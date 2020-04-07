@@ -5,6 +5,8 @@
     - name: 2020
       expanded: true
       items:
+        - name: Marzec
+          href: 2020-03.md
         - name: Luty
           href: 2020-02.md
         - name: January (Styczeń)
@@ -18,5 +20,3 @@
           href: 2019-11.md
         - name: Październik
           href: 2019-10.md
-        - name: Wrzesień
-          href: 2019-09.md

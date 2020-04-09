@@ -1,18 +1,18 @@
 ---
-title: Wprowadzenie do ASP.NET Core MVC
+title: Rozpoczęcie pracy z ASP.NET Core MVC
 author: rick-anderson
 description: Dowiedz się, jak rozpocząć pracę z ASP.NET Core MVC.
 ms.author: riande
 ms.date: 10/16/2019
 uid: tutorials/first-mvc-app/start-mvc
 ms.openlocfilehash: 901257efdfbc7b36249233745175f5ed253da2c7
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78662478"
 ---
-# <a name="get-started-with-aspnet-core-mvc"></a>Wprowadzenie do ASP.NET Core MVC
+# <a name="get-started-with-aspnet-core-mvc"></a>Rozpoczęcie pracy z ASP.NET Core MVC
 
 Autor: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -20,14 +20,14 @@ Autor: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 [!INCLUDE [consider RP](~/includes/razor.md)]
 
-Ten samouczek uczy się podstaw tworzenia aplikacji sieci Web ASP.NET Core MVC.
+Ten samouczek uczy podstaw tworzenia aplikacji sieci web ASP.NET Core MVC.
 
-Aplikacja zarządza bazą danych tytułów filmu. Omawiane kwestie:
+Aplikacja zarządza bazą danych tytułów filmów. Omawiane kwestie:
 
 > [!div class="checklist"]
 > * Utwórz aplikację internetową.
-> * Dodawanie i tworzenie szkieletu modelu.
-> * Pracuj z bazą danych.
+> * Dodaj i rusztowanie modelu.
+> * Praca z bazą danych.
 > * Dodaj wyszukiwanie i sprawdzanie poprawności.
 
 Na końcu masz aplikację, która może zarządzać i wyświetlać dane filmu.
@@ -36,7 +36,7 @@ Na końcu masz aplikację, która może zarządzać i wyświetlać dane filmu.
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs-3.1.md)]
 
@@ -52,30 +52,30 @@ Na końcu masz aplikację, która może zarządzać i wyświetlać dane filmu.
 
 ## <a name="create-a-web-app"></a>Tworzenie aplikacji internetowej
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
-* W programie Visual Studio wybierz pozycję **Utwórz nowy projekt**.
+* Z programu Visual Studio wybierz pozycję **Utwórz nowy projekt**.
 
-* Wybierz **ASP.NET Core aplikacji sieci Web** , a następnie wybierz przycisk **dalej**.
+* Wybierz **ASP.NET Podstawową aplikację sieci Web,** a następnie wybierz pozycję **Dalej**.
 
-![Nowa aplikacja sieci Web ASP.NET Core](start-mvc/_static/np_2.1.png)
+![nowa ASP.NET podstawowa aplikacja sieci Web](start-mvc/_static/np_2.1.png)
 
-* Nadaj projektowi nazwę **MvcMovie** i wybierz pozycję **Utwórz**. Ważne jest, aby nazwa **MvcMovie** projektu była taka sama, jak w przypadku kopiowania kodu, przestrzeń nazw będzie pasować.
+* Nazwij projekt **MvcMovie** i wybierz pozycję **Utwórz**. Ważne jest, aby nadać nazwę projektowi **MvcMovie,** więc podczas kopiowania kodu obszar nazw będzie zgodny.
 
-  ![Nowa aplikacja sieci Web ASP.NET Core](start-mvc/_static/config.png)
+  ![nowa ASP.NET podstawowa aplikacja sieci Web](start-mvc/_static/config.png)
 
-* Wybierz pozycję **aplikacja sieci Web (Model-View-Controller)** , a następnie wybierz pozycję **Utwórz**.
+* Wybierz **pozycję Aplikacja sieci Web(Kontroler widoku modelu),** a następnie wybierz pozycję **Utwórz**.
 
-![Okno dialogowe Nowy projekt, .NET Core w lewym okienku, ASP.NET Core Web ](start-mvc/_static/new_project30.png)
+![Nowe okno dialogowe projektu ,NET Core w lewym okienku, ASP.NET sieć Web Core ](start-mvc/_static/new_project30.png)
 
-Program Visual Studio użył szablonu domyślnego dla projektu MVC, który właśnie został utworzony. Teraz masz działającą aplikację, wprowadzając nazwę projektu i wybierając kilka opcji. Jest to podstawowy projekt startowy.
+Program Visual Studio użył domyślnego szablonu dla właśnie utworzonego projektu MVC. Masz teraz działającą aplikację, wprowadzając nazwę projektu i wybierając kilka opcji. Jest to podstawowy projekt startowy.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-Samouczek założono familarity z VS Code. Aby uzyskać więcej informacji, zobacz [wprowadzenie do vs Code](https://code.visualstudio.com/docs) i [Visual Studio Code pomocy](#visual-studio-code-help) .
+Samouczek zakłada familarity z VS Code. Aby uzyskać więcej [informacji,](https://code.visualstudio.com/docs) zobacz Wprowadzenie do programu VS Code i visual [studio code.](#visual-studio-code-help)
 
 * Otwórz [zintegrowany terminal](https://code.visualstudio.com/docs/editor/integrated-terminal).
-* Zmień katalog (`cd`) do folderu, który będzie zawierać projekt.
+* Zmień katalogi`cd`( ) na folder, który będzie zawierał projekt.
 * Uruchom następujące polecenie:
 
    ```dotnetcli
@@ -83,81 +83,81 @@ Samouczek założono familarity z VS Code. Aby uzyskać więcej informacji, zoba
    code -r MvcMovie
    ```
 
-  * Zostanie wyświetlone okno dialogowe z **wymaganymi zasobami do kompilowania i debugowania brakuje w "MvcMovie". Dodać je?**  Wybierz opcję **tak**
+  * W oknie dialogowym z **wymaganymi zasobami do tworzenia i debugowania brakuje w "MvcMovie". Dodać je?**  Wybierz **tak**
 
-  * `dotnet new mvc -o MvcMovie`: tworzy nowy projekt ASP.NET Core MVC w folderze *MvcMovie* .
-  * `code -r MvcMovie`: ładuje plik projektu *MvcMovie. csproj* w Visual Studio Code.
+  * `dotnet new mvc -o MvcMovie`: tworzy nowy projekt ASP.NET Core MVC w folderze *MvcMovie.*
+  * `code -r MvcMovie`: Ładuje plik projektu *MvcMovie.csproj* w programie Visual Studio Code.
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-* Wybierz pozycję **plik** > **nowe rozwiązanie**.
+* Wybierz **pozycję Plik** > **nowego rozwiązania**.
 
-  ![Nowe rozwiązanie w systemie macOS](./start-mvc/_static/new_project_vsmac.png)
+  ![macOS Nowe rozwiązanie](./start-mvc/_static/new_project_vsmac.png)
 
-* Wybierz pozycję **.NET Core** > **App** > **aplikacji sieci Web (Model-View-Controller)** > **dalej**.
+* Wybierz opcję **.NET Core** > **App** > **Web Application (Model-View-Controller)** > **Dalej**.
 
-  ![okno dialogowe z systemem macOS nowego projektu](./start-mvc/_static/new_project_mvc_vsmac.png)
+  ![macOS Nowe okno dialogowe projektu](./start-mvc/_static/new_project_mvc_vsmac.png)
 
-* W oknie dialogowym **Konfigurowanie nowego interfejsu API sieci Web ASP.NET Core** Ustaw platformę **docelową** programu **.NET Core 3,1**.
+* W oknie dialogowym **Konfigurowanie nowego interfejsu API sieci Web ASP.NET Core** ustaw **docelową platformę** **programu .NET Core 3.1**.
 
-  ![wybór macOS .NET Core 3,1](./start-mvc/_static/new_project_31_vsmac.png)
+  ![Wybór systemu macOS .NET Core 3.1](./start-mvc/_static/new_project_31_vsmac.png)
 
 * Nazwij projekt **MvcMovie**, a następnie wybierz pozycję **Utwórz**.
 
 ---
 
-### <a name="run-the-app"></a>Uruchamianie aplikacji
+### <a name="run-the-app"></a>Uruchomienie aplikacji
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
-Wybierz **kombinację klawiszy CTRL-F5** , aby uruchomić aplikację w trybie bez debugowania.
+Wybierz **klawisz Ctrl-F5,** aby uruchomić aplikację w trybie bez debugowania.
 
 [!INCLUDE[](~/includes/trustCertVS.md)]
 
-* Program Visual Studio jest uruchamiany [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) i uruchomi aplikację. Zauważ, że na pasku adresu są wyświetlane `localhost:port#` a nie `example.com`. Wynika to z faktu, że `localhost` jest standardową nazwą hosta dla komputera lokalnego. Gdy program Visual Studio tworzy projekt sieci Web, dla serwera sieci Web jest używany port losowy.
-* Uruchamianie aplikacji za pomocą klawiszy CTRL + F5 (tryb bez debugowania) umożliwia wprowadzanie zmian w kodzie, zapisywanie pliku, odświeżanie przeglądarki i wyświetlanie zmian w kodzie. Wielu deweloperów preferuje Używanie trybu niedebugowania, aby szybko uruchomić aplikację i wyświetlić zmiany.
-* Możesz uruchomić aplikację w trybie debugowania lub bez debugowania z elementu menu **Debuguj** :
+* Program Visual Studio uruchamia [program IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) i uruchamia aplikację. Zwróć uwagę, że `localhost:port#` pasek adresu `example.com`pokazuje, a nie coś w stylu . To dlatego, `localhost` że jest standardową nazwa hosta dla komputera lokalnego. Podczas tworzenia projektu internetowego w programie Visual Studio dla serwera internetowego jest używany losowy port.
+* Uruchomienie aplikacji za pomocą klawiszy Ctrl+F5 (tryb bez debugowania) umożliwia wprowadzanie zmian w kodzie, zapisywanie pliku, odświeżanie przeglądarki i wyświetlanie zmian w kodzie. Wielu deweloperów woli używać trybu bez debugowania, aby móc szybko uruchomić aplikację i wyświetlić zmiany.
+* Aplikację można uruchomić w trybie debugowania lub bez debugowania z elementu menu **Debugowania:**
 
-  ![Menu Debuguj](start-mvc/_static/debug_menu.png)
+  ![Menu debugowania](start-mvc/_static/debug_menu.png)
 
-* Możesz debugować aplikację, wybierając przycisk **IIS Express**
+* Aplikację można debugować, wybierając przycisk **IIS Express**
 
   ![IIS Express](start-mvc/_static/iis_express.png)
 
   Na poniższej ilustracji przedstawiono aplikację:
 
-  ![Strona główna lub indeks](start-mvc/_static/home2.2.png)
+  ![Strona główna lub Indeks](start-mvc/_static/home2.2.png)
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-Naciśnij klawisze CTRL + F5, aby uruchomić bez debugera.
+Naciśnij klawisze Ctrl+F5, aby uruchomić bez debugera.
 
 [!INCLUDE[](~/includes/trustCertVSC.md)]
 
-  Visual Studio Code uruchamia [Kestrel](xref:fundamentals/servers/kestrel), uruchamia przeglądarkę i przechodzi do `https://localhost:5001`. Na pasku adresu są wyświetlane `localhost:port:5001` a nie elementy, takie jak `example.com`. Wynika to z faktu, że `localhost` jest standardową nazwą hosta dla komputera lokalnego. Host lokalny obsługuje tylko żądania sieci Web z komputera lokalnego.
+  Program Visual Studio Code uruchamia [Kestrel](xref:fundamentals/servers/kestrel), uruchamia `https://localhost:5001`przeglądarkę i przechodzi do . Pasek adresu `localhost:port:5001` pokazuje, a `example.com`nie coś w stylu . To dlatego, `localhost` że jest standardową nazwa hosta dla komputera lokalnego. Localhost obsługuje tylko żądania sieci web z komputera lokalnego.
 
-  Uruchamianie aplikacji za pomocą klawiszy CTRL + F5 (tryb bez debugowania) umożliwia wprowadzanie zmian w kodzie, zapisywanie pliku, odświeżanie przeglądarki i wyświetlanie zmian w kodzie. Wielu deweloperów woli używać trybu niedebugowania do odświeżania strony i wyświetlania zmian.
+  Uruchomienie aplikacji za pomocą klawiszy Ctrl+F5 (tryb bez debugowania) umożliwia wprowadzanie zmian w kodzie, zapisywanie pliku, odświeżanie przeglądarki i wyświetlanie zmian w kodzie. Wielu deweloperów woli używać trybu bez debugowania, aby odświeżyć stronę i wyświetlić zmiany.
 
-  ![Strona główna lub indeks](start-mvc/_static/home2.2.png)
+  ![Strona główna lub Indeks](start-mvc/_static/home2.2.png)
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-Wybierz pozycję **uruchom** > **Uruchom bez debugowania** , aby uruchomić aplikację. Visual Studio dla komputerów Mac uruchamia serwer [Kestrel](xref:fundamentals/servers/index#kestrel) , uruchamia przeglądarkę i przechodzi do `http://localhost:port`, gdzie *port* to losowo wybierany numer portu.
+Wybierz **uruchom** > **start bez debugowania,** aby uruchomić aplikację. Program Visual Studio dla komputerów Mac uruchamia serwer [Kestrel,](xref:fundamentals/servers/index#kestrel) uruchamia przeglądarkę i przechodzi do `http://localhost:port`, gdzie *port* jest losowo wybranym numerem portu.
 
 [!INCLUDE[](~/includes/trustCertMac.md)]
 
-* Na pasku adresu są wyświetlane `localhost:port#` a nie elementy, takie jak `example.com`. Wynika to z faktu, że `localhost` jest standardową nazwą hosta dla komputera lokalnego. Gdy program Visual Studio tworzy projekt sieci Web, dla serwera sieci Web jest używany port losowy. Po uruchomieniu aplikacji zobaczysz inny numer portu.
-* Aplikację można uruchomić w trybie debugowania lub bez debugowania z menu **Run (uruchamianie** ).
+* Pasek adresu `localhost:port#` pokazuje, a `example.com`nie coś w stylu . To dlatego, `localhost` że jest standardową nazwa hosta dla komputera lokalnego. Podczas tworzenia projektu internetowego w programie Visual Studio dla serwera internetowego jest używany losowy port. Po uruchomieniu aplikacji zobaczysz inny numer portu.
+* Aplikację można uruchomić w trybie debugowania lub bez debugowania z menu **Uruchom.**
 
   Na poniższej ilustracji przedstawiono aplikację:
 
-  ![Strona główna lub indeks](./start-mvc/_static/output_macos.png)
+  ![Strona główna lub Indeks](./start-mvc/_static/output_macos.png)
 
 ---
 
 [!INCLUDE[](~/includes/vs-vsc-vsmac-help.md)]
 
-W następnej części tego samouczka znajdziesz informacje na temat MVC i zacznij pisać kod.
+W następnej części tego samouczka dowiesz się o MVC i rozpocząć pisanie kodu.
 
 > [!div class="step-by-step"]
 > [Dalej](adding-controller.md)
@@ -168,14 +168,14 @@ W następnej części tego samouczka znajdziesz informacje na temat MVC i zaczni
 
 [!INCLUDE [consider RP](~/includes/razor.md)]
 
-Ten samouczek uczy się podstaw tworzenia aplikacji sieci Web ASP.NET Core MVC.
+Ten samouczek uczy podstaw tworzenia aplikacji sieci web ASP.NET Core MVC.
 
-Aplikacja zarządza bazą danych tytułów filmu. Omawiane kwestie:
+Aplikacja zarządza bazą danych tytułów filmów. Omawiane kwestie:
 
 > [!div class="checklist"]
 > * Utwórz aplikację internetową.
-> * Dodawanie i tworzenie szkieletu modelu.
-> * Pracuj z bazą danych.
+> * Dodaj i rusztowanie modelu.
+> * Praca z bazą danych.
 > * Dodaj wyszukiwanie i sprawdzanie poprawności.
 
 Na końcu masz aplikację, która może zarządzać i wyświetlać dane filmu.
@@ -184,7 +184,7 @@ Na końcu masz aplikację, która może zarządzać i wyświetlać dane filmu.
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs2019-2.2.md)]
 
@@ -199,31 +199,31 @@ Na końcu masz aplikację, która może zarządzać i wyświetlać dane filmu.
 ---
 ## <a name="create-a-web-app"></a>Tworzenie aplikacji internetowej
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
-* W programie Visual Studio wybierz pozycję **Utwórz nowy projekt**.
+* Z programu Visual Studio wybierz pozycję **Utwórz nowy projekt**.
 
-* Wybierz **ASP.NET Core aplikacji sieci Web** , a następnie wybierz przycisk **dalej**.
+* Wybierz **ASP.NET Podstawową aplikację sieci Web,** a następnie wybierz pozycję **Dalej**.
 
-![Nowa aplikacja sieci Web ASP.NET Core](start-mvc/_static/np_2.1.png)
+![nowa ASP.NET podstawowa aplikacja sieci Web](start-mvc/_static/np_2.1.png)
 
-* Nadaj projektowi nazwę **MvcMovie** i wybierz pozycję **Utwórz**. Ważne jest, aby nazwa **MvcMovie** projektu była taka sama, jak w przypadku kopiowania kodu, przestrzeń nazw będzie pasować.
+* Nazwij projekt **MvcMovie** i wybierz pozycję **Utwórz**. Ważne jest, aby nadać nazwę projektowi **MvcMovie,** więc podczas kopiowania kodu obszar nazw będzie zgodny.
 
-  ![Nowa aplikacja sieci Web ASP.NET Core](start-mvc/_static/config.png)
+  ![nowa ASP.NET podstawowa aplikacja sieci Web](start-mvc/_static/config.png)
 
 
-* Wybierz pozycję **aplikacja sieci Web (Model-View-Controller)** , a następnie wybierz pozycję **Utwórz**.
+* Wybierz **pozycję Aplikacja sieci Web(Kontroler widoku modelu),** a następnie wybierz pozycję **Utwórz**.
 
-![Okno dialogowe Nowy projekt, .NET Core w lewym okienku, ASP.NET Core Web ](start-mvc/_static/new_project22-21.png)
+![Nowe okno dialogowe projektu ,NET Core w lewym okienku, ASP.NET sieć Web Core ](start-mvc/_static/new_project22-21.png)
 
-Program Visual Studio użył szablonu domyślnego dla projektu MVC, który właśnie został utworzony. Teraz masz działającą aplikację, wprowadzając nazwę projektu i wybierając kilka opcji. Jest to podstawowy projekt początkowy i jest dobrym miejscem do rozpoczęcia.
+Program Visual Studio użył domyślnego szablonu dla właśnie utworzonego projektu MVC. Masz teraz działającą aplikację, wprowadzając nazwę projektu i wybierając kilka opcji. Jest to podstawowy projekt startowy i jest to dobre miejsce do rozpoczęcia.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-Samouczek założono familarity z VS Code. Aby uzyskać więcej informacji, zobacz [wprowadzenie do vs Code](https://code.visualstudio.com/docs) i [Visual Studio Code pomocy](#visual-studio-code-help) .
+Samouczek zakłada familarity z VS Code. Aby uzyskać więcej [informacji,](https://code.visualstudio.com/docs) zobacz Wprowadzenie do programu VS Code i visual [studio code.](#visual-studio-code-help)
 
 * Otwórz [zintegrowany terminal](https://code.visualstudio.com/docs/editor/integrated-terminal).
-* Zmień katalog (`cd`) do folderu, który będzie zawierać projekt.
+* Zmień katalogi`cd`( ) na folder, który będzie zawierał projekt.
 * Uruchom następujące polecenie:
 
    ```dotnetcli
@@ -231,95 +231,95 @@ Samouczek założono familarity z VS Code. Aby uzyskać więcej informacji, zoba
    code -r MvcMovie
    ```
 
-  * Zostanie wyświetlone okno dialogowe z **wymaganymi zasobami do kompilowania i debugowania brakuje w "MvcMovie". Dodać je?**  Wybierz opcję **tak**
+  * W oknie dialogowym z **wymaganymi zasobami do tworzenia i debugowania brakuje w "MvcMovie". Dodać je?**  Wybierz **tak**
 
-  * `dotnet new mvc -o MvcMovie`: tworzy nowy projekt ASP.NET Core MVC w folderze *MvcMovie* .
-  * `code -r MvcMovie`: ładuje plik projektu *MvcMovie. csproj* w Visual Studio Code.
+  * `dotnet new mvc -o MvcMovie`: tworzy nowy projekt ASP.NET Core MVC w folderze *MvcMovie.*
+  * `code -r MvcMovie`: Ładuje plik projektu *MvcMovie.csproj* w programie Visual Studio Code.
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-* Wybierz pozycję **plik** > **nowe rozwiązanie**.
+* Wybierz **pozycję Plik** > **nowego rozwiązania**.
 
-  ![Nowe rozwiązanie w systemie macOS](./start-mvc/_static/new_project_vsmac.png)
+  ![macOS Nowe rozwiązanie](./start-mvc/_static/new_project_vsmac.png)
 
-* Wybierz pozycję **.NET Core** > **App** > **aplikacji sieci Web (Model-View-Controller)** > **dalej**.
+* Wybierz opcję **.NET Core** > **App** > **Web Application (Model-View-Controller)** > **Dalej**.
 
-  ![okno dialogowe z systemem macOS nowego projektu](./start-mvc/_static/new_project_mvc_vsmac.png)
+  ![macOS Nowe okno dialogowe projektu](./start-mvc/_static/new_project_mvc_vsmac.png)
 
-* W oknie dialogowym **Konfigurowanie nowego interfejsu API sieci Web ASP.NET Core** zaakceptuj domyślną **platformę docelową** programu **.NET Core 2,2**.
+* W oknie dialogowym **Konfigurowanie nowego interfejsu API sieci Web ASP.NET Core** zaakceptuj domyślną **platformę docelową** **programu .NET Core 2.2**.
 
-  ![wybór macOS .NET Core 2,2](./start-mvc/_static/new_project_22_vsmac.png)
+  ![Wybór systemu macOS .NET Core 2.2](./start-mvc/_static/new_project_22_vsmac.png)
 
 * Nazwij projekt **MvcMovie**, a następnie wybierz pozycję **Utwórz**.
 
 ---
 
-### <a name="run-the-app"></a>Uruchamianie aplikacji
+### <a name="run-the-app"></a>Uruchomienie aplikacji
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
-Wybierz **kombinację klawiszy CTRL-F5** , aby uruchomić aplikację w trybie bez debugowania.
+Wybierz **klawisz Ctrl-F5,** aby uruchomić aplikację w trybie bez debugowania.
 
 [!INCLUDE[](~/includes/trustCertVS.md)]
 
-* Program Visual Studio jest uruchamiany [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) i uruchomi aplikację. Zauważ, że na pasku adresu są wyświetlane `localhost:port#` a nie `example.com`. Wynika to z faktu, że `localhost` jest standardową nazwą hosta dla komputera lokalnego. Gdy program Visual Studio tworzy projekt sieci Web, dla serwera sieci Web jest używany port losowy.
-* Uruchamianie aplikacji za pomocą klawiszy CTRL + F5 (tryb bez debugowania) umożliwia wprowadzanie zmian w kodzie, zapisywanie pliku, odświeżanie przeglądarki i wyświetlanie zmian w kodzie. Wielu deweloperów preferuje Używanie trybu niedebugowania, aby szybko uruchomić aplikację i wyświetlić zmiany.
-* Możesz uruchomić aplikację w trybie debugowania lub bez debugowania z elementu menu **Debuguj** :
+* Program Visual Studio uruchamia [program IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) i uruchamia aplikację. Zwróć uwagę, że `localhost:port#` pasek adresu `example.com`pokazuje, a nie coś w stylu . To dlatego, `localhost` że jest standardową nazwa hosta dla komputera lokalnego. Podczas tworzenia projektu internetowego w programie Visual Studio dla serwera internetowego jest używany losowy port.
+* Uruchomienie aplikacji za pomocą klawiszy Ctrl+F5 (tryb bez debugowania) umożliwia wprowadzanie zmian w kodzie, zapisywanie pliku, odświeżanie przeglądarki i wyświetlanie zmian w kodzie. Wielu deweloperów woli używać trybu bez debugowania, aby móc szybko uruchomić aplikację i wyświetlić zmiany.
+* Aplikację można uruchomić w trybie debugowania lub bez debugowania z elementu menu **Debugowania:**
 
-  ![Menu Debuguj](start-mvc/_static/debug_menu.png)
+  ![Menu debugowania](start-mvc/_static/debug_menu.png)
 
-* Możesz debugować aplikację, wybierając przycisk **IIS Express**
+* Aplikację można debugować, wybierając przycisk **IIS Express**
 
   ![IIS Express](start-mvc/_static/iis_express.png)
 
-* Wybierz pozycję **Akceptuj** , aby wyrazić zgodę na śledzenie. Ta aplikacja nie śledzi informacji osobistych. Kod wygenerowany przez szablon zawiera zasoby, które pomagają spełnić [ogólne rozporządzenie o ochronie danych (Rodo)](xref:security/gdpr).
+* Wybierz **pozycję Zaakceptuj,** aby wyrazić zgodę na śledzenie. Ta aplikacja nie śledzi informacji osobistych. Wygenerowany szablon kod zawiera zasoby ułatwiające spełnienie [ogólnego rozporządzenia o ochronie danych (RODO).](xref:security/gdpr)
 
-  ![Strona główna lub indeks](start-mvc/_static/privacy.png)
+  ![Strona główna lub Indeks](start-mvc/_static/privacy.png)
 
-  Na poniższej ilustracji przedstawiono aplikację po przyjęciu śledzenia:
+  Na poniższej ilustracji przedstawiono aplikację po zaakceptowaniu śledzenia:
 
-  ![Strona główna lub indeks](start-mvc/_static/home2.2.png)
+  ![Strona główna lub Indeks](start-mvc/_static/home2.2.png)
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-Naciśnij klawisze CTRL + F5, aby uruchomić bez debugera.
+Naciśnij klawisze Ctrl+F5, aby uruchomić bez debugera.
 
 [!INCLUDE[](~/includes/trustCertVSC.md)]
 
-  Visual Studio Code uruchamia [Kestrel](xref:fundamentals/servers/kestrel), uruchamia przeglądarkę i przechodzi do `https://localhost:5001`. Na pasku adresu są wyświetlane `localhost:port:5001` a nie elementy, takie jak `example.com`. Wynika to z faktu, że `localhost` jest standardową nazwą hosta dla komputera lokalnego. Host lokalny obsługuje tylko żądania sieci Web z komputera lokalnego.
+  Program Visual Studio Code uruchamia [Kestrel](xref:fundamentals/servers/kestrel), uruchamia `https://localhost:5001`przeglądarkę i przechodzi do . Pasek adresu `localhost:port:5001` pokazuje, a `example.com`nie coś w stylu . To dlatego, `localhost` że jest standardową nazwa hosta dla komputera lokalnego. Localhost obsługuje tylko żądania sieci web z komputera lokalnego.
 
-  Uruchamianie aplikacji za pomocą klawiszy CTRL + F5 (tryb bez debugowania) umożliwia wprowadzanie zmian w kodzie, zapisywanie pliku, odświeżanie przeglądarki i wyświetlanie zmian w kodzie. Wielu deweloperów woli używać trybu niedebugowania do odświeżania strony i wyświetlania zmian.
+  Uruchomienie aplikacji za pomocą klawiszy Ctrl+F5 (tryb bez debugowania) umożliwia wprowadzanie zmian w kodzie, zapisywanie pliku, odświeżanie przeglądarki i wyświetlanie zmian w kodzie. Wielu deweloperów woli używać trybu bez debugowania, aby odświeżyć stronę i wyświetlić zmiany.
 
-* Wybierz pozycję **Akceptuj** , aby wyrazić zgodę na śledzenie. Ta aplikacja nie śledzi informacji osobistych. Kod wygenerowany przez szablon zawiera zasoby, które pomagają spełnić [ogólne rozporządzenie o ochronie danych (Rodo)](xref:security/gdpr).
+* Wybierz **pozycję Zaakceptuj,** aby wyrazić zgodę na śledzenie. Ta aplikacja nie śledzi informacji osobistych. Wygenerowany szablon kod zawiera zasoby ułatwiające spełnienie [ogólnego rozporządzenia o ochronie danych (RODO).](xref:security/gdpr)
 
-  ![Strona główna lub indeks](start-mvc/_static/privacy.png)
+  ![Strona główna lub Indeks](start-mvc/_static/privacy.png)
 
-  Na poniższej ilustracji przedstawiono aplikację po przyjęciu śledzenia:
+  Na poniższej ilustracji przedstawiono aplikację po zaakceptowaniu śledzenia:
 
-  ![Strona główna lub indeks](start-mvc/_static/home2.2.png)
+  ![Strona główna lub Indeks](start-mvc/_static/home2.2.png)
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-Wybierz pozycję **uruchom** > **Uruchom bez debugowania** , aby uruchomić aplikację. Visual Studio dla komputerów Mac uruchamia serwer [Kestrel](xref:fundamentals/servers/index#kestrel) , uruchamia przeglądarkę i przechodzi do `http://localhost:port`, gdzie *port* to losowo wybierany numer portu.
+Wybierz **uruchom** > **start bez debugowania,** aby uruchomić aplikację. Program Visual Studio dla komputerów Mac uruchamia serwer [Kestrel,](xref:fundamentals/servers/index#kestrel) uruchamia przeglądarkę i przechodzi do `http://localhost:port`, gdzie *port* jest losowo wybranym numerem portu.
 
 [!INCLUDE[](~/includes/trustCertMac.md)]
 
-* Na pasku adresu są wyświetlane `localhost:port#` a nie elementy, takie jak `example.com`. Wynika to z faktu, że `localhost` jest standardową nazwą hosta dla komputera lokalnego. Gdy program Visual Studio tworzy projekt sieci Web, dla serwera sieci Web jest używany port losowy. Po uruchomieniu aplikacji zobaczysz inny numer portu.
-* Aplikację można uruchomić w trybie debugowania lub bez debugowania z menu **Run (uruchamianie** ).
+* Pasek adresu `localhost:port#` pokazuje, a `example.com`nie coś w stylu . To dlatego, `localhost` że jest standardową nazwa hosta dla komputera lokalnego. Podczas tworzenia projektu internetowego w programie Visual Studio dla serwera internetowego jest używany losowy port. Po uruchomieniu aplikacji zobaczysz inny numer portu.
+* Aplikację można uruchomić w trybie debugowania lub bez debugowania z menu **Uruchom.**
 
-* Wybierz pozycję **Akceptuj** , aby wyrazić zgodę na śledzenie. Ta aplikacja nie śledzi informacji osobistych. Kod wygenerowany przez szablon zawiera zasoby, które pomagają spełnić [ogólne rozporządzenie o ochronie danych (Rodo)](xref:security/gdpr).
+* Wybierz **pozycję Zaakceptuj,** aby wyrazić zgodę na śledzenie. Ta aplikacja nie śledzi informacji osobistych. Wygenerowany szablon kod zawiera zasoby ułatwiające spełnienie [ogólnego rozporządzenia o ochronie danych (RODO).](xref:security/gdpr)
 
-  ![Strona główna lub indeks](./start-mvc/_static/output_privacy_macos.png)
+  ![Strona główna lub Indeks](./start-mvc/_static/output_privacy_macos.png)
 
-  Na poniższej ilustracji przedstawiono aplikację po przyjęciu śledzenia:
+  Na poniższej ilustracji przedstawiono aplikację po zaakceptowaniu śledzenia:
 
-  ![Strona główna lub indeks](./start-mvc/_static/output_macos.png)
+  ![Strona główna lub Indeks](./start-mvc/_static/output_macos.png)
 
 ---
 
 [!INCLUDE[](~/includes/vs-vsc-vsmac-help.md)]
 
-W następnej części tego samouczka znajdziesz informacje na temat MVC i zacznij pisać kod.
+W następnej części tego samouczka dowiesz się o MVC i rozpocząć pisanie kodu.
 
 > [!div class="step-by-step"]
 > [Dalej](adding-controller.md)

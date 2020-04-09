@@ -1,5 +1,5 @@
-Wersja końcowa... /cu i... /cuFinal zawiera więcej wykonanych kodu.
+Ostateczna wersja .. /cu i .. /cuFinal zawiera więcej ukończonego kodu.
 
-Skopiuj plik wwwroot z.. /cu/lub z nowego projektu Razor Pages.
+Skopiuj wwwroot z .. /cu/ lub z nowego projektu Razor Pages.
 
 Uruchom polecenie `dotnet ef database update`

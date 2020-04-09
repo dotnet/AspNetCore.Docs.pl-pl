@@ -1,64 +1,64 @@
 ---
-title: JsonPatch w interfejsie Web API ASP.NET Core
+title: JsonPatch w ASP.NET Core web API
 author: rick-anderson
-description: Dowiedz się, jak obsługiwać żądania poprawek w formacie JSON w ASP.NET Core internetowym interfejsie API.
+description: Dowiedz się, jak obsługiwać żądania poprawek JSON w internetowym interfejsie API ASP.NET Core.
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/01/2019
+ms.date: 04/02/2020
 uid: web-api/jsonpatch
-ms.openlocfilehash: cf1a00c1928652bf5210b2442087209e23b8868e
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: be4115e870dac818aeb6b1e65ddfb21e89d9cf25
+ms.sourcegitcommit: 9675db7bf4b67ae269f9226b6f6f439b5cce4603
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78661785"
+ms.lasthandoff: 04/03/2020
+ms.locfileid: "80625880"
 ---
-# <a name="jsonpatch-in-aspnet-core-web-api"></a>JsonPatch w interfejsie Web API ASP.NET Core
+# <a name="jsonpatch-in-aspnet-core-web-api"></a>JsonPatch w ASP.NET Core web API
 
-Autorzy [Dykstra](https://github.com/tdykstra) i [Kirka Larkin](https://github.com/serpent5)
+Przez [Tom Dykstra](https://github.com/tdykstra) i [Kirk Larkin](https://github.com/serpent5)
 
 ::: moniker range=">= aspnetcore-3.0"
 
-W tym artykule wyjaśniono, jak obsłużyć żądania poprawek w formacie JSON w ASP.NET Core interfejsie API sieci Web.
+W tym artykule wyjaśniono, jak obsługiwać żądania poprawek JSON w interfejsie API sieci web ASP.NET Core.
 
 ## <a name="package-installation"></a>Instalacja pakietu
 
-Obsługa JsonPatch jest włączona przy użyciu pakietu `Microsoft.AspNetCore.Mvc.NewtonsoftJson`. Aby włączyć tę funkcję, aplikacje muszą:
+Aby włączyć obsługę poprawek JSON w aplikacji, wykonaj następujące czynności:
 
-* Zainstaluj pakiet NuGet [Microsoft. AspNetCore. MVC. NewtonsoftJson](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson/) .
-* Zaktualizuj metodę `Startup.ConfigureServices` projektu w celu uwzględnienia wywołania `AddNewtonsoftJson`:
+1. Zainstaluj pakiet [Microsoft.AspNetCore.Mvc.NewtonsoftJson](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson/) NuGet.
+1. Zaktualizuj `Startup.ConfigureServices` metodę <xref:Microsoft.Extensions.DependencyInjection.NewtonsoftJsonMvcBuilderExtensions.AddNewtonsoftJson*>projektu, aby wywołać . Przykład:
 
-  ```csharp
-  services
-      .AddControllersWithViews()
-      .AddNewtonsoftJson();
-  ```
+    ```csharp
+    services
+        .AddControllersWithViews()
+        .AddNewtonsoftJson();
+    ```
 
-`AddNewtonsoftJson` jest zgodna z metodami rejestracji usługi MVC:
+`AddNewtonsoftJson`jest kompatybilny z metodami rejestracji usługi MVC:
 
-  * `AddRazorPages`
-  * `AddControllersWithViews`
-  * `AddControllers`
+* <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddRazorPages*>
+* <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddControllersWithViews*>
+* <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddControllers*>
 
-## <a name="jsonpatch-addnewtonsoftjson-and-systemtextjson"></a>JsonPatch, AddNewtonsoftJson i system. Text. JSON
-  
-`AddNewtonsoftJson` zastępuje oparte na `System.Text.Json` wejściowe i wyjściowe elementy formatujące używane do formatowania **całej** zawartości JSON. Aby dodać obsługę `JsonPatch` przy użyciu `Newtonsoft.Json`, pozostawiając inne elementy formatujące bez zmian, zaktualizuj `Startup.ConfigureServices` projektu w następujący sposób:
+## <a name="json-patch-addnewtonsoftjson-and-systemtextjson"></a>Łatka JSON, AddNewtonsoftJson i System.Text.Json
+
+`AddNewtonsoftJson`zastępuje `System.Text.Json`formatery wejściowe i wyjściowe oparte na podstawie formatowania używane do formatowania **całej** zawartości JSON. Aby dodać obsługę poprawki `Newtonsoft.Json`JSON przy użyciu , pozostawiając inne formaterów `Startup.ConfigureServices` bez zmian, zaktualizuj metodę projektu w następujący sposób:
 
 [!code-csharp[](jsonpatch/samples/3.0/WebApp1/Startup.cs?name=snippet)]
 
-Poprzedzający kod wymaga odwołania do elementu [Microsoft. AspNetCore. MVC. NewtonsoftJson](https://nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson) i następujących instrukcji using:
+Poprzedni kod wymaga `Microsoft.AspNetCore.Mvc.NewtonsoftJson` pakietu i `using` następujące instrukcje:
 
 [!code-csharp[](jsonpatch/samples/3.0/WebApp1/Startup.cs?name=snippet1)]
 
-## <a name="patch-http-request-method"></a>Poprawka metody żądania HTTP
+## <a name="patch-http-request-method"></a>Metoda żądania HTTP PATCH
 
-Metody PUT i [patch](https://tools.ietf.org/html/rfc5789) są używane do aktualizowania istniejącego zasobu. Różnica między nimi polega na tym, że zastępuje cały zasób, podczas gdy poprawka określa tylko te zmiany.
+Metody PUT i [PATCH](https://tools.ietf.org/html/rfc5789) są używane do aktualizowania istniejącego zasobu. Różnica między nimi polega na tym, że PUT zastępuje cały zasób, podczas gdy patch określa tylko zmiany.
 
-## <a name="json-patch"></a>Poprawka JSON
+## <a name="json-patch"></a>Łatka JSON
 
-[Poprawka JSON](https://tools.ietf.org/html/rfc6902) to format służący do określania aktualizacji, które mają zostać zastosowane do zasobu. Dokument poprawki JSON zawiera tablicę *operacji*. Każda operacja identyfikuje określony typ zmiany, na przykład Dodaj element tablicy lub Zastąp wartość właściwości.
+[JSON Patch](https://tools.ietf.org/html/rfc6902) to format określania aktualizacji, które mają być stosowane do zasobu. Dokument poprawki JSON ma tablicę *operacji*. Każda operacja identyfikuje określony typ zmiany. Przykłady takich zmian obejmują dodawanie elementu tablicy lub zastąpienie wartości właściwości.
 
-Na przykład następujące dokumenty JSON reprezentują zasób, dokument poprawki JSON dla zasobu oraz wynik zastosowania operacji patch.
+Na przykład następujące dokumenty JSON reprezentują zasób, dokument JSON Patch dla zasobu i wynik zastosowania operacji poprawki.
 
 ### <a name="resource-example"></a>Przykład zasobu
 
@@ -68,15 +68,15 @@ Na przykład następujące dokumenty JSON reprezentują zasób, dokument poprawk
 
 [!code-json[](jsonpatch/samples/2.2/JSON/add.json)]
 
-W powyższym formacie JSON:
+W poprzednim JSON:
 
 * Właściwość `op` wskazuje typ operacji.
-* Właściwość `path` wskazuje element do zaktualizowania.
-* Właściwość `value` udostępnia nową wartość.
+* Właściwość `path` wskazuje element do aktualizacji.
+* Właściwość `value` zawiera nową wartość.
 
-### <a name="resource-after-patch"></a>Zasób po zastosowaniu poprawki
+### <a name="resource-after-patch"></a>Zasób po aktualizacji
 
-Poniżej znajduje się zasób po zastosowaniu poprzedniego dokumentu poprawki JSON:
+Oto zasób po zastosowaniu poprzedniego dokumentu JSON Patch:
 
 ```json
 {
@@ -98,60 +98,60 @@ Poniżej znajduje się zasób po zastosowaniu poprzedniego dokumentu poprawki JS
 }
 ```
 
-Zmiany wprowadzone przez zastosowanie dokumentu poprawek JSON do zasobu są niepodzielne: Jeśli jakakolwiek operacja na liście nie powiedzie się, nie zostanie zastosowana żadna operacja na liście.
+Zmiany wprowadzone przez zastosowanie dokumentu JSON Patch do zasobu są niepodzielne. Jeśli jakakolwiek operacja na liście nie powiedzie się, nie jest stosowana żadna operacja na liście.
 
 ## <a name="path-syntax"></a>Składnia ścieżki
 
-Właściwość [Path](https://tools.ietf.org/html/rfc6901) obiektu operacji ma ukośniki między poziomami. Na przykład `"/address/zipCode"`.
+Właściwość [path](https://tools.ietf.org/html/rfc6901) obiektu operacji ma ukośniki między poziomami. Na przykład `"/address/zipCode"`.
 
-W celu określenia elementów tablicy są używane indeksy oparte na wartości zero. Pierwszy element tablicy `addresses` będzie miał `/addresses/0`. Aby `add` do końca tablicy, użyj łącznika (-), a nie numeru indeksu: `/addresses/-`.
+Indeksy oparte na wartościach zerowych są używane do określania elementów tablicy. Pierwszy element tablicy `addresses` będzie `/addresses/0`w . Aby `add` zakończyć tablicę, należy użyć`-`łącznika ( ) `/addresses/-`zamiast numeru indeksu: .
 
 ### <a name="operations"></a>Operacje
 
-W poniższej tabeli przedstawiono obsługiwane operacje zgodnie z definicją w [specyfikacji poprawek JSON](https://tools.ietf.org/html/rfc6902):
+W poniższej tabeli przedstawiono obsługiwane operacje zdefiniowane w [specyfikacji JSON Patch:](https://tools.ietf.org/html/rfc6902)
 
 |Operacja  | Uwagi |
 |-----------|--------------------------------|
-| `add`     | Dodaj właściwość lub element tablicy. Dla istniejącej właściwości: Ustaw wartość.|
+| `add`     | Dodaj właściwość lub element tablicy. Dla istniejącej właściwości: ustaw wartość.|
 | `remove`  | Usuń właściwość lub element tablicy. |
-| `replace` | Taka sama jak `remove`, a następnie `add` w tej samej lokalizacji. |
-| `move`    | Taka sama jak `remove` ze źródła, po której następuje `add` do miejsca docelowego przy użyciu wartości ze źródła. |
-| `copy`    | Analogicznie jak `add` do miejsca docelowego przy użyciu wartości ze źródła. |
-| `test`    | Zwróć kod stanu sukcesu, jeśli wartość w `path` = dostarczona `value`.|
+| `replace` | Tak `remove` samo `add` jak w tym samym miejscu. |
+| `move`    | Tak `remove` samo jak `add` ze źródła, po którym następuje miejsce docelowe przy użyciu wartości ze źródła. |
+| `copy`    | Tak `add` samo jak w przypadku miejsca docelowego przy użyciu wartości ze źródła. |
+| `test`    | Zwraca kod stanu sukcesu, jeśli wartość w `path` = pod warunkiem `value`.|
 
-## <a name="jsonpatch-in-aspnet-core"></a>JsonPatch w ASP.NET Core
+## <a name="json-patch-in-aspnet-core"></a>Łatka JSON w ASP.NET Core
 
-ASP.NET Core implementacja poprawki JSON jest dostępna w pakiecie NuGet [Microsoft. AspNetCore. JsonPatch](https://www.nuget.org/packages/microsoft.aspnetcore.jsonpatch/) .
+Implementacja ASP.NET Core poprawki JSON jest dostępna w pakiecie [Microsoft.AspNetCore.JsonPatch](https://www.nuget.org/packages/microsoft.aspnetcore.jsonpatch/) NuGet.
 
 ## <a name="action-method-code"></a>Kod metody akcji
 
-W kontrolerze interfejsu API Metoda akcji dla poprawki JSON:
+W kontrolerze interfejsu API: metoda akcji dla poprawki JSON:
 
-* Ma adnotację z atrybutem `HttpPatch`.
-* Akceptuje `JsonPatchDocument<T>`, zazwyczaj z `[FromBody]`.
-* Wywołuje `ApplyTo` w dokumencie poprawki, aby zastosować zmiany.
+* Jest opisywany z `HttpPatch` atrybutem.
+* Akceptuje , `JsonPatchDocument<T>`zazwyczaj z `[FromBody]`.
+* Wzywa `ApplyTo` dokument poprawki do zastosowania zmian.
 
 Oto przykład:
 
 [!code-csharp[](jsonpatch/samples/2.2/Controllers/HomeController.cs?name=snippet_PatchAction&highlight=1,3,9)]
 
-Ten kod z przykładowej aplikacji współdziała z poniższym modelem `Customer`.
+Ten kod z przykładowej aplikacji `Customer` działa z następującym modelem:
 
 [!code-csharp[](jsonpatch/samples/2.2/Models/Customer.cs?name=snippet_Customer)]
 
 [!code-csharp[](jsonpatch/samples/2.2/Models/Order.cs?name=snippet_Order)]
 
-Przykładowa Metoda akcji:
+Przykładowa metoda działania:
 
-* Konstruuje `Customer`.
+* Konstruuje `Customer`plik .
 * Stosuje poprawkę.
 * Zwraca wynik w treści odpowiedzi.
 
- W rzeczywistej aplikacji kod pobiera dane z magazynu, takiego jak baza danych, i aktualizuje bazę danych po zastosowaniu poprawki.
+W prawdziwej aplikacji kod będzie pobierać dane z magazynu, takich jak baza danych i zaktualizować bazę danych po zastosowaniu poprawki.
 
 ### <a name="model-state"></a>Stan modelu
 
-Poprzednia metoda działania przykład wywołuje Przeciążenie `ApplyTo`, które pobiera stan modelu jako jeden z jego parametrów. W przypadku tej opcji można odbierać komunikaty o błędach w odpowiedziach. Poniższy przykład przedstawia treść nieprawidłowej odpowiedzi na żądanie 400 dla operacji `test`:
+W poprzednim przykładzie metody akcji `ApplyTo` wywołuje przeciążenie tego przyjmuje stan modelu jako jeden z jego parametrów. Za pomocą tej opcji można otrzymywać komunikaty o błędach w odpowiedziach. Poniższy przykład przedstawia treść odpowiedzi 400 Bad `test` Request dla operacji:
 
 ```json
 {
@@ -163,114 +163,114 @@ Poprzednia metoda działania przykład wywołuje Przeciążenie `ApplyTo`, któr
 
 ### <a name="dynamic-objects"></a>Obiekty dynamiczne
 
-W poniższym przykładzie metody akcji pokazano, jak zastosować poprawkę do obiektu dynamicznego.
+Poniższa metoda akcji pokazuje, jak zastosować poprawkę do obiektu dynamicznego:
 
 [!code-csharp[](jsonpatch/samples/2.2/Controllers/HomeController.cs?name=snippet_Dynamic)]
 
 ## <a name="the-add-operation"></a>Operacja dodawania
 
-* Jeśli `path` wskazuje element tablicy: wstawia nowy element przed określony przez `path`.
-* Jeśli `path` wskazuje Właściwość: ustawia wartość właściwości.
+* Jeśli `path` wskazuje element tablicy: wstawia nowy `path`element przed elementem określonym przez .
+* Jeśli `path` wskazuje na właściwość: ustawia wartość właściwości.
 * Jeśli `path` wskazuje nieistniejącą lokalizację:
-  * Jeśli zasób do poprawki jest obiektem dynamicznym: dodaje właściwość.
-  * Jeśli zasób do poprawki jest obiektem statycznym: żądanie nie powiedzie się.
+  * Jeśli zasób do poprawki jest obiekt dynamiczny: dodaje właściwość.
+  * Jeśli zasób do poprawki jest obiektstatyczny: żądanie kończy się niepowodzeniem.
 
-Następujący przykładowy dokument poprawek ustawia wartość `CustomerName` i dodaje obiekt `Order` do końca tablicy `Orders`.
+Poniższy przykładowy dokument poprawki `CustomerName` ustawia `Order` wartość i dodaje `Orders` obiekt na końcu tablicy.
 
 [!code-json[](jsonpatch/samples/2.2/JSON/add.json)]
 
 ## <a name="the-remove-operation"></a>Operacja usuwania
 
 * Jeśli `path` wskazuje element tablicy: usuwa element.
-* Jeśli `path` wskazuje Właściwość:
-  * Jeśli zasób do poprawki jest obiektem dynamicznym: usuwa właściwość.
+* Jeśli `path` wskazuje na właściwość:
+  * Jeśli zasób do poprawki jest obiekt dynamiczny: usuwa właściwość.
   * Jeśli zasób do poprawki jest obiektem statycznym:
-    * Jeśli właściwość dopuszcza wartość null: ustawia ją na wartość null.
-    * Jeśli właściwość nie dopuszcza wartości null, ustawia ją na `default<T>`.
+    * Jeśli właściwość jest nullable: ustawia go na null.
+    * Jeśli właściwość nie może być nullowa, ustawia ją na `default<T>`.
 
-Następujący przykładowy dokument poprawek ustawia `CustomerName` na null i usuwa `Orders[0]`.
+Następujący przykładowy dokument `CustomerName` poprawki ustawia `Orders[0]`wartość null i usuwa:
 
 [!code-json[](jsonpatch/samples/2.2/JSON/remove.json)]
 
-## <a name="the-replace-operation"></a>Operacja zamiany
+## <a name="the-replace-operation"></a>Operacja wymiany
 
-Ta operacja jest funkcjonalnie taka sama jak `remove` i `add`.
+Ta operacja jest funkcjonalnie `remove` taka `add`sama jak po .
 
-Następujący przykładowy dokument poprawek ustawia wartość `CustomerName` i zastępuje `Orders[0]`nowym obiektem `Order`.
+Następujący przykładowy dokument poprawki `CustomerName` ustawia `Orders[0]`wartość i `Order` zastępuje go nowym obiektem:
 
 [!code-json[](jsonpatch/samples/2.2/JSON/replace.json)]
 
 ## <a name="the-move-operation"></a>Operacja przenoszenia
 
-* Jeśli `path` wskazuje element tablicy: kopiuje `from` element do lokalizacji `path` elementu, a następnie uruchamia operację `remove` na `from` elemencie.
-* Jeśli `path` wskazuje Właściwość: kopiuje wartość właściwości `from` do właściwości `path`, a następnie uruchamia operację `remove` na właściwości `from`.
-* Jeśli `path` wskazuje nieistniejącą Właściwość:
-  * Jeśli zasób do poprawki jest obiektem statycznym: żądanie nie powiedzie się.
-  * Jeśli zasób do naprawienia jest obiektem dynamicznym: kopiuje Właściwość `from` do lokalizacji wskazywanej przez `path`, a następnie uruchamia operację `remove` na właściwości `from`.
+* Jeśli `path` wskazuje element tablicy: `from` kopiuje `path` element do `remove` lokalizacji elementu, a następnie uruchamia operację na elemencie. `from`
+* Jeśli `path` wskazuje właściwość: `from` kopiuje `path` wartość właściwości do `remove` właściwości, `from` a następnie uruchamia operację na właściwości.
+* Jeśli `path` wskazuje nieistniejącą właściwość:
+  * Jeśli zasób do poprawki jest obiektstatyczny: żądanie kończy się niepowodzeniem.
+  * Jeśli zasób do poprawki jest `from` obiektem dynamicznym: `path`kopiuje `remove` właściwość `from` do lokalizacji wskazanej przez program , a następnie uruchamia operację we właściwości.
 
-Następujący przykładowy dokument poprawek:
+Następujący przykładowy dokument poprawki:
 
-* Kopiuje wartość `Orders[0].OrderName` do `CustomerName`.
-* Ustawia `Orders[0].OrderName` na wartość null.
-* Przenosi `Orders[1]` do przed `Orders[0]`.
+* Kopiuje wartość `Orders[0].OrderName` `CustomerName`do .
+* Ustawia `Orders[0].OrderName` wartość null.
+* Przechodzi `Orders[1]` do `Orders[0]`przed .
 
 [!code-json[](jsonpatch/samples/2.2/JSON/move.json)]
 
 ## <a name="the-copy-operation"></a>Operacja kopiowania
 
-Ta operacja jest funkcjonalnie taka sama jak operacja `move` bez kroku `remove` końcowego.
+Ta operacja jest funkcjonalnie `move` taka sama `remove` jak operacja bez ostatniego kroku.
 
-Następujący przykładowy dokument poprawek:
+Następujący przykładowy dokument poprawki:
 
-* Kopiuje wartość `Orders[0].OrderName` do `CustomerName`.
-* Wstawia kopię `Orders[1]` przed `Orders[0]`.
+* Kopiuje wartość `Orders[0].OrderName` `CustomerName`do .
+* Wstawia kopię `Orders[1]` `Orders[0]`przed .
 
 [!code-json[](jsonpatch/samples/2.2/JSON/copy.json)]
 
 ## <a name="the-test-operation"></a>Operacja testowa
 
-Jeśli wartość w lokalizacji wskazywanej przez `path` różni się od wartości podanej w `value`, żądanie kończy się niepowodzeniem. W takim przypadku całe żądanie PATCH kończy się niepowodzeniem, nawet jeśli wszystkie inne operacje w dokumencie poprawki zakończyły się powodzeniem.
+Jeśli wartość w lokalizacji wskazanej przez `path` różni się `value`od wartości podanej w , żądanie nie powiedzie się. W takim przypadku całe żądanie PATCH kończy się niepowodzeniem, nawet jeśli wszystkie inne operacje w dokumencie poprawki w przeciwnym razie zakończyłyby się pomyślnie.
 
-Operacja `test` jest często używana do zapobiegania aktualizacji, gdy występuje konflikt współbieżności.
+Operacja `test` jest często używana, aby zapobiec aktualizacji, gdy istnieje konflikt współbieżności.
 
-Następujący przykładowy dokument poprawek nie ma wpływu, jeśli początkowa wartość `CustomerName` to "Jan", ponieważ test kończy się niepowodzeniem:
+Następujący przykładowy dokument poprawki nie ma `CustomerName` wpływu, jeśli wartość początkowa jest "John", ponieważ test nie powiedzie się:
 
 [!code-json[](jsonpatch/samples/2.2/JSON/test-fail.json)]
 
 ## <a name="get-the-code"></a>Uzyskiwanie kodu
 
-[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/jsonpatch/samples/2.2). ([Jak pobrać](xref:index#how-to-download-a-sample)).
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/jsonpatch/samples). (Jak[pobrać](xref:index#how-to-download-a-sample)).
 
-Aby przetestować przykład, uruchom aplikację i Wyślij żądania HTTP z następującymi ustawieniami:
+Aby przetestować przykład, uruchom aplikację i wyślij żądania HTTP z następującymi ustawieniami:
 
-* Adres URL: `http://localhost:{port}/jsonpatch/jsonpatchwithmodelstate`
-* Metoda HTTP: `PATCH`
-* Nagłówek: `Content-Type: application/json-patch+json`
-* Treść: Skopiuj i wklej jeden z przykładów dokumentu poprawki JSON z folderu projektu *JSON* .
+* Adres url:`http://localhost:{port}/jsonpatch/jsonpatchwithmodelstate`
+* Metoda HTTP:`PATCH`
+* Nagłówka:`Content-Type: application/json-patch+json`
+* Treść: Skopiuj i wklej jedną z próbek dokumentu poprawki JSON z folderu projektu *JSON.*
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
-* [IETF RFC 5789 Specyfikacja metody poprawek](https://tools.ietf.org/html/rfc5789)
-* [IETF RFC 6902 — Specyfikacja poprawek JSON](https://tools.ietf.org/html/rfc6902)
-* [IETF RFC 6901 JSON Format ścieżki poprawek](https://tools.ietf.org/html/rfc6901)
-* [Dokumentacja poprawek JSON](https://jsonpatch.com/). Zawiera linki do zasobów do tworzenia dokumentów poprawek JSON.
-* [ASP.NET Core kod źródłowy poprawki JSON](https://github.com/dotnet/AspNetCore/tree/master/src/Features/JsonPatch/src)
+* [Specyfikacja metody IETF RFC 5789 PATCH](https://tools.ietf.org/html/rfc5789)
+* [IETF RFC 6902 JSON Patch specyfikacja](https://tools.ietf.org/html/rfc6902)
+* [Specyfikacja formatu ścieżki poprawki IETF RFC 6901 JSON](https://tools.ietf.org/html/rfc6901)
+* [Dokumentacja JSON Patch](https://jsonpatch.com/). Zawiera łącza do zasobów do tworzenia dokumentów JSON Patch.
+* [ASP.NET Podstawowy kod źródłowy JSON Patch](https://github.com/dotnet/AspNetCore/tree/master/src/Features/JsonPatch/src)
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-W tym artykule wyjaśniono, jak obsłużyć żądania poprawek w formacie JSON w ASP.NET Core interfejsie API sieci Web.
+W tym artykule wyjaśniono, jak obsługiwać żądania poprawek JSON w interfejsie API sieci web ASP.NET Core.
 
-## <a name="patch-http-request-method"></a>Poprawka metody żądania HTTP
+## <a name="patch-http-request-method"></a>Metoda żądania HTTP PATCH
 
-Metody PUT i [patch](https://tools.ietf.org/html/rfc5789) są używane do aktualizowania istniejącego zasobu. Różnica między nimi polega na tym, że zastępuje cały zasób, podczas gdy poprawka określa tylko te zmiany.
+Metody PUT i [PATCH](https://tools.ietf.org/html/rfc5789) są używane do aktualizowania istniejącego zasobu. Różnica między nimi polega na tym, że PUT zastępuje cały zasób, podczas gdy patch określa tylko zmiany.
 
-## <a name="json-patch"></a>Poprawka JSON
+## <a name="json-patch"></a>Łatka JSON
 
-[Poprawka JSON](https://tools.ietf.org/html/rfc6902) to format służący do określania aktualizacji, które mają zostać zastosowane do zasobu. Dokument poprawki JSON zawiera tablicę *operacji*. Każda operacja identyfikuje określony typ zmiany, na przykład Dodaj element tablicy lub Zastąp wartość właściwości.
+[JSON Patch](https://tools.ietf.org/html/rfc6902) to format określania aktualizacji, które mają być stosowane do zasobu. Dokument poprawki JSON ma tablicę *operacji*. Każda operacja identyfikuje określonego typu zmiany, takich jak dodać element tablicy lub zastąpić wartość właściwości.
 
-Na przykład następujące dokumenty JSON reprezentują zasób, dokument poprawki JSON dla zasobu oraz wynik zastosowania operacji patch.
+Na przykład następujące dokumenty JSON reprezentują zasób, dokument poprawki JSON dla zasobu i wynik zastosowania operacji poprawki.
 
 ### <a name="resource-example"></a>Przykład zasobu
 
@@ -280,15 +280,15 @@ Na przykład następujące dokumenty JSON reprezentują zasób, dokument poprawk
 
 [!code-json[](jsonpatch/samples/2.2/JSON/add.json)]
 
-W powyższym formacie JSON:
+W poprzednim JSON:
 
 * Właściwość `op` wskazuje typ operacji.
-* Właściwość `path` wskazuje element do zaktualizowania.
-* Właściwość `value` udostępnia nową wartość.
+* Właściwość `path` wskazuje element do aktualizacji.
+* Właściwość `value` zawiera nową wartość.
 
-### <a name="resource-after-patch"></a>Zasób po zastosowaniu poprawki
+### <a name="resource-after-patch"></a>Zasób po aktualizacji
 
-Poniżej znajduje się zasób po zastosowaniu poprzedniego dokumentu poprawki JSON:
+Oto zasób po zastosowaniu poprzedniego dokumentu JSON Patch:
 
 ```json
 {
@@ -310,60 +310,60 @@ Poniżej znajduje się zasób po zastosowaniu poprzedniego dokumentu poprawki JS
 }
 ```
 
-Zmiany wprowadzone przez zastosowanie dokumentu poprawek JSON do zasobu są niepodzielne: Jeśli jakakolwiek operacja na liście nie powiedzie się, nie zostanie zastosowana żadna operacja na liście.
+Zmiany wprowadzone przez zastosowanie dokumentu JSON Patch do zasobu są niepodzielne: jeśli jakakolwiek operacja na liście nie powiedzie się, nie zostanie zastosowana żadna operacja na liście.
 
 ## <a name="path-syntax"></a>Składnia ścieżki
 
-Właściwość [Path](https://tools.ietf.org/html/rfc6901) obiektu operacji ma ukośniki między poziomami. Na przykład `"/address/zipCode"`.
+Właściwość [path](https://tools.ietf.org/html/rfc6901) obiektu operacji ma ukośniki między poziomami. Na przykład `"/address/zipCode"`.
 
-W celu określenia elementów tablicy są używane indeksy oparte na wartości zero. Pierwszy element tablicy `addresses` będzie miał `/addresses/0`. Aby `add` do końca tablicy, użyj łącznika (-), a nie numeru indeksu: `/addresses/-`.
+Indeksy oparte na wartościach zerowych są używane do określania elementów tablicy. Pierwszy element tablicy `addresses` będzie `/addresses/0`w . Na `add` końcu tablicy należy użyć łącznika (-), a nie `/addresses/-`numeru indeksu: .
 
 ### <a name="operations"></a>Operacje
 
-W poniższej tabeli przedstawiono obsługiwane operacje zgodnie z definicją w [specyfikacji poprawek JSON](https://tools.ietf.org/html/rfc6902):
+W poniższej tabeli przedstawiono obsługiwane operacje zdefiniowane w [specyfikacji JSON Patch:](https://tools.ietf.org/html/rfc6902)
 
 |Operacja  | Uwagi |
 |-----------|--------------------------------|
-| `add`     | Dodaj właściwość lub element tablicy. Dla istniejącej właściwości: Ustaw wartość.|
+| `add`     | Dodaj właściwość lub element tablicy. Dla istniejącej właściwości: ustaw wartość.|
 | `remove`  | Usuń właściwość lub element tablicy. |
-| `replace` | Taka sama jak `remove`, a następnie `add` w tej samej lokalizacji. |
-| `move`    | Taka sama jak `remove` ze źródła, po której następuje `add` do miejsca docelowego przy użyciu wartości ze źródła. |
-| `copy`    | Analogicznie jak `add` do miejsca docelowego przy użyciu wartości ze źródła. |
-| `test`    | Zwróć kod stanu sukcesu, jeśli wartość w `path` = dostarczona `value`.|
+| `replace` | Tak `remove` samo `add` jak w tym samym miejscu. |
+| `move`    | Tak `remove` samo jak `add` ze źródła, po którym następuje miejsce docelowe przy użyciu wartości ze źródła. |
+| `copy`    | Tak `add` samo jak w przypadku miejsca docelowego przy użyciu wartości ze źródła. |
+| `test`    | Zwraca kod stanu sukcesu, jeśli wartość w `path` = pod warunkiem `value`.|
 
 ## <a name="jsonpatch-in-aspnet-core"></a>JsonPatch w ASP.NET Core
 
-ASP.NET Core implementacja poprawki JSON jest dostępna w pakiecie NuGet [Microsoft. AspNetCore. JsonPatch](https://www.nuget.org/packages/microsoft.aspnetcore.jsonpatch/) . Pakiet jest zawarty w pakiecie [Microsoft. AspnetCore. app](xref:fundamentals/metapackage-app) .
+Implementacja ASP.NET Core poprawki JSON jest dostępna w pakiecie [Microsoft.AspNetCore.JsonPatch](https://www.nuget.org/packages/microsoft.aspnetcore.jsonpatch/) NuGet. Pakiet znajduje się w metapakiecie [Microsoft.AspnetCore.App.](xref:fundamentals/metapackage-app)
 
 ## <a name="action-method-code"></a>Kod metody akcji
 
-W kontrolerze interfejsu API Metoda akcji dla poprawki JSON:
+W kontrolerze interfejsu API: metoda akcji dla poprawki JSON:
 
-* Ma adnotację z atrybutem `HttpPatch`.
-* Akceptuje `JsonPatchDocument<T>`, zazwyczaj z `[FromBody]`.
-* Wywołuje `ApplyTo` w dokumencie poprawki, aby zastosować zmiany.
+* Jest opisywany z `HttpPatch` atrybutem.
+* Akceptuje , `JsonPatchDocument<T>`zazwyczaj z `[FromBody]`.
+* Wzywa `ApplyTo` dokument poprawki do zastosowania zmian.
 
 Oto przykład:
 
 [!code-csharp[](jsonpatch/samples/2.2/Controllers/HomeController.cs?name=snippet_PatchAction&highlight=1,3,9)]
 
-Ten kod z przykładowej aplikacji współdziała z poniższym modelem `Customer`.
+Ten kod z przykładowej aplikacji `Customer` działa z następującym modelem.
 
 [!code-csharp[](jsonpatch/samples/2.2/Models/Customer.cs?name=snippet_Customer)]
 
 [!code-csharp[](jsonpatch/samples/2.2/Models/Order.cs?name=snippet_Order)]
 
-Przykładowa Metoda akcji:
+Przykładowa metoda działania:
 
-* Konstruuje `Customer`.
+* Konstruuje `Customer`plik .
 * Stosuje poprawkę.
 * Zwraca wynik w treści odpowiedzi.
 
- W rzeczywistej aplikacji kod pobiera dane z magazynu, takiego jak baza danych, i aktualizuje bazę danych po zastosowaniu poprawki.
+ W prawdziwej aplikacji kod będzie pobierać dane z magazynu, takich jak baza danych i zaktualizować bazę danych po zastosowaniu poprawki.
 
 ### <a name="model-state"></a>Stan modelu
 
-Poprzednia metoda działania przykład wywołuje Przeciążenie `ApplyTo`, które pobiera stan modelu jako jeden z jego parametrów. W przypadku tej opcji można odbierać komunikaty o błędach w odpowiedziach. Poniższy przykład przedstawia treść nieprawidłowej odpowiedzi na żądanie 400 dla operacji `test`:
+W poprzednim przykładzie metody akcji `ApplyTo` wywołuje przeciążenie tego przyjmuje stan modelu jako jeden z jego parametrów. Za pomocą tej opcji można otrzymywać komunikaty o błędach w odpowiedziach. Poniższy przykład przedstawia treść odpowiedzi 400 Bad `test` Request dla operacji:
 
 ```json
 {
@@ -381,91 +381,91 @@ W poniższym przykładzie metody akcji pokazano, jak zastosować poprawkę do ob
 
 ## <a name="the-add-operation"></a>Operacja dodawania
 
-* Jeśli `path` wskazuje element tablicy: wstawia nowy element przed określony przez `path`.
-* Jeśli `path` wskazuje Właściwość: ustawia wartość właściwości.
+* Jeśli `path` wskazuje element tablicy: wstawia nowy `path`element przed elementem określonym przez .
+* Jeśli `path` wskazuje na właściwość: ustawia wartość właściwości.
 * Jeśli `path` wskazuje nieistniejącą lokalizację:
-  * Jeśli zasób do poprawki jest obiektem dynamicznym: dodaje właściwość.
-  * Jeśli zasób do poprawki jest obiektem statycznym: żądanie nie powiedzie się.
+  * Jeśli zasób do poprawki jest obiekt dynamiczny: dodaje właściwość.
+  * Jeśli zasób do poprawki jest obiektstatyczny: żądanie kończy się niepowodzeniem.
 
-Następujący przykładowy dokument poprawek ustawia wartość `CustomerName` i dodaje obiekt `Order` do końca tablicy `Orders`.
+Poniższy przykładowy dokument poprawki `CustomerName` ustawia `Order` wartość i dodaje `Orders` obiekt na końcu tablicy.
 
 [!code-json[](jsonpatch/samples/2.2/JSON/add.json)]
 
 ## <a name="the-remove-operation"></a>Operacja usuwania
 
 * Jeśli `path` wskazuje element tablicy: usuwa element.
-* Jeśli `path` wskazuje Właściwość:
-  * Jeśli zasób do poprawki jest obiektem dynamicznym: usuwa właściwość.
+* Jeśli `path` wskazuje na właściwość:
+  * Jeśli zasób do poprawki jest obiekt dynamiczny: usuwa właściwość.
   * Jeśli zasób do poprawki jest obiektem statycznym:
-    * Jeśli właściwość dopuszcza wartość null: ustawia ją na wartość null.
-    * Jeśli właściwość nie dopuszcza wartości null, ustawia ją na `default<T>`.
+    * Jeśli właściwość jest nullable: ustawia go na null.
+    * Jeśli właściwość nie może być nullowa, ustawia ją na `default<T>`.
 
-Następujący przykładowy dokument poprawek ustawia `CustomerName` na null i usuwa `Orders[0]`.
+Poniższy przykładowy `CustomerName` dokument poprawki ustawia `Orders[0]`wartość null i usuwa .
 
 [!code-json[](jsonpatch/samples/2.2/JSON/remove.json)]
 
-## <a name="the-replace-operation"></a>Operacja zamiany
+## <a name="the-replace-operation"></a>Operacja wymiany
 
-Ta operacja jest funkcjonalnie taka sama jak `remove` i `add`.
+Ta operacja jest funkcjonalnie `remove` taka `add`sama jak po .
 
-Następujący przykładowy dokument poprawek ustawia wartość `CustomerName` i zastępuje `Orders[0]`nowym obiektem `Order`.
+Poniższy przykładowy dokument poprawki `CustomerName` ustawia `Orders[0]`wartość i `Order` zastępuje się nowym obiektem.
 
 [!code-json[](jsonpatch/samples/2.2/JSON/replace.json)]
 
 ## <a name="the-move-operation"></a>Operacja przenoszenia
 
-* Jeśli `path` wskazuje element tablicy: kopiuje `from` element do lokalizacji `path` elementu, a następnie uruchamia operację `remove` na `from` elemencie.
-* Jeśli `path` wskazuje Właściwość: kopiuje wartość właściwości `from` do właściwości `path`, a następnie uruchamia operację `remove` na właściwości `from`.
-* Jeśli `path` wskazuje nieistniejącą Właściwość:
-  * Jeśli zasób do poprawki jest obiektem statycznym: żądanie nie powiedzie się.
-  * Jeśli zasób do naprawienia jest obiektem dynamicznym: kopiuje Właściwość `from` do lokalizacji wskazywanej przez `path`, a następnie uruchamia operację `remove` na właściwości `from`.
+* Jeśli `path` wskazuje element tablicy: `from` kopiuje `path` element do `remove` lokalizacji elementu, a następnie uruchamia operację na elemencie. `from`
+* Jeśli `path` wskazuje właściwość: `from` kopiuje `path` wartość właściwości do `remove` właściwości, `from` a następnie uruchamia operację na właściwości.
+* Jeśli `path` wskazuje nieistniejącą właściwość:
+  * Jeśli zasób do poprawki jest obiektstatyczny: żądanie kończy się niepowodzeniem.
+  * Jeśli zasób do poprawki jest `from` obiektem dynamicznym: `path`kopiuje `remove` właściwość `from` do lokalizacji wskazanej przez program , a następnie uruchamia operację we właściwości.
 
-Następujący przykładowy dokument poprawek:
+Następujący przykładowy dokument poprawki:
 
-* Kopiuje wartość `Orders[0].OrderName` do `CustomerName`.
-* Ustawia `Orders[0].OrderName` na wartość null.
-* Przenosi `Orders[1]` do przed `Orders[0]`.
+* Kopiuje wartość `Orders[0].OrderName` `CustomerName`do .
+* Ustawia `Orders[0].OrderName` wartość null.
+* Przechodzi `Orders[1]` do `Orders[0]`przed .
 
 [!code-json[](jsonpatch/samples/2.2/JSON/move.json)]
 
 ## <a name="the-copy-operation"></a>Operacja kopiowania
 
-Ta operacja jest funkcjonalnie taka sama jak operacja `move` bez kroku `remove` końcowego.
+Ta operacja jest funkcjonalnie `move` taka sama `remove` jak operacja bez ostatniego kroku.
 
-Następujący przykładowy dokument poprawek:
+Następujący przykładowy dokument poprawki:
 
-* Kopiuje wartość `Orders[0].OrderName` do `CustomerName`.
-* Wstawia kopię `Orders[1]` przed `Orders[0]`.
+* Kopiuje wartość `Orders[0].OrderName` `CustomerName`do .
+* Wstawia kopię `Orders[1]` `Orders[0]`przed .
 
 [!code-json[](jsonpatch/samples/2.2/JSON/copy.json)]
 
 ## <a name="the-test-operation"></a>Operacja testowa
 
-Jeśli wartość w lokalizacji wskazywanej przez `path` różni się od wartości podanej w `value`, żądanie kończy się niepowodzeniem. W takim przypadku całe żądanie PATCH kończy się niepowodzeniem, nawet jeśli wszystkie inne operacje w dokumencie poprawki zakończyły się powodzeniem.
+Jeśli wartość w lokalizacji wskazanej przez `path` różni się `value`od wartości podanej w , żądanie nie powiedzie się. W takim przypadku całe żądanie PATCH kończy się niepowodzeniem, nawet jeśli wszystkie inne operacje w dokumencie poprawki w przeciwnym razie zakończyłyby się pomyślnie.
 
-Operacja `test` jest często używana do zapobiegania aktualizacji, gdy występuje konflikt współbieżności.
+Operacja `test` jest często używana, aby zapobiec aktualizacji, gdy istnieje konflikt współbieżności.
 
-Następujący przykładowy dokument poprawek nie ma wpływu, jeśli początkowa wartość `CustomerName` to "Jan", ponieważ test kończy się niepowodzeniem:
+Następujący przykładowy dokument poprawki nie ma `CustomerName` wpływu, jeśli wartość początkowa jest "John", ponieważ test nie powiedzie się:
 
 [!code-json[](jsonpatch/samples/2.2/JSON/test-fail.json)]
 
 ## <a name="get-the-code"></a>Uzyskiwanie kodu
 
-[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/jsonpatch/samples/2.2). ([Jak pobrać](xref:index#how-to-download-a-sample)).
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/jsonpatch/samples/2.2). (Jak[pobrać](xref:index#how-to-download-a-sample)).
 
-Aby przetestować przykład, uruchom aplikację i Wyślij żądania HTTP z następującymi ustawieniami:
+Aby przetestować przykład, uruchom aplikację i wyślij żądania HTTP z następującymi ustawieniami:
 
-* Adres URL: `http://localhost:{port}/jsonpatch/jsonpatchwithmodelstate`
-* Metoda HTTP: `PATCH`
-* Nagłówek: `Content-Type: application/json-patch+json`
-* Treść: Skopiuj i wklej jeden z przykładów dokumentu poprawki JSON z folderu projektu *JSON* .
+* Adres url:`http://localhost:{port}/jsonpatch/jsonpatchwithmodelstate`
+* Metoda HTTP:`PATCH`
+* Nagłówka:`Content-Type: application/json-patch+json`
+* Treść: Skopiuj i wklej jedną z próbek dokumentu poprawki JSON z folderu projektu *JSON.*
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
-* [IETF RFC 5789 Specyfikacja metody poprawek](https://tools.ietf.org/html/rfc5789)
-* [IETF RFC 6902 — Specyfikacja poprawek JSON](https://tools.ietf.org/html/rfc6902)
-* [IETF RFC 6901 JSON Format ścieżki poprawek](https://tools.ietf.org/html/rfc6901)
-* [Dokumentacja poprawek JSON](https://jsonpatch.com/). Zawiera linki do zasobów do tworzenia dokumentów poprawek JSON.
-* [ASP.NET Core kod źródłowy poprawki JSON](https://github.com/dotnet/AspNetCore/tree/master/src/Features/JsonPatch/src)
+* [Specyfikacja metody IETF RFC 5789 PATCH](https://tools.ietf.org/html/rfc5789)
+* [IETF RFC 6902 JSON Patch specyfikacja](https://tools.ietf.org/html/rfc6902)
+* [Specyfikacja formatu ścieżki poprawki IETF RFC 6901 JSON](https://tools.ietf.org/html/rfc6901)
+* [Dokumentacja JSON Patch](https://jsonpatch.com/). Zawiera łącza do zasobów do tworzenia dokumentów JSON Patch.
+* [ASP.NET Podstawowy kod źródłowy JSON Patch](https://github.com/dotnet/AspNetCore/tree/master/src/Features/JsonPatch/src)
 
 ::: moniker-end

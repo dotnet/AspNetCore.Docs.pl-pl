@@ -1082,6 +1082,8 @@
       uid: security/enforcing-ssl
     - name: Hostowanie platformy Docker przy użyciu protokołu HTTPS
       uid: security/docker-https
+    - name: Narzędzie Docker Compose przy użyciu protokołu HTTPS
+      uid: security/docker-compose-https
     - name: Obsługa Ogólnego rozporządzenia o ochronie danych (RODO) w UE
       uid: security/gdpr
     - name: Ochrona przed fałszerstwem żądań

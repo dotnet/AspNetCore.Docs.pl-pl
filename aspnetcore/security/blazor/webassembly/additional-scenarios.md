@@ -1,60 +1,99 @@
 ---
-title: Dodatkowe scenariusze zabezpieczeń ASP.NET Core Blazor webassembly
+title: ASP.NET podstawowe Blazor scenariusze zabezpieczeń WebAssembly
 author: guardrex
 description: ''
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/19/2020
+ms.date: 03/30/2020
 no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/additional-scenarios
-ms.openlocfilehash: ccb512392341e3eea33f4ab45740b7900f7b63f9
-ms.sourcegitcommit: 9b6e7f421c243963d5e419bdcfc5c4bde71499aa
+ms.openlocfilehash: 516132379ae20bd31c0f3b3261bb09b3f5b218f2
+ms.sourcegitcommit: 1d8f1396ccc66a0c3fcb5e5f36ea29b50db6d92a
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/21/2020
-ms.locfileid: "79989453"
+ms.lasthandoff: 04/01/2020
+ms.locfileid: "80501128"
 ---
-# <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a><span data-ttu-id="164b9-102">Dodatkowe scenariusze zabezpieczeń ASP.NET Core Blazor webassembly</span><span class="sxs-lookup"><span data-stu-id="164b9-102">ASP.NET Core Blazor WebAssembly additional security scenarios</span></span>
+# <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a><span data-ttu-id="4c1e5-102">ASP.NET Core Blazor WebAssembly dodatkowe scenariusze zabezpieczeń</span><span class="sxs-lookup"><span data-stu-id="4c1e5-102">ASP.NET Core Blazor WebAssembly additional security scenarios</span></span>
 
-<span data-ttu-id="164b9-103">Autor [Javier Calvarro Nelson](https://github.com/javiercn)</span><span class="sxs-lookup"><span data-stu-id="164b9-103">By [Javier Calvarro Nelson](https://github.com/javiercn)</span></span>
+<span data-ttu-id="4c1e5-103">Przez [Javier Calvarro Nelson](https://github.com/javiercn)</span><span class="sxs-lookup"><span data-stu-id="4c1e5-103">By [Javier Calvarro Nelson](https://github.com/javiercn)</span></span>
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 [!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
 
-## <a name="handle-token-request-errors"></a><span data-ttu-id="164b9-104">Obsługa błędów żądania tokenu</span><span class="sxs-lookup"><span data-stu-id="164b9-104">Handle token request errors</span></span>
+## <a name="request-additional-access-tokens"></a><span data-ttu-id="4c1e5-104">Żądanie dodatkowych tokenów dostępu</span><span class="sxs-lookup"><span data-stu-id="4c1e5-104">Request additional access tokens</span></span>
 
-<span data-ttu-id="164b9-105">Gdy aplikacja jednostronicowa uwierzytelnia użytkownika przy użyciu funkcji Open ID Connect (OIDC), stan uwierzytelniania jest obsługiwany lokalnie w ramach SPA i w postaci pliku cookie sesji, który jest ustawiany w wyniku użytkownika dostarczającego ich uwierzytelniające.</span><span class="sxs-lookup"><span data-stu-id="164b9-105">When a Single Page Application (SPA) authenticates a user using Open ID Connect (OIDC), the authentication state is maintained locally within the SPA and in the Identity Provider (IP) in the form of a session cookie that's set as a result of the user providing their credentials.</span></span>
+<span data-ttu-id="4c1e5-105">Większość aplikacji wymaga tylko tokenu dostępu do interakcji z chronionymi zasobami, których używają.</span><span class="sxs-lookup"><span data-stu-id="4c1e5-105">Most apps only require an access token to interact with the protected resources that they use.</span></span> <span data-ttu-id="4c1e5-106">W niektórych scenariuszach aplikacja może wymagać więcej niż jednego tokenu w celu interakcji z dwoma lub więcej zasobów.</span><span class="sxs-lookup"><span data-stu-id="4c1e5-106">In some scenarios, an app might require more than one token in order to interact with two or more resources.</span></span>
 
-<span data-ttu-id="164b9-106">Tokeny, które są emitowane przez protokół IP dla użytkownika zwykle są ważne przez krótki okresy czasu, na ogół o godzinę, więc aplikacja kliencka musi regularnie pobierać nowe tokeny.</span><span class="sxs-lookup"><span data-stu-id="164b9-106">The tokens that the IP emits for the user typically are valid for short periods of time, about one hour normally, so the client app must regularly fetch new tokens.</span></span> <span data-ttu-id="164b9-107">W przeciwnym razie użytkownik zostanie wylogowany po wygaśnięciu przyznanych tokenów.</span><span class="sxs-lookup"><span data-stu-id="164b9-107">Otherwise, the user would be logged-out after the granted tokens expire.</span></span> <span data-ttu-id="164b9-108">W większości przypadków klienci OIDC mogą udostępniać nowe tokeny, nie wymagając ponownego uwierzytelnienia użytkownika w ramach stanu uwierzytelniania lub "sesji", który jest przechowywany w ramach adresu IP.</span><span class="sxs-lookup"><span data-stu-id="164b9-108">In most cases, OIDC clients are able to provision new tokens without requiring the user to authenticate again thanks to the authentication state or "session" that is kept within the IP.</span></span>
+<span data-ttu-id="4c1e5-107">W poniższym przykładzie dodatkowe zakresy interfejsu API programu Microsoft Graph usługi Azure Active Directory (AAD) są wymagane przez aplikację do odczytywania danych użytkownika i wysyłania poczty.</span><span class="sxs-lookup"><span data-stu-id="4c1e5-107">In the following example, additional Azure Active Directory (AAD) Microsoft Graph API scopes are required by an app to read user data and send mail.</span></span> <span data-ttu-id="4c1e5-108">Po dodaniu uprawnień interfejsu API programu Microsoft Graph w portalu usługi Azure AAD dodatkowe zakresy są konfigurowane w aplikacji klienta (`Program.Main`, *Program.cs*):</span><span class="sxs-lookup"><span data-stu-id="4c1e5-108">After adding the Microsoft Graph API permissions in the Azure AAD portal, the additional scopes are configured in the Client app (`Program.Main`, *Program.cs*):</span></span>
 
-<span data-ttu-id="164b9-109">Istnieją sytuacje, w których klient nie może uzyskać tokenu bez interakcji użytkownika, na przykład gdy z jakiegoś powodu użytkownik jawnie wylogowuje się z adresu IP.</span><span class="sxs-lookup"><span data-stu-id="164b9-109">There are some cases in which the client can't get a token without user interaction, for example, when for some reason the user explicitly logs out from the IP.</span></span> <span data-ttu-id="164b9-110">Ten scenariusz występuje, gdy użytkownik odwiedza `https://login.microsoftonline.com` i wylogowuje się. W tych scenariuszach aplikacja nie wie od razu, że użytkownik wyloguje się. Każdy token przechowywany przez klienta może już nie być prawidłowy.</span><span class="sxs-lookup"><span data-stu-id="164b9-110">This scenario occurs if a user visits `https://login.microsoftonline.com` and logs out. In these scenarios, the app doesn't know immediately that the user has logged out. Any token that the client holds might no longer be valid.</span></span> <span data-ttu-id="164b9-111">Ponadto klient nie może zainicjować obsługi nowego tokenu bez interakcji użytkownika po wygaśnięciu bieżącego tokenu.</span><span class="sxs-lookup"><span data-stu-id="164b9-111">Also, the client isn't able to provision a new token without user interaction after the current token expires.</span></span>
+```csharp
+builder.Services.AddMsalAuthentication(options =>
+{
+    ...
 
-<span data-ttu-id="164b9-112">Te scenariusze nie są specyficzne dla uwierzytelniania opartego na tokenach.</span><span class="sxs-lookup"><span data-stu-id="164b9-112">These scenarios aren't specific to token-based authentication.</span></span> <span data-ttu-id="164b9-113">Są one częścią charakteru aplikacji jednostronicowych.</span><span class="sxs-lookup"><span data-stu-id="164b9-113">They are part of the nature of SPAs.</span></span> <span data-ttu-id="164b9-114">SPA używający plików cookie również nie może wywołać interfejsu API serwera, jeśli plik cookie uwierzytelniania zostanie usunięty.</span><span class="sxs-lookup"><span data-stu-id="164b9-114">An SPA using cookies also fails to call a server API if the authentication cookie is removed.</span></span>
+    options.ProviderOptions.AdditionalScopesToConsent.Add(
+        "https://graph.microsoft.com/Mail.Send");
+    options.ProviderOptions.AdditionalScopesToConsent.Add(
+        "https://graph.microsoft.com/User.Read");
+}
+```
 
-<span data-ttu-id="164b9-115">Gdy aplikacja wykonuje wywołania interfejsu API do chronionych zasobów, należy pamiętać o następujących kwestiach:</span><span class="sxs-lookup"><span data-stu-id="164b9-115">When an app performs API calls to protected resources, you must be aware of the following:</span></span>
+<span data-ttu-id="4c1e5-109">Metoda `IAccessTokenProvider.RequestToken` zapewnia przeciążenie, które umożliwia aplikacji aprowizować token z danym zestawem zakresów, jak pokazano w poniższym przykładzie:</span><span class="sxs-lookup"><span data-stu-id="4c1e5-109">The `IAccessTokenProvider.RequestToken` method provides an overload that allows an app to provision a token with a given set of scopes, as seen in the following example:</span></span>
 
-* <span data-ttu-id="164b9-116">Aby zainicjować obsługę nowego tokenu dostępu w celu wywołania interfejsu API, może być konieczne ponowne uwierzytelnienie użytkownika.</span><span class="sxs-lookup"><span data-stu-id="164b9-116">To provision a new access token to call the API, the user might be required to authenticate again.</span></span>
-* <span data-ttu-id="164b9-117">Nawet jeśli klient ma token, który wydaje się być prawidłowy, wywołanie do serwera może się nie powieść, ponieważ token został odwołany przez użytkownika.</span><span class="sxs-lookup"><span data-stu-id="164b9-117">Even if the client has a token that seems to be valid, the call to the server might fail because the token was revoked by the user.</span></span>
+```csharp
+var tokenResult = await AuthenticationService.RequestAccessToken(
+    new AccessTokenRequestOptions
+    {
+        Scopes = new[] { "https://graph.microsoft.com/Mail.Send", 
+            "https://graph.microsoft.com/User.Read" }
+    });
 
-<span data-ttu-id="164b9-118">Gdy aplikacja żąda tokenu, istnieją dwa możliwe wyniki:</span><span class="sxs-lookup"><span data-stu-id="164b9-118">When the app requests a token, there are two possible outcomes:</span></span>
+if (tokenResult.TryGetToken(out var token))
+{
+    ...
+}
+```
 
-* <span data-ttu-id="164b9-119">Żądanie powiodło się, a aplikacja ma prawidłowy token.</span><span class="sxs-lookup"><span data-stu-id="164b9-119">The request succeeds, and the app has a valid token.</span></span>
-* <span data-ttu-id="164b9-120">Żądanie nie powiedzie się, a aplikacja musi ponownie uwierzytelnić użytkownika w celu uzyskania nowego tokenu.</span><span class="sxs-lookup"><span data-stu-id="164b9-120">The request fails, and the app must authenticate the user again to obtain a new token.</span></span>
+<span data-ttu-id="4c1e5-110">`TryGetToken`Zwraca:</span><span class="sxs-lookup"><span data-stu-id="4c1e5-110">`TryGetToken` returns:</span></span>
 
-<span data-ttu-id="164b9-121">Gdy żądanie tokenu nie powiedzie się, należy zdecydować, czy chcesz zapisać dowolny bieżący stan przed przeprowadzeniem przekierowania.</span><span class="sxs-lookup"><span data-stu-id="164b9-121">When a token request fails, you need to decide whether you want to save any current state before you perform a redirection.</span></span> <span data-ttu-id="164b9-122">Istnieją różne podejścia z rosnącymi poziomami złożoności:</span><span class="sxs-lookup"><span data-stu-id="164b9-122">Several approaches exist with increasing levels of complexity:</span></span>
+* <span data-ttu-id="4c1e5-111">`true`z `token` do użytku.</span><span class="sxs-lookup"><span data-stu-id="4c1e5-111">`true` with the `token` for use.</span></span>
+* <span data-ttu-id="4c1e5-112">`false`jeśli token nie jest pobierany.</span><span class="sxs-lookup"><span data-stu-id="4c1e5-112">`false` if the token isn't retrieved.</span></span>
 
-* <span data-ttu-id="164b9-123">Przechowuj bieżący stan strony w magazynie sesji.</span><span class="sxs-lookup"><span data-stu-id="164b9-123">Store the current page state in session storage.</span></span> <span data-ttu-id="164b9-124">Podczas `OnInitializeAsync`Sprawdź, czy stan można przywrócić przed kontynuowaniem.</span><span class="sxs-lookup"><span data-stu-id="164b9-124">During `OnInitializeAsync`, check if state can be restored before continuing.</span></span>
-* <span data-ttu-id="164b9-125">Dodaj parametr ciągu zapytania i użyj go jako sposobu sygnalizowania aplikacji, którą potrzebuje do ponownego zapisu wcześniej zapisanego stanu.</span><span class="sxs-lookup"><span data-stu-id="164b9-125">Add a query string parameter and use that as a way to signal the app that it needs to re-hydrate the previously saved state.</span></span>
-* <span data-ttu-id="164b9-126">Dodaj parametr ciągu zapytania z unikatowym identyfikatorem w celu przechowywania danych w magazynie sesji bez ryzyka kolizji z innymi elementami.</span><span class="sxs-lookup"><span data-stu-id="164b9-126">Add a query string parameter with a unique identifier to store data in session storage without risking collisions with other items.</span></span>
+## <a name="handle-token-request-errors"></a><span data-ttu-id="4c1e5-113">Obsługa błędów żądań tokenu</span><span class="sxs-lookup"><span data-stu-id="4c1e5-113">Handle token request errors</span></span>
 
-<span data-ttu-id="164b9-127">W poniższym przykładzie przedstawiono sposób:</span><span class="sxs-lookup"><span data-stu-id="164b9-127">The following example shows how to:</span></span>
+<span data-ttu-id="4c1e5-114">Gdy aplikacja jednostronicowa (SPA) uwierzytelnia użytkownika przy użyciu open id connect (OIDC), stan uwierzytelniania jest obsługiwany lokalnie w spa i w dostawcy tożsamości (IP) w postaci pliku cookie sesji, który jest ustawiany w wyniku podania przez użytkownika swoich poświadczeń.</span><span class="sxs-lookup"><span data-stu-id="4c1e5-114">When a Single Page Application (SPA) authenticates a user using Open ID Connect (OIDC), the authentication state is maintained locally within the SPA and in the Identity Provider (IP) in the form of a session cookie that's set as a result of the user providing their credentials.</span></span>
 
-* <span data-ttu-id="164b9-128">Zachowaj stan przed przekierowaniem do strony logowania.</span><span class="sxs-lookup"><span data-stu-id="164b9-128">Preserve state before redirecting to the login page.</span></span>
-* <span data-ttu-id="164b9-129">Odzyskaj poprzedni stan, a następnie Uwierzytelnij przy użyciu parametru ciągu zapytania.</span><span class="sxs-lookup"><span data-stu-id="164b9-129">Recover the previous state afterward authentication using the query string parameter.</span></span>
+<span data-ttu-id="4c1e5-115">Tokeny, które adres IP emituje dla użytkownika zazwyczaj są ważne przez krótki okres czasu, około jednej godziny normalnie, więc aplikacja kliencka musi regularnie pobierać nowe tokeny.</span><span class="sxs-lookup"><span data-stu-id="4c1e5-115">The tokens that the IP emits for the user typically are valid for short periods of time, about one hour normally, so the client app must regularly fetch new tokens.</span></span> <span data-ttu-id="4c1e5-116">W przeciwnym razie użytkownik zostanie wylogowany po wygaśnięciu przyznanych tokenów.</span><span class="sxs-lookup"><span data-stu-id="4c1e5-116">Otherwise, the user would be logged-out after the granted tokens expire.</span></span> <span data-ttu-id="4c1e5-117">W większości przypadków klienci OIDC są w stanie aprowizować nowe tokeny bez konieczności ponownego uwierzytelniania użytkownika za pomocą stanu uwierzytelniania lub "sesji", która jest przechowywana w adresie IP.</span><span class="sxs-lookup"><span data-stu-id="4c1e5-117">In most cases, OIDC clients are able to provision new tokens without requiring the user to authenticate again thanks to the authentication state or "session" that is kept within the IP.</span></span>
+
+<span data-ttu-id="4c1e5-118">Istnieją przypadki, w których klient nie może uzyskać tokenu bez interakcji z użytkownikiem, na przykład, gdy z jakiegoś powodu użytkownik jawnie wylogowuje się z adresu IP.</span><span class="sxs-lookup"><span data-stu-id="4c1e5-118">There are some cases in which the client can't get a token without user interaction, for example, when for some reason the user explicitly logs out from the IP.</span></span> <span data-ttu-id="4c1e5-119">Ten scenariusz występuje, `https://login.microsoftonline.com` jeśli użytkownik odwiedza i wylogowuje. W tych scenariuszach aplikacja nie wie od razu, że użytkownik wylogował się. Każdy token, który przechowuje klient może nie być już prawidłowy.</span><span class="sxs-lookup"><span data-stu-id="4c1e5-119">This scenario occurs if a user visits `https://login.microsoftonline.com` and logs out. In these scenarios, the app doesn't know immediately that the user has logged out. Any token that the client holds might no longer be valid.</span></span> <span data-ttu-id="4c1e5-120">Ponadto klient nie jest w stanie aprowizować nowego tokenu bez interakcji z użytkownikiem po wygaśnięciu bieżącego tokenu.</span><span class="sxs-lookup"><span data-stu-id="4c1e5-120">Also, the client isn't able to provision a new token without user interaction after the current token expires.</span></span>
+
+<span data-ttu-id="4c1e5-121">Te scenariusze nie są specyficzne dla uwierzytelniania opartego na tokenie.</span><span class="sxs-lookup"><span data-stu-id="4c1e5-121">These scenarios aren't specific to token-based authentication.</span></span> <span data-ttu-id="4c1e5-122">Są one częścią charakteru OSO.</span><span class="sxs-lookup"><span data-stu-id="4c1e5-122">They are part of the nature of SPAs.</span></span> <span data-ttu-id="4c1e5-123">Spa przy użyciu plików cookie również nie można wywołać interfejsu API serwera, jeśli plik cookie uwierzytelniania jest usuwany.</span><span class="sxs-lookup"><span data-stu-id="4c1e5-123">An SPA using cookies also fails to call a server API if the authentication cookie is removed.</span></span>
+
+<span data-ttu-id="4c1e5-124">Gdy aplikacja wykonuje wywołania interfejsu API do chronionych zasobów, należy pamiętać o następujących czynnościach:</span><span class="sxs-lookup"><span data-stu-id="4c1e5-124">When an app performs API calls to protected resources, you must be aware of the following:</span></span>
+
+* <span data-ttu-id="4c1e5-125">Aby aprowizować nowy token dostępu do wywołania interfejsu API, użytkownik może być zobowiązany do ponownego uwierzytelnienia.</span><span class="sxs-lookup"><span data-stu-id="4c1e5-125">To provision a new access token to call the API, the user might be required to authenticate again.</span></span>
+* <span data-ttu-id="4c1e5-126">Nawet jeśli klient ma token, który wydaje się być prawidłowy, wywołanie serwera może zakończyć się niepowodzeniem, ponieważ token został odwołany przez użytkownika.</span><span class="sxs-lookup"><span data-stu-id="4c1e5-126">Even if the client has a token that seems to be valid, the call to the server might fail because the token was revoked by the user.</span></span>
+
+<span data-ttu-id="4c1e5-127">Gdy aplikacja żąda tokenu, istnieją dwa możliwe wyniki:</span><span class="sxs-lookup"><span data-stu-id="4c1e5-127">When the app requests a token, there are two possible outcomes:</span></span>
+
+* <span data-ttu-id="4c1e5-128">Żądanie zakończy się pomyślnie, a aplikacja ma prawidłowy token.</span><span class="sxs-lookup"><span data-stu-id="4c1e5-128">The request succeeds, and the app has a valid token.</span></span>
+* <span data-ttu-id="4c1e5-129">Żądanie kończy się niepowodzeniem, a aplikacja musi ponownie uwierzytelnić użytkownika, aby uzyskać nowy token.</span><span class="sxs-lookup"><span data-stu-id="4c1e5-129">The request fails, and the app must authenticate the user again to obtain a new token.</span></span>
+
+<span data-ttu-id="4c1e5-130">Gdy żądanie tokenu nie powiedzie się, należy zdecydować, czy chcesz zapisać dowolny bieżący stan przed wykonaniem przekierowania.</span><span class="sxs-lookup"><span data-stu-id="4c1e5-130">When a token request fails, you need to decide whether you want to save any current state before you perform a redirection.</span></span> <span data-ttu-id="4c1e5-131">Istnieje kilka podejść z rosnącym poziomem złożoności:</span><span class="sxs-lookup"><span data-stu-id="4c1e5-131">Several approaches exist with increasing levels of complexity:</span></span>
+
+* <span data-ttu-id="4c1e5-132">Przechowuj bieżący stan strony w magazynie sesji.</span><span class="sxs-lookup"><span data-stu-id="4c1e5-132">Store the current page state in session storage.</span></span> <span data-ttu-id="4c1e5-133">Podczas `OnInitializeAsync`, sprawdź, czy stan można przywrócić przed kontynuowaniem.</span><span class="sxs-lookup"><span data-stu-id="4c1e5-133">During `OnInitializeAsync`, check if state can be restored before continuing.</span></span>
+* <span data-ttu-id="4c1e5-134">Dodaj parametr ciągu zapytania i użyj go jako sposobu sygnalizowania aplikacji, że musi ponownie nawodnić wcześniej zapisany stan.</span><span class="sxs-lookup"><span data-stu-id="4c1e5-134">Add a query string parameter and use that as a way to signal the app that it needs to re-hydrate the previously saved state.</span></span>
+* <span data-ttu-id="4c1e5-135">Dodaj parametr ciągu zapytania z unikatowym identyfikatorem do przechowywania danych w magazynie sesji bez ryzyka kolizji z innymi elementami.</span><span class="sxs-lookup"><span data-stu-id="4c1e5-135">Add a query string parameter with a unique identifier to store data in session storage without risking collisions with other items.</span></span>
+
+<span data-ttu-id="4c1e5-136">W poniższym przykładzie pokazano, jak:</span><span class="sxs-lookup"><span data-stu-id="4c1e5-136">The following example shows how to:</span></span>
+
+* <span data-ttu-id="4c1e5-137">Zachowaj stan przed przekierowaniem do strony logowania.</span><span class="sxs-lookup"><span data-stu-id="4c1e5-137">Preserve state before redirecting to the login page.</span></span>
+* <span data-ttu-id="4c1e5-138">Odzyskaj poprzedni stan po uwierzytelnieniu przy użyciu parametru ciągu zapytania.</span><span class="sxs-lookup"><span data-stu-id="4c1e5-138">Recover the previous state afterward authentication using the query string parameter.</span></span>
 
 ```razor
 <EditForm Model="User" @onsubmit="OnSaveAsync">
@@ -115,11 +154,11 @@ ms.locfileid: "79989453"
 }
 ```
 
-## <a name="save-app-state-before-an-authentication-operation"></a><span data-ttu-id="164b9-130">Zapisz stan aplikacji przed operacją uwierzytelniania</span><span class="sxs-lookup"><span data-stu-id="164b9-130">Save app state before an authentication operation</span></span>
+## <a name="save-app-state-before-an-authentication-operation"></a><span data-ttu-id="4c1e5-139">Zapisywanie stanu aplikacji przed operacją uwierzytelniania</span><span class="sxs-lookup"><span data-stu-id="4c1e5-139">Save app state before an authentication operation</span></span>
 
-<span data-ttu-id="164b9-131">Podczas operacji uwierzytelniania istnieją przypadki, w których chcesz zapisać stan aplikacji przed przekierowaniem przeglądarki do adresu IP.</span><span class="sxs-lookup"><span data-stu-id="164b9-131">During an authentication operation, there are cases where you want to save the app state before the browser is redirected to the IP.</span></span> <span data-ttu-id="164b9-132">Taka sytuacja może wystąpić w przypadku korzystania z takiego elementu jak kontenera stanu i przywrócenia stanu po pomyślnym uwierzytelnieniu.</span><span class="sxs-lookup"><span data-stu-id="164b9-132">This can be the case when you are using something like a state container and you want to restore the state after the authentication succeeds.</span></span> <span data-ttu-id="164b9-133">Możesz użyć niestandardowego obiektu stanu uwierzytelniania, aby zachować stan specyficzny dla aplikacji lub odwołanie do niego, a następnie przywrócić ten stan po pomyślnym ukończeniu operacji uwierzytelniania.</span><span class="sxs-lookup"><span data-stu-id="164b9-133">You can use a custom authentication state object to preserve app-specific state or a reference to it and restore that state once the authentication operation successfully completes.</span></span>
+<span data-ttu-id="4c1e5-140">Podczas operacji uwierzytelniania istnieją przypadki, w których chcesz zapisać stan aplikacji, zanim przeglądarka zostanie przekierowana do adresu IP.</span><span class="sxs-lookup"><span data-stu-id="4c1e5-140">During an authentication operation, there are cases where you want to save the app state before the browser is redirected to the IP.</span></span> <span data-ttu-id="4c1e5-141">Może to być w przypadku, gdy używasz coś takiego jak kontener stanu i chcesz przywrócić stan po pomyślnym uwierzytelnieniu.</span><span class="sxs-lookup"><span data-stu-id="4c1e5-141">This can be the case when you are using something like a state container and you want to restore the state after the authentication succeeds.</span></span> <span data-ttu-id="4c1e5-142">Niestandardowego obiektu stanu uwierzytelniania można użyć, aby zachować stan specyficzny dla aplikacji lub odwołanie do niego i przywrócić ten stan po pomyślnym zakończeniu operacji uwierzytelniania.</span><span class="sxs-lookup"><span data-stu-id="4c1e5-142">You can use a custom authentication state object to preserve app-specific state or a reference to it and restore that state once the authentication operation successfully completes.</span></span>
 
-<span data-ttu-id="164b9-134">składnik `Authentication` (*strony/uwierzytelnianie. Razor*):</span><span class="sxs-lookup"><span data-stu-id="164b9-134">`Authentication` component (*Pages/Authentication.razor*):</span></span>
+<span data-ttu-id="4c1e5-143">`Authentication`składnik *(Pages/Authentication.brzytwa):*</span><span class="sxs-lookup"><span data-stu-id="4c1e5-143">`Authentication` component (*Pages/Authentication.razor*):</span></span>
 
 ```razor
 @page "/authentication/{action}"
@@ -163,40 +202,27 @@ ms.locfileid: "79989453"
 }
 ```
 
-## <a name="request-additional-access-tokens"></a><span data-ttu-id="164b9-135">Żądaj dodatkowych tokenów dostępu</span><span class="sxs-lookup"><span data-stu-id="164b9-135">Request additional access tokens</span></span>
+## <a name="customize-app-routes"></a><span data-ttu-id="4c1e5-144">Dostosowywanie tras aplikacji</span><span class="sxs-lookup"><span data-stu-id="4c1e5-144">Customize app routes</span></span>
 
-<span data-ttu-id="164b9-136">Większość aplikacji wymaga tylko tokenu dostępu, aby móc korzystać z chronionych zasobów, z których korzystają.</span><span class="sxs-lookup"><span data-stu-id="164b9-136">Most apps only require an access token to interact with the protected resources that they use.</span></span> <span data-ttu-id="164b9-137">W niektórych scenariuszach aplikacja może wymagać więcej niż jednego tokenu, aby można było korzystać z dwóch lub więcej zasobów.</span><span class="sxs-lookup"><span data-stu-id="164b9-137">In some scenarios, an app might require more than one token in order to interact with two or more resources.</span></span> <span data-ttu-id="164b9-138">Metoda `IAccessTokenProvider.RequestToken` zapewnia Przeciążenie, które umożliwia aplikacji Inicjowanie obsługi tokenu z danym zestawem zakresów, jak pokazano w następującym przykładzie:</span><span class="sxs-lookup"><span data-stu-id="164b9-138">The `IAccessTokenProvider.RequestToken` method provides an overload that allows an app to provision a token with a given set of scopes, as seen in the following example:</span></span>
+<span data-ttu-id="4c1e5-145">Domyślnie biblioteka `Microsoft.AspNetCore.Components.WebAssembly.Authentication` używa tras wyświetlanych w poniższej tabeli do reprezentowania różnych stanów uwierzytelniania.</span><span class="sxs-lookup"><span data-stu-id="4c1e5-145">By default, the `Microsoft.AspNetCore.Components.WebAssembly.Authentication` library uses the routes shown in the following table for representing different authentication states.</span></span>
 
-```csharp
-var tokenResult = await AuthenticationService.RequestAccessToken(
-    new AccessTokenRequestOptions
-    {
-        Scopes = new[] { "https://graph.microsoft.com/Mail.Send", 
-            "https://graph.microsoft.com/User.Read" }
-    });
-```
-
-## <a name="customize-app-routes"></a><span data-ttu-id="164b9-139">Dostosowywanie tras aplikacji</span><span class="sxs-lookup"><span data-stu-id="164b9-139">Customize app routes</span></span>
-
-<span data-ttu-id="164b9-140">Domyślnie Biblioteka `Microsoft.AspNetCore.Components.WebAssembly.Authentication` używa tras przedstawionych w poniższej tabeli w celu reprezentowania różnych stanów uwierzytelniania.</span><span class="sxs-lookup"><span data-stu-id="164b9-140">By default, the `Microsoft.AspNetCore.Components.WebAssembly.Authentication` library uses the routes shown in the following table for representing different authentication states.</span></span>
-
-| <span data-ttu-id="164b9-141">Trasa</span><span class="sxs-lookup"><span data-stu-id="164b9-141">Route</span></span>                            | <span data-ttu-id="164b9-142">Przeznaczenie</span><span class="sxs-lookup"><span data-stu-id="164b9-142">Purpose</span></span> |
+| <span data-ttu-id="4c1e5-146">Trasa</span><span class="sxs-lookup"><span data-stu-id="4c1e5-146">Route</span></span>                            | <span data-ttu-id="4c1e5-147">Przeznaczenie</span><span class="sxs-lookup"><span data-stu-id="4c1e5-147">Purpose</span></span> |
 | -------------------------------- | ------- |
-| `authentication/login`           | <span data-ttu-id="164b9-143">Wyzwala operację logowania.</span><span class="sxs-lookup"><span data-stu-id="164b9-143">Triggers a sign-in operation.</span></span> |
-| `authentication/login-callback`  | <span data-ttu-id="164b9-144">Obsługuje wynik operacji logowania.</span><span class="sxs-lookup"><span data-stu-id="164b9-144">Handles the result of any sign-in operation.</span></span> |
-| `authentication/login-failed`    | <span data-ttu-id="164b9-145">Wyświetla komunikaty o błędach, gdy operacja logowania zakończy się niepowodzeniem z jakiegoś powodu.</span><span class="sxs-lookup"><span data-stu-id="164b9-145">Displays error messages when the sign-in operation fails for some reason.</span></span> |
-| `authentication/logout`          | <span data-ttu-id="164b9-146">Wyzwala operację wylogowania.</span><span class="sxs-lookup"><span data-stu-id="164b9-146">Triggers a sign-out operation.</span></span> |
-| `authentication/logout-callback` | <span data-ttu-id="164b9-147">Obsługuje wynik operacji wylogowania.</span><span class="sxs-lookup"><span data-stu-id="164b9-147">Handles the result of a sign-out operation.</span></span> |
-| `authentication/logout-failed`   | <span data-ttu-id="164b9-148">Wyświetla komunikaty o błędach, gdy operacja wylogowania nie powiedzie się z jakiegoś powodu.</span><span class="sxs-lookup"><span data-stu-id="164b9-148">Displays error messages when the sign-out operation fails for some reason.</span></span> |
-| `authentication/logged-out`      | <span data-ttu-id="164b9-149">Wskazuje, że użytkownik pomyślnie wylogować się.</span><span class="sxs-lookup"><span data-stu-id="164b9-149">Indicates that the user has successfully logout.</span></span> |
-| `authentication/profile`         | <span data-ttu-id="164b9-150">Wyzwala operację edytowania profilu użytkownika.</span><span class="sxs-lookup"><span data-stu-id="164b9-150">Triggers an operation to edit the user profile.</span></span> |
-| `authentication/register`        | <span data-ttu-id="164b9-151">Wyzwala operację w celu zarejestrowania nowego użytkownika.</span><span class="sxs-lookup"><span data-stu-id="164b9-151">Triggers an operation to register a new user.</span></span> |
+| `authentication/login`           | <span data-ttu-id="4c1e5-148">Wyzwala operację logowania.</span><span class="sxs-lookup"><span data-stu-id="4c1e5-148">Triggers a sign-in operation.</span></span> |
+| `authentication/login-callback`  | <span data-ttu-id="4c1e5-149">Obsługuje wynik każdej operacji logowania.</span><span class="sxs-lookup"><span data-stu-id="4c1e5-149">Handles the result of any sign-in operation.</span></span> |
+| `authentication/login-failed`    | <span data-ttu-id="4c1e5-150">Wyświetla komunikaty o błędach, gdy operacja logowania nie powiedzie się z jakiegoś powodu.</span><span class="sxs-lookup"><span data-stu-id="4c1e5-150">Displays error messages when the sign-in operation fails for some reason.</span></span> |
+| `authentication/logout`          | <span data-ttu-id="4c1e5-151">Wyzwala operację wylogowywania.</span><span class="sxs-lookup"><span data-stu-id="4c1e5-151">Triggers a sign-out operation.</span></span> |
+| `authentication/logout-callback` | <span data-ttu-id="4c1e5-152">Obsługuje wynik operacji wylogowywania.</span><span class="sxs-lookup"><span data-stu-id="4c1e5-152">Handles the result of a sign-out operation.</span></span> |
+| `authentication/logout-failed`   | <span data-ttu-id="4c1e5-153">Wyświetla komunikaty o błędach, gdy operacja wylogowywania nie powiedzie się z jakiegoś powodu.</span><span class="sxs-lookup"><span data-stu-id="4c1e5-153">Displays error messages when the sign-out operation fails for some reason.</span></span> |
+| `authentication/logged-out`      | <span data-ttu-id="4c1e5-154">Wskazuje, że użytkownik pomyślnie wylogował się.</span><span class="sxs-lookup"><span data-stu-id="4c1e5-154">Indicates that the user has successfully logout.</span></span> |
+| `authentication/profile`         | <span data-ttu-id="4c1e5-155">Wyzwala operację, aby edytować profil użytkownika.</span><span class="sxs-lookup"><span data-stu-id="4c1e5-155">Triggers an operation to edit the user profile.</span></span> |
+| `authentication/register`        | <span data-ttu-id="4c1e5-156">Wyzwala operację, aby zarejestrować nowego użytkownika.</span><span class="sxs-lookup"><span data-stu-id="4c1e5-156">Triggers an operation to register a new user.</span></span> |
 
-<span data-ttu-id="164b9-152">Trasy pokazane w powyższej tabeli można konfigurować za pośrednictwem `RemoteAuthenticationOptions<TProviderOptions>.AuthenticationPaths`.</span><span class="sxs-lookup"><span data-stu-id="164b9-152">The routes shown in the preceding table are configurable via `RemoteAuthenticationOptions<TProviderOptions>.AuthenticationPaths`.</span></span> <span data-ttu-id="164b9-153">Podczas ustawiania opcji w celu zapewnienia tras niestandardowych upewnij się, że aplikacja ma trasę obsługującą każdą ścieżkę.</span><span class="sxs-lookup"><span data-stu-id="164b9-153">When setting options to provide custom routes, confirm that the app has a route that handles each path.</span></span>
+<span data-ttu-id="4c1e5-157">Trasy pokazane w powyższej tabeli `RemoteAuthenticationOptions<TProviderOptions>.AuthenticationPaths`można konfigurować za pomocą programu .</span><span class="sxs-lookup"><span data-stu-id="4c1e5-157">The routes shown in the preceding table are configurable via `RemoteAuthenticationOptions<TProviderOptions>.AuthenticationPaths`.</span></span> <span data-ttu-id="4c1e5-158">Podczas ustawiania opcji, aby zapewnić trasy niestandardowe, upewnij się, że aplikacja ma trasę, która obsługuje każdą ścieżkę.</span><span class="sxs-lookup"><span data-stu-id="4c1e5-158">When setting options to provide custom routes, confirm that the app has a route that handles each path.</span></span>
 
-<span data-ttu-id="164b9-154">W poniższym przykładzie wszystkie ścieżki są poprzedzone prefiksem `/security`.</span><span class="sxs-lookup"><span data-stu-id="164b9-154">In the following example, all the paths are prefixed with `/security`.</span></span>
+<span data-ttu-id="4c1e5-159">W poniższym przykładzie wszystkie ścieżki są `/security`poprzedzone programem .</span><span class="sxs-lookup"><span data-stu-id="4c1e5-159">In the following example, all the paths are prefixed with `/security`.</span></span>
 
-<span data-ttu-id="164b9-155">składnik `Authentication` (*strony/uwierzytelnianie. Razor*):</span><span class="sxs-lookup"><span data-stu-id="164b9-155">`Authentication` component (*Pages/Authentication.razor*):</span></span>
+<span data-ttu-id="4c1e5-160">`Authentication`składnik *(Pages/Authentication.brzytwa):*</span><span class="sxs-lookup"><span data-stu-id="4c1e5-160">`Authentication` component (*Pages/Authentication.razor*):</span></span>
 
 ```razor
 @page "/security/{action}"
@@ -210,7 +236,7 @@ var tokenResult = await AuthenticationService.RequestAccessToken(
 }
 ```
 
-<span data-ttu-id="164b9-156">`Program.Main` (*program.cs*):</span><span class="sxs-lookup"><span data-stu-id="164b9-156">`Program.Main` (*Program.cs*):</span></span>
+<span data-ttu-id="4c1e5-161">`Program.Main`(*Program.cs*):</span><span class="sxs-lookup"><span data-stu-id="4c1e5-161">`Program.Main` (*Program.cs*):</span></span>
 
 ```csharp
 builder.Services.AddApiAuthorization(options => { 
@@ -226,7 +252,7 @@ builder.Services.AddApiAuthorization(options => {
 });
 ```
 
-<span data-ttu-id="164b9-157">Jeśli wymaganie wywołuje całkowicie różne ścieżki, ustaw trasy zgodnie z opisem wcześniej i Renderuj `RemoteAuthenticatorView` za pomocą jawnego parametru akcji:</span><span class="sxs-lookup"><span data-stu-id="164b9-157">If the requirement calls for completely different paths, set the routes as described previously and render the `RemoteAuthenticatorView` with an explicit action parameter:</span></span>
+<span data-ttu-id="4c1e5-162">Jeśli wymaganie wymaga zupełnie innych ścieżek, ustaw trasy zgodnie `RemoteAuthenticatorView` z opisem wcześniej i renderuj z jawnym parametrem akcji:</span><span class="sxs-lookup"><span data-stu-id="4c1e5-162">If the requirement calls for completely different paths, set the routes as described previously and render the `RemoteAuthenticatorView` with an explicit action parameter:</span></span>
 
 ```razor
 @page "/register"
@@ -234,13 +260,13 @@ builder.Services.AddApiAuthorization(options => {
 <RemoteAuthenticatorView Action="@RemoteAuthenticationActions.Register" />
 ```
 
-<span data-ttu-id="164b9-158">Jeśli zdecydujesz się to zrobić, możesz przerwać interfejs użytkownika na różnych stronach.</span><span class="sxs-lookup"><span data-stu-id="164b9-158">You're allowed to break the UI into different pages if you choose to do so.</span></span>
+<span data-ttu-id="4c1e5-163">Jeśli zdecydujesz się to zrobić, możesz podzielić interfejs użytkownika na różne strony.</span><span class="sxs-lookup"><span data-stu-id="4c1e5-163">You're allowed to break the UI into different pages if you choose to do so.</span></span>
 
-## <a name="customize-the-authentication-user-interface"></a><span data-ttu-id="164b9-159">Dostosowywanie interfejsu użytkownika uwierzytelniania</span><span class="sxs-lookup"><span data-stu-id="164b9-159">Customize the authentication user interface</span></span>
+## <a name="customize-the-authentication-user-interface"></a><span data-ttu-id="4c1e5-164">Dostosowywanie interfejsu użytkownika uwierzytelniania</span><span class="sxs-lookup"><span data-stu-id="4c1e5-164">Customize the authentication user interface</span></span>
 
-<span data-ttu-id="164b9-160">`RemoteAuthenticatorView` zawiera domyślny zestaw elementów interfejsu użytkownika dla każdego stanu uwierzytelniania.</span><span class="sxs-lookup"><span data-stu-id="164b9-160">`RemoteAuthenticatorView` includes a default set of UI pieces for each authentication state.</span></span> <span data-ttu-id="164b9-161">Każdy stan można dostosować przez przekazanie do niestandardowego `RenderFragment`.</span><span class="sxs-lookup"><span data-stu-id="164b9-161">Each state can be customized by passing in a custom `RenderFragment`.</span></span> <span data-ttu-id="164b9-162">Aby dostosować wyświetlany tekst podczas początkowego procesu logowania, można zmienić `RemoteAuthenticatorView` w następujący sposób.</span><span class="sxs-lookup"><span data-stu-id="164b9-162">To customize the displayed text during the initial login process, can change the `RemoteAuthenticatorView` as follows.</span></span>
+<span data-ttu-id="4c1e5-165">`RemoteAuthenticatorView`zawiera domyślny zestaw elementów interfejsu użytkownika dla każdego stanu uwierzytelniania.</span><span class="sxs-lookup"><span data-stu-id="4c1e5-165">`RemoteAuthenticatorView` includes a default set of UI pieces for each authentication state.</span></span> <span data-ttu-id="4c1e5-166">Każdy stan można dostosować, przechodząc `RenderFragment`w niestandardowym pliku .</span><span class="sxs-lookup"><span data-stu-id="4c1e5-166">Each state can be customized by passing in a custom `RenderFragment`.</span></span> <span data-ttu-id="4c1e5-167">Aby dostosować wyświetlany tekst podczas początkowego procesu logowania, można zmienić w `RemoteAuthenticatorView` następujący sposób.</span><span class="sxs-lookup"><span data-stu-id="4c1e5-167">To customize the displayed text during the initial login process, can change the `RemoteAuthenticatorView` as follows.</span></span>
 
-<span data-ttu-id="164b9-163">składnik `Authentication` (*strony/uwierzytelnianie. Razor*):</span><span class="sxs-lookup"><span data-stu-id="164b9-163">`Authentication` component (*Pages/Authentication.razor*):</span></span>
+<span data-ttu-id="4c1e5-168">`Authentication`składnik *(Pages/Authentication.brzytwa):*</span><span class="sxs-lookup"><span data-stu-id="4c1e5-168">`Authentication` component (*Pages/Authentication.razor*):</span></span>
 
 ```razor
 @page "/security/{action}"
@@ -258,9 +284,9 @@ builder.Services.AddApiAuthorization(options => {
 }
 ```
 
-<span data-ttu-id="164b9-164">`RemoteAuthenticatorView` ma jeden fragment, którego można użyć dla trasy uwierzytelniania pokazanej w poniższej tabeli.</span><span class="sxs-lookup"><span data-stu-id="164b9-164">The `RemoteAuthenticatorView` has one fragment that can be used per authentication route shown in the following table.</span></span>
+<span data-ttu-id="4c1e5-169">Ma `RemoteAuthenticatorView` jeden fragment, który może być używany dla trasy uwierzytelniania pokazano w poniższej tabeli.</span><span class="sxs-lookup"><span data-stu-id="4c1e5-169">The `RemoteAuthenticatorView` has one fragment that can be used per authentication route shown in the following table.</span></span>
 
-| <span data-ttu-id="164b9-165">Trasa</span><span class="sxs-lookup"><span data-stu-id="164b9-165">Route</span></span>                            | <span data-ttu-id="164b9-166">Fragment</span><span class="sxs-lookup"><span data-stu-id="164b9-166">Fragment</span></span>                |
+| <span data-ttu-id="4c1e5-170">Trasa</span><span class="sxs-lookup"><span data-stu-id="4c1e5-170">Route</span></span>                            | <span data-ttu-id="4c1e5-171">Fragment</span><span class="sxs-lookup"><span data-stu-id="4c1e5-171">Fragment</span></span>                |
 | -------------------------------- | ----------------------- |
 | `authentication/login`           | `<LoggingIn>`           |
 | `authentication/login-callback`  | `<CompletingLoggingIn>` |

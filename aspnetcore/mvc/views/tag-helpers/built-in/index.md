@@ -1,29 +1,29 @@
 ---
-title: ASP.NET Core wbudowane Pomocnicyy tagów
+title: ASP.NET Core wbudowanych pomocników tagów
 author: pkellner
-description: Dowiedz się, jak wbudowany pomocnik tagów ASP.NET Core zwiększa produktywność.
+description: Dowiedz się, jak ASP.NET wbudowane w core pomocników tagów zwiększa produktywność.
 ms.author: riande
 ms.custom: mvc
 ms.date: 10/10/2018
 uid: mvc/views/tag-helpers/builtin-th/Index
 ms.openlocfilehash: f19cfa5b843bde8a8633ce778562707e566bebb9
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78662723"
 ---
-# <a name="aspnet-core-built-in-tag-helpers"></a>ASP.NET Core wbudowane Pomocnicyy tagów
+# <a name="aspnet-core-built-in-tag-helpers"></a>ASP.NET Core wbudowanych pomocników tagów
 
-Według [Peterowi Kellner](https://peterkellner.net)
+Przez [Peter Kellner](https://peterkellner.net)
 
-Aby zapoznać się z omówieniem pomocników tagów, zobacz <xref:mvc/views/tag-helpers/intro>.
+Aby zapoznać się z <xref:mvc/views/tag-helpers/intro>omówieniem pomocników tagów, zobacz .
 
-Istnieją wbudowane pomocnicy tagów, które nie są wymienione w tym dokumencie. Pomocniky tagów nieznajdujących się na liście są używane wewnętrznie przez aparat widoku [Razor](xref:mvc/views/razor) . Pomocnik tagu dla znaku `~` (tyldy) nie jest wystawiony. Pomocnik tagu tyldy rozszerza się do ścieżki głównej witryny sieci Web.
+Istnieją wbudowane pomocników tagów, które nie są wymienione w tym dokumencie. Niepubliczne pomocników tagów są używane wewnętrznie przez aparat widoku [Razor.](xref:mvc/views/razor) Pomocnik znaczników dla `~` znaku (tyldy) jest niepubliczny. Pomocnik znaczników tyldy rozszerza się do głównej ścieżki witryny.
 
 [!INCLUDE[](~/includes/built-in-TH.md)]
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:mvc/views/tag-helpers/intro>
 * <xref:mvc/views/tag-helpers/th-components>

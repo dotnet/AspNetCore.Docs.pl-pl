@@ -1,37 +1,37 @@
 ---
-title: Wywoływanie usług gRPC za pomocą klienta platformy .NET
+title: Dzwoń z usług gRPC za pomocą klienta .NET
 author: jamesnk
-description: Dowiedz się, jak wywoływać usługi gRPC Services za pomocą programu .NET gRPC Client.
+description: Dowiedz się, jak dzwonić do usług gRPC z klientem gRPC .NET.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 08/21/2019
 uid: grpc/client
 ms.openlocfilehash: 6a6a649f7194354b16f3d67160be02428cc01170
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78667175"
 ---
-# <a name="call-grpc-services-with-the-net-client"></a>Wywoływanie usług gRPC za pomocą klienta platformy .NET
+# <a name="call-grpc-services-with-the-net-client"></a>Dzwoń z usług gRPC za pomocą klienta .NET
 
-Biblioteka klienta .NET gRPC jest dostępna w pakiecie NuGet [gRPC .NET. Client](https://www.nuget.org/packages/Grpc.Net.Client) . W tym dokumencie wyjaśniono, jak:
+Biblioteka klienta gRPC .NET jest dostępna w pakiecie [Grpc.Net.Client](https://www.nuget.org/packages/Grpc.Net.Client) NuGet. W tym dokumencie wyjaśniono, jak:
 
-* Skonfiguruj klienta gRPC do wywoływania usług gRPC.
-* GRPC wywołania jednoargumentowe, przesyłania strumieniowego serwera, przesyłania strumieniowego klienta i dwukierunkowych metod przesyłania strumieniowego.
+* Skonfiguruj klienta gRPC, aby dzwonił do usług gRPC.
+* Wykonuj wywołania gRPC do arysowych, strumieniowych serwerów, przesyłania strumieniowego klienta i dwukierunkowych metod przesyłania strumieniowego.
 
 ## <a name="configure-grpc-client"></a>Konfigurowanie klienta gRPC
 
-gRPC klienci są konkretnymi typami klientów, które są [generowane na podstawie plików *\*. proto* ](xref:grpc/basics#generated-c-assets). Konkretny klient gRPC ma metody, które są tłumaczone na usługę gRPC w pliku *\*. proto* .
+Klienci gRPC to konkretne typy klientów [generowane z * \*plików .proto.* ](xref:grpc/basics#generated-c-assets) Konkretny klient gRPC ma metody, które przekładają się na usługę gRPC w pliku * \*.proto.*
 
-Klient gRPC jest tworzony na podstawie kanału. Zacznij od użycia `GrpcChannel.ForAddress`, aby utworzyć kanał, a następnie użyj kanału, aby utworzyć klienta gRPC:
+Klient gRPC jest tworzony z kanału. Zacznij od `GrpcChannel.ForAddress` utworzenia kanału, a następnie użyj kanału, aby utworzyć klienta gRPC:
 
 ```csharp
 var channel = GrpcChannel.ForAddress("https://localhost:5001");
 var client = new Greet.GreeterClient(channel);
 ```
 
-Kanał reprezentuje długotrwałe połączenie z usługą gRPC. Po utworzeniu kanału jest on konfigurowany z opcjami związanymi z wywoływaniem usługi. Na przykład `HttpClient` używany do wykonywania wywołań, maksymalnego rozmiaru wysyłania i odbierania wiadomości oraz rejestrowania można określić dla `GrpcChannelOptions` i użyć z `GrpcChannel.ForAddress`. Aby uzyskać pełną listę opcji, zobacz [Opcje konfiguracji klienta](xref:grpc/configuration#configure-client-options).
+Kanał reprezentuje długotrwałe połączenie z usługą gRPC. Po utworzeniu kanału jest on konfigurowany z opcjami związanymi z wywoływaniem usługi. Na przykład `HttpClient` używany do nawiązywania połączeń, maksymalny rozmiar wiadomości wysyłania i odbierania oraz rejestrowanie można określić `GrpcChannelOptions` i używać z programem `GrpcChannel.ForAddress`. Aby uzyskać pełną listę opcji, zobacz [opcje konfiguracji klienta](xref:grpc/configuration#configure-client-options).
 
 ```csharp
 var channel = GrpcChannel.ForAddress("https://localhost:5001");
@@ -42,36 +42,36 @@ var counterClient = new Count.CounterClient(channel);
 // Use clients to call gRPC services
 ```
 
-Wydajność i użycie kanału i klienta:
+Wydajność i wykorzystanie kanałów i klientów:
 
-* Tworzenie kanału może być kosztowną operacją. Użycie kanału dla wywołań gRPC zapewnia korzyści wynikające z wydajności.
-* gRPC klienci są tworzone za pomocą kanałów. gRPC klienci są obiektami lekkimi i nie muszą być buforowane ani ponownie używane.
-* Wielu klientów gRPC można utworzyć na podstawie kanału, w tym różnych typów klientów.
-* Kanał i klienci utworzeni z kanału mogą być bezpiecznie używani przez wiele wątków.
-* Klienci utworzeni z kanału mogą wykonywać wiele jednoczesnych wywołań.
+* Tworzenie kanału może być kosztowną operacją. Ponowne korzystać z kanału dla połączeń gRPC zapewnia korzyści wydajności.
+* Klienci gRPC są tworzone za pomocą kanałów. Klienci gRPC są lekkimi obiektami i nie muszą być buforowane ani ponownie zażywane.
+* Wielu klientów gRPC można utworzyć z kanału, w tym różnych typów klientów.
+* Kanał i klientów utworzonych z kanału mogą być bezpiecznie używane przez wiele wątków.
+* Klienci utworzone z kanału można wykonywać wiele jednoczesnych połączeń.
 
-`GrpcChannel.ForAddress` nie jest jedyną opcją tworzenia klienta gRPC. Jeśli wywołujesz usługi gRPC z aplikacji ASP.NET Core, weź pod uwagę [integrację klienta gRPC](xref:grpc/clientfactory). Integracja gRPC z `HttpClientFactory` oferuje scentralizowaną alternatywę do tworzenia klientów gRPC.
-
-> [!NOTE]
-> Dodatkowa konfiguracja jest wymagana do [wywołania niezabezpieczonych usług gRPC za pomocą klienta platformy .NET](xref:grpc/troubleshoot#call-insecure-grpc-services-with-net-core-client).
+`GrpcChannel.ForAddress`nie jest jedyną opcją tworzenia klienta gRPC. Jeśli dzwonisz do usług gRPC z aplikacji ASP.NET Core, rozważ [integrację fabryki klienta gRPC.](xref:grpc/clientfactory) Integracja gRPC z `HttpClientFactory` oferuje scentralizowaną alternatywę dla tworzenia klientów gRPC.
 
 > [!NOTE]
-> Wywołanie gRPC za pośrednictwem protokołu HTTP/2 z `Grpc.Net.Client` nie jest obecnie obsługiwane w oprogramowaniu Xamarin. Pracujemy nad ulepszeniem obsługi protokołu HTTP/2 w przyszłej wersji platformy Xamarin. [GRPC. Core](https://www.nuget.org/packages/Grpc.Core) i [GRPC-Web](xref:grpc/browser) to żywotne alternatywy, które działają dzisiaj.
+> Dodatkowa konfiguracja jest wymagana do [wywoływania niezabezpieczonych usług gRPC z klientem .NET](xref:grpc/troubleshoot#call-insecure-grpc-services-with-net-core-client).
 
-## <a name="make-grpc-calls"></a>Utwórz wywołania gRPC
+> [!NOTE]
+> Wywołanie gRPC przez HTTP/2 z `Grpc.Net.Client` obecnie nie jest obsługiwane na xamarin. Pracujemy nad ulepszeniem obsługi protokołu HTTP/2 w przyszłej wersji platformy Xamarin. [Grpc.Core](https://www.nuget.org/packages/Grpc.Core) i [gRPC-Web](xref:grpc/browser) są realnymi alternatywami, które działają dzisiaj.
 
-Wywołanie gRPC jest inicjowane przez wywołanie metody na kliencie. Klient gRPC będzie obsługiwał serializację komunikatów i odnoszący się do wywołania gRPC do prawidłowej usługi.
+## <a name="make-grpc-calls"></a>Wykonywanie połączeń gRPC
 
-gRPC ma różne typy metod. Sposób użycia klienta do nawiązywania wywołania gRPC zależy od typu wywoływanej metody. Typy metod gRPC są następujące:
+Wywołanie gRPC jest inicjowane przez wywołanie metody na kliencie. Klient gRPC będzie obsługiwać serializacji wiadomości i adresowania wywołania gRPC do poprawnej usługi.
 
-* Jednostk
+gRPC ma różne rodzaje metod. Sposób korzystania z klienta do wywołania gRPC zależy od typu metody, którą wywołujesz. Typy metod gRPC to:
+
+* Jednoargumentowy
 * Przesyłanie strumieniowe serwera
 * Przesyłanie strumieniowe klienta
 * Dwukierunkowe przesyłanie strumieniowe
 
-### <a name="unary-call"></a>Wywołanie jednoargumentowe
+### <a name="unary-call"></a>Połączenie bezemisowe
 
-Wywołanie jednoargumentowe rozpoczyna się od klienta wysyłającego komunikat żądania. Komunikat odpowiedzi jest zwracany po zakończeniu działania usługi.
+Połączenie bezemisowe rozpoczyna się od wysłania przez klienta wiadomości żądania. Komunikat odpowiedzi jest zwracany po zakończeniu usługi.
 
 ```csharp
 var client = new Greet.GreeterClient(channel);
@@ -81,14 +81,14 @@ Console.WriteLine("Greeting: " + response.Message);
 // Greeting: Hello World
 ```
 
-Każda metoda usługi jednoargumentowej w pliku *\*. proto* powoduje dwie metody .NET na konkretnym typie klienta gRPC do wywoływania metody: Metoda asynchroniczna i Metoda blokująca. Na przykład na `GreeterClient` istnieją dwa sposoby wywoływania `SayHello`:
+Każda metoda usługi dwuarchifowej w pliku * \*.proto* spowoduje dwie metody .NET na typie klienta gRPC dla wywoływania metody: metoda asynchroniza i metoda blokowania. Na przykład, `GreeterClient` na istnieją dwa `SayHello`sposoby wywoływania:
 
-* `GreeterClient.SayHelloAsync` — wywołania `Greeter.SayHello` usługa asynchronicznie. Można oczekiwać.
-* `GreeterClient.SayHello` — wywołania `Greeter.SayHello` usługi i bloków do momentu ukończenia. Nie używaj w kodzie asynchronicznym.
+* `GreeterClient.SayHelloAsync`- `Greeter.SayHello` wywołuje usługę asynchronicznie. Można oczekiwać.
+* `GreeterClient.SayHello`- `Greeter.SayHello` dzwoni serwis i blokuje się do czasu zakończenia. Nie używaj w kodzie asynchroniza.
 
 ### <a name="server-streaming-call"></a>Wywołanie przesyłania strumieniowego serwera
 
-Wywołanie przesyłania strumieniowego serwera rozpoczyna się od klienta wysyłającego komunikat żądania. `ResponseStream.MoveNext()` odczytuje komunikaty przesyłane strumieniowo z usługi. Wywołanie przesyłania strumieniowego serwera jest ukończone, gdy `ResponseStream.MoveNext()` zwraca `false`.
+Wywołanie przesyłania strumieniowego serwera rozpoczyna się od wysłania przez klienta komunikatu żądania. `ResponseStream.MoveNext()`odczytuje wiadomości przesyłane strumieniowo z usługi. Połączenie przesyłania strumieniowego `ResponseStream.MoveNext()` serwera `false`zostanie zakończone po zwróceniu .
 
 ```csharp
 var client = new Greet.GreeterClient(channel);
@@ -102,7 +102,7 @@ using (var call = client.SayHellos(new HelloRequest { Name = "World" }))
 }
 ```
 
-W przypadku używania C# 8 lub nowszych składni `await foreach` można używać do odczytywania wiadomości. Metoda rozszerzenia `IAsyncStreamReader<T>.ReadAllAsync()` odczytuje wszystkie komunikaty ze strumienia odpowiedzi:
+Jeśli używasz języka C# 8 `await foreach` lub nowszego, składni może służyć do odczytywania wiadomości. Metoda `IAsyncStreamReader<T>.ReadAllAsync()` rozszerzenia odczytuje wszystkie komunikaty ze strumienia odpowiedzi:
 
 ```csharp
 var client = new Greet.GreeterClient(channel);
@@ -116,9 +116,9 @@ using (var call = client.SayHellos(new HelloRequest { Name = "World" }))
 }
 ```
 
-### <a name="client-streaming-call"></a>Wywołanie przesyłania strumieniowego klienta
+### <a name="client-streaming-call"></a>Połączenie strumieniowe klienta
 
-Wywołanie przesyłania strumieniowego klienta rozpoczyna się *bez* wysyłania komunikatu przez klienta. Klient może zdecydować się na wysyłanie komunikatów przy użyciu `RequestStream.WriteAsync`. Gdy klient zakończył wysyłanie komunikatów, `RequestStream.CompleteAsync` powinien zostać wywołany w celu powiadomienia usługi. Wywołanie jest zakończone, gdy usługa zwróci komunikat odpowiedzi.
+Połączenie przesyłania strumieniowego klienta rozpoczyna się *bez* wysyłania wiadomości przez klienta. Klient może wybrać opcję `RequestStream.WriteAsync`wysyłania wiadomości za pomocą pliku . Po zakończeniu wysyłania `RequestStream.CompleteAsync` wiadomości przez klienta należy wywołać, aby powiadomić usługę. Wywołanie jest zakończone, gdy usługa zwraca komunikat odpowiedzi.
 
 ```csharp
 var client = new Counter.CounterClient(channel);
@@ -136,9 +136,9 @@ using (var call = client.AccumulateCount())
 }
 ```
 
-### <a name="bi-directional-streaming-call"></a>Dwukierunkowe wywołanie przesyłania strumieniowego
+### <a name="bi-directional-streaming-call"></a>Dwukierunkowe połączenie strumieniowe
 
-Dwukierunkowe wywołanie przesyłania strumieniowego rozpoczyna się *bez* wysyłania komunikatu przez klienta. Klient może zdecydować się na wysyłanie komunikatów przy użyciu `RequestStream.WriteAsync`. Komunikaty przesyłane strumieniowo z usługi są dostępne z użyciem `ResponseStream.MoveNext()` lub `ResponseStream.ReadAllAsync()`. Dwukierunkowe wywołanie przesyłania strumieniowego jest kompletne, gdy `ResponseStream` nie ma więcej komunikatów.
+Dwukierunkowe połączenie przesyłania strumieniowego rozpoczyna się *bez* wysyłania wiadomości przez klienta. Klient może wybrać opcję `RequestStream.WriteAsync`wysyłania wiadomości za pomocą pliku . Wiadomości przesyłane strumieniowo z `ResponseStream.MoveNext()` `ResponseStream.ReadAllAsync()`usługi są dostępne za pomocą pliku . Dwukierunkowe wywołanie przesyłania strumieniowego `ResponseStream` jest zakończone, gdy nie ma więcej wiadomości.
 
 ```csharp
 using (var call = client.Echo())
@@ -172,9 +172,9 @@ using (var call = client.Echo())
 }
 ```
 
-W trakcie dwukierunkowego wywołania przesyłania strumieniowego klient i usługa mogą w dowolnym momencie wysyłać komunikaty do siebie. Najlepsza logika klienta do współpracy z dwukierunkowym wywołaniem różni się w zależności od logiki usługi.
+Podczas dwukierunkowego połączenia przesyłania strumieniowego klient i usługa mogą wysyłać do siebie wiadomości w dowolnym momencie. Najlepsza logika klienta do interakcji z wywołaniem dwukierunkowym różni się w zależności od logiki usługi.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:grpc/clientfactory>
 * <xref:grpc/basics>

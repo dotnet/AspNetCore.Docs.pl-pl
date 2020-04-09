@@ -1,10 +1,10 @@
 * `-h|--help`
 
-  Pokaż informacje pomocy.
+  Pokaż informacje o pomocy.
 
 * `--verbosity <LEVEL>`
 
-  Ustaw poziom szczegółowości danych wyjściowych. Zastąp `<LEVEL>` jedną z następujących wartości:
+  Ustaw szczegółowość danych wyjściowych. Zastąp `<LEVEL>` jedną z następujących wartości:
   
   * `quiet`
   * `normal`

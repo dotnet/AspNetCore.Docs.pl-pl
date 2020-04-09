@@ -1,87 +1,95 @@
 ---
-title: ASP.NET Core Blazor globalizacja i lokalizacja
+title: ASP.NET Podstawowa Blazor globalizacja i lokalizacja
 author: guardrex
-description: Dowiedz się, jak udostępnić składniki Razor użytkownikom w wielu kulturach i językach.
+description: Dowiedz się, jak sprawić, by składniki Razor były dostępne dla użytkowników w wielu kulturach i językach.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/12/2020
+ms.date: 04/07/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/globalization-localization
-ms.openlocfilehash: aba62fa7b6285c8ba884652694f1ea3e3a66ed18
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 2795b21f418ccb2722e7fd0e76a77cfde58e524a
+ms.sourcegitcommit: f0aeeab6ab6e09db713bb9b7862c45f4d447771b
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78655492"
+ms.lasthandoff: 04/08/2020
+ms.locfileid: "80976745"
 ---
-# <a name="aspnet-core-opno-locblazor-globalization-and-localization"></a>ASP.NET Core Blazor globalizacja i lokalizacja
+# <a name="aspnet-core-opno-locblazor-globalization-and-localization"></a>ASP.NET Podstawowa Blazor globalizacja i lokalizacja
 
-Autorzy [Luke Latham](https://github.com/guardrex) i [Daniel Roth](https://github.com/danroth27)
+Autorstwa [Luke'a Lathama](https://github.com/guardrex) i [Daniela Rotha](https://github.com/danroth27)
 
-Składniki Razor można udostępnić użytkownikom w wielu kulturach i językach. Dostępne są następujące scenariusze globalizacji i lokalizacji platformy .NET:
+Składniki maszynki do golenia mogą być dostępne dla użytkowników w wielu kulturach i językach. Dostępne są następujące scenariusze globalizacji i lokalizacji platformy .NET:
 
-* . System zasobów netto
+* . System zasobów NET
 * Formatowanie liczb i dat specyficznych dla kultury
 
-Obecnie obsługiwane są ograniczone zestawy ASP.NET Core scenariuszy lokalizacji:
+Obecnie obsługiwany jest ograniczony zestaw scenariuszy lokalizacji ASP.NET Core:
 
-* `IStringLocalizer<>` *jest obsługiwana* w aplikacjach Blazor.
-* Lokalizacja `IHtmlLocalizer<>`, `IViewLocalizer<>`i adnotacji danych są ASP.NET Core scenariusze MVC i **nie są obsługiwane** w aplikacjach Blazor.
+* `IStringLocalizer<>`*jest obsługiwana* w Blazor aplikacjach.
+* `IHtmlLocalizer<>`, `IViewLocalizer<>`i lokalizacja adnotacji danych są ASP.NET scenariuszy Core MVC Blazor i nie są **obsługiwane** w aplikacjach.
 
 Aby uzyskać więcej informacji, zobacz <xref:fundamentals/localization>.
 
 ## <a name="globalization"></a>Globalizacja
 
-Funkcja `@bind` Blazorwykonuje formaty i analizuje wartości na potrzeby wyświetlania w oparciu o bieżącą kulturę użytkownika.
+Blazor's `@bind` funkcje wykonuje formaty i analizuje wartości wyświetlania na podstawie bieżącej kultury użytkownika.
 
-Dostęp do bieżącej kultury można uzyskać ze właściwości <xref:System.Globalization.CultureInfo.CurrentCulture?displayProperty=fullName>.
+Bieżąca kultura jest dostępna <xref:System.Globalization.CultureInfo.CurrentCulture?displayProperty=fullName> z właściwości.
 
-[CultureInfo. InvariantCulture](xref:System.Globalization.CultureInfo.InvariantCulture) jest używany dla następujących typów pól (`<input type="{TYPE}" />`):
+[CultureInfo.InvariantCulture](xref:System.Globalization.CultureInfo.InvariantCulture) jest używany dla następujących`<input type="{TYPE}" />`typów pól ( ):
 
 * `date`
 * `number`
 
 Poprzednie typy pól:
 
-* Są wyświetlane przy użyciu odpowiednich reguł formatowania opartych na przeglądarce.
-* Nie może zawierać tekstu o dowolnym formacie.
-* Podaj charakterystykę interakcji użytkownika w oparciu o implementację przeglądarki.
+* Są wyświetlane przy użyciu odpowiednich reguł formatowania opartego na przeglądarce.
+* Nie może zawierać tekstu w postaci swobodnej.
+* Podaj charakterystykę interakcji użytkownika na podstawie implementacji przeglądarki.
 
-Następujące typy pól mają określone wymagania dotyczące formatowania i nie są obecnie obsługiwane przez Blazor, ponieważ nie są obsługiwane przez wszystkie główne przeglądarki:
+Następujące typy pól mają określone wymagania dotyczące formatowania i Blazor nie są obecnie obsługiwane, ponieważ nie są obsługiwane przez wszystkie główne przeglądarki:
 
 * `datetime-local`
 * `month`
 * `week`
 
-`@bind` obsługuje parametr `@bind:culture`, aby zapewnić <xref:System.Globalization.CultureInfo?displayProperty=fullName> do analizy i formatowania wartości. Określanie kultury nie jest zalecane w przypadku używania typów pól `date` i `number`. `date` i `number` mają wbudowaną obsługę Blazor, która udostępnia wymaganą kulturę.
+`@bind`obsługuje `@bind:culture` parametr, aby <xref:System.Globalization.CultureInfo?displayProperty=fullName> zapewnić analizowanie i formatowanie wartości. Określanie kultury nie jest zalecane `date` podczas `number` korzystania z typów pól i. `date`i `number` mają wbudowaną Blazor obsługę, która zapewnia wymaganą kulturę.
 
 ## <a name="localization"></a>Lokalizacja
 
-aplikacje serwera Blazor są zlokalizowane przy użyciu [oprogramowania pośredniczącego](xref:fundamentals/localization#localization-middleware). Oprogramowanie pośredniczące wybiera odpowiednią kulturę dla użytkowników żądających zasobów z aplikacji.
+### <a name="opno-locblazor-webassembly"></a>BlazorWebAssembly (WebAssembly)
 
-Kulturę można ustawić przy użyciu jednej z następujących metod:
+BlazorAplikacje WebAssembly ustawiają kulturę przy użyciu [preferencji językowych](https://developer.mozilla.org/docs/Web/API/NavigatorLanguage/languages)użytkownika .
+
+Aby jawnie skonfigurować kulturę, `CultureInfo.DefaultThreadCurrentUICulture` `Program.Main`ustaw `CultureInfo.DefaultThreadCurrentCulture` i w .
+
+Domyślnie Blazorkonfiguracja konsolidatora webassembly Blazor usuwa informacje o internacjonalizacji, z wyjątkiem ustawień regionalnych jawnie żądane. Aby uzyskać więcej informacji i wskazówek dotyczących kontrolowania <xref:host-and-deploy/blazor/configure-linker#configure-the-linker-for-internationalization>zachowania konsolidatora, zobacz .
+
+Podczas gdy Blazor kultura, która wybiera domyślnie może być wystarczająca dla większości użytkowników, należy rozważyć oferowanie użytkownikom sposobu, aby określić preferowane ustawienia regionalne. Aby Blazor uzyskać przykładową aplikację WebAssembly z selektorem kultury, zobacz przykładową aplikację [lokalizacji LocSample.](https://github.com/pranavkm/LocSample)
+
+### <a name="opno-locblazor-server"></a>BlazorSerwera
+
+BlazorAplikacje serwera są zlokalizowane przy użyciu [oprogramowania pośredniczącego lokalizacji](xref:fundamentals/localization#localization-middleware). Oprogramowanie pośredniczące wybiera odpowiednią kulturę dla użytkowników żądających zasobów z aplikacji.
+
+Kultury można ustawić przy użyciu jednego z następujących metod:
 
 * [Plik cookie](#cookies)
-* [Podaj interfejs użytkownika, aby wybrać kulturę](#provide-ui-to-choose-the-culture)
+* [Udostępnij interfejs użytkownika, aby wybrać kulturę](#provide-ui-to-choose-the-culture)
 
-Aby uzyskać więcej informacji i przykładów, zobacz <xref:fundamentals/localization>.
+Aby uzyskać więcej informacji <xref:fundamentals/localization>i przykładów, zobacz .
 
-### <a name="configure-the-linker-for-internationalization-opno-locblazor-webassembly"></a>Konfigurowanie konsolidatora do użytku wieloplikowego (Blazor webassembly)
+#### <a name="cookies"></a>Pliki cookie
 
-Domyślnie konfiguracja konsolidatora Blazordla Blazor aplikacji webassembly umożliwia rozłączenie informacji o danych wielojęzycznych z wyjątkiem lokalizacji lokalnych jawnie żądanych. Aby uzyskać więcej informacji i wskazówek dotyczących kontrolowania zachowania konsolidatora, zobacz <xref:host-and-deploy/blazor/configure-linker#configure-the-linker-for-internationalization>.
+Plik cookie kultury lokalizacji może utrwalać kulturę użytkownika. Plik cookie jest `OnGet` tworzony metodą strony hosta aplikacji (*Pages/Host.cshtml.cs*). Oprogramowanie pośredniczące lokalizacji odczytuje plik cookie na kolejne żądania, aby ustawić kulturę użytkownika. 
 
-### <a name="cookies"></a>Cookie
+Użycie pliku cookie gwarantuje, że połączenie WebSocket może poprawnie propagować kulturę. Jeśli schematy lokalizacji są oparte na ścieżce adresu URL lub ciągu kwerendy, schemat może nie być w stanie pracować z WebSockets, w związku z czym nie można utrwalić kultury. W związku z tym użycie pliku cookie kultury lokalizacji jest zalecane podejście.
 
-Plik cookie kultury lokalizacji może utrzymywać kulturę użytkownika. Plik cookie jest tworzony przez metodę `OnGet` strony hosta aplikacji (*strony/hosta. cshtml. cs*). Oprogramowanie pośredniczące lokalizacji odczytuje plik cookie na kolejnych żądaniach, aby ustawić kulturę użytkownika. 
+Dowolna technika może służyć do przypisywania kultury, jeśli kultura jest utrwalona w pliku cookie lokalizacji. Jeśli aplikacja ma już ustalony schemat lokalizacji dla ASP.NET Core po stronie serwera, nadal używaj istniejącej infrastruktury lokalizacyjnej aplikacji i ustaw plik cookie kultury lokalizacji w schemacie aplikacji.
 
-Użycie pliku cookie zapewnia, że połączenie z użyciem protokołu WebSocket może prawidłowo propagować kulturę. Jeśli schematy lokalizacji są oparte na ścieżce URL lub ciągu zapytania, schemat może nie być w stanie współdziałać z usługą WebSockets, więc nie będzie można zachować kultury. W związku z tym zalecanym podejściem jest użycie pliku cookie kultury lokalizacji.
-
-Każda technika może służyć do przypisywania kultury, jeśli kultura jest utrwalona w pliku cookie lokalizacji. Jeśli aplikacja ma już ustalony schemat lokalizacji dla ASP.NET Core po stronie serwera, Kontynuuj korzystanie z istniejącej infrastruktury lokalizacji aplikacji i Ustaw plik cookie kultury lokalizacji w schemacie aplikacji.
-
-Poniższy przykład pokazuje, jak ustawić bieżącą kulturę w pliku cookie, który może zostać odczytany przez oprogramowanie pośredniczące lokalizacji. Utwórz plik *Pages/hosta. cshtml. cs* z następującą zawartością w aplikacji Blazor Server:
+W poniższym przykładzie pokazano, jak ustawić bieżącą kulturę w pliku cookie, który może być odczytywany przez oprogramowanie pośredniczące lokalizacji. Utwórz plik *Pages/_Host.cshtml.cs* z następującą Blazor zawartością w aplikacji Serwer:
 
 ```csharp
 public class HostModel : PageModel
@@ -98,22 +106,22 @@ public class HostModel : PageModel
 }
 ```
 
-Lokalizacja jest obsługiwana przez aplikację w następującej kolejności zdarzeń:
+Lokalizacja jest obsługiwana przez aplikację w następującej sekwencji zdarzeń:
 
 1. Przeglądarka wysyła początkowe żądanie HTTP do aplikacji.
-1. Kultura jest przypisana przez oprogramowanie pośredniczące lokalizacji.
-1. Metoda `OnGet` w *_Host. cshtml. cs* utrzymuje kulturę w pliku cookie jako część odpowiedzi.
-1. Przeglądarka otwiera połączenie WebSocket, aby utworzyć interakcyjną sesję serwera Blazor.
+1. Kultura jest przypisywana przez oprogramowanie pośredniczące lokalizacji.
+1. Metoda `OnGet` w *_Host.cshtml.cs* utrzymuje kultury w pliku cookie jako część odpowiedzi.
+1. Przeglądarka otwiera połączenie WebSocket w Blazor celu utworzenia interaktywnej sesji serwera.
 1. Oprogramowanie pośredniczące lokalizacji odczytuje plik cookie i przypisuje kulturę.
-1. Sesja serwera Blazor rozpoczyna się od poprawnej kultury.
+1. Sesja Blazor serwera rozpoczyna się od poprawnej kultury.
 
-### <a name="provide-ui-to-choose-the-culture"></a>Podaj interfejs użytkownika, aby wybrać kulturę
+#### <a name="provide-ui-to-choose-the-culture"></a>Udostępnij interfejs użytkownika, aby wybrać kulturę
 
-Aby zapewnić interfejs użytkownika, aby umożliwić użytkownikowi wybranie kultury, zalecane jest *podejście oparte na przekierowaniu* . Ten proces jest podobny do tego, co się dzieje w aplikacji sieci Web, gdy użytkownik próbuje uzyskać dostęp do bezpiecznego zasobu&mdash;użytkownik zostanie przekierowany do strony logowania, a następnie przekierowany z powrotem do oryginalnego zasobu. 
+Aby zapewnić interfejs użytkownika, aby umożliwić użytkownikowi wybranie kultury, *zaleca się podejście oparte na przekierowanie.* Proces jest podobny do tego, co dzieje się w aplikacji sieci web, gdy użytkownik próbuje uzyskać dostęp do bezpiecznego zasobu. Użytkownik jest przekierowywał do strony logowania, a następnie przekierowywał z powrotem do oryginalnego zasobu. 
 
-Aplikacja utrzymuje wybraną kulturę użytkownika za pośrednictwem przekierowania do kontrolera. Kontroler ustawia wybraną kulturę użytkownika na plik cookie i przekierowuje użytkownika z powrotem do oryginalnego identyfikatora URI.
+Aplikacja utrzymuje wybranej kultury użytkownika za pośrednictwem przekierowania do kontrolera. Kontroler ustawia wybraną kulturę użytkownika w plik cookie i przekierowuje użytkownika z powrotem do oryginalnego identyfikatora URI.
 
-Ustanów punkt końcowy HTTP na serwerze, aby ustawić kulturę wybraną przez użytkownika w pliku cookie i wykonać przekierowanie z powrotem do oryginalnego identyfikatora URI:
+Ustanowienie punktu końcowego HTTP na serwerze, aby ustawić wybraną kulturę użytkownika w pliku cookie i wykonać przekierowanie z powrotem do oryginalnego identyfikatora URI:
 
 ```csharp
 [Route("[controller]/[action]")]
@@ -135,9 +143,9 @@ public class CultureController : Controller
 ```
 
 > [!WARNING]
-> Użyj wyniku działania `LocalRedirect`, aby zapobiec atakom typu "Open redirect". Aby uzyskać więcej informacji, zobacz <xref:security/preventing-open-redirects>.
+> Użyj `LocalRedirect` wyniku akcji, aby zapobiec otwartym atakom przekierowania. Aby uzyskać więcej informacji, zobacz <xref:security/preventing-open-redirects>.
 
-Poniższy składnik przedstawia przykład sposobu wykonywania wstępnego przekierowania, gdy użytkownik wybierze kulturę:
+Następujący składnik przedstawia przykład wykonywania początkowego przekierowania, gdy użytkownik wybierze kulturę:
 
 ```razor
 @inject NavigationManager NavigationManager
@@ -154,7 +162,7 @@ Poniższy składnik przedstawia przykład sposobu wykonywania wstępnego przekie
     private void OnSelected(ChangeEventArgs e)
     {
         var culture = (string)e.Value;
-        var uri = new Uri(NavigationManager.Uri())
+        var uri = new Uri(NavigationManager.Uri)
             .GetComponents(UriComponents.PathAndQuery, UriFormat.Unescaped);
         var query = $"?culture={Uri.EscapeDataString(culture)}&" +
             $"redirectUri={Uri.EscapeDataString(uri)}";
@@ -164,6 +172,6 @@ Poniższy składnik przedstawia przykład sposobu wykonywania wstępnego przekie
 }
 ```
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:fundamentals/localization>

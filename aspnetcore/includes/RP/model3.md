@@ -1,5 +1,5 @@
 
-Uruchom następujące polecenia interfejs wiersza polecenia platformy .NET Core:
+Uruchom następujące polecenia .NET Core CLI:
 
 ```dotnetcli
 dotnet ef migrations add InitialCreate

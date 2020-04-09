@@ -1,19 +1,19 @@
 > [!NOTE]
 > 
-> **Ograniczenia oprogramowania SQLite**
+> **Ograniczenia SQLite**
 >
-> Ten samouczek używa funkcji *migracji* Entity Framework Core, jeśli jest to możliwe. Migracja aktualizuje schemat bazy danych, aby pasował do zmian w modelu danych. Jednak tylko te zmiany są obsługiwane przez aparat bazy danych, a możliwości zmiany schematu oprogramowania SQLite są ograniczone. Na przykład, Dodawanie kolumny jest obsługiwane, ale usuwanie kolumny nie jest obsługiwane. Jeśli migracja zostanie utworzona w celu usunięcia kolumny, polecenie `ef migrations add` zakończy się pomyślnie, ale polecenie `ef database update` kończy się niepowodzeniem. 
+> W tym samouczku używa funkcji *migracji* core programu Entity Framework, jeśli to możliwe. Migracje aktualizuje schemat bazy danych, aby dopasować zmiany w modelu danych. Jednak migracje tylko rodzaje zmian, które obsługuje aparat bazy danych i możliwości zmiany schematu SQLite są ograniczone. Na przykład dodawanie kolumny jest obsługiwane, ale usunięcie kolumny nie jest obsługiwane. Jeśli zostanie utworzona migracja w `ef migrations add` celu usunięcia kolumny, polecenie zakończy się pomyślnie, ale polecenie zakończy się niepowodzeniem. `ef database update` 
 >
-> Obejście ograniczeń oprogramowania SQLite polega na ręcznym pisaniu kodu migracji w celu przetworzenia odbudowy tabeli, gdy coś w tabeli ulegnie zmianie. Kod przejdzie do `Up` i `Down` metod migracji i będzie obejmował:
+> Obejście ograniczeń SQLite jest ręczne pisanie kodu migracji do wykonywania przebudowy tabeli, gdy coś w tabeli zmienia. Kod będzie przejść `Up` w `Down` i metody migracji i obejmowałby:
 >
 > * Tworzenie nowej tabeli.
 > * Kopiowanie danych ze starej tabeli do nowej tabeli.
-> * Porzucenie starej tabeli.
+> * Upuszczanie starej tabeli.
 > * Zmiana nazwy nowej tabeli.
 >
-> Pisanie kodu specyficznego dla bazy danych tego typu jest poza zakresem tego samouczka. Zamiast tego ten samouczek opuszcza i ponownie tworzy bazę danych za każdym razem, gdy próba zastosowania migracji zakończy się niepowodzeniem. Więcej informacji zawierają następujące zasoby:
+> Pisanie kodu specyficzne dla bazy danych tego typu jest poza zakresem tego samouczka. Zamiast tego ten samouczek porzuca i ponownie tworzy bazę danych, gdy próba zastosowania migracji zakończy się niepowodzeniem. Więcej informacji zawierają następujące zasoby:
 >
-> * [Ograniczenia dostawcy bazy danych EF Core SQLite](/ef/core/providers/sqlite/limitations)
+> * [Ograniczenia dostawcy baz danych CORE FIRMY SQLite EF](/ef/core/providers/sqlite/limitations)
 > * [Dostosowywanie kodu migracji](/ef/core/managing-schemas/migrations/#customize-migration-code)
-> * [Rozmieszczanie danych](/ef/core/modeling/data-seeding)
-> * [Instrukcja ALTER TABLE w programie SQLite](https://sqlite.org/lang_altertable.html)
+> * [Wysiew danych](/ef/core/modeling/data-seeding)
+> * [Instrukcja TABELI SQLite ALTER](https://sqlite.org/lang_altertable.html)

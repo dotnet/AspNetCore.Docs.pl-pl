@@ -1,6 +1,6 @@
 ## <a name="debug-diagnostics"></a>Diagnostyka debugowania
 
-W celu uzyskania szczegółowych danych wyjściowych diagnostycznych routingu Ustaw `Logging:LogLevel:Microsoft` na `Debug`. Na przykład w środowisku programistycznym ustaw wartość *appSettings. Plik Development. JSON*:
+Aby uzyskać szczegółowe dane `Logging:LogLevel:Microsoft` wyjściowe diagnostyczne routingu, ustaw wartość `Debug`. Na przykład w środowisku programistycznym ustaw *ustawienia aplikacji. Development.json*:
 
 ```JSON
 {

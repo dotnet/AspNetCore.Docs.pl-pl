@@ -1,5 +1,5 @@
 * [Visual Studio Code](https://code.visualstudio.com/download)
-* [C#dla Visual Studio Code (Najnowsza wersja)](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)
-* [Zestaw .NET Core SDK 2,2 lub nowszy](https://dotnet.microsoft.com/download/dotnet-core)
+* [C# dla programu Visual Studio Code (najnowsza wersja)](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)
+* [.NET Core SDK 2.2 lub nowsza](https://dotnet.microsoft.com/download/dotnet-core)
 
-Instrukcje Visual Studio Code używają interfejs wiersza polecenia platformy .NET Core do funkcji deweloperskich ASP.NET Core, takich jak tworzenie projektu. Te instrukcje można wykonać na dowolnej platformie (macOS, Linux lub Windows) i dowolnym edytorze kodu. Jeśli używasz czegoś innego niż Visual Studio Code, może być konieczne wprowadzenie drobnych zmian.
+Instrukcje kodu programu Visual Studio używają interfejsu wiersza polecenia .NET Core dla ASP.NET podstawowych funkcji programistycznych, takich jak tworzenie projektu. Możesz postępować zgodnie z tymi instrukcjami na dowolnej platformie (macOS, Linux lub Windows) i za pomocą dowolnego edytora kodu. Drobne zmiany mogą być wymagane, jeśli używasz czegoś innego niż Visual Studio Code.

@@ -1,8 +1,8 @@
-# <a name="aspnet-core-razor-pages-unit-tests-sample"></a>Przykład ASP.NET Core testy jednostkowe Razor Pages
+# <a name="aspnet-core-razor-pages-unit-tests-sample"></a>ASP.NET Core Razor Pages testuje próbkę
 
-Ten przykład ilustruje testy jednostkowe aplikacji [Razor Pages](https://docs.microsoft.com/aspnet/core/mvc/razor-pages) . Ten przykład pokazuje funkcje opisane w temacie [Razor Pages testy jednostkowe](https://docs.microsoft.com/aspnet/core/test/razor-pages-tests) .
+W tym przykładzie przedstawiono testy jednostkowe aplikacji [Razor Pages.](https://docs.microsoft.com/aspnet/core/mvc/razor-pages) W tym przykładzie przedstawiono funkcje opisane w temacie [testów jednostkowych razor Pages.](https://docs.microsoft.com/aspnet/core/test/razor-pages-tests)
 
-Jeśli nie korzystasz ze środowiska IDE z wbudowanymi funkcjami testu, wykonaj następujące polecenie w wierszu polecenia w folderze *Tests/RazorPagesTestSample. Tests* :
+Jeśli nie używasz IDE z wbudowanymi funkcjami testu, wykonaj następujące polecenie w wierszu polecenia w folderze *tests/RazorPagesTestSample.Tests:*
 
 ```console
 dotnet test

@@ -1,55 +1,55 @@
 ---
-title: Wdrażanie aplikacji w usłudze App Service — metodyki DevOps z platformą ASP.NET Core i platformy Azure
+title: Wdrażanie aplikacji w usłudze app service — DevOps z ASP.NET Core i platformą Azure
 author: CamSoper
-description: Wdrażanie aplikacji ASP.NET Core na usłudze Azure App Service, pierwszym krokiem dla metodyki DevOps z platformą ASP.NET Core i platformy Azure.
+description: Wdrażanie aplikacji ASP.NET Core w usłudze Azure App Service, pierwszym kroku dla usługi DevOps z ASP.NET Core i platformą Azure.
 ms.author: casoper
 ms.custom: mvc, seodec18
 ms.date: 10/24/2018
 uid: azure/devops/deploy-to-app-service
 ms.openlocfilehash: df41f296e9c4e1eff6e31d45b29ec30ee1e20cf4
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78657746"
 ---
-# <a name="deploy-an-app-to-app-service"></a>Wdrażanie aplikacji w usłudze App Service
+# <a name="deploy-an-app-to-app-service"></a>Wdrażanie aplikacji w usłudze app service
 
-[Azure App Service](/azure/app-service/) to platforma hostingu w sieci Web platformy Azure. Wdrażanie aplikacji sieci web w usłudze Azure App Service może odbywać się ręcznie lub za pomocą zautomatyzowanego procesu. W tej sekcji przewodnika omówiono metod wdrażania, które mogą być wyzwalane ręcznie lub za pomocą skryptu przy użyciu wiersza polecenia lub wyzwalane ręcznie przy użyciu programu Visual Studio.
+[Usługa Azure App Service](/azure/app-service/) to platforma hostingowa platformy Azure. Wdrażanie aplikacji sieci web w usłudze Azure App Service można wykonać ręcznie lub za pomocą zautomatyzowanego procesu. W tej sekcji przewodnika omówiono metody wdrażania, które mogą być wyzwalane ręcznie lub za pomocą skryptu przy użyciu wiersza polecenia lub wyzwalane ręcznie przy użyciu programu Visual Studio.
 
-W tej sekcji opisano następujące zadania:
+W tej sekcji wykonasz następujące zadania:
 
-* Pobierz i skompiluj aplikację przykładową.
-* Tworzenie usługi Azure App Service Web Apps przy użyciu usługi Azure Cloud Shell.
-* Wdróż przykładową aplikację na platformie Azure przy użyciu narzędzia Git.
-* Wdrażanie zmiany w aplikacji przy użyciu programu Visual Studio.
-* Dodaj miejsce na tymczasową do aplikacji sieci web.
-* Wdróż aktualizację w miejscu przejściowym.
-* Zamienić gniazd środowisk przejściowych i produkcyjnych.
+* Pobierz i skompiluj przykładową aplikację.
+* Utwórz aplikację sieci Web usługi Azure App Service przy użyciu usługi Azure Cloud Shell.
+* Wdrażanie przykładowej aplikacji na platformie Azure przy użyciu git.
+* Wdrażanie zmiany w aplikacji za pomocą programu Visual Studio.
+* Dodaj miejsce przejściowe do aplikacji sieci web.
+* Wdrażanie aktualizacji do miejsca przejściowego.
+* Zamień miejsce przejściowe i miejsce produkcyjne.
 
 ## <a name="download-and-test-the-app"></a>Pobieranie i testowanie aplikacji
 
-Aplikacja używana w tym przewodniku jest wstępnie zbudowaną aplikacją ASP.NET Core, [prostym czytnikiem strumieniowego źródła danych](https://github.com/Azure-Samples/simple-feed-reader/). Jest to aplikacja Razor Pages, która korzysta z interfejsu API `Microsoft.SyndicationFeed.ReaderWriter` do pobierania źródła danych RSS/Atom i wyświetlania na liście elementów wiadomości.
+Aplikacja używana w tym przewodniku jest wstępnie zbudowany ASP.NET Core aplikacji, [Simple Feed Reader](https://github.com/Azure-Samples/simple-feed-reader/). Jest to aplikacja Razor Pages, `Microsoft.SyndicationFeed.ReaderWriter` która używa interfejsu API do pobierania kanału RSS/Atom i wyświetlania elementów wiadomości na liście.
 
-Możesz przejrzeć kod, ale jest ważne dowiedzieć się, że nie ma nic specjalnego o tej aplikacji. Po prostu prostą aplikację platformy ASP.NET Core jest celach ilustracyjnych.
+Zapraszam do przeglądania kodu, ale ważne jest, aby zrozumieć, że nie ma nic specjalnego w tej aplikacji. To po prostu prosta aplikacja ASP.NET Core w celach ilustracyjnych.
 
-Z powłoki poleceń należy pobrać kod, skompilować projekt i uruchomić go w następujący sposób.
+Z powłoki poleceń pobierz kod, skompiluj projekt i uruchom go w następujący sposób.
 
-> *Uwaga: Użytkownicy systemu Linux/macOS powinni wprowadzać odpowiednie zmiany w ścieżkach, np. przy użyciu ukośnika (`/`), a nie ukośnika odwrotnego (`\`).*
+> *Uwaga: Użytkownicy systemów Linux/macOS powinni wprowadzić odpowiednie zmiany w ścieżkach, np.`/``\`*
 
-1. Klonowanie kodu do folderu na komputerze lokalnym.
+1. Sklonuj kod do folderu na komputerze lokalnym.
 
     ```console
     git clone https://github.com/Azure-Samples/simple-feed-reader/
     ```
 
-2. Zmień folder roboczy na utworzony folder *czytnika źródła danych* .
+2. Zmień folder roboczy na utworzony folder *prostego czytnika kanałów informacyjnych.*
 
     ```console
     cd .\simple-feed-reader\SimpleFeedReader
     ```
 
-3. Przywróć pakiety i Skompiluj rozwiązanie.
+3. Przywróć pakiety i skompiluj rozwiązanie.
 
     ```dotnetcli
     dotnet build
@@ -61,23 +61,23 @@ Z powłoki poleceń należy pobrać kod, skompilować projekt i uruchomić go w 
     dotnet run
     ```
 
-    ![Polecenia dotnet, uruchom polecenie zakończy się pomyślnie](./media/deploying-to-app-service/dotnet-run.png)
+    ![Polecenie dotnet run zakończyło się pomyślnie](./media/deploying-to-app-service/dotnet-run.png)
 
-5. Otwórz przeglądarkę i przejdź pod adres `http://localhost:5000`. Aplikacja pozwala wpisać lub wkleić zespolonego adres URL źródła danych i wyświetlanie listy elementów wiadomości.
+5. Otwórz przeglądarkę i przejdź pod adres `http://localhost:5000`. Aplikacja pozwala wpisać lub wkleić adres URL źródła danych zesłania i wyświetlić listę elementów wiadomości.
 
-     ![Aplikacja wyświetlania zawartości ze źródła danych RSS](./media/deploying-to-app-service/app-in-browser.png)
+     ![Aplikacja wyświetlająca zawartość kanału RSS](./media/deploying-to-app-service/app-in-browser.png)
 
-6. Po upewnieniu się, że aplikacja działa prawidłowo, zamknij ją, naciskając klawisz **Ctrl**+**C** w powłoce poleceń.
+6. Po upewnieniu się, że aplikacja działa poprawnie, zamknij ją, naciskając **klawisz Ctrl**+**C** w powłoce poleceń.
 
-## <a name="create-the-azure-app-service-web-app"></a>Tworzenie aplikacji sieci Web w usłudze Azure App Service
+## <a name="create-the-azure-app-service-web-app"></a>Tworzenie aplikacji sieci Web usługi Azure App Service
 
-Aby wdrożyć aplikację, musisz utworzyć App Service [aplikację sieci Web](/azure/app-service/app-service-web-overview). Po utworzeniu aplikacji sieci Web będzie można wdrożyć na go z komputera lokalnego przy użyciu narzędzia Git.
+Aby wdrożyć aplikację, musisz utworzyć aplikację [sieci Web](/azure/app-service/app-service-web-overview)usługi app. Po utworzeniu aplikacji sieci Web, można wdrożyć do niego z komputera lokalnego przy użyciu git.
 
-1. Zaloguj się do usługi [Azure Cloud Shell](https://shell.azure.com/bash). Uwaga: Po zalogowaniu się po raz pierwszy Cloud Shell monituje o utworzenie konta magazynu dla plików konfiguracyjnych. Zaakceptuj wartości domyślne lub Podaj unikatową nazwę.
+1. Zaloguj się do usługi [Azure Cloud Shell](https://shell.azure.com/bash). Uwaga: Gdy zalogujesz się po raz pierwszy, usługa Cloud Shell wyświetli monit o utworzenie konta magazynu dla plików konfiguracyjnych. Zaakceptuj ustawienia domyślne lub podaj unikatową nazwę.
 
-2. Użyliśmy usługi Cloud Shell dla następujących kroków.
+2. Użyj powłoki chmury dla następujących kroków.
 
-    a. Zadeklaruj zmienną do przechowywania nazwy aplikacji sieci web. Nazwa musi być unikatowa, ma być używany w domyślnego adresu URL. Używanie `$RANDOM` funkcji bash do konstruowania nazwy gwarantuje unikatowość i wyniki w formacie `webappname99999`.
+    a. Zadeklaruj zmienną do przechowywania nazwy aplikacji sieci web. Nazwa musi być unikatowa, aby była używana w domyślnym adresie URL. `$RANDOM` Za pomocą bash funkcji do konstruowania nazwy `webappname99999`gwarantuje unikatowość i wyniki w formacie .
 
     ```console
     webappname=mywebapp$RANDOM
@@ -89,39 +89,39 @@ Aby wdrożyć aplikację, musisz utworzyć App Service [aplikację sieci Web](/a
     az group create --location centralus --name AzureTutorial
     ```
 
-    `az` polecenie wywołuje [interfejs wiersza polecenia platformy Azure](/cli/azure/). Interfejs wiersza polecenia, które mogą być uruchamiane lokalnie, ale jej używanie w usłudze Cloud Shell oszczędza czas i konfiguracji.
+    Polecenie `az` wywołuje interfejsu [wiersza polecenia platformy Azure](/cli/azure/). Cli można uruchomić lokalnie, ale przy użyciu go w cloud shell oszczędza czas i konfigurację.
 
-    c. Utwórz plan usługi App Service w warstwie S1. Plan usługi App Service to grupa aplikacji sieci web, które udostępnianie tej samej warstwie cenowej. W warstwie S1 jest bezpłatne, ale jest to wymagane dla funkcji miejsca przejściowego.
+    d. Utwórz plan usługi app service w warstwie S1. Plan usługi aplikacji to grupowanie aplikacji sieci web, które mają tę samą warstwę cenową. Warstwa S1 nie jest bezpłatna, ale jest wymagana dla funkcji miejsca przejściowe.
 
     ```azure-cli
     az appservice plan create --name $webappname --resource-group AzureTutorial --sku S1
     ```
 
-    d. Utwórz zasób aplikacji sieci web przy użyciu planu usługi App Service w tej samej grupie zasobów.
+    d. Utwórz zasób aplikacji sieci Web przy użyciu planu usługi app service w tej samej grupie zasobów.
 
     ```azure-cli
     az webapp create --name $webappname --resource-group AzureTutorial --plan $webappname
     ```
 
-    e. Ustaw poświadczenia wdrażania. Te poświadczenia wdrożenia dotyczą wszystkich aplikacji sieci web w ramach subskrypcji. Nie należy używać znaków specjalnych w nazwie użytkownika.
+    e. Ustaw poświadczenia wdrożenia. Te poświadczenia wdrożenia dotyczą wszystkich aplikacji sieci web w ramach subskrypcji. Nie używaj znaków specjalnych w nazwie użytkownika.
 
     ```azure-cli
     az webapp deployment user set --user-name REPLACE_WITH_USER_NAME --password REPLACE_WITH_PASSWORD
     ```
 
-    f. Skonfiguruj aplikację sieci Web tak, aby akceptowała wdrożenia z lokalnego narzędzia Git i wyświetlała *adres URL wdrożenia narzędzia Git*. **Zanotuj ten adres URL później**.
+    f. Skonfiguruj aplikację internetową tak, aby akceptowała wdrożenia z lokalnego gita i wyświetlała *adres URL wdrożenia Gita*. **Zanotuj ten adres URL w celu późniejszego odniesienia**.
 
     ```azure-cli
     echo Git deployment URL: $(az webapp deployment source config-local-git --name $webappname --resource-group AzureTutorial --query url --output tsv)
     ```
 
-    g. Wyświetl *adres URL aplikacji sieci Web*. Przejdź do tego adresu URL, aby zobaczyć aplikację internetową puste. **Zanotuj ten adres URL później**.
+    g. Wyświetl *adres URL aplikacji internetowej*. Przejdź do tego adresu URL, aby wyświetlić pustą aplikację internetową. **Zanotuj ten adres URL w celu późniejszego odniesienia**.
 
     ```console
     echo Web app URL: http://$webappname.azurewebsites.net
     ```
 
-3. Przy użyciu powłoki poleceń na komputerze lokalnym przejdź do folderu projektu aplikacji sieci Web (na przykład `.\simple-feed-reader\SimpleFeedReader`). Wykonaj następujące polecenia, aby konfiguracja repozytorium Git do wypychania na adres URL wdrożenia:
+3. Korzystając z powłoki poleceń na komputerze lokalnym, przejdź do folderu projektu aplikacji sieci web (na przykład `.\simple-feed-reader\SimpleFeedReader`). Wykonaj następujące polecenia, aby skonfigurować git do wypychania do adresu URL wdrożenia:
 
     a. Dodaj zdalny adres URL do lokalnego repozytorium.
 
@@ -129,118 +129,118 @@ Aby wdrożyć aplikację, musisz utworzyć App Service [aplikację sieci Web](/a
     git remote add azure-prod GIT_DEPLOYMENT_URL
     ```
 
-    b. Wypchnij lokalną gałąź *główną* do *głównej* gałęzi *Azure-prod* zdalnego.
+    b. Wypchnij lokalną gałąź *wzorcową* do gałęzi *głównej* pilota *azure-prod.*
 
     ```console
     git push azure-prod master
     ```
 
-    Zostanie wyświetlony monit o poświadczenia wdrażania, która została utworzona wcześniej. Sprawdzanie danych wyjściowych, w powłoce poleceń. Azure tworzy aplikację ASP.NET Core zdalnie.
+    Zostanie wyświetlony monit o poświadczenia wdrożenia utworzone wcześniej. Obserwować dane wyjściowe w powłoce poleceń. Platforma Azure zdalnie tworzy aplikację ASP.NET Core.
 
-4. W przeglądarce przejdź do *adresu URL aplikacji sieci Web* i zanotuj, że aplikacja została skompilowana i wdrożona. Dodatkowe zmiany można zatwierdzić w lokalnym repozytorium git przy użyciu `git commit`. Te zmiany są przekazywane do platformy Azure przy użyciu poprzedniego polecenia `git push`.
+4. W przeglądarce przejdź do *adresu URL aplikacji sieci Web* i zanotuj, że aplikacja została sbudona i wdrożona. Dodatkowe zmiany mogą zostać wprowadzone do lokalnego repozytorium Git z . `git commit` Te zmiany są wypychane na `git push` platformę Azure za pomocą poprzedniego polecenia.
 
 ## <a name="deployment-with-visual-studio"></a>Wdrażanie za pomocą programu Visual Studio
 
-> *Uwaga: Ta sekcja dotyczy tylko systemu Windows. Użytkownicy systemów Linux i macOS powinni wprowadzić zmiany opisane w kroku 2 poniżej. Zapisz plik i zatwierdź zmianę w repozytorium lokalnym przy użyciu `git commit`. Na koniec wypchnij zmianę o `git push`, jak w pierwszej sekcji.*
+> *Uwaga: Ta sekcja dotyczy tylko systemu Windows. Użytkownicy systemów Linux i macOS powinni wprowadzić zmiany opisane w kroku 2 poniżej. Zapisz plik i zatwierdź zmianę w lokalnym `git commit`repozytorium za pomocą pliku . Na koniec naciśnij zmianę `git push`za pomocą , jak w pierwszej sekcji.*
 
-Aplikacja została już wdrożona z powłoki poleceń. Utwórzmy wdrażanie aktualizacji w aplikacji za pomocą zintegrowanych narzędzi programu Visual Studio. W tle programu Visual Studio w ramach tak samo, jak narzędzie wiersza polecenia, ale w obrębie znajomy interfejs użytkownika programu Visual Studio.
+Aplikacja została już wdrożona z powłoki poleceń. Użyjmy zintegrowanych narzędzi programu Visual Studio do wdrożenia aktualizacji w aplikacji. W tle visual studio wykonuje to samo, co narzędzia wiersza polecenia, ale w programie Visual Studio znanego interfejsu użytkownika.
 
-1. Otwórz *SimpleFeedReader. sln* w programie Visual Studio.
-2. W Eksplorator rozwiązań Otwórz *Pages\Index.cshtml*. Zmień `<h2>Simple Feed Reader</h2>`, aby `<h2>Simple Feed Reader - V2</h2>`.
-3. Naciśnij klawisz **Ctrl**+**SHIFT**+**B** , aby skompilować aplikację.
-4. W Eksplorator rozwiązań kliknij prawym przyciskiem myszy projekt, a następnie kliknij pozycję **Publikuj**.
+1. Otwórz *simplefeedreader.sln* w programie Visual Studio.
+2. W Eksploratorze rozwiązań otwórz *stronę Pages\Index.cshtml*. Zmień `<h2>Simple Feed Reader</h2>` `<h2>Simple Feed Reader - V2</h2>`na .
+3. Naciśnij **klawisze Ctrl**+**Shift**+**B,** aby utworzyć aplikację.
+4. W Eksploratorze rozwiązań kliknij prawym przyciskiem myszy projekt i kliknij polecenie **Publikuj**.
 
-    ![Zrzut ekranu przedstawiający kliknij prawym przyciskiem myszy i publikowania](./media/deploying-to-app-service/publish.png)
-5. Visual Studio można utworzyć nowy zasób usługi App Service, ale ta aktualizacja zostanie opublikowana przez istniejące wdrożenie. W oknie dialogowym **Wybieranie elementu docelowego publikowania** wybierz pozycję **App Service** z listy po lewej stronie, a następnie wybierz pozycję **Wybierz istniejące**. Kliknij przycisk **Opublikuj**.
-6. W oknie dialogowym **App Service** upewnij się, że konto Microsoft lub organizacyjne używane do tworzenia subskrypcji platformy Azure jest wyświetlane w prawym górnym rogu. Jeśli nie, kliknij listę rozwijaną i dodaj ją.
-7. Upewnij się, że wybrano poprawną **subskrypcję** platformy Azure. W obszarze **Widok**wybierz pozycję **Grupa zasobów**. Rozwiń grupę zasobów **AzureTutorial** , a następnie wybierz istniejącą aplikację sieci Web. Kliknij przycisk **OK**.
+    ![Zrzut ekranu przedstawiający kliknięcie prawym przyciskiem myszy, Opublikuj](./media/deploying-to-app-service/publish.png)
+5. Visual Studio można utworzyć nowy zasób usługi App Service, ale ta aktualizacja zostanie opublikowana w istniejącym wdrożeniu. W oknie **dialogowym Wybieranie celu publikowania** wybierz pozycję **App Service** z listy po lewej stronie, a następnie wybierz pozycję **Wybierz istniejący**. Kliknij przycisk **Opublikuj**.
+6. W oknie dialogowym **Usługi aplikacji** upewnij się, że konto microsoft lub konto organizacyjne używane do tworzenia subskrypcji platformy Azure jest wyświetlane w prawym górnym rogu. Jeśli tak nie jest, kliknij pozycję rozwijaną i dodaj ją.
+7. Upewnij się, że wybrano poprawną **subskrypcję** platformy Azure. W **obszarze Widok**wybierz pozycję Grupa **zasobów**. Rozwiń grupę zasobów **AzureTutorial,** a następnie wybierz istniejącą aplikację sieci web. Kliknij przycisk **OK**.
 
-    ![Zrzut ekranu przedstawiający okno dialogowe z publikowania usługi aplikacji](./media/deploying-to-app-service/publish-dialog.png)
+    ![Zrzut ekranu przedstawiający okno dialogowe Publikowania usługi aplikacji](./media/deploying-to-app-service/publish-dialog.png)
 
-Visual Studio tworzy i wdraża aplikację na platformie Azure. Przejdź do adresu URL aplikacji sieci web. Sprawdź, czy `<h2>` modyfikacji elementu jest na żywo.
+Visual Studio tworzy i wdraża aplikację na platformie Azure. Przejdź do adresu URL aplikacji internetowej. Sprawdź, czy `<h2>` modyfikacja elementu jest na żywo.
 
-![Aplikacja z tytułem zmienione](./media/deploying-to-app-service/app-v2.png)
+![Aplikacja ze zmienionym tytułem](./media/deploying-to-app-service/app-v2.png)
 
 ## <a name="deployment-slots"></a>Miejsca wdrożenia
 
-Miejsca wdrożenia obsługuje wdrażanie przejściowe zmiany, bez wywierania wpływu na aplikacji działających w środowisku produkcyjnym. Po zweryfikowaniu przygotowaną wersję aplikacji przez zespół zapewnienia jakości można wymieniać produkcyjne oraz przejściowe miejsce. Aplikacji w środowisku tymczasowym jest podwyższany do środowiska produkcyjnego w ten sposób. Poniższe kroki tworzenia miejsca przejściowego, wdrażanie w niej kilka zmian i zamienić miejsce przejściowe z środowisku produkcyjnym po zakończeniu weryfikacji.
+Gniazda wdrażania obsługują przemieszczania zmian bez wpływu na aplikację działającą w produkcji. Po etapowej wersji aplikacji jest sprawdzany przez zespół zapewnienia jakości, produkcji i przemieszczania slotów mogą być zamienione. Aplikacja w przemieszczania jest promowany do produkcji w ten sposób. Poniższe kroki tworzą miejsce przejściowe, wdrażają do niego pewne zmiany i zamieniaj miejsce przejściowe z produkcją po weryfikacji.
 
-1. Zaloguj się do [Azure Cloud Shell](https://shell.azure.com/bash), jeśli jeszcze nie jest zalogowany.
-2. Utwórz miejsca przejściowego.
+1. Zaloguj się do [usługi Azure Cloud Shell](https://shell.azure.com/bash), jeśli nie jest jeszcze zalogowany.
+2. Utwórz miejsce przejściowe.
 
-    a. Utwórz miejsce wdrożenia o nazwie *tymczasowej*.
+    a. Utwórz miejsce wdrożenia o nazwie *przemieszczania*.
 
     ```azure-cli
     az webapp deployment slot create --name $webappname --resource-group AzureTutorial --slot staging
     ```
 
-    b. Skonfiguruj miejsce przejściowe tak, aby korzystało z wdrożenia z lokalnego narzędzia Git i uzyskać adres URL wdrożenia **przemieszczania** . **Zanotuj ten adres URL później**.
+    b. Skonfiguruj miejsce przejściowe do używania wdrożenia z lokalnego gita i uzyskaj adres URL wdrożenia **przejściowego.** **Zanotuj ten adres URL w celu późniejszego odniesienia**.
 
     ```azure-cli
     echo Git deployment URL for staging: $(az webapp deployment source config-local-git --name $webappname --resource-group AzureTutorial --slot staging --query url --output tsv)
     ```
 
-    c. Wyświetlanie adresów URL w miejscu przejściowym. Przejdź do adresu URL, aby wyświetlić puste miejsce na tymczasową. **Zanotuj ten adres URL później**.
+    d. Wyświetl adres URL miejsca przemieszczania. Przejdź do adresu URL, aby wyświetlić puste miejsce przemieszczania. **Zanotuj ten adres URL w celu późniejszego odniesienia**.
 
     ```console
     echo Staging web app URL: http://$webappname-staging.azurewebsites.net
     ```
 
-3. W edytorze tekstu lub programie Visual Studio zmodyfikuj ponownie *strony/index. cshtml* , aby element `<h2>` odczytuje `<h2>Simple Feed Reader - V3</h2>` i zapisać plik.
+3. W edytorze tekstu lub programie Visual Studio ponownie zmodyfikuj *pages/index.cshtml,* aby `<h2>` element odczytywana `<h2>Simple Feed Reader - V3</h2>` i zapisać plik.
 
-4. Zatwierdź plik w lokalnym repozytorium git, używając strony **zmiany** w karcie *Team Explorer* w programie Visual Studio lub wprowadzając następujące polecenie przy użyciu powłoki poleceń komputera lokalnego:
+4. Zaagnalizuj plik do lokalnego repozytorium Git, używając strony **Zmiany** na karcie *Eksplorator zespołu* programu Visual Studio lub wprowadzając następujące elementy przy użyciu powłoki poleceń komputera lokalnego:
 
     ```console
     git commit -a -m "upgraded to V3"
     ```
 
-5. Korzystając z powłoki poleceń na komputerze lokalnym, Dodaj przejściowym adresie URL wdrożenia jako element zdalny narzędzia Git i Wypchnij zatwierdzone zmiany:
+5. Korzystając z powłoki poleceń komputera lokalnego, dodaj adres URL wdrożenia przemieszczania jako pilot Git i wypchnij zatwierdzone zmiany:
 
-    a. Dodaj zdalny adres URL na potrzeby wdrażania przejściowego do lokalnego repozytorium Git.
+    a. Dodaj zdalny adres URL do przemieszczania do lokalnego repozytorium Git.
 
     ```console
     git remote add azure-staging <Git_staging_deployment_URL>
     ```
 
-    b. Wypchnij lokalną gałąź *główną* do *głównej* gałęzi zdalnej *platformy Azure* .
+    b. Wypchnij lokalną gałąź *wzorcową* do gałęzi *głównej* pilota zdalnego *przemieszczania azure.*
 
     ```console
     git push azure-staging master
     ```
 
-    Zaczekaj, aż Azure zostanie skompilowana i wdrożona aplikacja.
+    Poczekaj, aż platforma Azure skompiluje i wdroży aplikację.
 
-6. Aby sprawdzić, czy V3 został pomyślnie wdrożony do miejsca przejściowego, Otwórz dwa okna przeglądarki. W jednym oknie przejdź do oryginalnego adresu URL aplikacji sieci web. W innym oknie przejdź do tymczasowej adresu URL aplikacji sieci web. Produkcja — adres URL służy aplikacji w wersji 2. Przejściowym adresie URL służy aplikacji w wersji 3.
+6. Aby sprawdzić, czy wersja 3 została wdrożona w miejscu przejściowym, otwórz dwa okna przeglądarki. W jednym oknie przejdź do oryginalnego adresu URL aplikacji sieci Web. W drugim oknie przejdź do adresu URL aplikacji sieci web przemieszczania. Produkcyjny adres URL obsługuje w wersji 2 aplikacji. Przemieszczania adres URL obsługuje V3 aplikacji.
 
-    ![Zrzut ekranu okna przeglądarki porównanie](./media/deploying-to-app-service/ready-to-swap.png)
+    ![Zrzut ekranu porównujący okna przeglądarki](./media/deploying-to-app-service/ready-to-swap.png)
 
-7. W usłudze Cloud Shell można zamienić miejsca przejściowego zweryfikować/przygotowaniu up w środowisku produkcyjnym.
+7. W usłudze Cloud Shell zamienić zweryfikowane/rozgrzane miejsce postoju na produkcję.
 
     ```azure-cli
     az webapp deployment slot swap --name $webappname --resource-group AzureTutorial --slot staging
     ```
 
-8. Sprawdź wymiany, które wystąpiły, odświeżając okna przeglądarki dwa.
+8. Sprawdź, czy doszło do wymiany, odświeżając dwa okna przeglądarki.
 
-    ![Porównywanie okna przeglądarki po wymiany](./media/deploying-to-app-service/swapped.png)
+    ![Porównywanie okien przeglądarki po wymianie](./media/deploying-to-app-service/swapped.png)
 
 ## <a name="summary"></a>Podsumowanie
 
 W tej sekcji wykonano następujące zadania:
 
-* Pobrano i zbudowane dla przykładowej aplikacji.
-* Utworzony usługi Azure App Service Web Apps przy użyciu usługi Azure Cloud Shell.
-* Wdrożyć aplikację przykładową na platformie Azure przy użyciu narzędzia Git.
-* Wdrożona zmiana w aplikacji przy użyciu programu Visual Studio.
-* Dodaje gniazdo tymczasowej do aplikacji sieci web.
-* Należy wdrożyć aktualizację do miejsca przejściowego.
-* Zamienione miejscami środowisk przejściowych i produkcyjnych.
+* Pobrano i sbudowa przykładową aplikację.
+* Utworzono aplikację sieci Web usługi Azure App Service przy użyciu usługi Azure Cloud Shell.
+* Wdrożono przykładową aplikację na platformie Azure przy użyciu git.
+* Wdrożono zmianę w aplikacji przy użyciu programu Visual Studio.
+* Dodano miejsce przejściowe do aplikacji internetowej.
+* Wdrożono aktualizację miejsca przejściowego.
+* Zamieniliśmy miejsca przemieszczania i produkcji.
 
-W następnej sekcji dowiesz się, jak utworzyć potok DevOps za pomocą potoków usługi Azure.
+W następnej sekcji dowiesz się, jak utworzyć potok DevOps za pomocą usługi Azure Pipelines.
 
-## <a name="additional-reading"></a>Materiały uzupełniające
+## <a name="additional-reading"></a>Dodatkowa lektura
 
-* [Przegląd usługi Web Apps](/azure/app-service/app-service-web-overview)
-* [Tworzenie aplikacji internetowej platformy .NET Core i SQL Database w programie Azure App Service](/azure/app-service/app-service-web-tutorial-dotnetcore-sqldb)
-* [Skonfiguruj poświadczenia wdrażania dla Azure App Service](/azure/app-service/app-service-deployment-credentials)
+* [Omówienie aplikacji sieci Web](/azure/app-service/app-service-web-overview)
+* [Tworzenie aplikacji internetowej platformy .NET Core i usługi SQL Database w usłudze Azure App Service](/azure/app-service/app-service-web-tutorial-dotnetcore-sqldb)
+* [Konfigurowanie poświadczeń wdrażania usługi Azure App Service](/azure/app-service/app-service-deployment-credentials)
 * [Konfigurowanie środowisk przejściowych w usłudze Azure App Service](/azure/app-service/web-sites-staged-publishing)

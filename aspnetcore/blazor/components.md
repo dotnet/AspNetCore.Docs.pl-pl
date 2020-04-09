@@ -1,7 +1,7 @@
 ---
-title: Tworzenie i używanie składników ASP.NET Core Razor
+title: Tworzenie i używanie ASP.NET podstawowych komponentów maszynki do golenia
 author: guardrex
-description: Dowiedz się, jak tworzyć i używać składników Razor, w tym jak powiązać z danymi, obsługiwać zdarzenia i zarządzać cyklem życia składników.
+description: Dowiedz się, jak tworzyć składniki razor i używać ich, w tym jak wiązać się z danymi, obsługiwać zdarzenia i zarządzać cyklami życia komponentu.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
@@ -11,34 +11,34 @@ no-loc:
 - SignalR
 uid: blazor/components
 ms.openlocfilehash: bc1d07aef9cd60b89343a034168daa6754f4421b
-ms.sourcegitcommit: 6ffb583991d6689326605a24565130083a28ef85
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/26/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "80306507"
 ---
-# <a name="create-and-use-aspnet-core-razor-components"></a>Tworzenie i używanie składników ASP.NET Core Razor
+# <a name="create-and-use-aspnet-core-razor-components"></a>Tworzenie i używanie ASP.NET podstawowych komponentów maszynki do golenia
 
-Autorzy [Luke Latham](https://github.com/guardrex) i [Daniel Roth](https://github.com/danroth27)
+Autorstwa [Luke'a Lathama](https://github.com/guardrex) i [Daniela Rotha](https://github.com/danroth27)
 
 [Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([jak pobrać](xref:index#how-to-download-a-sample))
 
-aplikacje Blazor są kompilowane przy użyciu *składników*programu. Składnik jest niezależnym fragmentem interfejsu użytkownika (UI), takim jak strona, okno dialogowe lub formularz. Składnik zawiera znaczniki HTML i logikę przetwarzania wymagane do iniekcji danych lub reagowania na zdarzenia interfejsu użytkownika. Składniki są elastyczne i lekkie. Mogą być zagnieżdżane, ponownie używane i udostępniane między projektami.
+Blazoraplikacje są tworzone przy użyciu *składników*. Składnik jest samodzielnym fragmentem interfejsu użytkownika (UI), takim jak strona, okno dialogowe lub formularz. Składnik zawiera znaczników HTML i logiki przetwarzania wymagane do wstrzykiwania danych lub reagowania na zdarzenia interfejsu użytkownika. Komponenty są elastyczne i lekkie. Mogą być zagnieżdżone, ponownie i udostępniane między projektami.
 
-## <a name="component-classes"></a>Klasy składników
+## <a name="component-classes"></a>Klasy komponentów
 
-Składniki są zaimplementowane w plikach składników [Razor](xref:mvc/views/razor) ( *. Razor*) przy użyciu kombinacji C# i znaczników HTML. Składnik Blazor jest formalnie określany jako *składnik Razor*.
+Składniki są implementowane w plikach komponentów [Razor](xref:mvc/views/razor) (*.brzytwa*) przy użyciu kombinacji znaczników C# i HTML. Składnik w Blazor jest formalnie określany jako *składnik Razor*.
 
-Nazwa składnika musi rozpoczynać się wielką literą. Na przykład *MyCoolComponent. Razor* jest prawidłowy, a *MyCoolComponent. Razor* jest nieprawidłowy.
+Nazwa komponentu musi zaczynać się od znaku wielkim. Na przykład *MyCoolComponent.brzytwa* jest prawidłowa, a *myCoolComponent.brzytwa* jest nieprawidłowa.
 
-Interfejs użytkownika dla składnika jest definiowany przy użyciu języka HTML. Logika renderowania dynamicznego (na przykład pętle, warunkowe, wyrażenia) jest dodawana przy C# użyciu osadzonej składni o nazwie [Razor](xref:mvc/views/razor). Po skompilowaniu aplikacji logika znaczników HTML i C# renderowania jest konwertowana na klasę składnika. Nazwa wygenerowanej klasy jest zgodna z nazwą pliku.
+Interfejs użytkownika składnika jest zdefiniowany przy użyciu kodu HTML. Dynamiczna logika renderowania (na przykład pętle, warunki, wyrażenia) jest dodawana przy użyciu osadzonej składni języka C# o nazwie [Razor](xref:mvc/views/razor). Podczas kompilowania aplikacji, znaczników HTML i logiki renderowania Języka C# są konwertowane na klasę składnika. Nazwa wygenerowanej klasy jest zgodna z nazwą pliku.
 
-Elementy członkowskie klasy składnika są zdefiniowane w bloku `@code`. W bloku `@code` stan składnika (właściwości, pola) jest określany przy użyciu metod obsługi zdarzeń lub definiowania innej logiki składnika. Dozwolony jest więcej niż jeden blok `@code`.
+Elementy członkowskie klasy komponentu `@code` są definiowane w bloku. W `@code` bloku stan składnika (właściwości, pola) jest określony za pomocą metod obsługi zdarzeń lub definiowania innej logiki składnika. Dopuszczalne `@code` jest więcej niż jeden blok.
 
-Składowe składnika mogą być używane jako część logiki renderowania składnika przy użyciu C# wyrażeń, które zaczynają się od `@`. Na przykład C# pole jest renderowane przez utworzenie prefiksu `@` na nazwę pola. Poniższy przykład szacuje i renderuje:
+Elementy członkowskie składnika mogą być używane jako część logiki renderowania `@`składnika przy użyciu wyrażeń Języka C#, które zaczynają się od . Na przykład pole C# jest renderowane `@` przez prefiks do nazwy pola. Poniższy przykład ocenia i renderuje:
 
-* `_headingFontStyle` wartość właściwości CSS dla `font-style`.
-* `_headingText` do zawartości elementu `<h1>`.
+* `_headingFontStyle`do wartości właściwości CSS dla `font-style`.
+* `_headingText`do treści `<h1>` elementu.
 
 ```razor
 <h1 style="font-style:@_headingFontStyle">@_headingText</h1>
@@ -49,62 +49,62 @@ Składowe składnika mogą być używane jako część logiki renderowania skła
 }
 ```
 
-Po pierwszym wyrenderowaniu składnika składnik generuje jego drzewo renderowania w odpowiedzi na zdarzenia. Blazor następnie porównuje nowe drzewo renderowania z poprzednią i zastosuje wszelkie modyfikacje Document Object Model (DOM) przeglądarki.
+Po składnik jest początkowo renderowane, składnik ponownie generuje jego drzewa renderowania w odpowiedzi na zdarzenia. Blazornastępnie porównuje nowe drzewo renderowania z poprzednim i stosuje wszelkie modyfikacje modelu obiektu dokumentu przeglądarki (DOM).
 
-Składniki są zwykłymi C# klasami i mogą być umieszczane w dowolnym miejscu w projekcie. Składniki, które generują strony sieci Web, zwykle znajdują się w folderze *strony* . Składniki niestronicowe są często umieszczane w folderze *udostępnionym* lub w folderze niestandardowym dodanym do projektu.
+Składniki są zwykłe klasy C# i mogą być umieszczane w dowolnym miejscu w ramach projektu. Składniki, które tworzą strony sieci Web, zwykle znajdują się w folderze *Strony.* Składniki niebędące stronicowymi są często umieszczane w folderze *udostępnionym* lub folderze niestandardowym dodawanym do projektu.
 
-Zazwyczaj przestrzeń nazw składnika pochodzi od głównej przestrzeni nazw aplikacji i lokalizacji składnika (folderu) w aplikacji. Jeśli główna przestrzeń nazw aplikacji jest `BlazorApp` a składnik `Counter` znajduje się w folderze *strony* :
+Zazwyczaj obszar nazw składnika pochodzi z głównego obszaru nazw aplikacji i lokalizacji (folderu) składnika w aplikacji. Jeśli główny obszar nazw aplikacji `BlazorApp` jest `Counter` i składnik znajduje się w folderze *Strony:*
 
-* Przestrzeń nazw składnika `Counter` jest `BlazorApp.Pages`.
-* W pełni kwalifikowana nazwa typu składnika jest `BlazorApp.Pages.Counter`.
+* Obszar `Counter` nazw składnika `BlazorApp.Pages`jest .
+* W pełni kwalifikowana nazwa `BlazorApp.Pages.Counter`typu komponentu to .
 
-Aby uzyskać więcej informacji, zobacz sekcję [Importowanie składników](#import-components) .
+Aby uzyskać więcej informacji, zobacz sekcję [Importowanie składników.](#import-components)
 
-Aby użyć folderu niestandardowego, należy dodać przestrzeń nazw folderu niestandardowego do składnika nadrzędnego lub pliku *_Imports. Razor* aplikacji. Na przykład następująca przestrzeń nazw sprawia, że składniki w folderze *Components* są dostępne, gdy główna przestrzeń nazw aplikacji jest `BlazorApp`:
+Aby użyć folderu niestandardowego, dodaj obszar nazw folderu niestandardowego do składnika nadrzędnego lub do pliku *_Imports.brzytwa* aplikacji. Na przykład następujący obszar nazw udostępnia składniki w folderze *Składniki,* gdy `BlazorApp`głównym obszarem nazw aplikacji jest:
 
 ```razor
 @using BlazorApp.Components
 ```
 
-## <a name="static-assets"></a>Statyczne zasoby
+## <a name="static-assets"></a>Aktywa statyczne
 
-Blazor jest zgodna z Konwencją ASP.NET Core aplikacji umieszczających statyczne zasoby w [folderze głównym katalogu głównego (wwwroot)](xref:fundamentals/index#web-root)projektu.
+Blazornastępuje konwencja ASP.NET Aplikacje Core umieszczanie zasobów statycznych w [folderze głównego internetowego projektu (wwwroot).](xref:fundamentals/index#web-root)
 
-Użyj ścieżki względnej podstawowe (`/`), aby odwołać się do katalogu głównego sieci Web dla statycznego elementu zawartości. W poniższym przykładzie *logo. png* znajduje się fizycznie w folderze *{Project root}/wwwroot/images* :
+Użyj ścieżki względnej`/`podstawowej ( ), aby odwołać się do katalogu głównego sieci Web dla zasobu statycznego. W poniższym przykładzie *logo.png* jest fizycznie zlokalizowane w folderze *{PROJECT ROOT}/wwwroot/images:*
 
 ```razor
 <img alt="Company logo" src="/images/logo.png" />
 ```
 
-Składniki Razor **nie** obsługują notacji z ukośnikiem (`~/`).
+Komponenty brzytwy **nie** obsługują notacji tyldy ().`~/`
 
-Aby uzyskać informacje na temat ustawiania ścieżki podstawowej aplikacji, zobacz <xref:host-and-deploy/blazor/index#app-base-path>.
+Aby uzyskać informacje na temat ustawiania <xref:host-and-deploy/blazor/index#app-base-path>ścieżki podstawowej aplikacji, zobacz .
 
-## <a name="tag-helpers-arent-supported-in-components"></a>Pomocnicy tagów nie są obsługiwani w składnikach
+## <a name="tag-helpers-arent-supported-in-components"></a>Pomocników tagów nie są obsługiwane w składnikach
 
-[Pomocnicy tagów](xref:mvc/views/tag-helpers/intro) nie są obsługiwani w składnikach Razor (pliki *. Razor* ). Aby zapewnić funkcje podobne do pomocnika tagów w Blazor, Utwórz składnik o tej samej funkcji, co pomocnik tagów i użyj składnika zamiast.
+[Pomocników tagów](xref:mvc/views/tag-helpers/intro) nie są obsługiwane w składnikach Razor (pliki *.brzytwa).* Aby zapewnić funkcję podobną do Blazorpomocnika znaczników w programie , utwórz składnik o takiej samej funkcjonalności jak Pomocnik znaczników i zamiast tego użyj składnika.
 
-## <a name="use-components"></a>Używanie składników
+## <a name="use-components"></a>Użyj komponentów
 
-Składniki mogą zawierać inne składniki, deklarując je za pomocą składni elementu HTML. Znaczniki użycia składnika wyglądają jak tag HTML, gdzie nazwa znacznika jest typem składnika.
+Składniki mogą zawierać inne składniki, deklarując je przy użyciu składni elementu HTML. Znaczników przy użyciu składnika wygląda tag HTML, gdzie nazwa znacznika jest typem składnika.
 
-Poniższy znacznik w *indeksie. Razor* renderuje wystąpienie `HeadingComponent`:
+Następujące znaczniki w *index.brzytwa* `HeadingComponent` renderuje wystąpienie:
 
 ```razor
 <HeadingComponent />
 ```
 
-*Składniki/HeadingComponent. Razor*:
+*Składniki/HeadingComponent.brzytwa:*
 
 [!code-razor[](common/samples/3.x/BlazorWebAssemblySample/Components/HeadingComponent.razor)]
 
-Jeśli składnik zawiera element HTML z wielką literą, która nie jest zgodna z nazwą składnika, jest emitowane ostrzeżenie wskazujące, że element ma nieoczekiwaną nazwę. Dodanie `@using` dyrektywy dla przestrzeni nazw składnika sprawia, że składnik jest dostępny, co rozwiązuje ostrzeżenie.
+Jeśli składnik zawiera element HTML z wielką literą pierwszej litery, która nie pasuje do nazwy składnika, jest emitowane ostrzeżenie wskazujące, że element ma nieoczekiwaną nazwę. Dodanie `@using` dyrektywy dla obszaru nazw składnika udostępnia składnik, który rozwiązuje ostrzeżenie.
 
 ## <a name="routing"></a>Routing
 
-Routing w Blazor jest realizowany przez dostarczenie szablonu trasy do każdego dostępnego składnika w aplikacji.
+Routing Blazor w uzyskuje się przez zapewnienie szablonu trasy do każdego składnika dostępne w aplikacji.
 
-Po skompilowaniu pliku Razor z dyrektywą `@page`, wygenerowana Klasa otrzymuje <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> określania szablonu trasy. W czasie wykonywania router szuka klas składników przy użyciu `RouteAttribute` i renderuje niezależnie składnik ma szablon trasy pasujący do żądanego adresu URL.
+Po skompilowaniu `@page` pliku Razor z dyrektywą, <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> wygenerowana klasa otrzymuje określający szablon trasy. W czasie wykonywania router wyszukuje `RouteAttribute` klasy składników z i renderuje, który składnik ma szablon trasy, który pasuje do żądanego adresu URL.
 
 ```razor
 @page "/ParentComponent"
@@ -118,54 +118,54 @@ Aby uzyskać więcej informacji, zobacz <xref:blazor/routing>.
 
 ### <a name="route-parameters"></a>Parametry trasy
 
-Składniki mogą odbierać parametry tras z szablonu trasy dostarczonego w dyrektywie `@page`. Router używa parametrów trasy, aby wypełnić odpowiednie parametry składnika.
+Składniki mogą odbierać parametry trasy z `@page` szablonu trasy przedstawionego w dyrektywie. Router używa parametrów trasy do wypełniania odpowiednich parametrów komponentu.
 
-*Strony/RouteParameter. Razor*:
+*Strony/RouteParameter.brzytwa*:
 
 [!code-razor[](components/samples_snapshot/RouteParameter.razor?highlight=2,7-8)]
 
-Parametry opcjonalne nie są obsługiwane, więc dwie dyrektywy `@page` są stosowane w poprzednim przykładzie. Pierwszy zezwala na nawigowanie do składnika bez parametru. Druga dyrektywa `@page` otrzymuje parametr trasy `{text}` i przypisuje wartość do właściwości `Text`.
+Parametry opcjonalne nie są obsługiwane, więc dwie `@page` dyrektywy są stosowane w poprzednim przykładzie. Pierwszy umożliwia nawigację do składnika bez parametru. Druga `@page` dyrektywa odbiera `{text}` parametr trasy i przypisuje `Text` wartość do właściwości.
 
-Składnia *catch-all* (`*`/`**`), która przechwytuje ścieżkę między wieloma granicami folderów, **nie** jest obsługiwana w składnikach Razor ( *. Razor*).
+Składnia parametrów *Catch-all* (`*`/`**`), która przechwytuje ścieżkę przez wiele granic folderów, **nie** jest obsługiwana w składnikach Razor (*.brzytwa*).
 
-### <a name="component-parameters"></a>Parametry składnika
+### <a name="component-parameters"></a>Parametry komponentu
 
-Składniki mogą mieć *Parametry składnika*, które są zdefiniowane przy użyciu właściwości publicznych w klasie składnika z atrybutem `[Parameter]`. Użyj atrybutów, aby określić argumenty dla składnika w znaczniku.
+Komponenty mogą mieć *parametry komponentu,* które są definiowane `[Parameter]` przy użyciu właściwości publicznych w klasie składnika z atrybutem. Atrybuty służy do określania argumentów dla składnika w znacznikach.
 
-*Składniki/ChildComponent. Razor*:
+*Składniki/ChildComponent.brzytwa*:
 
 [!code-razor[](common/samples/3.x/BlazorWebAssemblySample/Components/ChildComponent.razor?highlight=2,11-12)]
 
-W poniższym przykładzie z przykładowej aplikacji `ParentComponent` ustawia wartość właściwości `Title` `ChildComponent`.
+W poniższym przykładzie z `ParentComponent` przykładowej aplikacji `Title` ustawia wartość `ChildComponent`właściwości . .
 
-*Strony/ParentComponent. Razor*:
+*Strony/ParentComponent.brzytwa:*
 
 [!code-razor[](components/samples_snapshot/ParentComponent.razor?highlight=5-6)]
 
 ## <a name="child-content"></a>Zawartość podrzędna
 
-Składniki mogą ustawiać zawartość innego składnika. Składnik Assigner zawiera zawartość między tagami, które określają składnik do odbioru.
+Składniki można ustawić zawartość innego składnika. Składnik przypisujący udostępnia zawartość między znacznikami określającymi składnik odbiorczy.
 
-W poniższym przykładzie `ChildComponent` ma właściwość `ChildContent`, która reprezentuje `RenderFragment`, która reprezentuje segment interfejsu użytkownika do renderowania. Wartość `ChildContent` jest umieszczana w znacznikach składnika, w którym powinna być renderowana zawartość. Wartość `ChildContent` jest odbierana ze składnika nadrzędnego i renderowany w `panel-body`panelu uruchamiania.
+W poniższym przykładzie `ChildComponent` `ChildContent` ma właściwość, która reprezentuje `RenderFragment`, który reprezentuje segment interfejsu użytkownika do renderowania. Wartość `ChildContent` jest umieszczana w znacznikach składnika, gdzie zawartość powinna być renderowana. Wartość `ChildContent` jest odbierana z komponentu nadrzędnego i renderowana `panel-body`wewnątrz panelu Bootstrap .
 
-*Składniki/ChildComponent. Razor*:
+*Składniki/ChildComponent.brzytwa*:
 
 [!code-razor[](common/samples/3.x/BlazorWebAssemblySample/Components/ChildComponent.razor?highlight=3,14-15)]
 
 > [!NOTE]
-> Właściwość, która otrzymuje `RenderFragment` zawartość, musi mieć nazwę `ChildContent` według Konwencji.
+> Właściwość odbierająca `RenderFragment` zawartość musi `ChildContent` być nazwany przez konwencję.
 
-`ParentComponent` w przykładowej aplikacji może udostępniać zawartość w celu renderowania `ChildComponent` przez umieszczenie zawartości wewnątrz tagów `<ChildComponent>`.
+W `ParentComponent` przykładowej aplikacji można zapewnić zawartość `ChildComponent` do renderowania `<ChildComponent>` przez umieszczenie zawartości wewnątrz tagów.
 
-*Strony/ParentComponent. Razor*:
+*Strony/ParentComponent.brzytwa:*
 
 [!code-razor[](components/samples_snapshot/ParentComponent.razor?highlight=7-8)]
 
-## <a name="attribute-splatting-and-arbitrary-parameters"></a>Korzystając atrybutów i dowolne parametry
+## <a name="attribute-splatting-and-arbitrary-parameters"></a>Podział atrybutów i dowolne parametry
 
-Składniki mogą przechwytywać i renderować dodatkowe atrybuty oprócz zadeklarowanych parametrów składnika. Dodatkowe atrybuty mogą być przechwytywane w słowniku, a następnie *splatted* na element, gdy składnik jest renderowany przy użyciu dyrektywy [`@attributes`](xref:mvc/views/razor#attributes) Razor. Ten scenariusz jest przydatny podczas definiowania składnika, który generuje element znaczników, który obsługuje różne dostosowania. Na przykład można żmudnym definiować atrybuty oddzielnie dla `<input>`, które obsługują wiele parametrów.
+Składniki mogą przechwytywać i renderować dodatkowe atrybuty oprócz zadeklarowanych parametrów składnika. Dodatkowe atrybuty mogą być przechwytywane w słowniku, a następnie *splatted* na element, gdy składnik jest renderowany przy użyciu [`@attributes`](xref:mvc/views/razor#attributes) dyrektywy Razor. Ten scenariusz jest przydatny podczas definiowania składnika, który tworzy element znaczników, który obsługuje różne dostosowania. Na przykład może być żmudne definiowanie `<input>` atrybutów oddzielnie dla, który obsługuje wiele parametrów.
 
-W poniższym przykładzie pierwszy element `<input>` (`id="useIndividualParams"`) używa pojedynczych parametrów składnika, podczas gdy drugi `<input>` elementu (`id="useAttributesDict"`) używa atrybutu korzystając:
+W poniższym przykładzie `<input>` pierwszy`id="useIndividualParams"`element ( ) używa poszczególnych parametrów komponentu, podczas gdy drugi `<input>` element (`id="useAttributesDict"`) używa splatting atrybutu:
 
 ```razor
 <input id="useIndividualParams"
@@ -202,9 +202,9 @@ W poniższym przykładzie pierwszy element `<input>` (`id="useIndividualParams"`
 }
 ```
 
-Typ parametru musi implementować `IEnumerable<KeyValuePair<string, object>>` za pomocą kluczy ciągu. Używanie `IReadOnlyDictionary<string, object>` jest również opcją w tym scenariuszu.
+Typ parametru musi `IEnumerable<KeyValuePair<string, object>>` zostać zaimplementowany za pomocą kluczy ciągów. Korzystanie `IReadOnlyDictionary<string, object>` jest również opcją w tym scenariuszu.
 
-Renderowane `<input>` elementy używające obu metod są identyczne:
+Renderowane `<input>` elementy przy użyciu obu podejść są identyczne:
 
 ```html
 <input id="useIndividualParams"
@@ -220,7 +220,7 @@ Renderowane `<input>` elementy używające obu metod są identyczne:
        size="50">
 ```
 
-Aby zaakceptować dowolne atrybuty, zdefiniuj parametr składnika przy użyciu atrybutu `[Parameter]` z właściwością `CaptureUnmatchedValues` ustawioną na `true`:
+Aby zaakceptować dowolne atrybuty, `[Parameter]` należy zdefiniować parametr `true`komponentu przy użyciu atrybutu z właściwością ustawioną na: `CaptureUnmatchedValues`
 
 ```razor
 @code {
@@ -229,17 +229,17 @@ Aby zaakceptować dowolne atrybuty, zdefiniuj parametr składnika przy użyciu a
 }
 ```
 
-Właściwość `CaptureUnmatchedValues` na `[Parameter]` umożliwia dopasowanie parametru do wszystkich atrybutów, które nie są zgodne z żadnym innym parametrem. Składnik może definiować tylko jeden parametr z `CaptureUnmatchedValues`. Typ właściwości używany z `CaptureUnmatchedValues` musi być możliwy do przypisania z `Dictionary<string, object>` z kluczami ciągu. w tym scenariuszu są również dostępne opcje `IEnumerable<KeyValuePair<string, object>>` lub `IReadOnlyDictionary<string, object>`.
+Właściwość `CaptureUnmatchedValues` `[Parameter]` na umożliwia parametr dopasować wszystkie atrybuty, które nie pasują do innego parametru. Komponent może definiować tylko `CaptureUnmatchedValues`jeden parametr za pomocą pliku . Typ właściwości używany `CaptureUnmatchedValues` z musi `Dictionary<string, object>` być przypisany z kluczami ciągu. `IEnumerable<KeyValuePair<string, object>>`lub `IReadOnlyDictionary<string, object>` są również opcje w tym scenariuszu.
 
-Pozycja `@attributes` odnosząca się do pozycji atrybutów elementu jest ważna. Gdy `@attributes` są splatted na elemencie, atrybuty są przetwarzane od prawej do lewej (Ostatnia do). Rozważmy następujący przykład składnika, który zużywa składnik `Child`:
+Pozycja `@attributes` względem pozycji atrybutów elementu jest ważna. Gdy `@attributes` są splatted na element, atrybuty są przetwarzane od prawej do lewej (ostatnio do pierwszego). Rozważmy następujący przykład składnika, `Child` który zużywa składnik:
 
-*ParentComponent. Razor*:
+*ParentComponent.brzytwa*:
 
 ```razor
 <ChildComponent extra="10" />
 ```
 
-*ChildComponent. Razor*:
+*ChildComponent.brzytwa*:
 
 ```razor
 <div @attributes="AdditionalAttributes" extra="5" />
@@ -248,21 +248,21 @@ Pozycja `@attributes` odnosząca się do pozycji atrybutów elementu jest ważna
 public IDictionary<string, object> AdditionalAttributes { get; set; }
 ```
 
-Atrybut `extra` składnika `Child` jest ustawiony na prawo od `@attributes`. `<div>` renderowanego składnika `Parent` zawiera `extra="5"`, gdy jest on przeszukiwany za pomocą dodatkowego atrybutu, ponieważ atrybuty są przetwarzane od prawej do lewej (od ostatni do pierwszego):
+Atrybut `Child` składnika `extra` jest ustawiony na prawo `@attributes`od . Renderowany `Parent` `<div>` składnik zawiera `extra="5"` po przejściu przez dodatkowy atrybut, ponieważ atrybuty są przetwarzane od prawej do lewej (od początku do pierwszego):
 
 ```html
 <div extra="5" />
 ```
 
-W poniższym przykładzie porządek `extra` i `@attributes` jest odwrócony w `<div>`składnika `Child`:
+W poniższym przykładzie `extra` kolejność `@attributes` i jest `Child` odwrócona `<div>`w komponencie:
 
-*ParentComponent. Razor*:
+*ParentComponent.brzytwa*:
 
 ```razor
 <ChildComponent extra="10" />
 ```
 
-*ChildComponent. Razor*:
+*ChildComponent.brzytwa*:
 
 ```razor
 <div extra="5" @attributes="AdditionalAttributes" />
@@ -271,18 +271,18 @@ W poniższym przykładzie porządek `extra` i `@attributes` jest odwrócony w `<
 public IDictionary<string, object> AdditionalAttributes { get; set; }
 ```
 
-Renderowane `<div>` w składniku `Parent` zawiera `extra="10"` w przypadku przechodzenia przez dodatkowy atrybut:
+Renderowane `<div>` w `Parent` składniku `extra="10"` zawiera, gdy przekazywane przez dodatkowy atrybut:
 
 ```html
 <div extra="10" />
 ```
 
-## <a name="capture-references-to-components"></a>Przechwyć odwołania do składników
+## <a name="capture-references-to-components"></a>Przechwytywanie odwołań do komponentów
 
-Odwołania do składników zapewniają sposób odwoływania się do wystąpienia składnika, dzięki czemu można wydać polecenia do tego wystąpienia, takie jak `Show` lub `Reset`. Aby przechwycić odwołanie do składnika:
+Odwołania do składników umożliwiają odwoływanie się do wystąpienia składnika, dzięki czemu `Show` `Reset`można wydawać polecenia do tego wystąpienia, takie jak lub . Aby przechwycić odwołanie do komponentu:
 
-* Dodaj atrybut [`@ref`](xref:mvc/views/razor#ref) do składnika podrzędnego.
-* Zdefiniuj pole z tym samym typem co składnik podrzędny.
+* Dodaj [`@ref`](xref:mvc/views/razor#ref) atrybut do składnika podrzędnego.
+* Zdefiniuj pole o tym samym typie co komponent podrzędny.
 
 ```razor
 <MyLoginDialog @ref="_loginDialog" ... />
@@ -297,23 +297,23 @@ Odwołania do składników zapewniają sposób odwoływania się do wystąpienia
 }
 ```
 
-Gdy składnik jest renderowany, pole `_loginDialog` jest wypełniane za pomocą `MyLoginDialog` podrzędnego wystąpienia składnika. Następnie można wywołać metody .NET w wystąpieniu składnika.
+Podczas renderowania komponentu `_loginDialog` pole jest wypełniane wystąpieniem komponentu podrzędnego. `MyLoginDialog` Następnie można wywołać metody .NET w wystąpieniu składnika.
 
 > [!IMPORTANT]
-> Zmienna `_loginDialog` jest wypełniana tylko po wyrenderowaniu składnika, a jego wyjście zawiera element `MyLoginDialog`. Do tego momentu nie ma niczego do odwołania. Aby manipulować odwołaniami do składników po zakończeniu renderowania składnika, należy użyć [metody OnAfterRenderAsync lub OnAfterRender](xref:blazor/lifecycle#after-component-render).
+> Zmienna `_loginDialog` jest wypełniana tylko po renderowaniu składnika, a jej dane wyjściowe zawierają `MyLoginDialog` element. Do tego momentu nie ma się czego odwołać. Aby manipulować odwołaniami do komponentów po zakończeniu renderowania przez komponent, należy użyć [metod OnAfterRenderAsync lub OnAfterRender](xref:blazor/lifecycle#after-component-render).
 
-Aby odwoływać się do składników w pętli, zobacz [przechwytywanie odwołań do wielu podobnych składników podrzędnych (dotnet/aspnetcore #13358)](https://github.com/dotnet/aspnetcore/issues/13358).
+Aby odwoływać się do komponentów w pętli, zobacz [Przechwytywanie odwołań do wielu podobnych składników podrzędnych (#13358 dotnet/aspnetcore).](https://github.com/dotnet/aspnetcore/issues/13358)
 
-Podczas przechwytywania odwołań do składników użycie podobnej składni do [przechwytywania odwołań do elementów](xref:blazor/call-javascript-from-dotnet#capture-references-to-elements)nie jest funkcją międzyoperacyjności języka JavaScript. Odwołania do składników nie są przesyłane do kodu JavaScript,&mdash;są używane tylko w kodzie platformy .NET.
+Podczas przechwytywania odwołań do składników użyć podobnej składni do [przechwytywania odwołań do elementów,](xref:blazor/call-javascript-from-dotnet#capture-references-to-elements)nie jest to funkcja interop JavaScript. Odwołania do składników nie są przekazywane&mdash;do kodu JavaScript, który jest używany tylko w kodzie .NET.
 
 > [!NOTE]
-> **Nie** należy używać odwołań do składników do mutacji stanu składników podrzędnych. Zamiast tego należy używać zwykłych parametrów deklaratywnych do przekazywania danych do składników podrzędnych. Użycie normalnych parametrów deklaratywnych powoduje, że składniki podrzędne, które automatycznie uruchamiają się w prawidłowym czasie.
+> **Nie** należy używać odwołań do komponentów do mutować stan komponentów podrzędnych. Zamiast tego należy użyć normalnych parametrów deklaratywnych do przekazywania danych do składników podrzędnych. Użycie normalnych parametrów deklaratywnych powoduje, że składniki podrzędne, które automatycznie rimanują w prawidłowych godzinach.
 
-## <a name="invoke-component-methods-externally-to-update-state"></a>Wywołaj metody składnika zewnętrznie, aby zaktualizować stan
+## <a name="invoke-component-methods-externally-to-update-state"></a>Wywoływanie metod składników zewnętrznie w celu aktualizacji stanu
 
-Blazor używa `SynchronizationContext` w celu wymuszenia pojedynczego wątku logicznego wykonywania. W tym `SynchronizationContext`są wykonywane [metody cyklu życia](xref:blazor/lifecycle) składnika i wszystkie wywołania zwrotne zdarzeń, które są wywoływane przez Blazor. W przypadku zdarzenia składnika należy zaktualizować na podstawie zdarzenia zewnętrznego, takiego jak czasomierz lub inne powiadomienia, użyj metody `InvokeAsync`, która będzie wysyłana do `SynchronizationContext`Blazor.
+Blazorużywa `SynchronizationContext` do wymuszania pojedynczego wątku logicznego wykonania. [Metody cyklu życia](xref:blazor/lifecycle) składnika i wszelkie wywołania zwrotne zdarzeń, które są wywoływane przez Blazor są wykonywane na ten `SynchronizationContext`temat . W przypadku, gdy składnik musi zostać zaktualizowany na podstawie zdarzenia zewnętrznego, takiego `InvokeAsync` jak czasomierz Blazorlub `SynchronizationContext`inne powiadomienia, użyj metody, która zostanie wysłana do 's .
 
-Rozważmy na przykład *usługę powiadamiania* , która może powiadomić dowolny składnik nasłuchujący zaktualizowanego stanu:
+Rozważmy na przykład *usługę powiadamiania,* która może powiadamiać dowolny składnik nasłuchiwania o zaktualizowanym stanie:
 
 ```csharp
 public class NotifierService
@@ -333,19 +333,19 @@ public class NotifierService
 
 Zarejestruj `NotifierService` jako singletion:
 
-* W programie Blazor webassembly Zarejestruj usługę w `Program.Main`:
+* W Blazor WebAssembly zarejestruj usługę `Program.Main`w:
 
   ```csharp
   builder.Services.AddSingleton<NotifierService>();
   ```
 
-* W programie Blazor Server Zarejestruj usługę w `Startup.ConfigureServices`:
+* W Blazor systemie Server zarejestruj `Startup.ConfigureServices`usługę w:
 
   ```csharp
   services.AddSingleton<NotifierService>();
   ```
 
-Użyj `NotifierService`, aby zaktualizować składnik:
+Użyj, `NotifierService` aby zaktualizować składnik:
 
 ```razor
 @page "/"
@@ -378,11 +378,11 @@ Użyj `NotifierService`, aby zaktualizować składnik:
 }
 ```
 
-W poprzednim przykładzie `NotifierService` wywołuje metodę `OnNotify` składnika poza `SynchronizationContext`Blazor. `InvokeAsync` jest używany do przełączania do poprawnego kontekstu i renderowania kolejki.
+W poprzednim przykładzie `NotifierService` wywołuje metodę składnika `OnNotify` poza Blazor's `SynchronizationContext`. `InvokeAsync`służy do przełączania się do prawidłowego kontekstu i kolejkowania renderowania.
 
-## <a name="use-key-to-control-the-preservation-of-elements-and-components"></a>Użyj klucza \@, aby kontrolować zachowywanie elementów i składników
+## <a name="use-key-to-control-the-preservation-of-elements-and-components"></a>Użyj \@klawisza do kontrolowania zachowania elementów i komponentów
 
-Podczas renderowania listy elementów lub składników oraz elementów lub składników, które następnie zmieniają się, algorytm różnicowania Blazormusi zdecydować, które z poprzednich elementów lub składników mogą być zachowywane i jak obiekty modelu powinny być mapowane na nie. Zwykle ten proces jest automatyczny i można go zignorować, ale istnieją przypadki, w których może być konieczne sterowanie procesem.
+Podczas renderowania listy elementów lub składników i elementy Blazorlub składniki następnie zmienić, 's diffing algorytm musi zdecydować, które z poprzednich elementów lub składników mogą być zachowywane i jak obiekty modelu powinny mapować do nich. Zwykle ten proces jest automatyczny i może być ignorowany, ale są przypadki, w których można kontrolować proces.
 
 Rozważmy następujący przykład:
 
@@ -398,9 +398,9 @@ Rozważmy następujący przykład:
 }
 ```
 
-Zawartość kolekcji `People` może ulec zmianie z wstawionymi, usuniętymi lub z ponownymi zamówieniami. Gdy składnik jest przerenderowany, składnik `<DetailsEditor>` może zmienić, aby otrzymywać różne `Details` wartości parametrów. Może to spowodować bardziej złożone odwzorowanie niż oczekiwano. W niektórych przypadkach odzyskanie może prowadzić do zauważalnych różnic w zachowaniu, takich jak brak fokusu elementu.
+Zawartość `People` kolekcji może ulec zmianie za pomocą wpisów wstawionych, usuniętych lub ponownie uporządkowanych. Gdy składnik rerenders, `<DetailsEditor>` składnik może ulec `Details` zmianie, aby otrzymać różne wartości parametrów. Może to spowodować bardziej złożone rerendering niż oczekiwano. W niektórych przypadkach rerendering może prowadzić do widocznych różnic w zachowaniu, takich jak utrata fokusu elementu.
 
-Proces mapowania można kontrolować przy użyciu atrybutu dyrektywy `@key`. `@key` powoduje, że algorytm różnicowania gwarantuje zachowywanie elementów lub składników na podstawie wartości klucza:
+Proces mapowania można kontrolować `@key` za pomocą atrybutu dyrektywy. `@key`powoduje, że algorytm diffing gwarantuje zachowanie elementów lub komponentów w oparciu o wartość klucza:
 
 ```csharp
 @foreach (var person in People)
@@ -414,22 +414,22 @@ Proces mapowania można kontrolować przy użyciu atrybutu dyrektywy `@key`. `@k
 }
 ```
 
-W przypadku zmiany kolekcji `People`, algorytm różnicowania zachowuje skojarzenie między wystąpieniami `<DetailsEditor>` i wystąpieniami `person`:
+Po `People` zmianie kolekcji algorytm diffing zachowuje `<DetailsEditor>` skojarzenie `person` między wystąpieniami i wystąpieniami:
 
-* Jeśli `Person` zostanie usunięty z listy `People`, tylko odpowiednie wystąpienie `<DetailsEditor>` zostanie usunięte z interfejsu użytkownika. Inne wystąpienia pozostaną bez zmian.
-* Jeśli na liście zostanie wstawiony `Person`, jedno nowe wystąpienie `<DetailsEditor>` zostanie wstawione do odpowiedniego położenia. Inne wystąpienia pozostaną bez zmian.
-* W przypadku ponownego uporządkowania wpisów `Person` odpowiednie wystąpienia `<DetailsEditor>` są zachowywane i uporządkowane w interfejsie użytkownika.
+* Jeśli `Person` a zostanie `People` usunięty z listy, tylko odpowiednie `<DetailsEditor>` wystąpienie jest usuwany z interfejsu użytkownika. Inne wystąpienia pozostają niezmienione.
+* Jeśli `Person` a jest wstawiany w jakiejś pozycji na liście, jedno nowe `<DetailsEditor>` wystąpienie jest wstawiany w tym odpowiednim położeniu. Inne wystąpienia pozostają niezmienione.
+* Jeśli `Person` wpisy są ponownie uporządkowane, odpowiednie `<DetailsEditor>` wystąpienia są zachowywane i ponownie uporządkowane w interfejsie użytkownika.
 
-W niektórych scenariuszach użycie `@key` minimalizuje złożoność operacji renderowania i pozwala uniknąć potencjalnych problemów związanych z zmianami stanowymi modelu DOM, takich jak pozycja fokusu.
+W niektórych scenariuszach `@key` użycie minimalizuje złożoność rerendering i pozwala uniknąć potencjalnych problemów ze stanowymi częściami dom zmiany, takich jak położenie fokusu.
 
 > [!IMPORTANT]
 > Klucze są lokalne dla każdego elementu kontenera lub składnika. Klucze nie są porównywane globalnie w całym dokumencie.
 
-### <a name="when-to-use-key"></a>Kiedy używać klucza \@
+### <a name="when-to-use-key"></a>Kiedy używać \@klucza
 
-Zazwyczaj warto używać `@key` zawsze, gdy lista jest renderowana (na przykład w bloku `@foreach`), a odpowiednia wartość istnieje do zdefiniowania `@key`.
+Zazwyczaj warto używać za `@key` każdym razem, gdy lista jest renderowana `@foreach` (na przykład w bloku) `@key`i istnieje odpowiednia wartość do zdefiniowania programu .
 
-Można również użyć `@key`, aby uniemożliwić Blazor zachowywania poddrzewa elementu lub składnika, gdy zmieniany jest obiekt:
+Można również `@key` użyć, Blazor aby zapobiec zachowaniu elementu lub poddrzewa komponentu, gdy zmienia się obiekt:
 
 ```razor
 <div @key="currentPerson">
@@ -437,33 +437,33 @@ Można również użyć `@key`, aby uniemożliwić Blazor zachowywania poddrzewa
 </div>
 ```
 
-W przypadku zmiany `@currentPerson` dyrektywa `@key` wymusza Blazor odrzucania całego `<div>` i jego obiektów podrzędnych i ponownej kompilacji poddrzewa w interfejsie użytkownika z nowymi elementami i składnikami. Może to być przydatne, jeśli zachodzi konieczność zagwarantowania, że stan interfejsu użytkownika nie jest zachowywany po zmianie `@currentPerson`.
+Jeśli `@currentPerson` zmiany, `@key` dyrektywa atrybut Blazor wymusza `<div>` odrzucić cały i jego elementy podrzędne i odbudować poddrzewo w interfejsie użytkownika z nowych elementów i składników. Może to być przydatne, jeśli trzeba zagwarantować, że `@currentPerson` żaden stan interfejsu użytkownika jest zachowywany po zmianie.
 
-### <a name="when-not-to-use-key"></a>Kiedy nie używać klucza \@
+### <a name="when-not-to-use-key"></a>Kiedy nie \@używać klucza
 
-Różnica między `@key`ami jest kosztem wydajności. Koszt wydajności nie jest duży, ale Określ `@key` tylko wtedy, gdy kontrolowanie reguł utrwalania elementów i składników korzyści dla aplikacji.
+Jest koszt wydajności podczas diffing `@key`z . Koszt wydajności nie jest duży, `@key` ale należy określić tylko wtedy, gdy kontrolowanie zasad zachowania elementu lub składnika jest korzystne dla aplikacji.
 
-Nawet jeśli `@key` nie jest używany, Blazor zachowuje elementy podrzędne i wystąpienia składników tak dużo, jak to możliwe. Jedyną zaletą korzystania z `@key` jest kontrola nad *sposobem* , w jaki wystąpienia modelu są mapowane na zachowane wystąpienia składników, zamiast algorytmu różnicowego, wybierając mapowanie.
+Nawet `@key` jeśli nie jest Blazor używany, zachowuje element podrzędny i wystąpienia składników jak najwięcej. Jedyną zaletą `@key` przy użyciu jest kontrola nad *tym, jak* wystąpienia modelu są mapowane do zachowanych wystąpień składników, zamiast algorytmu diffing wybierając mapowanie.
 
-### <a name="what-values-to-use-for-key"></a>Wartości, które mają być używane dla klucza \@
+### <a name="what-values-to-use-for-key"></a>Jakie wartości mają \@być używane dla klucza
 
-Ogólnie rzecz biorąc, warto podać jeden z następujących rodzajów wartości dla `@key`:
+Ogólnie rzecz biorąc, ma sens dostarczanie jednego z `@key`następujących rodzajów wartości dla:
 
-* Wystąpienia obiektów modelu (na przykład wystąpienie `Person` jak w poprzednim przykładzie). Zapewnia to zachowywanie na podstawie równości odwołań do obiektów.
-* Unikatowe identyfikatory (na przykład wartości klucza podstawowego typu `int`, `string`lub `Guid`).
+* Wystąpienia obiektu modelu (na `Person` przykład wystąpienie, jak we wcześniejszym przykładzie). Zapewnia to zachowanie na podstawie równości odwołania do obiektu.
+* Unikatowe identyfikatory (na przykład wartości `int` `string`klucza `Guid`podstawowego typu , lub ).
 
-Upewnij się, że wartości używane dla `@key` nie kolidują. Jeśli w tym samym elemencie nadrzędnym zostaną wykryte wartości powodujące konflikt, Blazor zgłasza wyjątek, ponieważ nie może on w sposób jednoznaczny mapować starych elementów lub składników na nowe elementy lub składniki. Używaj tylko odrębnych wartości, takich jak wystąpienia obiektów lub wartości klucza podstawowego.
+Upewnij się, `@key` że wartości używane dla nie kolidują ze sobą. Jeśli wartości kolizji zostaną wykryte w Blazor tym samym elemencie nadrzędnym, zgłasza wyjątek, ponieważ nie można deterministycznie mapować stare elementy lub składniki do nowych elementów lub składników. Używaj tylko różnych wartości, takich jak wystąpienia obiektów lub wartości klucza podstawowego.
 
-## <a name="partial-class-support"></a>Obsługa klasy częściowej
+## <a name="partial-class-support"></a>Obsługa częściowej klasy
 
-Składniki Razor są generowane jako klasy częściowe. Składniki Razor są tworzone przy użyciu jednej z następujących metod:
+Komponenty maszynki do golenia są generowane jako klasy częściowe. Komponenty maszynki do golenia są tworzyć przy użyciu jednego z następujących podejść:
 
-* C#kod jest zdefiniowany w bloku [`@code`](xref:mvc/views/razor#code) przy użyciu znaczników HTML i kodu Razor w pojedynczym pliku. Szablony Blazor definiują ich składniki Razor przy użyciu tego podejścia.
-* C#kod jest umieszczany w pliku związanym z kodem zdefiniowanym jako Klasa częściowa.
+* Kod C# jest [`@code`](xref:mvc/views/razor#code) zdefiniowany w bloku z znaczników HTML i kod Razor w jednym pliku. Blazorszablony definiują swoje składniki Razor przy użyciu tego podejścia.
+* Kod C# jest umieszczany w pliku związanym z kodem zdefiniowanym jako klasa częściowa.
 
-Poniższy przykład pokazuje domyślny składnik `Counter` z blokiem `@code` w aplikacji wygenerowanej na podstawie szablonu Blazor. Znaczniki HTML, kod Razor i C# kod są w tym samym pliku:
+W poniższym przykładzie pokazano domyślny `Counter` składnik z blokiem `@code` w aplikacji wygenerowanej na podstawie szablonu. Blazor Znaczniki HTML, kod Razor i kod C# znajdują się w tym samym pliku:
 
-*Counter. Razor*:
+*Counter.brzytwa*:
 
 ```razor
 @page "/counter"
@@ -484,9 +484,9 @@ Poniższy przykład pokazuje domyślny składnik `Counter` z blokiem `@code` w a
 }
 ```
 
-Składnik `Counter` można również utworzyć przy użyciu pliku związanego z kodem z klasą częściową:
+Składnik `Counter` można również utworzyć przy użyciu pliku posuwu kodu z klasą częściową:
 
-*Counter. Razor*:
+*Counter.brzytwa*:
 
 ```razor
 @page "/counter"
@@ -498,7 +498,7 @@ Składnik `Counter` można również utworzyć przy użyciu pliku związanego z 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 ```
 
-*Counter.Razor.cs*:
+*Counter.razor.cs:*
 
 ```csharp
 namespace BlazorApp.Pages
@@ -515,7 +515,7 @@ namespace BlazorApp.Pages
 }
 ```
 
-W razie potrzeby dodaj wszystkie wymagane przestrzenie nazw do pliku klasy częściowej. Typowe przestrzenie nazw używane przez składniki Razor obejmują:
+W razie potrzeby dodaj wszystkie wymagane obszary nazw do pliku klasy częściowej. Typowe przestrzenie nazw używane przez składniki Razor obejmują:
 
 ```csharp
 using Microsoft.AspNetCore.Authorization;
@@ -526,11 +526,11 @@ using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.AspNetCore.Components.Web;
 ```
 
-## <a name="specify-a-base-class"></a>Określ klasę bazową
+## <a name="specify-a-base-class"></a>Określanie klasy podstawowej
 
-Dyrektywa [`@inherits`](xref:mvc/views/razor#inherits) może służyć do określania klasy bazowej dla składnika. Poniższy przykład pokazuje, jak składnik może dziedziczyć klasę bazową `BlazorRocksBase`, aby zapewnić właściwości i metody składnika. Klasa bazowa powinna pochodzić od `ComponentBase`.
+Dyrektywa [`@inherits`](xref:mvc/views/razor#inherits) może służyć do określania klasy podstawowej dla składnika. Poniższy przykład pokazuje, jak składnik może `BlazorRocksBase`dziedziczyć klasę podstawową, aby zapewnić właściwości i metody składnika. Klasa podstawowa powinna `ComponentBase`pochodzić od .
 
-*Strony/BlazorRocks. Razor*:
+*Strony/BlazorRocks.brzytwa*:
 
 ```razor
 @page "/BlazorRocks"
@@ -539,7 +539,7 @@ Dyrektywa [`@inherits`](xref:mvc/views/razor#inherits) może służyć do okreś
 <h1>@BlazorRocksText</h1>
 ```
 
-*BlazorRocksBase.cs*:
+*BlazorRocksBase.cs:*
 
 ```csharp
 using Microsoft.AspNetCore.Components;
@@ -554,28 +554,28 @@ namespace BlazorSample
 }
 ```
 
-## <a name="specify-an-attribute"></a>Określ atrybut
+## <a name="specify-an-attribute"></a>Określanie atrybutu
 
-Atrybuty można określić w składnikach Razor za pomocą dyrektywy [`@attribute`](xref:mvc/views/razor#attribute) . Poniższy przykład stosuje atrybut `[Authorize]` do klasy składnika:
+Atrybuty można określić w [`@attribute`](xref:mvc/views/razor#attribute) komponentach Razor z dyrektywą. Poniższy przykład stosuje `[Authorize]` atrybut do klasy składnika:
 
 ```razor
 @page "/"
 @attribute [Authorize]
 ```
 
-## <a name="import-components"></a>Importuj składniki
+## <a name="import-components"></a>Importowanie składników
 
-Przestrzeń nazw składnika utworzone przy użyciu Razor jest oparta na (w kolejności priorytetu):
+Obszar nazw składnika chowanego za pomocą razora jest oparty na (w kolejności priorytetu):
 
-* Wyznaczanie [`@namespace`](xref:mvc/views/razor#namespace) w znaczniku pliku*Razor (`@namespace BlazorSample.MyNamespace`* ).
-* `RootNamespace` projektu w pliku projektu (`<RootNamespace>BlazorSample</RootNamespace>`).
-* Nazwa projektu, pobrana z nazwy pliku projektu ( *. csproj*) i ścieżka z katalogu głównego projektu do składnika. Na przykład struktura rozpoznaje *{Project root}/Pages/index.Razor* (*BlazorSample. csproj*) do przestrzeni nazw `BlazorSample.Pages`. Składniki przestrzegają C# reguł powiązań nazw. Dla składnika `Index` w tym przykładzie składniki należące do zakresu są wszystkich składników:
+* [`@namespace`](xref:mvc/views/razor#namespace)oznaczenie w pliku Razor (*.brzytwa*) znaczników (`@namespace BlazorSample.MyNamespace`).
+* Projekt jest `RootNamespace` w pliku projektu`<RootNamespace>BlazorSample</RootNamespace>`( ).
+* Nazwa projektu, zaczerpnięta z nazwy pliku projektu (*csproj*) i ścieżka z katalogu głównego projektu do składnika. Na przykład struktura rozwiązuje *{PROJECT ROOT}/Pages/Index.razor* (*BlazorSample.csproj* `BlazorSample.Pages`) do obszaru nazw . Składniki są zgodne z regułami wiązania nazw języka C#. Dla `Index` składnika w tym przykładzie składniki w zakresie są wszystkie składniki:
   * W tym samym folderze *strony*.
-  * Składniki w katalogu głównym projektu, które nie określają jawnie innej przestrzeni nazw.
+  * Składniki w katalogu głównym projektu, które jawnie nie określają innego obszaru nazw.
 
-Składniki zdefiniowane w innej przestrzeni nazw są wprowadzane do zakresu za pomocą dyrektywy [`@using`](xref:mvc/views/razor#using) Razor.
+Składniki zdefiniowane w innej przestrzeni nazw są wprowadzane [`@using`](xref:mvc/views/razor#using) do zakresu przy użyciu dyrektywy Razor.
 
-Jeśli inny składnik, `NavMenu.razor`, istnieje w *BlazorSample/Shared/* folder, składnik może być używany w `Index.razor` z następującą instrukcją `@using`:
+Jeśli inny `NavMenu.razor`składnik, istnieje w *folderze BlazorSample/Shared/,* składnik `Index.razor` może `@using` być użyty z następującą instrukcją:
 
 ```razor
 @using BlazorSample.Shared
@@ -585,7 +585,7 @@ This is the Index page.
 <NavMenu></NavMenu>
 ```
 
-Do składników można także odwoływać się za pomocą ich w pełni kwalifikowanych nazw, które nie wymagają dyrektywy [`@using`](xref:mvc/views/razor#using) :
+Składniki można również odwoływać się przy użyciu ich w [`@using`](xref:mvc/views/razor#using) pełni kwalifikowanych nazw, które nie wymagają dyrektywy:
 
 ```razor
 This is the Index page.
@@ -594,17 +594,17 @@ This is the Index page.
 ```
 
 > [!NOTE]
-> Kwalifikacja `global::` nie jest obsługiwana.
+> Kwalifikacje `global::` nie są obsługiwane.
 >
-> Importowanie składników za pomocą instrukcji `using` z aliasami (na przykład `@using Foo = Bar`) nie jest obsługiwane.
+> Importowanie składników z `using` aliasami instrukcji `@using Foo = Bar`(na przykład) nie jest obsługiwane.
 >
-> Częściowo kwalifikowane nazwy nie są obsługiwane. Na przykład dodawanie `@using BlazorSample` i odwoływanie się do `NavMenu.razor` za pomocą `<Shared.NavMenu></Shared.NavMenu>` nie jest obsługiwane.
+> Częściowo kwalifikowane nazwy nie są obsługiwane. Na przykład `@using BlazorSample` dodawanie i `NavMenu.razor` `<Shared.NavMenu></Shared.NavMenu>` odwoływanie się do nie jest obsługiwane.
 
-## <a name="conditional-html-element-attributes"></a>Warunkowe atrybuty elementu HTML
+## <a name="conditional-html-element-attributes"></a>Warunkowe atrybuty elementów HTML
 
-Atrybuty elementu HTML są warunkowo renderowane na podstawie wartości .NET. Jeśli wartość jest `false` lub `null`, atrybut nie jest renderowany. Jeśli wartość jest `true`, atrybut jest renderowany jako zminimalizowany.
+Atrybuty elementu HTML są warunkowo renderowane na podstawie wartości .NET. Jeśli wartość `false` jest `null`lub atrybut nie jest renderowany. Jeśli wartość `true`jest , atrybut jest renderowany zminimalizowane.
 
-W poniższym przykładzie `IsCompleted` określa, czy `checked` jest renderowany w znacznikach elementu:
+W poniższym `IsCompleted` przykładzie `checked` określa, czy jest renderowany w znacznikach elementu:
 
 ```razor
 <input type="checkbox" checked="@IsCompleted" />
@@ -615,13 +615,13 @@ W poniższym przykładzie `IsCompleted` określa, czy `checked` jest renderowany
 }
 ```
 
-Jeśli `IsCompleted` jest `true`, pole wyboru jest renderowane jako:
+Jeśli `IsCompleted` `true`tak, to pole wyboru jest renderowane jako:
 
 ```html
 <input type="checkbox" checked />
 ```
 
-Jeśli `IsCompleted` jest `false`, pole wyboru jest renderowane jako:
+Jeśli `IsCompleted` `false`tak, to pole wyboru jest renderowane jako:
 
 ```html
 <input type="checkbox" />
@@ -630,16 +630,16 @@ Jeśli `IsCompleted` jest `false`, pole wyboru jest renderowane jako:
 Aby uzyskać więcej informacji, zobacz <xref:mvc/views/razor>.
 
 > [!WARNING]
-> Niektóre atrybuty HTML, takie jak [Aria](https://developer.mozilla.org/docs/Web/Accessibility/ARIA/Roles/button_role#Toggle_buttons), nie działają prawidłowo, gdy typem .net jest `bool`. W tych przypadkach Użyj typu `string` zamiast `bool`.
+> Niektóre atrybuty HTML, takie jak [wciśnięte aria,](https://developer.mozilla.org/docs/Web/Accessibility/ARIA/Roles/button_role#Toggle_buttons)nie działają `bool`poprawnie, gdy typem .NET jest . W takich przypadkach `string` należy użyć typu `bool`zamiast pliku .
 
-## <a name="raw-html"></a>Nieprzetworzony kod HTML
+## <a name="raw-html"></a>Surowy kod HTML
 
-Ciągi są zwykle renderowane przy użyciu węzłów tekstowych DOM, co oznacza, że wszystkie znaczniki, które mogą zawierać, są ignorowane i traktowane jako tekst literału. Aby renderować nieprzetworzony kod HTML, zawiń zawartość HTML w `MarkupString` wartość. Wartość jest analizowana jako plik HTML lub SVG i wstawiona do modelu DOM.
+Ciągi są zwykle renderowane przy użyciu węzłów tekstu DOM, co oznacza, że wszelkie znaczniki, które mogą zawierać, są ignorowane i traktowane jako tekst dosłowny. Aby renderować nieprzetworzony `MarkupString` kod HTML, zawiń zawartość HTML w wartość. Wartość jest analizowana jako HTML lub SVG i wstawiana do modelu DOM.
 
 > [!WARNING]
-> Renderowanie nieprzetworzonego kodu HTML zbudowanego z dowolnego niezaufanego źródła stanowi **zagrożenie bezpieczeństwa** i należy je unikać!
+> Renderowanie surowego KODU HTML zbudowanego z dowolnego niezaufanego źródła stanowi **zagrożenie bezpieczeństwa** i należy ich unikać!
 
-Poniższy przykład ilustruje użycie typu `MarkupString`, aby dodać blok statycznej zawartości HTML do renderowanego danych wyjściowych składnika:
+Poniższy przykład pokazuje, że przy użyciu `MarkupString` typu, aby dodać blok statycznej zawartości HTML do renderowanych danych wyjściowych składnika:
 
 ```html
 @((MarkupString)_myMarkup)
@@ -650,15 +650,15 @@ Poniższy przykład ilustruje użycie typu `MarkupString`, aby dodać blok staty
 }
 ```
 
-## <a name="cascading-values-and-parameters"></a>Wartości kaskadowe i parametry
+## <a name="cascading-values-and-parameters"></a>Kaskadowe wartości i parametry
 
-W niektórych scenariuszach nie można przepływać danych z składnika nadrzędnego do składnika potomnego przy użyciu [parametrów składnika](#component-parameters), zwłaszcza gdy istnieje kilka warstw składników. Wartości kaskadowe i parametry rozwiązują ten problem, zapewniając wygodną metodę dla składnika nadrzędnego, aby zapewnić wartość wszystkim jej składnikom potomnym. Kaskadowe wartości i parametry również zapewniają podejście do współrzędnych składników.
+W niektórych scenariuszach jest niewygodne przepływ danych ze składnika nadrzędnego do składnika malejącego przy użyciu [parametrów komponentu](#component-parameters), zwłaszcza gdy istnieje kilka warstw składowych. Kaskadowe wartości i parametry rozwiązują ten problem, zapewniając wygodny sposób dla komponentu nadrzędnego, aby zapewnić wartość dla wszystkich jego składników potomnych. Kaskadowe wartości i parametry zapewniają również podejście do komponentów do koordynowania.
 
 ### <a name="theme-example"></a>Przykład motywu
 
-W poniższym przykładzie z przykładowej aplikacji Klasa `ThemeInfo` określa informacje o motywie, aby przetworzyć hierarchię składników w taki sposób, aby wszystkie przyciski w danej części aplikacji miały ten sam styl.
+W poniższym przykładzie z `ThemeInfo` przykładowej aplikacji klasa określa informacje o motywie, które mają przepływać w dół hierarchii składników, tak aby wszystkie przyciski w danej części aplikacji współużytkować ten sam styl.
 
-*UIThemeClasses/themeinfo wskazuje. cs*:
+*UIThemeClasses/ThemeInfo.cs*:
 
 ```csharp
 public class ThemeInfo
@@ -667,11 +667,11 @@ public class ThemeInfo
 }
 ```
 
-Składnik nadrzędny może zapewnić kaskadową wartość przy użyciu składnika wartości kaskadowych. Składnik `CascadingValue` zawija poddrzewo hierarchii składników i dostarcza jedną wartość do wszystkich składników w tym poddrzewie.
+Składnik nadrzędny może zapewnić wartość kaskadową przy użyciu składnika Wartość kaskadowa. Składnik `CascadingValue` zawija poddrzewo hierarchii komponentów i dostarcza pojedynczą wartość do wszystkich komponentów w tym poddrzewie.
 
-Przykładowo aplikacja Przykładowa określa informacje o motywie (`ThemeInfo`) w jednej z układów aplikacji jako parametr kaskadowy dla wszystkich składników, które tworzą treść układu właściwości `@Body`. `ButtonClass` ma przypisaną wartość `btn-success` w składniku układu. Każdy składnik podrzędny może wykorzystać tę właściwość za pomocą obiektu kaskadowego `ThemeInfo`.
+Na przykład przykładowa aplikacja określa`ThemeInfo`informacje o motywie ( ) w jednym z układów aplikacji jako parametr `@Body` kaskadowy dla wszystkich składników, które tworzą treść układu właściwości. `ButtonClass`jest przypisana wartość `btn-success` w komponencie układu. Każdy składnik potomny może `ThemeInfo` korzystać z tej właściwości za pośrednictwem obiektu kaskadowego.
 
-składnik `CascadingValuesParametersLayout`:
+`CascadingValuesParametersLayout`Składnik:
 
 ```razor
 @inherits LayoutComponentBase
@@ -697,11 +697,11 @@ składnik `CascadingValuesParametersLayout`:
 }
 ```
 
-Aby korzystać z wartości kaskadowych, składniki deklarują kaskadowe parametry przy użyciu atrybutu `[CascadingParameter]`. Wartości kaskadowe są powiązane z parametrami kaskadowymi według typu.
+Aby użyć wartości kaskadowych, składniki deklarują parametry `[CascadingParameter]` kaskadowe przy użyciu atrybutu. Wartości kaskadowe są powiązane z parametrami kaskadowymi według typu.
 
-W przykładowej aplikacji składnik `CascadingValuesParametersTheme` wiąże `ThemeInfo` wartość kaskadową z parametrem kaskadowym. Parametr służy do ustawiania klasy CSS dla jednego z przycisków wyświetlanych przez składnik.
+W przykładowej aplikacji `CascadingValuesParametersTheme` składnik wiąże `ThemeInfo` wartość kaskadową z parametrem kaskadowym. Parametr służy do ustawiania klasy CSS dla jednego z przycisków wyświetlanych przez składnik.
 
-składnik `CascadingValuesParametersTheme`:
+`CascadingValuesParametersTheme`Składnik:
 
 ```razor
 @page "/cascadingvaluesparameterstheme"
@@ -737,7 +737,7 @@ składnik `CascadingValuesParametersTheme`:
 }
 ```
 
-Aby przetworzyć kaskadowo wiele wartości tego samego typu w ramach tego samego poddrzewa, podaj unikatowy ciąg `Name` do każdego składnika `CascadingValue` i odpowiadający mu `CascadingParameter`. W poniższym przykładzie dwa składniki `CascadingValue` są kaskadowo różne wystąpienia `MyCascadingType` według nazwy:
+Aby kaskadowo przedstawić wiele wartości tego samego typu w `Name` obrębie `CascadingValue` tego samego `CascadingParameter`poddrzewa, podaj unikatowy ciąg do każdego komponentu i odpowiadającego mu pliku . W poniższym przykładzie dwa `CascadingValue` składniki kaskadowo różnych wystąpień `MyCascadingType` według nazwy:
 
 ```razor
 <CascadingValue Value=@_parentCascadeParameter1 Name="CascadeParam1">
@@ -756,7 +756,7 @@ Aby przetworzyć kaskadowo wiele wartości tego samego typu w ramach tego samego
 }
 ```
 
-W składniku potomnym, kaskadowe parametry odbierają swoje wartości z odpowiednich kaskadowych wartości w składniku nadrzędnym według nazwy:
+W komponencie podrzędnym parametry kaskadowe otrzymują swoje wartości z odpowiednich wartości kaskadowych w komponencie nadrzędnym według nazwy:
 
 ```razor
 ...
@@ -770,15 +770,15 @@ W składniku potomnym, kaskadowe parametry odbierają swoje wartości z odpowied
 }
 ```
 
-### <a name="tabset-example"></a>Przykład TabSet
+### <a name="tabset-example"></a>Przykład zestawu kart
 
-Parametry kaskadowe umożliwiają również współdziałanie składników w hierarchii składników. Rozważmy na przykład następujący przykład *TabSet* w aplikacji przykładowej.
+Parametry kaskadowe umożliwiają również współpracę komponentów w hierarchii składników. Rozważmy na przykład poniższy *przykład Zestawu tabulatorów* w przykładowej aplikacji.
 
-Przykładowa aplikacja ma interfejs `ITab`, w którym znajdują się karty implementacji:
+Przykładowa aplikacja `ITab` ma interfejs, który implementuje karty:
 
 [!code-csharp[](common/samples/3.x/BlazorWebAssemblySample/UIInterfaces/ITab.cs)]
 
-Składnik `CascadingValuesParametersTabSet` używa składnika `TabSet`, który zawiera kilka `Tab` składników:
+Komponent `CascadingValuesParametersTabSet` używa składnika, `TabSet` który `Tab` zawiera kilka składników:
 
 ```razor
 <TabSet>
@@ -804,27 +804,27 @@ Składnik `CascadingValuesParametersTabSet` używa składnika `TabSet`, który z
 </TabSet>
 ```
 
-Podrzędne składniki `Tab` nie są jawnie przenoszone jako parametry do `TabSet`. Zamiast tego podrzędne składniki `Tab` są częścią zawartości podrzędnej `TabSet`. Jednak `TabSet` nadal muszą znać każdy składnik `Tab`, aby można było renderować nagłówki i aktywną kartę. Aby umożliwić tę koordynację bez konieczności stosowania dodatkowego kodu, składnik `TabSet` *może sam określić jako wartość kaskadową* , która jest następnie pobierana przez składniki `Tab` potomnych.
+Składniki `Tab` podrzędne nie są jawnie przekazywane `TabSet`jako parametry do . Zamiast tego składniki `Tab` podrzędne są częścią zawartości `TabSet`podrzędnej programu . Jednak `TabSet` nadal musi wiedzieć o `Tab` każdym składniku, tak aby można było renderować nagłówki i aktywną kartę. Aby włączyć tę koordynację bez `TabSet` konieczności dodatkowego kodu, składnik *może zapewnić się jako wartość kaskadowa,* która jest następnie pobierana przez składniki potomne. `Tab`
 
-składnik `TabSet`:
+`TabSet`Składnik:
 
 [!code-razor[](common/samples/3.x/BlazorWebAssemblySample/Components/TabSet.razor)]
 
-Składniki `Tab` potomne przechwytują `TabSet` zawierający jako parametr kaskadowy, więc składniki `Tab` dodają same do `TabSet` i koordynują, na której karcie jest aktywna.
+Składniki `Tab` potomne przechwytują `TabSet` zawierające jako parametr kaskadowy, dzięki czemu `Tab` komponenty dodają `TabSet` się do i współrzędnych, na których karta jest aktywna.
 
-składnik `Tab`:
+`Tab`Składnik:
 
 [!code-razor[](common/samples/3.x/BlazorWebAssemblySample/Components/Tab.razor)]
 
-## <a name="razor-templates"></a>Szablony Razor
+## <a name="razor-templates"></a>Szablony maszynki do golenia
 
-Fragmenty renderowania można definiować przy użyciu składni szablonu Razor. Szablony Razor są sposobem definiowania fragmentu interfejsu użytkownika i przyjmuje następujący format:
+Render fragmenty mogą być definiowane przy użyciu składni szablonu Razor. Szablony maszynki do golenia są sposobem definiowania fragmentu kodu interfejsu użytkownika i zakładania następującego formatu:
 
 ```razor
 @<{HTML tag}>...</{HTML tag}>
 ```
 
-Poniższy przykład ilustruje sposób określania wartości `RenderFragment` i `RenderFragment<T>` oraz renderowania szablonów bezpośrednio w składniku. Fragmenty renderowania mogą być również przekazane jako argumenty do [składników z szablonem](xref:blazor/templated-components).
+Poniższy przykład ilustruje `RenderFragment` `RenderFragment<T>` sposób określania i wartości i renderowania szablonów bezpośrednio w składniku. Fragmenty renderowania mogą być również przekazywane jako argumenty do [składników szablonów](xref:blazor/templated-components).
 
 ```razor
 @_timeTemplate
@@ -850,15 +850,15 @@ Renderowane dane wyjściowe poprzedniego kodu:
 <p>Pet: Rex</p>
 ```
 
-## <a name="scalable-vector-graphics-svg-images"></a>Skalowalne obrazy wektorowe (SVG)
+## <a name="scalable-vector-graphics-svg-images"></a>Skalowalne obrazy grafiki wektorowej (SVG)
 
-Ponieważ Blazor renderuje HTML, obrazy obsługiwane przez przeglądarkę, w tym obrazy*SVG (Scalable*Vector Graphics), są obsługiwane za pośrednictwem tagu `<img>`:
+Od Blazor czasu renderowania html, obrazy obsługiwane przez przeglądarkę, `<img>` w tym scalable vector graphics (SVG) obrazy *(.svg),* są obsługiwane przez tag:
 
 ```html
 <img alt="Example image" src="some-image.svg" />
 ```
 
-Podobnie Obrazy SVG są obsługiwane w regułach CSS pliku arkusza stylów (*CSS*):
+Podobnie obrazy SVG są obsługiwane w regułach CSS pliku arkusza stylów (*.css*):
 
 ```css
 .my-element {
@@ -866,8 +866,8 @@ Podobnie Obrazy SVG są obsługiwane w regułach CSS pliku arkusza stylów (*CSS
 }
 ```
 
-Jednak wbudowane znaczniki SVG nie są obsługiwane we wszystkich scenariuszach. Jeśli umieścisz tag `<svg>` bezpośrednio w pliku składnika ( *. Razor*), podstawowe renderowanie obrazu jest obsługiwane, ale wiele scenariuszy zaawansowanych nie jest jeszcze obsługiwanych. Na przykład Tagi `<use>` nie są obecnie przestrzegane i `@bind` nie mogą być używane w przypadku niektórych tagów SVG. Oczekujemy, że te ograniczenia są opisane w przyszłej wersji.
+Jednak wbudowane znaczniki SVG nie są obsługiwane we wszystkich scenariuszach. Jeśli `<svg>` umieścisz znacznik bezpośrednio w pliku komponentu (*.brzytwa*), podstawowe renderowanie obrazu jest obsługiwane, ale wiele zaawansowanych scenariuszy nie jest jeszcze obsługiwanych. Na przykład `<use>` tagi nie są obecnie przestrzegane i `@bind` nie mogą być używane z niektórymi tagami SVG. Oczekujemy, że zajmiemy się tymi ograniczeniami w przyszłej wersji.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
-* <xref:security/blazor/server> &ndash; zawiera wskazówki dotyczące tworzenia aplikacji Blazor Server, które muszą będą konkurować o z wyczerpaniem zasobów.
+* <xref:security/blazor/server>&ndash; Zawiera wskazówki Blazor dotyczące tworzenia aplikacji serwera, które muszą zmagać się z wyczerpaniem zasobów.

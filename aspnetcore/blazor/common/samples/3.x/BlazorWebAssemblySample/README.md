@@ -1,12 +1,12 @@
-# <a name="blazor-webassembly-sample-app"></a>Przykładowa aplikacja Blazor webassembly
+# <a name="blazor-webassembly-sample-app"></a>Przykładowa aplikacja Blazor Webassembly
 
-Ten przykład ilustruje użycie scenariuszy Blazor opisanych w dokumentacji Blazor.
+Ten przykład ilustruje wykorzystanie scenariuszy Blazora opisanych w dokumentacji Blazora.
 
-## <a name="call-web-api-example"></a>Przykład wywołania internetowego interfejsu API
+## <a name="call-web-api-example"></a>Przykład interfejsu API sieci Web
 
-Przykład internetowego interfejsu API wymaga działającego internetowego interfejsu API opartego na przykładowej aplikacji dotyczącej <a href="https://docs.microsoft.com/aspnet/core/tutorials/first-web-api">tworzenia internetowego interfejsu API za pomocą ASP.NET Core</a> , który domyślnie używa tego samego portu HTTPS (5001) jako aplikacji przykładowej Blazor. Aby używać obu aplikacji na tym samym komputerze w tym samym czasie, zmień port internetowego interfejsu API (na przykład użyj portu 10000). Przykładowa aplikacja wysyła żądania do internetowego interfejsu API w `https://localhost:10000/api/TodoItems`. Jeśli używany jest inny adres internetowego interfejsu API, należy zaktualizować wartość `ServiceEndpoint` stałej w bloku `@code` składnika Razor.</p>
+Przykład interfejsu API sieci web wymaga uruchomionego interfejsu API sieci web opartego na przykładowej aplikacji dla <a href="https://docs.microsoft.com/aspnet/core/tutorials/first-web-api">tematu Tworzenie interfejsu API sieci web z ASP.NET Core,</a> który domyślnie używa tego samego portu HTTPS (5001) co przykładowa aplikacja Blazor. Aby korzystać z obu aplikacji na tym samym komputerze w tym samym czasie, zmień port internetowego interfejsu API (na przykład użyj portu 10000). Przykładowa aplikacja wysuwa `https://localhost:10000/api/TodoItems`żądania do internetowego interfejsu API pod adresem . Jeśli używany jest inny adres internetowego interfejsu API, zaktualizuj stałą `ServiceEndpoint` wartość w bloku składnika `@code` Razor.</p>
 
-Przykładowa aplikacja wykonuje żądanie <a href="https://docs.microsoft.com/aspnet/core/security/cors">współużytkowania zasobów między źródłami (CORS)</a> od `http://localhost:5000` lub `https://localhost:5001` do internetowego interfejsu API. Poświadczenia (pliki cookie/nagłówki autoryzacji) są dozwolone. Dodaj następującą konfigurację oprogramowania CORS do `Startup.Configure` metody internetowego interfejsu API:</p>
+Przykładowa aplikacja tworzy żądanie <a href="https://docs.microsoft.com/aspnet/core/security/cors">udostępniania zasobów między źródłami (CORS)</a> z `http://localhost:5000` lub `https://localhost:5001` do internetowego interfejsu API. Poświadczenia (pliki cookie/nagłówki autoryzacji) są dozwolone. Dodaj następującą konfigurację oprogramowania pośredniczącego `Startup.Configure` CORS do metody internetowego interfejsu API:</p>
 
 ```csharp
 app.UseCors(policy => 
@@ -16,6 +16,6 @@ app.UseCors(policy =>
     .AllowCredentials());
 ```
 
-Dostosuj domeny i porty `WithOrigins` zgodnie z wymaganiami aplikacji Blazor.
+Dostosuj domeny i porty w `WithOrigins` razie potrzeby dla aplikacji Blazor.
 
-Internetowy interfejs API jest skonfigurowany do obsługi mechanizmu CORS, aby zezwalać na pliki cookie/nagłówki i żądania autoryzacji z kodu klienta, ale internetowy interfejs API utworzony przez samouczek nie zezwala na rzeczywiste żądania. Zapoznaj się z <a href="https://docs.microsoft.com/aspnet/core/security/">artykułami dotyczącymi ASP.NET Core Security i Identity</a> , aby uzyskać wskazówki dotyczące implementacji.
+Internetowy interfejs API jest skonfigurowany dla usługi CORS, aby zezwalać na autoryzację plików cookie/nagłówków i żądań z kodu klienta, ale internetowy interfejs API utworzony przez samouczek w rzeczywistości nie autoryzuje żądań. Zapoznaj się z <a href="https://docs.microsoft.com/aspnet/core/security/">artykułami ASP.NET core security i identity,</a> aby uzyskać wskazówki dotyczące implementacji.

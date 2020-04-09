@@ -1,7 +1,7 @@
 ---
-title: Integrowanie składników ASP.NET Core Razor z aplikacjami Razor Pages i MVC
+title: Integracja komponentów ASP.NET Core Razor w aplikacjach Razor Pages i MVC
 author: guardrex
-description: Dowiedz się więcej na temat scenariuszy powiązań danych dla składników i elementów DOM w aplikacjach Blazor.
+description: Dowiedz się więcej o scenariuszach wiązania Blazor danych dla składników i elementów DOM w aplikacjach.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
@@ -11,43 +11,43 @@ no-loc:
 - SignalR
 uid: blazor/integrate-components
 ms.openlocfilehash: cf6056e0985d5433bddecac8dd183ca3f4c2af5b
-ms.sourcegitcommit: 91dc1dd3d055b4c7d7298420927b3fd161067c64
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/24/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "80218937"
 ---
-# <a name="integrate-aspnet-core-razor-components-into-razor-pages-and-mvc-apps"></a>Integrowanie składników ASP.NET Core Razor z aplikacjami Razor Pages i MVC
+# <a name="integrate-aspnet-core-razor-components-into-razor-pages-and-mvc-apps"></a>Integracja komponentów ASP.NET Core Razor w aplikacjach Razor Pages i MVC
 
-Autorzy [Luke Latham](https://github.com/guardrex) i [Daniel Roth](https://github.com/danroth27)
+Autorstwa [Luke'a Lathama](https://github.com/guardrex) i [Daniela Rotha](https://github.com/danroth27)
 
-Składniki Razor można zintegrować z aplikacjami Razor Pages i MVC. Gdy strona lub widok jest renderowany, składniki mogą być wstępnie renderowane w tym samym czasie.
+Komponenty brzytwy można zintegrować ze żyletką Pages i aplikacjami MVC. Gdy strona lub widok jest renderowany, komponenty mogą być prerendered w tym samym czasie.
 
-## <a name="prepare-the-app-to-use-components-in-pages-and-views"></a>Przygotowywanie aplikacji do używania składników na stronach i widokach
+## <a name="prepare-the-app-to-use-components-in-pages-and-views"></a>Przygotowanie aplikacji do używania składników na stronach i w widokach
 
-Istniejąca aplikacja Razor Pages lub MVC może zintegrować składniki Razor ze stronami i widokami:
+Istniejące strony Razor lub aplikacja MVC mogą integrować składniki Razor ze stronami i widokami:
 
-1. W pliku układu aplikacji ( *_Layout. cshtml*):
+1. W pliku układu aplikacji (*_Layout.cshtml*):
 
-   * Dodaj następujący tag `<base>` do elementu `<head>`:
+   * Dodaj następujący `<base>` znacznik `<head>` do elementu:
 
      ```html
      <base href="~/" />
      ```
 
-     Wartość `href` ( *Ścieżka podstawowa aplikacji*) w poprzednim przykładzie założono, że aplikacja znajduje się w ścieżce adresu URL katalogu głównego (`/`). Jeśli aplikacja jest aplikacją podrzędną, postępuj zgodnie ze wskazówkami w sekcji *Ścieżka podstawowa aplikacji* w artykule <xref:host-and-deploy/blazor/index#app-base-path>.
+     Wartość `href` *(ścieżka podstawowa aplikacji)* w poprzednim przykładzie zakłada, że aplikacja znajduje`/`się przy ścieżce głównego adresu URL ( ). Jeśli aplikacja jest aplikacją podrzędną, postępuj zgodnie ze <xref:host-and-deploy/blazor/index#app-base-path> wskazówkami w sekcji *Ścieżka podstawowa aplikacji* w tym artykule.
 
-     Plik *_Layout. cshtml* znajduje się w folderze *Pages/shared* w aplikacji Razor Pages lub *widokach/folderze udostępnionym* w aplikacji MVC.
+     Plik *_Layout.cshtml* znajduje się w folderze *Strony/Udostępnione* w aplikacji Razor Pages lub w folderze *Widoki/Udostępnione* w aplikacji MVC.
 
-   * Dodaj tag `<script>` dla skryptu *blazor. Server. js* bezpośrednio przed tagiem zamykającym `</body>`:
+   * Dodaj `<script>` tag skryptu *blazor.server.js* bezpośrednio przed `</body>` tagiem zamykającym:
 
      ```html
      <script src="_framework/blazor.server.js"></script>
      ```
 
-     Struktura dodaje skrypt *blazor. Server. js* do aplikacji. Nie trzeba ręcznie dodawać skryptu do aplikacji.
+     Struktura dodaje *skrypt blazor.server.js* do aplikacji. Nie ma potrzeby ręcznego dodawania skryptu do aplikacji.
 
-1. Dodaj plik *_Imports. Razor* do folderu głównego projektu o następującej zawartości (Zmień ostatnią przestrzeń nazw, `MyAppNamespace`, na przestrzeń nazw aplikacji):
+1. Dodaj plik *_Imports.razor* do folderu głównego projektu z następującą zawartością (zmień `MyAppNamespace`obszar nazw, do obszaru nazw aplikacji):
 
    ```razor
    @using System.Net.Http
@@ -60,29 +60,29 @@ Istniejąca aplikacja Razor Pages lub MVC może zintegrować składniki Razor ze
    @using MyAppNamespace
    ```
 
-1. W `Startup.ConfigureServices`Zarejestruj usługę Blazor Server:
+1. W `Startup.ConfigureServices`, Blazor zarejestruj usługę Serwer:
 
    ```csharp
    services.AddServerSideBlazor();
    ```
 
-1. W `Startup.Configure`Dodaj punkt końcowy centrum Blazor do `app.UseEndpoints`:
+1. W `Startup.Configure`programie Blazor dodaj punkt `app.UseEndpoints`końcowy centrum do:
 
    ```csharp
    endpoints.MapBlazorHub();
    ```
 
-1. Integruj składniki na dowolną stronę lub widok. Aby uzyskać więcej informacji, zobacz [składniki renderowania ze strony lub widoku](#render-components-from-a-page-or-view) .
+1. Zintegruj komponenty z dowolną stroną lub widokiem. Aby uzyskać więcej informacji, zobacz [Renderuj składniki ze strony lub widoku](#render-components-from-a-page-or-view) sekcji.
 
-## <a name="use-routable-components-in-a-razor-pages-app"></a>Używanie składników rutowanych w aplikacji Razor Pages
+## <a name="use-routable-components-in-a-razor-pages-app"></a>Używanie składników routable w aplikacji Razor Pages
 
-*Ta sekcja dotyczy dodawania składników, które są bezpośrednio trasowane z żądań użytkowników.*
+*Ta sekcja dotyczy dodawania składników, które są bezpośrednio rutowalne z żądań użytkownika.*
 
-Aby obsługiwać Routing składników Razor w aplikacjach Razor Pages:
+Aby obsługiwać rutowalne składniki Razor w aplikacjach Razor Pages:
 
-1. Postępuj zgodnie ze wskazówkami zawartymi w sekcji [przygotowanie aplikacji do używania składników w stronach i widokach](#prepare-the-app-to-use-components-in-pages-and-views) .
+1. Postępuj zgodnie ze wskazówkami w [sekcji Przygotowywanie aplikacji do używania składników w](#prepare-the-app-to-use-components-in-pages-and-views) sekcji strony i widoki.
 
-1. Dodaj plik *App. Razor* do katalogu głównego projektu z następującą zawartością:
+1. Dodaj plik *App.razor* do katalogu głównego projektu z następującą zawartością:
 
    ```razor
    @using Microsoft.AspNetCore.Components.Routing
@@ -98,7 +98,7 @@ Aby obsługiwać Routing składników Razor w aplikacjach Razor Pages:
    </Router>
    ```
 
-1. Dodaj plik *_Host. cshtml* do folderu *stron* o następującej zawartości:
+1. Dodaj *plik _Host.cshtml* do folderu *Pages* z następującą zawartością:
 
    ```cshtml
    @page "/blazor"
@@ -111,9 +111,9 @@ Aby obsługiwać Routing składników Razor w aplikacjach Razor Pages:
    </app>
    ```
 
-   Składniki używają udostępnionego pliku *_Layout. cshtml* dla ich układu.
+   Składniki używają udostępnionego *pliku _Layout.cshtml* dla ich układu.
 
-1. Dodaj trasę o niskim priorytecie dla strony *_Host. cshtml* do konfiguracji punktu końcowego w `Startup.Configure`:
+1. Dodaj trasę o niskim priorytecie dla strony *_Host.cshtml* do konfiguracji punktu końcowego w : `Startup.Configure`
 
    ```csharp
    app.UseEndpoints(endpoints =>
@@ -124,7 +124,7 @@ Aby obsługiwać Routing składników Razor w aplikacjach Razor Pages:
    });
    ```
 
-1. Dodaj składniki routingu do aplikacji. Na przykład:
+1. Dodaj składniki rutowalne do aplikacji. Przykład:
 
    ```razor
    @page "/counter"
@@ -134,17 +134,17 @@ Aby obsługiwać Routing składników Razor w aplikacjach Razor Pages:
    ...
    ```
 
-   Aby uzyskać więcej informacji na temat przestrzeni nazw, zobacz sekcję [przestrzenie nazw składników](#component-namespaces) .
+   Aby uzyskać więcej informacji na temat obszarów nazw, zobacz [sekcję Obszary nazw składnika.](#component-namespaces)
 
-## <a name="use-routable-components-in-an-mvc-app"></a>Używanie składników rutowanych w aplikacji MVC
+## <a name="use-routable-components-in-an-mvc-app"></a>Używanie składników routingu w aplikacji MVC
 
-*Ta sekcja dotyczy dodawania składników, które są bezpośrednio trasowane z żądań użytkowników.*
+*Ta sekcja dotyczy dodawania składników, które są bezpośrednio rutowalne z żądań użytkownika.*
 
-Aby zapewnić obsługę routingu składników Razor w aplikacjach MVC:
+Aby obsługiwać rutowalne komponenty Razor w aplikacjach MVC:
 
-1. Postępuj zgodnie ze wskazówkami zawartymi w sekcji [przygotowanie aplikacji do używania składników w stronach i widokach](#prepare-the-app-to-use-components-in-pages-and-views) .
+1. Postępuj zgodnie ze wskazówkami w [sekcji Przygotowywanie aplikacji do używania składników w](#prepare-the-app-to-use-components-in-pages-and-views) sekcji strony i widoki.
 
-1. Dodaj plik *App. Razor* do katalogu głównego projektu z następującą zawartością:
+1. Dodaj plik *App.razor* do katalogu głównego projektu z następującą zawartością:
 
    ```razor
    @using Microsoft.AspNetCore.Components.Routing
@@ -160,7 +160,7 @@ Aby zapewnić obsługę routingu składników Razor w aplikacjach MVC:
    </Router>
    ```
 
-1. Dodaj plik *_Host. cshtml* do folderu *widoki/główne* z następującą zawartością:
+1. Dodaj plik *_Host.cshtml* do folderu *Widoki/Strona główna* z następującą zawartością:
 
    ```cshtml
    @{
@@ -172,7 +172,7 @@ Aby zapewnić obsługę routingu składników Razor w aplikacjach MVC:
    </app>
    ```
 
-   Składniki używają udostępnionego pliku *_Layout. cshtml* dla ich układu.
+   Składniki używają udostępnionego *pliku _Layout.cshtml* dla ich układu.
 
 1. Dodaj akcję do kontrolera macierzystego:
 
@@ -183,7 +183,7 @@ Aby zapewnić obsługę routingu składników Razor w aplikacjach MVC:
    }
    ```
 
-1. Dodaj trasę o niskim priorytecie dla akcji kontrolera, która zwraca widok *_Host. cshtml* do konfiguracji punktu końcowego w `Startup.Configure`:
+1. Dodaj trasę o niskim priorytecie dla akcji kontrolera, która zwraca widok `Startup.Configure` *_Host.cshtml* do konfiguracji punktu końcowego w :
 
    ```csharp
    app.UseEndpoints(endpoints =>
@@ -194,7 +194,7 @@ Aby zapewnić obsługę routingu składników Razor w aplikacjach MVC:
    });
    ```
 
-1. Utwórz folder *strony* i Dodaj składniki do obsługi routingu do aplikacji. Na przykład:
+1. Utwórz folder *Strony* i dodaj do aplikacji składniki rutowalne. Przykład:
 
    ```razor
    @page "/counter"
@@ -204,30 +204,30 @@ Aby zapewnić obsługę routingu składników Razor w aplikacjach MVC:
    ...
    ```
 
-   Aby uzyskać więcej informacji na temat przestrzeni nazw, zobacz sekcję [przestrzenie nazw składników](#component-namespaces) .
+   Aby uzyskać więcej informacji na temat obszarów nazw, zobacz [sekcję Obszary nazw składnika.](#component-namespaces)
 
 ## <a name="component-namespaces"></a>Przestrzenie nazw składników
 
-W przypadku używania folderu niestandardowego do przechowywania składników aplikacji należy dodać przestrzeń nazw reprezentującą folder do strony/widoku lub pliku *_ViewImports. cshtml* . W poniższym przykładzie:
+W przypadku przechowywania składników aplikacji przy użyciu folderu niestandardowego należy dodać obszar nazw reprezentujący folder do strony/widoku lub pliku *_ViewImports.cshtml.* W poniższym przykładzie:
 
-* Zmień `MyAppNamespace` na przestrzeń nazw aplikacji.
-* Jeśli folder o nazwie *Components* nie jest używany do przechowywania składników, należy zmienić `Components` do folderu, w którym znajdują się składniki.
+* Zmień `MyAppNamespace` obszar nazw aplikacji.
+* Jeśli folder o nazwie *Składniki* nie jest używany `Components` do przechowywania składników, zmień folder, w którym znajdują się składniki.
 
 ```cshtml
 @using MyAppNamespace.Components
 ```
 
-Plik *_ViewImports. cshtml* znajduje się w folderze *strony* aplikacji Razor Pages lub folderu *widoki* aplikacji MVC.
+Plik *_ViewImports.cshtml* znajduje się w folderze *Strony* aplikacji Razor Pages lub w folderze *Widoki* aplikacji MVC.
 
 Aby uzyskać więcej informacji, zobacz <xref:blazor/components#import-components>.
 
-## <a name="render-components-from-a-page-or-view"></a>Renderuj składniki ze strony lub widoku
+## <a name="render-components-from-a-page-or-view"></a>Renderowanie składników ze strony lub widoku
 
-*Ta sekcja dotyczy dodawania składników do stron lub widoków, w których składniki nie są bezpośrednio trasowane z żądań użytkownika.*
+*Ta sekcja dotyczy dodawania składników do stron lub widoków, gdzie składniki nie są bezpośrednio rutowalne z żądań użytkowników.*
 
-Aby renderować składnik ze strony lub widoku, użyj [pomocnika tagów składnika](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper).
+Aby renderować składnik ze strony lub widoku, użyj [pomocnika znacznika składnika](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper).
 
-Aby uzyskać więcej informacji na temat sposobu renderowania składników, stanu składnika i pomocnika tagów `Component`, zobacz następujące artykuły:
+Aby uzyskać więcej informacji na temat sposobu renderowania składników, stanu składnika i Pomocnika `Component` znaczników, zobacz następujące artykuły:
 
 * <xref:blazor/hosting-models>
 * <xref:blazor/hosting-model-configuration>

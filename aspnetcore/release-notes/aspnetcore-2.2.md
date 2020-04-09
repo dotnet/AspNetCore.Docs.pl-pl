@@ -1,122 +1,122 @@
 ---
-title: Co nowego w ASP.NET Core 2,2
+title: Co nowego w ASP.NET Core 2.2
 author: rick-anderson
-description: Dowiedz się więcej o nowych funkcjach w ASP.NET Core 2,2.
+description: Dowiedz się więcej o nowych funkcjach w ASP.NET Core 2.2.
 ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
 - SignalR
 uid: aspnetcore-2.2
-ms.openlocfilehash: 97deafd520926476f7653fc3de40d577b394734b
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 54d3f1e7b0c94d69781c052694305a389a675019
+ms.sourcegitcommit: f0aeeab6ab6e09db713bb9b7862c45f4d447771b
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78661050"
+ms.lasthandoff: 04/08/2020
+ms.locfileid: "80977174"
 ---
-# <a name="whats-new-in-aspnet-core-22"></a>Co nowego w ASP.NET Core 2,2
+# <a name="whats-new-in-aspnet-core-22"></a>Co nowego w ASP.NET Core 2.2
 
-W tym artykule przedstawiono najbardziej znaczące zmiany w ASP.NET Core 2,2 z linkami do odpowiedniej dokumentacji.
+W tym artykule przedstawiono najważniejsze zmiany w ASP.NET Core 2.2, wraz z łączami do odpowiedniej dokumentacji.
 
-## <a name="openapi-analyzers--conventions"></a>OpenAPI & analizatory
+## <a name="openapi-analyzers--conventions"></a>Analizatory OpenAPI & konwencje
 
-OpenAPI (wcześniej znany jako Swagger) to specyfikacja języka niezależny od do opisywania interfejsów API REST. Ekosystem OpenAPI zawiera narzędzia, które umożliwiają odnajdywanie, testowanie i tworzenie kodu klienta przy użyciu specyfikacji. Obsługa generowania i wizualizacji dokumentów OpenAPI w ASP.NET Core MVC jest zapewniana za pośrednictwem projektów opartych na społeczności, takich jak [NSwag](https://github.com/RicoSuter/NSwag) i [Swashbuckle. AspNetCore](https://github.com/domaindrivendev/Swashbuckle.AspNetCore). ASP.NET Core 2,2 oferuje udoskonalone narzędzia i środowisko uruchomieniowe do tworzenia dokumentów OpenAPI.
+OpenAPI (dawniej znany jako Swagger) jest specyfikacją niezależną od języka do opisywania interfejsów API REST. Ekosystem OpenAPI zawiera narzędzia, które umożliwiają odnajdowanie, testowanie i tworzenie kodu klienta przy użyciu specyfikacji. Obsługa generowania i wizualizacji dokumentów OpenAPI w ASP.NET Core MVC jest świadczona za pośrednictwem projektów opartych na społeczności, takich jak [NSwag](https://github.com/RicoSuter/NSwag) i [Swashbuckle.AspNetCore](https://github.com/domaindrivendev/Swashbuckle.AspNetCore). ASP.NET Core 2.2 zapewnia ulepszone narzędzia i środowisko uruchomieniowe do tworzenia dokumentów OpenAPI.
 
 Więcej informacji zawierają następujące zasoby:
 
 * <xref:web-api/advanced/analyzers>
 * <xref:web-api/advanced/conventions>
-* [ASP.NET Core 2.2.0-zestawu: OpenAPI analizatory &](https://blogs.msdn.microsoft.com/webdev/2018/08/23/asp-net-core-2-20-preview1-open-api-analyzers-conventions/)
+* [ASP.NET Core 2.2.0-preview1: Analizatory OpenAPI & konwencje](https://blogs.msdn.microsoft.com/webdev/2018/08/23/asp-net-core-2-20-preview1-open-api-analyzers-conventions/)
 
-## <a name="problem-details-support"></a>Pomoc techniczna dotycząca problemów
+## <a name="problem-details-support"></a>Obsługa szczegółów problemu
 
-ASP.NET Core 2,1 wprowadzono `ProblemDetails`na podstawie specyfikacji [RFC 7807](https://tools.ietf.org/html/rfc7807) w celu przeprowadzenia szczegółów błędu z odpowiedzi HTTP. W 2,2 `ProblemDetails` jest standardową odpowiedzią dla kodów błędów klienta w kontrolerach z atrybutem `ApiControllerAttribute`. `IActionResult` zwracająca kod stanu błędu klienta (4xx) teraz zwraca treść `ProblemDetails`. Wynik zawiera również identyfikator korelacji, który może służyć do skorelowania błędów przy użyciu dzienników żądań. W przypadku błędów klienta `ProducesResponseType` domyślne użycie `ProblemDetails` jako typu odpowiedzi. Jest to udokumentowane w danych wyjściowych OpenAPI/Swagger wygenerowanych przy użyciu NSwag lub Swashbuckle. AspNetCore.
+ASP.NET wprowadzono `ProblemDetails`Core 2.1, opartą na specyfikacji [RFC 7807](https://tools.ietf.org/html/rfc7807) do przenoszenia szczegółów błędu z odpowiedzią HTTP. W 2.2, `ProblemDetails` jest standardową odpowiedzią dla kodów błędów klienta w kontrolerach przypisanych z `ApiControllerAttribute`. Zwracany `IActionResult` kod stanu błędu klienta (4xx) `ProblemDetails` zwraca teraz treść. Wynik zawiera również identyfikator korelacji, który może służyć do skorelowania błędu przy użyciu dzienników żądań. W przypadku błędów klienta `ProducesResponseType` `ProblemDetails` domyślnie używa się jako typu odpowiedzi. Jest to udokumentowane w openapi / swagger danych wyjściowych generowanych przy użyciu NSwag lub Swashbuckle.AspNetCore.
 
-## <a name="endpoint-routing"></a>Routing punktów końcowych
+## <a name="endpoint-routing"></a>Routing punktu końcowego
 
-ASP.NET Core 2,2 używa nowego systemu *routingu punktu końcowego* do ulepszonego wysyłania żądań. Zmiany obejmują nowe elementy członkowskie interfejsu API generacji linków i transformatory parametrów trasy.
+ASP.NET Core 2.2 używa nowego systemu *routingu punktów końcowych* do poprawy wysyłania żądań. Zmiany obejmują nowe elementy członkowskie interfejsu API generowania łączy i transformatory parametrów trasy.
 
 Więcej informacji zawierają następujące zasoby:
 
-* [Routing punktów końcowych w 2,2](https://blogs.msdn.microsoft.com/webdev/2018/08/27/asp-net-core-2-2-0-preview1-endpoint-routing/)
-* [Transformatory parametrów trasy](https://www.hanselman.com/blog/ASPNETCore22ParameterTransformersForCleanURLGenerationAndSlugsInRazorPagesOrMVC.aspx) (zobacz sekcję **routingu** )
-* [Różnice między IRouter i routingu opartego na punktach końcowych](xref:fundamentals/routing?view=aspnetcore-2.2#differences-from-earlier-versions-of-routing)
+* [Routing punktu końcowego w 2.2](https://blogs.msdn.microsoft.com/webdev/2018/08/27/asp-net-core-2-2-0-preview1-endpoint-routing/)
+* [Transformatory parametrów trasy](https://www.hanselman.com/blog/ASPNETCore22ParameterTransformersForCleanURLGenerationAndSlugsInRazorPagesOrMVC.aspx) (patrz sekcja **Routing)**
+* [Różnice między routingu IRouter- i oparte na punkcie końcowym](xref:fundamentals/routing?view=aspnetcore-2.2#differences-from-earlier-versions-of-routing)
 
 ## <a name="health-checks"></a>Kontrole kondycji
 
-Nowa usługa kontroli kondycji ułatwia korzystanie z ASP.NET Core w środowiskach wymagających kontroli kondycji, takich jak Kubernetes. Kontrole kondycji obejmują oprogramowanie pośredniczące i zestaw bibliotek, które definiują `IHealthCheck` abstrakcję i usługę.
+Nowa usługa kontroli kondycji ułatwia korzystanie z ASP.NET Core w środowiskach, które wymagają kontroli kondycji, takich jak Kubernetes. Kontrole kondycji obejmują oprogramowanie pośredniczące i `IHealthCheck` zestaw bibliotek definiujących abstrakcję i usługę.
 
-Kontrole kondycji są używane przez koordynatora kontenerów lub moduł równoważenia obciążenia, aby szybko określić, czy system odpowiada na żądania normalnie. Koordynator kontenera może odpowiedzieć na niepowodzenie sprawdzania kondycji przez zatrzymanie wdrożenia stopniowego lub ponowne uruchomienie kontenera. Moduł równoważenia obciążenia może odpowiedzieć na kontrolę kondycji przez kierowanie ruchu z nieprawidłowego wystąpienia usługi.
+Kontrole kondycji są używane przez koordynatora kontenera lub moduł równoważenia obciążenia, aby szybko określić, czy system odpowiada na żądania normalnie. Koordynator kontenera może odpowiedzieć na sprawdzanie kondycji, zatrzymując wdrożenie stopniowe lub ponowne uruchomienie kontenera. Moduł równoważenia obciążenia może odpowiedzieć na sprawdzenie kondycji, kierując ruch z dala od nieudanego wystąpienia usługi.
 
-Kontrole kondycji są udostępniane przez aplikację jako punkt końcowy HTTP używany przez systemy monitorowania. Kontrole kondycji można skonfigurować dla różnych scenariuszy monitorowania w czasie rzeczywistym i systemów monitorowania. Usługa sprawdzania kondycji integruje się z [projektem BeatPulse](https://github.com/Xabaril/BeatPulse). ułatwia to dodawanie czeków dla dziesiątek popularnych systemów i zależności.
+Kontrole kondycji są udostępniane przez aplikację jako punkt końcowy HTTP używany przez systemy monitorowania. Kontrole kondycji można skonfigurować dla różnych scenariuszy monitorowania w czasie rzeczywistym i systemów monitorowania. Służba kontroli zdrowia integruje się z [projektem BeatPulse.](https://github.com/Xabaril/BeatPulse) co ułatwia dodawanie kontroli dla dziesiątek popularnych systemów i zależności.
 
-Aby uzyskać więcej informacji, zobacz [kontrole kondycji w ASP.NET Core](xref:host-and-deploy/health-checks).
+Aby uzyskać więcej informacji, zobacz [Kontrole kondycji w ASP.NET Core](xref:host-and-deploy/health-checks).
 
-## <a name="http2-in-kestrel"></a>HTTP/2 w Kestrel
+## <a name="http2-in-kestrel"></a>HTTP/2 w Pustułce
 
-ASP.NET Core 2,2 dodaje obsługę protokołu HTTP/2.
+ASP.NET Core 2.2 dodaje obsługę protokołu HTTP/2.
 
-HTTP/2 to główna wersja protokołu HTTP. Istotne funkcje protokołu HTTP/2 obejmują:
+HTTP/2 jest główną wersją protokołu HTTP. Godne uwagi funkcje HTTP/2 obejmują:
 
 * Obsługa kompresji nagłówka.
-* W pełni multipleksne strumienie za pośrednictwem jednego połączenia.
+* W pełni multipleksowane strumienie za pośrednictwem jednego połączenia.
 
-Chociaż protokół HTTP/2 zachowuje semantykę protokołu HTTP (na przykład nagłówki HTTP i metody), jest to istotna zmiana z protokołu HTTP/1. x na temat tego, jak dane są frameowe i wysyłane między klientem a serwerem.
+Podczas gdy protokół HTTP/2 zachowuje semantykę HTTP (na przykład nagłówki i metody HTTP), jest to przełomowa zmiana z protokołu HTTP/1.x na temat sposobu oprawiania i wysyłania danych między klientem a serwerem.
 
-W związku z tą zmianą w ramkach serwery i klienci muszą negocjować używaną wersję protokołu. Negocjowanie protokołu warstwy aplikacji (CLIENTHELLO ALPN) to rozszerzenie TLS, które umożliwia serwerowi i klientowi negocjowanie wersji protokołu używanej w ramach uzgadniania TLS. Chociaż istnieje możliwość uzyskania wcześniejszej wiedzy między serwerem a klientem programu, wszystkie główne przeglądarki obsługują CLIENTHELLO ALPN jako jedyny sposób nawiązywania połączenia HTTP/2.
+W konsekwencji tej zmiany w kadrowaniu serwery i klienci muszą negocjować używaną wersję protokołu. Negocjacja protokołu warstwy aplikacji (ALPN) to rozszerzenie TLS, które umożliwia serwerowi i klientowi negocjowanie wersji protokołu używanej jako część uzgadniania TLS. Chociaż istnieje możliwość wcześniejszej wiedzy między serwerem a klientem na temat protokołu, wszystkie główne przeglądarki obsługują ALPN jako jedyny sposób na nawiązania połączenia HTTP/2.
 
-Aby uzyskać więcej informacji, zobacz [Obsługa protokołu HTTP/2](xref:fundamentals/servers/index?view=aspnetcore-2.2#http2-support).
+Aby uzyskać więcej informacji, zobacz [http/2 support](xref:fundamentals/servers/index?view=aspnetcore-2.2#http2-support).
 
-## <a name="kestrel-configuration"></a>Konfiguracja Kestrel
+## <a name="kestrel-configuration"></a>Konfiguracja pustułki
 
-We wcześniejszych wersjach ASP.NET Core opcje Kestrel są konfigurowane przez wywołanie `UseKestrel`. W 2,2 opcje Kestrel są konfigurowane przez wywołanie `ConfigureKestrel` w konstruktorze hosta. Ta zmiana rozwiązuje problem z kolejnością rejestracji `IServer` na potrzeby hostingu w procesie. Więcej informacji zawierają następujące zasoby:
+We wcześniejszych wersjach ASP.NET Core opcje Kestrel są `UseKestrel`konfigurowane przez wywołanie . W 2.2 opcje Kestrel są `ConfigureKestrel` konfigurowane przez wywołanie konstruktora hosta. Ta zmiana rozwiązuje problem z `IServer` kolejnością rejestracji dla hostingu w trakcie. Więcej informacji zawierają następujące zasoby:
 
-* [Eliminowanie konfliktu Iisurl](https://github.com/aspnet/KestrelHttpServer/issues/2760)
-* [Konfigurowanie opcji serwera Kestrel za pomocą ConfigureKestrel](xref:fundamentals/servers/kestrel?view=aspnetcore-2.2#how-to-use-kestrel-in-aspnet-core-apps)
+* [Ograniczanie konfliktów UseIIS](https://github.com/aspnet/KestrelHttpServer/issues/2760)
+* [Konfigurowanie opcji serwera Pustułka za pomocą narzędzia Konfiguruj atrybut](xref:fundamentals/servers/kestrel?view=aspnetcore-2.2#how-to-use-kestrel-in-aspnet-core-apps)
 
-## <a name="iis-in-process-hosting"></a>Hosting w procesie usług IIS
+## <a name="iis-in-process-hosting"></a>Hosting w trakcie usługi IIS
 
-W starszych wersjach ASP.NET Core usługi IIS pełnią funkcję zwrotnego serwera proxy. W 2,2 moduł ASP.NET Core może wykonać rozruch CoreCLR i hostowanie aplikacji w procesie roboczym usług IIS (*w3wp. exe*). Hosting w procesie zapewnia wydajność i zyski z diagnostyki podczas pracy z usługami IIS.
+We wcześniejszych wersjach ASP.NET Core usługi IIS służą jako odwrotny serwer proxy. W 2.2 moduł ASP.NET Core może uruchomić CoreCLR i hostować aplikację wewnątrz procesu roboczego IIS (*w3wp.exe*). Hosting w trakcie zapewnia korzyści wydajności i diagnostyki podczas uruchamiania z usługi IIS.
 
-Aby uzyskać więcej informacji, zobacz [hosting w procesie dla usług IIS](xref:host-and-deploy/aspnet-core-module?view=aspnetcore-2.2#in-process-hosting-model).
+Aby uzyskać więcej informacji, zobacz [hosting w trakcie usługi IIS](xref:host-and-deploy/aspnet-core-module?view=aspnetcore-2.2#in-process-hosting-model).
 
-## <a name="opno-locsignalr-java-client"></a>Klient Java SignalR
+## <a name="opno-locsignalr-java-client"></a>SignalRKlient Java
 
-ASP.NET Core 2,2 wprowadza klienta Java dla SignalR. Ten klient obsługuje łączenie z serwerem ASP.NET Core SignalR z poziomu kodu Java, w tym aplikacji dla systemu Android.
+ASP.NET Core 2.2 wprowadza klienta Java SignalRdla . Ten klient obsługuje łączenie się z SignalR ASP.NET Core Server z kodu Java, w tym aplikacji na Androida.
 
-Aby uzyskać więcej informacji, zobacz [ASP.NET Core SignalR klienta Java](https://docs.microsoft.com/aspnet/core/signalr/java-client?view=aspnetcore-2.2).
+Aby uzyskać więcej informacji, zobacz [ASP.NET Core SignalR Java client](https://docs.microsoft.com/aspnet/core/signalr/java-client?view=aspnetcore-2.2).
 
-## <a name="cors-improvements"></a>Ulepszenia funkcji CORS
+## <a name="cors-improvements"></a>Ulepszenia CORS
 
-We wcześniejszych wersjach ASP.NET Core oprogramowanie do obsługi mechanizmu CORS umożliwia wysyłanie nagłówków `Accept`, `Accept-Language`, `Content-Language`i `Origin` niezależnie od wartości skonfigurowanych w `CorsPolicy.Headers`. W przypadku 2,2 dopasowanie zasad oprogramowania do mechanizmu CORS jest możliwe tylko wtedy, gdy nagłówki wysyłane w `Access-Control-Request-Headers` dokładnie pasują do nagłówków określonych w `WithHeaders`.
+We wcześniejszych wersjach ASP.NET Core oprogramowanie pośredniczące `Accept-Language` `Content-Language`CORS `Origin` umożliwia `Accept`przesyłanie nagłówków i nagłówków `CorsPolicy.Headers`niezależnie od wartości skonfigurowanych w pliku . W 2.2 dopasowanie zasad oprogramowania pośredniczącego CORS jest `Access-Control-Request-Headers` możliwe tylko wtedy, `WithHeaders`gdy nagłówki wysyłane dokładnie odpowiadają nagłówkom podanym w .
 
 Aby uzyskać więcej informacji, zobacz [oprogramowanie pośredniczące CORS](xref:security/cors?view=aspnetcore-2.2#set-the-allowed-request-headers).
 
 ## <a name="response-compression"></a>Kompresja odpowiedzi
 
-ASP.NET Core 2,2 może kompresować odpowiedzi przy użyciu [formatu kompresji Brotli](https://tools.ietf.org/html/rfc7932).
+ASP.NET Core 2.2 może kompresować odpowiedzi za pomocą [formatu kompresji Brotli.](https://tools.ietf.org/html/rfc7932)
 
-Aby uzyskać więcej informacji, zobacz Kompresja [oprogramowania pośredniczącego obsługuje kompresję Brotli](xref:performance/response-compression?view=aspnetcore-2.2#brotli-compression-provider).
+Aby uzyskać więcej informacji, zobacz [Oprogramowanie pośredniczące kompresji odpowiedzi obsługuje kompresję Brotli](xref:performance/response-compression?view=aspnetcore-2.2#brotli-compression-provider).
 
 ## <a name="project-templates"></a>Szablony projektów
 
-Szablony projektu sieci Web ASP.NET Core zostały zaktualizowane do [Bootstrap 4](https://getbootstrap.com/docs/4.1/migration/) i [kątowe 6](https://blog.angular.io/version-6-of-angular-now-available-cc56b0efa7a4). Nowy wygląd jest wizualnie prostszy i ułatwia wyświetlanie ważnych struktur aplikacji.
+ASP.NET Core szablony projektów internetowych zostały zaktualizowane do [Bootstrap 4](https://getbootstrap.com/docs/4.1/migration/) i [Angular 6](https://blog.angular.io/version-6-of-angular-now-available-cc56b0efa7a4). Nowy wygląd jest wizualnie prostszy i ułatwia zobaczenie ważnych struktur aplikacji.
 
-![Strona główna lub indeks](~/tutorials/razor-pages/razor-pages-start/_static/home2.2.png)
+![Strona główna lub Indeks](~/tutorials/razor-pages/razor-pages-start/_static/home2.2.png)
 
-## <a name="validation-performance"></a>Wydajność walidacji
+## <a name="validation-performance"></a>Wydajność sprawdzania poprawności
 
-System sprawdzania poprawności MVC został zaprojektowany do rozszerzalności i elastyczności, co pozwala na określenie na podstawie żądania, którego moduł sprawdzania poprawności ma zastosowanie do danego modelu. Jest to doskonałe rozwiązanie w przypadku tworzenia złożonych dostawców weryfikacji. Jednak w najbardziej typowym przypadku aplikacja używa tylko wbudowanych modułów sprawdzania poprawności i nie wymaga tej dodatkowej elastyczności. Wbudowane moduły sprawdzania poprawności obejmują adnotacje, takie jak [Required] i [StringLength] i `IValidatableObject`.
+System sprawdzania poprawności MVC jest zaprojektowany tak, aby był rozszerzalny i elastyczny, co pozwala określić na podstawie żądania, które walidatory mają zastosowanie do danego modelu. Jest to idealne rozwiązanie dla autorów złożonych dostawców sprawdzania poprawności. Jednak w najczęstszym przypadku aplikacja używa tylko wbudowanych modułów sprawdzania poprawności i nie wymagają tej dodatkowej elastyczności. Wbudowane walidatory zawierają adnotacje danych, takie jak [Wymagane] `IValidatableObject`i [StringLength] oraz .
 
-W ASP.NET Core 2,2, MVC może skrócić do krótkiego obwodu, jeśli określa, że dany wykres modelu nie wymaga weryfikacji. Pomijanie sprawdzania poprawności skutkuje znaczącymi ulepszeniami podczas weryfikowania modeli, które nie mogą lub nie mają żadnych modułów walidacji. Obejmuje to takie obiekty jak kolekcje pierwotne (takie jak `byte[]`, `string[]`, `Dictionary<string, string>`) lub złożone wykresy obiektów bez wielu modułów sprawdzania poprawności.
+W ASP.NET Core 2.2 MVC może zwarcie sprawdzania poprawności, jeśli określa, że wykres danego modelu nie wymaga sprawdzania poprawności. Pomijanie sprawdzania poprawności powoduje znaczne ulepszenia podczas sprawdzania poprawności modeli, które nie mogą lub nie mają żadnych modułów sprawdzania poprawności. Obejmuje to obiekty, takie jak kolekcje pierwotnych `string[]` `Dictionary<string, string>`(takich jak `byte[]`, , ), lub złożone wykresy obiektów bez wielu modułów sprawdzania poprawności.
 
 ## <a name="http-client-performance"></a>Wydajność klienta HTTP
 
-W ASP.NET Core 2,2 wydajność `SocketsHttpHandler` została ulepszona przez zmniejszenie rywalizacji o blokowanie puli połączeń. W przypadku aplikacji, które tworzą wiele wychodzących żądań HTTP, takich jak architektury mikrousług, zwiększa się przepływność. W obszarze obciążenie `HttpClient` przepływność można ulepszyć o 60% w systemie Linux i 20% systemu Windows.
+W ASP.NET Core 2.2 wydajność `SocketsHttpHandler` została zwiększona poprzez zmniejszenie rywalizacji blokowania puli połączeń. W przypadku aplikacji, które tworzą wiele wychodzących żądań HTTP, takich jak niektóre architektury mikrousług, przepustowość jest lepsza. Pod obciążeniem `HttpClient` przepustowość można poprawić nawet o 60% w systemie Linux i o 20% w systemie Windows.
 
-Aby uzyskać więcej informacji, zobacz [żądanie ściągnięcia, które dokonało tego ulepszenia](https://github.com/dotnet/corefx/pull/32568).
+Aby uzyskać więcej informacji, zobacz [żądanie ściągnięcia, które dokonało tej poprawy](https://github.com/dotnet/corefx/pull/32568).
 
 ## <a name="additional-information"></a>Dodatkowe informacje
 
-Aby uzyskać pełną listę zmian, zapoznaj się z [informacjami o wersji ASP.NET Core 2,2](https://github.com/dotnet/aspnetcore/releases/tag/2.2.0).
+Aby uzyskać pełną listę zmian, zobacz [ASP.NET Informacje o wersji Core 2.2](https://github.com/dotnet/aspnetcore/releases/tag/2.2.0).

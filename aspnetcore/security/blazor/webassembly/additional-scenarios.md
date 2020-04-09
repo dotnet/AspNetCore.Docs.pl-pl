@@ -1,60 +1,99 @@
 ---
-title: Dodatkowe scenariusze zabezpieczeń ASP.NET Core Blazor webassembly
+title: ASP.NET podstawowe Blazor scenariusze zabezpieczeń WebAssembly
 author: guardrex
 description: ''
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/19/2020
+ms.date: 03/30/2020
 no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/additional-scenarios
-ms.openlocfilehash: ccb512392341e3eea33f4ab45740b7900f7b63f9
-ms.sourcegitcommit: 9b6e7f421c243963d5e419bdcfc5c4bde71499aa
+ms.openlocfilehash: 516132379ae20bd31c0f3b3261bb09b3f5b218f2
+ms.sourcegitcommit: 1d8f1396ccc66a0c3fcb5e5f36ea29b50db6d92a
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/21/2020
-ms.locfileid: "79989453"
+ms.lasthandoff: 04/01/2020
+ms.locfileid: "80501128"
 ---
-# <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a>Dodatkowe scenariusze zabezpieczeń ASP.NET Core Blazor webassembly
+# <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor WebAssembly dodatkowe scenariusze zabezpieczeń
 
-Autor [Javier Calvarro Nelson](https://github.com/javiercn)
+Przez [Javier Calvarro Nelson](https://github.com/javiercn)
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 [!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
 
-## <a name="handle-token-request-errors"></a>Obsługa błędów żądania tokenu
+## <a name="request-additional-access-tokens"></a>Żądanie dodatkowych tokenów dostępu
 
-Gdy aplikacja jednostronicowa uwierzytelnia użytkownika przy użyciu funkcji Open ID Connect (OIDC), stan uwierzytelniania jest obsługiwany lokalnie w ramach SPA i w postaci pliku cookie sesji, który jest ustawiany w wyniku użytkownika dostarczającego ich uwierzytelniające.
+Większość aplikacji wymaga tylko tokenu dostępu do interakcji z chronionymi zasobami, których używają. W niektórych scenariuszach aplikacja może wymagać więcej niż jednego tokenu w celu interakcji z dwoma lub więcej zasobów.
 
-Tokeny, które są emitowane przez protokół IP dla użytkownika zwykle są ważne przez krótki okresy czasu, na ogół o godzinę, więc aplikacja kliencka musi regularnie pobierać nowe tokeny. W przeciwnym razie użytkownik zostanie wylogowany po wygaśnięciu przyznanych tokenów. W większości przypadków klienci OIDC mogą udostępniać nowe tokeny, nie wymagając ponownego uwierzytelnienia użytkownika w ramach stanu uwierzytelniania lub "sesji", który jest przechowywany w ramach adresu IP.
+W poniższym przykładzie dodatkowe zakresy interfejsu API programu Microsoft Graph usługi Azure Active Directory (AAD) są wymagane przez aplikację do odczytywania danych użytkownika i wysyłania poczty. Po dodaniu uprawnień interfejsu API programu Microsoft Graph w portalu usługi Azure AAD dodatkowe zakresy są konfigurowane w aplikacji klienta (`Program.Main`, *Program.cs*):
 
-Istnieją sytuacje, w których klient nie może uzyskać tokenu bez interakcji użytkownika, na przykład gdy z jakiegoś powodu użytkownik jawnie wylogowuje się z adresu IP. Ten scenariusz występuje, gdy użytkownik odwiedza `https://login.microsoftonline.com` i wylogowuje się. W tych scenariuszach aplikacja nie wie od razu, że użytkownik wyloguje się. Każdy token przechowywany przez klienta może już nie być prawidłowy. Ponadto klient nie może zainicjować obsługi nowego tokenu bez interakcji użytkownika po wygaśnięciu bieżącego tokenu.
+```csharp
+builder.Services.AddMsalAuthentication(options =>
+{
+    ...
 
-Te scenariusze nie są specyficzne dla uwierzytelniania opartego na tokenach. Są one częścią charakteru aplikacji jednostronicowych. SPA używający plików cookie również nie może wywołać interfejsu API serwera, jeśli plik cookie uwierzytelniania zostanie usunięty.
+    options.ProviderOptions.AdditionalScopesToConsent.Add(
+        "https://graph.microsoft.com/Mail.Send");
+    options.ProviderOptions.AdditionalScopesToConsent.Add(
+        "https://graph.microsoft.com/User.Read");
+}
+```
 
-Gdy aplikacja wykonuje wywołania interfejsu API do chronionych zasobów, należy pamiętać o następujących kwestiach:
+Metoda `IAccessTokenProvider.RequestToken` zapewnia przeciążenie, które umożliwia aplikacji aprowizować token z danym zestawem zakresów, jak pokazano w poniższym przykładzie:
 
-* Aby zainicjować obsługę nowego tokenu dostępu w celu wywołania interfejsu API, może być konieczne ponowne uwierzytelnienie użytkownika.
-* Nawet jeśli klient ma token, który wydaje się być prawidłowy, wywołanie do serwera może się nie powieść, ponieważ token został odwołany przez użytkownika.
+```csharp
+var tokenResult = await AuthenticationService.RequestAccessToken(
+    new AccessTokenRequestOptions
+    {
+        Scopes = new[] { "https://graph.microsoft.com/Mail.Send", 
+            "https://graph.microsoft.com/User.Read" }
+    });
+
+if (tokenResult.TryGetToken(out var token))
+{
+    ...
+}
+```
+
+`TryGetToken`Zwraca:
+
+* `true`z `token` do użytku.
+* `false`jeśli token nie jest pobierany.
+
+## <a name="handle-token-request-errors"></a>Obsługa błędów żądań tokenu
+
+Gdy aplikacja jednostronicowa (SPA) uwierzytelnia użytkownika przy użyciu open id connect (OIDC), stan uwierzytelniania jest obsługiwany lokalnie w spa i w dostawcy tożsamości (IP) w postaci pliku cookie sesji, który jest ustawiany w wyniku podania przez użytkownika swoich poświadczeń.
+
+Tokeny, które adres IP emituje dla użytkownika zazwyczaj są ważne przez krótki okres czasu, około jednej godziny normalnie, więc aplikacja kliencka musi regularnie pobierać nowe tokeny. W przeciwnym razie użytkownik zostanie wylogowany po wygaśnięciu przyznanych tokenów. W większości przypadków klienci OIDC są w stanie aprowizować nowe tokeny bez konieczności ponownego uwierzytelniania użytkownika za pomocą stanu uwierzytelniania lub "sesji", która jest przechowywana w adresie IP.
+
+Istnieją przypadki, w których klient nie może uzyskać tokenu bez interakcji z użytkownikiem, na przykład, gdy z jakiegoś powodu użytkownik jawnie wylogowuje się z adresu IP. Ten scenariusz występuje, `https://login.microsoftonline.com` jeśli użytkownik odwiedza i wylogowuje. W tych scenariuszach aplikacja nie wie od razu, że użytkownik wylogował się. Każdy token, który przechowuje klient może nie być już prawidłowy. Ponadto klient nie jest w stanie aprowizować nowego tokenu bez interakcji z użytkownikiem po wygaśnięciu bieżącego tokenu.
+
+Te scenariusze nie są specyficzne dla uwierzytelniania opartego na tokenie. Są one częścią charakteru OSO. Spa przy użyciu plików cookie również nie można wywołać interfejsu API serwera, jeśli plik cookie uwierzytelniania jest usuwany.
+
+Gdy aplikacja wykonuje wywołania interfejsu API do chronionych zasobów, należy pamiętać o następujących czynnościach:
+
+* Aby aprowizować nowy token dostępu do wywołania interfejsu API, użytkownik może być zobowiązany do ponownego uwierzytelnienia.
+* Nawet jeśli klient ma token, który wydaje się być prawidłowy, wywołanie serwera może zakończyć się niepowodzeniem, ponieważ token został odwołany przez użytkownika.
 
 Gdy aplikacja żąda tokenu, istnieją dwa możliwe wyniki:
 
-* Żądanie powiodło się, a aplikacja ma prawidłowy token.
-* Żądanie nie powiedzie się, a aplikacja musi ponownie uwierzytelnić użytkownika w celu uzyskania nowego tokenu.
+* Żądanie zakończy się pomyślnie, a aplikacja ma prawidłowy token.
+* Żądanie kończy się niepowodzeniem, a aplikacja musi ponownie uwierzytelnić użytkownika, aby uzyskać nowy token.
 
-Gdy żądanie tokenu nie powiedzie się, należy zdecydować, czy chcesz zapisać dowolny bieżący stan przed przeprowadzeniem przekierowania. Istnieją różne podejścia z rosnącymi poziomami złożoności:
+Gdy żądanie tokenu nie powiedzie się, należy zdecydować, czy chcesz zapisać dowolny bieżący stan przed wykonaniem przekierowania. Istnieje kilka podejść z rosnącym poziomem złożoności:
 
-* Przechowuj bieżący stan strony w magazynie sesji. Podczas `OnInitializeAsync`Sprawdź, czy stan można przywrócić przed kontynuowaniem.
-* Dodaj parametr ciągu zapytania i użyj go jako sposobu sygnalizowania aplikacji, którą potrzebuje do ponownego zapisu wcześniej zapisanego stanu.
-* Dodaj parametr ciągu zapytania z unikatowym identyfikatorem w celu przechowywania danych w magazynie sesji bez ryzyka kolizji z innymi elementami.
+* Przechowuj bieżący stan strony w magazynie sesji. Podczas `OnInitializeAsync`, sprawdź, czy stan można przywrócić przed kontynuowaniem.
+* Dodaj parametr ciągu zapytania i użyj go jako sposobu sygnalizowania aplikacji, że musi ponownie nawodnić wcześniej zapisany stan.
+* Dodaj parametr ciągu zapytania z unikatowym identyfikatorem do przechowywania danych w magazynie sesji bez ryzyka kolizji z innymi elementami.
 
-W poniższym przykładzie przedstawiono sposób:
+W poniższym przykładzie pokazano, jak:
 
 * Zachowaj stan przed przekierowaniem do strony logowania.
-* Odzyskaj poprzedni stan, a następnie Uwierzytelnij przy użyciu parametru ciągu zapytania.
+* Odzyskaj poprzedni stan po uwierzytelnieniu przy użyciu parametru ciągu zapytania.
 
 ```razor
 <EditForm Model="User" @onsubmit="OnSaveAsync">
@@ -115,11 +154,11 @@ W poniższym przykładzie przedstawiono sposób:
 }
 ```
 
-## <a name="save-app-state-before-an-authentication-operation"></a>Zapisz stan aplikacji przed operacją uwierzytelniania
+## <a name="save-app-state-before-an-authentication-operation"></a>Zapisywanie stanu aplikacji przed operacją uwierzytelniania
 
-Podczas operacji uwierzytelniania istnieją przypadki, w których chcesz zapisać stan aplikacji przed przekierowaniem przeglądarki do adresu IP. Taka sytuacja może wystąpić w przypadku korzystania z takiego elementu jak kontenera stanu i przywrócenia stanu po pomyślnym uwierzytelnieniu. Możesz użyć niestandardowego obiektu stanu uwierzytelniania, aby zachować stan specyficzny dla aplikacji lub odwołanie do niego, a następnie przywrócić ten stan po pomyślnym ukończeniu operacji uwierzytelniania.
+Podczas operacji uwierzytelniania istnieją przypadki, w których chcesz zapisać stan aplikacji, zanim przeglądarka zostanie przekierowana do adresu IP. Może to być w przypadku, gdy używasz coś takiego jak kontener stanu i chcesz przywrócić stan po pomyślnym uwierzytelnieniu. Niestandardowego obiektu stanu uwierzytelniania można użyć, aby zachować stan specyficzny dla aplikacji lub odwołanie do niego i przywrócić ten stan po pomyślnym zakończeniu operacji uwierzytelniania.
 
-składnik `Authentication` (*strony/uwierzytelnianie. Razor*):
+`Authentication`składnik *(Pages/Authentication.brzytwa):*
 
 ```razor
 @page "/authentication/{action}"
@@ -163,40 +202,27 @@ składnik `Authentication` (*strony/uwierzytelnianie. Razor*):
 }
 ```
 
-## <a name="request-additional-access-tokens"></a>Żądaj dodatkowych tokenów dostępu
-
-Większość aplikacji wymaga tylko tokenu dostępu, aby móc korzystać z chronionych zasobów, z których korzystają. W niektórych scenariuszach aplikacja może wymagać więcej niż jednego tokenu, aby można było korzystać z dwóch lub więcej zasobów. Metoda `IAccessTokenProvider.RequestToken` zapewnia Przeciążenie, które umożliwia aplikacji Inicjowanie obsługi tokenu z danym zestawem zakresów, jak pokazano w następującym przykładzie:
-
-```csharp
-var tokenResult = await AuthenticationService.RequestAccessToken(
-    new AccessTokenRequestOptions
-    {
-        Scopes = new[] { "https://graph.microsoft.com/Mail.Send", 
-            "https://graph.microsoft.com/User.Read" }
-    });
-```
-
 ## <a name="customize-app-routes"></a>Dostosowywanie tras aplikacji
 
-Domyślnie Biblioteka `Microsoft.AspNetCore.Components.WebAssembly.Authentication` używa tras przedstawionych w poniższej tabeli w celu reprezentowania różnych stanów uwierzytelniania.
+Domyślnie biblioteka `Microsoft.AspNetCore.Components.WebAssembly.Authentication` używa tras wyświetlanych w poniższej tabeli do reprezentowania różnych stanów uwierzytelniania.
 
 | Trasa                            | Przeznaczenie |
 | -------------------------------- | ------- |
 | `authentication/login`           | Wyzwala operację logowania. |
-| `authentication/login-callback`  | Obsługuje wynik operacji logowania. |
-| `authentication/login-failed`    | Wyświetla komunikaty o błędach, gdy operacja logowania zakończy się niepowodzeniem z jakiegoś powodu. |
-| `authentication/logout`          | Wyzwala operację wylogowania. |
-| `authentication/logout-callback` | Obsługuje wynik operacji wylogowania. |
-| `authentication/logout-failed`   | Wyświetla komunikaty o błędach, gdy operacja wylogowania nie powiedzie się z jakiegoś powodu. |
-| `authentication/logged-out`      | Wskazuje, że użytkownik pomyślnie wylogować się. |
-| `authentication/profile`         | Wyzwala operację edytowania profilu użytkownika. |
-| `authentication/register`        | Wyzwala operację w celu zarejestrowania nowego użytkownika. |
+| `authentication/login-callback`  | Obsługuje wynik każdej operacji logowania. |
+| `authentication/login-failed`    | Wyświetla komunikaty o błędach, gdy operacja logowania nie powiedzie się z jakiegoś powodu. |
+| `authentication/logout`          | Wyzwala operację wylogowywania. |
+| `authentication/logout-callback` | Obsługuje wynik operacji wylogowywania. |
+| `authentication/logout-failed`   | Wyświetla komunikaty o błędach, gdy operacja wylogowywania nie powiedzie się z jakiegoś powodu. |
+| `authentication/logged-out`      | Wskazuje, że użytkownik pomyślnie wylogował się. |
+| `authentication/profile`         | Wyzwala operację, aby edytować profil użytkownika. |
+| `authentication/register`        | Wyzwala operację, aby zarejestrować nowego użytkownika. |
 
-Trasy pokazane w powyższej tabeli można konfigurować za pośrednictwem `RemoteAuthenticationOptions<TProviderOptions>.AuthenticationPaths`. Podczas ustawiania opcji w celu zapewnienia tras niestandardowych upewnij się, że aplikacja ma trasę obsługującą każdą ścieżkę.
+Trasy pokazane w powyższej tabeli `RemoteAuthenticationOptions<TProviderOptions>.AuthenticationPaths`można konfigurować za pomocą programu . Podczas ustawiania opcji, aby zapewnić trasy niestandardowe, upewnij się, że aplikacja ma trasę, która obsługuje każdą ścieżkę.
 
-W poniższym przykładzie wszystkie ścieżki są poprzedzone prefiksem `/security`.
+W poniższym przykładzie wszystkie ścieżki są `/security`poprzedzone programem .
 
-składnik `Authentication` (*strony/uwierzytelnianie. Razor*):
+`Authentication`składnik *(Pages/Authentication.brzytwa):*
 
 ```razor
 @page "/security/{action}"
@@ -210,7 +236,7 @@ składnik `Authentication` (*strony/uwierzytelnianie. Razor*):
 }
 ```
 
-`Program.Main` (*program.cs*):
+`Program.Main`(*Program.cs*):
 
 ```csharp
 builder.Services.AddApiAuthorization(options => { 
@@ -226,7 +252,7 @@ builder.Services.AddApiAuthorization(options => {
 });
 ```
 
-Jeśli wymaganie wywołuje całkowicie różne ścieżki, ustaw trasy zgodnie z opisem wcześniej i Renderuj `RemoteAuthenticatorView` za pomocą jawnego parametru akcji:
+Jeśli wymaganie wymaga zupełnie innych ścieżek, ustaw trasy zgodnie `RemoteAuthenticatorView` z opisem wcześniej i renderuj z jawnym parametrem akcji:
 
 ```razor
 @page "/register"
@@ -234,13 +260,13 @@ Jeśli wymaganie wywołuje całkowicie różne ścieżki, ustaw trasy zgodnie z 
 <RemoteAuthenticatorView Action="@RemoteAuthenticationActions.Register" />
 ```
 
-Jeśli zdecydujesz się to zrobić, możesz przerwać interfejs użytkownika na różnych stronach.
+Jeśli zdecydujesz się to zrobić, możesz podzielić interfejs użytkownika na różne strony.
 
 ## <a name="customize-the-authentication-user-interface"></a>Dostosowywanie interfejsu użytkownika uwierzytelniania
 
-`RemoteAuthenticatorView` zawiera domyślny zestaw elementów interfejsu użytkownika dla każdego stanu uwierzytelniania. Każdy stan można dostosować przez przekazanie do niestandardowego `RenderFragment`. Aby dostosować wyświetlany tekst podczas początkowego procesu logowania, można zmienić `RemoteAuthenticatorView` w następujący sposób.
+`RemoteAuthenticatorView`zawiera domyślny zestaw elementów interfejsu użytkownika dla każdego stanu uwierzytelniania. Każdy stan można dostosować, przechodząc `RenderFragment`w niestandardowym pliku . Aby dostosować wyświetlany tekst podczas początkowego procesu logowania, można zmienić w `RemoteAuthenticatorView` następujący sposób.
 
-składnik `Authentication` (*strony/uwierzytelnianie. Razor*):
+`Authentication`składnik *(Pages/Authentication.brzytwa):*
 
 ```razor
 @page "/security/{action}"
@@ -258,7 +284,7 @@ składnik `Authentication` (*strony/uwierzytelnianie. Razor*):
 }
 ```
 
-`RemoteAuthenticatorView` ma jeden fragment, którego można użyć dla trasy uwierzytelniania pokazanej w poniższej tabeli.
+Ma `RemoteAuthenticatorView` jeden fragment, który może być używany dla trasy uwierzytelniania pokazano w poniższej tabeli.
 
 | Trasa                            | Fragment                |
 | -------------------------------- | ----------------------- |

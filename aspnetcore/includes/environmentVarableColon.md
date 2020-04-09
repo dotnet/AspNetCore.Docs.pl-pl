@@ -1,4 +1,4 @@
-Separator `:` nie działa ze zmiennymi kluczy hierarchicznych na wszystkich platformach. `__`, podwójne podkreślenie:
+Separator `:` nie działa z kluczami hierarchicznymi zmiennych środowiskowych na wszystkich platformach. `__`, podwójne podkreślenie, jest:
 
-* Obsługiwane przez wszystkie platformy. Na przykład separator `:` nie jest obsługiwany przez [bash](https://linuxhint.com/bash-environment-variables/), ale `__` jest.
-* Automatycznie zastąpione przez `:`
+* Obsługiwane przez wszystkie platformy. Na przykład `:` separator nie jest obsługiwany przez `__` [Bash](https://linuxhint.com/bash-environment-variables/), ale jest.
+* Automatycznie zastępowana przez`:`

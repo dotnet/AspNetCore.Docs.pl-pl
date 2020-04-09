@@ -1,71 +1,71 @@
 ---
-title: Microsoft. AspNetCore. All, pakiet dla ASP.NET Core 2,0
+title: Microsoft.AspNetCore.All metapakiet dla ASP.NET Core 2.0
 author: Rick-Anderson
-description: Nie zaleca się stosowania pakietu Microsoft. AspNetCore. All w przypadku ASP.NET Core 2,1 i nowszych.
+description: Metapakiet Microsoft.AspNetCore.All nie jest zalecany dla ASP.NET Core 2.1 i nowszych.
 monikerRange: '>= aspnetcore-2.0'
 ms.author: riande
 ms.custom: mvc
 ms.date: 10/25/2018
 uid: fundamentals/metapackage
 ms.openlocfilehash: cc00c075909da5c17a4aa2fd252c9e662e5a0fc9
-ms.sourcegitcommit: d64ef143c64ee4fdade8f9ea0b753b16752c5998
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/18/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "79511070"
 ---
-# <a name="microsoftaspnetcoreall-metapackage-for-aspnet-core-20"></a>Microsoft. AspNetCore. All, pakiet dla ASP.NET Core 2,0
+# <a name="microsoftaspnetcoreall-metapackage-for-aspnet-core-20"></a>Microsoft.AspNetCore.All metapakiet dla ASP.NET Core 2.0
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Pakiet `Microsoft.AspNetCore.All` nie jest zawarty w ASP.NET Core 3,0 i nowszych. Aby uzyskać więcej informacji, zobacz [ten problem](https://github.com/aspnet/Announcements/issues/314)w serwisie GitHub.
+Metapakiet `Microsoft.AspNetCore.All` nie jest zawarty w ASP.NET Core 3.0 i nowszych. Aby uzyskać więcej informacji, zobacz [ten problem z githubem](https://github.com/aspnet/Announcements/issues/314).
 
 ::: moniker-end
 
 > [!NOTE]
-> Zalecamy stosowanie aplikacji przeznaczonych dla ASP.NET Core 2,1 i nowszych przy użyciu [pakietu Microsoft. AspNetCore. app](xref:fundamentals/metapackage-app) , a nie tego pakietu. Zobacz [Migrowanie z Microsoft. AspNetCore. All do Microsoft. AspNetCore. app](#migrate) w tym artykule.
+> Zalecamy aplikacje przeznaczone ASP.NET Core 2.1 i później użyć [microsoft.AspNetCore.App metapakiet,](xref:fundamentals/metapackage-app) a nie tego pakietu. Zobacz [Migrowanie z pliku Microsoft.AspNetCore.All do pliku Microsoft.AspNetCore.App](#migrate) w tym artykule.
 
-Ta funkcja wymaga ASP.NET Core 2. x przeznaczonych dla platformy .NET Core 2. x.
+Ta funkcja wymaga ASP.NET celu Core 2.x .NET Core 2.x.
 
-[Microsoft. AspNetCore. All](https://www.nuget.org/packages/Microsoft.AspNetCore.All) to pakiet, który odwołuje się do udostępnionej struktury. *Struktura udostępniona* to zbiór zestawów (plików*dll* ), które nie znajdują się w folderach aplikacji. Aby można było uruchomić aplikację, na komputerze musi być zainstalowana struktura udostępniona. Aby uzyskać więcej informacji, zobacz [udostępnioną strukturę](https://natemcmaster.com/blog/2018/08/29/netcore-primitives-2/).
+[Microsoft.AspNetCore.All](https://www.nuget.org/packages/Microsoft.AspNetCore.All) jest metapakiet, który odnosi się do udostępnionej struktury. *Współużytkowana struktura* to zestaw zestawów (plików*dll),* które nie znajdują się w folderach aplikacji. Aby uruchomić aplikację, należy zainstalować platformę współużytkową. Aby uzyskać więcej informacji, zobacz [Współużytkowane struktury](https://natemcmaster.com/blog/2018/08/29/netcore-primitives-2/).
 
-Platforma udostępniona, do której od`Microsoft.AspNetCore.All` się to obejmuje:
+Współużytkowane ramy, które `Microsoft.AspNetCore.All` się odwołują, obejmują:
 
 * Wszystkie obsługiwane pakiety przez zespół ASP.NET Core.
-* Wszystkie obsługiwane pakiety przez Entity Framework Core.
-* Zależności wewnętrzne i inne firmy używane przez ASP.NET Core i Entity Framework Core.
+* Wszystkie obsługiwane pakiety przez entity framework core.
+* Wewnętrzne i zewnętrzne zależności używane przez ASP.NET Core i Entity Framework Core.
 
-Wszystkie funkcje ASP.NET Core 2. x i Entity Framework Core 2. x są zawarte w pakiecie `Microsoft.AspNetCore.All`. Domyślne szablony projektu dla ASP.NET Core 2,0 używają tego pakietu.
+Wszystkie funkcje ASP.NET Core 2.x i Entity Framework Core 2.x `Microsoft.AspNetCore.All` są zawarte w pakiecie. Domyślne szablony projektów przeznaczone dla ASP.NET Core 2.0 używają tego pakietu.
 
-Numer wersji pakietu `Microsoft.AspNetCore.All`ow reprezentuje minimalną wersję ASP.NET Core i wersję Entity Framework Core.
+Numer wersji `Microsoft.AspNetCore.All` metapakietu reprezentuje minimalną ASP.NET wersję Core i wersję Core programu Entity Framework.
 
-Następujący plik *. csproj* odwołuje się do `Microsoft.AspNetCore.All` pakietu dla ASP.NET Core:
+Następujący plik *csproj* odwołuje `Microsoft.AspNetCore.All` się do metapakiety dla ASP.NET Core:
 
 [!code-xml[](metapackage/samples/Metapackage.All.Example.csproj?highlight=8)]
 
 ::: moniker range=">= aspnetcore-2.1"
 
-## <a name="implicit-versioning"></a>Niejawna wersja
+## <a name="implicit-versioning"></a>Niejawne przechowywanie wersji
 
-W ASP.NET Core 2,1 lub nowszej można określić odwołanie do pakietu `Microsoft.AspNetCore.All` bez wersji. Gdy wersja nie jest określona, zestaw SDK (`Microsoft.NET.Sdk.Web`) określa niejawną wersję. Zalecamy użycie niejawnej wersji określonej przez zestaw SDK i niejawne ustawienie numeru wersji w odwołaniu do pakietu. Jeśli masz pytania dotyczące tego podejścia, pozostaw komentarz w serwisie GitHub w [dyskusji dotyczącej wersji niejawnej Microsoft. AspNetCore. app](https://github.com/dotnet/AspNetCore.Docs/issues/6430).
+W ASP.NET Core 2.1 lub nowszym `Microsoft.AspNetCore.All` można określić odwołanie do pakietu bez wersji. Gdy wersja nie jest określona, wersja niejawna jest`Microsoft.NET.Sdk.Web`określona przez SDK ( ). Zaleca się poleganie na wersji niejawnej określonej przez SDK i nie jawnie ustawienie numeru wersji na odwołanie do pakietu. Jeśli masz pytania dotyczące tego podejścia, pozostaw komentarz gitHub w [dyskusji dla wersji niejawnej Microsoft.AspNetCore.App](https://github.com/dotnet/AspNetCore.Docs/issues/6430).
 
-Niejawna wersja jest ustawiona na `major.minor.0` dla aplikacji przenośnych. Mechanizm przekazujący przechodzenie do platformy udostępnionej uruchamia aplikację w najnowszej zgodnej wersji wśród zainstalowanych platform udostępnionych. Aby zagwarantować, że ta sama wersja jest używana w środowisku deweloperskim, testowym i produkcyjnym, upewnij się, że ta sama wersja udostępnionej platformy jest zainstalowana we wszystkich środowiskach. W przypadku aplikacji samodzielnych niejawny numer wersji jest ustawiany na `major.minor.patch` udostępnionej struktury powiązanej z zainstalowanym zestawem SDK.
+Wersja niejawna `major.minor.0` jest ustawiona na aplikacje przenośne. Mechanizm przekazywania udostępnionej struktury uruchamia aplikację w najnowszej zgodnej wersji wśród zainstalowanych udostępnionych struktur. Aby zagwarantować, że ta sama wersja jest używana w programach, testach i produkcji, upewnij się, że ta sama wersja udostępnionej struktury jest zainstalowana we wszystkich środowiskach. W przypadku aplikacji samodzielnych numer wersji niejawnej jest ustawiany na `major.minor.patch` platformę udostępnionej w pakiecie z zainstalowanym zestawem SDK.
 
-Określenie numeru wersji w odwołaniu do pakietu `Microsoft.AspNetCore.All` nie **gwarantuje,** że jest wybrana wersja udostępnionej platformy. Załóżmy na przykład, że jest określona wersja "2.1.1", ale jest zainstalowana wartość "2.1.3". W takim przypadku aplikacja będzie używać "2.1.3". Chociaż nie jest to zalecane, można wyłączyć funkcję wycofywania do przodu (poprawka i/lub pomocnicza). Aby uzyskać więcej informacji na temat przetworzenia i konfigurowania zachowań hosta dotnet, zobacz [przewinięcie hosta dotnet do przodu](https://github.com/dotnet/core-setup/blob/master/Documentation/design-docs/roll-forward-on-no-candidate-fx.md).
+Określenie numeru wersji w `Microsoft.AspNetCore.All` odwołaniu do pakietu **nie** gwarantuje, że wybrano wersję udostępnionej struktury. Załóżmy na przykład, że określono wersję "2.1.1", ale jest zainstalowana "2.1.3". W takim przypadku aplikacja użyje "2.1.3". Chociaż nie jest to zalecane, można wyłączyć roll forward (łatka i/lub drobne). Aby uzyskać więcej informacji dotyczących roll-forward hosta dotnet i sposobu konfigurowania jego zachowania, zobacz [dotnet host roll forward](https://github.com/dotnet/core-setup/blob/master/Documentation/design-docs/roll-forward-on-no-candidate-fx.md).
 
-Zestaw SDK projektu musi być ustawiony na `Microsoft.NET.Sdk.Web` w pliku projektu, aby można było użyć niejawnej wersji `Microsoft.AspNetCore.All`. Gdy zostanie określony zestaw `Microsoft.NET.Sdk` SDK (`<Project Sdk="Microsoft.NET.Sdk">` w górnej części pliku projektu), generowane jest następujące ostrzeżenie:
+Zestaw SDK projektu musi być `Microsoft.NET.Sdk.Web` ustawiony w pliku projektu, `Microsoft.AspNetCore.All`aby użyć niejawnej wersji pliku . Po `Microsoft.NET.Sdk` określeniu SDK (w`<Project Sdk="Microsoft.NET.Sdk">` górnej części pliku projektu) generowane jest następujące ostrzeżenie:
 
-*Ostrzeżenie NU1604: zależność projektu Microsoft. AspNetCore. All nie zawiera mniejszej granicy. Uwzględnij dolną granicę w wersji zależności, aby zapewnić spójne wyniki przywracania.*
+*Ostrzeżenie NU1604: Zależność projektu Microsoft.AspNetCore.All nie zawiera włącznie dolnej granicy. Dołącz dolną granicę w wersji zależności, aby zapewnić spójne wyniki przywracania.*
 
-Jest to znany problem z zestawem SDK platformy .NET Core 2,1 i zostanie naprawiony w zestawie SDK platformy .NET Core 2,2.
+Jest to znany problem z .NET Core 2.1 SDK i zostanie rozwiązany w .NET Core 2.2 SDK.
 
 ::: moniker-end
 
 <a name="migrate"></a>
 
-## <a name="migrating-from-microsoftaspnetcoreall-to-microsoftaspnetcoreapp"></a>Migrowanie z Microsoft. AspNetCore. All do Microsoft. AspNetCore. App
+## <a name="migrating-from-microsoftaspnetcoreall-to-microsoftaspnetcoreapp"></a>Migracja z pliku Microsoft.AspNetCore.All do pliku Microsoft.AspNetCore.App
 
-Następujące pakiety są zawarte w `Microsoft.AspNetCore.All`, ale nie w pakiecie `Microsoft.AspNetCore.App`.
+Następujące pakiety są `Microsoft.AspNetCore.All` zawarte w `Microsoft.AspNetCore.App` pakiecie, ale nie.
 
 * `Microsoft.AspNetCore.ApplicationInsights.HostingStartup`
 * `Microsoft.AspNetCore.AzureAppServices.HostingStartup`
@@ -83,17 +83,17 @@ Następujące pakiety są zawarte w `Microsoft.AspNetCore.All`, ale nie w pakiec
 * `Microsoft.Extensions.Logging.AzureAppServices`
 * `Microsoft.VisualStudio.Web.BrowserLink`
 
-Aby przejść z `Microsoft.AspNetCore.All` do `Microsoft.AspNetCore.App`, jeśli aplikacja używa dowolnych interfejsów API z powyższych pakietów lub pakietów wprowadzonych przez te pakiety, Dodaj odwołania do tych pakietów w projekcie.
+Aby przejść `Microsoft.AspNetCore.All` `Microsoft.AspNetCore.App`z do , jeśli aplikacja używa żadnych interfejsów API z powyższych pakietów lub pakietów wniesionych przez te pakiety, dodaj odwołania do tych pakietów w projekcie.
 
-Wszystkie zależności poprzedzających pakietów, które w przeciwnym razie nie są zależnościami `Microsoft.AspNetCore.App` nie są uwzględnione niejawnie. Na przykład:
+Wszelkie zależności poprzednich pakietów, które w przeciwnym `Microsoft.AspNetCore.App` razie nie są zależności nie są uwzględniane niejawnie. Przykład:
 
-* `StackExchange.Redis` jako zależność `Microsoft.Extensions.Caching.Redis`
-* `Microsoft.ApplicationInsights` jako zależność `Microsoft.AspNetCore.ApplicationInsights.HostingStartup`
+* `StackExchange.Redis`jako zależność od`Microsoft.Extensions.Caching.Redis`
+* `Microsoft.ApplicationInsights`jako zależność od`Microsoft.AspNetCore.ApplicationInsights.HostingStartup`
 
-## <a name="update-aspnet-core-21"></a>Aktualizacja ASP.NET Core 2,1
+## <a name="update-aspnet-core-21"></a>Aktualizacja ASP.NET Core 2.1
 
-Zalecamy przeprowadzenie migracji do `Microsoft.AspNetCore.App` pakietu operacyjnego w wersji 2,1 lub nowszej. Aby nadal korzystać z pakietu `Microsoft.AspNetCore.All` i upewnić się, że jest wdrożona Najnowsza wersja poprawki:
+Zalecamy migrację `Microsoft.AspNetCore.App` do metapakiety dla 2.1 i nowsze. Aby nadal `Microsoft.AspNetCore.All` korzystać z metapakiety i upewnić się, że najnowsza wersja poprawki jest wdrożona:
 
-* Na komputerach deweloperskich i serwerach kompilacji: Zainstaluj najnowsze [zestaw .NET Core SDK](https://dotnet.microsoft.com/download).
-* Na serwerach wdrożenia: Zainstaluj najnowsze [środowisko uruchomieniowe programu .NET Core](https://dotnet.microsoft.com/download).
- Aplikacja zostanie przeniesiona do najnowszej zainstalowanej wersji przy ponownym uruchomieniu aplikacji.
+* Na komputerach deweloperskich i serwerach kompilacji: Zainstaluj najnowszy [pakiet .NET Core SDK](https://dotnet.microsoft.com/download).
+* Na serwerach wdrażania: Zainstaluj najnowsze [środowisko uruchomieniowe .NET Core](https://dotnet.microsoft.com/download).
+ Aplikacja zostanie przerzuci do najnowszej zainstalowanej wersji po ponownym uruchomieniu aplikacji.

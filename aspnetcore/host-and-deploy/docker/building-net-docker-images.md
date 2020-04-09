@@ -1,60 +1,60 @@
 ---
 title: Obrazy platformy Docker dla ASP.NET Core
 author: rick-anderson
-description: Dowiedz się, jak używać opublikowanych obrazów .NET Core Docker z rejestru platformy Docker. Ściągaj obrazy i Kompiluj własne obrazy.
+description: Dowiedz się, jak korzystać z opublikowanych obrazów platformy .NET Core Docker z rejestru platformy Docker. Ściągaj obrazy i twórz własne obrazy.
 ms.author: riande
 ms.custom: mvc
 ms.date: 01/15/2020
 uid: host-and-deploy/docker/building-net-docker-images
-ms.openlocfilehash: b55235ffc44f0bacf44bd1644e45210b37f19607
-ms.sourcegitcommit: d64ef143c64ee4fdade8f9ea0b753b16752c5998
+ms.openlocfilehash: 31161d6841986cb0bd8080468e5d523d59400490
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/18/2020
-ms.locfileid: "79511330"
+ms.lasthandoff: 04/06/2020
+ms.locfileid: "80405924"
 ---
 # <a name="docker-images-for-aspnet-core"></a>Obrazy platformy Docker dla ASP.NET Core
 
 W tym samouczku pokazano, jak uruchomić aplikację ASP.NET Core w kontenerach platformy Docker.
 
-W tym samouczku zostaną wykonane następujące czynności:
+W tym samouczku zostały wykonane następujące czynności:
 > [!div class="checklist"]
-> * Dowiedz się więcej na temat Microsoft .NET podstawowych obrazów platformy Docker
+> * Dowiedz się więcej o obrazach platformy Docker platformy Microsoft .NET Core
 > * Pobieranie przykładowej aplikacji ASP.NET Core
-> * Uruchamianie przykładowej aplikacji lokalnie
+> * Lokalne uruchamianie przykładowej aplikacji
 > * Uruchamianie przykładowej aplikacji w kontenerach systemu Linux
 > * Uruchamianie przykładowej aplikacji w kontenerach systemu Windows
-> * Kompiluj i wdrażaj ręcznie
+> * Ręczne tworzenie i wdrażanie
 
-## <a name="aspnet-core-docker-images"></a>ASP.NET Core obrazów platformy Docker
+## <a name="aspnet-core-docker-images"></a>ASP.NET obrazy platformy Docker Core
 
-Na potrzeby tego samouczka pobierzesz przykładową aplikację ASP.NET Core i uruchomisz ją w kontenerach platformy Docker. Przykład działa w przypadku kontenerów systemów Linux i Windows.
+W tym samouczku pobierz ASP.NET przykładową aplikację Core i uruchom ją w kontenerach platformy Docker. Przykład działa z kontenerami linux i windows.
 
-Przykładowy pliku dockerfile używa [funkcji budowania wielu etapów platformy Docker](https://docs.docker.com/engine/userguide/eng-image/multistage-build/) do kompilowania i uruchamiania w różnych kontenerach. Kontenery kompilacji i uruchamiania są tworzone na podstawie obrazów udostępnianych w usłudze Docker Hub przez firmę Microsoft:
+Przykładowy dockerfile używa [funkcji kompilacji wieloetapowej platformy Docker](https://docs.docker.com/engine/userguide/eng-image/multistage-build/) do tworzenia i uruchamiania w różnych kontenerach. Kontenery kompilacji i uruchamiania są tworzone na podstawie obrazów dostarczanych w centrum platformy Docker przez firmę Microsoft:
 
 * `dotnet/core/sdk`
 
-  Przykład używa tego obrazu do kompilowania aplikacji. Obraz zawiera zestaw .NET Core SDK, który zawiera narzędzia wiersza polecenia (CLI). Obraz jest zoptymalizowany pod kątem lokalnego projektowania, debugowania i testowania jednostkowego. Narzędzia zainstalowane na potrzeby programowania i kompilowania sprawiają, że jest to stosunkowo duży obraz. 
+  Przykład używa tego obrazu do tworzenia aplikacji. Obraz zawiera zestaw SDK .NET Core, który zawiera narzędzia wiersza polecenia (CLI). Obraz jest zoptymalizowany pod kątem lokalnego rozwoju, debugowania i testowania jednostkowego. Narzędzia zainstalowane do tworzenia i kompilacji sprawiają, że jest to stosunkowo duży obraz. 
 
 * `dotnet/core/aspnet`
 
-   Przykład używa tego obrazu do uruchamiania aplikacji. Obraz zawiera ASP.NET Core środowiska uruchomieniowego i bibliotek, które są zoptymalizowane pod kątem uruchamiania aplikacji w środowisku produkcyjnym. Obraz jest stosunkowo mały, zaprojektowany z myślą o szybkości wdrażania i uruchamiania aplikacji, dlatego Optymalizacja wydajności sieci z poziomu rejestru platformy Docker do hosta platformy Docker jest zoptymalizowana. Tylko pliki binarne i zawartość, które są konieczne do uruchomienia aplikacji, są kopiowane do kontenera. Zawartość jest gotowa do uruchomienia, co umożliwia najszybszy czas od `Docker run` do uruchamiania aplikacji. W modelu platformy Docker nie jest wymagana kompilacja kodu dynamicznego.
+   Przykład używa tego obrazu do uruchamiania aplikacji. Obraz zawiera ASP.NET Core środowiska uruchomieniowego i bibliotek i jest zoptymalizowany pod kątem uruchamiania aplikacji w produkcji. Zaprojektowany z myślą o szybkości wdrażania i uruchamianiu aplikacji, obraz jest stosunkowo mały, więc wydajność sieci z rejestru platformy Docker do hosta platformy Docker jest zoptymalizowana. Tylko pliki binarne i zawartość potrzebna do uruchomienia aplikacji są kopiowane do kontenera. Zawartość jest gotowa do uruchomienia, umożliwiając najszybszy czas od `Docker run` uruchomienia aplikacji. Kompilacja kodu dynamicznego nie jest potrzebna w modelu platformy Docker.
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 ::: moniker range="< aspnetcore-3.0"
 
-* [Zestaw SDK platformy .NET Core 2,2](https://dotnet.microsoft.com/download/dotnet-core)
+* [.NET Core 2.2 SDK](https://dotnet.microsoft.com/download/dotnet-core)
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-3.0"
 
-* [Zestaw .NET Core SDK 3,0](https://dotnet.microsoft.com/download)
+* [.NET Core SDK 3.0](https://dotnet.microsoft.com/download)
 
 ::: moniker-end
 
-* Klient platformy Docker 18,03 lub nowszy
+* Klient platformy Docker 18.03 lub nowszy
 
-  * Dystrybucje systemu Linux
+  * Dystrybucje Linuksa
     * [CentOS](https://docs.docker.com/install/linux/docker-ce/centos/)
     * [Debian](https://docs.docker.com/install/linux/docker-ce/debian/)
     * [Fedora](https://docs.docker.com/install/linux/docker-ce/fedora/)
@@ -62,11 +62,11 @@ Przykładowy pliku dockerfile używa [funkcji budowania wielu etapów platformy 
   * [macOS](https://docs.docker.com/docker-for-mac/install/)
   * [Windows](https://docs.docker.com/docker-for-windows/install/)
 
-* [Usługa Git](https://git-scm.com/download)
+* [Git](https://git-scm.com/download)
 
 ## <a name="download-the-sample-app"></a>Pobieranie przykładowej aplikacji
 
-* Pobierz próbkę, klonowanie [repozytorium .NET Core Docker](https://github.com/dotnet/dotnet-docker): 
+* Pobierz próbkę, klonując [repozytorium platformy .NET Core Docker:](https://github.com/dotnet/dotnet-docker) 
 
   ```console
   git clone https://github.com/dotnet/dotnet-docker
@@ -74,7 +74,7 @@ Przykładowy pliku dockerfile używa [funkcji budowania wielu etapów platformy 
 
 ## <a name="run-the-app-locally"></a>Lokalne uruchamianie aplikacji
 
-* Przejdź do folderu projektu w programie *dotnet-Docker/Samples/aspnetapp/aspnetapp*.
+* Przejdź do folderu projektu w *dotnet-docker/samples/aspnetapp/aspnetapp*.
 
 * Uruchom następujące polecenie, aby skompilować i uruchomić aplikację lokalnie:
 
@@ -82,53 +82,53 @@ Przykładowy pliku dockerfile używa [funkcji budowania wielu etapów platformy 
   dotnet run
   ```
 
-* Przejdź do `http://localhost:5000` w przeglądarce, aby przetestować aplikację.
+* Przejdź `http://localhost:5000` do przeglądarki, aby przetestować aplikację.
 
-* Naciśnij klawisze CTRL + C w wierszu polecenia, aby zatrzymać aplikację.
+* Naciśnij klawisze Ctrl+C w wierszu polecenia, aby zatrzymać aplikację.
 
 ## <a name="run-in-a-linux-container"></a>Uruchamianie w kontenerze systemu Linux
 
-* W kliencie platformy Docker przejdź do obszaru kontenery systemu Linux.
+* W kliencie platformy Docker przełącz się na kontenery systemu Linux.
 
-* Przejdź do folderu pliku dockerfile w programie *dotnet-Docker/Samples/aspnetapp*.
+* Przejdź do folderu Dockerfile w *dotnet-docker/samples/aspnetapp*.
 
-* Uruchom następujące polecenia, aby skompilować i uruchomić przykład w Docker:
+* Uruchom następujące polecenia, aby skompilować i uruchomić przykład w umiań Docker:
 
   ```console
   docker build -t aspnetapp .
   docker run -it --rm -p 5000:80 --name aspnetcore_sample aspnetapp
   ```
 
-  Argumenty polecenia `build`:
+  Argumenty `build` polecenia:
   * Nazwij obraz aspnetapp.
-  * Wyszukaj pliku dockerfile w bieżącym folderze (okres na końcu).
+  * Poszukaj pliku Dockerfile w bieżącym folderze (kropka na końcu).
 
-  Argumenty polecenia Run:
-  * Przydziel pseudo-TTY i pozostaw go otwarty nawet wtedy, gdy nie jest dołączony. (Ten sam efekt jest `--interactive --tty`.)
-  * Automatycznie Usuń kontener, gdy zostanie on zakończony.
-  * Mapuj port 5000 na komputerze lokalnym na port 80 w kontenerze.
-  * Nadaj nazwę kontenerowi aspnetcore_sample.
+  Argumenty polecenia uruchom:
+  * Przydziel pseudo-TTY i zachowaj go otwartego, nawet jeśli nie jest dołączony. (Taki sam `--interactive --tty`efekt jak .)
+  * Automatycznie usuń kontener po jego wyjściu.
+  * Mapuj port 5000 na komputerze lokalnym, aby port 80 w kontenerze.
+  * Nazwij aspnetcore_sample kontenera.
   * Określ obraz aspnetapp.
 
-* Przejdź do `http://localhost:5000` w przeglądarce, aby przetestować aplikację.
+* Przejdź `http://localhost:5000` do przeglądarki, aby przetestować aplikację.
 
 ## <a name="run-in-a-windows-container"></a>Uruchamianie w kontenerze systemu Windows
 
-* W kliencie platformy Docker przejdź do kontenerów systemu Windows.
+* W kliencie platformy Docker przełącz się do kontenerów systemu Windows.
 
-Przejdź do folderu Docker File w `dotnet-docker/samples/aspnetapp`.
+Przejdź do folderu plików `dotnet-docker/samples/aspnetapp`platformy docker w pliku .
 
-* Uruchom następujące polecenia, aby skompilować i uruchomić przykład w Docker:
+* Uruchom następujące polecenia, aby skompilować i uruchomić przykład w umiań Docker:
 
   ```console
   docker build -t aspnetapp .
   docker run -it --rm --name aspnetcore_sample aspnetapp
   ```
 
-* W przypadku kontenerów systemu Windows wymagany jest adres IP kontenera (przechodzenie do `http://localhost:5000` nie będzie możliwe):
+* W przypadku kontenerów systemu Windows potrzebny jest adres `http://localhost:5000` IP kontenera (przeglądanie, aby nie działać):
   * Otwórz inny wiersz polecenia.
-  * Uruchom `docker ps`, aby wyświetlić uruchomione kontenery. Upewnij się, że kontener "aspnetcore_sample" znajduje się w tym miejscu.
-  * Uruchom `docker exec aspnetcore_sample ipconfig`, aby wyświetlić adres IP kontenera. Dane wyjściowe polecenia wyglądają jak w tym przykładzie:
+  * Uruchom, `docker ps` aby wyświetlić uruchomione kontenery. Sprawdź, czy istnieje kontener "aspnetcore_sample".
+  * Uruchom, `docker exec aspnetcore_sample ipconfig` aby wyświetlić adres IP kontenera. Dane wyjściowe z polecenia wygląda następująco:
 
     ```console
     Ethernet adapter Ethernet:
@@ -142,21 +142,21 @@ Przejdź do folderu Docker File w `dotnet-docker/samples/aspnetapp`.
 
 * Skopiuj adres IPv4 kontenera (na przykład 172.29.245.43) i wklej go na pasku adresu przeglądarki, aby przetestować aplikację.
 
-## <a name="build-and-deploy-manually"></a>Kompiluj i wdrażaj ręcznie
+## <a name="build-and-deploy-manually"></a>Ręczne tworzenie i wdrażanie
 
-W niektórych scenariuszach może zajść potrzeba wdrożenia aplikacji w kontenerze przez skopiowanie do niego plików aplikacji, które są potrzebne w czasie wykonywania. W tej sekcji pokazano, jak wdrożyć ręcznie.
+W niektórych scenariuszach można wdrożyć aplikację do kontenera, kopiując do niego pliki aplikacji, które są potrzebne w czasie wykonywania. W tej sekcji pokazano, jak wdrożyć ręcznie.
 
-* Przejdź do folderu projektu w programie *dotnet-Docker/Samples/aspnetapp/aspnetapp*.
+* Przejdź do folderu projektu w *dotnet-docker/samples/aspnetapp/aspnetapp*.
 
-* Uruchom [dotnet Publish](/dotnet/core/tools/dotnet-publish) polecenie:
+* Uruchom polecenie [publikowania dotnetu:](/dotnet/core/tools/dotnet-publish)
 
   ```dotnetcli
   dotnet publish -c Release -o published
   ```
 
   Argumenty polecenia:
-  * Kompiluj aplikację w trybie wydania (domyślnie jest to tryb debugowania).
-  * Utwórz pliki w folderze *opublikowanym* .
+  * Tworzenie aplikacji w trybie zwalniania (domyślnym jest tryb debugowania).
+  * Utwórz pliki w *opublikowanym folderze.*
 
 * Uruchom aplikację.
 
@@ -172,22 +172,22 @@ W niektórych scenariuszach może zajść potrzeba wdrożenia aplikacji w konten
     dotnet published/aspnetapp.dll
     ```
 
-* Przejdź do `http://localhost:5000`, aby wyświetlić stronę główną.
+* Przejdź do `http://localhost:5000` strony głównej.
 
-Aby użyć ręcznie opublikowanej aplikacji w kontenerze platformy Docker, Utwórz nowy pliku dockerfile i użyj polecenia `docker build .`, aby skompilować kontener.
+Aby użyć ręcznie opublikowanej aplikacji w kontenerze platformy Docker, utwórz `docker build .` nowy plik Dockerfile i użyj polecenia do utworzenia kontenera.
 
 ::: moniker range="< aspnetcore-3.0"
 
-```console
+```dockerfile
 FROM mcr.microsoft.com/dotnet/core/aspnet:2.2 AS runtime
 WORKDIR /app
 COPY published/aspnetapp.dll ./
 ENTRYPOINT ["dotnet", "aspnetapp.dll"]
 ```
 
-### <a name="the-dockerfile"></a>Pliku dockerfile
+### <a name="the-dockerfile"></a>Plik dockerfile
 
-Oto *pliku dockerfile* używany przez uruchomione wcześniej polecenie `docker build`.  Używa `dotnet publish` tak samo jak w tej sekcji do kompilowania i wdrażania.  
+Oto *Dockerfile* używane przez `docker build` polecenie, które uruchomiono wcześniej.  Używa tak `dotnet publish` samo, jak w tej sekcji do tworzenia i wdrażania.  
 
 ```dockerfile
 FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS build
@@ -214,16 +214,16 @@ ENTRYPOINT ["dotnet", "aspnetapp.dll"]
 
 ::: moniker range=">= aspnetcore-3.0"
 
-```console
+```dockerfile
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.0 AS runtime
 WORKDIR /app
 COPY published/aspnetapp.dll ./
 ENTRYPOINT ["dotnet", "aspnetapp.dll"]
 ```
 
-### <a name="the-dockerfile"></a>Pliku dockerfile
+### <a name="the-dockerfile"></a>Plik dockerfile
 
-Oto *pliku dockerfile* używany przez uruchomione wcześniej polecenie `docker build`.  Używa `dotnet publish` tak samo jak w tej sekcji do kompilowania i wdrażania.  
+Oto *Dockerfile* używane przez `docker build` polecenie, które uruchomiono wcześniej.  Używa tak `dotnet publish` samo, jak w tej sekcji do tworzenia i wdrażania.  
 
 ```dockerfile
 FROM mcr.microsoft.com/dotnet/core/sdk:3.0 AS build
@@ -248,25 +248,25 @@ ENTRYPOINT ["dotnet", "aspnetapp.dll"]
 
 ::: moniker-end
 
-```console
+```dockerfile
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.0 AS runtime
 WORKDIR /app
 COPY published/aspnetapp.dll ./
 ENTRYPOINT ["dotnet", "aspnetapp.dll"]
 ```
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
-* [Docker Build — polecenie](https://docs.docker.com/engine/reference/commandline/build)
-* [Polecenie Docker Run](https://docs.docker.com/engine/reference/commandline/run)
-* [ASP.NET Core Docker — przykład](https://github.com/dotnet/dotnet-docker) (używany w tym samouczku).
-* [Konfigurowanie ASP.NET Core do pracy z serwerami proxy i usługami równoważenia obciążenia](/aspnet/core/host-and-deploy/proxy-load-balancer)
-* [Praca z narzędziami platformy Docker programu Visual Studio](https://docs.microsoft.com/aspnet/core/publishing/visual-studio-tools-for-docker)
-* [Debugowanie za pomocą Visual Studio Code](https://code.visualstudio.com/docs/nodejs/debugging-recipes#_debug-nodejs-in-docker-containers) 
+* [Polecenie kompilacji platformy Docker](https://docs.docker.com/engine/reference/commandline/build)
+* [Polecenie Uruchom docker](https://docs.docker.com/engine/reference/commandline/run)
+* [ASP.NET próbka rdzenia platformy Docker](https://github.com/dotnet/dotnet-docker) (ten używany w tym samouczku).
+* [Konfigurowanie ASP.NET Core do pracy z serwerami proxy i modułami równoważenia obciążenia](/aspnet/core/host-and-deploy/proxy-load-balancer)
+* [Praca z narzędziami platformy Visual Studio docker](https://docs.microsoft.com/aspnet/core/publishing/visual-studio-tools-for-docker)
+* [Debugowanie za pomocą kodu programu Visual Studio](https://code.visualstudio.com/docs/nodejs/debugging-recipes#_debug-nodejs-in-docker-containers) 
 
 ## <a name="next-steps"></a>Następne kroki
 
-Repozytorium git zawierające przykładową aplikację zawiera również dokumentację. Aby zapoznać się z omówieniem zasobów dostępnych w repozytorium, zobacz [plik Readme](https://github.com/dotnet/dotnet-docker/blob/master/samples/aspnetapp/README.md). W szczególności Dowiedz się, jak zaimplementować protokół HTTPS:
+Repozytorium Git, które zawiera przykładową aplikację, zawiera również dokumentację. Aby uzyskać przegląd zasobów dostępnych w repozytorium, zobacz [plik README](https://github.com/dotnet/dotnet-docker/blob/master/samples/aspnetapp/README.md). W szczególności dowiedz się, jak zaimplementować protokół HTTPS:
 
 > [!div class="nextstepaction"]
-> [Opracowywanie aplikacji ASP.NET Core przy użyciu platformy Docker za pośrednictwem protokołu HTTPS](https://github.com/dotnet/dotnet-docker/blob/master/samples/run-aspnetcore-https-development.md)
+> [Tworzenie ASP.NET podstawowych aplikacji za pomocą platformy Docker za pośrednictwem protokołu HTTPS](https://github.com/dotnet/dotnet-docker/blob/master/samples/run-aspnetcore-https-development.md)

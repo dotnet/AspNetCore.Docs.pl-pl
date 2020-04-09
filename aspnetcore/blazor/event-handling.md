@@ -1,7 +1,7 @@
 ---
-title: Obsługa zdarzeń Blazor ASP.NET Core
+title: ASP.NET Obsługa zdarzeń Blazor Core
 author: guardrex
-description: Dowiedz się więcej o funkcjach obsługi zdarzeń Blazor, takich jak typy argumentów zdarzeń, wywołania zwrotne zdarzeń i zarządzanie domyślnymi zdarzeniami przeglądarki.
+description: Dowiedz Blazorsię więcej o funkcjach obsługi zdarzeń, w tym typach argumentów zdarzeń, wywołaniach zwrotnych zdarzeń i zarządzaniu domyślnymi zdarzeniami przeglądarki.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
@@ -11,19 +11,19 @@ no-loc:
 - SignalR
 uid: blazor/event-handling
 ms.openlocfilehash: c144841805e07a136f153c25a78c7f9af7c5801b
-ms.sourcegitcommit: d64ef143c64ee4fdade8f9ea0b753b16752c5998
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/18/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "79511369"
 ---
-# <a name="aspnet-core-blazor-event-handling"></a>Obsługa zdarzeń Blazor ASP.NET Core
+# <a name="aspnet-core-blazor-event-handling"></a>ASP.NET Obsługa zdarzeń Core Blazor
 
-Autorzy [Luke Latham](https://github.com/guardrex) i [Daniel Roth](https://github.com/danroth27)
+Autorstwa [Luke'a Lathama](https://github.com/guardrex) i [Daniela Rotha](https://github.com/danroth27)
 
-Składniki Razor zapewniają funkcje obsługi zdarzeń. Dla atrybutu elementu HTML o nazwie [`@on{EVENT}`](xref:mvc/views/razor#onevent) (na przykład `@onclick`) z wartością typu delegata składnik Razor traktuje wartość atrybutu jako procedurę obsługi zdarzeń.
+Komponenty maszynki do golenia zapewniają funkcje obsługi zdarzeń. Dla atrybutu elementu [`@on{EVENT}`](xref:mvc/views/razor#onevent) HTML o `@onclick`nazwie (na przykład) z wartością typu delegate, składnik Razor traktuje wartość atrybutu jako program obsługi zdarzeń.
 
-Poniższy kod wywołuje metodę `UpdateHeading`, gdy przycisk zostanie wybrany w interfejsie użytkownika:
+Następujący kod wywołuje `UpdateHeading` metodę, gdy przycisk jest wybrany w interfejsie użytkownika:
 
 ```razor
 <button class="btn btn-primary" @onclick="UpdateHeading">
@@ -38,7 +38,7 @@ Poniższy kod wywołuje metodę `UpdateHeading`, gdy przycisk zostanie wybrany w
 }
 ```
 
-Poniższy kod wywołuje metodę `CheckChanged`, gdy pole wyboru zostanie zmienione w interfejsie użytkownika:
+Następujący kod wywołuje `CheckChanged` metodę, gdy pole wyboru zostanie zmienione w interfejsie użytkownika:
 
 ```razor
 <input type="checkbox" class="form-check-input" @onchange="CheckChanged" />
@@ -51,9 +51,9 @@ Poniższy kod wywołuje metodę `CheckChanged`, gdy pole wyboru zostanie zmienio
 }
 ```
 
-Procedury obsługi zdarzeń mogą również być asynchroniczne i zwracać <xref:System.Threading.Tasks.Task>. Nie ma potrzeby ręcznego wywoływania [StateHasChanged](xref:blazor/lifecycle#state-changes). Wyjątki są rejestrowane, gdy wystąpią.
+Programy obsługi zdarzeń mogą być również asynchroniczne i zwracać <xref:System.Threading.Tasks.Task>. Nie ma potrzeby ręcznego wywoływania [StateHasChanged](xref:blazor/lifecycle#state-changes). Wyjątki są rejestrowane, gdy wystąpią.
 
-W poniższym przykładzie `UpdateHeading` jest wywoływana asynchronicznie po wybraniu przycisku:
+W poniższym `UpdateHeading` przykładzie jest wywoływana asynchronicznie, gdy przycisk jest zaznaczony:
 
 ```razor
 <button class="btn btn-primary" @onclick="UpdateHeading">
@@ -70,39 +70,39 @@ W poniższym przykładzie `UpdateHeading` jest wywoływana asynchronicznie po wy
 
 ## <a name="event-argument-types"></a>Typy argumentów zdarzeń
 
-W przypadku niektórych zdarzeń dozwolone są typy argumentów zdarzeń. Określanie typu zdarzenia w wywołaniu metody jest konieczne tylko wtedy, gdy typ zdarzenia jest używany w metodzie.
+W przypadku niektórych zdarzeń typy argumentów zdarzeń są dozwolone. Określenie typu zdarzenia w wywołaniu metody jest konieczne tylko wtedy, gdy typ zdarzenia jest używany w metodzie.
 
-Obsługiwane `EventArgs` przedstawiono w poniższej tabeli.
+Obsługiwane `EventArgs` są pokazane w poniższej tabeli.
 
-| Wydarzenie            | Klasa                | Zdarzenia i uwagi dotyczące modelu DOM |
+| Wydarzenie            | Klasa                | Wydarzenia i notatki DOM |
 | ---------------- | -------------------- | -------------------- |
 | Schowek        | `ClipboardEventArgs` | `oncut`, `oncopy`, `onpaste` |
-| Przeciągnij             | `DragEventArgs`      | `ondrag`, `ondragstart`, `ondragenter`, `ondragleave`, `ondragover`, `ondrop`, `ondragend`<br><br>`DataTransfer` i `DataTransferItem` przechowywać przeciągane dane elementu. |
+| Przeciągnij             | `DragEventArgs`      | `ondrag`, `ondragstart`, `ondragenter`, `ondragleave`, `ondragover`, `ondrop`, `ondragend`<br><br>`DataTransfer`i `DataTransferItem` przytrzymaj przeciągnięte dane elementu. |
 | Błąd            | `ErrorEventArgs`     | `onerror` |
-| Wydarzenie            | `EventArgs`          | *Ogólne*<br>`onactivate`, `onbeforeactivate`, `onbeforedeactivate`, `ondeactivate`, `onended`, `onfullscreenchange`, `onfullscreenerror`, `onloadeddata`, `onloadedmetadata`, `onpointerlockchange`, `onpointerlockerror`, `onreadystatechange`, `onscroll`<br><br>*Schowek*<br>`onbeforecut`, `onbeforecopy`, `onbeforepaste`<br><br>*Dane wejściowe*<br>`oninvalid`, `onreset`, `onselect`, `onselectionchange`, `onselectstart``onsubmit`<br><br>*Multimedialny*<br>`oncanplay`, `oncanplaythrough`, `oncuechange`, `ondurationchange`, `onemptied`, `onpause`, `onplay`, `onplaying`, `onratechange`, `onseeked`, `onseeking`, `onstalled`, `onstop`, `onsuspend`, `ontimeupdate`, `onvolumechange`, `onwaiting` |
-| Fokus            | `FocusEventArgs`     | `onfocus`, `onblur`, `onfocusin`, `onfocusout`<br><br>Nie obejmuje obsługi `relatedTarget`. |
+| Wydarzenie            | `EventArgs`          | *Ogólne*<br>`onactivate`, `onbeforeactivate`, `onbeforedeactivate`, `ondeactivate`, `onended`, `onfullscreenchange`, `onfullscreenerror`, `onloadeddata`, `onloadedmetadata`, `onpointerlockchange`, `onpointerlockerror`, `onreadystatechange`, `onscroll`<br><br>*Schowek*<br>`onbeforecut`, `onbeforecopy`, `onbeforepaste`<br><br>*Dane wejściowe*<br>`oninvalid`, `onreset`, `onselect`, `onselectionchange`, `onselectstart`, `onsubmit`<br><br>*Multimedia*<br>`oncanplay`, `oncanplaythrough`, `oncuechange`, `ondurationchange`, `onemptied`, `onpause`, `onplay`, `onplaying`, `onratechange`, `onseeked`, `onseeking`, `onstalled`, `onstop`, `onsuspend`, `ontimeupdate`, `onvolumechange`, `onwaiting` |
+| Ostrości            | `FocusEventArgs`     | `onfocus`, `onblur`, `onfocusin`, `onfocusout`<br><br>Nie obejmuje obsługi `relatedTarget`. |
 | Dane wejściowe            | `ChangeEventArgs`    | `onchange`, `oninput` |
 | Klawiatura         | `KeyboardEventArgs`  | `onkeydown`, `onkeypress`, `onkeyup` |
-| Wskaźnik            | `MouseEventArgs`     | `onclick`, `oncontextmenu`, `ondblclick`, `onmousedown`, `onmouseup`, `onmouseover`, `onmousemove`, `onmouseout` |
+| Mysz            | `MouseEventArgs`     | `onclick`, `oncontextmenu`, `ondblclick`, `onmousedown`, `onmouseup`, `onmouseover`, `onmousemove`, `onmouseout` |
 | Wskaźnik myszy    | `PointerEventArgs`   | `onpointerdown`, `onpointerup`, `onpointercancel`, `onpointermove`, `onpointerover`, `onpointerout`, `onpointerenter`, `onpointerleave`, `ongotpointercapture`, `onlostpointercapture` |
-| Kółko myszy      | `WheelEventArgs`     | `onwheel`, `onmousewheel` |
-| Postęp         | `ProgressEventArgs`  | `onabort`, `onload`, `onloadend`, `onloadstart`, `onprogress``ontimeout` |
-| Dotyk            | `TouchEventArgs`     | `ontouchstart`, `ontouchend`, `ontouchmove`, `ontouchenter`, `ontouchleave``ontouchcancel`<br><br>`TouchPoint` reprezentuje pojedynczy punkt kontaktu na urządzeniu dotykowym. |
+| Kółka myszy      | `WheelEventArgs`     | `onwheel`, `onmousewheel` |
+| Postęp         | `ProgressEventArgs`  | `onabort`, `onload`, `onloadend`, `onloadstart`, `onprogress`, `ontimeout` |
+| Dotyk            | `TouchEventArgs`     | `ontouchstart`, `ontouchend`, `ontouchmove`, `ontouchenter`, `ontouchleave`, `ontouchcancel`<br><br>`TouchPoint`oznacza pojedynczy punkt kontaktowy na urządzeniu dotykowym. |
 
 Więcej informacji zawierają następujące zasoby:
 
-* [Klasy EventArgs w źródle odwołania ASP.NET Core (gałąź dotnet/aspnetcore Release/3.1)](https://github.com/dotnet/aspnetcore/tree/release/3.1/src/Components/Web/src/Web).
-* [Powiadomienia MDN Web docs: GlobalEventHandlers](https://developer.mozilla.org/docs/Web/API/GlobalEventHandlers) &ndash; zawiera informacje o tym, które elementy HTML obsługują każde wydarzenie dom.
+* [EventArgs klasy w ASP.NET Core źródła odniesienia (dotnet/aspnetcore release/3.1 oddział)](https://github.com/dotnet/aspnetcore/tree/release/3.1/src/Components/Web/src/Web).
+* [Dokumenty sieci web MDN: GlobalEventHandlers](https://developer.mozilla.org/docs/Web/API/GlobalEventHandlers) &ndash; Zawiera informacje o tym, które elementy HTML obsługują każde zdarzenie DOM.
 
 ## <a name="lambda-expressions"></a>Wyrażenia lambda
 
-[Wyrażenia lambda](/dotnet/csharp/programming-guide/statements-expressions-operators/lambda-expressions) mogą być również używane:
+[Wyrażenia Lambda](/dotnet/csharp/programming-guide/statements-expressions-operators/lambda-expressions) mogą być również używane:
 
 ```razor
 <button @onclick="@(e => Console.WriteLine("Hello, world!"))">Say hello</button>
 ```
 
-Często wygodnie jest blisko dodatkowych wartości, na przykład podczas iteracji na zestawie elementów. Poniższy przykład tworzy trzy przyciski, z których każdy wywołuje `UpdateHeading` przekazywaniem argumentu zdarzenia (`MouseEventArgs`) i numerem przycisku (`buttonNumber`), po wybraniu w interfejsie użytkownika:
+Często jest wygodne, aby zamknąć dodatkowe wartości, takie jak podczas iteracji nad zestawem elementów. Poniższy przykład tworzy trzy przyciski, z których każdy wywołuje `UpdateHeading` przekazywanie argumentu zdarzenia (`MouseEventArgs`) i jego numer przycisku (`buttonNumber`) po wybraniu w interfejsie użytkownika:
 
 ```razor
 <h2>@_message</h2>
@@ -129,19 +129,19 @@ Często wygodnie jest blisko dodatkowych wartości, na przykład podczas iteracj
 ```
 
 > [!NOTE]
-> **Nie** używaj zmiennej loop (`i`) w pętli `for` bezpośrednio w wyrażeniu lambda. W przeciwnym razie ta sama zmienna jest używana przez wszystkie wyrażenia lambda, co sprawia, że wartość `i`być taka sama we wszystkich lambdach. Zawsze Przechwytuj wartość w zmiennej lokalnej (`buttonNumber` w poprzednim przykładzie), a następnie użyj jej.
+> **Nie** należy używać zmiennej pętli (`i`) w `for` pętli bezpośrednio w wyrażeniu lambda. W przeciwnym razie ta sama zmienna jest `i`używana przez wszystkie wyrażenia lambda, powodując wartość 's być taka sama we wszystkich lambdas. Zawsze przechwytuj jego wartość`buttonNumber` w zmiennej lokalnej (w poprzednim przykładzie), a następnie użyj jej.
 
 ## <a name="eventcallback"></a>EventCallback
 
-Typowym scenariuszem ze składnikami zagnieżdżonymi jest potrzeba uruchomienia metody składnika nadrzędnego w przypadku wystąpienia zdarzenia podrzędnego składnika&mdash;na przykład gdy zdarzenie `onclick` wystąpi w elemencie podrzędnym. Aby uwidocznić zdarzenia między składnikami, użyj `EventCallback`. Składnik nadrzędny może przypisać metodę wywołania zwrotnego do `EventCallback`składnika podrzędnego.
+Typowym scenariuszem z zagnieżdżonych składników jest chęć uruchomienia&mdash;metody składnika `onclick` nadrzędnego, gdy wystąpi zdarzenie składnika podrzędnego na przykład, gdy zdarzenie występuje w podrzędnym. Aby uwidaczniać `EventCallback`zdarzenia między składnikami, należy użyć pliku . Składnik nadrzędny może przypisać metodę wywołania zwrotnego do składnika podrzędnego `EventCallback`.
 
-`ChildComponent` w przykładowej aplikacji (*Components/ChildComponent. Razor*) pokazuje, jak program obsługi `onclick` przycisku został skonfigurowany tak, aby otrzymać delegata `EventCallback` z `ParentComponent`próbki. `EventCallback` jest wpisana z `MouseEventArgs`, która jest odpowiednia dla zdarzenia `onclick` z urządzenia peryferyjnego:
+W `ChildComponent` przykładowej aplikacji *(Components/ChildComponent.brzytwa)* pokazuje, `onclick` jak program obsługi `EventCallback` przycisku jest skonfigurowany do odbierania pełnomocnika z przykładu `ParentComponent`. Wpisuje `EventCallback` się `MouseEventArgs`z , co `onclick` jest odpowiednie dla zdarzenia z urządzenia peryferyjnego:
 
 [!code-razor[](common/samples/3.x/BlazorWebAssemblySample/Components/ChildComponent.razor?highlight=5-7,17-18)]
 
-`ParentComponent` ustawia `EventCallback<T>` elementu podrzędnego (`OnClickCallback`) na jego metodę `ShowMessage`.
+Ustawia `ParentComponent` dziecko `EventCallback<T>` (`OnClickCallback`) do `ShowMessage` jego metody.
 
-*Strony/ParentComponent. Razor*:
+*Strony/ParentComponent.brzytwa:*
 
 ```razor
 @page "/ParentComponent"
@@ -166,33 +166,33 @@ Typowym scenariuszem ze składnikami zagnieżdżonymi jest potrzeba uruchomienia
 }
 ```
 
-Gdy przycisk zostanie wybrany w `ChildComponent`:
+Po wybraniu przycisku `ChildComponent`w :
 
-* Metoda `ShowMessage` `ParentComponent`jest wywoływana. `_messageText` jest aktualizowany i wyświetlany w `ParentComponent`.
-* Wywołanie [StateHasChanged](xref:blazor/lifecycle#state-changes) nie jest wymagane w metodzie wywołania zwrotnego (`ShowMessage`). `StateHasChanged` jest automatycznie wywoływana w celu odrenderowania `ParentComponent`, podobnie jak zdarzenia podrzędne wyzwalają ponowne renderowanie składnika w obsłudze zdarzeń, które są wykonywane w ramach elementu podrzędnego.
+* Metoda `ParentComponent`'s `ShowMessage` jest wywoływana. `_messageText`jest aktualizowana i `ParentComponent`wyświetlana w pliku .
+* Wywołanie [StateHasChanged](xref:blazor/lifecycle#state-changes) nie jest wymagane w metodzie wywołania zwrotnego (`ShowMessage`). `StateHasChanged`jest wywoływana automatycznie do `ParentComponent`rerender , podobnie jak zdarzenia podrzędne wyzwalania składnika rerendering w programach obsługi zdarzeń, które są wykonywane w obrębie elementu podrzędnego.
 
-`EventCallback` i `EventCallback<T>` Zezwalaj na asynchroniczne Delegaty. `EventCallback<T>` jest silnie wpisana i wymaga określonego typu argumentu. `EventCallback` jest słabo wpisywany i dopuszcza każdy typ argumentu.
+`EventCallback`delegatów `EventCallback<T>` asynchronicznych. `EventCallback<T>`jest silnie wpisywany i wymaga określonego typu argumentu. `EventCallback`jest słabo wpisywany i pozwala na dowolny typ argumentu.
 
 ```razor
 <ChildComponent 
     OnClickCallback="@(async () => { await Task.Yield(); _messageText = "Blaze It!"; })" />
 ```
 
-Wywołaj `EventCallback` lub `EventCallback<T>` z `InvokeAsync` i oczekują na <xref:System.Threading.Tasks.Task>:
+Wywołać `EventCallback` lub `EventCallback<T>` `InvokeAsync` z i <xref:System.Threading.Tasks.Task>czekać na:
 
 ```csharp
 await callback.InvokeAsync(arg);
 ```
 
-Użyj `EventCallback` i `EventCallback<T>` do obsługi zdarzeń i parametrów składnika powiązania.
+Służy `EventCallback` `EventCallback<T>` i do obsługi zdarzeń i parametrów składnika wiązania.
 
-Preferuj silnie wpisaną `EventCallback<T>` przez `EventCallback`. `EventCallback<T>` zapewnia lepszą opinię o błędach dla użytkowników składnika. Podobnie jak w przypadku innych programów obsługi zdarzeń interfejsu użytkownika, określenie parametru zdarzenia jest opcjonalne. Użyj `EventCallback`, gdy nie zostanie przeniesiona wartość do wywołania zwrotnego.
+Preferuj mocno `EventCallback<T>` `EventCallback`wpisane nad . `EventCallback<T>`zapewnia lepsze informacje zwrotne o błędach dla użytkowników składnika. Podobnie jak inne programy obsługi zdarzeń interfejsu użytkownika, określenie parametru zdarzenia jest opcjonalne. Użyj, `EventCallback` gdy nie ma żadnej wartości przekazywane do wywołania zwrotnego.
 
-## <a name="prevent-default-actions"></a>Zapobiegaj akcjom domyślnym
+## <a name="prevent-default-actions"></a>Zapobiegaj działaniom domyślnym
 
-Użyj atrybutu dyrektywy [`@on{EVENT}:preventDefault`](xref:mvc/views/razor#oneventpreventdefault) , aby zapobiec domyślnej akcji dla zdarzenia.
+Użyj [`@on{EVENT}:preventDefault`](xref:mvc/views/razor#oneventpreventdefault) atrybutu dyrektywy, aby zapobiec akcji domyślnej dla zdarzenia.
 
-Po wybraniu klucza na urządzeniu wejściowym, gdy fokus elementu znajduje się w polu tekstowym, przeglądarka zwykle wyświetla znak klucza w polu tekstowym. W poniższym przykładzie zachowanie domyślne jest blokowane przez określenie atrybutu dyrektywy `@onkeypress:preventDefault`. Licznik przyrostu i klucz **+** nie są przechwytywane do wartości elementu `<input>`:
+Gdy na urządzeniu wejściowym zaznaczono klucz, a fokus elementu znajduje się na polu tekstowym, przeglądarka zwykle wyświetla znak klucza w polu tekstowym. W poniższym przykładzie domyślne zachowanie jest `@onkeypress:preventDefault` zapobiegane przez określenie atrybutu dyrektywy. Licznik zwiększa się, a **+** klucz nie jest `<input>` przechwytywany do wartości elementu:
 
 ```razor
 <input value="@_count" @onkeypress="KeyHandler" @onkeypress:preventDefault />
@@ -210,21 +210,21 @@ Po wybraniu klucza na urządzeniu wejściowym, gdy fokus elementu znajduje się 
 }
 ```
 
-Określanie atrybutu `@on{EVENT}:preventDefault` bez wartości jest równoważne z `@on{EVENT}:preventDefault="true"`.
+Określenie atrybutu `@on{EVENT}:preventDefault` bez wartości jest `@on{EVENT}:preventDefault="true"`równoważne .
 
-Wartość atrybutu może również być wyrażeniem. W poniższym przykładzie `_shouldPreventDefault` jest polem `bool` ustawionym na `true` lub `false`:
+Wartość atrybutu może być również wyrażeniem. W poniższym `_shouldPreventDefault` przykładzie `bool` jest pole `true` ustawione `false`na jeden lub:
 
 ```razor
 <input @onkeypress:preventDefault="_shouldPreventDefault" />
 ```
 
-Procedura obsługi zdarzeń nie jest wymagana, aby zapobiec akcji domyślnej. Procedury obsługi zdarzeń i zapobiegania domyślnym scenariuszom akcji mogą być używane niezależnie.
+Program obsługi zdarzeń nie jest wymagany, aby zapobiec akcji domyślnej. Program obsługi zdarzeń i zapobiec domyślne scenariusze akcji mogą być używane niezależnie.
 
 ## <a name="stop-event-propagation"></a>Zatrzymaj propagację zdarzeń
 
-Użyj atrybutu dyrektywy [`@on{EVENT}:stopPropagation`](xref:mvc/views/razor#oneventstoppropagation) , aby zatrzymać propagację zdarzeń.
+Użyj [`@on{EVENT}:stopPropagation`](xref:mvc/views/razor#oneventstoppropagation) atrybutu dyrektywy, aby zatrzymać propagację zdarzeń.
 
-W poniższym przykładzie, zaznaczając pole wyboru, Zapobiegaj kliknięciu zdarzeń z drugiego elementu podrzędnego `<div>` od propagowania do `<div>`nadrzędnego:
+W poniższym przykładzie zaznaczenie pola wyboru zapobiega propagacji zdarzeń kliknięć z drugiego dziecka `<div>` do nadrzędnego: `<div>`
 
 ```razor
 <label>

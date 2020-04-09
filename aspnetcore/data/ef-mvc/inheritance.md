@@ -1,6 +1,6 @@
 ---
-title: 'Samouczek: implementowanie dziedziczenia-ASP.NET MVC z EF Core'
-description: W tym samouczku przedstawiono sposób implementowania dziedziczenia w modelu danych przy użyciu Entity Framework Core w aplikacji ASP.NET Core.
+title: 'Samouczek: Implementowanie dziedziczenia - ASP.NET MVC z EF Core'
+description: W tym samouczku pokazano, jak zaimplementować dziedziczenie w modelu danych przy użyciu entity framework core w aplikacji ASP.NET Core.
 author: rick-anderson
 ms.author: riande
 ms.custom: mvc
@@ -8,122 +8,122 @@ ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/inheritance
 ms.openlocfilehash: dab3d2b057162f6d986db10e74e3681acc0ada3b
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78657242"
 ---
-# <a name="tutorial-implement-inheritance---aspnet-mvc-with-ef-core"></a>Samouczek: implementowanie dziedziczenia-ASP.NET MVC z EF Core
+# <a name="tutorial-implement-inheritance---aspnet-mvc-with-ef-core"></a>Samouczek: Implementowanie dziedziczenia - ASP.NET MVC z EF Core
 
-W poprzednim samouczku zostały obsłużone wyjątki współbieżności. W tym samouczku pokazano, jak zaimplementować dziedziczenie w modelu danych.
+W poprzednim samouczku obsługiwane wyjątki współbieżności. W tym samouczku pokazano, jak zaimplementować dziedziczenie w modelu danych.
 
-W programowaniu zorientowanym obiektowo można użyć dziedziczenia, aby ułatwić ponowne użycie kodu. W tym samouczku zmienisz klasy `Instructor` i `Student` tak, aby znajdowały się one w `Person` klasie bazowej, która zawiera właściwości, takie jak `LastName`, które są wspólne dla instruktorów i studentów. Nie dodasz ani nie zmienisz żadnych stron sieci Web, ale zmienisz część kodu, a zmiany zostaną automatycznie odzwierciedlone w bazie danych.
+W programowaniu obiektowym można użyć dziedziczenia, aby ułatwić ponowne użycie kodu. W tym samouczku zmienisz `Instructor` `Student` i klasy tak, aby `Person` pochodziły z klasy `LastName` podstawowej, która zawiera właściwości, takie jak te są wspólne dla instruktorów i studentów. Nie będziesz dodawać ani zmieniać żadnych stron internetowych, ale zmienisz część kodu, a te zmiany zostaną automatycznie odzwierciedlone w bazie danych.
 
-W tym samouczku zostaną wykonane następujące czynności:
+W tym samouczku zostały wykonane następujące czynności:
 
 > [!div class="checklist"]
-> * Dziedziczenie mapowania do bazy danych
-> * Tworzenie klasy Person
-> * Aktualizuj instruktora i uczniów
+> * Mapowanie dziedziczenia do bazy danych
+> * Tworzenie klasy Osoba
+> * Aktualizuj instruktora i ucznia
 > * Dodawanie osoby do modelu
 > * Tworzenie i aktualizowanie migracji
 > * Testowanie implementacji
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
-* [Obsługa współbieżności](concurrency.md)
+* [Współbieżność uchwytów](concurrency.md)
 
-## <a name="map-inheritance-to-database"></a>Dziedziczenie mapowania do bazy danych
+## <a name="map-inheritance-to-database"></a>Mapowanie dziedziczenia do bazy danych
 
-Klasy `Instructor` i `Student` w modelu danych szkolnych mają kilka właściwości, które są identyczne:
+I `Instructor` `Student` klasy w modelu danych szkoły mają kilka właściwości, które są identyczne:
 
-![Klasy uczniów i instruktorów](inheritance/_static/no-inheritance.png)
+![Zajęcia dla uczniów i instruktorów](inheritance/_static/no-inheritance.png)
 
-Załóżmy, że chcesz wyeliminować nadmiarowy kod dla właściwości, które są współużytkowane przez `Instructor` i `Student` jednostek. Lub chcesz napisać usługę, która może formatować nazwy bez Caring, niezależnie od tego, czy nazwa pochodzi od instruktora, czy studenta. Można utworzyć `Person` klasę bazową, która zawiera tylko te właściwości udostępnione, a następnie uczynić klasy `Instructor` i `Student` dziedziczone z tej klasy bazowej, jak pokazano na poniższej ilustracji:
+Załóżmy, że chcesz wyeliminować nadmiarowy kod dla `Instructor` `Student` właściwości, które są współużytkowane przez i jednostek. Lub chcesz napisać usługę, która może formatować nazwy bez dbania, czy nazwa pochodzi od instruktora lub ucznia. Można utworzyć `Person` klasę podstawową, która zawiera tylko te `Instructor` `Student` właściwości udostępnione, a następnie sprawić, aby klasy i dziedziczyły z tej klasy podstawowej, jak pokazano na poniższej ilustracji:
 
-![Klasy uczniów i instruktorów wyprowadzane z klasy Person](inheritance/_static/inheritance.png)
+![Zajęcia dla uczniów i instruktorów pochodzące z klasy person](inheritance/_static/inheritance.png)
 
-Istnieje kilka sposobów reprezentowania tej struktury dziedziczenia w bazie danych. Może istnieć tabela osób, która zawiera informacje o studentach i instruktorach w pojedynczej tabeli. Niektóre kolumny mogą dotyczyć tylko instruktorów (HireDate), niektórych tylko do uczniów (EnrollmentDate), niektórych do obu (LastName, FirstName). Zazwyczaj masz kolumnę rozróżniacza, aby wskazać, który typ reprezentuje każdy wiersz. Na przykład kolumna rozróżniacza może mieć "instruktor" dla instruktorów i "Student" dla studentów.
+Istnieje kilka sposobów tej struktury dziedziczenia może być reprezentowana w bazie danych. W jednej tabeli może być tabela Osoba zawierająca informacje o uczniach i instruktorach. Niektóre kolumny mogą mieć zastosowanie tylko do instruktorów (HireDate), niektóre tylko do studentów (EnrollmentDate), niektóre do obu (LastName, FirstName). Zazwyczaj kolumna rozróżniacza wskazuje, który typ reprezentuje każdy wiersz. Na przykład kolumna dyskryminująca może mieć "Instruktor" dla instruktorów i "Student" dla studentów.
 
 ![Przykład tabeli na hierarchię](inheritance/_static/tph.png)
 
-Ten wzorzec generowania struktury dziedziczenia jednostek z pojedynczej tabeli bazy danych jest nazywany dziedziczeniem na hierarchię (TPH).
+Ten wzorzec generowania struktury dziedziczenia jednostki z jednej tabeli bazy danych jest nazywany dziedziczeniem tabeli na hierarchię (TPH).
 
-Alternatywą jest, aby baza danych wyglądała podobnie jak struktura dziedziczenia. Na przykład można mieć tylko pola nazw w tabeli Person i mieć osobne tabele instruktorów i uczniów z polami daty.
+Alternatywą jest, aby baza danych wyglądać bardziej jak struktury dziedziczenia. Na przykład można mieć tylko pola nazwy w tabeli Osoba i mieć oddzielne tabele Instruktor i Student z polami daty.
 
-![Dziedziczenie dla typu tabeli](inheritance/_static/tpt.png)
+![Dziedziczenie tabeli na typ](inheritance/_static/tpt.png)
 
-Ten wzorzec tworzenia tabeli bazy danych dla każdej klasy jednostek jest nazywany dziedziczeniem tabeli na typ (TPT).
+Ten wzorzec tworzenia tabeli bazy danych dla każdej klasy jednostki jest nazywany dziedziczeniem tabeli na typ (TPT).
 
-Jeszcze kolejną opcją jest zamapowanie wszystkich typów nieabstrakcyjnych na poszczególne tabele. Wszystkie właściwości klasy, łącznie z dziedziczonymi właściwościami, mapują do kolumn odpowiedniej tabeli. Ten wzorzec jest nazywany dziedziczeniem klasy opartej na tabeli (TPC). W przypadku zaimplementowania dziedziczenia testowego dla osoby, ucznia i klas instruktorów, jak pokazano wcześniej, w tabelach student i instruktor nie będą one wyglądały inaczej po wdrożeniu dziedziczenia niż wcześniej.
+Jeszcze inną opcją jest mapowanie wszystkich typów nieabstrakcyjnych do poszczególnych tabel. Wszystkie właściwości klasy, w tym właściwości dziedziczone, są mapowane na kolumny odpowiedniej tabeli. Ten wzorzec jest nazywany table-per-concrete class (TPC) dziedziczenia. Jeśli zaimplementowano dziedziczenie TPC dla klasy Person, Student i Instructor, jak pokazano wcześniej, tabele Uczeń i instruktor nie będą wyglądać inaczej po wdrożeniu dziedziczenia niż wcześniej.
 
-Wzorce TPHa i dziedziczenia zapewniają lepszą wydajność niż wzorce dziedziczenia TPT, ponieważ wzorce TPT mogą powodować złożone zapytania sprzężenia.
+Wzorce dziedziczenia TPC i TPH zazwyczaj zapewniają lepszą wydajność niż wzorce dziedziczenia TPT, ponieważ wzorce TPT mogą powodować złożone zapytania sprzężenia.
 
-W tym samouczku pokazano, jak wdrożyć dziedziczenie TPH. TPH jest jedynym wzorcem dziedziczenia obsługiwanym przez Entity Framework Core.  To, co robisz, jest utworzenie klasy `Person`, zmiana klas `Instructor` i `Student` na pochodny od `Person`, dodanie nowej klasy do `DbContext`i utworzenie migracji.
+W tym samouczku pokazano, jak zaimplementować dziedziczenie TPH. TPH jest tylko wzorzec dziedziczenia, który obsługuje Entity Framework Core.  Co zrobisz, to utworzyć `Person` klasę, `Instructor` zmienić i `Student` klasy `Person`pochodzić z , `DbContext`dodać nową klasę do , i utworzyć migrację.
 
 > [!TIP]
-> Rozważ zapisanie kopii projektu przed wprowadzeniem następujących zmian.  Jeśli wystąpią problemy i trzeba zacząć od nowa, będzie łatwiej zacząć od zapisanego projektu zamiast odwracania kroków wykonanych dla tego samouczka lub powrotu do początku całej serii.
+> Należy rozważyć zapisanie kopii projektu przed wprowadzeniem następujących zmian.  Następnie, jeśli napotkasz problemy i trzeba zacząć od nowa, łatwiej będzie rozpocząć od zapisanego projektu zamiast cofania kroków wykonanych dla tego samouczka lub wracając do początku całej serii.
 
-## <a name="create-the-person-class"></a>Tworzenie klasy Person
+## <a name="create-the-person-class"></a>Tworzenie klasy Osoba
 
-W folderze modele Utwórz Person.cs i Zastąp kod szablonu następującym kodem:
+W folderze Modele utwórz Person.cs i zastąp kod szablonu następującym kodem:
 
 [!code-csharp[](intro/samples/cu/Models/Person.cs)]
 
-## <a name="update-instructor-and-student"></a>Aktualizuj instruktora i uczniów
+## <a name="update-instructor-and-student"></a>Aktualizuj instruktora i ucznia
 
-W *Instructor.cs*, pochodny klasy instruktora od klasy Person i Usuń pola klucza i nazwy. Kod będzie wyglądać podobnie do poniższego przykładu:
+W *Instructor.cs*, wyprowadz instructor klasy z Person klasy i usunąć klucz i nazwy pól. Kod będzie wyglądać następująco:
 
 [!code-csharp[](intro/samples/cu/Models/Instructor.cs?name=snippet_AfterInheritance&highlight=8)]
 
-Wprowadź te same zmiany w programie *student.cs*.
+Wprowadzać te same zmiany w *Student.cs*.
 
 [!code-csharp[](intro/samples/cu/Models/Student.cs?name=snippet_AfterInheritance&highlight=8)]
 
 ## <a name="add-person-to-the-model"></a>Dodawanie osoby do modelu
 
-Dodaj typ jednostki osoby do *SchoolContext.cs*. Nowe wiersze są wyróżnione.
+Dodaj typ encji Osoba do *SchoolContext.cs*. Nowe linie zostaną wyróżnione.
 
 [!code-csharp[](intro/samples/cu/Data/SchoolContext.cs?name=snippet_AfterInheritance&highlight=19,30)]
 
-To wszystko, co Entity Framework potrzebuje w celu skonfigurowania dziedziczenia w hierarchii na poziomie tabeli. Jak widać, gdy baza danych zostanie zaktualizowana, będzie miała tabelę osób zamiast tabel uczniów i instruktorów.
+Jest to wszystko, czego potrzebuje entity framework w celu skonfigurowania dziedziczenia tabeli na hierarchię. Jak zobaczysz, po zaktualizowaniu bazy danych będzie miała tabelę Osoba zamiast tabely Uczeń i Instruktor.
 
 ## <a name="create-and-update-migrations"></a>Tworzenie i aktualizowanie migracji
 
-Zapisz zmiany i skompiluj projekt. Następnie otwórz okno polecenia w folderze projektu i wprowadź następujące polecenie:
+Zapisz swoje zmiany i zbuduj projekt. Następnie otwórz okno polecenia w folderze projektu i wprowadź następujące polecenie:
 
 ```dotnetcli
 dotnet ef migrations add Inheritance
 ```
 
-Nie uruchamiaj jeszcze polecenia `database update`. To polecenie spowoduje utratę danych, ponieważ spowoduje porzucenie tabeli instruktora i zmianę nazwy tabeli uczniów na osobę. Musisz podać niestandardowy kod, aby zachować istniejące dane.
+Nie uruchamiaj `database update` jeszcze polecenia. To polecenie spowoduje utratę danych, ponieważ spowoduje upuszczenie tabeli Instructor i zmianę nazwy tabeli Student na Osoba. Należy podać kod niestandardowy, aby zachować istniejące dane.
 
-Otwórz okno *migracji/\<sygnatura czasowa > _Inheritance. cs* i Zastąp metodę `Up` następującym kodem:
+Otwórz *migracje/\<sygnaturę czasową>_Inheritance.cs* i zastąp `Up` metodę następującym kodem:
 
 [!code-csharp[](intro/samples/cu/Migrations/20170216215525_Inheritance.cs?name=snippet_Up)]
 
-Ten kod obejmuje następujące zadania aktualizacji bazy danych:
+Ten kod zajmuje się następującymi zadaniami aktualizacji bazy danych:
 
-* Usuwa ograniczenia klucza obcego i indeksy wskazujące na tabelę uczniów.
+* Usuwa ograniczenia klucza obcego i indeksy wskazujące tabelę Student.
 
-* Zmienia nazwę tabeli instruktora jako osobę i wprowadza zmiany, które są niezbędne do przechowywania danych ucznia:
+* Zmienia nazwę tabeli Instructor jako Person i wprowadza zmiany potrzebne do przechowywania danych ucznia:
 
-* Dodaje wartość null EnrollmentDate dla studentów.
+* Dodaje nullable EnrollmentDate dla studentów.
 
-* Dodaje kolumnę rozróżniacza, aby wskazać, czy wiersz dotyczy studenta, czy instruktora.
+* Dodaje kolumnę Rozróżniacz, aby wskazać, czy wiersz jest dla ucznia, czy instruktora.
 
-* Sprawia, że HireDate dopuszcza wartość null, ponieważ wiersze uczniów nie mają dat zatrudnienia.
+* Sprawia, że HireDate jest niemożna anulować, ponieważ wiersze uczniów nie będą miały dat zatrudnienia.
 
-* Dodaje pole tymczasowe, które będzie używane do aktualizacji kluczy obcych, które wskazują uczniów. W przypadku kopiowania uczniów do tabeli osób zostaną pobrane nowe wartości klucza podstawowego.
+* Dodaje tymczasowe pole, które będzie używane do aktualizowania kluczy obcych, które wskazują uczniów. Podczas kopiowania uczniów do tabeli Osoba otrzymają nowe wartości klucza podstawowego.
 
-* Kopiuje dane z tabeli uczniów do tabeli Person. Powoduje to, że uczniowie mogą uzyskać przypisane nowe wartości klucza podstawowego.
+* Kopiuje dane z tabeli Student do tabeli Osoba. Powoduje to, że uczniowie otrzymują przypisane nowe wartości klucza podstawowego.
 
-* Naprawia wartości kluczy obcych, które wskazują uczniów.
+* Naprawia wartości klucza obcego, które wskazują na uczniów.
 
-* Ponownie tworzy ograniczenia klucza obcego i indeksy, teraz wskazując je do tabeli Person.
+* Ponownie tworzy ograniczenia klucza obcego i indeksy, teraz wskazując je na person tabeli.
 
-(Jeśli jako typ klucza podstawowego użyto identyfikatora GUID zamiast Integer, wartości klucza podstawowego studenta nie będą musiały ulec zmianie, a niektóre z tych kroków mogły zostać pominięte).
+(Jeśli identyfikator GUID zamiast liczby całkowitej jest typem klucza podstawowego, wartości klucza podstawowego ucznia nie musiałyby ulec zmianie, a kilka z tych kroków mogło zostać pominiętych).
 
 Uruchom `database update` polecenie:
 
@@ -131,44 +131,44 @@ Uruchom `database update` polecenie:
 dotnet ef database update
 ```
 
-(W systemie produkcyjnym można wprowadzać odpowiednie zmiany w metodzie `Down` na wypadek, gdyby kiedykolwiek było użyć tego programu w celu powrotu do poprzedniej wersji bazy danych. W tym samouczku nie będziesz używać metody `Down`.)
+(W systemie produkcyjnym można wprowadzić `Down` odpowiednie zmiany do metody w przypadku, gdy kiedykolwiek trzeba było użyć, aby wrócić do poprzedniej wersji bazy danych. W tym samouczku nie będzie `Down` przy użyciu metody.)
 
 > [!NOTE]
-> Podczas wprowadzania zmian schematu w bazie danych, która ma istniejące dane, można uzyskać inne błędy. W przypadku wystąpienia błędów migracji, których nie można rozwiązać, można zmienić nazwę bazy danych w parametrach połączenia lub usunąć bazę danych. W przypadku nowej bazy danych nie ma żadnych danych do migracji, a polecenie Update-Database może być gotowe do ukończenia bez błędów. Aby usunąć bazę danych, użyj SSOX lub uruchom polecenie interfejsu wiersza polecenia `database drop`.
+> Istnieje możliwość uzyskania innych błędów podczas wprowadzania zmian schematu w bazie danych, która ma istniejące dane. Jeśli zostaną otrzymasz błędy migracji, których nie można rozwiązać, możesz zmienić nazwę bazy danych w ciągu połączenia lub usunąć bazę danych. W nowej bazie danych nie ma żadnych danych do migracji, a polecenie update-database jest bardziej prawdopodobne, aby zakończyć bez błędów. Aby usunąć bazę danych, należy `database drop` użyć SSOX lub uruchom polecenie CLI.
 
 ## <a name="test-the-implementation"></a>Testowanie implementacji
 
 Uruchom aplikację i wypróbuj różne strony. Wszystko działa tak samo jak wcześniej.
 
-W **Eksplorator obiektów SQL Server**rozwiń węzeł **połączenia danych/SchoolContext** , a następnie **tabele**i sprawdź, czy tabele student i instruktor zostały zastąpione przez tabelę Person. Otwórz projektanta tabeli Person i sprawdź, czy zawiera on wszystkie kolumny, które zostały użyte w tabelach studenta i instruktora.
+W **Eksploratorze obiektów programu SQL Server**rozwiń węzeł Połączenia **danych/Podręcznik szkolny,** a następnie tabele , a **tabele**Dla uczniów i instruktorów zostały zastąpione przez tabelę Osoba. Otwórz projektanta tabel osoby i zobaczysz, że ma wszystkie kolumny, które były w tabelach Uczeń i instruktor.
 
 ![Tabela osób w SSOX](inheritance/_static/ssox-person-table.png)
 
-Kliknij prawym przyciskiem myszy tabelę osoba, a następnie kliknij polecenie **Pokaż dane tabeli** , aby wyświetlić kolumnę rozróżniacza.
+Kliknij prawym przyciskiem myszy tabelę Osoba, a następnie kliknij polecenie **Pokaż dane tabeli,** aby wyświetlić kolumnę dyskryminującą.
 
-![Tabela osób w SSOX — dane tabeli](inheritance/_static/ssox-person-data.png)
+![Tabela osób w SSOX - dane tabeli](inheritance/_static/ssox-person-data.png)
 
 ## <a name="get-the-code"></a>Uzyskiwanie kodu
 
-[Pobierz lub Wyświetl ukończoną aplikację.](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
+[Pobierz lub wyświetl ukończoną aplikację.](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
-Aby uzyskać więcej informacji na temat dziedziczenia w Entity Framework Core, zobacz [dziedziczenie](/ef/core/modeling/inheritance).
+Aby uzyskać więcej informacji na temat dziedziczenia w core frameworku encji, zobacz [Dziedziczenie](/ef/core/modeling/inheritance).
 
 ## <a name="next-steps"></a>Następne kroki
 
-W tym samouczku zostaną wykonane następujące czynności:
+W tym samouczku zostały wykonane następujące czynności:
 
 > [!div class="checklist"]
-> * Mapowane dziedziczenie do bazy danych
-> * Utworzono klasę Person
-> * Zaktualizowany instruktor i student
+> * Zamapowane dziedziczenie do bazy danych
+> * Utworzono klasę Osoba
+> * Zaktualizowany instruktor i uczeń
 > * Dodano osobę do modelu
 > * Tworzenie i aktualizowanie migracji
 > * Przetestowano implementację
 
-Przejdź do następnego samouczka, aby dowiedzieć się, jak obsługiwać wiele relatywnie zaawansowanych scenariuszy Entity Framework.
+Przejdź do następnego samouczka, aby dowiedzieć się, jak obsługiwać wiele stosunkowo zaawansowanych scenariuszy entity framework.
 
 > [!div class="nextstepaction"]
-> [Dalej: Tematy zaawansowane](advanced.md)
+> [Dalej: Zaawansowane tematy](advanced.md)

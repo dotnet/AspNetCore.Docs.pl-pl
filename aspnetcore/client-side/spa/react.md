@@ -1,67 +1,67 @@
 ---
-title: Użyj szablonu projektu reagowanie z ASP.NET Core
+title: Użyj szablonu projektu React z ASP.NET Core
 author: SteveSandersonMS
-description: Dowiedz się, jak rozpocząć pracę z szablonem projektu aplikacji jednostronicowej (SPA) ASP.NET Core na potrzeby reakcji i tworzenia aplikacji.
+description: Dowiedz się, jak rozpocząć pracę z szablonem projektu ASP.NET Core Single Page Application (SPA) dla aplikacji React i create-react-app.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 03/07/2019
 uid: spa/react
 ms.openlocfilehash: 9703a62eb7f779974382fe0fb01702d9fcd37d64
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78664963"
 ---
-# <a name="use-the-react-project-template-with-aspnet-core"></a>Użyj szablonu projektu reagowanie z ASP.NET Core
+# <a name="use-the-react-project-template-with-aspnet-core"></a>Użyj szablonu projektu React z ASP.NET Core
 
-Zaktualizowany szablon projektu dotyczącego reakcji umożliwia korzystanie z dogodnych punktów początkowych dla ASP.NET Core aplikacji przy użyciu konwencji reagowania i [tworzenia aplikacji](https://github.com/facebookincubator/create-react-app) (CRA) w celu zaimplementowania rozbudowanego interfejsu użytkownika po stronie klienta.
+Zaktualizowany szablon projektu React zapewnia wygodny punkt wyjścia dla aplikacji ASP.NET Core przy użyciu konwencji React i create-react-app (CRA) w celu zaimplementowania bogatego interfejsu użytkownika po stronie klienta.The updated React project template provides a convenient starting point for ASP.NET Core apps using React and [create-react-app](https://github.com/facebookincubator/create-react-app) (CRA) conventions to implement a rich, client-side user interface (UI).
 
-Szablon jest równoznaczny z tworzeniem projektu ASP.NET Core, który działa jako zaplecze interfejsu API, a standardowy projekt reakcji CRA reaguje na działanie jako interfejs użytkownika, ale z wygodą hostingu zarówno w jednym projekcie aplikacji, który można skompilować i opublikować jako pojedynczą jednostkę.
+Szablon jest odpowiednikiem tworzenia zarówno projektu ASP.NET Core do działania jako zaplecze interfejsu API, jak i standardowego projektu CRA React, aby działać jako interfejs użytkownika, ale z wygodą hostingu zarówno w jednym projekcie aplikacji, który może być zbudowany i opublikowany jako pojedyncza jednostka.
 
-Szablon projektu reaguje nie jest przeznaczony do renderowania po stronie serwera (SSR). W przypadku usługi SSR z reagowaniem i środowiska Node. js Rozważ użycie [poniższego elementu js](https://github.com/zeit/next.js/) lub [Razzle](https://github.com/jaredpalmer/razzle).
+Szablon projektu React nie jest przeznaczony do renderowania po stronie serwera (SSR). Dla SSR z React i Node.js, należy wziąć pod uwagę [Next.js](https://github.com/zeit/next.js/) lub [Razzle](https://github.com/jaredpalmer/razzle).
 
 ## <a name="create-a-new-app"></a>Tworzenie nowej aplikacji
 
-Jeśli zainstalowano ASP.NET Core 2,1, nie ma potrzeby instalowania szablonu projektu z reagowaniem.
+Jeśli masz ASP.NET zainstalowanym core 2.1, nie ma potrzeby instalowania szablonu projektu React.
 
-Utwórz nowy projekt z wiersza polecenia przy użyciu polecenia `dotnet new react` w pustym katalogu. Na przykład następujące polecenia tworzą aplikację w katalogu *My-New-App* i przełączają się do tego katalogu:
+Utwórz nowy projekt z wiersza `dotnet new react` polecenia za pomocą polecenia w pustym katalogu. Na przykład następujące polecenia tworzą aplikację w katalogu *my-new-app* i przełączają się do tego katalogu:
 
 ```dotnetcli
 dotnet new react -o my-new-app
 cd my-new-app
 ```
 
-Uruchom aplikację z poziomu programu Visual Studio lub interfejs wiersza polecenia platformy .NET Core:
+Uruchom aplikację z programu Visual Studio lub interfejsu wiersza polecenia .NET Core:
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
-Otwórz wygenerowany plik *csproj* i uruchom aplikację w zwykły sposób.
+Otwórz wygenerowany plik *csproj* i uruchom aplikację normalnie stamtąd.
 
-Proces kompilacji przywraca zależności npm w pierwszym przebiegu, co może potrwać kilka minut. Kolejne kompilacje są znacznie szybsze.
+Proces kompilacji przywraca zależności npm przy pierwszym uruchomieniu, co może potrwać kilka minut. Kolejne kompilacje są znacznie szybsze.
 
-# <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
 
-Upewnij się, że masz zmienną środowiskową o nazwie `ASPNETCORE_Environment` z wartością `Development`. W systemie Windows (w komunikatach innych niż programu PowerShell) Uruchom `SET ASPNETCORE_Environment=Development`. W systemie Linux lub macOS Uruchom `export ASPNETCORE_Environment=Development`.
+Upewnij się, że `ASPNETCORE_Environment` masz zmienną środowiskową o nazwie o wartości `Development`. W systemie Windows (w monitach innych `SET ASPNETCORE_Environment=Development`niż powershell) uruchom program . W systemie Linux lub `export ASPNETCORE_Environment=Development`macOS uruchom plik .
 
-Uruchom [kompilację dotnet](/dotnet/core/tools/dotnet-build) , aby sprawdzić, czy aplikacja jest poprawnie skompilowana. W pierwszym uruchomieniu proces kompilacji przywraca zależności npm, co może potrwać kilka minut. Kolejne kompilacje są znacznie szybsze.
+Uruchom [kompilację dotnet,](/dotnet/core/tools/dotnet-build) aby poprawnie zweryfikować kompilacje aplikacji. Przy pierwszym uruchomieniu proces kompilacji przywraca zależności npm, co może potrwać kilka minut. Kolejne kompilacje są znacznie szybsze.
 
-Uruchom [uruchomienie programu dotnet](/dotnet/core/tools/dotnet-run) , aby uruchomić aplikację.
+Uruchom [dotnet uruchom,](/dotnet/core/tools/dotnet-run) aby uruchomić aplikację.
 
 ---
 
-Szablon projektu tworzy aplikację ASP.NET Core i aplikację do reagowania. Aplikacja ASP.NET Core jest przeznaczona do użycia na potrzeby dostępu do danych, autoryzacji i innych zagadnień po stronie serwera. Aplikacja do reagowania znajdująca się w podkatalogu *ClientApp* jest przeznaczona do użycia w przypadku wszystkich problemów z interfejsem użytkownika.
+Szablon projektu tworzy aplikację ASP.NET Core i aplikację React. Aplikacja ASP.NET Core jest przeznaczona do użycia w celu uzyskania dostępu do danych, autoryzacji i innych problemów po stronie serwera. Aplikacja React, zamieszkała w podkatalogu *ClientApp,* jest przeznaczona do użycia dla wszystkich problemów z interfejsem użytkownika.
 
-## <a name="add-pages-images-styles-modules-etc"></a>Dodawanie stron, obrazów, stylów, modułów itp.
+## <a name="add-pages-images-styles-modules-etc"></a>Dodaj strony, obrazy, style, moduły itp.
 
-Katalog *ClientApp* jest standardową aplikacją do reagowania w CRA. Aby uzyskać więcej informacji, zobacz oficjalną [dokumentację CRA](https://create-react-app.dev/docs/getting-started/) .
+Katalog *ClientApp* jest standardową aplikacją CRA React. Więcej informacji można znaleźć w oficjalnej [dokumentacji CRA.](https://create-react-app.dev/docs/getting-started/)
 
-Istnieją niewielkie różnice między aplikacją reakcji utworzoną przez ten szablon a tym utworzonym przez CRA. jednak możliwości aplikacji nie są zmieniane. Aplikacja utworzona przez szablon zawiera układ oparty na [Bootstrap](https://getbootstrap.com/)i podstawowy przykład routingu.
+Istnieją niewielkie różnice między aplikacją React utworzoną przez ten szablon a aplikacją stworzoną przez samą cra; jednak możliwości aplikacji pozostają niezmienione. Aplikacja utworzona przez szablon zawiera układ oparty na [bootstrap](https://getbootstrap.com/)i przykład podstawowego routingu.
 
-## <a name="install-npm-packages"></a>Zainstaluj pakiety npm
+## <a name="install-npm-packages"></a>Instalowanie pakietów npm
 
-Aby zainstalować pakiety npm innych firm, należy użyć wiersza polecenia w podkatalogu *ClientApp* . Na przykład:
+Aby zainstalować pakiety npm innych firm, użyj wiersza polecenia w podkatalogu *ClientApp.* Przykład:
 
 ```console
 cd ClientApp
@@ -70,44 +70,44 @@ npm install --save <package_name>
 
 ## <a name="publish-and-deploy"></a>Publikowanie i wdrażanie
 
-W trakcie opracowywania aplikacja jest uruchamiana w trybie zoptymalizowanym pod kątem wygody dla deweloperów. Na przykład pakiety JavaScript zawierają mapy źródłowe (w przypadku debugowania można zobaczyć oryginalny kod źródłowy). Aplikacja obserwuje zmiany plików JavaScript, HTML i CSS na dysku, a następnie automatycznie ponownie kompiluje i ładuje je, gdy zobaczy zmiany tych plików.
+W rozwoju aplikacja działa w trybie zoptymalizowanym pod kątem wygody dewelopera. Na przykład pakiety JavaScript zawierają mapy źródłowe (dzięki czemu podczas debugowania można zobaczyć oryginalny kod źródłowy). Aplikacja obserwuje zmiany plików JavaScript, HTML i CSS na dysku i automatycznie ponownie kompiluje i ładuje się, gdy widzi, że te pliki się zmieniają.
 
-W środowisku produkcyjnym można korzystać z wersji aplikacji zoptymalizowanej pod kątem wydajności. To jest skonfigurowane tak, aby były wykonywane automatycznie. Podczas publikowania, konfiguracja kompilacji emituje zminimalizowanego, przenoszącą wbudowaną kompilację kodu po stronie klienta. W przeciwieństwie do kompilacji deweloperskiej kompilacja produkcyjna nie wymaga zainstalowania na serwerze programu Node. js.
+W produkcji wyświetlaj wersję aplikacji zoptymalizowaną pod kątem wydajności. Jest to skonfigurowane tak, aby odbywało się automatycznie. Podczas publikowania konfiguracji kompilacji emituje wbudowane, transpiled kompilacji kodu po stronie klienta. W przeciwieństwie do kompilacji deweloperów kompilacja produkcyjna nie wymaga instalowania node.js na serwerze.
 
-Można użyć standardowych [ASP.NET Core metod hostingu i wdrażania](xref:host-and-deploy/index).
+Można użyć standardowych [ASP.NET metody hostingu i wdrażania Core](xref:host-and-deploy/index).
 
-## <a name="run-the-cra-server-independently"></a>Uruchom serwer CRA niezależnie
+## <a name="run-the-cra-server-independently"></a>Uruchamianie serwera CRA niezależnie
 
-Projekt jest skonfigurowany tak, aby uruchamiał własne wystąpienie serwera CRA Development w tle podczas uruchamiania aplikacji ASP.NET Core w trybie tworzenia. Jest to wygodne, ponieważ oznacza to, że nie trzeba ręcznie uruchamiać oddzielnego serwera.
+Projekt jest skonfigurowany do uruchamiania własnego wystąpienia serwera dewelopera CRA w tle, gdy aplikacja ASP.NET Core zostanie uruchomiony w trybie programowania. Jest to wygodne, ponieważ oznacza to, że nie trzeba ręcznie uruchamiać oddzielnego serwera.
 
-Istnieje zwrot do tej konfiguracji domyślnej. Za każdym razem, gdy C# modyfikujesz kod, a aplikacja ASP.NET Core wymaga ponownego uruchomienia, serwer CRA zostanie uruchomiony ponownie. Aby rozpocząć tworzenie kopii zapasowej, wymagane są kilka sekund. Jeśli wprowadzasz częste C# zmiany kodu i nie chcesz czekać na ponowne uruchomienie serwera CRA, uruchom serwer CRA na zewnątrz niezależnie od procesu ASP.NET Core. W tym celu:
+Istnieje wada tej domyślnej konfiguracji. Za każdym razem, gdy modyfikujesz kod C#, a aplikacja ASP.NET Core musi zostać ponownie uruchomiona, serwer CRA zostanie ponownie uruchomiony. Do uruchomienia kopii zapasowej wymagane jest kilka sekund. Jeśli wprowadzasz częste zmiany kodu języka C# i nie chcesz czekać na ponowne uruchomienie serwera CRA, uruchom serwer USŁUGI CRA zewnętrznie, niezależnie od procesu ASP.NET Core. W tym celu:
 
-1. Dodaj plik *ENV* do podkatalogu *ClientApp* przy użyciu następującego ustawienia:
+1. Dodaj plik *.env* do podkatalogu *ClientApp* z następującym ustawieniem:
 
     ```
     BROWSER=none
     ```
 
-    Uniemożliwi to otwieranie przeglądarki sieci Web podczas zewnętrznego uruchamiania serwera CRA.
+    Zapobiegnie to otwarciu przeglądarki internetowej podczas uruchamiania serwera CRA na zewnątrz.
 
-2. W wierszu polecenia przejdź do podkatalogu *ClientApp* i uruchom serwer deweloperski CRA:
+2. W wierszu polecenia przełącz się do podkatalogu *ClientApp* i uruchom serwer deweloperski USŁUGI CRA:
 
     ```console
     cd ClientApp
     npm start
     ```
 
-3. Zmodyfikuj aplikację ASP.NET Core tak, aby korzystała z zewnętrznego wystąpienia serwera CRA, zamiast uruchamiania jednego z nich. W klasie *uruchomieniowej* Zastąp wywołanie `spa.UseReactDevelopmentServer`, wykonując następujące czynności:
+3. Zmodyfikuj aplikację ASP.NET Core, aby użyć zewnętrznego wystąpienia serwera CRA zamiast uruchamiać własne. W klasie *uruchamiania* `spa.UseReactDevelopmentServer` zastąp wywołanie następującymi:
 
     ```csharp
     spa.UseProxyToSpaDevelopmentServer("http://localhost:3000");
     ```
 
-Po uruchomieniu aplikacji ASP.NET Core nie zostanie uruchomiony serwer CRA. Wystąpienie, które zostało uruchomione ręcznie, jest używane w zamian. Pozwala to na szybkie uruchamianie i ponowne uruchamianie. Nie czeka już na odbudowanie aplikacji z reagowaniem za każdym razem.
+Po uruchomieniu aplikacji ASP.NET Core nie uruchomi ona serwera CRA. Zamiast tego używane jest wystąpienie uruchomione ręcznie. Dzięki temu można go uruchomić i uruchomić szybciej. Nie czeka już na odbudowanie aplikacji React za każdym razem.
 
 > [!IMPORTANT]
-> "Renderowanie po stronie serwera" nie jest obsługiwaną funkcją tego szablonu. Naszym celem tego szablonu jest spełnienie warunków dotyczących "Tworzenie — reagowanie aplikacji". W związku z tym scenariusze i funkcje, które nie są uwzględnione w projekcie "Create-rereagować na aplikacje" (na przykład SSR), nie są obsługiwane i pozostają jako ćwiczenie dla użytkownika.
+> "Renderowanie po stronie serwera" nie jest obsługiwaną funkcją tego szablonu. Naszym celem w tym szablonie jest spełnienie parytetu z "create-react-app". W związku z tym scenariusze i funkcje, które nie zostały uwzględnione w projekcie "create-react-app" (takim jak SSR) nie są obsługiwane i pozostają jako ćwiczenie dla użytkownika.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:security/authentication/identity/spa>

@@ -1,7 +1,7 @@
 ---
-title: ASP.NET Core Blazor powiązania danych
+title: ASP.NET podstawowe Blazor powiązanie danych
 author: guardrex
-description: Dowiedz się więcej o funkcjach powiązań danych dla składników i elementów DOM w aplikacjach Blazor.
+description: Dowiedz się więcej o funkcjach Blazor wiązania danych dla składników i elementów DOM w aplikacjach.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
@@ -11,19 +11,19 @@ no-loc:
 - SignalR
 uid: blazor/data-binding
 ms.openlocfilehash: a7b3730dad48b5bbb6134dab181051da4e3651b4
-ms.sourcegitcommit: f3b1bcfd108e5d53f73abc0bf2555890869d953b
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/26/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "80320950"
 ---
-# <a name="aspnet-core-opno-locblazor-data-binding"></a>ASP.NET Core Blazor powiązania danych
+# <a name="aspnet-core-opno-locblazor-data-binding"></a>ASP.NET podstawowe Blazor powiązanie danych
 
-Autorzy [Luke Latham](https://github.com/guardrex) i [Daniel Roth](https://github.com/danroth27)
+Autorstwa [Luke'a Lathama](https://github.com/guardrex) i [Daniela Rotha](https://github.com/danroth27)
 
-Składniki Razor udostępniają funkcje powiązań danych za pośrednictwem atrybutu elementu HTML o nazwie [`@bind`](xref:mvc/views/razor#bind) z wartością pola, właściwością lub wyrażeniem Razor.
+Składniki maszynki do golenia zapewniają funkcje [`@bind`](xref:mvc/views/razor#bind) wiązania danych za pośrednictwem atrybutu elementu HTML o nazwie z wartością wyrażenia pole, właściwość lub razor.
 
-Poniższy przykład wiąże Właściwość `CurrentValue` z wartością pola tekstowego:
+Poniższy przykład wiąże `CurrentValue` właściwość z wartością pola tekstowego:
 
 ```razor
 <input @bind="CurrentValue" />
@@ -33,11 +33,11 @@ Poniższy przykład wiąże Właściwość `CurrentValue` z wartością pola tek
 }
 ```
 
-Gdy pole tekstowe utraci fokus, wartość właściwości jest aktualizowana.
+Gdy pole tekstowe traci fokus, wartość właściwości jest aktualizowana.
 
-Pole tekstowe jest aktualizowane w interfejsie użytkownika tylko wtedy, gdy składnik jest renderowany, a nie w odpowiedzi na zmianę wartości właściwości. Ponieważ składniki renderują się po wykonaniu kodu procedury obsługi zdarzeń, aktualizacje właściwości są *zwykle* odzwierciedlane w interfejsie użytkownika natychmiast po wyzwoleniu programu obsługi zdarzeń.
+Pole tekstowe jest aktualizowane w interfejsie użytkownika tylko wtedy, gdy składnik jest renderowany, a nie w odpowiedzi na zmianę wartości właściwości. Ponieważ składniki renderowania się po wykonaniu kodu obsługi zdarzeń, aktualizacje właściwości są *zwykle* odzwierciedlane w interfejsie użytkownika natychmiast po wyzwoleniu programu obsługi zdarzeń.
 
-Używanie `@bind` z właściwością `CurrentValue` (`<input @bind="CurrentValue" />`) jest zasadniczo równoważne z następującymi:
+Korzystanie `@bind` z `CurrentValue` właściwości`<input @bind="CurrentValue" />`( ) jest zasadniczo równoważne z następującymi:
 
 ```razor
 <input value="@CurrentValue"
@@ -49,9 +49,9 @@ Używanie `@bind` z właściwością `CurrentValue` (`<input @bind="CurrentValue
 }
 ```
 
-Gdy składnik jest renderowany, `value` elementu wejściowego pochodzi z właściwości `CurrentValue`. Gdy użytkownik wpisze w polu tekstowym i zmieni fokus elementu, zdarzenie `onchange` jest wyzwalane, a właściwość `CurrentValue` jest ustawiona na wartość zmieniona. W rzeczywistości generowanie kodu jest bardziej skomplikowane, ponieważ `@bind` obsługuje przypadki, w których są wykonywane konwersje typów. W zasadzie `@bind` kojarzy bieżącą wartość wyrażenia z atrybutem `value` i obsługuje zmiany przy użyciu zarejestrowanej procedury obsługi.
+Gdy składnik jest renderowany, `value` element wejściowy `CurrentValue` pochodzi z właściwości. Gdy użytkownik wpisuje w polu tekstowym `onchange` i zmienia fokus elementu, zdarzenie jest uruchamiane i `CurrentValue` właściwość jest ustawiona na zmienioną wartość. W rzeczywistości generowanie kodu jest `@bind` bardziej złożone, ponieważ obsługuje przypadki, w których są wykonywane konwersje typu. Zasadniczo `@bind` kojarzy bieżącą wartość wyrażenia `value` z atrybutem i obsługuje zmiany przy użyciu zarejestrowanego programu obsługi.
 
-Powiąż właściwość lub pole w innych zdarzeniach, dołączając również atrybut `@bind:event` z parametrem `event`. Poniższy przykład wiąże Właściwość `CurrentValue` w zdarzeniu `oninput`:
+Powiąż właściwość lub pole `@bind:event` z innymi `event` zdarzeniami, dołączając również atrybut z parametrem. Poniższy przykład wiąże `CurrentValue` właściwość `oninput` ze zdarzeniem:
 
 ```razor
 <input @bind="CurrentValue" @bind:event="oninput" />
@@ -61,9 +61,9 @@ Powiąż właściwość lub pole w innych zdarzeniach, dołączając również a
 }
 ```
 
-W przeciwieństwie do `onchange`, które jest wyzwalane, gdy element utraci fokus, `oninput` uruchamiany, gdy wartość pola tekstowego ulegnie zmianie.
+W `onchange`przeciwieństwie do , który uruchamia `oninput` się, gdy element traci fokus, uruchamia się, gdy zmienia się wartość pola tekstowego.
 
-Użyj `@bind-{ATTRIBUTE}` ze składnią `@bind-{ATTRIBUTE}:event`, aby powiązać atrybuty elementu inne niż `value`. W poniższym przykładzie styl akapitu zostanie zaktualizowany po zmianie wartości `_paragraphStyle`:
+Użyj `@bind-{ATTRIBUTE}` `@bind-{ATTRIBUTE}:event` ze składnią do wiązania `value`atrybutów elementów innych niż . W poniższym przykładzie styl akapitu `_paragraphStyle` jest aktualizowany po zmianie wartości:
 
 ```razor
 @page "/binding-example"
@@ -81,15 +81,15 @@ Użyj `@bind-{ATTRIBUTE}` ze składnią `@bind-{ATTRIBUTE}:event`, aby powiąza�
 }
 ```
 
-W powiązaniu atrybutu rozróżniana jest wielkość liter. Na przykład `@bind` jest prawidłowy, a `@Bind` jest nieprawidłowy.
+Rozróżniana wielkość liter. Na przykład `@bind` jest prawidłowy i `@Bind` jest nieprawidłowy.
 
-## <a name="unparsable-values"></a>Wartości niemożliwy do przeanalizowania
+## <a name="unparsable-values"></a>Wartości niedajne
 
-Gdy użytkownik dostarczy wartość niemożliwy do przeanalizowania do elementu powiązanego z danymi, wartość niemożliwy do przeanalizowania jest automatycznie przywracana do poprzedniej wartości po wyzwoleniu zdarzenia bind.
+Gdy użytkownik udostępnia nieparadowalną wartość elementu połączenia danych, wartość nieparasable jest automatycznie przywracana do poprzedniej wartości po wyzwoleniu zdarzenia powiązania.
 
 Poniżej przedstawiono przykładowy scenariusz:
 
-* Element `<input>` jest powiązany z typem `int` z początkową wartością `123`:
+* Element `<input>` jest powiązany `int` z typem `123`o wartości początkowej:
 
   ```razor
   <input @bind="MyProperty" />
@@ -99,21 +99,21 @@ Poniżej przedstawiono przykładowy scenariusz:
       public int MyProperty { get; set; } = 123;
   }
   ```
-* Użytkownik aktualizuje wartość elementu do `123.45` na stronie i zmienia fokus elementu.
+* Użytkownik aktualizuje wartość elementu `123.45` na stronie i zmienia fokus elementu.
 
-W poprzednim scenariuszu wartość elementu jest przywracana do `123`. Gdy wartość `123.45` zostanie odrzucona na korzyść oryginalnej wartości `123`, użytkownik rozumie, że ich wartość nie została zaakceptowana.
+W poprzednim scenariuszu wartość elementu jest przywracana `123`do . Gdy wartość `123.45` zostanie odrzucona na rzecz `123`oryginalnej wartości , użytkownik rozumie, że ich wartość nie została zaakceptowana.
 
-Domyślnie powiązanie dotyczy zdarzenia `onchange` elementu (`@bind="{PROPERTY OR FIELD}"`). Użyj `@bind="{PROPERTY OR FIELD}" @bind:event={EVENT}`, aby wyzwolić powiązanie na innym zdarzeniu. W przypadku zdarzenia `oninput` (`@bind:event="oninput"`) następuje rewersja po naciśnięciu klawisza, które wprowadza niemożliwy do przeanalizowania wartość. Podczas określania wartości docelowej zdarzenia `oninput` przy użyciu typu powiązanego z `int`użytkownik nie będzie wpisywać znaku `.`. Znak `.` zostanie natychmiast usunięty, więc użytkownik otrzymuje natychmiastową opinię, że dozwolone są tylko liczby całkowite. Istnieją scenariusze, w których przywrócenie wartości w zdarzeniu `oninput` nie jest idealne, na przykład wtedy, gdy użytkownik powinien mieć możliwość wyczyszczenia wartości `<input>` niemożliwej do przeanalizowania. Alternatywy obejmują:
+Domyślnie powiązanie ma zastosowanie do `onchange` zdarzenia`@bind="{PROPERTY OR FIELD}"`elementu ( ). Służy `@bind="{PROPERTY OR FIELD}" @bind:event={EVENT}` do wyzwalania powiązania dla innego zdarzenia. W `oninput` przypadku`@bind:event="oninput"`zdarzenia ( ), odwrócenie występuje po każdym naciśnięciu klawisza, który wprowadza wartość niedościsobie. Podczas kierowania `oninput` zdarzenia z `int`typem powiązanym użytkownik nie może `.` wpisywać znaku. Znak `.` jest natychmiast usuwany, więc użytkownik otrzymuje natychmiastową informację, że dozwolone są tylko liczby pełne. Istnieją scenariusze, w których przywracanie wartości w zdarzeniu `oninput` nie jest idealne, na przykład gdy `<input>` użytkownik powinien mieć możliwość wyczyszczenia wartości niepardziellnej. Alternatywy obejmują:
 
-* Nie używaj zdarzenia `oninput`. Użyj domyślnego zdarzenia `onchange` (Określ tylko `@bind="{PROPERTY OR FIELD}"`), gdzie nie zostanie przywrócona nieprawidłowa wartość, dopóki element nie utraci fokusu.
-* Powiąż z typem dopuszczającym wartość null, takim jak `int?` lub `string`, i podaj logikę niestandardową do obsługi nieprawidłowych wpisów.
-* Użyj [składnika walidacji formularza](xref:blazor/forms-validation), takiego jak `InputNumber` lub `InputDate`. Składniki walidacji formularza mają wbudowaną obsługę zarządzania nieprawidłowymi danymi wejściowymi. Składniki walidacji formularza:
-  * Zezwalaj użytkownikowi na dostarczenie nieprawidłowych danych wejściowych i otrzymywanie błędów walidacji w skojarzonym `EditContext`.
-  * Wyświetlaj błędy walidacji w interfejsie użytkownika bez zakłócania wprowadzania dodatkowych danych przez użytkownika.
+* Nie używaj `oninput` zdarzenia. Użyj zdarzenia `onchange` domyślnego `@bind="{PROPERTY OR FIELD}"`(tylko określić ), gdzie nieprawidłowa wartość nie jest przywracana, dopóki element traci fokus.
+* Powiązanie z typem nullable, takich jak `int?` lub `string`, i podać niestandardową logikę do obsługi nieprawidłowych wpisów.
+* Użyj [składnika sprawdzania poprawności formularza,](xref:blazor/forms-validation)takiego jak `InputNumber` lub `InputDate`. Składniki sprawdzania poprawności formularza mają wbudowaną obsługę zarządzania nieprawidłowymi danymi wejściowymi. Składniki sprawdzania poprawności formularza:
+  * Zezwalaj użytkownikowi na podanie nieprawidłowych danych wejściowych `EditContext`i odbierania błędów sprawdzania poprawności na skojarzonym programie .
+  * Wyświetlanie błędów sprawdzania poprawności w interfejsie użytkownika bez zakłócania wprowadzania przez użytkownika dodatkowych danych webform.
 
-## <a name="format-strings"></a>Ciągi formatujące
+## <a name="format-strings"></a>Formatowanie ciągów
 
-Powiązanie danych działa z ciągami formatu <xref:System.DateTime> przy użyciu [`@bind:format`](xref:mvc/views/razor#bind). W tej chwili nie są dostępne inne wyrażenia formatu, takie jak formaty walutowe lub liczbowe.
+Powiązanie danych <xref:System.DateTime> działa z [`@bind:format`](xref:mvc/views/razor#bind)ciągami formatu przy użyciu programu . Inne wyrażenia formatu, takie jak formaty walut lub liczb, nie są obecnie dostępne.
 
 ```razor
 <input @bind="StartDate" @bind:format="yyyy-MM-dd" />
@@ -124,26 +124,26 @@ Powiązanie danych działa z ciągami formatu <xref:System.DateTime> przy użyci
 }
 ```
 
-W powyższym kodzie, typ pola `<input>` elementu (`type`) domyślnie `text`. `@bind:format` jest obsługiwana w celu powiązania następujących typów .NET:
+W poprzednim kodzie `<input>` typ pola elementu`type`( ) `text`domyślnie ma wartość . `@bind:format`jest obsługiwana w celu powiązania następujących typów .NET:
 
 * <xref:System.DateTime?displayProperty=fullName>
 * <xref:System.DateTime?displayProperty=fullName>?
 * <xref:System.DateTimeOffset?displayProperty=fullName>
 * <xref:System.DateTimeOffset?displayProperty=fullName>?
 
-Atrybut `@bind:format` określa format daty, który ma zostać zastosowany do `value` elementu `<input>`. Format jest również używany do analizowania wartości, gdy wystąpi zdarzenie `onchange`.
+Atrybut `@bind:format` określa format daty, który `value` ma `<input>` być stosowany do elementu. Format jest również używany do analizowania `onchange` wartości w przypadku wystąpienia zdarzenia.
 
-Określanie formatu dla typu pola `date` nie jest zalecane, ponieważ Blazor ma wbudowaną obsługę formatowania dat. Pomimo zalecenia, należy używać tylko formatu daty `yyyy-MM-dd`, aby powiązania działały prawidłowo, jeśli format jest dostarczany z typem pola `date`:
+Określanie formatu `date` dla typu pola nie Blazor jest zalecane, ponieważ ma wbudowaną obsługę formatowania dat. Pomimo zalecenia, należy używać `yyyy-MM-dd` tylko format daty do wiązania do poprawnego działania, jeśli format jest dostarczany z typem `date` pola:
 
 ```razor
 <input type="date" @bind="StartDate" @bind:format="yyyy-MM-dd">
 ```
 
-## <a name="parent-to-child-binding-with-component-parameters"></a>Powiązanie element nadrzędny-to-Child z parametrami składnika
+## <a name="parent-to-child-binding-with-component-parameters"></a>Powiązanie nadrzędny-podrzędny z parametrami komponentu
 
-Powiązanie rozpoznaje parametry składnika, gdzie `@bind-{PROPERTY}` może powiązać wartość właściwości z składnika nadrzędnego w dół ze składnikiem podrzędnym. Powiązanie z elementu podrzędnego z elementem nadrzędnym jest omówione w [powiązaniu podrzędnie-to-Parent z częściowym powiązaniem powiązania](#child-to-parent-binding-with-chained-bind) .
+Powiązanie rozpoznaje parametry `@bind-{PROPERTY}` składnika, gdzie można powiązać wartość właściwości ze składnika nadrzędnego w dół do składnika podrzędnego. Powiązanie z elementem podrzędnym do rodzica jest objęte [Child-to-parent powiązania z sieciowej](#child-to-parent-binding-with-chained-bind) sekcji powiązania.
 
-Poniższy składnik podrzędny (`ChildComponent`) ma parametr składnika `Year` i wywołanie zwrotne `YearChanged`:
+Następujący składnik podrzędny`ChildComponent`( `Year` ) `YearChanged` ma parametr składnika i wywołanie zwrotne:
 
 ```razor
 <h2>Child Component</h2>
@@ -159,12 +159,12 @@ Poniższy składnik podrzędny (`ChildComponent`) ma parametr składnika `Year` 
 }
 ```
 
-`EventCallback<T>` wyjaśniono w <xref:blazor/event-handling#eventcallback>.
+`EventCallback<T>`wyjaśniono w <xref:blazor/event-handling#eventcallback>.
 
-Poniższy składnik nadrzędny używa:
+Następujący składnik nadrzędny używa:
 
-* `ChildComponent` i wiąże parametr `ParentYear` z elementu nadrzędnego z parametrem `Year` w składniku podrzędnym.
-* Zdarzenie `onclick` służy do wyzwalania metody `ChangeTheYear`. Aby uzyskać więcej informacji, zobacz <xref:blazor/event-handling>.
+* `ChildComponent`i wiąże `ParentYear` parametr z elementem `Year` nadrzędnym z parametrem w komponencie podrzędnym.
+* Zdarzenie `onclick` jest używane do `ChangeTheYear` wyzwalania metody. Aby uzyskać więcej informacji, zobacz <xref:blazor/event-handling>.
 
 ```razor
 @page "/ParentComponent"
@@ -190,7 +190,7 @@ Poniższy składnik nadrzędny używa:
 }
 ```
 
-Załadowanie `ParentComponent` powoduje utworzenie następującej adjustacji:
+Ładowanie `ParentComponent` powoduje następujące znaczniki:
 
 ```html
 <h1>Parent Component</h1>
@@ -202,7 +202,7 @@ Załadowanie `ParentComponent` powoduje utworzenie następującej adjustacji:
 <p>Year: 1978</p>
 ```
 
-Jeśli wartość właściwości `ParentYear` zostanie zmieniona przez wybranie przycisku w `ParentComponent`, zostanie zaktualizowana właściwość `Year` `ChildComponent`. Nowa wartość `Year` jest renderowana w interfejsie użytkownika podczas renderowania `ParentComponent`:
+Jeśli wartość właściwości `ParentYear` zostanie zmieniona przez wybranie `ParentComponent`przycisku w , `Year` właściwość `ChildComponent` jest aktualizowana. Nowa wartość `Year` jest renderowana w interfejsie `ParentComponent` użytkownika, gdy jest rerendered:
 
 ```html
 <h1>Parent Component</h1>
@@ -214,31 +214,31 @@ Jeśli wartość właściwości `ParentYear` zostanie zmieniona przez wybranie p
 <p>Year: 1986</p>
 ```
 
-Parametr `Year` jest możliwy do powiązania, ponieważ zawiera zdarzenie pomocnika `YearChanged` pasujące do typu parametru `Year`.
+Parametr `Year` jest wiązany, ponieważ `YearChanged` ma zdarzenie towarzyszące, które pasuje do typu parametru. `Year`
 
-Zgodnie z Konwencją `<ChildComponent @bind-Year="ParentYear" />` jest zasadniczo równoważne zapisowi:
+Zgodnie z `<ChildComponent @bind-Year="ParentYear" />` konwencją, jest zasadniczo równoważne piśmie:
 
 ```razor
 <ChildComponent @bind-Year="ParentYear" @bind-Year:event="YearChanged" />
 ```
 
-Ogólnie rzecz biorąc, właściwość może być powiązana z odpowiadającą jej obsługą zdarzeń, dołączając atrybut `@bind-{PROPRETY}:event`. Na przykład właściwość `MyProp` może być powiązana z `MyEventHandler` przy użyciu następujących dwóch atrybutów:
+Ogólnie rzecz biorąc właściwość może być powiązana `@bind-{PROPRETY}:event` z odpowiednim programem obsługi zdarzeń, dołączając atrybut. Na przykład właściwość `MyProp` może `MyEventHandler` być powiązana przy użyciu następujących dwóch atrybutów:
 
 ```razor
 <MyComponent @bind-MyProp="MyValue" @bind-MyProp:event="MyEventHandler" />
 ```
 
-## <a name="child-to-parent-binding-with-chained-bind"></a>Powiązanie elementu podrzędnego z elementem nadrzędnym z powiązaniem łańcuchowym
+## <a name="child-to-parent-binding-with-chained-bind"></a>Powiązanie podrzędne z elementem nadrzędnym z powiązaniem łańcuchowym
 
-Typowy scenariusz polega na łańcuchu parametru powiązanego z danymi do elementu strony w danych wyjściowych składnika. Ten scenariusz jest nazywany *powiązaniem łańcuchowym* , ponieważ wiele poziomów powiązań występuje jednocześnie.
+Typowym scenariuszem jest łączenie parametru powiązanego z danymi do elementu strony w danych wyjściowych składnika. Ten scenariusz jest nazywany *powiązanie łańcuchowe,* ponieważ wiele poziomów wiązania występują jednocześnie.
 
-Nie można zaimplementować powiązania łańcuchowego z składnią `@bind` w elemencie strony. Program obsługi zdarzeń i wartość muszą być określone osobno. Składnik nadrzędny, jednak może używać składni `@bind`ej z parametrem składnika.
+Powiązanie łańcuchowe nie może być `@bind` zaimplementowane ze składnią w elemencie strony. Program obsługi zdarzeń i wartość musi być określony oddzielnie. Składnik nadrzędny może jednak `@bind` używać składni z parametrem składnika.
 
-Następujący składnik `PasswordField` (*PasswordField. Razor*):
+Następujący `PasswordField` składnik (*PasswordField.brzytwa):*
 
-* Ustawia wartość elementu `<input>` na Właściwość `Password`.
-* Uwidacznia zmiany właściwości `Password` w składniku nadrzędnym z [EventCallback](xref:blazor/event-handling#eventcallback).
-* Używa zdarzenia `onclick` służy do wyzwalania metody `ToggleShowPassword`. Aby uzyskać więcej informacji, zobacz <xref:blazor/event-handling>.
+* Ustawia `<input>` wartość elementu na `Password` właściwość.
+* Udostępnia zmiany `Password` właściwości do składnika nadrzędnego z [EventCallback](xref:blazor/event-handling#eventcallback).
+* Używa `onclick` zdarzenia jest używany do `ToggleShowPassword` wyzwalania metody. Aby uzyskać więcej informacji, zobacz <xref:blazor/event-handling>.
 
 ```razor
 <h1>Child Component</h1>
@@ -291,12 +291,12 @@ Składnik `PasswordField` jest używany w innym składniku:
 }
 ```
 
-Aby przeprowadzić sprawdzenia lub błędy pułapki dla hasła w poprzednim przykładzie:
+Aby wykonać błędy sprawdzania lub zalewkowania hasła w poprzednim przykładzie:
 
-* Utwórz pole zapasowe dla `Password` (`_password` w poniższym przykładowym kodzie).
-* Wykonaj testy lub błędy pułapki w metodzie ustawiającej `Password`.
+* Utwórz pole `Password` zapasowe dla (`_password` w poniższym przykładzie kodu).
+* Wykonaj błędy kontroli lub zalewki w ustawiacza. `Password`
 
-Poniższy przykład przedstawia natychmiastową opinię dla użytkownika, jeśli w wartości hasła jest używana spacja:
+Poniższy przykład zapewnia natychmiastową informację zwrotną dla użytkownika, jeśli spacja jest używana w wartości hasła:
 
 ```razor
 <h1>Child Component</h1>
@@ -357,6 +357,6 @@ Password:
 }
 ```
 
-## <a name="radio-buttons"></a>Przyciski radiowe
+## <a name="radio-buttons"></a>Przycisków
 
-Aby uzyskać informacje na temat tworzenia powiązań z przyciskami radiowymi w formularzu, zobacz <xref:blazor/forms-validation#work-with-radio-buttons>.
+Aby uzyskać informacje na temat powiązania <xref:blazor/forms-validation#work-with-radio-buttons>z przyciskami radiowymi w formularzu, zobacz .

@@ -1,1 +1,1 @@
-Ukończony przykład znajduje się w folderze *2,2-ukończony* . Przykład *MvcMovie22* jest używany do dokumentacji i trudno go używać.
+Wypełniony przykład znajduje się w folderze *2.2-completed.* Próbka *MvcMovie222* jest używana do dokumentacji i jest trudna w użyciu.

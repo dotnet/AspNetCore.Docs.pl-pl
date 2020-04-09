@@ -1,3 +1,3 @@
-# <a name="aspnet-core-configuration-sample"></a>Przykład konfiguracji ASP.NET Core
+# <a name="aspnet-core-configuration-sample"></a>Przykład konfiguracji rdzenia ASP.NET
 
-Ten przykład ilustruje korzystanie z interfejsu API konfiguracji. Ten przykład pokazuje scenariusze opisane w [konfiguracji w ASP.NET Core](https://docs.microsoft.com/aspnet/core/fundamentals/configuration) temacie.
+W tym przykładzie przedstawiono użycie interfejsu API konfiguracji. W tym przykładzie przedstawiono scenariusze opisane w [konfiguracji w ASP.NET tematu Core.](https://docs.microsoft.com/aspnet/core/fundamentals/configuration)

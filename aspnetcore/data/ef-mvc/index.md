@@ -1,22 +1,22 @@
 ---
-title: ASP.NET Core MVC z serią EF Core-samouczków
+title: ASP.NET Core MVC z EF Core - seria samouczków
 author: rick-anderson
 description: ''
 ms.author: riande
 ms.date: 03/27/2017
 uid: data/ef-mvc/index
 ms.openlocfilehash: 9ff070022260aae597d71b2da8d342f41f0c976b
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78657291"
 ---
-# <a name="aspnet-core-mvc-with-ef-core---tutorial-series"></a>ASP.NET Core MVC z serią EF Core-samouczków
+# <a name="aspnet-core-mvc-with-ef-core---tutorial-series"></a>ASP.NET Core MVC z EF Core - seria samouczków
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Ten samouczek **nie** został zaktualizowany do ASP.NET Core 3,0. Zaktualizowano [Razor Pages wersję](xref:data/ef-rp/intro) . Aby uzyskać informacje na temat aktualizacji, zobacz [ten problem](https://github.com/dotnet/AspNetCore.Docs/issues/13920)w usłudze GitHub.
+Ten samouczek **nie** został zaktualizowany do ASP.NET Core 3.0. [Zaktualizowano wersję Razor Pages.](xref:data/ef-rp/intro) Aby uzyskać informacje o tym, kiedy może to być zaktualizowane, zobacz [ten problem z githubem](https://github.com/dotnet/AspNetCore.Docs/issues/13920).
 
 ::: moniker-end
 

@@ -1,13 +1,13 @@
-Dodaj następujące właściwości do klasy `Movie`:
+Dodaj następujące właściwości do `Movie` klasy:
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Models/Movie.cs?name=snippet1)]
 
 Klasa `Movie` zawiera:
 
-* Pole `Id`, które jest wymagane przez bazę danych dla klucza podstawowego.
-* `[DataType(DataType.Date)]`: atrybut [DataType](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.internal.datatypeattributeadapter) określa typ danych (`Date`). Z tym atrybutem:
+* Pole `Id` wymagane przez bazę danych dla klucza podstawowego.
+* `[DataType(DataType.Date)]`: Atrybut [DataType](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.internal.datatypeattributeadapter) określa typ danych (`Date`). Z tym atrybutem:
 
-  * Użytkownik nie musi wprowadzać informacji o czasie w polu Data.
-  * Tylko data jest wyświetlana, a nie informacje o czasie.
+  * Użytkownik nie musi wprowadzać informacji o godzinie w polu daty.
+  * Wyświetlana jest tylko data, a nie informacje o czasie.
 
-[Adnotacje DataAnnotations](/dotnet/api/system.componentmodel.dataannotations) są omówione w kolejnym samouczku.
+[DataAnnotations](/dotnet/api/system.componentmodel.dataannotations) są omówione w późniejszym samouczku.

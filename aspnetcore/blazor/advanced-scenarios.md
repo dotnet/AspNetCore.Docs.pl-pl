@@ -1,7 +1,7 @@
 ---
-title: Scenariusze ASP.NET Core Blazor Advanced
+title: zaawansowane scenariusze Blazor ASP.NET Core
 author: guardrex
-description: Dowiedz się więcej na temat zaawansowanych scenariuszy w Blazor, w tym sposobu włączania ręcznej logiki RenderTreeBuilder do aplikacji.
+description: Dowiedz się więcej Blazoro zaawansowanych scenariuszach w , w tym jak włączyć ręczną logikę RenderTreeBuilder do aplikacji.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
@@ -11,19 +11,19 @@ no-loc:
 - SignalR
 uid: blazor/advanced-scenarios
 ms.openlocfilehash: 5edbbe36e8389bac0335594b1e4331aee1c02867
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78659454"
 ---
-# <a name="aspnet-core-blazor-advanced-scenarios"></a>Zaawansowane scenariusze ASP.NET Core Blazor
+# <a name="aspnet-core-blazor-advanced-scenarios"></a>zaawansowane scenariusze ASP.NET Core Blazor
 
-Autorzy [Luke Latham](https://github.com/guardrex) i [Daniel Roth](https://github.com/danroth27)
+Autorstwa [Luke'a Lathama](https://github.com/guardrex) i [Daniela Rotha](https://github.com/danroth27)
 
-## <a name="blazor-server-circuit-handler"></a>Procedura obsługi obwodu serwera Blazor
+## <a name="blazor-server-circuit-handler"></a>Obsługa obwodów serwera Blazor
 
-Serwer Blazor umożliwia kodowi Definiowanie *procedury obsługi obwodu*, która umożliwia uruchamianie kodu na zmiany stanu obwodu użytkownika. Program obsługi obwodu jest implementowany przez wyprowadzanie z `CircuitHandler` i rejestrowanie klasy w kontenerze usługi aplikacji. Poniższy przykład obsługi obwodu śledzi połączenia otwartych sygnałów:
+Blazor Server pozwala na zdefiniowanie programu *obsługi obwodów,* który umożliwia uruchamianie kodu na zmiany stanu obwodu użytkownika. Program obsługi obwodu jest implementowany przez wyprowadzanie `CircuitHandler` i rejestrowanie klasy w kontenerze usługi aplikacji. Poniższy przykład obsługi obwodu śledzi otwarte połączenia SignalR:
 
 ```csharp
 using System.Collections.Generic;
@@ -55,7 +55,7 @@ public class TrackingCircuitHandler : CircuitHandler
 }
 ```
 
-Procedury obsługi obwodu są rejestrowane przy użyciu funkcji DI. Wystąpienia w zakresie są tworzone na wystąpienie obwodu. Korzystając z `TrackingCircuitHandler` w poprzednim przykładzie, tworzona jest usługa singleton, ponieważ stan wszystkich obwodów musi być śledzony:
+Programy obsługi obwodów są rejestrowane przy użyciu DI. Wystąpienia o określonym zakresie są tworzone na wystąpienie obwodu. `TrackingCircuitHandler` W poprzednim przykładzie tworzona jest usługa singleton, ponieważ stan wszystkich obwodów musi być śledzony:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -65,18 +65,18 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Jeśli metody obsługi niestandardowego obwodu zgłaszają nieobsługiwany wyjątek, wyjątek jest krytyczny dla obwodu serwera Blazor. Aby tolerować wyjątki w kodzie programu obsługi lub metodach wywoływanych, zawiń kod w co najmniej jednej instrukcji [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) z obsługą błędów i rejestrowaniem.
+Jeśli metody niestandardowego programu obsługi obwodów zgłaszają nieobsługiowany wyjątek, wyjątek jest krytyczny dla obwodu serwera Blazor. Aby tolerować wyjątki w kodzie programu obsługi lub metody wywoływane, zawiń kod w co najmniej jednej [instrukcji try-catch](/dotnet/csharp/language-reference/keywords/try-catch) z obsługi błędów i rejestrowania.
 
-Gdy obwód kończy się, ponieważ użytkownik odłączył się i struktura czyści stan obwodu, struktura usuwa zakres DI obwodu. Oddysponowanie zakresu polega na usunięciu wszelkich usług w zakresie innych firm, które implementują <xref:System.IDisposable?displayProperty=fullName>. Jeśli jakakolwiek usługa nie zgłasza nieobsłużonego wyjątku podczas usuwania, struktura rejestruje wyjątek.
+Po zakończeniu obwodu, ponieważ użytkownik został odłączony, a struktura czyści stan obwodu, struktura usuwa zakres DI obwodu. Pozbywanie się zakresu usuwa wszystkie usługi DI <xref:System.IDisposable?displayProperty=fullName>o zakresie obwodu, które implementują . Jeśli dowolna usługa DI zgłasza nieobsługiowany wyjątek podczas likwidacji, struktura rejestruje wyjątek.
 
 ## <a name="manual-rendertreebuilder-logic"></a>Ręczna logika RenderTreeBuilder
 
-`Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder` udostępnia metody manipulowania składnikami i elementami, w tym ręczne Kompilowanie C# składników w kodzie.
+`Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder`udostępnia metody manipulowania składników i elementów, w tym składników budynku ręcznie w kodzie C#.
 
 > [!NOTE]
-> Użycie `RenderTreeBuilder` do tworzenia składników jest zaawansowanym scenariuszem. Nieprawidłowo sformułowany składnik (na przykład niezamknięty tag znacznika) może spowodować niezdefiniowane zachowanie.
+> Użycie `RenderTreeBuilder` do tworzenia składników jest scenariuszem zaawansowanym. Nieprawidłowo sformułowany składnik (na przykład niezamknięty znacznik znaczników) może spowodować niezdefiniowane zachowanie.
 
-Rozważmy następujący składnik `PetDetails`, który można utworzyć ręcznie w innym składniku:
+Należy wziąć `PetDetails` pod uwagę następujący składnik, który może być ręcznie wbudowany w inny składnik:
 
 ```razor
 <h2>Pet Details Component</h2>
@@ -90,9 +90,9 @@ Rozważmy następujący składnik `PetDetails`, który można utworzyć ręcznie
 }
 ```
 
-W poniższym przykładzie pętla w metodzie `CreateComponent` generuje trzy składniki `PetDetails`. Podczas wywoływania `RenderTreeBuilder` metod tworzenia składników (`OpenComponent` i `AddAttribute`) numery sekwencji są numerami wierszy kodu źródłowego. Algorytm Blazor różnica polega na numerach sekwencji odpowiadających odrębnym wierszom kodu, a nie odrębnym wywoływaniu wywołań. Podczas tworzenia składnika przy użyciu metod `RenderTreeBuilder` umieszczaj argumenty dla numerów sekwencji. **Użycie obliczenia lub licznika do wygenerowania numeru sekwencji może prowadzić do niskiej wydajności.** Aby uzyskać więcej informacji, zobacz sekcję [numery sekwencji powiązane z numerami wierszy kodu i kolejnością niewykonania](#sequence-numbers-relate-to-code-line-numbers-and-not-execution-order) .
+W poniższym przykładzie pętla w `CreateComponent` `PetDetails` metodzie generuje trzy składniki. Podczas `RenderTreeBuilder` wywoływania metod tworzenia`OpenComponent` `AddAttribute`składników ( i ), numery sekwencji są numery wierszy kodu źródłowego. Algorytm różnicy Blazor opiera się na numery sekwencji odpowiadające różnych wierszy kodu, a nie różne wywołania wywołania. Podczas tworzenia składnika `RenderTreeBuilder` z metodami, hardcode argumenty dla numerów sekwencji. **Przy użyciu obliczeń lub licznika do generowania numeru sekwencyjnyego może prowadzić do niskiej wydajności.** Aby uzyskać więcej informacji, zobacz [numery sekwencji odnoszą się do numerów wierszy kodu, a nie do](#sequence-numbers-relate-to-code-line-numbers-and-not-execution-order) sekcji zlecenia wykonania.
 
-składnik `BuiltContent`:
+`BuiltContent`Składnik:
 
 ```razor
 @page "/BuiltContent"
@@ -126,15 +126,15 @@ składnik `BuiltContent`:
 ```
 
 > [!WARNING]
-> Typy w `Microsoft.AspNetCore.Components.RenderTree` umożliwiają przetwarzanie *wyników* operacji renderowania. Są to wewnętrzne szczegóły implementacji platformy Blazor Framework. Te typy powinny być uznawane za *niestabilne* i mogą ulec zmianie w przyszłych wersjach.
+> Typy `Microsoft.AspNetCore.Components.RenderTree` w zezwalają na przetwarzanie *wyników* operacji renderowania. Są to wewnętrzne szczegóły implementacji ram Blazor. Te typy należy uznać za *niestabilne* i mogą ulec zmianie w przyszłych wersjach.
 
-### <a name="sequence-numbers-relate-to-code-line-numbers-and-not-execution-order"></a>Numery sekwencji odnoszą się do numerów wierszy kodu, a nie kolejności wykonywania
+### <a name="sequence-numbers-relate-to-code-line-numbers-and-not-execution-order"></a>Numery sekwencji odnoszą się do numerów wierszy kodu, a nie do zlecenia wykonania
 
-Pliki składników Razor ( *. Razor*) są zawsze kompilowane. Kompilacja jest potencjalną możliwością przekroczenia interpretacji kodu, ponieważ krok kompilacji może służyć do iniekcji informacji, które zwiększają wydajność aplikacji w czasie wykonywania.
+Pliki komponentów razor (*.brzytwa*) są zawsze kompilowane. Kompilacja jest potencjalną przewagą nad interpretacją kodu, ponieważ krok kompilacji może służyć do wstrzykiwania informacji, które poprawia wydajność aplikacji w czasie wykonywania.
 
-Najważniejszym przykładem tych ulepszeń są *numery sekwencji*. Numery sekwencji wskazują na środowisko uruchomieniowe, które pochodzą z różnych i uporządkowanych wierszy kodu. Środowisko uruchomieniowe używa tych informacji do generowania wydajnych różnic drzewa w czasie liniowym, które są znacznie szybsze niż zwykle jest to możliwe dla algorytmu różnicowego drzewa ogólnego.
+Kluczowym przykładem tych ulepszeń są *numery sekwencji*. Numery sekwencji wskazują do środowiska wykonawczego, które dane wyjściowe pochodzą z których różne i uporządkowane wiersze kodu. Środowisko wykonawcze używa tych informacji do generowania efektywnych różnic kursowych drzewa w czasie liniowym, co jest znacznie szybsze niż zwykle jest to możliwe dla ogólnego algorytmu różnicowego drzewa.
 
-Rozważmy następujący plik składnika Razor (*Razor*):
+Rozważmy następujący plik komponentu Razor (*.brzytwa):*
 
 ```razor
 @if (someFlag)
@@ -145,7 +145,7 @@ Rozważmy następujący plik składnika Razor (*Razor*):
 Second
 ```
 
-Poprzedni kod kompiluje się w taki sposób, aby wyglądał następująco:
+Poprzedni kod kompiluje się do czegoś następującego:
 
 ```csharp
 if (someFlag)
@@ -156,26 +156,26 @@ if (someFlag)
 builder.AddContent(1, "Second");
 ```
 
-Gdy kod jest wykonywany po raz pierwszy, jeśli `someFlag` jest `true`, Konstruktor odbiera:
+Gdy kod jest wykonywany po raz `someFlag` `true`pierwszy, jeśli jest , konstruktor odbiera:
 
 | Sequence | Typ      | Dane   |
 | :------: | --------- | :----: |
-| 0        | Węzeł tekstu | Pierwszego  |
-| 1        | Węzeł tekstu | Sekunda |
+| 0        | Węzeł tekstowy | First  |
+| 1        | Węzeł tekstowy | Sekunda |
 
-Załóżmy, że `someFlag` `false`, a znaczniki są renderowane ponownie. Tym razem Konstruktor odbiera:
+Wyobraź `someFlag` sobie, że staje się `false`, a znaczniki są renderowane ponownie. Tym razem budowniczy otrzymuje:
 
 | Sequence | Typ       | Dane   |
 | :------: | ---------- | :----: |
-| 1        | Węzeł tekstu  | Sekunda |
+| 1        | Węzeł tekstowy  | Sekunda |
 
-Gdy środowisko uruchomieniowe wykonuje różnicę, zobaczy, że element w sekwencji `0` został usunięty, więc generuje następujący skrypt uproszczonej *edycji*:
+Gdy środowisko wykonawcze wykonuje diff, widzi, że `0` element w sekwencji został usunięty, więc generuje następujący skrypt *edycji*trywialne:
 
-* Usuń pierwszy węzeł tekstu.
+* Usuń pierwszy węzeł tekstowy.
 
-### <a name="the-problem-with-generating-sequence-numbers-programmatically"></a>Problem z programowo generowanymi numerami sekwencji
+### <a name="the-problem-with-generating-sequence-numbers-programmatically"></a>Problem z programowym generowaniem numerów sekwencyjnych
 
-Wyobraź sobie, że została zapisana następująca logika konstruktora drzewa renderowania:
+Wyobraź sobie, że zamiast tego napisałeś następującą logikę konstruktora drzew renderowania:
 
 ```csharp
 var seq = 0;
@@ -188,62 +188,62 @@ if (someFlag)
 builder.AddContent(seq++, "Second");
 ```
 
-Teraz pierwsze dane wyjściowe to:
+Teraz pierwsze wyjście to:
 
 | Sequence | Typ      | Dane   |
 | :------: | --------- | :----: |
-| 0        | Węzeł tekstu | Pierwszego  |
-| 1        | Węzeł tekstu | Sekunda |
+| 0        | Węzeł tekstowy | First  |
+| 1        | Węzeł tekstowy | Sekunda |
 
-Ten wynik jest identyczny z poprzednim przypadkiem, dlatego nie istnieją żadne negatywne problemy. `someFlag` jest `false` podczas drugiego renderowania, a dane wyjściowe:
+Wynik ten jest identyczny z poprzednim przypadkiem, więc nie istnieją żadne negatywne problemy. `someFlag`znajduje `false` się na drugim renderowaniu, a dane wyjściowe są następujące:
 
 | Sequence | Typ      | Dane   |
 | :------: | --------- | ------ |
-| 0        | Węzeł tekstu | Sekunda |
+| 0        | Węzeł tekstowy | Sekunda |
 
-Tym razem algorytm diff widzi, że pojawiły się *dwie* zmiany, a algorytm generuje następujący skrypt edycji:
+Tym razem algorytm różnicowy widzi, że wystąpiły *dwie* zmiany, a algorytm generuje następujący skrypt edycji:
 
-* Zmień wartość pierwszego węzła tekstowego na `Second`.
-* Usuń drugi węzeł tekstu.
+* Zmień wartość pierwszego węzła `Second`tekstowego na .
+* Usuń drugi węzeł tekstowy.
 
-Generowanie numerów sekwencji utraciło wszystkie przydatne informacje o tym, gdzie `if/else` gałęzie i pętle były obecne w oryginalnym kodzie. Wynikiem tego jest różnica **dwa razy** , tak długo, jak wcześniej.
+Generowanie numerów sekwencji utracił wszystkie przydatne `if/else` informacje o tym, gdzie gałęzie i pętle były obecne w oryginalnym kodzie. Powoduje to dyferwę **dwa razy dłużej** niż wcześniej.
 
-Jest to prosty przykład. W bardziej realistycznych przypadkach ze złożonymi i głęboko zagnieżdżonymi strukturami, w szczególności z pętlami, koszt wydajności jest zwykle wyższy. Zamiast natychmiastowego identyfikowania, które bloki lub gałęzie pętli zostały wstawione lub usunięte, algorytm diff musi odnosił się do drzewa renderowania. Zwykle polega to na konieczności kompilowania dłużej edytowanych skryptów, ponieważ algorytm różnicowy jest niewiadome o tym, jak stare i nowe struktury odnoszą się do siebie.
+To trywialny przykład. W bardziej realistycznych przypadkach ze złożonymi i głęboko zagnieżdżonymi strukturami, a zwłaszcza w przypadku pętli, koszt wydajności jest zwykle wyższy. Zamiast natychmiast zidentyfikować, które bloki pętli lub gałęzie zostały wstawione lub usunięte, algorytm różnicujący musi ponownie wciągać się głęboko w drzewa renderowania. Zwykle powoduje to konieczność tworzenia dłuższych skryptów edycji, ponieważ algorytm różnicowy jest błędnie poinformowany o tym, jak stare i nowe struktury odnoszą się do siebie nawzajem.
 
-### <a name="guidance-and-conclusions"></a>Wskazówki i wnioski
+### <a name="guidance-and-conclusions"></a>Wytyczne i wnioski
 
-* Wydajność aplikacji ma wpływ na to, że numery sekwencji są generowane dynamicznie.
-* Struktura nie może automatycznie tworzyć własnych numerów sekwencji w czasie wykonywania, ponieważ niezbędne informacje nie istnieją, chyba że są przechwytywane w czasie kompilacji.
-* Nie zapisuj długich bloków ręcznie zaimplementowanej logiki `RenderTreeBuilder`. Preferuj pliki *Razor* i Zezwalaj kompilatorowi na rozpatrywanie numerów sekwencyjnych. Jeśli nie możesz uniknąć ręcznej logiki `RenderTreeBuilder`, Podziel długie bloki kodu na mniejsze fragmenty opakowane w `OpenRegion`/`CloseRegion` wywołania. Każdy region ma własne oddzielne miejsce numerów sekwencyjnych, więc można uruchomić ponownie od zera (lub dowolnego innego numeru) w każdym regionie.
-* Jeśli numery sekwencji są stałee, algorytm diff wymaga tylko zwiększenia wartości sekwencji. Początkowa wartość i przerwy są nieistotne. Jedną z wiarygodnych opcji jest użycie numeru wiersza kodu jako numeru sekwencyjnego lub rozpoczęcie od zera i zwiększenie według wartości lub setek (lub dowolnego preferowanego interwału). 
-* Blazor używa numerów sekwencji, podczas gdy inne struktury interfejsu użytkownika rozróżniania drzewa nie są używane. Różnica jest znacznie szybsza, gdy są używane numery sekwencji, a Blazor ma zalety kroku kompilacji, który zajmuje się automatycznie numerami sekwencyjnymi dla deweloperów tworzących pliki *. Razor* .
+* Wydajność aplikacji cierpi, jeśli numery sekwencji są generowane dynamicznie.
+* Struktura nie można utworzyć własne numery sekwencji automatycznie w czasie wykonywania, ponieważ niezbędne informacje nie istnieje, chyba że jest przechwycony w czasie kompilacji.
+* Nie zapisuj długich bloków logiki implementowanych `RenderTreeBuilder` ręcznie. Preferuj pliki *.brzytwa* i pozwól kompilatorowi radzić sobie z numerami sekwencji. Jeśli nie możesz uniknąć `RenderTreeBuilder` logiki ręcznej, podziel długie bloki `OpenRegion` / `CloseRegion` kodu na mniejsze kawałki zawinięte w wywołania. Każdy region ma własną oddzielną przestrzeń numerów sekwencyjnych, dzięki czemu można ponownie uruchomić od zera (lub dowolną inną dowolną liczbę) wewnątrz każdego regionu.
+* Jeśli numery sekwencji są zakodowane na stałe, algorytm różnicowy wymaga tylko, aby numery sekwencji zwiększyć wartość. Wartość początkowa i luki są nieistotne. Jedną z legalnych opcji jest użycie numeru wiersza kodu jako numeru sekwencyjnyego lub rozpoczęcia od zera i zwiększenia o jeden lub setki (lub dowolnego preferowanego interwału). 
+* Blazorużywa numerów sekwencji, podczas gdy inne struktury interfejsu użytkownika różnicujące drzewa nie używają ich. Diffing jest znacznie szybsze, gdy Blazor numery sekwencji są używane i ma tę zaletę, krok kompilacji, który zajmuje się numery sekwencji automatycznie dla programistów tworzenia plików *.brzytwa.*
 
-## <a name="perform-large-data-transfers-in-opno-locblazor-server-apps"></a>Wykonywanie dużych transferów danych w aplikacjach Blazor Server
+## <a name="perform-large-data-transfers-in-opno-locblazor-server-apps"></a>Wykonywanie dużych transferów danych w Blazor aplikacjach serwera
 
-W niektórych scenariuszach należy przenieść duże ilości danych między językami JavaScript i Blazor. Zwykle duże transfery danych odbywają się w przypadku:
+W niektórych scenariuszach duże ilości danych muszą być Blazorprzesyłane między javascript i . Zazwyczaj duże transfery danych występują, gdy:
 
 * Interfejsy API systemu plików przeglądarki służą do przekazywania lub pobierania pliku.
-* Wymagana jest współdziałanie z biblioteką innej firmy.
+* Wymagany jest interop z biblioteką innej firmy.
 
-W programie Blazor Server ograniczenie jest stosowane w celu uniemożliwienia przekazywania pojedynczych dużych komunikatów, które mogą powodować problemy z wydajnością.
+W Blazor serwerze ograniczenie jest w miejscu, aby zapobiec przekazywaniu pojedynczych dużych wiadomości, które mogą powodować problemy z wydajnością.
 
-Podczas tworzenia kodu, który przesyła dane między językami JavaScript i Blazor, należy wziąć pod uwagę następujące wskazówki:
+Podczas opracowywania kodu, który przesyła dane Blazormiędzy javascript i:
 
-* Wydziel dane na mniejsze fragmenty i Wyślij segmenty danych sekwencyjnie, dopóki wszystkie dane nie zostaną odebrane przez serwer.
-* Nie przydzielaj dużych obiektów w języku C# JavaScript i kodzie.
-* Nie blokuj głównego wątku interfejsu użytkownika przez długie okresy podczas wysyłania lub otrzymywania danych.
-* Zwolnij wszystkie używane pamięci, gdy proces zostanie ukończony lub anulowany.
-* Wymuś następujące dodatkowe wymagania dotyczące zabezpieczeń:
-  * Zadeklaruj maksymalny rozmiar pliku lub danych, który może zostać przesłany.
-  * Zadeklaruj minimalną szybkość przekazywania z klienta na serwerze.
-* Po odebraniu danych przez serwer dane mogą być następujące:
-  * Tymczasowo przechowywane w buforze pamięci do momentu zebrania wszystkich segmentów.
-  * Wykorzystano natychmiast. Na przykład dane mogą być przechowywane bezpośrednio w bazie danych lub zapisywane na dysku w miarę odbierania poszczególnych segmentów.
+* Podziel dane na mniejsze kawałki i wysyłaj segmenty danych sekwencyjnie, aż wszystkie dane nie będą odbierane przez serwer.
+* Nie przydzielaj dużych obiektów w kodzie JavaScript i C#.
+* Nie blokuj głównego wątku interfejsu użytkownika przez długi czas podczas wysyłania lub odbierania danych.
+* Zwolnić pamięć zużytą po zakończeniu lub anulowaniu procesu.
+* Wymuszaj następujące dodatkowe wymagania ze względów bezpieczeństwa:
+  * Zadeklaruj maksymalny rozmiar pliku lub danych, który może zostać przekazany.
+  * Zadeklarować minimalną szybkość przekazywania z klienta do serwera.
+* Po odebraniu danych przez serwer dane mogą być:
+  * Tymczasowo przechowywane w buforze pamięci, dopóki nie zostaną zebrane wszystkie segmenty.
+  * Zużyte natychmiast. Na przykład dane mogą być natychmiast przechowywane w bazie danych lub zapisywane na dysku podczas odnoszenia każdego segmentu.
 
-Następująca Klasa obiektu przekazującego plików obsługuje program JS Interop z klientem programu. Klasa obiektu przekazującego używa programu JS Interop do:
+Następująca klasa przekazywania plików obsługuje JS interop z klientem. Klasa przesyłająca używa JS interop do:
 
-* Przesondowaj klienta, aby wysłał segment danych.
-* Przerywaj transakcję, jeśli trwa sondowanie.
+* Sonduj klienta, aby wysłać segment danych.
+* Przerwij transakcję, jeśli limit czasu sondowania.
 
 ```csharp
 using System;
@@ -332,16 +332,16 @@ public class FileUploader : IDisposable
 
 W poprzednim przykładzie:
 
-* `_maxBase64SegmentSize` jest ustawiona na `8192`, która jest obliczana na podstawie `_maxBase64SegmentSize = _segmentSize * 4 / 3`.
-* Interfejsy API zarządzania pamięcią programu .NET Core na niskim poziomie są używane do przechowywania segmentów pamięci na serwerze w `_uploadedSegments`.
-* Metoda `ReceiveFile` służy do obsługi przekazywania za pomocą narzędzia JS Interop:
-  * Rozmiar pliku jest określany w bajtach za pomocą narzędzia JS Interop z `_jsRuntime.InvokeAsync<FileInfo>('getFileSize', selector)`.
-  * Liczba segmentów do odebrania jest obliczana i przechowywana w `numberOfSegments`.
-  * Segmenty są żądane w pętli `for` za pomocą programu JS Interop z `_jsRuntime.InvokeAsync<string>('receiveSegment', i, selector)`. Wszystkie segmenty, ale ostatnie muszą mieć 8 192 bajtów przed dekodowaniem. Klient jest zmuszony do wydajnego wysyłania danych.
-  * Podczas każdego odebranego segmentu sprawdzane są operacje przed dekodowaniem w <xref:System.Convert.TryFromBase64String*>.
-  * Strumień z danymi jest zwracany jako nowy <xref:System.IO.Stream> (`SegmentedStream`) po zakończeniu przekazywania.
+* Jest `_maxBase64SegmentSize` ustawiona `8192`na , `_maxBase64SegmentSize = _segmentSize * 4 / 3`który jest obliczany od .
+* Interfejsy API zarządzania pamięcią .NET Core niskiego poziomu służą `_uploadedSegments`do przechowywania segmentów pamięci na serwerze w programie .
+* Metoda `ReceiveFile` jest używana do obsługi przekazywania za pośrednictwem js interop:
+  * Rozmiar pliku jest określany w bajtach `_jsRuntime.InvokeAsync<FileInfo>('getFileSize', selector)`za pośrednictwem JS interop z .
+  * Liczba segmentów do odebrania jest `numberOfSegments`obliczana i przechowywana w pliku .
+  * Segmenty są wymagane w `for` pętli przez JS `_jsRuntime.InvokeAsync<string>('receiveSegment', i, selector)`interop z . Wszystkie segmenty, ale ostatni musi być 8,192 bajtów przed dekodowaniem. Klient jest zmuszony do wysyłania danych w skuteczny sposób.
+  * Dla każdego odebranego segmentu kontrole <xref:System.Convert.TryFromBase64String*>są wykonywane przed dekodowaniem za pomocą pliku .
+  * Strumień z danymi jest zwracany <xref:System.IO.Stream> `SegmentedStream`jako nowy ( ) po zakończeniu przekazywania.
 
-Klasa łańcucha segmentów uwidacznia listę segmentów jako niemożliwy do przeszukiwania <xref:System.IO.Stream>:
+Klasa strumienia segmentowego udostępnia listę segmentów jako nieszukalną <xref:System.IO.Stream>tylko w przypadku odczytu:
 
 ```csharp
 using System;
@@ -437,7 +437,7 @@ public class SegmentedStream : Stream
 }
 ```
 
-Poniższy kod implementuje funkcje języka JavaScript do odbierania danych:
+Następujący kod implementuje funkcje JavaScript do odbierania danych:
 
 ```javascript
 function getFileSize(selector) {

@@ -1,1 +1,1 @@
-[Zestaw .NET Core SDK 2,0 lub nowszy](https://dotnet.microsoft.com/download)
+[.NET Core SDK 2.0 lub nowsza](https://dotnet.microsoft.com/download)

@@ -1,63 +1,63 @@
 ---
-title: Wykrywanie zmian przy użyciu tokenów zmiany w ASP.NET Core
+title: Wykrywanie zmian za pomocą tokenów zmian w ASP.NET Core
 author: rick-anderson
-description: Dowiedz się, jak śledzić zmiany przy użyciu tokenów zmian.
+description: Dowiedz się, jak używać tokenów zmian do śledzenia zmian.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 10/07/2019
 uid: fundamentals/change-tokens
 ms.openlocfilehash: 70451e219f1295b854e2f84aac55f0cfd1786b19
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78656346"
 ---
-# <a name="detect-changes-with-change-tokens-in-aspnet-core"></a>Wykrywanie zmian przy użyciu tokenów zmiany w ASP.NET Core
+# <a name="detect-changes-with-change-tokens-in-aspnet-core"></a>Wykrywanie zmian za pomocą tokenów zmian w ASP.NET Core
 
 ::: moniker range=">= aspnetcore-3.0"
 
-*Tokenem zmiany* jest ogólnym blokiem konstrukcyjnym, który służy do śledzenia zmian stanu.
+*Token zmiany* jest uniwersalnym, niskopoziomowym blokiem konstrukcyjnym używanym do śledzenia zmian stanu.
 
 [Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/change-tokens/samples/) ([jak pobrać](xref:index#how-to-download-a-sample))
 
-## <a name="ichangetoken-interface"></a>IChangeToken, interfejs
+## <a name="ichangetoken-interface"></a>Interfejs IChangeToken
 
-<xref:Microsoft.Extensions.Primitives.IChangeToken> propaguje powiadomienia o wystąpieniu zmiany. `IChangeToken` znajduje się w przestrzeni nazw <xref:Microsoft.Extensions.Primitives?displayProperty=fullName>. Pakiet NuGet [Microsoft. Extensions.](https://www.nuget.org/packages/Microsoft.Extensions.Primitives/) jest niejawnie dostarczany do aplikacji ASP.NET Core.
+<xref:Microsoft.Extensions.Primitives.IChangeToken>propaguje powiadomienia o wystąpieniu zmiany. `IChangeToken`znajduje się w <xref:Microsoft.Extensions.Primitives?displayProperty=fullName> obszarze nazw. [Pakiet Microsoft.Extensions.Primitives](https://www.nuget.org/packages/Microsoft.Extensions.Primitives/) NuGet jest niejawnie dostarczany do aplikacji ASP.NET Core.
 
-`IChangeToken` ma dwie właściwości:
+`IChangeToken`posiada dwie właściwości:
 
-* <xref:Microsoft.Extensions.Primitives.IChangeToken.ActiveChangeCallbacks> wskazać, czy token aktywnie wywołuje wywołania zwrotne. Jeśli `ActiveChangedCallbacks` jest ustawiona na `false`, wywołanie zwrotne nigdy nie zostanie wywołane, a aplikacja musi sondować `HasChanged` pod kątem zmian. Istnieje również możliwość, że token nigdy nie zostanie anulowany, jeśli nie wystąpią żadne zmiany lub zostanie usunięty lub wyłączony odbiornik zmian.
-* <xref:Microsoft.Extensions.Primitives.IChangeToken.HasChanged> otrzymuje wartość wskazującą, czy wprowadzono zmianę.
+* <xref:Microsoft.Extensions.Primitives.IChangeToken.ActiveChangeCallbacks>wskazać, czy token proaktywnie wywołuje wywołania zwrotne. Jeśli `ActiveChangedCallbacks` jest `false`ustawiona na , wywołanie zwrotne `HasChanged` nigdy nie jest wywoływane, a aplikacja musi sondować zmiany. Jest również możliwe dla tokenu nigdy nie zostać anulowane, jeśli nie nastąpią żadne zmiany lub odbiornika zmian podstawowych jest usuwany lub wyłączony.
+* <xref:Microsoft.Extensions.Primitives.IChangeToken.HasChanged>otrzymuje wartość, która wskazuje, czy nastąpiła zmiana.
 
-Interfejs `IChangeToken` obejmuje metodę [RegisterChangeCallback (Action\<object >, Object)](xref:Microsoft.Extensions.Primitives.IChangeToken.RegisterChangeCallback*) , która rejestruje wywołanie zwrotne, które jest wywoływane, gdy token został zmieniony. przed wywołaniem wywołania zwrotnego należy ustawić `HasChanged`.
+Interfejs `IChangeToken` zawiera [RegisterChangeCallback(Action\<Object>, Object),](xref:Microsoft.Extensions.Primitives.IChangeToken.RegisterChangeCallback*) który rejestruje wywołanie zwrotne, który jest wywoływany po zmianie tokenu. `HasChanged`należy ustawić przed wywołaniem wywołania zwrotnego.
 
-## <a name="changetoken-class"></a>Klasa ChangeToken
+## <a name="changetoken-class"></a>ChangeToken, klasa
 
-<xref:Microsoft.Extensions.Primitives.ChangeToken> jest klasą statyczną służącą do propagowania powiadomień, w których wystąpiła zmiana. `ChangeToken` znajduje się w przestrzeni nazw <xref:Microsoft.Extensions.Primitives?displayProperty=fullName>. Pakiet NuGet [Microsoft. Extensions.](https://www.nuget.org/packages/Microsoft.Extensions.Primitives/) jest niejawnie dostarczany do aplikacji ASP.NET Core.
+<xref:Microsoft.Extensions.Primitives.ChangeToken>jest klasą statyczną używaną do propagowania powiadomień o wystąpieniu zmiany. `ChangeToken`znajduje się w <xref:Microsoft.Extensions.Primitives?displayProperty=fullName> obszarze nazw. [Pakiet Microsoft.Extensions.Primitives](https://www.nuget.org/packages/Microsoft.Extensions.Primitives/) NuGet jest niejawnie dostarczany do aplikacji ASP.NET Core.
 
-Metoda [ChangeToken. OnChange (Func\<IChangeToken >, Action)](xref:Microsoft.Extensions.Primitives.ChangeToken.OnChange*) rejestruje `Action` do wywołania przy każdej zmianie tokenu:
+[ChangeToken.OnChange(Func\<IChangeToken>, akcja)](xref:Microsoft.Extensions.Primitives.ChangeToken.OnChange*) rejestruje `Action` wywołać do każdej zmiany tokenu:
 
-* `Func<IChangeToken>` generuje token.
-* `Action` jest wywoływana, gdy zostanie zmieniony token.
+* `Func<IChangeToken>`tworzy żeton.
+* `Action`jest wywoływana, gdy zmienia się token.
 
-[ChangeToken. Onchange\<TState > (Func\<IChangeToken >, Action\<TState >, TState)](xref:Microsoft.Extensions.Primitives.ChangeToken.OnChange*) Przeciążenie przyjmuje dodatkowy parametr `TState`, który jest przesyłany do `Action`odbiorcy tokenu.
+Przeciążenie [\<ChangeToken.OnChange TState>(Func\<IChangeToken>, Action\<TState>, TState)](xref:Microsoft.Extensions.Primitives.ChangeToken.OnChange*) przyjmuje dodatkowy `TState` parametr, który jest `Action`przekazywany do konsumenta tokenu .
 
-`OnChange` zwraca <xref:System.IDisposable>. Wywołanie <xref:System.IDisposable.Dispose*> uniemożliwia wysłuchanie tokenu przez dalsze zmiany i zwolnienie zasobów tokenu.
+`OnChange`zwraca <xref:System.IDisposable>plik . Wywołanie <xref:System.IDisposable.Dispose*> zatrzymuje tokenu od nasłuchiwania dalszych zmian i zwalnia zasoby tokenu.
 
-## <a name="example-uses-of-change-tokens-in-aspnet-core"></a>Przykładowe zastosowania tokenów zmiany w ASP.NET Core
+## <a name="example-uses-of-change-tokens-in-aspnet-core"></a>Przykładowe zastosowania tokenów zmian w ASP.NET Core
 
-Tokeny zmiany są używane w widocznych obszarach ASP.NET Core do monitorowania zmian obiektów:
+Tokeny zmiany są używane w widocznych obszarach ASP.NET Core do monitorowania zmian w obiektach:
 
-* W przypadku monitorowania zmian plików <xref:Microsoft.Extensions.FileProviders.IFileProvider><xref:Microsoft.Extensions.FileProviders.IFileProvider.Watch*> Metoda tworzy `IChangeToken` dla określonych plików lub folderów do monitorowania.
-* tokeny `IChangeToken` można dodać do wpisów pamięci podręcznej, aby wyzwolić wykluczenia z pamięci podręcznej w przypadku zmiany.
-* W przypadku zmian `TOptions` domyślna <xref:Microsoft.Extensions.Options.OptionsMonitor`1> implementacja <xref:Microsoft.Extensions.Options.IOptionsMonitor`1> ma Przeciążenie, które akceptuje co najmniej jedno wystąpienie <xref:Microsoft.Extensions.Options.IOptionsChangeTokenSource`1>. Każde wystąpienie zwraca `IChangeToken` do zarejestrowania zmian wywołania zwrotnego powiadomienia o zmianach dla opcji śledzenia.
+* Do monitorowania zmian <xref:Microsoft.Extensions.FileProviders.IFileProvider>w <xref:Microsoft.Extensions.FileProviders.IFileProvider.Watch*> plikach, `IChangeToken` 's metoda tworzy dla określonych plików lub folderu do oglądania.
+* `IChangeToken`tokeny mogą być dodawane do wpisów pamięci podręcznej, aby wyzwolić eksmisje pamięci podręcznej na zmiany.
+* W `TOptions` przypadku zmian <xref:Microsoft.Extensions.Options.OptionsMonitor`1> domyślna implementacja <xref:Microsoft.Extensions.Options.IOptionsMonitor`1> ma przeciążenie, które akceptuje jedno lub więcej <xref:Microsoft.Extensions.Options.IOptionsChangeTokenSource`1> wystąpień. Każde wystąpienie `IChangeToken` zwraca, aby zarejestrować wywołanie zwrotne powiadomienia o zmianie dla zmian opcji śledzenia.
 
-## <a name="monitor-for-configuration-changes"></a>Monitorowanie zmian konfiguracji
+## <a name="monitor-for-configuration-changes"></a>Monitoruj zmiany konfiguracji
 
-Domyślnie szablony ASP.NET Core korzystają z [plików konfiguracji JSON](xref:fundamentals/configuration/index#json-configuration-provider) (*appSettings. JSON*, *appSettings. Development. JSON*i *appSettings. Production. JSON*) w celu załadowania ustawień konfiguracji aplikacji.
+Domyślnie ASP.NET szablonów Core używają [plików konfiguracyjnych JSON](xref:fundamentals/configuration/index#json-configuration-provider) (*appsettings.json*, *appsettings. Development.json*i *appsettings. Production.json*), aby załadować ustawienia konfiguracji aplikacji.
 
-Te pliki są konfigurowane przy użyciu metody rozszerzenia [AddJsonFile (IConfigurationBuilder, String, Boolean, Boolean)](xref:Microsoft.Extensions.Configuration.JsonConfigurationExtensions.AddJsonFile*) na <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder>, która akceptuje parametr `reloadOnChange`. `reloadOnChange` wskazuje, czy należy ponownie załadować konfigurację w przypadku zmian w pliku. To ustawienie jest dostępne w <xref:Microsoft.Extensions.Hosting.Host> metodzie wygody <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder*>:
+Pliki te są konfigurowane przy użyciu metody rozszerzenia [AddJsonFile(IConfigurationBuilder, String, Boolean, Boolean),](xref:Microsoft.Extensions.Configuration.JsonConfigurationExtensions.AddJsonFile*) <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder> która akceptuje `reloadOnChange` parametr. `reloadOnChange`wskazuje, czy konfiguracja powinna zostać ponownie załadowana przy zmianach w pliku. To ustawienie pojawia <xref:Microsoft.Extensions.Hosting.Host> się <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder*>w metodzie wygody:
 
 ```csharp
 config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
@@ -65,116 +65,116 @@ config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
           reloadOnChange: true);
 ```
 
-Konfiguracja oparta na plikach jest reprezentowana przez <xref:Microsoft.Extensions.Configuration.FileConfigurationSource>. `FileConfigurationSource` używa <xref:Microsoft.Extensions.FileProviders.IFileProvider> do monitorowania plików.
+Konfiguracja oparta na <xref:Microsoft.Extensions.Configuration.FileConfigurationSource>plikach jest reprezentowana przez program . `FileConfigurationSource`do <xref:Microsoft.Extensions.FileProviders.IFileProvider> monitorowania plików.
 
-Domyślnie `IFileMonitor` jest udostępniana przez <xref:Microsoft.Extensions.FileProviders.PhysicalFileProvider>, która używa <xref:System.IO.FileSystemWatcher> do monitorowania zmian w pliku konfiguracji.
+Domyślnie `IFileMonitor` jest dostarczany przez <xref:Microsoft.Extensions.FileProviders.PhysicalFileProvider>program , <xref:System.IO.FileSystemWatcher> który służy do monitorowania zmian w pliku konfiguracyjnym.
 
-Przykładowa aplikacja przedstawia dwie implementacje monitorowania zmian konfiguracji. Jeśli którykolwiek z plików *AppSettings* zostanie zmieniony, oba implementacje monitorowania plików wykonują kod niestandardowy&mdash;Przykładowa aplikacja zapisuje komunikat w konsoli programu.
+Przykładowa aplikacja demonstruje dwie implementacje do monitorowania zmian konfiguracji. Jeśli którykolwiek z *appsettings* plików zmiany, zarówno implementacje monitorowania plików wykonać kod&mdash;niestandardowy przykładowy aplikacja zapisuje komunikat do konsoli.
 
-`FileSystemWatcher` pliku konfiguracji może wyzwolić wiele wywołań zwrotnych tokenów dla jednej zmiany pliku konfiguracji. Aby upewnić się, że kod niestandardowy jest uruchamiany tylko raz w przypadku wyzwolenia wielu wywołań zwrotnych tokenów, implementacja próbki sprawdza skróty plików. W przykładzie zastosowano mieszanie plików SHA1. Ponowna próba jest zaimplementowana z wycofywaniem wykładniczym. Ponowienie próby jest możliwe, ponieważ może wystąpić zablokowanie pliku, który tymczasowo uniemożliwia Obliczanie nowego skrótu pliku.
+Plik konfiguracyjny `FileSystemWatcher` może wyzwolić wiele wywołań zwrotnych tokenu dla zmiany pliku pojedynczej konfiguracji. Aby upewnić się, że kod niestandardowy jest uruchamiany tylko raz po wyzwoleniu wielu wywołań zwrotnych tokenu, implementacja przykładu sprawdza skróty plików. W przykładzie użyto mieszania plików SHA1. Ponowna próba jest implementowana z wykładniczym wycofywania. Ponowna próby jest obecny, ponieważ może wystąpić blokowanie plików, które tymczasowo uniemożliwia obliczanie nowego skrótu w pliku.
 
-*Narzędzia/Narzędzia. cs*:
+*Narzędzia/Utilities.cs*:
 
 [!code-csharp[](change-tokens/samples/3.x/SampleApp/Utilities/Utilities.cs?name=snippet1)]
 
 ### <a name="simple-startup-change-token"></a>Prosty token zmiany uruchamiania
 
-Zarejestruj odbiorcę tokenu `Action` wywołanie zwrotne dla powiadomień o zmianach do tokenu Załaduj ponownie konfigurację.
+Zarejestruj wywołania `Action` zwrotne konsumenta tokenu dla powiadomień o zmianie do tokenu ponownego ładowania konfiguracji.
 
 W pliku `Startup.Configure`:
 
 [!code-csharp[](change-tokens/samples/3.x/SampleApp/Startup.cs?name=snippet2)]
 
-`config.GetReloadToken()` udostępnia token. Wywołanie zwrotne jest metodą `InvokeChanged`:
+`config.GetReloadToken()`zapewnia token. Wywołanie zwrotne `InvokeChanged` jest metodą:
 
 [!code-csharp[](change-tokens/samples/3.x/SampleApp/Startup.cs?name=snippet3)]
 
-`state` wywołania zwrotnego jest używany do przekazywania w `IWebHostEnvironment`, co jest przydatne do określania poprawnego pliku konfiguracyjnego *AppSettings* do monitorowania (na przykład *appSettings. Plik Development. JSON* w środowisku programistycznym). Skróty plików są używane do zapobiegania wielokrotnemu uruchamianiu instrukcji `WriteConsole` ze względu na wiele wywołań zwrotnych tokenów, gdy plik konfiguracyjny został zmieniony tylko raz.
+Wywołanie zwrotne jest używany do przekazywania `state` w `IWebHostEnvironment`programie , który jest przydatny do określenia pliku konfiguracji poprawne *appsettings* do monitorowania (na przykład *appsettings. Development.json,* gdy w środowisku programistycznym). Skróty plików są używane, `WriteConsole` aby zapobiec wiele razy uruchamianie instrukcji z powodu wielu wywołań zwrotnych tokenu, gdy plik konfiguracji zmienił się tylko raz.
 
-Ten system działa tak długo, jak działa aplikacja i nie może zostać wyłączona przez użytkownika.
+Ten system działa tak długo, jak aplikacja jest uruchomiona i nie może być wyłączona przez użytkownika.
 
 ### <a name="monitor-configuration-changes-as-a-service"></a>Monitorowanie zmian konfiguracji jako usługi
 
 Przykład implementuje:
 
-* Podstawowe monitorowanie tokenów uruchamiania.
+* Podstawowe monitorowanie tokenu uruchamiania.
 * Monitorowanie jako usługa.
-* Mechanizm do włączania i wyłączania monitorowania.
+* Mechanizm włączania i wyłączania monitorowania.
 
-Przykład ustanawia interfejs `IConfigurationMonitor`.
+Próbka ustanawia `IConfigurationMonitor` interfejs.
 
-*Rozszerzenia/ConfigurationMonitor. cs*:
+*Rozszerzenia/ConfigurationMonitor.cs*:
 
 [!code-csharp[](change-tokens/samples/3.x/SampleApp/Extensions/ConfigurationMonitor.cs?name=snippet1)]
 
-Konstruktor zaimplementowanej klasy `ConfigurationMonitor`rejestruje wywołanie zwrotne dla powiadomień o zmianach:
+Konstruktor zaimplementowana `ConfigurationMonitor`klasa, rejestruje wywołanie zwrotne dla powiadomień o zmianie:
 
 [!code-csharp[](change-tokens/samples/3.x/SampleApp/Extensions/ConfigurationMonitor.cs?name=snippet2)]
 
-`config.GetReloadToken()` dostarcza token. `InvokeChanged` jest metodą wywołania zwrotnego. `state` w tym wystąpieniu jest odwołaniem do wystąpienia `IConfigurationMonitor`, które jest używane w celu uzyskania dostępu do stanu monitorowania. Są używane dwie właściwości:
+`config.GetReloadToken()`dostarcza żeton. `InvokeChanged`jest metodą wywołania zwrotnego. W `state` tym przypadku jest odwołanie `IConfigurationMonitor` do wystąpienia, który jest używany do dostępu do stanu monitorowania. Używane są dwie właściwości:
 
-* `MonitoringEnabled` &ndash; wskazuje, czy wywołanie zwrotne powinno uruchamiać swój kod niestandardowy.
-* `CurrentState` &ndash; opisuje bieżący stan monitorowania do użycia w interfejsie użytkownika.
+* `MonitoringEnabled`&ndash; Wskazuje, czy wywołanie zwrotne należy uruchomić jego kod niestandardowy.
+* `CurrentState`&ndash; Opisuje bieżący stan monitorowania do użycia w interfejsie użytkownika.
 
 Metoda `InvokeChanged` jest podobna do wcześniejszego podejścia, z tą różnicą, że:
 
-* Nie uruchamia tego kodu, chyba że `MonitoringEnabled` jest `true`.
-* Wyprowadza bieżącą `state` w jej `WriteConsole` danych wyjściowych.
+* Nie uruchamia swojego kodu, chyba że `MonitoringEnabled` jest `true`.
+* Wyprowadza prąd `state` w `WriteConsole` jego wyjściu.
 
 [!code-csharp[](change-tokens/samples/3.x/SampleApp/Extensions/ConfigurationMonitor.cs?name=snippet3)]
 
-`ConfigurationMonitor` wystąpienia jest zarejestrowany jako usługa w `Startup.ConfigureServices`:
+Wystąpienie `ConfigurationMonitor` jest rejestrowane jako `Startup.ConfigureServices`usługa w:
 
 [!code-csharp[](change-tokens/samples/3.x/SampleApp/Startup.cs?name=snippet1)]
 
-Strona indeks zapewnia kontrolę nad konfiguracją przez użytkownika. Wystąpienie `IConfigurationMonitor` jest wstrzykiwane do `IndexModel`.
+Strona Indeks oferuje kontrolę użytkownika nad monitorowaniem konfiguracji. Wystąpienie `IConfigurationMonitor` jest wstrzykiwane `IndexModel`do pliku .
 
-*Pages/index. cshtml. cs*:
+*Strony/Index.cshtml.cs*:
 
 [!code-csharp[](change-tokens/samples/3.x/SampleApp/Pages/Index.cshtml.cs?name=snippet1)]
 
-Monitor konfiguracji (`_monitor`) służy do włączania lub wyłączania monitorowania oraz ustawiania bieżącego stanu na potrzeby przesyłania opinii o interfejsie użytkownika:
+Monitor konfiguracji`_monitor`( ) służy do włączania lub wyłączania monitorowania i ustawiania bieżącego stanu sprzężenia zwrotnego interfejsu użytkownika:
 
 [!code-csharp[](change-tokens/samples/3.x/SampleApp/Pages/Index.cshtml.cs?name=snippet2)]
 
-Gdy `OnPostStartMonitoring` jest wyzwalane, monitorowanie jest włączone, a bieżący stan jest wyczyszczony. Gdy `OnPostStopMonitoring` jest wyzwalane, monitorowanie jest wyłączone, a stan jest ustawiony na odzwierciedlenie tego, że monitorowanie nie jest wykonywane.
+Po `OnPostStartMonitoring` wyzwoleniu monitorowanie jest włączone, a bieżący stan jest czyszczony. Po `OnPostStopMonitoring` wyzwoleniu monitorowanie jest wyłączone, a stan jest ustawiony tak, aby odzwierciedlać, że monitorowanie nie występuje.
 
 Przyciski w interfejsie użytkownika włączają i wyłączają monitorowanie.
 
-*Pages/index. cshtml*:
+*Strony/Index.cshtml*:
 
 [!code-cshtml[](change-tokens/samples/3.x/SampleApp/Pages/Index.cshtml?name=snippet_Buttons)]
 
-## <a name="monitor-cached-file-changes"></a>Monitoruj zmiany plików w pamięci podręcznej
+## <a name="monitor-cached-file-changes"></a>Monitorowanie zmian w buforowanym pliku
 
-Zawartość pliku może być buforowana w pamięci przy użyciu <xref:Microsoft.Extensions.Caching.Memory.IMemoryCache>. Buforowanie w pamięci jest opisane w temacie [pamięć podręczna w pamięci podręcznej](xref:performance/caching/memory) . Bez podejmowania dodatkowych czynności, takich jak implementacja opisana poniżej, *nieodświeżone (przestarzałe* ) dane są zwracane z pamięci podręcznej, jeśli dane źródłowe zostaną zmienione.
+Zawartość pliku można buforować w <xref:Microsoft.Extensions.Caching.Memory.IMemoryCache>pamięci za pomocą programu . Buforowanie w pamięci jest opisane w [pamięci podręcznej w pamięci](xref:performance/caching/memory) tematu. Bez podejmowania dodatkowych kroków, takich jak implementacja opisana poniżej, *przestarzałe* (nieaktualne) dane są zwracane z pamięci podręcznej, jeśli dane źródłowe ulegną zmianie.
 
-Na przykład nie uwzględnia stanu pliku źródłowego w pamięci podręcznej podczas odnawiania przedziału czasu [wygaśnięcia](xref:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.SlidingExpiration) prowadzi do starych danych w pamięci podręcznej. Każde żądanie dotyczące danych odnawia przedział czasu wygaśnięcia, ale plik nigdy nie jest ponownie ładowany do pamięci podręcznej. Wszystkie funkcje aplikacji korzystające z zawartości w pamięci podręcznej są uzależnione od potencjalnie otrzymywania nieodświeżonej zawartości.
+Na przykład nie biorąc pod uwagę stan buforowanego pliku źródłowego podczas [odnawiania okres wygaśnięcia przesuwne](xref:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.SlidingExpiration) prowadzi do starych danych pliku w pamięci podręcznej. Każde żądanie danych odnawia przesuwany okres wygaśnięcia, ale plik nigdy nie jest ponownie ładowany do pamięci podręcznej. Wszystkie funkcje aplikacji, które używają zawartości buforowanej pliku, mogą odbierać nieaktualną zawartość.
 
-Użycie tokenów zmiany w scenariuszu buforowania plików uniemożliwia obecność przestarzałych zawartości plików w pamięci podręcznej. Przykładowa aplikacja prezentuje implementację metody.
+Za pomocą zmiany tokenów w scenariuszu buforowania plików zapobiega obecności starych zawartości pliku w pamięci podręcznej. Przykładowa aplikacja demonstruje implementację podejścia.
 
-Przykład używa `GetFileContent` do:
+Próbka wykorzystuje `GetFileContent` do:
 
-* Zwróć zawartość pliku.
-* Zaimplementuj algorytm ponawiania prób z wycofywaniem z powrotem, aby uwzględnić przypadki, w których blokada pliku tymczasowo uniemożliwia odczytywanie pliku.
+* Zwracanie zawartości pliku.
+* Zaimplementuj algorytm ponawiania próby z wykładniczym wycofywania w celu pokrycia przypadków, w których blokada pliku tymczasowo uniemożliwia odczyt pliku.
 
-*Narzędzia/Narzędzia. cs*:
+*Narzędzia/Utilities.cs*:
 
 [!code-csharp[](change-tokens/samples/3.x/SampleApp/Utilities/Utilities.cs?name=snippet2)]
 
-`FileService` jest tworzony w celu obsługi wyszukiwań w pamięci podręcznej. Wywołanie metody `GetFileContent`j usługi próbuje uzyskać zawartość pliku z pamięci podręcznej w pamięci i zwrócić ją do obiektu wywołującego (*Services/FileService. cs*).
+A `FileService` jest tworzony do obsługi wyszukiwania plików w pamięci podręcznej. Wywołanie `GetFileContent` metody usługi próbuje uzyskać zawartość pliku z pamięci podręcznej w pamięci podręcznej i zwrócić ją do osoby dzwoniącej (*Services/FileService.cs*).
 
-Jeśli buforowana zawartość nie zostanie znaleziona przy użyciu klucza pamięci podręcznej, zostaną wykonane następujące akcje:
+Jeśli zawartość w pamięci podręcznej nie zostanie znaleziona przy użyciu klucza pamięci podręcznej, zostaną podjęte następujące akcje:
 
-1. Zawartość pliku jest uzyskiwana przy użyciu `GetFileContent`.
-1. Token zmiany jest uzyskiwany od dostawcy plików z [IFileProviders. Watch](xref:Microsoft.Extensions.FileProviders.IFileProvider.Watch*). Wywołanie zwrotne tokenu jest wyzwalane, gdy plik zostanie zmodyfikowany.
-1. Zawartość pliku jest buforowana z [ruchomym](xref:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.SlidingExpiration) okresem ważności. Token zmiany jest dołączony do [MemoryCacheEntryExtensions. AddExpirationToken](xref:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.AddExpirationToken*) w celu wykluczenia wpisu pamięci podręcznej, jeśli plik zostanie zmieniony w pamięci podręcznej.
+1. Zawartość pliku jest `GetFileContent`uzyskiwana za pomocą programu .
+1. Token zmiany jest uzyskiwany od dostawcy plików za pomocą [pliku IFileProviders.Watch](xref:Microsoft.Extensions.FileProviders.IFileProvider.Watch*). Wywołania zwrotnego tokenu jest wyzwalany, gdy plik jest modyfikowany.
+1. Zawartość pliku jest buforowana z przesuwanym okresem [wygaśnięcia.](xref:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.SlidingExpiration) Token zmiany jest dołączony do [MemoryCacheEntryExtensions.AddExpirationToken](xref:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.AddExpirationToken*) do eksmisji wpis pamięci podręcznej, jeśli plik zmienia się, gdy jest buforowany.
 
-W poniższym przykładzie pliki są przechowywane w [katalogu głównym zawartości](xref:fundamentals/index#content-root)aplikacji. `IWebHostEnvironment.ContentRootFileProvider` służy do uzyskiwania <xref:Microsoft.Extensions.FileProviders.IFileProvider> wskazujących `IWebHostEnvironment.ContentRootPath`aplikacji. `filePath` jest uzyskiwany za pomocą [IFileInfo. PhysicalPath](xref:Microsoft.Extensions.FileProviders.IFileInfo.PhysicalPath).
+W poniższym przykładzie pliki są przechowywane w [katalogu głównym zawartości](xref:fundamentals/index#content-root)aplikacji . `IWebHostEnvironment.ContentRootFileProvider`służy do uzyskania <xref:Microsoft.Extensions.FileProviders.IFileProvider> punktu na aplikacji `IWebHostEnvironment.ContentRootPath`. Jest `filePath` uzyskiwany za pomocą [pliku IFileInfo.PhysicalPath](xref:Microsoft.Extensions.FileProviders.IFileInfo.PhysicalPath).
 
 [!code-csharp[](change-tokens/samples/3.x/SampleApp/Services/FileService.cs?name=snippet1)]
 
-`FileService` jest zarejestrowany w kontenerze usługi wraz z usługą buforowania pamięci.
+Jest `FileService` zarejestrowany w kontenerze usługi wraz z usługą buforowania pamięci.
 
 W pliku `Startup.ConfigureServices`:
 
@@ -182,13 +182,13 @@ W pliku `Startup.ConfigureServices`:
 
 Model strony ładuje zawartość pliku przy użyciu usługi.
 
-W metodzie `OnGet` strony indeksu (*strony/index. cshtml. cs*):
+W `OnGet` metodzie strony Indeks *(Pages/Index.cshtml.cs):*
 
 [!code-csharp[](change-tokens/samples/3.x/SampleApp/Pages/Index.cshtml.cs?name=snippet3)]
 
-## <a name="compositechangetoken-class"></a>Klasa CompositeChangeToken
+## <a name="compositechangetoken-class"></a>CompositeChangeToken, klasa
 
-Dla reprezentowania jednego lub więcej wystąpień `IChangeToken` w jednym obiekcie, użyj klasy <xref:Microsoft.Extensions.Primitives.CompositeChangeToken>.
+Aby reprezentować jedno `IChangeToken` lub więcej wystąpień w <xref:Microsoft.Extensions.Primitives.CompositeChangeToken> jednym obiekcie, należy użyć klasy.
 
 ```csharp
 var firstCancellationTokenSource = new CancellationTokenSource();
@@ -209,53 +209,53 @@ var compositeChangeToken =
         });
 ```
 
-`HasChanged` w raportach tokenów złożonych, `true`, jeśli `true``HasChanged` tokenem reprezentowanego. `ActiveChangeCallbacks` w raportach tokenów złożonych, `true`, jeśli `true``ActiveChangeCallbacks` tokenem reprezentowanego. W przypadku wystąpienia wielu współbieżnych zdarzeń zmiany wywołanie zwrotne zmiany złożonego jest wywoływana jednokrotnie.
+`HasChanged`w raportach `true` tokenu złożonego, `true`jeśli jest reprezentowany token `HasChanged` . `ActiveChangeCallbacks`w raportach `true` tokenu złożonego, `true`jeśli jest reprezentowany token `ActiveChangeCallbacks` . Jeśli wystąpi wiele zdarzeń zmiany równoczesnych, wywołania zwrotnego zmiany złożonej jest wywoływana jeden raz.
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-*Tokenem zmiany* jest ogólnym blokiem konstrukcyjnym, który służy do śledzenia zmian stanu.
+*Token zmiany* jest uniwersalnym, niskopoziomowym blokiem konstrukcyjnym używanym do śledzenia zmian stanu.
 
 [Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/change-tokens/samples/) ([jak pobrać](xref:index#how-to-download-a-sample))
 
-## <a name="ichangetoken-interface"></a>IChangeToken, interfejs
+## <a name="ichangetoken-interface"></a>Interfejs IChangeToken
 
-<xref:Microsoft.Extensions.Primitives.IChangeToken> propaguje powiadomienia o wystąpieniu zmiany. `IChangeToken` znajduje się w przestrzeni nazw <xref:Microsoft.Extensions.Primitives?displayProperty=fullName>. W przypadku aplikacji, które nie korzystają z [pakietu Microsoft. AspNetCore. app](xref:fundamentals/metapackage-app), Utwórz odwołanie do pakietu dla pakietu NuGet [Microsoft. Extensions. pierwotne](https://www.nuget.org/packages/Microsoft.Extensions.Primitives/) .
+<xref:Microsoft.Extensions.Primitives.IChangeToken>propaguje powiadomienia o wystąpieniu zmiany. `IChangeToken`znajduje się w <xref:Microsoft.Extensions.Primitives?displayProperty=fullName> obszarze nazw. W przypadku aplikacji, które nie używają [metapakietu Microsoft.AspNetCore.App,](xref:fundamentals/metapackage-app)utwórz odwołanie do pakietu [Microsoft.Extensions.Primitives](https://www.nuget.org/packages/Microsoft.Extensions.Primitives/) NuGet.
 
-`IChangeToken` ma dwie właściwości:
+`IChangeToken`posiada dwie właściwości:
 
-* <xref:Microsoft.Extensions.Primitives.IChangeToken.ActiveChangeCallbacks> wskazać, czy token aktywnie wywołuje wywołania zwrotne. Jeśli `ActiveChangedCallbacks` jest ustawiona na `false`, wywołanie zwrotne nigdy nie zostanie wywołane, a aplikacja musi sondować `HasChanged` pod kątem zmian. Istnieje również możliwość, że token nigdy nie zostanie anulowany, jeśli nie wystąpią żadne zmiany lub zostanie usunięty lub wyłączony odbiornik zmian.
-* <xref:Microsoft.Extensions.Primitives.IChangeToken.HasChanged> otrzymuje wartość wskazującą, czy wprowadzono zmianę.
+* <xref:Microsoft.Extensions.Primitives.IChangeToken.ActiveChangeCallbacks>wskazać, czy token proaktywnie wywołuje wywołania zwrotne. Jeśli `ActiveChangedCallbacks` jest `false`ustawiona na , wywołanie zwrotne `HasChanged` nigdy nie jest wywoływane, a aplikacja musi sondować zmiany. Jest również możliwe dla tokenu nigdy nie zostać anulowane, jeśli nie nastąpią żadne zmiany lub odbiornika zmian podstawowych jest usuwany lub wyłączony.
+* <xref:Microsoft.Extensions.Primitives.IChangeToken.HasChanged>otrzymuje wartość, która wskazuje, czy nastąpiła zmiana.
 
-Interfejs `IChangeToken` obejmuje metodę [RegisterChangeCallback (Action\<object >, Object)](xref:Microsoft.Extensions.Primitives.IChangeToken.RegisterChangeCallback*) , która rejestruje wywołanie zwrotne, które jest wywoływane, gdy token został zmieniony. przed wywołaniem wywołania zwrotnego należy ustawić `HasChanged`.
+Interfejs `IChangeToken` zawiera [RegisterChangeCallback(Action\<Object>, Object),](xref:Microsoft.Extensions.Primitives.IChangeToken.RegisterChangeCallback*) który rejestruje wywołanie zwrotne, który jest wywoływany po zmianie tokenu. `HasChanged`należy ustawić przed wywołaniem wywołania zwrotnego.
 
-## <a name="changetoken-class"></a>Klasa ChangeToken
+## <a name="changetoken-class"></a>ChangeToken, klasa
 
-<xref:Microsoft.Extensions.Primitives.ChangeToken> jest klasą statyczną służącą do propagowania powiadomień, w których wystąpiła zmiana. `ChangeToken` znajduje się w przestrzeni nazw <xref:Microsoft.Extensions.Primitives?displayProperty=fullName>. W przypadku aplikacji, które nie korzystają z [pakietu Microsoft. AspNetCore. app](xref:fundamentals/metapackage-app), Utwórz odwołanie do pakietu dla pakietu NuGet [Microsoft. Extensions. pierwotne](https://www.nuget.org/packages/Microsoft.Extensions.Primitives/) .
+<xref:Microsoft.Extensions.Primitives.ChangeToken>jest klasą statyczną używaną do propagowania powiadomień o wystąpieniu zmiany. `ChangeToken`znajduje się w <xref:Microsoft.Extensions.Primitives?displayProperty=fullName> obszarze nazw. W przypadku aplikacji, które nie używają [metapakietu Microsoft.AspNetCore.App,](xref:fundamentals/metapackage-app)utwórz odwołanie do pakietu [Microsoft.Extensions.Primitives](https://www.nuget.org/packages/Microsoft.Extensions.Primitives/) NuGet.
 
-Metoda [ChangeToken. OnChange (Func\<IChangeToken >, Action)](xref:Microsoft.Extensions.Primitives.ChangeToken.OnChange*) rejestruje `Action` do wywołania przy każdej zmianie tokenu:
+[ChangeToken.OnChange(Func\<IChangeToken>, akcja)](xref:Microsoft.Extensions.Primitives.ChangeToken.OnChange*) rejestruje `Action` wywołać do każdej zmiany tokenu:
 
-* `Func<IChangeToken>` generuje token.
-* `Action` jest wywoływana, gdy zostanie zmieniony token.
+* `Func<IChangeToken>`tworzy żeton.
+* `Action`jest wywoływana, gdy zmienia się token.
 
-[ChangeToken. Onchange\<TState > (Func\<IChangeToken >, Action\<TState >, TState)](xref:Microsoft.Extensions.Primitives.ChangeToken.OnChange*) Przeciążenie przyjmuje dodatkowy parametr `TState`, który jest przesyłany do `Action`odbiorcy tokenu.
+Przeciążenie [\<ChangeToken.OnChange TState>(Func\<IChangeToken>, Action\<TState>, TState)](xref:Microsoft.Extensions.Primitives.ChangeToken.OnChange*) przyjmuje dodatkowy `TState` parametr, który jest `Action`przekazywany do konsumenta tokenu .
 
-`OnChange` zwraca <xref:System.IDisposable>. Wywołanie <xref:System.IDisposable.Dispose*> uniemożliwia wysłuchanie tokenu przez dalsze zmiany i zwolnienie zasobów tokenu.
+`OnChange`zwraca <xref:System.IDisposable>plik . Wywołanie <xref:System.IDisposable.Dispose*> zatrzymuje tokenu od nasłuchiwania dalszych zmian i zwalnia zasoby tokenu.
 
-## <a name="example-uses-of-change-tokens-in-aspnet-core"></a>Przykładowe zastosowania tokenów zmiany w ASP.NET Core
+## <a name="example-uses-of-change-tokens-in-aspnet-core"></a>Przykładowe zastosowania tokenów zmian w ASP.NET Core
 
-Tokeny zmiany są używane w widocznych obszarach ASP.NET Core do monitorowania zmian obiektów:
+Tokeny zmiany są używane w widocznych obszarach ASP.NET Core do monitorowania zmian w obiektach:
 
-* W przypadku monitorowania zmian plików <xref:Microsoft.Extensions.FileProviders.IFileProvider><xref:Microsoft.Extensions.FileProviders.IFileProvider.Watch*> Metoda tworzy `IChangeToken` dla określonych plików lub folderów do monitorowania.
-* tokeny `IChangeToken` można dodać do wpisów pamięci podręcznej, aby wyzwolić wykluczenia z pamięci podręcznej w przypadku zmiany.
-* W przypadku zmian `TOptions` domyślna <xref:Microsoft.Extensions.Options.OptionsMonitor`1> implementacja <xref:Microsoft.Extensions.Options.IOptionsMonitor`1> ma Przeciążenie, które akceptuje co najmniej jedno wystąpienie <xref:Microsoft.Extensions.Options.IOptionsChangeTokenSource`1>. Każde wystąpienie zwraca `IChangeToken` do zarejestrowania zmian wywołania zwrotnego powiadomienia o zmianach dla opcji śledzenia.
+* Do monitorowania zmian <xref:Microsoft.Extensions.FileProviders.IFileProvider>w <xref:Microsoft.Extensions.FileProviders.IFileProvider.Watch*> plikach, `IChangeToken` 's metoda tworzy dla określonych plików lub folderu do oglądania.
+* `IChangeToken`tokeny mogą być dodawane do wpisów pamięci podręcznej, aby wyzwolić eksmisje pamięci podręcznej na zmiany.
+* W `TOptions` przypadku zmian <xref:Microsoft.Extensions.Options.OptionsMonitor`1> domyślna implementacja <xref:Microsoft.Extensions.Options.IOptionsMonitor`1> ma przeciążenie, które akceptuje jedno lub więcej <xref:Microsoft.Extensions.Options.IOptionsChangeTokenSource`1> wystąpień. Każde wystąpienie `IChangeToken` zwraca, aby zarejestrować wywołanie zwrotne powiadomienia o zmianie dla zmian opcji śledzenia.
 
-## <a name="monitor-for-configuration-changes"></a>Monitorowanie zmian konfiguracji
+## <a name="monitor-for-configuration-changes"></a>Monitoruj zmiany konfiguracji
 
-Domyślnie szablony ASP.NET Core korzystają z [plików konfiguracji JSON](xref:fundamentals/configuration/index#json-configuration-provider) (*appSettings. JSON*, *appSettings. Development. JSON*i *appSettings. Production. JSON*) w celu załadowania ustawień konfiguracji aplikacji.
+Domyślnie ASP.NET szablonów Core używają [plików konfiguracyjnych JSON](xref:fundamentals/configuration/index#json-configuration-provider) (*appsettings.json*, *appsettings. Development.json*i *appsettings. Production.json*), aby załadować ustawienia konfiguracji aplikacji.
 
-Te pliki są konfigurowane przy użyciu metody rozszerzenia [AddJsonFile (IConfigurationBuilder, String, Boolean, Boolean)](xref:Microsoft.Extensions.Configuration.JsonConfigurationExtensions.AddJsonFile*) na <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder>, która akceptuje parametr `reloadOnChange`. `reloadOnChange` wskazuje, czy należy ponownie załadować konfigurację w przypadku zmian w pliku. To ustawienie jest dostępne w <xref:Microsoft.AspNetCore.WebHost> metodzie wygody <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*>:
+Pliki te są konfigurowane przy użyciu metody rozszerzenia [AddJsonFile(IConfigurationBuilder, String, Boolean, Boolean),](xref:Microsoft.Extensions.Configuration.JsonConfigurationExtensions.AddJsonFile*) <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder> która akceptuje `reloadOnChange` parametr. `reloadOnChange`wskazuje, czy konfiguracja powinna zostać ponownie załadowana przy zmianach w pliku. To ustawienie pojawia <xref:Microsoft.AspNetCore.WebHost> się <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*>w metodzie wygody:
 
 ```csharp
 config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
@@ -263,116 +263,116 @@ config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
           reloadOnChange: true);
 ```
 
-Konfiguracja oparta na plikach jest reprezentowana przez <xref:Microsoft.Extensions.Configuration.FileConfigurationSource>. `FileConfigurationSource` używa <xref:Microsoft.Extensions.FileProviders.IFileProvider> do monitorowania plików.
+Konfiguracja oparta na <xref:Microsoft.Extensions.Configuration.FileConfigurationSource>plikach jest reprezentowana przez program . `FileConfigurationSource`do <xref:Microsoft.Extensions.FileProviders.IFileProvider> monitorowania plików.
 
-Domyślnie `IFileMonitor` jest udostępniana przez <xref:Microsoft.Extensions.FileProviders.PhysicalFileProvider>, która używa <xref:System.IO.FileSystemWatcher> do monitorowania zmian w pliku konfiguracji.
+Domyślnie `IFileMonitor` jest dostarczany przez <xref:Microsoft.Extensions.FileProviders.PhysicalFileProvider>program , <xref:System.IO.FileSystemWatcher> który służy do monitorowania zmian w pliku konfiguracyjnym.
 
-Przykładowa aplikacja przedstawia dwie implementacje monitorowania zmian konfiguracji. Jeśli którykolwiek z plików *AppSettings* zostanie zmieniony, oba implementacje monitorowania plików wykonują kod niestandardowy&mdash;Przykładowa aplikacja zapisuje komunikat w konsoli programu.
+Przykładowa aplikacja demonstruje dwie implementacje do monitorowania zmian konfiguracji. Jeśli którykolwiek z *appsettings* plików zmiany, zarówno implementacje monitorowania plików wykonać kod&mdash;niestandardowy przykładowy aplikacja zapisuje komunikat do konsoli.
 
-`FileSystemWatcher` pliku konfiguracji może wyzwolić wiele wywołań zwrotnych tokenów dla jednej zmiany pliku konfiguracji. Aby upewnić się, że kod niestandardowy jest uruchamiany tylko raz w przypadku wyzwolenia wielu wywołań zwrotnych tokenów, implementacja próbki sprawdza skróty plików. W przykładzie zastosowano mieszanie plików SHA1. Ponowna próba jest zaimplementowana z wycofywaniem wykładniczym. Ponowienie próby jest możliwe, ponieważ może wystąpić zablokowanie pliku, który tymczasowo uniemożliwia Obliczanie nowego skrótu pliku.
+Plik konfiguracyjny `FileSystemWatcher` może wyzwolić wiele wywołań zwrotnych tokenu dla zmiany pliku pojedynczej konfiguracji. Aby upewnić się, że kod niestandardowy jest uruchamiany tylko raz po wyzwoleniu wielu wywołań zwrotnych tokenu, implementacja przykładu sprawdza skróty plików. W przykładzie użyto mieszania plików SHA1. Ponowna próba jest implementowana z wykładniczym wycofywania. Ponowna próby jest obecny, ponieważ może wystąpić blokowanie plików, które tymczasowo uniemożliwia obliczanie nowego skrótu w pliku.
 
-*Narzędzia/Narzędzia. cs*:
+*Narzędzia/Utilities.cs*:
 
 [!code-csharp[](change-tokens/samples/2.x/SampleApp/Utilities/Utilities.cs?name=snippet1)]
 
 ### <a name="simple-startup-change-token"></a>Prosty token zmiany uruchamiania
 
-Zarejestruj odbiorcę tokenu `Action` wywołanie zwrotne dla powiadomień o zmianach do tokenu Załaduj ponownie konfigurację.
+Zarejestruj wywołania `Action` zwrotne konsumenta tokenu dla powiadomień o zmianie do tokenu ponownego ładowania konfiguracji.
 
 W pliku `Startup.Configure`:
 
 [!code-csharp[](change-tokens/samples/2.x/SampleApp/Startup.cs?name=snippet2)]
 
-`config.GetReloadToken()` udostępnia token. Wywołanie zwrotne jest metodą `InvokeChanged`:
+`config.GetReloadToken()`zapewnia token. Wywołanie zwrotne `InvokeChanged` jest metodą:
 
 [!code-csharp[](change-tokens/samples/2.x/SampleApp/Startup.cs?name=snippet3)]
 
-`state` wywołania zwrotnego jest używany do przekazywania w `IHostingEnvironment`, co jest przydatne do określania poprawnego pliku konfiguracyjnego *AppSettings* do monitorowania (na przykład *appSettings. Plik Development. JSON* w środowisku programistycznym). Skróty plików są używane do zapobiegania wielokrotnemu uruchamianiu instrukcji `WriteConsole` ze względu na wiele wywołań zwrotnych tokenów, gdy plik konfiguracyjny został zmieniony tylko raz.
+Wywołanie zwrotne jest używany do przekazywania `state` w `IHostingEnvironment`programie , który jest przydatny do określenia pliku konfiguracji poprawne *appsettings* do monitorowania (na przykład *appsettings. Development.json,* gdy w środowisku programistycznym). Skróty plików są używane, `WriteConsole` aby zapobiec wiele razy uruchamianie instrukcji z powodu wielu wywołań zwrotnych tokenu, gdy plik konfiguracji zmienił się tylko raz.
 
-Ten system działa tak długo, jak działa aplikacja i nie może zostać wyłączona przez użytkownika.
+Ten system działa tak długo, jak aplikacja jest uruchomiona i nie może być wyłączona przez użytkownika.
 
 ### <a name="monitor-configuration-changes-as-a-service"></a>Monitorowanie zmian konfiguracji jako usługi
 
 Przykład implementuje:
 
-* Podstawowe monitorowanie tokenów uruchamiania.
+* Podstawowe monitorowanie tokenu uruchamiania.
 * Monitorowanie jako usługa.
-* Mechanizm do włączania i wyłączania monitorowania.
+* Mechanizm włączania i wyłączania monitorowania.
 
-Przykład ustanawia interfejs `IConfigurationMonitor`.
+Próbka ustanawia `IConfigurationMonitor` interfejs.
 
-*Rozszerzenia/ConfigurationMonitor. cs*:
+*Rozszerzenia/ConfigurationMonitor.cs*:
 
 [!code-csharp[](change-tokens/samples/2.x/SampleApp/Extensions/ConfigurationMonitor.cs?name=snippet1)]
 
-Konstruktor zaimplementowanej klasy `ConfigurationMonitor`rejestruje wywołanie zwrotne dla powiadomień o zmianach:
+Konstruktor zaimplementowana `ConfigurationMonitor`klasa, rejestruje wywołanie zwrotne dla powiadomień o zmianie:
 
 [!code-csharp[](change-tokens/samples/2.x/SampleApp/Extensions/ConfigurationMonitor.cs?name=snippet2)]
 
-`config.GetReloadToken()` dostarcza token. `InvokeChanged` jest metodą wywołania zwrotnego. `state` w tym wystąpieniu jest odwołaniem do wystąpienia `IConfigurationMonitor`, które jest używane w celu uzyskania dostępu do stanu monitorowania. Są używane dwie właściwości:
+`config.GetReloadToken()`dostarcza żeton. `InvokeChanged`jest metodą wywołania zwrotnego. W `state` tym przypadku jest odwołanie `IConfigurationMonitor` do wystąpienia, który jest używany do dostępu do stanu monitorowania. Używane są dwie właściwości:
 
-* `MonitoringEnabled` &ndash; wskazuje, czy wywołanie zwrotne powinno uruchamiać swój kod niestandardowy.
-* `CurrentState` &ndash; opisuje bieżący stan monitorowania do użycia w interfejsie użytkownika.
+* `MonitoringEnabled`&ndash; Wskazuje, czy wywołanie zwrotne należy uruchomić jego kod niestandardowy.
+* `CurrentState`&ndash; Opisuje bieżący stan monitorowania do użycia w interfejsie użytkownika.
 
 Metoda `InvokeChanged` jest podobna do wcześniejszego podejścia, z tą różnicą, że:
 
-* Nie uruchamia tego kodu, chyba że `MonitoringEnabled` jest `true`.
-* Wyprowadza bieżącą `state` w jej `WriteConsole` danych wyjściowych.
+* Nie uruchamia swojego kodu, chyba że `MonitoringEnabled` jest `true`.
+* Wyprowadza prąd `state` w `WriteConsole` jego wyjściu.
 
 [!code-csharp[](change-tokens/samples/2.x/SampleApp/Extensions/ConfigurationMonitor.cs?name=snippet3)]
 
-`ConfigurationMonitor` wystąpienia jest zarejestrowany jako usługa w `Startup.ConfigureServices`:
+Wystąpienie `ConfigurationMonitor` jest rejestrowane jako `Startup.ConfigureServices`usługa w:
 
 [!code-csharp[](change-tokens/samples/2.x/SampleApp/Startup.cs?name=snippet1)]
 
-Strona indeks zapewnia kontrolę nad konfiguracją przez użytkownika. Wystąpienie `IConfigurationMonitor` jest wstrzykiwane do `IndexModel`.
+Strona Indeks oferuje kontrolę użytkownika nad monitorowaniem konfiguracji. Wystąpienie `IConfigurationMonitor` jest wstrzykiwane `IndexModel`do pliku .
 
-*Pages/index. cshtml. cs*:
+*Strony/Index.cshtml.cs*:
 
 [!code-csharp[](change-tokens/samples/2.x/SampleApp/Pages/Index.cshtml.cs?name=snippet1)]
 
-Monitor konfiguracji (`_monitor`) służy do włączania lub wyłączania monitorowania oraz ustawiania bieżącego stanu na potrzeby przesyłania opinii o interfejsie użytkownika:
+Monitor konfiguracji`_monitor`( ) służy do włączania lub wyłączania monitorowania i ustawiania bieżącego stanu sprzężenia zwrotnego interfejsu użytkownika:
 
 [!code-csharp[](change-tokens/samples/2.x/SampleApp/Pages/Index.cshtml.cs?name=snippet2)]
 
-Gdy `OnPostStartMonitoring` jest wyzwalane, monitorowanie jest włączone, a bieżący stan jest wyczyszczony. Gdy `OnPostStopMonitoring` jest wyzwalane, monitorowanie jest wyłączone, a stan jest ustawiony na odzwierciedlenie tego, że monitorowanie nie jest wykonywane.
+Po `OnPostStartMonitoring` wyzwoleniu monitorowanie jest włączone, a bieżący stan jest czyszczony. Po `OnPostStopMonitoring` wyzwoleniu monitorowanie jest wyłączone, a stan jest ustawiony tak, aby odzwierciedlać, że monitorowanie nie występuje.
 
 Przyciski w interfejsie użytkownika włączają i wyłączają monitorowanie.
 
-*Pages/index. cshtml*:
+*Strony/Index.cshtml*:
 
 [!code-cshtml[](change-tokens/samples/2.x/SampleApp/Pages/Index.cshtml?name=snippet_Buttons)]
 
-## <a name="monitor-cached-file-changes"></a>Monitoruj zmiany plików w pamięci podręcznej
+## <a name="monitor-cached-file-changes"></a>Monitorowanie zmian w buforowanym pliku
 
-Zawartość pliku może być buforowana w pamięci przy użyciu <xref:Microsoft.Extensions.Caching.Memory.IMemoryCache>. Buforowanie w pamięci jest opisane w temacie [pamięć podręczna w pamięci podręcznej](xref:performance/caching/memory) . Bez podejmowania dodatkowych czynności, takich jak implementacja opisana poniżej, *nieodświeżone (przestarzałe* ) dane są zwracane z pamięci podręcznej, jeśli dane źródłowe zostaną zmienione.
+Zawartość pliku można buforować w <xref:Microsoft.Extensions.Caching.Memory.IMemoryCache>pamięci za pomocą programu . Buforowanie w pamięci jest opisane w [pamięci podręcznej w pamięci](xref:performance/caching/memory) tematu. Bez podejmowania dodatkowych kroków, takich jak implementacja opisana poniżej, *przestarzałe* (nieaktualne) dane są zwracane z pamięci podręcznej, jeśli dane źródłowe ulegną zmianie.
 
-Na przykład nie uwzględnia stanu pliku źródłowego w pamięci podręcznej podczas odnawiania przedziału czasu [wygaśnięcia](xref:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.SlidingExpiration) prowadzi do starych danych w pamięci podręcznej. Każde żądanie dotyczące danych odnawia przedział czasu wygaśnięcia, ale plik nigdy nie jest ponownie ładowany do pamięci podręcznej. Wszystkie funkcje aplikacji korzystające z zawartości w pamięci podręcznej są uzależnione od potencjalnie otrzymywania nieodświeżonej zawartości.
+Na przykład nie biorąc pod uwagę stan buforowanego pliku źródłowego podczas [odnawiania okres wygaśnięcia przesuwne](xref:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.SlidingExpiration) prowadzi do starych danych pliku w pamięci podręcznej. Każde żądanie danych odnawia przesuwany okres wygaśnięcia, ale plik nigdy nie jest ponownie ładowany do pamięci podręcznej. Wszystkie funkcje aplikacji, które używają zawartości buforowanej pliku, mogą odbierać nieaktualną zawartość.
 
-Użycie tokenów zmiany w scenariuszu buforowania plików uniemożliwia obecność przestarzałych zawartości plików w pamięci podręcznej. Przykładowa aplikacja prezentuje implementację metody.
+Za pomocą zmiany tokenów w scenariuszu buforowania plików zapobiega obecności starych zawartości pliku w pamięci podręcznej. Przykładowa aplikacja demonstruje implementację podejścia.
 
-Przykład używa `GetFileContent` do:
+Próbka wykorzystuje `GetFileContent` do:
 
-* Zwróć zawartość pliku.
-* Zaimplementuj algorytm ponawiania prób z wycofywaniem z powrotem, aby uwzględnić przypadki, w których blokada pliku tymczasowo uniemożliwia odczytywanie pliku.
+* Zwracanie zawartości pliku.
+* Zaimplementuj algorytm ponawiania próby z wykładniczym wycofywania w celu pokrycia przypadków, w których blokada pliku tymczasowo uniemożliwia odczyt pliku.
 
-*Narzędzia/Narzędzia. cs*:
+*Narzędzia/Utilities.cs*:
 
 [!code-csharp[](change-tokens/samples/2.x/SampleApp/Utilities/Utilities.cs?name=snippet2)]
 
-`FileService` jest tworzony w celu obsługi wyszukiwań w pamięci podręcznej. Wywołanie metody `GetFileContent`j usługi próbuje uzyskać zawartość pliku z pamięci podręcznej w pamięci i zwrócić ją do obiektu wywołującego (*Services/FileService. cs*).
+A `FileService` jest tworzony do obsługi wyszukiwania plików w pamięci podręcznej. Wywołanie `GetFileContent` metody usługi próbuje uzyskać zawartość pliku z pamięci podręcznej w pamięci podręcznej i zwrócić ją do osoby dzwoniącej (*Services/FileService.cs*).
 
-Jeśli buforowana zawartość nie zostanie znaleziona przy użyciu klucza pamięci podręcznej, zostaną wykonane następujące akcje:
+Jeśli zawartość w pamięci podręcznej nie zostanie znaleziona przy użyciu klucza pamięci podręcznej, zostaną podjęte następujące akcje:
 
-1. Zawartość pliku jest uzyskiwana przy użyciu `GetFileContent`.
-1. Token zmiany jest uzyskiwany od dostawcy plików z [IFileProviders. Watch](xref:Microsoft.Extensions.FileProviders.IFileProvider.Watch*). Wywołanie zwrotne tokenu jest wyzwalane, gdy plik zostanie zmodyfikowany.
-1. Zawartość pliku jest buforowana z [ruchomym](xref:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.SlidingExpiration) okresem ważności. Token zmiany jest dołączony do [MemoryCacheEntryExtensions. AddExpirationToken](xref:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.AddExpirationToken*) w celu wykluczenia wpisu pamięci podręcznej, jeśli plik zostanie zmieniony w pamięci podręcznej.
+1. Zawartość pliku jest `GetFileContent`uzyskiwana za pomocą programu .
+1. Token zmiany jest uzyskiwany od dostawcy plików za pomocą [pliku IFileProviders.Watch](xref:Microsoft.Extensions.FileProviders.IFileProvider.Watch*). Wywołania zwrotnego tokenu jest wyzwalany, gdy plik jest modyfikowany.
+1. Zawartość pliku jest buforowana z przesuwanym okresem [wygaśnięcia.](xref:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.SlidingExpiration) Token zmiany jest dołączony do [MemoryCacheEntryExtensions.AddExpirationToken](xref:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.AddExpirationToken*) do eksmisji wpis pamięci podręcznej, jeśli plik zmienia się, gdy jest buforowany.
 
-W poniższym przykładzie pliki są przechowywane w [katalogu głównym zawartości](xref:fundamentals/index#content-root)aplikacji. [IHostingEnvironment. ContentRootFileProvider](xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.ContentRootFileProvider) służy do uzyskiwania <xref:Microsoft.Extensions.FileProviders.IFileProvider> wskazujących <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.ContentRootPath>aplikacji. `filePath` jest uzyskiwany za pomocą [IFileInfo. PhysicalPath](xref:Microsoft.Extensions.FileProviders.IFileInfo.PhysicalPath).
+W poniższym przykładzie pliki są przechowywane w [katalogu głównym zawartości](xref:fundamentals/index#content-root)aplikacji . [IHostingEnvironment.ContentRootFileProvider](xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.ContentRootFileProvider) służy do <xref:Microsoft.Extensions.FileProviders.IFileProvider> uzyskania wskazując na aplikacji <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.ContentRootPath>. Jest `filePath` uzyskiwany za pomocą [pliku IFileInfo.PhysicalPath](xref:Microsoft.Extensions.FileProviders.IFileInfo.PhysicalPath).
 
 [!code-csharp[](change-tokens/samples/2.x/SampleApp/Services/FileService.cs?name=snippet1)]
 
-`FileService` jest zarejestrowany w kontenerze usługi wraz z usługą buforowania pamięci.
+Jest `FileService` zarejestrowany w kontenerze usługi wraz z usługą buforowania pamięci.
 
 W pliku `Startup.ConfigureServices`:
 
@@ -380,13 +380,13 @@ W pliku `Startup.ConfigureServices`:
 
 Model strony ładuje zawartość pliku przy użyciu usługi.
 
-W metodzie `OnGet` strony indeksu (*strony/index. cshtml. cs*):
+W `OnGet` metodzie strony Indeks *(Pages/Index.cshtml.cs):*
 
 [!code-csharp[](change-tokens/samples/2.x/SampleApp/Pages/Index.cshtml.cs?name=snippet3)]
 
-## <a name="compositechangetoken-class"></a>Klasa CompositeChangeToken
+## <a name="compositechangetoken-class"></a>CompositeChangeToken, klasa
 
-Dla reprezentowania jednego lub więcej wystąpień `IChangeToken` w jednym obiekcie, użyj klasy <xref:Microsoft.Extensions.Primitives.CompositeChangeToken>.
+Aby reprezentować jedno `IChangeToken` lub więcej wystąpień w <xref:Microsoft.Extensions.Primitives.CompositeChangeToken> jednym obiekcie, należy użyć klasy.
 
 ```csharp
 var firstCancellationTokenSource = new CancellationTokenSource();
@@ -407,11 +407,11 @@ var compositeChangeToken =
         });
 ```
 
-`HasChanged` w raportach tokenów złożonych, `true`, jeśli `true``HasChanged` tokenem reprezentowanego. `ActiveChangeCallbacks` w raportach tokenów złożonych, `true`, jeśli `true``ActiveChangeCallbacks` tokenem reprezentowanego. W przypadku wystąpienia wielu współbieżnych zdarzeń zmiany wywołanie zwrotne zmiany złożonego jest wywoływana jednokrotnie.
+`HasChanged`w raportach `true` tokenu złożonego, `true`jeśli jest reprezentowany token `HasChanged` . `ActiveChangeCallbacks`w raportach `true` tokenu złożonego, `true`jeśli jest reprezentowany token `ActiveChangeCallbacks` . Jeśli wystąpi wiele zdarzeń zmiany równoczesnych, wywołania zwrotnego zmiany złożonej jest wywoływana jeden raz.
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:performance/caching/memory>
 * <xref:performance/caching/distributed>

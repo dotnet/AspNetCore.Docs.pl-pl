@@ -1,58 +1,58 @@
 ---
-title: Rejestrowanie i Diagnostyka w programie gRPC na platformie .NET
+title: Rejestrowanie i diagnostyka w gRPC na .NET
 author: jamesnk
-description: Dowiedz się, jak zbierać diagnostykę z aplikacji gRPC na platformie .NET.
+description: Dowiedz się, jak zbierać diagnostykę z aplikacji gRPC w serwisie .NET.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 09/23/2019
 uid: grpc/diagnostics
-ms.openlocfilehash: 17607b734e6d777de9516aa14e81c97f87b61023
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 131144bf7a2c637eb2c1a1d5c54990dd4d429502
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78667343"
+ms.lasthandoff: 04/06/2020
+ms.locfileid: "80417517"
 ---
-# <a name="logging-and-diagnostics-in-grpc-on-net"></a>Rejestrowanie i Diagnostyka w programie gRPC na platformie .NET
+# <a name="logging-and-diagnostics-in-grpc-on-net"></a>Rejestrowanie i diagnostyka w gRPC na .NET
 
-Przez [Kuba Kowalski-króla](https://twitter.com/jamesnk)
+Przez [James Newton-King](https://twitter.com/jamesnk)
 
-Ten artykuł zawiera wskazówki dotyczące zbierania diagnostyki z aplikacji gRPC w celu ułatwienia rozwiązywania problemów. Omawiane tematy to m.in.:
+Ten artykuł zawiera wskazówki dotyczące zbierania diagnostyki z aplikacji gRPC, aby pomóc w rozwiązywaniu problemów. Omawiane tematy to m.in.:
 
-* **Rejestrowanie** dzienników strukturalnych Zapisano do [rejestrowania w programie .NET Core](xref:fundamentals/logging/index). <xref:Microsoft.Extensions.Logging.ILogger> jest używany przez platformy aplikacji do pisania dzienników oraz przez użytkowników w celu ich własnego rejestrowania w aplikacji.
-* **Śledzenie** — zdarzenia związane z operacją zapisaną przy użyciu `DiaganosticSource` i `Activity`. Ślady ze źródła diagnostycznego są często używane do zbierania danych telemetrycznych aplikacji według bibliotek takich jak [Application Insights](https://docs.microsoft.com/azure/azure-monitor/app/asp-net-core) i [OpenTelemetry](https://github.com/open-telemetry/opentelemetry-dotnet).
-* **Metryki** — reprezentacja miar danych przez przedziały czasu, na przykład żądania na sekundę. Metryki są emitowane przy użyciu `EventCounter` i mogą być zaobserwowane przy użyciu narzędzia wiersza polecenia usługi [dotnet-Counters](https://docs.microsoft.com/dotnet/core/diagnostics/dotnet-counters) lub z [Application Insights](https://docs.microsoft.com/azure/azure-monitor/app/eventcounters).
+* **Rejestrowanie** - Dzienniki strukturalne zapisywane w [dzienniku .NET Core](xref:fundamentals/logging/index). <xref:Microsoft.Extensions.Logging.ILogger>jest używany przez struktury aplikacji do pisania dzienników i przez użytkowników do własnego logowania w aplikacji.
+* **Śledzenie** — zdarzenia związane z operacją napisaną przy użyciu `DiaganosticSource` i `Activity`. Ślady ze źródła diagnostycznego są często używane do zbierania danych telemetrycznych aplikacji przez biblioteki, takie jak [Usługa Application Insights](https://docs.microsoft.com/azure/azure-monitor/app/asp-net-core) i [OpenTelemetry.](https://github.com/open-telemetry/opentelemetry-dotnet)
+* **Metryki** — reprezentacja miar danych w odstępach czasu, na przykład żądania na sekundę. Metryki są emitowane za pomocą `EventCounter` i można je obserwować za pomocą narzędzia wiersza polecenia [liczników dotnet](https://docs.microsoft.com/dotnet/core/diagnostics/dotnet-counters) lub usługi Application [Insights](https://docs.microsoft.com/azure/azure-monitor/app/eventcounters).
 
 ## <a name="logging"></a>Rejestrowanie
 
-usługi gRPC i dzienniki zapisu klienta gRPC przy użyciu funkcji [rejestrowania w programie .NET Core](xref:fundamentals/logging/index). Dzienniki są dobrym miejscem do uruchomienia, gdy zachodzi potrzeba debugowania nieoczekiwanego zachowania w aplikacjach.
+usługi gRPC i logi zapisu klienta gRPC przy użyciu [rejestrowania .NET Core](xref:fundamentals/logging/index). Dzienniki są dobrym miejscem do rozpoczęcia, gdy trzeba debugować nieoczekiwane zachowanie w aplikacjach.
 
-### <a name="grpc-services-logging"></a>Rejestrowanie usług gRPC Services
+### <a name="grpc-services-logging"></a>Rejestrowanie usług gRPC
 
 > [!WARNING]
-> Dzienniki po stronie serwera mogą zawierać poufne informacje z aplikacji. **Nigdy nie** Publikuj nieprzetworzonych dzienników z aplikacji produkcyjnych na forach publicznych, takich jak GitHub.
+> Dzienniki po stronie serwera mogą zawierać poufne informacje z aplikacji. **Nigdy nie** publikuj nieprzetworzonych dzienników z aplikacji produkcyjnych na forach publicznych, takich jak GitHub.
 
-Ponieważ usługi gRPC Services są hostowane na ASP.NET Core, korzysta z systemu rejestrowania ASP.NET Core. W konfiguracji domyślnej gRPC rejestruje bardzo mało informacji, ale można je skonfigurować. Szczegółowe informacje na temat konfigurowania rejestrowania ASP.NET Core można znaleźć w dokumentacji dotyczącej [rejestrowania ASP.NET Core](xref:fundamentals/logging/index#configuration) .
+Ponieważ usługi gRPC są hostowane w ASP.NET Core, korzysta z systemu rejestrowania ASP.NET Core. W konfiguracji domyślnej gRPC rejestruje bardzo mało informacji, ale można to skonfigurować. Szczegółowe informacje na temat konfigurowania rejestrowania ASP.NET Core można znaleźć w dokumentacji dotyczącej [rejestrowania ASP.NET](xref:fundamentals/logging/index#configuration) Core.
 
-gRPC dodaje dzienniki w kategorii `Grpc`. Aby włączyć szczegółowe dzienniki z gRPC, skonfiguruj prefiksy `Grpc` do poziomu `Debug` w pliku *appSettings. JSON* przez dodanie następujących elementów do podsekcji `LogLevel` w `Logging`:
+gRPC dodaje dzienniki `Grpc` w kategorii. Aby włączyć szczegółowe dzienniki z `Grpc` gRPC, skonfiguruj prefiksy do `Debug` poziomu w pliku *appsettings.json,* dodając następujące elementy do `LogLevel` podsekcji w: `Logging`
 
 [!code-json[](diagnostics/sample/logging-config.json?highlight=7)]
 
-Można to również skonfigurować w *Startup.cs* z `ConfigureLogging`:
+Można to również skonfigurować w *Startup.cs* za pomocą: `ConfigureLogging`
 
 [!code-csharp[](diagnostics/sample/logging-config-code.cs?highlight=5)]
 
-Jeśli nie korzystasz z konfiguracji opartej na notacji JSON, ustaw w systemie konfiguracji następującą wartość konfiguracji:
+Jeśli konfiguracja oparta na JSON nie jest obsługiwana, ustaw następującą wartość konfiguracji w systemie konfiguracyjnym:
 
 * `Logging:LogLevel:Grpc` = `Debug`
 
-Zapoznaj się z dokumentacją systemu konfiguracyjnego, aby określić sposób określania zagnieżdżonych wartości konfiguracyjnych. Na przykład w przypadku używania zmiennych środowiskowych zamiast `:` są używane dwa `_` znaki (na przykład `Logging__LogLevel__Grpc`).
+Sprawdź dokumentację systemu konfiguracji, aby określić sposób określania zagnieżdżonych wartości konfiguracyjnych. Na przykład podczas korzystania ze `_` zmiennych środowiskowych zamiast `:` (na przykład `Logging__LogLevel__Grpc`) używane są dwa znaki.
 
-Zalecamy użycie poziomu `Debug` podczas zbierania bardziej szczegółowych informacji diagnostycznych dla aplikacji. Na poziomie `Trace` powstaje Diagnostyka bardzo niskiego poziomu i jest rzadko wymagana do diagnozowania problemów w aplikacji.
+Zalecamy używanie `Debug` poziomu podczas zbierania bardziej szczegółowych diagnostyki aplikacji. Poziom `Trace` tworzy diagnostykę bardzo niskiego poziomu i rzadko jest potrzebny do diagnozowania problemów w aplikacji.
 
 #### <a name="sample-logging-output"></a>Przykładowe dane wyjściowe rejestrowania
 
-Oto przykład danych wyjściowych konsoli na poziomie `Debug` usługi gRPC:
+Oto przykład wyjścia konsoli na `Debug` poziomie usługi gRPC:
 
 ```console
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
@@ -73,41 +73,41 @@ info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
 
 ### <a name="access-server-side-logs"></a>Dostęp do dzienników po stronie serwera
 
-Sposób dostępu do dzienników po stronie serwera zależy od środowiska, w którym jest uruchomiony program.
+Sposób uzyskiwania dostępu do dzienników po stronie serwera zależy od środowiska, w którym jest uruchomiona.
 
-#### <a name="as-a-console-app"></a>Jako Aplikacja konsolowa
+#### <a name="as-a-console-app"></a>Jako aplikacja konsoli
 
-Jeśli używasz programu w aplikacji konsolowej, [Rejestrator konsoli](xref:fundamentals/logging/index#console-provider) powinien być domyślnie włączony. Dzienniki gRPC będą wyświetlane w konsoli programu.
+Jeśli korzystasz z aplikacji konsoli, [rejestrator konsoli](xref:fundamentals/logging/index#console-provider) powinien być domyślnie włączony. W konsoli pojawią się dzienniki gRPC.
 
 #### <a name="other-environments"></a>Inne środowiska
 
-Jeśli aplikacja jest wdrażana w innym środowisku (na przykład Docker, Kubernetes lub Windows Service), zobacz <xref:fundamentals/logging/index>, aby uzyskać więcej informacji na temat konfigurowania dostawców rejestrowania odpowiednie dla danego środowiska.
+Jeśli aplikacja jest wdrażana w innym środowisku (na przykład Docker, Kubernetes lub Windows Service), zobacz <xref:fundamentals/logging/index> więcej informacji na temat konfigurowania dostawców rejestrowania odpowiednich dla środowiska.
 
 ### <a name="grpc-client-logging"></a>Rejestrowanie klienta gRPC
 
 > [!WARNING]
-> Dzienniki po stronie klienta mogą zawierać poufne informacje z aplikacji. **Nigdy nie** Publikuj nieprzetworzonych dzienników z aplikacji produkcyjnych na forach publicznych, takich jak GitHub.
+> Dzienniki po stronie klienta mogą zawierać poufne informacje z aplikacji. **Nigdy nie** publikuj nieprzetworzonych dzienników z aplikacji produkcyjnych na forach publicznych, takich jak GitHub.
 
-Aby uzyskać dzienniki z klienta platformy .NET, można ustawić właściwość `GrpcChannelOptions.LoggerFactory` podczas tworzenia kanału klienta. Jeśli wywołujesz usługę gRPC z aplikacji ASP.NET Core, fabryka rejestratorów może zostać rozpoznana z iniekcji zależności (DI):
+Aby uzyskać dzienniki z klienta .NET, `GrpcChannelOptions.LoggerFactory` można ustawić właściwość podczas tworzenia kanału klienta. Jeśli wywołujesz usługę gRPC z aplikacji ASP.NET Core, fabrykę rejestratora można rozwiązać z iniekcji zależności (DI):
 
 [!code-csharp[](diagnostics/sample/net-client-dependency-injection.cs?highlight=7,16)]
 
-Alternatywnym sposobem włączenia rejestrowania klienta jest użycie [fabryki klienta gRPC](xref:grpc/clientfactory) do utworzenia klienta programu. Klient gRPC zarejestrowany w fabryce klienta i rozwiązany przez program DI automatycznie użyje skonfigurowanego rejestrowania aplikacji.
+Alternatywnym sposobem włączenia rejestrowania klienta jest użycie [fabryki klienta gRPC](xref:grpc/clientfactory) do utworzenia klienta. Klient gRPC zarejestrowany w fabryce klienta i rozwiązany z DI automatycznie użyje skonfigurowanego rejestrowania aplikacji.
 
-Jeśli aplikacja nie korzysta z programu DI, można utworzyć nowe wystąpienie `ILoggerFactory` za pomocą [LoggerFactory. Create](xref:Microsoft.Extensions.Logging.LoggerFactory.Create*). Aby uzyskać dostęp do tej metody, Dodaj pakiet [Microsoft. Extensions. Logging](https://www.nuget.org/packages/microsoft.extensions.logging/) do aplikacji.
+Jeśli aplikacja nie używa DI, możesz utworzyć `ILoggerFactory` nowe wystąpienie za pomocą [pliku LoggerFactory.Create](xref:Microsoft.Extensions.Logging.LoggerFactory.Create*). Aby uzyskać dostęp do tej metody, dodaj pakiet [rejestrowania Microsoft.Extensions.Logging](https://www.nuget.org/packages/microsoft.extensions.logging/) do aplikacji.
 
 [!code-csharp[](diagnostics/sample/net-client-loggerfactory-create.cs?highlight=1,8)]
 
-#### <a name="grpc-client-log-scopes"></a>gRPC zakresy dziennika klienta
+#### <a name="grpc-client-log-scopes"></a>Zakresy dziennika klienta gRPC
 
-Klient gRPC dodaje [zakres rejestrowania](https://docs.microsoft.com/aspnet/core/fundamentals/logginglog-scopes) do dzienników wykonywanych podczas wywołania gRPC. Zakres zawiera metadane dotyczące wywołania gRPC:
+Klient gRPC dodaje [zakres rejestrowania](https://docs.microsoft.com/aspnet/core/fundamentals/logging#log-scopes) do dzienników wykonanych podczas wywołania gRPC. Zakres zawiera metadane związane z wywołaniem gRPC:
 
-* **GrpcMethodType** — typ metody gRPC. Możliwe wartości to nazwy z `Grpc.Core.MethodType` Wyliczenie, np. jednoargumentowy
-* **GrpcUri** — WZGLĘDNY identyfikator URI metody gRPC, np./Greet. Greeter/SayHellos
+* **GrpcMethodType** - Typ metody gRPC. Możliwe wartości to `Grpc.Core.MethodType` nazwy z wyliczenia, np.
+* **GrpcUri** — względny identyfikator URI metody gRPC, np. Greeter/SayHellos
 
 #### <a name="sample-logging-output"></a>Przykładowe dane wyjściowe rejestrowania
 
-Oto przykład danych wyjściowych konsoli na poziomie `Debug` klienta gRPC:
+Oto przykład wyjścia konsoli na `Debug` poziomie klienta gRPC:
 
 ```console
 dbug: Grpc.Net.Client.Internal.GrpcCall[1]
@@ -122,77 +122,77 @@ dbug: Grpc.Net.Client.Internal.GrpcCall[4]
 
 ## <a name="tracing"></a>Śledzenie
 
-usługi gRPC oraz klient gRPC dostarczają informacji o wywołaniach gRPC za pomocą [DiagnosticSource](https://docs.microsoft.com/dotnet/api/system.diagnostics.diagnosticsource) i [działania](https://docs.microsoft.com/dotnet/api/system.diagnostics.activity).
+Usługi gRPC i klient gRPC dostarczają informacji o wywołaniach gRPC za pomocą [DiagnosticSource](https://docs.microsoft.com/dotnet/api/system.diagnostics.diagnosticsource) i [Activity](https://docs.microsoft.com/dotnet/api/system.diagnostics.activity).
 
 * .NET gRPC używa działania do reprezentowania wywołania gRPC.
-* Zdarzenia śledzenia są zapisywane w źródle diagnostycznym na początek i zatrzymanie działania wywołania gRPC.
-* Śledzenie nie przechwytuje informacji o wysyłaniu komunikatów przez okres istnienia wywołań przesyłania strumieniowego gRPC.
+* Śledzenie zdarzeń są zapisywane do źródła diagnostycznego na początku i zatrzymaniu działania wywołania gRPC.
+* Śledzenie nie przechwytuje informacji o tym, kiedy wiadomości są wysyłane przez cały okres istnienia połączeń strumieniowych gRPC.
 
-### <a name="grpc-service-tracing"></a>Śledzenie usługi gRPC
+### <a name="grpc-service-tracing"></a>Śledzenie usług gRPC
 
-usługi gRPC Services są hostowane na ASP.NET Core które raportują zdarzenia dotyczące przychodzących żądań HTTP. gRPC określone metadane są dodawane do istniejącej diagnostyki żądania HTTP, która zapewnia ASP.NET Core.
+Usługi gRPC są hostowane w ASP.NET Core, który zgłasza zdarzenia dotyczące przychodzących żądań HTTP. Metadane specyficzne dla gRPC są dodawane do istniejącej diagnostyki żądań HTTP, która ASP.NET zapewnia Core.
 
-* Nazwa źródła diagnostyki jest `Microsoft.AspNetCore`.
-* Nazwa działania jest `Microsoft.AspNetCore.Hosting.HttpRequestIn`.
-  * Nazwa metody gRPC wywoływanej przez wywołanie gRPC jest dodawana jako tag o nazwie `grpc.method`.
-  * Kod stanu wywołania gRPC po zakończeniu zostanie dodany jako tag o nazwie `grpc.status_code`.
+* Nazwa źródła `Microsoft.AspNetCore`diagnostycznego to .
+* Nazwa działania `Microsoft.AspNetCore.Hosting.HttpRequestIn`to .
+  * Nazwa metody gRPC wywoływanej przez wywołanie gRPC jest dodawana jako znacznik o nazwie `grpc.method`.
+  * Kod stanu wywołania gRPC po jego zakończeniu jest dodawany jako tag o nazwie `grpc.status_code`.
 
 ### <a name="grpc-client-tracing"></a>Śledzenie klienta gRPC
 
-Klient .NET gRPC używa `HttpClient` do wykonywania wywołań gRPC. Mimo że `HttpClient` zapisuje zdarzenia diagnostyczne, klient .NET gRPC udostępnia niestandardowe źródło diagnostyki, działanie i zdarzenia, dzięki czemu można zbierać kompletne informacje dotyczące wywołania gRPC.
+Klient gRPC .NET `HttpClient` używa do wykonywania wywołań gRPC. Mimo `HttpClient` że zapisuje zdarzenia diagnostyczne, klient gRPC .NET udostępnia niestandardowe źródło diagnostyczne, działanie i zdarzenia, dzięki czemu można zbierać pełne informacje o wywołaniu gRPC.
 
-* Nazwa źródła diagnostyki jest `Grpc.Net.Client`.
-* Nazwa działania jest `Grpc.Net.Client.GrpcOut`.
-  * Nazwa metody gRPC wywoływanej przez wywołanie gRPC jest dodawana jako tag o nazwie `grpc.method`.
-  * Kod stanu wywołania gRPC po zakończeniu zostanie dodany jako tag o nazwie `grpc.status_code`.
+* Nazwa źródła `Grpc.Net.Client`diagnostycznego to .
+* Nazwa działania `Grpc.Net.Client.GrpcOut`to .
+  * Nazwa metody gRPC wywoływanej przez wywołanie gRPC jest dodawana jako znacznik o nazwie `grpc.method`.
+  * Kod stanu wywołania gRPC po jego zakończeniu jest dodawany jako tag o nazwie `grpc.status_code`.
 
 ### <a name="collecting-tracing"></a>Zbieranie śledzenia
 
-Najprostszym sposobem korzystania z `DiagnosticSource` jest skonfigurowanie biblioteki telemetrii, takiej jak [Application Insights](https://docs.microsoft.com/azure/azure-monitor/app/asp-net-core) lub [OpenTelemetry](https://github.com/open-telemetry/opentelemetry-dotnet) w aplikacji. Biblioteka będzie przetwarzać informacje o wywołaniach gRPC wraz z inną telemetrią aplikacji.
+Najprostszym sposobem użycia `DiagnosticSource` jest skonfigurowanie biblioteki telemetryczne, takich jak [Usługa Application Insights](https://docs.microsoft.com/azure/azure-monitor/app/asp-net-core) lub [OpenTelemetry](https://github.com/open-telemetry/opentelemetry-dotnet) w aplikacji. Biblioteka będzie przetwarzać informacje o wywołaniach gRPC wraz z innymi danymi telemetrycznymi aplikacji.
 
-Śledzenie można wyświetlać w zarządzanej usłudze, takiej jak Application Insights, lub można uruchomić własny system śledzenia rozproszonego. OpenTelemetry obsługuje eksportowanie danych śledzenia do [Jaeger](https://www.jaegertracing.io/) i [Zipkin](https://zipkin.io/).
+Śledzenie można wyświetlać w usłudze zarządzanej, takiej jak usługa Application Insights, lub można uruchomić własny rozproszony system śledzenia. OpenTelemetry obsługuje eksportowanie danych śledzenia do [Jaeger](https://www.jaegertracing.io/) i [Zipkin](https://zipkin.io/).
 
-`DiagnosticSource` może zużywać zdarzenia śledzenia w kodzie przy użyciu `DiagnosticListener`. Aby uzyskać informacje o nasłuchiwaniu źródła diagnostycznego z kodem, zobacz [Podręcznik użytkownika DiagnosticSource](https://github.com/dotnet/corefx/blob/d3942d4671919edb0cca6ddc1840190f524a809d/src/System.Diagnostics.DiagnosticSource/src/DiagnosticSourceUsersGuide.md#consuming-data-with-diagnosticlistener).
+`DiagnosticSource`może korzystać ze śledzenia `DiagnosticListener`zdarzeń w kodzie przy użyciu programu . Aby uzyskać informacje na temat nasłuchiwania źródła diagnostycznego z kodem, zobacz [diagnosticsource podręcznik użytkownika](https://github.com/dotnet/corefx/blob/d3942d4671919edb0cca6ddc1840190f524a809d/src/System.Diagnostics.DiagnosticSource/src/DiagnosticSourceUsersGuide.md#consuming-data-with-diagnosticlistener).
 
 > [!NOTE]
-> Biblioteki telemetrii nie przechwytują gRPC `Grpc.Net.Client.GrpcOut` konkretnych danych telemetrycznych. Działa w celu usprawnienia bibliotek telemetrycznych przechwytujących to śledzenie.
+> Biblioteki telemetryczne nie przechwytują `Grpc.Net.Client.GrpcOut` obecnie danych telemetrycznych specyficznych dla gRPC. Trwają prace nad ulepszeniem bibliotek telemetrycznych przechwytujących to śledzenie.
 
 ## <a name="metrics"></a>Metryki
 
-Metryki są reprezentacją miar danych przez przedziały czasu, na przykład żądania na sekundę. Dane metryk umożliwiają obserwację stanu aplikacji na wysokim poziomie. Metryki programu .NET gRPC są emitowane przy użyciu `EventCounter`.
+Metryki to reprezentacja miar danych w odstępach czasu, na przykład żądania na sekundę. Dane metryk umożliwia obserwację stanu aplikacji na wysokim poziomie. Metryki .NET gRPC są `EventCounter`emitowane przy użyciu .
 
-### <a name="grpc-service-metrics"></a>metryki usługi gRPC
+### <a name="grpc-service-metrics"></a>Metryki usług gRPC
 
-metryki serwera gRPC są zgłaszane w `Grpc.AspNetCore.Server` źródle zdarzeń.
+Metryki serwera gRPC `Grpc.AspNetCore.Server` są zgłaszane w źródle zdarzeń.
 
-| Name (Nazwa)                      | Opis                   |
+| Nazwa                      | Opis                   |
 | --------------------------|-------------------------------|
-| `total-calls`             | Łączna liczba wywołań                   |
-| `current-calls`           | Bieżące wywołania                 |
-| `calls-failed`            | Łączna liczba nieudanych wywołań            |
-| `calls-deadline-exceeded` | Przekroczono łączny termin ostateczny wywołań |
-| `messages-sent`           | Całkowita liczba wysłanych komunikatów           |
-| `messages-received`       | Całkowita liczba odebranych komunikatów       |
-| `calls-unimplemented`     | Łączna liczba wywołań niezaimplementowanych     |
+| `total-calls`             | Łączna liczba połączeń                   |
+| `current-calls`           | Bieżące połączenia                 |
+| `calls-failed`            | Łączna liczba połączeń nie powiodła się            |
+| `calls-deadline-exceeded` | Przekroczono łączny termin nawiązywanie połączeń |
+| `messages-sent`           | Łączna liczba wysłanych wiadomości           |
+| `messages-received`       | Łączna liczba odebranych wiadomości       |
+| `calls-unimplemented`     | Łączna liczba połączeń nieuwzwolonych     |
 
-ASP.NET Core również udostępnia własne metryki `Microsoft.AspNetCore.Hosting` źródła zdarzeń.
+ASP.NET Core udostępnia również własne metryki `Microsoft.AspNetCore.Hosting` w źródle zdarzeń.
 
-### <a name="grpc-client-metrics"></a>metryki klienta gRPC
+### <a name="grpc-client-metrics"></a>Metryki klienta gRPC
 
-metryki klienta gRPC są zgłaszane w `Grpc.Net.Client` źródle zdarzeń.
+Metryki klienta gRPC `Grpc.Net.Client` są raportowane w źródle zdarzeń.
 
-| Name (Nazwa)                      | Opis                   |
+| Nazwa                      | Opis                   |
 | --------------------------|-------------------------------|
-| `total-calls`             | Łączna liczba wywołań                   |
-| `current-calls`           | Bieżące wywołania                 |
-| `calls-failed`            | Łączna liczba nieudanych wywołań            |
-| `calls-deadline-exceeded` | Przekroczono łączny termin ostateczny wywołań |
-| `messages-sent`           | Całkowita liczba wysłanych komunikatów           |
-| `messages-received`       | Całkowita liczba odebranych komunikatów       |
+| `total-calls`             | Łączna liczba połączeń                   |
+| `current-calls`           | Bieżące połączenia                 |
+| `calls-failed`            | Łączna liczba połączeń nie powiodła się            |
+| `calls-deadline-exceeded` | Przekroczono łączny termin nawiązywanie połączeń |
+| `messages-sent`           | Łączna liczba wysłanych wiadomości           |
+| `messages-received`       | Łączna liczba odebranych wiadomości       |
 
-### <a name="observe-metrics"></a>Obserwuj metryki
+### <a name="observe-metrics"></a>Obserwowanie danych
 
-[dotnet-Counters](https://docs.microsoft.com/dotnet/core/diagnostics/dotnet-counters) to narzędzie do monitorowania wydajności dla monitorowania kondycji ad hoc i badania wydajności pierwszego poziomu. Monitoruj aplikację .NET przy użyciu `Grpc.AspNetCore.Server` lub `Grpc.Net.Client` jako nazwy dostawcy.
+[liczniki dotnet to](https://docs.microsoft.com/dotnet/core/diagnostics/dotnet-counters) narzędzie do monitorowania wydajności do doraźnego monitorowania kondycji i badania wydajności pierwszego poziomu. Monitoruj aplikację platformy `Grpc.AspNetCore.Server` .NET z nazwą dostawcy lub `Grpc.Net.Client` jako jej nazwę.
 
 ```console
 > dotnet-counters monitor --process-id 1902 Grpc.AspNetCore.Server
@@ -209,9 +209,9 @@ Press p to pause, r to resume, q to quit.
     Total Calls Unimplemented                   0
 ```
 
-Innym sposobem na obserwowanie metryk gRPC jest przechwycenie danych licznika przy Application Insights użyciu [pakietu Microsoft. ApplicationInsights. EventCounterCollector](https://docs.microsoft.com/azure/azure-monitor/app/eventcounters). Po zakończeniu instalacji Application Insights zbiera typowe liczniki platformy .NET w czasie wykonywania. Liczniki gRPC nie są zbierane domyślnie, ale usługi App Insights można [dostosować w celu uwzględnienia dodatkowych liczników](https://docs.microsoft.com/azure/azure-monitor/app/eventcounters#customizing-counters-to-be-collected).
+Innym sposobem obserwowania metryk gRPC jest przechwytywanie danych liczników przy użyciu [pakietu Microsoft.ApplicationInsights.EventCounterCollector](https://docs.microsoft.com/azure/azure-monitor/app/eventcounters)aplikacji aplikacji. Po skonfigurowaniu usługa Application Insights zbiera typowe liczniki platformy .NET w czasie wykonywania. Liczniki gRPC nie są zbierane domyślnie, ale App Insights można [dostosować, aby uwzględnić dodatkowe liczniki](https://docs.microsoft.com/azure/azure-monitor/app/eventcounters#customizing-counters-to-be-collected).
 
-Określ gRPC Liczniki usługi Application Insights do zebrania w *Startup.cs*:
+Określ liczniki gRPC dla usługi Application Insight do zebrania w *Startup.cs:*
 
 ```csharp
     using Microsoft.ApplicationInsights.Extensibility.EventCounterCollector;
@@ -232,7 +232,7 @@ Określ gRPC Liczniki usługi Application Insights do zebrania w *Startup.cs*:
     }
 ```
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:fundamentals/logging/index>
 * <xref:grpc/configuration>

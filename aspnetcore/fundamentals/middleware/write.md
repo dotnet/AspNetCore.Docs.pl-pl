@@ -1,57 +1,57 @@
 ---
-title: Napisz niestandardowe oprogramowanie pośredniczące ASP.NET Core
+title: Pisanie niestandardowego oprogramowania pośredniczącego ASP.NET Core
 author: rick-anderson
-description: Dowiedz się, jak napisać niestandardowe oprogramowanie pośredniczące ASP.NET Core.
+description: Dowiedz się, jak pisać niestandardowe oprogramowanie pośredniczące ASP.NET Core.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 08/22/2019
 uid: fundamentals/middleware/write
 ms.openlocfilehash: e74bba9e1bd826d4f493b0ee642a198f984daada
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78663927"
 ---
-# <a name="write-custom-aspnet-core-middleware"></a>Napisz niestandardowe oprogramowanie pośredniczące ASP.NET Core
+# <a name="write-custom-aspnet-core-middleware"></a>Pisanie niestandardowego oprogramowania pośredniczącego ASP.NET Core
 
-Autorzy [Rick Anderson](https://twitter.com/RickAndMSFT) i [Steve Smith](https://ardalis.com/)
+Przez [Rick Anderson](https://twitter.com/RickAndMSFT) i Steve [Smith](https://ardalis.com/)
 
-Oprogramowanie pośredniczące jest oprogramowaniem, które jest połączone z potokiem aplikacji w celu obsługi żądań i odpowiedzi. ASP.NET Core udostępnia bogaty zestaw wbudowanych komponentów oprogramowania pośredniczącego, ale w niektórych scenariuszach warto napisać niestandardowe oprogramowanie pośredniczące.
+Oprogramowanie pośredniczące to oprogramowanie, które jest montowane w potoku aplikacji do obsługi żądań i odpowiedzi. ASP.NET Core udostępnia bogaty zestaw wbudowanych składników oprogramowania pośredniczącego, ale w niektórych scenariuszach można napisać niestandardowe oprogramowanie pośredniczące.
 
-## <a name="middleware-class"></a>Pośrednicząca Klasa oprogramowania
+## <a name="middleware-class"></a>Klasa oprogramowania pośredniczącego
 
-Oprogramowanie pośredniczące jest zazwyczaj hermetyzowane w klasie i udostępniane przy użyciu metody rozszerzenia. Rozważ następujące oprogramowanie pośredniczące, które ustawia kulturę dla bieżącego żądania z ciągu zapytania:
+Oprogramowanie pośredniczące jest zazwyczaj hermetyzowane w klasie i udostępniane za pomocą metody rozszerzenia. Należy wziąć pod uwagę następujące oprogramowanie pośredniczące, który ustawia kultury dla bieżącego żądania z ciągu zapytania:
 
 [!code-csharp[](write/snapshot/StartupCulture.cs)]
 
-Poprzedni przykładowy kod służy do zademonstrowania tworzenia składnika pośredniczącego. Aby uzyskać wbudowaną obsługę lokalizacji ASP.NET Core, zobacz <xref:fundamentals/localization>.
+Poprzedni przykładowy kod służy do wykazania tworzenia składnika oprogramowania pośredniczącego. Aby uzyskać ASP.NET wbudowaną obsługę lokalizacji Core, <xref:fundamentals/localization>zobacz .
 
-Przetestuj oprogramowanie pośredniczące, przekazując kulturę. Na przykład żądanie `https://localhost:5001/?culture=no`.
+Przetestuj oprogramowanie pośredniczące, przechodząc w kulturze. Na przykład `https://localhost:5001/?culture=no`poproś o plik .
 
-Poniższy kod przenosi delegata oprogramowania pośredniczącego do klasy:
+Następujący kod przenosi delegata oprogramowania pośredniczącego do klasy:
 
 [!code-csharp[](write/snapshot/RequestCultureMiddleware.cs)]
 
-Klasa pośrednicząca musi zawierać następujące:
+Klasa oprogramowania pośredniczącego musi zawierać:
 
 * Konstruktor publiczny z parametrem typu <xref:Microsoft.AspNetCore.Http.RequestDelegate>.
-* Metoda publiczna o nazwie `Invoke` lub `InvokeAsync`. Ta metoda musi:
-  * Zwróć `Task`.
-  * Zaakceptuj pierwszy parametr typu <xref:Microsoft.AspNetCore.Http.HttpContext>.
+* Metoda publiczna `Invoke` `InvokeAsync`o nazwie lub . Metoda ta musi:
+  * Zwróć `Task`plik .
+  * Zaakceptuj pierwszy parametr <xref:Microsoft.AspNetCore.Http.HttpContext>typu .
   
-Dodatkowe parametry dla konstruktora i `Invoke`/`InvokeAsync` są wypełniane przez [iniekcję zależności (di)](xref:fundamentals/dependency-injection).
+Dodatkowe parametry dla konstruktora i `Invoke` / `InvokeAsync` są wypełniane przez [iniekcję zależności (DI)](xref:fundamentals/dependency-injection).
 
 ## <a name="middleware-dependencies"></a>Zależności oprogramowania pośredniczącego
 
-Oprogramowanie pośredniczące powinno postępować zgodnie z [zasadą jawnych zależności](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies) przez ujawnienie jej zależności w konstruktorze. Oprogramowanie pośredniczące jest zbudowane raz dla *okresu istnienia aplikacji*. Zapoznaj się z sekcją [zależności oprogramowania pośredniczącego na żądanie](#per-request-middleware-dependencies) , jeśli chcesz udostępnić usługi za pomocą oprogramowania pośredniczącego w ramach żądania.
+Oprogramowanie pośredniczące należy przestrzegać [zasady jawne zależności,](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies) ujawniając jego zależności w jego konstruktora. Oprogramowanie pośredniczące jest konstruowane raz na *okres istnienia aplikacji.* Zobacz [sekcję Zależności oprogramowania pośredniczącego na żądanie,](#per-request-middleware-dependencies) jeśli chcesz udostępnić usługi oprogramowaniu pośredniczącemu w żądaniu.
 
-Składniki pośredniczące mogą rozpoznać zależności od [iniekcji zależności (di)](xref:fundamentals/dependency-injection) przez parametry konstruktora. [UseMiddleware&lt;t&gt;](/dotnet/api/microsoft.aspnetcore.builder.usemiddlewareextensions.usemiddleware#Microsoft_AspNetCore_Builder_UseMiddlewareExtensions_UseMiddleware_Microsoft_AspNetCore_Builder_IApplicationBuilder_System_Type_System_Object___) może również bezpośrednio akceptować dodatkowe parametry.
+Składniki oprogramowania pośredniczącego można rozwiązać ich zależności od [iniekcji zależności (DI)](xref:fundamentals/dependency-injection) za pomocą parametrów konstruktora. [UseMiddleware&lt;&gt; T](/dotnet/api/microsoft.aspnetcore.builder.usemiddlewareextensions.usemiddleware#Microsoft_AspNetCore_Builder_UseMiddlewareExtensions_UseMiddleware_Microsoft_AspNetCore_Builder_IApplicationBuilder_System_Type_System_Object___) może również bezpośrednio akceptować dodatkowe parametry.
 
 ## <a name="per-request-middleware-dependencies"></a>Zależności oprogramowania pośredniczącego na żądanie
 
-Ponieważ oprogramowanie pośredniczące jest zbudowane przy uruchamianiu aplikacji, a nie na żądanie, usługi okresu istnienia w *zasięgu* , które są używane przez konstruktory oprogramowania pośredniczącego, nie są udostępniane innym typem z wstrzykiwanymi zależnościami podczas każdego żądania. Jeśli musisz udostępnić usługę z *zakresem* dla oprogramowania pośredniczącego i innych typów, Dodaj te usługi do sygnatury metody `Invoke`. Metoda `Invoke` może akceptować dodatkowe parametry, które są wypełniane przez DI:
+Ponieważ oprogramowanie pośredniczące jest skonstruowane podczas uruchamiania aplikacji, nie na żądanie, usługi okresu istnienia o *określonym zakresie* używane przez konstruktory oprogramowania pośredniczącego nie są współużytkowane z innymi typami wstrzykniętymi zależnościami podczas każdego żądania. Jeśli musisz udostępnić usługę *o określonym zakresie* między oprogramowaniem pośredniczącym i innymi typami, dodaj te usługi do podpisu `Invoke` metody. Metoda `Invoke` może akceptować dodatkowe parametry, które są wypełniane przez DI:
 
 ```csharp
 public class CustomMiddleware
@@ -74,15 +74,15 @@ public class CustomMiddleware
 
 ## <a name="middleware-extension-method"></a>Metoda rozszerzenia oprogramowania pośredniczącego
 
-Następująca metoda rozszerzania uwidacznia oprogramowanie pośredniczące za pomocą <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder>:
+Następująca metoda rozszerzenia udostępnia oprogramowanie <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder>pośredniczące poprzez:
 
 [!code-csharp[](write/snapshot/RequestCultureMiddlewareExtensions.cs)]
 
-Poniższy kod wywołuje oprogramowanie pośredniczące z `Startup.Configure`:
+Poniższy kod wywołuje oprogramowanie `Startup.Configure`pośredniczące z:
 
 [!code-csharp[](write/snapshot/Startup.cs?highlight=5)]
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:fundamentals/middleware/index>
 * <xref:migration/http-modules>

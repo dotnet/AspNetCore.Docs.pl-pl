@@ -1,7 +1,7 @@
 ---
-title: ASP.NET Core układy Blazor
+title: ASP.NET układy Blazor rdzenia
 author: guardrex
-description: Dowiedz się, jak tworzyć składniki układu wielokrotnego użytku dla aplikacji Blazor.
+description: Dowiedz się, jak tworzyć składniki Blazor układu wielokrotnego użytku dla aplikacji.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
@@ -11,91 +11,91 @@ no-loc:
 - SignalR
 uid: blazor/layouts
 ms.openlocfilehash: 5b6e1c7ceb4a6e41230e31bbe379bde1bb0a8286
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78660413"
 ---
-# <a name="aspnet-core-opno-locblazor-layouts"></a>ASP.NET Core układy Blazor
+# <a name="aspnet-core-opno-locblazor-layouts"></a>ASP.NET układy Blazor rdzenia
 
-Autorzy [Rainer Stropek](https://www.timecockpit.com) i [Luke Latham](https://github.com/guardrex)
+Przez [Rainer Stropek](https://www.timecockpit.com) i [Luke Latham](https://github.com/guardrex)
 
-Niektóre elementy aplikacji, takie jak menu, wiadomości o prawach autorskich i logo firmy, są zwykle częścią ogólnego układu aplikacji i są używane przez każdy składnik w aplikacji. Kopiowanie kodu tych elementów do wszystkich składników aplikacji nie jest efektywnym podejściem&mdash;za każdym razem, gdy jeden z elementów wymaga aktualizacji, należy zaktualizować każdy składnik. Taka duplikacja jest trudna do utrzymania i może prowadzić do niespójnej zawartości z upływem czasu. *Układy* rozwiązują ten problem.
+Niektóre elementy aplikacji, takie jak menu, wiadomości o prawach autorskich i logo firmy, są zwykle częścią ogólnego układu aplikacji i są używane przez każdy składnik w aplikacji. Kopiowanie kodu tych elementów do wszystkich składników aplikacji nie jest&mdash;skuteczne podejście za każdym razem, gdy jeden z elementów wymaga aktualizacji, każdy składnik musi zostać zaktualizowany. Takie powielanie jest trudne do utrzymania i może prowadzić do niespójnej zawartości w czasie. *Układy* rozwiązują ten problem.
 
-Technicznie, układ jest tylko innym składnikiem. Układ jest zdefiniowany w szablonie Razor lub w C# kodzie i może używać [powiązań danych](xref:blazor/data-binding), [iniekcji zależności](xref:blazor/dependency-injection)i innych scenariuszy składników.
+Technicznie układ jest po prostu kolejnym elementem. Układ jest zdefiniowany w szablonie Razor lub w kodzie Języka C# i może używać [powiązania danych,](xref:blazor/data-binding) [iniekcji zależności](xref:blazor/dependency-injection)i innych scenariuszy składników.
 
-Aby przekształcić *składnik* do *układu*, składnik:
+Aby przekształcić *komponent* w *układ*, komponent:
 
-* Dziedziczy z `LayoutComponentBase`, który definiuje Właściwość `Body` dla renderowanej zawartości wewnątrz układu.
-* Używa `@Body` składnia Razor do określenia lokalizacji w znaczniku układu, w którym jest renderowana zawartość.
+* Dziedziczy `LayoutComponentBase`z , który `Body` definiuje właściwość dla renderowanych treści wewnątrz układu.
+* Używa składni `@Body` Razor, aby określić lokalizację w znacznikach układu, w której zawartość jest renderowana.
 
-Poniższy przykład kodu pokazuje szablon Razor składnika układu: *MainLayout. Razor*. Układ dziedziczy `LayoutComponentBase` i ustawia `@Body` między paskiem nawigacyjnym i stopką:
+Poniższy przykład kodu przedstawia szablon Razor składnika *układu, MainLayout.brzytwa*. Układ dziedziczy `LayoutComponentBase` i `@Body` ustawia między paskiem nawigacyjnym a stopki:
 
 [!code-razor[](layouts/sample_snapshot/3.x/MainLayout.razor?highlight=1,13)]
 
-W aplikacji opartej na jednym z szablonów aplikacji Blazor składnik `MainLayout` (*MainLayout. Razor*) znajduje się w folderze *udostępnionym* aplikacji.
+W aplikacji opartej na Blazor jednym z `MainLayout` szablonów aplikacji składnik *(MainLayout.brzytwa)* znajduje się w folderze *udostępnionym* aplikacji.
 
 ## <a name="default-layout"></a>Układ domyślny
 
-Określ domyślny układ aplikacji w składniku `Router` w pliku *App. Razor* aplikacji. Poniższy składnik `Router`, który jest dostarczany przez domyślne szablony Blazor, ustawia domyślny układ na składnik `MainLayout`:
+Określ domyślny układ `Router` aplikacji w składniku w pliku *App.razor* aplikacji. Następujący `Router` składnik, który jest dostarczany Blazor przez szablony domyślne, `MainLayout` ustawia domyślny układ na składnik:
 
 [!code-razor[](layouts/sample_snapshot/3.x/App1.razor?highlight=3)]
 
-Aby podać domyślny układ zawartości `NotFound`, określ `LayoutView` dla zawartości `NotFound`:
+Aby podać domyślny `NotFound` układ zawartości, określ `LayoutView` zawartość: `NotFound`
 
 [!code-razor[](layouts/sample_snapshot/3.x/App2.razor?highlight=6-9)]
 
-Aby uzyskać więcej informacji na temat składnika `Router`, zobacz <xref:blazor/routing>.
+Aby uzyskać więcej `Router` informacji <xref:blazor/routing>na temat komponentu, zobacz .
 
-Określanie układu jako domyślnego układu w routerze jest przydatnym rozwiązaniem, ponieważ może być zastąpione dla poszczególnych składników lub folderów. Preferuj użycie routera do ustawienia domyślnego układu aplikacji, ponieważ jest to najbardziej ogólna technika.
+Określenie układu jako układu domyślnego w routerze jest użyteczną praktyką, ponieważ można go zastąpić na podstawie składnika lub dla folderu. Wolisz używać routera, aby ustawić domyślny układ aplikacji, ponieważ jest to najbardziej ogólna technika.
 
-## <a name="specify-a-layout-in-a-component"></a>Określanie układu w składniku
+## <a name="specify-a-layout-in-a-component"></a>Określanie układu w komponencie
 
-Użyj dyrektywy Razor `@layout`, aby zastosować układ do składnika. Kompilator konwertuje `@layout` na `LayoutAttribute`, który jest stosowany do klasy składnika.
+Użyj dyrektywy `@layout` Razor, aby zastosować układ do składnika. Kompilator `@layout` konwertuje `LayoutAttribute`na , który jest stosowany do klasy składnika.
 
-Zawartość następującego składnika `MasterList` jest wstawiana do `MasterLayout` na pozycji `@Body`:
+Zawartość następującego `MasterList` komponentu jest wstawiana `MasterLayout` `@Body`do pozycji:
 
 [!code-razor[](layouts/sample_snapshot/3.x/MasterList.razor?highlight=1)]
 
-Określanie układu bezpośrednio w składniku przesłania domyślny zestaw *układów* w routerze lub `@layout` dyrektywie zaimportowanej z *_Imports. Razor*.
+Określenie układu bezpośrednio w komponencie zastępuje *domyślny układ* ustawiony `@layout` w routerze lub dyrektywę zaimportowany z *_Imports.brzytwa*.
 
-## <a name="centralized-layout-selection"></a>Scentralizowany wybór układu
+## <a name="centralized-layout-selection"></a>Wybór układu scentralizowanego
 
-Każdy folder aplikacji może opcjonalnie zawierać plik szablonu o nazwie *_Imports. Razor*. Kompilator zawiera dyrektywy określone w pliku Imports we wszystkich szablonach Razor w tym samym folderze i rekursywnie we wszystkich jego podfolderach. W związku z tym plik *_Imports. Razor* zawierający `@layout MyCoolLayout` zapewnia, że wszystkie składniki w folderze używają `MyCoolLayout`. Nie ma potrzeby wielokrotnego dodawania `@layout MyCoolLayout` do wszystkich plików *. Razor* w folderze i podfolderach. dyrektywy `@using` są również stosowane do składników w taki sam sposób.
+Każdy folder aplikacji może opcjonalnie zawierać plik szablonu o nazwie *_Imports.razor*. Kompilator zawiera dyrektywy określone w pliku importu we wszystkich szablonach Razor w tym samym folderze i rekursywnie we wszystkich jego podfolderach. W związku z tym *plik _Imports.brzytwa* zawierający `@layout MyCoolLayout` zapewnia, że `MyCoolLayout`wszystkie składniki w folderze używać . Nie ma potrzeby wielokrotnego `@layout MyCoolLayout` dodawania do wszystkich plików *.brzytwa* w folderze i podfolderach. `@using`dyrektywy są również stosowane do komponentów w ten sam sposób.
 
-Następujące *_Imports.* Importy pliku Razor:
+Importowanie plików *_Imports.brzytwa:*
 
 * `MyCoolLayout`.
-* Wszystkie składniki Razor w tym samym folderze i wszystkie podfoldery.
-* Przestrzeń nazw `BlazorApp1.Data`.
+* Wszystkie komponenty Razor w tym samym folderze i wszystkie podfoldery.
+* Obszar `BlazorApp1.Data` nazw.
  
 [!code-razor[](layouts/sample_snapshot/3.x/_Imports.razor)]
 
-Plik *_Imports. Razor* jest podobny do [pliku _ViewImports. cshtml dla widoków i stron Razor,](xref:mvc/views/layout#importing-shared-directives) ale jest stosowany w odniesieniu do plików składników Razor.
+Plik *_Imports.razor* jest podobny do [pliku _ViewImports.cshtml dla widoków i stron Razor,](xref:mvc/views/layout#importing-shared-directives) ale stosuje się specjalnie do plików komponentów Razor.
 
-Określanie układu w *_Imports. Razor* przesłania układ określony jako *domyślny układ*routera.
+Określenie układu w *_Imports.razor* zastępuje układ określony jako *domyślny układ*routera .
 
 ## <a name="nested-layouts"></a>Układy zagnieżdżone
 
-Aplikacje mogą składać się z zagnieżdżonych układów. Składnik może odwoływać się do układu, który z kolei odwołuje się do innego układu. Na przykład zagnieżdżanie układów służy do tworzenia struktury menu wielopoziomowego.
+Aplikacje mogą składać się z układów zagnieżdżonych. Składnik może odwoływać się do układu, który z kolei odwołuje się do innego układu. Na przykład układy zagnieżdżania są używane do tworzenia wielopoziomowej struktury menu.
 
-Poniższy przykład pokazuje, jak używać układów zagnieżdżonych. Plik *EpisodesComponent. Razor* jest składnikiem do wyświetlenia. Składnik odwołuje się do `MasterListLayout`:
+W poniższym przykładzie pokazano, jak używać układów zagnieżdżonych. *Plik EpisodesComponent.razor* jest składnikiem do wyświetlenia. Komponent odwołuje się `MasterListLayout`do:
 
 [!code-razor[](layouts/sample_snapshot/3.x/EpisodesComponent.razor?highlight=1)]
 
-Plik *MasterListLayout. Razor* zawiera `MasterListLayout`. Układ odwołuje się do innego układu, `MasterLayout`, gdzie jest renderowany. `EpisodesComponent` jest renderowany w miejscu, w którym pojawia się `@Body`:
+Plik *MasterListLayout.razor* zapewnia `MasterListLayout`plik . Układ odwołuje się do `MasterLayout`innego układu, gdzie jest renderowany. `EpisodesComponent`jest renderowany `@Body` w miejscu, w którym się pojawia:
 
 [!code-razor[](layouts/sample_snapshot/3.x/MasterListLayout.razor?highlight=1,9)]
 
-Na koniec `MasterLayout` w *MasterLayout. Razor* zawiera elementy układu najwyższego poziomu, takie jak nagłówek, menu główne i stopka. `MasterListLayout` z `EpisodesComponent` jest renderowany w miejscu, w którym pojawia się `@Body`:
+Na koniec `MasterLayout` w *masterlayout.brzytwa* zawiera elementy układu najwyższego poziomu, takie jak nagłówek, menu główne i stopka. `MasterListLayout`z `EpisodesComponent` renderowanym renderem, w którym `@Body` się pojawia:
 
 [!code-razor[](layouts/sample_snapshot/3.x/MasterLayout.razor?highlight=6)]
 
-## <a name="share-a-razor-pages-layout-with-integrated-components"></a>Udostępnianie układu Razor Pages ze składnikami zintegrowanymi
+## <a name="share-a-razor-pages-layout-with-integrated-components"></a>Udostępnianie układu Strony Razor ze zintegrowanymi komponentami
 
-Gdy składniki routingu są zintegrowane z aplikacją Razor Pages, można używać współużytkowanego układu aplikacji ze składnikami. Aby uzyskać więcej informacji, zobacz <xref:blazor/integrate-components>.
+Gdy składniki rutowalne są zintegrowane z aplikacją Razor Pages, udostępnionego układu aplikacji można używać ze składnikami. Aby uzyskać więcej informacji, zobacz <xref:blazor/integrate-components>.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:mvc/views/layout>

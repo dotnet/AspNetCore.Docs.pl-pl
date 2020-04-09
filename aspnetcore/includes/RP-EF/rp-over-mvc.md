@@ -1,12 +1,12 @@
-Ten samouczek uczy się ASP.NET Core MVC i Entity Framework Core z kontrolerami i widokami. [Razor Pages](xref:razor-pages/index) jest alternatywnym modelem programistycznym, który został wprowadzony w ASP.NET Core 2,0. W przypadku nowych rozwiązań zalecamy Razor Pages za pośrednictwem platformy MVC z kontrolerami i widokami. Istnieje [Razor Pages](xref:data/ef-rp/intro) wersja tego samouczka. W każdym samouczku omówiono pewne materiały:
+W tym samouczku uczy ASP.NET Core MVC i Entity Framework Core z kontrolerami i widokami. [Razor Pages](xref:razor-pages/index) to alternatywny model programowania, który został wprowadzony w ASP.NET Core 2.0. Aby uzyskać nowy rozwój, zalecamy Razor Pages przez MVC z kontrolerami i widokami. Istnieje wersja [Razor Pages](xref:data/ef-rp/intro) tego samouczka. Każdy samouczek obejmuje niektóre materiały inne nie:
 
-W tym samouczku MVC zamieszczono informacje o samouczku Razor Pages:
+Niektóre rzeczy, które ten poradnik MVC ma, że razor strony samouczek nie:
 
 * Implementowanie dziedziczenia w modelu danych
 * Wykonywanie nieprzetworzonych zapytań SQL
-* Używanie dynamicznego LINQ do uproszczenia kodu
+* Użyj dynamicznego LINQ, aby uprościć kod
  
-Oto kilka rzeczy, w których samouczek Razor Pages ma następujący:
+Niektóre rzeczy Razor Pages tutorial ma, że ten nie:
 
-* Użyj metody Select do załadowania powiązanych danych
-* Wersja dostępna dla ASP.NET Core 3,0
+* Użyj metody Wybierz, aby załadować powiązane dane
+* Wersja dostępna dla ASP.NET Core 3.0

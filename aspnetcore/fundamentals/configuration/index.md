@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 3/29/2020
 uid: fundamentals/configuration/index
-ms.openlocfilehash: d76ca78bc988f859b4e99752a0e88735e1df1d82
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: 506f01ace72d6e915c0f3ebdaae5b4a3328a79b9
+ms.sourcegitcommit: e72a58d6ebde8604badd254daae8077628f9d63e
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80501328"
+ms.lasthandoff: 04/10/2020
+ms.locfileid: "81007161"
 ---
 # <a name="configuration-in-aspnet-core"></a>Konfiguracja w ASP.NET Core
 
@@ -311,7 +311,7 @@ Klucze konfiguracyjne:
 * Klucze hierarchiczne
   * W interfejsie API konfiguracji separator dwukropka (`:`) działa na wszystkich platformach.
   * W zmiennych środowiskowych separator dwukropek może nie działać na wszystkich platformach. Podwójne podkreślenie, `__`jest obsługiwane przez wszystkie platformy i jest `:`automatycznie konwertowane na dwukropek.
-  * W usłudze Azure Key `--` Vault klucze hierarchiczne używają jako separatora. Napisz kod, `--` aby `:` zastąpić z a, gdy wpisy tajne są ładowane do konfiguracji aplikacji.
+  * W usłudze Azure Key `--` Vault klucze hierarchiczne używają jako separatora. [Dostawca konfiguracji usługi Azure Key](xref:security/key-vault-configuration) `--` Vault `:` automatycznie zastępuje się, gdy wpisy tajne są ładowane do konfiguracji aplikacji.
 * Obsługuje <xref:Microsoft.Extensions.Configuration.ConfigurationBinder> tablice powiązania do obiektów przy użyciu indeksów tablicy w kluczach konfiguracyjnych. Powiązanie tablicy jest opisane w [Bind tablicy do](#boa) sekcji klasy.
 
 Wartości konfiguracji:

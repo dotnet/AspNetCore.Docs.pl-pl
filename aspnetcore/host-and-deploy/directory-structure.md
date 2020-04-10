@@ -5,14 +5,14 @@ description: Dowiedz się więcej o strukturze katalogów opublikowanych aplikac
 monikerRange: '>= aspnetcore-2.2'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/20/2020
+ms.date: 04/09/2020
 uid: host-and-deploy/directory-structure
-ms.openlocfilehash: 0e7bf40520385b7719cb37120709e0a3fd2442e3
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 3ed27db31c5fda8376ed108568ea74b657d30531
+ms.sourcegitcommit: 4506a8f71ece921010ad6b7edebc8b200618f40d
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "79989729"
+ms.lasthandoff: 04/09/2020
+ms.locfileid: "81002941"
 ---
 # <a name="aspnet-core-directory-structure"></a>ASP.NET Podstawowa struktura katalogów
 
@@ -28,7 +28,7 @@ Katalog *publikowania* zawiera zasoby, które można wdrożyć w aplikacji, wypr
 
 | Typ aplikacji | Struktura katalogów |
 | -------- | ------------------- |
-| [Plik wykonywalny zależny od struktury (FDE)](/dotnet/core/deploying/#framework-dependent-executables-fde) | <ul><li>Publikowania&dagger;<ul><li>Widoki&dagger; aplikacji MVC; jeśli widoki nie są wstępnie kompilowane</li><li>Strony&dagger; Aplikacje MVC lub Razor Pages, jeśli strony nie są wstępnie kompilowane</li><li>wwwroot&dagger;</li><li>\*pliki dll</li><li>{NAZWA ZESTAWU}.deps.json</li><li>{NAZWA ZESTAWU}.dll</li><li>{NAZWA ZESTAWU} {. EXTENSION} *.exe* extension on Windows, no extension on macOS or Linux</li><li>{NAZWA ZESTAWU}.pdb</li><li>{NAZWA ZESTAWU}. Plik Views.dll</li><li>{NAZWA ZESTAWU}. Widok.pdb</li><li>{NAZWA ZESTAWU}.runtimeconfig.json</li><li>web.config (wdrożenia usług IIS)</li><li>createdump ([Linux createdump narzędzie](https://github.com/dotnet/coreclr/blob/master/Documentation/botr/xplat-minidump-generation.md#configurationpolicy))</li><li>\*.so (biblioteka obiektów współdzielonych systemu Linux)</li><li>\*.a (archiwum macOS)</li><li>\*.dylib (biblioteka dynamiczna macOS)</li></ul></li></ul> |
+| [Plik wykonywalny zależny od struktury (FDE)](/dotnet/core/deploying/#framework-dependent-executables-fde) | <ul><li>Publikowania&dagger;<ul><li>Widoki&dagger; aplikacji MVC; jeśli widoki nie są wstępnie kompilowane</li><li>Strony&dagger; Aplikacje MVC lub Razor Pages, jeśli strony nie są wstępnie kompilowane</li><li>wwwroot&dagger;</li><li>\*pliki dll</li><li>{NAZWA ZESTAWU}.deps.json</li><li>{NAZWA ZESTAWU}.dll</li><li>{NAZWA ZESTAWU} {. EXTENSION} .exe extension on Windows, no extension on macOS or Linux</li><li>{NAZWA ZESTAWU}.pdb</li><li>{NAZWA ZESTAWU}. Plik Views.dll</li><li>{NAZWA ZESTAWU}. Widok.pdb</li><li>{NAZWA ZESTAWU}.runtimeconfig.json</li><li>web.config (wdrożenia usług IIS)</li><li>createdump ([Linux createdump narzędzie](https://github.com/dotnet/coreclr/blob/master/Documentation/botr/xplat-minidump-generation.md#configurationpolicy))</li><li>\*.so (biblioteka obiektów współdzielonych systemu Linux)</li><li>\*.a (archiwum macOS)</li><li>\*.dylib (biblioteka dynamiczna macOS)</li></ul></li></ul> |
 | [Samodzielne wdrażanie (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd) | <ul><li>Publikowania&dagger;<ul><li>Wyświetla&dagger; aplikacje MVC, jeśli widoki nie są wstępnie kompilowane</li><li>Strony&dagger; Aplikacje MVC lub Razor Pages, jeśli strony nie są wstępnie kompilowane</li><li>wwwroot&dagger;</li><li>\*pliki dll</li><li>{NAZWA ZESTAWU}.deps.json</li><li>{NAZWA ZESTAWU}.dll</li><li>{NAZWA ZESTAWU}.exe</li><li>{NAZWA ZESTAWU}.pdb</li><li>{NAZWA ZESTAWU}. Plik Views.dll</li><li>{NAZWA ZESTAWU}. Widok.pdb</li><li>{NAZWA ZESTAWU}.runtimeconfig.json</li><li>web.config (wdrożenia usług IIS)</li></ul></li></ul> |
 
 &dagger;Wskazuje katalog
@@ -58,9 +58,9 @@ Katalog *publikowania* zawiera zasoby, które można wdrożyć w aplikacji, wypr
 
 | Typ aplikacji | Struktura katalogów |
 | -------- | ------------------- |
-| [Plik wykonywalny zależny od struktury (FDE)](/dotnet/core/deploying/#framework-dependent-executables-fde) | <ul><li>Publikowania&dagger;<ul><li>Widoki&dagger; aplikacji MVC; jeśli widoki nie są wstępnie kompilowane</li><li>Strony&dagger; Aplikacje MVC lub Razor Pages, jeśli strony nie są wstępnie kompilowane</li><li>wwwroot&dagger;</li><li>\*pliki dll</li><li>{NAZWA ZESTAWU}.deps.json</li><li>{NAZWA ZESTAWU}.dll</li><li>{NAZWA ZESTAWU} {. EXTENSION} *.exe* extension on Windows, no extension on macOS or Linux</li><li>{NAZWA ZESTAWU}.pdb</li><li>{NAZWA ZESTAWU}. Plik Views.dll</li><li>{NAZWA ZESTAWU}. Widok.pdb</li><li>{NAZWA ZESTAWU}.runtimeconfig.json</li><li>web.config (wdrożenia usług IIS)</li><li>createdump ([Linux createdump narzędzie](https://github.com/dotnet/coreclr/blob/master/Documentation/botr/xplat-minidump-generation.md#configurationpolicy))</li><li>\*.so (biblioteka obiektów współdzielonych systemu Linux)</li><li>\*.a (archiwum macOS)</li><li>\*.dylib (biblioteka dynamiczna macOS)</li></ul></li></ul> |
+| [Plik wykonywalny zależny od struktury (FDE)](/dotnet/core/deploying/#framework-dependent-executables-fde) | <ul><li>Publikowania&dagger;<ul><li>Widoki&dagger; aplikacji MVC; jeśli widoki nie są wstępnie kompilowane</li><li>Strony&dagger; Aplikacje MVC lub Razor Pages, jeśli strony nie są wstępnie kompilowane</li><li>wwwroot&dagger;</li><li>\*pliki dll</li><li>{NAZWA ZESTAWU}.deps.json</li><li>{NAZWA ZESTAWU}.dll</li><li>{NAZWA ZESTAWU} {. EXTENSION} .exe extension on Windows, no extension on macOS or Linux</li><li>{NAZWA ZESTAWU}.pdb</li><li>{NAZWA ZESTAWU}. Plik Views.dll</li><li>{NAZWA ZESTAWU}. Widok.pdb</li><li>{NAZWA ZESTAWU}.runtimeconfig.json</li><li>web.config (wdrożenia usług IIS)</li><li>createdump ([Linux createdump narzędzie](https://github.com/dotnet/coreclr/blob/master/Documentation/botr/xplat-minidump-generation.md#configurationpolicy))</li><li>\*.so (biblioteka obiektów współdzielonych systemu Linux)</li><li>\*.a (archiwum macOS)</li><li>\*.dylib (biblioteka dynamiczna macOS)</li></ul></li></ul> |
 | [Samodzielne wdrażanie (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd) | <ul><li>Publikowania&dagger;<ul><li>Wyświetla&dagger; aplikacje MVC, jeśli widoki nie są wstępnie kompilowane</li><li>Strony&dagger; Aplikacje MVC lub Razor Pages, jeśli strony nie są wstępnie kompilowane</li><li>wwwroot&dagger;</li><li>\*pliki dll</li><li>{NAZWA ZESTAWU}.deps.json</li><li>{NAZWA ZESTAWU}.dll</li><li>{NAZWA ZESTAWU}.exe</li><li>{NAZWA ZESTAWU}.pdb</li><li>{NAZWA ZESTAWU}. Plik Views.dll</li><li>{NAZWA ZESTAWU}. Widok.pdb</li><li>{NAZWA ZESTAWU}.runtimeconfig.json</li><li>web.config (wdrożenia usług IIS)</li></ul></li></ul> |
--
+
 &dagger;Wskazuje katalog
 
 Katalog *publikowania* reprezentuje *ścieżkę katalogu głównego zawartości*, zwaną również *ścieżką podstawową aplikacji,* wdrożenia. Niezależnie od nazwy nadanej katalogu *publikowania* wdrożonej aplikacji na serwerze, jego lokalizacja służy jako fizyczna ścieżka serwera do hosta aplikacji.

@@ -3,14 +3,14 @@ title: Tworzenie klienta i serwera gRPC .NET Core w ASP.NET Core
 author: juntaoluo
 description: W tym samouczku pokazano, jak utworzyć usługę gRPC i klienta gRPC na ASP.NET Core. Dowiedz się, jak utworzyć projekt usługi gRPC, edytować plik proto i dodać połączenie strumieniowe dupleksu.
 ms.author: johluo
-ms.date: 12/05/2019
+ms.date: 04/08/2020
 uid: tutorials/grpc/grpc-start
-ms.openlocfilehash: 0cedeb021427455c3f60a8a8cc36b52794a055bc
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 2bbd40b4b89af170dae40b8a5277749d6bcd5faf
+ms.sourcegitcommit: 9a46e78c79d167e5fa0cddf89c1ef584e5fe1779
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78665824"
+ms.lasthandoff: 04/09/2020
+ms.locfileid: "80994626"
 ---
 # <a name="tutorial-create-a-grpc-client-and-server-in-aspnet-core"></a>Samouczek: Tworzenie klienta i serwera gRPC w ASP.NET Core
 
@@ -298,7 +298,7 @@ info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
 ```
 
 > [!NOTE]
-> Kod w tym artykule wymaga ASP.NET certyfikatu rozwoju HTTPS Core w celu zabezpieczenia usługi gRPC. Jeśli klient nie powiedzie się z komunikatem, `The remote certificate is invalid according to the validation procedure.`certyfikat dewelopera nie jest zaufany. Aby uzyskać instrukcje dotyczące rozwiązania tego problemu, zobacz [Ufanie ASP.NET podstawowy certyfikat rozwoju HTTPS w systemach Windows i macOS](xref:security/enforcing-ssl#trust-the-aspnet-core-https-development-certificate-on-windows-and-macos).
+> Kod w tym artykule wymaga ASP.NET certyfikatu rozwoju HTTPS Core w celu zabezpieczenia usługi gRPC. Jeśli klient gRPC platformy .NET `The remote certificate is invalid according to the validation procedure.` `The SSL connection could not be established.`ulegnie awarii z komunikatem lub certyfikatem dewelopera nie jest zaufany. Aby rozwiązać ten problem, zobacz [Wywoływanie usługi gRPC z niezaufanym/nieprawidłowym certyfikatem](xref:grpc/troubleshoot#call-a-grpc-service-with-an-untrustedinvalid-certificate).
 
 [!INCLUDE[](~/includes/gRPCazure.md)]
 

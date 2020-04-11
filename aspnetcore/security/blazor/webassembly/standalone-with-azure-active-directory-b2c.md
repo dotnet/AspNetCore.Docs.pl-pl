@@ -5,17 +5,17 @@ description: ''
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/08/2020
+ms.date: 04/09/2020
 no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/standalone-with-azure-active-directory-b2c
-ms.openlocfilehash: 0734bad2d4281eb856783a362ef8c608a303c17a
-ms.sourcegitcommit: f0aeeab6ab6e09db713bb9b7862c45f4d447771b
+ms.openlocfilehash: 96e39a4c975a65fd11776f774fb1799acab525b9
+ms.sourcegitcommit: e8dc30453af8bbefcb61857987090d79230a461d
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80977057"
+ms.lasthandoff: 04/11/2020
+ms.locfileid: "81123449"
 ---
 # <a name="secure-an-aspnet-core-opno-locblazor-webassembly-standalone-app-with-azure-active-directory-b2c"></a>Zabezpieczanie autonomicznej Blazor aplikacji ASP.NET Core WebAssembly za pomocą usługi Azure Active Directory B2C
 
@@ -140,6 +140,8 @@ Aby uzyskać więcej informacji, zobacz <xref:security/blazor/webassembly/additi
 ## <a name="authentication-component"></a>Składnik uwierzytelniania
 
 [!INCLUDE[](~/includes/blazor-security/authentication-component.md)]
+
+[!INCLUDE[](~/includes/blazor-security/wasm-aad-b2c-userflows.md)]
 
 [!INCLUDE[](~/includes/blazor-security/troubleshoot.md)]
 

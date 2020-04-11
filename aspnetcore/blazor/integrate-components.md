@@ -5,17 +5,17 @@ description: Dowiedz się więcej o scenariuszach wiązania Blazor danych dla sk
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/17/2020
+ms.date: 04/01/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/integrate-components
-ms.openlocfilehash: cf6056e0985d5433bddecac8dd183ca3f4c2af5b
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 6efa84c550a4605bde5e1f2bca4f2d1aa4a2667b
+ms.sourcegitcommit: e8dc30453af8bbefcb61857987090d79230a461d
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80218937"
+ms.lasthandoff: 04/11/2020
+ms.locfileid: "81123361"
 ---
 # <a name="integrate-aspnet-core-razor-components-into-razor-pages-and-mvc-apps"></a>Integracja komponentów ASP.NET Core Razor w aplikacjach Razor Pages i MVC
 
@@ -60,13 +60,13 @@ Istniejące strony Razor lub aplikacja MVC mogą integrować składniki Razor ze
    @using MyAppNamespace
    ```
 
-1. W `Startup.ConfigureServices`, Blazor zarejestruj usługę Serwer:
+1. W `Startup.ConfigureServices`, zarejestruj usługę Serwera Blazor:
 
    ```csharp
    services.AddServerSideBlazor();
    ```
 
-1. W `Startup.Configure`programie Blazor dodaj punkt `app.UseEndpoints`końcowy centrum do:
+1. W `Startup.Configure`programie dodaj punkt końcowy `app.UseEndpoints`Blazor Hub do:
 
    ```csharp
    endpoints.MapBlazorHub();
@@ -112,6 +112,19 @@ Aby obsługiwać rutowalne składniki Razor w aplikacjach Razor Pages:
    ```
 
    Składniki używają udostępnionego *pliku _Layout.cshtml* dla ich układu.
+
+   <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode>określa, `App` czy składnik:
+
+   * Jest prerendered do strony.
+   * Jest renderowany jako statyczny HTML na stronie lub jeśli zawiera niezbędne informacje do bootstrap aplikacji Blazor od agenta użytkownika.
+
+   | Tryb renderowania | Opis |
+   | ----------- | ----------- |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | Renderuje `App` składnik do statycznego kodu HTML Blazor i zawiera znacznik aplikacji serwera. Po uruchomieniu agenta użytkownika ten znacznik jest używany Blazor do uruchamiania aplikacji. |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Renderuje znacznik aplikacji Blazor serwera. Dane wyjściowe ze `App` składnika nie są uwzględniane. Po uruchomieniu agenta użytkownika ten znacznik jest używany Blazor do uruchamiania aplikacji. |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | Renderuje `App` składnik do statycznego kodu HTML. |
+
+   Aby uzyskać więcej informacji na temat <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>pomocnika znacznika składnika, zobacz .
 
 1. Dodaj trasę o niskim priorytecie dla strony *_Host.cshtml* do konfiguracji punktu końcowego w : `Startup.Configure`
 

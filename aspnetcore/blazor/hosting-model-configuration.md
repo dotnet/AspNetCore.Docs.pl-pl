@@ -5,17 +5,17 @@ description: Dowiedz Blazor się więcej o konfiguracji modelu hostingu, w tym o
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/24/2020
+ms.date: 04/07/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/hosting-model-configuration
-ms.openlocfilehash: 1f71ac63bbe9dc9d56cfca2ded19a5b863be828f
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: ca1b3ea9092640ca561b3fbe02ddce6f974c525e
+ms.sourcegitcommit: e8dc30453af8bbefcb61857987090d79230a461d
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80306433"
+ms.lasthandoff: 04/11/2020
+ms.locfileid: "81123372"
 ---
 # <a name="aspnet-core-blazor-hosting-model-configuration"></a>konfiguracja modelu hostingowego ASP.NET Core Blazor
 
@@ -27,14 +27,73 @@ W tym artykule omówiono konfigurację modelu hostingu.
 
 ## <a name="blazor-webassembly"></a>Zestaw WebAssembly Blazor
 
+### <a name="environment"></a>Środowisko
+
+Podczas uruchamiania aplikacji lokalnie środowiska domyślnie rozwoju. Po opublikowaniu aplikacji środowisko domyślnie ma wartość Produkcja.
+
+Hostowana aplikacja Blazor WebAssembly odbiera środowisko z serwera za pośrednictwem oprogramowania pośredniczącego, `blazor-environment` które komunikuje środowisko z przeglądarką przez dodanie nagłówka. Wartością nagłówka jest środowisko. Hostowana aplikacja Blazor i aplikacja serwera współużytkuje to samo środowisko. Aby uzyskać więcej informacji, w tym <xref:fundamentals/environments>jak skonfigurować środowisko, zobacz .
+
+W przypadku autonomicznej aplikacji działającej lokalnie `blazor-environment` serwer deweloperów dodaje nagłówek w celu określenia środowiska deweloperskiego. Aby określić środowisko dla innych środowisk `blazor-environment` hostingowych, dodaj nagłówek.
+
+W poniższym przykładzie dla usług IIS dodaj niestandardowy nagłówek do opublikowanego pliku *web.config.* Plik *web.config* znajduje się w folderze *bin/release/{TARGET FRAMEWORK}/publish:*
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <system.webServer>
+
+    ...
+
+    <httpProtocol>
+      <customHeaders>
+        <add name="blazor-environment" value="Staging" />
+      </customHeaders>
+    </httpProtocol>
+  </system.webServer>
+</configuration>
+```
+
+> [!NOTE]
+> Aby użyć niestandardowego pliku *web.config* dla usług IIS, który nie jest zastępowany <xref:host-and-deploy/blazor/webassembly#use-a-custom-webconfig>podczas publikowania aplikacji w folderze *publikowania,* zobacz .
+
+Uzyskaj środowisko aplikacji w składniku, `IWebAssemblyHostEnvironment` wstrzykując i odczytując `Environment` właściwość:
+
+```razor
+@page "/"
+@using Microsoft.AspNetCore.Components.WebAssembly.Hosting
+@inject IWebAssemblyHostEnvironment HostEnvironment
+
+<h1>Environment example</h1>
+
+<p>Environment: @HostEnvironment.Environment</p>
+```
+
+### <a name="configuration"></a>Konfigurowanie
+
 W wersji ASP.NET Core 3.2 Preview 3, Blazor WebAssembly obsługuje konfigurację z:
 
 * *wwwroot/appsettings.json*
 * *wwwroot/appsettings. {ŚRODOWISKO}.json*
 
-W aplikacji Blazor Hosted [środowisko wykonawcze](xref:fundamentals/environments) jest takie samo jak wartość aplikacji serwera.
+Dodaj plik *appsettings.json* w folderze *wwwroot:*
 
-Podczas uruchamiania aplikacji lokalnie środowiska domyślnie rozwoju. Po opublikowaniu aplikacji środowisko domyślnie ma wartość Produkcja. Aby uzyskać więcej informacji, w tym <xref:fundamentals/environments>jak skonfigurować środowisko, zobacz .
+```json
+{
+  "message": "Hello from config!"
+}
+```
+
+Wstrzyknąć wystąpienie <xref:Microsoft.Extensions.Configuration.IConfiguration> do składnika, aby uzyskać dostęp do danych konfiguracyjnych:
+
+```razor
+@page "/"
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+
+<h1>Configuration example</h1>
+
+<p>Message: @Configuration["message"]</p>
+```
 
 > [!WARNING]
 > Konfiguracja w aplikacji Blazor WebAssembly jest widoczna dla użytkowników. **Nie przechowuj wpisów tajnych aplikacji ani poświadczeń w konfiguracji.**

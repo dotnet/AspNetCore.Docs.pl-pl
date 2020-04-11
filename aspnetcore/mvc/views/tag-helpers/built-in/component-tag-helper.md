@@ -1,34 +1,47 @@
 ---
-title: Pomocnik tagu składnika w ASP.NET Core
+title: Pomocnik znaczników składników w ASP.NET rdzeniu
 author: guardrex
 ms.author: riande
-description: Dowiedz się, jak używać pomocnika tagów składnika ASP.NET Core, aby renderować składniki Razor na stronach i widokach.
+description: Dowiedz się, jak używać pomocnika ASP.NET Core Component Tag Helper do renderowania składników Razor na stronach i widokach.
 ms.custom: mvc
-ms.date: 03/18/2020
+ms.date: 04/01/2020
 no-loc:
 - Blazor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/component-tag-helper
-ms.openlocfilehash: 801ceb73de5bb4ef7500624e1fbddbf96d1ab89c
-ms.sourcegitcommit: 91dc1dd3d055b4c7d7298420927b3fd161067c64
+ms.openlocfilehash: 4a6b21229ce086099fcddfeb51c3a959ef639f24
+ms.sourcegitcommit: e8dc30453af8bbefcb61857987090d79230a461d
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "80226397"
+ms.lasthandoff: 04/11/2020
+ms.locfileid: "81123427"
 ---
-# <a name="component-tag-helper-in-aspnet-core"></a>Pomocnik tagu składnika w ASP.NET Core
+# <a name="component-tag-helper-in-aspnet-core"></a>Pomocnik znaczników składników w ASP.NET rdzeniu
 
-Autorzy [Daniel Roth](https://github.com/danroth27) i [Luke Latham](https://github.com/guardrex)
+Autorstwa [Daniela Rotha](https://github.com/danroth27) i [Luke'a Lathama](https://github.com/guardrex)
 
-Aby renderować składnik ze strony lub widoku, użyj [pomocnika tagów składnika](xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper).
+Aby renderować składnik ze strony lub widoku, użyj [pomocnika znacznika składnika](xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper).
 
-Poniższy pomocnik tagów składnika renderuje składnik `Counter` na stronie lub w widoku:
+## <a name="prerequisites"></a>Wymagania wstępne
+
+Postępuj zgodnie ze wskazówkami w *przygotowaniu aplikacji do używania składników w* sekcji strony i widoki <xref:blazor/integrate-components#prepare-the-app-to-use-components-in-pages-and-views> artykułu.
+
+## <a name="component-tag-helper"></a>Pomocnik znaczników składników
+
+Pomocnik znacznika składnika renderuje składnik na `Counter` stronie lub w widoku:
 
 ```cshtml
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using {APP ASSEMBLY}.Pages
+
+...
+
 <component type="typeof(Counter)" render-mode="ServerPrerendered" />
 ```
 
-Pomocnik tagów składnika może również przekazywać parametry do składników. Rozważmy następujący składnik `ColorfulCheckbox`, który ustawia kolor i rozmiar etykiety pola wyboru:
+W poprzednim przykładzie przyjęto założenie, że `Counter` składnik znajduje się w folderze *Strony* aplikacji.
+
+Pomocnik znaczników składnika może również przekazywać parametry do komponentów. Należy wziąć `ColorfulCheckbox` pod uwagę następujący składnik, który ustawia kolor i rozmiar etykiety pola wyboru:
 
 ```razor
 <label style="font-size:@(Size)px;color:@Color">
@@ -56,14 +69,21 @@ Pomocnik tagów składnika może również przekazywać parametry do składnikó
 }
 ```
 
-[Parametry składnika](xref:blazor/components#component-parameters) `Size` (`int`) i `Color` (`string`) mogą być ustawiane przez pomocnika tagów składnika:
+Parametry `Size` `int` [komponentu](xref:blazor/components#component-parameters) `string`( ) i `Color` ( ) mogą być ustawiane przez pomocnika znacznika komponentu:
 
 ```cshtml
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using {APP ASSEMBLY}.Shared
+
+...
+
 <component type="typeof(ColorfulCheckbox)" render-mode="ServerPrerendered" 
     param-Size="14" param-Color="@("blue")" />
 ```
 
-Następujący kod HTML jest renderowany na stronie lub w widoku:
+W poprzednim przykładzie przyjęto założenie, że `ColorfulCheckbox` składnik znajduje się w folderze *udostępnionym* aplikacji.
+
+Na stronie lub w widoku renderowany jest następujący kod HTML:
 
 ```html
 <label style="font-size:24px;color:blue">
@@ -72,26 +92,80 @@ Następujący kod HTML jest renderowany na stronie lub w widoku:
 </label>
 ```
 
-Przekazywanie ciągu w cudzysłowie wymaga [jawnego wyrażenia Razor](xref:mvc/views/razor#explicit-razor-expressions), jak pokazano dla `param-Color` w poprzednim przykładzie. Zachowanie analizy Razor dla wartości typu `string` nie ma zastosowania do atrybutu `param-*`, ponieważ atrybut jest typem `object`.
+Przekazywanie cytowanego ciągu wymaga [jawnego wyrażenia Razor](xref:mvc/views/razor#explicit-razor-expressions), jak pokazano `param-Color` w poprzednim przykładzie. Razor analizowanie zachowanie dla `string` wartości typu nie ma `param-*` zastosowania do atrybutu, `object` ponieważ atrybut jest typem.
 
-Typ parametru musi być możliwy do serializacji JSON, co oznacza, że typ musi mieć domyślny Konstruktor i właściwości settable. Na przykład można określić wartość `Size` i `Color` w poprzednim przykładzie, ponieważ typy `Size` i `Color` są typami pierwotnymi (`int` i `string`), które są obsługiwane przez serializator JSON.
+Typ parametru musi być serializowalny JSON, co zazwyczaj oznacza, że typ musi mieć domyślny konstruktor i właściwości settable. Na przykład można określić `Size` wartość `Color` dla i w poprzednim `Size` przykładzie, ponieważ typy i `Color` są typami pierwotnymi (`int` i `string`), które są obsługiwane przez serializatorA JSON.
 
-<xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode> określa, czy składnik:
+W poniższym przykładzie obiekt klasy jest przekazywany do składnika:
 
-* Jest wstępnie renderowany na stronie.
-* Jest renderowany jako statyczny kod HTML na stronie lub zawiera informacje niezbędne do uruchomienia aplikacji Blazor z poziomu agenta użytkownika.
+*MyClass.cs:*
+
+```csharp
+public class MyClass
+{
+    public MyClass()
+    {
+    }
+
+    public int MyInt { get; set; } = 999;
+    public string MyString { get; set; } = "Initial value";
+}
+```
+
+**Klasa musi mieć publiczny konstruktor bez parametrów.**
+
+*Udostępnione/MyComponent.brzytwa*:
+
+```razor
+<h2>MyComponent</h2>
+
+<p>Int: @MyObject.MyInt</p>
+<p>String: @MyObject.MyString</p>
+
+@code
+{
+    [Parameter]
+    public MyClass MyObject { get; set; }
+}
+```
+
+*Strony/MyPage.cshtml*:
+
+```cshtml
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using {APP ASSEMBLY}
+@using {APP ASSEMBLY}.Shared
+
+...
+
+@{
+    var myObject = new MyClass();
+    myObject.MyInt = 7;
+    myObject.MyString = "Set by MyPage";
+}
+
+<component type="typeof(MyComponent)" render-mode="ServerPrerendered" 
+    param-MyObject="@myObject" />
+```
+
+W poprzednim przykładzie przyjęto założenie, że `MyComponent` składnik znajduje się w folderze *udostępnionym* aplikacji. `MyClass`znajduje się w obszarze nazw`{APP ASSEMBLY}`aplikacji ( ).
+
+<xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode>określa, czy składnik:
+
+* Jest prerendered do strony.
+* Jest renderowany jako statyczny HTML na stronie lub jeśli zawiera niezbędne informacje do bootstrap aplikacji Blazor od agenta użytkownika.
 
 | Tryb renderowania | Opis |
 | ----------- | ----------- |
-| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | Renderuje składnik do statycznego kodu HTML i zawiera znacznik dla aplikacji serwera Blazor. Po uruchomieniu agenta użytkownika ten znacznik jest używany do uruchamiania aplikacji Blazor. |
-| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Renderuje znacznik dla aplikacji serwera Blazor. Dane wyjściowe ze składnika nie są uwzględniane. Po uruchomieniu agenta użytkownika ten znacznik jest używany do uruchamiania aplikacji Blazor. |
+| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | Renderuje składnik do statycznego kodu HTML Blazor i zawiera znacznik aplikacji serwera. Po uruchomieniu agenta użytkownika ten znacznik jest używany Blazor do uruchamiania aplikacji. |
+| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Renderuje znacznik aplikacji Blazor serwera. Dane wyjściowe ze składnika nie są uwzględniane. Po uruchomieniu agenta użytkownika ten znacznik jest używany Blazor do uruchamiania aplikacji. |
 | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | Renderuje składnik do statycznego kodu HTML. |
 
-Podczas gdy strony i widoki mogą korzystać ze składników, wartość nie jest równa "true". Składniki nie mogą korzystać z funkcji specjalnych, takich jak widoki częściowe i sekcje. Aby użyć logiki z widoku częściowego w składniku, należy rozłożyć logikę widoku częściowego na składnik.
+Podczas gdy strony i widoki mogą używać składników, odwrotność nie jest prawdziwa. Składniki nie mogą używać funkcji specyficznych dla widoku i strony, takich jak widoki częściowe i sekcje. Aby użyć logiki z widoku częściowego w komponencie, należy uwzględnić logikę widoku częściowego w składniku.
 
-Renderowanie składników serwera ze statyczną stroną HTML nie jest obsługiwane.
+Renderowanie składników serwera ze statycznej strony HTML nie jest obsługiwane.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper>
 * <xref:mvc/views/tag-helpers/intro>

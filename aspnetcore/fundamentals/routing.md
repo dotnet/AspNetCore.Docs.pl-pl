@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 4/1/2020
 uid: fundamentals/routing
-ms.openlocfilehash: 5742ac6879ce46e01247ddd2f8bfe3e3b8a2a02a
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: 0fc89ccf15c14c67f284a7084a21159af300a195
+ms.sourcegitcommit: 5af16166977da598953f82da3ed3b7712d38f6cb
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80751148"
+ms.lasthandoff: 04/14/2020
+ms.locfileid: "81277226"
 ---
 # <a name="routing-in-aspnet-core"></a>Routing w ASP.NET Rdzeniu
 
@@ -454,6 +454,8 @@ Korzystanie z szablonu jest zazwyczaj najprostszym podejściem do routingu. Ogra
 
 Złożone segmenty są przetwarzane przez dopasowanie do literału ograniczników od prawej do lewej w sposób [niechciwy.](#greedy) Na przykład `[Route("/a{b}c{d}")]` jest segmentem złożonym.
 Złożone segmenty działają w określony sposób, który musi być rozumiany jako z powodzeniem z nich korzystać. W przykładzie w tej sekcji pokazano, dlaczego złożone segmenty działają tylko dobrze, gdy tekst ogranicznika nie pojawia się wewnątrz wartości parametrów. Przy użyciu [wyrażenia regularnego,](/dotnet/standard/base-types/regular-expressions) a następnie ręcznie wyodrębnianie wartości jest potrzebne w bardziej złożonych przypadkach.
+
+[!INCLUDE[](~/includes/regex.md)]
 
 Jest to podsumowanie kroków, które routing `/a{b}c{d}` wykonuje z `/abcd`szablonem i ścieżką adresu URL . Służy `|` do wizualizacji, jak działa algorytm:
 

@@ -6,12 +6,12 @@ ms.author: casoper
 ms.custom: mvc, seodec18
 ms.date: 10/24/2018
 uid: azure/devops/deploy-to-app-service
-ms.openlocfilehash: df41f296e9c4e1eff6e31d45b29ec30ee1e20cf4
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: d7ee3e42d320d35c2aaff6e097203c45289ec5b1
+ms.sourcegitcommit: fbdb8b9ab5a52656384b117ff6e7c92ae070813c
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78657746"
+ms.lasthandoff: 04/13/2020
+ms.locfileid: "81228130"
 ---
 # <a name="deploy-an-app-to-app-service"></a>Wdrażanie aplikacji w usłudze app service
 
@@ -85,7 +85,7 @@ Aby wdrożyć aplikację, musisz utworzyć aplikację [sieci Web](/azure/app-ser
 
     b. Utwórz grupę zasobów. Grupy zasobów zapewniają środki do agregowania zasobów platformy Azure, które mają być zarządzane jako grupa.
 
-    ```azure-cli
+    ```azurecli
     az group create --location centralus --name AzureTutorial
     ```
 
@@ -93,25 +93,25 @@ Aby wdrożyć aplikację, musisz utworzyć aplikację [sieci Web](/azure/app-ser
 
     d. Utwórz plan usługi app service w warstwie S1. Plan usługi aplikacji to grupowanie aplikacji sieci web, które mają tę samą warstwę cenową. Warstwa S1 nie jest bezpłatna, ale jest wymagana dla funkcji miejsca przejściowe.
 
-    ```azure-cli
+    ```azurecli
     az appservice plan create --name $webappname --resource-group AzureTutorial --sku S1
     ```
 
     d. Utwórz zasób aplikacji sieci Web przy użyciu planu usługi app service w tej samej grupie zasobów.
 
-    ```azure-cli
+    ```azurecli
     az webapp create --name $webappname --resource-group AzureTutorial --plan $webappname
     ```
 
     e. Ustaw poświadczenia wdrożenia. Te poświadczenia wdrożenia dotyczą wszystkich aplikacji sieci web w ramach subskrypcji. Nie używaj znaków specjalnych w nazwie użytkownika.
 
-    ```azure-cli
+    ```azurecli
     az webapp deployment user set --user-name REPLACE_WITH_USER_NAME --password REPLACE_WITH_PASSWORD
     ```
 
     f. Skonfiguruj aplikację internetową tak, aby akceptowała wdrożenia z lokalnego gita i wyświetlała *adres URL wdrożenia Gita*. **Zanotuj ten adres URL w celu późniejszego odniesienia**.
 
-    ```azure-cli
+    ```azurecli
     echo Git deployment URL: $(az webapp deployment source config-local-git --name $webappname --resource-group AzureTutorial --query url --output tsv)
     ```
 
@@ -170,13 +170,13 @@ Gniazda wdrażania obsługują przemieszczania zmian bez wpływu na aplikację d
 
     a. Utwórz miejsce wdrożenia o nazwie *przemieszczania*.
 
-    ```azure-cli
+    ```azurecli
     az webapp deployment slot create --name $webappname --resource-group AzureTutorial --slot staging
     ```
 
     b. Skonfiguruj miejsce przejściowe do używania wdrożenia z lokalnego gita i uzyskaj adres URL wdrożenia **przejściowego.** **Zanotuj ten adres URL w celu późniejszego odniesienia**.
 
-    ```azure-cli
+    ```azurecli
     echo Git deployment URL for staging: $(az webapp deployment source config-local-git --name $webappname --resource-group AzureTutorial --slot staging --query url --output tsv)
     ```
 
@@ -216,7 +216,7 @@ Gniazda wdrażania obsługują przemieszczania zmian bez wpływu na aplikację d
 
 7. W usłudze Cloud Shell zamienić zweryfikowane/rozgrzane miejsce postoju na produkcję.
 
-    ```azure-cli
+    ```azurecli
     az webapp deployment slot swap --name $webappname --resource-group AzureTutorial --slot staging
     ```
 

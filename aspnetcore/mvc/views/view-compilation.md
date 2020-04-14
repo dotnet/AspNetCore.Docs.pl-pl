@@ -4,20 +4,96 @@ author: rick-anderson
 description: Dowiedz się, jak odbywa się kompilacja plików Razor w aplikacji ASP.NET Core.
 ms.author: riande
 ms.custom: mvc
-ms.date: 4/8/2020
+ms.date: 04/13/2020
 uid: mvc/views/view-compilation
-ms.openlocfilehash: 0afd39fdb5a6f570e0e78ad54f6c436460bad3a6
-ms.sourcegitcommit: 6f1b516e0c899a49afe9a29044a2383ce2ada3c7
+ms.openlocfilehash: 67bbeb88cd944791b522900b69bd10cff38c9f3a
+ms.sourcegitcommit: 5af16166977da598953f82da3ed3b7712d38f6cb
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/13/2020
-ms.locfileid: "81223962"
+ms.lasthandoff: 04/14/2020
+ms.locfileid: "81277275"
 ---
 # <a name="razor-file-compilation-in-aspnet-core"></a>Kompilacja plików brzytwy w ASP.NET Core
 
 Autor: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-::: moniker range=">= aspnetcore-3.0"
+::: moniker range=">= aspnetcore-3.1"
+
+Pliki razor z rozszerzeniem *.cshtml* są kompilowane zarówno w czasie kompilacji, jak i publikowania przy użyciu [razor SDK](xref:razor-pages/sdk). Kompilacja środowiska uruchomieniowego może być opcjonalnie włączona przez skonfigurowanie projektu.
+
+## <a name="razor-compilation"></a>Kompilacja maszynki do golenia
+
+Kompilacja plików Razor w czasie kompilacji i czasu publikacji jest domyślnie włączona przez zestaw Razor SDK. Po włączeniu kompilacja środowiska uruchomieniowego uzupełnia kompilację w czasie kompilacji, umożliwiając aktualizowanie plików Razor, jeśli są edytowane.
+
+## <a name="enable-runtime-compilation-at-project-creation"></a>Włączanie kompilacji środowiska uruchomieniowego podczas tworzenia projektu
+
+Strony Razor i szablony projektów MVC zawierają opcję włączania kompilacji środowiska uruchomieniowego podczas tworzenia projektu. Ta opcja jest obsługiwana w ASP.NET Core 3.1 i nowszych.
+
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+
+W oknie **dialogowym Tworzenie nowej aplikacji sieci Web ASP.NET Core:**
+
+1. Wybierz szablon projektu **aplikacji sieci Web** lub aplikacji sieci Web **(Model-View-Controller).**
+1. Zaznacz pole wyboru **Włącz kompilację środowiska uruchomieniowego Razor.**
+
+# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
+
+Użyj `-rrc` opcji `--razor-runtime-compilation` lub szablonu. Na przykład następujące polecenie tworzy nowy projekt Razor Pages z włączoną kompilacją środowiska wykonawczego:
+
+```dotnetcli
+dotnet new webapp --razor-runtime-compilation
+```
+
+---
+
+## <a name="enable-runtime-compilation-in-an-existing-project"></a>Włączanie kompilacji środowiska uruchomieniowego w istniejącym projekcie
+
+Aby włączyć kompilację środowiska uruchomieniowego dla wszystkich środowisk w istniejącym projekcie:
+
+1. Zainstaluj pakiet [Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation/) NuGet.
+1. Zaktualizuj `Startup.ConfigureServices` metodę projektu, <xref:Microsoft.Extensions.DependencyInjection.RazorRuntimeCompilationMvcBuilderExtensions.AddRazorRuntimeCompilation*>aby uwzględnić wywołanie . Przykład:
+
+    ```csharp
+    public void ConfigureServices(IServiceCollection services)
+    {
+        services.AddRazorPages()
+            .AddRazorRuntimeCompilation();
+
+        // code omitted for brevity
+    }
+    ```
+
+## <a name="conditionally-enable-runtime-compilation-in-an-existing-project"></a>Warunkowe włączanie kompilacji środowiska uruchomieniowego w istniejącym projekcie
+
+Kompilacja środowiska uruchomieniowego może być włączona w taki sposób, że jest dostępna tylko dla rozwoju lokalnego. Warunkowe włączenie w ten sposób zapewnia, że opublikowane dane wyjściowe:
+
+* Używa skompilowanych widoków.
+* Nie włącza obserwatorów plików w produkcji.
+
+Aby włączyć kompilację środowiska uruchomieniowego tylko w środowisku deweloperskim:
+
+1. Zainstaluj pakiet [Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation/) NuGet.
+1. Zmodyfikuj sekcję profilu `environmentVariables` uruchamiania w *launchSettings.json*:
+    * Sprawdź `ASPNETCORE_ENVIRONMENT` jest `"Development"`ustawiona na .
+    * Ustaw `ASPNETCORE_HOSTINGSTARTUPASSEMBLIES` `"Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation"`na .
+
+W poniższym przykładzie kompilacja środowiska uruchomieniowego jest `IIS Express` `RazorPagesApp` włączona w środowisku programistycznym dla profilów i uruchamiania:
+
+[!code-json[](~/mvc/views/view-compilation/samples/3.1/launchSettings.json?highlight=15-16,24-25)]
+
+Żadne zmiany kodu nie są `Startup` potrzebne w klasie projektu. W czasie wykonywania ASP.NET Core wyszukuje [atrybut HostingStartup](xref:fundamentals/configuration/platform-specific-configuration#hostingstartup-attribute) `Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation`na poziomie zestawu w . Atrybut `HostingStartup` określa kod startowy aplikacji do wykonania. Ten kod startowy umożliwia kompilację środowiska uruchomieniowego.
+
+## <a name="additional-resources"></a>Zasoby dodatkowe
+
+* [Właściwości RazorCompileOnBuild i RazorCompileOnPublish.](xref:razor-pages/sdk#properties)
+* <xref:razor-pages/index>
+* <xref:mvc/views/overview>
+* <xref:razor-pages/sdk>
+* Zobacz [przykład kompilacji środowiska wykonawczego w usłudze GitHub,](https://github.com/aspnet/samples/tree/master/samples/aspnetcore/mvc/runtimecompilation) aby uzyskać przykład, który pokazuje tworzenie pracy kompilacji środowiska uruchomieniowego między projektami.
+
+::: moniker-end
+
+::: moniker range="= aspnetcore-3.0"
 
 Pliki razor z rozszerzeniem *.cshtml* są kompilowane zarówno w czasie kompilacji, jak i publikowania przy użyciu [razor SDK](xref:razor-pages/sdk). Kompilacja środowiska uruchomieniowego może być opcjonalnie włączona przez skonfigurowanie aplikacji.
 
@@ -61,7 +137,7 @@ Aby włączyć kompilację środowiska uruchomieniowego opartą na środowisku i
 
 1. Zaktualizuj `Startup.ConfigureServices` metodę projektu, `AddRazorRuntimeCompilation`aby uwzględnić wywołanie . Warunkowo `AddRazorRuntimeCompilation` wykonać tak, że działa tylko `ASPNETCORE_ENVIRONMENT` w trybie `Development`debugowania, gdy zmienna jest ustawiona na:
 
-  [!code-csharp[](~/mvc/views/view-compilation/sample/Startup.cs?name=snippet)]
+    [!code-csharp[](~/mvc/views/view-compilation/samples/3.0/Startup.cs?name=snippet)]
 
 ## <a name="additional-resources"></a>Zasoby dodatkowe
 

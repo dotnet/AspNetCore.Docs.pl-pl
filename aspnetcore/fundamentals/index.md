@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/30/2020
 uid: fundamentals/index
-ms.openlocfilehash: da2b42a7cf5d116a36d1dd9fa586d40ab31fc52d
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: c675644d8480ef7a5290045067e6cec2ea6f4764
+ms.sourcegitcommit: f29a12486313e38e0163a643d8a97c8cecc7e871
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80417642"
+ms.lasthandoff: 04/14/2020
+ms.locfileid: "81384062"
 ---
 # <a name="aspnet-core-fundamentals"></a>Platforma ASP.NET Core — podstawy
 
@@ -205,7 +205,7 @@ Katalog główny zawartości jest podstawową ścieżką dla:
   * Pliki danych (*.db*)
 * [Katalog główny sieci Web](#web-root), zazwyczaj folder *wwwroot.*
 
-Podczas tworzenia katalogu głównego zawartości domyślnie katalogu głównego projektu. Ten katalog jest również podstawową ścieżką zarówno dla plików zawartości aplikacji, jak i [katalogu głównego sieci Web.](#web-root) Określ inny katalog główny zawartości, ustawiając jego ścieżkę podczas [tworzenia hosta](#host). Aby uzyskać więcej informacji, zobacz [Katalog główny zawartości](xref:fundamentals/host/generic-host#contentrootpath-1).
+Podczas tworzenia katalogu głównego zawartości domyślnie katalogu głównego projektu. Ten katalog jest również podstawową ścieżką zarówno dla plików zawartości aplikacji, jak i [katalogu głównego sieci Web.](#web-root) Określ inny katalog główny zawartości, ustawiając jego ścieżkę podczas [tworzenia hosta](#host). Aby uzyskać więcej informacji, zobacz [Katalog główny zawartości](xref:fundamentals/host/generic-host#contentroot).
 
 ## <a name="web-root"></a>Katalog główny sieci Web
 
@@ -215,7 +215,7 @@ Katalog główny sieci Web jest ścieżką bazową dla publicznych, statycznych 
 * JavaScript (*.js*)
 * Zdjęcia (*.png*, *.jpg*)
 
-Domyślnie pliki statyczne są obsługiwane tylko z katalogu głównego sieci Web i jego podkatastów. Ścieżka główna sieci Web domyślnie *{zawartość root}/wwwroot*. Określ inny katalog główny sieci Web, ustawiając jego ścieżkę podczas [tworzenia hosta](#host). Aby uzyskać więcej informacji, zobacz [Katalog główny sieci Web](xref:fundamentals/host/generic-host#webroot-1).
+Domyślnie pliki statyczne są obsługiwane tylko z katalogu głównego sieci Web i jego podkatastów. Ścieżka główna sieci Web domyślnie *{zawartość root}/wwwroot*. Określ inny katalog główny sieci Web, ustawiając jego ścieżkę podczas [tworzenia hosta](#host). Aby uzyskać więcej informacji, zobacz [Katalog główny sieci Web](xref:fundamentals/host/generic-host#webroot).
 
 Zapobiegaj publikowaniu plików w [ \<](/visualstudio/msbuild/common-msbuild-project-items#content) *witrynie wwwroot* za pomocą elementu projektu> zawartości w pliku projektu. Poniższy przykład zapobiega publikowaniu zawartości w *wwwroot/local* i jego podkatastronach:
 

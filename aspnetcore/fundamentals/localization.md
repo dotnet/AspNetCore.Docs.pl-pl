@@ -5,12 +5,12 @@ description: Dowiedz się, jak ASP.NET Core zapewnia usługi i oprogramowanie po
 ms.author: riande
 ms.date: 11/30/2019
 uid: fundamentals/localization
-ms.openlocfilehash: b175354220a8a71c029e005f27443d5a72749a11
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 91db83eb8685c7bee5e976f386c2a12c4090b734
+ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78662121"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81440821"
 ---
 # <a name="globalization-and-localization-in-aspnet-core"></a>Globalizacja i lokalizacja w ASP.NET Core
 
@@ -120,11 +120,11 @@ W poprzednim kodzie `SharedResource` jest klasa odpowiadająca resx, gdzie są p
 
 ### <a name="supportedcultures-and-supporteduicultures"></a>Wspieranekultury i wspieranekultury
 
-ASP.NET Core umożliwia określenie dwóch wartości `SupportedCultures` kultury `SupportedUICultures`i . [CultureInfo](/dotnet/api/system.globalization.cultureinfo) Obiekt `SupportedCultures` dla określa wyniki funkcji zależnych od kultury, takich jak data, godzina, liczba i formatowanie waluty. `SupportedCultures`określa również kolejność sortowania tekstu, konwencje wielkości liter i porównania ciągów. Zobacz [CultureInfo.CurrentCulture](/dotnet/api/system.stringcomparer.currentculture#System_StringComparer_CurrentCulture) aby uzyskać więcej informacji na temat sposobu serwera pobiera kultury. Określa, `SupportedUICultures` które tłumaczy ciągi (z plików *resx)* są wyszukane przez [ResourceManager](/dotnet/api/system.resources.resourcemanager). Po `ResourceManager` prostu wyszukuje ciągi specyficzne `CurrentUICulture`dla kultury, które są określane przez . Każdy wątek `CurrentCulture` w `CurrentUICulture` .NET ma i obiektów. ASP.NET Core sprawdza te wartości podczas renderowania funkcji zależnych od kultury. Na przykład jeśli kultura bieżącego wątku jest ustawiona na "en-US" (angielski, Stany Zjednoczone), `DateTime.Now.ToLongDateString()` wyświetla "Czwartek, 18 lutego 2016", ale jeśli `CurrentCulture` jest ustawiona na "es-ES" (hiszpański, Hiszpania), wyjście będzie "jueves, 18 de febrero de 2016".
+ASP.NET Core umożliwia określenie dwóch wartości `SupportedCultures` kultury `SupportedUICultures`i . [CultureInfo](/dotnet/api/system.globalization.cultureinfo) Obiekt `SupportedCultures` dla określa wyniki funkcji zależnych od kultury, takich jak data, godzina, liczba i formatowanie waluty. `SupportedCultures`określa również kolejność sortowania tekstu, konwencje wielkości liter i porównania ciągów. Zobacz [CultureInfo.CurrentCulture](/dotnet/api/system.stringcomparer.currentculture#System_StringComparer_CurrentCulture) aby uzyskać więcej informacji na temat sposobu serwera pobiera kultury. Określa, `SupportedUICultures` które przetłumaczone ciągi (z plików *resx)* są wyszukiwane przez [ResourceManager](/dotnet/api/system.resources.resourcemanager). Po `ResourceManager` prostu wyszukuje ciągi specyficzne `CurrentUICulture`dla kultury, które są określane przez . Każdy wątek `CurrentCulture` w `CurrentUICulture` .NET ma i obiektów. ASP.NET Core sprawdza te wartości podczas renderowania funkcji zależnych od kultury. Na przykład jeśli kultura bieżącego wątku jest ustawiona na "en-US" (angielski, Stany Zjednoczone), `DateTime.Now.ToLongDateString()` wyświetla "Czwartek, 18 lutego 2016", ale jeśli `CurrentCulture` jest ustawiona na "es-ES" (hiszpański, Hiszpania), wyjście będzie "jueves, 18 de febrero de 2016".
 
 ## <a name="resource-files"></a>Pliki zasobów
 
-Plik zasobów jest przydatnym mechanizmem oddzielania ciągów zlokalizowanych od kodu. Przetłumaczone ciągi dla języka nie domyślnego są izolowane pliki zasobów *.resx.* Na przykład można utworzyć hiszpański plik zasobów o nazwie *Welcome.es.resx* zawierający przetłumaczone ciągi. "es" to kod języka hiszpańskiego. Aby utworzyć ten plik zasobu w programie Visual Studio:
+Plik zasobów jest przydatnym mechanizmem oddzielania ciągów zlokalizowanych od kodu. Przetłumaczone ciągi dla języka nie domyślnego są izolowane w plikach zasobów *.resx.* Na przykład można utworzyć hiszpański plik zasobów o nazwie *Welcome.es.resx* zawierający przetłumaczone ciągi. "es" to kod języka hiszpańskiego. Aby utworzyć ten plik zasobu w programie Visual Studio:
 
 1. W **Eksploratorze rozwiązań**kliknij prawym przyciskiem myszy folder, który będzie zawierał plik zasobu > **Dodaj** > **nowy element**.
 

@@ -4,14 +4,14 @@ author: rick-anderson
 description: Dowiedz się, jak odbywa się kompilacja plików Razor w aplikacji ASP.NET Core.
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/13/2020
+ms.date: 04/14/2020
 uid: mvc/views/view-compilation
-ms.openlocfilehash: 67bbeb88cd944791b522900b69bd10cff38c9f3a
-ms.sourcegitcommit: 5af16166977da598953f82da3ed3b7712d38f6cb
+ms.openlocfilehash: 3d871ab960de28a565280d9e4cb2c597832e2455
+ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81277275"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81440938"
 ---
 # <a name="razor-file-compilation-in-aspnet-core"></a>Kompilacja plików brzytwy w ASP.NET Core
 
@@ -83,13 +83,23 @@ W poniższym przykładzie kompilacja środowiska uruchomieniowego jest `IIS Expr
 
 Żadne zmiany kodu nie są `Startup` potrzebne w klasie projektu. W czasie wykonywania ASP.NET Core wyszukuje [atrybut HostingStartup](xref:fundamentals/configuration/platform-specific-configuration#hostingstartup-attribute) `Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation`na poziomie zestawu w . Atrybut `HostingStartup` określa kod startowy aplikacji do wykonania. Ten kod startowy umożliwia kompilację środowiska uruchomieniowego.
 
+## <a name="enable-runtime-compilation-for-a-razor-class-library"></a>Włączanie kompilacji środowiska uruchomieniowego dla biblioteki klas Razor
+
+Rozważmy scenariusz, w którym projekt Razor Pages odwołuje się do [biblioteki klas Razor (RCL)](xref:razor-pages/ui-class) o nazwie *MyClassLib*. RCL zawiera *plik _Layout.cshtml,* że wszystkie projekty MVC zespołu i Razor Pages zużywają. Chcesz włączyć kompilację środowiska uruchomieniowego dla pliku *_Layout.cshtml* w tej śr. W projekcie Strony maszynki do golenia wprowadzono następujące zmiany:
+
+1. Włącz kompilację środowiska uruchomieniowego z instrukcjami w [warunkowo włączyć kompilację środowiska uruchomieniowego w istniejącym projekcie](#conditionally-enable-runtime-compilation-in-an-existing-project).
+1. Konfigurowanie opcji kompilacji środowiska `Startup.ConfigureServices`uruchomieniowego w:
+
+    [!code-csharp[](~/mvc/views/view-compilation/samples/3.1/Startup.cs?name=snippet_ConfigureServices&highlight=5-10)]
+
+    W poprzednim kodzie jest skonstruowana ścieżka bezwzględna do listy RCL *MyClassLib.* [Interfejs API PhysicalFileProvider](xref:fundamentals/file-providers#physicalfileprovider) służy do lokalizowania katalogów i plików w tej ścieżce bezwzględnej. Na koniec `PhysicalFileProvider` wystąpienie jest dodawane do kolekcji dostawców plików, co umożliwia dostęp do plików *.cshtml* rcl.
+
 ## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Właściwości RazorCompileOnBuild i RazorCompileOnPublish.](xref:razor-pages/sdk#properties)
 * <xref:razor-pages/index>
 * <xref:mvc/views/overview>
 * <xref:razor-pages/sdk>
-* Zobacz [przykład kompilacji środowiska wykonawczego w usłudze GitHub,](https://github.com/aspnet/samples/tree/master/samples/aspnetcore/mvc/runtimecompilation) aby uzyskać przykład, który pokazuje tworzenie pracy kompilacji środowiska uruchomieniowego między projektami.
 
 ::: moniker-end
 

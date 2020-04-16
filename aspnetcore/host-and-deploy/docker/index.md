@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/08/2018
 uid: host-and-deploy/docker/index
-ms.openlocfilehash: cb5f774db5fab46a57f8ca4bbbca148f20f371ba
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: 78eb6f467c7e779e1bf998e8ac8e917a90895db9
+ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78664081"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81440730"
 ---
 # <a name="host-aspnet-core-in-docker-containers"></a>Host ASP.NET Core w kontenerach platformy Docker
 
@@ -39,3 +39,5 @@ Dowiedz się, jak użyć rozszerzenia Narzędzia kontenerów programu Visual Stu
 
 [Konfigurowanie ASP.NET Core do pracy z serwerami proxy i modułami równoważenia obciążenia](xref:host-and-deploy/proxy-load-balancer)  
 Dodatkowa konfiguracja może być wymagana dla aplikacji hostowanych za serwerami proxy i modułami równoważenia obciążenia. Przekazywanie żądań za pośrednictwem serwera proxy często zasłania informacje o oryginalnym żądaniu, takie jak schemat i adres IP klienta. Może być konieczne przekazanie niektórych informacji o żądaniu ręcznie do aplikacji.
+
+[GC przy użyciu platformy Docker i małych kontenerów](xref:performance/memory#sc) W tym artykule omówiono wybór GC z małymi pojemnikami.

@@ -5,17 +5,17 @@ description: Dowiedz się, jak sprawić, by składniki Razor były dostępne dla
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/07/2020
+ms.date: 04/14/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/globalization-localization
-ms.openlocfilehash: 2795b21f418ccb2722e7fd0e76a77cfde58e524a
-ms.sourcegitcommit: f0aeeab6ab6e09db713bb9b7862c45f4d447771b
+ms.openlocfilehash: 0883a67e0129590f7a3fb68689eaba8d85e5523f
+ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80976745"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81440717"
 ---
 # <a name="aspnet-core-opno-locblazor-globalization-and-localization"></a>ASP.NET Podstawowa Blazor globalizacja i lokalizacja
 
@@ -62,13 +62,19 @@ Następujące typy pól mają określone wymagania dotyczące formatowania i Bla
 
 ### <a name="opno-locblazor-webassembly"></a>BlazorWebAssembly (WebAssembly)
 
-BlazorAplikacje WebAssembly ustawiają kulturę przy użyciu [preferencji językowych](https://developer.mozilla.org/docs/Web/API/NavigatorLanguage/languages)użytkownika .
-
-Aby jawnie skonfigurować kulturę, `CultureInfo.DefaultThreadCurrentUICulture` `Program.Main`ustaw `CultureInfo.DefaultThreadCurrentCulture` i w .
-
 Domyślnie Blazorkonfiguracja konsolidatora webassembly Blazor usuwa informacje o internacjonalizacji, z wyjątkiem ustawień regionalnych jawnie żądane. Aby uzyskać więcej informacji i wskazówek dotyczących kontrolowania <xref:host-and-deploy/blazor/configure-linker#configure-the-linker-for-internationalization>zachowania konsolidatora, zobacz .
 
-Podczas gdy Blazor kultura, która wybiera domyślnie może być wystarczająca dla większości użytkowników, należy rozważyć oferowanie użytkownikom sposobu, aby określić preferowane ustawienia regionalne. Aby Blazor uzyskać przykładową aplikację WebAssembly z selektorem kultury, zobacz przykładową aplikację [lokalizacji LocSample.](https://github.com/pranavkm/LocSample)
+<!-- HOLD FOR 3.2 PREVIEW 4: Replace prior paragraph with ...
+
+Blazor WebAssembly apps set the culture using the user's [language preference](https://developer.mozilla.org/docs/Web/API/NavigatorLanguage/languages).
+
+To explicitly configure the culture, set `CultureInfo.DefaultThreadCurrentCulture` and `CultureInfo.DefaultThreadCurrentUICulture` in `Program.Main`.
+
+By default, Blazor's linker configuration for Blazor WebAssembly apps strips out internationalization information except for locales explicitly requested. For more information and guidance on controlling the linker's behavior, see <xref:host-and-deploy/blazor/configure-linker#configure-the-linker-for-internationalization>.
+
+While the culture that Blazor selects by default might be sufficient for most users, consider offering a way for users to specify their preferred locale. For a Blazor WebAssembly sample app with a culture picker, see the [LocSample](https://github.com/pranavkm/LocSample) localization sample app.
+
+-->
 
 ### <a name="opno-locblazor-server"></a>BlazorSerwera
 

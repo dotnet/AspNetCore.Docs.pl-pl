@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/23/2020
 uid: security/cors
-ms.openlocfilehash: 601e26e1990a86ad60aa50c8c93ffa490ff6b708
-ms.sourcegitcommit: e72a58d6ebde8604badd254daae8077628f9d63e
+ms.openlocfilehash: e7731fd967c206679ac93209fdb84f40367bea37
+ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/10/2020
-ms.locfileid: "81007187"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81440912"
 ---
 # <a name="enable-cross-origin-requests-cors-in-aspnet-core"></a>Włączanie żądań między źródłami (CORS) w ASP.NET Core
 
@@ -109,7 +109,7 @@ Włączenie mechanizmu CORS dla punktu `RequireCors` końcowego przy użyciu obe
 
 Za pomocą routingu punktu końcowego cors można włączyć na <xref:Microsoft.AspNetCore.Builder.CorsEndpointConventionBuilderExtensions.RequireCors*> podstawie punktu końcowego przy użyciu zestawu metod rozszerzenia:
 
-[!code-csharp[](cors/3.1sample/Cors/WebAPI/StartupEndPt.cs?name=snippet2&highlight=3,7-15,32,41,44)]
+[!code-csharp[](cors/3.1sample/Cors/WebAPI/StartupEndPt.cs?name=snippet2&highlight=3,7-15,32,40,43)]
 
 Powyższy kod ma następujące działanie:
 

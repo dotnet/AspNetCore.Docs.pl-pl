@@ -5,17 +5,17 @@ description: Utwórz aplikację do czatu, która SignalR Blazor używa ASP.NET C
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/26/2020
+ms.date: 04/16/2020
 no-loc:
 - Blazor
 - SignalR
 uid: tutorials/signalr-blazor-webassembly
-ms.openlocfilehash: c4843dc282e1978b39738e206ecc79ded87fcff9
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 798068c83e16070d3279c88c44af0cd96d182fe2
+ms.sourcegitcommit: 77c046331f3d633d7cc247ba77e58b89e254f487
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80306572"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81488887"
 ---
 # <a name="use-aspnet-core-signalr-with-blazor-webassembly"></a>Użyj ASP.NET Core SignalR z Blazor WebAssembly
 
@@ -38,7 +38,7 @@ Na końcu tego samouczka będziesz mieć działającą aplikację czatu.
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs-3.1.md)]
 
@@ -61,24 +61,24 @@ Na końcu tego samouczka będziesz mieć działającą aplikację czatu.
 Jeśli nie używasz programu Visual Studio w wersji 16.6 Preview 2 lub nowszej, zainstaluj szablon [Blazor WebAssembly.](xref:blazor/hosting-models#blazor-webassembly) Pakiet [Microsoft.AspNetCore.Components.WebAssembly.Templates](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Templates/) ma wersję zapoznawczą, podczas gdy Blazor WebAssembly jest w wersji zapoznawczej. W powłoce polecenia wykonaj następujące polecenie:
 
 ```dotnetcli
-dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview3.20168.3
+dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview4.20210.8
 ```
 
 Postępuj zgodnie ze wskazówkami dotyczącymi wyboru narzędzi:
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 1. Tworzenie nowego projektu.
 
 1. Wybierz **aplikację Blazor** i wybierz pozycję **Dalej**.
 
-1. Wpisz "BlazorSignalRApp" w polu **Nazwa projektu.** Upewnij się, że wpis **Lokalizacja** jest poprawny lub podaj lokalizację dla projektu. Wybierz **pozycję Utwórz**.
+1. Wpisz "BlazorSignalRApp" w polu **Nazwa projektu.** Upewnij się, że wpis **Lokalizacja** jest poprawny lub podaj lokalizację dla projektu. Wybierz pozycję **Utwórz**.
 
 1. Wybierz szablon **aplikacji Blazor WebAssembly.**
 
 1. W **obszarze Zaawansowane**zaznacz pole wyboru **Hostowany ASP.NET Core.**
 
-1. Wybierz **pozycję Utwórz**.
+1. Wybierz pozycję **Utwórz**.
 
 > [!NOTE]
 > Jeśli uaktualniono lub zainstalowano nową wersję programu Visual Studio, a szablon Blazor WebAssembly nie pojawi się `dotnet new` w interfejsie użytkownika programu VS, zainstaluj ponownie szablon przy użyciu polecenia pokazanego wcześniej.
@@ -117,7 +117,7 @@ dotnet new blazorwasm --hosted --output BlazorSignalRApp
 
 ## <a name="add-the-signalr-client-library"></a>Dodawanie biblioteki klienta SignalR
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio/)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)
 
 1. W **Eksploratorze rozwiązań**kliknij prawym przyciskiem myszy projekt **BlazorSignalRApp.Client** i wybierz pozycję **Zarządzaj pakietami NuGet**.
 
@@ -200,7 +200,7 @@ W projekcie **BlazorSignalRApp.Server** utwórz folder *Koncentratorów* (liczba
 
 1. Postępuj zgodnie ze wskazówkami dotyczącymi oprzyrządowania:
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 1. W **Eksploratorze rozwiązań**wybierz projekt **BlazorSignalRApp.Server.** Naciśnij **klawisze Ctrl+F5,** aby uruchomić aplikację bez debugowania.
 

@@ -5,12 +5,12 @@ description: Dowiedz się, jak dodać klasy do zarządzania filmami w bazie dany
 ms.author: riande
 ms.date: 12/05/2019
 uid: tutorials/razor-pages/model
-ms.openlocfilehash: f6dbac81b4efceb30c379ab06dd715005d879228
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 7f7c2a09b74e6007ee3ea9c038398bac54988186
+ms.sourcegitcommit: 77c046331f3d633d7cc247ba77e58b89e254f487
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78658936"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81488874"
 ---
 # <a name="add-a-model-to-a-razor-pages-app-in-aspnet-core"></a>Dodawanie modelu do aplikacji Razor Pages w ASP.NET Core
 
@@ -20,7 +20,7 @@ Autor: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 <!-- In the next update on the CLI version, let the scaffolder do the same work the VS driven scaffolder does. That is, create the DB context, etc -->
 
-W tej sekcji klasy są dodawane do zarządzania filmami w wieloplatformowej [bazie danych SQLite](https://www.sqlite.org/index.html). Aplikacje utworzone na podstawie szablonu ASP.NET Core korzystają z bazy danych SQLite. Klasy modelu aplikacji są używane z [Entity Framework Core (EF Core)](/ef/core) [(SQLite EF Core Database Provider)](/ef/core/providers/sqlite)do pracy z bazą danych. EF Core jest strukturą mapowania obiekto-relacyjnego (ORM), która upraszcza dostęp do danych.
+W tej sekcji klasy są dodawane do zarządzania filmami. Klasy modelu aplikacji używają [entity framework core (EF Core)](/ef/core) do pracy z bazą danych. EF Core jest obiektokręgowym maperem (O/RM), który upraszcza dostęp do danych.
 
 Klasy modelu są znane jako klasy POCO (z "zwykłych starych obiektów CLR"), ponieważ nie mają żadnej zależności od EF Core. Definiują właściwości danych, które są przechowywane w bazie danych.
 
@@ -28,7 +28,7 @@ Klasy modelu są znane jako klasy POCO (z "zwykłych starych obiektów CLR"), po
 
 ## <a name="add-a-data-model"></a>Dodawanie modelu danych
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Kliknij prawym przyciskiem myszy projekt **RazorPagesMovie** > **Dodaj** > **nowy folder**. Nazwij folder *Models*.
 
@@ -65,7 +65,7 @@ Skompiluj projekt, aby sprawdzić, czy nie ma żadnych błędów kompilacji.
 
 W tej sekcji model filmu jest szkieletu. Oznacza to, że narzędzie rusztowania tworzy strony dla operacji Tworzenia, Odczytu, Aktualizacji i Usuwania (CRUD) dla modelu filmu.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Tworzenie folderu *Strony/Filmy:*
 
@@ -158,7 +158,7 @@ Poprzednie polecenie dodaje podstawowe narzędzia entity framework dla interfejs
 
 ### <a name="files-created"></a>Utworzone pliki
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Proces rusztowania tworzy i aktualizuje następujące pliki:
 
@@ -198,7 +198,7 @@ Utworzone pliki są wyjaśnione w następnej sekcji.
 
 ## <a name="initial-migration"></a>Migracja początkowa
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 W tej sekcji konsola Menedżera pakietów (PMC) służy do:
 
@@ -234,7 +234,7 @@ Polecenie migracji generuje kod do tworzenia początkowego schematu bazy danych.
 
 Polecenie `update` uruchamia `Up` metodę w migracjach, które nie zostały zastosowane. W takim `update` przypadku `Up` uruchamia metodę w *migrations/\<time-stamp>_InitialCreate.cs* file, który tworzy bazę danych.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 ### <a name="examine-the-context-registered-with-dependency-injection"></a>Badanie kontekstu zarejestrowanego przy iniekcji zależności
 
@@ -309,7 +309,7 @@ Klasy modelu są znane jako klasy POCO (z "zwykłych starych obiektów CLR"), po
 
 ## <a name="add-a-data-model"></a>Dodawanie modelu danych
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Kliknij prawym przyciskiem myszy projekt **RazorPagesMovie** > **Dodaj** > **nowy folder**. Nazwij folder *Models*.
 
@@ -346,7 +346,7 @@ Skompiluj projekt, aby sprawdzić, czy nie ma żadnych błędów kompilacji.
 
 W tej sekcji model filmu jest szkieletu. Oznacza to, że narzędzie rusztowania tworzy strony dla operacji Tworzenia, Odczytu, Aktualizacji i Usuwania (CRUD) dla modelu filmu.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Tworzenie folderu *Strony/Filmy:*
 
@@ -440,7 +440,7 @@ Utworzone i zaktualizowane pliki są wyjaśnione w następnej sekcji.
 
 ## <a name="initial-migration"></a>Migracja początkowa
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 W tej sekcji konsola Menedżera pakietów (PMC) służy do:
 
@@ -474,7 +474,7 @@ Polecenie `Update-Database` uruchamia `Up` metodę w pliku *Migrations/\<time-st
 > [!NOTE]
 > Poprzednie polecenia generują następujące ostrzeżenie: "*Dla kolumny dziesiętnej "Cena" dla kolumny dziesiętnej "Cena" dla typu encji "Film". Spowoduje to, że wartości będą dyskretnie obcinane, jeśli nie mieszczą się w domyślnej precyzji i skali. Jawnie określ typ kolumny serwera SQL, który może pomieścić wszystkie wartości za pomocą "HasColumnType()".*" Możesz zignorować to ostrzeżenie, zostanie ono naprawione w późniejszym samouczku.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 ### <a name="examine-the-context-registered-with-dependency-injection"></a>Badanie kontekstu zarejestrowanego przy iniekcji zależności
 

@@ -5,17 +5,17 @@ description: Dowiedz się, Blazor jak debugować aplikacje.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/26/2020
+ms.date: 04/16/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: eaa67d63f6d15249885d78d3de197ae53e73f072
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 8b63444ba5c8cd45e64e722c8978ba4e6d90af36
+ms.sourcegitcommit: 77c046331f3d633d7cc247ba77e58b89e254f487
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80381872"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81488751"
 ---
 # <a name="debug-aspnet-core-opno-locblazor-webassembly"></a>Debugowanie ASP.NET Core Blazor WebAssembly
 
@@ -55,7 +55,7 @@ Debugowanie wymaga jednej z następujących przeglądarek:
 
 ## <a name="enable-debugging-for-visual-studio-and-visual-studio-code"></a>Włączanie debugowania dla programu Visual Studio i kodu programu Visual Studio
 
-Debugowanie jest włączane automatycznie dla nowych projektów, które są tworzone przy użyciu ASP.NET Core Blazor 3.2 Preview 3 lub nowszym szablonie projektu WebAssembly.
+Debugowanie jest włączane automatycznie dla nowych projektów, które są tworzone przy użyciu ASP.NET Core Blazor 3.2 Preview 3 lub nowszym szablonie projektu WebAssembly[(bieżąca wersja to 3.2 Preview 4](xref:blazor/get-started)).
 
 Aby włączyć debugowanie Blazor dla istniejącej aplikacji WebAssembly, zaktualizuj plik *launchSettings.json* w projekcie startowym, aby uwzględnić następującą `inspectUri` właściwość w każdym profilu uruchamiania:
 

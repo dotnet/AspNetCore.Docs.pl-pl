@@ -7,18 +7,18 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 4/17/2020
 uid: fundamentals/host/generic-host
-ms.openlocfilehash: b528a33fa52bfe56faaf9f3ff8c7e43db0d4e184
-ms.sourcegitcommit: f29a12486313e38e0163a643d8a97c8cecc7e871
+ms.openlocfilehash: 46a56c278e889778e58a1fbb41ec217aaf023b13
+ms.sourcegitcommit: 77c046331f3d633d7cc247ba77e58b89e254f487
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81384034"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81488777"
 ---
 # <a name="net-generic-host"></a>Host ogólny platformy .NET
 
 ::: moniker range=">= aspnetcore-3.0 <= aspnetcore-3.1"
 
-Szablony ASP.NET Core tworzą hosta ogólnego .NET<xref:Microsoft.Extensions.Hosting.HostBuilder>Core ( ).
+Szablony ASP.NET Core tworzą hosta ogólnego .NET Core, <xref:Microsoft.Extensions.Hosting.HostBuilder>.
 
 ## <a name="host-definition"></a>Definicja hosta
 
@@ -40,7 +40,7 @@ Host jest zazwyczaj skonfigurowany, zbudowany i uruchamiany `Program` przez kod 
 * Wywołuje `CreateHostBuilder` metodę tworzenia i konfigurowania obiektu konstruktora.
 * `Build` Wywołania `Run` i metody na obiekcie konstruktora.
 
-Szablony sieci Web ASP.NET Core generują następujący kod w celu utworzenia hosta:
+Szablony sieci Web ASP.NET Core generują następujący kod w celu utworzenia hosta ogólnego:
 
 ```csharp
 public class Program
@@ -59,7 +59,7 @@ public class Program
 }
 ```
 
-Poniższy kod tworzy obciążenie inne `IHostedService` niż HTTP z implementacją dodaną do kontenera DI.
+Poniższy kod tworzy hosta ogólnego przy użyciu obciążenia innego niż HTTP. Implementacja `IHostedService` jest dodawana do kontenera DI:
 
 ```csharp
 public class Program
@@ -88,6 +88,8 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
             webBuilder.UseStartup<Startup>();
         });
 ```
+
+Poprzedni kod jest generowany przez szablony ASP.NET Core.
 
 Jeśli aplikacja używa entity framework core, nie należy zmieniać `CreateHostBuilder` nazwę lub podpis metody. [Narzędzia Entity Framework Core](/ef/core/miscellaneous/cli/) oczekują, aby znaleźć `CreateHostBuilder` metodę, która konfiguruje hosta bez uruchamiania aplikacji. Aby uzyskać więcej informacji, zobacz [Tworzenie dbcontext w czasie projektowania](/ef/core/miscellaneous/cli/dbcontext-creation).
 

@@ -4,14 +4,14 @@ author: scottaddie
 description: Dowiedz się, jak zoptymalizować zasoby statyczne w aplikacji sieci web ASP.NET Core, stosując techniki łączenia i łączenia.
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 06/17/2019
+ms.date: 04/15/2020
 uid: client-side/bundling-and-minification
-ms.openlocfilehash: a7a5c40d6c31c4416212c02c1b491dd794f2a1d3
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 670ac6a96c3affd2b2ac699836f536aea7d85ff3
+ms.sourcegitcommit: 77c046331f3d633d7cc247ba77e58b89e254f487
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78658271"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81488692"
 ---
 # <a name="bundle-and-minify-static-assets-in-aspnet-core"></a>Pakiet i minify statycznych zasobów w ASP.NET Core
 
@@ -63,7 +63,7 @@ Przeglądarki są dość pełne w odniesieniu do nagłówków żądań HTTP. Ca�
 
 ## <a name="choose-a-bundling-and-minification-strategy"></a>Wybierz strategię sprzedaży pakietowej i minimizacji
 
-Szablony projektów MVC i Razor Pages zapewniają gotowe rozwiązanie do łączenia i wydobywania składającego się z pliku konfiguracyjnego JSON. Narzędzia innych firm, takie jak [grunt](xref:client-side/using-grunt) runner zadań, wykonać te same zadania z nieco większą złożoność. Narzędzie innej firmy doskonale pasuje, gdy przepływ pracy dewelopera wymaga&mdash;przetwarzania poza tworzeniem pakietów i wydobywaniem, takimi jak linting i optymalizacja obrazu. Za pomocą tworzenia pakietów i minyfikacji w czasie projektowania, wstępnie zunifikowane pliki są tworzone przed wdrożeniem aplikacji. Łączenie i minifying przed wdrożeniem zapewnia zaletę mniejszego obciążenia serwera. Jednak ważne jest, aby rozpoznać, że tworzenie pakietów i minyfikacji w czasie projektowania zwiększa złożoność kompilacji i działa tylko z plikami statycznymi.
+Szablony projektów MVC i Razor Pages zapewniają rozwiązanie do łączenia i wydobywania składającego się z pliku konfiguracyjnego JSON. Narzędzia innych firm, takie jak [grunt](xref:client-side/using-grunt) runner zadań, wykonać te same zadania z nieco większą złożoność. Narzędzie innej firmy doskonale pasuje, gdy przepływ pracy dewelopera wymaga&mdash;przetwarzania poza tworzeniem pakietów i wydobywaniem, takimi jak linting i optymalizacja obrazu. Za pomocą tworzenia pakietów i minyfikacji w czasie projektowania, wstępnie zunifikowane pliki są tworzone przed wdrożeniem aplikacji. Łączenie i minifying przed wdrożeniem zapewnia zaletę mniejszego obciążenia serwera. Jednak ważne jest, aby rozpoznać, że tworzenie pakietów i minyfikacji w czasie projektowania zwiększa złożoność kompilacji i działa tylko z plikami statycznymi.
 
 ## <a name="configure-bundling-and-minification"></a>Konfigurowanie tworzenia pakietów i minimizacji
 
@@ -95,109 +95,6 @@ Opcje konfiguracji obejmują:
 * `includeInProject`: Flaga wskazująca, czy chcesz dodać wygenerowane pliki do pliku projektu. **opcjonalne**, *domyślnie - false*
 * `sourceMap`: Flaga wskazująca, czy chcesz wygenerować mapę źródłową dla dołączonego pliku. **opcjonalne**, *domyślnie - false*
 * `sourceMapRootPath`: Ścieżka główna do przechowywania wygenerowanego pliku mapy źródłowej.
-
-## <a name="build-time-execution-of-bundling-and-minification"></a>Wykonanie w czasie kompilacji sprzedaży pakietowej i minyfikacji
-
-Pakiet [BuildBundlerMinifier](https://www.nuget.org/packages/BuildBundlerMinifier/) NuGet umożliwia wykonywanie tworzenia pakietów i minyfikacji w czasie kompilacji. Pakiet wstrzykuje [MSBuild cele,](/visualstudio/msbuild/msbuild-targets) które są uruchamiane w czasie kompilacji i czystego czasu. Plik *bundleconfig.json* jest analizowany przez proces kompilacji w celu wytworzenia plików wyjściowych na podstawie zdefiniowanej konfiguracji.
-
-> [!NOTE]
-> BuildBundlerMinifier należy do projektu opartego na społeczności w usłudze GitHub, dla którego firma Microsoft nie zapewnia pomocy technicznej. Kwestie powinny być złożone [tutaj](https://github.com/madskristensen/BundlerMinifier/issues).
-
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
-
-Dodaj pakiet *BuildBundlerMinifier* do projektu.
-
-Skompiluj projekt. W oknie Dane wyjściowe są wyświetlane następujące informacje:
-
-```console
-1>------ Build started: Project: BuildBundlerMinifierApp, Configuration: Debug Any CPU ------
-1>
-1>Bundler: Begin processing bundleconfig.json
-1>  Minified wwwroot/css/site.min.css
-1>  Minified wwwroot/js/site.min.js
-1>Bundler: Done processing bundleconfig.json
-1>BuildBundlerMinifierApp -> C:\BuildBundlerMinifierApp\bin\Debug\netcoreapp2.0\BuildBundlerMinifierApp.dll
-========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ==========
-```
-
-Oczyść projekt. W oknie Dane wyjściowe są wyświetlane następujące informacje:
-
-```console
-1>------ Clean started: Project: BuildBundlerMinifierApp, Configuration: Debug Any CPU ------
-1>
-1>Bundler: Cleaning output from bundleconfig.json
-1>Bundler: Done cleaning output file from bundleconfig.json
-========== Clean: 1 succeeded, 0 failed, 0 skipped ==========
-```
-
-# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
-
-Dodaj pakiet *BuildBundlerMinifier* do projektu:
-
-```dotnetcli
-dotnet add package BuildBundlerMinifier
-```
-
-Jeśli używasz ASP.NET Core 1.x, przywróć nowo dodany pakiet:
-
-```dotnetcli
-dotnet restore
-```
-
-Zbuduj projekt:
-
-```dotnetcli
-dotnet build
-```
-
-Pojawi się następująca:
-
-```console
-Microsoft (R) Build Engine version 15.4.8.50001 for .NET Core
-Copyright (C) Microsoft Corporation. All rights reserved.
-
-
-    Bundler: Begin processing bundleconfig.json
-    Bundler: Done processing bundleconfig.json
-    BuildBundlerMinifierApp -> C:\BuildBundlerMinifierApp\bin\Debug\netcoreapp2.0\BuildBundlerMinifierApp.dll
-```
-
-Oczyść projekt:
-
-```dotnetcli
-dotnet clean
-```
-
-Zostaną wyświetlone następujące dane wyjściowe:
-
-```console
-Microsoft (R) Build Engine version 15.4.8.50001 for .NET Core
-Copyright (C) Microsoft Corporation. All rights reserved.
-
-
-  Bundler: Cleaning output from bundleconfig.json
-  Bundler: Done cleaning output file from bundleconfig.json
-```
-
----
-
-## <a name="ad-hoc-execution-of-bundling-and-minification"></a>Doraźne wykonanie sprzedaży pakietowej i minyfikacji
-
-Zadania łączenia i kopytowania można wykonywać ad hoc, bez budowania projektu. Dodaj pakiet [BundlerMinifier.Core](https://www.nuget.org/packages/BundlerMinifier.Core/) NuGet do projektu:
-
-[!code-xml[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/BuildBundlerMinifierApp.csproj?range=10)]
-
-> [!NOTE]
-> BundlerMinifier.Core należy do projektu opartego na społeczności w usłudze GitHub, dla którego firma Microsoft nie zapewnia pomocy technicznej. Kwestie powinny być złożone [tutaj](https://github.com/madskristensen/BundlerMinifier/issues).
-
-Ten pakiet rozszerza wiersz polecenia .NET Core o narzędzie *dotnet-bundle.* Następujące polecenie może być wykonane w oknie konsoli Menedżera pakietów (PMC) lub w powłoce polecenia:
-
-```dotnetcli
-dotnet bundle
-```
-
-> [!IMPORTANT]
-> Menedżer pakietów NuGet dodaje zależności do pliku `<PackageReference />` *.csproj jako węzły. Polecenie `dotnet bundle` jest rejestrowane w wierszu polecenia `<DotNetCliToolReference />` .NET Core tylko wtedy, gdy używany jest węzeł. Odpowiednio zmodyfikuj plik *.csproj.
 
 ## <a name="add-files-to-workflow"></a>Dodawanie plików do przepływu pracy
 
@@ -258,32 +155,7 @@ Poniższy `environment` tag renderuje dołączone i zminifikowane pliki CSS podc
 
 Istnieją przypadki, w których przepływ pracy tworzenia pakietów i łączenia aplikacji wymaga dodatkowego przetwarzania. Przykłady obejmują optymalizację obrazu, krach pamięci podręcznej i przetwarzanie zasobów sieci CDN. Aby spełnić te wymagania, można przekonwertować przepływ pracy tworzenia pakietów i minyfikacji na użycie Gulp.
 
-### <a name="use-the-bundler--minifier-extension"></a>Użyj rozszerzenia & Minifier Bundler
-
-Rozszerzenie programu Visual Studio [Bundler & Minifier](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.BundlerMinifier) obsługuje konwersję do Gulp.
-
-> [!NOTE]
-> Rozszerzenie & Minifier należy do projektu opartego na społeczności w usłudze GitHub, dla którego firma Microsoft nie zapewnia pomocy technicznej. Kwestie powinny być złożone [tutaj](https://github.com/madskristensen/BundlerMinifier/issues).
-
-Kliknij prawym przyciskiem myszy plik *bundleconfig.json* w Eksploratorze rozwiązań i wybierz **opcję Bundler & Minifier** > **Convert To Gulp...**:
-
-![Konwertuj na element menu kontekstowego Łyk](../client-side/bundling-and-minification/_static/convert-to-gulp.png)
-
-Pliki *gulpfile.js* i *package.json* są dodawane do projektu. Obsługiwane pakiety [npm](https://www.npmjs.com/) wymienione w `devDependencies` sekcji pliku *package.json* są zainstalowane.
-
-Uruchom następujące polecenie w oknie PMC, aby zainstalować interfejs wiersza polecenia Gulp jako zależność globalną:
-
-```console
-npm i -g gulp-cli
-```
-
-Plik *gulpfile.js* odczytuje plik *bundleconfig.json* dla wejść, wyjść i ustawień.
-
-[!code-javascript[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/gulpfile.js?range=1-12&highlight=10)]
-
-### <a name="convert-manually"></a>Konwertuj ręcznie
-
-Jeśli program Visual Studio i/lub rozszerzenie & Minifier pakietu są niedostępne, konwertuj ręcznie.
+### <a name="manually-convert-the-bundling-and-minification-workflow-to-use-gulp"></a>Ręczne konwertowanie przepływu pracy tworzenia pakietów i minowania w celu użycia gulp
 
 Dodaj plik *package.json* z `devDependencies`następującymi plikami , do katalogu głównego projektu:
 

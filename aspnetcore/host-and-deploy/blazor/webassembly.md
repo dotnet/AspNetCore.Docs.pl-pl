@@ -5,17 +5,17 @@ description: Dowiedz się, jak Blazor hostować i wdrażać aplikację przy uży
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/06/2020
+ms.date: 04/16/2020
 no-loc:
 - Blazor
 - SignalR
 uid: host-and-deploy/blazor/webassembly
-ms.openlocfilehash: f364d94085d175fde5596c222ef21852c0106ec1
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: f3508144f1e472ee906a35e427fc57f536008ab6
+ms.sourcegitcommit: 77c046331f3d633d7cc247ba77e58b89e254f487
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80751130"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81488861"
 ---
 # <a name="host-and-deploy-aspnet-core-opno-locblazor-webassembly"></a>Hostowanie i wdrażanie Blazor ASP.NET Core WebAssembly
 
@@ -25,13 +25,17 @@ ms.locfileid: "80751130"
 
 Z [ Blazor webassembly hosting modelu:](xref:blazor/hosting-models#blazor-webassembly)
 
-* Aplikacja, Blazor jej zależności i środowisko uruchomieniowe platformy .NET są pobierane do przeglądarki.
+* Aplikacja, Blazor jej zależności i środowisko uruchomieniowe .NET są pobierane do przeglądarki równolegle.
 * Aplikacja jest wykonywana bezpośrednio w wątku interfejsu użytkownika przeglądarki.
 
 Obsługiwane są następujące strategie wdrażania:
 
 * Aplikacja Blazor jest obsługiwana przez aplikację ASP.NET Core. Ta strategia jest omówiona w [hostowane wdrożenie z ASP.NET Core](#hosted-deployment-with-aspnet-core) sekcji.
 * Aplikacja Blazor jest umieszczana na statycznym serwerze www hostingu, gdzie .NET nie jest używana do obsługi Blazor aplikacji. Ta strategia jest omówiona w sekcji [samodzielne wdrażanie,](#standalone-deployment) która zawiera informacje na temat hostingu Blazor aplikacji WebAssembly jako podkoszuli IIS.
+
+## <a name="brotli-precompression"></a>Wstępne skompresja Brotli
+
+Po Blazor opublikowaniu aplikacji WebAssembly dane wyjściowe są wstępnie kompresowane przy użyciu [algorytmu kompresji Brotli](https://tools.ietf.org/html/rfc7932) na najwyższym poziomie, aby zmniejszyć rozmiar aplikacji i usunąć potrzebę kompresji środowiska uruchomieniowego.
 
 ## <a name="rewrite-urls-for-correct-routing"></a>Przepisz adresy URL w celu prawidłowego routingu
 

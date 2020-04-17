@@ -5,17 +5,17 @@ description: Zacznij od Blazor tworzenia Blazor aplikacji z wybranym oprzyrządo
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/09/2020
+ms.date: 04/16/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/get-started
-ms.openlocfilehash: e9e6eeeb1d29aa529e43d75f5d3951d2c4384d7e
-ms.sourcegitcommit: 4506a8f71ece921010ad6b7edebc8b200618f40d
+ms.openlocfilehash: 7fe4fbb082f08d4f71684c836a826d8b6dd888f6
+ms.sourcegitcommit: 77c046331f3d633d7cc247ba77e58b89e254f487
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/09/2020
-ms.locfileid: "81002915"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81488731"
 ---
 # <a name="get-started-with-aspnet-core-blazor"></a>Zacznij cie z ASP.NET Core Blazor
 
@@ -25,7 +25,7 @@ Autorstwa [Daniela Rotha](https://github.com/danroth27) i [Luke'a Lathama](https
 
 Aby rozpocząć pracę z Blazorem, postępuj zgodnie ze wskazówkami dotyczącymi wyboru narzędzi:
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 1. Aby utworzyć aplikacje Blazor Server, zainstaluj najnowszą wersję [programu Visual Studio 2019](https://visualstudio.microsoft.com/downloads/) z obciążeniem **ASP.NET i tworzenia sieci Web.**
 
@@ -33,13 +33,19 @@ Aby rozpocząć pracę z Blazorem, postępuj zgodnie ze wskazówkami dotyczącym
 
    Aby uzyskać informacje na temat dwóch modeli hostingowych Blazor, *Blazor WebAssembly* i *Blazor Server*, zobacz <xref:blazor/hosting-models>.
 
+1. Zainstaluj szablon [podglądu Blazor WebAssembly,](xref:blazor/hosting-models#blazor-webassembly) uruchamiając następujące polecenie:
+
+   ```dotnetcli
+   dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview4.20210.8
+   ```
+
 1. Tworzenie nowego projektu.
 
-1. Wybierz **aplikację Blazor**. Wybierz **pozycję Dalej**.
+1. Wybierz **aplikację Blazor**. Wybierz opcję **Dalej**.
 
-1. Podaj nazwę projektu w polu **Nazwa projektu** lub zaakceptuj domyślną nazwę projektu. Upewnij się, że wpis **Lokalizacja** jest poprawny lub podaj lokalizację dla projektu. Wybierz **pozycję Utwórz**.
+1. Podaj nazwę projektu w polu **Nazwa projektu** lub zaakceptuj domyślną nazwę projektu. Upewnij się, że wpis **Lokalizacja** jest poprawny lub podaj lokalizację dla projektu. Wybierz pozycję **Utwórz**.
 
-1. Aby uzyskać środowisko Blazor WebAssembly (Visual Studio 16.6 Preview 2 lub nowsze), wybierz szablon **aplikacji Blazor WebAssembly.** Aby uzyskać środowisko serwera Blazor (Visual Studio 16.4 lub nowsze), wybierz szablon **aplikacji Serwera Blazor.** Wybierz **pozycję Utwórz**.
+1. Aby uzyskać środowisko Blazor WebAssembly (Visual Studio 16.6 Preview 2 lub nowsze), wybierz szablon **aplikacji Blazor WebAssembly.** Aby uzyskać środowisko serwera Blazor (Visual Studio 16.4 lub nowsze), wybierz szablon **aplikacji Serwera Blazor.** Wybierz pozycję **Utwórz**.
 
 1. Naciśnij <kbd>klawisz Ctrl</kbd>+<kbd>F5,</kbd> aby uruchomić aplikację.
 
@@ -50,11 +56,11 @@ Aby rozpocząć pracę z Blazorem, postępuj zgodnie ze wskazówkami dotyczącym
 1. Opcjonalnie zainstaluj szablon podglądu [Blazor WebAssembly,](xref:blazor/hosting-models#blazor-webassembly) uruchamiając następujące polecenie:
 
    ```dotnetcli
-   dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview3.20168.3
+   dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview4.20210.8
    ```
 
    > [!NOTE]
-   > Do korzystania z szablonu 3.2 Preview 3 Blazor WebAssembly **wymagany** jest [plik .NET Core SDK w wersji 3.1.201 lub](https://dotnet.microsoft.com/download/dotnet-core/3.1) nowszej. Potwierdź zainstalowaną wersję .NET `dotnet --version` Core SDK, uruchamiając go w powłoce poleceń.
+   > Do korzystania z szablonu 3.2 Preview **4** Blazor WebAssembly wymagany jest [plik .NET Core SDK w wersji 3.1.201 lub](https://dotnet.microsoft.com/download/dotnet-core/3.1) nowszej. Potwierdź zainstalowaną wersję .NET `dotnet --version` Core SDK, uruchamiając go w powłoce poleceń.
 
 1. Zainstaluj narzędzie [Visual Studio Code](https://code.visualstudio.com/).
 
@@ -94,13 +100,13 @@ Blazor Server jest obsługiwany w programie Visual Studio dla komputerów Mac. B
 
 1. Na pasku bocznym wybierz pozycję **.NET Core** > **App**.
 
-1. Wybierz szablon **aplikacji Serwera Blazor.** Wybierz **pozycję Utwórz**.
+1. Wybierz szablon **aplikacji Serwera Blazor.** Wybierz pozycję **Utwórz**.
 
    Aby uzyskać informacje na temat modelu <xref:blazor/hosting-models>hostingu Serwera Blazor, zobacz .
 
 1. Ustaw **platformę docelową** na **.NET Core 3.1** i wybierz **pozycję Dalej**.
 
-1. W polu **Nazwa projektu** nazwij aplikację `WebApplication1`. Wybierz **pozycję Utwórz**.
+1. W polu **Nazwa projektu** nazwij aplikację `WebApplication1`. Wybierz pozycję **Utwórz**.
 
 1. Wybierz **uruchom** > **uruchom bez debugowania,** aby uruchomić aplikację *bez debugera*. Uruchom aplikację za pomocą **debugowania startowego,** aby uruchomić aplikację *za pomocą debugera*.
 
@@ -113,11 +119,11 @@ Jeśli pojawia się monit, aby ufać certyfikatowi dewelopera, zaufaj certyfikat
 1. Opcjonalnie zainstaluj szablon podglądu [Blazor WebAssembly,](xref:blazor/hosting-models#blazor-webassembly) uruchamiając następujące polecenie:
 
    ```dotnetcli
-   dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview3.20168.3
+   dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview4.20210.8
    ```
 
    > [!NOTE]
-   > Do korzystania z szablonu 3.2 Preview 3 Blazor WebAssembly **wymagany** jest [plik .NET Core SDK w wersji 3.1.201 lub](https://dotnet.microsoft.com/download/dotnet-core/3.1) nowszej. Potwierdź zainstalowaną wersję .NET `dotnet --version` Core SDK, uruchamiając go w powłoce poleceń.
+   > Do korzystania z szablonu 3.2 Preview **4** Blazor WebAssembly wymagany jest [plik .NET Core SDK w wersji 3.1.201 lub](https://dotnet.microsoft.com/download/dotnet-core/3.1) nowszej. Potwierdź zainstalowaną wersję .NET `dotnet --version` Core SDK, uruchamiając go w powłoce poleceń.
 
 1. Aby uzyskać środowisko serwera Blazor, wykonaj następujące polecenia w powłoce poleceń:
 

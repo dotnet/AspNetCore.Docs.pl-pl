@@ -5,16 +5,27 @@ description: Dowiedz się, jak hostować aplikacje ASP.NET Core w internetowych 
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/07/2020
+ms.date: 04/17/2020
 uid: host-and-deploy/iis/index
-ms.openlocfilehash: 819c53f945c1e5bb2cedcef8fc39d4c8761e4549
-ms.sourcegitcommit: f0aeeab6ab6e09db713bb9b7862c45f4d447771b
+ms.openlocfilehash: 77f07ba89de4449c6d13006a5fd61499cb5cdfc0
+ms.sourcegitcommit: 3d07e21868dafc503530ecae2cfa18a7490b58a6
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80977031"
+ms.lasthandoff: 04/18/2020
+ms.locfileid: "81642748"
 ---
 # <a name="host-aspnet-core-on-windows-with-iis"></a>Host ASP.NET Core w systemie Windows z iis
+
+<!-- 
+
+    NOTE FOR 5.0
+    
+    When making the 5.0 version of this topic, remove the Hosting Bundle
+    direct download section from the (new) <5.0 & >2.2 version and modify 
+    the text and heading for the *Earlier versions of the installer* 
+    section. See the 2.2 version for an example.
+    
+-->
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -250,9 +261,9 @@ Pobierz instalatora za pomocą następującego linku:
 Aby uzyskać wcześniejszą wersję instalatora:
 
 1. Przejdź do strony [Pobierz .NET Core.](https://dotnet.microsoft.com/download/dotnet-core)
-1. Kliknij żądaną wersję .NET Core.
+1. Wybierz żądaną wersję .NET Core.
 1. W kolumnie **Uruchom aplikacje — środowisko uruchomieniowe** znajdź wiersz żądanej wersji środowiska uruchomieniowego .NET Core.
-1. Pobierz instalatora za pomocą łącza **Runtime & Hosting Bundle.**
+1. Pobierz instalatora za pomocą linku **Pakiet hostingowy.**
 
 > [!WARNING]
 > Niektóre instalatory zawierają wersje wersji, które osiągnęły swój koniec życia (EOL) i nie są już obsługiwane przez firmę Microsoft. Aby uzyskać więcej informacji, zobacz [zasady pomocy technicznej](https://dotnet.microsoft.com/platform/support/policy/dotnet-core).
@@ -617,7 +628,7 @@ Aby zapobiec przesunieniu limitu czasu przez aplikacje hostowane [poza procesem,
 * <xref:test/troubleshoot-azure-iis>
 * <xref:host-and-deploy/azure-iis-errors-reference>
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:test/troubleshoot>
 * <xref:index>
@@ -846,20 +857,12 @@ Zainstaluj *pakiet hostingowy .NET Core* w systemie hostingowym. Pakiet instaluj
 >
 > Jeśli pakiet hostingowy jest zainstalowany po zainstalowaniu 64-bitowej (x64) wersji .NET Core, może wydawać się brak zestawów SDK[(nie wykryto żadnych zestawów SDK .NET Core](xref:test/troubleshoot#no-net-core-sdks-were-detected)). Aby rozwiązać ten <xref:test/troubleshoot#missing-sdk-after-installing-the-net-core-hosting-bundle>problem, zobacz .
 
-### <a name="direct-download-current-version"></a>Pobieranie bezpośrednie (aktualna wersja)
-
-Pobierz instalatora za pomocą następującego linku:
-
-[Aktualny instalator pakietu hostingu .NET Core (pobieranie bezpośrednie)](https://dotnet.microsoft.com/permalink/dotnetcore-current-windows-runtime-bundle-installer)
-
-### <a name="earlier-versions-of-the-installer"></a>Starsze wersje instalatora
-
-Aby uzyskać wcześniejszą wersję instalatora:
+### <a name="download"></a>Pobierz
 
 1. Przejdź do strony [Pobierz .NET Core.](https://dotnet.microsoft.com/download/dotnet-core)
-1. Kliknij żądaną wersję .NET Core.
+1. Wybierz żądaną wersję .NET Core.
 1. W kolumnie **Uruchom aplikacje — środowisko uruchomieniowe** znajdź wiersz żądanej wersji środowiska uruchomieniowego .NET Core.
-1. Pobierz instalatora za pomocą łącza **Runtime & Hosting Bundle.**
+1. Pobierz instalatora za pomocą linku **Pakiet hostingowy.**
 
 > [!WARNING]
 > Niektóre instalatory zawierają wersje wersji, które osiągnęły swój koniec życia (EOL) i nie są już obsługiwane przez firmę Microsoft. Aby uzyskać więcej informacji, zobacz [zasady pomocy technicznej](https://dotnet.microsoft.com/platform/support/policy/dotnet-core).
@@ -1221,7 +1224,7 @@ Aby zapobiec przesunieniu limitu czasu przez aplikacje hostowane [poza procesem,
 * <xref:test/troubleshoot-azure-iis>
 * <xref:host-and-deploy/azure-iis-errors-reference>
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:test/troubleshoot>
 * <xref:index>
@@ -1422,20 +1425,12 @@ Zainstaluj *pakiet hostingowy .NET Core* w systemie hostingowym. Pakiet instaluj
 >
 > Jeśli pakiet hostingowy jest zainstalowany po zainstalowaniu 64-bitowej (x64) wersji .NET Core, może wydawać się brak zestawów SDK[(nie wykryto żadnych zestawów SDK .NET Core](xref:test/troubleshoot#no-net-core-sdks-were-detected)). Aby rozwiązać ten <xref:test/troubleshoot#missing-sdk-after-installing-the-net-core-hosting-bundle>problem, zobacz .
 
-### <a name="direct-download-current-version"></a>Pobieranie bezpośrednie (aktualna wersja)
-
-Pobierz instalatora za pomocą następującego linku:
-
-[Aktualny instalator pakietu hostingu .NET Core (pobieranie bezpośrednie)](https://dotnet.microsoft.com/permalink/dotnetcore-current-windows-runtime-bundle-installer)
-
-### <a name="earlier-versions-of-the-installer"></a>Starsze wersje instalatora
-
-Aby uzyskać wcześniejszą wersję instalatora:
+### <a name="download"></a>Pobierz
 
 1. Przejdź do strony [Pobierz .NET Core.](https://dotnet.microsoft.com/download/dotnet-core)
-1. Kliknij żądaną wersję .NET Core.
+1. Wybierz żądaną wersję .NET Core.
 1. W kolumnie **Uruchom aplikacje — środowisko uruchomieniowe** znajdź wiersz żądanej wersji środowiska uruchomieniowego .NET Core.
-1. Pobierz instalatora za pomocą łącza **Runtime & Hosting Bundle.**
+1. Pobierz instalatora za pomocą linku **Pakiet hostingowy.**
 
 > [!WARNING]
 > Niektóre instalatory zawierają wersje wersji, które osiągnęły swój koniec życia (EOL) i nie są już obsługiwane przez firmę Microsoft. Aby uzyskać więcej informacji, zobacz [zasady pomocy technicznej](https://dotnet.microsoft.com/platform/support/policy/dotnet-core).
@@ -1747,7 +1742,7 @@ W przypadku aplikacji ASP.NET Core przeznaczonej dla programu .NET Framework ż�
 * <xref:test/troubleshoot-azure-iis>
 * <xref:host-and-deploy/azure-iis-errors-reference>
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:test/troubleshoot>
 * <xref:index>

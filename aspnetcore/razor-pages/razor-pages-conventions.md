@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 uid: razor-pages/razor-pages-conventions
-ms.openlocfilehash: b42d63c8f1b5b48fcfc771923171e1105d3f0a29
-ms.sourcegitcommit: 5af16166977da598953f82da3ed3b7712d38f6cb
+ms.openlocfilehash: 6124554d5f9859179edfb5c545cf0b082369c0c9
+ms.sourcegitcommit: 3d07e21868dafc503530ecae2cfa18a7490b58a6
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81277317"
+ms.lasthandoff: 04/18/2020
+ms.locfileid: "81642734"
 ---
 # <a name="razor-pages-route-and-app-conventions-in-aspnet-core"></a>Trasy stron brzytwy i konwencje aplikacji w ASP.NET Core
 
@@ -24,7 +24,7 @@ Jeśli trzeba skonfigurować niestandardowe trasy stron dla poszczególnych stro
 
 Aby określić trasę strony, dodać segmenty trasy lub dodać parametry `@page` do trasy, użyj dyrektywy strony. Aby uzyskać więcej informacji, zobacz [Trasy niestandardowe](xref:razor-pages/index#custom-routes).
 
-Istnieją słowa zastrzeżone, których nie można używać jako segmentów trasy ani nazw parametrów. Aby uzyskać więcej informacji, zobacz [Routing: Zarezerwowane nazwy routingu](xref:fundamentals/routing#reserved-routing-names).
+Istnieją słowa zastrzeżone, których nie można używać jako segmentów trasy ani nazw parametrów. Aby uzyskać więcej informacji, zobacz [Routing: Zarezerwowane nazwy routingu](xref:mvc/controllers/routing#reserved-routing-names).
 
 [Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/razor-pages-conventions/samples/) ([jak pobrać](xref:index#how-to-download-a-sample))
 
@@ -292,7 +292,7 @@ Poproś przykładową stronę Informacje `localhost:5000/About` o i sprawdź nag
 
 Filtr Strony<xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter>( ) to filtr, który ma zastosowanie do stron Razor. Aby uzyskać więcej informacji, zobacz [Metody filtrowania stron razor](xref:razor-pages/filter).
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:security/authorization/razor-pages-authorization>
 * <xref:mvc/controllers/areas#areas-with-razor-pages>
@@ -582,7 +582,7 @@ Poproś przykładową stronę Informacje `localhost:5000/About` o i sprawdź nag
 
 Filtr Strony<xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter>( ) to filtr, który ma zastosowanie do stron Razor. Aby uzyskać więcej informacji, zobacz [Metody filtrowania stron razor](xref:razor-pages/filter).
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:security/authorization/razor-pages-authorization>
 * <xref:mvc/controllers/areas#areas-with-razor-pages>
@@ -838,7 +838,7 @@ Poproś przykładową stronę Informacje `localhost:5000/About` o i sprawdź nag
 
 Filtr Strony<xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter>( ) to filtr, który ma zastosowanie do stron Razor. Aby uzyskać więcej informacji, zobacz [Metody filtrowania stron razor](xref:razor-pages/filter).
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:security/authorization/razor-pages-authorization>
 * <xref:mvc/controllers/areas#areas-with-razor-pages>

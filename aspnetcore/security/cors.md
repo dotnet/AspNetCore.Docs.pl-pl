@@ -4,14 +4,14 @@ author: rick-anderson
 description: Dowiedz się, jak cors jako standard zezwalania lub odrzucania żądań cross-origin w aplikacji ASP.NET Core.
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/23/2020
+ms.date: 04/17/2020
 uid: security/cors
-ms.openlocfilehash: e7731fd967c206679ac93209fdb84f40367bea37
-ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
+ms.openlocfilehash: 56a339d9018f619af38aecc6f4c2ff40c3c43d2f
+ms.sourcegitcommit: 3d07e21868dafc503530ecae2cfa18a7490b58a6
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81440912"
+ms.lasthandoff: 04/18/2020
+ms.locfileid: "81642698"
 ---
 # <a name="enable-cross-origin-requests-cors-in-aspnet-core"></a>Włączanie żądań między źródłami (CORS) w ASP.NET Core
 
@@ -71,7 +71,7 @@ Oprogramowanie pośredniczące CORS obsługuje żądania cross-origin. Poniższy
 Powyższy kod ma następujące działanie:
 
 * Ustawia nazwę zasady `_myAllowSpecificOrigins`na . Nazwa zasad jest dowolna.
-* Wywołuje <xref:Microsoft.AspNetCore.Builder.CorsMiddlewareExtensions.UseCors*> metodę rozszerzenia i `_myAllowSpecificOrigins` określa zasady CORS. `UseCors`dodaje oprogramowanie pośredniczące CORS.
+* Wywołuje <xref:Microsoft.AspNetCore.Builder.CorsMiddlewareExtensions.UseCors*> metodę rozszerzenia i `_myAllowSpecificOrigins` określa zasady CORS. `UseCors`dodaje oprogramowanie pośredniczące CORS. Wezwanie do `UseCors` musi być `UseRouting`umieszczone `UseAuthorization`po , ale przed . Aby uzyskać więcej informacji, zobacz [Kolejność oprogramowania pośredniczącego](xref:fundamentals/middleware/index#middleware-order).
 * Wywołania <xref:Microsoft.Extensions.DependencyInjection.CorsServiceCollectionExtensions.AddCors*> z [wyrażeniem lambda](/dotnet/csharp/programming-guide/statements-expressions-operators/lambda-expressions). Lambda bierze <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder> obiekt. [Opcje konfiguracji](#cors-policy-options), `WithOrigins`takie jak , są opisane w dalszej części tego artykułu.
 * Włącza `_myAllowSpecificOrigins` zasady CORS dla wszystkich punktów końcowych kontrolera. Zobacz [routing punktu końcowego,](#ecors) aby zastosować zasady CORS do określonych punktów końcowych.
 
@@ -605,7 +605,7 @@ Poniżej `TodoItems2Controller` przedstawiono podobne punkty końcowe, ale zawie
 
 Przetestuj poprzedni kod ze [strony testowej](https://cors1.azurewebsites.net/test?number=2) wdrożonego przykładu. Na liście rozwijanej **Kontroler** wybierz pozycję **Inspekcji wstępnej,** a następnie **ustaw kontroler**. Wszystkie wywołania CORS `TodoItems2Controller` do punktów końcowych zakończyć się pomyślnie.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Współużytkowanie zasobów między źródłami (CORS)](https://developer.mozilla.org/docs/Web/HTTP/CORS)
 * [Wprowadzenie do modułu IIS CORS](https://blogs.iis.net/iisteam/getting-started-with-the-iis-cors-module)
@@ -1011,7 +1011,7 @@ Punkty końcowe obsługujące mechanizm CORS można testować za pomocą narzęd
 
 Podczas wdrażania w usługach IIS mechanizm CORS musi być uruchomiony przed uwierzytelnianiem systemu Windows, jeśli serwer nie jest skonfigurowany do zezwalania na dostęp anonimowy. Aby obsługiwać ten scenariusz, [moduł IIS CORS](https://www.iis.net/downloads/microsoft/iis-cors-module) musi zostać zainstalowany i skonfigurowany dla aplikacji.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Współużytkowanie zasobów między źródłami (CORS)](https://developer.mozilla.org/docs/Web/HTTP/CORS)
 * [Wprowadzenie do modułu IIS CORS](https://blogs.iis.net/iisteam/getting-started-with-the-iis-cors-module)

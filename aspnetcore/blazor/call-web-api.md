@@ -5,17 +5,17 @@ description: Dowiedz się, jak wywoływać Blazor internetowy interfejs API z ap
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/16/2020
+ms.date: 04/19/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/call-web-api
-ms.openlocfilehash: 2f2d4150f4fa1e7f47310f2a88b816f445cd1d3a
-ms.sourcegitcommit: 49c91ad4b69f4f8032394cbf2d5ae1b19a7f863b
+ms.openlocfilehash: 943f9d440adbe11ac1977f28aebee53a5510a86b
+ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "81544859"
+ms.lasthandoff: 04/21/2020
+ms.locfileid: "81661579"
 ---
 # <a name="call-a-web-api-from-aspnet-core-opno-locblazor"></a>Wywoływanie internetowego interfejsu API z ASP.NET CoreBlazor
 
@@ -120,7 +120,11 @@ Metody pomocnicze JSON wysyłają żądania do identyfikatora URI (internetowego
   }
   ```
   
-  Połączenia `PostAsJsonAsync` z <xref:System.Net.Http.HttpResponseMessage>prośbą o zwrot pliku .
+  Połączenia `PostAsJsonAsync` z <xref:System.Net.Http.HttpResponseMessage>prośbą o zwrot pliku . Aby zdesializować zawartość JSON z `ReadFromJsonAsync<T>` komunikatu odpowiedzi, użyj metody rozszerzenia:
+  
+  ```csharp
+  var content = response.content.ReadFromJsonAsync<WeatherForecast>();
+  ```
 
 * `PutAsJsonAsync`&ndash; Wysyła żądanie HTTP PUT, w tym zawartość zakodowaną w UO.
 
@@ -149,7 +153,11 @@ Metody pomocnicze JSON wysyłają żądania do identyfikatora URI (internetowego
   }
   ```
   
-  Połączenia `PutAsJsonAsync` z <xref:System.Net.Http.HttpResponseMessage>prośbą o zwrot pliku .
+  Połączenia `PutAsJsonAsync` z <xref:System.Net.Http.HttpResponseMessage>prośbą o zwrot pliku . Aby zdesializować zawartość JSON z `ReadFromJsonAsync<T>` komunikatu odpowiedzi, użyj metody rozszerzenia:
+  
+  ```csharp
+  var content = response.content.ReadFromJsonAsync<WeatherForecast>();
+  ```
 
 <xref:System.Net.Http>zawiera dodatkowe metody rozszerzenia do wysyłania żądań HTTP i odbierania odpowiedzi HTTP. [HttpClient.DeleteAsync](xref:System.Net.Http.HttpClient.DeleteAsync*) służy do wysyłania żądania HTTP DELETE do internetowego interfejsu API.
 
@@ -237,7 +245,7 @@ app.UseCors(policy =>
 
 Aby uzyskać więcej <xref:security/cors> informacji, zobacz i przykładowy składnik testera żądań HTTP aplikacji *(Components/HTTPRequestTester.brzytwa).*
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:fundamentals/http-requests>
 * <xref:security/enforcing-ssl>

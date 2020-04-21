@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/26/2020
 uid: fundamentals/dependency-injection
-ms.openlocfilehash: 943ea30c2e4887638f69b6dcdb7e323bcee40240
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 4e990329b7ebcfc9cbbff8a3c9895604a22461d3
+ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80405977"
+ms.lasthandoff: 04/21/2020
+ms.locfileid: "81661697"
 ---
 # <a name="dependency-injection-in-aspnet-core"></a>Dependency injection in ASP.NET Core (Wstrzykiwanie zależności na platformie ASP.NET Core)
 
@@ -196,7 +196,7 @@ Usługi przejściowe<xref:Microsoft.Extensions.DependencyInjection.ServiceCollec
 Usługi okresowe<xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped*>o określonym zakresie ( ) są tworzone raz na żądanie klienta (połączenie).
 
 > [!WARNING]
-> Podczas korzystania z usługi o określonym zakresie w `Invoke` oprogramowaniu pośredniczącym, wstrzyknąć usługę do lub `InvokeAsync` metody. Nie wstrzyknąć za pomocą iniekcji konstruktora, ponieważ wymusza usługę zachowywać się jak singleton. Aby uzyskać więcej informacji, zobacz <xref:fundamentals/middleware/write#per-request-middleware-dependencies>.
+> Podczas korzystania z usługi o określonym zakresie w `Invoke` oprogramowaniu pośredniczącym, wstrzyknąć usługę do lub `InvokeAsync` metody. Nie wstrzyknąć za pomocą [iniekcji konstruktora,](xref:mvc/controllers/dependency-injection#constructor-injection) ponieważ wymusza usługę zachowywać się jak singleton. Aby uzyskać więcej informacji, zobacz <xref:fundamentals/middleware/write#per-request-middleware-dependencies>.
 
 ### <a name="singleton"></a>Singleton
 
@@ -261,9 +261,9 @@ Usługi można rozwiązać za pomocą dwóch mechanizmów:
 
 Konstruktory mogą akceptować argumenty, które nie są dostarczane przez iniekcję zależności, ale argumenty muszą przypisywać wartości domyślne.
 
-Gdy usługi są `IServiceProvider` rozpoznawane przez lub `ActivatorUtilities`, iniekcji konstruktora wymaga konstruktora *publicznego.*
+Gdy usługi są `IServiceProvider` rozpoznawane przez lub `ActivatorUtilities` [, iniekcji konstruktora](xref:mvc/controllers/dependency-injection#constructor-injection) wymaga konstruktora *publicznego.*
 
-Gdy usługi są `ActivatorUtilities`rozpoznawane przez , iniekcji konstruktora wymaga, że istnieje tylko jeden odpowiedni konstruktor. Przeciążenia konstruktora są obsługiwane, ale tylko jedno przeciążenie może istnieć, których argumenty mogą być spełnione przez iniekcję zależności.
+Gdy usługi są `ActivatorUtilities`rozpoznawane przez [, iniekcji konstruktora](xref:mvc/controllers/dependency-injection#constructor-injection) wymaga, że istnieje tylko jeden odpowiedni konstruktor. Przeciążenia konstruktora są obsługiwane, ale tylko jedno przeciążenie może istnieć, których argumenty mogą być spełnione przez iniekcję zależności.
 
 ## <a name="entity-framework-contexts"></a>Konteksty struktury encji
 
@@ -540,7 +540,7 @@ Podobnie jak wszystkie zestawy zaleceń, mogą wystąpić sytuacje, w których i
 
 DI jest *alternatywą dla* wzorców dostępu do obiektów statycznych/globalnych. Możesz nie być w stanie zrealizować korzyści z DI, jeśli mieszasz go z dostępem do obiektów statycznych.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:mvc/views/dependency-injection>
 * <xref:mvc/controllers/dependency-injection>
@@ -733,7 +733,7 @@ Usługi przejściowe<xref:Microsoft.Extensions.DependencyInjection.ServiceCollec
 Usługi okresowe<xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped*>o określonym zakresie ( ) są tworzone raz na żądanie klienta (połączenie).
 
 > [!WARNING]
-> Podczas korzystania z usługi o określonym zakresie w `Invoke` oprogramowaniu pośredniczącym, wstrzyknąć usługę do lub `InvokeAsync` metody. Nie wstrzyknąć za pomocą iniekcji konstruktora, ponieważ wymusza usługę zachowywać się jak singleton. Aby uzyskać więcej informacji, zobacz <xref:fundamentals/middleware/write#per-request-middleware-dependencies>.
+> Podczas korzystania z usługi o określonym zakresie w `Invoke` oprogramowaniu pośredniczącym, wstrzyknąć usługę do lub `InvokeAsync` metody. Nie wstrzyknąć za pomocą [iniekcji konstruktora,](xref:mvc/controllers/dependency-injection#constructor-injection) ponieważ wymusza usługę zachowywać się jak singleton. Aby uzyskać więcej informacji, zobacz <xref:fundamentals/middleware/write#per-request-middleware-dependencies>.
 
 ### <a name="singleton"></a>Singleton
 
@@ -798,9 +798,9 @@ Usługi można rozwiązać za pomocą dwóch mechanizmów:
 
 Konstruktory mogą akceptować argumenty, które nie są dostarczane przez iniekcję zależności, ale argumenty muszą przypisywać wartości domyślne.
 
-Gdy usługi są `IServiceProvider` rozpoznawane przez lub `ActivatorUtilities`, iniekcji konstruktora wymaga konstruktora *publicznego.*
+Gdy usługi są `IServiceProvider` rozpoznawane przez lub `ActivatorUtilities` [, iniekcji konstruktora](xref:mvc/controllers/dependency-injection#constructor-injection) wymaga konstruktora *publicznego.*
 
-Gdy usługi są `ActivatorUtilities`rozpoznawane przez , iniekcji konstruktora wymaga, że istnieje tylko jeden odpowiedni konstruktor. Przeciążenia konstruktora są obsługiwane, ale tylko jedno przeciążenie może istnieć, których argumenty mogą być spełnione przez iniekcję zależności.
+Gdy usługi są `ActivatorUtilities`rozpoznawane przez [, iniekcji konstruktora](xref:mvc/controllers/dependency-injection#constructor-injection) wymaga, że istnieje tylko jeden odpowiedni konstruktor. Przeciążenia konstruktora są obsługiwane, ale tylko jedno przeciążenie może istnieć, których argumenty mogą być spełnione przez iniekcję zależności.
 
 ## <a name="entity-framework-contexts"></a>Konteksty struktury encji
 
@@ -1075,7 +1075,7 @@ Podobnie jak wszystkie zestawy zaleceń, mogą wystąpić sytuacje, w których i
 
 DI jest *alternatywą dla* wzorców dostępu do obiektów statycznych/globalnych. Możesz nie być w stanie zrealizować korzyści z DI, jeśli mieszasz go z dostępem do obiektów statycznych.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:mvc/views/dependency-injection>
 * <xref:mvc/controllers/dependency-injection>

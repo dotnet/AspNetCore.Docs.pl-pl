@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 09/26/2019
 uid: data/ef-rp/intro
-ms.openlocfilehash: 94783aa9014aef4c5f775fc8f36a2c3a7715e4b6
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 07faf5e596e7ea8b134d13caa0259c1e9d74ff1b
+ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78656822"
+ms.lasthandoff: 04/21/2020
+ms.locfileid: "81661615"
 ---
 # <a name="razor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>Strony brzytwy z entity framework core w ASP.NET Core - Samouczek 1 z 8
 
@@ -27,7 +27,7 @@ Jest to pierwszy z serii samouczków, które pokazują, jak korzystać z entity 
 
 * Jeśli dopiero zaczynasz pracę na stronach Razor Pages, przed rozpoczęciem tej serii przejdź do serii samouczków Wprowadzenie do [stron razor.](xref:tutorials/razor-pages/razor-pages-start)
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[VS prereqs](~/includes/net-core-prereqs-vs-3.0.md)]
 
@@ -61,7 +61,7 @@ Styl interfejsu użytkownika tej witryny jest oparty na wbudowanych szablonach p
 
 Kliknij łącze w górnej części strony, aby uzyskać kod źródłowy ukończonego projektu. Folder *cu30* zawiera kod ASP.NET wersji Core 3.0 samouczka. Pliki, które odzwierciedlają stan kodu dla tutoriali 1-7 można znaleźć w folderze *cu30snapshots.*
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Aby uruchomić aplikację po pobraniu ukończonego projektu:
 
@@ -103,7 +103,7 @@ Aby uruchomić aplikację po pobraniu ukończonego projektu:
 
 ## <a name="create-the-web-app-project"></a>Tworzenie projektu aplikacji sieci Web
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Z menu **Plik** programu Visual Studio wybierz polecenie **Nowy** > **projekt**.
 * Wybierz **ASP.NET podstawową aplikację sieci Web**.
@@ -159,7 +159,7 @@ Uczeń może zapisać się na dowolną liczbę kursów, a kurs może mieć dowol
 
   [!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Models/Student.cs)]
 
-Właściwość `ID` staje się kolumną klucza podstawowego tabeli bazy danych, która odpowiada tej klasie. Domyślnie EF Core interpretuje właściwość, `ID` `classnameID` która jest nazwany lub jako klucz podstawowy. Tak więc alternatywą automatycznie `Student` rozpoznawaną nazwę `StudentID`dla klasy klucz podstawowy jest .
+Właściwość `ID` staje się kolumną klucza podstawowego tabeli bazy danych, która odpowiada tej klasie. Domyślnie EF Core interpretuje właściwość, `ID` `classnameID` która jest nazwany lub jako klucz podstawowy. Tak więc alternatywą automatycznie `Student` rozpoznawaną nazwę `StudentID`dla klasy klucz podstawowy jest . Aby uzyskać więcej informacji, zobacz [EF Core - Keys](/ef/core/modeling/keys?tabs=data-annotations).
 
 Właściwość `Enrollments` jest [właściwością nawigacji](/ef/core/modeling/relationships). Właściwości nawigacji przechowują inne jednostki, które są powiązane z tą encją. W takim przypadku `Enrollments` właściwość `Student` jednostki posiada `Enrollment` wszystkie jednostki, które są związane z tym Student. Na przykład jeśli wiersz studenta w bazie danych ma `Enrollments` dwa powiązane wiersze rejestracji, właściwość nawigacji zawiera te dwie jednostki rejestracji. 
 
@@ -206,7 +206,7 @@ W tej sekcji służy ASP.NET narzędzie do tworzenia rusztowań rdzenia do gener
 * Klasa *kontekstu* EF Core. Kontekst jest klasą główną, która koordynuje funkcjonalność entity framework dla danego modelu danych. Pochodzi z `Microsoft.EntityFrameworkCore.DbContext` klasy.
 * Strony maszynki do golenia obsługujące operacje tworzenia, odczytu, aktualizacji i usuwania (CRUD) dla `Student` encji.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Tworzenie folderu *Uczniowie* w folderze *Strony.*
 * W **Eksploratorze rozwiązań**kliknij prawym przyciskiem myszy folder *Strony/Uczniowie* i wybierz pozycję **Dodaj** > **nowy element rusztowania**.
@@ -282,7 +282,7 @@ Proces rusztowania:
 
 ## <a name="database-connection-string"></a>Parametry połączenia bazy danych
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Parametry połączenia określają [usługę SQL Server LocalDB](/sql/database-engine/configure-windows/sql-server-2016-express-localdb). 
 
@@ -323,7 +323,7 @@ ASP.NET Core jest zbudowany z [iniekcji zależności](xref:fundamentals/dependen
 
 Narzędzie szkieletu automatycznie zarejestrował klasę kontekstu z kontenerem iniekcji zależności.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * W `ConfigureServices`, wyróżnione linie zostały dodane przez rusztowania:
 
@@ -379,7 +379,7 @@ Utwórz *plik Data/DbInitializer.cs* za pomocą następującego kodu:
   DbInitializer.Initialize(context);
   ```
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Zatrzymaj aplikację, jeśli jest uruchomiona, i uruchom następujące polecenie w **konsoli Menedżera pakietów** (PMC):
 
@@ -399,7 +399,7 @@ Drop-Database
 
 ## <a name="view-the-database"></a>Wyświetlanie bazy danych
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Otwórz **program SQL Server Object Explorer** (SSOX) z menu **Widok** w programie Visual Studio.
 * W obszarze SSOX wybierz **(localdb)\MSSQLLocalDB > databases > SchoolContext-{GUID}**. Nazwa bazy danych jest generowana na podstawie nazwy kontekstu podanej wcześniej oraz myślnika i identyfikatora GUID.
@@ -462,7 +462,7 @@ Przykładowa aplikacja jest witryną sieci web fikcyjnego Uniwersytetu Contoso. 
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 [!INCLUDE [](~/includes/net-core-prereqs-windows.md)]
 
@@ -492,7 +492,7 @@ Styl interfejsu użytkownika tej witryny jest zbliżony do tego, co jest generow
 
 ## <a name="create-the-contosouniversity-razor-pages-web-app"></a>Tworzenie aplikacji internetowej Strony razorów ContosoUniversity
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Z menu **Plik** programu Visual Studio wybierz polecenie **Nowy** > **projekt**.
 * Utwórz nową ASP.NET podstawową aplikację sieci Web. Nazwij projekt **ContosoUniversity**. Ważne jest, aby nadać nazwę projektowi *ContosoUniversity,* aby obszary nazw były zgodne, gdy kod jest kopiowany/wklejany.
@@ -588,7 +588,7 @@ W tej sekcji model studenta jest szkieletu. Oznacza to, że narzędzie rusztowan
 * Skompiluj projekt.
 * Utwórz folder *Strony/Uczniowie.*
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * W **Eksploratorze rozwiązań**kliknij prawym przyciskiem myszy folder *Strony/Uczniowie* > **Dodaj** > **nowy element rusztowania**.
 * W oknie dialogowym **Dodawanie szkieletu** wybierz pozycję **Razor Pages using Entity Framework (CRUD)** > **ADD**.
@@ -707,7 +707,7 @@ W *Program.cs*, zmodyfikuj `Main` metodę wywoływania: `Initialize`
 
 [!code-csharp[](intro/samples/cu21/Program.cs?name=snippet2&highlight=14-15)]
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Zatrzymaj aplikację, jeśli jest uruchomiona, i uruchom następujące polecenie w **konsoli Menedżera pakietów** (PMC):
 
@@ -763,7 +763,7 @@ W następnym samouczku sprawdzane są podstawowe operacje CRUD (tworzenie, odczy
 
 
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Wersja tego samouczka w YouTube](https://www.youtube.com/watch?v=P7iTtQnkrNs)
 

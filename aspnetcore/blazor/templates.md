@@ -5,17 +5,17 @@ description: Dowiedz się więcej Blazor o szablonach Blazor aplikacji ASP.NET C
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/26/2020
+ms.date: 04/19/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/templates
-ms.openlocfilehash: 71a9d9eee8637dda0b3cecac82ff96a0c3bfedb5
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 0a4a508beeae3d7bc665372d925989aa4e34ad52
+ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80320982"
+ms.lasthandoff: 04/21/2020
+ms.locfileid: "81661725"
 ---
 # <a name="aspnet-core-opno-locblazor-templates"></a>szablony ASP.NET Blazor Core
 
@@ -31,6 +31,13 @@ Struktura Blazor zawiera szablony do tworzenia aplikacji Blazor dla każdego z m
 Aby uzyskać Blazorwięcej informacji na <xref:blazor/hosting-models>temat modeli hostingu, zobacz .
 
 Aby uzyskać instrukcje krok po kroku Blazor dotyczące tworzenia aplikacji <xref:blazor/get-started>z szablonu, zobacz .
+
+Opcje szablonu są `--help` dostępne, przekazując tę opcję do nowego polecenia [dotnet:](/dotnet/core/tools/dotnet-new)
+
+```dotnetcli
+dotnet new blazorwasm --help
+dotnet new blazorserver --help
+```
 
 ## <a name="opno-locblazor-project-structure"></a>Blazorstruktura projektu
 

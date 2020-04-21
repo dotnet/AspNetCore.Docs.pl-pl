@@ -5,17 +5,17 @@ description: Dowiedz się, Blazor jak zabezpieczyć aplikacje WebAssemlby jako a
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/31/2020
+ms.date: 04/19/2020
 no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/index
-ms.openlocfilehash: be286d770cd8d6e5cf7885b91be8654f74ffd743
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: b82341f3d1d0665d4ee31bb6d967ccf305bae9c3
+ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80538974"
+ms.lasthandoff: 04/21/2020
+ms.locfileid: "81661783"
 ---
 # <a name="secure-aspnet-core-opno-locblazor-webassembly"></a>Bezpieczne ASP.NET Core Blazor WebAssembly
 
@@ -72,7 +72,11 @@ public class Program
         var builder = WebAssemblyHostBuilder.CreateDefault(args);
         builder.RootComponents.Add<App>("app");
 
-        services.AddBaseAddressHttpClient();
+        builder.Services.AddSingleton(new HttpClient 
+        {
+            BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
+        });
+
         services.Add...;
 
         ConfigureCommonServices(builder.Services);

@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 uid: test/troubleshoot-azure-iis
-ms.openlocfilehash: 671f68da2ea261cb8ae32a9d5ef875217859054d
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: f994cd1274bda9082a7cd8b637968b2769db1671
+ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78655331"
+ms.lasthandoff: 04/21/2020
+ms.locfileid: "81661710"
 ---
 # <a name="troubleshoot-aspnet-core-on-azure-app-service-and-iis"></a>Rozwiązywanie problemów z ASP.NET Core w usłudze Azure App Service i usługach IIS
 
@@ -159,6 +159,15 @@ Aby naprawić ten błąd, napraw instalację [pakietu hostingowego .NET Core (dl
 Nie można uruchomić w provied termin uruchamiania. Domyślnie limit czasu wynosi 120 sekund.
 
 Ten błąd może wystąpić podczas uruchamiania dużej liczby aplikacji na tym samym komputerze. Sprawdź, czy użycie procesora CPU/pamięci wzrasta na serwerze podczas uruchamiania. Może być konieczne rozłożenie procesu uruchamiania wielu aplikacji.
+
+### <a name="50038-ancm-application-dll-not-found"></a>Nie znaleziono biblioteki DLL aplikacji 500.38 ANCM
+
+Ancm nie można zlokalizować biblioteki DLL aplikacji, która powinna być obok pliku wykonywalnego.
+
+Ten błąd występuje podczas hostowania aplikacji spakowanej jako [plik wykonywalny z jednym plikiem](/dotnet/core/whats-new/dotnet-core-3-0#single-file-executables) przy użyciu modelu hostingu w trakcie. Model w procesie wymaga, aby ancm załadować aplikację .NET Core do istniejącego procesu IIS. Ten scenariusz nie jest obsługiwany przez model wdrażania z jednym plikiem. Aby naprawić ten błąd, użyj **jednego** z następujących podejść w pliku projektu aplikacji:
+
+1. Wyłącz publikowanie pojedynczego `PublishSingleFile` pliku, ustawiając `false`właściwość MSBuild na .
+1. Przełącz się do modelu hostingu poza `AspNetCoreHostingModel` procesem, ustawiając `OutOfProcess`właściwość MSBuild na .
 
 ### <a name="5025-process-failure"></a>502.5 Błąd procesu
 
@@ -552,7 +561,7 @@ Działająca aplikacja może zakończyć się niepowodzeniem natychmiast po uakt
 1. Przywracanie i odbudowywać projekt.
 1. Usuń wszystkie pliki w folderze wdrażania na serwerze przed ponowne wdrożeniem aplikacji.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:test/troubleshoot>
 * <xref:host-and-deploy/azure-iis-errors-reference>
@@ -1045,7 +1054,7 @@ Działająca aplikacja może zakończyć się niepowodzeniem natychmiast po uakt
 1. Przywracanie i odbudowywać projekt.
 1. Usuń wszystkie pliki w folderze wdrażania na serwerze przed ponowne wdrożeniem aplikacji.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:test/troubleshoot>
 * <xref:host-and-deploy/azure-iis-errors-reference>
@@ -1476,7 +1485,7 @@ Działająca aplikacja może zakończyć się niepowodzeniem natychmiast po uakt
 1. Przywracanie i odbudowywać projekt.
 1. Usuń wszystkie pliki w folderze wdrażania na serwerze przed ponowne wdrożeniem aplikacji.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:test/troubleshoot>
 * <xref:host-and-deploy/azure-iis-errors-reference>

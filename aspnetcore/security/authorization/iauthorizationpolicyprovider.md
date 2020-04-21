@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/14/2019
 uid: security/authorization/iauthorizationpolicyprovider
-ms.openlocfilehash: 2a8b189cc9f17529a962a1f9642c7bb199d5781b
-ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
+ms.openlocfilehash: 2c67e25ff73bc8c3a5f3af4730a509b2385fc1cf
+ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81440925"
+ms.lasthandoff: 04/21/2020
+ms.locfileid: "81661771"
 ---
 # <a name="custom-authorization-policy-providers-using-iauthorizationpolicyprovider-in-aspnet-core"></a>Dostawcy zasad autoryzacji niestandardowej przy użyciu usługi IAuthorizationPolicyProvider w ASP.NET Core 
 
@@ -25,7 +25,7 @@ Przykłady scenariuszy, w których [niestandardowe IAuthorizationPolicyProvider]
 * Korzystanie z szerokiego zakresu zasad (na przykład dla różnych numerów lub grup wiekowych) nie `AuthorizationOptions.AddPolicy` ma sensu dodawać poszczególnych zasad autoryzacji za pomocą połączenia.
 * Tworzenie zasad w czasie wykonywania na podstawie informacji w zewnętrznym źródle danych (takich jak baza danych) lub dynamiczne określanie wymagań dotyczących autoryzacji za pomocą innego mechanizmu.
 
-[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore/tree/release/2.2/src/Security/samples/CustomPolicyProvider) z [repozytorium AspNetCore GitHub](https://github.com/dotnet/AspNetCore). Pobierz plik ZIP repozytorium dotnet/AspNetCore. Rozpaj plik. Przejdź do folderu projektu *src/Security/samples/CustomPolicyProvider.*
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/aspnetcore/tree/v3.1.3/src/Security/samples/CustomPolicyProvider) z [repozytorium AspNetCore GitHub](https://github.com/dotnet/AspNetCore). Pobierz plik ZIP repozytorium dotnet/AspNetCore. Rozpaj plik. Przejdź do folderu projektu *src/Security/samples/CustomPolicyProvider.*
 
 ## <a name="customize-policy-retrieval"></a>Dostosowywanie pobierania zasad
 
@@ -183,4 +183,4 @@ Aby używać zasad `IAuthorizationPolicyProvider`niestandardowych z programu , n
 services.AddSingleton<IAuthorizationPolicyProvider, MinimumAgePolicyProvider>();
 ```
 
-Kompletny próbka niestandardowa `IAuthorizationPolicyProvider` jest dostępna w [repozytorium dotnet/aspnetcore GitHub.](https://github.com/dotnet/aspnetcore/tree/ea555458dc61e04314598c25b3ab8c56362a5123/src/Security/samples/CustomPolicyProvider)
+Kompletny próbka niestandardowa `IAuthorizationPolicyProvider` jest dostępna w [repozytorium dotnet/aspnetcore GitHub.](https://github.com/dotnet/aspnetcore/tree/v3.1.3/src/Security/samples/CustomPolicyProvider)

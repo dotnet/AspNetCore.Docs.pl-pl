@@ -5,17 +5,17 @@ description: Utwórz aplikację do czatu, która SignalR Blazor używa ASP.NET C
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/16/2020
+ms.date: 04/21/2020
 no-loc:
 - Blazor
 - SignalR
 uid: tutorials/signalr-blazor-webassembly
-ms.openlocfilehash: 798068c83e16070d3279c88c44af0cd96d182fe2
-ms.sourcegitcommit: 77c046331f3d633d7cc247ba77e58b89e254f487
+ms.openlocfilehash: 03db8b48bdacec1d6877a4ea09f97c242761c42d
+ms.sourcegitcommit: f976dce28ad887bbd31720c318fd4a97cf96cc6d
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81488887"
+ms.lasthandoff: 04/21/2020
+ms.locfileid: "81738010"
 ---
 # <a name="use-aspnet-core-signalr-with-blazor-webassembly"></a>Użyj ASP.NET Core SignalR z Blazor WebAssembly
 
@@ -168,7 +168,7 @@ W projekcie **BlazorSignalRApp.Server** utwórz folder *Koncentratorów* (liczba
 
 [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Hubs/ChatHub.cs)]
 
-## <a name="add-signalr-services-and-an-endpoint-for-the-signalr-hub"></a>Dodawanie usług SignalR i punktu końcowego dla centrum SignalR
+## <a name="add-services-and-an-endpoint-for-the-signalr-hub"></a>Dodawanie usług i punktu końcowego dla centrum SignalR
 
 1. W projekcie **BlazorSignalRApp.Server** otwórz plik *Startup.cs.*
 
@@ -178,15 +178,13 @@ W projekcie **BlazorSignalRApp.Server** utwórz folder *Koncentratorów* (liczba
    using BlazorSignalRApp.Server.Hubs;
    ```
 
-1. Dodaj usługi SignalR `Startup.ConfigureServices`do:
+1. Dodaj usługi signalr i response `Startup.ConfigureServices`compression middleware do:
 
-   ```csharp
-   services.AddSignalR();
-   ```
+   [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Startup.cs?name=snippet_ConfigureServices&highlight=3,5-9)]
 
-1. Pomiędzy `Startup.Configure` punktami końcowymi dla domyślnej trasy kontrolera a rezerwowym po stronie klienta dodaj punkt końcowy dla koncentratora:
+1. Pomiędzy `Startup.Configure` punktami końcowymi dla kontrolerów i rezerwowego po stronie klienta, dodaj punkt końcowy dla koncentratora:
 
-   [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Startup.cs?name=snippet&highlight=4)]
+   [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Startup.cs?name=snippet_UseEndpoints&highlight=4)]
 
 ## <a name="add-razor-component-code-for-chat"></a>Dodawanie kodu komponentu Razor do czatu
 
@@ -202,7 +200,7 @@ W projekcie **BlazorSignalRApp.Server** utwórz folder *Koncentratorów* (liczba
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-1. W **Eksploratorze rozwiązań**wybierz projekt **BlazorSignalRApp.Server.** Naciśnij **klawisze Ctrl+F5,** aby uruchomić aplikację bez debugowania.
+1. W **Eksploratorze rozwiązań**wybierz projekt **BlazorSignalRApp.Server.** Naciśnij <kbd>klawisz F5,</kbd> aby uruchomić aplikację za pomocą debugowania lub <kbd>Ctrl</kbd>+<kbd>F5,</kbd> aby uruchomić aplikację bez debugowania.
 
 1. Skopiuj adres URL z paska adresu, otwórz inne wystąpienie lub kartę przeglądarki i wklej adres URL na pasku adresu.
 
@@ -214,7 +212,13 @@ W projekcie **BlazorSignalRApp.Server** utwórz folder *Koncentratorów* (liczba
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-1. Wybierz **polecenie Uruchom debugowanie** > **bez debugowania** z paska narzędzi.
+1. Gdy program VS Code oferuje utworzenie profilu uruchamiania aplikacji Serwer (*.vscode/launch.json),* `program` wpis jest podobny`{APPLICATION NAME}.Server.dll`do następującego, aby wskazać zestaw aplikacji ( ):
+
+   ```json
+   "program": "${workspaceFolder}/Server/bin/Debug/netcoreapp3.1/{APPLICATION NAME}.Server.dll"
+   ```
+
+1. Naciśnij <kbd>klawisz F5,</kbd> aby uruchomić aplikację za pomocą debugowania lub <kbd>Ctrl</kbd>+<kbd>F5,</kbd> aby uruchomić aplikację bez debugowania.
 
 1. Skopiuj adres URL z paska adresu, otwórz inne wystąpienie lub kartę przeglądarki i wklej adres URL na pasku adresu.
 
@@ -226,7 +230,7 @@ W projekcie **BlazorSignalRApp.Server** utwórz folder *Koncentratorów* (liczba
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-1. Na **pasku** bocznym rozwiązanie wybierz projekt **BlazorSignalRApp.Server.** Z menu wybierz **polecenie Uruchom** > **start bez debugowania**.
+1. Na **pasku** bocznym rozwiązanie wybierz projekt **BlazorSignalRApp.Server.** Naciśnij przycisk -<kbd>↩</kbd><kbd>⌘</kbd>+**, <kbd>⌘</kbd>+aby uruchomić aplikację z debugowaniem lub <kbd>-</kbd>+<kbd>↩</kbd> , aby uruchomić aplikację bez debugowania.
 
 1. Skopiuj adres URL z paska adresu, otwórz inne wystąpienie lub kartę przeglądarki i wklej adres URL na pasku adresu.
 
@@ -271,6 +275,6 @@ Aby dowiedzieć Blazor się więcej Blazor o tworzeniu aplikacji, zobacz dokumen
 > [!div class="nextstepaction"]
 > <xref:blazor/index>
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:signalr/introduction>

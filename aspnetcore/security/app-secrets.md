@@ -6,12 +6,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 4/20/2020
 uid: security/app-secrets
-ms.openlocfilehash: 9d4e59c003afc253971ee64fce523c7188d3582a
-ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
+ms.openlocfilehash: c62c5e59ad0a72506fb72bda82aa821a4f1719c8
+ms.sourcegitcommit: c9d1208e86160615b2d914cce74a839ae41297a8
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81661804"
+ms.lasthandoff: 04/22/2020
+ms.locfileid: "81791578"
 ---
 # <a name="safe-storage-of-app-secrets-in-development-in-aspnet-core"></a>Bezpieczne przechowywanie tajemnic aplikacji w rozwoju w ASP.NET Core
 
@@ -75,7 +75,7 @@ dotnet user-secrets init
 
 Poprzednie polecenie dodaje `UserSecretsId` element w `PropertyGroup` pliku *csproj.* Domyślnie wewnętrzny tekst `UserSecretsId` jest identyfikatorem GUID. Tekst wewnętrzny jest dowolny, ale jest unikatowy dla projektu.
 
-[!code-xml[](app-secrets/samples/2.x/UserSecrets/UserSecrets.csproj?name=snippet_PropertyGroup&highlight=3)]
+[!code-xml[](app-secrets/samples/3.x/UserSecrets/UserSecrets.csproj?name=snippet_PropertyGroup&highlight=3)]
 
 W programie Visual Studio kliknij prawym przyciskiem myszy projekt w Eksploratorze rozwiązań i wybierz polecenie **Zarządzaj wpisami tajnymi użytkowników** z menu kontekstowego. Ten gest `UserSecretsId` dodaje element wypełniony identyfikatorem GUID do pliku *csproj.*
 
@@ -142,18 +142,17 @@ Otwórz powłokę polecenia i wykonaj następujące polecenie:
 
 [Interfejs API konfiguracji ASP.NET Core](xref:fundamentals/configuration/index) zapewnia dostęp do tajnych wpisów tajnych menedżera.
 
-W ASP.NET Core 2.0 lub nowszym źródło konfiguracji wpisów tajnych użytkowników <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder%2A> jest automatycznie dodawane w trybie rozwoju, gdy projekt wywołuje zainicjowanie nowego wystąpienia hosta ze wstępnie skonfigurowanymi ustawieniami domyślnymi. `CreateDefaultBuilder`połączenia, <xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A> <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.EnvironmentName> gdy <xref:Microsoft.AspNetCore.Hosting.EnvironmentName.Development>jest:
+Źródło konfiguracji wpisów tajnych użytkowników jest automatycznie <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder%2A> dodawane w trybie programowania, gdy projekt wywołuje zainicjowanie nowego wystąpienia hosta ze wstępnie skonfigurowanymi ustawieniami domyślnymi. `CreateDefaultBuilder`połączenia, <xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A> <xref:Microsoft.Extensions.Hosting.IHostEnvironment.EnvironmentName> gdy <xref:Microsoft.Extensions.Hosting.EnvironmentName.Development>jest:
 
 [!code-csharp[](app-secrets/samples/3.x/UserSecrets/Program.cs?name=snippet_CreateHostBuilder&highlight=2)]
 
-Gdy `CreateDefaultBuilder` nie jest wywoływana, dodaj źródło konfiguracji <xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A> wpisów `Startup` tajnych użytkownika jawnie wywołując w konstruktorze. Wywołaj `AddUserSecrets` tylko wtedy, gdy aplikacja działa w środowisku deweloperskim, jak pokazano w poniższym przykładzie:
+Gdy `CreateDefaultBuilder` nie jest wywoływana, dodaj źródło konfiguracji <xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A>wpisów tajnych użytkownika jawnie, wywołując program . Wywołaj `AddUserSecrets` tylko wtedy, gdy aplikacja działa w środowisku deweloperskim, jak pokazano w poniższym przykładzie:
 
-[!code-csharp[](app-secrets/samples/3.x/UserSecrets/Startup2.cs?name=snippet_StartupConstructor&highlight=12)]
+[!code-csharp[](app-secrets/samples/3.x/UserSecrets/Program2.cs?name=snippet_Host&highlight=6-9)]
 
 Wpisy tajne użytkownika można `Configuration` pobrać za pośrednictwem interfejsu API:
 
-[!code-csharp[](app-secrets/samples/2.x/UserSecrets/Startup.cs?name=snippet_StartupClass&highlight=14)]
-
+[!code-csharp[](app-secrets/samples/3.x/UserSecrets/Startup.cs?name=snippet_StartupClass&highlight=14)]
 
 ## <a name="map-secrets-to-a-poco"></a>Mapowanie wpisów tajnych do poco
 
@@ -163,17 +162,17 @@ Mapowanie całego obiektu literału do POCO (prosta klasa .NET z właściwościa
 
 Aby zamapować poprzednie wpisy tajne `Configuration` do poco, należy użyć funkcji [powiązania wykresu obiektu](xref:fundamentals/configuration/index#bind-to-an-object-graph) interfejsu API. Następujący kod wiąże się `MovieSettings` z niestandardowym poco i uzyskuje dostęp do wartości `ServiceApiKey` właściwości:
 
-[!code-csharp[](app-secrets/samples/2.x/UserSecrets/Startup3.cs?name=snippet_BindToObjectGraph)]
+[!code-csharp[](app-secrets/samples/3.x/UserSecrets/Startup3.cs?name=snippet_BindToObjectGraph)]
 
 `Movies:ConnectionString` Wpisy `Movies:ServiceApiKey` tajne są mapowane do `MovieSettings`odpowiednich właściwości w:
 
-[!code-csharp[](app-secrets/samples/2.x/UserSecrets/Models/MovieSettings.cs?name=snippet_MovieSettingsClass)]
+[!code-csharp[](app-secrets/samples/3.x/UserSecrets/Models/MovieSettings.cs?name=snippet_MovieSettingsClass)]
 
 ## <a name="string-replacement-with-secrets"></a>Wymiana ciągów z wpisami tajnymi
 
 Przechowywanie haseł w postaci zwykłego tekstu jest niezabezpieczone. Na przykład parametry połączenia bazy danych przechowywane w *appsettings.json* może zawierać hasło dla określonego użytkownika:
 
-[!code-json[](app-secrets/samples/2.x/UserSecrets/appsettings-unsecure.json?highlight=3)]
+[!code-json[](app-secrets/samples/3.x/UserSecrets/appsettings-unsecure.json?highlight=3)]
 
 Bezpieczniejszym podejściem jest przechowywanie hasła jako klucza tajnego. Przykład:
 
@@ -183,11 +182,11 @@ dotnet user-secrets set "DbPassword" "pass123"
 
 Usuń `Password` parę klucz-wartość z ciągu połączenia w *pliku appsettings.json*. Przykład:
 
-[!code-json[](app-secrets/samples/2.x/UserSecrets/appsettings.json?highlight=3)]
+[!code-json[](app-secrets/samples/3.x/UserSecrets/appsettings.json?highlight=3)]
 
 Wartość klucza tajnego można <xref:System.Data.SqlClient.SqlConnectionStringBuilder> ustawić na <xref:System.Data.SqlClient.SqlConnectionStringBuilder.Password%2A> właściwość obiektu, aby zakończyć parametry połączenia:
 
-[!code-csharp[](app-secrets/samples/2.x/UserSecrets/Startup2.cs?name=snippet_StartupClass&highlight=14-17)]
+[!code-csharp[](app-secrets/samples/3.x/UserSecrets/Startup2.cs?name=snippet_StartupClass&highlight=14-17)]
 
 ## <a name="list-the-secrets"></a>Lista wpisów tajnych
 
@@ -388,15 +387,13 @@ Otwórz powłokę polecenia i wykonaj następujące polecenie:
 
 Jeśli projekt jest przeznaczony dla platformy .NET Framework, zainstaluj pakiet [Microsoft.Extensions.Configuration.UserSecrets](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.UserSecrets) NuGet.
 
-
 W ASP.NET Core 2.0 lub nowszym źródło konfiguracji wpisów tajnych użytkowników <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder%2A> jest automatycznie dodawane w trybie rozwoju, gdy projekt wywołuje zainicjowanie nowego wystąpienia hosta ze wstępnie skonfigurowanymi ustawieniami domyślnymi. `CreateDefaultBuilder`połączenia, <xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A> <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.EnvironmentName> gdy <xref:Microsoft.AspNetCore.Hosting.EnvironmentName.Development>jest:
 
 [!code-csharp[](app-secrets/samples/2.x/UserSecrets/Program.cs?name=snippet_CreateWebHostBuilder&highlight=2)]
 
-
 Gdy `CreateDefaultBuilder` nie jest wywoływana, dodaj źródło konfiguracji <xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A> wpisów `Startup` tajnych użytkownika jawnie wywołując w konstruktorze. Wywołaj `AddUserSecrets` tylko wtedy, gdy aplikacja działa w środowisku deweloperskim, jak pokazano w poniższym przykładzie:
 
-[!code-csharp[](app-secrets/samples/1.x/UserSecrets/Startup.cs?name=snippet_StartupConstructor&highlight=12)]
+[!code-csharp[](app-secrets/samples/2.x/UserSecrets/Startup3.cs?name=snippet_StartupConstructor&highlight=12)]
 
 Wpisy tajne użytkownika można `Configuration` pobrać za pośrednictwem interfejsu API:
 

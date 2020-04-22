@@ -5,21 +5,21 @@ description: Dowiedz się, jak tworzyć składniki razor i używać ich, w tym j
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/25/2020
+ms.date: 04/21/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/components
-ms.openlocfilehash: bc1d07aef9cd60b89343a034168daa6754f4421b
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 4434636992cb2506ef6525996690946f97c43764
+ms.sourcegitcommit: c9d1208e86160615b2d914cce74a839ae41297a8
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80306507"
+ms.lasthandoff: 04/22/2020
+ms.locfileid: "81791487"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>Tworzenie i używanie ASP.NET podstawowych komponentów maszynki do golenia
 
-Autorstwa [Luke'a Lathama](https://github.com/guardrex) i [Daniela Rotha](https://github.com/danroth27)
+[Luke Latham](https://github.com/guardrex), [Daniel Roth](https://github.com/danroth27)i [Tobias Bartsch](https://www.aveo-solutions.com/)
 
 [Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([jak pobrać](xref:index#how-to-download-a-sample))
 
@@ -141,6 +141,9 @@ W poniższym przykładzie z `ParentComponent` przykładowej aplikacji `Title` us
 *Strony/ParentComponent.brzytwa:*
 
 [!code-razor[](components/samples_snapshot/ParentComponent.razor?highlight=5-6)]
+
+> [!WARNING]
+> Nie należy tworzyć komponentów, które zapisują do własnych *parametrów składnika,* zamiast tego należy użyć pola prywatnego. Aby uzyskać więcej informacji, zobacz [Nie należy tworzyć składników, które zapisują do własnych właściwości parametrów](#dont-create-components-that-write-to-their-own-parameter-properties) sekcji.
 
 ## <a name="child-content"></a>Zawartość podrzędna
 
@@ -400,7 +403,7 @@ Rozważmy następujący przykład:
 
 Zawartość `People` kolekcji może ulec zmianie za pomocą wpisów wstawionych, usuniętych lub ponownie uporządkowanych. Gdy składnik rerenders, `<DetailsEditor>` składnik może ulec `Details` zmianie, aby otrzymać różne wartości parametrów. Może to spowodować bardziej złożone rerendering niż oczekiwano. W niektórych przypadkach rerendering może prowadzić do widocznych różnic w zachowaniu, takich jak utrata fokusu elementu.
 
-Proces mapowania można kontrolować `@key` za pomocą atrybutu dyrektywy. `@key`powoduje, że algorytm diffing gwarantuje zachowanie elementów lub komponentów w oparciu o wartość klucza:
+Proces mapowania można kontrolować [`@key`](xref:mvc/views/razor#key) za pomocą atrybutu dyrektywy. `@key`powoduje, że algorytm diffing gwarantuje zachowanie elementów lub komponentów w oparciu o wartość klucza:
 
 ```csharp
 @foreach (var person in People)
@@ -453,6 +456,99 @@ Ogólnie rzecz biorąc, ma sens dostarczanie jednego z `@key`następujących rod
 * Unikatowe identyfikatory (na przykład wartości `int` `string`klucza `Guid`podstawowego typu , lub ).
 
 Upewnij się, `@key` że wartości używane dla nie kolidują ze sobą. Jeśli wartości kolizji zostaną wykryte w Blazor tym samym elemencie nadrzędnym, zgłasza wyjątek, ponieważ nie można deterministycznie mapować stare elementy lub składniki do nowych elementów lub składników. Używaj tylko różnych wartości, takich jak wystąpienia obiektów lub wartości klucza podstawowego.
+
+## <a name="dont-create-components-that-write-to-their-own-parameter-properties"></a>Nie należy tworzyć składników, które zapisują do własnych właściwości parametrów
+
+Parametry są zastępowane pod następującymi warunkami:
+
+* Zawartość składnika podrzędnego jest renderowana za pomocą pliku `RenderFragment`.
+* <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A>jest wywoływana w komponencie nadrzędnym.
+
+Parametry są resetowane, ponieważ składnik <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> nadrzędny rerenders, gdy jest wywoływana i nowe wartości parametrów są dostarczane do składnika podrzędnego.
+
+Należy wziąć `Expander` pod uwagę następujący składnik, który:
+
+* Renderuje zawartość podrzędną.
+* Przełączniki przedstawiające zawartość podrzędną z parametrem komponentu.
+
+```razor
+<div @onclick="@Toggle">
+    Toggle (Expanded = @Expanded)
+
+    @if (Expanded)
+    {
+        @ChildContent
+    }
+</div>
+
+@code {
+    [Parameter]
+    public bool Expanded { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    private void Toggle()
+    {
+        Expanded = !Expanded;
+    }
+}
+```
+
+Komponent `Expander` jest dodawany do składnika `StateHasChanged`nadrzędnego, który może wywołać:
+
+```razor
+<Expander Expanded="true">
+    <h1>Hello, world!</h1>
+</Expander>
+
+<Expander Expanded="true" />
+
+<button @onclick="@(() => StateHasChanged())">
+    Call StateHasChanged
+</button>
+```
+
+Początkowo `Expander` składniki zachowują się niezależnie, gdy ich `Expanded` właściwości są przełączane. Składniki podrzędne zachowują swoje stany zgodnie z oczekiwaniami. Po `StateHasChanged` wywołaniu w chyłce `Expanded` parametr pierwszego komponentu podrzędnego`true`jest resetowany z powrotem do jego wartości początkowej ( ). Wartość `Expander` drugiego składnika `Expanded` nie jest resetowana, ponieważ w drugim składniku nie jest renderowana żadna zawartość podrzędna.
+
+Aby zachować stan w poprzednim scenariuszu, `Expander` należy użyć pola *prywatnego* w składniku, aby zachować jego stan przełączania.
+
+Następujący `Expander` składnik:
+
+* Akceptuje wartość `Expanded` parametru składnika z elementu nadrzędnego.
+* Przypisuje wartość parametru komponentu do`_expanded`pola *prywatnego* ( ) w [zdarzeniu OnInitialized](xref:blazor/lifecycle#component-initialization-methods).
+* Używa pola prywatnego do zachowania jego wewnętrznego stanu przełączania.
+
+```razor
+<div @onclick="@Toggle">
+    Toggle (Expanded = @_expanded)
+
+    @if (_expanded)
+    {
+        @ChildContent
+    }
+</div>
+
+@code {
+    [Parameter]
+    public bool Expanded { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    private bool _expanded;
+
+    protected override void OnInitialized()
+    {
+        _expanded = Expanded;
+    }
+
+    private void Toggle()
+    {
+        _expanded = !_expanded;
+    }
+}
+```
 
 ## <a name="partial-class-support"></a>Obsługa częściowej klasy
 
@@ -868,6 +964,6 @@ Podobnie obrazy SVG są obsługiwane w regułach CSS pliku arkusza stylów (*.cs
 
 Jednak wbudowane znaczniki SVG nie są obsługiwane we wszystkich scenariuszach. Jeśli `<svg>` umieścisz znacznik bezpośrednio w pliku komponentu (*.brzytwa*), podstawowe renderowanie obrazu jest obsługiwane, ale wiele zaawansowanych scenariuszy nie jest jeszcze obsługiwanych. Na przykład `<use>` tagi nie są obecnie przestrzegane i `@bind` nie mogą być używane z niektórymi tagami SVG. Oczekujemy, że zajmiemy się tymi ograniczeniami w przyszłej wersji.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:security/blazor/server>&ndash; Zawiera wskazówki Blazor dotyczące tworzenia aplikacji serwera, które muszą zmagać się z wyczerpaniem zasobów.

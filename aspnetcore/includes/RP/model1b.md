@@ -6,7 +6,7 @@ Dodaj następujące właściwości do `Movie` klasy:
 Klasa `Movie` zawiera:
 
 * Pole `ID` jest wymagane przez bazę danych dla klucza podstawowego.
-* `[DataType(DataType.Date)]`: Atrybut [DataType](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.internal.datatypeattributeadapter) określa typ danych (Data). Z tym atrybutem:
+* `[DataType(DataType.Date)]`: Atrybut [DataType](xref:System.ComponentModel.DataAnnotations.DataTypeAttribute) określa typ danych (Data). Z tym atrybutem:
 
   * Użytkownik nie musi wprowadzać informacji o godzinie w polu daty.
   * Wyświetlana jest tylko data, a nie informacje o czasie.

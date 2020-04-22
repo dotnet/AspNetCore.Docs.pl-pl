@@ -1,19 +1,19 @@
 ---
-title: Dzwoń z usług gRPC za pomocą klienta .NET
+title: Wywoływanie usług gRPC przy użyciu klienta platformy .NET
 author: jamesnk
 description: Dowiedz się, jak dzwonić do usług gRPC z klientem gRPC .NET.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
-ms.date: 08/21/2019
+ms.date: 04/21/2020
 uid: grpc/client
-ms.openlocfilehash: 6a6a649f7194354b16f3d67160be02428cc01170
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: aefa52a5c4c66178c5978aebd4cd9b00559c7f54
+ms.sourcegitcommit: c9d1208e86160615b2d914cce74a839ae41297a8
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78667175"
+ms.lasthandoff: 04/22/2020
+ms.locfileid: "81791546"
 ---
-# <a name="call-grpc-services-with-the-net-client"></a>Dzwoń z usług gRPC za pomocą klienta .NET
+# <a name="call-grpc-services-with-the-net-client"></a>Wywoływanie usług gRPC przy użyciu klienta platformy .NET
 
 Biblioteka klienta gRPC .NET jest dostępna w pakiecie [Grpc.Net.Client](https://www.nuget.org/packages/Grpc.Net.Client) NuGet. W tym dokumencie wyjaśniono, jak:
 
@@ -50,7 +50,7 @@ Wydajność i wykorzystanie kanałów i klientów:
 * Kanał i klientów utworzonych z kanału mogą być bezpiecznie używane przez wiele wątków.
 * Klienci utworzone z kanału można wykonywać wiele jednoczesnych połączeń.
 
-`GrpcChannel.ForAddress`nie jest jedyną opcją tworzenia klienta gRPC. Jeśli dzwonisz do usług gRPC z aplikacji ASP.NET Core, rozważ [integrację fabryki klienta gRPC.](xref:grpc/clientfactory) Integracja gRPC z `HttpClientFactory` oferuje scentralizowaną alternatywę dla tworzenia klientów gRPC.
+`GrpcChannel.ForAddress`nie jest jedyną opcją tworzenia klienta gRPC. W przypadku wywoływania usług gRPC z aplikacji ASP.NET Core należy rozważyć [integrację fabryki klienta gRPC](xref:grpc/clientfactory). Integracja gRPC z `HttpClientFactory` oferuje scentralizowaną alternatywę dla tworzenia klientów gRPC.
 
 > [!NOTE]
 > Dodatkowa konfiguracja jest wymagana do [wywoływania niezabezpieczonych usług gRPC z klientem .NET](xref:grpc/troubleshoot#call-insecure-grpc-services-with-net-core-client).
@@ -62,7 +62,7 @@ Wydajność i wykorzystanie kanałów i klientów:
 
 Wywołanie gRPC jest inicjowane przez wywołanie metody na kliencie. Klient gRPC będzie obsługiwać serializacji wiadomości i adresowania wywołania gRPC do poprawnej usługi.
 
-gRPC ma różne rodzaje metod. Sposób korzystania z klienta do wywołania gRPC zależy od typu metody, którą wywołujesz. Typy metod gRPC to:
+gRPC ma różne rodzaje metod. Sposób, w jaki klient jest używany do wywołania gRPC zależy od typu metody wywoływanej. Typy metod gRPC to:
 
 * Jednoargumentowy
 * Przesyłanie strumieniowe serwera
@@ -92,48 +92,45 @@ Wywołanie przesyłania strumieniowego serwera rozpoczyna się od wysłania prze
 
 ```csharp
 var client = new Greet.GreeterClient(channel);
-using (var call = client.SayHellos(new HelloRequest { Name = "World" }))
+using var call = client.SayHellos(new HelloRequest { Name = "World" });
+
+while (await call.ResponseStream.MoveNext())
 {
-    while (await call.ResponseStream.MoveNext())
-    {
-        Console.WriteLine("Greeting: " + call.ResponseStream.Current.Message);
-        // "Greeting: Hello World" is written multiple times
-    }
+    Console.WriteLine("Greeting: " + call.ResponseStream.Current.Message);
+    // "Greeting: Hello World" is written multiple times
 }
 ```
 
-Jeśli używasz języka C# 8 `await foreach` lub nowszego, składni może służyć do odczytywania wiadomości. Metoda `IAsyncStreamReader<T>.ReadAllAsync()` rozszerzenia odczytuje wszystkie komunikaty ze strumienia odpowiedzi:
+Podczas korzystania z języka C# `await foreach` 8 lub nowszego składni może służyć do odczytywania wiadomości. Metoda `IAsyncStreamReader<T>.ReadAllAsync()` rozszerzenia odczytuje wszystkie komunikaty ze strumienia odpowiedzi:
 
 ```csharp
 var client = new Greet.GreeterClient(channel);
-using (var call = client.SayHellos(new HelloRequest { Name = "World" }))
+using var call = client.SayHellos(new HelloRequest { Name = "World" });
+
+await foreach (var response in call.ResponseStream.ReadAllAsync())
 {
-    await foreach (var response in call.ResponseStream.ReadAllAsync())
-    {
-        Console.WriteLine("Greeting: " + response.Message);
-        // "Greeting: Hello World" is written multiple times
-    }
+    Console.WriteLine("Greeting: " + response.Message);
+    // "Greeting: Hello World" is written multiple times
 }
 ```
 
 ### <a name="client-streaming-call"></a>Połączenie strumieniowe klienta
 
-Połączenie przesyłania strumieniowego klienta rozpoczyna się *bez* wysyłania wiadomości przez klienta. Klient może wybrać opcję `RequestStream.WriteAsync`wysyłania wiadomości za pomocą pliku . Po zakończeniu wysyłania `RequestStream.CompleteAsync` wiadomości przez klienta należy wywołać, aby powiadomić usługę. Wywołanie jest zakończone, gdy usługa zwraca komunikat odpowiedzi.
+Połączenie przesyłania strumieniowego klienta rozpoczyna się *bez* wysyłania wiadomości przez klienta. Klient może wybrać opcję `RequestStream.WriteAsync`wysyłania wiadomości za pomocą pliku . Po zakończeniu wysyłania wiadomości `RequestStream.CompleteAsync` przez klienta należy wywołać powiadomienie usługi. Wywołanie jest zakończone, gdy usługa zwraca komunikat odpowiedzi.
 
 ```csharp
 var client = new Counter.CounterClient(channel);
-using (var call = client.AccumulateCount())
-{
-    for (var i = 0; i < 3; i++)
-    {
-        await call.RequestStream.WriteAsync(new CounterRequest { Count = 1 });
-    }
-    await call.RequestStream.CompleteAsync();
+using var call = client.AccumulateCount();
 
-    var response = await call;
-    Console.WriteLine($"Count: {response.Count}");
-    // Count: 3
+for (var i = 0; i < 3; i++)
+{
+    await call.RequestStream.WriteAsync(new CounterRequest { Count = 1 });
 }
+await call.RequestStream.CompleteAsync();
+
+var response = await call;
+Console.WriteLine($"Count: {response.Count}");
+// Count: 3
 ```
 
 ### <a name="bi-directional-streaming-call"></a>Dwukierunkowe połączenie strumieniowe
@@ -141,40 +138,100 @@ using (var call = client.AccumulateCount())
 Dwukierunkowe połączenie przesyłania strumieniowego rozpoczyna się *bez* wysyłania wiadomości przez klienta. Klient może wybrać opcję `RequestStream.WriteAsync`wysyłania wiadomości za pomocą pliku . Wiadomości przesyłane strumieniowo z `ResponseStream.MoveNext()` `ResponseStream.ReadAllAsync()`usługi są dostępne za pomocą pliku . Dwukierunkowe wywołanie przesyłania strumieniowego `ResponseStream` jest zakończone, gdy nie ma więcej wiadomości.
 
 ```csharp
-using (var call = client.Echo())
+var client = new Echo.EchoClient(channel);
+using var call = client.Echo();
+
+Console.WriteLine("Starting background task to receive messages");
+var readTask = Task.Run(async () =>
 {
-    Console.WriteLine("Starting background task to receive messages");
-    var readTask = Task.Run(async () =>
+    await foreach (var response in call.ResponseStream.ReadAllAsync())
     {
-        await foreach (var response in call.ResponseStream.ReadAllAsync())
-        {
-            Console.WriteLine(response.Message);
-            // Echo messages sent to the service
-        }
-    });
+        Console.WriteLine(response.Message);
+        // Echo messages sent to the service
+    }
+});
 
-    Console.WriteLine("Starting to send messages");
-    Console.WriteLine("Type a message to echo then press enter.");
-    while (true)
+Console.WriteLine("Starting to send messages");
+Console.WriteLine("Type a message to echo then press enter.");
+while (true)
+{
+    var result = Console.ReadLine();
+    if (string.IsNullOrEmpty(result))
     {
-        var result = Console.ReadLine();
-        if (string.IsNullOrEmpty(result))
-        {
-            break;
-        }
-
-        await call.RequestStream.WriteAsync(new EchoMessage { Message = result });
+        break;
     }
 
-    Console.WriteLine("Disconnecting");
-    await call.RequestStream.CompleteAsync();
-    await readTask;
+    await call.RequestStream.WriteAsync(new EchoMessage { Message = result });
 }
+
+Console.WriteLine("Disconnecting");
+await call.RequestStream.CompleteAsync();
+await readTask;
 ```
 
 Podczas dwukierunkowego połączenia przesyłania strumieniowego klient i usługa mogą wysyłać do siebie wiadomości w dowolnym momencie. Najlepsza logika klienta do interakcji z wywołaniem dwukierunkowym różni się w zależności od logiki usługi.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="access-grpc-trailers"></a>Dostęp do przyczep gRPC
+
+połączenia gRPC mogą zwracać przyczepy grpc. Przyczepy gRPC służą do podawania metadanych nazwy/wartości o połączeniu. Zwiastuny zapewniają podobną funkcjonalność do nagłówków HTTP, ale są odbierane po zakończeniu połączenia.
+
+Przyczepy gRPC są `GetTrailers()`dostępne za pomocą , który zwraca zbiór metadanych. Przyczepy są zwracane po zakończeniu odpowiedzi, dlatego przed wejściem do przyczep należy poczekać na wszystkie komunikaty odpowiedzi.
+
+Połączenia przesyłane strumieniowo `ResponseAsync` bez `GetTrailers()`emigo i klientów muszą czekać przed wywołaniem:
+
+```csharp
+var client = new Greet.GreeterClient(channel);
+using var call = client.SayHelloAsync(new HelloRequest { Name = "World" });
+var response = await call.ResponseAsync;
+
+Console.WriteLine("Greeting: " + response.Message);
+// Greeting: Hello World
+
+var trailers = call.GetTrailers();
+var myValue = trailers.First(e => e.Key == "my-trailer-name");
+```
+
+Serwer i dwukierunkowe połączenia przesyłania strumieniowego muszą `GetTrailers()`zakończyć się oczekiwaniem na strumień odpowiedzi przed wywołaniem:
+
+```csharp
+var client = new Greet.GreeterClient(channel);
+using var call = client.SayHellos(new HelloRequest { Name = "World" });
+
+await foreach (var response in call.ResponseStream.ReadAllAsync())
+{
+    Console.WriteLine("Greeting: " + response.Message);
+    // "Greeting: Hello World" is written multiple times
+}
+
+var trailers = call.GetTrailers();
+var myValue = trailers.First(e => e.Key == "my-trailer-name");
+```
+
+Przyczepy gRPC są `RpcException`również dostępne z . Usługa może zwrócić przyczepy wraz ze statusem gRPC nienajmki. W tej sytuacji przyczepy są pobierane z wyjątku zgłaszanych przez klienta gRPC:
+
+```csharp
+var client = new Greet.GreeterClient(channel);
+string myValue = null;
+
+try
+{
+    using var call = client.SayHelloAsync(new HelloRequest { Name = "World" });
+    var response = await call.ResponseAsync;
+
+    Console.WriteLine("Greeting: " + response.Message);
+    // Greeting: Hello World
+
+    var trailers = call.GetTrailers();
+    myValue = trailers.First(e => e.Key == "my-trailer-name");
+}
+catch (RpcException ex)
+{
+    var trailers = ex.Trailers;
+    myValue = trailers.First(e => e.Key == "my-trailer-name");
+}
+```
+
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:grpc/clientfactory>
 * <xref:grpc/basics>

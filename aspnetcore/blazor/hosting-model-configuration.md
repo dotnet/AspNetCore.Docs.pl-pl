@@ -10,12 +10,12 @@ no-loc:
 - Blazor
 - SignalR
 uid: blazor/hosting-model-configuration
-ms.openlocfilehash: 1b0f5f4071be7134d7de08615ec016ca6567385d
-ms.sourcegitcommit: 49c91ad4b69f4f8032394cbf2d5ae1b19a7f863b
+ms.openlocfilehash: 6a3731657d11faed0b005b429058343b2be4c44b
+ms.sourcegitcommit: c9d1208e86160615b2d914cce74a839ae41297a8
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "81544846"
+ms.lasthandoff: 04/22/2020
+ms.locfileid: "81791477"
 ---
 # <a name="aspnet-core-blazor-hosting-model-configuration"></a>konfiguracja modelu hostingowego ASP.NET Core Blazor
 
@@ -134,6 +134,10 @@ Pliki konfiguracyjne są buforowane do użytku w trybie offline. Dzięki [progre
 * Pliki *service-worker.js* i *service-worker-assets.js* muszą zostać przebudowane na kompilacji, która sygnalizuje aplikacji przy następnej wizycie online użytkownika, że aplikacja została ponownie rozmieszczona.
 
 Aby uzyskać więcej informacji na temat sposobu obsługi <xref:blazor/progressive-web-app#background-updates>aktualizacji w tle przez programy PWA, zobacz .
+
+### <a name="logging"></a>Rejestrowanie
+
+Aby uzyskać informacje na temat obsługi rejestrowania <xref:fundamentals/logging/index#create-logs-in-blazor-webassembly>blazora WebAssembly, zobacz .
 
 ## <a name="blazor-server"></a>Serwer Blazor
 

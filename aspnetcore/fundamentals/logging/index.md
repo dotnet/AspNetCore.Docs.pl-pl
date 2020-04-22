@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 4/17/2020
 uid: fundamentals/logging/index
-ms.openlocfilehash: a3c63b738d3eaa51249475b88d78572038348a7a
-ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
+ms.openlocfilehash: b897d0d775da62a11f01a64f39b47b6c5abebc8b
+ms.sourcegitcommit: c9d1208e86160615b2d914cce74a839ae41297a8
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81440743"
+ms.lasthandoff: 04/22/2020
+ms.locfileid: "81791561"
 ---
 # <a name="logging-in-net-core-and-aspnet-core"></a>Logowanie do .NET Core i ASP.NET Core
 
@@ -164,6 +164,23 @@ Jeśli trzeba skonfigurować usługę, która `ILogger<T>`zależy od , nadal mo�
 [!code-csharp[](index/samples/3.x/TodoApiSample/Startup.cs?name=snippet_ConfigureServices&highlight=6-10)]
 
 Poprzedni wyróżniony kod `Func` jest, który uruchamia po raz pierwszy kontener `MyService`DI musi skonstruować wystąpienie . W ten sposób można uzyskać dostęp do dowolnej z zarejestrowanych usług.
+
+### <a name="create-logs-in-blazor-webassembly"></a>Tworzenie dzienników w blazor webassembly
+
+Skonfiguruj rejestrowanie w aplikacjach Blazor WebAssembly z właściwością `WebAssemblyHostBuilder.Logging` w: `Program.Main`
+
+```csharp
+using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+
+...
+
+var builder = WebAssemblyHostBuilder.CreateDefault(args);
+
+builder.Logging.SetMinimumLevel(LogLevel.Debug);
+builder.Logging.AddProvider(new CustomLoggingProvider());
+```
+
+Właściwość `Logging` jest <xref:Microsoft.Extensions.Logging.ILoggingBuilder>typu, więc wszystkie metody <xref:Microsoft.Extensions.Logging.ILoggingBuilder> rozszerzenia dostępne `Logging`są również dostępne na .
 
 ### <a name="no-asynchronous-logger-methods"></a>Brak metod rejestratora asynchronii
 
@@ -822,7 +839,7 @@ Korzystanie z struktury innej firmy jest podobne do korzystania z jednego z wbud
 
 Aby uzyskać więcej informacji, zobacz dokumentację każdego dostawcy. Dostawcy rejestrowania innych firm nie są obsługiwani przez firmę Microsoft.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:fundamentals/logging/loggermessage>
 ::: moniker-end
@@ -1486,7 +1503,7 @@ Korzystanie z struktury innej firmy jest podobne do korzystania z jednego z wbud
 
 Aby uzyskać więcej informacji, zobacz dokumentację każdego dostawcy. Dostawcy rejestrowania innych firm nie są obsługiwani przez firmę Microsoft.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:fundamentals/logging/loggermessage>
 

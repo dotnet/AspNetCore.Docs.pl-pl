@@ -1,3 +1,3 @@
-<span data-ttu-id="824a0-101">Obszar <xref:Microsoft.AspNetCore.Components.Authorization?displayProperty=fullName> nazw jest udostępniany w całej aplikacji za pośrednictwem pliku *_Imports.razor:*</span><span class="sxs-lookup"><span data-stu-id="824a0-101">The <xref:Microsoft.AspNetCore.Components.Authorization?displayProperty=fullName> namespace is made available throughout the app via the *_Imports.razor* file:</span></span>
+<span data-ttu-id="194a0-101">Obszar <xref:Microsoft.AspNetCore.Components.Authorization?displayProperty=fullName> nazw jest udostępniany w całej aplikacji za pośrednictwem pliku *_Imports.razor:*</span><span class="sxs-lookup"><span data-stu-id="194a0-101">The <xref:Microsoft.AspNetCore.Components.Authorization?displayProperty=fullName> namespace is made available throughout the app via the *_Imports.razor* file:</span></span>
 
-[!code-razor[](imports-standalone.razor?highlight=2)]
+[!code-razor[](imports-standalone.razor?highlight=3)]

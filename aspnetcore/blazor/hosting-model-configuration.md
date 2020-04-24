@@ -1,41 +1,41 @@
 ---
-title: Konfiguracja modelu Blazor hostingu ASP.NET Core
+title: ASP.NET Core Blazor konfigurację modelu hostingu
 author: guardrex
-description: Dowiedz Blazor się więcej o konfiguracji modelu hostingu, w tym o tym, jak zintegrować komponenty Razor ze stronami Razor i aplikacjami MVC.
+description: Dowiedz Blazor się więcej o konfiguracji modelu hostingu, w tym o sposobie integrowania składników Razor z aplikacjami Razor Pages i MVC.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/16/2020
+ms.date: 04/23/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/hosting-model-configuration
-ms.openlocfilehash: 6a3731657d11faed0b005b429058343b2be4c44b
-ms.sourcegitcommit: c9d1208e86160615b2d914cce74a839ae41297a8
+ms.openlocfilehash: cf5776109368dc7353d7e21bcad1e947561e7eb4
+ms.sourcegitcommit: 7bb14d005155a5044c7902a08694ee8ccb20c113
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81791477"
+ms.lasthandoff: 04/24/2020
+ms.locfileid: "82111061"
 ---
-# <a name="aspnet-core-blazor-hosting-model-configuration"></a>konfiguracja modelu hostingowego ASP.NET Core Blazor
+# <a name="aspnet-core-blazor-hosting-model-configuration"></a>Konfiguracja modelu hostingu ASP.NET Core Blazor
 
-Przez [Daniel Roth](https://github.com/danroth27)
+Autorzy [Daniel Roth](https://github.com/danroth27) i [Luke Latham](https://github.com/guardrex)
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
-W tym artykule omówiono konfigurację modelu hostingu.
+W tym artykule opisano hostowanie konfiguracji modelu.
 
 ## <a name="blazor-webassembly"></a>Zestaw WebAssembly Blazor
 
 ### <a name="environment"></a>Środowisko
 
-Podczas uruchamiania aplikacji lokalnie środowiska domyślnie rozwoju. Po opublikowaniu aplikacji środowisko domyślnie ma wartość Produkcja.
+Podczas lokalnego uruchamiania aplikacji środowisko jest domyślnie opracowywane. Gdy aplikacja zostanie opublikowana, środowisko jest domyślne dla środowiska produkcyjnego.
 
-Hostowana aplikacja Blazor WebAssembly odbiera środowisko z serwera za pośrednictwem oprogramowania pośredniczącego, `blazor-environment` które komunikuje środowisko z przeglądarką przez dodanie nagłówka. Wartością nagłówka jest środowisko. Hostowana aplikacja Blazor i aplikacja serwera współużytkuje to samo środowisko. Aby uzyskać więcej informacji, w tym <xref:fundamentals/environments>jak skonfigurować środowisko, zobacz .
+Hostowana aplikacja webassembly Blazor pobiera środowisko z serwera za pośrednictwem oprogramowania pośredniczącego, które komunikuje środowisko z przeglądarką przez dodanie `blazor-environment` nagłówka. Wartość nagłówka to środowisko. Hostowana aplikacja Blazor i aplikacja serwera współużytkują to samo środowisko. Aby uzyskać więcej informacji, w tym o sposobie konfigurowania środowiska, <xref:fundamentals/environments>Zobacz.
 
-W przypadku autonomicznej aplikacji działającej lokalnie `blazor-environment` serwer deweloperów dodaje nagłówek w celu określenia środowiska deweloperskiego. Aby określić środowisko dla innych środowisk `blazor-environment` hostingowych, dodaj nagłówek.
+W przypadku aplikacji autonomicznej uruchomionej lokalnie serwer programistyczny dodaje `blazor-environment` nagłówek, aby określić środowisko programistyczne. Aby określić środowisko dla innych środowisk hostingu, Dodaj `blazor-environment` nagłówek.
 
-W poniższym przykładzie dla usług IIS dodaj niestandardowy nagłówek do opublikowanego pliku *web.config.* Plik *web.config* znajduje się w folderze *bin/release/{TARGET FRAMEWORK}/publish:*
+W poniższym przykładzie dla usług IIS Dodaj nagłówek niestandardowy do opublikowanego pliku *Web. config* . Plik *Web. config* znajduje się w folderze *bin/Release/{Target Framework}/Publish* :
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -54,9 +54,9 @@ W poniższym przykładzie dla usług IIS dodaj niestandardowy nagłówek do opub
 ```
 
 > [!NOTE]
-> Aby użyć niestandardowego pliku *web.config* dla usług IIS, który nie jest zastępowany <xref:host-and-deploy/blazor/webassembly#use-a-custom-webconfig>podczas publikowania aplikacji w folderze *publikowania,* zobacz .
+> Aby użyć niestandardowego pliku *Web. config* dla usług IIS, które nie są zastępowane podczas publikowania aplikacji w folderze *publikowania* , zobacz <xref:host-and-deploy/blazor/webassembly#use-a-custom-webconfig>.
 
-Uzyskaj środowisko aplikacji w składniku, `IWebAssemblyHostEnvironment` wstrzykując i odczytując `Environment` właściwość:
+Uzyskaj środowisko aplikacji w składniku, wprowadzając `IWebAssemblyHostEnvironment` i odczytując `Environment` Właściwość:
 
 ```razor
 @page "/"
@@ -68,7 +68,7 @@ Uzyskaj środowisko aplikacji w składniku, `IWebAssemblyHostEnvironment` wstrzy
 <p>Environment: @HostEnvironment.Environment</p>
 ```
 
-Podczas uruchamiania `WebAssemblyHostBuilder` udostępnia `IWebAssemblyHostEnvironment` za `HostEnvironment` pośrednictwem właściwości, która umożliwia deweloperom mają logiki specyficzne dla środowiska w kodzie:
+Podczas uruchamiania program `WebAssemblyHostBuilder` ujawnia `IWebAssemblyHostEnvironment` `HostEnvironment` Właściwość przez, co umożliwia deweloperom zdefiniowanie w kodzie logiki specyficznej dla środowiska:
 
 ```csharp
 if (builder.HostEnvironment.Environment == "Custom")
@@ -77,12 +77,12 @@ if (builder.HostEnvironment.Environment == "Custom")
 };
 ```
 
-Następujące metody rozszerzenia wygody umożliwiają sprawdzanie bieżącego środowiska dla nazw środowiska deweloperskiego, produkcyjnego, przemieszczania i środowiska niestandardowego:
+Następujące wygodne metody rozszerzające umożliwiają sprawdzanie bieżącego środowiska pod kątem nazw środowisk deweloperskich, produkcyjnych, tymczasowych i niestandardowych:
 
 * `IsDevelopment()`
 * `IsProduction()`
 * `IsStaging()`
-* 'IsEnvironment("{NAZWA ŚRODOWISKA}")
+* "Isenvironment (" {Nazwa środowiska} ")
 
 ```csharp
 if (builder.HostEnvironment.IsStaging())
@@ -96,16 +96,25 @@ if (builder.HostEnvironment.IsEnvironment("Custom"))
 };
 ```
 
-Właściwość `IWebAssemblyHostEnvironment.BaseAddress` może być używana `NavigationManager` podczas uruchamiania, gdy usługa nie jest dostępna.
+`IWebAssemblyHostEnvironment.BaseAddress` Właściwość może być używana podczas uruchamiania, `NavigationManager` gdy usługa jest niedostępna.
 
 ### <a name="configuration"></a>Konfigurowanie
 
-Od ASP.NET wersji Core 3.2 Preview 3[(obecna wersja to 3.2 Preview 4),](xref:blazor/get-started)Blazor WebAssembly obsługuje konfigurację z:
+Zestaw webassembly Blazor obsługuje konfigurację z:
 
-* *wwwroot/appsettings.json*
-* *wwwroot/appsettings. {ŚRODOWISKO}.json*
+* Domyślnie [dostawca konfiguracji plików](xref:fundamentals/configuration/index#file-configuration-provider) dla plików ustawień aplikacji:
+  * *wwwroot/appSettings. JSON*
+  * *wwwroot/appSettings. {ENVIRONMENT}. JSON*
+* Inni [dostawcy konfiguracji](xref:fundamentals/configuration/index) zarejestrowani przez aplikację.
 
-Dodaj plik *appsettings.json* w folderze *wwwroot:*
+> [!WARNING]
+> Konfiguracja w aplikacji Blazor webassembly jest widoczna dla użytkowników. **Nie przechowuj wpisów tajnych aplikacji ani poświadczeń w konfiguracji.**
+
+Aby uzyskać więcej informacji na temat dostawców konfiguracji <xref:fundamentals/configuration/index>, zobacz.
+
+#### <a name="app-settings-configuration"></a>Konfiguracja ustawień aplikacji
+
+*wwwroot/appSettings. JSON*:
 
 ```json
 {
@@ -113,7 +122,7 @@ Dodaj plik *appsettings.json* w folderze *wwwroot:*
 }
 ```
 
-Wstrzyknąć wystąpienie <xref:Microsoft.Extensions.Configuration.IConfiguration> do składnika, aby uzyskać dostęp do danych konfiguracyjnych:
+Wsuń <xref:Microsoft.Extensions.Configuration.IConfiguration> wystąpienie do składnika w celu uzyskania dostępu do danych konfiguracji:
 
 ```razor
 @page "/"
@@ -125,27 +134,132 @@ Wstrzyknąć wystąpienie <xref:Microsoft.Extensions.Configuration.IConfiguratio
 <p>Message: @Configuration["message"]</p>
 ```
 
-> [!WARNING]
-> Konfiguracja w aplikacji Blazor WebAssembly jest widoczna dla użytkowników. **Nie przechowuj wpisów tajnych aplikacji ani poświadczeń w konfiguracji.**
+#### <a name="provider-configuration"></a>Konfiguracja dostawcy
 
-Pliki konfiguracyjne są buforowane do użytku w trybie offline. Dzięki [progresywnym aplikacjom sieci Web (PWA)](xref:blazor/progressive-web-app)można aktualizować tylko pliki konfiguracyjne podczas tworzenia nowego wdrożenia. Edytowanie plików konfiguracyjnych między wdrożeniami nie ma wpływu, ponieważ:
+Poniższy przykład używa <xref:Microsoft.Extensions.Configuration.Memory.MemoryConfigurationSource> [dostawcy konfiguracji plików](xref:fundamentals/configuration/index#file-configuration-provider) i dostarcza dodatkową konfigurację:
 
-* Użytkownicy mają buforowane wersje plików, które nadal używają.
-* Pliki *service-worker.js* i *service-worker-assets.js* muszą zostać przebudowane na kompilacji, która sygnalizuje aplikacji przy następnej wizycie online użytkownika, że aplikacja została ponownie rozmieszczona.
+`Program.Main`:
 
-Aby uzyskać więcej informacji na temat sposobu obsługi <xref:blazor/progressive-web-app#background-updates>aktualizacji w tle przez programy PWA, zobacz .
+```csharp
+using Microsoft.Extensions.Configuration;
+
+...
+
+var vehicleData = new Dictionary<string, string>()
+{
+    { "color", "blue" },
+    { "type", "car" },
+    { "wheels:count", "3" },
+    { "wheels:brand", "Blazin" },
+    { "wheels:brand:type", "rally" },
+    { "wheels:year", "2008" },
+};
+
+var memoryConfig = new MemoryConfigurationSource { InitialData = vehicleData };
+
+...
+
+builder.Configuration
+    .Add(memoryConfig)
+    .AddJsonFile("cars.json", optional: false, reloadOnChange: true);
+```
+
+Wsuń <xref:Microsoft.Extensions.Configuration.IConfiguration> wystąpienie do składnika w celu uzyskania dostępu do danych konfiguracji:
+
+```razor
+@page "/"
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+
+<h1>Configuration example</h1>
+
+<h2>Wheels</h2>
+
+<ul>
+    <li>Count: @Configuration["wheels:count"]</p>
+    <li>Brand: @Configuration["wheels:brand"]</p>
+    <li>Type: @Configuration["wheels:brand:type"]</p>
+    <li>Year: @Configuration["wheels:year"]</p>
+</ul>
+
+@code {
+    var wheelsSection = Configuration.GetSection("wheels");
+    
+    ...
+}
+```
+
+#### <a name="authentication-configuration"></a>Konfiguracja uwierzytelniania
+
+*wwwroot/appSettings. JSON*:
+
+```json
+{
+  "AzureAD": {
+    "Authority": "https://login.microsoftonline.com/",
+    "ClientId": "aeaebf0f-d416-4d92-a08f-e1d5b51fc494"
+  }
+}
+```
+
+`Program.Main`:
+
+```csharp
+builder.Services.AddOidcAuthentication(options =>
+    builder.Configuration.Bind("AzureAD", options);
+```
+
+#### <a name="logging-configuration"></a>Konfiguracja rejestrowania
+
+*wwwroot/appSettings. JSON*:
+
+```json
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  }
+}
+```
+
+`Program.Main`:
+
+```csharp
+builder.Logging.AddConfiguration(
+    builder.Configuration.GetSection("Logging"));
+```
+
+#### <a name="host-builder-configuration"></a>Konfiguracja konstruktora hostów
+
+`Program.Main`:
+
+```csharp
+var hostname = builder.Configuration["HostName"];
+```
+
+#### <a name="cached-configuration"></a>Konfiguracja buforowana
+
+Pliki konfiguracji są buforowane do użycia w trybie offline. Przy użyciu [progresywnych aplikacji sieci Web (PWAs)](xref:blazor/progressive-web-app)można aktualizować tylko pliki konfiguracji podczas tworzenia nowego wdrożenia. Edytowanie plików konfiguracji między wdrożeniami nie ma żadnego skutku, ponieważ:
+
+* Użytkownicy mają buforowane wersje plików, które nadal są używane.
+* Pliki *Service-Worker. js* i *Service-Worker-Assets. js* programu PWA muszą zostać ponownie skompilowane w ramach kompilacji, która sygnalizuje aplikacji w następnym trybie online, że aplikacja została ponownie wdrożona.
+
+Aby uzyskać więcej informacji o tym, jak aktualizacje w tle są obsługiwane <xref:blazor/progressive-web-app#background-updates>przez PWAs, zobacz.
 
 ### <a name="logging"></a>Rejestrowanie
 
-Aby uzyskać informacje na temat obsługi rejestrowania <xref:fundamentals/logging/index#create-logs-in-blazor-webassembly>blazora WebAssembly, zobacz .
+Aby uzyskać informacje na temat obsługi rejestrowania w programie Blazor <xref:fundamentals/logging/index#create-logs-in-blazor>webassembly, zobacz.
 
 ## <a name="blazor-server"></a>Serwer Blazor
 
 ### <a name="reflect-the-connection-state-in-the-ui"></a>Odzwierciedlanie stanu połączenia w interfejsie użytkownika
 
-Gdy klient wykryje, że połączenie zostało utracone, domyślny interfejs użytkownika jest wyświetlany użytkownikowi, podczas gdy klient próbuje ponownie połączyć. Jeśli ponowne połączenie nie powiedzie się, użytkownik ma możliwość ponowienia próby.
+Gdy klient wykryje, że połączenie zostało utracone, do użytkownika jest wyświetlany domyślny interfejs użytkownika, podczas gdy klient próbuje ponownie nawiązać połączenie. Jeśli ponowne połączenie nie powiedzie się, użytkownik otrzymuje opcję ponowienia próby.
 
-Aby dostosować interfejs użytkownika, zdefiniuj element z `id` dokączą `components-reconnect-modal` `<body>` na stronie *_Host.cshtml* Razor:
+Aby dostosować interfejs użytkownika, zdefiniuj element `id` z elementu `components-reconnect-modal` na liście `<body>` *_Host. cshtml* Razor:
 
 ```cshtml
 <div id="components-reconnect-modal">
@@ -153,18 +267,18 @@ Aby dostosować interfejs użytkownika, zdefiniuj element z `id` dokączą `comp
 </div>
 ```
 
-W poniższej tabeli opisano klasy `components-reconnect-modal` CSS zastosowane do elementu.
+W poniższej tabeli opisano klasy CSS stosowane do `components-reconnect-modal` elementu.
 
 | Klasa CSS                       | Wskazuje&hellip; |
 | ------------------------------- | ----------------- |
-| `components-reconnect-show`     | Utracone połączenie. Klient próbuje ponownie nawiązać połączenie. Pokaż modal. |
-| `components-reconnect-hide`     | Aktywne połączenie zostanie ponownie nawiązane do serwera. Ukryj modal. |
-| `components-reconnect-failed`   | Ponowne połączenie nie powiodło się, prawdopodobnie z powodu awarii sieci. Aby spróbować ponownie połączyć, zadzwoń do `window.Blazor.reconnect()`pliku . |
-| `components-reconnect-rejected` | Ponowne połączenie odrzucone. Serwer został osiągnięty, ale odmówił połączenia, a stan użytkownika na serwerze zostanie utracony. Aby ponownie załadować `location.reload()`aplikację, zadzwoń . Ten stan połączenia może spowodować, gdy:<ul><li>Wystąpi awaria obwodu po stronie serwera.</li><li>Klient jest rozłączany wystarczająco długo, aby serwer porzucić stan użytkownika. Wystąpienia składników, z którymi użytkownik wchodzi w interakcję, są usuwane.</li><li>Serwer zostanie ponownie uruchomiony lub proces roboczy aplikacji jest odtwoniany.</li></ul> |
+| `components-reconnect-show`     | Utracono połączenie. Klient próbuje ponownie nawiązać połączenie. Pokaż modalne. |
+| `components-reconnect-hide`     | Aktywne połączenie zostanie ponownie nawiązane z serwerem. Ukryj modalne. |
+| `components-reconnect-failed`   | Ponowne połączenie nie powiodło się, prawdopodobnie z powodu błędu sieci. Aby spróbować ponownie nawiązać połączenie `window.Blazor.reconnect()`, wywołaj polecenie. |
+| `components-reconnect-rejected` | Odrzucono ponowne połączenie. Serwer został osiągnięty, ale odmówił połączenia, a stan użytkownika na serwerze został utracony. Aby ponownie załadować aplikację, wywołaj `location.reload()`polecenie. Ten stan połączenia może skutkować tym, że:<ul><li>Wystąpił awaria w obwodzie po stronie serwera.</li><li>Klient jest odłączony wystarczająco długo, aby serwer mógł porzucić stan użytkownika. Wystąpienia składników, z którymi łączy się użytkownik, są usuwane.</li><li>Serwer zostanie uruchomiony ponownie lub proces roboczy aplikacji zostanie odtworzony.</li></ul> |
 
 ### <a name="render-mode"></a>Tryb renderowania
 
-Aplikacje Blazor Server są domyślnie skonfigurowane do prerender interfejsu użytkownika na serwerze przed nawiązaniem połączenia klienta z serwerem. Jest to skonfigurowane na stronie *_Host.cshtml* Razor:
+Aplikacje serwera Blazor są domyślnie skonfigurowane, aby skonfigurować interfejs użytkownika na serwerze przed nawiązaniem połączenia z serwerem. Ta konfiguracja jest ustawiana na stronie *_Host. cshtml* Razor:
 
 ```cshtml
 <body>
@@ -176,30 +290,30 @@ Aplikacje Blazor Server są domyślnie skonfigurowane do prerender interfejsu u�
 </body>
 ```
 
-`RenderMode`określa, czy składnik:
+`RenderMode`Określa, czy składnik:
 
-* Jest prerendered do strony.
-* Jest renderowany jako statyczny HTML na stronie lub jeśli zawiera niezbędne informacje do bootstrap aplikacji Blazor od agenta użytkownika.
+* Jest wstępnie renderowany na stronie.
+* Jest renderowany jako statyczny kod HTML na stronie lub zawiera informacje niezbędne do uruchomienia aplikacji Blazor z poziomu agenta użytkownika.
 
 | `RenderMode`        | Opis |
 | ------------------- | ----------- |
-| `ServerPrerendered` | Renderuje składnik do statycznego kodu HTML Blazor i zawiera znacznik aplikacji serwera. Po uruchomieniu agenta użytkownika ten znacznik jest używany Blazor do uruchamiania aplikacji. |
-| `Server`            | Renderuje znacznik aplikacji Blazor serwera. Dane wyjściowe ze składnika nie są uwzględniane. Po uruchomieniu agenta użytkownika ten znacznik jest używany Blazor do uruchamiania aplikacji. |
+| `ServerPrerendered` | Renderuje składnik do statycznego kodu HTML i zawiera znacznik dla Blazor aplikacji serwera. Po uruchomieniu agenta użytkownika ten znacznik jest używany do uruchamiania Blazor aplikacji. |
+| `Server`            | Renderuje znacznik dla aplikacji Blazor serwera. Dane wyjściowe ze składnika nie są uwzględniane. Po uruchomieniu agenta użytkownika ten znacznik jest używany do uruchamiania Blazor aplikacji. |
 | `Static`            | Renderuje składnik do statycznego kodu HTML. |
 
-Renderowanie składników serwera ze statycznej strony HTML nie jest obsługiwane.
+Renderowanie składników serwera ze statyczną stroną HTML nie jest obsługiwane.
 
-### <a name="render-stateful-interactive-components-from-razor-pages-and-views"></a>Renderowanie stanowych składników interaktywnych ze stron i widoków Razor
+### <a name="render-stateful-interactive-components-from-razor-pages-and-views"></a>Renderuj stanowe składniki interaktywne ze stron Razor i widoków
 
-Stanowe składniki interaktywne można dodać do strony lub widoku Razor.
+Można dodać składniki interaktywne ze stanem do strony lub widoku Razor.
 
-Gdy strona lub widok renderuje:
+Gdy renderuje stronę lub widok:
 
-* Składnik jest prerendered ze stroną lub widoku.
-* Początkowy stan składnika używany do wstępnego rozsyłania jest tracony.
-* Nowy stan składnika SignalR jest tworzony po nawiązaniu połączenia.
+* Składnik jest wstępnie renderowany przy użyciu strony lub widoku.
+* Początkowy stan składnika używany na potrzeby renderowania wstępnego został utracony.
+* Nowy stan składnika jest tworzony podczas ustanawiania SignalR połączenia.
 
-Następująca strona Razor `Counter` renderuje składnik:
+Następująca strona Razor renderuje `Counter` składnik:
 
 ```cshtml
 <h1>My Razor Page</h1>
@@ -213,9 +327,9 @@ Następująca strona Razor `Counter` renderuje składnik:
 }
 ```
 
-### <a name="render-noninteractive-components-from-razor-pages-and-views"></a>Renderowanie składników nieinteraktywnych ze stron i widoków razor
+### <a name="render-noninteractive-components-from-razor-pages-and-views"></a>Renderuj nieinteraktywne składniki ze stron Razor i widoków
 
-Na następującej stronie Razor `Counter` składnik jest statycznie renderowany z wartością początkową określoną przy użyciu formularza:
+Na poniższej stronie Razor `Counter` składnik jest statycznie renderowany z wartością początkową określoną przy użyciu formularza:
 
 ```cshtml
 <h1>My Razor Page</h1>
@@ -234,16 +348,16 @@ Na następującej stronie Razor `Counter` składnik jest statycznie renderowany 
 }
 ```
 
-Ponieważ `MyComponent` jest statycznie renderowane, składnik nie może być interaktywny.
+Ponieważ `MyComponent` jest renderowany statycznie, składnik nie może być interaktywny.
 
-### <a name="configure-the-opno-locsignalr-client-for-opno-locblazor-server-apps"></a>Konfigurowanie SignalR klienta Blazor dla aplikacji serwera
+### <a name="configure-the-opno-locsignalr-client-for-opno-locblazor-server-apps"></a>Konfigurowanie SignalR klienta dla Blazor aplikacji serwerowych
 
-Czasami należy skonfigurować SignalR klienta używanego Blazor przez aplikacje serwera. Na przykład można skonfigurować rejestrowanie na SignalR kliencie, aby zdiagnozować problem z połączeniem.
+Czasami trzeba skonfigurować SignalR klienta używanego przez Blazor aplikacje serwera. Na przykład możesz chcieć skonfigurować rejestrowanie na kliencie, SignalR aby zdiagnozować problem z połączeniem.
 
-Aby skonfigurować SignalR klienta w pliku *Pages/_Host.cshtml:*
+Aby skonfigurować SignalR klienta w pliku *pages/_Host. cshtml* :
 
 * Dodaj `autostart="false"` atrybut do `<script>` znacznika `blazor.server.js` skryptu.
-* Wywołaj `Blazor.start` i przekaż w obiekcie SignalR konfiguracji, który określa konstruktora.
+* Wywoływanie `Blazor.start` i przekazywanie obiektu konfiguracji, który określa SignalR Konstruktor.
 
 ```html
 <script src="_framework/blazor.server.js" autostart="false"></script>
@@ -255,3 +369,7 @@ Aby skonfigurować SignalR klienta w pliku *Pages/_Host.cshtml:*
   });
 </script>
 ```
+
+### <a name="logging"></a>Rejestrowanie
+
+Aby uzyskać informacje Blazor na temat obsługi rejestrowania na <xref:fundamentals/logging/index#create-logs-in-blazor>serwerze, zobacz.

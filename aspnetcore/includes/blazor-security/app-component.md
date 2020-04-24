@@ -1,8 +1,8 @@
-Składnik `App` (*App. Razor*) jest podobny do składnika `App` znalezionego w aplikacjach serwera Blazor:
+Składnik (*App. Razor*) jest podobny do `App` składnika znalezionego w aplikacjach serwera Blazor: `App`
 
-* Składnik `CascadingAuthenticationState` zarządza uwidacznianiem `AuthenticationState` w pozostałej części aplikacji.
-* Składnik `AuthorizeRouteView` upewnia się, że bieżący użytkownik ma uprawnienia dostępu do danej strony lub w inny sposób renderuje składnik `RedirectToLogin`.
-* Składnik `RedirectToLogin` zarządza przekierowywaniem nieautoryzowanych użytkowników do strony logowania.
+* `CascadingAuthenticationState` Składnik zarządza uwidacznianiem `AuthenticationState` w pozostałej części aplikacji.
+* `AuthorizeRouteView` Składnik gwarantuje, że bieżący użytkownik ma uprawnienia dostępu do danej strony lub w inny sposób renderuje `RedirectToLogin` składnik.
+* `RedirectToLogin` Składnik zarządza przekierowaniem nieautoryzowanych użytkowników na stronę logowania.
 
 ```razor
 <CascadingAuthenticationState>
@@ -11,7 +11,17 @@ Składnik `App` (*App. Razor*) jest podobny do składnika `App` znalezionego w a
             <AuthorizeRouteView RouteData="@routeData" 
                 DefaultLayout="@typeof(MainLayout)">
                 <NotAuthorized>
-                    <RedirectToLogin />
+                    @if (!context.User.Identity.IsAuthenticated)
+                    {
+                        <RedirectToLogin />
+                    }
+                    else
+                    {
+                        <p>
+                            You are not authorized to access 
+                            this resource.
+                        </p>
+                    }
                 </NotAuthorized>
             </AuthorizeRouteView>
         </Found>

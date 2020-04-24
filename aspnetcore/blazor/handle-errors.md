@@ -1,38 +1,38 @@
 ---
-title: Obsługa błędów w aplikacjach ASP.NET Core Blazor
+title: Obsługa błędów w aplikacjach Blazor ASP.NET Core
 author: guardrex
-description: Dowiedz się, jak Blazor ASP.NET Blazor Core, jak zarządza nieobsługiwałem wyjątków i jak tworzyć aplikacje, które wykrywają i obsługują błędy.
+description: Odkryj, jak Blazor ASP.NET Core Blazor jak program zarządza nieobsługiwanymi wyjątkami i jak opracowywać aplikacje wykrywające i obsługujące błędy.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/29/2020
+ms.date: 04/23/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/handle-errors
-ms.openlocfilehash: 4fdaf7fb90d126b8f7f029aac3af49eec3b69e74
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 63bb791958785fa9a4a676f1aab79126c6873068
+ms.sourcegitcommit: 7bb14d005155a5044c7902a08694ee8ccb20c113
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80382278"
+ms.lasthandoff: 04/24/2020
+ms.locfileid: "82111048"
 ---
-# <a name="handle-errors-in-aspnet-core-opno-locblazor-apps"></a>Obsługa błędów w aplikacjach ASP.NET Core Blazor
+# <a name="handle-errors-in-aspnet-core-opno-locblazor-apps"></a>Obsługa błędów w aplikacjach Blazor ASP.NET Core
 
-Przez [Steve Sanderson](https://github.com/SteveSandersonMS)
+[Steve Sanderson](https://github.com/SteveSandersonMS)
 
-W tym Blazor artykule opisano, jak zarządza nieobsługiwanie wyjątków i jak tworzyć aplikacje, które wykrywają i obsługują błędy.
+W tym artykule opisano Blazor , jak zarządzać nieobsługiwanymi wyjątkami oraz jak opracowywać aplikacje wykrywające i obsługujące błędy.
 
-## <a name="detailed-errors-during-development"></a>Szczegółowe błędy podczas opracowywania
+## <a name="detailed-errors-during-development"></a>Szczegóły błędów podczas opracowywania
 
-Gdy Blazor aplikacja nie działa poprawnie podczas tworzenia, otrzymywanie szczegółowych informacji o błędzie z aplikacji pomaga w rozwiązywaniu problemów i rozwiązywaniu problemu. W przypadku wystąpienia Blazor błędu aplikacje wyświetlają złoty pasek u dołu ekranu:
+Gdy Blazor aplikacja nie działa prawidłowo podczas opracowywania, otrzymuje szczegółowe informacje o błędzie z aplikacji, które pomagają w rozwiązywaniu problemów i rozwiązaniu problemu. Gdy wystąpi błąd, Blazor aplikacje wyświetlają złoty pasek u dołu ekranu:
 
-* Podczas tworzenia złotego paska kieruje cię do konsoli przeglądarki, gdzie można zobaczyć wyjątek.
-* W produkcji złoty pasek powiadamia użytkownika o wystąpieniu błędu i zaleca odświeżenie przeglądarki.
+* W trakcie programowania złoty pasek kieruje użytkownika do konsoli przeglądarki, gdzie można zobaczyć wyjątek.
+* W środowisku produkcyjnym złoty pasek powiadamia użytkownika o wystąpieniu błędu i zaleca odświeżenie przeglądarki.
 
-Interfejs użytkownika dla tego środowiska obsługi Blazor błędów jest częścią szablonów projektu.
+Interfejs użytkownika dla tego środowiska obsługi błędów jest częścią szablonów Blazor projektu.
 
-W Blazor aplikacji WebAssembly dostosuj środowisko w pliku *wwwroot/index.html:*
+Blazor W aplikacji webassembly Dostosuj środowisko w pliku *wwwroot/index.html* :
 
 ```html
 <div id="blazor-error-ui">
@@ -42,7 +42,7 @@ W Blazor aplikacji WebAssembly dostosuj środowisko w pliku *wwwroot/index.html:
 </div>
 ```
 
-W Blazor aplikacji Serwer dostosuj środowisko w pliku *Pages/_Host.cshtml:*
+W aplikacji Blazor serwera Dostosuj środowisko w pliku *pages/_Host. cshtml* :
 
 ```cshtml
 <div id="blazor-error-ui">
@@ -57,7 +57,7 @@ W Blazor aplikacji Serwer dostosuj środowisko w pliku *Pages/_Host.cshtml:*
 </div>
 ```
 
-Element `blazor-error-ui` jest ukryty przez style zawarte Blazor w szablonach (*wwwroot/css/site.css),* a następnie wyświetlany po wystąpieniu błędu:
+`blazor-error-ui` Element jest ukryty przez style zawarte w Blazor szablonach (*wwwroot/CSS/site. css*), a następnie pokazywany w przypadku wystąpienia błędu:
 
 ```css
 #blazor-error-ui {
@@ -80,193 +80,195 @@ Element `blazor-error-ui` jest ukryty przez style zawarte Blazor w szablonach (*
 }
 ```
 
-## <a name="how-a-opno-locblazor-server-app-reacts-to-unhandled-exceptions"></a>Jak Blazor aplikacja Server reaguje na nieobsługiwalne wyjątki
+## <a name="how-a-opno-locblazor-server-app-reacts-to-unhandled-exceptions"></a>Jak aplikacja Blazor serwera reaguje na Nieobsłużone wyjątki
 
-BlazorSerwer jest stanową strukturą. Podczas gdy użytkownicy wchodzą w interakcję z aplikacją, utrzymują połączenie z serwerem znanym jako *obwód*. Obwód zawiera aktywne wystąpienia składników oraz wiele innych aspektów stanu, takich jak:
+BlazorSerwer jest strukturą stanową. Gdy użytkownicy współpracują z aplikacją, utrzymują połączenie z serwerem znanym jako *obwód*. Obwód zawiera aktywne wystąpienia składnika, a także wiele innych aspektów stanu, takich jak:
 
 * Najnowsze renderowane dane wyjściowe składników.
 * Bieżący zestaw delegatów obsługi zdarzeń, które mogą być wyzwalane przez zdarzenia po stronie klienta.
 
-Jeśli użytkownik otworzy aplikację w wielu kartach przeglądarki, mają wiele niezależnych obwodów.
+Jeśli użytkownik otworzy aplikację na wielu kartach przeglądarki, mają one wiele niezależnych obwodów.
 
-Blazortraktuje większość nieobsługiwałem wyjątków jako śmiertelne dla obwodu, w którym występują. Jeśli obwód zostanie zakończony z powodu nieobsługiwał wyjątek, użytkownik może kontynuować interakcję z aplikacją tylko przez ponowne załadowanie strony w celu utworzenia nowego obwodu. Nie ma to wpływu na obwody poza końców, które są obwodami dla innych użytkowników lub innymi kartami przeglądarki. Ten scenariusz jest podobny do&mdash;aplikacji klasycznej, która ulega awarii, należy ponownie uruchomić aplikację, ale nie ma to wpływu na inne aplikacje.
+Blazortraktuje większość nieobsłużonych wyjątków jako krytyczne dla obwodu, w którym występują. Jeśli obwód zostanie przerwany z powodu nieobsługiwanego wyjątku, użytkownik może nadal korzystać z aplikacji tylko przez ponowne załadowanie strony w celu utworzenia nowego obwodu. Nie ma to wpływu na obwody, które zostały przerwane, które są obwody dla innych użytkowników lub kart przeglądarki. Ten scenariusz jest podobny do aplikacji klasycznej,&mdash;w której awaria aplikacji musi zostać uruchomiona ponownie, ale nie ma to wpływu na inne aplikacje.
 
-Obwód zostaje zakończony, gdy wystąpi nieobsługiowany wyjątek z następujących powodów:
+Obwód jest zakończony, gdy wystąpił nieobsługiwany wyjątek z następujących powodów:
 
-* Nieobsługiwał wyjątek często pozostawia obwód w stanie nieokreślonym.
-* Normalna operacja aplikacji nie może być zagwarantowana po nieobsługiwał wyjątek.
-* Jeśli obwód będzie kontynuowany, w aplikacji mogą pojawić się luki w zabezpieczeniach.
+* Nieobsługiwany wyjątek często pozostawia obwód w niezdefiniowanym stanie.
+* Nie można zagwarantować normalnej operacji aplikacji po wystąpieniu nieobsłużonego wyjątku.
+* W przypadku kontynuowania obwodu w aplikacji mogą pojawić się luki w zabezpieczeniach.
 
-## <a name="manage-unhandled-exceptions-in-developer-code"></a>Zarządzanie nieobsługiwałem wyjątków w kodzie dewelopera
+## <a name="manage-unhandled-exceptions-in-developer-code"></a>Zarządzanie nieobsługiwanymi wyjątkami w kodzie dewelopera
 
-Aby aplikacja mogła być kontynuowana po błędzie, aplikacja musi mieć logikę obsługi błędów. W dalszej części tego artykułu opisano potencjalne źródła nieobsługiwał wyjątków.
+Aby aplikacja kontynuowała działanie po wystąpieniu błędu, aplikacja musi mieć logikę obsługi błędów. W dalszej części tego artykułu opisano potencjalne źródła nieobsłużonych wyjątków.
 
-W produkcji nie renderuj komunikatów wyjątków framework lub ślady stosu w interfejsie użytkownika. Renderowanie komunikatów o wyjątkach lub śladów stosu może:
+W środowisku produkcyjnym nie Renderuj komunikatów wyjątków struktury ani śladów stosu w interfejsie użytkownika. Renderowanie komunikatów o wyjątkach lub śladów stosu może:
 
 * Ujawnianie poufnych informacji użytkownikom końcowym.
-* Pomóż złośliwemu użytkownikowi odkryć słabe punkty w aplikacji, które mogą naruszyć bezpieczeństwo aplikacji, serwera lub sieci.
+* Pomóż złośliwemu użytkownikowi wykrywać słabe strony w aplikacji, która może naruszyć bezpieczeństwo aplikacji, serwera lub sieci.
 
-## <a name="log-errors-with-a-persistent-provider"></a>Rejestrowanie błędów u trwałego dostawcy
+## <a name="log-errors-with-a-persistent-provider"></a>Rejestrowanie błędów przez dostawcę trwałego
 
-Jeśli wystąpi nieobsługiowany wyjątek, <xref:Microsoft.Extensions.Logging.ILogger> wyjątek jest rejestrowany w wystąpieniach skonfigurowanych w kontenerze usługi. Domyślnie Blazor aplikacje logują się do danych wyjściowych konsoli za pomocą dostawcy rejestrowania konsoli. Należy wziąć pod uwagę rejestrowanie do bardziej stałej lokalizacji z dostawcą, który zarządza rozmiar dziennika i rotacji dziennika. Aby uzyskać więcej informacji, zobacz <xref:fundamentals/logging/index>.
+Jeśli wystąpi nieobsługiwany wyjątek, wyjątek jest rejestrowany w <xref:Microsoft.Extensions.Logging.ILogger> wystąpieniach skonfigurowanych w kontenerze usługi. Domyślnie Blazor aplikacje rejestrują dane wyjściowe konsoli z dostawcą rejestrowania konsoli. Należy rozważyć logowanie do bardziej trwałej lokalizacji z dostawcą, który zarządza rozmiarem dziennika i rotacją dzienników. Aby uzyskać więcej informacji, zobacz <xref:fundamentals/logging/index>.
 
-Podczas tworzenia Blazor zwykle wysyła pełne szczegóły wyjątków do konsoli przeglądarki, aby pomóc w debugowaniu. W wersji produkcyjnej szczegółowe błędy w konsoli przeglądarki są domyślnie wyłączone, co oznacza, że błędy nie są wysyłane do klientów, ale pełne szczegóły wyjątku są nadal rejestrowane po stronie serwera. Aby uzyskać więcej informacji, zobacz <xref:fundamentals/error-handling>.
+Podczas opracowywania Blazor programu zwykle program wysyła do konsoli przeglądarki pełne szczegóły dotyczące wyjątków, aby pomóc w debugowaniu. W środowisku produkcyjnym szczegółowe błędy w konsoli przeglądarki są domyślnie wyłączone, co oznacza, że błędy nie są wysyłane do klientów, ale wszystkie szczegóły wyjątku nadal są rejestrowane po stronie serwera. Aby uzyskać więcej informacji, zobacz <xref:fundamentals/error-handling>.
 
-Należy zdecydować, które zdarzenia mają zostać zarejestrowane i poziom ważności zarejestrowanych zdarzeń. Wrogo nastawieni użytkownicy mogą celowo wyzwolić błędy. Na przykład nie rejestruj zdarzenia z powodu `ProductId` błędu, w którym w adresie URL składnika, który wyświetla szczegóły produktu, znajduje się nieznany. Nie wszystkie błędy powinny być traktowane jako zdarzenia o wysokiej ważności do rejestrowania.
+Należy zdecydować, które zdarzenia mają być rejestrowane, oraz poziom ważności zarejestrowanych zdarzeń. Nieszkodliwi użytkownicy mogą być w stanie wyzwolić błędy w sposób celowy. Na przykład nie należy rejestrować zdarzenia z błędu, gdy `ProductId` w adresie URL składnika, który zawiera szczegółowe informacje o produkcie. Nie wszystkie błędy powinny być traktowane jako zdarzenia o wysokiej ważności do rejestrowania.
+
+Aby uzyskać więcej informacji, zobacz <xref:fundamentals/logging/index#create-logs-in-blazor>.
 
 ## <a name="places-where-errors-may-occur"></a>Miejsca, w których mogą wystąpić błędy
 
-Framework i kod aplikacji może wyzwolić nieobsługiwał wyjątki w dowolnej z następujących lokalizacji:
+Kod struktury i aplikacji może wyzwolić Nieobsłużone wyjątki w jednej z następujących lokalizacji:
 
-* [Tworzenie wystąpienia składników](#component-instantiation)
+* [Tworzenie wystąpienia składnika](#component-instantiation)
 * [Metody cyklu życia](#lifecycle-methods)
 * [Logika renderowania](#rendering-logic)
 * [Procedury obsługi zdarzeń](#event-handlers)
-* [Utylizacja komponentów](#component-disposal)
+* [Usuwanie składników](#component-disposal)
 * [Międzyoperacyjność w języku JavaScript](#javascript-interop)
-* [BlazorRerendering serwera](#blazor-server-prerendering)
+* [BlazorRenderowanie serwera](#blazor-server-prerendering)
 
-Poprzednie nieobsługiwały wyjątki są opisane w poniższych sekcjach tego artykułu.
+Poprzednie Nieobsłużone wyjątki zostały opisane w poniższych sekcjach tego artykułu.
 
-### <a name="component-instantiation"></a>Tworzenie wystąpienia składników
+### <a name="component-instantiation"></a>Tworzenie wystąpienia składnika
 
-Po Blazor wykonaniu wystąpienia składnika:
+Podczas Blazor tworzenia wystąpienia składnika:
 
 * Konstruktor składnika jest wywoływany.
-* Konstruktory wszystkich usług DI innych niż singleton dostarczane do [`@inject`](xref:blazor/dependency-injection#request-a-service-in-a-component) konstruktora składnika za pośrednictwem dyrektywy lub atrybutu [`[Inject]`](xref:blazor/dependency-injection#request-a-service-in-a-component) są wywoływane.
+* Konstruktory wszelkich niepojedynczych usług DI dostarczonych do konstruktora składnika za pośrednictwem [`@inject`](xref:blazor/dependency-injection#request-a-service-in-a-component) dyrektywy lub [`[Inject]`](xref:blazor/dependency-injection#request-a-service-in-a-component) atrybutu są wywoływane.
 
-Obwód Blazor serwera kończy się niepowodzeniem, gdy `[Inject]` dowolny wykonany konstruktor lub ustawiacz dla dowolnej właściwości zgłasza nieobsługiowany wyjątek. Wyjątek jest krytyczny, ponieważ struktura nie może utworzyć wystąpienia składnika. Jeśli logika konstruktora może zgłaszać wyjątki, aplikacja powinna zalewkować wyjątki przy użyciu [instrukcji try-catch](/dotnet/csharp/language-reference/keywords/try-catch) z obsługą błędów i rejestrowaniem.
+Obwód Blazor serwera kończy się niepowodzeniem, gdy dowolny wykonany Konstruktor lub setter `[Inject]` dla każdej właściwości zgłasza nieobsługiwany wyjątek. Wyjątek jest krytyczny, ponieważ struktura nie może utworzyć wystąpienia składnika. Jeśli logika konstruktora może generować wyjątki, aplikacja powinna zalewkować wyjątki przy użyciu instrukcji [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) z obsługą błędów i rejestrowaniem.
 
 ### <a name="lifecycle-methods"></a>Metody cyklu życia
 
-W okresie istnienia składnika Blazor wywołuje następujące metody [cyklu życia:](xref:blazor/lifecycle)
+W okresie istnienia składnika program Blazor wywołuje następujące [metody cyklu życia](xref:blazor/lifecycle):
 
 * `OnInitialized` / `OnInitializedAsync`
 * `OnParametersSet` / `OnParametersSetAsync`
 * `ShouldRender` / `ShouldRenderAsync`
 * `OnAfterRender` / `OnAfterRenderAsync`
 
-Jeśli dowolna metoda cyklu życia zgłasza wyjątek, synchronicznie lub asynchronicznie, wyjątek jest krytyczny dla obwodu Blazor serwera. Aby składniki radziły sobie z błędami w metodach cyklu życia, dodaj logikę obsługi błędów.
+Jeśli jakakolwiek metoda cyklu życia zgłasza wyjątek, synchronicznie lub asynchronicznie, wyjątek jest krytyczny dla Blazor obwodu serwera. Aby składniki zajmowały błędy w metodach cyklu życia, Dodaj logikę obsługi błędów.
 
-W poniższym `OnParametersSetAsync` przykładzie, w którym wywołuje metodę uzyskania produktu:
+W poniższym przykładzie, gdzie `OnParametersSetAsync` wywołuje metodę w celu uzyskania produktu:
 
-* Wyjątek zgłoszony `ProductRepository.GetProductByIdAsync` w metodzie jest `try-catch` obsługiwany przez instrukcję.
-* Po `catch` wykonaniu bloku:
-  * `loadFailed`jest ustawiona na `true`, który jest używany do wyświetlania komunikatu o błędzie dla użytkownika.
+* Wyjątek zgłoszony w `ProductRepository.GetProductByIdAsync` metodzie jest obsługiwany przez `try-catch` instrukcję.
+* Gdy `catch` blok jest wykonywany:
+  * `loadFailed`jest ustawiona na `true`, która jest używana do wyświetlania komunikatu o błędzie dla użytkownika.
   * Błąd jest rejestrowany.
 
 [!code-razor[](handle-errors/samples_snapshot/3.x/product-details.razor?highlight=11,27-39)]
 
 ### <a name="rendering-logic"></a>Logika renderowania
 
-Znaczników deklaratywnych w pliku składnika `.razor` jest `BuildRenderTree`kompilowany do metody C# o nazwie . Gdy składnik renderuje, `BuildRenderTree` wykonuje i buduje strukturę danych opisującą elementy, tekst i składniki podrzędne renderowanego składnika.
+Znaczniki deklaratywne w pliku `.razor` składnika są kompilowane do metody języka C# o nazwie `BuildRenderTree`. Gdy składnik renderuje, `BuildRenderTree` wykonuje i tworzy strukturę danych opisującą elementy, tekst i składniki podrzędne renderowanego składnika.
 
-Logika renderowania może zgłosić wyjątek. Przykład tego scenariusza `@someObject.PropertyName` występuje, `@someObject` gdy `null`jest oceniany, ale jest . Nieobsłużony wyjątek zgłaszany przez Blazor logikę renderowania jest krytyczny dla obwodu serwera.
+Logika renderowania może zgłosić wyjątek. Przykład tego scenariusza występuje, gdy `@someObject.PropertyName` jest oceniane, ale `@someObject` jest `null`. Nieobsługiwany wyjątek zgłoszony przez logikę renderowania jest krytyczny dla obwodu Blazor serwera.
 
-Aby zapobiec wyjątek odwołania null w logice renderowania, sprawdź obiekt przed dostępem `null` do jego elementów członkowskich. W poniższym `person.Address` przykładzie właściwości nie są `person.Address` `null`dostępne, jeśli jest:
+Aby zapobiec wystąpieniu wyjątku odwołania o wartości null w logice renderowania, `null` przed uzyskaniem dostępu do elementów członkowskich Sprawdź, czy jest on obiektem. W poniższym przykładzie właściwości nie `person.Address` są dostępne, jeśli `person.Address` `null`:
 
 [!code-razor[](handle-errors/samples_snapshot/3.x/person-example.razor?highlight=1)]
 
-Poprzedni kod zakłada, `person` że nie `null`jest . Często struktura kodu gwarantuje, że obiekt istnieje w czasie renderowania składnika. W takich przypadkach nie jest konieczne, `null` aby sprawdzić w logice renderowania. W poprzednim przykładzie może być gwarantowane istnieć, `person` ponieważ `person` jest tworzony podczas tworzenia składnika jest tworzona.
+Poprzedni kod założono, `person` że `null`nie jest. Często Struktura kodu gwarantuje, że obiekt istnieje w momencie renderowania składnika. W takich przypadkach nie jest konieczne sprawdzanie `null` logiki renderowania. W poprzednim przykładzie można zagwarantować `person` , że istnieje, ponieważ `person` jest tworzony podczas tworzenia wystąpienia składnika.
 
 ### <a name="event-handlers"></a>Procedury obsługi zdarzeń
 
-Kod po stronie klienta wyzwala wywołania kodu Języka C#, gdy programy obsługi zdarzeń są tworzone przy użyciu:
+Kod po stronie klienta wyzwala wywołania kodu C#, gdy programy obsługi zdarzeń są tworzone przy użyciu:
 
 * `@onclick`
 * `@onchange`
 * Inne `@on...` atrybuty
 * `@bind`
 
-Kod obsługi zdarzeń może zgłosić nieobsługiowany wyjątek w tych scenariuszach.
+Kod procedury obsługi zdarzeń może zgłosić nieobsługiwany wyjątek w tych scenariuszach.
 
-Jeśli program obsługi zdarzeń zgłasza nieobsługiowany wyjątek (na przykład kwerenda Blazor bazy danych kończy się niepowodzeniem), wyjątek jest krytyczny dla obwodu serwera. Jeśli aplikacja wywołuje kod, który może zakończyć się niepowodzeniem z przyczyn zewnętrznych, wyjątki pułapki przy użyciu [instrukcji try-catch](/dotnet/csharp/language-reference/keywords/try-catch) z obsługi błędów i rejestrowania.
+Jeśli procedura obsługi zdarzeń zgłasza nieobsługiwany wyjątek (na przykład kwerenda bazy danych kończy się niepowodzeniem), wyjątek jest krytyczny dla obwodu Blazor serwera. Jeśli aplikacja wywołuje kod, który może zakończyć się niepowodzeniem z powodów zewnętrznych, należy zastosować wyjątek pułapki przy użyciu instrukcji [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) z obsługą błędów i rejestrowaniem.
 
-Jeśli kod użytkownika nie pułapki i obsługi wyjątku, struktura rejestruje wyjątek i kończy obwód.
+Jeśli kod użytkownika nie jest pułapk i nie obsługuje wyjątku, struktura rejestruje wyjątek i kończy obwód.
 
-### <a name="component-disposal"></a>Utylizacja komponentów
+### <a name="component-disposal"></a>Usuwanie składników
 
-Składnik może zostać usunięty z interfejsu użytkownika, na przykład, ponieważ użytkownik przeszedł do innej strony. Gdy składnik, który <xref:System.IDisposable?displayProperty=fullName> implementuje jest usuwany z interfejsu użytkownika, struktura wywołuje metodę składnika. <xref:System.IDisposable.Dispose*>
+Składnik może zostać usunięty z interfejsu użytkownika, na przykład, ponieważ użytkownik przeszedł do innej strony. Gdy składnik implementujący <xref:System.IDisposable?displayProperty=fullName> jest usuwany z interfejsu użytkownika, struktura wywołuje <xref:System.IDisposable.Dispose*> metodę składnika.
 
-Jeśli składnika `Dispose` metoda zgłasza nieobsługiwać wyjątek, wyjątek jest krytyczny dla obwodu Blazor serwera. Jeśli logika usuwania może zgłaszać wyjątki, aplikacja powinna zalewkować wyjątki przy użyciu [instrukcji try-catch](/dotnet/csharp/language-reference/keywords/try-catch) z obsługi błędów i rejestrowania.
+Jeśli `Dispose` Metoda składnika zgłasza nieobsługiwany wyjątek, wyjątek jest krytyczny dla obwodu Blazor serwera. Jeśli logika usuwania może generować wyjątki, aplikacja powinna zalewkować wyjątki przy użyciu instrukcji [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) z obsługą błędów i rejestrowaniem.
 
-Aby uzyskać więcej informacji <xref:blazor/lifecycle#component-disposal-with-idisposable>na temat usuwania komponentów, zobacz .
+Aby uzyskać więcej informacji na temat usuwania składników <xref:blazor/lifecycle#component-disposal-with-idisposable>, zobacz.
 
 ### <a name="javascript-interop"></a>Międzyoperacyjność w języku JavaScript
 
-`IJSRuntime.InvokeAsync<T>`umożliwia kodowi .NET wykonywanie wywołań asynchronicznych do środowiska wykonawczego JavaScript w przeglądarce użytkownika.
+`IJSRuntime.InvokeAsync<T>`umożliwia programowi .NET Code wykonywanie wywołań asynchronicznych do środowiska uruchomieniowego JavaScript w przeglądarce użytkownika.
 
-Następujące warunki mają zastosowanie `InvokeAsync<T>`do obsługi błędów z:
+Poniższe warunki dotyczą obsługi błędów w programie `InvokeAsync<T>`:
 
-* Jeśli `InvokeAsync<T>` wywołanie nie powiedzie się synchronicznie, wystąpi wyjątek .NET. Wywołanie `InvokeAsync<T>` może zakończyć się niepowodzeniem, na przykład, ponieważ dostarczone argumenty nie mogą być serializowane. Kod dewelopera musi przechwytyć wyjątek. Jeśli kod aplikacji w programie obsługi zdarzeń lub metody cyklu życia składnika nie Blazor obsługuje wyjątek, wynikowy wyjątek jest krytyczny dla obwodu serwera.
-* Jeśli wywołanie `InvokeAsync<T>` nie powiedzie się asynchronicznie, .NET <xref:System.Threading.Tasks.Task> kończy się niepowodzeniem. Wywołanie `InvokeAsync<T>` może zakończyć się niepowodzeniem, na przykład, ponieważ kod `Promise` po stronie `rejected`JavaScript zgłasza wyjątek lub zwraca, który został ukończony jako . Kod dewelopera musi przechwytyć wyjątek. Jeśli używasz [await](/dotnet/csharp/language-reference/keywords/await) operatora, należy rozważyć zawijanie wywołania metody w [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) instrukcji z obsługi błędów i rejestrowania. W przeciwnym razie kod w przypadku awarii powoduje nieobsługiwać wyjątek, który jest krytyczny dla obwodu Blazor serwera.
-* Domyślnie wywołania `InvokeAsync<T>` muszą zakończyć się w określonym czasie lub w przeciwnym razie przesunie się czas połączenia. Domyślny limit czasu wynosi jedną minutę. Limit czasu chroni kod przed utratą łączności sieciowej lub kodu JavaScript, który nigdy nie wysyła z powrotem komunikatu uzupełniania. Jeśli przesiąknie `Task` czasu połączenia, wynik nie powiedzie się z <xref:System.OperationCanceledException>. Zalewka i przetwarzać wyjątek z rejestrowania.
+* Jeśli wywołanie synchronicznie `InvokeAsync<T>` zakończy się niepowodzeniem, wystąpi wyjątek programu .NET. Wywołanie `InvokeAsync<T>` może zakończyć się niepowodzeniem, na przykład dlatego, że nie można serializować dostarczonych argumentów. Kod dewelopera musi przechwycić wyjątek. Jeśli kod aplikacji w obsłudze zdarzeń lub metoda cyklu życia składnika nie obsłuży wyjątku, wynikający z nich wyjątek jest krytyczny dla obwodu Blazor serwera.
+* Jeśli wywołanie `InvokeAsync<T>` powiedzie się asynchronicznie, .NET <xref:System.Threading.Tasks.Task> kończy się niepowodzeniem. Wywołanie `InvokeAsync<T>` może zakończyć się niepowodzeniem, na przykład ponieważ kod po stronie JavaScript zgłasza wyjątek lub zwraca `Promise` , który został ukończony jako. `rejected` Kod dewelopera musi przechwycić wyjątek. W przypadku użycia operatora [await](/dotnet/csharp/language-reference/keywords/await) Rozważ zapakowanie wywołania metody w instrukcji [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) z obsługą błędów i rejestrowaniem. W przeciwnym razie niepowodzenie kodu spowoduje nieobsłużony wyjątek, który jest krytyczny dla obwodu Blazor serwera.
+* Domyślnie wywołania programu muszą zakończyć `InvokeAsync<T>` się w określonym przedziale czasu lub w przeciwnym razie upłynął limit czasu połączenia. Domyślny limit czasu wynosi jedną minutę. Limit czasu chroni kod przed utratą połączenia sieciowego lub kodem JavaScript, który nigdy nie odsyła komunikat uzupełniający. Jeśli wystąpiło przełączenie, `Task` wynikiem kończy się <xref:System.OperationCanceledException>niepowodzeniem a. Zalewka i przetwórz wyjątek z rejestrowaniem.
 
-Podobnie kod JavaScript może inicjować wywołania metod [`[JSInvokable]`](xref:blazor/call-dotnet-from-javascript) platformy .NET wskazanych przez atrybut. Jeśli te metody platformy .NET zgłaszają nieobsługiowany wyjątek:
+Podobnie kod JavaScript może inicjować wywołania metod .NET wskazywanych przez [`[JSInvokable]`](xref:blazor/call-dotnet-from-javascript) atrybut. Jeśli te metody .NET zgłaszają nieobsługiwany wyjątek:
 
-* Wyjątek nie jest traktowany jako Blazor krytyczny dla obwodu serwera.
-* Strona JavaScript `Promise` zostanie odrzucona.
+* Wyjątek nie jest traktowany jako krytyczny Blazor dla obwodu serwera.
+* Po stronie `Promise` JavaScript jest odrzucany.
 
-Można użyć kodu obsługi błędów po stronie platformy .NET lub javascript wywołania metody.
+Istnieje możliwość użycia kodu obsługi błędów po stronie .NET lub stronie JavaScript wywołania metody.
 
 Aby uzyskać więcej informacji zobacz następujące artykuły:
 
 * <xref:blazor/call-javascript-from-dotnet>
 * <xref:blazor/call-dotnet-from-javascript>
 
-### <a name="opno-locblazor-server-prerendering"></a>BlazorPrerendering serwera
+### <a name="opno-locblazor-server-prerendering"></a>BlazorRenderowanie na serwerze
 
-Blazorskładniki mogą być prerendered przy użyciu [Pomocnika tagu składnika,](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper) tak aby ich renderowane znaczniki HTML jest zwracany jako część początkowego żądania HTTP użytkownika. Działa to poprzez:
+Blazorskładniki mogą być wstępnie renderowane przy użyciu [pomocnika tagów składnika](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper) , dzięki czemu RENDEROWANE znaczniki HTML są zwracane jako część początkowego żądania HTTP użytkownika. Działa to w następujący sposób:
 
-* Tworzenie nowego obwodu dla wszystkich wstępnie powstałych komponentów, które są częścią tej samej strony.
+* Tworzenie nowego obwodu dla wszystkich wstępnie renderowanych składników, które są częścią tej samej strony.
 * Generowanie początkowego kodu HTML.
-* Traktowanie obwodu `disconnected` jako dopóki przeglądarka użytkownika SignalR nie nawiązuje połączenia z powrotem do tego samego serwera. Po nawiązaniu połączenia interakcyjność w obwodzie jest wznawiana, a znaczniki HTML składników są aktualizowane.
+* Przetraktowanie obwodu `disconnected` do momentu, aż przeglądarka SignalR użytkownika nawiąże połączenie z powrotem z tym samym serwerem. Po nawiązaniu połączenia zostanie wznowione działanie międzydziałające w obwodzie i zostanie zaktualizowane oznaczenie HTML składników.
 
-Jeśli dowolny składnik zgłasza nieobsługiwanie wyjątek podczas prerendering, na przykład podczas metody cyklu życia lub w logice renderowania:
+Jeśli jakikolwiek składnik zgłasza nieobsłużony wyjątek podczas renderowania pre, na przykład podczas wykonywania metody cyklu życia lub logiki renderowania:
 
-* Wyjątek jest fatalny dla obwodu.
-* Wyjątek jest zgłaszany stos `Component` wywołania z Pomocnika tagu. W związku z tym całe żądanie HTTP kończy się niepowodzeniem, chyba że wyjątek jest jawnie złowionych przez kod dewelopera.
+* Wyjątek jest krytyczny dla obwodu.
+* Wyjątek jest generowany w stosie wywołań z pomocnika `Component` tagów. W związku z tym całe żądanie HTTP kończy się niepowodzeniem, chyba że wyjątek jest jawnie przechwycony przez kod dewelopera.
 
-W normalnych warunkach, gdy program prerendering kończy się niepowodzeniem, kontynuowanie tworzenia i renderowania składnika nie ma sensu, ponieważ nie można renderować składnika roboczego.
+W normalnych warunkach w przypadku niepowodzenia wstępnego renderowania kontynuowanie kompilowania i renderowania składnika nie ma sensu, ponieważ nie można renderować składnika roboczego.
 
-Aby tolerować błędy, które mogą wystąpić podczas prerendering, logika obsługi błędów musi być umieszczony wewnątrz składnika, który może zgłaszać wyjątki. Użyj [instrukcji try-catch](/dotnet/csharp/language-reference/keywords/try-catch) z obsługą błędów i rejestrowaniem. Zamiast zawijać `Component` Pomocnika znacznika w instrukcji, umieść logikę `try-catch` obsługi `Component` błędów w składniku renderowanym przez Pomocnika tagu.
+Aby tolerować błędy, które mogą wystąpić podczas renderowania prerenderingu, logika obsługi błędów musi być umieszczona wewnątrz składnika, który może zgłaszać wyjątki. Używaj instrukcji [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) z obsługą błędów i rejestrowaniem. Zamiast zawijać pomocnika `Component` tagów w `try-catch` instrukcji, umieść logikę obsługi błędów w składniku renderowanym przez `Component` pomocnika tagów.
 
 ## <a name="advanced-scenarios"></a>Scenariusze zaawansowane
 
 ### <a name="recursive-rendering"></a>Renderowanie cykliczne
 
-Komponenty mogą być zagnieżdżone rekursywnie. Jest to przydatne do reprezentowania struktur danych cyklicznych. Na przykład `TreeNode` składnik może `TreeNode` renderować więcej składników dla każdego z elementów podrzędnych węzła.
+Składniki można cyklicznie zagnieżdżać. Jest to przydatne do reprezentowania struktur danych rekursywnych. Na przykład `TreeNode` składnik może renderować więcej `TreeNode` składników dla każdego węzła podrzędnego.
 
-Podczas renderowania rekursywnie należy unikać wzorców kodowania, które powodują nieskończoną rekursję:
+W przypadku renderowania cyklicznego należy unikać tworzenia wzorców, które powodują nieskończoną rekursję:
 
-* Nie cyklicznie renderować struktury danych, która zawiera cykl. Na przykład nie renderuj węzła drzewa, którego dzieci zawiera się.
-* Nie należy tworzyć łańcucha układów, które zawierają cykl. Na przykład nie należy tworzyć układu, którego układ jest sam.
-* Nie zezwalaj użytkownikowi końcowemu na naruszanie invariants recursion (reguł) za pośrednictwem złośliwego wprowadzania danych lub wywołań interop JavaScript.
+* Nie Renderuj rekursywnie struktury danych zawierającej cykl. Na przykład nie Renderuj węzła drzewa, którego elementy podrzędne zawierają sam siebie.
+* Nie twórz łańcucha układów zawierających cykl. Na przykład nie twórz układu, którego układ jest sam.
+* Nie Zezwalaj użytkownikowi końcowemu na naruszenie nieodmian rekursji (reguł) przy użyciu złośliwego wpisu danych lub wywołań międzyoperacyjnych języka JavaScript.
 
 Nieskończone pętle podczas renderowania:
 
-* Powoduje, że proces renderowania trwa wiecznie.
-* Jest odpowiednikiem tworzenia pętli nieokreślonej.
+* Powoduje, że proces renderowania kontynuuje działanie zawsze.
+* Jest równoznaczny z tworzeniem niezakończonej pętli.
 
-W tych scenariuszach obwód Blazor serwera, którego dotyczy problem, kończy się niepowodzeniem, a wątek zwykle próbuje:
+W tych scenariuszach obwód serwera, Blazor którego to dotyczy, kończy się niepowodzeniem, a wątek zwykle próbuje wykonać:
 
-* Zużywają tyle czasu procesora, ile pozwala system operacyjny, przez czas nieokreślony.
-* Zużywają nieograniczoną ilość pamięci serwera. Korzystanie z pamięci nieograniczonej jest odpowiednikiem scenariusza, w którym nieokreślona pętla dodaje wpisy do kolekcji w każdej iteracji.
+* Zużywaj ilość czasu procesora CPU dozwoloną przez system operacyjny w nieskończoność.
+* Korzystaj z nieograniczonej ilości pamięci serwera. Zużywanie nieograniczonej pamięci jest równoważne scenariuszowi, w którym niezakończona pętla dodaje wpisy do kolekcji na każdej iteracji.
 
-Aby uniknąć nieskończonych wzorców rekursji, upewnij się, że rekursywny kod renderowania zawiera odpowiednie warunki zatrzymania.
+Aby uniknąć nieskończonych wzorców rekursji, należy się upewnić, że kod renderowania cyklicznego zawiera odpowiednie warunki zatrzymania.
 
-### <a name="custom-render-tree-logic"></a>Niestandardowa logika drzewa renderowania
+### <a name="custom-render-tree-logic"></a>Logika drzewa renderowania niestandardowego
 
-Większość Blazor składników są implementowane jako pliki *.brzytwa* i są `RenderTreeBuilder` kompilowane do tworzenia logiki, która działa na a do renderowania ich danych wyjściowych. Deweloper może ręcznie `RenderTreeBuilder` zaimplementować logikę przy użyciu proceduralnego kodu języka C#. Aby uzyskać więcej informacji, zobacz <xref:blazor/advanced-scenarios#manual-rendertreebuilder-logic>.
+Większość Blazor składników jest zaimplementowana jako pliki *Razor* i są kompilowane do tworzenia logiki, która działa `RenderTreeBuilder` w celu renderowania danych wyjściowych. Deweloper może ręcznie zaimplementować `RenderTreeBuilder` logikę przy użyciu procedury kodu w języku C#. Aby uzyskać więcej informacji, zobacz <xref:blazor/advanced-scenarios#manual-rendertreebuilder-logic>.
 
 > [!WARNING]
-> Korzystanie z logiki konstruktora drzewa renderowania ręcznego jest uważany za zaawansowany i niebezpieczny scenariusz, nie zalecane dla ogólnego rozwoju składników.
+> Korzystanie z logiki konstruktora drzewa renderowania ręcznego jest uznawane za zaawansowane i niebezpieczne scenariusze, które nie są zalecane do ogólnego tworzenia składników.
 
-Jeśli `RenderTreeBuilder` kod jest napisany, deweloper musi zagwarantować poprawność kodu. Na przykład deweloper musi upewnić się, że:
+Jeśli `RenderTreeBuilder` kod zostanie zapisany, Deweloper musi zagwarantować poprawność kodu. Na przykład Deweloper musi upewnić się, że:
 
-* Połączenia `OpenElement` do `CloseElement` i są prawidłowo wyważone.
-* Atrybuty są dodawane tylko w odpowiednich miejscach.
+* Wywołania `OpenElement` i `CloseElement` są prawidłowo zrównoważone.
+* Atrybuty są dodawane tylko w prawidłowych miejscach.
 
-Niepoprawna logika konstruktora drzew renderowania ręcznego może powodować dowolne niezdefiniowane zachowanie, w tym awarie, zawieszanie się serwera i luki w zabezpieczeniach.
+Nieprawidłowa ręczna logika konstruktora drzewa renderowania może spowodować dowolne niezdefiniowane zachowanie, w tym awarie, zawieszenie serwera i luki w zabezpieczeniach.
 
-Należy wziąć pod uwagę ręczne renderowania logiki konstruktora drzewa na tym samym poziomie złożoności i z tym samym poziomie *niebezpieczeństwa,* jak pisanie kodu zestawu lub instrukcje MSIL ręcznie.
+Rozważ ręczne renderowanie logiki konstruktora drzew drzewa na tym samym poziomie złożoności i z tym samym poziomem *zagrożenia* co ręczne pisanie kodu zestawu lub instrukcji MSIL.

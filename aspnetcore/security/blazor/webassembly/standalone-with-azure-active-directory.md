@@ -1,82 +1,85 @@
 ---
-title: Zabezpieczanie autonomicznej Blazor aplikacji ASP.NET Core WebAssembly za pomocą usługi Azure Active Directory
+title: Zabezpiecz ASP.NET Core Blazor autonomiczną aplikację webassembly z Azure Active Directory
 author: guardrex
 description: ''
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/08/2020
+ms.date: 04/23/2020
 no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/standalone-with-azure-active-directory
-ms.openlocfilehash: 7e132723657b7e12803b67ec12c3a33f1945baa3
-ms.sourcegitcommit: f0aeeab6ab6e09db713bb9b7862c45f4d447771b
+ms.openlocfilehash: 71229f41f3f1021aa9ad02402af21de51d7eeee4
+ms.sourcegitcommit: 7bb14d005155a5044c7902a08694ee8ccb20c113
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80977002"
+ms.lasthandoff: 04/24/2020
+ms.locfileid: "82111204"
 ---
-# <a name="secure-an-aspnet-core-opno-locblazor-webassembly-standalone-app-with-azure-active-directory"></a><span data-ttu-id="fa406-102">Zabezpieczanie autonomicznej Blazor aplikacji ASP.NET Core WebAssembly za pomocą usługi Azure Active Directory</span><span class="sxs-lookup"><span data-stu-id="fa406-102">Secure an ASP.NET Core Blazor WebAssembly standalone app with Azure Active Directory</span></span>
+# <a name="secure-an-aspnet-core-opno-locblazor-webassembly-standalone-app-with-azure-active-directory"></a><span data-ttu-id="a5aee-102">Zabezpiecz ASP.NET Core Blazor autonomiczną aplikację webassembly z Azure Active Directory</span><span class="sxs-lookup"><span data-stu-id="a5aee-102">Secure an ASP.NET Core Blazor WebAssembly standalone app with Azure Active Directory</span></span>
 
-<span data-ttu-id="fa406-103">Autorstwa [Javiera Calvarro Nelsona](https://github.com/javiercn) i [Luke'a Lathama](https://github.com/guardrex)</span><span class="sxs-lookup"><span data-stu-id="fa406-103">By [Javier Calvarro Nelson](https://github.com/javiercn) and [Luke Latham](https://github.com/guardrex)</span></span>
+<span data-ttu-id="a5aee-103">Autorzy [Javier Calvarro Nelson](https://github.com/javiercn) i [Luke Latham](https://github.com/guardrex)</span><span class="sxs-lookup"><span data-stu-id="a5aee-103">By [Javier Calvarro Nelson](https://github.com/javiercn) and [Luke Latham](https://github.com/guardrex)</span></span>
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 [!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
 
-<span data-ttu-id="fa406-104">Aby utworzyć Blazor autonomiczną aplikację webassembly, która używa [usługi Azure Active Directory (AAD)](https://azure.microsoft.com/services/active-directory/) do uwierzytelniania:</span><span class="sxs-lookup"><span data-stu-id="fa406-104">To create a Blazor WebAssembly standalone app that uses [Azure Active Directory (AAD)](https://azure.microsoft.com/services/active-directory/) for authentication:</span></span>
+> [!NOTE]
+> <span data-ttu-id="a5aee-104">Wskazówki zawarte w tym artykule dotyczą ASP.NET Core 3,2 w wersji zapoznawczej 4.</span><span class="sxs-lookup"><span data-stu-id="a5aee-104">The guidance in this article applies to ASP.NET Core 3.2 Preview 4.</span></span> <span data-ttu-id="a5aee-105">Ten temat zostanie zaktualizowany do wersji zapoznawczej 5 w piątek, 24 kwietnia.</span><span class="sxs-lookup"><span data-stu-id="a5aee-105">This topic will be updated to cover Preview 5 on Friday, April 24.</span></span>
 
-<span data-ttu-id="fa406-105">[Tworzenie dzierżawy usługi AAD i aplikacji sieci web:](/azure/active-directory/develop/v2-overview)</span><span class="sxs-lookup"><span data-stu-id="fa406-105">[Create an AAD tenant and web application](/azure/active-directory/develop/v2-overview):</span></span>
+<span data-ttu-id="a5aee-106">Aby utworzyć Blazor autonomiczną aplikację webassembly, która używa usługi [Azure Active Directory (AAD)](https://azure.microsoft.com/services/active-directory/) do uwierzytelniania:</span><span class="sxs-lookup"><span data-stu-id="a5aee-106">To create a Blazor WebAssembly standalone app that uses [Azure Active Directory (AAD)](https://azure.microsoft.com/services/active-directory/) for authentication:</span></span>
 
-<span data-ttu-id="fa406-106">Zarejestruj aplikację usługi AAD w obszarze**rejestracji aplikacji** usługi Azure **Active Directory** > w witrynie Azure portal:</span><span class="sxs-lookup"><span data-stu-id="fa406-106">Register a AAD app in the **Azure Active Directory** > **App registrations** area of the Azure portal:</span></span>
+<span data-ttu-id="a5aee-107">[Utwórz dzierżawę usługi AAD i aplikację sieci Web](/azure/active-directory/develop/v2-overview):</span><span class="sxs-lookup"><span data-stu-id="a5aee-107">[Create an AAD tenant and web application](/azure/active-directory/develop/v2-overview):</span></span>
 
-1. <span data-ttu-id="fa406-107">Podaj **nazwę** aplikacji (na przykład \*\* Blazor client AAD).\*\*</span><span class="sxs-lookup"><span data-stu-id="fa406-107">Provide a **Name** for the app (for example, **Blazor Client AAD**).</span></span>
-1. <span data-ttu-id="fa406-108">Wybierz **typy obsługiwanych kont**.</span><span class="sxs-lookup"><span data-stu-id="fa406-108">Choose a **Supported account types**.</span></span> <span data-ttu-id="fa406-109">Dla tego środowiska można wybrać opcję **Konta w tym katalogu organizacyjnym.**</span><span class="sxs-lookup"><span data-stu-id="fa406-109">You may select **Accounts in this organizational directory only** for this experience.</span></span>
-1. <span data-ttu-id="fa406-110">Pozostaw zestaw rozwijany **Przekierowania identyfikatora URI** `https://localhost:5001/authentication/login-callback`do sieci **Web**i podaj identyfikator URI przekierowania .</span><span class="sxs-lookup"><span data-stu-id="fa406-110">Leave the **Redirect URI** drop down set to **Web**, and provide a redirect URI of `https://localhost:5001/authentication/login-callback`.</span></span>
-1. <span data-ttu-id="fa406-111">Wyłącz pole **wyboru Uprawnienia** > **udzielaj administracyjnej do otwierania i offline_access uprawnień.**</span><span class="sxs-lookup"><span data-stu-id="fa406-111">Disable the **Permissions** > **Grant admin concent to openid and offline_access permissions** check box.</span></span>
-1. <span data-ttu-id="fa406-112">Wybierz pozycję **Zarejestruj**.</span><span class="sxs-lookup"><span data-stu-id="fa406-112">Select **Register**.</span></span>
+<span data-ttu-id="a5aee-108">Zarejestruj aplikację usługi AAD w obszarze **Azure Active Directory** > **rejestracje aplikacji** Azure Active Directory w Azure Portal:</span><span class="sxs-lookup"><span data-stu-id="a5aee-108">Register a AAD app in the **Azure Active Directory** > **App registrations** area of the Azure portal:</span></span>
 
-<span data-ttu-id="fa406-113">W**konfiguracji** > platformy **uwierzytelniania** > **w sieci Web:**</span><span class="sxs-lookup"><span data-stu-id="fa406-113">In **Authentication** > **Platform configurations** > **Web**:</span></span>
+1. <span data-ttu-id="a5aee-109">Podaj **nazwę** aplikacji (na przykład \*\* Blazor klienta AAD\*\*).</span><span class="sxs-lookup"><span data-stu-id="a5aee-109">Provide a **Name** for the app (for example, **Blazor Client AAD**).</span></span>
+1. <span data-ttu-id="a5aee-110">Wybierz **obsługiwane typy kont**.</span><span class="sxs-lookup"><span data-stu-id="a5aee-110">Choose a **Supported account types**.</span></span> <span data-ttu-id="a5aee-111">**W tym katalogu organizacji można wybrać konta tylko** dla tego środowiska.</span><span class="sxs-lookup"><span data-stu-id="a5aee-111">You may select **Accounts in this organizational directory only** for this experience.</span></span>
+1. <span data-ttu-id="a5aee-112">Pozostaw pole listy rozwijanej **Identyfikator URI przekierowania** na **Sieć Web**i podaj identyfikator URI `https://localhost:5001/authentication/login-callback`przekierowania.</span><span class="sxs-lookup"><span data-stu-id="a5aee-112">Leave the **Redirect URI** drop down set to **Web**, and provide a redirect URI of `https://localhost:5001/authentication/login-callback`.</span></span>
+1. <span data-ttu-id="a5aee-113">Wyłącz pole wyboru**Przyznaj administratorowi uprawnienia do OpenID Connect i uprawnień offline_access** . **Permissions** > </span><span class="sxs-lookup"><span data-stu-id="a5aee-113">Disable the **Permissions** > **Grant admin concent to openid and offline_access permissions** check box.</span></span>
+1. <span data-ttu-id="a5aee-114">Wybierz pozycję **Zarejestruj**.</span><span class="sxs-lookup"><span data-stu-id="a5aee-114">Select **Register**.</span></span>
 
-1. <span data-ttu-id="fa406-114">Upewnij się, że `https://localhost:5001/authentication/login-callback` identyfikator **URI przekierowania** jest obecny.</span><span class="sxs-lookup"><span data-stu-id="fa406-114">Confirm the **Redirect URI** of `https://localhost:5001/authentication/login-callback` is present.</span></span>
-1. <span data-ttu-id="fa406-115">W przypadku **dotacji niejawnych**zaznacz pola wyboru **tokenów programu Access** i **tokenów identyfikatorów**.</span><span class="sxs-lookup"><span data-stu-id="fa406-115">For **Implicit grant**, select the check boxes for **Access tokens** and **ID tokens**.</span></span>
-1. <span data-ttu-id="fa406-116">Pozostałe wartości domyślne dla aplikacji są dopuszczalne dla tego środowiska.</span><span class="sxs-lookup"><span data-stu-id="fa406-116">The remaining defaults for the app are acceptable for this experience.</span></span>
-1. <span data-ttu-id="fa406-117">Wybierz ikonę **Zapisz**.</span><span class="sxs-lookup"><span data-stu-id="fa406-117">Select the **Save** button.</span></span>
+<span data-ttu-id="a5aee-115">W obszarze**konfiguracje** > platformy **uwierzytelniania** > w**sieci Web**:</span><span class="sxs-lookup"><span data-stu-id="a5aee-115">In **Authentication** > **Platform configurations** > **Web**:</span></span>
 
-<span data-ttu-id="fa406-118">Zapisz następujące informacje:</span><span class="sxs-lookup"><span data-stu-id="fa406-118">Record the following information:</span></span>
+1. <span data-ttu-id="a5aee-116">Upewnij się, że `https://localhost:5001/authentication/login-callback` jest obecny **Identyfikator URI przekierowania** .</span><span class="sxs-lookup"><span data-stu-id="a5aee-116">Confirm the **Redirect URI** of `https://localhost:5001/authentication/login-callback` is present.</span></span>
+1. <span data-ttu-id="a5aee-117">W przypadku **niejawnego przydzielenia**zaznacz pola wyboru dla **tokenów dostępu** i **tokenów identyfikatorów**.</span><span class="sxs-lookup"><span data-stu-id="a5aee-117">For **Implicit grant**, select the check boxes for **Access tokens** and **ID tokens**.</span></span>
+1. <span data-ttu-id="a5aee-118">Pozostałe wartości domyślne dla aplikacji są dopuszczalne dla tego środowiska.</span><span class="sxs-lookup"><span data-stu-id="a5aee-118">The remaining defaults for the app are acceptable for this experience.</span></span>
+1. <span data-ttu-id="a5aee-119">Wybierz ikonę **Zapisz**.</span><span class="sxs-lookup"><span data-stu-id="a5aee-119">Select the **Save** button.</span></span>
 
-* <span data-ttu-id="fa406-119">Identyfikator aplikacji (identyfikator klienta) (na `11111111-1111-1111-1111-111111111111`przykład)</span><span class="sxs-lookup"><span data-stu-id="fa406-119">Application ID (Client ID) (for example, `11111111-1111-1111-1111-111111111111`)</span></span>
-* <span data-ttu-id="fa406-120">Identyfikator katalogu (identyfikator dzierżawy) (na `22222222-2222-2222-2222-222222222222`przykład )</span><span class="sxs-lookup"><span data-stu-id="fa406-120">Directory ID (Tenant ID) (for example, `22222222-2222-2222-2222-222222222222`)</span></span>
+<span data-ttu-id="a5aee-120">Zapisz następujące informacje:</span><span class="sxs-lookup"><span data-stu-id="a5aee-120">Record the following information:</span></span>
 
-<span data-ttu-id="fa406-121">Zastąp symbole zastępcze w następującym poleceniu informacjami zarejestrowanymi wcześniej i wykonaj polecenie w powłoce polecenia:</span><span class="sxs-lookup"><span data-stu-id="fa406-121">Replace the placeholders in the following command with the information recorded earlier and execute the command in a command shell:</span></span>
+* <span data-ttu-id="a5aee-121">Identyfikator aplikacji (identyfikator klienta) (na przykład `11111111-1111-1111-1111-111111111111`)</span><span class="sxs-lookup"><span data-stu-id="a5aee-121">Application ID (Client ID) (for example, `11111111-1111-1111-1111-111111111111`)</span></span>
+* <span data-ttu-id="a5aee-122">Identyfikator katalogu (identyfikator dzierżawy) (na przykład `22222222-2222-2222-2222-222222222222`)</span><span class="sxs-lookup"><span data-stu-id="a5aee-122">Directory ID (Tenant ID) (for example, `22222222-2222-2222-2222-222222222222`)</span></span>
+
+<span data-ttu-id="a5aee-123">Zastąp symbole zastępcze w poniższym poleceniu zapisanymi wcześniej informacjami i wykonaj polecenie w powłoce poleceń:</span><span class="sxs-lookup"><span data-stu-id="a5aee-123">Replace the placeholders in the following command with the information recorded earlier and execute the command in a command shell:</span></span>
 
 ```dotnetcli
 dotnet new blazorwasm -au SingleOrg --client-id "{CLIENT ID}" --tenant-id "{TENANT ID}"
 ```
 
-<span data-ttu-id="fa406-122">Aby określić lokalizację wyjściową, która tworzy folder projektu, jeśli nie istnieje, należy dołączyć opcję `-o BlazorSample`wyjściową w poleceniu ze ścieżką (na przykład ).</span><span class="sxs-lookup"><span data-stu-id="fa406-122">To specify the output location, which creates a project folder if it doesn't exist, include the output option in the command with a path (for example, `-o BlazorSample`).</span></span> <span data-ttu-id="fa406-123">Nazwa folderu również staje się częścią nazwy projektu.</span><span class="sxs-lookup"><span data-stu-id="fa406-123">The folder name also becomes part of the project's name.</span></span>
+<span data-ttu-id="a5aee-124">Aby określić lokalizację wyjściową, która tworzy folder projektu, jeśli nie istnieje, Uwzględnij opcję Output w poleceniu z ścieżką (na przykład `-o BlazorSample`).</span><span class="sxs-lookup"><span data-stu-id="a5aee-124">To specify the output location, which creates a project folder if it doesn't exist, include the output option in the command with a path (for example, `-o BlazorSample`).</span></span> <span data-ttu-id="a5aee-125">Nazwa folderu jest również częścią nazwy projektu.</span><span class="sxs-lookup"><span data-stu-id="a5aee-125">The folder name also becomes part of the project's name.</span></span>
 
-## <a name="authentication-package"></a><span data-ttu-id="fa406-124">Pakiet uwierzytelniania</span><span class="sxs-lookup"><span data-stu-id="fa406-124">Authentication package</span></span>
+## <a name="authentication-package"></a><span data-ttu-id="a5aee-126">Pakiet uwierzytelniania</span><span class="sxs-lookup"><span data-stu-id="a5aee-126">Authentication package</span></span>
 
-<span data-ttu-id="fa406-125">Po utworzeniu aplikacji do używania`SingleOrg`kont służbowych ( aplikacja automatycznie otrzymuje odwołanie`Microsoft.Authentication.WebAssembly.Msal`do pakietu dla [biblioteki uwierzytelniania Firmy Microsoft](/azure/active-directory/develop/msal-overview) ( ).</span><span class="sxs-lookup"><span data-stu-id="fa406-125">When an app is created to use Work or School Accounts (`SingleOrg`), the app automatically receives a package reference for the [Microsoft Authentication Library](/azure/active-directory/develop/msal-overview) (`Microsoft.Authentication.WebAssembly.Msal`).</span></span> <span data-ttu-id="fa406-126">Pakiet zawiera zestaw uwierzytelniania, które pomagają aplikacji uwierzytelniać użytkowników i uzyskać tokeny do wywoływania chronionych interfejsów API.</span><span class="sxs-lookup"><span data-stu-id="fa406-126">The package provides a set of primitives that help the app authenticate users and obtain tokens to call protected APIs.</span></span>
+<span data-ttu-id="a5aee-127">Gdy aplikacja zostanie utworzona w celu korzystania z kont służbowych (`SingleOrg`), aplikacja automatycznie otrzymuje odwołanie do pakietu dla [biblioteki uwierzytelniania firmy Microsoft](/azure/active-directory/develop/msal-overview) (`Microsoft.Authentication.WebAssembly.Msal`).</span><span class="sxs-lookup"><span data-stu-id="a5aee-127">When an app is created to use Work or School Accounts (`SingleOrg`), the app automatically receives a package reference for the [Microsoft Authentication Library](/azure/active-directory/develop/msal-overview) (`Microsoft.Authentication.WebAssembly.Msal`).</span></span> <span data-ttu-id="a5aee-128">Pakiet zawiera zestaw elementów podstawowych, które ułatwiają aplikacji uwierzytelnianie użytkowników i uzyskiwanie tokenów do wywoływania chronionych interfejsów API.</span><span class="sxs-lookup"><span data-stu-id="a5aee-128">The package provides a set of primitives that help the app authenticate users and obtain tokens to call protected APIs.</span></span>
 
-<span data-ttu-id="fa406-127">Jeśli dodasz uwierzytelnianie do aplikacji, ręcznie dodaj pakiet do pliku projektu aplikacji:</span><span class="sxs-lookup"><span data-stu-id="fa406-127">If adding authentication to an app, manually add the package to the app's project file:</span></span>
+<span data-ttu-id="a5aee-129">W przypadku dodawania uwierzytelniania do aplikacji ręcznie Dodaj pakiet do pliku projektu aplikacji:</span><span class="sxs-lookup"><span data-stu-id="a5aee-129">If adding authentication to an app, manually add the package to the app's project file:</span></span>
 
 ```xml
 <PackageReference Include="Microsoft.Authentication.WebAssembly.Msal" 
     Version="{VERSION}" />
 ```
 
-<span data-ttu-id="fa406-128">Zastąp `{VERSION}` w poprzednim odwołaniu `Microsoft.AspNetCore.Blazor.Templates` do pakietu <xref:blazor/get-started> wersją pakietu przedstawioną w artykule.</span><span class="sxs-lookup"><span data-stu-id="fa406-128">Replace `{VERSION}` in the preceding package reference with the version of the `Microsoft.AspNetCore.Blazor.Templates` package shown in the <xref:blazor/get-started> article.</span></span>
+<span data-ttu-id="a5aee-130">Zastąp `{VERSION}` odwołanie do poprzedniego pakietu wersją `Microsoft.AspNetCore.Blazor.Templates` pakietu pokazanego w <xref:blazor/get-started> artykule.</span><span class="sxs-lookup"><span data-stu-id="a5aee-130">Replace `{VERSION}` in the preceding package reference with the version of the `Microsoft.AspNetCore.Blazor.Templates` package shown in the <xref:blazor/get-started> article.</span></span>
 
-<span data-ttu-id="fa406-129">Pakiet `Microsoft.Authentication.WebAssembly.Msal` przechodnie dodaje `Microsoft.AspNetCore.Components.WebAssembly.Authentication` pakiet do aplikacji.</span><span class="sxs-lookup"><span data-stu-id="fa406-129">The `Microsoft.Authentication.WebAssembly.Msal` package transitively adds the `Microsoft.AspNetCore.Components.WebAssembly.Authentication` package to the app.</span></span>
+<span data-ttu-id="a5aee-131">Pakiet `Microsoft.Authentication.WebAssembly.Msal` zawiera przechodnie Dodawanie `Microsoft.AspNetCore.Components.WebAssembly.Authentication` pakietu do aplikacji.</span><span class="sxs-lookup"><span data-stu-id="a5aee-131">The `Microsoft.Authentication.WebAssembly.Msal` package transitively adds the `Microsoft.AspNetCore.Components.WebAssembly.Authentication` package to the app.</span></span>
 
-## <a name="authentication-service-support"></a><span data-ttu-id="fa406-130">Obsługa usługi uwierzytelniania</span><span class="sxs-lookup"><span data-stu-id="fa406-130">Authentication service support</span></span>
+## <a name="authentication-service-support"></a><span data-ttu-id="a5aee-132">Obsługa usługi uwierzytelniania</span><span class="sxs-lookup"><span data-stu-id="a5aee-132">Authentication service support</span></span>
 
-<span data-ttu-id="fa406-131">Obsługa uwierzytelniania użytkowników jest zarejestrowana w `AddMsalAuthentication` kontenerze usługi `Microsoft.Authentication.WebAssembly.Msal` przy użyciu metody rozszerzenia dostarczonej przez pakiet.</span><span class="sxs-lookup"><span data-stu-id="fa406-131">Support for authenticating users is registered in the service container with the `AddMsalAuthentication` extension method provided by the `Microsoft.Authentication.WebAssembly.Msal` package.</span></span> <span data-ttu-id="fa406-132">Ta metoda konfiguruje wszystkie usługi wymagane dla aplikacji do interakcji z dostawcą tożsamości (IP).</span><span class="sxs-lookup"><span data-stu-id="fa406-132">This method sets up all of the services required for the app to interact with the Identity Provider (IP).</span></span>
+<span data-ttu-id="a5aee-133">Obsługa uwierzytelniania użytkowników jest rejestrowana w kontenerze usługi przy użyciu metody `AddMsalAuthentication` rozszerzenia dostarczonej przez `Microsoft.Authentication.WebAssembly.Msal` pakiet.</span><span class="sxs-lookup"><span data-stu-id="a5aee-133">Support for authenticating users is registered in the service container with the `AddMsalAuthentication` extension method provided by the `Microsoft.Authentication.WebAssembly.Msal` package.</span></span> <span data-ttu-id="a5aee-134">Ta metoda umożliwia skonfigurowanie wszystkich usług wymaganych przez aplikację do współpracy z dostawcą tożsamości (IP).</span><span class="sxs-lookup"><span data-stu-id="a5aee-134">This method sets up all of the services required for the app to interact with the Identity Provider (IP).</span></span>
 
-<span data-ttu-id="fa406-133">*Program.cs:*</span><span class="sxs-lookup"><span data-stu-id="fa406-133">*Program.cs*:</span></span>
+<span data-ttu-id="a5aee-135">*Program.cs*:</span><span class="sxs-lookup"><span data-stu-id="a5aee-135">*Program.cs*:</span></span>
 
 ```csharp
 builder.Services.AddMsalAuthentication(options =>
@@ -87,11 +90,11 @@ builder.Services.AddMsalAuthentication(options =>
 });
 ```
 
-<span data-ttu-id="fa406-134">Metoda `AddMsalAuthentication` akceptuje wywołanie zwrotne, aby skonfigurować parametry wymagane do uwierzytelnienia aplikacji.</span><span class="sxs-lookup"><span data-stu-id="fa406-134">The `AddMsalAuthentication` method accepts a callback to configure the parameters required to authenticate an app.</span></span> <span data-ttu-id="fa406-135">Wartości wymagane do skonfigurowania aplikacji można uzyskać z konfiguracji usługi AAD usługi Azure Portal podczas rejestracji aplikacji.</span><span class="sxs-lookup"><span data-stu-id="fa406-135">The values required for configuring the app can be obtained from the Azure Portal AAD configuration when you register the app.</span></span>
+<span data-ttu-id="a5aee-136">`AddMsalAuthentication` Metoda akceptuje wywołanie zwrotne w celu skonfigurowania parametrów wymaganych do uwierzytelnienia aplikacji.</span><span class="sxs-lookup"><span data-stu-id="a5aee-136">The `AddMsalAuthentication` method accepts a callback to configure the parameters required to authenticate an app.</span></span> <span data-ttu-id="a5aee-137">Wartości wymagane do skonfigurowania aplikacji można uzyskać z konfiguracji usługi AAD w witrynie Azure Portal podczas rejestrowania aplikacji.</span><span class="sxs-lookup"><span data-stu-id="a5aee-137">The values required for configuring the app can be obtained from the Azure Portal AAD configuration when you register the app.</span></span>
 
-## <a name="access-token-scopes"></a><span data-ttu-id="fa406-136">Zakresy tokenów dostępu</span><span class="sxs-lookup"><span data-stu-id="fa406-136">Access token scopes</span></span>
+## <a name="access-token-scopes"></a><span data-ttu-id="a5aee-138">Zakresy tokenów dostępu</span><span class="sxs-lookup"><span data-stu-id="a5aee-138">Access token scopes</span></span>
 
-<span data-ttu-id="fa406-137">Szablon Blazor WebAssembly nie konfiguruje automatycznie aplikacji do żądania tokenu dostępu dla bezpiecznego interfejsu API.</span><span class="sxs-lookup"><span data-stu-id="fa406-137">The Blazor WebAssembly template doesn't automatically configure the app to request an access token for a secure API.</span></span> <span data-ttu-id="fa406-138">Aby aprowizować token jako część przepływu logowania, dodaj zakres do domyślnych zakresów tokenu `MsalProviderOptions`dostępu:</span><span class="sxs-lookup"><span data-stu-id="fa406-138">To provision a token as part of the sign-in flow, add the scope to the default access token scopes of the `MsalProviderOptions`:</span></span>
+<span data-ttu-id="a5aee-139">Blazor Szablon webassembly nie konfiguruje automatycznie aplikacji do żądania tokenu dostępu dla bezpiecznego interfejsu API.</span><span class="sxs-lookup"><span data-stu-id="a5aee-139">The Blazor WebAssembly template doesn't automatically configure the app to request an access token for a secure API.</span></span> <span data-ttu-id="a5aee-140">Aby zainicjować obsługę administracyjną tokenu w ramach przepływu logowania, Dodaj zakres do domyślnych zakresów tokenów dostępu `MsalProviderOptions`:</span><span class="sxs-lookup"><span data-stu-id="a5aee-140">To provision a token as part of the sign-in flow, add the scope to the default access token scopes of the `MsalProviderOptions`:</span></span>
 
 ```csharp
 builder.Services.AddMsalAuthentication(options =>
@@ -102,48 +105,52 @@ builder.Services.AddMsalAuthentication(options =>
 ```
 
 > [!NOTE]
-> <span data-ttu-id="fa406-139">Jeśli portal Azure udostępnia identyfikator URI zakresu i **aplikacja zgłasza nieobsługiwanie wyjątek** po otrzymaniu *401 nieautoryzowanej* odpowiedzi z interfejsu API, spróbuj użyć identyfikatora URI zakresu, który nie zawiera schematu i hosta.</span><span class="sxs-lookup"><span data-stu-id="fa406-139">If the Azure portal provides a scope URI and **the app throws an unhandled exception** when it receives a *401 Unauthorized* response from the API, try using a scope URI that doesn't include the scheme and host.</span></span> <span data-ttu-id="fa406-140">Na przykład witryny Azure portal może zapewnić jeden z następujących formatów identyfikatora URI zakresu:</span><span class="sxs-lookup"><span data-stu-id="fa406-140">For example, the Azure portal may provide one of the following scope URI formats:</span></span>
+> <span data-ttu-id="a5aee-141">Jeśli Azure Portal udostępnia identyfikator URI zakresu, a **aplikacja zgłasza nieobsłużony wyjątek** , gdy odbierze *401 nieautoryzowaną* odpowiedź z interfejsu API, spróbuj użyć identyfikatora URI zakresu, który nie zawiera schematu i hosta.</span><span class="sxs-lookup"><span data-stu-id="a5aee-141">If the Azure portal provides a scope URI and **the app throws an unhandled exception** when it receives a *401 Unauthorized* response from the API, try using a scope URI that doesn't include the scheme and host.</span></span> <span data-ttu-id="a5aee-142">Na przykład Azure Portal może podać jeden z następujących formatów identyfikatorów URI zakresu:</span><span class="sxs-lookup"><span data-stu-id="a5aee-142">For example, the Azure portal may provide one of the following scope URI formats:</span></span>
 >
 > * `https://{ORGANIZATION}.onmicrosoft.com/{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}`
 > * `api://{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}`
 >
-> <span data-ttu-id="fa406-141">Podać identyfikator URI zakresu bez schematu i hosta:</span><span class="sxs-lookup"><span data-stu-id="fa406-141">Supply the scope URI without the scheme and host:</span></span>
+> <span data-ttu-id="a5aee-143">Podaj identyfikator URI zakresu bez schematu i hosta:</span><span class="sxs-lookup"><span data-stu-id="a5aee-143">Supply the scope URI without the scheme and host:</span></span>
 >
 > ```csharp
 > options.ProviderOptions.DefaultAccessTokenScopes.Add(
 >     "{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}");
 > ```
 
-<span data-ttu-id="fa406-142">Aby uzyskać więcej informacji, zobacz <xref:security/blazor/webassembly/additional-scenarios#request-additional-access-tokens>.</span><span class="sxs-lookup"><span data-stu-id="fa406-142">For more information, see <xref:security/blazor/webassembly/additional-scenarios#request-additional-access-tokens>.</span></span>
+<span data-ttu-id="a5aee-144">Aby uzyskać więcej informacji, zobacz <xref:security/blazor/webassembly/additional-scenarios#request-additional-access-tokens>.</span><span class="sxs-lookup"><span data-stu-id="a5aee-144">For more information, see <xref:security/blazor/webassembly/additional-scenarios#request-additional-access-tokens>.</span></span>
 
-## <a name="imports-file"></a><span data-ttu-id="fa406-143">Import pliku</span><span class="sxs-lookup"><span data-stu-id="fa406-143">Imports file</span></span>
+<!--
+    For more information, see <xref:security/blazor/webassembly/additional-scenarios#attach-tokens-to-outgoing-requests>.
+-->
+
+## <a name="imports-file"></a><span data-ttu-id="a5aee-145">Importuje plik</span><span class="sxs-lookup"><span data-stu-id="a5aee-145">Imports file</span></span>
 
 [!INCLUDE[](~/includes/blazor-security/imports-file-standalone.md)]
 
-## <a name="index-page"></a><span data-ttu-id="fa406-144">Strona indeksu</span><span class="sxs-lookup"><span data-stu-id="fa406-144">Index page</span></span>
+## <a name="index-page"></a><span data-ttu-id="a5aee-146">Strona indeksu</span><span class="sxs-lookup"><span data-stu-id="a5aee-146">Index page</span></span>
 
 [!INCLUDE[](~/includes/blazor-security/index-page-msal.md)]
 
-## <a name="app-component"></a><span data-ttu-id="fa406-145">Składnik aplikacji</span><span class="sxs-lookup"><span data-stu-id="fa406-145">App component</span></span>
+## <a name="app-component"></a><span data-ttu-id="a5aee-147">Składnik aplikacji</span><span class="sxs-lookup"><span data-stu-id="a5aee-147">App component</span></span>
 
 [!INCLUDE[](~/includes/blazor-security/app-component.md)]
 
-## <a name="redirecttologin-component"></a><span data-ttu-id="fa406-146">Składnik RedirectToLogin</span><span class="sxs-lookup"><span data-stu-id="fa406-146">RedirectToLogin component</span></span>
+## <a name="redirecttologin-component"></a><span data-ttu-id="a5aee-148">Składnik RedirectToLogin</span><span class="sxs-lookup"><span data-stu-id="a5aee-148">RedirectToLogin component</span></span>
 
 [!INCLUDE[](~/includes/blazor-security/redirecttologin-component.md)]
 
-## <a name="logindisplay-component"></a><span data-ttu-id="fa406-147">Składnik LogowanieWydajnik</span><span class="sxs-lookup"><span data-stu-id="fa406-147">LoginDisplay component</span></span>
+## <a name="logindisplay-component"></a><span data-ttu-id="a5aee-149">Składnik LoginDisplay</span><span class="sxs-lookup"><span data-stu-id="a5aee-149">LoginDisplay component</span></span>
 
 [!INCLUDE[](~/includes/blazor-security/logindisplay-component.md)]
 
-## <a name="authentication-component"></a><span data-ttu-id="fa406-148">Składnik uwierzytelniania</span><span class="sxs-lookup"><span data-stu-id="fa406-148">Authentication component</span></span>
+## <a name="authentication-component"></a><span data-ttu-id="a5aee-150">Składnik uwierzytelniania</span><span class="sxs-lookup"><span data-stu-id="a5aee-150">Authentication component</span></span>
 
 [!INCLUDE[](~/includes/blazor-security/authentication-component.md)]
 
 [!INCLUDE[](~/includes/blazor-security/troubleshoot.md)]
 
-## <a name="additional-resources"></a><span data-ttu-id="fa406-149">Zasoby dodatkowe</span><span class="sxs-lookup"><span data-stu-id="fa406-149">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="a5aee-151">Dodatkowe zasoby</span><span class="sxs-lookup"><span data-stu-id="a5aee-151">Additional resources</span></span>
 
-* [<span data-ttu-id="fa406-150">Żądanie dodatkowych tokenów dostępu</span><span class="sxs-lookup"><span data-stu-id="fa406-150">Request additional access tokens</span></span>](xref:security/blazor/webassembly/additional-scenarios#request-additional-access-tokens)
+* <xref:security/blazor/webassembly/additional-scenarios>
 * <xref:security/authentication/azure-active-directory/index>
-* [<span data-ttu-id="fa406-151">Dokumentacja poświęcona platformie tożsamości firmy Microsoft</span><span class="sxs-lookup"><span data-stu-id="fa406-151">Microsoft identity platform documentation</span></span>](/azure/active-directory/develop/)
+* [<span data-ttu-id="a5aee-152">Dokumentacja poświęcona platformie tożsamości firmy Microsoft</span><span class="sxs-lookup"><span data-stu-id="a5aee-152">Microsoft identity platform documentation</span></span>](/azure/active-directory/develop/)

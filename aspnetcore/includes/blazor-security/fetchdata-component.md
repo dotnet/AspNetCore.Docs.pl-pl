@@ -1,26 +1,25 @@
 Składnik `FetchData` pokazuje, jak:
 
-* Aprowizuj token dostępu.
-* Użyj tokenu dostępu, aby wywołać chroniony interfejs API zasobów w aplikacji *Serwer.*
+* Inicjowanie obsługi administracyjnej tokenu dostępu.
+* Użyj tokenu dostępu, aby wywołać interfejs API zasobów chronionych w aplikacji *serwera* .
 
-Dyrektywa `@attribute [Authorize]` wskazuje system autoryzacji Blazor WebAssembly, że użytkownik musi być autoryzowany, aby odwiedzić ten składnik. Obecność atrybutu w aplikacji *klienta* nie uniemożliwia wywoływania interfejsu API na serwerze bez odpowiednich poświadczeń. Aplikacja *Server* również `[Authorize]` należy użyć w odpowiednich punktach końcowych, aby poprawnie je chronić.
+`@attribute [Authorize]` Dyrektywa wskazuje system autoryzacji zestawu webassembly Blazor, który użytkownik musi mieć autoryzację, aby móc odwiedzić ten składnik. Obecność atrybutu w aplikacji *klienckiej* nie zapobiega WYWOŁYWANIU interfejsu API na serwerze bez poprawnych poświadczeń. Aplikacja *serwera* musi również użyć `[Authorize]` odpowiednich punktów końcowych, aby je poprawnie chronić.
 
-`AuthenticationService.RequestAccessToken();`zajmuje się żądanie tokenu dostępu, który można dodać do żądania wywołania interfejsu API. Jeśli token jest buforowany lub usługa jest w stanie aprowizować nowy token dostępu bez interakcji z użytkownikiem, żądanie tokenu powiedzie się. W przeciwnym razie żądanie tokenu kończy się niepowodzeniem.
+`AuthenticationService.RequestAccessToken();`wykonuje żądanie tokenu dostępu, który można dodać do żądania, aby wywołać interfejs API. Jeśli token jest buforowany lub usługa jest w stanie zainicjować nowy token dostępu bez interakcji z użytkownikiem, żądanie tokenu powiedzie się. W przeciwnym razie żądanie tokenu kończy się niepowodzeniem.
 
-Aby uzyskać rzeczywisty token do uwzględnienia w żądaniu, aplikacja musi sprawdzić, czy żądanie powiodło się, wywołując `tokenResult.TryGetToken(out var token)`. 
+Aby uzyskać rzeczywisty token do uwzględnienia w żądaniu, aplikacja musi sprawdzić, czy żądanie powiodło się, wywołując `tokenResult.TryGetToken(out var token)`metodę. 
 
-Jeśli żądanie zakończyło się pomyślnie, zmienna tokenu jest wypełniona tokenem dostępu. Właściwość `Value` tokenu udostępnia ciąg literału do `Authorization` uwzględnienia w nagłówku żądania.
+Jeśli żądanie zakończyło się pomyślnie, zmienna tokenu jest wypełniana tokenem dostępu. `Value` Właściwość tokenu ujawnia ciąg literału, który ma zostać uwzględniony w `Authorization` nagłówku żądania.
 
-Jeśli żądanie nie powiodło się, ponieważ token nie może być aprowizowana bez interakcji z użytkownikiem, wynik tokenu zawiera adres URL przekierowania. Przejście do tego adresu URL powoduje przejście użytkownika do strony logowania i powrót do bieżącej strony po pomyślnym uwierzytelnieniu.
+Jeśli żądanie nie powiodło się, ponieważ nie można zainicjować obsługi administracyjnej tokenu bez interakcji z użytkownikiem, wynik tokenu zawiera adres URL przekierowania. Przechodzenie do tego adresu URL powoduje, że użytkownik jest zalogowany na stronie logowania i z powrotem do bieżącej strony po pomyślnym uwierzytelnieniu.
 
 ```razor
 @page "/fetchdata"
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
-@inject IAccessTokenProvider AuthenticationService
-@inject NavigationManager Navigation
-@using {APPLICATION NAMESPACE}.Shared
+@using {APP NAMESPACE}.Shared
 @attribute [Authorize]
+@inject HttpClient Http
 
 ...
 
@@ -29,23 +28,14 @@ Jeśli żądanie nie powiodło się, ponieważ token nie może być aprowizowana
 
     protected override async Task OnInitializedAsync()
     {
-        var httpClient = new HttpClient();
-        httpClient.BaseAddress = new Uri(Navigation.BaseUri);
-
-        var tokenResult = await AuthenticationService.RequestAccessToken();
-
-        if (tokenResult.TryGetToken(out var token))
+        try
         {
-            httpClient.DefaultRequestHeaders.Add("Authorization", 
-                $"Bearer {token.Value}");
-            forecasts = await httpClient.GetFromJsonAsync<WeatherForecast[]>(
-                "WeatherForecast");
+            forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("WeatherForecast");
         }
-        else
+        catch (AccessTokenNotAvailableException exception)
         {
-            Navigation.NavigateTo(tokenResult.RedirectUrl);
+            exception.Redirect();
         }
-
     }
 }
 ```

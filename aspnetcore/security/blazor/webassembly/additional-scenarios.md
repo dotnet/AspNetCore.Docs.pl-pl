@@ -5,17 +5,17 @@ description: ''
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/23/2020
+ms.date: 04/24/2020
 no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/additional-scenarios
-ms.openlocfilehash: 2dbb2bbd07c427c594a12b8037f35cfff2228191
-ms.sourcegitcommit: 7bb14d005155a5044c7902a08694ee8ccb20c113
+ms.openlocfilehash: cd1433d5716b9b595270209fa874a8cb93fdf699
+ms.sourcegitcommit: 4f91da9ce4543b39dba5e8920a9500d3ce959746
 ms.translationtype: MT
 ms.contentlocale: pl-PL
 ms.lasthandoff: 04/24/2020
-ms.locfileid: "82111178"
+ms.locfileid: "82138433"
 ---
 # <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a>Dodatkowe scenariusze zabezpieczeń ASP.NET Core Blazor webassembly
 
@@ -24,9 +24,6 @@ Autor [Javier Calvarro Nelson](https://github.com/javiercn)
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 [!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
-
-> [!NOTE]
-> Wskazówki zawarte w tym artykule dotyczą ASP.NET Core 3,2 w wersji zapoznawczej 4. Ten temat zostanie zaktualizowany do wersji zapoznawczej 5 w piątek, 24 kwietnia.
 
 ## <a name="request-additional-access-tokens"></a>Żądaj dodatkowych tokenów dostępu
 
@@ -46,7 +43,7 @@ builder.Services.AddMsalAuthentication(options =>
 }
 ```
 
-`IAccessTokenProvider.RequestToken` Metoda zapewnia Przeciążenie, które umożliwia aplikacji Inicjowanie obsługi tokenu z danym zestawem zakresów, jak pokazano w następującym przykładzie:
+`IAccessTokenProvider.RequestToken` Metoda zapewnia Przeciążenie, które umożliwia aplikacji udostępnianie tokenu dostępu z danym zestawem zakresów, jak pokazano w następującym przykładzie:
 
 ```csharp
 var tokenResult = await AuthenticationService.RequestAccessToken(
@@ -93,7 +90,8 @@ builder.Services.AddHttpClient("BlazorWithIdentityApp1.ServerAPI",
     client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
         .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 
-builder.Services.AddTransient(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("BlazorWithIdentityApp1.ServerAPI"));
+builder.Services.AddTransient(sp => sp.GetRequiredService<IHttpClientFactory>()
+    .CreateClient("BlazorWithIdentityApp1.ServerAPI"));
 ```
 
 W przypadku, gdy klient został `CreateClient` utworzony za pomocą programu w powyższym przykładzie, `HttpClient` jest dostarczane wystąpienia, które zawierają tokeny dostępu podczas wykonywania żądań do projektu serwera.
@@ -403,6 +401,71 @@ Jeśli zdecydujesz się to zrobić, możesz przerwać interfejs użytkownika na 
 | `authentication/profile`         | `<UserProfile>`         |
 | `authentication/register`        | `<Registering>`         |
 
+## <a name="customize-the-user"></a>Dostosowywanie użytkownika
+
+Użytkownicy powiązana z aplikacją mogą być dostosowywać. W poniższym przykładzie Wszyscy uwierzytelnieni użytkownicy otrzymują `amr` każde z metod uwierzytelniania użytkownika.
+
+Utwórz klasę rozszerzającą `RemoteUserAccount` klasę:
+
+```csharp
+using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+
+public class OidcAccount : RemoteUserAccount
+{
+    [JsonPropertyName("amr")]
+    public string[] AuthenticationMethod { get; set; }
+}
+```
+
+Utwórz fabrykę, która `AccountClaimsPrincipalFactory<TAccount>`rozszerza:
+
+```csharp
+using System.Security.Claims;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication.Internal;
+
+public class CustomAccountFactory 
+    : AccountClaimsPrincipalFactory<OidcAccount>
+{
+    public AccountClaimsPrincipalFactory(NavigationManager navigationManager, 
+        IAccessTokenProviderAccessor accessor) : base(accessor)
+    {
+    }
+  
+    public async override ValueTask<ClaimsPrincipal> CreateUserAsync(
+        OidcAccount account, RemoteAuthenticationUserOptions options)
+    {
+        var initialUser = await base.CreateUserAsync(account, options);
+        
+        if (initialUser.Identity.IsAuthenticated)
+        {
+            foreach (var value in account.AuthenticationMethod)
+            {
+                ((ClaimsIdentity)initialUser.Identity)
+                    .AddClaim(new Claim("amr", value));
+            }
+        }
+           
+        return initialUser;
+    }
+}
+```
+
+Zarejestruj usługi, `CustomAccountFactory`aby użyć:
+
+```csharp
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+
+...
+
+builder.Services.AddApiAuthorization<RemoteAuthenticationState, OidcAccount>()
+    .AddAccountClaimsPrincipalFactory<RemoteAuthenticationState, OidcAccount, 
+        CustomAccountFactory>();
+```
+
 ## <a name="support-prerendering-with-authentication"></a>Obsługa prerenderowania przy użyciu uwierzytelniania
 
 Po zastosowaniu wskazówek w jednej z aplikacji hostowanego Blazor zestawu webassembly Skorzystaj z poniższych instrukcji, aby utworzyć aplikację, która:
@@ -451,7 +514,8 @@ public void ConfigureServices(IServiceCollection services)
     ...
 
     services.AddRazorPages();
-    services.AddScoped<AuthenticationStateProvider, ServerAuthenticationStateProvider>();
+    services.AddScoped<AuthenticationStateProvider, 
+        ServerAuthenticationStateProvider>();
     services.AddScoped<SignOutSessionStateManager>();
 
     Client.Program.ConfigureCommonServices(services);
@@ -477,7 +541,8 @@ W aplikacji serwer Utwórz folder *strony* , jeśli nie istnieje. Utwórz stron�
   <app>
       @if (!HttpContext.Request.Path.StartsWithSegments("/authentication"))
       {
-          <component type="typeof(Wasm.Authentication.Client.App)" render-mode="Static" />
+          <component type="typeof(Wasm.Authentication.Client.App)" 
+              render-mode="Static" />
       }
       else
       {

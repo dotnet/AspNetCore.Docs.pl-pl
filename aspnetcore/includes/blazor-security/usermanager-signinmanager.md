@@ -1,9 +1,9 @@
-## <a name="usermanager-and-signinmanager"></a>UserManager i SignInManager
+## <a name="usermanager-and-signinmanager"></a>Usermanager i SignInManager
 
-Ustaw typ oświadczenia identyfikatora użytkownika, gdy aplikacja Serwer wymaga:
+Ustaw typ żądania identyfikatora użytkownika, gdy aplikacja serwera wymaga:
 
 * <xref:Microsoft.AspNetCore.Identity.UserManager%601>lub <xref:Microsoft.AspNetCore.Identity.SignInManager%601> w punkcie końcowym interfejsu API.
-* <xref:Microsoft.AspNetCore.Identity.IdentityUser>szczegóły, takie jak imię i nazwisko użytkownika, adres e-mail lub czas zakończenia blokady.
+* <xref:Microsoft.AspNetCore.Identity.IdentityUser>Szczegóły, takie jak nazwa użytkownika, adres e-mail lub czas zakończenia blokady.
 
 W pliku `Startup.ConfigureServices`:
 
@@ -12,7 +12,7 @@ services.Configure<IdentityOptions>(options =>
     options.ClaimsIdentity.UserIdClaimType = ClaimTypes.NameIdentifier);
 ```
 
-Następujące `WeatherForecastController` <xref:Microsoft.AspNetCore.Identity.IdentityUser%601.UserName> dzienniki, gdy `Get` metoda jest wywoływana:
+Następujące `WeatherForecastController` dzienniki są wywoływane <xref:Microsoft.AspNetCore.Identity.IdentityUser%601.UserName> , gdy `Get` wywoływana jest metoda:
 
 ```csharp
 using System;
@@ -23,10 +23,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
-using BlazorAppIdentityServer.Server.Models;
-using BlazorAppIdentityServer.Shared;
+using {APP NAMESPACE}.Server.Models;
+using {APP NAMESPACE}.Shared;
 
-namespace BlazorAppIdentityServer.Server.Controllers
+namespace {APP NAMESPACE}.Server.Controllers
 {
     [Authorize]
     [ApiController]

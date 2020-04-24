@@ -5,17 +5,17 @@ description: Aby utworzyć nową Blazor hostowaną aplikację z uwierzytelnianie
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/22/2020
+ms.date: 04/24/2020
 no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/hosted-with-identity-server
-ms.openlocfilehash: f8de07e2e21ca19b5c4e95839e7b7e621c335ad0
-ms.sourcegitcommit: 7bb14d005155a5044c7902a08694ee8ccb20c113
+ms.openlocfilehash: ffdcd30ae9ce5350113569a500e99cf8db82ad65
+ms.sourcegitcommit: 4f91da9ce4543b39dba5e8920a9500d3ce959746
 ms.translationtype: MT
 ms.contentlocale: pl-PL
 ms.lasthandoff: 04/24/2020
-ms.locfileid: "82110953"
+ms.locfileid: "82138612"
 ---
 # <a name="secure-an-aspnet-core-opno-locblazor-webassembly-hosted-app-with-identity-server"></a>Zabezpiecz aplikację hostowaną ASP.NET Core Blazor webassembly z serwerem tożsamości
 
@@ -24,9 +24,6 @@ Autorzy [Javier Calvarro Nelson](https://github.com/javiercn) i [Luke Latham](ht
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 [!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
-
-> [!NOTE]
-> Wskazówki zawarte w tym artykule dotyczą ASP.NET Core 3,2 w wersji zapoznawczej 4. Ten temat zostanie zaktualizowany do wersji zapoznawczej 5 w piątek, 24 kwietnia.
 
 Aby utworzyć nową Blazor hostowaną aplikację w programie Visual Studio, która używa [IdentityServer](https://identityserver.io/) do uwierzytelniania użytkowników i wywołań interfejsu API:
 
@@ -58,9 +55,11 @@ W poniższych sekcjach opisano Dodatki do projektu w przypadku włączenia obsł
 
     ```csharp
     services.AddDbContext<ApplicationDbContext>(options =>
-        options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+        options.UseSqlite(
+            Configuration.GetConnectionString("DefaultConnection")));
 
-    services.AddDefaultIdentity<ApplicationUser>()
+    services.AddDefaultIdentity<ApplicationUser>(options => 
+            options.SignIn.RequireConfirmedAccount = true)
         .AddEntityFrameworkStores<ApplicationDbContext>();
     ```
 
@@ -90,6 +89,13 @@ W poniższych sekcjach opisano Dodatki do projektu w przypadku włączenia obsł
 
     ```csharp
     app.UseIdentityServer();
+    ```
+
+  * Oprogramowanie pośredniczące uwierzytelniania i autoryzacji:
+
+    ```csharp
+    app.UseAuthentication();
+    app.UseAuthorization();
     ```
 
 ### <a name="addapiauthorization"></a>AddApiAuthorization
@@ -124,19 +130,9 @@ W sekcji plik ustawień aplikacji (*appSettings. JSON*) w katalogu głównym pro
 ```json
 "IdentityServer": {
   "Clients": {
-    "BlazorApplicationWithAuthentication.Client": {
+    "{APP ASSEMBLY}.Client": {
       "Profile": "IdentityServerSPA"
     }
-  }
-}
-```
-
-W pliku ustawień aplikacji środowiska programistycznego (*appSettings. Development. JSON*) w katalogu głównym projektu `IdentityServer` sekcja opisuje klucz używany do podpisywania tokenów. <!-- When deploying to production, a key needs to be provisioned and deployed alongside the app, as explained in the [Deploy to production](#deploy-to-production) section. -->
-
-```json
-"IdentityServer": {
-  "Key": {
-    "Type": "Development"
   }
 }
 ```

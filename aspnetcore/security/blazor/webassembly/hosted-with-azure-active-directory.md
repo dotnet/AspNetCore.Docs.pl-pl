@@ -5,17 +5,17 @@ description: ''
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/23/2020
+ms.date: 04/24/2020
 no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/hosted-with-azure-active-directory
-ms.openlocfilehash: 8c24546da50607d692a9cdc9f9c007d6ac8645ad
-ms.sourcegitcommit: 7bb14d005155a5044c7902a08694ee8ccb20c113
+ms.openlocfilehash: 5c1113a8177d54bfe71f41e1fd34c25d4dd03012
+ms.sourcegitcommit: 4f91da9ce4543b39dba5e8920a9500d3ce959746
 ms.translationtype: MT
 ms.contentlocale: pl-PL
 ms.lasthandoff: 04/24/2020
-ms.locfileid: "82110931"
+ms.locfileid: "82138590"
 ---
 # <a name="secure-an-aspnet-core-opno-locblazor-webassembly-hosted-app-with-azure-active-directory"></a>Zabezpiecz aplikację hostowaną ASP.NET Core Blazor webassembly przy użyciu Azure Active Directory
 
@@ -24,9 +24,6 @@ Autorzy [Javier Calvarro Nelson](https://github.com/javiercn) i [Luke Latham](ht
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 [!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
-
-> [!NOTE]
-> Wskazówki zawarte w tym artykule dotyczą ASP.NET Core 3,2 w wersji zapoznawczej 4. Ten temat zostanie zaktualizowany do wersji zapoznawczej 5 w piątek, 24 kwietnia.
 
 W tym artykule opisano sposób tworzenia [ Blazor aplikacji hostowanej w programie webassembly](xref:blazor/hosting-models#blazor-webassembly) , która używa usługi [Azure Active Directory (AAD)](https://azure.microsoft.com/services/active-directory/) do uwierzytelniania.
 
@@ -120,7 +117,7 @@ Obsługa uwierzytelniania i autoryzowania wywołań ASP.NET Core interfejsów AP
 
 ```xml
 <PackageReference Include="Microsoft.AspNetCore.Authentication.AzureAD.UI" 
-    Version="3.1.0" />
+    Version="{VERSION}" />
 ```
 
 ### <a name="authentication-service-support"></a>Obsługa usługi uwierzytelniania
@@ -166,7 +163,20 @@ Plik *appSettings. JSON* zawiera opcje konfigurowania procedury obsługi okazici
     "Instance": "https://login.microsoftonline.com/",
     "Domain": "{DOMAIN}",
     "TenantId": "{TENANT ID}",
-    "ClientId": "{API CLIENT ID}",
+    "ClientId": "{SERVER API APP CLIENT ID}",
+  }
+}
+```
+
+Przykład:
+
+```json
+{
+  "AzureAd": {
+    "Instance": "https://login.microsoftonline.com/",
+    "Domain": "contoso.onmicrosoft.com",
+    "TenantId": "e86c78e2-8bb4-4c41-aefd-918e0565a45e",
+    "ClientId": "41451fa7-82d9-4673-8fa5-69eff5a761fd",
   }
 }
 ```
@@ -213,6 +223,19 @@ Pakiet `Microsoft.Authentication.WebAssembly.Msal` zawiera przechodnie Dodawanie
 
 ### <a name="authentication-service-support"></a>Obsługa usługi uwierzytelniania
 
+Dodano obsługę `HttpClient` wystąpień, które obejmują tokeny dostępu podczas wykonywania żądań do projektu serwera.
+
+*Program.cs*:
+
+```csharp
+builder.Services.AddHttpClient("{APP ASSEMBLY}.ServerAPI", client => 
+        client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
+    .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
+
+builder.Services.AddTransient(sp => sp.GetRequiredService<IHttpClientFactory>()
+    .CreateClient("{APP ASSEMBLY}.ServerAPI"));
+```
+
 Obsługa uwierzytelniania użytkowników jest rejestrowana w kontenerze usługi przy użyciu metody `AddMsalAuthentication` rozszerzenia dostarczonej przez `Microsoft.Authentication.WebAssembly.Msal` pakiet. Ta metoda umożliwia skonfigurowanie wszystkich usług wymaganych przez aplikację do współpracy z dostawcą tożsamości (IP).
 
 *Program.cs*:
@@ -220,14 +243,36 @@ Obsługa uwierzytelniania użytkowników jest rejestrowana w kontenerze usługi 
 ```csharp
 builder.Services.AddMsalAuthentication(options =>
 {
-    var authentication = options.ProviderOptions.Authentication;
-    authentication.Authority = "https://login.microsoftonline.com/{TENANT ID}";
-    authentication.ClientId = "{CLIENT ID}";
+    builder.Configuration.Bind("AzureAd", options.ProviderOptions.Authentication);
     options.ProviderOptions.DefaultAccessTokenScopes.Add("{SCOPE URI}");
 });
 ```
 
 `AddMsalAuthentication` Metoda akceptuje wywołanie zwrotne w celu skonfigurowania parametrów wymaganych do uwierzytelnienia aplikacji. Wartości wymagane do skonfigurowania aplikacji można uzyskać z konfiguracji usługi AAD w witrynie Azure Portal podczas rejestrowania aplikacji.
+
+Konfiguracja jest dostarczana przez plik *wwwroot/appSettings. JSON* :
+
+```json
+{
+    "AzureAd": {
+        "Authority": "https://login.microsoftonline.com/{TENANT ID}",
+        "ClientId": "{CLIENT APP CLIENT ID}",
+        "ValidateAuthority": true
+    }
+}
+```
+
+Przykład:
+
+```json
+{
+    "AzureAd": {
+        "Authority": "https://login.microsoftonline.com/e86c78e2-...-918e0565a45e",
+        "ClientId": "4369008b-21fa-427c-abaa-9b53bf58e538",
+        "ValidateAuthority": true
+    }
+}
+```
 
 ### <a name="access-token-scopes"></a>Zakresy tokenów dostępu
 
@@ -259,11 +304,11 @@ builder.Services.AddMsalAuthentication(options =>
 >     "{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}");
 > ```
 
-Aby uzyskać więcej informacji, zobacz <xref:security/blazor/webassembly/additional-scenarios#request-additional-access-tokens>.
+Aby uzyskać więcej informacji, zobacz następujące sekcje *dodatkowych scenariuszy* :
 
-<!--
-    For more information, see <xref:security/blazor/webassembly/additional-scenarios#attach-tokens-to-outgoing-requests>.
--->
+* [Żądaj dodatkowych tokenów dostępu](xref:security/blazor/webassembly/additional-scenarios#request-additional-access-tokens)
+* [Dołącz tokeny do żądań wychodzących](xref:security/blazor/webassembly/additional-scenarios#attach-tokens-to-outgoing-requests)
+
 
 ### <a name="imports-file"></a>Importuje plik
 

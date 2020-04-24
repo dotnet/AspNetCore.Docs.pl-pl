@@ -5,17 +5,17 @@ description: Dowiedz się, Blazor jak zabezpieczyć aplikacje WebAssemlby jako a
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/22/2020
+ms.date: 04/24/2020
 no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/index
-ms.openlocfilehash: dba70afdb7a0a50da7ded38437860b52d2ce5f88
-ms.sourcegitcommit: 7bb14d005155a5044c7902a08694ee8ccb20c113
+ms.openlocfilehash: c096419f4866ea2f1db135594c4b88c89c7c90d1
+ms.sourcegitcommit: 4f91da9ce4543b39dba5e8920a9500d3ce959746
 ms.translationtype: MT
 ms.contentlocale: pl-PL
 ms.lasthandoff: 04/24/2020
-ms.locfileid: "82110902"
+ms.locfileid: "82138420"
 ---
 # <a name="secure-aspnet-core-opno-locblazor-webassembly"></a>Bezpieczny ASP.NET Core Blazor zestaw webassembly
 
@@ -24,9 +24,6 @@ Autor [Javier Calvarro Nelson](https://github.com/javiercn)
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 [!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
-
-> [!NOTE]
-> Wskazówki zawarte w tym artykule dotyczą ASP.NET Core 3,2 w wersji zapoznawczej 4. Ten temat zostanie zaktualizowany do wersji zapoznawczej 5 w piątek, 24 kwietnia.
 
 BlazorAplikacje webassembly są zabezpieczone w taki sam sposób, jak aplikacje jednostronicowe (aplikacji jednostronicowych). Istnieje kilka podejścia do uwierzytelniania użytkowników w aplikacji jednostronicowych, ale najpopularniejsze i kompleksowe podejście polega na użyciu implementacji opartej na [protokole OAuth 2,0](https://oauth.net/), takim jak [Open ID Connect (OIDC)](https://openid.net/connect/).
 

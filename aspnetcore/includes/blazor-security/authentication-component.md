@@ -1,8 +1,8 @@
-Strona utworzona przez składnik `Authentication` (*Pages/Authentication. Razor*) definiuje trasy wymagane do obsługi różnych etapów uwierzytelniania.
+Strona utworzona przez `Authentication` składnik (*Pages/Authentication. Razor*) definiuje trasy wymagane do obsługi różnych etapów uwierzytelniania.
 
-Składnik `RemoteAuthenticatorView`:
+`RemoteAuthenticatorView` Składnik:
 
-* Jest dostarczany przez pakiet `Microsoft.AspNetCore.Components.WebAssembly.Authentication`.
+* Jest dostarczany przez pakiet [Microsoft. AspNetCore. Components. webassembly. Authentication](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) .
 * Zarządza wykonywaniem odpowiednich czynności na każdym etapie uwierzytelniania.
 
 ```razor

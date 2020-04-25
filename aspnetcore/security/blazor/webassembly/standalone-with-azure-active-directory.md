@@ -10,12 +10,12 @@ no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/standalone-with-azure-active-directory
-ms.openlocfilehash: 4c5fc6a07ce52ee9560cd2aa0c7dbc3032522f00
-ms.sourcegitcommit: 4f91da9ce4543b39dba5e8920a9500d3ce959746
+ms.openlocfilehash: 6e01fa37e3b7b24b95bc86ea2a1dd53dbdd9c672
+ms.sourcegitcommit: 6d271f4b4c3cd1e82267f51d9bfb6de221c394fe
 ms.translationtype: MT
 ms.contentlocale: pl-PL
 ms.lasthandoff: 04/24/2020
-ms.locfileid: "82138473"
+ms.locfileid: "82149970"
 ---
 # <a name="secure-an-aspnet-core-opno-locblazor-webassembly-standalone-app-with-azure-active-directory"></a>Zabezpiecz ASP.NET Core Blazor autonomiczną aplikację webassembly z Azure Active Directory
 
@@ -91,10 +91,10 @@ Konfiguracja jest dostarczana przez plik *wwwroot/appSettings. JSON* :
 
 ```json
 {
-    "AzureAd": {
-        "Authority": "https://login.microsoftonline.com/{TENANT ID}",
-        "ClientId": "{CLIENT ID}"
-    }
+  "AzureAd": {
+    "Authority": "https://login.microsoftonline.com/{TENANT ID}",
+    "ClientId": "{CLIENT ID}"
+  }
 }
 ```
 
@@ -102,10 +102,10 @@ Przykład:
 
 ```json
 {
-    "AzureAd": {
-        "Authority": "https://login.microsoftonline.com/e86c78e2-...-918e0565a45e",
-        "ClientId": "41451fa7-82d9-4673-8fa5-69eff5a761fd"
-    }
+  "AzureAd": {
+    "Authority": "https://login.microsoftonline.com/e86c78e2-...-918e0565a45e",
+    "ClientId": "41451fa7-82d9-4673-8fa5-69eff5a761fd"
+  }
 }
 ```
 

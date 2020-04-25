@@ -39,5 +39,3 @@ Jeśli żądanie nie powiodło się, ponieważ nie można zainicjować obsługi 
     }
 }
 ```
-
-Aby uzyskać więcej informacji, zobacz [Zapisywanie stanu aplikacji przed operacją uwierzytelniania](xref:security/blazor/webassembly/additional-scenarios#save-app-state-before-an-authentication-operation).

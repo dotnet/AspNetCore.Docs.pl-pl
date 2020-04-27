@@ -5,17 +5,17 @@ description: Dowiedz Blazor się więcej o konfiguracji modelu hostingu, w tym o
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/23/2020
+ms.date: 04/25/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/hosting-model-configuration
-ms.openlocfilehash: cf5776109368dc7353d7e21bcad1e947561e7eb4
-ms.sourcegitcommit: 7bb14d005155a5044c7902a08694ee8ccb20c113
+ms.openlocfilehash: c7e8d1f2dcba6432072a5cc11a6c5d78e50c2398
+ms.sourcegitcommit: c6f5ea6397af2dd202632cf2be66fc30f3357bcc
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82111061"
+ms.lasthandoff: 04/26/2020
+ms.locfileid: "82159622"
 ---
 # <a name="aspnet-core-blazor-hosting-model-configuration"></a>Konfiguracja modelu hostingu ASP.NET Core Blazor
 
@@ -98,7 +98,7 @@ if (builder.HostEnvironment.IsEnvironment("Custom"))
 
 `IWebAssemblyHostEnvironment.BaseAddress` Właściwość może być używana podczas uruchamiania, `NavigationManager` gdy usługa jest niedostępna.
 
-### <a name="configuration"></a>Konfigurowanie
+### <a name="configuration"></a>Konfiguracja
 
 Zestaw webassembly Blazor obsługuje konfigurację z:
 
@@ -302,53 +302,6 @@ Aplikacje serwera Blazor są domyślnie skonfigurowane, aby skonfigurować inter
 | `Static`            | Renderuje składnik do statycznego kodu HTML. |
 
 Renderowanie składników serwera ze statyczną stroną HTML nie jest obsługiwane.
-
-### <a name="render-stateful-interactive-components-from-razor-pages-and-views"></a>Renderuj stanowe składniki interaktywne ze stron Razor i widoków
-
-Można dodać składniki interaktywne ze stanem do strony lub widoku Razor.
-
-Gdy renderuje stronę lub widok:
-
-* Składnik jest wstępnie renderowany przy użyciu strony lub widoku.
-* Początkowy stan składnika używany na potrzeby renderowania wstępnego został utracony.
-* Nowy stan składnika jest tworzony podczas ustanawiania SignalR połączenia.
-
-Następująca strona Razor renderuje `Counter` składnik:
-
-```cshtml
-<h1>My Razor Page</h1>
-
-<component type="typeof(Counter)" render-mode="ServerPrerendered" 
-    param-InitialValue="InitialValue" />
-
-@code {
-    [BindProperty(SupportsGet=true)]
-    public int InitialValue { get; set; }
-}
-```
-
-### <a name="render-noninteractive-components-from-razor-pages-and-views"></a>Renderuj nieinteraktywne składniki ze stron Razor i widoków
-
-Na poniższej stronie Razor `Counter` składnik jest statycznie renderowany z wartością początkową określoną przy użyciu formularza:
-
-```cshtml
-<h1>My Razor Page</h1>
-
-<form>
-    <input type="number" asp-for="InitialValue" />
-    <button type="submit">Set initial value</button>
-</form>
-
-<component type="typeof(Counter)" render-mode="Static" 
-    param-InitialValue="InitialValue" />
-
-@code {
-    [BindProperty(SupportsGet=true)]
-    public int InitialValue { get; set; }
-}
-```
-
-Ponieważ `MyComponent` jest renderowany statycznie, składnik nie może być interaktywny.
 
 ### <a name="configure-the-opno-locsignalr-client-for-opno-locblazor-server-apps"></a>Konfigurowanie SignalR klienta dla Blazor aplikacji serwerowych
 

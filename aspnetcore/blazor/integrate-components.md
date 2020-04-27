@@ -1,60 +1,60 @@
 ---
-title: Integracja komponentów ASP.NET Core Razor w aplikacjach Razor Pages i MVC
+title: Integrowanie składników ASP.NET Core Razor z aplikacjami Razor Pages i MVC
 author: guardrex
-description: Dowiedz się więcej o scenariuszach wiązania Blazor danych dla składników i elementów DOM w aplikacjach.
+description: Dowiedz się więcej na temat scenariuszy powiązań danych dla składników Blazor i elementów dom w aplikacjach.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/14/2020
+ms.date: 04/25/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/integrate-components
-ms.openlocfilehash: c242fbef70d289929d5c005abc0aa431619862b3
-ms.sourcegitcommit: f29a12486313e38e0163a643d8a97c8cecc7e871
+ms.openlocfilehash: 282f96a4198d20b7fa38c186721b48ace5219ca6
+ms.sourcegitcommit: c6f5ea6397af2dd202632cf2be66fc30f3357bcc
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81383967"
+ms.lasthandoff: 04/26/2020
+ms.locfileid: "82159609"
 ---
-# <a name="integrate-aspnet-core-razor-components-into-razor-pages-and-mvc-apps"></a>Integracja komponentów ASP.NET Core Razor w aplikacjach Razor Pages i MVC
+# <a name="integrate-aspnet-core-razor-components-into-razor-pages-and-mvc-apps"></a>Integrowanie składników ASP.NET Core Razor z aplikacjami Razor Pages i MVC
 
-Autorstwa [Luke'a Lathama](https://github.com/guardrex) i [Daniela Rotha](https://github.com/danroth27)
+Autorzy [Luke Latham](https://github.com/guardrex) i [Daniel Roth](https://github.com/danroth27)
 
-Komponenty brzytwy można zintegrować ze żyletką Pages i aplikacjami MVC. Gdy strona lub widok jest renderowany, komponenty mogą być prerendered w tym samym czasie.
+Składniki Razor można zintegrować z aplikacjami Razor Pages i MVC. Gdy strona lub widok jest renderowany, składniki mogą być wstępnie renderowane w tym samym czasie.
 
-Po [przygotowaniu aplikacji](#prepare-the-app)skorzystaj ze wskazówek w poniższych sekcjach, w zależności od wymagań aplikacji:
+Po [przygotowaniu aplikacji](#prepare-the-app)należy użyć wskazówek w poniższych sekcjach, w zależności od wymagań aplikacji:
 
-* Składniki &ndash; routingu Dla składników, które są bezpośrednio rutowalne z żądań użytkownika. Postępuj zgodnie z tymi wskazówkami, gdy użytkownicy powinni mieć [`@page`](xref:mvc/views/razor#page) możliwość złożenia żądania HTTP w przeglądarce dla składnika z dyrektywą.
-  * [Używanie składników routable w aplikacji Razor Pages](#use-routable-components-in-a-razor-pages-app)
-  * [Używanie składników routingu w aplikacji MVC](#use-routable-components-in-an-mvc-app)
-* [Renderowanie składników ze strony lub widoku](#render-components-from-a-page-or-view) &ndash; Dla składników, które nie są bezpośrednio rutowalne z żądań użytkownika. Postępuj zgodnie z tymi wskazówkami, gdy aplikacja osadza składniki na istniejących stronach i widokach za pomocą [Pomocnika znacznika składnika](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper).
+* Składniki &ndash; routingu dla składników, które są bezpośrednio trasowane z żądań użytkowników. Postępuj zgodnie z tymi wskazówkami, gdy osoby odwiedzające powinny mieć możliwość wykonania żądania HTTP w swojej [`@page`](xref:mvc/views/razor#page) przeglądarce dla składnika z dyrektywą.
+  * [Używanie składników rutowanych w aplikacji Razor Pages](#use-routable-components-in-a-razor-pages-app)
+  * [Używanie składników rutowanych w aplikacji MVC](#use-routable-components-in-an-mvc-app)
+* [Renderuj składniki ze strony lub widoku](#render-components-from-a-page-or-view) &ndash; składników, które nie są bezpośrednio trasowane z żądań użytkownika. Postępuj zgodnie z tymi wskazówkami, gdy aplikacja osadzi składniki na istniejących stronach i widokach za pomocą [pomocnika tagów składnika](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper).
 
 ## <a name="prepare-the-app"></a>Przygotowywanie aplikacji
 
-Istniejące strony Razor lub aplikacja MVC mogą integrować składniki Razor ze stronami i widokami:
+Istniejąca aplikacja Razor Pages lub MVC może zintegrować składniki Razor ze stronami i widokami:
 
-1. W pliku układu aplikacji (*_Layout.cshtml*):
+1. W pliku układu aplikacji (*_Layout. cshtml*):
 
-   * Dodaj następujący `<base>` znacznik `<head>` do elementu:
+   * Dodaj następujący `<base>` tag do `<head>` elementu:
 
      ```html
      <base href="~/" />
      ```
 
-     Wartość `href` *(ścieżka podstawowa aplikacji)* w poprzednim przykładzie zakłada, że aplikacja znajduje`/`się przy ścieżce głównego adresu URL ( ). Jeśli aplikacja jest aplikacją podrzędną, postępuj zgodnie ze <xref:host-and-deploy/blazor/index#app-base-path> wskazówkami w sekcji *Ścieżka podstawowa aplikacji* w tym artykule.
+     Wartość ( *Ścieżka podstawowa aplikacji*) w poprzednim przykładzie zakłada, że aplikacja znajduje się w ścieżce adresu URL katalogu głównego (`/`). `href` Jeśli aplikacja jest aplikacją podrzędną, postępuj zgodnie ze wskazówkami w sekcji *Ścieżka podstawowa aplikacji* <xref:host-and-deploy/blazor/index#app-base-path> artykułu.
 
-     Plik *_Layout.cshtml* znajduje się w folderze *Strony/Udostępnione* w aplikacji Razor Pages lub w folderze *Widoki/Udostępnione* w aplikacji MVC.
+     Plik *_Layout. cshtml* znajduje się w folderze *Pages/shared* w aplikacji Razor Pages lub *widokach/folderze udostępnionym* w aplikacji MVC.
 
-   * Dodaj `<script>` tag skryptu *blazor.server.js* bezpośrednio przed `</body>` tagiem zamykającym:
+   * Dodaj `<script>` tag dla skryptu *blazor. Server. js* bezpośrednio przed tagiem zamykającym `</body>` :
 
      ```html
      <script src="_framework/blazor.server.js"></script>
      ```
 
-     Struktura dodaje *skrypt blazor.server.js* do aplikacji. Nie ma potrzeby ręcznego dodawania skryptu do aplikacji.
+     Struktura dodaje skrypt *blazor. Server. js* do aplikacji. Nie trzeba ręcznie dodawać skryptu do aplikacji.
 
-1. Dodaj plik *_Imports.razor* do folderu głównego projektu z następującą zawartością (zmień `MyAppNamespace`obszar nazw, do obszaru nazw aplikacji):
+1. Dodaj plik *_Imports. Razor* do folderu głównego projektu o następującej zawartości (Zmień ostatnią przestrzeń nazw `MyAppNamespace`, do przestrzeni nazw aplikacji):
 
    ```razor
    @using System.Net.Http
@@ -67,29 +67,29 @@ Istniejące strony Razor lub aplikacja MVC mogą integrować składniki Razor ze
    @using MyAppNamespace
    ```
 
-1. W `Startup.ConfigureServices`, zarejestruj usługę Serwera Blazor:
+1. W `Startup.ConfigureServices`programie Zarejestruj usługę serwera Blazor:
 
    ```csharp
    services.AddServerSideBlazor();
    ```
 
-1. W `Startup.Configure`programie dodaj punkt końcowy `app.UseEndpoints`Blazor Hub do:
+1. W `Startup.Configure`programie Dodaj punkt końcowy centrum Blazor do `app.UseEndpoints`:
 
    ```csharp
    endpoints.MapBlazorHub();
    ```
 
-1. Zintegruj komponenty z dowolną stroną lub widokiem. Aby uzyskać więcej informacji, zobacz [Renderuj składniki ze strony lub widoku](#render-components-from-a-page-or-view) sekcji.
+1. Integruj składniki na dowolną stronę lub widok. Aby uzyskać więcej informacji, zobacz [składniki renderowania ze strony lub widoku](#render-components-from-a-page-or-view) .
 
-## <a name="use-routable-components-in-a-razor-pages-app"></a>Używanie składników routable w aplikacji Razor Pages
+## <a name="use-routable-components-in-a-razor-pages-app"></a>Używanie składników rutowanych w aplikacji Razor Pages
 
-*Ta sekcja dotyczy dodawania składników, które są bezpośrednio rutowalne z żądań użytkownika.*
+*Ta sekcja dotyczy dodawania składników, które są bezpośrednio trasowane z żądań użytkowników.*
 
-Aby obsługiwać rutowalne składniki Razor w aplikacjach Razor Pages:
+Aby obsługiwać Routing składników Razor w aplikacjach Razor Pages:
 
-1. Postępuj zgodnie ze wskazówkami w sekcji [Przygotowywanie aplikacji.](#prepare-the-app)
+1. Postępuj zgodnie ze wskazówkami w sekcji [Przygotowywanie aplikacji](#prepare-the-app) .
 
-1. Dodaj plik *App.razor* do katalogu głównego projektu z następującą zawartością:
+1. Dodaj plik *App. Razor* do katalogu głównego projektu z następującą zawartością:
 
    ```razor
    @using Microsoft.AspNetCore.Components.Routing
@@ -105,7 +105,7 @@ Aby obsługiwać rutowalne składniki Razor w aplikacjach Razor Pages:
    </Router>
    ```
 
-1. Dodaj *plik _Host.cshtml* do folderu *Pages* z następującą zawartością:
+1. Dodaj plik *_Host. cshtml* do folderu *stron* o następującej zawartości:
 
    ```cshtml
    @page "/blazor"
@@ -118,22 +118,22 @@ Aby obsługiwać rutowalne składniki Razor w aplikacjach Razor Pages:
    </app>
    ```
 
-   Składniki używają udostępnionego *pliku _Layout.cshtml* dla ich układu.
+   Składniki używają udostępnionego pliku *_Layout. cshtml* dla ich układu.
 
-   <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode>określa, `App` czy składnik:
+   <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode>Określa, `App` czy składnik:
 
-   * Jest prerendered do strony.
-   * Jest renderowany jako statyczny HTML na stronie lub jeśli zawiera niezbędne informacje do bootstrap aplikacji Blazor od agenta użytkownika.
+   * Jest wstępnie renderowany na stronie.
+   * Jest renderowany jako statyczny kod HTML na stronie lub zawiera informacje niezbędne do uruchomienia aplikacji Blazor z poziomu agenta użytkownika.
 
    | Tryb renderowania | Opis |
    | ----------- | ----------- |
-   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | Renderuje `App` składnik do statycznego kodu HTML i zawiera znacznik aplikacji Blazor Server. Po uruchomieniu agenta użytkownika ten znacznik jest używany do uruchamiania aplikacji Blazor. |
-   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Renderuje znacznik aplikacji Blazor Server. Dane wyjściowe ze `App` składnika nie są uwzględniane. Po uruchomieniu agenta użytkownika ten znacznik jest używany do uruchamiania aplikacji Blazor. |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | Renderuje `App` składnik do statycznego kodu HTML i zawiera znacznik dla aplikacji serwera Blazor. Po uruchomieniu agenta użytkownika ten znacznik jest używany do uruchamiania aplikacji Blazor. |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Renderuje znacznik dla aplikacji serwera Blazor. Dane wyjściowe ze `App` składnika nie są uwzględniane. Po uruchomieniu agenta użytkownika ten znacznik jest używany do uruchamiania aplikacji Blazor. |
    | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | Renderuje `App` składnik do statycznego kodu HTML. |
 
-   Aby uzyskać więcej informacji na temat <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>pomocnika znacznika składnika, zobacz .
+   Aby uzyskać więcej informacji na temat pomocnika tagów składnika <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>, zobacz.
 
-1. Dodaj trasę o niskim priorytecie dla strony *_Host.cshtml* do konfiguracji punktu końcowego w : `Startup.Configure`
+1. Dodaj trasę o niskim priorytecie dla strony *_Host. cshtml* do konfiguracji punktu końcowego w `Startup.Configure`:
 
    ```csharp
    app.UseEndpoints(endpoints =>
@@ -144,7 +144,7 @@ Aby obsługiwać rutowalne składniki Razor w aplikacjach Razor Pages:
    });
    ```
 
-1. Dodaj składniki rutowalne do aplikacji. Przykład:
+1. Dodaj składniki routingu do aplikacji. Przykład:
 
    ```razor
    @page "/counter"
@@ -154,17 +154,17 @@ Aby obsługiwać rutowalne składniki Razor w aplikacjach Razor Pages:
    ...
    ```
 
-Aby uzyskać więcej informacji na temat obszarów nazw, zobacz [sekcję Obszary nazw składnika.](#component-namespaces)
+Aby uzyskać więcej informacji na temat przestrzeni nazw, zobacz sekcję [przestrzenie nazw składników](#component-namespaces) .
 
-## <a name="use-routable-components-in-an-mvc-app"></a>Używanie składników routingu w aplikacji MVC
+## <a name="use-routable-components-in-an-mvc-app"></a>Używanie składników rutowanych w aplikacji MVC
 
-*Ta sekcja dotyczy dodawania składników, które są bezpośrednio rutowalne z żądań użytkownika.*
+*Ta sekcja dotyczy dodawania składników, które są bezpośrednio trasowane z żądań użytkowników.*
 
-Aby obsługiwać rutowalne komponenty Razor w aplikacjach MVC:
+Aby zapewnić obsługę routingu składników Razor w aplikacjach MVC:
 
-1. Postępuj zgodnie ze wskazówkami w sekcji [Przygotowywanie aplikacji.](#prepare-the-app)
+1. Postępuj zgodnie ze wskazówkami w sekcji [Przygotowywanie aplikacji](#prepare-the-app) .
 
-1. Dodaj plik *App.razor* do katalogu głównego projektu z następującą zawartością:
+1. Dodaj plik *App. Razor* do katalogu głównego projektu z następującą zawartością:
 
    ```razor
    @using Microsoft.AspNetCore.Components.Routing
@@ -180,7 +180,7 @@ Aby obsługiwać rutowalne komponenty Razor w aplikacjach MVC:
    </Router>
    ```
 
-1. Dodaj plik *_Host.cshtml* do folderu *Widoki/Strona główna* z następującą zawartością:
+1. Dodaj plik *_Host. cshtml* do folderu *widoki/główne* z następującą zawartością:
 
    ```cshtml
    @{
@@ -192,20 +192,20 @@ Aby obsługiwać rutowalne komponenty Razor w aplikacjach MVC:
    </app>
    ```
 
-   Składniki używają udostępnionego *pliku _Layout.cshtml* dla ich układu.
+   Składniki używają udostępnionego pliku *_Layout. cshtml* dla ich układu.
    
-   <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode>określa, `App` czy składnik:
+   <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode>Określa, `App` czy składnik:
 
-   * Jest prerendered do strony.
-   * Jest renderowany jako statyczny HTML na stronie lub jeśli zawiera niezbędne informacje do bootstrap aplikacji Blazor od agenta użytkownika.
+   * Jest wstępnie renderowany na stronie.
+   * Jest renderowany jako statyczny kod HTML na stronie lub zawiera informacje niezbędne do uruchomienia aplikacji Blazor z poziomu agenta użytkownika.
 
    | Tryb renderowania | Opis |
    | ----------- | ----------- |
-   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | Renderuje `App` składnik do statycznego kodu HTML Blazor i zawiera znacznik aplikacji serwera. Po uruchomieniu agenta użytkownika ten znacznik jest używany Blazor do uruchamiania aplikacji. |
-   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Renderuje znacznik aplikacji Blazor serwera. Dane wyjściowe ze `App` składnika nie są uwzględniane. Po uruchomieniu agenta użytkownika ten znacznik jest używany Blazor do uruchamiania aplikacji. |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | Renderuje `App` składnik do statycznego kodu HTML i zawiera znacznik dla Blazor aplikacji serwera. Po uruchomieniu agenta użytkownika ten znacznik jest używany do uruchamiania Blazor aplikacji. |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Renderuje znacznik dla aplikacji Blazor serwera. Dane wyjściowe ze `App` składnika nie są uwzględniane. Po uruchomieniu agenta użytkownika ten znacznik jest używany do uruchamiania Blazor aplikacji. |
    | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | Renderuje `App` składnik do statycznego kodu HTML. |
 
-   Aby uzyskać więcej informacji na temat <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>pomocnika znacznika składnika, zobacz .
+   Aby uzyskać więcej informacji na temat pomocnika tagów składnika <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>, zobacz.
 
 1. Dodaj akcję do kontrolera macierzystego:
 
@@ -216,7 +216,7 @@ Aby obsługiwać rutowalne komponenty Razor w aplikacjach MVC:
    }
    ```
 
-1. Dodaj trasę o niskim priorytecie dla akcji kontrolera, która zwraca widok `Startup.Configure` *_Host.cshtml* do konfiguracji punktu końcowego w :
+1. Dodaj trasę o niskim priorytecie dla akcji kontrolera, która zwraca widok *_Host. cshtml* do konfiguracji punktu końcowego w `Startup.Configure`:
 
    ```csharp
    app.UseEndpoints(endpoints =>
@@ -227,7 +227,7 @@ Aby obsługiwać rutowalne komponenty Razor w aplikacjach MVC:
    });
    ```
 
-1. Utwórz folder *Strony* i dodaj do aplikacji składniki rutowalne. Przykład:
+1. Utwórz folder *strony* i Dodaj składniki do obsługi routingu do aplikacji. Przykład:
 
    ```razor
    @page "/counter"
@@ -237,31 +237,74 @@ Aby obsługiwać rutowalne komponenty Razor w aplikacjach MVC:
    ...
    ```
 
-Aby uzyskać więcej informacji na temat obszarów nazw, zobacz [sekcję Obszary nazw składnika.](#component-namespaces)
+Aby uzyskać więcej informacji na temat przestrzeni nazw, zobacz sekcję [przestrzenie nazw składników](#component-namespaces) .
 
-## <a name="render-components-from-a-page-or-view"></a>Renderowanie składników ze strony lub widoku
+## <a name="render-components-from-a-page-or-view"></a>Renderuj składniki ze strony lub widoku
 
-*Ta sekcja dotyczy dodawania składników do stron lub widoków, gdzie składniki nie są bezpośrednio rutowalne z żądań użytkowników.*
+*Ta sekcja dotyczy dodawania składników do stron lub widoków, w których składniki nie są bezpośrednio trasowane z żądań użytkownika.*
 
-Aby renderować składnik ze strony lub widoku, użyj [pomocnika znacznika składnika](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper).
+Aby renderować składnik ze strony lub widoku, użyj [pomocnika tagów składnika](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper).
 
-Aby uzyskać więcej informacji na temat sposobu renderowania składników, stanu składnika i Pomocnika `Component` znaczników, zobacz następujące artykuły:
+### <a name="render-stateful-interactive-components"></a>Renderuj składniki interaktywne ze stanem
 
-* <xref:blazor/hosting-models>
-* <xref:blazor/hosting-model-configuration>
-* <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>
+Można dodać składniki interaktywne ze stanem do strony lub widoku Razor.
+
+Gdy renderuje stronę lub widok:
+
+* Składnik jest wstępnie renderowany przy użyciu strony lub widoku.
+* Początkowy stan składnika używany na potrzeby renderowania wstępnego został utracony.
+* Nowy stan składnika jest tworzony podczas ustanawiania SignalR połączenia.
+
+Następująca strona Razor renderuje `Counter` składnik:
+
+```cshtml
+<h1>My Razor Page</h1>
+
+<component type="typeof(Counter)" render-mode="ServerPrerendered" 
+    param-InitialValue="InitialValue" />
+
+@functions {
+    [BindProperty(SupportsGet=true)]
+    public int InitialValue { get; set; }
+}
+```
+
+Aby uzyskać więcej informacji, zobacz <xref:xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>.
+
+### <a name="render-noninteractive-components"></a>Renderuj nieinteraktywne składniki
+
+Na poniższej stronie Razor `Counter` składnik jest statycznie renderowany z wartością początkową określoną przy użyciu formularza. Ze względu na to, że składnik jest renderowany statycznie, składnik nie jest interaktywny:
+
+```cshtml
+<h1>My Razor Page</h1>
+
+<form>
+    <input type="number" asp-for="InitialValue" />
+    <button type="submit">Set initial value</button>
+</form>
+
+<component type="typeof(Counter)" render-mode="Static" 
+    param-InitialValue="InitialValue" />
+
+@functions {
+    [BindProperty(SupportsGet=true)]
+    public int InitialValue { get; set; }
+}
+```
+
+Aby uzyskać więcej informacji, zobacz <xref:xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>.
 
 ## <a name="component-namespaces"></a>Przestrzenie nazw składników
 
-W przypadku przechowywania składników aplikacji przy użyciu folderu niestandardowego należy dodać obszar nazw reprezentujący folder do strony/widoku lub pliku *_ViewImports.cshtml.* W poniższym przykładzie:
+W przypadku używania folderu niestandardowego do przechowywania składników aplikacji należy dodać przestrzeń nazw reprezentującą folder do strony/widoku lub pliku *_ViewImports. cshtml* . W poniższym przykładzie:
 
-* Zmień `MyAppNamespace` obszar nazw aplikacji.
-* Jeśli folder o nazwie *Składniki* nie jest używany `Components` do przechowywania składników, zmień folder, w którym znajdują się składniki.
+* Przejdź `MyAppNamespace` do przestrzeni nazw aplikacji.
+* Jeśli folder o nazwie *Components* nie jest używany do przechowywania składników, `Components` przejdź do folderu, w którym znajdują się składniki.
 
 ```cshtml
 @using MyAppNamespace.Components
 ```
 
-Plik *_ViewImports.cshtml* znajduje się w folderze *Strony* aplikacji Razor Pages lub w folderze *Widoki* aplikacji MVC.
+Plik *_ViewImports. cshtml* znajduje się w folderze *strony* aplikacji Razor Pages lub folderu *widoki* aplikacji MVC.
 
 Aby uzyskać więcej informacji, zobacz <xref:blazor/components#import-components>.

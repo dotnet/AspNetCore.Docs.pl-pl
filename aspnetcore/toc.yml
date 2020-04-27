@@ -299,14 +299,14 @@
           uid: blazor/data-binding
         - name: Obsługa zdarzeń
           uid: blazor/event-handling
+        - name: Cykl życia
+          uid: blazor/lifecycle
         - name: Składniki z szablonami
           uid: blazor/templated-components
         - name: Integracja składników
           uid: blazor/integrate-components
         - name: Globalizacja i lokalizacja
           uid: blazor/globalization-localization
-        - name: Cykl życia
-          uid: blazor/lifecycle
         - name: Układy
           uid: blazor/layouts
         - name: Formularze i walidacja

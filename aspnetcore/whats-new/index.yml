@@ -1,19 +1,19 @@
 ### YamlMime:Landing
-title: ASP.NET Podstawowa dokumentacja - co nowego?
-summary: Witamy w nowościach w ASP.NET docs Core. Użyj tej strony, aby szybko znaleźć najnowsze zmiany.
+title: ASP.NET Core dokumentacja — co nowego?
+summary: Witamy w nowościach w ASP.NET Core dokumentach. Ta strona umożliwia szybkie znalezienie najnowszych zmian.
 metadata:
-  title: ASP.NET Podstawowa dokumentacja - Co nowego?
-  description: Dowiedz się więcej o nowej i zaktualizowanej zawartości w ASP.NET docs Core.
+  title: ASP.NET Core dokumentacja — co nowego?
+  description: Więcej informacji na temat nowej i zaktualizowanej zawartości znajduje się w dokumentacji ASP.NET Core.
   ms.topic: landing-page
-  ms.date: 04/01/2020
-  ms.openlocfilehash: 4d1e63bafe1a40110c0b514fcaf0f1eb2f180722
-  ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+  ms.date: 04/26/2020
+  ms.openlocfilehash: 1650541ec9a6c6160f65ce1a3e83caf4b5cd092e
+  ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
   ms.translationtype: MT
   ms.contentlocale: pl-PL
-  ms.lasthandoff: 04/06/2020
-  ms.locfileid: "80538988"
+  ms.lasthandoff: 04/28/2020
+  ms.locfileid: "82206089"
 landingContent:
-- title: Znajdowanie aktualizacji dokumentów ASP.NET Core
+- title: Znajdź aktualizacje ASP.NET Core docs
   linkLists:
   - linkListType: whats-new
     links:
@@ -29,37 +29,43 @@ landingContent:
       url: 2019-11.md
     - text: Październik 2019 r.
       url: 2019-10.md
-- title: Zaangażuj się - wnosij wkład w ASP.NET dokumenty Core
+- title: Zapoznaj się z tematem tworzenie ASP.NET Core dokumentów
   linkLists:
   - linkListType: overview
     links:
-    - text: ASP.NET repozytorium dokumentów Core
+    - text: Repozytorium ASP.NET Core docs
       url: https://github.com/dotnet/AspNetCore.Docs/blob/master/README.md
-    - text: Struktura projektu i etykiety dla problemów i żądań ściągnięcia
+    - text: Struktura projektu i etykiety dotyczące problemów i żądań ściągnięcia
       url: https://github.com/dotnet/docs/blob/master/styleguide/labels-projects.md
   - linkListType: concept
     links:
-    - text: Przewodnik po współautorach dokumentów firmy Microsoft
+    - text: Przewodnik współautora witryny Microsoft docs
       url: https://docs.microsoft.com/contribute
-    - text: Przewodnik po współautorach dokumentów ASP.NET Core
+    - text: Przewodnik współautora ASP.NET Core docs
       url: https://github.com/dotnet/AspNetCore.Docs/blob/master/CONTRIBUTING.md
-    - text: przewodnik po dopcjach ASP.NET Core API
+    - text: Przewodnik współautora dokumentacji dotyczącej interfejsów API ASP.NET Core
       url: https://github.com/dotnet/AspNetApiDocs/blob/master/CONTRIBUTING.md
-- title: Powiązane nowe strony
+- title: Społeczność
   linkLists:
   - linkListType: whats-new
     links:
-    - text: Aktualizacje dokumentów platformy Xamarin
+    - text: Społeczność
+      url: https://dotnet.microsoft.com/platform/community
+- title: Informacje o nowych stronach
+  linkLists:
+  - linkListType: whats-new
+    links:
+    - text: Aktualizacje platformy Xamarin docs
       url: /xamarin/whats-new/
-    - text: Informacje o wersji .NET Core
+    - text: Informacje o wersji platformy .NET Core
       url: https://github.com/dotnet/core/blob/master/release-notes/README.md
-    - text: ASP.NET informacje o wersji Core
+    - text: Informacje o wersji ASP.NET Core
       url: /aspnet/core/release-notes/aspnetcore-3.1
-    - text: Informacje o wydaniu kompilatora języka C# (Roslyn)
+    - text: Informacje o wersji kompilatora C# (Roslyn)
       url: https://github.com/dotnet/roslyn/tree/master/docs/ide
     - text: Informacje o wersji programu Visual Studio
       url: /visualstudio/releases/2019/release-notes
-    - text: Informacje o wersji programu Visual Studio dla komputerów Mac
+    - text: Informacje o wersji Visual Studio dla komputerów Mac
       url: /visualstudio/releasenotes/vs2019-mac-relnotes
-    - text: Informacje o wersji kodu programu Visual Studio
+    - text: Informacje o wersji Visual Studio Code
       url: https://code.visualstudio.com/updates

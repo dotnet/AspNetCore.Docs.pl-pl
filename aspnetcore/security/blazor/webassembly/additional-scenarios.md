@@ -1,21 +1,21 @@
 ---
 title: Dodatkowe Blazor scenariusze zabezpieczeń ASP.NET Core webassembly
 author: guardrex
-description: ''
+description: Dowiedz się, Blazor jak skonfigurować zestaw webassembly pod kątem dodatkowych scenariuszy zabezpieczeń.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/24/2020
+ms.date: 04/27/2020
 no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/additional-scenarios
-ms.openlocfilehash: cd1433d5716b9b595270209fa874a8cb93fdf699
-ms.sourcegitcommit: 4f91da9ce4543b39dba5e8920a9500d3ce959746
+ms.openlocfilehash: 093498c3e0d42430c66c66a0998bcc44f62d1e0d
+ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82138433"
+ms.lasthandoff: 04/28/2020
+ms.locfileid: "82206154"
 ---
 # <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a>Dodatkowe scenariusze zabezpieczeń ASP.NET Core Blazor webassembly
 
@@ -430,7 +430,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Authentication.Internal;
 public class CustomAccountFactory 
     : AccountClaimsPrincipalFactory<OidcAccount>
 {
-    public AccountClaimsPrincipalFactory(NavigationManager navigationManager, 
+    public CustomAccountFactory(NavigationManager navigationManager, 
         IAccessTokenProviderAccessor accessor) : base(accessor)
     {
     }

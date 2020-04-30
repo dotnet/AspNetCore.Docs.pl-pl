@@ -348,7 +348,13 @@
                 - name: Dodatkowe scenariusze
                   uid: security/blazor/webassembly/additional-scenarios
             - name: Serwer Blazor
-              uid: security/blazor/server
+              items:
+                - name: Omówienie
+                  uid: security/blazor/server/index
+                - name: Łagodzenie zagrożeń
+                  uid: security/blazor/server/threat-mitigation
+                - name: Dodatkowe scenariusze
+                  uid: security/blazor/server/additional-scenarios
             - name: Zasady zabezpieczeń zawartości
               uid: security/blazor/content-security-policy
         - name: Zarządzanie stanem
@@ -1135,7 +1141,13 @@
             - name: Dodatkowe scenariusze
               uid: security/blazor/webassembly/additional-scenarios
         - name: Serwer Blazor
-          uid: security/blazor/server
+          items:
+            - name: Omówienie
+              uid: security/blazor/server/index
+            - name: Łagodzenie zagrożeń
+              uid: security/blazor/server/threat-mitigation
+            - name: Dodatkowe scenariusze
+              uid: security/blazor/server/additional-scenarios
         - name: Zasady zabezpieczeń zawartości
           uid: security/blazor/content-security-policy
 - name: Wydajność

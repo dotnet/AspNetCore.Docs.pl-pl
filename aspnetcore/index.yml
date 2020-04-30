@@ -9,13 +9,13 @@ metadata:
   ms.topic: hub-page
   author: WadePickett
   ms.author: wpickett
-  ms.date: 04/15/2020
-  ms.openlocfilehash: c0f987396a4bfcdbc8c189938125eb2a65dadc8a
-  ms.sourcegitcommit: d5d45d84fe488427d418de770000f7df44a08370
+  ms.date: 04/26/2020
+  ms.openlocfilehash: a818ac9201cfb0bc3139d29dae8e8812978528fb
+  ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
   ms.translationtype: HT
   ms.contentlocale: pl-PL
-  ms.lasthandoff: 04/17/2020
-  ms.locfileid: "81542403"
+  ms.lasthandoff: 04/28/2020
+  ms.locfileid: "82205799"
 highlightedContent:
   items:
   - title: Utwórz aplikację ASP.NET Core na dowolnej platformie w zaledwie pięć minut
@@ -24,9 +24,9 @@ highlightedContent:
   - title: Omówienie platformy ASP.NET Core
     itemType: overview
     url: introduction-to-aspnet-core.md
-  - title: Samouczki wideo dotyczące platformy ASP.NET Core
-    itemType: video
-    url: https://www.youtube.com/playlist?list=PLdo4fOcmZ0oW8nviYduHq7bmKode-p8Wy
+  - title: Pobierz platformę .NET
+    itemType: download
+    url: https://dotnet.microsoft.com/download
   - title: Co nowego w dokumentacji platformy ASP.NET Core
     itemType: whats-new
     url: whats-new/index.yml
@@ -214,6 +214,23 @@ conceptualContent:
     - url: https://docs.microsoft.com/aspnet/overview
       itemType: concept
       text: ASP.NET 4.x
+  - title: Samouczki wideo dotyczące platformy ASP.NET Core
+    links:
+    - url: https://www.youtube.com/playlist?list=PLdo4fOcmZ0oW8nviYduHq7bmKode-p8Wy
+      itemType: video
+      text: Seria podstawowych materiałów wideo dotyczących platformy ASP.NET Core
+    - url: https://www.youtube.com/playlist?list=PLdo4fOcmZ0oX7uTkjYwvCJDG2qhcSzwZ6
+      itemType: video
+      text: Seria podstawowych materiałów wideo dotyczących programu Entity Framework Core na platformach .NET Core i ASP.NET Core
+    - url: https://www.youtube.com/watch?v=RyHDWlIq6vI
+      itemType: video
+      text: Architektura mikrousług na platformie ASP.NET Core
+    - url: https://www.youtube.com/watch?v=KlngrOF6RPw&list=PLdo4fOcmZ0oWlP1Qpzg7Dwzxr298ewdUQ
+      itemType: video
+      text: Seria materiałów wideo — platforma Blazor
+    - url: https://www.youtube.com/channel/UCvtT19MZW8dq5Wwfu6B0oxw/
+      itemType: video
+      text: Kanał platformy .NET
 additionalContent:
   sections:
   - title: Pojęcia i funkcje

@@ -1,7 +1,7 @@
 ---
 title: Wprowadzenie do platformy ASP.NET Core
 author: rick-anderson
-description: Wprowadzenie do ASP.NET Core, wieloplatformowej, wydajnej struktury open source do tworzenia nowoczesnych aplikacji połączonych z Chmurą, połączonych z Internetem.
+description: Zapoznaj się z wprowadzeniem do ASP.NET Core, międzyplatformowej platformy typu open source do tworzenia nowoczesnych aplikacji z włączoną obsługą chmury.
 ms.author: riande
 ms.custom: mvc
 ms.date: 04/17/2020
@@ -9,12 +9,12 @@ no-loc:
 - Blazor
 - SignalR
 uid: index
-ms.openlocfilehash: c5a5a0ada996d88cb9252da25b5580fe0cf46f0b
-ms.sourcegitcommit: 636efd1afc0a1e6fd4b12ae3a542917b356abb93
+ms.openlocfilehash: d70998d0149a0cc7018946a93ab63b5e10b76b78
+ms.sourcegitcommit: f9a5069577e8f7c53f8bcec9e13e117950f4f033
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "81615946"
+ms.lasthandoff: 04/29/2020
+ms.locfileid: "82558931"
 ---
 # <a name="introduction-to-aspnet-core"></a>Wprowadzenie do platformy ASP.NET Core
 
@@ -22,16 +22,16 @@ ms.locfileid: "81615946"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-ASP.NET Core to wieloplatformowa, wydajna struktura [open source](https://github.com/dotnet/aspnetcore) do tworzenia nowoczesnych aplikacji połączonych z Chmurą i połączonych z Internetem. Platforma ASP.NET Core umożliwia:
+ASP.NET Core to międzyplatformowa platforma typu ["Open Source](https://github.com/dotnet/aspnetcore) ", która umożliwia tworzenie nowoczesnych aplikacji z obsługą chmury. Platforma ASP.NET Core umożliwia:
 
-* Tworzenie aplikacji i usług internetowych, aplikacji [Internetu rzeczy (IoT)](https://www.microsoft.com/internet-of-things/) i zaplecza mobilnego.
+* Twórz aplikacje sieci Web i usługi, aplikacje [Internet rzeczy (IoT)](https://www.microsoft.com/internet-of-things/) i frontony mobilne.
 * Używanie ulubionych narzędzi programistycznych w systemach Windows, macOS i Linux.
 * Wdrażanie w chmurze lub lokalnie.
-* Uruchom na [.NET Core](/dotnet/core/introduction).
+* Uruchamiany na [platformie .NET Core](/dotnet/core/introduction).
 
 ## <a name="why-choose-aspnet-core"></a>Dlaczego warto wybrać ASP.NET Core?
 
-Miliony programistów używają lub używają [ASP.NET 4.x](/aspnet/overview) do tworzenia aplikacji internetowych. ASP.NET Core to przeprojektowanie ASP.NET 4.x, w tym zmian architektonicznych, które skutkują szczuplejszą, bardziej modułową strukturą.
+Miliony deweloperów używają lub używały [ASP.NET 4. x](/aspnet/overview) do tworzenia aplikacji sieci Web. ASP.NET Core to projekt ASP.NET 4. x, w tym zmiany architektury, które powodują powstanie produkcji oszczędnej i większej struktury modularnej.
 
 [!INCLUDE[](~/includes/benefits.md)]
 
@@ -49,68 +49,68 @@ Platforma ASP.NET Core MVC udostępnia funkcje, które umożliwiają tworzenie [
 
 ## <a name="client-side-development"></a>Programowanie po stronie klienta
 
-ASP.NET Core bezproblemowo integruje się z popularnymi strukturami i bibliotekami po stronie klienta, w tym [Blazor](xref:blazor/index), [Angular](xref:spa/angular), [React](xref:spa/react)i [Bootstrap.](https://getbootstrap.com/) Aby uzyskać więcej <xref:blazor/index> informacji, zobacz i tematy pokrewne w obszarze *Rozwój po stronie klienta*.
+ASP.NET Core zapewnia bezproblemową integrację z popularnymi strukturami i bibliotekami po stronie klienta, takimi jak [Blazor](xref:blazor/index), [kątowy](xref:spa/angular), [reagowanie](xref:spa/react)i [Bootstrap](https://getbootstrap.com/). Aby uzyskać więcej informacji, <xref:blazor/index> Zobacz i Tematy pokrewne w obszarze *programowanie po stronie klienta*.
 
 <a name="target-framework"></a>
 
-## <a name="aspnet-core-target-frameworks"></a>ASP.NET podstawowe struktury docelowe
+## <a name="aspnet-core-target-frameworks"></a>ASP.NET Core platform docelowych
 
-ASP.NET Core 3.x i nowszych może być tylko ukierunkowane .NET Core. Ogólnie rzecz biorąc ASP.NET Core składa się z bibliotek [.NET Standard.](/dotnet/standard/net-standard) Biblioteki napisane za pomocą platformy .NET Standard 2.0 są uruchamiane na dowolnej [platformie .NET, która implementuje program .NET Standard 2.0](/dotnet/standard/net-standard#net-implementation-support).
+ASP.NET Core 3. x i nowsze mogą dotyczyć tylko .NET Core. Ogólnie rzecz biorąc ASP.NET Core składa się z bibliotek [.NET Standard](/dotnet/standard/net-standard) . Biblioteki z .NET Standard 2,0 są uruchamiane na dowolnej [platformie .NET implementującej .NET Standard 2,0](/dotnet/standard/net-standard#net-implementation-support).
 
 Jest kilka zalet przyjmowania platformy .NET Core jako docelowej, a ich liczba rośnie z każdym wydaniem. Niektóre z zalet platformy .NET Core nad platformą .NET Framework to:
 
 * Wieloplatformowość. Działa w systemach Windows, macOS i Linux.
 * Większa wydajność
-* [Przechowywanie wersji obok siebie](/dotnet/standard/choosing-core-framework-server#a-need-for-side-by-side-of-net-versions-per-application-level)
+* [Przechowywanie wersji obok siebie](/dotnet/standard/choosing-core-framework-server#side-by-side-net-versions-per-application-level)
 * Nowe interfejsy API
 * Kod open source
 
 ## <a name="recommended-learning-path"></a>Zalecana ścieżka szkoleniowa
 
-Firma Microsoft zaleca następującą sekwencję samouczków dla wprowadzenia do tworzenia aplikacji ASP.NET Core:
+Zalecamy poniższą sekwencję samouczków, aby zapoznać się z wprowadzeniem do tworzenia aplikacji ASP.NET Core:
 
-1. Postępuj zgodnie z samouczkiem dla typu aplikacji, który chcesz opracować lub utrzymać.
+1. Postępuj zgodnie z samouczkiem dotyczącym typu aplikacji, który chcesz opracowywać lub obsłudze.
 
    |Typ aplikacji  |Scenariusz  |Samouczek  |
    |----------|----------|----------|
-   |Aplikacja internetowa                   | Nowe tworzenie interfejsu użytkownika sieci web po stronie serwera |[Wprowadzenie do korzystania ze stron Razor](xref:tutorials/razor-pages/razor-pages-start) |
+   |Aplikacja internetowa                   | Tworzenie nowego interfejsu użytkownika sieci Web po stronie serwera |[Wprowadzenie do korzystania ze stron Razor](xref:tutorials/razor-pages/razor-pages-start) |
    |Aplikacja internetowa                   | Obsługa aplikacji MVC |[Wprowadzenie do wzorca MVC](xref:tutorials/first-mvc-app/start-mvc)|
-   |Aplikacja internetowa                   | Tworzenie interfejsu użytkownika sieci web po stronie klienta |[Wprowadzenie do blazora](xref:tutorials/first-blazor-app) |
-   |Interfejs API sieci Web                   | Restful usług HTTP |[Tworzenie internetowego interfejsu API](xref:tutorials/first-web-api)&dagger; |
-   |Aplikacja Do wywołania procedury zdalnej | Usługi oparte na kontraktach przy użyciu buforów protokołów |[Wprowadzenie do usługi gRPC](xref:tutorials/grpc/grpc-start) |
-   |Aplikacja czasu rzeczywistego             | Dwukierunkowa komunikacja między serwerami a podłączonymi klientami |[Wprowadzenie do usługi SignalR](xref:tutorials/signalr) |
+   |Aplikacja internetowa                   | Programowanie interfejsu użytkownika sieci Web po stronie klienta |[Wprowadzenie do Blazor](xref:tutorials/first-blazor-app) |
+   |Interfejs API sieci Web                   | RESTful usługi HTTP |[Tworzenie internetowego interfejsu API](xref:tutorials/first-web-api)&dagger; |
+   |Aplikacja zdalnego wywołania procedury | Usługi pierwszego kontraktu przy użyciu buforów protokołu |[Wprowadzenie do usługi gRPC](xref:tutorials/grpc/grpc-start) |
+   |Aplikacja czasu rzeczywistego             | Dwukierunkowa komunikacja między serwerami i połączonymi klientami |[Wprowadzenie do usługi SignalR](xref:tutorials/signalr) |
 
-1. Postępuj zgodnie z samouczkiem, który pokazuje, jak zrobić podstawowy dostęp do danych.
+1. Postępuj zgodnie z samouczkiem, który pokazuje, jak przeprowadzić podstawowy dostęp do danych.
 
    |Scenariusz  |Samouczek  |
    |----------|----------|
-   |Nowy rozwój        |[Platforma Razor Pages z platformą Entity Framework Core](xref:data/ef-rp/intro) |
+   |Nowe programowanie        |[Platforma Razor Pages z platformą Entity Framework Core](xref:data/ef-rp/intro) |
    |Obsługa aplikacji MVC |[Wzorzec MVC z platformą Entity Framework Core](xref:data/ef-mvc/intro) |
 
-1. Przeczytaj omówienie ASP.NET [podstawowe podstawy,](xref:fundamentals/index) które mają zastosowanie do wszystkich typów aplikacji.
+1. Zapoznaj się z omówieniem ASP.NET Core [podstawowych](xref:fundamentals/index) , które mają zastosowanie do wszystkich typów aplikacji.
 
-1. Przejrzyj spis treści w poszukiwaniu innych interesujących tematów.
+1. Przejrzyj Spis treści pod kątem innych tematów zainteresowania.
 
-&dagger;Istnieje również [interaktywny samouczek interfejsu API sieci.](/learn/modules/build-web-api-net-core) Nie jest wymagana lokalna instalacja narzędzi programistycznych. Kod jest uruchamiany w [usłudze Azure Cloud Shell](https://azure.microsoft.com/features/cloud-shell/) w przeglądarce, a [curl](https://curl.haxx.se/) jest używany do testowania.
+&dagger;Dostępny jest również [Interaktywny samouczek internetowy interfejsu API](/learn/modules/build-web-api-net-core). Nie jest wymagana instalacja lokalna narzędzi programistycznych. Kod jest uruchamiany w [Azure Cloud Shell](https://azure.microsoft.com/features/cloud-shell/) w przeglądarce, a [zwinięcie](https://curl.haxx.se/) służy do testowania.
 
-## <a name="migrate-from-net-framework"></a>Migrowanie z programu .NET Framework
+## <a name="migrate-from-net-framework"></a>Migrowanie z .NET Framework
 
-Aby uzyskać przewodnik po migracji ASP.NET aplikacji 4.x do ASP.NET Core, zobacz <xref:migration/proper-to-2x/index>.
+Przewodnik referencyjny dotyczący migrowania aplikacji ASP.NET 4. x do ASP.NET Core można <xref:migration/proper-to-2x/index>znaleźć w temacie.
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-ASP.NET Core to wieloplatformowa, wydajna struktura [open source](https://github.com/dotnet/aspnetcore) do tworzenia nowoczesnych aplikacji połączonych z Chmurą i połączonych z Internetem. Platforma ASP.NET Core umożliwia:
+ASP.NET Core to międzyplatformowa platforma typu ["Open Source](https://github.com/dotnet/aspnetcore) ", która umożliwia tworzenie nowoczesnych aplikacji z obsługą chmury. Platforma ASP.NET Core umożliwia:
 
-* Tworzenie aplikacji i usług internetowych, aplikacji [Internetu rzeczy (IoT)](https://www.microsoft.com/internet-of-things/) i zaplecza mobilnego.
+* Twórz aplikacje sieci Web i usługi, aplikacje [Internet rzeczy (IoT)](https://www.microsoft.com/internet-of-things/) i frontony mobilne.
 * Używanie ulubionych narzędzi programistycznych w systemach Windows, macOS i Linux.
 * Wdrażanie w chmurze lub lokalnie.
 * Uruchamianie na platformie [.NET Core lub .NET Framework](/dotnet/articles/standard/choosing-core-framework-server).
 
 ## <a name="why-choose-aspnet-core"></a>Dlaczego warto wybrać ASP.NET Core?
 
-Miliony programistów używają lub używają [ASP.NET 4.x](/aspnet/overview) do tworzenia aplikacji internetowych. ASP.NET Core to przeprojektowana platforma ASP.NET 4.x, w której wprowadzono zmiany architektoniczne w celu stworzenia bardziej zwartej i modułowej struktury.
+Miliony deweloperów używają lub używały [ASP.NET 4. x](/aspnet/overview) do tworzenia aplikacji sieci Web. ASP.NET Core to przeprojektowana platforma ASP.NET 4.x, w której wprowadzono zmiany architektoniczne w celu stworzenia bardziej zwartej i modułowej struktury.
 
 [!INCLUDE[](~/includes/benefits.md)]
 
@@ -128,17 +128,17 @@ Platforma ASP.NET Core MVC udostępnia funkcje, które umożliwiają tworzenie [
 
 ## <a name="client-side-development"></a>Programowanie po stronie klienta
 
-ASP.NET Core bezproblemowo integruje się z popularnymi strukturami i bibliotekami po stronie klienta, w tym [Blazor](xref:blazor/index), [Angular](xref:spa/angular), [React](xref:spa/react)i [Bootstrap.](https://getbootstrap.com/) Aby uzyskać więcej <xref:blazor/index> informacji, zobacz i tematy pokrewne w obszarze *Rozwój po stronie klienta*.
+ASP.NET Core zapewnia bezproblemową integrację z popularnymi strukturami i bibliotekami po stronie klienta, takimi jak [Blazor](xref:blazor/index), [kątowy](xref:spa/angular), [reagowanie](xref:spa/react)i [Bootstrap](https://getbootstrap.com/). Aby uzyskać więcej informacji, <xref:blazor/index> Zobacz i Tematy pokrewne w obszarze *programowanie po stronie klienta*.
 
 <a name="target-framework"></a>
 
 ## <a name="aspnet-core-targeting-net-framework"></a>Platforma ASP.NET Core ukierunkowana na platformę .NET Framework
 
-Platforma ASP.NET Core 2.x może jako cel mieć platformę .NET Core lub .NET Framework. Aplikacje platformy ASP.NET Core ukierunkowane na platformę .NET Framework nie są wieloplatformowe &mdash; działają tylko w systemie Windows. Ogólnie rzecz biorąc, platforma ASP.NET Core 2.x jest zbudowana z bibliotek [.NET Standard](/dotnet/standard/net-standard). Biblioteki napisane za pomocą platformy .NET Standard 2.0 są uruchamiane na dowolnej [platformie .NET, która implementuje program .NET Standard 2.0](/dotnet/standard/net-standard#net-implementation-support).
+Platforma ASP.NET Core 2.x może jako cel mieć platformę .NET Core lub .NET Framework. Aplikacje platformy ASP.NET Core ukierunkowane na platformę .NET Framework nie są wieloplatformowe &mdash; działają tylko w systemie Windows. Ogólnie rzecz biorąc, platforma ASP.NET Core 2.x jest zbudowana z bibliotek [.NET Standard](/dotnet/standard/net-standard). Biblioteki z .NET Standard 2,0 są uruchamiane na dowolnej [platformie .NET implementującej .NET Standard 2,0](/dotnet/standard/net-standard#net-implementation-support).
 
-ASP.NET Core 2.x jest obsługiwany w wersjach programu .NET Framework implementuj .NET Standard 2.0:
+ASP.NET Core 2. x jest obsługiwana w wersjach .NET Framework, które implementują .NET Standard 2,0:
 
-* Zalecana jest najnowsza wersja programu .NET Framework.
+* Zaleca się .NET Framework najnowszej wersji.
 * Platforma .NET Framework 4.6.1 lub nowsza.
 
 Platforma ASP.NET Core 3.0 i nowsze wersje będą działać tylko na platformie .NET Core. Aby uzyskać więcej informacji o tej zmianie, zobacz [A first look at changes coming in ASP.NET Core 3.0](https://blogs.msdn.microsoft.com/webdev/2018/10/29/a-first-look-at-changes-coming-in-asp-net-core-3-0/) (Pierwsze spojrzenie na zmiany wprowadzane na platformie ASP.NET Core 3.0).
@@ -147,17 +147,17 @@ Jest kilka zalet przyjmowania platformy .NET Core jako docelowej, a ich liczba r
 
 * Wieloplatformowość. Działa w systemach macOS, Linux i Windows.
 * Większa wydajność
-* [Przechowywanie wersji obok siebie](/dotnet/standard/choosing-core-framework-server#a-need-for-side-by-side-of-net-versions-per-application-level)
+* [Przechowywanie wersji obok siebie](/dotnet/standard/choosing-core-framework-server#side-by-side-net-versions-per-application-level)
 * Nowe interfejsy API
 * Kod open source
 
-Ciężko pracujemy nad zlikwidowaniem rozbieżności między interfejsami API platform .NET Framework i .NET Core. Pakiet [Windows Compatibility Pack](/dotnet/core/porting/windows-compat-pack) udostępnił tysiące interfejsów API specyficznych dla systemu Windows na platformie .NET Core. Te interfejsy API nie były dostępne na platformie .NET Core 1.x.
+Aby pomóc w zamknięciu przerwy w interfejsie API z .NET Framework do programu .NET Core, [pakiet zgodności systemu Windows](/dotnet/core/porting/windows-compat-pack) wprowadził tysiące interfejsów API tylko dla systemu Windows dostępnych w programie .NET Core. Te interfejsy API nie były dostępne na platformie .NET Core 1.x.
 
 ## <a name="recommended-learning-path"></a>Zalecana ścieżka szkoleniowa
 
 Przy rozpoczynaniu programowania aplikacji platformy ASP.NET Core zalecamy następujący zestaw samouczków i artykułów:
 
-1. Postępuj zgodnie z samouczkiem typu aplikacji, którą chcesz opracować lub obsługiwać.
+1. Postępuj zgodnie z samouczkiem dotyczącym typu aplikacji, którą chcesz opracowywać lub obsłudze.
 
    |Typ aplikacji  |Scenariusz  |Samouczek  |
    |----------|----------|----------|
@@ -166,22 +166,22 @@ Przy rozpoczynaniu programowania aplikacji platformy ASP.NET Core zalecamy nast�
    |Interfejs API sieci Web                   |                            |[Tworzenie internetowego interfejsu API](xref:tutorials/first-web-api)&dagger; |
    |Aplikacja czasu rzeczywistego             |                            |[Wprowadzenie do usługi SignalR](xref:tutorials/signalr) |
 
-1. Postępuj zgodnie z samouczkiem, który pokazuje, jak zrobić podstawowy dostęp do danych.
+1. Postępuj zgodnie z samouczkiem, który pokazuje, jak przeprowadzić podstawowy dostęp do danych.
 
    |Scenariusz  |Samouczek  |
    |----------|----------|
    | Programowanie od nowa        |[Platforma Razor Pages z platformą Entity Framework Core](xref:data/ef-rp/intro) |
    | Konserwacja aplikacji MVC |[Wzorzec MVC z platformą Entity Framework Core](xref:data/ef-mvc/intro) |
 
-1. Przeczytaj omówienie ASP.NET [podstawowe podstawy,](xref:fundamentals/index) które mają zastosowanie do wszystkich typów aplikacji.
+1. Zapoznaj się z omówieniem ASP.NET Core [podstawowych](xref:fundamentals/index) , które mają zastosowanie do wszystkich typów aplikacji.
 
 1. Przeglądaj spis treści, aby znaleźć inne interesujące tematy.
 
-&dagger;Istnieje również [samouczek interfejsu API sieci web, który można wykonać całkowicie w przeglądarce,](/learn/modules/build-web-api-net-core)nie jest wymagana instalacja lokalnego IDE. Kod jest wykonywany w usłudze [Azure Cloud Shell](https://azure.microsoft.com/features/cloud-shell/), a do testowania służy narzędzie [curl](https://curl.haxx.se/).
+&dagger;Dostępny jest również [samouczek interfejsu API sieci Web, który należy wykonać w całości w przeglądarce](/learn/modules/build-web-api-net-core), nie jest wymagana żadna lokalna instalacja środowiska IDE. Kod jest wykonywany w usłudze [Azure Cloud Shell](https://azure.microsoft.com/features/cloud-shell/), a do testowania służy narzędzie [curl](https://curl.haxx.se/).
 
-## <a name="migrate-from-net-framework"></a>Migrowanie z programu .NET Framework
+## <a name="migrate-from-net-framework"></a>Migrowanie z .NET Framework
 
-Aby uzyskać przewodnik po migracji ASP.NET aplikacji do ASP.NET Core, <xref:migration/proper-to-2x/index>zobacz .
+Przewodnik referencyjny dotyczący migrowania aplikacji ASP.NET do ASP.NET Core można <xref:migration/proper-to-2x/index>znaleźć w temacie.
 
 ::: moniker-end
 
@@ -195,7 +195,7 @@ Wiele artykułów i samouczków zawiera linki do kodu przykładowego.
 
 ### <a name="preprocessor-directives-in-sample-code"></a>Dyrektywy preprocesora w przykładowym kodzie
 
-Aby zademonstrować wiele scenariuszy, `#define` `#if-#else/#elif-#endif` przykładowe aplikacje używają dyrektyw i preprocesora do selektywnego kompilowania i uruchamiania różnych sekcji przykładowego kodu. Dla tych przykładów, które korzystają z `#define` tego podejścia, ustaw dyrektywę w górnej części plików Języka C#, aby zdefiniować symbol skojarzony ze scenariuszem, który chcesz uruchomić. Niektóre przykłady wymagają zdefiniowania symbolu u góry wielu plików w celu uruchomienia scenariusza.
+Aby przedstawić wiele scenariuszy, przykładowe aplikacje wykorzystują `#define` dyrektywy `#if-#else/#elif-#endif` i preprocesora, aby wybiórczo kompilować i uruchamiać różne sekcje przykładowego kodu. Dla tych przykładów, które korzystają z tego podejścia, należy ustawić `#define` dyrektywę w górnej części plików C#, aby zdefiniować symbol skojarzony z scenariuszem, który chcesz uruchomić. Niektóre przykłady wymagają zdefiniowania symbolu w górnej części wielu plików, aby można było uruchomić scenariusz.
 
 Na przykład następująca lista symboli `#define` wskazuje, że są dostępne cztery scenariusze (jeden scenariusz na symbol). Aktualna konfiguracja przykładu powoduje uruchomienie scenariusza `TemplateCode`:
 
@@ -213,7 +213,7 @@ Więcej informacji na temat używania [ dyrektyw preprocesora języka C#](/dotne
 
 ### <a name="regions-in-sample-code"></a>Regiony w przykładowym kodzie
 
-Niektóre przykładowe aplikacje zawierają sekcje kodu w otoczeniu [#region](/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-region) i [#endregion](/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-endregion) dyrektyw C#. System tworzenia dokumentacji wstawia te regiony do renderowanych tematów dokumentacji.  
+Niektóre przykładowe aplikacje zawierają sekcje kodu otoczone dyrektywami [#region](/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-region) i [#endregion](/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-endregion) C#. System tworzenia dokumentacji wstawia te regiony do renderowanych tematów dokumentacji.  
 
 Nazwy regionów zwykle zawierają wyraz „snippet”. W poniższym przykładzie pokazano region o nazwie `snippet_WebHostDefaults`:
 
@@ -233,7 +233,7 @@ Wcześniejszy fragment kodu w języku C# jest przywoływany w pliku markdown tem
 [!code-csharp[](sample/SampleApp/Program.cs?name=snippet_WebHostDefaults)]
 ```
 
-Można bezpiecznie zignorować (lub `#region` `#endregion` usunąć) i dyrektyw, które otaczają kod. Nie należy zmieniać kodu w ramach tych dyrektyw, jeśli planujesz uruchomić przykładowe scenariusze opisane w temacie. Kod możesz swobodnie modyfikować, eksperymentując z innymi scenariuszami.
+Licencjobiorca może bezpiecznie zignorować (lub usunąć) `#region` dyrektywy `#endregion` i, które są otaczające kod. Nie zmieniaj kodu w ramach tych dyrektyw, jeśli planujesz uruchamiać przykładowe scenariusze opisane w temacie. Kod możesz swobodnie modyfikować, eksperymentując z innymi scenariuszami.
 
 Aby uzyskać więcej informacji, zobacz [Współtworzenie dokumentacji platformy ASP.NET: fragmenty kodu](https://github.com/dotnet/AspNetCore.Docs/blob/master/CONTRIBUTING.md#code-snippets).
 

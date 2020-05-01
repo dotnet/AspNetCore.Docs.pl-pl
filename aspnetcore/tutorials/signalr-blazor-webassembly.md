@@ -5,17 +5,17 @@ description: Utwórz aplikację czatu, która używa ASP.NET Core SignalR z Blaz
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/23/2020
+ms.date: 04/30/2020
 no-loc:
 - Blazor
 - SignalR
 uid: tutorials/signalr-blazor-webassembly
-ms.openlocfilehash: 78c5fbb8b91b934bcb34525672e9e26b6a95290e
-ms.sourcegitcommit: 7bb14d005155a5044c7902a08694ee8ccb20c113
+ms.openlocfilehash: e86047c9a830cd3ea906d0798f61d90eaee5a18c
+ms.sourcegitcommit: 6318d2bdd63116e178c34492a904be85ec9ac108
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82111152"
+ms.lasthandoff: 04/30/2020
+ms.locfileid: "82604834"
 ---
 # <a name="use-aspnet-core-signalr-with-blazor-webassembly"></a>Korzystanie z ASP.NET Core sygnalizującego z zestawem webassembly Blazor
 
@@ -61,7 +61,7 @@ Na końcu tego samouczka będziesz mieć działającą aplikację czatu.
 Gdy nie korzystasz z programu Visual Studio w wersji 16,6 Preview 2 lub nowszej, zainstaluj szablon [Blazor webassembly](xref:blazor/hosting-models#blazor-webassembly) . Pakiet [Microsoft. AspNetCore. Components. webassembly. Templates](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Templates/) ma wersję zapoznawczą, a Blazor webassembly jest w wersji zapoznawczej. W powłoce poleceń wykonaj następujące polecenie:
 
 ```dotnetcli
-dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview5.20216.8
+dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-rc1.20223.4
 ```
 
 Postępuj zgodnie ze wskazówkami dotyczącymi wybranego narzędzia:
@@ -72,13 +72,13 @@ Postępuj zgodnie ze wskazówkami dotyczącymi wybranego narzędzia:
 
 1. Wybierz pozycję **aplikacja Blazor** i wybierz pozycję **dalej**.
 
-1. Wpisz "BlazorSignalRApp" w polu **Nazwa projektu** . Potwierdź, że wpis **lokalizacji** jest poprawny lub podaj lokalizację dla projektu. Wybierz pozycję **Utwórz**.
+1. Wpisz "BlazorSignalRApp" w polu **Nazwa projektu** . Potwierdź, że wpis **lokalizacji** jest poprawny lub podaj lokalizację dla projektu. Wybierz przycisk **Utwórz**.
 
 1. Wybierz szablon **aplikacji Webassembly Blazor** .
 
 1. W obszarze **Zaawansowane**zaznacz pole wyboru **hostowane ASP.NET Core** .
 
-1. Wybierz pozycję **Utwórz**.
+1. Wybierz przycisk **Utwórz**.
 
 > [!NOTE]
 > Jeśli uaktualniono lub zainstalowano nową wersję programu Visual Studio, a szablon Blazor webassembly nie jest wyświetlany w interfejsie użytkownika programu VS, należy `dotnet new` ponownie zainstalować szablon przy użyciu podanego wcześniej polecenia.
@@ -275,6 +275,6 @@ Aby dowiedzieć się więcej Blazor na temat tworzenia aplikacji Blazor , zapozn
 > [!div class="nextstepaction"]
 > <xref:blazor/index>
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:signalr/introduction>

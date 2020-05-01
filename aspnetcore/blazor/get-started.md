@@ -5,17 +5,17 @@ description: Zacznij korzystać z Blazor programu, tworząc Blazor aplikację pr
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/16/2020
+ms.date: 04/30/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/get-started
-ms.openlocfilehash: 2f10b00adce31c020d46d107c087159c17341beb
-ms.sourcegitcommit: 7bb14d005155a5044c7902a08694ee8ccb20c113
+ms.openlocfilehash: 8ef55b92c45aa07113fd4601a3c7464b42125623
+ms.sourcegitcommit: 6318d2bdd63116e178c34492a904be85ec9ac108
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82111074"
+ms.lasthandoff: 04/30/2020
+ms.locfileid: "82604769"
 ---
 # <a name="get-started-with-aspnet-core-blazor"></a>Wprowadzenie do ASP.NET Core Blazor
 
@@ -36,16 +36,16 @@ Aby rozpocząć pracę z usługą Blazor, postępuj zgodnie ze wskazówkami doty
 1. Zainstaluj szablon [Blazor webassembly](xref:blazor/hosting-models#blazor-webassembly) Preview, uruchamiając następujące polecenie:
 
    ```dotnetcli
-   dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview5.20216.8
+   dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-rc1.20223.4
    ```
 
 1. Tworzenie nowego projektu.
 
-1. Wybierz pozycję **aplikacja Blazor**. Wybierz opcję **Dalej**.
+1. Wybierz pozycję **aplikacja Blazor**. Wybierz pozycję **Dalej**.
 
-1. Podaj nazwę projektu w polu **Nazwa projektu** lub zaakceptuj nazwę domyślną projektu. Potwierdź, że wpis **lokalizacji** jest poprawny lub podaj lokalizację dla projektu. Wybierz pozycję **Utwórz**.
+1. Podaj nazwę projektu w polu **Nazwa projektu** lub zaakceptuj nazwę domyślną projektu. Potwierdź, że wpis **lokalizacji** jest poprawny lub podaj lokalizację dla projektu. Wybierz przycisk **Utwórz**.
 
-1. W przypadku środowiska webassembly Blazor (Visual Studio 16,6 Preview 2 lub nowszego) wybierz szablon **aplikacji Blazor webassembly** . W przypadku środowiska serwera Blazor (Visual Studio 16,4 lub nowszego) wybierz szablon **aplikacji Blazor Server** . Wybierz pozycję **Utwórz**.
+1. W przypadku środowiska webassembly Blazor (Visual Studio 16,6 Preview 2 lub nowszego) wybierz szablon **aplikacji Blazor webassembly** . W przypadku środowiska serwera Blazor (Visual Studio 16,4 lub nowszego) wybierz szablon **aplikacji Blazor Server** . Wybierz przycisk **Utwórz**.
 
 1. Naciśnij klawisz <kbd>Ctrl</kbd>+<kbd>F5</kbd> , aby uruchomić aplikację.
 
@@ -56,7 +56,7 @@ Aby rozpocząć pracę z usługą Blazor, postępuj zgodnie ze wskazówkami doty
 1. Opcjonalnie można zainstalować szablon [Blazor webassembly](xref:blazor/hosting-models#blazor-webassembly) Preview, uruchamiając następujące polecenie:
 
    ```dotnetcli
-   dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview5.20216.8
+   dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-rc1.20223.4
    ```
 
    > [!NOTE]
@@ -98,19 +98,19 @@ Serwer Blazor jest obsługiwany w Visual Studio dla komputerów Mac. Zestaw weba
 
 1. Wybierz pozycję **plik** > **nowe rozwiązanie** lub Utwórz **Nowy projekt**.
 
-1. Na pasku bocznym wybierz pozycję**aplikacja** **.NET Core** > .
+1. Na pasku bocznym wybierz pozycję**aplikacja** **sieci Web i konsola** > .
 
-1. Wybierz szablon **aplikacji Blazor Server** . Wybierz pozycję **Utwórz**.
+1. Wybierz szablon **aplikacji Blazor Server** . Wybierz pozycję **Dalej**.
 
    Aby uzyskać informacje na temat modelu hostingu serwera Blazor, <xref:blazor/hosting-models>Zobacz.
 
-1. Ustaw platformę **docelową** na **platformę .NET Core 3,1** i wybierz pozycję **dalej**.
+1. Upewnij się, że **platforma docelowa** jest ustawiona na **platformę .NET Core 3,1** , a następnie wybierz pozycję **dalej**.
 
-1. W polu **Nazwa projektu** Nadaj nazwę aplikacji `WebApplication1`. Wybierz pozycję **Utwórz**.
+1. W polu **Nazwa projektu** Nadaj nazwę aplikacji `WebApplication1`. Wybierz przycisk **Utwórz**.
 
-1. Wybierz pozycję **Uruchom** > **Uruchom bez debugowania** , aby uruchomić aplikację *bez debugera*. Uruchom aplikację przy użyciu **Rozpocznij debugowanie** , aby uruchomić aplikację *za pomocą debugera*.
+1. Wybierz pozycję **Uruchom** > **Uruchom bez debugowania** , aby uruchomić aplikację *bez debugera*. Uruchom aplikację przy użyciu przycisku **Rozpocznij debugowanie** lub uruchom (&#9654;) przycisk, aby uruchomić aplikację *z debugerem*.
 
-Jeśli zostanie wyświetlony monit o zaufać certyfikatowi Deweloperskiemu, zaufaj certyfikatowi i Kontynuuj.
+Jeśli zostanie wyświetlony monit o zaufać certyfikatowi Deweloperskiemu, zaufaj certyfikatowi i Kontynuuj. Hasła użytkownika i pęku kluczy są wymagane do zaufania certyfikatu.
 
 # <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli/)
 
@@ -119,7 +119,7 @@ Jeśli zostanie wyświetlony monit o zaufać certyfikatowi Deweloperskiemu, zauf
 1. Opcjonalnie można zainstalować szablon [Blazor webassembly](xref:blazor/hosting-models#blazor-webassembly) Preview, uruchamiając następujące polecenie:
 
    ```dotnetcli
-   dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview5.20216.8
+   dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-rc1.20223.4
    ```
 
    > [!NOTE]
@@ -149,7 +149,7 @@ Jeśli zostanie wyświetlony monit o zaufać certyfikatowi Deweloperskiemu, zauf
 
 Na pasku bocznym są dostępne wiele stron:
 
-* Strona główna
+* Domowy
 * Licznik
 * Pobieranie danych
 
@@ -199,7 +199,7 @@ Uruchom aplikację. `Index` Składnik ma swój własny licznik, który zwiększa
 
 <xref:tutorials/first-blazor-app>
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:blazor/templates>
 * <xref:signalr/introduction>

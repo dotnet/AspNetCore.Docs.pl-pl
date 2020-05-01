@@ -1,42 +1,42 @@
 ---
-title: Konfigurowanie konsolidatora dla ASP.NET CoreBlazor
+title: Skonfiguruj konsolidator dla ASP.NET CoreBlazor
 author: guardrex
-description: Dowiedz się, jak sterować konsolidatorem języka Blazor pośredniego podczas tworzenia aplikacji.
+description: Dowiedz się, jak kontrolować konsolidator języka pośredniego (IL) Blazor podczas kompilowania aplikacji.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/23/2020
+ms.date: 04/29/2020
 no-loc:
 - Blazor
 - SignalR
 uid: host-and-deploy/blazor/configure-linker
-ms.openlocfilehash: 109da5ef400c3b9d64ccf3ceb33a5387ea6b5618
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 94cf1f09ddff47aa41181e9f5c52b4c65dc2ecf1
+ms.sourcegitcommit: 6318d2bdd63116e178c34492a904be85ec9ac108
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80218664"
+ms.lasthandoff: 04/30/2020
+ms.locfileid: "82604782"
 ---
-# <a name="configure-the-linker-for-aspnet-core-blazor"></a>Konfigurowanie konsolidatora dla ASP.NET Core Blazor
+# <a name="configure-the-linker-for-aspnet-core-blazor"></a>Skonfiguruj konsolidator dla ASP.NET Core Blazor
 
-Przez [Luke Latham](https://github.com/guardrex)
+Autor [Luke Latham](https://github.com/guardrex)
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
-Blazor WebAssembly wykonuje [intermediate language (IL)](/dotnet/standard/managed-code#intermediate-language--execution) łączenie podczas kompilacji, aby przyciąć niepotrzebne IL z zestawów wyjściowych aplikacji. Konsolidator jest wyłączony podczas tworzenia w konfiguracji debugowania. Aplikacje muszą tworzyć w konfiguracji wersji, aby włączyć konsolidator. Zalecamy tworzenie w wersji podczas wdrażania aplikacji Blazor WebAssembly. 
+Blazor webassembly wykonuje konsolidację [języka pośredniego (IL)](/dotnet/standard/managed-code#intermediate-language--execution) podczas kompilacji, aby przyciąć niepotrzebny kod IL z zestawów wyjściowych aplikacji. Konsolidator jest wyłączony podczas kompilowania w konfiguracji debugowania. Aplikacje muszą kompilować w konfiguracji wydania, aby umożliwić konsolidator. Zalecamy Kompilowanie w wersji podczas wdrażania aplikacji webassembly Blazor. 
 
-Łączenie aplikacji optymalizuje rozmiar, ale może mieć szkodliwe skutki. Aplikacje, które używają odbicia lub powiązanych funkcji dynamicznych może pęknąć po przycięciu, ponieważ konsolidator nie wie o tym dynamicznym zachowaniu i nie można określić ogólnie, które typy są wymagane do odbicia w czasie wykonywania. Aby przyciąć takie aplikacje, konsolidator musi być informowany o wszystkich typach wymaganych przez odbicie w kodzie i w pakietach lub strukturach, od których zależy aplikacja. 
+Łączenie aplikacji jest zoptymalizowane pod kątem rozmiaru, ale mogą one mieć szkodliwe skutki. Aplikacje korzystające z odbicia lub powiązane funkcje dynamiczne mogą być przerywane po przycięciu, ponieważ konsolidator nie wie o tym zachowaniu dynamicznym i nie może w ogóle określić, które typy są wymagane do odbicia w czasie wykonywania. Aby przyciąć takie aplikacje, konsolidator musi być informowany o wszelkich typach wymaganych przez odbicie w kodzie oraz w pakietach lub strukturach, od których zależy aplikacja. 
 
-Aby upewnić się, że przycięta aplikacja działa poprawnie po wdrożeniu, ważne jest, aby testować kompilacje wydania aplikacji często podczas tworzenia.
+Aby upewnić się, że przycięta aplikacja działa prawidłowo po wdrożeniu, ważne jest, aby przetestować kompilacje wydań aplikacji często podczas opracowywania.
 
-Łączenie dla aplikacji Blazor można skonfigurować przy użyciu następujących funkcji MSBuild:
+Łączenie aplikacji Blazor można skonfigurować za pomocą tych funkcji MSBuild:
 
-* Konfigurowanie łączenia globalnie z [właściwością MSBuild](#control-linking-with-an-msbuild-property).
-* Sterowanie łączeniem na podstawie na zespół z [plikiem konfiguracyjnym](#control-linking-with-a-configuration-file).
+* Skonfiguruj konsolidację globalnie za pomocą [Właściwości programu MSBuild](#control-linking-with-an-msbuild-property).
+* Kontrolowanie łączenia poszczególnych zestawów z [plikiem konfiguracyjnym](#control-linking-with-a-configuration-file).
 
-## <a name="control-linking-with-an-msbuild-property"></a>Łączenie formantów z właściwością MSBuild
+## <a name="control-linking-with-an-msbuild-property"></a>Sterowanie łączeniem z właściwością programu MSBuild
 
-Łączenie jest włączone, gdy aplikacja `Release` jest wbudowana w konfigurację. Aby to zmienić, `BlazorWebAssemblyEnableLinking` skonfiguruj właściwość MSBuild w pliku projektu:
+Łączenie jest włączone, gdy aplikacja jest wbudowana `Release` w konfigurację. Aby to zmienić, skonfiguruj Właściwość `BlazorWebAssemblyEnableLinking` programu MSBuild w pliku projektu:
 
 ```xml
 <PropertyGroup>
@@ -44,9 +44,9 @@ Aby upewnić się, że przycięta aplikacja działa poprawnie po wdrożeniu, wa�
 </PropertyGroup>
 ```
 
-## <a name="control-linking-with-a-configuration-file"></a>Sterowanie łączem z plikiem konfiguracyjnym
+## <a name="control-linking-with-a-configuration-file"></a>Kontrola łączenia z plikiem konfiguracji
 
-Kontroluj łączenie na podstawie naze zespołu, udostępniając plik konfiguracyjny XML i określając plik jako element MSBuild w pliku projektu:
+Kontroluj łączenie dla poszczególnych zestawów, dostarczając plik konfiguracyjny XML i określając plik jako element programu MSBuild w pliku projektu:
 
 ```xml
 <ItemGroup>
@@ -54,7 +54,7 @@ Kontroluj łączenie na podstawie naze zespołu, udostępniając plik konfigurac
 </ItemGroup>
 ```
 
-*LinkerConfig.xml*:
+*LinkerConfig. XML*:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -86,13 +86,13 @@ Kontroluj łączenie na podstawie naze zespołu, udostępniając plik konfigurac
 </linker>
 ```
 
-Aby uzyskać więcej informacji, zobacz [Łączenie przykładów plików xml (repozytorium GitHub mono/linker).](https://github.com/mono/linker#link-xml-file-examples)
+Aby uzyskać więcej informacji, zobacz [łącza do plików XML](https://github.com/mono/linker#link-xml-file-examples).
 
-## <a name="add-an-xml-linker-configuration-file-to-a-library"></a>Dodawanie pliku konfiguracyjnego konsolidatora XML do biblioteki
+## <a name="add-an-xml-linker-configuration-file-to-a-library"></a>Dodawanie pliku konfiguracji konsolidatora XML do biblioteki
 
-Aby skonfigurować konsolidator dla określonej biblioteki, dodaj plik konfiguracyjny konsolidatora XML do biblioteki jako zasób osadzony. Osadzony zasób musi mieć taką samą nazwę jak zestaw.
+Aby skonfigurować konsolidator dla określonej biblioteki, Dodaj plik konfiguracji konsolidatora XML do biblioteki jako zasób osadzony. Osadzony zasób musi mieć taką samą nazwę jak zestaw.
 
-W poniższym przykładzie plik *LinkerConfig.xml* jest określony jako osadzony zasób, który ma taką samą nazwę jak zestaw biblioteki:
+W poniższym przykładzie plik *LinkerConfig. XML* jest określony jako zasób osadzony, który ma taką samą nazwę jak zestaw biblioteki:
 
 ```xml
 <ItemGroup>
@@ -102,28 +102,28 @@ W poniższym przykładzie plik *LinkerConfig.xml* jest określony jako osadzony 
 </ItemGroup>
 ```
 
-### <a name="configure-the-linker-for-internationalization"></a>Konfigurowanie konsolidatora do internacjonalizacji
+### <a name="configure-the-linker-for-internationalization"></a>Konfigurowanie konsolidatora dla celów wielojęzycznych
 
-Domyślnie konfiguracja konsolidatora Blazora dla aplikacji Blazor WebAssembly usuwa informacje o internacjonalizacji, z wyjątkiem wyraźnie żądanych ustawień regionalnych. Usunięcie tych zestawów minimalizuje rozmiar aplikacji.
+Domyślnie konfiguracja konsolidatora Blazor dla aplikacji Blazor webassembly umożliwia rozłączenie informacji o danych wielojęzycznych z wyjątkiem lokalizacji lokalnych jawnie żądanych. Usunięcie tych zestawów minimalizuje rozmiar aplikacji.
 
-Aby kontrolować, które zestawy I18N są `<MonoLinkerI18NAssemblies>` zachowywane, ustaw właściwość MSBuild w pliku projektu:
+Aby kontrolować, które zestawy I18N są zachowywane, `<BlazorWebAssemblyI18NAssemblies>` ustaw właściwość programu MSBuild w pliku projektu:
 
 ```xml
 <PropertyGroup>
-  <MonoLinkerI18NAssemblies>{all|none|REGION1,REGION2,...}</MonoLinkerI18NAssemblies>
+  <BlazorWebAssemblyI18NAssemblies>{all|none|REGION1,REGION2,...}</BlazorWebAssemblyI18NAssemblies>
 </PropertyGroup>
 ```
 
-| Wartość regionu     | Montaż regionu mono    |
+| Wartość regionu     | Zestaw regionów mono    |
 | ---------------- | ----------------------- |
-| `all`            | Wszystkie zestawy w zestawie |
+| `all`            | Uwzględnione wszystkie zestawy |
 | `cjk`            | *I18N.CJK.dll*          |
 | `mideast`        | *I18N.MidEast.dll*      |
-| `none`(domyślnie) | Brak                    |
+| `none`wartooć | Brak                    |
 | `other`          | *I18N.Other.dll*        |
 | `rare`           | *I18N.Rare.dll*         |
 | `west`           | *I18N.West.dll*         |
 
-Użyj przecinka, aby oddzielić `mideast,west`wiele wartości (na przykład ).
+Użyj przecinka, aby rozdzielić wiele wartości (na `mideast,west`przykład).
 
-Aby uzyskać więcej informacji, zobacz [I18N: Pnetlib Internationalization Framework Library (mon/mono Repozytorium GitHub).](https://github.com/mono/mono/tree/master/mcs/class/I18N)
+Aby uzyskać więcej informacji, zobacz [i18n: Pnetlib — Biblioteka struktury wielojęzycznej (repozytorium usługi GitHub/mono)](https://github.com/mono/mono/tree/master/mcs/class/I18N).

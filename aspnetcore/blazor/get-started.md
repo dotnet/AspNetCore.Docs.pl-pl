@@ -5,17 +5,17 @@ description: Zacznij korzystać z Blazor programu, tworząc Blazor aplikację pr
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/30/2020
+ms.date: 05/02/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/get-started
-ms.openlocfilehash: 8ef55b92c45aa07113fd4601a3c7464b42125623
-ms.sourcegitcommit: 6318d2bdd63116e178c34492a904be85ec9ac108
+ms.openlocfilehash: 6cf1de6e68d04505ce4ba5d18f2a7d0bbe5be333
+ms.sourcegitcommit: c19e388c83c981232e6f128d97440262adfe06e2
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82604769"
+ms.lasthandoff: 05/02/2020
+ms.locfileid: "82727654"
 ---
 # <a name="get-started-with-aspnet-core-blazor"></a>Wprowadzenie do ASP.NET Core Blazor
 
@@ -33,7 +33,7 @@ Aby rozpocząć pracę z usługą Blazor, postępuj zgodnie ze wskazówkami doty
 
    Aby uzyskać informacje na temat dwóch modeli hostingu Blazor, *Blazor webassembly* i *Blazor Server*, <xref:blazor/hosting-models>Zobacz.
 
-1. Zainstaluj szablon [Blazor webassembly](xref:blazor/hosting-models#blazor-webassembly) Preview, uruchamiając następujące polecenie:
+1. Zainstaluj szablon Blazor webassembly Preview, uruchamiając następujące polecenie:
 
    ```dotnetcli
    dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-rc1.20223.4
@@ -58,9 +58,11 @@ Aby rozpocząć pracę z usługą Blazor, postępuj zgodnie ze wskazówkami doty
    ```dotnetcli
    dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-rc1.20223.4
    ```
+   
+   Aby uzyskać informacje na temat dwóch modeli hostingu Blazor, *Blazor webassembly* i *Blazor Server*, <xref:blazor/hosting-models>Zobacz.
 
    > [!NOTE]
-   > [Zestaw .NET Core SDK w wersji 3.1.201 lub nowszej](https://dotnet.microsoft.com/download/dotnet-core/3.1) jest **wymagana** , aby można było użyć szablonu webassembly 3,2 Blazor. Potwierdź zainstalowaną zestaw .NET Core SDK wersję, `dotnet --version` uruchamiając polecenie w powłoce poleceń programu.
+   > [Zestaw .NET Core SDK w wersji 3.1.201 lub nowszej](https://dotnet.microsoft.com/download/dotnet-core/3.1) jest **wymagana** , aby można było 3,2 użyć szablonu webassembly Blazor. Potwierdź zainstalowaną zestaw .NET Core SDK wersję, `dotnet --version` uruchamiając polecenie w powłoce poleceń programu.
 
 1. Zainstaluj narzędzie [Visual Studio Code](https://code.visualstudio.com/).
 
@@ -78,8 +80,6 @@ Aby rozpocząć pracę z usługą Blazor, postępuj zgodnie ze wskazówkami doty
    dotnet new blazorwasm -o WebApplication1
    ```
 
-   Aby uzyskać informacje na temat dwóch modeli hostingu Blazor, *Blazor Server* i *Blazor webassembly*, <xref:blazor/hosting-models>Zobacz.
-
 1. Otwórz folder *WebApplication1* w Visual Studio Code.
 
 1. Żądania IDE służące do dodawania zasobów do kompilowania i debugowania projektu. Wybierz pozycję **tak**.
@@ -92,23 +92,49 @@ Aby rozpocząć pracę z usługą Blazor, postępuj zgodnie ze wskazówkami doty
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-Serwer Blazor jest obsługiwany w Visual Studio dla komputerów Mac. Zestaw webassembly Blazor nie jest obecnie obsługiwany. Aby kompilować Blazor aplikacje webassembly na macOS, postępuj zgodnie ze wskazówkami na karcie **interfejs wiersza polecenia platformy .NET Core** .
+Serwer Blazor jest obsługiwany w Visual Studio dla komputerów Mac. Zestaw webassembly Blazor nie jest obecnie obsługiwany. Aby utworzyć aplikacje Blazor webassembly na macOS, postępuj zgodnie ze wskazówkami na karcie **interfejs wiersza polecenia platformy .NET Core** . Aby uzyskać informacje na temat dwóch modeli hostingu Blazor, *Blazor webassembly* i *Blazor Server*, <xref:blazor/hosting-models>Zobacz.
 
 1. Zainstaluj [Visual Studio dla komputerów Mac](https://visualstudio.microsoft.com/vs/mac/).
 
-1. Wybierz pozycję **plik** > **nowe rozwiązanie** lub Utwórz **Nowy projekt**.
+1. Wybierz pozycję **plik** > **nowe rozwiązanie** lub Utwórz **Nowy** projekt z **okna uruchamiania**.
 
-1. Na pasku bocznym wybierz pozycję**aplikacja** **sieci Web i konsola** > .
+1. Na pasku bocznym wybierz pozycję**aplikacja** **.NET Core** > .
 
 1. Wybierz szablon **aplikacji Blazor Server** . Wybierz pozycję **Dalej**.
 
-   Aby uzyskać informacje na temat modelu hostingu serwera Blazor, <xref:blazor/hosting-models>Zobacz.
+1. Potwierdź następujące konfiguracje:
 
-1. Upewnij się, że **platforma docelowa** jest ustawiona na **platformę .NET Core 3,1** , a następnie wybierz pozycję **dalej**.
+   * **Platforma docelowa** jest ustawiona na **platformę .NET Core 3,1**.
+   * **Uwierzytelnianie** jest ustawione na wartość **bez uwierzytelniania**.
+   
+   Wybierz pozycję **Dalej**.
 
 1. W polu **Nazwa projektu** Nadaj nazwę aplikacji `WebApplication1`. Wybierz przycisk **Utwórz**.
 
-1. Wybierz pozycję **Uruchom** > **Uruchom bez debugowania** , aby uruchomić aplikację *bez debugera*. Uruchom aplikację przy użyciu przycisku **Rozpocznij debugowanie** lub uruchom (&#9654;) przycisk, aby uruchomić aplikację *z debugerem*.
+1. Wybierz pozycję **Uruchom** > **Uruchom bez debugowania** , aby uruchomić aplikację *bez debugera*. Debugowanie nie jest obecnie obsługiwane.
+
+<!-- HOLD FOR 8.6 GA
+
+1. Select **File** > **New Solution** or create a **New** project from the **Start Window**.
+
+1. In the sidebar, select **Web and Console** > **App**.
+
+1. For a Blazor WebAssembly experience, choose the **Blazor WebAssembly App** template. For a Blazor Server experience, choose the **Blazor Server App** template. Select **Next**.
+
+   For information on the two Blazor hosting models, *Blazor WebAssembly* and *Blazor Server*, see <xref:blazor/hosting-models>.
+
+1. Confirm the following configurations:
+
+   * **Target Framework** set to **.NET Core 3.1**.
+   * **Authentication** set to **No Authentication**.
+   
+   Select **Next**.
+
+1. In the **Project Name** field, name the app `WebApplication1`. Select **Create**.
+
+1. Select **Run** > **Start Without Debugging** to run the app *without the debugger*. Run the app with **Run** > **Start Debugging** or the Run (&#9654;) button to run the app *with the debugger*.
+
+-->
 
 Jeśli zostanie wyświetlony monit o zaufać certyfikatowi Deweloperskiemu, zaufaj certyfikatowi i Kontynuuj. Hasła użytkownika i pęku kluczy są wymagane do zaufania certyfikatu.
 
@@ -116,14 +142,16 @@ Jeśli zostanie wyświetlony monit o zaufać certyfikatowi Deweloperskiemu, zauf
 
 1. Zainstaluj [zestaw SDK platformy .NET Core 3,1](https://dotnet.microsoft.com/download/dotnet-core/3.1).
 
-1. Opcjonalnie można zainstalować szablon [Blazor webassembly](xref:blazor/hosting-models#blazor-webassembly) Preview, uruchamiając następujące polecenie:
+1. Opcjonalnie można zainstalować szablon Blazor webassembly Preview, uruchamiając następujące polecenie:
 
    ```dotnetcli
    dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-rc1.20223.4
    ```
+   
+   Aby uzyskać informacje na temat dwóch modeli hostingu Blazor, *Blazor webassembly* i *Blazor Server*, <xref:blazor/hosting-models>Zobacz.
 
    > [!NOTE]
-   > [Zestaw .NET Core SDK w wersji 3.1.201 lub nowszej](https://dotnet.microsoft.com/download/dotnet-core/3.1) jest **wymagana** , aby można było użyć szablonu webassembly 3,2 Blazor. Potwierdź zainstalowaną zestaw .NET Core SDK wersję, `dotnet --version` uruchamiając polecenie w powłoce poleceń programu.
+   > [Zestaw .NET Core SDK w wersji 3.1.201 lub nowszej](https://dotnet.microsoft.com/download/dotnet-core/3.1) jest **wymagana** , aby można było 3,2 użyć szablonu webassembly Blazor. Potwierdź zainstalowaną zestaw .NET Core SDK wersję, `dotnet --version` uruchamiając polecenie w powłoce poleceń programu.
 
 1. W przypadku środowiska serwera Blazor należy wykonać następujące polecenia w powłoce poleceń:
 
@@ -140,8 +168,6 @@ Jeśli zostanie wyświetlony monit o zaufać certyfikatowi Deweloperskiemu, zauf
    cd WebApplication1
    dotnet run
    ```
-
-   Aby uzyskać informacje na temat dwóch modeli hostingu Blazor, *Blazor Server* i *Blazor webassembly*, <xref:blazor/hosting-models>Zobacz.
 
 1. W przeglądarce przejdź do `https://localhost:5001`.
 

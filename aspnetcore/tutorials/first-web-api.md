@@ -1,56 +1,56 @@
 ---
-title: 'Samouczek: Tworzenie internetowego interfejsu API z ASP.NET Core'
+title: 'Samouczek: Tworzenie internetowego interfejsu API za pomocą ASP.NET Core'
 author: rick-anderson
 description: Dowiedz się, jak utworzyć internetowy interfejs API za pomocą ASP.NET Core.
 ms.author: riande
 ms.custom: mvc
 ms.date: 2/25/2020
 uid: tutorials/first-web-api
-ms.openlocfilehash: 7418e962076fae3ebdbb25381838757b09046578
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 4e205c737f606579590854b679e669cbdd0cd5ab
+ms.sourcegitcommit: c19e388c83c981232e6f128d97440262adfe06e2
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80417659"
+ms.lasthandoff: 05/02/2020
+ms.locfileid: "82727794"
 ---
-# <a name="tutorial-create-a-web-api-with-aspnet-core"></a>Samouczek: Tworzenie internetowego interfejsu API z ASP.NET Core
+# <a name="tutorial-create-a-web-api-with-aspnet-core"></a>Samouczek: Tworzenie internetowego interfejsu API za pomocą ASP.NET Core
 
-Rick [Anderson](https://twitter.com/RickAndMSFT), [Kirk Larkin](https://twitter.com/serpent5)i [Mike Wasson](https://github.com/mikewasson)
+Autorzy [Rick Anderson](https://twitter.com/RickAndMSFT), [Kirka Larkin](https://twitter.com/serpent5)i [Jan Wasson](https://github.com/mikewasson)
 
-Ten samouczek uczy podstaw tworzenia internetowego interfejsu API za pomocą ASP.NET Core.
+Ten samouczek uczy się podstaw tworzenia interfejsu API sieci Web za pomocą ASP.NET Core.
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Niniejszy samouczek zawiera informacje na temat wykonywania następujących czynności:
+Ten samouczek zawiera informacje na temat wykonywania następujących czynności:
 
 > [!div class="checklist"]
-> * Tworzenie projektu internetowego interfejsu API.
+> * Utwórz projekt interfejsu API sieci Web.
 > * Dodaj klasę modelu i kontekst bazy danych.
-> * Rusztowanie sterownika z metodami CRUD.
-> * Konfigurowanie routingu, ścieżek adresów URL i wartości zwracanych.
-> * Wywołanie internetowego interfejsu API za pomocą listonosza.
+> * Tworzy szkielet kontrolera z metodami CRUD.
+> * Skonfiguruj Routing, ścieżki URL i wartości zwracane.
+> * Wywołaj interfejs API sieci Web za pomocą programu Poster.
 
-Na końcu masz internetowy interfejs API, który może zarządzać elementami "do wykonania" przechowywanymi w bazie danych.
+Na końcu znajduje się internetowy interfejs API, który może zarządzać elementami do wykonania przechowywanymi w bazie danych.
 
 ## <a name="overview"></a>Omówienie
 
-W tym samouczku utworzy się następujący interfejs API:
+Ten samouczek tworzy następujący interfejs API:
 
-|interfejs API | Opis | Treść żądania | Treść odpowiedzi |
+|Interfejs API | Opis | Treść żądania | Treść odpowiedzi |
 |--- | ---- | ---- | ---- |
-|POBIERZ /api/TodoItems | Pobierz wszystkie przedmioty do zrobienia | Brak | Tablica elementów do wykonania|
-|POBIERZ /api/TodoItems/{id} | Uzyskaj przedmiot według identyfikatora | Brak | Element do wykonania|
-|POST /api/TodoItems | Dodawanie nowego elementu | Element do wykonania | Element do wykonania |
-|PUT /api/TodoItems/{id} | Aktualizowanie istniejącego elementu&nbsp; | Element do wykonania | Brak |
-|USUŃ /api/TodoItems/{id} &nbsp;&nbsp; | Usuwanie elementu &nbsp;&nbsp; | Brak | Brak|
+|`GET /api/TodoItems` | Pobierz wszystkie elementy do wykonania | Brak | Tablica elementów do wykonania|
+|`GET /api/TodoItems/{id}` | Pobieranie elementu według identyfikatora | Brak | Element do wykonania|
+|`POST /api/TodoItems` | Dodaj nowy element | Element do wykonania | Element do wykonania |
+|`PUT /api/TodoItems/{id}` | Aktualizowanie istniejącego elementu&nbsp; | Element do wykonania | Brak |
+|`DELETE /api/TodoItems/{id}` &nbsp; &nbsp; | Usuń element &nbsp;&nbsp; | Brak | Brak|
 
 Na poniższym diagramie przedstawiono projekt aplikacji.
 
-![Klient jest reprezentowany przez pole po lewej stronie. Składa wniosek i otrzymuje odpowiedź od wniosku, pole sporządzone po prawej stronie. W polu aplikacji trzy pola reprezentują kontroler, model i warstwę dostępu do danych. Żądanie jest do kontrolera aplikacji i operacje odczytu/zapisu występują między kontrolerem a warstwą dostępu do danych. Model jest serializowany i zwracany do klienta w odpowiedzi.](first-web-api/_static/architecture.png)
+![Klient jest reprezentowany przez pole po lewej stronie. Przesyła żądanie i odbiera odpowiedź z aplikacji, pole rysowane po prawej stronie. W polu aplikacja trzy pola reprezentują kontroler, model i warstwę dostępu do danych. Żądanie znajduje się w kontrolerze aplikacji, a operacje odczytu i zapisu są wykonywane między kontrolerem a warstwą dostępu do danych. Model jest serializowany i zwracany do klienta w odpowiedzi.](first-web-api/_static/architecture.png)
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs-3.1.md)]
 
@@ -66,19 +66,19 @@ Na poniższym diagramie przedstawiono projekt aplikacji.
 
 ## <a name="create-a-web-project"></a>Tworzenie projektu sieci Web
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Z menu **Plik** wybierz polecenie **Nowy** > **projekt**.
-* Wybierz szablon **ASP.NET Core Web Application** i kliknij przycisk **Dalej**.
-* Nazwij projekt *TodoApi* i kliknij przycisk **Utwórz**.
-* W oknie **dialogowym Tworzenie nowej ASP.NET podstawowej aplikacji sieci Web** upewnij się, że wybrano opcję **.NET Core** i ASP.NET Core **3.1.** Wybierz szablon **interfejsu API** i kliknij przycisk **Utwórz**.
+* Z menu **plik** wybierz pozycję **Nowy** > **projekt**.
+* Wybierz szablon **aplikacja sieci Web ASP.NET Core** a następnie kliknij przycisk **dalej**.
+* Nazwij projekt *TodoApi* i kliknij pozycję **Utwórz**.
+* W oknie dialogowym **Tworzenie nowej ASP.NET Core aplikacji sieci Web** upewnij się, że wybrano opcję **.net Core** i **ASP.NET Core 3,1** . Wybierz szablon **interfejsu API** i kliknij przycisk **Utwórz**.
 
-![Vs nowe okno dialogowe projektu](first-web-api/_static/vs3.png)
+![Okno dialogowe programu VS New Project](first-web-api/_static/vs3.png)
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * Otwórz [zintegrowany terminal](https://code.visualstudio.com/docs/editor/integrated-terminal).
-* Zmień katalogi`cd`( ) na folder, który będzie zawierał folder projektu.
+* Zmień katalog (`cd`) do folderu, który będzie zawierać folder projektu.
 * Uruchom następujące polecenia:
 
    ```dotnetcli
@@ -89,32 +89,32 @@ Na poniższym diagramie przedstawiono projekt aplikacji.
    code -r ../TodoApi
    ```
 
-* Gdy w oknie dialogowym pojawi się pytanie, czy chcesz dodać wymagane zasoby do projektu, wybierz opcję **Tak**.
+* Gdy zostanie wyświetlone okno dialogowe z pytaniem, czy chcesz dodać wymagane zasoby do projektu, wybierz opcję **tak**.
 
   Poprzednie polecenia:
 
-  * Tworzy nowy projekt interfejsu API sieci web i otwiera go w programie Visual Studio Code.
+  * Tworzy nowy projekt internetowego interfejsu API i otwiera go w Visual Studio Code.
   * Dodaje pakiety NuGet, które są wymagane w następnej sekcji.
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-* Wybierz **pozycję Plik** > **nowego rozwiązania**.
+* Wybierz pozycję **plik** > **nowe rozwiązanie**.
 
-  ![macOS Nowe rozwiązanie](first-web-api-mac/_static/sln.png)
+  ![macOS nowe rozwiązanie](first-web-api-mac/_static/sln.png)
 
-* Wybierz następnie **pozycję .NET Core** > **App** > **API** > **.**
+* Wybierz pozycję **interfejs API** > **App** > > **Next**aplikacji **.NET Core** .
 
-  ![macOS Nowe okno dialogowe projektu](first-web-api-mac/_static/1.png)
+  ![okno dialogowe nowego projektu macOS](first-web-api-mac/_static/1.png)
   
-* W oknie dialogowym **Konfigurowanie nowego interfejsu API sieci Web ASP.NET Core** wybierz pozycję Target **Framework** of **.NET Core 3.1*.
+* W oknie dialogowym **Konfigurowanie nowego interfejsu API sieci Web ASP.NET Core** wybierz pozycję **docelowa platforma** **.NET Core 3,1*.
 
-* Wprowadź *pozycję TodoApi* dla **nazwy projektu,** a następnie wybierz pozycję **Utwórz**.
+* Wprowadź *TodoApi* jako **nazwę projektu** , a następnie wybierz pozycję **Utwórz**.
 
   ![okno dialogowe konfiguracji](first-web-api-mac/_static/2.png)
 
 [!INCLUDE[](~/includes/mac-terminal-access.md)]
 
-Otwórz terminal poleceń w folderze projektu i uruchom następujące polecenia:
+Otwórz Terminal poleceń w folderze projektu i uruchom następujące polecenia:
 
    ```dotnetcli
    dotnet add package Microsoft.EntityFrameworkCore.SqlServer
@@ -125,25 +125,25 @@ Otwórz terminal poleceń w folderze projektu i uruchom następujące polecenia:
 
 ### <a name="test-the-api"></a>Testowanie interfejsu API
 
-Szablon projektu tworzy `WeatherForecast` interfejs API. Wywołanie `Get` metody z przeglądarki, aby przetestować aplikację.
+Szablon projektu tworzy `WeatherForecast` interfejs API. Wywołaj `Get` metodę z przeglądarki, aby przetestować aplikację.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Naciśnij klawisze Ctrl+F5, aby uruchomić aplikację. Visual Studio uruchamia przeglądarkę `https://localhost:<port>/WeatherForecast`i `<port>` przechodzi do , gdzie jest losowo wybrany numer portu.
+Naciśnij klawisze CTRL + F5, aby uruchomić aplikację. Program Visual Studio uruchamia przeglądarkę i przechodzi do `https://localhost:<port>/WeatherForecast`lokalizacji, gdzie `<port>` jest losowo wybierany numer portu.
 
-Jeśli pojawi się okno dialogowe z pytaniem, czy certyfikat IIS Express ma być zaufany, wybierz opcję **Tak**. W oknie dialogowym **Ostrzeżenie o zabezpieczeniach,** które pojawi się obok, wybierz pozycję **Tak**.
+Jeśli zostanie wyświetlone okno dialogowe z pytaniem, czy należy zaufać certyfikatowi IIS Express, wybierz pozycję **tak**. W wyświetlonym oknie dialogowym **ostrzeżenia o zabezpieczeniach** wybierz pozycję **tak**.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-Naciśnij klawisze Ctrl+F5, aby uruchomić aplikację. W przeglądarce przejdź do `https://localhost:5001/WeatherForecast`następującego adresu URL: .
+Naciśnij klawisze CTRL + F5, aby uruchomić aplikację. W przeglądarce przejdź do następującego adresu URL: `https://localhost:5001/WeatherForecast`.
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-Wybierz **uruchom** > **debugowanie startowe,** aby uruchomić aplikację. Program Visual Studio dla komputerów `https://localhost:<port>`Mac `<port>` uruchamia przeglądarkę i przechodzi do miejsca, w którym jest losowo wybrany numer portu. Zwracany jest błąd HTTP 404 (nie znaleziono). Dołącz `/WeatherForecast` do adresu URL (zmień `https://localhost:<port>/WeatherForecast`adres URL na ).
+Wybierz pozycję **Uruchom** > **Rozpocznij debugowanie** , aby uruchomić aplikację. Visual Studio dla komputerów Mac uruchamia przeglądarkę i nawiguje do `https://localhost:<port>`, gdzie `<port>` jest losowo wybranym numerem portu. Zwracany jest błąd HTTP 404 (nie znaleziono). Dołącz `/WeatherForecast` do adresu URL (Zmień adres URL na `https://localhost:<port>/WeatherForecast`).
 
 ---
 
-JSON podobne do następujących jest zwracany:
+Zwracany jest kod JSON podobny do następującego:
 
 ```json
 [
@@ -180,33 +180,33 @@ JSON podobne do następujących jest zwracany:
 ]
 ```
 
-## <a name="add-a-model-class"></a>Dodawanie klasy modelu
+## <a name="add-a-model-class"></a>Dodaj klasę modelu
 
-*Model* to zestaw klas, które reprezentują dane, którymi zarządza aplikacja. Model dla tej aplikacji `TodoItem` jest pojedynczą klasą.
+*Model* to zestaw klas, które reprezentują dane zarządzane przez aplikację. Model tej aplikacji jest pojedynczą `TodoItem` klasą.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* W **Eksploratorze rozwiązań**kliknij projekt prawym przyciskiem myszy. Wybierz **pozycję Dodaj** > **nowy folder**. Nazwij folder *Models*.
+* W **Eksplorator rozwiązań**kliknij prawym przyciskiem myszy projekt. Wybierz pozycję **Dodaj** > **Nowy folder**. Nazwij *modele*folderów.
 
-* Kliknij prawym przyciskiem myszy folder *Modele* i wybierz polecenie **Dodaj** > **klasę**. Nazwij klasę *TodoItem* i wybierz pozycję **Dodaj**.
+* Kliknij prawym przyciskiem myszy folder *modele* i wybierz polecenie **Dodaj** > **klasę**. Nadaj klasie nazwę *TodoItem* i wybierz pozycję **Dodaj**.
 
 * Zastąp kod szablonu następującym kodem:
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-* Dodawanie folderu o nazwie *Modele*.
+* Dodaj folder o nazwie *models*.
 
-* Dodaj `TodoItem` klasę do folderu *Models* z następującym kodem:
+* Dodaj `TodoItem` klasę do folderu *models* o następującym kodzie:
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-* Kliknij prawym przyciskiem myszy projekt. Wybierz **pozycję Dodaj** > **nowy folder**. Nazwij folder *Models*.
+* Kliknij prawym przyciskiem myszy projekt. Wybierz pozycję **Dodaj** > **Nowy folder**. Nazwij *modele*folderów.
 
-  ![nowy folder](first-web-api-mac/_static/folder.png)
+  ![Nowy folder](first-web-api-mac/_static/folder.png)
 
-* Kliknij prawym przyciskiem myszy folder *Modele* i wybierz polecenie **Dodaj** > **nową** > **klasę opróżnienia ogólnego** > **Empty Class**pliku .
+* Kliknij prawym przyciskiem myszy folder *modele* , a następnie wybierz pozycję **Dodaj** > **nowy plik** > **ogólna** > **pusta Klasa**.
 
-* Nazwij klasę *TodoItem*, a następnie kliknij przycisk **Nowy**.
+* Nazwij klasę *TodoItem*, a następnie kliknij pozycję **New (nowy**).
 
 * Zastąp kod szablonu następującym kodem:
 
@@ -214,33 +214,33 @@ JSON podobne do następujących jest zwracany:
 
   [!code-csharp[](first-web-api/samples/3.0/TodoApi/Models/TodoItem.cs?name=snippet)]
 
-Właściwość `Id` działa jako unikatowy klucz w relacyjnej bazie danych.
+`Id` Właściwość działa jako unikatowy klucz w relacyjnej bazie danych.
 
-Klasy modelu można przejść w dowolnym miejscu w projekcie, ale *Models* folder jest używany przez konwencję.
+Klasy modelu mogą przejść do dowolnego miejsca w projekcie, ale folder *modele* jest używany przez Konwencję.
 
 ## <a name="add-a-database-context"></a>Dodawanie kontekstu bazy danych
 
-*Kontekst bazy danych* jest klasą główną, która koordynuje funkcjonalność entity framework dla modelu danych. Ta klasa jest tworzona `Microsoft.EntityFrameworkCore.DbContext` przez wyprowadzanie z klasy.
+*Kontekst bazy danych* jest główną klasą, która koordynuje Entity Framework funkcji dla modelu danych. Ta klasa jest tworzona przez wyprowadzanie z `Microsoft.EntityFrameworkCore.DbContext` klasy.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-### <a name="add-microsoftentityframeworkcoresqlserver"></a>Dodaj serwer Microsoft.EntityFrameCore.SqlServer
+### <a name="add-microsoftentityframeworkcoresqlserver"></a>Dodaj Microsoft. EntityFrameworkCore. SqlServer
 
-* Z menu **Narzędzia** wybierz polecenie **Menedżer pakietów NuGet > Zarządzanie pakietami NuGet dla rozwiązania**.
-* Wybierz kartę **Przeglądaj,** a następnie wprowadź w polu wyszukiwania pozycję **Microsoft.EntityFrameCore.SqlServer.**
-* Wybierz **pozycję Microsoft.EntityFrameWorkCore.SqlServer** w lewym okienku.
-* Zaznacz pole wyboru **Projekt** w prawym okienku, a następnie wybierz pozycję **Zainstaluj**.
-* Użyj poprzednich instrukcji, aby `Microsoft.EntityFrameworkCore.InMemory` dodać pakiet NuGet.
+* W menu **Narzędzia** wybierz pozycję **menedżer pakietów NuGet > zarządzanie pakietami NuGet dla rozwiązania**.
+* Wybierz kartę **Przeglądaj** , a następnie w polu wyszukiwania wprowadź ciąg **Microsoft. EntityFrameworkCore. SqlServer** .
+* W lewym okienku wybierz pozycję **Microsoft. EntityFrameworkCore. SqlServer** .
+* Zaznacz pole wyboru **projekt** w prawym okienku, a następnie wybierz pozycję **Zainstaluj**.
+* Aby dodać pakiet `Microsoft.EntityFrameworkCore.InMemory` NuGet, użyj powyższych instrukcji.
 
 ![Menedżer pakietów NuGet](first-web-api/_static/vs3NuGet.png)
 
 ## <a name="add-the-todocontext-database-context"></a>Dodawanie kontekstu bazy danych TodoContext
 
-* Kliknij prawym przyciskiem myszy folder *Modele* i wybierz polecenie **Dodaj** > **klasę**. Nazwij klasę *TodoContext* i kliknij przycisk **Dodaj**.
+* Kliknij prawym przyciskiem myszy folder *modele* i wybierz polecenie **Dodaj** > **klasę**. Nadaj klasie nazwę *TodoContext* i kliknij przycisk **Dodaj**.
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[Kod programu Visual Studio / Visual Studio dla komputerów Mac](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Visual Studio dla komputerów Mac](#tab/visual-studio-code+visual-studio-mac)
 
-* Dodaj `TodoContext` klasę do folderu *Modele.*
+* Dodaj `TodoContext` klasę do folderu *models* .
 
 ---
 
@@ -250,9 +250,9 @@ Klasy modelu można przejść w dowolnym miejscu w projekcie, ale *Models* folde
 
 ## <a name="register-the-database-context"></a>Rejestrowanie kontekstu bazy danych
 
-W ASP.NET Core usługi, takie jak kontekst bazy danych, muszą być zarejestrowane w kontenerze [iniekcji zależności (DI).](xref:fundamentals/dependency-injection) Kontener zapewnia usługę do kontrolerów.
+W ASP.NET Core usługi, takie jak kontekst bazy danych, muszą być zarejestrowane z kontenerem [iniekcji zależności (di)](xref:fundamentals/dependency-injection) . Kontener udostępnia usługę kontrolerom.
 
-Zaktualizuj *Startup.cs* następującym wyróżnionym kodem:
+Zaktualizuj *Startup.cs* o następujący wyróżniony kod:
 
 [!code-csharp[](first-web-api/samples/3.0/TodoApi/Startup.cs?highlight=7-8,23-24&name=snippet_all)]
 
@@ -260,22 +260,22 @@ Powyższy kod ma następujące działanie:
 
 * Usuwa nieużywane `using` deklaracje.
 * Dodaje kontekst bazy danych do kontenera DI.
-* Określa, że kontekst bazy danych będzie używany w bazie danych w pamięci.
+* Określa, że kontekst bazy danych będzie używać bazy danych w pamięci.
 
-## <a name="scaffold-a-controller"></a>Rusztowanie sterownika
+## <a name="scaffold-a-controller"></a>Tworzenie szkieletu kontrolera
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Kliknij prawym przyciskiem myszy folder *Kontrolery.*
-* Wybierz **pozycję Dodaj** > **nowy element szkieletu**.
-* Wybierz **kontroler interfejsu API z akcjami, używając entity framework**, a następnie wybierz pozycję **Dodaj**.
-* W oknie dialogowym **Dodawanie kontrolera interfejsu API z akcjami przy użyciu** programu Entity Framework:
+* Kliknij prawym przyciskiem myszy folder *controllers* .
+* Wybierz pozycję **Dodaj** > **nowy element szkieletowy**.
+* Wybierz pozycję **kontroler interfejsu API z akcjami, używając Entity Framework**, a następnie wybierz pozycję **Dodaj**.
+* Na stronie **Dodawanie kontrolera interfejsu API z akcjami przy użyciu Entity Framework** dialogowego:
 
-  * Wybierz **todoItem (TodoApi.Models)** w **klasie Model**.
-  * Wybierz **todoContext (TodoApi.Models)** w **klasie kontekstu danych**.
+  * Wybierz pozycję **TodoItem (TodoApi. models)** w **klasie model**.
+  * W **klasie kontekstu danych**wybierz pozycję **TodoContext (TodoApi. models)** .
   * Wybierz pozycję **Dodaj**.
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[Kod programu Visual Studio / Visual Studio dla komputerów Mac](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Visual Studio dla komputerów Mac](#tab/visual-studio-code+visual-studio-mac)
 
 Uruchom następujące polecenia:
 
@@ -288,60 +288,60 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 Poprzednie polecenia:
 
-* Dodaj pakiety NuGet wymagane dla rusztowania.
-* Montuje silnik rusztowania`dotnet-aspnet-codegenerator`( ).
-* Rusztowania `TodoItemsController`.
+* Dodaj pakiety NuGet wymagane do tworzenia szkieletów.
+* Instaluje aparat tworzenia szkieletu (`dotnet-aspnet-codegenerator`).
+* Szkielety `TodoItemsController`.
 
 ---
 
 Wygenerowany kod:
 
-* Oznacza klasę atrybutem. [`[ApiController]`](/dotnet/api/microsoft.aspnetcore.mvc.apicontrollerattribute) Ten atrybut wskazuje, że kontroler odpowiada na żądania interfejsu API sieci web. Aby uzyskać informacje o określonych zachowaniach, <xref:web-api/index>które umożliwia atrybut, zobacz .
-* Używa DI, aby wstrzyknąć kontekst bazy danych (`TodoContext`) do kontrolera. Kontekst bazy danych jest używany w każdej z metod [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) w kontrolerze.
+* Oznacza klasę [`[ApiController]`](/dotnet/api/microsoft.aspnetcore.mvc.apicontrollerattribute) atrybutem. Ten atrybut wskazuje, że kontroler odpowiada na żądania interfejsu API sieci Web. Aby uzyskać informacje o określonych zachowaniach, które włącza atrybut <xref:web-api/index>, zobacz.
+* Używa funkcji DI do iniekcji kontekstu bazy`TodoContext`danych () do kontrolera. Kontekst bazy danych jest używany w każdej z metod [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) w kontrolerze.
 
 Szablony ASP.NET Core dla:
 
-* Kontrolery z `[action]` widokami zawierają w szablonie trasy.
-* Kontrolery interfejsu API `[action]` nie zawierają w szablonie trasy.
+* Kontrolery z widokami `[action]` obejmują szablon trasy.
+* Kontrolery interfejsu API nie `[action]` należą do szablonu trasy.
 
-Gdy `[action]` tokenu nie ma w szablonie trasy, nazwa [akcji](xref:mvc/controllers/routing#action) jest wykluczona z trasy. Oznacza to, że nazwa skojarzonej metody akcji nie jest używana w pasującej marszrutie.
+Gdy `[action]` token nie znajduje się w szablonie trasy, nazwa [akcji](xref:mvc/controllers/routing#action) jest wykluczona z trasy. Oznacza to, że nazwa metody skojarzonej z akcją nie jest używana w zgodnej trasie.
 
-## <a name="examine-the-posttodoitem-create-method"></a>Sprawdź PostTodoItem create metody
+## <a name="examine-the-posttodoitem-create-method"></a>Badanie metody PostTodoItem Create
 
-Zastąp return `PostTodoItem` instrukcji w aby użyć [nameof](/dotnet/csharp/language-reference/operators/nameof) operatora:
+Zastąp instrukcję return w, `PostTodoItem` aby użyć operatora [nameof](/dotnet/csharp/language-reference/operators/nameof) :
 
 [!code-csharp[](first-web-api/samples/3.0/TodoApi/Controllers/TodoItemsController.cs?name=snippet_Create)]
 
-Poprzedni kod jest http post metody, zgodnie [`[HttpPost]`](/dotnet/api/microsoft.aspnetcore.mvc.httppostattribute) z atrybutem. Metoda pobiera wartość elementu do wykonania z treści żądania HTTP.
+Poprzedni kod jest metodą POST protokołu HTTP, jak wskazano w [`[HttpPost]`](/dotnet/api/microsoft.aspnetcore.mvc.httppostattribute) atrybucie. Metoda pobiera wartość elementu do wykonania z treści żądania HTTP.
 
-Metoda: <xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction*>
+<xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction*> Metoda:
 
-* Zwraca kod stanu HTTP 201, jeśli zakończy się pomyślnie. HTTP 201 jest standardową odpowiedzią dla metody HTTP POST, która tworzy nowy zasób na serwerze.
-* Dodaje nagłówek [lokalizacja](https://developer.mozilla.org/docs/Web/HTTP/Headers/Location) do odpowiedzi. Nagłówek `Location` określa [identyfikator URI](https://developer.mozilla.org/docs/Glossary/URI) nowo utworzonego elementu do wykonania. Aby uzyskać więcej informacji, zobacz [10.2.2 201 Utworzono](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html).
-* Odwołuje się `GetTodoItem` do akcji, aby utworzyć `Location` identyfikator URI nagłówka. C# `nameof` słowo kluczowe jest używany w celu uniknięcia `CreatedAtAction` twardego kodowania nazwę akcji w wywołaniu.
+* W razie powodzenia zwraca kod stanu HTTP 201. HTTP 201 to standardowa odpowiedź dla metody POST protokołu HTTP, która tworzy nowy zasób na serwerze.
+* Dodaje nagłówek [lokalizacji](https://developer.mozilla.org/docs/Web/HTTP/Headers/Location) do odpowiedzi. `Location` Nagłówek określa [Identyfikator URI](https://developer.mozilla.org/docs/Glossary/URI) nowo utworzonego elementu do wykonania. Aby uzyskać więcej informacji, zobacz [10.2.2 201](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html).
+* Odwołuje `GetTodoItem` się do akcji tworzenia `Location` identyfikatora URI nagłówka. Słowo kluczowe `nameof` języka C# służy do zapobiegania twardemu kodowaniu nazwy akcji w `CreatedAtAction` wywołaniu.
 
-### <a name="install-postman"></a>Instalowanie listonosza
+### <a name="install-postman"></a>Zainstaluj program Poster
 
-Ten samouczek używa postmana do testowania internetowego interfejsu API.
+Ten samouczek używa programu do testowania interfejsu API sieci Web.
 
-* Instalowanie [listonosza](https://www.getpostman.com/downloads/)
+* Zainstaluj program [Poster](https://www.getpostman.com/downloads/)
 * Uruchom aplikację internetową.
-* Rozpocznij postman.
-* Wyłączanie **weryfikacji certyfikatu SSL**
-  * W **obszarze** > **Ustawienia** plików (karta**Ogólne)** wyłącz **weryfikację certyfikatu SSL**.
+* Uruchom wpis.
+* Wyłącz **weryfikację certyfikatu SSL**
+  * W obszarze **Ustawienia** **pliku** > (karta**Ogólne** ) Wyłącz **weryfikację certyfikatu SSL**.
     > [!WARNING]
-    > Ponownie włącz weryfikację certyfikatu SSL po przetestowaniu sterownika.
+    > Po przetestowaniu kontrolera ponownie Włącz weryfikację certyfikatu SSL.
 
 <a name="post"></a>
 
-### <a name="test-posttodoitem-with-postman"></a>Test PostTodoItem z listonoszem
+### <a name="test-posttodoitem-with-postman"></a>Test PostTodoItem za pomocą programu Poster
 
 * Utwórz nowe żądanie.
-* Ustaw metodę HTTP `POST`na .
+* Ustaw metodę HTTP na `POST`.
 * Wybierz kartę **Treść**.
-* Wybierz **nieprzetworzony** przycisk radiowy.
-* Ustaw typ na **JSON (application/json)**.
-* W treści żądania wprowadź JSON dla elementu do wykonania:
+* Wybierz przycisk radiowy **RAW** .
+* Ustaw typ na **JSON (Application/JSON)**.
+* W treści żądania wprowadź kod JSON dla elementu do wykonania:
 
     ```json
     {
@@ -352,32 +352,32 @@ Ten samouczek używa postmana do testowania internetowego interfejsu API.
 
 * Wybierz pozycję **Wyślij**.
 
-  ![Listonosz z żądaniem utworzenia](first-web-api/_static/3/create.png)
+  ![Ogłoś przy użyciu żądania Create](first-web-api/_static/3/create.png)
 
 ### <a name="test-the-location-header-uri"></a>Testowanie identyfikatora URI nagłówka lokalizacji
 
-* Wybierz kartę **Nagłówki** w okienku **Odpowiedzi.**
-* Skopiuj wartość **nagłówka Lokalizacja:**
+* Wybierz kartę **nagłówki** w okienku **odpowiedź** .
+* Skopiuj wartość nagłówka **lokalizacji** :
 
-  ![Karta Nagłówki konsoli Listonosz](first-web-api/_static/3/create.png)
+  ![Karta nagłówki w konsoli programu Poster](first-web-api/_static/3/create.png)
 
-* Ustaw metodę na GET.
-* Wklej identyfikator URI (na przykład `https://localhost:5001/api/TodoItems/1`).
+* Ustaw metodę, aby uzyskać.
+* Wklej URI (na przykład `https://localhost:5001/api/TodoItems/1`).
 * Wybierz pozycję **Wyślij**.
 
-## <a name="examine-the-get-methods"></a>Sprawdź metody GET
+## <a name="examine-the-get-methods"></a>Badanie metod GET
 
 Te metody implementują dwa punkty końcowe GET:
 
 * `GET /api/TodoItems`
 * `GET /api/TodoItems/{id}`
 
-Przetestuj aplikację, wywołując dwa punkty końcowe z przeglądarki lub listonosza. Przykład:
+Przetestuj aplikację, wywołując dwa punkty końcowe z przeglądarki lub wpisu. Przykład:
 
 * `https://localhost:5001/api/TodoItems`
 * `https://localhost:5001/api/TodoItems/1`
 
-Odpowiedź podobna do następującej jest `GetTodoItems`wywoływana przez wezwanie do:
+Odpowiedź podobna do poniższego jest generowana przez wywołanie `GetTodoItems`:
 
 ```json
 [
@@ -389,55 +389,55 @@ Odpowiedź podobna do następującej jest `GetTodoItems`wywoływana przez wezwan
 ]
 ```
 
-### <a name="test-get-with-postman"></a>Test Get z Listonoszem
+### <a name="test-get-with-postman"></a>Test get przy użyciu programu Poster
 
 * Utwórz nowe żądanie.
-* Ustaw metodę HTTP na **GET**.
-* Ustaw adres URL `https://localhost:<port>/api/TodoItems`żądania na . Na przykład `https://localhost:5001/api/TodoItems`.
-* Ustaw **widok dwóch okienek** w postmanie.
+* Ustaw metodę HTTP, aby **uzyskać**.
+* Ustaw adres URL żądania `https://localhost:<port>/api/TodoItems`. Na przykład `https://localhost:5001/api/TodoItems`.
+* Ustaw **dwa widoki okienka** w programie Poster.
 * Wybierz pozycję **Wyślij**.
 
-Ta aplikacja korzysta z bazy danych w pamięci. Jeśli aplikacja zostanie zatrzymana i uruchomiona, poprzednie żądanie GET nie zwróci żadnych danych. Jeśli żadne dane nie są zwracane, dane [POST](#post) do aplikacji.
+Ta aplikacja używa bazy danych w pamięci. Jeśli aplikacja zostanie zatrzymana i uruchomiona, poprzednie żądanie GET nie zwróci żadnych danych. Jeśli nie zostaną zwrócone żadne dane, [Opublikuj](#post) dane w aplikacji.
 
 ## <a name="routing-and-url-paths"></a>Ścieżki routingu i adresów URL
 
-Atrybut [`[HttpGet]`](/dotnet/api/microsoft.aspnetcore.mvc.httpgetattribute) oznacza metodę, która odpowiada na żądanie HTTP GET. Ścieżka adresu URL dla każdej metody jest skonstruowana w następujący sposób:
+Ten [`[HttpGet]`](/dotnet/api/microsoft.aspnetcore.mvc.httpgetattribute) atrybut oznacza metodę, która reaguje na żądanie HTTP GET. Ścieżka adresu URL dla każdej metody jest zbudowana w następujący sposób:
 
 * Zacznij od ciągu szablonu w `Route` atrybucie kontrolera:
 
   [!code-csharp[](first-web-api/samples/3.0/TodoApi/Controllers/TodoItemsController.cs?name=TodoController&highlight=1)]
 
-* Zamień `[controller]` na nazwę kontrolera, który zgodnie z konwencją jest nazwą klasy kontrolera minus sufiks "Controller". W tym przykładzie nazwa klasy kontrolera to **TodoItems**Controller, więc nazwa kontrolera to "TodoItems". ASP.NET [Routingu rdzenia](xref:mvc/controllers/routing) jest niewrażliwe na wielkości liter.
-* Jeśli `[HttpGet]` atrybut ma szablon trasy (na `[HttpGet("products")]`przykład ), dołącz go do ścieżki. W tym przykładzie nie jest używany szablon. Aby uzyskać więcej informacji, zobacz [Routing atrybutów z atrybutami Http[Verb]](xref:mvc/controllers/routing#attribute-routing-with-httpverb-attributes).
+* Zastąp `[controller]` nazwą kontrolera, którą Konwencją jest nazwa klasy kontrolera minus sufiks "Controller". Dla tego przykładu nazwa klasy kontrolera to **TodoItems**Controller, więc nazwa kontrolera to "TodoItems". W ASP.NET Core [routingu](xref:mvc/controllers/routing) jest rozróżniana wielkość liter.
+* Jeśli `[HttpGet]` atrybut ma szablon trasy (na przykład `[HttpGet("products")]`), Dodaj go do ścieżki. Ten przykład nie używa szablonu. Aby uzyskać więcej informacji, zobacz temat [Routing atrybutów z atrybutami http [Verb]](xref:mvc/controllers/routing#attribute-routing-with-httpverb-attributes).
 
-W poniższej `GetTodoItem` `"{id}"` metodzie jest zmienną zastępczą dla unikatowego identyfikatora elementu do wykonania. Po `GetTodoItem` wywołaniu wartość `"{id}"` w adresie URL jest dostarczana `id` do metody w jego parametrze.
+W poniższej `GetTodoItem` metodzie `"{id}"` jest zmienną zastępczą dla unikatowego identyfikatora elementu do wykonania. Gdy `GetTodoItem` jest wywoływana, wartość `"{id}"` w adresie URL jest podawana do metody w jej `id` parametrze.
 
 [!code-csharp[](first-web-api/samples/3.0/TodoApi/Controllers/TodoItemsController.cs?name=snippet_GetByID&highlight=1-2)]
 
 ## <a name="return-values"></a>Zwracane wartości
 
-Typ zwracany `GetTodoItems` i `GetTodoItem` metody jest [ActionResult\<T> typu](xref:web-api/action-return-types#actionresultt-type). ASP.NET Core automatycznie serializuje obiekt do [JSON](https://www.json.org/) i zapisuje JSON w treści komunikatu odpowiedzi. Kod odpowiedzi dla tego typu zwracania wynosi 200, przy założeniu, że nie ma żadnych nieobsługiwał wyjątków. Nieobsługiwały się wyjątkami są tłumaczone na błędy 5xx.
+Zwracany typ metod `GetTodoItems` i `GetTodoItem` to [ActionResult\<T> typ](xref:web-api/action-return-types#actionresultt-type). ASP.NET Core automatycznie serializować obiektu do [formatu JSON](https://www.json.org/) i zapisuje kod JSON w treści komunikatu odpowiedzi. Kod odpowiedzi dla tego typu zwracanego to 200, przy założeniu, że nie istnieją Nieobsłużone wyjątki. Nieobsłużone wyjątki są tłumaczone na błędy 5xx.
 
-`ActionResult`zwracane typy mogą reprezentować szeroki zakres kodów stanu HTTP. Na przykład `GetTodoItem` może zwrócić dwie różne wartości stanu:
+`ActionResult`typy zwracane mogą reprezentować szeroką gamę kodów stanu HTTP. Na przykład `GetTodoItem` może zwracać dwie różne wartości stanu:
 
-* Jeśli żaden element nie pasuje do żądanego identyfikatora, metoda zwraca kod błędu [NotFound](/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.notfound) 404.
-* W przeciwnym razie metoda zwraca 200 z treści odpowiedzi JSON. Zwracanie `item` wyników w odpowiedzi HTTP 200.
+* Jeśli żaden element nie jest zgodny z żądanym IDENTYFIKATORem, metoda zwraca 404 kod błędu [NOTFOUND](/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.notfound) .
+* W przeciwnym razie metoda zwraca 200 z treścią odpowiedzi JSON. Zwracanie `item` wyników w odpowiedzi HTTP 200.
 
 ## <a name="the-puttodoitem-method"></a>Metoda PutTodoItem
 
-Zbadaj `PutTodoItem` metodę:
+Badanie `PutTodoItem` metody:
 
 [!code-csharp[](first-web-api/samples/3.0/TodoApi/Controllers/TodoItemsController.cs?name=snippet_Update)]
 
-`PutTodoItem`jest podobny `PostTodoItem`do , z tą różnicą, że używa HTTP PUT. Odpowiedź to [204 (Brak zawartości).](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) Zgodnie ze specyfikacją HTTP żądanie PUT wymaga od klienta wysłania całej zaktualizowanej jednostki, a nie tylko zmian. Aby obsługiwać częściowe aktualizacje, należy użyć protokołu [HTTP PATCH](xref:Microsoft.AspNetCore.Mvc.HttpPatchAttribute).
+`PutTodoItem`jest podobny do `PostTodoItem`, z tą różnicą, że używa protokołu HTTP Put. Odpowiedź to [204 (brak zawartości)](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html). Zgodnie ze specyfikacją protokołu HTTP żądanie PUT wymaga, aby klient wysłał całą zaktualizowaną jednostkę, a nie tylko te zmiany. Aby zapewnić obsługę częściowych aktualizacji, użyj [poprawki http](xref:Microsoft.AspNetCore.Mvc.HttpPatchAttribute).
 
-Jeśli wystąpi błąd `PutTodoItem`wywołanie `GET` , wywołanie, aby upewnić się, że istnieje element w bazie danych.
+Jeśli wystąpi błąd podczas wywoływania `PutTodoItem`, wywołaj `GET` , aby upewnić się, że w bazie danych znajduje się element.
 
-### <a name="test-the-puttodoitem-method"></a>Przetestuj metodę PutTodoItem
+### <a name="test-the-puttodoitem-method"></a>Testowanie metody PutTodoItem
 
-W tym przykładzie użyto bazy danych w pamięci, która musi zostać zainicjowana przy każdym uruchomieniu aplikacji. Musi istnieć element w bazie danych przed dokonaniem wywołania PUT. Wywołanie GET, aby upewnić się, że jest element w bazie danych przed wykonaniem wywołania PUT.
+Ten przykład korzysta z bazy danych w pamięci, która musi zostać zainicjowana za każdym razem, gdy aplikacja zostanie uruchomiona. Przed wykonaniem wywołania PUT musi istnieć element w bazie danych. Wywołaj polecenie GET, aby upewnić się, że w bazie danych znajduje się element, przed wykonaniem wywołania PUT.
 
-Zaktualizuj element do wykonania o identyfikatorze = 1 i ustaw jego nazwę na "feed fish":
+Zaktualizuj element do wykonania o IDENTYFIKATORze 1 i ustaw jego nazwę na "Źródło danych":
 
 ```json
   {
@@ -447,96 +447,96 @@ Zaktualizuj element do wykonania o identyfikatorze = 1 i ustaw jego nazwę na "f
   }
 ```
 
-Na poniższej ilustracji przedstawiono aktualizację Listonosz:
+Na poniższej ilustracji przedstawiono aktualizację programu Poster:
 
-![Konsola listonosza z odpowiedzią 204 (brak zawartości)](first-web-api/_static/3/pmcput.png)
+![Konsola programu Poster pokazująca odpowiedź 204 (brak zawartości)](first-web-api/_static/3/pmcput.png)
 
 ## <a name="the-deletetodoitem-method"></a>Metoda DeleteTodoItem
 
-Zbadaj `DeleteTodoItem` metodę:
+Badanie `DeleteTodoItem` metody:
 
 [!code-csharp[](first-web-api/samples/3.0/TodoApi/Controllers/TodoItemsController.cs?name=snippet_Delete)]
 
 ### <a name="test-the-deletetodoitem-method"></a>Testowanie metody DeleteTodoItem
 
-Użyj listonosza, aby usunąć element do wykonania:
+Użyj programu Poster, aby usunąć element do wykonania:
 
-* Ustaw metodę `DELETE`na .
-* Ustaw identyfikator URI obiektu do usunięcia `https://localhost:5001/api/TodoItems/1`(na przykład ).
+* Ustaw metodę na `DELETE`.
+* Ustaw identyfikator URI obiektu do usunięcia (na przykład `https://localhost:5001/api/TodoItems/1`).
 * Wybierz pozycję **Wyślij**.
 
 <a name="over-post"></a>
 
-## <a name="prevent-over-posting"></a>Zapobieganie nadmiernemu księgowaniu
+## <a name="prevent-over-posting"></a>Zapobiegaj za pośrednictwem księgowania
 
-Obecnie przykładowa aplikacja udostępnia `TodoItem` cały obiekt. Aplikacje Productions zazwyczaj ograniczają dane, które są wprowadzane do danych wejściowych i zwracane przy użyciu podzbioru modelu. Istnieje wiele powodów, dla których jest to ważne, a bezpieczeństwo jest najważniejsze. Podzbiór modelu jest zwykle określany jako obiekt transferu danych (DTO), model wejściowy lub model widoku. **DTO** jest używany w tym artykule.
+Obecnie Przykładowa aplikacja uwidacznia cały `TodoItem` obiekt. Aplikacje produkcji zwykle ograniczają dane wejściowe i zwracane przy użyciu podzestawu modelu. Istnieje wiele powodów związanych z tym, a zabezpieczenia są głównymi. Podzestaw modelu jest zwykle określany jako obiekt Transfer danych (DTO), model wejściowy lub model widoku. **DTO** jest używany w tym artykule.
 
-DTO może być stosowany do:
+DTO może służyć do:
 
-* Zapobiegaj nadmiernemu księgowaniu.
-* Ukryj właściwości, których klienci nie powinni wyświetlać.
-* Pomiń niektóre właściwości w celu zmniejszenia rozmiaru ładunku.
-* Spłaszcz wykresy obiektów zawierających obiekty zagnieżdżone. Wykresy spłaszczonych obiektów mogą być wygodniejsze dla klientów.
+* Zablokuj nadmierne księgowanie.
+* Ukryj właściwości, które nie powinny być wyświetlane dla klientów.
+* Pomiń niektóre właściwości, aby zmniejszyć rozmiar ładunku.
+* Spłaszcz wykresy obiektów zawierające obiekty zagnieżdżone. Spłaszczone wykresy obiektów mogą być wygodniejsze dla klientów.
 
-Aby zademonstrować podejście DTO, zaktualizuj klasę, `TodoItem` aby uwzględniła tajne pole:
+Aby zademonstrować podejście DTO, zaktualizuj `TodoItem` klasę w celu uwzględnienia pola tajnego:
 
 [!code-csharp[](first-web-api/samples/3.0/TodoApiDTO/Models/TodoItem.cs?name=snippet&highlight=6)]
 
-Pole tajne musi być ukryte przed tą aplikacją, ale aplikacja administracyjna może go udostępnić.
+Pole tajne musi być ukryte w tej aplikacji, ale aplikacja administracyjna mogła ją uwidocznić.
 
-Sprawdź, czy możesz zaksięgować i uzyskać tajne pole.
+Sprawdź, czy można opublikować i pobrać pole tajne.
 
 Utwórz model DTO:
 
 [!code-csharp[](first-web-api/samples/3.0/TodoApiDTO/Models/TodoItemDTO.cs?name=snippet)]
 
-Zaktualizuj `TodoItemsController` do użycia: `TodoItemDTO`
+Zaktualizuj, `TodoItemsController` aby użyć `TodoItemDTO`:
 
 [!code-csharp[](first-web-api/samples/3.0/TodoApiDTO/Controllers/TodoItemsController.cs?name=snippet)]
 
-Sprawdź, czy nie możesz zaksięgować ani nie uzyskać pola tajnego.
+Upewnij się, że nie można opublikować lub pobrać pola tajnego.
 
-## <a name="call-the-web-api-with-javascript"></a>Wywoływanie internetowego interfejsu API za pomocą języka JavaScript
+## <a name="call-the-web-api-with-javascript"></a>Wywoływanie interfejsu API sieci Web przy użyciu języka JavaScript
 
-Zobacz [Samouczek: Wywołanie ASP.NET core internet API z JavaScript](xref:tutorials/web-api-javascript).
+Zobacz [Samouczek: wywoływanie interfejsu API sieci web ASP.NET Core przy użyciu języka JavaScript](xref:tutorials/web-api-javascript).
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-Niniejszy samouczek zawiera informacje na temat wykonywania następujących czynności:
+Ten samouczek zawiera informacje na temat wykonywania następujących czynności:
 
 > [!div class="checklist"]
-> * Tworzenie projektu internetowego interfejsu API.
+> * Utwórz projekt interfejsu API sieci Web.
 > * Dodaj klasę modelu i kontekst bazy danych.
 > * Dodaj kontroler.
 > * Dodaj metody CRUD.
-> * Konfigurowanie ścieżek routingu i adresów URL.
+> * Skonfiguruj ścieżki routingu i adresów URL.
 > * Określ wartości zwracane.
-> * Wywołanie internetowego interfejsu API za pomocą listonosza.
-> * Wywołanie internetowego interfejsu API za pomocą języka JavaScript.
+> * Wywołaj interfejs API sieci Web za pomocą programu Poster.
+> * Wywołaj interfejs API sieci Web za pomocą języka JavaScript.
 
-Na końcu masz internetowy interfejs API, który może zarządzać elementami "do wykonania" przechowywanymi w relacyjnej bazie danych.
+Na końcu znajduje się internetowy interfejs API, który może zarządzać elementami do wykonania przechowywanymi w relacyjnej bazie danych.
 
 ## <a name="overview"></a>Omówienie
 
-W tym samouczku utworzy się następujący interfejs API:
+Ten samouczek tworzy następujący interfejs API:
 
-|interfejs API | Opis | Treść żądania | Treść odpowiedzi |
+|Interfejs API | Opis | Treść żądania | Treść odpowiedzi |
 |--- | ---- | ---- | ---- |
-|POBIERZ /api/TodoItems | Pobierz wszystkie przedmioty do zrobienia | Brak | Tablica elementów do wykonania|
-|POBIERZ /api/TodoItems/{id} | Uzyskaj przedmiot według identyfikatora | Brak | Element do wykonania|
-|POST /api/TodoItems | Dodawanie nowego elementu | Element do wykonania | Element do wykonania |
-|PUT /api/TodoItems/{id} | Aktualizowanie istniejącego elementu&nbsp; | Element do wykonania | Brak |
-|USUŃ /api/TodoItems/{id} &nbsp;&nbsp; | Usuwanie elementu &nbsp;&nbsp; | Brak | Brak|
+|Pobierz/api/TodoItems | Pobierz wszystkie elementy do wykonania | Brak | Tablica elementów do wykonania|
+|Pobierz/api/TodoItems/{id} | Pobieranie elementu według identyfikatora | Brak | Element do wykonania|
+|Opublikuj/api/TodoItems | Dodaj nowy element | Element do wykonania | Element do wykonania |
+|Umieść/api/TodoItems/{id} | Aktualizowanie istniejącego elementu&nbsp; | Element do wykonania | Brak |
+|Usuń/api/TodoItems/{id} &nbsp;&nbsp; | Usuń element &nbsp;&nbsp; | Brak | Brak|
 
 Na poniższym diagramie przedstawiono projekt aplikacji.
 
-![Klient jest reprezentowany przez pole po lewej stronie. Składa wniosek i otrzymuje odpowiedź od wniosku, pole sporządzone po prawej stronie. W polu aplikacji trzy pola reprezentują kontroler, model i warstwę dostępu do danych. Żądanie jest do kontrolera aplikacji i operacje odczytu/zapisu występują między kontrolerem a warstwą dostępu do danych. Model jest serializowany i zwracany do klienta w odpowiedzi.](first-web-api/_static/architecture.png)
+![Klient jest reprezentowany przez pole po lewej stronie. Przesyła żądanie i odbiera odpowiedź z aplikacji, pole rysowane po prawej stronie. W polu aplikacja trzy pola reprezentują kontroler, model i warstwę dostępu do danych. Żądanie znajduje się w kontrolerze aplikacji, a operacje odczytu i zapisu są wykonywane między kontrolerem a warstwą dostępu do danych. Model jest serializowany i zwracany do klienta w odpowiedzi.](first-web-api/_static/architecture.png)
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs2019-2.2.md)]
 
@@ -552,19 +552,19 @@ Na poniższym diagramie przedstawiono projekt aplikacji.
 
 ## <a name="create-a-web-project"></a>Tworzenie projektu sieci Web
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Z menu **Plik** wybierz polecenie **Nowy** > **projekt**.
-* Wybierz szablon **ASP.NET Core Web Application** i kliknij przycisk **Dalej**.
-* Nazwij projekt *TodoApi* i kliknij przycisk **Utwórz**.
-* W oknie **dialogowym Tworzenie nowej ASP.NET core web application** upewnij się, że wybrano opcję **.NET Core** i ASP.NET Core **2.2.** Wybierz szablon **interfejsu API** i kliknij przycisk **Utwórz**. **Nie wybieraj** opcji **Włącz obsługę platformy Docker**.
+* Z menu **plik** wybierz pozycję **Nowy** > **projekt**.
+* Wybierz szablon **aplikacja sieci Web ASP.NET Core** a następnie kliknij przycisk **dalej**.
+* Nazwij projekt *TodoApi* i kliknij pozycję **Utwórz**.
+* W oknie dialogowym **Tworzenie nowej ASP.NET Core aplikacji sieci Web** upewnij się, że wybrano opcję **.net Core** i **ASP.NET Core 2,2** . Wybierz szablon **interfejsu API** i kliknij przycisk **Utwórz**. **Nie** zaznaczaj opcji **Włącz obsługę platformy Docker**.
 
-![Vs nowe okno dialogowe projektu](first-web-api/_static/vs.png)
+![Okno dialogowe programu VS New Project](first-web-api/_static/vs.png)
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * Otwórz [zintegrowany terminal](https://code.visualstudio.com/docs/editor/integrated-terminal).
-* Zmień katalogi`cd`( ) na folder, który będzie zawierał folder projektu.
+* Zmień katalog (`cd`) do folderu, który będzie zawierać folder projektu.
 * Uruchom następujące polecenia:
 
    ```dotnetcli
@@ -572,23 +572,23 @@ Na poniższym diagramie przedstawiono projekt aplikacji.
    code -r TodoApi
    ```
 
-  Te polecenia tworzą nowy projekt interfejsu API sieci web i otwierają nowe wystąpienie programu Visual Studio Code w nowym folderze projektu.
+  Te polecenia tworzą nowy projekt internetowego interfejsu API i otwierają nowe wystąpienie Visual Studio Code w nowym folderze projektu.
 
-* Gdy w oknie dialogowym pojawi się pytanie, czy chcesz dodać wymagane zasoby do projektu, wybierz opcję **Tak**.
+* Gdy zostanie wyświetlone okno dialogowe z pytaniem, czy chcesz dodać wymagane zasoby do projektu, wybierz opcję **tak**.
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-* Wybierz **pozycję Plik** > **nowego rozwiązania**.
+* Wybierz pozycję **plik** > **nowe rozwiązanie**.
 
-  ![macOS Nowe rozwiązanie](first-web-api-mac/_static/sln.png)
+  ![macOS nowe rozwiązanie](first-web-api-mac/_static/sln.png)
 
-* Wybierz następnie **pozycję .NET Core** > **App** > **API** > **.**
+* Wybierz pozycję **interfejs API** > **App** > > **Next**aplikacji **.NET Core** .
 
-  ![macOS Nowe okno dialogowe projektu](first-web-api-mac/_static/1.png)
+  ![okno dialogowe nowego projektu macOS](first-web-api-mac/_static/1.png)
   
-* W oknie dialogowym **Konfigurowanie nowego interfejsu API sieci Web ASP.NET Core** zaakceptuj domyślną **ramę docelową** **.NET Core 2.2*.
+* W oknie dialogowym **Konfigurowanie nowego interfejsu API sieci Web ASP.NET Core** zaakceptuj domyślną **platformę docelową** programu **.NET Core 2,2*.
 
-* Wprowadź *pozycję TodoApi* dla **nazwy projektu,** a następnie wybierz pozycję **Utwórz**.
+* Wprowadź *TodoApi* jako **nazwę projektu** , a następnie wybierz pozycję **Utwórz**.
 
   ![okno dialogowe konfiguracji](first-web-api-mac/_static/2.png)
 
@@ -596,21 +596,21 @@ Na poniższym diagramie przedstawiono projekt aplikacji.
 
 ### <a name="test-the-api"></a>Testowanie interfejsu API
 
-Szablon projektu tworzy `values` interfejs API. Wywołanie `Get` metody z przeglądarki, aby przetestować aplikację.
+Szablon projektu tworzy `values` interfejs API. Wywołaj `Get` metodę z przeglądarki, aby przetestować aplikację.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Naciśnij klawisze Ctrl+F5, aby uruchomić aplikację. Visual Studio uruchamia przeglądarkę `https://localhost:<port>/api/values`i `<port>` przechodzi do , gdzie jest losowo wybrany numer portu.
+Naciśnij klawisze CTRL + F5, aby uruchomić aplikację. Program Visual Studio uruchamia przeglądarkę i przechodzi do `https://localhost:<port>/api/values`lokalizacji, gdzie `<port>` jest losowo wybierany numer portu.
 
-Jeśli pojawi się okno dialogowe z pytaniem, czy certyfikat IIS Express ma być zaufany, wybierz opcję **Tak**. W oknie dialogowym **Ostrzeżenie o zabezpieczeniach,** które pojawi się obok, wybierz pozycję **Tak**.
+Jeśli zostanie wyświetlone okno dialogowe z pytaniem, czy należy zaufać certyfikatowi IIS Express, wybierz pozycję **tak**. W wyświetlonym oknie dialogowym **ostrzeżenia o zabezpieczeniach** wybierz pozycję **tak**.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-Naciśnij klawisze Ctrl+F5, aby uruchomić aplikację. W przeglądarce przejdź do `https://localhost:5001/api/values`następującego adresu URL: .
+Naciśnij klawisze CTRL + F5, aby uruchomić aplikację. W przeglądarce przejdź do następującego adresu URL: `https://localhost:5001/api/values`.
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-Wybierz **uruchom** > **debugowanie startowe,** aby uruchomić aplikację. Program Visual Studio dla komputerów `https://localhost:<port>`Mac `<port>` uruchamia przeglądarkę i przechodzi do miejsca, w którym jest losowo wybrany numer portu. Zwracany jest błąd HTTP 404 (nie znaleziono). Dołącz `/api/values` do adresu URL (zmień `https://localhost:<port>/api/values`adres URL na ).
+Wybierz pozycję **Uruchom** > **Rozpocznij debugowanie** , aby uruchomić aplikację. Visual Studio dla komputerów Mac uruchamia przeglądarkę i nawiguje do `https://localhost:<port>`, gdzie `<port>` jest losowo wybranym numerem portu. Zwracany jest błąd HTTP 404 (nie znaleziono). Dołącz `/api/values` do adresu URL (Zmień adres URL na `https://localhost:<port>/api/values`).
 
 ---
 
@@ -620,33 +620,33 @@ Zostanie zwrócony następujący kod JSON:
 ["value1","value2"]
 ```
 
-## <a name="add-a-model-class"></a>Dodawanie klasy modelu
+## <a name="add-a-model-class"></a>Dodaj klasę modelu
 
-*Model* to zestaw klas, które reprezentują dane, którymi zarządza aplikacja. Model dla tej aplikacji `TodoItem` jest pojedynczą klasą.
+*Model* to zestaw klas, które reprezentują dane zarządzane przez aplikację. Model tej aplikacji jest pojedynczą `TodoItem` klasą.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* W **Eksploratorze rozwiązań**kliknij projekt prawym przyciskiem myszy. Wybierz **pozycję Dodaj** > **nowy folder**. Nazwij folder *Models*.
+* W **Eksplorator rozwiązań**kliknij prawym przyciskiem myszy projekt. Wybierz pozycję **Dodaj** > **Nowy folder**. Nazwij *modele*folderów.
 
-* Kliknij prawym przyciskiem myszy folder *Modele* i wybierz polecenie **Dodaj** > **klasę**. Nazwij klasę *TodoItem* i wybierz pozycję **Dodaj**.
+* Kliknij prawym przyciskiem myszy folder *modele* i wybierz polecenie **Dodaj** > **klasę**. Nadaj klasie nazwę *TodoItem* i wybierz pozycję **Dodaj**.
 
 * Zastąp kod szablonu następującym kodem:
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-* Dodawanie folderu o nazwie *Modele*.
+* Dodaj folder o nazwie *models*.
 
-* Dodaj `TodoItem` klasę do folderu *Models* z następującym kodem:
+* Dodaj `TodoItem` klasę do folderu *models* o następującym kodzie:
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-* Kliknij prawym przyciskiem myszy projekt. Wybierz **pozycję Dodaj** > **nowy folder**. Nazwij folder *Models*.
+* Kliknij prawym przyciskiem myszy projekt. Wybierz pozycję **Dodaj** > **Nowy folder**. Nazwij *modele*folderów.
 
-  ![nowy folder](first-web-api-mac/_static/folder.png)
+  ![Nowy folder](first-web-api-mac/_static/folder.png)
 
-* Kliknij prawym przyciskiem myszy folder *Modele* i wybierz polecenie **Dodaj** > **nową** > **klasę opróżnienia ogólnego** > **Empty Class**pliku .
+* Kliknij prawym przyciskiem myszy folder *modele* , a następnie wybierz pozycję **Dodaj** > **nowy plik** > **ogólna** > **pusta Klasa**.
 
-* Nazwij klasę *TodoItem*, a następnie kliknij przycisk **Nowy**.
+* Nazwij klasę *TodoItem*, a następnie kliknij pozycję **New (nowy**).
 
 * Zastąp kod szablonu następującym kodem:
 
@@ -654,21 +654,21 @@ Zostanie zwrócony następujący kod JSON:
 
   [!code-csharp[](first-web-api/samples/2.2/TodoApi/Models/TodoItem.cs)]
 
-Właściwość `Id` działa jako unikatowy klucz w relacyjnej bazie danych.
+`Id` Właściwość działa jako unikatowy klucz w relacyjnej bazie danych.
 
-Klasy modelu można przejść w dowolnym miejscu w projekcie, ale *Models* folder jest używany przez konwencję.
+Klasy modelu mogą przejść do dowolnego miejsca w projekcie, ale folder *modele* jest używany przez Konwencję.
 
 ## <a name="add-a-database-context"></a>Dodawanie kontekstu bazy danych
 
-*Kontekst bazy danych* jest klasą główną, która koordynuje funkcjonalność entity framework dla modelu danych. Ta klasa jest tworzona `Microsoft.EntityFrameworkCore.DbContext` przez wyprowadzanie z klasy.
+*Kontekst bazy danych* jest główną klasą, która koordynuje Entity Framework funkcji dla modelu danych. Ta klasa jest tworzona przez wyprowadzanie z `Microsoft.EntityFrameworkCore.DbContext` klasy.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Kliknij prawym przyciskiem myszy folder *Modele* i wybierz polecenie **Dodaj** > **klasę**. Nazwij klasę *TodoContext* i kliknij przycisk **Dodaj**.
+* Kliknij prawym przyciskiem myszy folder *modele* i wybierz polecenie **Dodaj** > **klasę**. Nadaj klasie nazwę *TodoContext* i kliknij przycisk **Dodaj**.
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[Kod programu Visual Studio / Visual Studio dla komputerów Mac](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Visual Studio dla komputerów Mac](#tab/visual-studio-code+visual-studio-mac)
 
-* Dodaj `TodoContext` klasę do folderu *Modele.*
+* Dodaj `TodoContext` klasę do folderu *models* .
 
 ---
 
@@ -678,9 +678,9 @@ Klasy modelu można przejść w dowolnym miejscu w projekcie, ale *Models* folde
 
 ## <a name="register-the-database-context"></a>Rejestrowanie kontekstu bazy danych
 
-W ASP.NET Core usługi, takie jak kontekst bazy danych, muszą być zarejestrowane w kontenerze [iniekcji zależności (DI).](xref:fundamentals/dependency-injection) Kontener zapewnia usługę do kontrolerów.
+W ASP.NET Core usługi, takie jak kontekst bazy danych, muszą być zarejestrowane z kontenerem [iniekcji zależności (di)](xref:fundamentals/dependency-injection) . Kontener udostępnia usługę kontrolerom.
 
-Zaktualizuj *Startup.cs* następującym wyróżnionym kodem:
+Zaktualizuj *Startup.cs* o następujący wyróżniony kod:
 
 [!code-csharp[](first-web-api/samples/2.2/TodoApi/Startup1.cs?highlight=5,8,25-26&name=snippet_all)]
 
@@ -688,22 +688,22 @@ Powyższy kod ma następujące działanie:
 
 * Usuwa nieużywane `using` deklaracje.
 * Dodaje kontekst bazy danych do kontenera DI.
-* Określa, że kontekst bazy danych będzie używany w bazie danych w pamięci.
+* Określa, że kontekst bazy danych będzie używać bazy danych w pamięci.
 
 ## <a name="add-a-controller"></a>Dodawanie kontrolera
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Kliknij prawym przyciskiem myszy folder *Kontrolery.*
-* Wybierz **pozycję Dodaj** > **nowy element**.
-* W oknie dialogowym **Dodawanie nowego elementu** wybierz szablon klasy **kontrolera interfejsu API.**
-* Nazwij klasę *TodoController*i wybierz pozycję **Dodaj**.
+* Kliknij prawym przyciskiem myszy folder *controllers* .
+* Wybierz pozycję **Dodaj** > **nowy element**.
+* W oknie dialogowym **Dodaj nowy element** wybierz szablon **Klasa kontrolera interfejsu API** .
+* Nadaj klasie nazwę *TodoController*i wybierz pozycję **Dodaj**.
 
-  ![Dodawanie nowego okna dialogowego Element z kontrolerem w polu wyszukiwania i wybranym kontrolerem interfejsu API sieci Web](first-web-api/_static/new_controller.png)
+  ![Okno dialogowe Dodawanie nowego elementu z kontrolerem w polu wyszukiwania i wybranym kontrolerem interfejsu API sieci Web](first-web-api/_static/new_controller.png)
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[Kod programu Visual Studio / Visual Studio dla komputerów Mac](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Visual Studio dla komputerów Mac](#tab/visual-studio-code+visual-studio-mac)
 
-* W folderze *Kontrolery* utwórz `TodoController`klasę o nazwie .
+* W folderze *controllers* Utwórz klasę o nazwie `TodoController`.
 
 ---
 
@@ -714,13 +714,13 @@ Powyższy kod ma następujące działanie:
 Powyższy kod ma następujące działanie:
 
 * Definiuje klasę kontrolera interfejsu API bez metod.
-* Oznacza klasę atrybutem. [`[ApiController]`](/dotnet/api/microsoft.aspnetcore.mvc.apicontrollerattribute) Ten atrybut wskazuje, że kontroler odpowiada na żądania interfejsu API sieci web. Aby uzyskać informacje o określonych zachowaniach, <xref:web-api/index>które umożliwia atrybut, zobacz .
-* Używa DI, aby wstrzyknąć kontekst bazy danych (`TodoContext`) do kontrolera. Kontekst bazy danych jest używany w każdej z metod [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) w kontrolerze.
-* Dodaje element `Item1` o nazwie do bazy danych, jeśli baza danych jest pusta. Ten kod znajduje się w konstruktorze, więc jest uruchamiany za każdym razem, gdy jest nowe żądanie HTTP. Jeśli usuniesz wszystkie elementy, konstruktor tworzy `Item1` ponownie następnym razem, gdy wywoływana jest metoda interfejsu API. Więc może to wyglądać usunięcie nie działa, gdy rzeczywiście nie działa.
+* Oznacza klasę [`[ApiController]`](/dotnet/api/microsoft.aspnetcore.mvc.apicontrollerattribute) atrybutem. Ten atrybut wskazuje, że kontroler odpowiada na żądania interfejsu API sieci Web. Aby uzyskać informacje o określonych zachowaniach, które włącza atrybut <xref:web-api/index>, zobacz.
+* Używa funkcji DI do iniekcji kontekstu bazy`TodoContext`danych () do kontrolera. Kontekst bazy danych jest używany w każdej z metod [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) w kontrolerze.
+* Dodaje element o nazwie `Item1` do bazy danych, jeśli baza danych jest pusta. Ten kod znajduje się w konstruktorze, więc jest uruchamiany za każdym razem, gdy istnieje nowe żądanie HTTP. Jeśli usuniesz wszystkie elementy, Konstruktor zostanie ponownie utworzony `Item1` przy następnym wywołaniu metody interfejsu API. Dlatego może wyglądać podobnie jak usunięcie nie zadziałało, gdy rzeczywiście zadziałało.
 
-## <a name="add-get-methods"></a>Dodaj metody Pobierz
+## <a name="add-get-methods"></a>Dodawanie metod get
 
-Aby zapewnić interfejs API, który pobiera elementy do wykonania, dodaj do `TodoController` klasy następujące metody:
+Aby udostępnić interfejs API, który pobiera elementy do wykonania, Dodaj następujące metody do `TodoController` klasy:
 
 [!code-csharp[](first-web-api/samples/2.2/TodoApi/Controllers/TodoController.cs?name=snippet_GetAll)]
 
@@ -729,14 +729,14 @@ Te metody implementują dwa punkty końcowe GET:
 * `GET /api/todo`
 * `GET /api/todo/{id}`
 
-Zatrzymaj aplikację, jeśli jest nadal uruchomiona. Następnie uruchom go ponownie, aby uwzględnić najnowsze zmiany.
+Zatrzymaj aplikację, jeśli jest nadal uruchomiona. Następnie uruchom ją ponownie, aby uwzględnić najnowsze zmiany.
 
 Przetestuj aplikację, wywołując dwa punkty końcowe z przeglądarki. Przykład:
 
 * `https://localhost:<port>/api/todo`
 * `https://localhost:<port>/api/todo/1`
 
-Następująca odpowiedź HTTP jest wywoływana przez wywołanie: `GetTodoItems`
+Następująca odpowiedź HTTP jest generowana przez wywołanie `GetTodoItems`:
 
 ```json
 [
@@ -750,82 +750,82 @@ Następująca odpowiedź HTTP jest wywoływana przez wywołanie: `GetTodoItems`
 
 ## <a name="routing-and-url-paths"></a>Ścieżki routingu i adresów URL
 
-Atrybut [`[HttpGet]`](/dotnet/api/microsoft.aspnetcore.mvc.httpgetattribute) oznacza metodę, która odpowiada na żądanie HTTP GET. Ścieżka adresu URL dla każdej metody jest skonstruowana w następujący sposób:
+Ten [`[HttpGet]`](/dotnet/api/microsoft.aspnetcore.mvc.httpgetattribute) atrybut oznacza metodę, która reaguje na żądanie HTTP GET. Ścieżka adresu URL dla każdej metody jest zbudowana w następujący sposób:
 
 * Zacznij od ciągu szablonu w `Route` atrybucie kontrolera:
 
   [!code-csharp[](first-web-api/samples/2.2/TodoApi/Controllers/TodoController.cs?name=TodoController&highlight=3)]
 
-* Zamień `[controller]` na nazwę kontrolera, który zgodnie z konwencją jest nazwą klasy kontrolera minus sufiks "Controller". W tym przykładzie nazwa klasy kontrolera to **Kontroler Dodo,** więc nazwa kontrolera jest "todo". ASP.NET [Routingu rdzenia](xref:mvc/controllers/routing) jest niewrażliwe na wielkości liter.
-* Jeśli `[HttpGet]` atrybut ma szablon trasy (na `[HttpGet("products")]`przykład ), dołącz go do ścieżki. W tym przykładzie nie jest używany szablon. Aby uzyskać więcej informacji, zobacz [Routing atrybutów z atrybutami Http[Verb]](xref:mvc/controllers/routing#attribute-routing-with-httpverb-attributes).
+* Zastąp `[controller]` nazwą kontrolera, którą Konwencją jest nazwa klasy kontrolera minus sufiks "Controller". W przypadku tego przykładu nazwa klasy kontrolera to kontroler do **zrobienia**, więc nazwa kontrolera to "do zrobienia". W ASP.NET Core [routingu](xref:mvc/controllers/routing) jest rozróżniana wielkość liter.
+* Jeśli `[HttpGet]` atrybut ma szablon trasy (na przykład `[HttpGet("products")]`), Dodaj go do ścieżki. Ten przykład nie używa szablonu. Aby uzyskać więcej informacji, zobacz temat [Routing atrybutów z atrybutami http [Verb]](xref:mvc/controllers/routing#attribute-routing-with-httpverb-attributes).
 
-W poniższej `GetTodoItem` `"{id}"` metodzie jest zmienną zastępczą dla unikatowego identyfikatora elementu do wykonania. Po `GetTodoItem` wywołaniu wartość `"{id}"` w adresie URL jest dostarczana`id` do metody w jego parametrze.
+W poniższej `GetTodoItem` metodzie `"{id}"` jest zmienną zastępczą dla unikatowego identyfikatora elementu do wykonania. Gdy `GetTodoItem` jest wywoływana, wartość `"{id}"` w adresie URL jest podawana do metody w jej`id` parametrze.
 
 [!code-csharp[](first-web-api/samples/2.2/TodoApi/Controllers/TodoController.cs?name=snippet_GetByID&highlight=1-2)]
 
 ## <a name="return-values"></a>Zwracane wartości
 
-Typ zwracany `GetTodoItems` i `GetTodoItem` metody jest [ActionResult\<T> typu](xref:web-api/action-return-types#actionresultt-type). ASP.NET Core automatycznie serializuje obiekt do [JSON](https://www.json.org/) i zapisuje JSON w treści komunikatu odpowiedzi. Kod odpowiedzi dla tego typu zwracania wynosi 200, przy założeniu, że nie ma żadnych nieobsługiwał wyjątków. Nieobsługiwały się wyjątkami są tłumaczone na błędy 5xx.
+Zwracany typ metod `GetTodoItems` i `GetTodoItem` to [ActionResult\<T> typ](xref:web-api/action-return-types#actionresultt-type). ASP.NET Core automatycznie serializować obiektu do [formatu JSON](https://www.json.org/) i zapisuje kod JSON w treści komunikatu odpowiedzi. Kod odpowiedzi dla tego typu zwracanego to 200, przy założeniu, że nie istnieją Nieobsłużone wyjątki. Nieobsłużone wyjątki są tłumaczone na błędy 5xx.
 
-`ActionResult`zwracane typy mogą reprezentować szeroki zakres kodów stanu HTTP. Na przykład `GetTodoItem` może zwrócić dwie różne wartości stanu:
+`ActionResult`typy zwracane mogą reprezentować szeroką gamę kodów stanu HTTP. Na przykład `GetTodoItem` może zwracać dwie różne wartości stanu:
 
-* Jeśli żaden element nie pasuje do żądanego identyfikatora, metoda zwraca kod błędu [NotFound](/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.notfound) 404.
-* W przeciwnym razie metoda zwraca 200 z treści odpowiedzi JSON. Zwracanie `item` wyników w odpowiedzi HTTP 200.
+* Jeśli żaden element nie jest zgodny z żądanym IDENTYFIKATORem, metoda zwraca 404 kod błędu [NOTFOUND](/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.notfound) .
+* W przeciwnym razie metoda zwraca 200 z treścią odpowiedzi JSON. Zwracanie `item` wyników w odpowiedzi HTTP 200.
 
-## <a name="test-the-gettodoitems-method"></a>Przetestuj metodę GetTodoItems
+## <a name="test-the-gettodoitems-method"></a>Testowanie metody GetTodoItems
 
-Ten samouczek używa postmana do testowania internetowego interfejsu API.
+Ten samouczek używa programu do testowania interfejsu API sieci Web.
 
-* Zainstaluj [Listonosz](https://www.getpostman.com/downloads/).
+* Zainstaluj program [Poster](https://www.getpostman.com/downloads/).
 * Uruchom aplikację internetową.
-* Rozpocznij postman.
+* Uruchom wpis.
 * Wyłącz **weryfikację certyfikatu SSL**.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* W **obszarze** > **Ustawienia** plików (karta**Ogólne)** wyłącz **weryfikację certyfikatu SSL**.
+* W obszarze **Ustawienia** **pliku** > (karta**Ogólne** ) Wyłącz **weryfikację certyfikatu SSL**.
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[Kod programu Visual Studio / Visual Studio dla komputerów Mac](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Visual Studio dla komputerów Mac](#tab/visual-studio-code+visual-studio-mac)
 
-* Z **preferencji listonosza** > **Preferences** (karta**Ogólne)** wyłącz **weryfikację certyfikatu SSL**. Możesz też wybrać klucz i wybrać **ustawienia**, a następnie wyłączyć weryfikację certyfikatu SSL.
+* Z poziomu**preferencji** programu **Poster** > (karta**Ogólne** ) Wyłącz **weryfikację certyfikatu SSL**. Alternatywnie wybierz klucz i wybierz pozycję **Ustawienia**, a następnie wyłącz weryfikację certyfikatu SSL.
 
 ---
   
 > [!WARNING]
-> Ponownie włącz weryfikację certyfikatu SSL po przetestowaniu sterownika.
+> Po przetestowaniu kontrolera ponownie Włącz weryfikację certyfikatu SSL.
 
 * Utwórz nowe żądanie.
-  * Ustaw metodę HTTP na **GET**.
-  * Ustaw adres URL `https://localhost:<port>/api/todo`żądania na . Na przykład `https://localhost:5001/api/todo`.
-* Ustaw **widok dwóch okienek** w postmanie.
+  * Ustaw metodę HTTP, aby **uzyskać**.
+  * Ustaw adres URL żądania `https://localhost:<port>/api/todo`. Na przykład `https://localhost:5001/api/todo`.
+* Ustaw **dwa widoki okienka** w programie Poster.
 * Wybierz pozycję **Wyślij**.
 
-![Listonosz z prośbą o uzyskanie](first-web-api/_static/2pv.png)
+![Ogłoś przy użyciu żądania GET](first-web-api/_static/2pv.png)
 
-## <a name="add-a-create-method"></a>Dodawanie metody tworzenia
+## <a name="add-a-create-method"></a>Dodawanie metody Create
 
-Dodaj następującą `PostTodoItem` metodę wewnątrz *controllers/TodoController.cs*: 
+Dodaj następującą `PostTodoItem` metodę w obszarze *controllers/TodoController. cs*: 
 
 [!code-csharp[](first-web-api/samples/2.2/TodoApi/Controllers/TodoController.cs?name=snippet_Create)]
 
-Poprzedni kod jest http post metody, zgodnie [`[HttpPost]`](/dotnet/api/microsoft.aspnetcore.mvc.httppostattribute) z atrybutem. Metoda pobiera wartość elementu do wykonania z treści żądania HTTP.
+Poprzedni kod jest metodą POST protokołu HTTP, jak wskazano w [`[HttpPost]`](/dotnet/api/microsoft.aspnetcore.mvc.httppostattribute) atrybucie. Metoda pobiera wartość elementu do wykonania z treści żądania HTTP.
 
-Metoda: `CreatedAtAction`
+`CreatedAtAction` Metoda:
 
-* Zwraca kod stanu HTTP 201, jeśli zakończy się pomyślnie. HTTP 201 jest standardową odpowiedzią dla metody HTTP POST, która tworzy nowy zasób na serwerze.
-* Dodaje `Location` nagłówek do odpowiedzi. Nagłówek `Location` określa identyfikator URI nowo utworzonego elementu do wykonania. Aby uzyskać więcej informacji, zobacz [10.2.2 201 Utworzono](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html).
-* Odwołuje się `GetTodoItem` do akcji, aby utworzyć `Location` identyfikator URI nagłówka. C# `nameof` słowo kluczowe jest używany w celu uniknięcia `CreatedAtAction` twardego kodowania nazwę akcji w wywołaniu.
+* Zwraca kod stanu HTTP 201, jeśli powodzenie. HTTP 201 to standardowa odpowiedź dla metody POST protokołu HTTP, która tworzy nowy zasób na serwerze.
+* Dodaje `Location` nagłówek do odpowiedzi. `Location` Nagłówek określa identyfikator URI nowo utworzonego elementu do wykonania. Aby uzyskać więcej informacji, zobacz [10.2.2 201](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html).
+* Odwołuje `GetTodoItem` się do akcji tworzenia `Location` identyfikatora URI nagłówka. Słowo kluczowe `nameof` języka C# służy do zapobiegania twardemu kodowaniu nazwy akcji w `CreatedAtAction` wywołaniu.
 
   [!code-csharp[](first-web-api/samples/2.2/TodoApi/Controllers/TodoController.cs?name=snippet_GetByID&highlight=1-2)]
 
-### <a name="test-the-posttodoitem-method"></a>Przetestuj metodę PostTodoItem
+### <a name="test-the-posttodoitem-method"></a>Testowanie metody PostTodoItem
 
 * Skompiluj projekt.
-* W u wysłać metodę `POST`Http na .
+* W programie Poster ustaw metodę HTTP na `POST`.
 * Wybierz kartę **Treść**.
-* Wybierz **nieprzetworzony** przycisk radiowy.
-* Ustaw typ na **JSON (application/json)**.
-* W treści żądania wprowadź JSON dla elementu do wykonania:
+* Wybierz przycisk radiowy **RAW** .
+* Ustaw typ na **JSON (Application/JSON)**.
+* W treści żądania wprowadź kod JSON dla elementu do wykonania:
 
     ```json
     {
@@ -836,19 +836,19 @@ Metoda: `CreatedAtAction`
 
 * Wybierz pozycję **Wyślij**.
 
-  ![Listonosz z żądaniem utworzenia](first-web-api/_static/create.png)
+  ![Ogłoś przy użyciu żądania Create](first-web-api/_static/create.png)
 
-  Jeśli otrzymasz błąd 405 Metoda niedozwolone, prawdopodobnie jest wynikiem nie kompilacji projektu po dodaniu `PostTodoItem` metody.
+  Jeśli wystąpi błąd 405 metody niedozwolonej, jest to prawdopodobnie wynik niekompilowania projektu po dodaniu `PostTodoItem` metody.
 
 ### <a name="test-the-location-header-uri"></a>Testowanie identyfikatora URI nagłówka lokalizacji
 
-* Wybierz kartę **Nagłówki** w okienku **Odpowiedzi.**
-* Skopiuj wartość **nagłówka Lokalizacja:**
+* Wybierz kartę **nagłówki** w okienku **odpowiedź** .
+* Skopiuj wartość nagłówka **lokalizacji** :
 
-  ![Karta Nagłówki konsoli Listonosz](first-web-api/_static/pmc2.png)
+  ![Karta nagłówki w konsoli programu Poster](first-web-api/_static/pmc2.png)
 
-* Ustaw metodę na GET.
-* Wklej identyfikator URI (na przykład `https://localhost:5001/api/Todo/2`).
+* Ustaw metodę, aby uzyskać.
+* Wklej URI (na przykład `https://localhost:5001/api/Todo/2`).
 * Wybierz pozycję **Wyślij**.
 
 ## <a name="add-a-puttodoitem-method"></a>Dodawanie metody PutTodoItem
@@ -857,15 +857,15 @@ Dodaj następującą `PutTodoItem` metodę:
 
 [!code-csharp[](first-web-api/samples/2.2/TodoApi/Controllers/TodoController.cs?name=snippet_Update)]
 
-`PutTodoItem`jest podobny `PostTodoItem`do , z tą różnicą, że używa HTTP PUT. Odpowiedź to [204 (Brak zawartości).](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) Zgodnie ze specyfikacją HTTP żądanie PUT wymaga od klienta wysłania całej zaktualizowanej jednostki, a nie tylko zmian. Aby obsługiwać częściowe aktualizacje, należy użyć protokołu [HTTP PATCH](xref:Microsoft.AspNetCore.Mvc.HttpPatchAttribute).
+`PutTodoItem`jest podobny do `PostTodoItem`, z tą różnicą, że używa protokołu HTTP Put. Odpowiedź to [204 (brak zawartości)](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html). Zgodnie ze specyfikacją protokołu HTTP żądanie PUT wymaga, aby klient wysłał całą zaktualizowaną jednostkę, a nie tylko te zmiany. Aby zapewnić obsługę częściowych aktualizacji, użyj [poprawki http](xref:Microsoft.AspNetCore.Mvc.HttpPatchAttribute).
 
-Jeśli wystąpi błąd `PutTodoItem`wywołanie `GET` , wywołanie, aby upewnić się, że istnieje element w bazie danych.
+Jeśli wystąpi błąd podczas wywoływania `PutTodoItem`, wywołaj `GET` , aby upewnić się, że w bazie danych znajduje się element.
 
-### <a name="test-the-puttodoitem-method"></a>Przetestuj metodę PutTodoItem
+### <a name="test-the-puttodoitem-method"></a>Testowanie metody PutTodoItem
 
-W tym przykładzie użyto bazy danych w pamięci, która musi zostać zainicjowana przy każdym uruchomieniu aplikacji. Musi istnieć element w bazie danych przed dokonaniem wywołania PUT. Wywołanie GET, aby upewnić się, że jest element w bazie danych przed wykonaniem wywołania PUT.
+Ten przykład korzysta z bazy danych w pamięci, która musi zostać zainicjowana za każdym razem, gdy aplikacja zostanie uruchomiona. Przed wykonaniem wywołania PUT musi istnieć element w bazie danych. Wywołaj polecenie GET, aby upewnić się, że w bazie danych znajduje się element, przed wykonaniem wywołania PUT.
 
-Zaktualizuj element do wykonania, który ma identyfikator = 1 i ustaw jego nazwę na "feed fish":
+Zaktualizuj element do wykonania o identyfikatorze 1 i ustaw jego nazwę na "Źródło danych":
 
 ```json
   {
@@ -875,9 +875,9 @@ Zaktualizuj element do wykonania, który ma identyfikator = 1 i ustaw jego nazw�
   }
 ```
 
-Na poniższej ilustracji przedstawiono aktualizację Listonosz:
+Na poniższej ilustracji przedstawiono aktualizację programu Poster:
 
-![Konsola listonosza z odpowiedzią 204 (brak zawartości)](first-web-api/_static/pmcput.png)
+![Konsola programu Poster pokazująca odpowiedź 204 (brak zawartości)](first-web-api/_static/pmcput.png)
 
 ## <a name="add-a-deletetodoitem-method"></a>Dodawanie metody DeleteTodoItem
 
@@ -885,64 +885,64 @@ Dodaj następującą `DeleteTodoItem` metodę:
 
 [!code-csharp[](first-web-api/samples/2.2/TodoApi/Controllers/TodoController.cs?name=snippet_Delete)]
 
-Odpowiedź `DeleteTodoItem` to [204 (Brak zawartości).](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html)
+`DeleteTodoItem` Odpowiedź to [204 (brak zawartości)](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html).
 
 ### <a name="test-the-deletetodoitem-method"></a>Testowanie metody DeleteTodoItem
 
-Użyj listonosza, aby usunąć element do wykonania:
+Użyj programu Poster, aby usunąć element do wykonania:
 
-* Ustaw metodę `DELETE`na .
-* Ustaw identyfikator URI obiektu do usunięcia `https://localhost:5001/api/todo/1`(na przykład ).
+* Ustaw metodę na `DELETE`.
+* Ustaw identyfikator URI obiektu do usunięcia (na przykład `https://localhost:5001/api/todo/1`).
 * Wybierz pozycję **Wyślij**.
 
-Przykładowa aplikacja umożliwia usunięcie wszystkich elementów. Jednak po usunięciu ostatniego elementu, nowy jest tworzony przez konstruktora klasy modelu przy następnym wywołaniu interfejsu API.
+Przykładowa aplikacja umożliwia usunięcie wszystkich elementów. Jednak po usunięciu ostatniego elementu jest on tworzony przez konstruktora klasy modelu przy następnym wywołaniu interfejsu API.
 
-## <a name="call-the-web-api-with-javascript"></a>Wywoływanie internetowego interfejsu API za pomocą języka JavaScript
+## <a name="call-the-web-api-with-javascript"></a>Wywoływanie interfejsu API sieci Web przy użyciu języka JavaScript
 
-W tej sekcji zostanie dodana strona HTML, która używa języka JavaScript do wywoływania internetowego interfejsu API. jQuery inicjuje żądanie. JavaScript aktualizuje stronę ze szczegółami z odpowiedzi internetowego interfejsu API.
+W tej sekcji zostanie dodana strona HTML, która używa języka JavaScript do wywoływania internetowego interfejsu API. jQuery inicjuje żądanie. Język JavaScript aktualizuje stronę ze szczegółowymi informacjami z odpowiedzi internetowego interfejsu API.
 
-Skonfiguruj aplikację do [obsługi plików statycznych](/dotnet/api/microsoft.aspnetcore.builder.staticfileextensions.usestaticfiles#Microsoft_AspNetCore_Builder_StaticFileExtensions_UseStaticFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_) i [włącz domyślne mapowanie plików,](/dotnet/api/microsoft.aspnetcore.builder.defaultfilesextensions.usedefaultfiles#Microsoft_AspNetCore_Builder_DefaultFilesExtensions_UseDefaultFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_) aktualizując *Startup.cs* za pomocą następującego podświetlanych kodów:
+Skonfiguruj aplikację do [obsługi plików statycznych](/dotnet/api/microsoft.aspnetcore.builder.staticfileextensions.usestaticfiles#Microsoft_AspNetCore_Builder_StaticFileExtensions_UseStaticFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_) i [Włącz domyślne mapowanie plików](/dotnet/api/microsoft.aspnetcore.builder.defaultfilesextensions.usedefaultfiles#Microsoft_AspNetCore_Builder_DefaultFilesExtensions_UseDefaultFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_) , aktualizując *Startup.cs* z następującym wyróżnionym kodem:
 
 [!code-csharp[](first-web-api/samples/2.2/TodoApi/Startup.cs?highlight=14-15&name=snippet_configure)]
 
 Utwórz folder *wwwroot* w katalogu projektu.
 
-Dodaj plik HTML o nazwie *index.html* do katalogu *wwwroot.* Zastąp jego zawartość następującym znacznikiem:
+Dodaj plik HTML o nazwie *index. html* do katalogu *wwwroot* . Zastąp jego zawartość następującym znacznikiem:
 
 [!code-html[](first-web-api/samples/2.2/TodoApi/wwwroot/index.html)]
 
-Dodaj plik JavaScript o nazwie *site.js* do katalogu *wwwroot.* Zastąp jego zawartość następującym kodem:
+Dodaj plik języka JavaScript o nazwie *site. js* do katalogu *wwwroot* . Zastąp jego zawartość następującym kodem:
 
 [!code-javascript[](first-web-api/samples/2.2/TodoApi/wwwroot/site.js?name=snippet_SiteJs)]
 
-Aby przetestować stronę HTML lokalnie, może być wymagana zmiana ustawień uruchamiania projektu ASP.NET Core:
+Zmiana ustawień uruchamiania projektu ASP.NET Core może być wymagana do lokalnego przetestowania strony HTML:
 
-* Otwórz *właściwości\launchSettings.json*.
-* Usuń `launchUrl` właściwość, aby wymusić otwarcie aplikacji w *pliku index.html*&mdash;domyślnego pliku projektu.
+* Otwórz *Properties\launchSettings.JSON*.
+* Usuń `launchUrl` właściwość, aby wymusić Otwieranie aplikacji w *indeksie. html*&mdash;plik domyślny projektu.
 
-W tym przykładzie wywołuje wszystkie metody CRUD interfejsu API sieci web. Poniżej przedstawiono objaśnienia wywołań interfejsu API.
+Ten przykład wywołuje wszystkie metody CRUD internetowego interfejsu API. Poniżej znajdują się wyjaśnienia wywołań interfejsu API.
 
-### <a name="get-a-list-of-to-do-items"></a>Wyświetlanie listy elementów do wykonania
+### <a name="get-a-list-of-to-do-items"></a>Pobierz listę elementów do wykonania
 
-jQuery wysyła żądanie HTTP GET do internetowego interfejsu API, który zwraca JSON reprezentujący tablicę elementów do wykonania. Funkcja `success` wywołania zwrotnego jest wywoływana, jeśli żądanie zakończy się pomyślnie. W wywołaniu zwrotnym dom jest aktualizowany o informacje do wykonania.
+jQuery wysyła żądanie HTTP GET do internetowego interfejsu API, który zwraca kod JSON reprezentujący tablicę elementów do wykonania. Funkcja `success` wywołania zwrotnego jest wywoływana, jeśli żądanie zakończy się pomyślnie. W wywołaniu zwrotnym model DOM jest aktualizowany przy użyciu informacji o tym do wykonania.
 
 [!code-javascript[](first-web-api/samples/2.2/TodoApi/wwwroot/site.js?name=snippet_GetData)]
 
-### <a name="add-a-to-do-item"></a>Dodawanie elementu do wykonania
+### <a name="add-a-to-do-item"></a>Dodaj element do wykonania
 
-jQuery wysyła żądanie HTTP POST z elementem do wykonania w treści żądania. Opcje `accepts` `contentType` i opcje `application/json` są ustawione tak, aby określić typ nośnika odbierany i wysyłany. Element do wykonania jest konwertowany na JSON przy użyciu pliku [JSON.stringify](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify). Gdy interfejs API zwraca kod `getData` stanu pomyślnego, funkcja jest wywoływana w celu zaktualizowania tabeli HTML.
+jQuery wysyła żądanie HTTP POST z elementem do wykonania w treści żądania. Opcje `accepts` i `contentType` są ustawione na `application/json` , aby określić typ nośnika odbierany i wysyłany. Element do wykonania jest konwertowany na format JSON przy użyciu [formatu JSON. stringify](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify). Gdy interfejs API zwraca kod stanu pomyślnego, `getData` funkcja jest wywoływana w celu zaktualizowania tabeli HTML.
 
 [!code-javascript[](first-web-api/samples/2.2/TodoApi/wwwroot/site.js?name=snippet_AddItem)]
 
 ### <a name="update-a-to-do-item"></a>Aktualizowanie elementu do wykonania
 
-Aktualizowanie elementu do wykonania jest podobne do dodawania jednego. Zmiany, `url` aby dodać unikatowy identyfikator elementu, `type` `PUT`a jest .
+Aktualizowanie elementu do wykonania jest podobne do dodawania jednego. `url` Zmiany mające na celu dodanie unikatowego identyfikatora elementu i `type` is `PUT`.
 
 [!code-javascript[](first-web-api/samples/2.2/TodoApi/wwwroot/site.js?name=snippet_AjaxPut)]
 
-### <a name="delete-a-to-do-item"></a>Usuwanie elementu do wykonania
+### <a name="delete-a-to-do-item"></a>Usuń element do wykonania
 
-Usunięcie elementu do wykonania odbywa się poprzez `type` ustawienie wywołania `DELETE` AJAX i określenie unikatowego identyfikatora elementu w adresie URL.
+Usuwanie elementu do wykonania jest realizowane przez ustawienie `type` w wywołaniu AJAX `DELETE` i określenie unikatowego identyfikatora elementu w adresie URL.
 
 [!code-javascript[](first-web-api/samples/2.2/TodoApi/wwwroot/site.js?name=snippet_AjaxDelete)]
 
@@ -956,7 +956,7 @@ Usunięcie elementu do wykonania odbywa się poprzez `type` ustawienie wywołani
 
 ## <a name="additional-resources"></a>Zasoby dodatkowe
 
-[Wyświetl lub pobierz przykładowy kod dla tego samouczka](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/first-web-api/samples). Zobacz, [jak pobrać](xref:index#how-to-download-a-sample)plik .
+[Wyświetl lub Pobierz przykładowy kod dla tego samouczka](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/first-web-api/samples). Zobacz artykuł [jak pobrać](xref:index#how-to-download-a-sample).
 
 Więcej informacji zawierają następujące zasoby:
 
@@ -967,4 +967,4 @@ Więcej informacji zawierają następujące zasoby:
 * <xref:web-api/action-return-types>
 * <xref:host-and-deploy/azure-apps/index>
 * <xref:host-and-deploy/index>
-* [Wersja tego samouczka w YouTube](https://www.youtube.com/watch?v=TTkhEyGBfAk)
+* [Wersja tego samouczka usługi YouTube](https://www.youtube.com/watch?v=TTkhEyGBfAk)

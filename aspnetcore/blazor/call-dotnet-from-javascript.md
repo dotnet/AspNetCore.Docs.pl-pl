@@ -1,41 +1,44 @@
 ---
-title: Wywoływanie metod platformy .NET z funkcji JavaScript w ASP.NET CoreBlazor
+title: Wywoływanie metod .NET z funkcji języka JavaScript w ASP.NET CoreBlazor
 author: guardrex
-description: Dowiedz się, jak wywoływać metody platformy Blazor .NET z funkcji JavaScript w aplikacjach.
+description: Dowiedz się, jak wywoływać metody .NET z Blazor funkcji języka JavaScript w aplikacjach.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 04/07/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/call-dotnet-from-javascript
-ms.openlocfilehash: e2344dd15efd243a405373b6cf0362f28b48173a
-ms.sourcegitcommit: f0aeeab6ab6e09db713bb9b7862c45f4d447771b
+ms.openlocfilehash: 1bc75f0825b114a24def287bb7ccb11c27514f01
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80976953"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82767190"
 ---
-# <a name="call-net-methods-from-javascript-functions-in-aspnet-core-opno-locblazor"></a>Wywoływanie metod platformy .NET z funkcji JavaScript w ASP.NET CoreBlazor
+# <a name="call-net-methods-from-javascript-functions-in-aspnet-core-blazor"></a>Wywoływanie metod .NET z funkcji języka JavaScript w ASP.NET CoreBlazor
 
-[Javier Calvarro Nelson](https://github.com/javiercn), Daniel [Roth](https://github.com/danroth27), [Shashikant Rudrawadi](http://wisne.co)i [Luke Latham](https://github.com/guardrex)
+[Javier Calvarro Nelson](https://github.com/javiercn), [Daniel Roth](https://github.com/danroth27), [Shashikant Rudrawadi](http://wisne.co)i [Luke](https://github.com/guardrex) Latham
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
-Aplikacja Blazor może wywoływać funkcje JavaScript z metod .NET i .NET z funkcji JavaScript. Scenariusze te są nazywane *interoperacyjnością JavaScript* *(JS interop*).
+Blazor Aplikacja może wywoływać funkcje języka JavaScript z metod .NET i metod .NET z funkcji języka JavaScript. Te scenariusze nazywa się *współdziałaniem JavaScript* (w programie*js Interop*).
 
-W tym artykule omówiono wywoływanie metod platformy .NET z języka JavaScript. Aby uzyskać informacje na temat wywoływania funkcji <xref:blazor/call-javascript-from-dotnet>JavaScript z platformy .NET, zobacz .
+W tym artykule opisano wywoływanie metod .NET z języka JavaScript. Aby uzyskać informacje na temat wywoływania funkcji JavaScript z platformy .NET, <xref:blazor/call-javascript-from-dotnet>Zobacz.
 
 [Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([jak pobrać](xref:index#how-to-download-a-sample))
 
 ## <a name="static-net-method-call"></a>Statyczne wywołanie metody .NET
 
-Aby wywołać statyczną metodę .NET z `DotNet.invokeMethod` języka `DotNet.invokeMethodAsync` JavaScript, należy użyć funkcji lub. Przekaż w identyfikatorzie metody statycznej, którą chcesz wywołać, nazwę zestawu zawierającego funkcję i wszelkie argumenty. Wersja asynchroniowa jest preferowana do obsługi Blazor scenariuszy serwera. Metoda .NET musi być publiczna, statyczna i mieć `[JSInvokable]` atrybut. Wywoływanie otwartych metod ogólnych nie jest obecnie obsługiwane.
+Aby wywołać statyczną metodę .NET z poziomu języka JavaScript, `DotNet.invokeMethod` Użyj `DotNet.invokeMethodAsync` funkcji or. Przekaż identyfikator metody statycznej, która ma być wywoływana, nazwę zestawu zawierającego funkcję i wszelkie argumenty. Wersja asynchroniczna jest preferowana do Blazor obsługi scenariuszy serwera. Metoda .NET musi być publiczna, statyczna i mieć `[JSInvokable]` atrybut. Wywoływanie otwartych metod ogólnych nie jest obecnie obsługiwane.
 
-Przykładowa aplikacja zawiera metodę języka `int` C#, aby zwrócić tablicę. Atrybut `JSInvokable` jest stosowany do metody.
+Przykładowa aplikacja zawiera metodę języka C#, która zwraca `int` tablicę. Ten `JSInvokable` atrybut jest stosowany do metody.
 
-*Strony/JsInterop.brzytwa*:
+*Strony/JsInterop. Razor*:
 
 ```razor
 <button type="button" class="btn btn-primary"
@@ -52,23 +55,23 @@ Przykładowa aplikacja zawiera metodę języka `int` C#, aby zwrócić tablicę.
 }
 ```
 
-JavaScript obsługiwany klientowi wywołuje metodę C# .NET.
+Kod JavaScript obsługiwany przez klienta wywołuje metodę języka C# .NET.
 
-*wwwroot/exampleJsInterop.js*:
+*wwwroot/exampleJsInterop. js*:
 
 [!code-javascript[](./common/samples/3.x/BlazorWebAssemblySample/wwwroot/exampleJsInterop.js?highlight=8-14)]
 
-Po wybraniu przycisku **Trigger .NET metoda statyczna ReturnArrayAsync,** sprawdź dane wyjściowe konsoli w narzędziach programistycznych sieci web przeglądarki.
+Gdy zostanie wybrany przycisk **ReturnArrayAsync Wyzwalaj metodę statyczną .NET** , sprawdź dane wyjściowe konsoli w narzędziach deweloperskich sieci Web w przeglądarce.
 
-Wyjście konsoli jest następujące:
+Dane wyjściowe konsoli są następujące:
 
 ```console
 Array(4) [ 1, 2, 3, 4 ]
 ```
 
-Czwarta wartość tablicy jest wypychany do tablicy (`data.push(4);`) zwracany przez `ReturnArrayAsync`.
+Czwarta wartość tablicy jest wypychana do tablicy (`data.push(4);`) zwracanej przez `ReturnArrayAsync`.
 
-Domyślnie identyfikator metody jest nazwą metody, ale można określić inny `JSInvokableAttribute` identyfikator przy użyciu konstruktora:
+Domyślnie identyfikator metody jest nazwą metody, ale można określić inny identyfikator przy użyciu `JSInvokableAttribute` konstruktora:
 
 ```csharp
 @code {
@@ -94,19 +97,19 @@ returnArrayAsyncJs: function () {
 
 ## <a name="instance-method-call"></a>Wywołanie metody wystąpienia
 
-Można również wywołać metody wystąpienia platformy .NET z języka JavaScript. Aby wywołać metodę wystąpienia platformy .NET z języka JavaScript:
+Można również wywołać metody wystąpienia platformy .NET z poziomu języka JavaScript. Aby wywołać metodę wystąpienia platformy .NET z poziomu języka JavaScript:
 
-* Przekaż wystąpienie .NET przez odwołanie do języka JavaScript:
-  * Nawiązać statyczne `DotNetObjectReference.Create`wywołanie do pliku .
-  * Zawiń wystąpienie `DotNetObjectReference` w `Create` wystąpieniu `DotNetObjectReference` i wywołaj wystąpienie. Zutylizuj `DotNetObjectReference` obiekty (przykład pojawia się w dalszej części tej sekcji).
-* Wywołaj metody wystąpienia .NET w `invokeMethod` `invokeMethodAsync` wystąpieniu przy użyciu funkcji lub. Wystąpienie platformy .NET można również przekazać jako argument podczas wywoływania innych metod platformy .NET z języka JavaScript.
+* Przekaż wystąpienie platformy .NET przez odwołanie do języka JavaScript:
+  * Wykonaj wywołanie statyczne do `DotNetObjectReference.Create`.
+  * Zawiń wystąpienie w `DotNetObjectReference` wystąpieniu i Wywołaj `Create` `DotNetObjectReference` wystąpienie. Usuwanie `DotNetObjectReference` obiektów (przykład pojawia się w dalszej części tej sekcji).
+* Wywołaj metody wystąpienia platformy .NET w wystąpieniu przy `invokeMethod` użyciu `invokeMethodAsync` funkcji lub. Wystąpienie programu .NET może być również przekazywać jako argument podczas wywoływania innych metod .NET z JavaScript.
 
 > [!NOTE]
-> Przykładowa aplikacja rejestruje komunikaty do konsoli po stronie klienta. Poniższe przykłady zademonstrowane przez przykładową aplikację należy sprawdzić dane wyjściowe konsoli przeglądarki w narzędziach deweloperskich przeglądarki.
+> Przykładowa aplikacja rejestruje komunikaty do konsoli po stronie klienta. W poniższych przykładach zademonstrowanych przez przykładową aplikację można sprawdzić dane wyjściowe konsoli przeglądarki w narzędziach deweloperskich w przeglądarce.
 
-Gdy **trigger .NET metody wystąpienia HelloHelper.SayHello** przycisk jest zaznaczony, `ExampleJsInterop.CallHelloHelperSayHello` jest wywoływana i przekazuje nazwę, `Blazor`do metody.
+Po wybraniu `ExampleJsInterop.CallHelloHelperSayHello` przycisku **Wyzwalaj metodę wystąpienia .NET HelloHelper. sayHello** jest wywoływana i przekazuje nazwę, `Blazor`do metody.
 
-*Strony/JsInterop.brzytwa*:
+*Strony/JsInterop. Razor*:
 
 ```razor
 <button type="button" class="btn btn-primary" @onclick="TriggerNetInstanceMethod">
@@ -122,31 +125,31 @@ Gdy **trigger .NET metody wystąpienia HelloHelper.SayHello** przycisk jest zazn
 }
 ```
 
-`CallHelloHelperSayHello`wywołuje funkcję `sayHello` JavaScript z nowym `HelloHelper`wystąpieniem .
+`CallHelloHelperSayHello`wywołuje funkcję `sayHello` JavaScript z nowym wystąpieniem `HelloHelper`.
 
-*JsInteropClasses/ExampleJsInterop.cs*:
+*JsInteropClasses/ExampleJsInterop. cs*:
 
 [!code-csharp[](./common/samples/3.x/BlazorWebAssemblySample/JsInteropClasses/ExampleJsInterop.cs?name=snippet1&highlight=11-18)]
 
-*wwwroot/exampleJsInterop.js*:
+*wwwroot/exampleJsInterop. js*:
 
 [!code-javascript[](./common/samples/3.x/BlazorWebAssemblySample/wwwroot/exampleJsInterop.js?highlight=15-18)]
 
-Nazwa jest przekazywana do `HelloHelper`konstruktora , który ustawia `HelloHelper.Name` właściwość. Po wykonaniu funkcji `sayHello` JavaScript `HelloHelper.SayHello` zwraca `Hello, {Name}!` komunikat, który jest zapisywany na konsoli przez funkcję JavaScript.
+Nazwa jest przenoszona do `HelloHelper`konstruktora, który ustawia `HelloHelper.Name` właściwość. Gdy funkcja `sayHello` JavaScript jest wykonywana, `HelloHelper.SayHello` zwraca `Hello, {Name}!` komunikat, który jest zapisywana w konsoli przez funkcję JavaScript.
 
-*JsInteropClasses/HelloHelper.cs*:
+*JsInteropClasses/HelloHelper. cs*:
 
 [!code-csharp[](./common/samples/3.x/BlazorWebAssemblySample/JsInteropClasses/HelloHelper.cs?name=snippet1&highlight=5,10-11)]
 
-Dane wyjściowe konsoli w narzędziach programistycznych przeglądarki:
+Dane wyjściowe konsoli w narzędziach deweloperskich sieci Web w przeglądarce:
 
 ```console
 Hello, Blazor!
 ```
 
-Aby uniknąć przecieku pamięci i zezwolić na `DotNetObjectReference`wyrzucanie elementów bezużytecznych na składniku, który tworzy , przyjąć jedną z następujących metod:
+Aby uniknąć przecieków pamięci i zezwolić na wyrzucanie elementów bezużytecznych `DotNetObjectReference`w składniku, który tworzy, należy zastosować jedną z następujących metod:
 
-* Zutylizuj obiekt w `DotNetObjectReference` klasie, która utworzyła wystąpienie:
+* Usuń obiekt z klasy, która utworzyła `DotNetObjectReference` wystąpienie:
 
   ```csharp
   public class ExampleJsInterop : IDisposable
@@ -175,7 +178,7 @@ Aby uniknąć przecieku pamięci i zezwolić na `DotNetObjectReference`wyrzucani
   }
   ```
 
-  Poprzedni wzorzec pokazany `ExampleJsInterop` w klasie można również zaimplementować w komponencie:
+  Poprzedni wzorzec przedstawiony w `ExampleJsInterop` klasie może być również zaimplementowany w składniku:
 
   ```razor
   @page "/JSInteropComponent"
@@ -208,7 +211,7 @@ Aby uniknąć przecieku pamięci i zezwolić na `DotNetObjectReference`wyrzucani
   }
   ```
 
-* Jeśli składnik lub klasa nie pozbywa się `DotNetObjectReference`, zbywaj obiekt `.dispose()`na kliencie, wywołując:
+* Gdy składnik lub Klasa nie usuwa `DotNetObjectReference`metody Dispose z klienta przez wywołanie: `.dispose()`
 
   ```javascript
   window.myFunction = (dotnetHelper) => {
@@ -221,8 +224,8 @@ Aby uniknąć przecieku pamięci i zezwolić na `DotNetObjectReference`wyrzucani
 
 Aby wywołać metody .NET składnika:
 
-* Użyj `invokeMethod` funkcji `invokeMethodAsync` lub, aby wywołać metodę statyczną do składnika.
-* Metoda statyczna składnika zawija wywołanie metody wystąpienia `Action`jako wywoływane .
+* Użyj funkcji `invokeMethod` or `invokeMethodAsync` , aby wykonać wywołanie metody statycznej do składnika.
+* Metoda statyczna składnika zawija wywołanie do metody instancji jako wywołane `Action`.
 
 W języku JavaScript po stronie klienta:
 
@@ -232,7 +235,7 @@ function updateMessageCallerJS() {
 }
 ```
 
-*Strony/JSInteropComponent.brzytwa*:
+*Strony/JSInteropComponent. Razor*:
 
 ```razor
 @page "/JSInteropComponent"
@@ -268,15 +271,15 @@ function updateMessageCallerJS() {
 }
 ```
 
-Gdy istnieje kilka składników, każdy z metod wystąpienia do wywołania, należy użyć `Action`klasy pomocnika do wywołania metody wystąpienia (jako s) każdego składnika.
+Jeśli istnieje kilka składników, z których każda wywołuje metody wystąpienia, użyj klasy pomocnika, aby wywołać metody wystąpienia (jako `Action`s) każdego składnika.
 
 W poniższym przykładzie:
 
-* Składnik `JSInterop` zawiera `ListItem` kilka składników.
-* Każdy `ListItem` składnik składa się z wiadomości i przycisku.
-* Po `ListItem` wybraniu przycisku `ListItem`komponentu `UpdateMessage` metoda ta zmienia tekst elementu listy i ukrywa przycisk.
+* `JSInterop` Składnik zawiera kilka `ListItem` składników.
+* Każdy `ListItem` składnik składa się z komunikatu i przycisku.
+* Po wybraniu `ListItem` `ListItem`przycisku składnik `UpdateMessage` Metoda zmienia tekst elementu listy i ukrywa przycisk.
 
-*MessageUpdateInvokeHelper.cs:*
+*MessageUpdateInvokeHelper.cs*:
 
 ```csharp
 using System;
@@ -308,7 +311,7 @@ window.updateMessageCallerJS = (dotnetHelper) => {
 }
 ```
 
-*Shared/ListItem.brzytwa*:
+*Shared/ListItem. Razor*:
 
 ```razor
 @inject IJSRuntime JsRuntime
@@ -343,7 +346,7 @@ window.updateMessageCallerJS = (dotnetHelper) => {
 }
 ```
 
-*Strony/JSInterop.brzytwa*:
+*Strony/JSInterop. Razor*:
 
 ```razor
 @page "/JSInterop"
@@ -360,20 +363,20 @@ window.updateMessageCallerJS = (dotnetHelper) => {
 
 [!INCLUDE[Share interop code in a class library](~/includes/blazor-share-interop-code.md)]
 
-## <a name="avoid-circular-object-references"></a>Unikaj odwołań do obiektów cyklicznych
+## <a name="avoid-circular-object-references"></a>Unikaj cyklicznych odwołań do obiektów
 
-Obiekty, które zawierają odwołania cykliczne nie mogą być serializowane na kliencie dla jednego z:
+Obiekty, które zawierają odwołania cykliczne, nie mogą być serializowane na kliencie dla obu:
 
 * Wywołania metody .NET.
-* Metoda JavaScript wywołuje z języka C#, gdy typ zwracany ma odwołania cykliczne.
+* Wywołania metody JavaScript z języka C#, gdy typem zwracanym są odwołania cykliczne.
 
 Aby uzyskać więcej informacji, zobacz następujące problemy:
 
-* [Odwołania cykliczne nie są obsługiwane, weź dwa (dotnet/aspnetcore #20525)](https://github.com/dotnet/aspnetcore/issues/20525)
-* [Propozycja: Dodaj mechanizm do obsługi odwołań cyklicznych podczas serializacji (#30820 dotnet/runtime)](https://github.com/dotnet/runtime/issues/30820)
+* [Odwołania cykliczne nie są obsługiwane, zrób dwa (dotnet/aspnetcore #20525)](https://github.com/dotnet/aspnetcore/issues/20525)
+* [Propozycja: Dodawanie mechanizmu do obsługi odwołań cyklicznych podczas serializacji (#30820 dotnet/Runtime)](https://github.com/dotnet/runtime/issues/30820)
 
 ## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:blazor/call-javascript-from-dotnet>
-* [Przykład InteropComponent.razor (repozytorium Dotnet/AspNetCore GitHub, gałąź wydania 3.1)](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)
-* [Wykonywanie dużych transferów danych w Blazor aplikacjach serwera](xref:blazor/advanced-scenarios#perform-large-data-transfers-in-blazor-server-apps)
+* [InteropComponent. Razor — przykład (repozytorium dotnet/AspNetCore w witrynie GitHub, 3,1 gałąź wydania)](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)
+* [Wykonywanie dużych transferów danych Blazor w aplikacjach serwera](xref:blazor/advanced-scenarios#perform-large-data-transfers-in-blazor-server-apps)

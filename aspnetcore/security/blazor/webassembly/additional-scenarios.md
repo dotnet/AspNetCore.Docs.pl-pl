@@ -5,17 +5,20 @@ description: Dowiedz się, Blazor jak skonfigurować zestaw webassembly pod kąt
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/27/2020
+ms.date: 05/04/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: security/blazor/webassembly/additional-scenarios
-ms.openlocfilehash: 093498c3e0d42430c66c66a0998bcc44f62d1e0d
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: e69b598431027aa540227b87dedfd091057a1af4
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82206154"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82768172"
 ---
 # <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a>Dodatkowe scenariusze zabezpieczeń ASP.NET Core Blazor webassembly
 
@@ -25,45 +28,6 @@ Autor [Javier Calvarro Nelson](https://github.com/javiercn)
 
 [!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
 
-## <a name="request-additional-access-tokens"></a>Żądaj dodatkowych tokenów dostępu
-
-Większość aplikacji wymaga tylko tokenu dostępu, aby móc korzystać z chronionych zasobów, z których korzystają. W niektórych scenariuszach aplikacja może wymagać więcej niż jednego tokenu, aby można było korzystać z dwóch lub więcej zasobów.
-
-W poniższym przykładzie dodatkowe zakresy interfejsu API usługi Azure Active Directory (AAD) Microsoft Graph są wymagane przez aplikację do odczytywania danych użytkownika i wysyłania wiadomości e-mail. Po dodaniu Microsoft Graph uprawnień interfejsu API w portalu usługi Azure AAD dodatkowe zakresy są konfigurowane w aplikacji klienckiej (`Program.Main`, *program.cs*):
-
-```csharp
-builder.Services.AddMsalAuthentication(options =>
-{
-    ...
-
-    options.ProviderOptions.AdditionalScopesToConsent.Add(
-        "https://graph.microsoft.com/Mail.Send");
-    options.ProviderOptions.AdditionalScopesToConsent.Add(
-        "https://graph.microsoft.com/User.Read");
-}
-```
-
-`IAccessTokenProvider.RequestToken` Metoda zapewnia Przeciążenie, które umożliwia aplikacji udostępnianie tokenu dostępu z danym zestawem zakresów, jak pokazano w następującym przykładzie:
-
-```csharp
-var tokenResult = await AuthenticationService.RequestAccessToken(
-    new AccessTokenRequestOptions
-    {
-        Scopes = new[] { "https://graph.microsoft.com/Mail.Send", 
-            "https://graph.microsoft.com/User.Read" }
-    });
-
-if (tokenResult.TryGetToken(out var token))
-{
-    ...
-}
-```
-
-`TryGetToken`typu
-
-* `true`z `token` do użycia.
-* `false`Jeśli nie pobrano tokenu.
-
 ## <a name="attach-tokens-to-outgoing-requests"></a>Dołącz tokeny do żądań wychodzących
 
 `AuthorizationMessageHandler` Usługa może być używana z `HttpClient` programem w celu dołączania tokenów dostępu do żądań wychodzących. Tokeny są uzyskiwane przy `IAccessTokenProvider` użyciu istniejącej usługi. Jeśli nie można uzyskać tokenu, zgłaszany `AccessTokenNotAvailableException` jest wyjątek. `AccessTokenNotAvailableException`ma `Redirect` metodę, która może być używana do nawigowania do dostawcy tożsamości w celu uzyskania nowego tokenu. `AuthorizationMessageHandler` Można skonfigurować z autoryzowanymi adresami URL, zakresami i zwrotnym adresem URL `ConfigureHandler` przy użyciu metody.
@@ -71,7 +35,7 @@ if (tokenResult.TryGetToken(out var token))
 W poniższym `AuthorizationMessageHandler` przykładzie konfiguruje `HttpClient` w `Program.Main` (*program.cs*):
 
 ```csharp
-builder.Services.AddSingleton(sp =>
+builder.Services.AddTransient(sp =>
 {
     return new HttpClient(sp.GetRequiredService<AuthorizationMessageHandler>()
         .ConfigureHandler(
@@ -166,6 +130,156 @@ protected override async Task OnInitializedAsync()
     forecasts = await WeatherClient.GetWeatherForeacasts();
 }
 ```
+
+## <a name="request-additional-access-tokens"></a>Żądaj dodatkowych tokenów dostępu
+
+Tokeny dostępu można uzyskać ręcznie, wywołując `IAccessTokenProvider.RequestAccessToken`metodę.
+
+W poniższym przykładzie dodatkowe zakresy interfejsu API usługi Azure Active Directory (AAD) Microsoft Graph są wymagane przez aplikację do odczytywania danych użytkownika i wysyłania wiadomości e-mail. Po dodaniu Microsoft Graph uprawnień interfejsu API w portalu usługi Azure AAD dodatkowe zakresy są konfigurowane w aplikacji klienckiej (`Program.Main`, *program.cs*):
+
+```csharp
+builder.Services.AddMsalAuthentication(options =>
+{
+    ...
+
+    options.ProviderOptions.AdditionalScopesToConsent.Add(
+        "https://graph.microsoft.com/Mail.Send");
+    options.ProviderOptions.AdditionalScopesToConsent.Add(
+        "https://graph.microsoft.com/User.Read");
+}
+```
+
+`IAccessTokenProvider.RequestToken` Metoda zapewnia Przeciążenie, które umożliwia aplikacji udostępnianie tokenu dostępu z danym zestawem zakresów, jak pokazano w następującym przykładzie:
+
+```csharp
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@inject IAccessTokenProvider TokenProvider
+
+...
+
+var tokenResult = await TokenProvider.RequestAccessToken(
+    new AccessTokenRequestOptions
+    {
+        Scopes = new[] { "https://graph.microsoft.com/Mail.Send", 
+            "https://graph.microsoft.com/User.Read" }
+    });
+
+if (tokenResult.TryGetToken(out var token))
+{
+    ...
+}
+```
+
+`TryGetToken`typu
+
+* `true`z `token` do użycia.
+* `false`Jeśli nie pobrano tokenu.
+
+## <a name="httpclient-and-httprequestmessage-with-fetch-api-request-options"></a>HttpClient i HttpRequestMessage za pomocą opcji żądania interfejsu API pobierania
+
+W przypadku uruchamiania w zestawie webassembly w aplikacji Blazor webassembly [HttpClient](xref:fundamentals/http-requests) i <xref:System.Net.Http.HttpRequestMessage> może służyć do dostosowywania żądań. Na przykład można określić metodę HTTP i nagłówki żądania. Poniższy przykład wykonuje `POST` żądanie do punktu końcowego interfejsu API listy do wykonania na serwerze i wyświetla treść odpowiedzi:
+
+```razor
+@page "/todorequest"
+@using System.Net.Http
+@using System.Net.Http.Headers
+@using System.Net.Http.Json
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@inject HttpClient Http
+@inject IAccessTokenProvider TokenProvider
+
+<h1>ToDo Request</h1>
+
+<button @onclick="PostRequest">Submit POST request</button>
+
+<p>Response body returned by the server:</p>
+
+<p>@_responseBody</p>
+
+@code {
+    private string _responseBody;
+
+    private async Task PostRequest()
+    {
+        var requestMessage = new HttpRequestMessage()
+        {
+            Method = new HttpMethod("POST"),
+            RequestUri = new Uri("https://localhost:10000/api/TodoItems"),
+            Content =
+                JsonContent.Create(new TodoItem
+                {
+                    Name = "My New Todo Item",
+                    IsComplete = false
+                })
+        };
+
+        var tokenResult = await TokenProvider.RequestAccessToken();
+
+        if (tokenResult.TryGetToken(out var token))
+        {
+            requestMessage.Headers.Authorization =
+                new AuthenticationHeaderValue("Bearer", token.Value);
+
+            requestMessage.Content.Headers.TryAddWithoutValidation(
+                "x-custom-header", "value");
+
+            var response = await Http.SendAsync(requestMessage);
+            var responseStatusCode = response.StatusCode;
+
+            _responseBody = await response.Content.ReadAsStringAsync();
+        }
+    }
+
+    public class TodoItem
+    {
+        public long Id { get; set; }
+        public string Name { get; set; }
+        public bool IsComplete { get; set; }
+    }
+}
+```
+
+Implementacja programu `HttpClient` .NET webassembly używa [WindowOrWorkerGlobalScope. Fetch ()](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch). Polecenie Pobierz umożliwia skonfigurowanie kilku [opcji specyficznych dla żądania](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters). 
+
+Opcje żądania pobrania HTTP można skonfigurować przy użyciu `HttpRequestMessage` metod rozszerzających pokazanych w poniższej tabeli.
+
+| `HttpRequestMessage`Metoda rozszerzenia | Właściwość żądania pobrania |
+| ------------------------------------- | ---------------------- |
+| `SetBrowserRequestCredentials`        | [uwierzytelniające](https://developer.mozilla.org/docs/Web/API/Request/credentials) |
+| `SetBrowserRequestCache`              | [Chow](https://developer.mozilla.org/docs/Web/API/Request/cache) |
+| `SetBrowserRequestMode`               | [wyst](https://developer.mozilla.org/docs/Web/API/Request/mode) |
+| `SetBrowserRequestIntegrity`          | [spójn](https://developer.mozilla.org/docs/Web/API/Request/integrity) |
+
+Można ustawić dodatkowe opcje przy użyciu bardziej generycznej `SetBrowserRequestOption` metody rozszerzenia.
+ 
+Odpowiedź HTTP jest zwykle buforowana w aplikacji Blazor webassembly, aby umożliwić obsługę odczytów synchronizacji w zawartości odpowiedzi. Aby włączyć obsługę przesyłania strumieniowego odpowiedzi, należy `SetBrowserResponseStreamingEnabled` użyć metody rozszerzenia w żądaniu.
+
+Aby uwzględnić poświadczenia w żądaniu między źródłami, użyj metody `SetBrowserRequestCredentials` rozszerzenia:
+
+```csharp
+requestMessage.SetBrowserRequestCredentials(BrowserRequestCredentials.Include);
+```
+
+Aby uzyskać więcej informacji na temat opcji interfejsu API pobierania, zobacz [powiadomienia MDN Web docs: WindowOrWorkerGlobalScope. Fetch ():P arameters](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters).
+
+Podczas wysyłania poświadczeń (plików cookie/nagłówki autoryzacji) w żądaniach CORS `Authorization` nagłówek musi być dozwolony przez zasady CORS.
+
+Następujące zasady obejmują konfigurację programu:
+
+* Pochodzenie żądania (`http://localhost:5000`, `https://localhost:5001`).
+* Dowolna Metoda (czasownik).
+* `Content-Type`i `Authorization` nagłówki. Aby zezwolić na nagłówek niestandardowy (na przykład `x-custom-header`), Wyświetl nagłówek podczas wywoływania. <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithHeaders*>
+* Poświadczenia ustawione przez kod JavaScript po stronie klienta (`credentials` Właściwość ustawiona na `include`).
+
+```csharp
+app.UseCors(policy => 
+    policy.WithOrigins("http://localhost:5000", "https://localhost:5001")
+    .AllowAnyMethod()
+    .WithHeaders(HeaderNames.ContentType, HeaderNames.Authorization, "x-custom-header")
+    .AllowCredentials());
+```
+
+Aby uzyskać więcej informacji, <xref:security/cors> Zobacz i składnik Tester żądania HTTP aplikacji przykładowej (*Components/HTTPRequestTester. Razor*).
 
 ## <a name="handle-token-request-errors"></a>Obsługa błędów żądania tokenu
 
@@ -483,7 +597,7 @@ public class Program
         var builder = WebAssemblyHostBuilder.CreateDefault(args);
         builder.RootComponents.Add<App>("app");
 
-        builder.Services.AddSingleton(new HttpClient 
+        builder.Services.AddTransient(new HttpClient 
         {
             BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
         });
@@ -573,13 +687,13 @@ Uwierzytelnij użytkownika za pomocą przepływu OAuth po stronie klienta dla do
 
 ### <a name="authenticate-users-with-a-third-party-provider-and-call-protected-apis-on-the-host-server-and-the-third-party"></a>Uwierzytelnianie użytkowników za pomocą dostawcy innych firm i wywoływanie chronionych interfejsów API na serwerze hosta i stronie trzeciej
 
-Skonfiguruj tożsamość przy użyciu innego dostawcy logowania. Uzyskaj tokeny wymagane przez dostęp do interfejsu API innych firm i Zapisz je.
+Skonfiguruj Identity przy użyciu innego dostawcy logowania. Uzyskaj tokeny wymagane przez dostęp do interfejsu API innych firm i Zapisz je.
 
-Gdy użytkownik loguje się, tożsamość zbiera tokeny dostępu i odświeżania w ramach procesu uwierzytelniania. W tym momencie istnieje kilka podejścia dostępnych do wykonywania wywołań interfejsu API do interfejsów API innych firm.
+Gdy użytkownik loguje się, Identity zbiera tokeny dostępu i odświeżania w ramach procesu uwierzytelniania. W tym momencie istnieje kilka podejścia dostępnych do wykonywania wywołań interfejsu API do interfejsów API innych firm.
 
 #### <a name="use-a-server-access-token-to-retrieve-the-third-party-access-token"></a>Korzystanie z tokenu dostępu do serwera w celu pobrania tokenu dostępu innej firmy
 
-Użyj tokenu dostępu wygenerowanego na serwerze, aby pobrać token dostępu innej firmy z punktu końcowego interfejsu API serwera. Z tego miejsca Użyj tokenu dostępu innej firmy do wywołania zasobów interfejsu API innych firm bezpośrednio z tożsamości na kliencie.
+Użyj tokenu dostępu wygenerowanego na serwerze, aby pobrać token dostępu innej firmy z punktu końcowego interfejsu API serwera. Z tego miejsca Użyj tokenu dostępu innej firmy do wywołania zasobów interfejsu API innych firm bezpośrednio z poziomu Identity klienta.
 
 Nie zalecamy tego podejścia. Takie podejście wymaga traktowania tokenu dostępu innej firmy, tak jakby został wygenerowany dla klienta publicznego. W przypadku postanowień uwierzytelniania OAuth publiczna aplikacja nie ma tajnego klienta, ponieważ nie może być zaufana do bezpiecznego przechowywania wpisów tajnych, a token dostępu jest generowany dla klienta poufnego. Klient poufny jest klientem, który ma klucz tajny klienta i ma możliwość bezpiecznego przechowywania wpisów tajnych.
 

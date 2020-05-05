@@ -1,17 +1,8 @@
 ---
-no-loc:
-- Blazor
-- SignalR
-ms.openlocfilehash: 5f3e22e04fe18149ec5a8acb42f42a8ef83a7664
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
-ms.translationtype: MT
-ms.contentlocale: pl-PL
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78659720"
 ---
-Podczas Blazor gdy aplikacja Server jest prerendering, niektóre akcje, takie jak wywołanie javascript, nie są możliwe, ponieważ połączenie z przeglądarką nie zostało ustanowione. Składniki mogą wymagać renderowania inaczej podczas prerendered.
+Gdy aplikacja serwera Blazor jest wstępnie renderowana, niektóre akcje, takie jak wywoływanie kodu JavaScript, nie są możliwe, ponieważ połączenie z przeglądarką nie zostało nawiązane. Składniki mogą być konieczne w różny sposób, gdy są wstępnie renderowane.
 
-Aby opóźnić połączenia interop JavaScript do momentu nawiązania połączenia z przeglądarką, można użyć [zdarzenia cyklu życia składnika OnAfterRenderAsync](xref:blazor/lifecycle#after-component-render). To zdarzenie jest wywoływane tylko po aplikacji jest w pełni renderowane i nawiązywanego połączenia klienta.
+Aby opóźnić wywołania międzyoperacyjne języka JavaScript do momentu ustanowienia połączenia z przeglądarką, można użyć [zdarzenia cyklu życia składnika OnAfterRenderAsync](xref:blazor/lifecycle#after-component-render). To zdarzenie jest wywoływane tylko wtedy, gdy aplikacja jest w pełni renderowana, a połączenie z klientem zostanie nawiązane.
 
 ```cshtml
 @using Microsoft.JSInterop
@@ -33,7 +24,7 @@ Aby opóźnić połączenia interop JavaScript do momentu nawiązania połączen
 }
 ```
 
-W przypadku poprzedniego przykładowego `setElementText` kodu podaj `<head>` funkcję JavaScript wewnątrzBlazor elementu *wwwroot/index.html* (WebAssembly) lub *Pages/_Host.cshtml* (Blazor Serwer). Funkcja jest wywoływana z `IJSRuntime.InvokeVoidAsync` i nie zwraca wartości:
+W powyższym przykładowym kodzie Podaj `setElementText` funkcję JavaScript wewnątrz `<head>` elementu *wwwroot/index.html* (Blazor webassembly) lub *Pages/_Host. cshtml* (Blazor Server). Funkcja jest wywoływana z `IJSRuntime.InvokeVoidAsync` i nie zwraca wartości:
 
 ```html
 <script>
@@ -42,13 +33,13 @@ W przypadku poprzedniego przykładowego `setElementText` kodu podaj `<head>` fun
 ```
 
 > [!WARNING]
-> W poprzednim przykładzie modyfikuje model obiektu dokumentu (DOM) bezpośrednio tylko w celach demonstracyjnych. Bezpośrednie modyfikowanie dom z JavaScript nie jest zalecane w większości scenariuszy, ponieważ JavaScript może zakłócać Blazorśledzenia zmian.
+> Poprzedni przykład modyfikuje Document Object Model (DOM) bezpośrednio wyłącznie w celach demonstracyjnych. Nie zaleca się bezpośredniej modyfikacji modelu DOM przy użyciu języka JavaScript w większości scenariuszy, ponieważ kod JavaScript może zakłócać śledzenie zmian Blazor.
 
-Poniższy składnik pokazuje, jak używać javascript interop jako część logiki inicjowania składnika w sposób, który jest zgodny z prerendering. Składnik pokazuje, że możliwe jest wyzwolenie aktualizacji `OnAfterRenderAsync`renderowania od wewnątrz . Deweloper musi unikać tworzenia nieskończonej pętli w tym scenariuszu.
+Poniższy składnik pokazuje, jak używać międzyoperacyjności JavaScript jako części logiki inicjalizacji składnika w sposób, który jest zgodny z renderowaniem. Składnik pokazuje, że można wyzwolić aktualizację renderowania z wewnątrz `OnAfterRenderAsync`. Deweloper musi unikać tworzenia pętli nieskończonej w tym scenariuszu.
 
-Gdzie `JSRuntime.InvokeAsync` jest `ElementRef` wywoływana, `OnAfterRenderAsync` jest używany tylko w i nie w dowolnej wcześniejszej metody cyklu życia, ponieważ nie ma żadnego elementu JavaScript, dopóki po renderowane składnika.
+Gdzie `JSRuntime.InvokeAsync` jest wywoływana, `ElementRef` jest używana tylko w `OnAfterRenderAsync` , a nie w żadnej wcześniejszej metodzie cyklu życia, ponieważ nie istnieje element JavaScript do momentu renderowania składnika.
 
-[StateHasChanged](xref:blazor/lifecycle#state-changes) jest wywoływana do rerender składnika z nowym stanie uzyskanych z wywołania interop JavaScript. Kod nie tworzy nieskończonej pętli, ponieważ `StateHasChanged` `infoFromJs` jest `null`wywoływana tylko wtedy, gdy jest .
+[StateHasChanged](xref:blazor/lifecycle#state-changes) jest wywoływana, aby przetworzyć składnik z nowym stanem uzyskanym z wywołania międzyoperacyjnego języka JavaScript. Kod nie tworzy pętli nieskończonej, ponieważ `StateHasChanged` jest wywoływana tylko wtedy `infoFromJs` , `null`gdy jest.
 
 ```cshtml
 @page "/prerendered-interop"
@@ -81,7 +72,7 @@ Set value via JS interop call:
 }
 ```
 
-W przypadku poprzedniego przykładowego `setElementText` kodu podaj `<head>` funkcję JavaScript wewnątrzBlazor elementu *wwwroot/index.html* (WebAssembly) lub *Pages/_Host.cshtml* (Blazor Serwer). Funkcja jest wywoływana z `IJSRuntime.InvokeAsync` i zwraca wartość:
+W powyższym przykładowym kodzie Podaj `setElementText` funkcję JavaScript wewnątrz `<head>` elementu *wwwroot/index.html* (Blazor webassembly) lub *Pages/_Host. cshtml* (Blazor Server). Funkcja jest wywoływana z `IJSRuntime.InvokeAsync` i zwraca wartość:
 
 ```html
 <script>
@@ -93,4 +84,4 @@ W przypadku poprzedniego przykładowego `setElementText` kodu podaj `<head>` fun
 ```
 
 > [!WARNING]
-> W poprzednim przykładzie modyfikuje model obiektu dokumentu (DOM) bezpośrednio tylko w celach demonstracyjnych. Bezpośrednie modyfikowanie dom z JavaScript nie jest zalecane w większości scenariuszy, ponieważ JavaScript może zakłócać Blazorśledzenia zmian.
+> Poprzedni przykład modyfikuje Document Object Model (DOM) bezpośrednio wyłącznie w celach demonstracyjnych. Nie zaleca się bezpośredniej modyfikacji modelu DOM przy użyciu języka JavaScript w większości scenariuszy, ponieważ kod JavaScript może zakłócać śledzenie zmian Blazor.

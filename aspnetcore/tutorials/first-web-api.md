@@ -5,13 +5,19 @@ description: Dowiedz się, jak utworzyć internetowy interfejs API za pomocą AS
 ms.author: riande
 ms.custom: mvc
 ms.date: 2/25/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: tutorials/first-web-api
-ms.openlocfilehash: 4e205c737f606579590854b679e669cbdd0cd5ab
-ms.sourcegitcommit: c19e388c83c981232e6f128d97440262adfe06e2
+ms.openlocfilehash: ddc14aba14e31c5530cda14b4792736da001246a
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/02/2020
-ms.locfileid: "82727794"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82767242"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>Samouczek: Tworzenie internetowego interfejsu API za pomocą ASP.NET Core
 

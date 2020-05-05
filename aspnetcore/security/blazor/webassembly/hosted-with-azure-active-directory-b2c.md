@@ -8,16 +8,19 @@ ms.custom: mvc
 ms.date: 04/24/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: security/blazor/webassembly/hosted-with-azure-active-directory-b2c
-ms.openlocfilehash: 6f049906da4a1aa87f293f5ad1af19dad44f477a
-ms.sourcegitcommit: 6d271f4b4c3cd1e82267f51d9bfb6de221c394fe
+ms.openlocfilehash: 05068853615a63611188175d95c27f1442973a86
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82150036"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82768211"
 ---
-# <a name="secure-an-aspnet-core-opno-locblazor-webassembly-hosted-app-with-azure-active-directory-b2c"></a>Zabezpiecz aplikację hostowaną ASP.NET Core Blazor webassembly przy użyciu Azure Active Directory B2C
+# <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-azure-active-directory-b2c"></a>Zabezpiecz aplikację hostowaną ASP.NET Core Blazor webassembly przy użyciu Azure Active Directory B2C
 
 Autorzy [Javier Calvarro Nelson](https://github.com/javiercn) i [Luke Latham](https://github.com/guardrex)
 
@@ -91,7 +94,7 @@ W **uprawnienia interfejsu API**:
 1. Otwórz listę **interfejsów API** .
 1. Włącz dostęp do interfejsu API (na przykład `API.Access`).
 1. Wybierz pozycję **Dodaj uprawnienia**.
-1. Wybierz przycisk **Udziel zawartości administratora dla {Nazwa dzierżawy}** . Wybierz pozycję **Tak**, aby potwierdzić.
+1. Wybierz przycisk **Udziel zawartości administratora dla {Nazwa dzierżawy}** . Kliknij przycisk **Tak**, aby potwierdzić.
 
 W obszarze**przepływy użytkowników**w**Azure AD B2C** >  **domowej** > :
 
@@ -149,7 +152,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 ```
 
-### <a name="useridentityname"></a>User.Identity.Name
+### <a name="useridentityname"></a>Użytkownicy. Identity. Nazwij
 
 Domyślnie wartość `User.Identity.Name` nie jest wypełniona.
 
@@ -246,7 +249,7 @@ builder.Services.AddTransient(sp => sp.GetRequiredService<IHttpClientFactory>()
     .CreateClient("{APP ASSEMBLY}.ServerAPI"));
 ```
 
-Obsługa uwierzytelniania użytkowników jest rejestrowana w kontenerze usługi przy użyciu metody `AddMsalAuthentication` rozszerzenia dostarczonej przez `Microsoft.Authentication.WebAssembly.Msal` pakiet. Ta metoda umożliwia skonfigurowanie wszystkich usług wymaganych przez aplikację do współpracy z dostawcą tożsamości (IP).
+Obsługa uwierzytelniania użytkowników jest rejestrowana w kontenerze usługi przy użyciu metody `AddMsalAuthentication` rozszerzenia dostarczonej przez `Microsoft.Authentication.WebAssembly.Msal` pakiet. Ta metoda umożliwia skonfigurowanie wszystkich usług wymaganych przez aplikację do współpracy z Identity dostawcą (IP).
 
 *Program.cs*:
 
@@ -360,7 +363,7 @@ Uruchom aplikację z projektu serwera. W przypadku korzystania z programu Visual
 
 [!INCLUDE[](~/includes/blazor-security/troubleshoot.md)]
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:security/blazor/webassembly/additional-scenarios>
 * <xref:security/authentication/azure-ad-b2c>

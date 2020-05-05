@@ -8,14 +8,17 @@ ms.custom: mvc
 ms.date: 04/07/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: 380a14177d4bb8fa3de63a3c1cd9a39aeab13db3
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: 2f12c2a05ef510c38f407ccd69f748aceafd55de
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82205985"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82767174"
 ---
 # <a name="call-javascript-functions-from-net-methods-in-aspnet-core-blazor"></a>Wywoływanie funkcji języka JavaScript z metod .NET w ASP.NET CoreBlazor
 
@@ -56,7 +59,7 @@ Następujący składnik:
 
 Aby użyć `IJSRuntime` abstrakcji, należy zastosować jedną z następujących metod:
 
-* Wstrzyknąć `IJSRuntime` abstrakcję do składnika Razor (*. Razor*):
+* Wstrzyknąć `IJSRuntime` abstrakcję do Razor składnika (*. Razor*):
 
   [!code-razor[](call-javascript-from-dotnet/samples_snapshot/inject-abstraction.razor?highlight=1)]
 
@@ -474,7 +477,7 @@ Aby uzyskać więcej informacji, zobacz następujące problemy:
 * [Odwołania cykliczne nie są obsługiwane, zrób dwa (dotnet/aspnetcore #20525)](https://github.com/dotnet/aspnetcore/issues/20525)
 * [Propozycja: Dodawanie mechanizmu do obsługi odwołań cyklicznych podczas serializacji (#30820 dotnet/Runtime)](https://github.com/dotnet/runtime/issues/30820)
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:blazor/call-dotnet-from-javascript>
 * [InteropComponent. Razor — przykład (repozytorium dotnet/AspNetCore w witrynie GitHub, 3,1 gałąź wydania)](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)

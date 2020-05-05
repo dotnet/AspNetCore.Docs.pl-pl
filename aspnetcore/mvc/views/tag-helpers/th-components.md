@@ -5,13 +5,19 @@ description: Informacje o składnikach pomocników tagów i sposobach ich użyci
 monikerRange: '>= aspnetcore-2.0'
 ms.author: scaddie
 ms.date: 06/12/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/views/tag-helpers/th-components
-ms.openlocfilehash: 5e2eb2d4322068c5864fbe49acaa6d0859bd319a
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: df118cdc8346b99e4e5c60c9f0441c963543f4b4
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78660770"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82767515"
 ---
 # <a name="tag-helper-components-in-aspnet-core"></a>Oznacz składniki pomocnika w ASP.NET Core
 
@@ -19,7 +25,7 @@ Przez [Scott Addie](https://twitter.com/Scott_Addie) i [Fiyaz bin Hasan](https:/
 
 Składnik pomocnika tagów to pomocnik tagów, który umożliwia warunkowe modyfikowanie lub Dodawanie elementów HTML z kodu po stronie serwera. Ta funkcja jest dostępna w ASP.NET Core 2,0 lub nowszej.
 
-ASP.NET Core obejmuje dwa wbudowane składniki pomocnika tagów: `head` i `body`. Znajdują się one w przestrzeni nazw <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers> i mogą być używane zarówno w MVC, jak i Razor Pages. Składniki pomocnika tagów nie wymagają rejestracji w aplikacji w *_ViewImports. cshtml*.
+ASP.NET Core obejmuje dwa wbudowane składniki pomocnika tagów: `head` i. `body` Znajdują się one w <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers> przestrzeni nazw i mogą być używane zarówno w MVC Razor , jak i stronach. Składniki pomocnika tagów nie wymagają rejestracji w aplikacji w *_ViewImports. cshtml*.
 
 [Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/tag-helpers/th-components/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
 
@@ -34,91 +40,91 @@ W poniższych sekcjach opisano te przypadki użycia.
 
 ### <a name="inject-into-html-head-element"></a>Wsuń do elementu głównego HTML
 
-Wewnątrz elementu `<head>` HTML pliki CSS są zwykle importowane z elementem HTML `<link>`. Poniższy kod wprowadza `<link>` elementu do elementu `<head>` przy użyciu składnika pomocnika tagów `head`:
+Wewnątrz elementu HTML `<head>` pliki CSS są zwykle importowane z elementem HTML `<link>` . Poniższy kod wprowadza `<link>` element do `<head>` elementu przy użyciu składnika pomocnika `head` tagów:
 
 [!code-csharp[](th-components/samples/RazorPagesSample/TagHelpers/AddressStyleTagHelperComponent.cs)]
 
-W powyższym kodzie:
+Powyższy kod ma następujące działanie:
 
-* `AddressStyleTagHelperComponent` implementuje <xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperComponent>. Streszczenie:
-  * Umożliwia inicjowanie klasy za pomocą <xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext>.
+* `AddressStyleTagHelperComponent`implementuje <xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperComponent>. Streszczenie:
+  * Umożliwia inicjowanie klasy z <xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext>.
   * Umożliwia używanie składników pomocnika tagów do dodawania lub modyfikowania elementów HTML.
-* Właściwość <xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperComponent.Order*> definiuje kolejność, w jakiej składniki są renderowane. `Order` jest konieczne, gdy w aplikacji istnieje wiele użycia składników pomocnika tagów.
-* <xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperComponent.ProcessAsync*> porównuje wartość właściwości <xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext.TagName*> kontekstu wykonania do `head`. Jeśli wynikiem porównania jest wartość true, zawartość pola `_style` jest wstrzykiwana do elementu `<head>` HTML.
+* <xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperComponent.Order*> Właściwość definiuje kolejność, w jakiej składniki są renderowane. `Order`jest konieczne, gdy w aplikacji istnieje wiele użycia składników pomocnika tagów.
+* <xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperComponent.ProcessAsync*>porównuje wartość <xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext.TagName*> właściwości kontekstu wykonania z `head`. Jeśli wynikiem porównania jest wartość true, zawartość `_style` pola jest wstrzykiwana do elementu HTML. `<head>`
 
 ### <a name="inject-into-html-body-element"></a>Wsuń do elementu treści HTML
 
-Składnik pomocnika tagów `body` może wstrzyknąć element `<script>` do elementu `<body>`. Poniższy kod ilustruje tę technikę:
+Składnik `body` pomocnika tagów może wstrzyknąć `<script>` element do `<body>` elementu. Poniższy kod ilustruje tę technikę:
 
 [!code-csharp[](th-components/samples/RazorPagesSample/TagHelpers/AddressScriptTagHelperComponent.cs)]
 
-Oddzielny plik HTML jest używany do przechowywania elementu `<script>`. Plik HTML sprawia, że kod jest bardziej przejrzysty i bardziej czytelny. Poprzedni kod odczytuje zawartość *TagHelpers/templates/AddressToolTipScript.html* i dołącza ją z danymi wyjściowymi pomocnika tagów. Plik *AddressToolTipScript. html* zawiera następujące znaczniki:
+Do przechowywania `<script>` elementu używany jest oddzielny plik HTML. Plik HTML sprawia, że kod jest bardziej przejrzysty i bardziej czytelny. Poprzedni kod odczytuje zawartość *TagHelpers/templates/AddressToolTipScript.html* i dołącza ją z danymi wyjściowymi pomocnika tagów. Plik *AddressToolTipScript. html* zawiera następujące znaczniki:
 
 [!code-html[](th-components/samples/RazorPagesSample/TagHelpers/Templates/AddressToolTipScript.html)]
 
-Poprzedni kod wiąże [widżet etykietki narzędzia Bootstrap](https://getbootstrap.com/docs/3.3/javascript/#tooltips) z dowolnym elementem `<address>`, który zawiera atrybut `printable`. Efekt jest widoczny, gdy wskaźnik myszy znajduje się nad elementem.
+Poprzedni kod tworzy element [widget etykietki narzędzia Bootstrap](https://getbootstrap.com/docs/3.3/javascript/#tooltips) dla każdego `<address>` elementu, który zawiera `printable` atrybut. Efekt jest widoczny, gdy wskaźnik myszy znajduje się nad elementem.
 
 ## <a name="register-a-component"></a>Rejestrowanie składnika
 
 Składnik pomocnika tagów należy dodać do kolekcji składników pomocnika tagów aplikacji. Istnieją trzy sposoby dodawania do kolekcji:
 
 * [Rejestracja za pośrednictwem kontenera usług](#registration-via-services-container)
-* [Rejestracja za pośrednictwem pliku Razor](#registration-via-razor-file)
+* [Rejestracja za Razor pośrednictwem pliku](#registration-via-razor-file)
 * [Rejestracja za pośrednictwem modelu lub kontrolera strony](#registration-via-page-model-or-controller)
 
 ### <a name="registration-via-services-container"></a>Rejestracja za pośrednictwem kontenera usług
 
-Jeśli Klasa składnika pomocnika tagów nie jest zarządzana z <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers.ITagHelperComponentManager>, musi być zarejestrowana w systemie [wtrysku zależności (di)](xref:fundamentals/dependency-injection) . Poniższy kod `Startup.ConfigureServices` rejestruje klasy `AddressStyleTagHelperComponent` i `AddressScriptTagHelperComponent` z [przejściowym okresem istnienia](xref:fundamentals/dependency-injection#lifetime-and-registration-options):
+Jeśli Klasa składnika pomocnika tagów nie jest zarządzana za pomocą <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers.ITagHelperComponentManager>programu, musi być zarejestrowana w systemie [wtrysku zależności (di)](xref:fundamentals/dependency-injection) . Poniższy `Startup.ConfigureServices` kod rejestruje klasy `AddressStyleTagHelperComponent` i `AddressScriptTagHelperComponent` z [przejściowym okresem istnienia](xref:fundamentals/dependency-injection#lifetime-and-registration-options):
 
 [!code-csharp[](th-components/samples/RazorPagesSample/Startup.cs?name=snippet_ConfigureServices&highlight=12-15)]
 
-### <a name="registration-via-razor-file"></a>Rejestracja za pośrednictwem pliku Razor
+### <a name="registration-via-razor-file"></a>Rejestracja za Razor pośrednictwem pliku
 
-Jeśli składnik pomocnika tagów nie jest zarejestrowany przy użyciu DI, może być zarejestrowany na stronie Razor Pages lub widoku MVC. Ta technika służy do kontrolowania wstrzykniętego znacznika i kolejności wykonywania składników z pliku Razor.
+Jeśli składnik pomocnika tagów nie jest zarejestrowany przy użyciu DI, można go zarejestrować ze Razor strony stron lub widoku MVC. Ta technika służy do kontrolowania wstrzykniętego znacznika i kolejności wykonywania składników z Razor pliku.
 
-`ITagHelperComponentManager` służy do dodawania składników pomocnika tagów lub usuwania ich z aplikacji. Poniższy kod ilustruje tę technikę z `AddressTagHelperComponent`:
+`ITagHelperComponentManager`służy do dodawania składników pomocnika tagów lub usuwania ich z aplikacji. Poniższy kod ilustruje tę technikę `AddressTagHelperComponent`:
 
 [!code-cshtml[](th-components/samples/RazorPagesSample/Pages/Contact.cshtml?name=snippet_ITagHelperComponentManager)]
 
-W powyższym kodzie:
+Powyższy kod ma następujące działanie:
 
-* Dyrektywa `@inject` zawiera wystąpienie `ITagHelperComponentManager`. Wystąpienie jest przypisane do zmiennej o nazwie `manager` w celu uzyskania dostępu do pliku Razor.
+* `@inject` Dyrektywa zawiera wystąpienie `ITagHelperComponentManager`. Wystąpienie jest przypisane do zmiennej o nazwie `manager` w celu uzyskania dostępu do Razor pliku.
 * Wystąpienie `AddressTagHelperComponent` jest dodawane do kolekcji składników pomocnika tagów aplikacji.
 
-`AddressTagHelperComponent` został zmodyfikowany w celu uwzględnienia konstruktora akceptującego parametry `markup` i `order`:
+`AddressTagHelperComponent`zmodyfikowano, aby pomieścić konstruktora, który akceptuje `markup` parametry `order` i:
 
 [!code-csharp[](th-components/samples/RazorPagesSample/TagHelpers/AddressTagHelperComponent.cs?name=snippet_Constructor)]
 
-Podany `markup` parametr jest używany w `ProcessAsync` w następujący sposób:
+Podany `markup` parametr jest używany w `ProcessAsync` następujący sposób:
 
 [!code-csharp[](th-components/samples/RazorPagesSample/TagHelpers/AddressTagHelperComponent.cs?name=snippet_ProcessAsync&highlight=10-11)]
 
 ### <a name="registration-via-page-model-or-controller"></a>Rejestracja za pośrednictwem modelu lub kontrolera strony
 
-Jeśli składnik pomocnika tagów nie jest zarejestrowany w programie DI, może być zarejestrowany z poziomu modelu strony Razor Pages lub kontrolera MVC. Ta technika jest przydatna do oddzielania C# logiki od plików Razor.
+Jeśli składnik pomocnika tagów nie jest zarejestrowany w programie DI, może być zarejestrowany z Razor poziomu modelu strony stron lub kontrolera MVC. Ta technika jest przydatna do oddzielania logiki języka Razor C# z plików.
 
-Iniekcja konstruktora jest używana w celu uzyskania dostępu do wystąpienia `ITagHelperComponentManager`. Składnik pomocnika tagów jest dodawany do kolekcji składników pomocnika tagów wystąpienia. Poniższy Razor Pages model strony ilustruje tę technikę z `AddressTagHelperComponent`:
+Iniekcja konstruktora jest używana w celu uzyskania dostępu `ITagHelperComponentManager`do wystąpienia. Składnik pomocnika tagów jest dodawany do kolekcji składników pomocnika tagów wystąpienia. Poniższy Razor model strony przedstawia tę technikę `AddressTagHelperComponent`:
 
 [!code-csharp[](th-components/samples/RazorPagesSample/Pages/Index.cshtml.cs?name=snippet_IndexModelClass)]
 
-W powyższym kodzie:
+Powyższy kod ma następujące działanie:
 
-* Iniekcja konstruktora jest używana w celu uzyskania dostępu do wystąpienia `ITagHelperComponentManager`.
+* Iniekcja konstruktora jest używana w celu uzyskania dostępu `ITagHelperComponentManager`do wystąpienia.
 * Wystąpienie `AddressTagHelperComponent` jest dodawane do kolekcji składników pomocnika tagów aplikacji.
 
 ## <a name="create-a-component"></a>Tworzenie składnika
 
 Aby utworzyć składnik pomocnika tagów niestandardowych:
 
-* Utwórz klasę publiczną wynikającą z <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers.TagHelperComponentTagHelper>.
-* Zastosuj atrybut [`[HtmlTargetElement]`](xref:Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElementAttribute) do klasy. Określ nazwę docelowego elementu HTML.
-* *Opcjonalne*: zastosuj atrybut [`[EditorBrowsable(EditorBrowsableState.Never)]`](xref:System.ComponentModel.EditorBrowsableAttribute) do klasy, aby pominąć wyświetlanie typu w IntelliSense.
+* Utwórz klasę publiczną wyprowadzaną z <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers.TagHelperComponentTagHelper>.
+* Zastosuj [`[HtmlTargetElement]`](xref:Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElementAttribute) atrybut do klasy. Określ nazwę docelowego elementu HTML.
+* *Opcjonalne*: Zastosuj [`[EditorBrowsable(EditorBrowsableState.Never)]`](xref:System.ComponentModel.EditorBrowsableAttribute) atrybut do klasy, aby pominąć wyświetlanie typu w IntelliSense.
 
-Poniższy kod tworzy składnik pomocnika tagów niestandardowych, który jest przeznaczony dla `<address>` elementu HTML:
+Poniższy kod tworzy składnik pomocnika tagów niestandardowych, który jest przeznaczony `<address>` dla elementu HTML:
 
 [!code-csharp[](th-components/samples/RazorPagesSample/TagHelpers/AddressTagHelperComponentTagHelper.cs)]
 
-Użyj składnika pomocnika tagów niestandardowych `address`, aby wstrzyknąć znaczniki HTML w następujący sposób:
+Użyj składnika pomocnika tagów niestandardowych `address` , aby WSTRZYKNĄĆ znacznik HTML w następujący sposób:
 
 ```csharp
 public class AddressTagHelperComponent : TagHelperComponent
@@ -146,16 +152,16 @@ public class AddressTagHelperComponent : TagHelperComponent
 }
 ```
 
-Poprzednia metoda `ProcessAsync` wprowadza kod HTML udostępniony do <xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContent.SetHtmlContent*> do zgodnego elementu `<address>`. Iniekcja występuje, gdy:
+Poprzednia `ProcessAsync` metoda wprowadza kod HTML udostępniony do <xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContent.SetHtmlContent*> zgodnego `<address>` elementu. Iniekcja występuje, gdy:
 
-* Wartość właściwości `TagName` kontekstu wykonywania jest równa `address`.
-* Odpowiadający element `<address>` ma atrybut `printable`.
+* Wartość `TagName` właściwości kontekstu wykonania jest równa `address`.
+* Odpowiadający `<address>` element ma `printable` atrybut.
 
-Na przykład, instrukcja `if` ma wartość true podczas przetwarzania następującego elementu `<address>`:
+Na przykład, `if` instrukcja daje w wyniku wartość true podczas przetwarzania następującego `<address>` elementu:
 
 [!code-cshtml[](th-components/samples/RazorPagesSample/Pages/Contact.cshtml?name=snippet_AddressPrintable)]
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:fundamentals/dependency-injection>
 * <xref:mvc/views/dependency-injection>

@@ -4,13 +4,19 @@ author: rick-anderson
 description: Dowiedz się, jak zastąpić machineKey w ASP.NET, aby umożliwić korzystanie z nowego i bezpieczniejszego systemu ochrony danych.
 ms.author: riande
 ms.date: 04/06/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/compatibility/replacing-machinekey
-ms.openlocfilehash: 2317cb50cfe63226baf336ebfc5d681d1cebe5c6
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 72e736f820ec243a7ad1461fc70e2711ac8b76ee
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78667987"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777465"
 ---
 # <a name="replace-the-aspnet-machinekey-in-aspnet-core"></a>Zastąp ASP.NET machineKey w ASP.NET Core
 
@@ -32,7 +38,7 @@ Po zainstalowaniu pakietu wstawia wiersz do *pliku Web. config* , który informu
 ```
 
 >[!TIP]
-> Możesz sprawdzić, czy nowy system ochrony danych jest aktywny, sprawdzając pola, takie jak `__VIEWSTATE`, które powinny rozpoczynać się od ciągu "CfDJ8", jak w poniższym przykładzie. "CfDJ8" to reprezentacja Base64 nagłówka Magic "09 F0 C9 F0", który identyfikuje ładunek chroniony przez system ochrony danych.
+> Można sprawdzić, czy nowy system ochrony danych jest aktywny, sprawdzając pola, takie jak `__VIEWSTATE`, które powinny zaczynać się od "CfDJ8", jak w poniższym przykładzie. "CfDJ8" to reprezentacja Base64 nagłówka Magic "09 F0 C9 F0", który identyfikuje ładunek chroniony przez system ochrony danych.
 
 ```html
 <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="CfDJ8AWPr2EQPTBGs3L2GCZOpk...">
@@ -67,9 +73,9 @@ namespace DataProtectionDemo
 ```
 
 >[!TIP]
-> Zamiast jawnie wywołać metody setapplicationname, można również użyć `<machineKey applicationName="my-app" ... />`. Jest to wygodny mechanizm pozwalający uniknąć wymuszania tworzenia przez dewelopera typu DataProtectionStartup-pochodnego, jeśli wszystko, co chciało skonfigurować, została ustawiona nazwa aplikacji.
+> Można również użyć `<machineKey applicationName="my-app" ... />` zamiast jawnie wywołania setapplicationname. Jest to wygodny mechanizm pozwalający uniknąć wymuszania tworzenia przez dewelopera typu DataProtectionStartup-pochodnego, jeśli wszystko, co chciało skonfigurować, została ustawiona nazwa aplikacji.
 
-Aby włączyć tę konfigurację niestandardową, Wróć do pliku Web. config i poszukaj elementu `<appSettings>`, który został dodany przez pakiet w celu dodania do niego. Będzie wyglądać następująco:
+Aby włączyć tę konfigurację niestandardową, Wróć do pliku Web. config i poszukaj `<appSettings>` elementu, który został dodany przez pakiet do tego celu. Będzie wyglądać następująco:
 
 ```xml
 <appSettings>

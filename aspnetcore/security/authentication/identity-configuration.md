@@ -1,24 +1,30 @@
 ---
-title: Konfigurowanie tożsamości ASP.NET Core
+title: Konfigurowanie ASP.NET CoreIdentity
 author: AdrienTorris
-description: Poznaj wartości domyślne tożsamości ASP.NET Core i Dowiedz się, jak skonfigurować właściwości tożsamości, aby korzystać z wartości niestandardowych.
+description: Poznaj ASP.NET Core Identity wartości domyślne i Dowiedz się, Identity jak skonfigurować właściwości do używania wartości niestandardowych.
 ms.author: riande
 ms.date: 02/11/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authentication/identity-configuration
-ms.openlocfilehash: 823182bed2cb953e07f9374d135868aeb2be9c60
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: b88f2627eabc536f2d3b8e677020a67bfd1a40ba
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78661407"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775651"
 ---
 # <a name="configure-aspnet-core-identity"></a>Konfigurowanie tożsamości ASP.NET Core
 
-ASP.NET Core Identity używa wartości domyślnych dla ustawień, takich jak zasady haseł, blokada i konfiguracja plików cookie. Te ustawienia można zastąpić w klasie `Startup`.
+ASP.NET Core Identity używa wartości domyślnych dla ustawień, takich jak zasady haseł, blokada i konfiguracja plików cookie. Te ustawienia można przesłonić w `Startup` klasie.
 
 ## <a name="identity-options"></a>Opcje tożsamości
 
-Klasa [IdentityOptions](/dotnet/api/microsoft.aspnetcore.identity.identityoptions) reprezentuje opcje, których można użyć do skonfigurowania systemu tożsamości. `IdentityOptions` musi być ustawiony **po** wywołaniu `AddIdentity` lub `AddDefaultIdentity`.
+Klasa [IdentityOptions](/dotnet/api/microsoft.aspnetcore.identity.identityoptions) reprezentuje opcje, których można użyć do skonfigurowania systemu tożsamości. `IdentityOptions`musi być ustawiony **po** wywołaniu `AddIdentity` lub `AddDefaultIdentity`.
 
 ### <a name="claims-identity"></a>Tożsamość oświadczeń
 
@@ -31,21 +37,21 @@ Klasa [IdentityOptions](/dotnet/api/microsoft.aspnetcore.identity.identityoption
 | [UserIdClaimType](/dotnet/api/microsoft.aspnetcore.identity.claimsidentityoptions.useridclaimtype) | Pobiera lub ustawia typ zgłoszenia używany dla żądania identyfikatora użytkownika. | [Oświadczenia. NameIdentifier](/dotnet/api/system.security.claims.claimtypes.nameidentifier) |
 | [UserNameClaimType](/dotnet/api/microsoft.aspnetcore.identity.claimsidentityoptions.usernameclaimtype) | Pobiera lub ustawia typ zgłoszenia używany jako nazwa użytkownika. | [ClaimTypes.Name](/dotnet/api/system.security.claims.claimtypes.name) |
 
-### <a name="lockout"></a>Blokady
+### <a name="lockout"></a>Blokad
 
 Blokada została ustawiona w metodzie [PasswordSignInAsync](/dotnet/api/microsoft.aspnetcore.identity.signinmanager-1.passwordsigninasync#Microsoft_AspNetCore_Identity_SignInManager_1_PasswordSignInAsync_System_String_System_String_System_Boolean_System_Boolean_) :
 
 [!code-csharp[](identity-configuration/sample/Areas/Identity/Pages/Account/Login.cshtml.cs?name=snippet&highlight=9)]
 
-Poprzedni kod jest oparty na `Login` szablonu tożsamości. 
+Poprzedni kod jest oparty na szablonie `Login` tożsamości. 
 
-Opcje blokady są ustawiane w `StartUp.ConfigureServices`:
+Opcje blokady są ustawione w `StartUp.ConfigureServices`:
 
 [!code-csharp[](identity-configuration/sample/Startup.cs?name=snippet_lock)]
 
 Poprzedni kod ustawia [IdentityOptions](/dotnet/api/microsoft.aspnetcore.identity.identityoptions) [LockoutOptions](/dotnet/api/microsoft.aspnetcore.identity.lockoutoptions) z wartościami domyślnymi.
 
-Po pomyślnym uwierzytelnieniu resetuje liczbę prób dostępu nie powiodło się i zresetowanie zegara.
+Pomyślne uwierzytelnienie resetuje liczbę prób dostępu zakończonych niepowodzeniem i resetuje zegar.
 
 [IdentityOptions. Blokada](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.lockout) określa [LockoutOptions](/dotnet/api/microsoft.aspnetcore.identity.lockoutoptions) z właściwościami przedstawionymi w tabeli.
 
@@ -106,7 +112,7 @@ Domyślnie tożsamość wymaga, aby hasła zawierały wielkie litery, małe lite
 
 ### <a name="sign-in"></a>Logowanie
 
-Poniższy kod ustawia `SignIn` ustawienia (do wartości domyślnych):
+Poniższy kod określa `SignIn` ustawienia (do wartości domyślnych):
 
 ::: moniker range=">= aspnetcore-2.1"
 
@@ -133,11 +139,11 @@ Poniższy kod ustawia `SignIn` ustawienia (do wartości domyślnych):
 
 |                                                        Właściwość                                                         |                                                                                      Opis                                                                                      |
 |-------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|     [AuthenticatorTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.authenticatortokenprovider)     |                                       Pobiera lub ustawia `AuthenticatorTokenProvider` używany do weryfikowania logowania dwuskładnikowego przy użyciu wystawcy uwierzytelnienia.                                       |
-|       [ChangeEmailTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.changeemailtokenprovider)       |                                     Pobiera lub ustawia `ChangeEmailTokenProvider` używany do generowania tokenów używanych w wiadomościach e-mail z potwierdzeniem zmian wiadomości e-mail.                                     |
+|     [AuthenticatorTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.authenticatortokenprovider)     |                                       Pobiera lub ustawia `AuthenticatorTokenProvider` używany do weryfikacji logowania dwuskładnikowego przy użyciu wystawcy uwierzytelnienia.                                       |
+|       [ChangeEmailTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.changeemailtokenprovider)       |                                     Pobiera lub ustawia `ChangeEmailTokenProvider` używany do generowania tokenów używanych w wiadomościach e-mail z potwierdzeniem zmiany wiadomości e-mail.                                     |
 | [ChangePhoneNumberTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.changephonenumbertokenprovider) |                                      Pobiera lub ustawia `ChangePhoneNumberTokenProvider` używany do generowania tokenów używanych podczas zmieniania numerów telefonów.                                      |
 | [EmailConfirmationTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.emailconfirmationtokenprovider) |                                             Pobiera lub ustawia dostawcę tokenu używanego do generowania tokenów używanych w wiadomościach e-mail z potwierdzeniem konta.                                              |
-|     [PasswordResetTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.passwordresettokenprovider)     | Pobiera lub ustawia [> IUserTwoFactorTokenProvider\<TUser](/dotnet/api/microsoft.aspnetcore.identity.iusertwofactortokenprovider-1) używany do generowania tokenów używanych w wiadomościach e-mail dotyczących resetowania haseł. |
+|     [PasswordResetTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.passwordresettokenprovider)     | Pobiera lub ustawia [>IUserTwoFactorTokenProvider\<TUser](/dotnet/api/microsoft.aspnetcore.identity.iusertwofactortokenprovider-1) używany do generowania tokenów używanych w wiadomościach e-mail dotyczących resetowania haseł. |
 |                    [ProviderMap](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.providermap)                    |                Służy do konstruowania [dostawcy tokenów użytkownika](/dotnet/api/microsoft.aspnetcore.identity.tokenproviderdescriptor) z kluczem używanym jako nazwa dostawcy.                 |
 
 ### <a name="user"></a>Użytkownik
@@ -153,7 +159,7 @@ Poniższy kod ustawia `SignIn` ustawienia (do wartości domyślnych):
 
 ### <a name="cookie-settings"></a>Ustawienia plików cookie
 
-Skonfiguruj plik cookie aplikacji w `Startup.ConfigureServices`. [ConfigureApplicationCookie](/dotnet/api/microsoft.extensions.dependencyinjection.identityservicecollectionextensions.configureapplicationcookie#Microsoft_Extensions_DependencyInjection_IdentityServiceCollectionExtensions_ConfigureApplicationCookie_Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_Microsoft_AspNetCore_Authentication_Cookies_CookieAuthenticationOptions__) musi być wywoływana **po** wywołaniu `AddIdentity` lub `AddDefaultIdentity`.
+Skonfiguruj plik cookie aplikacji w programie `Startup.ConfigureServices`. [ConfigureApplicationCookie](/dotnet/api/microsoft.extensions.dependencyinjection.identityservicecollectionextensions.configureapplicationcookie#Microsoft_Extensions_DependencyInjection_IdentityServiceCollectionExtensions_ConfigureApplicationCookie_Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_Microsoft_AspNetCore_Authentication_Cookies_CookieAuthenticationOptions__) musi być wywoływana **po** wywołaniu `AddIdentity` lub `AddDefaultIdentity`.
 
 ::: moniker range=">= aspnetcore-2.1"
 
@@ -177,14 +183,14 @@ Aby uzyskać więcej informacji, zobacz [CookieAuthenticationOptions](/dotnet/ap
 
 ## <a name="password-hasher-options"></a>Opcje skrótu hasła
 
-<xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions> pobiera i ustawia opcje tworzenia skrótów haseł.
+<xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions>Pobiera i ustawia opcje tworzenia skrótów haseł.
 
 | Opcja | Opis |
 | ------ | ----------- |
-| <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.CompatibilityMode> | Tryb zgodności używany podczas mieszania nowych haseł. Wartość domyślna to <xref:Microsoft.AspNetCore.Identity.PasswordHasherCompatibilityMode.IdentityV3>. Pierwszy bajt skrótu hasła zwanego *znacznikiem formatu*określa wersję algorytmu wyznaczania wartości skrótu używanego do mieszania hasła. Podczas weryfikowania hasła przy użyciu skrótu Metoda <xref:Microsoft.AspNetCore.Identity.PasswordHasher`1.VerifyHashedPassword*> wybiera poprawny algorytm na podstawie pierwszego bajtu. Klient może się uwierzytelnić niezależnie od tego, która wersja algorytmu została użyta do skrótu hasła. Ustawienie trybu zgodności ma wpływ na skróty *nowych haseł*. |
-| <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.IterationCount> | Liczba iteracji używanych podczas tworzenia skrótów haseł przy użyciu PBKDF2. Ta wartość jest używana tylko wtedy, gdy <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.CompatibilityMode> jest ustawiona na <xref:Microsoft.AspNetCore.Identity.PasswordHasherCompatibilityMode.IdentityV3>. Wartość musi być dodatnią liczbą całkowitą i wartością domyślną do `10000`. |
+| <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.CompatibilityMode> | Tryb zgodności używany podczas mieszania nowych haseł. Wartość domyślna <xref:Microsoft.AspNetCore.Identity.PasswordHasherCompatibilityMode.IdentityV3>to. Pierwszy bajt skrótu hasła zwanego *znacznikiem formatu*określa wersję algorytmu wyznaczania wartości skrótu używanego do mieszania hasła. Podczas weryfikowania hasła przy użyciu skrótu <xref:Microsoft.AspNetCore.Identity.PasswordHasher`1.VerifyHashedPassword*> Metoda wybiera poprawny algorytm na podstawie pierwszego bajtu. Klient może się uwierzytelnić niezależnie od tego, która wersja algorytmu została użyta do skrótu hasła. Ustawienie trybu zgodności ma wpływ na skróty *nowych haseł*. |
+| <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.IterationCount> | Liczba iteracji używanych podczas tworzenia skrótów haseł przy użyciu PBKDF2. Ta wartość jest używana tylko wtedy, <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.CompatibilityMode> gdy jest ustawiona <xref:Microsoft.AspNetCore.Identity.PasswordHasherCompatibilityMode.IdentityV3>na. Wartość musi być dodatnią liczbą całkowitą i wartością domyślną `10000`. |
 
-W poniższym przykładzie <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.IterationCount> jest ustawiona na `12000` w `Startup.ConfigureServices`:
+W poniższym przykładzie <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.IterationCount> jest ustawiona na `12000` wartość w: `Startup.ConfigureServices`
 
 ```csharp
 // using Microsoft.AspNetCore.Identity;

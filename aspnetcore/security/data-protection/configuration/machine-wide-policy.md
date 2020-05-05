@@ -4,13 +4,19 @@ author: rick-anderson
 description: Dowiedz się więcej na temat obsługi ustawiania domyślnych zasad komputera dla wszystkich aplikacji, które używają ASP.NET Core ochrony danych.
 ms.author: riande
 ms.date: 10/14/2016
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/configuration/machine-wide-policy
-ms.openlocfilehash: 70aaca7afcd3df22cebb4466fbd9845a2277688c
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 84f54b37dfff3112ea5ca84f931103624cfde90a
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78667952"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776841"
 ---
 # <a name="data-protection-machine-wide-policy-support-in-aspnet-core"></a>Obsługa zasad na całym komputerze ochrony danych w ASP.NET Core
 
@@ -33,8 +39,8 @@ Obsługiwane wartości są przedstawione poniżej.
 
 | Wartość              | Typ   | Opis |
 | ------------------ | :----: | ----------- |
-| EncryptionType     | ciąg | Określa, które algorytmy mają być używane do ochrony danych. Wartość musi być wartością CNG-CBC, CNG-GCM lub Managed i została opisana bardziej szczegółowo poniżej. |
-| DefaultKeyLifetime | DWORD  | Określa okres istnienia nowo generowanych kluczy. Wartość jest określona w dniach i musi być > = 7. |
+| Szyfrowanietype     | ciąg | Określa, które algorytmy mają być używane do ochrony danych. Wartość musi być wartością CNG-CBC, CNG-GCM lub Managed i została opisana bardziej szczegółowo poniżej. |
+| DefaultKeyLifetime | DWORD  | Określa okres istnienia nowo generowanych kluczy. Wartość jest określona w dniach i musi być >= 7. |
 | KeyEscrowSinks     | ciąg | Określa typy, które są używane dla klucza Escrow. Wartość to rozdzielana średnikami lista kluczy ujścia usługi Escrow, gdzie każdy element na liście jest kwalifikowaną nazwą zestawu typu, który implementuje [IKeyEscrowSink](/dotnet/api/microsoft.aspnetcore.dataprotection.keymanagement.ikeyescrowsink). |
 
 ## <a name="encryption-types"></a>Typy szyfrowania

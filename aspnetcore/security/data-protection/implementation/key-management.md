@@ -4,13 +4,19 @@ author: rick-anderson
 description: Poznaj szczegóły implementacji interfejsów API zarządzania kluczami ASP.NET Core ochrony danych.
 ms.author: riande
 ms.date: 10/14/2016
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/implementation/key-management
-ms.openlocfilehash: c571222d734fa69183563aefa5cc6ce5a10e7612
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 0f54ceedf3558fb4fa2349903461fdfdb4dc02e6
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78664711"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776906"
 ---
 # <a name="key-management-in-aspnet-core"></a>Zarządzanie kluczami w ASP.NET Core
 
@@ -59,7 +65,7 @@ services.AddDataProtection()
        .SetDefaultKeyLifetime(TimeSpan.FromDays(14));
 ```
 
-Administrator może również zmienić domyślne ustawienie całego systemu, chociaż jawne wywołanie `SetDefaultKeyLifetime` przesłoni wszystkie zasady dotyczące całego systemu. Domyślny okres istnienia klucza nie może być krótszy niż 7 dni.
+Administrator może również zmienić domyślne ustawienie całego systemu, chociaż jawne wywołanie spowoduje zastąpienie wszystkich zasad `SetDefaultKeyLifetime` dotyczących całego systemu. Domyślny okres istnienia klucza nie może być krótszy niż 7 dni.
 
 ## <a name="automatic-key-ring-refresh"></a>Automatyczne odświeżanie dzwonka klucza
 
@@ -68,11 +74,11 @@ Po zainicjowaniu system ochrony danych odczytuje pierścień klucza z bazowego r
 >[!WARNING]
 > Deweloperzy muszą bardzo rzadko korzystać z interfejsów API zarządzania kluczami. System ochrony danych wykona automatyczne zarządzanie kluczami, zgodnie z powyższym opisem.
 
-System ochrony danych uwidacznia interfejs `IKeyManager`, który może służyć do sprawdzania i wprowadzania zmian w pęku kluczy. System DI, który dostarczył wystąpienie `IDataProtectionProvider`, może także zapewnić wystąpienie `IKeyManager` do użycia. Alternatywnie można ściągnąć `IKeyManager` prosto z `IServiceProvider`, jak w poniższym przykładzie.
+System ochrony danych udostępnia interfejs `IKeyManager` , który może służyć do sprawdzania i wprowadzania zmian w pierścieniu kluczy. System DI, który dostarczył wystąpienia, `IDataProtectionProvider` może również dostarczyć wystąpienie `IKeyManager` do użycia. Alternatywnie można ściągnąć `IKeyManager` bezpośrednio z metody `IServiceProvider` AS w poniższym przykładzie.
 
-Każda operacja, która modyfikuje pierścień kluczy (utworzenie nowego klucza jawnie lub wykonanie odwołania), spowoduje unieważnienie pamięci podręcznej w pamięci. Następne wywołanie `Protect` lub `Unprotect` spowoduje, że system ochrony danych odczyta ponownie pierścień klucza i ponownie utworzy pamięć podręczną.
+Każda operacja, która modyfikuje pierścień kluczy (utworzenie nowego klucza jawnie lub wykonanie odwołania), spowoduje unieważnienie pamięci podręcznej w pamięci. Następne wywołanie `Protect` lub `Unprotect` spowoduje, że system ochrony danych odczyta dzwonek klucza i ponownie utworzy pamięć podręczną.
 
-Poniższy przykład ilustruje użycie interfejsu `IKeyManager` do sprawdzenia i manipulowania pierścieniem kluczy, w tym odwoływanie istniejących kluczy i ręczne generowanie nowego klucza.
+Poniższy przykład demonstruje użycie `IKeyManager` interfejsu do sprawdzenia i manipulowania pierścieniem kluczy, w tym odwoływanie istniejących kluczy i ręczne generowanie nowego klucza.
 
 [!code-csharp[](key-management/samples/key-management.cs)]
 

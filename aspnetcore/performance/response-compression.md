@@ -6,13 +6,19 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: performance/response-compression
-ms.openlocfilehash: 8fc68f2303bfcf16d279b829ab9441a80119f1bb
-ms.sourcegitcommit: 755952496316fdb0923689109b536b609ce525ee
+ms.openlocfilehash: 12a39ccfefdcaec6251a9804011aefde3bbae7b2
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82643085"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776672"
 ---
 # <a name="response-compression-in-aspnet-core"></a>Kompresja odpowiedzi w ASP.NET Core
 
@@ -80,7 +86,7 @@ Poznaj funkcje oprogramowania pośredniczącego kompresji odpowiedzi z [przykła
 
 Oprogramowanie pośredniczące kompresji odpowiedzi jest dostarczane przez pakiet [Microsoft. AspNetCore. ResponseCompression](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCompression/) , który jest niejawnie uwzględniony w aplikacjach ASP.NET Core.
 
-## <a name="configuration"></a>Konfiguracja
+## <a name="configuration"></a>Konfigurowanie
 
 Poniższy kod pokazuje, jak włączyć oprogramowanie pośredniczące kompresji odpowiedzi dla domyślnych typów MIME i dostawców kompresji ([Brotli](#brotli-compression-provider) i [gzip](#gzip-compression-provider)):
 
@@ -326,7 +332,7 @@ Poznaj funkcje oprogramowania pośredniczącego kompresji odpowiedzi z [przykła
 
 Aby uwzględnić oprogramowanie pośredniczące w projekcie, Dodaj odwołanie do pakietu [Microsoft. AspNetCore. app](xref:fundamentals/metapackage-app), który obejmuje pakiet [Microsoft. AspNetCore. ResponseCompression](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCompression/) .
 
-## <a name="configuration"></a>Konfiguracja
+## <a name="configuration"></a>Konfigurowanie
 
 Poniższy kod pokazuje, jak włączyć oprogramowanie pośredniczące kompresji odpowiedzi dla domyślnych typów MIME i dostawców kompresji ([Brotli](#brotli-compression-provider) i [gzip](#gzip-compression-provider)):
 
@@ -571,7 +577,7 @@ Poznaj funkcje oprogramowania pośredniczącego kompresji odpowiedzi z [przykła
 
 Aby uwzględnić oprogramowanie pośredniczące w projekcie, Dodaj odwołanie do pakietu [Microsoft. AspNetCore. app](xref:fundamentals/metapackage-app), który obejmuje pakiet [Microsoft. AspNetCore. ResponseCompression](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCompression/) .
 
-## <a name="configuration"></a>Konfiguracja
+## <a name="configuration"></a>Konfigurowanie
 
 Poniższy kod pokazuje, jak włączyć oprogramowanie pośredniczące kompresji odpowiedzi dla domyślnych typów MIME i [dostawcy kompresji gzip](#gzip-compression-provider):
 

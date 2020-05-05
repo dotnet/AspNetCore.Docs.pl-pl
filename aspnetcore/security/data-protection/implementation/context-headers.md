@@ -4,13 +4,19 @@ author: rick-anderson
 description: Poznaj szczegóły implementacji nagłówków kontekstu ochrony danych ASP.NET Core.
 ms.author: riande
 ms.date: 10/14/2016
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/implementation/context-headers
-ms.openlocfilehash: 518423f5df93924d3df144994e4beb1755cd0bfc
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 381cc137d1de87e87f36c3b32a6a551a318ed3cf
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78666580"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776958"
 ---
 # <a name="context-headers-in-aspnet-core"></a>Nagłówki kontekstu w ASP.NET Core
 
@@ -20,9 +26,9 @@ ms.locfileid: "78666580"
 
 W systemie ochrony danych "klucz" oznacza obiekt, który może zapewniać uwierzytelnione usługi szyfrowania. Każdy klucz jest identyfikowany za pomocą unikatowego identyfikatora (GUID) i zawiera informacje o algorytmach IT i materiał entropic. Należy zastanowić się, że każdy klucz ma unikatową entropię, ale system nie może wymusić tego działania, a ponadto musimy uwzględnić deweloperów, którzy mogą ręcznie zmienić pierścień kluczy, modyfikując informacje o algorytmach istniejącego klucza w pęku kluczy. W celu osiągnięcia naszych wymagań w zakresie bezpieczeństwa w tym przypadku system ochrony danych ma koncepcję [kryptografii kryptograficznej](https://www.microsoft.com/en-us/research/publication/cryptographic-agility-and-its-relation-to-circular-encryption/), która umożliwia bezpieczne używanie jednej wartości entropic w wielu algorytmach kryptograficznych.
 
-Większość systemów, które obsługują elastyczność kryptograficzną, to przez uwzględnienie pewnych informacji identyfikujących algorytm wewnątrz ładunku. Identyfikator OID algorytmu jest zwykle dobrym kandydatem do tego. Jednak jeden z nich wystąpił, że istnieje wiele sposobów na określenie tego samego algorytmu: "AES" (CNG), a zarządzane algorytmy AES, AesManaged, AesCryptoServiceProvider, AesCng i RijndaelManaged (dane o określonych parametrach) są faktycznie takie same. w tym celu należy zachować mapowanie wszystkich tych elementów do prawidłowego identyfikatora OID. Jeśli deweloper chciał udostępnić niestandardowy algorytm (lub nawet inną implementację algorytmu AES), musi powiedzieć nas o jego identyfikatorze OID. Ten dodatkowy krok rejestracji powoduje, że konfiguracja systemu jest szczególnie bolesnym.
+Większość systemów, które obsługują elastyczność kryptograficzną, to przez uwzględnienie pewnych informacji identyfikujących algorytm wewnątrz ładunku. Identyfikator OID algorytmu jest zwykle dobrym kandydatem do tego. Jednak jeden z nich wystąpił, że istnieje wiele sposobów na określenie tego samego algorytmu: "AES" (CNG), a zarządzane algorytmy AES, AesManaged, AesCryptoServiceProvider, AesCng i RijndaelManaged (dane o określonych parametrach) są faktycznie tymi samymi, a musimy zachować mapowanie wszystkich tych elementów do właściwego identyfikatora OID. Jeśli deweloper chciał udostępnić niestandardowy algorytm (lub nawet inną implementację algorytmu AES), musi powiedzieć nas o jego identyfikatorze OID. Ten dodatkowy krok rejestracji powoduje, że konfiguracja systemu jest szczególnie bolesnym.
 
-Przechodzenie przez nas z powrotem zadecydował się, że wystąpił problem z niewłaściwym kierunkiem. Identyfikator OID informuje o tym, czym jest algorytm, ale nie jest to naprawdę ważne. Jeśli musimy bezpiecznie użyć pojedynczej wartości entropic w dwóch różnych algorytmach, nie jest to konieczne, aby wiedzieć, jakie algorytmy rzeczywiście są. Zadbajmy o to, jak działa. Każdy algorytm szyfrowania bloku symetrycznego znośnego jest również silnie pseudolosowych permutacji (PRP): Popraw dane wejściowe (klucz, tryb łańcuchowy, IV, zwykły tekst) i dane wyjściowe tekstu szyfrowanego będą się różnić od dowolnego innego szyfru bloku symetrycznego algorytm przydany te same dane wejściowe. Podobnie każda znośnegoa funkcja skrótu jest również silną funkcją pseudolosowych (PRF) i ze stałym zestawem danych wejściowych, która będzie zależeć od dowolnej innej funkcji skrótu z ustawioną instrukcją.
+Przechodzenie przez nas z powrotem zadecydował się, że wystąpił problem z niewłaściwym kierunkiem. Identyfikator OID informuje o tym, czym jest algorytm, ale nie jest to naprawdę ważne. Jeśli musimy bezpiecznie użyć pojedynczej wartości entropic w dwóch różnych algorytmach, nie jest to konieczne, aby wiedzieć, jakie algorytmy rzeczywiście są. Zadbajmy o to, jak działa. Każdy algorytm szyfrowania bloku symetrycznego znośnego jest również silnie pseudolosowych permutacji (PRP): Popraw dane wejściowe (klucz, tryb łańcucha, IV, zwykły tekst) i dane wyjściowe tekstu szyfrowanego. Podobnie każda znośnegoa funkcja skrótu jest również silną funkcją pseudolosowych (PRF) i ze stałym zestawem danych wejściowych, która będzie zależeć od dowolnej innej funkcji skrótu z ustawioną instrukcją.
 
 Używamy tej koncepcji mocnych PRPs i PRFs do kompilowania nagłówka kontekstu. Ten nagłówek kontekstu zasadniczo działa jako stabilny odcisk palca dla algorytmów używanych dla danej operacji i zapewnia elastyczność kryptograficzną wymaganą przez system ochrony danych. Ten nagłówek jest powtarzalny i używany później jako część [procesu wyprowadzania podklucza](xref:security/data-protection/implementation/subkeyderivation#data-protection-implementation-subkey-derivation). Istnieją dwa różne sposoby tworzenia nagłówka kontekstu w zależności od trybów działania podstawowych algorytmów.
 
@@ -67,11 +73,11 @@ B7 92 3D BF 59 90 00 A9
 
 Następnie Enc_CBC obliczeniowe (K_E, IV, "") dla algorytmu AES-192-CBC przyznany IV = 0 * i K_E jak powyżej.
 
-result := F474B1872B3B53E4721DE19C0841DB6F
+wynik: = F474B1872B3B53E4721DE19C0841DB6F
 
 Następnie należy obliczyć komputery MAC (K_H "") dla HMACSHA256 K_H jak powyżej.
 
-result := D4791184B996092EE1202F36E8608FA8FBD98ABDFF5402F264B1D7211536220C
+wynik: = D4791184B996092EE1202F36E8608FA8FBD98ABDFF5402F264B1D7211536220C
 
 Spowoduje to utworzenie pełnego nagłówka kontekstu poniżej:
 
@@ -114,11 +120,11 @@ D1 F7 5A 34 EB 28 3E D7 D4 67 B4 64
 
 Następnie Enc_CBC obliczeniowe (K_E, IV, "") dla algorytmu 3DES-192-CBC przyznany IV = 0 * i K_E jak powyżej.
 
-result := ABB100F81E53E10E
+wynik: = ABB100F81E53E10E
 
 Następnie należy obliczyć komputery MAC (K_H "") dla HMACSHA1 K_H jak powyżej.
 
-result := 76EB189B35CF03461DDF877CD9F4B1B4D63A7555
+wynik: = 76EB189B35CF03461DDF877CD9F4B1B4D63A7555
 
 Spowoduje to utworzenie pełnego nagłówka kontekstu, który jest odciskiem palca pary szyfrowany algorytm szyfrowania (3DES-192-CBC Encryption + HMACSHA1 Validation), jak pokazano poniżej:
 
@@ -168,11 +174,11 @@ K_E = SP800_108_CTR (PRF = HMACSHA512, Key = "", Label = "", context = "")
 
 Najpierw Zezwól na K_E = SP800_108_CTR (PRF = HMACSHA512, Key = "", Label = "", context = ""), gdzie | K_E | = 256 bitów.
 
-K_E := 22BC6F1B171C08C4AE2F27444AF8FC8B3087A90006CAEA91FDCFB47C1B8733B8
+K_E: = 22BC6F1B171C08C4AE2F27444AF8FC8B3087A90006CAEA91FDCFB47C1B8733B8
 
 Następnie Oblicz tag uwierzytelniania Enc_GCM (K_E, nonce, "") dla algorytmu AES-256-GCM danego identyfikatora nonce = 096 i K_E jak powyżej.
 
-result := E7DCCE66DF855A323A6BB7BD7A59BE45
+wynik: = E7DCCE66DF855A323A6BB7BD7A59BE45
 
 Spowoduje to utworzenie pełnego nagłówka kontekstu poniżej:
 

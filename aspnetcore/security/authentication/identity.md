@@ -1,16 +1,22 @@
 ---
-title: Wprowadzenie do tożsamości na ASP.NET Core
+title: Wprowadzenie do Identity ASP.NET Core
 author: rick-anderson
-description: Użyj tożsamości z aplikacją ASP.NET Core. Dowiedz się, jak ustawiać wymagania dotyczące haseł (RequireDigit, RequiredLength, RequiredUniqueChars itd.).
+description: Używanie Identity z aplikacją ASP.NET Core. Dowiedz się, jak ustawiać wymagania dotyczące haseł (RequireDigit, RequiredLength, RequiredUniqueChars itd.).
 ms.author: riande
 ms.date: 01/15/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authentication/identity
-ms.openlocfilehash: 4bc5f206b3aee7c2d34055703acc5b6c5218f964
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: d596a8357c5c812b94950809eedf35718328747c
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82205946"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777010"
 ---
 # <a name="introduction-to-identity-on-aspnet-core"></a>Wprowadzenie do tożsamości na ASP.NET Core
 
@@ -391,30 +397,30 @@ Wpis jest określony na *stronie/Shared/_LoginPartial. cshtml*:
 
 [!code-csharp[](identity/sample/WebApp1/Pages/Shared/_LoginPartial.cshtml?highlight=16)]
 
-## <a name="test-identity"></a>Testuj tożsamość
+## <a name="test-identity"></a>BadanIdentity
 
-Domyślne szablony projektu sieci Web umożliwiają anonimowy dostęp do stron głównych. Aby przetestować tożsamość, Dodaj [`[Authorize]`](/dotnet/api/microsoft.aspnetcore.authorization.authorizeattribute) stronę prywatność.
+Domyślne szablony projektu sieci Web umożliwiają anonimowy dostęp do stron głównych. Aby przetestować Identity, Dodaj [`[Authorize]`](/dotnet/api/microsoft.aspnetcore.authorization.authorizeattribute) stronę prywatność.
 
 [!code-csharp[](identity/sample/WebApp1/Pages/Privacy.cshtml.cs?highlight=7)]
 
 Jeśli użytkownik jest zalogowany, Wyloguj się. Uruchom aplikację i wybierz łącze **prywatność** . Nastąpi przekierowanie do strony logowania.
 
-### <a name="explore-identity"></a>Eksploruj tożsamość
+### <a name="explore-identity"></a>PrzeglądaćIdentity
 
-Aby poznać tożsamość w bardziej szczegółowy sposób:
+Aby poznać Identity więcej szczegółów:
 
 * [Utwórz źródło interfejsu użytkownika pełnej tożsamości](xref:security/authentication/scaffold-identity#create-full-identity-ui-source)
 * Przejrzyj Źródło poszczególnych stron i przechodzenie przez debuger.
 
-## <a name="identity-components"></a>Składniki tożsamości
+## <a name="identity-components"></a>IdentityKomponentów
 
-Wszystkie pakiety NuGet zależne od tożsamości są zawarte w [pakiecie Microsoft. AspNetCore. app](xref:fundamentals/metapackage-app).
+Wszystkie Identity zależne pakiety NuGet są zawarte w [pakiecie Microsoft. AspNetCore. app](xref:fundamentals/metapackage-app).
 
-Podstawowym pakietem tożsamości jest [Microsoft. AspNetCore. Identity](https://www.nuget.org/packages/Microsoft.AspNetCore.Identity/). Ten pakiet zawiera podstawowy zestaw interfejsów dla ASP.NET Core Identity i jest dołączony do programu `Microsoft.AspNetCore.Identity.EntityFrameworkCore`.
+Podstawowym pakietem programu Identity jest [Microsoft. AspNetCore.Identity](https://www.nuget.org/packages/Microsoft.AspNetCore.Identity/). Ten pakiet zawiera podstawowy zestaw interfejsów dla ASP.NET Core Identityi jest dołączany przez `Microsoft.AspNetCore.Identity.EntityFrameworkCore`program.
 
-## <a name="migrating-to-aspnet-core-identity"></a>Migrowanie do ASP.NET Core Identity
+## <a name="migrating-to-aspnet-core-identity"></a>Migrowanie do ASP.NET CoreIdentity
 
-Aby uzyskać więcej informacji i wskazówek dotyczących migrowania istniejącego magazynu tożsamości, zobacz [Migrowanie uwierzytelniania i tożsamości](xref:migration/identity).
+Aby uzyskać więcej informacji i wskazówek dotyczących migrowania Identity istniejącego magazynu, zobacz [Migrowanie Identityuwierzytelniania i ](xref:migration/identity).
 
 ## <a name="setting-password-strength"></a>Ustawianie siły hasła
 
@@ -422,8 +428,8 @@ Zobacz [Konfiguracja](#pw) dla przykładu, który ustawia minimalne wymagania do
 
 ## <a name="next-steps"></a>Następne kroki
 
-* Zobacz [ten problem](https://github.com/dotnet/AspNetCore.Docs/issues/5131) w usłudze GitHub, aby uzyskać informacje dotyczące konfigurowania tożsamości przy użyciu oprogramowania SQLite.
-* [Konfigurowanie systemu Identity](xref:security/authentication/identity-configuration)
+* Zobacz [ten problem](https://github.com/dotnet/AspNetCore.Docs/issues/5131) w usłudze GitHub, aby Identity uzyskać informacje dotyczące konfigurowania za pomocą oprogramowania SQLite.
+* [PonowneIdentity](xref:security/authentication/identity-configuration)
 * <xref:security/authorization/secure-data>
 * <xref:security/authentication/add-user-data>
 * <xref:security/authentication/identity-enable-qrcodes>

@@ -1,30 +1,36 @@
 ---
-title: ASP.NET implementacja podstawowej ochrony danych
+title: ASP.NET Core implementacja ochrony danych
 author: rick-anderson
-description: Zapoznaj się z różnymi tematami implementacji ASP.NET podstawowych danych.
+description: Odkryj różne tematy ASP.NET Core implementacji ochrony danych.
 ms.author: riande
 ms.date: 10/14/2016
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/implementation/index
-ms.openlocfilehash: a21738ee2c092a9d14b7d448f7d3c7694f456ca8
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: aa5ebc3bfec996298ef5d203a9aa93ebbac521b0
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78667427"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776945"
 ---
-# <a name="aspnet-core-data-protection-implementation"></a>ASP.NET implementacja podstawowej ochrony danych
+# <a name="aspnet-core-data-protection-implementation"></a>ASP.NET Core implementacja ochrony danych
 
 * [Szczegóły uwierzytelnionego szyfrowania](xref:security/data-protection/implementation/authenticated-encryption-details)
 
-* [Wyprowadzanie podklucza i uwierzytelnione szyfrowanie](xref:security/data-protection/implementation/subkeyderivation)
+* [Wyprowadzanie podkluczy i uwierzytelnione szyfrowanie](xref:security/data-protection/implementation/subkeyderivation)
 
 * [Nagłówki kontekstu](xref:security/data-protection/implementation/context-headers)
 
 * [Zarządzanie kluczami](xref:security/data-protection/implementation/key-management)
 
-* [Dostawcy kluczy pamięci masowej](xref:security/data-protection/implementation/key-storage-providers)
+* [Dostawcy magazynu kluczy](xref:security/data-protection/implementation/key-storage-providers)
 
-* [Szyfrowanie kluczy w spoczynku](xref:security/data-protection/implementation/key-encryption-at-rest)
+* [Szyfrowanie klucza w spoczynku](xref:security/data-protection/implementation/key-encryption-at-rest)
 
 * [Ustawienia i niezmienność klucza](xref:security/data-protection/implementation/key-immutability)
 

@@ -4,13 +4,19 @@ author: ardalis
 description: Dowiedz się, jak rozpocząć Migrowanie projektu ASP.NET MVC do ASP.NET Core MVC.
 ms.author: riande
 ms.date: 04/06/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: migration/mvc
-ms.openlocfilehash: 6c9449fb43960d05db8aa6dcba64d3d830834cdb
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 59a10c002958e5f719dbd59686f21df69da5f43e
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78661169"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777049"
 ---
 # <a name="migrate-from-aspnet-mvc-to-aspnet-core-mvc"></a>Migrowanie z ASP.NET MVC do ASP.NET Core MVC
 
@@ -61,13 +67,13 @@ Utwórz nową *pustą* aplikację sieci Web ASP.NET Core o takiej samej nazwie j
 
 ::: moniker-end
 
-`Microsoft.AspNetCore.Mvc` jest platformą ASP.NET Core MVC. `Microsoft.AspNetCore.StaticFiles` jest programem obsługi pliku statycznego. Środowisko uruchomieniowe ASP.NET Core jest modularne i należy jawnie zadecydować, aby obsługiwały pliki statyczne (zobacz [pliki statyczne](xref:fundamentals/static-files)).
+`Microsoft.AspNetCore.Mvc`jest platformą ASP.NET Core MVC. `Microsoft.AspNetCore.StaticFiles`jest programem obsługi plików statycznych. Środowisko uruchomieniowe ASP.NET Core jest modularne i należy jawnie zadecydować, aby obsługiwały pliki statyczne (zobacz [pliki statyczne](xref:fundamentals/static-files)).
 
 * Otwórz plik *Startup.cs* i Zmień kod w taki sposób, aby był zgodny z następującymi:
 
   [!code-csharp[](mvc/sample/Startup.cs?highlight=13,26-31)]
 
-Metoda rozszerzenia `UseStaticFiles` dodaje procedurę obsługi pliku statycznego. Jak wspomniano wcześniej, środowisko uruchomieniowe ASP.NET jest modularne, a użytkownik musi jawnie zadecydować, aby obsługiwał pliki statyczne. Metoda rozszerzenia `UseMvc` dodaje Routing. Aby uzyskać więcej informacji, zobacz Uruchamianie i [Routing](xref:fundamentals/routing) [aplikacji](xref:fundamentals/startup) .
+Metoda `UseStaticFiles` rozszerzenia dodaje procedurę obsługi pliku statycznego. Jak wspomniano wcześniej, środowisko uruchomieniowe ASP.NET jest modularne, a użytkownik musi jawnie zadecydować, aby obsługiwał pliki statyczne. Metoda `UseMvc` rozszerzenia dodaje Routing. Aby uzyskać więcej informacji, zobacz Uruchamianie i [Routing](xref:fundamentals/routing) [aplikacji](xref:fundamentals/startup) .
 
 ## <a name="add-a-controller-and-view"></a>Dodawanie kontrolera i widoku
 
@@ -83,7 +89,7 @@ W tej sekcji dodasz minimalny kontroler i widok służący jako symbole zastępc
 
 * Dodaj *Widok/folder macierzysty* .
 
-* Dodaj **Widok Razor** o nazwie *index. cshtml* do folderu *widoki/Home* .
+* Dodaj ** Razor widok** o nazwie *index. cshtml* do folderu *widoki/Home* .
 
 ![Okno dialogowe Dodawanie nowego elementu](mvc/_static/view.png)
 
@@ -113,19 +119,19 @@ Teraz, gdy mamy minimalny działający projekt ASP.NET Core, możemy rozpocząć
 
 * modele
 
-* Tworzenia pakietów
+* tworzenia pakietów
 
 * filtry
 
-* Logowanie/wylogowywanie, tożsamość (jest to wykonywane w następnym samouczku).
+* Logowanie/wylogowywanie, Identity (to jest wykonywane w następnym samouczku).
 
 ## <a name="controllers-and-views"></a>Kontrolery i widoki
 
-* Skopiuj każdą z metod z ASP.NET MVC `HomeController` do nowej `HomeController`. Należy pamiętać, że w ASP.NET MVC Metoda akcji kontrolera wbudowanego szablonu ma wartość [ActionResult](https://msdn.microsoft.com/library/system.web.mvc.actionresult(v=vs.118).aspx); w ASP.NET Core MVC metody akcji zwracają `IActionResult` zamiast tego. `ActionResult` implementuje `IActionResult`, więc nie trzeba zmieniać zwracanego typu metod akcji.
+* Skopiuj każdą z metod z ASP.NET MVC `HomeController` do nowej. `HomeController` Należy pamiętać, że w ASP.NET MVC Metoda akcji kontrolera wbudowanego szablonu ma wartość [ActionResult](https://msdn.microsoft.com/library/system.web.mvc.actionresult(v=vs.118).aspx); w ASP.NET Core MVC, zamiast tego zwracają `IActionResult` metody akcji. `ActionResult`implementuje `IActionResult`, dlatego nie trzeba zmieniać zwracanego typu metod akcji.
 
-* Skopiuj pliki widoku Razor *. cshtml*, *Contact. cshtml*i *Index. cshtml* z projektu ASP.NET MVC do projektu ASP.NET Core.
+* Skopiuj pliki *. cshtml*, *Contact. cshtml*i *index. cshtml* Razor z projektu ASP.NET MVC do projektu ASP.NET Core.
 
-* Uruchom aplikację ASP.NET Core i przetestuj każdą metodę. Plik lub style układu nie został jeszcze zmigrowany, więc renderowane widoki zawierają tylko zawartość w plikach widoku. Nie masz linków wygenerowanych przez plik układu dla widoków `About` i `Contact`, więc musisz wywołać je z przeglądarki (Zastąp **4492** numerem portu używanym w projekcie).
+* Uruchom aplikację ASP.NET Core i przetestuj każdą metodę. Plik lub style układu nie został jeszcze zmigrowany, więc renderowane widoki zawierają tylko zawartość w plikach widoku. Nie masz linków do pliku układu dla widoków `About` i `Contact` , więc musisz wywołać je z przeglądarki (Zastąp **4492** numerem portu używanym w projekcie).
 
   * `http://localhost:4492/home/about`
 
@@ -133,7 +139,7 @@ Teraz, gdy mamy minimalny działający projekt ASP.NET Core, możemy rozpocząć
 
 ![Strona kontaktu](mvc/_static/contact-page.png)
 
-Zwróć uwagę na brak stylów i elementów menu. Naprawimy, w następnej sekcji.
+Zwróć uwagę na brak stylów i elementów menu. Naprawimy to w następnej sekcji.
 
 ## <a name="static-content"></a>Zawartość statyczna
 
@@ -155,15 +161,15 @@ Stary projekt ASP.NET MVC używa narzędzia [Bootstrap](https://getbootstrap.com
 
 Otwórz plik *_Layout. cshtml* i wprowadź następujące zmiany (kod wykonany jest przedstawiony poniżej):
 
-* Zastąp `@Styles.Render("~/Content/css")` elementem `<link>`, aby załadować *Bootstrap. css* (patrz poniżej).
+* Zamień `@Styles.Render("~/Content/css")` na `<link>` element, który ma ładować *Bootstrap. css* (patrz poniżej).
 
 * Usuń `@Scripts.Render("~/bundles/modernizr")`.
 
-* Dodaj komentarz do wiersza `@Html.Partial("_LoginPartial")` (Umieść wiersz z `@*...*@`em). Aby uzyskać więcej informacji [, zobacz Migrowanie uwierzytelniania i tożsamości do ASP.NET Core](xref:migration/identity)
+* Dodaj komentarz do `@Html.Partial("_LoginPartial")` wiersza (Otocz linią `@*...*@`). Aby uzyskać więcej informacji [, zobacz Migrowanie uwierzytelniania Identity i ASP.NET Core](xref:migration/identity)
 
-* Zastąp `@Scripts.Render("~/bundles/jquery")` elementem `<script>` (zobacz poniżej).
+* Zamień `@Scripts.Render("~/bundles/jquery")` na `<script>` element (patrz poniżej).
 
-* Zastąp `@Scripts.Render("~/bundles/bootstrap")` elementem `<script>` (zobacz poniżej).
+* Zamień `@Scripts.Render("~/bundles/bootstrap")` na `<script>` element (patrz poniżej).
 
 Znacznik zastępczy dla dołączania do ładowania początkowego:
 
@@ -196,13 +202,13 @@ Aby uzyskać informacje o sposobie konfigurowania grupowania i minifikacja, zoba
 
 ## <a name="solve-http-500-errors"></a>Rozwiązywanie błędów HTTP 500
 
-Istnieje wiele problemów, które mogą spowodować wyświetlenie komunikatu o błędzie HTTP 500, który nie zawiera żadnych informacji na temat źródła problemu. Na przykład, jeśli plik *views/_ViewImports. cshtml* zawiera przestrzeń nazw, która nie istnieje w projekcie, zostanie wyświetlony błąd HTTP 500. Domyślnie w aplikacjach ASP.NET Core rozszerzenie `UseDeveloperExceptionPage` jest dodawane do `IApplicationBuilder` i wykonywane podczas *opracowywania*konfiguracji. Jest to szczegółowo opisany w poniższym kodzie:
+Istnieje wiele problemów, które mogą spowodować wyświetlenie komunikatu o błędzie HTTP 500, który nie zawiera żadnych informacji na temat źródła problemu. Na przykład, jeśli plik *views/_ViewImports. cshtml* zawiera przestrzeń nazw, która nie istnieje w projekcie, zostanie wyświetlony błąd HTTP 500. Domyślnie w aplikacjach ASP.NET Core `UseDeveloperExceptionPage` rozszerzenie jest dodawane do `IApplicationBuilder` i wykonywane podczas *opracowywania*konfiguracji. Jest to szczegółowo opisany w poniższym kodzie:
 
 [!code-csharp[](mvc/sample/Startup.cs?highlight=19-22)]
 
 ASP.NET Core konwertuje Nieobsłużone wyjątki w aplikacji sieci Web do odpowiedzi na błędy HTTP 500. Zwykle szczegóły błędu nie są uwzględniane w tych odpowiedziach, aby zapobiec ujawnieniu potencjalnie poufnych informacji o serwerze. Aby uzyskać więcej informacji **, zobacz Używanie strony wyjątków dla deweloperów** w temacie [Obsługa błędów](../fundamentals/error-handling.md) .
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:blazor/index>
 * <xref:mvc/views/tag-helpers/intro>

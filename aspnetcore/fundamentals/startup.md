@@ -1,48 +1,54 @@
 ---
 title: Uruchamianie aplikacji w ASP.NET Core
 author: rick-anderson
-description: Dowiedz się, jak klasa Uruchamianie w ASP.NET Core konfiguruje usługi i potok żądań aplikacji.
+description: Dowiedz się, jak Klasa startowa w ASP.NET Core konfiguruje usługi i potok żądań aplikacji.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: fundamentals/startup
-ms.openlocfilehash: e3249df4b7388beeff13fe4b4e0ff481c35725c5
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 39fba5ccc99ec0ecf32df5681cfc025c52bc5469
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78667658"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776438"
 ---
 # <a name="app-startup-in-aspnet-core"></a>Uruchamianie aplikacji w ASP.NET Core
 
-Rick [Anderson](https://twitter.com/RickAndMSFT), [Tom Dykstra](https://github.com/tdykstra)i [Steve Smith](https://ardalis.com)
+Autorzy [Rick Anderson](https://twitter.com/RickAndMSFT), [Tomasz Dykstra](https://github.com/tdykstra)i [Steve Smith](https://ardalis.com)
 
-Klasa `Startup` konfiguruje usługi i potok żądań aplikacji.
+`Startup` Klasa konfiguruje usługi i potok żądań aplikacji.
 
 ::: moniker range=">= aspnetcore-3.0"
 
 ## <a name="the-startup-class"></a>Klasa Startup
 
-ASP.NET aplikacje Core `Startup` używają klasy, `Startup` która jest nazwana zgodnie z konwencją. Klasa `Startup`:
+Aplikacje ASP.NET Core używają `Startup` klasy, która jest nazywana `Startup` Konwencją. Klasa `Startup`:
 
-* Opcjonalnie zawiera <xref:Microsoft.AspNetCore.Hosting.StartupBase.ConfigureServices*> metodę konfigurowania *usług*aplikacji . Usługa jest składnikiem wielokrotnego użytku, który zapewnia funkcjonalność aplikacji. Usługi *registered* są `ConfigureServices` rejestrowane i używane w całej aplikacji za <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.ApplicationServices*>pomocą [iniekcji zależności (DI)](xref:fundamentals/dependency-injection) lub .
+* Opcjonalnie zawiera <xref:Microsoft.AspNetCore.Hosting.StartupBase.ConfigureServices*> metodę konfigurowania *usług*aplikacji. Usługa to składnik wielokrotnego użytku, który zapewnia funkcjonalność aplikacji. Usługi są *rejestrowane* `ConfigureServices` i zużywane przez aplikację za pośrednictwem [iniekcji zależności (di)](xref:fundamentals/dependency-injection) lub <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.ApplicationServices*>.
 * Zawiera <xref:Microsoft.AspNetCore.Hosting.StartupBase.Configure*> metodę tworzenia potoku przetwarzania żądań aplikacji.
 
-`ConfigureServices`i `Configure` są wywoływane przez ASP.NET Core środowiska uruchomieniowego po uruchomieniu aplikacji:
+`ConfigureServices`i `Configure` są wywoływane przez środowisko uruchomieniowe ASP.NET Core podczas uruchamiania aplikacji:
 
 [!code-csharp[](startup/3.0_samples/StartupFilterSample/Startup.cs?name=snippet)]
 
-Poprzednia próbka dotyczy [stron Razor;](xref:razor-pages/index) wersja MVC jest podobna.
+Powyższy przykład dotyczy [ Razor stron](xref:razor-pages/index); wersja MVC jest podobna.
 
 
-Klasa `Startup` jest określona podczas [budowy hosta](xref:fundamentals/index#host) aplikacji. Klasa `Startup` jest zazwyczaj określona przez wywołanie [WebHostBuilderExtensions.UseStartup\<TStartup>](xref:Microsoft.AspNetCore.Hosting.WebHostBuilderExtensions.UseStartup*) metody w konstruktorze hosta:
+`Startup` Klasa jest określana podczas kompilowania [hosta](xref:fundamentals/index#host) aplikacji. Klasa jest zwykle określona przez wywołanie metody [WebHostBuilderExtensions. UseStartup\<TStartup>](xref:Microsoft.AspNetCore.Hosting.WebHostBuilderExtensions.UseStartup*) na konstruktorze hosta: `Startup`
 
 [!code-csharp[](startup/3.0_samples/Program3.cs?name=snippet_Program&highlight=12)]
 
-Host udostępnia usługi, które `Startup` są dostępne dla konstruktora klasy. Aplikacja dodaje dodatkowe `ConfigureServices`usługi za pośrednictwem . Zarówno host, jak i `Configure` usługi aplikacji są dostępne w aplikacji i w całej aplikacji.
+Host udostępnia usługi, które są dostępne dla konstruktora `Startup` klasy. Aplikacja dodaje dodatkowe usługi za pośrednictwem `ConfigureServices`programu. Usługi hosta i aplikacji są dostępne w `Configure` systemach i w całej aplikacji.
 
-Tylko następujące typy usług mogą `Startup` być wstrzykiwane do konstruktora podczas korzystania z [hosta ogólnego](xref:fundamentals/host/generic-host) (<xref:Microsoft.Extensions.Hosting.IHostBuilder>):
+Tylko następujące typy usług można wstrzyknąć do konstruktora, `Startup` gdy jest używany [host generyczny](xref:fundamentals/host/generic-host) (<xref:Microsoft.Extensions.Hosting.IHostBuilder>):
 
 * <xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment>
 * <xref:Microsoft.Extensions.Hosting.IHostEnvironment>
@@ -50,100 +56,100 @@ Tylko następujące typy usług mogą `Startup` być wstrzykiwane do konstruktor
 
 [!code-csharp[](startup/3.0_samples/StartupFilterSample/StartUp2.cs?name=snippet)]
 
-Większość usług nie są `Configure` dostępne, dopóki metoda jest wywoływana.
+Większość usług nie jest dostępna do momentu wywołania `Configure` metody.
 
-### <a name="multiple-startup"></a>Wielokrotne uruchamianie
+### <a name="multiple-startup"></a>Wielokrotne uruchomienie
 
-Gdy aplikacja definiuje `Startup` oddzielne klasy dla różnych środowisk `StartupDevelopment`(na `Startup` przykład), odpowiednia klasa jest wybierana w czasie wykonywania. Klasa, której sufiks nazwy pasuje do bieżącego środowiska, jest traktowana priorytetowo. Jeśli aplikacja jest uruchamiana w środowisku `Startup` deweloperskim `StartupDevelopment` i `StartupDevelopment` zawiera zarówno klasę, jak i klasę, klasa jest używana. Aby uzyskać więcej informacji, zobacz [Używanie wielu środowisk](xref:fundamentals/environments#environment-based-startup-class-and-methods).
+Gdy aplikacja definiuje oddzielne `Startup` klasy dla różnych środowisk (na przykład `StartupDevelopment`), odpowiednia `Startup` Klasa jest wybierana w czasie wykonywania. Kategoria, której sufiks nazwy jest zgodny z bieżącym środowiskiem, ma priorytet. Jeśli aplikacja jest uruchamiana w środowisku deweloperskim i zawiera `Startup` klasę i `StartupDevelopment` klasę, używana jest `StartupDevelopment` Klasa. Aby uzyskać więcej informacji, zobacz [Korzystanie z wielu środowisk](xref:fundamentals/environments#environment-based-startup-class-and-methods).
 
-Zobacz [Host, aby](xref:fundamentals/index#host) uzyskać więcej informacji na temat hosta. Aby uzyskać informacje na temat obsługi błędów podczas [uruchamiania, zobacz Obsługa wyjątków uruchamiania](xref:fundamentals/error-handling#startup-exception-handling).
+Aby uzyskać więcej informacji na temat hosta, zobacz [hosta](xref:fundamentals/index#host) . Informacje dotyczące obsługi błędów podczas uruchamiania można znaleźć w temacie [Obsługa wyjątków uruchamiania](xref:fundamentals/error-handling#startup-exception-handling).
 
 ## <a name="the-configureservices-method"></a>Metoda ConfigureServices
 
-Metoda <xref:Microsoft.AspNetCore.Hosting.StartupBase.ConfigureServices*> jest:
+<xref:Microsoft.AspNetCore.Hosting.StartupBase.ConfigureServices*> Metoda jest:
 
-* Element opcjonalny.
+* Opcjonalny.
 * Wywoływane przez hosta przed `Configure` metodą konfigurowania usług aplikacji.
-* Gdzie [opcje konfiguracji](xref:fundamentals/configuration/index) są ustawiane przez konwencję.
+* Gdzie są ustawiane [Opcje konfiguracji](xref:fundamentals/configuration/index) zgodnie z Konwencją.
 
-Host może skonfigurować niektóre `Startup` usługi przed wywoływaniem metod. Aby uzyskać więcej informacji, zobacz [Host](xref:fundamentals/index#host).
+Przed `Startup` wywołaniem metod host może skonfigurować niektóre usługi. Aby uzyskać więcej informacji, zobacz [hosta](xref:fundamentals/index#host).
 
-W przypadku funkcji wymagających `Add{Service}` znacznej <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection>konfiguracji dostępne są metody rozszerzenia . Na przykład **Dodaj**DbContext, **Dodaj**domyślnąnietołowienie, **Dodaj**EntityFrameworkStores i **Dodaj**RazorPages:
+W przypadku funkcji wymagających znaczącej konfiguracji istnieją metody `Add{Service}` rozszerzające w <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection>systemie. Na przykład **Dodaj**DbContext, **Add**DefaultIdentity, **Add**EntityFrameworkStores i **Add**RazorPages:
 
 [!code-csharp[](startup/3.0_samples/StartupFilterSample/StartupIdentity.cs?name=snippet)]
 
-Dodawanie usług do kontenera usługi udostępnia je `Configure` w aplikacji i w metodzie. Usługi są rozwiązywane za pomocą <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.ApplicationServices*> [iniekcji zależności](xref:fundamentals/dependency-injection) lub z .
+Dodanie usług do kontenera usług sprawia, że są one dostępne w aplikacji i w `Configure` metodzie. Usługi są rozwiązywane za pośrednictwem [iniekcji zależności](xref:fundamentals/dependency-injection) lub z <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.ApplicationServices*>.
 
-## <a name="the-configure-method"></a>Metoda Konfiguruj
+## <a name="the-configure-method"></a>Metoda Configure
 
-Metoda <xref:Microsoft.AspNetCore.Hosting.StartupBase.Configure*> służy do określania, jak aplikacja reaguje na żądania HTTP. Potok żądań jest konfigurowany przez <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder> dodanie składników [oprogramowania pośredniczącego](xref:fundamentals/middleware/index) do wystąpienia. `IApplicationBuilder`jest dostępna `Configure` dla metody, ale nie jest zarejestrowana w kontenerze usługi. Hosting tworzy `IApplicationBuilder` i przekazuje go `Configure`bezpośrednio do .
+<xref:Microsoft.AspNetCore.Hosting.StartupBase.Configure*> Metoda służy do określania, w jaki sposób aplikacja reaguje na żądania HTTP. Potok żądań jest konfigurowany przez dodanie do <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder> wystąpienia składników [pośredniczących](xref:fundamentals/middleware/index) . `IApplicationBuilder`jest dostępny dla `Configure` metody, ale nie jest ona zarejestrowana w kontenerze usługi. Hosting tworzy `IApplicationBuilder` i przekazuje go bezpośrednio do programu `Configure`.
 
-[Szablony ASP.NET Core konfigurują](/dotnet/core/tools/dotnet-new) potok z obsługą:
+[Szablony ASP.NET Core](/dotnet/core/tools/dotnet-new) konfigurują potok z obsługą:
 
-* [Strona wyjątku dla deweloperów](xref:fundamentals/error-handling#developer-exception-page)
-* [Obsługa wyjątków](xref:fundamentals/error-handling#exception-handler-page)
-* [Ścisłe bezpieczeństwo transportu HTTP (HSTS)](xref:security/enforcing-ssl#http-strict-transport-security-protocol-hsts)
+* [Strona wyjątków dla deweloperów](xref:fundamentals/error-handling#developer-exception-page)
+* [Procedura obsługi wyjątków](xref:fundamentals/error-handling#exception-handler-page)
+* [Zabezpieczenia protokołu HTTP Strict Transport (HSTS)](xref:security/enforcing-ssl#http-strict-transport-security-protocol-hsts)
 * [Przekierowanie HTTPS](xref:security/enforcing-ssl)
 * [Pliki statyczne](xref:fundamentals/static-files)
-* ASP.NET [podstawowych stron](xref:razor-pages/index) [MVC](xref:mvc/overview) i razor
+* ASP.NET Core [MVC](xref:mvc/overview) i [ Razor strony](xref:razor-pages/index)
 
 
 [!code-csharp[](startup/3.0_samples/StartupFilterSample/Startup.cs?name=snippet)]
 
-Poprzednia próbka dotyczy [stron Razor;](xref:razor-pages/index) wersja MVC jest podobna.
+Powyższy przykład dotyczy [ Razor stron](xref:razor-pages/index); wersja MVC jest podobna.
 
-Każda `Use` metoda rozszerzenia dodaje jeden lub więcej składników oprogramowania pośredniczącego do potoku żądań. Na przykład <xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles*> konfiguruje [oprogramowanie pośredniczące](xref:fundamentals/middleware/index) do obsługi [plików statycznych](xref:fundamentals/static-files).
+Każda `Use` Metoda rozszerzenia dodaje jeden lub więcej składników pośredniczących do potoku żądania. Na przykład program <xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles*> skonfiguruje [oprogramowanie pośredniczące](xref:fundamentals/middleware/index) , aby obsługiwało [pliki statyczne](xref:fundamentals/static-files).
 
-Każdy składnik oprogramowania pośredniczącego w potoku żądań jest odpowiedzialny za wywoływanie następnego składnika w potoku lub zwarcie łańcucha, jeśli to konieczne.
+Każdy składnik pośredniczący w potoku żądania jest odpowiedzialny za wywoływanie następnego składnika w potoku lub krótkiego obwodu łańcucha, jeśli jest to konieczne.
 
-Dodatkowe usługi, `IWebHostEnvironment`takie `ILoggerFactory`jak , `ConfigureServices`lub cokolwiek zdefiniowanego w , można określić w podpisie `Configure` metody. Te usługi są wstrzykiwane, jeśli są one dostępne.
+Dodatkowe usługi, takie jak `IWebHostEnvironment`, `ILoggerFactory`lub dowolne elementy zdefiniowane w `ConfigureServices`programie, można określić w podpisie `Configure` metody. Te usługi są wstrzykiwane, jeśli są dostępne.
 
-Aby uzyskać więcej informacji `IApplicationBuilder` na temat sposobu korzystania <xref:fundamentals/middleware/index>z oprogramowania pośredniczącego i kolejności przetwarzania oprogramowania pośredniczącego, zobacz .
+Aby uzyskać więcej informacji na temat sposobu `IApplicationBuilder` użycia i kolejności przetwarzania oprogramowania pośredniczącego, zobacz <xref:fundamentals/middleware/index>.
 
 <a name="convenience-methods"></a>
 
 ## <a name="configure-services-without-startup"></a>Konfigurowanie usług bez uruchamiania
 
-Aby skonfigurować usługi i potok przetwarzania `Startup` żądań `ConfigureServices` `Configure` bez użycia klasy, wywołania i wygody metod na konstruktora hosta. Wiele wywołań do `ConfigureServices` dołączenia do siebie. Jeśli `Configure` istnieje wiele wywołań `Configure` metody, używane jest ostatnie wywołanie.
+Aby skonfigurować usługi i potok przetwarzania żądań bez użycia `Startup` klas, wywołań `ConfigureServices` i `Configure` wygodnych metod w konstruktorze hosta. Wiele wywołań do `ConfigureServices` dołączenia do siebie nawzajem. Jeśli istnieje `Configure` wiele wywołań metod, używane jest `Configure` ostatnie wywołanie.
 
 [!code-csharp[](startup/3.0_samples/StartupFilterSample/Program1.cs?name=snippet)]
 
-## <a name="extend-startup-with-startup-filters"></a>Rozszerzanie uruchamiania za pomocą filtrów startowych
+## <a name="extend-startup-with-startup-filters"></a>Zwiększanie uruchamiania przy użyciu filtrów uruchamiania
 
-Zastosowanie: <xref:Microsoft.AspNetCore.Hosting.IStartupFilter>
+Użyj <xref:Microsoft.AspNetCore.Hosting.IStartupFilter>:
 
-* Aby skonfigurować oprogramowanie pośredniczące na początku lub na końcu potoku [Konfigurowanie](#the-configure-method) oprogramowania pośredniczącego aplikacji bez wyraźnego wywołania `Use{Middleware}`. `IStartupFilter`jest używany przez ASP.NET Core, aby dodać wartości domyślne na początku potoku bez konieczności jawnego rejestrowania domyślnego oprogramowania pośredniczącego przez autora aplikacji. `IStartupFilter`umożliwia inne wywołanie `Use{Middleware}` składnika w imieniu autora aplikacji.
-* Aby utworzyć potok `Configure` metod. [IStartupFilter.Configure](xref:Microsoft.AspNetCore.Hosting.IStartupFilter.Configure*) można ustawić oprogramowanie pośredniczące do uruchamiania przed lub po oprogramowania pośredniczącego dodane przez biblioteki.
+* Aby skonfigurować oprogramowanie pośredniczące na początku lub na końcu aplikacji [Skonfiguruj](#the-configure-method) potok oprogramowania pośredniczącego bez jawnego wywołania do programu `Use{Middleware}`. `IStartupFilter`jest używany przez ASP.NET Core, aby dodać wartości domyślne do początku potoku bez konieczności jawnego rejestrowania przez autora aplikacji domyślnego oprogramowania pośredniczącego. `IStartupFilter`umożliwia innym wywołaniem `Use{Middleware}` składnika w imieniu autora aplikacji.
+* Do utworzenia potoku `Configure` metod. [IStartupFilter. configure](xref:Microsoft.AspNetCore.Hosting.IStartupFilter.Configure*) może ustawić oprogramowanie pośredniczące do uruchomienia przed lub po oprogramowaniu pośredniczącym dodanym przez biblioteki.
 
-`IStartupFilter`implementuje <xref:Microsoft.AspNetCore.Hosting.StartupBase.Configure*>, który odbiera `Action<IApplicationBuilder>`i zwraca . Definiuje <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder> klasę, aby skonfigurować potok żądania aplikacji. Aby uzyskać więcej informacji, zobacz [Tworzenie potoku oprogramowania pośredniczącego za pomocą aplikacji IApplicationBuilder](xref:fundamentals/middleware/index#create-a-middleware-pipeline-with-iapplicationbuilder).
+`IStartupFilter`implementuje <xref:Microsoft.AspNetCore.Hosting.StartupBase.Configure*>, który odbiera i zwraca `Action<IApplicationBuilder>`. <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder> Definiuje klasę, aby skonfigurować potok żądania aplikacji. Aby uzyskać więcej informacji, zobacz [Tworzenie potoku oprogramowania pośredniczącego za pomocą IApplicationBuilder](xref:fundamentals/middleware/index#create-a-middleware-pipeline-with-iapplicationbuilder).
 
-Każdy `IStartupFilter` można dodać jeden lub więcej oprogramowania pośredniczącego w potoku żądania. Filtry są wywoływane w kolejności, w jakiej zostały dodane do kontenera usługi. Filtry mogą dodawać oprogramowanie pośredniczące przed lub po przekazaniu formantu do następnego filtru, w związku z czym dołączają do początku lub końca potoku aplikacji.
+Każdy `IStartupFilter` z nich może dodać jeden lub więcej middlewares w potoku żądania. Filtry są wywoływane w kolejności, w jakiej zostały dodane do kontenera usługi. Filtry mogą dodać oprogramowanie pośredniczące przed lub po przekazaniu kontroli do następnego filtru, w związku z czym dołączają do początku lub na końcu potoku aplikacji.
 
-W poniższym przykładzie pokazano, jak `IStartupFilter`zarejestrować oprogramowanie pośredniczące w pliku . Oprogramowanie `RequestSetOptionsMiddleware` pośredniczące ustawia wartość opcji z parametru ciągu zapytania:
+Poniższy przykład pokazuje, jak zarejestrować oprogramowanie pośredniczące w programie `IStartupFilter`. `RequestSetOptionsMiddleware` Oprogramowanie pośredniczące ustawia wartość opcji z parametru ciągu zapytania:
 
 [!code-csharp[](startup/3.0_samples/StartupFilterSample/RequestSetOptionsMiddleware.cs?name=snippet1)]
 
-Jest `RequestSetOptionsMiddleware` skonfigurowany w `RequestSetOptionsStartupFilter` klasie:
+`RequestSetOptionsMiddleware` Jest skonfigurowany w `RequestSetOptionsStartupFilter` klasie:
 
 [!code-csharp[](startup/3.0_samples/StartupFilterSample/RequestSetOptionsStartupFilter.cs?name=snippet1&highlight=7)]
 
-Jest `IStartupFilter` zarejestrowany w kontenerze <xref:Microsoft.AspNetCore.Hosting.StartupBase.ConfigureServices*>serwisowym w .
+`IStartupFilter` Jest zarejestrowany w kontenerze usługi w <xref:Microsoft.AspNetCore.Hosting.StartupBase.ConfigureServices*>.
 
 [!code-csharp[](startup/3.0_samples/StartupFilterSample/Program.cs?name=snippet&highlight=19-20)]
 
-Po podaniu `option` parametru ciągu zapytania oprogramowanie pośredniczące przetwarza przypisanie wartości, zanim oprogramowanie pośredniczące ASP.NET Core renderuje odpowiedź.
+Po podaniu parametru `option` ciągu zapytania, oprogramowanie pośredniczące przetwarza przypisanie wartości przed wyrenderowaniem przez ASP.NET Core oprogramowanie pośredniczące.
 
-Zlecenie wykonania oprogramowania pośredniczącego `IStartupFilter` jest ustawiane według kolejności rejestracji:
+Kolejność wykonywania oprogramowania pośredniczącego jest określana na podstawie `IStartupFilter` kolejności rejestracji:
 
-* Wiele `IStartupFilter` implementacji może wchodzić w interakcje z tymi samymi obiektami. Jeśli zamawianie jest ważne, zamów ich `IStartupFilter` rejestracje usługi, aby dopasować kolejność, że ich oprogramowanie pośredniczące powinny działać.
-* Biblioteki mogą dodawać oprogramowanie `IStartupFilter` pośredniczące z jedną lub kilkoma implementacjami, które są uruchamiane przed lub po zarejestrowaniu `IStartupFilter`innego oprogramowania pośredniczącego aplikacji . Aby wywołać `IStartupFilter` oprogramowanie pośredniczące przed oprogramowaniem `IStartupFilter`pośredniczącym dodanym przez bibliotekę:
+* Wiele `IStartupFilter` implementacji może współistnieć z tymi samymi obiektami. Jeśli kolejność jest ważna, określ kolejność `IStartupFilter` rejestracji usług w celu dopasowania ich do kolejności, w jakiej middlewares powinny działać.
+* Biblioteki mogą dodawać oprogramowanie pośredniczące z co najmniej `IStartupFilter` jedną implementacją, która jest uruchamiana przed lub po innym `IStartupFilter`oprogramowaniu pośredniczącym aplikacji zarejestrowanym w usłudze. Aby wywołać `IStartupFilter` oprogramowanie pośredniczące przed dodaniem oprogramowania pośredniczącego przez bibliotekę `IStartupFilter`:
 
   * Umieść rejestrację usługi przed dodaniem biblioteki do kontenera usługi.
-  * Aby wywołać później, umieść rejestrację usługi po dodaniu biblioteki.
+  * Aby później wywołać, należy ustawić rejestrację usługi po dodaniu biblioteki.
 
-## <a name="add-configuration-at-startup-from-an-external-assembly"></a>Dodawanie konfiguracji przy uruchamianiu z zestawu zewnętrznego
+## <a name="add-configuration-at-startup-from-an-external-assembly"></a>Dodaj konfigurację podczas uruchamiania z zestawu zewnętrznego
 
-Implementacja <xref:Microsoft.AspNetCore.Hosting.IHostingStartup> umożliwia dodawanie ulepszeń do aplikacji podczas uruchamiania `Startup` z zewnętrznego zestawu poza klasą aplikacji. Aby uzyskać więcej informacji, zobacz <xref:fundamentals/configuration/platform-specific-configuration>.
+<xref:Microsoft.AspNetCore.Hosting.IHostingStartup> Implementacja umożliwia dodawanie ulepszeń do aplikacji podczas uruchamiania z zewnętrznego zestawu poza `Startup` klasą aplikacji. Aby uzyskać więcej informacji, zobacz <xref:fundamentals/configuration/platform-specific-configuration>.
 
 ## <a name="additional-resources"></a>Zasoby dodatkowe
 
@@ -159,123 +165,123 @@ Implementacja <xref:Microsoft.AspNetCore.Hosting.IHostingStartup> umożliwia dod
 
 ## <a name="the-startup-class"></a>Klasa Startup
 
-ASP.NET aplikacje Core `Startup` używają klasy, `Startup` która jest nazwana zgodnie z konwencją. Klasa `Startup`:
+Aplikacje ASP.NET Core używają `Startup` klasy, która jest nazywana `Startup` Konwencją. Klasa `Startup`:
 
-* Opcjonalnie zawiera <xref:Microsoft.AspNetCore.Hosting.StartupBase.ConfigureServices*> metodę konfigurowania *usług*aplikacji . Usługa jest składnikiem wielokrotnego użytku, który zapewnia funkcjonalność aplikacji. Usługi *registered* są `ConfigureServices` rejestrowane i używane w całej aplikacji za <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.ApplicationServices*>pomocą [iniekcji zależności (DI)](xref:fundamentals/dependency-injection) lub .
+* Opcjonalnie zawiera <xref:Microsoft.AspNetCore.Hosting.StartupBase.ConfigureServices*> metodę konfigurowania *usług*aplikacji. Usługa to składnik wielokrotnego użytku, który zapewnia funkcjonalność aplikacji. Usługi są *rejestrowane* `ConfigureServices` i zużywane przez aplikację za pośrednictwem [iniekcji zależności (di)](xref:fundamentals/dependency-injection) lub <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.ApplicationServices*>.
 * Zawiera <xref:Microsoft.AspNetCore.Hosting.StartupBase.Configure*> metodę tworzenia potoku przetwarzania żądań aplikacji.
 
-`ConfigureServices`i `Configure` są wywoływane przez ASP.NET Core środowiska uruchomieniowego po uruchomieniu aplikacji:
+`ConfigureServices`i `Configure` są wywoływane przez środowisko uruchomieniowe ASP.NET Core podczas uruchamiania aplikacji:
 
 [!code-csharp[](startup/sample_snapshot/Startup1.cs)]
 
-Klasa `Startup` jest określona podczas [budowy hosta](xref:fundamentals/index#host) aplikacji. Klasa `Startup` jest zazwyczaj określona przez wywołanie [WebHostBuilderExtensions.UseStartup\<TStartup>](xref:Microsoft.AspNetCore.Hosting.WebHostBuilderExtensions.UseStartup*) metody w konstruktorze hosta:
+`Startup` Klasa jest określana podczas kompilowania [hosta](xref:fundamentals/index#host) aplikacji. Klasa jest zwykle określona przez wywołanie metody [WebHostBuilderExtensions. UseStartup\<TStartup>](xref:Microsoft.AspNetCore.Hosting.WebHostBuilderExtensions.UseStartup*) na konstruktorze hosta: `Startup`
 
 [!code-csharp[](startup/sample_snapshot/Program3.cs?name=snippet_Program&highlight=12)]
 
-Host udostępnia usługi, które `Startup` są dostępne dla konstruktora klasy. Aplikacja dodaje dodatkowe `ConfigureServices`usługi za pośrednictwem . Usługi hosta i aplikacji są `Configure` następnie dostępne w aplikacji i w całej aplikacji.
+Host udostępnia usługi, które są dostępne dla konstruktora `Startup` klasy. Aplikacja dodaje dodatkowe usługi za pośrednictwem `ConfigureServices`programu. Zarówno usługi hosta, jak i aplikacje są dostępne w `Configure` systemie i w całej aplikacji.
 
-Częstym zastosowaniem [iniekcji zależności](xref:fundamentals/dependency-injection) do `Startup` klasy jest wstrzyknięcie:
+Typowym zastosowaniem [iniekcji zależności](xref:fundamentals/dependency-injection) do `Startup` klasy jest wstrzyknięcie:
 
-* <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment>, aby skonfigurować usługi według środowiska.
-* <xref:Microsoft.Extensions.Configuration.IConfiguration>, aby odczytać konfigurację.
-* <xref:Microsoft.Extensions.Logging.ILoggerFactory>, aby utworzyć `Startup.ConfigureServices`rejestrator w pliku .
+* <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment>Aby skonfigurować usługi według środowiska.
+* <xref:Microsoft.Extensions.Configuration.IConfiguration>Aby odczytać konfigurację.
+* <xref:Microsoft.Extensions.Logging.ILoggerFactory>do utworzenia rejestratora w `Startup.ConfigureServices`programie.
 
 [!code-csharp[](startup/sample_snapshot/Startup2.cs?highlight=7-8)]
 
-Większość usług nie są `Configure` dostępne, dopóki metoda jest wywoływana.
+Większość usług nie jest dostępna do momentu wywołania `Configure` metody.
 
-### <a name="multiple-startup"></a>Wielokrotne uruchamianie
+### <a name="multiple-startup"></a>Wielokrotne uruchomienie
 
-Gdy aplikacja definiuje `Startup` oddzielne klasy dla różnych środowisk `StartupDevelopment`(na `Startup` przykład), odpowiednia klasa jest wybierana w czasie wykonywania. Klasa, której sufiks nazwy pasuje do bieżącego środowiska, jest traktowana priorytetowo. Jeśli aplikacja jest uruchamiana w środowisku `Startup` deweloperskim `StartupDevelopment` i `StartupDevelopment` zawiera zarówno klasę, jak i klasę, klasa jest używana. Aby uzyskać więcej informacji, zobacz [Używanie wielu środowisk](xref:fundamentals/environments#environment-based-startup-class-and-methods).
+Gdy aplikacja definiuje oddzielne `Startup` klasy dla różnych środowisk (na przykład `StartupDevelopment`), odpowiednia `Startup` Klasa jest wybierana w czasie wykonywania. Kategoria, której sufiks nazwy jest zgodny z bieżącym środowiskiem, ma priorytet. Jeśli aplikacja jest uruchamiana w środowisku deweloperskim i zawiera `Startup` klasę i `StartupDevelopment` klasę, używana jest `StartupDevelopment` Klasa. Aby uzyskać więcej informacji, zobacz [Korzystanie z wielu środowisk](xref:fundamentals/environments#environment-based-startup-class-and-methods).
 
-Zobacz [Host, aby](xref:fundamentals/index#host) uzyskać więcej informacji na temat hosta. Aby uzyskać informacje na temat obsługi błędów podczas [uruchamiania, zobacz Obsługa wyjątków uruchamiania](xref:fundamentals/error-handling#startup-exception-handling).
+Aby uzyskać więcej informacji na temat hosta, zobacz [hosta](xref:fundamentals/index#host) . Informacje dotyczące obsługi błędów podczas uruchamiania można znaleźć w temacie [Obsługa wyjątków uruchamiania](xref:fundamentals/error-handling#startup-exception-handling).
 
 ## <a name="the-configureservices-method"></a>Metoda ConfigureServices
 
-Metoda <xref:Microsoft.AspNetCore.Hosting.StartupBase.ConfigureServices*> jest:
+<xref:Microsoft.AspNetCore.Hosting.StartupBase.ConfigureServices*> Metoda jest:
 
-* Element opcjonalny.
+* Opcjonalny.
 * Wywoływane przez hosta przed `Configure` metodą konfigurowania usług aplikacji.
-* Gdzie [opcje konfiguracji](xref:fundamentals/configuration/index) są ustawiane przez konwencję.
+* Gdzie są ustawiane [Opcje konfiguracji](xref:fundamentals/configuration/index) zgodnie z Konwencją.
 
-Host może skonfigurować niektóre `Startup` usługi przed wywoływaniem metod. Aby uzyskać więcej informacji, zobacz [Host](xref:fundamentals/index#host).
+Przed `Startup` wywołaniem metod host może skonfigurować niektóre usługi. Aby uzyskać więcej informacji, zobacz [hosta](xref:fundamentals/index#host).
 
-W przypadku funkcji wymagających `Add{Service}` znacznej <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection>konfiguracji dostępne są metody rozszerzenia . Na przykład **Dodaj**DbContext, **Dodaj**domyślnąnietołowienie, **Dodaj**EntityFrameworkStores i **Dodaj**RazorPages:
+W przypadku funkcji wymagających znaczącej konfiguracji istnieją metody `Add{Service}` rozszerzające w <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection>systemie. Na przykład **Dodaj**DbContext, **Add**DefaultIdentity, **Add**EntityFrameworkStores i **Add**RazorPages:
 
 [!code-csharp[](startup/sample_snapshot/Startup3.cs)]
 
-Dodawanie usług do kontenera usługi udostępnia je `Configure` w aplikacji i w metodzie. Usługi są rozwiązywane za pomocą <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.ApplicationServices*> [iniekcji zależności](xref:fundamentals/dependency-injection) lub z .
+Dodanie usług do kontenera usług sprawia, że są one dostępne w aplikacji i w `Configure` metodzie. Usługi są rozwiązywane za pośrednictwem [iniekcji zależności](xref:fundamentals/dependency-injection) lub z <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.ApplicationServices*>.
 
-Aby [SetCompatibilityVersion](xref:mvc/compatibility-version) uzyskać więcej informacji na `SetCompatibilityVersion`temat temat .
+Aby [SetCompatibilityVersion](xref:mvc/compatibility-version) uzyskać więcej informacji, zobacz `SetCompatibilityVersion`SetCompatibilityVersion.
 
-## <a name="the-configure-method"></a>Metoda Konfiguruj
+## <a name="the-configure-method"></a>Metoda Configure
 
-Metoda <xref:Microsoft.AspNetCore.Hosting.StartupBase.Configure*> służy do określania, jak aplikacja reaguje na żądania HTTP. Potok żądań jest konfigurowany przez <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder> dodanie składników [oprogramowania pośredniczącego](xref:fundamentals/middleware/index) do wystąpienia. `IApplicationBuilder`jest dostępna `Configure` dla metody, ale nie jest zarejestrowana w kontenerze usługi. Hosting tworzy `IApplicationBuilder` i przekazuje go `Configure`bezpośrednio do .
+<xref:Microsoft.AspNetCore.Hosting.StartupBase.Configure*> Metoda służy do określania, w jaki sposób aplikacja reaguje na żądania HTTP. Potok żądań jest konfigurowany przez dodanie do <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder> wystąpienia składników [pośredniczących](xref:fundamentals/middleware/index) . `IApplicationBuilder`jest dostępny dla `Configure` metody, ale nie jest ona zarejestrowana w kontenerze usługi. Hosting tworzy `IApplicationBuilder` i przekazuje go bezpośrednio do programu `Configure`.
 
-[Szablony ASP.NET Core konfigurują](/dotnet/core/tools/dotnet-new) potok z obsługą:
+[Szablony ASP.NET Core](/dotnet/core/tools/dotnet-new) konfigurują potok z obsługą:
 
-* [Strona wyjątku dla deweloperów](xref:fundamentals/error-handling#developer-exception-page)
-* [Obsługa wyjątków](xref:fundamentals/error-handling#exception-handler-page)
-* [Ścisłe bezpieczeństwo transportu HTTP (HSTS)](xref:security/enforcing-ssl#http-strict-transport-security-protocol-hsts)
+* [Strona wyjątków dla deweloperów](xref:fundamentals/error-handling#developer-exception-page)
+* [Procedura obsługi wyjątków](xref:fundamentals/error-handling#exception-handler-page)
+* [Zabezpieczenia protokołu HTTP Strict Transport (HSTS)](xref:security/enforcing-ssl#http-strict-transport-security-protocol-hsts)
 * [Przekierowanie HTTPS](xref:security/enforcing-ssl)
 * [Pliki statyczne](xref:fundamentals/static-files)
-* ASP.NET [podstawowych stron](xref:razor-pages/index) [MVC](xref:mvc/overview) i razor
-* [Ogólne rozporządzenie o ochronie danych (RODO)](xref:security/gdpr)
+* ASP.NET Core [MVC](xref:mvc/overview) i [ Razor strony](xref:razor-pages/index)
+* [Ogólne rozporządzenie o ochronie danych (Rodo)](xref:security/gdpr)
 
 [!code-csharp[](startup/sample_snapshot/Startup4.cs)]
 
-Każda `Use` metoda rozszerzenia dodaje jeden lub więcej składników oprogramowania pośredniczącego do potoku żądań. Na przykład <xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles*> konfiguruje [oprogramowanie pośredniczące](xref:fundamentals/middleware/index) do obsługi [plików statycznych](xref:fundamentals/static-files).
+Każda `Use` Metoda rozszerzenia dodaje jeden lub więcej składników pośredniczących do potoku żądania. Na przykład program <xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles*> skonfiguruje [oprogramowanie pośredniczące](xref:fundamentals/middleware/index) , aby obsługiwało [pliki statyczne](xref:fundamentals/static-files).
 
-Każdy składnik oprogramowania pośredniczącego w potoku żądań jest odpowiedzialny za wywoływanie następnego składnika w potoku lub zwarcie łańcucha, jeśli to konieczne.
+Każdy składnik pośredniczący w potoku żądania jest odpowiedzialny za wywoływanie następnego składnika w potoku lub krótkiego obwodu łańcucha, jeśli jest to konieczne.
 
-Dodatkowe usługi, `IHostingEnvironment` takie `ILoggerFactory`jak i `ConfigureServices`, lub cokolwiek `Configure` zdefiniowanego w , można określić w podpisie metody. Te usługi są wstrzykiwane, jeśli są one dostępne.
+Dodatkowe usługi, takie jak `IHostingEnvironment` i `ILoggerFactory`lub dowolne elementy zdefiniowane w `ConfigureServices`programie, można określić w podpisie `Configure` metody. Te usługi są wstrzykiwane, jeśli są dostępne.
 
-Aby uzyskać więcej informacji `IApplicationBuilder` na temat sposobu korzystania <xref:fundamentals/middleware/index>z oprogramowania pośredniczącego i kolejności przetwarzania oprogramowania pośredniczącego, zobacz .
+Aby uzyskać więcej informacji na temat sposobu `IApplicationBuilder` użycia i kolejności przetwarzania oprogramowania pośredniczącego, zobacz <xref:fundamentals/middleware/index>.
 
 <a name="convenience-methods"></a>
 
 ## <a name="configure-services-without-startup"></a>Konfigurowanie usług bez uruchamiania
 
-Aby skonfigurować usługi i potok przetwarzania `Startup` żądań `ConfigureServices` `Configure` bez użycia klasy, wywołania i wygody metod na konstruktora hosta. Wiele wywołań do `ConfigureServices` dołączenia do siebie. Jeśli `Configure` istnieje wiele wywołań `Configure` metody, używane jest ostatnie wywołanie.
+Aby skonfigurować usługi i potok przetwarzania żądań bez użycia `Startup` klas, wywołań `ConfigureServices` i `Configure` wygodnych metod w konstruktorze hosta. Wiele wywołań do `ConfigureServices` dołączenia do siebie nawzajem. Jeśli istnieje `Configure` wiele wywołań metod, używane jest `Configure` ostatnie wywołanie.
 
 [!code-csharp[](startup/sample_snapshot/Program1.cs?highlight=16,20)]
 
-## <a name="extend-startup-with-startup-filters"></a>Rozszerzanie uruchamiania za pomocą filtrów startowych
+## <a name="extend-startup-with-startup-filters"></a>Zwiększanie uruchamiania przy użyciu filtrów uruchamiania
 
-Zastosowanie: <xref:Microsoft.AspNetCore.Hosting.IStartupFilter>
+Użyj <xref:Microsoft.AspNetCore.Hosting.IStartupFilter>:
 
-* Aby skonfigurować oprogramowanie pośredniczące na początku lub na końcu potoku [Konfigurowanie](#the-configure-method) oprogramowania pośredniczącego aplikacji bez wyraźnego wywołania `Use{Middleware}`. `IStartupFilter`jest używany przez ASP.NET Core, aby dodać wartości domyślne na początku potoku bez konieczności jawnego rejestrowania domyślnego oprogramowania pośredniczącego przez autora aplikacji. `IStartupFilter`umożliwia inne wywołanie `Use{Middleware}` składnika w imieniu autora aplikacji.
-* Aby utworzyć potok `Configure` metod. [IStartupFilter.Configure](xref:Microsoft.AspNetCore.Hosting.IStartupFilter.Configure*) można ustawić oprogramowanie pośredniczące do uruchamiania przed lub po oprogramowania pośredniczącego dodane przez biblioteki.
+* Aby skonfigurować oprogramowanie pośredniczące na początku lub na końcu aplikacji [Skonfiguruj](#the-configure-method) potok oprogramowania pośredniczącego bez jawnego wywołania do programu `Use{Middleware}`. `IStartupFilter`jest używany przez ASP.NET Core, aby dodać wartości domyślne do początku potoku bez konieczności jawnego rejestrowania przez autora aplikacji domyślnego oprogramowania pośredniczącego. `IStartupFilter`umożliwia innym wywołaniem `Use{Middleware}` składnika w imieniu autora aplikacji.
+* Do utworzenia potoku `Configure` metod. [IStartupFilter. configure](xref:Microsoft.AspNetCore.Hosting.IStartupFilter.Configure*) może ustawić oprogramowanie pośredniczące do uruchomienia przed lub po oprogramowaniu pośredniczącym dodanym przez biblioteki.
 
-`IStartupFilter`implementuje <xref:Microsoft.AspNetCore.Hosting.StartupBase.Configure*>, który odbiera `Action<IApplicationBuilder>`i zwraca . Definiuje <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder> klasę, aby skonfigurować potok żądania aplikacji. Aby uzyskać więcej informacji, zobacz [Tworzenie potoku oprogramowania pośredniczącego za pomocą aplikacji IApplicationBuilder](xref:fundamentals/middleware/index#create-a-middleware-pipeline-with-iapplicationbuilder).
+`IStartupFilter`implementuje <xref:Microsoft.AspNetCore.Hosting.StartupBase.Configure*>, który odbiera i zwraca `Action<IApplicationBuilder>`. <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder> Definiuje klasę, aby skonfigurować potok żądania aplikacji. Aby uzyskać więcej informacji, zobacz [Tworzenie potoku oprogramowania pośredniczącego za pomocą IApplicationBuilder](xref:fundamentals/middleware/index#create-a-middleware-pipeline-with-iapplicationbuilder).
 
-Każdy `IStartupFilter` można dodać jeden lub więcej oprogramowania pośredniczącego w potoku żądania. Filtry są wywoływane w kolejności, w jakiej zostały dodane do kontenera usługi. Filtry mogą dodawać oprogramowanie pośredniczące przed lub po przekazaniu formantu do następnego filtru, w związku z czym dołączają do początku lub końca potoku aplikacji.
+Każdy `IStartupFilter` z nich może dodać jeden lub więcej middlewares w potoku żądania. Filtry są wywoływane w kolejności, w jakiej zostały dodane do kontenera usługi. Filtry mogą dodać oprogramowanie pośredniczące przed lub po przekazaniu kontroli do następnego filtru, w związku z czym dołączają do początku lub na końcu potoku aplikacji.
 
-W poniższym przykładzie pokazano, jak `IStartupFilter`zarejestrować oprogramowanie pośredniczące w pliku . Oprogramowanie `RequestSetOptionsMiddleware` pośredniczące ustawia wartość opcji z parametru ciągu zapytania:
+Poniższy przykład pokazuje, jak zarejestrować oprogramowanie pośredniczące w programie `IStartupFilter`. `RequestSetOptionsMiddleware` Oprogramowanie pośredniczące ustawia wartość opcji z parametru ciągu zapytania:
 
 [!code-csharp[](startup/sample_snapshot/RequestSetOptionsMiddleware.cs?name=snippet1&highlight=21)]
 
-Jest `RequestSetOptionsMiddleware` skonfigurowany w `RequestSetOptionsStartupFilter` klasie:
+`RequestSetOptionsMiddleware` Jest skonfigurowany w `RequestSetOptionsStartupFilter` klasie:
 
 [!code-csharp[](startup/sample_snapshot/RequestSetOptionsStartupFilter.cs?name=snippet1&highlight=7)]
 
-Jest `IStartupFilter` zarejestrowany w kontenerze <xref:Microsoft.AspNetCore.Hosting.StartupBase.ConfigureServices*>serwisowym w .
+`IStartupFilter` Jest zarejestrowany w kontenerze usługi w <xref:Microsoft.AspNetCore.Hosting.StartupBase.ConfigureServices*>.
 
 [!code-csharp[](startup/sample_snapshot/Program2.cs?name=snippet1&highlight=4-5)]
 
-Po podaniu `option` parametru ciągu zapytania oprogramowanie pośredniczące przetwarza przypisanie wartości, zanim oprogramowanie pośredniczące ASP.NET Core renderuje odpowiedź.
+Po podaniu parametru `option` ciągu zapytania, oprogramowanie pośredniczące przetwarza przypisanie wartości przed wyrenderowaniem przez ASP.NET Core oprogramowanie pośredniczące.
 
-Zlecenie wykonania oprogramowania pośredniczącego `IStartupFilter` jest ustawiane według kolejności rejestracji:
+Kolejność wykonywania oprogramowania pośredniczącego jest określana na podstawie `IStartupFilter` kolejności rejestracji:
 
-* Wiele `IStartupFilter` implementacji może wchodzić w interakcje z tymi samymi obiektami. Jeśli zamawianie jest ważne, zamów ich `IStartupFilter` rejestracje usługi, aby dopasować kolejność, że ich oprogramowanie pośredniczące powinny działać.
-* Biblioteki mogą dodawać oprogramowanie `IStartupFilter` pośredniczące z jedną lub kilkoma implementacjami, które są uruchamiane przed lub po zarejestrowaniu `IStartupFilter`innego oprogramowania pośredniczącego aplikacji . Aby wywołać `IStartupFilter` oprogramowanie pośredniczące przed oprogramowaniem `IStartupFilter`pośredniczącym dodanym przez bibliotekę:
+* Wiele `IStartupFilter` implementacji może współistnieć z tymi samymi obiektami. Jeśli kolejność jest ważna, określ kolejność `IStartupFilter` rejestracji usług w celu dopasowania ich do kolejności, w jakiej middlewares powinny działać.
+* Biblioteki mogą dodawać oprogramowanie pośredniczące z co najmniej `IStartupFilter` jedną implementacją, która jest uruchamiana przed lub po innym `IStartupFilter`oprogramowaniu pośredniczącym aplikacji zarejestrowanym w usłudze. Aby wywołać `IStartupFilter` oprogramowanie pośredniczące przed dodaniem oprogramowania pośredniczącego przez bibliotekę `IStartupFilter`:
 
   * Umieść rejestrację usługi przed dodaniem biblioteki do kontenera usługi.
-  * Aby wywołać później, umieść rejestrację usługi po dodaniu biblioteki.
+  * Aby później wywołać, należy ustawić rejestrację usługi po dodaniu biblioteki.
 
-## <a name="add-configuration-at-startup-from-an-external-assembly"></a>Dodawanie konfiguracji przy uruchamianiu z zestawu zewnętrznego
+## <a name="add-configuration-at-startup-from-an-external-assembly"></a>Dodaj konfigurację podczas uruchamiania z zestawu zewnętrznego
 
-Implementacja <xref:Microsoft.AspNetCore.Hosting.IHostingStartup> umożliwia dodawanie ulepszeń do aplikacji podczas uruchamiania `Startup` z zewnętrznego zestawu poza klasą aplikacji. Aby uzyskać więcej informacji, zobacz <xref:fundamentals/configuration/platform-specific-configuration>.
+<xref:Microsoft.AspNetCore.Hosting.IHostingStartup> Implementacja umożliwia dodawanie ulepszeń do aplikacji podczas uruchamiania z zewnętrznego zestawu poza `Startup` klasą aplikacji. Aby uzyskać więcej informacji, zobacz <xref:fundamentals/configuration/platform-specific-configuration>.
 
 ## <a name="additional-resources"></a>Zasoby dodatkowe
 

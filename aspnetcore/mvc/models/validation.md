@@ -1,19 +1,25 @@
 ---
 title: Walidacja modelu w ASP.NET Core MVC
 author: rick-anderson
-description: Dowiedz się więcej o walidacji modelu w ASP.NET Core MVC i Razor Pages.
+description: Dowiedz się więcej o walidacji modelu Razor w ASP.NET Core MVC i stronach.
 ms.author: riande
 ms.custom: mvc
 ms.date: 12/15/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/models/validation
-ms.openlocfilehash: 0e3d4f4705dbfdae00943de2d85c603b6762a2f8
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: a0f7c070514de26ae007526a5587c13d26d1eb1b
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82205894"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777179"
 ---
-# <a name="model-validation-in-aspnet-core-mvc-and-razor-pages"></a>Walidacja modelu w ASP.NET Core MVC i Razor Pages
+# <a name="model-validation-in-aspnet-core-mvc-and-razor-pages"></a>Walidacja modelu w ASP.NET Core MVC Razor i stronach
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -27,7 +33,7 @@ W tym artykule wyjaśniono, jak sprawdzić poprawność danych wprowadzonych prz
 
 Stan modelu reprezentuje błędy pochodzące z dwóch podsystemów: powiązanie modelu i walidacja modelu. Błędy, które pochodzą z [powiązania modelu](model-binding.md) , są zwykle Błędy konwersji danych. Na przykład znak "x" jest wprowadzany w polu liczby całkowitej. Walidacja modelu odbywa się po powiązaniu modelu i zgłasza błędy, gdy dane nie są zgodne z regułami biznesowymi. Na przykład wartość 0 jest wprowadzana w polu, które oczekuje klasyfikacji z przedziału od 1 do 5.
 
-Powiązanie modelu i walidacja modelu są wykonywane przed wykonaniem akcji kontrolera lub metody obsługi Razor Pages. W przypadku aplikacji sieci Web jest odpowiedzialna za jej sprawdzenie `ModelState.IsValid` i reagowanie. Aplikacja internetowa zazwyczaj ponownie wyświetla stronę z komunikatem o błędzie:
+Powiązanie modelu i walidacja modelu są wykonywane przed wykonaniem akcji kontrolera lub metody obsługi Razor stron. W przypadku aplikacji sieci Web jest odpowiedzialna za jej sprawdzenie `ModelState.IsValid` i reagowanie. Aplikacja internetowa zazwyczaj ponownie wyświetla stronę z komunikatem o błędzie:
 
 [!code-csharp[](validation/samples/3.x/ValidationSample/Pages/Movies/Create.cshtml.cs?name=snippet_OnPostAsync&highlight=3-6)]
 
@@ -367,7 +373,7 @@ Ta metoda renderowania `data-` atrybutów w kodzie HTML jest używana przez `Cla
 
 ## <a name="disable-client-side-validation"></a>Wyłącz weryfikację po stronie klienta
 
-Poniższy kod wyłącza weryfikację klienta w Razor Pages:
+Poniższy kod wyłącza weryfikację klienta na Razor stronach:
 
 [!code-csharp[](validation/samples/3.x/ValidationSample/Startup.cs?name=snippet_DisableClientValidation&highlight=2-5)]
 
@@ -376,9 +382,9 @@ Inne opcje wyłączenia weryfikacji po stronie klienta:
 * Dodaj komentarz do odwołania do `_ValidationScriptsPartial` wszystkich plików *. cshtml* .
 * Usuń zawartość pliku *Pages\Shared\_ValidationScriptsPartial. cshtml* .
 
-Poprzednie podejście nie zapobiega weryfikacji po stronie klienta w bibliotece klas Razor ASP.NET Core Identity. Aby uzyskać więcej informacji, zobacz <xref:security/authentication/scaffold-identity>.
+Poprzednie podejście nie zapobiega weryfikacji po stronie klienta ASP.NET Core Identity Razor biblioteki klas. Aby uzyskać więcej informacji, zobacz <xref:security/authentication/scaffold-identity>.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Przestrzeń nazw System. ComponentModel. DataAnnotations](xref:System.ComponentModel.DataAnnotations)
 * [Powiązanie modelu](model-binding.md)
@@ -395,7 +401,7 @@ W tym artykule wyjaśniono, jak sprawdzić poprawność danych wprowadzonych prz
 
 Stan modelu reprezentuje błędy pochodzące z dwóch podsystemów: powiązanie modelu i walidacja modelu. Błędy, które pochodzą z [powiązania modelu](model-binding.md) , to zwykle Błędy konwersji danych (na przykład "x" jest wprowadzany w polu, w którym jest oczekiwana liczba całkowita). Walidacja modelu odbywa się po powiązaniu modelu i zgłasza błędy, gdy dane nie są zgodne z regułami biznesowymi (na przykład wartość 0 jest wprowadzana w polu, w którym oczekiwana jest Ocena z zakresu od 1 do 5).
 
-Zarówno powiązanie modelu, jak i walidacja są wykonywane przed wykonaniem akcji kontrolera lub metody obsługi Razor Pages. W przypadku aplikacji sieci Web jest odpowiedzialna za jej sprawdzenie `ModelState.IsValid` i reagowanie. Aplikacja internetowa zazwyczaj ponownie wyświetla stronę z komunikatem o błędzie:
+Zarówno powiązanie modelu, jak i walidacja są wykonywane przed wykonaniem akcji kontrolera Razor lub metody obsługi stron. W przypadku aplikacji sieci Web jest odpowiedzialna za jej sprawdzenie `ModelState.IsValid` i reagowanie. Aplikacja internetowa zazwyczaj ponownie wyświetla stronę z komunikatem o błędzie:
 
 [!code-csharp[](validation/samples_snapshot/2.x/Create.cshtml.cs?name=snippet&highlight=3-6)]
 
@@ -418,7 +424,7 @@ Atrybuty walidacji umożliwiają określanie reguł walidacji dla właściwości
 Wbudowane atrybuty walidacji obejmują:
 
 * `[CreditCard]`: Sprawdza, czy właściwość ma format karty kredytowej.
-* `[Compare]`: Sprawdza, czy dwie właściwości w modelu pasują do siebie. Na przykład plik *register.cshtml.cs* używa `[Compare]` do sprawdzania poprawności dwóch wprowadzonych haseł. [Tożsamość szkieletu](xref:security/authentication/scaffold-identity) do wyświetlania kodu rejestru.
+* `[Compare]`: Sprawdza, czy dwie właściwości w modelu pasują do siebie. Na przykład plik *register.cshtml.cs* używa `[Compare]` do sprawdzania poprawności dwóch wprowadzonych haseł. [Szkielet Identity ](xref:security/authentication/scaffold-identity) , aby wyświetlić kod rejestru.
 * `[EmailAddress]`: Sprawdza, czy właściwość ma format wiadomości e-mail.
 * `[Phone]`: Sprawdza, czy właściwość ma format numeru telefonu.
 * `[Range]`: Sprawdza, czy wartość właściwości znajduje się w określonym zakresie.
@@ -742,13 +748,13 @@ Poniższy kod wyłącza weryfikację klienta w widokach MVC:
 
 [!code-csharp[](validation/samples_snapshot/2.x/Startup2.cs?name=snippet_DisableClientValidation)]
 
-I w Razor Pages:
+I na Razor stronach:
 
 [!code-csharp[](validation/samples_snapshot/2.x/Startup3.cs?name=snippet_DisableClientValidation)]
 
 Kolejną opcją wyłączenia sprawdzania poprawności klienta jest komentarz do odwołania do `_ValidationScriptsPartial` w pliku *. cshtml* .
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Przestrzeń nazw System. ComponentModel. DataAnnotations](xref:System.ComponentModel.DataAnnotations)
 * [Powiązanie modelu](model-binding.md)

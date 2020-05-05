@@ -6,14 +6,18 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 12/05/2019
 no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: grpc/comparison
-ms.openlocfilehash: 4b83a8ff48d5544390166a4acece404cd3d26ec0
-ms.sourcegitcommit: c19e388c83c981232e6f128d97440262adfe06e2
+ms.openlocfilehash: ab103adc20c5332f71d5f6e3348d0b14c69fce34
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/02/2020
-ms.locfileid: "82727782"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774707"
 ---
 # <a name="compare-grpc-services-with-http-apis"></a>Porównanie usług gRPC za pomocą interfejsów API protokołu HTTP
 
@@ -32,7 +36,7 @@ Poniższa tabela zawiera porównanie funkcji między gRPC i interfejsami API pro
 | Ładunku          | [Protobuf (mały, binarny)](#performance)           | JSON (duże, czytelne dla ludzi)  |
 | Prescriptiveness | [Specyfikacja Strict](#strict-specification)      | Sypki. Wszystkie protokoły HTTP są prawidłowe.     |
 | Przesyłanie strumieniowe        | [Klient, serwer, dwukierunkowa](#streaming)       | Klient, serwer                |
-| Obsługa przeglądarki  | [Nie (wymaga GRPC-Web)](#limited-browser-support) | Yes                           |
+| Obsługa przeglądarki  | [Nie (wymaga GRPC-Web)](#limited-browser-support) | Tak                           |
 | Zabezpieczenia         | Transport (TLS)                                    | Transport (TLS)               |
 | Generowanie kodu klienta | [Tak](#code-generation)                      | Narzędzia OpenAPI + inne firmy |
 

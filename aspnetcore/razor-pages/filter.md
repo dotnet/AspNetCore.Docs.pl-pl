@@ -1,81 +1,87 @@
 ---
-title: Metody filtrowania stron razor w ASP.NET Core
+title: Metody filtrowania dla Razor stron w ASP.NET Core
 author: Rick-Anderson
-description: Dowiedz się, jak tworzyć metody filtrowania stron razor w ASP.NET Core.
+description: Dowiedz się, jak tworzyć metody Razor filtrowania dla stron w ASP.NET Core.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 2/18/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: razor-pages/filter
-ms.openlocfilehash: cd772da8ed565bc779d8c6bcc7c9949a0c1c7c60
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 68962d5a3a49e52510d72899e7dead2c1983d8b6
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78660756"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775521"
 ---
-# <a name="filter-methods-for-razor-pages-in-aspnet-core"></a>Metody filtrowania stron razor w ASP.NET Core
+# <a name="filter-methods-for-razor-pages-in-aspnet-core"></a>Metody filtrowania dla Razor stron w ASP.NET Core
 
 ::: moniker range=">= aspnetcore-3.0"
 
 Autor: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-Filtry strony razor [IPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter?view=aspnetcore-2.0) i [IAsyncPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter?view=aspnetcore-2.0) umożliwiają stronki Razor uruchamianie kodu przed i po uruchomieniu programu obsługi strony Razor. Filtry strony razor są podobne do [filtrów akcji ASP.NET Core MVC](xref:mvc/controllers/filters#action-filters), z tą różnicą, że nie można ich zastosować do poszczególnych metod obsługi strony.
+Razor[IPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter?view=aspnetcore-2.0) i [IAsyncPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter?view=aspnetcore-2.0) umożliwiają Razor stronom uruchamianie kodu przed uruchomieniem programu obsługi stron Razor i po nim. RazorFiltry stron są podobne do [ASP.NET Core filtrów akcji MVC](xref:mvc/controllers/filters#action-filters), z wyjątkiem sytuacji, gdy nie można ich zastosować do metod obsługi poszczególnych stron.
 
-Filtry strony razor:
+RazorFiltry stron:
 
 * Uruchom kod po wybraniu metody obsługi, ale przed wystąpieniem powiązania modelu.
-* Uruchom kod przed wykonaniem metody obsługi, po zakończeniu wiązania modelu.
+* Uruchom kod przed wykonaniem metody obsługi, po utworzeniu powiązania modelu.
 * Uruchom kod po wykonaniu metody obsługi.
 * Można zaimplementować na stronie lub globalnie.
-* Nie można zastosować do określonych metod obsługi strony.
-* Może mieć zależności konstruktora wypełnione przez [iniekcję zależności](xref:fundamentals/dependency-injection) (DI). Aby uzyskać więcej informacji, zobacz [ServiceFilterAttribute](/aspnet/core/mvc/controllers/filters#servicefilterattribute) i [TypeFilterAttribute](/aspnet/core/mvc/controllers/filters#typefilterattribute).
+* Nie można zastosować do określonych metod obsługi stron.
+* Może mieć zależności konstruktora wypełniane przez [iniekcję zależności](xref:fundamentals/dependency-injection) (di). Aby uzyskać więcej informacji, zobacz [Servicefilterattribute](/aspnet/core/mvc/controllers/filters#servicefilterattribute) i [TypeFilterAttribute](/aspnet/core/mvc/controllers/filters#typefilterattribute).
 
-Podczas konstruktorów stron i oprogramowania pośredniczącego umożliwiają wykonywanie kodu niestandardowego przed <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.HttpContext> wykonaniem metody obsługi, tylko filtry razor Page umożliwiają dostęp do i strony. Oprogramowanie pośredniczące `HttpContext`ma dostęp do , ale nie do "kontekstu strony". Filtry mają <xref:Microsoft.AspNetCore.Mvc.Filters.FilterContext> pochodny parametr, który `HttpContext`zapewnia dostęp do . Na przykład [Implementowanie przykładu atrybutu filtru](#ifa) dodaje nagłówek do odpowiedzi, coś, czego nie można zrobić z konstruktorów lub oprogramowania pośredniczącego.
+Podczas gdy konstruktory stron i oprogramowanie pośredniczące umożliwiają wykonywanie kodu niestandardowego przed wykonaniem metody Razor obsługi, tylko filtry strony <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.HttpContext> umożliwiają dostęp do i strony. Oprogramowanie pośredniczące ma dostęp do `HttpContext`programu, ale nie do "kontekstu strony". Filtry mają parametr <xref:Microsoft.AspNetCore.Mvc.Filters.FilterContext> pochodny, który zapewnia dostęp do `HttpContext`. Na przykład, implementacja przykładu [atrybutu filtru](#ifa) dodaje nagłówek do odpowiedzi, co nie jest możliwe za pomocą konstruktorów lub oprogramowania pośredniczącego.
 
 [Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/filter/3.1sample) ([jak pobrać](xref:index#how-to-download-a-sample))
 
-Filtry strony razor zapewniają następujące metody, które mogą być stosowane globalnie lub na poziomie strony:
+RazorFiltry stron oferują następujące metody, które mogą być stosowane globalnie lub na poziomie strony:
 
 * Metody synchroniczne:
 
-  * [OnPageHandlerSelected:](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter.onpagehandlerselected?view=aspnetcore-2.0) Wywoływane po wybraniu metody obsługi, ale przed wystąpieniem powiązania modelu.
-  * [OnPageHandlerWydajanie:](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter.onpagehandlerexecuting?view=aspnetcore-2.0) Wywoływane przed wykonaniem metody obsługi, po zakończeniu wiązania modelu.
-  * [OnPageHandlerExecuted](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter.onpagehandlerexecuted?view=aspnetcore-2.0) : Wywoływane po wykonaniu metody obsługi, przed wynikiem akcji.
+  * [OnPageHandlerSelected](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter.onpagehandlerselected?view=aspnetcore-2.0) : wywołuje się po wybraniu metody obsługi, ale przed wystąpieniem powiązania modelu.
+  * [OnPageHandlerExecuting](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter.onpagehandlerexecuting?view=aspnetcore-2.0) : wywoływana przed wykonaniem metody obsługi, po zakończeniu powiązania modelu.
+  * [OnPageHandlerExecuted](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter.onpagehandlerexecuted?view=aspnetcore-2.0) : wywoływane po wykonaniu metody obsługi przed wynikiem akcji.
 
 * Metody asynchroniczne:
 
-  * [OnPageHandlerSelectionAsync](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter.onpagehandlerselectionasync?view=aspnetcore-2.0) : Wywoływane asynchronicznie po wybraniu metody obsługi, ale przed wystąpieniem powiązania modelu.
-  * [OnPageHandlerExecutionAsync](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter.onpagehandlerexecutionasync?view=aspnetcore-2.0) : Wywoływane asynchronicznie przed wywołanie metody obsługi, po zakończeniu wiązania modelu.
+  * [OnPageHandlerSelectionAsync](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter.onpagehandlerselectionasync?view=aspnetcore-2.0) : wywołano asynchronicznie po wybraniu metody obsługi, ale przed wystąpieniem powiązania modelu.
+  * [OnPageHandlerExecutionAsync](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter.onpagehandlerexecutionasync?view=aspnetcore-2.0) : wywołano asynchronicznie przed wywołaniem metody obsługi, po zakończeniu powiązania modelu.
 
-Zaimplementuj synchroniową lub asynchronizową wersję interfejsu filtru, **a nie** obie. **either** Struktura sprawdza najpierw, czy filtr implementuje interfejs asynkowy, a jeśli tak, to wywołuje to. Jeśli nie, wywołuje metodę(-y) interfejsu synchronicznego. Jeśli oba interfejsy są implementowane, tylko metody asynchronii są wywoływane. Ta sama reguła ma zastosowanie do zastąpienia na stronach, implementować synchroniczne lub asynchroniczne wersji zastąpienia, nie oba.
+Implementowanie synchronicznej lub asynchronicznej wersji interfejsu filtru **, a** **nie** obu. Struktura sprawdza najpierw, czy filtr implementuje interfejs asynchroniczny, a jeśli tak, wywołuje to. Jeśli nie, wywołuje metody interfejsu synchronicznego. W przypadku implementacji obu interfejsów są wywoływane tylko metody asynchroniczne. Ta sama reguła dotyczy zastąpień na stronach, implementuje synchroniczną lub asynchroniczną wersję przesłonięcia, a nie obu.
 
-## <a name="implement-razor-page-filters-globally"></a>Globalnie wdrażaj filtry strony razor na całym świecie
+## <a name="implement-razor-page-filters-globally"></a>Implementowanie Razor filtrów stron globalnie
 
-Poniższy kod `IAsyncPageFilter`implementuje:
+Poniższy kod implementuje `IAsyncPageFilter`:
 
 [!code-csharp[Main](filter/3.1sample/PageFilter/Filters/SampleAsyncPageFilter.cs?name=snippet1)]
 
-W poprzednim kodzie `ProcessUserAgent.Write` jest podany przez użytkownika kod, który współpracuje z ciągiem agenta użytkownika.
+W poprzednim kodzie `ProcessUserAgent.Write` jest podany przez użytkownika kod, który działa z ciągiem agenta użytkownika.
 
-Poniższy kod `SampleAsyncPageFilter` włącza `Startup` w klasie:
+Poniższy kod włącza `SampleAsyncPageFilter` w `Startup` klasie:
 
 [!code-csharp[Main](filter/3.1sample/PageFilter/Startup.cs?name=snippet2)]
 
-Następujące wywołania <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.PageConventionCollection.AddFolderApplicationModelConvention*> kodu, `SampleAsyncPageFilter` aby zastosować tylko do stron w */Movies:*
+Poniższy kod wywołuje <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.PageConventionCollection.AddFolderApplicationModelConvention*> , `SampleAsyncPageFilter` aby zastosować tylko do stron w */Movies*:
 
 [!code-csharp[Main](filter/3.1sample/PageFilter/Startup2.cs?name=snippet2)]
 
-Poniższy kod implementuje synchroniczne: `IPageFilter`
+Poniższy kod implementuje synchroniczne `IPageFilter`:
 
 [!code-csharp[Main](filter/3.1sample/PageFilter/Filters/SamplePageFilter.cs?name=snippet1)]
 
-Poniższy kod `SamplePageFilter`umożliwia:
+Poniższy kod włącza `SamplePageFilter`:
 
 [!code-csharp[Main](filter/3.1sample/PageFilter/StartupSync.cs?name=snippet2)]
 
-## <a name="implement-razor-page-filters-by-overriding-filter-methods"></a>Implementowanie filtrów strony razor przez zastąpienie metod filtrowania
+## <a name="implement-razor-page-filters-by-overriding-filter-methods"></a>Implementowanie Razor filtrów stron przez zastępowanie metod filtrowania
 
-Poniższy kod zastępuje filtry asynchroniiowa strony Razor:
+Poniższy kod przesłania asynchroniczne Razor filtry stron:
 
 [!code-csharp[Main](filter/3.1sample/PageFilter/Pages/Index.cshtml.cs?name=snippet)]
 
@@ -83,25 +89,25 @@ Poniższy kod zastępuje filtry asynchroniiowa strony Razor:
 
 ## <a name="implement-a-filter-attribute"></a>Implementowanie atrybutu filtru
 
-Wbudowany <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncResultFilter.OnResultExecutionAsync*> filtr oparty na atrybutach może być podklasyfikowany. Następujący filtr dodaje nagłówek do odpowiedzi:
+Wbudowany filtr filtru <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncResultFilter.OnResultExecutionAsync*> oparty na atrybutach może być podklasą. Poniższy filtr dodaje nagłówek do odpowiedzi:
 
 [!code-csharp[Main](filter/3.1sample/PageFilter/Filters/AddHeaderAttribute.cs)]
 
-Następujący kod stosuje `AddHeader` atrybut:
+Poniższy kod stosuje `AddHeader` atrybut:
 
 [!code-csharp[Main](filter/3.1sample/PageFilter/Pages/Movies/Test.cshtml.cs)]
 
-Użyj narzędzia, takiego jak narzędzia programistyczne przeglądarki, aby sprawdzić nagłówki. W obszarze Nagłówki `author: Rick` **odpowiedzi**zostanie wyświetlona opcja "Nagłówki odpowiedzi".
+Użyj narzędzia, takiego jak narzędzia deweloperskie przeglądarki, aby przeanalizować nagłówki. W obszarze **nagłówki odpowiedzi** `author: Rick` jest wyświetlany.
 
-Zobacz [Zastępowanie domyślnej kolejności](xref:mvc/controllers/filters#overriding-the-default-order) instrukcji dotyczących zastępowania zamówienia.
+Zobacz [przesłanianie domyślnej kolejności,](xref:mvc/controllers/filters#overriding-the-default-order) Aby uzyskać instrukcje dotyczące zastępowania kolejności.
 
-Zobacz [Anulowanie i zwarcie,](xref:mvc/controllers/filters#cancellation-and-short-circuiting) aby uzyskać instrukcje dotyczące zwarcia rurociągu filtra z filtra.
+Zobacz [Anulowanie i krótkie obwody](xref:mvc/controllers/filters#cancellation-and-short-circuiting) , aby uzyskać instrukcje dotyczące krótkiego obwodu potoku filtru z filtru.
 
 <a name="auth"></a>
 
 ## <a name="authorize-filter-attribute"></a>Autoryzuj atrybut filtru
 
-Atrybut [Authorize](/dotnet/api/microsoft.aspnetcore.authorization.authorizeattribute?view=aspnetcore-2.0) można zastosować `PageModel`do:
+Atrybut [Autoryzuj](/dotnet/api/microsoft.aspnetcore.authorization.authorizeattribute?view=aspnetcore-2.0) można zastosować do `PageModel`:
 
 [!code-csharp[Main](filter/sample/PageFilter/Pages/ModelWithAuthFilter.cshtml.cs?highlight=7)]
 
@@ -111,67 +117,67 @@ Atrybut [Authorize](/dotnet/api/microsoft.aspnetcore.authorization.authorizeattr
 
 Autor: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-Filtry strony razor [IPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter?view=aspnetcore-2.0) i [IAsyncPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter?view=aspnetcore-2.0) umożliwiają stronki Razor uruchamianie kodu przed i po uruchomieniu programu obsługi strony Razor. Filtry strony razor są podobne do [filtrów akcji ASP.NET Core MVC](xref:mvc/controllers/filters#action-filters), z tą różnicą, że nie można ich zastosować do poszczególnych metod obsługi strony.
+Razor[IPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter?view=aspnetcore-2.0) i [IAsyncPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter?view=aspnetcore-2.0) umożliwiają Razor stronom uruchamianie kodu przed uruchomieniem programu obsługi stron Razor i po nim. RazorFiltry stron są podobne do [ASP.NET Core filtrów akcji MVC](xref:mvc/controllers/filters#action-filters), z wyjątkiem sytuacji, gdy nie można ich zastosować do metod obsługi poszczególnych stron.
 
-Filtry strony razor:
+RazorFiltry stron:
 
 * Uruchom kod po wybraniu metody obsługi, ale przed wystąpieniem powiązania modelu.
-* Uruchom kod przed wykonaniem metody obsługi, po zakończeniu wiązania modelu.
+* Uruchom kod przed wykonaniem metody obsługi, po utworzeniu powiązania modelu.
 * Uruchom kod po wykonaniu metody obsługi.
 * Można zaimplementować na stronie lub globalnie.
-* Nie można zastosować do określonych metod obsługi strony.
+* Nie można zastosować do określonych metod obsługi stron.
 
-Kod można uruchomić, zanim metoda obsługi zostanie wykonana przy użyciu konstruktora strony lub oprogramowania pośredniczącego, ale tylko filtry strony Razor mają dostęp do [protokołu HttpContext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.httpcontext?view=aspnetcore-2.0#Microsoft_AspNetCore_Mvc_RazorPages_PageModel_HttpContext). Filtry mają parametr pochodny [FilterContext,](/dotnet/api/microsoft.aspnetcore.mvc.filters.filtercontext?view=aspnetcore-2.0) `HttpContext`który zapewnia dostęp do . Na przykład [Implementowanie przykładu atrybutu filtru](#ifa) dodaje nagłówek do odpowiedzi, coś, czego nie można zrobić z konstruktorów lub oprogramowania pośredniczącego.
+Kod można uruchomić przed wykonaniem metody obsługi przy użyciu konstruktora stron lub oprogramowania pośredniczącego, ale tylko Razor filtry strony mają dostęp do elementu [HttpContext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.httpcontext?view=aspnetcore-2.0#Microsoft_AspNetCore_Mvc_RazorPages_PageModel_HttpContext). Filtry mają parametr pochodny [FilterContext](/dotnet/api/microsoft.aspnetcore.mvc.filters.filtercontext?view=aspnetcore-2.0) , który zapewnia dostęp do `HttpContext`. Na przykład, implementacja przykładu [atrybutu filtru](#ifa) dodaje nagłówek do odpowiedzi, co nie jest możliwe za pomocą konstruktorów lub oprogramowania pośredniczącego.
 
 [Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/filter/sample/PageFilter) ([jak pobrać](xref:index#how-to-download-a-sample))
 
-Filtry strony razor zapewniają następujące metody, które mogą być stosowane globalnie lub na poziomie strony:
+RazorFiltry stron oferują następujące metody, które mogą być stosowane globalnie lub na poziomie strony:
 
 * Metody synchroniczne:
 
-  * [OnPageHandlerSelected:](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter.onpagehandlerselected?view=aspnetcore-2.0) Wywoływane po wybraniu metody obsługi, ale przed wystąpieniem powiązania modelu.
-  * [OnPageHandlerWydajanie:](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter.onpagehandlerexecuting?view=aspnetcore-2.0) Wywoływane przed wykonaniem metody obsługi, po zakończeniu wiązania modelu.
-  * [OnPageHandlerExecuted](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter.onpagehandlerexecuted?view=aspnetcore-2.0) : Wywoływane po wykonaniu metody obsługi, przed wynikiem akcji.
+  * [OnPageHandlerSelected](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter.onpagehandlerselected?view=aspnetcore-2.0) : wywołuje się po wybraniu metody obsługi, ale przed wystąpieniem powiązania modelu.
+  * [OnPageHandlerExecuting](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter.onpagehandlerexecuting?view=aspnetcore-2.0) : wywoływana przed wykonaniem metody obsługi, po zakończeniu powiązania modelu.
+  * [OnPageHandlerExecuted](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter.onpagehandlerexecuted?view=aspnetcore-2.0) : wywoływane po wykonaniu metody obsługi przed wynikiem akcji.
 
 * Metody asynchroniczne:
 
-  * [OnPageHandlerSelectionAsync](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter.onpagehandlerselectionasync?view=aspnetcore-2.0) : Wywoływane asynchronicznie po wybraniu metody obsługi, ale przed wystąpieniem powiązania modelu.
-  * [OnPageHandlerExecutionAsync](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter.onpagehandlerexecutionasync?view=aspnetcore-2.0) : Wywoływane asynchronicznie przed wywołanie metody obsługi, po zakończeniu wiązania modelu.
+  * [OnPageHandlerSelectionAsync](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter.onpagehandlerselectionasync?view=aspnetcore-2.0) : wywołano asynchronicznie po wybraniu metody obsługi, ale przed wystąpieniem powiązania modelu.
+  * [OnPageHandlerExecutionAsync](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter.onpagehandlerexecutionasync?view=aspnetcore-2.0) : wywołano asynchronicznie przed wywołaniem metody obsługi, po zakończeniu powiązania modelu.
 
 > [!NOTE]
-> Zaimplementuj synchroniową lub asynchronizową wersję interfejsu filtru, a nie obie. **either** Struktura sprawdza najpierw, czy filtr implementuje interfejs asynkowy, a jeśli tak, to wywołuje to. Jeśli nie, wywołuje metodę(-y) interfejsu synchronicznego. Jeśli oba interfejsy są implementowane, tylko metody asynchronii są wywoływane. Ta sama reguła ma zastosowanie do zastąpienia na stronach, implementować synchroniczne lub asynchroniczne wersji zastąpienia, nie oba.
+> Implementowanie synchronicznej lub asynchronicznej wersji interfejsu filtru **, a nie** obu. Struktura sprawdza najpierw, czy filtr implementuje interfejs asynchroniczny, a jeśli tak, wywołuje to. Jeśli nie, wywołuje metody interfejsu synchronicznego. W przypadku implementacji obu interfejsów są wywoływane tylko metody asynchroniczne. Ta sama reguła dotyczy zastąpień na stronach, implementuje synchroniczną lub asynchroniczną wersję przesłonięcia, a nie obu.
 
-## <a name="implement-razor-page-filters-globally"></a>Globalnie wdrażaj filtry strony razor na całym świecie
+## <a name="implement-razor-page-filters-globally"></a>Implementowanie Razor filtrów stron globalnie
 
-Poniższy kod `IAsyncPageFilter`implementuje:
+Poniższy kod implementuje `IAsyncPageFilter`:
 
 [!code-csharp[Main](filter/sample/PageFilter/Filters/SampleAsyncPageFilter.cs?name=snippet1)]
 
-W poprzednim kodzie [ILogger](/dotnet/api/microsoft.extensions.logging.ilogger?view=aspnetcore-2.0) nie jest wymagane. Jest on używany w próbce, aby zapewnić informacje śledzenia dla aplikacji.
+W poprzednim kodzie [ILogger](/dotnet/api/microsoft.extensions.logging.ilogger?view=aspnetcore-2.0) nie jest wymagana. Jest on używany w przykładzie w celu zapewnienia informacji o śledzeniu dla aplikacji.
 
-Poniższy kod `SampleAsyncPageFilter` włącza `Startup` w klasie:
+Poniższy kod włącza `SampleAsyncPageFilter` w `Startup` klasie:
 
 [!code-csharp[Main](filter/sample/PageFilter/Startup.cs?name=snippet2&highlight=11)]
 
-Poniższy kod przedstawia `Startup` pełną klasę:
+Poniższy kod przedstawia kompletną `Startup` klasę:
 
 [!code-csharp[Main](filter/sample/PageFilter/Startup.cs?name=snippet1)]
 
-Następujący kod `AddFolderApplicationModelConvention` wywołuje zastosowanie `SampleAsyncPageFilter` tylko do stron w */subFolder:*
+Poniższy kod wywołuje `AddFolderApplicationModelConvention` , `SampleAsyncPageFilter` aby zastosować tylko do stron w */subFolder*:
 
 [!code-csharp[Main](filter/sample/PageFilter/Startup2.cs?name=snippet2)]
 
-Poniższy kod implementuje synchroniczne: `IPageFilter`
+Poniższy kod implementuje synchroniczne `IPageFilter`:
 
 [!code-csharp[Main](filter/sample/PageFilter/Filters/SamplePageFilter.cs?name=snippet1)]
 
-Poniższy kod `SamplePageFilter`umożliwia:
+Poniższy kod włącza `SamplePageFilter`:
 
 [!code-csharp[Main](filter/sample/PageFilter/StartupSync.cs?name=snippet2&highlight=11)]
 
-## <a name="implement-razor-page-filters-by-overriding-filter-methods"></a>Implementowanie filtrów strony razor przez zastąpienie metod filtrowania
+## <a name="implement-razor-page-filters-by-overriding-filter-methods"></a>Implementowanie Razor filtrów stron przez zastępowanie metod filtrowania
 
-Następujący kod zastępuje filtry synchroniczowej strony Razor:
+Poniższy kod przesłania synchroniczne Razor filtry stron:
 
 [!code-csharp[Main](filter/sample/PageFilter/Pages/Index.cshtml.cs)]
 
@@ -179,23 +185,23 @@ Następujący kod zastępuje filtry synchroniczowej strony Razor:
 
 ## <a name="implement-a-filter-attribute"></a>Implementowanie atrybutu filtru
 
-Wbudowany filtr oparty na atrybutach [OnResultExecutionAsync](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncresultfilter.onresultexecutionasync?view=aspnetcore-2.0#Microsoft_AspNetCore_Mvc_Filters_IAsyncResultFilter_OnResultExecutionAsync_Microsoft_AspNetCore_Mvc_Filters_ResultExecutingContext_Microsoft_AspNetCore_Mvc_Filters_ResultExecutionDelegate_) filtr może być podklasyfikowany. Następujący filtr dodaje nagłówek do odpowiedzi:
+Wbudowany filtr [OnResultExecutionAsync](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncresultfilter.onresultexecutionasync?view=aspnetcore-2.0#Microsoft_AspNetCore_Mvc_Filters_IAsyncResultFilter_OnResultExecutionAsync_Microsoft_AspNetCore_Mvc_Filters_ResultExecutingContext_Microsoft_AspNetCore_Mvc_Filters_ResultExecutionDelegate_) filtru oparty na atrybutach może być podklasą. Poniższy filtr dodaje nagłówek do odpowiedzi:
 
 [!code-csharp[Main](filter/sample/PageFilter/Filters/AddHeaderAttribute.cs)]
 
-Następujący kod stosuje `AddHeader` atrybut:
+Poniższy kod stosuje `AddHeader` atrybut:
 
 [!code-csharp[Main](filter/sample/PageFilter/Pages/Contact.cshtml.cs?name=snippet1)]
 
-Zobacz [Zastępowanie domyślnej kolejności](xref:mvc/controllers/filters#overriding-the-default-order) instrukcji dotyczących zastępowania zamówienia.
+Zobacz [przesłanianie domyślnej kolejności,](xref:mvc/controllers/filters#overriding-the-default-order) Aby uzyskać instrukcje dotyczące zastępowania kolejności.
 
-Zobacz [Anulowanie i zwarcie,](xref:mvc/controllers/filters#cancellation-and-short-circuiting) aby uzyskać instrukcje dotyczące zwarcia rurociągu filtra z filtra. 
+Zobacz [Anulowanie i krótkie obwody](xref:mvc/controllers/filters#cancellation-and-short-circuiting) , aby uzyskać instrukcje dotyczące krótkiego obwodu potoku filtru z filtru. 
 
 <a name="auth"></a>
 
 ## <a name="authorize-filter-attribute"></a>Autoryzuj atrybut filtru
 
-Atrybut [Authorize](/dotnet/api/microsoft.aspnetcore.authorization.authorizeattribute?view=aspnetcore-2.0) można zastosować `PageModel`do:
+Atrybut [Autoryzuj](/dotnet/api/microsoft.aspnetcore.authorization.authorizeattribute?view=aspnetcore-2.0) można zastosować do `PageModel`:
 
 [!code-csharp[Main](filter/sample/PageFilter/Pages/ModelWithAuthFilter.cshtml.cs?highlight=7)]
 

@@ -6,13 +6,19 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 3/29/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: fundamentals/configuration/index
-ms.openlocfilehash: 7715adc9b39edd4f8a5882b2e60a1b5513fe400b
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: c2a7ef9c1523bc179524f328905f3a4b1460a1a5
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82205998"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774499"
 ---
 # <a name="configuration-in-aspnet-core"></a>Konfiguracja w ASP.NET Core
 
@@ -757,7 +763,7 @@ Aby uzyskać więcej informacji na temat migrowania konfiguracji aplikacji z wcz
 
 <xref:Microsoft.AspNetCore.Hosting.IHostingStartup> Implementacja umożliwia dodawanie ulepszeń do aplikacji podczas uruchamiania z zewnętrznego zestawu poza `Startup` klasą aplikacji. Aby uzyskać więcej informacji, zobacz <xref:fundamentals/configuration/platform-specific-configuration>.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Kod źródłowy konfiguracji](https://github.com/dotnet/extensions/tree/master/src/Configuration)
 * <xref:fundamentals/configuration/options>
@@ -1037,7 +1043,7 @@ W przypadku aplikacji opartych na ASP.NET Core szablonach program `AddCommandLin
 })
 ```
 
-**Przyklad**
+**Przykład**
 
 Przykładowa aplikacja korzysta z statycznej wygodnej metody `CreateDefaultBuilder` tworzenia hosta, który obejmuje wywołanie <xref:Microsoft.Extensions.Configuration.CommandLineConfigurationExtensions.AddCommandLine*>.
 
@@ -1101,7 +1107,7 @@ W przypadku aplikacji korzystających z mapowań przełączników wywołanie `Cr
 
 Po utworzeniu słownika mapowań przełączników zawiera dane przedstawione w poniższej tabeli.
 
-| Key       | Wartość             |
+| Klucz       | Wartość             |
 | --------- | ----------------- |
 | `-CLKey1` | `CommandLineKey1` |
 | `-CLKey2` | `CommandLineKey2` |
@@ -1114,7 +1120,7 @@ dotnet run -CLKey1=value1 -CLKey2=value2
 
 Po uruchomieniu poprzedniego polecenia Konfiguracja zawiera wartości pokazane w poniższej tabeli.
 
-| Key               | Wartość    |
+| Klucz               | Wartość    |
 | ----------------- | -------- |
 | `CommandLineKey1` | `value1` |
 | `CommandLineKey2` | `value2` |
@@ -1151,7 +1157,7 @@ Aby zapewnić konfigurację aplikacji na podstawie dodatkowych zmiennych środow
 
 Wywołaj `AddEnvironmentVariables` ostatni, aby zezwolić na zmienne środowiskowe z danym prefiksem, aby przesłonić wartości od innych dostawców.
 
-**Przyklad**
+**Przykład**
 
 Przykładowa aplikacja korzysta z statycznej wygodnej metody `CreateDefaultBuilder` tworzenia hosta, który obejmuje wywołanie `AddEnvironmentVariables`.
 
@@ -1203,7 +1209,7 @@ Gdy zmienna środowiskowa zostanie odnaleziona i załadowana do konfiguracji z d
 | `SQLAZURECONNSTR_{KEY}`  | `ConnectionStrings:{KEY}`   | Klucz: `ConnectionStrings:{KEY}_ProviderName`:<br>Wartość:`System.Data.SqlClient`  |
 | `SQLCONNSTR_{KEY}`       | `ConnectionStrings:{KEY}`   | Klucz: `ConnectionStrings:{KEY}_ProviderName`:<br>Wartość:`System.Data.SqlClient`  |
 
-**Przyklad**
+**Przykład**
 
 Na serwerze zostanie utworzona niestandardowa zmienna środowiskowa parametrów połączenia:
 
@@ -1310,7 +1316,7 @@ Wywołaj `ConfigureAppConfiguration` podczas kompilowania hosta, aby określić 
 })
 ```
 
-**Przyklad**
+**Przykład**
 
 Przykładowa aplikacja korzysta z statycznej wygodnej metody `CreateDefaultBuilder` tworzenia hosta, który obejmuje dwa wywołania `AddJsonFile`:
 
@@ -1618,7 +1624,7 @@ TvShow = tvShow;
 
 Należy wziąć pod uwagę klucze konfiguracji i wartości podane w poniższej tabeli.
 
-| Key             | Wartość  |
+| Klucz             | Wartość  |
 | :-------------: | :----: |
 | Tablica: wpisy: 0 | value0 |
 | Tablica: wpisy: 1 | sekwencj |
@@ -1678,7 +1684,7 @@ config.AddJsonFile(
 
 Para klucz-wartość pokazana w tabeli jest ładowana do konfiguracji.
 
-| Key             | Wartość  |
+| Klucz             | Wartość  |
 | :-------------: | :----: |
 | Tablica: wpisy: 3 | Wartość3 |
 
@@ -1701,7 +1707,7 @@ Jeśli plik JSON zawiera tablicę, klucze konfiguracji są tworzone dla element�
 
 Dostawca konfiguracji JSON odczytuje dane konfiguracji do następujących par klucz-wartość:
 
-| Key                     | Wartość  |
+| Klucz                     | Wartość  |
 | ----------------------- | :----: |
 | json_array: klucz          | wartośća |
 | json_array: podsekcja: 0 | Wartośćb |
@@ -1792,11 +1798,11 @@ public class Startup
 
 Aby zapoznać się z przykładem uzyskiwania dostępu do konfiguracji przy użyciu metod uruchamiania, zobacz [Uruchamianie aplikacji: wygodne metody](xref:fundamentals/startup#convenience-methods).
 
-## <a name="access-configuration-in-a-razor-pages-page-or-mvc-view"></a>Konfiguracja dostępu na stronie Razor Pages lub widoku MVC
+## <a name="access-configuration-in-a-razor-pages-page-or-mvc-view"></a>Konfiguracja dostępu na stronie Razor stron lub widoku MVC
 
-Aby uzyskać dostęp do ustawień konfiguracji na stronie Razor Pages lub widoku MVC, Dodaj [dyrektywę using](xref:mvc/views/razor#using) ([odwołanie w C#: Using](/dotnet/csharp/language-reference/keywords/using-directive)) dla [przestrzeni nazw Microsoft. Extensions. Configuration](xref:Microsoft.Extensions.Configuration) i wsuń <xref:Microsoft.Extensions.Configuration.IConfiguration> do strony lub widoku.
+Aby uzyskać dostęp do ustawień konfiguracji Razor na stronie stron lub widoku MVC, Dodaj [dyrektywę using](xref:mvc/views/razor#using) ([odwołanie w C#: Using](/dotnet/csharp/language-reference/keywords/using-directive)) dla [przestrzeni nazw Microsoft. Extensions. Configuration](xref:Microsoft.Extensions.Configuration) i wsuń <xref:Microsoft.Extensions.Configuration.IConfiguration> do strony lub widoku.
 
-Na stronie Razor Pages:
+Na stronie Razor stron:
 
 ```cshtml
 @page
@@ -1838,7 +1844,7 @@ W widoku MVC:
 
 <xref:Microsoft.AspNetCore.Hosting.IHostingStartup> Implementacja umożliwia dodawanie ulepszeń do aplikacji podczas uruchamiania z zewnętrznego zestawu poza `Startup` klasą aplikacji. Aby uzyskać więcej informacji, zobacz <xref:fundamentals/configuration/platform-specific-configuration>.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:fundamentals/configuration/options>
 

@@ -8,14 +8,17 @@ ms.custom: mvc
 ms.date: 04/27/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: security/blazor/server/additional-scenarios
-ms.openlocfilehash: 1a3e5a215daedbb9b97c1924275701915806983e
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: 95e9e57889fdbb5270f895874c9b8148ae4ca48d
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82206390"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82772807"
 ---
 # <a name="aspnet-core-blazor-server-additional-security-scenarios"></a>Dodatkowe Blazor scenariusze zabezpieczeń ASP.NET Core Server
 
@@ -23,9 +26,9 @@ Autor [Javier Calvarro Nelson](https://github.com/javiercn)
 
 ## <a name="pass-tokens-to-a-blazor-server-app"></a>Przekazywanie tokenów do Blazor aplikacji serwera
 
-Tokeny dostępne poza składnikami Razor w aplikacji Blazor serwerowej mogą być przesyłane do składników z podejściem opisanym w tej sekcji. Przykładowy kod, łącznie z kompletnym `Startup.ConfigureServices` przykładem, można znaleźć w temacie [przekazywanie tokenów do Blazor aplikacji po stronie serwera](https://github.com/javiercn/blazor-server-aad-sample).
+Tokeny dostępne poza Razor składnikami w aplikacji Blazor serwerowej mogą być przesyłane do składników z podejściem opisanym w tej sekcji. Przykładowy kod, łącznie z kompletnym `Startup.ConfigureServices` przykładem, można znaleźć w temacie [przekazywanie tokenów do Blazor aplikacji po stronie serwera](https://github.com/javiercn/blazor-server-aad-sample).
 
-Uwierzytelnij Blazor aplikację serwera tak jak w przypadku zwykłej aplikacji Razor Pages lub MVC. Zainicjuj obsługę administracyjną i Zapisz tokeny w pliku cookie uwierzytelniania. Przykład:
+Uwierzytelnianie aplikacji Blazor serwerowej tak jak w przypadku zwykłych Razor stron lub aplikacji MVC. Zainicjuj obsługę administracyjną i Zapisz tokeny w pliku cookie uwierzytelniania. Przykład:
 
 ```csharp
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;

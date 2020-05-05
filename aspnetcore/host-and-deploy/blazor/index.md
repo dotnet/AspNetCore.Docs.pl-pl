@@ -8,14 +8,17 @@ ms.custom: mvc
 ms.date: 04/30/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: host-and-deploy/blazor/index
-ms.openlocfilehash: 993c1e49aed2efb4283753ab184506e5ae33a3b2
-ms.sourcegitcommit: 6318d2bdd63116e178c34492a904be85ec9ac108
+ms.openlocfilehash: 9d57b81cd813d02a65b6d3a39c7f1a1aa8a069c7
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82604821"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775170"
 ---
 # <a name="host-and-deploy-aspnet-core-blazor"></a>Hostowanie i wdrażanie ASP.NET Core Blazor
 

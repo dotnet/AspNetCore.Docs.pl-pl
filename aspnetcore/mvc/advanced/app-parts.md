@@ -1,18 +1,24 @@
 ---
-title: Udostępnianie kontrolerów, widoków, Razor Pages i innych elementów aplikacji w programie ASP.NET Core
+title: Udostępnianie kontrolerów, widoków, Razor stron i nie tylko za pomocą części aplikacji w ASP.NET Core
 author: rick-anderson
-description: Udostępnianie kontrolerów, przeglądanie, Razor Pages i nie tylko za pomocą części aplikacji w ASP.NET Core
+description: Udostępnianie kontrolerów, widoku, Razor stron i innych elementów przy użyciu części aplikacji w ASP.NET Core
 ms.author: riande
 ms.date: 11/11/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/extensibility/app-parts
-ms.openlocfilehash: 0156c94bc6d0b83d0e14b8ef49468cfdf106d7e6
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 68991a3df5e09b63dc52bdadae55f055a721ad3c
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78667133"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774408"
 ---
-# <a name="share-controllers-views-razor-pages-and-more-with-application-parts"></a>Udostępnianie kontrolerów, widoków, Razor Pages i innych elementów aplikacji
+# <a name="share-controllers-views-razor-pages-and-more-with-application-parts"></a>Udostępnianie kontrolerów, widoków, Razor stron i nie tylko za pomocą części aplikacji
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -20,33 +26,33 @@ Autor: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 [Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts) ([jak pobrać](xref:index#how-to-download-a-sample))
 
-*Część aplikacji* to Abstrakcja zasobów aplikacji. Części aplikacji umożliwiają ASP.NET Core odnajdywania kontrolerów, wyświetlania składników, pomocników tagów, Razor Pages, źródeł kompilacji Razor i nie tylko. <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> jest częścią aplikacji. `AssemblyPart` hermetyzuje odwołanie do zestawu i udostępnia typy i odwołania do kompilacji.
+*Część aplikacji* to Abstrakcja zasobów aplikacji. Części aplikacji umożliwiają ASP.NET Core odnajdywania kontrolerów, wyświetlania składników, pomocników tagów, Razor stron, źródeł kompilacji Razor i nie tylko. <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart>jest częścią aplikacji. `AssemblyPart`hermetyzuje odwołanie do zestawu i udostępnia typy i odwołania do kompilacji.
 
-[Dostawcy funkcji](#fp) pracują z częściami aplikacji, aby wypełnić funkcje aplikacji ASP.NET Core. Głównym przypadkiem użycia części aplikacji jest skonfigurowanie aplikacji do odnajdywania (lub unikania ładowania) ASP.NET Core funkcji z zestawu. Na przykład może być konieczne udostępnienie typowych funkcji między wieloma aplikacjami. Korzystając z części aplikacji, można udostępnić zestaw (DLL) zawierający kontrolery, widoki, Razor Pages, źródła kompilacji Razor, pomocników tagów i wiele innych aplikacji. Udostępnianie zestawu jest preferowane do duplikowania kodu w wielu projektach.
+[Dostawcy funkcji](#fp) pracują z częściami aplikacji, aby wypełnić funkcje aplikacji ASP.NET Core. Głównym przypadkiem użycia części aplikacji jest skonfigurowanie aplikacji do odnajdywania (lub unikania ładowania) ASP.NET Core funkcji z zestawu. Na przykład może być konieczne udostępnienie typowych funkcji między wieloma aplikacjami. Korzystając z części aplikacji, można udostępnić zestaw (DLL) zawierający kontrolery, widoki, Razor strony, źródła kompilacji Razor, pomocników tagów i wiele więcej w przypadku wielu aplikacji. Udostępnianie zestawu jest preferowane do duplikowania kodu w wielu projektach.
 
-ASP.NET Core aplikacje ładują funkcje z <xref:System.Web.WebPages.ApplicationPart>. Klasa <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> reprezentuje część aplikacji, która jest obsługiwana przez zestaw.
+ASP.NET Core aplikacje ładują funkcje <xref:System.Web.WebPages.ApplicationPart>z programu. <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> Klasa reprezentuje część aplikacji, która jest obsługiwana przez zestaw.
 
 ## <a name="load-aspnet-core-features"></a>Załaduj funkcje ASP.NET Core
 
-Użyj klas <xref:Microsoft.AspNetCore.Mvc.ApplicationParts> i <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> do odnajdywania i ładowania funkcji ASP.NET Core (kontrolerów, składników widoku itp.). <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.ApplicationPartManager> śledzi dostępne składniki aplikacji i dostawców funkcji. `ApplicationPartManager` jest skonfigurowany w `Startup.ConfigureServices`:
+Użyj klas <xref:Microsoft.AspNetCore.Mvc.ApplicationParts> i <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> , aby odnajdywać i ładować funkcje ASP.NET Core (kontrolery, składniki widoku itp.). <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.ApplicationPartManager> Śledzi dostępne części aplikacji i dostawców funkcji. `ApplicationPartManager`jest skonfigurowany w `Startup.ConfigureServices`:
 
 [!code-csharp[](./app-parts/3.0sample1/WebAppParts/Startup.cs?name=snippet)]
 
-Poniższy kod stanowi alternatywny sposób konfigurowania `ApplicationPartManager` przy użyciu `AssemblyPart`:
+Poniższy kod stanowi alternatywny sposób konfigurowania `ApplicationPartManager` użycia: `AssemblyPart`
 
 [!code-csharp[](./app-parts/3.0sample1/WebAppParts/Startup2.cs?name=snippet)]
 
-Powyższe dwa przykłady kodu ładują `SharedController` z zestawu. `SharedController` nie znajduje się w projekcie aplikacji. Zobacz Pobieranie przykładowego [rozwiązania WebAppParts](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts/3.0sample1/WebAppParts) .
+Powyższe dwa przykłady kodu ładują `SharedController` z zestawu. Nie `SharedController` znajduje się w projekcie aplikacji. Zobacz Pobieranie przykładowego [rozwiązania WebAppParts](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts/3.0sample1/WebAppParts) .
 
 ### <a name="include-views"></a>Dołącz widoki
 
-Użyj [biblioteki klas Razor](xref:razor-pages/ui-class) do uwzględnienia widoków w zestawie.
+Użyj [ Razor biblioteki klas](xref:razor-pages/ui-class) , aby dołączyć widoki w zestawie.
 
 ### <a name="prevent-loading-resources"></a>Zapobiegaj ładowaniu zasobów
 
-Części aplikacji mogą służyć do *uniknięcia* ładowania zasobów w określonym zestawie lub lokalizacji. Dodaj lub Usuń elementy członkowskie kolekcji <xref:Microsoft.AspNetCore.Mvc.ApplicationParts>, aby ukryć lub udostępnić dostępne zasoby. Kolejność wpisów w kolekcji `ApplicationParts` nie jest ważna. Skonfiguruj `ApplicationPartManager` przed użyciem go do konfigurowania usług w kontenerze. Na przykład skonfiguruj `ApplicationPartManager` przed wywołaniem `AddControllersAsServices`. Wywołaj `Remove` w kolekcji `ApplicationParts`, aby usunąć zasób.
+Części aplikacji mogą służyć do *uniknięcia* ładowania zasobów w określonym zestawie lub lokalizacji. Dodaj lub Usuń elementy członkowskie <xref:Microsoft.AspNetCore.Mvc.ApplicationParts> kolekcji, aby ukryć lub udostępnić dostępne zasoby. Kolejność wpisów w `ApplicationParts` kolekcji nie jest ważna. Skonfiguruj program `ApplicationPartManager` przed użyciem go do konfigurowania usług w kontenerze. Na przykład skonfiguruj `ApplicationPartManager` przed wywołaniem `AddControllersAsServices`. Wywołaj `Remove` `ApplicationParts` kolekcję, aby usunąć zasób.
 
-`ApplicationPartManager` zawiera części dla:
+`ApplicationPartManager` Zawiera części dla:
 
 * Zestaw aplikacji i zestawy zależne.
 * `Microsoft.AspNetCore.Mvc.ApplicationParts.CompiledRazorAssemblyPart`
@@ -64,13 +70,13 @@ Dostawcy funkcji aplikacji badają części aplikacji i udostępniają funkcje d
 * <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers.TagHelperFeatureProvider>
 * <xref:Microsoft.AspNetCore.Mvc.Razor.Compilation.MetadataReferenceFeatureProvider>
 * <xref:Microsoft.AspNetCore.Mvc.Razor.Compilation.ViewsFeatureProvider>
-* `internal class` [RazorCompiledItemFeatureProvider](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.Razor/src/ApplicationParts/RazorCompiledItemFeatureProvider.cs#L14)
+* `internal class`[RazorCompiledItemFeatureProvider](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.Razor/src/ApplicationParts/RazorCompiledItemFeatureProvider.cs#L14)
 
-Dostawcy funkcji dziedziczą z <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.IApplicationFeatureProvider`1>, gdzie `T` jest typem funkcji. Dostawców funkcji można zaimplementować dla dowolnego z wcześniej wymienionych typów funkcji. Kolejność dostawców funkcji w `ApplicationPartManager.FeatureProviders` może mieć wpływ na zachowanie w czasie wykonywania. Później dodani dostawcy mogą reagować na akcje podejmowane przez wcześniej dodanych dostawców.
+Dostawcy funkcji dziedziczą <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.IApplicationFeatureProvider`1>z, `T` gdzie jest typem funkcji. Dostawców funkcji można zaimplementować dla dowolnego z wcześniej wymienionych typów funkcji. Kolejność dostawców funkcji w programie `ApplicationPartManager.FeatureProviders` może mieć wpływ na zachowanie. Później dodani dostawcy mogą reagować na akcje podejmowane przez wcześniej dodanych dostawców.
 
 ### <a name="display-available-features"></a>Wyświetlanie dostępnych funkcji
 
-Funkcje dostępne dla aplikacji można wyliczyć, żądając `ApplicationPartManager` za pomocą [iniekcji zależności](../../fundamentals/dependency-injection.md):
+Funkcje dostępne dla aplikacji można wyliczyć, żądając `ApplicationPartManager` od [iniekcji zależności](../../fundamentals/dependency-injection.md):
 
 [!code-csharp[](./app-parts/sample2/AppPartsSample/Controllers/FeaturesController.cs?highlight=16,25-27)]
 
@@ -98,7 +104,7 @@ View Components:
 
 Błędy HTTP 404 nie są rzadko stosowane podczas tworzenia przy użyciu części aplikacji. Te błędy są zwykle spowodowane brakiem zasadniczego wymagania w zakresie odnajdywania części aplikacji. Jeśli aplikacja zwróci błąd HTTP 404, sprawdź, czy zostały spełnione następujące wymagania:
 
-* Ustawienie `applicationName` musi być ustawione na zestaw główny używany do odnajdywania. Zestaw główny używany do odnajdywania jest zwykle zestawem punktów wejścia.
+* `applicationName` Ustawienie musi być ustawione na zestaw główny używany do odnajdywania. Zestaw główny używany do odnajdywania jest zwykle zestawem punktów wejścia.
 * Zestaw główny musi mieć odwołanie do części używanych do odnajdywania. Odwołanie może być bezpośrednie lub przechodnie.
 * Zestaw główny musi odwoływać się do zestawu SDK sieci Web. Struktura ma logikę, która składa się z atrybutów w zestawie głównym używanym do odnajdywania.
 
@@ -110,35 +116,35 @@ Autor: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 [Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts) ([jak pobrać](xref:index#how-to-download-a-sample))
 
-*Część aplikacji* to Abstrakcja zasobów aplikacji. Części aplikacji umożliwiają ASP.NET Core odnajdywania kontrolerów, wyświetlania składników, pomocników tagów, Razor Pages, źródeł kompilacji Razor i nie tylko. [AssemblyPart](/dotnet/api/microsoft.aspnetcore.mvc.applicationparts.assemblypart#Microsoft_AspNetCore_Mvc_ApplicationParts_AssemblyPart) jest częścią aplikacji. `AssemblyPart` hermetyzuje odwołanie do zestawu i udostępnia typy i odwołania do kompilacji.
+*Część aplikacji* to Abstrakcja zasobów aplikacji. Części aplikacji umożliwiają ASP.NET Core odnajdywania kontrolerów, wyświetlania składników, pomocników tagów, Razor stron, źródeł kompilacji Razor i nie tylko. [AssemblyPart](/dotnet/api/microsoft.aspnetcore.mvc.applicationparts.assemblypart#Microsoft_AspNetCore_Mvc_ApplicationParts_AssemblyPart) jest częścią aplikacji. `AssemblyPart`hermetyzuje odwołanie do zestawu i udostępnia typy i odwołania do kompilacji.
 
-*Dostawcy funkcji* pracują z częściami aplikacji, aby wypełnić funkcje aplikacji ASP.NET Core. Głównym przypadkiem użycia części aplikacji jest skonfigurowanie aplikacji do odnajdywania (lub unikania ładowania) ASP.NET Core funkcji z zestawu. Na przykład może być konieczne udostępnienie typowych funkcji między wieloma aplikacjami. Korzystając z części aplikacji, można udostępnić zestaw (DLL) zawierający kontrolery, widoki, Razor Pages, źródła kompilacji Razor, pomocników tagów i wiele innych aplikacji. Udostępnianie zestawu jest preferowane do duplikowania kodu w wielu projektach.
+*Dostawcy funkcji* pracują z częściami aplikacji, aby wypełnić funkcje aplikacji ASP.NET Core. Głównym przypadkiem użycia części aplikacji jest skonfigurowanie aplikacji do odnajdywania (lub unikania ładowania) ASP.NET Core funkcji z zestawu. Na przykład może być konieczne udostępnienie typowych funkcji między wieloma aplikacjami. Korzystając z części aplikacji, można udostępnić zestaw (DLL) zawierający kontrolery, widoki, Razor strony, źródła kompilacji Razor, pomocników tagów i wiele więcej w przypadku wielu aplikacji. Udostępnianie zestawu jest preferowane do duplikowania kodu w wielu projektach.
 
-ASP.NET Core aplikacje ładują funkcje z <xref:System.Web.WebPages.ApplicationPart>. Klasa <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> reprezentuje część aplikacji, która jest obsługiwana przez zestaw.
+ASP.NET Core aplikacje ładują funkcje <xref:System.Web.WebPages.ApplicationPart>z programu. <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> Klasa reprezentuje część aplikacji, która jest obsługiwana przez zestaw.
 
 ## <a name="load-aspnet-core-features"></a>Załaduj funkcje ASP.NET Core
 
-Użyj klas `ApplicationPart` i `AssemblyPart` do odnajdywania i ładowania funkcji ASP.NET Core (kontrolerów, składników widoku itp.). <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.ApplicationPartManager> śledzi dostępne składniki aplikacji i dostawców funkcji. `ApplicationPartManager` jest skonfigurowany w `Startup.ConfigureServices`:
+Użyj klas `ApplicationPart` i `AssemblyPart` , aby odnajdywać i ładować funkcje ASP.NET Core (kontrolery, składniki widoku itp.). <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.ApplicationPartManager> Śledzi dostępne części aplikacji i dostawców funkcji. `ApplicationPartManager`jest skonfigurowany w `Startup.ConfigureServices`:
 
 [!code-csharp[](./app-parts/sample1/WebAppParts/Startup.cs?name=snippet)]
 
-Poniższy kod stanowi alternatywny sposób konfigurowania `ApplicationPartManager` przy użyciu `AssemblyPart`:
+Poniższy kod stanowi alternatywny sposób konfigurowania `ApplicationPartManager` użycia: `AssemblyPart`
 
 [!code-csharp[](./app-parts/sample1/WebAppParts/Startup2.cs?name=snippet)]
 
-Powyższe dwa przykłady kodu ładują `SharedController` z zestawu. `SharedController` nie znajduje się w projekcie aplikacji. Zobacz Pobieranie przykładowego [rozwiązania WebAppParts](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts/sample1/WebAppParts) .
+Powyższe dwa przykłady kodu ładują `SharedController` z zestawu. Nie `SharedController` znajduje się w projekcie aplikacji. Zobacz Pobieranie przykładowego [rozwiązania WebAppParts](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts/sample1/WebAppParts) .
 
 ### <a name="include-views"></a>Dołącz widoki
 
-Użyj [biblioteki klas Razor](xref:razor-pages/ui-class) do uwzględnienia widoków w zestawie.
+Użyj [ Razor biblioteki klas](xref:razor-pages/ui-class) , aby dołączyć widoki w zestawie.
 
 ### <a name="prevent-loading-resources"></a>Zapobiegaj ładowaniu zasobów
 
-Części aplikacji mogą służyć do *uniknięcia* ładowania zasobów w określonym zestawie lub lokalizacji. Dodaj lub Usuń elementy członkowskie kolekcji <xref:Microsoft.AspNetCore.Mvc.ApplicationParts>, aby ukryć lub udostępnić dostępne zasoby. Kolejność wpisów w kolekcji `ApplicationParts` nie jest ważna. Skonfiguruj `ApplicationPartManager` przed użyciem go do konfigurowania usług w kontenerze. Na przykład skonfiguruj `ApplicationPartManager` przed wywołaniem `AddControllersAsServices`. Wywołaj `Remove` w kolekcji `ApplicationParts`, aby usunąć zasób.
+Części aplikacji mogą służyć do *uniknięcia* ładowania zasobów w określonym zestawie lub lokalizacji. Dodaj lub Usuń elementy członkowskie <xref:Microsoft.AspNetCore.Mvc.ApplicationParts> kolekcji, aby ukryć lub udostępnić dostępne zasoby. Kolejność wpisów w `ApplicationParts` kolekcji nie jest ważna. Skonfiguruj program `ApplicationPartManager` przed użyciem go do konfigurowania usług w kontenerze. Na przykład skonfiguruj `ApplicationPartManager` przed wywołaniem `AddControllersAsServices`. Wywołaj `Remove` `ApplicationParts` kolekcję, aby usunąć zasób.
 
-Poniższy kod używa <xref:Microsoft.AspNetCore.Mvc.ApplicationParts> do usuwania `MyDependentLibrary` z aplikacji: [!code-csharp[](./app-parts/sample1/WebAppParts/StartupRm.cs?name=snippet)]
+Następujący kod używa <xref:Microsoft.AspNetCore.Mvc.ApplicationParts> do usunięcia `MyDependentLibrary` z aplikacji:[!code-csharp[](./app-parts/sample1/WebAppParts/StartupRm.cs?name=snippet)]
 
-`ApplicationPartManager` zawiera części dla:
+`ApplicationPartManager` Zawiera części dla:
 
 * Zestaw aplikacji i zestawy zależne.
 * `Microsoft.AspNetCore.Mvc.TagHelpers`.
@@ -152,11 +158,11 @@ Dostawcy funkcji aplikacji badają części aplikacji i udostępniają funkcje d
 * [Pomocnicy tagów](/dotnet/api/microsoft.aspnetcore.mvc.razor.taghelpers.taghelperfeatureprovider)
 * [Wyświetl składniki](/dotnet/api/microsoft.aspnetcore.mvc.viewcomponents.viewcomponentfeatureprovider)
 
-Dostawcy funkcji dziedziczą z <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.IApplicationFeatureProvider`1>, gdzie `T` jest typem funkcji. Dostawców funkcji można zaimplementować dla dowolnego z wcześniej wymienionych typów funkcji. Kolejność dostawców funkcji w `ApplicationPartManager.FeatureProviders` może mieć wpływ na zachowanie w czasie wykonywania. Później dodani dostawcy mogą reagować na akcje podejmowane przez wcześniej dodanych dostawców.
+Dostawcy funkcji dziedziczą <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.IApplicationFeatureProvider`1>z, `T` gdzie jest typem funkcji. Dostawców funkcji można zaimplementować dla dowolnego z wcześniej wymienionych typów funkcji. Kolejność dostawców funkcji w programie `ApplicationPartManager.FeatureProviders` może mieć wpływ na zachowanie. Później dodani dostawcy mogą reagować na akcje podejmowane przez wcześniej dodanych dostawców.
 
 ### <a name="display-available-features"></a>Wyświetlanie dostępnych funkcji
 
-Funkcje dostępne dla aplikacji można wyliczyć, żądając `ApplicationPartManager` za pomocą [iniekcji zależności](../../fundamentals/dependency-injection.md):
+Funkcje dostępne dla aplikacji można wyliczyć, żądając `ApplicationPartManager` od [iniekcji zależności](../../fundamentals/dependency-injection.md):
 
 [!code-csharp[](./app-parts/sample2/AppPartsSample/Controllers/FeaturesController.cs?highlight=16,25-27)]
 
@@ -184,7 +190,7 @@ View Components:
 
 Błędy HTTP 404 nie są rzadko stosowane podczas tworzenia przy użyciu części aplikacji. Te błędy są zwykle spowodowane brakiem zasadniczego wymagania w zakresie odnajdywania części aplikacji. Jeśli aplikacja zwróci błąd HTTP 404, sprawdź, czy zostały spełnione następujące wymagania:
 
-* Ustawienie `applicationName` musi być ustawione na zestaw główny używany do odnajdywania. Zestaw główny używany do odnajdywania jest zwykle zestawem punktów wejścia.
+* `applicationName` Ustawienie musi być ustawione na zestaw główny używany do odnajdywania. Zestaw główny używany do odnajdywania jest zwykle zestawem punktów wejścia.
 * Zestaw główny musi mieć odwołanie do części używanych do odnajdywania. Odwołanie może być bezpośrednie lub przechodnie.
 * Zestaw główny musi odwoływać się do zestawu SDK sieci Web.
   * Struktura ASP.NET Core ma niestandardową logikę kompilacji, która oznacza atrybuty w zestawie głównym, które są używane do odnajdywania.

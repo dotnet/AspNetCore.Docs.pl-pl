@@ -7,14 +7,18 @@ ms.author: anurse
 ms.custom: mvc
 ms.date: 01/16/2020
 no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: signalr/security
-ms.openlocfilehash: 5a804425752a26cc5f3185f2b43dd9219dec312d
-ms.sourcegitcommit: f9a5069577e8f7c53f8bcec9e13e117950f4f033
+ms.openlocfilehash: 2b049d9d8131c6c95b2f768620c984d0f67f92cc
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82558978"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775326"
 ---
 # <a name="security-considerations-in-aspnet-core-signalr"></a>Zagadnienia dotyczące zabezpieczeń w ASP.NET CoreSignalR
 

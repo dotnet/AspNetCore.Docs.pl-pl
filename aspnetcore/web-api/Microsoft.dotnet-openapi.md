@@ -5,13 +5,19 @@ description: Pokazuje, w jaki sposób używać narzędzia "Microsoft. dotnet-ope
 ms.author: rybrande
 ms.date: 09/26/2019
 monikerRange: '>= aspnetcore-3.0'
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: web-api/Microsoft.dotnet-openapi
-ms.openlocfilehash: 079e36511b63c186ffa7726bdb1e3c3bcbda9d34
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 1924fb8ee5ac1ba8dc31d2175a336c8333c81fb2
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78655268"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775716"
 ---
 # <a name="develop-aspnet-core-apps-using-openapi-tools"></a>Opracowywanie aplikacji ASP.NET Core przy użyciu narzędzi OpenAPI
 
@@ -21,15 +27,15 @@ Ryan Brandenburg
 
 ## <a name="installation"></a>Instalacja
 
-Aby zainstalować `Microsoft.dotnet-openapi`, uruchom następujące polecenie:
+Aby zainstalować `Microsoft.dotnet-openapi`program, uruchom następujące polecenie:
 
 ```dotnetcli
 dotnet tool install -g Microsoft.dotnet-openapi
 ```
 
-## <a name="add"></a>Add
+## <a name="add"></a>Dodaj
 
-Dodanie odwołania OpenAPI przy użyciu dowolnego polecenia na tej stronie spowoduje dodanie elementu `<OpenApiReference />` podobnego do poniższego do pliku *. csproj* :
+Dodanie odwołania OpenAPI przy użyciu dowolnego polecenia na tej stronie powoduje dodanie `<OpenApiReference />` elementu podobnego do poniższego do pliku *. csproj* :
 
 ```xml
 <OpenApiReference Include="openapi.json" />
@@ -59,8 +65,8 @@ Poprzednie odwołanie jest wymagane, aby aplikacja mogła wywołać wygenerowany
 | Opcja krótka| Opcja Long| Opis | Przykład |
 |-------|------|-------|---------|
 | -p|--updateProject | Projekt do działania. |openapi dotnet — Dodaj plik *--updateProject .\Ref.csproj* .\OpenAPI.JSON |
-| -c|--Generator kodu| Generator kodu, który ma zostać zastosowany do odwołania. Dostępne są `NSwagCSharp` i `NSwagTypeScript`. Jeśli `--code-generator` nie zostanie określona, ustawienia domyślne narzędzi do `NSwagCSharp`.|dotnet openapi Dodaj plik .\OpenApi.json--generator kodu
-| -h|--help|Pokaż informacje pomocy|openapi dotnet — Dodawanie pliku — pomoc|
+| -c|--Generator kodu| Generator kodu, który ma zostać zastosowany do odwołania. Dostępne opcje `NSwagCSharp` to `NSwagTypeScript`i. Jeśli `--code-generator` nie określono ustawień domyślnych narzędzi `NSwagCSharp`.|dotnet openapi Dodaj plik .\OpenApi.json--generator kodu
+| -h|--Pomoc|Pokaż informacje pomocy|openapi dotnet — Dodawanie pliku — pomoc|
 
 #### <a name="arguments"></a>Argumenty
 
@@ -68,24 +74,24 @@ Poprzednie odwołanie jest wymagane, aby aplikacja mogła wywołać wygenerowany
 |-------------|-------------|---------|
 | plik źródłowy | Źródło, z którego ma zostać utworzone odwołanie. Musi to być plik OpenAPI. |openapi dotnet — Dodaj plik *.\OpenAPI.JSON* |
 
-### <a name="add-url"></a>Dodawanie adresu URL
+### <a name="add-url"></a>Dodaj adres URL
 
 #### <a name="options"></a>Opcje
 
 | Opcja krótka| Opcja Long| Opis | Przykład |
 |-------|------|-------------|---------|
-| -p|--updateProject | Projekt do działania. |openapi dotnet — Dodaj adres URL *--updateProject .\Ref.csproj* `https://contoso.com/openapi.json` |
-| -o|--Output-File | Miejsce, w którym ma zostać umieszczona kopia lokalna pliku OpenAPI. |openapia dotnet Dodaj adres URL `https://contoso.com/openapi.json` *--output-plik WebClient. JSON* |
-| -c|--Generator kodu| Generator kodu, który ma zostać zastosowany do odwołania. Dostępne są `NSwagCSharp` i `NSwagTypeScript`. |dotnet openapi Dodaj plik .\OpenApi.json--generator kodu
-| -h|--help|Pokaż informacje pomocy|openapi dotnet — Dodaj adres URL — pomoc|
+| -p|--updateProject | Projekt do działania. |openapi dotnet — Dodaj adres URL *--updateProject .\Ref.csproj*`https://contoso.com/openapi.json` |
+| -o|--Output-File | Miejsce, w którym ma zostać umieszczona kopia lokalna pliku OpenAPI. |openapi dotnet Dodaj adres `https://contoso.com/openapi.json` URL- *-output-plik WebClient. JSON* |
+| -c|--Generator kodu| Generator kodu, który ma zostać zastosowany do odwołania. Dostępne opcje `NSwagCSharp` to `NSwagTypeScript`i. |dotnet openapi Dodaj plik .\OpenApi.json--generator kodu
+| -h|--Pomoc|Pokaż informacje pomocy|openapi dotnet — Dodaj adres URL — pomoc|
 
 #### <a name="arguments"></a>Argumenty
 
 |  Argument  | Opis | Przykład |
 |-------------|-------------|---------|
-| adres URL źródła | Źródło, z którego ma zostać utworzone odwołanie. Musi być adresem URL. |`https://contoso.com/openapi.json` dodawania adresu URL openapi dotnet |
+| adres URL źródła | Źródło, z którego ma zostać utworzone odwołanie. Musi być adresem URL. |Dodawanie adresu URL openapi dotnet`https://contoso.com/openapi.json` |
 
-## <a name="remove"></a>Remove
+## <a name="remove"></a>Usuń
 
 Usuwa odwołanie OpenAPI pasujące do podanej nazwy pliku z pliku *csproj* . Po usunięciu odwołania OpenAPI klienci nie będą wygenerował. Pliki Local *. JSON* i *. YAML* są usuwane.
 
@@ -94,7 +100,7 @@ Usuwa odwołanie OpenAPI pasujące do podanej nazwy pliku z pliku *csproj* . Po 
 | Opcja krótka| Opcja Long| Opis| Przykład |
 |-------|------|------------|---------|
 | -p|--updateProject | Projekt do działania. |openapi dotnet *--updateProject .\Ref.csproj* .\OpenAPI.JSON |
-| -h|--help|Pokaż informacje pomocy|openapi dotnet — pomoc|
+| -h|--Pomoc|Pokaż informacje pomocy|openapi dotnet — pomoc|
 
 ### <a name="arguments"></a>Argumenty
 
@@ -110,11 +116,11 @@ Odświeża lokalną wersję pliku, który został pobrany przy użyciu najnowsze
 
 | Opcja krótka| Opcja Long| Opis | Przykład |
 |-------|------|-------------|---------|
-| -p|--updateProject | Projekt do działania. | openapi dotnet *--updateProject .\Ref.csproj* `https://contoso.com/openapi.json` |
-| -h|--help|Pokaż informacje pomocy|openapi dotnet — pomoc|
+| -p|--updateProject | Projekt do działania. | openapi dotnet *--updateProject .\Ref.csproj*`https://contoso.com/openapi.json` |
+| -h|--Pomoc|Pokaż informacje pomocy|openapi dotnet — pomoc|
 
 ### <a name="arguments"></a>Argumenty
 
 |  Argument  | Opis | Przykład |
 | ------------|-------------|---------|
-| adres URL źródła | Adres URL, z którego ma zostać odświeżone odwołanie. | `https://contoso.com/openapi.json` odświeżania dotnet openapi |
+| adres URL źródła | Adres URL, z którego ma zostać odświeżone odwołanie. | Odświeżanie openapi dotnet`https://contoso.com/openapi.json` |

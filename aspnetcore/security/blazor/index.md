@@ -5,17 +5,20 @@ description: Dowiedz Blazor się więcej na temat scenariuszy uwierzytelniania i
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/26/2020
+ms.date: 05/04/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: security/blazor/index
-ms.openlocfilehash: ced8e90147b08bc75aec4534fdd8d8552506f88c
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: d55880265ed1ceedf8f115412e5ac47309521239
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82206102"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82772898"
 ---
 # <a name="aspnet-core-blazor-authentication-and-authorization"></a>ASP.NET Core Blazor uwierzytelnianie i autoryzacja
 
@@ -35,12 +38,12 @@ Scenariusze zabezpieczeń różnią Blazor się między Blazor aplikacjami serwe
 
 BlazorAplikacje webassembly są uruchamiane na kliencie. Autoryzacja jest używana *tylko* do określenia opcji interfejsu użytkownika, które mają być wyświetlane. Ponieważ testy po stronie klienta mogą być modyfikowane lub pomijane przez użytkownika, Blazor aplikacja webassembly nie może wymusić reguł dostępu autoryzacji.
 
-[Razor Pages Konwencji autoryzacji](xref:security/authorization/razor-pages-authorization) nie mają zastosowania do routingu składników Razor. Jeśli składnik Razor nieobsługujący routingu jest [osadzony na stronie](xref:blazor/integrate-components#render-components-from-a-page-or-view), konwencje autoryzacji strony mają pośredni wpływ na składnik Razor wraz z resztą zawartości strony.
+Konwencje autoryzacji stron nie dotyczą składników Razor rutowanych. [ Razor ](xref:security/authorization/razor-pages-authorization) Jeśli na [stronie osadzony](xref:blazor/integrate-components#render-components-from-a-page-or-view)jest składnik nieobsługujący routingu Razor Razor , konwencje autoryzacji stron pośrednio wpływają na składnik wraz z resztą zawartości strony.
 
 > [!NOTE]
-> <xref:Microsoft.AspNetCore.Identity.SignInManager%601>i <xref:Microsoft.AspNetCore.Identity.UserManager%601> nie są obsługiwane w składnikach Razor.
+> <xref:Microsoft.AspNetCore.Identity.SignInManager%601>i <xref:Microsoft.AspNetCore.Identity.UserManager%601> nie są obsługiwane Razor w składnikach.
 
-## <a name="authentication"></a>Authentication
+## <a name="authentication"></a>Uwierzytelnianie
 
 Blazorprogram używa istniejących mechanizmów uwierzytelniania ASP.NET Core do ustanowienia tożsamości użytkownika. Dokładny mechanizm zależy od tego Blazor , jak aplikacja jest hostowana, Blazor webassembly lub Blazor serwer.
 
@@ -246,7 +249,7 @@ Dostęp jest zazwyczaj udzielany lub odrzucany w zależności od tego, czy:
 * Użytkownik ma *wierzytelność*.
 * *Zasady* są spełnione.
 
-Każda z tych koncepcji jest taka sama jak w aplikacji ASP.NET Core MVC lub Razor Pages. Aby uzyskać więcej informacji na temat zabezpieczeń ASP.NET Core, zapoznaj się z artykułami w obszarze [ASP.NET Core zabezpieczenia i tożsamość](xref:security/index).
+Każda z tych koncepcji jest taka sama jak w aplikacji ASP.NET Core MVC lub Razor Pages. Więcej informacji o zabezpieczeniach ASP.NET Core można znaleźć w artykułach w obszarze [ASP.NET Core IdentitySecurity i ](xref:security/index).
 
 ## <a name="authorizeview-component"></a>Składnik AuthorizeView
 
@@ -338,7 +341,7 @@ Takie podejście nie dotyczy zazwyczaj aplikacji Blazor serwerowych. BlazorAplik
 
 ## <a name="authorize-attribute"></a>[Autoryzuj] — atrybut
 
-Ten `[Authorize]` atrybut może być używany w składnikach Razor:
+Ten `[Authorize]` atrybut może być używany w Razor składnikach:
 
 ```razor
 @page "/"
@@ -426,6 +429,7 @@ Jeśli aplikacja określi, że dane stanu uwierzytelniania zostały zmienione (n
 Jeśli aplikacja jest wymagana do sprawdzenia reguł autoryzacji jako części logiki proceduralnej, należy użyć kaskadowego parametru typu `Task<AuthenticationState>` , aby uzyskać użytkownika. <xref:System.Security.Claims.ClaimsPrincipal> `Task<AuthenticationState>`można łączyć z innymi usługami, takimi jak `IAuthorizationService`, do analizowania zasad.
 
 ```razor
+@using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
 
 <button @onclick="@DoSomething">Do something important</button>
@@ -496,7 +500,7 @@ Prawdopodobnie projekt nie został utworzony przy użyciu szablonu Blazor serwer
 
 `CascadingAuthenticationState` Dostarcza parametr `Task<AuthenticationState>` kaskadowy, który z kolei otrzymuje od podstawowej `AuthenticationStateProvider` usługi di.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:security/index>
 * <xref:security/authentication/windowsauth>

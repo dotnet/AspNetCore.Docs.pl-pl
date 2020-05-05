@@ -1,141 +1,147 @@
 ---
-title: Oprogramowanie pośredniczące do przepisywania adresów URL w ASP.NET Core
+title: Ponowne zapisywanie przez adres URL oprogramowania pośredniczącego w ASP.NET Core
 author: rick-anderson
-description: Dowiedz się więcej o przepisywaniu i przekierowywaniu adresów URL za pomocą oprogramowania pośredniczącego do przepisywania adresów URL w aplikacjach ASP.NET Core.
+description: Dowiedz się więcej na temat zapisywania i przekierowywania adresów URL przy użyciu oprogramowania pośredniczącego do ponownego zapisywania adresów URL w aplikacjach ASP.NET Core.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 08/16/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: fundamentals/url-rewriting
-ms.openlocfilehash: 7d63cf381f1d8a19ed4fb789348e36f94304ad63
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 9e12831f57af02cd427d2a66d9d4c4d654905106
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78666468"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774863"
 ---
-# <a name="url-rewriting-middleware-in-aspnet-core"></a>Oprogramowanie pośredniczące do przepisywania adresów URL w ASP.NET Core
+# <a name="url-rewriting-middleware-in-aspnet-core"></a>Ponowne zapisywanie przez adres URL oprogramowania pośredniczącego w ASP.NET Core
 
-Przez [Mikael Mengistu](https://github.com/mikaelm12)
+Autor [Mikael Mengistu](https://github.com/mikaelm12)
 
 ::: moniker range=">= aspnetcore-3.0"
 
-W tym dokumencie wprowadzono przepisywanie adresów URL z instrukcjami dotyczącymi używania oprogramowania pośredniczącego do przepisywania adresów URL w aplikacjach ASP.NET Core.
+Ten dokument zawiera wprowadzenie do ponownego zapisywania adresów URL z instrukcjami dotyczącymi sposobu korzystania z programu pośredniczącego do ponownego zapisywania adresów URL w aplikacjach ASP.NET Core.
 
-Przepisywanie adresów URL to czynność modyfikowania adresów URL żądań na podstawie co najmniej jednej wstępnie zdefiniowanej reguły. Przepisywanie adresów URL tworzy abstrakcję między lokalizacjami zasobów a ich adresami, dzięki czemu lokalizacje i adresy nie są ściśle powiązane. Przepisywanie adresów URL jest cenne w kilku scenariuszach, aby:
+Ponowne zapisywanie adresu URL to czynność modyfikacji adresów URL żądań na podstawie co najmniej jednej wstępnie zdefiniowanej reguły. Ponowne zapisywanie adresów URL powoduje utworzenie abstrakcji między lokalizacjami zasobów a ich adresami, dzięki czemu lokalizacje i adresy nie są ściśle połączone. Ponowne zapisywanie adresów URL jest cenne w kilku scenariuszach:
 
-* Przenieś lub zastąp zasoby serwera tymczasowo lub na stałe i zachowaj stabilne lokalizatory dla tych zasobów.
-* Przetwarzanie żądań podzielonych na różne aplikacje lub w różnych obszarach jednej aplikacji.
-* Usuwanie, dodawanie lub reorganizowanie segmentów adresów URL w żądaniach przychodzących.
-* Optymalizacja publicznych adresów URL pod kątem optymalizacji pod kątem wyszukiwarek (SEO).
-* Zezwalaj na używanie przyjaznych publicznych adresów URL, aby ułatwić odwiedzającym przewidywanie zwracanej zawartości przez żądanie zasobu.
+* Przenoszenie lub zastępowanie zasobów serwera tymczasowo lub trwale i utrzymuje stałe lokalizatory dla tych zasobów.
+* Podziel przetwarzanie żądań między różne aplikacje lub w obszarach jednej aplikacji.
+* Usuwanie, Dodawanie lub organizowanie segmentów adresów URL w żądaniach przychodzących.
+* Optymalizuj publiczne adresy URL dla optymalizacji aparatu wyszukiwania (wyszukiwarka).
+* Zezwól na używanie przyjaznych publicznych adresów URL, aby ułatwić odwiedzającym zapowiadanie zawartości zwróconej przez żądanie zasobu.
 * Przekieruj niezabezpieczone żądania do bezpiecznych punktów końcowych.
-* Zapobiegaj hotlinkingowi, gdy witryna zewnętrzna używa hostowanego zasobu statycznego w innej witrynie, łącząc go z własną zawartością.
+* Zapobiegaj hotlinking, gdzie lokacja zewnętrzna używa hostowanego zasobu statycznego w innej lokacji przez połączenie elementu zawartości z własną zawartością.
 
 > [!NOTE]
-> Przepisywanie adresów URL może zmniejszyć wydajność aplikacji. Tam, gdzie jest to możliwe, ogranicz liczbę i złożoność przepisów.
+> Ponowne zapisywanie adresów URL może zmniejszyć wydajność aplikacji. Jeśli to możliwe, należy ograniczyć liczbę i złożoność reguł.
 
 [Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/url-rewriting/samples/) ([jak pobrać](xref:index#how-to-download-a-sample))
 
-## <a name="url-redirect-and-url-rewrite"></a>Przekierowanie adresu URL i przepisanie adresu URL
+## <a name="url-redirect-and-url-rewrite"></a>Przekierowywanie adresów URL i ponowne zapisywanie adresów URL
 
-Różnica w sformułowaniu między *przekierowaniem adresu URL* a *przepisaniem adresu URL jest subtelna,* ale ma istotne implikacje dla dostarczania zasobów klientom. ASP.NET Core url przepisywanie oprogramowania pośredniczącego jest w stanie zasypać potrzebę obu.
+Różnica między *przekierowaniami adresów URL* i *przepisaniem adresów URL* jest subtelna, ale ma ważne konsekwencje dla udostępniania zasobów klientom. Ponowne zapisywanie oprogramowania pośredniczącego w usłudze ASP.NET Core jest w stanie sprostać potrzebom obu tych elementów.
 
-*Przekierowanie adresu URL* obejmuje operację po stronie klienta, gdzie klient jest poinstruowany, aby uzyskać dostęp do zasobu pod innym adresem niż klient pierwotnie żądany. Wymaga to podróży w obie strony do serwera. Adres URL przekierowania zwrócony do klienta pojawia się na pasku adresu przeglądarki, gdy klient wysunie nowe żądanie dla zasobu.
+*Przekierowanie adresu URL* obejmuje operację po stronie klienta, w której klient otrzymuje dostęp do zasobu pod innym adresem niż pierwotnie żądany klient. Wymaga to przeprowadzenia rundy na serwerze. Adres URL przekierowania zwracany do klienta pojawia się na pasku adresu przeglądarki, gdy klient wysyła nowe żądanie dla zasobu.
 
-Jeśli `/resource` zostanie *przekierowany* do `/different-resource`programu, serwer odpowiada, że `/different-resource` klient powinien uzyskać zasób z kodem stanu wskazującym, że przekierowanie jest tymczasowe lub stałe.
+W `/resource` przypadku *przekierowania* do `/different-resource`programu serwer odpowiada, że klient powinien uzyskać zasób przy `/different-resource` użyciu kodu stanu wskazującego, że przekierowanie jest tymczasowe lub trwałe.
 
-![Punkt końcowy usługi WebAPI został tymczasowo zmieniony z wersji 1 (wersja 1) na wersję 2 (wersja 2) na serwerze. Klient sprawia, że żądanie do usługi w wersji 1 ścieżka /v1/api. Serwer wysyła z powrotem odpowiedź 302 (Found) z nową, tymczasową ścieżką dla usługi w wersji 2 /v2/api. Klient wysunie drugie żądanie do usługi pod adresem URL przekierowania. Serwer odpowiada kodem stanu 200 (OK).](url-rewriting/_static/url_redirect.png)
+![Punkt końcowy usługi WebAPI został tymczasowo zmieniony z wersji 1 (v1) do wersji 2 (v2) na serwerze. Klient wysyła żądanie do usługi w ścieżce w wersji 1/v1/API. Serwer wysyła odpowiedź 302 (znalezioną) z nową ścieżką tymczasową dla usługi w wersji 2/v2/API. Klient wysyła drugie żądanie do usługi przy użyciu adresu URL przekierowania. Serwer reaguje na kod stanu 200 (OK).](url-rewriting/_static/url_redirect.png)
 
-Podczas przekierowywania żądań do innego adresu URL, należy wskazać, czy przekierowanie jest stałe czy tymczasowe, określając kod stanu z odpowiedzią:
+Podczas przekierowywania żądań do innego adresu URL wskaż, czy przekierowanie jest trwałe, czy tymczasowe, określając kod stanu z odpowiedzią:
 
-* *301 - Przeniesiony kod* stanu trwale jest używany, gdy zasób ma nowy, stały adres URL i chcesz poinstruować klienta, że wszystkie przyszłe żądania dla zasobu powinny używać nowego adresu URL. *Klient może buforować i ponownie używać odpowiedzi po odebraniu kodu stanu 301.*
+* *301-przesunięty* kod stanu jest używany, gdy zasób ma nowy, stały adres URL i chcesz wydać klientowi, że wszystkie przyszłe żądania dla zasobu powinny używać nowego adresu URL. *Klient może buforować i ponownie używać odpowiedzi po odebraniu kodu stanu 301.*
 
-* Kod stanu *302 - Znaleziono* jest używany, gdy przekierowanie jest tymczasowe lub zazwyczaj może ulec zmianie. Kod stanu 302 oznacza, że klient nie przechowuje adresu URL i nie używa go w przyszłości.
+* Kod stanu *znaleziony przez 302* jest używany, gdy przekierowywanie jest tymczasowe lub zwykle może ulec zmianie. Kod stanu 302 wskazuje na klienta, aby nie przechowywać adresu URL i używać go w przyszłości.
 
-Aby uzyskać więcej informacji na temat kodów stanu, zobacz [RFC 2616: Definicje kodu stanu](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html).
+Aby uzyskać więcej informacji na temat kodów stanu, zobacz [RFC 2616: definicje kodów stanu](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html).
 
-*Przepisanie adresu URL* jest operacją po stronie serwera, która zapewnia zasób z adresu innego zasobu niż żądany klient. Przepisywanie adresu URL nie wymaga podróży w obie strony do serwera. Przepisany adres URL nie jest zwracany do klienta i nie jest wyświetlany na pasku adresu przeglądarki.
+Ponowne *Zapisywanie adresów URL* jest operacją po stronie serwera, która dostarcza zasób z innego adresu zasobu niż żądany klient. Ponowne zapisywanie adresu URL nie wymaga przejazdu na serwer. Zwrotny adres URL nie jest zwracany do klienta i nie jest wyświetlany na pasku adresu przeglądarki.
 
-Jeśli `/resource` jest *przepisany* do `/different-resource`, serwer *wewnętrznie* pobiera i `/different-resource`zwraca zasób w .
+Jeśli `/resource` program *rewritten* zostanie ponownie `/different-resource`zapisany w programie, serwer *wewnętrznie* pobiera i zwraca zasób w `/different-resource`.
 
-Mimo że klient może być w stanie pobrać zasób przy przepisanych adresów URL, klient nie jest informowany, że zasób istnieje w przepisany adres URL, gdy sprawia, że jego żądanie i odbiera odpowiedź.
+Mimo że klient może być w stanie pobrać zasób przy zapisywanym adresie URL, klient nie ma informacji o tym, że zasób istnieje pod adresem URL, gdy wysyła żądanie i otrzymuje odpowiedź.
 
-![Punkt końcowy usługi WebAPI został zmieniony z wersji 1 (wersja 1) na wersję 2 (wersja 2) na serwerze. Klient sprawia, że żądanie do usługi w wersji 1 ścieżka /v1/api. Adres URL żądania jest przepisany, aby uzyskać dostęp do usługi w ścieżce w wersji 2 /v2/api. Usługa odpowiada klientowi za pomocą kodu stanu 200 (OK).](url-rewriting/_static/url_rewrite.png)
+![Punkt końcowy usługi WebAPI został zmieniony z wersji 1 (v1) na wersję 2 (v2) na serwerze. Klient wysyła żądanie do usługi w ścieżce w wersji 1/v1/API. Adres URL żądania zostanie ponownie zapisany w celu uzyskania dostępu do usługi w ścieżce w wersji 2/v2/API. Usługa reaguje na klienta z kodem stanu 200 (OK).](url-rewriting/_static/url_rewrite.png)
 
-## <a name="url-rewriting-sample-app"></a>Przykładowa aplikacja do przepisywania adresów URL
+## <a name="url-rewriting-sample-app"></a>Przykładowa aplikacja do ponownego zapisywania adresów URL
 
-Za pomocą [przykładowej aplikacji](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/url-rewriting/samples/)można zapoznać się z funkcjami oprogramowania pośredniczącego przepisywania adresów URL. Aplikacja stosuje reguły przekierowania i przepisywania i pokazuje przekierowany lub przepisany adres URL dla kilku scenariuszy.
+Możesz zapoznać się z funkcjami zapisywania oprogramowania pośredniczącego za pomocą [przykładowej aplikacji](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/url-rewriting/samples/). Aplikacja stosuje reguły przekierowania i ponownego zapisywania oraz pokazuje przekierowany lub ponownie zapisany adres URL dla kilku scenariuszy.
 
-## <a name="when-to-use-url-rewriting-middleware"></a>Kiedy używać oprogramowania pośredniczącego do przepisywania adresów URL
+## <a name="when-to-use-url-rewriting-middleware"></a>Kiedy używać oprogramowania pośredniczącego ponownego zapisywania adresów URL
 
-Oprogramowanie pośredniczące do przepisywania adresów URL używa się następujących metod:
+Używaj ponownego zapisywania adresów URL, gdy nie możesz użyć następujących metod:
 
-* [Moduł przepisywania adresów URL z usługami IIS w systemie Windows Server](https://www.iis.net/downloads/microsoft/url-rewrite)
-* [Moduł mod_rewrite Apache na serwerze Apache](https://httpd.apache.org/docs/2.4/rewrite/)
-* [Przepisywanie adresów URL w Nginx](https://www.nginx.com/blog/creating-nginx-rewrite-rules/)
+* [Moduł ponownego zapisywania adresów URL z usługami IIS w systemie Windows Server](https://www.iis.net/downloads/microsoft/url-rewrite)
+* [Moduł Apache mod_rewrite na serwerze Apache](https://httpd.apache.org/docs/2.4/rewrite/)
+* [Ponowne zapisywanie adresów URL w witrynie Nginx](https://www.nginx.com/blog/creating-nginx-rewrite-rules/)
 
-Ponadto należy użyć oprogramowania pośredniczącego, gdy aplikacja jest hostowana na [serwerze HTTP.sys](xref:fundamentals/servers/httpsys) (dawniej nazywanym WebListener).
+Należy również użyć oprogramowania pośredniczącego, gdy aplikacja jest hostowana na [serwerze HTTP. sys](xref:fundamentals/servers/httpsys) (wcześniej nazywanej webListener).
 
-Główne powody, dla których warto używać opartych na serwerze technologii przepisywania adresów URL w usługach IIS, Apache i Nginx to:
+Główne przyczyny używania technologii zapisywania adresów URL opartych na serwerze w usługach IIS, Apache i Nginx są następujące:
 
 * Oprogramowanie pośredniczące nie obsługuje pełnych funkcji tych modułów.
 
-  Niektóre funkcje modułów serwera nie działają z ASP.NET projektów podstawowych, `IsFile` takich `IsDirectory` jak i ograniczenia modułu IIS Rewrite. W tych scenariuszach zamiast tego należy użyć oprogramowania pośredniczącego.
-* Wydajność oprogramowania pośredniczącego prawdopodobnie nie pasuje do wydajności modułów.
+  Niektóre funkcje modułów serwera nie współpracują z projektami ASP.NET Core, takimi jak `IsFile` i `IsDirectory` ograniczeniami modułu ponownego zapisywania usług IIS. W tych scenariuszach zamiast tego należy użyć oprogramowania pośredniczącego.
+* Wydajność oprogramowania pośredniczącego prawdopodobnie nie jest zgodna z tymi modułami.
 
-  Analiza porównawcza jest jedynym sposobem, aby wiedzieć na pewno, które podejście obniża wydajność najbardziej lub jeśli obniżona wydajność jest znikoma.
+  Testy porównawcze są jedynym sposobem, aby wiedzieć, że metoda obniża wydajność w najbardziej lub niewielkim stopniu wydajności.
 
 ## <a name="package"></a>Pakiet
 
-Oprogramowanie pośredniczące do przepisywania adresów URL jest dostarczane przez pakiet [Microsoft.AspNetCore.Rewrite,](https://www.nuget.org/packages/Microsoft.AspNetCore.Rewrite) który jest niejawnie zawarty w aplikacjach ASP.NET Core.
+Oprogramowanie pośredniczące ponownego zapisywania adresów URL jest dostarczane przez pakiet [Microsoft. AspNetCore. Rewrite](https://www.nuget.org/packages/Microsoft.AspNetCore.Rewrite) , który jest niejawnie uwzględniony w aplikacjach ASP.NET Core.
 
 ## <a name="extension-and-options"></a>Rozszerzenie i opcje
 
-Uspokaj reguły przepisywania i przekierowywania adresów URL, tworząc wystąpienie klasy [RewriteOptions](xref:Microsoft.AspNetCore.Rewrite.RewriteOptions) z metodami rozszerzenia dla każdej reguły przepisywania. Łańcuch wielu reguł w kolejności, w której chcesz je przetworzyć. Są `RewriteOptions` przekazywane do adresu URL przepisywanie oprogramowania pośredniczącego, <xref:Microsoft.AspNetCore.Builder.RewriteBuilderExtensions.UseRewriter*>jak jest dodawany do potoku żądania z:
+Ustanów reguły ponownego zapisywania i przekierowywania adresów URL, tworząc wystąpienie klasy [RewriteOptions](xref:Microsoft.AspNetCore.Rewrite.RewriteOptions) z metodami rozszerzającymi dla każdej z reguł ponownego zapisywania. Łączenie wielu reguł w kolejności, w jakiej mają być przetwarzane. `RewriteOptions` Są one przesyłane do programu pośredniczącego na potrzeby ponownego zapisywania adresów URL, ponieważ są dodawane do potoku żądania przy użyciu <xref:Microsoft.AspNetCore.Builder.RewriteBuilderExtensions.UseRewriter*>:
 
 [!code-csharp[](url-rewriting/samples/3.x/SampleApp/Startup.cs?name=snippet1)]
 
-### <a name="redirect-non-www-to-www"></a>Przekieruj inne niż www na www
+### <a name="redirect-non-www-to-www"></a>Przekieruj do sieci Web inne niż www
 
-Trzy opcje pozwalają aplikacji przekierować`www` `www`nie-żądania do:
+Trzy opcje Zezwalaj aplikacji na przekierowywanie`www` żądań, które nie `www`są żądaniami do:
 
-* <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirectToWwwPermanent*>&ndash; Trwale przekieruj żądanie do `www` poddomeny, jeśli żądanie nie jest-`www`. Przekierowuje z kodem stanu [Status308PermanentRedirect.](xref:Microsoft.AspNetCore.Http.StatusCodes.Status308PermanentRedirect)
+* <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirectToWwwPermanent*>&ndash; Trwale Przekieruj żądanie do `www` domeny podrzędnej, jeśli żądanie jest inne niż`www`. Przekierowuje kod stanu [Status308PermanentRedirect](xref:Microsoft.AspNetCore.Http.StatusCodes.Status308PermanentRedirect) .
 
-* <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirectToWww*>&ndash; Przekieruj `www` żądanie do poddomeny,`www`jeśli żądanie przychodzące nie jest - . Przekierowuje z kodem stanu [Status307TemporaryRedirect.](xref:Microsoft.AspNetCore.Http.StatusCodes.Status307TemporaryRedirect) Przeciążenie umożliwia podanie kodu stanu odpowiedzi. Użyj pola <xref:Microsoft.AspNetCore.Http.StatusCodes> klasy dla przypisania kodu stanu.
+* <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirectToWww*>&ndash; Przekieruj żądanie do `www` domeny podrzędnej, jeśli żądanie przychodzące jest inne niż`www`. Przekierowuje kod stanu [Status307TemporaryRedirect](xref:Microsoft.AspNetCore.Http.StatusCodes.Status307TemporaryRedirect) . Przeciążenie umożliwia podanie kodu stanu odpowiedzi. Użyj pola <xref:Microsoft.AspNetCore.Http.StatusCodes> klasy do przypisania kodu stanu.
 
 ### <a name="url-redirect"></a>Przekierowywanie adresów URL
 
-Służy <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirect*> do przekierowywania żądań. Pierwszy parametr zawiera wyrażenie regularne do dopasowywania na ścieżce przychodzącego adresu URL. Drugi parametr to ciąg zastępczy. Trzeci parametr, jeśli jest obecny, określa kod stanu. Jeśli nie określisz kodu stanu, domyślnie kod stanu *302 - Znaleziono*, co oznacza, że zasób jest tymczasowo przeniesiony lub zastąpiony.
+Użyj <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirect*> , aby przekierować żądania. Pierwszy parametr zawiera wyrażenie regularne do dopasowania na ścieżce przychodzącego adresu URL. Drugi parametr jest ciągiem zamiennym. Trzeci parametr, jeśli obecny, określa kod stanu. Jeśli nie określisz kodu stanu, kod stanu zostanie zmieniony na *302-znaleziono*, co oznacza, że zasób jest tymczasowo przenoszony lub zastępowany.
 
 [!code-csharp[](url-rewriting/samples/3.x/SampleApp/Startup.cs?name=snippet1&highlight=9)]
 
-W przeglądarce z włączonymi narzędziami deweloperskimi złożyć `/redirect-rule/1234/5678`żądanie do przykładowej aplikacji ze ścieżką . Wyrażenie regularne jest zgodne `redirect-rule/(.*)`ze ścieżką żądania, `/redirected/1234/5678`a ścieżka jest zastępowana . Adres URL przekierowania jest wysyłany z powrotem do klienta z kodem stanu *302 — znaleziono.* Przeglądarka tworzy nowe żądanie pod adresem URL przekierowania, który pojawia się na pasku adresu przeglądarki. Ponieważ żadne reguły w przykładowej aplikacji nie są zgodne z adresem URL przekierowania:
+W przeglądarce z włączonymi narzędziami deweloperskimi Utwórz żądanie do przykładowej aplikacji ze ścieżką `/redirect-rule/1234/5678`. Wyrażenie regularne dopasowuje ścieżkę żądania w `redirect-rule/(.*)`, a ścieżka jest zastępowana przez `/redirected/1234/5678`. Adres URL przekierowania jest wysyłany z powrotem do klienta z kodem stanu *znalezionym przez 302* . Przeglądarka tworzy nowe żądanie w adresie URL przekierowania, który jest wyświetlany na pasku adresu przeglądarki. Ponieważ w adresie URL przekierowania nie ma reguł pasujących do przykładowej aplikacji:
 
-* Drugie żądanie otrzymuje *odpowiedź 200 — OK* z aplikacji.
-* Treść odpowiedzi pokazuje adres URL przekierowania.
+* Drugie żądanie odbiera odpowiedź *200-OK* z aplikacji.
+* Treść odpowiedzi zawiera adres URL przekierowania.
 
-Po *przekierowaniu*adresu URL adres URL na serwer odbywa się podróż w obie strony.
+Po *przekierowaniu*adresu URL do serwera zostanie przeprowadzona runda.
 
 > [!WARNING]
-> Należy zachować ostrożność podczas ustanawiania reguł przekierowania. Reguły przekierowania są oceniane przy każdym żądaniu do aplikacji, w tym po przekierowaniu. Łatwo jest przypadkowo utworzyć *pętlę nieskończonych przekierowań*.
+> Należy zachować ostrożność podczas ustanawiania reguł przekierowań. Reguły przekierowania są oceniane dla każdego żądania do aplikacji, w tym po przekierowaniu. Można łatwo przypadkowo utworzyć *pętlę nieskończonych przekierowań*.
 
-Oryginalna prośba:`/redirect-rule/1234/5678`
+Oryginalne żądanie:`/redirect-rule/1234/5678`
 
-![Okno przeglądarki z narzędziami deweloperskimi śledzącymi żądania i odpowiedzi](url-rewriting/_static/add_redirect.png)
+![Okno przeglądarki z Narzędzia deweloperskie śledzenia żądań i odpowiedzi](url-rewriting/_static/add_redirect.png)
 
-Część wyrażenia zawarta w nawiasach jest nazywana *grupą przechwytywania*. Kropka (`.`) wyrażenia oznacza *dopasowanie dowolnego znaku*. Gwiazdka (`*`) oznacza *dopasowanie poprzedniego znaku zero lub więcej razy*. W związku z tym dwa ostatnie segmenty ścieżki adresu `1234/5678` `(.*)`URL, są przechwytywane przez grupę przechwytywania . Każda wartość podana w `redirect-rule/` adresie URL żądania po jest przechwytywany przez tę pojedynczą grupę przechwytywania.
+Część wyrażenia zawartego w nawiasach jest nazywana *grupą przechwytywania*. Kropka (`.`) wyrażenia oznacza *dopasowanie dowolnego znaku*. Gwiazdka (`*`) oznacza *Dopasowanie znaku poprzedzającego zero lub więcej razy*. W związku z tym, ostatnie dwa segmenty ścieżki adresu `1234/5678`URL, są przechwytywane przez `(.*)`grupę przechwytywania. Każda wartość podaną w adresie URL żądania `redirect-rule/` Po przechwyceniu przez tę pojedynczą grupę przechwytywania.
 
-W ciągu zastępczym przechwycone grupy są wtryskiwane`$`do ciągu ze znakiem dolara ( ), po którym następuje numer sekwencyjny przechwytywania. Pierwsza wartość grupy przechwytywania `$1`jest uzyskiwana za pomocą , drugi z `$2`, i są one kontynuowane w kolejności dla grup przechwytywania w wyrażeniach. Istnieje tylko jedna przechwycona grupa w resecie przekierowania regex w przykładowej aplikacji, więc `$1`jest tylko jedna wstrzyknięta grupa w ciągu zastępczym, który jest . Po zastosowaniu reguły adres `/redirected/1234/5678`URL staje się .
+W ciągu zamiennym przechwycone grupy są wstawiane do ciągu z symbolem dolara`$`(), po którym następuje numer sekwencji przechwytywania. Pierwsza wartość grupy przechwytywania jest pobierana z `$1`, sekunda z `$2`i są dalej sekwencją dla grup przechwytywania w wyrażeniach regularnych. W aplikacji przykładowej wyrażenie regularne ma tylko jedną przechwyconą grupę, więc w ciągu zamiennym istnieje tylko jedna grupa wstrzykiwana, która jest `$1`. Gdy reguła zostanie zastosowana, adres URL zmieni `/redirected/1234/5678`się.
 
 ### <a name="url-redirect-to-a-secure-endpoint"></a>Przekierowanie adresu URL do bezpiecznego punktu końcowego
 
-Służy <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirectToHttps*> do przekierowywania żądań HTTP do tego samego hosta i ścieżki przy użyciu protokołu HTTPS. Jeśli kod stanu nie jest podany, oprogramowanie pośredniczące domyślnie *302 - Znaleziono*. Jeśli port nie jest podany:
+Służy <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirectToHttps*> do przekierowywania żądań HTTP do tego samego hosta i ścieżki przy użyciu protokołu HTTPS. Jeśli nie podano kodu stanu, oprogramowanie pośredniczące domyślnie zostanie *znalezione na 302*. Jeśli port nie jest podany:
 
-* Oprogramowanie pośredniczące `null`domyślnie ma wartość .
-* Schemat zmienia `https` się na (protokół HTTPS), a klient uzyskuje dostęp do zasobu na porcie 443.
+* Ustawienia domyślne oprogramowania pośredniczącego `null`.
+* Schemat zmienia się na `https` (protokół https), a klient uzyskuje dostęp do zasobu na porcie 443.
 
-W poniższym przykładzie pokazano, jak ustawić kod stanu na *301 — przeniesiony na stałe* i zmienić port na 5001.
+Poniższy przykład pokazuje, jak ustawić kod stanu na *301 — trwale przeniesiony* i zmienić port na 5001.
 
 ```csharp
 public void Configure(IApplicationBuilder app)
@@ -147,7 +153,7 @@ public void Configure(IApplicationBuilder app)
 }
 ```
 
-Służy <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirectToHttpsPermanent*> do przekierowywania niezabezpieczonych żądań do tego samego hosta i ścieżki z bezpiecznym protokołem HTTPS na porcie 443. Oprogramowanie pośredniczące ustawia kod stanu na *301 - Przeniesiony na stałe*.
+Służy <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirectToHttpsPermanent*> do przekierowywania niezabezpieczonych żądań do tego samego hosta i ścieżki z bezpiecznym protokołem HTTPS na porcie 443. Oprogramowanie pośredniczące ustawia kod stanu na *301 — trwale przeniesiony*.
 
 ```csharp
 public void Configure(IApplicationBuilder app)
@@ -160,31 +166,31 @@ public void Configure(IApplicationBuilder app)
 ```
 
 > [!NOTE]
-> Podczas przekierowywania do bezpiecznego punktu końcowego bez wymogu dodatkowych reguł przekierowania, zaleca się użycie oprogramowania pośredniczącego przekierowania HTTPS. Aby uzyskać więcej informacji, zobacz temat [Wymuszanie protokołu HTTPS.](xref:security/enforcing-ssl#require-https)
+> Podczas przekierowywania do bezpiecznego punktu końcowego bez wymagania dla dodatkowych reguł przekierowywania zalecamy używanie oprogramowania pośredniczącego do przekierowania protokołu HTTPS. Aby uzyskać więcej informacji, zobacz temat [Wymuś https](xref:security/enforcing-ssl#require-https) .
 
-Przykładowa aplikacja jest w stanie `AddRedirectToHttps` wykazać, jak używać lub `AddRedirectToHttpsPermanent`. Dodaj metodę rozszerzenia `RewriteOptions`do pliku . Złożyć niezabezpieczone żądanie do aplikacji w dowolnym adresie URL. Odrzuć ostrzeżenie zabezpieczeń przeglądarki, że certyfikat z podpisem własnym jest niezaufany lub utwórz wyjątek, aby ufać certyfikatowi.
+Przykładowa aplikacja jest w stanie demonstrować, jak korzystać `AddRedirectToHttps` z `AddRedirectToHttpsPermanent`lub. Dodaj metodę rozszerzenia do `RewriteOptions`. Wprowadź niezabezpieczone żądanie do aplikacji pod dowolnym adresem URL. Odrzuć ostrzeżenie o zabezpieczeniach przeglądarki, że certyfikat z podpisem własnym jest niezaufany lub Utwórz wyjątek, aby zaufać certyfikatowi.
 
-Oryginalne żądanie `AddRedirectToHttps(301, 5001)`za pomocą:`http://localhost:5000/secure`
+Oryginalne żądanie przy `AddRedirectToHttps(301, 5001)`użyciu:`http://localhost:5000/secure`
 
-![Okno przeglądarki z narzędziami deweloperskimi śledzącymi żądania i odpowiedzi](url-rewriting/_static/add_redirect_to_https.png)
+![Okno przeglądarki z Narzędzia deweloperskie śledzenia żądań i odpowiedzi](url-rewriting/_static/add_redirect_to_https.png)
 
-Oryginalne żądanie `AddRedirectToHttpsPermanent`za pomocą:`http://localhost:5000/secure`
+Oryginalne żądanie przy `AddRedirectToHttpsPermanent`użyciu:`http://localhost:5000/secure`
 
-![Okno przeglądarki z narzędziami deweloperskimi śledzącymi żądania i odpowiedzi](url-rewriting/_static/add_redirect_to_https_permanent.png)
+![Okno przeglądarki z Narzędzia deweloperskie śledzenia żądań i odpowiedzi](url-rewriting/_static/add_redirect_to_https_permanent.png)
 
 ### <a name="url-rewrite"></a>Regenerowanie adresów URL
 
-Służy <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRewrite*> do tworzenia reguły przepisywania adresów URL. Pierwszy parametr zawiera wyrażenie regularne do dopasowywania na przychodzącej ścieżce adresu URL. Drugi parametr to ciąg zastępczy. Trzeci parametr `skipRemainingRules: {true|false}`, wskazuje oprogramowaniu pośredniczącemu, czy pominąć dodatkowe reguły ponownego zapisu, jeśli stosowana jest bieżąca reguła.
+Służy <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRewrite*> do tworzenia reguły ponownego zapisywania adresów URL. Pierwszy parametr zawiera wyrażenie regularne do dopasowania w przychodzącej ścieżce adresu URL. Drugi parametr jest ciągiem zamiennym. Trzeci parametr, `skipRemainingRules: {true|false}`, wskazuje na oprogramowanie pośredniczące, niezależnie od tego, czy pominięcia dodatkowych reguł ponownego zapisu w przypadku zastosowania bieżącej reguły.
 
 [!code-csharp[](url-rewriting/samples/3.x/SampleApp/Startup.cs?name=snippet1&highlight=10-11)]
 
-Oryginalna prośba:`/rewrite-rule/1234/5678`
+Oryginalne żądanie:`/rewrite-rule/1234/5678`
 
-![Okno przeglądarki z narzędziami deweloperskimi śledzącymi żądanie i odpowiedź](url-rewriting/_static/add_rewrite.png)
+![Okno przeglądarki z Narzędzia deweloperskie śledzenia żądania i odpowiedzi](url-rewriting/_static/add_rewrite.png)
 
-Karat (`^`) na początku wyrażenia oznacza, że dopasowywanie rozpoczyna się na początku ścieżki adresu URL.
+W karatach`^`() na początku wyrażenia oznacza to, że dopasowanie rozpoczyna się na początku ścieżki URL.
 
-We wcześniejszym przykładzie z `redirect-rule/(.*)`regułą przekierowania ,`^`nie ma karatów ( ) na początku wyrażenia regularnego. W związku z tym `redirect-rule/` wszystkie znaki mogą poprzedzać w ścieżce dla pomyślnego dopasowania.
+W poprzednim przykładzie z regułą `redirect-rule/(.*)`przekierowania nie ma żadnych karatów (`^`) na początku wyrażenia regularnego. W związku z tym wszystkie znaki `redirect-rule/` mogą poprzedzać w ścieżce pomyślne dopasowanie.
 
 | Ścieżka                               | Dopasowanie |
 | ---------------------------------- | :---: |
@@ -192,41 +198,41 @@ We wcześniejszym przykładzie z `redirect-rule/(.*)`regułą przekierowania ,`^
 | `/my-cool-redirect-rule/1234/5678` | Tak   |
 | `/anotherredirect-rule/1234/5678`  | Tak   |
 
-Reguła przepisywania, `^rewrite-rule/(\d+)/(\d+)`, dopasowuje ścieżki `rewrite-rule/`tylko wtedy, gdy zaczynają się od . W poniższej tabeli należy zwrócić uwagę na różnicę w dopasowywaniu.
+Reguła ponownego zapisywania, `^rewrite-rule/(\d+)/(\d+)`,, dopasowuje się tylko do ścieżek, `rewrite-rule/`Jeśli zaczynają się od. W poniższej tabeli należy zwrócić uwagę na różnicę.
 
 | Ścieżka                              | Dopasowanie |
 | --------------------------------- | :---: |
-| `/rewrite-rule/1234/5678`         | Tak   |
+| `/rewrite-rule/1234/5678`         | Yes   |
 | `/my-cool-rewrite-rule/1234/5678` | Nie    |
 | `/anotherrewrite-rule/1234/5678`  | Nie    |
 
-Po `^rewrite-rule/` części wyrażenia istnieją dwie grupy przechwytywania, `(\d+)/(\d+)`. Oznacza `\d` to *dopasowanie cyfry (liczby)*. Znak plus`+`( ) oznacza *dopasowanie jednego lub więcej z poprzedniego znaku*. W związku z tym adres URL musi zawierać liczbę, po której następuje ukośnik do przodu, po którym następuje inny numer. Te grupy przechwytywania są wstrzykiwane `$1` do `$2`przepisanych adresów URL jako i . Ciąg zastępowania reguły ponownego przepisywania umieszcza przechwycone grupy w ciągu zapytania. Żądana ścieżka `/rewrite-rule/1234/5678` jest przepisana w celu `/rewritten?var1=1234&var2=5678`uzyskania zasobu w pliku . Jeśli ciąg zapytania jest obecny na oryginalnym żądaniu, jest zachowywany, gdy adres URL jest przepisany.
+Po `^rewrite-rule/` części wyrażenia istnieją dwie grupy przechwytywania `(\d+)/(\d+)`. `\d` Oznaczenia *są zgodne z cyfrą (* cyfrą). Znak plus (`+`) oznacza *dopasowanie co najmniej jednego znaku poprzedzającego*. W związku z tym adres URL musi zawierać numer, po którym następuje ukośnik, po którym następuje kolejny numer. Te grupy przechwytywania są wstrzykiwane do zarejestrowanego adresu URL `$1` jako `$2`i. Ciąg zastępczy reguły ponownego zapisu umieszcza przechwycone grupy w ciągu zapytania. Żądana ścieżka `/rewrite-rule/1234/5678` jest ponownie zapisywana, aby uzyskać zasób w `/rewritten?var1=1234&var2=5678`. Jeśli ciąg zapytania jest obecny w oryginalnym żądaniu, jest zachowywany, gdy adres URL zostanie ponownie zapisany.
 
-Nie ma żadnej podróży w obie strony do serwera, aby uzyskać zasób. Jeśli zasób istnieje, jest pobierany i zwracany do klienta z kodem stanu *200 - OK.* Ponieważ klient nie jest przekierowywał, adres URL na pasku adresu przeglądarki nie zmienia się. Klienci nie mogą wykryć, że na serwerze wystąpiła operacja ponownego zmiany adresu URL.
+Serwer nie może uzyskać dostępu do zasobów. Jeśli zasób istnieje, jest pobierany i zwracany do klienta przy użyciu kodu stanu *200-OK* . Ponieważ klient nie jest przekierowywany, adres URL na pasku adresu przeglądarki nie jest zmieniany. Klienci nie mogą wykryć, czy na serwerze wystąpiła operacja ponownego zapisywania adresu URL.
 
 > [!NOTE]
-> Używaj, `skipRemainingRules: true` gdy jest to możliwe, ponieważ reguły dopasowywania są kosztowne pod względem obliczeniowym i wydłuża czas reakcji aplikacji. Aby uzyskać najszybszą odpowiedź aplikacji:
+> Używaj `skipRemainingRules: true` zawsze, gdy jest to możliwe, ponieważ reguły uzgadniania są wyliczane i zwiększają czas odpowiedzi aplikacji. Dla najszybszej odpowiedzi aplikacji:
 >
-> * Kolejność przepisywania reguł z najczęściej dopasowywane reguły do reguły najrzadziej dopasowane.
-> * Pomiń przetwarzanie pozostałych reguł, gdy wystąpi dopasowanie i nie jest wymagane żadne dodatkowe przetwarzanie reguł.
+> * Zamów reguły ponownego zapisu z najczęściej dopasowanej reguły do najmniej często dopasowanej reguły.
+> * Pomiń przetwarzanie pozostałych reguł w przypadku wystąpienia dopasowania i nie jest wymagane żadne dodatkowe przetwarzanie reguły.
 
-### <a name="apache-mod_rewrite"></a>mod_rewrite Apache
+### <a name="apache-mod_rewrite"></a>Mod_rewrite Apache
 
-Zastosuj apache mod_rewrite reguły <xref:Microsoft.AspNetCore.Rewrite.ApacheModRewriteOptionsExtensions.AddApacheModRewrite*>z . Upewnij się, że plik reguł jest wdrożony z aplikacją. Aby uzyskać więcej informacji i przykłady reguł mod_rewrite, zobacz [mod_rewrite Apache](https://httpd.apache.org/docs/2.4/rewrite/).
+Zastosuj reguły mod_rewrite Apache za <xref:Microsoft.AspNetCore.Rewrite.ApacheModRewriteOptionsExtensions.AddApacheModRewrite*>pomocą programu. Upewnij się, że plik reguł został wdrożony razem z aplikacją. Aby uzyskać więcej informacji i przykłady reguł mod_rewrite, zobacz [Apache mod_rewrite](https://httpd.apache.org/docs/2.4/rewrite/).
 
-A <xref:System.IO.StreamReader> służy do odczytywania reguł z pliku reguł *ApacheModRewrite.txt:*
+A <xref:System.IO.StreamReader> służy do odczytywania reguł z pliku reguł *ApacheModRewrite. txt* :
 
 [!code-csharp[](url-rewriting/samples/3.x/SampleApp/Startup.cs?name=snippet1&highlight=3-4,12)]
 
-Przykładowa aplikacja przekierowuje żądania z `/apache-mod-rules-redirect/(.\*)` . `/redirected?id=$1` Kod stanu odpowiedzi to *302 - Znaleziono*.
+Przykładowa aplikacja przekierowuje żądania z `/apache-mod-rules-redirect/(.\*)` do. `/redirected?id=$1` Kod stanu odpowiedzi to *302 — znaleziono*.
 
 [!code[](url-rewriting/samples/3.x/SampleApp/ApacheModRewrite.txt)]
 
-Oryginalna prośba:`/apache-mod-rules-redirect/1234`
+Oryginalne żądanie:`/apache-mod-rules-redirect/1234`
 
-![Okno przeglądarki z narzędziami deweloperskimi śledzącymi żądania i odpowiedzi](url-rewriting/_static/add_apache_mod_redirect.png)
+![Okno przeglądarki z Narzędzia deweloperskie śledzenia żądań i odpowiedzi](url-rewriting/_static/add_apache_mod_redirect.png)
 
-Oprogramowanie pośredniczące obsługuje następujące zmienne serwera mod_rewrite Apache:
+Oprogramowanie pośredniczące obsługuje następujące zmienne serwera Apache mod_rewrite:
 
 * CONN_REMOTE_ADDR
 * HTTP_ACCEPT
@@ -237,11 +243,11 @@ Oprogramowanie pośredniczące obsługuje następujące zmienne serwera mod_rewr
 * HTTP_REFERER
 * HTTP_USER_AGENT
 * HTTPS
-* Protokół IPV6
-* Query_string
+* If
+* QUERY_STRING
 * REMOTE_ADDR
 * REMOTE_PORT
-* Request_filename
+* REQUEST_FILENAME
 * REQUEST_METHOD
 * REQUEST_SCHEME
 * REQUEST_URI
@@ -258,36 +264,36 @@ Oprogramowanie pośredniczące obsługuje następujące zmienne serwera mod_rewr
 * TIME_WDAY
 * TIME_YEAR
 
-### <a name="iis-url-rewrite-module-rules"></a>Reguły modułu przepisywania adresów URL w uirozmywanych adresach URL w uirozie.
+### <a name="iis-url-rewrite-module-rules"></a>Reguły modułu ponownego zapisywania adresów URL usług IIS
 
-Aby użyć tego samego zestawu reguł, który ma zastosowanie do <xref:Microsoft.AspNetCore.Rewrite.IISUrlRewriteOptionsExtensions.AddIISUrlRewrite*>modułu przepisywania adresu URL iIS, należy użyć programu . Upewnij się, że plik reguł jest wdrożony z aplikacją. Nie kieruj oprogramowania pośredniczącego do używania pliku *web.config* aplikacji podczas uruchamiania w systemie Windows Server IIS. Dzięki usługom IIS te reguły powinny być przechowywane poza *plikiem web.config* aplikacji, aby uniknąć konfliktów z modułem Przepisywanie usług IIS. Aby uzyskać więcej informacji i przykłady reguł modułu zapisywania adresów URL usług IIS, zobacz [Korzystanie z modułu 2.0 do przepisywania adresów URL](/iis/extensions/url-rewrite-module/using-url-rewrite-module-20) i odwołanie do konfiguracji [modułu ponownego zapisu adresu URL](/iis/extensions/url-rewrite-module/url-rewrite-module-configuration-reference).
+Aby użyć tego samego zestawu reguł, który ma zastosowanie do modułu ponowne zapisywanie adresów URL usług <xref:Microsoft.AspNetCore.Rewrite.IISUrlRewriteOptionsExtensions.AddIISUrlRewrite*>IIS, użyj. Upewnij się, że plik reguł został wdrożony razem z aplikacją. Nie należy kierować oprogramowanie pośredniczące do korzystania z pliku *Web. config* aplikacji podczas uruchamiania w usługach IIS systemu Windows Server. W przypadku usług IIS te reguły powinny być przechowywane poza plikiem *Web. config* aplikacji, aby uniknąć konfliktów z modułem ponownego zapisywania usług IIS. Aby uzyskać więcej informacji i przykłady reguł modułu ponownego zapisywania adresów URL usług IIS, zobacz [using URL Rewrite module 2,0](/iis/extensions/url-rewrite-module/using-url-rewrite-module-20) i [informacje konfiguracyjne modułu ponownego zapisywania adresu URL](/iis/extensions/url-rewrite-module/url-rewrite-module-configuration-reference).
 
-A <xref:System.IO.StreamReader> służy do odczytywania reguł z pliku reguł *IISUrlRewrite.xml:*
+A <xref:System.IO.StreamReader> służy do odczytywania reguł z pliku reguł *IISUrlRewrite. XML* :
 
 [!code-csharp[](url-rewriting/samples/3.x/SampleApp/Startup.cs?name=snippet1&highlight=5-6,13)]
 
-Przykładowa aplikacja przepisuje `/iis-rules-rewrite/(.*)` `/rewritten?id=$1`żądania z do . Odpowiedź jest wysyłana do klienta z kodem stanu *200 - OK.*
+Przykładowa aplikacja ponownie zapisuje żądania z `/iis-rules-rewrite/(.*)` programu do `/rewritten?id=$1`. Odpowiedź jest wysyłana do klienta z kodem stanu *200-OK* .
 
 [!code-xml[](url-rewriting/samples/3.x/SampleApp/IISUrlRewrite.xml)]
 
-Oryginalna prośba:`/iis-rules-rewrite/1234`
+Oryginalne żądanie:`/iis-rules-rewrite/1234`
 
-![Okno przeglądarki z narzędziami deweloperskimi śledzącymi żądanie i odpowiedź](url-rewriting/_static/add_iis_url_rewrite.png)
+![Okno przeglądarki z Narzędzia deweloperskie śledzenia żądania i odpowiedzi](url-rewriting/_static/add_iis_url_rewrite.png)
 
-Jeśli masz aktywny moduł przepisywania usług IIS z skonfigurowaną regułą na poziomie serwera, która miałaby wpływ na aplikację w niepożądany sposób, możesz wyłączyć moduł przepisywania usług IIS dla aplikacji. Aby uzyskać więcej informacji, zobacz [Wyłączanie modułów IIS](xref:host-and-deploy/iis/modules#disabling-iis-modules).
+Jeśli masz aktywny moduł ponownego zapisywania usług IIS z skonfigurowanymi regułami na poziomie serwera, które byłyby wpływać na aplikację na niepożądane sposoby, możesz wyłączyć moduł ponownego zapisywania usług IIS dla aplikacji. Aby uzyskać więcej informacji, zobacz [wyłączanie modułów IIS](xref:host-and-deploy/iis/modules#disabling-iis-modules).
 
-#### <a name="unsupported-features"></a>Nieobsługiwały się funkcje
+#### <a name="unsupported-features"></a>Nieobsługiwane funkcje
 
-Oprogramowanie pośredniczące wydane z ASP.NET Core 2.x nie obsługuje następujących funkcji modułu zapisywania adresów URL IIS:
+Oprogramowanie pośredniczące wydane z ASP.NET Core 2. x nie obsługuje następujących funkcji modułu ponownego zapisywania adresów URL usług IIS:
 
 * Reguły ruchu wychodzącego
 * Niestandardowe zmienne serwera
 * Symbole wieloznaczne
 * LogRewrittenUrl
 
-#### <a name="supported-server-variables"></a>Obsługiwane zmienne serwera
+#### <a name="supported-server-variables"></a>Obsługiwane Zmienne serwera
 
-Oprogramowanie pośredniczące obsługuje następujące zmienne serwera serwera iis url rewrite module:
+Oprogramowanie pośredniczące obsługuje następujące zmienne serwera modułu ponownego zapisywania adresów URL usług IIS:
 
 * CONTENT_LENGTH
 * CONTENT_TYPE
@@ -300,14 +306,14 @@ Oprogramowanie pośredniczące obsługuje następujące zmienne serwera serwera 
 * HTTP_USER_AGENT
 * HTTPS
 * LOCAL_ADDR
-* Query_string
+* QUERY_STRING
 * REMOTE_ADDR
 * REMOTE_PORT
-* Request_filename
+* REQUEST_FILENAME
 * REQUEST_URI
 
 > [!NOTE]
-> Można również uzyskać <xref:Microsoft.Extensions.FileProviders.IFileProvider> za <xref:Microsoft.Extensions.FileProviders.PhysicalFileProvider>pośrednictwem . Takie podejście może zapewnić większą elastyczność lokalizacji plików reguł ponownego zapisu. Upewnij się, że pliki reguł ponownego zapisu są wdrażane na serwerze w ścieżce, którą podasz.
+> Możesz również uzyskać <xref:Microsoft.Extensions.FileProviders.IFileProvider> za pośrednictwem a <xref:Microsoft.Extensions.FileProviders.PhysicalFileProvider>. Takie podejście może zapewnić większą elastyczność lokalizacji plików reguł ponownego zapisywania. Upewnij się, że pliki reguł ponownego zapisywania są wdrożone na serwerze pod podaną ścieżką.
 >
 > ```csharp
 > PhysicalFileProvider fileProvider = new PhysicalFileProvider(Directory.GetCurrentDirectory());
@@ -315,181 +321,181 @@ Oprogramowanie pośredniczące obsługuje następujące zmienne serwera serwera 
 
 ### <a name="method-based-rule"></a>Reguła oparta na metodzie
 
-Służy <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.Add*> do implementowania własnej logiki reguły w metodzie. `Add`udostępnia <xref:Microsoft.AspNetCore.Rewrite.RewriteContext>, który udostępnia <xref:Microsoft.AspNetCore.Http.HttpContext> do wykorzystania w metodzie. [RewriteContext.Result](xref:Microsoft.AspNetCore.Rewrite.RewriteContext.Result*) określa sposób obsługi dodatkowego przetwarzania potoku. Ustaw wartość jednego z <xref:Microsoft.AspNetCore.Rewrite.RuleResult> pól opisanych w poniższej tabeli.
+Użyj <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.Add*> , aby zaimplementować własną logikę reguł w metodzie. `Add`udostępnia <xref:Microsoft.AspNetCore.Rewrite.RewriteContext>, który udostępnia <xref:Microsoft.AspNetCore.Http.HttpContext> do użycia w Twojej metodzie. [RewriteContext. Result](xref:Microsoft.AspNetCore.Rewrite.RewriteContext.Result*) określa sposób obsługi dodatkowego przetwarzania potoku. Ustaw wartość na jedno z <xref:Microsoft.AspNetCore.Rewrite.RuleResult> pól opisanych w poniższej tabeli.
 
 | `RewriteContext.Result`              | Akcja                                                           |
 | ------------------------------------ | ---------------------------------------------------------------- |
-| `RuleResult.ContinueRules`(domyślnie) | Kontynuuj stosowanie reguł.                                         |
-| `RuleResult.EndResponse`             | Przestań stosować reguły i wyślij odpowiedź.                       |
-| `RuleResult.SkipRemainingRules`      | Przestań stosować reguły i wyślij kontekst do następnego oprogramowania pośredniczącego. |
+| `RuleResult.ContinueRules`wartooć | Kontynuuj stosowanie reguł.                                         |
+| `RuleResult.EndResponse`             | Zatrzymaj stosowanie reguł i Wyślij odpowiedź.                       |
+| `RuleResult.SkipRemainingRules`      | Zatrzymaj stosowanie reguł i Wyślij kontekst do następnego oprogramowania pośredniczącego. |
 
 [!code-csharp[](url-rewriting/samples/3.x/SampleApp/Startup.cs?name=snippet1&highlight=14)]
 
-Przykładowa aplikacja pokazuje metodę, która przekierowuje żądania ścieżek, które kończą się na *.xml*. Jeśli zostanie złożony `/file.xml`wniosek, żądanie zostanie `/xmlfiles/file.xml`przekierowane do . Kod stanu jest ustawiony na *301 - Przeniesiony na stałe*. Gdy przeglądarka wysunie nowe żądanie dla */xmlfiles/file.xml*, Oprogramowanie pośredniczące plików statycznych służy do klienta z folderu *wwwroot/xmlfiles.* W przypadku przekierowania jawnie ustaw kod stanu odpowiedzi. W przeciwnym razie zwracany jest kod stanu *200 - OK,* a przekierowanie nie występuje na kliencie.
+Przykładowa aplikacja przedstawia metodę, która przekierowuje żądania dla ścieżek kończących się na *. XML*. Jeśli zostanie wysłane żądanie `/file.xml`, żądanie jest przekierowywane do. `/xmlfiles/file.xml` Kod stanu jest ustawiony na *301 — trwale przeniesiony*. Gdy przeglądarka wykonuje nowe żądanie dla */XmlFiles/File.XML*, oprogramowanie pośredniczące plików statycznych zachowuje ten plik na kliencie z folderu *wwwroot/XmlFiles* . W przypadku przekierowania jawnie ustaw kod stanu odpowiedzi. W przeciwnym razie zwracany jest kod stanu *200-OK* i przekierowanie nie wystąpi na kliencie.
 
-*RewriteRules.cs:*
+*RewriteRules.cs*:
 
 [!code-csharp[](url-rewriting/samples/3.x/SampleApp/RewriteRules.cs?name=snippet_RedirectXmlFileRequests&highlight=14-18)]
 
-Takie podejście można również przepisać żądania. Przykładowa aplikacja demonstruje przepisywanie ścieżki dla dowolnego żądania pliku tekstowego do obsługi pliku tekstowego *file.txt* z folderu *wwwroot.* Oprogramowanie pośredniczące plików statycznych obsługuje plik na podstawie zaktualizowanej ścieżki żądania:
+Takie podejście może również ponownie zapisywać żądania. Przykładowa aplikacja pokazuje, jak ponownie napisać ścieżkę do dowolnego żądania pliku tekstowego, aby zapewnić obsługę pliku tekstowego *pliku. txt* z folderu *wwwroot* . Oprogramowanie pośredniczące plików statycznych obsługuje plik na podstawie zaktualizowanej ścieżki żądania:
 
 [!code-csharp[](url-rewriting/samples/3.x/SampleApp/Startup.cs?name=snippet1&highlight=15,22)]
 
-*RewriteRules.cs:*
+*RewriteRules.cs*:
 
 [!code-csharp[](url-rewriting/samples/3.x/SampleApp/RewriteRules.cs?name=snippet_RewriteTextFileRequests&highlight=7-8)]
 
-### <a name="irule-based-rule"></a>Reguła oparta na zasadach irule
+### <a name="irule-based-rule"></a>Reguła oparta na IRule
 
-Użyj <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.Add*> logiki reguły w klasie, <xref:Microsoft.AspNetCore.Rewrite.IRule> która implementuje interfejs. `IRule`zapewnia większą elastyczność w stosowania metody opartej na metodzie. Klasa implementacji może zawierać konstruktora, który <xref:Microsoft.AspNetCore.Rewrite.IRule.ApplyRule*> umożliwia przekazywanie parametrów dla metody.
+Użyj <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.Add*> , aby użyć logiki reguły w klasie, która implementuje <xref:Microsoft.AspNetCore.Rewrite.IRule> interfejs. `IRule`zapewnia większą elastyczność w porównaniu z użyciem metody opartej na metodzie. Klasa implementacji może zawierać konstruktora, który umożliwia przekazywanie parametrów dla <xref:Microsoft.AspNetCore.Rewrite.IRule.ApplyRule*> metody.
 
 [!code-csharp[](url-rewriting/samples/3.x/SampleApp/Startup.cs?name=snippet1&highlight=16-17)]
 
-Wartości parametrów w przykładowej aplikacji `extension` dla `newPath` i są sprawdzane, aby spełnić kilka warunków. Musi `extension` zawierać wartość, a wartość musi być *.png*, *.jpg*lub *gif*. Jeśli `newPath` nie jest prawidłowy, jest wyrzucany. <xref:System.ArgumentException> Jeśli zostanie złożony wniosek o *image.png,* żądanie `/png-images/image.png`zostanie przekierowane do . Jeśli zostanie złożony wniosek o *image.jpg*, `/jpg-images/image.jpg`żądanie zostanie przekierowane do . Kod stanu jest ustawiony na *301 -* `context.Result` Przeniesiony na stałe , a jest ustawiony, aby zatrzymać reguły przetwarzania i wysłać odpowiedź.
+Wartości parametrów w aplikacji przykładowej dla `extension` i `newPath` są sprawdzane pod kątem spełnienia kilku warunków. `extension` Musi zawierać wartość i musi mieć wartość *. png*, *. jpg*lub *. gif*. `newPath` Jeśli <xref:System.ArgumentException> jest nieprawidłowa, zostanie zgłoszony. Jeśli zostanie wysłane żądanie dotyczące pliku *Image. png*, żądanie jest przekierowywane do `/png-images/image.png`. Jeśli zostanie wysłane żądanie do *obrazu. jpg*, żądanie jest przekierowywane do `/jpg-images/image.jpg`. Kod stanu jest ustawiony na *301 — trwale przeniesiony*, a ustawienie `context.Result` jest ustawione na zatrzymanie przetwarzania reguł i wysłanie odpowiedzi.
 
 [!code-csharp[](url-rewriting/samples/3.x/SampleApp/RewriteRules.cs?name=snippet_RedirectImageRequests)]
 
-Oryginalna prośba:`/image.png`
+Oryginalne żądanie:`/image.png`
 
-![Okno przeglądarki z narzędziami deweloperskimi śledzącymi żądania i odpowiedzi dla pliku image.png](url-rewriting/_static/add_redirect_png_requests.png)
+![Okno przeglądarki z Narzędzia deweloperskie śledzenia żądań i odpowiedzi dla pliku Image. png](url-rewriting/_static/add_redirect_png_requests.png)
 
-Oryginalna prośba:`/image.jpg`
+Oryginalne żądanie:`/image.jpg`
 
-![Okno przeglądarki z narzędziami deweloperskimi śledzącymi żądania i odpowiedzi dla pliku image.jpg](url-rewriting/_static/add_redirect_jpg_requests.png)
+![Okno przeglądarki z Narzędzia deweloperskie śledzenia żądań i odpowiedzi dla obrazu. jpg](url-rewriting/_static/add_redirect_jpg_requests.png)
 
-## <a name="regex-examples"></a>Przykłady regex
+## <a name="regex-examples"></a>Przykłady wyrażeń regularnych
 
-| Cel | & ciągu regex<br>Przykład dopasowania | & ciągu zastępczego<br>Przykład wyjścia |
+| Cel | Ciąg wyrażenia regularnego &<br>Przykład dopasowania | & ciągu zamiennego<br>Przykład danych wyjściowych |
 | ---- | ------------------------------- | -------------------------------------- |
-| Przepisanie ścieżki do sznurka zapytania | `^path/(.*)/(.*)`<br>`/path/abc/123` | `path?var1=$1&var2=$2`<br>`/path?var1=abc&var2=123` |
-| Ukośnik na końcu taśmy | `(.*)/$`<br>`/path/` | `$1`<br>`/path` |
-| Wymuszanie końcowego ukośnika | `(.*[^/])$`<br>`/path` | `$1/`<br>`/path/` |
-| Unikaj przepisywania określonych żądań | `^(.*)(?<!\.axd)$` lub `^(?!.*\.axd$)(.*)$`<br>Tak:`/resource.htm`<br>№:`/resource.axd` | `rewritten/$1`<br>`/rewritten/resource.htm`<br>`/resource.axd` |
-| Zmienianie rozmieszczenia segmentów adresów URL | `path/(.*)/(.*)/(.*)`<br>`path/1/2/3` | `path/$3/$2/$1`<br>`path/3/2/1` |
+| Zapisz ścieżkę do ciągu QueryString | `^path/(.*)/(.*)`<br>`/path/abc/123` | `path?var1=$1&var2=$2`<br>`/path?var1=abc&var2=123` |
+| Ukośnik końcowy na pasku | `(.*)/$`<br>`/path/` | `$1`<br>`/path` |
+| Wymuszaj końcowy ukośnik | `(.*[^/])$`<br>`/path` | `$1/`<br>`/path/` |
+| Unikaj ponownego zapisywania określonych żądań | `^(.*)(?<!\.axd)$` lub `^(?!.*\.axd$)(.*)$`<br>Opcję`/resource.htm`<br>Znaleziono`/resource.axd` | `rewritten/$1`<br>`/rewritten/resource.htm`<br>`/resource.axd` |
+| Zmień rozmieszczenie segmentów adresu URL | `path/(.*)/(.*)/(.*)`<br>`path/1/2/3` | `path/$3/$2/$1`<br>`path/3/2/1` |
 | Zastępowanie segmentu adresu URL | `^(.*)/segment2/(.*)`<br>`/segment1/segment2/segment3` | `$1/replaced/$2`<br>`/segment1/replaced/segment3` |
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-W tym dokumencie wprowadzono przepisywanie adresów URL z instrukcjami dotyczącymi używania oprogramowania pośredniczącego do przepisywania adresów URL w aplikacjach ASP.NET Core.
+Ten dokument zawiera wprowadzenie do ponownego zapisywania adresów URL z instrukcjami dotyczącymi sposobu korzystania z programu pośredniczącego do ponownego zapisywania adresów URL w aplikacjach ASP.NET Core.
 
-Przepisywanie adresów URL to czynność modyfikowania adresów URL żądań na podstawie co najmniej jednej wstępnie zdefiniowanej reguły. Przepisywanie adresów URL tworzy abstrakcję między lokalizacjami zasobów a ich adresami, dzięki czemu lokalizacje i adresy nie są ściśle powiązane. Przepisywanie adresów URL jest cenne w kilku scenariuszach, aby:
+Ponowne zapisywanie adresu URL to czynność modyfikacji adresów URL żądań na podstawie co najmniej jednej wstępnie zdefiniowanej reguły. Ponowne zapisywanie adresów URL powoduje utworzenie abstrakcji między lokalizacjami zasobów a ich adresami, dzięki czemu lokalizacje i adresy nie są ściśle połączone. Ponowne zapisywanie adresów URL jest cenne w kilku scenariuszach:
 
-* Przenieś lub zastąp zasoby serwera tymczasowo lub na stałe i zachowaj stabilne lokalizatory dla tych zasobów.
-* Przetwarzanie żądań podzielonych na różne aplikacje lub w różnych obszarach jednej aplikacji.
-* Usuwanie, dodawanie lub reorganizowanie segmentów adresów URL w żądaniach przychodzących.
-* Optymalizacja publicznych adresów URL pod kątem optymalizacji pod kątem wyszukiwarek (SEO).
-* Zezwalaj na używanie przyjaznych publicznych adresów URL, aby ułatwić odwiedzającym przewidywanie zwracanej zawartości przez żądanie zasobu.
+* Przenoszenie lub zastępowanie zasobów serwera tymczasowo lub trwale i utrzymuje stałe lokalizatory dla tych zasobów.
+* Podziel przetwarzanie żądań między różne aplikacje lub w obszarach jednej aplikacji.
+* Usuwanie, Dodawanie lub organizowanie segmentów adresów URL w żądaniach przychodzących.
+* Optymalizuj publiczne adresy URL dla optymalizacji aparatu wyszukiwania (wyszukiwarka).
+* Zezwól na używanie przyjaznych publicznych adresów URL, aby ułatwić odwiedzającym zapowiadanie zawartości zwróconej przez żądanie zasobu.
 * Przekieruj niezabezpieczone żądania do bezpiecznych punktów końcowych.
-* Zapobiegaj hotlinkingowi, gdy witryna zewnętrzna używa hostowanego zasobu statycznego w innej witrynie, łącząc go z własną zawartością.
+* Zapobiegaj hotlinking, gdzie lokacja zewnętrzna używa hostowanego zasobu statycznego w innej lokacji przez połączenie elementu zawartości z własną zawartością.
 
 > [!NOTE]
-> Przepisywanie adresów URL może zmniejszyć wydajność aplikacji. Tam, gdzie jest to możliwe, ogranicz liczbę i złożoność przepisów.
+> Ponowne zapisywanie adresów URL może zmniejszyć wydajność aplikacji. Jeśli to możliwe, należy ograniczyć liczbę i złożoność reguł.
 
 [Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/url-rewriting/samples/) ([jak pobrać](xref:index#how-to-download-a-sample))
 
-## <a name="url-redirect-and-url-rewrite"></a>Przekierowanie adresu URL i przepisanie adresu URL
+## <a name="url-redirect-and-url-rewrite"></a>Przekierowywanie adresów URL i ponowne zapisywanie adresów URL
 
-Różnica w sformułowaniu między *przekierowaniem adresu URL* a *przepisaniem adresu URL jest subtelna,* ale ma istotne implikacje dla dostarczania zasobów klientom. ASP.NET Core url przepisywanie oprogramowania pośredniczącego jest w stanie zasypać potrzebę obu.
+Różnica między *przekierowaniami adresów URL* i *przepisaniem adresów URL* jest subtelna, ale ma ważne konsekwencje dla udostępniania zasobów klientom. Ponowne zapisywanie oprogramowania pośredniczącego w usłudze ASP.NET Core jest w stanie sprostać potrzebom obu tych elementów.
 
-*Przekierowanie adresu URL* obejmuje operację po stronie klienta, gdzie klient jest poinstruowany, aby uzyskać dostęp do zasobu pod innym adresem niż klient pierwotnie żądany. Wymaga to podróży w obie strony do serwera. Adres URL przekierowania zwrócony do klienta pojawia się na pasku adresu przeglądarki, gdy klient wysunie nowe żądanie dla zasobu.
+*Przekierowanie adresu URL* obejmuje operację po stronie klienta, w której klient otrzymuje dostęp do zasobu pod innym adresem niż pierwotnie żądany klient. Wymaga to przeprowadzenia rundy na serwerze. Adres URL przekierowania zwracany do klienta pojawia się na pasku adresu przeglądarki, gdy klient wysyła nowe żądanie dla zasobu.
 
-Jeśli `/resource` zostanie *przekierowany* do `/different-resource`programu, serwer odpowiada, że `/different-resource` klient powinien uzyskać zasób z kodem stanu wskazującym, że przekierowanie jest tymczasowe lub stałe.
+W `/resource` przypadku *przekierowania* do `/different-resource`programu serwer odpowiada, że klient powinien uzyskać zasób przy `/different-resource` użyciu kodu stanu wskazującego, że przekierowanie jest tymczasowe lub trwałe.
 
-![Punkt końcowy usługi WebAPI został tymczasowo zmieniony z wersji 1 (wersja 1) na wersję 2 (wersja 2) na serwerze. Klient sprawia, że żądanie do usługi w wersji 1 ścieżka /v1/api. Serwer wysyła z powrotem odpowiedź 302 (Found) z nową, tymczasową ścieżką dla usługi w wersji 2 /v2/api. Klient wysunie drugie żądanie do usługi pod adresem URL przekierowania. Serwer odpowiada kodem stanu 200 (OK).](url-rewriting/_static/url_redirect.png)
+![Punkt końcowy usługi WebAPI został tymczasowo zmieniony z wersji 1 (v1) do wersji 2 (v2) na serwerze. Klient wysyła żądanie do usługi w ścieżce w wersji 1/v1/API. Serwer wysyła odpowiedź 302 (znalezioną) z nową ścieżką tymczasową dla usługi w wersji 2/v2/API. Klient wysyła drugie żądanie do usługi przy użyciu adresu URL przekierowania. Serwer reaguje na kod stanu 200 (OK).](url-rewriting/_static/url_redirect.png)
 
-Podczas przekierowywania żądań do innego adresu URL, należy wskazać, czy przekierowanie jest stałe czy tymczasowe, określając kod stanu z odpowiedzią:
+Podczas przekierowywania żądań do innego adresu URL wskaż, czy przekierowanie jest trwałe, czy tymczasowe, określając kod stanu z odpowiedzią:
 
-* *301 - Przeniesiony kod* stanu trwale jest używany, gdy zasób ma nowy, stały adres URL i chcesz poinstruować klienta, że wszystkie przyszłe żądania dla zasobu powinny używać nowego adresu URL. *Klient może buforować i ponownie używać odpowiedzi po odebraniu kodu stanu 301.*
+* *301-przesunięty* kod stanu jest używany, gdy zasób ma nowy, stały adres URL i chcesz wydać klientowi, że wszystkie przyszłe żądania dla zasobu powinny używać nowego adresu URL. *Klient może buforować i ponownie używać odpowiedzi po odebraniu kodu stanu 301.*
 
-* Kod stanu *302 - Znaleziono* jest używany, gdy przekierowanie jest tymczasowe lub zazwyczaj może ulec zmianie. Kod stanu 302 oznacza, że klient nie przechowuje adresu URL i nie używa go w przyszłości.
+* Kod stanu *znaleziony przez 302* jest używany, gdy przekierowywanie jest tymczasowe lub zwykle może ulec zmianie. Kod stanu 302 wskazuje na klienta, aby nie przechowywać adresu URL i używać go w przyszłości.
 
-Aby uzyskać więcej informacji na temat kodów stanu, zobacz [RFC 2616: Definicje kodu stanu](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html).
+Aby uzyskać więcej informacji na temat kodów stanu, zobacz [RFC 2616: definicje kodów stanu](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html).
 
-*Przepisanie adresu URL* jest operacją po stronie serwera, która zapewnia zasób z adresu innego zasobu niż żądany klient. Przepisywanie adresu URL nie wymaga podróży w obie strony do serwera. Przepisany adres URL nie jest zwracany do klienta i nie jest wyświetlany na pasku adresu przeglądarki.
+Ponowne *Zapisywanie adresów URL* jest operacją po stronie serwera, która dostarcza zasób z innego adresu zasobu niż żądany klient. Ponowne zapisywanie adresu URL nie wymaga przejazdu na serwer. Zwrotny adres URL nie jest zwracany do klienta i nie jest wyświetlany na pasku adresu przeglądarki.
 
-Jeśli `/resource` jest *przepisany* do `/different-resource`, serwer *wewnętrznie* pobiera i `/different-resource`zwraca zasób w .
+Jeśli `/resource` program *rewritten* zostanie ponownie `/different-resource`zapisany w programie, serwer *wewnętrznie* pobiera i zwraca zasób w `/different-resource`.
 
-Mimo że klient może być w stanie pobrać zasób przy przepisanych adresów URL, klient nie jest informowany, że zasób istnieje w przepisany adres URL, gdy sprawia, że jego żądanie i odbiera odpowiedź.
+Mimo że klient może być w stanie pobrać zasób przy zapisywanym adresie URL, klient nie ma informacji o tym, że zasób istnieje pod adresem URL, gdy wysyła żądanie i otrzymuje odpowiedź.
 
-![Punkt końcowy usługi WebAPI został zmieniony z wersji 1 (wersja 1) na wersję 2 (wersja 2) na serwerze. Klient sprawia, że żądanie do usługi w wersji 1 ścieżka /v1/api. Adres URL żądania jest przepisany, aby uzyskać dostęp do usługi w ścieżce w wersji 2 /v2/api. Usługa odpowiada klientowi za pomocą kodu stanu 200 (OK).](url-rewriting/_static/url_rewrite.png)
+![Punkt końcowy usługi WebAPI został zmieniony z wersji 1 (v1) na wersję 2 (v2) na serwerze. Klient wysyła żądanie do usługi w ścieżce w wersji 1/v1/API. Adres URL żądania zostanie ponownie zapisany w celu uzyskania dostępu do usługi w ścieżce w wersji 2/v2/API. Usługa reaguje na klienta z kodem stanu 200 (OK).](url-rewriting/_static/url_rewrite.png)
 
-## <a name="url-rewriting-sample-app"></a>Przykładowa aplikacja do przepisywania adresów URL
+## <a name="url-rewriting-sample-app"></a>Przykładowa aplikacja do ponownego zapisywania adresów URL
 
-Za pomocą [przykładowej aplikacji](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/url-rewriting/samples/)można zapoznać się z funkcjami oprogramowania pośredniczącego przepisywania adresów URL. Aplikacja stosuje reguły przekierowania i przepisywania i pokazuje przekierowany lub przepisany adres URL dla kilku scenariuszy.
+Możesz zapoznać się z funkcjami zapisywania oprogramowania pośredniczącego za pomocą [przykładowej aplikacji](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/url-rewriting/samples/). Aplikacja stosuje reguły przekierowania i ponownego zapisywania oraz pokazuje przekierowany lub ponownie zapisany adres URL dla kilku scenariuszy.
 
-## <a name="when-to-use-url-rewriting-middleware"></a>Kiedy używać oprogramowania pośredniczącego do przepisywania adresów URL
+## <a name="when-to-use-url-rewriting-middleware"></a>Kiedy używać oprogramowania pośredniczącego ponownego zapisywania adresów URL
 
-Oprogramowanie pośredniczące do przepisywania adresów URL używa się następujących metod:
+Używaj ponownego zapisywania adresów URL, gdy nie możesz użyć następujących metod:
 
-* [Moduł przepisywania adresów URL z usługami IIS w systemie Windows Server](https://www.iis.net/downloads/microsoft/url-rewrite)
-* [Moduł mod_rewrite Apache na serwerze Apache](https://httpd.apache.org/docs/2.4/rewrite/)
-* [Przepisywanie adresów URL w Nginx](https://www.nginx.com/blog/creating-nginx-rewrite-rules/)
+* [Moduł ponownego zapisywania adresów URL z usługami IIS w systemie Windows Server](https://www.iis.net/downloads/microsoft/url-rewrite)
+* [Moduł Apache mod_rewrite na serwerze Apache](https://httpd.apache.org/docs/2.4/rewrite/)
+* [Ponowne zapisywanie adresów URL w witrynie Nginx](https://www.nginx.com/blog/creating-nginx-rewrite-rules/)
 
-Ponadto należy użyć oprogramowania pośredniczącego, gdy aplikacja jest hostowana na [serwerze HTTP.sys](xref:fundamentals/servers/httpsys) (dawniej nazywanym WebListener).
+Należy również użyć oprogramowania pośredniczącego, gdy aplikacja jest hostowana na [serwerze HTTP. sys](xref:fundamentals/servers/httpsys) (wcześniej nazywanej webListener).
 
-Główne powody, dla których warto używać opartych na serwerze technologii przepisywania adresów URL w usługach IIS, Apache i Nginx to:
+Główne przyczyny używania technologii zapisywania adresów URL opartych na serwerze w usługach IIS, Apache i Nginx są następujące:
 
 * Oprogramowanie pośredniczące nie obsługuje pełnych funkcji tych modułów.
 
-  Niektóre funkcje modułów serwera nie działają z ASP.NET projektów podstawowych, `IsFile` takich `IsDirectory` jak i ograniczenia modułu IIS Rewrite. W tych scenariuszach zamiast tego należy użyć oprogramowania pośredniczącego.
-* Wydajność oprogramowania pośredniczącego prawdopodobnie nie pasuje do wydajności modułów.
+  Niektóre funkcje modułów serwera nie współpracują z projektami ASP.NET Core, takimi jak `IsFile` i `IsDirectory` ograniczeniami modułu ponownego zapisywania usług IIS. W tych scenariuszach zamiast tego należy użyć oprogramowania pośredniczącego.
+* Wydajność oprogramowania pośredniczącego prawdopodobnie nie jest zgodna z tymi modułami.
 
-  Analiza porównawcza jest jedynym sposobem, aby wiedzieć na pewno, które podejście obniża wydajność najbardziej lub jeśli obniżona wydajność jest znikoma.
+  Testy porównawcze są jedynym sposobem, aby wiedzieć, że metoda obniża wydajność w najbardziej lub niewielkim stopniu wydajności.
 
 ## <a name="package"></a>Pakiet
 
-Aby uwzględnić oprogramowanie pośredniczące w projekcie, dodaj odwołanie do pakietu [Microsoft.AspNetCore.App metapakiet](xref:fundamentals/metapackage-app) w pliku projektu, który zawiera pakiet [Microsoft.AspNetCore.Rewrite.](https://www.nuget.org/packages/Microsoft.AspNetCore.Rewrite)
+Aby uwzględnić oprogramowanie pośredniczące w projekcie, Dodaj odwołanie do pakietu do [pakietu Microsoft. AspNetCore. app](xref:fundamentals/metapackage-app) w pliku projektu, który zawiera pakiet [Microsoft. AspNetCore. Rewrite](https://www.nuget.org/packages/Microsoft.AspNetCore.Rewrite) .
 
-Jeśli nie `Microsoft.AspNetCore.App` jest używany metapackage, dodaj `Microsoft.AspNetCore.Rewrite` odwołanie do projektu do pakietu.
+Gdy nie korzystasz `Microsoft.AspNetCore.App` z pakietu, Dodaj odwołanie do projektu do `Microsoft.AspNetCore.Rewrite` pakietu.
 
 ## <a name="extension-and-options"></a>Rozszerzenie i opcje
 
-Uspokaj reguły przepisywania i przekierowywania adresów URL, tworząc wystąpienie klasy [RewriteOptions](xref:Microsoft.AspNetCore.Rewrite.RewriteOptions) z metodami rozszerzenia dla każdej reguły przepisywania. Łańcuch wielu reguł w kolejności, w której chcesz je przetworzyć. Są `RewriteOptions` przekazywane do adresu URL przepisywanie oprogramowania pośredniczącego, <xref:Microsoft.AspNetCore.Builder.RewriteBuilderExtensions.UseRewriter*>jak jest dodawany do potoku żądania z:
+Ustanów reguły ponownego zapisywania i przekierowywania adresów URL, tworząc wystąpienie klasy [RewriteOptions](xref:Microsoft.AspNetCore.Rewrite.RewriteOptions) z metodami rozszerzającymi dla każdej z reguł ponownego zapisywania. Łączenie wielu reguł w kolejności, w jakiej mają być przetwarzane. `RewriteOptions` Są one przesyłane do programu pośredniczącego na potrzeby ponownego zapisywania adresów URL, ponieważ są dodawane do potoku żądania przy użyciu <xref:Microsoft.AspNetCore.Builder.RewriteBuilderExtensions.UseRewriter*>:
 
 [!code-csharp[](url-rewriting/samples/2.x/SampleApp/Startup.cs?name=snippet1)]
 
-### <a name="redirect-non-www-to-www"></a>Przekieruj inne niż www na www
+### <a name="redirect-non-www-to-www"></a>Przekieruj do sieci Web inne niż www
 
-Trzy opcje pozwalają aplikacji przekierować`www` `www`nie-żądania do:
+Trzy opcje Zezwalaj aplikacji na przekierowywanie`www` żądań, które nie `www`są żądaniami do:
 
-* <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirectToWwwPermanent*>&ndash; Trwale przekieruj żądanie do `www` poddomeny, jeśli żądanie nie jest-`www`. Przekierowuje z kodem stanu [Status308PermanentRedirect.](xref:Microsoft.AspNetCore.Http.StatusCodes.Status308PermanentRedirect)
+* <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirectToWwwPermanent*>&ndash; Trwale Przekieruj żądanie do `www` domeny podrzędnej, jeśli żądanie jest inne niż`www`. Przekierowuje kod stanu [Status308PermanentRedirect](xref:Microsoft.AspNetCore.Http.StatusCodes.Status308PermanentRedirect) .
 
-* <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirectToWww*>&ndash; Przekieruj `www` żądanie do poddomeny,`www`jeśli żądanie przychodzące nie jest - . Przekierowuje z kodem stanu [Status307TemporaryRedirect.](xref:Microsoft.AspNetCore.Http.StatusCodes.Status307TemporaryRedirect) Przeciążenie umożliwia podanie kodu stanu odpowiedzi. Użyj pola <xref:Microsoft.AspNetCore.Http.StatusCodes> klasy dla przypisania kodu stanu.
+* <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirectToWww*>&ndash; Przekieruj żądanie do `www` domeny podrzędnej, jeśli żądanie przychodzące jest inne niż`www`. Przekierowuje kod stanu [Status307TemporaryRedirect](xref:Microsoft.AspNetCore.Http.StatusCodes.Status307TemporaryRedirect) . Przeciążenie umożliwia podanie kodu stanu odpowiedzi. Użyj pola <xref:Microsoft.AspNetCore.Http.StatusCodes> klasy do przypisania kodu stanu.
 
 ### <a name="url-redirect"></a>Przekierowywanie adresów URL
 
-Służy <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirect*> do przekierowywania żądań. Pierwszy parametr zawiera wyrażenie regularne do dopasowywania na ścieżce przychodzącego adresu URL. Drugi parametr to ciąg zastępczy. Trzeci parametr, jeśli jest obecny, określa kod stanu. Jeśli nie określisz kodu stanu, domyślnie kod stanu *302 - Znaleziono*, co oznacza, że zasób jest tymczasowo przeniesiony lub zastąpiony.
+Użyj <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirect*> , aby przekierować żądania. Pierwszy parametr zawiera wyrażenie regularne do dopasowania na ścieżce przychodzącego adresu URL. Drugi parametr jest ciągiem zamiennym. Trzeci parametr, jeśli obecny, określa kod stanu. Jeśli nie określisz kodu stanu, kod stanu zostanie zmieniony na *302-znaleziono*, co oznacza, że zasób jest tymczasowo przenoszony lub zastępowany.
 
 [!code-csharp[](url-rewriting/samples/2.x/SampleApp/Startup.cs?name=snippet1&highlight=9)]
 
-W przeglądarce z włączonymi narzędziami deweloperskimi złożyć `/redirect-rule/1234/5678`żądanie do przykładowej aplikacji ze ścieżką . Wyrażenie regularne jest zgodne `redirect-rule/(.*)`ze ścieżką żądania, `/redirected/1234/5678`a ścieżka jest zastępowana . Adres URL przekierowania jest wysyłany z powrotem do klienta z kodem stanu *302 — znaleziono.* Przeglądarka tworzy nowe żądanie pod adresem URL przekierowania, który pojawia się na pasku adresu przeglądarki. Ponieważ żadne reguły w przykładowej aplikacji nie są zgodne z adresem URL przekierowania:
+W przeglądarce z włączonymi narzędziami deweloperskimi Utwórz żądanie do przykładowej aplikacji ze ścieżką `/redirect-rule/1234/5678`. Wyrażenie regularne dopasowuje ścieżkę żądania w `redirect-rule/(.*)`, a ścieżka jest zastępowana przez `/redirected/1234/5678`. Adres URL przekierowania jest wysyłany z powrotem do klienta z kodem stanu *znalezionym przez 302* . Przeglądarka tworzy nowe żądanie w adresie URL przekierowania, który jest wyświetlany na pasku adresu przeglądarki. Ponieważ w adresie URL przekierowania nie ma reguł pasujących do przykładowej aplikacji:
 
-* Drugie żądanie otrzymuje *odpowiedź 200 — OK* z aplikacji.
-* Treść odpowiedzi pokazuje adres URL przekierowania.
+* Drugie żądanie odbiera odpowiedź *200-OK* z aplikacji.
+* Treść odpowiedzi zawiera adres URL przekierowania.
 
-Po *przekierowaniu*adresu URL adres URL na serwer odbywa się podróż w obie strony.
+Po *przekierowaniu*adresu URL do serwera zostanie przeprowadzona runda.
 
 > [!WARNING]
-> Należy zachować ostrożność podczas ustanawiania reguł przekierowania. Reguły przekierowania są oceniane przy każdym żądaniu do aplikacji, w tym po przekierowaniu. Łatwo jest przypadkowo utworzyć *pętlę nieskończonych przekierowań*.
+> Należy zachować ostrożność podczas ustanawiania reguł przekierowań. Reguły przekierowania są oceniane dla każdego żądania do aplikacji, w tym po przekierowaniu. Można łatwo przypadkowo utworzyć *pętlę nieskończonych przekierowań*.
 
-Oryginalna prośba:`/redirect-rule/1234/5678`
+Oryginalne żądanie:`/redirect-rule/1234/5678`
 
-![Okno przeglądarki z narzędziami deweloperskimi śledzącymi żądania i odpowiedzi](url-rewriting/_static/add_redirect.png)
+![Okno przeglądarki z Narzędzia deweloperskie śledzenia żądań i odpowiedzi](url-rewriting/_static/add_redirect.png)
 
-Część wyrażenia zawarta w nawiasach jest nazywana *grupą przechwytywania*. Kropka (`.`) wyrażenia oznacza *dopasowanie dowolnego znaku*. Gwiazdka (`*`) oznacza *dopasowanie poprzedniego znaku zero lub więcej razy*. W związku z tym dwa ostatnie segmenty ścieżki adresu `1234/5678` `(.*)`URL, są przechwytywane przez grupę przechwytywania . Każda wartość podana w `redirect-rule/` adresie URL żądania po jest przechwytywany przez tę pojedynczą grupę przechwytywania.
+Część wyrażenia zawartego w nawiasach jest nazywana *grupą przechwytywania*. Kropka (`.`) wyrażenia oznacza *dopasowanie dowolnego znaku*. Gwiazdka (`*`) oznacza *Dopasowanie znaku poprzedzającego zero lub więcej razy*. W związku z tym, ostatnie dwa segmenty ścieżki adresu `1234/5678`URL, są przechwytywane przez `(.*)`grupę przechwytywania. Każda wartość podaną w adresie URL żądania `redirect-rule/` Po przechwyceniu przez tę pojedynczą grupę przechwytywania.
 
-W ciągu zastępczym przechwycone grupy są wtryskiwane`$`do ciągu ze znakiem dolara ( ), po którym następuje numer sekwencyjny przechwytywania. Pierwsza wartość grupy przechwytywania `$1`jest uzyskiwana za pomocą , drugi z `$2`, i są one kontynuowane w kolejności dla grup przechwytywania w wyrażeniach. Istnieje tylko jedna przechwycona grupa w resecie przekierowania regex w przykładowej aplikacji, więc `$1`jest tylko jedna wstrzyknięta grupa w ciągu zastępczym, który jest . Po zastosowaniu reguły adres `/redirected/1234/5678`URL staje się .
+W ciągu zamiennym przechwycone grupy są wstawiane do ciągu z symbolem dolara`$`(), po którym następuje numer sekwencji przechwytywania. Pierwsza wartość grupy przechwytywania jest pobierana z `$1`, sekunda z `$2`i są dalej sekwencją dla grup przechwytywania w wyrażeniach regularnych. W aplikacji przykładowej wyrażenie regularne ma tylko jedną przechwyconą grupę, więc w ciągu zamiennym istnieje tylko jedna grupa wstrzykiwana, która jest `$1`. Gdy reguła zostanie zastosowana, adres URL zmieni `/redirected/1234/5678`się.
 
 ### <a name="url-redirect-to-a-secure-endpoint"></a>Przekierowanie adresu URL do bezpiecznego punktu końcowego
 
-Służy <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirectToHttps*> do przekierowywania żądań HTTP do tego samego hosta i ścieżki przy użyciu protokołu HTTPS. Jeśli kod stanu nie jest podany, oprogramowanie pośredniczące domyślnie *302 - Znaleziono*. Jeśli port nie jest podany:
+Służy <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirectToHttps*> do przekierowywania żądań HTTP do tego samego hosta i ścieżki przy użyciu protokołu HTTPS. Jeśli nie podano kodu stanu, oprogramowanie pośredniczące domyślnie zostanie *znalezione na 302*. Jeśli port nie jest podany:
 
-* Oprogramowanie pośredniczące `null`domyślnie ma wartość .
-* Schemat zmienia `https` się na (protokół HTTPS), a klient uzyskuje dostęp do zasobu na porcie 443.
+* Ustawienia domyślne oprogramowania pośredniczącego `null`.
+* Schemat zmienia się na `https` (protokół https), a klient uzyskuje dostęp do zasobu na porcie 443.
 
-W poniższym przykładzie pokazano, jak ustawić kod stanu na *301 — przeniesiony na stałe* i zmienić port na 5001.
+Poniższy przykład pokazuje, jak ustawić kod stanu na *301 — trwale przeniesiony* i zmienić port na 5001.
 
 ```csharp
 public void Configure(IApplicationBuilder app)
@@ -501,7 +507,7 @@ public void Configure(IApplicationBuilder app)
 }
 ```
 
-Służy <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirectToHttpsPermanent*> do przekierowywania niezabezpieczonych żądań do tego samego hosta i ścieżki z bezpiecznym protokołem HTTPS na porcie 443. Oprogramowanie pośredniczące ustawia kod stanu na *301 - Przeniesiony na stałe*.
+Służy <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirectToHttpsPermanent*> do przekierowywania niezabezpieczonych żądań do tego samego hosta i ścieżki z bezpiecznym protokołem HTTPS na porcie 443. Oprogramowanie pośredniczące ustawia kod stanu na *301 — trwale przeniesiony*.
 
 ```csharp
 public void Configure(IApplicationBuilder app)
@@ -514,31 +520,31 @@ public void Configure(IApplicationBuilder app)
 ```
 
 > [!NOTE]
-> Podczas przekierowywania do bezpiecznego punktu końcowego bez wymogu dodatkowych reguł przekierowania, zaleca się użycie oprogramowania pośredniczącego przekierowania HTTPS. Aby uzyskać więcej informacji, zobacz temat [Wymuszanie protokołu HTTPS.](xref:security/enforcing-ssl#require-https)
+> Podczas przekierowywania do bezpiecznego punktu końcowego bez wymagania dla dodatkowych reguł przekierowywania zalecamy używanie oprogramowania pośredniczącego do przekierowania protokołu HTTPS. Aby uzyskać więcej informacji, zobacz temat [Wymuś https](xref:security/enforcing-ssl#require-https) .
 
-Przykładowa aplikacja jest w stanie `AddRedirectToHttps` wykazać, jak używać lub `AddRedirectToHttpsPermanent`. Dodaj metodę rozszerzenia `RewriteOptions`do pliku . Złożyć niezabezpieczone żądanie do aplikacji w dowolnym adresie URL. Odrzuć ostrzeżenie zabezpieczeń przeglądarki, że certyfikat z podpisem własnym jest niezaufany lub utwórz wyjątek, aby ufać certyfikatowi.
+Przykładowa aplikacja jest w stanie demonstrować, jak korzystać `AddRedirectToHttps` z `AddRedirectToHttpsPermanent`lub. Dodaj metodę rozszerzenia do `RewriteOptions`. Wprowadź niezabezpieczone żądanie do aplikacji pod dowolnym adresem URL. Odrzuć ostrzeżenie o zabezpieczeniach przeglądarki, że certyfikat z podpisem własnym jest niezaufany lub Utwórz wyjątek, aby zaufać certyfikatowi.
 
-Oryginalne żądanie `AddRedirectToHttps(301, 5001)`za pomocą:`http://localhost:5000/secure`
+Oryginalne żądanie przy `AddRedirectToHttps(301, 5001)`użyciu:`http://localhost:5000/secure`
 
-![Okno przeglądarki z narzędziami deweloperskimi śledzącymi żądania i odpowiedzi](url-rewriting/_static/add_redirect_to_https.png)
+![Okno przeglądarki z Narzędzia deweloperskie śledzenia żądań i odpowiedzi](url-rewriting/_static/add_redirect_to_https.png)
 
-Oryginalne żądanie `AddRedirectToHttpsPermanent`za pomocą:`http://localhost:5000/secure`
+Oryginalne żądanie przy `AddRedirectToHttpsPermanent`użyciu:`http://localhost:5000/secure`
 
-![Okno przeglądarki z narzędziami deweloperskimi śledzącymi żądania i odpowiedzi](url-rewriting/_static/add_redirect_to_https_permanent.png)
+![Okno przeglądarki z Narzędzia deweloperskie śledzenia żądań i odpowiedzi](url-rewriting/_static/add_redirect_to_https_permanent.png)
 
 ### <a name="url-rewrite"></a>Regenerowanie adresów URL
 
-Służy <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRewrite*> do tworzenia reguły przepisywania adresów URL. Pierwszy parametr zawiera wyrażenie regularne do dopasowywania na przychodzącej ścieżce adresu URL. Drugi parametr to ciąg zastępczy. Trzeci parametr `skipRemainingRules: {true|false}`, wskazuje oprogramowaniu pośredniczącemu, czy pominąć dodatkowe reguły ponownego zapisu, jeśli stosowana jest bieżąca reguła.
+Służy <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRewrite*> do tworzenia reguły ponownego zapisywania adresów URL. Pierwszy parametr zawiera wyrażenie regularne do dopasowania w przychodzącej ścieżce adresu URL. Drugi parametr jest ciągiem zamiennym. Trzeci parametr, `skipRemainingRules: {true|false}`, wskazuje na oprogramowanie pośredniczące, niezależnie od tego, czy pominięcia dodatkowych reguł ponownego zapisu w przypadku zastosowania bieżącej reguły.
 
 [!code-csharp[](url-rewriting/samples/2.x/SampleApp/Startup.cs?name=snippet1&highlight=10-11)]
 
-Oryginalna prośba:`/rewrite-rule/1234/5678`
+Oryginalne żądanie:`/rewrite-rule/1234/5678`
 
-![Okno przeglądarki z narzędziami deweloperskimi śledzącymi żądanie i odpowiedź](url-rewriting/_static/add_rewrite.png)
+![Okno przeglądarki z Narzędzia deweloperskie śledzenia żądania i odpowiedzi](url-rewriting/_static/add_rewrite.png)
 
-Karat (`^`) na początku wyrażenia oznacza, że dopasowywanie rozpoczyna się na początku ścieżki adresu URL.
+W karatach`^`() na początku wyrażenia oznacza to, że dopasowanie rozpoczyna się na początku ścieżki URL.
 
-We wcześniejszym przykładzie z `redirect-rule/(.*)`regułą przekierowania ,`^`nie ma karatów ( ) na początku wyrażenia regularnego. W związku z tym `redirect-rule/` wszystkie znaki mogą poprzedzać w ścieżce dla pomyślnego dopasowania.
+W poprzednim przykładzie z regułą `redirect-rule/(.*)`przekierowania nie ma żadnych karatów (`^`) na początku wyrażenia regularnego. W związku z tym wszystkie znaki `redirect-rule/` mogą poprzedzać w ścieżce pomyślne dopasowanie.
 
 | Ścieżka                               | Dopasowanie |
 | ---------------------------------- | :---: |
@@ -546,41 +552,41 @@ We wcześniejszym przykładzie z `redirect-rule/(.*)`regułą przekierowania ,`^
 | `/my-cool-redirect-rule/1234/5678` | Tak   |
 | `/anotherredirect-rule/1234/5678`  | Tak   |
 
-Reguła przepisywania, `^rewrite-rule/(\d+)/(\d+)`, dopasowuje ścieżki `rewrite-rule/`tylko wtedy, gdy zaczynają się od . W poniższej tabeli należy zwrócić uwagę na różnicę w dopasowywaniu.
+Reguła ponownego zapisywania, `^rewrite-rule/(\d+)/(\d+)`,, dopasowuje się tylko do ścieżek, `rewrite-rule/`Jeśli zaczynają się od. W poniższej tabeli należy zwrócić uwagę na różnicę.
 
 | Ścieżka                              | Dopasowanie |
 | --------------------------------- | :---: |
-| `/rewrite-rule/1234/5678`         | Tak   |
+| `/rewrite-rule/1234/5678`         | Yes   |
 | `/my-cool-rewrite-rule/1234/5678` | Nie    |
 | `/anotherrewrite-rule/1234/5678`  | Nie    |
 
-Po `^rewrite-rule/` części wyrażenia istnieją dwie grupy przechwytywania, `(\d+)/(\d+)`. Oznacza `\d` to *dopasowanie cyfry (liczby)*. Znak plus`+`( ) oznacza *dopasowanie jednego lub więcej z poprzedniego znaku*. W związku z tym adres URL musi zawierać liczbę, po której następuje ukośnik do przodu, po którym następuje inny numer. Te grupy przechwytywania są wstrzykiwane `$1` do `$2`przepisanych adresów URL jako i . Ciąg zastępowania reguły ponownego przepisywania umieszcza przechwycone grupy w ciągu zapytania. Żądana ścieżka `/rewrite-rule/1234/5678` jest przepisana w celu `/rewritten?var1=1234&var2=5678`uzyskania zasobu w pliku . Jeśli ciąg zapytania jest obecny na oryginalnym żądaniu, jest zachowywany, gdy adres URL jest przepisany.
+Po `^rewrite-rule/` części wyrażenia istnieją dwie grupy przechwytywania `(\d+)/(\d+)`. `\d` Oznaczenia *są zgodne z cyfrą (* cyfrą). Znak plus (`+`) oznacza *dopasowanie co najmniej jednego znaku poprzedzającego*. W związku z tym adres URL musi zawierać numer, po którym następuje ukośnik, po którym następuje kolejny numer. Te grupy przechwytywania są wstrzykiwane do zarejestrowanego adresu URL `$1` jako `$2`i. Ciąg zastępczy reguły ponownego zapisu umieszcza przechwycone grupy w ciągu zapytania. Żądana ścieżka `/rewrite-rule/1234/5678` jest ponownie zapisywana, aby uzyskać zasób w `/rewritten?var1=1234&var2=5678`. Jeśli ciąg zapytania jest obecny w oryginalnym żądaniu, jest zachowywany, gdy adres URL zostanie ponownie zapisany.
 
-Nie ma żadnej podróży w obie strony do serwera, aby uzyskać zasób. Jeśli zasób istnieje, jest pobierany i zwracany do klienta z kodem stanu *200 - OK.* Ponieważ klient nie jest przekierowywał, adres URL na pasku adresu przeglądarki nie zmienia się. Klienci nie mogą wykryć, że na serwerze wystąpiła operacja ponownego zmiany adresu URL.
+Serwer nie może uzyskać dostępu do zasobów. Jeśli zasób istnieje, jest pobierany i zwracany do klienta przy użyciu kodu stanu *200-OK* . Ponieważ klient nie jest przekierowywany, adres URL na pasku adresu przeglądarki nie jest zmieniany. Klienci nie mogą wykryć, czy na serwerze wystąpiła operacja ponownego zapisywania adresu URL.
 
 > [!NOTE]
-> Używaj, `skipRemainingRules: true` gdy jest to możliwe, ponieważ reguły dopasowywania są kosztowne pod względem obliczeniowym i wydłuża czas reakcji aplikacji. Aby uzyskać najszybszą odpowiedź aplikacji:
+> Używaj `skipRemainingRules: true` zawsze, gdy jest to możliwe, ponieważ reguły uzgadniania są wyliczane i zwiększają czas odpowiedzi aplikacji. Dla najszybszej odpowiedzi aplikacji:
 >
-> * Kolejność przepisywania reguł z najczęściej dopasowywane reguły do reguły najrzadziej dopasowane.
-> * Pomiń przetwarzanie pozostałych reguł, gdy wystąpi dopasowanie i nie jest wymagane żadne dodatkowe przetwarzanie reguł.
+> * Zamów reguły ponownego zapisu z najczęściej dopasowanej reguły do najmniej często dopasowanej reguły.
+> * Pomiń przetwarzanie pozostałych reguł w przypadku wystąpienia dopasowania i nie jest wymagane żadne dodatkowe przetwarzanie reguły.
 
-### <a name="apache-mod_rewrite"></a>mod_rewrite Apache
+### <a name="apache-mod_rewrite"></a>Mod_rewrite Apache
 
-Zastosuj apache mod_rewrite reguły <xref:Microsoft.AspNetCore.Rewrite.ApacheModRewriteOptionsExtensions.AddApacheModRewrite*>z . Upewnij się, że plik reguł jest wdrożony z aplikacją. Aby uzyskać więcej informacji i przykłady reguł mod_rewrite, zobacz [mod_rewrite Apache](https://httpd.apache.org/docs/2.4/rewrite/).
+Zastosuj reguły mod_rewrite Apache za <xref:Microsoft.AspNetCore.Rewrite.ApacheModRewriteOptionsExtensions.AddApacheModRewrite*>pomocą programu. Upewnij się, że plik reguł został wdrożony razem z aplikacją. Aby uzyskać więcej informacji i przykłady reguł mod_rewrite, zobacz [Apache mod_rewrite](https://httpd.apache.org/docs/2.4/rewrite/).
 
-A <xref:System.IO.StreamReader> służy do odczytywania reguł z pliku reguł *ApacheModRewrite.txt:*
+A <xref:System.IO.StreamReader> służy do odczytywania reguł z pliku reguł *ApacheModRewrite. txt* :
 
 [!code-csharp[](url-rewriting/samples/2.x/SampleApp/Startup.cs?name=snippet1&highlight=3-4,12)]
 
-Przykładowa aplikacja przekierowuje żądania z `/apache-mod-rules-redirect/(.\*)` . `/redirected?id=$1` Kod stanu odpowiedzi to *302 - Znaleziono*.
+Przykładowa aplikacja przekierowuje żądania z `/apache-mod-rules-redirect/(.\*)` do. `/redirected?id=$1` Kod stanu odpowiedzi to *302 — znaleziono*.
 
 [!code[](url-rewriting/samples/2.x/SampleApp/ApacheModRewrite.txt)]
 
-Oryginalna prośba:`/apache-mod-rules-redirect/1234`
+Oryginalne żądanie:`/apache-mod-rules-redirect/1234`
 
-![Okno przeglądarki z narzędziami deweloperskimi śledzącymi żądania i odpowiedzi](url-rewriting/_static/add_apache_mod_redirect.png)
+![Okno przeglądarki z Narzędzia deweloperskie śledzenia żądań i odpowiedzi](url-rewriting/_static/add_apache_mod_redirect.png)
 
-Oprogramowanie pośredniczące obsługuje następujące zmienne serwera mod_rewrite Apache:
+Oprogramowanie pośredniczące obsługuje następujące zmienne serwera Apache mod_rewrite:
 
 * CONN_REMOTE_ADDR
 * HTTP_ACCEPT
@@ -591,11 +597,11 @@ Oprogramowanie pośredniczące obsługuje następujące zmienne serwera mod_rewr
 * HTTP_REFERER
 * HTTP_USER_AGENT
 * HTTPS
-* Protokół IPV6
-* Query_string
+* If
+* QUERY_STRING
 * REMOTE_ADDR
 * REMOTE_PORT
-* Request_filename
+* REQUEST_FILENAME
 * REQUEST_METHOD
 * REQUEST_SCHEME
 * REQUEST_URI
@@ -612,36 +618,36 @@ Oprogramowanie pośredniczące obsługuje następujące zmienne serwera mod_rewr
 * TIME_WDAY
 * TIME_YEAR
 
-### <a name="iis-url-rewrite-module-rules"></a>Reguły modułu przepisywania adresów URL w uirozmywanych adresach URL w uirozie.
+### <a name="iis-url-rewrite-module-rules"></a>Reguły modułu ponownego zapisywania adresów URL usług IIS
 
-Aby użyć tego samego zestawu reguł, który ma zastosowanie do <xref:Microsoft.AspNetCore.Rewrite.IISUrlRewriteOptionsExtensions.AddIISUrlRewrite*>modułu przepisywania adresu URL iIS, należy użyć programu . Upewnij się, że plik reguł jest wdrożony z aplikacją. Nie kieruj oprogramowania pośredniczącego do używania pliku *web.config* aplikacji podczas uruchamiania w systemie Windows Server IIS. Dzięki usługom IIS te reguły powinny być przechowywane poza *plikiem web.config* aplikacji, aby uniknąć konfliktów z modułem Przepisywanie usług IIS. Aby uzyskać więcej informacji i przykłady reguł modułu zapisywania adresów URL usług IIS, zobacz [Korzystanie z modułu 2.0 do przepisywania adresów URL](/iis/extensions/url-rewrite-module/using-url-rewrite-module-20) i odwołanie do konfiguracji [modułu ponownego zapisu adresu URL](/iis/extensions/url-rewrite-module/url-rewrite-module-configuration-reference).
+Aby użyć tego samego zestawu reguł, który ma zastosowanie do modułu ponowne zapisywanie adresów URL usług <xref:Microsoft.AspNetCore.Rewrite.IISUrlRewriteOptionsExtensions.AddIISUrlRewrite*>IIS, użyj. Upewnij się, że plik reguł został wdrożony razem z aplikacją. Nie należy kierować oprogramowanie pośredniczące do korzystania z pliku *Web. config* aplikacji podczas uruchamiania w usługach IIS systemu Windows Server. W przypadku usług IIS te reguły powinny być przechowywane poza plikiem *Web. config* aplikacji, aby uniknąć konfliktów z modułem ponownego zapisywania usług IIS. Aby uzyskać więcej informacji i przykłady reguł modułu ponownego zapisywania adresów URL usług IIS, zobacz [using URL Rewrite module 2,0](/iis/extensions/url-rewrite-module/using-url-rewrite-module-20) i [informacje konfiguracyjne modułu ponownego zapisywania adresu URL](/iis/extensions/url-rewrite-module/url-rewrite-module-configuration-reference).
 
-A <xref:System.IO.StreamReader> służy do odczytywania reguł z pliku reguł *IISUrlRewrite.xml:*
+A <xref:System.IO.StreamReader> służy do odczytywania reguł z pliku reguł *IISUrlRewrite. XML* :
 
 [!code-csharp[](url-rewriting/samples/2.x/SampleApp/Startup.cs?name=snippet1&highlight=5-6,13)]
 
-Przykładowa aplikacja przepisuje `/iis-rules-rewrite/(.*)` `/rewritten?id=$1`żądania z do . Odpowiedź jest wysyłana do klienta z kodem stanu *200 - OK.*
+Przykładowa aplikacja ponownie zapisuje żądania z `/iis-rules-rewrite/(.*)` programu do `/rewritten?id=$1`. Odpowiedź jest wysyłana do klienta z kodem stanu *200-OK* .
 
 [!code-xml[](url-rewriting/samples/2.x/SampleApp/IISUrlRewrite.xml)]
 
-Oryginalna prośba:`/iis-rules-rewrite/1234`
+Oryginalne żądanie:`/iis-rules-rewrite/1234`
 
-![Okno przeglądarki z narzędziami deweloperskimi śledzącymi żądanie i odpowiedź](url-rewriting/_static/add_iis_url_rewrite.png)
+![Okno przeglądarki z Narzędzia deweloperskie śledzenia żądania i odpowiedzi](url-rewriting/_static/add_iis_url_rewrite.png)
 
-Jeśli masz aktywny moduł przepisywania usług IIS z skonfigurowaną regułą na poziomie serwera, która miałaby wpływ na aplikację w niepożądany sposób, możesz wyłączyć moduł przepisywania usług IIS dla aplikacji. Aby uzyskać więcej informacji, zobacz [Wyłączanie modułów IIS](xref:host-and-deploy/iis/modules#disabling-iis-modules).
+Jeśli masz aktywny moduł ponownego zapisywania usług IIS z skonfigurowanymi regułami na poziomie serwera, które byłyby wpływać na aplikację na niepożądane sposoby, możesz wyłączyć moduł ponownego zapisywania usług IIS dla aplikacji. Aby uzyskać więcej informacji, zobacz [wyłączanie modułów IIS](xref:host-and-deploy/iis/modules#disabling-iis-modules).
 
-#### <a name="unsupported-features"></a>Nieobsługiwały się funkcje
+#### <a name="unsupported-features"></a>Nieobsługiwane funkcje
 
-Oprogramowanie pośredniczące wydane z ASP.NET Core 2.x nie obsługuje następujących funkcji modułu zapisywania adresów URL IIS:
+Oprogramowanie pośredniczące wydane z ASP.NET Core 2. x nie obsługuje następujących funkcji modułu ponownego zapisywania adresów URL usług IIS:
 
 * Reguły ruchu wychodzącego
 * Niestandardowe zmienne serwera
 * Symbole wieloznaczne
 * LogRewrittenUrl
 
-#### <a name="supported-server-variables"></a>Obsługiwane zmienne serwera
+#### <a name="supported-server-variables"></a>Obsługiwane Zmienne serwera
 
-Oprogramowanie pośredniczące obsługuje następujące zmienne serwera serwera iis url rewrite module:
+Oprogramowanie pośredniczące obsługuje następujące zmienne serwera modułu ponownego zapisywania adresów URL usług IIS:
 
 * CONTENT_LENGTH
 * CONTENT_TYPE
@@ -654,14 +660,14 @@ Oprogramowanie pośredniczące obsługuje następujące zmienne serwera serwera 
 * HTTP_USER_AGENT
 * HTTPS
 * LOCAL_ADDR
-* Query_string
+* QUERY_STRING
 * REMOTE_ADDR
 * REMOTE_PORT
-* Request_filename
+* REQUEST_FILENAME
 * REQUEST_URI
 
 > [!NOTE]
-> Można również uzyskać <xref:Microsoft.Extensions.FileProviders.IFileProvider> za <xref:Microsoft.Extensions.FileProviders.PhysicalFileProvider>pośrednictwem . Takie podejście może zapewnić większą elastyczność lokalizacji plików reguł ponownego zapisu. Upewnij się, że pliki reguł ponownego zapisu są wdrażane na serwerze w ścieżce, którą podasz.
+> Możesz również uzyskać <xref:Microsoft.Extensions.FileProviders.IFileProvider> za pośrednictwem a <xref:Microsoft.Extensions.FileProviders.PhysicalFileProvider>. Takie podejście może zapewnić większą elastyczność lokalizacji plików reguł ponownego zapisywania. Upewnij się, że pliki reguł ponownego zapisywania są wdrożone na serwerze pod podaną ścieżką.
 >
 > ```csharp
 > PhysicalFileProvider fileProvider = new PhysicalFileProvider(Directory.GetCurrentDirectory());
@@ -669,57 +675,57 @@ Oprogramowanie pośredniczące obsługuje następujące zmienne serwera serwera 
 
 ### <a name="method-based-rule"></a>Reguła oparta na metodzie
 
-Służy <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.Add*> do implementowania własnej logiki reguły w metodzie. `Add`udostępnia <xref:Microsoft.AspNetCore.Rewrite.RewriteContext>, który udostępnia <xref:Microsoft.AspNetCore.Http.HttpContext> do wykorzystania w metodzie. [RewriteContext.Result](xref:Microsoft.AspNetCore.Rewrite.RewriteContext.Result*) określa sposób obsługi dodatkowego przetwarzania potoku. Ustaw wartość jednego z <xref:Microsoft.AspNetCore.Rewrite.RuleResult> pól opisanych w poniższej tabeli.
+Użyj <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.Add*> , aby zaimplementować własną logikę reguł w metodzie. `Add`udostępnia <xref:Microsoft.AspNetCore.Rewrite.RewriteContext>, który udostępnia <xref:Microsoft.AspNetCore.Http.HttpContext> do użycia w Twojej metodzie. [RewriteContext. Result](xref:Microsoft.AspNetCore.Rewrite.RewriteContext.Result*) określa sposób obsługi dodatkowego przetwarzania potoku. Ustaw wartość na jedno z <xref:Microsoft.AspNetCore.Rewrite.RuleResult> pól opisanych w poniższej tabeli.
 
 | `RewriteContext.Result`              | Akcja                                                           |
 | ------------------------------------ | ---------------------------------------------------------------- |
-| `RuleResult.ContinueRules`(domyślnie) | Kontynuuj stosowanie reguł.                                         |
-| `RuleResult.EndResponse`             | Przestań stosować reguły i wyślij odpowiedź.                       |
-| `RuleResult.SkipRemainingRules`      | Przestań stosować reguły i wyślij kontekst do następnego oprogramowania pośredniczącego. |
+| `RuleResult.ContinueRules`wartooć | Kontynuuj stosowanie reguł.                                         |
+| `RuleResult.EndResponse`             | Zatrzymaj stosowanie reguł i Wyślij odpowiedź.                       |
+| `RuleResult.SkipRemainingRules`      | Zatrzymaj stosowanie reguł i Wyślij kontekst do następnego oprogramowania pośredniczącego. |
 
 [!code-csharp[](url-rewriting/samples/2.x/SampleApp/Startup.cs?name=snippet1&highlight=14)]
 
-Przykładowa aplikacja pokazuje metodę, która przekierowuje żądania ścieżek, które kończą się na *.xml*. Jeśli zostanie złożony `/file.xml`wniosek, żądanie zostanie `/xmlfiles/file.xml`przekierowane do . Kod stanu jest ustawiony na *301 - Przeniesiony na stałe*. Gdy przeglądarka wysunie nowe żądanie dla */xmlfiles/file.xml*, Oprogramowanie pośredniczące plików statycznych służy do klienta z folderu *wwwroot/xmlfiles.* W przypadku przekierowania jawnie ustaw kod stanu odpowiedzi. W przeciwnym razie zwracany jest kod stanu *200 - OK,* a przekierowanie nie występuje na kliencie.
+Przykładowa aplikacja przedstawia metodę, która przekierowuje żądania dla ścieżek kończących się na *. XML*. Jeśli zostanie wysłane żądanie `/file.xml`, żądanie jest przekierowywane do. `/xmlfiles/file.xml` Kod stanu jest ustawiony na *301 — trwale przeniesiony*. Gdy przeglądarka wykonuje nowe żądanie dla */XmlFiles/File.XML*, oprogramowanie pośredniczące plików statycznych zachowuje ten plik na kliencie z folderu *wwwroot/XmlFiles* . W przypadku przekierowania jawnie ustaw kod stanu odpowiedzi. W przeciwnym razie zwracany jest kod stanu *200-OK* i przekierowanie nie wystąpi na kliencie.
 
-*RewriteRules.cs:*
+*RewriteRules.cs*:
 
 [!code-csharp[](url-rewriting/samples/2.x/SampleApp/RewriteRules.cs?name=snippet_RedirectXmlFileRequests&highlight=14-18)]
 
-Takie podejście można również przepisać żądania. Przykładowa aplikacja demonstruje przepisywanie ścieżki dla dowolnego żądania pliku tekstowego do obsługi pliku tekstowego *file.txt* z folderu *wwwroot.* Oprogramowanie pośredniczące plików statycznych obsługuje plik na podstawie zaktualizowanej ścieżki żądania:
+Takie podejście może również ponownie zapisywać żądania. Przykładowa aplikacja pokazuje, jak ponownie napisać ścieżkę do dowolnego żądania pliku tekstowego, aby zapewnić obsługę pliku tekstowego *pliku. txt* z folderu *wwwroot* . Oprogramowanie pośredniczące plików statycznych obsługuje plik na podstawie zaktualizowanej ścieżki żądania:
 
 [!code-csharp[](url-rewriting/samples/2.x/SampleApp/Startup.cs?name=snippet1&highlight=15,22)]
 
-*RewriteRules.cs:*
+*RewriteRules.cs*:
 
 [!code-csharp[](url-rewriting/samples/2.x/SampleApp/RewriteRules.cs?name=snippet_RewriteTextFileRequests&highlight=7-8)]
 
-### <a name="irule-based-rule"></a>Reguła oparta na zasadach irule
+### <a name="irule-based-rule"></a>Reguła oparta na IRule
 
-Użyj <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.Add*> logiki reguły w klasie, <xref:Microsoft.AspNetCore.Rewrite.IRule> która implementuje interfejs. `IRule`zapewnia większą elastyczność w stosowania metody opartej na metodzie. Klasa implementacji może zawierać konstruktora, który <xref:Microsoft.AspNetCore.Rewrite.IRule.ApplyRule*> umożliwia przekazywanie parametrów dla metody.
+Użyj <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.Add*> , aby użyć logiki reguły w klasie, która implementuje <xref:Microsoft.AspNetCore.Rewrite.IRule> interfejs. `IRule`zapewnia większą elastyczność w porównaniu z użyciem metody opartej na metodzie. Klasa implementacji może zawierać konstruktora, który umożliwia przekazywanie parametrów dla <xref:Microsoft.AspNetCore.Rewrite.IRule.ApplyRule*> metody.
 
 [!code-csharp[](url-rewriting/samples/2.x/SampleApp/Startup.cs?name=snippet1&highlight=16-17)]
 
-Wartości parametrów w przykładowej aplikacji `extension` dla `newPath` i są sprawdzane, aby spełnić kilka warunków. Musi `extension` zawierać wartość, a wartość musi być *.png*, *.jpg*lub *gif*. Jeśli `newPath` nie jest prawidłowy, jest wyrzucany. <xref:System.ArgumentException> Jeśli zostanie złożony wniosek o *image.png,* żądanie `/png-images/image.png`zostanie przekierowane do . Jeśli zostanie złożony wniosek o *image.jpg*, `/jpg-images/image.jpg`żądanie zostanie przekierowane do . Kod stanu jest ustawiony na *301 -* `context.Result` Przeniesiony na stałe , a jest ustawiony, aby zatrzymać reguły przetwarzania i wysłać odpowiedź.
+Wartości parametrów w aplikacji przykładowej dla `extension` i `newPath` są sprawdzane pod kątem spełnienia kilku warunków. `extension` Musi zawierać wartość i musi mieć wartość *. png*, *. jpg*lub *. gif*. `newPath` Jeśli <xref:System.ArgumentException> jest nieprawidłowa, zostanie zgłoszony. Jeśli zostanie wysłane żądanie dotyczące pliku *Image. png*, żądanie jest przekierowywane do `/png-images/image.png`. Jeśli zostanie wysłane żądanie do *obrazu. jpg*, żądanie jest przekierowywane do `/jpg-images/image.jpg`. Kod stanu jest ustawiony na *301 — trwale przeniesiony*, a ustawienie `context.Result` jest ustawione na zatrzymanie przetwarzania reguł i wysłanie odpowiedzi.
 
 [!code-csharp[](url-rewriting/samples/2.x/SampleApp/RewriteRules.cs?name=snippet_RedirectImageRequests)]
 
-Oryginalna prośba:`/image.png`
+Oryginalne żądanie:`/image.png`
 
-![Okno przeglądarki z narzędziami deweloperskimi śledzącymi żądania i odpowiedzi dla pliku image.png](url-rewriting/_static/add_redirect_png_requests.png)
+![Okno przeglądarki z Narzędzia deweloperskie śledzenia żądań i odpowiedzi dla pliku Image. png](url-rewriting/_static/add_redirect_png_requests.png)
 
-Oryginalna prośba:`/image.jpg`
+Oryginalne żądanie:`/image.jpg`
 
-![Okno przeglądarki z narzędziami deweloperskimi śledzącymi żądania i odpowiedzi dla pliku image.jpg](url-rewriting/_static/add_redirect_jpg_requests.png)
+![Okno przeglądarki z Narzędzia deweloperskie śledzenia żądań i odpowiedzi dla obrazu. jpg](url-rewriting/_static/add_redirect_jpg_requests.png)
 
-## <a name="regex-examples"></a>Przykłady regex
+## <a name="regex-examples"></a>Przykłady wyrażeń regularnych
 
-| Cel | & ciągu regex<br>Przykład dopasowania | & ciągu zastępczego<br>Przykład wyjścia |
+| Cel | Ciąg wyrażenia regularnego &<br>Przykład dopasowania | & ciągu zamiennego<br>Przykład danych wyjściowych |
 | ---- | ------------------------------- | -------------------------------------- |
-| Przepisanie ścieżki do sznurka zapytania | `^path/(.*)/(.*)`<br>`/path/abc/123` | `path?var1=$1&var2=$2`<br>`/path?var1=abc&var2=123` |
-| Ukośnik na końcu taśmy | `(.*)/$`<br>`/path/` | `$1`<br>`/path` |
-| Wymuszanie końcowego ukośnika | `(.*[^/])$`<br>`/path` | `$1/`<br>`/path/` |
-| Unikaj przepisywania określonych żądań | `^(.*)(?<!\.axd)$` lub `^(?!.*\.axd$)(.*)$`<br>Tak:`/resource.htm`<br>№:`/resource.axd` | `rewritten/$1`<br>`/rewritten/resource.htm`<br>`/resource.axd` |
-| Zmienianie rozmieszczenia segmentów adresów URL | `path/(.*)/(.*)/(.*)`<br>`path/1/2/3` | `path/$3/$2/$1`<br>`path/3/2/1` |
+| Zapisz ścieżkę do ciągu QueryString | `^path/(.*)/(.*)`<br>`/path/abc/123` | `path?var1=$1&var2=$2`<br>`/path?var1=abc&var2=123` |
+| Ukośnik końcowy na pasku | `(.*)/$`<br>`/path/` | `$1`<br>`/path` |
+| Wymuszaj końcowy ukośnik | `(.*[^/])$`<br>`/path` | `$1/`<br>`/path/` |
+| Unikaj ponownego zapisywania określonych żądań | `^(.*)(?<!\.axd)$` lub `^(?!.*\.axd$)(.*)$`<br>Opcję`/resource.htm`<br>Znaleziono`/resource.axd` | `rewritten/$1`<br>`/rewritten/resource.htm`<br>`/resource.axd` |
+| Zmień rozmieszczenie segmentów adresu URL | `path/(.*)/(.*)/(.*)`<br>`path/1/2/3` | `path/$3/$2/$1`<br>`path/3/2/1` |
 | Zastępowanie segmentu adresu URL | `^(.*)/segment2/(.*)`<br>`/segment1/segment2/segment3` | `$1/replaced/$2`<br>`/segment1/replaced/segment3` |
 
 ::: moniker-end
@@ -729,11 +735,11 @@ Oryginalna prośba:`/image.jpg`
 * <xref:fundamentals/startup>
 * <xref:fundamentals/middleware/index>
 * [Wyrażenia regularne w programie .NET](/dotnet/articles/standard/base-types/regular-expressions)
-* [Język wyrażenia regularnego - podręczny punkt odniesienia](/dotnet/articles/standard/base-types/quick-ref)
-* [mod_rewrite Apache](https://httpd.apache.org/docs/2.4/rewrite/)
-* [Korzystanie z modułu 2.0 (dla iis)](/iis/extensions/url-rewrite-module/using-url-rewrite-module-20)
-* [Odwołanie do konfiguracji modułu ponownego zapisu adresu URL](/iis/extensions/url-rewrite-module/url-rewrite-module-configuration-reference)
-* [Forum modułu zapisywania adresów URL programu IIS](https://forums.iis.net/1152.aspx)
-* [Zachowaj prostą strukturę adresów URL](https://support.google.com/webmasters/answer/76329?hl=en)
-* [10 porad i wskazówek dotyczących przepisywania adresów URL](https://ruslany.net/2009/04/10-url-rewriting-tips-and-tricks/)
-* [Aby ciąć lub nie ciąć](https://webmasters.googleblog.com/2010/04/to-slash-or-not-to-slash.html)
+* [Język wyrażeń regularnych — Krótki przewodnik](/dotnet/articles/standard/base-types/quick-ref)
+* [Mod_rewrite Apache](https://httpd.apache.org/docs/2.4/rewrite/)
+* [Używanie modułu ponownego zapisywania adresu URL 2,0 (dla usług IIS)](/iis/extensions/url-rewrite-module/using-url-rewrite-module-20)
+* [Odwołanie do konfiguracji modułu ponownego zapisywania adresu URL](/iis/extensions/url-rewrite-module/url-rewrite-module-configuration-reference)
+* [Forum ponownego zapisywania adresów URL usług IIS](https://forums.iis.net/1152.aspx)
+* [Zachowaj prostą strukturę adresu URL](https://support.google.com/webmasters/answer/76329?hl=en)
+* [10 — porady i wskazówki dotyczące ponownego zapisywania adresów URL](https://ruslany.net/2009/04/10-url-rewriting-tips-and-tricks/)
+* [Na ukośnik lub nie do ukośnika](https://webmasters.googleblog.com/2010/04/to-slash-or-not-to-slash.html)

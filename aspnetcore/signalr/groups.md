@@ -1,43 +1,47 @@
 ---
-title: Zarządzanie użytkownikami i grupami w SignalR
+title: Zarządzanie użytkownikami i grupami w programieSignalR
 author: bradygaster
-description: Omówienie ASP.NET Core SignalR zarządzanie użytkownikami i grupami.
+description: Przegląd ASP.NET Core SignalR zarządzania użytkownikami i grupami.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: signalr/groups
-ms.openlocfilehash: 7e8c85dcbc46daa68988374f499f19a9d2cead47
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: af498575899fcfa407aba9f9f49c0bfeabadc7a7
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78665866"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776301"
 ---
-# <a name="manage-users-and-groups-in-opno-locsignalr"></a>Zarządzanie użytkownikami i grupami w SignalR
+# <a name="manage-users-and-groups-in-signalr"></a>Zarządzanie użytkownikami i grupami w programieSignalR
 
 Autor [Brennan Conroy](https://github.com/BrennanConroy)
 
-SignalR umożliwia wysyłanie komunikatów do wszystkich połączeń skojarzonych z określonym użytkownikiem, a także do nazwanych grup połączeń.
+SignalRumożliwia wysyłanie komunikatów do wszystkich połączeń skojarzonych z określonym użytkownikiem, a także do nazwanych grup połączeń.
 
 [Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/groups/sample/) [(jak pobrać)](xref:index#how-to-download-a-sample)
 
-## <a name="users-in-opno-locsignalr"></a>Użytkownicy w SignalR
+## <a name="users-in-signalr"></a>Użytkownicy wSignalR
 
-SignalR umożliwia wysyłanie komunikatów do wszystkich połączeń skojarzonych z określonym użytkownikiem. Domyślnie SignalR używa `ClaimTypes.NameIdentifier` z `ClaimsPrincipal` skojarzonego z połączeniem jako identyfikatorem użytkownika. Pojedynczy użytkownik może mieć wiele połączeń z aplikacją SignalR. Na przykład użytkownik może być połączony na swoim komputerze, a także na telefonie. Każde urządzenie ma oddzielne połączenie SignalR, ale wszystkie są skojarzone z tym samym użytkownikiem. Jeśli wiadomość jest wysyłana do użytkownika, wszystkie połączenia skojarzone z tym użytkownikiem otrzymują komunikat. Do identyfikatora użytkownika dla połączenia można uzyskać dostęp za pomocą właściwości `Context.UserIdentifier` w centrum.
+SignalRumożliwia wysyłanie komunikatów do wszystkich połączeń skojarzonych z określonym użytkownikiem. Domyślnie program SignalR używa programu `ClaimTypes.NameIdentifier` ze `ClaimsPrincipal` skojarzonego z połączeniem jako identyfikator użytkownika. Pojedynczy użytkownik może mieć wiele połączeń z SignalR aplikacją. Na przykład użytkownik może być połączony na swoim komputerze, a także na telefonie. Każde urządzenie ma oddzielne SignalR połączenie, ale wszystkie są skojarzone z tym samym użytkownikiem. Jeśli wiadomość jest wysyłana do użytkownika, wszystkie połączenia skojarzone z tym użytkownikiem otrzymują komunikat. Do identyfikatora użytkownika dla połączenia można uzyskać dostęp do `Context.UserIdentifier` właściwości w centrum.
 
-Wyślij wiadomość do określonego użytkownika, przekazując identyfikator użytkownika do funkcji `User` w metodzie centrum, jak pokazano w następującym przykładzie:
+Wyślij wiadomość do określonego użytkownika, przekazując identyfikator użytkownika do `User` funkcji w metodzie centrum, jak pokazano w następującym przykładzie:
 
 > [!NOTE]
 > W identyfikatorze użytkownika jest rozróżniana wielkość liter.
 
 [!code-csharp[Configure service](groups/sample/hubs/chathub.cs?range=29-32)]
 
-## <a name="groups-in-opno-locsignalr"></a>Grupy w SignalR
+## <a name="groups-in-signalr"></a>Grupy wSignalR
 
-Grupa jest kolekcją połączeń skojarzonych z nazwą. Komunikaty mogą być wysyłane do wszystkich połączeń w grupie. Grupy są zalecanym sposobem wysyłania do połączenia lub wielu połączeń, ponieważ grupy są zarządzane przez aplikację. Połączenie może być członkiem wielu grup. Sprawia to, że grupy są idealnym rozwiązaniem, takim jak aplikacja czatu, gdzie każde pomieszczenie może być reprezentowane jako Grupa. Połączenia mogą być dodawane lub usuwane z grup za pośrednictwem metod `AddToGroupAsync` i `RemoveFromGroupAsync`.
+Grupa jest kolekcją połączeń skojarzonych z nazwą. Komunikaty mogą być wysyłane do wszystkich połączeń w grupie. Grupy są zalecanym sposobem wysyłania do połączenia lub wielu połączeń, ponieważ grupy są zarządzane przez aplikację. Połączenie może być członkiem wielu grup. Sprawia to, że grupy są idealnym rozwiązaniem, takim jak aplikacja czatu, gdzie każde pomieszczenie może być reprezentowane jako Grupa. Połączenia mogą być dodawane lub usuwane z grup za pośrednictwem `AddToGroupAsync` metod `RemoveFromGroupAsync` i.
 
 [!code-csharp[Hub methods](groups/sample/hubs/chathub.cs?range=15-27)]
 

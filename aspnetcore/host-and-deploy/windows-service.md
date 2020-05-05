@@ -1,56 +1,62 @@
 ---
-title: Host ASP.NET Core w usłudze systemu Windows
+title: ASP.NET Core hosta w usłudze systemu Windows
 author: rick-anderson
 description: Dowiedz się, jak hostować aplikację ASP.NET Core w usłudze systemu Windows.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: host-and-deploy/windows-service
-ms.openlocfilehash: 5cb61d330df7e15fbd54396207792596ae018fd3
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 4ad9086c60e58f89bdde4962d7487036df251cc1
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80417579"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776347"
 ---
-# <a name="host-aspnet-core-in-a-windows-service"></a>Host ASP.NET Core w usłudze systemu Windows
+# <a name="host-aspnet-core-in-a-windows-service"></a>ASP.NET Core hosta w usłudze systemu Windows
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Aplikacja ASP.NET Core może być hostowana w systemie Windows jako [usługa systemu Windows](/dotnet/framework/windows-services/introduction-to-windows-service-applications) bez korzystania z usług IIS. Po uruchomieniu jako usługa systemu Windows aplikacja jest uruchamiana automatycznie po ponownym uruchomieniu serwera.
+Aplikacja ASP.NET Core może być hostowana w systemie Windows jako [Usługa systemu Windows](/dotnet/framework/windows-services/introduction-to-windows-service-applications) bez korzystania z usług IIS. Gdy usługa jest hostowana w systemie Windows, aplikacja jest uruchamiana automatycznie po ponownym uruchomieniu serwera.
 
 [Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/windows-service/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
-* [ASP.NET Core SDK 2.1 lub nowszym](https://dotnet.microsoft.com/download)
-* [Program PowerShell 6.2 lub nowszy](https://github.com/PowerShell/PowerShell)
+* [ASP.NET Core zestaw SDK 2,1 lub nowszy](https://dotnet.microsoft.com/download)
+* [Program PowerShell 6,2 lub nowszy](https://github.com/PowerShell/PowerShell)
 
-## <a name="worker-service-template"></a>Szablon usługi pracownika
+## <a name="worker-service-template"></a>Szablon usługi procesu roboczego
 
-Szablon ASP.NET Core Worker Service stanowi punkt wyjścia do pisania długo działających aplikacji usługi. Aby użyć szablonu jako podstawy aplikacji usługi windows:
+Szablon usługi ASP.NET Core Worker zapewnia punkt początkowy do pisania długotrwałych aplikacji usługi. Aby użyć szablonu jako podstawy dla aplikacji usługi systemu Windows:
 
 1. Utwórz aplikację usługi procesu roboczego na podstawie szablonu .NET Core.
-1. Postępuj zgodnie ze wskazówkami w sekcji [Konfiguracja aplikacji,](#app-configuration) aby zaktualizować aplikację usługi procesu roboczego, aby mogła działać jako usługa systemu Windows.
+1. Postępuj zgodnie ze wskazówkami w sekcji [Konfiguracja aplikacji](#app-configuration) , aby zaktualizować aplikację usługi procesu roboczego tak, aby mogła ona działać jako usługa systemu Windows.
 
 [!INCLUDE[](~/includes/worker-template-instructions.md)]
 
 ## <a name="app-configuration"></a>Konfiguracja aplikacji
 
-Aplikacja wymaga odwołania do pakietu [dla microsoft.extensions.Hosting.WindowsServices](https://www.nuget.org/packages/Microsoft.Extensions.Hosting.WindowsServices).
+Aplikacja wymaga odwołania do pakietu dla elementu [Microsoft. Extensions. hosting. WindowsServices](https://www.nuget.org/packages/Microsoft.Extensions.Hosting.WindowsServices).
 
-`IHostBuilder.UseWindowsService`podczas budowania hosta. Jeśli aplikacja jest uruchomiona jako usługa systemu Windows, metoda:
+`IHostBuilder.UseWindowsService`jest wywoływana podczas kompilowania hosta. Jeśli aplikacja działa jako usługa systemu Windows, Metoda:
 
-* Ustawia okres istnienia `WindowsServiceLifetime`hosta na .
-* Ustawia [katalog główny zawartości](xref:fundamentals/index#content-root) na [AppContext.BaseDirectory](xref:System.AppContext.BaseDirectory). Aby uzyskać więcej informacji, zobacz [sekcję Bieżący katalog i katalog zawartości.](#current-directory-and-content-root)
-* Umożliwia rejestrowanie w dzienniku zdarzeń:
+* Ustawia okres istnienia hosta `WindowsServiceLifetime`na.
+* Ustawia [katalog główny zawartości](xref:fundamentals/index#content-root) na [AppContext. BaseDirectory](xref:System.AppContext.BaseDirectory). Aby uzyskać więcej informacji, zapoznaj się z sekcją [Current Directory i root Content](#current-directory-and-content-root) .
+* Włącza rejestrowanie w dzienniku zdarzeń:
   * Nazwa aplikacji jest używana jako domyślna nazwa źródła.
-  * Domyślny poziom dziennika to *Ostrzeżenie* lub wyższy dla aplikacji opartej `CreateDefaultBuilder` na szablonie ASP.NET Core, który wywołuje tworzenie hosta.
-  * Zastąp domyślny poziom `Logging:EventLog:LogLevel:Default` dziennika za pomocą klucza w *appsettings.json*/*appsettings.{ Środowisko}.json* lub inny dostawca konfiguracji.
-  * Tylko administratorzy mogą tworzyć nowe źródła zdarzeń. Jeśli nie można utworzyć źródła zdarzeń przy użyciu nazwy aplikacji, ostrzeżenie jest rejestrowane w źródle *aplikacji,* a dzienniki zdarzeń są wyłączone.
+  * Domyślny poziom rejestrowania jest *ostrzegawczy* lub wyższy dla aplikacji opartej na szablonie ASP.NET Core, który wywołuje `CreateDefaultBuilder` , aby skompilować hosta.
+  * Zastąp domyślny poziom dziennika `Logging:EventLog:LogLevel:Default` kluczem w pliku *appSettings. JSON*/*. { Environment}. JSON* lub inny dostawca konfiguracji.
+  * Tylko Administratorzy mogą tworzyć nowe źródła zdarzeń. Gdy nie można utworzyć źródła zdarzeń przy użyciu nazwy aplikacji, w źródle *aplikacji* jest rejestrowane ostrzeżenie, a dzienniki zdarzeń są wyłączone.
 
-W `CreateHostBuilder` *Program.cs:*
+W `CreateHostBuilder` programie *program.cs*:
 
 ```csharp
 Host.CreateDefaultBuilder(args)
@@ -58,36 +64,36 @@ Host.CreateDefaultBuilder(args)
     ...
 ```
 
-W tym temacie dołączone są następujące przykładowe aplikacje:
+Następujące przykładowe aplikacje zostały dołączone do tego tematu:
 
-* Przykład &ndash; usługi procesu roboczego w tle Przykładowa aplikacja niesienia sieci web oparta na [szablonie Usługi procesu roboczego,](#worker-service-template) który używa [hostowanych usług](xref:fundamentals/host/hosted-services) do wykonywania zadań w tle.
-* Przykładowa próbka &ndash; aplikacji sieciOwy Razor Pages, która działa jako usługa systemu Windows z [usługami hostowanymi](xref:fundamentals/host/hosted-services) dla zadań w tle.
+* Przykładowa usługa procesu &ndash; roboczego w tle — Przykładowa aplikacja nieinternetowa oparta na [szablonie usługi procesu roboczego](#worker-service-template) , który korzysta z [usług hostowanych](xref:fundamentals/host/hosted-services) na potrzeby zadań w tle.
+* App Service sieci Web &ndash; Przykładowa Razor Strona Przykładowa aplikacji sieci Web, która działa jako usługa systemu Windows z [usługami hostowanymi](xref:fundamentals/host/hosted-services) dla zadań w tle.
 
-Wskazówki MVC można znaleźć <xref:mvc/overview> <xref:migration/22-to-30>w artykułach w obszarze i .
+Wskazówki dotyczące MVC znajdują się w <xref:mvc/overview> artykułach <xref:migration/22-to-30>i.
 
 ## <a name="deployment-type"></a>Typ wdrożenia
 
-Aby uzyskać informacje i porady dotyczące scenariuszy wdrażania, zobacz [wdrożenie aplikacji .NET Core](/dotnet/core/deploying/).
+Aby uzyskać informacje i porady dotyczące scenariuszy wdrażania, zobacz [wdrażanie aplikacji .NET Core](/dotnet/core/deploying/).
 
 ### <a name="sdk"></a>SDK
 
-W przypadku usługi opartej na aplikacjach sieci web, która używa stron Razor Pages lub struktur MVC, określ składnik Web SDK w pliku projektu:
+W przypadku usługi opartej na aplikacji sieci Web korzystającej ze Razor stron lub platform MVC należy określić zestaw SDK sieci Web w pliku projektu:
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk.Web">
 ```
 
-Jeśli usługa wykonuje tylko zadania w tle (na przykład [usługi hostowane),](xref:fundamentals/host/hosted-services)określ sdk roboczy w pliku projektu:
+Jeśli usługa wykonuje tylko zadania w tle (na przykład [usługi hostowane](xref:fundamentals/host/hosted-services)), określ zestaw SDK procesu roboczego w pliku projektu:
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk.Worker">
 ```
 
-### <a name="framework-dependent-deployment-fdd"></a>Wdrożenie zależne od struktury (FDD)
+### <a name="framework-dependent-deployment-fdd"></a>Wdrożenie zależne od platformy (FDD)
 
-Wdrożenie zależne od struktury (FDD) opiera się na obecności udostępnionej wersji systemu .NET Core w systemie docelowym. Gdy scenariusz FDD zostanie przyjęty zgodnie ze wskazówkami zawartymi w tym artykule, SDK tworzy plik wykonywalny (*.exe*), nazywany *wykonywalnym zależnym od struktury*.
+Wdrożenie zależne od platformy (FDD) zależy od obecności udostępnionej systemowej wersji platformy .NET Core w systemie docelowym. Po przyjęciu scenariusza FDD zgodnie ze wskazówkami zawartymi w tym artykule zestaw SDK tworzy plik wykonywalny (*. exe*), nazywany *plik wykonywalny zależny od platformy*.
 
-W przypadku korzystania z [pakietu Web SDK](#sdk)plik *web.config,* który jest zwykle produkowany podczas publikowania aplikacji ASP.NET Core, nie jest potrzebny dla aplikacji Usług systemu Windows. Aby wyłączyć tworzenie pliku *web.config,* `<IsTransformWebConfigDisabled>` dodaj właściwość ustawioną na `true`.
+Jeśli używasz [zestawu SDK sieci Web](#sdk), plik *Web. config* , który jest zwykle tworzony podczas publikowania aplikacji ASP.NET Core, jest zbędny dla aplikacji usług systemu Windows. Aby wyłączyć tworzenie pliku *Web. config* , należy dodać `<IsTransformWebConfigDisabled>` Właściwość ustawioną na `true`.
 
 ```xml
 <PropertyGroup>
@@ -96,65 +102,65 @@ W przypadku korzystania z [pakietu Web SDK](#sdk)plik *web.config,* który jest 
 </PropertyGroup>
 ```
 
-### <a name="self-contained-deployment-scd"></a>Samodzielne wdrażanie (SCD)
+### <a name="self-contained-deployment-scd"></a>Wdrażanie samodzielne (SCD)
 
-Samodzielne wdrożenie (SCD) nie opiera się na obecności udostępnionej struktury w systemie hosta. Środowisko wykonawcze i zależności aplikacji są wdrażane za pomocą aplikacji.
+Wdrożenie samodzielne (SCD) nie polega na obecności struktury udostępnionej w systemie hosta. Środowisko uruchomieniowe i zależności aplikacji są wdrażane przy użyciu aplikacji.
 
-Identyfikator środowiska wykonawczego systemu Windows [(RID)](/dotnet/core/rid-catalog) `<PropertyGroup>` znajduje się w platformie zawierającej platformę docelową:
+[Identyfikator środowiska uruchomieniowego systemu Windows (RID)](/dotnet/core/rid-catalog) znajduje się `<PropertyGroup>` w, który zawiera platformę docelową:
 
 ```xml
 <RuntimeIdentifier>win7-x64</RuntimeIdentifier>
 ```
 
-Aby opublikować wiele identyfikatorów RID:
+Aby opublikować dla wielu identyfikatorów RID:
 
-* Podaj identyfikatory RID na liście rozdzielanych średnikami.
-* Nazwa właściwości [ \<RuntimeIdentifiers>](/dotnet/core/tools/csproj#runtimeidentifiers) (liczba mnoga).
+* Podaj identyfikatory RID na liście rozdzielanej średnikami.
+* Użyj nazwy [ \<właściwości RuntimeIdentifiers>](/dotnet/core/tools/csproj#runtimeidentifiers) (plural).
 
-Aby uzyskać więcej informacji, zobacz [.NET Core RID Catalog](/dotnet/core/rid-catalog).
+Aby uzyskać więcej informacji, zobacz [katalog .NET Core RID Catalog](/dotnet/core/rid-catalog).
 
 ## <a name="service-user-account"></a>Konto użytkownika usługi
 
-Aby utworzyć konto użytkownika dla usługi, użyj polecenia cmdlet [New-LocalUser](/powershell/module/microsoft.powershell.localaccounts/new-localuser) z administracyjnej powłoki poleceń programu PowerShell 6.
+Aby utworzyć konto użytkownika dla usługi, należy użyć polecenia cmdlet [New-LocalUser](/powershell/module/microsoft.powershell.localaccounts/new-localuser) w powłoce poleceń administracyjnych programu PowerShell 6.
 
-W systemie Windows 10 October 2018 Update (wersja 1809/kompilacja 10.0.17763) lub nowszej:
+W systemie Windows 10 października 2018 Update (wersja 1809/Kompilacja 10.0.17763) lub nowsza:
 
 ```powershell
 New-LocalUser -Name {SERVICE NAME}
 ```
 
-W systemie operacyjnym Windows wcześniej niż Windows 10 October 2018 Update (wersja 1809/build 10.0.17763):
+W systemie operacyjnym Windows w wersji starszej niż aktualizacja 2018 systemu Windows 10 października (wersja 1809/Kompilacja 10.0.17763):
 
 ```console
 powershell -Command "New-LocalUser -Name {SERVICE NAME}"
 ```
 
-Po wyświetleniu monitu podaj [silne hasło.](/windows/security/threat-protection/security-policy-settings/password-must-meet-complexity-requirements)
+Podaj [silne hasło](/windows/security/threat-protection/security-policy-settings/password-must-meet-complexity-requirements) po wyświetleniu monitu.
 
-O `-AccountExpires` ile parametr nie zostanie dostarczony do polecenia cmdlet <xref:System.DateTime> [New-LocalUser](/powershell/module/microsoft.powershell.localaccounts/new-localuser) z wygaśnięciem, konto nie wygaśnie.
+Jeśli `-AccountExpires` parametr nie zostanie dostarczony do polecenia cmdlet [New-LocalUser](/powershell/module/microsoft.powershell.localaccounts/new-localuser) z wygaśnięciem <xref:System.DateTime>, konto nie wygaśnie.
 
-Aby uzyskać więcej informacji, zobacz [Microsoft.PowerShell.LocalAccounts](/powershell/module/microsoft.powershell.localaccounts/) i [Konta użytkowników usług](/windows/desktop/services/service-user-accounts).
+Aby uzyskać więcej informacji, zobacz [Microsoft. PowerShell. LocalAccounts](/powershell/module/microsoft.powershell.localaccounts/) i [konta użytkowników usług](/windows/desktop/services/service-user-accounts).
 
-Alternatywnym podejściem do zarządzania użytkownikami podczas korzystania z usługi Active Directory jest użycie kont usług zarządzanych. Aby uzyskać więcej informacji, zobacz [Omówienie grupowych kont usług zarządzanych](/windows-server/security/group-managed-service-accounts/group-managed-service-accounts-overview).
+Alternatywna metoda zarządzania użytkownikami podczas korzystania z Active Directory polega na użyciu zarządzanych kont usług. Aby uzyskać więcej informacji, zobacz [Omówienie kont usług zarządzanych przez grupę](/windows-server/security/group-managed-service-accounts/group-managed-service-accounts-overview).
 
-## <a name="log-on-as-a-service-rights"></a>Zaloguj się jako prawa do usługi
+## <a name="log-on-as-a-service-rights"></a>Logowanie jako prawa usługi
 
-Aby *ustanowić logowanie jako* prawa do usługi dla konta użytkownika usługi:
+Aby nawiązać *Logowanie jako prawa usługi* dla konta użytkownika usługi:
 
-1. Otwórz edytor lokalnych zasad zabezpieczeń, uruchamiając *plik secpol.msc*.
-1. Rozwiń węzeł **Zasady lokalne** i wybierz pozycję **Przypisanie praw użytkownika**.
-1. Otwórz **zasadę Logowanie jako usługi.**
-1. Wybierz **pozycję Dodaj użytkownika lub grupę**.
+1. Otwórz Edytor lokalnych zasad zabezpieczeń, uruchamiając program *secpol. msc*.
+1. Rozwiń węzeł **Zasady lokalne** , a następnie wybierz pozycję **Przypisywanie praw użytkownika**.
+1. Otwórz okno **Logowanie jako usługa** .
+1. Wybierz pozycję **Dodaj użytkownika lub grupę**.
 1. Podaj nazwę obiektu (konto użytkownika) przy użyciu jednej z następujących metod:
-   1. Wpisz konto użytkownika`{DOMAIN OR COMPUTER NAME\USER}`( ) w polu nazwa obiektu i wybierz **przycisk OK,** aby dodać użytkownika do zasad.
-   1. Wybierz **pozycję Zaawansowane**. Wybierz **pozycję Znajdź teraz**. Wybierz konto użytkownika z listy. Kliknij przycisk **OK**. Wybierz **przycisk OK** ponownie, aby dodać użytkownika do zasad.
-1. Wybierz **przycisk OK** lub **Zastosuj,** aby zaakceptować zmiany.
+   1. Wpisz konto użytkownika (`{DOMAIN OR COMPUTER NAME\USER}`) w polu Nazwa obiektu, a następnie wybierz **przycisk OK** , aby dodać użytkownika do zasad.
+   1. Wybierz pozycję **Zaawansowane**. Wybierz pozycję **Znajdź teraz**. Wybierz z listy konto użytkownika. Wybierz przycisk **OK**. Ponownie wybierz **przycisk OK** , aby dodać użytkownika do zasad.
+1. Wybierz **przycisk OK** lub **Zastosuj** , aby zaakceptować zmiany.
 
 ## <a name="create-and-manage-the-windows-service"></a>Tworzenie usługi systemu Windows i zarządzanie nią
 
 ### <a name="create-a-service"></a>Tworzenie usługi
 
-Użyj poleceń programu PowerShell, aby zarejestrować usługę. Z administracyjnej powłoki poleceń programu PowerShell 6 wykonaj następujące polecenia:
+Zarejestrowanie usługi za pomocą poleceń programu PowerShell. Z poziomu powłoki poleceń administracyjnych programu PowerShell 6 wykonaj następujące polecenia:
 
 ```powershell
 $acl = Get-Acl "{EXE PATH}"
@@ -166,12 +172,12 @@ $acl | Set-Acl "{EXE PATH}"
 New-Service -Name {SERVICE NAME} -BinaryPathName {EXE FILE PATH} -Credential {DOMAIN OR COMPUTER NAME\USER} -Description "{DESCRIPTION}" -DisplayName "{DISPLAY NAME}" -StartupType Automatic
 ```
 
-* `{EXE PATH}`&ndash; Ścieżka do folderu aplikacji na hoście `d:\myservice`(na przykład ). Nie dołączaj pliku wykonywalnego aplikacji do ścieżki. Ukośnik na końcu nie jest wymagany.
+* `{EXE PATH}`&ndash; Ścieżka do folderu aplikacji na hoście (na przykład `d:\myservice`). Nie dołączaj pliku wykonywalnego aplikacji do ścieżki. Końcowy ukośnik nie jest wymagany.
 * `{DOMAIN OR COMPUTER NAME\USER}`&ndash; Konto użytkownika usługi (na przykład `Contoso\ServiceUser`).
-* `{SERVICE NAME}`&ndash; Nazwa usługi (na `MyService`przykład ).
-* `{EXE FILE PATH}`&ndash; Ścieżka wykonywalna aplikacji `d:\myservice\myservice.exe`(na przykład ). Dołącz nazwę pliku wykonywalnego z rozszerzeniem.
-* `{DESCRIPTION}`&ndash; Opis usługi (na `My sample service`przykład ).
-* `{DISPLAY NAME}`&ndash; Nazwa wyświetlana usługi `My Service`(na przykład ).
+* `{SERVICE NAME}`&ndash; Nazwa usługi (na przykład `MyService`).
+* `{EXE FILE PATH}`&ndash; Ścieżka pliku wykonywalnego aplikacji (na przykład `d:\myservice\myservice.exe`). Uwzględnij nazwę pliku wykonywalnego z rozszerzeniem.
+* `{DESCRIPTION}`&ndash; Opis usługi (na przykład `My sample service`).
+* `{DISPLAY NAME}`&ndash; Nazwa wyświetlana usługi (na przykład `My Service`).
 
 ### <a name="start-a-service"></a>Uruchamianie usługi
 
@@ -181,7 +187,7 @@ Uruchom usługę za pomocą następującego polecenia programu PowerShell 6:
 Start-Service -Name {SERVICE NAME}
 ```
 
-Polecenie trwa kilka sekund, aby uruchomić usługę.
+Uruchomienie usługi może potrwać kilka sekund.
 
 ### <a name="determine-a-services-status"></a>Określanie stanu usługi
 
@@ -191,7 +197,7 @@ Aby sprawdzić stan usługi, użyj następującego polecenia programu PowerShell
 Get-Service -Name {SERVICE NAME}
 ```
 
-Stan jest zgłaszany jako jedna z następujących wartości:
+Stan jest raportowany jako jedna z następujących wartości:
 
 * `Starting`
 * `Running`
@@ -200,7 +206,7 @@ Stan jest zgłaszany jako jedna z następujących wartości:
 
 ### <a name="stop-a-service"></a>Zatrzymywanie usługi
 
-Zatrzymaj usługę za pomocą następującego polecenia programu Powershell 6:
+Zatrzymaj usługę za pomocą następującego polecenia programu PowerShell 6:
 
 ```powershell
 Stop-Service -Name {SERVICE NAME}
@@ -208,7 +214,7 @@ Stop-Service -Name {SERVICE NAME}
 
 ### <a name="remove-a-service"></a>Usuwanie usługi
 
-Po krótkim opóźnieniu zatrzymania usługi usuń usługę za pomocą następującego polecenia Programu Powershell 6:
+Po krótkim opóźnieniu na zatrzymanie usługi Usuń usługę za pomocą następującego polecenia programu PowerShell 6:
 
 ```powershell
 Remove-Service -Name {SERVICE NAME}
@@ -216,116 +222,116 @@ Remove-Service -Name {SERVICE NAME}
 
 ## <a name="proxy-server-and-load-balancer-scenarios"></a>Scenariusze serwera proxy i modułu równoważenia obciążenia
 
-Usługi, które wchodzą w interakcję z żądaniami z Internetu lub sieci firmowej i znajdują się za serwerem proxy lub modułem równoważenia obciążenia, mogą wymagać dodatkowej konfiguracji. Aby uzyskać więcej informacji, zobacz <xref:host-and-deploy/proxy-load-balancer>.
+Usługi, które współdziałają z żądaniami z Internetu lub sieci firmowej i znajdują się za serwerem proxy lub modułem równoważenia obciążenia, mogą wymagać dodatkowej konfiguracji. Aby uzyskać więcej informacji, zobacz <xref:host-and-deploy/proxy-load-balancer>.
 
 ## <a name="configure-endpoints"></a>Konfigurowanie punktów końcowych
 
-Domyślnie ASP.NET Core wiąże się `http://localhost:5000`z programem . Skonfiguruj adres URL `ASPNETCORE_URLS` i port, ustawiając zmienną środowiskową.
+Domyślnie ASP.NET Core wiąże się z `http://localhost:5000`. Skonfiguruj adres URL i port przez ustawienie zmiennej `ASPNETCORE_URLS` środowiskowej.
 
-Aby uzyskać dodatkowe podejścia do konfiguracji adresów URL i portów, zobacz odpowiedni artykuł na temat serwera:
+Aby uzyskać dodatkowe podejścia do konfiguracji adresów URL i portów, zobacz artykuł dotyczący odpowiedniego serwera:
 
 * <xref:fundamentals/servers/kestrel#endpoint-configuration>
 * <xref:fundamentals/servers/httpsys#configure-windows-server>
 
-Powyższe wskazówki obejmują obsługę punktów końcowych HTTPS. Na przykład skonfiguruj aplikację dla protokołu HTTPS, gdy uwierzytelnianie jest używane z usługą systemu Windows.
+Powyższe wskazówki obejmują obsługę punktów końcowych HTTPS. Na przykład skonfiguruj aplikację do obsługi protokołu HTTPS, gdy uwierzytelnianie jest używane z usługą systemu Windows.
 
 > [!NOTE]
-> Użycie ASP.NET certyfikatu dewelopera HTTPS w celu zabezpieczenia punktu końcowego usługi nie jest obsługiwane.
+> Korzystanie z ASP.NET Core certyfikatu deweloperskiego HTTPS w celu zabezpieczenia punktu końcowego usługi nie jest obsługiwane.
 
-## <a name="current-directory-and-content-root"></a>Bieżący katalog i katalog główny zawartości
+## <a name="current-directory-and-content-root"></a>Bieżący katalog i główna Zawartość
 
-Bieżący katalog roboczy <xref:System.IO.Directory.GetCurrentDirectory*> zwracany przez wywołanie usługi systemu Windows to folder *C:\\WINDOWS\\system32.* Folder *system32* nie jest odpowiednią lokalizacją do przechowywania plików usługi (na przykład plików ustawień). Użyj jednego z następujących podejść do obsługi i uzyskiwania dostępu do zasobów i plików ustawień usługi.
+Bieżącym katalogiem roboczym zwróconym <xref:System.IO.Directory.GetCurrentDirectory*> przez wywołanie dla usługi systemu Windows jest folder *\\C\\: Windows system32* . Folder *system32* nie jest odpowiednią lokalizacją do przechowywania plików usługi (na przykład plików ustawień). Użyj jednego z poniższych metod, aby zachować i uzyskać dostęp do plików ustawień i zasobów usługi.
 
-### <a name="use-contentrootpath-or-contentrootfileprovider"></a>Korzystanie z programu ContentRootPath lub ContentRootFileProvider
+### <a name="use-contentrootpath-or-contentrootfileprovider"></a>Użyj ContentRootPath lub ContentRootFileProvider
 
-Użyj [IHostEnvironment.ContentRootPath](xref:Microsoft.Extensions.Hosting.IHostEnvironment.ContentRootPath) lub <xref:Microsoft.Extensions.Hosting.IHostEnvironment.ContentRootFileProvider> zlokalizować zasoby aplikacji.
+Użyj [IHostEnvironment. ContentRootPath](xref:Microsoft.Extensions.Hosting.IHostEnvironment.ContentRootPath) lub <xref:Microsoft.Extensions.Hosting.IHostEnvironment.ContentRootFileProvider> do lokalizowania zasobów aplikacji.
 
-Gdy aplikacja działa jako <xref:Microsoft.Extensions.Hosting.WindowsServiceLifetimeHostBuilderExtensions.UseWindowsService*> usługa, <xref:Microsoft.Extensions.Hosting.IHostEnvironment.ContentRootPath> ustawia na [AppContext.BaseDirectory](xref:System.AppContext.BaseDirectory).
+Gdy aplikacja działa jako usługa, <xref:Microsoft.Extensions.Hosting.WindowsServiceLifetimeHostBuilderExtensions.UseWindowsService*> ustawia wartość <xref:Microsoft.Extensions.Hosting.IHostEnvironment.ContentRootPath> na [AppContext. BaseDirectory](xref:System.AppContext.BaseDirectory).
 
-Domyślne pliki ustawień aplikacji, *appsettings.json* i *appsettings.{ Środowisko}.json*, są ładowane z katalogu głównego zawartości aplikacji, wywołując [CreateDefaultBuilder podczas budowy hosta](xref:fundamentals/host/generic-host#set-up-a-host).
+Domyślne pliki ustawień aplikacji, *appSettings. JSON* i *appSettings. { Environment}. JSON*jest ładowany z katalogu głównego zawartości aplikacji przez wywołanie [CreateDefaultBuilder podczas konstruowania hosta](xref:fundamentals/host/generic-host#set-up-a-host).
 
-W przypadku innych plików ustawień <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureAppConfiguration*>załadowanych przez kod <xref:Microsoft.Extensions.Configuration.FileConfigurationExtensions.SetBasePath*>programisty w , nie ma potrzeby, aby zadzwonić . W poniższym przykładzie plik *custom_settings.json* istnieje w katalogu głównym zawartości aplikacji i jest ładowany bez jawnego ustawiania ścieżki podstawowej:
+W przypadku innych plików ustawień ładowanych przez kod dewelopera w <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureAppConfiguration*>, nie ma potrzeby wywoływania <xref:Microsoft.Extensions.Configuration.FileConfigurationExtensions.SetBasePath*>. W poniższym przykładzie plik *custom_settings. JSON* znajduje się w katalogu głównym zawartości aplikacji i jest ładowany bez jawnego ustawiania ścieżki podstawowej:
 
 [!code-csharp[](windows-service/samples_snapshot/CustomSettingsExample.cs?highlight=13)]
 
-Nie próbuj używać <xref:System.IO.Directory.GetCurrentDirectory*> do uzyskania ścieżki zasobów, ponieważ aplikacja usługi systemu Windows zwraca folder *C:\\WINDOWS\\system32* jako bieżący katalog.
+Nie należy próbować użyć <xref:System.IO.Directory.GetCurrentDirectory*> programu w celu uzyskania ścieżki zasobu, ponieważ aplikacja usługi systemu Windows zwraca folder *\\C\\: Windows system32* jako bieżący katalog.
 
-### <a name="store-a-services-files-in-a-suitable-location-on-disk"></a>Przechowywanie plików usługi w odpowiednim miejscu na dysku
+### <a name="store-a-services-files-in-a-suitable-location-on-disk"></a>Przechowywanie plików usługi w odpowiedniej lokalizacji na dysku
 
-Określ ścieżkę <xref:Microsoft.Extensions.Configuration.FileConfigurationExtensions.SetBasePath*> bezwzględną <xref:Microsoft.Extensions.Configuration.IConfigurationBuilder> podczas korzystania z folderu zawierającego pliki.
+Określ ścieżkę <xref:Microsoft.Extensions.Configuration.FileConfigurationExtensions.SetBasePath*> bezwzględną przy użyciu <xref:Microsoft.Extensions.Configuration.IConfigurationBuilder> do folderu zawierającego pliki.
 
 ## <a name="troubleshoot"></a>Rozwiązywanie problemów
 
-Aby rozwiązać problem z <xref:test/troubleshoot>aplikacją Usługi systemu Windows, zobacz .
+Aby rozwiązać problem z aplikacją usługi systemu Windows <xref:test/troubleshoot>, zobacz.
 
 ### <a name="common-errors"></a>Typowe błędy
 
-* Używana jest stara lub wersja wstępna programu PowerShell.
-* Zarejestrowana usługa nie używa **opublikowanych** danych wyjściowych aplikacji z polecenia [publikowania dotnet.](/dotnet/core/tools/dotnet-publish) Dane wyjściowe polecenia [kompilacji dotnet](/dotnet/core/tools/dotnet-build) nie jest obsługiwany dla wdrażania aplikacji. Opublikowane zasoby znajdują się w jednym z następujących folderów w zależności od typu wdrożenia:
-  * *bin/release/{TARGET FRAMEWORK}/publish* (FDD)
-  * *bin/release/{TARGET FRAMEWORK}/{IDENTYFIKATOR ŚRODOWISKA URUCHOMIENIOWEGO}/publish* (SCD)
-* Usługa nie jest w stanie RUNNING.
-* Ścieżki do zasobów używanych przez aplikację (na przykład certyfikaty) są niepoprawne. Podstawową ścieżką usługi systemu Windows jest *c:\\Windows\\System32*.
-* Użytkownik nie ma *logowania jako* praw do usługi.
-* Hasło użytkownika wygasło lub zostało niepoprawnie przekazane `New-Service` podczas wykonywania polecenia programu PowerShell.
-* Aplikacja wymaga ASP.NET uwierzytelniania core, ale nie jest skonfigurowana do bezpiecznych połączeń (HTTPS).
+* Starsza lub wstępnie wydana wersja programu PowerShell jest używana.
+* Zarejestrowana usługa nie używa **opublikowanych** danych wyjściowych aplikacji z [dotnet Publish](/dotnet/core/tools/dotnet-publish) polecenia. Dane wyjściowe polecenia [kompilacji dotnet](/dotnet/core/tools/dotnet-build) nie są obsługiwane w przypadku wdrażania aplikacji. Opublikowane zasoby znajdują się w dowolnym z następujących folderów w zależności od typu wdrożenia:
+  * *bin/Release/{Target Framework}/Publish* (FDD)
+  * *bin/Release/{Target Framework}/{Runtime identyfikator}/Publish* (SCD)
+* Usługa nie jest w stanie uruchomienia.
+* Ścieżki do zasobów używanych przez aplikację (na przykład certyfikaty) są nieprawidłowe. Ścieżką podstawową usługi systemu Windows jest *c:\\Windows\\system32*.
+* Użytkownik nie ma uprawnień do *logowania się jako usługa* .
+* Hasło użytkownika wygasło lub zostało nieprawidłowo przesłane podczas wykonywania polecenia `New-Service` programu PowerShell.
+* Aplikacja wymaga uwierzytelniania ASP.NET Core, ale nie jest skonfigurowana dla połączeń Secure (HTTPS).
 * Port adresu URL żądania jest niepoprawny lub niepoprawnie skonfigurowany w aplikacji.
 
 ### <a name="system-and-application-event-logs"></a>Dzienniki zdarzeń systemu i aplikacji
 
-Dostęp do dzienników zdarzeń systemu i aplikacji:
+Uzyskaj dostęp do dzienników zdarzeń systemu i aplikacji:
 
-1. Otwórz menu Start, wyszukaj *podgląd zdarzeń*i wybierz aplikację **Podgląd zdarzeń.**
-1. W **Podglądzie zdarzeń**otwórz węzeł **Dzienniki systemu Windows.**
-1. Wybierz **system,** aby otworzyć dziennik zdarzeń systemu. Wybierz **opcję Aplikacja,** aby otworzyć dziennik zdarzeń aplikacji.
-1. Wyszukaj błędy skojarzone z nieudaną aplikacją.
+1. Otwórz menu Start, wyszukaj ciąg *Podgląd zdarzeń*i wybierz aplikację **Podgląd zdarzeń** .
+1. W **Podgląd zdarzeń**Otwórz węzeł **Dzienniki systemu Windows** .
+1. Wybierz pozycję **system** , aby otworzyć dziennik zdarzeń systemu. Wybierz pozycję **aplikacja** , aby otworzyć dziennik zdarzeń aplikacji.
+1. Wyszukaj błędy związane z niepowodzeniem aplikacji.
 
 ### <a name="run-the-app-at-a-command-prompt"></a>Uruchamianie aplikacji w wierszu polecenia
 
-Wiele błędów uruchamiania nie generuje przydatnych informacji w dziennikach zdarzeń. Przyczynę niektórych błędów można znaleźć, uruchamiając aplikację w wierszu polecenia w systemie hostingowym. Aby zarejestrować dodatkowe szczegóły z aplikacji, obniżyć [poziom dziennika](xref:fundamentals/logging/index#log-level) lub uruchomić aplikację w [środowisku deweloperskim](xref:fundamentals/environments).
+Wiele błędów uruchamiania nie produkuje użytecznych informacji w dziennikach zdarzeń. Przyczynę niektórych błędów można znaleźć, uruchamiając aplikację w wierszu polecenia w systemie hostingu. Aby rejestrować dodatkowe szczegóły aplikacji, Obniż [poziom rejestrowania](xref:fundamentals/logging/index#log-level) lub Uruchom aplikację w [środowisku deweloperskim](xref:fundamentals/environments).
 
 ### <a name="clear-package-caches"></a>Wyczyść pamięć podręczną pakietów
 
-Działająca aplikacja może zakończyć się niepowodzeniem natychmiast po uaktualnieniu zestawu .NET Core SDK na komputerze deweloperskim lub zmianie wersji pakietu w aplikacji. W niektórych przypadkach niespójne pakiety mogą spowodować przerwanie aplikacji podczas wykonywania głównych uaktualnień. Większość z tych problemów można rozwiązać, postępując zgodnie z następującymi instrukcjami:
+Działająca aplikacja może zakończyć się niepowodzeniem natychmiast po uaktualnieniu zestaw .NET Core SDK na komputerze deweloperskim lub zmianie wersji pakietu w ramach aplikacji. W niektórych przypadkach niespójne pakiety mogą przerwać aplikację podczas przeprowadzania uaktualnień głównych. Większość tych problemów można naprawić, wykonując następujące instrukcje:
 
-1. Usuń *foldery bin* i *obj.*
-1. Wyczyść bufory pakietu, wykonując [dotnet nuget locals all --clear](/dotnet/core/tools/dotnet-nuget-locals) z powłoki poleceń.
+1. Usuń foldery *bin* i *obj* .
+1. Wyczyść pamięć podręczną pakietów, wykonując [wszystkie elementy lokalne usługi NuGet programu dotnet--Wyczyść](/dotnet/core/tools/dotnet-nuget-locals) z poziomu powłoki poleceń.
 
-   Czyszczenie pamięci podręcznych pakietów można również wykonać za pomocą narzędzia [nuget.exe](https://www.nuget.org/downloads) i wykonać polecenie `nuget locals all -clear`. *nuget.exe* nie jest w pakiecie zainstalować z systemem operacyjnym Windows dla komputerów stacjonarnych i muszą być uzyskane oddzielnie od [strony internetowej NuGet](https://www.nuget.org/downloads).
+   Czyszczenie pamięci podręcznych pakietów można także wykonać przy użyciu narzędzia [NuGet. exe](https://www.nuget.org/downloads) i wykonując polecenie `nuget locals all -clear`. *NuGet. exe* nie jest pakietem instalowanym z systemem operacyjnym Windows dla komputerów stacjonarnych i musi być uzyskany niezależnie od [witryny sieci Web programu NuGet](https://www.nuget.org/downloads).
 
-1. Przywracanie i odbudowywać projekt.
-1. Usuń wszystkie pliki w folderze wdrażania na serwerze przed ponowne wdrożeniem aplikacji.
+1. Przywróć i skompiluj projekt.
+1. Usuń wszystkie pliki z folderu wdrożenia na serwerze przed ponownym wdrożeniem aplikacji.
 
-### <a name="slow-or-hanging-app"></a>Powolna lub wisząca aplikacja
+### <a name="slow-or-hanging-app"></a>Aplikacja wolna lub wysunięta
 
-*Zrzut awaryjny* jest migawką pamięci systemu i może pomóc w określeniu przyczyny awarii aplikacji, awarii uruchamiania lub powolnej aplikacji.
+*Zrzut awaryjny* to migawka pamięci systemu, która może pomóc w ustaleniu przyczyny awarii aplikacji, awarii uruchamiania lub powolnej aplikacji.
 
-#### <a name="app-crashes-or-encounters-an-exception"></a>Aplikacja ulega awarii lub napotyka wyjątek
+#### <a name="app-crashes-or-encounters-an-exception"></a>Awaria aplikacji lub napotka wyjątek
 
-Uzyskiwanie i analizowanie zrzutu z [raportowania błędów systemu Windows (WER)](/windows/desktop/wer/windows-error-reporting):
+Uzyskaj i Analizuj Zrzut z [raportowanie błędów systemu Windows (raportowanie błędów systemu Windows)](/windows/desktop/wer/windows-error-reporting):
 
-1. Utwórz folder do przechowywania `c:\dumps`plików zrzutu awaryjnego w pliku .
-1. Uruchom [skrypt EnableDumps PowerShell](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/host-and-deploy/windows-service/samples/scripts/EnableDumps.ps1) o nazwie wykonywalnej aplikacji:
+1. Utwórz folder do przechowywania plików zrzutu awaryjnego `c:\dumps`w.
+1. Uruchom [skrypt programu PowerShell](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/host-and-deploy/windows-service/samples/scripts/EnableDumps.ps1) w programie EnableDumps z nazwą pliku wykonywalnego aplikacji:
 
    ```powershell
    .\EnableDumps {APPLICATION EXE} c:\dumps
    ```
 
 1. Uruchom aplikację w warunkach, które powodują awarię.
-1. Po wystąpieniu awarii uruchom [skrypt DisableDumps PowerShell:](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/host-and-deploy/windows-service/samples/scripts/DisableDumps.ps1)
+1. Po wystąpieniu awarii Uruchom [skrypt programu DisableDumps PowerShell](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/host-and-deploy/windows-service/samples/scripts/DisableDumps.ps1):
 
    ```powershell
    .\DisableDumps {APPLICATION EXE}
    ```
 
-Po awarii aplikacji i kolekcji zrzutu jest zakończona, aplikacja może zakończyć się normalnie. Skrypt programu PowerShell konfiguruje program WER do zbierania maksymalnie pięciu zrzutów na aplikację.
+Po awarii aplikacji i zakończeniu zbierania zrzutów aplikacja może zakończyć normalne działanie. Skrypt programu PowerShell konfiguruje raportowanie błędów systemu Windows w celu zebrania do pięciu zrzutów na aplikację.
 
 > [!WARNING]
-> Zrzuty awaryjne mogą zająć dużą ilość miejsca na dysku (do kilku gigabajtów).
+> Zrzuty awaryjne mogą wymagać dużej ilości miejsca na dysku (do kilku gigabajtów).
 
 #### <a name="app-hangs-fails-during-startup-or-runs-normally"></a>Aplikacja zawiesza się, kończy się niepowodzeniem podczas uruchamiania lub działa normalnie
 
-Gdy aplikacja *zawiesza* się (przestaje odpowiadać, ale nie ulega awarii), kończy się niepowodzeniem podczas uruchamiania lub działa normalnie, zobacz [Pliki zrzutu w trybie użytkownika: Wybieranie najlepszego narzędzia,](/windows-hardware/drivers/debugger/user-mode-dump-files#choosing-the-best-tool) aby wybrać odpowiednie narzędzie do produkcji zrzutu.
+Gdy aplikacja *zawiesza* się (bez awarii), kończy się niepowodzeniem podczas uruchamiania lub działa normalnie, zobacz [pliki zrzutu w trybie użytkownika: wybór najlepszego narzędzia](/windows-hardware/drivers/debugger/user-mode-dump-files#choosing-the-best-tool) do wygenerowania zrzutu.
 
 #### <a name="analyze-the-dump"></a>Analizowanie zrzutu
 
@@ -333,7 +339,7 @@ Zrzut można analizować przy użyciu kilku metod. Aby uzyskać więcej informac
 
 ## <a name="additional-resources"></a>Zasoby dodatkowe
 
-* [Konfiguracja punktu końcowego pustułka](xref:fundamentals/servers/kestrel#endpoint-configuration) (obejmuje konfigurację HTTPS i obsługę SNI)
+* [Konfiguracja punktu końcowego Kestrel](xref:fundamentals/servers/kestrel#endpoint-configuration) (w tym Konfiguracja protokołu HTTPS i obsługa SNI)
 * <xref:fundamentals/host/generic-host>
 * <xref:test/troubleshoot>
 
@@ -341,57 +347,57 @@ Zrzut można analizować przy użyciu kilku metod. Aby uzyskać więcej informac
 
 ::: moniker range="= aspnetcore-2.2"
 
-Aplikacja ASP.NET Core może być hostowana w systemie Windows jako [usługa systemu Windows](/dotnet/framework/windows-services/introduction-to-windows-service-applications) bez korzystania z usług IIS. Po uruchomieniu jako usługa systemu Windows aplikacja jest uruchamiana automatycznie po ponownym uruchomieniu serwera.
+Aplikacja ASP.NET Core może być hostowana w systemie Windows jako [Usługa systemu Windows](/dotnet/framework/windows-services/introduction-to-windows-service-applications) bez korzystania z usług IIS. Gdy usługa jest hostowana w systemie Windows, aplikacja jest uruchamiana automatycznie po ponownym uruchomieniu serwera.
 
 [Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/windows-service/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
-* [ASP.NET Core SDK 2.1 lub nowszym](https://dotnet.microsoft.com/download)
-* [Program PowerShell 6.2 lub nowszy](https://github.com/PowerShell/PowerShell)
+* [ASP.NET Core zestaw SDK 2,1 lub nowszy](https://dotnet.microsoft.com/download)
+* [Program PowerShell 6,2 lub nowszy](https://github.com/PowerShell/PowerShell)
 
 ## <a name="app-configuration"></a>Konfiguracja aplikacji
 
-Aplikacja wymaga odwołań do pakietów dla [witryny Microsoft.AspNetCore.Hosting.WindowsServices](https://www.nuget.org/packages/Microsoft.AspNetCore.Hosting.WindowsServices) i [Microsoft.Extensions.Logging.EventLog](https://www.nuget.org/packages/Microsoft.Extensions.Logging.EventLog).
+Aplikacja wymaga odwołania do pakietów dla elementu [Microsoft. AspNetCore. hosting. WindowsServices](https://www.nuget.org/packages/Microsoft.AspNetCore.Hosting.WindowsServices) i [Microsoft. Extensions. Logging. EventLog](https://www.nuget.org/packages/Microsoft.Extensions.Logging.EventLog).
 
-Aby przetestować i debugować podczas uruchamiania poza usługą, dodaj kod, aby ustalić, czy aplikacja jest uruchomiona jako usługa lub aplikacja konsoli. Sprawdź, czy debuger jest `--console` dołączony lub przełącznik jest obecny. Jeśli którykolwiek z tych warunków jest spełniony (aplikacja <xref:Microsoft.AspNetCore.Hosting.WebHostExtensions.Run*>nie jest uruchamiana jako usługa), zadzwoń . Jeśli warunki są fałszywe (aplikacja jest uruchamiana jako usługa):
+Aby przetestować i debugować w przypadku uruchamiania poza usługą, należy dodać kod, aby określić, czy aplikacja działa jako usługa, czy Aplikacja konsolowa. Sprawdź, czy debuger jest dołączony lub czy `--console` jest obecny przełącznik. Jeśli którykolwiek z warunków jest spełniony (aplikacja nie jest uruchomiona jako usługa), wywołaj metodę <xref:Microsoft.AspNetCore.Hosting.WebHostExtensions.Run*>. Jeśli warunki są fałszywe (aplikacja jest uruchamiana jako usługa):
 
-* Zadzwoń <xref:System.IO.Directory.SetCurrentDirectory*> i użyj ścieżki do opublikowanej lokalizacji aplikacji. Nie wywołaj, <xref:System.IO.Directory.GetCurrentDirectory*> aby uzyskać ścieżkę, ponieważ aplikacja usługi systemu Windows <xref:System.IO.Directory.GetCurrentDirectory*> zwraca folder *C:\\WINDOWS\\system32,* gdy jest wywoływana. Aby uzyskać więcej informacji, zobacz [sekcję Bieżący katalog i katalog zawartości.](#current-directory-and-content-root) Ten krok jest wykonywany przed skonfigurowaniem aplikacji w pliku `CreateWebHostBuilder`.
-* Wywołanie, <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions.RunAsService*> aby uruchomić aplikację jako usługę.
+* Wywołaj <xref:System.IO.Directory.SetCurrentDirectory*> i użyj ścieżki do opublikowanej lokalizacji aplikacji. Nie wywołuj <xref:System.IO.Directory.GetCurrentDirectory*> , aby uzyskać ścieżkę, ponieważ aplikacja usługi systemu Windows zwraca folder *C\\:\\Windows system32* , <xref:System.IO.Directory.GetCurrentDirectory*> gdy jest wywoływana. Aby uzyskać więcej informacji, zapoznaj się z sekcją [Current Directory i root Content](#current-directory-and-content-root) . Ten krok jest wykonywany przed skonfigurowaniem aplikacji w programie `CreateWebHostBuilder`.
+* Wywołaj <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions.RunAsService*> , aby uruchomić aplikację jako usługę.
 
-Ponieważ [dostawca konfiguracji wiersza polecenia](xref:fundamentals/configuration/index#command-line-configuration-provider) wymaga par nazwa-wartość dla `--console` argumentów wiersza <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> polecenia, przełącznik jest usuwany z argumentów przed odebraniem argumentów.
+Ponieważ [dostawca konfiguracji wiersza polecenia](xref:fundamentals/configuration/index#command-line-configuration-provider) wymaga par nazwa-wartość dla argumentów wiersza polecenia, `--console` przełącznik jest usuwany z argumentów przed <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> odebraniem argumentów.
 
-Aby zapisać w dzienniku zdarzeń systemu Windows, dodaj dostawcę EventLog do <xref:Microsoft.AspNetCore.Hosting.WebHostBuilder.ConfigureLogging*>. Ustaw poziom rejestrowania `Logging:LogLevel:Default` za pomocą klucza w *appsettings. Plik Production.json.*
+Aby zapisać w dzienniku zdarzeń systemu Windows, Dodaj dostawcę EventLog do <xref:Microsoft.AspNetCore.Hosting.WebHostBuilder.ConfigureLogging*>programu. Ustaw poziom rejestrowania przy użyciu `Logging:LogLevel:Default` klucza w pliku *appSettings. Plik Product. JSON* .
 
-W poniższym przykładzie z `RunAsCustomService` przykładowej aplikacji, jest wywoływana zamiast <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions.RunAsService*> w celu obsługi zdarzeń lifetime w aplikacji. Aby uzyskać więcej informacji, zobacz [Handle uruchamiania i zatrzymywania zdarzeń](#handle-starting-and-stopping-events) sekcji.
+W poniższym przykładzie z przykładowej aplikacji `RunAsCustomService` jest wywoływana zamiast <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions.RunAsService*> w celu obsługi zdarzeń okresu istnienia w aplikacji. Aby uzyskać więcej informacji, zobacz sekcję [Obsługa zdarzeń dotyczących uruchamiania i zatrzymywania](#handle-starting-and-stopping-events) .
 
 [!code-csharp[](windows-service/samples/2.x/AspNetCoreService/Program.cs?name=snippet_Program)]
 
 ## <a name="deployment-type"></a>Typ wdrożenia
 
-Aby uzyskać informacje i porady dotyczące scenariuszy wdrażania, zobacz [wdrożenie aplikacji .NET Core](/dotnet/core/deploying/).
+Aby uzyskać informacje i porady dotyczące scenariuszy wdrażania, zobacz [wdrażanie aplikacji .NET Core](/dotnet/core/deploying/).
 
 ### <a name="sdk"></a>SDK
 
-W przypadku usługi opartej na aplikacjach sieci web, która używa stron Razor Pages lub struktur MVC, określ składnik Web SDK w pliku projektu:
+W przypadku usługi opartej na aplikacji sieci Web korzystającej ze Razor stron lub platform MVC należy określić zestaw SDK sieci Web w pliku projektu:
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk.Web">
 ```
 
-Jeśli usługa wykonuje tylko zadania w tle (na przykład [usługi hostowane),](xref:fundamentals/host/hosted-services)określ sdk roboczy w pliku projektu:
+Jeśli usługa wykonuje tylko zadania w tle (na przykład [usługi hostowane](xref:fundamentals/host/hosted-services)), określ zestaw SDK procesu roboczego w pliku projektu:
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk.Worker">
 ```
 
-### <a name="framework-dependent-deployment-fdd"></a>Wdrożenie zależne od struktury (FDD)
+### <a name="framework-dependent-deployment-fdd"></a>Wdrożenie zależne od platformy (FDD)
 
-Wdrożenie zależne od struktury (FDD) opiera się na obecności udostępnionej wersji systemu .NET Core w systemie docelowym. Gdy scenariusz FDD zostanie przyjęty zgodnie ze wskazówkami zawartymi w tym artykule, SDK tworzy plik wykonywalny (*.exe*), nazywany *wykonywalnym zależnym od struktury*.
+Wdrożenie zależne od platformy (FDD) zależy od obecności udostępnionej systemowej wersji platformy .NET Core w systemie docelowym. Po przyjęciu scenariusza FDD zgodnie ze wskazówkami zawartymi w tym artykule zestaw SDK tworzy plik wykonywalny (*. exe*), nazywany *plik wykonywalny zależny od platformy*.
 
-Identyfikator środowiska wykonawczego systemu Windows [(RID)](/dotnet/core/rid-catalog) [\<(RuntimeIdentifier>](/dotnet/core/tools/csproj#runtimeidentifier)) zawiera platformę docelową. W poniższym przykładzie identyfikator `win7-x64`RID jest ustawiony na . Właściwość `<SelfContained>` jest `false`ustawiona na . Te właściwości instruują SDK do generowania pliku wykonywalnego *(exe)* dla systemu Windows i aplikacji, która zależy od udostępnionej struktury .NET Core.
+[Identyfikator środowiska uruchomieniowego systemu Windows (RID)](/dotnet/core/rid-catalog) ([\<RuntimeIdentifier>](/dotnet/core/tools/csproj#runtimeidentifier)) zawiera platformę docelową. W poniższym przykładzie identyfikator RID jest ustawiony na `win7-x64`. `<SelfContained>` Właściwość jest ustawiona na `false`. Te właściwości instruują zestaw SDK, aby wygenerował plik wykonywalny (*exe*) dla systemu Windows i aplikację, która zależy od współużytkowanej platformy .NET Core.
 
-Plik *web.config,* który jest zwykle produkowany podczas publikowania aplikacji ASP.NET Core, nie jest potrzebny dla aplikacji Usług systemu Windows. Aby wyłączyć tworzenie pliku *web.config,* `<IsTransformWebConfigDisabled>` dodaj właściwość ustawioną na `true`.
+Plik *Web. config* , który jest zwykle tworzony podczas publikowania aplikacji ASP.NET Core, nie jest konieczny dla aplikacji usług systemu Windows. Aby wyłączyć tworzenie pliku *Web. config* , należy dodać `<IsTransformWebConfigDisabled>` Właściwość ustawioną na `true`.
 
 ```xml
 <PropertyGroup>
@@ -402,24 +408,24 @@ Plik *web.config,* który jest zwykle produkowany podczas publikowania aplikacji
 </PropertyGroup>
 ```
 
-### <a name="self-contained-deployment-scd"></a>Samodzielne wdrażanie (SCD)
+### <a name="self-contained-deployment-scd"></a>Wdrażanie samodzielne (SCD)
 
-Samodzielne wdrożenie (SCD) nie opiera się na obecności udostępnionej struktury w systemie hosta. Środowisko wykonawcze i zależności aplikacji są wdrażane za pomocą aplikacji.
+Wdrożenie samodzielne (SCD) nie polega na obecności struktury udostępnionej w systemie hosta. Środowisko uruchomieniowe i zależności aplikacji są wdrażane przy użyciu aplikacji.
 
-Identyfikator środowiska wykonawczego systemu Windows [(RID)](/dotnet/core/rid-catalog) `<PropertyGroup>` znajduje się w platformie zawierającej platformę docelową:
+[Identyfikator środowiska uruchomieniowego systemu Windows (RID)](/dotnet/core/rid-catalog) znajduje się `<PropertyGroup>` w, który zawiera platformę docelową:
 
 ```xml
 <RuntimeIdentifier>win7-x64</RuntimeIdentifier>
 ```
 
-Aby opublikować wiele identyfikatorów RID:
+Aby opublikować dla wielu identyfikatorów RID:
 
-* Podaj identyfikatory RID na liście rozdzielanych średnikami.
-* Nazwa właściwości [ \<RuntimeIdentifiers>](/dotnet/core/tools/csproj#runtimeidentifiers) (liczba mnoga).
+* Podaj identyfikatory RID na liście rozdzielanej średnikami.
+* Użyj nazwy [ \<właściwości RuntimeIdentifiers>](/dotnet/core/tools/csproj#runtimeidentifiers) (plural).
 
-Aby uzyskać więcej informacji, zobacz [.NET Core RID Catalog](/dotnet/core/rid-catalog).
+Aby uzyskać więcej informacji, zobacz [katalog .NET Core RID Catalog](/dotnet/core/rid-catalog).
 
-Właściwość `<SelfContained>` jest `true`ustawiona na:
+`<SelfContained>` Właściwość jest ustawiona na `true`:
 
 ```xml
 <SelfContained>true</SelfContained>
@@ -427,46 +433,46 @@ Właściwość `<SelfContained>` jest `true`ustawiona na:
 
 ## <a name="service-user-account"></a>Konto użytkownika usługi
 
-Aby utworzyć konto użytkownika dla usługi, użyj polecenia cmdlet [New-LocalUser](/powershell/module/microsoft.powershell.localaccounts/new-localuser) z administracyjnej powłoki poleceń programu PowerShell 6.
+Aby utworzyć konto użytkownika dla usługi, należy użyć polecenia cmdlet [New-LocalUser](/powershell/module/microsoft.powershell.localaccounts/new-localuser) w powłoce poleceń administracyjnych programu PowerShell 6.
 
-W systemie Windows 10 October 2018 Update (wersja 1809/kompilacja 10.0.17763) lub nowszej:
+W systemie Windows 10 października 2018 Update (wersja 1809/Kompilacja 10.0.17763) lub nowsza:
 
 ```powershell
 New-LocalUser -Name {SERVICE NAME}
 ```
 
-W systemie operacyjnym Windows wcześniej niż Windows 10 October 2018 Update (wersja 1809/build 10.0.17763):
+W systemie operacyjnym Windows w wersji starszej niż aktualizacja 2018 systemu Windows 10 października (wersja 1809/Kompilacja 10.0.17763):
 
 ```console
 powershell -Command "New-LocalUser -Name {SERVICE NAME}"
 ```
 
-Po wyświetleniu monitu podaj [silne hasło.](/windows/security/threat-protection/security-policy-settings/password-must-meet-complexity-requirements)
+Podaj [silne hasło](/windows/security/threat-protection/security-policy-settings/password-must-meet-complexity-requirements) po wyświetleniu monitu.
 
-O `-AccountExpires` ile parametr nie zostanie dostarczony do polecenia cmdlet <xref:System.DateTime> [New-LocalUser](/powershell/module/microsoft.powershell.localaccounts/new-localuser) z wygaśnięciem, konto nie wygaśnie.
+Jeśli `-AccountExpires` parametr nie zostanie dostarczony do polecenia cmdlet [New-LocalUser](/powershell/module/microsoft.powershell.localaccounts/new-localuser) z wygaśnięciem <xref:System.DateTime>, konto nie wygaśnie.
 
-Aby uzyskać więcej informacji, zobacz [Microsoft.PowerShell.LocalAccounts](/powershell/module/microsoft.powershell.localaccounts/) i [Konta użytkowników usług](/windows/desktop/services/service-user-accounts).
+Aby uzyskać więcej informacji, zobacz [Microsoft. PowerShell. LocalAccounts](/powershell/module/microsoft.powershell.localaccounts/) i [konta użytkowników usług](/windows/desktop/services/service-user-accounts).
 
-Alternatywnym podejściem do zarządzania użytkownikami podczas korzystania z usługi Active Directory jest użycie kont usług zarządzanych. Aby uzyskać więcej informacji, zobacz [Omówienie grupowych kont usług zarządzanych](/windows-server/security/group-managed-service-accounts/group-managed-service-accounts-overview).
+Alternatywna metoda zarządzania użytkownikami podczas korzystania z Active Directory polega na użyciu zarządzanych kont usług. Aby uzyskać więcej informacji, zobacz [Omówienie kont usług zarządzanych przez grupę](/windows-server/security/group-managed-service-accounts/group-managed-service-accounts-overview).
 
-## <a name="log-on-as-a-service-rights"></a>Zaloguj się jako prawa do usługi
+## <a name="log-on-as-a-service-rights"></a>Logowanie jako prawa usługi
 
-Aby *ustanowić logowanie jako* prawa do usługi dla konta użytkownika usługi:
+Aby nawiązać *Logowanie jako prawa usługi* dla konta użytkownika usługi:
 
-1. Otwórz edytor lokalnych zasad zabezpieczeń, uruchamiając *plik secpol.msc*.
-1. Rozwiń węzeł **Zasady lokalne** i wybierz pozycję **Przypisanie praw użytkownika**.
-1. Otwórz **zasadę Logowanie jako usługi.**
-1. Wybierz **pozycję Dodaj użytkownika lub grupę**.
+1. Otwórz Edytor lokalnych zasad zabezpieczeń, uruchamiając program *secpol. msc*.
+1. Rozwiń węzeł **Zasady lokalne** , a następnie wybierz pozycję **Przypisywanie praw użytkownika**.
+1. Otwórz okno **Logowanie jako usługa** .
+1. Wybierz pozycję **Dodaj użytkownika lub grupę**.
 1. Podaj nazwę obiektu (konto użytkownika) przy użyciu jednej z następujących metod:
-   1. Wpisz konto użytkownika`{DOMAIN OR COMPUTER NAME\USER}`( ) w polu nazwa obiektu i wybierz **przycisk OK,** aby dodać użytkownika do zasad.
-   1. Wybierz **pozycję Zaawansowane**. Wybierz **pozycję Znajdź teraz**. Wybierz konto użytkownika z listy. Kliknij przycisk **OK**. Wybierz **przycisk OK** ponownie, aby dodać użytkownika do zasad.
-1. Wybierz **przycisk OK** lub **Zastosuj,** aby zaakceptować zmiany.
+   1. Wpisz konto użytkownika (`{DOMAIN OR COMPUTER NAME\USER}`) w polu Nazwa obiektu, a następnie wybierz **przycisk OK** , aby dodać użytkownika do zasad.
+   1. Wybierz pozycję **Zaawansowane**. Wybierz pozycję **Znajdź teraz**. Wybierz z listy konto użytkownika. Wybierz przycisk **OK**. Ponownie wybierz **przycisk OK** , aby dodać użytkownika do zasad.
+1. Wybierz **przycisk OK** lub **Zastosuj** , aby zaakceptować zmiany.
 
 ## <a name="create-and-manage-the-windows-service"></a>Tworzenie usługi systemu Windows i zarządzanie nią
 
 ### <a name="create-a-service"></a>Tworzenie usługi
 
-Użyj poleceń programu PowerShell, aby zarejestrować usługę. Z administracyjnej powłoki poleceń programu PowerShell 6 wykonaj następujące polecenia:
+Zarejestrowanie usługi za pomocą poleceń programu PowerShell. Z poziomu powłoki poleceń administracyjnych programu PowerShell 6 wykonaj następujące polecenia:
 
 ```powershell
 $acl = Get-Acl "{EXE PATH}"
@@ -478,12 +484,12 @@ $acl | Set-Acl "{EXE PATH}"
 New-Service -Name {SERVICE NAME} -BinaryPathName {EXE FILE PATH} -Credential {DOMAIN OR COMPUTER NAME\USER} -Description "{DESCRIPTION}" -DisplayName "{DISPLAY NAME}" -StartupType Automatic
 ```
 
-* `{EXE PATH}`&ndash; Ścieżka do folderu aplikacji na hoście `d:\myservice`(na przykład ). Nie dołączaj pliku wykonywalnego aplikacji do ścieżki. Ukośnik na końcu nie jest wymagany.
+* `{EXE PATH}`&ndash; Ścieżka do folderu aplikacji na hoście (na przykład `d:\myservice`). Nie dołączaj pliku wykonywalnego aplikacji do ścieżki. Końcowy ukośnik nie jest wymagany.
 * `{DOMAIN OR COMPUTER NAME\USER}`&ndash; Konto użytkownika usługi (na przykład `Contoso\ServiceUser`).
-* `{SERVICE NAME}`&ndash; Nazwa usługi (na `MyService`przykład ).
-* `{EXE FILE PATH}`&ndash; Ścieżka wykonywalna aplikacji `d:\myservice\myservice.exe`(na przykład ). Dołącz nazwę pliku wykonywalnego z rozszerzeniem.
-* `{DESCRIPTION}`&ndash; Opis usługi (na `My sample service`przykład ).
-* `{DISPLAY NAME}`&ndash; Nazwa wyświetlana usługi `My Service`(na przykład ).
+* `{SERVICE NAME}`&ndash; Nazwa usługi (na przykład `MyService`).
+* `{EXE FILE PATH}`&ndash; Ścieżka pliku wykonywalnego aplikacji (na przykład `d:\myservice\myservice.exe`). Uwzględnij nazwę pliku wykonywalnego z rozszerzeniem.
+* `{DESCRIPTION}`&ndash; Opis usługi (na przykład `My sample service`).
+* `{DISPLAY NAME}`&ndash; Nazwa wyświetlana usługi (na przykład `My Service`).
 
 ### <a name="start-a-service"></a>Uruchamianie usługi
 
@@ -493,7 +499,7 @@ Uruchom usługę za pomocą następującego polecenia programu PowerShell 6:
 Start-Service -Name {SERVICE NAME}
 ```
 
-Polecenie trwa kilka sekund, aby uruchomić usługę.
+Uruchomienie usługi może potrwać kilka sekund.
 
 ### <a name="determine-a-services-status"></a>Określanie stanu usługi
 
@@ -503,7 +509,7 @@ Aby sprawdzić stan usługi, użyj następującego polecenia programu PowerShell
 Get-Service -Name {SERVICE NAME}
 ```
 
-Stan jest zgłaszany jako jedna z następujących wartości:
+Stan jest raportowany jako jedna z następujących wartości:
 
 * `Starting`
 * `Running`
@@ -512,7 +518,7 @@ Stan jest zgłaszany jako jedna z następujących wartości:
 
 ### <a name="stop-a-service"></a>Zatrzymywanie usługi
 
-Zatrzymaj usługę za pomocą następującego polecenia programu Powershell 6:
+Zatrzymaj usługę za pomocą następującego polecenia programu PowerShell 6:
 
 ```powershell
 Stop-Service -Name {SERVICE NAME}
@@ -520,7 +526,7 @@ Stop-Service -Name {SERVICE NAME}
 
 ### <a name="remove-a-service"></a>Usuwanie usługi
 
-Po krótkim opóźnieniu zatrzymania usługi usuń usługę za pomocą następującego polecenia Programu Powershell 6:
+Po krótkim opóźnieniu na zatrzymanie usługi Usuń usługę za pomocą następującego polecenia programu PowerShell 6:
 
 ```powershell
 Remove-Service -Name {SERVICE NAME}
@@ -528,51 +534,51 @@ Remove-Service -Name {SERVICE NAME}
 
 ## <a name="handle-starting-and-stopping-events"></a>Obsługa zdarzeń uruchamiania i zatrzymywania
 
-Aby <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostService.OnStarting*>obsłużyć , <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostService.OnStarted*>i <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostService.OnStopping*> zdarzenia:
+Aby obsłużyć <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostService.OnStarting*>zdarzenia, <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostService.OnStarted*>i <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostService.OnStopping*> :
 
-1. Utwórz klasę, która <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostService> wywodzi się z `OnStarting`, `OnStarted`i `OnStopping` metody:
+1. Utwórz klasę, która dziedziczy z <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostService> metody `OnStarting`, `OnStarted`, i `OnStopping` :
 
    [!code-csharp[](windows-service/samples/2.x/AspNetCoreService/CustomWebHostService.cs?name=snippet_CustomWebHostService)]
 
-2. Utwórz metodę <xref:Microsoft.AspNetCore.Hosting.IWebHost> rozszerzenia, `CustomWebHostService` która <xref:System.ServiceProcess.ServiceBase.Run*>przekazuje do :
+2. Utwórz metodę rozszerzenia dla <xref:Microsoft.AspNetCore.Hosting.IWebHost> , która przekazuje `CustomWebHostService` do: <xref:System.ServiceProcess.ServiceBase.Run*>
 
    [!code-csharp[](windows-service/samples/2.x/AspNetCoreService/WebHostServiceExtensions.cs?name=ExtensionsClass)]
 
-3. W `Program.Main`, `RunAsCustomService` wywołać metodę <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions.RunAsService*>rozszerzenia zamiast:
+3. W `Program.Main`, wywołaj `RunAsCustomService` metodę rozszerzenia zamiast <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions.RunAsService*>:
 
    ```csharp
    host.RunAsCustomService();
    ```
 
-   Aby wyświetlić <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions.RunAsService*> lokalizację `Program.Main`w , zapoznaj się z przykładowym kodem pokazanym w sekcji [Typ wdrożenia.](#deployment-type)
+   Aby zobaczyć lokalizację programu <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions.RunAsService*> w programie `Program.Main`, zapoznaj się z przykładem kodu pokazanym w sekcji [typ wdrożenia](#deployment-type) .
 
 ## <a name="proxy-server-and-load-balancer-scenarios"></a>Scenariusze serwera proxy i modułu równoważenia obciążenia
 
-Usługi, które wchodzą w interakcję z żądaniami z Internetu lub sieci firmowej i znajdują się za serwerem proxy lub modułem równoważenia obciążenia, mogą wymagać dodatkowej konfiguracji. Aby uzyskać więcej informacji, zobacz <xref:host-and-deploy/proxy-load-balancer>.
+Usługi, które współdziałają z żądaniami z Internetu lub sieci firmowej i znajdują się za serwerem proxy lub modułem równoważenia obciążenia, mogą wymagać dodatkowej konfiguracji. Aby uzyskać więcej informacji, zobacz <xref:host-and-deploy/proxy-load-balancer>.
 
 ## <a name="configure-endpoints"></a>Konfigurowanie punktów końcowych
 
-Domyślnie ASP.NET Core wiąże się `http://localhost:5000`z programem . Skonfiguruj adres URL `ASPNETCORE_URLS` i port, ustawiając zmienną środowiskową.
+Domyślnie ASP.NET Core wiąże się z `http://localhost:5000`. Skonfiguruj adres URL i port przez ustawienie zmiennej `ASPNETCORE_URLS` środowiskowej.
 
-Aby uzyskać dodatkowe podejścia do konfiguracji adresów URL i portów, zobacz odpowiedni artykuł na temat serwera:
+Aby uzyskać dodatkowe podejścia do konfiguracji adresów URL i portów, zobacz artykuł dotyczący odpowiedniego serwera:
 
 * <xref:fundamentals/servers/kestrel#endpoint-configuration>
 * <xref:fundamentals/servers/httpsys#configure-windows-server>
 
-Powyższe wskazówki obejmują obsługę punktów końcowych HTTPS. Na przykład skonfiguruj aplikację dla protokołu HTTPS, gdy uwierzytelnianie jest używane z usługą systemu Windows.
+Powyższe wskazówki obejmują obsługę punktów końcowych HTTPS. Na przykład skonfiguruj aplikację do obsługi protokołu HTTPS, gdy uwierzytelnianie jest używane z usługą systemu Windows.
 
 > [!NOTE]
-> Użycie ASP.NET certyfikatu dewelopera HTTPS w celu zabezpieczenia punktu końcowego usługi nie jest obsługiwane.
+> Korzystanie z ASP.NET Core certyfikatu deweloperskiego HTTPS w celu zabezpieczenia punktu końcowego usługi nie jest obsługiwane.
 
-## <a name="current-directory-and-content-root"></a>Bieżący katalog i katalog główny zawartości
+## <a name="current-directory-and-content-root"></a>Bieżący katalog i główna Zawartość
 
-Bieżący katalog roboczy <xref:System.IO.Directory.GetCurrentDirectory*> zwracany przez wywołanie usługi systemu Windows to folder *C:\\WINDOWS\\system32.* Folder *system32* nie jest odpowiednią lokalizacją do przechowywania plików usługi (na przykład plików ustawień). Użyj jednego z następujących podejść do obsługi i uzyskiwania dostępu do zasobów i plików ustawień usługi.
+Bieżącym katalogiem roboczym zwróconym <xref:System.IO.Directory.GetCurrentDirectory*> przez wywołanie dla usługi systemu Windows jest folder *\\C\\: Windows system32* . Folder *system32* nie jest odpowiednią lokalizacją do przechowywania plików usługi (na przykład plików ustawień). Użyj jednego z poniższych metod, aby zachować i uzyskać dostęp do plików ustawień i zasobów usługi.
 
-### <a name="set-the-content-root-path-to-the-apps-folder"></a>Ustawianie ścieżki głównej zawartości do folderu aplikacji
+### <a name="set-the-content-root-path-to-the-apps-folder"></a>Ustawianie ścieżki katalogu głównego zawartości do folderu aplikacji
 
-Jest <xref:Microsoft.Extensions.Hosting.IHostingEnvironment.ContentRootPath*> to ta sama `binPath` ścieżka podana do argumentu podczas tworzenia usługi. Zamiast dzwonić, `GetCurrentDirectory` aby utworzyć ścieżki do <xref:System.IO.Directory.SetCurrentDirectory*> plików ustawień, zadzwoń ze ścieżką do [katalogu głównego zawartości](xref:fundamentals/index#content-root)aplikacji .
+<xref:Microsoft.Extensions.Hosting.IHostingEnvironment.ContentRootPath*> Jest to ta sama ścieżka do `binPath` argumentu podczas tworzenia usługi. Zamiast wywoływania `GetCurrentDirectory` funkcji tworzenia ścieżek do plików ustawień, należy wywołać <xref:System.IO.Directory.SetCurrentDirectory*> ścieżkę do [katalogu głównego zawartości](xref:fundamentals/index#content-root)aplikacji.
 
-W `Program.Main`obszarze , określ ścieżkę do folderu pliku wykonywalnego usługi i użyj ścieżki do ustanowienia katalogu głównego zawartości aplikacji:
+W `Program.Main`programie określ ścieżkę do folderu wykonywalnego usługi i użyj ścieżki, aby określić katalog główny zawartości aplikacji:
 
 ```csharp
 var pathToExe = Process.GetCurrentProcess().MainModule.FileName;
@@ -584,82 +590,82 @@ CreateWebHostBuilder(args)
     .RunAsService();
 ```
 
-### <a name="store-a-services-files-in-a-suitable-location-on-disk"></a>Przechowywanie plików usługi w odpowiednim miejscu na dysku
+### <a name="store-a-services-files-in-a-suitable-location-on-disk"></a>Przechowywanie plików usługi w odpowiedniej lokalizacji na dysku
 
-Określ ścieżkę <xref:Microsoft.Extensions.Configuration.FileConfigurationExtensions.SetBasePath*> bezwzględną <xref:Microsoft.Extensions.Configuration.IConfigurationBuilder> podczas korzystania z folderu zawierającego pliki.
+Określ ścieżkę <xref:Microsoft.Extensions.Configuration.FileConfigurationExtensions.SetBasePath*> bezwzględną przy użyciu <xref:Microsoft.Extensions.Configuration.IConfigurationBuilder> do folderu zawierającego pliki.
 
 ## <a name="troubleshoot"></a>Rozwiązywanie problemów
 
-Aby rozwiązać problem z <xref:test/troubleshoot>aplikacją Usługi systemu Windows, zobacz .
+Aby rozwiązać problem z aplikacją usługi systemu Windows <xref:test/troubleshoot>, zobacz.
 
 ### <a name="common-errors"></a>Typowe błędy
 
-* Używana jest stara lub wersja wstępna programu PowerShell.
-* Zarejestrowana usługa nie używa **opublikowanych** danych wyjściowych aplikacji z polecenia [publikowania dotnet.](/dotnet/core/tools/dotnet-publish) Dane wyjściowe polecenia [kompilacji dotnet](/dotnet/core/tools/dotnet-build) nie jest obsługiwany dla wdrażania aplikacji. Opublikowane zasoby znajdują się w jednym z następujących folderów w zależności od typu wdrożenia:
-  * *bin/release/{TARGET FRAMEWORK}/publish* (FDD)
-  * *bin/release/{TARGET FRAMEWORK}/{IDENTYFIKATOR ŚRODOWISKA URUCHOMIENIOWEGO}/publish* (SCD)
-* Usługa nie jest w stanie RUNNING.
-* Ścieżki do zasobów używanych przez aplikację (na przykład certyfikaty) są niepoprawne. Podstawową ścieżką usługi systemu Windows jest *c:\\Windows\\System32*.
-* Użytkownik nie ma *logowania jako* praw do usługi.
-* Hasło użytkownika wygasło lub zostało niepoprawnie przekazane `New-Service` podczas wykonywania polecenia programu PowerShell.
-* Aplikacja wymaga ASP.NET uwierzytelniania core, ale nie jest skonfigurowana do bezpiecznych połączeń (HTTPS).
+* Starsza lub wstępnie wydana wersja programu PowerShell jest używana.
+* Zarejestrowana usługa nie używa **opublikowanych** danych wyjściowych aplikacji z [dotnet Publish](/dotnet/core/tools/dotnet-publish) polecenia. Dane wyjściowe polecenia [kompilacji dotnet](/dotnet/core/tools/dotnet-build) nie są obsługiwane w przypadku wdrażania aplikacji. Opublikowane zasoby znajdują się w dowolnym z następujących folderów w zależności od typu wdrożenia:
+  * *bin/Release/{Target Framework}/Publish* (FDD)
+  * *bin/Release/{Target Framework}/{Runtime identyfikator}/Publish* (SCD)
+* Usługa nie jest w stanie uruchomienia.
+* Ścieżki do zasobów używanych przez aplikację (na przykład certyfikaty) są nieprawidłowe. Ścieżką podstawową usługi systemu Windows jest *c:\\Windows\\system32*.
+* Użytkownik nie ma uprawnień do *logowania się jako usługa* .
+* Hasło użytkownika wygasło lub zostało nieprawidłowo przesłane podczas wykonywania polecenia `New-Service` programu PowerShell.
+* Aplikacja wymaga uwierzytelniania ASP.NET Core, ale nie jest skonfigurowana dla połączeń Secure (HTTPS).
 * Port adresu URL żądania jest niepoprawny lub niepoprawnie skonfigurowany w aplikacji.
 
 ### <a name="system-and-application-event-logs"></a>Dzienniki zdarzeń systemu i aplikacji
 
-Dostęp do dzienników zdarzeń systemu i aplikacji:
+Uzyskaj dostęp do dzienników zdarzeń systemu i aplikacji:
 
-1. Otwórz menu Start, wyszukaj *podgląd zdarzeń*i wybierz aplikację **Podgląd zdarzeń.**
-1. W **Podglądzie zdarzeń**otwórz węzeł **Dzienniki systemu Windows.**
-1. Wybierz **system,** aby otworzyć dziennik zdarzeń systemu. Wybierz **opcję Aplikacja,** aby otworzyć dziennik zdarzeń aplikacji.
-1. Wyszukaj błędy skojarzone z nieudaną aplikacją.
+1. Otwórz menu Start, wyszukaj ciąg *Podgląd zdarzeń*i wybierz aplikację **Podgląd zdarzeń** .
+1. W **Podgląd zdarzeń**Otwórz węzeł **Dzienniki systemu Windows** .
+1. Wybierz pozycję **system** , aby otworzyć dziennik zdarzeń systemu. Wybierz pozycję **aplikacja** , aby otworzyć dziennik zdarzeń aplikacji.
+1. Wyszukaj błędy związane z niepowodzeniem aplikacji.
 
 ### <a name="run-the-app-at-a-command-prompt"></a>Uruchamianie aplikacji w wierszu polecenia
 
-Wiele błędów uruchamiania nie generuje przydatnych informacji w dziennikach zdarzeń. Przyczynę niektórych błędów można znaleźć, uruchamiając aplikację w wierszu polecenia w systemie hostingowym. Aby zarejestrować dodatkowe szczegóły z aplikacji, obniżyć [poziom dziennika](xref:fundamentals/logging/index#log-level) lub uruchomić aplikację w [środowisku deweloperskim](xref:fundamentals/environments).
+Wiele błędów uruchamiania nie produkuje użytecznych informacji w dziennikach zdarzeń. Przyczynę niektórych błędów można znaleźć, uruchamiając aplikację w wierszu polecenia w systemie hostingu. Aby rejestrować dodatkowe szczegóły aplikacji, Obniż [poziom rejestrowania](xref:fundamentals/logging/index#log-level) lub Uruchom aplikację w [środowisku deweloperskim](xref:fundamentals/environments).
 
 ### <a name="clear-package-caches"></a>Wyczyść pamięć podręczną pakietów
 
-Działająca aplikacja może zakończyć się niepowodzeniem natychmiast po uaktualnieniu zestawu .NET Core SDK na komputerze deweloperskim lub zmianie wersji pakietu w aplikacji. W niektórych przypadkach niespójne pakiety mogą spowodować przerwanie aplikacji podczas wykonywania głównych uaktualnień. Większość z tych problemów można rozwiązać, postępując zgodnie z następującymi instrukcjami:
+Działająca aplikacja może zakończyć się niepowodzeniem natychmiast po uaktualnieniu zestaw .NET Core SDK na komputerze deweloperskim lub zmianie wersji pakietu w ramach aplikacji. W niektórych przypadkach niespójne pakiety mogą przerwać aplikację podczas przeprowadzania uaktualnień głównych. Większość tych problemów można naprawić, wykonując następujące instrukcje:
 
-1. Usuń *foldery bin* i *obj.*
-1. Wyczyść bufory pakietu, wykonując [dotnet nuget locals all --clear](/dotnet/core/tools/dotnet-nuget-locals) z powłoki poleceń.
+1. Usuń foldery *bin* i *obj* .
+1. Wyczyść pamięć podręczną pakietów, wykonując [wszystkie elementy lokalne usługi NuGet programu dotnet--Wyczyść](/dotnet/core/tools/dotnet-nuget-locals) z poziomu powłoki poleceń.
 
-   Czyszczenie pamięci podręcznych pakietów można również wykonać za pomocą narzędzia [nuget.exe](https://www.nuget.org/downloads) i wykonać polecenie `nuget locals all -clear`. *nuget.exe* nie jest w pakiecie zainstalować z systemem operacyjnym Windows dla komputerów stacjonarnych i muszą być uzyskane oddzielnie od [strony internetowej NuGet](https://www.nuget.org/downloads).
+   Czyszczenie pamięci podręcznych pakietów można także wykonać przy użyciu narzędzia [NuGet. exe](https://www.nuget.org/downloads) i wykonując polecenie `nuget locals all -clear`. *NuGet. exe* nie jest pakietem instalowanym z systemem operacyjnym Windows dla komputerów stacjonarnych i musi być uzyskany niezależnie od [witryny sieci Web programu NuGet](https://www.nuget.org/downloads).
 
-1. Przywracanie i odbudowywać projekt.
-1. Usuń wszystkie pliki w folderze wdrażania na serwerze przed ponowne wdrożeniem aplikacji.
+1. Przywróć i skompiluj projekt.
+1. Usuń wszystkie pliki z folderu wdrożenia na serwerze przed ponownym wdrożeniem aplikacji.
 
-### <a name="slow-or-hanging-app"></a>Powolna lub wisząca aplikacja
+### <a name="slow-or-hanging-app"></a>Aplikacja wolna lub wysunięta
 
-*Zrzut awaryjny* jest migawką pamięci systemu i może pomóc w określeniu przyczyny awarii aplikacji, awarii uruchamiania lub powolnej aplikacji.
+*Zrzut awaryjny* to migawka pamięci systemu, która może pomóc w ustaleniu przyczyny awarii aplikacji, awarii uruchamiania lub powolnej aplikacji.
 
-#### <a name="app-crashes-or-encounters-an-exception"></a>Aplikacja ulega awarii lub napotyka wyjątek
+#### <a name="app-crashes-or-encounters-an-exception"></a>Awaria aplikacji lub napotka wyjątek
 
-Uzyskiwanie i analizowanie zrzutu z [raportowania błędów systemu Windows (WER)](/windows/desktop/wer/windows-error-reporting):
+Uzyskaj i Analizuj Zrzut z [raportowanie błędów systemu Windows (raportowanie błędów systemu Windows)](/windows/desktop/wer/windows-error-reporting):
 
-1. Utwórz folder do przechowywania `c:\dumps`plików zrzutu awaryjnego w pliku .
-1. Uruchom [skrypt EnableDumps PowerShell](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/host-and-deploy/windows-service/scripts/EnableDumps.ps1) o nazwie wykonywalnej aplikacji:
+1. Utwórz folder do przechowywania plików zrzutu awaryjnego `c:\dumps`w.
+1. Uruchom [skrypt programu PowerShell](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/host-and-deploy/windows-service/scripts/EnableDumps.ps1) w programie EnableDumps z nazwą pliku wykonywalnego aplikacji:
 
    ```console
    .\EnableDumps {APPLICATION EXE} c:\dumps
    ```
 
 1. Uruchom aplikację w warunkach, które powodują awarię.
-1. Po wystąpieniu awarii uruchom [skrypt DisableDumps PowerShell:](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/host-and-deploy/windows-service/scripts/DisableDumps.ps1)
+1. Po wystąpieniu awarii Uruchom [skrypt programu DisableDumps PowerShell](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/host-and-deploy/windows-service/scripts/DisableDumps.ps1):
 
    ```console
    .\DisableDumps {APPLICATION EXE}
    ```
 
-Po awarii aplikacji i kolekcji zrzutu jest zakończona, aplikacja może zakończyć się normalnie. Skrypt programu PowerShell konfiguruje program WER do zbierania maksymalnie pięciu zrzutów na aplikację.
+Po awarii aplikacji i zakończeniu zbierania zrzutów aplikacja może zakończyć normalne działanie. Skrypt programu PowerShell konfiguruje raportowanie błędów systemu Windows w celu zebrania do pięciu zrzutów na aplikację.
 
 > [!WARNING]
-> Zrzuty awaryjne mogą zająć dużą ilość miejsca na dysku (do kilku gigabajtów).
+> Zrzuty awaryjne mogą wymagać dużej ilości miejsca na dysku (do kilku gigabajtów).
 
 #### <a name="app-hangs-fails-during-startup-or-runs-normally"></a>Aplikacja zawiesza się, kończy się niepowodzeniem podczas uruchamiania lub działa normalnie
 
-Gdy aplikacja *zawiesza* się (przestaje odpowiadać, ale nie ulega awarii), kończy się niepowodzeniem podczas uruchamiania lub działa normalnie, zobacz [Pliki zrzutu w trybie użytkownika: Wybieranie najlepszego narzędzia,](/windows-hardware/drivers/debugger/user-mode-dump-files#choosing-the-best-tool) aby wybrać odpowiednie narzędzie do produkcji zrzutu.
+Gdy aplikacja *zawiesza* się (bez awarii), kończy się niepowodzeniem podczas uruchamiania lub działa normalnie, zobacz [pliki zrzutu w trybie użytkownika: wybór najlepszego narzędzia](/windows-hardware/drivers/debugger/user-mode-dump-files#choosing-the-best-tool) do wygenerowania zrzutu.
 
 #### <a name="analyze-the-dump"></a>Analizowanie zrzutu
 
@@ -667,7 +673,7 @@ Zrzut można analizować przy użyciu kilku metod. Aby uzyskać więcej informac
 
 ## <a name="additional-resources"></a>Zasoby dodatkowe
 
-* [Konfiguracja punktu końcowego pustułka](xref:fundamentals/servers/kestrel#endpoint-configuration) (obejmuje konfigurację HTTPS i obsługę SNI)
+* [Konfiguracja punktu końcowego Kestrel](xref:fundamentals/servers/kestrel#endpoint-configuration) (w tym Konfiguracja protokołu HTTPS i obsługa SNI)
 * <xref:fundamentals/host/web-host>
 * <xref:test/troubleshoot>
 
@@ -675,59 +681,59 @@ Zrzut można analizować przy użyciu kilku metod. Aby uzyskać więcej informac
 
 ::: moniker range="< aspnetcore-2.2"
 
-Aplikacja ASP.NET Core może być hostowana w systemie Windows jako [usługa systemu Windows](/dotnet/framework/windows-services/introduction-to-windows-service-applications) bez korzystania z usług IIS. Po uruchomieniu jako usługa systemu Windows aplikacja jest uruchamiana automatycznie po ponownym uruchomieniu serwera.
+Aplikacja ASP.NET Core może być hostowana w systemie Windows jako [Usługa systemu Windows](/dotnet/framework/windows-services/introduction-to-windows-service-applications) bez korzystania z usług IIS. Gdy usługa jest hostowana w systemie Windows, aplikacja jest uruchamiana automatycznie po ponownym uruchomieniu serwera.
 
 [Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/windows-service/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
-* [ASP.NET Core SDK 2.1 lub nowszym](https://dotnet.microsoft.com/download)
-* [Program PowerShell 6.2 lub nowszy](https://github.com/PowerShell/PowerShell)
+* [ASP.NET Core zestaw SDK 2,1 lub nowszy](https://dotnet.microsoft.com/download)
+* [Program PowerShell 6,2 lub nowszy](https://github.com/PowerShell/PowerShell)
 
 ## <a name="app-configuration"></a>Konfiguracja aplikacji
 
-Aplikacja wymaga odwołań do pakietów dla [witryny Microsoft.AspNetCore.Hosting.WindowsServices](https://www.nuget.org/packages/Microsoft.AspNetCore.Hosting.WindowsServices) i [Microsoft.Extensions.Logging.EventLog](https://www.nuget.org/packages/Microsoft.Extensions.Logging.EventLog).
+Aplikacja wymaga odwołania do pakietów dla elementu [Microsoft. AspNetCore. hosting. WindowsServices](https://www.nuget.org/packages/Microsoft.AspNetCore.Hosting.WindowsServices) i [Microsoft. Extensions. Logging. EventLog](https://www.nuget.org/packages/Microsoft.Extensions.Logging.EventLog).
 
-Aby przetestować i debugować podczas uruchamiania poza usługą, dodaj kod, aby ustalić, czy aplikacja jest uruchomiona jako usługa lub aplikacja konsoli. Sprawdź, czy debuger jest `--console` dołączony lub przełącznik jest obecny. Jeśli którykolwiek z tych warunków jest spełniony (aplikacja <xref:Microsoft.AspNetCore.Hosting.WebHostExtensions.Run*>nie jest uruchamiana jako usługa), zadzwoń . Jeśli warunki są fałszywe (aplikacja jest uruchamiana jako usługa):
+Aby przetestować i debugować w przypadku uruchamiania poza usługą, należy dodać kod, aby określić, czy aplikacja działa jako usługa, czy Aplikacja konsolowa. Sprawdź, czy debuger jest dołączony lub czy `--console` jest obecny przełącznik. Jeśli którykolwiek z warunków jest spełniony (aplikacja nie jest uruchomiona jako usługa), wywołaj metodę <xref:Microsoft.AspNetCore.Hosting.WebHostExtensions.Run*>. Jeśli warunki są fałszywe (aplikacja jest uruchamiana jako usługa):
 
-* Zadzwoń <xref:System.IO.Directory.SetCurrentDirectory*> i użyj ścieżki do opublikowanej lokalizacji aplikacji. Nie wywołaj, <xref:System.IO.Directory.GetCurrentDirectory*> aby uzyskać ścieżkę, ponieważ aplikacja usługi systemu Windows <xref:System.IO.Directory.GetCurrentDirectory*> zwraca folder *C:\\WINDOWS\\system32,* gdy jest wywoływana. Aby uzyskać więcej informacji, zobacz [sekcję Bieżący katalog i katalog zawartości.](#current-directory-and-content-root) Ten krok jest wykonywany przed skonfigurowaniem aplikacji w pliku `CreateWebHostBuilder`.
-* Wywołanie, <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions.RunAsService*> aby uruchomić aplikację jako usługę.
+* Wywołaj <xref:System.IO.Directory.SetCurrentDirectory*> i użyj ścieżki do opublikowanej lokalizacji aplikacji. Nie wywołuj <xref:System.IO.Directory.GetCurrentDirectory*> , aby uzyskać ścieżkę, ponieważ aplikacja usługi systemu Windows zwraca folder *C\\:\\Windows system32* , <xref:System.IO.Directory.GetCurrentDirectory*> gdy jest wywoływana. Aby uzyskać więcej informacji, zapoznaj się z sekcją [Current Directory i root Content](#current-directory-and-content-root) . Ten krok jest wykonywany przed skonfigurowaniem aplikacji w programie `CreateWebHostBuilder`.
+* Wywołaj <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions.RunAsService*> , aby uruchomić aplikację jako usługę.
 
-Ponieważ [dostawca konfiguracji wiersza polecenia](xref:fundamentals/configuration/index#command-line-configuration-provider) wymaga par nazwa-wartość dla `--console` argumentów wiersza <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> polecenia, przełącznik jest usuwany z argumentów przed odebraniem argumentów.
+Ponieważ [dostawca konfiguracji wiersza polecenia](xref:fundamentals/configuration/index#command-line-configuration-provider) wymaga par nazwa-wartość dla argumentów wiersza polecenia, `--console` przełącznik jest usuwany z argumentów przed <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> odebraniem argumentów.
 
-Aby zapisać w dzienniku zdarzeń systemu Windows, dodaj dostawcę EventLog do <xref:Microsoft.AspNetCore.Hosting.WebHostBuilder.ConfigureLogging*>. Ustaw poziom rejestrowania `Logging:LogLevel:Default` za pomocą klucza w *appsettings. Plik Production.json.*
+Aby zapisać w dzienniku zdarzeń systemu Windows, Dodaj dostawcę EventLog do <xref:Microsoft.AspNetCore.Hosting.WebHostBuilder.ConfigureLogging*>programu. Ustaw poziom rejestrowania przy użyciu `Logging:LogLevel:Default` klucza w pliku *appSettings. Plik Product. JSON* .
 
-W poniższym przykładzie z `RunAsCustomService` przykładowej aplikacji, jest wywoływana zamiast <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions.RunAsService*> w celu obsługi zdarzeń lifetime w aplikacji. Aby uzyskać więcej informacji, zobacz [Handle uruchamiania i zatrzymywania zdarzeń](#handle-starting-and-stopping-events) sekcji.
+W poniższym przykładzie z przykładowej aplikacji `RunAsCustomService` jest wywoływana zamiast <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions.RunAsService*> w celu obsługi zdarzeń okresu istnienia w aplikacji. Aby uzyskać więcej informacji, zobacz sekcję [Obsługa zdarzeń dotyczących uruchamiania i zatrzymywania](#handle-starting-and-stopping-events) .
 
 [!code-csharp[](windows-service/samples/2.x/AspNetCoreService/Program.cs?name=snippet_Program)]
 
 ## <a name="deployment-type"></a>Typ wdrożenia
 
-Aby uzyskać informacje i porady dotyczące scenariuszy wdrażania, zobacz [wdrożenie aplikacji .NET Core](/dotnet/core/deploying/).
+Aby uzyskać informacje i porady dotyczące scenariuszy wdrażania, zobacz [wdrażanie aplikacji .NET Core](/dotnet/core/deploying/).
 
 ### <a name="sdk"></a>SDK
 
-W przypadku usługi opartej na aplikacjach sieci web, która używa stron Razor Pages lub struktur MVC, określ składnik Web SDK w pliku projektu:
+W przypadku usługi opartej na aplikacji sieci Web korzystającej ze Razor stron lub platform MVC należy określić zestaw SDK sieci Web w pliku projektu:
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk.Web">
 ```
 
-Jeśli usługa wykonuje tylko zadania w tle (na przykład [usługi hostowane),](xref:fundamentals/host/hosted-services)określ sdk roboczy w pliku projektu:
+Jeśli usługa wykonuje tylko zadania w tle (na przykład [usługi hostowane](xref:fundamentals/host/hosted-services)), określ zestaw SDK procesu roboczego w pliku projektu:
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk.Worker">
 ```
 
-### <a name="framework-dependent-deployment-fdd"></a>Wdrożenie zależne od struktury (FDD)
+### <a name="framework-dependent-deployment-fdd"></a>Wdrożenie zależne od platformy (FDD)
 
-Wdrożenie zależne od struktury (FDD) opiera się na obecności udostępnionej wersji systemu .NET Core w systemie docelowym. Gdy scenariusz FDD zostanie przyjęty zgodnie ze wskazówkami zawartymi w tym artykule, SDK tworzy plik wykonywalny (*.exe*), nazywany *wykonywalnym zależnym od struktury*.
+Wdrożenie zależne od platformy (FDD) zależy od obecności udostępnionej systemowej wersji platformy .NET Core w systemie docelowym. Po przyjęciu scenariusza FDD zgodnie ze wskazówkami zawartymi w tym artykule zestaw SDK tworzy plik wykonywalny (*. exe*), nazywany *plik wykonywalny zależny od platformy*.
 
-Identyfikator środowiska wykonawczego systemu Windows [(RID)](/dotnet/core/rid-catalog) [\<(RuntimeIdentifier>](/dotnet/core/tools/csproj#runtimeidentifier)) zawiera platformę docelową. W poniższym przykładzie identyfikator `win7-x64`RID jest ustawiony na . Właściwość `<SelfContained>` jest `false`ustawiona na . Te właściwości instruują SDK do generowania pliku wykonywalnego *(exe)* dla systemu Windows i aplikacji, która zależy od udostępnionej struktury .NET Core.
+[Identyfikator środowiska uruchomieniowego systemu Windows (RID)](/dotnet/core/rid-catalog) ([\<RuntimeIdentifier>](/dotnet/core/tools/csproj#runtimeidentifier)) zawiera platformę docelową. W poniższym przykładzie identyfikator RID jest ustawiony na `win7-x64`. `<SelfContained>` Właściwość jest ustawiona na `false`. Te właściwości instruują zestaw SDK, aby wygenerował plik wykonywalny (*exe*) dla systemu Windows i aplikację, która zależy od współużytkowanej platformy .NET Core.
 
-Właściwość `<UseAppHost>` jest `true`ustawiona na . Ta właściwość zapewnia usługi ze ścieżką aktywacji (wykonywalny, *.exe)* dla FDD.
+`<UseAppHost>` Właściwość jest ustawiona na `true`. Ta właściwość zapewnia usługę ze ścieżką aktywacji (plik wykonywalny, *exe*) dla FDD.
 
-Plik *web.config,* który jest zwykle produkowany podczas publikowania aplikacji ASP.NET Core, nie jest potrzebny dla aplikacji Usług systemu Windows. Aby wyłączyć tworzenie pliku *web.config,* `<IsTransformWebConfigDisabled>` dodaj właściwość ustawioną na `true`.
+Plik *Web. config* , który jest zwykle tworzony podczas publikowania aplikacji ASP.NET Core, nie jest konieczny dla aplikacji usług systemu Windows. Aby wyłączyć tworzenie pliku *Web. config* , należy dodać `<IsTransformWebConfigDisabled>` Właściwość ustawioną na `true`.
 
 ```xml
 <PropertyGroup>
@@ -739,24 +745,24 @@ Plik *web.config,* który jest zwykle produkowany podczas publikowania aplikacji
 </PropertyGroup>
 ```
 
-### <a name="self-contained-deployment-scd"></a>Samodzielne wdrażanie (SCD)
+### <a name="self-contained-deployment-scd"></a>Wdrażanie samodzielne (SCD)
 
-Samodzielne wdrożenie (SCD) nie opiera się na obecności udostępnionej struktury w systemie hosta. Środowisko wykonawcze i zależności aplikacji są wdrażane za pomocą aplikacji.
+Wdrożenie samodzielne (SCD) nie polega na obecności struktury udostępnionej w systemie hosta. Środowisko uruchomieniowe i zależności aplikacji są wdrażane przy użyciu aplikacji.
 
-Identyfikator środowiska wykonawczego systemu Windows [(RID)](/dotnet/core/rid-catalog) `<PropertyGroup>` znajduje się w platformie zawierającej platformę docelową:
+[Identyfikator środowiska uruchomieniowego systemu Windows (RID)](/dotnet/core/rid-catalog) znajduje się `<PropertyGroup>` w, który zawiera platformę docelową:
 
 ```xml
 <RuntimeIdentifier>win7-x64</RuntimeIdentifier>
 ```
 
-Aby opublikować wiele identyfikatorów RID:
+Aby opublikować dla wielu identyfikatorów RID:
 
-* Podaj identyfikatory RID na liście rozdzielanych średnikami.
-* Nazwa właściwości [ \<RuntimeIdentifiers>](/dotnet/core/tools/csproj#runtimeidentifiers) (liczba mnoga).
+* Podaj identyfikatory RID na liście rozdzielanej średnikami.
+* Użyj nazwy [ \<właściwości RuntimeIdentifiers>](/dotnet/core/tools/csproj#runtimeidentifiers) (plural).
 
-Aby uzyskać więcej informacji, zobacz [.NET Core RID Catalog](/dotnet/core/rid-catalog).
+Aby uzyskać więcej informacji, zobacz [katalog .NET Core RID Catalog](/dotnet/core/rid-catalog).
 
-Właściwość `<SelfContained>` jest `true`ustawiona na:
+`<SelfContained>` Właściwość jest ustawiona na `true`:
 
 ```xml
 <SelfContained>true</SelfContained>
@@ -764,46 +770,46 @@ Właściwość `<SelfContained>` jest `true`ustawiona na:
 
 ## <a name="service-user-account"></a>Konto użytkownika usługi
 
-Aby utworzyć konto użytkownika dla usługi, użyj polecenia cmdlet [New-LocalUser](/powershell/module/microsoft.powershell.localaccounts/new-localuser) z administracyjnej powłoki poleceń programu PowerShell 6.
+Aby utworzyć konto użytkownika dla usługi, należy użyć polecenia cmdlet [New-LocalUser](/powershell/module/microsoft.powershell.localaccounts/new-localuser) w powłoce poleceń administracyjnych programu PowerShell 6.
 
-W systemie Windows 10 October 2018 Update (wersja 1809/kompilacja 10.0.17763) lub nowszej:
+W systemie Windows 10 października 2018 Update (wersja 1809/Kompilacja 10.0.17763) lub nowsza:
 
 ```powershell
 New-LocalUser -Name {SERVICE NAME}
 ```
 
-W systemie operacyjnym Windows wcześniej niż Windows 10 October 2018 Update (wersja 1809/build 10.0.17763):
+W systemie operacyjnym Windows w wersji starszej niż aktualizacja 2018 systemu Windows 10 października (wersja 1809/Kompilacja 10.0.17763):
 
 ```console
 powershell -Command "New-LocalUser -Name {SERVICE NAME}"
 ```
 
-Po wyświetleniu monitu podaj [silne hasło.](/windows/security/threat-protection/security-policy-settings/password-must-meet-complexity-requirements)
+Podaj [silne hasło](/windows/security/threat-protection/security-policy-settings/password-must-meet-complexity-requirements) po wyświetleniu monitu.
 
-O `-AccountExpires` ile parametr nie zostanie dostarczony do polecenia cmdlet <xref:System.DateTime> [New-LocalUser](/powershell/module/microsoft.powershell.localaccounts/new-localuser) z wygaśnięciem, konto nie wygaśnie.
+Jeśli `-AccountExpires` parametr nie zostanie dostarczony do polecenia cmdlet [New-LocalUser](/powershell/module/microsoft.powershell.localaccounts/new-localuser) z wygaśnięciem <xref:System.DateTime>, konto nie wygaśnie.
 
-Aby uzyskać więcej informacji, zobacz [Microsoft.PowerShell.LocalAccounts](/powershell/module/microsoft.powershell.localaccounts/) i [Konta użytkowników usług](/windows/desktop/services/service-user-accounts).
+Aby uzyskać więcej informacji, zobacz [Microsoft. PowerShell. LocalAccounts](/powershell/module/microsoft.powershell.localaccounts/) i [konta użytkowników usług](/windows/desktop/services/service-user-accounts).
 
-Alternatywnym podejściem do zarządzania użytkownikami podczas korzystania z usługi Active Directory jest użycie kont usług zarządzanych. Aby uzyskać więcej informacji, zobacz [Omówienie grupowych kont usług zarządzanych](/windows-server/security/group-managed-service-accounts/group-managed-service-accounts-overview).
+Alternatywna metoda zarządzania użytkownikami podczas korzystania z Active Directory polega na użyciu zarządzanych kont usług. Aby uzyskać więcej informacji, zobacz [Omówienie kont usług zarządzanych przez grupę](/windows-server/security/group-managed-service-accounts/group-managed-service-accounts-overview).
 
-## <a name="log-on-as-a-service-rights"></a>Zaloguj się jako prawa do usługi
+## <a name="log-on-as-a-service-rights"></a>Logowanie jako prawa usługi
 
-Aby *ustanowić logowanie jako* prawa do usługi dla konta użytkownika usługi:
+Aby nawiązać *Logowanie jako prawa usługi* dla konta użytkownika usługi:
 
-1. Otwórz edytor lokalnych zasad zabezpieczeń, uruchamiając *plik secpol.msc*.
-1. Rozwiń węzeł **Zasady lokalne** i wybierz pozycję **Przypisanie praw użytkownika**.
-1. Otwórz **zasadę Logowanie jako usługi.**
-1. Wybierz **pozycję Dodaj użytkownika lub grupę**.
+1. Otwórz Edytor lokalnych zasad zabezpieczeń, uruchamiając program *secpol. msc*.
+1. Rozwiń węzeł **Zasady lokalne** , a następnie wybierz pozycję **Przypisywanie praw użytkownika**.
+1. Otwórz okno **Logowanie jako usługa** .
+1. Wybierz pozycję **Dodaj użytkownika lub grupę**.
 1. Podaj nazwę obiektu (konto użytkownika) przy użyciu jednej z następujących metod:
-   1. Wpisz konto użytkownika`{DOMAIN OR COMPUTER NAME\USER}`( ) w polu nazwa obiektu i wybierz **przycisk OK,** aby dodać użytkownika do zasad.
-   1. Wybierz **pozycję Zaawansowane**. Wybierz **pozycję Znajdź teraz**. Wybierz konto użytkownika z listy. Kliknij przycisk **OK**. Wybierz **przycisk OK** ponownie, aby dodać użytkownika do zasad.
-1. Wybierz **przycisk OK** lub **Zastosuj,** aby zaakceptować zmiany.
+   1. Wpisz konto użytkownika (`{DOMAIN OR COMPUTER NAME\USER}`) w polu Nazwa obiektu, a następnie wybierz **przycisk OK** , aby dodać użytkownika do zasad.
+   1. Wybierz pozycję **Zaawansowane**. Wybierz pozycję **Znajdź teraz**. Wybierz z listy konto użytkownika. Wybierz przycisk **OK**. Ponownie wybierz **przycisk OK** , aby dodać użytkownika do zasad.
+1. Wybierz **przycisk OK** lub **Zastosuj** , aby zaakceptować zmiany.
 
 ## <a name="create-and-manage-the-windows-service"></a>Tworzenie usługi systemu Windows i zarządzanie nią
 
 ### <a name="create-a-service"></a>Tworzenie usługi
 
-Użyj poleceń programu PowerShell, aby zarejestrować usługę. Z administracyjnej powłoki poleceń programu PowerShell 6 wykonaj następujące polecenia:
+Zarejestrowanie usługi za pomocą poleceń programu PowerShell. Z poziomu powłoki poleceń administracyjnych programu PowerShell 6 wykonaj następujące polecenia:
 
 ```powershell
 $acl = Get-Acl "{EXE PATH}"
@@ -815,12 +821,12 @@ $acl | Set-Acl "{EXE PATH}"
 New-Service -Name {SERVICE NAME} -BinaryPathName {EXE FILE PATH} -Credential {DOMAIN OR COMPUTER NAME\USER} -Description "{DESCRIPTION}" -DisplayName "{DISPLAY NAME}" -StartupType Automatic
 ```
 
-* `{EXE PATH}`&ndash; Ścieżka do folderu aplikacji na hoście `d:\myservice`(na przykład ). Nie dołączaj pliku wykonywalnego aplikacji do ścieżki. Ukośnik na końcu nie jest wymagany.
+* `{EXE PATH}`&ndash; Ścieżka do folderu aplikacji na hoście (na przykład `d:\myservice`). Nie dołączaj pliku wykonywalnego aplikacji do ścieżki. Końcowy ukośnik nie jest wymagany.
 * `{DOMAIN OR COMPUTER NAME\USER}`&ndash; Konto użytkownika usługi (na przykład `Contoso\ServiceUser`).
-* `{SERVICE NAME}`&ndash; Nazwa usługi (na `MyService`przykład ).
-* `{EXE FILE PATH}`&ndash; Ścieżka wykonywalna aplikacji `d:\myservice\myservice.exe`(na przykład ). Dołącz nazwę pliku wykonywalnego z rozszerzeniem.
-* `{DESCRIPTION}`&ndash; Opis usługi (na `My sample service`przykład ).
-* `{DISPLAY NAME}`&ndash; Nazwa wyświetlana usługi `My Service`(na przykład ).
+* `{SERVICE NAME}`&ndash; Nazwa usługi (na przykład `MyService`).
+* `{EXE FILE PATH}`&ndash; Ścieżka pliku wykonywalnego aplikacji (na przykład `d:\myservice\myservice.exe`). Uwzględnij nazwę pliku wykonywalnego z rozszerzeniem.
+* `{DESCRIPTION}`&ndash; Opis usługi (na przykład `My sample service`).
+* `{DISPLAY NAME}`&ndash; Nazwa wyświetlana usługi (na przykład `My Service`).
 
 ### <a name="start-a-service"></a>Uruchamianie usługi
 
@@ -830,7 +836,7 @@ Uruchom usługę za pomocą następującego polecenia programu PowerShell 6:
 Start-Service -Name {SERVICE NAME}
 ```
 
-Polecenie trwa kilka sekund, aby uruchomić usługę.
+Uruchomienie usługi może potrwać kilka sekund.
 
 ### <a name="determine-a-services-status"></a>Określanie stanu usługi
 
@@ -840,7 +846,7 @@ Aby sprawdzić stan usługi, użyj następującego polecenia programu PowerShell
 Get-Service -Name {SERVICE NAME}
 ```
 
-Stan jest zgłaszany jako jedna z następujących wartości:
+Stan jest raportowany jako jedna z następujących wartości:
 
 * `Starting`
 * `Running`
@@ -849,7 +855,7 @@ Stan jest zgłaszany jako jedna z następujących wartości:
 
 ### <a name="stop-a-service"></a>Zatrzymywanie usługi
 
-Zatrzymaj usługę za pomocą następującego polecenia programu Powershell 6:
+Zatrzymaj usługę za pomocą następującego polecenia programu PowerShell 6:
 
 ```powershell
 Stop-Service -Name {SERVICE NAME}
@@ -857,7 +863,7 @@ Stop-Service -Name {SERVICE NAME}
 
 ### <a name="remove-a-service"></a>Usuwanie usługi
 
-Po krótkim opóźnieniu zatrzymania usługi usuń usługę za pomocą następującego polecenia Programu Powershell 6:
+Po krótkim opóźnieniu na zatrzymanie usługi Usuń usługę za pomocą następującego polecenia programu PowerShell 6:
 
 ```powershell
 Remove-Service -Name {SERVICE NAME}
@@ -865,51 +871,51 @@ Remove-Service -Name {SERVICE NAME}
 
 ## <a name="handle-starting-and-stopping-events"></a>Obsługa zdarzeń uruchamiania i zatrzymywania
 
-Aby <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostService.OnStarting*>obsłużyć , <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostService.OnStarted*>i <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostService.OnStopping*> zdarzenia:
+Aby obsłużyć <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostService.OnStarting*>zdarzenia, <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostService.OnStarted*>i <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostService.OnStopping*> :
 
-1. Utwórz klasę, która <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostService> wywodzi się z `OnStarting`, `OnStarted`i `OnStopping` metody:
+1. Utwórz klasę, która dziedziczy z <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostService> metody `OnStarting`, `OnStarted`, i `OnStopping` :
 
    [!code-csharp[](windows-service/samples/2.x/AspNetCoreService/CustomWebHostService.cs?name=snippet_CustomWebHostService)]
 
-2. Utwórz metodę <xref:Microsoft.AspNetCore.Hosting.IWebHost> rozszerzenia, `CustomWebHostService` która <xref:System.ServiceProcess.ServiceBase.Run*>przekazuje do :
+2. Utwórz metodę rozszerzenia dla <xref:Microsoft.AspNetCore.Hosting.IWebHost> , która przekazuje `CustomWebHostService` do: <xref:System.ServiceProcess.ServiceBase.Run*>
 
    [!code-csharp[](windows-service/samples/2.x/AspNetCoreService/WebHostServiceExtensions.cs?name=ExtensionsClass)]
 
-3. W `Program.Main`, `RunAsCustomService` wywołać metodę <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions.RunAsService*>rozszerzenia zamiast:
+3. W `Program.Main`, wywołaj `RunAsCustomService` metodę rozszerzenia zamiast <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions.RunAsService*>:
 
    ```csharp
    host.RunAsCustomService();
    ```
 
-   Aby wyświetlić <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions.RunAsService*> lokalizację `Program.Main`w , zapoznaj się z przykładowym kodem pokazanym w sekcji [Typ wdrożenia.](#deployment-type)
+   Aby zobaczyć lokalizację programu <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions.RunAsService*> w programie `Program.Main`, zapoznaj się z przykładem kodu pokazanym w sekcji [typ wdrożenia](#deployment-type) .
 
 ## <a name="proxy-server-and-load-balancer-scenarios"></a>Scenariusze serwera proxy i modułu równoważenia obciążenia
 
-Usługi, które wchodzą w interakcję z żądaniami z Internetu lub sieci firmowej i znajdują się za serwerem proxy lub modułem równoważenia obciążenia, mogą wymagać dodatkowej konfiguracji. Aby uzyskać więcej informacji, zobacz <xref:host-and-deploy/proxy-load-balancer>.
+Usługi, które współdziałają z żądaniami z Internetu lub sieci firmowej i znajdują się za serwerem proxy lub modułem równoważenia obciążenia, mogą wymagać dodatkowej konfiguracji. Aby uzyskać więcej informacji, zobacz <xref:host-and-deploy/proxy-load-balancer>.
 
 ## <a name="configure-endpoints"></a>Konfigurowanie punktów końcowych
 
-Domyślnie ASP.NET Core wiąże się `http://localhost:5000`z programem . Skonfiguruj adres URL `ASPNETCORE_URLS` i port, ustawiając zmienną środowiskową.
+Domyślnie ASP.NET Core wiąże się z `http://localhost:5000`. Skonfiguruj adres URL i port przez ustawienie zmiennej `ASPNETCORE_URLS` środowiskowej.
 
-Aby uzyskać dodatkowe podejścia do konfiguracji adresów URL i portów, zobacz odpowiedni artykuł na temat serwera:
+Aby uzyskać dodatkowe podejścia do konfiguracji adresów URL i portów, zobacz artykuł dotyczący odpowiedniego serwera:
 
 * <xref:fundamentals/servers/kestrel#endpoint-configuration>
 * <xref:fundamentals/servers/httpsys#configure-windows-server>
 
-Powyższe wskazówki obejmują obsługę punktów końcowych HTTPS. Na przykład skonfiguruj aplikację dla protokołu HTTPS, gdy uwierzytelnianie jest używane z usługą systemu Windows.
+Powyższe wskazówki obejmują obsługę punktów końcowych HTTPS. Na przykład skonfiguruj aplikację do obsługi protokołu HTTPS, gdy uwierzytelnianie jest używane z usługą systemu Windows.
 
 > [!NOTE]
-> Użycie ASP.NET certyfikatu dewelopera HTTPS w celu zabezpieczenia punktu końcowego usługi nie jest obsługiwane.
+> Korzystanie z ASP.NET Core certyfikatu deweloperskiego HTTPS w celu zabezpieczenia punktu końcowego usługi nie jest obsługiwane.
 
-## <a name="current-directory-and-content-root"></a>Bieżący katalog i katalog główny zawartości
+## <a name="current-directory-and-content-root"></a>Bieżący katalog i główna Zawartość
 
-Bieżący katalog roboczy <xref:System.IO.Directory.GetCurrentDirectory*> zwracany przez wywołanie usługi systemu Windows to folder *C:\\WINDOWS\\system32.* Folder *system32* nie jest odpowiednią lokalizacją do przechowywania plików usługi (na przykład plików ustawień). Użyj jednego z następujących podejść do obsługi i uzyskiwania dostępu do zasobów i plików ustawień usługi.
+Bieżącym katalogiem roboczym zwróconym <xref:System.IO.Directory.GetCurrentDirectory*> przez wywołanie dla usługi systemu Windows jest folder *\\C\\: Windows system32* . Folder *system32* nie jest odpowiednią lokalizacją do przechowywania plików usługi (na przykład plików ustawień). Użyj jednego z poniższych metod, aby zachować i uzyskać dostęp do plików ustawień i zasobów usługi.
 
-### <a name="set-the-content-root-path-to-the-apps-folder"></a>Ustawianie ścieżki głównej zawartości do folderu aplikacji
+### <a name="set-the-content-root-path-to-the-apps-folder"></a>Ustawianie ścieżki katalogu głównego zawartości do folderu aplikacji
 
-Jest <xref:Microsoft.Extensions.Hosting.IHostingEnvironment.ContentRootPath*> to ta sama `binPath` ścieżka podana do argumentu podczas tworzenia usługi. Zamiast dzwonić, `GetCurrentDirectory` aby utworzyć ścieżki do <xref:System.IO.Directory.SetCurrentDirectory*> plików ustawień, zadzwoń ze ścieżką do [katalogu głównego zawartości](xref:fundamentals/index#content-root)aplikacji .
+<xref:Microsoft.Extensions.Hosting.IHostingEnvironment.ContentRootPath*> Jest to ta sama ścieżka do `binPath` argumentu podczas tworzenia usługi. Zamiast wywoływania `GetCurrentDirectory` funkcji tworzenia ścieżek do plików ustawień, należy wywołać <xref:System.IO.Directory.SetCurrentDirectory*> ścieżkę do [katalogu głównego zawartości](xref:fundamentals/index#content-root)aplikacji.
 
-W `Program.Main`obszarze , określ ścieżkę do folderu pliku wykonywalnego usługi i użyj ścieżki do ustanowienia katalogu głównego zawartości aplikacji:
+W `Program.Main`programie określ ścieżkę do folderu wykonywalnego usługi i użyj ścieżki, aby określić katalog główny zawartości aplikacji:
 
 ```csharp
 var pathToExe = Process.GetCurrentProcess().MainModule.FileName;
@@ -921,82 +927,82 @@ CreateWebHostBuilder(args)
     .RunAsService();
 ```
 
-### <a name="store-a-services-files-in-a-suitable-location-on-disk"></a>Przechowywanie plików usługi w odpowiednim miejscu na dysku
+### <a name="store-a-services-files-in-a-suitable-location-on-disk"></a>Przechowywanie plików usługi w odpowiedniej lokalizacji na dysku
 
-Określ ścieżkę <xref:Microsoft.Extensions.Configuration.FileConfigurationExtensions.SetBasePath*> bezwzględną <xref:Microsoft.Extensions.Configuration.IConfigurationBuilder> podczas korzystania z folderu zawierającego pliki.
+Określ ścieżkę <xref:Microsoft.Extensions.Configuration.FileConfigurationExtensions.SetBasePath*> bezwzględną przy użyciu <xref:Microsoft.Extensions.Configuration.IConfigurationBuilder> do folderu zawierającego pliki.
 
 ## <a name="troubleshoot"></a>Rozwiązywanie problemów
 
-Aby rozwiązać problem z <xref:test/troubleshoot>aplikacją Usługi systemu Windows, zobacz .
+Aby rozwiązać problem z aplikacją usługi systemu Windows <xref:test/troubleshoot>, zobacz.
 
 ### <a name="common-errors"></a>Typowe błędy
 
-* Używana jest stara lub wersja wstępna programu PowerShell.
-* Zarejestrowana usługa nie używa **opublikowanych** danych wyjściowych aplikacji z polecenia [publikowania dotnet.](/dotnet/core/tools/dotnet-publish) Dane wyjściowe polecenia [kompilacji dotnet](/dotnet/core/tools/dotnet-build) nie jest obsługiwany dla wdrażania aplikacji. Opublikowane zasoby znajdują się w jednym z następujących folderów w zależności od typu wdrożenia:
-  * *bin/release/{TARGET FRAMEWORK}/publish* (FDD)
-  * *bin/release/{TARGET FRAMEWORK}/{IDENTYFIKATOR ŚRODOWISKA URUCHOMIENIOWEGO}/publish* (SCD)
-* Usługa nie jest w stanie RUNNING.
-* Ścieżki do zasobów używanych przez aplikację (na przykład certyfikaty) są niepoprawne. Podstawową ścieżką usługi systemu Windows jest *c:\\Windows\\System32*.
-* Użytkownik nie ma *logowania jako* praw do usługi.
-* Hasło użytkownika wygasło lub zostało niepoprawnie przekazane `New-Service` podczas wykonywania polecenia programu PowerShell.
-* Aplikacja wymaga ASP.NET uwierzytelniania core, ale nie jest skonfigurowana do bezpiecznych połączeń (HTTPS).
+* Starsza lub wstępnie wydana wersja programu PowerShell jest używana.
+* Zarejestrowana usługa nie używa **opublikowanych** danych wyjściowych aplikacji z [dotnet Publish](/dotnet/core/tools/dotnet-publish) polecenia. Dane wyjściowe polecenia [kompilacji dotnet](/dotnet/core/tools/dotnet-build) nie są obsługiwane w przypadku wdrażania aplikacji. Opublikowane zasoby znajdują się w dowolnym z następujących folderów w zależności od typu wdrożenia:
+  * *bin/Release/{Target Framework}/Publish* (FDD)
+  * *bin/Release/{Target Framework}/{Runtime identyfikator}/Publish* (SCD)
+* Usługa nie jest w stanie uruchomienia.
+* Ścieżki do zasobów używanych przez aplikację (na przykład certyfikaty) są nieprawidłowe. Ścieżką podstawową usługi systemu Windows jest *c:\\Windows\\system32*.
+* Użytkownik nie ma uprawnień do *logowania się jako usługa* .
+* Hasło użytkownika wygasło lub zostało nieprawidłowo przesłane podczas wykonywania polecenia `New-Service` programu PowerShell.
+* Aplikacja wymaga uwierzytelniania ASP.NET Core, ale nie jest skonfigurowana dla połączeń Secure (HTTPS).
 * Port adresu URL żądania jest niepoprawny lub niepoprawnie skonfigurowany w aplikacji.
 
 ### <a name="system-and-application-event-logs"></a>Dzienniki zdarzeń systemu i aplikacji
 
-Dostęp do dzienników zdarzeń systemu i aplikacji:
+Uzyskaj dostęp do dzienników zdarzeń systemu i aplikacji:
 
-1. Otwórz menu Start, wyszukaj *podgląd zdarzeń*i wybierz aplikację **Podgląd zdarzeń.**
-1. W **Podglądzie zdarzeń**otwórz węzeł **Dzienniki systemu Windows.**
-1. Wybierz **system,** aby otworzyć dziennik zdarzeń systemu. Wybierz **opcję Aplikacja,** aby otworzyć dziennik zdarzeń aplikacji.
-1. Wyszukaj błędy skojarzone z nieudaną aplikacją.
+1. Otwórz menu Start, wyszukaj ciąg *Podgląd zdarzeń*i wybierz aplikację **Podgląd zdarzeń** .
+1. W **Podgląd zdarzeń**Otwórz węzeł **Dzienniki systemu Windows** .
+1. Wybierz pozycję **system** , aby otworzyć dziennik zdarzeń systemu. Wybierz pozycję **aplikacja** , aby otworzyć dziennik zdarzeń aplikacji.
+1. Wyszukaj błędy związane z niepowodzeniem aplikacji.
 
 ### <a name="run-the-app-at-a-command-prompt"></a>Uruchamianie aplikacji w wierszu polecenia
 
-Wiele błędów uruchamiania nie generuje przydatnych informacji w dziennikach zdarzeń. Przyczynę niektórych błędów można znaleźć, uruchamiając aplikację w wierszu polecenia w systemie hostingowym. Aby zarejestrować dodatkowe szczegóły z aplikacji, obniżyć [poziom dziennika](xref:fundamentals/logging/index#log-level) lub uruchomić aplikację w [środowisku deweloperskim](xref:fundamentals/environments).
+Wiele błędów uruchamiania nie produkuje użytecznych informacji w dziennikach zdarzeń. Przyczynę niektórych błędów można znaleźć, uruchamiając aplikację w wierszu polecenia w systemie hostingu. Aby rejestrować dodatkowe szczegóły aplikacji, Obniż [poziom rejestrowania](xref:fundamentals/logging/index#log-level) lub Uruchom aplikację w [środowisku deweloperskim](xref:fundamentals/environments).
 
 ### <a name="clear-package-caches"></a>Wyczyść pamięć podręczną pakietów
 
-Działająca aplikacja może zakończyć się niepowodzeniem natychmiast po uaktualnieniu zestawu .NET Core SDK na komputerze deweloperskim lub zmianie wersji pakietu w aplikacji. W niektórych przypadkach niespójne pakiety mogą spowodować przerwanie aplikacji podczas wykonywania głównych uaktualnień. Większość z tych problemów można rozwiązać, postępując zgodnie z następującymi instrukcjami:
+Działająca aplikacja może zakończyć się niepowodzeniem natychmiast po uaktualnieniu zestaw .NET Core SDK na komputerze deweloperskim lub zmianie wersji pakietu w ramach aplikacji. W niektórych przypadkach niespójne pakiety mogą przerwać aplikację podczas przeprowadzania uaktualnień głównych. Większość tych problemów można naprawić, wykonując następujące instrukcje:
 
-1. Usuń *foldery bin* i *obj.*
-1. Wyczyść bufory pakietu, wykonując [dotnet nuget locals all --clear](/dotnet/core/tools/dotnet-nuget-locals) z powłoki poleceń.
+1. Usuń foldery *bin* i *obj* .
+1. Wyczyść pamięć podręczną pakietów, wykonując [wszystkie elementy lokalne usługi NuGet programu dotnet--Wyczyść](/dotnet/core/tools/dotnet-nuget-locals) z poziomu powłoki poleceń.
 
-   Czyszczenie pamięci podręcznych pakietów można również wykonać za pomocą narzędzia [nuget.exe](https://www.nuget.org/downloads) i wykonać polecenie `nuget locals all -clear`. *nuget.exe* nie jest w pakiecie zainstalować z systemem operacyjnym Windows dla komputerów stacjonarnych i muszą być uzyskane oddzielnie od [strony internetowej NuGet](https://www.nuget.org/downloads).
+   Czyszczenie pamięci podręcznych pakietów można także wykonać przy użyciu narzędzia [NuGet. exe](https://www.nuget.org/downloads) i wykonując polecenie `nuget locals all -clear`. *NuGet. exe* nie jest pakietem instalowanym z systemem operacyjnym Windows dla komputerów stacjonarnych i musi być uzyskany niezależnie od [witryny sieci Web programu NuGet](https://www.nuget.org/downloads).
 
-1. Przywracanie i odbudowywać projekt.
-1. Usuń wszystkie pliki w folderze wdrażania na serwerze przed ponowne wdrożeniem aplikacji.
+1. Przywróć i skompiluj projekt.
+1. Usuń wszystkie pliki z folderu wdrożenia na serwerze przed ponownym wdrożeniem aplikacji.
 
-### <a name="slow-or-hanging-app"></a>Powolna lub wisząca aplikacja
+### <a name="slow-or-hanging-app"></a>Aplikacja wolna lub wysunięta
 
-*Zrzut awaryjny* jest migawką pamięci systemu i może pomóc w określeniu przyczyny awarii aplikacji, awarii uruchamiania lub powolnej aplikacji.
+*Zrzut awaryjny* to migawka pamięci systemu, która może pomóc w ustaleniu przyczyny awarii aplikacji, awarii uruchamiania lub powolnej aplikacji.
 
-#### <a name="app-crashes-or-encounters-an-exception"></a>Aplikacja ulega awarii lub napotyka wyjątek
+#### <a name="app-crashes-or-encounters-an-exception"></a>Awaria aplikacji lub napotka wyjątek
 
-Uzyskiwanie i analizowanie zrzutu z [raportowania błędów systemu Windows (WER)](/windows/desktop/wer/windows-error-reporting):
+Uzyskaj i Analizuj Zrzut z [raportowanie błędów systemu Windows (raportowanie błędów systemu Windows)](/windows/desktop/wer/windows-error-reporting):
 
-1. Utwórz folder do przechowywania `c:\dumps`plików zrzutu awaryjnego w pliku .
-1. Uruchom [skrypt EnableDumps PowerShell](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/host-and-deploy/windows-service/scripts/EnableDumps.ps1) o nazwie wykonywalnej aplikacji:
+1. Utwórz folder do przechowywania plików zrzutu awaryjnego `c:\dumps`w.
+1. Uruchom [skrypt programu PowerShell](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/host-and-deploy/windows-service/scripts/EnableDumps.ps1) w programie EnableDumps z nazwą pliku wykonywalnego aplikacji:
 
    ```console
    .\EnableDumps {APPLICATION EXE} c:\dumps
    ```
 
 1. Uruchom aplikację w warunkach, które powodują awarię.
-1. Po wystąpieniu awarii uruchom [skrypt DisableDumps PowerShell:](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/host-and-deploy/windows-service/scripts/DisableDumps.ps1)
+1. Po wystąpieniu awarii Uruchom [skrypt programu DisableDumps PowerShell](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/host-and-deploy/windows-service/scripts/DisableDumps.ps1):
 
    ```console
    .\DisableDumps {APPLICATION EXE}
    ```
 
-Po awarii aplikacji i kolekcji zrzutu jest zakończona, aplikacja może zakończyć się normalnie. Skrypt programu PowerShell konfiguruje program WER do zbierania maksymalnie pięciu zrzutów na aplikację.
+Po awarii aplikacji i zakończeniu zbierania zrzutów aplikacja może zakończyć normalne działanie. Skrypt programu PowerShell konfiguruje raportowanie błędów systemu Windows w celu zebrania do pięciu zrzutów na aplikację.
 
 > [!WARNING]
-> Zrzuty awaryjne mogą zająć dużą ilość miejsca na dysku (do kilku gigabajtów).
+> Zrzuty awaryjne mogą wymagać dużej ilości miejsca na dysku (do kilku gigabajtów).
 
 #### <a name="app-hangs-fails-during-startup-or-runs-normally"></a>Aplikacja zawiesza się, kończy się niepowodzeniem podczas uruchamiania lub działa normalnie
 
-Gdy aplikacja *zawiesza* się (przestaje odpowiadać, ale nie ulega awarii), kończy się niepowodzeniem podczas uruchamiania lub działa normalnie, zobacz [Pliki zrzutu w trybie użytkownika: Wybieranie najlepszego narzędzia,](/windows-hardware/drivers/debugger/user-mode-dump-files#choosing-the-best-tool) aby wybrać odpowiednie narzędzie do produkcji zrzutu.
+Gdy aplikacja *zawiesza* się (bez awarii), kończy się niepowodzeniem podczas uruchamiania lub działa normalnie, zobacz [pliki zrzutu w trybie użytkownika: wybór najlepszego narzędzia](/windows-hardware/drivers/debugger/user-mode-dump-files#choosing-the-best-tool) do wygenerowania zrzutu.
 
 #### <a name="analyze-the-dump"></a>Analizowanie zrzutu
 
@@ -1004,7 +1010,7 @@ Zrzut można analizować przy użyciu kilku metod. Aby uzyskać więcej informac
 
 ## <a name="additional-resources"></a>Zasoby dodatkowe
 
-* [Konfiguracja punktu końcowego pustułka](xref:fundamentals/servers/kestrel#endpoint-configuration) (obejmuje konfigurację HTTPS i obsługę SNI)
+* [Konfiguracja punktu końcowego Kestrel](xref:fundamentals/servers/kestrel#endpoint-configuration) (w tym Konfiguracja protokołu HTTPS i obsługa SNI)
 * <xref:fundamentals/host/web-host>
 * <xref:test/troubleshoot>
 

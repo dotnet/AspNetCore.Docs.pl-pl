@@ -1,71 +1,77 @@
 ---
-title: Żądaj funkcji w ASP.NET Core
+title: Zażądaj funkcji w ASP.NET Core
 author: ardalis
-description: Dowiedz się więcej o szczegółach implementacji serwera sieci Web związanych z żądaniami HTTP i odpowiedziami zdefiniowanymi w interfejsach dla ASP.NET Core.
+description: Dowiedz się więcej na temat szczegółów implementacji serwera sieci Web związanych z żądaniami HTTP i odpowiedziami, które są zdefiniowane w interfejsach dla ASP.NET Core.
 ms.author: riande
 ms.date: 10/14/2016
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: fundamentals/request-features
-ms.openlocfilehash: d0f3ae521d1f314dd04cb581d9a921da4719273d
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: e26a1a7b35d40c1214bbc40269571545cbd2c235
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "79416227"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776028"
 ---
-# <a name="request-features-in-aspnet-core"></a>Żądaj funkcji w ASP.NET Core
+# <a name="request-features-in-aspnet-core"></a>Zażądaj funkcji w ASP.NET Core
 
 Przez [Steve Smith](https://ardalis.com/)
 
-Szczegóły implementacji serwera sieci Web związane z żądaniami i odpowiedziami HTTP są definiowane w interfejsach. Interfejsy te są używane przez implementacje serwera i oprogramowanie pośredniczące do tworzenia i modyfikowania potoku hostingu aplikacji.
+Szczegóły implementacji serwera sieci Web związane z żądaniami HTTP i odpowiedziami są zdefiniowane w interfejsach. Te interfejsy są używane przez implementacje serwera i oprogramowanie pośredniczące do tworzenia i modyfikowania potoku hostingu aplikacji.
 
 ## <a name="feature-interfaces"></a>Interfejsy funkcji
 
-ASP.NET Core definiuje szereg interfejsów funkcji HTTP, w `Microsoft.AspNetCore.Http.Features` których są używane przez serwery do identyfikowania obsługiwanych przez nie funkcji. Następujące interfejsy funkcji obsługują żądania i zwracaj odpowiedzi:
+ASP.NET Core definiuje wiele interfejsów funkcji HTTP `Microsoft.AspNetCore.Http.Features` , które są używane przez serwery do identyfikowania obsługiwanych funkcji. Poniższe interfejsy funkcji obsługują żądania i zwracają odpowiedzi:
 
-`IHttpRequestFeature`Definiuje strukturę żądania HTTP, w tym protokołu, ścieżki, ciągu zapytania, nagłówków i treści.
+`IHttpRequestFeature`Definiuje strukturę żądania HTTP, łącznie z protokołem, ścieżką, ciągiem zapytania, nagłówkami i treścią.
 
 `IHttpResponseFeature`Definiuje strukturę odpowiedzi HTTP, w tym kod stanu, nagłówki i treść odpowiedzi.
 
-`IHttpAuthenticationFeature`Definiuje obsługę identyfikowania użytkowników `ClaimsPrincipal` na podstawie i określania obsługi uwierzytelniania.
+`IHttpAuthenticationFeature`Definiuje obsługę identyfikacji użytkowników na podstawie `ClaimsPrincipal` i określania procedury obsługi uwierzytelniania.
 
-`IHttpUpgradeFeature`Definiuje obsługę [uaktualnień HTTP,](https://tools.ietf.org/html/rfc2616.html#section-14.42)które umożliwiają klientowi określenie, które dodatkowe protokoły, których chciałby użyć, jeśli serwer chce przełączać protokoły.
+`IHttpUpgradeFeature`Definiuje obsługę [uaktualnień http](https://tools.ietf.org/html/rfc2616.html#section-14.42), które umożliwiają klientowi określenie dodatkowych protokołów, które mają być używane, jeśli serwer chce przełączyć protokoły.
 
-`IHttpBufferingFeature`Definiuje metody wyłączania buforowania żądań i/lub odpowiedzi.
+`IHttpBufferingFeature`Definiuje metody służące do wyłączania buforowania żądań i/lub odpowiedzi.
 
-`IHttpConnectionFeature`Definiuje właściwości dla adresów i portów lokalnych i zdalnych.
+`IHttpConnectionFeature`Definiuje właściwości adresów i portów lokalnych i zdalnych.
 
-`IHttpRequestLifetimeFeature`Definiuje obsługę przerywania połączeń lub wykrywania, czy żądanie zostało zakończone przedwcześnie, na przykład przez rozłączenie klienta.
+`IHttpRequestLifetimeFeature`Definiuje obsługę przerywania połączeń lub wykrywanie, czy żądanie zostało zakończone przedwcześnie, na przykład przez odłączenie klienta.
 
-`IHttpSendFileFeature`Definiuje metodę asynchronicznie wysyłania plików.
+`IHttpSendFileFeature`Definiuje metodę asynchronicznego wysyłania plików.
 
-`IHttpWebSocketFeature`Definiuje interfejs API do obsługi gniazd internetowych.
+`IHttpWebSocketFeature`Definiuje interfejs API do obsługi gniazd sieci Web.
 
-`IHttpRequestIdentifierFeature`Dodaje właściwość, która może być zaimplementowana do jednoznacznej identyfikacji żądań.
+`IHttpRequestIdentifierFeature`Dodaje właściwość, która może zostać zaimplementowana w celu jednoznacznego identyfikowania żądań.
 
-`ISessionFeature`Definiuje `ISessionFactory` i `ISession` abstrakcje do obsługi sesji użytkownika.
+`ISessionFeature`Definiuje `ISessionFactory` i `ISession` abstrakcje dla pomocniczych sesji użytkowników.
 
-`ITlsConnectionFeature`Definiuje interfejs API do pobierania certyfikatów klientów.
+`ITlsConnectionFeature`Definiuje interfejs API do pobierania certyfikatów klienta.
 
-`ITlsTokenBindingFeature`Definiuje metody pracy z parametrami wiązania tokenu TLS.
+`ITlsTokenBindingFeature`Definiuje metody pracy z parametrami powiązania tokenu TLS.
 
 > [!NOTE]
-> `ISessionFeature`nie jest funkcją serwera, ale jest `SessionMiddleware` implementowana przez (zobacz [Zarządzanie stanem aplikacji](app-state.md)).
+> `ISessionFeature`nie jest funkcją serwera, ale jest zaimplementowana `SessionMiddleware` przez program (zobacz [Zarządzanie stanem aplikacji](app-state.md)).
 
 ## <a name="feature-collections"></a>Kolekcje funkcji
 
-Właściwość `Features` `HttpContext` udostępnia interfejs do uzyskiwania i ustawiania dostępnych funkcji HTTP dla bieżącego żądania. Ponieważ kolekcja funkcji jest modyfikowalna nawet w kontekście żądania, oprogramowanie pośredniczące może służyć do modyfikowania kolekcji i dodawania obsługi dodatkowych funkcji.
+`Features` Właściwość `HttpContext` zawiera interfejs do pobierania i ustawiania dostępnych funkcji http dla bieżącego żądania. Ponieważ kolekcja funkcji jest modyfikowalna nawet w kontekście żądania, oprogramowanie pośredniczące może służyć do modyfikowania kolekcji i dodawania obsługi dodatkowych funkcji.
 
 ## <a name="middleware-and-request-features"></a>Oprogramowanie pośredniczące i funkcje żądania
 
-Podczas gdy serwery są odpowiedzialne za tworzenie kolekcji funkcji, oprogramowanie pośredniczące można zarówno dodać do tej kolekcji i zużywają funkcje z kolekcji. Na przykład `StaticFileMiddleware` uzyskuje dostęp `IHttpSendFileFeature` do funkcji. Jeśli funkcja istnieje, jest używana do wysyłania żądanego pliku statycznego ze ścieżki fizycznej. W przeciwnym razie do wysyłania pliku używana jest wolniejsza metoda alternatywna. Jeśli jest `IHttpSendFileFeature` to możliwe, system operacyjny może otworzyć plik i wykonać bezpośrednią kopię w trybie jądra na kartę sieciową.
+Chociaż serwery są odpowiedzialne za tworzenie kolekcji funkcji, oprogramowanie pośredniczące może dodawać do tej kolekcji i korzystać z funkcji z kolekcji. Na przykład `StaticFileMiddleware` program uzyskuje dostęp do `IHttpSendFileFeature` funkcji. Jeśli ta funkcja istnieje, jest używana do wysyłania żądanego pliku statycznego ze ścieżki fizycznej. W przeciwnym razie do wysłania pliku zostanie użyta mniejsza Metoda alternatywna. Jeśli jest `IHttpSendFileFeature` dostępna, umożliwia systemowi operacyjnemu otwarcie pliku i przeprowadzenie bezpośredniego kopiowania trybu jądra na kartę sieciową.
 
-Ponadto oprogramowanie pośredniczące można dodać do kolekcji funkcji ustanowionych przez serwer. Istniejące funkcje można nawet zastąpić oprogramowaniem pośredniczącym, dzięki czemu oprogramowanie pośredniczące rozszerza funkcjonalność serwera. Funkcje dodane do kolekcji są natychmiast dostępne dla innego oprogramowania pośredniczącego lub podstawowej aplikacji się później w potoku żądania.
+Ponadto oprogramowanie pośredniczące może dodać do kolekcji funkcji ustanowionej przez serwer. Istniejące funkcje mogą być nawet zastępowane przez oprogramowanie pośredniczące, co pozwala oprogramowaniu pośredniczącemu rozszerzyć funkcjonalność serwera. Funkcje dodane do kolekcji są natychmiast dostępne dla innych programów pośredniczących lub aplikacji bazowej w późniejszym czasie w potoku żądania.
 
-Łącząc implementacje serwerów niestandardowych i określone ulepszenia oprogramowania pośredniczącego, można utworzyć dokładny zestaw funkcji, które wymaga aplikacja. Dzięki temu brakujące funkcje mogą być dodawane bez konieczności zmiany serwera i zapewnia tylko minimalną ilość funkcji są widoczne, co ogranicza obszar ataku i zwiększenie wydajności.
+Łącząc niestandardowe implementacje serwera i konkretne udoskonalenia oprogramowania pośredniczącego, można utworzyć precyzyjny zestaw funkcji wymaganych przez aplikację. Pozwala to na dodanie brakujących funkcji bez konieczności zmiany na serwerze i gwarantuje, że dostępna jest tylko minimalna liczba funkcji, co ogranicza obszar narażony na ataki i zwiększa wydajność.
 
 ## <a name="summary"></a>Podsumowanie
 
-Interfejsy funkcji definiują określone funkcje HTTP, które mogą obsługiwać dane żądanie. Serwery definiują kolekcje funkcji i początkowy zestaw funkcji obsługiwanych przez ten serwer, ale oprogramowanie pośredniczące może służyć do ulepszania tych funkcji.
+Interfejsy funkcji definiują określone funkcje HTTP, które mogą być obsługiwane przez dane żądanie. Serwery definiują kolekcje funkcji i początkowy zestaw funkcji obsługiwanych przez ten serwer, ale oprogramowanie pośredniczące może służyć do ulepszania tych funkcji.
 
 ## <a name="additional-resources"></a>Zasoby dodatkowe
 

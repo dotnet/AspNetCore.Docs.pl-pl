@@ -1,20 +1,24 @@
 ---
 title: ASP.NET Core SignalR hosting i skalowanie produkcji
 author: bradygaster
-description: Dowiedz się, jak uniknąć problemów z wydajnością i skalowaniem w aplikacjach korzystających z ASP.NET Core SignalR.
+description: Dowiedz się, jak uniknąć problemów z wydajnością i skalowaniem w SignalRaplikacjach korzystających z ASP.NET Core.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
 ms.date: 01/17/2020
 no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: signalr/scale
-ms.openlocfilehash: 260e2f0c16288fec2e0a694d070f357529782d8d
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 23ac2b1c80b9d73d6e9ac57f0ef774ac2ea54be4
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78668155"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775079"
 ---
 # <a name="aspnet-core-signalr-hosting-and-scaling"></a>ASP.NET Core hosting i skalowanie sygnałów
 
@@ -32,7 +36,7 @@ Sygnalizujący wymaga, aby wszystkie żądania HTTP dotyczące określonego poł
 
 We wszystkich innych przypadkach (w tym gdy jest używany plan Redis), środowisko serwera musi być skonfigurowane dla sesji programu Sticky Notes.
 
-Aby uzyskać wskazówki dotyczące konfigurowania Azure App Service dla sygnalizacji, zobacz <xref:signalr/publish-to-azure-web-app>.
+Aby uzyskać wskazówki dotyczące konfigurowania Azure App Service dla sygnalizacji, <xref:signalr/publish-to-azure-web-app>Zobacz.
 
 ## <a name="tcp-connection-resources"></a>Zasoby połączenia TCP
 
@@ -42,7 +46,7 @@ Połączenia trwałe zużywają także dodatkową pamięć, aby śledzić każde
 
 Duże wykorzystanie zasobów związanych z połączeniami przez sygnalizującego może mieć wpływ na inne aplikacje sieci Web, które są hostowane na tym samym serwerze. Gdy sygnalizujący otwiera i przechowuje ostatnie dostępne połączenia TCP, inne aplikacje sieci Web na tym samym serwerze również nie będą miały dostępnych dodatkowych połączeń.
 
-Jeśli na serwerze wykorzystano połączenia, zobaczysz losowe błędy gniazda i błędy resetowania połączenia. Na przykład:
+Jeśli na serwerze wykorzystano połączenia, zobaczysz losowe błędy gniazda i błędy resetowania połączenia. Przykład:
 
 ```
 An attempt was made to access a socket in a way forbidden by its access permissions...
@@ -94,12 +98,12 @@ Zalety usługi Azure Signal Service zanotowane wcześniej są wadą dla Redisego
   * Wszyscy klienci są skonfigurowani do korzystania **tylko** z obiektów WebSockets.
   * [Ustawienie SkipNegotiation](xref:signalr/configuration#configure-additional-options) jest włączone w konfiguracji klienta. 
    Po zainicjowaniu połączenia na serwerze połączenie musi pozostać na tym serwerze.
-* Aplikacja SignalR musi być skalowana w poziomie na podstawie liczby klientów, nawet jeśli jest wysyłanych kilka komunikatów.
-* Aplikacja SignalR używa znacznie większej liczby zasobów połączenia niż aplikacja internetowa bez SignalR.
+* SignalR Aplikacja musi być skalowana w poziomie na podstawie liczby klientów, nawet jeśli jest wysyłanych kilka komunikatów.
+* SignalR Aplikacja używa znacznie większej liczby zasobów połączenia niż aplikacja internetowa bez SignalR.
 
 ## <a name="iis-limitations-on-windows-client-os"></a>Ograniczenia usług IIS w systemie operacyjnym Windows Client
 
-Windows 10 i Windows 8. x są systemami operacyjnymi klienta. Program IIS w systemach operacyjnych klienta ma limit 10 współbieżnych połączeń. połączenia SignalRsą następujące:
+Windows 10 i Windows 8. x są systemami operacyjnymi klienta. Program IIS w systemach operacyjnych klienta ma limit 10 współbieżnych połączeń. SignalRpołączenia:
 
 * Przejściowe i często ponownie nawiązane.
 * **Nie** usunięto natychmiast, gdy nie jest już używane.
@@ -111,7 +115,7 @@ Powyższe warunki mogą spowodować osiągnięcie 10 limitów połączeń w syst
 
 ## <a name="linux-with-nginx"></a>System Linux z serwerem Nginx
 
-Ustaw `Connection` i nagłówki `Upgrade` serwera proxy na następujące dla SignalRych obiektów WebSockets:
+Ustaw następujące elementy `Connection` i `Upgrade` nagłówki serwera proxy dla SignalR obiektów WebSockets:
 
 ```nginx
 proxy_set_header Upgrade $http_upgrade;
@@ -120,7 +124,7 @@ proxy_set_header Connection $connection_upgrade;
 
 Aby uzyskać więcej informacji, zobacz [Nginx jako proxy protokołu WebSocket](https://www.nginx.com/blog/websocket-nginx/).
 
-## <a name="third-party-opno-locsignalr-backplane-providers"></a>Dostawcy rozwiązań dla SignalR innych firm
+## <a name="third-party-signalr-backplane-providers"></a>SignalR Dostawcy rozwiązań innych firm
 
 * [NCache](https://www.alachisoft.com/ncache/asp-net-core-signalr.html)
 * [Orleans](https://github.com/OrleansContrib/SignalR.Orleans)
@@ -129,5 +133,5 @@ Aby uzyskać więcej informacji, zobacz [Nginx jako proxy protokołu WebSocket](
 
 Więcej informacji zawierają następujące zasoby:
 
-* [Dokumentacja usługi Azure SignalR](/azure/azure-signalr/signalr-overview)
+* [Dokumentacja SignalR usługi platformy Azure](/azure/azure-signalr/signalr-overview)
 * [Konfigurowanie planu Redis](xref:signalr/redis-backplane)

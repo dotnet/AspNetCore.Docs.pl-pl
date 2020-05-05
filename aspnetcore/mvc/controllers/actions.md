@@ -4,13 +4,19 @@ author: ardalis
 description: ''
 ms.author: riande
 ms.date: 12/05/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/controllers/actions
-ms.openlocfilehash: 715a73863513870d1cbd522e75013d41830da1e7
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: b7c4d61c4a71939e84bdea180a2f77b6438b15d5
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78662793"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774200"
 ---
 # <a name="handle-requests-with-controllers-in-aspnet-core-mvc"></a>Obsługa żądań z kontrolerami w ASP.NET Core MVC
 
@@ -25,15 +31,15 @@ Kontroler służy do definiowania i grupowania zestawu akcji. Akcja (lub *Metoda
 Według Konwencji, klasy kontrolera:
 
 * Znajduje się w folderze głównych *kontrolerów* poziomu projektu.
-* Dziedzicz po `Microsoft.AspNetCore.Mvc.Controller`.
+* Dziedzicz od `Microsoft.AspNetCore.Mvc.Controller`.
 
 Kontroler jest klasą instantiable, w której spełniony jest co najmniej jeden z następujących warunków:
 
 * Nazwa klasy jest sufiksem `Controller`.
 * Klasa dziedziczy z klasy, której nazwa jest sufiksem `Controller`.
-* Atrybut `[Controller]` jest stosowany do klasy.
+* Ten `[Controller]` atrybut jest stosowany do klasy.
 
-Klasa kontrolera nie może mieć skojarzonego atrybutu `[NonController]`.
+Klasa kontrolera nie może mieć skojarzonego `[NonController]` atrybutu.
 
 Kontrolery powinny przestrzegać [zasad jawnych zależności](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies). Istnieje kilka podejścia do implementowania tej zasady. Jeśli wiele akcji kontrolera wymaga tej samej usługi, rozważ użycie [iniekcji konstruktora](xref:mvc/controllers/dependency-injection#constructor-injection) , aby zażądać tych zależności. Jeśli usługa jest wymagana tylko przez pojedynczą metodę akcji, należy rozważyć użycie [iniekcji akcji](xref:mvc/controllers/dependency-injection#action-injection-with-fromservices) , aby zażądać zależności.
 
@@ -45,53 +51,53 @@ Kontroler jest abstrakcją *poziomu interfejsu użytkownika* . Celem jest zapewn
 
 ## <a name="defining-actions"></a>Definiowanie akcji
 
-Metody publiczne na kontrolerze, z wyjątkiem tych z atrybutem `[NonAction]`, to akcje. Parametry w akcjach są powiązane z danymi żądania i są weryfikowane przy użyciu [powiązania modelu](xref:mvc/models/model-binding). Walidacja modelu odbywa się dla wszystkich elementów, które są powiązane z modelem. Wartość właściwości `ModelState.IsValid` wskazuje, czy powiązanie modelu i walidacja zakończyły się powodzeniem.
+Metody publiczne na kontrolerze, z wyjątkiem tych z `[NonAction]` atrybutem, są akcjami. Parametry w akcjach są powiązane z danymi żądania i są weryfikowane przy użyciu [powiązania modelu](xref:mvc/models/model-binding). Walidacja modelu odbywa się dla wszystkich elementów, które są powiązane z modelem. Wartość `ModelState.IsValid` właściwości wskazuje, czy powiązanie modelu i walidacja zakończyły się powodzeniem.
 
 Metody akcji powinny zawierać logikę mapowania żądania do zagadnienia biznesowego. Kwestie biznesowe powinny być zwykle reprezentowane jako usługi, do których kontroler uzyskuje dostęp poprzez [iniekcję zależności](xref:mvc/controllers/dependency-injection). Następnie akcje mapują wynik akcji biznesowej do stanu aplikacji.
 
-Akcje mogą zwracać wszystko, ale często zwracają wystąpienie `IActionResult` (lub `Task<IActionResult>` metod asynchronicznych), które generują odpowiedź. Metoda akcji jest odpowiedzialna za wybór *rodzaju odpowiedzi*. Wynik akcji *wykonuje odpowiedź*.
+Akcje mogą zwracać wszystko, ale często zwracają wystąpienie `IActionResult` (lub `Task<IActionResult>` dla metod asynchronicznych), które generuje odpowiedź. Metoda akcji jest odpowiedzialna za wybór *rodzaju odpowiedzi*. Wynik akcji *wykonuje odpowiedź*.
 
 ### <a name="controller-helper-methods"></a>Metody pomocnika kontrolera
 
-Kontrolery zwykle dziedziczą z [kontrolera](/dotnet/api/microsoft.aspnetcore.mvc.controller), chociaż nie jest to wymagane. Wyprowadzanie z `Controller` zapewnia dostęp do trzech kategorii metod pomocnika:
+Kontrolery zwykle dziedziczą z [kontrolera](/dotnet/api/microsoft.aspnetcore.mvc.controller), chociaż nie jest to wymagane. Wyprowadzanie z `Controller` programu zapewnia dostęp do trzech kategorii metod pomocnika:
 
 #### <a name="1-methods-resulting-in-an-empty-response-body"></a>1. metody z wynikiem pustej treści odpowiedzi
 
-Brak nagłówka odpowiedzi HTTP `Content-Type`, ponieważ treść odpowiedzi nie zawiera zawartości do opisania.
+Brak `Content-Type` nagłówka odpowiedzi HTTP, ponieważ treść odpowiedzi nie zawiera treści do opisania.
 
 W tej kategorii istnieją dwa typy wyników: redirect i kod stanu HTTP.
 
 * **Kod stanu HTTP**
 
-    Ten typ zwraca kod stanu HTTP. Kilka metod pomocnika tego typu jest `BadRequest`, `NotFound`i `Ok`. Na przykład `return BadRequest();` generuje kod stanu 400 po wykonaniu. Gdy metody takie jak `BadRequest`, `NotFound`i `Ok` są przeciążone, nie kwalifikują się do nich jako obiekty odpowiadające kodów stanu HTTP, ponieważ odbywa się negocjowanie zawartości.
+    Ten typ zwraca kod stanu HTTP. Kilka metod pomocnika tego typu to `BadRequest`, `NotFound`, i. `Ok` Na przykład program `return BadRequest();` generuje kod stanu 400 po wykonaniu. Gdy metody takie jak `BadRequest`, `NotFound`i `Ok` są przeciążone, nie kwalifikują się do odpowiedzi na kod stanu HTTP, ponieważ odbywa się negocjowanie zawartości.
 
-* **Przekierowania**
+* **Przekierowanie**
 
-    Ten typ zwraca przekierowanie do akcji lub lokalizacji docelowej (przy użyciu `Redirect`, `LocalRedirect`, `RedirectToAction`lub `RedirectToRoute`). Na przykład `return RedirectToAction("Complete", new {id = 123});` przekieruje do `Complete`, przekazując obiekt anonimowy.
+    Ten typ zwraca przekierowanie do akcji lub lokalizacji docelowej (przy użyciu `Redirect`, `LocalRedirect`, `RedirectToAction`lub `RedirectToRoute`). Na przykład `return RedirectToAction("Complete", new {id = 123});` przekierowuje do `Complete`, przekazując obiekt anonimowy.
 
-    Typ wyniku przekierowania różni się od typu kodu stanu HTTP przede wszystkim przy dodawaniu `Location` nagłówku odpowiedzi HTTP.
+    Typ wyniku przekierowania różni się od typu kodu stanu HTTP przede wszystkim przy dodawaniu `Location` nagłówka odpowiedzi HTTP.
 
 #### <a name="2-methods-resulting-in-a-non-empty-response-body-with-a-predefined-content-type"></a>2. metody, które w wyniku niepustej treści odpowiedzi ze wstępnie zdefiniowanym typem zawartości
 
-Większość metod pomocniczych w tej kategorii zawiera właściwość `ContentType`, co pozwala na ustawienie nagłówka odpowiedzi `Content-Type` w celu opisania treści odpowiedzi.
+Większość metod pomocniczych w tej kategorii zawiera `ContentType` właściwość, co pozwala na określenie nagłówka `Content-Type` odpowiedzi opisującego treść odpowiedzi.
 
 W tej kategorii istnieją dwa typy wyników: [Wyświetl](xref:mvc/views/overview) i [sformatowaną odpowiedź](xref:web-api/advanced/formatting).
 
-* **Widokiem**
+* **Widok**
 
     Ten typ zwraca widok, który używa modelu do renderowania kodu HTML. Na przykład `return View(customer);` przekazuje model do widoku dla powiązania danych.
 
 * **Sformatowana odpowiedź**
 
-    Ten typ zwraca kod JSON lub podobny format wymiany danych, aby reprezentować obiekt w określony sposób. Na przykład `return Json(customer);` serializować podanego obiektu w formacie JSON.
+    Ten typ zwraca kod JSON lub podobny format wymiany danych, aby reprezentować obiekt w określony sposób. Na przykład `return Json(customer);` Serializacja podanego obiektu w formacie JSON.
     
-    Inne popularne metody tego typu obejmują `File` i `PhysicalFile`. Na przykład `return PhysicalFile(customerFilePath, "text/xml");` zwraca [PhysicalFileResult](/dotnet/api/microsoft.aspnetcore.mvc.physicalfileresult).
+    Inne popularne metody tego typu obejmują `File` i. `PhysicalFile` Na przykład `return PhysicalFile(customerFilePath, "text/xml");` zwraca [PhysicalFileResult](/dotnet/api/microsoft.aspnetcore.mvc.physicalfileresult).
 
 #### <a name="3-methods-resulting-in-a-non-empty-response-body-formatted-in-a-content-type-negotiated-with-the-client"></a>3. metody powodujące niepustą treść odpowiedzi sformatowaną w typie zawartości negocjowanej z klientem
 
-Ta kategoria jest lepiej znana jako **negocjowanie zawartości**. [Negocjowanie zawartości](xref:web-api/advanced/formatting#content-negotiation) ma zastosowanie zawsze, gdy akcja zwraca typ [ObjectResult](/dotnet/api/microsoft.aspnetcore.mvc.objectresult) lub coś innego niż implementacja [IActionResult](/dotnet/api/microsoft.aspnetcore.mvc.iactionresult) . Akcja zwracająca implementację nie`IActionResult`ną (na przykład `object`) zwraca również sformatowaną odpowiedź.
+Ta kategoria jest lepiej znana jako **negocjowanie zawartości**. [Negocjowanie zawartości](xref:web-api/advanced/formatting#content-negotiation) ma zastosowanie zawsze, gdy akcja zwraca typ [ObjectResult](/dotnet/api/microsoft.aspnetcore.mvc.objectresult) lub coś innego niż implementacja [IActionResult](/dotnet/api/microsoft.aspnetcore.mvc.iactionresult) . Akcja zwracająca brak`IActionResult` implementacji (na przykład `object`) zwraca również sformatowaną odpowiedź.
 
-Niektóre metody pomocnika tego typu obejmują `BadRequest`, `CreatedAtRoute`i `Ok`. Przykłady tych metod obejmują odpowiednio `return BadRequest(modelState);`, `return CreatedAtRoute("routename", values, newobject);`i `return Ok(value);`. Należy pamiętać, że `BadRequest` i `Ok` przeprowadzać negocjacje zawartości tylko wtedy, gdy przekazały wartość; bez przekazywania wartości, zamiast tego jako typy wyników kodu stanu HTTP. Metoda `CreatedAtRoute`, z drugiej strony, zawsze wykonuje negocjację zawartości, ponieważ jej przeciążenia wymagają, aby wartość została przekazana.
+Niektóre metody pomocnika tego typu obejmują `BadRequest`, `CreatedAtRoute`, i `Ok`. Przykłady tych metod obejmują `return BadRequest(modelState);`odpowiednio, `return CreatedAtRoute("routename", values, newobject);`i. `return Ok(value);` Należy pamiętać `BadRequest` , `Ok` że i przeprowadzenie negocjacji zawartości tylko w przypadku przekazania wartości; bez przekazywania wartości, zamiast tego jako typy wyników kodu stanu HTTP. Z `CreatedAtRoute` drugiej strony Metoda zawsze wykonuje negocjację zawartości, ponieważ jej przeciążenia wymagają, aby wartość została przekazana.
 
 ### <a name="cross-cutting-concerns"></a>Zagadnienia dotyczące wycinania
 

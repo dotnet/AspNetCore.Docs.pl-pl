@@ -8,14 +8,17 @@ ms.custom: mvc
 ms.date: 03/31/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: 48f5b09199091b2b55974010a2b0715c28eb1bae
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: 524fd015278d1a5f784fa306f077d06b865201c4
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82205972"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82772090"
 ---
 # <a name="aspnet-core-blazor-hosting-models"></a>ASP.NET Core Blazor modele hostingu
 
@@ -94,9 +97,9 @@ Model Blazor aplikacji serwera obsługuje [kontenery platformy Docker](/dotnet/s
 
 ### <a name="comparison-to-server-rendered-ui"></a>Porównanie z renderowanym przez serwer interfejsem użytkownika
 
-Jednym ze sposobów zrozumienia Blazor aplikacji serwerowych jest zrozumienie, jak różni się od tradycyjnych modeli służących do renderowania interfejsu użytkownika w aplikacjach ASP.NET Core przy użyciu widoków Razor lub Razor Pages. Oba modele używają języka Razor do opisywania zawartości HTML, ale znacząco różnią się sposobem renderowania znaczników.
+Jednym ze sposobów zrozumienia Blazor aplikacji serwerowych jest zrozumienie, jak różni się od tradycyjnych modeli służących do renderowania interfejsu użytkownika Razor w aplikacjach Razor ASP.NET Core przy użyciu widoków lub stron. Oba modele używają Razor języka do opisywania zawartości HTML, ale znacząco różnią się sposobem renderowania znaczników.
 
-Gdy strona Razor lub widok jest renderowany, każdy wiersz kodu Razor emituje kod HTML w postaci tekstowej. Po wyrenderowaniu serwer usuwa wystąpienie strony lub widoku, w tym dowolny utworzony stan. Gdy występuje inne żądanie dotyczące strony, na przykład w przypadku niepowodzenia walidacji serwera i wyświetlenia podsumowania walidacji:
+Gdy Razor Strona lub widok jest renderowany, każdy wiersz Razor kodu emituje kod HTML w postaci tekstu. Po wyrenderowaniu serwer usuwa wystąpienie strony lub widoku, w tym dowolny utworzony stan. Gdy występuje inne żądanie dotyczące strony, na przykład w przypadku niepowodzenia walidacji serwera i wyświetlenia podsumowania walidacji:
 
 * Cała strona zostanie ponownie przerenderowana na tekst HTML.
 * Strona jest wysyłana do klienta.
@@ -106,7 +109,7 @@ Blazor Aplikacja składa się z elementów wielokrotnego użytku interfejsu uży
 * Włączono tekst HTML (podczas renderowania prerenderingu&dagger;).
 * Służy do wydajnej aktualizacji znaczników podczas normalnego renderowania.
 
-&dagger;Przed *renderowaniem* &ndash; żądany składnik Razor jest kompilowany na serwerze do statycznego kodu HTML i wysyłany do klienta, gdzie jest renderowany dla użytkownika. Po nawiązaniu połączenia między klientem a serwerem, statycznie renderowane elementy składnika są zastępowane elementami interaktywnymi. Renderowanie w czasie konwersji sprawia, że aplikacja będzie bardziej odpowiadać użytkownikowi.
+&dagger;Przed *renderowaniem* &ndash; żądany Razor składnik jest kompilowany na serwerze do statycznego kodu HTML i wysyłany do klienta, gdzie jest renderowany dla użytkownika. Po nawiązaniu połączenia między klientem a serwerem, statycznie renderowane elementy składnika są zastępowane elementami interaktywnymi. Renderowanie w czasie konwersji sprawia, że aplikacja będzie bardziej odpowiadać użytkownikowi.
 
 Aktualizacja interfejsu użytkownika w Blazor programie jest wyzwalana przez:
 
@@ -150,7 +153,7 @@ Zalecamy korzystanie z [usługi platformy SignalR Azure](/azure/azure-signalr) d
 
 W przypadku korzystania z usług IIS sesje programu Sticky są włączane przy użyciu routingu żądań aplikacji. Aby uzyskać więcej informacji, zobacz [równoważenie obciążenia HTTP przy użyciu routingu żądań aplikacji](/iis/extensions/configuring-application-request-routing-arr/http-load-balancing-using-application-request-routing).
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:blazor/get-started>
 * <xref:signalr/introduction>

@@ -5,17 +5,23 @@ description: Dowiedz się, jak skonfigurować uwierzytelnianie certyfikatów w A
 monikerRange: '>= aspnetcore-3.0'
 ms.author: bdorrans
 ms.date: 01/02/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authentication/certauth
-ms.openlocfilehash: 280daa86510d4445c791b6952653122961f13aeb
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 2cee719014d57fa01b5e8b14edd703c192cfbe18
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78665327"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776646"
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>Konfigurowanie uwierzytelniania certyfikatów w ASP.NET Core
 
-`Microsoft.AspNetCore.Authentication.Certificate` zawiera implementację podobną do [uwierzytelniania certyfikatu](https://tools.ietf.org/html/rfc5246#section-7.4.4) dla ASP.NET Core. Uwierzytelnianie certyfikatu odbywa się na poziomie protokołu TLS, o ile nie zostanie kiedykolwiek przeASP.NET Core. Dokładniej, jest to procedura obsługi uwierzytelniania, która sprawdza poprawność certyfikatu, a następnie przekazuje zdarzenie, w którym można rozwiązać ten certyfikat do `ClaimsPrincipal`. 
+`Microsoft.AspNetCore.Authentication.Certificate`zawiera implementację podobną do [uwierzytelniania certyfikatu](https://tools.ietf.org/html/rfc5246#section-7.4.4) dla ASP.NET Core. Uwierzytelnianie certyfikatu odbywa się na poziomie protokołu TLS, o ile nie zostanie kiedykolwiek przeASP.NET Core. Dokładniej, jest to procedura obsługi uwierzytelniania, która sprawdza poprawność certyfikatu, a następnie przekazuje zdarzenie, w którym można rozwiązać ten certyfikat do `ClaimsPrincipal`. 
 
 [Skonfiguruj hosta](#configure-your-host-to-require-certificates) na potrzeby uwierzytelniania certyfikatów, to usługi IIS, Kestrel, Azure Web Apps lub inne, z których korzystasz.
 
@@ -28,15 +34,15 @@ Uwierzytelnianie certyfikatu jest scenariuszem stanowym głównie używanym w pr
 
 Alternatywą dla uwierzytelniania certyfikatu w środowiskach, w których są używane serwery proxy i moduły równoważenia obciążenia, są Active Directory usług federacyjnych (AD FS) za pomocą OpenID Connect Connect (OIDC).
 
-## <a name="get-started"></a>Rozpoczynanie pracy
+## <a name="get-started"></a>Rozpoczęcie pracy
 
 Uzyskaj certyfikat HTTPS, zastosuj go i [skonfiguruj hosta](#configure-your-host-to-require-certificates) , aby wymagał certyfikatów.
 
-W aplikacji sieci Web Dodaj odwołanie do pakietu `Microsoft.AspNetCore.Authentication.Certificate`. Następnie w metodzie `Startup.ConfigureServices` Wywołaj `services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate(...);` z opcjami, podając delegata `OnCertificateValidated` w celu przeprowadzenia wszelkich dodatkowych weryfikacji w certyfikacie klienta wysłanym z żądaniami. Przełączaj te informacje do `ClaimsPrincipal` i ustaw je na właściwości `context.Principal`.
+W aplikacji sieci Web Dodaj odwołanie do `Microsoft.AspNetCore.Authentication.Certificate` pakietu. Następnie w `Startup.ConfigureServices` metodzie Zadzwoń `services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate(...);` z własnymi opcjami, podając delegata w `OnCertificateValidated` celu wykonania dodatkowej weryfikacji dla certyfikatu klienta wysyłanego z żądaniami. Zmień te informacje na `ClaimsPrincipal` i ustaw dla `context.Principal` właściwości.
 
-Jeśli uwierzytelnianie nie powiedzie się, ta procedura obsługi zwróci odpowiedź `403 (Forbidden)`, a nie `401 (Unauthorized)`, zgodnie z oczekiwaniami. Powodem jest to, że uwierzytelnianie powinno nastąpić podczas początkowego połączenia TLS. Przez czas, gdy dociera do programu obsługi, jest zbyt opóźniony. Nie ma możliwości uaktualnienia połączenia z anonimowego połączenia z certyfikatem.
+Jeśli uwierzytelnianie nie powiedzie się, ta `403 (Forbidden)` procedura obsługi zwróci `401 (Unauthorized)`odpowiedź zamiast elementu, zgodnie z oczekiwaniami. Powodem jest to, że uwierzytelnianie powinno nastąpić podczas początkowego połączenia TLS. Przez czas, gdy dociera do programu obsługi, jest zbyt opóźniony. Nie ma możliwości uaktualnienia połączenia z anonimowego połączenia z certyfikatem.
 
-Dodaj również `app.UseAuthentication();` w metodzie `Startup.Configure`. W przeciwnym razie `HttpContext.User` nie zostanie ustawiona na `ClaimsPrincipal` utworzone na podstawie certyfikatu. Na przykład:
+Dodaj `app.UseAuthentication();` również `Startup.Configure` metodę. W przeciwnym razie `HttpContext.User` nie zostanie ustawiona jako utworzona `ClaimsPrincipal` na podstawie certyfikatu. Przykład:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -59,29 +65,29 @@ W powyższym przykładzie przedstawiono domyślny sposób dodawania uwierzytelni
 
 ## <a name="configure-certificate-validation"></a>Konfigurowanie weryfikacji certyfikatu
 
-Procedura obsługi `CertificateAuthenticationOptions` ma pewne wbudowane walidacje, które są minimalnymi walidacjami, które należy wykonać na certyfikacie. Każdy z tych ustawień jest domyślnie włączony.
+`CertificateAuthenticationOptions` Program obsługi ma pewne wbudowane walidacje, które są minimalnymi walidacjami, które należy wykonać na certyfikacie. Każdy z tych ustawień jest domyślnie włączony.
 
 ### <a name="allowedcertificatetypes--chained-selfsigned-or-all-chained--selfsigned"></a>AllowedCertificateTypes = łańcuchy, SelfSigned lub wszystkie (łańcuchowo | SelfSigned)
 
-Wartość domyślna: `CertificateTypes.Chained`
+Wartość domyślna:`CertificateTypes.Chained`
 
-Ten test sprawdza, czy dozwolony jest tylko odpowiedni typ certyfikatu. Jeśli aplikacja korzysta z certyfikatów z podpisem własnym, ta opcja musi być ustawiona na `CertificateTypes.All` lub `CertificateTypes.SelfSigned`.
+Ten test sprawdza, czy dozwolony jest tylko odpowiedni typ certyfikatu. Jeśli aplikacja korzysta z certyfikatów z podpisem własnym, ta opcja musi być ustawiona na `CertificateTypes.All` lub. `CertificateTypes.SelfSigned`
 
 ### <a name="validatecertificateuse"></a>ValidateCertificateUse
 
-Wartość domyślna: `true`
+Wartość domyślna:`true`
 
 Ten test sprawdza, czy certyfikat przedstawiony przez klienta ma rozszerzone użycie klucza uwierzytelniania klienta (EKU) lub nie rozszerzeń EKU w ogóle. Zgodnie ze specyfikacją, jeśli nie określono rozszerzenia EKU, wszystkie rozszerzeń EKU są uznawane za prawidłowe.
 
 ### <a name="validatevalidityperiod"></a>ValidateValidityPeriod
 
-Wartość domyślna: `true`
+Wartość domyślna:`true`
 
 Ten test sprawdza, czy certyfikat jest w jego okresie ważności. W przypadku każdego żądania program obsługi zapewnia, że certyfikat, który był ważny, gdy był prezentowany, nie upłynął podczas bieżącej sesji.
 
 ### <a name="revocationflag"></a>RevocationFlag
 
-Wartość domyślna: `X509RevocationFlag.ExcludeRoot`
+Wartość domyślna:`X509RevocationFlag.ExcludeRoot`
 
 Flaga określająca, które certyfikaty w łańcuchu są sprawdzane pod kątem odwołania.
 
@@ -89,7 +95,7 @@ Sprawdzanie odwołań jest wykonywane tylko wtedy, gdy certyfikat jest powiązan
 
 ### <a name="revocationmode"></a>Odwołaniemode
 
-Wartość domyślna: `X509RevocationMode.Online`
+Wartość domyślna:`X509RevocationMode.Online`
 
 Flaga określająca sposób sprawdzania odwołania.
 
@@ -105,8 +111,8 @@ Nie jest to możliwe. Należy pamiętać, że wymiana certyfikatów jest wykonyw
 
 Program obsługi ma dwa zdarzenia:
 
-* `OnAuthenticationFailed` &ndash; wywoływany, jeśli wystąpi wyjątek podczas uwierzytelniania i pozwala na reagowanie.
-* `OnCertificateValidated` &ndash; wywołane po sprawdzeniu poprawności certyfikatu, pomyślnie utworzono weryfikację i domyślny podmiot zabezpieczeń. To zdarzenie umożliwia wykonywanie własnych weryfikacji i rozszerzanie lub zastępowanie podmiotu zabezpieczeń. Przykłady obejmują:
+* `OnAuthenticationFailed`&ndash; Wywołuje się, gdy wyjątek występuje podczas uwierzytelniania i pozwala na reagowanie.
+* `OnCertificateValidated`&ndash; Wywoływana po zweryfikowaniu certyfikatu, została pomyślnie utworzona Walidacja i domyślny podmiot zabezpieczeń. To zdarzenie umożliwia wykonywanie własnych weryfikacji i rozszerzanie lub zastępowanie podmiotu zabezpieczeń. Przykłady obejmują:
   * Ustalanie, czy certyfikat jest znany dla usług.
   * Konstruowanie własnego podmiotu zabezpieczeń. Rozważmy następujący przykład w `Startup.ConfigureServices`:
 
@@ -142,7 +148,7 @@ services.AddAuthentication(
     });
 ```
 
-Jeśli okaże się, że certyfikat ruchu przychodzącego nie spełnia dodatkowej weryfikacji, wywołaj `context.Fail("failure reason")` z przyczyną niepowodzenia.
+Jeśli okaże się, że certyfikat ruchu przychodzącego nie spełnia dodatkowej weryfikacji `context.Fail("failure reason")` , wywołaj z przyczynę niepowodzenia.
 
 W przypadku rzeczywistej funkcjonalności prawdopodobnie chcesz wywołać usługę zarejestrowaną w iniekcji zależności, która łączy się z bazą danych lub innym typem magazynu użytkownika. Uzyskaj dostęp do usługi przy użyciu kontekstu przesłanego do obiektu delegowanego. Rozważmy następujący przykład w `Startup.ConfigureServices`:
 
@@ -187,7 +193,7 @@ services.AddAuthentication(
     });
 ```
 
-Koncepcyjnie sprawdzenie poprawności certyfikatu jest problemem z autoryzacją. Dodanie kontroli, na przykład wystawcy lub odcisk palca w zasadach autoryzacji, a nie w `OnCertificateValidated`, jest doskonale akceptowalne.
+Koncepcyjnie sprawdzenie poprawności certyfikatu jest problemem z autoryzacją. Dodanie kontroli, na przykład wystawcy lub odcisk palca w zasadach autoryzacji, a nie wewnątrz `OnCertificateValidated`, jest doskonale akceptowalne.
 
 ## <a name="configure-your-host-to-require-certificates"></a>Konfigurowanie hosta tak, aby wymagał certyfikatów
 
@@ -218,7 +224,7 @@ public static IHostBuilder CreateHostBuilder(string[] args)
 ```
 
 > [!NOTE]
-> Punkty końcowe utworzone przez wywołanie <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> **przed** wywołaniem <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureHttpsDefaults*> nie będą miały zastosowania wartości domyślnych.
+> Punkty końcowe utworzone przez <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> wywołanie **przed** wywołaniem <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureHttpsDefaults*> nie mają zastosowania wartości domyślnych.
 
 ### <a name="iis"></a>IIS
 
@@ -243,12 +249,12 @@ Na platformie Azure nie jest wymagana żadna konfiguracja przekazywania. Jest to
 
 ### <a name="use-certificate-authentication-in-custom-web-proxies"></a>Używanie uwierzytelniania certyfikatów w niestandardowych serwerach proxy sieci Web
 
-Metoda `AddCertificateForwarding` służy do określenia:
+`AddCertificateForwarding` Metoda jest używana do określenia:
 
 * Nazwa nagłówka klienta.
-* Sposób ładowania certyfikatu (przy użyciu właściwości `HeaderConverter`).
+* Sposób ładowania certyfikatu (za pomocą `HeaderConverter` właściwości).
 
-W niestandardowych proxy sieci Web certyfikat jest przekazywane jako niestandardowy nagłówek żądania, na przykład `X-SSL-CERT`. W tym celu należy skonfigurować przekazywanie certyfikatów w `Startup.ConfigureServices`:
+W niestandardowych proxy sieci Web certyfikat jest przekazywane jako niestandardowy nagłówek żądania, na przykład `X-SSL-CERT`. W tym celu należy skonfigurować przekazywanie certyfikatów w `Startup.ConfigureServices`programie:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -285,7 +291,7 @@ private static byte[] StringToByteArray(string hex)
 }
 ```
 
-Następnie Metoda `Startup.Configure` dodaje oprogramowanie pośredniczące. `UseCertificateForwarding` jest wywoływana przed wywołaniami `UseAuthentication` i `UseAuthorization`:
+Następnie `Startup.Configure` Metoda dodaje oprogramowanie pośredniczące. `UseCertificateForwarding`jest wywoływana przed wywołaniem do `UseAuthentication` i `UseAuthorization`:
 
 ```csharp
 public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -305,7 +311,7 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 }
 ```
 
-Oddzielna Klasa może służyć do implementowania logiki walidacji. Ponieważ ten sam certyfikat z podpisem własnym jest używany w tym przykładzie, należy się upewnić, że można używać tylko certyfikatu. Sprawdź, czy odciski palca zarówno certyfikatu klienta, jak i certyfikatu serwera, w przeciwnym razie można użyć dowolnego certyfikatu i będzie on wystarczający do uwierzytelnienia. Będzie on używany wewnątrz metody `AddCertificate`. W przypadku korzystania z certyfikatów pośrednich lub podrzędnych można także zweryfikować temat lub wystawcę w tym miejscu.
+Oddzielna Klasa może służyć do implementowania logiki walidacji. Ponieważ ten sam certyfikat z podpisem własnym jest używany w tym przykładzie, należy się upewnić, że można używać tylko certyfikatu. Sprawdź, czy odciski palca zarówno certyfikatu klienta, jak i certyfikatu serwera, w przeciwnym razie można użyć dowolnego certyfikatu i będzie on wystarczający do uwierzytelnienia. Będzie on używany wewnątrz `AddCertificate` metody. W przypadku korzystania z certyfikatów pośrednich lub podrzędnych można także zweryfikować temat lub wystawcę w tym miejscu.
 
 ```csharp
 using System.IO;
@@ -414,7 +420,7 @@ Jeśli do serwera zostanie wysłany prawidłowy certyfikat, dane są zwracane. J
 
 ### <a name="create-certificates-in-powershell"></a>Tworzenie certyfikatów w programie PowerShell
 
-Tworzenie certyfikatów jest najtrudniejszą częścią w konfigurowaniu tego przepływu. Certyfikat główny można utworzyć za pomocą polecenia cmdlet programu `New-SelfSignedCertificate` PowerShell. Podczas tworzenia certyfikatu należy użyć silnego hasła. Ważne jest, aby dodać parametr `KeyUsageProperty` i parametr `KeyUsage`, jak pokazano.
+Tworzenie certyfikatów jest najtrudniejszą częścią w konfigurowaniu tego przepływu. Certyfikat główny można utworzyć przy użyciu polecenia cmdlet `New-SelfSignedCertificate` programu PowerShell. Podczas tworzenia certyfikatu należy użyć silnego hasła. Ważne jest, aby dodać `KeyUsageProperty` parametr i `KeyUsage` parametr, jak pokazano.
 
 #### <a name="create-root-ca"></a>Utwórz główny urząd certyfikacji
 
@@ -429,7 +435,7 @@ Export-Certificate -Cert cert:\localMachine\my\"The thumbprint..." -FilePath roo
 ```
 
 > [!NOTE]
-> Wartość parametru `-DnsName` musi być zgodna z elementem docelowym wdrożenia aplikacji. Na przykład "localhost" do programowania.
+> Wartość `-DnsName` parametru musi być zgodna z elementem docelowym wdrożenia aplikacji. Na przykład "localhost" do programowania.
 
 #### <a name="install-in-the-trusted-root"></a>Zainstaluj w zaufanym katalogu głównym
 
@@ -439,7 +445,7 @@ https://social.msdn.microsoft.com/Forums/SqlServer/5ed119ef-1704-4be4-8a4f-ef11d
 
 #### <a name="intermediate-certificate"></a>Certyfikat pośredni
 
-Certyfikat pośredni można teraz utworzyć na podstawie certyfikatu głównego. Nie jest to wymagane w przypadku wszystkich przypadków użycia, ale może być konieczne utworzenie wielu certyfikatów lub konieczność aktywowania lub wyłączenia grup certyfikatów. Parametr `TextExtension` jest wymagany do ustawienia długości ścieżki w podstawowych ograniczeniach certyfikatu.
+Certyfikat pośredni można teraz utworzyć na podstawie certyfikatu głównego. Nie jest to wymagane w przypadku wszystkich przypadków użycia, ale może być konieczne utworzenie wielu certyfikatów lub konieczność aktywowania lub wyłączenia grup certyfikatów. `TextExtension` Parametr jest wymagany, aby ustawić długość ścieżki w podstawowych ograniczeniach certyfikatu.
 
 Certyfikat pośredni można następnie dodać do zaufanego certyfikatu pośredniego w systemie hosta systemu Windows.
 

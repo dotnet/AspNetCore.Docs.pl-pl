@@ -1,21 +1,24 @@
 ---
 title: ASP.NET Core Blazor konfigurację modelu hostingu
 author: guardrex
-description: Dowiedz Blazor się więcej o konfiguracji modelu hostingu, w tym o sposobie integrowania składników Razor z aplikacjami Razor Pages i MVC.
+description: Dowiedz Blazor się więcej o konfiguracji modelu hostingu, w Razor Razor tym o sposobie integrowania składników ze stronami i aplikacjami MVC.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/25/2020
+ms.date: 05/04/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/hosting-model-configuration
-ms.openlocfilehash: c7e8d1f2dcba6432072a5cc11a6c5d78e50c2398
-ms.sourcegitcommit: c6f5ea6397af2dd202632cf2be66fc30f3357bcc
+ms.openlocfilehash: 17ed43a12643f067da73658bec72400acbe1be43
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/26/2020
-ms.locfileid: "82159622"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82772077"
 ---
 # <a name="aspnet-core-blazor-hosting-model-configuration"></a>Konfiguracja modelu hostingu ASP.NET Core Blazor
 
@@ -98,14 +101,14 @@ if (builder.HostEnvironment.IsEnvironment("Custom"))
 
 `IWebAssemblyHostEnvironment.BaseAddress` Właściwość może być używana podczas uruchamiania, `NavigationManager` gdy usługa jest niedostępna.
 
-### <a name="configuration"></a>Konfiguracja
+### <a name="configuration"></a>Konfigurowanie
 
-Zestaw webassembly Blazor obsługuje konfigurację z:
+Blazor webassembly ładuje konfigurację z:
 
-* Domyślnie [dostawca konfiguracji plików](xref:fundamentals/configuration/index#file-configuration-provider) dla plików ustawień aplikacji:
+* Pliki ustawień aplikacji domyślnie:
   * *wwwroot/appSettings. JSON*
   * *wwwroot/appSettings. {ENVIRONMENT}. JSON*
-* Inni [dostawcy konfiguracji](xref:fundamentals/configuration/index) zarejestrowani przez aplikację.
+* Inni [dostawcy konfiguracji](xref:fundamentals/configuration/index) zarejestrowani przez aplikację. Nie wszyscy dostawcy są odpowiednią do aplikacji Blazor webassembly. Wyjaśnienie, na których dostawców są obsługiwane Blazor webassembly, jest śledzone przez [wyjaśnienie dostawców konfiguracji dla BLAZOR WASM (dotnet/AspNetCore. Docs #18134)](https://github.com/dotnet/AspNetCore.Docs/issues/18134).
 
 > [!WARNING]
 > Konfiguracja w aplikacji Blazor webassembly jest widoczna dla użytkowników. **Nie przechowuj wpisów tajnych aplikacji ani poświadczeń w konfiguracji.**
@@ -136,12 +139,12 @@ Wsuń <xref:Microsoft.Extensions.Configuration.IConfiguration> wystąpienie do s
 
 #### <a name="provider-configuration"></a>Konfiguracja dostawcy
 
-Poniższy przykład używa <xref:Microsoft.Extensions.Configuration.Memory.MemoryConfigurationSource> [dostawcy konfiguracji plików](xref:fundamentals/configuration/index#file-configuration-provider) i dostarcza dodatkową konfigurację:
+Poniższy przykład używa, <xref:Microsoft.Extensions.Configuration.Memory.MemoryConfigurationSource> aby podać dodatkową konfigurację:
 
 `Program.Main`:
 
 ```csharp
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.Memory;
 
 ...
 
@@ -159,9 +162,7 @@ var memoryConfig = new MemoryConfigurationSource { InitialData = vehicleData };
 
 ...
 
-builder.Configuration
-    .Add(memoryConfig)
-    .AddJsonFile("cars.json", optional: false, reloadOnChange: true);
+builder.Configuration.Add(memoryConfig);
 ```
 
 Wsuń <xref:Microsoft.Extensions.Configuration.IConfiguration> wystąpienie do składnika w celu uzyskania dostępu do danych konfiguracji:
@@ -176,10 +177,10 @@ Wsuń <xref:Microsoft.Extensions.Configuration.IConfiguration> wystąpienie do s
 <h2>Wheels</h2>
 
 <ul>
-    <li>Count: @Configuration["wheels:count"]</p>
-    <li>Brand: @Configuration["wheels:brand"]</p>
-    <li>Type: @Configuration["wheels:brand:type"]</p>
-    <li>Year: @Configuration["wheels:year"]</p>
+    <li>Count: @Configuration["wheels:count"]</li>
+    <li>Brand: @Configuration["wheels:brand"]</li>
+    <li>Type: @Configuration["wheels:brand:type"]</li>
+    <li>Year: @Configuration["wheels:year"]</li>
 </ul>
 
 @code {
@@ -187,6 +188,36 @@ Wsuń <xref:Microsoft.Extensions.Configuration.IConfiguration> wystąpienie do s
     
     ...
 }
+```
+
+Aby odczytać inne pliki konfiguracji z folderu *wwwroot* do konfiguracji, użyj programu `HttpClient` w celu uzyskania zawartości pliku. W przypadku korzystania z tego podejścia istniejąca `HttpClient` Rejestracja usługi może używać lokalnego klienta utworzonego do odczytu pliku, jak pokazano w poniższym przykładzie:
+
+plik *wwwroot/samochody. JSON*:
+
+```json
+{
+    "size": "tiny"
+}
+```
+
+`Program.Main`:
+
+```csharp
+using Microsoft.Extensions.Configuration;
+
+...
+
+var client = new HttpClient()
+{
+    BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
+};
+
+builder.Services.AddTransient(sp => client);
+
+using var response = await client.GetAsync("cars.json");
+using var stream = await response.Content.ReadAsStreamAsync();
+
+builder.Configuration.AddJsonStream(stream);
 ```
 
 #### <a name="authentication-configuration"></a>Konfiguracja uwierzytelniania
@@ -303,7 +334,7 @@ Aplikacje serwera Blazor są domyślnie skonfigurowane, aby skonfigurować inter
 
 Renderowanie składników serwera ze statyczną stroną HTML nie jest obsługiwane.
 
-### <a name="configure-the-opno-locsignalr-client-for-opno-locblazor-server-apps"></a>Konfigurowanie SignalR klienta dla Blazor aplikacji serwerowych
+### <a name="configure-the-signalr-client-for-blazor-server-apps"></a>Konfigurowanie SignalR klienta dla Blazor aplikacji serwerowych
 
 Czasami trzeba skonfigurować SignalR klienta używanego przez Blazor aplikacje serwera. Na przykład możesz chcieć skonfigurować rejestrowanie na kliencie, SignalR aby zdiagnozować problem z połączeniem.
 

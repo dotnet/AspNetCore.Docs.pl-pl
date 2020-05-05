@@ -6,14 +6,18 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/06/2020
 no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: fundamentals/app-state
-ms.openlocfilehash: 706468d44ddabbd3a695dbb60aaf1be15fe166e2
-ms.sourcegitcommit: f9a5069577e8f7c53f8bcec9e13e117950f4f033
+ms.openlocfilehash: c29b58eb14a7962f53f2c8c48067de2f5872fded
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82558908"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774811"
 ---
 # <a name="session-and-state-management-in-aspnet-core"></a>Zarządzanie sesjami i Stanami w ASP.NET Core
 
@@ -282,7 +286,7 @@ Zalecane podejście do sprawdzenia pod kątem błędów jest wywoływane `await 
 
 Aplikacje sygnalizujące nie powinny używać stanu sesji do przechowywania informacji. Aplikacje sygnalizujące mogą przechowywać stan dla połączenia w `Context.Items` centrum. <!-- https://github.com/aspnet/SignalR/issues/2139 -->
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 <xref:host-and-deploy/web-farm>
 ::: moniker-end
@@ -396,7 +400,7 @@ Stan sesji to *nie jest blokowanie*. Jeśli dwa żądania jednocześnie próbuj�
 
 ### <a name="set-and-get-session-values"></a>Ustawianie i pobieranie wartości sesji
 
-Uzyskano dostęp do stanu sesji z klasy [PageModel](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel) lub klasy [kontrolera](/dotnet/api/microsoft.aspnetcore.mvc.controller) MVC z Razor Pages obiektem [HttpContext. Session](/dotnet/api/microsoft.aspnetcore.http.httpcontext.session). Ta właściwość jest implementacją [ISession](/dotnet/api/microsoft.aspnetcore.http.isession) .
+Dostęp do stanu sesji odbywa się Razor ze stron [PageModel](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel) klasy lub [kontrolera](/dotnet/api/microsoft.aspnetcore.mvc.controller) MVC z obiektem [HttpContext. Session](/dotnet/api/microsoft.aspnetcore.http.httpcontext.session). Ta właściwość jest implementacją [ISession](/dotnet/api/microsoft.aspnetcore.http.isession) .
 
 `ISession` Implementacja zawiera kilka metod rozszerzających, które umożliwiają ustawianie i pobieranie wartości całkowitych i ciągów. Metody rozszerzające znajdują się w przestrzeni nazw [Microsoft. AspNetCore. http](/dotnet/api/microsoft.aspnetcore.http) ( `using Microsoft.AspNetCore.Http;` Dodaj instrukcję, aby uzyskać dostęp do metod rozszerzenia), gdy do projektu jest przywoływany pakiet [Microsoft. AspNetCore. http. Extensions](https://www.nuget.org/packages/Microsoft.AspNetCore.Http.Extensions/) . Oba pakiety są zawarte w [pakiecie Microsoft. AspNetCore. app](xref:fundamentals/metapackage-app).
 
@@ -408,7 +412,7 @@ Uzyskano dostęp do stanu sesji z klasy [PageModel](/dotnet/api/microsoft.aspnet
 * [SetInt32 (ISession, String, Int32)](/dotnet/api/microsoft.aspnetcore.http.sessionextensions.setint32)
 * [SetString (ISession, String, String)](/dotnet/api/microsoft.aspnetcore.http.sessionextensions.setstring)
 
-Poniższy przykład pobiera wartość sesji dla `IndexModel.SessionKeyName` klucza (`_Name` w przykładowej aplikacji) na stronie Razor Pages:
+Poniższy przykład pobiera wartość sesji dla `IndexModel.SessionKeyName` klucza (`_Name` w przykładowej aplikacji) na stronie Razor stron:
 
 ```csharp
 @page
@@ -436,7 +440,7 @@ Poniższy przykład pokazuje, jak ustawić i pobrać obiekt możliwy do serializ
 
 ## <a name="tempdata"></a>TempData
 
-ASP.NET Core uwidacznia Razor Pages [TempData](xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.TempData) lub Controller <xref:Microsoft.AspNetCore.Mvc.Controller.TempData>. Ta właściwość przechowuje dane, dopóki nie zostanie odczytany w innym żądaniu. Metody [Keep (String)](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*) i [Peek (String)](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Peek*) mogą służyć do badania danych bez usuwania na końcu żądania. Wartość [Keep ()](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*) oznacza wszystkie elementy w słowniku do przechowywania. `TempData`jest szczególnie przydatne w przypadku przekierowywania, gdy dane są wymagane dla więcej niż jednego żądania. `TempData`jest zaimplementowany przez `TempData` dostawców przy użyciu plików cookie lub stanu sesji.
+ASP.NET Core udostępnia Razor [TempData](xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.TempData) lub kontroler <xref:Microsoft.AspNetCore.Mvc.Controller.TempData>stron. Ta właściwość przechowuje dane, dopóki nie zostanie odczytany w innym żądaniu. Metody [Keep (String)](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*) i [Peek (String)](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Peek*) mogą służyć do badania danych bez usuwania na końcu żądania. Wartość [Keep ()](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*) oznacza wszystkie elementy w słowniku do przechowywania. `TempData`jest szczególnie przydatne w przypadku przekierowywania, gdy dane są wymagane dla więcej niż jednego żądania. `TempData`jest zaimplementowany przez `TempData` dostawców przy użyciu plików cookie lub stanu sesji.
 
 ## <a name="tempdata-samples"></a>Przykłady TempData
 
@@ -593,7 +597,7 @@ Użyj [iniekcji zależności](xref:fundamentals/dependency-injection) , aby udos
 
 SignalRaplikacje nie powinny używać stanu sesji do przechowywania informacji. SignalRaplikacje mogą przechowywać stan dla połączenia w `Context.Items` centrum. <!-- https://github.com/aspnet/SignalR/issues/2139 -->
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 <xref:host-and-deploy/web-farm>
 ::: moniker-end

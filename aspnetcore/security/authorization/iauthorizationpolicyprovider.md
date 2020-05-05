@@ -1,53 +1,59 @@
 ---
-title: Dostawcy zasad autoryzacji niestandardowej w ASP.NET Core
+title: Niestandardowi dostawcy zasad autoryzacji w ASP.NET Core
 author: mjrousos
-description: Dowiedz się, jak używać niestandardowego IAuthorizationPolicyProvider w aplikacji ASP.NET Core do dynamicznego generowania zasad autoryzacji.
+description: Dowiedz się, jak używać niestandardowych IAuthorizationPolicyProvider w aplikacji ASP.NET Core do dynamicznego generowania zasad autoryzacji.
 ms.author: riande
 ms.custom: mvc
 ms.date: 11/14/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authorization/iauthorizationpolicyprovider
-ms.openlocfilehash: 2c67e25ff73bc8c3a5f3af4730a509b2385fc1cf
-ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
+ms.openlocfilehash: 1db78e5b2cea964471e4eea090f713f6af5f4740
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81661771"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777543"
 ---
-# <a name="custom-authorization-policy-providers-using-iauthorizationpolicyprovider-in-aspnet-core"></a>Dostawcy zasad autoryzacji niestandardowej przy użyciu usługi IAuthorizationPolicyProvider w ASP.NET Core 
+# <a name="custom-authorization-policy-providers-using-iauthorizationpolicyprovider-in-aspnet-core"></a>Niestandardowi dostawcy zasad autoryzacji korzystający z usługi IAuthorizationPolicyProvider w ASP.NET Core 
 
-Przez [Mike Rousos](https://github.com/mjrousos)
+Według [Jan Rousos](https://github.com/mjrousos)
 
-Zazwyczaj podczas korzystania z [autoryzacji opartej na zasadach](xref:security/authorization/policies)zasady są rejestrowane przez wywołanie `AuthorizationOptions.AddPolicy` jako część konfiguracji usługi autoryzacji. W niektórych scenariuszach może nie być możliwe (lub pożądane) zarejestrowanie wszystkich zasad autoryzacji w ten sposób. W takich przypadkach można użyć `IAuthorizationPolicyProvider` niestandardowego do kontrolowania sposobu podajesz zasady autoryzacji.
+Zwykle podczas korzystania z [autoryzacji opartej na zasadach](xref:security/authorization/policies)zasady są rejestrowane przez `AuthorizationOptions.AddPolicy` wywołanie w ramach konfiguracji usługi autoryzacji. W niektórych scenariuszach może nie być możliwe (lub pożądane) rejestrowanie wszystkich zasad autoryzacji w ten sposób. W takich przypadkach można użyć niestandardowych `IAuthorizationPolicyProvider` do kontrolowania sposobu dostarczania zasad autoryzacji.
 
-Przykłady scenariuszy, w których [niestandardowe IAuthorizationPolicyProvider](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationpolicyprovider) może być przydatne obejmują:
+Przykłady scenariuszy, w których może być przydatne niestandardowe [IAuthorizationPolicyProvider](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationpolicyprovider) :
 
 * Korzystanie z usługi zewnętrznej w celu zapewnienia oceny zasad.
-* Korzystanie z szerokiego zakresu zasad (na przykład dla różnych numerów lub grup wiekowych) nie `AuthorizationOptions.AddPolicy` ma sensu dodawać poszczególnych zasad autoryzacji za pomocą połączenia.
-* Tworzenie zasad w czasie wykonywania na podstawie informacji w zewnętrznym źródle danych (takich jak baza danych) lub dynamiczne określanie wymagań dotyczących autoryzacji za pomocą innego mechanizmu.
+* Użycie dużego zakresu zasad (na przykład w przypadku różnych numerów pomieszczeń lub wieku), dlatego nie ma sensu dodania poszczególnych zasad autoryzacji do `AuthorizationOptions.AddPolicy` wywołania.
+* Tworzenie zasad w czasie wykonywania na podstawie informacji w zewnętrznym źródle danych (np. bazy danych) lub Określanie wymagań dotyczących autoryzacji w sposób dynamiczny przez inny mechanizm.
 
-[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/aspnetcore/tree/v3.1.3/src/Security/samples/CustomPolicyProvider) z [repozytorium AspNetCore GitHub](https://github.com/dotnet/AspNetCore). Pobierz plik ZIP repozytorium dotnet/AspNetCore. Rozpaj plik. Przejdź do folderu projektu *src/Security/samples/CustomPolicyProvider.*
+[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/aspnetcore/tree/v3.1.3/src/Security/samples/CustomPolicyProvider) z [repozytorium GitHub AspNetCore](https://github.com/dotnet/AspNetCore). Pobierz plik ZIP repozytorium dotnet/AspNetCore. Rozpakuj plik. Przejdź do folderu *src/Security/Samples/CustomPolicyProvider* Project.
 
-## <a name="customize-policy-retrieval"></a>Dostosowywanie pobierania zasad
+## <a name="customize-policy-retrieval"></a>Dostosuj pobieranie zasad
 
-ASP.NET aplikacje Core używają implementacji `IAuthorizationPolicyProvider` interfejsu do pobierania zasad autoryzacji. Domyślnie [DefaultAuthorizationPolicyProvider](/dotnet/api/microsoft.aspnetcore.authorization.defaultauthorizationpolicyprovider) jest zarejestrowany i używany. `DefaultAuthorizationPolicyProvider`zwraca zasady `AuthorizationOptions` z podanych w wywołaniu. `IServiceCollection.AddAuthorization`
+Aplikacje ASP.NET Core korzystają z implementacji `IAuthorizationPolicyProvider` interfejsu w celu pobierania zasad autoryzacji. Domyślnie [DefaultAuthorizationPolicyProvider](/dotnet/api/microsoft.aspnetcore.authorization.defaultauthorizationpolicyprovider) jest zarejestrowany i używany. `DefaultAuthorizationPolicyProvider`zwraca zasady z `AuthorizationOptions` podanego w `IServiceCollection.AddAuthorization` wywołaniu.
 
-Dostosuj to zachowanie, rejestrując `IAuthorizationPolicyProvider` inną implementację w kontenerze [iniekcji zależności](xref:fundamentals/dependency-injection) aplikacji. 
+Dostosuj to zachowanie, rejestrując inną `IAuthorizationPolicyProvider` implementację w kontenerze [iniekcji zależności](xref:fundamentals/dependency-injection) aplikacji. 
 
-Interfejs `IAuthorizationPolicyProvider` zawiera trzy interfejsy API:
+`IAuthorizationPolicyProvider` Interfejs zawiera trzy interfejsy API:
 
 * [GetPolicyAsync](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationpolicyprovider.getpolicyasync#Microsoft_AspNetCore_Authorization_IAuthorizationPolicyProvider_GetPolicyAsync_System_String_) zwraca zasady autoryzacji dla danej nazwy.
-* [GetDefaultPolicyAsync](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationpolicyprovider.getdefaultpolicyasync) zwraca domyślne zasady autoryzacji `[Authorize]` (zasady używane dla atrybutów bez określonych zasad). 
-* [GetFallbackPolicyAsync](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationpolicyprovider.getfallbackpolicyasync) zwraca zasady autoryzacji rezerwowej (zasady używane przez oprogramowanie pośredniczące autoryzacji, gdy nie określono żadnych zasad). 
+* [GetDefaultPolicyAsync](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationpolicyprovider.getdefaultpolicyasync) zwraca domyślne zasady autoryzacji (zasady używane dla `[Authorize]` atrybutów bez określonych zasad). 
+* [GetFallbackPolicyAsync](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationpolicyprovider.getfallbackpolicyasync) zwraca rezerwowe zasady autoryzacji (zasady używane przez oprogramowanie pośredniczące autoryzacji, gdy nie określono żadnych zasad). 
 
-Implementując te interfejsy API, można dostosować sposób, w jaki zasady autoryzacji są dostarczane.
+Implementując te interfejsy API, można dostosować sposób, w jaki są udostępniane zasady autoryzacji.
 
-## <a name="parameterized-authorize-attribute-example"></a>Przykład atrybutu autoryzacji sparametryzowanej
+## <a name="parameterized-authorize-attribute-example"></a>Przykładowy atrybut autoryzacji sparametryzowanej
 
-Jednym ze `IAuthorizationPolicyProvider` scenariuszy, w `[Authorize]` którym jest przydatne jest włączenie atrybutów niestandardowych, których wymagania zależą od parametru. Na przykład w dokumentacji [autoryzacji opartej na zasadach](xref:security/authorization/policies) jako przykładowa została użyta zasada oparta na wieku ("AtLeast21"). Jeśli różne akcje kontrolera w aplikacji powinny być dostępne dla użytkowników w *różnym* wieku, może być przydatne, aby mieć wiele różnych zasad opartych na wieku. Zamiast rejestrować wszystkie różne zasady oparte na wieku, `AuthorizationOptions`które aplikacja będzie potrzebować w , `IAuthorizationPolicyProvider`można wygenerować zasady dynamicznie za pomocą niestandardowego . Aby ułatwić korzystanie z zasad, można dodawać adnotacje `[MinimumAgeAuthorize(20)]`do akcji z atrybutem autoryzacji niestandardowej, takim jak .
+Jednym z scenariuszy `IAuthorizationPolicyProvider` , gdzie jest przydatna, `[Authorize]` jest włączenie atrybutów niestandardowych, których wymagania zależą od parametru. Na przykład w dokumentacji dotyczącej [autoryzacji opartej na zasadach](xref:security/authorization/policies) , jako przykład użyto zasad opartych na wieku ("AtLeast21"). Jeśli różne akcje kontrolera w aplikacji powinny być dostępne dla użytkowników z *różnych* okresów obowiązywania, może być przydatne w wielu różnych zasadach opartych na wieku. Zamiast zarejestrowania wszystkich zasad opartych na wieku, do których aplikacja będzie potrzebna `AuthorizationOptions`, możesz dynamicznie generować zasady za pomocą niestandardowej. `IAuthorizationPolicyProvider` Aby ułatwić korzystanie z zasad, można dodawać adnotacje do akcji przy użyciu niestandardowego atrybutu autoryzacji `[MinimumAgeAuthorize(20)]`, takiego jak.
 
-## <a name="custom-authorization-attributes"></a>Atrybuty autoryzacji niestandardowej
+## <a name="custom-authorization-attributes"></a>Niestandardowe atrybuty autoryzacji
 
-Zasady autoryzacji są identyfikowane przez ich nazwy. Niestandardowe `MinimumAgeAuthorizeAttribute` opisane wcześniej musi mapować argumenty w ciąg, który może służyć do pobierania odpowiednich zasad autoryzacji. Można to zrobić, wyprowadzając `AuthorizeAttribute` z `Age` i `AuthorizeAttribute.Policy` co właściwość zawinąć właściwość.
+Zasady autoryzacji są identyfikowane przez ich nazwy. Niestandardowe `MinimumAgeAuthorizeAttribute` opisane wcześniej muszą mapować argumenty na ciąg, którego można użyć do pobrania odpowiednich zasad autoryzacji. Można to zrobić, wyprowadzając z `AuthorizeAttribute` i ustawiając `Age` właściwość jako przewinięcie `AuthorizeAttribute.Policy` właściwości.
 
 ```csharp
 internal class MinimumAgeAuthorizeAttribute : AuthorizeAttribute
@@ -75,25 +81,25 @@ internal class MinimumAgeAuthorizeAttribute : AuthorizeAttribute
 }
 ```
 
-Ten typ atrybutu `Policy` ma ciąg oparty na prefiksie zakodowany (`"MinimumAge"`) i liczba całkowita przekazywane za pośrednictwem konstruktora.
+Ten typ atrybutu ma `Policy` ciąg oparty na zakodowanym prefiksie (`"MinimumAge"`) i liczbie całkowitej przekazanej za pośrednictwem konstruktora.
 
-Można go zastosować do akcji w `Authorize` taki sam sposób jak inne atrybuty, z tą różnicą, że przyjmuje całkowitą jako parametr.
+Można zastosować go do akcji w taki sam sposób, jak inne `Authorize` atrybuty, z wyjątkiem tego, że przyjmuje jako parametr liczbę całkowitą.
 
 ```csharp
 [MinimumAgeAuthorize(10)]
 public IActionResult RequiresMinimumAge10()
 ```
 
-## <a name="custom-iauthorizationpolicyprovider"></a>Niestandardowa autoryzacja IAuthorizationPolicyProvider
+## <a name="custom-iauthorizationpolicyprovider"></a>Niestandardowy IAuthorizationPolicyProvider
 
-Niestandardowe `MinimumAgeAuthorizeAttribute` ułatwia żądanie zasad autoryzacji dla dowolnego wieku minimalnego pożądanego. Kolejnym problemem do rozwiązania jest upewnienie się, że zasady autoryzacji są dostępne dla wszystkich osób w różnym wieku. To jest, `IAuthorizationPolicyProvider` gdy jest przydatna.
+Niestandardowe `MinimumAgeAuthorizeAttribute` ułatwiają żądania zasad autoryzacji w przypadku dowolnych minimalnych wieku. Następnym problemem do rozwiązania jest upewnienie się, że zasady autoryzacji są dostępne dla wszystkich tych różnych okresów. Jest to miejsce, `IAuthorizationPolicyProvider` w którym jest to przydatne.
 
-Podczas `MinimumAgeAuthorizationAttribute`korzystania, nazwy zasad autoryzacji `"MinimumAge" + Age`będą zgodne `IAuthorizationPolicyProvider` ze wzorcem, więc niestandardowe powinny generować zasady autoryzacji przez:
+W przypadku `MinimumAgeAuthorizationAttribute`korzystania z programu nazwy zasad autoryzacji będą zgodne ze `"MinimumAge" + Age`wzorcem, więc `IAuthorizationPolicyProvider` niestandardowe powinny generować zasady autoryzacji, wykonując następujące czynności:
 
-* Analizowanie wieku od nazwy zasad.
-* Używanie `AuthorizationPolicyBuilder` do tworzenia nowego`AuthorizationPolicy`
-* W tym i następujących przykładach zakłada się, że użytkownik jest uwierzytelniony za pomocą pliku cookie. Powinien `AuthorizationPolicyBuilder` być skonstruowany z co najmniej jedną nazwą schematu autoryzacji lub zawsze powiedzie się. W przeciwnym razie nie ma informacji na temat sposobu zapewnienia wyzwanie dla użytkownika i wyjątek zostanie zgłoszony.
-* Dodawanie wymagań do zasad na podstawie `AuthorizationPolicyBuilder.AddRequirements`wieku z . W innych scenariuszach można `RequireClaim` `RequireRole`użyć `RequireUserName` , lub zamiast tego.
+* Analizowanie wieku z nazwy zasad.
+* `AuthorizationPolicyBuilder` Tworzenie nowego`AuthorizationPolicy`
+* W tym i następujących przykładach zostanie przyjęty, że użytkownik jest uwierzytelniany za pośrednictwem pliku cookie. `AuthorizationPolicyBuilder` Należy utworzyć co najmniej jedną nazwę schematu autoryzacji lub zawsze powiodła się. W przeciwnym razie nie ma informacji o sposobie zapewnienia użytkownikowi wyzwania i zostanie zgłoszony wyjątek.
+* Dodawanie wymagań do zasad na podstawie wieku w programie `AuthorizationPolicyBuilder.AddRequirements`. W innych scenariuszach można użyć `RequireClaim`, `RequireRole`lub `RequireUserName` zamiast tego.
 
 ```csharp
 internal class MinimumAgePolicyProvider : IAuthorizationPolicyProvider
@@ -121,14 +127,14 @@ internal class MinimumAgePolicyProvider : IAuthorizationPolicyProvider
 
 ## <a name="multiple-authorization-policy-providers"></a>Wielu dostawców zasad autoryzacji
 
-Korzystając z `IAuthorizationPolicyProvider` niestandardowych implementacji, należy pamiętać, że ASP.NET Core `IAuthorizationPolicyProvider`używa tylko jednego wystąpienia programu . Jeśli dostawca niestandardowy nie jest w stanie podać zasad autoryzacji dla wszystkich nazw zasad, które będą używane, należy odroczyć do dostawcy kopii zapasowej. 
+W przypadku korzystania `IAuthorizationPolicyProvider` z implementacji niestandardowych należy pamiętać, że ASP.NET Core używa tylko jednego wystąpienia `IAuthorizationPolicyProvider`. Jeśli dostawca niestandardowy nie jest w stanie zapewnić zasad autoryzacji dla wszystkich nazw zasad, które będą używane, należy odroczyć dostawcę kopii zapasowych. 
 
-Rozważmy na przykład aplikację, która wymaga zarówno niestandardowych zasad wiekowych, jak i bardziej tradycyjnego pobierania zasad opartych na rolach. Taka aplikacja może używać dostawcy zasad autoryzacji niestandardowej, który:
+Rozważmy na przykład aplikację, która wymaga zarówno niestandardowych zasad wieku, jak i bardziej tradycyjnych operacji pobierania zasad opartych na rolach. Taka aplikacja może użyć niestandardowego dostawcy zasad autoryzacji, który:
 
 * Próbuje przeanalizować nazwy zasad. 
-* Wywołuje do innego dostawcy `DefaultAuthorizationPolicyProvider`zasad (np.), jeśli nazwa zasad nie zawiera wieku.
+* Wywołuje innego dostawcę zasad (na przykład `DefaultAuthorizationPolicyProvider`), jeśli nazwa zasad nie zawiera wieku.
 
-Przykładowa `IAuthorizationPolicyProvider` implementacja pokazano powyżej można `DefaultAuthorizationPolicyProvider` zaktualizować, aby użyć przez utworzenie dostawcy zasad tworzenia kopii zapasowych w konstruktorze (do użycia w przypadku, gdy nazwa zasad nie pasuje do oczekiwanego wzorca "MinimumAge" + age).
+Przykładowa `IAuthorizationPolicyProvider` implementacja pokazana powyżej może zostać zaktualizowana w `DefaultAuthorizationPolicyProvider` celu użycia przez utworzenie dostawcy zasad tworzenia kopii zapasowych w konstruktorze (do użycia w przypadku, gdy nazwa zasad nie jest zgodna z oczekiwanym wzorcem "minimalnie" + wiek).
 
 ```csharp
 private DefaultAuthorizationPolicyProvider BackupPolicyProvider { get; }
@@ -141,7 +147,7 @@ public MinimumAgePolicyProvider(IOptions<AuthorizationOptions> options)
 }
 ```
 
-Następnie `GetPolicyAsync` metoda może zostać zaktualizowana, aby użyć `BackupPolicyProvider` zamiast zwracania null:
+Następnie można zaktualizować `GetPolicyAsync` metodę, aby użyć `BackupPolicyProvider` zamiast zwracanej wartości null:
 
 ```csharp
 ...
@@ -150,37 +156,37 @@ return BackupPolicyProvider.GetPolicyAsync(policyName);
 
 ## <a name="default-policy"></a>Zasady domyślne
 
-Oprócz dostarczania nazwanych zasad autoryzacji, `IAuthorizationPolicyProvider` `GetDefaultPolicyAsync` niestandardowe musi zaimplementować, aby zapewnić zasady autoryzacji dla `[Authorize]` atrybutów bez określonej nazwy zasad.
+Oprócz dostarczania nazwanych zasad autoryzacji, niestandardową `IAuthorizationPolicyProvider` potrzebą jest `GetDefaultPolicyAsync` wdrożenie w celu udostępnienia zasad `[Authorize]` autoryzacji dla atrybutów bez określonej nazwy zasad.
 
-W wielu przypadkach ten atrybut autoryzacji wymaga tylko uwierzytelnionego użytkownika, dzięki `RequireAuthenticatedUser`czemu można wprowadzić niezbędne zasady za pomocą połączenia:
+W wielu przypadkach ten atrybut autoryzacji wymaga tylko uwierzytelnionego użytkownika, więc można wykonać niezbędne zasady z wywołaniem `RequireAuthenticatedUser`:
 
 ```csharp
 public Task<AuthorizationPolicy> GetDefaultPolicyAsync() => 
     Task.FromResult(new AuthorizationPolicyBuilder(CookieAuthenticationDefaults.AuthenticationScheme).RequireAuthenticatedUser().Build());
 ```
 
-Podobnie jak w odniesieniu `IAuthorizationPolicyProvider`do wszystkich aspektów niestandardowego , można dostosować to, w razie potrzeby. W niektórych przypadkach może być pożądane pobranie domyślnej `IAuthorizationPolicyProvider`zasady z rezerwowego .
+Podobnie jak w przypadku wszystkich aspektów `IAuthorizationPolicyProvider`niestandardowych, można je dostosować w razie konieczności. W niektórych przypadkach może być wskazane pobranie domyślnych zasad z rezerwy `IAuthorizationPolicyProvider`.
 
-## <a name="fallback-policy"></a>Zasady rezerwowe
+## <a name="fallback-policy"></a>Zasady powrotu
 
-Niestandardowe `IAuthorizationPolicyProvider` można opcjonalnie zaimplementować `GetFallbackPolicyAsync` w celu zapewnienia zasad, które są używane podczas [łączenia zasad](/dotnet/api/microsoft.aspnetcore.authorization.authorizationpolicy.combine) i gdy nie określono żadnych zasad. Jeśli `GetFallbackPolicyAsync` zwraca zasady inne niż null, zwrócone zasady są używane przez oprogramowanie pośredniczące autoryzacji, gdy nie określono żadnych zasad dla żądania.
+Niestandardowe `IAuthorizationPolicyProvider` można opcjonalnie zaimplementować `GetFallbackPolicyAsync` , aby określić zasady, które są używane podczas [łączenia zasad](/dotnet/api/microsoft.aspnetcore.authorization.authorizationpolicy.combine) i gdy nie określono żadnych zasad. Jeśli `GetFallbackPolicyAsync` zwraca zasadę o wartości innej niż null, zwracane zasady są używane przez oprogramowanie pośredniczące autoryzacji, gdy dla żądania nie określono żadnych zasad.
 
-Jeśli nie jest wymagana żadna zasada `null` rezerwowa, dostawca może zwrócić lub odroczyć do dostawcy rezerwowego:
+Jeśli nie są wymagane żadne zasady powrotu dostawcy, dostawca może `null` zwrócić lub odroczyć dostawcę rezerwowego:
 
 ```csharp
 public Task<AuthorizationPolicy> GetFallbackPolicyAsync() => 
     Task.FromResult<AuthorizationPolicy>(null);
 ```
 
-## <a name="use-a-custom-iauthorizationpolicyprovider"></a>Używanie niestandardowego programu IAuthorizationPolicyProvider
+## <a name="use-a-custom-iauthorizationpolicyprovider"></a>Użyj niestandardowego IAuthorizationPolicyProvider
 
-Aby używać zasad `IAuthorizationPolicyProvider`niestandardowych z programu , należy:
+Aby używać zasad niestandardowych z poziomu `IAuthorizationPolicyProvider`programu, należy:
 
-* Zarejestruj odpowiednie `AuthorizationHandler` typy z iniekcji zależności (opisane w [autoryzacji opartej na zasadach),](xref:security/authorization/policies#authorization-handlers)jak w przypadku wszystkich scenariuszy autoryzacji opartych na zasadach.
-* Zarejestruj typ `IAuthorizationPolicyProvider` niestandardowy w kolekcji usługi iniekcji zależności aplikacji (w), `Startup.ConfigureServices`aby zastąpić domyślnego dostawcę zasad.
+* Zarejestruj odpowiednie `AuthorizationHandler` typy z iniekcją zależności (zgodnie z opisem w [autoryzacji opartej na zasadach](xref:security/authorization/policies#authorization-handlers)), podobnie jak w przypadku wszystkich scenariuszy autoryzacji opartych na zasadach.
+* Zarejestruj typ niestandardowy `IAuthorizationPolicyProvider` w kolekcji usług iniekcji zależności aplikacji (w programie `Startup.ConfigureServices`), aby zastąpić domyślnego dostawcę zasad.
 
 ```csharp
 services.AddSingleton<IAuthorizationPolicyProvider, MinimumAgePolicyProvider>();
 ```
 
-Kompletny próbka niestandardowa `IAuthorizationPolicyProvider` jest dostępna w [repozytorium dotnet/aspnetcore GitHub.](https://github.com/dotnet/aspnetcore/tree/v3.1.3/src/Security/samples/CustomPolicyProvider)
+Pełny niestandardowy `IAuthorizationPolicyProvider` przykład jest dostępny w repozytorium programu [dotnet/Aspnetcore](https://github.com/dotnet/aspnetcore/tree/v3.1.3/src/Security/samples/CustomPolicyProvider)w witrynie GitHub.

@@ -4,13 +4,19 @@ author: rick-anderson
 description: Poznaj podstawowe informacje dotyczące autoryzacji i sposobu działania autoryzacji w aplikacjach ASP.NET Core.
 ms.author: riande
 ms.date: 10/14/2016
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authorization/introduction
-ms.openlocfilehash: b5e60b3c256941fff5e54e1a02e077c34c535902
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 241ef8b00e9dcbd1983d32edcd9c1db2eaa5c687
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78660714"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777530"
 ---
 # <a name="introduction-to-authorization-in-aspnet-core"></a>Wprowadzenie do autoryzacji w ASP.NET Core
 
@@ -20,14 +26,14 @@ Autoryzacja odnosi się do procesu, który określa, co użytkownik może zrobi�
 
 Autoryzacja jest prostopadła i niezależna od uwierzytelniania. Autoryzacja wymaga jednak mechanizmu uwierzytelniania. Uwierzytelnianie to proces ustalania, kto jest użytkownikiem. Uwierzytelnianie może utworzyć jedną lub więcej tożsamości dla bieżącego użytkownika.
 
-Aby uzyskać więcej informacji na temat uwierzytelniania w ASP.NET Core, zobacz <xref:security/authentication/index>.
+Aby uzyskać więcej informacji na temat uwierzytelniania w ASP.NET Core <xref:security/authentication/index>, zobacz.
 
 ## <a name="authorization-types"></a>Typy autoryzacji
 
 Autoryzacja ASP.NET Core zapewnia prostą, deklaratywną [rolę](xref:security/authorization/roles) i bogaty model [oparty na zasadach](xref:security/authorization/policies) . Autoryzacja jest wyrażona w wymaganiach, a programy obsługi szacują oświadczenia użytkownika względem wymagań. Bezwzględne kontrole mogą opierać się na prostych zasadach lub zasadach, które obliczają zarówno tożsamość użytkownika, jak i właściwości zasobu, do którego użytkownik próbuje uzyskać dostęp.
 
-## <a name="namespaces"></a>Przestrzenie nazw
+## <a name="namespaces"></a>Namespaces
 
-Składniki autoryzacji, w tym atrybuty `AuthorizeAttribute` i `AllowAnonymousAttribute`, znajdują się w przestrzeni nazw `Microsoft.AspNetCore.Authorization`.
+W `Microsoft.AspNetCore.Authorization` przestrzeni nazw znajdują `AuthorizeAttribute` się `AllowAnonymousAttribute` składniki autoryzacji, w tym atrybuty i.
 
 Zapoznaj się z dokumentacją dotyczącą [prostej autoryzacji](xref:security/authorization/simple).

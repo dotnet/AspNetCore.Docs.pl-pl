@@ -6,13 +6,19 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 4/23/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: fundamentals/logging/index
-ms.openlocfilehash: 7be8cef3377132ed43efde209db67401d7bdb6dc
-ms.sourcegitcommit: 7bb14d005155a5044c7902a08694ee8ccb20c113
+ms.openlocfilehash: ca62e374c6031ca3c2d438df87f2d13636d9c612
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82110918"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776106"
 ---
 # <a name="logging-in-net-core-and-aspnet-core"></a>Rejestrowanie w programie .NET Core i ASP.NET Core
 
@@ -533,7 +539,7 @@ Dane konfiguracji i `AddFilter` kod przedstawiony w powyższych przykładach two
 | 1      | Debugowanie         | Wszystkie kategorie                          | Informacje       |
 | 2      | Konsola       | Microsoft. AspNetCore. MVC. Razor. Internal | Ostrzeżenie           |
 | 3      | Konsola       | Microsoft. AspNetCore. MVC. Razor. Razor    | Debugowanie             |
-| 4      | Konsola       | Microsoft. AspNetCore. MVC. Razor          | Błąd             |
+| 4      | Konsola       | Microsoft. AspNetCore. MVC. Razor          | Error             |
 | 5      | Konsola       | Wszystkie kategorie                          | Informacje       |
 | 6      | Wszyscy dostawcy | Wszystkie kategorie                          | Debugowanie             |
 | 7      | Wszyscy dostawcy | System                                  | Debugowanie             |
@@ -898,7 +904,7 @@ Korzystanie z struktury innej firmy jest podobne do korzystania z jednego z wbud
 
 Aby uzyskać więcej informacji, zobacz dokumentację każdego dostawcy. Dostawcy rejestrowania innych firm nie są obsługiwani przez firmę Microsoft.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:fundamentals/logging/loggermessage>
 ::: moniker-end
@@ -1299,7 +1305,7 @@ Dane konfiguracji i `AddFilter` kod przedstawiony w powyższych przykładach two
 | 1      | Debugowanie         | Wszystkie kategorie                          | Informacje       |
 | 2      | Konsola       | Microsoft. AspNetCore. MVC. Razor. Internal | Ostrzeżenie           |
 | 3      | Konsola       | Microsoft. AspNetCore. MVC. Razor. Razor    | Debugowanie             |
-| 4      | Konsola       | Microsoft. AspNetCore. MVC. Razor          | Błąd             |
+| 4      | Konsola       | Microsoft. AspNetCore. MVC. Razor          | Error             |
 | 5      | Konsola       | Wszystkie kategorie                          | Informacje       |
 | 6      | Wszyscy dostawcy | Wszystkie kategorie                          | Debugowanie             |
 | 7      | Wszyscy dostawcy | System                                  | Debugowanie             |
@@ -1358,7 +1364,7 @@ Poniżej przedstawiono niektóre kategorie używane przez ASP.NET Core i Entity 
 | Microsoft. AspNetCore. dataprotection | Które klucze zostały wzięte pod uwagę, znaleziono i użyte. |
 | Microsoft. AspNetCore. HostFiltering  | Dozwolone hosty. |
 | Microsoft. AspNetCore. hosting        | Jak długo trwa wykonywanie żądań HTTP i czas ich uruchomienia. Które hostowanie zestawów uruchamiania zostało załadowane. |
-| Microsoft. AspNetCore. MVC            | Diagnostyka MVC i Razor. Powiązanie modelu, wykonywanie filtru, kompilacja widoku, wybór akcji. |
+| Microsoft. AspNetCore. MVC            | MVC i Razor Diagnostyka. Powiązanie modelu, wykonywanie filtru, kompilacja widoku, wybór akcji. |
 | Microsoft. AspNetCore. Routing        | Informacje o trasie. |
 | Microsoft. AspNetCore. Server         | Reagowanie na uruchamianie, zatrzymywanie i utrzymywanie aktywności. Informacje o certyfikacie HTTPS. |
 | Microsoft. AspNetCore. StaticFiles    | Obsługiwane pliki. |
@@ -1562,7 +1568,7 @@ Korzystanie z struktury innej firmy jest podobne do korzystania z jednego z wbud
 
 Aby uzyskać więcej informacji, zobacz dokumentację każdego dostawcy. Dostawcy rejestrowania innych firm nie są obsługiwani przez firmę Microsoft.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:fundamentals/logging/loggermessage>
 

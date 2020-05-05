@@ -1,23 +1,26 @@
 ---
-title: Tworzenie i używanie składników ASP.NET Core Razor
+title: Tworzenie i używanie składników Razor ASP.NET Core
 author: guardrex
-description: Dowiedz się, jak tworzyć i używać składników Razor, w tym jak powiązać z danymi, obsługiwać zdarzenia i zarządzać cyklem życia składników.
+description: Dowiedz się, jak tworzyć Razor i używać składników, w tym jak powiązać z danymi, obsługiwać zdarzenia i zarządzać cyklem życia składników.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 04/21/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/components
-ms.openlocfilehash: a9ae84c36716bfc07ae3cf86214e48ad24770401
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: f8b1ffef1b8375337f66c93d9b4652ad3c5dd616
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82205959"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82767750"
 ---
-# <a name="create-and-use-aspnet-core-razor-components"></a>Tworzenie i używanie składników ASP.NET Core Razor
+# <a name="create-and-use-aspnet-core-razor-components"></a>Tworzenie i używanie składników Razor ASP.NET Core
 
 [Luke Latham](https://github.com/guardrex), [Daniel Roth](https://github.com/danroth27)i [Tobias Bartsch](https://www.aveo-solutions.com/)
 
@@ -27,11 +30,11 @@ Blazoraplikacje są kompilowane przy użyciu *składników*programu. Składnik j
 
 ## <a name="component-classes"></a>Klasy składników
 
-Składniki są zaimplementowane w plikach składników [Razor](xref:mvc/views/razor) (*Razor*) przy użyciu kombinacji języka C# i znaczników HTML. Składnik w programie Blazor jest formalnie nazywany *składnikiem Razor*.
+Składniki są zaimplementowane w [Razor](xref:mvc/views/razor) plikach składników (*. Razor*) przy użyciu kombinacji języka C# i znaczników HTML. Składnik w programie Blazor jest formalnie nazywany * Razor składnikiem*.
 
 Nazwa składnika musi rozpoczynać się wielką literą. Na przykład *MyCoolComponent. Razor* jest prawidłowy, a *MyCoolComponent. Razor* jest nieprawidłowy.
 
-Interfejs użytkownika dla składnika jest definiowany przy użyciu języka HTML. Logika renderowania dynamicznego (na przykład pętle, warunkowe, wyrażenia) jest dodawana przy użyciu osadzonej składni języka C# o nazwie [Razor](xref:mvc/views/razor). Po skompilowaniu aplikacji logika kodu HTML i renderowania języka C# jest konwertowana na klasę składnika. Nazwa wygenerowanej klasy jest zgodna z nazwą pliku.
+Interfejs użytkownika dla składnika jest definiowany przy użyciu języka HTML. Logika renderowania dynamicznego (na przykład pętle, warunkowe, wyrażenia) jest dodawana przy użyciu osadzonej [Razor](xref:mvc/views/razor)składni języka C# o nazwie. Po skompilowaniu aplikacji logika kodu HTML i renderowania języka C# jest konwertowana na klasę składnika. Nazwa wygenerowanej klasy jest zgodna z nazwą pliku.
 
 Elementy członkowskie klasy składnika są zdefiniowane w `@code` bloku. W `@code` bloku stan składnika (właściwości, pola) jest określany przy użyciu metod obsługi zdarzeń lub definiowania innej logiki składnika. Dozwolony jest więcej `@code` niż jeden blok.
 
@@ -76,13 +79,13 @@ Użyj ścieżki względnej (`/`), aby odwołać się do katalogu głównego siec
 <img alt="Company logo" src="/images/logo.png" />
 ```
 
-Składniki Razor **nie** obsługują notacji z ukośnikiem (`~/`).
+Razorskładniki nie **obsługują** notacji ukośnika odwrotnego`~/`().
 
 Aby uzyskać informacje na temat ustawiania ścieżki podstawowej aplikacji, zobacz <xref:host-and-deploy/blazor/index#app-base-path>.
 
 ## <a name="tag-helpers-arent-supported-in-components"></a>Pomocnicy tagów nie są obsługiwani w składnikach
 
-[Pomocnicy tagów](xref:mvc/views/tag-helpers/intro) nie są obsługiwani w składnikach Razor (pliki *. Razor* ). Aby zapewnić funkcję przypominającą pomocnik tagów w Blazorprogramie, należy utworzyć składnik o tej samej funkcji co pomocnik tagów i użyć składnika zamiast niego.
+[Pomocnicy tagów](xref:mvc/views/tag-helpers/intro) nie są obsługiwani w Razor składnikach (pliki *. Razor* ). Aby zapewnić funkcję przypominającą pomocnik tagów w Blazorprogramie, należy utworzyć składnik o tej samej funkcji co pomocnik tagów i użyć składnika zamiast niego.
 
 ## <a name="use-components"></a>Używanie składników
 
@@ -104,7 +107,7 @@ Jeśli składnik zawiera element HTML z wielką literą, która nie jest zgodna 
 
 Routing w Blazor programie jest realizowany przez dostarczenie szablonu trasy do każdego dostępnego składnika w aplikacji.
 
-Gdy plik Razor z `@page` dyrektywą jest kompilowany, wygenerowana Klasa ma określony <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> szablon trasy. W czasie wykonywania router szuka klas składników za pomocą `RouteAttribute` i renderuje, w zależności od tego, który składnik ma szablon trasy zgodny z ŻĄDANYM adresem URL.
+Gdy Razor plik z `@page` dyrektywą jest kompilowany, wygenerowana Klasa ma określony <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> szablon trasy. W czasie wykonywania router szuka klas składników za pomocą `RouteAttribute` i renderuje, w zależności od tego, który składnik ma szablon trasy zgodny z ŻĄDANYM adresem URL.
 
 ```razor
 @page "/ParentComponent"
@@ -126,7 +129,7 @@ Składniki mogą odbierać parametry trasy z szablonu trasy dostarczonego w `@pa
 
 Parametry opcjonalne nie są obsługiwane, więc `@page` dwie dyrektywy są stosowane w powyższym przykładzie. Pierwszy zezwala na nawigowanie do składnika bez parametru. Druga `@page` dyrektywa odbiera parametr `{text}` Route i przypisuje wartość do `Text` właściwości.
 
-*Catch-all* parametrów (`*`/`**`), która przechwytuje ścieżkę między wieloma granicami folderów, **nie** jest obsługiwana w składnikach Razor (*. Razor*).
+*Catch-all* `*`/`**`parametrów (), która przechwytuje ścieżkę między wieloma granicami folderów, **nie** jest obsługiwana Razor w składnikach (*. Razor*).
 
 ### <a name="component-parameters"></a>Parametry składnika
 
@@ -166,7 +169,7 @@ W poniższym przykładzie `ChildComponent` ma `ChildContent` właściwość, kt�
 
 ## <a name="attribute-splatting-and-arbitrary-parameters"></a>Korzystając atrybutów i dowolne parametry
 
-Składniki mogą przechwytywać i renderować dodatkowe atrybuty oprócz zadeklarowanych parametrów składnika. Dodatkowe atrybuty mogą być przechwytywane w słowniku, a następnie *splatted* do elementu, gdy składnik jest renderowany przy [`@attributes`](xref:mvc/views/razor#attributes) użyciu dyrektywy Razor. Ten scenariusz jest przydatny podczas definiowania składnika, który generuje element znaczników, który obsługuje różne dostosowania. Na przykład może być żmudnym do definiowania atrybutów oddzielnie dla `<input>` , który obsługuje wiele parametrów.
+Składniki mogą przechwytywać i renderować dodatkowe atrybuty oprócz zadeklarowanych parametrów składnika. Dodatkowe atrybuty mogą być przechwytywane w słowniku, a następnie *splatted* na element, gdy składnik jest renderowany przy [`@attributes`](xref:mvc/views/razor#attributes) Razor użyciu dyrektywy. Ten scenariusz jest przydatny podczas definiowania składnika, który generuje element znaczników, który obsługuje różne dostosowania. Na przykład może być żmudnym do definiowania atrybutów oddzielnie dla `<input>` , który obsługuje wiele parametrów.
 
 W poniższym `<input>` przykładzie pierwszy element (`id="useIndividualParams"`) używa pojedynczych parametrów składnika, podczas gdy drugi `<input>` element (`id="useAttributesDict"`) używa atrybutu korzystając:
 
@@ -552,12 +555,12 @@ Następujący `Expander` składnik:
 
 ## <a name="partial-class-support"></a>Obsługa klasy częściowej
 
-Składniki Razor są generowane jako klasy częściowe. Składniki Razor są tworzone przy użyciu jednej z następujących metod:
+Razorskładniki są generowane jako klasy częściowe. Razorskładniki są tworzone przy użyciu jednej z następujących metod:
 
-* Kod C# jest zdefiniowany w [`@code`](xref:mvc/views/razor#code) bloku z oznaczeniem HTML i kodem Razor w pojedynczym pliku. BlazorSzablony definiują swoje składniki Razor przy użyciu tego podejścia.
+* Kod C# jest zdefiniowany w [`@code`](xref:mvc/views/razor#code) bloku z oznaczeniem HTML i Razor kodem w pojedynczym pliku. BlazorSzablony definiują Razor ich składniki przy użyciu tego podejścia.
 * Kod C# jest umieszczany w pliku związanym z kodem zdefiniowanym jako Klasa częściowa.
 
-Poniższy przykład pokazuje składnik domyślny `Counter` z `@code` blokiem w aplikacji wygenerowanej na podstawie Blazor szablonu. Znaczniki HTML, kod Razor i kod C# są w tym samym pliku:
+Poniższy przykład pokazuje składnik domyślny `Counter` z `@code` blokiem w aplikacji wygenerowanej na podstawie Blazor szablonu. Znaczniki HTML, Razor kod i kod C# są w tym samym pliku:
 
 *Counter. Razor*:
 
@@ -611,7 +614,7 @@ namespace BlazorApp.Pages
 }
 ```
 
-W razie potrzeby dodaj wszystkie wymagane przestrzenie nazw do pliku klasy częściowej. Typowe przestrzenie nazw używane przez składniki Razor obejmują:
+W razie potrzeby dodaj wszystkie wymagane przestrzenie nazw do pliku klasy częściowej. Typowe przestrzenie nazw Razor używane przez składniki obejmują:
 
 ```csharp
 using Microsoft.AspNetCore.Authorization;
@@ -652,7 +655,7 @@ namespace BlazorSample
 
 ## <a name="specify-an-attribute"></a>Określ atrybut
 
-Atrybuty można określić w składnikach Razor za pomocą [`@attribute`](xref:mvc/views/razor#attribute) dyrektywy. Poniższy przykład stosuje `[Authorize]` atrybut do klasy składnika:
+Atrybuty można określić w Razor składnikach [`@attribute`](xref:mvc/views/razor#attribute) dyrektywy. Poniższy przykład stosuje `[Authorize]` atrybut do klasy składnika:
 
 ```razor
 @page "/"
@@ -661,15 +664,15 @@ Atrybuty można określić w składnikach Razor za pomocą [`@attribute`](xref:m
 
 ## <a name="import-components"></a>Importuj składniki
 
-Przestrzeń nazw składnika utworzone przy użyciu Razor jest oparta na (w kolejności priorytetu):
+Przestrzeń nazw składnika utworzona w programie Razor jest oparta na (w kolejności priorytetu):
 
-* [`@namespace`](xref:mvc/views/razor#namespace)oznaczenie w pliku Razor (*. Razor*) Markup (`@namespace BlazorSample.MyNamespace`).
+* [`@namespace`](xref:mvc/views/razor#namespace)oznaczenie w Razor pliku (*. Razor*) Markup (`@namespace BlazorSample.MyNamespace`).
 * Projekt znajduje `RootNamespace` się w pliku projektu (`<RootNamespace>BlazorSample</RootNamespace>`).
 * Nazwa projektu, pobrana z nazwy pliku projektu (*. csproj*) i ścieżka z katalogu głównego projektu do składnika. Na przykład struktura rozpoznaje *{Project root}/Pages/index.Razor* (*BlazorSample. csproj*) do przestrzeni nazw `BlazorSample.Pages`. Składniki przestrzegają reguł powiązań nazw języka C#. W przypadku `Index` składnika w tym przykładzie składniki należące do zakresu są wszystkich składników:
   * W tym samym folderze *strony*.
   * Składniki w katalogu głównym projektu, które nie określają jawnie innej przestrzeni nazw.
 
-Składniki zdefiniowane w innej przestrzeni nazw są wprowadzane do zakresu za pomocą [`@using`](xref:mvc/views/razor#using) dyrektywy Razor.
+Składniki zdefiniowane w innej przestrzeni nazw są wprowadzane do zakresu za Razorpomocą [`@using`](xref:mvc/views/razor#using) dyrektywy.
 
 Jeśli inny składnik, `NavMenu.razor`,,, istnieje w *BlazorSample/Shared/* folder, można użyć w programie `Index.razor` z następującą `@using` instrukcją:
 
@@ -912,9 +915,9 @@ Składniki potomne `Tab` przechwytują zawierający `TabSet` jako parametr kaska
 
 [!code-razor[](common/samples/3.x/BlazorWebAssemblySample/Components/Tab.razor)]
 
-## <a name="razor-templates"></a>Szablony Razor
+## <a name="razor-templates"></a>Razorprzystawki
 
-Fragmenty renderowania można definiować przy użyciu składni szablonu Razor. Szablony Razor są sposobem definiowania fragmentu interfejsu użytkownika i przyjmuje następujący format:
+Fragmenty renderowania można definiować przy użyciu Razor składni szablonu. RazorSzablony są sposobem definiowania fragmentu interfejsu użytkownika i przyjmuje następujący format:
 
 ```razor
 @<{HTML tag}>...</{HTML tag}>
@@ -964,6 +967,6 @@ Podobnie Obrazy SVG są obsługiwane w regułach CSS pliku arkusza stylów (*CSS
 
 Jednak wbudowane znaczniki SVG nie są obsługiwane we wszystkich scenariuszach. Jeśli umieścisz `<svg>` tag bezpośrednio w pliku składnika (*. Razor*), podstawowe renderowanie obrazu jest obsługiwane, ale wiele scenariuszy zaawansowanych nie jest jeszcze obsługiwanych. Na przykład `<use>` Tagi nie są obecnie przestrzegane i `@bind` nie mogą być używane z niektórymi tagami SVG. Oczekujemy, że te ograniczenia są opisane w przyszłej wersji.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:security/blazor/server/threat-mitigation>&ndash; Zawiera wskazówki dotyczące tworzenia Blazor aplikacji serwera, które muszą będą konkurować o z wyczerpaniem zasobów.

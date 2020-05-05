@@ -5,13 +5,19 @@ description: Dowiedz się, jak używać narzędzi programu Visual Studio i platf
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 09/12/2018
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: host-and-deploy/docker/visual-studio-tools-for-docker
-ms.openlocfilehash: ba79f0af8192ad9e8b263d4304ccc0df36c50f00
-ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
+ms.openlocfilehash: b73903eae2b289fd410599748c1f48bdb4601543
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81440756"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776132"
 ---
 # <a name="visual-studio-container-tools-with-aspnet-core"></a>Narzędzia kontenerów programu Visual Studio z platformą ASP.NET Core
 
@@ -21,12 +27,12 @@ Program Visual Studio 2017 i jego nowsze wersje obsługują kompilowanie, debugo
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
-* [Docker dla systemu Windows](https://docs.docker.com/docker-for-windows/install/)
+* [Docker for Windows](https://docs.docker.com/docker-for-windows/install/)
 * [Program Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) z obciążeniem **Programowanie dla wielu platform w środowisku .NET Core**
 
 ## <a name="installation-and-setup"></a>Instalacja i konfiguracja
 
-W przypadku instalacji platformy Docker należy najpierw przejrzeć informacje zawarte w programie [Docker dla systemu Windows: Co należy wiedzieć przed zainstalowaniem](https://docs.docker.com/docker-for-windows/install/#what-to-know-before-you-install)programu . Następnie zainstaluj [platformę Docker dla systemu Windows](https://docs.docker.com/docker-for-windows/install/).
+W przypadku instalacji platformy Docker zapoznaj się z informacjami w [Docker for Windows: co należy wiedzieć przed zainstalowaniem](https://docs.docker.com/docker-for-windows/install/#what-to-know-before-you-install)programu. Następnie zainstaluj [platformę Docker dla systemu Windows](https://docs.docker.com/docker-for-windows/install/).
 
 **[Udostępnione dyski](https://docs.docker.com/docker-for-windows/#shared-drives)** na platformie Docker dla systemu Windows muszą być skonfigurowane do obsługi mapowania woluminów i debugowania. Kliknij prawym przyciskiem myszy ikonę platformy Docker na pasku zadań, wybierz pozycję **Settings** (Ustawienia) i wybierz pozycję **Shared Drives** (Udostępnione dyski). Wybierz dysk, na którym platforma Docker przechowuje pliki. Kliknij przycisk **Zastosuj**.
 
@@ -82,9 +88,9 @@ Wcześniejszy plik *Dockerfile* bazuje na obrazie [microsoft/aspnetcore](https:/
 
 ## <a name="add-container-orchestrator-support-to-an-app"></a>Dodawanie do aplikacji obsługi orkiestratora kontenerów
 
-Program Visual Studio 2017 w wersji 15.7 lub starszych jako rozwiązanie aranżacji kontenerów obsługuje tylko narzędzie [Docker Compose](https://docs.docker.com/compose/overview/). Artefakty docker compose są dodawane za pośrednictwem**obsługi dokcker** **.** > 
+Program Visual Studio 2017 w wersji 15.7 lub starszych jako rozwiązanie aranżacji kontenerów obsługuje tylko narzędzie [Docker Compose](https://docs.docker.com/compose/overview/). Docker Compose artefakty są dodawane za pośrednictwem **dodawania** > **obsługi platformy Docker**.
 
-W programie Visual Studio 2017 w wersji 15.8 i nowszych rozwiązanie aranżacji jest dodawane tylko na wyraźne żądanie. Kliknij projekt prawym przyciskiem myszy w **Eksploratorze rozwiązań** i wybierz pozycję **Dodaj** > **Obsługa orkiestratora kontenerów**. Oferowane są dwie różne opcje: [Docker Compose](#docker-compose) i [Service Fabric](#service-fabric).
+W programie Visual Studio 2017 w wersji 15.8 i nowszych rozwiązanie aranżacji jest dodawane tylko na wyraźne żądanie. Kliknij projekt prawym przyciskiem myszy w **Eksploratorze rozwiązań** i wybierz pozycję **Dodaj** > **Obsługa orkiestratora kontenerów**. Oferowane są dwa różne opcje: [Docker Compose](#docker-compose) i [Service Fabric](#service-fabric).
 
 ### <a name="docker-compose"></a>Docker Compose
 
@@ -120,7 +126,7 @@ Usługa Service Fabric nie obsługuje uruchamiania kontenerów systemu Linux w l
 
 Narzędzia kontenerów programu Visual Studio wykonują następujące zadania:
 
-* Dodaje * &lt;projekt aplikacji&gt;* sieci szkieletowej **project_name aplikacji usługi** aplikacji do rozwiązania.
+* Dodaje * &lt;Project_Name&gt;aplikacji* **Service Fabric projektu aplikacji** do rozwiązania.
 * Dodają do projektu ASP.NET Core pliki *Dockerfile* i *.dockerignore*. Jeśli plik *Dockerfile* już istnieje w projekcie ASP.NET Core, jego nazwa zostanie zmieniona na *Dockerfile.original*. Tworzony jest nowy plik *Dockerfile* podobny do następującego:
 
     [!code-dockerfile[](visual-studio-tools-for-docker/samples/2.1/HelloDockerTools/Dockerfile)]
@@ -185,7 +191,7 @@ baf9a678c88d        hellodockertools:dev   "C:\\remote_debugge..."   21 seconds 
 
 ## <a name="edit-and-continue"></a>Edytowanie i kontynuowanie
 
-Zmiany w plikach statycznych i widokach Razor są automatycznie aktualizowane bez konieczności wykonywania kroku kompilacji. Wprowadź zmiany, zapisz je i odśwież przeglądarkę, aby wyświetlić aktualizację.
+Zmiany w plikach i Razor widokach statycznych są automatycznie aktualizowane bez konieczności wykonywania kroku kompilacji. Wprowadź zmiany, zapisz je i odśwież przeglądarkę, aby wyświetlić aktualizację.
 
 Modyfikacje pliku kodu wymagają kompilacji i ponownego uruchomienia serwera Kestrel w kontenerze. Po wprowadzeniu zmiany użyj klawiszy `CTRL+F5`, aby wykonać przetwarzanie i uruchomić aplikację w kontenerze. Kontener platformy Docker nie jest ponownie kompilowany ani zatrzymywany. Uruchom polecenie `docker ps` w konsoli PMC. Zwróć uwagę, że oryginalny kontener nadal działa od 10 minut:
 
@@ -227,14 +233,14 @@ Obrazy `microsoft/aspnetcore-build` i `microsoft/aspnetcore` wyświetlane w popr
 ::: moniker-end
 
 > [!NOTE]
-> Polecenie `docker images` zwraca obrazy pośredniczące z nazwami repozytorium i tagami zidentyfikowanymi jako * \<żadne>* (niewymienione powyżej). Te nienazwane obrazy są produkowane przez [wieloetapową kompilację](https://docs.docker.com/engine/userguide/eng-image/multistage-build/) *Dockerfile*. Poprawiają one wydajność kompilowania końcowego obrazu &mdash; w przypadku wystąpienia zmian tylko niezbędne warstwy są ponownie kompilowane. Gdy obrazy pośrednie nie będą już potrzebne, można je usunąć za pomocą polecenia [docker rmi](https://docs.docker.com/engine/reference/commandline/rmi/).
+> Polecenie zwraca obrazy pośredniczące z nazwami repozytoriów i tagami identyfikowanych jako * \<brak>* (niewymienione powyżej). `docker images` Te obrazy bez nazwy są tworzone przez [Wieloetapową kompilację](https://docs.docker.com/engine/userguide/eng-image/multistage-build/) *pliku dockerfile*. Poprawiają one wydajność kompilowania końcowego obrazu &mdash; w przypadku wystąpienia zmian tylko niezbędne warstwy są ponownie kompilowane. Gdy obrazy pośrednie nie będą już potrzebne, można je usunąć za pomocą polecenia [docker rmi](https://docs.docker.com/engine/reference/commandline/rmi/).
 
 Może wystąpić oczekiwanie, że rozmiar obrazu produkcyjnego lub wydania będzie mniejszy niż obraz *dev*. Ze względu na mapowanie woluminu debuger i aplikacja były uruchomione z poziomu komputera lokalnego, a nie w kontenerze. Obraz *latest* (najnowszy) zawiera spakowany kod aplikacji niezbędny do uruchomienia aplikacji na komputerze hosta. Różnica w rozmiarach wynika zatem z rozmiaru kodu aplikacji.
 
 ## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Opracowywanie kontenerów w programie Visual Studio](/visualstudio/containers)
-* [Usługa Azure Service Fabric: Przygotowanie środowiska programistycznego](/azure/service-fabric/service-fabric-get-started)
+* [Azure Service Fabric: Przygotowywanie środowiska deweloperskiego](/azure/service-fabric/service-fabric-get-started)
 * [Wdrażanie aplikacji .NET w kontenerze systemu Windows w usłudze Azure Service Fabric](/azure/service-fabric/service-fabric-host-app-in-a-container)
 * [Rozwiązywanie problemów związanych z opracowywaniem zwartości w programie Visual Studio przy użyciu platformy Docker](/azure/vs-azure-tools-docker-troubleshooting-docker-errors)
 * [Repozytorium usługi GitHub dla narzędzi kontenerów programu Visual Studio](https://github.com/Microsoft/DockerTools)

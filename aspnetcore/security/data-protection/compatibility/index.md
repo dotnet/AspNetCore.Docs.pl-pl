@@ -1,18 +1,24 @@
 ---
-title: Kompatybilność w ASP.NET Core
+title: Zgodność w ASP.NET Core
 author: rick-anderson
-description: Ten dokument służy jako spis treści dla różnych ASP.NET tematów zgodności ochrony danych Core.
+description: Ten dokument służy jako Spis treści dla różnych tematów ASP.NET Core zgodności ochrony danych.
 ms.author: riande
 ms.date: 10/14/2016
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/compatibility/index
-ms.openlocfilehash: c5e277d812bb5d16fa5a3ab1b6acc091ed3b32ce
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: 103cd3529fa25c9e4c7e1afe32fef1f84748dd71
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78667973"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777478"
 ---
-# <a name="compatibility-in-aspnet-core"></a>Kompatybilność w ASP.NET Core
+# <a name="compatibility-in-aspnet-core"></a>Zgodność w ASP.NET Core
 
-* [Wymiana \<ASP.NET maszynyKey> w ASP.NET Core](xref:security/data-protection/compatibility/replacing-machinekey)
-* `Microsoft.AspNetCore.DataProtection`3.1 nie jest zgodny z aplikacjami funkcji platformy Azure. Aby uzyskać więcej informacji, zobacz [ten problem z githubem](https://github.com/Azure/azure-functions-host/issues/5447)
+* [Zastępowanie \<> machineKey ASP.NET w ASP.NET Core](xref:security/data-protection/compatibility/replacing-machinekey)
+* `Microsoft.AspNetCore.DataProtection`3,1 nie jest zgodny z aplikacjami funkcji platformy Azure. Aby uzyskać więcej informacji, zobacz [ten problem](https://github.com/Azure/azure-functions-host/issues/5447) w usłudze GitHub

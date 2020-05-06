@@ -4,8 +4,7 @@
       {
         "files": [
           "**/*.md",
-          "**/*.yml",
-          "breadcrumb/TOC.yml"
+          "**/*.yml"
         ],
         "exclude": [
           "**/obj/**",
@@ -44,16 +43,17 @@
     "overwrite": [],
     "externalReference": [],
     "globalMetadata": {
-      "bilingual_type": "hover over",
       "_navPath": "/foo",
       "_navRel": "/foo",
-      "breadcrumb_path": "/aspnet/breadcrumb/toc.json",
+      "breadcrumb_path": "/aspnet/core/breadcrumb/toc.json",
+      "bilingual_type": "hover over",
+      "extendBreadcrumb": true,
       "feedback_github_repo": "dotnet/AspNetCore.Docs.pl-pl",
       "feedback_product_url": "https://github.com/dotnet/aspnetcore/blob/master/CONTRIBUTING.md",
       "feedback_system": "GitHub",
       "ms.prod": "aspnet-core",
       "ms.topic": "conceptual",
-      "uhfHeaderId": "MSDocsHeader-DotNet",
+      "uhfHeaderId": [],
       "searchScope": [
         "ASP.NET Core"
       ],
@@ -91,7 +91,8 @@
         "signalr/**/**.md": "aspnetcore-signalr",
         "test/**/**.md": "aspnetcore-test",
         "tutorials/**/**.md": "aspnetcore-tutorials",
-        "web-api/**/**.md": "aspnetcore-webapi"
+        "web-api/**/**.md": "aspnetcore-webapi",
+        "whats-new/**/**.md": "aspnetcore-whatsnew"
       },
       "ms.topic": {
         "getting-started/**/**.md": "tutorial",

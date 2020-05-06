@@ -8,14 +8,17 @@ ms.custom: mvc
 ms.date: 04/27/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: security/blazor/server/threat-mitigation
-ms.openlocfilehash: 9a5e313153e5c5c17fc723cc9768c49ffd828007
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
-ms.translationtype: MT
+ms.openlocfilehash: 2c87e6cef5a16b394b03dac1635f18d09593eb94
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.translationtype: HT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82206383"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774187"
 ---
 # <a name="threat-mitigation-guidance-for-aspnet-core-blazor-server"></a>Wskazówki dotyczące łagodzenia zagrożeń dla ASP.NET Core Blazor Server
 
@@ -94,7 +97,7 @@ Domyślnie nie ma żadnego limitu liczby połączeń na użytkownika dla aplikac
 
 Ataki typu "odmowa usługi" (DoS) obejmują klienta, który powoduje, że serwer wyczerpuje jeden lub więcej zasobów, dzięki czemu aplikacja jest niedostępna. Aplikacje serwera Blazor obejmują pewne limity domyślne i są zależne od innych limitów ASP.NET Core i sygnałów, aby chronić przed atakami DoS:
 
-| Limit aplikacji serwera Blazor                            | Opis | Domyślny |
+| Limit aplikacji serwera Blazor                            | Opis | Domyślne |
 | ------------------------------------------------------- | ----------- | ------- |
 | `CircuitOptions.DisconnectedCircuitMaxRetained`         | Maksymalna liczba odłączonych obwodów, które dany serwer przechowuje w pamięci w danym momencie. | 100 |
 | `CircuitOptions.DisconnectedCircuitRetentionPeriod`     | Maksymalny czas przechowywania połączonego obwodu w pamięci przed jego usunięciem. | 3 minuty |
@@ -102,7 +105,7 @@ Ataki typu "odmowa usługi" (DoS) obejmują klienta, który powoduje, że serwer
 | `CircuitOptions.MaxBufferedUnacknowledgedRenderBatches` | Maksymalna liczba niepotwierdzonych partii renderowania, które serwer przechowuje w pamięci na obwód w danym momencie do obsługi niezawodnego ponownego łączenia. Po osiągnięciu limitu serwer przestaje tworzyć nowe partie renderowania do momentu potwierdzenia co najmniej jednej partii przez klienta. | 10 |
 
 
-| Sygnał i limit ASP.NET Core             | Opis | Domyślny |
+| Sygnał i limit ASP.NET Core             | Opis | Domyślne |
 | ------------------------------------------ | ----------- | ------- |
 | `CircuitOptions.MaximumReceiveMessageSize` | Rozmiar wiadomości dla pojedynczej wiadomości. | 32 KB |
 
@@ -342,9 +345,9 @@ Oprócz zabezpieczeń wdrożonych przez platformę, aplikacja musi być kodowana
 
 W przypadku luki w zabezpieczeniach XSS aplikacja musi zawierać dane wejściowe użytkownika na renderowanej stronie. BlazorSkładniki serwera wykonują krok czasu kompilowania, w którym adiustację w pliku *Razor* są przekształcane do procedury proceduralnej logiki C#. W czasie wykonywania logika języka C# kompiluje *drzewo renderowania* opisujące elementy, tekst i składniki podrzędne. Jest on stosowany do modelu DOM przeglądarki za pośrednictwem sekwencji instrukcji języka JavaScript (lub jest serializowany do HTML w przypadku prerenderowania):
 
-* Dane wejściowe użytkownika renderowane za pośrednictwem normalnego składnia Razor ( `@someStringValue`na przykład) nie ujawniają luki w zabezpieczeniach programu XSS, ponieważ składnia Razor jest dodawany do modelu Dom za pośrednictwem poleceń, które mogą zapisywać tekst. Nawet jeśli wartość zawiera znacznik HTML, wartość jest wyświetlana jako tekst statyczny. Podczas renderowania wstępnego dane wyjściowe są kodowane w formacie HTML, co spowoduje również wyświetlenie zawartości jako tekst statyczny.
+* Dane wejściowe użytkownika renderowane za Razor pośrednictwem normalnej składni ( `@someStringValue`na przykład) nie ujawniają luki w Razor zabezpieczeniach programu XSS, ponieważ składnia jest dodawana do modelu Dom za pośrednictwem poleceń, które mogą zapisywać tekst. Nawet jeśli wartość zawiera znacznik HTML, wartość jest wyświetlana jako tekst statyczny. Podczas renderowania wstępnego dane wyjściowe są kodowane w formacie HTML, co spowoduje również wyświetlenie zawartości jako tekst statyczny.
 * Tagi skryptu nie są dozwolone i nie powinny być uwzględnione w drzewie renderowania składnika aplikacji. Jeśli tag skryptu jest zawarty w znaczniku składnika, generowany jest błąd czasu kompilacji.
-* Autorzy składników mogą tworzyć składniki w języku C# bez użycia Razor. Autor składnika jest odpowiedzialny za korzystanie z odpowiednich interfejsów API podczas emitowania danych wyjściowych. Na przykład użyj `builder.AddContent(0, someUserSuppliedString)` , a *nie* `builder.AddMarkupContent(0, someUserSuppliedString)`, ponieważ drugie może utworzyć lukę w zabezpieczeniach.
+* Autorzy składników mogą tworzyć składniki w języku C# Razorbez użycia programu. Autor składnika jest odpowiedzialny za korzystanie z odpowiednich interfejsów API podczas emitowania danych wyjściowych. Na przykład użyj `builder.AddContent(0, someUserSuppliedString)` , a *nie* `builder.AddMarkupContent(0, someUserSuppliedString)`, ponieważ drugie może utworzyć lukę w zabezpieczeniach.
 
 W ramach ochrony przed atakami typu XSS należy rozważyć zaimplementowanie rozwiązań XSS, takich jak [zasady zabezpieczeń zawartości (CSP)](https://developer.mozilla.org/docs/Web/HTTP/CSP).
 

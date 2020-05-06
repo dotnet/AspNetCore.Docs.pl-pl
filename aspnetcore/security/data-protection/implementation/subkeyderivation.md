@@ -4,13 +4,19 @@ author: rick-anderson
 description: Poznaj szczegóły implementacji wyprowadzenia podklucza ASP.NET Core ochrony danych i uwierzytelniania uwierzytelnionego.
 ms.author: riande
 ms.date: 10/14/2016
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/implementation/subkeyderivation
-ms.openlocfilehash: bbfde378755b09cd5b1217b8cf66249b9fa1d6ad
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: c4b4076d532e33b48b3438f842507a8cda2d71b6
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78660553"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776854"
 ---
 # <a name="subkey-derivation-and-authenticated-encryption-in-aspnet-core"></a>Wyprowadzanie podkluczy i uwierzytelnione szyfrowanie w ASP.NET Core
 
@@ -19,21 +25,21 @@ ms.locfileid: "78660553"
 Większość kluczy w pierścieniu kluczy będzie zawierać pewną postać entropii i będzie zawierać informacje o algorytmach z uwzględnieniem "CBC-Mode Encryption + HMAC Validation" lub "GCM Encryption + Validation". W takich przypadkach odwołujemy się do osadzonej entropii jako głównego materiału klucza (lub KM) dla tego klucza i wykonujemy funkcję wyprowadzania klucza w celu uzyskania kluczy, które będą używane dla rzeczywistych operacji kryptograficznych.
 
 > [!NOTE]
-> Klucze są abstrakcyjne i implementacja niestandardowa może nie zachowywać się w następujący sposób. Jeśli klucz zawiera własną implementację `IAuthenticatedEncryptor` zamiast korzystać z jednego z naszych wbudowanych fabryk, mechanizm opisany w tej sekcji już nie ma zastosowania.
+> Klucze są abstrakcyjne i implementacja niestandardowa może nie zachowywać się w następujący sposób. Jeśli klucz stanowi własną implementację `IAuthenticatedEncryptor` zamiast korzystania z jednego z naszych wbudowanych fabryk, mechanizm opisany w tej sekcji już nie ma zastosowania.
 
 <a name="data-protection-implementation-subkey-derivation-aad"></a>
 
 ## <a name="additional-authenticated-data-and-subkey-derivation"></a>Dodatkowe uwierzytelnione dane i podklucze
 
-Interfejs `IAuthenticatedEncryptor` służy jako podstawowy interfejs dla wszystkich uwierzytelnionych operacji szyfrowania. `Encrypt` Metoda przyjmuje dwa bufory: zwykły tekst i additionalAuthenticatedData (AAD). Zawartość w postaci zwykłego tekstu nie zmieniła wywołania do `IDataProtector.Protect`, ale AAD jest generowana przez system i składa się z trzech składników:
+`IAuthenticatedEncryptor` Interfejs służy jako podstawowy interfejs dla wszystkich uwierzytelnionych operacji szyfrowania. Jego `Encrypt` Metoda przyjmuje dwa bufory: zwykły tekst i ADDITIONALAUTHENTICATEDDATA (AAD). Zawartość w postaci zwykłego tekstu nie zmieniła się `IDataProtector.Protect`z wywołaniem, ale jest generowana przez system i składa się z trzech składników:
 
 1. 32-bitowy nagłówek Magic 09 F0 C9 F0, który identyfikuje tę wersję systemu ochrony danych.
 
 2. Identyfikator klucza 128-bitowego.
 
-3. Ciąg o zmiennej długości utworzony z łańcucha przeznaczenie, który utworzył `IDataProtector`, który wykonuje tę operację.
+3. Ciąg o zmiennej długości utworzony z łańcucha przeznaczenie, który utworzył `IDataProtector` tę operację.
 
-Ponieważ usługa AAD jest unikatowa dla krotki wszystkich trzech składników, możemy użyć jej do uzyskania nowych kluczy z KM zamiast używania kilometrów we wszystkich naszych operacjach kryptograficznych. Dla każdego wywołania do `IAuthenticatedEncryptor.Encrypt`należy wykonać następujący proces wyprowadzania klucza:
+Ponieważ usługa AAD jest unikatowa dla krotki wszystkich trzech składników, możemy użyć jej do uzyskania nowych kluczy z KM zamiast używania kilometrów we wszystkich naszych operacjach kryptograficznych. Dla każdego wywołania do `IAuthenticatedEncryptor.Encrypt`programu odbywa się następujący proces wyprowadzania klucza:
 
 (K_E, K_H) = SP800_108_CTR_HMACSHA512 (K_M, AAD, contextHeader | | | | | | | | | | | | | |)
 
@@ -47,7 +53,7 @@ W tym miejscu wywołujemy instytut NIST SP800-108 KDF w trybie licznika (zobacz 
 
 * Context = contextHeader | | Modyfikator
 
-Nagłówek kontekstu ma zmienną długość i zasadniczo służy jako odcisk palca algorytmów, dla których są wyprowadzane K_E i K_H. Modyfikator klucza jest 128-bitowym ciągiem losowo generowanym dla każdego wywołania do `Encrypt` i służy do zagwarantowania, że z założeniem prawdopodobieństwa, że KE i KH jest unikatowy dla tej operacji szyfrowania uwierzytelniania, nawet jeśli wszystkie inne dane wejściowe KDF są stałe.
+Nagłówek kontekstu ma zmienną długość i zasadniczo służy jako odcisk palca algorytmów, dla których są wyprowadzane K_E i K_H. Modyfikator klucza jest 128-bitowym ciągiem losowo generowanym dla każdego wywołania do `Encrypt` i służy do zagwarantowania, że założenie, że funkcja KE i KH jest unikatowa dla tej operacji szyfrowania uwierzytelniania, nawet jeśli wszystkie inne dane wejściowe KDF są stałe.
 
 W przypadku operacji sprawdzania poprawności szyfrowania w trybie CBC + HMAC, | K_E | to długość klucza szyfrowania symetrycznego bloku i | K_H | jest rozmiarem podsumowania procedury HMAC. W przypadku operacji szyfrowania GCM + walidacji, | K_H | = 0.
 
@@ -60,7 +66,7 @@ Po wygenerowaniu K_E za pomocą powyższego mechanizmu generujemy losowy wektor 
 *Output: = modyfikator | | IV | | E_cbc (K_E, IV, dane) | | HMAC (K_H, IV | | E_cbc (K_E, IV, dane))*
 
 > [!NOTE]
-> Implementacja `IDataProtector.Protect` będzie dołączać [magiczny nagłówek i identyfikator klucza](xref:security/data-protection/implementation/authenticated-encryption-details) do danych wyjściowych przed przywróceniem go do obiektu wywołującego. Ponieważ nagłówek Magic i identyfikator klucza są niejawnie częścią usługi [AAD](xref:security/data-protection/implementation/subkeyderivation#data-protection-implementation-subkey-derivation-aad)i ponieważ modyfikator klucza jest podawany jako dane wejściowe do KDF, oznacza to, że każdy pojedynczy bajt końcowego zwróconego ładunku jest uwierzytelniany przez komputery Mac.
+> `IDataProtector.Protect` Implementacja zwróci [nagłówek Magic i identyfikator klucza](xref:security/data-protection/implementation/authenticated-encryption-details) do danych wyjściowych przed przywróceniem go do obiektu wywołującego. Ponieważ nagłówek Magic i identyfikator klucza są niejawnie częścią usługi [AAD](xref:security/data-protection/implementation/subkeyderivation#data-protection-implementation-subkey-derivation-aad)i ponieważ modyfikator klucza jest podawany jako dane wejściowe do KDF, oznacza to, że każdy pojedynczy bajt końcowego zwróconego ładunku jest uwierzytelniany przez komputery Mac.
 
 ## <a name="galoiscounter-mode-encryption--validation"></a>Szyfrowanie w trybie Galois/licznik + Walidacja
 

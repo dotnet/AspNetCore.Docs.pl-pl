@@ -1,67 +1,73 @@
 ---
 title: Widoki w ASP.NET Core MVC
 author: ardalis
-description: Dowiedz się, jak widoki obsługują prezentację danych aplikacji i interakcję użytkownika w ASP.NET Core MVC.
+description: Dowiedz się, w jaki sposób widoki obsługują prezentację danych aplikacji i interakcję użytkownika w ASP.NET Core MVC.
 ms.author: riande
 ms.date: 12/05/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/views/overview
-ms.openlocfilehash: 70b8c2c01a28f99dd384351041a3b77d23f46a48
-ms.sourcegitcommit: f29a12486313e38e0163a643d8a97c8cecc7e871
+ms.openlocfilehash: bda00a416ac34883e0a70a265156fa3ddcde3c6f
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81384070"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777140"
 ---
 # <a name="views-in-aspnet-core-mvc"></a>Widoki w ASP.NET Core MVC
 
 Przez [Steve Smith](https://ardalis.com/)
 
-W tym dokumencie wyjaśniono widoki używane w ASP.NET podstawowych aplikacji MVC. Aby uzyskać informacje na temat stron Razor, zobacz [Wprowadzenie do stron Razor](xref:razor-pages/index).
+W tym dokumencie objaśniono widoki używane w aplikacjach ASP.NET Core MVC. Aby uzyskać informacje na temat Razor Pages, zobacz [wprowadzenie do Razor Pages](xref:razor-pages/index).
 
-W wzorcu model-view-controller (MVC) *widok* obsługuje prezentacji danych aplikacji i interakcji użytkownika. Widok jest szablonem HTML z osadzonym [znacznikiem Razor](xref:mvc/views/razor). Znacznik maszynki do golenia to kod, który współdziała z znacznikami HTML w celu stworzenia strony sieci Web, która jest wysyłana do klienta.
+W wzorcu Model-View-Controller (MVC) *Widok* obsługuje prezentację danych aplikacji i interakcję użytkownika. Widok to szablon HTML z osadzonym [znacznikiem Razor](xref:mvc/views/razor). Znaczniki Razor to kod, który współdziała ze znacznikiem HTML, aby utworzyć stronę sieci Web, która jest wysyłana do klienta.
 
-W ASP.NET Core MVC widoki są plikami *cshtml,* które używają [języka programowania C#](/dotnet/csharp/) w znacznikach Razor. Zazwyczaj pliki widoku są pogrupowane w foldery nazwane dla każdego [z kontrolerów](xref:mvc/controllers/actions)aplikacji. Foldery są przechowywane w folderze *Widoki* w katalogu głównym aplikacji:
+W ASP.NET Core MVC widoki są plikami *. cshtml* , które używają [języka programowania C#](/dotnet/csharp/) w znaczniku Razor. Zazwyczaj pliki widoku są pogrupowane w foldery o nazwie dla każdej z [kontrolerów](xref:mvc/controllers/actions)aplikacji. Foldery są przechowywane w folderze *widoki* w katalogu głównym aplikacji:
 
-![Folder Widoki w Eksploratorze rozwiązań programu Visual Studio jest otwarty z otwartym folderem Strona główna, aby wyświetlić pliki About.cshtml, Contact.cshtml i Index.cshtml](overview/_static/views_solution_explorer.png)
+![Folder widoki w Eksplorator rozwiązań programu Visual Studio jest otwarty z folderem macierzystym otwartym, aby pokazać informacje o plikach. cshtml, Contact. cshtml i index. cshtml](overview/_static/views_solution_explorer.png)
 
-Kontroler *macierzysty* jest reprezentowany przez folder *home* wewnątrz folderu *Widoki.* Folder *Strona główna* zawiera widoki stron sieci Web *Informacje,* *Kontakt*i *Indeks* (strona główna). Gdy użytkownik żąda jednej z tych trzech stron sieci Web, akcje kontrolera w kontrolerze *macierzystym* określają, który z trzech widoków jest używany do tworzenia i zwracania strony sieci Web do użytkownika.
+Kontroler *główny* jest reprezentowany przez folder *macierzysty* w folderze *widoki* . Folder *macierzysty* zawiera widoki stron sieci Web *Informacje o*programie, *kontakt*i *indeks* (Strona główna). Gdy użytkownik zażąda jednej z tych trzech stron sieci Web, akcje kontrolera w kontrolerze *głównym* określają, które z tych trzech widoków są używane do kompilowania i zwracania strony internetowej do użytkownika.
 
-Układy umożliwiają [spójne](xref:mvc/views/layout) sekcje stron sieci Web i zmniejszają powtarzanie kodu. Układy często zawierają elementy nagłówka, nawigacji i menu oraz stopkę. Nagłówek i stopka zwykle zawierają znaczniki standardowego dla wielu elementów metadanych i łącza do zasobów skryptu i stylu. Układy pomagają uniknąć tego znaczników kotłowych w widokach.
+Użyj [układów](xref:mvc/views/layout) , aby zapewnić spójne sekcje stron i ograniczyć powtarzanie kodu. Układy często zawierają nagłówek, nawigację i elementy menu oraz stopkę. Nagłówek i stopka zazwyczaj zawierają standardowe znaczniki dla wielu elementów metadanych i linki do zasobów skryptu i stylu. Układy umożliwiają uniknięcie tego standardowego znacznika w widokach.
 
-[Widoki częściowe](xref:mvc/views/partial) zmniejszają powielanie kodu przez zarządzanie częściami widoków wielokrotnegoużytnia. Na przykład widok częściowy jest przydatny w przypadku biografii autora w witrynie sieci Web bloga, która pojawia się w kilku widokach. Biografia autora jest zwykłą zawartością widoku i nie wymaga kodu do wykonania w celu wytworzenia zawartości dla strony internetowej. Zawartość biografii autora jest dostępna dla widoku przez sam powiązanie modelu, więc użycie widoku częściowego dla tego typu zawartości jest idealne.
+[Częściowe widoki](xref:mvc/views/partial) redukują duplikowanie kodu przez zarządzanie częścią widoków wielokrotnego użytku. Na przykład widok częściowy jest przydatny w przypadku życiorysu autora w witrynie sieci Web blogu, która pojawia się w kilku widokach. Biografia autora to zwykła zawartość widoku i nie wymaga wykonania kodu w celu utworzenia zawartości dla strony sieci Web. Zawartość biografii autora jest dostępna dla samego powiązania widoku przez model, więc użycie widoku częściowego dla tego typu zawartości jest idealne.
 
-[Składniki widoku](xref:mvc/views/view-components) są podobne do widoków częściowych, ponieważ umożliwiają zmniejszenie powtarzającego się kodu, ale są odpowiednie dla zawartości widoku, która wymaga uruchomienia kodu na serwerze w celu renderowania strony sieci Web. Wyświetl składniki są przydatne, gdy renderowana zawartość wymaga interakcji z bazą danych, na przykład dla koszyka witryny sieci Web. Wyświetl składniki nie są ograniczone do powiązania modelu w celu uzyskania danych wyjściowych strony sieci Web.
+[Składniki widoku](xref:mvc/views/view-components) są podobne do widoków częściowych, które umożliwiają zredukowanie powtarzalnego kodu, ale są odpowiednie do wyświetlania zawartości, która wymaga uruchomienia kodu na serwerze w celu renderowania strony sieci Web. Składniki widoku są przydatne, gdy renderowana zawartość wymaga interakcji z bazą danych, na przykład w przypadku koszyka w witrynie sieci Web. Składniki widoku nie są ograniczone do powiązania modelu, aby można było utworzyć dane wyjściowe strony sieci Web.
 
-## <a name="benefits-of-using-views"></a>Korzyści z korzystania z widoków
+## <a name="benefits-of-using-views"></a>Zalety korzystania z widoków
 
-Widoki pomagają ustalić [oddzielenie problemów](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#separation-of-concerns) w aplikacji MVC, oddzielając znaczniki interfejsu użytkownika od innych części aplikacji. Zgodnie z projektem SoC sprawia, że aplikacja jest modułowa, co zapewnia kilka korzyści:
+Wyświetla pomoc w celu ustalenia [rozdzielenia problemów](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#separation-of-concerns) w aplikacji MVC przez oddzielenie znaczników interfejsu użytkownika od innych części aplikacji. Następujący projekt SoC umożliwia modularną aplikację, która zapewnia kilka korzyści:
 
-* Aplikacja jest łatwiejsza w utrzymaniu, ponieważ jest lepiej zorganizowana. Widoki są zazwyczaj pogrupowane według funkcji aplikacji. Ułatwia to znajdowanie powiązanych widoków podczas pracy nad funkcją.
-* Części aplikacji są luźno sprzężone. Widoki aplikacji można tworzyć i aktualizować niezależnie od składników logiki biznesowej i dostępu do danych. Można modyfikować widoki aplikacji bez konieczności aktualizowania innych części aplikacji.
-* Łatwiej jest przetestować części interfejsu użytkownika aplikacji, ponieważ widoki są oddzielne jednostki.
-* Ze względu na lepszą organizację jest mniej prawdopodobne, że przypadkowo powtórzysz sekcje interfejsu użytkownika.
+* Aplikacja jest łatwiejsza w obsłudze, ponieważ jest lepiej zorganizowana. Widoki są zazwyczaj pogrupowane według funkcji aplikacji. Ułatwia to Znajdowanie powiązanych widoków podczas pracy nad funkcją.
+* Części aplikacji są luźno powiązane. Widoki aplikacji można kompilować i aktualizować niezależnie od składników logiki biznesowej i dostępu do danych. Widoki aplikacji można modyfikować bez konieczności aktualizowania innych części aplikacji.
+* Łatwiejsze jest przetestowanie części interfejsu użytkownika aplikacji, ponieważ widoki są osobnymi jednostkami.
+* Ze względu na lepszą organizację nie można przypadkowo powtarzać sekcji interfejsu użytkownika.
 
 ## <a name="creating-a-view"></a>Tworzenie widoku
 
-Widoki specyficzne dla kontrolera są tworzone w folderze *Widoki/[Nazwa kontrolera].* Widoki współużytkowane przez kontrolery są umieszczane w folderze *Widoki/Udostępnione.* Aby utworzyć widok, dodaj nowy plik i nadaj mu taką samą nazwę jak skojarzona z nim akcja kontrolera z rozszerzeniem pliku *cshtml.* Aby utworzyć widok odpowiadający akcji *Informacje* na kontrolerze *macierzystym,* utwórz plik *About.cshtml* w folderze *Widoki/Strona główna:*
+Widoki, które są specyficzne dla kontrolera, są tworzone w folderze *widoki/[ControllerName]* . Widoki, które są współużytkowane przez kontrolery, są umieszczane w folderze *widoki/udostępnione* . Aby utworzyć widok, Dodaj nowy plik i nadaj mu taką samą nazwę jak skojarzona z nim akcja kontrolera z rozszerzeniem *. cshtml* . Aby utworzyć widok, który odpowiada akcji *about* w kontrolerze *głównym* , Utwórz plik *about. cshtml* w folderze *widoki/Home* :
 
 [!code-cshtml[](../../common/samples/WebApplication1/Views/Home/About.cshtml)]
 
-*Znacznik brzytwy* zaczyna `@` się od symbolu. Uruchom instrukcje C#, umieszczając kod C# w [blokach kodu Razor](xref:mvc/views/razor#razor-code-blocks) ustawionych przez nawiasy klamrowe (`{ ... }`). Na przykład zobacz przypisanie "Informacje", aby `ViewData["Title"]` pokazano powyżej. Wartości w formacie HTML można wyświetlać, `@` po prostu odwołując się do wartości za pomocą symbolu. Zobacz zawartość `<h2>` i `<h3>` elementy powyżej.
+Znaczniki *Razor* zaczynają się `@` od symbolu. Uruchamiaj instrukcje języka C#, umieszczając kod w języku C# w [blokach kodu Razor](xref:mvc/views/razor#razor-code-blocks) ,`{ ... }`które są określone przez nawiasy klamrowe (). Na przykład zapoznaj się z tematem przypisywanie elementu " `ViewData["Title"]` informacje". Możesz wyświetlić wartości w kodzie HTML, po prostu przywołując wartość `@` symbolem. Zapoznaj się z zawartością `<h2>` elementów `<h3>` i powyżej.
 
-Zawartość widoku pokazana powyżej jest tylko częścią całej strony sieci Web, która jest renderowana dla użytkownika. Pozostałe elementy układu strony i inne typowe aspekty widoku są określone w innych plikach widoku. Aby dowiedzieć się więcej, zobacz [temat Układ](xref:mvc/views/layout).
+Zawartość widoku pokazana powyżej jest tylko częścią całej strony sieci Web, która jest renderowana dla użytkownika. Pozostała część układu strony i inne typowe aspekty widoku są określone w innych plikach widoku. Aby dowiedzieć się więcej, zobacz [temat układ](xref:mvc/views/layout).
 
-## <a name="how-controllers-specify-views"></a>Jak kontrolerzy określają widoki
+## <a name="how-controllers-specify-views"></a>Jak kontrolery określają widoki
 
-Widoki są zazwyczaj zwracane z akcji jako [ViewResult](/dotnet/api/microsoft.aspnetcore.mvc.viewresult), który jest typem [ActionResult](/dotnet/api/microsoft.aspnetcore.mvc.actionresult). Metoda akcji można utworzyć `ViewResult` i zwrócić bezpośrednio, ale to nie jest powszechnie wykonywane. Ponieważ większość kontrolerów dziedziczy po [kontrolerze,](/dotnet/api/microsoft.aspnetcore.mvc.controller)wystarczy użyć metody `View` pomocnika, aby zwrócić `ViewResult`:
+Widoki są zwykle zwracane z akcji jako [ViewResult](/dotnet/api/microsoft.aspnetcore.mvc.viewresult), które są typu [ActionResult](/dotnet/api/microsoft.aspnetcore.mvc.actionresult). Metoda działania może tworzyć i zwracać `ViewResult` bezpośrednio, ale nie jest to powszechnie wykonywane. Ponieważ większość kontrolerów dziedziczy po [kontrolerze](/dotnet/api/microsoft.aspnetcore.mvc.controller), wystarczy użyć metody `View` pomocnika do zwrócenia: `ViewResult`
 
 *HomeController.cs*
 
 [!code-csharp[](../../common/samples/WebApplication1/Controllers/HomeController.cs?highlight=5&range=16-21)]
 
-Gdy ta akcja powróci, widok *About.cshtml* wyświetlany w ostatniej sekcji jest renderowany jako następująca strona sieci Web:
+Po powrocie tej akcji widok *Informacje o. cshtml* widoczny w ostatniej sekcji jest renderowany jako następująca strona sieci Web:
 
-![Strona wyrenderowana w przeglądarce Edge — informacje](overview/_static/about-page.png)
+![Informacje o stronie renderowanej w przeglądarce Edge](overview/_static/about-page.png)
 
 Metoda `View` pomocnika ma kilka przeciążeń. Opcjonalnie można określić:
 
@@ -71,7 +77,7 @@ Metoda `View` pomocnika ma kilka przeciążeń. Opcjonalnie można określić:
   return View("Orders");
   ```
 
-* [Model,](xref:mvc/models/model-binding) który ma przejść do widoku:
+* [Model](xref:mvc/models/model-binding) do przekazania do widoku:
 
   ```csharp
   return View(Orders);
@@ -83,61 +89,61 @@ Metoda `View` pomocnika ma kilka przeciążeń. Opcjonalnie można określić:
   return View("Orders", Orders);
   ```
 
-### <a name="view-discovery"></a>Wyświetlanie odnajdowania
+### <a name="view-discovery"></a>Wyświetlanie odnajdywania
 
-Gdy akcja zwraca widok, odbywa się proces o nazwie *odnajdowanie widoku.* Ten proces określa, który plik widoku jest używany na podstawie nazwy widoku. 
+Gdy akcja zwraca widok, odbywa się proces o nazwie *odnajdywanie widoku* . Ten proces określa, który plik widoku jest używany na podstawie nazwy widoku. 
 
-Domyślnym zachowaniem `View` metody`return View();`( ) jest zwrócenie widoku o takiej samej nazwie jak metoda akcji, z której jest wywoływana. Na przykład nazwa metody *Informacje* `ActionResult` kontrolera służy do wyszukiwania pliku widoku o nazwie *About.cshtml*. Najpierw środowisko wykonawcze szuka w *views/[ControllerName]* folderu dla widoku. Jeśli nie znajdzie tam pasującego widoku, przeszukuje widok w folderze *Udostępniony.*
+Domyślne zachowanie `View` metody (`return View();`) ma zwrócić widok o tej samej nazwie co Metoda akcji, z której jest wywoływana. Na przykład nazwa metody *informacji* `ActionResult` kontrolera służy do wyszukiwania pliku widoku o nazwie *about. cshtml*. Najpierw środowisko uruchomieniowe przeszukuje folder *widoki/[ControllerName]* dla widoku. Jeśli w tym miejscu nie zostanie znaleziony pasujący widok, przeszukiwany jest folder *udostępniony* dla tego widoku.
 
-Nie ma znaczenia, czy niejawnie `ViewResult` zwracasz nazwę widoku `return View();` z `View` lub `return View("<ViewName>");`jawnie przekazujesz do metody za pomocą . W obu przypadkach widok odnajdywania wyszukuje pasujący plik widoku w tej kolejności:
+Nie `ViewResult` ma znaczenia, `return View();` czy niejawnie zwracają nazwę widoku do `View` metody z. `return View("<ViewName>");` W obu przypadkach należy wyświetlić wyszukiwanie w poszukiwaniu zgodnego pliku widoku w następującej kolejności:
 
-   1. *Widoki/\[Nazwa kontrolera]/\[ViewName].cshtml*
-   1. *Widoki/Udostępnione/\[ViewName].cshtml*
+   1. *Widoki/\[kontrolername]/\[viewName]. cshtml*
+   1. *Widoki/udostępnione/\[viewName]. cshtml*
 
-Zamiast nazwy widoku można podać ścieżkę pliku widoku. Jeśli używasz ścieżki bezwzględnej rozpoczynającej się w katalogu głównym aplikacji (opcjonalnie zaczynając od "/" lub "~/"), należy określić rozszerzenie *.cshtml:*
+Zamiast nazwy widoku można podać ścieżkę pliku widoku. Jeśli używana jest ścieżka bezwzględna rozpoczynająca się od elementu głównego aplikacji (opcjonalnie rozpoczynając od "/" lub "~/"), należy określić rozszerzenie *cshtml* :
 
 ```csharp
 return View("Views/Home/About.cshtml");
 ```
 
-Można również użyć ścieżki względnej, aby określić widoki w różnych katalogach bez rozszerzenia *cshtml.* Wewnątrz `HomeController`widoku , można zwrócić widok *indeksu* widoków *zarządzania* ścieżką względną:
+Możesz również użyć ścieżki względnej, aby określić widoki w różnych katalogach bez rozszerzenia *. cshtml* . `HomeController`Wewnątrz można zwrócić widok *indeksu* widoków *Zarządzanie* ze ścieżką względną:
 
 ```csharp
 return View("../Manage/Index");
 ```
 
-Podobnie można wskazać bieżący katalog specyficzny dla kontrolera za pomocą prefiksu "./":
+Analogicznie, można wskazać bieżący katalog specyficzny dla kontrolera z prefiksem "./":
 
 ```csharp
 return View("./About");
 ```
 
-[Widoki częściowe](xref:mvc/views/partial) i [komponenty widoku](xref:mvc/views/view-components) używają podobnych (ale nie identycznych) mechanizmów odnajdowania.
+[Widoki częściowe](xref:mvc/views/partial) i [składniki widoku](xref:mvc/views/view-components) używają podobnych mechanizmów odnajdywania (ale nie identycznych).
 
-Domyślną konwencję można dostosować do sposobu, w jaki widoki znajdują się w aplikacji, korzystając z niestandardowego [programu IViewLocationExpander](/dotnet/api/microsoft.aspnetcore.mvc.razor.iviewlocationexpander).
+Można dostosować domyślną Konwencję dotyczącą sposobu, w jaki widoki znajdują się w aplikacji, przy użyciu niestandardowego [IViewLocationExpander](/dotnet/api/microsoft.aspnetcore.mvc.razor.iviewlocationexpander).
 
-Odnajdowanie widoku zależy od znajdowania plików widoku według nazwy pliku. Jeśli w podstawowym systemie plików rozróżniana jest wielkość liter, w nazwach widoku prawdopodobnie rozróżniana jest wielkość liter. Aby uzyskać zgodność między systemami operacyjnymi, dopasuj przypadek między nazwami kontrolerów i akcji oraz skojarzonymi folderami widoku i nazwami plików. Jeśli wystąpi błąd, że plik widoku nie można znaleźć podczas pracy z systemem plików z uwzględnieniem wielkości liter, upewnij się, że wielkość liter jest zgodna między żądanym plikiem widoku a rzeczywistą nazwą pliku widoku.
+Widok odnajdywania polega na znalezieniu plików widoku według nazwy pliku. Jeśli w podstawowym systemie plików jest rozróżniana wielkość liter, nazwy widoków są prawdopodobnie rozróżniane. Aby zapewnić zgodność między systemami operacyjnymi, Uwzględnij wielkość liter między nazwami kontrolerów i akcji oraz skojarzonymi folderami widoków i nazwami plików. Jeśli wystąpi błąd, że nie można odnaleźć pliku widoku podczas pracy z systemem plików z uwzględnieniem wielkości liter, upewnij się, że wielkość liter jest zgodna między żądanym plikiem widoku a rzeczywistą nazwą pliku widoku.
 
-Postępuj zgodnie z najlepszymi praktykami organizowania struktury plików dla widoków, aby odzwierciedlić relacje między kontrolerami, akcjami i widokami, aby zapewnić łatwość konserwacji i przejrzystość.
+Postępuj zgodnie z najlepszymi rozwiązaniami dotyczącymi organizowania struktury plików dla widoków, aby odzwierciedlały relacje między kontrolerami, działaniami i widokami w celu utrzymania i przejrzystości.
 
 ## <a name="passing-data-to-views"></a>Przekazywanie danych do widoków
 
 Przekazywanie danych do widoków przy użyciu kilku metod:
 
-* Silnie wpisane dane: viewmodel
-* Słabo wpisane dane
+* Dane silnie wpisane: ViewModel
+* Dane niejednoznacznie wpisane
   * `ViewData` (`ViewDataAttribute`)
   * `ViewBag`
 
-### <a name="strongly-typed-data-viewmodel"></a>Silnie wpisane dane (viewmodel)
+### <a name="strongly-typed-data-viewmodel"></a>Dane silnie wpisane (ViewModel)
 
-Najbardziej niezawodne podejście jest określenie typu [modelu](xref:mvc/models/model-binding) w widoku. Ten model jest powszechnie określany jako *model widoku*. Można przekazać wystąpienie typu viewmodel do widoku z akcji.
+Najbardziej niezawodne podejście polega na określeniu typu [modelu](xref:mvc/models/model-binding) w widoku. Ten model jest często określany jako *ViewModel*. Wystąpienie typu ViewModel można przekazać do widoku z akcji.
 
-Za pomocą modelu widoku do przekazywania danych do widoku umożliwia widok, aby skorzystać z *silnego* sprawdzania typu. *Silne wpisywanie* (lub *silnie wpisane)* oznacza, że każda zmienna `string`i `int`stała `DateTime`ma wyraźnie zdefiniowany typ (na przykład , , lub ). Ważność typów używanych w widoku jest sprawdzana w czasie kompilacji.
+Użycie ViewModel do przekazywania danych do widoku pozwala widokowi korzystać z funkcji sprawdzania *silnych* typów. *Silne wpisywanie* (lub *silnie wpisane*) oznacza, że każda zmienna i stała ma jawnie zdefiniowany typ (na `string`przykład `int`,, `DateTime`lub). Ważność typów używanych w widoku jest sprawdzana w czasie kompilacji.
 
-[Visual Studio](https://visualstudio.microsoft.com) i [Visual Studio Code](https://code.visualstudio.com/) listy silnie wpisanych członków klasy za pomocą funkcji o nazwie [IntelliSense](/visualstudio/ide/using-intellisense). Aby wyświetlić właściwości systemu viewmodel, wpisz nazwę zmiennej dla asetu,`.`po którym następuje kropka ( ). Pomaga to pisać kod szybciej przy mniejszej liczbie błędów.
+[Program Visual Studio](https://visualstudio.microsoft.com) i lista [Visual Studio Code](https://code.visualstudio.com/) grupy o jednoznacznie określonym typie przy użyciu funkcji o nazwie [IntelliSense](/visualstudio/ide/using-intellisense). Aby wyświetlić właściwości ViewModel, wpisz nazwę zmiennej dla ViewModel, a następnie kropkę (`.`). Dzięki temu można szybciej napisać kod z mniejszą liczbą błędów.
 
-Określ model `@model` przy użyciu dyrektywy. Użyj modelu `@Model`z:
+Określ model przy użyciu `@model` dyrektywy. Użyj modelu z `@Model`:
 
 ```cshtml
 @model WebApplication1.ViewModels.Address
@@ -150,7 +156,7 @@ Określ model `@model` przy użyciu dyrektywy. Użyj modelu `@Model`z:
 </address>
 ```
 
-Aby udostępnić model do widoku, kontroler przekazuje go jako parametr:
+Aby zapewnić modelowi widok, kontroler przekazuje go jako parametr:
 
 ```csharp
 public IActionResult Contact()
@@ -170,7 +176,7 @@ public IActionResult Contact()
 }
 ```
 
-Nie ma żadnych ograniczeń dotyczących typów modeli, które można podać do widoku. Zaleca się używanie zwykłych starych obiektów CLR (POCO) z małym lub żadnym zachowaniem (metody) zdefiniowane. Zazwyczaj viewmodel klasy są przechowywane w *models* folderu lub oddzielny *viewmodels* folderu w katalogu głównym aplikacji. System viewmodel *adresu* używany w powyższym przykładzie to program widoku POCO przechowywany w pliku o nazwie *Address.cs:*
+Nie ma żadnych ograniczeń dotyczących typów modelu, które można dostarczyć do widoku. Zalecamy używanie zwykłego starego obiektu CLR (POCO) modele widoków z niewielkimi lub żadnymi zachowaniami (metodami). Zazwyczaj klasy ViewModel są przechowywane w folderze *models* lub w oddzielnym folderze *modele widoków* w katalogu głównym aplikacji. *Adres* ViewModel używany w powyższym przykładzie to poco ViewModel przechowywany w pliku o nazwie *Address.cs*:
 
 ```csharp
 namespace WebApplication1.ViewModels
@@ -186,33 +192,33 @@ namespace WebApplication1.ViewModels
 }
 ```
 
-Nic nie stoi na przeszkodzie, aby używać tych samych klas zarówno dla typów modelu widoku, jak i typów modeli biznesowych. Jednak przy użyciu oddzielnych modeli umożliwia widoki różnią się niezależnie od logiki biznesowej i części dostępu do danych aplikacji. Separacja modeli i viewmodels oferuje również korzyści zabezpieczeń, gdy modele używają [powiązania modelu](xref:mvc/models/model-binding) i [sprawdzania poprawności](xref:mvc/models/validation) danych wysyłanych do aplikacji przez użytkownika.
+Nic nie pozwala na korzystanie z tych samych klas zarówno dla typów ViewModel, jak i typów modelu biznesowego. Korzystanie z oddzielnych modeli pozwala jednak na różne widoki niezależnie od logiki biznesowej i elementów dostępu do danych aplikacji. Rozdzielenie modeli i modele widoków zapewnia także korzyści z używania [modelu powiązania](xref:mvc/models/model-binding) i [walidacji](xref:mvc/models/validation) danych wysyłanych do aplikacji przez użytkownika.
 
 <a name="VD_VB"></a>
 
-### <a name="weakly-typed-data-viewdata-viewdata-attribute-and-viewbag"></a>Słabo wpisane dane (ViewData, ViewData i ViewBag)
+### <a name="weakly-typed-data-viewdata-viewdata-attribute-and-viewbag"></a>Dane słabo wpisane (ViewData, ViewData Attribute i ViewBag)
 
-`ViewBag`*nie jest dostępna w aplikacji Razor Pages.*
+`ViewBag`*nie jest dostępny w Razor Pages.*
 
-Oprócz widoków silnie typizowanych widoki mają dostęp do *słabo wpisanego* (nazywanego również *luźno wpisanym)* zbioru danych. W przeciwieństwie do typów *silnych, słabe typy* (lub *typy luźne)* oznacza, że nie jawnie zadeklarować typ danych, których używasz. Można użyć kolekcji słabo wpisanych danych do przekazywania niewielkich ilości danych do i z kontrolerów i widoków.
+W przypadku widoków o jednoznacznie określonym typie widoki mają dostęp do jednoznacznie *wpisanej* kolekcji (nazywanej również *luźno wpisaną*) kolekcją danych. W przeciwieństwie do mocnych typów, *słabych typów* (lub *luźnych typów*) oznacza, że nie deklaruje jawnie typu danych, z których korzystasz. Możesz użyć kolekcji nieokreślonych danych do przekazywania małych ilości danych do i z kontrolerów i widoków.
 
-| Przekazywanie danych między ...                        | Przykład                                                                        |
+| Przekazywanie danych między...                        | Przykład                                                                        |
 | ------------------------------------------------- | ------------------------------------------------------------------------------ |
 | Kontroler i widok                             | Wypełnianie listy rozwijanej danymi.                                          |
-| Widok i [widok układu](xref:mvc/views/layout)   | Ustawienie ** \<tytułu>** zawartości elementu w widoku układu z pliku widoku.  |
-| [Widok częściowy](xref:mvc/views/partial) i widok | Widżet wyświetlany na podstawie strony sieci Web żądanej przez użytkownika.      |
+| Widok i widok [układu](xref:mvc/views/layout)   | Ustawianie ** \<tytułu>** zawartości elementu w widoku układu z pliku widoku.  |
+| [Widok częściowy](xref:mvc/views/partial) i widok | Widżet wyświetlający dane na podstawie strony sieci Web, której zażądał użytkownik.      |
 
-Do tej kolekcji można odwoływać się za pośrednictwem `ViewData` właściwości lub `ViewBag` na kontrolerach i widokach. Właściwość `ViewData` jest słownikiem słabo wpisanych obiektów. Właściwość `ViewBag` jest otoka `ViewData` wokół, która zapewnia `ViewData` właściwości dynamiczne dla podstawowej kolekcji. Uwaga: Wyszukiwania klawiszy są niewrażliwe na `ViewData` te `ViewBag`argumenty zarówno dla i .
+Do tej kolekcji można odwoływać się za `ViewData` pomocą `ViewBag` właściwości lub na kontrolerach i w widokach. `ViewData` Właściwość jest słownikiem obiektów o nieprawidłowym typie. `ViewBag` Właściwość to otoka `ViewData` , która udostępnia właściwości dynamiczne dla kolekcji źródłowej `ViewData` . Uwaga: w przypadku wyszukiwania kluczy nie jest rozróżniana wielkość liter `ViewData` w `ViewBag`obu i.
 
-`ViewData`i `ViewBag` są dynamicznie rozwiązywane w czasie wykonywania. Ponieważ nie oferują one sprawdzanie typu kompilacji czasu, oba są na ogół bardziej podatne na błędy niż przy użyciu viewmodel. Z tego powodu niektórzy deweloperzy wolą `ViewData` minimalnie lub nigdy nie używać i `ViewBag`.
+`ViewData`i `ViewBag` są dynamicznie rozwiązywane w czasie wykonywania. Ponieważ nie oferują sprawdzania typu w czasie kompilacji, obie są zwykle bardziej podatne na błędy niż przy użyciu ViewModel. Z tego powodu niektórzy deweloperzy wolą do minimalnej lub nigdy nie używać `ViewData` i. `ViewBag`
 
 <a name="VD"></a>
 
-**ViewData (Wyświetl dane)**
+**ViewData**
 
-`ViewData`jest [obiektem ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary) `string` dostępnym za pośrednictwem kluczy. Dane ciągu mogą być przechowywane i używane bezpośrednio bez konieczności rzutnia, ale należy rzutować inne `ViewData` wartości obiektów do określonych typów podczas ich wyodrębniania. Za pomocą `ViewData` funkcji przekazywania danych z kontrolerów do widoków i widoków, w tym [widoków częściowych](xref:mvc/views/partial) i [układów.](xref:mvc/views/layout)
+`ViewData`jest obiektem [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary) dostępnym `string` za pomocą kluczy. Dane ciągu mogą być przechowywane i używane bezpośrednio bez konieczności rzutowania, ale należy rzutować inne `ViewData` wartości obiektów na określone typy podczas ich wyodrębniania. Można użyć `ViewData` do przekazywania danych z kontrolerów do widoków i w widokach, w tym [częściowych widoków](xref:mvc/views/partial) i [układów](xref:mvc/views/layout).
 
-Oto przykład, który ustawia wartości powitania i `ViewData` adresu przy użyciu w akcji:
+Poniżej znajduje się przykład, który ustawia wartości dla powitania i adresu przy użyciu `ViewData` w akcji:
 
 ```csharp
 public IActionResult SomeAction()
@@ -231,7 +237,7 @@ public IActionResult SomeAction()
 }
 ```
 
-Praca z danymi w widoku:
+Pracuj z danymi w widoku:
 
 ```cshtml
 @{
@@ -250,11 +256,11 @@ Praca z danymi w widoku:
 
 ::: moniker range=">= aspnetcore-2.1"
 
-**Atrybut ViewData**
+**ViewData — atrybut**
 
-Innym podejściem, które używa [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary) jest [ViewDataAttribute](/dotnet/api/microsoft.aspnetcore.mvc.viewdataattribute). Właściwości na kontrolerach lub razor Page `[ViewData]` modele oznaczone atrybutem mają swoje wartości przechowywane i ładowane ze słownika.
+Innym podejściem korzystającym z [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary) jest [ViewDataAttribute](/dotnet/api/microsoft.aspnetcore.mvc.viewdataattribute). Właściwości na kontrolerach Razor lub modelach stron oznaczonych `[ViewData]` atrybutem są przechowywane i ładowane ze słownika.
 
-W poniższym przykładzie kontroler `Title` home zawiera `[ViewData]`właściwość oznaczoną symbolem . Metoda `About` ustawia tytuł dla widoku Informacje:
+W poniższym przykładzie kontroler Home zawiera `Title` Właściwość oznaczoną przy użyciu. `[ViewData]` `About` Metoda ustawia tytuł dla widoku informacje:
 
 ```csharp
 public class HomeController : Controller
@@ -284,11 +290,11 @@ W układzie tytuł jest odczytywany ze słownika ViewData:
 
 ::: moniker-end
 
-**Torba ViewBag**
+**ViewBag**
 
-`ViewBag`*nie jest dostępna w aplikacji Razor Pages.*
+`ViewBag`*nie jest dostępny Razor na stronach.*
 
-`ViewBag`jest obiektem [DynamicViewData,](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.internal.dynamicviewdata) który zapewnia dynamiczny `ViewData`dostęp do obiektów przechowywanych w programie . `ViewBag`może być wygodniejszy w pracy, ponieważ nie wymaga odlewania. W poniższym przykładzie `ViewBag` pokazano, jak `ViewData` używać z tym samym wynikiem, co przy użyciu powyżej:
+`ViewBag`jest obiektem [DynamicViewData](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.internal.dynamicviewdata) , który zapewnia dynamiczny dostęp do obiektów przechowywanych w `ViewData`. `ViewBag`może być wygodniejszy do pracy z, ponieważ nie wymaga rzutowania. Poniższy przykład pokazuje, jak używać `ViewBag` tego samego wyniku, jak w przypadku `ViewData` użycia powyżej:
 
 ```csharp
 public IActionResult SomeAction()
@@ -317,13 +323,13 @@ public IActionResult SomeAction()
 </address>
 ```
 
-**Jednoczesne korzystanie z viewdata i ViewBag**
+**Jednoczesne korzystanie z ViewData i ViewBag**
 
-`ViewBag`*nie jest dostępna w aplikacji Razor Pages.*
+`ViewBag`*nie jest dostępny Razor na stronach.*
 
-Ponieważ `ViewData` `ViewBag` i odnoszą się `ViewData` do tej samej `ViewBag` kolekcji podstawowej, można użyć i `ViewData` mieszać i dopasowywać między nimi podczas odczytu i pisania wartości.
+Ponieważ `ViewData` i `ViewBag` zapoznaj się z tą `ViewData` samą kolekcją podstawową, można `ViewData` użyć `ViewBag` obu i i kombinacji między nimi podczas odczytywania i zapisywania wartości.
 
-Ustaw użycie `ViewBag` tytułu i `ViewData` opisu w górnej części widoku *About.cshtml:*
+Ustaw tytuł przy użyciu `ViewBag` i opis przy użyciu `ViewData` w górnej części widoku *Informacje o. cshtml* :
 
 ```cshtml
 @{
@@ -333,7 +339,7 @@ Ustaw użycie `ViewBag` tytułu i `ViewData` opisu w górnej części widoku *Ab
 }
 ```
 
-Odczytuj właściwości, ale `ViewData` odwróć użycie i `ViewBag`. W pliku *_Layout.cshtml,* uzyskać tytuł `ViewData` za pomocą i `ViewBag`uzyskać opis za pomocą :
+Odczytaj właściwości, ale Cofnij użycie `ViewData` i. `ViewBag` W pliku *_Layout. cshtml* Uzyskaj tytuł przy użyciu `ViewData` i uzyskaj opis przy użyciu: `ViewBag`
 
 ```cshtml
 <!DOCTYPE html>
@@ -344,9 +350,9 @@ Odczytuj właściwości, ale `ViewData` odwróć użycie i `ViewBag`. W pliku *_
     ...
 ```
 
-Pamiętaj, że ciągi nie wymagają `ViewData`rzutu dla . Można używać `@ViewData["Title"]` bez odlewania.
+Należy pamiętać, że ciągi nie wymagają rzutowania dla `ViewData`. Można używać `@ViewData["Title"]` bez rzutowania.
 
-Korzystanie `ViewData` zarówno `ViewBag` i w tym samym czasie działa, podobnie jak mieszanie i dopasowywanie odczytu i pisania właściwości. Renderowane są następujące znaczniki:
+Użycie jednocześnie `ViewData` i `ViewBag` w tym samym czasie działa tak, jak mieszanie i odczytywanie właściwości. Renderowane są następujące znaczniki:
 
 ```html
 <!DOCTYPE html>
@@ -359,23 +365,23 @@ Korzystanie `ViewData` zarówno `ViewBag` i w tym samym czasie działa, podobnie
 
 **Podsumowanie różnic między ViewData i ViewBag**
 
- `ViewBag`nie jest dostępna na stronach Razor.
+ `ViewBag`nie jest dostępny na Razor stronach.
 
 * `ViewData`
-  * Pochodzi z [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary), więc ma właściwości słownika, które `ContainsKey` `Add`mogą `Remove`być `Clear`przydatne, takie jak , , i .
-  * Klucze w słowniku są ciągami znaków, więc odstępy są dozwolone. Przykład: `ViewData["Some Key With Whitespace"]`
-  * Każdy typ inny `string` niż a musi być `ViewData`rzutowy w widoku, aby użyć .
+  * Pochodzi z [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary), więc ma właściwości słownika, które mogą być przydatne, takie jak `ContainsKey`, `Add`, `Remove`, i `Clear`.
+  * Klucze w słowniku są ciągami, więc odstępy są dozwolone. Przykład: `ViewData["Some Key With Whitespace"]`
+  * Każdy typ inny niż element `string` musi być rzutowany w widoku, który `ViewData`ma być używany.
 * `ViewBag`
-  * Wywodzi się z [DynamicViewData](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.internal.dynamicviewdata), dzięki czemu umożliwia tworzenie`@ViewBag.SomeKey = <value or object>`właściwości dynamicznych przy użyciu notacji kropkowej ( ), a rzutowanie nie jest wymagane. Składnia `ViewBag` sprawia, że szybciej dodać do kontrolerów i widoków.
-  * Prostsze, aby sprawdzić wartości null. Przykład: `@ViewBag.Person?.Name`
+  * Pochodzi z [DynamicViewData](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.internal.dynamicviewdata), dzięki czemu umożliwia tworzenie właściwości dynamicznych przy użyciu notacji kropek (`@ViewBag.SomeKey = <value or object>`), a rzutowanie nie jest wymagane. Składnia `ViewBag` umożliwia szybsze Dodawanie do kontrolerów i widoków.
+  * Łatwiejszy do sprawdzenia pod kątem wartości null. Przykład: `@ViewBag.Person?.Name`
 
 **Kiedy używać ViewData lub ViewBag**
 
-Oba `ViewData` `ViewBag` i są równie prawidłowe podejścia do przekazywania niewielkich ilości danych między kontrolerami i widoków. Wybór, którego z nich użyć, zależy od preferencji. Można mieszać `ViewData` i `ViewBag` dopasowywać i obiekty, jednak kod jest łatwiejsze do odczytania i utrzymania z jednego podejścia używane konsekwentnie. Oba podejścia są dynamicznie rozpoznawane w czasie wykonywania, a tym samym podatne na wywoływanie błędów środowiska uruchomieniowego. Niektóre zespoły programistyczne ich unikają.
+Obie `ViewData` i `ViewBag` są równie ważnym podejściem do przekazywania małych ilości danych między kontrolerami i widokami. Wybór, który ma być używany, jest oparty na preferencjach. Możliwe jest mieszanie i `ViewData` Dopasowywanie `ViewBag` obiektów oraz obiekty, jednak kod jest łatwiejszy do odczytania i utrzymania przy użyciu jednego podejścia stosowanego spójnie. Oba podejścia są dynamicznie rozwiązywane w czasie wykonywania i w ten sposób podatne na błędy środowiska uruchomieniowego. Niektóre zespoły programistyczne ich nie mają.
 
 ### <a name="dynamic-views"></a>Widoki dynamiczne
 
-Widoki, które nie deklarują typu `@model` modelu przy użyciu, ale które mają `return View(Address);`wystąpienie modelu przekazywane do nich (na przykład ) można odwoływać się do właściwości wystąpienia dynamicznie:
+Widoki, które nie deklarują typu modelu `@model` przy użyciu, ale mają do nich przekazanie wystąpienie modelu (na `return View(Address);`przykład), mogą dynamicznie odwoływać się do właściwości wystąpienia:
 
 ```cshtml
 <address>
@@ -385,12 +391,12 @@ Widoki, które nie deklarują typu `@model` modelu przy użyciu, ale które maj�
 </address>
 ```
 
-Ta funkcja oferuje elastyczność, ale nie oferuje ochrony kompilacji ani IntelliSense. Jeśli właściwość nie istnieje, generowanie strony sieci Web kończy się niepowodzeniem w czasie wykonywania.
+Ta funkcja oferuje elastyczność, ale nie oferuje funkcji ochrony kompilacji ani technologii IntelliSense. Jeśli właściwość nie istnieje, generowanie strony sieci Web kończy się niepowodzeniem w czasie wykonywania.
 
 ## <a name="more-view-features"></a>Więcej funkcji widoku
 
-[Pomocnik tagów](xref:mvc/views/tag-helpers/intro) ułatwia dodawanie zachowania po stronie serwera do istniejących tagów HTML. Korzystanie z Pomocników tagów pozwala uniknąć konieczności pisania niestandardowego kodu lub pomocników w widokach. Pomocników tagów są stosowane jako atrybuty do elementów HTML i są ignorowane przez edytory, które nie mogą ich przetworzyć. Dzięki temu można edytować i renderować znaczniki widoku w różnych narzędziach.
+[Pomocnicy tagów](xref:mvc/views/tag-helpers/intro) ułatwiają dodawanie zachowań po stronie serwera do istniejących tagów HTML. Korzystanie z pomocników tagów pozwala uniknąć konieczności pisania niestandardowego kodu lub pomocników w widokach. Pomocnicy tagów są stosowane jako atrybuty do elementów HTML i są ignorowane przez edytory, które nie mogą ich przetworzyć. Dzięki temu można edytować i renderować znaczniki widoku w różnych narzędziach.
 
-Generowanie niestandardowych znaczników HTML można osiągnąć za pomocą wielu wbudowanych pomocników HTML. Bardziej złożona logika interfejsu użytkownika może być obsługiwana przez [składniki widoku](xref:mvc/views/view-components). Składniki widoku zapewniają ten sam SoC, który oferują kontrolery i widoki. Mogą one wyeliminować potrzebę akcji i widoków, które dotyczą danych używanych przez typowe elementy interfejsu użytkownika.
+Generowanie niestandardowego znacznika HTML można osiągnąć za pomocą wielu wbudowanych pomocników HTML. Bardziej złożona logika interfejsu użytkownika może być obsługiwana przez [składniki widoku](xref:mvc/views/view-components). Składniki widoku zapewniają ten sam SoC, który oferuje kontrolery i widoki. Mogą wyeliminować potrzebę wykonywania działań i widoków, które zajmują się danymi używanymi przez wspólne elementy interfejsu użytkownika.
 
-Podobnie jak wiele innych aspektów ASP.NET Core, widoki obsługują [iniekcję zależności,](xref:fundamentals/dependency-injection)umożliwiając usługi, które mają być [wstrzykiwane do widoków.](xref:mvc/views/dependency-injection)
+Podobnie jak w przypadku wielu innych aspektów ASP.NET Core, widoki obsługują [iniekcję zależności](xref:fundamentals/dependency-injection), umożliwiając dodawanie usług do [widoków](xref:mvc/views/dependency-injection).

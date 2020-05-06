@@ -1,69 +1,73 @@
 ---
-title: Hostowanie obrazu ASP.NET Core w kontenerze przy użyciu dokowanekomoncja z HTTPS
+title: Hostowanie ASP.NET Core obrazu w kontenerze za pomocą funkcji tworzenia aplikacji platformy Docker przy użyciu protokołu HTTPS
 author: ravipal
-description: Dowiedz się, jak hostować ASP.NET podstawowych obrazów za pomocą dokowanekomonkusowania za pośrednictwem protokołu HTTPS
+description: Dowiedz się, jak hostować ASP.NET Core obrazy z Docker Compose za pośrednictwem protokołu HTTPS
 monikerRange: '>= aspnetcore-2.1'
 ms.author: ravipal
 ms.custom: mvc
 ms.date: 03/28/2020
 no-loc:
+- Blazor
+- Identity
 - Let's Encrypt
+- Razor
+- SignalR
 uid: security/docker-compose-https
-ms.openlocfilehash: 616ccf906e98534ffda08c0c2b6d0a171f063cc1
-ms.sourcegitcommit: d03905aadf5ceac39fff17706481af7f6c130411
+ms.openlocfilehash: 533d86fb17e3c89fdca59685b090645a11ba5473
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/29/2020
-ms.locfileid: "80381825"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775144"
 ---
-# <a name="hosting-aspnet-core-images-with-docker-compose-over-https"></a>Hostowanie obrazów ASP.NET podstawowych za pomocą dokowanewyskusić za pośrednictwem protokołu HTTPS
+# <a name="hosting-aspnet-core-images-with-docker-compose-over-https"></a>Hostowanie ASP.NET Core obrazów z Docker Compose za pośrednictwem protokołu HTTPS
 
 
-ASP.NET Core domyślnie używa [protokołu HTTPS](/aspnet/core/security/enforcing-ssl). [Protokół HTTPS](https://en.wikipedia.org/wiki/HTTPS) opiera się na [certyfikatach](https://en.wikipedia.org/wiki/Public_key_certificate) zaufania, tożsamości i szyfrowania.
+ASP.NET Core [domyślnie używa protokołu HTTPS](/aspnet/core/security/enforcing-ssl). [Protokół https](https://en.wikipedia.org/wiki/HTTPS) opiera się na [certyfikatach](https://en.wikipedia.org/wiki/Public_key_certificate) do zaufania, tożsamości i szyfrowania.
 
-W tym dokumencie wyjaśniono, jak uruchomić wstępnie utworzone obrazy kontenerów za pomocą protokołu HTTPS.
+W tym dokumencie wyjaśniono, jak uruchamiać wstępnie skompilowane obrazy kontenerów przy użyciu protokołu HTTPS.
 
-Zobacz Tworzenie ASP.NET podstawowych aplikacji za pomocą platformy [Docker za pośrednictwem protokołu HTTPS](https://github.com/dotnet/dotnet-docker/blob/master/samples/run-aspnetcore-https-development.md) dla scenariuszy rozwoju.
+Zobacz [Tworzenie aplikacji ASP.NET Core przy użyciu platformy Docker za pośrednictwem protokołu HTTPS](https://github.com/dotnet/dotnet-docker/blob/master/samples/run-aspnetcore-https-development.md) na potrzeby scenariuszy programistycznych.
 
-Ten przykład wymaga [platformy Docker 17.06](https://docs.docker.com/release-notes/docker-ce) lub nowszej [klienta platformy Docker.](https://www.docker.com/products/docker)
+Ten przykład wymaga [platformy docker 17,06](https://docs.docker.com/release-notes/docker-ce) lub nowszej wersji [klienta platformy Docker](https://www.docker.com/products/docker).
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
-Zestaw [SDK .NET Core 2.2](https://dotnet.microsoft.com/download) lub nowszy jest wymagany dla niektórych instrukcji zawartych w tym dokumencie.
+W przypadku niektórych instrukcji przedstawionych w tym dokumencie wymagany jest [zestaw .NET Core 2,2 SDK](https://dotnet.microsoft.com/download) lub nowszy.
 
 ## <a name="certificates"></a>Certyfikaty
 
-Certyfikat z [urzędu certyfikacji](https://wikipedia.org/wiki/Certificate_authority) jest wymagany do [hostingu produkcyjnego](https://blogs.msdn.microsoft.com/webdev/2017/11/29/configuring-https-in-asp-net-core-across-different-platforms/) dla domeny. [Let's Encrypt](https://letsencrypt.org/)to urząd certyfikacji, który oferuje bezpłatne certyfikaty.
+Certyfikat z [urzędu certyfikacji](https://wikipedia.org/wiki/Certificate_authority) jest wymagany do hostingu w [środowisku produkcyjnym](https://blogs.msdn.microsoft.com/webdev/2017/11/29/configuring-https-in-asp-net-core-across-different-platforms/) dla domeny. [Let's Encrypt](https://letsencrypt.org/)to urząd certyfikacji, który oferuje bezpłatne certyfikaty.
 
-Ten dokument używa [samodzielnie podpisanych certyfikatów deweloperskich](https://wikipedia.org/wiki/Self-signed_certificate) do hostowania wstępnie utworzonych obrazów. `localhost` Instrukcje są podobne do używania certyfikatów produkcyjnych.
+W tym dokumencie są stosowane [Certyfikaty deweloperskie](https://wikipedia.org/wiki/Self-signed_certificate) z podpisem własnym do obsługi wstępnie `localhost`utworzonych obrazów. Instrukcje są podobne do korzystania z certyfikatów produkcyjnych.
 
-Dla świadectw produkcji:
+Dla certyfikatów produkcyjnych:
 
-* Narzędzie `dotnet dev-certs` nie jest wymagane.
-* Certyfikaty nie muszą być przechowywane w lokalizacji użytej w instrukcjach. Przechowuj certyfikaty w dowolnym miejscu poza katalogiem lokacji.
+* `dotnet dev-certs` Narzędzie nie jest wymagane.
+* Certyfikaty nie muszą być przechowywane w lokalizacji używanej w instrukcjach. Przechowuj certyfikaty w dowolnej lokalizacji poza katalogiem lokacji.
 
-Instrukcje zawarte w poniższej sekcji zainstalować certyfikaty `volumes` woluminu do kontenerów przy użyciu właściwości w *docker-compose.yml.* Można dodać certyfikaty do `COPY` obrazów kontenerów za pomocą polecenia w *pliku Dockerfile*, ale nie jest to zalecane. Kopiowanie certyfikatów do obrazu nie jest zalecane z następujących powodów:
+Instrukcje zawarte w poniższej sekcji dotyczą instalowania certyfikatów do kontenerów przy użyciu `volumes` właściwości w *Docker-Compose. yml.* Można dodać certyfikaty do obrazów kontenerów za pomocą `COPY` polecenia w *pliku dockerfile*, ale nie jest to zalecane. Nie zaleca się kopiowania certyfikatów do obrazu z następujących powodów:
 
-* Utrudnia użycie tego samego obrazu do testowania z certyfikatami dewelopera.
-* Utrudnia to użycie tego samego obrazu dla hostingu z certyfikatami produkcyjnymi.
-* Istnieje znaczne ryzyko ujawnienia certyfikatu.
+* Utrudnia to korzystanie z tego samego obrazu do testowania przy użyciu certyfikatów deweloperskich.
+* Utrudnia korzystanie z tego samego obrazu na potrzeby hostowania z certyfikatami produkcyjnymi.
+* Istnieje duże ryzyko ujawnienia certyfikatu.
 
-## <a name="starting-a-container-with-https-support-using-docker-compose"></a>Uruchamianie kontenera z obsługą https przy użyciu kompozycji docker
+## <a name="starting-a-container-with-https-support-using-docker-compose"></a>Uruchamianie kontenera z obsługą protokołu HTTPS przy użyciu funkcji tworzenia platformy Docker
 
-Użyj poniższych instrukcji dotyczących konfiguracji systemu operacyjnego.
+Wykonaj następujące instrukcje dotyczące konfiguracji systemu operacyjnego.
 
 ### <a name="windows-using-linux-containers"></a>System Windows korzystający z kontenerów systemu Linux
 
-Generowanie certyfikatu i konfigurowanie komputera lokalnego:
+Generuj certyfikat i skonfiguruj komputer lokalny:
 
 ```dotnetcli
 dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\aspnetapp.pfx -p { password here }
 dotnet dev-certs https --trust
 ```
 
-W poprzednich poleceniach zastąp `{ password here }` hasłem.
+W poprzednich poleceniach Zastąp `{ password here }` ciąg hasłem.
 
-Utwórz plik _docker-compose.debug.yml_ z następującą zawartością:
+Utwórz plik _Docker-Compose. Debug. yml_ o następującej zawartości:
 
 ```json
 version: '3.4'
@@ -82,7 +86,7 @@ services:
     volumes:
       - ~/.aspnet/https:/https:ro
 ```
-Hasło określone w pliku redagowania docker musi być zgodne z hasłem używanym dla certyfikatu.
+Hasło określone w pliku redagowania platformy Docker musi być zgodne z hasłem użytym dla certyfikatu.
 
 Uruchom kontener z ASP.NET Core skonfigurowanym dla protokołu HTTPS:
 
@@ -92,18 +96,18 @@ docker-compose -f "docker-compose.debug.yml" up -d
 
 ### <a name="macos-or-linux"></a>macOS lub Linux
 
-Generowanie certyfikatu i konfigurowanie komputera lokalnego:
+Generuj certyfikat i skonfiguruj komputer lokalny:
 
 ```dotnetcli
 dotnet dev-certs https -ep ${HOME}/.aspnet/https/aspnetapp.pfx -p { password here }
 dotnet dev-certs https --trust
 ```
 
-`dotnet dev-certs https --trust`jest obsługiwana tylko w systemach macOS i Windows. Musisz ufać certyfikatom w systemie Linux w sposób obsługiwany przez twoją dystrybucję. Jest prawdopodobne, że musisz zaufać certyfikatowi w przeglądarce.
+`dotnet dev-certs https --trust`jest obsługiwana tylko w systemach macOS i Windows. Należy zaufać certyfikatom w systemie Linux w sposób, który jest obsługiwany przez dystrybucji. Prawdopodobnie należy zaufać certyfikatowi w przeglądarce.
 
-W poprzednich poleceniach zastąp `{ password here }` hasłem.
+W poprzednich poleceniach Zastąp `{ password here }` ciąg hasłem.
 
-Utwórz plik _docker-compose.debug.yml_ z następującą zawartością:
+Utwórz plik _Docker-Compose. Debug. yml_ o następującej zawartości:
 
 ```json
 version: '3.4'
@@ -122,7 +126,7 @@ services:
     volumes:
       - ~/.aspnet/https:/https:ro
 ```
-Hasło określone w pliku redagowania docker musi być zgodne z hasłem używanym dla certyfikatu.
+Hasło określone w pliku redagowania platformy Docker musi być zgodne z hasłem użytym dla certyfikatu.
 
 Uruchom kontener z ASP.NET Core skonfigurowanym dla protokołu HTTPS:
 
@@ -130,18 +134,18 @@ Uruchom kontener z ASP.NET Core skonfigurowanym dla protokołu HTTPS:
 docker-compose -f "docker-compose.debug.yml" up -d
 ```
 
-### <a name="windows-using-windows-containers"></a>System Windows przy użyciu kontenerów systemu Windows
+### <a name="windows-using-windows-containers"></a>Windows przy użyciu kontenerów systemu Windows
 
-Generowanie certyfikatu i konfigurowanie komputera lokalnego:
+Generuj certyfikat i skonfiguruj komputer lokalny:
 
 ```dotnetcli
 dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\aspnetapp.pfx -p { password here }
 dotnet dev-certs https --trust
 ```
 
-W poprzednich poleceniach zastąp `{ password here }` hasłem.
+W poprzednich poleceniach Zastąp `{ password here }` ciąg hasłem.
 
-Utwórz plik _docker-compose.debug.yml_ z następującą zawartością:
+Utwórz plik _Docker-Compose. Debug. yml_ o następującej zawartości:
 
 ```json
 version: '3.4'
@@ -160,7 +164,7 @@ services:
     volumes:
       - ${USERPROFILE}\.aspnet\https:C:\https:ro
 ```
-Hasło określone w pliku redagowania docker musi być zgodne z hasłem używanym dla certyfikatu.
+Hasło określone w pliku redagowania platformy Docker musi być zgodne z hasłem użytym dla certyfikatu.
 
 Uruchom kontener z ASP.NET Core skonfigurowanym dla protokołu HTTPS:
 

@@ -4,13 +4,19 @@ author: rick-anderson
 description: ''
 ms.author: riande
 ms.date: 12/07/2016
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: migration/http-modules
-ms.openlocfilehash: bdf27ccb742d4bc05bac71e6c96d71c38dcb4b62
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: c2b49976d2063679eab2403aae432660e8c8932d
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78659685"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775417"
 ---
 # <a name="migrate-http-handlers-and-modules-to-aspnet-core-middleware"></a>Migrowanie programów obsługi i modułów HTTP do ASP.NET Core oprogramowania pośredniczącego
 
@@ -88,7 +94,7 @@ Istniejący moduł HTTP będzie wyglądać podobnie do tego:
 
 [!code-csharp[](../migration/http-modules/sample/Asp.Net4/Asp.Net4/Modules/MyModule.cs?highlight=6,8,24,31)]
 
-Jak pokazano na stronie [oprogramowania pośredniczącego](xref:fundamentals/middleware/index) , ASP.NET Core oprogramowanie pośredniczące jest klasą, która uwidacznia metodę `Invoke` pobierającą `HttpContext` i zwracającą `Task`. Nowe oprogramowanie pośredniczące będzie wyglądać następująco:
+Jak pokazano na stronie [oprogramowania pośredniczącego](xref:fundamentals/middleware/index) , ASP.NET Core oprogramowanie pośredniczące jest klasą, która udostępnia `Invoke` metodę pobierającą `HttpContext` i zwracającą `Task`wynik. Nowe oprogramowanie pośredniczące będzie wyglądać następująco:
 
 <a name="http-modules-usemiddleware"></a>
 
@@ -96,7 +102,7 @@ Jak pokazano na stronie [oprogramowania pośredniczącego](xref:fundamentals/mid
 
 Poprzedni szablon oprogramowania pośredniczącego został pobrany z sekcji podczas [pisania oprogramowania pośredniczącego](xref:fundamentals/middleware/write).
 
-Klasa pomocnika *MyMiddlewareExtensions* ułatwia skonfigurowanie oprogramowania pośredniczącego w klasie `Startup`. Metoda `UseMyMiddleware` dodaje klasę oprogramowania pośredniczącego do potoku żądania. Usługi wymagane przez oprogramowanie pośredniczące są wprowadzane w konstruktorze oprogramowania pośredniczącego.
+Klasa pomocnika *MyMiddlewareExtensions* ułatwia konfigurowanie oprogramowania pośredniczącego w `Startup` klasie. `UseMyMiddleware` Metoda dodaje klasę oprogramowania pośredniczącego do potoku żądania. Usługi wymagane przez oprogramowanie pośredniczące są wprowadzane w konstruktorze oprogramowania pośredniczącego.
 
 <a name="http-modules-shortcircuiting-middleware"></a>
 
@@ -104,11 +110,11 @@ Moduł może zakończyć żądanie, na przykład jeśli użytkownik nie ma autor
 
 [!code-csharp[](../migration/http-modules/sample/Asp.Net4/Asp.Net4/Modules/MyTerminatingModule.cs?highlight=9,10,11,12,13&name=snippet_Terminate)]
 
-Oprogramowanie pośredniczące obsługuje to nie wywołując `Invoke` w następnym oprogramowaniu pośredniczącym w potoku. Należy pamiętać, że to nie przerywa w pełni żądania, ponieważ poprzednie middlewares nadal będą wywoływane, gdy odpowiedź przejdzie do tyłu przez potok.
+Oprogramowanie pośredniczące obsługuje to, nie wywołując `Invoke` w następnym oprogramowaniu pośredniczącym w potoku. Należy pamiętać, że to nie przerywa w pełni żądania, ponieważ poprzednie middlewares nadal będą wywoływane, gdy odpowiedź przejdzie do tyłu przez potok.
 
 [!code-csharp[](../migration/http-modules/sample/Asp.Net.Core/Middleware/MyTerminatingMiddleware.cs?highlight=7,8&name=snippet_Terminate)]
 
-Po przeprowadzeniu migracji funkcjonalności modułu do nowego oprogramowania pośredniczącego, może się okazać, że Twój kod nie kompiluje się, ponieważ Klasa `HttpContext` została znacząco zmieniona w ASP.NET Core. [Później](#migrating-to-the-new-httpcontext)zobaczysz, jak przeprowadzić migrację do nowego ASP.NET Core HttpContext.
+Po przeprowadzeniu migracji funkcjonalności modułu do nowego oprogramowania pośredniczącego, może się okazać, że Twój kod nie kompiluje `HttpContext` się, ponieważ klasa została znacząco zmieniona w ASP.NET Core. [Później](#migrating-to-the-new-httpcontext)zobaczysz, jak przeprowadzić migrację do nowego ASP.NET Core HttpContext.
 
 ## <a name="migrating-module-insertion-into-the-request-pipeline"></a>Migrowanie wstawiania modułu do potoku żądania
 
@@ -116,11 +122,11 @@ Moduły HTTP są zazwyczaj dodawane do potoku żądania przy użyciu *pliku Web.
 
 [!code-xml[](../migration/http-modules/sample/Asp.Net4/Asp.Net4/Web.config?highlight=6&range=1-3,32-33,36,43,50,101)]
 
-Przekształć to, [dodając nowe oprogramowanie pośredniczące](xref:fundamentals/middleware/index#create-a-middleware-pipeline-with-iapplicationbuilder) do potoku żądania w klasie `Startup`:
+Przekształć to, [dodając nowe oprogramowanie pośredniczące](xref:fundamentals/middleware/index#create-a-middleware-pipeline-with-iapplicationbuilder) do potoku żądania `Startup` w klasie:
 
 [!code-csharp[](../migration/http-modules/sample/Asp.Net.Core/Startup.cs?name=snippet_Configure&highlight=16)]
 
-Dokładne miejsce w potoku, w którym wstawiasz nowe oprogramowanie pośredniczące, zależy od zdarzenia, które zostało obsłużone jako moduł (`BeginRequest`, `EndRequest`itp.) i jego kolejność na liście modułów w *pliku Web. config*.
+Dokładne miejsce w potoku, w którym wstawiasz nowe oprogramowanie pośredniczące, zależy od zdarzenia, które zostało obsłużone jako moduł`BeginRequest`( `EndRequest`, itp.) i jego kolejność na liście modułów w *pliku Web. config*.
 
 Jak wspomniano wcześniej, nie ma cyklu życia aplikacji w ASP.NET Core i kolejności, w której odpowiedzi są przetwarzane przez oprogramowanie pośredniczące, różnią się od kolejności używanej przez moduły. Może to spowodować, że decyzje dotyczące porządkowania są bardziej trudne.
 
@@ -136,7 +142,7 @@ W projekcie ASP.NET Core można je przetłumaczyć na oprogramowanie pośrednicz
 
 [!code-csharp[](../migration/http-modules/sample/Asp.Net.Core/Middleware/ReportHandlerMiddleware.cs?highlight=7,9,13,20,21,22,23,40,42,44)]
 
-To oprogramowanie pośredniczące jest bardzo podobne do oprogramowania pośredniczącego odpowiadającego modułom. Jedyną rzeczywistą różnicą jest to, że nie ma żadnych wywołań do `_next.Invoke(context)`. Ma to sens, ponieważ program obsługi znajduje się na końcu potoku żądania, więc nie będzie można wywołać następnego oprogramowania pośredniczącego.
+To oprogramowanie pośredniczące jest bardzo podobne do oprogramowania pośredniczącego odpowiadającego modułom. Jedyną rzeczywistą różnicą jest to, że nie jest to `_next.Invoke(context)`wywołanie. Ma to sens, ponieważ program obsługi znajduje się na końcu potoku żądania, więc nie będzie można wywołać następnego oprogramowania pośredniczącego.
 
 ## <a name="migrating-handler-insertion-into-the-request-pipeline"></a>Migrowanie wstawiania procedury obsługi do potoku żądania
 
@@ -144,15 +150,15 @@ Konfigurowanie obsługi protokołu HTTP jest wykonywane w *pliku Web. config* i 
 
 [!code-xml[](../migration/http-modules/sample/Asp.Net4/Asp.Net4/Web.config?highlight=6&range=1-3,32,46-48,50,101)]
 
-Można to przekonwertować, dodając nowe oprogramowanie pośredniczące programu obsługi do potoku żądania w klasie `Startup`, podobnie jak oprogramowanie pośredniczące konwertowane z modułów. Problem z tym podejściem polega na tym, że wyśle wszystkie żądania do nowego oprogramowania pośredniczącego programu obsługi. Jednak tylko żądania z danym rozszerzeniem mogą dotrzeć do oprogramowania pośredniczącego. Zapewnia to takie same funkcje, jak w przypadku programu obsługi protokołu HTTP.
+Można to przekonwertować, dodając nowe oprogramowanie pośredniczące programu obsługi do potoku żądania w `Startup` klasie, podobnie jak oprogramowanie pośredniczące konwertowane z modułów. Problem z tym podejściem polega na tym, że wyśle wszystkie żądania do nowego oprogramowania pośredniczącego programu obsługi. Jednak tylko żądania z danym rozszerzeniem mogą dotrzeć do oprogramowania pośredniczącego. Zapewnia to takie same funkcje, jak w przypadku programu obsługi protokołu HTTP.
 
-Jednym z rozwiązań jest rozgałęzienie potoku dla żądań z danym rozszerzeniem przy użyciu metody rozszerzenia `MapWhen`. Należy to zrobić w tej samej metodzie `Configure`, w której można dodać inne oprogramowanie pośredniczące:
+Jednym z rozwiązań jest rozgałęzienie potoku dla żądań z danym rozszerzeniem przy użyciu `MapWhen` metody rozszerzenia. Należy to zrobić w tej samej `Configure` metodzie, w której można dodać inne oprogramowanie pośredniczące:
 
 [!code-csharp[](../migration/http-modules/sample/Asp.Net.Core/Startup.cs?name=snippet_Configure&highlight=27-34)]
 
-`MapWhen` przyjmuje następujące parametry:
+`MapWhen`przyjmuje następujące parametry:
 
-1. Lambda, która pobiera `HttpContext` i zwraca `true`, jeśli żądanie powinno przejść do gałęzi. Oznacza to, że można rozgałęziać żądania nie tylko na podstawie ich rozszerzenia, ale także w nagłówkach żądań, parametrach ciągu zapytania itd.
+1. Lambda, która pobiera `HttpContext` i zwraca `true` , jeśli żądanie powinno przejść do gałęzi. Oznacza to, że można rozgałęziać żądania nie tylko na podstawie ich rozszerzenia, ale także w nagłówkach żądań, parametrach ciągu zapytania itd.
 
 2. Lambda, która pobiera `IApplicationBuilder` i dodaje wszystkie oprogramowanie pośredniczące dla gałęzi. Oznacza to, że można dodać dodatkowe oprogramowanie pośredniczące do gałęzi przed programem obsługi oprogramowania pośredniczącego.
 
@@ -182,11 +188,11 @@ Nowy [system konfiguracji](xref:fundamentals/configuration/index) zapewnia nast�
 
 3. Skojarz wartości opcji z klasą opcji
 
-    Wzorzec opcji używa struktury wstrzykiwania zależności ASP.NET Core do kojarzenia typu opcji (na przykład `MyMiddlewareOptions`) z obiektem `MyMiddlewareOptions`, który ma rzeczywiste opcje.
+    Wzorzec opcji używa struktury wstrzykiwania zależności ASP.NET Core do kojarzenia typu opcji (na przykład `MyMiddlewareOptions`) z `MyMiddlewareOptions` obiektem, który ma rzeczywiste opcje.
 
-    Aktualizowanie klasy `Startup`:
+    Aktualizowanie `Startup` klasy:
 
-   1. Jeśli używasz pliku *appSettings. JSON*, Dodaj go do konstruktora konfiguracji w konstruktorze `Startup`:
+   1. Jeśli używasz pliku *appSettings. JSON*, Dodaj go do konstruktora konfiguracji w `Startup` konstruktorze:
 
       [!code-csharp[](../migration/http-modules/sample/Asp.Net.Core/Startup.cs?name=snippet_Ctor&highlight=5-6)]
 
@@ -202,9 +208,9 @@ Nowy [system konfiguracji](xref:fundamentals/configuration/index) zapewnia nast�
 
    [!code-csharp[](../migration/http-modules/sample/Asp.Net.Core/Middleware/MyMiddlewareWithParams.cs?name=snippet_MiddlewareWithParams&highlight=4,7,10,15-16)]
 
-   Metoda rozszerzenia [UseMiddleware](#http-modules-usemiddleware) , która dodaje oprogramowanie pośredniczące do `IApplicationBuilder`, bierze pod uwagę iniekcję zależności.
+   Metoda rozszerzenia [UseMiddleware](#http-modules-usemiddleware) , która dodaje oprogramowanie pośredniczące do `IApplicationBuilder` opieki nad iniekcją zależności.
 
-   Nie jest to ograniczone do `IOptions` obiektów. Każdy inny obiekt, którego potrzebuje oprogramowanie pośredniczące, można wprowadzić w ten sposób.
+   Nie jest to ograniczone `IOptions` do obiektów. Każdy inny obiekt, którego potrzebuje oprogramowanie pośredniczące, można wprowadzić w ten sposób.
 
 ## <a name="loading-middleware-options-through-direct-injection"></a>Ładowanie opcji oprogramowania pośredniczącego za pośrednictwem bezpośredniego wtrysku
 
@@ -212,7 +218,7 @@ Wzorzec opcji ma zalety tworzenia swobodnego sprzężenia między wartościami o
 
 Ten podział działa inaczej, jeśli chcesz użyć tego samego oprogramowania pośredniczącego dwa razy, z innymi opcjami. Na przykład oprogramowanie pośredniczące autoryzacji używane w różnych gałęziach, które zezwalają na różne role. Nie można skojarzyć dwóch różnych obiektów Options z jedną klasą opcji.
 
-Rozwiązaniem jest uzyskanie obiektów Options z rzeczywistymi wartościami opcji w klasie `Startup` i przekazywanie ich bezpośrednio do każdego wystąpienia oprogramowania pośredniczącego.
+Rozwiązaniem jest uzyskanie obiektów Options z rzeczywistymi wartościami opcji w `Startup` klasie i przekazywanie ich bezpośrednio do każdego wystąpienia oprogramowania pośredniczącego.
 
 1. Dodawanie drugiego klucza do pliku *appSettings. JSON*
 
@@ -220,25 +226,25 @@ Rozwiązaniem jest uzyskanie obiektów Options z rzeczywistymi wartościami opcj
 
    [!code-json[](http-modules/sample/Asp.Net.Core/appsettings.json?range=1,10-18&highlight=2-5)]
 
-2. Pobierz wartości opcji i przekaż je do oprogramowania pośredniczącego. Metoda rozszerzenia `Use...` (która dodaje oprogramowanie pośredniczące do potoku) jest miejscem logicznym do przekazania w wartościach opcji: 
+2. Pobierz wartości opcji i przekaż je do oprogramowania pośredniczącego. Metoda `Use...` rozszerzająca (która dodaje oprogramowanie pośredniczące do potoku) jest miejscem logicznym do przekazania w wartościach opcji: 
 
    [!code-csharp[](http-modules/sample/Asp.Net.Core/Startup.cs?name=snippet_Configure&highlight=20-23)]
 
-3. Włącz oprogramowanie pośredniczące, aby pobrać parametr Options. Podaj Przeciążenie metody rozszerzenia `Use...` (która przyjmuje parametr Options i przekazuje ją do `UseMiddleware`). Gdy `UseMiddleware` jest wywoływana z parametrami, przekazuje parametry do konstruktora oprogramowania pośredniczącego podczas tworzenia wystąpienia obiektu pośredniczącego.
+3. Włącz oprogramowanie pośredniczące, aby pobrać parametr Options. Podaj Przeciążenie metody `Use...` rozszerzenia (która przyjmuje parametr Options i przekazuje go do `UseMiddleware`). Gdy `UseMiddleware` jest wywoływana z parametrami, przekazuje parametry do konstruktora oprogramowania pośredniczącego podczas tworzenia wystąpienia obiektu pośredniczącego.
 
    [!code-csharp[](../migration/http-modules/sample/Asp.Net.Core/Middleware/MyMiddlewareWithParams.cs?name=snippet_Extensions&highlight=9-14)]
 
-   Zwróć uwagę, jak spowoduje to Zawijanie obiektu options w obiekcie `OptionsWrapper`. To implementuje `IOptions`, zgodnie z oczekiwaniami przez Konstruktor oprogramowania pośredniczącego.
+   Zwróć uwagę, jak to zawija obiekt Options w `OptionsWrapper` obiekcie. To implementuje `IOptions`, zgodnie z oczekiwaniami w konstruktorze oprogramowania pośredniczącego.
 
 ## <a name="migrating-to-the-new-httpcontext"></a>Migrowanie do nowego obiektu HttpContext
 
-Wcześniej wywiesz, że metoda `Invoke` w oprogramowaniu pośredniczącym przyjmuje parametr typu `HttpContext`:
+Wcześniej zawarto, że `Invoke` Metoda w oprogramowaniu pośredniczącym przyjmuje parametr typu `HttpContext`:
 
 ```csharp
 public async Task Invoke(HttpContext context)
 ```
 
-`HttpContext` został znacząco zmieniony w ASP.NET Core. W tej sekcji pokazano, jak przetłumaczyć najczęściej używane właściwości elementu [System. Web. HttpContext](/dotnet/api/system.web.httpcontext) na nowe `Microsoft.AspNetCore.Http.HttpContext`.
+`HttpContext`został znacząco zmieniony w ASP.NET Core. W tej sekcji pokazano, jak przetłumaczyć najczęściej używane właściwości elementu [System. Web. HttpContext](/dotnet/api/system.web.httpcontext) na nowy `Microsoft.AspNetCore.Http.HttpContext`.
 
 ### <a name="httpcontext"></a>HttpContext
 
@@ -252,7 +258,7 @@ Zapewnia unikatowy identyfikator dla każdego żądania. Bardzo przydatne do uwz
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Trace)]
 
-### <a name="httpcontextrequest"></a>HttpContext.Request
+### <a name="httpcontextrequest"></a>Element HttpContext. Request
 
 Element **HttpContext. Request. HttpMethod** Wykonuje translację na:
 
@@ -316,7 +322,7 @@ Element **HttpContext. Request. InputStream** Wykonuje translację na:
 >
 >Nie dotyczy to odczytywania formularza jak pokazano wcześniej, ponieważ jest to wykonywane z bufora.
 
-### <a name="httpcontextresponse"></a>HttpContext.Response
+### <a name="httpcontextresponse"></a>HttpContext. Response
 
 **Właściwość HttpContext. Response. status** i **HttpContext. Response. StatusDescription** są tłumaczone na:
 
@@ -342,9 +348,9 @@ W [tym miejscu](../fundamentals/request-features.md#middleware-and-request-featu
 
 Wysyłanie nagłówków odpowiedzi jest skomplikowane przez fakt, że jeśli ustawisz je po zapisaniu jakichkolwiek elementów w treści odpowiedzi, nie będą one wysyłane.
 
-Rozwiązanie polega na ustawieniu metody wywołania zwrotnego, która będzie wywoływana w prawo przed rozpoczęciem zapisywania do odpowiedzi. Jest to najlepsze rozwiązanie na początku metody `Invoke` w oprogramowaniu pośredniczącym. Jest to metoda wywołania zwrotnego, która ustawia nagłówki odpowiedzi.
+Rozwiązanie polega na ustawieniu metody wywołania zwrotnego, która będzie wywoływana w prawo przed rozpoczęciem zapisywania do odpowiedzi. Jest to najlepsze rozwiązanie na początku `Invoke` metody w oprogramowaniu pośredniczącym. Jest to metoda wywołania zwrotnego, która ustawia nagłówki odpowiedzi.
 
-Poniższy kod ustawia metodę wywołania zwrotnego o nazwie `SetHeaders`:
+Poniższy kod ustawia metodę wywołania zwrotnego o `SetHeaders`nazwie:
 
 ```csharp
 public async Task Invoke(HttpContext httpContext)
@@ -353,7 +359,7 @@ public async Task Invoke(HttpContext httpContext)
     httpContext.Response.OnStarting(SetHeaders, state: httpContext);
 ```
 
-Metoda wywołania zwrotnego `SetHeaders` będzie wyglądać następująco:
+Metoda `SetHeaders` wywołania zwrotnego będzie wyglądać następująco:
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_SetHeaders)]
 
@@ -369,13 +375,13 @@ public async Task Invoke(HttpContext httpContext)
     httpContext.Response.OnStarting(SetHeaders, state: httpContext);
 ```
 
-Metoda wywołania zwrotnego `SetCookies` będzie wyglądać następująco:
+Metoda `SetCookies` wywołania zwrotnego będzie wyglądać następująco:
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_SetCookies)]
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Obsługa protokołu HTTP i moduły HTTP — Omówienie](/iis/configuration/system.webserver/)
-* [Konfiguracja](xref:fundamentals/configuration/index)
+* [Konfigurowanie](xref:fundamentals/configuration/index)
 * [Uruchamianie aplikacji](xref:fundamentals/startup)
 * [Oprogramowanie pośredniczące](xref:fundamentals/middleware/index)

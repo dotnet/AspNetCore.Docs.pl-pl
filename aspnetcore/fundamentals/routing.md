@@ -6,13 +6,19 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 4/1/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: fundamentals/routing
-ms.openlocfilehash: 79a46cac4122728e84fa6f5acb3defa182092bec
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
-ms.translationtype: MT
+ms.openlocfilehash: e2b1672066a5b3c0bb6bc44e316bda93ae0f21b7
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.translationtype: HT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82206128"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774912"
 ---
 # <a name="routing-in-aspnet-core"></a>Routing w ASP.NET Core
 
@@ -348,7 +354,7 @@ Szczegóły dotyczące sposobu działania pierwszeństwa są powiązane ze sposo
 * Segment z tekstem literału jest traktowany jako bardziej szczegółowy niż segment parametru.
 * Segment parametru z ograniczeniem jest uznawany za bardziej szczegółowy niż jeden bez.
 * Segment złożony jest uznawany za określony jako segment parametru z ograniczeniem.
-* Przechwyć wszystkie parametry są najmniej określone.
+* Catch-wszystkie parametry są najmniej określone. Aby uzyskać ważne informacje dotyczące przechwytywania wszystkich tras, zobacz temat **catch-all** w [dokumentacji dotyczącej szablonu trasy](#rtr) .
 
 Zapoznaj się z [kodem źródłowym w witrynie GitHub](https://github.com/dotnet/aspnetcore/blob/master/src/Http/Routing/src/Template/RoutePrecedence.cs#L189) , aby uzyskać odwołanie do dokładnych wartości.
 
@@ -415,6 +421,8 @@ Gwiazdka `*` lub podwójna gwiazdka `**`:
 * Są nazywane parametrami **przechwycenia** . Na przykład `blog/{**slug}`:
   * Dopasowuje dowolny identyfikator URI, `/blog` który rozpoczyna się od i ma dowolną wartość po nim.
   * Wartość poniżej `/blog` jest przypisana do wartości trasy [informacji](https://developer.mozilla.org/docs/Glossary/Slug) o sobie.
+
+[!INCLUDE[](~/includes/catchall.md)]
 
 Catch-wszystkie parametry można także dopasować do pustego ciągu.
 

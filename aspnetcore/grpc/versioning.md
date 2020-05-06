@@ -1,88 +1,94 @@
 ---
 title: Przechowywanie wersji usług gRPC
 author: jamesnk
-description: Dowiedz się, jak wersję usług gRPC.
+description: Dowiedz się, jak w wersji gRPC Services.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 01/09/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: grpc/versioning
-ms.openlocfilehash: 9bd76009ba28a1abef25a98686afea6753d4a8f4
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: dcf089f1e5f27639d048e91ee3aa42c7da6d8398
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78664116"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775365"
 ---
 # <a name="versioning-grpc-services"></a>Przechowywanie wersji usług gRPC
 
-Przez [James Newton-King](https://twitter.com/jamesnk)
+Przez [Kuba Kowalski-króla](https://twitter.com/jamesnk)
 
-Nowe funkcje dodane do aplikacji mogą wymagać, aby usługi gRPC świadczone klientom były zmieniane, czasami w nieoczekiwany i przełomowy sposób. Po zmianie usług gRPC:
+Nowe funkcje dodane do aplikacji mogą wymagać zmiany usług gRPC Services na potrzeby klientów, czasami w nieoczekiwany sposób. Gdy usługi gRPC Services zmienią się:
 
-* Należy wziąć pod uwagę wpływ zmian na klientów.
-* Należy wdrożyć strategię przechowywania wersji do obsługi zmian.
+* Należy zwrócić uwagę na to, jak zmiany wpływają na klientów.
+* Należy zaimplementować strategię obsługi wersji, aby obsługiwać zmiany.
 
-## <a name="backwards-compatibility"></a>Zgodność z przewładem
+## <a name="backwards-compatibility"></a>Zgodność z poprzednimi wersjami
 
-Protokół gRPC jest przeznaczony do obsługi usług, które zmieniają się w czasie. Ogólnie rzecz biorąc, dodatki do usług i metod gRPC nie są łamane. Nierozerwalne zmiany umożliwiają istniejącym klientom kontynuowanie pracy bez zmian. Zmiana lub usunięcie usług gRPC to przełomowe zmiany. Gdy usługi gRPC mają przełomowe zmiany, klienci korzystający z tej usługi muszą zostać zaktualizowani i ponownie wsiewając.
+Protokół gRPC jest przeznaczony do obsługi usług, które zmieniają się w miarę upływu czasu. Ogólnie rzecz biorąc, dodatki do usług gRPC i metod są nieistotne. Niekrytyczne zmiany umożliwiają istniejącym klientom kontynuowanie pracy bez zmian. Zmiana lub usunięcie usług gRPC powoduje przerwanie zmian. Gdy usługi gRPC mają istotne zmiany, klienci korzystający z tej usługi muszą zostać zaktualizowani i wdrożoni ponownie.
 
-Wprowadzanie nierozerwowych zmian w usłudze ma wiele zalet:
+Wprowadzanie nieistotnych zmian do usługi ma wiele korzyści:
 
-* Istniejący klienci nadal działają.
-* Pozwala uniknąć pracy związanej z powiadamianiem klientów o przełomowych zmianach i aktualizowaniem ich.
+* Istniejący klienci będą nadal działać.
+* Zapobiega pracy związanym z powiadamianiem klientów o istotnych zmianach i aktualizowanie ich.
 * Tylko jedna wersja usługi musi być udokumentowana i utrzymywana.
 
-### <a name="non-breaking-changes"></a>Zmiany nierozłamane
+### <a name="non-breaking-changes"></a>Niekrytyczne zmiany
 
-Zmiany te nie są łamanie na poziomie protokołu gRPC i .NET binarny poziom.
+Te zmiany nie są przerywane na poziomie protokołu gRPC i pliku binarnego platformy .NET.
 
 * **Dodawanie nowej usługi**
 * **Dodawanie nowej metody do usługi**
-* **Dodawanie pola do komunikatu żądania** — pola dodane do komunikatu żądania są deserializowane z [wartością domyślną](https://developers.google.com/protocol-buffers/docs/proto3#default) na serwerze, gdy nie są ustawione. Aby usługa była zmianą nierozważną, musi zakończyć się pomyślnie, gdy nowe pole nie jest ustawiane przez starszych klientów.
-* **Dodawanie pola do komunikatu odpowiedzi** — pola dodane do wiadomości odpowiedzi są deserializowane do kolekcji [nieznanych pól](https://developers.google.com/protocol-buffers/docs/proto3#unknowns) wiadomości na kliencie.
-* **Dodawanie wartości do wyliczenia** — wyliczenia są serializowane jako wartość liczbowa. Nowe wartości wyliczenia są deserializowane na kliencie do wartości wyliczenia bez nazwy wyliczenia. Aby być zmianą nierozłamającą, starsi klienci muszą działać poprawnie podczas odbierania nowej wartości wyliczenia.
+* **Dodawanie pola do komunikatu żądania** — pola dodawane do komunikatu żądania są deserializowane przy użyciu [wartości domyślnej](https://developers.google.com/protocol-buffers/docs/proto3#default) na serwerze, gdy nie jest ustawiony. Aby nastąpić nieprzerwaną zmianę, usługa musi się powieść, jeśli nowe pole nie zostanie ustawione przez starszych klientów.
+* **Dodawanie pola do komunikatu odpowiedzi** — pola dodane do komunikatu odpowiedzi są deserializowane do kolekcji [nieznanych pól](https://developers.google.com/protocol-buffers/docs/proto3#unknowns) na komputerze klienckim.
+* **Dodawanie wartości do** wyliczenia-wyliczenia jest serializowane jako wartość liczbowa. Nowe wartości wyliczeniowe są deserializowane na kliencie do wartości wyliczenia bez nazwy wyliczenia. Aby mieć nieistotną zmianę, starsze komputery klienckie muszą działać poprawnie, gdy otrzymuje nową wartość enum.
 
-### <a name="binary-breaking-changes"></a>Binary przełomowe zmiany
+### <a name="binary-breaking-changes"></a>Zmiany kodu binarnego
 
-Następujące zmiany nie są przerywane na poziomie protokołu gRPC, ale klient musi zostać zaktualizowany, jeśli uaktualni do najnowszego kontraktu *.proto* lub zestawu .NET klienta. Zgodność binarna jest ważne, jeśli planujesz opublikować bibliotekę gRPC do NuGet.
+Następujące zmiany nie są rozrywane na poziomie protokołu gRPC, ale klient należy zaktualizować w przypadku uaktualnienia do najnowszej wersji kontraktu *. proto* lub zestawu .NET klienta. Zgodność binarna jest ważna, jeśli planujesz opublikowanie biblioteki gRPC w programie NuGet.
 
-* **Usuwanie pola** — wartości z usuniętego pola są deserializowane do [nieznanych pól](https://developers.google.com/protocol-buffers/docs/proto3#unknowns)wiadomości . Nie jest to zmiana podziału protokołu gRPC, ale klient musi zostać zaktualizowany, jeśli uaktualni się do najnowszej umowy. Ważne jest, aby usunięty numer pola nie był przypadkowo ponownie odtwarzany w przyszłości. Aby upewnić się, że tak się nie stanie, określ usunięte numery pól i nazwy w wiadomości za pomocą [zastrzeżonego](https://developers.google.com/protocol-buffers/docs/proto3#reserved) słowa kluczowego Protobuf.
-* **Zmiana nazwy wiadomości** — nazwy wiadomości nie są zazwyczaj wysyłane w sieci, więc nie jest to zmiana podziału protokołu gRPC. Klient będzie musiał zostać zaktualizowany, jeśli uaktualni do najnowszej umowy. Jedną z sytuacji, w której nazwy wiadomości **są** wysyłane w sieci, są [pola Dowolne,](https://developers.google.com/protocol-buffers/docs/proto3#any) gdy nazwa wiadomości jest używana do identyfikowania typu wiadomości.
-* **Zmiana csharp_namespace** — zmiana `csharp_namespace` spowoduje zmianę obszaru nazw wygenerowanych typów .NET. Nie jest to zmiana podziału protokołu gRPC, ale klient musi zostać zaktualizowany, jeśli uaktualni się do najnowszej umowy.
+* **Usuwanie wartości pól** z usuniętego pola jest deserializowane do [nieznanych pól](https://developers.google.com/protocol-buffers/docs/proto3#unknowns)komunikatu. Nie jest to gRPCa zmiana protokołu, ale klient należy zaktualizować w przypadku uaktualnienia do najnowszego kontraktu. Należy pamiętać, że usunięty numer pola nie jest przypadkowo ponownie używany w przyszłości. Aby się upewnić, że to się nie dzieje, określ usunięte numery pól i nazwy w komunikacie przy użyciu [zastrzeżonego](https://developers.google.com/protocol-buffers/docs/proto3#reserved) słowa kluczowego protobuf.
+* Zmiana **nazwy** komunikatów nie jest zazwyczaj wysyłana w sieci, więc nie jest to gRPCa. Po uaktualnieniu do najnowszej kontraktu klient musi zostać zaktualizowany. Jedną z sytuacji, w której nazwy komunikatów **są** wysyłane w sieci, są z [dowolnymi](https://developers.google.com/protocol-buffers/docs/proto3#any) polami, gdy nazwa komunikatu jest używana do identyfikowania typu wiadomości.
+* **Zmiana csharp_namespace** -zmiana `csharp_namespace` zmieni przestrzeń nazw wygenerowanych typów .NET. Nie jest to gRPCa zmiana protokołu, ale klient należy zaktualizować w przypadku uaktualnienia do najnowszego kontraktu.
 
-### <a name="protocol-breaking-changes"></a>Zmiany w zerwaniu protokołu
+### <a name="protocol-breaking-changes"></a>Zmiany podczas łamania protokołu
 
-Następujące elementy są protokołem i binarnymi zmianami podziału:
+Poniżej przedstawiono następujące elementy:
 
-* **Zmiana nazwy pola** — w przypadku zawartości Protobuf nazwy pól są używane tylko w wygenerowanym kodzie. Numer pola służy do identyfikowania pól w sieci. Zmiana nazwy pola nie jest zmianą protokołu dla Protobuf. Jeśli jednak serwer używa zawartości JSON, zmiana nazwy pola jest zmianą podziału.
-* **Zmiana typu danych pola** — zmiana typu danych pola na [niezgodny typ](https://developers.google.com/protocol-buffers/docs/proto3#updating) spowoduje błędy podczas deserializacji wiadomości. Nawet jeśli nowy typ danych jest zgodny, jest prawdopodobne, że klient musi zostać zaktualizowany do obsługi nowego typu, jeśli uaktualnia do najnowszego kontraktu.
-* **Zmiana numeru pola** — w przypadku ładunków Protobuf numer pola jest używany do identyfikowania pól w sieci.
-* **Zmiana nazwy pakietu, usługi lub metody** — gRPC używa nazwy pakietu, nazwy usługi i nazwy metody do tworzenia adresu URL. Klient otrzymuje *status UNIMPLEMENTED* z serwera.
-* **Usuwanie usługi lub metody** — klient pobiera *status UNIMPLEMENTED* z serwera podczas wywoływania usuniętej metody.
+* **Zmiana nazwy pola** — z zawartością protobuf, nazwy pól są używane tylko w wygenerowanym kodzie. Numer pola służy do identyfikowania pól w sieci. Zmiana nazwy pola nie jest zmianą protokołu dla protobuf. Jeśli jednak serwer używa zawartości JSON, zmiana nazwy pola jest istotną zmianą.
+* **Zmiana typu danych pola** — zmiana typu danych pola na [niezgodny typ](https://developers.google.com/protocol-buffers/docs/proto3#updating) spowoduje błędy podczas deserializacji komunikatu. Nawet jeśli nowy typ danych jest zgodny, prawdopodobnie klient musi zostać zaktualizowany do obsługi nowego typu w przypadku uaktualnienia do najnowszego kontraktu.
+* **Zmiana numeru pola** — przy użyciu ładunków protobuf numer pola służy do identyfikowania pól w sieci.
+* **Zmiana nazwy pakietu, usługi lub metody** — gRPC używa nazwy pakietu, nazwy usługi i nazwy metody do KOMPILOWANIA adresu URL. Klient Pobiera stan *NIEZAimplementowany* z serwera.
+* **Usuwanie usługi lub metody** — klient Pobiera stan *niezaimplementowany* z serwera podczas wywoływania usuniętej metody.
 
-### <a name="behavior-breaking-changes"></a>Zmiany dotyczące zachowania
+### <a name="behavior-breaking-changes"></a>Zmiany powodujące przerwanie działania
 
-Podczas wprowadzania zmian nierozłamających należy również rozważyć, czy starsi klienci mogą kontynuować pracę z nowym zachowaniem usługi. Na przykład dodanie nowego pola do wiadomości żądania:
+Podczas wprowadzania nieistotnych zmian należy również rozważyć, czy starsze komputery klienckie mogą kontynuować pracę z nowym zachowaniem usługi. Na przykład Dodaj nowe pole do komunikatu żądania:
 
 * Nie jest to zmiana podziału protokołu.
-* Zwracanie stanu błędu na serwerze, jeśli nowe pole nie jest ustawione, powoduje, że jest to przełomowa zmiana dla starych klientów.
+* Zwrócenie stanu błędu na serwerze, jeśli nowe pole nie zostało ustawione sprawia, że jest to istotna zmiana dla starych klientów.
 
-Zgodność zachowania zależy od kodu specyficznego dla aplikacji.
+Zgodność z zachowaniem jest określana na podstawie kodu specyficznego dla aplikacji.
 
-## <a name="version-number-services"></a>Usługi numerów wersji
+## <a name="version-number-services"></a>Usługi numeru wersji
 
-Usługi powinny dążyć do zachowania wstecz zgodności ze starymi klientami. Po pewnym czasie zmiany w aplikacji mogą wymagać zmian w przerwaniu pracy. Rozbijanie starych klientów i zmuszanie ich do aktualizacji wraz z usługą nie jest dobrym doświadczeniem użytkownika. Sposobem zachowania zgodności z powrotem podczas wprowadzania zmian podziału jest opublikowanie wielu wersji usługi.
+Usługi powinny dążyć do zachowania zgodności z poprzednimi klientami. Ostatecznie zmiany w aplikacji mogą wymagać przerwania zmian. Przerywanie starych klientów i wymuszanie ich aktualizacji wraz z usługą nie jest dobrym doświadczeniem użytkownika. Sposób zapewnienia zgodności z poprzednimi wersjami podczas wprowadzania istotnych zmian polega na opublikowaniu wielu wersji usługi.
 
-gRPC obsługuje opcjonalny specyfikator [pakietu,](https://developers.google.com/protocol-buffers/docs/proto3#packages) który działa podobnie jak obszar nazw .NET. W rzeczywistości `package` będzie używany jako obszar nazw .NET dla `option csharp_namespace` wygenerowanych typów .NET, jeśli nie jest ustawiony w pliku *.proto.* Pakiet może służyć do określenia numeru wersji usługi i jej komunikatów:
+gRPC obsługuje opcjonalny specyfikator [pakietu](https://developers.google.com/protocol-buffers/docs/proto3#packages) , który działa podobnie jak przestrzeń nazw platformy .NET. W rzeczywistości `package` zostanie użyta jako przestrzeń nazw .NET dla wygenerowanych typów .NET, `option csharp_namespace` Jeśli nie jest ustawiona w pliku *. proto* . Pakiet może służyć do określania numeru wersji usługi i jej komunikatów:
 
 [!code-protobuf[](versioning/sample/greet.v1.proto?highlight=3)]
 
-Nazwa pakietu jest łączona z nazwą usługi w celu zidentyfikowania adresu usługi. Adres usługi umożliwia hostowanie wielu wersji usługi obok siebie:
+Nazwa pakietu jest połączona z nazwą usługi, aby zidentyfikować adres usługi. Adres usługi umożliwia obsługiwanie wielu wersji usługi po stronie:
 
 * `greet.v1.Greeter`
 * `greet.v2.Greeter`
 
-Implementacje usługi są rejestrowane w *Startup.cs:*
+Implementacje usługi z wersjami są zarejestrowane w *Startup.cs*:
 
 ```csharp
 app.UseEndpoints(endpoints =>
@@ -95,14 +101,14 @@ app.UseEndpoints(endpoints =>
 });
 ```
 
-Uwzględnienie numeru wersji w nazwie pakietu daje możliwość opublikowania wersji *2* usługi z przełomowymi zmianami, kontynuując obsługę starszych klientów, którzy wywołują wersję *v1.* Po zaktualizowaniu klientów do korzystania z usługi *w wersji 2* można usunąć starą wersję. Planując opublikowanie wielu wersji usługi:
+Dołączenie numeru wersji w nazwie pakietu daje możliwość opublikowania w wersji *2* usługi z uwzględnieniem istotnych zmian, przy jednoczesnym dalszym obsłudze starszych klientów, którzy wywołują wersję *V1* . Gdy klienci zostali zaktualizowani do korzystania z usługi w *wersji 2* , możesz wybrać opcję usunięcia starej wersji. Planując Publikowanie wielu wersji usługi:
 
-* Unikaj łamania zmian, jeśli jest to uzasadnione.
-* Nie aktualizuj numeru wersji, chyba że wprowadzasz przełomowe zmiany.
-* Należy zaktualizować numer wersji po wprowadzeniu zmian w przerwaniu.
+* Unikaj znaczących zmian, jeśli jest to uzasadnione.
+* Nie Aktualizuj numeru wersji, chyba że wprowadzasz istotne zmiany.
+* Należy zaktualizować numer wersji po wprowadzeniu zmian.
 
-Publikowanie wielu wersji usługi powiela ją. Aby ograniczyć powielanie, należy rozważyć przeniesienie logiki biznesowej z implementacji usługi do scentralizowanej lokalizacji, która może być ponownie używana przez stare i nowe implementacje:
+Publikowanie wielu wersji usługi duplikuje ją. Aby zmniejszyć duplikowanie, rozważ przeniesienie logiki biznesowej z implementacji usługi do scentralizowanej lokalizacji, która może być ponownie używana przez stare i nowe implementacje:
 
 [!code-csharp[](versioning/sample/GreeterServiceV1.cs?highlight=10,19)]
 
-Usługi i wiadomości generowane przy różnych nazwach pakietów są **różnymi typami .NET**. Przenoszenie logiki biznesowej do scentralizowanej lokalizacji wymaga mapowania wiadomości do typowych typów.
+Usługi i komunikaty generowane z różnymi nazwami pakietów są **różnymi typami .NET**. Przeniesienie logiki biznesowej do scentralizowanej lokalizacji wymaga mapowania komunikatów do typów wspólnych.

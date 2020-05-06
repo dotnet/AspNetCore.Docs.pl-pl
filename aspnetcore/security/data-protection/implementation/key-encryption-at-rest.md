@@ -4,13 +4,19 @@ author: rick-anderson
 description: Zapoznaj się ze szczegółami implementacji szyfrowania klucza ochrony danych ASP.NET Core.
 ms.author: riande
 ms.date: 07/16/2018
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/implementation/key-encryption-at-rest
-ms.openlocfilehash: 52c3137dbe467096364b42430c92aecc7c15e313
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: e68b8e09dbd876c6f0d37242ebaa415994b3b808
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78658390"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776932"
 ---
 # <a name="key-encryption-at-rest-in-aspnet-core"></a>Szyfrowanie klucza przechowywane w ASP.NET Core
 
@@ -23,7 +29,7 @@ System ochrony danych [domyślnie stosuje mechanizm odnajdywania](xref:security/
 
 ## <a name="azure-key-vault"></a>W usłudze Azure Key Vault
 
-Aby przechowywać klucze w [Azure Key Vault](https://azure.microsoft.com/services/key-vault/), skonfiguruj system przy użyciu [ProtectKeysWithAzureKeyVault](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault) w klasie `Startup`:
+Aby przechowywać klucze w [Azure Key Vault](https://azure.microsoft.com/services/key-vault/), skonfiguruj system przy użyciu [ProtectKeysWithAzureKeyVault](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault) w `Startup` klasie:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -53,7 +59,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Jeśli `ProtectKeysWithDpapi` jest wywoływana bez parametrów, tylko bieżące konto użytkownika systemu Windows może odszyfrować trwały pierścień klucza. Opcjonalnie możesz określić, że każde konto użytkownika na komputerze (nie tylko bieżące konto użytkownika) będzie mogło odszyfrować pierścień klucza:
+Jeśli `ProtectKeysWithDpapi` jest wywoływana bez parametrów, tylko bieżące konto użytkownika systemu Windows może odszyfrować utrwalonego dzwonka klucza. Opcjonalnie możesz określić, że każde konto użytkownika na komputerze (nie tylko bieżące konto użytkownika) będzie mogło odszyfrować pierścień klucza:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)

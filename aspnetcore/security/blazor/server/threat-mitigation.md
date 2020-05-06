@@ -5,7 +5,7 @@ description: Dowiedz się, jak ograniczyć zagrożenia bezpieczeństwa Blazor do
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/27/2020
+ms.date: 05/05/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/server/threat-mitigation
-ms.openlocfilehash: 2c87e6cef5a16b394b03dac1635f18d09593eb94
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: f43a46f53dc50cde43c88460b8bd3d6fb7a7076f
+ms.sourcegitcommit: 4a9321db7ca4e69074fa08a678dcc91e16215b1e
 ms.translationtype: HT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774187"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82850503"
 ---
 # <a name="threat-mitigation-guidance-for-aspnet-core-blazor-server"></a>Wskazówki dotyczące łagodzenia zagrożeń dla ASP.NET Core Blazor Server
 
@@ -97,7 +97,7 @@ Domyślnie nie ma żadnego limitu liczby połączeń na użytkownika dla aplikac
 
 Ataki typu "odmowa usługi" (DoS) obejmują klienta, który powoduje, że serwer wyczerpuje jeden lub więcej zasobów, dzięki czemu aplikacja jest niedostępna. Aplikacje serwera Blazor obejmują pewne limity domyślne i są zależne od innych limitów ASP.NET Core i sygnałów, aby chronić przed atakami DoS:
 
-| Limit aplikacji serwera Blazor                            | Opis | Domyślne |
+| Limit aplikacji serwera Blazor                            | Opis | Domyślny |
 | ------------------------------------------------------- | ----------- | ------- |
 | `CircuitOptions.DisconnectedCircuitMaxRetained`         | Maksymalna liczba odłączonych obwodów, które dany serwer przechowuje w pamięci w danym momencie. | 100 |
 | `CircuitOptions.DisconnectedCircuitRetentionPeriod`     | Maksymalny czas przechowywania połączonego obwodu w pamięci przed jego usunięciem. | 3 minuty |
@@ -105,7 +105,7 @@ Ataki typu "odmowa usługi" (DoS) obejmują klienta, który powoduje, że serwer
 | `CircuitOptions.MaxBufferedUnacknowledgedRenderBatches` | Maksymalna liczba niepotwierdzonych partii renderowania, które serwer przechowuje w pamięci na obwód w danym momencie do obsługi niezawodnego ponownego łączenia. Po osiągnięciu limitu serwer przestaje tworzyć nowe partie renderowania do momentu potwierdzenia co najmniej jednej partii przez klienta. | 10 |
 
 
-| Sygnał i limit ASP.NET Core             | Opis | Domyślne |
+| Sygnał i limit ASP.NET Core             | Opis | Domyślny |
 | ------------------------------------------ | ----------- | ------- |
 | `CircuitOptions.MaximumReceiveMessageSize` | Rozmiar wiadomości dla pojedynczej wiadomości. | 32 KB |
 
@@ -281,7 +281,7 @@ Wskazówki dotyczące zabezpieczania aplikacji ASP.NET Core mają zastosowanie B
 
 * [Rejestrowanie i dane poufne](#logging-and-sensitive-data)
 * [Ochrona informacji przesyłanych przy użyciu protokołu HTTPS](#protect-information-in-transit-with-https)
-* [Skrypty między lokacjami (XSS)](#cross-site-scripting-xss))
+* [Skrypty między lokacjami (XSS)](#cross-site-scripting-xss)
 * [Ochrona między źródłami](#cross-origin-protection)
 * [Gniazdo kliknięcia](#click-jacking)
 * [Otwórz przekierowania](#open-redirects)

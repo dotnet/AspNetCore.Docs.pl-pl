@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/routing
-ms.openlocfilehash: e2b1672066a5b3c0bb6bc44e316bda93ae0f21b7
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
+ms.openlocfilehash: 2dd44a561debddac13250174a8e74dd912302d60
+ms.sourcegitcommit: 4a9321db7ca4e69074fa08a678dcc91e16215b1e
+ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774912"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82850516"
 ---
 # <a name="routing-in-aspnet-core"></a>Routing w ASP.NET Core
 
@@ -581,6 +581,8 @@ Aby ograniczyć parametr do znanego zestawu możliwych wartości, użyj wyrażen
 Niestandardowe ograniczenia trasy można utworzyć przez implementację <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> interfejsu. `IRouteConstraint` Interfejs <xref:System.Web.Routing.IRouteConstraint.Match*>zawiera, który zwraca `true` , jeśli ograniczenie jest spełnione i `false` w przeciwnym razie.
 
 Niestandardowe ograniczenia trasy są rzadko zbędne. Przed wdrożeniem niestandardowego ograniczenia trasy należy rozważyć alternatywy, takie jak powiązanie modelu.
+
+Folder [ograniczenia](https://github.com/dotnet/aspnetcore/tree/master/src/Http/Routing/src/Constraints) ASP.NET Core zawiera dobre przykłady tworzenia ograniczeń. Na przykład [GuidRouteConstraint](https://github.com/dotnet/aspnetcore/blob/master/src/Http/Routing/src/Constraints/GuidRouteConstraint.cs#L18).
 
 Aby użyć niestandardowego `IRouteConstraint`, typ ograniczenia trasy musi być zarejestrowany <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> w ramach aplikacji w kontenerze usługi. `ConstraintMap` Jest słownikiem, który mapuje klucze ograniczeń trasy `IRouteConstraint` do implementacji, które weryfikują te ograniczenia. Aplikację `ConstraintMap` można zaktualizować w `Startup.ConfigureServices` ramach [usług. Wywołanie addrouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*) lub przez skonfigurowanie <xref:Microsoft.AspNetCore.Routing.RouteOptions> bezpośrednio w `services.Configure<RouteOptions>`usłudze. Przykład:
 

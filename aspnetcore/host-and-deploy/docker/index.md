@@ -1,43 +1,49 @@
 ---
-title: Host ASP.NET Core w kontenerach platformy Docker
+title: ASP.NET Core hosta w kontenerach platformy Docker
 author: rick-anderson
-description: Odnajduj łącza do zasobów, aby dowiedzieć się, jak hostować aplikacje ASP.NET Core w kontenerach platformy Docker.
+description: Odkryj linki do zasobów, aby dowiedzieć się, jak hostować aplikacje ASP.NET Core w kontenerach platformy Docker.
 ms.author: riande
 ms.custom: mvc
 ms.date: 01/08/2018
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: host-and-deploy/docker/index
-ms.openlocfilehash: 78eb6f467c7e779e1bf998e8ac8e917a90895db9
-ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
+ms.openlocfilehash: 94996f279929f6e3837efb613c99927edbd9143e
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81440730"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774590"
 ---
-# <a name="host-aspnet-core-in-docker-containers"></a>Host ASP.NET Core w kontenerach platformy Docker
+# <a name="host-aspnet-core-in-docker-containers"></a>ASP.NET Core hosta w kontenerach platformy Docker
 
-Następujące artykuły są dostępne do nauki o hostingu aplikacji ASP.NET Core w platformie Docker:
+Następujące artykuły są dostępne na potrzeby uczenia się, jak hostować ASP.NET Core aplikacje w programie Docker:
 
 [Wprowadzenie do kontenerów i platformy Docker](/dotnet/standard/microservices-architecture/container-docker-introduction/index)  
-Zobacz, jak konteneryzacja jest podejście do tworzenia oprogramowania, w którym aplikacja lub usługa, jego zależności i jego konfiguracji są pakowane razem jako obraz kontenera. Obraz można przetestować, a następnie wdrożyć na hoście.
+Zobacz, jak kontenerach jest podejściem do tworzenia oprogramowania, w którym aplikacja lub usługa, jej zależności i jej konfiguracja są pakowane razem jako obraz kontenera. Obraz może zostać przetestowany, a następnie wdrożony na hoście.
 
-[Co to jest docker](/dotnet/standard/microservices-architecture/container-docker-introduction/docker-defined)  
-Dowiedz się, jak docker jest projektem typu open source do automatyzacji wdrażania aplikacji jako przenośnych, samowystarczalnych kontenerów, które mogą działać w chmurze lub lokalnie.
+[Co to jest platforma Docker](/dotnet/standard/microservices-architecture/container-docker-introduction/docker-defined)  
+Odkryj, jak platforma Docker to projekt typu "open source" służący do automatyzowania wdrażania aplikacji jako przenośnych, samowystarczalnych kontenerów, które mogą być uruchamiane w chmurze lub lokalnie.
 
 [Terminologia platformy Docker](/dotnet/standard/microservices-architecture/container-docker-introduction/docker-terminology)  
-Poznaj terminy i definicje technologii Platformy Docker.
+Poznaj warunki i definicje dotyczące technologii platformy Docker.
 
 [Kontenery, obrazy i rejestry platformy Docker](/dotnet/standard/microservices-architecture/container-docker-introduction/docker-containers-images-registries)  
-Dowiedz się, jak obrazy kontenerów platformy Docker są przechowywane w rejestrze obrazów w celu spójnego wdrażania w różnych środowiskach.
+Dowiedz się, w jaki sposób obrazy kontenerów platformy Docker są przechowywane w rejestrze obrazów na potrzeby spójnego wdrażania w różnych środowiskach.
 
-<xref:host-and-deploy/docker/building-net-docker-images>Dowiedz się, jak tworzyć i dockerize aplikacji ASP.NET Core. Eksploruj obrazy platformy Docker obsługiwane przez firmę Microsoft i badaj przypadki użycia.
+<xref:host-and-deploy/docker/building-net-docker-images>Dowiedz się, jak kompilować i przekształcać aplikację ASP.NET Core. Eksploruj obrazy platformy Docker obsługiwane przez firmę Microsoft i badaj przypadki użycia.
 
 [Narzędzia kontenerów programu Visual Studio](xref:host-and-deploy/docker/visual-studio-tools-for-docker)  
-Dowiedz się, jak program Visual Studio obsługuje tworzenie, debugowanie i uruchamianie aplikacji ASP.NET Core przeznaczonych dla programu .NET Framework lub .NET Core w platformie Docker dla systemu Windows. Obsługiwane są kontenery zarówno systemu Windows, jak i Linux.
+Dowiedz się, w jaki sposób program Visual Studio obsługuje kompilowanie, debugowanie i uruchamianie aplikacji ASP.NET Core przeznaczonych dla .NET Framework lub .NET Core w Docker for Windows. Obsługiwane są kontenery zarówno systemu Windows, jak i Linux.
 
 [Publikowanie w usłudze Azure Container Registry](/azure/vs-azure-tools-docker-hosting-web-apps-in-docker)  
-Dowiedz się, jak użyć rozszerzenia Narzędzia kontenerów programu Visual Studio do wdrożenia aplikacji ASP.NET Core na hoście platformy Docker na platformie Azure przy użyciu programu PowerShell.
+Dowiedz się, jak za pomocą rozszerzenia Visual Studio Container Tools wdrożyć aplikację ASP.NET Core na hoście Docker na platformie Azure przy użyciu programu PowerShell.
 
-[Konfigurowanie ASP.NET Core do pracy z serwerami proxy i modułami równoważenia obciążenia](xref:host-and-deploy/proxy-load-balancer)  
-Dodatkowa konfiguracja może być wymagana dla aplikacji hostowanych za serwerami proxy i modułami równoważenia obciążenia. Przekazywanie żądań za pośrednictwem serwera proxy często zasłania informacje o oryginalnym żądaniu, takie jak schemat i adres IP klienta. Może być konieczne przekazanie niektórych informacji o żądaniu ręcznie do aplikacji.
+[Konfigurowanie ASP.NET Core do pracy z serwerami proxy i usługami równoważenia obciążenia](xref:host-and-deploy/proxy-load-balancer)  
+Dodatkowa konfiguracja może być wymagana dla aplikacji hostowanych w ramach serwerów proxy i modułów równoważenia obciążenia. Przekazywanie żądań za pomocą serwera proxy często zasłania informacje o oryginalnym żądaniu, takie jak schemat i adres IP klienta. Może być konieczne ręczne przekazanie pewnych informacji dotyczących żądania do aplikacji.
 
-[GC przy użyciu platformy Docker i małych kontenerów](xref:performance/memory#sc) W tym artykule omówiono wybór GC z małymi pojemnikami.
+[GC przy użyciu platformy Docker i małych kontenerów](xref:performance/memory#sc) Omawia wybór GC z małymi kontenerami.

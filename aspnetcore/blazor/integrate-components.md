@@ -1,5 +1,5 @@
 ---
-title: Integrowanie składników ASP.NET Core Razor z aplikacjami Razor Pages i MVC
+title: Integrowanie Razor składników ASP.NET Core Razor ze stronami i aplikacjami MVC
 author: guardrex
 description: Dowiedz się więcej na temat scenariuszy powiązań danych dla składników Blazor i elementów dom w aplikacjach.
 monikerRange: '>= aspnetcore-3.1'
@@ -8,14 +8,17 @@ ms.custom: mvc
 ms.date: 04/25/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/integrate-components
-ms.openlocfilehash: 4e2103b7e8b65478808093d7a31e8cfe29b04984
-ms.sourcegitcommit: f9a5069577e8f7c53f8bcec9e13e117950f4f033
+ms.openlocfilehash: eb4378223c40594ac52f50b7b890785067515555
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82558921"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82771777"
 ---
 # <a name="integrate-aspnet-core-razor-components-into-razor-pages-and-mvc-apps"></a>Integrowanie składników ASP.NET Core Razor z aplikacjami Razor Pages i MVC
 
@@ -247,7 +250,7 @@ Aby renderować składnik ze strony lub widoku, użyj [pomocnika tagów składni
 
 ### <a name="render-stateful-interactive-components"></a>Renderuj składniki interaktywne ze stanem
 
-Można dodać składniki interaktywne ze stanem do strony lub widoku Razor.
+Składniki interaktywne można dodać do Razor strony lub widoku.
 
 Gdy renderuje stronę lub widok:
 
@@ -255,7 +258,7 @@ Gdy renderuje stronę lub widok:
 * Początkowy stan składnika używany na potrzeby renderowania wstępnego został utracony.
 * Nowy stan składnika jest tworzony podczas ustanawiania SignalR połączenia.
 
-Następująca strona Razor renderuje `Counter` składnik:
+Na poniższej Razor stronie jest `Counter` renderowany składnik:
 
 ```cshtml
 <h1>My Razor Page</h1>
@@ -273,7 +276,7 @@ Aby uzyskać więcej informacji, zobacz <xref:mvc/views/tag-helpers/builtin-th/c
 
 ### <a name="render-noninteractive-components"></a>Renderuj nieinteraktywne składniki
 
-Na poniższej stronie Razor `Counter` składnik jest statycznie renderowany z wartością początkową określoną przy użyciu formularza. Ze względu na to, że składnik jest renderowany statycznie, składnik nie jest interaktywny:
+Na poniższej Razor stronie `Counter` składnik jest renderowany statycznie z wartością początkową określoną przy użyciu formularza. Ze względu na to, że składnik jest renderowany statycznie, składnik nie jest interaktywny:
 
 ```cshtml
 <h1>My Razor Page</h1>
@@ -305,6 +308,6 @@ W przypadku używania folderu niestandardowego do przechowywania składników ap
 @using MyAppNamespace.Components
 ```
 
-Plik *_ViewImports. cshtml* znajduje się w folderze *strony* aplikacji Razor Pages lub folderu *widoki* aplikacji MVC.
+Plik *_ViewImports. cshtml* znajduje się w folderze *Pages* aplikacji Razor Pages lub folderze *widoki* aplikacji MVC.
 
 Aby uzyskać więcej informacji, zobacz <xref:blazor/components#import-components>.

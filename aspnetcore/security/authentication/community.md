@@ -4,13 +4,19 @@ author: rick-anderson
 description: Odkryj opcje uwierzytelniania Open Source dla ASP.NET Core.
 ms.author: riande
 ms.date: 10/28/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authentication/community
-ms.openlocfilehash: 68c32515b7d789db86f60cd011632da5c1244c1f
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 425382781d6d35f6706aa9337280b0fdede4eac3
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78665334"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774629"
 ---
 # <a name="community-oss-authentication-options-for-aspnet-core"></a>Opcje wspólnotowego uwierzytelniania OSS dla ASP.NET Core
 
@@ -20,7 +26,7 @@ Ta strona zawiera opcje uwierzytelniania Open Source udostępniane przez społec
 
 Poniższa lista jest sortowana alfabetycznie.
 
-| Name (Nazwa) | Opis |
+| Nazwa | Opis |
 | ---- | ----------- |
 | [AspNet. Security. OpenIdConnect. Server (ASOS)](https://github.com/aspnet-contrib/AspNet.Security.OpenIdConnect.Server) | ASOS jest platformą programu OpenID Connect, która jest najniższego poziomu, dla ASP.NET Core i OWIN/Katana. |
 | [Serwer GLUU](https://gluu.org/) | Gotowe do użytku przedsiębiorstwa, oprogramowanie open source dla tożsamości, zarządzania dostępem (IAM) i logowania jednokrotnego (SSO). Aby uzyskać więcej informacji, zobacz [dokumentację produktu GLUU](https://gluu.org/docs/). |

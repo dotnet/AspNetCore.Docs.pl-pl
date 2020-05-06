@@ -5,13 +5,19 @@ description: Dowiedz się, jak zapobiegać atakom na aplikacje sieci Web, w któ
 ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/anti-request-forgery
-ms.openlocfilehash: 3da73b8fe3e3d73d5d7754e0642e55feeb785de3
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 4e7e7a89daaee533f648efdb2c621399225f57be
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78659160"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774007"
 ---
 # <a name="prevent-cross-site-request-forgery-xsrfcsrf-attacks-in-aspnet-core"></a>Uniemożliwiaj ataki między witrynami (XSRF/CSRF) w ASP.NET Core
 
@@ -22,9 +28,9 @@ Sfałszowanie żądań między lokacjami (znane również jako XSRF lub CSRF) je
 Przykład ataku CSRF:
 
 1. Użytkownik loguje się `www.good-banking-site.com` przy użyciu uwierzytelniania formularzy. Serwer uwierzytelnia użytkownika i wystawia odpowiedź obejmującą plik cookie uwierzytelniania. Lokacja jest narażona na ataki, ponieważ ufa każde żądanie odbierane z prawidłowym plikiem cookie uwierzytelniania.
-1. Użytkownik odwiedzi złośliwą witrynę `www.bad-crook-site.com`.
+1. Użytkownik odwiedza złośliwą lokację `www.bad-crook-site.com`.
 
-   Złośliwa witryna `www.bad-crook-site.com`, zawiera formularz HTML podobny do poniższego:
+   Złośliwa Witryna `www.bad-crook-site.com`programu zawiera formularz HTML podobny do poniższego:
 
    ```html
    <h1>Congratulations! You're a Winner!</h1>
@@ -35,10 +41,10 @@ Przykład ataku CSRF:
    </form>
    ```
 
-   Zwróć uwagę, że formularz `action` wpisów do zagrożonej witryny, a nie do złośliwej witryny. To jest część "wiele witryn" z CSRF.
+   Zwróć uwagę na to, `action` że formularz wpisuje w nieszkodliwej witrynie. To jest część "wiele witryn" z CSRF.
 
-1. Użytkownik wybiera przycisk Prześlij. Przeglądarka wysyła żądanie i automatycznie uwzględnia plik cookie uwierzytelniania dla żądanych domen, `www.good-banking-site.com`.
-1. Żądanie jest uruchamiane na serwerze `www.good-banking-site.com` z kontekstem uwierzytelniania użytkownika i może wykonać dowolną akcję, którą może wykonać uwierzytelniony użytkownik.
+1. Użytkownik wybiera przycisk Prześlij. Przeglądarka wysyła żądanie i automatycznie uwzględnia plik cookie uwierzytelniania dla żądanej domeny `www.good-banking-site.com`.
+1. Żądanie jest uruchamiane na `www.good-banking-site.com` serwerze z kontekstem uwierzytelniania użytkownika i może wykonywać dowolną akcję, którą może wykonać uwierzytelniony użytkownik.
 
 Oprócz scenariusza, w którym użytkownik wybiera przycisk, aby przesłać formularz, złośliwa witryna może:
 
@@ -48,7 +54,7 @@ Oprócz scenariusza, w którym użytkownik wybiera przycisk, aby przesłać form
 
 Te alternatywne scenariusze nie wymagają żadnych działań ani danych wejściowych od użytkownika innego niż początkowo odwiedzają złośliwe witryny.
 
-Korzystanie z protokołu HTTPS nie uniemożliwia ataku CSRF. Złośliwa lokacja może wysłać żądanie `https://www.good-banking-site.com/` równie łatwo, jak może wysłać niezabezpieczone żądanie.
+Korzystanie z protokołu HTTPS nie uniemożliwia ataku CSRF. Złośliwa lokacja może wysłać `https://www.good-banking-site.com/` żądanie równie łatwo, jak może wysłać niezabezpieczone żądanie.
 
 Niektóre ataki są ukierunkowanymi punktami końcowymi, które odpowiadają na żądania GET, w takim przypadku można użyć znacznika obrazu do wykonania akcji. Ta forma ataku jest wspólna w witrynach forum, które zezwalają na obrazy, ale blokują kod JavaScript. Aplikacje, które zmieniają stan w żądaniach GET, gdzie zmienne lub zasoby są zmieniane, są narażone na złośliwe ataki. **Żądania GET, które zmieniają stan są niezabezpieczone. Najlepszym rozwiązaniem jest nigdy nie zmieniaj stanu żądania GET.**
 
@@ -58,9 +64,9 @@ Możliwe jest ataki CSRF na aplikacje sieci Web, które używają plików cookie
 * Przechowywane pliki cookie obejmują pliki cookie sesji dla użytkowników uwierzytelnionych.
 * Przeglądarki wysyłają do aplikacji sieci Web wszystkie pliki cookie skojarzone z domeną, niezależnie od tego, w jaki sposób żądanie do aplikacji zostało wygenerowane w przeglądarce.
 
-Jednak ataki CSRF nie ograniczają się do korzystania z plików cookie. Na przykład uwierzytelnianie podstawowe i szyfrowane jest również zagrożone. Gdy użytkownik zaloguje się przy użyciu uwierzytelniania podstawowego lub szyfrowanego, przeglądarka automatycznie wyśle poświadczenia do momentu zakończenia sesji&dagger;.
+Jednak ataki CSRF nie ograniczają się do korzystania z plików cookie. Na przykład uwierzytelnianie podstawowe i szyfrowane jest również zagrożone. Gdy użytkownik zaloguje się przy użyciu uwierzytelniania podstawowego lub szyfrowanego, przeglądarka automatycznie wyśle poświadczenia do momentu&dagger; zakończenia sesji.
 
-&dagger;w tym kontekście *sesja* odwołuje się do sesji po stronie klienta, podczas której użytkownik jest uwierzytelniany. Nie jest on związany z sesjami po stronie serwera lub [ASP.NET Core pośredniczących sesji](xref:fundamentals/app-state).
+&dagger;W tym kontekście *sesja* dotyczy sesji po stronie klienta, podczas której użytkownik jest uwierzytelniany. Nie jest on związany z sesjami po stronie serwera lub [ASP.NET Core pośredniczących sesji](xref:fundamentals/app-state).
 
 Użytkownicy mogą chronić przed lukami w CSRF, podejmując środki ostrożności:
 
@@ -85,7 +91,7 @@ Po uwierzytelnieniu użytkownika są wystawiane tokeny (nie token antysfałszowa
 
 Udostępnione środowiska hostingu są podatne na przejmowanie sesji, CSRF logowania i inne ataki.
 
-Mimo że `example1.contoso.net` i `example2.contoso.net` są różnymi hostami, istnieje niejawna relacja zaufania między hostami w ramach domeny `*.contoso.net`. Niejawne relacje zaufania umożliwiają potencjalnie niezaufanym hostom wpływanie na wszystkie inne pliki cookie (zasady tego samego źródła, które zarządza żądaniami AJAX, nie zawsze mają zastosowanie do plików cookie HTTP).
+Chociaż `example1.contoso.net` i `example2.contoso.net` są różnymi hostami, istnieje niejawna relacja zaufania między hostami w `*.contoso.net` domenie. Niejawne relacje zaufania umożliwiają potencjalnie niezaufanym hostom wpływanie na wszystkie inne pliki cookie (zasady tego samego źródła, które zarządza żądaniami AJAX, nie zawsze mają zastosowanie do plików cookie HTTP).
 
 Ataki wykorzystujące zaufane pliki cookie między aplikacjami hostowanymi w tej samej domenie można zablokować, nie udostępniając domen. Gdy każda aplikacja jest hostowana we własnej domenie, nie istnieje niejawna relacja zaufania plików cookie do wykorzystania.
 
@@ -96,7 +102,7 @@ Ataki wykorzystujące zaufane pliki cookie między aplikacjami hostowanymi w tej
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Oprogramowanie pośredniczące przed fałszowaniem jest dodawane do kontenera [iniekcji zależności](xref:fundamentals/dependency-injection) , gdy jeden z następujących interfejsów API jest wywoływany w `Startup.ConfigureServices`:
+Oprogramowanie pośredniczące przed fałszowaniem jest dodawane do kontenera [iniekcji zależności](xref:fundamentals/dependency-injection) , gdy jeden z następujących interfejsów API jest `Startup.ConfigureServices`wywoływany w:
 
 * <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddMvc*>
 * <xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapRazorPages*>
@@ -107,7 +113,7 @@ Oprogramowanie pośredniczące przed fałszowaniem jest dodawane do kontenera [i
 
 ::: moniker range="< aspnetcore-3.0"
 
-Oprogramowanie pośredniczące przed fałszowaniem jest dodawane do kontenera [iniekcji zależności](xref:fundamentals/dependency-injection) , gdy <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddMvc*> jest wywoływana w `Startup.ConfigureServices`
+Oprogramowanie pośredniczące przed fałszowaniem jest dodawane do kontenera [iniekcji zależności](xref:fundamentals/dependency-injection) , gdy <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddMvc*> jest wywoływana w`Startup.ConfigureServices`
 
 ::: moniker-end
 
@@ -121,14 +127,14 @@ W ASP.NET Core 2,0 lub nowszej [FormTagHelper](xref:mvc/views/working-with-forms
 
 Podobnie [IHtmlHelper. BeginForm](/dotnet/api/microsoft.aspnetcore.mvc.rendering.ihtmlhelper.beginform) domyślnie generuje tokeny zabezpieczające przed fałszerstwem, jeśli nie można pobrać metody formularza.
 
-Automatyczne generowanie tokenów antysfałszowanych dla elementów formularza HTML występuje, gdy tag `<form>` zawiera atrybut `method="post"` i jeden z następujących warunków jest spełniony:
+Automatyczne generowanie tokenów antysfałszowanych dla elementów formularza HTML występuje, gdy `<form>` tag zawiera `method="post"` atrybut i jeden z następujących warunków jest spełniony:
 
 * Atrybut Action jest pusty (`action=""`).
 * Nie podano atrybutu Action (`<form method="post">`).
 
 Automatyczne generowanie tokenów antysfałszowanych dla elementów formularza HTML może być wyłączone:
 
-* Jawnie wyłącz tokeny antysfałszowane z atrybutem `asp-antiforgery`:
+* Jawnie wyłącz tokeny zabezpieczające przed fałszowaniem `asp-antiforgery` z atrybutem:
 
   ```cshtml
   <form method="post" asp-antiforgery="false">
@@ -144,7 +150,7 @@ Automatyczne generowanie tokenów antysfałszowanych dla elementów formularza H
   </!form>
   ```
 
-* Usuń `FormTagHelper` z widoku. `FormTagHelper` można usunąć z widoku przez dodanie następującej dyrektywy do widoku Razor:
+* Usuń `FormTagHelper` z widoku. `FormTagHelper` Może zostać usunięty z widoku przez dodanie następującej dyrektywy do widoku Razor:
 
   ```cshtml
   @removeTagHelper Microsoft.AspNetCore.Mvc.TagHelpers.FormTagHelper, Microsoft.AspNetCore.Mvc.TagHelpers
@@ -159,7 +165,7 @@ Najbardziej typowym podejściem do obrony przed atakami CSRF jest użycie *wzorc
 1. Klient wysyła do serwera token z powrotem w celu weryfikacji.
 1. Jeśli serwer odbiera token, który nie jest zgodny z tożsamością uwierzytelnionego użytkownika, żądanie zostanie odrzucone.
 
-Token jest unikatowy i nieprzewidywalny. Token może również służyć do zapewnienia prawidłowej sekwencji serii żądań (na przykład w celu zapewnienia sekwencji żądań: Strona 1 &ndash; stronie 2 &ndash; stronie 3). Wszystkie formularze w szablonach ASP.NET Core MVC i Razor Pages generują tokeny zabezpieczające przed fałszerstwem. Poniższa para przykładów widoku generuje tokeny zabezpieczające przed fałszerstwem:
+Token jest unikatowy i nieprzewidywalny. Token może również służyć do zapewnienia prawidłowej sekwencji serii żądań (na przykład w celu zapewnienia sekwencji żądań: Strona 1 &ndash; Strona 2 &ndash; Strona 3). Wszystkie formularze w szablonach ASP.NET Core MVC i Razor Pages generują tokeny zabezpieczające przed fałszerstwem. Poniższa para przykładów widoku generuje tokeny zabezpieczające przed fałszerstwem:
 
 ```cshtml
 <form asp-controller="Manage" asp-action="ChangePassword" method="post">
@@ -172,7 +178,7 @@ Token jest unikatowy i nieprzewidywalny. Token może również służyć do zape
 }
 ```
 
-Jawnie Dodaj token antysfałszowany do elementu `<form>` bez korzystania z pomocników tagów za pomocą usługi HTML helper [`@Html.AntiForgeryToken`](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.htmlhelper.antiforgerytoken):
+Jawnie Dodaj token antysfałszowany do `<form>` elementu bez korzystania z pomocników tagów, korzystając z pomocy języka [`@Html.AntiForgeryToken`](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.htmlhelper.antiforgerytoken)HTML:
 
 ```cshtml
 <form action="/" method="post">
@@ -194,7 +200,7 @@ ASP.NET Core zawiera trzy [filtry](xref:mvc/controllers/filters) do pracy z toke
 
 ## <a name="antiforgery-options"></a>Opcje samopodrabiania
 
-Dostosuj [Opcje antysfałszowane](/dotnet/api/Microsoft.AspNetCore.Antiforgery.AntiforgeryOptions) w `Startup.ConfigureServices`:
+Dostosuj [Opcje antysfałszowane](/dotnet/api/Microsoft.AspNetCore.Antiforgery.AntiforgeryOptions) w `Startup.ConfigureServices`programie:
 
 ::: moniker range=">= aspnetcore-2.0"
 
@@ -208,14 +214,14 @@ services.AddAntiforgery(options =>
 });
 ```
 
-&dagger;ustawić właściwości `Cookie` przed fałszerstwem przy użyciu właściwości klasy [CookieBuilder](/dotnet/api/microsoft.aspnetcore.http.cookiebuilder) .
+&dagger;Ustaw `Cookie` właściwości przeciwpodrabiane przy użyciu właściwości klasy [CookieBuilder](/dotnet/api/microsoft.aspnetcore.http.cookiebuilder) .
 
 | Opcja | Opis |
 | ------ | ----------- |
 | [Plików](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookie) | Określa ustawienia używane do tworzenia plików cookie z fałszerstwem. |
 | [FormFieldName](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.formfieldname) | Nazwa ukrytego pola formularza używanego przez system antysfałszowany do renderowania tokenów antysfałszowanych w widokach. |
-| [Nagłówek nagłówka](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.headername) | Nazwa nagłówka używanego przez system antysfałszowany. Jeśli `null`, system uwzględnia tylko dane formularza. |
-| [SuppressXFrameOptionsHeader](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.suppressxframeoptionsheader) | Określa, czy należy pominąć generowanie nagłówka `X-Frame-Options`. Domyślnie nagłówek jest generowany z wartością "SAMEORIGIN". Wartość domyślna to `false`. |
+| [Nagłówek nagłówka](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.headername) | Nazwa nagłówka używanego przez system antysfałszowany. Jeśli `null`system uwzględnia tylko dane formularza. |
+| [SuppressXFrameOptionsHeader](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.suppressxframeoptionsheader) | Określa, czy należy pominąć generowanie `X-Frame-Options` nagłówka. Domyślnie nagłówek jest generowany z wartością "SAMEORIGIN". Wartość domyślna `false`to. |
 
 ::: moniker-end
 
@@ -237,13 +243,13 @@ services.AddAntiforgery(options =>
 | Opcja | Opis |
 | ------ | ----------- |
 | [Plików](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookie) | Określa ustawienia używane do tworzenia plików cookie z fałszerstwem. |
-| [CookieDomain](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookiedomain) | Domena pliku cookie. Wartość domyślna to `null`. Ta właściwość jest przestarzała i zostanie usunięta w przyszłej wersji. Zalecaną alternatywą jest plik cookie. domena. |
+| [CookieDomain](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookiedomain) | Domena pliku cookie. Wartość domyślna `null`to. Ta właściwość jest przestarzała i zostanie usunięta w przyszłej wersji. Zalecaną alternatywą jest plik cookie. domena. |
 | [Plik CookieName](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookiename) | Nazwa pliku cookie. Jeśli nie zostanie ustawiona, system generuje unikatową nazwę rozpoczynającą się od [DefaultCookiePrefix](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.defaultcookieprefix) (". AspNetCore. przed fałszerstwem "). Ta właściwość jest przestarzała i zostanie usunięta w przyszłej wersji. Zalecaną alternatywą jest Cookie.Name. |
 | [CookiePath](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookiepath) | Ścieżka ustawiona w pliku cookie. Ta właściwość jest przestarzała i zostanie usunięta w przyszłej wersji. Zalecaną alternatywą jest plik cookie. Path. |
 | [FormFieldName](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.formfieldname) | Nazwa ukrytego pola formularza używanego przez system antysfałszowany do renderowania tokenów antysfałszowanych w widokach. |
-| [Nagłówek nagłówka](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.headername) | Nazwa nagłówka używanego przez system antysfałszowany. Jeśli `null`, system uwzględnia tylko dane formularza. |
-| [RequireSsl](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.requiressl) | Określa, czy protokół HTTPS jest wymagany przez system antysfałszowany. Jeśli `true`, żądania inne niż HTTPS kończą się niepowodzeniem. Wartość domyślna to `false`. Ta właściwość jest przestarzała i zostanie usunięta w przyszłej wersji. Zalecaną alternatywą jest ustawienie pliku cookie. SecurePolicy. |
-| [SuppressXFrameOptionsHeader](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.suppressxframeoptionsheader) | Określa, czy należy pominąć generowanie nagłówka `X-Frame-Options`. Domyślnie nagłówek jest generowany z wartością "SAMEORIGIN". Wartość domyślna to `false`. |
+| [Nagłówek nagłówka](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.headername) | Nazwa nagłówka używanego przez system antysfałszowany. Jeśli `null`system uwzględnia tylko dane formularza. |
+| [RequireSsl](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.requiressl) | Określa, czy protokół HTTPS jest wymagany przez system antysfałszowany. Jeśli `true`żądania inne niż HTTPS kończą się niepowodzeniem. Wartość domyślna `false`to. Ta właściwość jest przestarzała i zostanie usunięta w przyszłej wersji. Zalecaną alternatywą jest ustawienie pliku cookie. SecurePolicy. |
+| [SuppressXFrameOptionsHeader](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.suppressxframeoptionsheader) | Określa, czy należy pominąć generowanie `X-Frame-Options` nagłówka. Domyślnie nagłówek jest generowany z wartością "SAMEORIGIN". Wartość domyślna `false`to. |
 
 ::: moniker-end
 
@@ -251,7 +257,7 @@ Aby uzyskać więcej informacji, zobacz [CookieAuthenticationOptions](/dotnet/ap
 
 ## <a name="configure-antiforgery-features-with-iantiforgery"></a>Konfigurowanie funkcji antysfałszowanych za pomocą IAntiforgery
 
-[IAntiforgery](/dotnet/api/microsoft.aspnetcore.antiforgery.iantiforgery) udostępnia interfejs API do konfigurowania funkcji antysfałszowanych. `IAntiforgery` można żądać w metodzie `Configure` klasy `Startup`. W poniższym przykładzie użyto oprogramowania pośredniczącego ze strony głównej aplikacji do wygenerowania tokenu antysfałszowanego i wysłania go w odpowiedzi jako plik cookie (przy użyciu domyślnej konwencji nazewnictwa kątowego opisanej w dalszej części tego tematu):
+[IAntiforgery](/dotnet/api/microsoft.aspnetcore.antiforgery.iantiforgery) udostępnia interfejs API do konfigurowania funkcji antysfałszowanych. `IAntiforgery`można żądać w `Configure` metodzie `Startup` klasy. W poniższym przykładzie użyto oprogramowania pośredniczącego ze strony głównej aplikacji do wygenerowania tokenu antysfałszowanego i wysłania go w odpowiedzi jako plik cookie (przy użyciu domyślnej konwencji nazewnictwa kątowego opisanej w dalszej części tego tematu):
 
 ```csharp
 public void Configure(IApplicationBuilder app, IAntiforgery antiforgery)
@@ -305,21 +311,21 @@ public async Task<IActionResult> RemoveLogin(RemoveLoginViewModel account)
 }
 ```
 
-Atrybut `ValidateAntiForgeryToken` wymaga tokenu dla żądań do metod akcji, które oznacza, w tym żądań HTTP GET. Jeśli atrybut `ValidateAntiForgeryToken` jest stosowany w kontrolerach aplikacji, można go zastąpić atrybutem `IgnoreAntiforgeryToken`.
+Ten `ValidateAntiForgeryToken` atrybut wymaga tokenu dla żądań do metod akcji, które to oznacza, w tym żądań HTTP GET. Jeśli `ValidateAntiForgeryToken` atrybut jest stosowany w kontrolerach aplikacji, można go zastąpić `IgnoreAntiforgeryToken` atrybutem.
 
 > [!NOTE]
 > ASP.NET Core nie obsługuje dodawania tokenów antysfałszowanych w celu automatycznego uzyskiwania żądań.
 
 ### <a name="automatically-validate-antiforgery-tokens-for-unsafe-http-methods-only"></a>Automatycznie Weryfikuj tokeny antysfałszowane wyłącznie dla niebezpiecznych metod HTTP
 
-Aplikacje ASP.NET Core nie generują tokenów antysfałszowanych dla bezpiecznych metod HTTP (GET, głowy, OPTIONS i TRACE). Zamiast szeroko stosowanego atrybutu `ValidateAntiForgeryToken`, a następnie przesłania go przy użyciu atrybutów `IgnoreAntiforgeryToken`, można użyć atrybutu [AutoValidateAntiforgeryToken](/dotnet/api/microsoft.aspnetcore.mvc.autovalidateantiforgerytokenattribute) . Ten atrybut działa identycznie z atrybutem `ValidateAntiForgeryToken`, z tą różnicą, że nie wymagają tokenów dla żądań wysyłanych przy użyciu następujących metod HTTP:
+Aplikacje ASP.NET Core nie generują tokenów antysfałszowanych dla bezpiecznych metod HTTP (GET, głowy, OPTIONS i TRACE). Zamiast szeroko stosowanego `ValidateAntiForgeryToken` atrybutu, a następnie zastępując go `IgnoreAntiforgeryToken` atrybutami, można użyć atrybutu [AutoValidateAntiforgeryToken](/dotnet/api/microsoft.aspnetcore.mvc.autovalidateantiforgerytokenattribute) . Ten atrybut działa identycznie z `ValidateAntiForgeryToken` atrybutem, z tą różnicą, że nie wymaga tokenów dla żądań wysyłanych przy użyciu następujących metod http:
 
 * GET
-* MTP
-* OPCJE
+* HEAD
+* Opcje
 * TRACE
 
-Zalecamy korzystanie z `AutoValidateAntiforgeryToken` w szerokim zakresie dla scenariuszy innych niż interfejsy API. Gwarantuje to, że akcje wykonywane domyślnie są chronione. Alternatywą jest ignorowanie tokenów antysfałszowanych domyślnie, chyba że `ValidateAntiForgeryToken` jest stosowana do poszczególnych metod akcji. Bardziej prawdopodobnie w tym scenariuszu, aby metoda po akcji nie była chroniona przez pomyłkę, pozostawiając aplikację narażoną na ataki CSRF. Wszystkie wpisy powinny wysyłać token antysfałszowany.
+Zalecamy użycie `AutoValidateAntiforgeryToken` ogólnie dla scenariuszy innych niż interfejsy API. Gwarantuje to, że akcje wykonywane domyślnie są chronione. Alternatywą jest ignorowanie tokenów antysfałszowanych domyślnie, chyba `ValidateAntiForgeryToken` że jest on stosowany do poszczególnych metod akcji. Bardziej prawdopodobnie w tym scenariuszu, aby metoda po akcji nie była chroniona przez pomyłkę, pozostawiając aplikację narażoną na ataki CSRF. Wszystkie wpisy powinny wysyłać token antysfałszowany.
 
 Interfejsy API nie mają mechanizmu automatycznego do wysyłania niezwiązanego z plikiem cookie części tokenu. Implementacja prawdopodobnie zależy od implementacji kodu klienta. Poniżej przedstawiono kilka przykładów:
 
@@ -336,7 +342,7 @@ Przykład globalny:
 
 ::: moniker range="< aspnetcore-3.0"
 
-Services. AddMvc (Opcje = > Opcje. Filters. Add (New AutoValidateAntiforgeryTokenAttribute ()));
+Services. AddMvc (opcje => opcje. Filters. Add (New AutoValidateAntiforgeryTokenAttribute ()));
 
 ::: moniker-end
 
@@ -351,7 +357,7 @@ services.AddControllersWithViews(options =>
 
 ### <a name="override-global-or-controller-antiforgery-attributes"></a>Zastąp atrybuty globalnym lub kontrolerem antyfałszowanym
 
-Filtr [IgnoreAntiforgeryToken](/dotnet/api/microsoft.aspnetcore.mvc.ignoreantiforgerytokenattribute) służy do eliminacji potrzeb tokenu antysfałszowanego dla danej akcji (lub kontrolera). W przypadku zastosowania ten filtr zastępuje filtry `ValidateAntiForgeryToken` i `AutoValidateAntiforgeryToken` określone na wyższym poziomie (globalnie lub na kontrolerze).
+Filtr [IgnoreAntiforgeryToken](/dotnet/api/microsoft.aspnetcore.mvc.ignoreantiforgerytokenattribute) służy do eliminacji potrzeb tokenu antysfałszowanego dla danej akcji (lub kontrolera). Po zastosowaniu ten filtr przesłania `ValidateAntiForgeryToken` i `AutoValidateAntiforgeryToken` filtry określone na wyższym poziomie (globalnie lub na kontrolerze).
 
 ```csharp
 [Authorize]
@@ -369,7 +375,7 @@ public class ManageController : Controller
 
 ## <a name="refresh-tokens-after-authentication"></a>Odśwież tokeny po uwierzytelnieniu
 
-Tokeny należy odświeżyć po uwierzytelnieniu użytkownika przez przekierowanie użytkownika do widoku lub Razor Pages strony.
+Tokeny należy odświeżyć po uwierzytelnieniu użytkownika przez przekierowanie użytkownika do strony widoku lub Razor strony.
 
 ## <a name="javascript-ajax-and-spas"></a>JavaScript, AJAX i aplikacji jednostronicowych
 
@@ -394,7 +400,7 @@ context.Response.Cookies.Append("CSRF-TOKEN", tokens.RequestToken,
     new Microsoft.AspNetCore.Http.CookieOptions { HttpOnly = false });
 ```
 
-Zakładając, że żądanie skryptu wysłano token w nagłówku o nazwie `X-CSRF-TOKEN`, skonfiguruj usługę antysfałszowaną, aby wyszukać nagłówek `X-CSRF-TOKEN`:
+Zakładając, że żądanie skryptu wysłano token w nagłówku `X-CSRF-TOKEN`o nazwie, skonfiguruj usługę antysfałszowaną, aby wyszukać `X-CSRF-TOKEN` nagłówek:
 
 ```csharp
 services.AddAntiforgery(options => options.HeaderName = "X-CSRF-TOKEN");
@@ -439,12 +445,12 @@ xhttp.send(JSON.stringify({ "newPassword": "ReallySecurePassword999$$$" }));
 
 ### <a name="angularjs"></a>AngularJS
 
-AngularJS używa konwencji do adresowania CSRF. Jeśli serwer wysyła plik cookie o nazwie `XSRF-TOKEN`, usługa AngularJS `$http` dodaje wartość cookie do nagłówka podczas wysyłania żądania do serwera. Ten proces jest automatyczny. Nagłówek nie musi być jawnie ustawiony na kliencie. Nazwa nagłówka jest `X-XSRF-TOKEN`. Serwer powinien wykryć ten nagłówek i zweryfikować jego zawartość.
+AngularJS używa konwencji do adresowania CSRF. Jeśli serwer wysyła plik cookie o nazwie `XSRF-TOKEN`, usługa AngularJS `$http` dodaje wartość cookie do nagłówka podczas wysyłania żądania do serwera. Ten proces jest automatyczny. Nagłówek nie musi być jawnie ustawiony na kliencie. Nazwa nagłówka to `X-XSRF-TOKEN`. Serwer powinien wykryć ten nagłówek i zweryfikować jego zawartość.
 
 Aby program ASP.NET Core API działał z tą konwencją podczas uruchamiania aplikacji:
 
 * Skonfiguruj aplikację, aby zapewnić token w pliku cookie o nazwie `XSRF-TOKEN`.
-* Skonfiguruj usługę antysfałszowaną, aby wyszukać nagłówek o nazwie `X-XSRF-TOKEN`.
+* Skonfiguruj usługę antysfałszowaną, aby wyszukać nagłówek o `X-XSRF-TOKEN`nazwie.
 
 ```csharp
 public void Configure(IApplicationBuilder app, IAntiforgery antiforgery)
@@ -479,9 +485,9 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="extend-antiforgery"></a>Zwiększ fałszerstwo
 
-Typ [IAntiForgeryAdditionalDataProvider](/dotnet/api/microsoft.aspnetcore.antiforgery.iantiforgeryadditionaldataprovider) umożliwia deweloperom zwiększenie zachowania systemu antyCSRFowego przez dwukrotne wyzwolenie dodatkowych danych w każdym tokenie. Metoda [GetAdditionalData](/dotnet/api/microsoft.aspnetcore.antiforgery.iantiforgeryadditionaldataprovider.getadditionaldata) jest wywoływana za każdym razem, gdy generowany jest token pola, a zwracana wartość jest osadzona w wygenerowanym tokenie. Realizator może zwrócić sygnaturę czasową, identyfikator jednorazowy lub inną wartość, a następnie wywołać [ValidateAdditionalData](/dotnet/api/microsoft.aspnetcore.antiforgery.iantiforgeryadditionaldataprovider.validateadditionaldata) , aby zweryfikować te dane po sprawdzeniu poprawności tokenu. Nazwa użytkownika klienta jest już osadzona w wygenerowanych tokenach, więc nie trzeba uwzględniać tych informacji. Jeśli token zawiera dane uzupełniające, ale nie skonfigurowano `IAntiForgeryAdditionalDataProvider`, dane uzupełniające nie są sprawdzane.
+Typ [IAntiForgeryAdditionalDataProvider](/dotnet/api/microsoft.aspnetcore.antiforgery.iantiforgeryadditionaldataprovider) umożliwia deweloperom zwiększenie zachowania systemu antyCSRFowego przez dwukrotne wyzwolenie dodatkowych danych w każdym tokenie. Metoda [GetAdditionalData](/dotnet/api/microsoft.aspnetcore.antiforgery.iantiforgeryadditionaldataprovider.getadditionaldata) jest wywoływana za każdym razem, gdy generowany jest token pola, a zwracana wartość jest osadzona w wygenerowanym tokenie. Realizator może zwrócić sygnaturę czasową, identyfikator jednorazowy lub inną wartość, a następnie wywołać [ValidateAdditionalData](/dotnet/api/microsoft.aspnetcore.antiforgery.iantiforgeryadditionaldataprovider.validateadditionaldata) , aby zweryfikować te dane po sprawdzeniu poprawności tokenu. Nazwa użytkownika klienta jest już osadzona w wygenerowanych tokenach, więc nie trzeba uwzględniać tych informacji. Jeśli token zawiera dane uzupełniające, ale nie `IAntiForgeryAdditionalDataProvider` jest skonfigurowany, dane uzupełniające nie są sprawdzane.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [CSRF](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)) w [programie Open Web Application Security Project](https://www.owasp.org/index.php/Main_Page) (OWASP).
 * <xref:host-and-deploy/web-farm>

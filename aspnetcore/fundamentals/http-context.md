@@ -1,26 +1,32 @@
 ---
-title: Dostęp do protokołu HttpContext w ASP.NET Core
+title: Dostęp do obiektu HttpContext w ASP.NET Core
 author: coderandhiker
-description: Dowiedz się, jak uzyskać dostęp do protokołu HttpContext w ASP.NET Core.
+description: Dowiedz się, jak uzyskać dostęp do obiektu HttpContext w ASP.NET Core.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 12/03/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: fundamentals/httpcontext
-ms.openlocfilehash: 8a7ee180380c42ea745c91b8e6a18c1baa820220
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: ac0982f144c98bf1540b16013497fabeb6683e63
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78658747"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82773981"
 ---
-# <a name="access-httpcontext-in-aspnet-core"></a>Dostęp do protokołu HttpContext w ASP.NET Core
+# <a name="access-httpcontext-in-aspnet-core"></a>Dostęp do obiektu HttpContext w ASP.NET Core
 
-ASP.NET dostęp `HttpContext` do aplikacji Core <xref:Microsoft.AspNetCore.Http.IHttpContextAccessor> za pośrednictwem <xref:Microsoft.AspNetCore.Http.HttpContextAccessor>interfejsu i jego domyślnej implementacji . Jest to konieczne tylko `IHttpContextAccessor` wtedy, gdy `HttpContext` potrzebujesz dostępu do wewnątrz usługi.
+Dostęp `HttpContext` do aplikacji ASP.NET Core za <xref:Microsoft.AspNetCore.Http.IHttpContextAccessor> pomocą interfejsu i jego domyślnej <xref:Microsoft.AspNetCore.Http.HttpContextAccessor>implementacji. Jest to konieczne tylko wtedy, `IHttpContextAccessor` gdy potrzebujesz dostępu do `HttpContext` wnętrza usługi.
 
-## <a name="use-httpcontext-from-razor-pages"></a>Użyj protokołu HttpContext ze stron Razor
+## <a name="use-httpcontext-from-razor-pages"></a>Użyj kontekstu HttpContext Razor ze stron
 
-Strony <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> Razor udostępnia <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.HttpContext> właściwość:
+Razor Strony <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> uwidaczniają <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.HttpContext> Właściwość:
 
 ```csharp
 public class AboutModel : PageModel
@@ -34,9 +40,9 @@ public class AboutModel : PageModel
 }
 ```
 
-## <a name="use-httpcontext-from-a-razor-view"></a>Używanie protokołu HttpContext z widoku Razor
+## <a name="use-httpcontext-from-a-razor-view"></a>Używanie elementu Razor HttpContext z widoku
 
-Widoki razor `HttpContext` uwidaczniają bezpośrednio za pośrednictwem [właściwości RazorPage.Context](xref:Microsoft.AspNetCore.Mvc.Razor.RazorPage.Context) w widoku. Poniższy przykład pobiera bieżącą nazwę użytkownika w aplikacji intranetowej przy użyciu uwierzytelniania systemu Windows:
+Razorwidoki uwidaczniają `HttpContext` się bezpośrednio za pomocą właściwości [RazorPage. Context](xref:Microsoft.AspNetCore.Mvc.Razor.RazorPage.Context) w widoku. Poniższy przykład pobiera bieżącą nazwę użytkownika w aplikacji intranetowej przy użyciu uwierzytelniania systemu Windows:
 
 ```cshtml
 @{
@@ -46,9 +52,9 @@ Widoki razor `HttpContext` uwidaczniają bezpośrednio za pośrednictwem [właś
 }
 ```
 
-## <a name="use-httpcontext-from-a-controller"></a>Używanie protokołu HttpContext z kontrolera
+## <a name="use-httpcontext-from-a-controller"></a>Używanie elementu HttpContext z poziomu kontrolera
 
-Kontrolery uwidaczniają [ControllerBase.HttpContext](xref:Microsoft.AspNetCore.Mvc.ControllerBase.HttpContext) właściwości:
+Kontrolery uwidaczniają Właściwość [ControllerBase. HttpContext](xref:Microsoft.AspNetCore.Mvc.ControllerBase.HttpContext) :
 
 ```csharp
 public class HomeController : Controller
@@ -64,9 +70,9 @@ public class HomeController : Controller
 }
 ```
 
-## <a name="use-httpcontext-from-middleware"></a>Użyj protokołu HttpContext z oprogramowania pośredniczącego
+## <a name="use-httpcontext-from-middleware"></a>Używanie obiektu HttpContext w oprogramowaniu pośredniczącym
 
-Podczas pracy z niestandardowymi `HttpContext` składnikami `Invoke` oprogramowania pośredniczącego, jest przekazywana do metody lub `InvokeAsync` i jest dostępna, gdy oprogramowanie pośredniczące jest skonfigurowane:
+Podczas pracy z niestandardowymi składnikami `HttpContext` oprogramowania pośredniczącego jest `Invoke` przenoszona do metody lub `InvokeAsync` i można uzyskać do niej dostęp po skonfigurowaniu oprogramowania pośredniczącego:
 
 ```csharp
 public class MyCustomMiddleware
@@ -78,9 +84,9 @@ public class MyCustomMiddleware
 }
 ```
 
-## <a name="use-httpcontext-from-custom-components"></a>Używanie protokołu HttpContext ze składników niestandardowych
+## <a name="use-httpcontext-from-custom-components"></a>Używanie obiektu HttpContext ze składników niestandardowych
 
-Dla innych składników framework i `HttpContext`niestandardowych, które wymagają dostępu do , zalecane podejście jest zarejestrowanie zależności przy użyciu wbudowanego [kontenera iniekcji zależności.](xref:fundamentals/dependency-injection) Kontener iniekcji zależności `IHttpContextAccessor` dostarcza do wszystkich klas, które deklarują go jako zależność w ich konstruktorów:
+W przypadku innych platform i składników niestandardowych, które wymagają `HttpContext`dostępu do, zalecane podejście polega na zarejestrowaniu zależności przy użyciu wbudowanego kontenera [iniekcji zależności](xref:fundamentals/dependency-injection) . Kontener iniekcji zależności dostarcza klasy `IHttpContextAccessor` do wszystkich klas, które deklarują ją jako zależność w konstruktorach:
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -111,8 +117,8 @@ public void ConfigureServices(IServiceCollection services)
 
 W poniższym przykładzie:
 
-* `UserRepository`deklaruje swoją zależność `IHttpContextAccessor`od .
-* Zależność jest dostarczana, gdy iniekcja zależności rozwiązuje `UserRepository`łańcuch zależności i tworzy wystąpienie .
+* `UserRepository`deklaruje swoją zależność `IHttpContextAccessor`od.
+* Zależność jest podawana, gdy iniekcja zależności rozpoznaje łańcuch zależności i tworzy wystąpienie `UserRepository`.
 
 ```csharp
 public class UserRepository : IUserRepository
@@ -132,19 +138,19 @@ public class UserRepository : IUserRepository
 }
 ```
 
-## <a name="httpcontext-access-from-a-background-thread"></a>Dostęp httpcontext z wątku tła
+## <a name="httpcontext-access-from-a-background-thread"></a>Dostęp do obiektu HttpContext z wątku w tle
 
-`HttpContext`nie jest bezpieczny dla wątków. Odczytywanie lub zapisywanie właściwości `HttpContext` z zewnątrz przetwarzania <xref:System.NullReferenceException>żądania może spowodować .
+`HttpContext`nie jest bezpieczny wątkowo. Odczyt lub zapis właściwości `HttpContext` poza przetwarzaniem żądania może skutkować. <xref:System.NullReferenceException>
 
 > [!NOTE]
-> Jeśli aplikacja generuje sporadyczne `NullReferenceException` błędy, przejrzyj części kodu, które rozpoczynają przetwarzanie w tle lub które kontynuują przetwarzanie po zakończeniu żądania. Poszukaj błędów, takich jak `async void`definiowanie metody kontrolera jako .
+> Jeśli aplikacja generuje sporadyczne `NullReferenceException` błędy, zapoznaj się z częścią kodu, który rozpoczyna przetwarzanie w tle, lub Kontynuuj przetwarzanie po zakończeniu żądania. Poszukaj błędów, takich jak Definiowanie metody kontrolera jako `async void`.
 
-Aby bezpiecznie wykonywać `HttpContext` pracę w tle z danymi:
+Aby bezpiecznie wykonać prace w tle `HttpContext` z danymi:
 
 * Skopiuj wymagane dane podczas przetwarzania żądania.
-* Przekaż skopiowane dane do zadania działającego w tle.
+* Przekaż skopiowane dane do zadania w tle.
 
-Aby uniknąć niebezpiecznego `HttpContext` kodu, nigdy nie należy przekazywać do metody, która wykonuje pracę w tle. Zamiast tego przekaż wymagane dane. W poniższym `SendEmailCore` przykładzie jest wywoływana, aby rozpocząć wysyłanie wiadomości e-mail. Jest `correlationId` przekazywana `SendEmailCore`do `HttpContext`, a nie do . Wykonanie kodu nie czeka `SendEmailCore` na zakończenie:
+Aby uniknąć niebezpiecznego kodu, nigdy `HttpContext` nie przekazuj do metody, która wykonuje działania w tle. Zamiast tego Przekaż wymagane dane. W poniższym przykładzie `SendEmailCore` jest wywoływana w celu rozpoczęcia wysyłania wiadomości e-mail. `correlationId` Jest przenoszona do `SendEmailCore`, nie jest `HttpContext`. Wykonanie kodu nie oczekuje `SendEmailCore` na zakończenie:
 
 ```csharp
 public class EmailController : Controller

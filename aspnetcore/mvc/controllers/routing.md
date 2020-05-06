@@ -4,13 +4,19 @@ author: rick-anderson
 description: Dowiedz się, w jaki sposób ASP.NET Core MVC używa programów pośredniczących routingu, aby dopasować adresy URL żądań przychodzących i zmapować je na akcje.
 ms.author: riande
 ms.date: 3/25/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/controllers/routing
-ms.openlocfilehash: 974a5e7653f2b71b124a96650733ff460e60637a
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: 4208ef8fb7a9b10621f214f79679ff8d7fd83996
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82206115"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775027"
 ---
 # <a name="routing-to-controller-actions-in-aspnet-core"></a>Routing do akcji kontrolera w ASP.NET Core
 
@@ -195,7 +201,9 @@ Powyższy przykład:
 ### <a name="conventional-routing-order"></a>Tradycyjna kolejność routingu
 
 Routing konwencjonalny pasuje do kombinacji akcji i kontrolera, które są zdefiniowane przez aplikację. Jest to przeznaczone do uproszczenia sytuacji, w których trasy konwencjonalne nakładają się na siebie.
-Dodanie tras przy <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*>użyciu <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapDefaultControllerRoute*>, i <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*> automatycznie przypisanie wartości zamówienia do punktów końcowych w oparciu o kolejność, w której są wywoływane. Dopasowania z trasy, która pojawiła się wcześniej, mają wyższy priorytet. Routowanie konwencjonalne jest zależne od kolejności. Ogólnie rzecz biorąc, trasy z obszarami powinny być umieszczone wcześniej, ponieważ są bardziej specyficzne niż trasy bez obszaru. [Dedykowane konwencjonalne trasy](#dcr) z funkcją catch wszystkie parametry `{*article}` trasy, takie jak mogą spowodować zbyt [zachłanne](xref:fundamentals/routing#greedy)trasy, co oznacza, że pasuje do adresów URL, które mają być dopasowane przez inne trasy. Umieść trasy zachłanne w dalszej części tabeli tras, aby zapobiec dopasowania zachłanne.
+Dodanie tras przy <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*>użyciu <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapDefaultControllerRoute*>, i <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*> automatycznie przypisanie wartości zamówienia do punktów końcowych w oparciu o kolejność, w której są wywoływane. Dopasowania z trasy, która pojawiła się wcześniej, mają wyższy priorytet. Routowanie konwencjonalne jest zależne od kolejności. Ogólnie rzecz biorąc, trasy z obszarami powinny być umieszczone wcześniej, ponieważ są bardziej specyficzne niż trasy bez obszaru. [Dedykowane konwencjonalne trasy](#dcr) ze wszystkimi parametrami tras, `{*article}` takich jak, mogą spowodować zbyt [zachłanne](xref:fundamentals/routing#greedy)trasy, co oznacza, że pasuje do adresów URL, które mają być dopasowane przez inne trasy. Umieść trasy zachłanne w dalszej części tabeli tras, aby zapobiec dopasowania zachłanne.
+
+[!INCLUDE[](~/includes/catchall.md)]
 
 <a name="best"></a>
 
@@ -463,7 +471,7 @@ Za pomocą powyższego `/home` kodu program `HomeController.Index` uruchamia pun
 * Poprzedni kod jest przykładem lub słabym projektem routingu. Została użyta do zilustrowania `Order` właściwości.
 * `Order` Właściwość rozwiązuje tylko niejednoznaczność, ale nie można dopasować tego szablonu. Lepszym rozwiązaniem jest usunięcie `[Route("Home")]` szablonu.
 
-Zobacz [Razor Pages trasy i konwencje aplikacji: zamówienie trasy,](xref:razor-pages/razor-pages-conventions#route-order) Aby uzyskać informacje na temat kolejności tras z Razor Pages.
+Zobacz [ Razor strony trasy i konwencje aplikacji: kolejność tras](xref:razor-pages/razor-pages-conventions#route-order) na potrzeby informacji o kolejności Razor tras na stronach.
 
 W niektórych przypadkach błąd HTTP 500 jest zwracany z niejednoznacznych tras. Użyj [rejestrowania](xref:fundamentals/logging/index) , aby zobaczyć, które punkty `AmbiguousMatchException`końcowe spowodowały.
 
@@ -744,13 +752,13 @@ Poprzedni kod wykazał wygenerowanie adresu URL przez przekazanie go do kontrole
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/UrlGeneration2Controller.cs?name=snippet_1)]
 
-Następujący plik Razor generuje link HTML do `Destination_Route`:
+Następujący Razor plik GENERUJE link HTML do `Destination_Route`:
 
 [!code-cshtml[](routing/samples/3.x/main/Views/Shared/MyLink.cshtml)]
 
 <a name="routing-gen-urls-html-ref-label"></a>
 
-### <a name="generate-urls-in-html-and-razor"></a>Generuj adresy URL w formacie HTML i Razor
+### <a name="generate-urls-in-html-and-razor"></a>Generuj adresy URL w kodzie HTML iRazor
 
 <xref:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper>udostępnia <xref:Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper> metody [HTML. BeginForm](xref:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper.BeginForm*) oraz [HTML. ActionLink](xref:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper.ActionLink*) do wygenerowania `<form>` i `<a>` elementów. Metody te używają metody [URL. Action](xref:Microsoft.AspNetCore.Mvc.IUrlHelper.Action*) do generowania adresu URL i akceptują podobne argumenty. `Url.RouteUrl` Pomocników dla programu `HtmlHelper` mają `Html.BeginRouteForm` `Html.RouteLink` podobną funkcjonalność.
 
@@ -1212,7 +1220,7 @@ Trasy atrybutów mogą konfigurować kolejność przy użyciu `Order` właściwo
 > [!TIP]
 > Należy unikać w `Order`zależności od. Jeśli przestrzeń adresów URL wymaga jawnych wartości kolejności, aby można było prawidłowo kierować trasy, to prawdopodobnie również jest myląca dla klientów. W ogólnym routingu atrybutów wybierz prawidłową trasę z dopasowywaniem adresów URL. Jeśli domyślna kolejność generowania adresów URL nie działa, użycie nazwy trasy jako przesłonięcia jest zwykle prostsze niż stosowanie `Order` właściwości.
 
-Razor Pages Routing i kontroler MVC współdzielą implementację. Informacje o zamówieniu trasy w Razor Pages tematy są dostępne na stronie [Razor Pages trasy i konwencje aplikacji: kolejność tras](xref:razor-pages/razor-pages-conventions#route-order).
+RazorStrony routingu i routingu kontrolera MVC współdzielą implementację. Informacje o zamówieniu trasy Razor w tematach stron są dostępne na [ Razor stronach trasy i konwencje aplikacji: kolejność trasy](xref:razor-pages/razor-pages-conventions#route-order).
 
 <a name="routing-token-replacement-templates-ref-label"></a>
 

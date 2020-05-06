@@ -1,37 +1,43 @@
 ---
-title: ASP.NET Core Web API strony pomocy z Swagger / OpenAPI
+title: ASP.NET Core stronach pomocy interfejsu API sieci Web w programie Swagger/OpenAPI
 author: RicoSuter
-description: Ten samouczek zawiera instruktaż dodawania Swagger do generowania dokumentacji i stron pomocy dla aplikacji interfejsu API sieci Web.
+description: Ten samouczek zawiera wskazówki dotyczące dodawania struktury Swagger w celu wygenerowania dokumentacji i stron pomocy dla aplikacji interfejsu API sieci Web.
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/07/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: tutorials/web-api-help-pages-using-swagger
-ms.openlocfilehash: 4408e02996b958bf009903aa1e4eeda9ad4f457c
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: bde38fcbc11ef36c42523acb182fc62a934821c3
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78658474"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774525"
 ---
-# <a name="aspnet-core-web-api-help-pages-with-swagger--openapi"></a>ASP.NET Core web API strony pomocy z Swagger / OpenAPI
+# <a name="aspnet-core-web-api-help-pages-with-swagger--openapi"></a>ASP.NET Core stronach pomocy interfejsu API sieci Web w programie Swagger/OpenAPI
 
-Christoph [Nienaber](https://twitter.com/zuckerthoben) i [Rico Suter](https://blog.rsuter.com/)
+[Christoph Nienaber](https://twitter.com/zuckerthoben) i [Portoryko Suter](https://blog.rsuter.com/)
 
-Podczas korzystania z interfejsu API sieci Web, zrozumienie jego różnych metod może być trudne dla dewelopera. [Swagger](https://swagger.io/), znany również jako [OpenAPI,](https://www.openapis.org/)rozwiązuje problem generowania przydatnych dokumentów i stron pomocy dla interfejsów API sieci Web. Zapewnia korzyści, takie jak interaktywna dokumentacja, generowanie sdk klienta i wykrywalność interfejsu API.
+W przypadku korzystania z internetowego interfejsu API zrozumienie jego różnych metod może być trudne dla dewelopera. Struktura [Swagger](https://swagger.io/), znana również jako [openapi](https://www.openapis.org/), rozwiązuje problem związany z generowaniem użytecznej dokumentacji i stron pomocy dla interfejsów API sieci Web. Zapewnia takie korzyści, jak dokumentacja interaktywna, generowanie zestawu SDK klienta i możliwość odnajdywania interfejsów API.
 
-W tym artykule, [Swashbuckle.AspNetCore](https://github.com/domaindrivendev/Swashbuckle.AspNetCore) i [NSwag](https://github.com/RicoSuter/NSwag) .NET Swagger implementacje są prezentowane:
+W tym artykule opisano implementacje [Swashbuckle. AspNetCore](https://github.com/domaindrivendev/Swashbuckle.AspNetCore) i [NSwag](https://github.com/RicoSuter/NSwag) .NET Swagger:
 
-* **Swashbuckle.AspNetCore** to projekt open source do generowania dokumentów Swagger dla ASP.NET Core Web API.
+* **Swashbuckle. AspNetCore** to projekt Open Source służący do generowania dokumentów struktury Swagger dla ASP.NET Core interfejsów API sieci Web.
 
-* **NSwag** to kolejny projekt open source do generowania dokumentów Swagger i integracji [Swagger UI](https://swagger.io/swagger-ui/) lub [ReDoc](https://github.com/Rebilly/ReDoc) w ASP.NET Core interfejsów API sieci. Ponadto NSwag oferuje podejścia do generowania kodu klienta języka C# i TypeScript dla interfejsu API.
+* **NSwag** jest innym projektem Open Source na potrzeby generowania dokumentów struktury Swagger i INTEGROWANIA [interfejsu użytkownika struktury Swagger](https://swagger.io/swagger-ui/) lub [ReDoc](https://github.com/Rebilly/ReDoc) do ASP.NET Core interfejsów API sieci Web. Ponadto NSwag oferuje podejścia do generowania kodu klienta C# i języka TypeScript dla interfejsu API.
 
-## <a name="what-is-swagger--openapi"></a>Co to jest Swagger / OpenAPI?
+## <a name="what-is-swagger--openapi"></a>Co to jest Swagger/OpenAPI?
 
-Swagger jest specyfikacją niezależną od języka do opisywania interfejsów API [REST.](https://en.wikipedia.org/wiki/Representational_state_transfer) Projekt Swagger został przekazany na [rzecz Inicjatywy OpenAPI,](https://www.openapis.org/)gdzie jest teraz określany jako OpenAPI. Obie nazwy są używane zamiennie; jednak OpenAPI jest preferowany. Umożliwia zarówno komputerom, jak i ludziom zrozumienie możliwości usługi bez bezpośredniego dostępu do implementacji (kod źródłowy, dostęp do sieci, dokumentacja). Jednym z celów jest zminimalizowanie ilości pracy potrzebnej do połączenia usług rozłączonych. Innym celem jest skrócenie czasu potrzebnego do dokładnego udokumentowania usługi.
+Swagger to specyfikacja języka niezależny od do opisywania interfejsów API [rest](https://en.wikipedia.org/wiki/Representational_state_transfer) . Projekt Swagger został przekazano do [inicjatywy openapi](https://www.openapis.org/), w której jest teraz określany jako openapi. Obie nazwy są używane zamiennie; OpenAPI jest jednak preferowane. Pozwala to komputerom i ludziom na zrozumienie możliwości usługi bez bezpośredniego dostępu do implementacji (kod źródłowy, dostęp do sieci, dokumentacja). Jednym z celów jest zminimalizowanie ilości pracy wymaganej do nawiązania połączenia z nieskojarzonymi usługami. Innym celem jest skrócenie czasu wymaganego do dokładnego udokumentowania usługi.
 
-## <a name="swagger-specification-swaggerjson"></a>Specyfikacja Swaggera (swagger.json)
+## <a name="swagger-specification-swaggerjson"></a>Specyfikacja struktury Swagger (Swagger. JSON)
 
-Rdzeniem przepływu Swagger jest specyfikacja&mdash;Swagger domyślnie, dokument o nazwie *swagger.json*. Jest generowany przez łańcuch narzędzi Swagger (lub implementacje innych firm) na podstawie usługi. Opisano w nim możliwości interfejsu API i sposób uzyskiwania do niego dostępu za pomocą protokołu HTTP. Napędza interfejs użytkownika Swagger i jest używany przez łańcuch narzędzi, aby umożliwić odnajdowanie i generowanie kodu klienta. Oto przykład specyfikacji Swagger, zredukowane dla zwięzłości:
+Rdzeń do przepływu struktury Swagger jest domyślnie specyfikacją&mdash;Swagger dokumentu o nazwie *Swagger. JSON*. Jest on generowany przez łańcuch narzędzi programu Swagger (lub implementacje innych firm) na podstawie Twojej usługi. Opisuje możliwości interfejsu API i sposób uzyskiwania dostępu do niego przy użyciu protokołu HTTP. Służy on do tworzenia interfejsu użytkownika struktury Swagger i jest używany przez łańcuch narzędzi do włączania odnajdywania i generowania kodu klienta. Oto przykład specyfikacji struktury Swagger zredukowany dla zwięzłości:
 
 ```json
 {
@@ -102,18 +108,18 @@ Rdzeniem przepływu Swagger jest specyfikacja&mdash;Swagger domyślnie, dokument
 }
 ```
 
-## <a name="swagger-ui"></a>Interfejs użytkownika swagger
+## <a name="swagger-ui"></a>Interfejs użytkownika struktury Swagger
 
-[Interfejs użytkownika Swagger](https://swagger.io/swagger-ui/) oferuje interfejs użytkownika oparty na sieci Web, który dostarcza informacji o usłudze przy użyciu wygenerowanej specyfikacji Swagger. Zarówno Swashbuckle i NSwag zawierają osadzoną wersję interfejsu użytkownika Swagger, dzięki czemu może być hostowany w aplikacji ASP.NET Core przy użyciu wywołania rejestracji oprogramowania pośredniczącego. Interfejs użytkownika sieci Web wygląda następująco:
+[Interfejs użytkownika struktury Swagger](https://swagger.io/swagger-ui/) oferuje interfejs użytkownika oparty na sieci Web, który zawiera informacje o usłudze, przy użyciu wygenerowanej specyfikacji struktury Swagger. Zarówno Swashbuckle, jak i NSwag zawierają osadzoną wersję interfejsu użytkownika struktury Swagger, dzięki czemu mogą być hostowane w aplikacji ASP.NET Core przy użyciu wywołania rejestracji oprogramowania pośredniczącego. Interfejs użytkownika sieci Web wygląda następująco:
 
-![Interfejs użytkownika swagger](web-api-help-pages-using-swagger/_static/swagger-ui.png)
+![Interfejs użytkownika struktury Swagger](web-api-help-pages-using-swagger/_static/swagger-ui.png)
 
-Każda metoda akcji publicznej w kontrolerach można przetestować z interfejsu użytkownika. Kliknij nazwę metody, aby rozwinąć sekcję. Dodaj wszystkie niezbędne parametry i kliknij przycisk **Wypróbuj!**.
+Każda publiczna Metoda działania w kontrolerach może być testowana z poziomu interfejsu użytkownika. Kliknij nazwę metody, aby rozwinąć sekcję. Dodaj wszelkie niezbędne parametry i kliknij przycisk **Wypróbuj!**.
 
-![Przykład testu Swagger GET](web-api-help-pages-using-swagger/_static/get-try-it-out.png)
+![Przykład pobierania testów struktury Swagger](web-api-help-pages-using-swagger/_static/get-try-it-out.png)
 
 > [!NOTE]
-> Wersja interfejsu użytkownika Swagger używana do zrzutów ekranu jest w wersji 2. Przykład w wersji 3 można znaleźć w [przykładzie sklepu petstore.](https://petstore.swagger.io/)
+> Wersja interfejsu użytkownika programu Swagger używana na potrzeby zrzutów ekranu jest w wersji 2. Aby zapoznać się z wersją 3 przykład, zobacz [przykład petstore](https://petstore.swagger.io/).
 
 ## <a name="next-steps"></a>Następne kroki
 

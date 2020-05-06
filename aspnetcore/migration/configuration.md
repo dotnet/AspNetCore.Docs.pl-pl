@@ -4,13 +4,19 @@ author: ardalis
 description: Dowiedz się, jak przeprowadzić migrację konfiguracji z projektu ASP.NET MVC do projektu ASP.NET Core MVC.
 ms.author: riande
 ms.date: 10/14/2016
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: migration/configuration
-ms.openlocfilehash: 2c50ea768a42aa38d14c55d8c403fea4176b3650
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: f65db927d79224695861101aff00897315c6e0b2
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78659328"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777231"
 ---
 # <a name="migrate-configuration-to-aspnet-core"></a>Migrowanie konfiguracji do ASP.NET Core
 
@@ -22,7 +28,7 @@ W poprzednim artykule rozpocząłmy [migrację projektu ASP.NET MVC do ASP.NET C
 
 ## <a name="setup-configuration"></a>Konfiguracja konfiguracji
 
-ASP.NET Core nie używa już plików *Global. asax* i *Web. config* , z których korzysta poprzednie wersje ASP.NET. We wcześniejszych wersjach programu ASP.NET logika uruchamiania aplikacji została umieszczona w metodzie `Application_StartUp` w elemencie *Global. asax*. Później w ASP.NET MVC plik *Startup.cs* został uwzględniony w katalogu głównym projektu; i, został wywołany podczas uruchamiania aplikacji. ASP.NET Core częściowo przyjęła to podejście, umieszczając w pliku *Startup.cs* wszystkie logikę uruchamiania.
+ASP.NET Core nie używa już plików *Global. asax* i *Web. config* , z których korzysta poprzednie wersje ASP.NET. We wcześniejszych wersjach programu ASP.NET logika uruchamiania aplikacji została umieszczona w `Application_StartUp` metodzie w *Global. asax*. Później w ASP.NET MVC plik *Startup.cs* został uwzględniony w katalogu głównym projektu; i, został wywołany podczas uruchamiania aplikacji. ASP.NET Core częściowo przyjęła to podejście, umieszczając w pliku *Startup.cs* wszystkie logikę uruchamiania.
 
 Plik *Web. config* został również zastąpiony w ASP.NET Core. Konfigurację można teraz skonfigurować w ramach procedury uruchamiania aplikacji opisanej w *Startup.cs*. Konfiguracja może nadal korzystać z plików XML, ale zazwyczaj projekty ASP.NET Core umieściją wartości konfiguracyjne w pliku w formacie JSON, takim jak *appSettings. JSON*. System konfiguracji ASP.NET Core może również łatwo uzyskać dostęp do zmiennych środowiskowych, co może zapewnić bezpieczniejsze [i niezawodne lokalizację](xref:security/app-secrets) dla wartości specyficznych dla środowiska. Jest to szczególnie prawdziwe w przypadku wpisów tajnych, takich jak parametry połączenia i klucze interfejsu API, które nie powinny być zaewidencjonowane do kontroli źródła. Zobacz [Konfiguracja](xref:fundamentals/configuration/index) , aby dowiedzieć się więcej o konfiguracji w ASP.NET Core.
 
@@ -30,7 +36,7 @@ W tym artykule zaczynamy od częściowo zmigrowanego projektu ASP.NET Core z [po
 
 [!code-csharp[](configuration/samples/WebApp1/src/WebApp1/Startup.cs?range=11-16)]
 
-Należy pamiętać, że w tym momencie plik *Startup.cs* nie zostanie skompilowany, ponieważ nadal będziemy musieli dodać następującą instrukcję `using`:
+Należy pamiętać, że w tym momencie plik *Startup.cs* nie zostanie skompilowany, ponieważ nadal będziemy musieli dodać następującą `using` instrukcję:
 
 ```csharp
 using Microsoft.Extensions.Configuration;
@@ -42,7 +48,7 @@ Dodaj plik *appSettings. JSON* do katalogu głównego projektu przy użyciu odpo
 
 ## <a name="migrate-configuration-settings-from-webconfig"></a>Migruj ustawienia konfiguracji z pliku Web. config
 
-Nasze projekty MVC ASP.NET zawierają wymagane parametry połączenia z bazą danych w *pliku Web. config*w elemencie `<connectionStrings>`. W naszym ASP.NET Core projekcie będziemy przechowywać te informacje w pliku *appSettings. JSON* . Otwórz plik *appSettings. JSON*i zwróć uwagę, że zawiera on już następujące elementy:
+Nasze projekty MVC ASP.NET zawierają wymagane parametry połączenia z bazą danych w *pliku Web. config*w `<connectionStrings>` elemencie. W naszym ASP.NET Core projekcie będziemy przechowywać te informacje w pliku *appSettings. JSON* . Otwórz plik *appSettings. JSON*i zwróć uwagę, że zawiera on już następujące elementy:
 
 [!code-json[](../migration/configuration/samples/WebApp1/src/WebApp1/appsettings.json?highlight=4)]
 

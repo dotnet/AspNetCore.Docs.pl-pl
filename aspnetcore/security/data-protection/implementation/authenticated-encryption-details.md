@@ -4,13 +4,19 @@ author: rick-anderson
 description: Poznaj szczegóły implementacji uwierzytelnionego szyfrowania ASP.NET Core ochrony danych.
 ms.author: riande
 ms.date: 10/14/2016
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/implementation/authenticated-encryption-details
-ms.openlocfilehash: 9def03e6b27e19fc34a839e923d6152e086889db
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 3066cd505781ed2ddad46626dda9d9ce35307877
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78667763"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776971"
 ---
 # <a name="authenticated-encryption-details-in-aspnet-core"></a>Szczegóły uwierzytelnionego szyfrowania w ASP.NET Core
 
@@ -55,4 +61,4 @@ Następny 128 bitów lub 16 bajtów jest identyfikatorem klucza (80 9C 81 0C 19 
 Pozostała część zawiera ładunek i jest zależna od użytego formatu.
 
 > [!WARNING]
-> Wszystkie ładunki chronione w danym kluczu będą rozpoczynać się od tego samego, 20-bajtowego (Magiczna wartość, identyfikator klucza). Administratorzy mogą używać tego faktu w celach diagnostycznych do przybliżonego momentu wygenerowania ładunku. Na przykład powyższy ładunek odpowiada kluczowi {0c819c80-6619-4019-9536-53f8aaffee57}. Jeśli po sprawdzeniu repozytorium kluczy okaże się, że ten określony klucz jest w dniu 2015-01-01, a jego Data wygaśnięcia to 2015-03-01, uzasadnione jest założenie, że ładunek (jeśli nie naruszony) został wygenerowany w tym oknie, podaj lub Zrób małą Fudge po obu stronach.
+> Wszystkie ładunki chronione w danym kluczu będą rozpoczynać się od tego samego, 20-bajtowego (Magiczna wartość, identyfikator klucza). Administratorzy mogą używać tego faktu w celach diagnostycznych do przybliżonego momentu wygenerowania ładunku. Na przykład powyższy ładunek odpowiada kluczowi {0c819c80-6619-4019-9536-53f8aaffee57}. Jeśli po sprawdzeniu repozytorium kluczy okaże się, że Data aktywacji określonego klucza to 2015-01-01, a jej data wygaśnięcia to 2015-03-01, rozsądne jest założenie, że ładunek (jeśli nie naruszony) został wygenerowany w tym oknie, nadaje lub przyjmuje mały współczynnik Fudge po obu stronach.

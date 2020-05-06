@@ -5,13 +5,19 @@ description: Dowiedz się, jak przeprowadzić migrację aplikacji non-ASP.NET Co
 ms.author: pakrym
 ms.custom: mvc
 ms.date: 01/04/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: migration/logging-nonaspnetcore
-ms.openlocfilehash: 2519ddc02cee5978483bcaef4341a52aad3ba2a6
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 3a84d53cb925a518f6c3e244dd342a3228a1fe17
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78659321"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777062"
 ---
 # <a name="migrate-from-microsoftextensionslogging-21-to-22-or-30"></a>Migrowanie z Microsoft. Extensions. Logging 2,1 do 2,2 lub 3,0
 
@@ -69,6 +75,6 @@ using (var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole())
 }
 ```
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 <xref:fundamentals/logging/index>

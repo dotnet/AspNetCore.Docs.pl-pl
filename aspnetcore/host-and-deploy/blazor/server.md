@@ -8,14 +8,17 @@ ms.custom: mvc
 ms.date: 03/03/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: host-and-deploy/blazor/server
-ms.openlocfilehash: 380bbab8898b4fbeab4efa514b17b807accbb1ac
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: e69b91035c65739dde724330e83793c0b8b5481a
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82205868"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775157"
 ---
 # <a name="host-and-deploy-blazor-server"></a>Hostowanie i Blazor Wdrażanie serwera
 

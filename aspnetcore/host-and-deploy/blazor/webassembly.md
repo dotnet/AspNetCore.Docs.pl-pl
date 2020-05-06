@@ -5,17 +5,20 @@ description: Dowiedz się, jak hostować Blazor i wdrażać aplikację przy uży
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/30/2020
+ms.date: 05/04/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: host-and-deploy/blazor/webassembly
-ms.openlocfilehash: 2472fd499128a8807b76a3cc031d466140e180f5
-ms.sourcegitcommit: 23243f6d6a3100303802e4310b0634860cc0b268
+ms.openlocfilehash: 9bc1e3aaadb7310f6ea338eea2726bdc592aa06a
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82619372"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776412"
 ---
 # <a name="host-and-deploy-aspnet-core-blazor-webassembly"></a>Hostowanie i wdrażanie ASP.NET Core Blazor webassembly
 
@@ -402,3 +405,53 @@ Aplikację webassembly Blazor można zainicjować przy użyciu `loadBootResource
 Źródła zewnętrzne muszą zwracać wymagane nagłówki CORS dla przeglądarek, aby umożliwić ładowanie zasobów między źródłami. Sieci CDN zwykle domyślnie udostępnia wymagane nagłówki.
 
 Wystarczy określić typy zachowań niestandardowych. Typy, które nie `loadBootResource` zostały określone do, są ładowane przez platformę na ich domyślne zachowania ładowania.
+
+## <a name="change-the-filename-extension-of-dll-files"></a>Zmień rozszerzenie nazwy pliku DLL
+
+W przypadku konieczności zmiany rozszerzeń nazw plików *dll* aplikacji, postępuj zgodnie ze wskazówkami w tej sekcji.
+
+Po opublikowaniu aplikacji Użyj skryptu powłoki lub potoku kompilacji DevOps, aby zmienić nazwy plików *. dll* , aby użyć innego rozszerzenia pliku. Docelowo pliki *. dll* w katalogu *wwwroot* w opublikowanym danych wyjściowych aplikacji (na przykład *{Content root}/bin/Release/netstandard2.1/Publish/wwwroot*).
+
+W poniższych przykładach pliki *. dll* są nazwy, aby użyć rozszerzenia pliku *bin* .
+
+W systemie Windows:
+
+```powershell
+dir .\_framework\_bin | rename-item -NewName { $_.name -replace ".dll\b",".bin" }
+((Get-Content .\_framework\blazor.boot.json -Raw) -replace '.dll"','.bin"') | Set-Content .\_framework\blazor.boot.json
+```
+
+W systemie Linux lub macOS:
+
+```console
+for f in _framework/_bin/*; do mv "$f" "`echo $f | sed -e 's/\.dll\b/.bin/g'`"; done
+sed -i 's/\.dll"/.bin"/g' _framework/blazor.boot.json
+```
+   
+Aby użyć innego rozszerzenia pliku niż *. bin*, należy zastąpić *. bin* w poprzednich poleceniach.
+
+Aby rozwiązać skompresowane pliki *blazor. boot. JSON. gz* i *blazor.boot.JSON.br* , należy zastosować jedną z następujących metod:
+
+* Usuń skompresowane pliki *blazor. boot. JSON. gz* i *blazor.boot.JSON.br* . Kompresja jest wyłączona w tym podejściu.
+* Ponownie skompresuje zaktualizowany plik *blazor. boot. JSON* .
+
+Poniższy przykład systemu Windows używa skryptu programu PowerShell znajdującego się w katalogu głównym projektu.
+
+*ChangeDLLExtensions. ps1:*:
+
+```powershell
+param([string]$filepath,[string]$tfm)
+dir $filepath\bin\Release\$tfm\wwwroot\_framework\_bin | rename-item -NewName { $_.name -replace ".dll\b",".bin" }
+((Get-Content $filepath\bin\Release\$tfm\wwwroot\_framework\blazor.boot.json -Raw) -replace '.dll"','.bin"') | Set-Content $filepath\bin\Release\$tfm\wwwroot\_framework\blazor.boot.json
+Remove-Item $filepath\bin\Release\$tfm\wwwroot\_framework\blazor.boot.json.gz
+```
+
+W pliku projektu skrypt jest uruchamiany po opublikowaniu aplikacji:
+
+```xml
+<Target Name="ChangeDLLFileExtensions" AfterTargets="Publish" Condition="'$(Configuration)'=='Release'">
+  <Exec Command="powershell.exe -command &quot;&amp; { .\ChangeDLLExtensions.ps1 '$(SolutionDir)' '$(TargetFramework)'}&quot;" />
+</Target>
+```
+
+Aby przekazać opinię, odwiedź stronę [aspnetcore/problemy #5477](https://github.com/dotnet/aspnetcore/issues/5477).

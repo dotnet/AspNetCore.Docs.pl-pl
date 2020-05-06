@@ -4,13 +4,19 @@ author: ardalis
 description: Dowiedz się, jak ASP.NET Core obsługuje iniekcję zależności w widokach MVC.
 ms.author: riande
 ms.date: 10/14/2016
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/views/dependency-injection
-ms.openlocfilehash: 6241bb8e262f64e2e30721bc5fe6f8f1be84b60d
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: aee4152bed50576f087862142e7ce9f261c7da19
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78656101"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775456"
 ---
 # <a name="dependency-injection-into-views-in-aspnet-core"></a>Wstrzykiwanie zależności do widoków w ASP.NET Core
 
@@ -36,7 +42,7 @@ Przykład pliku *appSettings. JSON* :
 }
 ```
 
-Składnia `@inject`: `@inject <type> <name>`
+Składnia dla `@inject`:`@inject <type> <name>`
 
 Przykład przy użyciu `@inject`:
 
@@ -51,15 +57,15 @@ Przykład przy użyciu `@inject`:
 
 ## <a name="service-injection"></a>Wstrzykiwanie usługi
 
-Usługę można wstrzyknąć do widoku przy użyciu dyrektywy `@inject`. Można traktować `@inject` jak dodawanie właściwości do widoku i wypełnianie właściwości przy użyciu DI.
+Usługę można wstrzyknąć do widoku za pomocą `@inject` dyrektywy. Można traktować `@inject` jako dodanie właściwości do widoku i wypełnianie właściwości przy użyciu di.
 
 [!code-csharp[](../../mvc/views/dependency-injection/sample/src/ViewInjectSample/Views/ToDo/Index.cshtml?highlight=4,5,15,16,17)]
 
-Ten widok przedstawia listę wystąpień `ToDoItem` wraz z podsumowaniem pokazującym ogólną statystykę. Podsumowanie zostanie wypełnione na podstawie wstrzykiwanych `StatisticsService`. Ta usługa jest zarejestrowana na potrzeby iniekcji zależności w `ConfigureServices` w *Startup.cs*:
+Ten widok przedstawia listę `ToDoItem` wystąpień wraz z podsumowaniem pokazującym ogólną statystykę. Podsumowanie jest wypełniane przez wstrzykiwaną `StatisticsService`. Ta usługa jest zarejestrowana na potrzeby iniekcji zależności w `ConfigureServices` programie *Startup.cs*:
 
 [!code-csharp[](../../mvc/views/dependency-injection/sample/src/ViewInjectSample/Startup.cs?highlight=6,7&range=15-22)]
 
-`StatisticsService` wykonuje pewne obliczenia dotyczące zestawu `ToDoItem` wystąpień, do którego uzyskuje dostęp za pośrednictwem repozytorium:
+`StatisticsService` Wykonuje pewne obliczenia dotyczące zestawu `ToDoItem` wystąpień, do którego uzyskuje dostęp za pośrednictwem repozytorium:
 
 [!code-csharp[](../../mvc/views/dependency-injection/sample/src/ViewInjectSample/Model/Services/StatisticsService.cs?highlight=15,20,25)]
 
@@ -71,7 +77,7 @@ Przykład wyświetla dane z modelu powiązanego z widokiem, a usługa została w
 
 ## <a name="populating-lookup-data"></a>Wypełnianie danych wyszukiwania
 
-Iniekcja widoku może być przydatna do wypełniania opcji elementów interfejsu użytkownika, takich jak listy rozwijane. Rozważ użycie formularza profilu użytkownika, który zawiera opcje określania płci, stanu i innych preferencji. Renderowanie takiego formularza przy użyciu standardowego podejścia MVC wymagało, aby kontroler zażądał usług dostępu do danych dla każdego z tych zestawów opcji, a następnie wypełnia model lub `ViewBag` przy użyciu każdego zestawu opcji, które mają być powiązane.
+Iniekcja widoku może być przydatna do wypełniania opcji elementów interfejsu użytkownika, takich jak listy rozwijane. Rozważ użycie formularza profilu użytkownika, który zawiera opcje określania płci, stanu i innych preferencji. Renderowanie takiego formularza przy użyciu standardowego podejścia MVC wymagało, aby kontroler zażądał usług dostępu do danych dla każdego z tych zestawów opcji, a następnie wypełnia model `ViewBag` lub z każdym zestawem opcji, które mają być powiązane.
 
 Alternatywna metoda powoduje wstrzyknięcie usług bezpośrednio do widoku w celu uzyskania opcji. Pozwala to zminimalizować ilość kodu wymaganego przez kontroler, przenosząc tę logikę konstrukcyjną tego elementu widoku do samego widoku. Akcja kontrolera, aby wyświetlić formularz edycji profilu, musi jedynie przekazać formularz wystąpienia profilu:
 
@@ -85,12 +91,12 @@ Te listy są wypełniane przez usługę, która została wprowadzona do widoku:
 
 [!code-cshtml[](../../mvc/views/dependency-injection/sample/src/ViewInjectSample/Views/Profile/Index.cshtml?highlight=4,16,17,21,22,26,27)]
 
-`ProfileOptionsService` to usługa poziomu interfejsu użytkownika zaprojektowana w celu zapewnienia tylko danych wymaganych dla tego formularza:
+`ProfileOptionsService` Jest to usługa poziomu interfejsu użytkownika zaprojektowana w celu zapewnienia tylko danych wymaganych dla tego formularza:
 
 [!code-csharp[](../../mvc/views/dependency-injection/sample/src/ViewInjectSample/Model/Services/ProfileOptionsService.cs?highlight=7,13,24)]
 
 > [!IMPORTANT]
-> Nie zapomnij zarejestrować typów, które zażądasz poprzez iniekcję zależności w `Startup.ConfigureServices`. Wyrejestrowanie typu zgłasza wyjątek w czasie wykonywania, ponieważ dostawca usług jest wewnętrznie zapytań za pośrednictwem [GetRequiredService](/dotnet/api/microsoft.extensions.dependencyinjection.serviceproviderserviceextensions.getrequiredservice).
+> Nie zapomnij zarejestrować typów, które zażądasz poprzez `Startup.ConfigureServices`iniekcję zależności w programie. Wyrejestrowanie typu zgłasza wyjątek w czasie wykonywania, ponieważ dostawca usług jest wewnętrznie zapytań za pośrednictwem [GetRequiredService](/dotnet/api/microsoft.extensions.dependencyinjection.serviceproviderserviceextensions.getrequiredservice).
 
 ## <a name="overriding-services"></a>Zastępowanie usług
 
@@ -98,7 +104,7 @@ Oprócz wstrzykiwania nowych usług ta technika może być również używana do
 
 ![Menu kontekstowe IntelliSense dla wpisanego znaku @ symbol z listą pól HTML, składników, StatsService i adresów URL](dependency-injection/_static/razor-fields.png)
 
-Jak widać, pola domyślne obejmują `Html`, `Component`i `Url` (a także `StatsService`, które zostały dodane). Jeśli na przykład chcesz zastąpić domyślne pomocników HTML własnymi, możesz łatwo to zrobić przy użyciu `@inject`:
+Jak widać, pola domyślne `Html`obejmują, `Component`, i `Url` (jak również `StatsService` wprowadzone). Jeśli na przykład chcesz zastąpić domyślne pomocników HTML własnymi, możesz łatwo to zrobić przy użyciu `@inject`:
 
 [!code-cshtml[](../../mvc/views/dependency-injection/sample/src/ViewInjectSample/Views/Helper/Index.cshtml?highlight=3,11)]
 

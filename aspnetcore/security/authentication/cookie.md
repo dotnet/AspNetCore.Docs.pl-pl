@@ -1,17 +1,23 @@
 ---
-title: Korzystanie z uwierzytelniania plików cookie bez tożsamości ASP.NET Core
+title: Korzystanie z uwierzytelniania plików cookie bez ASP.NET CoreIdentity
 author: rick-anderson
-description: Dowiedz się, jak używać uwierzytelniania przy użyciu plików cookie bez tożsamości ASP.NET Core.
+description: Dowiedz się, jak korzystać z uwierzytelniania Identityplików cookie bez ASP.NET Core.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 02/11/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authentication/cookie
-ms.openlocfilehash: b7c8b2cccb27dd6818330b17439675e41bfef013
-ms.sourcegitcommit: 91dc1dd3d055b4c7d7298420927b3fd161067c64
+ms.openlocfilehash: c179b3657ad4cbda960c2afe685a63f3266a7402
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "80219210"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82773847"
 ---
 # <a name="use-cookie-authentication-without-aspnet-core-identity"></a>Korzystanie z uwierzytelniania plików cookie bez tożsamości ASP.NET Core
 
@@ -23,27 +29,27 @@ ASP.NET Core Identity to kompletny, w pełni funkcjonalny Dostawca uwierzytelnia
 
 [Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/cookie/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
 
-W celach demonstracyjnych w przykładowej aplikacji konto użytkownika dla hipotetycznego użytkownika, Maria Rodriguez jest stałe do aplikacji. Użyj adresu **e-mail** `maria.rodriguez@contoso.com` i hasła do logowania użytkownika. Użytkownik jest uwierzytelniany w metodzie `AuthenticateUser` w pliku *Pages/Account/Login. cshtml. cs* . W świecie rzeczywistym użytkownik zostanie uwierzytelniony w odniesieniu do bazy danych.
+W celach demonstracyjnych w przykładowej aplikacji konto użytkownika dla hipotetycznego użytkownika, Maria Rodriguez jest stałe do aplikacji. Zaloguj się **Email** przy użyciu `maria.rodriguez@contoso.com` adresu e-mail i hasła. Użytkownik jest uwierzytelniany w `AuthenticateUser` metodzie w pliku *Pages/Account/Login. cshtml. cs* . W świecie rzeczywistym użytkownik zostanie uwierzytelniony w odniesieniu do bazy danych.
 
-## <a name="configuration"></a>Konfiguracja
+## <a name="configuration"></a>Konfigurowanie
 
 Jeśli aplikacja nie korzysta z [pakietu Microsoft. AspNetCore. app](xref:fundamentals/metapackage-app), Utwórz odwołanie do pakietu w pliku projektu dla pakietu [Microsoft. AspNetCore. Authentication. cookies](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Cookies/) .
 
-W metodzie `Startup.ConfigureServices` Utwórz usługi pośredniczące uwierzytelniania przy użyciu metod <xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication*> i <xref:Microsoft.Extensions.DependencyInjection.CookieExtensions.AddCookie*>:
+W `Startup.ConfigureServices` metodzie Utwórz usługi pośredniczące uwierzytelniania przy użyciu metod <xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication*> i: <xref:Microsoft.Extensions.DependencyInjection.CookieExtensions.AddCookie*>
 
 [!code-csharp[](cookie/samples/3.x/CookieSample/Startup.cs?name=snippet1)]
 
-<xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme> przeszedł do `AddAuthentication` ustawia domyślny schemat uwierzytelniania dla aplikacji. `AuthenticationScheme` jest przydatne, gdy istnieje wiele wystąpień uwierzytelniania plików cookie i chcesz [autoryzować z określonym schematem](xref:security/authorization/limitingidentitybyscheme). Ustawienie `AuthenticationScheme` na [CookieAuthenticationDefaults. AuthenticationScheme](xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme) zapewnia wartość "cookies" dla schematu. Można podać dowolną wartość ciągu odróżniającą schemat.
+<xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme>przeszedł `AddAuthentication` do ustawia domyślny schemat uwierzytelniania dla aplikacji. `AuthenticationScheme`jest przydatne, gdy istnieje wiele wystąpień uwierzytelniania plików cookie i chcesz [autoryzować z określonym schematem](xref:security/authorization/limitingidentitybyscheme). Ustawienie parametru `AuthenticationScheme` na [CookieAuthenticationDefaults. AuthenticationScheme](xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme) zapewnia wartość "cookies" dla schematu. Można podać dowolną wartość ciągu odróżniającą schemat.
 
-Schemat uwierzytelniania aplikacji różni się od schematu uwierzytelniania plików cookie aplikacji. Gdy schemat uwierzytelniania plików cookie nie jest dostarczany do <xref:Microsoft.Extensions.DependencyInjection.CookieExtensions.AddCookie*>, używa `CookieAuthenticationDefaults.AuthenticationScheme` ("pliki cookie").
+Schemat uwierzytelniania aplikacji różni się od schematu uwierzytelniania plików cookie aplikacji. Gdy schemat uwierzytelniania plików cookie nie jest dostarczany <xref:Microsoft.Extensions.DependencyInjection.CookieExtensions.AddCookie*>, używa `CookieAuthenticationDefaults.AuthenticationScheme` go ("pliki cookie").
 
-Właściwość <xref:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential> pliku cookie uwierzytelniania jest domyślnie ustawiona na `true`. Pliki cookie uwierzytelniania są dozwolone, gdy osoby odwiedzające witrynę nie wyraziły zgody na zbieranie danych. Aby uzyskać więcej informacji, zobacz <xref:security/gdpr#essential-cookies>.
+<xref:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential> Właściwość pliku cookie uwierzytelniania jest domyślnie ustawiona na `true` wartość. Pliki cookie uwierzytelniania są dozwolone, gdy osoby odwiedzające witrynę nie wyraziły zgody na zbieranie danych. Aby uzyskać więcej informacji, zobacz <xref:security/gdpr#essential-cookies>.
 
-W `Startup.Configure`Wywołaj `UseAuthentication` i `UseAuthorization`, aby ustawić właściwość `HttpContext.User` i uruchomić oprogramowanie pośredniczące autoryzacji dla żądań. Przed wywołaniem `UseEndpoints`wywołaj metody `UseAuthentication` i `UseAuthorization`:
+W `Startup.Configure`, `UseAuthentication` Wywołaj `UseAuthorization` i, aby `HttpContext.User` ustawić właściwość i uruchamiać oprogramowanie pośredniczące autoryzacji dla żądań. Wywołaj `UseAuthentication` metody `UseAuthorization` i przed wywołaniem `UseEndpoints`:
 
 [!code-csharp[](cookie/samples/3.x/CookieSample/Startup.cs?name=snippet2)]
 
-Klasa <xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationOptions> służy do konfigurowania opcji dostawcy uwierzytelniania.
+<xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationOptions> Klasa służy do konfigurowania opcji dostawcy uwierzytelniania.
 
 Ustaw `CookieAuthenticationOptions` w konfiguracji usługi na potrzeby uwierzytelniania w `Startup.ConfigureServices` metodzie:
 
@@ -57,15 +63,15 @@ services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
 
 ## <a name="cookie-policy-middleware"></a>Oprogramowanie pośredniczące zasad dotyczących plików cookie
 
-[Oprogramowanie pośredniczące zasad plików cookie](xref:Microsoft.AspNetCore.CookiePolicy.CookiePolicyMiddleware) umożliwia korzystanie z funkcji zasad dotyczących plików cookie. Dodanie oprogramowania pośredniczącego do potoku przetwarzania aplikacji jest zależne od kolejności&mdash;ma wpływ tylko na składniki podrzędne zarejestrowane w potoku.
+[Oprogramowanie pośredniczące zasad plików cookie](xref:Microsoft.AspNetCore.CookiePolicy.CookiePolicyMiddleware) umożliwia korzystanie z funkcji zasad dotyczących plików cookie. Dodanie oprogramowania pośredniczącego do potoku przetwarzania aplikacji jest zgodne z&mdash;kolejnością, ma wpływ tylko na składniki podrzędne zarejestrowane w potoku.
 
 ```csharp
 app.UseCookiePolicy(cookiePolicyOptions);
 ```
 
-Użyj <xref:Microsoft.AspNetCore.Builder.CookiePolicyOptions> dostarczanego do programu pośredniczącego zasad dotyczących plików cookie, aby kontrolować globalne właściwości przetwarzania plików cookie i podłączać się do programów obsługi przetwarzania plików cookie, gdy pliki cookie są dodawane lub usuwane.
+Zastosowanie <xref:Microsoft.AspNetCore.Builder.CookiePolicyOptions> do oprogramowania pośredniczącego zasad dotyczących plików cookie pozwala kontrolować globalne właściwości przetwarzania plików cookie i przełączać się do programów obsługi przetwarzania plików cookie, gdy pliki cookie są dodawane lub usuwane.
 
-Domyślna wartość <xref:Microsoft.AspNetCore.Builder.CookiePolicyOptions.MinimumSameSitePolicy> jest `SameSiteMode.Lax`, aby zezwalać na uwierzytelnianie OAuth2. Aby ściśle wymusić zasady dotyczące tej samej lokacji `SameSiteMode.Strict`, ustaw `MinimumSameSitePolicy`. Mimo że to ustawienie powoduje przerwanie OAuth2 i innych schematów uwierzytelniania między źródłami, podnosi poziom bezpieczeństwa plików cookie dla innych typów aplikacji, które nie polegają na przetwarzaniu żądań między źródłami.
+Wartością domyślną <xref:Microsoft.AspNetCore.Builder.CookiePolicyOptions.MinimumSameSitePolicy> jest `SameSiteMode.Lax` umożliwienie uwierzytelniania OAuth2. Aby ściśle wymuszać zasady dotyczące `SameSiteMode.Strict`tej samej lokacji, należy `MinimumSameSitePolicy`ustawić. Mimo że to ustawienie powoduje przerwanie OAuth2 i innych schematów uwierzytelniania między źródłami, podnosi poziom bezpieczeństwa plików cookie dla innych typów aplikacji, które nie polegają na przetwarzaniu żądań między źródłami.
 
 ```csharp
 var cookiePolicyOptions = new CookiePolicyOptions
@@ -74,25 +80,25 @@ var cookiePolicyOptions = new CookiePolicyOptions
 };
 ```
 
-Ustawienie ustawienia pośredniczące zasad plików cookie dla `MinimumSameSitePolicy` może wpływać na ustawienie `Cookie.SameSite` w ustawieniach `CookieAuthenticationOptions` zgodnie z poniższą macierzą.
+Ustawienie ustawienia pośredniczące zasad dotyczących plików `MinimumSameSitePolicy` cookie dla programu może mieć `Cookie.SameSite` wpływ `CookieAuthenticationOptions` na ustawienia w ustawieniach zgodnie z poniższą macierzą.
 
-| MinimumSameSitePolicy | Cookie.SameSite | Wynikowy plik cookie. SameSite ustawienie |
+| MinimumSameSitePolicy | Plik cookie. SameSite | Wynikowy plik cookie. SameSite ustawienie |
 | --------------------- | --------------- | --------------------------------- |
-| SameSiteMode.None     | SameSiteMode.None<br>SameSiteMode.Lax<br>SameSiteMode.Strict | SameSiteMode.None<br>SameSiteMode.Lax<br>SameSiteMode.Strict |
-| SameSiteMode.Lax      | SameSiteMode.None<br>SameSiteMode.Lax<br>SameSiteMode.Strict | SameSiteMode.Lax<br>SameSiteMode.Lax<br>SameSiteMode.Strict |
-| SameSiteMode.Strict   | SameSiteMode.None<br>SameSiteMode.Lax<br>SameSiteMode.Strict | SameSiteMode.Strict<br>SameSiteMode.Strict<br>SameSiteMode.Strict |
+| SameSiteMode. None     | SameSiteMode. None<br>SameSiteMode. swobodny<br>SameSiteMode. Strict | SameSiteMode. None<br>SameSiteMode. swobodny<br>SameSiteMode. Strict |
+| SameSiteMode. swobodny      | SameSiteMode. None<br>SameSiteMode. swobodny<br>SameSiteMode. Strict | SameSiteMode. swobodny<br>SameSiteMode. swobodny<br>SameSiteMode. Strict |
+| SameSiteMode. Strict   | SameSiteMode. None<br>SameSiteMode. swobodny<br>SameSiteMode. Strict | SameSiteMode. Strict<br>SameSiteMode. Strict<br>SameSiteMode. Strict |
 
 ## <a name="create-an-authentication-cookie"></a>Utwórz plik cookie uwierzytelniania
 
-Aby utworzyć plik cookie przechowujący informacje o użytkowniku, Utwórz <xref:System.Security.Claims.ClaimsPrincipal>. Informacje o użytkowniku są serializowane i przechowywane w pliku cookie. 
+Aby utworzyć plik cookie przechowujący informacje o użytkowniku <xref:System.Security.Claims.ClaimsPrincipal>, konstrukcja a. Informacje o użytkowniku są serializowane i przechowywane w pliku cookie. 
 
-Utwórz <xref:System.Security.Claims.ClaimsIdentity> z dowolnym wymaganym <xref:System.Security.Claims.Claim>s i Wywołaj <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignInAsync*>, aby zalogować użytkownika:
+Utwórz z <xref:System.Security.Claims.ClaimsIdentity> dowolnym wymaganym <xref:System.Security.Claims.Claim>elementem s i <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignInAsync*> Wywołaj, aby zalogować użytkownika:
 
 [!code-csharp[](cookie/samples/3.x/CookieSample/Pages/Account/Login.cshtml.cs?name=snippet1)]
 
 [!INCLUDE[request localized comments](~/includes/code-comments-loc.md)]
 
-`SignInAsync` tworzy zaszyfrowany plik cookie i dodaje go do bieżącej odpowiedzi. Jeśli `AuthenticationScheme` nie jest określony, używany jest domyślny schemat.
+`SignInAsync`tworzy zaszyfrowany plik cookie i dodaje go do bieżącej odpowiedzi. Jeśli `AuthenticationScheme` nie jest określony, używany jest domyślny schemat.
 
 System [ochrony danych](xref:security/data-protection/using-data-protection) ASP.NET Core jest używany do szyfrowania. W przypadku aplikacji hostowanej na wielu komputerach, równoważenia obciążenia między aplikacjami lub korzystania z kolektywu serwerów sieci Web należy [skonfigurować ochronę danych](xref:security/data-protection/configuration/overview) tak, aby używała tego samego dzwonka klucza i identyfikatora aplikacji.
 
@@ -102,7 +108,7 @@ Aby wylogować bieżącego użytkownika i usunąć jego plik cookie, wywołaj <x
 
 [!code-csharp[](cookie/samples/3.x/CookieSample/Pages/Account/Login.cshtml.cs?name=snippet2)]
 
-Jeśli `CookieAuthenticationDefaults.AuthenticationScheme` (lub "cookies") nie jest używany jako schemat (na przykład "ContosoCookie"), należy podać schemat używany podczas konfigurowania dostawcy uwierzytelniania. W przeciwnym razie używany jest domyślny schemat.
+Jeśli `CookieAuthenticationDefaults.AuthenticationScheme` (lub "cookie") nie jest używany jako schemat (na przykład "ContosoCookie"), należy podać schemat używany podczas konfigurowania dostawcy uwierzytelniania. W przeciwnym razie używany jest domyślny schemat.
 
 ## <a name="react-to-back-end-changes"></a>Reagowanie na zmiany zaplecza
 
@@ -111,11 +117,11 @@ Po utworzeniu pliku cookie plik cookie jest pojedynczym źródłem tożsamości.
 * System uwierzytelniania plików cookie aplikacji kontynuuje przetwarzanie żądań na podstawie pliku cookie uwierzytelniania.
 * Użytkownik pozostaje zalogowany do aplikacji, o ile plik cookie uwierzytelniania jest prawidłowy.
 
-Zdarzenia <xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationEvents.ValidatePrincipal*> mogą służyć do przechwycenia i zastąpienia weryfikacji tożsamości pliku cookie. Sprawdzanie poprawności pliku cookie na każde żądanie zmniejsza ryzyko odwołujący się użytkowników, którzy uzyskują dostęp do aplikacji.
+<xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationEvents.ValidatePrincipal*> Zdarzenia można użyć do przechwycenia i zastąpienia weryfikacji tożsamości pliku cookie. Sprawdzanie poprawności pliku cookie na każde żądanie zmniejsza ryzyko odwołujący się użytkowników, którzy uzyskują dostęp do aplikacji.
 
-Jedno z metod weryfikacji plików cookie polega na śledzeniu zmian w bazie danych użytkownika. Jeśli baza danych nie została zmieniona od czasu wystawienia pliku cookie, nie ma potrzeby ponownego uwierzytelnienia użytkownika, jeśli plik cookie jest nadal ważny. W przykładowej aplikacji baza danych jest zaimplementowana w `IUserRepository` i przechowuje `LastChanged` wartość. Gdy użytkownik zostanie zaktualizowany w bazie danych, wartość `LastChanged` jest ustawiana na bieżącą godzinę.
+Jedno z metod weryfikacji plików cookie polega na śledzeniu zmian w bazie danych użytkownika. Jeśli baza danych nie została zmieniona od czasu wystawienia pliku cookie, nie ma potrzeby ponownego uwierzytelnienia użytkownika, jeśli plik cookie jest nadal ważny. W przykładowej aplikacji baza danych jest zaimplementowana `IUserRepository` w i przechowuje `LastChanged` wartość. Gdy użytkownik zostanie zaktualizowany w bazie danych, `LastChanged` wartość jest ustawiana na bieżącą godzinę.
 
-Aby unieważnić plik cookie, gdy baza danych zmienia się w oparciu o wartość `LastChanged`, Utwórz plik cookie z `LastChanged`m, zawierającym wartość bieżącą `LastChanged` z bazy danych:
+Aby unieważnić plik cookie, gdy baza danych zmienia się na podstawie `LastChanged` wartości, Utwórz plik cookie z `LastChanged` zastrzeżeniem zawierającym bieżącą `LastChanged` wartość z bazy danych:
 
 ```csharp
 var claims = new List<Claim>
@@ -133,13 +139,13 @@ await HttpContext.SignInAsync(
     new ClaimsPrincipal(claimsIdentity));
 ```
 
-Aby zaimplementować przesłonięcie dla zdarzenia `ValidatePrincipal`, napisz metodę o następującej sygnaturze w klasie, która pochodzi od <xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationEvents>:
+Aby zaimplementować przesłonięcie dla `ValidatePrincipal` zdarzenia, napisz metodę o następującym podpisie w klasie, która pochodzi od <xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationEvents>:
 
 ```csharp
 ValidatePrincipal(CookieValidatePrincipalContext)
 ```
 
-Poniżej przedstawiono przykładową implementację `CookieAuthenticationEvents`:
+Poniżej przedstawiono przykładową implementację programu `CookieAuthenticationEvents`:
 
 ```csharp
 using System.Linq;
@@ -178,7 +184,7 @@ public class CustomCookieAuthenticationEvents : CookieAuthenticationEvents
 }
 ```
 
-Zarejestruj wystąpienie zdarzeń podczas rejestracji usługi plików cookie w metodzie `Startup.ConfigureServices`. Podaj [rejestrację usługi w zakresie](xref:fundamentals/dependency-injection#service-lifetimes) dla swojej klasy `CustomCookieAuthenticationEvents`:
+Zarejestruj wystąpienie zdarzeń podczas rejestracji usługi plików cookie w `Startup.ConfigureServices` metodzie. Podaj [rejestrację usługi w zakresie](xref:fundamentals/dependency-injection#service-lifetimes) dla swojej `CustomCookieAuthenticationEvents` klasy:
 
 ```csharp
 services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -190,7 +196,7 @@ services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
 services.AddScoped<CustomCookieAuthenticationEvents>();
 ```
 
-Rozważ sytuację, w której nazwa użytkownika jest aktualizowana&mdash;decyzji, która nie ma wpływu na zabezpieczenia w jakikolwiek sposób. Jeśli chcesz nieszkodliwej aktualizacji podmiotu zabezpieczeń, wywołaj `context.ReplacePrincipal` i ustaw właściwość `context.ShouldRenew` na `true`.
+Rozważ sytuację, w której nazwa użytkownika jest aktualizowana&mdash;decyzją, która nie ma wpływu na zabezpieczenia w jakikolwiek sposób. Jeśli chcesz nieszkodliwej aktualizacji podmiotu zabezpieczeń, wywołaj `context.ReplacePrincipal` i ustaw `context.ShouldRenew` właściwość na. `true`
 
 > [!WARNING]
 > Opisane tutaj podejście jest wyzwalane dla każdego żądania. Sprawdzanie poprawności plików cookie uwierzytelniania dla wszystkich użytkowników w każdym żądaniu może spowodować spadek wydajności aplikacji.
@@ -201,7 +207,7 @@ Plik cookie może być trwały między sesjami przeglądarki. Tę trwałość na
 
 Poniższy fragment kodu tworzy tożsamość i odpowiadający jej plik cookie, który przeżyje przez zamknięcia przeglądarki. Wszystkie skonfigurowane wcześniej ustawienia wygasania są honorowane. Jeśli plik cookie wygaśnie, gdy przeglądarka zostanie ZAMKNIĘTA, przeglądarka czyści plik cookie po jego ponownym uruchomieniu.
 
-Ustaw <xref:Microsoft.AspNetCore.Authentication.AuthenticationProperties.IsPersistent> na `true` w <xref:Microsoft.AspNetCore.Authentication.AuthenticationProperties>:
+Ustaw <xref:Microsoft.AspNetCore.Authentication.AuthenticationProperties.IsPersistent> na `true` wartość <xref:Microsoft.AspNetCore.Authentication.AuthenticationProperties>w:
 
 ```csharp
 // using Microsoft.AspNetCore.Authentication;
@@ -217,7 +223,7 @@ await HttpContext.SignInAsync(
 
 ## <a name="absolute-cookie-expiration"></a>Bezwzględne wygaśnięcie pliku cookie
 
-Bezwzględny czas wygaśnięcia można ustawić za pomocą <xref:Microsoft.AspNetCore.Authentication.AuthenticationProperties.ExpiresUtc>. Aby utworzyć trwały plik cookie, należy również ustawić `IsPersistent`. W przeciwnym razie plik cookie jest tworzony przy użyciu okresu istnienia sesji i może wygasnąć przed lub po posiadanym przez niego biletem uwierzytelniania. Gdy `ExpiresUtc` jest ustawiona, zastępuje wartość opcji <xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationOptions.ExpireTimeSpan> <xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationOptions>, jeśli jest ustawiona.
+Bezwzględny czas wygaśnięcia można ustawić za <xref:Microsoft.AspNetCore.Authentication.AuthenticationProperties.ExpiresUtc>pomocą. Aby utworzyć trwały plik cookie `IsPersistent` , należy również ustawić opcję. W przeciwnym razie plik cookie jest tworzony przy użyciu okresu istnienia sesji i może wygasnąć przed lub po posiadanym przez niego biletem uwierzytelniania. Gdy `ExpiresUtc` jest ustawiona, zastępuje wartość <xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationOptions.ExpireTimeSpan> opcji <xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationOptions>, jeśli jest ustawiona.
 
 Poniższy fragment kodu tworzy tożsamość i odpowiedni plik cookie, który trwa przez 20 minut. Ignoruje to wszystkie ustawienia wygasania, które zostały wcześniej skonfigurowane.
 
@@ -242,27 +248,27 @@ ASP.NET Core Identity to kompletny, w pełni funkcjonalny Dostawca uwierzytelnia
 
 [Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/cookie/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
 
-W celach demonstracyjnych w przykładowej aplikacji konto użytkownika dla hipotetycznego użytkownika, Maria Rodriguez jest stałe do aplikacji. Użyj adresu **e-mail** `maria.rodriguez@contoso.com` i hasła do logowania użytkownika. Użytkownik jest uwierzytelniany w metodzie `AuthenticateUser` w pliku *Pages/Account/Login. cshtml. cs* . W świecie rzeczywistym użytkownik zostanie uwierzytelniony w odniesieniu do bazy danych.
+W celach demonstracyjnych w przykładowej aplikacji konto użytkownika dla hipotetycznego użytkownika, Maria Rodriguez jest stałe do aplikacji. Zaloguj się **Email** przy użyciu `maria.rodriguez@contoso.com` adresu e-mail i hasła. Użytkownik jest uwierzytelniany w `AuthenticateUser` metodzie w pliku *Pages/Account/Login. cshtml. cs* . W świecie rzeczywistym użytkownik zostanie uwierzytelniony w odniesieniu do bazy danych.
 
-## <a name="configuration"></a>Konfiguracja
+## <a name="configuration"></a>Konfigurowanie
 
 Jeśli aplikacja nie korzysta z [pakietu Microsoft. AspNetCore. app](xref:fundamentals/metapackage-app), Utwórz odwołanie do pakietu w pliku projektu dla pakietu [Microsoft. AspNetCore. Authentication. cookies](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Cookies/) .
 
-W metodzie `Startup.ConfigureServices` Utwórz usługę pośredniczącą uwierzytelniania przy użyciu metod <xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication*> i <xref:Microsoft.Extensions.DependencyInjection.CookieExtensions.AddCookie*>:
+W `Startup.ConfigureServices` metodzie Utwórz usługę pośredniczącą uwierzytelniania przy użyciu metod <xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication*> i: <xref:Microsoft.Extensions.DependencyInjection.CookieExtensions.AddCookie*>
 
 [!code-csharp[](cookie/samples/2.x/CookieSample/Startup.cs?name=snippet1)]
 
-<xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme> przeszedł do `AddAuthentication` ustawia domyślny schemat uwierzytelniania dla aplikacji. `AuthenticationScheme` jest przydatne, gdy istnieje wiele wystąpień uwierzytelniania plików cookie i chcesz [autoryzować z określonym schematem](xref:security/authorization/limitingidentitybyscheme). Ustawienie `AuthenticationScheme` na [CookieAuthenticationDefaults. AuthenticationScheme](xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme) zapewnia wartość "cookies" dla schematu. Można podać dowolną wartość ciągu odróżniającą schemat.
+<xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme>przeszedł `AddAuthentication` do ustawia domyślny schemat uwierzytelniania dla aplikacji. `AuthenticationScheme`jest przydatne, gdy istnieje wiele wystąpień uwierzytelniania plików cookie i chcesz [autoryzować z określonym schematem](xref:security/authorization/limitingidentitybyscheme). Ustawienie parametru `AuthenticationScheme` na [CookieAuthenticationDefaults. AuthenticationScheme](xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme) zapewnia wartość "cookies" dla schematu. Można podać dowolną wartość ciągu odróżniającą schemat.
 
-Schemat uwierzytelniania aplikacji różni się od schematu uwierzytelniania plików cookie aplikacji. Gdy schemat uwierzytelniania plików cookie nie jest dostarczany do <xref:Microsoft.Extensions.DependencyInjection.CookieExtensions.AddCookie*>, używa `CookieAuthenticationDefaults.AuthenticationScheme` ("pliki cookie").
+Schemat uwierzytelniania aplikacji różni się od schematu uwierzytelniania plików cookie aplikacji. Gdy schemat uwierzytelniania plików cookie nie jest dostarczany <xref:Microsoft.Extensions.DependencyInjection.CookieExtensions.AddCookie*>, używa `CookieAuthenticationDefaults.AuthenticationScheme` go ("pliki cookie").
 
-Właściwość <xref:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential> pliku cookie uwierzytelniania jest domyślnie ustawiona na `true`. Pliki cookie uwierzytelniania są dozwolone, gdy osoby odwiedzające witrynę nie wyraziły zgody na zbieranie danych. Aby uzyskać więcej informacji, zobacz <xref:security/gdpr#essential-cookies>.
+<xref:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential> Właściwość pliku cookie uwierzytelniania jest domyślnie ustawiona na `true` wartość. Pliki cookie uwierzytelniania są dozwolone, gdy osoby odwiedzające witrynę nie wyraziły zgody na zbieranie danych. Aby uzyskać więcej informacji, zobacz <xref:security/gdpr#essential-cookies>.
 
-W metodzie `Startup.Configure` Wywołaj metodę `UseAuthentication`, aby wywołać oprogramowanie pośredniczące uwierzytelniania, które ustawia właściwość `HttpContext.User`. Wywołaj metodę `UseAuthentication` przed wywołaniem `UseMvcWithDefaultRoute` lub `UseMvc`:
+W `Startup.Configure` metodzie Wywołaj `UseAuthentication` metodę, aby wywołać oprogramowanie pośredniczące uwierzytelniania, które ustawia `HttpContext.User` właściwość. Wywołaj `UseAuthentication` metodę przed `UseMvcWithDefaultRoute` wywołaniem `UseMvc`lub:
 
 [!code-csharp[](cookie/samples/2.x/CookieSample/Startup.cs?name=snippet2)]
 
-Klasa <xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationOptions> służy do konfigurowania opcji dostawcy uwierzytelniania.
+<xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationOptions> Klasa służy do konfigurowania opcji dostawcy uwierzytelniania.
 
 Ustaw `CookieAuthenticationOptions` w konfiguracji usługi na potrzeby uwierzytelniania w `Startup.ConfigureServices` metodzie:
 
@@ -276,15 +282,15 @@ services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
 
 ## <a name="cookie-policy-middleware"></a>Oprogramowanie pośredniczące zasad dotyczących plików cookie
 
-[Oprogramowanie pośredniczące zasad plików cookie](xref:Microsoft.AspNetCore.CookiePolicy.CookiePolicyMiddleware) umożliwia korzystanie z funkcji zasad dotyczących plików cookie. Dodanie oprogramowania pośredniczącego do potoku przetwarzania aplikacji jest zależne od kolejności&mdash;ma wpływ tylko na składniki podrzędne zarejestrowane w potoku.
+[Oprogramowanie pośredniczące zasad plików cookie](xref:Microsoft.AspNetCore.CookiePolicy.CookiePolicyMiddleware) umożliwia korzystanie z funkcji zasad dotyczących plików cookie. Dodanie oprogramowania pośredniczącego do potoku przetwarzania aplikacji jest zgodne z&mdash;kolejnością, ma wpływ tylko na składniki podrzędne zarejestrowane w potoku.
 
 ```csharp
 app.UseCookiePolicy(cookiePolicyOptions);
 ```
 
-Użyj <xref:Microsoft.AspNetCore.Builder.CookiePolicyOptions> dostarczanego do programu pośredniczącego zasad dotyczących plików cookie, aby kontrolować globalne właściwości przetwarzania plików cookie i podłączać się do programów obsługi przetwarzania plików cookie, gdy pliki cookie są dodawane lub usuwane.
+Zastosowanie <xref:Microsoft.AspNetCore.Builder.CookiePolicyOptions> do oprogramowania pośredniczącego zasad dotyczących plików cookie pozwala kontrolować globalne właściwości przetwarzania plików cookie i przełączać się do programów obsługi przetwarzania plików cookie, gdy pliki cookie są dodawane lub usuwane.
 
-Domyślna wartość <xref:Microsoft.AspNetCore.Builder.CookiePolicyOptions.MinimumSameSitePolicy> jest `SameSiteMode.Lax`, aby zezwalać na uwierzytelnianie OAuth2. Aby ściśle wymusić zasady dotyczące tej samej lokacji `SameSiteMode.Strict`, ustaw `MinimumSameSitePolicy`. Mimo że to ustawienie powoduje przerwanie OAuth2 i innych schematów uwierzytelniania między źródłami, podnosi poziom bezpieczeństwa plików cookie dla innych typów aplikacji, które nie polegają na przetwarzaniu żądań między źródłami.
+Wartością domyślną <xref:Microsoft.AspNetCore.Builder.CookiePolicyOptions.MinimumSameSitePolicy> jest `SameSiteMode.Lax` umożliwienie uwierzytelniania OAuth2. Aby ściśle wymuszać zasady dotyczące `SameSiteMode.Strict`tej samej lokacji, należy `MinimumSameSitePolicy`ustawić. Mimo że to ustawienie powoduje przerwanie OAuth2 i innych schematów uwierzytelniania między źródłami, podnosi poziom bezpieczeństwa plików cookie dla innych typów aplikacji, które nie polegają na przetwarzaniu żądań między źródłami.
 
 ```csharp
 var cookiePolicyOptions = new CookiePolicyOptions
@@ -293,23 +299,23 @@ var cookiePolicyOptions = new CookiePolicyOptions
 };
 ```
 
-Ustawienie ustawienia pośredniczące zasad plików cookie dla `MinimumSameSitePolicy` może wpływać na ustawienie `Cookie.SameSite` w ustawieniach `CookieAuthenticationOptions` zgodnie z poniższą macierzą.
+Ustawienie ustawienia pośredniczące zasad dotyczących plików `MinimumSameSitePolicy` cookie dla programu może mieć `Cookie.SameSite` wpływ `CookieAuthenticationOptions` na ustawienia w ustawieniach zgodnie z poniższą macierzą.
 
-| MinimumSameSitePolicy | Cookie.SameSite | Wynikowy plik cookie. SameSite ustawienie |
+| MinimumSameSitePolicy | Plik cookie. SameSite | Wynikowy plik cookie. SameSite ustawienie |
 | --------------------- | --------------- | --------------------------------- |
-| SameSiteMode.None     | SameSiteMode.None<br>SameSiteMode.Lax<br>SameSiteMode.Strict | SameSiteMode.None<br>SameSiteMode.Lax<br>SameSiteMode.Strict |
-| SameSiteMode.Lax      | SameSiteMode.None<br>SameSiteMode.Lax<br>SameSiteMode.Strict | SameSiteMode.Lax<br>SameSiteMode.Lax<br>SameSiteMode.Strict |
-| SameSiteMode.Strict   | SameSiteMode.None<br>SameSiteMode.Lax<br>SameSiteMode.Strict | SameSiteMode.Strict<br>SameSiteMode.Strict<br>SameSiteMode.Strict |
+| SameSiteMode. None     | SameSiteMode. None<br>SameSiteMode. swobodny<br>SameSiteMode. Strict | SameSiteMode. None<br>SameSiteMode. swobodny<br>SameSiteMode. Strict |
+| SameSiteMode. swobodny      | SameSiteMode. None<br>SameSiteMode. swobodny<br>SameSiteMode. Strict | SameSiteMode. swobodny<br>SameSiteMode. swobodny<br>SameSiteMode. Strict |
+| SameSiteMode. Strict   | SameSiteMode. None<br>SameSiteMode. swobodny<br>SameSiteMode. Strict | SameSiteMode. Strict<br>SameSiteMode. Strict<br>SameSiteMode. Strict |
 
 ## <a name="create-an-authentication-cookie"></a>Utwórz plik cookie uwierzytelniania
 
-Aby utworzyć plik cookie przechowujący informacje o użytkowniku, Utwórz <xref:System.Security.Claims.ClaimsPrincipal>. Informacje o użytkowniku są serializowane i przechowywane w pliku cookie. 
+Aby utworzyć plik cookie przechowujący informacje o użytkowniku <xref:System.Security.Claims.ClaimsPrincipal>, konstrukcja a. Informacje o użytkowniku są serializowane i przechowywane w pliku cookie. 
 
-Utwórz <xref:System.Security.Claims.ClaimsIdentity> z dowolnym wymaganym <xref:System.Security.Claims.Claim>s i Wywołaj <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignInAsync*>, aby zalogować użytkownika:
+Utwórz z <xref:System.Security.Claims.ClaimsIdentity> dowolnym wymaganym <xref:System.Security.Claims.Claim>elementem s i <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignInAsync*> Wywołaj, aby zalogować użytkownika:
 
 [!code-csharp[](cookie/samples/2.x/CookieSample/Pages/Account/Login.cshtml.cs?name=snippet1)]
 
-`SignInAsync` tworzy zaszyfrowany plik cookie i dodaje go do bieżącej odpowiedzi. Jeśli `AuthenticationScheme` nie jest określony, używany jest domyślny schemat.
+`SignInAsync`tworzy zaszyfrowany plik cookie i dodaje go do bieżącej odpowiedzi. Jeśli `AuthenticationScheme` nie jest określony, używany jest domyślny schemat.
 
 System [ochrony danych](xref:security/data-protection/using-data-protection) ASP.NET Core jest używany do szyfrowania. W przypadku aplikacji hostowanej na wielu komputerach, równoważenia obciążenia między aplikacjami lub korzystania z kolektywu serwerów sieci Web należy [skonfigurować ochronę danych](xref:security/data-protection/configuration/overview) tak, aby używała tego samego dzwonka klucza i identyfikatora aplikacji.
 
@@ -319,7 +325,7 @@ Aby wylogować bieżącego użytkownika i usunąć jego plik cookie, wywołaj <x
 
 [!code-csharp[](cookie/samples/2.x/CookieSample/Pages/Account/Login.cshtml.cs?name=snippet2)]
 
-Jeśli `CookieAuthenticationDefaults.AuthenticationScheme` (lub "cookies") nie jest używany jako schemat (na przykład "ContosoCookie"), należy podać schemat używany podczas konfigurowania dostawcy uwierzytelniania. W przeciwnym razie używany jest domyślny schemat.
+Jeśli `CookieAuthenticationDefaults.AuthenticationScheme` (lub "cookie") nie jest używany jako schemat (na przykład "ContosoCookie"), należy podać schemat używany podczas konfigurowania dostawcy uwierzytelniania. W przeciwnym razie używany jest domyślny schemat.
 
 ## <a name="react-to-back-end-changes"></a>Reagowanie na zmiany zaplecza
 
@@ -328,11 +334,11 @@ Po utworzeniu pliku cookie plik cookie jest pojedynczym źródłem tożsamości.
 * System uwierzytelniania plików cookie aplikacji kontynuuje przetwarzanie żądań na podstawie pliku cookie uwierzytelniania.
 * Użytkownik pozostaje zalogowany do aplikacji, o ile plik cookie uwierzytelniania jest prawidłowy.
 
-Zdarzenia <xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationEvents.ValidatePrincipal*> mogą służyć do przechwycenia i zastąpienia weryfikacji tożsamości pliku cookie. Sprawdzanie poprawności pliku cookie na każde żądanie zmniejsza ryzyko odwołujący się użytkowników, którzy uzyskują dostęp do aplikacji.
+<xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationEvents.ValidatePrincipal*> Zdarzenia można użyć do przechwycenia i zastąpienia weryfikacji tożsamości pliku cookie. Sprawdzanie poprawności pliku cookie na każde żądanie zmniejsza ryzyko odwołujący się użytkowników, którzy uzyskują dostęp do aplikacji.
 
-Jedno z metod weryfikacji plików cookie polega na śledzeniu zmian w bazie danych użytkownika. Jeśli baza danych nie została zmieniona od czasu wystawienia pliku cookie, nie ma potrzeby ponownego uwierzytelnienia użytkownika, jeśli plik cookie jest nadal ważny. W przykładowej aplikacji baza danych jest zaimplementowana w `IUserRepository` i przechowuje `LastChanged` wartość. Gdy użytkownik zostanie zaktualizowany w bazie danych, wartość `LastChanged` jest ustawiana na bieżącą godzinę.
+Jedno z metod weryfikacji plików cookie polega na śledzeniu zmian w bazie danych użytkownika. Jeśli baza danych nie została zmieniona od czasu wystawienia pliku cookie, nie ma potrzeby ponownego uwierzytelnienia użytkownika, jeśli plik cookie jest nadal ważny. W przykładowej aplikacji baza danych jest zaimplementowana `IUserRepository` w i przechowuje `LastChanged` wartość. Gdy użytkownik zostanie zaktualizowany w bazie danych, `LastChanged` wartość jest ustawiana na bieżącą godzinę.
 
-Aby unieważnić plik cookie, gdy baza danych zmienia się w oparciu o wartość `LastChanged`, Utwórz plik cookie z `LastChanged`m, zawierającym wartość bieżącą `LastChanged` z bazy danych:
+Aby unieważnić plik cookie, gdy baza danych zmienia się na podstawie `LastChanged` wartości, Utwórz plik cookie z `LastChanged` zastrzeżeniem zawierającym bieżącą `LastChanged` wartość z bazy danych:
 
 ```csharp
 var claims = new List<Claim>
@@ -350,13 +356,13 @@ await HttpContext.SignInAsync(
     new ClaimsPrincipal(claimsIdentity));
 ```
 
-Aby zaimplementować przesłonięcie dla zdarzenia `ValidatePrincipal`, napisz metodę o następującej sygnaturze w klasie, która pochodzi od <xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationEvents>:
+Aby zaimplementować przesłonięcie dla `ValidatePrincipal` zdarzenia, napisz metodę o następującym podpisie w klasie, która pochodzi od <xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationEvents>:
 
 ```csharp
 ValidatePrincipal(CookieValidatePrincipalContext)
 ```
 
-Poniżej przedstawiono przykładową implementację `CookieAuthenticationEvents`:
+Poniżej przedstawiono przykładową implementację programu `CookieAuthenticationEvents`:
 
 ```csharp
 using System.Linq;
@@ -395,7 +401,7 @@ public class CustomCookieAuthenticationEvents : CookieAuthenticationEvents
 }
 ```
 
-Zarejestruj wystąpienie zdarzeń podczas rejestracji usługi plików cookie w metodzie `Startup.ConfigureServices`. Podaj [rejestrację usługi w zakresie](xref:fundamentals/dependency-injection#service-lifetimes) dla swojej klasy `CustomCookieAuthenticationEvents`:
+Zarejestruj wystąpienie zdarzeń podczas rejestracji usługi plików cookie w `Startup.ConfigureServices` metodzie. Podaj [rejestrację usługi w zakresie](xref:fundamentals/dependency-injection#service-lifetimes) dla swojej `CustomCookieAuthenticationEvents` klasy:
 
 ```csharp
 services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -407,7 +413,7 @@ services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
 services.AddScoped<CustomCookieAuthenticationEvents>();
 ```
 
-Rozważ sytuację, w której nazwa użytkownika jest aktualizowana&mdash;decyzji, która nie ma wpływu na zabezpieczenia w jakikolwiek sposób. Jeśli chcesz nieszkodliwej aktualizacji podmiotu zabezpieczeń, wywołaj `context.ReplacePrincipal` i ustaw właściwość `context.ShouldRenew` na `true`.
+Rozważ sytuację, w której nazwa użytkownika jest aktualizowana&mdash;decyzją, która nie ma wpływu na zabezpieczenia w jakikolwiek sposób. Jeśli chcesz nieszkodliwej aktualizacji podmiotu zabezpieczeń, wywołaj `context.ReplacePrincipal` i ustaw `context.ShouldRenew` właściwość na. `true`
 
 > [!WARNING]
 > Opisane tutaj podejście jest wyzwalane dla każdego żądania. Sprawdzanie poprawności plików cookie uwierzytelniania dla wszystkich użytkowników w każdym żądaniu może spowodować spadek wydajności aplikacji.
@@ -418,7 +424,7 @@ Plik cookie może być trwały między sesjami przeglądarki. Tę trwałość na
 
 Poniższy fragment kodu tworzy tożsamość i odpowiadający jej plik cookie, który przeżyje przez zamknięcia przeglądarki. Wszystkie skonfigurowane wcześniej ustawienia wygasania są honorowane. Jeśli plik cookie wygaśnie, gdy przeglądarka zostanie ZAMKNIĘTA, przeglądarka czyści plik cookie po jego ponownym uruchomieniu.
 
-Ustaw <xref:Microsoft.AspNetCore.Authentication.AuthenticationProperties.IsPersistent> na `true` w <xref:Microsoft.AspNetCore.Authentication.AuthenticationProperties>:
+Ustaw <xref:Microsoft.AspNetCore.Authentication.AuthenticationProperties.IsPersistent> na `true` wartość <xref:Microsoft.AspNetCore.Authentication.AuthenticationProperties>w:
 
 ```csharp
 // using Microsoft.AspNetCore.Authentication;
@@ -434,7 +440,7 @@ await HttpContext.SignInAsync(
 
 ## <a name="absolute-cookie-expiration"></a>Bezwzględne wygaśnięcie pliku cookie
 
-Bezwzględny czas wygaśnięcia można ustawić za pomocą <xref:Microsoft.AspNetCore.Authentication.AuthenticationProperties.ExpiresUtc>. Aby utworzyć trwały plik cookie, należy również ustawić `IsPersistent`. W przeciwnym razie plik cookie jest tworzony przy użyciu okresu istnienia sesji i może wygasnąć przed lub po posiadanym przez niego biletem uwierzytelniania. Gdy `ExpiresUtc` jest ustawiona, zastępuje wartość opcji <xref:Microsoft.AspNetCore.Builder.CookieAuthenticationOptions.ExpireTimeSpan> <xref:Microsoft.AspNetCore.Builder.CookieAuthenticationOptions>, jeśli jest ustawiona.
+Bezwzględny czas wygaśnięcia można ustawić za <xref:Microsoft.AspNetCore.Authentication.AuthenticationProperties.ExpiresUtc>pomocą. Aby utworzyć trwały plik cookie `IsPersistent` , należy również ustawić opcję. W przeciwnym razie plik cookie jest tworzony przy użyciu okresu istnienia sesji i może wygasnąć przed lub po posiadanym przez niego biletem uwierzytelniania. Gdy `ExpiresUtc` jest ustawiona, zastępuje wartość <xref:Microsoft.AspNetCore.Builder.CookieAuthenticationOptions.ExpireTimeSpan> opcji <xref:Microsoft.AspNetCore.Builder.CookieAuthenticationOptions>, jeśli jest ustawiona.
 
 Poniższy fragment kodu tworzy tożsamość i odpowiedni plik cookie, który trwa przez 20 minut. Ignoruje to wszystkie ustawienia wygasania, które zostały wcześniej skonfigurowane.
 
@@ -453,7 +459,7 @@ await HttpContext.SignInAsync(
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:security/authorization/limitingidentitybyscheme>
 * <xref:security/authorization/claims>

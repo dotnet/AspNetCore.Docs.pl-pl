@@ -4,13 +4,19 @@ author: ardalis
 description: Dowiedz się, jak ASP.NET Core MVC to rozbudowana platforma służąca do tworzenia aplikacji sieci Web i interfejsów API przy użyciu wzorca projektowego modelu widoku.
 ms.author: riande
 ms.date: 02/12/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/overview
-ms.openlocfilehash: 2911399f6ed4e14345171c908c4306b9c3e33805
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: c6c7fd1d0cb7a462b3a13d5e31a50c704a00c0ef
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78658432"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775469"
 ---
 # <a name="overview-of-aspnet-core-mvc"></a>Omówienie platformy ASP.NET Core MVC
 
@@ -37,11 +43,11 @@ Model w aplikacji MVC reprezentuje stan aplikacji i wszelkie operacje logiki biz
 
 ### <a name="view-responsibilities"></a>Wyświetl obowiązki
 
-Widoki są odpowiedzialne za prezentowanie zawartości za pomocą interfejsu użytkownika. Używają one [aparatu widoku Razor](#razor-view-engine) do osadzania kodu platformy .NET w znaczniku html. W widokach powinna być minimalna logika, a jakakolwiek logika powinna odnosić się do treści prezentacji. Jeśli okaże się, że trzeba wykonać znaczną transakcję logiki w plikach widoku, aby wyświetlić dane z modelu złożonego, należy rozważyć użycie [składnika widoku](views/view-components.md), ViewModel lub szablonu widoku, aby uprościć widok.
+Widoki są odpowiedzialne za prezentowanie zawartości za pomocą interfejsu użytkownika. Używają one [ Razor aparatu widoku](#razor-view-engine) do osadzania kodu platformy .NET w znaczniku html. W widokach powinna być minimalna logika, a jakakolwiek logika powinna odnosić się do treści prezentacji. Jeśli okaże się, że trzeba wykonać znaczną transakcję logiki w plikach widoku, aby wyświetlić dane z modelu złożonego, należy rozważyć użycie [składnika widoku](views/view-components.md), ViewModel lub szablonu widoku, aby uprościć widok.
 
 ### <a name="controller-responsibilities"></a>Obowiązki kontrolera
 
-Kontrolery są składnikami, które obsługują interakcję z użytkownikiem, pracują z modelem i ostatecznie wybierają widok do renderowania. W aplikacji MVC widok służy wyłącznie do wyświetlania informacji. Za obsługę danych wprowadzanych przez użytkownika i interakcję z użytkownikiem odpowiada kontroler. We wzorcu MVC kontroler jest punktem wejścia, który jest odpowiedzialny za wybór typów modelu do pracy i widok do renderowania (w związku z czym jego nazwa określa, jak aplikacja odpowiada na daną prośbę).
+Kontrolery są składnikami, które obsługują interakcję z użytkownikiem, pracują z modelem i ostatecznie wybierają widok do renderowania. W aplikacji MVC widok wyświetla tylko informacje; kontroler obsługuje i reaguje na dane wejściowe użytkownika i interakcje. We wzorcu MVC kontroler jest punktem wejścia, który jest odpowiedzialny za wybór typów modelu do pracy i widok do renderowania (w związku z czym jego nazwa określa, jak aplikacja odpowiada na daną prośbę).
 
 > [!NOTE]
 > Kontrolery nie powinny być nadmiernie skomplikowane przez zbyt wiele obowiązków. Aby zachować logikę kontrolera przed nadmierną złożonością, wypychanie logiki biznesowej z kontrolera i do modelu domeny.
@@ -60,14 +66,14 @@ ASP.NET Core MVC oferuje oparty na wzorcach sposób tworzenia dynamicznych witry
 ASP.NET Core MVC obejmuje następujące elementy:
 
 * [Routing](#routing)
-* [Wiązanie modelu](#model-binding)
+* [Powiązanie modelu](#model-binding)
 * [Walidacja modelu](#model-validation)
-* [Iniekcja zależności](../fundamentals/dependency-injection.md)
+* [Wstrzykiwanie zależności](../fundamentals/dependency-injection.md)
 * [Filtry](#filters)
 * [Obszary](#areas)
 * [Interfejsy API sieci Web](#web-apis)
 * [Testowalności](#testability)
-* [Aparat widoku Razor](#razor-view-engine)
+* [RazorWyświetl aparat](#razor-view-engine)
 * [Widoki o jednoznacznie określonym typie](#strongly-typed-views)
 * [Pomocnicy tagów](#tag-helpers)
 * [Wyświetl składniki](#view-components)
@@ -145,7 +151,7 @@ Platforma obsługuje walidację danych żądania zarówno na kliencie, jak i na 
 
 ASP.NET Core ma wbudowaną obsługę [iniekcji zależności (di)](../fundamentals/dependency-injection.md). W ASP.NET Core MVC [Kontrolery](controllers/dependency-injection.md) mogą zażądać wymaganych usług za pomocą ich konstruktorów, umożliwiając im przestrzeganie [zasad jawnych zależności](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies).
 
-Twoja aplikacja może również używać [iniekcji zależności w plikach widoku](views/dependency-injection.md)przy użyciu dyrektywy `@inject`:
+Twoja aplikacja może również używać [iniekcji zależności w plikach widoku](views/dependency-injection.md)przy użyciu `@inject` dyrektywy:
 
 ```cshtml
 @inject SomeService ServiceName
@@ -163,7 +169,7 @@ Twoja aplikacja może również używać [iniekcji zależności w plikach widoku
 
 ### <a name="filters"></a>Filtry
 
-[Filtry](controllers/filters.md) ułatwiają deweloperom hermetyzację zagadnień związanych z zmniejszeniem, takich jak obsługa wyjątków czy autoryzacja. Filtry umożliwiają uruchamianie niestandardowej logiki sprzed i po przetworzeniu dla metod akcji i można ją skonfigurować do uruchamiania w określonych punktach w potoku wykonywania dla danego żądania. Filtry mogą być stosowane do kontrolerów lub akcji jako atrybuty (lub mogą być uruchamiane globalnie). Niektóre filtry (takie jak `Authorize`) są zawarte w strukturze. `[Authorize]` jest atrybutem używanym do tworzenia filtrów autoryzacji MVC.
+[Filtry](controllers/filters.md) ułatwiają deweloperom hermetyzację zagadnień związanych z zmniejszeniem, takich jak obsługa wyjątków czy autoryzacja. Filtry umożliwiają uruchamianie niestandardowej logiki sprzed i po przetworzeniu dla metod akcji i można ją skonfigurować do uruchamiania w określonych punktach w potoku wykonywania dla danego żądania. Filtry mogą być stosowane do kontrolerów lub akcji jako atrybuty (lub mogą być uruchamiane globalnie). W strukturze uwzględniono kilka `Authorize`filtrów (takich jak). `[Authorize]`jest atrybutem używanym do tworzenia filtrów autoryzacji MVC.
 
 ```csharp
 [Authorize]
@@ -186,9 +192,9 @@ Użyj generowania linków, aby włączyć obsługę multimediów. Łatwo Włącz
 
 Korzystanie z interfejsów i iniekcja zależności umożliwia odpowiednie rozwiązanie do testowania jednostkowego, a platforma obejmuje funkcje (takie jak TestHost i Dostawca pamięci dla Entity Framework), które umożliwiają szybkie i łatwe testowanie [integracji](xref:test/integration-tests) . Dowiedz się więcej [na temat testowania logiki kontrolera](controllers/testing.md).
 
-### <a name="razor-view-engine"></a>Aparat widoku Razor
+### <a name="razor-view-engine"></a>RazorWyświetl aparat
 
-[ASP.NET Core widoki MVC](views/overview.md) używają [aparatu widoku Razor](views/razor.md) do renderowania widoków. Razor to zwarty, wyraźny i płynny język znaczników do definiowania widoków przy użyciu C# kodu osadzonego. Razor służy do dynamicznego generowania zawartości sieci Web na serwerze. Można wyczyścić kod serwera z zawartością i kodem po stronie klienta.
+[ASP.NET Core widoki MVC](views/overview.md) wykorzystują [ Razor aparat widoku](views/razor.md) do renderowania widoków. Razorto zwarty, wyraźny i płynny język znaczników szablonów do definiowania widoków przy użyciu osadzonego kodu w języku C#. Razorsłuży do dynamicznego generowania zawartości sieci Web na serwerze. Można wyczyścić kod serwera z zawartością i kodem po stronie klienta.
 
 ```cshtml
 <ul>
@@ -198,13 +204,13 @@ Korzystanie z interfejsów i iniekcja zależności umożliwia odpowiednie rozwi�
 </ul>
 ```
 
-Korzystając z aparatu widoku Razor, można definiować [układy](views/layout.md), [częściowe widoki](views/partial.md) i przemieścić sekcje.
+Korzystając z Razor aparatu widoku, można definiować [układy](views/layout.md), [częściowe widoki](views/partial.md) i przemieścić sekcje.
 
 ### <a name="strongly-typed-views"></a>Widoki o jednoznacznie określonym typie
 
-Widoki Razor w MVC mogą być silnie wpisane na podstawie modelu. Kontrolery mogą przekazać silnie wpisany model do widoków, co umożliwia kontrolowanie typów i obsługę technologii IntelliSense.
+Razorwidoki w MVC można jednoznacznie wpisywać na podstawie modelu. Kontrolery mogą przekazać silnie wpisany model do widoków, co umożliwia kontrolowanie typów i obsługę technologii IntelliSense.
 
-Na przykład następujący widok ilustruje model typu `IEnumerable<Product>`:
+Na przykład następujący widok renderuje model typu `IEnumerable<Product>`:
 
 ```cshtml
 @model IEnumerable<Product>
@@ -218,9 +224,9 @@ Na przykład następujący widok ilustruje model typu `IEnumerable<Product>`:
 
 ### <a name="tag-helpers"></a>Pomocnicy tagów
 
-[Pomocnicy tagów](views/tag-helpers/intro.md) Włącz kod po stronie serwera, aby wziąć udział w tworzeniu i RENDEROWANIU elementów HTML w plikach Razor. Za pomocą pomocników tagów można definiować niestandardowe znaczniki (na przykład `<environment>`) lub zmodyfikować zachowanie istniejących tagów (na przykład `<label>`). Pomocnicy tagów powiążą się z określonymi elementami na podstawie nazwy elementu i jego atrybutów. Zapewniają one zalety renderowania po stronie serwera, zachowując jednocześnie środowisko edycji HTML.
+[Pomocnicy tagów](views/tag-helpers/intro.md) Włącz kod po stronie serwera, aby wziąć udział w tworzeniu i RENDEROWANIU elementów Razor HTML w plikach. Za pomocą pomocników tagów można definiować niestandardowe znaczniki (na przykład `<environment>`) lub modyfikować zachowanie istniejących tagów (na przykład `<label>`). Pomocnicy tagów powiążą się z określonymi elementami na podstawie nazwy elementu i jego atrybutów. Zapewniają one zalety renderowania po stronie serwera, zachowując jednocześnie środowisko edycji HTML.
 
-Istnieje wiele wbudowanych pomocników tagów dla typowych zadań, takich jak tworzenie formularzy, linków, ładowanie zasobów i inne — a nawet więcej dostępnych w publicznych repozytoriach GitHub i jako pakiety NuGet. Pomocnicy tagów są autorzy C#i są elementami DOCELOWYmi HTML w oparciu o nazwę elementu, nazwę atrybutu lub tag nadrzędny. Na przykład wbudowana LinkTagHelper może służyć do tworzenia linku do akcji `Login` `AccountsController`:
+Istnieje wiele wbudowanych pomocników tagów dla typowych zadań, takich jak tworzenie formularzy, linków, ładowanie zasobów i inne — a nawet więcej dostępnych w publicznych repozytoriach GitHub i jako pakiety NuGet. Pomocnicy tagów są twórcy w języku C# i są elementami docelowymi elementów HTML w oparciu o nazwę elementu, nazwę atrybutu lub tag nadrzędny. Na przykład wbudowana LinkTagHelper może służyć do tworzenia linku do `Login` akcji: `AccountsController`
 
 ```cshtml
 <p>
@@ -229,7 +235,7 @@ Istnieje wiele wbudowanych pomocników tagów dla typowych zadań, takich jak tw
 </p>
 ```
 
-`EnvironmentTagHelper` może służyć do uwzględnienia różnych skryptów w widokach (na przykład Raw lub zminimalizowanego) w oparciu o środowisko uruchomieniowe, takie jak programowanie, przemieszczanie lub produkcja:
+`EnvironmentTagHelper` Może służyć do uwzględnienia różnych skryptów w widokach (na przykład Raw lub zminimalizowanego) w oparciu o środowisko uruchomieniowe, takie jak programowanie, przemieszczanie lub produkcja:
 
 ```cshtml
 <environment names="Development">
@@ -243,7 +249,7 @@ Istnieje wiele wbudowanych pomocników tagów dla typowych zadań, takich jak tw
 </environment>
 ```
 
-Pomocnicy tagów zapewniają przyjazne dla języka HTML środowisko programistyczne i zaawansowane środowisko IntelliSense do tworzenia znaczników HTML i Razor. Większość wbudowanych pomocników tagów docelowo istniejące elementy HTML i udostępniają atrybuty po stronie serwera dla elementu.
+Pomocnicy tagów zapewniają przyjazne dla języka HTML środowisko programistyczne i zaawansowane środowisko IntelliSense do tworzenia kodu HTML Razor i znaczników. Większość wbudowanych pomocników tagów docelowo istniejące elementy HTML i udostępniają atrybuty po stronie serwera dla elementu.
 
 ### <a name="view-components"></a>Wyświetl składniki
 
@@ -251,11 +257,11 @@ Pomocnicy tagów zapewniają przyjazne dla języka HTML środowisko programistyc
 
 ## <a name="compatibility-version"></a>Wersja zgodności
 
-Metoda <xref:Microsoft.Extensions.DependencyInjection.MvcCoreMvcBuilderExtensions.SetCompatibilityVersion*> pozwala aplikacji na zgodę lub rezygnację z ewentualnych zmian w zachowaniu, które wprowadzono w ASP.NET Core MVC 2,1 lub nowszych.
+<xref:Microsoft.Extensions.DependencyInjection.MvcCoreMvcBuilderExtensions.SetCompatibilityVersion*> Metoda pozwala aplikacji na zgodę lub rezygnację z ewentualnych zmian w zachowaniu, wprowadzonych w ASP.NET Core MVC 2,1 lub nowszych.
 
 Aby uzyskać więcej informacji, zobacz <xref:mvc/compatibility-version>.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
-* [Przetestowana Biblioteka testowania AspNetCore. MVC-Fluent dla ASP.NET Core Mvc](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc) &ndash; Biblioteka testów jednostkowych z silną typem, zapewniająca interfejs Fluent do testowania aplikacji MVC i Web API. (*Niekonserwowane lub obsługiwane przez firmę Microsoft).*
+* [AspNetCore. MVC-Fluent — Biblioteka testów dla ASP.NET Core MVC](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc) &ndash; z silnie wpisanąmi bibliotekami testów jednostkowych, zapewniając interfejs Fluent do testowania aplikacji MVC i Web API. (*Niekonserwowane lub obsługiwane przez firmę Microsoft).*
 * <xref:blazor/integrate-components>

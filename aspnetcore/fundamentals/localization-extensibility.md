@@ -1,51 +1,57 @@
 ---
 title: Rozszerzalność lokalizacji
 author: hishamco
-description: Dowiedz się, jak rozszerzyć interfejsy API lokalizacji w aplikacjach ASP.NET Core.
+description: Dowiedz się, jak rozłożyć interfejsy API lokalizacji w aplikacjach ASP.NET Core.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 08/03/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: fundamentals/localization-extensibility
-ms.openlocfilehash: dfa2efe78b2e1e118e6b3f09bfc41f3330e1d721
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 152146992f1ea3cace14a2e702762af942a6c289
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78662100"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774343"
 ---
 # <a name="localization-extensibility"></a>Rozszerzalność lokalizacji
 
-Przez [Hisham Bin Ateya](https://github.com/hishamco)
+Według [Hisham bin Ateya](https://github.com/hishamco)
 
 W tym artykule:
 
 * Wyświetla listę punktów rozszerzalności w interfejsach API lokalizacji.
-* Zawiera instrukcje dotyczące rozszerzania lokalizacji aplikacji ASP.NET Core.
+* Zawiera instrukcje dotyczące sposobu rozbudowania lokalizacji aplikacji ASP.NET Core.
 
 ## <a name="extensible-points-in-localization-apis"></a>Rozszerzalne punkty w interfejsach API lokalizacji
 
-ASP.NET interfejsy API lokalizacji podstawowej są tworzone tak, aby były rozszerzalne. Rozszerzalność umożliwia deweloperom dostosowanie lokalizacji zgodnie z ich potrzebami. Na [przykład, OrchardCore](https://github.com/orchardCMS/OrchardCore/) ma `POStringLocalizer`. `POStringLocalizer`opisuje szczegółowo przy użyciu lokalizacji `PO` obiektu [przenośnego](xref:fundamentals/portable-object-localization) do przechowywania zasobów lokalizacji za pomocą plików.
+Interfejsy API lokalizacji ASP.NET Core są kompilowane do rozszerzalności. Rozszerzalność umożliwia deweloperom dostosowanie lokalizacji zgodnie z ich potrzebami. Na przykład [OrchardCore](https://github.com/orchardCMS/OrchardCore/) ma `POStringLocalizer`. `POStringLocalizer`szczegółowo opisano przy użyciu [lokalizacji obiektów przenośnych](xref:fundamentals/portable-object-localization) do `PO` przechowywania zasobów lokalizacji.
 
-W tym artykule wymieniono dwa główne punkty rozszerzalności, które zapewniają interfejsy API lokalizacji: 
+W tym artykule wymieniono dwa główne punkty rozszerzalności zapewniane przez interfejsy API lokalizacji: 
 
 * <xref:Microsoft.AspNetCore.Localization.RequestCultureProvider>
 * <xref:Microsoft.Extensions.Localization.IStringLocalizer>
 
 ## <a name="localization-culture-providers"></a>Dostawcy kultury lokalizacji
 
-ASP.NET podstawowe interfejsy API lokalizacji mają czterech domyślnych dostawców, którzy mogą określić bieżącą kulturę żądania wykonywania:
+Interfejsy API lokalizacji ASP.NET Core mają czterech dostawców domyślnych, którzy mogą określić bieżącą kulturę żądania wykonania:
 
 * <xref:Microsoft.AspNetCore.Localization.QueryStringRequestCultureProvider>
 * <xref:Microsoft.AspNetCore.Localization.CookieRequestCultureProvider>
 * <xref:Microsoft.AspNetCore.Localization.AcceptLanguageHeaderRequestCultureProvider>
 * <xref:Microsoft.AspNetCore.Localization.CustomRequestCultureProvider>
 
-Poprzedni dostawcy są szczegółowo opisane w dokumentacji [oprogramowania pośredniczącego lokalizacji.](xref:fundamentals/localization) Jeśli dostawcy domyślni nie spełniają Twoich potrzeb, stwórz niestandardowego dostawcę przy użyciu jednego z następujących metod:
+Poprzedni dostawcy są szczegółowo opisane w dokumentacji [oprogramowania pośredniczącego](xref:fundamentals/localization) . Jeśli dostawcy domyślnie nie spełnią Twoich potrzeb, należy utworzyć niestandardowego dostawcę przy użyciu jednej z następujących metod:
 
-### <a name="use-customrequestcultureprovider"></a>Użyj programu CustomRequestCultureProvider
+### <a name="use-customrequestcultureprovider"></a>Użyj CustomRequestCultureProvider
 
-<xref:Microsoft.AspNetCore.Localization.CustomRequestCultureProvider>zawiera niestandardowe, <xref:Microsoft.AspNetCore.Localization.RequestCultureProvider> które używa prostego delegata do określenia bieżącej kultury lokalizacji:
+<xref:Microsoft.AspNetCore.Localization.CustomRequestCultureProvider>zapewnia niestandardowy <xref:Microsoft.AspNetCore.Localization.RequestCultureProvider> , który używa prostego delegata do określenia bieżącej kultury lokalizacji:
 
 ::: moniker range="< aspnetcore-3.0"
 ```csharp
@@ -89,11 +95,11 @@ options.AddInitialRequestCultureProvider(new CustomRequestCultureProvider(async 
 
 ::: moniker-end
 
-### <a name="use-a-new-implemetation-of-requestcultureprovider"></a>Użyj nowego implemetation RequestCultureProvider
+### <a name="use-a-new-implemetation-of-requestcultureprovider"></a>Użyj nowego Jawna implementacja RequestCultureProvider
 
-Można utworzyć <xref:Microsoft.AspNetCore.Localization.RequestCultureProvider> nową implementację, która określa informacje o kulturze żądania z niestandardowego źródła. Na przykład źródłem niestandardowym może być plik konfiguracyjny lub baza danych.
+<xref:Microsoft.AspNetCore.Localization.RequestCultureProvider> Można utworzyć nową implementację, która określa informacje o kulturze żądania ze źródła niestandardowego. Na przykład źródło niestandardowe może być plikiem konfiguracji lub bazą danych.
 
-Poniższy przykład `AppSettingsRequestCultureProvider`pokazuje , <xref:Microsoft.AspNetCore.Localization.RequestCultureProvider> który rozszerza, aby określić informacje o kulturze żądania z *appsettings.json:*
+Poniższy przykład pokazuje `AppSettingsRequestCultureProvider`, który rozszerza, <xref:Microsoft.AspNetCore.Localization.RequestCultureProvider> aby określić informacje o kulturze żądań z pliku *appSettings. JSON*:
 
 ```csharp
 public class AppSettingsRequestCultureProvider : RequestCultureProvider
@@ -135,14 +141,14 @@ public class AppSettingsRequestCultureProvider : RequestCultureProvider
 }
 ```
 
-## <a name="localization-resources"></a>Zasoby lokalizacyjne
+## <a name="localization-resources"></a>Zasoby lokalizacji
 
-ASP.NET Zapewnia lokalizacja rdzenia <xref:Microsoft.Extensions.Localization.ResourceManagerStringLocalizer>. <xref:Microsoft.Extensions.Localization.ResourceManagerStringLocalizer>jest implementacją, <xref:Microsoft.Extensions.Localization.IStringLocalizer> która `resx` jest używana do przechowywania zasobów lokalizacji.
+Zapewnia <xref:Microsoft.Extensions.Localization.ResourceManagerStringLocalizer>ASP.NET Core lokalizacji. <xref:Microsoft.Extensions.Localization.ResourceManagerStringLocalizer>jest implementacją programu <xref:Microsoft.Extensions.Localization.IStringLocalizer> , która jest `resx` stosowana do przechowywania zasobów lokalizacji.
 
-Nie ograniczasz się `resx` do używania plików. Implementując `IStringLocalized`, można użyć dowolnego źródła danych.
+Nie można używać `resx` plików. Implementując `IStringLocalized`, można użyć dowolnego źródła danych.
 
-Poniższe przykładowe <xref:Microsoft.Extensions.Localization.IStringLocalizer>projekty implementują: 
+Następujące przykładowe projekty implementują <xref:Microsoft.Extensions.Localization.IStringLocalizer>: 
 
 * [EFStringLocalizer](https://github.com/aspnet/Entropy/tree/master/samples/Localization.EntityFramework)
 * [JsonStringLocalizer](https://github.com/hishamco/My.Extensions.Localization.Json)
-* [SqlLocalizer](https://github.com/damienbod/AspNetCoreLocalization)
+* [Sqllokalizowaer](https://github.com/damienbod/AspNetCoreLocalization)

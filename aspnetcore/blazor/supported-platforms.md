@@ -1,25 +1,28 @@
 ---
-title: Obsługiwane platformy ASP.NET Blazor Core
+title: ASP.NET Core Blazor obsługiwane platformy
 author: guardrex
-description: Dowiedz się więcej o obsługiwanych Blazorplatformach dla ASP.NET Core .
+description: Dowiedz się więcej na temat obsługiwanych Blazorplatform dla ASP.NET Core.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 12/18/2019
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/supported-platforms
-ms.openlocfilehash: 505974280b5c96ec2bcae42c6e076ab67a15bb07
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 1c78803e6468f924bf8c8e9403a34565b114006f
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78658859"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82771119"
 ---
-# <a name="aspnet-core-blazor-supported-platforms"></a>obsługiwane przez ASP.NET Core Blazor platformy
+# <a name="aspnet-core-blazor-supported-platforms"></a>Obsługiwane platformy ASP.NET Core Blazor
 
-Przez [Luke Latham](https://github.com/guardrex)
+Autor [Luke Latham](https://github.com/guardrex)
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
@@ -33,9 +36,9 @@ Przez [Luke Latham](https://github.com/guardrex)
 | Mozilla Firefox                  | Current               |
 | Google Chrome, w tym Android | Current               |
 | Safari, w tym iOS            | Current               |
-| Microsoft Internet Explorer      | Nie obsługiwane&dagger; |
+| Microsoft Internet Explorer      | Nieobsługiwane&dagger; |
 
-&dagger;Program Microsoft Internet Explorer nie obsługuje programu [WebAssembly](https://webassembly.org).
+&dagger;Program Microsoft Internet Explorer nie obsługuje [zestawu webassembly](https://webassembly.org).
 
 ### <a name="blazor-server"></a>Serwer Blazor
 
@@ -47,7 +50,7 @@ Przez [Luke Latham](https://github.com/guardrex)
 | Safari, w tym iOS            | Current    |
 | Microsoft Internet Explorer      | 11&dagger; |
 
-&dagger;Wymagane są dodatkowe polifilly (na przykład obietnice można dodawać za pośrednictwem [pakietu Polyfill.io).](https://polyfill.io/v3/)
+&dagger;Wymagane są dodatkowe wypełnienie (na przykład niesie obietnice zwiększenia można dodać za pośrednictwem pakietu [polyfill.IO](https://polyfill.io/v3/) ).
 
 ## <a name="additional-resources"></a>Zasoby dodatkowe
 

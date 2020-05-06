@@ -8,14 +8,17 @@ ms.custom: mvc
 ms.date: 05/02/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/get-started
-ms.openlocfilehash: 6cf1de6e68d04505ce4ba5d18f2a7d0bbe5be333
-ms.sourcegitcommit: c19e388c83c981232e6f128d97440262adfe06e2
+ms.openlocfilehash: 052a787fbe6411dbaa953f10fcd982dfbd41f1af
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/02/2020
-ms.locfileid: "82727654"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82769458"
 ---
 # <a name="get-started-with-aspnet-core-blazor"></a>Wprowadzenie do ASP.NET Core Blazor
 

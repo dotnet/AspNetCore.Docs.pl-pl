@@ -8,14 +8,17 @@ ms.custom: mvc
 ms.date: 04/30/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: tutorials/signalr-blazor-webassembly
-ms.openlocfilehash: e86047c9a830cd3ea906d0798f61d90eaee5a18c
-ms.sourcegitcommit: 6318d2bdd63116e178c34492a904be85ec9ac108
+ms.openlocfilehash: 1579b92dbc9db08bfdc5572e5d4245bd18d50590
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82604834"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82773791"
 ---
 # <a name="use-aspnet-core-signalr-with-blazor-webassembly"></a>Korzystanie z ASP.NET Core sygnalizującego z zestawem webassembly Blazor
 
@@ -268,7 +271,7 @@ W niniejszym samouczku zawarto informacje na temat wykonywania następujących c
 > * Dodawanie biblioteki SignalR klienta
 > * Dodawanie SignalR centrum
 > * Dodaj SignalR usługi i punkt końcowy SignalR centrum
-> * Dodawanie kodu składnika Razor dla rozmowy
+> * Dodawanie Razor kodu składnika dla rozmowy
 
 Aby dowiedzieć się więcej Blazor na temat tworzenia aplikacji Blazor , zapoznaj się z dokumentacją:
 

@@ -8,16 +8,19 @@ ms.custom: mvc
 ms.date: 04/23/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/handle-errors
-ms.openlocfilehash: 63bb791958785fa9a4a676f1aab79126c6873068
-ms.sourcegitcommit: 7bb14d005155a5044c7902a08694ee8ccb20c113
+ms.openlocfilehash: 7eefc988da275c0efccd97958d04e76f04e7cad4
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82111048"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82772116"
 ---
-# <a name="handle-errors-in-aspnet-core-opno-locblazor-apps"></a>Obsługa błędów w aplikacjach Blazor ASP.NET Core
+# <a name="handle-errors-in-aspnet-core-blazor-apps"></a>Obsługa błędów w aplikacjach Blazor ASP.NET Core
 
 [Steve Sanderson](https://github.com/SteveSandersonMS)
 
@@ -80,7 +83,7 @@ W aplikacji Blazor serwera Dostosuj środowisko w pliku *pages/_Host. cshtml* :
 }
 ```
 
-## <a name="how-a-opno-locblazor-server-app-reacts-to-unhandled-exceptions"></a>Jak aplikacja Blazor serwera reaguje na Nieobsłużone wyjątki
+## <a name="how-a-blazor-server-app-reacts-to-unhandled-exceptions"></a>Jak aplikacja Blazor serwera reaguje na Nieobsłużone wyjątki
 
 BlazorSerwer jest strukturą stanową. Gdy użytkownicy współpracują z aplikacją, utrzymują połączenie z serwerem znanym jako *obwód*. Obwód zawiera aktywne wystąpienia składnika, a także wiele innych aspektów stanu, takich jak:
 
@@ -216,7 +219,7 @@ Aby uzyskać więcej informacji zobacz następujące artykuły:
 * <xref:blazor/call-javascript-from-dotnet>
 * <xref:blazor/call-dotnet-from-javascript>
 
-### <a name="opno-locblazor-server-prerendering"></a>BlazorRenderowanie na serwerze
+### <a name="blazor-server-prerendering"></a>BlazorRenderowanie na serwerze
 
 Blazorskładniki mogą być wstępnie renderowane przy użyciu [pomocnika tagów składnika](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper) , dzięki czemu RENDEROWANE znaczniki HTML są zwracane jako część początkowego żądania HTTP użytkownika. Działa to w następujący sposób:
 

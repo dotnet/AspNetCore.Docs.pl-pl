@@ -528,7 +528,7 @@ Upewnij się, że aplikacja działa z następującymi krokami.
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:signalr/javascript-client>
 * <xref:signalr/hubs>

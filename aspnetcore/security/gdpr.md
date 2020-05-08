@@ -151,7 +151,7 @@ W przypadku baz danych, które nie zapewniają wbudowanego szyfrowania w spoczyn
   * [eCryptfs](https://launchpad.net/ecryptfs)
   * [EncFs](https://github.com/vgough/encfs).
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Microsoft.com/GDPR](https://www.microsoft.com/trustcenter/Privacy/GDPR)
 * [Rodo — Dodawanie przycisku odwołaj zgodę w ASP.NET Core](https://www.joeaudette.com/blog/2018/08/28/gdpr---adding-a-revoke-consent-button-in-aspnet-core)

@@ -665,6 +665,8 @@
       uid: test/razor-pages-tests
     - name: Kontrolery testów
       uid: mvc/controllers/testing
+    - name: Testowanie oprogramowania pośredniczącego
+      uid: test/middleware
     - name: Debugowanie zdalne
       href: /visualstudio/debugger/remote-debugging-azure
     - name: Debugowanie migawek

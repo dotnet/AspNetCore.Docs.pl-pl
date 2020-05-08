@@ -80,7 +80,7 @@ Przykład zawiera następujące programy obsługi autoryzacji:
 Ten samouczek jest zaawansowany. Należy zapoznać się z:
 
 * [ASP.NET Core](xref:tutorials/first-mvc-app/start-mvc)
-* [Uwierzytelnianie](xref:security/authentication/identity)
+* [Authentication](xref:security/authentication/identity)
 * [Potwierdzenie konta i odzyskiwanie hasła](xref:security/authentication/accconfirm)
 * [Autoryzacja](xref:security/authorization/introduction)
 * [Entity Framework Core](xref:data/ef-mvc/intro)
@@ -416,7 +416,7 @@ Przykład zawiera następujące programy obsługi autoryzacji:
 Ten samouczek jest zaawansowany. Należy zapoznać się z:
 
 * [ASP.NET Core](xref:tutorials/first-mvc-app/start-mvc)
-* [Uwierzytelnianie](xref:security/authentication/identity)
+* [Authentication](xref:security/authentication/identity)
 * [Potwierdzenie konta i odzyskiwanie hasła](xref:security/authentication/accconfirm)
 * [Autoryzacja](xref:security/authorization/introduction)
 * [Entity Framework Core](xref:data/ef-mvc/intro)
@@ -696,7 +696,7 @@ Sprawdź, czy aplikacja wykorzystana z bazy danych. Jeśli w bazie danych kontak
 
 <a name="secure-data-add-resources-label"></a>
 
-### <a name="additional-resources"></a>Zasoby dodatkowe
+### <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Tworzenie aplikacji internetowej platformy .NET Core i usługi SQL Database w usłudze Azure App Service](/azure/app-service/app-service-web-tutorial-dotnetcore-sqldb)
 * [ASP.NET Core laboratorium autoryzacji](https://github.com/blowdart/AspNetAuthorizationWorkshop). To laboratorium prowadzi do bardziej szczegółowych informacji na temat funkcji zabezpieczeń wprowadzonych w tym samouczku.

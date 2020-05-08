@@ -2,14 +2,14 @@
 npm run release
 ```
 
-To polecenie generuje zasoby po stronie klienta, które mają być obsługiwane podczas uruchamiania aplikacji. Zasoby są umieszczane w folderze *wwwroot.*
+To polecenie generuje zasoby po stronie klienta, które mają być obsługiwane podczas uruchamiania aplikacji. Elementy zawartości są umieszczane w folderze *wwwroot* .
 
-Pakiet Webpack wykonał następujące zadania:
+Pakiet WebPack ukończył następujące zadania:
 
-* Przeczyszczona zawartość katalogu *wwwroot.*
-* Przekonwertowano kod maszynowy na język JavaScript w procesie zwanym *transpilacją*.
-* Zniekształcony wygenerowany JavaScript, aby zmniejszyć rozmiar pliku w procesie znanym jako *minyfikacja*.
-* Skopiowano przetworzone pliki JavaScript, CSS i HTML z *src* do katalogu *wwwroot.*
-* Wstrzykuje się następujące elementy do pliku *wwwroot/index.html:*
-  * Tag, `<link>` odwołujący się do *wwwroot/main.\< hash\>.css.* Ten tag jest umieszczany `</head>` bezpośrednio przed tagiem zamykającym.
-  * Tag, `<script>` odwołujący się do zmętnionego *wwwroot/main.\< hash\>.js.* Ten tag jest umieszczany `</body>` bezpośrednio przed tagiem zamykającym.
+* Przeczyszczanie zawartości katalogu *wwwroot* .
+* Przekonwertowane TypeScript na JavaScript w procesie znanym jako *transpilation*.
+* Zniekształcona wygenerowany kod JavaScript, aby zmniejszyć rozmiar pliku w procesie znanym jako *minifikacja*.
+* Skopiowano przetworzone pliki JavaScript, CSS i HTML z pliku *src* do katalogu *wwwroot* .
+* Do pliku *wwwroot/index.html* zostały dodane następujące elementy:
+  * Tag `<link>` , który odwołuje się do elementu *wwwroot\< /Main. hash\>. css* , plik. Ten tag jest umieszczany bezpośrednio przed tagiem `</head>` zamykającym.
+  * Tag `<script>` , który odwołuje się do zminimalizowanego *wwwroot/\< Main. plik\>hash. js* . Ten tag jest umieszczany bezpośrednio przed tagiem `</body>` zamykającym.

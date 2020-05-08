@@ -1,1 +1,1 @@
-Ten samouczek uczy ASP.NET core mvc web rozwoju z kontrolerów i widoków. Jeśli dopiero zaczynasz ASP.NET core web development, rozważ wersję [razor Pages](xref:tutorials/razor-pages/razor-pages-start) tego samouczka, która zapewnia łatwiejszy punkt wyjścia.
+Ten samouczek uczy się ASP.NET Core tworzenia aplikacji sieci Web MVC z kontrolerami i widokami. Jeśli dopiero zaczynasz pracę z ASP.NET Core programowaniem w sieci Web, weź pod uwagę wersję [Razor Pages](xref:tutorials/razor-pages/razor-pages-start) tego samouczka, która zapewnia łatwiejszy punkt startowy.

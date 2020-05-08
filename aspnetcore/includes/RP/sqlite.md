@@ -1,9 +1,9 @@
 ## <a name="sqlite"></a>SQLite
 
-Strona [SQLite](https://www.sqlite.org/) stwierdza:
+Stan witryny sieci Web programu [SQLite](https://www.sqlite.org/) :
 
-> SQLite to samodzielny, niezawodny, osadzony, w pełni funkcjonalny, publiczny aparat bazy danych SQL. SQLite jest najczęściej używanym silnikiem baz danych na świecie.
+> Oprogramowanie SQLite to samodzielna, osadzona, w pełni funkcjonalna, publiczna i ogólnie oparta na usłudze SQL Database aparat. SQLite to najbardziej używany aparat bazy danych na całym świecie.
 
-Istnieje wiele narzędzi innych firm, które można pobrać, aby zarządzać i przeglądać bazę danych SQLite. Obrazek poniżej jest z [DB Browser dla SQLite](https://sqlitebrowser.org/). Jeśli masz ulubione narzędzie SQLite, zostaw komentarz na temat tego, co lubisz.
+Istnieje wiele narzędzi innych firm, które można pobrać, aby zarządzać bazą danych programu SQLite i ją przeglądać. Poniższy obraz pochodzi z [przeglądarki DB dla oprogramowania SQLite](https://sqlitebrowser.org/). Jeśli masz ulubione narzędzie SQLite, pozostaw komentarz na temat tego, co Ci się podoba.
 
-![DB Browser for SQLite pokazuje film db](~/tutorials/first-mvc-app-xplat/working-with-sql/_static/dbb.png)
+![Przeglądarka bazy danych dla oprogramowania SQLite przedstawiająca film](~/tutorials/first-mvc-app-xplat/working-with-sql/_static/dbb.png)

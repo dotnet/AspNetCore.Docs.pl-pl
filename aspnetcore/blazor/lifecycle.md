@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/lifecycle
-ms.openlocfilehash: 87c65776684f9cc91b868b8e88926e46b25592ff
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 571f14247efe08ac6abbd6d1e2720656f94c213c
+ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82771523"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82967457"
 ---
 # <a name="aspnet-core-blazor-lifecycle"></a>ASP.NET Core Blazor cykl życia
 
@@ -30,7 +30,7 @@ Blazor Platforma obejmuje metody cyklu życia synchronicznego i asynchronicznego
 
 ### <a name="component-initialization-methods"></a>Metody inicjujące składniki
 
-<xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync*>i <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitialized*> są wywoływane, gdy składnik zostanie zainicjowany po odebraniu początkowych parametrów z jego składnika nadrzędnego. Użyj `OnInitializedAsync` , gdy składnik wykonuje operację asynchroniczną i powinien być odświeżany po zakończeniu operacji.
+<xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>i <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitialized%2A> są wywoływane, gdy składnik zostanie zainicjowany po odebraniu początkowych parametrów z jego składnika nadrzędnego. Użyj `OnInitializedAsync` , gdy składnik wykonuje operację asynchroniczną i powinien być odświeżany po zakończeniu operacji.
 
 W przypadku operacji synchronicznej Przesłoń `OnInitialized`:
 
@@ -63,7 +63,7 @@ W przypadku skonfigurowania dowolnych programów obsługi zdarzeń odłączanie 
 
 ### <a name="before-parameters-are-set"></a>Przed ustawieniem parametrów
 
-<xref:Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync*>Ustawia parametry dostarczone przez element nadrzędny składnika w drzewie renderowania:
+<xref:Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync%2A>Ustawia parametry dostarczone przez element nadrzędny składnika w drzewie renderowania:
 
 ```csharp
 public override async Task SetParametersAsync(ParameterView parameters)
@@ -84,7 +84,7 @@ W przypadku skonfigurowania dowolnych programów obsługi zdarzeń odłączanie 
 
 ### <a name="after-parameters-are-set"></a>Po ustawieniu parametrów
 
-<xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync*>i <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSet*> są wywoływane:
+<xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync%2A>i <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSet%2A> są wywoływane:
 
 * Gdy składnik jest zainicjowany i odebrał swój pierwszy zestaw parametrów z jego składnika nadrzędnego.
 * Po ponownym wyrenderowaniu i zaopatrzeniu składnika nadrzędnego:
@@ -112,7 +112,7 @@ W przypadku skonfigurowania dowolnych programów obsługi zdarzeń odłączanie 
 
 ### <a name="after-component-render"></a>Po renderowania składników
 
-<xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRenderAsync*>i <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender*> są wywoływane po zakończeniu renderowania składnika. Odwołania do elementów i składników są wypełniane w tym momencie. Ten etap służy do wykonywania dodatkowych kroków inicjowania przy użyciu renderowanej zawartości, takiej jak aktywacja bibliotek języka JavaScript innych firm, które działają na renderowanych elementach DOM.
+<xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRenderAsync%2A>i <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A> są wywoływane po zakończeniu renderowania składnika. Odwołania do elementów i składników są wypełniane w tym momencie. Ten etap służy do wykonywania dodatkowych kroków inicjowania przy użyciu renderowanej zawartości, takiej jak aktywacja bibliotek języka JavaScript innych firm, które działają na renderowanych elementach DOM.
 
 `firstRender` Parametr dla `OnAfterRenderAsync` i `OnAfterRender`:
 
@@ -150,7 +150,7 @@ W przypadku skonfigurowania dowolnych programów obsługi zdarzeń odłączanie 
 
 ### <a name="suppress-ui-refreshing"></a>Pomiń odświeżanie interfejsu użytkownika
 
-Przesłoń <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender*> , aby pominąć odświeżanie interfejsu użytkownika. Jeśli implementacja zwraca `true`, interfejs użytkownika zostanie odświeżony:
+Przesłoń <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> , aby pominąć odświeżanie interfejsu użytkownika. Jeśli implementacja zwraca `true`, interfejs użytkownika zostanie odświeżony:
 
 ```csharp
 protected override bool ShouldRender()
@@ -167,7 +167,7 @@ Nawet jeśli `ShouldRender` jest zastępowany, składnik jest zawsze początkowo
 
 ## <a name="state-changes"></a>Zmiany stanu
 
-<xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged*>powiadamia składnik o zmianie stanu. Jeśli ma to zastosowanie `StateHasChanged` , wywołanie powoduje, że składnik jest renderowany.
+<xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A>powiadamia składnik o zmianie stanu. Jeśli ma to zastosowanie `StateHasChanged` , wywołanie powoduje, że składnik jest renderowany.
 
 ## <a name="handle-incomplete-async-actions-at-render"></a>Obsługuj niekompletne akcje asynchroniczne podczas renderowania
 
@@ -198,7 +198,7 @@ W przypadku zaimplementowania <xref:System.IDisposable>składnika [Metoda Dispos
 ```
 
 > [!NOTE]
-> <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged*> Wywoływanie `Dispose` metody nie jest obsługiwane. `StateHasChanged`może być wywoływana w ramach rozrywania modułu renderowania, dlatego żądanie aktualizacji interfejsu użytkownika nie jest obsługiwane.
+> <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> Wywoływanie `Dispose` metody nie jest obsługiwane. `StateHasChanged`może być wywoływana w ramach rozrywania modułu renderowania, dlatego żądanie aktualizacji interfejsu użytkownika nie jest obsługiwane.
 
 Procedury obsługi zdarzeń anulowania subskrypcji z zdarzeń platformy .NET. Poniższe [ Blazor przykłady formularzy](xref:blazor/forms-validation) pokazują, jak odpiąć procedurę obsługi zdarzeń w `Dispose` metodzie:
 
@@ -234,7 +234,7 @@ Poniższy kod ilustruje aktualizację `WeatherForecastService` w aplikacji serwe
 ```csharp
 public class WeatherForecastService
 {
-    private static readonly string[] _summaries = new[]
+    private static readonly string[] summaries = new[]
     {
         "Freezing", "Bracing", "Chilly", "Cool", "Mild",
         "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
@@ -265,7 +265,7 @@ public class WeatherForecastService
             {
                 Date = startDate.AddDays(index),
                 TemperatureC = rng.Next(-20, 55),
-                Summary = _summaries[rng.Next(_summaries.Length)]
+                Summary = summaries[rng.Next(summaries.Length)]
             }).ToArray();
         });
     }

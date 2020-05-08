@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-dotnet-from-javascript
-ms.openlocfilehash: 1bc75f0825b114a24def287bb7ccb11c27514f01
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 9eab35f3fd856debf9f0305aedf012d63b9b800a
+ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82767190"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82967327"
 ---
 # <a name="call-net-methods-from-javascript-functions-in-aspnet-core-blazor"></a>Wywoływanie metod .NET z funkcji języka JavaScript w ASP.NET CoreBlazor
 
@@ -154,26 +154,26 @@ Aby uniknąć przecieków pamięci i zezwolić na wyrzucanie elementów bezużyt
   ```csharp
   public class ExampleJsInterop : IDisposable
   {
-      private readonly IJSRuntime _jsRuntime;
-      private DotNetObjectReference<HelloHelper> _objRef;
+      private readonly IJSRuntime jsRuntime;
+      private DotNetObjectReference<HelloHelper> objRef;
 
       public ExampleJsInterop(IJSRuntime jsRuntime)
       {
-          _jsRuntime = jsRuntime;
+          this.jsRuntime = jsRuntime;
       }
 
       public ValueTask<string> CallHelloHelperSayHello(string name)
       {
-          _objRef = DotNetObjectReference.Create(new HelloHelper(name));
+          objRef = DotNetObjectReference.Create(new HelloHelper(name));
 
-          return _jsRuntime.InvokeAsync<string>(
+          return jsRuntime.InvokeAsync<string>(
               "exampleJsFunctions.sayHello",
-              _objRef);
+              objRef);
       }
 
       public void Dispose()
       {
-          _objRef?.Dispose();
+          objRef?.Dispose();
       }
   }
   ```
@@ -193,20 +193,20 @@ Aby uniknąć przecieków pamięci i zezwolić na wyrzucanie elementów bezużyt
   </button>
 
   @code {
-      private DotNetObjectReference<HelloHelper> _objRef;
+      private DotNetObjectReference<HelloHelper> objRef;
 
       public async Task TriggerNetInstanceMethod()
       {
-          _objRef = DotNetObjectReference.Create(new HelloHelper("Blazor"));
+          objRef = DotNetObjectReference.Create(new HelloHelper("Blazor"));
 
           await JSRuntime.InvokeAsync<string>(
               "exampleJsFunctions.sayHello",
-              _objRef);
+              objRef);
       }
 
       public void Dispose()
       {
-          _objRef?.Dispose();
+          objRef?.Dispose();
       }
   }
   ```
@@ -241,7 +241,7 @@ function updateMessageCallerJS() {
 @page "/JSInteropComponent"
 
 <p>
-    Message: @_message
+    Message: @message
 </p>
 
 <p>
@@ -249,24 +249,24 @@ function updateMessageCallerJS() {
 </p>
 
 @code {
-    private static Action _action;
-    private string _message = "Select the button.";
+    private static Action action;
+    private string message = "Select the button.";
 
     protected override void OnInitialized()
     {
-        _action = UpdateMessage;
+        action = UpdateMessage;
     }
 
     private void UpdateMessage()
     {
-        _message = "UpdateMessage Called!";
+        message = "UpdateMessage Called!";
         StateHasChanged();
     }
 
     [JSInvokable]
     public static void UpdateMessageCaller()
     {
-        _action.Invoke();
+        action.Invoke();
     }
 }
 ```
@@ -287,17 +287,17 @@ using Microsoft.JSInterop;
 
 public class MessageUpdateInvokeHelper
 {
-    private Action _action;
+    private Action action;
 
     public MessageUpdateInvokeHelper(Action action)
     {
-        _action = action;
+        action = action;
     }
 
     [JSInvokable("BlazorSample")]
     public void UpdateMessageCaller()
     {
-        _action.Invoke();
+        action.Invoke();
     }
 }
 ```
@@ -317,30 +317,30 @@ window.updateMessageCallerJS = (dotnetHelper) => {
 @inject IJSRuntime JsRuntime
 
 <li>
-    @_message
-    <button @onclick="InteropCall" style="display:@_display">InteropCall</button>
+    @message
+    <button @onclick="InteropCall" style="display:@display">InteropCall</button>
 </li>
 
 @code {
-    private string _message = "Select one of these list item buttons.";
-    private string _display = "inline-block";
-    private MessageUpdateInvokeHelper _messageUpdateInvokeHelper;
+    private string message = "Select one of these list item buttons.";
+    private string display = "inline-block";
+    private MessageUpdateInvokeHelper messageUpdateInvokeHelper;
 
     protected override void OnInitialized()
     {
-        _messageUpdateInvokeHelper = new MessageUpdateInvokeHelper(UpdateMessage);
+        messageUpdateInvokeHelper = new MessageUpdateInvokeHelper(UpdateMessage);
     }
 
     protected async Task InteropCall()
     {
         await JsRuntime.InvokeVoidAsync("updateMessageCallerJS",
-            DotNetObjectReference.Create(_messageUpdateInvokeHelper));
+            DotNetObjectReference.Create(messageUpdateInvokeHelper));
     }
 
     private void UpdateMessage()
     {
-        _message = "UpdateMessage Called!";
-        _display = "none";
+        message = "UpdateMessage Called!";
+        display = "none";
         StateHasChanged();
     }
 }
@@ -375,7 +375,7 @@ Aby uzyskać więcej informacji, zobacz następujące problemy:
 * [Odwołania cykliczne nie są obsługiwane, zrób dwa (dotnet/aspnetcore #20525)](https://github.com/dotnet/aspnetcore/issues/20525)
 * [Propozycja: Dodawanie mechanizmu do obsługi odwołań cyklicznych podczas serializacji (#30820 dotnet/Runtime)](https://github.com/dotnet/runtime/issues/30820)
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:blazor/call-javascript-from-dotnet>
 * [InteropComponent. Razor — przykład (repozytorium dotnet/AspNetCore w witrynie GitHub, 3,1 gałąź wydania)](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)

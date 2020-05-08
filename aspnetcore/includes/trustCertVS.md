@@ -1,11 +1,11 @@
-W programie Visual Studio jest wyświetlane następujące okno dialogowe:
+Program Visual Studio wyświetla następujące okno dialogowe:
 
-![Ten projekt jest skonfigurowany do używania SSL. Aby uniknąć ostrzeżeń SSL w przeglądarce, można zaufać certyfikatowi z podpisem własnym, który wygenerował program IIS Express. Czy chcesz zaufać certyfikatowi SSL usługi IIS Express?](~/getting-started/_static/trustCert.png)
+![Ten projekt jest skonfigurowany do korzystania z protokołu SSL. Aby uniknąć ostrzeżeń protokołu SSL w przeglądarce, możesz zdecydować się na zaufać certyfikatowi z podpisem własnym, który IIS Express wygenerowany. Czy chcesz zaufać certyfikatowi IIS Express SSL?](~/getting-started/_static/trustCert.png)
 
-Wybierz **opcję Tak,** jeśli ufasz certyfikatowi SSL usługi IIS Express.
+Wybierz opcję **tak** , jeśli ufasz certyfikatowi IIS Express protokołu SSL.
 
-Zostanie wyświetlone następujące okno dialogowe:
+Wyświetlane jest następujące okno dialogowe:
 
-![Okno dialogowe z ostrzeżeniem o zabezpieczeniach](~/getting-started/_static/cert.png)
+![Okno dialogowe ostrzeżenia o zabezpieczeniach](~/getting-started/_static/cert.png)
 
-Wybierz **opcję Tak,** jeśli zgadzasz się ufać certyfikatowi dewelopera.
+Wybierz opcję **tak** , jeśli zgadzasz się ufać certyfikatowi Deweloperskiemu.

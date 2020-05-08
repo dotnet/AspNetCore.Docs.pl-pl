@@ -120,7 +120,7 @@ Inne struktury są zalecane w porównaniu z gRPC w następujących scenariuszach
 * **Emitowanie gRPC komunikacji** &ndash; w czasie rzeczywistym obsługuje komunikację w czasie rzeczywistym za pośrednictwem przesyłania strumieniowego, ale pojęcie rozgłaszania komunikatów do zarejestrowanych połączeń nie istnieje. Na przykład w scenariuszu pokoju rozmów, w którym nowe wiadomości czatu powinny być wysyłane do wszystkich klientów w pokoju rozmowy, każde wywołanie gRPC jest wymagane do narzucania strumieniowego przesyłania nowych komunikatów rozmowy do klienta. [SignalR](xref:signalr/introduction)jest przydatną strukturą dla tego scenariusza. SignalRma koncepcję trwałych połączeń i wbudowaną obsługę rozgłaszania komunikatów.
 * &ndash; **Komunikacja między procesami** proces musi obsługiwać serwer HTTP/2, aby akceptować przychodzące wywołania gRPC. W przypadku systemu Windows [potoki](/dotnet/standard/io/pipe-operations) komunikacji między procesami to szybka i lekka Metoda komunikacji.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:tutorials/grpc/grpc-start>
 * <xref:grpc/index>

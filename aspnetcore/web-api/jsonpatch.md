@@ -254,7 +254,7 @@ Aby przetestować przykład, uruchom aplikację i Wyślij żądania HTTP z nast�
 * Nagłówki`Content-Type: application/json-patch+json`
 * Treść: Skopiuj i wklej jeden z przykładów dokumentu poprawki JSON z folderu projektu *JSON* .
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [IETF RFC 5789 Specyfikacja metody poprawek](https://tools.ietf.org/html/rfc5789)
 * [IETF RFC 6902 — Specyfikacja poprawek JSON](https://tools.ietf.org/html/rfc6902)
@@ -466,7 +466,7 @@ Aby przetestować przykład, uruchom aplikację i Wyślij żądania HTTP z nast�
 * Nagłówki`Content-Type: application/json-patch+json`
 * Treść: Skopiuj i wklej jeden z przykładów dokumentu poprawki JSON z folderu projektu *JSON* .
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [IETF RFC 5789 Specyfikacja metody poprawek](https://tools.ietf.org/html/rfc5789)
 * [IETF RFC 6902 — Specyfikacja poprawek JSON](https://tools.ietf.org/html/rfc6902)

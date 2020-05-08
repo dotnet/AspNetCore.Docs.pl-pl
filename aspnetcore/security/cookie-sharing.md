@@ -190,6 +190,6 @@ Gdy aplikacje korzystają z tego Identity samego schematu (w tej Identitysamej w
 
 Gdy Identity schemat różni się między aplikacjami, zwykle ponieważ aplikacje korzystają z różnych Identity wersji, udostępnianie wspólnej bazy danych opartej na najnowszej wersji programu Identity nie jest możliwe bez ponownego mapowania i dodawania kolumn w Identity schematach innych aplikacji. Jest to często bardziej wydajne, aby uaktualnić inne aplikacje w celu korzystania z Identity najnowszej wersji, aby Wspólna baza danych mogła być współużytkowana przez aplikacje.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:host-and-deploy/web-farm>

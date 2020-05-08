@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/data-binding
-ms.openlocfilehash: 73e73869d58e4a22e9dbee059f69fd15605ce2ce
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: b4951c5eb712b15db3a7c1ccd57ae01c530a23ef
+ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82767554"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82967171"
 ---
 # <a name="aspnet-core-blazor-data-binding"></a>ASP.NET Core Blazor powiązania danych
 
@@ -66,21 +66,21 @@ Powiąż właściwość lub pole w innych zdarzeniach, dołączając także `@bi
 
 W przeciwieństwie do `onchange`, które jest wyzwalane, gdy `oninput` element utraci fokus, jest uruchamiany po zmianie wartości pola tekstowego.
 
-Użyj `@bind-{ATTRIBUTE}` składni `@bind-{ATTRIBUTE}:event` with, aby powiązać atrybuty elementu inne `value`niż. W poniższym przykładzie styl akapitu zostanie zaktualizowany po zmianie `_paragraphStyle` wartości:
+Użyj `@bind-{ATTRIBUTE}` składni `@bind-{ATTRIBUTE}:event` with, aby powiązać atrybuty elementu inne `value`niż. W poniższym przykładzie styl akapitu zostanie zaktualizowany po zmianie `paragraphStyle` wartości:
 
 ```razor
 @page "/binding-example"
 
 <p>
-    <input type="text" @bind="_paragraphStyle" />
+    <input type="text" @bind="paragraphStyle" />
 </p>
 
-<p @bind-style="_paragraphStyle" @bind-style:event="onchange">
+<p @bind-style="paragraphStyle" @bind-style:event="onchange">
     Blazorify the app!
 </p>
 
 @code {
-    private string _paragraphStyle = "color:red";
+    private string paragraphStyle = "color:red";
 }
 ```
 
@@ -250,7 +250,7 @@ Password:
 
 <input @oninput="OnPasswordChanged" 
        required 
-       type="@(_showPassword ? "text" : "password")" 
+       type="@(showPassword ? "text" : "password")" 
        value="@Password" />
 
 <button class="btn btn-primary" @onclick="ToggleShowPassword">
@@ -258,7 +258,7 @@ Password:
 </button>
 
 @code {
-    private bool _showPassword;
+    private bool showPassword;
 
     [Parameter]
     public string Password { get; set; }
@@ -275,7 +275,7 @@ Password:
 
     private void ToggleShowPassword()
     {
-        _showPassword = !_showPassword;
+        showPassword = !showPassword;
     }
 }
 ```
@@ -287,16 +287,16 @@ Password:
 
 <h1>Parent Component</h1>
 
-<PasswordField @bind-Password="_password" />
+<PasswordField @bind-Password="password" />
 
 @code {
-    private string _password;
+    private string password;
 }
 ```
 
 Aby przeprowadzić sprawdzenia lub błędy pułapki dla hasła w poprzednim przykładzie:
 
-* Utwórz pole zapasowe dla `Password` (`_password` w poniższym przykładowym kodzie).
+* Utwórz pole zapasowe dla `Password` (`password` w poniższym przykładowym kodzie).
 * Wykonaj testy lub błędy pułapek w metodzie `Password` ustawiającej.
 
 Poniższy przykład przedstawia natychmiastową opinię dla użytkownika, jeśli w wartości hasła jest używana spacja:
@@ -308,36 +308,36 @@ Password:
 
 <input @oninput="OnPasswordChanged" 
        required 
-       type="@(_showPassword ? "text" : "password")" 
+       type="@(showPassword ? "text" : "password")" 
        value="@Password" />
 
 <button class="btn btn-primary" @onclick="ToggleShowPassword">
     Show password
 </button>
 
-<span class="text-danger">@_validationMessage</span>
+<span class="text-danger">@validationMessage</span>
 
 @code {
-    private bool _showPassword;
-    private string _password;
-    private string _validationMessage;
+    private bool showPassword;
+    private string password;
+    private string validationMessage;
 
     [Parameter]
     public string Password
     {
-        get { return _password ?? string.Empty; }
+        get { return password ?? string.Empty; }
         set
         {
-            if (_password != value)
+            if (password != value)
             {
                 if (value.Contains(' '))
                 {
-                    _validationMessage = "Spaces not allowed!";
+                    validationMessage = "Spaces not allowed!";
                 }
                 else
                 {
-                    _password = value;
-                    _validationMessage = string.Empty;
+                    password = value;
+                    validationMessage = string.Empty;
                 }
             }
         }
@@ -355,7 +355,7 @@ Password:
 
     private void ToggleShowPassword()
     {
-        _showPassword = !_showPassword;
+        showPassword = !showPassword;
     }
 }
 ```

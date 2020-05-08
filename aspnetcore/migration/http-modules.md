@@ -379,7 +379,7 @@ Metoda `SetCookies` wywołania zwrotnego będzie wyglądać następująco:
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_SetCookies)]
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Obsługa protokołu HTTP i moduły HTTP — Omówienie](/iis/configuration/system.webserver/)
 * [Konfigurowanie](xref:fundamentals/configuration/index)

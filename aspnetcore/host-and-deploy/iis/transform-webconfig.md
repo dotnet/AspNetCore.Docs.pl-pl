@@ -186,7 +186,7 @@ Aby zapobiec przekształceń pliku *Web. config* , ustaw właściwość `$(IsWeb
 dotnet publish /p:IsWebConfigTransformDisabled=true
 ```
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Składnia transformacji Web. config dla wdrożenia projektu aplikacji sieci Web](/previous-versions/dd465326(v=vs.100))
 * [Składnia transformacji Web. config dla wdrożenia projektu sieci Web przy użyciu programu Visual Studio](/previous-versions/aspnet/dd465326(v=vs.110))

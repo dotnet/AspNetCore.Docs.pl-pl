@@ -5,7 +5,7 @@ description: Dowiedz się, jak hostować ASP.NET Core aplikacje w systemie Windo
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/17/2020
+ms.date: 05/07/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/index
-ms.openlocfilehash: 72f433ffdc7d08e23fb68fc6ed9903a39959363b
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 157cfc4c42d5e057e9b2ebd04c93d80db55419c9
+ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775989"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82967496"
 ---
 # <a name="host-aspnet-core-on-windows-with-iis"></a>ASP.NET Core hosta w systemie Windows z usługami IIS
 
@@ -59,6 +59,8 @@ Obsługiwane są aplikacje opublikowane dla wdrożenia 32-bitowego (x86) lub 64-
 * Wymagana jest większa przestrzeń adresów pamięci wirtualnej dla aplikacji 64-bitowej.
 * Wymaga większego rozmiaru stosu IIS.
 * Ma 64-bitowe zależności natywne.
+
+Aplikacje opublikowane dla 32-bitowej (x86) muszą mieć włączone 32-bitowe dla ich pul aplikacji usług IIS. Aby uzyskać więcej informacji, zobacz sekcję [Tworzenie witryny usług IIS](#create-the-iis-site) .
 
 Aby opublikować aplikację 64-bitową, należy użyć 64-bitowej (x64) zestaw .NET Core SDK. 64-bitowy środowisko uruchomieniowe musi być obecny w systemie hosta.
 
@@ -137,7 +139,7 @@ services.Configure<IISServerOptions>(options =>
 });
 ```
 
-| Opcja                         | Domyślne | Ustawienie |
+| Opcja                         | Domyślny | Ustawienie |
 | ------------------------------ | :-----: | ------- |
 | `AutomaticAuthentication`      | `true`  | Jeśli `true`serwer usług IIS ustawi `HttpContext.User` uwierzytelnienie za pomocą [uwierzytelniania systemu Windows](xref:security/authentication/windowsauth). Jeśli `false`serwer zawiera tylko tożsamość dla `HttpContext.User` i reaguje na wyzwania, gdy zostanie `AuthenticationScheme`jawnie zlecony przez. Aby program `AutomaticAuthentication` mógł działać, należy włączyć uwierzytelnianie systemu Windows. Aby uzyskać więcej informacji, zobacz [uwierzytelnianie systemu Windows](xref:security/authentication/windowsauth). |
 | `AuthenticationDisplayName`    | `null`  | Ustawia nazwę wyświetlaną pokazywaną użytkownikom na stronach logowania. |
@@ -155,7 +157,7 @@ services.Configure<IISOptions>(options =>
 });
 ```
 
-| Opcja                         | Domyślne | Ustawienie |
+| Opcja                         | Domyślny | Ustawienie |
 | ------------------------------ | :-----: | ------- |
 | `AutomaticAuthentication`      | `true`  | Jeśli `true` [oprogramowanie pośredniczące integracji usług IIS](#enable-the-iisintegration-components) ustawi `HttpContext.User` uwierzytelnienie za pomocą [uwierzytelniania systemu Windows](xref:security/authentication/windowsauth). Jeśli `false`oprogramowanie pośredniczące zapewnia tylko tożsamość `HttpContext.User` i reaguje na wyzwania, gdy zostanie `AuthenticationScheme`jawnie zażądana przez program. Aby program `AutomaticAuthentication` mógł działać, należy włączyć uwierzytelnianie systemu Windows. Aby uzyskać więcej informacji, zobacz temat [uwierzytelnianie systemu Windows](xref:security/authentication/windowsauth) . |
 | `AuthenticationDisplayName`    | `null`  | Ustawia nazwę wyświetlaną pokazywaną użytkownikom na stronach logowania. |
@@ -326,11 +328,13 @@ Podczas wdrażania aplikacji na serwerach z [Web Deploy](/iis/install/installing
 
    ![Nie ustawiaj kodu zarządzanego dla wersji środowiska .NET CLR.](index/_static/edit-apppool-ws2016.png)
 
-    ASP.NET Core działa w osobnym procesie i zarządza środowiskiem uruchomieniowym. ASP.NET Core nie polega na ładowaniu środowiska CLR (.NET CLR)&mdash;podstawowego środowiska uruchomieniowego języka wspólnego (CoreCLR) dla platformy .NET Core w celu hostowania aplikacji w procesie roboczym. Ustawienie **wersji środowiska .NET CLR** na **Brak kodu zarządzanego** jest opcjonalne, ale zalecane.
+    ASP.NET Core działa w osobnym procesie i zarządza środowiskiem uruchomieniowym. ASP.NET Core nie polega na ładowaniu programu Desktop CLR (.NET CLR). Podstawowe środowisko uruchomieniowe języka wspólnego (CoreCLR) dla platformy .NET Core jest uruchamiane w celu hostowania aplikacji w procesie roboczym. Ustawienie **wersji środowiska .NET CLR** na **Brak kodu zarządzanego** jest opcjonalne, ale zalecane.
 
-1. *ASP.NET Core 2,2 lub nowsza*: w przypadku [wdrożenia](/dotnet/core/deploying/#self-contained-deployments-scd) z systemem 64-bitowym (x64), które korzysta z [modelu hostingu w procesie](#in-process-hosting-model), wyłączaj pulę aplikacji dla procesów 32-bit (x86).
+1. *ASP.NET Core 2,2 lub nowszy*:
 
-   Na pasku bocznym **Akcje** Menedżera usług IIS > **Pule aplikacji**wybierz pozycję **Ustaw ustawienia domyślne puli aplikacji** lub **Zaawansowane**. Znajdź **opcję Włącz aplikacje 32-bitowe** i ustaw wartość na `False`. To ustawienie nie ma wpływu na aplikacje wdrożone na potrzeby [hostingu poza procesem](xref:host-and-deploy/aspnet-core-module#out-of-process-hosting-model).
+   * W przypadku 32-bitowego (x86) [wdrożenia](/dotnet/core/deploying/#self-contained-deployments-scd) opublikowanego z 32-bitowym zestawem SDK, który korzysta z [modelu hostingu w procesie](#in-process-hosting-model), należy włączyć pulę aplikacji dla 32-bitowego. W Menedżerze usług IIS przejdź do **pul aplikacji** na pasku bocznym **połączenia** . Wybierz pulę aplikacji aplikacji. Na pasku bocznym **Akcje** wybierz pozycję **Ustawienia zaawansowane**. Ustaw dla `True`opcji **Włącz aplikacje 32-bitowe** . 
+
+   * W przypadku [wdrożenia](/dotnet/core/deploying/#self-contained-deployments-scd) z systemem 64-bitowym (x64), które używa [modelu hostingu w procesie](#in-process-hosting-model), wyłącz pulę aplikacji dla procesów 32-bitowych (x86). W Menedżerze usług IIS przejdź do **pul aplikacji** na pasku bocznym **połączenia** . Wybierz pulę aplikacji aplikacji. Na pasku bocznym **Akcje** wybierz pozycję **Ustawienia zaawansowane**. Ustaw dla `False`opcji **Włącz aplikacje 32-bitowe** . 
 
 1. Potwierdź, że tożsamość modelu procesu ma odpowiednie uprawnienia.
 
@@ -634,7 +638,7 @@ Aby zapobiec przekroczeniu limitu [czasu hostowanych przez aplikacje](#out-of-pr
 * <xref:test/troubleshoot-azure-iis>
 * <xref:host-and-deploy/azure-iis-errors-reference>
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:test/troubleshoot>
 * <xref:index>
@@ -746,7 +750,7 @@ services.Configure<IISServerOptions>(options =>
 });
 ```
 
-| Opcja                         | Domyślne | Ustawienie |
+| Opcja                         | Domyślny | Ustawienie |
 | ------------------------------ | :-----: | ------- |
 | `AutomaticAuthentication`      | `true`  | Jeśli `true`serwer usług IIS ustawi `HttpContext.User` uwierzytelnienie za pomocą [uwierzytelniania systemu Windows](xref:security/authentication/windowsauth). Jeśli `false`serwer zawiera tylko tożsamość dla `HttpContext.User` i reaguje na wyzwania, gdy zostanie `AuthenticationScheme`jawnie zlecony przez. Aby program `AutomaticAuthentication` mógł działać, należy włączyć uwierzytelnianie systemu Windows. Aby uzyskać więcej informacji, zobacz [uwierzytelnianie systemu Windows](xref:security/authentication/windowsauth). |
 | `AuthenticationDisplayName`    | `null`  | Ustawia nazwę wyświetlaną pokazywaną użytkownikom na stronach logowania. |
@@ -762,7 +766,7 @@ services.Configure<IISOptions>(options =>
 });
 ```
 
-| Opcja                         | Domyślne | Ustawienie |
+| Opcja                         | Domyślny | Ustawienie |
 | ------------------------------ | :-----: | ------- |
 | `AutomaticAuthentication`      | `true`  | Jeśli `true` [oprogramowanie pośredniczące integracji usług IIS](#enable-the-iisintegration-components) ustawi `HttpContext.User` uwierzytelnienie za pomocą [uwierzytelniania systemu Windows](xref:security/authentication/windowsauth). Jeśli `false`oprogramowanie pośredniczące zapewnia tylko tożsamość `HttpContext.User` i reaguje na wyzwania, gdy zostanie `AuthenticationScheme`jawnie zażądana przez program. Aby program `AutomaticAuthentication` mógł działać, należy włączyć uwierzytelnianie systemu Windows. Aby uzyskać więcej informacji, zobacz temat [uwierzytelnianie systemu Windows](xref:security/authentication/windowsauth) . |
 | `AuthenticationDisplayName`    | `null`  | Ustawia nazwę wyświetlaną pokazywaną użytkownikom na stronach logowania. |
@@ -1230,7 +1234,7 @@ Aby zapobiec przekroczeniu limitu [czasu hostowanych przez aplikacje](#out-of-pr
 * <xref:test/troubleshoot-azure-iis>
 * <xref:host-and-deploy/azure-iis-errors-reference>
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:test/troubleshoot>
 * <xref:index>
@@ -1316,7 +1320,7 @@ Aby uzyskać więcej informacji `CreateDefaultBuilder`na temat <xref:fundamental
 
 ### <a name="iis-options"></a>Opcje usług IIS
 
-| Opcja                         | Domyślne | Ustawienie |
+| Opcja                         | Domyślny | Ustawienie |
 | ------------------------------ | :-----: | ------- |
 | `AutomaticAuthentication`      | `true`  | Jeśli `true`serwer usług IIS ustawi `HttpContext.User` uwierzytelnienie za pomocą [uwierzytelniania systemu Windows](xref:security/authentication/windowsauth). Jeśli `false`serwer zawiera tylko tożsamość dla `HttpContext.User` i reaguje na wyzwania, gdy zostanie `AuthenticationScheme`jawnie zlecony przez. Aby program `AutomaticAuthentication` mógł działać, należy włączyć uwierzytelnianie systemu Windows. Aby uzyskać więcej informacji, zobacz [uwierzytelnianie systemu Windows](xref:security/authentication/windowsauth). |
 | `AuthenticationDisplayName`    | `null`  | Ustawia nazwę wyświetlaną pokazywaną użytkownikom na stronach logowania. |
@@ -1330,7 +1334,7 @@ services.Configure<IISOptions>(options =>
 });
 ```
 
-| Opcja                         | Domyślne | Ustawienie |
+| Opcja                         | Domyślny | Ustawienie |
 | ------------------------------ | :-----: | ------- |
 | `AutomaticAuthentication`      | `true`  | Jeśli `true` [oprogramowanie pośredniczące integracji usług IIS](#enable-the-iisintegration-components) ustawi `HttpContext.User` uwierzytelnienie za pomocą [uwierzytelniania systemu Windows](xref:security/authentication/windowsauth). Jeśli `false`oprogramowanie pośredniczące zapewnia tylko tożsamość `HttpContext.User` i reaguje na wyzwania, gdy zostanie `AuthenticationScheme`jawnie zażądana przez program. Aby program `AutomaticAuthentication` mógł działać, należy włączyć uwierzytelnianie systemu Windows. Aby uzyskać więcej informacji, zobacz temat [uwierzytelnianie systemu Windows](xref:security/authentication/windowsauth) . |
 | `AuthenticationDisplayName`    | `null`  | Ustawia nazwę wyświetlaną pokazywaną użytkownikom na stronach logowania. |
@@ -1748,7 +1752,7 @@ W przypadku aplikacji ASP.NET Core, która jest przeznaczona dla .NET Framework,
 * <xref:test/troubleshoot-azure-iis>
 * <xref:host-and-deploy/azure-iis-errors-reference>
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:test/troubleshoot>
 * <xref:index>

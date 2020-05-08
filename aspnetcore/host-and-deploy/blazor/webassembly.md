@@ -5,7 +5,7 @@ description: Dowiedz się, jak hostować Blazor i wdrażać aplikację przy uży
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/04/2020
+ms.date: 05/07/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/blazor/webassembly
-ms.openlocfilehash: 9bc1e3aaadb7310f6ea338eea2726bdc592aa06a
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: e136a401beffe9cc7e29906b3631ab3f068b30fd
+ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776412"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82967600"
 ---
 # <a name="host-and-deploy-aspnet-core-blazor-webassembly"></a>Hostowanie i wdrażanie ASP.NET Core Blazor webassembly
 
@@ -79,6 +79,12 @@ Aby uzyskać informacje na temat wdrażania do Azure App Service <xref:tutorials
 *Wdrożenie autonomiczne* obsługuje aplikację webassembly Blazor jako zestaw plików statycznych, które są żądane bezpośrednio przez klientów. Każdy statyczny serwer plików jest w stanie obsłużyć aplikację Blazor.
 
 Zasoby wdrażania autonomicznego są publikowane w folderze */bin/Release/{Target Framework}/Publish/wwwroot* .
+
+### <a name="azure-app-service"></a>Azure App Service
+
+Aplikacje webassembly Blazor można wdrożyć na platformie Azure App Services w systemie Windows, który hostuje aplikację w [usługach IIS](#iis).
+
+Wdrażanie autonomicznej aplikacji Blazor webassembly do Azure App Service dla systemu Linux nie jest obecnie obsługiwane. Obraz serwera z systemem Linux do hostowania aplikacji nie jest obecnie dostępny. Trwa wykonywanie pracy, aby włączyć ten scenariusz.
 
 ### <a name="iis"></a>IIS
 

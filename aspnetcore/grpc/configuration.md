@@ -67,7 +67,7 @@ Następujący kod:
 
 [!INCLUDE[](~/includes/gRPCazure.md)]
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:grpc/aspnetcore>
 * <xref:grpc/client>

@@ -99,7 +99,7 @@ Poniższy pomocnik tagów częściowych osiąga takie samo asynchroniczne zachow
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Pages/Products.cshtml?name=snippet_TagHelper&highlight=3)]
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:mvc/views/partial>
 * <xref:mvc/views/overview#weakly-typed-data-viewdata-viewdata-attribute-and-viewbag>

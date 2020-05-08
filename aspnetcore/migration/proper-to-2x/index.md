@@ -199,6 +199,6 @@ Struktura katalogów:
     └── web.config
 ```
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 - [Przenoszenie bibliotek do programu .NET Core](/dotnet/core/porting/libraries)

@@ -121,7 +121,7 @@ Aby dowiedzieć się więcej na temat hostowania aplikacji ASP.NET Core w usług
 > [!div class="nextstepaction"]
 > <xref:host-and-deploy/iis/index>
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 ### <a name="articles-in-the-aspnet-core-documentation-set"></a>Artykuły w zestawie dokumentacji ASP.NET Core
 

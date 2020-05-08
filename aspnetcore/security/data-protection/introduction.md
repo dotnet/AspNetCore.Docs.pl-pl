@@ -83,6 +83,6 @@ Stos ochrony danych składa się z pięciu pakietów.
 
 * [Microsoft. AspNetCore. Cryptography. Datapochodny](https://www.nuget.org/packages/Microsoft.AspNetCore.Cryptography.KeyDerivation/) dostarcza implementację procedury skrótu hasła PBKDF2 i może być używana przez systemy, które muszą bezpiecznie obsługiwać hasła użytkowników. Aby uzyskać więcej informacji, zobacz <xref:security/data-protection/consumer-apis/password-hashing>.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 <xref:host-and-deploy/web-farm>

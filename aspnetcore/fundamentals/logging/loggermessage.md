@@ -356,6 +356,6 @@ info: LoggerMessageSample.Pages.IndexModel[4]
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Rejestrowanie](xref:fundamentals/logging/index)

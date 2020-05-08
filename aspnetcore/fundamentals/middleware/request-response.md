@@ -85,7 +85,7 @@ Obie `Body` właściwości `BodyReader/BodyWriter` i są dostępne dla `HttpRequ
 
 `HttpResponse.StartAsync`służy do wskazywania, że nagłówki są niemodyfikowalne i `OnStarting` aby można było uruchamiać wywołania zwrotne. Podczas używania `StartAsync` Kestrel jako serwera, wywołując przed użyciem `PipeReader` gwarancji, że pamięć zwrócona przez `GetMemory` należy do wewnętrznego <xref:System.IO.Pipelines.Pipe> , a nie do buforu zewnętrznego.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Wprowadzenie do System. IO. potoków](https://devblogs.microsoft.com/dotnet/system-io-pipelines-high-performance-io-in-net/)
 * <xref:fundamentals/middleware/write>

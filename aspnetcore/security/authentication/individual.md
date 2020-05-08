@@ -89,7 +89,7 @@ W poniższej tabeli przedstawiono opcje uwierzytelniania dostępne podczas tworz
 | Chmura służbowa/usługa szkoły i wiele organizacji |  Uwierzytelnianie organizacyjne dla wielu dzierżawców | [Azure AD](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp) |
 | Windows         |  Uwierzytelnianie systemu Windows | [Uwierzytelnianie systemu Windows](xref:security/authentication/windowsauth)
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 W poniższych artykułach pokazano, jak używać kodu wygenerowanego w szablonach ASP.NET Core, które używają poszczególnych kont użytkowników:
 

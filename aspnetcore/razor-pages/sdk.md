@@ -193,7 +193,7 @@ W przypadku określania `Microsoft.NET.Sdk.Web` zestawu SDK wersja Razor języko
 
 Razorwersja językowa jest ściśle zintegrowana z wersją środowiska uruchomieniowego, dla którego została skompilowana. Określanie wersji językowej, która nie jest przeznaczona dla środowiska uruchomieniowego, nie jest obsługiwane i prawdopodobnie powoduje błędy kompilacji.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Dodatki do formatu csproj dla platformy .NET Core](/dotnet/core/tools/csproj)
 * [Wspólne elementy projektu MSBuild](/visualstudio/msbuild/common-msbuild-project-items)

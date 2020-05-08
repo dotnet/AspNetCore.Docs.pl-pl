@@ -163,6 +163,6 @@ Na przykład zasób obrazu w folderze *wwwroot/images* jest dostępny dla przegl
 
 **Uwaga:** Aby uzyskać bardziej szczegółowe informacje na temat obsługi plików statycznych w ASP.NET Core, zobacz <xref:fundamentals/static-files>.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Przenoszenie bibliotek do programu .NET Core](/dotnet/core/porting/libraries)

@@ -66,7 +66,7 @@ Poniższe scenariusze nie wymagają dodatkowej konfiguracji, ale zależą od tec
 
 | Scenariusz | Zależy od&hellip; |
 | -------- | ------------------- |
-| Uwierzytelnianie | Ochrona danych (zobacz <xref:security/data-protection/configuration/overview>).<br><br>Aby uzyskać więcej informacji, zobacz <xref:security/authentication/cookie> i <xref:security/cookie-sharing>. |
+| Authentication | Ochrona danych (zobacz <xref:security/data-protection/configuration/overview>).<br><br>Aby uzyskać więcej informacji, zobacz <xref:security/authentication/cookie> i <xref:security/cookie-sharing>. |
 | Identity | Konfiguracja uwierzytelniania i bazy danych.<br><br>Aby uzyskać więcej informacji, zobacz <xref:security/authentication/identity>. |
 | Sesja | Ochrona danych (zaszyfrowane pliki cookie) <xref:security/data-protection/configuration/overview>(zobacz) i buforowanie <xref:performance/caching/distributed>(zobacz).<br><br>Aby uzyskać więcej informacji, zobacz [Zarządzanie sesjami i Stanami: stan sesji](xref:fundamentals/app-state#session-state). |
 | TempData | Ochrona danych (zaszyfrowane pliki cookie) <xref:security/data-protection/configuration/overview>(zobacz) lub sesja (zobacz [Zarządzanie sesjami i Stanami: stan sesji](xref:fundamentals/app-state#session-state)).<br><br>Aby uzyskać więcej informacji, zobacz temat [Zarządzanie sesjami i Stanami: TempData](xref:fundamentals/app-state#tempdata). |
@@ -95,7 +95,7 @@ Aby uzyskać więcej informacji na temat konfiguracji ochrony danych dla wdroże
 
 Jeśli aplikacje kolektywu serwerów sieci Web mogą odpowiadać na żądania, uzyskiwać żądania, połączenia i dodatkowe dane z aplikacji przy użyciu wbudowanego oprogramowania terminala. Aby uzyskać więcej informacji i przykładowy kod, <xref:test/troubleshoot#obtain-data-from-an-app>Zobacz.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Rozszerzenie niestandardowego skryptu dla systemu Windows](/azure/virtual-machines/extensions/custom-script-windows) &ndash; pobiera i wykonuje skrypty na maszynach wirtualnych platformy Azure, co jest przydatne w przypadku konfiguracji po wdrożeniu i instalacji oprogramowania.
 * <xref:host-and-deploy/proxy-load-balancer>

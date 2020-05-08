@@ -109,7 +109,7 @@ różnice gRPC wychwytcy z ASP.NET Core oprogramowania pośredniczącego:
   * Działa na podstawowych komunikatach HTTP/2.
   * Można uzyskać dostęp tylko do bajtów z strumienia żądań i odpowiedzi.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:grpc/index>
 * <xref:grpc/basics>

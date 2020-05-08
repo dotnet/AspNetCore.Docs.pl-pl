@@ -129,7 +129,7 @@ Rdzeń sadu:
 
 Zobacz [podstawowe źródło sadu](https://github.com/OrchardCMS/OrchardCore) dla przykładu dostawców uwierzytelniania na dzierżawcę.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:security/authorization/limitingidentitybyscheme>
 * <xref:security/authentication/policyschemes>

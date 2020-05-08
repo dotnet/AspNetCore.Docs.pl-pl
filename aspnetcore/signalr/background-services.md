@@ -123,7 +123,7 @@ W trakcie `IHostedService.StopAsync` metody `HubConnection` jest usuwany asynchr
 
 [!code-csharp[StopAsync method](background-service/sample/Clients.ConsoleTwo/ClockHubClient.cs?name=StopAsync)]
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Rozpoczęcie pracy](xref:tutorials/signalr)
 * [Centra](xref:signalr/hubs)

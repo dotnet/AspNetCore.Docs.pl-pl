@@ -192,7 +192,7 @@ Otrzymany nagłówek zastosowany do odpowiedzi strony Cache4 przez profil `Defau
 Cache-Control: public,max-age=30
 ```
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Przechowywanie odpowiedzi w pamięci podręcznej](https://tools.ietf.org/html/rfc7234#section-3)
 * [Cache-Control](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9)

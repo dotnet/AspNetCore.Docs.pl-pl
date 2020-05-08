@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: 2f12c2a05ef510c38f407ccd69f748aceafd55de
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 064f504e94cd65862370d4551c6cb44210a8238f
+ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82767174"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82967301"
 ---
 # <a name="call-javascript-functions-from-net-methods-in-aspnet-core-blazor"></a>Wywoływanie funkcji języka JavaScript z metod .NET w ASP.NET CoreBlazor
 
@@ -277,7 +277,7 @@ Poniższy Blazor przykład zestawu webassembly ilustruje podejście.
 ```razor
 @page "/"
 
-<h1 @ref="_title">Hello, world!</h1>
+<h1 @ref="title">Hello, world!</h1>
 
 Welcome to your new app.
 
@@ -296,20 +296,20 @@ namespace BlazorSample.Pages
     public partial class Index : 
         ComponentBase, IObservable<ElementReference>, IDisposable
     {
-        private bool _disposing;
-        private IList<IObserver<ElementReference>> _subscriptions = 
+        private bool disposing;
+        private IList<IObserver<ElementReference>> subscriptions = 
             new List<IObserver<ElementReference>>();
-        private ElementReference _title;
+        private ElementReference title;
 
         protected override void OnAfterRender(bool firstRender)
         {
             base.OnAfterRender(firstRender);
 
-            foreach (var subscription in _subscriptions)
+            foreach (var subscription in subscriptions)
             {
                 try
                 {
-                    subscription.OnNext(_title);
+                    subscription.OnNext(title);
                 }
                 catch (Exception)
                 {
@@ -320,9 +320,9 @@ namespace BlazorSample.Pages
 
         public void Dispose()
         {
-            _disposing = true;
+            disposing = true;
 
-            foreach (var subscription in _subscriptions)
+            foreach (var subscription in subscriptions)
             {
                 try
                 {
@@ -333,17 +333,17 @@ namespace BlazorSample.Pages
                 }
             }
 
-            _subscriptions.Clear();
+            subscriptions.Clear();
         }
 
         public IDisposable Subscribe(IObserver<ElementReference> observer)
         {
-            if (_disposing)
+            if (disposing)
             {
                 throw new InvalidOperationException("Parent being disposed");
             }
 
-            _subscriptions.Add(observer);
+            subscriptions.Add(observer);
 
             return new Subscription(observer, this);
         }
@@ -361,7 +361,7 @@ namespace BlazorSample.Pages
 
             public void Dispose()
             {
-                Self._subscriptions.Remove(Observer);
+                Self.subscriptions.Remove(Observer);
             }
         }
     }
@@ -402,7 +402,7 @@ namespace BlazorSample.Shared
     public partial class SurveyPrompt : 
         ComponentBase, IObserver<ElementReference>, IDisposable
     {
-        private IDisposable _subscription = null;
+        private IDisposable subscription = null;
 
         [Parameter]
         public IObservable<ElementReference> Parent { get; set; }
@@ -411,22 +411,22 @@ namespace BlazorSample.Shared
         {
             base.OnParametersSet();
 
-            if (_subscription != null)
+            if (subscription != null)
             {
-                _subscription.Dispose();
+                subscription.Dispose();
             }
 
-            _subscription = Parent.Subscribe(this);
+            subscription = Parent.Subscribe(this);
         }
 
         public void OnCompleted()
         {
-            _subscription = null;
+            subscription = null;
         }
 
         public void OnError(Exception error)
         {
-            _subscription = null;
+            subscription = null;
         }
 
         public void OnNext(ElementReference value)
@@ -437,7 +437,7 @@ namespace BlazorSample.Shared
 
         public void Dispose()
         {
-            _subscription?.Dispose();
+            subscription?.Dispose();
         }
     }
 }
@@ -477,7 +477,7 @@ Aby uzyskać więcej informacji, zobacz następujące problemy:
 * [Odwołania cykliczne nie są obsługiwane, zrób dwa (dotnet/aspnetcore #20525)](https://github.com/dotnet/aspnetcore/issues/20525)
 * [Propozycja: Dodawanie mechanizmu do obsługi odwołań cyklicznych podczas serializacji (#30820 dotnet/Runtime)](https://github.com/dotnet/runtime/issues/30820)
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:blazor/call-dotnet-from-javascript>
 * [InteropComponent. Razor — przykład (repozytorium dotnet/AspNetCore w witrynie GitHub, 3,1 gałąź wydania)](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)

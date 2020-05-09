@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/file-uploads
-ms.openlocfilehash: 0da9e124b884337c63dd91b06df60ef7ca89cf3e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: b613ccd8df65e41b86793466a0ed5dc7bf7e8772
+ms.sourcegitcommit: 363e3a2a035f4082cb92e7b75ed150ba304258b3
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774135"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82976756"
 ---
 # <a name="upload-files-in-aspnet-core"></a>Przekaż pliki w ASP.NET Core
 
@@ -70,7 +70,7 @@ Aby uzyskać więcej informacji na temat implementowania środków zabezpieczeń
 
 Typowe opcje magazynu dla plików to:
 
-* Baza danych
+* baza danych
 
   * W przypadku małych operacji przekazywania plików baza danych jest często szybsza niż opcje magazynu fizycznego (systemu plików lub udziału sieciowego).
   * Baza danych jest często bardziej wygodna niż opcje magazynu fizycznego, ponieważ Pobieranie rekordu bazy danych dla danych użytkownika może jednocześnie dostarczyć zawartość pliku (na przykład obraz awatara).
@@ -107,7 +107,7 @@ Zasoby (dysk, pamięć) używane przez operacje przekazywania plików zależą o
 Buforowanie małych plików zostało omówione w następujących sekcjach tego tematu:
 
 * [Magazyn fizyczny](#upload-small-files-with-buffered-model-binding-to-physical-storage)
-* [Baza danych](#upload-small-files-with-buffered-model-binding-to-a-database)
+* [Database](#upload-small-files-with-buffered-model-binding-to-a-database)
 
 **Przesyłanie strumieniowe**
 
@@ -799,7 +799,7 @@ Aby uzyskać więcej informacji na temat implementowania środków zabezpieczeń
 
 Typowe opcje magazynu dla plików to:
 
-* Baza danych
+* baza danych
 
   * W przypadku małych operacji przekazywania plików baza danych jest często szybsza niż opcje magazynu fizycznego (systemu plików lub udziału sieciowego).
   * Baza danych jest często bardziej wygodna niż opcje magazynu fizycznego, ponieważ Pobieranie rekordu bazy danych dla danych użytkownika może jednocześnie dostarczyć zawartość pliku (na przykład obraz awatara).
@@ -836,7 +836,7 @@ Zasoby (dysk, pamięć) używane przez operacje przekazywania plików zależą o
 Buforowanie małych plików zostało omówione w następujących sekcjach tego tematu:
 
 * [Magazyn fizyczny](#upload-small-files-with-buffered-model-binding-to-physical-storage)
-* [Baza danych](#upload-small-files-with-buffered-model-binding-to-a-database)
+* [Database](#upload-small-files-with-buffered-model-binding-to-a-database)
 
 **Przesyłanie strumieniowe**
 
@@ -1478,7 +1478,7 @@ Przykłady w tym temacie polegają <xref:System.IO.MemoryStream> na zapełnieniu
 
 ## <a name="additional-resources"></a>Zasoby dodatkowe
 
-* [Opróżnianie żądań połączenia HTTP](xref:fundamentals/servers/kestrel#http-connection-request-draining)
+* [Opróżnianie żądań połączenia HTTP](xref:fundamentals/servers/kestrel#http11-request-draining)
 * [Przekazywanie plików bez ograniczeń](https://owasp.org/www-community/vulnerabilities/Unrestricted_File_Upload)
 * [Zabezpieczenia platformy Azure: ramka zabezpieczeń: sprawdzanie poprawności danych wejściowych | Środki zaradcze](/azure/security/azure-security-threat-modeling-tool-input-validation)
 * [Wzorce projektowe chmury platformy Azure: wzorzec klucza portiera](/azure/architecture/patterns/valet-key)

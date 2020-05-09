@@ -5,7 +5,7 @@ description: Dowiedz się, Razor jak korzystać z metod cyklu Blazor życia skł
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/16/2020
+ms.date: 05/07/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/lifecycle
-ms.openlocfilehash: 571f14247efe08ac6abbd6d1e2720656f94c213c
-ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
+ms.openlocfilehash: 81699158a161d0e9c9621235840979ebcd634a7e
+ms.sourcegitcommit: 363e3a2a035f4082cb92e7b75ed150ba304258b3
 ms.translationtype: MT
 ms.contentlocale: pl-PL
 ms.lasthandoff: 05/08/2020
-ms.locfileid: "82967457"
+ms.locfileid: "82976704"
 ---
 # <a name="aspnet-core-blazor-lifecycle"></a>ASP.NET Core Blazor cykl życia
 
@@ -277,3 +277,73 @@ Aby uzyskać więcej informacji na `RenderMode`temat, <xref:blazor/hosting-model
 ## <a name="detect-when-the-app-is-prerendering"></a>Wykryj, kiedy aplikacja jest przedrenderowana
 
 [!INCLUDE[](~/includes/blazor-prerendering.md)]
+
+## <a name="cancelable-background-work"></a>Anulowanie pracy w tle
+
+Składniki często wykonują długotrwałą pracę w tle, taką jak tworzenie wywołań sieciowych<xref:System.Net.Http.HttpClient>() i współdziałanie z bazami danych. Pożądane jest zatrzymanie pracy w tle w celu zapełnienia zasobów systemowych w kilku sytuacjach. Na przykład operacje asynchroniczne w tle nie są automatycznie przerywane, gdy użytkownik przechodzi poza składnik.
+
+Inne powody, dla których elementy robocze w tle mogą wymagać anulowania, to:
+
+* Rozpoczęto wykonywanie zadania w tle z uszkodzonymi danymi wejściowymi lub przetwarzaniem parametrów.
+* Bieżący zestaw wykonywanych elementów roboczych w tle musi zostać zastąpiony nowym zestawem elementów roboczych.
+* Priorytet aktualnie wykonywanych zadań musi zostać zmieniony.
+* Aby można było ponownie wdrożyć je na serwerze, należy zamknąć aplikację.
+* Zasoby serwera stają się ograniczone, co wymaga ponownego planowania Backgound elementów roboczych.
+
+Aby zaimplementować w składniku wzorzec pracy z możliwością anulowania w tle:
+
+* Użyj <xref:System.Threading.CancellationTokenSource> i <xref:System.Threading.CancellationToken>.
+* Po rozwiązaniu składnika i w dowolnym momencie anulowanie jest wymagane przez ręczne [usunięcie](#component-disposal-with-idisposable) tokenu, wywołaj [CancellationTokenSource. Cancel](xref:System.Threading.CancellationTokenSource.Cancel%2A) , aby sygnalizować, że działanie w tle powinno być anulowane.
+* Po wywołaniu asynchronicznym wywołanie <xref:System.Threading.CancellationToken.ThrowIfCancellationRequested%2A> na tokenie.
+
+W poniższym przykładzie:
+
+* `await Task.Delay(5000, cts.Token);`reprezentuje długotrwałe działanie asynchroniczne w tle.
+* `BackgroundResourceMethod`reprezentuje długotrwałą metodę w tle, która `Resource` nie powinna być uruchamiana, jeśli element zostanie usunięty przed wywołaniem metody.
+
+```razor
+@implements IDisposable
+@using System.Threading
+
+<button @onclick="LongRunningWork">Trigger long running work</button>
+
+@code {
+    private Resource resource = new Resource();
+    private CancellationTokenSource cts = new CancellationTokenSource();
+
+    protected async Task LongRunningWork()
+    {
+        await Task.Delay(5000, cts.Token);
+
+        cts.Token.ThrowIfCancellationRequested();
+        resource.BackgroundResourceMethod();
+    }
+
+    public void Dispose()
+    {
+        cts.Cancel();
+        cts.Dispose();
+        resource.Dispose();
+    }
+
+    private class Resource : IDisposable
+    {
+        private bool disposed;
+
+        public void BackgroundResourceMethod()
+        {
+            if (disposed)
+            {
+                throw new ObjectDisposedException(nameof(Resource));
+            }
+            
+            ...
+        }
+        
+        public void Dispose()
+        {
+            disposed = true;
+        }
+    }
+}
+```

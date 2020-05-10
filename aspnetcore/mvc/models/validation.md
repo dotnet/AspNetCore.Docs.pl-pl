@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/validation
-ms.openlocfilehash: a0f7c070514de26ae007526a5587c13d26d1eb1b
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 56c8d799b98cc09b8cfff12744c6eeb46af4f8e6
+ms.sourcegitcommit: 6c7a149168d2c4d747c36de210bfab3abd60809a
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777179"
+ms.lasthandoff: 05/09/2020
+ms.locfileid: "83003169"
 ---
 # <a name="model-validation-in-aspnet-core-mvc-and-razor-pages"></a>Walidacja modelu w ASP.NET Core MVC Razor i stronach
 
@@ -55,7 +55,7 @@ Atrybuty walidacji umożliwiają określanie reguł walidacji dla właściwości
 
 Poniżej przedstawiono niektóre wbudowane atrybuty walidacji:
 
-* `[CreditCard]`: Sprawdza, czy właściwość ma format karty kredytowej.
+* `[CreditCard]`: Sprawdza, czy właściwość ma format karty kredytowej. Wymaga zastosowania [dodatkowych metod walidacji jQuery](https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/additional-methods.min.js).
 * `[Compare]`: Sprawdza, czy dwie właściwości w modelu pasują do siebie.
 * `[EmailAddress]`: Sprawdza, czy właściwość ma format wiadomości e-mail.
 * `[Phone]`: Sprawdza, czy właściwość ma format numeru telefonu.
@@ -248,7 +248,7 @@ Weryfikacja po stronie klienta umożliwia uniknięcie niepotrzebnej komunikacji 
 
 [!code-cshtml[](validation/samples/3.x/ValidationSample/Views/Shared/_ValidationScriptsPartial.cshtml?name=snippet_Scripts)]
 
-Skrypt [niezauważalnego sprawdzania poprawności jQuery](https://github.com/aspnet/jquery-validation-unobtrusive) jest niestandardową biblioteką frontonu firmy Microsoft, która kompiluje się w popularnej wersji interfejsu [jQuery](https://jqueryvalidation.org/) . Bez dyskretnej weryfikacji jQuery należy wykonać kod tej samej logiki walidacji w dwóch miejscach: raz w atrybuty walidacji po stronie serwera we właściwościach modelu, a następnie ponownie w skryptach po stronie klienta. Zamiast tego, [pomocników tagów](xref:mvc/views/tag-helpers/intro) i [pomocników HTML](xref:mvc/views/overview) używają atrybutów walidacji i metadanych typu z właściwości modelu do renderowania atrybutów `data-` HTML 5 dla elementów formularza, które wymagają walidacji. niezauważalne sprawdzenie poprawności przez `data-` program jQuery umożliwia przeanalizowanie atrybutów i przekazanie logiki do programu jQuery Validate, efektywne "Kopiowanie" logiki walidacji po stronie serwera do klienta. Błędy sprawdzania poprawności można wyświetlić na kliencie przy użyciu pomocników tagów, jak pokazano poniżej:
+Skrypt [niezauważalnego sprawdzania poprawności jQuery](https://github.com/aspnet/jquery-validation-unobtrusive) jest niestandardową biblioteką frontonu firmy Microsoft, która kompiluje się w popularnej wtyczki do [sprawdzania poprawności jQuery](https://jqueryvalidation.org/) . Bez dyskretnej weryfikacji jQuery należy wykonać kod tej samej logiki walidacji w dwóch miejscach: raz w atrybuty walidacji po stronie serwera we właściwościach modelu, a następnie ponownie w skryptach po stronie klienta. Zamiast tego, [pomocników tagów](xref:mvc/views/tag-helpers/intro) i [pomocników HTML](xref:mvc/views/overview) używają atrybutów walidacji i metadanych typu z właściwości modelu do renderowania atrybutów `data-` HTML 5 dla elementów formularza, które wymagają walidacji. niezauważalne sprawdzenie poprawności przez `data-` program jQuery umożliwia przeanalizowanie atrybutów i przekazanie logiki do walidacji jQuery, efektywne "Kopiowanie" logiki walidacji po stronie serwera do klienta. Błędy sprawdzania poprawności można wyświetlić na kliencie przy użyciu pomocników tagów, jak pokazano poniżej:
 
 [!code-cshtml[](validation/samples/3.x/ValidationSample/Pages/Movies/Create.cshtml?name=snippet_ReleaseDate&highlight=3-4)]
 
@@ -265,7 +265,7 @@ Poprzednie pomocnicy tagów renderują następujący kod HTML:
 </div>
 ```
 
-Zauważ, że `data-` atrybuty w danych wyjściowych HTML odpowiadają atrybutom walidacji `Movie.ReleaseDate` właściwości. Ten `data-val-required` atrybut zawiera komunikat o błędzie, który zostanie wyświetlony, jeśli użytkownik nie wypełni pola Data wydania. niezauważalne sprawdzenie poprawności przez funkcję jQuery powoduje, że ta wartość jest przekazywana do walidacji [wymaganej metody ()](https://jqueryvalidation.org/required-method/) , która następnie wyświetla ten komunikat w towarzyszącym ** \<zakresie>** elementu.
+Zauważ, że `data-` atrybuty w danych wyjściowych HTML odpowiadają atrybutom walidacji `Movie.ReleaseDate` właściwości. Ten `data-val-required` atrybut zawiera komunikat o błędzie, który zostanie wyświetlony, jeśli użytkownik nie wypełni pola Data wydania. niezauważalne sprawdzenie poprawności przez funkcję jQuery spowoduje przekazanie tej wartości do metody sprawdzania poprawności jQuery [()](https://jqueryvalidation.org/required-method/) , która następnie wyświetla ** \<** ten komunikat w towarzyszącym zakresie>elementu.
 
 Walidacja typu danych jest oparta na typie .NET właściwości, chyba że zostanie zastąpiona przez `[DataType]` atrybut. Przeglądarki mają własne domyślne komunikaty o błędach, ale pakietem weryfikacji jQuery nie dyskretnego sprawdzania poprawności może przesłonić te komunikaty. `[DataType]`atrybuty i podklasy, takie jak `[EmailAddress]` pozwalają określić komunikat o błędzie.
 
@@ -275,7 +275,7 @@ Aby uzyskać informacje o niezauważalnej weryfikacji, zobacz [ten problem](http
 
 ### <a name="add-validation-to-dynamic-forms"></a>Dodawanie walidacji do formularzy dynamicznych
 
-w przypadku niedyskretnego sprawdzania poprawności jest sprawdzana logika walidacji i parametry do jQuery podczas pierwszego ładowania strony. W związku z tym sprawdzanie poprawności nie działa automatycznie na formularzach generowanych dynamicznie. Aby włączyć weryfikację, poinformuj jQuery o niezauważalnej weryfikacji, aby przeanalizować formularz dynamiczny bezpośrednio po jego utworzeniu. Na przykład poniższy kod konfiguruje walidację po stronie klienta w formularzu dodanym przez AJAX.
+niezauważalne Walidacja w usłudze jQuery powoduje przekazanie logiki walidacji i parametrów do walidacji jQuery podczas pierwszego ładowania strony. W związku z tym sprawdzanie poprawności nie działa automatycznie na formularzach generowanych dynamicznie. Aby włączyć weryfikację, poinformuj jQuery o niezauważalnej weryfikacji, aby przeanalizować formularz dynamiczny bezpośrednio po jego utworzeniu. Na przykład poniższy kod konfiguruje walidację po stronie klienta w formularzu dodanym przez AJAX.
 
 ```javascript
 $.get({
@@ -294,7 +294,7 @@ $.get({
 })
 ```
 
-`$.validator.unobtrusive.parse()` Metoda akceptuje selektor jQuery dla jednego argumentu. Ta metoda informuje niedyskretną weryfikację jQuery do `data-` analizy atrybutów formularzy w ramach tego selektora. Wartości tych atrybutów są następnie przesyłane do wtyczki do walidacji jQuery.
+`$.validator.unobtrusive.parse()` Metoda akceptuje selektor jQuery dla jednego argumentu. Ta metoda informuje niedyskretną weryfikację jQuery do `data-` analizy atrybutów formularzy w ramach tego selektora. Wartości tych atrybutów są następnie przesyłane do wtyczki walidacji jQuery.
 
 ### <a name="add-validation-to-dynamic-controls"></a>Dodawanie walidacji do formantów dynamicznych
 
@@ -310,7 +310,7 @@ $.get({
     success: function(newInputHTML) {
         var form = document.getElementById("my-form");
         form.insertAdjacentHTML("beforeend", newInputHTML);
-        $(form).removeData("validator")    // Added by jQuery Validate
+        $(form).removeData("validator")    // Added by jQuery Validation
                .removeData("unobtrusiveValidation");   // Added by jQuery Unobtrusive Validation
         $.validator.unobtrusive.parse(form);
     }
@@ -319,11 +319,11 @@ $.get({
 
 ## <a name="custom-client-side-validation"></a>Niestandardowe sprawdzanie poprawności po stronie klienta
 
-Niestandardowe sprawdzanie poprawności po stronie klienta jest wykonywane przez `data-` generowanie atrybutów HTML, które działają z niestandardowym identyfikatorem platformy jQuery. Następujący przykładowy kod karty został zapisany dla atrybutów `[ClassicMovie]` i `[ClassicMovieWithClientValidator]` , które zostały wprowadzone wcześniej w tym artykule:
+Niestandardowe sprawdzanie poprawności po stronie klienta jest wykonywane przez `data-` generowanie atrybutów HTML, które działają z niestandardowym adapterem weryfikacji platformy jQuery. Następujący przykładowy kod karty został zapisany dla atrybutów `[ClassicMovie]` i `[ClassicMovieWithClientValidator]` , które zostały wprowadzone wcześniej w tym artykule:
 
 [!code-javascript[](validation/samples/3.x/ValidationSample/wwwroot/js/classicMovieValidator.js)]
 
-Aby uzyskać informacje o sposobach pisania kart sieciowych, zobacz [dokumentację dotyczącą platformy jQuery Validate](https://jqueryvalidation.org/documentation/).
+Aby uzyskać informacje o sposobach pisania kart sieciowych, zobacz [dokumentację dotyczącą weryfikacji jQuery](https://jqueryvalidation.org/documentation/).
 
 Użycie karty dla danego pola jest wyzwalane przez `data-` atrybuty, które:
 

@@ -5,7 +5,7 @@ description: Dowiedz się, jak hostować ASP.NET Core aplikacje w systemie Windo
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/07/2020
+ms.date: 5/7/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/index
-ms.openlocfilehash: 157cfc4c42d5e057e9b2ebd04c93d80db55419c9
-ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
+ms.openlocfilehash: c3841babe213a9a3f303b8f9b83a947fd33ad647
+ms.sourcegitcommit: 6c7a149168d2c4d747c36de210bfab3abd60809a
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82967496"
+ms.lasthandoff: 05/09/2020
+ms.locfileid: "83003132"
 ---
 # <a name="host-aspnet-core-on-windows-with-iis"></a>ASP.NET Core hosta w systemie Windows z usługami IIS
 
@@ -77,22 +77,26 @@ Korzystając z hostingu w procesie, aplikacja ASP.NET Core jest uruchamiana w ty
   * Wywołania `Program.Main`.
 * Obsługuje okres istnienia żądania natywnego usług IIS.
 
-Model hostingu w procesie nie jest obsługiwany w przypadku aplikacji ASP.NET Core przeznaczonych dla .NET Framework.
-
 Na poniższym diagramie przedstawiono relację między usługami IIS, modułem ASP.NET Core i hostowaną w procesie aplikacją:
 
 ![Moduł ASP.NET Core w scenariuszu hostingu w procesie](index/_static/ancm-inprocess.png)
 
-Żądanie dociera do sieci Web do sterownika HTTP. sys trybu jądra. Sterownik kieruje natywne żądanie do usług IIS na skonfigurowanym porcie witryny sieci Web, zwykle 80 (HTTP) lub 443 (HTTPS). Moduł ASP.NET Core odbiera żądanie natywne i przekazuje go do serwera HTTP usług IIS (`IISHttpServer`). Serwer HTTP IIS jest implementacją serwera w procesie dla usług IIS, która konwertuje żądanie z natywnego na zarządzane.
+1. Żądanie dociera do sieci Web do sterownika HTTP. sys trybu jądra.
+1. Sterownik kieruje natywne żądanie do usług IIS na skonfigurowanym porcie witryny sieci Web, zwykle 80 (HTTP) lub 443 (HTTPS).
+1. Moduł ASP.NET Core odbiera żądanie natywne i przekazuje go do serwera HTTP usług IIS (`IISHttpServer`). Serwer HTTP IIS jest implementacją serwera w procesie dla usług IIS, która konwertuje żądanie z natywnego na zarządzane.
 
-Po przetworzeniu żądania przez serwer HTTP IIS żądanie jest wypychane do potoku ASP.NET Core pośredniczącego. Potok oprogramowania pośredniczącego obsługuje żądanie i przekazuje go jako `HttpContext` wystąpienie do logiki aplikacji. Odpowiedź aplikacji jest przesyłana z powrotem do usług IIS za pośrednictwem serwera HTTP IIS. Program IIS wysyła odpowiedź do klienta, który zainicjował żądanie.
+Po przetworzeniu żądania przez serwer HTTP IIS:
 
-Hosting w procesie jest nieobecny w przypadku istniejących aplikacji, ale w przypadku wszystkich scenariuszy z usługami w ramach programu z obsługą IIS Express usług w toku są domyślnie obsługiwane [nowe](/dotnet/core/tools/dotnet-new) szablony.
+1. Żądanie jest wysyłane do ASP.NET Core potoku oprogramowania pośredniczącego.
+1. Potok oprogramowania pośredniczącego obsługuje żądanie i przekazuje go jako `HttpContext` wystąpienie do logiki aplikacji.
+1. Odpowiedź aplikacji jest przesyłana z powrotem do usług IIS za pośrednictwem serwera HTTP IIS.
+1. Program IIS wysyła odpowiedź do klienta, który zainicjował żądanie.
 
-`CreateDefaultBuilder`dodaje <xref:Microsoft.AspNetCore.Hosting.Server.IServer> wystąpienie przez wywołanie <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIIS*> metody w celu uruchomienia [CoreCLR](/dotnet/standard/glossary#coreclr) i hostowania aplikacji w procesie roboczym usług IIS (*w3wp. exe* lub *iisexpress. exe*). Testy wydajności wskazują, że hostowanie aplikacji platformy .NET Core w procesie zapewnia znacznie wyższą przepływność żądań w porównaniu z obsługą żądań serwera proxy poza procesem i serwerem [Kestrel](xref:fundamentals/servers/kestrel) .
+Hosting w procesie jest zgodą na istniejące aplikacje. Szablony sieci Web ASP.NET Core korzystają z modelu hostingu w procesie.
 
-> [!NOTE]
-> Aplikacje publikowane jako pojedynczy plik wykonywalny nie mogą zostać załadowane przez model hostingu w procesie.
+`CreateDefaultBuilder`dodaje <xref:Microsoft.AspNetCore.Hosting.Server.IServer> wystąpienie przez wywołanie <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIIS*> metody w celu uruchomienia [CoreCLR](/dotnet/standard/glossary#coreclr) i hostowania aplikacji w procesie roboczym usług IIS (*w3wp. exe* lub *iisexpress. exe*). Testy wydajności wskazują, że hostowanie aplikacji platformy .NET Core w procesie zapewnia znacznie wyższą przepływność żądań w porównaniu z obsługą żądań proxy poza procesem i [Kestrel](xref:fundamentals/servers/kestrel).
+
+Aplikacje publikowane jako pojedynczy plik wykonywalny nie mogą zostać załadowane przez model hostingu w procesie.
 
 ### <a name="out-of-process-hosting-model"></a>Model hostingu poza procesem
 
@@ -102,11 +106,14 @@ Na poniższym diagramie przedstawiono relację między usługami IIS, modułem A
 
 ![Moduł ASP.NET Core w scenariuszu hostingu poza procesem](index/_static/ancm-outofprocess.png)
 
-Żądania docierają do sieci Web do sterownika HTTP. sys trybu jądra. Sterownik kieruje żądania do usług IIS na skonfigurowanym porcie witryny sieci Web, zwykle 80 (HTTP) lub 443 (HTTPS). Moduł przekazuje żądania do Kestrel na losowo wybranym porcie dla aplikacji, która nie jest portem 80 lub 443.
+1. Żądania docierają do sieci Web do sterownika HTTP. sys trybu jądra.
+1. Sterownik kieruje żądania do usług IIS na skonfigurowanym porcie witryny sieci Web. Skonfigurowany port jest zwykle 80 (HTTP) lub 443 (HTTPS).
+1. Moduł przekazuje żądania do Kestrel na losowo wybranym porcie dla aplikacji. Port losowy nie jest 80 lub 443.
 
-Moduł określa port za pośrednictwem zmiennej środowiskowej podczas uruchamiania, a <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIISIntegration*> rozszerzenie konfiguruje serwer do nasłuchiwania `http://localhost:{PORT}`. Dodatkowe sprawdzenia są wykonywane, a żądania, które nie pochodzą z modułu, są odrzucane. Moduł nie obsługuje przekazywania HTTPS, dlatego żądania są przekazywane przez protokół HTTP nawet wtedy, gdy są odbierane przez usługę IIS przez protokół HTTPS.
+<!-- make this a bullet list -->
+Moduł ASP.NET Core określa port za pośrednictwem zmiennej środowiskowej podczas uruchamiania. <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIISIntegration*> Rozszerzenie konfiguruje serwer do nasłuchiwania `http://localhost:{PORT}`. Dodatkowe sprawdzenia są wykonywane, a żądania, które nie pochodzą z modułu, są odrzucane. Moduł nie obsługuje przekazywania HTTPS. Żądania są przekazywane przez protokół HTTP nawet wtedy, gdy są odbierane przez usługi IIS przez protokół HTTPS.
 
-Po podaniu przez Kestrel żądania z modułu żądanie jest wypychane do potoku ASP.NET Core pośredniczącego. Potok oprogramowania pośredniczącego obsługuje żądanie i przekazuje go jako `HttpContext` wystąpienie do logiki aplikacji. Oprogramowanie pośredniczące dodane przez integrację usług IIS aktualizuje schemat, zdalny adres IP i pathbase, aby można było przesłać żądanie do Kestrel. Odpowiedź aplikacji jest przesyłana z powrotem do usług IIS, która wypycha ją z powrotem do klienta HTTP, który zainicjował żądanie.
+Po poKestrel przez program żądania z modułu żądanie zostanie przekazane do ASP.NET Core potoku programu pośredniczącego. Potok oprogramowania pośredniczącego obsługuje żądanie i przekazuje go jako `HttpContext` wystąpienie do logiki aplikacji. Oprogramowanie pośredniczące dodane przez integrację usług IIS aktualizuje schemat, zdalny adres IP i pathbase, aby można było przesłać żądanie do Kestrel. Odpowiedź aplikacji jest przesyłana z powrotem do usług IIS, która przekazuje ją z powrotem do klienta HTTP, który zainicjował żądanie.
 
 Aby uzyskać wskazówki dotyczące konfiguracji modułu ASP.NET Core <xref:host-and-deploy/aspnet-core-module>, zobacz.
 
@@ -165,7 +172,14 @@ services.Configure<IISOptions>(options =>
 
 ### <a name="proxy-server-and-load-balancer-scenarios"></a>Scenariusze serwera proxy i modułu równoważenia obciążenia
 
-[Oprogramowanie pośredniczące integracji usług IIS](#enable-the-iisintegration-components), które konfiguruje przekazane nagłówki oprogramowania pośredniczącego, a moduł ASP.NET Core jest skonfigurowany do przesyłania dalej schematu (http/https) i zdalnego adresu IP, z którego pochodzi żądanie. W przypadku aplikacji hostowanych za dodatkowymi serwerami proxy i modułami równoważenia obciążenia może być wymagana dodatkowa konfiguracja. Aby uzyskać więcej informacji, zobacz [konfigurowanie ASP.NET Core do pracy z serwerami proxy i usługami równoważenia obciążenia](xref:host-and-deploy/proxy-load-balancer).
+[Oprogramowanie pośredniczące integracji usług IIS](#enable-the-iisintegration-components) i moduł ASP.NET Core są skonfigurowane do przesyłania dalej:
+
+* Schemat (HTTP/HTTPS).
+* Zdalny adres IP, z którego pochodzi żądanie.
+
+[Oprogramowanie pośredniczące integracji usług IIS](#enable-the-iisintegration-components) konfiguruje przekazane nagłówki pośredniczące.
+
+W przypadku aplikacji hostowanych za dodatkowymi serwerami proxy i modułami równoważenia obciążenia może być wymagana dodatkowa konfiguracja. Aby uzyskać więcej informacji, zobacz [konfigurowanie ASP.NET Core do pracy z serwerami proxy i usługami równoważenia obciążenia](xref:host-and-deploy/proxy-load-balancer).
 
 ### <a name="webconfig-file"></a>plik Web. config
 
@@ -201,7 +215,7 @@ Poufne pliki znajdują się w ścieżce fizycznej aplikacji, takiej jak * \<Asse
 
 ### <a name="transform-webconfig"></a>Przekształcanie pliku web.config
 
-Jeśli musisz przekształcić *plik Web. config* przy publikowaniu (na przykład ustawić zmienne środowiskowe na podstawie konfiguracji, profilu lub środowiska), zobacz <xref:host-and-deploy/iis/transform-webconfig>.
+Jeśli musisz przekształcić *plik Web. config* przy publikowaniu, zobacz <xref:host-and-deploy/iis/transform-webconfig>. Może być konieczne przekształcenie *pliku Web. config* przy publikowaniu w celu ustawienia zmiennych środowiskowych na podstawie konfiguracji, profilu lub środowiska.
 
 ## <a name="iis-configuration"></a>Konfiguracja usług IIS
 
@@ -638,7 +652,7 @@ Aby zapobiec przekroczeniu limitu [czasu hostowanych przez aplikacje](#out-of-pr
 * <xref:test/troubleshoot-azure-iis>
 * <xref:host-and-deploy/azure-iis-errors-reference>
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:test/troubleshoot>
 * <xref:index>
@@ -682,7 +696,11 @@ Aby opublikować aplikację 64-bitową, należy użyć 64-bitowej (x64) zestaw .
 
 ### <a name="in-process-hosting-model"></a>Model hostingu w procesie
 
-Korzystając z hostingu w procesie, aplikacja ASP.NET Core jest uruchamiana w tym samym procesie co proces roboczy usług IIS. Hosting w procesie zapewnia lepszą wydajność w porównaniu z obsługą hostingu, ponieważ żądania nie są kierowane do serwera proxy za pośrednictwem karty sprzężenia zwrotnego, czyli interfejsu sieciowego, który zwraca wychodzący ruch sieciowy z powrotem do tego samego komputera. Usługi IIS obsługują zarządzanie procesami przy użyciu [usługi aktywacji procesów systemu Windows (was)](/iis/manage/provisioning-and-managing-iis/features-of-the-windows-process-activation-service-was).
+Korzystając z hostingu w procesie, aplikacja ASP.NET Core jest uruchamiana w tym samym procesie co proces roboczy usług IIS. Hosting w procesie zapewnia lepszą wydajność w porównaniu z obsługą hostingu poza procesem, ponieważ:
+
+* Żądania nie są przekazywane za pośrednictwem karty sprzężenia zwrotnego. Karta sprzężenia zwrotnego jest interfejsem sieciowym, który zwraca wychodzący ruch sieciowy z powrotem do tego samego komputera.
+
+Usługi IIS obsługują zarządzanie procesami przy użyciu [usługi aktywacji procesów systemu Windows (was)](/iis/manage/provisioning-and-managing-iis/features-of-the-windows-process-activation-service-was).
 
 [Moduł ASP.NET Core](xref:host-and-deploy/aspnet-core-module):
 
@@ -1234,7 +1252,7 @@ Aby zapobiec przekroczeniu limitu [czasu hostowanych przez aplikacje](#out-of-pr
 * <xref:test/troubleshoot-azure-iis>
 * <xref:host-and-deploy/azure-iis-errors-reference>
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:test/troubleshoot>
 * <xref:index>
@@ -1752,7 +1770,7 @@ W przypadku aplikacji ASP.NET Core, która jest przeznaczona dla .NET Framework,
 * <xref:test/troubleshoot-azure-iis>
 * <xref:host-and-deploy/azure-iis-errors-reference>
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:test/troubleshoot>
 * <xref:index>

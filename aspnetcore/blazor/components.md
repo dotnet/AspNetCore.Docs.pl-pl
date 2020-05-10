@@ -1,5 +1,5 @@
 ---
-title: Tworzenie i używanie składników ASP.NET Core Razor
+title: Tworzenie i używanie składników Razor ASP.NET Core
 author: guardrex
 description: Dowiedz się, jak tworzyć Razor i używać składników, w tym jak powiązać z danymi, obsługiwać zdarzenia i zarządzać cyklem życia składników.
 monikerRange: '>= aspnetcore-3.1'
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components
-ms.openlocfilehash: 9e36a3239e703e1279feafc65288a1f9ec82c277
-ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
+ms.openlocfilehash: de8696488292dfc409c5ed83ea0b88a54a001696
+ms.sourcegitcommit: 6c7a149168d2c4d747c36de210bfab3abd60809a
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82967184"
+ms.lasthandoff: 05/09/2020
+ms.locfileid: "83003058"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>Tworzenie i używanie składników Razor ASP.NET Core
 
@@ -967,6 +967,6 @@ Podobnie Obrazy SVG są obsługiwane w regułach CSS pliku arkusza stylów (*CSS
 
 Jednak wbudowane znaczniki SVG nie są obsługiwane we wszystkich scenariuszach. Jeśli umieścisz `<svg>` tag bezpośrednio w pliku składnika (*. Razor*), podstawowe renderowanie obrazu jest obsługiwane, ale wiele scenariuszy zaawansowanych nie jest jeszcze obsługiwanych. Na przykład `<use>` Tagi nie są obecnie przestrzegane i `@bind` nie mogą być używane z niektórymi tagami SVG. Oczekujemy, że te ograniczenia są opisane w przyszłej wersji.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:security/blazor/server/threat-mitigation>&ndash; Zawiera wskazówki dotyczące tworzenia Blazor aplikacji serwera, które muszą będą konkurować o z wyczerpaniem zasobów.

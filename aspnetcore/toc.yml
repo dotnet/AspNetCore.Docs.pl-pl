@@ -339,14 +339,16 @@
                   uid: security/blazor/webassembly/standalone-with-azure-active-directory
                 - name: Autonomiczne z usługą AAD B2C
                   uid: security/blazor/webassembly/standalone-with-azure-active-directory-b2c
-                - name: Hostowane z serwerem tożsamości
-                  uid: security/blazor/webassembly/hosted-with-identity-server
                 - name: Hostowane z usługą AAD
                   uid: security/blazor/webassembly/hosted-with-azure-active-directory
                 - name: Hostowane z usługą AAD B2C
                   uid: security/blazor/webassembly/hosted-with-azure-active-directory-b2c
+                - name: Hostowane z serwerem tożsamości
+                  uid: security/blazor/webassembly/hosted-with-identity-server
                 - name: Dodatkowe scenariusze
                   uid: security/blazor/webassembly/additional-scenarios
+                - name: Grupy i role usługi AAD
+                  uid: security/blazor/webassembly/aad-groups-roles
             - name: Serwer Blazor
               items:
                 - name: Omówienie
@@ -1134,14 +1136,16 @@
               uid: security/blazor/webassembly/standalone-with-azure-active-directory
             - name: Autonomiczne z usługą AAD B2C
               uid: security/blazor/webassembly/standalone-with-azure-active-directory-b2c
-            - name: Hostowane z serwerem tożsamości
-              uid: security/blazor/webassembly/hosted-with-identity-server
             - name: Hostowane z usługą AAD
               uid: security/blazor/webassembly/hosted-with-azure-active-directory
             - name: Hostowane z usługą AAD B2C
               uid: security/blazor/webassembly/hosted-with-azure-active-directory-b2c
+            - name: Hostowane z serwerem tożsamości
+              uid: security/blazor/webassembly/hosted-with-identity-server
             - name: Dodatkowe scenariusze
               uid: security/blazor/webassembly/additional-scenarios
+            - name: Grupy i role usługi AAD
+              uid: security/blazor/webassembly/aad-groups-roles
         - name: Serwer Blazor
           items:
             - name: Omówienie

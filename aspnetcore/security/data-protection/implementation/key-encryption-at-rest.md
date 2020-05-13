@@ -1,5 +1,5 @@
 ---
-title: Szyfrowanie klucza przechowywane w ASP.NET Core
+title: Szyfrowanie kluczy w systemie Windows i platformie Azure przy użyciu ASP.NET Core
 author: rick-anderson
 description: Zapoznaj się ze szczegółami implementacji szyfrowania klucza ochrony danych ASP.NET Core.
 ms.author: riande
@@ -11,14 +11,14 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/implementation/key-encryption-at-rest
-ms.openlocfilehash: e68b8e09dbd876c6f0d37242ebaa415994b3b808
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: c927c926212aeb1263d15fd3fdc753c377b2e305
+ms.sourcegitcommit: 1250c90c8d87c2513532be5683640b65bfdf9ddb
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776932"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83153572"
 ---
-# <a name="key-encryption-at-rest-in-aspnet-core"></a>Szyfrowanie klucza przechowywane w ASP.NET Core
+# <a name="key-encryption-at-rest-in-windows-and-azure-using-aspnet-core"></a>Szyfrowanie kluczy w systemie Windows i platformie Azure przy użyciu ASP.NET Core
 
 System ochrony danych [domyślnie stosuje mechanizm odnajdywania](xref:security/data-protection/configuration/default-settings) , aby określić, jak klucze kryptograficzne mają być szyfrowane w stanie spoczynku. Deweloper może przesłonić mechanizm odnajdywania i ręcznie określić, jak klucze mają być szyfrowane w stanie spoczynku.
 
@@ -106,7 +106,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Istnieje również Przeciążenie bez parametrów `ProtectKeysWithDpapiNG`. Użyj tej wygodnej metody, aby określić regułę "SID = {CURRENT_ACCOUNT_SID}", gdzie *CURRENT_ACCOUNT_SID* jest identyfikatorem SID bieżącego konta użytkownika systemu Windows:
+Istnieje również Przeciążenie bez parametrów `ProtectKeysWithDpapiNG` . Użyj tej wygodnej metody, aby określić regułę "SID = {CURRENT_ACCOUNT_SID}", gdzie *CURRENT_ACCOUNT_SID* jest identyfikatorem SID bieżącego konta użytkownika systemu Windows:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)

@@ -4,7 +4,7 @@ author: rick-anderson
 description: Dowiedz się, jak używać opublikowanych obrazów .NET Core Docker z rejestru platformy Docker. Ściągaj obrazy i Kompiluj własne obrazy.
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/15/2020
+ms.date: 05/12/2020
 no-loc:
 - Blazor
 - Identity
@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/docker/building-net-docker-images
-ms.openlocfilehash: bce04caf20dcf23ab7160066d55a279b29dca1ae
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 7394cba07109fce5a8718998b4e2a3b5bf752b0b
+ms.sourcegitcommit: e87dfa08fec0be1008249b1be678e5f79dcc5acb
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774109"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83382520"
 ---
 # <a name="docker-images-for-aspnet-core"></a>Obrazy platformy Docker dla ASP.NET Core
 
@@ -88,7 +88,7 @@ Przykładowy pliku dockerfile używa [funkcji budowania wielu etapów platformy 
   dotnet run
   ```
 
-* Przejdź do `http://localhost:5000` programu w przeglądarce, aby przetestować aplikację.
+* Przejdź do programu `http://localhost:5000` w przeglądarce, aby przetestować aplikację.
 
 * Naciśnij klawisze CTRL + C w wierszu polecenia, aby zatrzymać aplikację.
 
@@ -105,24 +105,24 @@ Przykładowy pliku dockerfile używa [funkcji budowania wielu etapów platformy 
   docker run -it --rm -p 5000:80 --name aspnetcore_sample aspnetapp
   ```
 
-  Argumenty `build` polecenia:
+  `build`Argumenty polecenia:
   * Nazwij obraz aspnetapp.
   * Wyszukaj pliku dockerfile w bieżącym folderze (okres na końcu).
 
   Argumenty polecenia Run:
-  * Przydziel pseudo-TTY i pozostaw go otwarty nawet wtedy, gdy nie jest dołączony. (Ten sam efekt `--interactive --tty`jako)
+  * Przydziel pseudo-TTY i pozostaw go otwarty nawet wtedy, gdy nie jest dołączony. (Ten sam efekt jako `--interactive --tty` )
   * Automatycznie Usuń kontener, gdy zostanie on zakończony.
   * Mapuj port 5000 na komputerze lokalnym na port 80 w kontenerze.
   * Nadaj nazwę kontenerowi aspnetcore_sample.
   * Określ obraz aspnetapp.
 
-* Przejdź do `http://localhost:5000` programu w przeglądarce, aby przetestować aplikację.
+* Przejdź do programu `http://localhost:5000` w przeglądarce, aby przetestować aplikację.
 
 ## <a name="run-in-a-windows-container"></a>Uruchamianie w kontenerze systemu Windows
 
 * W kliencie platformy Docker przejdź do kontenerów systemu Windows.
 
-Przejdź do folderu pliku platformy Docker pod `dotnet-docker/samples/aspnetapp`adresem.
+Przejdź do folderu pliku platformy Docker pod adresem `dotnet-docker/samples/aspnetapp` .
 
 * Uruchom następujące polecenia, aby skompilować i uruchomić przykład w Docker:
 
@@ -133,8 +133,8 @@ Przejdź do folderu pliku platformy Docker pod `dotnet-docker/samples/aspnetapp`
 
 * W przypadku kontenerów systemu Windows wymagany jest adres IP kontenera (przeglądanie w celu `http://localhost:5000` uniemożliwienia pracy):
   * Otwórz inny wiersz polecenia.
-  * Uruchom `docker ps` , aby wyświetlić uruchomione kontenery. Upewnij się, że kontener "aspnetcore_sample" znajduje się w tym miejscu.
-  * Uruchom `docker exec aspnetcore_sample ipconfig` , aby wyświetlić adres IP kontenera. Dane wyjściowe polecenia wyglądają jak w tym przykładzie:
+  * Uruchom, `docker ps` Aby wyświetlić uruchomione kontenery. Upewnij się, że kontener "aspnetcore_sample" znajduje się w tym miejscu.
+  * Uruchom, `docker exec aspnetcore_sample ipconfig` Aby wyświetlić adres IP kontenera. Dane wyjściowe polecenia wyglądają jak w tym przykładzie:
 
     ```console
     Ethernet adapter Ethernet:
@@ -180,7 +180,7 @@ W niektórych scenariuszach może zajść potrzeba wdrożenia aplikacji w konten
 
 * Przejdź do `http://localhost:5000` strony głównej.
 
-Aby użyć ręcznie opublikowanej aplikacji w kontenerze platformy Docker, Utwórz nowy pliku dockerfile i użyj polecenia `docker build .` , aby skompilować kontener.
+Aby użyć ręcznie opublikowanej aplikacji w kontenerze platformy Docker, Utwórz nowy pliku dockerfile i Użyj `docker build .` polecenia, aby skompilować kontener.
 
 ::: moniker range="< aspnetcore-3.0"
 
@@ -193,7 +193,7 @@ ENTRYPOINT ["dotnet", "aspnetapp.dll"]
 
 ### <a name="the-dockerfile"></a>Pliku dockerfile
 
-Oto *pliku dockerfile* używany przez wykonane wcześniej `docker build` polecenie.  Używa `dotnet publish` tego samego sposobu tworzenia i wdrażania w tej sekcji.  
+Oto *pliku dockerfile* używany przez `docker build` wykonane wcześniej polecenie.  Używa tego `dotnet publish` samego sposobu tworzenia i wdrażania w tej sekcji.  
 
 ```dockerfile
 FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS build
@@ -208,7 +208,6 @@ RUN dotnet restore
 COPY aspnetapp/. ./aspnetapp/
 WORKDIR /app/aspnetapp
 RUN dotnet publish -c Release -o out
-
 
 FROM mcr.microsoft.com/dotnet/core/aspnet:2.2 AS runtime
 WORKDIR /app
@@ -229,7 +228,7 @@ ENTRYPOINT ["dotnet", "aspnetapp.dll"]
 
 ### <a name="the-dockerfile"></a>Pliku dockerfile
 
-Oto *pliku dockerfile* używany przez wykonane wcześniej `docker build` polecenie.  Używa `dotnet publish` tego samego sposobu tworzenia i wdrażania w tej sekcji.  
+Oto *pliku dockerfile* używany przez `docker build` wykonane wcześniej polecenie.  Używa tego `dotnet publish` samego sposobu tworzenia i wdrażania w tej sekcji.  
 
 ```dockerfile
 FROM mcr.microsoft.com/dotnet/core/sdk:3.0 AS build
@@ -245,23 +244,17 @@ COPY aspnetapp/. ./aspnetapp/
 WORKDIR /app/aspnetapp
 RUN dotnet publish -c Release -o out
 
-
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.0 AS runtime
 WORKDIR /app
 COPY --from=build /app/aspnetapp/out ./
 ENTRYPOINT ["dotnet", "aspnetapp.dll"]
 ```
 
+Jak wspomniano w poprzednim pliku dockerfile, `*.csproj` pliki są kopiowane i przywracane jako odrębne *warstwy*. Gdy `docker build` polecenie kompiluje obraz, używa wbudowanej pamięci podręcznej. Jeśli `*.csproj` pliki nie uległy zmianie od czasu `docker build` ostatniego uruchomienia polecenia, `dotnet restore` nie trzeba ponownie uruchamiać polecenia. Zamiast tego Wbudowana pamięć podręczna dla odpowiedniej `dotnet restore` warstwy jest używana ponownie. Aby uzyskać więcej informacji, zobacz [najlepsze rozwiązania dotyczące pisania wieloetapowe dockerfile](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#leverage-build-cache).
+
 ::: moniker-end
 
-```dockerfile
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.0 AS runtime
-WORKDIR /app
-COPY published/aspnetapp.dll ./
-ENTRYPOINT ["dotnet", "aspnetapp.dll"]
-```
-
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Docker Build — polecenie](https://docs.docker.com/engine/reference/commandline/build)
 * [Polecenie Docker Run](https://docs.docker.com/engine/reference/commandline/run)

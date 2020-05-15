@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/memory
-ms.openlocfilehash: 8d4e4bf08bc9f414ceee4c35afea58f997880ccd
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 1967fb1942b4003d498800f6cf4c9dd280aca24e
+ms.sourcegitcommit: 688b6f448d87b6f7f4440182d72388eaa68d2935
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774486"
+ms.lasthandoff: 05/14/2020
+ms.locfileid: "83393849"
 ---
 # <a name="cache-in-memory-in-aspnet-core"></a>Buforowanie w pamięci w ASP.NET Core
 
@@ -35,7 +35,7 @@ ASP.NET Core obsługuje kilka różnych pamięci podręcznych. Najprostsza pami�
 
 Sesje inne niż nietrwałe w kolektywie serwerów sieci Web wymagają [rozproszonej pamięci podręcznej](distributed.md) , aby uniknąć problemów ze spójnością pamięci W przypadku niektórych aplikacji rozproszonej pamięci podręcznej może obsługiwać większą skalowalność niż pamięć podręczna w pamięci. Użycie rozproszonej pamięci podręcznej powoduje odciążenie pamięci podręcznej do procesu zewnętrznego.
 
-Pamięć podręczna w pamięci może przechowywać dowolny obiekt. Interfejs rozproszonej pamięci podręcznej `byte[]`jest ograniczony do. Magazyn w pamięci i rozproszonej pamięci podręcznej przechowuje elementy pamięci podręcznej jako pary klucz-wartość.
+Pamięć podręczna w pamięci może przechowywać dowolny obiekt. Interfejs rozproszonej pamięci podręcznej jest ograniczony do `byte[]` . Magazyn w pamięci i rozproszonej pamięci podręcznej przechowuje elementy pamięci podręcznej jako pary klucz-wartość.
 
 ## <a name="systemruntimecachingmemorycache"></a>System. Runtime. buforowanie/elemencie MemoryCache
 
@@ -45,9 +45,9 @@ Pamięć podręczna w pamięci może przechowywać dowolny obiekt. Interfejs roz
 * Dowolna [implementacja platformy .NET](/dotnet/standard/net-standard#net-implementation-support) , która jest przeznaczona dla .NET Standard 2,0 lub nowszych. Na przykład ASP.NET Core 2,0 lub nowszy.
 * .NET Framework 4,5 lub nowszy.
 
-[Firma Microsoft. Extensions. buforowanie. Memory](https://www.nuget.org/packages/Microsoft.Extensions.Caching.Memory/) / `IMemoryCache` (opisana w tym artykule) jest zalecana `System.Runtime.Caching` / `MemoryCache` w porównaniu ze względu na to, że jest lepiej zintegrowana z ASP.NET Core. Na przykład `IMemoryCache` działa natywnie z [iniekcją ASP.NET Core zależności](xref:fundamentals/dependency-injection).
+[Firma Microsoft. Extensions. buforowanie. Memory](https://www.nuget.org/packages/Microsoft.Extensions.Caching.Memory/) / `IMemoryCache` (opisana w tym artykule) jest zalecana w porównaniu ze względu na to, że jest `System.Runtime.Caching` / `MemoryCache` lepiej zintegrowana z ASP.NET Core. Na przykład `IMemoryCache` działa natywnie z [iniekcją ASP.NET Core zależności](xref:fundamentals/dependency-injection).
 
-`System.Runtime.Caching` / Użyj `MemoryCache` jako mostka zgodności podczas przenoszenia kodu z ASP.NET 4. x do ASP.NET Core.
+Użyj `System.Runtime.Caching` / `MemoryCache` jako mostka zgodności podczas przenoszenia kodu z ASP.NET 4. x do ASP.NET Core.
 
 ## <a name="cache-guidelines"></a>Wskazówki dotyczące pamięci podręcznej
 
@@ -60,15 +60,15 @@ Pamięć podręczna w pamięci może przechowywać dowolny obiekt. Interfejs roz
 ## <a name="use-imemorycache"></a>Użyj IMemoryCache
 
 > [!WARNING]
-> Użycie pamięci podręcznej pamięci *współużytkowanej* przed `SetSize` [iniekcją zależności](xref:fundamentals/dependency-injection) i wywołaniem, `Size`lub `SizeLimit` w celu ograniczenia rozmiaru pamięci podręcznej może spowodować niepowodzenie aplikacji. Po ustawieniu limitu rozmiaru w pamięci podręcznej, wszystkie wpisy muszą określać rozmiar podczas dodawania. Może to prowadzić do problemów, ponieważ deweloperzy mogą nie mieć pełnej kontroli nad używaniem udostępnionej pamięci podręcznej. Na przykład Entity Framework Core używa udostępnionej pamięci podręcznej i nie określa rozmiaru. Jeśli aplikacja ustawi limit rozmiaru pamięci podręcznej i użyje EF Core, aplikacja zgłosi `InvalidOperationException`.
-> W przypadku `SetSize`korzystania `Size`z, `SizeLimit` , lub do ograniczania pamięci podręcznej, należy utworzyć pojedynczą pamięć podręczną dla buforowania. Aby uzyskać więcej informacji i zapoznać się z przykładem, zobacz [Używanie SetSize, size i SizeLimit w celu ograniczenia rozmiaru pamięci podręcznej](#use-setsize-size-and-sizelimit-to-limit-cache-size).
+> Użycie pamięci podręcznej pamięci *współużytkowanej* przed [iniekcją zależności](xref:fundamentals/dependency-injection) i wywołaniem `SetSize` , `Size` lub `SizeLimit` w celu ograniczenia rozmiaru pamięci podręcznej może spowodować niepowodzenie aplikacji. Po ustawieniu limitu rozmiaru w pamięci podręcznej, wszystkie wpisy muszą określać rozmiar podczas dodawania. Może to prowadzić do problemów, ponieważ deweloperzy mogą nie mieć pełnej kontroli nad używaniem udostępnionej pamięci podręcznej. Na przykład Entity Framework Core używa udostępnionej pamięci podręcznej i nie określa rozmiaru. Jeśli aplikacja ustawi limit rozmiaru pamięci podręcznej i użyje EF Core, aplikacja zgłosi `InvalidOperationException` .
+> W przypadku korzystania z `SetSize` , `Size` , lub `SizeLimit` do ograniczania pamięci podręcznej, należy utworzyć pojedynczą pamięć podręczną dla buforowania. Aby uzyskać więcej informacji i zapoznać się z przykładem, zobacz [Używanie SetSize, size i SizeLimit w celu ograniczenia rozmiaru pamięci podręcznej](#use-setsize-size-and-sizelimit-to-limit-cache-size).
 > Udostępniona pamięć podręczna jest współdzielona przez inne struktury lub biblioteki. Na przykład EF Core używa udostępnionej pamięci podręcznej i nie określa rozmiaru. 
 
 Buforowanie w pamięci to *Usługa* , do której odwołuje się aplikacja przy użyciu [iniekcji zależności](xref:fundamentals/dependency-injection). Zażądaj `IMemoryCache` wystąpienia w konstruktorze:
 
 [!code-csharp[](memory/3.0sample/WebCacheSample/Controllers/HomeController.cs?name=snippet_ctor)]
 
-Poniższy kod używa [TryGetValue](/dotnet/api/microsoft.extensions.caching.memory.imemorycache.trygetvalue?view=aspnetcore-2.0#Microsoft_Extensions_Caching_Memory_IMemoryCache_TryGetValue_System_Object_System_Object__) aby sprawdzić, czy czas znajduje się w pamięci podręcznej. Jeśli czas nie jest buforowany, nowy wpis zostanie utworzony i dodany do pamięci podręcznej z [zestawem](/dotnet/api/microsoft.extensions.caching.memory.cacheextensions.set?view=aspnetcore-2.0#Microsoft_Extensions_Caching_Memory_CacheExtensions_Set__1_Microsoft_Extensions_Caching_Memory_IMemoryCache_System_Object___0_Microsoft_Extensions_Caching_Memory_MemoryCacheEntryOptions_). `CacheKeys` Klasa jest częścią przykładu pobierania.
+Poniższy kod używa [TryGetValue](/dotnet/api/microsoft.extensions.caching.memory.imemorycache.trygetvalue?view=aspnetcore-2.0#Microsoft_Extensions_Caching_Memory_IMemoryCache_TryGetValue_System_Object_System_Object__) aby sprawdzić, czy czas znajduje się w pamięci podręcznej. Jeśli czas nie jest buforowany, nowy wpis zostanie utworzony i dodany do pamięci podręcznej z [zestawem](/dotnet/api/microsoft.extensions.caching.memory.cacheextensions.set?view=aspnetcore-2.0#Microsoft_Extensions_Caching_Memory_CacheExtensions_Set__1_Microsoft_Extensions_Caching_Memory_IMemoryCache_System_Object___0_Microsoft_Extensions_Caching_Memory_MemoryCacheEntryOptions_). `CacheKeys`Klasa jest częścią przykładu pobierania.
 
 [!code-csharp[](memory/3.0sample/WebCacheSample/CacheKeys.cs)]
 
@@ -100,7 +100,7 @@ Poniższy kod pobiera lub tworzy buforowany element z przewinięciem *i* bezwzgl
 
 Poprzedni kod gwarantuje, że dane nie będą przechowywane w pamięci podręcznej dłużej niż czas bezwzględny.
 
-<xref:Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreate*>, <xref:Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreateAsync*>, i <xref:Microsoft.Extensions.Caching.Memory.CacheExtensions.Get*> są metodami rozszerzającymi <xref:Microsoft.Extensions.Caching.Memory.CacheExtensions> w klasie. Te metody zwiększają możliwości programu <xref:Microsoft.Extensions.Caching.Memory.IMemoryCache>.
+<xref:Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreate*>, <xref:Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreateAsync*> , i <xref:Microsoft.Extensions.Caching.Memory.CacheExtensions.Get*> są metodami rozszerzającymi w <xref:Microsoft.Extensions.Caching.Memory.CacheExtensions> klasie. Te metody zwiększają możliwości programu <xref:Microsoft.Extensions.Caching.Memory.IMemoryCache> .
 
 ## <a name="memorycacheentryoptions"></a>MemoryCacheEntryOptions
 
@@ -114,7 +114,7 @@ Poniższy przykład:
 
 ## <a name="use-setsize-size-and-sizelimit-to-limit-cache-size"></a>Użyj SetSize, size i SizeLimit, aby ograniczyć rozmiar pamięci podręcznej
 
-`MemoryCache` Wystąpienie może opcjonalnie określić i wymusić limit rozmiaru. Limit rozmiaru pamięci podręcznej nie ma zdefiniowanej jednostki miary, ponieważ pamięć podręczna nie ma mechanizmu mierzenia rozmiaru wpisów. Jeśli ustawiono limit rozmiaru pamięci podręcznej, wszystkie wpisy muszą określać rozmiar. Środowisko uruchomieniowe ASP.NET Core nie ogranicza rozmiaru pamięci podręcznej na podstawie nacisku pamięci. Aby ograniczyć rozmiar pamięci podręcznej, należy do dewelopera. Określony rozmiar jest w jednostkach wybranych przez dewelopera.
+`MemoryCache`Wystąpienie może opcjonalnie określić i wymusić limit rozmiaru. Limit rozmiaru pamięci podręcznej nie ma zdefiniowanej jednostki miary, ponieważ pamięć podręczna nie ma mechanizmu mierzenia rozmiaru wpisów. Jeśli ustawiono limit rozmiaru pamięci podręcznej, wszystkie wpisy muszą określać rozmiar. Środowisko uruchomieniowe ASP.NET Core nie ogranicza rozmiaru pamięci podręcznej na podstawie nacisku pamięci. Aby ograniczyć rozmiar pamięci podręcznej, należy do dewelopera. Określony rozmiar jest w jednostkach wybranych przez dewelopera.
 
 Przykład:
 
@@ -130,7 +130,7 @@ Poniższy kod tworzy bezjednostkowy rozmiar <xref:Microsoft.Extensions.Caching.M
 
 [!code-csharp[](memory/sample/RPcache/Services/MyMemoryCache.cs?name=snippet)]
 
-`SizeLimit`nie ma jednostek. Wpisy w pamięci podręcznej muszą określać rozmiar w jednostkach, które są uważane za najbardziej odpowiednie, jeśli ustawiono limit rozmiaru pamięci podręcznej. Wszyscy użytkownicy wystąpienia pamięci podręcznej powinni używać tego samego systemu jednostek. Wpis nie zostanie zapisany w pamięci podręcznej, jeśli suma rozmiarów buforowanych wpisów przekroczy `SizeLimit`wartość określoną przez. Jeśli limit rozmiaru pamięci podręcznej nie zostanie ustawiony, rozmiar pamięci podręcznej ustawiony na wpis zostanie zignorowany.
+`SizeLimit`nie ma jednostek. Wpisy w pamięci podręcznej muszą określać rozmiar w jednostkach, które są uważane za najbardziej odpowiednie, jeśli ustawiono limit rozmiaru pamięci podręcznej. Wszyscy użytkownicy wystąpienia pamięci podręcznej powinni używać tego samego systemu jednostek. Wpis nie zostanie zapisany w pamięci podręcznej, jeśli suma rozmiarów buforowanych wpisów przekroczy wartość określoną przez `SizeLimit` . Jeśli limit rozmiaru pamięci podręcznej nie zostanie ustawiony, rozmiar pamięci podręcznej ustawiony na wpis zostanie zignorowany.
 
 Poniższy kod rejestruje `MyMemoryCache` z kontenerem [iniekcji zależności](xref:fundamentals/dependency-injection) .
 
@@ -138,11 +138,11 @@ Poniższy kod rejestruje `MyMemoryCache` z kontenerem [iniekcji zależności](xr
 
 `MyMemoryCache`jest tworzony jako pamięć podręczna niezależna pamięci dla składników, które są świadome pamięci podręcznej ograniczonej rozmiaru i wiedzą, jak ustawić odpowiednio rozmiar wpisu pamięci podręcznej.
 
-Następujący kod używa `MyMemoryCache`:
+Następujący kod używa `MyMemoryCache` :
 
 [!code-csharp[](memory/3.0sample/RPcache/Pages/SetSize.cshtml.cs?name=snippet)]
 
-Rozmiar wpisu pamięci podręcznej może być ustawiony przez <xref:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.Size> lub metody <xref:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetSize*> rozszerzenia:
+Rozmiar wpisu pamięci podręcznej może być ustawiony przez <xref:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.Size> lub <xref:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetSize*> metody rozszerzenia:
 
 [!code-csharp[](memory/3.0sample/RPcache/Pages/SetSize.cshtml.cs?name=snippet2&highlight=9,10,14,15)]
 
@@ -156,7 +156,7 @@ Rozmiar wpisu pamięci podręcznej może być ustawiony przez <xref:Microsoft.Ex
 * Elementy z najwcześniejszym bezwzględnym okresem ważności.
 * Elementy z najwcześniejszym okresem ważności.
 
-Przypięte elementy <xref:Microsoft.Extensions.Caching.Memory.CacheItemPriority.NeverRemove> z priorytetem nigdy nie są usuwane. Poniższy kod usuwa element pamięci podręcznej i `Compact`wywołuje:
+Przypięte elementy z priorytetem <xref:Microsoft.Extensions.Caching.Memory.CacheItemPriority.NeverRemove> nigdy nie są usuwane. Poniższy kod usuwa element pamięci podręcznej i wywołuje `Compact` :
 
 [!code-csharp[](memory/3.0sample/RPcache/Pages/TestCache.cshtml.cs?name=snippet3)]
 
@@ -164,15 +164,15 @@ Aby uzyskać więcej informacji, zobacz artykuł [Compact Source w witrynie GitH
 
 ## <a name="cache-dependencies"></a>Zależności pamięci podręcznej
 
-Poniższy przykład pokazuje, jak wygasa wpis pamięci podręcznej, Jeśli wpis zależny wygaśnie. Element <xref:Microsoft.Extensions.Primitives.CancellationChangeToken> jest dodawany do elementu w pamięci podręcznej. Gdy `Cancel` jest wywoływana w `CancellationTokenSource`, oba wpisy pamięci podręcznej są wykluczone.
+Poniższy przykład pokazuje, jak wygasa wpis pamięci podręcznej, Jeśli wpis zależny wygaśnie. <xref:Microsoft.Extensions.Primitives.CancellationChangeToken>Element jest dodawany do elementu w pamięci podręcznej. Gdy `Cancel` jest wywoływana w `CancellationTokenSource` , oba wpisy pamięci podręcznej są wykluczone.
 
 [!code-csharp[](memory/3.0sample/WebCacheSample/Controllers/HomeController.cs?name=snippet_ed)]
 
-Użycie a <xref:System.Threading.CancellationTokenSource> umożliwia wykluczenie wielu wpisów pamięci podręcznej jako grupy. Ze `using` wzorcem w powyższym kodzie wpisy pamięci podręcznej `using` utworzone wewnątrz bloku będą dziedziczyć wyzwalacze i ustawienia wygasania.
+Użycie a <xref:System.Threading.CancellationTokenSource> umożliwia wykluczenie wielu wpisów pamięci podręcznej jako grupy. Ze `using` wzorcem w powyższym kodzie wpisy pamięci podręcznej utworzone wewnątrz `using` bloku będą dziedziczyć wyzwalacze i ustawienia wygasania.
 
 ## <a name="additional-notes"></a>Uwagi dodatkowe
 
-* Wygaśnięcie nie odbywa się w tle. Nie ma czasomierza, który aktywnie skanuje pamięć podręczną pod kątem wygasłych elementów. Wszystkie działania w pamięci podręcznej `Set`( `Remove``Get`,,) mogą wyzwalać skanowanie w tle dla elementów, które utraciły ważność. Czasomierz w `CancellationTokenSource` (<xref:System.Threading.CancellationTokenSource.CancelAfter*>) również usuwa wpis i wyzwala skanowanie pod kątem wygasłych elementów. W poniższym przykładzie zastosowano [CancellationTokenSource (TimeSpan)](/dotnet/api/system.threading.cancellationtokensource.-ctor) dla zarejestrowanego tokenu. Gdy ten token wyzwala, usuwa wpis natychmiast i wyzwala wywołania zwrotne wykluczenia:
+* Wygaśnięcie nie odbywa się w tle. Nie ma czasomierza, który aktywnie skanuje pamięć podręczną pod kątem wygasłych elementów. Wszystkie działania w pamięci podręcznej ( `Get` , `Set` , `Remove` ) mogą wyzwalać skanowanie w tle dla elementów, które utraciły ważność. Czasomierz w `CancellationTokenSource` ( <xref:System.Threading.CancellationTokenSource.CancelAfter*> ) również usuwa wpis i wyzwala skanowanie pod kątem wygasłych elementów. W poniższym przykładzie zastosowano [CancellationTokenSource (TimeSpan)](/dotnet/api/system.threading.cancellationtokensource.-ctor) dla zarejestrowanego tokenu. Gdy ten token wyzwala, usuwa wpis natychmiast i wyzwala wywołania zwrotne wykluczenia:
 
 [!code-csharp[](memory/3.0sample/WebCacheSample/Controllers/HomeController.cs?name=snippet_ae)]
 
@@ -183,8 +183,12 @@ Użycie a <xref:System.Threading.CancellationTokenSource> umożliwia wykluczenie
 
 * Gdy jeden wpis pamięci podręcznej jest używany do utworzenia innego, element podrzędny kopiuje tokeny wygaśnięcia i czas wygaśnięcia na podstawie czasu. Element podrzędny nie wygasł przez ręczne usunięcie lub aktualizację wpisu nadrzędnego.
 
-* Użyj <xref:Microsoft.Extensions.Caching.Memory.ICacheEntry.PostEvictionCallbacks> , aby ustawić wywołania zwrotne, które będą wyzwalane po usunięciu wpisu pamięci podręcznej z tej pamięci.
-* W przypadku większości aplikacji `IMemoryCache` jest włączona. Na przykład wywoływanie `AddMvc`, `AddControllersWithViews`, `AddRazorPages`, `AddMvcCore().AddRazorViewEngine`, i wiele innych `Add{Service}` metod w `ConfigureServices`, włącza `IMemoryCache`. W przypadku aplikacji, które nie wywołuje jednej z powyższych `Add{Service}` metod, może być konieczne wywołanie metody <xref:Microsoft.Extensions.DependencyInjection.MemoryCacheServiceCollectionExtensions.AddMemoryCache*> `ConfigureServices`.
+* Użyj, <xref:Microsoft.Extensions.Caching.Memory.ICacheEntry.PostEvictionCallbacks> Aby ustawić wywołania zwrotne, które będą wyzwalane po usunięciu wpisu pamięci podręcznej z tej pamięci.
+* W przypadku większości aplikacji `IMemoryCache` jest włączona. Na przykład wywoływanie `AddMvc` , `AddControllersWithViews` , `AddRazorPages` , `AddMvcCore().AddRazorViewEngine` , i wiele innych `Add{Service}` metod w `ConfigureServices` , włącza `IMemoryCache` . W przypadku aplikacji, które nie wywołuje jednej z powyższych `Add{Service}` metod, może być konieczne wywołanie metody <xref:Microsoft.Extensions.DependencyInjection.MemoryCacheServiceCollectionExtensions.AddMemoryCache*> `ConfigureServices` .
+
+## <a name="background-cache-update"></a>Aktualizacja pamięci podręcznej w tle
+
+Użyj [usługi w tle](xref:fundamentals/host/hosted-services) , takiej jak <xref:Microsoft.Extensions.Hosting.IHostedService> Aby zaktualizować pamięć podręczną. Usługa w tle może ponownie obliczyć wpisy, a następnie przypisać je do pamięci podręcznej tylko wtedy, gdy są gotowe.
 
 ## <a name="additional-resources"></a>Zasoby dodatkowe
 
@@ -212,7 +216,7 @@ ASP.NET Core obsługuje kilka różnych pamięci podręcznych. Najprostsza pami�
 
 Sesje inne niż nietrwałe w kolektywie serwerów sieci Web wymagają [rozproszonej pamięci podręcznej](distributed.md) , aby uniknąć problemów ze spójnością pamięci W przypadku niektórych aplikacji rozproszonej pamięci podręcznej może obsługiwać większą skalowalność niż pamięć podręczna w pamięci. Użycie rozproszonej pamięci podręcznej powoduje odciążenie pamięci podręcznej do procesu zewnętrznego.
 
-Pamięć podręczna w pamięci może przechowywać dowolny obiekt. Interfejs rozproszonej pamięci podręcznej `byte[]`jest ograniczony do. Magazyn w pamięci i rozproszonej pamięci podręcznej przechowuje elementy pamięci podręcznej jako pary klucz-wartość.
+Pamięć podręczna w pamięci może przechowywać dowolny obiekt. Interfejs rozproszonej pamięci podręcznej jest ograniczony do `byte[]` . Magazyn w pamięci i rozproszonej pamięci podręcznej przechowuje elementy pamięci podręcznej jako pary klucz-wartość.
 
 ## <a name="systemruntimecachingmemorycache"></a>System. Runtime. buforowanie/elemencie MemoryCache
 
@@ -222,9 +226,9 @@ Pamięć podręczna w pamięci może przechowywać dowolny obiekt. Interfejs roz
 * Dowolna [implementacja platformy .NET](/dotnet/standard/net-standard#net-implementation-support) , która jest przeznaczona dla .NET Standard 2,0 lub nowszych. Na przykład ASP.NET Core 2,0 lub nowszy.
 * .NET Framework 4,5 lub nowszy.
 
-[Firma Microsoft. Extensions. buforowanie. Memory](https://www.nuget.org/packages/Microsoft.Extensions.Caching.Memory/) / `IMemoryCache` (opisana w tym artykule) jest zalecana `System.Runtime.Caching` / `MemoryCache` w porównaniu ze względu na to, że jest lepiej zintegrowana z ASP.NET Core. Na przykład `IMemoryCache` działa natywnie z [iniekcją ASP.NET Core zależności](xref:fundamentals/dependency-injection).
+[Firma Microsoft. Extensions. buforowanie. Memory](https://www.nuget.org/packages/Microsoft.Extensions.Caching.Memory/) / `IMemoryCache` (opisana w tym artykule) jest zalecana w porównaniu ze względu na to, że jest `System.Runtime.Caching` / `MemoryCache` lepiej zintegrowana z ASP.NET Core. Na przykład `IMemoryCache` działa natywnie z [iniekcją ASP.NET Core zależności](xref:fundamentals/dependency-injection).
 
-`System.Runtime.Caching` / Użyj `MemoryCache` jako mostka zgodności podczas przenoszenia kodu z ASP.NET 4. x do ASP.NET Core.
+Użyj `System.Runtime.Caching` / `MemoryCache` jako mostka zgodności podczas przenoszenia kodu z ASP.NET 4. x do ASP.NET Core.
 
 ## <a name="cache-guidelines"></a>Wskazówki dotyczące pamięci podręcznej
 
@@ -237,10 +241,10 @@ Pamięć podręczna w pamięci może przechowywać dowolny obiekt. Interfejs roz
 ## <a name="using-imemorycache"></a>Korzystanie z IMemoryCache
 
 > [!WARNING]
-> Użycie pamięci podręcznej pamięci *współużytkowanej* przed `SetSize` [iniekcją zależności](xref:fundamentals/dependency-injection) i wywołaniem, `Size`lub `SizeLimit` w celu ograniczenia rozmiaru pamięci podręcznej może spowodować niepowodzenie aplikacji. Po ustawieniu limitu rozmiaru w pamięci podręcznej, wszystkie wpisy muszą określać rozmiar podczas dodawania. Może to prowadzić do problemów, ponieważ deweloperzy mogą nie mieć pełnej kontroli nad używaniem udostępnionej pamięci podręcznej. Na przykład Entity Framework Core używa udostępnionej pamięci podręcznej i nie określa rozmiaru. Jeśli aplikacja ustawi limit rozmiaru pamięci podręcznej i użyje EF Core, aplikacja zgłosi `InvalidOperationException`.
-> W przypadku `SetSize`korzystania `Size`z, `SizeLimit` , lub do ograniczania pamięci podręcznej, należy utworzyć pojedynczą pamięć podręczną dla buforowania. Aby uzyskać więcej informacji i zapoznać się z przykładem, zobacz [Używanie SetSize, size i SizeLimit w celu ograniczenia rozmiaru pamięci podręcznej](#use-setsize-size-and-sizelimit-to-limit-cache-size).
+> Użycie pamięci podręcznej pamięci *współużytkowanej* przed [iniekcją zależności](xref:fundamentals/dependency-injection) i wywołaniem `SetSize` , `Size` lub `SizeLimit` w celu ograniczenia rozmiaru pamięci podręcznej może spowodować niepowodzenie aplikacji. Po ustawieniu limitu rozmiaru w pamięci podręcznej, wszystkie wpisy muszą określać rozmiar podczas dodawania. Może to prowadzić do problemów, ponieważ deweloperzy mogą nie mieć pełnej kontroli nad używaniem udostępnionej pamięci podręcznej. Na przykład Entity Framework Core używa udostępnionej pamięci podręcznej i nie określa rozmiaru. Jeśli aplikacja ustawi limit rozmiaru pamięci podręcznej i użyje EF Core, aplikacja zgłosi `InvalidOperationException` .
+> W przypadku korzystania z `SetSize` , `Size` , lub `SizeLimit` do ograniczania pamięci podręcznej, należy utworzyć pojedynczą pamięć podręczną dla buforowania. Aby uzyskać więcej informacji i zapoznać się z przykładem, zobacz [Używanie SetSize, size i SizeLimit w celu ograniczenia rozmiaru pamięci podręcznej](#use-setsize-size-and-sizelimit-to-limit-cache-size).
 
-Buforowanie w pamięci to *Usługa* , do której odwołuje się aplikacja przy użyciu [iniekcji zależności](../../fundamentals/dependency-injection.md). Wywołanie `AddMemoryCache` w `ConfigureServices`:
+Buforowanie w pamięci to *Usługa* , do której odwołuje się aplikacja przy użyciu [iniekcji zależności](../../fundamentals/dependency-injection.md). Wywołanie `AddMemoryCache` w `ConfigureServices` :
 
 [!code-csharp[](memory/sample/WebCache/Startup.cs?highlight=9)]
 
@@ -272,21 +276,21 @@ Następujący kod wywołuje [pobieranie](/dotnet/api/microsoft.extensions.cachin
 
 [!code-csharp[](memory/sample/WebCache/Controllers/HomeController.cs?name=snippet_gct)]
 
-<xref:Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreate*>, <xref:Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreateAsync*>, i [Get](/dotnet/api/microsoft.extensions.caching.memory.cacheextensions.get#Microsoft_Extensions_Caching_Memory_CacheExtensions_Get__1_Microsoft_Extensions_Caching_Memory_IMemoryCache_System_Object_) są metodami rozszerzenia części klasy [CacheExtensions](/dotnet/api/microsoft.extensions.caching.memory.cacheextensions) , która rozszerza możliwości programu <xref:Microsoft.Extensions.Caching.Memory.IMemoryCache>. Zobacz [metody IMemoryCache](/dotnet/api/microsoft.extensions.caching.memory.imemorycache) i [CacheExtensions metody](/dotnet/api/microsoft.extensions.caching.memory.cacheextensions) opisujące inne metody pamięci podręcznej.
+<xref:Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreate*>, <xref:Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreateAsync*> , i [Get](/dotnet/api/microsoft.extensions.caching.memory.cacheextensions.get#Microsoft_Extensions_Caching_Memory_CacheExtensions_Get__1_Microsoft_Extensions_Caching_Memory_IMemoryCache_System_Object_) są metodami rozszerzenia części klasy [CacheExtensions](/dotnet/api/microsoft.extensions.caching.memory.cacheextensions) , która rozszerza możliwości programu <xref:Microsoft.Extensions.Caching.Memory.IMemoryCache> . Zobacz [metody IMemoryCache](/dotnet/api/microsoft.extensions.caching.memory.imemorycache) i [CacheExtensions metody](/dotnet/api/microsoft.extensions.caching.memory.cacheextensions) opisujące inne metody pamięci podręcznej.
 
 ## <a name="memorycacheentryoptions"></a>MemoryCacheEntryOptions
 
 Poniższy przykład:
 
 * Ustawia czas wygaśnięcia. Żądania, które uzyskują dostęp do tego elementu w pamięci podręcznej, spowodują zresetowanie zegara zakończenia przewijania.
-* Ustawia priorytet pamięci podręcznej na `CacheItemPriority.NeverRemove`.
+* Ustawia priorytet pamięci podręcznej na `CacheItemPriority.NeverRemove` .
 * Ustawia [PostEvictionDelegate](/dotnet/api/microsoft.extensions.caching.memory.postevictiondelegate) , który zostanie wywołany po wykluczeniu wpisu z pamięci podręcznej. Wywołanie zwrotne jest uruchamiane w innym wątku niż kod, który usuwa element z pamięci podręcznej.
 
 [!code-csharp[](memory/sample/WebCache/Controllers/HomeController.cs?name=snippet_et&highlight=14-21)]
 
 ## <a name="use-setsize-size-and-sizelimit-to-limit-cache-size"></a>Użyj SetSize, size i SizeLimit, aby ograniczyć rozmiar pamięci podręcznej
 
-`MemoryCache` Wystąpienie może opcjonalnie określić i wymusić limit rozmiaru. Limit rozmiaru pamięci podręcznej nie ma zdefiniowanej jednostki miary, ponieważ pamięć podręczna nie ma mechanizmu mierzenia rozmiaru wpisów. Jeśli ustawiono limit rozmiaru pamięci podręcznej, wszystkie wpisy muszą określać rozmiar. Środowisko uruchomieniowe ASP.NET Core nie ogranicza rozmiaru pamięci podręcznej na podstawie nacisku pamięci. Aby ograniczyć rozmiar pamięci podręcznej, należy do dewelopera. Określony rozmiar jest w jednostkach wybranych przez dewelopera.
+`MemoryCache`Wystąpienie może opcjonalnie określić i wymusić limit rozmiaru. Limit rozmiaru pamięci podręcznej nie ma zdefiniowanej jednostki miary, ponieważ pamięć podręczna nie ma mechanizmu mierzenia rozmiaru wpisów. Jeśli ustawiono limit rozmiaru pamięci podręcznej, wszystkie wpisy muszą określać rozmiar. Środowisko uruchomieniowe ASP.NET Core nie ogranicza rozmiaru pamięci podręcznej na podstawie nacisku pamięci. Aby ograniczyć rozmiar pamięci podręcznej, należy do dewelopera. Określony rozmiar jest w jednostkach wybranych przez dewelopera.
 
 Przykład:
 
@@ -302,7 +306,7 @@ Poniższy kod tworzy bezjednostkowy rozmiar <xref:Microsoft.Extensions.Caching.M
 
 [!code-csharp[](memory/sample/RPcache/Services/MyMemoryCache.cs?name=snippet)]
 
-`SizeLimit`nie ma jednostek. Wpisy w pamięci podręcznej muszą określać rozmiar w jednostkach, które są uważane za najbardziej odpowiednie, jeśli ustawiono limit rozmiaru pamięci podręcznej. Wszyscy użytkownicy wystąpienia pamięci podręcznej powinni używać tego samego systemu jednostek. Wpis nie zostanie zapisany w pamięci podręcznej, jeśli suma rozmiarów buforowanych wpisów przekroczy `SizeLimit`wartość określoną przez. Jeśli limit rozmiaru pamięci podręcznej nie zostanie ustawiony, rozmiar pamięci podręcznej ustawiony na wpis zostanie zignorowany.
+`SizeLimit`nie ma jednostek. Wpisy w pamięci podręcznej muszą określać rozmiar w jednostkach, które są uważane za najbardziej odpowiednie, jeśli ustawiono limit rozmiaru pamięci podręcznej. Wszyscy użytkownicy wystąpienia pamięci podręcznej powinni używać tego samego systemu jednostek. Wpis nie zostanie zapisany w pamięci podręcznej, jeśli suma rozmiarów buforowanych wpisów przekroczy wartość określoną przez `SizeLimit` . Jeśli limit rozmiaru pamięci podręcznej nie zostanie ustawiony, rozmiar pamięci podręcznej ustawiony na wpis zostanie zignorowany.
 
 Poniższy kod rejestruje `MyMemoryCache` z kontenerem [iniekcji zależności](xref:fundamentals/dependency-injection) .
 
@@ -310,7 +314,7 @@ Poniższy kod rejestruje `MyMemoryCache` z kontenerem [iniekcji zależności](xr
 
 `MyMemoryCache`jest tworzony jako pamięć podręczna niezależna pamięci dla składników, które są świadome pamięci podręcznej ograniczonej rozmiaru i wiedzą, jak ustawić odpowiednio rozmiar wpisu pamięci podręcznej.
 
-Następujący kod używa `MyMemoryCache`:
+Następujący kod używa `MyMemoryCache` :
 
 [!code-csharp[](memory/sample/RPcache/Pages/About.cshtml.cs?name=snippet)]
 
@@ -328,7 +332,7 @@ Rozmiar wpisu pamięci podręcznej można ustawić przez [rozmiar](/dotnet/api/m
 * Elementy z najwcześniejszym bezwzględnym okresem ważności.
 * Elementy z najwcześniejszym okresem ważności.
 
-Przypięte elementy <xref:Microsoft.Extensions.Caching.Memory.CacheItemPriority.NeverRemove> z priorytetem nigdy nie są usuwane.
+Przypięte elementy z priorytetem <xref:Microsoft.Extensions.Caching.Memory.CacheItemPriority.NeverRemove> nigdy nie są usuwane.
 
 [!code-csharp[](memory/3.0sample/RPcache/Pages/TestCache.cshtml.cs?name=snippet3)]
 
@@ -336,11 +340,11 @@ Aby uzyskać więcej informacji, zobacz artykuł [Compact Source w witrynie GitH
 
 ## <a name="cache-dependencies"></a>Zależności pamięci podręcznej
 
-Poniższy przykład pokazuje, jak wygasa wpis pamięci podręcznej, Jeśli wpis zależny wygaśnie. Element <xref:Microsoft.Extensions.Primitives.CancellationChangeToken> jest dodawany do elementu w pamięci podręcznej. Gdy `Cancel` jest wywoływana w `CancellationTokenSource`, oba wpisy pamięci podręcznej są wykluczone.
+Poniższy przykład pokazuje, jak wygasa wpis pamięci podręcznej, Jeśli wpis zależny wygaśnie. <xref:Microsoft.Extensions.Primitives.CancellationChangeToken>Element jest dodawany do elementu w pamięci podręcznej. Gdy `Cancel` jest wywoływana w `CancellationTokenSource` , oba wpisy pamięci podręcznej są wykluczone.
 
 [!code-csharp[](memory/sample/WebCache/Controllers/HomeController.cs?name=snippet_ed)]
 
-Użycie a `CancellationTokenSource` umożliwia wykluczenie wielu wpisów pamięci podręcznej jako grupy. Ze `using` wzorcem w powyższym kodzie wpisy pamięci podręcznej `using` utworzone wewnątrz bloku będą dziedziczyć wyzwalacze i ustawienia wygasania.
+Użycie a `CancellationTokenSource` umożliwia wykluczenie wielu wpisów pamięci podręcznej jako grupy. Ze `using` wzorcem w powyższym kodzie wpisy pamięci podręcznej utworzone wewnątrz `using` bloku będą dziedziczyć wyzwalacze i ustawienia wygasania.
 
 ## <a name="additional-notes"></a>Uwagi dodatkowe
 
@@ -352,6 +356,10 @@ Użycie a `CancellationTokenSource` umożliwia wykluczenie wielu wpisów pamięc
 * Gdy jeden wpis pamięci podręcznej jest używany do utworzenia innego, element podrzędny kopiuje tokeny wygaśnięcia i czas wygaśnięcia na podstawie czasu. Element podrzędny nie wygasł przez ręczne usunięcie lub aktualizację wpisu nadrzędnego.
 
 * Użyj [PostEvictionCallbacks](/dotnet/api/microsoft.extensions.caching.memory.icacheentry.postevictioncallbacks#Microsoft_Extensions_Caching_Memory_ICacheEntry_PostEvictionCallbacks) , aby ustawić wywołania zwrotne, które zostaną wyzwolone po usunięciu wpisu pamięci podręcznej z pamięci.
+
+## <a name="background-cache-update"></a>Aktualizacja pamięci podręcznej w tle
+
+Użyj [usługi w tle](xref:fundamentals/host/hosted-services) , takiej jak <xref:Microsoft.Extensions.Hosting.IHostedService> Aby zaktualizować pamięć podręczną. Usługa w tle może ponownie obliczyć wpisy, a następnie przypisać je do pamięci podręcznej tylko wtedy, gdy są gotowe.
 
 ## <a name="additional-resources"></a>Zasoby dodatkowe
 

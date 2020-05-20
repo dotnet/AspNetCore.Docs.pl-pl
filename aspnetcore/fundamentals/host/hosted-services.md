@@ -1,24 +1,11 @@
 ---
-title: Zadania w tle z usługami hostowanymi w ASP.NET Core
-author: rick-anderson
-description: Dowiedz się, jak zaimplementować zadania w tle za pomocą usług hostowanych w ASP.NET Core.
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 02/10/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: fundamentals/host/hosted-services
-ms.openlocfilehash: 9ffb91226368643d1e1526847ed32f5c93e31080
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775573"
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
 ---
 # <a name="background-tasks-with-hosted-services-in-aspnet-core"></a>Zadania w tle z usługami hostowanymi w ASP.NET Core
 
@@ -26,7 +13,7 @@ Według [Jeow li Huan](https://github.com/huan086)
 
 ::: moniker range=">= aspnetcore-3.0"
 
-W ASP.NET Core zadania w tle można zaimplementować jako *usługi hostowane*. Usługa hostowana jest klasą z logiką zadań w tle, <xref:Microsoft.Extensions.Hosting.IHostedService> która implementuje interfejs. Ten temat zawiera trzy przykłady usługi hostowanej:
+W ASP.NET Core zadania w tle można zaimplementować jako *usługi hostowane*. Usługa hostowana jest klasą z logiką zadań w tle, która implementuje <xref:Microsoft.Extensions.Hosting.IHostedService> interfejs. Ten temat zawiera trzy przykłady usługi hostowanej:
 
 * Zadanie w tle, które jest uruchamiane na czasomierzu.
 * Usługa hostowana, która aktywuje [usługę](xref:fundamentals/dependency-injection#service-lifetimes)o określonym zakresie. Usługa objęta zakresem może używać [iniekcji zależności (di)](xref:fundamentals/dependency-injection).
@@ -50,18 +37,18 @@ Aby użyć szablonu jako podstawy dla aplikacji usług hostowanych:
 
 Aplikacja oparta na szablonie usługi procesu roboczego używa `Microsoft.NET.Sdk.Worker` zestawu SDK i ma jawne odwołanie do pakietu [Microsoft. Extensions. hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting) . Na przykład zapoznaj się z plikiem projektu przykładowej aplikacji (*BackgroundTasksSample. csproj*).
 
-W przypadku aplikacji sieci Web, `Microsoft.NET.Sdk.Web` które używają zestawu SDK, pakiet [Microsoft. Extensions. hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting) jest przywoływany niejawnie z udostępnionej struktury. Jawne odwołanie do pakietu w pliku projektu aplikacji nie jest wymagane.
+W przypadku aplikacji sieci Web, które używają `Microsoft.NET.Sdk.Web` zestawu SDK, pakiet [Microsoft. Extensions. hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting) jest przywoływany niejawnie z udostępnionej struktury. Jawne odwołanie do pakietu w pliku projektu aplikacji nie jest wymagane.
 
 ## <a name="ihostedservice-interface"></a>IHostedService, interfejs
 
-<xref:Microsoft.Extensions.Hosting.IHostedService> Interfejs definiuje dwie metody dla obiektów zarządzanych przez hosta:
+<xref:Microsoft.Extensions.Hosting.IHostedService>Interfejs definiuje dwie metody dla obiektów zarządzanych przez hosta:
 
-* [StartAsync (CancellationToken)](xref:Microsoft.Extensions.Hosting.IHostedService.StartAsync*) &ndash; `StartAsync` zawiera logikę do uruchomienia zadania w tle. `StartAsync`jest wywoływana *przed*:
+* [StartAsync (CancellationToken)](xref:Microsoft.Extensions.Hosting.IHostedService.StartAsync*) &ndash; `StartAsync`zawiera logikę do uruchomienia zadania w tle. `StartAsync`jest wywoływana *przed*:
 
-  * Skonfigurowano potok przetwarzania żądania aplikacji (`Startup.Configure`).
+  * Skonfigurowano potok przetwarzania żądania aplikacji ( `Startup.Configure` ).
   * Serwer został uruchomiony i zostanie wyzwolony [IApplicationLifetime. ApplicationStarted](xref:Microsoft.AspNetCore.Hosting.IApplicationLifetime.ApplicationStarted*) .
 
-  Zachowanie domyślne można zmienić tak, aby usługa hostowana `StartAsync` działała po skonfigurowaniu potoku aplikacji i `ApplicationStarted` jest wywoływana. Aby zmienić zachowanie domyślne, należy dodać usługę hostowaną (`VideosWatcher` w poniższym przykładzie) po wywołaniu `ConfigureWebHostDefaults`:
+  Zachowanie domyślne można zmienić tak, aby usługa hostowana `StartAsync` działała po skonfigurowaniu potoku aplikacji i `ApplicationStarted` jest wywoływana. Aby zmienić zachowanie domyślne, należy dodać usługę hostowaną ( `VideosWatcher` w poniższym przykładzie) po wywołaniu `ConfigureWebHostDefaults` :
 
   ```csharp
   using Microsoft.AspNetCore.Hosting;
@@ -88,41 +75,41 @@ W przypadku aplikacji sieci Web, `Microsoft.NET.Sdk.Web` które używają zestaw
   }
   ```
 
-* [StopAsync (CancellationToken)](xref:Microsoft.Extensions.Hosting.IHostedService.StopAsync*) &ndash; wyzwalane, gdy host wykonuje bezpieczne zamknięcie. `StopAsync`zawiera logikę końcową zadania w tle. Implementacja <xref:System.IDisposable> i [finalizatory (destruktory)](/dotnet/csharp/programming-guide/classes-and-structs/destructors) do usuwania wszelkich niezarządzanych zasobów.
+* [StopAsync (CancellationToken)](xref:Microsoft.Extensions.Hosting.IHostedService.StopAsync*) &ndash; Wyzwalane, gdy host wykonuje bezpieczne zamknięcie. `StopAsync`zawiera logikę końcową zadania w tle. Implementacja <xref:System.IDisposable> i [finalizatory (destruktory)](/dotnet/csharp/programming-guide/classes-and-structs/destructors) do usuwania wszelkich niezarządzanych zasobów.
 
   Token anulowania ma domyślnie pięciu sekund, aby wskazać, że proces zamykania nie powinien już być łagodny. Gdy żądanie anulowania jest wymagane na tokenie:
 
   * Wszystkie pozostałe operacje w tle, które wykonuje aplikacja, powinny zostać przerwane.
-  * Wszelkie metody wywoływane w `StopAsync` programie powinny zwracać monity.
+  * Wszelkie metody wywoływane w programie `StopAsync` powinny zwracać monity.
 
-  Jednak zadania nie są porzucane po zażądaniu&mdash;anulowania obiekt wywołujący czeka na ukończenie wszystkich zadań.
+  Jednak zadania nie są porzucane po zażądaniu anulowania &mdash; obiekt wywołujący czeka na ukończenie wszystkich zadań.
 
-  Jeśli aplikacja nieoczekiwanie się zamknie (na przykład proces aplikacji kończy się niepowodzeniem) `StopAsync` , może nie zostać wywołany. W związku z tym wszystkie metody wywoływane lub operacje `StopAsync` wykonywane w programie mogą nie wystąpić.
+  Jeśli aplikacja nieoczekiwanie się zamknie (na przykład proces aplikacji kończy się niepowodzeniem), `StopAsync` może nie zostać wywołany. W związku z tym wszystkie metody wywoływane lub operacje wykonywane w programie `StopAsync` mogą nie wystąpić.
 
   Aby zwiększyć domyślne pięć sekund limitu czasu zamykania, ustaw:
 
   * <xref:Microsoft.Extensions.Hosting.HostOptions.ShutdownTimeout*>w przypadku korzystania z hosta ogólnego. Aby uzyskać więcej informacji, zobacz <xref:fundamentals/host/generic-host#shutdown-timeout>.
   * Ustawienie konfiguracji hosta limitu czasu zamykania w przypadku korzystania z hosta sieci Web. Aby uzyskać więcej informacji, zobacz <xref:fundamentals/host/web-host#shutdown-timeout>.
 
-Usługa hostowana jest uaktywniana raz podczas uruchamiania aplikacji i bezpiecznie zamykana podczas zamykania aplikacji. Jeśli wystąpi błąd podczas wykonywania zadania w tle, powinien `Dispose` zostać wywołany, nawet `StopAsync` Jeśli nie jest wywoływana.
+Usługa hostowana jest uaktywniana raz podczas uruchamiania aplikacji i bezpiecznie zamykana podczas zamykania aplikacji. Jeśli wystąpi błąd podczas wykonywania zadania w tle, `Dispose` powinien zostać wywołany, nawet jeśli `StopAsync` nie jest wywoływana.
 
 ## <a name="backgroundservice-base-class"></a>Klasa bazowa BackgroundService
 
-<xref:Microsoft.Extensions.Hosting.BackgroundService>jest klasą bazową do implementowania długotrwałego działania <xref:Microsoft.Extensions.Hosting.IHostedService>.
+<xref:Microsoft.Extensions.Hosting.BackgroundService>jest klasą bazową do implementowania długotrwałego działania <xref:Microsoft.Extensions.Hosting.IHostedService> .
 
-[Wywoływanie ExecuteAsync (CancellationToken)](xref:Microsoft.Extensions.Hosting.BackgroundService.ExecuteAsync*) jest wywoływana w celu uruchomienia usługi w tle. Implementacja zwraca <xref:System.Threading.Tasks.Task> wartość reprezentującą cały okres istnienia usługi w tle. Żadne dalsze usługi nie są uruchamiane do momentu, gdy [wywoływanie ExecuteAsync staną się asynchroniczne](https://github.com/dotnet/extensions/issues/2149), na przykład przez wywołanie `await`. Unikaj długotrwałych operacji inicjalizacji `ExecuteAsync`. Bloki hosta w [StopAsync (CancellationToken)](xref:Microsoft.Extensions.Hosting.BackgroundService.StopAsync*) oczekują `ExecuteAsync` na zakończenie.
+[Wywoływanie ExecuteAsync (CancellationToken)](xref:Microsoft.Extensions.Hosting.BackgroundService.ExecuteAsync*) jest wywoływana w celu uruchomienia usługi w tle. Implementacja zwraca wartość <xref:System.Threading.Tasks.Task> reprezentującą cały okres istnienia usługi w tle. Żadne dalsze usługi nie są uruchamiane do momentu, gdy [wywoływanie ExecuteAsync staną się asynchroniczne](https://github.com/dotnet/extensions/issues/2149), na przykład przez wywołanie `await` . Unikaj długotrwałych operacji inicjalizacji `ExecuteAsync` . Bloki hosta w [StopAsync (CancellationToken)](xref:Microsoft.Extensions.Hosting.BackgroundService.StopAsync*) oczekują na `ExecuteAsync` zakończenie.
 
 Token anulowania jest wyzwalany, gdy wywoływana jest [IHostedService. StopAsync](xref:Microsoft.Extensions.Hosting.IHostedService.StopAsync*) . Implementacja programu `ExecuteAsync` powinna zakończyć się natychmiast po uruchomieniu tokenu anulowania w celu łagodnego zamknięcia usługi. W przeciwnym razie usługa niebezpiecznie zamyka się po upływie limitu czasu zamykania. Aby uzyskać więcej informacji, zobacz sekcję dotyczącą [interfejsu IHostedService](#ihostedservice-interface) .
 
 ## <a name="timed-background-tasks"></a>Zadania w tle czasu
 
-Zadanie w tle czasu używa klasy [System. Threading. Timer](xref:System.Threading.Timer) . Czasomierz wyzwala `DoWork` metodę zadania. Czasomierz jest wyłączony `StopAsync` i zlikwidowany po usunięciu kontenera usługi `Dispose`:
+Zadanie w tle czasu używa klasy [System. Threading. Timer](xref:System.Threading.Timer) . Czasomierz wyzwala `DoWork` metodę zadania. Czasomierz jest wyłączony `StopAsync` i zlikwidowany po usunięciu kontenera usługi `Dispose` :
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Services/TimedHostedService.cs?name=snippet1&highlight=16-17,34,41)]
 
-<xref:System.Threading.Timer> Nie czeka na zakończenie poprzednich wykonań `DoWork` , więc wskazane podejście może nie być odpowiednie dla każdego scenariusza. Z [blokadą. przyrost](xref:System.Threading.Interlocked.Increment*) służy do zwiększania licznika wykonywania jako operacja niepodzielna, która zapewnia, że wiele wątków nie `executionCount` zostanie jednocześnie zaktualizowanych.
+<xref:System.Threading.Timer>Nie czeka na zakończenie poprzednich wykonań `DoWork` , więc wskazane podejście może nie być odpowiednie dla każdego scenariusza. Z [blokadą. przyrost](xref:System.Threading.Interlocked.Increment*) służy do zwiększania licznika wykonywania jako operacja niepodzielna, która zapewnia, że wiele wątków nie zostanie jednocześnie zaktualizowanych `executionCount` .
 
-Usługa jest zarejestrowana w `IHostBuilder.ConfigureServices` (*program.cs*) z metodą `AddHostedService` rozszerzenia:
+Usługa jest zarejestrowana w `IHostBuilder.ConfigureServices` (*program.cs*) z `AddHostedService` metodą rozszerzenia:
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Program.cs?name=snippet1)]
 
@@ -132,48 +119,48 @@ Aby użyć [usług z zakresem](xref:fundamentals/dependency-injection#service-li
 
 Usługa zadań w tle w zakresie zawiera logikę zadania w tle. W poniższym przykładzie:
 
-* Usługa jest asynchroniczna. `DoWork` Metoda zwraca `Task`. W celach demonstracyjnych oczekuje się, że w `DoWork` metodzie występuje opóźnienie o dziesięć sekund.
-* <xref:Microsoft.Extensions.Logging.ILogger> Jest wstrzykiwana do usługi.
+* Usługa jest asynchroniczna. `DoWork`Metoda zwraca `Task` . W celach demonstracyjnych oczekuje się, że w metodzie występuje opóźnienie o dziesięć sekund `DoWork` .
+* <xref:Microsoft.Extensions.Logging.ILogger>Jest wstrzykiwana do usługi.
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Services/ScopedProcessingService.cs?name=snippet1)]
 
-Usługa hostowana tworzy zakres, aby rozwiązać usługę zadań w tle w zakresie, aby wywołać `DoWork` metodę. `DoWork`Zwraca element `Task`, który jest oczekiwany w `ExecuteAsync`:
+Usługa hostowana tworzy zakres, aby rozwiązać usługę zadań w tle w zakresie, aby wywołać `DoWork` metodę. `DoWork`Zwraca element `Task` , który jest oczekiwany w `ExecuteAsync` :
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Services/ConsumeScopedServiceHostedService.cs?name=snippet1&highlight=19,22-35)]
 
-Usługi są zarejestrowane w `IHostBuilder.ConfigureServices` usłudze (*program.cs*). Usługa hostowana jest zarejestrowana przy `AddHostedService` użyciu metody rozszerzającej:
+Usługi są zarejestrowane w usłudze `IHostBuilder.ConfigureServices` (*program.cs*). Usługa hostowana jest zarejestrowana przy użyciu `AddHostedService` metody rozszerzającej:
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Program.cs?name=snippet2)]
 
 ## <a name="queued-background-tasks"></a>Zadania w kolejce w dół
 
-Kolejka zadań w tle jest oparta na platformie .NET 4. <xref:System.Web.Hosting.HostingEnvironment.QueueBackgroundWorkItem*> x ([wstępnie zaplanowano wbudowaną ASP.NET Core](https://github.com/aspnet/Hosting/issues/1280)):
+Kolejka zadań w tle jest oparta na platformie .NET 4. x <xref:System.Web.Hosting.HostingEnvironment.QueueBackgroundWorkItem*> ([wstępnie zaplanowano wbudowaną ASP.NET Core](https://github.com/aspnet/Hosting/issues/1280)):
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Services/BackgroundTaskQueue.cs?name=snippet1)]
 
 W poniższym `QueueHostedService` przykładzie:
 
-* `BackgroundProcessing` Metoda zwraca obiekt `Task`, który jest oczekiwany w `ExecuteAsync`.
-* Zadania w tle w kolejce są dekolejkowane i wykonywane w `BackgroundProcessing`.
-* Elementy robocze oczekują na zatrzymanie usługi w `StopAsync`usłudze.
+* `BackgroundProcessing`Metoda zwraca obiekt `Task` , który jest oczekiwany w `ExecuteAsync` .
+* Zadania w tle w kolejce są dekolejkowane i wykonywane w `BackgroundProcessing` .
+* Elementy robocze oczekują na zatrzymanie usługi w usłudze `StopAsync` .
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Services/QueuedHostedService.cs?name=snippet1&highlight=28-29,33)]
 
-`MonitorLoop` Usługa obsługuje zadania umieszczenie dla usługi hostowanej za każdym razem `w` , gdy klucz zostanie wybrany na urządzeniu wejściowym:
+`MonitorLoop`Usługa obsługuje zadania umieszczenie dla usługi hostowanej za każdym razem, gdy `w` klucz zostanie wybrany na urządzeniu wejściowym:
 
-* `IBackgroundTaskQueue` Jest wstrzykiwana do `MonitorLoop` usługi.
+* `IBackgroundTaskQueue`Jest wstrzykiwana do `MonitorLoop` usługi.
 * `IBackgroundTaskQueue.QueueBackgroundWorkItem`jest wywoływana w celu dodawania do kolejki elementu pracy.
 * Element roboczy symuluje długotrwałe zadanie w tle:
-  * Trzy 5-sekundowe opóźnienia są wykonywane`Task.Delay`().
-  * Pułapka `try-catch` <xref:System.OperationCanceledException> instrukcji, jeśli zadanie zostało anulowane.
+  * Trzy 5-sekundowe opóźnienia są wykonywane ( `Task.Delay` ).
+  * `try-catch`Pułapka instrukcji <xref:System.OperationCanceledException> , jeśli zadanie zostało anulowane.
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Services/MonitorLoop.cs?name=snippet_Monitor&highlight=7,33)]
 
-Usługi są zarejestrowane w `IHostBuilder.ConfigureServices` usłudze (*program.cs*). Usługa hostowana jest zarejestrowana przy `AddHostedService` użyciu metody rozszerzającej:
+Usługi są zarejestrowane w usłudze `IHostBuilder.ConfigureServices` (*program.cs*). Usługa hostowana jest zarejestrowana przy użyciu `AddHostedService` metody rozszerzającej:
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Program.cs?name=snippet3)]
 
-`MontiorLoop`jest uruchamiany w `Program.Main`:
+`MonitorLoop`jest uruchamiany w `Program.Main` :
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Program.cs?name=snippet4)]
 
@@ -181,7 +168,7 @@ Usługi są zarejestrowane w `IHostBuilder.ConfigureServices` usłudze (*program
 
 ::: moniker range="< aspnetcore-3.0"
 
-W ASP.NET Core zadania w tle można zaimplementować jako *usługi hostowane*. Usługa hostowana jest klasą z logiką zadań w tle, <xref:Microsoft.Extensions.Hosting.IHostedService> która implementuje interfejs. Ten temat zawiera trzy przykłady usługi hostowanej:
+W ASP.NET Core zadania w tle można zaimplementować jako *usługi hostowane*. Usługa hostowana jest klasą z logiką zadań w tle, która implementuje <xref:Microsoft.Extensions.Hosting.IHostedService> interfejs. Ten temat zawiera trzy przykłady usługi hostowanej:
 
 * Zadanie w tle, które jest uruchamiane na czasomierzu.
 * Usługa hostowana, która aktywuje [usługę](xref:fundamentals/dependency-injection#service-lifetimes)o określonym zakresie. Usługa objęta zakresem może używać [iniekcji zależności (di)](xref:fundamentals/dependency-injection)
@@ -197,51 +184,51 @@ Odwołuje się do pakietu [Microsoft. AspNetCore. app](xref:fundamentals/metapac
 
 Usługi hostowane implementują <xref:Microsoft.Extensions.Hosting.IHostedService> interfejs. Interfejs definiuje dwie metody dla obiektów zarządzanych przez hosta:
 
-* [StartAsync (CancellationToken)](xref:Microsoft.Extensions.Hosting.IHostedService.StartAsync*) &ndash; `StartAsync` zawiera logikę do uruchomienia zadania w tle. W przypadku korzystania z [hosta sieci Web](xref:fundamentals/host/web-host) `StartAsync` jest wywoływana po uruchomieniu serwera i wyzwoleniu [IApplicationLifetime. ApplicationStarted](xref:Microsoft.AspNetCore.Hosting.IApplicationLifetime.ApplicationStarted*) . W przypadku korzystania z [hosta generycznego](xref:fundamentals/host/generic-host) `StartAsync` jest wywoływana `ApplicationStarted` przed wywołaniem.
+* [StartAsync (CancellationToken)](xref:Microsoft.Extensions.Hosting.IHostedService.StartAsync*) &ndash; `StartAsync`zawiera logikę do uruchomienia zadania w tle. W przypadku korzystania z [hosta sieci Web](xref:fundamentals/host/web-host) `StartAsync` jest wywoływana po uruchomieniu serwera i wyzwoleniu [IApplicationLifetime. ApplicationStarted](xref:Microsoft.AspNetCore.Hosting.IApplicationLifetime.ApplicationStarted*) . W przypadku korzystania z [hosta generycznego](xref:fundamentals/host/generic-host) `StartAsync` jest wywoływana przed wywołaniem `ApplicationStarted` .
 
-* [StopAsync (CancellationToken)](xref:Microsoft.Extensions.Hosting.IHostedService.StopAsync*) &ndash; wyzwalane, gdy host wykonuje bezpieczne zamknięcie. `StopAsync`zawiera logikę końcową zadania w tle. Implementacja <xref:System.IDisposable> i [finalizatory (destruktory)](/dotnet/csharp/programming-guide/classes-and-structs/destructors) do usuwania wszelkich niezarządzanych zasobów.
+* [StopAsync (CancellationToken)](xref:Microsoft.Extensions.Hosting.IHostedService.StopAsync*) &ndash; Wyzwalane, gdy host wykonuje bezpieczne zamknięcie. `StopAsync`zawiera logikę końcową zadania w tle. Implementacja <xref:System.IDisposable> i [finalizatory (destruktory)](/dotnet/csharp/programming-guide/classes-and-structs/destructors) do usuwania wszelkich niezarządzanych zasobów.
 
   Token anulowania ma domyślnie pięciu sekund, aby wskazać, że proces zamykania nie powinien już być łagodny. Gdy żądanie anulowania jest wymagane na tokenie:
 
   * Wszystkie pozostałe operacje w tle, które wykonuje aplikacja, powinny zostać przerwane.
-  * Wszelkie metody wywoływane w `StopAsync` programie powinny zwracać monity.
+  * Wszelkie metody wywoływane w programie `StopAsync` powinny zwracać monity.
 
-  Jednak zadania nie są porzucane po zażądaniu&mdash;anulowania obiekt wywołujący czeka na ukończenie wszystkich zadań.
+  Jednak zadania nie są porzucane po zażądaniu anulowania &mdash; obiekt wywołujący czeka na ukończenie wszystkich zadań.
 
-  Jeśli aplikacja nieoczekiwanie się zamknie (na przykład proces aplikacji kończy się niepowodzeniem) `StopAsync` , może nie zostać wywołany. W związku z tym wszystkie metody wywoływane lub operacje `StopAsync` wykonywane w programie mogą nie wystąpić.
+  Jeśli aplikacja nieoczekiwanie się zamknie (na przykład proces aplikacji kończy się niepowodzeniem), `StopAsync` może nie zostać wywołany. W związku z tym wszystkie metody wywoływane lub operacje wykonywane w programie `StopAsync` mogą nie wystąpić.
 
   Aby zwiększyć domyślne pięć sekund limitu czasu zamykania, ustaw:
 
   * <xref:Microsoft.Extensions.Hosting.HostOptions.ShutdownTimeout*>w przypadku korzystania z hosta ogólnego. Aby uzyskać więcej informacji, zobacz <xref:fundamentals/host/generic-host#shutdown-timeout>.
   * Ustawienie konfiguracji hosta limitu czasu zamykania w przypadku korzystania z hosta sieci Web. Aby uzyskać więcej informacji, zobacz <xref:fundamentals/host/web-host#shutdown-timeout>.
 
-Usługa hostowana jest uaktywniana raz podczas uruchamiania aplikacji i bezpiecznie zamykana podczas zamykania aplikacji. Jeśli wystąpi błąd podczas wykonywania zadania w tle, powinien `Dispose` zostać wywołany, nawet `StopAsync` Jeśli nie jest wywoływana.
+Usługa hostowana jest uaktywniana raz podczas uruchamiania aplikacji i bezpiecznie zamykana podczas zamykania aplikacji. Jeśli wystąpi błąd podczas wykonywania zadania w tle, `Dispose` powinien zostać wywołany, nawet jeśli `StopAsync` nie jest wywoływana.
 
 ## <a name="timed-background-tasks"></a>Zadania w tle czasu
 
-Zadanie w tle czasu używa klasy [System. Threading. Timer](xref:System.Threading.Timer) . Czasomierz wyzwala `DoWork` metodę zadania. Czasomierz jest wyłączony `StopAsync` i zlikwidowany po usunięciu kontenera usługi `Dispose`:
+Zadanie w tle czasu używa klasy [System. Threading. Timer](xref:System.Threading.Timer) . Czasomierz wyzwala `DoWork` metodę zadania. Czasomierz jest wyłączony `StopAsync` i zlikwidowany po usunięciu kontenera usługi `Dispose` :
 
 [!code-csharp[](hosted-services/samples/2.x/BackgroundTasksSample/Services/TimedHostedService.cs?name=snippet1&highlight=15-16,30,37)]
 
-<xref:System.Threading.Timer> Nie czeka na zakończenie poprzednich wykonań `DoWork` , więc wskazane podejście może nie być odpowiednie dla każdego scenariusza.
+<xref:System.Threading.Timer>Nie czeka na zakończenie poprzednich wykonań `DoWork` , więc wskazane podejście może nie być odpowiednie dla każdego scenariusza.
 
-Usługa jest zarejestrowana w `Startup.ConfigureServices` ramach metody `AddHostedService` rozszerzającej:
+Usługa jest zarejestrowana w ramach `Startup.ConfigureServices` `AddHostedService` metody rozszerzającej:
 
 [!code-csharp[](hosted-services/samples/2.x/BackgroundTasksSample/Startup.cs?name=snippet1)]
 
 ## <a name="consuming-a-scoped-service-in-a-background-task"></a>Zużywanie usługi w zakresie w zadaniu w tle
 
-Aby korzystać z [usług](xref:fundamentals/dependency-injection#service-lifetimes) o określonym zakresie `IHostedService`w ramach programu, należy utworzyć zakres. Żaden zakres nie jest tworzony domyślnie dla usługi hostowanej.
+Aby korzystać z usług o określonym [zakresie](xref:fundamentals/dependency-injection#service-lifetimes) w ramach programu `IHostedService` , należy utworzyć zakres. Żaden zakres nie jest tworzony domyślnie dla usługi hostowanej.
 
 Usługa zadań w tle w zakresie zawiera logikę zadania w tle. W poniższym przykładzie <xref:Microsoft.Extensions.Logging.ILogger> jest wstrzykiwana do usługi:
 
 [!code-csharp[](hosted-services/samples/2.x/BackgroundTasksSample/Services/ScopedProcessingService.cs?name=snippet1)]
 
-Usługa hostowana tworzy zakres, aby rozwiązać usługę zadań w tle w zakresie w celu wywołania `DoWork` jej metody:
+Usługa hostowana tworzy zakres, aby rozwiązać usługę zadań w tle w zakresie w celu wywołania jej `DoWork` metody:
 
 [!code-csharp[](hosted-services/samples/2.x/BackgroundTasksSample/Services/ConsumeScopedServiceHostedService.cs?name=snippet1&highlight=29-36)]
 
-Usługi są zarejestrowane w `Startup.ConfigureServices`usłudze. `IHostedService` Implementacja jest zarejestrowana przy użyciu `AddHostedService` metody rozszerzającej:
+Usługi są zarejestrowane w usłudze `Startup.ConfigureServices` . `IHostedService`Implementacja jest zarejestrowana przy użyciu `AddHostedService` metody rozszerzającej:
 
 [!code-csharp[](hosted-services/samples/2.x/BackgroundTasksSample/Startup.cs?name=snippet2)]
 
@@ -251,22 +238,22 @@ Kolejka zadań w tle jest oparta na .NET Framework 4. x <xref:System.Web.Hosting
 
 [!code-csharp[](hosted-services/samples/2.x/BackgroundTasksSample/Services/BackgroundTaskQueue.cs?name=snippet1)]
 
-W `QueueHostedService`programie zadania w tle w kolejce są odrzucane i wykonywane jako [BackgroundService](#backgroundservice-base-class), która jest klasą bazową do implementowania długotrwałego `IHostedService`działania:
+W programie `QueueHostedService` zadania w tle w kolejce są odrzucane i wykonywane jako [BackgroundService](#backgroundservice-base-class), która jest klasą bazową do implementowania długotrwałego działania `IHostedService` :
 
 [!code-csharp[](hosted-services/samples/2.x/BackgroundTasksSample/Services/QueuedHostedService.cs?name=snippet1&highlight=21,25)]
 
-Usługi są zarejestrowane w `Startup.ConfigureServices`usłudze. `IHostedService` Implementacja jest zarejestrowana przy użyciu `AddHostedService` metody rozszerzającej:
+Usługi są zarejestrowane w usłudze `Startup.ConfigureServices` . `IHostedService`Implementacja jest zarejestrowana przy użyciu `AddHostedService` metody rozszerzającej:
 
 [!code-csharp[](hosted-services/samples/2.x/BackgroundTasksSample/Startup.cs?name=snippet3)]
 
 W klasie modelu strony indeksu:
 
-* `IBackgroundTaskQueue` Zostaje wstrzyknięty do konstruktora i przypisany do `Queue`.
-* <xref:Microsoft.Extensions.DependencyInjection.IServiceScopeFactory> Jest wstrzykiwany i przypisany do `_serviceScopeFactory`. Fabryka służy do tworzenia wystąpień <xref:Microsoft.Extensions.DependencyInjection.IServiceScope>, które są używane do tworzenia usług w zakresie. Zakres jest tworzony w celu używania aplikacji `AppDbContext` (usługi w [zakresie](xref:fundamentals/dependency-injection#service-lifetimes)) do zapisywania rekordów bazy danych w `IBackgroundTaskQueue` (pojedynczej usłudze).
+* `IBackgroundTaskQueue`Zostaje wstrzyknięty do konstruktora i przypisany do `Queue` .
+* <xref:Microsoft.Extensions.DependencyInjection.IServiceScopeFactory>Jest wstrzykiwany i przypisany do `_serviceScopeFactory` . Fabryka służy do tworzenia wystąpień <xref:Microsoft.Extensions.DependencyInjection.IServiceScope> , które są używane do tworzenia usług w zakresie. Zakres jest tworzony w celu używania aplikacji `AppDbContext` ( [usługi w zakresie](xref:fundamentals/dependency-injection#service-lifetimes)) do zapisywania rekordów bazy danych w `IBackgroundTaskQueue` (pojedynczej usłudze).
 
 [!code-csharp[](hosted-services/samples/2.x/BackgroundTasksSample/Pages/Index.cshtml.cs?name=snippet1)]
 
-Po wybraniu przycisku **Dodaj zadanie** na stronie indeks jest wykonywana `OnPostAddTask` Metoda. `QueueBackgroundWorkItem`jest wywoływana w celu dodawania do kolejki elementu pracy:
+Po wybraniu przycisku **Dodaj zadanie** na stronie indeks `OnPostAddTask` jest wykonywana metoda. `QueueBackgroundWorkItem`jest wywoływana w celu dodawania do kolejki elementu pracy:
 
 [!code-csharp[](hosted-services/samples/2.x/BackgroundTasksSample/Pages/Index.cshtml.cs?name=snippet2)]
 

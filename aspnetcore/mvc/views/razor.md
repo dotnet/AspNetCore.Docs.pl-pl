@@ -1,7 +1,7 @@
 ---
 title: odwołanie do składni Razor dla ASP.NET Core
 author: rick-anderson
-description: Dowiedz Razor się więcej o składni znaczników na potrzeby osadzania kodu opartego na serwerze w stronach sieci Web.
+description: Dowiedz się więcej o Razor składni znaczników na potrzeby osadzania kodu opartego na serwerze w stronach sieci Web.
 ms.author: riande
 ms.date: 02/12/2020
 no-loc:
@@ -11,12 +11,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/razor
-ms.openlocfilehash: 3e77b25e2660688d0040d47840e47dab8f260197
-ms.sourcegitcommit: 6c7a149168d2c4d747c36de210bfab3abd60809a
+ms.openlocfilehash: 2831fd2edd029043e9457cd213e32f1a82c2872e
+ms.sourcegitcommit: 69e1a79a572b0af17d08e81af12c594b7316f2e1
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/09/2020
-ms.locfileid: "83003191"
+ms.lasthandoff: 05/15/2020
+ms.locfileid: "83424424"
 ---
 # <a name="razor-syntax-reference-for-aspnet-core"></a>Składnia Razor odwołanie do ASP.NET Core
 
@@ -32,9 +32,9 @@ Domyślnym językiem składni Razor jest HTML. Renderowanie kodu HTML ze tagów 
 
 Razor obsługuje C# i używa `@` symbolu do przechodzenia z języka HTML do języka c#. Razor oblicza wyrażenia języka C# i renderuje je w danych wyjściowych w formacie HTML.
 
-Gdy po `@` symbolu następuje [słowo kluczowe zarezerwowane Razor](#razor-reserved-keywords), przechodzi do znacznika specyficznego dla Razor. W przeciwnym razie przechodzi do zwykłego języka C#.
+Gdy `@` po symbolu następuje [słowo kluczowe zarezerwowane Razor](#razor-reserved-keywords), przechodzi do znacznika specyficznego dla Razor. W przeciwnym razie przechodzi do zwykłego języka C#.
 
-Aby wypróbować `@` symbol w znaczniku Razor, użyj `@` drugiego symbolu:
+Aby wypróbować `@` symbol w znaczniku Razor, użyj drugiego `@` symbolu:
 
 ```cshtml
 <p>@@Username</p>
@@ -54,20 +54,20 @@ Atrybuty i zawartość HTML zawierające adresy e-mail nie traktują `@` symbolu
 
 ## <a name="implicit-razor-expressions"></a>Niejawne wyrażenia Razor
 
-Niejawne wyrażenia Razor `@` zaczynają się od kodu C#:
+Niejawne wyrażenia Razor zaczynają się od `@` kodu C#:
 
 ```cshtml
 <p>@DateTime.Now</p>
 <p>@DateTime.IsLeapYear(2016)</p>
 ```
 
-Z wyjątkiem słowa kluczowego języka `await` C# wyrażenia niejawne nie mogą zawierać spacji. Jeśli instrukcja języka C# ma jasne zakończenie, spacje mogą być wymieszaniu:
+Z wyjątkiem `await` słowa kluczowego języka C# wyrażenia niejawne nie mogą zawierać spacji. Jeśli instrukcja języka C# ma jasne zakończenie, spacje mogą być wymieszaniu:
 
 ```cshtml
 <p>@await DoSomething("hello", "world")</p>
 ```
 
-Wyrażenia niejawne **nie mogą** zawierać typów ogólnych języka C#, ponieważ znaki wewnątrz`<>`nawiasów () są interpretowane jako tag HTML. Następujący **kod jest nieprawidłowy** :
+Wyrażenia niejawne **nie mogą** zawierać typów ogólnych języka C#, ponieważ znaki wewnątrz nawiasów ( `<>` ) są interpretowane jako tag HTML. Następujący **kod jest nieprawidłowy** :
 
 ```cshtml
 <p>@GenericMethod<int>()</p>
@@ -120,7 +120,7 @@ Wyrażenia jawne mogą służyć do renderowania danych wyjściowych z metod og�
 
 ## <a name="expression-encoding"></a>Kodowanie wyrażeń
 
-Wyrażenia języka C#, które są obliczane jako ciąg, są kodowane w formacie HTML. Wyrażenia języka C#, które `IHtmlContent` mają być renderowane bezpośrednio `IHtmlContent.WriteTo`przez. Wyrażenia języka C#, które nie `IHtmlContent` są szacowane do, są konwertowane `ToString` na ciąg przez i kodowane przed ich renderowaniem.
+Wyrażenia języka C#, które są obliczane jako ciąg, są kodowane w formacie HTML. Wyrażenia języka C#, które mają być `IHtmlContent` renderowane bezpośrednio przez `IHtmlContent.WriteTo` . Wyrażenia języka C#, które nie są szacowane do, `IHtmlContent` są konwertowane na ciąg przez `ToString` i kodowane przed ich renderowaniem.
 
 ```cshtml
 @("<span>Hello World</span>")
@@ -141,7 +141,7 @@ KOD HTML jest wyświetlany w przeglądarce jako:
 `HtmlHelper.Raw`dane wyjściowe nie są kodowane, ale renderowane jako znaczniki HTML.
 
 > [!WARNING]
-> Korzystanie `HtmlHelper.Raw` z nieoczyszczonych danych wejściowych użytkownika stanowi zagrożenie bezpieczeństwa. Dane wejściowe użytkownika mogą zawierać złośliwe skrypty JavaScript lub inne luki w zabezpieczeniach. Oczyszczanie danych wejściowych użytkownika jest trudne. Unikaj `HtmlHelper.Raw` używania z danymi wejściowymi użytkownika.
+> Korzystanie `HtmlHelper.Raw` z nieoczyszczonych danych wejściowych użytkownika stanowi zagrożenie bezpieczeństwa. Dane wejściowe użytkownika mogą zawierać złośliwe skrypty JavaScript lub inne luki w zabezpieczeniach. Oczyszczanie danych wejściowych użytkownika jest trudne. Unikaj używania `HtmlHelper.Raw` z danymi wejściowymi użytkownika.
 
 ```cshtml
 @Html.Raw("<span>Hello World</span>")
@@ -155,7 +155,7 @@ Kod renderuje następujący HTML:
 
 ## <a name="razor-code-blocks"></a>Bloki kodu Razor
 
-Bloki kodu Razor zaczynają `@` się od i są `{}`ujęte w. W przeciwieństwie do wyrażeń, kod C# wewnątrz bloków kodu nie jest renderowany. Bloki kodu i wyrażenia w widoku mają ten sam zakres i są zdefiniowane w kolejności:
+Bloki kodu Razor zaczynają się od `@` i są ujęte w `{}` . W przeciwieństwie do wyrażeń, kod C# wewnątrz bloków kodu nie jest renderowany. Bloki kodu i wyrażenia w widoku mają ten sam zakres i są zdefiniowane w kolejności:
 
 ```cshtml
 @{
@@ -216,7 +216,7 @@ Językiem domyślnym w bloku kodu jest C#, ale strona Razor może przejść z po
 
 ### <a name="explicit-delimited-transition"></a>Jawne ograniczone przechodzenie
 
-Aby zdefiniować podsekcję bloku kodu, który powinien renderować HTML, należy ująć znaki do renderowania przy użyciu tagu Razor `<text>` :
+Aby zdefiniować podsekcję bloku kodu, który powinien renderować HTML, należy ująć znaki do renderowania przy użyciu `<text>` tagu Razor:
 
 ```cshtml
 @for (var i = 0; i < people.Length; i++)
@@ -228,10 +228,10 @@ Aby zdefiniować podsekcję bloku kodu, który powinien renderować HTML, należ
 
 To podejście służy do renderowania kodu HTML, który nie jest ujęty w tag HTML. Bez tagu HTML lub Razor Wystąpił błąd środowiska uruchomieniowego Razor.
 
-`<text>` Tag jest przydatny do kontrolowania odstępów podczas renderowania zawartości:
+`<text>`Tag jest przydatny do kontrolowania odstępów podczas renderowania zawartości:
 
 * Tylko zawartość między `<text>` tagiem jest renderowana.
-* W danych wyjściowych HTML nie `<text>` ma odstępów przed tagiem ani po nim.
+* W danych wyjściowych HTML nie ma odstępów przed tagiem ani po nim `<text>` .
 
 ### <a name="explicit-line-transition"></a>Jawne przejście liniowe
 
@@ -245,7 +245,7 @@ Aby renderować resztę całego wiersza jako HTML wewnątrz bloku kodu, użyj `@
 }
 ```
 
-`@:` Bez kodu, generowany jest błąd środowiska uruchomieniowego Razor.
+Bez `@:` kodu, generowany jest błąd środowiska uruchomieniowego Razor.
 
 Dodatkowe `@` znaki w pliku Razor mogą spowodować błędy kompilatora w instrukcjach znajdujących się w dalszej części bloku. Te błędy kompilatora mogą być trudne do zrozumienia, ponieważ rzeczywisty błąd występuje przed zgłoszonym błędem. Ten błąd jest typowy po połączeniu wielu wyrażeń jawnych/jawnych w jeden blok kodu.
 
@@ -253,7 +253,7 @@ Dodatkowe `@` znaki w pliku Razor mogą spowodować błędy kompilatora w instru
 
 Struktury formantów są rozszerzeniem bloków kodu. Wszystkie aspekty bloków kodu (przechodzenie do znaczników, wbudowane C#) również mają zastosowanie do następujących struktur:
 
-### <a name="conditionals-if-else-if-else-and-switch"></a>Warunkowe \@IF, Else IF, else i \@Switch
+### <a name="conditionals-if-else-if-else-and-switch"></a>Warunkowe \@ IF, Else IF, else i \@ Switch
 
 `@if`kontroluje, kiedy kod jest uruchamiany:
 
@@ -298,7 +298,7 @@ W poniższym znaczniku pokazano, jak używać instrukcji switch:
 }
 ```
 
-### <a name="looping-for-foreach-while-and-do-while"></a>Zapętlenie \@dla \@, ForEach \@, while, \@i do while
+### <a name="looping-for-foreach-while-and-do-while"></a>Zapętlenie \@ dla, \@ foreach, \@ while, i \@ do while
 
 KOD HTML z szablonem może być renderowany przy użyciu instrukcji sterowania pętlą. Aby renderować listę osób:
 
@@ -364,7 +364,7 @@ Obsługiwane są następujące instrukcje pętli:
 } while (i < people.Length);
 ```
 
-### <a name="compound-using"></a>Złożone \@użycie
+### <a name="compound-using"></a>Złożone \@ użycie
 
 W języku C# `using` instrukcja jest używana w celu upewnienia się, że obiekt został usunięty. W przypadku aparatu Razor ten sam mechanizm jest używany do tworzenia pomocników HTML zawierających dodatkową zawartość. W poniższym kodzie, pomocników HTML renderuje `<form>` tag przy użyciu `@using` instrukcji:
 
@@ -451,9 +451,9 @@ public class _Views_Something_cshtml : RazorPage<dynamic>
 
 W dalszej części tego artykułu, sekcja [Badanie klasy Razor C# wygenerowanej dla widoku](#inspect-the-razor-c-class-generated-for-a-view) wyjaśnia sposób wyświetlania tej wygenerowanej klasy.
 
-### <a name="attribute"></a>\@ — atrybut
+### <a name="attribute"></a>\@przypisane
 
-`@attribute` Dyrektywa dodaje dany atrybut do klasy wygenerowanej strony lub widoku. Poniższy przykład dodaje `[Authorize]` atrybut:
+`@attribute`Dyrektywa dodaje dany atrybut do klasy wygenerowanej strony lub widoku. Poniższy przykład dodaje `[Authorize]` atrybut:
 
 ```cshtml
 @attribute [Authorize]
@@ -465,7 +465,7 @@ W dalszej części tego artykułu, sekcja [Badanie klasy Razor C# wygenerowanej 
 
 *Ten scenariusz dotyczy tylko składników Razor (Razor).*
 
-`@code` Blok umożliwia [składnikowi Razor](xref:blazor/components) Dodawanie elementów członkowskich C# (pól, właściwości i metod) do składnika:
+`@code`Blok umożliwia [składnikowi Razor](xref:blazor/components) Dodawanie elementów członkowskich C# (pól, właściwości i metod) do składnika:
 
 ```razor
 @code {
@@ -473,13 +473,13 @@ W dalszej części tego artykułu, sekcja [Badanie klasy Razor C# wygenerowanej 
 }
 ```
 
-W przypadku składników Razor `@code` jest alias [`@functions`](#functions) i zalecany `@functions`. Dozwolony jest więcej `@code` niż jeden blok.
+W przypadku składników Razor `@code` jest alias [`@functions`](#functions) i zalecany `@functions` . Dozwolony jest więcej niż jeden `@code` blok.
 
 ::: moniker-end
 
 ### <a name="functions"></a>\@obowiązki
 
-`@functions` Dyrektywa umożliwia dodawanie elementów członkowskich C# (pól, właściwości i metod) do wygenerowanej klasy:
+`@functions`Dyrektywa umożliwia dodawanie elementów członkowskich C# (pól, właściwości i metod) do wygenerowanej klasy:
 
 ```cshtml
 @functions {
@@ -493,7 +493,7 @@ W [składnikach Razor](xref:blazor/components), `@code` Użyj `@functions` do do
 
 ::: moniker-end
 
-Przykład:
+Na przykład:
 
 [!code-cshtml[](razor/sample/Views/Home/Contact6.cshtml)]
 
@@ -532,11 +532,11 @@ Kod renderuje następujący HTML:
 <p>Name: <strong>Martin Luther King, Jr.</strong></p>
 ```
 
-### <a name="implements"></a>\@implements
+### <a name="implements"></a>\@wprowadza
 
-`@implements` Dyrektywa implementuje interfejs dla wygenerowanej klasy.
+`@implements`Dyrektywa implementuje interfejs dla wygenerowanej klasy.
 
-Poniższy przykład implementuje <xref:System.IDisposable?displayProperty=fullName> , aby można było <xref:System.IDisposable.Dispose*> wywołać metodę:
+Poniższy przykład implementuje, <xref:System.IDisposable?displayProperty=fullName> Aby <xref:System.IDisposable.Dispose*> można było wywołać metodę:
 
 ```cshtml
 @implements IDisposable
@@ -556,7 +556,7 @@ Poniższy przykład implementuje <xref:System.IDisposable?displayProperty=fullNa
 
 ### <a name="inherits"></a>\@inherit
 
-`@inherits` Dyrektywa zapewnia pełną kontrolę nad klasą, którą dziedziczy widok:
+`@inherits`Dyrektywa zapewnia pełną kontrolę nad klasą, którą dziedziczy widok:
 
 ```cshtml
 @inherits TypeNameOfClassToInheritFrom
@@ -566,7 +566,7 @@ Następujący kod jest niestandardowym typem strony Razor:
 
 [!code-csharp[](razor/sample/Classes/CustomRazorPage.cs)]
 
-`CustomText` Zostanie wyświetlony w widoku:
+`CustomText`Zostanie wyświetlony w widoku:
 
 [!code-cshtml[](razor/sample/Views/Home/Contact10.cshtml)]
 
@@ -587,7 +587,7 @@ Poniższy kod stanowi przykład widoku o jednoznacznie określonym typie:
 
 [!code-cshtml[](razor/sample/Views/Home/Login1.cshtml)]
 
-W przypadkurick@contoso.comprzekazywania "" w modelu widok generuje następujący znacznik HTML:
+W przypadku rick@contoso.com przekazywania "" w modelu widok generuje następujący znacznik HTML:
 
 ```html
 <div>The Login Email: rick@contoso.com</div>
@@ -599,7 +599,7 @@ W przypadkurick@contoso.comprzekazywania "" w modelu widok generuje następując
 
 ### <a name="inject"></a>\@dodanie
 
-`@inject` Dyrektywa umożliwia stronie Razor dodanie usługi z [kontenera usługi](xref:fundamentals/dependency-injection) do widoku. Aby uzyskać więcej informacji, zobacz [iniekcja zależności w widokach](xref:mvc/views/dependency-injection).
+`@inject`Dyrektywa umożliwia stronie Razor dodanie usługi z [kontenera usługi](xref:fundamentals/dependency-injection) do widoku. Aby uzyskać więcej informacji, zobacz [iniekcja zależności w widokach](xref:mvc/views/dependency-injection).
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -607,7 +607,7 @@ W przypadkurick@contoso.comprzekazywania "" w modelu widok generuje następując
 
 *Ten scenariusz dotyczy tylko składników Razor (Razor).*
 
-`@layout` Dyrektywa określa układ składnika Razor. Składniki układu są używane do uniknięcia duplikowania kodu i niespójności. Aby uzyskać więcej informacji, zobacz <xref:blazor/layouts>.
+`@layout`Dyrektywa określa układ składnika Razor. Składniki układu są używane do uniknięcia duplikowania kodu i niespójności. Aby uzyskać więcej informacji, zobacz <xref:blazor/layouts>.
 
 ::: moniker-end
 
@@ -615,7 +615,7 @@ W przypadkurick@contoso.comprzekazywania "" w modelu widok generuje następując
 
 *Ten scenariusz dotyczy tylko widoków MVC i Razor Pages (. cshtml).*
 
-`@model` Dyrektywa określa typ modelu przekazaną do widoku lub strony:
+`@model`Dyrektywa określa typ modelu przekazaną do widoku lub strony:
 
 ```cshtml
 @model TypeNameOfModel
@@ -627,23 +627,23 @@ W aplikacji ASP.NET Core MVC lub Razor Pages utworzonej przy użyciu poszczegól
 @model LoginViewModel
 ```
 
-Wygenerowana Klasa dziedziczy po `RazorPage<dynamic>`:
+Wygenerowana Klasa dziedziczy po `RazorPage<dynamic>` :
 
 ```csharp
 public class _Views_Account_Login_cshtml : RazorPage<LoginViewModel>
 ```
 
-Razor uwidacznia `Model` właściwość do uzyskiwania dostępu do modelu przekazaną do widoku:
+Razor uwidacznia `Model` Właściwość do uzyskiwania dostępu do modelu przekazaną do widoku:
 
 ```cshtml
 <div>The Login Email: @Model.Email</div>
 ```
 
-`@model` Dyrektywa określa typ `Model` właściwości. Dyrektywa określa, `T` w `RazorPage<T>` którym wygenerowanej klasie, z której pochodzi widok. Jeśli `@model` dyrektywa nie jest określona, `Model` właściwość jest typu. `dynamic` Aby uzyskać więcej informacji, zobacz [silnie wpisane modele @model i słowo kluczowe](xref:tutorials/first-mvc-app/adding-model#strongly-typed-models-and-the--keyword).
+`@model`Dyrektywa określa typ `Model` właściwości. Dyrektywa określa, `T` w `RazorPage<T>` którym wygenerowanej klasie, z której pochodzi widok. Jeśli `@model` dyrektywa nie jest określona, `Model` Właściwość jest typu `dynamic` . Aby uzyskać więcej informacji, zobacz [silnie wpisane modele i @model słowo kluczowe](xref:tutorials/first-mvc-app/adding-model#strongly-typed-models-and-the--keyword).
 
-### <a name="namespace"></a>\@namespace
+### <a name="namespace"></a>\@obszaru
 
-`@namespace` Dyrektywa:
+`@namespace`Dyrektywa:
 
 * Ustawia przestrzeń nazw klasy wygenerowanej strony Razor, widoku MVC lub składnika Razor.
 * Ustawia główne pochodne przestrzenie nazw stron, widoków lub klas składników z najbliższego pliku importów w drzewie katalogów, *_ViewImports. cshtml* (widoki lub strony) lub *_Imports. Razor* (składniki Razor).
@@ -655,7 +655,7 @@ Razor uwidacznia `Model` właściwość do uzyskiwania dostępu do modelu przeka
 W przykładzie Razor Pages przedstawionym w poniższej tabeli:
 
 * Każda Strona importuje *strony/_ViewImports. cshtml*.
-* *Strona/_ViewImports. cshtml* zawiera `@namespace Hello.World`.
+* *Strona/_ViewImports. cshtml* zawiera `@namespace Hello.World` .
 * Każda Strona ma `Hello.World` jako element główny przestrzeni nazw.
 
 | Strona                                        | Przestrzeń nazw                             |
@@ -668,7 +668,7 @@ Poprzednie relacje mają zastosowanie do plików importu używanych z widokami M
 
 Gdy wiele plików importu ma `@namespace` dyrektywę, plik znajdujący się najbliżej strony, widoku lub składnika w drzewie katalogów jest używany do ustawiania głównej przestrzeni nazw.
 
-Jeśli folder *EvenMorePages* w poprzednim przykładzie ma plik Imports z `@namespace Another.Planet` plikiem (lub *strony/MorePages/EvenMorePages/Page. cshtml* zawiera `@namespace Another.Planet`), wynik zostanie przedstawiony w poniższej tabeli.
+Jeśli folder *EvenMorePages* w poprzednim przykładzie ma plik Imports z plikiem `@namespace Another.Planet` (lub *strony/MorePages/EvenMorePages/Page. cshtml* zawiera `@namespace Another.Planet` ), wynik zostanie przedstawiony w poniższej tabeli.
 
 | Strona                                        | Przestrzeń nazw               |
 | ------------------------------------------- | ----------------------- |
@@ -680,16 +680,16 @@ Jeśli folder *EvenMorePages* w poprzednim przykładzie ma plik Imports z `@name
 
 ::: moniker range=">= aspnetcore-3.0"
 
-`@page` Dyrektywa ma różne skutki w zależności od typu pliku, w którym występuje. Dyrektywa:
+`@page`Dyrektywa ma różne skutki w zależności od typu pliku, w którym występuje. Dyrektywa:
 
-* W pliku *. cshtml* wskazuje, że plik jest stroną Razor. Aby uzyskać więcej informacji, zobacz [trasy niestandardowe](xref:razor-pages/index#custom-routes) i <xref:razor-pages/index>.
+* W pliku *. cshtml* wskazuje, że plik jest stroną Razor. Aby uzyskać więcej informacji, zobacz [trasy niestandardowe](xref:razor-pages/index#custom-routes) i <xref:razor-pages/index> .
 * Określa, że składnik Razor powinien obsługiwać żądania bezpośrednio. Aby uzyskać więcej informacji, zobacz <xref:blazor/routing>.
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-`@page` Dyrektywa w pierwszym wierszu pliku *. cshtml* wskazuje, że plik jest stroną Razor. Aby uzyskać więcej informacji, zobacz <xref:razor-pages/index>.
+`@page`Dyrektywa w pierwszym wierszu pliku *. cshtml* wskazuje, że plik jest stroną Razor. Aby uzyskać więcej informacji, zobacz <xref:razor-pages/index>.
 
 ::: moniker-end
 
@@ -697,23 +697,25 @@ Jeśli folder *EvenMorePages* w poprzednim przykładzie ma plik Imports z `@name
 
 *Ten scenariusz dotyczy tylko widoków MVC i Razor Pages (. cshtml).*
 
-`@section` Dyrektywa jest używana w połączeniu z [układem MVC i Razor Pages](xref:mvc/views/layout) , aby umożliwić widokom lub stronom renderowanie zawartości w różnych częściach strony html. Aby uzyskać więcej informacji, zobacz <xref:mvc/views/layout>.
+`@section`Dyrektywa jest używana w połączeniu z [układem MVC i Razor Pages](xref:mvc/views/layout) , aby umożliwić widokom lub stronom renderowanie zawartości w różnych częściach strony html. Aby uzyskać więcej informacji, zobacz <xref:mvc/views/layout>.
 
 ### <a name="using"></a>\@using
 
-`@using` Dyrektywa dodaje dyrektywę C# `using` do wygenerowanego widoku:
+`@using`Dyrektywa dodaje `using` dyrektywę C# do wygenerowanego widoku:
 
 [!code-cshtml[](razor/sample/Views/Home/Contact9.cshtml)]
 
 ::: moniker range=">= aspnetcore-3.0"
 
-W [składnikach Razor](xref:blazor/components)również kontroluje składniki, `@using` które znajdują się w zakresie.
+W [składnikach Razor](xref:blazor/components) `@using` również kontroluje składniki, które znajdują się w zakresie.
 
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-3.0"
 
 ## <a name="directive-attributes"></a>Atrybuty dyrektywy
+
+Atrybuty dyrektywy Razor są reprezentowane przez niejawne wyrażenia z zastrzeżonymi słowami kluczowymi po `@` symbolu. Atrybut dyrektywy zazwyczaj zmienia sposób analizowania elementu lub umożliwia korzystanie z różnych funkcji.
 
 ### <a name="attributes"></a>\@Attributes
 
@@ -753,23 +755,23 @@ Powoduje zatrzymanie propagacji zdarzenia dla zdarzenia.
 
 ::: moniker range=">= aspnetcore-3.0"
 
-### <a name="key"></a>\@głównych
+### <a name="key"></a>\@key
 
 *Ten scenariusz dotyczy tylko składników Razor (Razor).*
 
-Atrybut `@key` dyrektywy powoduje, że algorytmy porównujące składniki, aby zagwarantować zachowywanie elementów lub składników na podstawie wartości klucza. Aby uzyskać więcej informacji, zobacz <xref:blazor/components#use-key-to-control-the-preservation-of-elements-and-components>.
+`@key`Atrybut dyrektywy powoduje, że algorytmy porównujące składniki, aby zagwarantować zachowywanie elementów lub składników na podstawie wartości klucza. Aby uzyskać więcej informacji, zobacz <xref:blazor/components#use-key-to-control-the-preservation-of-elements-and-components>.
 
 ### <a name="ref"></a>\@ref
 
 *Ten scenariusz dotyczy tylko składników Razor (Razor).*
 
-Odwołania do składników`@ref`() umożliwiają odwoływanie się do wystąpienia składnika, dzięki czemu można wydać polecenia do tego wystąpienia. Aby uzyskać więcej informacji, zobacz <xref:blazor/components#capture-references-to-components>.
+Odwołania do składników ( `@ref` ) umożliwiają odwoływanie się do wystąpienia składnika, dzięki czemu można wydać polecenia do tego wystąpienia. Aby uzyskać więcej informacji, zobacz <xref:blazor/components#capture-references-to-components>.
 
 ### <a name="typeparam"></a>\@typeparam
 
 *Ten scenariusz dotyczy tylko składników Razor (Razor).*
 
-`@typeparam` Dyrektywa deklaruje parametr typu ogólnego dla wygenerowanej klasy składnika. Aby uzyskać więcej informacji, zobacz <xref:blazor/templated-components#generic-typed-components>.
+`@typeparam`Dyrektywa deklaruje parametr typu ogólnego dla wygenerowanej klasy składnika. Aby uzyskać więcej informacji, zobacz <xref:blazor/templated-components#generic-typed-components>.
 
 ::: moniker-end
 
@@ -781,7 +783,7 @@ Szablony Razor umożliwiają zdefiniowanie fragmentu interfejsu użytkownika w n
 @<tag>...</tag>
 ```
 
-Poniższy przykład ilustruje, jak określić delegata Razor dla szablonu jako <xref:System.Func%602>. [Typ dynamiczny](/dotnet/csharp/programming-guide/types/using-type-dynamic) jest określony dla parametru metody, która jest hermetyzowana przez delegata. [Typ obiektu](/dotnet/csharp/language-reference/keywords/object) jest określony jako wartość zwracana delegata. Szablon jest używany z elementem <xref:System.Collections.Generic.List%601> `Pet` zawierającym `Name` właściwość.
+Poniższy przykład ilustruje, jak określić delegata Razor dla szablonu jako <xref:System.Func%602> . [Typ dynamiczny](/dotnet/csharp/programming-guide/types/using-type-dynamic) jest określony dla parametru metody, która jest hermetyzowana przez delegata. [Typ obiektu](/dotnet/csharp/language-reference/keywords/object) jest określony jako wartość zwracana delegata. Szablon jest używany z elementem <xref:System.Collections.Generic.List%601> `Pet` zawierającym `Name` Właściwość.
 
 ```csharp
 public class Pet
@@ -803,7 +805,7 @@ public class Pet
 }
 ```
 
-Szablon jest renderowany przy użyciu `pets` `foreach` instrukcji dostarczonej przez instrukcję:
+Szablon jest renderowany przy użyciu `pets` instrukcji dostarczonej przez `foreach` instrukcję:
 
 ```cshtml
 @foreach (var pet in pets)
@@ -846,7 +848,7 @@ Możesz również podać wbudowany szablon Razor jako argument metody. W poniżs
 
 Korzystając z listy zwierząt domowych z poprzedniego przykładu, `Repeat` Metoda jest wywoływana z:
 
-* <xref:System.Collections.Generic.List%601>z `Pet`programu.
+* <xref:System.Collections.Generic.List%601>z programu `Pet` .
 * Liczba powtórzeń poszczególnych zwierząt domowych.
 * Wbudowany szablon do użycia dla elementów listy nieuporządkowanej listy.
 
@@ -896,14 +898,14 @@ Istnieją trzy dyrektywy, które odnoszą się do [pomocników tagów](xref:mvc/
 * section
 * Pomocnik (aktualnie nieobsługiwany przez ASP.NET Core)
 
-RazorSłowa kluczowe są wyprowadzane `@(Razor Keyword)` z (na przykład `@(functions)`).
+RazorSłowa kluczowe są wyprowadzane z `@(Razor Keyword)` (na przykład `@(functions)` ).
 
-### <a name="c-razor-keywords"></a>Słowa Razor kluczowe języka C#
+### <a name="c-razor-keywords"></a>RazorSłowa kluczowe języka C#
 
 * case
 * do
 * default
-* for
+* dla
 * foreach
 * if
 * else
@@ -915,19 +917,19 @@ RazorSłowa kluczowe są wyprowadzane `@(Razor Keyword)` z (na przykład `@(func
 * using
 * while
 
-Słowa Razor kluczowe języka C# muszą mieć podwójne ucieczki `@(@C# Razor Keyword)` z (na przykład `@(@case)`). Pierwszy `@` wyprowadza Razor Analizator. Drugi `@` wyprowadza analizator składni języka C#.
+RazorSłowa kluczowe języka C# muszą mieć podwójne ucieczki z `@(@C# Razor Keyword)` (na przykład `@(@case)` ). Pierwszy `@` wyprowadza Razor Analizator. Drugi `@` wyprowadza analizator składni języka C#.
 
 ### <a name="reserved-keywords-not-used-by-razor"></a>Zastrzeżone słowa kluczowe, które nie są używane przezRazor
 
 * class
 
-## <a name="inspect-the-razor-c-class-generated-for-a-view"></a>Sprawdzanie klasy Razor języka C# wygenerowanej dla widoku
+## <a name="inspect-the-razor-c-class-generated-for-a-view"></a>Sprawdzanie Razor klasy języka C# wygenerowanej dla widoku
 
 ::: moniker range=">= aspnetcore-2.1"
 
-W zestaw .NET Core SDK 2,1 lub nowszej, [ Razor zestaw SDK](xref:razor-pages/sdk) obsługuje kompilację Razor plików. Podczas kompilowania projektu Razor zestaw SDK generuje *obj/<build_configuration>/<target_framework_moniker>/Razor * katalogu w katalogu głównym projektu. Struktura katalogów w *Razor* katalogu odzwierciedla strukturę katalogu projektu.
+W zestaw .NET Core SDK 2,1 lub nowszej, [ Razor zestaw SDK](xref:razor-pages/sdk) obsługuje kompilację Razor plików. Podczas kompilowania projektu Razor zestaw SDK generuje *obj/<build_configuration>/<target_framework_moniker>/ Razor * katalogu w katalogu głównym projektu. Struktura katalogów w *Razor* katalogu odzwierciedla strukturę katalogu projektu.
 
-Rozważmy następującą strukturę katalogów w projekcie ASP.NET Core stron Razor 2,1 na platformie .net Core 2,1:
+Rozważmy następującą strukturę katalogów w projekcie ASP.NET Core stron 2,1 na Razor platformie .NET Core 2,1:
 
 * **Obszarach**
   * **Administratora**
@@ -959,7 +961,7 @@ Kompilowanie projektu w konfiguracji *debugowania* powoduje zwrócenie następuj
           * *_ViewStart. g. cshtml. cs*
           * *Index.g.cshtml.cs*
 
-Aby wyświetlić wygenerowaną klasę dla *stron/index. cshtml*, Otwórz *obj/Debug/netcoreapp 2.1/Razor/Pages/index.g.cshtml.cs*.
+Aby wyświetlić wygenerowaną klasę dla *stron/index. cshtml*, Otwórz *obj/Debug/netcoreapp 2.1/ Razor /Pages/index.g.cshtml.cs*.
 
 ::: moniker-end
 
@@ -969,11 +971,11 @@ Dodaj następującą klasę do projektu ASP.NET Core MVC:
 
 [!code-csharp[](razor/sample/Utilities/CustomTemplateEngine.cs)]
 
-W `Startup.ConfigureServices`programie Zastąp `RazorTemplateEngine` wartość dodany przez MVC `CustomTemplateEngine` klasą:
+W programie `Startup.ConfigureServices` Zastąp wartość `RazorTemplateEngine` dodany przez MVC `CustomTemplateEngine` klasą:
 
 [!code-csharp[](razor/sample/Startup.cs?highlight=4&range=10-14)]
 
-Ustaw punkt przerwania na `return csharpDocument;` instrukcji `CustomTemplateEngine`. Gdy wykonanie programu zatrzyma się w punkcie przerwania, Wyświetl `generatedCode`wartość.
+Ustaw punkt przerwania na `return csharpDocument;` instrukcji `CustomTemplateEngine` . Gdy wykonanie programu zatrzyma się w punkcie przerwania, Wyświetl wartość `generatedCode` .
 
 ![Widok wizualizatora tekstu generatedCode](razor/_static/tvr.png)
 
@@ -981,11 +983,11 @@ Ustaw punkt przerwania na `return csharpDocument;` instrukcji `CustomTemplateEng
 
 ## <a name="view-lookups-and-case-sensitivity"></a>Wyświetl wyszukiwania i rozróżnianie wielkości liter
 
-Aparat Razor widoku wykonuje wyszukiwania z uwzględnieniem wielkości liter w widokach. Jednak rzeczywiste wyszukiwanie jest określane przez podstawowy system plików:
+RazorAparat widoku wykonuje wyszukiwania z uwzględnieniem wielkości liter w widokach. Jednak rzeczywiste wyszukiwanie jest określane przez podstawowy system plików:
 
 * Źródło na podstawie pliku:
   * W systemach operacyjnych z systemami plików bez uwzględniania wielkości liter (na przykład Windows) wyszukiwania dostawcy plików fizycznych nie uwzględniają wielkości liter. Na przykład `return View("Test")` wyniki są zgodne z */views/Home/test.cshtml*, */views/Home/test.cshtml*i innymi wariantami wielkości liter.
-  * W przypadku systemów plików z uwzględnieniem wielkości liter (na przykład Linux, OSX i `EmbeddedFileProvider`with) Wyszukiwanie jest rozróżniana wielkość liter. Na przykład, `return View("Test")` w odniesieniu do */views/Home/test.cshtml*.
+  * W przypadku systemów plików z uwzględnieniem wielkości liter (na przykład Linux, OSX i with `EmbeddedFileProvider` ) Wyszukiwanie jest rozróżniana wielkość liter. Na przykład, w odniesieniu do `return View("Test")` */views/Home/test.cshtml*.
 * Wstępnie skompilowane widoki: w przypadku ASP.NET Core 2,0 i nowszych wyszukiwanie wstępnie skompilowanych widoków nie uwzględnia wielkości liter we wszystkich systemach operacyjnych. Zachowanie jest takie samo jak zachowanie dostawcy plików fizycznych w systemie Windows. Jeśli dwa skompilowane widoki różnią się tylko wielkością liter, wynik wyszukiwania jest niejednoznaczny.
 
 Deweloperzy są zachęcani do dopasowania wielkości liter w nazwach plików i katalogów do wielkości liter:
@@ -997,4 +999,4 @@ Przypadek dopasowania gwarantuje, że wdrożenia znajdą swoje widoki niezależn
 
 ## <a name="additional-resources"></a>Zasoby dodatkowe
 
-[Wprowadzenie do programowania w sieci Web ASP.NET Razor przy użyciu składni](/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c) zawiera wiele przykładów programowania Razor z składnią.
+[Wprowadzenie do programowania w sieci Web ASP.NET za pomocą Razor Składnia](/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c) zawiera wiele przykładów programowania z Razor składnią.

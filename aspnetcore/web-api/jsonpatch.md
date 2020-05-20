@@ -1,24 +1,13 @@
 ---
-title: JsonPatch w interfejsie Web API ASP.NET Core
-author: rick-anderson
-description: Dowiedz się, jak obsługiwać żądania poprawek w formacie JSON w ASP.NET Core internetowym interfejsie API.
-ms.author: riande
-ms.custom: mvc
-ms.date: 04/02/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: web-api/jsonpatch
-ms.openlocfilehash: 3a78fa268cce8cff10fedf5814d61ce0e5faaf4b
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82766670"
+title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
 ---
+
 # <a name="jsonpatch-in-aspnet-core-web-api"></a>JsonPatch w interfejsie Web API ASP.NET Core
 
 Autorzy [Dykstra](https://github.com/tdykstra) i [Kirka Larkin](https://github.com/serpent5)
@@ -31,8 +20,8 @@ W tym artykule wyjaśniono, jak obsłużyć żądania poprawek w formacie JSON w
 
 Aby włączyć obsługę poprawek JSON w aplikacji, wykonaj następujące czynności:
 
-1. Zainstaluj pakiet NuGet [Microsoft. AspNetCore. MVC. NewtonsoftJson](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson/) .
-1. Zaktualizuj `Startup.ConfigureServices` metodę projektu w celu wywołania <xref:Microsoft.Extensions.DependencyInjection.NewtonsoftJsonMvcBuilderExtensions.AddNewtonsoftJson*>. Przykład:
+1. Zainstaluj [`Microsoft.AspNetCore.Mvc.NewtonsoftJson`](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson/) pakiet NuGet.
+1. Zaktualizuj `Startup.ConfigureServices` metodę projektu w celu wywołania <xref:Microsoft.Extensions.DependencyInjection.NewtonsoftJsonMvcBuilderExtensions.AddNewtonsoftJson*> . Na przykład:
 
     ```csharp
     services
@@ -48,7 +37,7 @@ Aby włączyć obsługę poprawek JSON w aplikacji, wykonaj następujące czynno
 
 ## <a name="json-patch-addnewtonsoftjson-and-systemtextjson"></a>Poprawka JSON, AddNewtonsoftJson i system. Text. JSON
 
-`AddNewtonsoftJson``System.Text.Json`zastępuje utworzone w oparciu o dane wejściowe i wyjściowe elementy formatujące używane do formatowania **całej** zawartości JSON. Aby dodać obsługę poprawki JSON przy użyciu `Newtonsoft.Json`, pozostawiając inne elementy formatujące bez zmian, zaktualizuj `Startup.ConfigureServices` metodę projektu w następujący sposób:
+`AddNewtonsoftJson`zastępuje utworzone w oparciu o dane `System.Text.Json` wejściowe i wyjściowe elementy formatujące używane do formatowania **całej** zawartości JSON. Aby dodać obsługę poprawki JSON przy użyciu `Newtonsoft.Json` , pozostawiając inne elementy formatujące bez zmian, zaktualizuj `Startup.ConfigureServices` metodę projektu w następujący sposób:
 
 [!code-csharp[](jsonpatch/samples/3.0/WebApp1/Startup.cs?name=snippet)]
 
@@ -76,9 +65,9 @@ Na przykład następujące dokumenty JSON reprezentują zasób, dokument poprawk
 
 W powyższym formacie JSON:
 
-* `op` Właściwość wskazuje typ operacji.
-* `path` Właściwość wskazuje element do zaktualizowania.
-* `value` Właściwość zawiera nową wartość.
+* `op`Właściwość wskazuje typ operacji.
+* `path`Właściwość wskazuje element do zaktualizowania.
+* `value`Właściwość zawiera nową wartość.
 
 ### <a name="resource-after-patch"></a>Zasób po zastosowaniu poprawki
 
@@ -110,20 +99,150 @@ Zmiany wprowadzone przez zastosowanie dokumentu poprawki JSON do zasobu są niep
 
 Właściwość [Path](https://tools.ietf.org/html/rfc6901) obiektu operacji ma ukośniki między poziomami. Na przykład `"/address/zipCode"`.
 
-W celu określenia elementów tablicy są używane indeksy oparte na wartości zero. Pierwszy element `addresses` tablicy będzie miał wartość `/addresses/0`. Na `add` koniec tablicy Użyj łącznika (`-`), a nie numeru indeksu:. `/addresses/-`
+W celu określenia elementów tablicy są używane indeksy oparte na wartości zero. Pierwszy element `addresses` tablicy będzie miał wartość `/addresses/0` . Na `add` koniec tablicy Użyj łącznika ( `-` ), a nie numeru indeksu: `/addresses/-` .
 
 ### <a name="operations"></a>Operacje
 
 W poniższej tabeli przedstawiono obsługiwane operacje zgodnie z definicją w [specyfikacji poprawek JSON](https://tools.ietf.org/html/rfc6902):
 
 |Operacja  | Uwagi |
-|-----------|--------------------------------|
-| `add`     | Dodaj właściwość lub element tablicy. Dla istniejącej właściwości: Ustaw wartość.|
-| `remove`  | Usuń właściwość lub element tablicy. |
-| `replace` | Takie same `remove` , jak `add` następuje w tej samej lokalizacji. |
-| `move`    | Takie samo `remove` jak ze źródła, `add` a następnie do miejsca docelowego przy użyciu wartości ze źródła. |
-| `copy`    | Takie samo `add` jak miejsce docelowe przy użyciu wartości ze źródła. |
-| `test`    | Zwróć kod stanu sukcesu, jeśli wartość `path` jest równa = `value`.|
+|---
+title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+------|---
+title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+----------------| | `add`     | Dodaj właściwość lub element tablicy. Dla istniejącej właściwości: Ustaw wartość. | | `remove`  | Usuń właściwość lub element tablicy. | | `replace` | Takie same, jak `remove` następuje `add` w tej samej lokalizacji. | | `move`    | Takie samo jak `remove` ze źródła, a następnie `add` do miejsca docelowego przy użyciu wartości ze źródła. | | `copy`    | Takie samo jak `add` miejsce docelowe przy użyciu wartości ze źródła. | | `test`    | Zwróć kod stanu sukcesu, jeśli wartość jest równa `path` = podano `value` . |
 
 ## <a name="json-patch-in-aspnet-core"></a>Poprawka JSON w ASP.NET Core
 
@@ -134,10 +253,10 @@ ASP.NET Core implementacja poprawki JSON jest dostępna w pakiecie NuGet [Micros
 W kontrolerze interfejsu API Metoda akcji dla poprawki JSON:
 
 * Ma adnotację z `HttpPatch` atrybutem.
-* Akceptuje element `JsonPatchDocument<T>`, zazwyczaj z `[FromBody]`.
+* Akceptuje element `JsonPatchDocument<T>` , zazwyczaj z `[FromBody]` .
 * Wywołuje `ApplyTo` dokument poprawki, aby zastosować zmiany.
 
-Przykład:
+Oto przykład:
 
 [!code-csharp[](jsonpatch/samples/2.2/Controllers/HomeController.cs?name=snippet_PatchAction&highlight=1,3,9)]
 
@@ -149,7 +268,7 @@ Ten kod z przykładowej aplikacji współdziała z następującym `Customer` mod
 
 Przykładowa Metoda akcji:
 
-* Konstruuje `Customer`a.
+* Konstruuje a `Customer` .
 * Stosuje poprawkę.
 * Zwraca wynik w treści odpowiedzi.
 
@@ -175,7 +294,7 @@ W poniższym przykładzie metody akcji pokazano, jak zastosować poprawkę do ob
 
 ## <a name="the-add-operation"></a>Operacja dodawania
 
-* Jeśli `path` wskazuje element tablicy: wstawia nowy element przed określony przez `path`.
+* Jeśli `path` wskazuje element tablicy: wstawia nowy element przed określony przez `path` .
 * Jeśli `path` wskazuje Właściwość: ustawia wartość właściwości.
 * Jeśli `path` wskazuje nieistniejącą lokalizację:
   * Jeśli zasób do poprawki jest obiektem dynamicznym: dodaje właściwość.
@@ -192,52 +311,52 @@ Następujący przykładowy dokument poprawek ustawia wartość `CustomerName` i 
   * Jeśli zasób do poprawki jest obiektem dynamicznym: usuwa właściwość.
   * Jeśli zasób do poprawki jest obiektem statycznym:
     * Jeśli właściwość dopuszcza wartość null: ustawia ją na wartość null.
-    * Jeśli właściwość nie dopuszcza wartości null, ustawia ją na `default<T>`.
+    * Jeśli właściwość nie dopuszcza wartości null, ustawia ją na `default<T>` .
 
-Następujący Przykładowa poprawka zestawów `CustomerName` dokumentów do wartości null i `Orders[0]`usuwa:
+Następujący Przykładowa poprawka zestawów dokumentów `CustomerName` do wartości null i usuwa `Orders[0]` :
 
 [!code-json[](jsonpatch/samples/2.2/JSON/remove.json)]
 
 ## <a name="the-replace-operation"></a>Operacja zamiany
 
-Ta operacja jest funkcjonalnie taka sama jak `remove` po nim. `add`
+Ta operacja jest funkcjonalnie taka sama jak `remove` po nim `add` .
 
-Następujący przykładowy dokument poprawek ustawia wartość `CustomerName` i zastępuje `Orders[0]`ją nowym `Order` obiektem:
+Następujący przykładowy dokument poprawek ustawia wartość `CustomerName` i zastępuje ją `Orders[0]` nowym `Order` obiektem:
 
 [!code-json[](jsonpatch/samples/2.2/JSON/replace.json)]
 
 ## <a name="the-move-operation"></a>Operacja przenoszenia
 
-* Jeśli `path` wskazuje element `from` tablicy: kopiuje element do lokalizacji `path` elementu, a następnie uruchamia `remove` operację na `from` elemencie.
-* Jeśli `path` `from` wskazuje Właściwość: kopiuje wartość właściwości do `path` właściwości, a następnie uruchamia `remove` operację na `from` właściwości.
+* Jeśli `path` wskazuje element tablicy: kopiuje `from` element do lokalizacji `path` elementu, a następnie uruchamia `remove` operację na `from` elemencie.
+* Jeśli `path` wskazuje Właściwość: kopiuje wartość `from` właściwości do `path` właściwości, a następnie uruchamia `remove` operację na `from` właściwości.
 * Jeśli `path` wskazuje na nieistniejącą Właściwość:
   * Jeśli zasób do poprawki jest obiektem statycznym: żądanie nie powiedzie się.
-  * Jeśli zasób do poprawki jest obiektem dynamicznym: kopiuje `from` właściwość do lokalizacji wskazywanej `path`przez, a następnie `remove` uruchamia operację na `from` właściwości.
+  * Jeśli zasób do poprawki jest obiektem dynamicznym: kopiuje `from` Właściwość do lokalizacji wskazywanej przez `path` , a następnie uruchamia `remove` operację na `from` właściwości.
 
 Następujący przykładowy dokument poprawek:
 
-* Kopiuje wartość `Orders[0].OrderName` do `CustomerName`.
+* Kopiuje wartość `Orders[0].OrderName` do `CustomerName` .
 * Ustawia `Orders[0].OrderName` wartość null.
-* Przenosi `Orders[1]` do przed `Orders[0]`.
+* Przenosi `Orders[1]` do przed `Orders[0]` .
 
 [!code-json[](jsonpatch/samples/2.2/JSON/move.json)]
 
 ## <a name="the-copy-operation"></a>Operacja kopiowania
 
-Ta operacja jest funkcjonalnie taka sama jak `move` operacja bez kroku końcowego. `remove`
+Ta operacja jest funkcjonalnie taka sama jak `move` operacja bez `remove` kroku końcowego.
 
 Następujący przykładowy dokument poprawek:
 
-* Kopiuje wartość `Orders[0].OrderName` do `CustomerName`.
-* Wstawia kopię `Orders[1]` przed `Orders[0]`.
+* Kopiuje wartość `Orders[0].OrderName` do `CustomerName` .
+* Wstawia kopię `Orders[1]` przed `Orders[0]` .
 
 [!code-json[](jsonpatch/samples/2.2/JSON/copy.json)]
 
 ## <a name="the-test-operation"></a>Operacja testowa
 
-Jeśli wartość w lokalizacji wskazywanej przez `path` różni się od wartości podanej w `value`, żądanie kończy się niepowodzeniem. W takim przypadku całe żądanie PATCH kończy się niepowodzeniem, nawet jeśli wszystkie inne operacje w dokumencie poprawki zakończyły się powodzeniem.
+Jeśli wartość w lokalizacji wskazywanej przez różni `path` się od wartości podanej w `value` , żądanie kończy się niepowodzeniem. W takim przypadku całe żądanie PATCH kończy się niepowodzeniem, nawet jeśli wszystkie inne operacje w dokumencie poprawki zakończyły się powodzeniem.
 
-`test` Operacja jest często używana do zapobiegania aktualizacji, gdy występuje konflikt współbieżności.
+`test`Operacja jest często używana do zapobiegania aktualizacji, gdy występuje konflikt współbieżności.
 
 Następujący przykładowy dokument poprawek nie ma wpływu, jeśli początkowa wartość `CustomerName` to "Jan", ponieważ test zakończy się niepowodzeniem:
 
@@ -254,7 +373,7 @@ Aby przetestować przykład, uruchom aplikację i Wyślij żądania HTTP z nast�
 * Nagłówki`Content-Type: application/json-patch+json`
 * Treść: Skopiuj i wklej jeden z przykładów dokumentu poprawki JSON z folderu projektu *JSON* .
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [IETF RFC 5789 Specyfikacja metody poprawek](https://tools.ietf.org/html/rfc5789)
 * [IETF RFC 6902 — Specyfikacja poprawek JSON](https://tools.ietf.org/html/rfc6902)
@@ -288,9 +407,9 @@ Na przykład następujące dokumenty JSON reprezentują zasób, dokument poprawk
 
 W powyższym formacie JSON:
 
-* `op` Właściwość wskazuje typ operacji.
-* `path` Właściwość wskazuje element do zaktualizowania.
-* `value` Właściwość zawiera nową wartość.
+* `op`Właściwość wskazuje typ operacji.
+* `path`Właściwość wskazuje element do zaktualizowania.
+* `value`Właściwość zawiera nową wartość.
 
 ### <a name="resource-after-patch"></a>Zasób po zastosowaniu poprawki
 
@@ -322,20 +441,150 @@ Zmiany wprowadzone przez zastosowanie dokumentu poprawek JSON do zasobu są niep
 
 Właściwość [Path](https://tools.ietf.org/html/rfc6901) obiektu operacji ma ukośniki między poziomami. Na przykład `"/address/zipCode"`.
 
-W celu określenia elementów tablicy są używane indeksy oparte na wartości zero. Pierwszy element `addresses` tablicy będzie miał wartość `/addresses/0`. Na `add` koniec tablicy Użyj łącznika (-), a nie numeru indeksu: `/addresses/-`.
+W celu określenia elementów tablicy są używane indeksy oparte na wartości zero. Pierwszy element `addresses` tablicy będzie miał wartość `/addresses/0` . Na `add` koniec tablicy Użyj łącznika (-), a nie numeru indeksu: `/addresses/-` .
 
 ### <a name="operations"></a>Operacje
 
 W poniższej tabeli przedstawiono obsługiwane operacje zgodnie z definicją w [specyfikacji poprawek JSON](https://tools.ietf.org/html/rfc6902):
 
 |Operacja  | Uwagi |
-|-----------|--------------------------------|
-| `add`     | Dodaj właściwość lub element tablicy. Dla istniejącej właściwości: Ustaw wartość.|
-| `remove`  | Usuń właściwość lub element tablicy. |
-| `replace` | Takie same `remove` , jak `add` następuje w tej samej lokalizacji. |
-| `move`    | Takie samo `remove` jak ze źródła, `add` a następnie do miejsca docelowego przy użyciu wartości ze źródła. |
-| `copy`    | Takie samo `add` jak miejsce docelowe przy użyciu wartości ze źródła. |
-| `test`    | Zwróć kod stanu sukcesu, jeśli wartość `path` jest równa = `value`.|
+|---
+title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+------|---
+title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+----------------| | `add`     | Dodaj właściwość lub element tablicy. Dla istniejącej właściwości: Ustaw wartość. | | `remove`  | Usuń właściwość lub element tablicy. | | `replace` | Takie same, jak `remove` następuje `add` w tej samej lokalizacji. | | `move`    | Takie samo jak `remove` ze źródła, a następnie `add` do miejsca docelowego przy użyciu wartości ze źródła. | | `copy`    | Takie samo jak `add` miejsce docelowe przy użyciu wartości ze źródła. | | `test`    | Zwróć kod stanu sukcesu, jeśli wartość jest równa `path` = podano `value` . |
 
 ## <a name="jsonpatch-in-aspnet-core"></a>JsonPatch w ASP.NET Core
 
@@ -346,10 +595,10 @@ ASP.NET Core implementacja poprawki JSON jest dostępna w pakiecie NuGet [Micros
 W kontrolerze interfejsu API Metoda akcji dla poprawki JSON:
 
 * Ma adnotację z `HttpPatch` atrybutem.
-* Akceptuje element `JsonPatchDocument<T>`, zazwyczaj z `[FromBody]`.
+* Akceptuje element `JsonPatchDocument<T>` , zazwyczaj z `[FromBody]` .
 * Wywołuje `ApplyTo` dokument poprawki, aby zastosować zmiany.
 
-Przykład:
+Oto przykład:
 
 [!code-csharp[](jsonpatch/samples/2.2/Controllers/HomeController.cs?name=snippet_PatchAction&highlight=1,3,9)]
 
@@ -361,7 +610,7 @@ Ten kod z przykładowej aplikacji współdziała z następującym `Customer` mod
 
 Przykładowa Metoda akcji:
 
-* Konstruuje `Customer`a.
+* Konstruuje a `Customer` .
 * Stosuje poprawkę.
 * Zwraca wynik w treści odpowiedzi.
 
@@ -387,7 +636,7 @@ W poniższym przykładzie metody akcji pokazano, jak zastosować poprawkę do ob
 
 ## <a name="the-add-operation"></a>Operacja dodawania
 
-* Jeśli `path` wskazuje element tablicy: wstawia nowy element przed określony przez `path`.
+* Jeśli `path` wskazuje element tablicy: wstawia nowy element przed określony przez `path` .
 * Jeśli `path` wskazuje Właściwość: ustawia wartość właściwości.
 * Jeśli `path` wskazuje nieistniejącą lokalizację:
   * Jeśli zasób do poprawki jest obiektem dynamicznym: dodaje właściwość.
@@ -404,52 +653,52 @@ Następujący przykładowy dokument poprawek ustawia wartość `CustomerName` i 
   * Jeśli zasób do poprawki jest obiektem dynamicznym: usuwa właściwość.
   * Jeśli zasób do poprawki jest obiektem statycznym:
     * Jeśli właściwość dopuszcza wartość null: ustawia ją na wartość null.
-    * Jeśli właściwość nie dopuszcza wartości null, ustawia ją na `default<T>`.
+    * Jeśli właściwość nie dopuszcza wartości null, ustawia ją na `default<T>` .
 
-Poniższy Przykładowa poprawka zestawów `CustomerName` dokumentów do wartości null i `Orders[0]`usuwa.
+Poniższy Przykładowa poprawka zestawów dokumentów `CustomerName` do wartości null i usuwa `Orders[0]` .
 
 [!code-json[](jsonpatch/samples/2.2/JSON/remove.json)]
 
 ## <a name="the-replace-operation"></a>Operacja zamiany
 
-Ta operacja jest funkcjonalnie taka sama jak `remove` po nim. `add`
+Ta operacja jest funkcjonalnie taka sama jak `remove` po nim `add` .
 
-Następujący przykładowy dokument poprawek ustawia wartość `CustomerName` i zastępuje `Orders[0]`ją nowym `Order` obiektem.
+Następujący przykładowy dokument poprawek ustawia wartość `CustomerName` i zastępuje ją `Orders[0]` nowym `Order` obiektem.
 
 [!code-json[](jsonpatch/samples/2.2/JSON/replace.json)]
 
 ## <a name="the-move-operation"></a>Operacja przenoszenia
 
-* Jeśli `path` wskazuje element `from` tablicy: kopiuje element do lokalizacji `path` elementu, a następnie uruchamia `remove` operację na `from` elemencie.
-* Jeśli `path` `from` wskazuje Właściwość: kopiuje wartość właściwości do `path` właściwości, a następnie uruchamia `remove` operację na `from` właściwości.
+* Jeśli `path` wskazuje element tablicy: kopiuje `from` element do lokalizacji `path` elementu, a następnie uruchamia `remove` operację na `from` elemencie.
+* Jeśli `path` wskazuje Właściwość: kopiuje wartość `from` właściwości do `path` właściwości, a następnie uruchamia `remove` operację na `from` właściwości.
 * Jeśli `path` wskazuje na nieistniejącą Właściwość:
   * Jeśli zasób do poprawki jest obiektem statycznym: żądanie nie powiedzie się.
-  * Jeśli zasób do poprawki jest obiektem dynamicznym: kopiuje `from` właściwość do lokalizacji wskazywanej `path`przez, a następnie `remove` uruchamia operację na `from` właściwości.
+  * Jeśli zasób do poprawki jest obiektem dynamicznym: kopiuje `from` Właściwość do lokalizacji wskazywanej przez `path` , a następnie uruchamia `remove` operację na `from` właściwości.
 
 Następujący przykładowy dokument poprawek:
 
-* Kopiuje wartość `Orders[0].OrderName` do `CustomerName`.
+* Kopiuje wartość `Orders[0].OrderName` do `CustomerName` .
 * Ustawia `Orders[0].OrderName` wartość null.
-* Przenosi `Orders[1]` do przed `Orders[0]`.
+* Przenosi `Orders[1]` do przed `Orders[0]` .
 
 [!code-json[](jsonpatch/samples/2.2/JSON/move.json)]
 
 ## <a name="the-copy-operation"></a>Operacja kopiowania
 
-Ta operacja jest funkcjonalnie taka sama jak `move` operacja bez kroku końcowego. `remove`
+Ta operacja jest funkcjonalnie taka sama jak `move` operacja bez `remove` kroku końcowego.
 
 Następujący przykładowy dokument poprawek:
 
-* Kopiuje wartość `Orders[0].OrderName` do `CustomerName`.
-* Wstawia kopię `Orders[1]` przed `Orders[0]`.
+* Kopiuje wartość `Orders[0].OrderName` do `CustomerName` .
+* Wstawia kopię `Orders[1]` przed `Orders[0]` .
 
 [!code-json[](jsonpatch/samples/2.2/JSON/copy.json)]
 
 ## <a name="the-test-operation"></a>Operacja testowa
 
-Jeśli wartość w lokalizacji wskazywanej przez `path` różni się od wartości podanej w `value`, żądanie kończy się niepowodzeniem. W takim przypadku całe żądanie PATCH kończy się niepowodzeniem, nawet jeśli wszystkie inne operacje w dokumencie poprawki zakończyły się powodzeniem.
+Jeśli wartość w lokalizacji wskazywanej przez różni `path` się od wartości podanej w `value` , żądanie kończy się niepowodzeniem. W takim przypadku całe żądanie PATCH kończy się niepowodzeniem, nawet jeśli wszystkie inne operacje w dokumencie poprawki zakończyły się powodzeniem.
 
-`test` Operacja jest często używana do zapobiegania aktualizacji, gdy występuje konflikt współbieżności.
+`test`Operacja jest często używana do zapobiegania aktualizacji, gdy występuje konflikt współbieżności.
 
 Następujący przykładowy dokument poprawek nie ma wpływu, jeśli początkowa wartość `CustomerName` to "Jan", ponieważ test zakończy się niepowodzeniem:
 
@@ -466,7 +715,7 @@ Aby przetestować przykład, uruchom aplikację i Wyślij żądania HTTP z nast�
 * Nagłówki`Content-Type: application/json-patch+json`
 * Treść: Skopiuj i wklej jeden z przykładów dokumentu poprawki JSON z folderu projektu *JSON* .
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [IETF RFC 5789 Specyfikacja metody poprawek](https://tools.ietf.org/html/rfc5789)
 * [IETF RFC 6902 — Specyfikacja poprawek JSON](https://tools.ietf.org/html/rfc6902)

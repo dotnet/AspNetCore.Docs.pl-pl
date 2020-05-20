@@ -1,24 +1,12 @@
 ---
-title: Tworzenie i używanie Razor składników ASP.NET Core
-author: guardrex
-description: Dowiedz się, jak tworzyć i używać Razor składników, w tym jak powiązać z danymi, obsługiwać zdarzenia i zarządzać cyklem życia składników.
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 05/11/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: blazor/components
-ms.openlocfilehash: a7009bf1cf99a15f3617b47a904d52f5787b9ce1
-ms.sourcegitcommit: 1250c90c8d87c2513532be5683640b65bfdf9ddb
-ms.translationtype: MT
-ms.contentlocale: pl-PL
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83153513"
+title: "Create and use ASP.NET Core Razor Components" Author: Description: "Dowiedz się, jak tworzyć i używać Razor składników, w tym jak powiązać z danymi, obsługiwać zdarzenia i zarządzać cyklem życia składników".
+monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>Tworzenie i używanie Razor składników ASP.NET Core
 
@@ -34,9 +22,9 @@ Składniki są zaimplementowane w [Razor](xref:mvc/views/razor) plikach składni
 
 Nazwa składnika musi rozpoczynać się wielką literą. Na przykład *MyCoolComponent. Razor* jest prawidłowy, a *MyCoolComponent. Razor* jest nieprawidłowy.
 
-Interfejs użytkownika dla składnika jest definiowany przy użyciu języka HTML. Logika renderowania dynamicznego (na przykład pętle, warunkowe, wyrażenia) jest dodawana przy użyciu osadzonej składni języka C# o nazwie [Razor](xref:mvc/views/razor) . Po skompilowaniu aplikacji logika kodu HTML i renderowania języka C# jest konwertowana na klasę składnika. Nazwa wygenerowanej klasy jest zgodna z nazwą pliku.
+Interfejs użytkownika dla składnika jest definiowany przy użyciu języka HTML. Logika renderowania dynamicznego (na przykład pętle, warunkowe, wyrażenia) jest dodawana przy użyciu osadzonej składni języka C# o nazwie *Razor* . Po skompilowaniu aplikacji logika kodu HTML i renderowania języka C# jest konwertowana na klasę składnika. Nazwa wygenerowanej klasy jest zgodna z nazwą pliku.
 
-Elementy członkowskie klasy składnika są zdefiniowane w `@code` bloku. W `@code` bloku stan składnika (właściwości, pola) jest określany przy użyciu metod obsługi zdarzeń lub definiowania innej logiki składnika. Dozwolony jest więcej niż jeden `@code` blok.
+Elementy członkowskie klasy składnika są zdefiniowane w [`@code`][1] bloku. W [`@code`][1] bloku stan składnika (właściwości, pola) jest określany przy użyciu metod obsługi zdarzeń lub definiowania innej logiki składnika. Dozwolony jest więcej niż jeden [`@code`][1] blok.
 
 Składowe składnika mogą być używane jako część logiki renderowania składnika przy użyciu wyrażeń języka C#, które zaczynają się od `@` . Na przykład pole C# jest renderowane przez utworzenie prefiksu `@` do nazwy pola. Poniższy przykład szacuje i renderuje:
 
@@ -75,6 +63,15 @@ Alternatywnie można odwoływać się bezpośrednio do składnika:
 
 Aby uzyskać więcej informacji, zobacz sekcję [Importowanie składników](#import-components) .
 
+## <a name="razor-syntax"></a>Razorobowiązuje
+
+Razorskładniki w Blazor aplikacjach szeroko wykorzystują Razor składnię. Jeśli nie znasz Razor języka znaczników, zalecamy przeczytanie <xref:mvc/views/razor> przed kontynuowaniem.
+
+Podczas uzyskiwania dostępu do zawartości w Razor składni należy zwrócić szczególną uwagę na następujące sekcje:
+
+* [Dyrektywy](xref:mvc/views/razor#directives) &ndash; `@`— wstępnie ustalone zastrzeżone słowa kluczowe, które zwykle zmieniają sposób, w jaki znaczniki składnika są analizowane lub działają.
+* [Atrybuty dyrektywy](xref:mvc/views/razor#directive-attributes) &ndash; `@`— wstępnie ustalone zastrzeżone słowa kluczowe, które zwykle zmieniają sposób analizowania elementów składnika lub funkcji.
+
 ## <a name="static-assets"></a>Statyczne zasoby
 
 Blazorzgodnie z Konwencją ASP.NET Core aplikacje umieszczające statyczne zasoby w [folderze katalogu głównego sieci Web (wwwroot)](xref:fundamentals/index#web-root)projektu.
@@ -107,13 +104,13 @@ Poniższy znacznik w *indeksie. Razor* renderuje `HeadingComponent` wystąpienie
 
 [!code-razor[](common/samples/3.x/BlazorWebAssemblySample/Components/HeadingComponent.razor)]
 
-Jeśli składnik zawiera element HTML z wielką literą, która nie jest zgodna z nazwą składnika, jest emitowane ostrzeżenie wskazujące, że element ma nieoczekiwaną nazwę. Dodanie `@using` dyrektywy dla przestrzeni nazw składnika sprawia, że składnik jest dostępny, co rozwiązuje ostrzeżenie.
+Jeśli składnik zawiera element HTML z wielką literą, która nie jest zgodna z nazwą składnika, jest emitowane ostrzeżenie wskazujące, że element ma nieoczekiwaną nazwę. Dodanie [`@using`][2] dyrektywy dla przestrzeni nazw składnika sprawia, że składnik jest dostępny, co rozwiązuje ostrzeżenie.
 
 ## <a name="routing"></a>Routing
 
 Routing w programie jest realizowany Blazor przez dostarczenie szablonu trasy do każdego dostępnego składnika w aplikacji.
 
-Gdy Razor plik z `@page` dyrektywą jest kompilowany, wygenerowana Klasa ma określony <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> szablon trasy. W czasie wykonywania router szuka klas składników za pomocą `RouteAttribute` i renderuje, w zależności od tego, który składnik ma szablon trasy zgodny z żądanym adresem URL.
+Gdy Razor plik z [`@page`][9] dyrektywą jest kompilowany, wygenerowana Klasa ma określony <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> szablon trasy. W czasie wykonywania router szuka klas składników za pomocą `RouteAttribute` i renderuje, w zależności od tego, który składnik ma szablon trasy zgodny z żądanym adresem URL.
 
 ```razor
 @page "/ParentComponent"
@@ -127,13 +124,13 @@ Aby uzyskać więcej informacji, zobacz <xref:blazor/routing>.
 
 ### <a name="route-parameters"></a>Parametry trasy
 
-Składniki mogą odbierać parametry trasy z szablonu trasy dostarczonego w `@page` dyrektywie. Router używa parametrów trasy, aby wypełnić odpowiednie parametry składnika.
+Składniki mogą odbierać parametry trasy z szablonu trasy dostarczonego w [`@page`][9] dyrektywie. Router używa parametrów trasy, aby wypełnić odpowiednie parametry składnika.
 
 *Strony/RouteParameter. Razor*:
 
 [!code-razor[](components/samples_snapshot/RouteParameter.razor?highlight=2,7-8)]
 
-Parametry opcjonalne nie są obsługiwane, więc dwie `@page` dyrektywy są stosowane w powyższym przykładzie. Pierwszy zezwala na nawigowanie do składnika bez parametru. Druga `@page` dyrektywa odbiera `{text}` parametr Route i przypisuje wartość do `Text` właściwości.
+Parametry opcjonalne nie są obsługiwane, więc dwie [`@page`][9] dyrektywy są stosowane w powyższym przykładzie. Pierwszy zezwala na nawigowanie do składnika bez parametru. Druga [`@page`][9] dyrektywa odbiera `{text}` parametr Route i przypisuje wartość do `Text` właściwości.
 
 *Catch-all* parametrów ( `*` / `**` ), która przechwytuje ścieżkę między wieloma granicami folderów, **nie** jest obsługiwana w Razor składnikach (*. Razor*).
 
@@ -175,7 +172,7 @@ W poniższym przykładzie `ChildComponent` ma `ChildContent` Właściwość, kt�
 
 ## <a name="attribute-splatting-and-arbitrary-parameters"></a>Korzystając atrybutów i dowolne parametry
 
-Składniki mogą przechwytywać i renderować dodatkowe atrybuty oprócz zadeklarowanych parametrów składnika. Dodatkowe atrybuty mogą być przechwytywane w słowniku, a następnie *splatted* na element, gdy składnik jest renderowany przy użyciu [`@attributes`](xref:mvc/views/razor#attributes) Razor dyrektywy. Ten scenariusz jest przydatny podczas definiowania składnika, który generuje element znaczników, który obsługuje różne dostosowania. Na przykład może być żmudnym do definiowania atrybutów oddzielnie dla `<input>` , który obsługuje wiele parametrów.
+Składniki mogą przechwytywać i renderować dodatkowe atrybuty oprócz zadeklarowanych parametrów składnika. Dodatkowe atrybuty mogą być przechwytywane w słowniku, a następnie *splatted* na element, gdy składnik jest renderowany przy użyciu [`@attributes`][3] Razor dyrektywy. Ten scenariusz jest przydatny podczas definiowania składnika, który generuje element znaczników, który obsługuje różne dostosowania. Na przykład może być żmudnym do definiowania atrybutów oddzielnie dla `<input>` , który obsługuje wiele parametrów.
 
 W poniższym przykładzie pierwszy `<input>` element ( `id="useIndividualParams"` ) używa pojedynczych parametrów składnika, podczas gdy drugi `<input>` element ( `id="useAttributesDict"` ) używa atrybutu korzystając:
 
@@ -243,7 +240,7 @@ Aby zaakceptować dowolne atrybuty, zdefiniuj parametr składnika przy użyciu `
 
 `CaptureUnmatchedValues`Właściwość on `[Parameter]` umożliwia dopasowanie parametru do wszystkich atrybutów, które nie są zgodne z żadnym innym parametrem. Składnik może definiować tylko jeden parametr z `CaptureUnmatchedValues` . Typ właściwości używany z elementem `CaptureUnmatchedValues` musi być możliwy do przypisania z `Dictionary<string, object>` klucza ciągu. `IEnumerable<KeyValuePair<string, object>>`lub `IReadOnlyDictionary<string, object>` są również opcje w tym scenariuszu.
 
-Pozycja `@attributes` względem pozycji atrybutów elementu jest ważna. Gdy `@attributes` są splatted w elemencie, atrybuty są przetwarzane od prawej do lewej (Ostatnia do). Rozważmy następujący przykład składnika, który zużywa `Child` składnik:
+Pozycja [`@attributes`][3] względem pozycji atrybutów elementu jest ważna. Gdy [`@attributes`][3] są splatted w elemencie, atrybuty są przetwarzane od prawej do lewej (Ostatnia do). Rozważmy następujący przykład składnika, który zużywa `Child` składnik:
 
 *ParentComponent. Razor*:
 
@@ -260,13 +257,13 @@ Pozycja `@attributes` względem pozycji atrybutów elementu jest ważna. Gdy `@a
 public IDictionary<string, object> AdditionalAttributes { get; set; }
 ```
 
-`Child` `extra` Atrybut składnika jest ustawiony z prawej strony `@attributes` . `Parent`Renderowany składnik `<div>` zawiera gdy jest `extra="5"` przenoszona przez dodatkowy atrybut, ponieważ atrybuty są przetwarzane od prawej do lewej (od ostatni do pierwszego):
+`Child` `extra` Atrybut składnika jest ustawiony z prawej strony [`@attributes`][3] . `Parent`Renderowany składnik `<div>` zawiera gdy jest `extra="5"` przenoszona przez dodatkowy atrybut, ponieważ atrybuty są przetwarzane od prawej do lewej (od ostatni do pierwszego):
 
 ```html
 <div extra="5" />
 ```
 
-W poniższym przykładzie porządek `extra` i `@attributes` jest odwrócony w `Child` składniku `<div>` :
+W poniższym przykładzie porządek `extra` i [`@attributes`][3] jest odwrócony w `Child` składniku `<div>` :
 
 *ParentComponent. Razor*:
 
@@ -293,7 +290,7 @@ Renderowane `<div>` w `Parent` składniku zawiera, `extra="10"` gdy jest przenos
 
 Odwołania do składników zapewniają sposób odwoływania się do wystąpienia składnika, dzięki czemu można wydać polecenia do tego wystąpienia, takie jak `Show` lub `Reset` . Aby przechwycić odwołanie do składnika:
 
-* Dodaj [`@ref`](xref:mvc/views/razor#ref) atrybut do składnika podrzędnego.
+* Dodaj [`@ref`][4] atrybut do składnika podrzędnego.
 * Zdefiniuj pole z tym samym typem co składnik podrzędny.
 
 ```razor
@@ -316,7 +313,7 @@ Gdy składnik jest renderowany, `loginDialog` pole zostanie wypełnione `MyLogin
 
 Aby odwoływać się do składników w pętli, zobacz [przechwytywanie odwołań do wielu podobnych składników podrzędnych (dotnet/aspnetcore #13358)](https://github.com/dotnet/aspnetcore/issues/13358).
 
-Podczas przechwytywania odwołań do składników użycie podobnej składni do [przechwytywania odwołań do elementów](xref:blazor/call-javascript-from-dotnet#capture-references-to-elements)nie jest funkcją międzyoperacyjności języka JavaScript. Odwołania do składników nie są przenoszone do kodu JavaScript, &mdash; są używane tylko w kodzie platformy .NET.
+Podczas przechwytywania odwołań do składników użycie podobnej składni do [przechwytywania odwołań do elementów](xref:blazor/call-javascript-from-dotnet#capture-references-to-elements)nie jest funkcją międzyoperacyjności języka JavaScript. Odwołania do składników nie są przesyłane do kodu JavaScript. Odwołania do składników są używane tylko w kodzie platformy .NET.
 
 > [!NOTE]
 > **Nie** należy używać odwołań do składników do mutacji stanu składników podrzędnych. Zamiast tego należy używać zwykłych parametrów deklaratywnych do przekazywania danych do składników podrzędnych. Użycie normalnych parametrów deklaratywnych powoduje, że składniki podrzędne, które automatycznie uruchamiają się w prawidłowym czasie.
@@ -398,7 +395,7 @@ W poprzednim przykładzie `NotifierService` wywołuje `OnNotify` metodę składn
 
 Gdy renderuje listę elementów lub składników, a następnie zmienia się elementy lub składniki, Blazor algorytm różnicowania musi zdecydować, które z poprzednich elementów lub składników mogą być zachowywane i jak obiekty modelu powinny być na nich mapowane. Zwykle ten proces jest automatyczny i można go zignorować, ale istnieją przypadki, w których może być konieczne sterowanie procesem.
 
-Rozważmy następujący przykład:
+Rozpatrzmy następujący przykład:
 
 ```csharp
 @foreach (var person in People)
@@ -414,7 +411,7 @@ Rozważmy następujący przykład:
 
 Zawartość `People` kolekcji może ulec zmianie z wstawionymi, usuniętymi lub z ponownymi zamówieniami. Gdy składnik jest przerenderowany, `<DetailsEditor>` składnik może ulec zmianie, aby otrzymywać różne `Details` wartości parametrów. Może to spowodować bardziej złożone odwzorowanie niż oczekiwano. W niektórych przypadkach odzyskanie może prowadzić do zauważalnych różnic w zachowaniu, takich jak brak fokusu elementu.
 
-Proces mapowania można kontrolować przy użyciu [`@key`](xref:mvc/views/razor#key) atrybutu dyrektywy. `@key`powoduje, że algorytm różnicowego gwarantuje zachowywanie elementów lub składników na podstawie wartości klucza:
+Proces mapowania można kontrolować przy użyciu [`@key`][5] atrybutu dyrektywy. [`@key`][5]powoduje, że algorytm różnicowego gwarantuje zachowywanie elementów lub składników na podstawie wartości klucza:
 
 ```csharp
 @foreach (var person in People)
@@ -434,16 +431,16 @@ Po `People` zmianie kolekcji algorytm różnicowy zachowuje skojarzenie między 
 * Jeśli na `Person` liście zostanie wstawiony w pewnym miejscu, jedno nowe `<DetailsEditor>` wystąpienie zostanie wstawione w odpowiednim położeniu. Inne wystąpienia pozostaną bez zmian.
 * `Person`W przypadku ponownego uporządkowania wpisów odpowiednie `<DetailsEditor>` wystąpienia są zachowywane i uporządkowane w interfejsie użytkownika.
 
-W niektórych scenariuszach użycie programu `@key` minimalizuje złożoność operacji renderowania i pozwala uniknąć potencjalnych problemów związanych ze stanem częściowych elementów modelu dom, takich jak pozycja fokusu.
+W niektórych scenariuszach użycie programu [`@key`][5] minimalizuje złożoność operacji renderowania i pozwala uniknąć potencjalnych problemów związanych ze stanem częściowych elementów modelu dom, takich jak pozycja fokusu.
 
 > [!IMPORTANT]
 > Klucze są lokalne dla każdego elementu kontenera lub składnika. Klucze nie są porównywane globalnie w całym dokumencie.
 
 ### <a name="when-to-use-key"></a>Kiedy używać \@ klucza
 
-Zazwyczaj warto używać `@key` zawsze, gdy lista jest renderowana (na przykład w `@foreach` bloku) i odpowiednia wartość istnieje do zdefiniowania `@key` .
+Zazwyczaj warto używać [`@key`][5] zawsze, gdy lista jest renderowana (na przykład w `@foreach` bloku) i odpowiednia wartość istnieje do zdefiniowania [`@key`][5] .
 
-Można również użyć, `@key` Aby uniemożliwić Blazor zachowanie poddrzewa elementu lub składnika po zmianie obiektu:
+Można również użyć, [`@key`][5] Aby uniemożliwić Blazor zachowanie poddrzewa elementu lub składnika po zmianie obiektu:
 
 ```razor
 <div @key="currentPerson">
@@ -451,22 +448,22 @@ Można również użyć, `@key` Aby uniemożliwić Blazor zachowanie poddrzewa e
 </div>
 ```
 
-Jeśli `@currentPerson` zmiany, `@key` dyrektywa Attribute wymusza Blazor odrzucanie całości `<div>` i jego obiektów podrzędnych oraz odbudowa poddrzewa w interfejsie użytkownika o nowych elementach i składnikach. Może to być przydatne, jeśli zachodzi konieczność zagwarantowania, że stan interfejsu użytkownika nie jest zachowywany w przypadku `@currentPerson` zmiany.
+Jeśli `@currentPerson` zmiany, [`@key`][5] dyrektywa Attribute wymusza Blazor odrzucanie całości `<div>` i jego obiektów podrzędnych oraz odbudowa poddrzewa w interfejsie użytkownika o nowych elementach i składnikach. Może to być przydatne, jeśli zachodzi konieczność zagwarantowania, że stan interfejsu użytkownika nie jest zachowywany w przypadku `@currentPerson` zmiany.
 
 ### <a name="when-not-to-use-key"></a>Kiedy nie używać \@ klucza
 
-W przypadku różnicowania w programie występuje koszt wydajności `@key` . Koszt wydajności nie jest duży, ale określa tylko, `@key` czy kontrolowanie reguł utrwalania elementu lub składnika przynosi korzyści dla aplikacji.
+W przypadku różnicowania w programie występuje koszt wydajności [`@key`][5] . Koszt wydajności nie jest duży, ale określa tylko, [`@key`][5] czy kontrolowanie reguł utrwalania elementu lub składnika przynosi korzyści dla aplikacji.
 
-Nawet jeśli `@key` nie jest używany, program Blazor zachowuje elementy podrzędne i wystąpienia składników tak jak to możliwe. Jedyną zaletą korzystania z programu `@key` jest kontrola nad *sposobem* , w jaki wystąpienia modelu są mapowane na zachowane wystąpienia składników, zamiast algorytmu różnicowego, wybierając mapowanie.
+Nawet jeśli [`@key`][5] nie jest używany, program Blazor zachowuje elementy podrzędne i wystąpienia składników tak jak to możliwe. Jedyną zaletą korzystania z programu [`@key`][5] jest kontrola nad *sposobem* , w jaki wystąpienia modelu są mapowane na zachowane wystąpienia składników, zamiast algorytmu różnicowego, wybierając mapowanie.
 
 ### <a name="what-values-to-use-for-key"></a>Wartości, które mają być używane dla \@ klucza
 
-Ogólnie rzecz biorąc, warto podać jeden z następujących rodzajów wartości dla `@key` :
+Ogólnie rzecz biorąc, warto podać jeden z następujących rodzajów wartości dla [`@key`][5] :
 
 * Wystąpienia obiektów modelu (na przykład `Person` wystąpienie takie jak w poprzednim przykładzie). Zapewnia to zachowywanie na podstawie równości odwołań do obiektów.
 * Unikatowe identyfikatory (na przykład wartości klucza podstawowego typu `int` , `string` lub `Guid` ).
 
-Upewnij się, że wartości używane do `@key` nie kolidują. Jeśli w tym samym elemencie nadrzędnym zostaną wykryte wartości powodujące konflikt, program Blazor zgłosi wyjątek, ponieważ nie może on w sposób jednoznaczny zmapować starych elementów lub składników na nowe elementy lub składniki. Używaj tylko odrębnych wartości, takich jak wystąpienia obiektów lub wartości klucza podstawowego.
+Upewnij się, że wartości używane do [`@key`][5] nie kolidują. Jeśli w tym samym elemencie nadrzędnym zostaną wykryte wartości powodujące konflikt, program Blazor zgłosi wyjątek, ponieważ nie może on w sposób jednoznaczny zmapować starych elementów lub składników na nowe elementy lub składniki. Używaj tylko odrębnych wartości, takich jak wystąpienia obiektów lub wartości klucza podstawowego.
 
 ## <a name="dont-create-components-that-write-to-their-own-parameter-properties"></a>Nie twórz składników, które zapisują do własnych właściwości parametrów
 
@@ -565,10 +562,10 @@ Następujący `Expander` składnik:
 
 Razorskładniki są generowane jako klasy częściowe. Razorskładniki są tworzone przy użyciu jednej z następujących metod:
 
-* Kod C# jest zdefiniowany w [`@code`](xref:mvc/views/razor#code) bloku z oznaczeniem HTML i Razor kodem w pojedynczym pliku. BlazorSzablony definiują ich Razor składniki przy użyciu tego podejścia.
+* Kod C# jest zdefiniowany w [`@code`][1] bloku z oznaczeniem HTML i Razor kodem w pojedynczym pliku. BlazorSzablony definiują ich Razor składniki przy użyciu tego podejścia.
 * Kod C# jest umieszczany w pliku związanym z kodem zdefiniowanym jako Klasa częściowa.
 
-Poniższy przykład pokazuje `Counter` składnik domyślny z `@code` blokiem w aplikacji wygenerowanej na podstawie Blazor szablonu. Znaczniki HTML, Razor kod i kod C# są w tym samym pliku:
+Poniższy przykład pokazuje `Counter` składnik domyślny z [`@code`][1] blokiem w aplikacji wygenerowanej na podstawie Blazor szablonu. Znaczniki HTML, Razor kod i kod C# są w tym samym pliku:
 
 *Counter. Razor*:
 
@@ -635,7 +632,7 @@ using Microsoft.AspNetCore.Components.Web;
 
 ## <a name="specify-a-base-class"></a>Określ klasę bazową
 
-[`@inherits`](xref:mvc/views/razor#inherits)Dyrektywa może służyć do określania klasy bazowej dla składnika. Poniższy przykład pokazuje, jak składnik może dziedziczyć klasę bazową, `BlazorRocksBase` , aby zapewnić właściwości i metody składnika. Klasa bazowa powinna pochodzić od `ComponentBase` .
+[`@inherits`][6]Dyrektywa może służyć do określania klasy bazowej dla składnika. Poniższy przykład pokazuje, jak składnik może dziedziczyć klasę bazową, `BlazorRocksBase` , aby zapewnić właściwości i metody składnika. Klasa bazowa powinna pochodzić od `ComponentBase` .
 
 *Strony/BlazorRocks. Razor*:
 
@@ -663,7 +660,7 @@ namespace BlazorSample
 
 ## <a name="specify-an-attribute"></a>Określ atrybut
 
-Atrybuty można określić w Razor składnikach [`@attribute`](xref:mvc/views/razor#attribute) dyrektywy. Poniższy przykład stosuje `[Authorize]` atrybut do klasy składnika:
+Atrybuty można określić w Razor składnikach [`@attribute`][7] dyrektywy. Poniższy przykład stosuje `[Authorize]` atrybut do klasy składnika:
 
 ```razor
 @page "/"
@@ -674,15 +671,15 @@ Atrybuty można określić w Razor składnikach [`@attribute`](xref:mvc/views/ra
 
 Przestrzeń nazw składnika utworzona w programie Razor jest oparta na (w kolejności priorytetu):
 
-* [`@namespace`](xref:mvc/views/razor#namespace)oznaczenie w Razor pliku (*. Razor*) Markup ( `@namespace BlazorSample.MyNamespace` ).
+* [`@namespace`][8]oznaczenie w Razor pliku (*. Razor*) Markup ( `@namespace BlazorSample.MyNamespace` ).
 * Projekt znajduje się `RootNamespace` w pliku projektu ( `<RootNamespace>BlazorSample</RootNamespace>` ).
 * Nazwa projektu, pobrana z nazwy pliku projektu (*. csproj*) i ścieżka z katalogu głównego projektu do składnika. Na przykład struktura rozpoznaje *{Project root}/Pages/index.Razor* (*BlazorSample. csproj*) do przestrzeni nazw `BlazorSample.Pages` . Składniki przestrzegają reguł powiązań nazw języka C#. W przypadku `Index` składnika w tym przykładzie składniki należące do zakresu są wszystkich składników:
   * W tym samym folderze *strony*.
   * Składniki w katalogu głównym projektu, które nie określają jawnie innej przestrzeni nazw.
 
-Składniki zdefiniowane w innej przestrzeni nazw są wprowadzane do zakresu za Razor pomocą [`@using`](xref:mvc/views/razor#using) dyrektywy.
+Składniki zdefiniowane w innej przestrzeni nazw są wprowadzane do zakresu za Razor pomocą [`@using`][2] dyrektywy.
 
-Jeśli inny składnik, `NavMenu.razor` ,,, istnieje w *BlazorSample/Shared/* folder, można użyć w programie `Index.razor` z następującą `@using` instrukcją:
+Jeśli inny składnik, `NavMenu.razor` ,,, istnieje w *BlazorSample/Shared/* folder, można użyć w programie `Index.razor` z następującą [`@using`][2] instrukcją:
 
 ```razor
 @using BlazorSample.Shared
@@ -692,7 +689,7 @@ This is the Index page.
 <NavMenu></NavMenu>
 ```
 
-Do składników można także odwoływać się za pomocą ich w pełni kwalifikowanych nazw, które nie wymagają [`@using`](xref:mvc/views/razor#using) dyrektywy:
+Do składników można także odwoływać się za pomocą ich w pełni kwalifikowanych nazw, które nie wymagają [`@using`][2] dyrektywy:
 
 ```razor
 This is the Index page.
@@ -973,8 +970,20 @@ Podobnie Obrazy SVG są obsługiwane w regułach CSS pliku arkusza stylów (*CSS
 }
 ```
 
-Jednak wbudowane znaczniki SVG nie są obsługiwane we wszystkich scenariuszach. Jeśli umieścisz `<svg>` tag bezpośrednio w pliku składnika (*. Razor*), podstawowe renderowanie obrazu jest obsługiwane, ale wiele scenariuszy zaawansowanych nie jest jeszcze obsługiwanych. Na przykład `<use>` tagi nie są obecnie przestrzegane i `@bind` nie mogą być używane z niektórymi tagami SVG. Oczekujemy, że te ograniczenia są opisane w przyszłej wersji.
+Jednak wbudowane znaczniki SVG nie są obsługiwane we wszystkich scenariuszach. Jeśli umieścisz `<svg>` tag bezpośrednio w pliku składnika (*. Razor*), podstawowe renderowanie obrazu jest obsługiwane, ale wiele scenariuszy zaawansowanych nie jest jeszcze obsługiwanych. Na przykład `<use>` tagi nie są obecnie przestrzegane i `@bind` nie mogą być używane z niektórymi tagami SVG. Aby uzyskać więcej informacji, zobacz [Obsługa SVG w Blazor (#18271 dotnet/aspnetcore)](https://github.com/dotnet/aspnetcore/issues/18271).
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:security/blazor/server/threat-mitigation>&ndash;Zawiera wskazówki dotyczące tworzenia Blazor Aplikacje serwera, które muszą będą konkurować o z wyczerpaniem zasobów.
+
+<!--Reference links in article-->
+[1]: <xref:mvc/views/razor#code>
+[2]: <xref:mvc/views/razor#using>
+[3]: <xref:mvc/views/razor#attributes>
+[4]: <xref:mvc/views/razor#ref>
+[5]: <xref:mvc/views/razor#key>
+[6]: <xref:mvc/views/razor#inherits>
+[7]: <xref:mvc/views/razor#attribute>
+[8]: <xref:mvc/views/razor#namespace>
+[9]: <xref:mvc/views/razor#page>
+[10]: <xref:mvc/views/razor#bind>

@@ -1,30 +1,18 @@
 ---
-title: Wprowadzenie do ASP.NET CoreBlazor
-author: guardrex
-description: Eksploruj ASP.NET Core Blazor, jak tworzyć interaktywny interfejs użytkownika sieci Web po stronie klienta przy użyciu platformy .NET w aplikacji ASP.NET Core.
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc, seoapril2019
-ms.date: 03/25/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: blazor/index
-ms.openlocfilehash: ced3e2cc0428fccf6f0b2eba7a3f045e07002234
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82771953"
+title: "wprowadzenie do ASP.NET Core Blazor " autor: Opis: "eksploruj ASP.NET Core Blazor , sposób kompilowania interaktywnego interfejsu użytkownika sieci Web po stronie klienta przy użyciu platformy .NET w aplikacji ASP.NET Core."
+monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
 ---
 # <a name="introduction-to-aspnet-core-blazor"></a>Wprowadzenie do ASP.NET CoreBlazor
 
 Autorzy [Daniel Roth](https://github.com/danroth27) i [Luke Latham](https://github.com/guardrex)
 
-*Witamy Blazor!*
+*Witamy Blazor !*
 
 Blazorto platforma służąca do tworzenia interakcyjnego interfejsu użytkownika sieci Web po stronie klienta przy użyciu platformy .NET:
 
@@ -53,7 +41,7 @@ Składniki to klasy .NET wbudowane w zestawy .NET, które:
 * Mogą być zagnieżdżane i ponownie używane.
 * Mogą być udostępniane i dystrybuowane jako [ Razor biblioteki klas](xref:razor-pages/ui-class) lub [pakiety NuGet](/nuget/what-is-nuget).
 
-Klasa składnika jest zwykle zapisywana w formie strony [Razor](xref:mvc/views/razor) znaczników z rozszerzeniem *. Razor* . Składniki w Blazor programie są formalnie określane jako * Razor składniki*. Razorjest składnią służącą do łączenia znaczników HTML z kodem C# zaprojektowanym pod kątem produktywności dla deweloperów. Razorumożliwia przełączanie między znacznikami HTML i C# w tym samym pliku z obsługą [IntelliSense](/visualstudio/ide/using-intellisense) . RazorUżywane Razorsą również strony i MVC. W przeciwieństwie Razor do stron i MVC, które są zbudowane wokół modelu żądania/odpowiedzi, składniki są używane specjalnie dla logiki interfejsu użytkownika po stronie klienta.
+Klasa składnika jest zwykle zapisywana w formie [Razor](xref:mvc/views/razor) strony znaczników z rozszerzeniem *. Razor* . Składniki w programie Blazor są formalnie określane jako * Razor składniki*. Razorjest składnią służącą do łączenia znaczników HTML z kodem C# zaprojektowanym pod kątem produktywności dla deweloperów. Razorumożliwia przełączanie między znacznikami HTML i C# w tym samym pliku z obsługą [IntelliSense](/visualstudio/ide/using-intellisense) . RazorUżywane są również strony i MVC Razor . W przeciwieństwie do Razor stron i MVC, które są zbudowane wokół modelu żądania/odpowiedzi, składniki są używane specjalnie dla logiki interfejsu użytkownika po stronie klienta.
 
 Poniższy Razor znacznik ilustruje składnik (*dialog. Razor*), który może być zagnieżdżony w innym składniku:
 
@@ -80,7 +68,7 @@ Poniższy Razor znacznik ilustruje składnik (*dialog. Razor*), który może by�
 }
 ```
 
-Zawartość (`ChildContent`) i tytuł (`Title`) okna dialogowego są udostępniane przez składnik, który używa tego składnika w interfejsie użytkownika. `OnYes`jest metodą języka C# wyzwalaną przez `onclick` zdarzenie przycisku.
+Zawartość ( `ChildContent` ) i tytuł () okna dialogowego `Title` są udostępniane przez składnik, który używa tego składnika w interfejsie użytkownika. `OnYes`jest metodą języka C# wyzwalaną przez zdarzenie przycisku `onclick` .
 
 Blazorużywa naturalnych tagów HTML dla kompozycji interfejsu użytkownika. Elementy HTML określają składniki, a atrybuty znacznika przechodzą wartości do właściwości składnika.
 
@@ -110,8 +98,6 @@ Składniki są renderowane w pamięci podręcznej Document Object Model (DOM) pr
 
 ## <a name="blazor-webassembly"></a>BlazorZestaw webassembly
 
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
-
 BlazorWebassembly to jednostronicowa platforma aplikacji służąca do tworzenia interaktywnych aplikacji sieci Web po stronie klienta przy użyciu platformy .NET. BlazorZestaw webassembly używa otwartych standardów sieci Web bez wtyczek lub kodu transpilation i działa we wszystkich nowoczesnych przeglądarkach sieci Web, w tym w przeglądarkach mobilnych.
 
 Uruchamianie kodu platformy .NET wewnątrz przeglądarek sieci Web jest możliwe przez [zestaw webassembly](https://webassembly.org) (skrócony *wasm*). Webassembly to kompaktowy format kodu bajtowego zoptymalizowany pod kątem szybkiego pobierania i maksymalnej szybkości wykonywania. Webassembly to otwarty standard sieci Web, który jest obsługiwany w przeglądarkach sieci Web bez wtyczek.
@@ -120,11 +106,11 @@ Kod webassembly może uzyskać dostęp do pełnej funkcjonalności przeglądarki
 
 ![BlazorZestaw webassembly uruchamia kod platformy .NET w przeglądarce z zestawem webassembly.](index/_static/blazor-webassembly.png)
 
-Blazor Gdy aplikacja webassembly zostanie skompilowana i uruchomiona w przeglądarce:
+Gdy Blazor aplikacja webassembly zostanie skompilowana i uruchomiona w przeglądarce:
 
 * Pliki kodu C# i Razor pliki są kompilowane do zestawów .NET.
 * Zestawy i środowisko uruchomieniowe platformy .NET są pobierane do przeglądarki.
-* BlazorZestaw webassembly Bootstrap środowisko uruchomieniowe platformy .NET i konfiguruje środowisko uruchomieniowe w celu załadowania zestawów dla aplikacji. Blazor Środowisko uruchomieniowe webassembly używa interfejsu JavaScript Interop do obsługi operacji MANIPULOWANia modelem Dom i interfejsów API przeglądarki.
+* BlazorZestaw webassembly Bootstrap środowisko uruchomieniowe platformy .NET i konfiguruje środowisko uruchomieniowe w celu załadowania zestawów dla aplikacji. BlazorŚrodowisko uruchomieniowe webassembly używa interfejsu JavaScript Interop do obsługi operacji manipulowania modelem Dom i interfejsów API przeglądarki.
 
 Rozmiar opublikowanej aplikacji, jej *rozmiaru ładunku*, jest krytycznym czynnikiem wydajności dla useability aplikacji. Pobieranie dużej aplikacji do przeglądarki zajmuje stosunkowo dużo czasu, co zmniejsza środowisko użytkownika. BlazorZestaw webassembly optymalizuje rozmiar ładunku, aby skrócić czas pobierania:
 
@@ -144,16 +130,16 @@ Połączenie używane przez Blazor serwer do komunikacji z przeglądarką jest r
 
 ## <a name="javascript-interop"></a>Międzyoperacyjność w języku JavaScript
 
-W przypadku aplikacji, które wymagają bibliotek JavaScript innych firm i dostępu do interfejsów API przeglądarki, składniki współdziałają z JavaScript. Składniki mogą korzystać z dowolnej biblioteki lub interfejsu API, który może być używany przez język JavaScript. Kod c# może wywołać kod JavaScript, a kod JavaScript może wywołać kod C#. Aby uzyskać więcej informacji zobacz następujące artykuły:
+W przypadku aplikacji, które wymagają bibliotek JavaScript innych firm i dostępu do interfejsów API przeglądarki, składniki współdziałają z JavaScript. Składniki mogą korzystać z dowolnej biblioteki lub interfejsu API, który może być używany przez język JavaScript. Kod c# może wywołać kod JavaScript, a kod JavaScript może wywołać kod C#. Aby uzyskać więcej informacji, zobacz następujące artykuły:
 
 * <xref:blazor/call-javascript-from-dotnet>
 * <xref:blazor/call-dotnet-from-javascript>
 
 ## <a name="code-sharing-and-net-standard"></a>Udostępnianie kodu i .NET Standard
 
-Blazorimplementuje [.NET Standard 2,0](/dotnet/standard/net-standard). .NET Standard jest formalną specyfikacją interfejsów API platformy .NET, które są wspólne dla implementacji platformy .NET. Biblioteki klas .NET Standard mogą być współużytkowane przez różne platformy .NET, Blazortakie jak .NET Framework, .NET Core, Xamarin, mono i Unity.
+Blazorimplementuje [.NET Standard 2,0](/dotnet/standard/net-standard). .NET Standard jest formalną specyfikacją interfejsów API platformy .NET, które są wspólne dla implementacji platformy .NET. Biblioteki klas .NET Standard mogą być współużytkowane przez różne platformy .NET, takie jak Blazor .NET Framework, .NET Core, Xamarin, mono i Unity.
 
-Interfejsy API, które nie są stosowane w przeglądarce sieci Web (na przykład dostęp do systemu plików, otwieranie gniazda i wątkowość) throw <xref:System.PlatformNotSupportedException>.
+Interfejsy API, które nie są stosowane w przeglądarce sieci Web (na przykład dostęp do systemu plików, otwieranie gniazda i wątkowość) throw <xref:System.PlatformNotSupportedException> .
 
 ## <a name="additional-resources"></a>Zasoby dodatkowe
 
@@ -163,4 +149,4 @@ Interfejsy API, które nie są stosowane w przeglądarce sieci Web (na przykład
 * [Przewodnik C#](/dotnet/csharp/)
 * <xref:mvc/views/razor>
 * [HTML](https://www.w3.org/html/)
-* [Wspaniałe Blazor ](https://github.com/AdrienTorris/awesome-blazor) linki społeczności
+* [Firma Blazor Awesome](https://github.com/AdrienTorris/awesome-blazor) linki społeczności

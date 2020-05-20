@@ -1,30 +1,16 @@
 ---
-title: Wymuś zasady zabezpieczeń zawartości dla ASP.NET CoreBlazor
-author: guardrex
-description: Dowiedz się, jak używać zasad zabezpieczeń zawartości (CSP) z Blazor aplikacjami ASP.NET Core, aby chronić przed atakami na skrypty krzyżowe (XSS).
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 03/02/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: security/blazor/content-security-policy
-ms.openlocfilehash: 8c5e1c5dd2d41efade91a612bea2855569a61fee
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775586"
+title: "Wymuś zasady zabezpieczeń zawartości dla ASP.NET Core Blazor " autor: Opis: "Dowiedz się, jak używać zasad zabezpieczeń zawartości (CSP) z Blazor aplikacjami ASP.NET Core, aby chronić przed atakami opartymi na wielu lokacjach (XSS).
+monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
 ---
 # <a name="enforce-a-content-security-policy-for-aspnet-core-blazor"></a>Wymuś zasady zabezpieczeń zawartości dla ASP.NET CoreBlazor
 
 Autorzy [Javier Calvarro Nelson](https://github.com/javiercn) i [Luke Latham](https://github.com/guardrex)
-
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 [Skrypt między lokacjami (XSS)](xref:security/cross-site-scripting) to luka w zabezpieczeniach, w której osoba atakująca umieszcza jeden lub więcej złośliwych skryptów po stronie klienta w renderowanej zawartości aplikacji. Zasady zabezpieczeń zawartości (CSP) pomagają chronić przed atakami typu XSS, informując przeglądarkę o prawidłowym:
 
@@ -32,45 +18,45 @@ Autorzy [Javier Calvarro Nelson](https://github.com/javiercn) i [Luke Latham](ht
 * Akcje podejmowane przez stronę, określając dozwolone docelowe adresy URL formularzy.
 * Wtyczki, które mogą zostać załadowane.
 
-Aby zastosować dostawcę CSP do aplikacji, deweloper określa kilka *dyrektyw* dotyczących zabezpieczeń zawartości dostawcy CSP w co najmniej jednym `Content-Security-Policy` nagłówku `<meta>` lub znaczniku.
+Aby zastosować dostawcę CSP do aplikacji, deweloper określa kilka *dyrektyw* dotyczących zabezpieczeń zawartości dostawcy CSP w co najmniej jednym `Content-Security-Policy` nagłówku lub `<meta>` znaczniku.
 
 Zasady są oceniane przez przeglądarkę podczas ładowania strony. Przeglądarka sprawdzi źródła strony i określi, czy spełniają one wymagania dyrektyw dotyczących zabezpieczeń zawartości. Gdy dyrektywy zasad nie są spełnione dla zasobu, przeglądarka nie załaduje zasobu. Rozważmy na przykład zasady, które nie zezwalają na wykonywanie skryptów innych firm. Gdy strona zawiera `<script>` tag z pochodzeniem innej firmy w `src` atrybucie, przeglądarka uniemożliwi ładowanie skryptu.
 
-Dostawca CSP jest obsługiwany w większości nowoczesnych przeglądarek klasycznych i mobilnych, takich jak Chrome, Edge, Firefox, operac i Safari. Dostawca CSP jest zalecany Blazor w przypadku aplikacji.
+Dostawca CSP jest obsługiwany w większości nowoczesnych przeglądarek klasycznych i mobilnych, takich jak Chrome, Edge, Firefox, operac i Safari. Dostawca CSP jest zalecany w przypadku Blazor aplikacji.
 
 ## <a name="policy-directives"></a>Dyrektywy zasad
 
-Określ w minimalny sposób następujące dyrektywy i źródła dla Blazor aplikacji. Dodaj dodatkowe dyrektywy i źródła zgodnie z wymaganiami. Poniższe dyrektywy są używane w sekcji [stosowanie zasad](#apply-the-policy) w tym artykule, w której znajdują się przykładowe zasady zabezpieczeń Blazor dla zestawu webassembly i Blazor serwera:
+Określ w minimalny sposób następujące dyrektywy i źródła dla Blazor aplikacji. Dodaj dodatkowe dyrektywy i źródła zgodnie z wymaganiami. Poniższe dyrektywy są używane w sekcji [stosowanie zasad](#apply-the-policy) w tym artykule, w której znajdują się przykładowe zasady zabezpieczeń dla Blazor zestawu webassembly i Blazor serwera:
 
-* [Identyfikator URI](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/base-uri) &ndash; Base ogranicza adresy URL `<base>` tagu strony. Określ `self` , aby wskazać, że pochodzenie aplikacji, w tym schemat i numer portu, jest prawidłowym źródłem.
-* [Blokuj — wszystko-zawartość](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/block-all-mixed-content) &ndash; uniemożliwia ładowanie mieszanej zawartości http i https.
-* [wartość domyślna-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/default-src) &ndash; wskazuje rezerwę na dyrektywy źródłowe, które nie są jawnie określone przez zasady. Określ `self` , aby wskazać, że pochodzenie aplikacji, w tym schemat i numer portu, jest prawidłowym źródłem.
-* [img-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/img-src) &ndash; wskazuje prawidłowe źródła obrazów.
-  * Określ `data:` , aby zezwolić na ładowanie `data:` obrazów z adresów URL.
+* [podstawowy identyfikator URI](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/base-uri) &ndash; Ogranicza adresy URL `<base>` tagu strony. Określ, `self` Aby wskazać, że pochodzenie aplikacji, w tym schemat i numer portu, jest prawidłowym źródłem.
+* [Block-All-Mixed-Content](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/block-all-mixed-content) &ndash; Uniemożliwia ładowanie mieszanej zawartości HTTP i HTTPS.
+* [default-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/default-src) &ndash; Wskazuje rezerwę na dyrektywy źródłowe, które nie są jawnie określone przez zasady. Określ, `self` Aby wskazać, że pochodzenie aplikacji, w tym schemat i numer portu, jest prawidłowym źródłem.
+* [img-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/img-src) &ndash; Wskazuje prawidłowe źródła obrazów.
+  * Określ `data:` , aby zezwolić na ładowanie obrazów z `data:` adresów URL.
   * Określ `https:` , aby zezwolić na ładowanie obrazów z punktów końcowych https.
-* [obiekt-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/object-src) &ndash; wskazuje prawidłowe źródła dla tagów `<object>`, `<embed>`i `<applet>` . Określ `none` , aby uniemożliwić wszystkie źródła adresów URL.
-* [skrypt-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/script-src) &ndash; wskazuje prawidłowe źródła dla skryptów.
-  * Określ źródło `https://stackpath.bootstrapcdn.com/` hosta dla skryptów Bootstrap.
-  * Określ `self` , aby wskazać, że pochodzenie aplikacji, w tym schemat i numer portu, jest prawidłowym źródłem.
-  * Blazor W aplikacji webassembly:
+* [obiekt-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/object-src) &ndash; Wskazuje prawidłowe źródła dla `<object>` tagów, `<embed>` i `<applet>` . Określ `none` , aby uniemożliwić wszystkie źródła adresów URL.
+* [skrypt-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/script-src) &ndash; Wskazuje prawidłowe źródła dla skryptów.
+  * Określ `https://stackpath.bootstrapcdn.com/` Źródło hosta dla skryptów Bootstrap.
+  * Określ, `self` Aby wskazać, że pochodzenie aplikacji, w tym schemat i numer portu, jest prawidłowym źródłem.
+  * W Blazor aplikacji webassembly:
     * Określ następujące skróty, aby zezwolić na ładowanie wymaganych Blazor skryptów wbudowanych webassembly:
       * `sha256-v8ZC9OgMhcnEQ/Me77/R9TlJfzOBqrMTW8e1KuqLaqc=`
       * `sha256-If//FtbPc03afjLezvWHnC3Nbu4fDM04IIzkPaf3pH0=`
       * `sha256-v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA=`
     * Określ `unsafe-eval` użycie `eval()` i metody tworzenia kodu z ciągów.
-  * W aplikacji Blazor serwera określ `sha256-34WLX60Tw3aG6hylk0plKbZZFXCuepeQ6Hu7OqRf8PI=` skrót dla skryptu wbudowanego, który wykonuje wykrywanie powrotu dla arkuszy stylów.
-* [styl-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/style-src) &ndash; wskazuje prawidłowe źródła dla arkuszy stylów.
-  * Określ źródło `https://stackpath.bootstrapcdn.com/` hosta dla arkuszy stylów ładowania początkowego.
-  * Określ `self` , aby wskazać, że pochodzenie aplikacji, w tym schemat i numer portu, jest prawidłowym źródłem.
+  * W Blazor aplikacji serwera określ `sha256-34WLX60Tw3aG6hylk0plKbZZFXCuepeQ6Hu7OqRf8PI=` skrót dla skryptu wbudowanego, który wykonuje wykrywanie powrotu dla arkuszy stylów.
+* [styl — src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/style-src) &ndash; Wskazuje prawidłowe źródła arkuszy stylów.
+  * Określ `https://stackpath.bootstrapcdn.com/` Źródło hosta dla arkuszy stylów ładowania początkowego.
+  * Określ, `self` Aby wskazać, że pochodzenie aplikacji, w tym schemat i numer portu, jest prawidłowym źródłem.
   * Określ `unsafe-inline` , aby zezwolić na używanie wbudowanych stylów. Deklaracja wbudowana jest wymagana dla interfejsu użytkownika w Blazor aplikacjach serwerowych do ponownego połączenia klienta i serwera po początkowym żądaniu. W przyszłej wersji style wbudowane mogą zostać usunięte, aby `unsafe-inline` nie były już wymagane.
-* [uaktualnianie — niezabezpieczone — żądania](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/upgrade-insecure-requests) &ndash; wskazują, że adresy URL zawartości ze źródeł niezabezpieczonych (http) powinny zostać bezpiecznie pobrane za pośrednictwem protokołu HTTPS.
+* [uaktualnienie-niezabezpieczone — żądania](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/upgrade-insecure-requests) &ndash; Wskazuje, że adresy URL zawartości ze źródeł niezabezpieczonych (HTTP) powinny zostać bezpiecznie pobrane za pośrednictwem protokołu HTTPS.
 
 Powyższe dyrektywy są obsługiwane przez wszystkie przeglądarki z wyjątkiem programu Microsoft Internet Explorer.
 
 Aby uzyskać skróty SHA dla dodatkowych skryptów wbudowanych:
 
 * Zastosuj dostawcę CSP pokazany w sekcji [Zastosuj zasady](#apply-the-policy) .
-* Uzyskaj dostęp do konsoli narzędzia deweloperskie w przeglądarce podczas lokalnego uruchamiania aplikacji. Przeglądarka oblicza i wyświetla skróty dla zablokowanych skryptów, gdy istnieje nagłówek lub `meta` tag dostawcy CSP.
+* Uzyskaj dostęp do konsoli narzędzia deweloperskie w przeglądarce podczas lokalnego uruchamiania aplikacji. Przeglądarka oblicza i wyświetla skróty dla zablokowanych skryptów, gdy istnieje nagłówek lub tag dostawcy CSP `meta` .
 * Skopiuj skróty udostępnione przez przeglądarkę do `script-src` źródeł. Używaj pojedynczych cudzysłowów wokół każdego skrótu.
 
 Aby uzyskać informacje na temat obsługi macierzy dla poziomu zasad zabezpieczeń zawartości w przeglądarce, zobacz [: Czy można korzystać z poziomu zasad zabezpieczeń zawartości 2](https://www.caniuse.com/#feat=contentsecuritypolicy2).
@@ -79,11 +65,11 @@ Aby uzyskać informacje na temat obsługi macierzy dla poziomu zasad zabezpiecze
 
 Użyj `<meta>` znacznika, aby zastosować zasady:
 
-* Ustaw wartość `http-equiv` atrybutu na `Content-Security-Policy`.
-* Umieść dyrektywy w wartości `content` atrybutu. Oddziel dyrektywy średnikami (`;`).
+* Ustaw wartość `http-equiv` atrybutu na `Content-Security-Policy` .
+* Umieść dyrektywy w `content` wartości atrybutu. Oddziel dyrektywy średnikami ( `;` ).
 * Zawsze umieszczaj `meta` tag w `<head>` zawartości.
 
-W poniższych sekcjach przedstawiono przykładowe zasady Blazor dla zestawu webassembly i Blazor serwera. Te przykłady dotyczą wersji tego artykułu dla każdej wersji programu Blazor. Aby użyć wersji odpowiedniej dla wersji, wybierz wersję dokumentu z selektorem listy rozwijanej **wersji** na tej stronie sieci Web.
+W poniższych sekcjach przedstawiono przykładowe zasady dla Blazor zestawu webassembly i Blazor serwera. Te przykłady dotyczą wersji tego artykułu dla każdej wersji programu Blazor . Aby użyć wersji odpowiedniej dla wersji, wybierz wersję dokumentu z selektorem listy rozwijanej **wersji** na tej stronie sieci Web.
 
 ### <a name="blazor-webassembly"></a>BlazorZestaw webassembly
 
@@ -110,7 +96,7 @@ W `<head>` zawartości strony hosta *wwwroot/index.html* Zastosuj dyrektywy opis
 
 ### <a name="blazor-server"></a>BlazorServer
 
-`<head>` Na stronie hosta *strony/_Host. cshtml* Zastosuj dyrektywy opisane w sekcji [dyrektywy zasad](#policy-directives) :
+Na `<head>` stronie hosta *strony/_Host. cshtml* Zastosuj dyrektywy opisane w sekcji [dyrektywy zasad](#policy-directives) :
 
 ```cshtml
 <meta http-equiv="Content-Security-Policy" 
@@ -130,27 +116,27 @@ W `<head>` zawartości strony hosta *wwwroot/index.html* Zastosuj dyrektywy opis
 
 ## <a name="meta-tag-limitations"></a>Ograniczenia tagów Meta
 
-Zasady `<meta>` dotyczące tagów nie obsługują następujących dyrektyw:
+`<meta>`Zasady dotyczące tagów nie obsługują następujących dyrektyw:
 
 * [Ramka — elementy nadrzędne](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/frame-ancestors)
 * [Zgłoś do](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/report-to)
 * [Raport — identyfikator URI](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/report-uri)
 * [rozwiązania](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/sandbox)
 
-Aby zapewnić obsługę powyższych dyrektyw, użyj nagłówka o nazwie `Content-Security-Policy`. Ciąg dyrektywy jest wartością nagłówka.
+Aby zapewnić obsługę powyższych dyrektyw, użyj nagłówka o nazwie `Content-Security-Policy` . Ciąg dyrektywy jest wartością nagłówka.
 
 ## <a name="test-a-policy-and-receive-violation-reports"></a>Testowanie zasad i otrzymywanie raportów o naruszeniu
 
 Testowanie pomaga upewnić się, że skrypty innych firm nie są przypadkowo blokowane podczas kompilowania zasad początkowych.
 
-Aby przetestować zasady w określonym czasie bez wymuszania dyrektyw zasad, ustaw `<meta>` `http-equiv` atrybut lub nazwę nagłówka dla zasad opartych na nagłówkach na. `Content-Security-Policy-Report-Only` Raporty o błędach są wysyłane jako dokumenty JSON do określonego adresu URL. Aby uzyskać więcej informacji, zobacz [powiadomienia MDN Web docs: Content-Security-Policy-Report-Only](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy-Report-Only).
+Aby przetestować zasady w określonym czasie bez wymuszania dyrektyw zasad, ustaw `<meta>` `http-equiv` atrybut lub nazwę nagłówka dla zasad opartych na nagłówkach na `Content-Security-Policy-Report-Only` . Raporty o błędach są wysyłane jako dokumenty JSON do określonego adresu URL. Aby uzyskać więcej informacji, zobacz [powiadomienia MDN Web docs: Content-Security-Policy-Report-Only](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy-Report-Only).
 
 Aby zgłaszać naruszenia zasad, gdy zasady są aktywne, zobacz następujące artykuły:
 
 * [Zgłoś do](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/report-to)
 * [Raport — identyfikator URI](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/report-uri)
 
-Chociaż `report-uri` nie jest już zalecane do użycia, obie dyrektywy należy stosować do momentu `report-to` , w którym wszystkie główne przeglądarki są obsługiwane. Nie używaj `report-uri` wyłącznie, ponieważ obsługa `report-uri` programu podlega porzucaniu *w dowolnym momencie* w przeglądarkach. Usuń obsługę programu `report-uri` w ramach zasad, `report-to` gdy jest w pełni obsługiwany. Aby śledzić przyjęcie programu `report-to`, zobacz temat [czy można użyć: raport-do](https://caniuse.com/#feat=mdn-http_headers_csp_content-security-policy_report-to).
+Chociaż `report-uri` nie jest już zalecane do użycia, obie dyrektywy należy stosować do momentu, `report-to` w którym wszystkie główne przeglądarki są obsługiwane. Nie używaj wyłącznie `report-uri` , ponieważ obsługa programu `report-uri` podlega porzucaniu *w dowolnym momencie* w przeglądarkach. Usuń obsługę programu `report-uri` w ramach zasad, gdy `report-to` jest w pełni obsługiwany. Aby śledzić przyjęcie programu `report-to` , zobacz temat [czy można użyć: raport-do](https://caniuse.com/#feat=mdn-http_headers_csp_content-security-policy_report-to).
 
 Testowanie i aktualizowanie zasad aplikacji w każdej wersji.
 

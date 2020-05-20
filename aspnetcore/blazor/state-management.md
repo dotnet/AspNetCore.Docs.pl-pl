@@ -1,36 +1,22 @@
 ---
-title: Zarządzanie Blazor stanem ASP.NET Core
-author: guardrex
-description: Dowiedz się, jak utrwalać stan w Blazor aplikacjach serwerowych.
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 03/17/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: blazor/state-management
-ms.openlocfilehash: 5e14a0697fbc98575970b93dfa12c68e9f561c56
-ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
-ms.translationtype: MT
-ms.contentlocale: pl-PL
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82967418"
+title: "ASP.NET Core Blazor Zarządzanie stanem" autor: Opis: "informacje o utrwalaniu stanu w Blazor aplikacjach serwera".
+monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
 ---
-# <a name="aspnet-core-blazor-state-management"></a>Zarządzanie Blazor stanem ASP.NET Core
+# <a name="aspnet-core-blazor-state-management"></a>BlazorZarządzanie stanem ASP.NET Core
 
 [Steve Sanderson](https://github.com/SteveSandersonMS)
-
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 BlazorSerwer jest platformą aplikacji stanowych. W większości przypadków aplikacja utrzymuje ciągłe połączenie z serwerem. Stan użytkownika jest przechowywany w pamięci serwera w ramach *obwodu*. 
 
 Przykłady stanu przechowywanego dla obwodu użytkownika obejmują:
 
-* Renderowany interfejs użytkownika&mdash;hierarchii wystąpień składników i ich najnowszych danych wyjściowych renderowania.
+* Renderowany interfejs użytkownika: hierarchia wystąpień składników i ich najnowsze dane wyjściowe renderowania.
 * Wartości wszystkich pól i właściwości w wystąpieniach składników.
 * Dane przechowywane w wystąpieniach usługi [wtrysku zależności (di)](xref:fundamentals/dependency-injection) , które są objęte zakresem obwodu.
 
@@ -56,11 +42,11 @@ W niektórych scenariuszach jest wymagane zachowanie stanu między obwodami. Apl
 
 Ogólnie rzecz biorąc, utrzymanie stanu między obwodami ma zastosowanie do scenariuszy, w których użytkownicy aktywnie tworzą dane, a nie tylko odczytujące dane, które już istnieją.
 
-Aby zachować stan poza pojedynczym obwodem, *nie należy przechowywać danych w pamięci serwera*. Aplikacja musi przechowywać dane w innej lokalizacji magazynu. Trwałość stanu nie jest&mdash;automatyczna, podczas tworzenia aplikacji należy wykonać kroki w celu zaimplementowania trwałości danych stanowych.
+Aby zachować stan poza pojedynczym obwodem, *nie należy przechowywać danych w pamięci serwera*. Aplikacja musi przechowywać dane w innej lokalizacji magazynu. Trwałość stanu nie jest automatyczna. Podczas tworzenia aplikacji należy wykonać kroki w celu zaimplementowania stanu trwałości danych stanowych.
 
 Trwałość danych jest zwykle wymagana tylko w przypadku stanu wysokiego poziomu, który użytkownicy wystawią nakłady na tworzenie. W poniższych przykładach stan utrwalania polega na zapisywaniu czasu lub pomocy w działaniach komercyjnych:
 
-* Wieloetapowy formularz &ndash; WebForm, który jest czasochłonny dla użytkownika, aby ponownie wprowadzić dane dla kilku ukończonych kroków procesu wieloetapowego, jeśli ich stan zostanie utracony. Użytkownik utraci stan w tym scenariuszu, jeśli przejdą do formularza wieloetapowego i wrócisz do formularza później.
+* Wieloetapowy formularz WebForm &ndash; , który jest czasochłonny dla użytkownika, aby ponownie wprowadzić dane dla kilku ukończonych kroków procesu wieloetapowego, jeśli ich stan zostanie utracony. Użytkownik utraci stan w tym scenariuszu, jeśli przejdą do formularza wieloetapowego i wrócisz do formularza później.
 * Koszyk &ndash; można obsłużyć wszelkie komercyjnie ważne składniki aplikacji, które reprezentują potencjalne przychody. Użytkownik, który straci swój stan, a tym samym koszyk, może zakupić mniejszą liczbę produktów lub usług w momencie powrotu do lokacji w przyszłości.
 
 Zwykle nie jest konieczne zachowywanie stanu łatwego ponownego tworzenia, takiego jak wprowadzona nazwa użytkownika do okna dialogowego logowania, które nie zostało przesłane.
@@ -70,7 +56,7 @@ Zwykle nie jest konieczne zachowywanie stanu łatwego ponownego tworzenia, takie
 
 ## <a name="where-to-persist-state"></a>Gdzie będzie trwały stan
 
-Trzy Popularne lokalizacje istnieją dla stanu utrwalania w aplikacji Blazor serwera. Każde podejście jest najlepiej dostosowane do różnych scenariuszy i ma inne zastrzeżenia:
+Trzy Popularne lokalizacje istnieją dla stanu utrwalania w Blazor aplikacji serwera. Każde podejście jest najlepiej dostosowane do różnych scenariuszy i ma inne zastrzeżenia:
 
 * [Po stronie serwera w bazie danych](#server-side-in-a-database)
 * [Adres URL](#url)
@@ -99,23 +85,23 @@ W przypadku danych przejściowych reprezentujących stan nawigacji należy model
 Zawartość paska adresu przeglądarki jest zachowywana:
 
 * Jeśli użytkownik ręcznie ponownie załaduje stronę.
-* Jeśli serwer sieci Web stał się&mdash;niedostępny, użytkownik jest zmuszony do ponownego załadowania strony, aby można było połączyć się z innym serwerem.
+* Jeśli serwer sieci Web stał się niedostępny, a użytkownik jest zmuszony do ponownego załadowania strony, aby można było połączyć się z innym serwerem.
 
-Aby uzyskać informacje na temat definiowania wzorców adresów `@page` URL za pomocą <xref:blazor/routing>dyrektywy, zobacz.
+Aby uzyskać informacje na temat definiowania wzorców adresów URL za pomocą `@page` dyrektywy, zobacz <xref:blazor/routing> .
 
 ### <a name="client-side-in-the-browser"></a>Po stronie klienta w przeglądarce
 
-W przypadku danych przejściowych, które użytkownik aktywnie tworzy, wspólny magazyn kopii zapasowych jest `localStorage` przeglądarką `sessionStorage` i kolekcjami. Aplikacja nie jest wymagana do zarządzania lub czyszczenia stanu przechowywanego, jeśli obwód został porzucony, co jest korzystne w porównaniu z magazynem po stronie serwera.
+W przypadku danych przejściowych, które użytkownik aktywnie tworzy, wspólny magazyn kopii zapasowych jest przeglądarką `localStorage` i `sessionStorage` kolekcjami. Aplikacja nie jest wymagana do zarządzania lub czyszczenia stanu przechowywanego, jeśli obwód został porzucony, co jest korzystne w porównaniu z magazynem po stronie serwera.
 
 > [!NOTE]
-> "Po stronie klienta" w tej sekcji odwołuje się do scenariuszy po stronie klienta w przeglądarce, a [ Blazor nie modelu hostingu zestawu webassembly](xref:blazor/hosting-models#blazor-webassembly). `localStorage`i `sessionStorage` mogą być używane w Blazor aplikacjach webassembly, ale tylko przez napisanie kodu niestandardowego lub użycie pakietu innej firmy.
+> "Po stronie klienta" w tej sekcji odwołuje się do scenariuszy po stronie klienta w przeglądarce, a nie [ Blazor modelu hostingu zestawu webassembly](xref:blazor/hosting-models#blazor-webassembly). `localStorage`i `sessionStorage` mogą być używane w Blazor aplikacjach webassembly, ale tylko przez napisanie kodu niestandardowego lub użycie pakietu innej firmy.
 
 `localStorage`i `sessionStorage` różnią się w następujący sposób:
 
 * `localStorage`jest objęty zakresem przeglądarki użytkownika. Jeśli użytkownik ponownie załaduje stronę lub zamknie i otworzy przeglądarkę, stan będzie się utrzymywał. Jeśli użytkownik otworzy wiele kart przeglądarki, stan jest udostępniany na kartach. Dane są zachowywane `localStorage` do momentu jawnego wyczyszczenia.
 * `sessionStorage`jest zakresem do karty przeglądarki użytkownika. Jeśli użytkownik ponownie załaduje kartę, stan będzie się utrzymywał. Jeśli użytkownik zamknie kartę lub przeglądarkę, stan zostanie utracony. Jeśli użytkownik otworzy wiele kart przeglądarki, każda karta ma własną niezależną wersję danych.
 
-Ogólnie rzecz `sessionStorage` biorąc, jest bezpiecznie używać. `sessionStorage`pozwala uniknąć ryzyka, że użytkownik otwiera wiele kart i napotyka następujące kwestie:
+Ogólnie rzecz biorąc, `sessionStorage` jest bezpiecznie używać. `sessionStorage`pozwala uniknąć ryzyka, że użytkownik otwiera wiele kart i napotyka następujące kwestie:
 
 * Błędy w magazynie Stanów na kartach.
 * Zachowanie mylące, gdy karta zastępuje stan innych kart.
@@ -131,7 +117,7 @@ Ostrzeżenia dotyczące korzystania z magazynu przeglądarki:
 
 ## <a name="third-party-browser-storage-solutions"></a>Rozwiązania do magazynowania przeglądarki innych firm
 
-Pakiety NuGet innych firm zapewniają interfejsy API do pracy z `localStorage` i `sessionStorage`.
+Pakiety NuGet innych firm zapewniają interfejsy API do pracy z `localStorage` i `sessionStorage` .
 
 Warto rozważać wybór pakietu, który w sposób przezroczysty używa ASP.NET Core [ochrony danych](xref:security/data-protection/introduction). Ochrona danych ASP.NET Core szyfruje przechowywane dane i zmniejsza potencjalne ryzyko naruszenia przechowywanych danych. Jeśli dane serializowane w formacie JSON są przechowywane w postaci zwykłego tekstu, użytkownicy mogą zobaczyć dane przy użyciu narzędzi deweloperskich przeglądarki, a także zmodyfikować przechowywane dane. Zabezpieczanie danych nie zawsze jest problemem, ponieważ dane mogą być proste. Na przykład odczytywanie lub modyfikowanie zapisanego koloru elementu interfejsu użytkownika nie jest istotnym zagrożeniem bezpieczeństwa użytkownika lub organizacji. Unikaj zezwalania użytkownikom na inspekcję i manipulowanie *danymi poufnymi*.
 
@@ -146,14 +132,14 @@ Przykład pakietu NuGet, który zapewnia [ochronę danych](xref:security/data-pr
 
 Aby zainstalować `Microsoft.AspNetCore.ProtectedBrowserStorage` pakiet:
 
-1. W projekcie Blazor aplikacji serwera Dodaj odwołanie do pakietu do [Microsoft. AspNetCore. ProtectedBrowserStorage](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage).
-1. W kodzie HTML najwyższego poziomu (na przykład w pliku *Pages/_Host. cshtml* w domyślnym szablonie projektu) Dodaj następujący `<script>` Tag:
+1. W Blazor projekcie aplikacji serwera Dodaj odwołanie do pakietu do [Microsoft. AspNetCore. ProtectedBrowserStorage](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage).
+1. W kodzie HTML najwyższego poziomu (na przykład w pliku *Pages/_Host. cshtml* w domyślnym szablonie projektu) Dodaj następujący `<script>` tag:
 
    ```html
    <script src="_content/Microsoft.AspNetCore.ProtectedBrowserStorage/protectedBrowserStorage.js"></script>
    ```
 
-1. W `Startup.ConfigureServices` metodzie Wywołaj `AddProtectedBrowserStorage` polecenie Dodaj `localStorage` i `sessionStorage` usługi do kolekcji usług:
+1. W `Startup.ConfigureServices` metodzie Wywołaj polecenie `AddProtectedBrowserStorage` Dodaj `localStorage` i `sessionStorage` usługi do kolekcji usług:
 
    ```csharp
    services.AddProtectedBrowserStorage();
@@ -161,7 +147,7 @@ Aby zainstalować `Microsoft.AspNetCore.ProtectedBrowserStorage` pakiet:
 
 ### <a name="save-and-load-data-within-a-component"></a>Zapisz i Załaduj dane w składniku
 
-W dowolnym składniku wymagającym ładowania lub zapisywania danych w magazynie przeglądarki Użyj [`@inject`](xref:blazor/dependency-injection#request-a-service-in-a-component) , aby wstrzyknąć wystąpienie jednego z następujących elementów:
+W dowolnym składniku wymagającym ładowania lub zapisywania danych w magazynie przeglądarki Użyj, [`@inject`](xref:blazor/dependency-injection#request-a-service-in-a-component) Aby wstrzyknąć wystąpienie jednego z następujących elementów:
 
 * `ProtectedLocalStorage`
 * `ProtectedSessionStorage`
@@ -173,9 +159,9 @@ Wybór zależy od tego, który magazyn zapasowy ma być używany. W poniższym p
 @inject ProtectedSessionStorage ProtectedSessionStore
 ```
 
-`@using` Instrukcja może zostać umieszczona w pliku *_Imports. Razor* zamiast w składniku. Użycie pliku *_Imports. Razor* sprawia, że przestrzeń nazw jest dostępna dla większych segmentów aplikacji lub całej aplikacji.
+`@using`Instrukcja może zostać umieszczona w pliku *_Imports. Razor* zamiast w składniku. Użycie pliku *_Imports. Razor* sprawia, że przestrzeń nazw jest dostępna dla większych segmentów aplikacji lub całej aplikacji.
 
-Aby zachować `currentCount` wartość w `Counter` składniku szablonu projektu, zmodyfikuj `IncrementCount` metodę do użycia: `ProtectedSessionStore.SetAsync`
+Aby zachować `currentCount` wartość w `Counter` składniku szablonu projektu, zmodyfikuj `IncrementCount` metodę do użycia `ProtectedSessionStore.SetAsync` :
 
 ```csharp
 private async Task IncrementCount()
@@ -189,7 +175,7 @@ W większych, bardziej realistycznych aplikacjach przechowywanie pojedynczych p�
 
 W poprzednim przykładzie kodu `currentCount` dane są przechowywane jako `sessionStorage['count']` w przeglądarce użytkownika. Dane nie są przechowywane w postaci zwykłego tekstu, ale nie są chronione przy użyciu [ochrony danych](xref:security/data-protection/introduction)ASP.NET Core. Zaszyfrowane dane można zobaczyć, jeśli `sessionStorage['count']` są oceniane w konsoli dewelopera w przeglądarce.
 
-Aby odzyskać `currentCount` dane, jeśli użytkownik powróci do `Counter` składnika później (w tym, jeśli znajdują się w całkowicie nowym obwodzie) `ProtectedSessionStore.GetAsync`, użyj:
+Aby odzyskać `currentCount` dane, jeśli użytkownik powróci do `Counter` składnika później (w tym, jeśli znajdują się w całkowicie nowym obwodzie), użyj `ProtectedSessionStore.GetAsync` :
 
 ```csharp
 protected override async Task OnInitializedAsync()
@@ -198,7 +184,7 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
-Jeśli parametry składnika obejmują stan nawigacji, wywołaj `ProtectedSessionStore.GetAsync` i przypisz wynik w `OnParametersSetAsync`, nie. `OnInitializedAsync` `OnInitializedAsync`jest wywoływana tylko raz podczas pierwszego wystąpienia składnika. `OnInitializedAsync`nie zostanie wywołana ponownie później, jeśli użytkownik przejdzie do innego adresu URL, a pozostałe na tej samej stronie. Aby uzyskać więcej informacji, zobacz <xref:blazor/lifecycle>.
+Jeśli parametry składnika obejmują stan nawigacji, wywołaj `ProtectedSessionStore.GetAsync` i przypisz wynik w `OnParametersSetAsync` , nie `OnInitializedAsync` . `OnInitializedAsync`jest wywoływana tylko raz podczas pierwszego wystąpienia składnika. `OnInitializedAsync`nie zostanie wywołana ponownie później, jeśli użytkownik przejdzie do innego adresu URL, a pozostałe na tej samej stronie. Aby uzyskać więcej informacji, zobacz <xref:blazor/lifecycle>.
 
 > [!WARNING]
 > Przykłady w tej sekcji działają tylko wtedy, gdy serwer nie ma włączonej obsługi przed renderowaniem. Po włączeniu obsługi przed renderowaniem zostanie wygenerowany błąd podobny do:
@@ -211,7 +197,7 @@ Jeśli parametry składnika obejmują stan nawigacji, wywołaj `ProtectedSession
 
 Ponieważ magazyn przeglądarki jest asynchroniczny (dostęp za pośrednictwem połączenia sieciowego), zawsze jest okres, po upływie którego dane będą ładowane i dostępne do użycia przez składnik. Aby uzyskać najlepsze wyniki, renderowanie komunikatu o stanie ładowania podczas ładowania jest w toku zamiast wyświetlania danych pustych lub domyślnych.
 
-Jednym z metod jest śledzenie, czy dane są `null` (nadal ładowane) czy nie. W składniku `Counter` domyślnym liczba jest przechowywana w `int`. Wprowadź `currentCount` wartość null, dodając znak zapytania`?`() do typu (`int`):
+Jednym z metod jest śledzenie, czy dane są `null` (nadal ładowane) czy nie. W `Counter` składniku domyślnym liczba jest przechowywana w `int` . Wprowadź `currentCount` wartość null, dodając znak zapytania ( `?` ) do typu ( `int` ):
 
 ```csharp
 private int? currentCount;
@@ -243,11 +229,11 @@ Podczas renderowania:
 
 > W tej chwili nie można wystawić wywołań międzyoperacyjnych języka JavaScript. Dzieje się tak, ponieważ składnik jest wstępnie renderowany.
 
-Jednym ze sposobów na rozwiązanie błędu jest wyłączenie renderowania. Jest to zazwyczaj najlepszym wyborem, jeśli aplikacja znacznie korzysta z magazynu opartego na przeglądarce. Renderowanie zwiększa złożoność i nie korzysta z aplikacji, ponieważ aplikacja nie może przeprowadzić renderowania żadnej `localStorage` przydatnej zawartości do momentu, `sessionStorage` gdy nie jest dostępna.
+Jednym ze sposobów na rozwiązanie błędu jest wyłączenie renderowania. Jest to zazwyczaj najlepszym wyborem, jeśli aplikacja znacznie korzysta z magazynu opartego na przeglądarce. Renderowanie zwiększa złożoność i nie korzysta z aplikacji, ponieważ aplikacja nie może przeprowadzić renderowania żadnej przydatnej zawartości do momentu, gdy nie `localStorage` `sessionStorage` jest dostępna.
 
-Aby wyłączyć renderowanie, Otwórz plik *Pages/_Host. cshtml* i zmień wartość `render-mode` [pomocnika znacznika składnika](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper) na <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server>.
+Aby wyłączyć renderowanie, Otwórz plik *Pages/_Host. cshtml* i zmień wartość `render-mode` [pomocnika znacznika składnika](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper) na <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> .
 
-Renderowanie może być przydatne w przypadku innych stron, które `localStorage` nie `sessionStorage`używają ani. Aby włączyć renderowanie, odłóż operację ładowania do momentu podłączenia przeglądarki do obwodu. Poniżej przedstawiono przykład przechowywania wartości licznika:
+Renderowanie może być przydatne w przypadku innych stron, które nie używają `localStorage` ani `sessionStorage` . Aby włączyć renderowanie, odłóż operację ładowania do momentu podłączenia przeglądarki do obwodu. Poniżej przedstawiono przykład przechowywania wartości licznika:
 
 ```razor
 @using Microsoft.AspNetCore.ProtectedBrowserStorage
@@ -326,9 +312,9 @@ else
 }
 ```
 
-`CounterStateProvider` Składnik obsługuje fazę ładowania, przez co nie renderuje jej zawartości podrzędnej do momentu ukończenia ładowania.
+`CounterStateProvider`Składnik obsługuje fazę ładowania, przez co nie renderuje jej zawartości podrzędnej do momentu ukończenia ładowania.
 
-Aby użyć `CounterStateProvider` składnika, zawiń wystąpienie składnika wokół dowolnego innego składnika, który wymaga dostępu do stanu licznika. Aby zapewnić `CounterStateProvider` dostępność stanu dla wszystkich składników w aplikacji, zawiń składnik wokół składnika `Router` w `App` składniku (*App. Razor*):
+Aby użyć `CounterStateProvider` składnika, zawiń wystąpienie składnika wokół dowolnego innego składnika, który wymaga dostępu do stanu licznika. Aby zapewnić dostępność stanu dla wszystkich składników w aplikacji, zawiń `CounterStateProvider` składnik wokół składnika `Router` w `App` składniku (*App. Razor*):
 
 ```razor
 <CounterStateProvider>
@@ -359,9 +345,9 @@ Zapakowane składniki są odbierane i mogą modyfikować stan trwałych licznik�
 }
 ```
 
-Poprzedni składnik nie jest wymagany do współpracy z `ProtectedBrowserStorage`programem ani nie zajmuje się fazą "Ładowanie".
+Poprzedni składnik nie jest wymagany do współpracy z programem `ProtectedBrowserStorage` ani nie zajmuje się fazą "Ładowanie".
 
-Aby można było zaradzić sobie z instrukcją `CounterStateProvider` prerenderingu zgodnie z wcześniejszym opisem, może zostać zmieniona, aby wszystkie składniki korzystające z danych licznika automatycznie działały z użyciem prerenderowania. Szczegółowe informacje znajdują się w sekcji [Obsługa przed renderowaniem](#handle-prerendering) .
+Aby można było zaradzić sobie z instrukcją prerenderingu zgodnie z wcześniejszym opisem, `CounterStateProvider` może zostać zmieniona, aby wszystkie składniki korzystające z danych licznika automatycznie działały z użyciem prerenderowania. Szczegółowe informacje znajdują się w sekcji [Obsługa przed renderowaniem](#handle-prerendering) .
 
 Ogólnie rzecz biorąc, zalecany jest wzorzec *składnika nadrzędnego dostawcy stanu* :
 

@@ -13,18 +13,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity/spa
-ms.openlocfilehash: 178f85df0d35027cddb4314f9dabe26af8483ce6
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 26d371161bf5f926e50cbc141ccfaac40ee96977
+ms.sourcegitcommit: ff5c47beded9264c1395beb9c905f826261f3ba3
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775677"
+ms.lasthandoff: 05/16/2020
+ms.locfileid: "83440181"
 ---
 # <a name="authentication-and-authorization-for-spas"></a>Uwierzytelnianie i autoryzacja dla aplikacji jednostronicowych
 
 ASP.NET Core 3,0 lub nowszy oferuje uwierzytelnianie w aplikacjach jednostronicowych (aplikacji jednostronicowych) przy użyciu obsługi autoryzacji interfejsu API. ASP.NET Core Identity do uwierzytelniania i przechowywania użytkowników jest połączony z [IdentityServer](https://identityserver.io/) w celu zaimplementowania programu Open ID Connect.
 
-Parametr uwierzytelniania został dodany do szablonów projektów **kątowych** i **reagowania** , które są podobne do parametrów uwierzytelniania w szablonach **aplikacji sieci Web (Model-View-Controller)** (MVC) i **aplikacji sieci Web** (Razor strony). Dozwolone wartości parametrów to **none** i **indywidualny**. Szablon projektu **re. js i Redux** nie obsługuje teraz parametru Authentication.
+Parametr uwierzytelniania został dodany do szablonów projektów **kątowych** i **reagowania** , które są podobne do parametrów uwierzytelniania w szablonach **aplikacji sieci Web (Model-View-Controller)** (MVC) i **aplikacji sieci Web** ( Razor strony). Dozwolone wartości parametrów to **none** i **indywidualny**. Szablon projektu **re. js i Redux** nie obsługuje teraz parametru Authentication.
 
 ## <a name="create-an-app-with-api-authorization-support"></a>Tworzenie aplikacji z obsługą autoryzacji interfejsu API
 
@@ -50,7 +50,7 @@ W poniższych sekcjach opisano Dodatki do projektu w przypadku włączenia obsł
 
 ### <a name="startup-class"></a>Klasa początkowa
 
-`Startup` Klasa zawiera następujące dodatki:
+`Startup`Klasa zawiera następujące dodatki:
 
 * Wewnątrz `Startup.ConfigureServices` metody:
   * Identityprzy użyciu domyślnego interfejsu użytkownika:
@@ -97,7 +97,7 @@ Ta metoda pomocnika umożliwia skonfigurowanie IdentityServer do korzystania z n
 
 ### <a name="addidentityserverjwt"></a>AddIdentityServerJwt
 
-Ta metoda pomocnika konfiguruje schemat zasad dla aplikacji jako domyślną procedurę obsługi uwierzytelniania. Zasady są skonfigurowane tak, aby Identity obsługiwać wszystkie żądania kierowane do dowolnej ścieżki podrzędnej w Identity przestrzeni adresów URL "Identity/". `JwtBearerHandler` Obsługuje wszystkie inne żądania. Ponadto ta metoda rejestruje zasób `<<ApplicationName>>API` interfejsu API z IdentityServer z domyślnym zakresem `<<ApplicationName>>API` i konfiguruje oprogramowanie pośredniczące tokenu okaziciela JWT do weryfikowania tokenów wystawionych przez IdentityServer dla aplikacji.
+Ta metoda pomocnika konfiguruje schemat zasad dla aplikacji jako domyślną procedurę obsługi uwierzytelniania. Zasady są skonfigurowane tak, aby Identity obsługiwać wszystkie żądania kierowane do dowolnej ścieżki podrzędnej w Identity przestrzeni adresów URL "/ Identity ". `JwtBearerHandler`Obsługuje wszystkie inne żądania. Ponadto ta metoda rejestruje `<<ApplicationName>>API` zasób interfejsu API z IdentityServer z domyślnym zakresem `<<ApplicationName>>API` i konfiguruje oprogramowanie pośredniczące tokenu okaziciela JWT do weryfikowania tokenów wystawionych przez IdentityServer dla aplikacji.
 
 ### <a name="weatherforecastcontroller"></a>WeatherForecastController
 
@@ -105,7 +105,7 @@ W pliku *Controllers\WeatherForecastController.cs* Zwróć uwagę na `[Authorize
 
 ### <a name="applicationdbcontext"></a>ApplicationDbContext
 
-W pliku *Data\ApplicationDbContext.cs* Zauważ `DbContext` , że jest on używany Identity w połączeniu z wyjątkiem, który rozszerza `ApiAuthorizationDbContext` (Klasa pochodna z `IdentityDbContext`), aby uwzględnić schemat dla IdentityServer.
+W pliku *Data\ApplicationDbContext.cs* Zauważ, `DbContext` że jest on używany w Identity połączeniu z wyjątkiem, który rozszerza `ApiAuthorizationDbContext` (Klasa pochodna z), `IdentityDbContext` Aby uwzględnić schemat dla IdentityServer.
 
 Aby uzyskać pełną kontrolę nad schematem bazy danych, Dziedzicz z jednej z dostępnych Identity `DbContext` klas i skonfiguruj kontekst, aby uwzględnić Identity schemat przez wywołanie `builder.ConfigurePersistedGrantContext(_operationalStoreOptions.Value)` `OnModelCreating` metody.
 
@@ -115,7 +115,7 @@ W pliku *Controllers\OidcConfigurationController.cs* Zwróć uwagę na punkt ko�
 
 ### <a name="appsettingsjson"></a>appSettings. JSON
 
-W pliku *appSettings. JSON* w katalogu głównym projektu znajduje się nowa `IdentityServer` sekcja opisująca listę skonfigurowanych klientów. W poniższym przykładzie istnieje pojedynczy klient. Nazwa klienta odpowiada nazwie aplikacji i jest zamapowana według Konwencji do parametru OAuth `ClientId` . Profil wskazuje konfigurowany typ aplikacji. Jest on używany wewnętrznie w przypadku Konwencji, które upraszczają proces konfiguracji serwera. Istnieje kilka dostępnych profilów, zgodnie z opisem w sekcji [Profile aplikacji](#application-profiles) .
+W pliku *appSettings. JSON* w katalogu głównym projektu znajduje się nowa `IdentityServer` sekcja opisująca listę skonfigurowanych klientów. W poniższym przykładzie istnieje pojedynczy klient. Nazwa klienta odpowiada nazwie aplikacji i jest zamapowana według Konwencji do `ClientId` parametru OAuth. Profil wskazuje konfigurowany typ aplikacji. Jest on używany wewnętrznie w przypadku Konwencji, które upraszczają proces konfiguracji serwera. Istnieje kilka dostępnych profilów, zgodnie z opisem w sekcji [Profile aplikacji](#application-profiles) .
 
 ```json
 "IdentityServer": {
@@ -149,7 +149,7 @@ Obsługa uwierzytelniania i autoryzacji interfejsu API w szablonie kątowym znaj
   * *login-menu. składnik. TS*: element widget wyświetlający jeden z następujących zestawów linków:
     * Zarządzanie profilami użytkowników i wylogowywanie łączy podczas uwierzytelniania użytkownika.
     * Rejestrowanie i logowanie w przypadku braku uwierzytelnienia użytkownika.
-* Ochrona `AuthorizeGuard` trasy, którą można dodać do tras i wymaga uwierzytelnienia użytkownika przed odwiedzeniem trasy.
+* Ochrona trasy `AuthorizeGuard` , którą można dodać do tras i wymaga uwierzytelnienia użytkownika przed odwiedzeniem trasy.
 * Interceptor protokołu HTTP `AuthorizeInterceptor` , który dołącza token dostępu do wychodzących żądań HTTP przeznaczonych dla interfejsu API podczas uwierzytelniania użytkownika.
 * Usługa `AuthorizeService` , która obsługuje szczegóły niższego poziomu procesu uwierzytelniania i ujawnia informacje o uwierzytelnionym użytkowniku w pozostałej części aplikacji do użycia.
 * Moduł kątowy, który definiuje trasy skojarzone z częściami uwierzytelniania aplikacji. Przedstawia on składnik menu logowania, Interceptor, ochronę i usługę do użycia w pozostałej części aplikacji.
@@ -189,9 +189,9 @@ services.Configure<JwtBearerOptions>(
     });
 ```
 
-Procedura obsługi JWT interfejsu API wywołuje zdarzenia, które umożliwiają kontrolę nad procesem uwierzytelniania przy `JwtBearerEvents`użyciu. Aby zapewnić obsługę autoryzacji interfejsu API, `AddIdentityServerJwt` rejestruje własne programy obsługi zdarzeń.
+Procedura obsługi JWT interfejsu API wywołuje zdarzenia, które umożliwiają kontrolę nad procesem uwierzytelniania przy użyciu `JwtBearerEvents` . Aby zapewnić obsługę autoryzacji interfejsu API, `AddIdentityServerJwt` rejestruje własne programy obsługi zdarzeń.
 
-Aby dostosować obsługę zdarzenia, zawiń istniejący program obsługi zdarzeń z dodatkową logiką zgodnie z wymaganiami. Przykład:
+Aby dostosować obsługę zdarzenia, zawiń istniejący program obsługi zdarzeń z dodatkową logiką zgodnie z wymaganiami. Na przykład:
 
 ```csharp
 services.Configure<JwtBearerOptions>(
@@ -208,7 +208,7 @@ services.Configure<JwtBearerOptions>(
     });
 ```
 
-W poprzednim kodzie procedura obsługi `OnTokenValidated` zdarzeń jest zastępowana implementacją niestandardową. Ta implementacja:
+W poprzednim kodzie `OnTokenValidated` procedura obsługi zdarzeń jest zastępowana implementacją niestandardową. Ta implementacja:
 
 1. Wywołuje oryginalną implementację dostarczoną przez obsługę autoryzacji interfejsu API.
 1. Uruchom własną logikę niestandardową.
@@ -224,7 +224,7 @@ RouterModule.forRoot([
 ])
 ```
 
-Należy pamiętać, że ochrona trasy nie chroni faktycznego punktu końcowego (co nadal wymaga zastosowania `[Authorize]` atrybutu), ale uniemożliwia użytkownikowi przechodzenie do podanej trasy po stronie klienta, gdy nie jest ona uwierzytelniana.
+Należy pamiętać, że ochrona trasy nie chroni faktycznego punktu końcowego (co nadal wymaga `[Authorize]` zastosowania atrybutu), ale uniemożliwia użytkownikowi przechodzenie do podanej trasy po stronie klienta, gdy nie jest ona uwierzytelniana.
 
 ## <a name="authenticate-api-requests-angular"></a>Uwierzytelnianie żądań interfejsu API (kątowy)
 
@@ -232,7 +232,7 @@ Należy pamiętać, że ochrona trasy nie chroni faktycznego punktu końcowego (
 
 ## <a name="protect-a-client-side-route-react"></a>Ochrona trasy po stronie klienta (reagowanie)
 
-Ochrona trasy po stronie klienta przy użyciu `AuthorizeRoute` składnika zamiast zwykłego `Route` składnika. Na przykład Zwróć uwagę na to `fetch-data` , jak trasa jest skonfigurowana `App` w składniku:
+Ochrona trasy po stronie klienta przy użyciu `AuthorizeRoute` składnika zamiast zwykłego `Route` składnika. Na przykład Zwróć uwagę na to, jak `fetch-data` trasa jest skonfigurowana w `App` składniku:
 
 ```jsx
 <AuthorizeRoute path='/fetch-data' component={FetchData} />
@@ -240,12 +240,12 @@ Ochrona trasy po stronie klienta przy użyciu `AuthorizeRoute` składnika zamias
 
 Ochrona trasy:
 
-* Nie chroni rzeczywistego punktu końcowego (co nadal wymaga zastosowania `[Authorize]` atrybutu).
+* Nie chroni rzeczywistego punktu końcowego (co nadal wymaga `[Authorize]` zastosowania atrybutu).
 * Uniemożliwia użytkownikowi przechodzenie do danej trasy po stronie klienta, gdy nie jest ona uwierzytelniana.
 
 ## <a name="authenticate-api-requests-react"></a>Uwierzytelnianie żądań interfejsu API (reagowanie)
 
-Żądania uwierzytelniania przy użyciu reakcji są wykonywane najpierw przez zaimportowanie `authService` wystąpienia z `AuthorizeService`programu. Token dostępu jest pobierany z `authService` i jest dołączany do żądania, jak pokazano poniżej. W przypadku składników reagujących ta czynność jest zwykle wykonywana w `componentDidMount` metodzie cyklu życia lub w wyniku działania niektórych działań użytkownika.
+Żądania uwierzytelniania przy użyciu reakcji są wykonywane najpierw przez zaimportowanie `authService` wystąpienia z programu `AuthorizeService` . Token dostępu jest pobierany z `authService` i jest dołączany do żądania, jak pokazano poniżej. W przypadku składników reagujących ta czynność jest zwykle wykonywana w `componentDidMount` metodzie cyklu życia lub w wyniku działania niektórych działań użytkownika.
 
 ### <a name="import-the-authservice-into-your-component"></a>Zaimportuj authService do składnika
 
@@ -270,15 +270,17 @@ async populateWeatherData() {
 
 Aby wdrożyć aplikację w środowisku produkcyjnym, należy zainicjować następujące zasoby:
 
-* Baza danych, w której Identity mają być przechowywane konta użytkowników i dotacje IdentityServer.
+* Baza danych, w której mają być przechowywane Identity konta użytkowników i dotacje IdentityServer.
 * Certyfikat produkcyjny do użycia na potrzeby podpisywania tokenów.
   * Nie ma określonych wymagań dotyczących tego certyfikatu; może to być certyfikat z podpisem własnym lub certyfikat obsługiwany przez urząd certyfikacji.
   * Można go wygenerować za poorednictwem standardowych narzędzi, takich jak PowerShell lub OpenSSL.
   * Można go zainstalować w magazynie certyfikatów na maszynach docelowych lub wdrożyć jako plik *PFX* przy użyciu silnego hasła.
 
-### <a name="example-deploy-to-azure-websites"></a>Przykład: wdrażanie w usłudze Azure Websites
+### <a name="example-deploy-to-azure-app-service"></a>Przykład: Wdróż do Azure App Service
 
-W tej sekcji opisano wdrażanie aplikacji w usłudze Azure Websites przy użyciu certyfikatu przechowywanego w magazynie certyfikatów. Aby zmodyfikować aplikację w celu załadowania certyfikatu z magazynu certyfikatów, plan App Service musi znajdować się co najmniej w warstwie Standardowa podczas konfigurowania w późniejszym kroku. W pliku *appSettings. JSON* aplikacji zmodyfikuj `IdentityServer` sekcję, aby uwzględnić szczegóły klucza:
+W tej sekcji opisano wdrażanie aplikacji do Azure App Service przy użyciu certyfikatu przechowywanego w magazynie certyfikatów. Aby zmodyfikować aplikację w celu załadowania certyfikatu z magazynu certyfikatów, podczas konfigurowania aplikacji w Azure Portal w późniejszym kroku wymagany jest plan usługi warstwy Standardowa lub lepszy.
+
+W pliku *appSettings. JSON* aplikacji zmodyfikuj `IdentityServer` sekcję, aby uwzględnić szczegóły klucza:
 
 ```json
 "IdentityServer": {
@@ -292,16 +294,16 @@ W tej sekcji opisano wdrażanie aplikacji w usłudze Azure Websites przy użyciu
 ```
 
 * Nazwa magazynu reprezentuje nazwę magazynu certyfikatów, w którym przechowywany jest certyfikat. W tym przypadku wskazuje osobisty magazyn użytkownika.
-* Lokalizacja magazynu reprezentuje miejsce załadowania certyfikatu (`CurrentUser` lub `LocalMachine`).
+* Lokalizacja magazynu reprezentuje miejsce załadowania certyfikatu ( `CurrentUser` lub `LocalMachine` ).
 * Właściwość Name certyfikatu odpowiada podmiotowi wyróżnionemu dla certyfikatu.
 
-Aby wdrożyć usługę Azure Websites, wdróż aplikację zgodnie z instrukcjami w temacie [wdrażanie aplikacji na platformie Azure](xref:tutorials/publish-to-azure-webapp-using-vs#deploy-the-app-to-azure) w celu utworzenia niezbędnych zasobów platformy Azure i wdrożenia aplikacji w środowisku produkcyjnym.
+Aby wdrożyć program do Azure App Service, wykonaj kroki opisane w artykule [wdrażanie aplikacji na platformie Azure](xref:tutorials/publish-to-azure-webapp-using-vs#deploy-the-app-to-azure), w którym wyjaśniono, jak utworzyć niezbędne zasoby platformy Azure i wdrożyć aplikację w środowisku produkcyjnym.
 
-Po wykonaniu powyższych instrukcji aplikacja zostanie wdrożona na platformie Azure, ale nie jest jeszcze funkcjonalna. Nadal trzeba skonfigurować certyfikat używany przez aplikację. Znajdź odcisk palca certyfikatu, który ma być używany, i postępuj zgodnie z instrukcjami opisanymi w artykule [ładowanie certyfikatów](/azure/app-service/app-service-web-ssl-cert-load#load-the-certificate-in-code).
+Po wykonaniu powyższych instrukcji aplikacja zostanie wdrożona na platformie Azure, ale nie jest jeszcze funkcjonalna. Certyfikat używany w aplikacji musi być skonfigurowany w Azure Portal. Znajdź odcisk palca certyfikatu i postępuj zgodnie z instrukcjami opisanymi w artykule [ładowanie certyfikatów](/azure/app-service/app-service-web-ssl-cert-load#load-the-certificate-in-code).
 
-Chociaż te kroki zawierają informacje o protokole SSL, w portalu znajduje się sekcja **Certyfikaty prywatne** , w której można przekazać certyfikat z obsługą administracyjną do użycia z aplikacją.
+Chociaż te kroki zawierają informacje o protokole SSL, w Azure Portal znajduje się sekcja **Certyfikaty prywatne** , w której można przekazać certyfikat z obsługą administracyjną do użycia z aplikacją.
 
-Po wykonaniu tego kroku należy ponownie uruchomić aplikację, która powinna działać.
+Po skonfigurowaniu aplikacji i ustawieniach aplikacji w Azure Portal ponownie uruchom aplikację w portalu.
 
 ## <a name="other-configuration-options"></a>Inne opcje konfiguracji
 
@@ -312,15 +314,15 @@ Obsługa usługi API Authorization kompiluje się w oparciu o IdentityServer z z
 Profile aplikacji są wstępnie zdefiniowanymi konfiguracjami dla aplikacji, które definiują ich parametry. W tej chwili obsługiwane są następujące profile:
 
 * `IdentityServerSPA`: Reprezentuje wartość SPA hostowaną obok IdentityServer jako pojedynczą jednostkę.
-  * `redirect_uri` Wartość domyślna to `/authentication/login-callback`.
-  * `post_logout_redirect_uri` Wartość domyślna to `/authentication/logout-callback`.
-  * Zestaw zakresów obejmuje `openid`, `profile`i każdy zakres zdefiniowany dla interfejsów API w aplikacji.
-  * Zestaw dozwolonych typów odpowiedzi OIDC jest `id_token token` lub każdy z nich indywidualnie (`id_token`, `token`).
-  * Dozwolony tryb odpowiedzi to `fragment`.
+  * `redirect_uri`Wartość domyślna to `/authentication/login-callback` .
+  * `post_logout_redirect_uri`Wartość domyślna to `/authentication/logout-callback` .
+  * Zestaw zakresów obejmuje `openid` , `profile` i każdy zakres zdefiniowany dla interfejsów API w aplikacji.
+  * Zestaw dozwolonych typów odpowiedzi OIDC jest `id_token token` lub każdy z nich indywidualnie ( `id_token` , `token` ).
+  * Dozwolony tryb odpowiedzi to `fragment` .
 * `SPA`: Reprezentuje SPA, który nie jest hostowany z IdentityServer.
-  * Zestaw zakresów obejmuje `openid`, `profile`i każdy zakres zdefiniowany dla interfejsów API w aplikacji.
-  * Zestaw dozwolonych typów odpowiedzi OIDC jest `id_token token` lub każdy z nich indywidualnie (`id_token`, `token`).
-  * Dozwolony tryb odpowiedzi to `fragment`.
+  * Zestaw zakresów obejmuje `openid` , `profile` i każdy zakres zdefiniowany dla interfejsów API w aplikacji.
+  * Zestaw dozwolonych typów odpowiedzi OIDC jest `id_token token` lub każdy z nich indywidualnie ( `id_token` , `token` ).
+  * Dozwolony tryb odpowiedzi to `fragment` .
 * `IdentityServerJwt`: Reprezentuje interfejs API, który jest hostowany wraz z IdentityServer.
   * Aplikacja jest skonfigurowana tak, aby zawierała pojedynczy zakres, który jest wartością domyślną dla nazwy aplikacji.
 * `API`: Reprezentuje interfejs API, który nie jest obsługiwany przez IdentityServer.
@@ -328,7 +330,7 @@ Profile aplikacji są wstępnie zdefiniowanymi konfiguracjami dla aplikacji, kt�
 
 ### <a name="configuration-through-appsettings"></a>Konfiguracja za poorednictwem AppSettings
 
-Skonfiguruj aplikacje za pomocą systemu konfiguracji, dodając je do listy `Clients` lub. `Resources`
+Skonfiguruj aplikacje za pomocą systemu konfiguracji, dodając je do listy `Clients` lub `Resources` .
 
 Skonfiguruj poszczególne klienta `redirect_uri` i `post_logout_redirect_uri` właściwości, jak pokazano w następującym przykładzie:
 

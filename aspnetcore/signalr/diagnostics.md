@@ -1,7 +1,7 @@
 ---
 title: Rejestrowanie i Diagnostyka w ASP.NET CoreSignalR
 author: anurse
-description: Dowiedz się, jak zbierać diagnostykę SignalR z aplikacji ASP.NET Core.
+description: Dowiedz się, jak zbierać diagnostykę z SignalR aplikacji ASP.NET Core.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: anurse
 ms.custom: signalr
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/diagnostics
-ms.openlocfilehash: 5fda458c2418c3570d55d551ce5144730afd7f85
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 0dda4fb55b1e2275d9cdb2af0b55824b12121dee
+ms.sourcegitcommit: 16b3abec1ed70f9a206f0cfa7cf6404eebaf693d
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82767229"
+ms.lasthandoff: 05/17/2020
+ms.locfileid: "83444220"
 ---
 # <a name="logging-and-diagnostics-in-aspnet-core-signalr"></a>Rejestrowanie i Diagnostyka w ASP.NET Core sygnalizujący
 
@@ -35,10 +35,10 @@ Ponieważ sygnalizujący jest częścią ASP.NET Core, używa systemu rejestrowa
 
 Sygnalizujący używa dwóch kategorii rejestratora:
 
-* `Microsoft.AspNetCore.SignalR`&ndash; w przypadku dzienników związanych z protokołami centrów, aktywowanie centrów, wywoływanie metod i innych działań związanych z centrum.
-* `Microsoft.AspNetCore.Http.Connections`&ndash; w przypadku dzienników związanych z transportami, takimi jak obiekty WebSockets, długie sondowanie i zdarzenia wysyłane przez serwer oraz infrastruktura sygnałów niskiego poziomu.
+* `Microsoft.AspNetCore.SignalR`&ndash;w przypadku dzienników związanych z protokołami centrów, aktywowanie centrów, wywoływanie metod i innych działań związanych z centrum.
+* `Microsoft.AspNetCore.Http.Connections`&ndash;w przypadku dzienników związanych z transportami, takimi jak obiekty WebSockets, długie sondowanie i zdarzenia wysyłane przez serwer oraz infrastruktura sygnałów niskiego poziomu.
 
-Aby włączyć szczegółowe dzienniki od sygnalizującego, skonfiguruj obie `Debug` powyższe prefiksy do poziomu w pliku *appSettings. JSON* , dodając następujące elementy do `LogLevel` podsekcji w: `Logging`
+Aby włączyć szczegółowe dzienniki od sygnalizującego, skonfiguruj obie powyższe prefiksy do `Debug` poziomu w pliku *appSettings. JSON* , dodając następujące elementy do `LogLevel` podsekcji w `Logging` :
 
 [!code-json[](diagnostics/logging-config.json?highlight=7-8)]
 
@@ -51,7 +51,7 @@ Jeśli nie korzystasz z konfiguracji opartej na notacji JSON, ustaw następując
 * `Logging:LogLevel:Microsoft.AspNetCore.SignalR` = `Debug`
 * `Logging:LogLevel:Microsoft.AspNetCore.Http.Connections` = `Debug`
 
-Zapoznaj się z dokumentacją systemu konfiguracyjnego, aby określić sposób określania zagnieżdżonych wartości konfiguracyjnych. Na przykład w przypadku używania zmiennych środowiskowych zamiast `_` `:` (na przykład `Logging__LogLevel__Microsoft.AspNetCore.SignalR`) są używane dwa znaki.
+Zapoznaj się z dokumentacją systemu konfiguracyjnego, aby określić sposób określania zagnieżdżonych wartości konfiguracyjnych. Na przykład w przypadku używania zmiennych środowiskowych `_` zamiast `:` (na przykład) są używane dwa znaki `Logging__LogLevel__Microsoft.AspNetCore.SignalR` .
 
 Zalecamy użycie `Debug` poziomu podczas zbierania bardziej szczegółowych informacji diagnostycznych dla aplikacji. Na `Trace` poziomie powstaje Diagnostyka bardzo niskiego poziomu i jest rzadko wymagana do diagnozowania problemów w aplikacji.
 
@@ -61,7 +61,7 @@ Sposób dostępu do dzienników po stronie serwera zależy od środowiska, w kt�
 
 ### <a name="as-a-console-app-outside-iis"></a>Jako Aplikacja konsolowa poza usługami IIS
 
-Jeśli używasz programu w aplikacji konsolowej, [Rejestrator konsoli](xref:fundamentals/logging/index#console-provider) powinien być domyślnie włączony. Dzienniki sygnalizujące będą wyświetlane w konsoli programu.
+Jeśli używasz programu w aplikacji konsolowej, [Rejestrator konsoli](xref:fundamentals/logging/index#console) powinien być domyślnie włączony. Dzienniki sygnalizujące będą wyświetlane w konsoli programu.
 
 ### <a name="within-iis-express-from-visual-studio"></a>W IIS Express z programu Visual Studio
 
@@ -69,18 +69,18 @@ Program Visual Studio Wyświetla dane wyjściowe dziennika w oknie **danych wyj�
 
 ### <a name="azure-app-service"></a>Azure App Service
 
-Włącz opcję **Rejestrowanie aplikacji (system plików)** w sekcji **dzienniki diagnostyki** w portalu Azure App Service i skonfiguruj **poziom** na `Verbose`. Dzienniki powinny być dostępne w usłudze **przesyłania strumieniowego dzienników** oraz w dziennikach w systemie plików App Service. Aby uzyskać więcej informacji, zobacz [przesyłanie strumieniowe dzienników Azure](xref:fundamentals/logging/index#azure-log-streaming).
+Włącz opcję **Rejestrowanie aplikacji (system plików)** w sekcji **dzienniki diagnostyki** w portalu Azure App Service i skonfiguruj **poziom** na `Verbose` . Dzienniki powinny być dostępne w usłudze **przesyłania strumieniowego dzienników** oraz w dziennikach w systemie plików App Service. Aby uzyskać więcej informacji, zobacz [przesyłanie strumieniowe dzienników Azure](xref:fundamentals/logging/index#azure-log-streaming).
 
 ### <a name="other-environments"></a>Inne środowiska
 
-Jeśli aplikacja jest wdrażana w innym środowisku (na przykład Docker, Kubernetes lub Windows Service), zobacz <xref:fundamentals/logging/index> , aby uzyskać więcej informacji na temat konfigurowania dostawców rejestrowania odpowiednie dla danego środowiska.
+Jeśli aplikacja jest wdrażana w innym środowisku (na przykład Docker, Kubernetes lub Windows Service), zobacz, <xref:fundamentals/logging/index> Aby uzyskać więcej informacji na temat konfigurowania dostawców rejestrowania odpowiednie dla danego środowiska.
 
 ## <a name="javascript-client-logging"></a>Rejestrowanie klientów JavaScript
 
 > [!WARNING]
 > Dzienniki po stronie klienta mogą zawierać poufne informacje z aplikacji. **Nigdy nie** Publikuj nieprzetworzonych dzienników z aplikacji produkcyjnych na forach publicznych, takich jak GitHub.
 
-Korzystając z klienta JavaScript, można skonfigurować opcje rejestrowania za pomocą `configureLogging` metody w: `HubConnectionBuilder`
+Korzystając z klienta JavaScript, można skonfigurować opcje rejestrowania za pomocą `configureLogging` metody w `HubConnectionBuilder` :
 
 [!code-javascript[](diagnostics/logging-config-js.js?highlight=3)]
 
@@ -100,7 +100,7 @@ W poniższej tabeli przedstawiono poziomy dziennika dostępne dla klienta JavaSc
 
 Po skonfigurowaniu szczegółowości dzienniki zostaną zapisane w konsoli przeglądarki (lub w standardowym wyjściu w aplikacji NodeJS).
 
-Jeśli chcesz wysłać dzienniki do niestandardowego systemu rejestrowania, możesz dostarczyć obiekt JavaScript implementujący `ILogger` interfejs. Jedyną metodą, która musi zostać wdrożona, `log`jest, która pobiera poziom zdarzenia i komunikat skojarzony ze zdarzeniem. Przykład:
+Jeśli chcesz wysłać dzienniki do niestandardowego systemu rejestrowania, możesz dostarczyć obiekt JavaScript implementujący `ILogger` interfejs. Jedyną metodą, która musi zostać wdrożona `log` , jest, która pobiera poziom zdarzenia i komunikat skojarzony ze zdarzeniem. Na przykład:
 
 [!code-typescript[](diagnostics/custom-logger.ts?highlight=3-7,13)]
 
@@ -109,11 +109,11 @@ Jeśli chcesz wysłać dzienniki do niestandardowego systemu rejestrowania, moż
 > [!WARNING]
 > Dzienniki po stronie klienta mogą zawierać poufne informacje z aplikacji. **Nigdy nie** Publikuj nieprzetworzonych dzienników z aplikacji produkcyjnych na forach publicznych, takich jak GitHub.
 
-Aby pobrać dzienniki z klienta .NET, można użyć `ConfigureLogging` metody z. `HubConnectionBuilder` Działa tak samo jak `ConfigureLogging` Metoda w systemach `WebHostBuilder` i. `HostBuilder` Można skonfigurować tych samych dostawców rejestrowania, których używasz w ASP.NET Core. Należy jednak ręcznie zainstalować i włączyć pakiety NuGet dla poszczególnych dostawców rejestrowania.
+Aby pobrać dzienniki z klienta .NET, można użyć `ConfigureLogging` metody z `HubConnectionBuilder` . Działa tak samo jak `ConfigureLogging` Metoda w systemach `WebHostBuilder` i `HostBuilder` . Można skonfigurować tych samych dostawców rejestrowania, których używasz w ASP.NET Core. Należy jednak ręcznie zainstalować i włączyć pakiety NuGet dla poszczególnych dostawców rejestrowania.
 
 ### <a name="console-logging"></a>Rejestrowanie konsoli
 
-Aby włączyć rejestrowanie konsoli, Dodaj pakiet [Microsoft. Extensions. Logging. Console](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Console) . Następnie użyj `AddConsole` metody, aby skonfigurować Rejestrator konsoli:
+Aby włączyć rejestrowanie konsoli, Dodaj pakiet [Microsoft. Extensions. Logging. Console](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Console) . Następnie użyj metody, `AddConsole` Aby skonfigurować Rejestrator konsoli:
 
 [!code-csharp[](diagnostics/net-client-console-log.cs?highlight=6)]
 
@@ -125,13 +125,13 @@ Możesz również skonfigurować dzienniki, aby przejść do okna **danych wyjś
 
 ### <a name="other-logging-providers"></a>Inni dostawcy rejestrowania
 
-SignalRobsługuje innych dostawców rejestrowania, takich jak Serilog, SEQ, NLog lub dowolny inny system rejestrowania, który integruje `Microsoft.Extensions.Logging`się z programem. Jeśli system rejestrowania zapewnia `ILoggerProvider`, możesz zarejestrować go za pomocą: `AddProvider`
+SignalRobsługuje innych dostawców rejestrowania, takich jak Serilog, SEQ, NLog lub dowolny inny system rejestrowania, który integruje się z programem `Microsoft.Extensions.Logging` . Jeśli system rejestrowania zapewnia, możesz `ILoggerProvider` zarejestrować go za pomocą `AddProvider` :
 
 [!code-csharp[](diagnostics/net-client-custom-log.cs?highlight=6)]
 
 ### <a name="control-verbosity"></a>Szczegółowość kontroli
 
-Jeśli rejestrujesz się z innych miejsc w aplikacji, zmiana poziomu domyślnego na `Debug` wartość może być zbyt pełna. Możesz użyć filtru, aby skonfigurować poziom rejestrowania dla SignalR dzienników. Można to zrobić w kodzie w taki sam sposób jak na serwerze:
+Jeśli rejestrujesz się z innych miejsc w aplikacji, zmiana poziomu domyślnego na wartość `Debug` może być zbyt pełna. Możesz użyć filtru, aby skonfigurować poziom rejestrowania dla SignalR dzienników. Można to zrobić w kodzie w taki sam sposób jak na serwerze:
 
 [!code-csharp[Controlling verbosity in .NET client](diagnostics/logging-config-client-code.cs?highlight=9-10)]
 
@@ -150,7 +150,7 @@ Programu Fiddler to bardzo zaawansowane narzędzie do zbierania śladów HTTP. Z
 
 Jeśli łączysz się przy użyciu protokołu HTTPS, należy wykonać kilka dodatkowych kroków, aby programu Fiddler można było odszyfrować ruch HTTPS. Aby uzyskać więcej informacji, zobacz [dokumentację programu Fiddler](https://docs.telerik.com/fiddler/Configure-Fiddler/Tasks/DecryptHTTPS).
 
-Po zebraniu śledzenia można wyeksportować śledzenie, wybierając pozycję **plik** > **Zapisz** > **wszystkie sesje** z paska menu.
+Po zebraniu śledzenia można wyeksportować śledzenie, wybierając pozycję **plik**  >  **Zapisz**  >  **wszystkie sesje** z paska menu.
 
 ![Eksportowanie wszystkich sesji z programu Fiddler](diagnostics/fiddler-export.png)
 
@@ -158,13 +158,13 @@ Po zebraniu śledzenia można wyeksportować śledzenie, wybierając pozycję **
 
 Ta metoda działa w przypadku wszystkich aplikacji.
 
-Można zbierać pierwotne ślady TCP przy użyciu tcpdump, uruchamiając następujące polecenie z poziomu powłoki poleceń. Jeśli wystąpi błąd uprawnień, `root` może być konieczne lub nastąpić odtworzenie prefiksu polecenia: `sudo`
+Można zbierać pierwotne ślady TCP przy użyciu tcpdump, uruchamiając następujące polecenie z poziomu powłoki poleceń. Jeśli wystąpi błąd uprawnień, może być konieczne lub nastąpić odtworzenie `root` prefiksu polecenia `sudo` :
 
 ```console
 tcpdump -i [interface] -w trace.pcap
 ```
 
-Zamień `[interface]` na interfejs sieciowy, który ma być przechwytywany. Zwykle jest to coś podobnego `/dev/eth0` (dla standardowego interfejsu Ethernet) lub `/dev/lo0` (dla ruchu hosta lokalnego). Aby uzyskać więcej informacji, zobacz `tcpdump` stronę Man w systemie hosta.
+Zamień na `[interface]` interfejs sieciowy, który ma być przechwytywany. Zwykle jest to coś podobnego `/dev/eth0` (dla standardowego interfejsu Ethernet) lub `/dev/lo0` (dla ruchu hosta lokalnego). Aby uzyskać więcej informacji, zobacz `tcpdump` stronę Man w systemie hosta.
 
 ## <a name="collect-a-network-trace-in-the-browser"></a>Zbieranie danych śledzenia sieci w przeglądarce
 
@@ -203,7 +203,7 @@ Większość przeglądarek Narzędzia deweloperskie ma kartę sieciową, która 
 
 ## <a name="attach-diagnostics-files-to-github-issues"></a>Dołączanie plików diagnostycznych do problemów z usługą GitHub
 
-Pliki diagnostyczne można dołączać do problemów z usługą GitHub, zmieniając ich nazwy, `.txt` aby zawierały rozszerzenie, a następnie przeciągać i upuszczać je na ten problem.
+Pliki diagnostyczne można dołączać do problemów z usługą GitHub, zmieniając ich nazwy, aby zawierały `.txt` rozszerzenie, a następnie przeciągać i upuszczać je na ten problem.
 
 > [!NOTE]
 > Nie należy wklejać zawartości plików dziennika ani śladów sieci do problemu w usłudze GitHub. Te dzienniki i ślady mogą być bardzo duże, a usługi GitHub zwykle obcinają je.

@@ -5,7 +5,7 @@ description: Dowiedz się, jak tworzyć profile publikowania w programie Visual 
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/07/2019
+ms.date: 05/14/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,20 +13,20 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/visual-studio-publish-profiles
-ms.openlocfilehash: 0de20b93929162f79d4d15fc4731959e48bb3b6c
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 42d790ad4942ea238fb3bbe56cb92ae4a26ddc2d
+ms.sourcegitcommit: e20653091c30e0768c4f960343e2c3dd658bba13
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776373"
+ms.lasthandoff: 05/16/2020
+ms.locfileid: "83439009"
 ---
 # <a name="visual-studio-publish-profiles-pubxml-for-aspnet-core-app-deployment"></a>Profile publikacji programu Visual Studio (. pubxml) dla wdrożenia aplikacji ASP.NET Core
 
 Autorzy [Sayed Ibrahim Hashimi](https://github.com/sayedihashimi) i [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-Ten dokument koncentruje się na używaniu programu Visual Studio 2019 lub nowszego do tworzenia profilów publikowania i używania ich. Profile publikowania utworzone za pomocą programu Visual Studio mogą być używane z użyciem programu MSBuild i programu Visual Studio. Instrukcje dotyczące publikowania na platformie Azure znajdują <xref:tutorials/publish-to-azure-webapp-using-vs>się w temacie.
+Ten dokument koncentruje się na używaniu programu Visual Studio 2019 lub nowszego do tworzenia profilów publikowania i używania ich. Profile publikowania utworzone za pomocą programu Visual Studio mogą być używane z użyciem programu MSBuild i programu Visual Studio. Instrukcje dotyczące publikowania na platformie Azure znajdują się w temacie <xref:tutorials/publish-to-azure-webapp-using-vs> .
 
-`dotnet new mvc` Polecenie tworzy plik projektu zawierający następujący [ \<element> projektu](/visualstudio/msbuild/project-element-msbuild)na poziomie głównym:
+`dotnet new mvc`Polecenie tworzy plik projektu zawierający następujący [ \< element> projektu](/visualstudio/msbuild/project-element-msbuild)na poziomie głównym:
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk.Web">
@@ -34,9 +34,9 @@ Ten dokument koncentruje się na używaniu programu Visual Studio 2019 lub nowsz
 </Project>
 ```
 
-`Sdk` Atrybut `<Project>` poprzedzającego elementu importuje odpowiednio [Właściwości](/visualstudio/msbuild/msbuild-properties) i [elementy docelowe](/visualstudio/msbuild/msbuild-targets) programu MSBuild z *$ (MSBuildSDKsPath) \Microsoft.NET.Sdk.Web\Sdk\Sdk.props* i *$ (MSBuildSDKsPath) \Microsoft.NET.Sdk.Web\Sdk\Sdk.targets*. Domyślną lokalizacją programu `$(MSBuildSDKsPath)` (z programem Visual Studio 2019 Enterprise) jest folder *% ProgramFiles (x86)% \ Microsoft Visual Studio\2019\Enterprise\MSBuild\Sdks* .
+Atrybut poprzedzającego `<Project>` elementu `Sdk` importuje odpowiednio [Właściwości](/visualstudio/msbuild/msbuild-properties) i [elementy docelowe](/visualstudio/msbuild/msbuild-targets) programu MSBuild z *$ (MSBuildSDKsPath) \Microsoft.NET.Sdk.Web\Sdk\Sdk.props* i *$ (MSBuildSDKsPath) \Microsoft.NET.Sdk.Web\Sdk\Sdk.targets*. Domyślną lokalizacją programu `$(MSBuildSDKsPath)` (z programem Visual Studio 2019 Enterprise) jest folder *% ProgramFiles (x86)% \ Microsoft Visual Studio\2019\Enterprise\MSBuild\Sdks* .
 
-`Microsoft.NET.Sdk.Web`(Zestaw SDK dla sieci Web) zależy od innych zestawów `Microsoft.NET.Sdk` SDK, w tym `Microsoft.NET.Sdk.Razor` (zestaw .NET Core SDK) i ([SDK Razor](xref:razor-pages/sdk)). Zaimportowano właściwości i obiekty docelowe programu MSBuild skojarzone z poszczególnymi zależnymi zestawem SDK. Opublikuj obiekty docelowe zaimportuj odpowiedni zbiór obiektów docelowych na podstawie użytej metody publikacji.
+`Microsoft.NET.Sdk.Web`([Zestaw SDK dla sieci Web](xref:razor-pages/web-sdk)) zależy od innych zestawów SDK, w tym `Microsoft.NET.Sdk` ([zestaw .NET Core SDK](/dotnet/core/project-sdk/msbuild-props)) i `Microsoft.NET.Sdk.Razor` ([SDK Razor](xref:razor-pages/sdk)). Zaimportowano właściwości i obiekty docelowe programu MSBuild skojarzone z poszczególnymi zależnymi zestawem SDK. Opublikuj obiekty docelowe zaimportuj odpowiedni zbiór obiektów docelowych na podstawie użytej metody publikacji.
 
 Gdy program MSBuild lub program Visual Studio ładuje projekt, wykonywane są następujące akcje wysokiego poziomu:
 
@@ -46,19 +46,19 @@ Gdy program MSBuild lub program Visual Studio ładuje projekt, wykonywane są na
 
 ## <a name="compute-project-items"></a>Obliczenia elementów projektu
 
-Po załadowaniu projektu są obliczane [elementy projektu MSBuild](/visualstudio/msbuild/common-msbuild-project-items) (pliki). Typ elementu określa sposób przetwarzania pliku. Domyślnie pliki *CS* znajdują się na liście `Compile` elementów. Pliki na liście `Compile` elementów są kompilowane.
+Po załadowaniu projektu są obliczane [elementy projektu MSBuild](/visualstudio/msbuild/common-msbuild-project-items) (pliki). Typ elementu określa sposób przetwarzania pliku. Domyślnie pliki *CS* znajdują się na `Compile` liście elementów. Pliki na `Compile` liście elementów są kompilowane.
 
-Lista `Content` elementów zawiera pliki, które są publikowane w uzupełnieniu do danych wyjściowych kompilacji. Domyślnie pliki zgodne ze `wwwroot\**`wzorcami, `**\*.config`i `**\*.json` znajdują się na liście `Content` elementów. Na przykład `wwwroot\**` [wzorzec obsługi symboli wieloznacznych](https://gruntjs.com/configuring-tasks#globbing-patterns) dopasowuje wszystkie pliki w folderze *wwwroot* i jego podfolderach.
+`Content`Lista elementów zawiera pliki, które są publikowane w uzupełnieniu do danych wyjściowych kompilacji. Domyślnie pliki zgodne ze wzorcami `wwwroot\**` , `**\*.config` i `**\*.json` znajdują się na `Content` liście elementów. Na przykład `wwwroot\**` [wzorzec obsługi symboli wieloznacznych](https://gruntjs.com/configuring-tasks#globbing-patterns) dopasowuje wszystkie pliki w folderze *wwwroot* i jego podfolderach.
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Zestaw SDK sieci Web importuje [zestaw Razor SDK](xref:razor-pages/sdk). W związku z tym pliki zgodne ze `**\*.cshtml` wzorcami `**\*.razor` i również znajdują się `Content` na liście elementów.
+[Zestaw SDK sieci Web](xref:razor-pages/web-sdk) importuje [zestaw Razor SDK](xref:razor-pages/sdk). W związku z tym pliki zgodne ze wzorcami `**\*.cshtml` i `**\*.razor` również znajdują się na `Content` liście elementów.
 
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-2.1 <= aspnetcore-2.2"
 
-Zestaw SDK sieci Web importuje [zestaw Razor SDK](xref:razor-pages/sdk). W efekcie pliki zgodne z `**\*.cshtml` wzorcem są również uwzględnione na liście `Content` elementów.
+[Zestaw SDK sieci Web](xref:razor-pages/web-sdk) importuje [zestaw Razor SDK](xref:razor-pages/sdk). W efekcie pliki zgodne z `**\*.cshtml` wzorcem są również uwzględnione na `Content` liście elementów.
 
 ::: moniker-end
 
@@ -72,11 +72,11 @@ Po wybraniu przycisku **Publikuj** w programie Visual Studio lub opublikowaniu z
 * Elementy publikowania są obliczane (pliki, które są konieczne do opublikowania).
 * Projekt jest publikowany (pliki obliczane są kopiowane do lokalizacji docelowej publikowania).
 
-Gdy projekt ASP.NET Core odwołuje `Microsoft.NET.Sdk.Web` się do pliku projektu, plik *app_offline. htm* zostanie umieszczony w katalogu głównym katalogu aplikacji sieci Web. Gdy plik jest obecny, moduł ASP.NET Core bezpiecznie zamyka aplikację i obsługuje plik *app_offline. htm* podczas wdrażania. Aby uzyskać więcej informacji, zobacz [Informacje o konfiguracji modułu ASP.NET Core](xref:host-and-deploy/aspnet-core-module#app_offlinehtm).
+Gdy projekt ASP.NET Core odwołuje się do `Microsoft.NET.Sdk.Web` pliku projektu, plik *app_offline. htm* zostanie umieszczony w katalogu głównym katalogu aplikacji sieci Web. Gdy plik jest obecny, moduł ASP.NET Core bezpiecznie zamyka aplikację i obsługuje plik *app_offline. htm* podczas wdrażania. Aby uzyskać więcej informacji, zobacz [Informacje o konfiguracji modułu ASP.NET Core](xref:host-and-deploy/aspnet-core-module#app_offlinehtm).
 
 ## <a name="basic-command-line-publishing"></a>Podstawowe publikowanie w wierszu polecenia
 
-Publikowanie w wierszu polecenia działa na wszystkich platformach obsługiwanych przez platformę .NET Core i nie wymaga programu Visual Studio. W poniższych przykładach polecenie interfejs wiersza polecenia platformy .NET Core [dotnet Publish](/dotnet/core/tools/dotnet-publish) jest uruchamiane z katalogu projektu (który zawiera plik *. csproj* ). Jeśli folder projektu nie jest bieżącym katalogiem roboczym, jawnie Przekaż ścieżkę do pliku projektu. Przykład:
+Publikowanie w wierszu polecenia działa na wszystkich platformach obsługiwanych przez platformę .NET Core i nie wymaga programu Visual Studio. W poniższych przykładach polecenie interfejs wiersza polecenia platformy .NET Core [dotnet Publish](/dotnet/core/tools/dotnet-publish) jest uruchamiane z katalogu projektu (który zawiera plik *. csproj* ). Jeśli folder projektu nie jest bieżącym katalogiem roboczym, jawnie Przekaż ścieżkę do pliku projektu. Na przykład:
 
 ```dotnetcli
 dotnet publish C:\Webs\Web1
@@ -89,7 +89,7 @@ dotnet new mvc
 dotnet publish
 ```
 
-`dotnet publish` Polecenie tworzy odmianę następujących danych wyjściowych:
+`dotnet publish`Polecenie tworzy odmianę następujących danych wyjściowych:
 
 ```console
 C:\Webs\Web1>dotnet publish
@@ -102,7 +102,7 @@ Copyright (C) Microsoft Corporation. All rights reserved.
   Web1 -> C:\Webs\Web1\bin\Debug\{TARGET FRAMEWORK MONIKER}\publish\
 ```
 
-Domyślny format folderu publikowania to *bin\Debug\\{Target Framework MONIKER} \publish\\*. Na przykład *bin\Debug\netcoreapp2.2\publish\\*.
+Domyślny format folderu publikowania to *bin\Debug \\ {Target Framework MONIKER} \publish \\ *. Na przykład *bin\Debug\netcoreapp2.2\publish \\ *.
 
 Następujące polecenie określa `Release` kompilację i katalog publikowania:
 
@@ -110,7 +110,7 @@ Następujące polecenie określa `Release` kompilację i katalog publikowania:
 dotnet publish -c Release -o C:\MyWebs\test
 ```
 
-`dotnet publish` Polecenie wywołuje program MSBuild, który wywołuje `Publish` element docelowy. Wszystkie parametry przesłane do `dotnet publish` są przesyłane do programu MSBuild. Parametry `-c` i `-o` są mapowane odpowiednio do programu `Configuration` MSBuild `OutputPath` i właściwości.
+`dotnet publish`Polecenie wywołuje program MSBuild, który wywołuje `Publish` element docelowy. Wszystkie parametry przesłane do `dotnet publish` są przesyłane do programu MSBuild. `-c`Parametry i są `-o` mapowane odpowiednio do programu MSBuild `Configuration` i `OutputPath` właściwości.
 
 Właściwości programu MSBuild można przekazywać przy użyciu jednego z następujących formatów:
 
@@ -145,7 +145,7 @@ Zostanie wyświetlona karta **Publikowanie** na stronie możliwości aplikacji. 
 
 Aby określić najbardziej odpowiedni cel publikowania, zobacz, [jakie opcje publikowania są odpowiednie dla mnie](/visualstudio/ide/not-in-toc/web-publish-options).
 
-Po wybraniu elementu docelowego publikowania **folderu** określ ścieżkę folderu do przechowywania opublikowanych zasobów. Domyślna ścieżka folderu to *bin\\{Konfiguracja projektu}\\{Target Framework MONIKER} \publish\\*. Na przykład *bin\Release\netcoreapp2.2\publish\\*. Wybierz przycisk **Utwórz profil** , aby zakończyć.
+Po wybraniu elementu docelowego publikowania **folderu** określ ścieżkę folderu do przechowywania opublikowanych zasobów. Domyślna ścieżka folderu to *bin \\ {Konfiguracja projektu} \\ {Target Framework MONIKER} \publish \\ *. Na przykład *bin\Release\netcoreapp2.2\publish \\ *. Wybierz przycisk **Utwórz profil** , aby zakończyć.
 
 Po utworzeniu profilu publikowania zostanie zmieniona zawartość karty **Publikuj** . Nowo utworzony profil zostanie wyświetlony na liście rozwijanej. Poniżej listy rozwijanej wybierz pozycję **Utwórz nowy profil** , aby utworzyć inny nowy profil.
 
@@ -158,7 +158,7 @@ Podczas publikowania w usłudze Azure Target plik *. pubxml* zawiera identyfikat
 
 Informacje poufne (na przykład publikowanie hasła) są szyfrowane na poziomie użytkownika/komputera. Jest ona przechowywana w pliku *Properties/PublishProfiles/{Nazwa profilu}. pubxml. User* . Ponieważ ten plik może przechowywać informacje poufne, nie należy go sprawdzać w kontroli źródła.
 
-Aby zapoznać się z omówieniem sposobu publikowania aplikacji internetowej ASP.NET Core, zobacz <xref:host-and-deploy/index>. Zadania i elementy docelowe programu MSBuild wymagane do opublikowania ASP.NET Core aplikacji sieci Web to "open source" w [repozytorium ASPNET/websdk](https://github.com/aspnet/websdk).
+Aby zapoznać się z omówieniem sposobu publikowania aplikacji internetowej ASP.NET Core, zobacz <xref:host-and-deploy/index> . Zadania i elementy docelowe programu MSBuild wymagane do opublikowania ASP.NET Core aplikacji sieci Web to "open source" w [repozytorium ASPNET/websdk](https://github.com/aspnet/websdk).
 
 Następujące polecenia mogą używać profilów publikowania folderów, MSDeploy i [kudu](https://github.com/projectkudu/kudu/wiki) . Ponieważ MSDeploy nie obsługuje obsługi wielu platform, następujące opcje MSDeploy są obsługiwane tylko w systemie Windows.
 
@@ -233,10 +233,10 @@ NOTE: Temporarily removed until https://github.com/aspnet/websdk/issues/888 is r
 * `dotnet build /p:DeployOnBuild=true /p:PublishProfile=FolderProfile`
 * `msbuild /p:DeployOnBuild=true /p:PublishProfile=FolderProfile`
 
-Wywołanie `msbuild` polecenia [kompilacji dotnet](/dotnet/core/tools/dotnet-build) w interfejs wiersza polecenia platformy .NET Core, aby uruchomić proces kompilowania i publikowania. Polecenia `dotnet build` i `msbuild` są równoważne podczas przekazywania profilu folderu. Podczas wywoływania `msbuild` bezpośrednio w systemie Windows jest używana .NET Framework wersja programu MSBuild. Wywoływanie `dotnet build` w profilu nienależącym do folderu:
+Wywołanie polecenia [kompilacji dotnet](/dotnet/core/tools/dotnet-build) w interfejs wiersza polecenia platformy .NET Core, `msbuild` Aby uruchomić proces kompilowania i publikowania. `dotnet build`Polecenia i `msbuild` są równoważne podczas przekazywania profilu folderu. Podczas wywoływania `msbuild` bezpośrednio w systemie Windows jest używana .NET Framework wersja programu MSBuild. Wywoływanie `dotnet build` w profilu nienależącym do folderu:
 
-* Wywołuje `msbuild`, który używa MSDeploy.
-* Powoduje niepowodzenie (nawet w przypadku uruchamiania w systemie Windows). Aby opublikować z profilem nienależącym do folderu `msbuild` , Połącz się bezpośrednio.
+* Wywołuje `msbuild` , który używa MSDeploy.
+* Powoduje niepowodzenie (nawet w przypadku uruchamiania w systemie Windows). Aby opublikować z profilem nienależącym do folderu, Połącz się `msbuild` bezpośrednio.
 
 Następujący profil publikowania folderu został utworzony za pomocą programu Visual Studio i jest publikowany w udziale sieciowym:
 
@@ -266,7 +266,7 @@ MSBuild file.
 
 W poprzednim przykładzie:
 
-* `<ExcludeApp_Data>` Właściwość jest obecna tylko w celu spełnienia wymagań schematu XML. `<ExcludeApp_Data>` Właściwość nie ma wpływu na proces publikowania, nawet jeśli w katalogu głównym projektu znajduje się folder *App_Data* . Folder *App_Data* nie otrzymuje specjalnego traktowania, ponieważ w projektach ASP.NET 4. x.
+* `<ExcludeApp_Data>`Właściwość jest obecna tylko w celu spełnienia wymagań schematu XML. `<ExcludeApp_Data>`Właściwość nie ma wpływu na proces publikowania, nawet jeśli w katalogu głównym projektu znajduje się folder *App_Data* . Folder *App_Data* nie otrzymuje specjalnego traktowania, ponieważ w projektach ASP.NET 4. x.
 
 <!--
 
@@ -278,7 +278,7 @@ NOTE: Temporarily removed from 'Using the .NET Core CLI' below until https://git
 
 -->
 
-* `<LastUsedBuildConfiguration>` Właściwość jest ustawiona na `Release`. Podczas publikowania z programu Visual Studio, wartość `<LastUsedBuildConfiguration>` jest ustawiana za pomocą wartości podczas uruchamiania procesu publikowania. `<LastUsedBuildConfiguration>`jest specjalne i nie należy go przesłaniać w zaimportowanym pliku MSBuild. Tę właściwość można jednak zastąpić z wiersza polecenia przy użyciu jednego z poniższych metod.
+* `<LastUsedBuildConfiguration>`Właściwość jest ustawiona na `Release` . Podczas publikowania z programu Visual Studio, wartość `<LastUsedBuildConfiguration>` jest ustawiana za pomocą wartości podczas uruchamiania procesu publikowania. `<LastUsedBuildConfiguration>`jest specjalne i nie należy go przesłaniać w zaimportowanym pliku MSBuild. Tę właściwość można jednak zastąpić z wiersza polecenia przy użyciu jednego z poniższych metod.
   * Przy użyciu interfejs wiersza polecenia platformy .NET Core:
 
     ```dotnetcli
@@ -309,11 +309,11 @@ msbuild {PATH}
     /p:Password={PASSWORD}
 ```
 
-* ŚCIEŻKA &ndash; Ścieżka do pliku projektu aplikacji.
-* PROFILU &ndash; Nazwa profilu publikowania.
-* UŻ &ndash; Nazwa użytkownika MSDeploy. {USERNAME} można znaleźć w profilu publikowania.
-* HASŁO &ndash; Hasło MSDeploy. Uzyskaj {PASSWORD} z poziomu *{Profile}. Plik PublishSettings* . Pobierz *. Plik PublishSettings* z:
-  * **Eksplorator rozwiązań**: wybierz pozycję **Wyświetl** > **Eksplorator chmury**. Połącz się ze swoją subskrypcją platformy Azure. Otwórz **App Services**. Kliknij prawym przyciskiem myszy aplikację. Wybierz pozycję **Pobierz profil publikowania**.
+* {PATH} &ndash; Ścieżka do pliku projektu aplikacji.
+* {PROFILE} &ndash; Nazwa profilu publikowania.
+* {USERNAME} &ndash; Nazwa użytkownika MSDeploy. {USERNAME} można znaleźć w profilu publikowania.
+* {PASSWORD} &ndash; Hasło MSDeploy. Uzyskaj {PASSWORD} z poziomu *{Profile}. Plik PublishSettings* . Pobierz *. Plik PublishSettings* z:
+  * **Eksplorator rozwiązań**: wybierz pozycję **Wyświetl**  >  **Eksplorator chmury**. Połącz się ze swoją subskrypcją platformy Azure. Otwórz **App Services**. Kliknij prawym przyciskiem myszy aplikację. Wybierz pozycję **Pobierz profil publikowania**.
   * Azure Portal: wybierz pozycję **Pobierz profil publikowania** w panelu **Przegląd** aplikacji sieci Web.
 
 W poniższym przykładzie zastosowano profil publikowania o nazwie *AzureWebApp-Web Deploy*:
@@ -337,11 +337,11 @@ dotnet msbuild "AzureWebApp.csproj"
 ```
 
 > [!IMPORTANT]
-> `dotnet msbuild` Polecenie jest międzyplatformowym poleceniem i może kompilować ASP.NET Core aplikacje w systemach MacOS i Linux. Jednak program MSBuild w systemach macOS i Linux nie jest w stanie wdrożyć aplikacji na platformie Azure ani w innych punktach końcowych MSDeploy.
+> `dotnet msbuild`Polecenie jest międzyplatformowym poleceniem i może kompilować ASP.NET Core aplikacje w systemach macOS i Linux. Jednak program MSBuild w systemach macOS i Linux nie jest w stanie wdrożyć aplikacji na platformie Azure ani w innych punktach końcowych MSDeploy.
 
 ## <a name="set-the-environment"></a>Ustawianie środowiska
 
-Dołącz `<EnvironmentName>` właściwość w pliku profil publikacji (*pubxml*) lub plik projektu, aby ustawić [środowisko](xref:fundamentals/environments)aplikacji:
+Dołącz `<EnvironmentName>` Właściwość w pliku profil publikacji (*pubxml*) lub plik projektu, aby ustawić [środowisko](xref:fundamentals/environments)aplikacji:
 
 ```xml
 <PropertyGroup>
@@ -349,7 +349,7 @@ Dołącz `<EnvironmentName>` właściwość w pliku profil publikacji (*pubxml*)
 </PropertyGroup>
 ```
 
-Jeśli wymagane są przekształcenia *Web. config* (na przykład Ustawianie zmiennych środowiskowych na podstawie konfiguracji, profilu lub środowiska), zobacz <xref:host-and-deploy/iis/transform-webconfig>.
+Jeśli wymagane są przekształcenia *Web. config* (na przykład Ustawianie zmiennych środowiskowych na podstawie konfiguracji, profilu lub środowiska), zobacz <xref:host-and-deploy/iis/transform-webconfig> .
 
 ## <a name="exclude-files"></a>Wyklucz pliki
 
@@ -388,7 +388,7 @@ Następujący `<MsDeploySkipRules>` element wyklucza wszystkie pliki z folderu *
 * *Widoki/Home/About2. cshtml*
 * *Widoki/Home/About3. cshtml*
 
-W przypadku dodania `<MsDeploySkipRules>` następujących elementów te pliki nie zostaną usunięte w lokacji wdrożenia.
+W przypadku `<MsDeploySkipRules>` dodania następujących elementów te pliki nie zostaną usunięte w lokacji wdrożenia.
 
 ```xml
 <ItemGroup>
@@ -440,7 +440,7 @@ Done Building Project "C:\Webs\Web1\Web1.csproj" (default targets).
 
 ## <a name="include-files"></a>Pliki dołączane
 
-W poniższych sekcjach opisano różne podejścia do dołączania plików w czasie publikacji. [Ogólna sekcja dołączania plików](#general-file-inclusion) używa `DotNetPublishFiles` elementu, który jest dostarczany przez plik Opublikuj elementy docelowe w zestawie SDK sieci Web. Sekcja [selektywne Dołączanie plików](#selective-file-inclusion) używa `ResolvedFileToPublish` elementu, który jest dostarczany przez plik opublikuj elementy docelowe w zestaw .NET Core SDK. Ponieważ zestaw SDK sieci Web zależy od zestaw .NET Core SDK, każdy element może być używany w ASP.NET Core projekcie.
+W poniższych sekcjach opisano różne podejścia do dołączania plików w czasie publikacji. [Ogólna sekcja dołączania plików](#general-file-inclusion) używa `DotNetPublishFiles` elementu, który jest dostarczany przez plik Opublikuj elementy docelowe w [zestawie SDK sieci Web](xref:razor-pages/web-sdk). Sekcja [selektywne Dołączanie plików](#selective-file-inclusion) używa `ResolvedFileToPublish` elementu, który jest dostarczany przez plik Opublikuj elementy docelowe w [zestaw .NET Core SDK](/dotnet/core/project-sdk/msbuild-props). Ponieważ zestaw SDK sieci Web zależy od zestaw .NET Core SDK, każdy element może być używany w ASP.NET Core projekcie.
 
 ### <a name="general-file-inclusion"></a>Ogólny dołączenie plików
 
@@ -458,8 +458,8 @@ Poniższy przykład `<ItemGroup>` elementu pokazuje Kopiowanie folderu znajdują
 Poprzedzające znaczniki:
 
 * Można dodać do pliku *csproj* lub profilu publikacji. Jeśli zostanie ona dodana do pliku *. csproj* , jest zawarta w każdym profilu publikacji w projekcie.
-* Deklaruje `_CustomFiles` element do przechowywania plików zgodnych `Include` ze wzorcem obsługi symboli wieloznacznych atrybutu. Folder *obrazów* , do którego odwołuje się wzorzec, znajduje się poza katalogiem projektu. [Właściwość zastrzeżona](/visualstudio/msbuild/msbuild-reserved-and-well-known-properties)o nazwie `$(MSBuildProjectDirectory)`jest rozpoznawana jako ścieżka bezwzględna pliku projektu.
-* Zawiera listę plików do `DotNetPublishFiles` elementu. Domyślnie `<DestinationRelativePath>` element elementu jest pusty. Wartość domyślna jest zastępowana w znaczniku i używa [dobrze znanych metadanych elementu](/visualstudio/msbuild/msbuild-well-known-item-metadata) , takich jak `%(RecursiveDir)`. Tekst wewnętrzny reprezentuje folder *wwwroot/images* opublikowanej witryny.
+* Deklaruje `_CustomFiles` element do przechowywania plików zgodnych ze `Include` wzorcem obsługi symboli wieloznacznych atrybutu. Folder *obrazów* , do którego odwołuje się wzorzec, znajduje się poza katalogiem projektu. [Właściwość zastrzeżona](/visualstudio/msbuild/msbuild-reserved-and-well-known-properties)o nazwie jest `$(MSBuildProjectDirectory)` rozpoznawana jako ścieżka bezwzględna pliku projektu.
+* Zawiera listę plików do `DotNetPublishFiles` elementu. Domyślnie `<DestinationRelativePath>` element elementu jest pusty. Wartość domyślna jest zastępowana w znaczniku i używa [dobrze znanych metadanych elementu](/visualstudio/msbuild/msbuild-well-known-item-metadata) , takich jak `%(RecursiveDir)` . Tekst wewnętrzny reprezentuje folder *wwwroot/images* opublikowanej witryny.
 
 ### <a name="selective-file-inclusion"></a>Selektywne Dołączanie plików
 
@@ -471,7 +471,7 @@ Wyróżnione znaczniki w poniższym przykładzie pokazują:
 
 [!code-xml[](visual-studio-publish-profiles/samples/Web1.pubxml?highlight=18-23)]
 
-Poprzedni przykład używa `ResolvedFileToPublish` elementu, którego domyślnym zachowaniem jest zawsze kopiowanie plików dostarczonych w `Include` atrybucie do opublikowanej lokacji. Zastąp zachowanie domyślne, dołączając element `<CopyToPublishDirectory>` podrzędny z tekstem wewnętrznym obu `Never` lub. `PreserveNewest` Przykład:
+Poprzedni przykład używa `ResolvedFileToPublish` elementu, którego domyślnym zachowaniem jest zawsze kopiowanie plików dostarczonych w `Include` atrybucie do opublikowanej lokacji. Zastąp zachowanie domyślne, dołączając `<CopyToPublishDirectory>` element podrzędny z tekstem wewnętrznym obu `Never` lub `PreserveNewest` . Na przykład:
 
 ```xml
 <ResolvedFileToPublish Include="..\ReadMe2.md">
@@ -497,7 +497,7 @@ Wbudowane `BeforePublish` i `AfterPublish` docelowe cele wykonują obiekt docelo
 
 ## <a name="publish-to-a-server-using-an-untrusted-certificate"></a>Publikowanie na serwerze za pomocą niezaufanego certyfikatu
 
-Dodaj `<AllowUntrustedCertificate>` właściwość o wartości `True` do profilu publikowania:
+Dodaj `<AllowUntrustedCertificate>` Właściwość o wartości `True` do profilu publikowania:
 
 ```xml
 <PropertyGroup>
@@ -507,7 +507,7 @@ Dodaj `<AllowUntrustedCertificate>` właściwość o wartości `True` do profilu
 
 ## <a name="the-kudu-service"></a>Usługa kudu
 
-Aby wyświetlić pliki w Azure App Service wdrożenia aplikacji sieci Web, należy użyć [usługi kudu](https://github.com/projectkudu/kudu/wiki/Accessing-the-kudu-service). Dołącz `scm` token do nazwy aplikacji sieci Web. Przykład:
+Aby wyświetlić pliki w Azure App Service wdrożenia aplikacji sieci Web, należy użyć [usługi kudu](https://github.com/projectkudu/kudu/wiki/Accessing-the-kudu-service). Dołącz `scm` token do nazwy aplikacji sieci Web. Na przykład:
 
 | Adres URL                                    | Wynik       |
 | -------------------------------------- | ------------ |

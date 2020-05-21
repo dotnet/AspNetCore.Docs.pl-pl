@@ -30,5 +30,5 @@ Jednym z metod zapobiegania występowaniu plików cookie i danych lokacji z zak�
 Podczas testowania i rozwiązywania problemów z hostowaną aplikacją Blazor upewnij się, że aplikacja jest uruchamiana z projektu **serwera** . Na przykład w programie Visual Studio upewnij się, że projekt serwera został wyróżniony w **Eksplorator rozwiązań** przed uruchomieniem aplikacji, korzystając z następujących metod:
 
 * Wybierz przycisk **Uruchom**.
-*  > Użyj **debugowania****Rozpocznij debugowanie** z menu.
+* Użyj **debugowania**  >  **Rozpocznij debugowanie** z menu.
 * Naciśnij klawisz <kbd>F5</kbd>.

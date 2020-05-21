@@ -129,7 +129,7 @@ services.AddControllers().AddJsonOptions(options =>
 });
 ```
 
-Opcje serializacji danych wyjściowych dla poszczególnych akcji można skonfigurować przy użyciu polecenia `JsonResult` . Na przykład:
+Opcje serializacji danych wyjściowych dla poszczególnych akcji można skonfigurować przy użyciu polecenia `JsonResult` . Przykład:
 
 ```csharp
 public IActionResult Get()
@@ -168,7 +168,7 @@ services.AddControllers().AddNewtonsoftJson(options =>
 });
 ```
 
-Opcje serializacji danych wyjściowych dla poszczególnych akcji można skonfigurować przy użyciu polecenia `JsonResult` . Na przykład:
+Opcje serializacji danych wyjściowych dla poszczególnych akcji można skonfigurować przy użyciu polecenia `JsonResult` . Przykład:
 
 ```csharp
 public IActionResult Get()
@@ -224,7 +224,7 @@ Niektóre specjalne przypadki są implementowane przy użyciu wbudowanych elemen
 
 Bez `StringOutputFormatter` , wbudowany typ programu FORMATUJĄCEGO JSON formatuje `string` typy zwracane. Jeśli wbudowany program formatujący JSON jest usuwany, a element formatujący XML jest dostępny, format XML programu formatującego jest `string` typem zwracanym. W przeciwnym razie zwracane `string` typy zwracają `406 Not Acceptable` .
 
-Bez `HttpNoContentOutputFormatter` obiektów o wartości null są formatowane przy użyciu skonfigurowanego programu formatującego. Na przykład:
+Bez `HttpNoContentOutputFormatter` obiektów o wartości null są formatowane przy użyciu skonfigurowanego programu formatującego. Przykład:
 
 * Program formatujący JSON zwraca odpowiedź z treścią `null` .
 * Program formatujący XML zwraca pusty element XML z `xsi:nil="true"` zestawem atrybutów.
@@ -236,7 +236,7 @@ Klienci mogą zażądać określonego formatu w ramach adresu URL, na przykład:
 * W ciągu zapytania lub części ścieżki.
 * Przy użyciu rozszerzenia pliku specyficznego dla formatu, takiego jak. XML lub. JSON.
 
-Mapowanie ze ścieżki żądania należy określić w marszrucie używanej przez interfejs API. Na przykład:
+Mapowanie ze ścieżki żądania należy określić w marszrucie używanej przez interfejs API. Przykład:
 
 [!code-csharp[](./formatting/sample/Controllers/ProductsController.cs?name=snippet)]
 

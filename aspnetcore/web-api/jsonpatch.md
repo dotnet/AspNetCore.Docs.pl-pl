@@ -21,7 +21,7 @@ W tym artykule wyjaśniono, jak obsłużyć żądania poprawek w formacie JSON w
 Aby włączyć obsługę poprawek JSON w aplikacji, wykonaj następujące czynności:
 
 1. Zainstaluj [`Microsoft.AspNetCore.Mvc.NewtonsoftJson`](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson/) pakiet NuGet.
-1. Zaktualizuj `Startup.ConfigureServices` metodę projektu w celu wywołania <xref:Microsoft.Extensions.DependencyInjection.NewtonsoftJsonMvcBuilderExtensions.AddNewtonsoftJson*> . Na przykład:
+1. Zaktualizuj `Startup.ConfigureServices` metodę projektu w celu wywołania <xref:Microsoft.Extensions.DependencyInjection.NewtonsoftJsonMvcBuilderExtensions.AddNewtonsoftJson*> . Przykład:
 
     ```csharp
     services

@@ -1,162 +1,117 @@
 ---
-title: Konfiguracja w ASP.NET Core
-author: rick-anderson
-description: Dowiedz się, jak skonfigurować aplikację ASP.NET Core przy użyciu interfejsu API konfiguracji.
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 3/29/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: fundamentals/configuration/index
-ms.openlocfilehash: c2a7ef9c1523bc179524f328905f3a4b1460a1a5
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774499"
----
-# <a name="configuration-in-aspnet-core"></a><span data-ttu-id="32987-103">Konfiguracja w ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="32987-103">Configuration in ASP.NET Core</span></span>
+<span data-ttu-id="f83a3-101">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-101">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-102">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-102">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-103">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-103">'Identity'</span></span>
+- <span data-ttu-id="f83a3-104">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-104">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-105">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-105">'Razor'</span></span>
+- <span data-ttu-id="f83a3-106">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-106">'SignalR' uid:</span></span> 
 
-<span data-ttu-id="32987-104">Autorzy [Rick Anderson](https://twitter.com/RickAndMSFT) i [Kirka Larkin](https://twitter.com/serpent5)</span><span class="sxs-lookup"><span data-stu-id="32987-104">By [Rick Anderson](https://twitter.com/RickAndMSFT) and [Kirk Larkin](https://twitter.com/serpent5)</span></span>
+---
+# <a name="configuration-in-aspnet-core"></a><span data-ttu-id="f83a3-107">Konfiguracja w ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="f83a3-107">Configuration in ASP.NET Core</span></span>
+
+<span data-ttu-id="f83a3-108">Autorzy [Rick Anderson](https://twitter.com/RickAndMSFT) i [Kirka Larkin](https://twitter.com/serpent5)</span><span class="sxs-lookup"><span data-stu-id="f83a3-108">By [Rick Anderson](https://twitter.com/RickAndMSFT) and [Kirk Larkin](https://twitter.com/serpent5)</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
-<span data-ttu-id="32987-105">Konfiguracja w ASP.NET Core jest wykonywana przy użyciu co najmniej jednego [dostawcy konfiguracji](#cp).</span><span class="sxs-lookup"><span data-stu-id="32987-105">Configuration in ASP.NET Core is performed using one or more [configuration providers](#cp).</span></span> <span data-ttu-id="32987-106">Dostawcy konfiguracji odczytują dane konfiguracji z par klucz-wartość przy użyciu różnych źródeł konfiguracji:</span><span class="sxs-lookup"><span data-stu-id="32987-106">Configuration providers read configuration data from key-value pairs using a variety of configuration sources:</span></span>
+<span data-ttu-id="f83a3-109">Konfiguracja w ASP.NET Core jest wykonywana przy użyciu co najmniej jednego [dostawcy konfiguracji](#cp).</span><span class="sxs-lookup"><span data-stu-id="f83a3-109">Configuration in ASP.NET Core is performed using one or more [configuration providers](#cp).</span></span> <span data-ttu-id="f83a3-110">Dostawcy konfiguracji odczytują dane konfiguracji z par klucz-wartość przy użyciu różnych źródeł konfiguracji:</span><span class="sxs-lookup"><span data-stu-id="f83a3-110">Configuration providers read configuration data from key-value pairs using a variety of configuration sources:</span></span>
 
-* <span data-ttu-id="32987-107">Pliki ustawień, takie jak *appSettings. JSON*</span><span class="sxs-lookup"><span data-stu-id="32987-107">Settings files, such as *appsettings.json*</span></span>
-* <span data-ttu-id="32987-108">Zmienne środowiskowe</span><span class="sxs-lookup"><span data-stu-id="32987-108">Environment variables</span></span>
-* <span data-ttu-id="32987-109">W usłudze Azure Key Vault</span><span class="sxs-lookup"><span data-stu-id="32987-109">Azure Key Vault</span></span>
-* <span data-ttu-id="32987-110">Azure App Configuration</span><span class="sxs-lookup"><span data-stu-id="32987-110">Azure App Configuration</span></span>
-* <span data-ttu-id="32987-111">Argumenty wiersza polecenia</span><span class="sxs-lookup"><span data-stu-id="32987-111">Command-line arguments</span></span>
-* <span data-ttu-id="32987-112">Niestandardowi dostawcy, instalowani lub utworzony</span><span class="sxs-lookup"><span data-stu-id="32987-112">Custom providers, installed or created</span></span>
-* <span data-ttu-id="32987-113">Pliki katalogu</span><span class="sxs-lookup"><span data-stu-id="32987-113">Directory files</span></span>
-* <span data-ttu-id="32987-114">Obiekty w pamięci .NET</span><span class="sxs-lookup"><span data-stu-id="32987-114">In-memory .NET objects</span></span>
+* <span data-ttu-id="f83a3-111">Pliki ustawień, takie jak *appSettings. JSON*</span><span class="sxs-lookup"><span data-stu-id="f83a3-111">Settings files, such as *appsettings.json*</span></span>
+* <span data-ttu-id="f83a3-112">Zmienne środowiskowe</span><span class="sxs-lookup"><span data-stu-id="f83a3-112">Environment variables</span></span>
+* <span data-ttu-id="f83a3-113">W usłudze Azure Key Vault</span><span class="sxs-lookup"><span data-stu-id="f83a3-113">Azure Key Vault</span></span>
+* <span data-ttu-id="f83a3-114">Azure App Configuration</span><span class="sxs-lookup"><span data-stu-id="f83a3-114">Azure App Configuration</span></span>
+* <span data-ttu-id="f83a3-115">Argumenty wiersza polecenia</span><span class="sxs-lookup"><span data-stu-id="f83a3-115">Command-line arguments</span></span>
+* <span data-ttu-id="f83a3-116">Niestandardowi dostawcy, instalowani lub utworzony</span><span class="sxs-lookup"><span data-stu-id="f83a3-116">Custom providers, installed or created</span></span>
+* <span data-ttu-id="f83a3-117">Pliki katalogu</span><span class="sxs-lookup"><span data-stu-id="f83a3-117">Directory files</span></span>
+* <span data-ttu-id="f83a3-118">Obiekty w pamięci .NET</span><span class="sxs-lookup"><span data-stu-id="f83a3-118">In-memory .NET objects</span></span>
 
-<span data-ttu-id="32987-115">[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples) ([jak pobrać](xref:index#how-to-download-a-sample))</span><span class="sxs-lookup"><span data-stu-id="32987-115">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples) ([how to download](xref:index#how-to-download-a-sample))</span></span>
+<span data-ttu-id="f83a3-119">[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples) ([jak pobrać](xref:index#how-to-download-a-sample))</span><span class="sxs-lookup"><span data-stu-id="f83a3-119">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples) ([how to download](xref:index#how-to-download-a-sample))</span></span>
 
 <a name="default"></a>
 
-## <a name="default-configuration"></a><span data-ttu-id="32987-116">Konfiguracja domyślna</span><span class="sxs-lookup"><span data-stu-id="32987-116">Default configuration</span></span>
+## <a name="default-configuration"></a><span data-ttu-id="f83a3-120">Konfiguracja domyślna</span><span class="sxs-lookup"><span data-stu-id="f83a3-120">Default configuration</span></span>
 
-<span data-ttu-id="32987-117">ASP.NET Core aplikacje sieci Web utworzone za pomocą programu [dotnet New](/dotnet/core/tools/dotnet-new) lub Visual Studio generują następujący kod:</span><span class="sxs-lookup"><span data-stu-id="32987-117">ASP.NET Core web apps created with [dotnet new](/dotnet/core/tools/dotnet-new) or Visual Studio generate the following code:</span></span>
+<span data-ttu-id="f83a3-121">ASP.NET Core aplikacje sieci Web utworzone za pomocą programu [dotnet New](/dotnet/core/tools/dotnet-new) lub Visual Studio generują następujący kod:</span><span class="sxs-lookup"><span data-stu-id="f83a3-121">ASP.NET Core web apps created with [dotnet new](/dotnet/core/tools/dotnet-new) or Visual Studio generate the following code:</span></span>
 
 [!code-csharp[](index/samples/3.x/ConfigSample/Program.cs?name=snippet&highlight=9)]
 
- <span data-ttu-id="32987-118"><xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder*>zapewnia domyślną konfigurację dla aplikacji w następującej kolejności:</span><span class="sxs-lookup"><span data-stu-id="32987-118"><xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder*> provides default configuration for the app in the following order:</span></span>
+ <span data-ttu-id="f83a3-122"><xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder*>zapewnia domyślną konfigurację dla aplikacji w następującej kolejności:</span><span class="sxs-lookup"><span data-stu-id="f83a3-122"><xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder*> provides default configuration for the app in the following order:</span></span>
 
-1. <span data-ttu-id="32987-119">[ChainedConfigurationProvider](xref:Microsoft.Extensions.Configuration.ChainedConfigurationSource) : Dodaje istniejący `IConfiguration` element jako źródło.</span><span class="sxs-lookup"><span data-stu-id="32987-119">[ChainedConfigurationProvider](xref:Microsoft.Extensions.Configuration.ChainedConfigurationSource) :  Adds an existing `IConfiguration` as a source.</span></span> <span data-ttu-id="32987-120">W przypadku konfiguracji domyślnej program dodaje konfigurację [hosta](#hvac) i ustawia ją jako pierwsze źródło konfiguracji _aplikacji_ .</span><span class="sxs-lookup"><span data-stu-id="32987-120">In the default configuration case, adds the [host](#hvac) configuration and setting it as the first source for the _app_ configuration.</span></span>
-1. <span data-ttu-id="32987-121">[appSettings. JSON](#appsettingsjson) przy użyciu [dostawcy konfiguracji JSON](#file-configuration-provider).</span><span class="sxs-lookup"><span data-stu-id="32987-121">[appsettings.json](#appsettingsjson) using the [JSON configuration provider](#file-configuration-provider).</span></span>
-1. <span data-ttu-id="32987-122">*appSettings.* `Environment` *. JSON* przy użyciu [dostawcy konfiguracji JSON](#file-configuration-provider).</span><span class="sxs-lookup"><span data-stu-id="32987-122">*appsettings.*`Environment`*.json* using the [JSON configuration provider](#file-configuration-provider).</span></span> <span data-ttu-id="32987-123">Na przykład *AppSettings*. ***Środowisko produkcyjne***. *JSON* i *AppSettings*. ***Programowanie***. *kod JSON*.</span><span class="sxs-lookup"><span data-stu-id="32987-123">For example, *appsettings*.***Production***.*json* and *appsettings*.***Development***.*json*.</span></span>
-1. <span data-ttu-id="32987-124">Wpisy [tajne aplikacji](xref:security/app-secrets) , gdy aplikacja jest `Development` uruchamiana w środowisku.</span><span class="sxs-lookup"><span data-stu-id="32987-124">[App secrets](xref:security/app-secrets) when the app runs in the `Development` environment.</span></span>
-1. <span data-ttu-id="32987-125">Zmienne środowiskowe używające [dostawcy konfiguracji zmiennych środowiskowych](#evcp).</span><span class="sxs-lookup"><span data-stu-id="32987-125">Environment variables using the [Environment Variables configuration provider](#evcp).</span></span>
-1. <span data-ttu-id="32987-126">Argumenty wiersza polecenia przy użyciu [dostawcy konfiguracji wiersza polecenia](#command-line).</span><span class="sxs-lookup"><span data-stu-id="32987-126">Command-line arguments using the [Command-line configuration provider](#command-line).</span></span>
+1. <span data-ttu-id="f83a3-123">[ChainedConfigurationProvider](xref:Microsoft.Extensions.Configuration.ChainedConfigurationSource) : Dodaje istniejący element `IConfiguration` jako źródło.</span><span class="sxs-lookup"><span data-stu-id="f83a3-123">[ChainedConfigurationProvider](xref:Microsoft.Extensions.Configuration.ChainedConfigurationSource) :  Adds an existing `IConfiguration` as a source.</span></span> <span data-ttu-id="f83a3-124">W przypadku konfiguracji domyślnej program dodaje konfigurację [hosta](#hvac) i ustawia ją jako pierwsze źródło konfiguracji _aplikacji_ .</span><span class="sxs-lookup"><span data-stu-id="f83a3-124">In the default configuration case, adds the [host](#hvac) configuration and setting it as the first source for the _app_ configuration.</span></span>
+1. <span data-ttu-id="f83a3-125">[appSettings. JSON](#appsettingsjson) przy użyciu [dostawcy konfiguracji JSON](#file-configuration-provider).</span><span class="sxs-lookup"><span data-stu-id="f83a3-125">[appsettings.json](#appsettingsjson) using the [JSON configuration provider](#file-configuration-provider).</span></span>
+1. <span data-ttu-id="f83a3-126">*appSettings.* `Environment` *. JSON* przy użyciu [dostawcy konfiguracji JSON](#file-configuration-provider).</span><span class="sxs-lookup"><span data-stu-id="f83a3-126">*appsettings.*`Environment`*.json* using the [JSON configuration provider](#file-configuration-provider).</span></span> <span data-ttu-id="f83a3-127">Na przykład *AppSettings*. ***Środowisko produkcyjne***. *JSON* i *AppSettings*. ***Programowanie***. *kod JSON*.</span><span class="sxs-lookup"><span data-stu-id="f83a3-127">For example, *appsettings*.***Production***.*json* and *appsettings*.***Development***.*json*.</span></span>
+1. <span data-ttu-id="f83a3-128">Wpisy [tajne aplikacji](xref:security/app-secrets) , gdy aplikacja jest uruchamiana w `Development` środowisku.</span><span class="sxs-lookup"><span data-stu-id="f83a3-128">[App secrets](xref:security/app-secrets) when the app runs in the `Development` environment.</span></span>
+1. <span data-ttu-id="f83a3-129">Zmienne środowiskowe używające [dostawcy konfiguracji zmiennych środowiskowych](#evcp).</span><span class="sxs-lookup"><span data-stu-id="f83a3-129">Environment variables using the [Environment Variables configuration provider](#evcp).</span></span>
+1. <span data-ttu-id="f83a3-130">Argumenty wiersza polecenia przy użyciu [dostawcy konfiguracji wiersza polecenia](#command-line).</span><span class="sxs-lookup"><span data-stu-id="f83a3-130">Command-line arguments using the [Command-line configuration provider](#command-line).</span></span>
 
-<span data-ttu-id="32987-127">Dostawcy konfiguracji, którzy zostaną dodani później przesłaniają poprzednie ustawienia klucza.</span><span class="sxs-lookup"><span data-stu-id="32987-127">Configuration providers that are added later override previous key settings.</span></span> <span data-ttu-id="32987-128">Na przykład, jeśli `MyKey` jest ustawiony zarówno w pliku *appSettings. JSON* , jak i w środowisku, zostanie użyta wartość środowiska.</span><span class="sxs-lookup"><span data-stu-id="32987-128">For example, if `MyKey` is set in both *appsettings.json* and the environment, the environment value is used.</span></span> <span data-ttu-id="32987-129">Przy użyciu domyślnych dostawców konfiguracji [dostawca konfiguracji wiersza polecenia](#command-line-configuration-provider) zastępuje wszystkich innych dostawców.</span><span class="sxs-lookup"><span data-stu-id="32987-129">Using the default configuration providers, the  [Command-line configuration provider](#command-line-configuration-provider) overrides all other providers.</span></span>
+<span data-ttu-id="f83a3-131">Dostawcy konfiguracji, którzy zostaną dodani później przesłaniają poprzednie ustawienia klucza.</span><span class="sxs-lookup"><span data-stu-id="f83a3-131">Configuration providers that are added later override previous key settings.</span></span> <span data-ttu-id="f83a3-132">Na przykład, jeśli `MyKey` jest ustawiony zarówno w pliku *appSettings. JSON* , jak i w środowisku, zostanie użyta wartość środowiska.</span><span class="sxs-lookup"><span data-stu-id="f83a3-132">For example, if `MyKey` is set in both *appsettings.json* and the environment, the environment value is used.</span></span> <span data-ttu-id="f83a3-133">Przy użyciu domyślnych dostawców konfiguracji [dostawca konfiguracji wiersza polecenia](#command-line-configuration-provider) zastępuje wszystkich innych dostawców.</span><span class="sxs-lookup"><span data-stu-id="f83a3-133">Using the default configuration providers, the  [Command-line configuration provider](#command-line-configuration-provider) overrides all other providers.</span></span>
 
-<span data-ttu-id="32987-130">Aby uzyskać więcej informacji `CreateDefaultBuilder`na temat, zobacz [ustawienia domyślnego konstruktora](xref:fundamentals/host/generic-host#default-builder-settings).</span><span class="sxs-lookup"><span data-stu-id="32987-130">For more information on `CreateDefaultBuilder`, see [Default builder settings](xref:fundamentals/host/generic-host#default-builder-settings).</span></span>
+<span data-ttu-id="f83a3-134">Aby uzyskać więcej informacji na temat `CreateDefaultBuilder` , zobacz [ustawienia domyślnego konstruktora](xref:fundamentals/host/generic-host#default-builder-settings).</span><span class="sxs-lookup"><span data-stu-id="f83a3-134">For more information on `CreateDefaultBuilder`, see [Default builder settings](xref:fundamentals/host/generic-host#default-builder-settings).</span></span>
 
-<span data-ttu-id="32987-131">Poniższy kod wyświetla dostawców konfiguracji włączonych w kolejności, w jakiej zostały dodane:</span><span class="sxs-lookup"><span data-stu-id="32987-131">The following code displays the enabled configuration providers in the order they were added:</span></span>
+<span data-ttu-id="f83a3-135">Poniższy kod wyświetla dostawców konfiguracji włączonych w kolejności, w jakiej zostały dodane:</span><span class="sxs-lookup"><span data-stu-id="f83a3-135">The following code displays the enabled configuration providers in the order they were added:</span></span>
 
 [!code-csharp[](index/samples/3.x/ConfigSample/Pages/Index2.cshtml.cs?name=snippet)]
 
-### <a name="appsettingsjson"></a><span data-ttu-id="32987-132">appSettings. JSON</span><span class="sxs-lookup"><span data-stu-id="32987-132">appsettings.json</span></span>
+### <a name="appsettingsjson"></a><span data-ttu-id="f83a3-136">appSettings. JSON</span><span class="sxs-lookup"><span data-stu-id="f83a3-136">appsettings.json</span></span>
 
-<span data-ttu-id="32987-133">Rozważmy następujący plik *appSettings. JSON* :</span><span class="sxs-lookup"><span data-stu-id="32987-133">Consider the following *appsettings.json* file:</span></span>
+<span data-ttu-id="f83a3-137">Rozważmy następujący plik *appSettings. JSON* :</span><span class="sxs-lookup"><span data-stu-id="f83a3-137">Consider the following *appsettings.json* file:</span></span>
 
 [!code-json[](index/samples/3.x/ConfigSample/appsettings.json)]
 
-<span data-ttu-id="32987-134">Poniższy kod z [pobranego przykładu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) wyświetla kilka powyższych ustawień konfiguracji:</span><span class="sxs-lookup"><span data-stu-id="32987-134">The following code from the [sample download](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) displays several of the preceding configurations settings:</span></span>
+<span data-ttu-id="f83a3-138">Poniższy kod z [pobranego przykładu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) wyświetla kilka powyższych ustawień konfiguracji:</span><span class="sxs-lookup"><span data-stu-id="f83a3-138">The following code from the [sample download](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) displays several of the preceding configurations settings:</span></span>
 
 [!code-csharp[](index/samples/3.x/ConfigSample/Pages/Test.cshtml.cs?name=snippet)]
 
-<span data-ttu-id="32987-135">Domyślna <xref:Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider> konfiguracja ładowania w następującej kolejności:</span><span class="sxs-lookup"><span data-stu-id="32987-135">The default <xref:Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider> loads configuration in the following order:</span></span>
+<span data-ttu-id="f83a3-139">Domyślna <xref:Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider> Konfiguracja ładowania w następującej kolejności:</span><span class="sxs-lookup"><span data-stu-id="f83a3-139">The default <xref:Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider> loads configuration in the following order:</span></span>
 
-1. <span data-ttu-id="32987-136">*appSettings. JSON*</span><span class="sxs-lookup"><span data-stu-id="32987-136">*appsettings.json*</span></span>
-1. <span data-ttu-id="32987-137">*appSettings.* `Environment` *. JSON* : na przykład, *AppSettings*. ***Środowisko produkcyjne***. *JSON* i *AppSettings*. ***Programowanie***. pliki *JSON* .</span><span class="sxs-lookup"><span data-stu-id="32987-137">*appsettings.*`Environment`*.json* : For example, the *appsettings*.***Production***.*json* and *appsettings*.***Development***.*json* files.</span></span> <span data-ttu-id="32987-138">Wersja środowiska pliku jest ładowana na podstawie [IHostingEnvironment. EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostingEnvironment.EnvironmentName*).</span><span class="sxs-lookup"><span data-stu-id="32987-138">The environment version of the file is loaded based on the [IHostingEnvironment.EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostingEnvironment.EnvironmentName*).</span></span> <span data-ttu-id="32987-139">Aby uzyskać więcej informacji, zobacz <xref:fundamentals/environments>.</span><span class="sxs-lookup"><span data-stu-id="32987-139">For more information, see <xref:fundamentals/environments>.</span></span>
+1. <span data-ttu-id="f83a3-140">*appSettings. JSON*</span><span class="sxs-lookup"><span data-stu-id="f83a3-140">*appsettings.json*</span></span>
+1. <span data-ttu-id="f83a3-141">*appSettings.* `Environment` *. JSON* : na przykład, *AppSettings*. ***Środowisko produkcyjne***. *JSON* i *AppSettings*. ***Programowanie***. pliki *JSON* .</span><span class="sxs-lookup"><span data-stu-id="f83a3-141">*appsettings.*`Environment`*.json* : For example, the *appsettings*.***Production***.*json* and *appsettings*.***Development***.*json* files.</span></span> <span data-ttu-id="f83a3-142">Wersja środowiska pliku jest ładowana na podstawie [IHostingEnvironment. EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostingEnvironment.EnvironmentName*).</span><span class="sxs-lookup"><span data-stu-id="f83a3-142">The environment version of the file is loaded based on the [IHostingEnvironment.EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostingEnvironment.EnvironmentName*).</span></span> <span data-ttu-id="f83a3-143">Aby uzyskać więcej informacji, zobacz <xref:fundamentals/environments>.</span><span class="sxs-lookup"><span data-stu-id="f83a3-143">For more information, see <xref:fundamentals/environments>.</span></span>
 
-<span data-ttu-id="32987-140">*AppSettings*. `Environment`. wartości *JSON* przesłaniają klucze w pliku *appSettings. JSON*.</span><span class="sxs-lookup"><span data-stu-id="32987-140">*appsettings*.`Environment`.*json* values override keys in *appsettings.json*.</span></span> <span data-ttu-id="32987-141">Na przykład domyślnie:</span><span class="sxs-lookup"><span data-stu-id="32987-141">For example, by default:</span></span>
+<span data-ttu-id="f83a3-144">*AppSettings*. `Environment` . wartości *JSON* przesłaniają klucze w pliku *appSettings. JSON*.</span><span class="sxs-lookup"><span data-stu-id="f83a3-144">*appsettings*.`Environment`.*json* values override keys in *appsettings.json*.</span></span> <span data-ttu-id="f83a3-145">Na przykład domyślnie:</span><span class="sxs-lookup"><span data-stu-id="f83a3-145">For example, by default:</span></span>
 
-* <span data-ttu-id="32987-142">W obszarze programowanie, *AppSettings*. ***Programowanie***. Konfiguracja *JSON* zastępuje wartości Znalezione w pliku *appSettings. JSON*.</span><span class="sxs-lookup"><span data-stu-id="32987-142">In development, *appsettings*.***Development***.*json* configuration overwrites values found in *appsettings.json*.</span></span>
-* <span data-ttu-id="32987-143">W obszarze produkcja, *AppSettings*. ***Środowisko produkcyjne***. Konfiguracja *JSON* zastępuje wartości Znalezione w pliku *appSettings. JSON*.</span><span class="sxs-lookup"><span data-stu-id="32987-143">In production, *appsettings*.***Production***.*json* configuration overwrites values found in *appsettings.json*.</span></span> <span data-ttu-id="32987-144">Na przykład podczas wdrażania aplikacji na platformie Azure.</span><span class="sxs-lookup"><span data-stu-id="32987-144">For example, when deploying the app to Azure.</span></span>
+* <span data-ttu-id="f83a3-146">W obszarze programowanie, *AppSettings*. ***Programowanie***. Konfiguracja *JSON* zastępuje wartości Znalezione w pliku *appSettings. JSON*.</span><span class="sxs-lookup"><span data-stu-id="f83a3-146">In development, *appsettings*.***Development***.*json* configuration overwrites values found in *appsettings.json*.</span></span>
+* <span data-ttu-id="f83a3-147">W obszarze produkcja, *AppSettings*. ***Środowisko produkcyjne***. Konfiguracja *JSON* zastępuje wartości Znalezione w pliku *appSettings. JSON*.</span><span class="sxs-lookup"><span data-stu-id="f83a3-147">In production, *appsettings*.***Production***.*json* configuration overwrites values found in *appsettings.json*.</span></span> <span data-ttu-id="f83a3-148">Na przykład podczas wdrażania aplikacji na platformie Azure.</span><span class="sxs-lookup"><span data-stu-id="f83a3-148">For example, when deploying the app to Azure.</span></span>
 
 <a name="optpat"></a>
 
-#### <a name="bind-hierarchical-configuration-data-using-the-options-pattern"></a><span data-ttu-id="32987-145">Powiązywanie hierarchicznych danych konfiguracji przy użyciu wzorca opcji</span><span class="sxs-lookup"><span data-stu-id="32987-145">Bind hierarchical configuration data using the options pattern</span></span>
+### <a name="bind-hierarchical-configuration-data-using-the-options-pattern"></a><span data-ttu-id="f83a3-149">Powiązywanie hierarchicznych danych konfiguracji przy użyciu wzorca opcji</span><span class="sxs-lookup"><span data-stu-id="f83a3-149">Bind hierarchical configuration data using the options pattern</span></span>
 
-<span data-ttu-id="32987-146">Preferowanym sposobem odczytywania pokrewnych wartości konfiguracji jest użycie [wzorca opcji](xref:fundamentals/configuration/options).</span><span class="sxs-lookup"><span data-stu-id="32987-146">The preferred way to read related configuration values is using the [options pattern](xref:fundamentals/configuration/options).</span></span> <span data-ttu-id="32987-147">Na przykład, aby odczytać następujące wartości konfiguracji:</span><span class="sxs-lookup"><span data-stu-id="32987-147">For example, to read the following configuration values:</span></span>
+[!INCLUDE[](~/includes/bind.md)]
 
-```json
-  "Position": {
-    "Title": "Editor",
-    "Name": "Joe Smith"
-  }
-```
+<span data-ttu-id="f83a3-150">Korzystając z konfiguracji [domyślnej](#default) , pliku *appSettings. JSON* i *appSettings.* `Environment` pliki *. JSON* są włączone z [reloadOnChange: true](https://github.com/dotnet/extensions/blob/release/3.1/src/Hosting/Hosting/src/Host.cs#L74-L75).</span><span class="sxs-lookup"><span data-stu-id="f83a3-150">Using the [default](#default) configuration, the *appsettings.json* and *appsettings.*`Environment`*.json* files are enabled with [reloadOnChange: true](https://github.com/dotnet/extensions/blob/release/3.1/src/Hosting/Hosting/src/Host.cs#L74-L75).</span></span> <span data-ttu-id="f83a3-151">Zmiany wprowadzone w pliku *appSettings. JSON* i *appSettings.* `Environment` plik *. JSON* ***po*** uruchomieniu aplikacji jest odczytywany przez [dostawcę konfiguracji JSON](#jcp).</span><span class="sxs-lookup"><span data-stu-id="f83a3-151">Changes made to the *appsettings.json* and *appsettings.*`Environment`*.json* file ***after*** the app starts are read by the [JSON configuration provider](#jcp).</span></span>
 
-<span data-ttu-id="32987-148">Utwórz następującą `PositionOptions` klasę:</span><span class="sxs-lookup"><span data-stu-id="32987-148">Create the following `PositionOptions` class:</span></span>
-
-[!code-csharp[](index/samples/3.x/ConfigSample/Options/PositionOptions.cs?name=snippet)]
-
-<span data-ttu-id="32987-149">Wszystkie publiczne właściwości odczytu i zapisu typu są powiązane.</span><span class="sxs-lookup"><span data-stu-id="32987-149">All the public read-write properties of the type are bound.</span></span> <span data-ttu-id="32987-150">Pola ***nie*** są powiązane.</span><span class="sxs-lookup"><span data-stu-id="32987-150">Fields are ***not*** bound.</span></span>
-
-<span data-ttu-id="32987-151">Następujący kod:</span><span class="sxs-lookup"><span data-stu-id="32987-151">The following code:</span></span>
-
-* <span data-ttu-id="32987-152">Wywołuje [ConfigurationBinder. bind](xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Bind*) , `PositionOptions` aby powiązać klasę z `Position` sekcją.</span><span class="sxs-lookup"><span data-stu-id="32987-152">Calls [ConfigurationBinder.Bind](xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Bind*) to bind the `PositionOptions` class to the `Position` section.</span></span>
-* <span data-ttu-id="32987-153">Wyświetla dane `Position` konfiguracji.</span><span class="sxs-lookup"><span data-stu-id="32987-153">Displays the `Position` configuration data.</span></span>
-
-[!code-csharp[](index/samples/3.x/ConfigSample/Pages/Test22.cshtml.cs?name=snippet)]
-
-<span data-ttu-id="32987-154">[`ConfigurationBinder.Get<T>`](xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Get*)tworzy powiązania i zwraca określony typ.</span><span class="sxs-lookup"><span data-stu-id="32987-154">[`ConfigurationBinder.Get<T>`](xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Get*) binds and returns the specified type.</span></span> <span data-ttu-id="32987-155">`ConfigurationBinder.Get<T>`może być wygodniejsze niż używanie `ConfigurationBinder.Bind`.</span><span class="sxs-lookup"><span data-stu-id="32987-155">`ConfigurationBinder.Get<T>` may be more convenient than using `ConfigurationBinder.Bind`.</span></span> <span data-ttu-id="32987-156">Poniższy kod przedstawia sposób użycia `ConfigurationBinder.Get<T>` z `PositionOptions` klasą:</span><span class="sxs-lookup"><span data-stu-id="32987-156">The following code shows how to use `ConfigurationBinder.Get<T>` with the `PositionOptions` class:</span></span>
-
-[!code-csharp[](index/samples/3.x/ConfigSample/Pages/Test21.cshtml.cs?name=snippet)]
-
-<span data-ttu-id="32987-157">Alternatywne podejście w przypadku używania ***wzorca opcji*** ma na celu powiązanie `Position` sekcji i dodanie jej do [kontenera usługi iniekcji zależności](xref:fundamentals/dependency-injection).</span><span class="sxs-lookup"><span data-stu-id="32987-157">An alternative approach when using the ***options pattern*** is to bind the `Position` section and add it to the [dependency injection service container](xref:fundamentals/dependency-injection).</span></span> <span data-ttu-id="32987-158">W poniższym kodzie `PositionOptions` został dodany do kontenera usługi z <xref:Microsoft.Extensions.DependencyInjection.OptionsConfigurationServiceCollectionExtensions.Configure*> i powiązana z konfiguracją:</span><span class="sxs-lookup"><span data-stu-id="32987-158">In the following code, `PositionOptions` is added to the service container with <xref:Microsoft.Extensions.DependencyInjection.OptionsConfigurationServiceCollectionExtensions.Configure*> and bound to configuration:</span></span>
-
-[!code-csharp[](index/samples/3.x/ConfigSample/Startup.cs?name=snippet)]
-
-<span data-ttu-id="32987-159">Korzystając z powyższego kodu, poniższy kod odczytuje opcje pozycji:</span><span class="sxs-lookup"><span data-stu-id="32987-159">Using the preceding code, the following code reads the position options:</span></span>
-
-[!code-csharp[](index/samples/3.x/ConfigSample/Pages/Test2.cshtml.cs?name=snippet)]
-
-<span data-ttu-id="32987-160">Korzystając z konfiguracji [domyślnej](#default) , pliku *appSettings. JSON* i *appSettings.* `Environment`pliki *. JSON* są włączone z [reloadOnChange: true](https://github.com/dotnet/extensions/blob/release/3.1/src/Hosting/Hosting/src/Host.cs#L74-L75).</span><span class="sxs-lookup"><span data-stu-id="32987-160">Using the [default](#default) configuration, the *appsettings.json* and *appsettings.*`Environment`*.json* files are enabled with [reloadOnChange: true](https://github.com/dotnet/extensions/blob/release/3.1/src/Hosting/Hosting/src/Host.cs#L74-L75).</span></span> <span data-ttu-id="32987-161">Zmiany wprowadzone w pliku *appSettings. JSON* i *appSettings.* `Environment`plik *. JSON* ***po*** uruchomieniu aplikacji jest odczytywany przez [dostawcę konfiguracji JSON](#jcp).</span><span class="sxs-lookup"><span data-stu-id="32987-161">Changes made to the *appsettings.json* and *appsettings.*`Environment`*.json* file ***after*** the app starts are read by the [JSON configuration provider](#jcp).</span></span>
-
-<span data-ttu-id="32987-162">Aby uzyskać informacje na temat dodawania dodatkowych plików konfiguracji JSON, zobacz [dostawca konfiguracji JSON](#jcp) w tym dokumencie.</span><span class="sxs-lookup"><span data-stu-id="32987-162">See [JSON configuration provider](#jcp) in this document for information on adding additional JSON configuration files.</span></span>
+<span data-ttu-id="f83a3-152">Aby uzyskać informacje na temat dodawania dodatkowych plików konfiguracji JSON, zobacz [dostawca konfiguracji JSON](#jcp) w tym dokumencie.</span><span class="sxs-lookup"><span data-stu-id="f83a3-152">See [JSON configuration provider](#jcp) in this document for information on adding additional JSON configuration files.</span></span>
 
 <a name="security"></a>
 
-## <a name="security-and-secret-manager"></a><span data-ttu-id="32987-163">Security and Secret Manager</span><span class="sxs-lookup"><span data-stu-id="32987-163">Security and secret manager</span></span>
+## <a name="security-and-secret-manager"></a><span data-ttu-id="f83a3-153">Security and Secret Manager</span><span class="sxs-lookup"><span data-stu-id="f83a3-153">Security and secret manager</span></span>
 
-<span data-ttu-id="32987-164">Wskazówki dotyczące danych konfiguracyjnych:</span><span class="sxs-lookup"><span data-stu-id="32987-164">Configuration data guidelines:</span></span>
+<span data-ttu-id="f83a3-154">Wskazówki dotyczące danych konfiguracyjnych:</span><span class="sxs-lookup"><span data-stu-id="f83a3-154">Configuration data guidelines:</span></span>
 
-* <span data-ttu-id="32987-165">Nie należy przechowywać haseł ani innych danych poufnych w kodzie dostawcy konfiguracji ani w plikach konfiguracji zwykłego tekstu.</span><span class="sxs-lookup"><span data-stu-id="32987-165">Never store passwords or other sensitive data in configuration provider code or in plain text configuration files.</span></span> <span data-ttu-id="32987-166">Za pomocą [Menedżera wpisów tajnych](xref:security/app-secrets) można przechowywać wpisy tajne.</span><span class="sxs-lookup"><span data-stu-id="32987-166">The [Secret manager](xref:security/app-secrets) can be used to store secrets in development.</span></span>
-* <span data-ttu-id="32987-167">Nie używaj tajemnic produkcyjnych w środowiskach deweloperskich i testowych.</span><span class="sxs-lookup"><span data-stu-id="32987-167">Don't use production secrets in development or test environments.</span></span>
-* <span data-ttu-id="32987-168">Określ wpisy tajne poza projektem, aby nie mogły zostać przypadkowo przekazane do repozytorium kodu źródłowego.</span><span class="sxs-lookup"><span data-stu-id="32987-168">Specify secrets outside of the project so that they can't be accidentally committed to a source code repository.</span></span>
+* <span data-ttu-id="f83a3-155">Nie należy przechowywać haseł ani innych danych poufnych w kodzie dostawcy konfiguracji ani w plikach konfiguracji zwykłego tekstu.</span><span class="sxs-lookup"><span data-stu-id="f83a3-155">Never store passwords or other sensitive data in configuration provider code or in plain text configuration files.</span></span> <span data-ttu-id="f83a3-156">Za pomocą [Menedżera wpisów tajnych](xref:security/app-secrets) można przechowywać wpisy tajne.</span><span class="sxs-lookup"><span data-stu-id="f83a3-156">The [Secret manager](xref:security/app-secrets) can be used to store secrets in development.</span></span>
+* <span data-ttu-id="f83a3-157">Nie używaj tajemnic produkcyjnych w środowiskach deweloperskich i testowych.</span><span class="sxs-lookup"><span data-stu-id="f83a3-157">Don't use production secrets in development or test environments.</span></span>
+* <span data-ttu-id="f83a3-158">Określ wpisy tajne poza projektem, aby nie mogły zostać przypadkowo przekazane do repozytorium kodu źródłowego.</span><span class="sxs-lookup"><span data-stu-id="f83a3-158">Specify secrets outside of the project so that they can't be accidentally committed to a source code repository.</span></span>
 
-<span data-ttu-id="32987-169">[Domyślnie](#default)program [Secret Manager](xref:security/app-secrets) odczytuje ustawienia konfiguracji po pliku *appSettings. JSON* i *appSettings.* `Environment` *. JSON*.</span><span class="sxs-lookup"><span data-stu-id="32987-169">By [default](#default), [Secret manager](xref:security/app-secrets) reads configuration settings after *appsettings.json* and *appsettings.*`Environment`*.json*.</span></span>
+<span data-ttu-id="f83a3-159">[Domyślnie](#default)program [Secret Manager](xref:security/app-secrets) odczytuje ustawienia konfiguracji po pliku *appSettings. JSON* i *appSettings.* `Environment` *. JSON*.</span><span class="sxs-lookup"><span data-stu-id="f83a3-159">By [default](#default), [Secret manager](xref:security/app-secrets) reads configuration settings after *appsettings.json* and *appsettings.*`Environment`*.json*.</span></span>
 
-<span data-ttu-id="32987-170">Aby uzyskać więcej informacji na temat przechowywania haseł lub innych poufnych danych:</span><span class="sxs-lookup"><span data-stu-id="32987-170">For more information on storing passwords or other sensitive data:</span></span>
+<span data-ttu-id="f83a3-160">Aby uzyskać więcej informacji na temat przechowywania haseł lub innych poufnych danych:</span><span class="sxs-lookup"><span data-stu-id="f83a3-160">For more information on storing passwords or other sensitive data:</span></span>
 
 * <xref:fundamentals/environments>
-* <span data-ttu-id="32987-171"><xref:security/app-secrets>: Zawiera porady dotyczące używania zmiennych środowiskowych do przechowywania poufnych danych.</span><span class="sxs-lookup"><span data-stu-id="32987-171"><xref:security/app-secrets>:  Includes advice on using environment variables to store sensitive data.</span></span> <span data-ttu-id="32987-172">Menedżer wpisów tajnych używa [dostawcy konfiguracji plików](#fcp) do przechowywania wpisów tajnych użytkownika w pliku JSON w systemie lokalnym.</span><span class="sxs-lookup"><span data-stu-id="32987-172">The Secret Manager uses the [File configuration provider](#fcp) to store user secrets in a JSON file on the local system.</span></span>
+* <span data-ttu-id="f83a3-161"><xref:security/app-secrets>: Zawiera porady dotyczące używania zmiennych środowiskowych do przechowywania poufnych danych.</span><span class="sxs-lookup"><span data-stu-id="f83a3-161"><xref:security/app-secrets>:  Includes advice on using environment variables to store sensitive data.</span></span> <span data-ttu-id="f83a3-162">Menedżer wpisów tajnych używa [dostawcy konfiguracji plików](#fcp) do przechowywania wpisów tajnych użytkownika w pliku JSON w systemie lokalnym.</span><span class="sxs-lookup"><span data-stu-id="f83a3-162">The Secret Manager uses the [File configuration provider](#fcp) to store user secrets in a JSON file on the local system.</span></span>
 
-<span data-ttu-id="32987-173">[Azure Key Vault](https://azure.microsoft.com/services/key-vault/) bezpieczne przechowywanie wpisów tajnych aplikacji dla ASP.NET Core aplikacji.</span><span class="sxs-lookup"><span data-stu-id="32987-173">[Azure Key Vault](https://azure.microsoft.com/services/key-vault/) safely stores app secrets for ASP.NET Core apps.</span></span> <span data-ttu-id="32987-174">Aby uzyskać więcej informacji, zobacz <xref:security/key-vault-configuration>.</span><span class="sxs-lookup"><span data-stu-id="32987-174">For more information, see <xref:security/key-vault-configuration>.</span></span>
+<span data-ttu-id="f83a3-163">[Azure Key Vault](https://azure.microsoft.com/services/key-vault/) bezpieczne przechowywanie wpisów tajnych aplikacji dla ASP.NET Core aplikacji.</span><span class="sxs-lookup"><span data-stu-id="f83a3-163">[Azure Key Vault](https://azure.microsoft.com/services/key-vault/) safely stores app secrets for ASP.NET Core apps.</span></span> <span data-ttu-id="f83a3-164">Aby uzyskać więcej informacji, zobacz <xref:security/key-vault-configuration>.</span><span class="sxs-lookup"><span data-stu-id="f83a3-164">For more information, see <xref:security/key-vault-configuration>.</span></span>
 
 <a name="evcp"></a>
 
-## <a name="environment-variables"></a><span data-ttu-id="32987-175">Zmienne środowiskowe</span><span class="sxs-lookup"><span data-stu-id="32987-175">Environment variables</span></span>
+## <a name="environment-variables"></a><span data-ttu-id="f83a3-165">Zmienne środowiskowe</span><span class="sxs-lookup"><span data-stu-id="f83a3-165">Environment variables</span></span>
 
-<span data-ttu-id="32987-176">Korzystając z konfiguracji [domyślnej](#default) , <xref:Microsoft.Extensions.Configuration.EnvironmentVariables.EnvironmentVariablesConfigurationProvider> ładowanie konfiguracji ze zmiennej środowiskowej par klucz-wartość po odczytywaniu pliku *appSettings. JSON*, *appSettings.* `Environment` *. JSON*i [Menedżer wpisów tajnych](xref:security/app-secrets).</span><span class="sxs-lookup"><span data-stu-id="32987-176">Using the [default](#default) configuration, the <xref:Microsoft.Extensions.Configuration.EnvironmentVariables.EnvironmentVariablesConfigurationProvider> loads configuration from environment variable key-value pairs after reading *appsettings.json*, *appsettings.*`Environment`*.json*, and [Secret manager](xref:security/app-secrets).</span></span> <span data-ttu-id="32987-177">W związku z tym kluczowe wartości odczytywane z wartości zastąpienia środowiska są odczytywane z pliku *appSettings. JSON*, *appSettings.* `Environment` *. JSON*i Menedżer wpisów tajnych.</span><span class="sxs-lookup"><span data-stu-id="32987-177">Therefore, key values read from the environment override values read from *appsettings.json*, *appsettings.*`Environment`*.json*, and Secret manager.</span></span>
+<span data-ttu-id="f83a3-166">Korzystając z konfiguracji [domyślnej](#default) , <xref:Microsoft.Extensions.Configuration.EnvironmentVariables.EnvironmentVariablesConfigurationProvider> Ładowanie konfiguracji ze zmiennej środowiskowej par klucz-wartość po odczytywaniu pliku *appSettings. JSON*, *appSettings.* `Environment` *. JSON*i [Menedżer wpisów tajnych](xref:security/app-secrets).</span><span class="sxs-lookup"><span data-stu-id="f83a3-166">Using the [default](#default) configuration, the <xref:Microsoft.Extensions.Configuration.EnvironmentVariables.EnvironmentVariablesConfigurationProvider> loads configuration from environment variable key-value pairs after reading *appsettings.json*, *appsettings.*`Environment`*.json*, and [Secret manager](xref:security/app-secrets).</span></span> <span data-ttu-id="f83a3-167">W związku z tym kluczowe wartości odczytywane z wartości zastąpienia środowiska są odczytywane z pliku *appSettings. JSON*, *appSettings.* `Environment` *. JSON*i Menedżer wpisów tajnych.</span><span class="sxs-lookup"><span data-stu-id="f83a3-167">Therefore, key values read from the environment override values read from *appsettings.json*, *appsettings.*`Environment`*.json*, and Secret manager.</span></span>
 
 [!INCLUDE[](~/includes/environmentVarableColon.md)]
 
-<span data-ttu-id="32987-178">Następujące `set` polecenia:</span><span class="sxs-lookup"><span data-stu-id="32987-178">The following `set` commands:</span></span>
+<span data-ttu-id="f83a3-168">Następujące `set` polecenia:</span><span class="sxs-lookup"><span data-stu-id="f83a3-168">The following `set` commands:</span></span>
 
-* <span data-ttu-id="32987-179">Ustaw klucze środowiska i wartości z [poprzedniego przykładu](#appsettingsjson) w systemie Windows.</span><span class="sxs-lookup"><span data-stu-id="32987-179">Set the environment keys and values of the [preceding example](#appsettingsjson) on Windows.</span></span>
-* <span data-ttu-id="32987-180">Przetestuj ustawienia przy użyciu pobranego [przykładu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample).</span><span class="sxs-lookup"><span data-stu-id="32987-180">Test the settings when using the [sample download](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample).</span></span> <span data-ttu-id="32987-181">`dotnet run` Polecenie musi być uruchamiane w katalogu projektu.</span><span class="sxs-lookup"><span data-stu-id="32987-181">The `dotnet run` command must be run in the project directory.</span></span>
+* <span data-ttu-id="f83a3-169">Ustaw klucze środowiska i wartości z [poprzedniego przykładu](#appsettingsjson) w systemie Windows.</span><span class="sxs-lookup"><span data-stu-id="f83a3-169">Set the environment keys and values of the [preceding example](#appsettingsjson) on Windows.</span></span>
+* <span data-ttu-id="f83a3-170">Przetestuj ustawienia przy użyciu pobranego [przykładu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample).</span><span class="sxs-lookup"><span data-stu-id="f83a3-170">Test the settings when using the [sample download](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample).</span></span> <span data-ttu-id="f83a3-171">`dotnet run`Polecenie musi być uruchamiane w katalogu projektu.</span><span class="sxs-lookup"><span data-stu-id="f83a3-171">The `dotnet run` command must be run in the project directory.</span></span>
 
 ```dotnetcli
 set MyKey="My key from Environment"
@@ -165,12 +120,12 @@ set Position__Name=Environment_Rick
 dotnet run
 ```
 
-<span data-ttu-id="32987-182">Poprzednie ustawienia środowiska:</span><span class="sxs-lookup"><span data-stu-id="32987-182">The preceding environment settings:</span></span>
+<span data-ttu-id="f83a3-172">Poprzednie ustawienia środowiska:</span><span class="sxs-lookup"><span data-stu-id="f83a3-172">The preceding environment settings:</span></span>
 
-* <span data-ttu-id="32987-183">Są ustawiane tylko w ramach procesów uruchomionych z poziomu okna polecenia, które zostały ustawione w.</span><span class="sxs-lookup"><span data-stu-id="32987-183">Are only set in processes launched from the command window they were set in.</span></span>
-* <span data-ttu-id="32987-184">Nie będą odczytywane przez przeglądarki uruchomione przy użyciu programu Visual Studio.</span><span class="sxs-lookup"><span data-stu-id="32987-184">Won't be read by browsers launched with Visual Studio.</span></span>
+* <span data-ttu-id="f83a3-173">Są ustawiane tylko w ramach procesów uruchomionych z poziomu okna polecenia, które zostały ustawione w.</span><span class="sxs-lookup"><span data-stu-id="f83a3-173">Are only set in processes launched from the command window they were set in.</span></span>
+* <span data-ttu-id="f83a3-174">Nie będą odczytywane przez przeglądarki uruchomione przy użyciu programu Visual Studio.</span><span class="sxs-lookup"><span data-stu-id="f83a3-174">Won't be read by browsers launched with Visual Studio.</span></span>
 
-<span data-ttu-id="32987-185">Następujące polecenia [setx](/windows-server/administration/windows-commands/setx) mogą służyć do ustawiania kluczy środowiskowych i wartości w systemie Windows.</span><span class="sxs-lookup"><span data-stu-id="32987-185">The following [setx](/windows-server/administration/windows-commands/setx) commands can be used to set the environment keys and values on Windows.</span></span> <span data-ttu-id="32987-186">W `set`przeciwieństwie `setx` do, ustawienia są utrwalane.</span><span class="sxs-lookup"><span data-stu-id="32987-186">Unlike `set`, `setx` settings are persisted.</span></span> <span data-ttu-id="32987-187">`/M`ustawia zmienną w środowisku systemowym.</span><span class="sxs-lookup"><span data-stu-id="32987-187">`/M` sets the variable in the system environment.</span></span> <span data-ttu-id="32987-188">Jeśli `/M` przełącznik nie jest używany, zmienna środowiskowa użytkownika jest ustawiona.</span><span class="sxs-lookup"><span data-stu-id="32987-188">If the `/M` switch isn't used, a user environment variable is set.</span></span>
+<span data-ttu-id="f83a3-175">Następujące polecenia [setx](/windows-server/administration/windows-commands/setx) mogą służyć do ustawiania kluczy środowiskowych i wartości w systemie Windows.</span><span class="sxs-lookup"><span data-stu-id="f83a3-175">The following [setx](/windows-server/administration/windows-commands/setx) commands can be used to set the environment keys and values on Windows.</span></span> <span data-ttu-id="f83a3-176">W przeciwieństwie do `set` , `setx` Ustawienia są utrwalane.</span><span class="sxs-lookup"><span data-stu-id="f83a3-176">Unlike `set`, `setx` settings are persisted.</span></span> <span data-ttu-id="f83a3-177">`/M`ustawia zmienną w środowisku systemowym.</span><span class="sxs-lookup"><span data-stu-id="f83a3-177">`/M` sets the variable in the system environment.</span></span> <span data-ttu-id="f83a3-178">Jeśli `/M` przełącznik nie jest używany, zmienna środowiskowa użytkownika jest ustawiona.</span><span class="sxs-lookup"><span data-stu-id="f83a3-178">If the `/M` switch isn't used, a user environment variable is set.</span></span>
 
 ```cmd
 setx MyKey "My key from setx Environment" /M
@@ -178,23 +133,23 @@ setx Position__Title Setx_Environment_Editor /M
 setx Position__Name Environment_Rick /M
 ```
 
-<span data-ttu-id="32987-189">Aby sprawdzić, czy poprzednie polecenia przesłaniają plik *appSettings. JSON* i *appSettings.* `Environment` *. JSON*:</span><span class="sxs-lookup"><span data-stu-id="32987-189">To test that the preceding commands override *appsettings.json* and *appsettings.*`Environment`*.json*:</span></span>
+<span data-ttu-id="f83a3-179">Aby sprawdzić, czy poprzednie polecenia przesłaniają plik *appSettings. JSON* i *appSettings.* `Environment` *. JSON*:</span><span class="sxs-lookup"><span data-stu-id="f83a3-179">To test that the preceding commands override *appsettings.json* and *appsettings.*`Environment`*.json*:</span></span>
 
-* <span data-ttu-id="32987-190">Za pomocą programu Visual Studio: Zamknij i uruchom ponownie program Visual Studio.</span><span class="sxs-lookup"><span data-stu-id="32987-190">With Visual Studio: Exit and restart Visual Studio.</span></span>
-* <span data-ttu-id="32987-191">Za pomocą interfejsu wiersza polecenia: Uruchom nowe okno poleceń i `dotnet run`wprowadź.</span><span class="sxs-lookup"><span data-stu-id="32987-191">With the CLI: Start a new command window and enter `dotnet run`.</span></span>
+* <span data-ttu-id="f83a3-180">Za pomocą programu Visual Studio: Zamknij i uruchom ponownie program Visual Studio.</span><span class="sxs-lookup"><span data-stu-id="f83a3-180">With Visual Studio: Exit and restart Visual Studio.</span></span>
+* <span data-ttu-id="f83a3-181">Za pomocą interfejsu wiersza polecenia: Uruchom nowe okno poleceń i wprowadź `dotnet run` .</span><span class="sxs-lookup"><span data-stu-id="f83a3-181">With the CLI: Start a new command window and enter `dotnet run`.</span></span>
 
-<span data-ttu-id="32987-192">Połącz <xref:Microsoft.Extensions.Configuration.EnvironmentVariablesExtensions.AddEnvironmentVariables*> z ciągiem, aby określić prefiks dla zmiennych środowiskowych:</span><span class="sxs-lookup"><span data-stu-id="32987-192">Call <xref:Microsoft.Extensions.Configuration.EnvironmentVariablesExtensions.AddEnvironmentVariables*> with a string to specify a prefix for environment variables:</span></span>
+<span data-ttu-id="f83a3-182">Połącz <xref:Microsoft.Extensions.Configuration.EnvironmentVariablesExtensions.AddEnvironmentVariables*> z ciągiem, aby określić prefiks dla zmiennych środowiskowych:</span><span class="sxs-lookup"><span data-stu-id="f83a3-182">Call <xref:Microsoft.Extensions.Configuration.EnvironmentVariablesExtensions.AddEnvironmentVariables*> with a string to specify a prefix for environment variables:</span></span>
 
-[!code-csharp[](index/samples/3.x/ConfigSample/Program.cs?name=snippet4&highlight=12)]
+[!code-csharp[](~/fundamentals/configuration/index/samples/3.x/ConfigSample/Program.cs?name=snippet4&highlight=12)]
 
-<span data-ttu-id="32987-193">Powyższy kod ma następujące działanie:</span><span class="sxs-lookup"><span data-stu-id="32987-193">In the preceding code:</span></span>
+<span data-ttu-id="f83a3-183">Powyższy kod ma następujące działanie:</span><span class="sxs-lookup"><span data-stu-id="f83a3-183">In the preceding code:</span></span>
 
-* <span data-ttu-id="32987-194">`config.AddEnvironmentVariables(prefix: "MyCustomPrefix_")`zostanie dodany po [domyślnych dostawcach konfiguracji](#default).</span><span class="sxs-lookup"><span data-stu-id="32987-194">`config.AddEnvironmentVariables(prefix: "MyCustomPrefix_")` is added after the [default configuration providers](#default).</span></span> <span data-ttu-id="32987-195">Przykład określania kolejności dostawców konfiguracji można znaleźć w temacie [dostawca konfiguracji JSON](#jcp).</span><span class="sxs-lookup"><span data-stu-id="32987-195">For an example of ordering the configuration providers, see [JSON configuration provider](#jcp).</span></span>
-* <span data-ttu-id="32987-196">Zmienne środowiskowe ustawione z `MyCustomPrefix_` prefiksem przesłaniają [domyślnych dostawców konfiguracji](#default).</span><span class="sxs-lookup"><span data-stu-id="32987-196">Environment variables set with the `MyCustomPrefix_` prefix override the [default configuration providers](#default).</span></span> <span data-ttu-id="32987-197">Obejmuje to zmienne środowiskowe bez prefiksu.</span><span class="sxs-lookup"><span data-stu-id="32987-197">This includes environment variables without the prefix.</span></span>
+* <span data-ttu-id="f83a3-184">`config.AddEnvironmentVariables(prefix: "MyCustomPrefix_")`zostanie dodany po [domyślnych dostawcach konfiguracji](#default).</span><span class="sxs-lookup"><span data-stu-id="f83a3-184">`config.AddEnvironmentVariables(prefix: "MyCustomPrefix_")` is added after the [default configuration providers](#default).</span></span> <span data-ttu-id="f83a3-185">Przykład określania kolejności dostawców konfiguracji można znaleźć w temacie [dostawca konfiguracji JSON](#jcp).</span><span class="sxs-lookup"><span data-stu-id="f83a3-185">For an example of ordering the configuration providers, see [JSON configuration provider](#jcp).</span></span>
+* <span data-ttu-id="f83a3-186">Zmienne środowiskowe ustawione z `MyCustomPrefix_` prefiksem przesłaniają [domyślnych dostawców konfiguracji](#default).</span><span class="sxs-lookup"><span data-stu-id="f83a3-186">Environment variables set with the `MyCustomPrefix_` prefix override the [default configuration providers](#default).</span></span> <span data-ttu-id="f83a3-187">Obejmuje to zmienne środowiskowe bez prefiksu.</span><span class="sxs-lookup"><span data-stu-id="f83a3-187">This includes environment variables without the prefix.</span></span>
 
-<span data-ttu-id="32987-198">Prefiks jest usuwany, gdy pary klucz konfiguracji-wartość są odczytywane.</span><span class="sxs-lookup"><span data-stu-id="32987-198">The prefix is stripped off when the configuration key-value pairs are read.</span></span>
+<span data-ttu-id="f83a3-188">Prefiks jest usuwany, gdy pary klucz konfiguracji-wartość są odczytywane.</span><span class="sxs-lookup"><span data-stu-id="f83a3-188">The prefix is stripped off when the configuration key-value pairs are read.</span></span>
 
-<span data-ttu-id="32987-199">Następujące polecenia testują prefiks niestandardowy:</span><span class="sxs-lookup"><span data-stu-id="32987-199">The following commands test the custom prefix:</span></span>
+<span data-ttu-id="f83a3-189">Następujące polecenia testują prefiks niestandardowy:</span><span class="sxs-lookup"><span data-stu-id="f83a3-189">The following commands test the custom prefix:</span></span>
 
 ```dotnetcli
 set MyCustomPrefix_MyKey="My key with MyCustomPrefix_ Environment"
@@ -203,287 +158,966 @@ set MyCustomPrefix_Position__Name=Environment_Rick_cp
 dotnet run
 ```
 
-<span data-ttu-id="32987-200">[Konfiguracja domyślna](#default) ładuje zmienne środowiskowe i argumenty wiersza polecenia poprzedzone `DOTNET_` i. `ASPNETCORE_`</span><span class="sxs-lookup"><span data-stu-id="32987-200">The [default configuration](#default) loads environment variables and command line arguments prefixed with `DOTNET_` and `ASPNETCORE_`.</span></span> <span data-ttu-id="32987-201">`DOTNET_` Prefiksy `ASPNETCORE_` i są używane przez ASP.NET Core do [konfiguracji hosta i aplikacji](xref:fundamentals/host/generic-host#host-configuration), ale nie do konfiguracji użytkownika.</span><span class="sxs-lookup"><span data-stu-id="32987-201">The `DOTNET_` and `ASPNETCORE_` prefixes are used by ASP.NET Core for [host and app configuration](xref:fundamentals/host/generic-host#host-configuration), but not for user configuration.</span></span> <span data-ttu-id="32987-202">Aby uzyskać więcej informacji na temat konfiguracji hosta i aplikacji, zobacz [host ogólny programu .NET](xref:fundamentals/host/generic-host).</span><span class="sxs-lookup"><span data-stu-id="32987-202">For more information on host and app configuration, see [.NET Generic Host](xref:fundamentals/host/generic-host).</span></span>
+<span data-ttu-id="f83a3-190">[Konfiguracja domyślna](#default) ładuje zmienne środowiskowe i argumenty wiersza polecenia poprzedzone `DOTNET_` i `ASPNETCORE_` .</span><span class="sxs-lookup"><span data-stu-id="f83a3-190">The [default configuration](#default) loads environment variables and command line arguments prefixed with `DOTNET_` and `ASPNETCORE_`.</span></span> <span data-ttu-id="f83a3-191">`DOTNET_` `ASPNETCORE_` Prefiksy i są używane przez ASP.NET Core do [konfiguracji hosta i aplikacji](xref:fundamentals/host/generic-host#host-configuration), ale nie do konfiguracji użytkownika.</span><span class="sxs-lookup"><span data-stu-id="f83a3-191">The `DOTNET_` and `ASPNETCORE_` prefixes are used by ASP.NET Core for [host and app configuration](xref:fundamentals/host/generic-host#host-configuration), but not for user configuration.</span></span> <span data-ttu-id="f83a3-192">Aby uzyskać więcej informacji na temat konfiguracji hosta i aplikacji, zobacz [host ogólny programu .NET](xref:fundamentals/host/generic-host).</span><span class="sxs-lookup"><span data-stu-id="f83a3-192">For more information on host and app configuration, see [.NET Generic Host](xref:fundamentals/host/generic-host).</span></span>
 
-<span data-ttu-id="32987-203">Na [Azure App Service](https://azure.microsoft.com/services/app-service/)wybierz pozycję **nowe ustawienie aplikacji** na stronie **Konfiguracja > ustawienia** .</span><span class="sxs-lookup"><span data-stu-id="32987-203">On [Azure App Service](https://azure.microsoft.com/services/app-service/), select **New application setting** on the **Settings > Configuration** page.</span></span> <span data-ttu-id="32987-204">Ustawienia aplikacji Azure App Service są następujące:</span><span class="sxs-lookup"><span data-stu-id="32987-204">Azure App Service application settings are:</span></span>
+<span data-ttu-id="f83a3-193">Na [Azure App Service](https://azure.microsoft.com/services/app-service/)wybierz pozycję **nowe ustawienie aplikacji** na stronie **Konfiguracja > ustawienia** .</span><span class="sxs-lookup"><span data-stu-id="f83a3-193">On [Azure App Service](https://azure.microsoft.com/services/app-service/), select **New application setting** on the **Settings > Configuration** page.</span></span> <span data-ttu-id="f83a3-194">Ustawienia aplikacji Azure App Service są następujące:</span><span class="sxs-lookup"><span data-stu-id="f83a3-194">Azure App Service application settings are:</span></span>
 
-* <span data-ttu-id="32987-205">Szyfrowane i przesyłane przez zaszyfrowanego kanału.</span><span class="sxs-lookup"><span data-stu-id="32987-205">Encrypted at rest and transmitted over an encrypted channel.</span></span>
-* <span data-ttu-id="32987-206">Uwidocznione jako zmienne środowiskowe.</span><span class="sxs-lookup"><span data-stu-id="32987-206">Exposed as environment variables.</span></span>
+* <span data-ttu-id="f83a3-195">Szyfrowane i przesyłane przez zaszyfrowanego kanału.</span><span class="sxs-lookup"><span data-stu-id="f83a3-195">Encrypted at rest and transmitted over an encrypted channel.</span></span>
+* <span data-ttu-id="f83a3-196">Uwidocznione jako zmienne środowiskowe.</span><span class="sxs-lookup"><span data-stu-id="f83a3-196">Exposed as environment variables.</span></span>
 
-<span data-ttu-id="32987-207">Aby uzyskać więcej informacji, zobacz artykuł [Azure Apps: zastępowanie konfiguracji aplikacji przy użyciu witryny Azure Portal](xref:host-and-deploy/azure-apps/index#override-app-configuration-using-the-azure-portal).</span><span class="sxs-lookup"><span data-stu-id="32987-207">For more information, see [Azure Apps: Override app configuration using the Azure Portal](xref:host-and-deploy/azure-apps/index#override-app-configuration-using-the-azure-portal).</span></span>
+<span data-ttu-id="f83a3-197">Aby uzyskać więcej informacji, zobacz artykuł [Azure Apps: zastępowanie konfiguracji aplikacji przy użyciu witryny Azure Portal](xref:host-and-deploy/azure-apps/index#override-app-configuration-using-the-azure-portal).</span><span class="sxs-lookup"><span data-stu-id="f83a3-197">For more information, see [Azure Apps: Override app configuration using the Azure Portal](xref:host-and-deploy/azure-apps/index#override-app-configuration-using-the-azure-portal).</span></span>
 
-<span data-ttu-id="32987-208">Aby uzyskać informacje na temat parametrów połączenia z usługą Azure Database, zobacz [prefiksy parametrów połączenia](#constr) .</span><span class="sxs-lookup"><span data-stu-id="32987-208">See [Connection string prefixes](#constr) for information on Azure database connection strings.</span></span>
+<span data-ttu-id="f83a3-198">Aby uzyskać informacje na temat parametrów połączenia z usługą Azure Database, zobacz [prefiksy parametrów połączenia](#constr) .</span><span class="sxs-lookup"><span data-stu-id="f83a3-198">See [Connection string prefixes](#constr) for information on Azure database connection strings.</span></span>
 
 <a name="clcp"></a>
 
-## <a name="command-line"></a><span data-ttu-id="32987-209">Wiersz polecenia</span><span class="sxs-lookup"><span data-stu-id="32987-209">Command-line</span></span>
+## <a name="command-line"></a><span data-ttu-id="f83a3-199">Wiersz polecenia</span><span class="sxs-lookup"><span data-stu-id="f83a3-199">Command-line</span></span>
 
-<span data-ttu-id="32987-210">Korzystając z konfiguracji [domyślnej](#default) , <xref:Microsoft.Extensions.Configuration.CommandLine.CommandLineConfigurationProvider> ładuje konfigurację z par klucz-wartość argumentu wiersza polecenia po następujących źródłach konfiguracji:</span><span class="sxs-lookup"><span data-stu-id="32987-210">Using the [default](#default) configuration, the <xref:Microsoft.Extensions.Configuration.CommandLine.CommandLineConfigurationProvider> loads configuration from command-line argument key-value pairs after the following configuration sources:</span></span>
+<span data-ttu-id="f83a3-200">Korzystając z konfiguracji [domyślnej](#default) , <xref:Microsoft.Extensions.Configuration.CommandLine.CommandLineConfigurationProvider> ładuje konfigurację z par klucz-wartość argumentu wiersza polecenia po następujących źródłach konfiguracji:</span><span class="sxs-lookup"><span data-stu-id="f83a3-200">Using the [default](#default) configuration, the <xref:Microsoft.Extensions.Configuration.CommandLine.CommandLineConfigurationProvider> loads configuration from command-line argument key-value pairs after the following configuration sources:</span></span>
 
-* <span data-ttu-id="32987-211">*appSettings. JSON* i *AppSettings*. `Environment`. pliki *JSON* .</span><span class="sxs-lookup"><span data-stu-id="32987-211">*appsettings.json* and *appsettings*.`Environment`.*json* files.</span></span>
-* <span data-ttu-id="32987-212">Wpisy [tajne aplikacji (Secret Manager)](xref:security/app-secrets) w środowisku deweloperskim.</span><span class="sxs-lookup"><span data-stu-id="32987-212">[App secrets (Secret Manager)](xref:security/app-secrets) in the Development environment.</span></span>
-* <span data-ttu-id="32987-213">Zmienne środowiskowe.</span><span class="sxs-lookup"><span data-stu-id="32987-213">Environment variables.</span></span>
+* <span data-ttu-id="f83a3-201">*appSettings. JSON* i *AppSettings*. `Environment` . pliki *JSON* .</span><span class="sxs-lookup"><span data-stu-id="f83a3-201">*appsettings.json* and *appsettings*.`Environment`.*json* files.</span></span>
+* <span data-ttu-id="f83a3-202">Wpisy [tajne aplikacji (Secret Manager)](xref:security/app-secrets) w środowisku deweloperskim.</span><span class="sxs-lookup"><span data-stu-id="f83a3-202">[App secrets (Secret Manager)](xref:security/app-secrets) in the Development environment.</span></span>
+* <span data-ttu-id="f83a3-203">Zmienne środowiskowe.</span><span class="sxs-lookup"><span data-stu-id="f83a3-203">Environment variables.</span></span>
 
-<span data-ttu-id="32987-214">[Domyślnie](#default)wartości konfiguracji ustawione w wierszu polecenia przesłaniają wartości konfiguracyjne ustawione dla wszystkich innych dostawców konfiguracji.</span><span class="sxs-lookup"><span data-stu-id="32987-214">By [default](#default), configuration values set on the command-line override configuration values set with all the other configuration providers.</span></span>
+<span data-ttu-id="f83a3-204">[Domyślnie](#default)wartości konfiguracji ustawione w wierszu polecenia przesłaniają wartości konfiguracyjne ustawione dla wszystkich innych dostawców konfiguracji.</span><span class="sxs-lookup"><span data-stu-id="f83a3-204">By [default](#default), configuration values set on the command-line override configuration values set with all the other configuration providers.</span></span>
 
-### <a name="command-line-arguments"></a><span data-ttu-id="32987-215">Argumenty wiersza polecenia</span><span class="sxs-lookup"><span data-stu-id="32987-215">Command-line arguments</span></span>
+### <a name="command-line-arguments"></a><span data-ttu-id="f83a3-205">Argumenty wiersza polecenia</span><span class="sxs-lookup"><span data-stu-id="f83a3-205">Command-line arguments</span></span>
 
-<span data-ttu-id="32987-216">Następujące polecenie ustawia klucze i wartości przy użyciu `=`:</span><span class="sxs-lookup"><span data-stu-id="32987-216">The following command sets keys and values using `=`:</span></span>
+<span data-ttu-id="f83a3-206">Następujące polecenie ustawia klucze i wartości przy użyciu `=` :</span><span class="sxs-lookup"><span data-stu-id="f83a3-206">The following command sets keys and values using `=`:</span></span>
 
 ```dotnetcli
 dotnet run MyKey="My key from command line" Position:Title=Cmd Position:Name=Cmd_Rick
 ```
 
-<span data-ttu-id="32987-217">Następujące polecenie ustawia klucze i wartości przy użyciu `/`:</span><span class="sxs-lookup"><span data-stu-id="32987-217">The following command sets keys and values using `/`:</span></span>
+<span data-ttu-id="f83a3-207">Następujące polecenie ustawia klucze i wartości przy użyciu `/` :</span><span class="sxs-lookup"><span data-stu-id="f83a3-207">The following command sets keys and values using `/`:</span></span>
 
 ```dotnetcli
 dotnet run /MyKey "Using /" /Position:Title=Cmd_ /Position:Name=Cmd_Rick
 ```
 
-<span data-ttu-id="32987-218">Następujące polecenie ustawia klucze i wartości przy użyciu `--`:</span><span class="sxs-lookup"><span data-stu-id="32987-218">The following command sets keys and values using `--`:</span></span>
+<span data-ttu-id="f83a3-208">Następujące polecenie ustawia klucze i wartości przy użyciu `--` :</span><span class="sxs-lookup"><span data-stu-id="f83a3-208">The following command sets keys and values using `--`:</span></span>
 
 ```dotnetcli
 dotnet run --MyKey "Using --" --Position:Title=Cmd-- --Position:Name=Cmd--Rick
 ```
 
-<span data-ttu-id="32987-219">Wartość klucza:</span><span class="sxs-lookup"><span data-stu-id="32987-219">The key value:</span></span>
+<span data-ttu-id="f83a3-209">Wartość klucza:</span><span class="sxs-lookup"><span data-stu-id="f83a3-209">The key value:</span></span>
 
-* <span data-ttu-id="32987-220">Musi być `=`zgodna lub musi mieć prefiks `--` lub `/` , gdy wartość znajduje się w miejscu.</span><span class="sxs-lookup"><span data-stu-id="32987-220">Must follow `=`, or the key must have a prefix of `--` or `/` when the value follows a space.</span></span>
-* <span data-ttu-id="32987-221">Nie jest wymagane `=` , jeśli jest używany.</span><span class="sxs-lookup"><span data-stu-id="32987-221">Isn't required if `=` is used.</span></span> <span data-ttu-id="32987-222">Na przykład `MySetting=`.</span><span class="sxs-lookup"><span data-stu-id="32987-222">For example, `MySetting=`.</span></span>
+* <span data-ttu-id="f83a3-210">Musi `=` być zgodna lub musi mieć prefiks lub, gdy wartość znajduje się w `--` `/` miejscu.</span><span class="sxs-lookup"><span data-stu-id="f83a3-210">Must follow `=`, or the key must have a prefix of `--` or `/` when the value follows a space.</span></span>
+* <span data-ttu-id="f83a3-211">Nie jest wymagane, jeśli `=` jest używany.</span><span class="sxs-lookup"><span data-stu-id="f83a3-211">Isn't required if `=` is used.</span></span> <span data-ttu-id="f83a3-212">Na przykład `MySetting=`.</span><span class="sxs-lookup"><span data-stu-id="f83a3-212">For example, `MySetting=`.</span></span>
 
-<span data-ttu-id="32987-223">W tym samym poleceniu nie należy mieszać par klucz-wartość argumentu wiersza polecenia, które `=` są używane z parami klucz-wartość, które używają spacji.</span><span class="sxs-lookup"><span data-stu-id="32987-223">Within the same command, don't mix command-line argument key-value pairs that use `=` with key-value pairs that use a space.</span></span>
+<span data-ttu-id="f83a3-213">W tym samym poleceniu nie należy mieszać par klucz-wartość argumentu wiersza polecenia, które są używane `=` z parami klucz-wartość, które używają spacji.</span><span class="sxs-lookup"><span data-stu-id="f83a3-213">Within the same command, don't mix command-line argument key-value pairs that use `=` with key-value pairs that use a space.</span></span>
 
-### <a name="switch-mappings"></a><span data-ttu-id="32987-224">Mapowanie przełączników</span><span class="sxs-lookup"><span data-stu-id="32987-224">Switch mappings</span></span>
+### <a name="switch-mappings"></a><span data-ttu-id="f83a3-214">Mapowanie przełączników</span><span class="sxs-lookup"><span data-stu-id="f83a3-214">Switch mappings</span></span>
 
-<span data-ttu-id="32987-225">Mapowania przełączników Zezwalaj na logikę zamiany nazwy **klucza** .</span><span class="sxs-lookup"><span data-stu-id="32987-225">Switch mappings allow **key** name replacement logic.</span></span> <span data-ttu-id="32987-226">Udostępnienie słownika przemieszczenia przełączników w <xref:Microsoft.Extensions.Configuration.CommandLineConfigurationExtensions.AddCommandLine*> metodzie.</span><span class="sxs-lookup"><span data-stu-id="32987-226">Provide a dictionary of switch replacements to the <xref:Microsoft.Extensions.Configuration.CommandLineConfigurationExtensions.AddCommandLine*> method.</span></span>
+<span data-ttu-id="f83a3-215">Mapowania przełączników Zezwalaj na logikę zamiany nazwy **klucza** .</span><span class="sxs-lookup"><span data-stu-id="f83a3-215">Switch mappings allow **key** name replacement logic.</span></span> <span data-ttu-id="f83a3-216">Udostępnienie słownika przemieszczenia przełączników w <xref:Microsoft.Extensions.Configuration.CommandLineConfigurationExtensions.AddCommandLine*> metodzie.</span><span class="sxs-lookup"><span data-stu-id="f83a3-216">Provide a dictionary of switch replacements to the <xref:Microsoft.Extensions.Configuration.CommandLineConfigurationExtensions.AddCommandLine*> method.</span></span>
 
-<span data-ttu-id="32987-227">Gdy jest używany słownik mapowania przełączników, słownik jest sprawdzany dla klucza, który pasuje do klucza dostarczonego przez argument wiersza polecenia.</span><span class="sxs-lookup"><span data-stu-id="32987-227">When the switch mappings dictionary is used, the dictionary is checked for a key that matches the key provided by a command-line argument.</span></span> <span data-ttu-id="32987-228">Jeśli klucz wiersza polecenia zostanie znaleziony w słowniku, wartość słownika zostanie przeniesiona z powrotem, aby ustawić parę klucz-wartość w konfiguracji aplikacji.</span><span class="sxs-lookup"><span data-stu-id="32987-228">If the command-line key is found in the dictionary, the dictionary value is passed back to set the key-value pair into the app's configuration.</span></span> <span data-ttu-id="32987-229">Mapowanie przełącznika jest wymagane dla każdego klucza wiersza polecenia poprzedzonego pojedynczą kreską (`-`).</span><span class="sxs-lookup"><span data-stu-id="32987-229">A switch mapping is required for any command-line key prefixed with a single dash (`-`).</span></span>
+<span data-ttu-id="f83a3-217">Gdy jest używany słownik mapowania przełączników, słownik jest sprawdzany dla klucza, który pasuje do klucza dostarczonego przez argument wiersza polecenia.</span><span class="sxs-lookup"><span data-stu-id="f83a3-217">When the switch mappings dictionary is used, the dictionary is checked for a key that matches the key provided by a command-line argument.</span></span> <span data-ttu-id="f83a3-218">Jeśli klucz wiersza polecenia zostanie znaleziony w słowniku, wartość słownika zostanie przeniesiona z powrotem, aby ustawić parę klucz-wartość w konfiguracji aplikacji.</span><span class="sxs-lookup"><span data-stu-id="f83a3-218">If the command-line key is found in the dictionary, the dictionary value is passed back to set the key-value pair into the app's configuration.</span></span> <span data-ttu-id="f83a3-219">Mapowanie przełącznika jest wymagane dla każdego klucza wiersza polecenia poprzedzonego pojedynczą kreską ( `-` ).</span><span class="sxs-lookup"><span data-stu-id="f83a3-219">A switch mapping is required for any command-line key prefixed with a single dash (`-`).</span></span>
 
-<span data-ttu-id="32987-230">Przełącz reguły klucza słownika mapowania:</span><span class="sxs-lookup"><span data-stu-id="32987-230">Switch mappings dictionary key rules:</span></span>
+<span data-ttu-id="f83a3-220">Przełącz reguły klucza słownika mapowania:</span><span class="sxs-lookup"><span data-stu-id="f83a3-220">Switch mappings dictionary key rules:</span></span>
 
-* <span data-ttu-id="32987-231">Przełączniki muszą zaczynać `-` się `--`od lub.</span><span class="sxs-lookup"><span data-stu-id="32987-231">Switches must start with `-` or `--`.</span></span>
-* <span data-ttu-id="32987-232">Słownik mapowania przełącznika nie może zawierać zduplikowanych kluczy.</span><span class="sxs-lookup"><span data-stu-id="32987-232">The switch mappings dictionary must not contain duplicate keys.</span></span>
+* <span data-ttu-id="f83a3-221">Przełączniki muszą zaczynać się od `-` lub `--` .</span><span class="sxs-lookup"><span data-stu-id="f83a3-221">Switches must start with `-` or `--`.</span></span>
+* <span data-ttu-id="f83a3-222">Słownik mapowania przełącznika nie może zawierać zduplikowanych kluczy.</span><span class="sxs-lookup"><span data-stu-id="f83a3-222">The switch mappings dictionary must not contain duplicate keys.</span></span>
 
-<span data-ttu-id="32987-233">Aby użyć słownika mapowania przełączników, przekaż go do wywołania `AddCommandLine`:</span><span class="sxs-lookup"><span data-stu-id="32987-233">To use a switch mappings dictionary, pass it into the call to `AddCommandLine`:</span></span>
+<span data-ttu-id="f83a3-223">Aby użyć słownika mapowania przełączników, przekaż go do wywołania `AddCommandLine` :</span><span class="sxs-lookup"><span data-stu-id="f83a3-223">To use a switch mappings dictionary, pass it into the call to `AddCommandLine`:</span></span>
 
 [!code-csharp[](index/samples/3.x/ConfigSample/ProgramSwitch.cs?name=snippet&highlight=10-18,23)]
 
-<span data-ttu-id="32987-234">Poniższy kod przedstawia wartości kluczy zastępowanych kluczy:</span><span class="sxs-lookup"><span data-stu-id="32987-234">The following code shows the key values for the replaced keys:</span></span>
+<span data-ttu-id="f83a3-224">Poniższy kod przedstawia wartości kluczy zastępowanych kluczy:</span><span class="sxs-lookup"><span data-stu-id="f83a3-224">The following code shows the key values for the replaced keys:</span></span>
 
 [!code-csharp[](index/samples/3.x/ConfigSample/Pages/Test3.cshtml.cs?name=snippet)]
 
-<span data-ttu-id="32987-235">Uruchom następujące polecenie, aby przetestować zastąpienie klucza:</span><span class="sxs-lookup"><span data-stu-id="32987-235">Run the following command to test the key replacement:</span></span>
+<span data-ttu-id="f83a3-225">Uruchom następujące polecenie, aby przetestować zastąpienie klucza:</span><span class="sxs-lookup"><span data-stu-id="f83a3-225">Run the following command to test the key replacement:</span></span>
 
 ```dotnetcli
 dotnet run -k1=value1 -k2 value2 --alt3=value2 /alt4=value3 --alt5 value5 /alt6 value6
 ```
 
-<span data-ttu-id="32987-236">Uwaga: obecnie nie `=` można użyć, aby ustawić wartości zastępcze klucza za pomocą pojedynczej `-`kreski.</span><span class="sxs-lookup"><span data-stu-id="32987-236">Note: Currently, `=` cannot be used to set key-replacement values with a single dash `-`.</span></span> <span data-ttu-id="32987-237">Zobacz [ten problem](https://github.com/dotnet/extensions/issues/3059)w serwisie GitHub.</span><span class="sxs-lookup"><span data-stu-id="32987-237">See [this GitHub issue](https://github.com/dotnet/extensions/issues/3059).</span></span>
+<span data-ttu-id="f83a3-226">Uwaga: obecnie `=` nie można użyć, aby ustawić wartości zastępcze klucza za pomocą pojedynczej kreski `-` .</span><span class="sxs-lookup"><span data-stu-id="f83a3-226">Note: Currently, `=` cannot be used to set key-replacement values with a single dash `-`.</span></span> <span data-ttu-id="f83a3-227">Zobacz [ten problem](https://github.com/dotnet/extensions/issues/3059)w serwisie GitHub.</span><span class="sxs-lookup"><span data-stu-id="f83a3-227">See [this GitHub issue](https://github.com/dotnet/extensions/issues/3059).</span></span>
 
-<span data-ttu-id="32987-238">Następujące polecenie działa w celu zastąpienia klucza testowego:</span><span class="sxs-lookup"><span data-stu-id="32987-238">The following command works to test key replacement:</span></span>
+<span data-ttu-id="f83a3-228">Następujące polecenie działa w celu zastąpienia klucza testowego:</span><span class="sxs-lookup"><span data-stu-id="f83a3-228">The following command works to test key replacement:</span></span>
 
 ```dotnetcli
 dotnet run -k1 value1 -k2 value2 --alt3=value2 /alt4=value3 --alt5 value5 /alt6 value6
 ```
 
-<span data-ttu-id="32987-239">W przypadku aplikacji korzystających z mapowań przełączników wywołanie `CreateDefaultBuilder` nie powinno przekazywać argumentów.</span><span class="sxs-lookup"><span data-stu-id="32987-239">For apps that use switch mappings, the call to `CreateDefaultBuilder` shouldn't pass arguments.</span></span> <span data-ttu-id="32987-240">Wywołanie metody nie obejmuje zamapowanych przełączników i nie ma sposobu przekazywania słownika mapowania przełącznika do `CreateDefaultBuilder` `CreateDefaultBuilder` `AddCommandLine`</span><span class="sxs-lookup"><span data-stu-id="32987-240">The `CreateDefaultBuilder` method's `AddCommandLine` call doesn't include mapped switches, and there's no way to pass the switch-mapping dictionary to `CreateDefaultBuilder`.</span></span> <span data-ttu-id="32987-241">Rozwiązanie nie przekazuje argumentów do `CreateDefaultBuilder` , ale zamiast tego zezwala metodzie `ConfigurationBuilder` metody `AddCommandLine` na przetwarzanie zarówno argumentów, jak i słownika mapowania przełącznika.</span><span class="sxs-lookup"><span data-stu-id="32987-241">The solution isn't to pass the arguments to `CreateDefaultBuilder` but instead to allow the `ConfigurationBuilder` method's `AddCommandLine` method to process both the arguments and the switch-mapping dictionary.</span></span>
+<span data-ttu-id="f83a3-229">W przypadku aplikacji korzystających z mapowań przełączników wywołanie nie `CreateDefaultBuilder` powinno przekazywać argumentów.</span><span class="sxs-lookup"><span data-stu-id="f83a3-229">For apps that use switch mappings, the call to `CreateDefaultBuilder` shouldn't pass arguments.</span></span> <span data-ttu-id="f83a3-230">`CreateDefaultBuilder` `AddCommandLine` Wywołanie metody nie obejmuje zamapowanych przełączników i nie ma sposobu przekazywania słownika mapowania przełącznika do `CreateDefaultBuilder` .</span><span class="sxs-lookup"><span data-stu-id="f83a3-230">The `CreateDefaultBuilder` method's `AddCommandLine` call doesn't include mapped switches, and there's no way to pass the switch-mapping dictionary to `CreateDefaultBuilder`.</span></span> <span data-ttu-id="f83a3-231">Rozwiązanie nie przekazuje argumentów do, `CreateDefaultBuilder` ale zamiast tego zezwala metodzie `ConfigurationBuilder` metody `AddCommandLine` na przetwarzanie zarówno argumentów, jak i słownika mapowania przełącznika.</span><span class="sxs-lookup"><span data-stu-id="f83a3-231">The solution isn't to pass the arguments to `CreateDefaultBuilder` but instead to allow the `ConfigurationBuilder` method's `AddCommandLine` method to process both the arguments and the switch-mapping dictionary.</span></span>
 
-## <a name="hierarchical-configuration-data"></a><span data-ttu-id="32987-242">Hierarchiczne dane konfiguracji</span><span class="sxs-lookup"><span data-stu-id="32987-242">Hierarchical configuration data</span></span>
+## <a name="hierarchical-configuration-data"></a><span data-ttu-id="f83a3-232">Hierarchiczne dane konfiguracji</span><span class="sxs-lookup"><span data-stu-id="f83a3-232">Hierarchical configuration data</span></span>
 
-<span data-ttu-id="32987-243">Interfejs API konfiguracji odczytuje hierarchiczne dane konfiguracji przez spłaszczonie danych hierarchicznych przy użyciu ogranicznika w kluczach konfiguracji.</span><span class="sxs-lookup"><span data-stu-id="32987-243">The Configuration API reads hierarchical configuration data by flattening the hierarchical data with the use of a delimiter in the configuration keys.</span></span>
+<span data-ttu-id="f83a3-233">Interfejs API konfiguracji odczytuje hierarchiczne dane konfiguracji przez spłaszczonie danych hierarchicznych przy użyciu ogranicznika w kluczach konfiguracji.</span><span class="sxs-lookup"><span data-stu-id="f83a3-233">The Configuration API reads hierarchical configuration data by flattening the hierarchical data with the use of a delimiter in the configuration keys.</span></span>
 
-<span data-ttu-id="32987-244">[Pobieranie próbek](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) zawiera następujący plik *appSettings. JSON* :</span><span class="sxs-lookup"><span data-stu-id="32987-244">The [sample download](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) contains the following  *appsettings.json* file:</span></span>
+<span data-ttu-id="f83a3-234">[Pobieranie próbek](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) zawiera następujący plik *appSettings. JSON* :</span><span class="sxs-lookup"><span data-stu-id="f83a3-234">The [sample download](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) contains the following  *appsettings.json* file:</span></span>
 
 [!code-json[](index/samples/3.x/ConfigSample/appsettings.json)]
 
-<span data-ttu-id="32987-245">Poniższy kod z [pobranego przykładu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) wyświetla kilka ustawień konfiguracji:</span><span class="sxs-lookup"><span data-stu-id="32987-245">The following code from the [sample download](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) displays several of the configurations settings:</span></span>
+<span data-ttu-id="f83a3-235">Poniższy kod z [pobranego przykładu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) wyświetla kilka ustawień konfiguracji:</span><span class="sxs-lookup"><span data-stu-id="f83a3-235">The following code from the [sample download](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) displays several of the configurations settings:</span></span>
 
 [!code-csharp[](index/samples/3.x/ConfigSample/Pages/Test.cshtml.cs?name=snippet)]
 
-<span data-ttu-id="32987-246">Preferowanym sposobem odczytywania hierarchicznych danych konfiguracji jest użycie wzorca opcji.</span><span class="sxs-lookup"><span data-stu-id="32987-246">The preferred way to read hierarchical configuration data is using the options pattern.</span></span> <span data-ttu-id="32987-247">Aby uzyskać więcej informacji, zobacz [Powiązywanie hierarchicznych danych konfiguracji](#optpat) w tym dokumencie.</span><span class="sxs-lookup"><span data-stu-id="32987-247">For more information, see [Bind hierarchical configuration data](#optpat) in this document.</span></span>
+<span data-ttu-id="f83a3-236">Preferowanym sposobem odczytywania hierarchicznych danych konfiguracji jest użycie wzorca opcji.</span><span class="sxs-lookup"><span data-stu-id="f83a3-236">The preferred way to read hierarchical configuration data is using the options pattern.</span></span> <span data-ttu-id="f83a3-237">Aby uzyskać więcej informacji, zobacz [Powiązywanie hierarchicznych danych konfiguracji](#optpat) w tym dokumencie.</span><span class="sxs-lookup"><span data-stu-id="f83a3-237">For more information, see [Bind hierarchical configuration data](#optpat) in this document.</span></span>
 
-<span data-ttu-id="32987-248"><xref:Microsoft.Extensions.Configuration.ConfigurationSection.GetSection*>metody <xref:Microsoft.Extensions.Configuration.IConfiguration.GetChildren*> i są dostępne do izolowania sekcji i elementów podrzędnych sekcji w danych konfiguracyjnych.</span><span class="sxs-lookup"><span data-stu-id="32987-248"><xref:Microsoft.Extensions.Configuration.ConfigurationSection.GetSection*> and <xref:Microsoft.Extensions.Configuration.IConfiguration.GetChildren*> methods are available to isolate sections and children of a section in the configuration data.</span></span> <span data-ttu-id="32987-249">Te metody są opisane w dalszej [części GetSection, GetChildren i EXISTS](#getsection).</span><span class="sxs-lookup"><span data-stu-id="32987-249">These methods are described later in [GetSection, GetChildren, and Exists](#getsection).</span></span>
+<span data-ttu-id="f83a3-238"><xref:Microsoft.Extensions.Configuration.ConfigurationSection.GetSection*><xref:Microsoft.Extensions.Configuration.IConfiguration.GetChildren*>metody i są dostępne do izolowania sekcji i elementów podrzędnych sekcji w danych konfiguracyjnych.</span><span class="sxs-lookup"><span data-stu-id="f83a3-238"><xref:Microsoft.Extensions.Configuration.ConfigurationSection.GetSection*> and <xref:Microsoft.Extensions.Configuration.IConfiguration.GetChildren*> methods are available to isolate sections and children of a section in the configuration data.</span></span> <span data-ttu-id="f83a3-239">Te metody są opisane w dalszej [części GetSection, GetChildren i EXISTS](#getsection).</span><span class="sxs-lookup"><span data-stu-id="f83a3-239">These methods are described later in [GetSection, GetChildren, and Exists](#getsection).</span></span>
 
 <!--
 [Azure Key Vault configuration provider](xref:security/key-vault-configuration) implement change detection.
 -->
 
-## <a name="configuration-keys-and-values"></a><span data-ttu-id="32987-250">Klucze i wartości konfiguracji</span><span class="sxs-lookup"><span data-stu-id="32987-250">Configuration keys and values</span></span>
+## <a name="configuration-keys-and-values"></a><span data-ttu-id="f83a3-240">Klucze i wartości konfiguracji</span><span class="sxs-lookup"><span data-stu-id="f83a3-240">Configuration keys and values</span></span>
 
-<span data-ttu-id="32987-251">Klucze konfiguracji:</span><span class="sxs-lookup"><span data-stu-id="32987-251">Configuration keys:</span></span>
+<span data-ttu-id="f83a3-241">Klucze konfiguracji:</span><span class="sxs-lookup"><span data-stu-id="f83a3-241">Configuration keys:</span></span>
 
-* <span data-ttu-id="32987-252">Bez uwzględniania wielkości liter.</span><span class="sxs-lookup"><span data-stu-id="32987-252">Are case-insensitive.</span></span> <span data-ttu-id="32987-253">Na przykład `ConnectionString` i `connectionstring` są traktowane jako równoważne klucze.</span><span class="sxs-lookup"><span data-stu-id="32987-253">For example, `ConnectionString` and `connectionstring` are treated as equivalent keys.</span></span>
-* <span data-ttu-id="32987-254">Jeśli klucz i wartość są ustawione w więcej niż jednym dostawcy konfiguracji, zostanie użyta wartość z ostatniego dodawanego dostawcy.</span><span class="sxs-lookup"><span data-stu-id="32987-254">If a key and value is set in more than one configuration providers, the value from the last provider added is used.</span></span> <span data-ttu-id="32987-255">Aby uzyskać więcej informacji, zobacz [Konfiguracja domyślna](#default).</span><span class="sxs-lookup"><span data-stu-id="32987-255">For more information, see [Default configuration](#default).</span></span>
-* <span data-ttu-id="32987-256">Klucze hierarchiczne</span><span class="sxs-lookup"><span data-stu-id="32987-256">Hierarchical keys</span></span>
-  * <span data-ttu-id="32987-257">W interfejsie API konfiguracji, separator dwukropek`:`() działa na wszystkich platformach.</span><span class="sxs-lookup"><span data-stu-id="32987-257">Within the Configuration API, a colon separator (`:`) works on all platforms.</span></span>
-  * <span data-ttu-id="32987-258">W zmiennych środowiskowych separator dwukropek może nie zadziałał na wszystkich platformach.</span><span class="sxs-lookup"><span data-stu-id="32987-258">In environment variables, a colon separator may not work on all platforms.</span></span> <span data-ttu-id="32987-259">Podwójne podkreślenie, `__`,, jest obsługiwane przez wszystkie platformy i jest automatycznie konwertowane na dwukropek `:`.</span><span class="sxs-lookup"><span data-stu-id="32987-259">A double underscore, `__`, is supported by all platforms and is automatically converted into a colon `:`.</span></span>
-  * <span data-ttu-id="32987-260">W Azure Key Vault klucze hierarchiczne używają `--` jako separatora.</span><span class="sxs-lookup"><span data-stu-id="32987-260">In Azure Key Vault, hierarchical keys use `--` as a separator.</span></span> <span data-ttu-id="32987-261">[Dostawca konfiguracji Azure Key Vault](xref:security/key-vault-configuration) automatycznie zastępuje `--` przy użyciu `:` po załadowaniu wpisów tajnych do konfiguracji aplikacji.</span><span class="sxs-lookup"><span data-stu-id="32987-261">The [Azure Key Vault configuration provider](xref:security/key-vault-configuration) automatically replaces `--` with a `:` when the secrets are loaded into the app's configuration.</span></span>
-* <span data-ttu-id="32987-262"><xref:Microsoft.Extensions.Configuration.ConfigurationBinder> Obsługuje tablice powiązań z obiektami przy użyciu indeksów tablicowych w kluczach konfiguracji.</span><span class="sxs-lookup"><span data-stu-id="32987-262">The <xref:Microsoft.Extensions.Configuration.ConfigurationBinder> supports binding arrays to objects using array indices in configuration keys.</span></span> <span data-ttu-id="32987-263">Powiązanie tablicowe zostało opisane w sekcji [Powiązywanie tablicy z klasą](#boa) .</span><span class="sxs-lookup"><span data-stu-id="32987-263">Array binding is described in the [Bind an array to a class](#boa) section.</span></span>
+* <span data-ttu-id="f83a3-242">Bez uwzględniania wielkości liter.</span><span class="sxs-lookup"><span data-stu-id="f83a3-242">Are case-insensitive.</span></span> <span data-ttu-id="f83a3-243">Na przykład `ConnectionString` i `connectionstring` są traktowane jako równoważne klucze.</span><span class="sxs-lookup"><span data-stu-id="f83a3-243">For example, `ConnectionString` and `connectionstring` are treated as equivalent keys.</span></span>
+* <span data-ttu-id="f83a3-244">Jeśli klucz i wartość są ustawione w więcej niż jednym dostawcy konfiguracji, zostanie użyta wartość z ostatniego dodawanego dostawcy.</span><span class="sxs-lookup"><span data-stu-id="f83a3-244">If a key and value is set in more than one configuration providers, the value from the last provider added is used.</span></span> <span data-ttu-id="f83a3-245">Aby uzyskać więcej informacji, zobacz [Konfiguracja domyślna](#default).</span><span class="sxs-lookup"><span data-stu-id="f83a3-245">For more information, see [Default configuration](#default).</span></span>
+* <span data-ttu-id="f83a3-246">Klucze hierarchiczne</span><span class="sxs-lookup"><span data-stu-id="f83a3-246">Hierarchical keys</span></span>
+  * <span data-ttu-id="f83a3-247">W interfejsie API konfiguracji, separator dwukropek ( `:` ) działa na wszystkich platformach.</span><span class="sxs-lookup"><span data-stu-id="f83a3-247">Within the Configuration API, a colon separator (`:`) works on all platforms.</span></span>
+  * <span data-ttu-id="f83a3-248">W zmiennych środowiskowych separator dwukropek może nie zadziałał na wszystkich platformach.</span><span class="sxs-lookup"><span data-stu-id="f83a3-248">In environment variables, a colon separator may not work on all platforms.</span></span> <span data-ttu-id="f83a3-249">Podwójne podkreślenie, `__` ,, jest obsługiwane przez wszystkie platformy i jest automatycznie konwertowane na dwukropek `:` .</span><span class="sxs-lookup"><span data-stu-id="f83a3-249">A double underscore, `__`, is supported by all platforms and is automatically converted into a colon `:`.</span></span>
+  * <span data-ttu-id="f83a3-250">W Azure Key Vault klucze hierarchiczne używają `--` jako separatora.</span><span class="sxs-lookup"><span data-stu-id="f83a3-250">In Azure Key Vault, hierarchical keys use `--` as a separator.</span></span> <span data-ttu-id="f83a3-251">[Dostawca konfiguracji Azure Key Vault](xref:security/key-vault-configuration) automatycznie zastępuje `--` przy użyciu `:` po załadowaniu wpisów tajnych do konfiguracji aplikacji.</span><span class="sxs-lookup"><span data-stu-id="f83a3-251">The [Azure Key Vault configuration provider](xref:security/key-vault-configuration) automatically replaces `--` with a `:` when the secrets are loaded into the app's configuration.</span></span>
+* <span data-ttu-id="f83a3-252"><xref:Microsoft.Extensions.Configuration.ConfigurationBinder>Obsługuje tablice powiązań z obiektami przy użyciu indeksów tablicowych w kluczach konfiguracji.</span><span class="sxs-lookup"><span data-stu-id="f83a3-252">The <xref:Microsoft.Extensions.Configuration.ConfigurationBinder> supports binding arrays to objects using array indices in configuration keys.</span></span> <span data-ttu-id="f83a3-253">Powiązanie tablicowe zostało opisane w sekcji [Powiązywanie tablicy z klasą](#boa) .</span><span class="sxs-lookup"><span data-stu-id="f83a3-253">Array binding is described in the [Bind an array to a class](#boa) section.</span></span>
 
-<span data-ttu-id="32987-264">Wartości konfiguracji:</span><span class="sxs-lookup"><span data-stu-id="32987-264">Configuration values:</span></span>
+<span data-ttu-id="f83a3-254">Wartości konfiguracji:</span><span class="sxs-lookup"><span data-stu-id="f83a3-254">Configuration values:</span></span>
 
-* <span data-ttu-id="32987-265">Są ciągami.</span><span class="sxs-lookup"><span data-stu-id="32987-265">Are strings.</span></span>
-* <span data-ttu-id="32987-266">Wartości null nie można przechowywać w konfiguracji ani powiązana z obiektami.</span><span class="sxs-lookup"><span data-stu-id="32987-266">Null values can't be stored in configuration or bound to objects.</span></span>
+* <span data-ttu-id="f83a3-255">Są ciągami.</span><span class="sxs-lookup"><span data-stu-id="f83a3-255">Are strings.</span></span>
+* <span data-ttu-id="f83a3-256">Wartości null nie można przechowywać w konfiguracji ani powiązana z obiektami.</span><span class="sxs-lookup"><span data-stu-id="f83a3-256">Null values can't be stored in configuration or bound to objects.</span></span>
 
 <a name="cp"></a>
 
-## <a name="configuration-providers"></a><span data-ttu-id="32987-267">Dostawcy konfiguracji</span><span class="sxs-lookup"><span data-stu-id="32987-267">Configuration providers</span></span>
+## <a name="configuration-providers"></a><span data-ttu-id="f83a3-257">Dostawcy konfiguracji</span><span class="sxs-lookup"><span data-stu-id="f83a3-257">Configuration providers</span></span>
 
-<span data-ttu-id="32987-268">W poniższej tabeli przedstawiono dostawców konfiguracji dostępnych do ASP.NET Core aplikacji.</span><span class="sxs-lookup"><span data-stu-id="32987-268">The following table shows the configuration providers available to ASP.NET Core apps.</span></span>
+<span data-ttu-id="f83a3-258">W poniższej tabeli przedstawiono dostawców konfiguracji dostępnych do ASP.NET Core aplikacji.</span><span class="sxs-lookup"><span data-stu-id="f83a3-258">The following table shows the configuration providers available to ASP.NET Core apps.</span></span>
 
-| <span data-ttu-id="32987-269">Dostawca</span><span class="sxs-lookup"><span data-stu-id="32987-269">Provider</span></span> | <span data-ttu-id="32987-270">Zapewnia konfigurację z</span><span class="sxs-lookup"><span data-stu-id="32987-270">Provides configuration from</span></span> |
-| -------- | ----------------------------------- |
-| [<span data-ttu-id="32987-271">Dostawca konfiguracji Azure Key Vault</span><span class="sxs-lookup"><span data-stu-id="32987-271">Azure Key Vault configuration provider</span></span>](xref:security/key-vault-configuration) | <span data-ttu-id="32987-272">W usłudze Azure Key Vault</span><span class="sxs-lookup"><span data-stu-id="32987-272">Azure Key Vault</span></span> |
-| [<span data-ttu-id="32987-273">Dostawca konfiguracji aplikacji platformy Azure</span><span class="sxs-lookup"><span data-stu-id="32987-273">Azure App configuration provider</span></span>](/azure/azure-app-configuration/quickstart-aspnet-core-app) | <span data-ttu-id="32987-274">Azure App Configuration</span><span class="sxs-lookup"><span data-stu-id="32987-274">Azure App Configuration</span></span> |
-| [<span data-ttu-id="32987-275">Dostawca konfiguracji wiersza polecenia</span><span class="sxs-lookup"><span data-stu-id="32987-275">Command-line configuration provider</span></span>](#clcp) | <span data-ttu-id="32987-276">Parametry wiersza polecenia</span><span class="sxs-lookup"><span data-stu-id="32987-276">Command-line parameters</span></span> |
-| [<span data-ttu-id="32987-277">Niestandardowy dostawca konfiguracji</span><span class="sxs-lookup"><span data-stu-id="32987-277">Custom configuration provider</span></span>](#custom-configuration-provider) | <span data-ttu-id="32987-278">Źródło niestandardowe</span><span class="sxs-lookup"><span data-stu-id="32987-278">Custom source</span></span> |
-| [<span data-ttu-id="32987-279">Dostawca konfiguracji zmiennych środowiskowych</span><span class="sxs-lookup"><span data-stu-id="32987-279">Environment Variables configuration provider</span></span>](#evcp) | <span data-ttu-id="32987-280">Zmienne środowiskowe</span><span class="sxs-lookup"><span data-stu-id="32987-280">Environment variables</span></span> |
-| [<span data-ttu-id="32987-281">Dostawca konfiguracji plików</span><span class="sxs-lookup"><span data-stu-id="32987-281">File configuration provider</span></span>](#file-configuration-provider) | <span data-ttu-id="32987-282">Pliki INI, JSON i XML</span><span class="sxs-lookup"><span data-stu-id="32987-282">INI, JSON, and XML files</span></span> |
-| [<span data-ttu-id="32987-283">Dostawca konfiguracji klucza dla plików</span><span class="sxs-lookup"><span data-stu-id="32987-283">Key-per-file configuration provider</span></span>](#key-per-file-configuration-provider) | <span data-ttu-id="32987-284">Pliki katalogu</span><span class="sxs-lookup"><span data-stu-id="32987-284">Directory files</span></span> |
-| [<span data-ttu-id="32987-285">Dostawca konfiguracji pamięci</span><span class="sxs-lookup"><span data-stu-id="32987-285">Memory configuration provider</span></span>](#memory-configuration-provider) | <span data-ttu-id="32987-286">Kolekcje w pamięci</span><span class="sxs-lookup"><span data-stu-id="32987-286">In-memory collections</span></span> |
-| [<span data-ttu-id="32987-287">Menedżer wpisów tajnych</span><span class="sxs-lookup"><span data-stu-id="32987-287">Secret Manager</span></span>](xref:security/app-secrets)  | <span data-ttu-id="32987-288">Plik w katalogu profilu użytkownika</span><span class="sxs-lookup"><span data-stu-id="32987-288">File in the user profile directory</span></span> |
+| <span data-ttu-id="f83a3-259">Dostawca</span><span class="sxs-lookup"><span data-stu-id="f83a3-259">Provider</span></span> | <span data-ttu-id="f83a3-260">Zapewnia konfigurację z</span><span class="sxs-lookup"><span data-stu-id="f83a3-260">Provides configuration from</span></span> |
+| ---
+<span data-ttu-id="f83a3-261">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-261">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-262">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-262">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-263">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-263">'Identity'</span></span>
+- <span data-ttu-id="f83a3-264">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-264">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-265">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-265">'Razor'</span></span>
+- <span data-ttu-id="f83a3-266">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-266">'SignalR' uid:</span></span> 
 
-<span data-ttu-id="32987-289">Źródła konfiguracji są odczytywane w kolejności, w jakiej zostały określone dostawcy konfiguracji.</span><span class="sxs-lookup"><span data-stu-id="32987-289">Configuration sources are read in the order that their configuration providers are specified.</span></span> <span data-ttu-id="32987-290">Zamów dostawców konfiguracji w kodzie, aby odpowiadały priorytetom źródłowych źródeł konfiguracji wymaganych przez aplikację.</span><span class="sxs-lookup"><span data-stu-id="32987-290">Order configuration providers in code to suit the priorities for the underlying configuration sources that the app requires.</span></span>
+-
+<span data-ttu-id="f83a3-267">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-267">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-268">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-268">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-269">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-269">'Identity'</span></span>
+- <span data-ttu-id="f83a3-270">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-270">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-271">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-271">'Razor'</span></span>
+- <span data-ttu-id="f83a3-272">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-272">'SignalR' uid:</span></span> 
 
-<span data-ttu-id="32987-291">Typową sekwencją dostawców konfiguracji jest:</span><span class="sxs-lookup"><span data-stu-id="32987-291">A typical sequence of configuration providers is:</span></span>
+<span data-ttu-id="f83a3-273">---- | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-273">---- | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-274">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-274">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-275">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-275">'Identity'</span></span>
+- <span data-ttu-id="f83a3-276">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-276">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-277">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-277">'Razor'</span></span>
+- <span data-ttu-id="f83a3-278">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-278">'SignalR' uid:</span></span> 
 
-1. <span data-ttu-id="32987-292">*appSettings. JSON*</span><span class="sxs-lookup"><span data-stu-id="32987-292">*appsettings.json*</span></span>
-1. <span data-ttu-id="32987-293">*AppSettings*. `Environment`. *kod JSON*</span><span class="sxs-lookup"><span data-stu-id="32987-293">*appsettings*.`Environment`.*json*</span></span>
-1. [<span data-ttu-id="32987-294">Menedżer wpisów tajnych</span><span class="sxs-lookup"><span data-stu-id="32987-294">Secret Manager</span></span>](xref:security/app-secrets)
-1. <span data-ttu-id="32987-295">Zmienne środowiskowe używające [dostawcy konfiguracji zmiennych środowiskowych](#evcp).</span><span class="sxs-lookup"><span data-stu-id="32987-295">Environment variables using the [Environment Variables configuration provider](#evcp).</span></span>
-1. <span data-ttu-id="32987-296">Argumenty wiersza polecenia przy użyciu [dostawcy konfiguracji wiersza polecenia](#command-line-configuration-provider).</span><span class="sxs-lookup"><span data-stu-id="32987-296">Command-line arguments using the [Command-line configuration provider](#command-line-configuration-provider).</span></span>
+-
+<span data-ttu-id="f83a3-279">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-279">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-280">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-280">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-281">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-281">'Identity'</span></span>
+- <span data-ttu-id="f83a3-282">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-282">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-283">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-283">'Razor'</span></span>
+- <span data-ttu-id="f83a3-284">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-284">'SignalR' uid:</span></span> 
 
-<span data-ttu-id="32987-297">Typowym celem jest dodanie dostawcy konfiguracji wiersza polecenia w ciągu kilku dostawców, aby zezwolić na argumenty wiersza polecenia, aby przesłonić konfigurację ustawioną przez innych dostawców.</span><span class="sxs-lookup"><span data-stu-id="32987-297">A common practice is to add the Command-line configuration provider last in a series of providers to allow command-line arguments to override configuration set by the other providers.</span></span>
+-
+<span data-ttu-id="f83a3-285">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-285">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-286">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-286">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-287">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-287">'Identity'</span></span>
+- <span data-ttu-id="f83a3-288">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-288">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-289">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-289">'Razor'</span></span>
+- <span data-ttu-id="f83a3-290">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-290">'SignalR' uid:</span></span> 
 
-<span data-ttu-id="32987-298">Poprzednia sekwencja dostawców jest używana w [konfiguracji domyślnej](#default).</span><span class="sxs-lookup"><span data-stu-id="32987-298">The preceding sequence of providers is used in the [default configuration](#default).</span></span>
+-
+<span data-ttu-id="f83a3-291">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-291">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-292">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-292">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-293">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-293">'Identity'</span></span>
+- <span data-ttu-id="f83a3-294">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-294">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-295">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-295">'Razor'</span></span>
+- <span data-ttu-id="f83a3-296">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-296">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-297">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-297">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-298">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-298">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-299">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-299">'Identity'</span></span>
+- <span data-ttu-id="f83a3-300">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-300">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-301">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-301">'Razor'</span></span>
+- <span data-ttu-id="f83a3-302">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-302">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-303">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-303">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-304">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-304">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-305">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-305">'Identity'</span></span>
+- <span data-ttu-id="f83a3-306">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-306">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-307">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-307">'Razor'</span></span>
+- <span data-ttu-id="f83a3-308">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-308">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-309">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-309">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-310">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-310">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-311">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-311">'Identity'</span></span>
+- <span data-ttu-id="f83a3-312">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-312">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-313">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-313">'Razor'</span></span>
+- <span data-ttu-id="f83a3-314">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-314">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-315">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-315">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-316">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-316">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-317">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-317">'Identity'</span></span>
+- <span data-ttu-id="f83a3-318">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-318">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-319">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-319">'Razor'</span></span>
+- <span data-ttu-id="f83a3-320">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-320">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-321">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-321">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-322">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-322">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-323">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-323">'Identity'</span></span>
+- <span data-ttu-id="f83a3-324">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-324">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-325">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-325">'Razor'</span></span>
+- <span data-ttu-id="f83a3-326">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-326">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-327">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-327">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-328">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-328">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-329">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-329">'Identity'</span></span>
+- <span data-ttu-id="f83a3-330">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-330">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-331">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-331">'Razor'</span></span>
+- <span data-ttu-id="f83a3-332">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-332">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-333">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-333">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-334">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-334">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-335">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-335">'Identity'</span></span>
+- <span data-ttu-id="f83a3-336">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-336">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-337">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-337">'Razor'</span></span>
+- <span data-ttu-id="f83a3-338">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-338">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-339">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-339">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-340">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-340">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-341">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-341">'Identity'</span></span>
+- <span data-ttu-id="f83a3-342">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-342">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-343">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-343">'Razor'</span></span>
+- <span data-ttu-id="f83a3-344">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-344">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-345">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-345">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-346">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-346">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-347">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-347">'Identity'</span></span>
+- <span data-ttu-id="f83a3-348">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-348">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-349">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-349">'Razor'</span></span>
+- <span data-ttu-id="f83a3-350">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-350">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-351">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-351">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-352">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-352">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-353">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-353">'Identity'</span></span>
+- <span data-ttu-id="f83a3-354">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-354">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-355">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-355">'Razor'</span></span>
+- <span data-ttu-id="f83a3-356">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-356">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-357">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-357">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-358">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-358">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-359">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-359">'Identity'</span></span>
+- <span data-ttu-id="f83a3-360">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-360">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-361">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-361">'Razor'</span></span>
+- <span data-ttu-id="f83a3-362">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-362">'SignalR' uid:</span></span> 
+
+<span data-ttu-id="f83a3-363">------------------ | | [Dostawca konfiguracji Azure Key Vault](xref:security/key-vault-configuration) | Azure Key Vault | | [Dostawca konfiguracji aplikacji platformy Azure](/azure/azure-app-configuration/quickstart-aspnet-core-app) | Konfiguracja aplikacji platformy Azure | | [Dostawca konfiguracji wiersza polecenia](#clcp) | Parametry wiersza polecenia | | [Niestandardowy dostawca konfiguracji](#custom-configuration-provider) | Źródło niestandardowe | | [Dostawca konfiguracji zmiennych środowiskowych](#evcp) | Zmienne środowiskowe | | [Dostawca konfiguracji plików](#file-configuration-provider) | Pliki INI, JSON i XML | | [Dostawca konfiguracji klucza dla plików](#key-per-file-configuration-provider) | Pliki katalogu | | [Dostawca konfiguracji pamięci](#memory-configuration-provider) | Kolekcje w pamięci | | [Secret Manager](xref:security/app-secrets) | Plik w katalogu profilu użytkownika |</span><span class="sxs-lookup"><span data-stu-id="f83a3-363">------------------ | | [Azure Key Vault configuration provider](xref:security/key-vault-configuration) | Azure Key Vault | | [Azure App configuration provider](/azure/azure-app-configuration/quickstart-aspnet-core-app) | Azure App Configuration | | [Command-line configuration provider](#clcp) | Command-line parameters | | [Custom configuration provider](#custom-configuration-provider) | Custom source | | [Environment Variables configuration provider](#evcp) | Environment variables | | [File configuration provider](#file-configuration-provider) | INI, JSON, and XML files | | [Key-per-file configuration provider](#key-per-file-configuration-provider) | Directory files | | [Memory configuration provider](#memory-configuration-provider) | In-memory collections | | [Secret Manager](xref:security/app-secrets)  | File in the user profile directory |</span></span>
+
+<span data-ttu-id="f83a3-364">Źródła konfiguracji są odczytywane w kolejności, w jakiej zostały określone dostawcy konfiguracji.</span><span class="sxs-lookup"><span data-stu-id="f83a3-364">Configuration sources are read in the order that their configuration providers are specified.</span></span> <span data-ttu-id="f83a3-365">Zamów dostawców konfiguracji w kodzie, aby odpowiadały priorytetom źródłowych źródeł konfiguracji wymaganych przez aplikację.</span><span class="sxs-lookup"><span data-stu-id="f83a3-365">Order configuration providers in code to suit the priorities for the underlying configuration sources that the app requires.</span></span>
+
+<span data-ttu-id="f83a3-366">Typową sekwencją dostawców konfiguracji jest:</span><span class="sxs-lookup"><span data-stu-id="f83a3-366">A typical sequence of configuration providers is:</span></span>
+
+1. <span data-ttu-id="f83a3-367">*appSettings. JSON*</span><span class="sxs-lookup"><span data-stu-id="f83a3-367">*appsettings.json*</span></span>
+1. <span data-ttu-id="f83a3-368">*AppSettings*. `Environment` . *kod JSON*</span><span class="sxs-lookup"><span data-stu-id="f83a3-368">*appsettings*.`Environment`.*json*</span></span>
+1. [<span data-ttu-id="f83a3-369">Menedżer wpisów tajnych</span><span class="sxs-lookup"><span data-stu-id="f83a3-369">Secret Manager</span></span>](xref:security/app-secrets)
+1. <span data-ttu-id="f83a3-370">Zmienne środowiskowe używające [dostawcy konfiguracji zmiennych środowiskowych](#evcp).</span><span class="sxs-lookup"><span data-stu-id="f83a3-370">Environment variables using the [Environment Variables configuration provider](#evcp).</span></span>
+1. <span data-ttu-id="f83a3-371">Argumenty wiersza polecenia przy użyciu [dostawcy konfiguracji wiersza polecenia](#command-line-configuration-provider).</span><span class="sxs-lookup"><span data-stu-id="f83a3-371">Command-line arguments using the [Command-line configuration provider](#command-line-configuration-provider).</span></span>
+
+<span data-ttu-id="f83a3-372">Typowym celem jest dodanie dostawcy konfiguracji wiersza polecenia w ciągu kilku dostawców, aby zezwolić na argumenty wiersza polecenia, aby przesłonić konfigurację ustawioną przez innych dostawców.</span><span class="sxs-lookup"><span data-stu-id="f83a3-372">A common practice is to add the Command-line configuration provider last in a series of providers to allow command-line arguments to override configuration set by the other providers.</span></span>
+
+<span data-ttu-id="f83a3-373">Poprzednia sekwencja dostawców jest używana w [konfiguracji domyślnej](#default).</span><span class="sxs-lookup"><span data-stu-id="f83a3-373">The preceding sequence of providers is used in the [default configuration](#default).</span></span>
 
 <a name="constr"></a>
 
-### <a name="connection-string-prefixes"></a><span data-ttu-id="32987-299">Prefiksy parametrów połączenia</span><span class="sxs-lookup"><span data-stu-id="32987-299">Connection string prefixes</span></span>
+### <a name="connection-string-prefixes"></a><span data-ttu-id="f83a3-374">Prefiksy parametrów połączenia</span><span class="sxs-lookup"><span data-stu-id="f83a3-374">Connection string prefixes</span></span>
 
-<span data-ttu-id="32987-300">Interfejs API konfiguracji ma specjalne reguły przetwarzania dla czterech zmiennych środowiskowych parametrów połączenia.</span><span class="sxs-lookup"><span data-stu-id="32987-300">The Configuration API has special processing rules for four connection string environment variables.</span></span> <span data-ttu-id="32987-301">Te parametry połączenia są związane z konfigurowaniem parametrów połączenia platformy Azure dla środowiska aplikacji.</span><span class="sxs-lookup"><span data-stu-id="32987-301">These connection strings are involved in configuring Azure connection strings for the app environment.</span></span> <span data-ttu-id="32987-302">Zmienne środowiskowe z prefiksami podanymi w tabeli są ładowane do aplikacji z [konfiguracją domyślną](#default) lub gdy nie podano prefiksu `AddEnvironmentVariables`.</span><span class="sxs-lookup"><span data-stu-id="32987-302">Environment variables with the prefixes shown in the table are loaded into the app with the [default configuration](#default) or when no prefix is supplied to `AddEnvironmentVariables`.</span></span>
+<span data-ttu-id="f83a3-375">Interfejs API konfiguracji ma specjalne reguły przetwarzania dla czterech zmiennych środowiskowych parametrów połączenia.</span><span class="sxs-lookup"><span data-stu-id="f83a3-375">The Configuration API has special processing rules for four connection string environment variables.</span></span> <span data-ttu-id="f83a3-376">Te parametry połączenia są związane z konfigurowaniem parametrów połączenia platformy Azure dla środowiska aplikacji.</span><span class="sxs-lookup"><span data-stu-id="f83a3-376">These connection strings are involved in configuring Azure connection strings for the app environment.</span></span> <span data-ttu-id="f83a3-377">Zmienne środowiskowe z prefiksami podanymi w tabeli są ładowane do aplikacji z [konfiguracją domyślną](#default) lub gdy nie podano prefiksu `AddEnvironmentVariables` .</span><span class="sxs-lookup"><span data-stu-id="f83a3-377">Environment variables with the prefixes shown in the table are loaded into the app with the [default configuration](#default) or when no prefix is supplied to `AddEnvironmentVariables`.</span></span>
 
-| <span data-ttu-id="32987-303">Prefiks parametrów połączenia</span><span class="sxs-lookup"><span data-stu-id="32987-303">Connection string prefix</span></span> | <span data-ttu-id="32987-304">Dostawca</span><span class="sxs-lookup"><span data-stu-id="32987-304">Provider</span></span> |
-| ------------------------ | -------- |
-| `CUSTOMCONNSTR_` | <span data-ttu-id="32987-305">Dostawca niestandardowy</span><span class="sxs-lookup"><span data-stu-id="32987-305">Custom provider</span></span> |
-| `MYSQLCONNSTR_` | [<span data-ttu-id="32987-306">MySQL</span><span class="sxs-lookup"><span data-stu-id="32987-306">MySQL</span></span>](https://www.mysql.com/) |
-| `SQLAZURECONNSTR_` | [<span data-ttu-id="32987-307">Azure SQL Database</span><span class="sxs-lookup"><span data-stu-id="32987-307">Azure SQL Database</span></span>](https://azure.microsoft.com/services/sql-database/) |
-| `SQLCONNSTR_` | [<span data-ttu-id="32987-308">SQL Server</span><span class="sxs-lookup"><span data-stu-id="32987-308">SQL Server</span></span>](https://www.microsoft.com/sql-server/) |
+| <span data-ttu-id="f83a3-378">Prefiks parametrów połączenia</span><span class="sxs-lookup"><span data-stu-id="f83a3-378">Connection string prefix</span></span> | <span data-ttu-id="f83a3-379">Dostawca</span><span class="sxs-lookup"><span data-stu-id="f83a3-379">Provider</span></span> |
+| ---
+<span data-ttu-id="f83a3-380">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-380">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-381">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-381">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-382">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-382">'Identity'</span></span>
+- <span data-ttu-id="f83a3-383">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-383">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-384">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-384">'Razor'</span></span>
+- <span data-ttu-id="f83a3-385">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-385">'SignalR' uid:</span></span> 
 
-<span data-ttu-id="32987-309">Gdy zmienna środowiskowa zostanie odnaleziona i załadowana do konfiguracji z dowolnymi z czterech prefiksów pokazanych w tabeli:</span><span class="sxs-lookup"><span data-stu-id="32987-309">When an environment variable is discovered and loaded into configuration with any of the four prefixes shown in the table:</span></span>
+-
+<span data-ttu-id="f83a3-386">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-386">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-387">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-387">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-388">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-388">'Identity'</span></span>
+- <span data-ttu-id="f83a3-389">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-389">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-390">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-390">'Razor'</span></span>
+- <span data-ttu-id="f83a3-391">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-391">'SignalR' uid:</span></span> 
 
-* <span data-ttu-id="32987-310">Klucz konfiguracji jest tworzony przez usunięcie prefiksu zmiennej środowiskowej i dodanie sekcji klucza konfiguracji (`ConnectionStrings`).</span><span class="sxs-lookup"><span data-stu-id="32987-310">The configuration key is created by removing the environment variable prefix and adding a configuration key section (`ConnectionStrings`).</span></span>
-* <span data-ttu-id="32987-311">Zostanie utworzona nowa para klucz-wartość konfiguracji, która reprezentuje dostawcę połączenia bazy danych (z wyjątkiem `CUSTOMCONNSTR_`tego, który nie ma określonego dostawcy).</span><span class="sxs-lookup"><span data-stu-id="32987-311">A new configuration key-value pair is created that represents the database connection provider (except for `CUSTOMCONNSTR_`, which has no stated provider).</span></span>
+-
+<span data-ttu-id="f83a3-392">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-392">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-393">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-393">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-394">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-394">'Identity'</span></span>
+- <span data-ttu-id="f83a3-395">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-395">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-396">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-396">'Razor'</span></span>
+- <span data-ttu-id="f83a3-397">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-397">'SignalR' uid:</span></span> 
 
-| <span data-ttu-id="32987-312">Klucz zmiennej środowiskowej</span><span class="sxs-lookup"><span data-stu-id="32987-312">Environment variable key</span></span> | <span data-ttu-id="32987-313">Przekonwertowany klucz konfiguracji</span><span class="sxs-lookup"><span data-stu-id="32987-313">Converted configuration key</span></span> | <span data-ttu-id="32987-314">Wpis konfiguracji dostawcy</span><span class="sxs-lookup"><span data-stu-id="32987-314">Provider configuration entry</span></span>                                                    |
-| ------------------------ | --------------------------- | ------------------------------------------------------------------------------- |
-| `CUSTOMCONNSTR_{KEY} `   | `ConnectionStrings:{KEY}`   | <span data-ttu-id="32987-315">Wpis konfiguracji nie został utworzony.</span><span class="sxs-lookup"><span data-stu-id="32987-315">Configuration entry not created.</span></span>                                                |
-| `MYSQLCONNSTR_{KEY}`     | `ConnectionStrings:{KEY}`   | <span data-ttu-id="32987-316">Klucz: `ConnectionStrings:{KEY}_ProviderName`:</span><span class="sxs-lookup"><span data-stu-id="32987-316">Key: `ConnectionStrings:{KEY}_ProviderName`:</span></span><br><span data-ttu-id="32987-317">Wartość:`MySql.Data.MySqlClient`</span><span class="sxs-lookup"><span data-stu-id="32987-317">Value: `MySql.Data.MySqlClient`</span></span> |
-| `SQLAZURECONNSTR_{KEY}`  | `ConnectionStrings:{KEY}`   | <span data-ttu-id="32987-318">Klucz: `ConnectionStrings:{KEY}_ProviderName`:</span><span class="sxs-lookup"><span data-stu-id="32987-318">Key: `ConnectionStrings:{KEY}_ProviderName`:</span></span><br><span data-ttu-id="32987-319">Wartość:`System.Data.SqlClient`</span><span class="sxs-lookup"><span data-stu-id="32987-319">Value: `System.Data.SqlClient`</span></span>  |
-| `SQLCONNSTR_{KEY}`       | `ConnectionStrings:{KEY}`   | <span data-ttu-id="32987-320">Klucz: `ConnectionStrings:{KEY}_ProviderName`:</span><span class="sxs-lookup"><span data-stu-id="32987-320">Key: `ConnectionStrings:{KEY}_ProviderName`:</span></span><br><span data-ttu-id="32987-321">Wartość:`System.Data.SqlClient`</span><span class="sxs-lookup"><span data-stu-id="32987-321">Value: `System.Data.SqlClient`</span></span>  |
+-
+<span data-ttu-id="f83a3-398">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-398">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-399">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-399">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-400">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-400">'Identity'</span></span>
+- <span data-ttu-id="f83a3-401">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-401">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-402">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-402">'Razor'</span></span>
+- <span data-ttu-id="f83a3-403">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-403">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-404">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-404">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-405">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-405">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-406">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-406">'Identity'</span></span>
+- <span data-ttu-id="f83a3-407">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-407">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-408">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-408">'Razor'</span></span>
+- <span data-ttu-id="f83a3-409">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-409">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-410">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-410">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-411">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-411">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-412">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-412">'Identity'</span></span>
+- <span data-ttu-id="f83a3-413">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-413">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-414">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-414">'Razor'</span></span>
+- <span data-ttu-id="f83a3-415">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-415">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-416">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-416">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-417">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-417">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-418">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-418">'Identity'</span></span>
+- <span data-ttu-id="f83a3-419">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-419">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-420">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-420">'Razor'</span></span>
+- <span data-ttu-id="f83a3-421">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-421">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-422">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-422">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-423">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-423">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-424">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-424">'Identity'</span></span>
+- <span data-ttu-id="f83a3-425">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-425">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-426">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-426">'Razor'</span></span>
+- <span data-ttu-id="f83a3-427">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-427">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-428">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-428">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-429">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-429">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-430">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-430">'Identity'</span></span>
+- <span data-ttu-id="f83a3-431">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-431">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-432">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-432">'Razor'</span></span>
+- <span data-ttu-id="f83a3-433">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-433">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-434">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-434">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-435">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-435">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-436">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-436">'Identity'</span></span>
+- <span data-ttu-id="f83a3-437">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-437">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-438">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-438">'Razor'</span></span>
+- <span data-ttu-id="f83a3-439">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-439">'SignalR' uid:</span></span> 
+
+<span data-ttu-id="f83a3-440">------------ | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-440">------------ | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-441">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-441">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-442">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-442">'Identity'</span></span>
+- <span data-ttu-id="f83a3-443">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-443">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-444">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-444">'Razor'</span></span>
+- <span data-ttu-id="f83a3-445">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-445">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-446">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-446">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-447">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-447">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-448">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-448">'Identity'</span></span>
+- <span data-ttu-id="f83a3-449">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-449">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-450">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-450">'Razor'</span></span>
+- <span data-ttu-id="f83a3-451">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-451">'SignalR' uid:</span></span> 
+
+<span data-ttu-id="f83a3-452">---- | | `CUSTOMCONNSTR_` | Dostawca niestandardowy | | `MYSQLCONNSTR_` | [Baza danych MySQL](https://www.mysql.com/) |
+ | `SQLAZURECONNSTR_` | [Azure SQL Database](https://azure.microsoft.com/services/sql-database/) |
+ | `SQLCONNSTR_` | [SQL Server](https://www.microsoft.com/sql-server/)|</span><span class="sxs-lookup"><span data-stu-id="f83a3-452">---- | | `CUSTOMCONNSTR_` | Custom provider | | `MYSQLCONNSTR_` | [MySQL](https://www.mysql.com/) |
+| `SQLAZURECONNSTR_` | [Azure SQL Database](https://azure.microsoft.com/services/sql-database/) |
+| `SQLCONNSTR_` | [SQL Server](https://www.microsoft.com/sql-server/) |</span></span>
+
+<span data-ttu-id="f83a3-453">Gdy zmienna środowiskowa zostanie odnaleziona i załadowana do konfiguracji z dowolnymi z czterech prefiksów pokazanych w tabeli:</span><span class="sxs-lookup"><span data-stu-id="f83a3-453">When an environment variable is discovered and loaded into configuration with any of the four prefixes shown in the table:</span></span>
+
+* <span data-ttu-id="f83a3-454">Klucz konfiguracji jest tworzony przez usunięcie prefiksu zmiennej środowiskowej i dodanie sekcji klucza konfiguracji ( `ConnectionStrings` ).</span><span class="sxs-lookup"><span data-stu-id="f83a3-454">The configuration key is created by removing the environment variable prefix and adding a configuration key section (`ConnectionStrings`).</span></span>
+* <span data-ttu-id="f83a3-455">Zostanie utworzona nowa para klucz-wartość konfiguracji, która reprezentuje dostawcę połączenia bazy danych (z wyjątkiem tego `CUSTOMCONNSTR_` , który nie ma określonego dostawcy).</span><span class="sxs-lookup"><span data-stu-id="f83a3-455">A new configuration key-value pair is created that represents the database connection provider (except for `CUSTOMCONNSTR_`, which has no stated provider).</span></span>
+
+| <span data-ttu-id="f83a3-456">Klucz zmiennej środowiskowej</span><span class="sxs-lookup"><span data-stu-id="f83a3-456">Environment variable key</span></span> | <span data-ttu-id="f83a3-457">Przekonwertowany klucz konfiguracji</span><span class="sxs-lookup"><span data-stu-id="f83a3-457">Converted configuration key</span></span> | <span data-ttu-id="f83a3-458">Wpis konfiguracji dostawcy</span><span class="sxs-lookup"><span data-stu-id="f83a3-458">Provider configuration entry</span></span>                                                    |
+| ---
+<span data-ttu-id="f83a3-459">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-459">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-460">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-460">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-461">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-461">'Identity'</span></span>
+- <span data-ttu-id="f83a3-462">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-462">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-463">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-463">'Razor'</span></span>
+- <span data-ttu-id="f83a3-464">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-464">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-465">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-465">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-466">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-466">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-467">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-467">'Identity'</span></span>
+- <span data-ttu-id="f83a3-468">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-468">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-469">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-469">'Razor'</span></span>
+- <span data-ttu-id="f83a3-470">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-470">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-471">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-471">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-472">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-472">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-473">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-473">'Identity'</span></span>
+- <span data-ttu-id="f83a3-474">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-474">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-475">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-475">'Razor'</span></span>
+- <span data-ttu-id="f83a3-476">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-476">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-477">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-477">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-478">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-478">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-479">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-479">'Identity'</span></span>
+- <span data-ttu-id="f83a3-480">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-480">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-481">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-481">'Razor'</span></span>
+- <span data-ttu-id="f83a3-482">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-482">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-483">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-483">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-484">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-484">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-485">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-485">'Identity'</span></span>
+- <span data-ttu-id="f83a3-486">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-486">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-487">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-487">'Razor'</span></span>
+- <span data-ttu-id="f83a3-488">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-488">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-489">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-489">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-490">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-490">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-491">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-491">'Identity'</span></span>
+- <span data-ttu-id="f83a3-492">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-492">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-493">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-493">'Razor'</span></span>
+- <span data-ttu-id="f83a3-494">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-494">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-495">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-495">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-496">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-496">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-497">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-497">'Identity'</span></span>
+- <span data-ttu-id="f83a3-498">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-498">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-499">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-499">'Razor'</span></span>
+- <span data-ttu-id="f83a3-500">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-500">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-501">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-501">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-502">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-502">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-503">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-503">'Identity'</span></span>
+- <span data-ttu-id="f83a3-504">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-504">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-505">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-505">'Razor'</span></span>
+- <span data-ttu-id="f83a3-506">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-506">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-507">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-507">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-508">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-508">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-509">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-509">'Identity'</span></span>
+- <span data-ttu-id="f83a3-510">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-510">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-511">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-511">'Razor'</span></span>
+- <span data-ttu-id="f83a3-512">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-512">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-513">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-513">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-514">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-514">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-515">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-515">'Identity'</span></span>
+- <span data-ttu-id="f83a3-516">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-516">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-517">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-517">'Razor'</span></span>
+- <span data-ttu-id="f83a3-518">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-518">'SignalR' uid:</span></span> 
+
+<span data-ttu-id="f83a3-519">------------ | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-519">------------ | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-520">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-520">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-521">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-521">'Identity'</span></span>
+- <span data-ttu-id="f83a3-522">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-522">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-523">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-523">'Razor'</span></span>
+- <span data-ttu-id="f83a3-524">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-524">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-525">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-525">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-526">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-526">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-527">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-527">'Identity'</span></span>
+- <span data-ttu-id="f83a3-528">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-528">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-529">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-529">'Razor'</span></span>
+- <span data-ttu-id="f83a3-530">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-530">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-531">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-531">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-532">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-532">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-533">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-533">'Identity'</span></span>
+- <span data-ttu-id="f83a3-534">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-534">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-535">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-535">'Razor'</span></span>
+- <span data-ttu-id="f83a3-536">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-536">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-537">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-537">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-538">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-538">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-539">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-539">'Identity'</span></span>
+- <span data-ttu-id="f83a3-540">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-540">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-541">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-541">'Razor'</span></span>
+- <span data-ttu-id="f83a3-542">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-542">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-543">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-543">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-544">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-544">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-545">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-545">'Identity'</span></span>
+- <span data-ttu-id="f83a3-546">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-546">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-547">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-547">'Razor'</span></span>
+- <span data-ttu-id="f83a3-548">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-548">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-549">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-549">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-550">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-550">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-551">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-551">'Identity'</span></span>
+- <span data-ttu-id="f83a3-552">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-552">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-553">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-553">'Razor'</span></span>
+- <span data-ttu-id="f83a3-554">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-554">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-555">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-555">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-556">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-556">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-557">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-557">'Identity'</span></span>
+- <span data-ttu-id="f83a3-558">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-558">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-559">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-559">'Razor'</span></span>
+- <span data-ttu-id="f83a3-560">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-560">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-561">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-561">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-562">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-562">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-563">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-563">'Identity'</span></span>
+- <span data-ttu-id="f83a3-564">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-564">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-565">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-565">'Razor'</span></span>
+- <span data-ttu-id="f83a3-566">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-566">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-567">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-567">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-568">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-568">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-569">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-569">'Identity'</span></span>
+- <span data-ttu-id="f83a3-570">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-570">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-571">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-571">'Razor'</span></span>
+- <span data-ttu-id="f83a3-572">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-572">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-573">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-573">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-574">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-574">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-575">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-575">'Identity'</span></span>
+- <span data-ttu-id="f83a3-576">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-576">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-577">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-577">'Razor'</span></span>
+- <span data-ttu-id="f83a3-578">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-578">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-579">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-579">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-580">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-580">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-581">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-581">'Identity'</span></span>
+- <span data-ttu-id="f83a3-582">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-582">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-583">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-583">'Razor'</span></span>
+- <span data-ttu-id="f83a3-584">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-584">'SignalR' uid:</span></span> 
+
+<span data-ttu-id="f83a3-585">-------------- | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-585">-------------- | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-586">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-586">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-587">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-587">'Identity'</span></span>
+- <span data-ttu-id="f83a3-588">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-588">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-589">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-589">'Razor'</span></span>
+- <span data-ttu-id="f83a3-590">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-590">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-591">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-591">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-592">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-592">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-593">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-593">'Identity'</span></span>
+- <span data-ttu-id="f83a3-594">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-594">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-595">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-595">'Razor'</span></span>
+- <span data-ttu-id="f83a3-596">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-596">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-597">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-597">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-598">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-598">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-599">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-599">'Identity'</span></span>
+- <span data-ttu-id="f83a3-600">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-600">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-601">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-601">'Razor'</span></span>
+- <span data-ttu-id="f83a3-602">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-602">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-603">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-603">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-604">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-604">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-605">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-605">'Identity'</span></span>
+- <span data-ttu-id="f83a3-606">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-606">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-607">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-607">'Razor'</span></span>
+- <span data-ttu-id="f83a3-608">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-608">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-609">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-609">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-610">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-610">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-611">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-611">'Identity'</span></span>
+- <span data-ttu-id="f83a3-612">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-612">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-613">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-613">'Razor'</span></span>
+- <span data-ttu-id="f83a3-614">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-614">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-615">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-615">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-616">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-616">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-617">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-617">'Identity'</span></span>
+- <span data-ttu-id="f83a3-618">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-618">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-619">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-619">'Razor'</span></span>
+- <span data-ttu-id="f83a3-620">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-620">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-621">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-621">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-622">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-622">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-623">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-623">'Identity'</span></span>
+- <span data-ttu-id="f83a3-624">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-624">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-625">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-625">'Razor'</span></span>
+- <span data-ttu-id="f83a3-626">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-626">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-627">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-627">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-628">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-628">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-629">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-629">'Identity'</span></span>
+- <span data-ttu-id="f83a3-630">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-630">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-631">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-631">'Razor'</span></span>
+- <span data-ttu-id="f83a3-632">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-632">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-633">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-633">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-634">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-634">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-635">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-635">'Identity'</span></span>
+- <span data-ttu-id="f83a3-636">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-636">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-637">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-637">'Razor'</span></span>
+- <span data-ttu-id="f83a3-638">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-638">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-639">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-639">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-640">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-640">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-641">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-641">'Identity'</span></span>
+- <span data-ttu-id="f83a3-642">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-642">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-643">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-643">'Razor'</span></span>
+- <span data-ttu-id="f83a3-644">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-644">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-645">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-645">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-646">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-646">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-647">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-647">'Identity'</span></span>
+- <span data-ttu-id="f83a3-648">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-648">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-649">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-649">'Razor'</span></span>
+- <span data-ttu-id="f83a3-650">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-650">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-651">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-651">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-652">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-652">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-653">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-653">'Identity'</span></span>
+- <span data-ttu-id="f83a3-654">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-654">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-655">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-655">'Razor'</span></span>
+- <span data-ttu-id="f83a3-656">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-656">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-657">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-657">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-658">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-658">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-659">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-659">'Identity'</span></span>
+- <span data-ttu-id="f83a3-660">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-660">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-661">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-661">'Razor'</span></span>
+- <span data-ttu-id="f83a3-662">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-662">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-663">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-663">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-664">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-664">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-665">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-665">'Identity'</span></span>
+- <span data-ttu-id="f83a3-666">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-666">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-667">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-667">'Razor'</span></span>
+- <span data-ttu-id="f83a3-668">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-668">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-669">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-669">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-670">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-670">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-671">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-671">'Identity'</span></span>
+- <span data-ttu-id="f83a3-672">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-672">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-673">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-673">'Razor'</span></span>
+- <span data-ttu-id="f83a3-674">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-674">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-675">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-675">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-676">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-676">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-677">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-677">'Identity'</span></span>
+- <span data-ttu-id="f83a3-678">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-678">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-679">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-679">'Razor'</span></span>
+- <span data-ttu-id="f83a3-680">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-680">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-681">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-681">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-682">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-682">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-683">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-683">'Identity'</span></span>
+- <span data-ttu-id="f83a3-684">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-684">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-685">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-685">'Razor'</span></span>
+- <span data-ttu-id="f83a3-686">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-686">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-687">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-687">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-688">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-688">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-689">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-689">'Identity'</span></span>
+- <span data-ttu-id="f83a3-690">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-690">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-691">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-691">'Razor'</span></span>
+- <span data-ttu-id="f83a3-692">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-692">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-693">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-693">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-694">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-694">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-695">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-695">'Identity'</span></span>
+- <span data-ttu-id="f83a3-696">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-696">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-697">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-697">'Razor'</span></span>
+- <span data-ttu-id="f83a3-698">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-698">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-699">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-699">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-700">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-700">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-701">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-701">'Identity'</span></span>
+- <span data-ttu-id="f83a3-702">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-702">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-703">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-703">'Razor'</span></span>
+- <span data-ttu-id="f83a3-704">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-704">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-705">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-705">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-706">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-706">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-707">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-707">'Identity'</span></span>
+- <span data-ttu-id="f83a3-708">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-708">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-709">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-709">'Razor'</span></span>
+- <span data-ttu-id="f83a3-710">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-710">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-711">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-711">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-712">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-712">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-713">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-713">'Identity'</span></span>
+- <span data-ttu-id="f83a3-714">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-714">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-715">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-715">'Razor'</span></span>
+- <span data-ttu-id="f83a3-716">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-716">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-717">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-717">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-718">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-718">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-719">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-719">'Identity'</span></span>
+- <span data-ttu-id="f83a3-720">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-720">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-721">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-721">'Razor'</span></span>
+- <span data-ttu-id="f83a3-722">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-722">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-723">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-723">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-724">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-724">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-725">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-725">'Identity'</span></span>
+- <span data-ttu-id="f83a3-726">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-726">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-727">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-727">'Razor'</span></span>
+- <span data-ttu-id="f83a3-728">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-728">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-729">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-729">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-730">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-730">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-731">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-731">'Identity'</span></span>
+- <span data-ttu-id="f83a3-732">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-732">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-733">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-733">'Razor'</span></span>
+- <span data-ttu-id="f83a3-734">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-734">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-735">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-735">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-736">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-736">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-737">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-737">'Identity'</span></span>
+- <span data-ttu-id="f83a3-738">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-738">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-739">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-739">'Razor'</span></span>
+- <span data-ttu-id="f83a3-740">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-740">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-741">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-741">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-742">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-742">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-743">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-743">'Identity'</span></span>
+- <span data-ttu-id="f83a3-744">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-744">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-745">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-745">'Razor'</span></span>
+- <span data-ttu-id="f83a3-746">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-746">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-747">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-747">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-748">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-748">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-749">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-749">'Identity'</span></span>
+- <span data-ttu-id="f83a3-750">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-750">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-751">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-751">'Razor'</span></span>
+- <span data-ttu-id="f83a3-752">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-752">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-753">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-753">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-754">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-754">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-755">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-755">'Identity'</span></span>
+- <span data-ttu-id="f83a3-756">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-756">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-757">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-757">'Razor'</span></span>
+- <span data-ttu-id="f83a3-758">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-758">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-759">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-759">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-760">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-760">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-761">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-761">'Identity'</span></span>
+- <span data-ttu-id="f83a3-762">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-762">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-763">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-763">'Razor'</span></span>
+- <span data-ttu-id="f83a3-764">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-764">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-765">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-765">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-766">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-766">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-767">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-767">'Identity'</span></span>
+- <span data-ttu-id="f83a3-768">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-768">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-769">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-769">'Razor'</span></span>
+- <span data-ttu-id="f83a3-770">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-770">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-771">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-771">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-772">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-772">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-773">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-773">'Identity'</span></span>
+- <span data-ttu-id="f83a3-774">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-774">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-775">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-775">'Razor'</span></span>
+- <span data-ttu-id="f83a3-776">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-776">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-777">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-777">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-778">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-778">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-779">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-779">'Identity'</span></span>
+- <span data-ttu-id="f83a3-780">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-780">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-781">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-781">'Razor'</span></span>
+- <span data-ttu-id="f83a3-782">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-782">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-783">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-783">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-784">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-784">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-785">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-785">'Identity'</span></span>
+- <span data-ttu-id="f83a3-786">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-786">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-787">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-787">'Razor'</span></span>
+- <span data-ttu-id="f83a3-788">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-788">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-789">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-789">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-790">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-790">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-791">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-791">'Identity'</span></span>
+- <span data-ttu-id="f83a3-792">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-792">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-793">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-793">'Razor'</span></span>
+- <span data-ttu-id="f83a3-794">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-794">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-795">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-795">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-796">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-796">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-797">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-797">'Identity'</span></span>
+- <span data-ttu-id="f83a3-798">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-798">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-799">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-799">'Razor'</span></span>
+- <span data-ttu-id="f83a3-800">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-800">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-801">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-801">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-802">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-802">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-803">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-803">'Identity'</span></span>
+- <span data-ttu-id="f83a3-804">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-804">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-805">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-805">'Razor'</span></span>
+- <span data-ttu-id="f83a3-806">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-806">'SignalR' uid:</span></span> 
+
+<span data-ttu-id="f83a3-807">---------------------------------------- | | `CUSTOMCONNSTR_{KEY} `   | `ConnectionStrings:{KEY}`   | Wpis konfiguracji nie został utworzony.</span><span class="sxs-lookup"><span data-stu-id="f83a3-807">---------------------------------------- | | `CUSTOMCONNSTR_{KEY} `   | `ConnectionStrings:{KEY}`   | Configuration entry not created.</span></span>                                                <span data-ttu-id="f83a3-808">| | `MYSQLCONNSTR_{KEY}`     | `ConnectionStrings:{KEY}`   | Klucz: `ConnectionStrings:{KEY}_ProviderName` :</span><span class="sxs-lookup"><span data-stu-id="f83a3-808">| | `MYSQLCONNSTR_{KEY}`     | `ConnectionStrings:{KEY}`   | Key: `ConnectionStrings:{KEY}_ProviderName`:</span></span><br><span data-ttu-id="f83a3-809">Wartość: `MySql.Data.MySqlClient` | | `SQLAZURECONNSTR_{KEY}`   |  `ConnectionStrings:{KEY}`   | Klucz: `ConnectionStrings:{KEY}_ProviderName` :</span><span class="sxs-lookup"><span data-stu-id="f83a3-809">Value: `MySql.Data.MySqlClient` | | `SQLAZURECONNSTR_{KEY}`  | `ConnectionStrings:{KEY}`   | Key: `ConnectionStrings:{KEY}_ProviderName`:</span></span><br><span data-ttu-id="f83a3-810">Wartość: `System.Data.SqlClient` | | `SQLCONNSTR_{KEY}`        |  `ConnectionStrings:{KEY}`   | Klucz: `ConnectionStrings:{KEY}_ProviderName` :</span><span class="sxs-lookup"><span data-stu-id="f83a3-810">Value: `System.Data.SqlClient`  | | `SQLCONNSTR_{KEY}`       | `ConnectionStrings:{KEY}`   | Key: `ConnectionStrings:{KEY}_ProviderName`:</span></span><br><span data-ttu-id="f83a3-811">Wartościami`System.Data.SqlClient`  |</span><span class="sxs-lookup"><span data-stu-id="f83a3-811">Value: `System.Data.SqlClient`  |</span></span>
 
 <a name="jcp"></a>
 
-### <a name="json-configuration-provider"></a><span data-ttu-id="32987-322">Dostawca konfiguracji JSON</span><span class="sxs-lookup"><span data-stu-id="32987-322">JSON configuration provider</span></span>
+### <a name="json-configuration-provider"></a><span data-ttu-id="f83a3-812">Dostawca konfiguracji JSON</span><span class="sxs-lookup"><span data-stu-id="f83a3-812">JSON configuration provider</span></span>
 
-<span data-ttu-id="32987-323"><xref:Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider> Ładowanie konfiguracji z par klucz-wartość pliku JSON.</span><span class="sxs-lookup"><span data-stu-id="32987-323">The <xref:Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider> loads configuration from JSON file key-value pairs.</span></span>
+<span data-ttu-id="f83a3-813"><xref:Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider>Ładowanie konfiguracji z par klucz-wartość pliku JSON.</span><span class="sxs-lookup"><span data-stu-id="f83a3-813">The <xref:Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider> loads configuration from JSON file key-value pairs.</span></span>
 
-<span data-ttu-id="32987-324">Przeciążenia mogą określać:</span><span class="sxs-lookup"><span data-stu-id="32987-324">Overloads can specify:</span></span>
+<span data-ttu-id="f83a3-814">Przeciążenia mogą określać:</span><span class="sxs-lookup"><span data-stu-id="f83a3-814">Overloads can specify:</span></span>
 
-* <span data-ttu-id="32987-325">Czy plik jest opcjonalny.</span><span class="sxs-lookup"><span data-stu-id="32987-325">Whether the file is optional.</span></span>
-* <span data-ttu-id="32987-326">Czy konfiguracja zostanie ponownie załadowana w przypadku zmiany pliku.</span><span class="sxs-lookup"><span data-stu-id="32987-326">Whether the configuration is reloaded if the file changes.</span></span>
+* <span data-ttu-id="f83a3-815">Czy plik jest opcjonalny.</span><span class="sxs-lookup"><span data-stu-id="f83a3-815">Whether the file is optional.</span></span>
+* <span data-ttu-id="f83a3-816">Czy konfiguracja zostanie ponownie załadowana w przypadku zmiany pliku.</span><span class="sxs-lookup"><span data-stu-id="f83a3-816">Whether the configuration is reloaded if the file changes.</span></span>
 
-<span data-ttu-id="32987-327">Spójrzmy na poniższy kod:</span><span class="sxs-lookup"><span data-stu-id="32987-327">Consider the following code:</span></span>
+<span data-ttu-id="f83a3-817">Spójrzmy na poniższy kod:</span><span class="sxs-lookup"><span data-stu-id="f83a3-817">Consider the following code:</span></span>
 
 [!code-csharp[](index/samples/3.x/ConfigSample/ProgramJSON.cs?name=snippet&highlight=12-14)]
 
-<span data-ttu-id="32987-328">Powyższy kod ma następujące działanie:</span><span class="sxs-lookup"><span data-stu-id="32987-328">The preceding code:</span></span>
+<span data-ttu-id="f83a3-818">Powyższy kod ma następujące działanie:</span><span class="sxs-lookup"><span data-stu-id="f83a3-818">The preceding code:</span></span>
 
-* <span data-ttu-id="32987-329">Konfiguruje dostawcę konfiguracji JSON w celu załadowania pliku *. JSON* z następującymi opcjami:</span><span class="sxs-lookup"><span data-stu-id="32987-329">Configures the JSON configuration provider to load the *MyConfig.json* file with the following options:</span></span>
-  * <span data-ttu-id="32987-330">`optional: true`: Plik jest opcjonalny.</span><span class="sxs-lookup"><span data-stu-id="32987-330">`optional: true`: The file is optional.</span></span>
-  * <span data-ttu-id="32987-331">`reloadOnChange: true`: Plik zostanie ponownie załadowany podczas zapisywania zmian.</span><span class="sxs-lookup"><span data-stu-id="32987-331">`reloadOnChange: true` : The file is reloaded when changes are saved.</span></span>
-* <span data-ttu-id="32987-332">Odczytuje [domyślnych dostawców konfiguracji](#default) przed plikiem moja *config. JSON* .</span><span class="sxs-lookup"><span data-stu-id="32987-332">Reads the [default configuration providers](#default) before the *MyConfig.json* file.</span></span> <span data-ttu-id="32987-333">Ustawienia w pliku *config. JSON* przesłaniają ustawienie w domyślnych dostawcach konfiguracji, w tym [dostawcę konfiguracji zmienne środowiskowe](#evcp) i [dostawca konfiguracji wiersza polecenia](#clcp).</span><span class="sxs-lookup"><span data-stu-id="32987-333">Settings in the *MyConfig.json* file override setting in the default configuration providers, including the [Environment variables configuration provider](#evcp) and the [Command-line configuration provider](#clcp).</span></span>
+* <span data-ttu-id="f83a3-819">Konfiguruje dostawcę konfiguracji JSON w celu załadowania pliku *. JSON* z następującymi opcjami:</span><span class="sxs-lookup"><span data-stu-id="f83a3-819">Configures the JSON configuration provider to load the *MyConfig.json* file with the following options:</span></span>
+  * <span data-ttu-id="f83a3-820">`optional: true`: Plik jest opcjonalny.</span><span class="sxs-lookup"><span data-stu-id="f83a3-820">`optional: true`: The file is optional.</span></span>
+  * <span data-ttu-id="f83a3-821">`reloadOnChange: true`: Plik zostanie ponownie załadowany podczas zapisywania zmian.</span><span class="sxs-lookup"><span data-stu-id="f83a3-821">`reloadOnChange: true` : The file is reloaded when changes are saved.</span></span>
+* <span data-ttu-id="f83a3-822">Odczytuje [domyślnych dostawców konfiguracji](#default) przed plikiem moja *config. JSON* .</span><span class="sxs-lookup"><span data-stu-id="f83a3-822">Reads the [default configuration providers](#default) before the *MyConfig.json* file.</span></span> <span data-ttu-id="f83a3-823">Ustawienia w pliku *config. JSON* przesłaniają ustawienie w domyślnych dostawcach konfiguracji, w tym [dostawcę konfiguracji zmienne środowiskowe](#evcp) i [dostawca konfiguracji wiersza polecenia](#clcp).</span><span class="sxs-lookup"><span data-stu-id="f83a3-823">Settings in the *MyConfig.json* file override setting in the default configuration providers, including the [Environment variables configuration provider](#evcp) and the [Command-line configuration provider](#clcp).</span></span>
 
-<span data-ttu-id="32987-334">Zwykle ***nie*** chcesz, aby niestandardowy plik JSON zastępujący wartości ustawione w [zmiennej środowiskowej dostawcy konfiguracji](#evcp) i [dostawcy konfiguracji wiersza polecenia](#clcp).</span><span class="sxs-lookup"><span data-stu-id="32987-334">You typically ***don't*** want a custom JSON file overriding values set in the [Environment variables configuration provider](#evcp) and the [Command-line configuration provider](#clcp).</span></span>
+<span data-ttu-id="f83a3-824">Zwykle ***nie*** chcesz, aby niestandardowy plik JSON zastępujący wartości ustawione w [zmiennej środowiskowej dostawcy konfiguracji](#evcp) i [dostawcy konfiguracji wiersza polecenia](#clcp).</span><span class="sxs-lookup"><span data-stu-id="f83a3-824">You typically ***don't*** want a custom JSON file overriding values set in the [Environment variables configuration provider](#evcp) and the [Command-line configuration provider](#clcp).</span></span>
 
-<span data-ttu-id="32987-335">Poniższy kod czyści wszystkich dostawców konfiguracji i dodaje kilku dostawców konfiguracji:</span><span class="sxs-lookup"><span data-stu-id="32987-335">The following code clears all the configuration providers and adds several configuration providers:</span></span>
+<span data-ttu-id="f83a3-825">Poniższy kod czyści wszystkich dostawców konfiguracji i dodaje kilku dostawców konfiguracji:</span><span class="sxs-lookup"><span data-stu-id="f83a3-825">The following code clears all the configuration providers and adds several configuration providers:</span></span>
 
 [!code-csharp[](index/samples/3.x/ConfigSample/ProgramJSON2.cs?name=snippet)]
 
-<span data-ttu-id="32987-336">W powyższym kodzie ustawienia w *pliku config. JSON* i *konfiguracji*. `Environment`. pliki *JSON* :</span><span class="sxs-lookup"><span data-stu-id="32987-336">In the preceding code, settings in the *MyConfig.json* and  *MyConfig*.`Environment`.*json* files:</span></span>
+<span data-ttu-id="f83a3-826">W powyższym kodzie ustawienia w *pliku config. JSON* i *konfiguracji*. `Environment` . pliki *JSON* :</span><span class="sxs-lookup"><span data-stu-id="f83a3-826">In the preceding code, settings in the *MyConfig.json* and  *MyConfig*.`Environment`.*json* files:</span></span>
 
-* <span data-ttu-id="32987-337">Zastąp ustawienia w pliku *appSettings. JSON* i *AppSettings*. `Environment`. pliki *JSON* .</span><span class="sxs-lookup"><span data-stu-id="32987-337">Override settings in the *appsettings.json* and *appsettings*.`Environment`.*json* files.</span></span>
-* <span data-ttu-id="32987-338">Są zastępowane przez ustawienia [dostawcy konfiguracji zmiennych środowiskowych](#evcp) i [dostawcy konfiguracji wiersza polecenia](#clcp).</span><span class="sxs-lookup"><span data-stu-id="32987-338">Are overridden by settings in the [Environment variables configuration provider](#evcp) and the [Command-line configuration provider](#clcp).</span></span>
+* <span data-ttu-id="f83a3-827">Zastąp ustawienia w pliku *appSettings. JSON* i *AppSettings*. `Environment` . pliki *JSON* .</span><span class="sxs-lookup"><span data-stu-id="f83a3-827">Override settings in the *appsettings.json* and *appsettings*.`Environment`.*json* files.</span></span>
+* <span data-ttu-id="f83a3-828">Są zastępowane przez ustawienia [dostawcy konfiguracji zmiennych środowiskowych](#evcp) i [dostawcy konfiguracji wiersza polecenia](#clcp).</span><span class="sxs-lookup"><span data-stu-id="f83a3-828">Are overridden by settings in the [Environment variables configuration provider](#evcp) and the [Command-line configuration provider](#clcp).</span></span>
 
-<span data-ttu-id="32987-339">[Pobieranie próbek](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) zawiera następujący plik *. JSON* :</span><span class="sxs-lookup"><span data-stu-id="32987-339">The [sample download](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) contains the following  *MyConfig.json* file:</span></span>
+<span data-ttu-id="f83a3-829">[Pobieranie próbek](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) zawiera następujący plik *. JSON* :</span><span class="sxs-lookup"><span data-stu-id="f83a3-829">The [sample download](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) contains the following  *MyConfig.json* file:</span></span>
 
 [!code-json[](index/samples/3.x/ConfigSample/MyConfig.json)]
 
-<span data-ttu-id="32987-340">Poniższy kod z [pobranego przykładu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) wyświetla kilka powyższych ustawień konfiguracji:</span><span class="sxs-lookup"><span data-stu-id="32987-340">The following code from the [sample download](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) displays several of the preceding configurations settings:</span></span>
+<span data-ttu-id="f83a3-830">Poniższy kod z [pobranego przykładu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) wyświetla kilka powyższych ustawień konfiguracji:</span><span class="sxs-lookup"><span data-stu-id="f83a3-830">The following code from the [sample download](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) displays several of the preceding configurations settings:</span></span>
 
 [!code-csharp[](index/samples/3.x/ConfigSample/Pages/Test.cshtml.cs?name=snippet)]
 
 <a name="fcp"></a>
 
-## <a name="file-configuration-provider"></a><span data-ttu-id="32987-341">Dostawca konfiguracji plików</span><span class="sxs-lookup"><span data-stu-id="32987-341">File configuration provider</span></span>
+## <a name="file-configuration-provider"></a><span data-ttu-id="f83a3-831">Dostawca konfiguracji plików</span><span class="sxs-lookup"><span data-stu-id="f83a3-831">File configuration provider</span></span>
 
-<span data-ttu-id="32987-342"><xref:Microsoft.Extensions.Configuration.FileConfigurationProvider>jest klasą bazową do ładowania konfiguracji z systemu plików.</span><span class="sxs-lookup"><span data-stu-id="32987-342"><xref:Microsoft.Extensions.Configuration.FileConfigurationProvider> is the base class for loading configuration from the file system.</span></span> <span data-ttu-id="32987-343">Następujący dostawcy konfiguracji pochodzą z `FileConfigurationProvider`:</span><span class="sxs-lookup"><span data-stu-id="32987-343">The following configuration providers derive from `FileConfigurationProvider`:</span></span>
+<span data-ttu-id="f83a3-832"><xref:Microsoft.Extensions.Configuration.FileConfigurationProvider>jest klasą bazową do ładowania konfiguracji z systemu plików.</span><span class="sxs-lookup"><span data-stu-id="f83a3-832"><xref:Microsoft.Extensions.Configuration.FileConfigurationProvider> is the base class for loading configuration from the file system.</span></span> <span data-ttu-id="f83a3-833">Następujący dostawcy konfiguracji pochodzą z `FileConfigurationProvider` :</span><span class="sxs-lookup"><span data-stu-id="f83a3-833">The following configuration providers derive from `FileConfigurationProvider`:</span></span>
 
-* [<span data-ttu-id="32987-344">Dostawca konfiguracji pliku INI</span><span class="sxs-lookup"><span data-stu-id="32987-344">INI configuration provider</span></span>](#ini-configuration-provider)
-* [<span data-ttu-id="32987-345">Dostawca konfiguracji JSON</span><span class="sxs-lookup"><span data-stu-id="32987-345">JSON configuration provider</span></span>](#jcp)
-* [<span data-ttu-id="32987-346">Dostawca konfiguracji XML</span><span class="sxs-lookup"><span data-stu-id="32987-346">XML configuration provider</span></span>](#xml-configuration-provider)
+* [<span data-ttu-id="f83a3-834">Dostawca konfiguracji pliku INI</span><span class="sxs-lookup"><span data-stu-id="f83a3-834">INI configuration provider</span></span>](#ini-configuration-provider)
+* [<span data-ttu-id="f83a3-835">Dostawca konfiguracji JSON</span><span class="sxs-lookup"><span data-stu-id="f83a3-835">JSON configuration provider</span></span>](#jcp)
+* [<span data-ttu-id="f83a3-836">Dostawca konfiguracji XML</span><span class="sxs-lookup"><span data-stu-id="f83a3-836">XML configuration provider</span></span>](#xml-configuration-provider)
 
-### <a name="ini-configuration-provider"></a><span data-ttu-id="32987-347">Dostawca konfiguracji pliku INI</span><span class="sxs-lookup"><span data-stu-id="32987-347">INI configuration provider</span></span>
+### <a name="ini-configuration-provider"></a><span data-ttu-id="f83a3-837">Dostawca konfiguracji pliku INI</span><span class="sxs-lookup"><span data-stu-id="f83a3-837">INI configuration provider</span></span>
 
-<span data-ttu-id="32987-348"><xref:Microsoft.Extensions.Configuration.Ini.IniConfigurationProvider> Ładowanie konfiguracji z par klucz-wartość pliku ini w czasie wykonywania.</span><span class="sxs-lookup"><span data-stu-id="32987-348">The <xref:Microsoft.Extensions.Configuration.Ini.IniConfigurationProvider> loads configuration from INI file key-value pairs at runtime.</span></span>
+<span data-ttu-id="f83a3-838"><xref:Microsoft.Extensions.Configuration.Ini.IniConfigurationProvider>Ładowanie konfiguracji z par klucz-wartość pliku ini w czasie wykonywania.</span><span class="sxs-lookup"><span data-stu-id="f83a3-838">The <xref:Microsoft.Extensions.Configuration.Ini.IniConfigurationProvider> loads configuration from INI file key-value pairs at runtime.</span></span>
 
-<span data-ttu-id="32987-349">Poniższy kod czyści wszystkich dostawców konfiguracji i dodaje kilku dostawców konfiguracji:</span><span class="sxs-lookup"><span data-stu-id="32987-349">The following code clears all the configuration providers and adds several configuration providers:</span></span>
+<span data-ttu-id="f83a3-839">Poniższy kod czyści wszystkich dostawców konfiguracji i dodaje kilku dostawców konfiguracji:</span><span class="sxs-lookup"><span data-stu-id="f83a3-839">The following code clears all the configuration providers and adds several configuration providers:</span></span>
 
 [!code-csharp[](index/samples/3.x/ConfigSample/ProgramINI.cs?name=snippet&highlight=10-30)]
 
-<span data-ttu-id="32987-350">W powyższym kodzie ustawienia w *MyIniConfig. ini* i *MyIniConfig*. `Environment`. pliki *ini* są zastępowane przez ustawienia w:</span><span class="sxs-lookup"><span data-stu-id="32987-350">In the preceding code, settings in the *MyIniConfig.ini* and  *MyIniConfig*.`Environment`.*ini* files are overridden by settings in the:</span></span>
+<span data-ttu-id="f83a3-840">W powyższym kodzie ustawienia w *MyIniConfig. ini* i *MyIniConfig*. `Environment` . pliki *ini* są zastępowane przez ustawienia w:</span><span class="sxs-lookup"><span data-stu-id="f83a3-840">In the preceding code, settings in the *MyIniConfig.ini* and  *MyIniConfig*.`Environment`.*ini* files are overridden by settings in the:</span></span>
 
-* [<span data-ttu-id="32987-351">Dostawca konfiguracji zmiennych środowiskowych</span><span class="sxs-lookup"><span data-stu-id="32987-351">Environment variables configuration provider</span></span>](#evcp)
-* <span data-ttu-id="32987-352">[Dostawca konfiguracji wiersza polecenia](#clcp).</span><span class="sxs-lookup"><span data-stu-id="32987-352">[Command-line configuration provider](#clcp).</span></span>
+* [<span data-ttu-id="f83a3-841">Dostawca konfiguracji zmiennych środowiskowych</span><span class="sxs-lookup"><span data-stu-id="f83a3-841">Environment variables configuration provider</span></span>](#evcp)
+* <span data-ttu-id="f83a3-842">[Dostawca konfiguracji wiersza polecenia](#clcp).</span><span class="sxs-lookup"><span data-stu-id="f83a3-842">[Command-line configuration provider](#clcp).</span></span>
 
-<span data-ttu-id="32987-353">[Pobieranie próbek](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) zawiera następujący plik *MyIniConfig. ini* :</span><span class="sxs-lookup"><span data-stu-id="32987-353">The [sample download](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) contains the following *MyIniConfig.ini* file:</span></span>
+<span data-ttu-id="f83a3-843">[Pobieranie próbek](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) zawiera następujący plik *MyIniConfig. ini* :</span><span class="sxs-lookup"><span data-stu-id="f83a3-843">The [sample download](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) contains the following *MyIniConfig.ini* file:</span></span>
 
 [!code-ini[](index/samples/3.x/ConfigSample/MyIniConfig.ini)]
 
-<span data-ttu-id="32987-354">Poniższy kod z [pobranego przykładu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) wyświetla kilka powyższych ustawień konfiguracji:</span><span class="sxs-lookup"><span data-stu-id="32987-354">The following code from the [sample download](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) displays several of the preceding configurations settings:</span></span>
+<span data-ttu-id="f83a3-844">Poniższy kod z [pobranego przykładu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) wyświetla kilka powyższych ustawień konfiguracji:</span><span class="sxs-lookup"><span data-stu-id="f83a3-844">The following code from the [sample download](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) displays several of the preceding configurations settings:</span></span>
 
 [!code-csharp[](index/samples/3.x/ConfigSample/Pages/Test.cshtml.cs?name=snippet)]
 
-### <a name="xml-configuration-provider"></a><span data-ttu-id="32987-355">Dostawca konfiguracji XML</span><span class="sxs-lookup"><span data-stu-id="32987-355">XML configuration provider</span></span>
+### <a name="xml-configuration-provider"></a><span data-ttu-id="f83a3-845">Dostawca konfiguracji XML</span><span class="sxs-lookup"><span data-stu-id="f83a3-845">XML configuration provider</span></span>
 
-<span data-ttu-id="32987-356"><xref:Microsoft.Extensions.Configuration.Xml.XmlConfigurationProvider> Ładowanie konfiguracji z par klucz-wartość pliku XML w czasie wykonywania.</span><span class="sxs-lookup"><span data-stu-id="32987-356">The <xref:Microsoft.Extensions.Configuration.Xml.XmlConfigurationProvider> loads configuration from XML file key-value pairs at runtime.</span></span>
+<span data-ttu-id="f83a3-846"><xref:Microsoft.Extensions.Configuration.Xml.XmlConfigurationProvider>Ładowanie konfiguracji z par klucz-wartość pliku XML w czasie wykonywania.</span><span class="sxs-lookup"><span data-stu-id="f83a3-846">The <xref:Microsoft.Extensions.Configuration.Xml.XmlConfigurationProvider> loads configuration from XML file key-value pairs at runtime.</span></span>
 
-<span data-ttu-id="32987-357">Poniższy kod czyści wszystkich dostawców konfiguracji i dodaje kilku dostawców konfiguracji:</span><span class="sxs-lookup"><span data-stu-id="32987-357">The following code clears all the configuration providers and adds several configuration providers:</span></span>
+<span data-ttu-id="f83a3-847">Poniższy kod czyści wszystkich dostawców konfiguracji i dodaje kilku dostawców konfiguracji:</span><span class="sxs-lookup"><span data-stu-id="f83a3-847">The following code clears all the configuration providers and adds several configuration providers:</span></span>
 
 [!code-csharp[](index/samples/3.x/ConfigSample/ProgramXML.cs?name=snippet)]
 
-<span data-ttu-id="32987-358">W powyższym kodzie ustawienia w *MyXMLFile. XML* i *MyXMLFile*. `Environment`. pliki *XML* są zastępowane przez ustawienia w:</span><span class="sxs-lookup"><span data-stu-id="32987-358">In the preceding code, settings in the *MyXMLFile.xml* and  *MyXMLFile*.`Environment`.*xml* files are overridden by settings in the:</span></span>
+<span data-ttu-id="f83a3-848">W powyższym kodzie ustawienia w *MyXMLFile. XML* i *MyXMLFile*. `Environment` . pliki *XML* są zastępowane przez ustawienia w:</span><span class="sxs-lookup"><span data-stu-id="f83a3-848">In the preceding code, settings in the *MyXMLFile.xml* and  *MyXMLFile*.`Environment`.*xml* files are overridden by settings in the:</span></span>
 
-* [<span data-ttu-id="32987-359">Dostawca konfiguracji zmiennych środowiskowych</span><span class="sxs-lookup"><span data-stu-id="32987-359">Environment variables configuration provider</span></span>](#evcp)
-* <span data-ttu-id="32987-360">[Dostawca konfiguracji wiersza polecenia](#clcp).</span><span class="sxs-lookup"><span data-stu-id="32987-360">[Command-line configuration provider](#clcp).</span></span>
+* [<span data-ttu-id="f83a3-849">Dostawca konfiguracji zmiennych środowiskowych</span><span class="sxs-lookup"><span data-stu-id="f83a3-849">Environment variables configuration provider</span></span>](#evcp)
+* <span data-ttu-id="f83a3-850">[Dostawca konfiguracji wiersza polecenia](#clcp).</span><span class="sxs-lookup"><span data-stu-id="f83a3-850">[Command-line configuration provider](#clcp).</span></span>
 
-<span data-ttu-id="32987-361">[Pobieranie próbek](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) zawiera następujący plik *MyXMLFile. XML* :</span><span class="sxs-lookup"><span data-stu-id="32987-361">The [sample download](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) contains the following *MyXMLFile.xml* file:</span></span>
+<span data-ttu-id="f83a3-851">[Pobieranie próbek](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) zawiera następujący plik *MyXMLFile. XML* :</span><span class="sxs-lookup"><span data-stu-id="f83a3-851">The [sample download](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) contains the following *MyXMLFile.xml* file:</span></span>
 
 [!code-xml[](index/samples/3.x/ConfigSample/MyXMLFile.xml)]
 
-<span data-ttu-id="32987-362">Poniższy kod z [pobranego przykładu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) wyświetla kilka powyższych ustawień konfiguracji:</span><span class="sxs-lookup"><span data-stu-id="32987-362">The following code from the [sample download](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) displays several of the preceding configurations settings:</span></span>
+<span data-ttu-id="f83a3-852">Poniższy kod z [pobranego przykładu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) wyświetla kilka powyższych ustawień konfiguracji:</span><span class="sxs-lookup"><span data-stu-id="f83a3-852">The following code from the [sample download](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) displays several of the preceding configurations settings:</span></span>
 
 [!code-csharp[](index/samples/3.x/ConfigSample/Pages/Test.cshtml.cs?name=snippet)]
 
-<span data-ttu-id="32987-363">Powtarzające się elementy, które używają tej samej nazwy elementu `name` , działają, jeśli atrybut jest używany do odróżnienia elementów:</span><span class="sxs-lookup"><span data-stu-id="32987-363">Repeating elements that use the same element name work if the `name` attribute is used to distinguish the elements:</span></span>
+<span data-ttu-id="f83a3-853">Powtarzające się elementy, które używają tej samej nazwy elementu, działają, jeśli `name` atrybut jest używany do odróżnienia elementów:</span><span class="sxs-lookup"><span data-stu-id="f83a3-853">Repeating elements that use the same element name work if the `name` attribute is used to distinguish the elements:</span></span>
 
 [!code-xml[](index/samples/3.x/ConfigSample/MyXMLFile3.xml)]
 
-<span data-ttu-id="32987-364">Poniższy kod odczytuje poprzedni plik konfiguracji i wyświetla klucze i wartości:</span><span class="sxs-lookup"><span data-stu-id="32987-364">The following code reads the previous configuration file and displays the keys and values:</span></span>
+<span data-ttu-id="f83a3-854">Poniższy kod odczytuje poprzedni plik konfiguracji i wyświetla klucze i wartości:</span><span class="sxs-lookup"><span data-stu-id="f83a3-854">The following code reads the previous configuration file and displays the keys and values:</span></span>
 
 [!code-csharp[](index/samples/3.x/ConfigSample/Pages/XML/Index.cshtml.cs?name=snippet)]
 
-<span data-ttu-id="32987-365">Atrybuty mogą służyć do dostarczania wartości:</span><span class="sxs-lookup"><span data-stu-id="32987-365">Attributes can be used to supply values:</span></span>
+<span data-ttu-id="f83a3-855">Atrybuty mogą służyć do dostarczania wartości:</span><span class="sxs-lookup"><span data-stu-id="f83a3-855">Attributes can be used to supply values:</span></span>
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -495,25 +1129,25 @@ dotnet run -k1 value1 -k2 value2 --alt3=value2 /alt4=value3 --alt5 value5 /alt6 
 </configuration>
 ```
 
-<span data-ttu-id="32987-366">Poprzedni plik konfiguracji ładuje następujące klucze z `value`:</span><span class="sxs-lookup"><span data-stu-id="32987-366">The previous configuration file loads the following keys with `value`:</span></span>
+<span data-ttu-id="f83a3-856">Poprzedni plik konfiguracji ładuje następujące klucze z `value` :</span><span class="sxs-lookup"><span data-stu-id="f83a3-856">The previous configuration file loads the following keys with `value`:</span></span>
 
-* <span data-ttu-id="32987-367">Key: Attribute</span><span class="sxs-lookup"><span data-stu-id="32987-367">key:attribute</span></span>
-* <span data-ttu-id="32987-368">sekcja: Key: Attribute</span><span class="sxs-lookup"><span data-stu-id="32987-368">section:key:attribute</span></span>
+* <span data-ttu-id="f83a3-857">Key: Attribute</span><span class="sxs-lookup"><span data-stu-id="f83a3-857">key:attribute</span></span>
+* <span data-ttu-id="f83a3-858">sekcja: Key: Attribute</span><span class="sxs-lookup"><span data-stu-id="f83a3-858">section:key:attribute</span></span>
 
-## <a name="key-per-file-configuration-provider"></a><span data-ttu-id="32987-369">Dostawca konfiguracji klucza dla plików</span><span class="sxs-lookup"><span data-stu-id="32987-369">Key-per-file configuration provider</span></span>
+## <a name="key-per-file-configuration-provider"></a><span data-ttu-id="f83a3-859">Dostawca konfiguracji klucza dla plików</span><span class="sxs-lookup"><span data-stu-id="f83a3-859">Key-per-file configuration provider</span></span>
 
-<span data-ttu-id="32987-370"><xref:Microsoft.Extensions.Configuration.KeyPerFile.KeyPerFileConfigurationProvider> Używa plików katalogu jako par klucz konfiguracji i wartość.</span><span class="sxs-lookup"><span data-stu-id="32987-370">The <xref:Microsoft.Extensions.Configuration.KeyPerFile.KeyPerFileConfigurationProvider> uses a directory's files as configuration key-value pairs.</span></span> <span data-ttu-id="32987-371">Kluczem jest nazwa pliku.</span><span class="sxs-lookup"><span data-stu-id="32987-371">The key is the file name.</span></span> <span data-ttu-id="32987-372">Wartość zawiera zawartość pliku.</span><span class="sxs-lookup"><span data-stu-id="32987-372">The value contains the file's contents.</span></span> <span data-ttu-id="32987-373">Dostawca konfiguracji klucza dla plików jest używany w scenariuszach hostingu platformy Docker.</span><span class="sxs-lookup"><span data-stu-id="32987-373">The Key-per-file configuration provider is used in Docker hosting scenarios.</span></span>
+<span data-ttu-id="f83a3-860"><xref:Microsoft.Extensions.Configuration.KeyPerFile.KeyPerFileConfigurationProvider>Używa plików katalogu jako par klucz konfiguracji i wartość.</span><span class="sxs-lookup"><span data-stu-id="f83a3-860">The <xref:Microsoft.Extensions.Configuration.KeyPerFile.KeyPerFileConfigurationProvider> uses a directory's files as configuration key-value pairs.</span></span> <span data-ttu-id="f83a3-861">Kluczem jest nazwa pliku.</span><span class="sxs-lookup"><span data-stu-id="f83a3-861">The key is the file name.</span></span> <span data-ttu-id="f83a3-862">Wartość zawiera zawartość pliku.</span><span class="sxs-lookup"><span data-stu-id="f83a3-862">The value contains the file's contents.</span></span> <span data-ttu-id="f83a3-863">Dostawca konfiguracji klucza dla plików jest używany w scenariuszach hostingu platformy Docker.</span><span class="sxs-lookup"><span data-stu-id="f83a3-863">The Key-per-file configuration provider is used in Docker hosting scenarios.</span></span>
 
-<span data-ttu-id="32987-374">Aby uaktywnić konfigurację klucza dla plików, wywołaj metodę <xref:Microsoft.Extensions.Configuration.KeyPerFileConfigurationBuilderExtensions.AddKeyPerFile*> rozszerzenia w wystąpieniu <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder>.</span><span class="sxs-lookup"><span data-stu-id="32987-374">To activate key-per-file configuration, call the <xref:Microsoft.Extensions.Configuration.KeyPerFileConfigurationBuilderExtensions.AddKeyPerFile*> extension method on an instance of <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder>.</span></span> <span data-ttu-id="32987-375">`directoryPath` Do plików musi być ścieżką bezwzględną.</span><span class="sxs-lookup"><span data-stu-id="32987-375">The `directoryPath` to the files must be an absolute path.</span></span>
+<span data-ttu-id="f83a3-864">Aby uaktywnić konfigurację klucza dla plików, wywołaj <xref:Microsoft.Extensions.Configuration.KeyPerFileConfigurationBuilderExtensions.AddKeyPerFile*> metodę rozszerzenia w wystąpieniu <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder> .</span><span class="sxs-lookup"><span data-stu-id="f83a3-864">To activate key-per-file configuration, call the <xref:Microsoft.Extensions.Configuration.KeyPerFileConfigurationBuilderExtensions.AddKeyPerFile*> extension method on an instance of <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder>.</span></span> <span data-ttu-id="f83a3-865">`directoryPath`Do plików musi być ścieżką bezwzględną.</span><span class="sxs-lookup"><span data-stu-id="f83a3-865">The `directoryPath` to the files must be an absolute path.</span></span>
 
-<span data-ttu-id="32987-376">Przeciążania Zezwalaj na określanie:</span><span class="sxs-lookup"><span data-stu-id="32987-376">Overloads permit specifying:</span></span>
+<span data-ttu-id="f83a3-866">Przeciążania Zezwalaj na określanie:</span><span class="sxs-lookup"><span data-stu-id="f83a3-866">Overloads permit specifying:</span></span>
 
-* <span data-ttu-id="32987-377">`Action<KeyPerFileConfigurationSource>` Delegat, który konfiguruje źródło.</span><span class="sxs-lookup"><span data-stu-id="32987-377">An `Action<KeyPerFileConfigurationSource>` delegate that configures the source.</span></span>
-* <span data-ttu-id="32987-378">Określa, czy katalog jest opcjonalny, i ścieżkę do katalogu.</span><span class="sxs-lookup"><span data-stu-id="32987-378">Whether the directory is optional and the path to the directory.</span></span>
+* <span data-ttu-id="f83a3-867">`Action<KeyPerFileConfigurationSource>`Delegat, który konfiguruje źródło.</span><span class="sxs-lookup"><span data-stu-id="f83a3-867">An `Action<KeyPerFileConfigurationSource>` delegate that configures the source.</span></span>
+* <span data-ttu-id="f83a3-868">Określa, czy katalog jest opcjonalny, i ścieżkę do katalogu.</span><span class="sxs-lookup"><span data-stu-id="f83a3-868">Whether the directory is optional and the path to the directory.</span></span>
 
-<span data-ttu-id="32987-379">Podwójny znak podkreślenia (`__`) jest używany jako ogranicznik klucza konfiguracji w nazwach plików.</span><span class="sxs-lookup"><span data-stu-id="32987-379">The double-underscore (`__`) is used as a configuration key delimiter in file names.</span></span> <span data-ttu-id="32987-380">Na przykład nazwa `Logging__LogLevel__System` pliku generuje klucz `Logging:LogLevel:System`konfiguracji.</span><span class="sxs-lookup"><span data-stu-id="32987-380">For example, the file name `Logging__LogLevel__System` produces the configuration key `Logging:LogLevel:System`.</span></span>
+<span data-ttu-id="f83a3-869">Podwójny znak podkreślenia ( `__` ) jest używany jako ogranicznik klucza konfiguracji w nazwach plików.</span><span class="sxs-lookup"><span data-stu-id="f83a3-869">The double-underscore (`__`) is used as a configuration key delimiter in file names.</span></span> <span data-ttu-id="f83a3-870">Na przykład nazwa pliku `Logging__LogLevel__System` generuje klucz konfiguracji `Logging:LogLevel:System` .</span><span class="sxs-lookup"><span data-stu-id="f83a3-870">For example, the file name `Logging__LogLevel__System` produces the configuration key `Logging:LogLevel:System`.</span></span>
 
-<span data-ttu-id="32987-381">Wywołaj `ConfigureAppConfiguration` podczas kompilowania hosta, aby określić konfigurację aplikacji:</span><span class="sxs-lookup"><span data-stu-id="32987-381">Call `ConfigureAppConfiguration` when building the host to specify the app's configuration:</span></span>
+<span data-ttu-id="f83a3-871">Wywołaj `ConfigureAppConfiguration` podczas kompilowania hosta, aby określić konfigurację aplikacji:</span><span class="sxs-lookup"><span data-stu-id="f83a3-871">Call `ConfigureAppConfiguration` when building the host to specify the app's configuration:</span></span>
 
 ```csharp
 .ConfigureAppConfiguration((hostingContext, config) =>
@@ -526,83 +1160,83 @@ dotnet run -k1 value1 -k2 value2 --alt3=value2 /alt4=value3 --alt5 value5 /alt6 
 
 <a name="mcp"></a>
 
-## <a name="memory-configuration-provider"></a><span data-ttu-id="32987-382">Dostawca konfiguracji pamięci</span><span class="sxs-lookup"><span data-stu-id="32987-382">Memory configuration provider</span></span>
+## <a name="memory-configuration-provider"></a><span data-ttu-id="f83a3-872">Dostawca konfiguracji pamięci</span><span class="sxs-lookup"><span data-stu-id="f83a3-872">Memory configuration provider</span></span>
 
-<span data-ttu-id="32987-383"><xref:Microsoft.Extensions.Configuration.Memory.MemoryConfigurationProvider> Używa kolekcji w pamięci jako par klucz konfiguracji-wartość.</span><span class="sxs-lookup"><span data-stu-id="32987-383">The <xref:Microsoft.Extensions.Configuration.Memory.MemoryConfigurationProvider> uses an in-memory collection as configuration key-value pairs.</span></span>
+<span data-ttu-id="f83a3-873"><xref:Microsoft.Extensions.Configuration.Memory.MemoryConfigurationProvider>Używa kolekcji w pamięci jako par klucz konfiguracji-wartość.</span><span class="sxs-lookup"><span data-stu-id="f83a3-873">The <xref:Microsoft.Extensions.Configuration.Memory.MemoryConfigurationProvider> uses an in-memory collection as configuration key-value pairs.</span></span>
 
-<span data-ttu-id="32987-384">Poniższy kod dodaje kolekcję pamięci do systemu konfiguracji:</span><span class="sxs-lookup"><span data-stu-id="32987-384">The following code adds a memory collection to the configuration system:</span></span>
+<span data-ttu-id="f83a3-874">Poniższy kod dodaje kolekcję pamięci do systemu konfiguracji:</span><span class="sxs-lookup"><span data-stu-id="f83a3-874">The following code adds a memory collection to the configuration system:</span></span>
 
 [!code-csharp[](index/samples/3.x/ConfigSample/ProgramArray.cs?name=snippet6)]
 
-<span data-ttu-id="32987-385">Poniższy kod z [pobranego przykładu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) wyświetla poprzednie ustawienia konfiguracji:</span><span class="sxs-lookup"><span data-stu-id="32987-385">The following code from the [sample download](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) displays the preceding configurations settings:</span></span>
+<span data-ttu-id="f83a3-875">Poniższy kod z [pobranego przykładu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) wyświetla poprzednie ustawienia konfiguracji:</span><span class="sxs-lookup"><span data-stu-id="f83a3-875">The following code from the [sample download](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) displays the preceding configurations settings:</span></span>
 
 [!code-csharp[](index/samples/3.x/ConfigSample/Pages/Test.cshtml.cs?name=snippet)]
 
-<span data-ttu-id="32987-386">W poprzednim kodzie `config.AddInMemoryCollection(Dict)` jest dodawany po [domyślnych dostawcach konfiguracji](#default).</span><span class="sxs-lookup"><span data-stu-id="32987-386">In the preceding code, `config.AddInMemoryCollection(Dict)` is added after the [default configuration providers](#default).</span></span> <span data-ttu-id="32987-387">Przykład określania kolejności dostawców konfiguracji można znaleźć w temacie [dostawca konfiguracji JSON](#jcp).</span><span class="sxs-lookup"><span data-stu-id="32987-387">For an example of ordering the configuration providers, see [JSON configuration provider](#jcp).</span></span>
+<span data-ttu-id="f83a3-876">W poprzednim kodzie `config.AddInMemoryCollection(Dict)` jest dodawany po [domyślnych dostawcach konfiguracji](#default).</span><span class="sxs-lookup"><span data-stu-id="f83a3-876">In the preceding code, `config.AddInMemoryCollection(Dict)` is added after the [default configuration providers](#default).</span></span> <span data-ttu-id="f83a3-877">Przykład określania kolejności dostawców konfiguracji można znaleźć w temacie [dostawca konfiguracji JSON](#jcp).</span><span class="sxs-lookup"><span data-stu-id="f83a3-877">For an example of ordering the configuration providers, see [JSON configuration provider](#jcp).</span></span>
 
-<span data-ttu-id="32987-388">Zobacz [Powiąż tablicę](#boa) z innym przykładem przy użyciu `MemoryConfigurationProvider`.</span><span class="sxs-lookup"><span data-stu-id="32987-388">See [Bind an array](#boa) for another example using `MemoryConfigurationProvider`.</span></span>
+<span data-ttu-id="f83a3-878">Zobacz [Powiąż tablicę](#boa) z innym przykładem przy użyciu `MemoryConfigurationProvider` .</span><span class="sxs-lookup"><span data-stu-id="f83a3-878">See [Bind an array](#boa) for another example using `MemoryConfigurationProvider`.</span></span>
 
-## <a name="getvalue"></a><span data-ttu-id="32987-389">GetValue</span><span class="sxs-lookup"><span data-stu-id="32987-389">GetValue</span></span>
+## <a name="getvalue"></a><span data-ttu-id="f83a3-879">GetValue</span><span class="sxs-lookup"><span data-stu-id="f83a3-879">GetValue</span></span>
 
-<span data-ttu-id="32987-390">[`ConfigurationBinder.GetValue<T>`](xref:Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue*)wyodrębnia pojedynczą wartość z konfiguracji z określonym kluczem i konwertuje ją na określony typ:</span><span class="sxs-lookup"><span data-stu-id="32987-390">[`ConfigurationBinder.GetValue<T>`](xref:Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue*) extracts a single value from configuration with a specified key and converts it to the specified type:</span></span>
+<span data-ttu-id="f83a3-880">[`ConfigurationBinder.GetValue<T>`](xref:Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue*)wyodrębnia pojedynczą wartość z konfiguracji z określonym kluczem i konwertuje ją na określony typ:</span><span class="sxs-lookup"><span data-stu-id="f83a3-880">[`ConfigurationBinder.GetValue<T>`](xref:Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue*) extracts a single value from configuration with a specified key and converts it to the specified type:</span></span>
 
 [!code-csharp[](index/samples/3.x/ConfigSample/Pages/TestNum.cshtml.cs?name=snippet)]
 
-<span data-ttu-id="32987-391">W powyższym kodzie, `NumberKey` Jeśli nie zostanie znaleziony w konfiguracji, `99` zostanie użyta wartość domyślna.</span><span class="sxs-lookup"><span data-stu-id="32987-391">In the preceding code,  if `NumberKey` isn't found in the configuration, the default value of `99` is used.</span></span>
+<span data-ttu-id="f83a3-881">W powyższym kodzie, jeśli `NumberKey` nie zostanie znaleziony w konfiguracji, `99` zostanie użyta wartość domyślna.</span><span class="sxs-lookup"><span data-stu-id="f83a3-881">In the preceding code,  if `NumberKey` isn't found in the configuration, the default value of `99` is used.</span></span>
 
-## <a name="getsection-getchildren-and-exists"></a><span data-ttu-id="32987-392">GetSection, GetChildren i EXISTS</span><span class="sxs-lookup"><span data-stu-id="32987-392">GetSection, GetChildren, and Exists</span></span>
+## <a name="getsection-getchildren-and-exists"></a><span data-ttu-id="f83a3-882">GetSection, GetChildren i EXISTS</span><span class="sxs-lookup"><span data-stu-id="f83a3-882">GetSection, GetChildren, and Exists</span></span>
 
-<span data-ttu-id="32987-393">W poniższych przykładach należy wziąć pod uwagę następujący plik *MySubsection. JSON* :</span><span class="sxs-lookup"><span data-stu-id="32987-393">For the examples that follow, consider the following *MySubsection.json* file:</span></span>
+<span data-ttu-id="f83a3-883">W poniższych przykładach należy wziąć pod uwagę następujący plik *MySubsection. JSON* :</span><span class="sxs-lookup"><span data-stu-id="f83a3-883">For the examples that follow, consider the following *MySubsection.json* file:</span></span>
 
 [!code-json[](index/samples/3.x/ConfigSample/MySubsection.json)]
 
-<span data-ttu-id="32987-394">Poniższy kod dodaje *MySubsection. JSON* do dostawców konfiguracji:</span><span class="sxs-lookup"><span data-stu-id="32987-394">The following code adds *MySubsection.json* to the configuration providers:</span></span>
+<span data-ttu-id="f83a3-884">Poniższy kod dodaje *MySubsection. JSON* do dostawców konfiguracji:</span><span class="sxs-lookup"><span data-stu-id="f83a3-884">The following code adds *MySubsection.json* to the configuration providers:</span></span>
 
 [!code-csharp[](index/samples/3.x/ConfigSample/ProgramJSONsection.cs?name=snippet)]
 
-### <a name="getsection"></a><span data-ttu-id="32987-395">GetSection</span><span class="sxs-lookup"><span data-stu-id="32987-395">GetSection</span></span>
+### <a name="getsection"></a><span data-ttu-id="f83a3-885">GetSection</span><span class="sxs-lookup"><span data-stu-id="f83a3-885">GetSection</span></span>
 
-<span data-ttu-id="32987-396">[IConfiguration. GetSection](xref:Microsoft.Extensions.Configuration.IConfiguration.GetSection*) zwraca podsekcję konfiguracji z określonym kluczem podsekcji.</span><span class="sxs-lookup"><span data-stu-id="32987-396">[IConfiguration.GetSection](xref:Microsoft.Extensions.Configuration.IConfiguration.GetSection*) returns a configuration subsection with the specified subsection key.</span></span>
+<span data-ttu-id="f83a3-886">[IConfiguration. GetSection](xref:Microsoft.Extensions.Configuration.IConfiguration.GetSection*) zwraca podsekcję konfiguracji z określonym kluczem podsekcji.</span><span class="sxs-lookup"><span data-stu-id="f83a3-886">[IConfiguration.GetSection](xref:Microsoft.Extensions.Configuration.IConfiguration.GetSection*) returns a configuration subsection with the specified subsection key.</span></span>
 
-<span data-ttu-id="32987-397">Poniższy kod zwraca wartości dla `section1`:</span><span class="sxs-lookup"><span data-stu-id="32987-397">The following code returns values for `section1`:</span></span>
+<span data-ttu-id="f83a3-887">Poniższy kod zwraca wartości dla `section1` :</span><span class="sxs-lookup"><span data-stu-id="f83a3-887">The following code returns values for `section1`:</span></span>
 
 [!code-csharp[](index/samples/3.x/ConfigSample/Pages/TestSection.cshtml.cs?name=snippet)]
 
-<span data-ttu-id="32987-398">Poniższy kod zwraca wartości dla `section2:subsection0`:</span><span class="sxs-lookup"><span data-stu-id="32987-398">The following code returns values for `section2:subsection0`:</span></span>
+<span data-ttu-id="f83a3-888">Poniższy kod zwraca wartości dla `section2:subsection0` :</span><span class="sxs-lookup"><span data-stu-id="f83a3-888">The following code returns values for `section2:subsection0`:</span></span>
 
 [!code-csharp[](index/samples/3.x/ConfigSample/Pages/TestSection2.cshtml.cs?name=snippet)]
 
-<span data-ttu-id="32987-399">`GetSection`nigdy nie `null`zwraca.</span><span class="sxs-lookup"><span data-stu-id="32987-399">`GetSection` never returns `null`.</span></span> <span data-ttu-id="32987-400">Jeśli nie znaleziono pasującej sekcji, zwracany jest `IConfigurationSection` pusty.</span><span class="sxs-lookup"><span data-stu-id="32987-400">If a matching section isn't found, an empty `IConfigurationSection` is returned.</span></span>
+<span data-ttu-id="f83a3-889">`GetSection`nigdy nie zwraca `null` .</span><span class="sxs-lookup"><span data-stu-id="f83a3-889">`GetSection` never returns `null`.</span></span> <span data-ttu-id="f83a3-890">Jeśli nie znaleziono pasującej sekcji, `IConfigurationSection` zwracany jest pusty.</span><span class="sxs-lookup"><span data-stu-id="f83a3-890">If a matching section isn't found, an empty `IConfigurationSection` is returned.</span></span>
 
-<span data-ttu-id="32987-401">Gdy `GetSection` zwraca pasującą sekcję, <xref:Microsoft.Extensions.Configuration.IConfigurationSection.Value> nie jest wypełnione.</span><span class="sxs-lookup"><span data-stu-id="32987-401">When `GetSection` returns a matching section, <xref:Microsoft.Extensions.Configuration.IConfigurationSection.Value> isn't populated.</span></span> <span data-ttu-id="32987-402">A <xref:Microsoft.Extensions.Configuration.IConfigurationSection.Key> i <xref:Microsoft.Extensions.Configuration.IConfigurationSection.Path> są zwracane, gdy istnieje sekcja.</span><span class="sxs-lookup"><span data-stu-id="32987-402">A <xref:Microsoft.Extensions.Configuration.IConfigurationSection.Key> and <xref:Microsoft.Extensions.Configuration.IConfigurationSection.Path> are returned when the section exists.</span></span>
+<span data-ttu-id="f83a3-891">Gdy `GetSection` zwraca pasującą sekcję, <xref:Microsoft.Extensions.Configuration.IConfigurationSection.Value> nie jest wypełnione.</span><span class="sxs-lookup"><span data-stu-id="f83a3-891">When `GetSection` returns a matching section, <xref:Microsoft.Extensions.Configuration.IConfigurationSection.Value> isn't populated.</span></span> <span data-ttu-id="f83a3-892">A <xref:Microsoft.Extensions.Configuration.IConfigurationSection.Key> i <xref:Microsoft.Extensions.Configuration.IConfigurationSection.Path> są zwracane, gdy istnieje sekcja.</span><span class="sxs-lookup"><span data-stu-id="f83a3-892">A <xref:Microsoft.Extensions.Configuration.IConfigurationSection.Key> and <xref:Microsoft.Extensions.Configuration.IConfigurationSection.Path> are returned when the section exists.</span></span>
 
-### <a name="getchildren-and-exists"></a><span data-ttu-id="32987-403">GetChildren i istnieje</span><span class="sxs-lookup"><span data-stu-id="32987-403">GetChildren and Exists</span></span>
+### <a name="getchildren-and-exists"></a><span data-ttu-id="f83a3-893">GetChildren i istnieje</span><span class="sxs-lookup"><span data-stu-id="f83a3-893">GetChildren and Exists</span></span>
 
-<span data-ttu-id="32987-404">Poniższy kod wywołuje [iConfiguration. GetChildren](xref:Microsoft.Extensions.Configuration.IConfiguration.GetChildren*) i zwraca wartości dla `section2:subsection0`:</span><span class="sxs-lookup"><span data-stu-id="32987-404">The following code calls [IConfiguration.GetChildren](xref:Microsoft.Extensions.Configuration.IConfiguration.GetChildren*) and returns values for `section2:subsection0`:</span></span>
+<span data-ttu-id="f83a3-894">Poniższy kod wywołuje [iConfiguration. GetChildren](xref:Microsoft.Extensions.Configuration.IConfiguration.GetChildren*) i zwraca wartości dla `section2:subsection0` :</span><span class="sxs-lookup"><span data-stu-id="f83a3-894">The following code calls [IConfiguration.GetChildren](xref:Microsoft.Extensions.Configuration.IConfiguration.GetChildren*) and returns values for `section2:subsection0`:</span></span>
 
 [!code-csharp[](index/samples/3.x/ConfigSample/Pages/TestSection4.cshtml.cs?name=snippet)]
 
-<span data-ttu-id="32987-405">Poprzedni kod wywołuje [ConfigurationExtensions. Exists](xref:Microsoft.Extensions.Configuration.ConfigurationExtensions.Exists*) , aby sprawdzić, czy sekcja istnieje:</span><span class="sxs-lookup"><span data-stu-id="32987-405">The preceding code calls [ConfigurationExtensions.Exists](xref:Microsoft.Extensions.Configuration.ConfigurationExtensions.Exists*) to verify the  section exists:</span></span>
+<span data-ttu-id="f83a3-895">Poprzedni kod wywołuje [ConfigurationExtensions. Exists](xref:Microsoft.Extensions.Configuration.ConfigurationExtensions.Exists*) , aby sprawdzić, czy sekcja istnieje:</span><span class="sxs-lookup"><span data-stu-id="f83a3-895">The preceding code calls [ConfigurationExtensions.Exists](xref:Microsoft.Extensions.Configuration.ConfigurationExtensions.Exists*) to verify the  section exists:</span></span>
 
  <a name="boa"></a>
 
-## <a name="bind-an-array"></a><span data-ttu-id="32987-406">Powiąż tablicę</span><span class="sxs-lookup"><span data-stu-id="32987-406">Bind an array</span></span>
+## <a name="bind-an-array"></a><span data-ttu-id="f83a3-896">Powiąż tablicę</span><span class="sxs-lookup"><span data-stu-id="f83a3-896">Bind an array</span></span>
 
-<span data-ttu-id="32987-407">[ConfigurationBinder. bind](xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Bind*) obsługuje tablice powiązań z obiektami przy użyciu indeksów tablicowych w kluczach konfiguracji.</span><span class="sxs-lookup"><span data-stu-id="32987-407">The [ConfigurationBinder.Bind](xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Bind*) supports binding arrays to objects using array indices in configuration keys.</span></span> <span data-ttu-id="32987-408">Każdy format tablicy, który ujawnia segment klucza numerycznego, jest w stanie powiązać powiązanie tablicy z tablicą klas [poco](https://wikipedia.org/wiki/Plain_Old_CLR_Object) .</span><span class="sxs-lookup"><span data-stu-id="32987-408">Any array format that exposes a numeric key segment is capable of array binding to a [POCO](https://wikipedia.org/wiki/Plain_Old_CLR_Object) class array.</span></span>
+<span data-ttu-id="f83a3-897">[ConfigurationBinder. bind](xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Bind*) obsługuje tablice powiązań z obiektami przy użyciu indeksów tablicowych w kluczach konfiguracji.</span><span class="sxs-lookup"><span data-stu-id="f83a3-897">The [ConfigurationBinder.Bind](xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Bind*) supports binding arrays to objects using array indices in configuration keys.</span></span> <span data-ttu-id="f83a3-898">Każdy format tablicy, który ujawnia segment klucza numerycznego, jest w stanie powiązać powiązanie tablicy z tablicą klas [poco](https://wikipedia.org/wiki/Plain_Old_CLR_Object) .</span><span class="sxs-lookup"><span data-stu-id="f83a3-898">Any array format that exposes a numeric key segment is capable of array binding to a [POCO](https://wikipedia.org/wiki/Plain_Old_CLR_Object) class array.</span></span>
 
-<span data-ttu-id="32987-409">Weź pod uwagę plik *webarray. JSON* z [przykładowego pobrania](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample):</span><span class="sxs-lookup"><span data-stu-id="32987-409">Consider *MyArray.json* from the [sample download](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample):</span></span>
+<span data-ttu-id="f83a3-899">Weź pod uwagę plik *webarray. JSON* z [przykładowego pobrania](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample):</span><span class="sxs-lookup"><span data-stu-id="f83a3-899">Consider *MyArray.json* from the [sample download](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample):</span></span>
 
 [!code-json[](index/samples/3.x/ConfigSample/MyArray.json)]
 
-<span data-ttu-id="32987-410">Poniższy kod dodaje plik *webarray. JSON* do dostawców konfiguracji:</span><span class="sxs-lookup"><span data-stu-id="32987-410">The following code adds *MyArray.json* to the configuration providers:</span></span>
+<span data-ttu-id="f83a3-900">Poniższy kod dodaje plik *webarray. JSON* do dostawców konfiguracji:</span><span class="sxs-lookup"><span data-stu-id="f83a3-900">The following code adds *MyArray.json* to the configuration providers:</span></span>
 
 [!code-csharp[](index/samples/3.x/ConfigSample/ProgramJSONarray.cs?name=snippet)]
 
-<span data-ttu-id="32987-411">Poniższy kod odczytuje konfigurację i wyświetla wartości:</span><span class="sxs-lookup"><span data-stu-id="32987-411">The following code reads the configuration and displays the values:</span></span>
+<span data-ttu-id="f83a3-901">Poniższy kod odczytuje konfigurację i wyświetla wartości:</span><span class="sxs-lookup"><span data-stu-id="f83a3-901">The following code reads the configuration and displays the values:</span></span>
 
 [!code-csharp[](index/samples/3.x/ConfigSample/Pages/Array.cshtml.cs?name=snippet)]
 
-<span data-ttu-id="32987-412">Poprzedni kod zwraca następujące dane wyjściowe:</span><span class="sxs-lookup"><span data-stu-id="32987-412">The preceding code returns the following output:</span></span>
+<span data-ttu-id="f83a3-902">Poprzedni kod zwraca następujące dane wyjściowe:</span><span class="sxs-lookup"><span data-stu-id="f83a3-902">The preceding code returns the following output:</span></span>
 
 ```text
 Index: 0  Value: value00
@@ -612,17 +1246,17 @@ Index: 3  Value: value40
 Index: 4  Value: value50
 ```
 
-<span data-ttu-id="32987-413">W poprzednich danych wyjściowych indeks 3 ma wartość `value40`odpowiadającą `"4": "value40",` w pliku *webarray. JSON*.</span><span class="sxs-lookup"><span data-stu-id="32987-413">In the preceding output, Index 3 has value `value40`, corresponding to `"4": "value40",` in *MyArray.json*.</span></span> <span data-ttu-id="32987-414">Powiązane indeksy tablicy są ciągłe i nie są powiązane z indeksem klucza konfiguracji.</span><span class="sxs-lookup"><span data-stu-id="32987-414">The bound array indices are continuous and not bound to the configuration key index.</span></span> <span data-ttu-id="32987-415">Obiekt tworzący konfigurację nie jest w stanie powiązać wartości null ani tworzyć wpisów o wartości null dla obiektów powiązanych</span><span class="sxs-lookup"><span data-stu-id="32987-415">The configuration binder isn't capable of binding null values or creating null entries in bound objects</span></span>
+<span data-ttu-id="f83a3-903">W poprzednich danych wyjściowych indeks 3 ma wartość `value40` odpowiadającą `"4": "value40",` w pliku *webarray. JSON*.</span><span class="sxs-lookup"><span data-stu-id="f83a3-903">In the preceding output, Index 3 has value `value40`, corresponding to `"4": "value40",` in *MyArray.json*.</span></span> <span data-ttu-id="f83a3-904">Powiązane indeksy tablicy są ciągłe i nie są powiązane z indeksem klucza konfiguracji.</span><span class="sxs-lookup"><span data-stu-id="f83a3-904">The bound array indices are continuous and not bound to the configuration key index.</span></span> <span data-ttu-id="f83a3-905">Obiekt tworzący konfigurację nie jest w stanie powiązać wartości null ani tworzyć wpisów o wartości null dla obiektów powiązanych</span><span class="sxs-lookup"><span data-stu-id="f83a3-905">The configuration binder isn't capable of binding null values or creating null entries in bound objects</span></span>
 
-<span data-ttu-id="32987-416">Poniższy kod ładuje `array:entries` konfigurację z użyciem metody <xref:Microsoft.Extensions.Configuration.MemoryConfigurationBuilderExtensions.AddInMemoryCollection*> rozszerzającej:</span><span class="sxs-lookup"><span data-stu-id="32987-416">The  following code loads the `array:entries` configuration with the <xref:Microsoft.Extensions.Configuration.MemoryConfigurationBuilderExtensions.AddInMemoryCollection*> extension method:</span></span>
+<span data-ttu-id="f83a3-906">Poniższy kod ładuje `array:entries` konfigurację z użyciem <xref:Microsoft.Extensions.Configuration.MemoryConfigurationBuilderExtensions.AddInMemoryCollection*> metody rozszerzającej:</span><span class="sxs-lookup"><span data-stu-id="f83a3-906">The  following code loads the `array:entries` configuration with the <xref:Microsoft.Extensions.Configuration.MemoryConfigurationBuilderExtensions.AddInMemoryCollection*> extension method:</span></span>
 
 [!code-csharp[](index/samples/3.x/ConfigSample/ProgramArray.cs?name=snippet)]
 
-<span data-ttu-id="32987-417">Poniższy kod odczytuje konfigurację w `arrayDict` `Dictionary` i wyświetla wartości:</span><span class="sxs-lookup"><span data-stu-id="32987-417">The following code reads the configuration in the `arrayDict` `Dictionary` and displays the values:</span></span>
+<span data-ttu-id="f83a3-907">Poniższy kod odczytuje konfigurację w `arrayDict` `Dictionary` i wyświetla wartości:</span><span class="sxs-lookup"><span data-stu-id="f83a3-907">The following code reads the configuration in the `arrayDict` `Dictionary` and displays the values:</span></span>
 
 [!code-csharp[](index/samples/3.x/ConfigSample/Pages/Array.cshtml.cs?name=snippet)]
 
-<span data-ttu-id="32987-418">Poprzedni kod zwraca następujące dane wyjściowe:</span><span class="sxs-lookup"><span data-stu-id="32987-418">The preceding code returns the following output:</span></span>
+<span data-ttu-id="f83a3-908">Poprzedni kod zwraca następujące dane wyjściowe:</span><span class="sxs-lookup"><span data-stu-id="f83a3-908">The preceding code returns the following output:</span></span>
 
 ```text
 Index: 0  Value: value0
@@ -632,21 +1266,21 @@ Index: 3  Value: value4
 Index: 4  Value: value5
 ```
 
-<span data-ttu-id="32987-419">Indeks &num;3 w obiekcie powiązanym przechowuje dane konfiguracji dla klucza `array:4` konfiguracji i jego wartość `value4`.</span><span class="sxs-lookup"><span data-stu-id="32987-419">Index &num;3 in the bound object holds the configuration data for the `array:4` configuration key and its value of `value4`.</span></span> <span data-ttu-id="32987-420">Gdy dane konfiguracji zawierające tablicę są powiązane, indeksy tablic w kluczach konfiguracji są używane do iteracji danych konfiguracji podczas tworzenia obiektu.</span><span class="sxs-lookup"><span data-stu-id="32987-420">When configuration data containing an array is bound, the array indices in the configuration keys are used to iterate the configuration data when creating the object.</span></span> <span data-ttu-id="32987-421">Wartości null nie można zachować w danych konfiguracyjnych, a wpis o wartości null nie jest tworzony w obiekcie powiązanym, gdy tablica w kluczach konfiguracji pomija jeden lub więcej indeksów.</span><span class="sxs-lookup"><span data-stu-id="32987-421">A null value can't be retained in configuration data, and a null-valued entry isn't created in a bound object when an array in configuration keys skip one or more indices.</span></span>
+<span data-ttu-id="f83a3-909">Indeks &num; 3 w obiekcie powiązanym przechowuje dane konfiguracji dla `array:4` klucza konfiguracji i jego wartość `value4` .</span><span class="sxs-lookup"><span data-stu-id="f83a3-909">Index &num;3 in the bound object holds the configuration data for the `array:4` configuration key and its value of `value4`.</span></span> <span data-ttu-id="f83a3-910">Gdy dane konfiguracji zawierające tablicę są powiązane, indeksy tablic w kluczach konfiguracji są używane do iteracji danych konfiguracji podczas tworzenia obiektu.</span><span class="sxs-lookup"><span data-stu-id="f83a3-910">When configuration data containing an array is bound, the array indices in the configuration keys are used to iterate the configuration data when creating the object.</span></span> <span data-ttu-id="f83a3-911">Wartości null nie można zachować w danych konfiguracyjnych, a wpis o wartości null nie jest tworzony w obiekcie powiązanym, gdy tablica w kluczach konfiguracji pomija jeden lub więcej indeksów.</span><span class="sxs-lookup"><span data-stu-id="f83a3-911">A null value can't be retained in configuration data, and a null-valued entry isn't created in a bound object when an array in configuration keys skip one or more indices.</span></span>
 
-<span data-ttu-id="32987-422">Brakujący element konfiguracji dla indeksu &num;3 można dostarczyć przed powiązaniem z `ArrayExample` wystąpieniem przez dowolnego dostawcę konfiguracji, który odczytuje parę &num;klucz/wartość indeksu 3.</span><span class="sxs-lookup"><span data-stu-id="32987-422">The missing configuration item for index &num;3 can be supplied before binding to the `ArrayExample` instance by any configuration provider that reads the index &num;3 key/value pair.</span></span> <span data-ttu-id="32987-423">Rozważmy następujący plik *Wartość3. JSON* z przykładowego pobrania:</span><span class="sxs-lookup"><span data-stu-id="32987-423">Consider the following *Value3.json* file from the sample download:</span></span>
+<span data-ttu-id="f83a3-912">Brakujący element konfiguracji dla indeksu &num; 3 można dostarczyć przed powiązaniem z `ArrayExample` wystąpieniem przez dowolnego dostawcę konfiguracji, który odczytuje &num; parę klucz/wartość indeksu 3.</span><span class="sxs-lookup"><span data-stu-id="f83a3-912">The missing configuration item for index &num;3 can be supplied before binding to the `ArrayExample` instance by any configuration provider that reads the index &num;3 key/value pair.</span></span> <span data-ttu-id="f83a3-913">Rozważmy następujący plik *Wartość3. JSON* z przykładowego pobrania:</span><span class="sxs-lookup"><span data-stu-id="f83a3-913">Consider the following *Value3.json* file from the sample download:</span></span>
 
 [!code-json[](index/samples/3.x/ConfigSample/Value3.json)]
 
-<span data-ttu-id="32987-424">Poniższy kod zawiera konfigurację dla *Wartość3. JSON* i `arrayDict` `Dictionary`:</span><span class="sxs-lookup"><span data-stu-id="32987-424">The following code includes configuration for *Value3.json* and the `arrayDict` `Dictionary`:</span></span>
+<span data-ttu-id="f83a3-914">Poniższy kod zawiera konfigurację dla *Wartość3. JSON* i `arrayDict` `Dictionary` :</span><span class="sxs-lookup"><span data-stu-id="f83a3-914">The following code includes configuration for *Value3.json* and the `arrayDict` `Dictionary`:</span></span>
 
 [!code-csharp[](index/samples/3.x/ConfigSample/ProgramArray.cs?name=snippet2)]
 
-<span data-ttu-id="32987-425">Poniższy kod odczytuje poprzednią konfigurację i wyświetla wartości:</span><span class="sxs-lookup"><span data-stu-id="32987-425">The following code reads the preceding configuration and displays the values:</span></span>
+<span data-ttu-id="f83a3-915">Poniższy kod odczytuje poprzednią konfigurację i wyświetla wartości:</span><span class="sxs-lookup"><span data-stu-id="f83a3-915">The following code reads the preceding configuration and displays the values:</span></span>
 
 [!code-csharp[](index/samples/3.x/ConfigSample/Pages/Array.cshtml.cs?name=snippet)]
 
-<span data-ttu-id="32987-426">Poprzedni kod zwraca następujące dane wyjściowe:</span><span class="sxs-lookup"><span data-stu-id="32987-426">The preceding code returns the following output:</span></span>
+<span data-ttu-id="f83a3-916">Poprzedni kod zwraca następujące dane wyjściowe:</span><span class="sxs-lookup"><span data-stu-id="f83a3-916">The preceding code returns the following output:</span></span>
 
 ```text
 Index: 0  Value: value0
@@ -657,197 +1291,221 @@ Index: 4  Value: value4
 Index: 5  Value: value5
 ```
 
-<span data-ttu-id="32987-427">Niestandardowi dostawcy konfiguracji nie muszą implementować powiązania tablicy.</span><span class="sxs-lookup"><span data-stu-id="32987-427">Custom configuration providers aren't required to implement array binding.</span></span>
+<span data-ttu-id="f83a3-917">Niestandardowi dostawcy konfiguracji nie muszą implementować powiązania tablicy.</span><span class="sxs-lookup"><span data-stu-id="f83a3-917">Custom configuration providers aren't required to implement array binding.</span></span>
 
-## <a name="custom-configuration-provider"></a><span data-ttu-id="32987-428">Niestandardowy dostawca konfiguracji</span><span class="sxs-lookup"><span data-stu-id="32987-428">Custom configuration provider</span></span>
+## <a name="custom-configuration-provider"></a><span data-ttu-id="f83a3-918">Niestandardowy dostawca konfiguracji</span><span class="sxs-lookup"><span data-stu-id="f83a3-918">Custom configuration provider</span></span>
 
-<span data-ttu-id="32987-429">Przykładowa aplikacja pokazuje, jak utworzyć podstawowego dostawcę konfiguracji, który odczytuje pary klucz-wartość konfiguracji z bazy danych przy użyciu [Entity Framework (EF)](/ef/core/).</span><span class="sxs-lookup"><span data-stu-id="32987-429">The sample app demonstrates how to create a basic configuration provider that reads configuration key-value pairs from a database using [Entity Framework (EF)](/ef/core/).</span></span>
+<span data-ttu-id="f83a3-919">Przykładowa aplikacja pokazuje, jak utworzyć podstawowego dostawcę konfiguracji, który odczytuje pary klucz-wartość konfiguracji z bazy danych przy użyciu [Entity Framework (EF)](/ef/core/).</span><span class="sxs-lookup"><span data-stu-id="f83a3-919">The sample app demonstrates how to create a basic configuration provider that reads configuration key-value pairs from a database using [Entity Framework (EF)](/ef/core/).</span></span>
 
-<span data-ttu-id="32987-430">Dostawca ma następującą charakterystykę:</span><span class="sxs-lookup"><span data-stu-id="32987-430">The provider has the following characteristics:</span></span>
+<span data-ttu-id="f83a3-920">Dostawca ma następującą charakterystykę:</span><span class="sxs-lookup"><span data-stu-id="f83a3-920">The provider has the following characteristics:</span></span>
 
-* <span data-ttu-id="32987-431">Baza danych EF w pamięci jest używana w celach demonstracyjnych.</span><span class="sxs-lookup"><span data-stu-id="32987-431">The EF in-memory database is used for demonstration purposes.</span></span> <span data-ttu-id="32987-432">Aby użyć bazy danych, która wymaga parametrów połączenia, zaimplementuj dodatkową `ConfigurationBuilder` wartość w celu dostarczenia parametrów połączenia od innego dostawcy konfiguracji.</span><span class="sxs-lookup"><span data-stu-id="32987-432">To use a database that requires a connection string, implement a secondary `ConfigurationBuilder` to supply the connection string from another configuration provider.</span></span>
-* <span data-ttu-id="32987-433">Dostawca odczytuje tabelę bazy danych w konfiguracji podczas uruchamiania.</span><span class="sxs-lookup"><span data-stu-id="32987-433">The provider reads a database table into configuration at startup.</span></span> <span data-ttu-id="32987-434">Dostawca nie wykonuje zapytania do bazy danych w oparciu o klucz.</span><span class="sxs-lookup"><span data-stu-id="32987-434">The provider doesn't query the database on a per-key basis.</span></span>
-* <span data-ttu-id="32987-435">Ponowne załadowanie nie zostało zaimplementowane, więc aktualizacja bazy danych po uruchomieniu aplikacji nie ma wpływu na konfigurację aplikacji.</span><span class="sxs-lookup"><span data-stu-id="32987-435">Reload-on-change isn't implemented, so updating the database after the app starts has no effect on the app's configuration.</span></span>
+* <span data-ttu-id="f83a3-921">Baza danych EF w pamięci jest używana w celach demonstracyjnych.</span><span class="sxs-lookup"><span data-stu-id="f83a3-921">The EF in-memory database is used for demonstration purposes.</span></span> <span data-ttu-id="f83a3-922">Aby użyć bazy danych, która wymaga parametrów połączenia, zaimplementuj dodatkową wartość w `ConfigurationBuilder` celu dostarczenia parametrów połączenia od innego dostawcy konfiguracji.</span><span class="sxs-lookup"><span data-stu-id="f83a3-922">To use a database that requires a connection string, implement a secondary `ConfigurationBuilder` to supply the connection string from another configuration provider.</span></span>
+* <span data-ttu-id="f83a3-923">Dostawca odczytuje tabelę bazy danych w konfiguracji podczas uruchamiania.</span><span class="sxs-lookup"><span data-stu-id="f83a3-923">The provider reads a database table into configuration at startup.</span></span> <span data-ttu-id="f83a3-924">Dostawca nie wykonuje zapytania do bazy danych w oparciu o klucz.</span><span class="sxs-lookup"><span data-stu-id="f83a3-924">The provider doesn't query the database on a per-key basis.</span></span>
+* <span data-ttu-id="f83a3-925">Ponowne załadowanie nie zostało zaimplementowane, więc aktualizacja bazy danych po uruchomieniu aplikacji nie ma wpływu na konfigurację aplikacji.</span><span class="sxs-lookup"><span data-stu-id="f83a3-925">Reload-on-change isn't implemented, so updating the database after the app starts has no effect on the app's configuration.</span></span>
 
-<span data-ttu-id="32987-436">Zdefiniuj `EFConfigurationValue` jednostkę do przechowywania wartości konfiguracji w bazie danych.</span><span class="sxs-lookup"><span data-stu-id="32987-436">Define an `EFConfigurationValue` entity for storing configuration values in the database.</span></span>
+<span data-ttu-id="f83a3-926">Zdefiniuj `EFConfigurationValue` jednostkę do przechowywania wartości konfiguracji w bazie danych.</span><span class="sxs-lookup"><span data-stu-id="f83a3-926">Define an `EFConfigurationValue` entity for storing configuration values in the database.</span></span>
 
-<span data-ttu-id="32987-437">*Modele/EFConfigurationValue. cs*:</span><span class="sxs-lookup"><span data-stu-id="32987-437">*Models/EFConfigurationValue.cs*:</span></span>
+<span data-ttu-id="f83a3-927">*Modele/EFConfigurationValue. cs*:</span><span class="sxs-lookup"><span data-stu-id="f83a3-927">*Models/EFConfigurationValue.cs*:</span></span>
 
 [!code-csharp[](index/samples/3.x/ConfigurationSample/Models/EFConfigurationValue.cs?name=snippet1)]
 
-<span data-ttu-id="32987-438">Dodaj `EFConfigurationContext` do magazynu i uzyskaj dostęp do skonfigurowanych wartości.</span><span class="sxs-lookup"><span data-stu-id="32987-438">Add an `EFConfigurationContext` to store and access the configured values.</span></span>
+<span data-ttu-id="f83a3-928">Dodaj `EFConfigurationContext` do magazynu i uzyskaj dostęp do skonfigurowanych wartości.</span><span class="sxs-lookup"><span data-stu-id="f83a3-928">Add an `EFConfigurationContext` to store and access the configured values.</span></span>
 
-<span data-ttu-id="32987-439">*EFConfigurationProvider/EFConfigurationContext. cs*:</span><span class="sxs-lookup"><span data-stu-id="32987-439">*EFConfigurationProvider/EFConfigurationContext.cs*:</span></span>
+<span data-ttu-id="f83a3-929">*EFConfigurationProvider/EFConfigurationContext. cs*:</span><span class="sxs-lookup"><span data-stu-id="f83a3-929">*EFConfigurationProvider/EFConfigurationContext.cs*:</span></span>
 
 [!code-csharp[](index/samples/3.x/ConfigurationSample/EFConfigurationProvider/EFConfigurationContext.cs?name=snippet1)]
 
-<span data-ttu-id="32987-440">Utwórz klasę implementującą <xref:Microsoft.Extensions.Configuration.IConfigurationSource>.</span><span class="sxs-lookup"><span data-stu-id="32987-440">Create a class that implements <xref:Microsoft.Extensions.Configuration.IConfigurationSource>.</span></span>
+<span data-ttu-id="f83a3-930">Utwórz klasę implementującą <xref:Microsoft.Extensions.Configuration.IConfigurationSource> .</span><span class="sxs-lookup"><span data-stu-id="f83a3-930">Create a class that implements <xref:Microsoft.Extensions.Configuration.IConfigurationSource>.</span></span>
 
-<span data-ttu-id="32987-441">*EFConfigurationProvider/EFConfigurationSource. cs*:</span><span class="sxs-lookup"><span data-stu-id="32987-441">*EFConfigurationProvider/EFConfigurationSource.cs*:</span></span>
+<span data-ttu-id="f83a3-931">*EFConfigurationProvider/EFConfigurationSource. cs*:</span><span class="sxs-lookup"><span data-stu-id="f83a3-931">*EFConfigurationProvider/EFConfigurationSource.cs*:</span></span>
 
 [!code-csharp[](index/samples/3.x/ConfigurationSample/EFConfigurationProvider/EFConfigurationSource.cs?name=snippet1)]
 
-<span data-ttu-id="32987-442">Utwórz niestandardowego dostawcę konfiguracji, dziedziczących od <xref:Microsoft.Extensions.Configuration.ConfigurationProvider>.</span><span class="sxs-lookup"><span data-stu-id="32987-442">Create the custom configuration provider by inheriting from <xref:Microsoft.Extensions.Configuration.ConfigurationProvider>.</span></span> <span data-ttu-id="32987-443">Dostawca konfiguracji inicjuje bazę danych, gdy jest pusta.</span><span class="sxs-lookup"><span data-stu-id="32987-443">The configuration provider initializes the database when it's empty.</span></span> <span data-ttu-id="32987-444">Ponieważ w [kluczach konfiguracji jest rozróżniana wielkość liter](#keys), słownik używany do inicjowania bazy danych jest tworzony przy użyciu funkcji porównującej bez uwzględniania wielkości liter ([StringComparer. OrdinalIgnoreCase](xref:System.StringComparer.OrdinalIgnoreCase)).</span><span class="sxs-lookup"><span data-stu-id="32987-444">Since [configuration keys are case-insensitive](#keys), the dictionary used to initialize the database is created with the case-insensitive comparer ([StringComparer.OrdinalIgnoreCase](xref:System.StringComparer.OrdinalIgnoreCase)).</span></span>
+<span data-ttu-id="f83a3-932">Utwórz niestandardowego dostawcę konfiguracji, dziedziczących od <xref:Microsoft.Extensions.Configuration.ConfigurationProvider> .</span><span class="sxs-lookup"><span data-stu-id="f83a3-932">Create the custom configuration provider by inheriting from <xref:Microsoft.Extensions.Configuration.ConfigurationProvider>.</span></span> <span data-ttu-id="f83a3-933">Dostawca konfiguracji inicjuje bazę danych, gdy jest pusta.</span><span class="sxs-lookup"><span data-stu-id="f83a3-933">The configuration provider initializes the database when it's empty.</span></span> <span data-ttu-id="f83a3-934">Ponieważ w [kluczach konfiguracji jest rozróżniana wielkość liter](#keys), słownik używany do inicjowania bazy danych jest tworzony przy użyciu funkcji porównującej bez uwzględniania wielkości liter ([StringComparer. OrdinalIgnoreCase](xref:System.StringComparer.OrdinalIgnoreCase)).</span><span class="sxs-lookup"><span data-stu-id="f83a3-934">Since [configuration keys are case-insensitive](#keys), the dictionary used to initialize the database is created with the case-insensitive comparer ([StringComparer.OrdinalIgnoreCase](xref:System.StringComparer.OrdinalIgnoreCase)).</span></span>
 
-<span data-ttu-id="32987-445">*EFConfigurationProvider/EFConfigurationProvider. cs*:</span><span class="sxs-lookup"><span data-stu-id="32987-445">*EFConfigurationProvider/EFConfigurationProvider.cs*:</span></span>
+<span data-ttu-id="f83a3-935">*EFConfigurationProvider/EFConfigurationProvider. cs*:</span><span class="sxs-lookup"><span data-stu-id="f83a3-935">*EFConfigurationProvider/EFConfigurationProvider.cs*:</span></span>
 
 [!code-csharp[](index/samples/3.x/ConfigurationSample/EFConfigurationProvider/EFConfigurationProvider.cs?name=snippet1)]
 
-<span data-ttu-id="32987-446">Metoda `AddEFConfiguration` rozszerzająca zezwala na Dodawanie źródła konfiguracji do `ConfigurationBuilder`.</span><span class="sxs-lookup"><span data-stu-id="32987-446">An `AddEFConfiguration` extension method permits adding the configuration source to a `ConfigurationBuilder`.</span></span>
+<span data-ttu-id="f83a3-936">`AddEFConfiguration`Metoda rozszerzająca zezwala na Dodawanie źródła konfiguracji do `ConfigurationBuilder` .</span><span class="sxs-lookup"><span data-stu-id="f83a3-936">An `AddEFConfiguration` extension method permits adding the configuration source to a `ConfigurationBuilder`.</span></span>
 
-<span data-ttu-id="32987-447">*Rozszerzenia/EntityFrameworkExtensions. cs*:</span><span class="sxs-lookup"><span data-stu-id="32987-447">*Extensions/EntityFrameworkExtensions.cs*:</span></span>
+<span data-ttu-id="f83a3-937">*Rozszerzenia/EntityFrameworkExtensions. cs*:</span><span class="sxs-lookup"><span data-stu-id="f83a3-937">*Extensions/EntityFrameworkExtensions.cs*:</span></span>
 
 [!code-csharp[](index/samples/3.x/ConfigurationSample/Extensions/EntityFrameworkExtensions.cs?name=snippet1)]
 
-<span data-ttu-id="32987-448">Poniższy kod pokazuje, jak używać niestandardowych `EFConfigurationProvider` w *program.cs*:</span><span class="sxs-lookup"><span data-stu-id="32987-448">The following code shows how to use the custom `EFConfigurationProvider` in *Program.cs*:</span></span>
+<span data-ttu-id="f83a3-938">Poniższy kod pokazuje, jak używać niestandardowych `EFConfigurationProvider` w *program.cs*:</span><span class="sxs-lookup"><span data-stu-id="f83a3-938">The following code shows how to use the custom `EFConfigurationProvider` in *Program.cs*:</span></span>
 
 [!code-csharp[](index/samples/3.x/ConfigurationSample/Program.cs?name=snippet_Program&highlight=29-30)]
 
 <a name="acs"></a>
 
-## <a name="access-configuration-in-startup"></a><span data-ttu-id="32987-449">Konfiguracja dostępu w programie startowym</span><span class="sxs-lookup"><span data-stu-id="32987-449">Access configuration in Startup</span></span>
+## <a name="access-configuration-in-startup"></a><span data-ttu-id="f83a3-939">Konfiguracja dostępu w programie startowym</span><span class="sxs-lookup"><span data-stu-id="f83a3-939">Access configuration in Startup</span></span>
 
-<span data-ttu-id="32987-450">Poniższy kod przedstawia dane konfiguracji w `Startup` metodach:</span><span class="sxs-lookup"><span data-stu-id="32987-450">The following code displays configuration data in `Startup` methods:</span></span>
+<span data-ttu-id="f83a3-940">Poniższy kod przedstawia dane konfiguracji w `Startup` metodach:</span><span class="sxs-lookup"><span data-stu-id="f83a3-940">The following code displays configuration data in `Startup` methods:</span></span>
 
 [!code-csharp[](index/samples/3.x/ConfigSample/StartupKey.cs?name=snippet&highlight=13,18)]
 
-<span data-ttu-id="32987-451">Aby zapoznać się z przykładem uzyskiwania dostępu do konfiguracji przy użyciu metod uruchamiania, zobacz [Uruchamianie aplikacji: wygodne metody](xref:fundamentals/startup#convenience-methods).</span><span class="sxs-lookup"><span data-stu-id="32987-451">For an example of accessing configuration using startup convenience methods, see [App startup: Convenience methods](xref:fundamentals/startup#convenience-methods).</span></span>
+<span data-ttu-id="f83a3-941">Aby zapoznać się z przykładem uzyskiwania dostępu do konfiguracji przy użyciu metod uruchamiania, zobacz [Uruchamianie aplikacji: wygodne metody](xref:fundamentals/startup#convenience-methods).</span><span class="sxs-lookup"><span data-stu-id="f83a3-941">For an example of accessing configuration using startup convenience methods, see [App startup: Convenience methods](xref:fundamentals/startup#convenience-methods).</span></span>
 
-## <a name="access-configuration-in-razor-pages"></a><span data-ttu-id="32987-452">Konfiguracja dostępu w Razor Pages</span><span class="sxs-lookup"><span data-stu-id="32987-452">Access configuration in Razor Pages</span></span>
+## <a name="access-configuration-in-razor-pages"></a><span data-ttu-id="f83a3-942">Konfiguracja dostępu na Razor stronach</span><span class="sxs-lookup"><span data-stu-id="f83a3-942">Access configuration in Razor Pages</span></span>
 
-<span data-ttu-id="32987-453">Poniższy kod przedstawia dane konfiguracji na stronie Razor:</span><span class="sxs-lookup"><span data-stu-id="32987-453">The following code displays configuration data in a Razor Page:</span></span>
+<span data-ttu-id="f83a3-943">Poniższy kod przedstawia dane konfiguracji na Razor stronie:</span><span class="sxs-lookup"><span data-stu-id="f83a3-943">The following code displays configuration data in a Razor Page:</span></span>
 
 [!code-cshtml[](index/samples/3.x/ConfigSample/Pages/Test5.cshtml)]
 
-## <a name="access-configuration-in-a-mvc-view-file"></a><span data-ttu-id="32987-454">Konfiguracja dostępu w pliku widoku MVC</span><span class="sxs-lookup"><span data-stu-id="32987-454">Access configuration in a MVC view file</span></span>
+<span data-ttu-id="f83a3-944">W poniższym kodzie `MyOptions` został dodany do kontenera usługi z <xref:Microsoft.Extensions.DependencyInjection.OptionsConfigurationServiceCollectionExtensions.Configure*> i powiązana z konfiguracją:</span><span class="sxs-lookup"><span data-stu-id="f83a3-944">In the following code, `MyOptions` is added to the service container with <xref:Microsoft.Extensions.DependencyInjection.OptionsConfigurationServiceCollectionExtensions.Configure*> and bound to configuration:</span></span>
 
-<span data-ttu-id="32987-455">Poniższy kod przedstawia dane konfiguracji w widoku MVC:</span><span class="sxs-lookup"><span data-stu-id="32987-455">The following code displays configuration data in a MVC view:</span></span>
+[!code-csharp[](~/fundamentals/configuration/options/samples/3.x/OptionsSample/Startup3.cs?name=snippet_Example2)]
+
+<span data-ttu-id="f83a3-945">Następujące oznakowanie używa [`@inject`](xref:mvc/views/razor#inject) Razor dyrektywy do rozwiązywania i wyświetlania wartości opcji:</span><span class="sxs-lookup"><span data-stu-id="f83a3-945">The following markup uses the [`@inject`](xref:mvc/views/razor#inject) Razor directive to resolve and display the options values:</span></span>
+
+[!code-cshtml[](~/fundamentals/configuration/options/samples/3.x/OptionsSample/Pages/Test3.cshtml)]
+
+## <a name="access-configuration-in-a-mvc-view-file"></a><span data-ttu-id="f83a3-946">Konfiguracja dostępu w pliku widoku MVC</span><span class="sxs-lookup"><span data-stu-id="f83a3-946">Access configuration in a MVC view file</span></span>
+
+<span data-ttu-id="f83a3-947">Poniższy kod przedstawia dane konfiguracji w widoku MVC:</span><span class="sxs-lookup"><span data-stu-id="f83a3-947">The following code displays configuration data in a MVC view:</span></span>
 
 [!code-cshtml[](index/samples/3.x/ConfigSample/Views/Home2/Index.cshtml)]
 
+## <a name="configure-options-with-a-delegate"></a><span data-ttu-id="f83a3-948">Konfigurowanie opcji za pomocą delegata</span><span class="sxs-lookup"><span data-stu-id="f83a3-948">Configure options with a delegate</span></span>
+
+<span data-ttu-id="f83a3-949">Opcje skonfigurowane w wartościach zastąpień delegatów ustawionych w dostawcach konfiguracji.</span><span class="sxs-lookup"><span data-stu-id="f83a3-949">Options configured in a delegate override values set in the configuration providers.</span></span>
+
+<span data-ttu-id="f83a3-950">Konfigurowanie opcji za pomocą delegata jest zademonstrowane jako przykład 2 w przykładowej aplikacji.</span><span class="sxs-lookup"><span data-stu-id="f83a3-950">Configuring options with a delegate is demonstrated as Example 2 in the sample app.</span></span>
+
+<span data-ttu-id="f83a3-951">W poniższym kodzie <xref:Microsoft.Extensions.Options.IConfigureOptions%601> Usługa jest dodawana do kontenera usługi.</span><span class="sxs-lookup"><span data-stu-id="f83a3-951">In the following code, an <xref:Microsoft.Extensions.Options.IConfigureOptions%601> service is added to the service container.</span></span> <span data-ttu-id="f83a3-952">Używa delegata do konfigurowania wartości dla `MyOptions` :</span><span class="sxs-lookup"><span data-stu-id="f83a3-952">It uses a delegate to configure values for `MyOptions`:</span></span>
+
+[!code-csharp[](~/fundamentals/configuration/options/samples/3.x/OptionsSample/Startup2.cs?name=snippet_Example2)]
+
+<span data-ttu-id="f83a3-953">Poniższy kod wyświetla wartości opcji:</span><span class="sxs-lookup"><span data-stu-id="f83a3-953">The following code displays the options values:</span></span>
+
+[!code-csharp[](options/samples/3.x/OptionsSample/Pages/Test2.cshtml.cs?name=snippet)]
+
+<span data-ttu-id="f83a3-954">W poprzednim przykładzie wartości `Option1` i `Option2` są określone w pliku *appSettings. JSON* , a następnie zastąpione przez skonfigurowany delegat.</span><span class="sxs-lookup"><span data-stu-id="f83a3-954">In the preceding example, the values of `Option1` and `Option2` are specified in *appsettings.json* and then overridden by the configured delegate.</span></span>
+
 <a name="hvac"></a>
 
-## <a name="host-versus-app-configuration"></a><span data-ttu-id="32987-456">Host a konfiguracja aplikacji</span><span class="sxs-lookup"><span data-stu-id="32987-456">Host versus app configuration</span></span>
+## <a name="host-versus-app-configuration"></a><span data-ttu-id="f83a3-955">Host a konfiguracja aplikacji</span><span class="sxs-lookup"><span data-stu-id="f83a3-955">Host versus app configuration</span></span>
 
-<span data-ttu-id="32987-457">Przed skonfigurowaniem i uruchomieniem aplikacji *host* zostanie skonfigurowany i uruchomiony.</span><span class="sxs-lookup"><span data-stu-id="32987-457">Before the app is configured and started, a *host* is configured and launched.</span></span> <span data-ttu-id="32987-458">Host jest odpowiedzialny za uruchamianie aplikacji i zarządzanie okresem istnienia.</span><span class="sxs-lookup"><span data-stu-id="32987-458">The host is responsible for app startup and lifetime management.</span></span> <span data-ttu-id="32987-459">Zarówno aplikacja, jak i Host są konfigurowane przy użyciu dostawców konfiguracji opisanych w tym temacie.</span><span class="sxs-lookup"><span data-stu-id="32987-459">Both the app and the host are configured using the configuration providers described in this topic.</span></span> <span data-ttu-id="32987-460">Klucz konfiguracji hosta — pary wartości są również uwzględnione w konfiguracji aplikacji.</span><span class="sxs-lookup"><span data-stu-id="32987-460">Host configuration key-value pairs are also included in the app's configuration.</span></span> <span data-ttu-id="32987-461">Aby uzyskać więcej informacji na temat tego, jak dostawcy konfiguracji są używani podczas kompilowania hosta i jak źródła konfiguracji wpływają na <xref:fundamentals/index#host>konfigurację hosta, zobacz.</span><span class="sxs-lookup"><span data-stu-id="32987-461">For more information on how the configuration providers are used when the host is built and how configuration sources affect host configuration, see <xref:fundamentals/index#host>.</span></span>
+<span data-ttu-id="f83a3-956">Przed skonfigurowaniem i uruchomieniem aplikacji *host* zostanie skonfigurowany i uruchomiony.</span><span class="sxs-lookup"><span data-stu-id="f83a3-956">Before the app is configured and started, a *host* is configured and launched.</span></span> <span data-ttu-id="f83a3-957">Host jest odpowiedzialny za uruchamianie aplikacji i zarządzanie okresem istnienia.</span><span class="sxs-lookup"><span data-stu-id="f83a3-957">The host is responsible for app startup and lifetime management.</span></span> <span data-ttu-id="f83a3-958">Zarówno aplikacja, jak i Host są konfigurowane przy użyciu dostawców konfiguracji opisanych w tym temacie.</span><span class="sxs-lookup"><span data-stu-id="f83a3-958">Both the app and the host are configured using the configuration providers described in this topic.</span></span> <span data-ttu-id="f83a3-959">Klucz konfiguracji hosta — pary wartości są również uwzględnione w konfiguracji aplikacji.</span><span class="sxs-lookup"><span data-stu-id="f83a3-959">Host configuration key-value pairs are also included in the app's configuration.</span></span> <span data-ttu-id="f83a3-960">Aby uzyskać więcej informacji na temat tego, jak dostawcy konfiguracji są używani podczas kompilowania hosta i jak źródła konfiguracji wpływają na konfigurację hosta, zobacz <xref:fundamentals/index#host> .</span><span class="sxs-lookup"><span data-stu-id="f83a3-960">For more information on how the configuration providers are used when the host is built and how configuration sources affect host configuration, see <xref:fundamentals/index#host>.</span></span>
 
 <a name="dhc"></a>
 
-## <a name="default-host-configuration"></a><span data-ttu-id="32987-462">Domyślna konfiguracja hosta</span><span class="sxs-lookup"><span data-stu-id="32987-462">Default host configuration</span></span>
+## <a name="default-host-configuration"></a><span data-ttu-id="f83a3-961">Domyślna konfiguracja hosta</span><span class="sxs-lookup"><span data-stu-id="f83a3-961">Default host configuration</span></span>
 
-<span data-ttu-id="32987-463">Aby uzyskać szczegółowe informacje na temat konfiguracji domyślnej podczas korzystania z [hosta sieci Web](xref:fundamentals/host/web-host), zobacz [wersję ASP.NET Core 2,2 tego tematu](/aspnet/core/fundamentals/configuration/?view=aspnetcore-2.2).</span><span class="sxs-lookup"><span data-stu-id="32987-463">For details on the default configuration when using the [Web Host](xref:fundamentals/host/web-host), see the [ASP.NET Core 2.2 version of this topic](/aspnet/core/fundamentals/configuration/?view=aspnetcore-2.2).</span></span>
+<span data-ttu-id="f83a3-962">Aby uzyskać szczegółowe informacje na temat konfiguracji domyślnej podczas korzystania z [hosta sieci Web](xref:fundamentals/host/web-host), zobacz [wersję ASP.NET Core 2,2 tego tematu](/aspnet/core/fundamentals/configuration/?view=aspnetcore-2.2).</span><span class="sxs-lookup"><span data-stu-id="f83a3-962">For details on the default configuration when using the [Web Host](xref:fundamentals/host/web-host), see the [ASP.NET Core 2.2 version of this topic](/aspnet/core/fundamentals/configuration/?view=aspnetcore-2.2).</span></span>
 
-* <span data-ttu-id="32987-464">Konfiguracja hosta jest poświadczona z:</span><span class="sxs-lookup"><span data-stu-id="32987-464">Host configuration is provided from:</span></span>
-  * <span data-ttu-id="32987-465">Zmienne środowiskowe poprzedzone `DOTNET_` znakiem (na `DOTNET_ENVIRONMENT`przykład) przy użyciu [dostawcy konfiguracji zmiennych środowiskowych](#environment-variables-configuration-provider).</span><span class="sxs-lookup"><span data-stu-id="32987-465">Environment variables prefixed with `DOTNET_` (for example, `DOTNET_ENVIRONMENT`) using the [Environment Variables configuration provider](#environment-variables-configuration-provider).</span></span> <span data-ttu-id="32987-466">Prefiks (`DOTNET_`) jest usuwany, gdy są ładowane pary klucz-wartość konfiguracji.</span><span class="sxs-lookup"><span data-stu-id="32987-466">The prefix (`DOTNET_`) is stripped when the configuration key-value pairs are loaded.</span></span>
-  * <span data-ttu-id="32987-467">Argumenty wiersza polecenia przy użyciu [dostawcy konfiguracji wiersza polecenia](#command-line-configuration-provider).</span><span class="sxs-lookup"><span data-stu-id="32987-467">Command-line arguments using the [Command-line configuration provider](#command-line-configuration-provider).</span></span>
-* <span data-ttu-id="32987-468">Konfiguracja domyślna hosta sieci Web (`ConfigureWebHostDefaults`):</span><span class="sxs-lookup"><span data-stu-id="32987-468">Web Host default configuration is established (`ConfigureWebHostDefaults`):</span></span>
-  * <span data-ttu-id="32987-469">Kestrel jest używany jako serwer sieci Web i konfigurowany przy użyciu dostawców konfiguracji aplikacji.</span><span class="sxs-lookup"><span data-stu-id="32987-469">Kestrel is used as the web server and configured using the app's configuration providers.</span></span>
-  * <span data-ttu-id="32987-470">Dodaj oprogramowanie pośredniczące do filtrowania hosta.</span><span class="sxs-lookup"><span data-stu-id="32987-470">Add Host Filtering Middleware.</span></span>
-  * <span data-ttu-id="32987-471">Dodaj przekierowane nagłówki — oprogramowanie pośredniczące, `ASPNETCORE_FORWARDEDHEADERS_ENABLED` Jeśli zmienna środowiskowa jest ustawiona na. `true`</span><span class="sxs-lookup"><span data-stu-id="32987-471">Add Forwarded Headers Middleware if the `ASPNETCORE_FORWARDEDHEADERS_ENABLED` environment variable is set to `true`.</span></span>
-  * <span data-ttu-id="32987-472">Włącz integrację usług IIS.</span><span class="sxs-lookup"><span data-stu-id="32987-472">Enable IIS integration.</span></span>
+* <span data-ttu-id="f83a3-963">Konfiguracja hosta jest poświadczona z:</span><span class="sxs-lookup"><span data-stu-id="f83a3-963">Host configuration is provided from:</span></span>
+  * <span data-ttu-id="f83a3-964">Zmienne środowiskowe poprzedzone znakiem `DOTNET_` (na przykład `DOTNET_ENVIRONMENT` ) przy użyciu [dostawcy konfiguracji zmiennych środowiskowych](#environment-variables-configuration-provider).</span><span class="sxs-lookup"><span data-stu-id="f83a3-964">Environment variables prefixed with `DOTNET_` (for example, `DOTNET_ENVIRONMENT`) using the [Environment Variables configuration provider](#environment-variables-configuration-provider).</span></span> <span data-ttu-id="f83a3-965">Prefiks ( `DOTNET_` ) jest usuwany, gdy są ładowane pary klucz-wartość konfiguracji.</span><span class="sxs-lookup"><span data-stu-id="f83a3-965">The prefix (`DOTNET_`) is stripped when the configuration key-value pairs are loaded.</span></span>
+  * <span data-ttu-id="f83a3-966">Argumenty wiersza polecenia przy użyciu [dostawcy konfiguracji wiersza polecenia](#command-line-configuration-provider).</span><span class="sxs-lookup"><span data-stu-id="f83a3-966">Command-line arguments using the [Command-line configuration provider](#command-line-configuration-provider).</span></span>
+* <span data-ttu-id="f83a3-967">Konfiguracja domyślna hosta sieci Web ( `ConfigureWebHostDefaults` ):</span><span class="sxs-lookup"><span data-stu-id="f83a3-967">Web Host default configuration is established (`ConfigureWebHostDefaults`):</span></span>
+  * <span data-ttu-id="f83a3-968">Kestrel jest używany jako serwer sieci Web i konfigurowany przy użyciu dostawców konfiguracji aplikacji.</span><span class="sxs-lookup"><span data-stu-id="f83a3-968">Kestrel is used as the web server and configured using the app's configuration providers.</span></span>
+  * <span data-ttu-id="f83a3-969">Dodaj oprogramowanie pośredniczące do filtrowania hosta.</span><span class="sxs-lookup"><span data-stu-id="f83a3-969">Add Host Filtering Middleware.</span></span>
+  * <span data-ttu-id="f83a3-970">Dodaj przekierowane nagłówki — oprogramowanie pośredniczące, jeśli `ASPNETCORE_FORWARDEDHEADERS_ENABLED` zmienna środowiskowa jest ustawiona na `true` .</span><span class="sxs-lookup"><span data-stu-id="f83a3-970">Add Forwarded Headers Middleware if the `ASPNETCORE_FORWARDEDHEADERS_ENABLED` environment variable is set to `true`.</span></span>
+  * <span data-ttu-id="f83a3-971">Włącz integrację usług IIS.</span><span class="sxs-lookup"><span data-stu-id="f83a3-971">Enable IIS integration.</span></span>
 
-## <a name="other-configuration"></a><span data-ttu-id="32987-473">Inna konfiguracja</span><span class="sxs-lookup"><span data-stu-id="32987-473">Other configuration</span></span>
+## <a name="other-configuration"></a><span data-ttu-id="f83a3-972">Inna konfiguracja</span><span class="sxs-lookup"><span data-stu-id="f83a3-972">Other configuration</span></span>
 
-<span data-ttu-id="32987-474">Ten temat dotyczy tylko *konfiguracji aplikacji*.</span><span class="sxs-lookup"><span data-stu-id="32987-474">This topic only pertains to *app configuration*.</span></span> <span data-ttu-id="32987-475">Inne aspekty uruchamiania i hostowania aplikacji ASP.NET Core są konfigurowane przy użyciu plików konfiguracji nieuwzględnionych w tym temacie:</span><span class="sxs-lookup"><span data-stu-id="32987-475">Other aspects of running and hosting ASP.NET Core apps are configured using configuration files not covered in this topic:</span></span>
+<span data-ttu-id="f83a3-973">Ten temat dotyczy tylko *konfiguracji aplikacji*.</span><span class="sxs-lookup"><span data-stu-id="f83a3-973">This topic only pertains to *app configuration*.</span></span> <span data-ttu-id="f83a3-974">Inne aspekty uruchamiania i hostowania aplikacji ASP.NET Core są konfigurowane przy użyciu plików konfiguracji nieuwzględnionych w tym temacie:</span><span class="sxs-lookup"><span data-stu-id="f83a3-974">Other aspects of running and hosting ASP.NET Core apps are configured using configuration files not covered in this topic:</span></span>
 
-* <span data-ttu-id="32987-476">*plik Launch. JSON*/*profilu launchsettings. JSON* to pliki konfiguracji narzędzi dla środowiska programistycznego, opisane w temacie:</span><span class="sxs-lookup"><span data-stu-id="32987-476">*launch.json*/*launchSettings.json* are tooling configuration files for the Development environment, described:</span></span>
-  * <span data-ttu-id="32987-477">W <xref:fundamentals/environments#development>programie.</span><span class="sxs-lookup"><span data-stu-id="32987-477">In <xref:fundamentals/environments#development>.</span></span>
-  * <span data-ttu-id="32987-478">W zestawie dokumentacji, w której pliki są używane do konfigurowania ASP.NET Core aplikacji na potrzeby scenariuszy programistycznych.</span><span class="sxs-lookup"><span data-stu-id="32987-478">Across the documentation set where the files are used to configure ASP.NET Core apps for Development scenarios.</span></span>
-* <span data-ttu-id="32987-479">*Web. config* to plik konfiguracji serwera opisany w następujących tematach:</span><span class="sxs-lookup"><span data-stu-id="32987-479">*web.config* is a server configuration file, described in the following topics:</span></span>
+* <span data-ttu-id="f83a3-975">plik *Launch. JSON* / *profilu launchsettings. JSON* to pliki konfiguracji narzędzi dla środowiska programistycznego, opisane w temacie:</span><span class="sxs-lookup"><span data-stu-id="f83a3-975">*launch.json*/*launchSettings.json* are tooling configuration files for the Development environment, described:</span></span>
+  * <span data-ttu-id="f83a3-976">W programie <xref:fundamentals/environments#development> .</span><span class="sxs-lookup"><span data-stu-id="f83a3-976">In <xref:fundamentals/environments#development>.</span></span>
+  * <span data-ttu-id="f83a3-977">W zestawie dokumentacji, w której pliki są używane do konfigurowania ASP.NET Core aplikacji na potrzeby scenariuszy programistycznych.</span><span class="sxs-lookup"><span data-stu-id="f83a3-977">Across the documentation set where the files are used to configure ASP.NET Core apps for Development scenarios.</span></span>
+* <span data-ttu-id="f83a3-978">*Web. config* to plik konfiguracji serwera opisany w następujących tematach:</span><span class="sxs-lookup"><span data-stu-id="f83a3-978">*web.config* is a server configuration file, described in the following topics:</span></span>
   * <xref:host-and-deploy/iis/index>
   * <xref:host-and-deploy/aspnet-core-module>
 
-<span data-ttu-id="32987-480">Aby uzyskać więcej informacji na temat migrowania konfiguracji aplikacji z wcześniejszych wersji programu <xref:migration/proper-to-2x/index#store-configurations>ASP.NET, zobacz.</span><span class="sxs-lookup"><span data-stu-id="32987-480">For more information on migrating app configuration from earlier versions of ASP.NET, see <xref:migration/proper-to-2x/index#store-configurations>.</span></span>
+<span data-ttu-id="f83a3-979">Aby uzyskać więcej informacji na temat migrowania konfiguracji aplikacji z wcześniejszych wersji programu ASP.NET, zobacz <xref:migration/proper-to-2x/index#store-configurations> .</span><span class="sxs-lookup"><span data-stu-id="f83a3-979">For more information on migrating app configuration from earlier versions of ASP.NET, see <xref:migration/proper-to-2x/index#store-configurations>.</span></span>
 
-## <a name="add-configuration-from-an-external-assembly"></a><span data-ttu-id="32987-481">Dodawanie konfiguracji z zestawu zewnętrznego</span><span class="sxs-lookup"><span data-stu-id="32987-481">Add configuration from an external assembly</span></span>
+## <a name="add-configuration-from-an-external-assembly"></a><span data-ttu-id="f83a3-980">Dodawanie konfiguracji z zestawu zewnętrznego</span><span class="sxs-lookup"><span data-stu-id="f83a3-980">Add configuration from an external assembly</span></span>
 
-<span data-ttu-id="32987-482"><xref:Microsoft.AspNetCore.Hosting.IHostingStartup> Implementacja umożliwia dodawanie ulepszeń do aplikacji podczas uruchamiania z zewnętrznego zestawu poza `Startup` klasą aplikacji.</span><span class="sxs-lookup"><span data-stu-id="32987-482">An <xref:Microsoft.AspNetCore.Hosting.IHostingStartup> implementation allows adding enhancements to an app at startup from an external assembly outside of the app's `Startup` class.</span></span> <span data-ttu-id="32987-483">Aby uzyskać więcej informacji, zobacz <xref:fundamentals/configuration/platform-specific-configuration>.</span><span class="sxs-lookup"><span data-stu-id="32987-483">For more information, see <xref:fundamentals/configuration/platform-specific-configuration>.</span></span>
+<span data-ttu-id="f83a3-981"><xref:Microsoft.AspNetCore.Hosting.IHostingStartup>Implementacja umożliwia dodawanie ulepszeń do aplikacji podczas uruchamiania z zewnętrznego zestawu poza `Startup` klasą aplikacji.</span><span class="sxs-lookup"><span data-stu-id="f83a3-981">An <xref:Microsoft.AspNetCore.Hosting.IHostingStartup> implementation allows adding enhancements to an app at startup from an external assembly outside of the app's `Startup` class.</span></span> <span data-ttu-id="f83a3-982">Aby uzyskać więcej informacji, zobacz <xref:fundamentals/configuration/platform-specific-configuration>.</span><span class="sxs-lookup"><span data-stu-id="f83a3-982">For more information, see <xref:fundamentals/configuration/platform-specific-configuration>.</span></span>
 
-## <a name="additional-resources"></a><span data-ttu-id="32987-484">Zasoby dodatkowe</span><span class="sxs-lookup"><span data-stu-id="32987-484">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="f83a3-983">Zasoby dodatkowe</span><span class="sxs-lookup"><span data-stu-id="f83a3-983">Additional resources</span></span>
 
-* [<span data-ttu-id="32987-485">Kod źródłowy konfiguracji</span><span class="sxs-lookup"><span data-stu-id="32987-485">Configuration source code</span></span>](https://github.com/dotnet/extensions/tree/master/src/Configuration)
+* [<span data-ttu-id="f83a3-984">Kod źródłowy konfiguracji</span><span class="sxs-lookup"><span data-stu-id="f83a3-984">Configuration source code</span></span>](https://github.com/dotnet/extensions/tree/master/src/Configuration)
 * <xref:fundamentals/configuration/options>
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-<span data-ttu-id="32987-486">Konfiguracja aplikacji w ASP.NET Core jest oparta na parach klucz-wartość określonych przez *dostawców konfiguracji*.</span><span class="sxs-lookup"><span data-stu-id="32987-486">App configuration in ASP.NET Core is based on key-value pairs established by *configuration providers*.</span></span> <span data-ttu-id="32987-487">Dostawcy konfiguracji odczytują dane konfiguracji do par klucz-wartość z różnych źródeł konfiguracji:</span><span class="sxs-lookup"><span data-stu-id="32987-487">Configuration providers read configuration data into key-value pairs from a variety of configuration sources:</span></span>
+<span data-ttu-id="f83a3-985">Konfiguracja aplikacji w ASP.NET Core jest oparta na parach klucz-wartość określonych przez *dostawców konfiguracji*.</span><span class="sxs-lookup"><span data-stu-id="f83a3-985">App configuration in ASP.NET Core is based on key-value pairs established by *configuration providers*.</span></span> <span data-ttu-id="f83a3-986">Dostawcy konfiguracji odczytują dane konfiguracji do par klucz-wartość z różnych źródeł konfiguracji:</span><span class="sxs-lookup"><span data-stu-id="f83a3-986">Configuration providers read configuration data into key-value pairs from a variety of configuration sources:</span></span>
 
-* <span data-ttu-id="32987-488">W usłudze Azure Key Vault</span><span class="sxs-lookup"><span data-stu-id="32987-488">Azure Key Vault</span></span>
-* <span data-ttu-id="32987-489">Azure App Configuration</span><span class="sxs-lookup"><span data-stu-id="32987-489">Azure App Configuration</span></span>
-* <span data-ttu-id="32987-490">Argumenty wiersza polecenia</span><span class="sxs-lookup"><span data-stu-id="32987-490">Command-line arguments</span></span>
-* <span data-ttu-id="32987-491">Dostawcy niestandardowi (instalowani lub utworzony)</span><span class="sxs-lookup"><span data-stu-id="32987-491">Custom providers (installed or created)</span></span>
-* <span data-ttu-id="32987-492">Pliki katalogu</span><span class="sxs-lookup"><span data-stu-id="32987-492">Directory files</span></span>
-* <span data-ttu-id="32987-493">Zmienne środowiskowe</span><span class="sxs-lookup"><span data-stu-id="32987-493">Environment variables</span></span>
-* <span data-ttu-id="32987-494">Obiekty w pamięci .NET</span><span class="sxs-lookup"><span data-stu-id="32987-494">In-memory .NET objects</span></span>
-* <span data-ttu-id="32987-495">Pliki ustawień</span><span class="sxs-lookup"><span data-stu-id="32987-495">Settings files</span></span>
+* <span data-ttu-id="f83a3-987">W usłudze Azure Key Vault</span><span class="sxs-lookup"><span data-stu-id="f83a3-987">Azure Key Vault</span></span>
+* <span data-ttu-id="f83a3-988">Azure App Configuration</span><span class="sxs-lookup"><span data-stu-id="f83a3-988">Azure App Configuration</span></span>
+* <span data-ttu-id="f83a3-989">Argumenty wiersza polecenia</span><span class="sxs-lookup"><span data-stu-id="f83a3-989">Command-line arguments</span></span>
+* <span data-ttu-id="f83a3-990">Dostawcy niestandardowi (instalowani lub utworzony)</span><span class="sxs-lookup"><span data-stu-id="f83a3-990">Custom providers (installed or created)</span></span>
+* <span data-ttu-id="f83a3-991">Pliki katalogu</span><span class="sxs-lookup"><span data-stu-id="f83a3-991">Directory files</span></span>
+* <span data-ttu-id="f83a3-992">Zmienne środowiskowe</span><span class="sxs-lookup"><span data-stu-id="f83a3-992">Environment variables</span></span>
+* <span data-ttu-id="f83a3-993">Obiekty w pamięci .NET</span><span class="sxs-lookup"><span data-stu-id="f83a3-993">In-memory .NET objects</span></span>
+* <span data-ttu-id="f83a3-994">Pliki ustawień</span><span class="sxs-lookup"><span data-stu-id="f83a3-994">Settings files</span></span>
 
-<span data-ttu-id="32987-496">Pakiety konfiguracyjne dla typowych scenariuszy dostawcy konfiguracji ([Microsoft. Extensions. Configuration](https://www.nuget.org/packages/Microsoft.Extensions.Configuration/)) są zawarte w [pakiecie Microsoft. AspNetCore. app](xref:fundamentals/metapackage-app).</span><span class="sxs-lookup"><span data-stu-id="32987-496">Configuration packages for common configuration provider scenarios ([Microsoft.Extensions.Configuration](https://www.nuget.org/packages/Microsoft.Extensions.Configuration/)) are included in the [Microsoft.AspNetCore.App metapackage](xref:fundamentals/metapackage-app).</span></span>
+<span data-ttu-id="f83a3-995">Pakiety konfiguracyjne dla typowych scenariuszy dostawcy konfiguracji ([Microsoft. Extensions. Configuration](https://www.nuget.org/packages/Microsoft.Extensions.Configuration/)) są zawarte w [pakiecie Microsoft. AspNetCore. app](xref:fundamentals/metapackage-app).</span><span class="sxs-lookup"><span data-stu-id="f83a3-995">Configuration packages for common configuration provider scenarios ([Microsoft.Extensions.Configuration](https://www.nuget.org/packages/Microsoft.Extensions.Configuration/)) are included in the [Microsoft.AspNetCore.App metapackage](xref:fundamentals/metapackage-app).</span></span>
 
-<span data-ttu-id="32987-497">Przykłady kodu, które obserwują i w przykładowej aplikacji <xref:Microsoft.Extensions.Configuration> używają przestrzeni nazw:</span><span class="sxs-lookup"><span data-stu-id="32987-497">Code examples that follow and in the sample app use the <xref:Microsoft.Extensions.Configuration> namespace:</span></span>
+<span data-ttu-id="f83a3-996">Przykłady kodu, które obserwują i w przykładowej aplikacji używają <xref:Microsoft.Extensions.Configuration> przestrzeni nazw:</span><span class="sxs-lookup"><span data-stu-id="f83a3-996">Code examples that follow and in the sample app use the <xref:Microsoft.Extensions.Configuration> namespace:</span></span>
 
 ```csharp
 using Microsoft.Extensions.Configuration;
 ```
 
-<span data-ttu-id="32987-498">*Wzorzec opcji* jest rozszerzeniem pojęć konfiguracyjnych opisanych w tym temacie.</span><span class="sxs-lookup"><span data-stu-id="32987-498">The *options pattern* is an extension of the configuration concepts described in this topic.</span></span> <span data-ttu-id="32987-499">Opcje używają klas do reprezentowania grup powiązanych ustawień.</span><span class="sxs-lookup"><span data-stu-id="32987-499">Options use classes to represent groups of related settings.</span></span> <span data-ttu-id="32987-500">Aby uzyskać więcej informacji, zobacz <xref:fundamentals/configuration/options>.</span><span class="sxs-lookup"><span data-stu-id="32987-500">For more information, see <xref:fundamentals/configuration/options>.</span></span>
+<span data-ttu-id="f83a3-997">*Wzorzec opcji* jest rozszerzeniem pojęć konfiguracyjnych opisanych w tym temacie.</span><span class="sxs-lookup"><span data-stu-id="f83a3-997">The *options pattern* is an extension of the configuration concepts described in this topic.</span></span> <span data-ttu-id="f83a3-998">Opcje używają klas do reprezentowania grup powiązanych ustawień.</span><span class="sxs-lookup"><span data-stu-id="f83a3-998">Options use classes to represent groups of related settings.</span></span> <span data-ttu-id="f83a3-999">Aby uzyskać więcej informacji, zobacz <xref:fundamentals/configuration/options>.</span><span class="sxs-lookup"><span data-stu-id="f83a3-999">For more information, see <xref:fundamentals/configuration/options>.</span></span>
 
-<span data-ttu-id="32987-501">[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples) ([jak pobrać](xref:index#how-to-download-a-sample))</span><span class="sxs-lookup"><span data-stu-id="32987-501">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples) ([how to download](xref:index#how-to-download-a-sample))</span></span>
+<span data-ttu-id="f83a3-1000">[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples) ([jak pobrać](xref:index#how-to-download-a-sample))</span><span class="sxs-lookup"><span data-stu-id="f83a3-1000">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples) ([how to download](xref:index#how-to-download-a-sample))</span></span>
 
-## <a name="host-versus-app-configuration"></a><span data-ttu-id="32987-502">Host a konfiguracja aplikacji</span><span class="sxs-lookup"><span data-stu-id="32987-502">Host versus app configuration</span></span>
+## <a name="host-versus-app-configuration"></a><span data-ttu-id="f83a3-1001">Host a konfiguracja aplikacji</span><span class="sxs-lookup"><span data-stu-id="f83a3-1001">Host versus app configuration</span></span>
 
-<span data-ttu-id="32987-503">Przed skonfigurowaniem i uruchomieniem aplikacji *host* zostanie skonfigurowany i uruchomiony.</span><span class="sxs-lookup"><span data-stu-id="32987-503">Before the app is configured and started, a *host* is configured and launched.</span></span> <span data-ttu-id="32987-504">Host jest odpowiedzialny za uruchamianie aplikacji i zarządzanie okresem istnienia.</span><span class="sxs-lookup"><span data-stu-id="32987-504">The host is responsible for app startup and lifetime management.</span></span> <span data-ttu-id="32987-505">Zarówno aplikacja, jak i Host są konfigurowane przy użyciu dostawców konfiguracji opisanych w tym temacie.</span><span class="sxs-lookup"><span data-stu-id="32987-505">Both the app and the host are configured using the configuration providers described in this topic.</span></span> <span data-ttu-id="32987-506">Klucz konfiguracji hosta — pary wartości są również uwzględnione w konfiguracji aplikacji.</span><span class="sxs-lookup"><span data-stu-id="32987-506">Host configuration key-value pairs are also included in the app's configuration.</span></span> <span data-ttu-id="32987-507">Aby uzyskać więcej informacji na temat tego, jak dostawcy konfiguracji są używani podczas kompilowania hosta i jak źródła konfiguracji wpływają na <xref:fundamentals/index#host>konfigurację hosta, zobacz.</span><span class="sxs-lookup"><span data-stu-id="32987-507">For more information on how the configuration providers are used when the host is built and how configuration sources affect host configuration, see <xref:fundamentals/index#host>.</span></span>
+<span data-ttu-id="f83a3-1002">Przed skonfigurowaniem i uruchomieniem aplikacji *host* zostanie skonfigurowany i uruchomiony.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1002">Before the app is configured and started, a *host* is configured and launched.</span></span> <span data-ttu-id="f83a3-1003">Host jest odpowiedzialny za uruchamianie aplikacji i zarządzanie okresem istnienia.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1003">The host is responsible for app startup and lifetime management.</span></span> <span data-ttu-id="f83a3-1004">Zarówno aplikacja, jak i Host są konfigurowane przy użyciu dostawców konfiguracji opisanych w tym temacie.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1004">Both the app and the host are configured using the configuration providers described in this topic.</span></span> <span data-ttu-id="f83a3-1005">Klucz konfiguracji hosta — pary wartości są również uwzględnione w konfiguracji aplikacji.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1005">Host configuration key-value pairs are also included in the app's configuration.</span></span> <span data-ttu-id="f83a3-1006">Aby uzyskać więcej informacji na temat tego, jak dostawcy konfiguracji są używani podczas kompilowania hosta i jak źródła konfiguracji wpływają na konfigurację hosta, zobacz <xref:fundamentals/index#host> .</span><span class="sxs-lookup"><span data-stu-id="f83a3-1006">For more information on how the configuration providers are used when the host is built and how configuration sources affect host configuration, see <xref:fundamentals/index#host>.</span></span>
 
-## <a name="other-configuration"></a><span data-ttu-id="32987-508">Inna konfiguracja</span><span class="sxs-lookup"><span data-stu-id="32987-508">Other configuration</span></span>
+## <a name="other-configuration"></a><span data-ttu-id="f83a3-1007">Inna konfiguracja</span><span class="sxs-lookup"><span data-stu-id="f83a3-1007">Other configuration</span></span>
 
-<span data-ttu-id="32987-509">Ten temat dotyczy tylko *konfiguracji aplikacji*.</span><span class="sxs-lookup"><span data-stu-id="32987-509">This topic only pertains to *app configuration*.</span></span> <span data-ttu-id="32987-510">Inne aspekty uruchamiania i hostowania aplikacji ASP.NET Core są konfigurowane przy użyciu plików konfiguracji nieuwzględnionych w tym temacie:</span><span class="sxs-lookup"><span data-stu-id="32987-510">Other aspects of running and hosting ASP.NET Core apps are configured using configuration files not covered in this topic:</span></span>
+<span data-ttu-id="f83a3-1008">Ten temat dotyczy tylko *konfiguracji aplikacji*.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1008">This topic only pertains to *app configuration*.</span></span> <span data-ttu-id="f83a3-1009">Inne aspekty uruchamiania i hostowania aplikacji ASP.NET Core są konfigurowane przy użyciu plików konfiguracji nieuwzględnionych w tym temacie:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1009">Other aspects of running and hosting ASP.NET Core apps are configured using configuration files not covered in this topic:</span></span>
 
-* <span data-ttu-id="32987-511">*plik Launch. JSON*/*profilu launchsettings. JSON* to pliki konfiguracji narzędzi dla środowiska programistycznego, opisane w temacie:</span><span class="sxs-lookup"><span data-stu-id="32987-511">*launch.json*/*launchSettings.json* are tooling configuration files for the Development environment, described:</span></span>
-  * <span data-ttu-id="32987-512">W <xref:fundamentals/environments#development>programie.</span><span class="sxs-lookup"><span data-stu-id="32987-512">In <xref:fundamentals/environments#development>.</span></span>
-  * <span data-ttu-id="32987-513">W zestawie dokumentacji, w której pliki są używane do konfigurowania ASP.NET Core aplikacji na potrzeby scenariuszy programistycznych.</span><span class="sxs-lookup"><span data-stu-id="32987-513">Across the documentation set where the files are used to configure ASP.NET Core apps for Development scenarios.</span></span>
-* <span data-ttu-id="32987-514">*Web. config* to plik konfiguracji serwera opisany w następujących tematach:</span><span class="sxs-lookup"><span data-stu-id="32987-514">*web.config* is a server configuration file, described in the following topics:</span></span>
+* <span data-ttu-id="f83a3-1010">plik *Launch. JSON* / *profilu launchsettings. JSON* to pliki konfiguracji narzędzi dla środowiska programistycznego, opisane w temacie:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1010">*launch.json*/*launchSettings.json* are tooling configuration files for the Development environment, described:</span></span>
+  * <span data-ttu-id="f83a3-1011">W programie <xref:fundamentals/environments#development> .</span><span class="sxs-lookup"><span data-stu-id="f83a3-1011">In <xref:fundamentals/environments#development>.</span></span>
+  * <span data-ttu-id="f83a3-1012">W zestawie dokumentacji, w której pliki są używane do konfigurowania ASP.NET Core aplikacji na potrzeby scenariuszy programistycznych.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1012">Across the documentation set where the files are used to configure ASP.NET Core apps for Development scenarios.</span></span>
+* <span data-ttu-id="f83a3-1013">*Web. config* to plik konfiguracji serwera opisany w następujących tematach:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1013">*web.config* is a server configuration file, described in the following topics:</span></span>
   * <xref:host-and-deploy/iis/index>
   * <xref:host-and-deploy/aspnet-core-module>
 
-<span data-ttu-id="32987-515">Aby uzyskać więcej informacji na temat migrowania konfiguracji aplikacji z wcześniejszych wersji programu <xref:migration/proper-to-2x/index#store-configurations>ASP.NET, zobacz.</span><span class="sxs-lookup"><span data-stu-id="32987-515">For more information on migrating app configuration from earlier versions of ASP.NET, see <xref:migration/proper-to-2x/index#store-configurations>.</span></span>
+<span data-ttu-id="f83a3-1014">Aby uzyskać więcej informacji na temat migrowania konfiguracji aplikacji z wcześniejszych wersji programu ASP.NET, zobacz <xref:migration/proper-to-2x/index#store-configurations> .</span><span class="sxs-lookup"><span data-stu-id="f83a3-1014">For more information on migrating app configuration from earlier versions of ASP.NET, see <xref:migration/proper-to-2x/index#store-configurations>.</span></span>
 
-## <a name="default-configuration"></a><span data-ttu-id="32987-516">Konfiguracja domyślna</span><span class="sxs-lookup"><span data-stu-id="32987-516">Default configuration</span></span>
+## <a name="default-configuration"></a><span data-ttu-id="f83a3-1015">Konfiguracja domyślna</span><span class="sxs-lookup"><span data-stu-id="f83a3-1015">Default configuration</span></span>
 
-<span data-ttu-id="32987-517">Aplikacje sieci Web oparte na ASP.NET Coreniu [nowych](/dotnet/core/tools/dotnet-new) szablonów dotnet <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> są wywoływane podczas kompilowania hosta.</span><span class="sxs-lookup"><span data-stu-id="32987-517">Web apps based on the ASP.NET Core [dotnet new](/dotnet/core/tools/dotnet-new) templates call <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> when building a host.</span></span> <span data-ttu-id="32987-518">`CreateDefaultBuilder`zapewnia domyślną konfigurację dla aplikacji w następującej kolejności:</span><span class="sxs-lookup"><span data-stu-id="32987-518">`CreateDefaultBuilder` provides default configuration for the app in the following order:</span></span>
+<span data-ttu-id="f83a3-1016">Aplikacje sieci Web oparte na ASP.NET Coreniu [nowych szablonów dotnet](/dotnet/core/tools/dotnet-new) są wywoływane <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> podczas kompilowania hosta.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1016">Web apps based on the ASP.NET Core [dotnet new](/dotnet/core/tools/dotnet-new) templates call <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> when building a host.</span></span> <span data-ttu-id="f83a3-1017">`CreateDefaultBuilder`zapewnia domyślną konfigurację dla aplikacji w następującej kolejności:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1017">`CreateDefaultBuilder` provides default configuration for the app in the following order:</span></span>
 
-<span data-ttu-id="32987-519">Poniższe zasady dotyczą aplikacji korzystających z [hosta sieci Web](xref:fundamentals/host/web-host).</span><span class="sxs-lookup"><span data-stu-id="32987-519">The following applies to apps using the [Web Host](xref:fundamentals/host/web-host).</span></span> <span data-ttu-id="32987-520">Aby uzyskać szczegółowe informacje na temat konfiguracji domyślnej w przypadku korzystania z [hosta ogólnego](xref:fundamentals/host/generic-host), zobacz [najnowszą wersję tego tematu](xref:fundamentals/configuration/index).</span><span class="sxs-lookup"><span data-stu-id="32987-520">For details on the default configuration when using the [Generic Host](xref:fundamentals/host/generic-host), see the [latest version of this topic](xref:fundamentals/configuration/index).</span></span>
+<span data-ttu-id="f83a3-1018">Poniższe zasady dotyczą aplikacji korzystających z [hosta sieci Web](xref:fundamentals/host/web-host).</span><span class="sxs-lookup"><span data-stu-id="f83a3-1018">The following applies to apps using the [Web Host](xref:fundamentals/host/web-host).</span></span> <span data-ttu-id="f83a3-1019">Aby uzyskać szczegółowe informacje na temat konfiguracji domyślnej w przypadku korzystania z [hosta ogólnego](xref:fundamentals/host/generic-host), zobacz [najnowszą wersję tego tematu](xref:fundamentals/configuration/index).</span><span class="sxs-lookup"><span data-stu-id="f83a3-1019">For details on the default configuration when using the [Generic Host](xref:fundamentals/host/generic-host), see the [latest version of this topic](xref:fundamentals/configuration/index).</span></span>
 
-* <span data-ttu-id="32987-521">Konfiguracja hosta jest poświadczona z:</span><span class="sxs-lookup"><span data-stu-id="32987-521">Host configuration is provided from:</span></span>
-  * <span data-ttu-id="32987-522">Zmienne środowiskowe poprzedzone `ASPNETCORE_` znakiem (na `ASPNETCORE_ENVIRONMENT`przykład) przy użyciu [dostawcy konfiguracji zmiennych środowiskowych](#environment-variables-configuration-provider).</span><span class="sxs-lookup"><span data-stu-id="32987-522">Environment variables prefixed with `ASPNETCORE_` (for example, `ASPNETCORE_ENVIRONMENT`) using the [Environment Variables Configuration Provider](#environment-variables-configuration-provider).</span></span> <span data-ttu-id="32987-523">Prefiks (`ASPNETCORE_`) jest usuwany, gdy są ładowane pary klucz-wartość konfiguracji.</span><span class="sxs-lookup"><span data-stu-id="32987-523">The prefix (`ASPNETCORE_`) is stripped when the configuration key-value pairs are loaded.</span></span>
-  * <span data-ttu-id="32987-524">Argumenty wiersza polecenia przy użyciu [dostawcy konfiguracji wiersza polecenia](#command-line-configuration-provider).</span><span class="sxs-lookup"><span data-stu-id="32987-524">Command-line arguments using the [Command-line Configuration Provider](#command-line-configuration-provider).</span></span>
-* <span data-ttu-id="32987-525">Podano konfigurację aplikacji z:</span><span class="sxs-lookup"><span data-stu-id="32987-525">App configuration is provided from:</span></span>
-  * <span data-ttu-id="32987-526">*appSettings. JSON* przy użyciu [dostawcy konfiguracji plików](#file-configuration-provider).</span><span class="sxs-lookup"><span data-stu-id="32987-526">*appsettings.json* using the [File Configuration Provider](#file-configuration-provider).</span></span>
-  * <span data-ttu-id="32987-527">*appSettings. {Environment}. JSON* przy użyciu [dostawcy konfiguracji pliku](#file-configuration-provider).</span><span class="sxs-lookup"><span data-stu-id="32987-527">*appsettings.{Environment}.json* using the [File Configuration Provider](#file-configuration-provider).</span></span>
-  * <span data-ttu-id="32987-528">[Secret Manager](xref:security/app-secrets) , gdy aplikacja jest uruchamiana `Development` w środowisku przy użyciu zestawu wpisów.</span><span class="sxs-lookup"><span data-stu-id="32987-528">[Secret Manager](xref:security/app-secrets) when the app runs in the `Development` environment using the entry assembly.</span></span>
-  * <span data-ttu-id="32987-529">Zmienne środowiskowe używające [dostawcy konfiguracji zmiennych środowiskowych](#environment-variables-configuration-provider).</span><span class="sxs-lookup"><span data-stu-id="32987-529">Environment variables using the [Environment Variables Configuration Provider](#environment-variables-configuration-provider).</span></span>
-  * <span data-ttu-id="32987-530">Argumenty wiersza polecenia przy użyciu [dostawcy konfiguracji wiersza polecenia](#command-line-configuration-provider).</span><span class="sxs-lookup"><span data-stu-id="32987-530">Command-line arguments using the [Command-line Configuration Provider](#command-line-configuration-provider).</span></span>
+* <span data-ttu-id="f83a3-1020">Konfiguracja hosta jest poświadczona z:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1020">Host configuration is provided from:</span></span>
+  * <span data-ttu-id="f83a3-1021">Zmienne środowiskowe poprzedzone znakiem `ASPNETCORE_` (na przykład `ASPNETCORE_ENVIRONMENT` ) przy użyciu [dostawcy konfiguracji zmiennych środowiskowych](#environment-variables-configuration-provider).</span><span class="sxs-lookup"><span data-stu-id="f83a3-1021">Environment variables prefixed with `ASPNETCORE_` (for example, `ASPNETCORE_ENVIRONMENT`) using the [Environment Variables Configuration Provider](#environment-variables-configuration-provider).</span></span> <span data-ttu-id="f83a3-1022">Prefiks ( `ASPNETCORE_` ) jest usuwany, gdy są ładowane pary klucz-wartość konfiguracji.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1022">The prefix (`ASPNETCORE_`) is stripped when the configuration key-value pairs are loaded.</span></span>
+  * <span data-ttu-id="f83a3-1023">Argumenty wiersza polecenia przy użyciu [dostawcy konfiguracji wiersza polecenia](#command-line-configuration-provider).</span><span class="sxs-lookup"><span data-stu-id="f83a3-1023">Command-line arguments using the [Command-line Configuration Provider](#command-line-configuration-provider).</span></span>
+* <span data-ttu-id="f83a3-1024">Podano konfigurację aplikacji z:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1024">App configuration is provided from:</span></span>
+  * <span data-ttu-id="f83a3-1025">*appSettings. JSON* przy użyciu [dostawcy konfiguracji plików](#file-configuration-provider).</span><span class="sxs-lookup"><span data-stu-id="f83a3-1025">*appsettings.json* using the [File Configuration Provider](#file-configuration-provider).</span></span>
+  * <span data-ttu-id="f83a3-1026">*appSettings. {Environment}. JSON* przy użyciu [dostawcy konfiguracji pliku](#file-configuration-provider).</span><span class="sxs-lookup"><span data-stu-id="f83a3-1026">*appsettings.{Environment}.json* using the [File Configuration Provider](#file-configuration-provider).</span></span>
+  * <span data-ttu-id="f83a3-1027">[Secret Manager](xref:security/app-secrets) , gdy aplikacja jest uruchamiana w `Development` środowisku przy użyciu zestawu wpisów.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1027">[Secret Manager](xref:security/app-secrets) when the app runs in the `Development` environment using the entry assembly.</span></span>
+  * <span data-ttu-id="f83a3-1028">Zmienne środowiskowe używające [dostawcy konfiguracji zmiennych środowiskowych](#environment-variables-configuration-provider).</span><span class="sxs-lookup"><span data-stu-id="f83a3-1028">Environment variables using the [Environment Variables Configuration Provider](#environment-variables-configuration-provider).</span></span>
+  * <span data-ttu-id="f83a3-1029">Argumenty wiersza polecenia przy użyciu [dostawcy konfiguracji wiersza polecenia](#command-line-configuration-provider).</span><span class="sxs-lookup"><span data-stu-id="f83a3-1029">Command-line arguments using the [Command-line Configuration Provider](#command-line-configuration-provider).</span></span>
 
-## <a name="security"></a><span data-ttu-id="32987-531">Zabezpieczenia</span><span class="sxs-lookup"><span data-stu-id="32987-531">Security</span></span>
+## <a name="security"></a><span data-ttu-id="f83a3-1030">Zabezpieczenia</span><span class="sxs-lookup"><span data-stu-id="f83a3-1030">Security</span></span>
 
-<span data-ttu-id="32987-532">Aby zabezpieczyć poufne dane konfiguracji, należy zastosować następujące rozwiązania:</span><span class="sxs-lookup"><span data-stu-id="32987-532">Adopt the following practices to secure sensitive configuration data:</span></span>
+<span data-ttu-id="f83a3-1031">Aby zabezpieczyć poufne dane konfiguracji, należy zastosować następujące rozwiązania:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1031">Adopt the following practices to secure sensitive configuration data:</span></span>
 
-* <span data-ttu-id="32987-533">Nie należy przechowywać haseł ani innych danych poufnych w kodzie dostawcy konfiguracji ani w plikach konfiguracji zwykłego tekstu.</span><span class="sxs-lookup"><span data-stu-id="32987-533">Never store passwords or other sensitive data in configuration provider code or in plain text configuration files.</span></span>
-* <span data-ttu-id="32987-534">Nie używaj tajemnic produkcyjnych w środowiskach deweloperskich i testowych.</span><span class="sxs-lookup"><span data-stu-id="32987-534">Don't use production secrets in development or test environments.</span></span>
-* <span data-ttu-id="32987-535">Określ wpisy tajne poza projektem, aby nie mogły zostać przypadkowo przekazane do repozytorium kodu źródłowego.</span><span class="sxs-lookup"><span data-stu-id="32987-535">Specify secrets outside of the project so that they can't be accidentally committed to a source code repository.</span></span>
+* <span data-ttu-id="f83a3-1032">Nie należy przechowywać haseł ani innych danych poufnych w kodzie dostawcy konfiguracji ani w plikach konfiguracji zwykłego tekstu.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1032">Never store passwords or other sensitive data in configuration provider code or in plain text configuration files.</span></span>
+* <span data-ttu-id="f83a3-1033">Nie używaj tajemnic produkcyjnych w środowiskach deweloperskich i testowych.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1033">Don't use production secrets in development or test environments.</span></span>
+* <span data-ttu-id="f83a3-1034">Określ wpisy tajne poza projektem, aby nie mogły zostać przypadkowo przekazane do repozytorium kodu źródłowego.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1034">Specify secrets outside of the project so that they can't be accidentally committed to a source code repository.</span></span>
 
-<span data-ttu-id="32987-536">Aby uzyskać więcej informacji, zobacz następujące tematy:</span><span class="sxs-lookup"><span data-stu-id="32987-536">For more information, see the following topics:</span></span>
+<span data-ttu-id="f83a3-1035">Aby uzyskać więcej informacji, zobacz następujące tematy:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1035">For more information, see the following topics:</span></span>
 
 * <xref:fundamentals/environments>
-* <span data-ttu-id="32987-537"><xref:security/app-secrets>&ndash; Zawiera porady dotyczące używania zmiennych środowiskowych do przechowywania poufnych danych.</span><span class="sxs-lookup"><span data-stu-id="32987-537"><xref:security/app-secrets> &ndash; Includes advice on using environment variables to store sensitive data.</span></span> <span data-ttu-id="32987-538">Menedżer wpisów tajnych używa dostawcy konfiguracji plików do przechowywania wpisów tajnych użytkownika w pliku JSON w systemie lokalnym.</span><span class="sxs-lookup"><span data-stu-id="32987-538">The Secret Manager uses the File Configuration Provider to store user secrets in a JSON file on the local system.</span></span> <span data-ttu-id="32987-539">Dostawca konfiguracji plików został opisany w dalszej części tego tematu.</span><span class="sxs-lookup"><span data-stu-id="32987-539">The File Configuration Provider is described later in this topic.</span></span>
+* <span data-ttu-id="f83a3-1036"><xref:security/app-secrets>&ndash;Zawiera porady dotyczące używania zmiennych środowiskowych do przechowywania poufnych danych.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1036"><xref:security/app-secrets> &ndash; Includes advice on using environment variables to store sensitive data.</span></span> <span data-ttu-id="f83a3-1037">Menedżer wpisów tajnych używa dostawcy konfiguracji plików do przechowywania wpisów tajnych użytkownika w pliku JSON w systemie lokalnym.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1037">The Secret Manager uses the File Configuration Provider to store user secrets in a JSON file on the local system.</span></span> <span data-ttu-id="f83a3-1038">Dostawca konfiguracji plików został opisany w dalszej części tego tematu.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1038">The File Configuration Provider is described later in this topic.</span></span>
 
-<span data-ttu-id="32987-540">[Azure Key Vault](https://azure.microsoft.com/services/key-vault/) bezpieczne przechowywanie wpisów tajnych aplikacji dla ASP.NET Core aplikacji.</span><span class="sxs-lookup"><span data-stu-id="32987-540">[Azure Key Vault](https://azure.microsoft.com/services/key-vault/) safely stores app secrets for ASP.NET Core apps.</span></span> <span data-ttu-id="32987-541">Aby uzyskać więcej informacji, zobacz <xref:security/key-vault-configuration>.</span><span class="sxs-lookup"><span data-stu-id="32987-541">For more information, see <xref:security/key-vault-configuration>.</span></span>
+<span data-ttu-id="f83a3-1039">[Azure Key Vault](https://azure.microsoft.com/services/key-vault/) bezpieczne przechowywanie wpisów tajnych aplikacji dla ASP.NET Core aplikacji.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1039">[Azure Key Vault](https://azure.microsoft.com/services/key-vault/) safely stores app secrets for ASP.NET Core apps.</span></span> <span data-ttu-id="f83a3-1040">Aby uzyskać więcej informacji, zobacz <xref:security/key-vault-configuration>.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1040">For more information, see <xref:security/key-vault-configuration>.</span></span>
 
-## <a name="hierarchical-configuration-data"></a><span data-ttu-id="32987-542">Hierarchiczne dane konfiguracji</span><span class="sxs-lookup"><span data-stu-id="32987-542">Hierarchical configuration data</span></span>
+## <a name="hierarchical-configuration-data"></a><span data-ttu-id="f83a3-1041">Hierarchiczne dane konfiguracji</span><span class="sxs-lookup"><span data-stu-id="f83a3-1041">Hierarchical configuration data</span></span>
 
-<span data-ttu-id="32987-543">Interfejs API konfiguracji jest w stanie utrzymywać hierarchiczne dane konfiguracji przez spłaszczonie danych hierarchicznych przy użyciu ogranicznika w kluczach konfiguracji.</span><span class="sxs-lookup"><span data-stu-id="32987-543">The Configuration API is capable of maintaining hierarchical configuration data by flattening the hierarchical data with the use of a delimiter in the configuration keys.</span></span>
+<span data-ttu-id="f83a3-1042">Interfejs API konfiguracji jest w stanie utrzymywać hierarchiczne dane konfiguracji przez spłaszczonie danych hierarchicznych przy użyciu ogranicznika w kluczach konfiguracji.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1042">The Configuration API is capable of maintaining hierarchical configuration data by flattening the hierarchical data with the use of a delimiter in the configuration keys.</span></span>
 
-<span data-ttu-id="32987-544">W poniższym pliku JSON cztery klucze istnieją w hierarchii strukturalnej dwóch sekcji:</span><span class="sxs-lookup"><span data-stu-id="32987-544">In the following JSON file, four keys exist in a structured hierarchy of two sections:</span></span>
+<span data-ttu-id="f83a3-1043">W poniższym pliku JSON cztery klucze istnieją w hierarchii strukturalnej dwóch sekcji:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1043">In the following JSON file, four keys exist in a structured hierarchy of two sections:</span></span>
 
 ```json
 {
@@ -862,26 +1520,26 @@ using Microsoft.Extensions.Configuration;
 }
 ```
 
-<span data-ttu-id="32987-545">Gdy plik jest odczytywany do konfiguracji, są tworzone unikatowe klucze, aby zachować oryginalną hierarchiczną strukturę danych źródła konfiguracji.</span><span class="sxs-lookup"><span data-stu-id="32987-545">When the file is read into configuration, unique keys are created to maintain the original hierarchical data structure of the configuration source.</span></span> <span data-ttu-id="32987-546">Sekcje i klucze są spłaszczone przy użyciu dwukropka (`:`), aby zachować oryginalną strukturę:</span><span class="sxs-lookup"><span data-stu-id="32987-546">The sections and keys are flattened with the use of a colon (`:`) to maintain the original structure:</span></span>
+<span data-ttu-id="f83a3-1044">Gdy plik jest odczytywany do konfiguracji, są tworzone unikatowe klucze, aby zachować oryginalną hierarchiczną strukturę danych źródła konfiguracji.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1044">When the file is read into configuration, unique keys are created to maintain the original hierarchical data structure of the configuration source.</span></span> <span data-ttu-id="f83a3-1045">Sekcje i klucze są spłaszczone przy użyciu dwukropka (), `:` Aby zachować oryginalną strukturę:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1045">The sections and keys are flattened with the use of a colon (`:`) to maintain the original structure:</span></span>
 
-* <span data-ttu-id="32987-547">section0:key0</span><span class="sxs-lookup"><span data-stu-id="32987-547">section0:key0</span></span>
-* <span data-ttu-id="32987-548">section0: Klucz1</span><span class="sxs-lookup"><span data-stu-id="32987-548">section0:key1</span></span>
-* <span data-ttu-id="32987-549">section1:key0</span><span class="sxs-lookup"><span data-stu-id="32987-549">section1:key0</span></span>
-* <span data-ttu-id="32987-550">Section1: Klucz1</span><span class="sxs-lookup"><span data-stu-id="32987-550">section1:key1</span></span>
+* <span data-ttu-id="f83a3-1046">section0:key0</span><span class="sxs-lookup"><span data-stu-id="f83a3-1046">section0:key0</span></span>
+* <span data-ttu-id="f83a3-1047">section0: Klucz1</span><span class="sxs-lookup"><span data-stu-id="f83a3-1047">section0:key1</span></span>
+* <span data-ttu-id="f83a3-1048">section1:key0</span><span class="sxs-lookup"><span data-stu-id="f83a3-1048">section1:key0</span></span>
+* <span data-ttu-id="f83a3-1049">Section1: Klucz1</span><span class="sxs-lookup"><span data-stu-id="f83a3-1049">section1:key1</span></span>
 
-<span data-ttu-id="32987-551"><xref:Microsoft.Extensions.Configuration.ConfigurationSection.GetSection*>metody <xref:Microsoft.Extensions.Configuration.IConfiguration.GetChildren*> i są dostępne do izolowania sekcji i elementów podrzędnych sekcji w danych konfiguracyjnych.</span><span class="sxs-lookup"><span data-stu-id="32987-551"><xref:Microsoft.Extensions.Configuration.ConfigurationSection.GetSection*> and <xref:Microsoft.Extensions.Configuration.IConfiguration.GetChildren*> methods are available to isolate sections and children of a section in the configuration data.</span></span> <span data-ttu-id="32987-552">Te metody są opisane w dalszej [części GetSection, GetChildren i EXISTS](#getsection-getchildren-and-exists).</span><span class="sxs-lookup"><span data-stu-id="32987-552">These methods are described later in [GetSection, GetChildren, and Exists](#getsection-getchildren-and-exists).</span></span>
+<span data-ttu-id="f83a3-1050"><xref:Microsoft.Extensions.Configuration.ConfigurationSection.GetSection*><xref:Microsoft.Extensions.Configuration.IConfiguration.GetChildren*>metody i są dostępne do izolowania sekcji i elementów podrzędnych sekcji w danych konfiguracyjnych.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1050"><xref:Microsoft.Extensions.Configuration.ConfigurationSection.GetSection*> and <xref:Microsoft.Extensions.Configuration.IConfiguration.GetChildren*> methods are available to isolate sections and children of a section in the configuration data.</span></span> <span data-ttu-id="f83a3-1051">Te metody są opisane w dalszej [części GetSection, GetChildren i EXISTS](#getsection-getchildren-and-exists).</span><span class="sxs-lookup"><span data-stu-id="f83a3-1051">These methods are described later in [GetSection, GetChildren, and Exists](#getsection-getchildren-and-exists).</span></span>
 
-## <a name="conventions"></a><span data-ttu-id="32987-553">Konwencje</span><span class="sxs-lookup"><span data-stu-id="32987-553">Conventions</span></span>
+## <a name="conventions"></a><span data-ttu-id="f83a3-1052">Konwencje</span><span class="sxs-lookup"><span data-stu-id="f83a3-1052">Conventions</span></span>
 
-### <a name="sources-and-providers"></a><span data-ttu-id="32987-554">Źródła i dostawcy</span><span class="sxs-lookup"><span data-stu-id="32987-554">Sources and providers</span></span>
+### <a name="sources-and-providers"></a><span data-ttu-id="f83a3-1053">Źródła i dostawcy</span><span class="sxs-lookup"><span data-stu-id="f83a3-1053">Sources and providers</span></span>
 
-<span data-ttu-id="32987-555">Podczas uruchamiania aplikacji źródła konfiguracji są odczytywane w kolejności, w jakiej są określone przez ich dostawców konfiguracji.</span><span class="sxs-lookup"><span data-stu-id="32987-555">At app startup, configuration sources are read in the order that their configuration providers are specified.</span></span>
+<span data-ttu-id="f83a3-1054">Podczas uruchamiania aplikacji źródła konfiguracji są odczytywane w kolejności, w jakiej są określone przez ich dostawców konfiguracji.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1054">At app startup, configuration sources are read in the order that their configuration providers are specified.</span></span>
 
-<span data-ttu-id="32987-556">Dostawcy konfiguracji implementujący funkcję wykrywania zmian mają możliwość ponownego załadowania konfiguracji, gdy ustawienie podstawowe zostanie zmienione.</span><span class="sxs-lookup"><span data-stu-id="32987-556">Configuration providers that implement change detection have the ability to reload configuration when an underlying setting is changed.</span></span> <span data-ttu-id="32987-557">Na przykład dostawca konfiguracji plików (opisany w dalszej części tego tematu) i [dostawca konfiguracji Azure Key Vault](xref:security/key-vault-configuration) implementują wykrywanie zmian.</span><span class="sxs-lookup"><span data-stu-id="32987-557">For example, the File Configuration Provider (described later in this topic) and the [Azure Key Vault Configuration Provider](xref:security/key-vault-configuration) implement change detection.</span></span>
+<span data-ttu-id="f83a3-1055">Dostawcy konfiguracji implementujący funkcję wykrywania zmian mają możliwość ponownego załadowania konfiguracji, gdy ustawienie podstawowe zostanie zmienione.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1055">Configuration providers that implement change detection have the ability to reload configuration when an underlying setting is changed.</span></span> <span data-ttu-id="f83a3-1056">Na przykład dostawca konfiguracji plików (opisany w dalszej części tego tematu) i [dostawca konfiguracji Azure Key Vault](xref:security/key-vault-configuration) implementują wykrywanie zmian.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1056">For example, the File Configuration Provider (described later in this topic) and the [Azure Key Vault Configuration Provider](xref:security/key-vault-configuration) implement change detection.</span></span>
 
-<span data-ttu-id="32987-558"><xref:Microsoft.Extensions.Configuration.IConfiguration>jest dostępny w kontenerze [iniekcji zależności](xref:fundamentals/dependency-injection) aplikacji.</span><span class="sxs-lookup"><span data-stu-id="32987-558"><xref:Microsoft.Extensions.Configuration.IConfiguration> is available in the app's [dependency injection (DI)](xref:fundamentals/dependency-injection) container.</span></span> <span data-ttu-id="32987-559"><xref:Microsoft.Extensions.Configuration.IConfiguration>można wstrzyknąć do Razor Pages <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> lub MVC <xref:Microsoft.AspNetCore.Mvc.Controller> , aby uzyskać konfigurację dla klasy.</span><span class="sxs-lookup"><span data-stu-id="32987-559"><xref:Microsoft.Extensions.Configuration.IConfiguration> can be injected into a Razor Pages <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> or MVC <xref:Microsoft.AspNetCore.Mvc.Controller> to obtain configuration for the class.</span></span>
+<span data-ttu-id="f83a3-1057"><xref:Microsoft.Extensions.Configuration.IConfiguration>jest dostępny w kontenerze [iniekcji zależności](xref:fundamentals/dependency-injection) aplikacji.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1057"><xref:Microsoft.Extensions.Configuration.IConfiguration> is available in the app's [dependency injection (DI)](xref:fundamentals/dependency-injection) container.</span></span> <span data-ttu-id="f83a3-1058"><xref:Microsoft.Extensions.Configuration.IConfiguration>można wstrzyknąć do Razor stron <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> lub MVC, <xref:Microsoft.AspNetCore.Mvc.Controller> Aby uzyskać konfigurację dla klasy.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1058"><xref:Microsoft.Extensions.Configuration.IConfiguration> can be injected into a Razor Pages <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> or MVC <xref:Microsoft.AspNetCore.Mvc.Controller> to obtain configuration for the class.</span></span>
 
-<span data-ttu-id="32987-560">W poniższych przykładach `_config` pole jest używane w celu uzyskania dostępu do wartości konfiguracyjnych:</span><span class="sxs-lookup"><span data-stu-id="32987-560">In the following examples, the `_config` field is used to access configuration values:</span></span>
+<span data-ttu-id="f83a3-1059">W poniższych przykładach `_config` pole jest używane w celu uzyskania dostępu do wartości konfiguracyjnych:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1059">In the following examples, the `_config` field is used to access configuration values:</span></span>
 
 ```csharp
 public class IndexModel : PageModel
@@ -907,60 +1565,186 @@ public class HomeController : Controller
 }
 ```
 
-<span data-ttu-id="32987-561">Dostawcy konfiguracji nie mogą używać DI, ponieważ są niedostępne, gdy są skonfigurowane przez hosta.</span><span class="sxs-lookup"><span data-stu-id="32987-561">Configuration providers can't utilize DI, as it's not available when they're set up by the host.</span></span>
+<span data-ttu-id="f83a3-1060">Dostawcy konfiguracji nie mogą używać DI, ponieważ są niedostępne, gdy są skonfigurowane przez hosta.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1060">Configuration providers can't utilize DI, as it's not available when they're set up by the host.</span></span>
 
-### <a name="keys"></a><span data-ttu-id="32987-562">Klucze</span><span class="sxs-lookup"><span data-stu-id="32987-562">Keys</span></span>
+### <a name="keys"></a><span data-ttu-id="f83a3-1061">Klucze</span><span class="sxs-lookup"><span data-stu-id="f83a3-1061">Keys</span></span>
 
-<span data-ttu-id="32987-563">Klucze konfiguracji przyjmują następujące konwencje:</span><span class="sxs-lookup"><span data-stu-id="32987-563">Configuration keys adopt the following conventions:</span></span>
+<span data-ttu-id="f83a3-1062">Klucze konfiguracji przyjmują następujące konwencje:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1062">Configuration keys adopt the following conventions:</span></span>
 
-* <span data-ttu-id="32987-564">W kluczach nie jest rozróżniana wielkość liter.</span><span class="sxs-lookup"><span data-stu-id="32987-564">Keys are case-insensitive.</span></span> <span data-ttu-id="32987-565">Na przykład `ConnectionString` i `connectionstring` są traktowane jako równoważne klucze.</span><span class="sxs-lookup"><span data-stu-id="32987-565">For example, `ConnectionString` and `connectionstring` are treated as equivalent keys.</span></span>
-* <span data-ttu-id="32987-566">Jeśli wartość tego samego klucza jest ustawiana przez tych samych lub różnych dostawców konfiguracji, Ostatnia wartość ustawiona w tym kluczu jest używana.</span><span class="sxs-lookup"><span data-stu-id="32987-566">If a value for the same key is set by the same or different configuration providers, the last value set on the key is the value used.</span></span>
-* <span data-ttu-id="32987-567">Klucze hierarchiczne</span><span class="sxs-lookup"><span data-stu-id="32987-567">Hierarchical keys</span></span>
-  * <span data-ttu-id="32987-568">W interfejsie API konfiguracji, separator dwukropek`:`() działa na wszystkich platformach.</span><span class="sxs-lookup"><span data-stu-id="32987-568">Within the Configuration API, a colon separator (`:`) works on all platforms.</span></span>
-  * <span data-ttu-id="32987-569">W zmiennych środowiskowych separator dwukropek może nie zadziałał na wszystkich platformach.</span><span class="sxs-lookup"><span data-stu-id="32987-569">In environment variables, a colon separator may not work on all platforms.</span></span> <span data-ttu-id="32987-570">Podwójne podkreślenie (`__`) jest obsługiwane przez wszystkie platformy i automatycznie konwertowane na dwukropek.</span><span class="sxs-lookup"><span data-stu-id="32987-570">A double underscore (`__`) is supported by all platforms and is automatically converted into a colon.</span></span>
-  * <span data-ttu-id="32987-571">W Azure Key Vault klucze hierarchiczne używają `--` (dwóch kresek) jako separatora.</span><span class="sxs-lookup"><span data-stu-id="32987-571">In Azure Key Vault, hierarchical keys use `--` (two dashes) as a separator.</span></span> <span data-ttu-id="32987-572">Napisz kod, aby zastąpić łączniki dwukropkiem, gdy wpisy tajne są ładowane do konfiguracji aplikacji.</span><span class="sxs-lookup"><span data-stu-id="32987-572">Write code to replace the dashes with a colon when the secrets are loaded into the app's configuration.</span></span>
-* <span data-ttu-id="32987-573"><xref:Microsoft.Extensions.Configuration.ConfigurationBinder> Obsługuje tablice powiązań z obiektami przy użyciu indeksów tablicowych w kluczach konfiguracji.</span><span class="sxs-lookup"><span data-stu-id="32987-573">The <xref:Microsoft.Extensions.Configuration.ConfigurationBinder> supports binding arrays to objects using array indices in configuration keys.</span></span> <span data-ttu-id="32987-574">Powiązanie tablicowe zostało opisane w sekcji [Powiązywanie tablicy z klasą](#bind-an-array-to-a-class) .</span><span class="sxs-lookup"><span data-stu-id="32987-574">Array binding is described in the [Bind an array to a class](#bind-an-array-to-a-class) section.</span></span>
+* <span data-ttu-id="f83a3-1063">W kluczach nie jest rozróżniana wielkość liter.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1063">Keys are case-insensitive.</span></span> <span data-ttu-id="f83a3-1064">Na przykład `ConnectionString` i `connectionstring` są traktowane jako równoważne klucze.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1064">For example, `ConnectionString` and `connectionstring` are treated as equivalent keys.</span></span>
+* <span data-ttu-id="f83a3-1065">Jeśli wartość tego samego klucza jest ustawiana przez tych samych lub różnych dostawców konfiguracji, Ostatnia wartość ustawiona w tym kluczu jest używana.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1065">If a value for the same key is set by the same or different configuration providers, the last value set on the key is the value used.</span></span>
+* <span data-ttu-id="f83a3-1066">Klucze hierarchiczne</span><span class="sxs-lookup"><span data-stu-id="f83a3-1066">Hierarchical keys</span></span>
+  * <span data-ttu-id="f83a3-1067">W interfejsie API konfiguracji, separator dwukropek ( `:` ) działa na wszystkich platformach.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1067">Within the Configuration API, a colon separator (`:`) works on all platforms.</span></span>
+  * <span data-ttu-id="f83a3-1068">W zmiennych środowiskowych separator dwukropek może nie zadziałał na wszystkich platformach.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1068">In environment variables, a colon separator may not work on all platforms.</span></span> <span data-ttu-id="f83a3-1069">Podwójne podkreślenie ( `__` ) jest obsługiwane przez wszystkie platformy i automatycznie konwertowane na dwukropek.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1069">A double underscore (`__`) is supported by all platforms and is automatically converted into a colon.</span></span>
+  * <span data-ttu-id="f83a3-1070">W Azure Key Vault klucze hierarchiczne używają `--` (dwóch kresek) jako separatora.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1070">In Azure Key Vault, hierarchical keys use `--` (two dashes) as a separator.</span></span> <span data-ttu-id="f83a3-1071">Napisz kod, aby zastąpić łączniki dwukropkiem, gdy wpisy tajne są ładowane do konfiguracji aplikacji.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1071">Write code to replace the dashes with a colon when the secrets are loaded into the app's configuration.</span></span>
+* <span data-ttu-id="f83a3-1072"><xref:Microsoft.Extensions.Configuration.ConfigurationBinder>Obsługuje tablice powiązań z obiektami przy użyciu indeksów tablicowych w kluczach konfiguracji.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1072">The <xref:Microsoft.Extensions.Configuration.ConfigurationBinder> supports binding arrays to objects using array indices in configuration keys.</span></span> <span data-ttu-id="f83a3-1073">Powiązanie tablicowe zostało opisane w sekcji [Powiązywanie tablicy z klasą](#bind-an-array-to-a-class) .</span><span class="sxs-lookup"><span data-stu-id="f83a3-1073">Array binding is described in the [Bind an array to a class](#bind-an-array-to-a-class) section.</span></span>
 
-### <a name="values"></a><span data-ttu-id="32987-575">Wartości</span><span class="sxs-lookup"><span data-stu-id="32987-575">Values</span></span>
+### <a name="values"></a><span data-ttu-id="f83a3-1074">Wartości</span><span class="sxs-lookup"><span data-stu-id="f83a3-1074">Values</span></span>
 
-<span data-ttu-id="32987-576">Wartości konfiguracyjne przyjmują następujące konwencje:</span><span class="sxs-lookup"><span data-stu-id="32987-576">Configuration values adopt the following conventions:</span></span>
+<span data-ttu-id="f83a3-1075">Wartości konfiguracyjne przyjmują następujące konwencje:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1075">Configuration values adopt the following conventions:</span></span>
 
-* <span data-ttu-id="32987-577">Wartości są ciągami.</span><span class="sxs-lookup"><span data-stu-id="32987-577">Values are strings.</span></span>
-* <span data-ttu-id="32987-578">Wartości null nie można przechowywać w konfiguracji ani powiązana z obiektami.</span><span class="sxs-lookup"><span data-stu-id="32987-578">Null values can't be stored in configuration or bound to objects.</span></span>
+* <span data-ttu-id="f83a3-1076">Wartości są ciągami.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1076">Values are strings.</span></span>
+* <span data-ttu-id="f83a3-1077">Wartości null nie można przechowywać w konfiguracji ani powiązana z obiektami.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1077">Null values can't be stored in configuration or bound to objects.</span></span>
 
-## <a name="providers"></a><span data-ttu-id="32987-579">Dostawcy</span><span class="sxs-lookup"><span data-stu-id="32987-579">Providers</span></span>
+## <a name="providers"></a><span data-ttu-id="f83a3-1078">Dostawcy</span><span class="sxs-lookup"><span data-stu-id="f83a3-1078">Providers</span></span>
 
-<span data-ttu-id="32987-580">W poniższej tabeli przedstawiono dostawców konfiguracji dostępnych do ASP.NET Core aplikacji.</span><span class="sxs-lookup"><span data-stu-id="32987-580">The following table shows the configuration providers available to ASP.NET Core apps.</span></span>
+<span data-ttu-id="f83a3-1079">W poniższej tabeli przedstawiono dostawców konfiguracji dostępnych do ASP.NET Core aplikacji.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1079">The following table shows the configuration providers available to ASP.NET Core apps.</span></span>
 
-| <span data-ttu-id="32987-581">Dostawca</span><span class="sxs-lookup"><span data-stu-id="32987-581">Provider</span></span> | <span data-ttu-id="32987-582">Zapewnia konfigurację z&hellip;</span><span class="sxs-lookup"><span data-stu-id="32987-582">Provides configuration from&hellip;</span></span> |
-| -------- | ----------------------------------- |
-| <span data-ttu-id="32987-583">[Dostawca konfiguracji Azure Key Vault](xref:security/key-vault-configuration) (tematy dotyczące*zabezpieczeń* )</span><span class="sxs-lookup"><span data-stu-id="32987-583">[Azure Key Vault Configuration Provider](xref:security/key-vault-configuration) (*Security* topics)</span></span> | <span data-ttu-id="32987-584">W usłudze Azure Key Vault</span><span class="sxs-lookup"><span data-stu-id="32987-584">Azure Key Vault</span></span> |
-| <span data-ttu-id="32987-585">[Dostawca konfiguracji aplikacji platformy Azure](/azure/azure-app-configuration/quickstart-aspnet-core-app) (dokumentacja platformy Azure)</span><span class="sxs-lookup"><span data-stu-id="32987-585">[Azure App Configuration Provider](/azure/azure-app-configuration/quickstart-aspnet-core-app) (Azure documentation)</span></span> | <span data-ttu-id="32987-586">Azure App Configuration</span><span class="sxs-lookup"><span data-stu-id="32987-586">Azure App Configuration</span></span> |
-| [<span data-ttu-id="32987-587">Dostawca konfiguracji wiersza polecenia</span><span class="sxs-lookup"><span data-stu-id="32987-587">Command-line Configuration Provider</span></span>](#command-line-configuration-provider) | <span data-ttu-id="32987-588">Parametry wiersza polecenia</span><span class="sxs-lookup"><span data-stu-id="32987-588">Command-line parameters</span></span> |
-| [<span data-ttu-id="32987-589">Niestandardowy dostawca konfiguracji</span><span class="sxs-lookup"><span data-stu-id="32987-589">Custom configuration provider</span></span>](#custom-configuration-provider) | <span data-ttu-id="32987-590">Źródło niestandardowe</span><span class="sxs-lookup"><span data-stu-id="32987-590">Custom source</span></span> |
-| [<span data-ttu-id="32987-591">Dostawca konfiguracji zmiennych środowiskowych</span><span class="sxs-lookup"><span data-stu-id="32987-591">Environment Variables Configuration Provider</span></span>](#environment-variables-configuration-provider) | <span data-ttu-id="32987-592">Zmienne środowiskowe</span><span class="sxs-lookup"><span data-stu-id="32987-592">Environment variables</span></span> |
-| [<span data-ttu-id="32987-593">Dostawca konfiguracji plików</span><span class="sxs-lookup"><span data-stu-id="32987-593">File Configuration Provider</span></span>](#file-configuration-provider) | <span data-ttu-id="32987-594">Pliki (INI, JSON, XML)</span><span class="sxs-lookup"><span data-stu-id="32987-594">Files (INI, JSON, XML)</span></span> |
-| [<span data-ttu-id="32987-595">Dostawca konfiguracji klucza dla plików</span><span class="sxs-lookup"><span data-stu-id="32987-595">Key-per-file Configuration Provider</span></span>](#key-per-file-configuration-provider) | <span data-ttu-id="32987-596">Pliki katalogu</span><span class="sxs-lookup"><span data-stu-id="32987-596">Directory files</span></span> |
-| [<span data-ttu-id="32987-597">Dostawca konfiguracji pamięci</span><span class="sxs-lookup"><span data-stu-id="32987-597">Memory Configuration Provider</span></span>](#memory-configuration-provider) | <span data-ttu-id="32987-598">Kolekcje w pamięci</span><span class="sxs-lookup"><span data-stu-id="32987-598">In-memory collections</span></span> |
-| <span data-ttu-id="32987-599">Wpisy [tajne użytkownika (Secret Manager)](xref:security/app-secrets) (tematy dotyczące*zabezpieczeń* )</span><span class="sxs-lookup"><span data-stu-id="32987-599">[User secrets (Secret Manager)](xref:security/app-secrets) (*Security* topics)</span></span> | <span data-ttu-id="32987-600">Plik w katalogu profilu użytkownika</span><span class="sxs-lookup"><span data-stu-id="32987-600">File in the user profile directory</span></span> |
+| <span data-ttu-id="f83a3-1080">Dostawca</span><span class="sxs-lookup"><span data-stu-id="f83a3-1080">Provider</span></span> | <span data-ttu-id="f83a3-1081">Zapewnia konfigurację z&hellip;</span><span class="sxs-lookup"><span data-stu-id="f83a3-1081">Provides configuration from&hellip;</span></span> |
+| ---
+<span data-ttu-id="f83a3-1082">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1082">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1083">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1083">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1084">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1084">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1085">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1085">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1086">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1086">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1087">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1087">'SignalR' uid:</span></span> 
 
-<span data-ttu-id="32987-601">Źródła konfiguracji są odczytywane w kolejności, w jakiej dostawcy konfiguracji są określeni podczas uruchamiania.</span><span class="sxs-lookup"><span data-stu-id="32987-601">Configuration sources are read in the order that their configuration providers are specified at startup.</span></span> <span data-ttu-id="32987-602">Dostawcy konfiguracji opisane w tym temacie są opisane w kolejności alfabetycznej, a nie w kolejności, w jakiej kod ich rozmieszcza.</span><span class="sxs-lookup"><span data-stu-id="32987-602">The configuration providers described in this topic are described in alphabetical order, not in the order that the code arranges them.</span></span> <span data-ttu-id="32987-603">Zamów dostawców konfiguracji w kodzie, aby odpowiadały priorytetom źródłowych źródeł konfiguracji wymaganych przez aplikację.</span><span class="sxs-lookup"><span data-stu-id="32987-603">Order configuration providers in code to suit the priorities for the underlying configuration sources that the app requires.</span></span>
+-
+<span data-ttu-id="f83a3-1088">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1088">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1089">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1089">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1090">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1090">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1091">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1091">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1092">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1092">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1093">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1093">'SignalR' uid:</span></span> 
 
-<span data-ttu-id="32987-604">Typową sekwencją dostawców konfiguracji jest:</span><span class="sxs-lookup"><span data-stu-id="32987-604">A typical sequence of configuration providers is:</span></span>
+<span data-ttu-id="f83a3-1094">---- | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1094">---- | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1095">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1095">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1096">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1096">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1097">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1097">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1098">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1098">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1099">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1099">'SignalR' uid:</span></span> 
 
-1. <span data-ttu-id="32987-605">Pliki (*appSettings. JSON*, *appSettings. { Environment}. JSON*, gdzie `{Environment}` to bieżące środowisko hostingu aplikacji)</span><span class="sxs-lookup"><span data-stu-id="32987-605">Files (*appsettings.json*, *appsettings.{Environment}.json*, where `{Environment}` is the app's current hosting environment)</span></span>
-1. [<span data-ttu-id="32987-606">W usłudze Azure Key Vault</span><span class="sxs-lookup"><span data-stu-id="32987-606">Azure Key Vault</span></span>](xref:security/key-vault-configuration)
-1. <span data-ttu-id="32987-607">Wpisy [tajne użytkownika (Secret Manager)](xref:security/app-secrets) (tylko środowisko programistyczne)</span><span class="sxs-lookup"><span data-stu-id="32987-607">[User secrets (Secret Manager)](xref:security/app-secrets) (Development environment only)</span></span>
-1. <span data-ttu-id="32987-608">Zmienne środowiskowe</span><span class="sxs-lookup"><span data-stu-id="32987-608">Environment variables</span></span>
-1. <span data-ttu-id="32987-609">Argumenty wiersza polecenia</span><span class="sxs-lookup"><span data-stu-id="32987-609">Command-line arguments</span></span>
+-
+<span data-ttu-id="f83a3-1100">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1100">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1101">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1101">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1102">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1102">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1103">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1103">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1104">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1104">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1105">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1105">'SignalR' uid:</span></span> 
 
-<span data-ttu-id="32987-610">Typowym celem jest umieszczenie dostawcy konfiguracji wiersza polecenia jako ostatni w serii dostawców, aby zezwolić na argumenty wiersza polecenia, aby przesłonić konfigurację ustawioną przez innych dostawców.</span><span class="sxs-lookup"><span data-stu-id="32987-610">A common practice is to position the Command-line Configuration Provider last in a series of providers to allow command-line arguments to override configuration set by the other providers.</span></span>
+-
+<span data-ttu-id="f83a3-1106">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1106">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1107">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1107">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1108">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1108">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1109">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1109">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1110">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1110">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1111">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1111">'SignalR' uid:</span></span> 
 
-<span data-ttu-id="32987-611">Poprzednia sekwencja dostawców jest używana, gdy nowy Konstruktor hosta zostanie zainicjowany przy `CreateDefaultBuilder`użyciu programu.</span><span class="sxs-lookup"><span data-stu-id="32987-611">The preceding sequence of providers is used when a new host builder is initialized with `CreateDefaultBuilder`.</span></span> <span data-ttu-id="32987-612">Aby uzyskać więcej informacji, zobacz sekcję [Konfiguracja domyślna](#default-configuration) .</span><span class="sxs-lookup"><span data-stu-id="32987-612">For more information, see the [Default configuration](#default-configuration) section.</span></span>
+-
+<span data-ttu-id="f83a3-1112">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1112">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1113">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1113">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1114">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1114">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1115">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1115">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1116">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1116">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1117">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1117">'SignalR' uid:</span></span> 
 
-## <a name="configure-the-host-builder-with-useconfiguration"></a><span data-ttu-id="32987-613">Konfigurowanie konstruktora hostów za pomocą UseConfiguration</span><span class="sxs-lookup"><span data-stu-id="32987-613">Configure the host builder with UseConfiguration</span></span>
+-
+<span data-ttu-id="f83a3-1118">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1118">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1119">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1119">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1120">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1120">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1121">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1121">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1122">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1122">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1123">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1123">'SignalR' uid:</span></span> 
 
-<span data-ttu-id="32987-614">Aby skonfigurować konstruktora hosta, należy wywołać <xref:Microsoft.AspNetCore.Hosting.HostingAbstractionsWebHostBuilderExtensions.UseConfiguration*> konstruktora hosta z konfiguracją.</span><span class="sxs-lookup"><span data-stu-id="32987-614">To configure the host builder, call <xref:Microsoft.AspNetCore.Hosting.HostingAbstractionsWebHostBuilderExtensions.UseConfiguration*> on the host builder with the configuration.</span></span>
+-
+<span data-ttu-id="f83a3-1124">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1124">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1125">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1125">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1126">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1126">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1127">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1127">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1128">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1128">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1129">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1129">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1130">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1130">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1131">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1131">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1132">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1132">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1133">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1133">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1134">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1134">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1135">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1135">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1136">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1136">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1137">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1137">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1138">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1138">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1139">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1139">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1140">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1140">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1141">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1141">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1142">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1142">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1143">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1143">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1144">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1144">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1145">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1145">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1146">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1146">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1147">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1147">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1148">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1148">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1149">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1149">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1150">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1150">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1151">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1151">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1152">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1152">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1153">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1153">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1154">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1154">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1155">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1155">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1156">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1156">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1157">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1157">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1158">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1158">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1159">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1159">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1160">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1160">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1161">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1161">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1162">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1162">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1163">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1163">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1164">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1164">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1165">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1165">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1166">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1166">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1167">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1167">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1168">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1168">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1169">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1169">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1170">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1170">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1171">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1171">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1172">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1172">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1173">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1173">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1174">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1174">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1175">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1175">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1176">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1176">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1177">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1177">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1178">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1178">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1179">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1179">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1180">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1180">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1181">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1181">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1182">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1182">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1183">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1183">'SignalR' uid:</span></span> 
+
+<span data-ttu-id="f83a3-1184">------------------ | | [Dostawca konfiguracji Azure Key Vault](xref:security/key-vault-configuration) (tematy dotyczące*zabezpieczeń* ) | Azure Key Vault | | [Dostawca konfiguracji aplikacji platformy Azure](/azure/azure-app-configuration/quickstart-aspnet-core-app) (dokumentacja platformy Azure) | Konfiguracja aplikacji platformy Azure | | [Dostawca konfiguracji wiersza polecenia](#command-line-configuration-provider) | Parametry wiersza polecenia | | [Niestandardowy dostawca konfiguracji](#custom-configuration-provider) | Źródło niestandardowe | | [Dostawca konfiguracji zmiennych środowiskowych](#environment-variables-configuration-provider) | Zmienne środowiskowe | | [Dostawca konfiguracji plików](#file-configuration-provider) | Pliki (INI, JSON, XML) | | [Dostawca konfiguracji klucza dla plików](#key-per-file-configuration-provider) | Pliki katalogu | | [Dostawca konfiguracji pamięci](#memory-configuration-provider) | Kolekcje w pamięci | Wpisy | [tajne użytkownika (Secret Manager)](xref:security/app-secrets) (tematy dotyczące*zabezpieczeń* ) | Plik w katalogu profilu użytkownika |</span><span class="sxs-lookup"><span data-stu-id="f83a3-1184">------------------ | | [Azure Key Vault Configuration Provider](xref:security/key-vault-configuration) (*Security* topics) | Azure Key Vault | | [Azure App Configuration Provider](/azure/azure-app-configuration/quickstart-aspnet-core-app) (Azure documentation) | Azure App Configuration | | [Command-line Configuration Provider](#command-line-configuration-provider) | Command-line parameters | | [Custom configuration provider](#custom-configuration-provider) | Custom source | | [Environment Variables Configuration Provider](#environment-variables-configuration-provider) | Environment variables | | [File Configuration Provider](#file-configuration-provider) | Files (INI, JSON, XML) | | [Key-per-file Configuration Provider](#key-per-file-configuration-provider) | Directory files | | [Memory Configuration Provider](#memory-configuration-provider) | In-memory collections | | [User secrets (Secret Manager)](xref:security/app-secrets) (*Security* topics) | File in the user profile directory |</span></span>
+
+<span data-ttu-id="f83a3-1185">Źródła konfiguracji są odczytywane w kolejności, w jakiej dostawcy konfiguracji są określeni podczas uruchamiania.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1185">Configuration sources are read in the order that their configuration providers are specified at startup.</span></span> <span data-ttu-id="f83a3-1186">Dostawcy konfiguracji opisane w tym temacie są opisane w kolejności alfabetycznej, a nie w kolejności, w jakiej kod ich rozmieszcza.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1186">The configuration providers described in this topic are described in alphabetical order, not in the order that the code arranges them.</span></span> <span data-ttu-id="f83a3-1187">Zamów dostawców konfiguracji w kodzie, aby odpowiadały priorytetom źródłowych źródeł konfiguracji wymaganych przez aplikację.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1187">Order configuration providers in code to suit the priorities for the underlying configuration sources that the app requires.</span></span>
+
+<span data-ttu-id="f83a3-1188">Typową sekwencją dostawców konfiguracji jest:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1188">A typical sequence of configuration providers is:</span></span>
+
+1. <span data-ttu-id="f83a3-1189">Pliki (*appSettings. JSON*, *appSettings. { Environment}. JSON*, gdzie `{Environment}` to bieżące środowisko hostingu aplikacji)</span><span class="sxs-lookup"><span data-stu-id="f83a3-1189">Files (*appsettings.json*, *appsettings.{Environment}.json*, where `{Environment}` is the app's current hosting environment)</span></span>
+1. [<span data-ttu-id="f83a3-1190">W usłudze Azure Key Vault</span><span class="sxs-lookup"><span data-stu-id="f83a3-1190">Azure Key Vault</span></span>](xref:security/key-vault-configuration)
+1. <span data-ttu-id="f83a3-1191">Wpisy [tajne użytkownika (Secret Manager)](xref:security/app-secrets) (tylko środowisko programistyczne)</span><span class="sxs-lookup"><span data-stu-id="f83a3-1191">[User secrets (Secret Manager)](xref:security/app-secrets) (Development environment only)</span></span>
+1. <span data-ttu-id="f83a3-1192">Zmienne środowiskowe</span><span class="sxs-lookup"><span data-stu-id="f83a3-1192">Environment variables</span></span>
+1. <span data-ttu-id="f83a3-1193">Argumenty wiersza polecenia</span><span class="sxs-lookup"><span data-stu-id="f83a3-1193">Command-line arguments</span></span>
+
+<span data-ttu-id="f83a3-1194">Typowym celem jest umieszczenie dostawcy konfiguracji wiersza polecenia jako ostatni w serii dostawców, aby zezwolić na argumenty wiersza polecenia, aby przesłonić konfigurację ustawioną przez innych dostawców.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1194">A common practice is to position the Command-line Configuration Provider last in a series of providers to allow command-line arguments to override configuration set by the other providers.</span></span>
+
+<span data-ttu-id="f83a3-1195">Poprzednia sekwencja dostawców jest używana, gdy nowy Konstruktor hosta zostanie zainicjowany przy użyciu programu `CreateDefaultBuilder` .</span><span class="sxs-lookup"><span data-stu-id="f83a3-1195">The preceding sequence of providers is used when a new host builder is initialized with `CreateDefaultBuilder`.</span></span> <span data-ttu-id="f83a3-1196">Aby uzyskać więcej informacji, zobacz sekcję [Konfiguracja domyślna](#default-configuration) .</span><span class="sxs-lookup"><span data-stu-id="f83a3-1196">For more information, see the [Default configuration](#default-configuration) section.</span></span>
+
+## <a name="configure-the-host-builder-with-useconfiguration"></a><span data-ttu-id="f83a3-1197">Konfigurowanie konstruktora hostów za pomocą UseConfiguration</span><span class="sxs-lookup"><span data-stu-id="f83a3-1197">Configure the host builder with UseConfiguration</span></span>
+
+<span data-ttu-id="f83a3-1198">Aby skonfigurować konstruktora hosta, należy wywołać <xref:Microsoft.AspNetCore.Hosting.HostingAbstractionsWebHostBuilderExtensions.UseConfiguration*> konstruktora hosta z konfiguracją.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1198">To configure the host builder, call <xref:Microsoft.AspNetCore.Hosting.HostingAbstractionsWebHostBuilderExtensions.UseConfiguration*> on the host builder with the configuration.</span></span>
 
 ```csharp
 public static IWebHostBuilder CreateWebHostBuilder(string[] args)
@@ -981,15 +1765,15 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args)
 }
 ```
 
-## <a name="configureappconfiguration"></a><span data-ttu-id="32987-615">ConfigureAppConfiguration</span><span class="sxs-lookup"><span data-stu-id="32987-615">ConfigureAppConfiguration</span></span>
+## <a name="configureappconfiguration"></a><span data-ttu-id="f83a3-1199">ConfigureAppConfiguration</span><span class="sxs-lookup"><span data-stu-id="f83a3-1199">ConfigureAppConfiguration</span></span>
 
-<span data-ttu-id="32987-616">Wywołaj `ConfigureAppConfiguration` podczas kompilowania hosta, aby określić dostawców konfiguracji aplikacji oprócz tych dodanych automatycznie przez `CreateDefaultBuilder`:</span><span class="sxs-lookup"><span data-stu-id="32987-616">Call `ConfigureAppConfiguration` when building the host to specify the app's configuration providers in addition to those added automatically by `CreateDefaultBuilder`:</span></span>
+<span data-ttu-id="f83a3-1200">Wywołaj `ConfigureAppConfiguration` podczas kompilowania hosta, aby określić dostawców konfiguracji aplikacji oprócz tych dodanych automatycznie przez `CreateDefaultBuilder` :</span><span class="sxs-lookup"><span data-stu-id="f83a3-1200">Call `ConfigureAppConfiguration` when building the host to specify the app's configuration providers in addition to those added automatically by `CreateDefaultBuilder`:</span></span>
 
 [!code-csharp[](index/samples/2.x/ConfigurationSample/Program.cs?name=snippet_Program&highlight=20)]
 
-### <a name="override-previous-configuration-with-command-line-arguments"></a><span data-ttu-id="32987-617">Zastąp poprzednią konfigurację argumentami wiersza polecenia</span><span class="sxs-lookup"><span data-stu-id="32987-617">Override previous configuration with command-line arguments</span></span>
+### <a name="override-previous-configuration-with-command-line-arguments"></a><span data-ttu-id="f83a3-1201">Zastąp poprzednią konfigurację argumentami wiersza polecenia</span><span class="sxs-lookup"><span data-stu-id="f83a3-1201">Override previous configuration with command-line arguments</span></span>
 
-<span data-ttu-id="32987-618">Aby podać konfigurację aplikacji, którą można zastąpić za pomocą argumentów wiersza polecenia, wywołaj `AddCommandLine` ostatni:</span><span class="sxs-lookup"><span data-stu-id="32987-618">To provide app configuration that can be overridden with command-line arguments, call `AddCommandLine` last:</span></span>
+<span data-ttu-id="f83a3-1202">Aby podać konfigurację aplikacji, którą można zastąpić za pomocą argumentów wiersza polecenia, wywołaj `AddCommandLine` ostatni:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1202">To provide app configuration that can be overridden with command-line arguments, call `AddCommandLine` last:</span></span>
 
 ```csharp
 .ConfigureAppConfiguration((hostingContext, config) =>
@@ -999,9 +1783,9 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args)
 })
 ```
 
-### <a name="remove-providers-added-by-createdefaultbuilder"></a><span data-ttu-id="32987-619">Usuń dostawców dodanych przez CreateDefaultBuilder</span><span class="sxs-lookup"><span data-stu-id="32987-619">Remove providers added by CreateDefaultBuilder</span></span>
+### <a name="remove-providers-added-by-createdefaultbuilder"></a><span data-ttu-id="f83a3-1203">Usuń dostawców dodanych przez CreateDefaultBuilder</span><span class="sxs-lookup"><span data-stu-id="f83a3-1203">Remove providers added by CreateDefaultBuilder</span></span>
 
-<span data-ttu-id="32987-620">Aby usunąć dostawców dodanych przez `CreateDefaultBuilder`, najpierw Wywołaj polecenie [Clear](/dotnet/api/system.collections.generic.icollection-1.clear) w [IConfigurationBuilder. sources](xref:Microsoft.Extensions.Configuration.IConfigurationBuilder.Sources) :</span><span class="sxs-lookup"><span data-stu-id="32987-620">To remove the providers added by `CreateDefaultBuilder`, call [Clear](/dotnet/api/system.collections.generic.icollection-1.clear) on the [IConfigurationBuilder.Sources](xref:Microsoft.Extensions.Configuration.IConfigurationBuilder.Sources) first:</span></span>
+<span data-ttu-id="f83a3-1204">Aby usunąć dostawców dodanych przez `CreateDefaultBuilder` , najpierw Wywołaj polecenie [Clear](/dotnet/api/system.collections.generic.icollection-1.clear) w [IConfigurationBuilder. sources](xref:Microsoft.Extensions.Configuration.IConfigurationBuilder.Sources) :</span><span class="sxs-lookup"><span data-stu-id="f83a3-1204">To remove the providers added by `CreateDefaultBuilder`, call [Clear](/dotnet/api/system.collections.generic.icollection-1.clear) on the [IConfigurationBuilder.Sources](xref:Microsoft.Extensions.Configuration.IConfigurationBuilder.Sources) first:</span></span>
 
 ```csharp
 .ConfigureAppConfiguration((hostingContext, config) =>
@@ -1011,29 +1795,29 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args)
 })
 ```
 
-### <a name="consume-configuration-during-app-startup"></a><span data-ttu-id="32987-621">Użyj konfiguracji podczas uruchamiania aplikacji</span><span class="sxs-lookup"><span data-stu-id="32987-621">Consume configuration during app startup</span></span>
+### <a name="consume-configuration-during-app-startup"></a><span data-ttu-id="f83a3-1205">Użyj konfiguracji podczas uruchamiania aplikacji</span><span class="sxs-lookup"><span data-stu-id="f83a3-1205">Consume configuration during app startup</span></span>
 
-<span data-ttu-id="32987-622">Konfiguracja dostarczona do aplikacji w `ConfigureAppConfiguration` programie jest dostępna podczas uruchamiania aplikacji, w tym `Startup.ConfigureServices`.</span><span class="sxs-lookup"><span data-stu-id="32987-622">Configuration supplied to the app in `ConfigureAppConfiguration` is available during the app's startup, including `Startup.ConfigureServices`.</span></span> <span data-ttu-id="32987-623">Aby uzyskać więcej informacji, zobacz sekcję [Konfiguracja dostępu podczas uruchamiania](#access-configuration-during-startup) .</span><span class="sxs-lookup"><span data-stu-id="32987-623">For more information, see the [Access configuration during startup](#access-configuration-during-startup) section.</span></span>
+<span data-ttu-id="f83a3-1206">Konfiguracja dostarczona do aplikacji w programie `ConfigureAppConfiguration` jest dostępna podczas uruchamiania aplikacji, w tym `Startup.ConfigureServices` .</span><span class="sxs-lookup"><span data-stu-id="f83a3-1206">Configuration supplied to the app in `ConfigureAppConfiguration` is available during the app's startup, including `Startup.ConfigureServices`.</span></span> <span data-ttu-id="f83a3-1207">Aby uzyskać więcej informacji, zobacz sekcję [Konfiguracja dostępu podczas uruchamiania](#access-configuration-during-startup) .</span><span class="sxs-lookup"><span data-stu-id="f83a3-1207">For more information, see the [Access configuration during startup](#access-configuration-during-startup) section.</span></span>
 
-## <a name="command-line-configuration-provider"></a><span data-ttu-id="32987-624">Dostawca konfiguracji wiersza polecenia</span><span class="sxs-lookup"><span data-stu-id="32987-624">Command-line Configuration Provider</span></span>
+## <a name="command-line-configuration-provider"></a><span data-ttu-id="f83a3-1208">Dostawca konfiguracji wiersza polecenia</span><span class="sxs-lookup"><span data-stu-id="f83a3-1208">Command-line Configuration Provider</span></span>
 
-<span data-ttu-id="32987-625"><xref:Microsoft.Extensions.Configuration.CommandLine.CommandLineConfigurationProvider> Ładowanie konfiguracji z par klucz-wartość argumentu wiersza polecenia w czasie wykonywania.</span><span class="sxs-lookup"><span data-stu-id="32987-625">The <xref:Microsoft.Extensions.Configuration.CommandLine.CommandLineConfigurationProvider> loads configuration from command-line argument key-value pairs at runtime.</span></span>
+<span data-ttu-id="f83a3-1209"><xref:Microsoft.Extensions.Configuration.CommandLine.CommandLineConfigurationProvider>Ładowanie konfiguracji z par klucz-wartość argumentu wiersza polecenia w czasie wykonywania.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1209">The <xref:Microsoft.Extensions.Configuration.CommandLine.CommandLineConfigurationProvider> loads configuration from command-line argument key-value pairs at runtime.</span></span>
 
-<span data-ttu-id="32987-626">Aby uaktywnić konfigurację wiersza polecenia, Metoda <xref:Microsoft.Extensions.Configuration.CommandLineConfigurationExtensions.AddCommandLine*> rozszerzenia jest wywoływana w wystąpieniu <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder>.</span><span class="sxs-lookup"><span data-stu-id="32987-626">To activate command-line configuration, the <xref:Microsoft.Extensions.Configuration.CommandLineConfigurationExtensions.AddCommandLine*> extension method is called on an instance of <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder>.</span></span>
+<span data-ttu-id="f83a3-1210">Aby uaktywnić konfigurację wiersza polecenia, <xref:Microsoft.Extensions.Configuration.CommandLineConfigurationExtensions.AddCommandLine*> Metoda rozszerzenia jest wywoływana w wystąpieniu <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder> .</span><span class="sxs-lookup"><span data-stu-id="f83a3-1210">To activate command-line configuration, the <xref:Microsoft.Extensions.Configuration.CommandLineConfigurationExtensions.AddCommandLine*> extension method is called on an instance of <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder>.</span></span>
 
-<span data-ttu-id="32987-627">`AddCommandLine`jest wywoływana automatycznie, `CreateDefaultBuilder(string [])` gdy jest wywoływana.</span><span class="sxs-lookup"><span data-stu-id="32987-627">`AddCommandLine` is automatically called when `CreateDefaultBuilder(string [])` is called.</span></span> <span data-ttu-id="32987-628">Aby uzyskać więcej informacji, zobacz sekcję [Konfiguracja domyślna](#default-configuration) .</span><span class="sxs-lookup"><span data-stu-id="32987-628">For more information, see the [Default configuration](#default-configuration) section.</span></span>
+<span data-ttu-id="f83a3-1211">`AddCommandLine`jest wywoływana automatycznie, gdy `CreateDefaultBuilder(string [])` jest wywoływana.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1211">`AddCommandLine` is automatically called when `CreateDefaultBuilder(string [])` is called.</span></span> <span data-ttu-id="f83a3-1212">Aby uzyskać więcej informacji, zobacz sekcję [Konfiguracja domyślna](#default-configuration) .</span><span class="sxs-lookup"><span data-stu-id="f83a3-1212">For more information, see the [Default configuration](#default-configuration) section.</span></span>
 
-<span data-ttu-id="32987-629">`CreateDefaultBuilder`ładuje również:</span><span class="sxs-lookup"><span data-stu-id="32987-629">`CreateDefaultBuilder` also loads:</span></span>
+<span data-ttu-id="f83a3-1213">`CreateDefaultBuilder`ładuje również:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1213">`CreateDefaultBuilder` also loads:</span></span>
 
-* <span data-ttu-id="32987-630">Opcjonalna konfiguracja z pliku *appSettings. JSON* i *appSettings. { Environment}. JSON* — pliki.</span><span class="sxs-lookup"><span data-stu-id="32987-630">Optional configuration from *appsettings.json* and *appsettings.{Environment}.json* files.</span></span>
-* <span data-ttu-id="32987-631">Wpisy [tajne użytkownika (Secret Manager)](xref:security/app-secrets) w środowisku deweloperskim.</span><span class="sxs-lookup"><span data-stu-id="32987-631">[User secrets (Secret Manager)](xref:security/app-secrets) in the Development environment.</span></span>
-* <span data-ttu-id="32987-632">Zmienne środowiskowe.</span><span class="sxs-lookup"><span data-stu-id="32987-632">Environment variables.</span></span>
+* <span data-ttu-id="f83a3-1214">Opcjonalna konfiguracja z pliku *appSettings. JSON* i *appSettings. { Environment}. JSON* — pliki.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1214">Optional configuration from *appsettings.json* and *appsettings.{Environment}.json* files.</span></span>
+* <span data-ttu-id="f83a3-1215">Wpisy [tajne użytkownika (Secret Manager)](xref:security/app-secrets) w środowisku deweloperskim.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1215">[User secrets (Secret Manager)](xref:security/app-secrets) in the Development environment.</span></span>
+* <span data-ttu-id="f83a3-1216">Zmienne środowiskowe.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1216">Environment variables.</span></span>
 
-<span data-ttu-id="32987-633">`CreateDefaultBuilder`dodaje dostawcę konfiguracji wiersza polecenia Last.</span><span class="sxs-lookup"><span data-stu-id="32987-633">`CreateDefaultBuilder` adds the Command-line Configuration Provider last.</span></span> <span data-ttu-id="32987-634">Argumenty wiersza polecenia przekazane w czasie wykonywania zastępują konfigurację ustawioną przez innych dostawców.</span><span class="sxs-lookup"><span data-stu-id="32987-634">Command-line arguments passed at runtime override configuration set by the other providers.</span></span>
+<span data-ttu-id="f83a3-1217">`CreateDefaultBuilder`dodaje dostawcę konfiguracji wiersza polecenia Last.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1217">`CreateDefaultBuilder` adds the Command-line Configuration Provider last.</span></span> <span data-ttu-id="f83a3-1218">Argumenty wiersza polecenia przekazane w czasie wykonywania zastępują konfigurację ustawioną przez innych dostawców.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1218">Command-line arguments passed at runtime override configuration set by the other providers.</span></span>
 
-<span data-ttu-id="32987-635">`CreateDefaultBuilder`działa, gdy host jest skonstruowany.</span><span class="sxs-lookup"><span data-stu-id="32987-635">`CreateDefaultBuilder` acts when the host is constructed.</span></span> <span data-ttu-id="32987-636">W związku z tym konfiguracja wiersza polecenia aktywowana przez `CreateDefaultBuilder` program może mieć wpływ na sposób konfigurowania hosta.</span><span class="sxs-lookup"><span data-stu-id="32987-636">Therefore, command-line configuration activated by `CreateDefaultBuilder` can affect how the host is configured.</span></span>
+<span data-ttu-id="f83a3-1219">`CreateDefaultBuilder`działa, gdy host jest skonstruowany.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1219">`CreateDefaultBuilder` acts when the host is constructed.</span></span> <span data-ttu-id="f83a3-1220">W związku z tym konfiguracja wiersza polecenia aktywowana przez program `CreateDefaultBuilder` może mieć wpływ na sposób konfigurowania hosta.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1220">Therefore, command-line configuration activated by `CreateDefaultBuilder` can affect how the host is configured.</span></span>
 
-<span data-ttu-id="32987-637">W przypadku aplikacji opartych na ASP.NET Core szablonach program `AddCommandLine` został już wywołany przez. `CreateDefaultBuilder`</span><span class="sxs-lookup"><span data-stu-id="32987-637">For apps based on the ASP.NET Core templates, `AddCommandLine` has already been called by `CreateDefaultBuilder`.</span></span> <span data-ttu-id="32987-638">Aby dodać kolejnych dostawców konfiguracji i zachować możliwość przesłonięcia konfiguracji od tych dostawców za pomocą argumentów wiersza polecenia, wywołaj dodatkowych dostawców aplikacji w `ConfigureAppConfiguration` i Wywołaj `AddCommandLine` jako ostatni.</span><span class="sxs-lookup"><span data-stu-id="32987-638">To add additional configuration providers and maintain the ability to override configuration from those providers with command-line arguments, call the app's additional providers in `ConfigureAppConfiguration` and call `AddCommandLine` last.</span></span>
+<span data-ttu-id="f83a3-1221">W przypadku aplikacji opartych na ASP.NET Core szablonach program `AddCommandLine` został już wywołany przez `CreateDefaultBuilder` .</span><span class="sxs-lookup"><span data-stu-id="f83a3-1221">For apps based on the ASP.NET Core templates, `AddCommandLine` has already been called by `CreateDefaultBuilder`.</span></span> <span data-ttu-id="f83a3-1222">Aby dodać kolejnych dostawców konfiguracji i zachować możliwość przesłonięcia konfiguracji od tych dostawców za pomocą argumentów wiersza polecenia, wywołaj dodatkowych dostawców aplikacji w `ConfigureAppConfiguration` i Wywołaj jako `AddCommandLine` ostatni.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1222">To add additional configuration providers and maintain the ability to override configuration from those providers with command-line arguments, call the app's additional providers in `ConfigureAppConfiguration` and call `AddCommandLine` last.</span></span>
 
 ```csharp
 .ConfigureAppConfiguration((hostingContext, config) =>
@@ -1043,28 +1827,308 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args)
 })
 ```
 
-<span data-ttu-id="32987-639">**Przykład**</span><span class="sxs-lookup"><span data-stu-id="32987-639">**Example**</span></span>
+<span data-ttu-id="f83a3-1223">**Przyklad**</span><span class="sxs-lookup"><span data-stu-id="f83a3-1223">**Example**</span></span>
 
-<span data-ttu-id="32987-640">Przykładowa aplikacja korzysta z statycznej wygodnej metody `CreateDefaultBuilder` tworzenia hosta, który obejmuje wywołanie <xref:Microsoft.Extensions.Configuration.CommandLineConfigurationExtensions.AddCommandLine*>.</span><span class="sxs-lookup"><span data-stu-id="32987-640">The sample app takes advantage of the static convenience method `CreateDefaultBuilder` to build the host, which includes a call to <xref:Microsoft.Extensions.Configuration.CommandLineConfigurationExtensions.AddCommandLine*>.</span></span>
+<span data-ttu-id="f83a3-1224">Przykładowa aplikacja korzysta z statycznej wygodnej metody `CreateDefaultBuilder` tworzenia hosta, który obejmuje wywołanie <xref:Microsoft.Extensions.Configuration.CommandLineConfigurationExtensions.AddCommandLine*> .</span><span class="sxs-lookup"><span data-stu-id="f83a3-1224">The sample app takes advantage of the static convenience method `CreateDefaultBuilder` to build the host, which includes a call to <xref:Microsoft.Extensions.Configuration.CommandLineConfigurationExtensions.AddCommandLine*>.</span></span>
 
-1. <span data-ttu-id="32987-641">Otwórz wiersz polecenia w katalogu projektu.</span><span class="sxs-lookup"><span data-stu-id="32987-641">Open a command prompt in the project's directory.</span></span>
-1. <span data-ttu-id="32987-642">Podaj do `dotnet run` polecenia argument wiersza polecenia, `dotnet run CommandLineKey=CommandLineValue`.</span><span class="sxs-lookup"><span data-stu-id="32987-642">Supply a command-line argument to the `dotnet run` command, `dotnet run CommandLineKey=CommandLineValue`.</span></span>
-1. <span data-ttu-id="32987-643">Po uruchomieniu aplikacji otwórz w przeglądarce aplikację w lokalizacji `http://localhost:5000`.</span><span class="sxs-lookup"><span data-stu-id="32987-643">After the app is running, open a browser to the app at `http://localhost:5000`.</span></span>
-1. <span data-ttu-id="32987-644">Zwróć uwagę, że dane wyjściowe zawierają parę klucz-wartość dla argumentu wiersza polecenia konfiguracji dostarczonego do `dotnet run`.</span><span class="sxs-lookup"><span data-stu-id="32987-644">Observe that the output contains the key-value pair for the configuration command-line argument provided to `dotnet run`.</span></span>
+1. <span data-ttu-id="f83a3-1225">Otwórz wiersz polecenia w katalogu projektu.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1225">Open a command prompt in the project's directory.</span></span>
+1. <span data-ttu-id="f83a3-1226">Podaj do polecenia argument wiersza polecenia `dotnet run` , `dotnet run CommandLineKey=CommandLineValue` .</span><span class="sxs-lookup"><span data-stu-id="f83a3-1226">Supply a command-line argument to the `dotnet run` command, `dotnet run CommandLineKey=CommandLineValue`.</span></span>
+1. <span data-ttu-id="f83a3-1227">Po uruchomieniu aplikacji otwórz w przeglądarce aplikację w lokalizacji `http://localhost:5000` .</span><span class="sxs-lookup"><span data-stu-id="f83a3-1227">After the app is running, open a browser to the app at `http://localhost:5000`.</span></span>
+1. <span data-ttu-id="f83a3-1228">Zwróć uwagę, że dane wyjściowe zawierają parę klucz-wartość dla argumentu wiersza polecenia konfiguracji dostarczonego do `dotnet run` .</span><span class="sxs-lookup"><span data-stu-id="f83a3-1228">Observe that the output contains the key-value pair for the configuration command-line argument provided to `dotnet run`.</span></span>
 
-### <a name="arguments"></a><span data-ttu-id="32987-645">Argumenty</span><span class="sxs-lookup"><span data-stu-id="32987-645">Arguments</span></span>
+### <a name="arguments"></a><span data-ttu-id="f83a3-1229">Argumenty</span><span class="sxs-lookup"><span data-stu-id="f83a3-1229">Arguments</span></span>
 
-<span data-ttu-id="32987-646">Wartość musi następować po znaku równości (`=`) lub klucz musi mieć prefiks (`--` lub `/`), gdy wartość znajduje się w miejscu.</span><span class="sxs-lookup"><span data-stu-id="32987-646">The value must follow an equals sign (`=`), or the key must have a prefix (`--` or `/`) when the value follows a space.</span></span> <span data-ttu-id="32987-647">Wartość nie jest wymagana, jeśli jest używany znak równości (na przykład `CommandLineKey=`).</span><span class="sxs-lookup"><span data-stu-id="32987-647">The value isn't required if an equals sign is used (for example, `CommandLineKey=`).</span></span>
+<span data-ttu-id="f83a3-1230">Wartość musi następować po znaku równości ( `=` ) lub klucz musi mieć prefiks ( `--` lub `/` ), gdy wartość znajduje się w miejscu.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1230">The value must follow an equals sign (`=`), or the key must have a prefix (`--` or `/`) when the value follows a space.</span></span> <span data-ttu-id="f83a3-1231">Wartość nie jest wymagana, jeśli jest używany znak równości (na przykład `CommandLineKey=` ).</span><span class="sxs-lookup"><span data-stu-id="f83a3-1231">The value isn't required if an equals sign is used (for example, `CommandLineKey=`).</span></span>
 
-| <span data-ttu-id="32987-648">Prefiks klucza</span><span class="sxs-lookup"><span data-stu-id="32987-648">Key prefix</span></span>               | <span data-ttu-id="32987-649">Przykład</span><span class="sxs-lookup"><span data-stu-id="32987-649">Example</span></span>                                                |
-| ------------------------ | ------------------------------------------------------ |
-| <span data-ttu-id="32987-650">Brak prefiksu</span><span class="sxs-lookup"><span data-stu-id="32987-650">No prefix</span></span>                | `CommandLineKey1=value1`                               |
-| <span data-ttu-id="32987-651">Dwie kreski (`--`)</span><span class="sxs-lookup"><span data-stu-id="32987-651">Two dashes (`--`)</span></span>        | <span data-ttu-id="32987-652">`--CommandLineKey2=value2`, `--CommandLineKey2 value2`</span><span class="sxs-lookup"><span data-stu-id="32987-652">`--CommandLineKey2=value2`, `--CommandLineKey2 value2`</span></span> |
-| <span data-ttu-id="32987-653">Ukośnik (`/`)</span><span class="sxs-lookup"><span data-stu-id="32987-653">Forward slash (`/`)</span></span>      | <span data-ttu-id="32987-654">`/CommandLineKey3=value3`, `/CommandLineKey3 value3`</span><span class="sxs-lookup"><span data-stu-id="32987-654">`/CommandLineKey3=value3`, `/CommandLineKey3 value3`</span></span>   |
+| <span data-ttu-id="f83a3-1232">Prefiks klucza</span><span class="sxs-lookup"><span data-stu-id="f83a3-1232">Key prefix</span></span>               | <span data-ttu-id="f83a3-1233">Przykład</span><span class="sxs-lookup"><span data-stu-id="f83a3-1233">Example</span></span>                                                |
+| ---
+<span data-ttu-id="f83a3-1234">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1234">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1235">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1235">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1236">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1236">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1237">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1237">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1238">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1238">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1239">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1239">'SignalR' uid:</span></span> 
 
-<span data-ttu-id="32987-655">W tym samym poleceniu nie należy mieszać par klucz-wartość argumentu wiersza polecenia, które używają znaku równości z parami klucz-wartość, które używają spacji.</span><span class="sxs-lookup"><span data-stu-id="32987-655">Within the same command, don't mix command-line argument key-value pairs that use an equals sign with key-value pairs that use a space.</span></span>
+-
+<span data-ttu-id="f83a3-1240">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1240">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1241">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1241">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1242">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1242">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1243">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1243">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1244">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1244">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1245">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1245">'SignalR' uid:</span></span> 
 
-<span data-ttu-id="32987-656">Przykładowe polecenia:</span><span class="sxs-lookup"><span data-stu-id="32987-656">Example commands:</span></span>
+-
+<span data-ttu-id="f83a3-1246">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1246">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1247">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1247">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1248">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1248">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1249">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1249">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1250">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1250">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1251">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1251">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1252">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1252">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1253">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1253">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1254">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1254">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1255">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1255">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1256">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1256">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1257">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1257">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1258">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1258">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1259">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1259">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1260">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1260">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1261">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1261">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1262">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1262">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1263">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1263">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1264">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1264">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1265">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1265">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1266">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1266">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1267">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1267">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1268">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1268">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1269">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1269">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1270">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1270">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1271">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1271">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1272">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1272">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1273">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1273">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1274">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1274">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1275">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1275">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1276">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1276">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1277">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1277">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1278">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1278">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1279">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1279">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1280">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1280">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1281">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1281">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1282">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1282">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1283">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1283">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1284">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1284">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1285">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1285">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1286">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1286">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1287">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1287">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1288">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1288">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1289">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1289">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1290">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1290">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1291">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1291">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1292">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1292">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1293">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1293">'SignalR' uid:</span></span> 
+
+<span data-ttu-id="f83a3-1294">------------ | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1294">------------ | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1295">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1295">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1296">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1296">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1297">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1297">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1298">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1298">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1299">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1299">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1300">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1300">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1301">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1301">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1302">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1302">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1303">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1303">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1304">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1304">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1305">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1305">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1306">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1306">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1307">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1307">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1308">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1308">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1309">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1309">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1310">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1310">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1311">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1311">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1312">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1312">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1313">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1313">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1314">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1314">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1315">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1315">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1316">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1316">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1317">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1317">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1318">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1318">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1319">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1319">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1320">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1320">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1321">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1321">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1322">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1322">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1323">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1323">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1324">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1324">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1325">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1325">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1326">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1326">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1327">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1327">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1328">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1328">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1329">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1329">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1330">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1330">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1331">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1331">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1332">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1332">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1333">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1333">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1334">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1334">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1335">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1335">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1336">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1336">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1337">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1337">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1338">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1338">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1339">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1339">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1340">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1340">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1341">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1341">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1342">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1342">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1343">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1343">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1344">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1344">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1345">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1345">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1346">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1346">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1347">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1347">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1348">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1348">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1349">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1349">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1350">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1350">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1351">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1351">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1352">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1352">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1353">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1353">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1354">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1354">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1355">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1355">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1356">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1356">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1357">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1357">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1358">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1358">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1359">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1359">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1360">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1360">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1361">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1361">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1362">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1362">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1363">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1363">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1364">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1364">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1365">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1365">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1366">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1366">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1367">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1367">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1368">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1368">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1369">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1369">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1370">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1370">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1371">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1371">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1372">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1372">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1373">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1373">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1374">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1374">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1375">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1375">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1376">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1376">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1377">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1377">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1378">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1378">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1379">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1379">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1380">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1380">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1381">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1381">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1382">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1382">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1383">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1383">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1384">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1384">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1385">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1385">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1386">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1386">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1387">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1387">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1388">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1388">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1389">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1389">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1390">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1390">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1391">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1391">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1392">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1392">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1393">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1393">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1394">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1394">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1395">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1395">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1396">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1396">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1397">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1397">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1398">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1398">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1399">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1399">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1400">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1400">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1401">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1401">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1402">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1402">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1403">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1403">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1404">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1404">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1405">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1405">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1406">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1406">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1407">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1407">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1408">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1408">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1409">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1409">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1410">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1410">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1411">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1411">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1412">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1412">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1413">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1413">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1414">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1414">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1415">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1415">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1416">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1416">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1417">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1417">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1418">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1418">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1419">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1419">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1420">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1420">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1421">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1421">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1422">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1422">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1423">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1423">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1424">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1424">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1425">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1425">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1426">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1426">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1427">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1427">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1428">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1428">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1429">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1429">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1430">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1430">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1431">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1431">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1432">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1432">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1433">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1433">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1434">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1434">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1435">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1435">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1436">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1436">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1437">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1437">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1438">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1438">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1439">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1439">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1440">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1440">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1441">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1441">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1442">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1442">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1443">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1443">'SignalR' uid:</span></span> 
+
+<span data-ttu-id="f83a3-1444">--------------------------- | | Brak prefiksu | `CommandLineKey1=value1`                               |
+| Dwie kreski ( `--` ) | `--CommandLineKey2=value2` , `--CommandLineKey2 value2` |
+ | Ukośnik ( `/` ) | `/CommandLineKey3=value3` ,`/CommandLineKey3 value3`   |</span><span class="sxs-lookup"><span data-stu-id="f83a3-1444">--------------------------- | | No prefix                | `CommandLineKey1=value1`                               |
+| Two dashes (`--`)        | `--CommandLineKey2=value2`, `--CommandLineKey2 value2` |
+| Forward slash (`/`)      | `/CommandLineKey3=value3`, `/CommandLineKey3 value3`   |</span></span>
+
+<span data-ttu-id="f83a3-1445">W tym samym poleceniu nie należy mieszać par klucz-wartość argumentu wiersza polecenia, które używają znaku równości z parami klucz-wartość, które używają spacji.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1445">Within the same command, don't mix command-line argument key-value pairs that use an equals sign with key-value pairs that use a space.</span></span>
+
+<span data-ttu-id="f83a3-1446">Przykładowe polecenia:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1446">Example commands:</span></span>
 
 ```dotnetcli
 dotnet run CommandLineKey1=value1 --CommandLineKey2=value2 /CommandLineKey3=value3
@@ -1072,18 +2136,18 @@ dotnet run --CommandLineKey1 value1 /CommandLineKey2 value2
 dotnet run CommandLineKey1= CommandLineKey2=value2
 ```
 
-### <a name="switch-mappings"></a><span data-ttu-id="32987-657">Mapowanie przełączników</span><span class="sxs-lookup"><span data-stu-id="32987-657">Switch mappings</span></span>
+### <a name="switch-mappings"></a><span data-ttu-id="f83a3-1447">Mapowanie przełączników</span><span class="sxs-lookup"><span data-stu-id="f83a3-1447">Switch mappings</span></span>
 
-<span data-ttu-id="32987-658">Mapowania przełączników Zezwalaj na logikę zamiany nazwy klucza.</span><span class="sxs-lookup"><span data-stu-id="32987-658">Switch mappings allow key name replacement logic.</span></span> <span data-ttu-id="32987-659">Podczas ręcznego kompilowania konfiguracji za <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder>pomocą programu należy udostępnić słownik przemieszczeń Switch do <xref:Microsoft.Extensions.Configuration.CommandLineConfigurationExtensions.AddCommandLine*> metody.</span><span class="sxs-lookup"><span data-stu-id="32987-659">When manually building configuration with a <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder>, provide a dictionary of switch replacements to the <xref:Microsoft.Extensions.Configuration.CommandLineConfigurationExtensions.AddCommandLine*> method.</span></span>
+<span data-ttu-id="f83a3-1448">Mapowania przełączników Zezwalaj na logikę zamiany nazwy klucza.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1448">Switch mappings allow key name replacement logic.</span></span> <span data-ttu-id="f83a3-1449">Podczas ręcznego kompilowania konfiguracji za pomocą programu <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder> należy udostępnić słownik przemieszczeń Switch do <xref:Microsoft.Extensions.Configuration.CommandLineConfigurationExtensions.AddCommandLine*> metody.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1449">When manually building configuration with a <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder>, provide a dictionary of switch replacements to the <xref:Microsoft.Extensions.Configuration.CommandLineConfigurationExtensions.AddCommandLine*> method.</span></span>
 
-<span data-ttu-id="32987-660">Gdy jest używany słownik mapowania przełączników, słownik jest sprawdzany dla klucza, który pasuje do klucza dostarczonego przez argument wiersza polecenia.</span><span class="sxs-lookup"><span data-stu-id="32987-660">When the switch mappings dictionary is used, the dictionary is checked for a key that matches the key provided by a command-line argument.</span></span> <span data-ttu-id="32987-661">Jeśli klucz wiersza polecenia zostanie znaleziony w słowniku, wartość słownika (wymiana klucza) zostanie przeniesiona z powrotem, aby ustawić parę klucz-wartość w konfiguracji aplikacji.</span><span class="sxs-lookup"><span data-stu-id="32987-661">If the command-line key is found in the dictionary, the dictionary value (the key replacement) is passed back to set the key-value pair into the app's configuration.</span></span> <span data-ttu-id="32987-662">Mapowanie przełącznika jest wymagane dla każdego klucza wiersza polecenia poprzedzonego pojedynczą kreską (`-`).</span><span class="sxs-lookup"><span data-stu-id="32987-662">A switch mapping is required for any command-line key prefixed with a single dash (`-`).</span></span>
+<span data-ttu-id="f83a3-1450">Gdy jest używany słownik mapowania przełączników, słownik jest sprawdzany dla klucza, który pasuje do klucza dostarczonego przez argument wiersza polecenia.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1450">When the switch mappings dictionary is used, the dictionary is checked for a key that matches the key provided by a command-line argument.</span></span> <span data-ttu-id="f83a3-1451">Jeśli klucz wiersza polecenia zostanie znaleziony w słowniku, wartość słownika (wymiana klucza) zostanie przeniesiona z powrotem, aby ustawić parę klucz-wartość w konfiguracji aplikacji.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1451">If the command-line key is found in the dictionary, the dictionary value (the key replacement) is passed back to set the key-value pair into the app's configuration.</span></span> <span data-ttu-id="f83a3-1452">Mapowanie przełącznika jest wymagane dla każdego klucza wiersza polecenia poprzedzonego pojedynczą kreską ( `-` ).</span><span class="sxs-lookup"><span data-stu-id="f83a3-1452">A switch mapping is required for any command-line key prefixed with a single dash (`-`).</span></span>
 
-<span data-ttu-id="32987-663">Przełącz reguły klucza słownika mapowania:</span><span class="sxs-lookup"><span data-stu-id="32987-663">Switch mappings dictionary key rules:</span></span>
+<span data-ttu-id="f83a3-1453">Przełącz reguły klucza słownika mapowania:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1453">Switch mappings dictionary key rules:</span></span>
 
-* <span data-ttu-id="32987-664">Przełączniki muszą zaczynać się kreską`-`() lub podwójną kreską (`--`).</span><span class="sxs-lookup"><span data-stu-id="32987-664">Switches must start with a dash (`-`) or double-dash (`--`).</span></span>
-* <span data-ttu-id="32987-665">Słownik mapowania przełącznika nie może zawierać zduplikowanych kluczy.</span><span class="sxs-lookup"><span data-stu-id="32987-665">The switch mappings dictionary must not contain duplicate keys.</span></span>
+* <span data-ttu-id="f83a3-1454">Przełączniki muszą zaczynać się kreską ( `-` ) lub podwójną kreską ( `--` ).</span><span class="sxs-lookup"><span data-stu-id="f83a3-1454">Switches must start with a dash (`-`) or double-dash (`--`).</span></span>
+* <span data-ttu-id="f83a3-1455">Słownik mapowania przełącznika nie może zawierać zduplikowanych kluczy.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1455">The switch mappings dictionary must not contain duplicate keys.</span></span>
 
-<span data-ttu-id="32987-666">Utwórz słownik mapowań mapowania.</span><span class="sxs-lookup"><span data-stu-id="32987-666">Create a switch mappings dictionary.</span></span> <span data-ttu-id="32987-667">W poniższym przykładzie są tworzone dwa mapowania przełączników:</span><span class="sxs-lookup"><span data-stu-id="32987-667">In the following example, two switch mappings are created:</span></span>
+<span data-ttu-id="f83a3-1456">Utwórz słownik mapowań mapowania.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1456">Create a switch mappings dictionary.</span></span> <span data-ttu-id="f83a3-1457">W poniższym przykładzie są tworzone dwa mapowania przełączników:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1457">In the following example, two switch mappings are created:</span></span>
 
 ```csharp
 public static readonly Dictionary<string, string> _switchMappings = 
@@ -1094,7 +2158,7 @@ public static readonly Dictionary<string, string> _switchMappings =
     };
 ```
 
-<span data-ttu-id="32987-668">Po skompilowaniu hosta Wywołaj `AddCommandLine` przy użyciu słownika mapowania przełączników:</span><span class="sxs-lookup"><span data-stu-id="32987-668">When the host is built, call `AddCommandLine` with the switch mappings dictionary:</span></span>
+<span data-ttu-id="f83a3-1458">Po skompilowaniu hosta Wywołaj `AddCommandLine` przy użyciu słownika mapowania przełączników:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1458">When the host is built, call `AddCommandLine` with the switch mappings dictionary:</span></span>
 
 ```csharp
 .ConfigureAppConfiguration((hostingContext, config) =>
@@ -1103,50 +2167,176 @@ public static readonly Dictionary<string, string> _switchMappings =
 })
 ```
 
-<span data-ttu-id="32987-669">W przypadku aplikacji korzystających z mapowań przełączników wywołanie `CreateDefaultBuilder` nie powinno przekazywać argumentów.</span><span class="sxs-lookup"><span data-stu-id="32987-669">For apps that use switch mappings, the call to `CreateDefaultBuilder` shouldn't pass arguments.</span></span> <span data-ttu-id="32987-670">Wywołanie metody nie obejmuje zamapowanych przełączników i nie ma sposobu przekazywania słownika mapowania przełącznika do `CreateDefaultBuilder` `CreateDefaultBuilder` `AddCommandLine`</span><span class="sxs-lookup"><span data-stu-id="32987-670">The `CreateDefaultBuilder` method's `AddCommandLine` call doesn't include mapped switches, and there's no way to pass the switch mapping dictionary to `CreateDefaultBuilder`.</span></span> <span data-ttu-id="32987-671">Rozwiązanie nie przekazuje argumentów do `CreateDefaultBuilder` , ale zamiast tego zezwala metodzie `ConfigurationBuilder` metody `AddCommandLine` na przetwarzanie zarówno argumentów, jak i słownika mapowania przełącznika.</span><span class="sxs-lookup"><span data-stu-id="32987-671">The solution isn't to pass the arguments to `CreateDefaultBuilder` but instead to allow the `ConfigurationBuilder` method's `AddCommandLine` method to process both the arguments and the switch mapping dictionary.</span></span>
+<span data-ttu-id="f83a3-1459">W przypadku aplikacji korzystających z mapowań przełączników wywołanie nie `CreateDefaultBuilder` powinno przekazywać argumentów.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1459">For apps that use switch mappings, the call to `CreateDefaultBuilder` shouldn't pass arguments.</span></span> <span data-ttu-id="f83a3-1460">`CreateDefaultBuilder` `AddCommandLine` Wywołanie metody nie obejmuje zamapowanych przełączników i nie ma sposobu przekazywania słownika mapowania przełącznika do `CreateDefaultBuilder` .</span><span class="sxs-lookup"><span data-stu-id="f83a3-1460">The `CreateDefaultBuilder` method's `AddCommandLine` call doesn't include mapped switches, and there's no way to pass the switch mapping dictionary to `CreateDefaultBuilder`.</span></span> <span data-ttu-id="f83a3-1461">Rozwiązanie nie przekazuje argumentów do, `CreateDefaultBuilder` ale zamiast tego zezwala metodzie `ConfigurationBuilder` metody `AddCommandLine` na przetwarzanie zarówno argumentów, jak i słownika mapowania przełącznika.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1461">The solution isn't to pass the arguments to `CreateDefaultBuilder` but instead to allow the `ConfigurationBuilder` method's `AddCommandLine` method to process both the arguments and the switch mapping dictionary.</span></span>
 
-<span data-ttu-id="32987-672">Po utworzeniu słownika mapowań przełączników zawiera dane przedstawione w poniższej tabeli.</span><span class="sxs-lookup"><span data-stu-id="32987-672">After the switch mappings dictionary is created, it contains the data shown in the following table.</span></span>
+<span data-ttu-id="f83a3-1462">Po utworzeniu słownika mapowań przełączników zawiera dane przedstawione w poniższej tabeli.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1462">After the switch mappings dictionary is created, it contains the data shown in the following table.</span></span>
 
-| <span data-ttu-id="32987-673">Klucz</span><span class="sxs-lookup"><span data-stu-id="32987-673">Key</span></span>       | <span data-ttu-id="32987-674">Wartość</span><span class="sxs-lookup"><span data-stu-id="32987-674">Value</span></span>             |
-| --------- | ----------------- |
-| `-CLKey1` | `CommandLineKey1` |
-| `-CLKey2` | `CommandLineKey2` |
+| <span data-ttu-id="f83a3-1463">Klucz</span><span class="sxs-lookup"><span data-stu-id="f83a3-1463">Key</span></span>       | <span data-ttu-id="f83a3-1464">Wartość</span><span class="sxs-lookup"><span data-stu-id="f83a3-1464">Value</span></span>             |
+| ---
+<span data-ttu-id="f83a3-1465">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1465">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1466">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1466">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1467">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1467">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1468">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1468">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1469">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1469">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1470">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1470">'SignalR' uid:</span></span> 
 
-<span data-ttu-id="32987-675">Jeśli klucze mapowane przez przełącznik są używane podczas uruchamiania aplikacji, konfiguracja otrzymuje wartość konfiguracji klucza dostarczonego przez słownik:</span><span class="sxs-lookup"><span data-stu-id="32987-675">If the switch-mapped keys are used when starting the app, configuration receives the configuration value on the key supplied by the dictionary:</span></span>
+-
+<span data-ttu-id="f83a3-1471">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1471">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1472">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1472">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1473">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1473">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1474">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1474">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1475">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1475">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1476">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1476">'SignalR' uid:</span></span> 
+
+<span data-ttu-id="f83a3-1477">----- | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1477">----- | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1478">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1478">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1479">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1479">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1480">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1480">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1481">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1481">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1482">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1482">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1483">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1483">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1484">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1484">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1485">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1485">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1486">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1486">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1487">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1487">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1488">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1488">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1489">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1489">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1490">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1490">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1491">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1491">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1492">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1492">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1493">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1493">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1494">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1494">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1495">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1495">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1496">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1496">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1497">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1497">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1498">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1498">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1499">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1499">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1500">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1500">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1501">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1501">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1502">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1502">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1503">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1503">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1504">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1504">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1505">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1505">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1506">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1506">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1507">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1507">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1508">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1508">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1509">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1509">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1510">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1510">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1511">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1511">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1512">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1512">'SignalR' uid:</span></span> 
+
+<span data-ttu-id="f83a3-1513">--------- | | `-CLKey1` | `CommandLineKey1` |
+| `-CLKey2` | `CommandLineKey2` |</span><span class="sxs-lookup"><span data-stu-id="f83a3-1513">--------- | | `-CLKey1` | `CommandLineKey1` |
+| `-CLKey2` | `CommandLineKey2` |</span></span>
+
+<span data-ttu-id="f83a3-1514">Jeśli klucze mapowane przez przełącznik są używane podczas uruchamiania aplikacji, konfiguracja otrzymuje wartość konfiguracji klucza dostarczonego przez słownik:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1514">If the switch-mapped keys are used when starting the app, configuration receives the configuration value on the key supplied by the dictionary:</span></span>
 
 ```dotnetcli
 dotnet run -CLKey1=value1 -CLKey2=value2
 ```
 
-<span data-ttu-id="32987-676">Po uruchomieniu poprzedniego polecenia Konfiguracja zawiera wartości pokazane w poniższej tabeli.</span><span class="sxs-lookup"><span data-stu-id="32987-676">After running the preceding command, configuration contains the values shown in the following table.</span></span>
+<span data-ttu-id="f83a3-1515">Po uruchomieniu poprzedniego polecenia Konfiguracja zawiera wartości pokazane w poniższej tabeli.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1515">After running the preceding command, configuration contains the values shown in the following table.</span></span>
 
-| <span data-ttu-id="32987-677">Klucz</span><span class="sxs-lookup"><span data-stu-id="32987-677">Key</span></span>               | <span data-ttu-id="32987-678">Wartość</span><span class="sxs-lookup"><span data-stu-id="32987-678">Value</span></span>    |
-| ----------------- | -------- |
-| `CommandLineKey1` | `value1` |
-| `CommandLineKey2` | `value2` |
+| <span data-ttu-id="f83a3-1516">Klucz</span><span class="sxs-lookup"><span data-stu-id="f83a3-1516">Key</span></span>               | <span data-ttu-id="f83a3-1517">Wartość</span><span class="sxs-lookup"><span data-stu-id="f83a3-1517">Value</span></span>    |
+| ---
+<span data-ttu-id="f83a3-1518">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1518">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1519">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1519">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1520">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1520">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1521">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1521">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1522">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1522">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1523">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1523">'SignalR' uid:</span></span> 
 
-## <a name="environment-variables-configuration-provider"></a><span data-ttu-id="32987-679">Dostawca konfiguracji zmiennych środowiskowych</span><span class="sxs-lookup"><span data-stu-id="32987-679">Environment Variables Configuration Provider</span></span>
+-
+<span data-ttu-id="f83a3-1524">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1524">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1525">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1525">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1526">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1526">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1527">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1527">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1528">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1528">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1529">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1529">'SignalR' uid:</span></span> 
 
-<span data-ttu-id="32987-680"><xref:Microsoft.Extensions.Configuration.EnvironmentVariables.EnvironmentVariablesConfigurationProvider> Ładowanie konfiguracji ze zmiennej środowiskowej par klucz-wartość w czasie wykonywania.</span><span class="sxs-lookup"><span data-stu-id="32987-680">The <xref:Microsoft.Extensions.Configuration.EnvironmentVariables.EnvironmentVariablesConfigurationProvider> loads configuration from environment variable key-value pairs at runtime.</span></span>
+-
+<span data-ttu-id="f83a3-1530">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1530">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1531">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1531">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1532">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1532">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1533">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1533">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1534">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1534">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1535">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1535">'SignalR' uid:</span></span> 
 
-<span data-ttu-id="32987-681">Aby uaktywnić konfigurację zmiennych środowiskowych, <xref:Microsoft.Extensions.Configuration.EnvironmentVariablesExtensions.AddEnvironmentVariables*> Wywołaj metodę rozszerzenia w wystąpieniu <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder>.</span><span class="sxs-lookup"><span data-stu-id="32987-681">To activate environment variables configuration, call the <xref:Microsoft.Extensions.Configuration.EnvironmentVariablesExtensions.AddEnvironmentVariables*> extension method on an instance of <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder>.</span></span>
+-
+<span data-ttu-id="f83a3-1536">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1536">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1537">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1537">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1538">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1538">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1539">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1539">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1540">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1540">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1541">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1541">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1542">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1542">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1543">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1543">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1544">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1544">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1545">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1545">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1546">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1546">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1547">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1547">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1548">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1548">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1549">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1549">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1550">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1550">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1551">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1551">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1552">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1552">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1553">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1553">'SignalR' uid:</span></span> 
+
+<span data-ttu-id="f83a3-1554">--------- | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1554">--------- | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1555">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1555">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1556">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1556">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1557">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1557">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1558">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1558">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1559">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1559">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1560">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1560">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1561">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1561">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1562">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1562">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1563">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1563">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1564">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1564">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1565">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1565">'SignalR' uid:</span></span> 
+
+<span data-ttu-id="f83a3-1566">---- | | `CommandLineKey1` | `value1` |
+| `CommandLineKey2` | `value2` |</span><span class="sxs-lookup"><span data-stu-id="f83a3-1566">---- | | `CommandLineKey1` | `value1` |
+| `CommandLineKey2` | `value2` |</span></span>
+
+## <a name="environment-variables-configuration-provider"></a><span data-ttu-id="f83a3-1567">Dostawca konfiguracji zmiennych środowiskowych</span><span class="sxs-lookup"><span data-stu-id="f83a3-1567">Environment Variables Configuration Provider</span></span>
+
+<span data-ttu-id="f83a3-1568"><xref:Microsoft.Extensions.Configuration.EnvironmentVariables.EnvironmentVariablesConfigurationProvider>Ładowanie konfiguracji ze zmiennej środowiskowej par klucz-wartość w czasie wykonywania.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1568">The <xref:Microsoft.Extensions.Configuration.EnvironmentVariables.EnvironmentVariablesConfigurationProvider> loads configuration from environment variable key-value pairs at runtime.</span></span>
+
+<span data-ttu-id="f83a3-1569">Aby uaktywnić konfigurację zmiennych środowiskowych, wywołaj <xref:Microsoft.Extensions.Configuration.EnvironmentVariablesExtensions.AddEnvironmentVariables*> metodę rozszerzenia w wystąpieniu <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder> .</span><span class="sxs-lookup"><span data-stu-id="f83a3-1569">To activate environment variables configuration, call the <xref:Microsoft.Extensions.Configuration.EnvironmentVariablesExtensions.AddEnvironmentVariables*> extension method on an instance of <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder>.</span></span>
 
 [!INCLUDE[](~/includes/environmentVarableColon.md)]
 
-<span data-ttu-id="32987-682">[Azure App Service](https://azure.microsoft.com/services/app-service/) umożliwia ustawianie zmiennych środowiskowych w witrynie Azure Portal, które mogą przesłonić konfigurację aplikacji przy użyciu dostawcy konfiguracji zmiennych środowiskowych.</span><span class="sxs-lookup"><span data-stu-id="32987-682">[Azure App Service](https://azure.microsoft.com/services/app-service/) permits setting environment variables in the Azure Portal that can override app configuration using the Environment Variables Configuration Provider.</span></span> <span data-ttu-id="32987-683">Aby uzyskać więcej informacji, zobacz artykuł [Azure Apps: zastępowanie konfiguracji aplikacji przy użyciu witryny Azure Portal](xref:host-and-deploy/azure-apps/index#override-app-configuration-using-the-azure-portal).</span><span class="sxs-lookup"><span data-stu-id="32987-683">For more information, see [Azure Apps: Override app configuration using the Azure Portal](xref:host-and-deploy/azure-apps/index#override-app-configuration-using-the-azure-portal).</span></span>
+<span data-ttu-id="f83a3-1570">[Azure App Service](https://azure.microsoft.com/services/app-service/) umożliwia ustawianie zmiennych środowiskowych w witrynie Azure Portal, które mogą przesłonić konfigurację aplikacji przy użyciu dostawcy konfiguracji zmiennych środowiskowych.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1570">[Azure App Service](https://azure.microsoft.com/services/app-service/) permits setting environment variables in the Azure Portal that can override app configuration using the Environment Variables Configuration Provider.</span></span> <span data-ttu-id="f83a3-1571">Aby uzyskać więcej informacji, zobacz artykuł [Azure Apps: zastępowanie konfiguracji aplikacji przy użyciu witryny Azure Portal](xref:host-and-deploy/azure-apps/index#override-app-configuration-using-the-azure-portal).</span><span class="sxs-lookup"><span data-stu-id="f83a3-1571">For more information, see [Azure Apps: Override app configuration using the Azure Portal](xref:host-and-deploy/azure-apps/index#override-app-configuration-using-the-azure-portal).</span></span>
 
-<span data-ttu-id="32987-684">`AddEnvironmentVariables`służy do ładowania zmiennych środowiskowych, które są `ASPNETCORE_` poprzedzone [konfiguracją hosta](#host-versus-app-configuration) , gdy nowy Konstruktor hosta zostanie zainicjowany przy użyciu [hosta sieci Web](xref:fundamentals/host/web-host) i `CreateDefaultBuilder` jest wywoływany.</span><span class="sxs-lookup"><span data-stu-id="32987-684">`AddEnvironmentVariables` is used to load environment variables prefixed with `ASPNETCORE_` for [host configuration](#host-versus-app-configuration) when a new host builder is initialized with the [Web Host](xref:fundamentals/host/web-host) and `CreateDefaultBuilder` is called.</span></span> <span data-ttu-id="32987-685">Aby uzyskać więcej informacji, zobacz sekcję [Konfiguracja domyślna](#default-configuration) .</span><span class="sxs-lookup"><span data-stu-id="32987-685">For more information, see the [Default configuration](#default-configuration) section.</span></span>
+<span data-ttu-id="f83a3-1572">`AddEnvironmentVariables`służy do ładowania zmiennych środowiskowych, które są poprzedzone `ASPNETCORE_` [konfiguracją hosta](#host-versus-app-configuration) , gdy nowy Konstruktor hosta zostanie zainicjowany przy użyciu [hosta sieci Web](xref:fundamentals/host/web-host) i `CreateDefaultBuilder` jest wywoływany.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1572">`AddEnvironmentVariables` is used to load environment variables prefixed with `ASPNETCORE_` for [host configuration](#host-versus-app-configuration) when a new host builder is initialized with the [Web Host](xref:fundamentals/host/web-host) and `CreateDefaultBuilder` is called.</span></span> <span data-ttu-id="f83a3-1573">Aby uzyskać więcej informacji, zobacz sekcję [Konfiguracja domyślna](#default-configuration) .</span><span class="sxs-lookup"><span data-stu-id="f83a3-1573">For more information, see the [Default configuration](#default-configuration) section.</span></span>
 
-<span data-ttu-id="32987-686">`CreateDefaultBuilder`ładuje również:</span><span class="sxs-lookup"><span data-stu-id="32987-686">`CreateDefaultBuilder` also loads:</span></span>
+<span data-ttu-id="f83a3-1574">`CreateDefaultBuilder`ładuje również:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1574">`CreateDefaultBuilder` also loads:</span></span>
 
-* <span data-ttu-id="32987-687">Konfiguracja aplikacji z nieoznaczonych zmiennych środowiskowych przez `AddEnvironmentVariables` wywołanie bez prefiksu.</span><span class="sxs-lookup"><span data-stu-id="32987-687">App configuration from unprefixed environment variables by calling `AddEnvironmentVariables` without a prefix.</span></span>
-* <span data-ttu-id="32987-688">Opcjonalna konfiguracja z pliku *appSettings. JSON* i *appSettings. { Environment}. JSON* — pliki.</span><span class="sxs-lookup"><span data-stu-id="32987-688">Optional configuration from *appsettings.json* and *appsettings.{Environment}.json* files.</span></span>
-* <span data-ttu-id="32987-689">Wpisy [tajne użytkownika (Secret Manager)](xref:security/app-secrets) w środowisku deweloperskim.</span><span class="sxs-lookup"><span data-stu-id="32987-689">[User secrets (Secret Manager)](xref:security/app-secrets) in the Development environment.</span></span>
-* <span data-ttu-id="32987-690">Argumenty wiersza polecenia.</span><span class="sxs-lookup"><span data-stu-id="32987-690">Command-line arguments.</span></span>
+* <span data-ttu-id="f83a3-1575">Konfiguracja aplikacji z nieoznaczonych zmiennych środowiskowych przez wywołanie `AddEnvironmentVariables` bez prefiksu.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1575">App configuration from unprefixed environment variables by calling `AddEnvironmentVariables` without a prefix.</span></span>
+* <span data-ttu-id="f83a3-1576">Opcjonalna konfiguracja z pliku *appSettings. JSON* i *appSettings. { Environment}. JSON* — pliki.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1576">Optional configuration from *appsettings.json* and *appsettings.{Environment}.json* files.</span></span>
+* <span data-ttu-id="f83a3-1577">Wpisy [tajne użytkownika (Secret Manager)](xref:security/app-secrets) w środowisku deweloperskim.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1577">[User secrets (Secret Manager)](xref:security/app-secrets) in the Development environment.</span></span>
+* <span data-ttu-id="f83a3-1578">Argumenty wiersza polecenia.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1578">Command-line arguments.</span></span>
 
-<span data-ttu-id="32987-691">Dostawca konfiguracji zmiennych środowiskowych jest wywoływany po ustanowieniu konfiguracji z poziomu kluczy tajnych użytkownika i plików *AppSettings* .</span><span class="sxs-lookup"><span data-stu-id="32987-691">The Environment Variables Configuration Provider is called after configuration is established from user secrets and *appsettings* files.</span></span> <span data-ttu-id="32987-692">Wywołanie dostawcy w tym miejscu pozwala odczytywać zmienne środowiskowe w czasie wykonywania w celu przesłania konfiguracji ustawionych przez klucze tajne użytkownika i pliki *AppSettings* .</span><span class="sxs-lookup"><span data-stu-id="32987-692">Calling the provider in this position allows the environment variables read at runtime to override configuration set by user secrets and *appsettings* files.</span></span>
+<span data-ttu-id="f83a3-1579">Dostawca konfiguracji zmiennych środowiskowych jest wywoływany po ustanowieniu konfiguracji z poziomu kluczy tajnych użytkownika i plików *AppSettings* .</span><span class="sxs-lookup"><span data-stu-id="f83a3-1579">The Environment Variables Configuration Provider is called after configuration is established from user secrets and *appsettings* files.</span></span> <span data-ttu-id="f83a3-1580">Wywołanie dostawcy w tym miejscu pozwala odczytywać zmienne środowiskowe w czasie wykonywania w celu przesłania konfiguracji ustawionych przez klucze tajne użytkownika i pliki *AppSettings* .</span><span class="sxs-lookup"><span data-stu-id="f83a3-1580">Calling the provider in this position allows the environment variables read at runtime to override configuration set by user secrets and *appsettings* files.</span></span>
 
-<span data-ttu-id="32987-693">Aby zapewnić konfigurację aplikacji na podstawie dodatkowych zmiennych środowiskowych, wywołaj dodatkowych dostawców aplikacji `ConfigureAppConfiguration` w i `AddEnvironmentVariables` Wywołaj z prefiksem:</span><span class="sxs-lookup"><span data-stu-id="32987-693">To provide app configuration from additional environment variables, call the app's additional providers in `ConfigureAppConfiguration` and call `AddEnvironmentVariables` with the prefix:</span></span>
+<span data-ttu-id="f83a3-1581">Aby zapewnić konfigurację aplikacji na podstawie dodatkowych zmiennych środowiskowych, wywołaj dodatkowych dostawców aplikacji w `ConfigureAppConfiguration` i Wywołaj `AddEnvironmentVariables` z prefiksem:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1581">To provide app configuration from additional environment variables, call the app's additional providers in `ConfigureAppConfiguration` and call `AddEnvironmentVariables` with the prefix:</span></span>
 
 ```csharp
 .ConfigureAppConfiguration((hostingContext, config) =>
@@ -1155,26 +2345,26 @@ dotnet run -CLKey1=value1 -CLKey2=value2
 })
 ```
 
-<span data-ttu-id="32987-694">Wywołaj `AddEnvironmentVariables` ostatni, aby zezwolić na zmienne środowiskowe z danym prefiksem, aby przesłonić wartości od innych dostawców.</span><span class="sxs-lookup"><span data-stu-id="32987-694">Call `AddEnvironmentVariables` last to allow environment variables with the given prefix to override values from other providers.</span></span>
+<span data-ttu-id="f83a3-1582">Wywołaj `AddEnvironmentVariables` ostatni, aby zezwolić na zmienne środowiskowe z danym prefiksem, aby przesłonić wartości od innych dostawców.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1582">Call `AddEnvironmentVariables` last to allow environment variables with the given prefix to override values from other providers.</span></span>
 
-<span data-ttu-id="32987-695">**Przykład**</span><span class="sxs-lookup"><span data-stu-id="32987-695">**Example**</span></span>
+<span data-ttu-id="f83a3-1583">**Przyklad**</span><span class="sxs-lookup"><span data-stu-id="f83a3-1583">**Example**</span></span>
 
-<span data-ttu-id="32987-696">Przykładowa aplikacja korzysta z statycznej wygodnej metody `CreateDefaultBuilder` tworzenia hosta, który obejmuje wywołanie `AddEnvironmentVariables`.</span><span class="sxs-lookup"><span data-stu-id="32987-696">The sample app takes advantage of the static convenience method `CreateDefaultBuilder` to build the host, which includes a call to `AddEnvironmentVariables`.</span></span>
+<span data-ttu-id="f83a3-1584">Przykładowa aplikacja korzysta z statycznej wygodnej metody `CreateDefaultBuilder` tworzenia hosta, który obejmuje wywołanie `AddEnvironmentVariables` .</span><span class="sxs-lookup"><span data-stu-id="f83a3-1584">The sample app takes advantage of the static convenience method `CreateDefaultBuilder` to build the host, which includes a call to `AddEnvironmentVariables`.</span></span>
 
-1. <span data-ttu-id="32987-697">Uruchom przykładową aplikację.</span><span class="sxs-lookup"><span data-stu-id="32987-697">Run the sample app.</span></span> <span data-ttu-id="32987-698">Otwórz w przeglądarce aplikację pod adresem `http://localhost:5000`.</span><span class="sxs-lookup"><span data-stu-id="32987-698">Open a browser to the app at `http://localhost:5000`.</span></span>
-1. <span data-ttu-id="32987-699">Zwróć uwagę, że dane wyjściowe zawierają parę klucz-wartość dla zmiennej `ENVIRONMENT`środowiskowej.</span><span class="sxs-lookup"><span data-stu-id="32987-699">Observe that the output contains the key-value pair for the environment variable `ENVIRONMENT`.</span></span> <span data-ttu-id="32987-700">Wartość odzwierciedla środowisko, w którym jest uruchomiona aplikacja, zazwyczaj `Development` w przypadku uruchamiania lokalnego.</span><span class="sxs-lookup"><span data-stu-id="32987-700">The value reflects the environment in which the app is running, typically `Development` when running locally.</span></span>
+1. <span data-ttu-id="f83a3-1585">Uruchom przykładową aplikację.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1585">Run the sample app.</span></span> <span data-ttu-id="f83a3-1586">Otwórz w przeglądarce aplikację pod adresem `http://localhost:5000` .</span><span class="sxs-lookup"><span data-stu-id="f83a3-1586">Open a browser to the app at `http://localhost:5000`.</span></span>
+1. <span data-ttu-id="f83a3-1587">Zwróć uwagę, że dane wyjściowe zawierają parę klucz-wartość dla zmiennej środowiskowej `ENVIRONMENT` .</span><span class="sxs-lookup"><span data-stu-id="f83a3-1587">Observe that the output contains the key-value pair for the environment variable `ENVIRONMENT`.</span></span> <span data-ttu-id="f83a3-1588">Wartość odzwierciedla środowisko, w którym jest uruchomiona aplikacja, zazwyczaj w `Development` przypadku uruchamiania lokalnego.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1588">The value reflects the environment in which the app is running, typically `Development` when running locally.</span></span>
 
-<span data-ttu-id="32987-701">Aby zachować listę zmiennych środowiskowych renderowanych przez aplikację, aplikacja filtruje zmienne środowiskowe.</span><span class="sxs-lookup"><span data-stu-id="32987-701">To keep the list of environment variables rendered by the app short, the app filters environment variables.</span></span> <span data-ttu-id="32987-702">Zapoznaj się z plikiem przykładowej *strony aplikacji/index. cshtml. cs* .</span><span class="sxs-lookup"><span data-stu-id="32987-702">See the sample app's *Pages/Index.cshtml.cs* file.</span></span>
+<span data-ttu-id="f83a3-1589">Aby zachować listę zmiennych środowiskowych renderowanych przez aplikację, aplikacja filtruje zmienne środowiskowe.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1589">To keep the list of environment variables rendered by the app short, the app filters environment variables.</span></span> <span data-ttu-id="f83a3-1590">Zapoznaj się z plikiem przykładowej *strony aplikacji/index. cshtml. cs* .</span><span class="sxs-lookup"><span data-stu-id="f83a3-1590">See the sample app's *Pages/Index.cshtml.cs* file.</span></span>
 
-<span data-ttu-id="32987-703">Aby uwidocznić wszystkie zmienne środowiskowe dostępne dla aplikacji, należy zmienić stronę `FilteredConfiguration` na *stronie/index. cshtml. cs* w następujący sposób:</span><span class="sxs-lookup"><span data-stu-id="32987-703">To expose all of the environment variables available to the app, change the `FilteredConfiguration` in *Pages/Index.cshtml.cs* to the following:</span></span>
+<span data-ttu-id="f83a3-1591">Aby uwidocznić wszystkie zmienne środowiskowe dostępne dla aplikacji, należy zmienić `FilteredConfiguration` stronę na *stronie/index. cshtml. cs* w następujący sposób:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1591">To expose all of the environment variables available to the app, change the `FilteredConfiguration` in *Pages/Index.cshtml.cs* to the following:</span></span>
 
 ```csharp
 FilteredConfiguration = _config.AsEnumerable();
 ```
 
-### <a name="prefixes"></a><span data-ttu-id="32987-704">Prefiksy</span><span class="sxs-lookup"><span data-stu-id="32987-704">Prefixes</span></span>
+### <a name="prefixes"></a><span data-ttu-id="f83a3-1592">Prefiksy</span><span class="sxs-lookup"><span data-stu-id="f83a3-1592">Prefixes</span></span>
 
-<span data-ttu-id="32987-705">Zmienne środowiskowe ładowane do konfiguracji aplikacji są filtrowane podczas dostarczania prefiksu do `AddEnvironmentVariables` metody.</span><span class="sxs-lookup"><span data-stu-id="32987-705">Environment variables loaded into the app's configuration are filtered when supplying a prefix to the `AddEnvironmentVariables` method.</span></span> <span data-ttu-id="32987-706">Na przykład aby filtrować zmienne środowiskowe na prefiksie `CUSTOM_`, podaj prefiks dla dostawcy konfiguracji:</span><span class="sxs-lookup"><span data-stu-id="32987-706">For example, to filter environment variables on the prefix `CUSTOM_`, supply the prefix to the configuration provider:</span></span>
+<span data-ttu-id="f83a3-1593">Zmienne środowiskowe ładowane do konfiguracji aplikacji są filtrowane podczas dostarczania prefiksu do `AddEnvironmentVariables` metody.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1593">Environment variables loaded into the app's configuration are filtered when supplying a prefix to the `AddEnvironmentVariables` method.</span></span> <span data-ttu-id="f83a3-1594">Na przykład aby filtrować zmienne środowiskowe na prefiksie `CUSTOM_` , podaj prefiks dla dostawcy konfiguracji:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1594">For example, to filter environment variables on the prefix `CUSTOM_`, supply the prefix to the configuration provider:</span></span>
 
 ```csharp
 var config = new ConfigurationBuilder()
@@ -1182,69 +2372,622 @@ var config = new ConfigurationBuilder()
     .Build();
 ```
 
-<span data-ttu-id="32987-707">Prefiks jest usuwany podczas tworzenia par klucz-wartość konfiguracji.</span><span class="sxs-lookup"><span data-stu-id="32987-707">The prefix is stripped off when the configuration key-value pairs are created.</span></span>
+<span data-ttu-id="f83a3-1595">Prefiks jest usuwany podczas tworzenia par klucz-wartość konfiguracji.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1595">The prefix is stripped off when the configuration key-value pairs are created.</span></span>
 
-<span data-ttu-id="32987-708">Podczas tworzenia konstruktora hostów Konfiguracja hosta jest zapewniana przez zmienne środowiskowe.</span><span class="sxs-lookup"><span data-stu-id="32987-708">When the host builder is created, host configuration is provided by environment variables.</span></span> <span data-ttu-id="32987-709">Aby uzyskać więcej informacji na temat prefiksu używanego dla tych zmiennych środowiskowych, zobacz sekcję [Konfiguracja domyślna](#default-configuration) .</span><span class="sxs-lookup"><span data-stu-id="32987-709">For more information on the prefix used for these environment variables, see the [Default configuration](#default-configuration) section.</span></span>
+<span data-ttu-id="f83a3-1596">Podczas tworzenia konstruktora hostów Konfiguracja hosta jest zapewniana przez zmienne środowiskowe.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1596">When the host builder is created, host configuration is provided by environment variables.</span></span> <span data-ttu-id="f83a3-1597">Aby uzyskać więcej informacji na temat prefiksu używanego dla tych zmiennych środowiskowych, zobacz sekcję [Konfiguracja domyślna](#default-configuration) .</span><span class="sxs-lookup"><span data-stu-id="f83a3-1597">For more information on the prefix used for these environment variables, see the [Default configuration](#default-configuration) section.</span></span>
 
-<span data-ttu-id="32987-710">**Prefiksy parametrów połączenia**</span><span class="sxs-lookup"><span data-stu-id="32987-710">**Connection string prefixes**</span></span>
+<span data-ttu-id="f83a3-1598">**Prefiksy parametrów połączenia**</span><span class="sxs-lookup"><span data-stu-id="f83a3-1598">**Connection string prefixes**</span></span>
 
-<span data-ttu-id="32987-711">Interfejs API konfiguracji ma specjalne reguły przetwarzania dla czterech zmiennych środowiskowych parametrów połączenia związanych z konfigurowaniem parametrów połączenia platformy Azure dla środowiska aplikacji.</span><span class="sxs-lookup"><span data-stu-id="32987-711">The Configuration API has special processing rules for four connection string environment variables involved in configuring Azure connection strings for the app environment.</span></span> <span data-ttu-id="32987-712">Zmienne środowiskowe z prefiksami podanymi w tabeli są ładowane do aplikacji, jeśli nie podano prefiksu `AddEnvironmentVariables`.</span><span class="sxs-lookup"><span data-stu-id="32987-712">Environment variables with the prefixes shown in the table are loaded into the app if no prefix is supplied to `AddEnvironmentVariables`.</span></span>
+<span data-ttu-id="f83a3-1599">Interfejs API konfiguracji ma specjalne reguły przetwarzania dla czterech zmiennych środowiskowych parametrów połączenia związanych z konfigurowaniem parametrów połączenia platformy Azure dla środowiska aplikacji.</span><span class="sxs-lookup"><span data-stu-id="f83a3-1599">The Configuration API has special processing rules for four connection string environment variables involved in configuring Azure connection strings for the app environment.</span></span> <span data-ttu-id="f83a3-1600">Zmienne środowiskowe z prefiksami podanymi w tabeli są ładowane do aplikacji, jeśli nie podano prefiksu `AddEnvironmentVariables` .</span><span class="sxs-lookup"><span data-stu-id="f83a3-1600">Environment variables with the prefixes shown in the table are loaded into the app if no prefix is supplied to `AddEnvironmentVariables`.</span></span>
 
-| <span data-ttu-id="32987-713">Prefiks parametrów połączenia</span><span class="sxs-lookup"><span data-stu-id="32987-713">Connection string prefix</span></span> | <span data-ttu-id="32987-714">Dostawca</span><span class="sxs-lookup"><span data-stu-id="32987-714">Provider</span></span> |
-| ------------------------ | -------- |
-| `CUSTOMCONNSTR_` | <span data-ttu-id="32987-715">Dostawca niestandardowy</span><span class="sxs-lookup"><span data-stu-id="32987-715">Custom provider</span></span> |
-| `MYSQLCONNSTR_` | [<span data-ttu-id="32987-716">MySQL</span><span class="sxs-lookup"><span data-stu-id="32987-716">MySQL</span></span>](https://www.mysql.com/) |
-| `SQLAZURECONNSTR_` | [<span data-ttu-id="32987-717">Azure SQL Database</span><span class="sxs-lookup"><span data-stu-id="32987-717">Azure SQL Database</span></span>](https://azure.microsoft.com/services/sql-database/) |
-| `SQLCONNSTR_` | [<span data-ttu-id="32987-718">SQL Server</span><span class="sxs-lookup"><span data-stu-id="32987-718">SQL Server</span></span>](https://www.microsoft.com/sql-server/) |
+| <span data-ttu-id="f83a3-1601">Prefiks parametrów połączenia</span><span class="sxs-lookup"><span data-stu-id="f83a3-1601">Connection string prefix</span></span> | <span data-ttu-id="f83a3-1602">Dostawca</span><span class="sxs-lookup"><span data-stu-id="f83a3-1602">Provider</span></span> |
+| ---
+<span data-ttu-id="f83a3-1603">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1603">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1604">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1604">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1605">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1605">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1606">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1606">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1607">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1607">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1608">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1608">'SignalR' uid:</span></span> 
 
-<span data-ttu-id="32987-719">Gdy zmienna środowiskowa zostanie odnaleziona i załadowana do konfiguracji z dowolnymi z czterech prefiksów pokazanych w tabeli:</span><span class="sxs-lookup"><span data-stu-id="32987-719">When an environment variable is discovered and loaded into configuration with any of the four prefixes shown in the table:</span></span>
+-
+<span data-ttu-id="f83a3-1609">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1609">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1610">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1610">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1611">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1611">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1612">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1612">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1613">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1613">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1614">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1614">'SignalR' uid:</span></span> 
 
-* <span data-ttu-id="32987-720">Klucz konfiguracji jest tworzony przez usunięcie prefiksu zmiennej środowiskowej i dodanie sekcji klucza konfiguracji (`ConnectionStrings`).</span><span class="sxs-lookup"><span data-stu-id="32987-720">The configuration key is created by removing the environment variable prefix and adding a configuration key section (`ConnectionStrings`).</span></span>
-* <span data-ttu-id="32987-721">Zostanie utworzona nowa para klucz-wartość konfiguracji, która reprezentuje dostawcę połączenia bazy danych (z wyjątkiem `CUSTOMCONNSTR_`tego, który nie ma określonego dostawcy).</span><span class="sxs-lookup"><span data-stu-id="32987-721">A new configuration key-value pair is created that represents the database connection provider (except for `CUSTOMCONNSTR_`, which has no stated provider).</span></span>
+-
+<span data-ttu-id="f83a3-1615">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1615">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1616">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1616">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1617">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1617">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1618">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1618">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1619">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1619">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1620">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1620">'SignalR' uid:</span></span> 
 
-| <span data-ttu-id="32987-722">Klucz zmiennej środowiskowej</span><span class="sxs-lookup"><span data-stu-id="32987-722">Environment variable key</span></span> | <span data-ttu-id="32987-723">Przekonwertowany klucz konfiguracji</span><span class="sxs-lookup"><span data-stu-id="32987-723">Converted configuration key</span></span> | <span data-ttu-id="32987-724">Wpis konfiguracji dostawcy</span><span class="sxs-lookup"><span data-stu-id="32987-724">Provider configuration entry</span></span>                                                    |
-| ------------------------ | --------------------------- | ------------------------------------------------------------------------------- |
-| `CUSTOMCONNSTR_{KEY} `   | `ConnectionStrings:{KEY}`   | <span data-ttu-id="32987-725">Wpis konfiguracji nie został utworzony.</span><span class="sxs-lookup"><span data-stu-id="32987-725">Configuration entry not created.</span></span>                                                |
-| `MYSQLCONNSTR_{KEY}`     | `ConnectionStrings:{KEY}`   | <span data-ttu-id="32987-726">Klucz: `ConnectionStrings:{KEY}_ProviderName`:</span><span class="sxs-lookup"><span data-stu-id="32987-726">Key: `ConnectionStrings:{KEY}_ProviderName`:</span></span><br><span data-ttu-id="32987-727">Wartość:`MySql.Data.MySqlClient`</span><span class="sxs-lookup"><span data-stu-id="32987-727">Value: `MySql.Data.MySqlClient`</span></span> |
-| `SQLAZURECONNSTR_{KEY}`  | `ConnectionStrings:{KEY}`   | <span data-ttu-id="32987-728">Klucz: `ConnectionStrings:{KEY}_ProviderName`:</span><span class="sxs-lookup"><span data-stu-id="32987-728">Key: `ConnectionStrings:{KEY}_ProviderName`:</span></span><br><span data-ttu-id="32987-729">Wartość:`System.Data.SqlClient`</span><span class="sxs-lookup"><span data-stu-id="32987-729">Value: `System.Data.SqlClient`</span></span>  |
-| `SQLCONNSTR_{KEY}`       | `ConnectionStrings:{KEY}`   | <span data-ttu-id="32987-730">Klucz: `ConnectionStrings:{KEY}_ProviderName`:</span><span class="sxs-lookup"><span data-stu-id="32987-730">Key: `ConnectionStrings:{KEY}_ProviderName`:</span></span><br><span data-ttu-id="32987-731">Wartość:`System.Data.SqlClient`</span><span class="sxs-lookup"><span data-stu-id="32987-731">Value: `System.Data.SqlClient`</span></span>  |
+-
+<span data-ttu-id="f83a3-1621">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1621">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1622">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1622">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1623">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1623">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1624">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1624">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1625">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1625">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1626">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1626">'SignalR' uid:</span></span> 
 
-<span data-ttu-id="32987-732">**Przykład**</span><span class="sxs-lookup"><span data-stu-id="32987-732">**Example**</span></span>
+-
+<span data-ttu-id="f83a3-1627">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1627">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1628">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1628">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1629">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1629">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1630">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1630">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1631">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1631">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1632">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1632">'SignalR' uid:</span></span> 
 
-<span data-ttu-id="32987-733">Na serwerze zostanie utworzona niestandardowa zmienna środowiskowa parametrów połączenia:</span><span class="sxs-lookup"><span data-stu-id="32987-733">A custom connection string environment variable is created on the server:</span></span>
+-
+<span data-ttu-id="f83a3-1633">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1633">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1634">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1634">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1635">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1635">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1636">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1636">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1637">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1637">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1638">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1638">'SignalR' uid:</span></span> 
 
-* <span data-ttu-id="32987-734">Nazwa &ndash;`CUSTOMCONNSTR_ReleaseDB`</span><span class="sxs-lookup"><span data-stu-id="32987-734">Name &ndash; `CUSTOMCONNSTR_ReleaseDB`</span></span>
-* <span data-ttu-id="32987-735">Wartość &ndash;`Data Source=ReleaseSQLServer;Initial Catalog=MyReleaseDB;Integrated Security=True`</span><span class="sxs-lookup"><span data-stu-id="32987-735">Value &ndash; `Data Source=ReleaseSQLServer;Initial Catalog=MyReleaseDB;Integrated Security=True`</span></span>
+-
+<span data-ttu-id="f83a3-1639">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1639">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1640">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1640">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1641">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1641">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1642">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1642">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1643">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1643">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1644">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1644">'SignalR' uid:</span></span> 
 
-<span data-ttu-id="32987-736">Jeśli `IConfiguration` jest wstrzykiwany i przypisany do pola o nazwie `_config`, odczytaj wartość:</span><span class="sxs-lookup"><span data-stu-id="32987-736">If `IConfiguration` is injected and assigned to a field named `_config`, read the value:</span></span>
+-
+<span data-ttu-id="f83a3-1645">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1645">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1646">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1646">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1647">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1647">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1648">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1648">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1649">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1649">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1650">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1650">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1651">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1651">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1652">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1652">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1653">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1653">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1654">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1654">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1655">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1655">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1656">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1656">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1657">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1657">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1658">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1658">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1659">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1659">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1660">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1660">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1661">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1661">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1662">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1662">'SignalR' uid:</span></span> 
+
+<span data-ttu-id="f83a3-1663">------------ | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1663">------------ | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1664">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1664">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1665">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1665">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1666">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1666">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1667">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1667">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1668">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1668">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1669">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1669">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1670">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1670">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1671">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1671">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1672">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1672">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1673">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1673">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1674">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1674">'SignalR' uid:</span></span> 
+
+<span data-ttu-id="f83a3-1675">---- | | `CUSTOMCONNSTR_` | Dostawca niestandardowy | | `MYSQLCONNSTR_` | [Baza danych MySQL](https://www.mysql.com/) |
+ | `SQLAZURECONNSTR_` | [Azure SQL Database](https://azure.microsoft.com/services/sql-database/) |
+ | `SQLCONNSTR_` | [SQL Server](https://www.microsoft.com/sql-server/)|</span><span class="sxs-lookup"><span data-stu-id="f83a3-1675">---- | | `CUSTOMCONNSTR_` | Custom provider | | `MYSQLCONNSTR_` | [MySQL](https://www.mysql.com/) |
+| `SQLAZURECONNSTR_` | [Azure SQL Database](https://azure.microsoft.com/services/sql-database/) |
+| `SQLCONNSTR_` | [SQL Server](https://www.microsoft.com/sql-server/) |</span></span>
+
+<span data-ttu-id="f83a3-1676">Gdy zmienna środowiskowa zostanie odnaleziona i załadowana do konfiguracji z dowolnymi z czterech prefiksów pokazanych w tabeli:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1676">When an environment variable is discovered and loaded into configuration with any of the four prefixes shown in the table:</span></span>
+
+* <span data-ttu-id="f83a3-1677">Klucz konfiguracji jest tworzony przez usunięcie prefiksu zmiennej środowiskowej i dodanie sekcji klucza konfiguracji ( `ConnectionStrings` ).</span><span class="sxs-lookup"><span data-stu-id="f83a3-1677">The configuration key is created by removing the environment variable prefix and adding a configuration key section (`ConnectionStrings`).</span></span>
+* <span data-ttu-id="f83a3-1678">Zostanie utworzona nowa para klucz-wartość konfiguracji, która reprezentuje dostawcę połączenia bazy danych (z wyjątkiem tego `CUSTOMCONNSTR_` , który nie ma określonego dostawcy).</span><span class="sxs-lookup"><span data-stu-id="f83a3-1678">A new configuration key-value pair is created that represents the database connection provider (except for `CUSTOMCONNSTR_`, which has no stated provider).</span></span>
+
+| <span data-ttu-id="f83a3-1679">Klucz zmiennej środowiskowej</span><span class="sxs-lookup"><span data-stu-id="f83a3-1679">Environment variable key</span></span> | <span data-ttu-id="f83a3-1680">Przekonwertowany klucz konfiguracji</span><span class="sxs-lookup"><span data-stu-id="f83a3-1680">Converted configuration key</span></span> | <span data-ttu-id="f83a3-1681">Wpis konfiguracji dostawcy</span><span class="sxs-lookup"><span data-stu-id="f83a3-1681">Provider configuration entry</span></span>                                                    |
+| ---
+<span data-ttu-id="f83a3-1682">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1682">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1683">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1683">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1684">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1684">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1685">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1685">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1686">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1686">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1687">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1687">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1688">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1688">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1689">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1689">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1690">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1690">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1691">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1691">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1692">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1692">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1693">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1693">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1694">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1694">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1695">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1695">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1696">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1696">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1697">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1697">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1698">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1698">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1699">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1699">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1700">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1700">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1701">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1701">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1702">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1702">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1703">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1703">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1704">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1704">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1705">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1705">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1706">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1706">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1707">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1707">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1708">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1708">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1709">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1709">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1710">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1710">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1711">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1711">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1712">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1712">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1713">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1713">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1714">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1714">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1715">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1715">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1716">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1716">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1717">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1717">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1718">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1718">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1719">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1719">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1720">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1720">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1721">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1721">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1722">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1722">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1723">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1723">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1724">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1724">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1725">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1725">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1726">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1726">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1727">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1727">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1728">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1728">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1729">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1729">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1730">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1730">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1731">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1731">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1732">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1732">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1733">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1733">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1734">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1734">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1735">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1735">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1736">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1736">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1737">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1737">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1738">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1738">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1739">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1739">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1740">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1740">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1741">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1741">'SignalR' uid:</span></span> 
+
+<span data-ttu-id="f83a3-1742">------------ | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1742">------------ | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1743">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1743">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1744">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1744">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1745">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1745">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1746">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1746">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1747">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1747">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1748">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1748">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1749">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1749">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1750">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1750">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1751">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1751">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1752">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1752">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1753">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1753">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1754">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1754">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1755">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1755">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1756">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1756">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1757">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1757">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1758">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1758">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1759">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1759">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1760">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1760">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1761">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1761">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1762">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1762">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1763">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1763">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1764">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1764">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1765">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1765">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1766">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1766">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1767">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1767">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1768">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1768">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1769">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1769">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1770">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1770">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1771">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1771">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1772">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1772">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1773">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1773">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1774">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1774">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1775">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1775">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1776">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1776">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1777">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1777">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1778">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1778">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1779">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1779">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1780">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1780">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1781">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1781">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1782">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1782">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1783">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1783">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1784">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1784">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1785">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1785">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1786">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1786">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1787">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1787">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1788">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1788">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1789">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1789">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1790">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1790">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1791">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1791">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1792">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1792">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1793">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1793">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1794">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1794">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1795">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1795">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1796">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1796">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1797">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1797">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1798">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1798">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1799">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1799">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1800">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1800">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1801">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1801">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1802">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1802">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1803">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1803">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1804">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1804">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1805">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1805">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1806">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1806">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1807">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1807">'SignalR' uid:</span></span> 
+
+<span data-ttu-id="f83a3-1808">-------------- | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1808">-------------- | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1809">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1809">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1810">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1810">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1811">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1811">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1812">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1812">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1813">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1813">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1814">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1814">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1815">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1815">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1816">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1816">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1817">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1817">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1818">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1818">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1819">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1819">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1820">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1820">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1821">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1821">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1822">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1822">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1823">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1823">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1824">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1824">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1825">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1825">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1826">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1826">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1827">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1827">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1828">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1828">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1829">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1829">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1830">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1830">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1831">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1831">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1832">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1832">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1833">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1833">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1834">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1834">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1835">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1835">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1836">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1836">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1837">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1837">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1838">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1838">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1839">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1839">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1840">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1840">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1841">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1841">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1842">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1842">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1843">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1843">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1844">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1844">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1845">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1845">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1846">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1846">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1847">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1847">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1848">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1848">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1849">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1849">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1850">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1850">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1851">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1851">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1852">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1852">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1853">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1853">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1854">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1854">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1855">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1855">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1856">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1856">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1857">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1857">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1858">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1858">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1859">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1859">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1860">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1860">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1861">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1861">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1862">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1862">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1863">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1863">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1864">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1864">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1865">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1865">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1866">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1866">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1867">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1867">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1868">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1868">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1869">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1869">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1870">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1870">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1871">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1871">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1872">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1872">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1873">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1873">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1874">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1874">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1875">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1875">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1876">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1876">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1877">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1877">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1878">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1878">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1879">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1879">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1880">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1880">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1881">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1881">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1882">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1882">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1883">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1883">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1884">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1884">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1885">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1885">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1886">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1886">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1887">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1887">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1888">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1888">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1889">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1889">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1890">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1890">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1891">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1891">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1892">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1892">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1893">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1893">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1894">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1894">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1895">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1895">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1896">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1896">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1897">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1897">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1898">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1898">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1899">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1899">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1900">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1900">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1901">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1901">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1902">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1902">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1903">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1903">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1904">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1904">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1905">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1905">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1906">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1906">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1907">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1907">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1908">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1908">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1909">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1909">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1910">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1910">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1911">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1911">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1912">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1912">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1913">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1913">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1914">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1914">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1915">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1915">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1916">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1916">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1917">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1917">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1918">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1918">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1919">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1919">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1920">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1920">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1921">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1921">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1922">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1922">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1923">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1923">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1924">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1924">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1925">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1925">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1926">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1926">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1927">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1927">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1928">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1928">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1929">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1929">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1930">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1930">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1931">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1931">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1932">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1932">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1933">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1933">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1934">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1934">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1935">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1935">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1936">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1936">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1937">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1937">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1938">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1938">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1939">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1939">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1940">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1940">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1941">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1941">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1942">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1942">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1943">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1943">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1944">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1944">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1945">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1945">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1946">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1946">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1947">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1947">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1948">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1948">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1949">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1949">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1950">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1950">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1951">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1951">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1952">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1952">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1953">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1953">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1954">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1954">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1955">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1955">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1956">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1956">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1957">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1957">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1958">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1958">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1959">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1959">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1960">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1960">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1961">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1961">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1962">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1962">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1963">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1963">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1964">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1964">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1965">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1965">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1966">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1966">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1967">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1967">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1968">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1968">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1969">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1969">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1970">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1970">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1971">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1971">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1972">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1972">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1973">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1973">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1974">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1974">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1975">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1975">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1976">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1976">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1977">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1977">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1978">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1978">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1979">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1979">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1980">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1980">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1981">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1981">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1982">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1982">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1983">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1983">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1984">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1984">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1985">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1985">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1986">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1986">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1987">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1987">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1988">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1988">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1989">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1989">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1990">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1990">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1991">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1991">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1992">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1992">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1993">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1993">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-1994">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1994">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-1995">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1995">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-1996">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1996">'Identity'</span></span>
+- <span data-ttu-id="f83a3-1997">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1997">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-1998">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-1998">'Razor'</span></span>
+- <span data-ttu-id="f83a3-1999">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-1999">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2000">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2000">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2001">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2001">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2002">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2002">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2003">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2003">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2004">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2004">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2005">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2005">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2006">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2006">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2007">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2007">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2008">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2008">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2009">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2009">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2010">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2010">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2011">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2011">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2012">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2012">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2013">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2013">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2014">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2014">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2015">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2015">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2016">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2016">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2017">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2017">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2018">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2018">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2019">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2019">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2020">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2020">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2021">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2021">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2022">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2022">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2023">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2023">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2024">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2024">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2025">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2025">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2026">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2026">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2027">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2027">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2028">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2028">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2029">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2029">'SignalR' uid:</span></span> 
+
+<span data-ttu-id="f83a3-2030">---------------------------------------- | | `CUSTOMCONNSTR_{KEY} `   | `ConnectionStrings:{KEY}`   | Wpis konfiguracji nie został utworzony.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2030">---------------------------------------- | | `CUSTOMCONNSTR_{KEY} `   | `ConnectionStrings:{KEY}`   | Configuration entry not created.</span></span>                                                <span data-ttu-id="f83a3-2031">| | `MYSQLCONNSTR_{KEY}`     | `ConnectionStrings:{KEY}`   | Klucz: `ConnectionStrings:{KEY}_ProviderName` :</span><span class="sxs-lookup"><span data-stu-id="f83a3-2031">| | `MYSQLCONNSTR_{KEY}`     | `ConnectionStrings:{KEY}`   | Key: `ConnectionStrings:{KEY}_ProviderName`:</span></span><br><span data-ttu-id="f83a3-2032">Wartość: `MySql.Data.MySqlClient` | | `SQLAZURECONNSTR_{KEY}`   |  `ConnectionStrings:{KEY}`   | Klucz: `ConnectionStrings:{KEY}_ProviderName` :</span><span class="sxs-lookup"><span data-stu-id="f83a3-2032">Value: `MySql.Data.MySqlClient` | | `SQLAZURECONNSTR_{KEY}`  | `ConnectionStrings:{KEY}`   | Key: `ConnectionStrings:{KEY}_ProviderName`:</span></span><br><span data-ttu-id="f83a3-2033">Wartość: `System.Data.SqlClient` | | `SQLCONNSTR_{KEY}`        |  `ConnectionStrings:{KEY}`   | Klucz: `ConnectionStrings:{KEY}_ProviderName` :</span><span class="sxs-lookup"><span data-stu-id="f83a3-2033">Value: `System.Data.SqlClient`  | | `SQLCONNSTR_{KEY}`       | `ConnectionStrings:{KEY}`   | Key: `ConnectionStrings:{KEY}_ProviderName`:</span></span><br><span data-ttu-id="f83a3-2034">Wartościami`System.Data.SqlClient`  |</span><span class="sxs-lookup"><span data-stu-id="f83a3-2034">Value: `System.Data.SqlClient`  |</span></span>
+
+<span data-ttu-id="f83a3-2035">**Przyklad**</span><span class="sxs-lookup"><span data-stu-id="f83a3-2035">**Example**</span></span>
+
+<span data-ttu-id="f83a3-2036">Na serwerze zostanie utworzona niestandardowa zmienna środowiskowa parametrów połączenia:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2036">A custom connection string environment variable is created on the server:</span></span>
+
+* <span data-ttu-id="f83a3-2037">Nazwa &ndash;`CUSTOMCONNSTR_ReleaseDB`</span><span class="sxs-lookup"><span data-stu-id="f83a3-2037">Name &ndash; `CUSTOMCONNSTR_ReleaseDB`</span></span>
+* <span data-ttu-id="f83a3-2038">Wartość &ndash;`Data Source=ReleaseSQLServer;Initial Catalog=MyReleaseDB;Integrated Security=True`</span><span class="sxs-lookup"><span data-stu-id="f83a3-2038">Value &ndash; `Data Source=ReleaseSQLServer;Initial Catalog=MyReleaseDB;Integrated Security=True`</span></span>
+
+<span data-ttu-id="f83a3-2039">Jeśli `IConfiguration` jest wstrzykiwany i przypisany do pola o nazwie `_config` , odczytaj wartość:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2039">If `IConfiguration` is injected and assigned to a field named `_config`, read the value:</span></span>
 
 ```csharp
 _config["ConnectionStrings:ReleaseDB"]
 ```
 
-## <a name="file-configuration-provider"></a><span data-ttu-id="32987-737">Dostawca konfiguracji plików</span><span class="sxs-lookup"><span data-stu-id="32987-737">File Configuration Provider</span></span>
+## <a name="file-configuration-provider"></a><span data-ttu-id="f83a3-2040">Dostawca konfiguracji plików</span><span class="sxs-lookup"><span data-stu-id="f83a3-2040">File Configuration Provider</span></span>
 
-<span data-ttu-id="32987-738"><xref:Microsoft.Extensions.Configuration.FileConfigurationProvider>jest klasą bazową do ładowania konfiguracji z systemu plików.</span><span class="sxs-lookup"><span data-stu-id="32987-738"><xref:Microsoft.Extensions.Configuration.FileConfigurationProvider> is the base class for loading configuration from the file system.</span></span> <span data-ttu-id="32987-739">Następujący dostawcy konfiguracji są przydzielone do określonych typów plików:</span><span class="sxs-lookup"><span data-stu-id="32987-739">The following configuration providers are dedicated to specific file types:</span></span>
+<span data-ttu-id="f83a3-2041"><xref:Microsoft.Extensions.Configuration.FileConfigurationProvider>jest klasą bazową do ładowania konfiguracji z systemu plików.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2041"><xref:Microsoft.Extensions.Configuration.FileConfigurationProvider> is the base class for loading configuration from the file system.</span></span> <span data-ttu-id="f83a3-2042">Następujący dostawcy konfiguracji są przydzielone do określonych typów plików:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2042">The following configuration providers are dedicated to specific file types:</span></span>
 
-* [<span data-ttu-id="32987-740">Dostawca konfiguracji pliku INI</span><span class="sxs-lookup"><span data-stu-id="32987-740">INI Configuration Provider</span></span>](#ini-configuration-provider)
-* [<span data-ttu-id="32987-741">Dostawca konfiguracji JSON</span><span class="sxs-lookup"><span data-stu-id="32987-741">JSON Configuration Provider</span></span>](#json-configuration-provider)
-* [<span data-ttu-id="32987-742">Dostawca konfiguracji XML</span><span class="sxs-lookup"><span data-stu-id="32987-742">XML Configuration Provider</span></span>](#xml-configuration-provider)
+* [<span data-ttu-id="f83a3-2043">Dostawca konfiguracji pliku INI</span><span class="sxs-lookup"><span data-stu-id="f83a3-2043">INI Configuration Provider</span></span>](#ini-configuration-provider)
+* [<span data-ttu-id="f83a3-2044">Dostawca konfiguracji JSON</span><span class="sxs-lookup"><span data-stu-id="f83a3-2044">JSON Configuration Provider</span></span>](#json-configuration-provider)
+* [<span data-ttu-id="f83a3-2045">Dostawca konfiguracji XML</span><span class="sxs-lookup"><span data-stu-id="f83a3-2045">XML Configuration Provider</span></span>](#xml-configuration-provider)
 
-### <a name="ini-configuration-provider"></a><span data-ttu-id="32987-743">Dostawca konfiguracji pliku INI</span><span class="sxs-lookup"><span data-stu-id="32987-743">INI Configuration Provider</span></span>
+### <a name="ini-configuration-provider"></a><span data-ttu-id="f83a3-2046">Dostawca konfiguracji pliku INI</span><span class="sxs-lookup"><span data-stu-id="f83a3-2046">INI Configuration Provider</span></span>
 
-<span data-ttu-id="32987-744"><xref:Microsoft.Extensions.Configuration.Ini.IniConfigurationProvider> Ładowanie konfiguracji z par klucz-wartość pliku ini w czasie wykonywania.</span><span class="sxs-lookup"><span data-stu-id="32987-744">The <xref:Microsoft.Extensions.Configuration.Ini.IniConfigurationProvider> loads configuration from INI file key-value pairs at runtime.</span></span>
+<span data-ttu-id="f83a3-2047"><xref:Microsoft.Extensions.Configuration.Ini.IniConfigurationProvider>Ładowanie konfiguracji z par klucz-wartość pliku ini w czasie wykonywania.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2047">The <xref:Microsoft.Extensions.Configuration.Ini.IniConfigurationProvider> loads configuration from INI file key-value pairs at runtime.</span></span>
 
-<span data-ttu-id="32987-745">Aby uaktywnić konfigurację pliku INI, wywołaj metodę <xref:Microsoft.Extensions.Configuration.IniConfigurationExtensions.AddIniFile*> rozszerzenia w wystąpieniu. <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder></span><span class="sxs-lookup"><span data-stu-id="32987-745">To activate INI file configuration, call the <xref:Microsoft.Extensions.Configuration.IniConfigurationExtensions.AddIniFile*> extension method on an instance of <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder>.</span></span>
+<span data-ttu-id="f83a3-2048">Aby uaktywnić konfigurację pliku INI, wywołaj <xref:Microsoft.Extensions.Configuration.IniConfigurationExtensions.AddIniFile*> metodę rozszerzenia w wystąpieniu <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder> .</span><span class="sxs-lookup"><span data-stu-id="f83a3-2048">To activate INI file configuration, call the <xref:Microsoft.Extensions.Configuration.IniConfigurationExtensions.AddIniFile*> extension method on an instance of <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder>.</span></span>
 
-<span data-ttu-id="32987-746">Dwukropek może służyć jako ogranicznik sekcji w konfiguracji pliku INI.</span><span class="sxs-lookup"><span data-stu-id="32987-746">The colon can be used to as a section delimiter in INI file configuration.</span></span>
+<span data-ttu-id="f83a3-2049">Dwukropek może służyć jako ogranicznik sekcji w konfiguracji pliku INI.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2049">The colon can be used to as a section delimiter in INI file configuration.</span></span>
 
-<span data-ttu-id="32987-747">Przeciążania Zezwalaj na określanie:</span><span class="sxs-lookup"><span data-stu-id="32987-747">Overloads permit specifying:</span></span>
+<span data-ttu-id="f83a3-2050">Przeciążania Zezwalaj na określanie:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2050">Overloads permit specifying:</span></span>
 
-* <span data-ttu-id="32987-748">Czy plik jest opcjonalny.</span><span class="sxs-lookup"><span data-stu-id="32987-748">Whether the file is optional.</span></span>
-* <span data-ttu-id="32987-749">Czy konfiguracja zostanie ponownie załadowana w przypadku zmiany pliku.</span><span class="sxs-lookup"><span data-stu-id="32987-749">Whether the configuration is reloaded if the file changes.</span></span>
-* <span data-ttu-id="32987-750"><xref:Microsoft.Extensions.FileProviders.IFileProvider> Używane do uzyskiwania dostępu do pliku.</span><span class="sxs-lookup"><span data-stu-id="32987-750">The <xref:Microsoft.Extensions.FileProviders.IFileProvider> used to access the file.</span></span>
+* <span data-ttu-id="f83a3-2051">Czy plik jest opcjonalny.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2051">Whether the file is optional.</span></span>
+* <span data-ttu-id="f83a3-2052">Czy konfiguracja zostanie ponownie załadowana w przypadku zmiany pliku.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2052">Whether the configuration is reloaded if the file changes.</span></span>
+* <span data-ttu-id="f83a3-2053"><xref:Microsoft.Extensions.FileProviders.IFileProvider>Używane do uzyskiwania dostępu do pliku.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2053">The <xref:Microsoft.Extensions.FileProviders.IFileProvider> used to access the file.</span></span>
 
-<span data-ttu-id="32987-751">Wywołaj `ConfigureAppConfiguration` podczas kompilowania hosta, aby określić konfigurację aplikacji:</span><span class="sxs-lookup"><span data-stu-id="32987-751">Call `ConfigureAppConfiguration` when building the host to specify the app's configuration:</span></span>
+<span data-ttu-id="f83a3-2054">Wywołaj `ConfigureAppConfiguration` podczas kompilowania hosta, aby określić konfigurację aplikacji:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2054">Call `ConfigureAppConfiguration` when building the host to specify the app's configuration:</span></span>
 
 ```csharp
 .ConfigureAppConfiguration((hostingContext, config) =>
@@ -1254,7 +2997,7 @@ _config["ConnectionStrings:ReleaseDB"]
 })
 ```
 
-<span data-ttu-id="32987-752">Ogólny przykład pliku konfiguracji INI:</span><span class="sxs-lookup"><span data-stu-id="32987-752">A generic example of an INI configuration file:</span></span>
+<span data-ttu-id="f83a3-2055">Ogólny przykład pliku konfiguracji INI:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2055">A generic example of an INI configuration file:</span></span>
 
 ```ini
 [section0]
@@ -1271,42 +3014,42 @@ key=value
 key=value
 ```
 
-<span data-ttu-id="32987-753">Poprzedni plik konfiguracji ładuje następujące klucze z `value`:</span><span class="sxs-lookup"><span data-stu-id="32987-753">The previous configuration file loads the following keys with `value`:</span></span>
+<span data-ttu-id="f83a3-2056">Poprzedni plik konfiguracji ładuje następujące klucze z `value` :</span><span class="sxs-lookup"><span data-stu-id="f83a3-2056">The previous configuration file loads the following keys with `value`:</span></span>
 
-* <span data-ttu-id="32987-754">section0:key0</span><span class="sxs-lookup"><span data-stu-id="32987-754">section0:key0</span></span>
-* <span data-ttu-id="32987-755">section0: Klucz1</span><span class="sxs-lookup"><span data-stu-id="32987-755">section0:key1</span></span>
-* <span data-ttu-id="32987-756">Section1: podsekcja: Key</span><span class="sxs-lookup"><span data-stu-id="32987-756">section1:subsection:key</span></span>
-* <span data-ttu-id="32987-757">section2: subsection0: klucz</span><span class="sxs-lookup"><span data-stu-id="32987-757">section2:subsection0:key</span></span>
-* <span data-ttu-id="32987-758">section2: subsection1: klucz</span><span class="sxs-lookup"><span data-stu-id="32987-758">section2:subsection1:key</span></span>
+* <span data-ttu-id="f83a3-2057">section0:key0</span><span class="sxs-lookup"><span data-stu-id="f83a3-2057">section0:key0</span></span>
+* <span data-ttu-id="f83a3-2058">section0: Klucz1</span><span class="sxs-lookup"><span data-stu-id="f83a3-2058">section0:key1</span></span>
+* <span data-ttu-id="f83a3-2059">Section1: podsekcja: Key</span><span class="sxs-lookup"><span data-stu-id="f83a3-2059">section1:subsection:key</span></span>
+* <span data-ttu-id="f83a3-2060">section2: subsection0: klucz</span><span class="sxs-lookup"><span data-stu-id="f83a3-2060">section2:subsection0:key</span></span>
+* <span data-ttu-id="f83a3-2061">section2: subsection1: klucz</span><span class="sxs-lookup"><span data-stu-id="f83a3-2061">section2:subsection1:key</span></span>
 
-### <a name="json-configuration-provider"></a><span data-ttu-id="32987-759">Dostawca konfiguracji JSON</span><span class="sxs-lookup"><span data-stu-id="32987-759">JSON Configuration Provider</span></span>
+### <a name="json-configuration-provider"></a><span data-ttu-id="f83a3-2062">Dostawca konfiguracji JSON</span><span class="sxs-lookup"><span data-stu-id="f83a3-2062">JSON Configuration Provider</span></span>
 
-<span data-ttu-id="32987-760"><xref:Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider> Ładowanie konfiguracji z par klucz-wartość pliku JSON podczas środowiska uruchomieniowego.</span><span class="sxs-lookup"><span data-stu-id="32987-760">The <xref:Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider> loads configuration from JSON file key-value pairs during runtime.</span></span>
+<span data-ttu-id="f83a3-2063"><xref:Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider>Ładowanie konfiguracji z par klucz-wartość pliku JSON podczas środowiska uruchomieniowego.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2063">The <xref:Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider> loads configuration from JSON file key-value pairs during runtime.</span></span>
 
-<span data-ttu-id="32987-761">Aby uaktywnić konfigurację pliku JSON, wywołaj metodę <xref:Microsoft.Extensions.Configuration.JsonConfigurationExtensions.AddJsonFile*> rozszerzenia w wystąpieniu. <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder></span><span class="sxs-lookup"><span data-stu-id="32987-761">To activate JSON file configuration, call the <xref:Microsoft.Extensions.Configuration.JsonConfigurationExtensions.AddJsonFile*> extension method on an instance of <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder>.</span></span>
+<span data-ttu-id="f83a3-2064">Aby uaktywnić konfigurację pliku JSON, wywołaj <xref:Microsoft.Extensions.Configuration.JsonConfigurationExtensions.AddJsonFile*> metodę rozszerzenia w wystąpieniu <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder> .</span><span class="sxs-lookup"><span data-stu-id="f83a3-2064">To activate JSON file configuration, call the <xref:Microsoft.Extensions.Configuration.JsonConfigurationExtensions.AddJsonFile*> extension method on an instance of <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder>.</span></span>
 
-<span data-ttu-id="32987-762">Przeciążania Zezwalaj na określanie:</span><span class="sxs-lookup"><span data-stu-id="32987-762">Overloads permit specifying:</span></span>
+<span data-ttu-id="f83a3-2065">Przeciążania Zezwalaj na określanie:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2065">Overloads permit specifying:</span></span>
 
-* <span data-ttu-id="32987-763">Czy plik jest opcjonalny.</span><span class="sxs-lookup"><span data-stu-id="32987-763">Whether the file is optional.</span></span>
-* <span data-ttu-id="32987-764">Czy konfiguracja zostanie ponownie załadowana w przypadku zmiany pliku.</span><span class="sxs-lookup"><span data-stu-id="32987-764">Whether the configuration is reloaded if the file changes.</span></span>
-* <span data-ttu-id="32987-765"><xref:Microsoft.Extensions.FileProviders.IFileProvider> Używane do uzyskiwania dostępu do pliku.</span><span class="sxs-lookup"><span data-stu-id="32987-765">The <xref:Microsoft.Extensions.FileProviders.IFileProvider> used to access the file.</span></span>
+* <span data-ttu-id="f83a3-2066">Czy plik jest opcjonalny.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2066">Whether the file is optional.</span></span>
+* <span data-ttu-id="f83a3-2067">Czy konfiguracja zostanie ponownie załadowana w przypadku zmiany pliku.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2067">Whether the configuration is reloaded if the file changes.</span></span>
+* <span data-ttu-id="f83a3-2068"><xref:Microsoft.Extensions.FileProviders.IFileProvider>Używane do uzyskiwania dostępu do pliku.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2068">The <xref:Microsoft.Extensions.FileProviders.IFileProvider> used to access the file.</span></span>
 
-<span data-ttu-id="32987-766">`AddJsonFile`jest automatycznie wywoływana dwukrotnie, gdy nowy Konstruktor hosta zostanie zainicjowany przy `CreateDefaultBuilder`użyciu.</span><span class="sxs-lookup"><span data-stu-id="32987-766">`AddJsonFile` is automatically called twice when a new host builder is initialized with `CreateDefaultBuilder`.</span></span> <span data-ttu-id="32987-767">Metoda jest wywoływana w celu załadowania konfiguracji z:</span><span class="sxs-lookup"><span data-stu-id="32987-767">The method is called to load configuration from:</span></span>
+<span data-ttu-id="f83a3-2069">`AddJsonFile`jest automatycznie wywoływana dwukrotnie, gdy nowy Konstruktor hosta zostanie zainicjowany przy użyciu `CreateDefaultBuilder` .</span><span class="sxs-lookup"><span data-stu-id="f83a3-2069">`AddJsonFile` is automatically called twice when a new host builder is initialized with `CreateDefaultBuilder`.</span></span> <span data-ttu-id="f83a3-2070">Metoda jest wywoływana w celu załadowania konfiguracji z:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2070">The method is called to load configuration from:</span></span>
 
-* <span data-ttu-id="32987-768">*appSettings. JSON* &ndash; ten plik jest odczytywany jako pierwszy.</span><span class="sxs-lookup"><span data-stu-id="32987-768">*appsettings.json* &ndash; This file is read first.</span></span> <span data-ttu-id="32987-769">Wersja środowiska pliku może przesłonić wartości dostarczone przez plik *appSettings. JSON* .</span><span class="sxs-lookup"><span data-stu-id="32987-769">The environment version of the file can override the values provided by the *appsettings.json* file.</span></span>
-* <span data-ttu-id="32987-770">*appSettings. {Environment}. JSON* &ndash; wersja środowiska pliku jest ładowana na podstawie [IHostingEnvironment. EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostingEnvironment.EnvironmentName*).</span><span class="sxs-lookup"><span data-stu-id="32987-770">*appsettings.{Environment}.json* &ndash; The environment version of the file is loaded based on the [IHostingEnvironment.EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostingEnvironment.EnvironmentName*).</span></span>
+* <span data-ttu-id="f83a3-2071">*appSettings. JSON* &ndash; ten plik jest odczytywany jako pierwszy.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2071">*appsettings.json* &ndash; This file is read first.</span></span> <span data-ttu-id="f83a3-2072">Wersja środowiska pliku może przesłonić wartości dostarczone przez plik *appSettings. JSON* .</span><span class="sxs-lookup"><span data-stu-id="f83a3-2072">The environment version of the file can override the values provided by the *appsettings.json* file.</span></span>
+* <span data-ttu-id="f83a3-2073">*appSettings. {Environment}. JSON* &ndash; wersja środowiska pliku jest ładowana na podstawie [IHostingEnvironment. EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostingEnvironment.EnvironmentName*).</span><span class="sxs-lookup"><span data-stu-id="f83a3-2073">*appsettings.{Environment}.json* &ndash; The environment version of the file is loaded based on the [IHostingEnvironment.EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostingEnvironment.EnvironmentName*).</span></span>
 
-<span data-ttu-id="32987-771">Aby uzyskać więcej informacji, zobacz sekcję [Konfiguracja domyślna](#default-configuration) .</span><span class="sxs-lookup"><span data-stu-id="32987-771">For more information, see the [Default configuration](#default-configuration) section.</span></span>
+<span data-ttu-id="f83a3-2074">Aby uzyskać więcej informacji, zobacz sekcję [Konfiguracja domyślna](#default-configuration) .</span><span class="sxs-lookup"><span data-stu-id="f83a3-2074">For more information, see the [Default configuration](#default-configuration) section.</span></span>
 
-<span data-ttu-id="32987-772">`CreateDefaultBuilder`ładuje również:</span><span class="sxs-lookup"><span data-stu-id="32987-772">`CreateDefaultBuilder` also loads:</span></span>
+<span data-ttu-id="f83a3-2075">`CreateDefaultBuilder`ładuje również:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2075">`CreateDefaultBuilder` also loads:</span></span>
 
-* <span data-ttu-id="32987-773">Zmienne środowiskowe.</span><span class="sxs-lookup"><span data-stu-id="32987-773">Environment variables.</span></span>
-* <span data-ttu-id="32987-774">Wpisy [tajne użytkownika (Secret Manager)](xref:security/app-secrets) w środowisku deweloperskim.</span><span class="sxs-lookup"><span data-stu-id="32987-774">[User secrets (Secret Manager)](xref:security/app-secrets) in the Development environment.</span></span>
-* <span data-ttu-id="32987-775">Argumenty wiersza polecenia.</span><span class="sxs-lookup"><span data-stu-id="32987-775">Command-line arguments.</span></span>
+* <span data-ttu-id="f83a3-2076">Zmienne środowiskowe.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2076">Environment variables.</span></span>
+* <span data-ttu-id="f83a3-2077">Wpisy [tajne użytkownika (Secret Manager)](xref:security/app-secrets) w środowisku deweloperskim.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2077">[User secrets (Secret Manager)](xref:security/app-secrets) in the Development environment.</span></span>
+* <span data-ttu-id="f83a3-2078">Argumenty wiersza polecenia.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2078">Command-line arguments.</span></span>
 
-<span data-ttu-id="32987-776">Dostawca konfiguracji JSON został ustanowiony jako pierwszy.</span><span class="sxs-lookup"><span data-stu-id="32987-776">The JSON Configuration Provider is established first.</span></span> <span data-ttu-id="32987-777">W związku z tym klucze tajne użytkownika, zmienne środowiskowe i argumenty wiersza polecenia przesłaniają konfigurację ustawioną przez pliki *AppSettings* .</span><span class="sxs-lookup"><span data-stu-id="32987-777">Therefore, user secrets, environment variables, and command-line arguments override configuration set by the *appsettings* files.</span></span>
+<span data-ttu-id="f83a3-2079">Dostawca konfiguracji JSON został ustanowiony jako pierwszy.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2079">The JSON Configuration Provider is established first.</span></span> <span data-ttu-id="f83a3-2080">W związku z tym klucze tajne użytkownika, zmienne środowiskowe i argumenty wiersza polecenia przesłaniają konfigurację ustawioną przez pliki *AppSettings* .</span><span class="sxs-lookup"><span data-stu-id="f83a3-2080">Therefore, user secrets, environment variables, and command-line arguments override configuration set by the *appsettings* files.</span></span>
 
-<span data-ttu-id="32987-778">Wywołaj `ConfigureAppConfiguration` podczas kompilowania hosta, aby określić konfigurację aplikacji dla plików innych niż *appSettings. JSON* i *appSettings. { Environment}. JSON*:</span><span class="sxs-lookup"><span data-stu-id="32987-778">Call `ConfigureAppConfiguration` when building the host to specify the app's configuration for files other than *appsettings.json* and *appsettings.{Environment}.json*:</span></span>
+<span data-ttu-id="f83a3-2081">Wywołaj `ConfigureAppConfiguration` podczas kompilowania hosta, aby określić konfigurację aplikacji dla plików innych niż *appSettings. JSON* i *appSettings. { Environment}. JSON*:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2081">Call `ConfigureAppConfiguration` when building the host to specify the app's configuration for files other than *appsettings.json* and *appsettings.{Environment}.json*:</span></span>
 
 ```csharp
 .ConfigureAppConfiguration((hostingContext, config) =>
@@ -1316,41 +3059,41 @@ key=value
 })
 ```
 
-<span data-ttu-id="32987-779">**Przykład**</span><span class="sxs-lookup"><span data-stu-id="32987-779">**Example**</span></span>
+<span data-ttu-id="f83a3-2082">**Przyklad**</span><span class="sxs-lookup"><span data-stu-id="f83a3-2082">**Example**</span></span>
 
-<span data-ttu-id="32987-780">Przykładowa aplikacja korzysta z statycznej wygodnej metody `CreateDefaultBuilder` tworzenia hosta, który obejmuje dwa wywołania `AddJsonFile`:</span><span class="sxs-lookup"><span data-stu-id="32987-780">The sample app takes advantage of the static convenience method `CreateDefaultBuilder` to build the host, which includes two calls to `AddJsonFile`:</span></span>
+<span data-ttu-id="f83a3-2083">Przykładowa aplikacja korzysta z statycznej wygodnej metody `CreateDefaultBuilder` tworzenia hosta, który obejmuje dwa wywołania `AddJsonFile` :</span><span class="sxs-lookup"><span data-stu-id="f83a3-2083">The sample app takes advantage of the static convenience method `CreateDefaultBuilder` to build the host, which includes two calls to `AddJsonFile`:</span></span>
 
-* <span data-ttu-id="32987-781">Pierwsze wywołanie `AddJsonFile` ładowania konfiguracji z pliku *appSettings. JSON*:</span><span class="sxs-lookup"><span data-stu-id="32987-781">The first call to `AddJsonFile` loads configuration from *appsettings.json*:</span></span>
+* <span data-ttu-id="f83a3-2084">Pierwsze wywołanie `AddJsonFile` ładowania konfiguracji z pliku *appSettings. JSON*:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2084">The first call to `AddJsonFile` loads configuration from *appsettings.json*:</span></span>
 
   [!code-json[](index/samples/2.x/ConfigurationSample/appsettings.json)]
 
-* <span data-ttu-id="32987-782">Drugie wywołanie `AddJsonFile` ładowania konfiguracji z *appSettings. { Environment}. JSON*.</span><span class="sxs-lookup"><span data-stu-id="32987-782">The second call to `AddJsonFile` loads configuration from *appsettings.{Environment}.json*.</span></span> <span data-ttu-id="32987-783">Dla *appSettings. Plik Development. JSON* w przykładowej aplikacji jest ładowany:</span><span class="sxs-lookup"><span data-stu-id="32987-783">For *appsettings.Development.json* in the sample app, the following file is loaded:</span></span>
+* <span data-ttu-id="f83a3-2085">Drugie wywołanie `AddJsonFile` ładowania konfiguracji z *appSettings. { Environment}. JSON*.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2085">The second call to `AddJsonFile` loads configuration from *appsettings.{Environment}.json*.</span></span> <span data-ttu-id="f83a3-2086">Dla *appSettings. Plik Development. JSON* w przykładowej aplikacji jest ładowany:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2086">For *appsettings.Development.json* in the sample app, the following file is loaded:</span></span>
 
   [!code-json[](index/samples/2.x/ConfigurationSample/appsettings.Development.json)]
 
-1. <span data-ttu-id="32987-784">Uruchom przykładową aplikację.</span><span class="sxs-lookup"><span data-stu-id="32987-784">Run the sample app.</span></span> <span data-ttu-id="32987-785">Otwórz w przeglądarce aplikację pod adresem `http://localhost:5000`.</span><span class="sxs-lookup"><span data-stu-id="32987-785">Open a browser to the app at `http://localhost:5000`.</span></span>
-1. <span data-ttu-id="32987-786">Dane wyjściowe zawierają pary klucz-wartość dla konfiguracji w oparciu o środowisko aplikacji.</span><span class="sxs-lookup"><span data-stu-id="32987-786">The output contains key-value pairs for the configuration based on the app's environment.</span></span> <span data-ttu-id="32987-787">Poziom dziennika klucza `Logging:LogLevel:Default` jest `Debug` używany podczas uruchamiania aplikacji w środowisku deweloperskim.</span><span class="sxs-lookup"><span data-stu-id="32987-787">The log level for the key `Logging:LogLevel:Default` is `Debug` when running the app in the Development environment.</span></span>
-1. <span data-ttu-id="32987-788">Ponownie uruchom przykładową aplikację w środowisku produkcyjnym:</span><span class="sxs-lookup"><span data-stu-id="32987-788">Run the sample app again in the Production environment:</span></span>
-   1. <span data-ttu-id="32987-789">Otwórz plik *Properties/profilu launchsettings. JSON* .</span><span class="sxs-lookup"><span data-stu-id="32987-789">Open the *Properties/launchSettings.json* file.</span></span>
-   1. <span data-ttu-id="32987-790">W `ConfigurationSample` profilu Zmień wartość zmiennej `ASPNETCORE_ENVIRONMENT` środowiskowej na. `Production`</span><span class="sxs-lookup"><span data-stu-id="32987-790">In the `ConfigurationSample` profile, change the value of the `ASPNETCORE_ENVIRONMENT` environment variable to `Production`.</span></span>
-   1. <span data-ttu-id="32987-791">Zapisz plik i uruchom aplikację przy użyciu `dotnet run` powłoki poleceń.</span><span class="sxs-lookup"><span data-stu-id="32987-791">Save the file and run the app with `dotnet run` in a command shell.</span></span>
-1. <span data-ttu-id="32987-792">Ustawienia w *appSettings. Plik Development. JSON* nie zastępuje już ustawień w pliku *appSettings. JSON*.</span><span class="sxs-lookup"><span data-stu-id="32987-792">The settings in the *appsettings.Development.json* no longer override the settings in *appsettings.json*.</span></span> <span data-ttu-id="32987-793">Poziom dziennika klucza `Logging:LogLevel:Default` to `Warning`.</span><span class="sxs-lookup"><span data-stu-id="32987-793">The log level for the key `Logging:LogLevel:Default` is `Warning`.</span></span>
+1. <span data-ttu-id="f83a3-2087">Uruchom przykładową aplikację.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2087">Run the sample app.</span></span> <span data-ttu-id="f83a3-2088">Otwórz w przeglądarce aplikację pod adresem `http://localhost:5000` .</span><span class="sxs-lookup"><span data-stu-id="f83a3-2088">Open a browser to the app at `http://localhost:5000`.</span></span>
+1. <span data-ttu-id="f83a3-2089">Dane wyjściowe zawierają pary klucz-wartość dla konfiguracji w oparciu o środowisko aplikacji.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2089">The output contains key-value pairs for the configuration based on the app's environment.</span></span> <span data-ttu-id="f83a3-2090">Poziom dziennika klucza `Logging:LogLevel:Default` jest `Debug` używany podczas uruchamiania aplikacji w środowisku deweloperskim.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2090">The log level for the key `Logging:LogLevel:Default` is `Debug` when running the app in the Development environment.</span></span>
+1. <span data-ttu-id="f83a3-2091">Ponownie uruchom przykładową aplikację w środowisku produkcyjnym:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2091">Run the sample app again in the Production environment:</span></span>
+   1. <span data-ttu-id="f83a3-2092">Otwórz plik *Properties/profilu launchsettings. JSON* .</span><span class="sxs-lookup"><span data-stu-id="f83a3-2092">Open the *Properties/launchSettings.json* file.</span></span>
+   1. <span data-ttu-id="f83a3-2093">W `ConfigurationSample` profilu Zmień wartość `ASPNETCORE_ENVIRONMENT` zmiennej środowiskowej na `Production` .</span><span class="sxs-lookup"><span data-stu-id="f83a3-2093">In the `ConfigurationSample` profile, change the value of the `ASPNETCORE_ENVIRONMENT` environment variable to `Production`.</span></span>
+   1. <span data-ttu-id="f83a3-2094">Zapisz plik i uruchom aplikację przy użyciu `dotnet run` powłoki poleceń.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2094">Save the file and run the app with `dotnet run` in a command shell.</span></span>
+1. <span data-ttu-id="f83a3-2095">Ustawienia w *appSettings. Plik Development. JSON* nie zastępuje już ustawień w pliku *appSettings. JSON*.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2095">The settings in the *appsettings.Development.json* no longer override the settings in *appsettings.json*.</span></span> <span data-ttu-id="f83a3-2096">Poziom dziennika klucza `Logging:LogLevel:Default` to `Warning` .</span><span class="sxs-lookup"><span data-stu-id="f83a3-2096">The log level for the key `Logging:LogLevel:Default` is `Warning`.</span></span>
 
-### <a name="xml-configuration-provider"></a><span data-ttu-id="32987-794">Dostawca konfiguracji XML</span><span class="sxs-lookup"><span data-stu-id="32987-794">XML Configuration Provider</span></span>
+### <a name="xml-configuration-provider"></a><span data-ttu-id="f83a3-2097">Dostawca konfiguracji XML</span><span class="sxs-lookup"><span data-stu-id="f83a3-2097">XML Configuration Provider</span></span>
 
-<span data-ttu-id="32987-795"><xref:Microsoft.Extensions.Configuration.Xml.XmlConfigurationProvider> Ładowanie konfiguracji z par klucz-wartość pliku XML w czasie wykonywania.</span><span class="sxs-lookup"><span data-stu-id="32987-795">The <xref:Microsoft.Extensions.Configuration.Xml.XmlConfigurationProvider> loads configuration from XML file key-value pairs at runtime.</span></span>
+<span data-ttu-id="f83a3-2098"><xref:Microsoft.Extensions.Configuration.Xml.XmlConfigurationProvider>Ładowanie konfiguracji z par klucz-wartość pliku XML w czasie wykonywania.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2098">The <xref:Microsoft.Extensions.Configuration.Xml.XmlConfigurationProvider> loads configuration from XML file key-value pairs at runtime.</span></span>
 
-<span data-ttu-id="32987-796">Aby uaktywnić konfigurację pliku XML, wywołaj metodę <xref:Microsoft.Extensions.Configuration.XmlConfigurationExtensions.AddXmlFile*> rozszerzenia w wystąpieniu. <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder></span><span class="sxs-lookup"><span data-stu-id="32987-796">To activate XML file configuration, call the <xref:Microsoft.Extensions.Configuration.XmlConfigurationExtensions.AddXmlFile*> extension method on an instance of <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder>.</span></span>
+<span data-ttu-id="f83a3-2099">Aby uaktywnić konfigurację pliku XML, wywołaj <xref:Microsoft.Extensions.Configuration.XmlConfigurationExtensions.AddXmlFile*> metodę rozszerzenia w wystąpieniu <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder> .</span><span class="sxs-lookup"><span data-stu-id="f83a3-2099">To activate XML file configuration, call the <xref:Microsoft.Extensions.Configuration.XmlConfigurationExtensions.AddXmlFile*> extension method on an instance of <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder>.</span></span>
 
-<span data-ttu-id="32987-797">Przeciążania Zezwalaj na określanie:</span><span class="sxs-lookup"><span data-stu-id="32987-797">Overloads permit specifying:</span></span>
+<span data-ttu-id="f83a3-2100">Przeciążania Zezwalaj na określanie:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2100">Overloads permit specifying:</span></span>
 
-* <span data-ttu-id="32987-798">Czy plik jest opcjonalny.</span><span class="sxs-lookup"><span data-stu-id="32987-798">Whether the file is optional.</span></span>
-* <span data-ttu-id="32987-799">Czy konfiguracja zostanie ponownie załadowana w przypadku zmiany pliku.</span><span class="sxs-lookup"><span data-stu-id="32987-799">Whether the configuration is reloaded if the file changes.</span></span>
-* <span data-ttu-id="32987-800"><xref:Microsoft.Extensions.FileProviders.IFileProvider> Używane do uzyskiwania dostępu do pliku.</span><span class="sxs-lookup"><span data-stu-id="32987-800">The <xref:Microsoft.Extensions.FileProviders.IFileProvider> used to access the file.</span></span>
+* <span data-ttu-id="f83a3-2101">Czy plik jest opcjonalny.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2101">Whether the file is optional.</span></span>
+* <span data-ttu-id="f83a3-2102">Czy konfiguracja zostanie ponownie załadowana w przypadku zmiany pliku.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2102">Whether the configuration is reloaded if the file changes.</span></span>
+* <span data-ttu-id="f83a3-2103"><xref:Microsoft.Extensions.FileProviders.IFileProvider>Używane do uzyskiwania dostępu do pliku.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2103">The <xref:Microsoft.Extensions.FileProviders.IFileProvider> used to access the file.</span></span>
 
-<span data-ttu-id="32987-801">Węzeł główny pliku konfiguracji jest ignorowany, gdy są tworzone pary klucz-wartość konfiguracji.</span><span class="sxs-lookup"><span data-stu-id="32987-801">The root node of the configuration file is ignored when the configuration key-value pairs are created.</span></span> <span data-ttu-id="32987-802">Nie określaj definicji typu dokumentu (DTD) ani przestrzeni nazw w pliku.</span><span class="sxs-lookup"><span data-stu-id="32987-802">Don't specify a Document Type Definition (DTD) or namespace in the file.</span></span>
+<span data-ttu-id="f83a3-2104">Węzeł główny pliku konfiguracji jest ignorowany, gdy są tworzone pary klucz-wartość konfiguracji.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2104">The root node of the configuration file is ignored when the configuration key-value pairs are created.</span></span> <span data-ttu-id="f83a3-2105">Nie określaj definicji typu dokumentu (DTD) ani przestrzeni nazw w pliku.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2105">Don't specify a Document Type Definition (DTD) or namespace in the file.</span></span>
 
-<span data-ttu-id="32987-803">Wywołaj `ConfigureAppConfiguration` podczas kompilowania hosta, aby określić konfigurację aplikacji:</span><span class="sxs-lookup"><span data-stu-id="32987-803">Call `ConfigureAppConfiguration` when building the host to specify the app's configuration:</span></span>
+<span data-ttu-id="f83a3-2106">Wywołaj `ConfigureAppConfiguration` podczas kompilowania hosta, aby określić konfigurację aplikacji:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2106">Call `ConfigureAppConfiguration` when building the host to specify the app's configuration:</span></span>
 
 ```csharp
 .ConfigureAppConfiguration((hostingContext, config) =>
@@ -1360,7 +3103,7 @@ key=value
 })
 ```
 
-<span data-ttu-id="32987-804">Pliki konfiguracji XML mogą używać odrębnych nazw elementów dla powtarzających się sekcji:</span><span class="sxs-lookup"><span data-stu-id="32987-804">XML configuration files can use distinct element names for repeating sections:</span></span>
+<span data-ttu-id="f83a3-2107">Pliki konfiguracji XML mogą używać odrębnych nazw elementów dla powtarzających się sekcji:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2107">XML configuration files can use distinct element names for repeating sections:</span></span>
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -1376,14 +3119,14 @@ key=value
 </configuration>
 ```
 
-<span data-ttu-id="32987-805">Poprzedni plik konfiguracji ładuje następujące klucze z `value`:</span><span class="sxs-lookup"><span data-stu-id="32987-805">The previous configuration file loads the following keys with `value`:</span></span>
+<span data-ttu-id="f83a3-2108">Poprzedni plik konfiguracji ładuje następujące klucze z `value` :</span><span class="sxs-lookup"><span data-stu-id="f83a3-2108">The previous configuration file loads the following keys with `value`:</span></span>
 
-* <span data-ttu-id="32987-806">section0:key0</span><span class="sxs-lookup"><span data-stu-id="32987-806">section0:key0</span></span>
-* <span data-ttu-id="32987-807">section0: Klucz1</span><span class="sxs-lookup"><span data-stu-id="32987-807">section0:key1</span></span>
-* <span data-ttu-id="32987-808">section1:key0</span><span class="sxs-lookup"><span data-stu-id="32987-808">section1:key0</span></span>
-* <span data-ttu-id="32987-809">Section1: Klucz1</span><span class="sxs-lookup"><span data-stu-id="32987-809">section1:key1</span></span>
+* <span data-ttu-id="f83a3-2109">section0:key0</span><span class="sxs-lookup"><span data-stu-id="f83a3-2109">section0:key0</span></span>
+* <span data-ttu-id="f83a3-2110">section0: Klucz1</span><span class="sxs-lookup"><span data-stu-id="f83a3-2110">section0:key1</span></span>
+* <span data-ttu-id="f83a3-2111">section1:key0</span><span class="sxs-lookup"><span data-stu-id="f83a3-2111">section1:key0</span></span>
+* <span data-ttu-id="f83a3-2112">Section1: Klucz1</span><span class="sxs-lookup"><span data-stu-id="f83a3-2112">section1:key1</span></span>
 
-<span data-ttu-id="32987-810">Powtarzające się elementy, które używają tej samej nazwy elementu `name` , działają, jeśli atrybut jest używany do odróżnienia elementów:</span><span class="sxs-lookup"><span data-stu-id="32987-810">Repeating elements that use the same element name work if the `name` attribute is used to distinguish the elements:</span></span>
+<span data-ttu-id="f83a3-2113">Powtarzające się elementy, które używają tej samej nazwy elementu, działają, jeśli `name` atrybut jest używany do odróżnienia elementów:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2113">Repeating elements that use the same element name work if the `name` attribute is used to distinguish the elements:</span></span>
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -1399,14 +3142,14 @@ key=value
 </configuration>
 ```
 
-<span data-ttu-id="32987-811">Poprzedni plik konfiguracji ładuje następujące klucze z `value`:</span><span class="sxs-lookup"><span data-stu-id="32987-811">The previous configuration file loads the following keys with `value`:</span></span>
+<span data-ttu-id="f83a3-2114">Poprzedni plik konfiguracji ładuje następujące klucze z `value` :</span><span class="sxs-lookup"><span data-stu-id="f83a3-2114">The previous configuration file loads the following keys with `value`:</span></span>
 
-* <span data-ttu-id="32987-812">sekcja: section0: Key: Key0</span><span class="sxs-lookup"><span data-stu-id="32987-812">section:section0:key:key0</span></span>
-* <span data-ttu-id="32987-813">sekcja: section0: Key: Klucz1</span><span class="sxs-lookup"><span data-stu-id="32987-813">section:section0:key:key1</span></span>
-* <span data-ttu-id="32987-814">sekcja: Section1: Key: Key0</span><span class="sxs-lookup"><span data-stu-id="32987-814">section:section1:key:key0</span></span>
-* <span data-ttu-id="32987-815">sekcja: Section1: Key: Klucz1</span><span class="sxs-lookup"><span data-stu-id="32987-815">section:section1:key:key1</span></span>
+* <span data-ttu-id="f83a3-2115">sekcja: section0: Key: Key0</span><span class="sxs-lookup"><span data-stu-id="f83a3-2115">section:section0:key:key0</span></span>
+* <span data-ttu-id="f83a3-2116">sekcja: section0: Key: Klucz1</span><span class="sxs-lookup"><span data-stu-id="f83a3-2116">section:section0:key:key1</span></span>
+* <span data-ttu-id="f83a3-2117">sekcja: Section1: Key: Key0</span><span class="sxs-lookup"><span data-stu-id="f83a3-2117">section:section1:key:key0</span></span>
+* <span data-ttu-id="f83a3-2118">sekcja: Section1: Key: Klucz1</span><span class="sxs-lookup"><span data-stu-id="f83a3-2118">section:section1:key:key1</span></span>
 
-<span data-ttu-id="32987-816">Atrybuty mogą służyć do dostarczania wartości:</span><span class="sxs-lookup"><span data-stu-id="32987-816">Attributes can be used to supply values:</span></span>
+<span data-ttu-id="f83a3-2119">Atrybuty mogą służyć do dostarczania wartości:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2119">Attributes can be used to supply values:</span></span>
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -1418,25 +3161,25 @@ key=value
 </configuration>
 ```
 
-<span data-ttu-id="32987-817">Poprzedni plik konfiguracji ładuje następujące klucze z `value`:</span><span class="sxs-lookup"><span data-stu-id="32987-817">The previous configuration file loads the following keys with `value`:</span></span>
+<span data-ttu-id="f83a3-2120">Poprzedni plik konfiguracji ładuje następujące klucze z `value` :</span><span class="sxs-lookup"><span data-stu-id="f83a3-2120">The previous configuration file loads the following keys with `value`:</span></span>
 
-* <span data-ttu-id="32987-818">Key: Attribute</span><span class="sxs-lookup"><span data-stu-id="32987-818">key:attribute</span></span>
-* <span data-ttu-id="32987-819">sekcja: Key: Attribute</span><span class="sxs-lookup"><span data-stu-id="32987-819">section:key:attribute</span></span>
+* <span data-ttu-id="f83a3-2121">Key: Attribute</span><span class="sxs-lookup"><span data-stu-id="f83a3-2121">key:attribute</span></span>
+* <span data-ttu-id="f83a3-2122">sekcja: Key: Attribute</span><span class="sxs-lookup"><span data-stu-id="f83a3-2122">section:key:attribute</span></span>
 
-## <a name="key-per-file-configuration-provider"></a><span data-ttu-id="32987-820">Dostawca konfiguracji klucza dla plików</span><span class="sxs-lookup"><span data-stu-id="32987-820">Key-per-file Configuration Provider</span></span>
+## <a name="key-per-file-configuration-provider"></a><span data-ttu-id="f83a3-2123">Dostawca konfiguracji klucza dla plików</span><span class="sxs-lookup"><span data-stu-id="f83a3-2123">Key-per-file Configuration Provider</span></span>
 
-<span data-ttu-id="32987-821"><xref:Microsoft.Extensions.Configuration.KeyPerFile.KeyPerFileConfigurationProvider> Używa plików katalogu jako par klucz konfiguracji i wartość.</span><span class="sxs-lookup"><span data-stu-id="32987-821">The <xref:Microsoft.Extensions.Configuration.KeyPerFile.KeyPerFileConfigurationProvider> uses a directory's files as configuration key-value pairs.</span></span> <span data-ttu-id="32987-822">Kluczem jest nazwa pliku.</span><span class="sxs-lookup"><span data-stu-id="32987-822">The key is the file name.</span></span> <span data-ttu-id="32987-823">Wartość zawiera zawartość pliku.</span><span class="sxs-lookup"><span data-stu-id="32987-823">The value contains the file's contents.</span></span> <span data-ttu-id="32987-824">Dostawca konfiguracji klucza dla plików jest używany w scenariuszach hostingu platformy Docker.</span><span class="sxs-lookup"><span data-stu-id="32987-824">The Key-per-file Configuration Provider is used in Docker hosting scenarios.</span></span>
+<span data-ttu-id="f83a3-2124"><xref:Microsoft.Extensions.Configuration.KeyPerFile.KeyPerFileConfigurationProvider>Używa plików katalogu jako par klucz konfiguracji i wartość.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2124">The <xref:Microsoft.Extensions.Configuration.KeyPerFile.KeyPerFileConfigurationProvider> uses a directory's files as configuration key-value pairs.</span></span> <span data-ttu-id="f83a3-2125">Kluczem jest nazwa pliku.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2125">The key is the file name.</span></span> <span data-ttu-id="f83a3-2126">Wartość zawiera zawartość pliku.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2126">The value contains the file's contents.</span></span> <span data-ttu-id="f83a3-2127">Dostawca konfiguracji klucza dla plików jest używany w scenariuszach hostingu platformy Docker.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2127">The Key-per-file Configuration Provider is used in Docker hosting scenarios.</span></span>
 
-<span data-ttu-id="32987-825">Aby uaktywnić konfigurację klucza dla plików, wywołaj metodę <xref:Microsoft.Extensions.Configuration.KeyPerFileConfigurationBuilderExtensions.AddKeyPerFile*> rozszerzenia w wystąpieniu <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder>.</span><span class="sxs-lookup"><span data-stu-id="32987-825">To activate key-per-file configuration, call the <xref:Microsoft.Extensions.Configuration.KeyPerFileConfigurationBuilderExtensions.AddKeyPerFile*> extension method on an instance of <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder>.</span></span> <span data-ttu-id="32987-826">`directoryPath` Do plików musi być ścieżką bezwzględną.</span><span class="sxs-lookup"><span data-stu-id="32987-826">The `directoryPath` to the files must be an absolute path.</span></span>
+<span data-ttu-id="f83a3-2128">Aby uaktywnić konfigurację klucza dla plików, wywołaj <xref:Microsoft.Extensions.Configuration.KeyPerFileConfigurationBuilderExtensions.AddKeyPerFile*> metodę rozszerzenia w wystąpieniu <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder> .</span><span class="sxs-lookup"><span data-stu-id="f83a3-2128">To activate key-per-file configuration, call the <xref:Microsoft.Extensions.Configuration.KeyPerFileConfigurationBuilderExtensions.AddKeyPerFile*> extension method on an instance of <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder>.</span></span> <span data-ttu-id="f83a3-2129">`directoryPath`Do plików musi być ścieżką bezwzględną.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2129">The `directoryPath` to the files must be an absolute path.</span></span>
 
-<span data-ttu-id="32987-827">Przeciążania Zezwalaj na określanie:</span><span class="sxs-lookup"><span data-stu-id="32987-827">Overloads permit specifying:</span></span>
+<span data-ttu-id="f83a3-2130">Przeciążania Zezwalaj na określanie:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2130">Overloads permit specifying:</span></span>
 
-* <span data-ttu-id="32987-828">`Action<KeyPerFileConfigurationSource>` Delegat, który konfiguruje źródło.</span><span class="sxs-lookup"><span data-stu-id="32987-828">An `Action<KeyPerFileConfigurationSource>` delegate that configures the source.</span></span>
-* <span data-ttu-id="32987-829">Określa, czy katalog jest opcjonalny, i ścieżkę do katalogu.</span><span class="sxs-lookup"><span data-stu-id="32987-829">Whether the directory is optional and the path to the directory.</span></span>
+* <span data-ttu-id="f83a3-2131">`Action<KeyPerFileConfigurationSource>`Delegat, który konfiguruje źródło.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2131">An `Action<KeyPerFileConfigurationSource>` delegate that configures the source.</span></span>
+* <span data-ttu-id="f83a3-2132">Określa, czy katalog jest opcjonalny, i ścieżkę do katalogu.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2132">Whether the directory is optional and the path to the directory.</span></span>
 
-<span data-ttu-id="32987-830">Podwójny znak podkreślenia (`__`) jest używany jako ogranicznik klucza konfiguracji w nazwach plików.</span><span class="sxs-lookup"><span data-stu-id="32987-830">The double-underscore (`__`) is used as a configuration key delimiter in file names.</span></span> <span data-ttu-id="32987-831">Na przykład nazwa `Logging__LogLevel__System` pliku generuje klucz `Logging:LogLevel:System`konfiguracji.</span><span class="sxs-lookup"><span data-stu-id="32987-831">For example, the file name `Logging__LogLevel__System` produces the configuration key `Logging:LogLevel:System`.</span></span>
+<span data-ttu-id="f83a3-2133">Podwójny znak podkreślenia ( `__` ) jest używany jako ogranicznik klucza konfiguracji w nazwach plików.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2133">The double-underscore (`__`) is used as a configuration key delimiter in file names.</span></span> <span data-ttu-id="f83a3-2134">Na przykład nazwa pliku `Logging__LogLevel__System` generuje klucz konfiguracji `Logging:LogLevel:System` .</span><span class="sxs-lookup"><span data-stu-id="f83a3-2134">For example, the file name `Logging__LogLevel__System` produces the configuration key `Logging:LogLevel:System`.</span></span>
 
-<span data-ttu-id="32987-832">Wywołaj `ConfigureAppConfiguration` podczas kompilowania hosta, aby określić konfigurację aplikacji:</span><span class="sxs-lookup"><span data-stu-id="32987-832">Call `ConfigureAppConfiguration` when building the host to specify the app's configuration:</span></span>
+<span data-ttu-id="f83a3-2135">Wywołaj `ConfigureAppConfiguration` podczas kompilowania hosta, aby określić konfigurację aplikacji:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2135">Call `ConfigureAppConfiguration` when building the host to specify the app's configuration:</span></span>
 
 ```csharp
 .ConfigureAppConfiguration((hostingContext, config) =>
@@ -1447,17 +3190,17 @@ key=value
 })
 ```
 
-## <a name="memory-configuration-provider"></a><span data-ttu-id="32987-833">Dostawca konfiguracji pamięci</span><span class="sxs-lookup"><span data-stu-id="32987-833">Memory Configuration Provider</span></span>
+## <a name="memory-configuration-provider"></a><span data-ttu-id="f83a3-2136">Dostawca konfiguracji pamięci</span><span class="sxs-lookup"><span data-stu-id="f83a3-2136">Memory Configuration Provider</span></span>
 
-<span data-ttu-id="32987-834"><xref:Microsoft.Extensions.Configuration.Memory.MemoryConfigurationProvider> Używa kolekcji w pamięci jako par klucz konfiguracji-wartość.</span><span class="sxs-lookup"><span data-stu-id="32987-834">The <xref:Microsoft.Extensions.Configuration.Memory.MemoryConfigurationProvider> uses an in-memory collection as configuration key-value pairs.</span></span>
+<span data-ttu-id="f83a3-2137"><xref:Microsoft.Extensions.Configuration.Memory.MemoryConfigurationProvider>Używa kolekcji w pamięci jako par klucz konfiguracji-wartość.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2137">The <xref:Microsoft.Extensions.Configuration.Memory.MemoryConfigurationProvider> uses an in-memory collection as configuration key-value pairs.</span></span>
 
-<span data-ttu-id="32987-835">Aby uaktywnić konfigurację kolekcji w pamięci, wywołaj <xref:Microsoft.Extensions.Configuration.MemoryConfigurationBuilderExtensions.AddInMemoryCollection*> metodę rozszerzenia w wystąpieniu <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder>.</span><span class="sxs-lookup"><span data-stu-id="32987-835">To activate in-memory collection configuration, call the <xref:Microsoft.Extensions.Configuration.MemoryConfigurationBuilderExtensions.AddInMemoryCollection*> extension method on an instance of <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder>.</span></span>
+<span data-ttu-id="f83a3-2138">Aby uaktywnić konfigurację kolekcji w pamięci, wywołaj <xref:Microsoft.Extensions.Configuration.MemoryConfigurationBuilderExtensions.AddInMemoryCollection*> metodę rozszerzenia w wystąpieniu <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder> .</span><span class="sxs-lookup"><span data-stu-id="f83a3-2138">To activate in-memory collection configuration, call the <xref:Microsoft.Extensions.Configuration.MemoryConfigurationBuilderExtensions.AddInMemoryCollection*> extension method on an instance of <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder>.</span></span>
 
-<span data-ttu-id="32987-836">Dostawcę konfiguracji można zainicjować przy użyciu `IEnumerable<KeyValuePair<String,String>>`.</span><span class="sxs-lookup"><span data-stu-id="32987-836">The configuration provider can be initialized with an `IEnumerable<KeyValuePair<String,String>>`.</span></span>
+<span data-ttu-id="f83a3-2139">Dostawcę konfiguracji można zainicjować przy użyciu `IEnumerable<KeyValuePair<String,String>>` .</span><span class="sxs-lookup"><span data-stu-id="f83a3-2139">The configuration provider can be initialized with an `IEnumerable<KeyValuePair<String,String>>`.</span></span>
 
-<span data-ttu-id="32987-837">Wywołaj `ConfigureAppConfiguration` podczas kompilowania hosta, aby określić konfigurację aplikacji.</span><span class="sxs-lookup"><span data-stu-id="32987-837">Call `ConfigureAppConfiguration` when building the host to specify the app's configuration.</span></span>
+<span data-ttu-id="f83a3-2140">Wywołaj `ConfigureAppConfiguration` podczas kompilowania hosta, aby określić konfigurację aplikacji.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2140">Call `ConfigureAppConfiguration` when building the host to specify the app's configuration.</span></span>
 
-<span data-ttu-id="32987-838">W poniższym przykładzie tworzony jest słownik konfiguracji:</span><span class="sxs-lookup"><span data-stu-id="32987-838">In the following example, a configuration dictionary is created:</span></span>
+<span data-ttu-id="f83a3-2141">W poniższym przykładzie tworzony jest słownik konfiguracji:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2141">In the following example, a configuration dictionary is created:</span></span>
 
 ```csharp
 public static readonly Dictionary<string, string> _dict = 
@@ -1468,7 +3211,7 @@ public static readonly Dictionary<string, string> _dict =
     };
 ```
 
-<span data-ttu-id="32987-839">Słownik jest używany z wywołaniem `AddInMemoryCollection` do zapewnienia konfiguracji:</span><span class="sxs-lookup"><span data-stu-id="32987-839">The dictionary is used with a call to `AddInMemoryCollection` to provide the configuration:</span></span>
+<span data-ttu-id="f83a3-2142">Słownik jest używany z wywołaniem do `AddInMemoryCollection` zapewnienia konfiguracji:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2142">The dictionary is used with a call to `AddInMemoryCollection` to provide the configuration:</span></span>
 
 ```csharp
 .ConfigureAppConfiguration((hostingContext, config) =>
@@ -1477,15 +3220,15 @@ public static readonly Dictionary<string, string> _dict =
 })
 ```
 
-## <a name="getvalue"></a><span data-ttu-id="32987-840">GetValue</span><span class="sxs-lookup"><span data-stu-id="32987-840">GetValue</span></span>
+## <a name="getvalue"></a><span data-ttu-id="f83a3-2143">GetValue</span><span class="sxs-lookup"><span data-stu-id="f83a3-2143">GetValue</span></span>
 
-<span data-ttu-id="32987-841">[`ConfigurationBinder.GetValue<T>`](xref:Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue*)wyodrębnia pojedynczą wartość z konfiguracji z określonym kluczem i konwertuje ją na określony typ niekolekcje.</span><span class="sxs-lookup"><span data-stu-id="32987-841">[`ConfigurationBinder.GetValue<T>`](xref:Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue*) extracts a single value from configuration with a specified key and converts it to the specified noncollection type.</span></span> <span data-ttu-id="32987-842">Przeciążenie akceptuje wartość domyślną.</span><span class="sxs-lookup"><span data-stu-id="32987-842">An overload accepts a default value.</span></span>
+<span data-ttu-id="f83a3-2144">[`ConfigurationBinder.GetValue<T>`](xref:Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue*)wyodrębnia pojedynczą wartość z konfiguracji z określonym kluczem i konwertuje ją na określony typ niekolekcje.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2144">[`ConfigurationBinder.GetValue<T>`](xref:Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue*) extracts a single value from configuration with a specified key and converts it to the specified noncollection type.</span></span> <span data-ttu-id="f83a3-2145">Przeciążenie akceptuje wartość domyślną.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2145">An overload accepts a default value.</span></span>
 
-<span data-ttu-id="32987-843">Poniższy przykład:</span><span class="sxs-lookup"><span data-stu-id="32987-843">The following example:</span></span>
+<span data-ttu-id="f83a3-2146">Poniższy przykład:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2146">The following example:</span></span>
 
-* <span data-ttu-id="32987-844">Wyodrębnia wartość ciągu z konfiguracji przy użyciu klucza `NumberKey`.</span><span class="sxs-lookup"><span data-stu-id="32987-844">Extracts the string value from configuration with the key `NumberKey`.</span></span> <span data-ttu-id="32987-845">Jeśli `NumberKey` nie znaleziono w kluczach konfiguracji, `99` zostanie użyta wartość domyślna.</span><span class="sxs-lookup"><span data-stu-id="32987-845">If `NumberKey` isn't found in the configuration keys, the default value of `99` is used.</span></span>
-* <span data-ttu-id="32987-846">Typ wartości `int`.</span><span class="sxs-lookup"><span data-stu-id="32987-846">Types the value as an `int`.</span></span>
-* <span data-ttu-id="32987-847">Przechowuje wartość we `NumberConfig` właściwości do użycia na stronie.</span><span class="sxs-lookup"><span data-stu-id="32987-847">Stores the value in the `NumberConfig` property for use by the page.</span></span>
+* <span data-ttu-id="f83a3-2147">Wyodrębnia wartość ciągu z konfiguracji przy użyciu klucza `NumberKey` .</span><span class="sxs-lookup"><span data-stu-id="f83a3-2147">Extracts the string value from configuration with the key `NumberKey`.</span></span> <span data-ttu-id="f83a3-2148">Jeśli `NumberKey` nie znaleziono w kluczach konfiguracji, `99` zostanie użyta wartość domyślna.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2148">If `NumberKey` isn't found in the configuration keys, the default value of `99` is used.</span></span>
+* <span data-ttu-id="f83a3-2149">Typ wartości `int` .</span><span class="sxs-lookup"><span data-stu-id="f83a3-2149">Types the value as an `int`.</span></span>
+* <span data-ttu-id="f83a3-2150">Przechowuje wartość we `NumberConfig` właściwości do użycia na stronie.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2150">Stores the value in the `NumberConfig` property for use by the page.</span></span>
 
 ```csharp
 public class IndexModel : PageModel
@@ -1504,9 +3247,9 @@ public class IndexModel : PageModel
 }
 ```
 
-## <a name="getsection-getchildren-and-exists"></a><span data-ttu-id="32987-848">GetSection, GetChildren i EXISTS</span><span class="sxs-lookup"><span data-stu-id="32987-848">GetSection, GetChildren, and Exists</span></span>
+## <a name="getsection-getchildren-and-exists"></a><span data-ttu-id="f83a3-2151">GetSection, GetChildren i EXISTS</span><span class="sxs-lookup"><span data-stu-id="f83a3-2151">GetSection, GetChildren, and Exists</span></span>
 
-<span data-ttu-id="32987-849">W poniższych przykładach należy wziąć pod uwagę następujący plik JSON.</span><span class="sxs-lookup"><span data-stu-id="32987-849">For the examples that follow, consider the following JSON file.</span></span> <span data-ttu-id="32987-850">Cztery klucze są dostępne w dwóch sekcjach, z których jedna zawiera parę podsekcji:</span><span class="sxs-lookup"><span data-stu-id="32987-850">Four keys are found across two sections, one of which includes a pair of subsections:</span></span>
+<span data-ttu-id="f83a3-2152">W poniższych przykładach należy wziąć pod uwagę następujący plik JSON.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2152">For the examples that follow, consider the following JSON file.</span></span> <span data-ttu-id="f83a3-2153">Cztery klucze są dostępne w dwóch sekcjach, z których jedna zawiera parę podsekcji:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2153">Four keys are found across two sections, one of which includes a pair of subsections:</span></span>
 
 ```json
 {
@@ -1531,42 +3274,42 @@ public class IndexModel : PageModel
 }
 ```
 
-<span data-ttu-id="32987-851">Gdy plik jest odczytywany do konfiguracji, następujące unikatowe klucze hierarchiczne są tworzone w celu przechowywania wartości konfiguracyjnych:</span><span class="sxs-lookup"><span data-stu-id="32987-851">When the file is read into configuration, the following unique hierarchical keys are created to hold the configuration values:</span></span>
+<span data-ttu-id="f83a3-2154">Gdy plik jest odczytywany do konfiguracji, następujące unikatowe klucze hierarchiczne są tworzone w celu przechowywania wartości konfiguracyjnych:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2154">When the file is read into configuration, the following unique hierarchical keys are created to hold the configuration values:</span></span>
 
-* <span data-ttu-id="32987-852">section0:key0</span><span class="sxs-lookup"><span data-stu-id="32987-852">section0:key0</span></span>
-* <span data-ttu-id="32987-853">section0: Klucz1</span><span class="sxs-lookup"><span data-stu-id="32987-853">section0:key1</span></span>
-* <span data-ttu-id="32987-854">section1:key0</span><span class="sxs-lookup"><span data-stu-id="32987-854">section1:key0</span></span>
-* <span data-ttu-id="32987-855">Section1: Klucz1</span><span class="sxs-lookup"><span data-stu-id="32987-855">section1:key1</span></span>
-* <span data-ttu-id="32987-856">section2:subsection0:key0</span><span class="sxs-lookup"><span data-stu-id="32987-856">section2:subsection0:key0</span></span>
-* <span data-ttu-id="32987-857">section2: subsection0: Klucz1</span><span class="sxs-lookup"><span data-stu-id="32987-857">section2:subsection0:key1</span></span>
-* <span data-ttu-id="32987-858">section2:subsection1:key0</span><span class="sxs-lookup"><span data-stu-id="32987-858">section2:subsection1:key0</span></span>
-* <span data-ttu-id="32987-859">section2: subsection1: Klucz1</span><span class="sxs-lookup"><span data-stu-id="32987-859">section2:subsection1:key1</span></span>
+* <span data-ttu-id="f83a3-2155">section0:key0</span><span class="sxs-lookup"><span data-stu-id="f83a3-2155">section0:key0</span></span>
+* <span data-ttu-id="f83a3-2156">section0: Klucz1</span><span class="sxs-lookup"><span data-stu-id="f83a3-2156">section0:key1</span></span>
+* <span data-ttu-id="f83a3-2157">section1:key0</span><span class="sxs-lookup"><span data-stu-id="f83a3-2157">section1:key0</span></span>
+* <span data-ttu-id="f83a3-2158">Section1: Klucz1</span><span class="sxs-lookup"><span data-stu-id="f83a3-2158">section1:key1</span></span>
+* <span data-ttu-id="f83a3-2159">section2:subsection0:key0</span><span class="sxs-lookup"><span data-stu-id="f83a3-2159">section2:subsection0:key0</span></span>
+* <span data-ttu-id="f83a3-2160">section2: subsection0: Klucz1</span><span class="sxs-lookup"><span data-stu-id="f83a3-2160">section2:subsection0:key1</span></span>
+* <span data-ttu-id="f83a3-2161">section2:subsection1:key0</span><span class="sxs-lookup"><span data-stu-id="f83a3-2161">section2:subsection1:key0</span></span>
+* <span data-ttu-id="f83a3-2162">section2: subsection1: Klucz1</span><span class="sxs-lookup"><span data-stu-id="f83a3-2162">section2:subsection1:key1</span></span>
 
-### <a name="getsection"></a><span data-ttu-id="32987-860">GetSection</span><span class="sxs-lookup"><span data-stu-id="32987-860">GetSection</span></span>
+### <a name="getsection"></a><span data-ttu-id="f83a3-2163">GetSection</span><span class="sxs-lookup"><span data-stu-id="f83a3-2163">GetSection</span></span>
 
-<span data-ttu-id="32987-861">[IConfiguration. GetSection](xref:Microsoft.Extensions.Configuration.IConfiguration.GetSection*) wyodrębnia podsekcję konfiguracji z określonym kluczem podsekcji.</span><span class="sxs-lookup"><span data-stu-id="32987-861">[IConfiguration.GetSection](xref:Microsoft.Extensions.Configuration.IConfiguration.GetSection*) extracts a configuration subsection with the specified subsection key.</span></span>
+<span data-ttu-id="f83a3-2164">[IConfiguration. GetSection](xref:Microsoft.Extensions.Configuration.IConfiguration.GetSection*) wyodrębnia podsekcję konfiguracji z określonym kluczem podsekcji.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2164">[IConfiguration.GetSection](xref:Microsoft.Extensions.Configuration.IConfiguration.GetSection*) extracts a configuration subsection with the specified subsection key.</span></span>
 
-<span data-ttu-id="32987-862">Aby zwrócić element <xref:Microsoft.Extensions.Configuration.IConfigurationSection> zawierający tylko pary klucz-wartość w `section1`, wywołaniu `GetSection` i podać nazwę sekcji:</span><span class="sxs-lookup"><span data-stu-id="32987-862">To return an <xref:Microsoft.Extensions.Configuration.IConfigurationSection> containing only the key-value pairs in `section1`, call `GetSection` and supply the section name:</span></span>
+<span data-ttu-id="f83a3-2165">Aby zwrócić element <xref:Microsoft.Extensions.Configuration.IConfigurationSection> zawierający tylko pary klucz-wartość w `section1` , wywołaniu `GetSection` i podać nazwę sekcji:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2165">To return an <xref:Microsoft.Extensions.Configuration.IConfigurationSection> containing only the key-value pairs in `section1`, call `GetSection` and supply the section name:</span></span>
 
 ```csharp
 var configSection = _config.GetSection("section1");
 ```
 
-<span data-ttu-id="32987-863">`configSection` Nie ma wartości, tylko klucza i ścieżki.</span><span class="sxs-lookup"><span data-stu-id="32987-863">The `configSection` doesn't have a value, only a key and a path.</span></span>
+<span data-ttu-id="f83a3-2166">`configSection`Nie ma wartości, tylko klucza i ścieżki.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2166">The `configSection` doesn't have a value, only a key and a path.</span></span>
 
-<span data-ttu-id="32987-864">Podobnie Aby uzyskać wartości kluczy w `section2:subsection0`, wywołaj `GetSection` i podaj ścieżkę do sekcji:</span><span class="sxs-lookup"><span data-stu-id="32987-864">Similarly, to obtain the values for keys in `section2:subsection0`, call `GetSection` and supply the section path:</span></span>
+<span data-ttu-id="f83a3-2167">Podobnie Aby uzyskać wartości kluczy w `section2:subsection0` , wywołaj `GetSection` i podaj ścieżkę do sekcji:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2167">Similarly, to obtain the values for keys in `section2:subsection0`, call `GetSection` and supply the section path:</span></span>
 
 ```csharp
 var configSection = _config.GetSection("section2:subsection0");
 ```
 
-<span data-ttu-id="32987-865">`GetSection`nigdy nie `null`zwraca.</span><span class="sxs-lookup"><span data-stu-id="32987-865">`GetSection` never returns `null`.</span></span> <span data-ttu-id="32987-866">Jeśli nie znaleziono pasującej sekcji, zwracany jest `IConfigurationSection` pusty.</span><span class="sxs-lookup"><span data-stu-id="32987-866">If a matching section isn't found, an empty `IConfigurationSection` is returned.</span></span>
+<span data-ttu-id="f83a3-2168">`GetSection`nigdy nie zwraca `null` .</span><span class="sxs-lookup"><span data-stu-id="f83a3-2168">`GetSection` never returns `null`.</span></span> <span data-ttu-id="f83a3-2169">Jeśli nie znaleziono pasującej sekcji, `IConfigurationSection` zwracany jest pusty.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2169">If a matching section isn't found, an empty `IConfigurationSection` is returned.</span></span>
 
-<span data-ttu-id="32987-867">Gdy `GetSection` zwraca pasującą sekcję, <xref:Microsoft.Extensions.Configuration.IConfigurationSection.Value> nie jest wypełnione.</span><span class="sxs-lookup"><span data-stu-id="32987-867">When `GetSection` returns a matching section, <xref:Microsoft.Extensions.Configuration.IConfigurationSection.Value> isn't populated.</span></span> <span data-ttu-id="32987-868">A <xref:Microsoft.Extensions.Configuration.IConfigurationSection.Key> i <xref:Microsoft.Extensions.Configuration.IConfigurationSection.Path> są zwracane, gdy istnieje sekcja.</span><span class="sxs-lookup"><span data-stu-id="32987-868">A <xref:Microsoft.Extensions.Configuration.IConfigurationSection.Key> and <xref:Microsoft.Extensions.Configuration.IConfigurationSection.Path> are returned when the section exists.</span></span>
+<span data-ttu-id="f83a3-2170">Gdy `GetSection` zwraca pasującą sekcję, <xref:Microsoft.Extensions.Configuration.IConfigurationSection.Value> nie jest wypełnione.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2170">When `GetSection` returns a matching section, <xref:Microsoft.Extensions.Configuration.IConfigurationSection.Value> isn't populated.</span></span> <span data-ttu-id="f83a3-2171">A <xref:Microsoft.Extensions.Configuration.IConfigurationSection.Key> i <xref:Microsoft.Extensions.Configuration.IConfigurationSection.Path> są zwracane, gdy istnieje sekcja.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2171">A <xref:Microsoft.Extensions.Configuration.IConfigurationSection.Key> and <xref:Microsoft.Extensions.Configuration.IConfigurationSection.Path> are returned when the section exists.</span></span>
 
-### <a name="getchildren"></a><span data-ttu-id="32987-869">GetChildren —</span><span class="sxs-lookup"><span data-stu-id="32987-869">GetChildren</span></span>
+### <a name="getchildren"></a><span data-ttu-id="f83a3-2172">GetChildren —</span><span class="sxs-lookup"><span data-stu-id="f83a3-2172">GetChildren</span></span>
 
-<span data-ttu-id="32987-870">Wywołanie [iConfiguration. GetChildren](xref:Microsoft.Extensions.Configuration.IConfiguration.GetChildren*) w `section2` programie uzyskuje element `IEnumerable<IConfigurationSection>` obejmujący:</span><span class="sxs-lookup"><span data-stu-id="32987-870">A call to [IConfiguration.GetChildren](xref:Microsoft.Extensions.Configuration.IConfiguration.GetChildren*) on `section2` obtains an `IEnumerable<IConfigurationSection>` that includes:</span></span>
+<span data-ttu-id="f83a3-2173">Wywołanie [iConfiguration. GetChildren](xref:Microsoft.Extensions.Configuration.IConfiguration.GetChildren*) w programie `section2` uzyskuje element `IEnumerable<IConfigurationSection>` obejmujący:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2173">A call to [IConfiguration.GetChildren](xref:Microsoft.Extensions.Configuration.IConfiguration.GetChildren*) on `section2` obtains an `IEnumerable<IConfigurationSection>` that includes:</span></span>
 
 * `subsection0`
 * `subsection1`
@@ -1577,29 +3320,29 @@ var configSection = _config.GetSection("section2");
 var children = configSection.GetChildren();
 ```
 
-### <a name="exists"></a><span data-ttu-id="32987-871">Exists</span><span class="sxs-lookup"><span data-stu-id="32987-871">Exists</span></span>
+### <a name="exists"></a><span data-ttu-id="f83a3-2174">Exists</span><span class="sxs-lookup"><span data-stu-id="f83a3-2174">Exists</span></span>
 
-<span data-ttu-id="32987-872">Użyj [ConfigurationExtensions. istnieje](xref:Microsoft.Extensions.Configuration.ConfigurationExtensions.Exists*) , aby określić, czy istnieje sekcja konfiguracji:</span><span class="sxs-lookup"><span data-stu-id="32987-872">Use [ConfigurationExtensions.Exists](xref:Microsoft.Extensions.Configuration.ConfigurationExtensions.Exists*) to determine if a configuration section exists:</span></span>
+<span data-ttu-id="f83a3-2175">Użyj [ConfigurationExtensions. istnieje](xref:Microsoft.Extensions.Configuration.ConfigurationExtensions.Exists*) , aby określić, czy istnieje sekcja konfiguracji:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2175">Use [ConfigurationExtensions.Exists](xref:Microsoft.Extensions.Configuration.ConfigurationExtensions.Exists*) to determine if a configuration section exists:</span></span>
 
 ```csharp
 var sectionExists = _config.GetSection("section2:subsection2").Exists();
 ```
 
-<span data-ttu-id="32987-873">Dane przykładowe są `sectionExists` `false` spowodowane tym, że w danych konfiguracji `section2:subsection2` nie ma sekcji.</span><span class="sxs-lookup"><span data-stu-id="32987-873">Given the example data, `sectionExists` is `false` because there isn't a `section2:subsection2` section in the configuration data.</span></span>
+<span data-ttu-id="f83a3-2176">Dane przykładowe są spowodowane tym, że `sectionExists` `false` `section2:subsection2` w danych konfiguracji nie ma sekcji.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2176">Given the example data, `sectionExists` is `false` because there isn't a `section2:subsection2` section in the configuration data.</span></span>
 
-## <a name="bind-to-an-object-graph"></a><span data-ttu-id="32987-874">Powiąż z grafem obiektów</span><span class="sxs-lookup"><span data-stu-id="32987-874">Bind to an object graph</span></span>
+## <a name="bind-to-an-object-graph"></a><span data-ttu-id="f83a3-2177">Powiąż z grafem obiektów</span><span class="sxs-lookup"><span data-stu-id="f83a3-2177">Bind to an object graph</span></span>
 
-<span data-ttu-id="32987-875"><xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Bind*>jest w stanie powiązać cały Graf obiektów POCO.</span><span class="sxs-lookup"><span data-stu-id="32987-875"><xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Bind*> is capable of binding an entire POCO object graph.</span></span> <span data-ttu-id="32987-876">Podobnie jak w przypadku powiązania prostego obiektu, powiązane są tylko publiczne właściwości odczytu i zapisu.</span><span class="sxs-lookup"><span data-stu-id="32987-876">As with binding a simple object, only public read/write properties are bound.</span></span>
+<span data-ttu-id="f83a3-2178"><xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Bind*>jest w stanie powiązać cały Graf obiektów POCO.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2178"><xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Bind*> is capable of binding an entire POCO object graph.</span></span> <span data-ttu-id="f83a3-2179">Podobnie jak w przypadku powiązania prostego obiektu, powiązane są tylko publiczne właściwości odczytu i zapisu.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2179">As with binding a simple object, only public read/write properties are bound.</span></span>
 
-<span data-ttu-id="32987-877">Przykład zawiera `TvShow` model, którego obiekt zawiera `Metadata` obiekty i `Actors` klasy (*modele/TvShow. cs*):</span><span class="sxs-lookup"><span data-stu-id="32987-877">The sample contains a `TvShow` model whose object graph includes `Metadata` and `Actors` classes (*Models/TvShow.cs*):</span></span>
+<span data-ttu-id="f83a3-2180">Przykład zawiera `TvShow` model, którego obiekt zawiera obiekty `Metadata` i `Actors` klasy (*modele/TvShow. cs*):</span><span class="sxs-lookup"><span data-stu-id="f83a3-2180">The sample contains a `TvShow` model whose object graph includes `Metadata` and `Actors` classes (*Models/TvShow.cs*):</span></span>
 
 [!code-csharp[](index/samples/2.x/ConfigurationSample/Models/TvShow.cs?name=snippet1)]
 
-<span data-ttu-id="32987-878">Przykładowa aplikacja zawiera plik *tvshow. XML* zawierający dane konfiguracji:</span><span class="sxs-lookup"><span data-stu-id="32987-878">The sample app has a *tvshow.xml* file containing the configuration data:</span></span>
+<span data-ttu-id="f83a3-2181">Przykładowa aplikacja zawiera plik *tvshow. XML* zawierający dane konfiguracji:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2181">The sample app has a *tvshow.xml* file containing the configuration data:</span></span>
 
 [!code-xml[](index/samples/2.x/ConfigurationSample/tvshow.xml)]
 
-<span data-ttu-id="32987-879">Konfiguracja jest powiązana z wykresem całego `TvShow` obiektu za `Bind` pomocą metody.</span><span class="sxs-lookup"><span data-stu-id="32987-879">Configuration is bound to the entire `TvShow` object graph with the `Bind` method.</span></span> <span data-ttu-id="32987-880">Powiązane wystąpienie jest przypisane do właściwości w celu renderowania:</span><span class="sxs-lookup"><span data-stu-id="32987-880">The bound instance is assigned to a property for rendering:</span></span>
+<span data-ttu-id="f83a3-2182">Konfiguracja jest powiązana z `TvShow` wykresem całego obiektu za pomocą `Bind` metody.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2182">Configuration is bound to the entire `TvShow` object graph with the `Bind` method.</span></span> <span data-ttu-id="f83a3-2183">Powiązane wystąpienie jest przypisane do właściwości w celu renderowania:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2183">The bound instance is assigned to a property for rendering:</span></span>
 
 ```csharp
 var tvShow = new TvShow();
@@ -1607,67 +3350,264 @@ _config.GetSection("tvshow").Bind(tvShow);
 TvShow = tvShow;
 ```
 
-<span data-ttu-id="32987-881">[`ConfigurationBinder.Get<T>`](xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Get*)tworzy powiązania i zwraca określony typ.</span><span class="sxs-lookup"><span data-stu-id="32987-881">[`ConfigurationBinder.Get<T>`](xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Get*) binds and returns the specified type.</span></span> <span data-ttu-id="32987-882">`Get<T>`jest wygodniejszy niż używanie `Bind`.</span><span class="sxs-lookup"><span data-stu-id="32987-882">`Get<T>` is more convenient than using `Bind`.</span></span> <span data-ttu-id="32987-883">Poniższy kod pokazuje, jak używać `Get<T>` w poprzednim przykładzie:</span><span class="sxs-lookup"><span data-stu-id="32987-883">The following code shows how to use `Get<T>` with the preceding example:</span></span>
+<span data-ttu-id="f83a3-2184">[`ConfigurationBinder.Get<T>`](xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Get*)tworzy powiązania i zwraca określony typ.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2184">[`ConfigurationBinder.Get<T>`](xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Get*) binds and returns the specified type.</span></span> <span data-ttu-id="f83a3-2185">`Get<T>`jest wygodniejszy niż używanie `Bind` .</span><span class="sxs-lookup"><span data-stu-id="f83a3-2185">`Get<T>` is more convenient than using `Bind`.</span></span> <span data-ttu-id="f83a3-2186">Poniższy kod pokazuje, jak używać `Get<T>` w poprzednim przykładzie:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2186">The following code shows how to use `Get<T>` with the preceding example:</span></span>
 
 [!code-csharp[](index/samples/2.x/ConfigurationSample/Pages/Index.cshtml.cs?name=snippet_tvshow)]
 
-## <a name="bind-an-array-to-a-class"></a><span data-ttu-id="32987-884">Powiąż tablicę z klasą</span><span class="sxs-lookup"><span data-stu-id="32987-884">Bind an array to a class</span></span>
+## <a name="bind-an-array-to-a-class"></a><span data-ttu-id="f83a3-2187">Powiąż tablicę z klasą</span><span class="sxs-lookup"><span data-stu-id="f83a3-2187">Bind an array to a class</span></span>
 
-<span data-ttu-id="32987-885">*Przykładowa aplikacja pokazuje Koncepcje opisane w tej sekcji.*</span><span class="sxs-lookup"><span data-stu-id="32987-885">*The sample app demonstrates the concepts explained in this section.*</span></span>
+<span data-ttu-id="f83a3-2188">*Przykładowa aplikacja pokazuje Koncepcje opisane w tej sekcji.*</span><span class="sxs-lookup"><span data-stu-id="f83a3-2188">*The sample app demonstrates the concepts explained in this section.*</span></span>
 
-<span data-ttu-id="32987-886"><xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Bind*> Obsługuje tablice powiązań z obiektami przy użyciu indeksów tablicowych w kluczach konfiguracji.</span><span class="sxs-lookup"><span data-stu-id="32987-886">The <xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Bind*> supports binding arrays to objects using array indices in configuration keys.</span></span> <span data-ttu-id="32987-887">Każdy format tablicy, który ujawnia segment klucza numerycznego`:0:`( `:1:`, &hellip; `:{n}:`,) jest zdolny do powiązania tablicy z tablicą klas poco.</span><span class="sxs-lookup"><span data-stu-id="32987-887">Any array format that exposes a numeric key segment (`:0:`, `:1:`, &hellip; `:{n}:`) is capable of array binding to a POCO class array.</span></span>
+<span data-ttu-id="f83a3-2189"><xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Bind*>Obsługuje tablice powiązań z obiektami przy użyciu indeksów tablicowych w kluczach konfiguracji.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2189">The <xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Bind*> supports binding arrays to objects using array indices in configuration keys.</span></span> <span data-ttu-id="f83a3-2190">Każdy format tablicy, który ujawnia segment klucza numerycznego ( `:0:` , `:1:` , &hellip; `:{n}:` ) jest zdolny do powiązania tablicy z tablicą klas poco.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2190">Any array format that exposes a numeric key segment (`:0:`, `:1:`, &hellip; `:{n}:`) is capable of array binding to a POCO class array.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="32987-888">Powiązanie jest dostarczane według Konwencji.</span><span class="sxs-lookup"><span data-stu-id="32987-888">Binding is provided by convention.</span></span> <span data-ttu-id="32987-889">Niestandardowi dostawcy konfiguracji nie muszą implementować powiązania tablicy.</span><span class="sxs-lookup"><span data-stu-id="32987-889">Custom configuration providers aren't required to implement array binding.</span></span>
+> <span data-ttu-id="f83a3-2191">Powiązanie jest dostarczane według Konwencji.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2191">Binding is provided by convention.</span></span> <span data-ttu-id="f83a3-2192">Niestandardowi dostawcy konfiguracji nie muszą implementować powiązania tablicy.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2192">Custom configuration providers aren't required to implement array binding.</span></span>
 
-<span data-ttu-id="32987-890">**Przetwarzanie tablicy w pamięci**</span><span class="sxs-lookup"><span data-stu-id="32987-890">**In-memory array processing**</span></span>
+<span data-ttu-id="f83a3-2193">**Przetwarzanie tablicy w pamięci**</span><span class="sxs-lookup"><span data-stu-id="f83a3-2193">**In-memory array processing**</span></span>
 
-<span data-ttu-id="32987-891">Należy wziąć pod uwagę klucze konfiguracji i wartości podane w poniższej tabeli.</span><span class="sxs-lookup"><span data-stu-id="32987-891">Consider the configuration keys and values shown in the following table.</span></span>
+<span data-ttu-id="f83a3-2194">Należy wziąć pod uwagę klucze konfiguracji i wartości podane w poniższej tabeli.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2194">Consider the configuration keys and values shown in the following table.</span></span>
 
-| <span data-ttu-id="32987-892">Klucz</span><span class="sxs-lookup"><span data-stu-id="32987-892">Key</span></span>             | <span data-ttu-id="32987-893">Wartość</span><span class="sxs-lookup"><span data-stu-id="32987-893">Value</span></span>  |
-| :-------------: | :----: |
-| <span data-ttu-id="32987-894">Tablica: wpisy: 0</span><span class="sxs-lookup"><span data-stu-id="32987-894">array:entries:0</span></span> | <span data-ttu-id="32987-895">value0</span><span class="sxs-lookup"><span data-stu-id="32987-895">value0</span></span> |
-| <span data-ttu-id="32987-896">Tablica: wpisy: 1</span><span class="sxs-lookup"><span data-stu-id="32987-896">array:entries:1</span></span> | <span data-ttu-id="32987-897">sekwencj</span><span class="sxs-lookup"><span data-stu-id="32987-897">value1</span></span> |
-| <span data-ttu-id="32987-898">Tablica: wpisy: 2</span><span class="sxs-lookup"><span data-stu-id="32987-898">array:entries:2</span></span> | <span data-ttu-id="32987-899">wartość2</span><span class="sxs-lookup"><span data-stu-id="32987-899">value2</span></span> |
-| <span data-ttu-id="32987-900">Tablica: wpisy: 4</span><span class="sxs-lookup"><span data-stu-id="32987-900">array:entries:4</span></span> | <span data-ttu-id="32987-901">value4</span><span class="sxs-lookup"><span data-stu-id="32987-901">value4</span></span> |
-| <span data-ttu-id="32987-902">Tablica: wpisy: 5</span><span class="sxs-lookup"><span data-stu-id="32987-902">array:entries:5</span></span> | <span data-ttu-id="32987-903">value5</span><span class="sxs-lookup"><span data-stu-id="32987-903">value5</span></span> |
+| <span data-ttu-id="f83a3-2195">Klucz</span><span class="sxs-lookup"><span data-stu-id="f83a3-2195">Key</span></span>             | <span data-ttu-id="f83a3-2196">Wartość</span><span class="sxs-lookup"><span data-stu-id="f83a3-2196">Value</span></span>  |
+| :---
+<span data-ttu-id="f83a3-2197">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2197">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2198">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2198">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2199">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2199">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2200">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2200">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2201">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2201">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2202">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2202">'SignalR' uid:</span></span> 
 
-<span data-ttu-id="32987-904">Te klucze i wartości są ładowane w przykładowej aplikacji przy użyciu dostawcy konfiguracji pamięci:</span><span class="sxs-lookup"><span data-stu-id="32987-904">These keys and values are loaded in the sample app using the Memory Configuration Provider:</span></span>
+-
+<span data-ttu-id="f83a3-2203">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2203">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2204">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2204">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2205">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2205">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2206">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2206">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2207">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2207">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2208">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2208">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2209">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2209">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2210">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2210">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2211">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2211">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2212">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2212">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2213">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2213">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2214">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2214">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2215">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2215">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2216">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2216">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2217">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2217">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2218">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2218">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2219">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2219">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2220">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2220">'SignalR' uid:</span></span> 
+
+<span data-ttu-id="f83a3-2221">-------: | :----: | | Tablica: wpisy: 0 | value0 | | Tablica: wpisy: 1 | wartość1 | | Tablica: wpisy: 2 | wartość2 | | Tablica: wpisy: 4 | value4 | | Tablica: wpisy: 5 | value5 |</span><span class="sxs-lookup"><span data-stu-id="f83a3-2221">-------: | :----: | | array:entries:0 | value0 | | array:entries:1 | value1 | | array:entries:2 | value2 | | array:entries:4 | value4 | | array:entries:5 | value5 |</span></span>
+
+<span data-ttu-id="f83a3-2222">Te klucze i wartości są ładowane w przykładowej aplikacji przy użyciu dostawcy konfiguracji pamięci:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2222">These keys and values are loaded in the sample app using the Memory Configuration Provider:</span></span>
 
 [!code-csharp[](index/samples/2.x/ConfigurationSample/Program.cs?name=snippet_Program&highlight=5-12,22)]
 
-<span data-ttu-id="32987-905">Tablica pomija wartość dla indeksu &num;3.</span><span class="sxs-lookup"><span data-stu-id="32987-905">The array skips a value for index &num;3.</span></span> <span data-ttu-id="32987-906">Segregator konfiguracji nie może powiązać wartości null ani tworzyć wpisów o wartości null w obiektach powiązanych, co oznacza, że w chwili pojawi się wynik powiązania tej tablicy z obiektem.</span><span class="sxs-lookup"><span data-stu-id="32987-906">The configuration binder isn't capable of binding null values or creating null entries in bound objects, which becomes clear in a moment when the result of binding this array to an object is demonstrated.</span></span>
+<span data-ttu-id="f83a3-2223">Tablica pomija wartość dla indeksu &num; 3.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2223">The array skips a value for index &num;3.</span></span> <span data-ttu-id="f83a3-2224">Segregator konfiguracji nie może powiązać wartości null ani tworzyć wpisów o wartości null w obiektach powiązanych, co oznacza, że w chwili pojawi się wynik powiązania tej tablicy z obiektem.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2224">The configuration binder isn't capable of binding null values or creating null entries in bound objects, which becomes clear in a moment when the result of binding this array to an object is demonstrated.</span></span>
 
-<span data-ttu-id="32987-907">W przykładowej aplikacji jest dostępna Klasa POCO, która przechowuje powiązane dane konfiguracji:</span><span class="sxs-lookup"><span data-stu-id="32987-907">In the sample app, a POCO class is available to hold the bound configuration data:</span></span>
+<span data-ttu-id="f83a3-2225">W przykładowej aplikacji jest dostępna Klasa POCO, która przechowuje powiązane dane konfiguracji:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2225">In the sample app, a POCO class is available to hold the bound configuration data:</span></span>
 
 [!code-csharp[](index/samples/2.x/ConfigurationSample/Models/ArrayExample.cs?name=snippet1)]
 
-<span data-ttu-id="32987-908">Dane konfiguracji są powiązane z obiektem:</span><span class="sxs-lookup"><span data-stu-id="32987-908">The configuration data is bound to the object:</span></span>
+<span data-ttu-id="f83a3-2226">Dane konfiguracji są powiązane z obiektem:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2226">The configuration data is bound to the object:</span></span>
 
 ```csharp
 var arrayExample = new ArrayExample();
 _config.GetSection("array").Bind(arrayExample);
 ```
 
-<span data-ttu-id="32987-909">[`ConfigurationBinder.Get<T>`](xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Get*)można również użyć składni, co spowoduje zwiększenie kodu kompaktowego:</span><span class="sxs-lookup"><span data-stu-id="32987-909">[`ConfigurationBinder.Get<T>`](xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Get*) syntax can also be used, which results in more compact code:</span></span>
+<span data-ttu-id="f83a3-2227">[`ConfigurationBinder.Get<T>`](xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Get*)można również użyć składni, co spowoduje zwiększenie kodu kompaktowego:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2227">[`ConfigurationBinder.Get<T>`](xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Get*) syntax can also be used, which results in more compact code:</span></span>
 
 [!code-csharp[](index/samples/2.x/ConfigurationSample/Pages/Index.cshtml.cs?name=snippet_array)]
 
-<span data-ttu-id="32987-910">Obiekt powiązany, wystąpienie elementu `ArrayExample`, otrzymuje dane tablicy z konfiguracji.</span><span class="sxs-lookup"><span data-stu-id="32987-910">The bound object, an instance of `ArrayExample`, receives the array data from configuration.</span></span>
+<span data-ttu-id="f83a3-2228">Obiekt powiązany, wystąpienie elementu `ArrayExample` , otrzymuje dane tablicy z konfiguracji.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2228">The bound object, an instance of `ArrayExample`, receives the array data from configuration.</span></span>
 
-| <span data-ttu-id="32987-911">`ArrayExample.Entries`Indeks</span><span class="sxs-lookup"><span data-stu-id="32987-911">`ArrayExample.Entries` Index</span></span> | <span data-ttu-id="32987-912">`ArrayExample.Entries`Wartościami</span><span class="sxs-lookup"><span data-stu-id="32987-912">`ArrayExample.Entries` Value</span></span> |
-| :--------------------------: | :--------------------------: |
-| <span data-ttu-id="32987-913">0</span><span class="sxs-lookup"><span data-stu-id="32987-913">0</span></span>                            | <span data-ttu-id="32987-914">value0</span><span class="sxs-lookup"><span data-stu-id="32987-914">value0</span></span>                       |
-| <span data-ttu-id="32987-915">1</span><span class="sxs-lookup"><span data-stu-id="32987-915">1</span></span>                            | <span data-ttu-id="32987-916">sekwencj</span><span class="sxs-lookup"><span data-stu-id="32987-916">value1</span></span>                       |
-| <span data-ttu-id="32987-917">2</span><span class="sxs-lookup"><span data-stu-id="32987-917">2</span></span>                            | <span data-ttu-id="32987-918">wartość2</span><span class="sxs-lookup"><span data-stu-id="32987-918">value2</span></span>                       |
-| <span data-ttu-id="32987-919">3</span><span class="sxs-lookup"><span data-stu-id="32987-919">3</span></span>                            | <span data-ttu-id="32987-920">value4</span><span class="sxs-lookup"><span data-stu-id="32987-920">value4</span></span>                       |
-| <span data-ttu-id="32987-921">4</span><span class="sxs-lookup"><span data-stu-id="32987-921">4</span></span>                            | <span data-ttu-id="32987-922">value5</span><span class="sxs-lookup"><span data-stu-id="32987-922">value5</span></span>                       |
+| <span data-ttu-id="f83a3-2229">`ArrayExample.Entries`Indeks</span><span class="sxs-lookup"><span data-stu-id="f83a3-2229">`ArrayExample.Entries` Index</span></span> | <span data-ttu-id="f83a3-2230">`ArrayExample.Entries`Wartościami</span><span class="sxs-lookup"><span data-stu-id="f83a3-2230">`ArrayExample.Entries` Value</span></span> |
+| :---
+<span data-ttu-id="f83a3-2231">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2231">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2232">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2232">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2233">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2233">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2234">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2234">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2235">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2235">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2236">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2236">'SignalR' uid:</span></span> 
 
-<span data-ttu-id="32987-923">Indeks &num;3 w obiekcie powiązanym przechowuje dane konfiguracji dla klucza `array:4` konfiguracji i jego wartość `value4`.</span><span class="sxs-lookup"><span data-stu-id="32987-923">Index &num;3 in the bound object holds the configuration data for the `array:4` configuration key and its value of `value4`.</span></span> <span data-ttu-id="32987-924">Gdy dane konfiguracji zawierające tablicę są powiązane, indeksy tablic w kluczach konfiguracji są używane tylko do iteracji danych konfiguracji podczas tworzenia obiektu.</span><span class="sxs-lookup"><span data-stu-id="32987-924">When configuration data containing an array is bound, the array indices in the configuration keys are merely used to iterate the configuration data when creating the object.</span></span> <span data-ttu-id="32987-925">Wartości null nie można zachować w danych konfiguracyjnych, a wpis o wartości null nie jest tworzony w obiekcie powiązanym, gdy tablica w kluczach konfiguracji pomija jeden lub więcej indeksów.</span><span class="sxs-lookup"><span data-stu-id="32987-925">A null value can't be retained in configuration data, and a null-valued entry isn't created in a bound object when an array in configuration keys skip one or more indices.</span></span>
+-
+<span data-ttu-id="f83a3-2237">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2237">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2238">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2238">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2239">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2239">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2240">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2240">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2241">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2241">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2242">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2242">'SignalR' uid:</span></span> 
 
-<span data-ttu-id="32987-926">Brakujący element konfiguracji dla indeksu &num;3 można podać przed powiązaniem z `ArrayExample` wystąpieniem przez dowolnego dostawcę konfiguracji, który generuje poprawną parę klucz-wartość w konfiguracji.</span><span class="sxs-lookup"><span data-stu-id="32987-926">The missing configuration item for index &num;3 can be supplied before binding to the `ArrayExample` instance by any configuration provider that produces the correct key-value pair in configuration.</span></span> <span data-ttu-id="32987-927">Jeśli przykład zawiera dodatkowego dostawcę konfiguracji JSON z brakującą parą klucz-wartość, `ArrayExample.Entries` dopasowuje pełną tablicę konfiguracyjną:</span><span class="sxs-lookup"><span data-stu-id="32987-927">If the sample included an additional JSON Configuration Provider with the missing key-value pair, the `ArrayExample.Entries` matches the complete configuration array:</span></span>
+-
+<span data-ttu-id="f83a3-2243">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2243">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2244">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2244">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2245">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2245">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2246">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2246">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2247">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2247">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2248">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2248">'SignalR' uid:</span></span> 
 
-<span data-ttu-id="32987-928">plik *missing_value. JSON*:</span><span class="sxs-lookup"><span data-stu-id="32987-928">*missing_value.json*:</span></span>
+-
+<span data-ttu-id="f83a3-2249">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2249">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2250">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2250">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2251">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2251">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2252">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2252">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2253">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2253">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2254">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2254">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2255">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2255">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2256">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2256">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2257">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2257">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2258">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2258">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2259">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2259">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2260">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2260">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2261">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2261">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2262">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2262">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2263">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2263">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2264">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2264">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2265">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2265">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2266">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2266">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2267">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2267">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2268">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2268">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2269">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2269">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2270">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2270">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2271">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2271">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2272">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2272">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2273">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2273">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2274">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2274">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2275">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2275">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2276">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2276">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2277">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2277">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2278">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2278">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2279">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2279">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2280">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2280">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2281">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2281">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2282">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2282">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2283">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2283">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2284">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2284">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2285">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2285">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2286">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2286">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2287">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2287">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2288">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2288">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2289">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2289">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2290">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2290">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2291">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2291">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2292">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2292">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2293">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2293">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2294">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2294">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2295">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2295">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2296">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2296">'SignalR' uid:</span></span> 
+
+<span data-ttu-id="f83a3-2297">-------------: | :---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2297">-------------: | :--- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2298">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2298">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2299">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2299">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2300">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2300">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2301">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2301">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2302">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2302">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2303">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2303">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2304">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2304">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2305">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2305">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2306">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2306">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2307">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2307">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2308">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2308">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2309">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2309">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2310">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2310">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2311">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2311">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2312">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2312">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2313">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2313">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2314">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2314">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2315">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2315">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2316">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2316">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2317">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2317">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2318">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2318">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2319">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2319">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2320">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2320">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2321">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2321">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2322">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2322">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2323">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2323">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2324">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2324">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2325">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2325">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2326">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2326">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2327">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2327">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2328">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2328">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2329">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2329">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2330">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2330">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2331">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2331">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2332">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2332">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2333">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2333">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2334">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2334">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2335">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2335">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2336">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2336">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2337">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2337">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2338">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2338">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2339">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2339">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2340">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2340">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2341">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2341">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2342">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2342">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2343">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2343">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2344">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2344">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2345">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2345">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2346">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2346">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2347">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2347">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2348">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2348">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2349">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2349">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2350">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2350">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2351">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2351">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2352">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2352">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2353">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2353">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2354">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2354">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2355">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2355">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2356">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2356">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2357">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2357">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2358">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2358">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2359">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2359">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2360">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2360">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2361">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2361">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2362">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2362">'SignalR' uid:</span></span> 
+
+<span data-ttu-id="f83a3-2363">-------------: | | 0 | value0 | | 1 | wartość1 | | 2 | wartość2 | | 3 | value4 | | 4 | value5 |</span><span class="sxs-lookup"><span data-stu-id="f83a3-2363">-------------: | | 0                            | value0                       | | 1                            | value1                       | | 2                            | value2                       | | 3                            | value4                       | | 4                            | value5                       |</span></span>
+
+<span data-ttu-id="f83a3-2364">Indeks &num; 3 w obiekcie powiązanym przechowuje dane konfiguracji dla `array:4` klucza konfiguracji i jego wartość `value4` .</span><span class="sxs-lookup"><span data-stu-id="f83a3-2364">Index &num;3 in the bound object holds the configuration data for the `array:4` configuration key and its value of `value4`.</span></span> <span data-ttu-id="f83a3-2365">Gdy dane konfiguracji zawierające tablicę są powiązane, indeksy tablic w kluczach konfiguracji są używane tylko do iteracji danych konfiguracji podczas tworzenia obiektu.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2365">When configuration data containing an array is bound, the array indices in the configuration keys are merely used to iterate the configuration data when creating the object.</span></span> <span data-ttu-id="f83a3-2366">Wartości null nie można zachować w danych konfiguracyjnych, a wpis o wartości null nie jest tworzony w obiekcie powiązanym, gdy tablica w kluczach konfiguracji pomija jeden lub więcej indeksów.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2366">A null value can't be retained in configuration data, and a null-valued entry isn't created in a bound object when an array in configuration keys skip one or more indices.</span></span>
+
+<span data-ttu-id="f83a3-2367">Brakujący element konfiguracji dla indeksu &num; 3 można podać przed powiązaniem z `ArrayExample` wystąpieniem przez dowolnego dostawcę konfiguracji, który generuje poprawną parę klucz-wartość w konfiguracji.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2367">The missing configuration item for index &num;3 can be supplied before binding to the `ArrayExample` instance by any configuration provider that produces the correct key-value pair in configuration.</span></span> <span data-ttu-id="f83a3-2368">Jeśli przykład zawiera dodatkowego dostawcę konfiguracji JSON z brakującą parą klucz-wartość, `ArrayExample.Entries` dopasowuje pełną tablicę konfiguracyjną:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2368">If the sample included an additional JSON Configuration Provider with the missing key-value pair, the `ArrayExample.Entries` matches the complete configuration array:</span></span>
+
+<span data-ttu-id="f83a3-2369">plik *missing_value. JSON*:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2369">*missing_value.json*:</span></span>
 
 ```json
 {
@@ -1675,104 +3615,592 @@ _config.GetSection("array").Bind(arrayExample);
 }
 ```
 
-<span data-ttu-id="32987-929">W pliku `ConfigureAppConfiguration`:</span><span class="sxs-lookup"><span data-stu-id="32987-929">In `ConfigureAppConfiguration`:</span></span>
+<span data-ttu-id="f83a3-2370">W pliku `ConfigureAppConfiguration`:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2370">In `ConfigureAppConfiguration`:</span></span>
 
 ```csharp
 config.AddJsonFile(
     "missing_value.json", optional: false, reloadOnChange: false);
 ```
 
-<span data-ttu-id="32987-930">Para klucz-wartość pokazana w tabeli jest ładowana do konfiguracji.</span><span class="sxs-lookup"><span data-stu-id="32987-930">The key-value pair shown in the table is loaded into configuration.</span></span>
+<span data-ttu-id="f83a3-2371">Para klucz-wartość pokazana w tabeli jest ładowana do konfiguracji.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2371">The key-value pair shown in the table is loaded into configuration.</span></span>
 
-| <span data-ttu-id="32987-931">Klucz</span><span class="sxs-lookup"><span data-stu-id="32987-931">Key</span></span>             | <span data-ttu-id="32987-932">Wartość</span><span class="sxs-lookup"><span data-stu-id="32987-932">Value</span></span>  |
-| :-------------: | :----: |
-| <span data-ttu-id="32987-933">Tablica: wpisy: 3</span><span class="sxs-lookup"><span data-stu-id="32987-933">array:entries:3</span></span> | <span data-ttu-id="32987-934">Wartość3</span><span class="sxs-lookup"><span data-stu-id="32987-934">value3</span></span> |
+| <span data-ttu-id="f83a3-2372">Klucz</span><span class="sxs-lookup"><span data-stu-id="f83a3-2372">Key</span></span>             | <span data-ttu-id="f83a3-2373">Wartość</span><span class="sxs-lookup"><span data-stu-id="f83a3-2373">Value</span></span>  |
+| :---
+<span data-ttu-id="f83a3-2374">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2374">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2375">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2375">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2376">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2376">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2377">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2377">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2378">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2378">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2379">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2379">'SignalR' uid:</span></span> 
 
-<span data-ttu-id="32987-935">Jeśli wystąpienie `ArrayExample` klasy jest powiązane, gdy dostawca konfiguracji JSON zawiera wpis dla indeksu &num;3, `ArrayExample.Entries` tablica zawiera wartość.</span><span class="sxs-lookup"><span data-stu-id="32987-935">If the `ArrayExample` class instance is bound after the JSON Configuration Provider includes the entry for index &num;3, the `ArrayExample.Entries` array includes the value.</span></span>
+-
+<span data-ttu-id="f83a3-2380">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2380">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2381">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2381">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2382">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2382">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2383">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2383">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2384">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2384">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2385">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2385">'SignalR' uid:</span></span> 
 
-| <span data-ttu-id="32987-936">`ArrayExample.Entries`Indeks</span><span class="sxs-lookup"><span data-stu-id="32987-936">`ArrayExample.Entries` Index</span></span> | <span data-ttu-id="32987-937">`ArrayExample.Entries`Wartościami</span><span class="sxs-lookup"><span data-stu-id="32987-937">`ArrayExample.Entries` Value</span></span> |
-| :--------------------------: | :--------------------------: |
-| <span data-ttu-id="32987-938">0</span><span class="sxs-lookup"><span data-stu-id="32987-938">0</span></span>                            | <span data-ttu-id="32987-939">value0</span><span class="sxs-lookup"><span data-stu-id="32987-939">value0</span></span>                       |
-| <span data-ttu-id="32987-940">1</span><span class="sxs-lookup"><span data-stu-id="32987-940">1</span></span>                            | <span data-ttu-id="32987-941">sekwencj</span><span class="sxs-lookup"><span data-stu-id="32987-941">value1</span></span>                       |
-| <span data-ttu-id="32987-942">2</span><span class="sxs-lookup"><span data-stu-id="32987-942">2</span></span>                            | <span data-ttu-id="32987-943">wartość2</span><span class="sxs-lookup"><span data-stu-id="32987-943">value2</span></span>                       |
-| <span data-ttu-id="32987-944">3</span><span class="sxs-lookup"><span data-stu-id="32987-944">3</span></span>                            | <span data-ttu-id="32987-945">Wartość3</span><span class="sxs-lookup"><span data-stu-id="32987-945">value3</span></span>                       |
-| <span data-ttu-id="32987-946">4</span><span class="sxs-lookup"><span data-stu-id="32987-946">4</span></span>                            | <span data-ttu-id="32987-947">value4</span><span class="sxs-lookup"><span data-stu-id="32987-947">value4</span></span>                       |
-| <span data-ttu-id="32987-948">5</span><span class="sxs-lookup"><span data-stu-id="32987-948">5</span></span>                            | <span data-ttu-id="32987-949">value5</span><span class="sxs-lookup"><span data-stu-id="32987-949">value5</span></span>                       |
+-
+<span data-ttu-id="f83a3-2386">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2386">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2387">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2387">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2388">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2388">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2389">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2389">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2390">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2390">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2391">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2391">'SignalR' uid:</span></span> 
 
-<span data-ttu-id="32987-950">**Przetwarzanie tablicy JSON**</span><span class="sxs-lookup"><span data-stu-id="32987-950">**JSON array processing**</span></span>
+-
+<span data-ttu-id="f83a3-2392">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2392">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2393">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2393">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2394">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2394">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2395">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2395">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2396">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2396">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2397">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2397">'SignalR' uid:</span></span> 
 
-<span data-ttu-id="32987-951">Jeśli plik JSON zawiera tablicę, klucze konfiguracji są tworzone dla elementów tablicy z indeksem sekcji o wartości zero.</span><span class="sxs-lookup"><span data-stu-id="32987-951">If a JSON file contains an array, configuration keys are created for the array elements with a zero-based section index.</span></span> <span data-ttu-id="32987-952">W poniższym pliku konfiguracji `subsection` jest tablicą:</span><span class="sxs-lookup"><span data-stu-id="32987-952">In the following configuration file, `subsection` is an array:</span></span>
+<span data-ttu-id="f83a3-2398">-------: | :----: | | Tablica: wpisy: 3 | Wartość3 |</span><span class="sxs-lookup"><span data-stu-id="f83a3-2398">-------: | :----: | | array:entries:3 | value3 |</span></span>
+
+<span data-ttu-id="f83a3-2399">Jeśli `ArrayExample` wystąpienie klasy jest powiązane, gdy dostawca konfiguracji JSON zawiera wpis dla indeksu &num; 3, `ArrayExample.Entries` Tablica zawiera wartość.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2399">If the `ArrayExample` class instance is bound after the JSON Configuration Provider includes the entry for index &num;3, the `ArrayExample.Entries` array includes the value.</span></span>
+
+| <span data-ttu-id="f83a3-2400">`ArrayExample.Entries`Indeks</span><span class="sxs-lookup"><span data-stu-id="f83a3-2400">`ArrayExample.Entries` Index</span></span> | <span data-ttu-id="f83a3-2401">`ArrayExample.Entries`Wartościami</span><span class="sxs-lookup"><span data-stu-id="f83a3-2401">`ArrayExample.Entries` Value</span></span> |
+| :---
+<span data-ttu-id="f83a3-2402">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2402">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2403">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2403">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2404">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2404">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2405">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2405">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2406">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2406">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2407">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2407">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2408">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2408">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2409">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2409">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2410">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2410">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2411">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2411">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2412">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2412">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2413">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2413">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2414">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2414">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2415">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2415">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2416">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2416">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2417">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2417">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2418">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2418">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2419">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2419">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2420">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2420">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2421">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2421">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2422">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2422">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2423">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2423">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2424">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2424">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2425">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2425">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2426">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2426">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2427">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2427">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2428">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2428">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2429">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2429">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2430">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2430">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2431">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2431">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2432">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2432">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2433">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2433">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2434">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2434">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2435">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2435">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2436">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2436">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2437">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2437">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2438">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2438">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2439">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2439">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2440">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2440">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2441">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2441">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2442">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2442">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2443">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2443">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2444">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2444">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2445">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2445">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2446">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2446">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2447">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2447">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2448">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2448">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2449">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2449">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2450">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2450">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2451">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2451">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2452">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2452">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2453">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2453">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2454">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2454">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2455">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2455">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2456">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2456">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2457">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2457">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2458">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2458">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2459">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2459">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2460">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2460">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2461">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2461">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2462">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2462">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2463">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2463">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2464">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2464">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2465">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2465">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2466">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2466">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2467">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2467">'SignalR' uid:</span></span> 
+
+<span data-ttu-id="f83a3-2468">-------------: | :---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2468">-------------: | :--- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2469">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2469">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2470">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2470">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2471">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2471">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2472">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2472">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2473">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2473">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2474">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2474">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2475">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2475">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2476">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2476">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2477">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2477">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2478">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2478">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2479">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2479">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2480">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2480">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2481">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2481">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2482">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2482">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2483">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2483">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2484">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2484">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2485">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2485">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2486">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2486">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2487">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2487">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2488">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2488">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2489">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2489">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2490">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2490">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2491">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2491">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2492">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2492">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2493">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2493">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2494">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2494">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2495">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2495">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2496">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2496">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2497">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2497">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2498">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2498">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2499">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2499">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2500">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2500">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2501">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2501">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2502">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2502">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2503">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2503">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2504">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2504">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2505">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2505">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2506">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2506">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2507">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2507">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2508">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2508">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2509">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2509">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2510">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2510">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2511">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2511">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2512">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2512">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2513">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2513">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2514">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2514">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2515">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2515">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2516">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2516">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2517">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2517">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2518">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2518">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2519">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2519">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2520">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2520">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2521">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2521">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2522">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2522">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2523">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2523">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2524">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2524">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2525">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2525">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2526">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2526">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2527">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2527">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2528">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2528">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2529">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2529">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2530">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2530">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2531">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2531">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2532">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2532">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2533">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2533">'SignalR' uid:</span></span> 
+
+<span data-ttu-id="f83a3-2534">-------------: | | 0 | value0 | | 1 | wartość1 | | 2 | wartość2 | | 3 | Wartość3 | | 4 | value4 | | 5 | value5 |</span><span class="sxs-lookup"><span data-stu-id="f83a3-2534">-------------: | | 0                            | value0                       | | 1                            | value1                       | | 2                            | value2                       | | 3                            | value3                       | | 4                            | value4                       | | 5                            | value5                       |</span></span>
+
+<span data-ttu-id="f83a3-2535">**Przetwarzanie tablicy JSON**</span><span class="sxs-lookup"><span data-stu-id="f83a3-2535">**JSON array processing**</span></span>
+
+<span data-ttu-id="f83a3-2536">Jeśli plik JSON zawiera tablicę, klucze konfiguracji są tworzone dla elementów tablicy z indeksem sekcji o wartości zero.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2536">If a JSON file contains an array, configuration keys are created for the array elements with a zero-based section index.</span></span> <span data-ttu-id="f83a3-2537">W poniższym pliku konfiguracji `subsection` jest tablicą:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2537">In the following configuration file, `subsection` is an array:</span></span>
 
 [!code-json[](index/samples/2.x/ConfigurationSample/json_array.json)]
 
-<span data-ttu-id="32987-953">Dostawca konfiguracji JSON odczytuje dane konfiguracji do następujących par klucz-wartość:</span><span class="sxs-lookup"><span data-stu-id="32987-953">The JSON Configuration Provider reads the configuration data into the following key-value pairs:</span></span>
+<span data-ttu-id="f83a3-2538">Dostawca konfiguracji JSON odczytuje dane konfiguracji do następujących par klucz-wartość:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2538">The JSON Configuration Provider reads the configuration data into the following key-value pairs:</span></span>
 
-| <span data-ttu-id="32987-954">Klucz</span><span class="sxs-lookup"><span data-stu-id="32987-954">Key</span></span>                     | <span data-ttu-id="32987-955">Wartość</span><span class="sxs-lookup"><span data-stu-id="32987-955">Value</span></span>  |
-| ----------------------- | :----: |
-| <span data-ttu-id="32987-956">json_array: klucz</span><span class="sxs-lookup"><span data-stu-id="32987-956">json_array:key</span></span>          | <span data-ttu-id="32987-957">wartośća</span><span class="sxs-lookup"><span data-stu-id="32987-957">valueA</span></span> |
-| <span data-ttu-id="32987-958">json_array: podsekcja: 0</span><span class="sxs-lookup"><span data-stu-id="32987-958">json_array:subsection:0</span></span> | <span data-ttu-id="32987-959">Wartośćb</span><span class="sxs-lookup"><span data-stu-id="32987-959">valueB</span></span> |
-| <span data-ttu-id="32987-960">json_array: podsekcja: 1</span><span class="sxs-lookup"><span data-stu-id="32987-960">json_array:subsection:1</span></span> | <span data-ttu-id="32987-961">valueC</span><span class="sxs-lookup"><span data-stu-id="32987-961">valueC</span></span> |
-| <span data-ttu-id="32987-962">json_array: podsekcja: 2</span><span class="sxs-lookup"><span data-stu-id="32987-962">json_array:subsection:2</span></span> | <span data-ttu-id="32987-963">Znajdując</span><span class="sxs-lookup"><span data-stu-id="32987-963">valueD</span></span> |
+| <span data-ttu-id="f83a3-2539">Klucz</span><span class="sxs-lookup"><span data-stu-id="f83a3-2539">Key</span></span>                     | <span data-ttu-id="f83a3-2540">Wartość</span><span class="sxs-lookup"><span data-stu-id="f83a3-2540">Value</span></span>  |
+| ---
+<span data-ttu-id="f83a3-2541">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2541">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2542">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2542">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2543">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2543">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2544">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2544">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2545">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2545">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2546">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2546">'SignalR' uid:</span></span> 
 
-<span data-ttu-id="32987-964">W przykładowej aplikacji jest dostępna następująca Klasa POCO z powiązaniem par klucz-wartość konfiguracji:</span><span class="sxs-lookup"><span data-stu-id="32987-964">In the sample app, the following POCO class is available to bind the configuration key-value pairs:</span></span>
+-
+<span data-ttu-id="f83a3-2547">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2547">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2548">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2548">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2549">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2549">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2550">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2550">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2551">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2551">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2552">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2552">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2553">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2553">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2554">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2554">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2555">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2555">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2556">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2556">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2557">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2557">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2558">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2558">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2559">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2559">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2560">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2560">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2561">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2561">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2562">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2562">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2563">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2563">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2564">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2564">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2565">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2565">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2566">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2566">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2567">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2567">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2568">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2568">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2569">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2569">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2570">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2570">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2571">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2571">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2572">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2572">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2573">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2573">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2574">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2574">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2575">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2575">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2576">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2576">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2577">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2577">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2578">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2578">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2579">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2579">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2580">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2580">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2581">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2581">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2582">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2582">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2583">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2583">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2584">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2584">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2585">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2585">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2586">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2586">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2587">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2587">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2588">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2588">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2589">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2589">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2590">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2590">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2591">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2591">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2592">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2592">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2593">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2593">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2594">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2594">'SignalR' uid:</span></span> 
+
+<span data-ttu-id="f83a3-2595">------------ | :----: | | json_array: klucz | wartość a | | json_array: podsekcja: 0 | Wartośćb | | json_array: podsekcja: 1 | valueC | | json_array: podsekcja: 2 | Wartościowe |</span><span class="sxs-lookup"><span data-stu-id="f83a3-2595">------------ | :----: | | json_array:key          | valueA | | json_array:subsection:0 | valueB | | json_array:subsection:1 | valueC | | json_array:subsection:2 | valueD |</span></span>
+
+<span data-ttu-id="f83a3-2596">W przykładowej aplikacji jest dostępna następująca Klasa POCO z powiązaniem par klucz-wartość konfiguracji:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2596">In the sample app, the following POCO class is available to bind the configuration key-value pairs:</span></span>
 
 [!code-csharp[](index/samples/2.x/ConfigurationSample/Models/JsonArrayExample.cs?name=snippet1)]
 
-<span data-ttu-id="32987-965">Po powiązaniu `JsonArrayExample.Key` utrzymuje wartość `valueA`.</span><span class="sxs-lookup"><span data-stu-id="32987-965">After binding, `JsonArrayExample.Key` holds the value `valueA`.</span></span> <span data-ttu-id="32987-966">Wartości podsekcji są przechowywane we właściwości tablicy POCO `Subsection`.</span><span class="sxs-lookup"><span data-stu-id="32987-966">The subsection values are stored in the POCO array property, `Subsection`.</span></span>
+<span data-ttu-id="f83a3-2597">Po powiązaniu `JsonArrayExample.Key` utrzymuje wartość `valueA` .</span><span class="sxs-lookup"><span data-stu-id="f83a3-2597">After binding, `JsonArrayExample.Key` holds the value `valueA`.</span></span> <span data-ttu-id="f83a3-2598">Wartości podsekcji są przechowywane we właściwości tablicy POCO `Subsection` .</span><span class="sxs-lookup"><span data-stu-id="f83a3-2598">The subsection values are stored in the POCO array property, `Subsection`.</span></span>
 
-| <span data-ttu-id="32987-967">`JsonArrayExample.Subsection`Indeks</span><span class="sxs-lookup"><span data-stu-id="32987-967">`JsonArrayExample.Subsection` Index</span></span> | <span data-ttu-id="32987-968">`JsonArrayExample.Subsection`Wartościami</span><span class="sxs-lookup"><span data-stu-id="32987-968">`JsonArrayExample.Subsection` Value</span></span> |
-| :---------------------------------: | :---------------------------------: |
-| <span data-ttu-id="32987-969">0</span><span class="sxs-lookup"><span data-stu-id="32987-969">0</span></span>                                   | <span data-ttu-id="32987-970">Wartośćb</span><span class="sxs-lookup"><span data-stu-id="32987-970">valueB</span></span>                              |
-| <span data-ttu-id="32987-971">1</span><span class="sxs-lookup"><span data-stu-id="32987-971">1</span></span>                                   | <span data-ttu-id="32987-972">valueC</span><span class="sxs-lookup"><span data-stu-id="32987-972">valueC</span></span>                              |
-| <span data-ttu-id="32987-973">2</span><span class="sxs-lookup"><span data-stu-id="32987-973">2</span></span>                                   | <span data-ttu-id="32987-974">Znajdując</span><span class="sxs-lookup"><span data-stu-id="32987-974">valueD</span></span>                              |
+| <span data-ttu-id="f83a3-2599">`JsonArrayExample.Subsection`Indeks</span><span class="sxs-lookup"><span data-stu-id="f83a3-2599">`JsonArrayExample.Subsection` Index</span></span> | <span data-ttu-id="f83a3-2600">`JsonArrayExample.Subsection`Wartościami</span><span class="sxs-lookup"><span data-stu-id="f83a3-2600">`JsonArrayExample.Subsection` Value</span></span> |
+| :---
+<span data-ttu-id="f83a3-2601">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2601">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2602">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2602">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2603">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2603">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2604">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2604">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2605">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2605">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2606">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2606">'SignalR' uid:</span></span> 
 
-## <a name="custom-configuration-provider"></a><span data-ttu-id="32987-975">Niestandardowy dostawca konfiguracji</span><span class="sxs-lookup"><span data-stu-id="32987-975">Custom configuration provider</span></span>
+-
+<span data-ttu-id="f83a3-2607">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2607">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2608">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2608">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2609">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2609">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2610">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2610">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2611">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2611">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2612">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2612">'SignalR' uid:</span></span> 
 
-<span data-ttu-id="32987-976">Przykładowa aplikacja pokazuje, jak utworzyć podstawowego dostawcę konfiguracji, który odczytuje pary klucz-wartość konfiguracji z bazy danych przy użyciu [Entity Framework (EF)](/ef/core/).</span><span class="sxs-lookup"><span data-stu-id="32987-976">The sample app demonstrates how to create a basic configuration provider that reads configuration key-value pairs from a database using [Entity Framework (EF)](/ef/core/).</span></span>
+-
+<span data-ttu-id="f83a3-2613">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2613">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2614">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2614">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2615">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2615">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2616">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2616">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2617">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2617">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2618">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2618">'SignalR' uid:</span></span> 
 
-<span data-ttu-id="32987-977">Dostawca ma następującą charakterystykę:</span><span class="sxs-lookup"><span data-stu-id="32987-977">The provider has the following characteristics:</span></span>
+-
+<span data-ttu-id="f83a3-2619">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2619">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2620">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2620">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2621">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2621">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2622">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2622">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2623">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2623">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2624">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2624">'SignalR' uid:</span></span> 
 
-* <span data-ttu-id="32987-978">Baza danych EF w pamięci jest używana w celach demonstracyjnych.</span><span class="sxs-lookup"><span data-stu-id="32987-978">The EF in-memory database is used for demonstration purposes.</span></span> <span data-ttu-id="32987-979">Aby użyć bazy danych, która wymaga parametrów połączenia, zaimplementuj dodatkową `ConfigurationBuilder` wartość w celu dostarczenia parametrów połączenia od innego dostawcy konfiguracji.</span><span class="sxs-lookup"><span data-stu-id="32987-979">To use a database that requires a connection string, implement a secondary `ConfigurationBuilder` to supply the connection string from another configuration provider.</span></span>
-* <span data-ttu-id="32987-980">Dostawca odczytuje tabelę bazy danych w konfiguracji podczas uruchamiania.</span><span class="sxs-lookup"><span data-stu-id="32987-980">The provider reads a database table into configuration at startup.</span></span> <span data-ttu-id="32987-981">Dostawca nie wykonuje zapytania do bazy danych w oparciu o klucz.</span><span class="sxs-lookup"><span data-stu-id="32987-981">The provider doesn't query the database on a per-key basis.</span></span>
-* <span data-ttu-id="32987-982">Ponowne załadowanie nie zostało zaimplementowane, więc aktualizacja bazy danych po uruchomieniu aplikacji nie ma wpływu na konfigurację aplikacji.</span><span class="sxs-lookup"><span data-stu-id="32987-982">Reload-on-change isn't implemented, so updating the database after the app starts has no effect on the app's configuration.</span></span>
+-
+<span data-ttu-id="f83a3-2625">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2625">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2626">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2626">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2627">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2627">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2628">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2628">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2629">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2629">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2630">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2630">'SignalR' uid:</span></span> 
 
-<span data-ttu-id="32987-983">Zdefiniuj `EFConfigurationValue` jednostkę do przechowywania wartości konfiguracji w bazie danych.</span><span class="sxs-lookup"><span data-stu-id="32987-983">Define an `EFConfigurationValue` entity for storing configuration values in the database.</span></span>
+-
+<span data-ttu-id="f83a3-2631">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2631">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2632">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2632">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2633">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2633">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2634">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2634">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2635">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2635">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2636">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2636">'SignalR' uid:</span></span> 
 
-<span data-ttu-id="32987-984">*Modele/EFConfigurationValue. cs*:</span><span class="sxs-lookup"><span data-stu-id="32987-984">*Models/EFConfigurationValue.cs*:</span></span>
+-
+<span data-ttu-id="f83a3-2637">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2637">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2638">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2638">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2639">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2639">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2640">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2640">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2641">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2641">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2642">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2642">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2643">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2643">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2644">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2644">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2645">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2645">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2646">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2646">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2647">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2647">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2648">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2648">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2649">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2649">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2650">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2650">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2651">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2651">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2652">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2652">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2653">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2653">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2654">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2654">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2655">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2655">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2656">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2656">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2657">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2657">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2658">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2658">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2659">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2659">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2660">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2660">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2661">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2661">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2662">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2662">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2663">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2663">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2664">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2664">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2665">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2665">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2666">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2666">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2667">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2667">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2668">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2668">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2669">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2669">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2670">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2670">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2671">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2671">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2672">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2672">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2673">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2673">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2674">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2674">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2675">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2675">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2676">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2676">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2677">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2677">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2678">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2678">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2679">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2679">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2680">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2680">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2681">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2681">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2682">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2682">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2683">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2683">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2684">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2684">'SignalR' uid:</span></span> 
+
+<span data-ttu-id="f83a3-2685">-----------------: | :---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2685">-----------------: | :--- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2686">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2686">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2687">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2687">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2688">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2688">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2689">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2689">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2690">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2690">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2691">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2691">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2692">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2692">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2693">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2693">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2694">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2694">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2695">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2695">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2696">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2696">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2697">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2697">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2698">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2698">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2699">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2699">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2700">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2700">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2701">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2701">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2702">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2702">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2703">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2703">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2704">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2704">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2705">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2705">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2706">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2706">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2707">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2707">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2708">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2708">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2709">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2709">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2710">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2710">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2711">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2711">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2712">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2712">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2713">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2713">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2714">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2714">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2715">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2715">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2716">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2716">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2717">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2717">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2718">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2718">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2719">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2719">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2720">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2720">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2721">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2721">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2722">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2722">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2723">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2723">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2724">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2724">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2725">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2725">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2726">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2726">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2727">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2727">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2728">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2728">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2729">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2729">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2730">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2730">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2731">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2731">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2732">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2732">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2733">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2733">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2734">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2734">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2735">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2735">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2736">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2736">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2737">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2737">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2738">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2738">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2739">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2739">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2740">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2740">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2741">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2741">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2742">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2742">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2743">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2743">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2744">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2744">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2745">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2745">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2746">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2746">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2747">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2747">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2748">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2748">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2749">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2749">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2750">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2750">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2751">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2751">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2752">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2752">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2753">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2753">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2754">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2754">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2755">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2755">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2756">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2756">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2757">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2757">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2758">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2758">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2759">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2759">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2760">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2760">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2761">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2761">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2762">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2762">'SignalR' uid:</span></span> 
+
+-
+<span data-ttu-id="f83a3-2763">title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2763">title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="f83a3-2764">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2764">'Blazor'</span></span>
+- <span data-ttu-id="f83a3-2765">'Identity'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2765">'Identity'</span></span>
+- <span data-ttu-id="f83a3-2766">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2766">'Let's Encrypt'</span></span>
+- <span data-ttu-id="f83a3-2767">'Razor'</span><span class="sxs-lookup"><span data-stu-id="f83a3-2767">'Razor'</span></span>
+- <span data-ttu-id="f83a3-2768">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2768">'SignalR' uid:</span></span> 
+
+<span data-ttu-id="f83a3-2769">-----------------: | | 0 | Wartośćb | | 1 | valueC | | 2 | Wartościowe |</span><span class="sxs-lookup"><span data-stu-id="f83a3-2769">-----------------: | | 0                                   | valueB                              | | 1                                   | valueC                              | | 2                                   | valueD                              |</span></span>
+
+## <a name="custom-configuration-provider"></a><span data-ttu-id="f83a3-2770">Niestandardowy dostawca konfiguracji</span><span class="sxs-lookup"><span data-stu-id="f83a3-2770">Custom configuration provider</span></span>
+
+<span data-ttu-id="f83a3-2771">Przykładowa aplikacja pokazuje, jak utworzyć podstawowego dostawcę konfiguracji, który odczytuje pary klucz-wartość konfiguracji z bazy danych przy użyciu [Entity Framework (EF)](/ef/core/).</span><span class="sxs-lookup"><span data-stu-id="f83a3-2771">The sample app demonstrates how to create a basic configuration provider that reads configuration key-value pairs from a database using [Entity Framework (EF)](/ef/core/).</span></span>
+
+<span data-ttu-id="f83a3-2772">Dostawca ma następującą charakterystykę:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2772">The provider has the following characteristics:</span></span>
+
+* <span data-ttu-id="f83a3-2773">Baza danych EF w pamięci jest używana w celach demonstracyjnych.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2773">The EF in-memory database is used for demonstration purposes.</span></span> <span data-ttu-id="f83a3-2774">Aby użyć bazy danych, która wymaga parametrów połączenia, zaimplementuj dodatkową wartość w `ConfigurationBuilder` celu dostarczenia parametrów połączenia od innego dostawcy konfiguracji.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2774">To use a database that requires a connection string, implement a secondary `ConfigurationBuilder` to supply the connection string from another configuration provider.</span></span>
+* <span data-ttu-id="f83a3-2775">Dostawca odczytuje tabelę bazy danych w konfiguracji podczas uruchamiania.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2775">The provider reads a database table into configuration at startup.</span></span> <span data-ttu-id="f83a3-2776">Dostawca nie wykonuje zapytania do bazy danych w oparciu o klucz.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2776">The provider doesn't query the database on a per-key basis.</span></span>
+* <span data-ttu-id="f83a3-2777">Ponowne załadowanie nie zostało zaimplementowane, więc aktualizacja bazy danych po uruchomieniu aplikacji nie ma wpływu na konfigurację aplikacji.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2777">Reload-on-change isn't implemented, so updating the database after the app starts has no effect on the app's configuration.</span></span>
+
+<span data-ttu-id="f83a3-2778">Zdefiniuj `EFConfigurationValue` jednostkę do przechowywania wartości konfiguracji w bazie danych.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2778">Define an `EFConfigurationValue` entity for storing configuration values in the database.</span></span>
+
+<span data-ttu-id="f83a3-2779">*Modele/EFConfigurationValue. cs*:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2779">*Models/EFConfigurationValue.cs*:</span></span>
 
 [!code-csharp[](index/samples/2.x/ConfigurationSample/Models/EFConfigurationValue.cs?name=snippet1)]
 
-<span data-ttu-id="32987-985">Dodaj `EFConfigurationContext` do magazynu i uzyskaj dostęp do skonfigurowanych wartości.</span><span class="sxs-lookup"><span data-stu-id="32987-985">Add an `EFConfigurationContext` to store and access the configured values.</span></span>
+<span data-ttu-id="f83a3-2780">Dodaj `EFConfigurationContext` do magazynu i uzyskaj dostęp do skonfigurowanych wartości.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2780">Add an `EFConfigurationContext` to store and access the configured values.</span></span>
 
-<span data-ttu-id="32987-986">*EFConfigurationProvider/EFConfigurationContext. cs*:</span><span class="sxs-lookup"><span data-stu-id="32987-986">*EFConfigurationProvider/EFConfigurationContext.cs*:</span></span>
+<span data-ttu-id="f83a3-2781">*EFConfigurationProvider/EFConfigurationContext. cs*:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2781">*EFConfigurationProvider/EFConfigurationContext.cs*:</span></span>
 
 [!code-csharp[](index/samples/2.x/ConfigurationSample/EFConfigurationProvider/EFConfigurationContext.cs?name=snippet1)]
 
-<span data-ttu-id="32987-987">Utwórz klasę implementującą <xref:Microsoft.Extensions.Configuration.IConfigurationSource>.</span><span class="sxs-lookup"><span data-stu-id="32987-987">Create a class that implements <xref:Microsoft.Extensions.Configuration.IConfigurationSource>.</span></span>
+<span data-ttu-id="f83a3-2782">Utwórz klasę implementującą <xref:Microsoft.Extensions.Configuration.IConfigurationSource> .</span><span class="sxs-lookup"><span data-stu-id="f83a3-2782">Create a class that implements <xref:Microsoft.Extensions.Configuration.IConfigurationSource>.</span></span>
 
-<span data-ttu-id="32987-988">*EFConfigurationProvider/EFConfigurationSource. cs*:</span><span class="sxs-lookup"><span data-stu-id="32987-988">*EFConfigurationProvider/EFConfigurationSource.cs*:</span></span>
+<span data-ttu-id="f83a3-2783">*EFConfigurationProvider/EFConfigurationSource. cs*:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2783">*EFConfigurationProvider/EFConfigurationSource.cs*:</span></span>
 
 [!code-csharp[](index/samples/2.x/ConfigurationSample/EFConfigurationProvider/EFConfigurationSource.cs?name=snippet1)]
 
-<span data-ttu-id="32987-989">Utwórz niestandardowego dostawcę konfiguracji, dziedziczących od <xref:Microsoft.Extensions.Configuration.ConfigurationProvider>.</span><span class="sxs-lookup"><span data-stu-id="32987-989">Create the custom configuration provider by inheriting from <xref:Microsoft.Extensions.Configuration.ConfigurationProvider>.</span></span> <span data-ttu-id="32987-990">Dostawca konfiguracji inicjuje bazę danych, gdy jest pusta.</span><span class="sxs-lookup"><span data-stu-id="32987-990">The configuration provider initializes the database when it's empty.</span></span>
+<span data-ttu-id="f83a3-2784">Utwórz niestandardowego dostawcę konfiguracji, dziedziczących od <xref:Microsoft.Extensions.Configuration.ConfigurationProvider> .</span><span class="sxs-lookup"><span data-stu-id="f83a3-2784">Create the custom configuration provider by inheriting from <xref:Microsoft.Extensions.Configuration.ConfigurationProvider>.</span></span> <span data-ttu-id="f83a3-2785">Dostawca konfiguracji inicjuje bazę danych, gdy jest pusta.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2785">The configuration provider initializes the database when it's empty.</span></span>
 
-<span data-ttu-id="32987-991">*EFConfigurationProvider/EFConfigurationProvider. cs*:</span><span class="sxs-lookup"><span data-stu-id="32987-991">*EFConfigurationProvider/EFConfigurationProvider.cs*:</span></span>
+<span data-ttu-id="f83a3-2786">*EFConfigurationProvider/EFConfigurationProvider. cs*:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2786">*EFConfigurationProvider/EFConfigurationProvider.cs*:</span></span>
 
 [!code-csharp[](index/samples/2.x/ConfigurationSample/EFConfigurationProvider/EFConfigurationProvider.cs?name=snippet1)]
 
-<span data-ttu-id="32987-992">Metoda `AddEFConfiguration` rozszerzająca zezwala na Dodawanie źródła konfiguracji do `ConfigurationBuilder`.</span><span class="sxs-lookup"><span data-stu-id="32987-992">An `AddEFConfiguration` extension method permits adding the configuration source to a `ConfigurationBuilder`.</span></span>
+<span data-ttu-id="f83a3-2787">`AddEFConfiguration`Metoda rozszerzająca zezwala na Dodawanie źródła konfiguracji do `ConfigurationBuilder` .</span><span class="sxs-lookup"><span data-stu-id="f83a3-2787">An `AddEFConfiguration` extension method permits adding the configuration source to a `ConfigurationBuilder`.</span></span>
 
-<span data-ttu-id="32987-993">*Rozszerzenia/EntityFrameworkExtensions. cs*:</span><span class="sxs-lookup"><span data-stu-id="32987-993">*Extensions/EntityFrameworkExtensions.cs*:</span></span>
+<span data-ttu-id="f83a3-2788">*Rozszerzenia/EntityFrameworkExtensions. cs*:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2788">*Extensions/EntityFrameworkExtensions.cs*:</span></span>
 
 [!code-csharp[](index/samples/2.x/ConfigurationSample/Extensions/EntityFrameworkExtensions.cs?name=snippet1)]
 
-<span data-ttu-id="32987-994">Poniższy kod pokazuje, jak używać niestandardowych `EFConfigurationProvider` w *program.cs*:</span><span class="sxs-lookup"><span data-stu-id="32987-994">The following code shows how to use the custom `EFConfigurationProvider` in *Program.cs*:</span></span>
+<span data-ttu-id="f83a3-2789">Poniższy kod pokazuje, jak używać niestandardowych `EFConfigurationProvider` w *program.cs*:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2789">The following code shows how to use the custom `EFConfigurationProvider` in *Program.cs*:</span></span>
 
 [!code-csharp[](index/samples/2.x/ConfigurationSample/Program.cs?name=snippet_Program&highlight=29-30)]
 
-## <a name="access-configuration-during-startup"></a><span data-ttu-id="32987-995">Konfiguracja dostępu podczas uruchamiania</span><span class="sxs-lookup"><span data-stu-id="32987-995">Access configuration during startup</span></span>
+## <a name="access-configuration-during-startup"></a><span data-ttu-id="f83a3-2790">Konfiguracja dostępu podczas uruchamiania</span><span class="sxs-lookup"><span data-stu-id="f83a3-2790">Access configuration during startup</span></span>
 
-<span data-ttu-id="32987-996">Wsuń `IConfiguration` do konstruktora `Startup` , aby uzyskać dostęp do wartości `Startup.ConfigureServices`konfiguracyjnych w.</span><span class="sxs-lookup"><span data-stu-id="32987-996">Inject `IConfiguration` into the `Startup` constructor to access configuration values in `Startup.ConfigureServices`.</span></span> <span data-ttu-id="32987-997">Aby uzyskać dostęp do `Startup.Configure`konfiguracji w programie `IConfiguration` , należy wstrzyknąć bezpośrednio do metody lub użyć wystąpienia z konstruktora:</span><span class="sxs-lookup"><span data-stu-id="32987-997">To access configuration in `Startup.Configure`, either inject `IConfiguration` directly into the method or use the instance from the constructor:</span></span>
+<span data-ttu-id="f83a3-2791">Wsuń `IConfiguration` do `Startup` konstruktora, aby uzyskać dostęp do wartości konfiguracyjnych w `Startup.ConfigureServices` .</span><span class="sxs-lookup"><span data-stu-id="f83a3-2791">Inject `IConfiguration` into the `Startup` constructor to access configuration values in `Startup.ConfigureServices`.</span></span> <span data-ttu-id="f83a3-2792">Aby uzyskać dostęp do konfiguracji w programie `Startup.Configure` , należy wstrzyknąć `IConfiguration` bezpośrednio do metody lub użyć wystąpienia z konstruktora:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2792">To access configuration in `Startup.Configure`, either inject `IConfiguration` directly into the method or use the instance from the constructor:</span></span>
 
 ```csharp
 public class Startup
@@ -1796,13 +4224,13 @@ public class Startup
 }
 ```
 
-<span data-ttu-id="32987-998">Aby zapoznać się z przykładem uzyskiwania dostępu do konfiguracji przy użyciu metod uruchamiania, zobacz [Uruchamianie aplikacji: wygodne metody](xref:fundamentals/startup#convenience-methods).</span><span class="sxs-lookup"><span data-stu-id="32987-998">For an example of accessing configuration using startup convenience methods, see [App startup: Convenience methods](xref:fundamentals/startup#convenience-methods).</span></span>
+<span data-ttu-id="f83a3-2793">Aby zapoznać się z przykładem uzyskiwania dostępu do konfiguracji przy użyciu metod uruchamiania, zobacz [Uruchamianie aplikacji: wygodne metody](xref:fundamentals/startup#convenience-methods).</span><span class="sxs-lookup"><span data-stu-id="f83a3-2793">For an example of accessing configuration using startup convenience methods, see [App startup: Convenience methods](xref:fundamentals/startup#convenience-methods).</span></span>
 
-## <a name="access-configuration-in-a-razor-pages-page-or-mvc-view"></a><span data-ttu-id="32987-999">Konfiguracja dostępu na stronie Razor stron lub widoku MVC</span><span class="sxs-lookup"><span data-stu-id="32987-999">Access configuration in a Razor Pages page or MVC view</span></span>
+## <a name="access-configuration-in-a-razor-pages-page-or-mvc-view"></a><span data-ttu-id="f83a3-2794">Konfiguracja dostępu na Razor stronie stron lub widoku MVC</span><span class="sxs-lookup"><span data-stu-id="f83a3-2794">Access configuration in a Razor Pages page or MVC view</span></span>
 
-<span data-ttu-id="32987-1000">Aby uzyskać dostęp do ustawień konfiguracji Razor na stronie stron lub widoku MVC, Dodaj [dyrektywę using](xref:mvc/views/razor#using) ([odwołanie w C#: Using](/dotnet/csharp/language-reference/keywords/using-directive)) dla [przestrzeni nazw Microsoft. Extensions. Configuration](xref:Microsoft.Extensions.Configuration) i wsuń <xref:Microsoft.Extensions.Configuration.IConfiguration> do strony lub widoku.</span><span class="sxs-lookup"><span data-stu-id="32987-1000">To access configuration settings in a Razor Pages page or an MVC view, add a [using directive](xref:mvc/views/razor#using) ([C# reference: using directive](/dotnet/csharp/language-reference/keywords/using-directive)) for the [Microsoft.Extensions.Configuration namespace](xref:Microsoft.Extensions.Configuration) and inject <xref:Microsoft.Extensions.Configuration.IConfiguration> into the page or view.</span></span>
+<span data-ttu-id="f83a3-2795">Aby uzyskać dostęp do ustawień konfiguracji na Razor stronie stron lub widoku MVC, Dodaj [dyrektywę using](xref:mvc/views/razor#using) ([odwołanie w C#: Using](/dotnet/csharp/language-reference/keywords/using-directive)) dla [przestrzeni nazw Microsoft. Extensions. Configuration](xref:Microsoft.Extensions.Configuration) i wsuń <xref:Microsoft.Extensions.Configuration.IConfiguration> do strony lub widoku.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2795">To access configuration settings in a Razor Pages page or an MVC view, add a [using directive](xref:mvc/views/razor#using) ([C# reference: using directive](/dotnet/csharp/language-reference/keywords/using-directive)) for the [Microsoft.Extensions.Configuration namespace](xref:Microsoft.Extensions.Configuration) and inject <xref:Microsoft.Extensions.Configuration.IConfiguration> into the page or view.</span></span>
 
-<span data-ttu-id="32987-1001">Na stronie Razor stron:</span><span class="sxs-lookup"><span data-stu-id="32987-1001">In a Razor Pages page:</span></span>
+<span data-ttu-id="f83a3-2796">Na Razor stronie stron:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2796">In a Razor Pages page:</span></span>
 
 ```cshtml
 @page
@@ -1822,7 +4250,7 @@ public class Startup
 </html>
 ```
 
-<span data-ttu-id="32987-1002">W widoku MVC:</span><span class="sxs-lookup"><span data-stu-id="32987-1002">In an MVC view:</span></span>
+<span data-ttu-id="f83a3-2797">W widoku MVC:</span><span class="sxs-lookup"><span data-stu-id="f83a3-2797">In an MVC view:</span></span>
 
 ```cshtml
 @using Microsoft.Extensions.Configuration
@@ -1840,11 +4268,11 @@ public class Startup
 </html>
 ```
 
-## <a name="add-configuration-from-an-external-assembly"></a><span data-ttu-id="32987-1003">Dodawanie konfiguracji z zestawu zewnętrznego</span><span class="sxs-lookup"><span data-stu-id="32987-1003">Add configuration from an external assembly</span></span>
+## <a name="add-configuration-from-an-external-assembly"></a><span data-ttu-id="f83a3-2798">Dodawanie konfiguracji z zestawu zewnętrznego</span><span class="sxs-lookup"><span data-stu-id="f83a3-2798">Add configuration from an external assembly</span></span>
 
-<span data-ttu-id="32987-1004"><xref:Microsoft.AspNetCore.Hosting.IHostingStartup> Implementacja umożliwia dodawanie ulepszeń do aplikacji podczas uruchamiania z zewnętrznego zestawu poza `Startup` klasą aplikacji.</span><span class="sxs-lookup"><span data-stu-id="32987-1004">An <xref:Microsoft.AspNetCore.Hosting.IHostingStartup> implementation allows adding enhancements to an app at startup from an external assembly outside of the app's `Startup` class.</span></span> <span data-ttu-id="32987-1005">Aby uzyskać więcej informacji, zobacz <xref:fundamentals/configuration/platform-specific-configuration>.</span><span class="sxs-lookup"><span data-stu-id="32987-1005">For more information, see <xref:fundamentals/configuration/platform-specific-configuration>.</span></span>
+<span data-ttu-id="f83a3-2799"><xref:Microsoft.AspNetCore.Hosting.IHostingStartup>Implementacja umożliwia dodawanie ulepszeń do aplikacji podczas uruchamiania z zewnętrznego zestawu poza `Startup` klasą aplikacji.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2799">An <xref:Microsoft.AspNetCore.Hosting.IHostingStartup> implementation allows adding enhancements to an app at startup from an external assembly outside of the app's `Startup` class.</span></span> <span data-ttu-id="f83a3-2800">Aby uzyskać więcej informacji, zobacz <xref:fundamentals/configuration/platform-specific-configuration>.</span><span class="sxs-lookup"><span data-stu-id="f83a3-2800">For more information, see <xref:fundamentals/configuration/platform-specific-configuration>.</span></span>
 
-## <a name="additional-resources"></a><span data-ttu-id="32987-1006">Zasoby dodatkowe</span><span class="sxs-lookup"><span data-stu-id="32987-1006">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="f83a3-2801">Zasoby dodatkowe</span><span class="sxs-lookup"><span data-stu-id="f83a3-2801">Additional resources</span></span>
 
 * <xref:fundamentals/configuration/options>
 

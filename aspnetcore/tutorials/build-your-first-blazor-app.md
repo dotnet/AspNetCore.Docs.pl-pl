@@ -69,11 +69,11 @@ Uwzględnij składnik w innym składniku przy użyciu składni języka HTML.
 
 ## <a name="component-parameters"></a>Parametry składnika
 
-Składniki mogą także mieć parametry. Parametry składnika są definiowane przy użyciu właściwości publicznych w klasie składnika z `[Parameter]` atrybutem. Użyj atrybutów, aby określić argumenty dla składnika w znaczniku.
+Składniki mogą także mieć parametry. Parametry składnika są definiowane przy użyciu właściwości publicznych w klasie składnika z [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) atrybutem. Użyj atrybutów, aby określić argumenty dla składnika w znaczniku.
 
 1. Zaktualizuj `@code` kod C# składnika w następujący sposób:
 
-   * Dodaj publiczną `IncrementAmount` Właściwość z `[Parameter]` atrybutem.
+   * Dodaj publiczną `IncrementAmount` Właściwość z [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) atrybutem.
    * Zmień `IncrementCount` metodę, aby użyć `IncrementAmount` właściwości podczas zwiększania wartości `currentCount` .
 
    *Pages/Counter. Razor*:
@@ -105,7 +105,7 @@ W przypadku pracy z Blazor aplikacją serwera `WeatherForecastService` Usługa j
 
 [!code-csharp[](build-your-first-blazor-app/samples_snapshot/3.x/Startup.cs?highlight=5)]
 
-`@inject`Dyrektywa służy do wstrzykiwania wystąpienia `WeatherForecastService` usługi do `FetchData` składnika.
+[`@inject`](xref:mvc/views/razor#inject)Dyrektywa służy do wstrzykiwania wystąpienia `WeatherForecastService` usługi do `FetchData` składnika.
 
 *Strony/FetchData. Razor*:
 
@@ -117,7 +117,7 @@ W przypadku pracy z Blazor aplikacją serwera `WeatherForecastService` Usługa j
 
 ### <a name="blazor-webassembly-experience"></a>BlazorŚrodowisko zestawu webassembly
 
-W przypadku pracy z Blazor aplikacją webassembly wprowadza się w `HttpClient` celu uzyskania danych prognozy pogody z pliku *Pogoda. JSON* w folderze *wwwroot/Sample-Data* .
+W przypadku pracy z Blazor aplikacją webassembly wprowadza się w <xref:System.Net.Http.HttpClient> celu uzyskania danych prognozy pogody z pliku *Pogoda. JSON* w folderze *wwwroot/Sample-Data* .
 
 *Strony/FetchData. Razor*:
 

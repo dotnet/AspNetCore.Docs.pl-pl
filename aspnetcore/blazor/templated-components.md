@@ -1,26 +1,13 @@
 ---
-title: Składniki Blazor szablonu ASP.NET Core
-author: guardrex
-description: Dowiedz się, w jaki sposób składniki szablonu mogą akceptować jeden lub więcej szablonów interfejsu użytkownika jako parametry, które mogą być następnie używane jako część logiki renderowania składnika.
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 03/18/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: blazor/templated-components
-ms.openlocfilehash: de603d3520c124b278312e5167a2f8bad14cf6e9
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82771070"
+title: "ASP.NET Core Blazor templated Components" Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
 ---
-# <a name="aspnet-core-blazor-templated-components"></a>Składniki Blazor szablonu ASP.NET Core
+# <a name="aspnet-core-blazor-templated-components"></a>BlazorSkładniki szablonu ASP.NET Core
 
 Autorzy [Luke Latham](https://github.com/guardrex) i [Daniel Roth](https://github.com/danroth27)
 
@@ -31,13 +18,13 @@ Składniki z szablonami są składnikami, które akceptują jeden lub więcej sz
 
 ## <a name="template-parameters"></a>Parametry szablonu
 
-Składnik szablonu jest definiowany przez określenie co najmniej jednego parametru składnika typu `RenderFragment` lub. `RenderFragment<T>` Fragment renderowania reprezentuje segment interfejsu użytkownika do renderowania. `RenderFragment<T>`przyjmuje parametr typu, który można określić podczas wywoływania fragmentu renderowania.
+Składnik szablonu jest definiowany przez określenie co najmniej jednego parametru składnika typu <xref:Microsoft.AspNetCore.Components.RenderFragment> lub <xref:Microsoft.AspNetCore.Components.RenderFragment%601> . Fragment renderowania reprezentuje segment interfejsu użytkownika do renderowania. <xref:Microsoft.AspNetCore.Components.RenderFragment%601>przyjmuje parametr typu, który można określić podczas wywoływania fragmentu renderowania.
 
 `TableTemplate`składnika
 
 [!code-razor[](common/samples/3.x/BlazorWebAssemblySample/Components/TableTemplate.razor)]
 
-W przypadku korzystania z składnika z szablonem parametry szablonu można określić za pomocą elementów podrzędnych, które pasują do nazw parametrów (`TableHeader` i `RowTemplate` w poniższym przykładzie):
+W przypadku korzystania z składnika z szablonem parametry szablonu można określić za pomocą elementów podrzędnych, które pasują do nazw parametrów ( `TableHeader` i `RowTemplate` w poniższym przykładzie):
 
 ```razor
 <TableTemplate Items="pets">
@@ -57,7 +44,7 @@ W przypadku korzystania z składnika z szablonem parametry szablonu można okre�
 
 ## <a name="template-context-parameters"></a>Parametry kontekstu szablonu
 
-Argumenty składnika `RenderFragment<T>` typu przekazane jako elementy mają niejawny parametr o `context` nazwie (na przykład z poprzedniego przykładu kodu `@context.PetId`), ale można zmienić nazwę parametru przy użyciu `Context` atrybutu dla elementu podrzędnego. W poniższym przykładzie `RowTemplate` `Context` atrybut elementu określa `pet` parametr:
+Argumenty składnika typu <xref:Microsoft.AspNetCore.Components.RenderFragment%601> przekazane jako elementy mają niejawny parametr o nazwie `context` (na przykład z poprzedniego przykładu kodu `@context.PetId` ), ale można zmienić nazwę parametru przy użyciu `Context` atrybutu dla elementu podrzędnego. W poniższym przykładzie `RowTemplate` `Context` atrybut elementu określa `pet` parametr:
 
 ```razor
 <TableTemplate Items="pets">

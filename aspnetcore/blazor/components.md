@@ -110,7 +110,7 @@ Jeśli składnik zawiera element HTML z wielką literą, która nie jest zgodna 
 
 Routing w programie jest realizowany Blazor przez dostarczenie szablonu trasy do każdego dostępnego składnika w aplikacji.
 
-Gdy Razor plik z [`@page`][9] dyrektywą jest kompilowany, wygenerowana Klasa ma określony <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> szablon trasy. W czasie wykonywania router szuka klas składników za pomocą `RouteAttribute` i renderuje, w zależności od tego, który składnik ma szablon trasy zgodny z żądanym adresem URL.
+Gdy Razor plik z [`@page`][9] dyrektywą jest kompilowany, wygenerowana Klasa ma określony <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> szablon trasy. W czasie wykonywania router szuka klas składników za pomocą <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> i renderuje, w zależności od tego, który składnik ma szablon trasy zgodny z żądanym adresem URL.
 
 ```razor
 @page "/ParentComponent"
@@ -136,7 +136,7 @@ Parametry opcjonalne nie są obsługiwane, więc dwie [`@page`][9] dyrektywy są
 
 ### <a name="component-parameters"></a>Parametry składnika
 
-Składniki mogą mieć *Parametry składnika*, które są zdefiniowane przy użyciu właściwości publicznych w klasie składnika z `[Parameter]` atrybutem. Użyj atrybutów, aby określić argumenty dla składnika w znaczniku.
+Składniki mogą mieć *Parametry składnika*, które są zdefiniowane przy użyciu właściwości publicznych w klasie składnika z [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) atrybutem] (linki XREF: Microsoft. AspNetCore. Components. ParameterAttribute). Użyj atrybutów, aby określić argumenty dla składnika w znaczniku.
 
 *Składniki/ChildComponent. Razor*:
 
@@ -155,14 +155,14 @@ W poniższym przykładzie z przykładowej aplikacji `ParentComponent` ustawia wa
 
 Składniki mogą ustawiać zawartość innego składnika. Składnik Assigner zawiera zawartość między tagami, które określają składnik do odbioru.
 
-W poniższym przykładzie `ChildComponent` ma `ChildContent` Właściwość, która reprezentuje element `RenderFragment` , który reprezentuje segment interfejsu użytkownika do renderowania. Wartość `ChildContent` jest umieszczana w znacznikach składnika, gdzie zawartość powinna być renderowana. Wartość `ChildContent` jest odbierana ze składnika nadrzędnego i renderowany w panelu uruchamiania `panel-body` .
+W poniższym przykładzie `ChildComponent` ma `ChildContent` Właściwość, która reprezentuje element <xref:Microsoft.AspNetCore.Components.RenderFragment> , który reprezentuje segment interfejsu użytkownika do renderowania. Wartość `ChildContent` jest umieszczana w znacznikach składnika, gdzie zawartość powinna być renderowana. Wartość `ChildContent` jest odbierana ze składnika nadrzędnego i renderowany w panelu uruchamiania `panel-body` .
 
 *Składniki/ChildComponent. Razor*:
 
 [!code-razor[](common/samples/3.x/BlazorWebAssemblySample/Components/ChildComponent.razor?highlight=3,14-15)]
 
 > [!NOTE]
-> Właściwość otrzymująca `RenderFragment` zawartość musi być nazywana `ChildContent` Konwencją.
+> Właściwość otrzymująca <xref:Microsoft.AspNetCore.Components.RenderFragment> zawartość musi być nazywana `ChildContent` Konwencją.
 
 `ParentComponent`W przykładowej aplikacji można dostarczyć zawartość do renderowania `ChildComponent` przez umieszczenie zawartości wewnątrz `<ChildComponent>` tagów.
 
@@ -229,7 +229,7 @@ Renderowane `<input>` elementy korzystające z obu metod są identyczne:
        size="50">
 ```
 
-Aby zaakceptować dowolne atrybuty, zdefiniuj parametr składnika przy użyciu `[Parameter]` atrybutu z `CaptureUnmatchedValues` właściwością ustawioną na `true` :
+Aby zaakceptować dowolne atrybuty, zdefiniuj parametr składnika przy użyciu [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) atrybutu z <xref:Microsoft.AspNetCore.Components.ParameterAttribute.CaptureUnmatchedValues> właściwością ustawioną na `true` :
 
 ```razor
 @code {
@@ -238,7 +238,7 @@ Aby zaakceptować dowolne atrybuty, zdefiniuj parametr składnika przy użyciu `
 }
 ```
 
-`CaptureUnmatchedValues`Właściwość on `[Parameter]` umożliwia dopasowanie parametru do wszystkich atrybutów, które nie są zgodne z żadnym innym parametrem. Składnik może definiować tylko jeden parametr z `CaptureUnmatchedValues` . Typ właściwości używany z elementem `CaptureUnmatchedValues` musi być możliwy do przypisania z `Dictionary<string, object>` klucza ciągu. `IEnumerable<KeyValuePair<string, object>>`lub `IReadOnlyDictionary<string, object>` są również opcje w tym scenariuszu.
+<xref:Microsoft.AspNetCore.Components.ParameterAttribute.CaptureUnmatchedValues>Właściwość on [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) umożliwia dopasowanie parametru do wszystkich atrybutów, które nie są zgodne z żadnym innym parametrem. Składnik może definiować tylko jeden parametr z <xref:Microsoft.AspNetCore.Components.ParameterAttribute.CaptureUnmatchedValues> . Typ właściwości używany z elementem <xref:Microsoft.AspNetCore.Components.ParameterAttribute.CaptureUnmatchedValues> musi być możliwy do przypisania z `Dictionary<string, object>` klucza ciągu. `IEnumerable<KeyValuePair<string, object>>`lub `IReadOnlyDictionary<string, object>` są również opcje w tym scenariuszu.
 
 Pozycja [`@attributes`][3] względem pozycji atrybutów elementu jest ważna. Gdy [`@attributes`][3] są splatted w elemencie, atrybuty są przetwarzane od prawej do lewej (Ostatnia do). Rozważmy następujący przykład składnika, który zużywa `Child` składnik:
 
@@ -320,11 +320,11 @@ Podczas przechwytywania odwołań do składników użycie podobnej składni do [
 
 ## <a name="invoke-component-methods-externally-to-update-state"></a>Wywołaj metody składnika zewnętrznie, aby zaktualizować stan
 
-Blazorużywa kontekstu synchronizacji ( `SynchronizationContext` ) w celu wymuszenia pojedynczego wątku logicznego wykonywania. [Metody cyklu życia](xref:blazor/lifecycle) składnika i wszelkie wywołania zwrotne zdarzeń, które są wywoływane przez Blazor są wykonywane w kontekście synchronizacji.
+Blazorużywa kontekstu synchronizacji ( <xref:System.Threading.SynchronizationContext> ) w celu wymuszenia pojedynczego wątku logicznego wykonywania. [Metody cyklu życia](xref:blazor/lifecycle) składnika i wszelkie wywołania zwrotne zdarzeń, które są wywoływane przez Blazor są wykonywane w kontekście synchronizacji.
 
 BlazorKontekst synchronizacji serwera próbuje emulować środowisko jednowątkowe, aby dokładnie pasowało do modelu webassembly w przeglądarce, który jest pojedynczym wątkiem. W dowolnym momencie prace są wykonywane na dokładnie jednym wątku, co daje wrażenie pojedynczego wątku logicznego. Nie wykonano jednocześnie dwóch operacji.
 
-W przypadku zdarzenia składnik należy zaktualizować w oparciu o zdarzenie zewnętrzne, takie jak czasomierz lub inne powiadomienia, przy użyciu `InvokeAsync` metody, która będzie wysyłana do Blazor kontekstu synchronizacji. Rozważmy na przykład *usługę powiadamiania* , która może powiadomić dowolny składnik nasłuchujący zaktualizowanego stanu:
+W przypadku zdarzenia składnika należy zaktualizować na podstawie zdarzenia zewnętrznego, takiego jak czasomierz lub inne powiadomienia, użyj `InvokeAsync` metody, która jest wysyłana do Blazor kontekstu synchronizacji. Rozważmy na przykład *usługę powiadamiania* , która może powiadomić dowolny składnik nasłuchujący zaktualizowanego stanu:
 
 ```csharp
 public class NotifierService
@@ -438,7 +438,7 @@ W niektórych scenariuszach użycie programu [`@key`][5] minimalizuje złożono�
 
 ### <a name="when-to-use-key"></a>Kiedy używać \@ klucza
 
-Zazwyczaj warto używać [`@key`][5] zawsze, gdy lista jest renderowana (na przykład w `@foreach` bloku) i odpowiednia wartość istnieje do zdefiniowania [`@key`][5] .
+Zazwyczaj warto używać [`@key`][5] zawsze, gdy lista jest renderowana (na przykład w bloku [foreach](/dotnet/csharp/language-reference/keywords/foreach-in) ), a odpowiednia wartość istnieje do zdefiniowania [`@key`][5] .
 
 Można również użyć, [`@key`][5] Aby uniemożliwić Blazor zachowanie poddrzewa elementu lub składnika po zmianie obiektu:
 
@@ -469,7 +469,7 @@ Upewnij się, że wartości używane do [`@key`][5] nie kolidują. Jeśli w tym 
 
 Parametry są zastępowane w następujących warunkach:
 
-* Zawartość składnika podrzędnego jest renderowana przy użyciu `RenderFragment` .
+* Zawartość składnika podrzędnego jest renderowana przy użyciu <xref:Microsoft.AspNetCore.Components.RenderFragment> .
 * <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A>jest wywoływana w składniku nadrzędnym.
 
 Parametry są resetowane, ponieważ składnik nadrzędny jest ponownie renderowany, gdy <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> jest wywoływana, i nowe wartości parametrów są dostarczane do składnika podrzędnego.
@@ -503,7 +503,7 @@ Rozważmy następujący `Expander` składnik:
 }
 ```
 
-`Expander`Składnik jest dodawany do składnika nadrzędnego, który może wywołać `StateHasChanged` :
+`Expander`Składnik jest dodawany do składnika nadrzędnego, który może wywołać <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> :
 
 ```razor
 <Expander Expanded="true">
@@ -517,7 +517,7 @@ Rozważmy następujący `Expander` składnik:
 </button>
 ```
 
-Początkowo `Expander` składniki działają niezależnie, gdy ich `Expanded` właściwości są przełączane. Składniki podrzędne utrzymują swoje Stany zgodnie z oczekiwaniami. Gdy `StateHasChanged` jest wywoływana w obiekcie nadrzędnym, `Expanded` parametr pierwszego składnika podrzędnego jest resetowany z powrotem do jego wartości początkowej ( `true` ). Wartość drugiego `Expander` składnika `Expanded` nie zostanie zresetowana, ponieważ w drugim składniku nie jest renderowana żadna zawartość podrzędna.
+Początkowo `Expander` składniki działają niezależnie, gdy ich `Expanded` właściwości są przełączane. Składniki podrzędne utrzymują swoje Stany zgodnie z oczekiwaniami. Gdy <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> jest wywoływana w obiekcie nadrzędnym, `Expanded` parametr pierwszego składnika podrzędnego jest resetowany z powrotem do jego wartości początkowej ( `true` ). Wartość drugiego `Expander` składnika `Expanded` nie zostanie zresetowana, ponieważ w drugim składniku nie jest renderowana żadna zawartość podrzędna.
 
 Aby zachować stan w poprzednim scenariuszu, użyj *pola prywatnego* w `Expander` składniku, aby zachować stan przełączenia.
 
@@ -632,7 +632,7 @@ using Microsoft.AspNetCore.Components.Web;
 
 ## <a name="specify-a-base-class"></a>Określ klasę bazową
 
-[`@inherits`][6]Dyrektywa może służyć do określania klasy bazowej dla składnika. Poniższy przykład pokazuje, jak składnik może dziedziczyć klasę bazową, `BlazorRocksBase` , aby zapewnić właściwości i metody składnika. Klasa bazowa powinna pochodzić od `ComponentBase` .
+[`@inherits`][6]Dyrektywa może służyć do określania klasy bazowej dla składnika. Poniższy przykład pokazuje, jak składnik może dziedziczyć klasę bazową, `BlazorRocksBase` , aby zapewnić właściwości i metody składnika. Klasa bazowa powinna pochodzić od <xref:Microsoft.AspNetCore.Components.ComponentBase> .
 
 *Strony/BlazorRocks. Razor*:
 
@@ -660,7 +660,7 @@ namespace BlazorSample
 
 ## <a name="specify-an-attribute"></a>Określ atrybut
 
-Atrybuty można określić w Razor składnikach [`@attribute`][7] dyrektywy. Poniższy przykład stosuje `[Authorize]` atrybut do klasy składnika:
+Atrybuty można określić w Razor składnikach [`@attribute`][7] dyrektywy. Poniższy przykład stosuje [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) atrybut do klasy składnika:
 
 ```razor
 @page "/"
@@ -700,9 +700,9 @@ This is the Index page.
 > [!NOTE]
 > `global::`Kwalifikacja nie jest obsługiwana.
 >
-> Importowanie składników przy użyciu instrukcji z aliasami `using` (np `@using Foo = Bar` .) nie jest obsługiwane.
+> Importowanie składników przy użyciu instrukcji z aliasami [using](/dotnet/csharp/language-reference/keywords/using-statement) (na przykład `@using Foo = Bar` ) nie jest obsługiwane.
 >
-> Częściowo kwalifikowane nazwy nie są obsługiwane. Na przykład dodawanie `@using BlazorSample` i odwoływanie `NavMenu.razor` się za pomocą `<Shared.NavMenu></Shared.NavMenu>` nie jest obsługiwane.
+> Częściowo kwalifikowane nazwy nie są obsługiwane. Na przykład dodawanie `@using BlazorSample` i odwoływanie się do `NavMenu` składnika ( `NavMenu.razor` ) za pomocą `<Shared.NavMenu></Shared.NavMenu>` nie jest obsługiwane.
 
 ## <a name="conditional-html-element-attributes"></a>Warunkowe atrybuty elementu HTML
 
@@ -771,7 +771,7 @@ public class ThemeInfo
 }
 ```
 
-Składnik nadrzędny może zapewnić kaskadową wartość przy użyciu składnika wartości kaskadowych. `CascadingValue`Składnik otacza poddrzewo hierarchii składników i dostarcza jedną wartość do wszystkich składników w tym poddrzewie.
+Składnik nadrzędny może zapewnić kaskadową wartość przy użyciu składnika wartości kaskadowych. <xref:Microsoft.AspNetCore.Components.CascadingValue%601>Składnik otacza poddrzewo hierarchii składników i dostarcza jedną wartość do wszystkich składników w tym poddrzewie.
 
 Przykładowo aplikacja Przykładowa określa informacje o motywie ( `ThemeInfo` ) w jednej z układów aplikacji jako parametr kaskadowy dla wszystkich składników, które tworzą treść układu `@Body` właściwości. `ButtonClass`ma przypisaną wartość `btn-success` w składniku układu. Każdy składnik podrzędny może wykorzystać tę właściwość za pomocą `ThemeInfo` obiektu kaskadowego.
 
@@ -801,7 +801,7 @@ Przykładowo aplikacja Przykładowa określa informacje o motywie ( `ThemeInfo` 
 }
 ```
 
-Aby korzystać z wartości kaskadowych, składniki deklarują kaskadowe parametry przy użyciu `[CascadingParameter]` atrybutu. Wartości kaskadowe są powiązane z parametrami kaskadowymi według typu.
+Aby korzystać z wartości kaskadowych, składniki deklarują kaskadowe parametry przy użyciu [`[CascadingParameter]`](xref:Microsoft.AspNetCore.Components.CascadingParameterAttribute) atrybutu. Wartości kaskadowe są powiązane z parametrami kaskadowymi według typu.
 
 W przykładowej aplikacji `CascadingValuesParametersTheme` składnik wiąże `ThemeInfo` wartość kaskadową z parametrem kaskadowym. Parametr służy do ustawiania klasy CSS dla jednego z przycisków wyświetlanych przez składnik.
 
@@ -841,7 +841,7 @@ W przykładowej aplikacji `CascadingValuesParametersTheme` składnik wiąże `Th
 }
 ```
 
-Aby przetworzyć kaskadowo wiele wartości tego samego typu w ramach tego samego poddrzewa, podaj unikatowy `Name` ciąg dla każdego `CascadingValue` składnika i odpowiadający mu `CascadingParameter` . W poniższym przykładzie dwa `CascadingValue` składniki kaskaduje różne wystąpienia o `MyCascadingType` nazwie:
+Aby przetworzyć kaskadowo wiele wartości tego samego typu w ramach tego samego poddrzewa, podaj unikatowy <xref:Microsoft.AspNetCore.Components.CascadingValue%601.Name%2A> ciąg dla każdego <xref:Microsoft.AspNetCore.Components.CascadingValue%601> składnika i jego odpowiedni [`[CascadingParameter]`](xref:Microsoft.AspNetCore.Components.CascadingParameterAttribute) atrybut. W poniższym przykładzie dwa <xref:Microsoft.AspNetCore.Components.CascadingValue%601> składniki kaskaduje różne wystąpienia o `MyCascadingType` nazwie:
 
 ```razor
 <CascadingValue Value=@parentCascadeParameter1 Name="CascadeParam1">
@@ -928,7 +928,7 @@ Fragmenty renderowania można definiować przy użyciu Razor składni szablonu. 
 @<{HTML tag}>...</{HTML tag}>
 ```
 
-Poniższy przykład ilustruje sposób określania `RenderFragment` i `RenderFragment<T>` wartości oraz renderowania szablonów bezpośrednio w składniku. Fragmenty renderowania mogą być również przekazane jako argumenty do [składników z szablonem](xref:blazor/templated-components).
+Poniższy przykład ilustruje sposób określania <xref:Microsoft.AspNetCore.Components.RenderFragment> i <xref:Microsoft.AspNetCore.Components.RenderFragment%601> wartości oraz renderowania szablonów bezpośrednio w składniku. Fragmenty renderowania mogą być również przekazane jako argumenty do [składników z szablonem](xref:blazor/templated-components).
 
 ```razor
 @timeTemplate
@@ -970,7 +970,7 @@ Podobnie Obrazy SVG są obsługiwane w regułach CSS pliku arkusza stylów (*CSS
 }
 ```
 
-Jednak wbudowane znaczniki SVG nie są obsługiwane we wszystkich scenariuszach. Jeśli umieścisz `<svg>` tag bezpośrednio w pliku składnika (*. Razor*), podstawowe renderowanie obrazu jest obsługiwane, ale wiele scenariuszy zaawansowanych nie jest jeszcze obsługiwanych. Na przykład `<use>` tagi nie są obecnie przestrzegane i `@bind` nie mogą być używane z niektórymi tagami SVG. Aby uzyskać więcej informacji, zobacz [Obsługa SVG w Blazor (#18271 dotnet/aspnetcore)](https://github.com/dotnet/aspnetcore/issues/18271).
+Jednak wbudowane znaczniki SVG nie są obsługiwane we wszystkich scenariuszach. Jeśli umieścisz `<svg>` tag bezpośrednio w pliku składnika (*. Razor*), podstawowe renderowanie obrazu jest obsługiwane, ale wiele scenariuszy zaawansowanych nie jest jeszcze obsługiwanych. Na przykład `<use>` tagi nie są obecnie przestrzegane i [`@bind`][10] nie mogą być używane z niektórymi tagami SVG. Aby uzyskać więcej informacji, zobacz [Obsługa SVG w Blazor (#18271 dotnet/aspnetcore)](https://github.com/dotnet/aspnetcore/issues/18271).
 
 ## <a name="additional-resources"></a>Zasoby dodatkowe
 

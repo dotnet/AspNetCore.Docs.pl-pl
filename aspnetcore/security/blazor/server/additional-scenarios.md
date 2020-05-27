@@ -1,24 +1,12 @@
 ---
-title: BlazorDodatkowe scenariusze zabezpieczeń ASP.NET Core Server
-author: guardrex
-description: Dowiedz się, jak skonfigurować Blazor serwer pod kątem dodatkowych scenariuszy zabezpieczeń.
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 05/19/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: security/blazor/server/additional-scenarios
-ms.openlocfilehash: 9d26cde4d8964a8285241bb0158d8e6f8d5f8dbc
-ms.sourcegitcommit: 16b3abec1ed70f9a206f0cfa7cf6404eebaf693d
-ms.translationtype: MT
-ms.contentlocale: pl-PL
-ms.lasthandoff: 05/17/2020
-ms.locfileid: "83444077"
+title: "ASP.NET Core Blazor Server — dodatkowe scenariusze zabezpieczeń" autor: Opis: "informacje o konfigurowaniu Blazor serwera pod kątem dodatkowych scenariuszy zabezpieczeń".
+monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
 ---
 # <a name="aspnet-core-blazor-server-additional-security-scenarios"></a>BlazorDodatkowe scenariusze zabezpieczeń ASP.NET Core Server
 
@@ -28,7 +16,7 @@ Autor [Javier Calvarro Nelson](https://github.com/javiercn)
 
 Tokeny dostępne poza Razor składnikami w Blazor aplikacji serwerowej mogą być przesyłane do składników z podejściem opisanym w tej sekcji. Przykładowy kod, łącznie z kompletnym `Startup.ConfigureServices` przykładem, można znaleźć w temacie [przekazywanie tokenów do Blazor aplikacji po stronie serwera](https://github.com/javiercn/blazor-server-aad-sample).
 
-Uwierzytelnianie Blazor aplikacji serwerowej tak jak w przypadku zwykłych Razor stron lub aplikacji MVC. Zainicjuj obsługę administracyjną i Zapisz tokeny w pliku cookie uwierzytelniania. Na przykład:
+Uwierzytelnianie Blazor aplikacji serwerowej tak jak w przypadku zwykłych Razor stron lub aplikacji MVC. Zainicjuj obsługę administracyjną i Zapisz tokeny w pliku cookie uwierzytelniania. Przykład:
 
 ```csharp
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
@@ -171,7 +159,7 @@ Alternatywnie można wprowadzić to ustawienie w pliku ustawień aplikacji (*app
 }
 ```
 
-Jeśli znakowanie w segmencie urzędu nie jest odpowiednie dla dostawcy OIDC aplikacji, na przykład z dostawcami spoza usługi AAD, ustaw `Authority` Właściwość bezpośrednio. Ustaw właściwość w <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions> lub w pliku ustawień aplikacji na `Authority` klucz.
+Jeśli znakowanie w segmencie urzędu nie jest odpowiednie dla dostawcy OIDC aplikacji, na przykład z dostawcami spoza usługi AAD, ustaw <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority> Właściwość bezpośrednio. Ustaw właściwość w <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions> lub w pliku ustawień aplikacji na <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority> klucz.
 
 ### <a name="code-changes"></a>Zmiany kodu
 

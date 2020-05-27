@@ -1,23 +1,11 @@
 ---
-title: Przegląd zabezpieczeń ASP.NET Core
-author: rick-anderson
-description: Informacje na temat uwierzytelniania, autoryzacji i podstaw zabezpieczeń w programie ASP.NET Core.
-ms.author: riande
-ms.custom: mvc
-ms.date: 10/24/2018
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: security/index
-ms.openlocfilehash: b507832e34ac850d2bd4e80bab3066e73ea2ad95
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776516"
+title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
 ---
 # <a name="overview-of-aspnet-core-security"></a>Przegląd zabezpieczeń ASP.NET Core
 
@@ -25,7 +13,7 @@ ASP.NET Core pozwala deweloperom łatwo konfigurować zabezpieczenia dla swoich 
 
 ## <a name="aspnet-core-security-features"></a>ASP.NET Core funkcje zabezpieczeń
 
-ASP.NET Core udostępnia wiele narzędzi i bibliotek do zabezpieczania aplikacji, w tym Identity dostawców wbudowanych, ale można korzystać z usług tożsamości innych firm, takich jak Facebook, Twitter i LinkedIn. Za pomocą ASP.NET Core można łatwo zarządzać wpisami tajnymi aplikacji, które są sposobem przechowywania i używania poufnych informacji bez konieczności ujawniania ich w kodzie.
+ASP.NET Core udostępnia wiele narzędzi i bibliotek do zabezpieczania aplikacji, w tym wbudowanych dostawców tożsamości, ale można korzystać z usług tożsamości innych firm, takich jak Facebook, Twitter i LinkedIn. Za pomocą ASP.NET Core można łatwo zarządzać wpisami tajnymi aplikacji, które są sposobem przechowywania i używania poufnych informacji bez konieczności ujawniania ich w kodzie.
 
 ## <a name="authentication-vs-authorization"></a>Uwierzytelnianie a autoryzacja
 

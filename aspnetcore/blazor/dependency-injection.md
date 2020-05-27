@@ -76,7 +76,7 @@ monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
 - 'Razor'
 - SignalRIdentyfikator UID: 
 
------- | | <xref:System.Net.Http.HttpClient> | Przejściowe | Zapewnia metody wysyłania żądań HTTP i odbierania odpowiedzi HTTP z zasobu identyfikowanego przez identyfikator URI.<br><br>Wystąpienie elementu `HttpClient` w aplikacji sieci Blazor webassembly używa przeglądarki do obsługi ruchu HTTP w tle.<br><br>BlazorAplikacje serwera nie domyślnie zawierają `HttpClient` skonfigurowane jako usługa. Udostępnianie `HttpClient` Blazor aplikacji serwerowej.<br><br>Aby uzyskać więcej informacji, zobacz <xref:blazor/call-web-api>. | | `IJSRuntime` | Pojedyncze ( Blazor zestaw webassembly)<br>Zakres ( Blazor serwer) | Reprezentuje wystąpienie środowiska uruchomieniowego JavaScript, w którym są wysyłane wywołania języka JavaScript. Aby uzyskać więcej informacji, zobacz <xref:blazor/call-javascript-from-dotnet>. | | `NavigationManager` | Pojedyncze ( Blazor zestaw webassembly)<br>Zakres ( Blazor serwer) | Zawiera pomocników do pracy z identyfikatorami URI i stanem nawigacji. Aby uzyskać więcej informacji, zobacz [identyfikatory URI i pomocnika stanu nawigacji](xref:blazor/routing#uri-and-navigation-state-helpers). |
+------ | | <xref:System.Net.Http.HttpClient> | Przejściowe | Zapewnia metody wysyłania żądań HTTP i odbierania odpowiedzi HTTP z zasobu identyfikowanego przez identyfikator URI.<br><br>Wystąpienie elementu <xref:System.Net.Http.HttpClient> w aplikacji sieci Blazor webassembly używa przeglądarki do obsługi ruchu HTTP w tle.<br><br>BlazorAplikacje serwera nie domyślnie zawierają <xref:System.Net.Http.HttpClient> skonfigurowane jako usługa. Udostępnianie <xref:System.Net.Http.HttpClient> Blazor aplikacji serwerowej.<br><br>Aby uzyskać więcej informacji, zobacz <xref:blazor/call-web-api>. | | <xref:Microsoft.JSInterop.IJSRuntime> | Pojedyncze ( Blazor zestaw webassembly)<br>Zakres ( Blazor serwer) | Reprezentuje wystąpienie środowiska uruchomieniowego JavaScript, w którym są wysyłane wywołania języka JavaScript. Aby uzyskać więcej informacji, zobacz <xref:blazor/call-javascript-from-dotnet>. | | <xref:Microsoft.AspNetCore.Components.NavigationManager> | Pojedyncze ( Blazor zestaw webassembly)<br>Zakres ( Blazor serwer) | Zawiera pomocników do pracy z identyfikatorami URI i stanem nawigacji. Aby uzyskać więcej informacji, zobacz [identyfikatory URI i pomocnika stanu nawigacji](xref:blazor/routing#uri-and-navigation-state-helpers). |
 
 Niestandardowy dostawca usług nie dostarcza automatycznie usług domyślnych wymienionych w tabeli. W przypadku użycia niestandardowego dostawcy usług i wymagania usług wymienionych w tabeli należy dodać wymagane usługi do nowego dostawcy usług.
 
@@ -154,7 +154,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-`ConfigureServices`Metoda jest przenoszona <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection> a, która jest listą obiektów deskryptora usługi ( <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor> ). Usługi są dodawane przez dostarczenie deskryptorów usługi do kolekcji usług. Poniższy przykład demonstruje koncepcję z `IDataAccess` interfejsem i jego konkretną implementacją `DataAccess` :
+<xref:Microsoft.Extensions.Hosting.IHostBuilder.ConfigureServices%2A>Metoda jest przenoszona <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection> a, która jest listą obiektów deskryptora usługi ( <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor> ). Usługi są dodawane przez dostarczenie deskryptorów usługi do kolekcji usług. Poniższy przykład demonstruje koncepcję z `IDataAccess` interfejsem i jego konkretną implementacją `DataAccess` :
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -218,20 +218,20 @@ System DI jest oparty na systemie DI w ASP.NET Core. Aby uzyskać więcej inform
 
 ## <a name="request-a-service-in-a-component"></a>Żądanie usługi w składniku
 
-Po dodaniu usług do kolekcji usług należy wstrzyknąć usługi do składników za pomocą dyrektywy [ \@ wstrzykiwania](xref:mvc/views/razor#inject) Razor . `@inject`ma dwa parametry:
+Po dodaniu usług do kolekcji usług należy wstrzyknąć usługi do składników za pomocą dyrektywy [ \@ wstrzykiwania](xref:mvc/views/razor#inject) Razor . [`@inject`](xref:mvc/views/razor#inject)ma dwa parametry:
 
 * Wpisz &ndash; Typ usługi do dodania.
 * Właściwość &ndash; Nazwa właściwości otrzymującej wstrzykiwanej usługi App Service. Właściwość nie wymaga ręcznego tworzenia. Kompilator tworzy właściwość.
 
 Aby uzyskać więcej informacji, zobacz <xref:mvc/views/dependency-injection>.
 
-Użyj wielu `@inject` instrukcji, aby wstrzyknąć różne usługi.
+Użyj wielu [`@inject`](xref:mvc/views/razor#inject) instrukcji, aby wstrzyknąć różne usługi.
 
-Poniższy przykład pokazuje, jak używać `@inject` . Implementowanie usługi `Services.IDataAccess` jest wstrzykiwane do właściwości składnika `DataRepository` . Zwróć uwagę, jak kod używa tylko `IDataAccess` abstrakcji:
+Poniższy przykład pokazuje, jak używać [`@inject`](xref:mvc/views/razor#inject) . Implementowanie usługi `Services.IDataAccess` jest wstrzykiwane do właściwości składnika `DataRepository` . Zwróć uwagę, jak kod używa tylko `IDataAccess` abstrakcji:
 
 [!code-razor[](dependency-injection/samples_snapshot/3.x/CustomerList.razor?highlight=2-3,20)]
 
-Wewnętrznie wygenerowana Właściwość ( `DataRepository` ) używa `InjectAttribute` atrybutu. Zazwyczaj ten atrybut nie jest używany bezpośrednio. Jeśli klasa podstawowa jest wymagana dla składników i właściwości wstrzykiwane są również wymagane dla klasy bazowej, należy ręcznie dodać `InjectAttribute` :
+Wewnętrznie wygenerowana Właściwość ( `DataRepository` ) używa [`[Inject]`](xref:Microsoft.AspNetCore.Components.InjectAttribute) atrybutu. Zazwyczaj ten atrybut nie jest używany bezpośrednio. Jeśli klasa podstawowa jest wymagana dla składników i właściwości wstrzykiwane są również wymagane dla klasy bazowej, należy ręcznie dodać [`[Inject]`](xref:Microsoft.AspNetCore.Components.InjectAttribute) atrybut:
 
 ```csharp
 public class ComponentBase : IComponent
@@ -243,7 +243,7 @@ public class ComponentBase : IComponent
 }
 ```
 
-W składnikach pochodnych klasy bazowej `@inject` dyrektywa nie jest wymagana. `InjectAttribute`Klasa bazowa jest wystarczająca:
+W składnikach pochodnych klasy bazowej [`@inject`](xref:mvc/views/razor#inject) dyrektywa nie jest wymagana. <xref:Microsoft.AspNetCore.Components.InjectAttribute>Klasa bazowa jest wystarczająca:
 
 ```razor
 @page "/demo"
@@ -254,7 +254,7 @@ W składnikach pochodnych klasy bazowej `@inject` dyrektywa nie jest wymagana. `
 
 ## <a name="use-di-in-services"></a>Korzystanie z usług DI w
 
-Złożone usługi mogą wymagać dodatkowych usług. W poprzednim przykładzie `DataAccess` może być wymagana `HttpClient` Usługa domyślna. `@inject`(lub `InjectAttribute` ) nie jest dostępny do użytku w usługach. Zamiast tego należy użyć *iniekcji konstruktora* . Wymagane usługi są dodawane przez dodanie parametrów do konstruktora usługi. Gdy program DI tworzy usługę, rozpoznaje usługi, których wymaga w konstruktorze i udostępnia je odpowiednio.
+Złożone usługi mogą wymagać dodatkowych usług. W poprzednim przykładzie `DataAccess` może być wymagana <xref:System.Net.Http.HttpClient> Usługa domyślna. [`@inject`](xref:mvc/views/razor#inject)(lub [`[Inject]`](xref:Microsoft.AspNetCore.Components.InjectAttribute) atrybut) nie jest dostępny do użytku w usługach. Zamiast tego należy użyć *iniekcji konstruktora* . Wymagane usługi są dodawane przez dodanie parametrów do konstruktora usługi. Gdy program DI tworzy usługę, rozpoznaje usługi, których wymaga w konstruktorze i udostępnia je odpowiednio.
 
 ```csharp
 public class DataAccess : IDataAccess
@@ -278,16 +278,16 @@ Wymagania wstępne dotyczące iniekcji konstruktora:
 
 W przypadku aplikacji ASP.NET Core usługi o określonym zakresie są zwykle objęte zakresem bieżącego żądania. Po zakończeniu żądania wszystkie usługi w zakresie lub przejściowym są usuwane przez system DI. W obszarze Blazor aplikacje serwera zakres żądań jest używany przez czas trwania połączenia klienta, co może spowodować, że usługi przejściowe i objęte zakresem będą dużo dłużej niż oczekiwano. W Blazor aplikacjach webassembly usługi zarejestrowane w określonym okresie istnienia są traktowane jako pojedyncze, tak aby znajdowały się one dłużej niż usługi w zakresie w typowym ASP.NET Core aplikacji.
 
-Zastosowanie tego typu w aplikacjach ogranicza okres istnienia usługi Blazor `OwningComponentBase` . `OwningComponentBase`jest abstrakcyjnym typem pochodnym `ComponentBase` , który tworzy zakres di odpowiadający okresowi istnienia składnika. Korzystając z tego zakresu, możliwe jest korzystanie z usługi DI Services z okresem istnienia w zakresie i posiadanie ich na żywo tak długo, jak w przypadku składnika. Gdy składnik zostanie zniszczony, usługi z dostawcy usług w zasięgu składnika również zostaną usunięte. Może to być przydatne w przypadku usług, które:
+Zastosowanie tego typu w aplikacjach ogranicza okres istnienia usługi Blazor <xref:Microsoft.AspNetCore.Components.OwningComponentBase> . <xref:Microsoft.AspNetCore.Components.OwningComponentBase>jest abstrakcyjnym typem pochodnym <xref:Microsoft.AspNetCore.Components.ComponentBase> , który tworzy zakres di odpowiadający okresowi istnienia składnika. Korzystając z tego zakresu, możliwe jest korzystanie z usługi DI Services z okresem istnienia w zakresie i posiadanie ich na żywo tak długo, jak w przypadku składnika. Gdy składnik zostanie zniszczony, usługi z dostawcy usług w zasięgu składnika również zostaną usunięte. Może to być przydatne w przypadku usług, które:
 
 * Należy ponownie użyć w składniku, ponieważ przejściowy okres istnienia jest nieodpowiedni.
 * Nie powinny być współużytkowane przez składniki, ponieważ pojedynczy okres istnienia jest nieodpowiedni.
 
-Dostępne są dwie wersje `OwningComponentBase` typu:
+Dostępne są dwie wersje <xref:Microsoft.AspNetCore.Components.OwningComponentBase> typu:
 
-* `OwningComponentBase`jest abstrakcyjnym, jednorazowym elementem podrzędnym `ComponentBase` typu z `ScopedServices` właściwością chronioną typu `IServiceProvider` . Ten dostawca może służyć do rozpoznawania usług objętych zakresem czasu istnienia składnika.
+* <xref:Microsoft.AspNetCore.Components.OwningComponentBase>jest abstrakcyjnym, jednorazowym elementem podrzędnym <xref:Microsoft.AspNetCore.Components.ComponentBase> typu z <xref:Microsoft.AspNetCore.Components.OwningComponentBase.ScopedServices> właściwością chronioną typu <xref:System.IServiceProvider> . Ten dostawca może służyć do rozpoznawania usług objętych zakresem czasu istnienia składnika.
 
-  Usługi DI są wstrzykiwane do składnika przy użyciu `@inject` lub `InjectAttribute` ( `[Inject]` ) nie są tworzone w zakresie składnika. Aby można było użyć zakresu składnika, usługi muszą zostać rozwiązane przy użyciu `ScopedServices.GetRequiredService` lub `ScopedServices.GetService` . Wszystkie usługi rozpoznane przy użyciu `ScopedServices` dostawcy mają swoje zależności z tego samego zakresu.
+  Program DI Services wprowadzany do składnika przy użyciu [`@inject`](xref:mvc/views/razor#inject) [`[Inject]`](xref:Microsoft.AspNetCore.Components.InjectAttribute) atrybutu lub nie jest tworzony w zakresie składnika. Aby można było użyć zakresu składnika, usługi muszą zostać rozwiązane przy użyciu <xref:Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService%2A> lub <xref:System.IServiceProvider.GetService%2A> . Wszystkie usługi rozpoznane przy użyciu <xref:Microsoft.AspNetCore.Components.OwningComponentBase.ScopedServices> dostawcy mają swoje zależności z tego samego zakresu.
 
   ```razor
   @page "/preferences"
@@ -315,7 +315,7 @@ Dostępne są dwie wersje `OwningComponentBase` typu:
   }
   ```
 
-* `OwningComponentBase<T>`pochodzi z `OwningComponentBase` i dodaje właściwość `Service` zwracającą wystąpienie `T` z dostawcy i zakresu. Ten typ jest wygodnym sposobem uzyskiwania dostępu do usług objętych zakresem bez użycia wystąpienia, `IServiceProvider` gdy istnieje jedna usługa podstawowa wymagana przez aplikację z kontenera di używającego zakresu składnika. Ta `ScopedServices` Właściwość jest dostępna, aby aplikacja mogła uzyskać usługi innych typów, w razie potrzeby.
+* <xref:Microsoft.AspNetCore.Components.OwningComponentBase%601>pochodzi z <xref:Microsoft.AspNetCore.Components.OwningComponentBase> i dodaje <xref:Microsoft.AspNetCore.Components.OwningComponentBase%601.Service%2A> Właściwość zwracającą wystąpienie `T` z dostawcy i zakresu. Ten typ jest wygodnym sposobem uzyskiwania dostępu do usług objętych zakresem bez użycia wystąpienia, <xref:System.IServiceProvider> gdy istnieje jedna usługa podstawowa wymagana przez aplikację z kontenera di używającego zakresu składnika. Ta <xref:Microsoft.AspNetCore.Components.OwningComponentBase.ScopedServices> Właściwość jest dostępna, aby aplikacja mogła uzyskać usługi innych typów, w razie potrzeby.
 
   ```razor
   @page "/users"
@@ -334,16 +334,16 @@ Dostępne są dwie wersje `OwningComponentBase` typu:
 
 ## <a name="use-of-entity-framework-dbcontext-from-di"></a>Korzystanie z Entity Framework DbContext z elementu DI
 
-Jednym z typowych typów usług pobieranych z aplikacji sieci Web typu "i" jest Entity Framework (EF) `DbContext` . Rejestrowanie usług EF przy użyciu `IServiceCollection.AddDbContext` `DbContext` Domyślnie dodaje usługę jako objętą zakresem. Rejestracja w ramach usługi w zakresie może prowadzić do problemów w Blazor aplikacjach, ponieważ powoduje to `DbContext` , że wystąpienia są długotrwałe i udostępniane w całej aplikacji. `DbContext`nie jest bezpieczne dla wątków i nie może być używane współbieżnie.
+Jednym z typowych typów usług pobieranych z aplikacji sieci Web typu "i" jest Entity Framework (EF) <xref:Microsoft.EntityFrameworkCore.DbContext> . Rejestrowanie usług EF przy użyciu <xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContext%2A> <xref:Microsoft.EntityFrameworkCore.DbContext> Domyślnie dodaje usługę jako objętą zakresem. Rejestracja w ramach usługi w zakresie może prowadzić do problemów w Blazor aplikacjach, ponieważ powoduje to <xref:Microsoft.EntityFrameworkCore.DbContext> , że wystąpienia są długotrwałe i udostępniane w całej aplikacji. <xref:Microsoft.EntityFrameworkCore.DbContext>nie jest bezpieczne dla wątków i nie może być używane współbieżnie.
 
-W zależności od aplikacji korzystanie z programu `OwningComponentBase` w celu ograniczenia zakresu jednego `DbContext` składnika *może* rozwiązać ten problem. Jeśli składnik nie korzysta `DbContext` równolegle, wyprowadza składnik z `OwningComponentBase` i pobieranie `DbContext` z `ScopedServices` jest wystarczające, ponieważ gwarantuje to:
+W zależności od aplikacji korzystanie z programu <xref:Microsoft.AspNetCore.Components.OwningComponentBase> w celu ograniczenia zakresu jednego <xref:Microsoft.EntityFrameworkCore.DbContext> składnika *może* rozwiązać ten problem. Jeśli składnik nie korzysta <xref:Microsoft.EntityFrameworkCore.DbContext> równolegle, wyprowadza składnik z <xref:Microsoft.AspNetCore.Components.OwningComponentBase> i pobieranie <xref:Microsoft.EntityFrameworkCore.DbContext> z <xref:Microsoft.AspNetCore.Components.OwningComponentBase.ScopedServices> jest wystarczające, ponieważ gwarantuje to:
 
-* Oddzielne składniki nie współdzielą `DbContext` .
-* `DbContext`Mieszka tylko tak długo, jak i w zależności od tego, czy jest to składnik.
+* Oddzielne składniki nie współdzielą <xref:Microsoft.EntityFrameworkCore.DbContext> .
+* <xref:Microsoft.EntityFrameworkCore.DbContext>Mieszka tylko tak długo, jak i w zależności od tego, czy jest to składnik.
 
-Jeśli pojedynczy składnik może korzystać z współbieżnie `DbContext` (na przykład za każdym razem, gdy użytkownik wybierze przycisk), nawet przy użyciu `OwningComponentBase` nie należy unikać problemów z jednoczesnymi operacjami EF. W takim przypadku należy użyć innej `DbContext` dla każdej operacji logicznej EF. Użyj jednej z następujących metod:
+Jeśli pojedynczy składnik może korzystać z współbieżnie <xref:Microsoft.EntityFrameworkCore.DbContext> (na przykład za każdym razem, gdy użytkownik wybierze przycisk), nawet przy użyciu <xref:Microsoft.AspNetCore.Components.OwningComponentBase> nie należy unikać problemów z jednoczesnymi operacjami EF. W takim przypadku należy użyć innej <xref:Microsoft.EntityFrameworkCore.DbContext> dla każdej operacji logicznej EF. Użyj jednej z następujących metod:
 
-* Utwórz `DbContext` bezpośrednio przy użyciu `DbContextOptions<TContext>` jako argument, który można pobrać z elementu "i" jest bezpieczny wątkowo.
+* Utwórz <xref:Microsoft.EntityFrameworkCore.DbContext> bezpośrednio przy użyciu <xref:Microsoft.EntityFrameworkCore.DbContextOptions%601> jako argument, który można pobrać z elementu "i" jest bezpieczny wątkowo.
 
     ```razor
     @page "/example"
@@ -377,8 +377,8 @@ Jeśli pojedynczy składnik może korzystać z współbieżnie `DbContext` (na p
     }
     ```
 
-* Zarejestruj `DbContext` w kontenerze usługi z przejściowym okresem istnienia:
-  * Podczas rejestrowania kontekstu użyj `ServiceLifetime.Transient` . `AddDbContext`Metoda rozszerzenia przyjmuje dwa opcjonalne parametry typu `ServiceLifetime` . Aby skorzystać z tej metody, należy `contextLifetime` podać tylko parametr `ServiceLifetime.Transient` . `optionsLifetime`może zachować wartość domyślną `ServiceLifetime.Scoped` .
+* Zarejestruj <xref:Microsoft.EntityFrameworkCore.DbContext> w kontenerze usługi z przejściowym okresem istnienia:
+  * Podczas rejestrowania kontekstu użyj <xref:Microsoft.OData.ServiceLifetime.Transient?displayProperty=nameWithType> . <xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContext%2A>Metoda rozszerzenia przyjmuje dwa opcjonalne parametry typu <xref:Microsoft.Extensions.DependencyInjection.ServiceLifetime> . Aby skorzystać z tej metody, należy `contextLifetime` podać tylko parametr <xref:Microsoft.OData.ServiceLifetime.Transient?displayProperty=nameWithType> . `optionsLifetime`może zachować wartość domyślną <xref:Microsoft.OData.ServiceLifetime.Scoped?displayProperty=nameWithType> .
 
     ```csharp
     services.AddDbContext<AppDbContext>(options =>
@@ -386,7 +386,7 @@ Jeśli pojedynczy składnik może korzystać z współbieżnie `DbContext` (na p
          ServiceLifetime.Transient);
     ```  
 
-  * Przejściowy `DbContext` można wstrzyknąć jako normalny (przy użyciu `@inject` ) do składników, które nie wykonują równolegle wielu operacji EF. Te, które mogą wykonywać wiele operacji EF jednocześnie, mogą zażądać oddzielnych `DbContext` obiektów dla każdej operacji równoległej przy użyciu `IServiceProvider.GetRequiredService` .
+  * Przejściowy <xref:Microsoft.EntityFrameworkCore.DbContext> można wstrzyknąć jako normalny (przy użyciu [`@inject`](xref:mvc/views/razor#inject) ) do składników, które nie wykonują równolegle wielu operacji EF. Te, które mogą wykonywać wiele operacji EF jednocześnie, mogą zażądać oddzielnych <xref:Microsoft.EntityFrameworkCore.DbContext> obiektów dla każdej operacji równoległej przy użyciu <xref:Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService%2A> .
 
     ```razor
     @page "/example"

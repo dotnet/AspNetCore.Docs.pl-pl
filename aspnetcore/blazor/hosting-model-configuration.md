@@ -45,7 +45,7 @@ W poniższym przykładzie dla usług IIS Dodaj nagłówek niestandardowy do opub
 > [!NOTE]
 > Aby użyć niestandardowego pliku *Web. config* dla usług IIS, które nie są zastępowane podczas publikowania aplikacji w folderze *publikowania* , zobacz <xref:host-and-deploy/blazor/webassembly#use-a-custom-webconfig> .
 
-Uzyskaj środowisko aplikacji w składniku, wprowadzając `IWebAssemblyHostEnvironment` i odczytując `Environment` Właściwość:
+Uzyskaj środowisko aplikacji w składniku, wprowadzając <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment> i odczytując <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.Environment> Właściwość:
 
 ```razor
 @page "/"
@@ -57,7 +57,7 @@ Uzyskaj środowisko aplikacji w składniku, wprowadzając `IWebAssemblyHostEnvir
 <p>Environment: @HostEnvironment.Environment</p>
 ```
 
-Podczas uruchamiania program `WebAssemblyHostBuilder` ujawnia `IWebAssemblyHostEnvironment` `HostEnvironment` Właściwość przez, co umożliwia deweloperom zdefiniowanie w kodzie logiki specyficznej dla środowiska:
+Podczas uruchamiania program <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder> ujawnia <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment> <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder.HostEnvironment> Właściwość przez, co umożliwia deweloperom zdefiniowanie w kodzie logiki specyficznej dla środowiska:
 
 ```csharp
 if (builder.HostEnvironment.Environment == "Custom")
@@ -71,7 +71,7 @@ Następujące wygodne metody rozszerzające umożliwiają sprawdzanie bieżąceg
 * `IsDevelopment()`
 * `IsProduction()`
 * `IsStaging()`
-* "Isenvironment (" {Nazwa środowiska} ")
+* `IsEnvironment("{ENVIRONMENT NAME}")`
 
 ```csharp
 if (builder.HostEnvironment.IsStaging())
@@ -85,9 +85,9 @@ if (builder.HostEnvironment.IsEnvironment("Custom"))
 };
 ```
 
-`IWebAssemblyHostEnvironment.BaseAddress`Właściwość może być używana podczas uruchamiania, gdy `NavigationManager` Usługa jest niedostępna.
+<xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType>Właściwość może być używana podczas uruchamiania, gdy <xref:Microsoft.AspNetCore.Components.NavigationManager> Usługa jest niedostępna.
 
-### <a name="configuration"></a>Konfiguracja
+### <a name="configuration"></a>Konfigurowanie
 
 BlazorZestaw webassembly ładuje konfigurację z:
 
@@ -176,7 +176,7 @@ Wsuń <xref:Microsoft.Extensions.Configuration.IConfiguration> wystąpienie do s
 }
 ```
 
-Aby odczytać inne pliki konfiguracji z folderu *wwwroot* do konfiguracji, użyj programu `HttpClient` w celu uzyskania zawartości pliku. W przypadku korzystania z tego podejścia istniejąca `HttpClient` rejestracja usługi może używać lokalnego klienta utworzonego do odczytu pliku, jak pokazano w poniższym przykładzie:
+Aby odczytać inne pliki konfiguracji z folderu *wwwroot* do konfiguracji, użyj programu <xref:System.Net.Http.HttpClient> w celu uzyskania zawartości pliku. W przypadku korzystania z tego podejścia istniejąca <xref:System.Net.Http.HttpClient> rejestracja usługi może używać lokalnego klienta utworzonego do odczytu pliku, jak pokazano w poniższym przykładzie:
 
 plik *wwwroot/samochody. JSON*:
 
@@ -473,102 +473,16 @@ BlazorAplikacje serwera są domyślnie skonfigurowane, aby skonfigurować interf
 </body>
 ```
 
-`RenderMode`Określa, czy składnik:
+<xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.RenderMode>Określa, czy składnik:
 
 * Jest wstępnie renderowany na stronie.
 * Jest renderowany jako statyczny kod HTML na stronie lub zawiera informacje niezbędne do uruchomienia Blazor aplikacji przez agenta użytkownika.
 
-| `RenderMode`        | Opis |
-| ---
-title: "ASP.NET Core Blazor Konfiguracja modelu hostingu" autor: Opis: "informacje o Blazor konfiguracji modelu hostingu, w tym o sposobie integrowania Razor składników ze Razor stronami i aplikacjami MVC".
-monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: "ASP.NET Core Blazor Konfiguracja modelu hostingu" autor: Opis: "informacje o Blazor konfiguracji modelu hostingu, w tym o sposobie integrowania Razor składników ze Razor stronami i aplikacjami MVC".
-monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: "ASP.NET Core Blazor Konfiguracja modelu hostingu" autor: Opis: "informacje o Blazor konfiguracji modelu hostingu, w tym o sposobie integrowania Razor składników ze Razor stronami i aplikacjami MVC".
-monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: "ASP.NET Core Blazor Konfiguracja modelu hostingu" autor: Opis: "informacje o Blazor konfiguracji modelu hostingu, w tym o sposobie integrowania Razor składników ze Razor stronami i aplikacjami MVC".
-monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: "ASP.NET Core Blazor Konfiguracja modelu hostingu" autor: Opis: "informacje o Blazor konfiguracji modelu hostingu, w tym o sposobie integrowania Razor składników ze Razor stronami i aplikacjami MVC".
-monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: "ASP.NET Core Blazor Konfiguracja modelu hostingu" autor: Opis: "informacje o Blazor konfiguracji modelu hostingu, w tym o sposobie integrowania Razor składników ze Razor stronami i aplikacjami MVC".
-monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: "ASP.NET Core Blazor Konfiguracja modelu hostingu" autor: Opis: "informacje o Blazor konfiguracji modelu hostingu, w tym o sposobie integrowania Razor składników ze Razor stronami i aplikacjami MVC".
-monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
----------- | ---title: "ASP.NET Core Blazor Konfiguracja modelu hostingu" autor: Opis: "informacje o Blazor konfiguracji modelu hostingu, w tym o sposobie integrowania Razor składników ze Razor stronami i aplikacjami MVC".
-monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: "ASP.NET Core Blazor Konfiguracja modelu hostingu" autor: Opis: "informacje o Blazor konfiguracji modelu hostingu, w tym o sposobie integrowania Razor składników ze Razor stronami i aplikacjami MVC".
-monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: "ASP.NET Core Blazor Konfiguracja modelu hostingu" autor: Opis: "informacje o Blazor konfiguracji modelu hostingu, w tym o sposobie integrowania Razor składników ze Razor stronami i aplikacjami MVC".
-monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
------- | | `ServerPrerendered` | Renderuje składnik do statycznego kodu HTML i zawiera znacznik dla Blazor aplikacji serwera. Po uruchomieniu agenta użytkownika ten znacznik jest używany do uruchamiania Blazor aplikacji. | | `Server`            | Renderuje znacznik dla Blazor aplikacji serwera. Dane wyjściowe ze składnika nie są uwzględniane. Po uruchomieniu agenta użytkownika ten znacznik jest używany do uruchamiania Blazor aplikacji. | | `Static`            | Renderuje składnik do statycznego kodu HTML. |
+| <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.RenderMode> | Opis |
+| --- | --- |
+| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | Renderuje składnik do statycznego kodu HTML i zawiera znacznik dla Blazor aplikacji serwera. Po uruchomieniu agenta użytkownika ten znacznik jest używany do uruchamiania Blazor aplikacji. |
+| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Renderuje znacznik dla Blazor aplikacji serwera. Dane wyjściowe ze składnika nie są uwzględniane. Po uruchomieniu agenta użytkownika ten znacznik jest używany do uruchamiania Blazor aplikacji. |
+| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | Renderuje składnik do statycznego kodu HTML. |
 
 Renderowanie składników serwera ze statyczną stroną HTML nie jest obsługiwane.
 

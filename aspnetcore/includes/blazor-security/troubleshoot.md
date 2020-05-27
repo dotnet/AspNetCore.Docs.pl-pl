@@ -32,3 +32,7 @@ Podczas testowania i rozwiązywania problemów z hostowaną aplikacją Blazor up
 * Wybierz przycisk **Uruchom**.
 * Użyj **debugowania**  >  **Rozpocznij debugowanie** z menu.
 * Naciśnij klawisz <kbd>F5</kbd>.
+
+### <a name="inspect-the-content-of-a-json-web-token-jwt"></a>Sprawdzanie zawartości tokenu sieci Web JSON (JWT)
+
+Aby zdekodować token sieci Web JSON (JWT), użyj narzędzia [JWT.MS](https://jwt.ms/) firmy Microsoft. Wartości w interfejsie użytkownika nigdy nie opuszczają przeglądarki.

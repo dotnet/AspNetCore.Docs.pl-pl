@@ -1,32 +1,20 @@
 ---
-title: Zaawansowane Blazor scenariusze ASP.NET Core
-author: guardrex
-description: Poznaj zaawansowane scenariusze w programie Blazor, w tym sposób włączania ręcznej logiki RenderTreeBuilder do aplikacji.
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 02/18/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: blazor/advanced-scenarios
-ms.openlocfilehash: b47e7b1d7ff148bb5a8d299d3d2089999f017863
-ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
-ms.translationtype: MT
-ms.contentlocale: pl-PL
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82967340"
+title: "ASP.NET Core Blazor scenariuszy zaawansowanych" autor: Opis: "informacje o zaawansowanych scenariuszach w programie Blazor , w tym o sposobie włączania ręcznej logiki RenderTreeBuilder do aplikacji".
+monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
 ---
-# <a name="aspnet-core-blazor-advanced-scenarios"></a>Zaawansowane scenariusze ASP.NET Core Blazor
+# <a name="aspnet-core-blazor-advanced-scenarios"></a>BlazorZaawansowane scenariusze ASP.NET Core
 
 Autorzy [Luke Latham](https://github.com/guardrex) i [Daniel Roth](https://github.com/danroth27)
 
-## <a name="blazor-server-circuit-handler"></a>Procedura obsługi obwodu serwera Blazor
+## <a name="blazor-server-circuit-handler"></a>BlazorProcedura obsługi obwodu serwera
 
-Serwer Blazor umożliwia kodowi Definiowanie *procedury obsługi obwodu*, która umożliwia uruchamianie kodu na zmiany stanu obwodu użytkownika. Procedura obsługi obwodu jest implementowana przez wyprowadzanie z `CircuitHandler` i rejestrowanie klasy w kontenerze usługi aplikacji. Poniższy przykład obsługi obwodu śledzi połączenia otwartych sygnałów:
+BlazorSerwer umożliwia kodowi Definiowanie *procedury obsługi obwodu*, która umożliwia uruchamianie kodu na zmiany stanu obwodu użytkownika. Procedura obsługi obwodu jest implementowana przez wyprowadzanie z `CircuitHandler` i rejestrowanie klasy w kontenerze usługi aplikacji. Poniższy przykład obsługi obwodu śledzi otwarte SignalR połączenia:
 
 ```csharp
 using System.Collections.Generic;
@@ -58,7 +46,7 @@ public class TrackingCircuitHandler : CircuitHandler
 }
 ```
 
-Procedury obsługi obwodu są rejestrowane przy użyciu funkcji DI. Wystąpienia w zakresie są tworzone na wystąpienie obwodu. `TrackingCircuitHandler` Korzystając z powyższego przykładu, tworzona jest usługa singleton, ponieważ stan wszystkich obwodów musi być śledzony:
+Procedury obsługi obwodu są rejestrowane przy użyciu funkcji DI. Wystąpienia w zakresie są tworzone na wystąpienie obwodu. Korzystając z `TrackingCircuitHandler` powyższego przykładu, tworzona jest usługa singleton, ponieważ stan wszystkich obwodów musi być śledzony:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -68,16 +56,16 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Jeśli metody obsługi niestandardowego obwodu zgłaszają nieobsługiwany wyjątek, wyjątek jest krytyczny dla obwodu serwera Blazor. Aby tolerować wyjątki w kodzie programu obsługi lub metodach wywoływanych, zawiń kod w co najmniej jednej instrukcji [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) z obsługą błędów i rejestrowaniem.
+Jeśli metody obsługi niestandardowego obwodu zgłaszają nieobsługiwany wyjątek, wyjątek jest krytyczny dla Blazor obwodu serwera. Aby tolerować wyjątki w kodzie programu obsługi lub metodach wywoływanych, zawiń kod w co najmniej jednej instrukcji [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) z obsługą błędów i rejestrowaniem.
 
-Gdy obwód kończy się, ponieważ użytkownik odłączył się i struktura czyści stan obwodu, struktura usuwa zakres DI obwodu. Oddysponowanie zakresu polega na usunięciu wszelkich usług DI-Scope w <xref:System.IDisposable?displayProperty=fullName>zakresie, które implementują. Jeśli jakakolwiek usługa nie zgłasza nieobsłużonego wyjątku podczas usuwania, struktura rejestruje wyjątek.
+Gdy obwód kończy się, ponieważ użytkownik odłączył się i struktura czyści stan obwodu, struktura usuwa zakres DI obwodu. Oddysponowanie zakresu polega na usunięciu wszelkich usług DI-Scope w zakresie, które implementują <xref:System.IDisposable?displayProperty=fullName> . Jeśli jakakolwiek usługa nie zgłasza nieobsłużonego wyjątku podczas usuwania, struktura rejestruje wyjątek.
 
 ## <a name="manual-rendertreebuilder-logic"></a>Ręczna logika RenderTreeBuilder
 
-`Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder`zapewnia metody manipulowania składnikami i elementami, w tym ręczne Kompilowanie składników w kodzie C#.
+<xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder>zapewnia metody manipulowania składnikami i elementami, w tym ręczne Kompilowanie składników w kodzie C#.
 
 > [!NOTE]
-> Korzystanie z `RenderTreeBuilder` programu do tworzenia składników jest zaawansowanym scenariuszem. Nieprawidłowo sformułowany składnik (na przykład niezamknięty tag znacznika) może spowodować niezdefiniowane zachowanie.
+> Korzystanie z programu <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> do tworzenia składników jest zaawansowanym scenariuszem. Nieprawidłowo sformułowany składnik (na przykład niezamknięty tag znacznika) może spowodować niezdefiniowane zachowanie.
 
 Rozważmy następujący `PetDetails` składnik, który można ręcznie utworzyć w innym składniku:
 
@@ -93,7 +81,7 @@ Rozważmy następujący `PetDetails` składnik, który można ręcznie utworzyć
 }
 ```
 
-W poniższym przykładzie pętla w `CreateComponent` metodzie generuje trzy `PetDetails` składniki. Podczas wywoływania `RenderTreeBuilder` metod tworzenia składników (`OpenComponent` i `AddAttribute`) numery sekwencji są numerami wierszy kodu źródłowego. Algorytm Blazor różnica polega na numerach sekwencji odpowiadających odrębnym wierszom kodu, a nie odrębnym wywoływaniu wywołań. Podczas tworzenia składnika przy użyciu `RenderTreeBuilder` metod umieszczaj argumenty dla numerów sekwencji. **Użycie obliczenia lub licznika do wygenerowania numeru sekwencji może prowadzić do niskiej wydajności.** Aby uzyskać więcej informacji, zobacz sekcję [numery sekwencji powiązane z numerami wierszy kodu i kolejnością niewykonania](#sequence-numbers-relate-to-code-line-numbers-and-not-execution-order) .
+W poniższym przykładzie pętla w `CreateComponent` metodzie generuje trzy `PetDetails` składniki. Podczas wywoływania <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> metod tworzenia składników ( `OpenComponent` i `AddAttribute` ) numery sekwencji są numerami wierszy kodu źródłowego. BlazorAlgorytm różnic polega na numerach sekwencji odpowiadających odrębnym wierszom kodu, a nie odrębnym wywoływaniu wywołań. Podczas tworzenia składnika przy użyciu <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> metod umieszczaj argumenty dla numerów sekwencji. **Użycie obliczenia lub licznika do wygenerowania numeru sekwencji może prowadzić do niskiej wydajności.** Aby uzyskać więcej informacji, zobacz sekcję [numery sekwencji powiązane z numerami wierszy kodu i kolejnością niewykonania](#sequence-numbers-relate-to-code-line-numbers-and-not-execution-order) .
 
 `BuiltContent`składnika
 
@@ -129,15 +117,15 @@ W poniższym przykładzie pętla w `CreateComponent` metodzie generuje trzy `Pet
 ```
 
 > [!WARNING]
-> Typy w programie `Microsoft.AspNetCore.Components.RenderTree` umożliwiają przetwarzanie *wyników* operacji renderowania. Są to wewnętrzne szczegóły implementacji platformy Blazor Framework. Te typy powinny być uznawane za *niestabilne* i mogą ulec zmianie w przyszłych wersjach.
+> Typy w programie <xref:Microsoft.AspNetCore.Components.RenderTree> umożliwiają przetwarzanie *wyników* operacji renderowania. Są to wewnętrzne szczegóły Blazor implementacji platformy. Te typy powinny być uznawane za *niestabilne* i mogą ulec zmianie w przyszłych wersjach.
 
 ### <a name="sequence-numbers-relate-to-code-line-numbers-and-not-execution-order"></a>Numery sekwencji odnoszą się do numerów wierszy kodu, a nie kolejności wykonywania
 
-Pliki składników Razor (*. Razor*) są zawsze kompilowane. Kompilacja jest potencjalną możliwością przekroczenia interpretacji kodu, ponieważ krok kompilacji może służyć do iniekcji informacji, które zwiększają wydajność aplikacji w czasie wykonywania.
+RazorPliki składników (*. Razor*) są zawsze kompilowane. Kompilacja jest potencjalną możliwością przekroczenia interpretacji kodu, ponieważ krok kompilacji może służyć do iniekcji informacji, które zwiększają wydajność aplikacji w czasie wykonywania.
 
 Najważniejszym przykładem tych ulepszeń są *numery sekwencji*. Numery sekwencji wskazują na środowisko uruchomieniowe, które pochodzą z różnych i uporządkowanych wierszy kodu. Środowisko uruchomieniowe używa tych informacji do generowania wydajnych różnic drzewa w czasie liniowym, które są znacznie szybsze niż zwykle jest to możliwe dla algorytmu różnicowego drzewa ogólnego.
 
-Rozważmy następujący plik składnika Razor (*Razor*):
+Weź pod uwagę następujący Razor plik składnika (*Razor*):
 
 ```razor
 @if (someFlag)
@@ -159,20 +147,78 @@ if (someFlag)
 builder.AddContent(1, "Second");
 ```
 
-Gdy kod jest wykonywany po raz pierwszy, jeśli `someFlag` jest `true`, Konstruktor odbiera:
+Gdy kod jest wykonywany po raz pierwszy, jeśli `someFlag` jest `true` , Konstruktor odbiera:
 
 | Sequence | Typ      | Dane   |
-| :------: | --------- | :----: |
-| 0        | Węzeł tekstu | First  |
-| 1        | Węzeł tekstu | Sekunda |
+| :---
+title: "ASP.NET Core Blazor scenariuszy zaawansowanych" autor: Opis: "informacje o zaawansowanych scenariuszach w programie Blazor , w tym o sposobie włączania ręcznej logiki RenderTreeBuilder do aplikacji".
+monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
 
-Wyobraź sobie `someFlag` , `false`że zostanie ona przerenderowana, a znaczniki są renderowane ponownie. Tym razem Konstruktor odbiera:
+---: | ---title: "ASP.NET Core Blazor zaawansowane scenariusze" Author: Description: "Poznaj zaawansowane scenariusze w programie Blazor , w tym sposób włączania ręcznej logiki RenderTreeBuilder do aplikacji".
+monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: "ASP.NET Core Blazor scenariuszy zaawansowanych" autor: Opis: "informacje o zaawansowanych scenariuszach w programie Blazor , w tym o sposobie włączania ręcznej logiki RenderTreeBuilder do aplikacji".
+monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+----- | :----: | | 0 | Węzeł tekstu | Pierwszy | | 1 | Węzeł tekstu | Sekundę |
+
+Wyobraź sobie `someFlag` , że zostanie ona `false` przerenderowana, a znaczniki są renderowane ponownie. Tym razem Konstruktor odbiera:
 
 | Sequence | Typ       | Dane   |
-| :------: | ---------- | :----: |
-| 1        | Węzeł tekstu  | Sekunda |
+| :---
+title: "ASP.NET Core Blazor scenariuszy zaawansowanych" autor: Opis: "informacje o zaawansowanych scenariuszach w programie Blazor , w tym o sposobie włączania ręcznej logiki RenderTreeBuilder do aplikacji".
+monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
 
-Gdy środowisko uruchomieniowe wykonuje porównanie, zobaczy, że element w sekwencji `0` został usunięty, więc generuje następujący skrypt uproszczonej *edycji*:
+---: | ---title: "ASP.NET Core Blazor zaawansowane scenariusze" Author: Description: "Poznaj zaawansowane scenariusze w programie Blazor , w tym sposób włączania ręcznej logiki RenderTreeBuilder do aplikacji".
+monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: "ASP.NET Core Blazor scenariuszy zaawansowanych" autor: Opis: "informacje o zaawansowanych scenariuszach w programie Blazor , w tym o sposobie włączania ręcznej logiki RenderTreeBuilder do aplikacji".
+monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: "ASP.NET Core Blazor scenariuszy zaawansowanych" autor: Opis: "informacje o zaawansowanych scenariuszach w programie Blazor , w tym o sposobie włączania ręcznej logiki RenderTreeBuilder do aplikacji".
+monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+----- | :----: | | 1 | Węzeł tekstu | Sekundę |
+
+Gdy środowisko uruchomieniowe wykonuje porównanie, zobaczy, że element w sekwencji `0` został usunięty, więc generuje następujący *skrypt*uproszczonej edycji:
 
 * Usuń pierwszy węzeł tekstu.
 
@@ -194,22 +240,79 @@ builder.AddContent(seq++, "Second");
 Teraz pierwsze dane wyjściowe to:
 
 | Sequence | Typ      | Dane   |
-| :------: | --------- | :----: |
-| 0        | Węzeł tekstu | First  |
-| 1        | Węzeł tekstu | Sekunda |
+| :---
+title: "ASP.NET Core Blazor scenariuszy zaawansowanych" autor: Opis: "informacje o zaawansowanych scenariuszach w programie Blazor , w tym o sposobie włączania ręcznej logiki RenderTreeBuilder do aplikacji".
+monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
 
-Ten wynik jest identyczny z poprzednim przypadkiem, dlatego nie istnieją żadne negatywne problemy. `someFlag`znajduje `false` się na drugim renderingu, a dane wyjściowe:
+---: | ---title: "ASP.NET Core Blazor zaawansowane scenariusze" Author: Description: "Poznaj zaawansowane scenariusze w programie Blazor , w tym sposób włączania ręcznej logiki RenderTreeBuilder do aplikacji".
+monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: "ASP.NET Core Blazor scenariuszy zaawansowanych" autor: Opis: "informacje o zaawansowanych scenariuszach w programie Blazor , w tym o sposobie włączania ręcznej logiki RenderTreeBuilder do aplikacji".
+monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+----- | :----: | | 0 | Węzeł tekstu | Pierwszy | | 1 | Węzeł tekstu | Sekundę |
+
+Ten wynik jest identyczny z poprzednim przypadkiem, dlatego nie istnieją żadne negatywne problemy. `someFlag`znajduje się `false` na drugim renderingu, a dane wyjściowe:
 
 | Sequence | Typ      | Dane   |
-| :------: | --------- | ------ |
-| 0        | Węzeł tekstu | Sekunda |
+| :---
+title: "ASP.NET Core Blazor scenariuszy zaawansowanych" autor: Opis: "informacje o zaawansowanych scenariuszach w programie Blazor , w tym o sposobie włączania ręcznej logiki RenderTreeBuilder do aplikacji".
+monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+---: | ---title: "ASP.NET Core Blazor zaawansowane scenariusze" Author: Description: "Poznaj zaawansowane scenariusze w programie Blazor , w tym sposób włączania ręcznej logiki RenderTreeBuilder do aplikacji".
+monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: "ASP.NET Core Blazor scenariuszy zaawansowanych" autor: Opis: "informacje o zaawansowanych scenariuszach w programie Blazor , w tym o sposobie włączania ręcznej logiki RenderTreeBuilder do aplikacji".
+monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+----- | ---title: "ASP.NET Core Blazor zaawansowane scenariusze" Author: Description: "Poznaj zaawansowane scenariusze w programie Blazor , w tym sposób włączania ręcznej logiki RenderTreeBuilder do aplikacji".
+monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+--- | | 0 | Węzeł tekstu | Sekundę |
 
 Tym razem algorytm diff widzi, że pojawiły się *dwie* zmiany, a algorytm generuje następujący skrypt edycji:
 
-* Zmień wartość pierwszego węzła tekstowego na `Second`.
+* Zmień wartość pierwszego węzła tekstowego na `Second` .
 * Usuń drugi węzeł tekstu.
 
-Generowanie numerów sekwencji utraciło wszystkie przydatne informacje o tym, gdzie znajdują się `if/else` gałęzie i pętle w oryginalnym kodzie. Wynikiem tego jest różnica **dwa razy** , tak długo, jak wcześniej.
+Generowanie numerów sekwencji utraciło wszystkie przydatne informacje o tym, gdzie `if/else` znajdują się gałęzie i pętle w oryginalnym kodzie. Wynikiem tego jest różnica **dwa razy** , tak długo, jak wcześniej.
 
 Jest to prosty przykład. W bardziej realistycznych przypadkach ze złożonymi i głęboko zagnieżdżonymi strukturami, w szczególności z pętlami, koszt wydajności jest zwykle wyższy. Zamiast natychmiastowego identyfikowania, które bloki lub gałęzie pętli zostały wstawione lub usunięte, algorytm diff musi odnosił się do drzewa renderowania. Zwykle polega to na konieczności kompilowania dłużej edytowanych skryptów, ponieważ algorytm różnicowy jest niewiadome o tym, jak stare i nowe struktury odnoszą się do siebie.
 
@@ -217,20 +320,20 @@ Jest to prosty przykład. W bardziej realistycznych przypadkach ze złożonymi i
 
 * Wydajność aplikacji ma wpływ na to, że numery sekwencji są generowane dynamicznie.
 * Struktura nie może automatycznie tworzyć własnych numerów sekwencji w czasie wykonywania, ponieważ niezbędne informacje nie istnieją, chyba że są przechwytywane w czasie kompilacji.
-* Nie zapisuj długich bloków logiki wykonywanej `RenderTreeBuilder` ręcznie. Preferuj pliki *Razor* i Zezwalaj kompilatorowi na rozpatrywanie numerów sekwencyjnych. Jeśli nie możesz uniknąć ręcznej `RenderTreeBuilder` logiki, Podziel długie bloki kodu na mniejsze fragmenty opakowane. `OpenRegion` / `CloseRegion` Każdy region ma własne oddzielne miejsce numerów sekwencyjnych, więc można uruchomić ponownie od zera (lub dowolnego innego numeru) w każdym regionie.
+* Nie zapisuj długich bloków logiki wykonywanej ręcznie <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> . Preferuj pliki *Razor* i Zezwalaj kompilatorowi na rozpatrywanie numerów sekwencyjnych. Jeśli nie możesz uniknąć ręcznej <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> logiki, Podziel długie bloki kodu na mniejsze fragmenty opakowane <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder.OpenRegion%2A> / <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder.CloseRegion%2A> . Każdy region ma własne oddzielne miejsce numerów sekwencyjnych, więc można uruchomić ponownie od zera (lub dowolnego innego numeru) w każdym regionie.
 * Jeśli numery sekwencji są stałee, algorytm diff wymaga tylko zwiększenia wartości sekwencji. Początkowa wartość i przerwy są nieistotne. Jedną z wiarygodnych opcji jest użycie numeru wiersza kodu jako numeru sekwencyjnego lub rozpoczęcie od zera i zwiększenie według wartości lub setek (lub dowolnego preferowanego interwału). 
 * Blazorużywa numerów sekwencji, podczas gdy inne struktury interfejsu użytkownika rozróżniania drzewa nie są używane. Różnica jest znacznie szybsza, gdy są używane numery sekwencyjne i Blazor ma zalety kroku kompilacji, który zajmuje się automatycznie numerami sekwencyjnymi dla deweloperów tworzących pliki *. Razor* .
 
-## <a name="perform-large-data-transfers-in-blazor-server-apps"></a>Wykonywanie dużych transferów danych Blazor w aplikacjach serwera
+## <a name="perform-large-data-transfers-in-blazor-server-apps"></a>Wykonywanie dużych transferów danych w Blazor aplikacjach serwera
 
-W niektórych scenariuszach należy przenieść duże ilości danych między językami JavaScript i Blazor. Zwykle duże transfery danych odbywają się w przypadku:
+W niektórych scenariuszach należy przenieść duże ilości danych między językami JavaScript i Blazor . Zwykle duże transfery danych odbywają się w przypadku:
 
 * Interfejsy API systemu plików przeglądarki służą do przekazywania lub pobierania pliku.
 * Wymagana jest współdziałanie z biblioteką innej firmy.
 
 Na Blazor serwerze jest stosowane ograniczenie uniemożliwiające przekazywanie pojedynczych dużych komunikatów, które mogą powodować problemy z wydajnością.
 
-Podczas tworzenia kodu, który przesyła dane między językami JavaScript, Blazornależy wziąć pod uwagę następujące wskazówki:
+Podczas tworzenia kodu, który przesyła dane między językami JavaScript, należy wziąć pod uwagę następujące wskazówki Blazor :
 
 * Wydziel dane na mniejsze fragmenty i Wyślij segmenty danych sekwencyjnie, dopóki wszystkie dane nie zostaną odebrane przez serwer.
 * Nie przydzielaj dużych obiektów w kodzie JavaScript i C#.
@@ -335,16 +438,16 @@ public class FileUploader : IDisposable
 
 W poprzednim przykładzie:
 
-* `maxBase64SegmentSize` Jest ustawiona na `8192`, który jest obliczany z `maxBase64SegmentSize = segmentSize * 4 / 3`.
-* Interfejsy API zarządzania pamięcią programu .NET Core na niskim poziomie są używane do przechowywania segmentów pamięci na `uploadedSegments`serwerze w systemie.
-* `ReceiveFile` Metoda jest używana do obsługi przekazywania za pomocą narzędzia js Interop:
-  * Rozmiar pliku jest określany w bajtach za pomocą narzędzia `jsRuntime.InvokeAsync<FileInfo>('getFileSize', selector)`js Interop z.
-  * Liczba segmentów do odebrania jest obliczana i przechowywana w `numberOfSegments`.
-  * Segmenty są żądane w `for` pętli za pomocą narzędzia js Interop `jsRuntime.InvokeAsync<string>('receiveSegment', i, selector)`z. Wszystkie segmenty, ale ostatnie muszą mieć 8 192 bajtów przed dekodowaniem. Klient jest zmuszony do wydajnego wysyłania danych.
-  * W przypadku każdego odebranego segmentu sprawdzenia są wykonywane przed dekodowaniem w <xref:System.Convert.TryFromBase64String%2A>.
-  * Strumień z danymi jest zwracany jako nowy <xref:System.IO.Stream> (`SegmentedStream`) po zakończeniu przekazywania.
+* `maxBase64SegmentSize`Jest ustawiona na `8192` , który jest obliczany z `maxBase64SegmentSize = segmentSize * 4 / 3` .
+* Interfejsy API zarządzania pamięcią programu .NET Core na niskim poziomie są używane do przechowywania segmentów pamięci na serwerze w systemie `uploadedSegments` .
+* `ReceiveFile`Metoda jest używana do obsługi przekazywania za pomocą narzędzia js Interop:
+  * Rozmiar pliku jest określany w bajtach za pomocą narzędzia JS Interop z `jsRuntime.InvokeAsync<FileInfo>('getFileSize', selector)` .
+  * Liczba segmentów do odebrania jest obliczana i przechowywana w `numberOfSegments` .
+  * Segmenty są żądane w `for` pętli za pomocą narzędzia js Interop z `jsRuntime.InvokeAsync<string>('receiveSegment', i, selector)` . Wszystkie segmenty, ale ostatnie muszą mieć 8 192 bajtów przed dekodowaniem. Klient jest zmuszony do wydajnego wysyłania danych.
+  * W przypadku każdego odebranego segmentu sprawdzenia są wykonywane przed dekodowaniem w <xref:System.Convert.TryFromBase64String%2A> .
+  * Strumień z danymi jest zwracany jako nowy <xref:System.IO.Stream> ( `SegmentedStream` ) po zakończeniu przekazywania.
 
-Klasa łańcucha segmentów uwidacznia listę segmentów jako niemożliwy do przeszukiwania <xref:System.IO.Stream>:
+Klasa łańcucha segmentów uwidacznia listę segmentów jako niemożliwy do przeszukiwania <xref:System.IO.Stream> :
 
 ```csharp
 using System;

@@ -54,7 +54,7 @@ Następujące pliki i foldery tworzą Blazor aplikację wygenerowaną na podstaw
     * Pobiera środowisko uruchomieniowe platformy .NET, aplikację i zależności aplikacji.
     * Inicjuje środowisko uruchomieniowe, aby uruchomić aplikację.
 
-* *App. Razor* &ndash; główny składnik aplikacji, który konfiguruje Routing po stronie klienta za pomocą <xref:Microsoft.AspNetCore.Components.Routing.Router> składnika. `Router`Składnik przechwytuje nawigację przeglądarki i renderuje stronę pasującą do żądanego adresu.
+* *App. Razor* &ndash; główny składnik aplikacji, który konfiguruje Routing po stronie klienta za pomocą <xref:Microsoft.AspNetCore.Components.Routing.Router> składnika. <xref:Microsoft.AspNetCore.Components.Routing.Router>Składnik przechwytuje nawigację przeglądarki i renderuje stronę pasującą do żądanego adresu.
 
 * *Pages* Folder strony &ndash; zawiera składniki/strony z obsługą routingu (*. Razor*), które tworzą Blazor aplikację i Razor stronę główną Blazor aplikacji serwera. Trasy dla każdej strony są określone za pomocą [`@page`](xref:mvc/views/razor#page) dyrektywy. Szablon zawiera następujące elementy:
   * *_Host. cshtml* ( Blazor serwer) &ndash; Strona główna aplikacji zaimplementowana jako Razor Strona:
@@ -68,7 +68,7 @@ Następujące pliki i foldery tworzą Blazor aplikację wygenerowaną na podstaw
 
 * *Shared* Folder udostępniony &ndash; zawiera inne składniki interfejsu użytkownika (*. Razor*) używane przez aplikację:
   * `MainLayout`(*MainLayout. Razor*) &ndash; składnik układu aplikacji.
-  * `NavMenu`(*NavMenu. Razor*) &ndash; implementuje nawigację po pasku bocznym. Zawiera [składnik NavLink](xref:blazor/routing#navlink-component) ( <xref:Microsoft.AspNetCore.Components.Routing.NavLink> ), który renderuje linki nawigacji do innych Razor składników. `NavLink`Składnik automatycznie wskazuje wybrany stan podczas ładowania składnika, co pomaga użytkownikowi zrozumieć, który składnik jest aktualnie wyświetlany.
+  * `NavMenu`(*NavMenu. Razor*) &ndash; implementuje nawigację po pasku bocznym. Zawiera [składnik NavLink](xref:blazor/routing#navlink-component) ( <xref:Microsoft.AspNetCore.Components.Routing.NavLink> ), który renderuje linki nawigacji do innych Razor składników. <xref:Microsoft.AspNetCore.Components.Routing.NavLink>Składnik automatycznie wskazuje wybrany stan podczas ładowania składnika, co pomaga użytkownikowi zrozumieć, który składnik jest aktualnie wyświetlany.
 
 * *_Imports. Razor* &ndash; Zawiera wspólne Razor dyrektywy do uwzględnienia w składnikach aplikacji (*. Razor*), takich jak [`@using`](xref:mvc/views/razor#using) dyrektywy dotyczące przestrzeni nazw.
 

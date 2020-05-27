@@ -1,24 +1,12 @@
 ---
-title: ASP.NET Core Blazor najlepszych rozwiązań dotyczących wydajności zestawu Webassembly
-author: pranavkm
-description: Wskazówki dotyczące zwiększania wydajności w ASP.NET Core Blazor aplikacjach webassembly i unikania typowych problemów z wydajnością.
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 05/13/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: performance/blazor/webassembly-best-practices
-ms.openlocfilehash: 9e9b166cb9ce9870a8ff275b72bb12f04b84751b
-ms.sourcegitcommit: e20653091c30e0768c4f960343e2c3dd658bba13
-ms.translationtype: MT
-ms.contentlocale: pl-PL
-ms.lasthandoff: 05/16/2020
-ms.locfileid: "83439438"
+title: "ASP.NET Core Blazor najlepsze rozwiązania z zakresu wydajności zestawu webassembly" autor: Opis: "porady dotyczące zwiększania wydajności w Blazor aplikacjach ASP.NET Core webassembly i unikania typowych problemów z wydajnością".
+monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
 ---
 # <a name="aspnet-core-blazor-webassembly-performance-best-practices"></a>ASP.NET Core Blazor najlepszych rozwiązań dotyczących wydajności zestawu Webassembly
 
@@ -28,9 +16,9 @@ Ten artykuł zawiera wskazówki dotyczące ASP.NET Core najlepszych rozwiązań 
 
 ## <a name="avoid-unnecessary-component-renders"></a>Unikaj renderowania zbędnych składników
 
-Blazoralgorytm różnicowania unika odrenderowania składnika, gdy algorytm postrzega, że składnik nie został zmieniony. Przesłoń [ComponentBase. ShouldRender](xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A) w celu uzyskania szczegółowej kontroli nad renderowaniem składników.
+Blazoralgorytm różnicowania unika odrenderowania składnika, gdy algorytm postrzega, że składnik nie został zmieniony. Przesłoń dla szczegółowej <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A?displayProperty=nameWithType> kontroli nad renderowaniem składników.
 
-W przypadku tworzenia składnika tylko interfejsu użytkownika, który nigdy nie zmienia się po początkowym renderowaniu, skonfiguruj `ShouldRender` do zwrócenia `false` :
+W przypadku tworzenia składnika tylko interfejsu użytkownika, który nigdy nie zmienia się po początkowym renderowaniu, skonfiguruj <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> do zwrócenia `false` :
 
 ```razor
 @code {
@@ -42,9 +30,9 @@ Większość aplikacji nie wymaga precyzyjnej kontroli, ale <xref:Microsoft.AspN
 
 W poniższym przykładzie:
 
-* <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A>jest zastępowany i ustawiany na wartość `shouldRender` pola, początkowo `false` podczas ładowania składnika.
-* Gdy przycisk jest zaznaczony, `shouldRender` jest ustawiony na `true` , co wymusza ponowną renderowanie składnika przy użyciu zaktualizowanego `currentCount` .
-* Natychmiast po <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A> ponownym renderowaniu ustawia wartość z powrotem na, aby zapobiec dalszemu ponownemu przywracaniu do `shouldRender` `false` momentu, gdy przycisk zostanie wybrany.
+* <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A>jest zastępowany i ustawiany na wartość <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> pola, początkowo `false` podczas ładowania składnika.
+* Gdy przycisk jest zaznaczony, <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> jest ustawiony na `true` , co wymusza ponowną renderowanie składnika przy użyciu zaktualizowanego `currentCount` .
+* Natychmiast po <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A> ponownym renderowaniu ustawia wartość z powrotem na, aby zapobiec dalszemu ponownemu przywracaniu do <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> `false` momentu, gdy przycisk zostanie wybrany.
 
 ```razor
 <p>Current count: @currentCount</p>

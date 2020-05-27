@@ -11,11 +11,11 @@ title: "ASP.NET Core Blazor routing" Author: Description: monikerRange: MS. Auth
 
 Autor [Luke Latham](https://github.com/guardrex)
 
-Dowiedz się, jak kierować żądania i jak używać `NavLink` składnika do tworzenia linków nawigacji w Blazor aplikacjach.
+Dowiedz się, jak kierować żądania i jak używać <xref:Microsoft.AspNetCore.Components.Routing.NavLink> składnika do tworzenia linków nawigacji w Blazor aplikacjach.
 
 ## <a name="aspnet-core-endpoint-routing-integration"></a>ASP.NET Core integracja z routingiem punktu końcowego
 
-BlazorSerwer jest zintegrowany z [ASP.NET Core routingiem punktów końcowych](xref:fundamentals/routing). Aplikacja ASP.NET Core jest skonfigurowana do akceptowania połączeń przychodzących dla składników interaktywnych za pomocą `MapBlazorHub` programu w programie `Startup.Configure` :
+BlazorSerwer jest zintegrowany z [ASP.NET Core routingiem punktów końcowych](xref:fundamentals/routing). Aplikacja ASP.NET Core jest skonfigurowana do akceptowania połączeń przychodzących dla składników interaktywnych za pomocą <xref:Microsoft.AspNetCore.Builder.ComponentEndpointRouteBuilderExtensions.MapBlazorHub%2A> programu w programie `Startup.Configure` :
 
 [!code-csharp[](routing/samples_snapshot/3.x/Startup.cs?highlight=5)]
 
@@ -23,7 +23,7 @@ Najbardziej typową konfiguracją jest kierowanie wszystkich żądań do Razor s
 
 ## <a name="route-templates"></a>Szablony tras
 
-`Router`Składnik umożliwia kierowanie do każdego składnika z określoną trasą. `Router`Składnik pojawi się w pliku *App. Razor* :
+<xref:Microsoft.AspNetCore.Components.Routing.Router>Składnik umożliwia kierowanie do każdego składnika z określoną trasą. <xref:Microsoft.AspNetCore.Components.Routing.Router>Składnik pojawi się w pliku *App. Razor* :
 
 ```razor
 <Router AppAssembly="typeof(Startup).Assembly">
@@ -38,12 +38,12 @@ Najbardziej typową konfiguracją jest kierowanie wszystkich żądań do Razor s
 
 Gdy plik *Razor* z `@page` dyrektywą jest kompilowany, wygenerowana Klasa jest dostarczana z <xref:Microsoft.AspNetCore.Components.RouteAttribute> określeniem szablonu trasy.
 
-W środowisku uruchomieniowym `RouteView` składnik:
+W środowisku uruchomieniowym <xref:Microsoft.AspNetCore.Components.RouteView> składnik:
 
-* Odbiera `RouteData` od siebie `Router` wraz z dowolnymi żądanymi parametrami.
+* Odbiera <xref:Microsoft.AspNetCore.Components.RouteData> od siebie <xref:Microsoft.AspNetCore.Components.Routing.Router> wraz z dowolnymi żądanymi parametrami.
 * Renderuje określony składnik za pomocą układu (lub opcjonalnego układu domyślnego) przy użyciu określonych parametrów.
 
-Opcjonalnie można określić `DefaultLayout` parametr z klasą układu, która ma być używana dla składników, które nie określają układu. Domyślne Blazor Szablony określają `MainLayout` składnik. *MainLayout. Razor* znajduje się w folderze *udostępnionym* projektu szablonu. Aby uzyskać więcej informacji na temat układów, zobacz <xref:blazor/layouts> .
+Opcjonalnie można określić <xref:Microsoft.AspNetCore.Components.RouteView.DefaultLayout> parametr z klasą układu, która ma być używana dla składników, które nie określają układu. Domyślne Blazor Szablony określają `MainLayout` składnik. *MainLayout. Razor* znajduje się w folderze *udostępnionym* projektu szablonu. Aby uzyskać więcej informacji na temat układów, zobacz <xref:blazor/layouts> .
 
 Do składnika można zastosować wiele szablonów tras. Poniższy składnik odpowiada na żądania dla `/BlazorRoute` i `/DifferentBlazorRoute` :
 
@@ -59,9 +59,9 @@ Do składnika można zastosować wiele szablonów tras. Poniższy składnik odpo
 
 ## <a name="provide-custom-content-when-content-isnt-found"></a>Podaj zawartość niestandardową, jeśli nie można odnaleźć zawartości
 
-`Router`Składnik umożliwia aplikacji określenie zawartości niestandardowej, jeśli nie można odnaleźć zawartości dla żądanej trasy.
+<xref:Microsoft.AspNetCore.Components.Routing.Router>Składnik umożliwia aplikacji określenie zawartości niestandardowej, jeśli nie można odnaleźć zawartości dla żądanej trasy.
 
-W pliku *App. Razor* Ustaw zawartość niestandardową w `NotFound` parametrze szablonu `Router` składnika:
+W pliku *App. Razor* Ustaw zawartość niestandardową w <xref:Microsoft.AspNetCore.Components.Routing.Router.NotFound> parametrze szablonu <xref:Microsoft.AspNetCore.Components.Routing.Router> składnika:
 
 ```razor
 <Router AppAssembly="typeof(Startup).Assembly">
@@ -75,11 +75,11 @@ W pliku *App. Razor* Ustaw zawartość niestandardową w `NotFound` parametrze s
 </Router>
 ```
 
-Zawartość `<NotFound>` tagów może zawierać dowolne elementy, takie jak inne składniki interaktywne. Aby zastosować domyślny układ do `NotFound` zawartości, zobacz <xref:blazor/layouts> .
+Zawartość `<NotFound>` tagów może zawierać dowolne elementy, takie jak inne składniki interaktywne. Aby zastosować domyślny układ do <xref:Microsoft.AspNetCore.Components.Routing.Router.NotFound> zawartości, zobacz <xref:blazor/layouts> .
 
 ## <a name="route-to-components-from-multiple-assemblies"></a>Kierowanie do składników z wielu zestawów
 
-Użyj `AdditionalAssemblies` parametru, aby określić dodatkowe zestawy dla `Router` składnika do uwzględnienia podczas wyszukiwania składników routingu. Określone zestawy są traktowane jako uzupełnienie `AppAssembly` określonego zestawu. W poniższym przykładzie `Component1` jest składnikiem rutowanym zdefiniowanym w bibliotece klas, do której się odwołuje. W poniższym `AdditionalAssemblies` przykładzie przedstawiono obsługę routingu dla `Component1` :
+Użyj <xref:Microsoft.AspNetCore.Components.Routing.Router.AdditionalAssemblies> parametru, aby określić dodatkowe zestawy dla <xref:Microsoft.AspNetCore.Components.Routing.Router> składnika do uwzględnienia podczas wyszukiwania składników routingu. Określone zestawy są traktowane jako uzupełnienie `AppAssembly` określonego zestawu. W poniższym przykładzie `Component1` jest składnikiem rutowanym zdefiniowanym w bibliotece klas, do której się odwołuje. W poniższym <xref:Microsoft.AspNetCore.Components.Routing.Router.AdditionalAssemblies> przykładzie przedstawiono obsługę routingu dla `Component1` :
 
 ```razor
 <Router
@@ -606,7 +606,7 @@ title: "ASP.NET Core Blazor routing" Author: Description: monikerRange: MS. Auth
 ---------------: | | `bool`     | `{active:bool}`   | `true`, `FALSE`                                                                  | Nie | | `datetime` | `{dob:datetime}`  | `2016-12-31`, `2016-12-31 7:32pm`                                                | Tak | | `decimal`  | `{price:decimal}` | `49.99`, `-1,000.01`                                                             | Tak | | `double`   | `{weight:double}` | `1.234`, `-1,001.01e8`                                                           | Tak | | `float`    | `{weight:float}`  | `1.234`, `-1,001.01e8`                                                           | Tak | | `guid`     | `{id:guid}`       | `CD2C1638-1638-72D5-1638-DEADBEEF1638`, `{CD2C1638-1638-72D5-1638-DEADBEEF1638}` | Nie | | `int`      | `{id:int}`        | `123456789`, `-123456789`                                                        | Tak | | `long`     | `{ticks:long}`    | `123456789`, `-123456789`                                                        | Tak |
 
 > [!WARNING]
-> Ograniczenia trasy, które weryfikują adres URL i są konwertowane na typ CLR (takie jak `int` lub `DateTime` ), zawsze używają niezmiennej kultury. W tych ograniczeniach przyjęto założenie, że adres URL nie jest Lokalizowalny.
+> Ograniczenia trasy, które weryfikują adres URL i są konwertowane na typ CLR (takie jak `int` lub <xref:System.DateTime> ), zawsze używają niezmiennej kultury. W tych ograniczeniach przyjęto założenie, że adres URL nie jest Lokalizowalny.
 
 ### <a name="routing-with-urls-that-contain-dots"></a>Routing z adresami URL zawierającymi kropki
 
@@ -628,20 +628,20 @@ Aby uzyskać więcej informacji, zobacz <xref:fundamentals/routing>.
 
 ## <a name="navlink-component"></a>Składnik NavLink
 
-`NavLink`Podczas tworzenia linków nawigacji Użyj składnika zamiast elementów hiperlinków HTML ( `<a>` ). `NavLink`Składnik zachowuje się jak `<a>` element, z wyjątkiem przełączenia `active` klasy CSS w zależności od tego, czy jest on `href` zgodny z bieżącym adresem URL. `active`Klasa pomaga użytkownikowi zrozumieć, która strona jest aktywną stroną między wyświetlanymi łączami nawigacji.
+<xref:Microsoft.AspNetCore.Components.Routing.NavLink>Podczas tworzenia linków nawigacji Użyj składnika zamiast elementów hiperlinków HTML ( `<a>` ). <xref:Microsoft.AspNetCore.Components.Routing.NavLink>Składnik zachowuje się jak `<a>` element, z wyjątkiem przełączenia `active` klasy CSS w zależności od tego, czy jest on `href` zgodny z bieżącym adresem URL. `active`Klasa pomaga użytkownikowi zrozumieć, która strona jest aktywną stroną między wyświetlanymi łączami nawigacji.
 
-Poniższy `NavMenu` składnik tworzy pasek nawigacyjny [Bootstrap](https://getbootstrap.com/docs/) , który pokazuje, jak używać `NavLink` składników:
+Poniższy `NavMenu` składnik tworzy pasek nawigacyjny [Bootstrap](https://getbootstrap.com/docs/) , który pokazuje, jak używać <xref:Microsoft.AspNetCore.Components.Routing.NavLink> składników:
 
 [!code-razor[](routing/samples_snapshot/3.x/NavMenu.razor?highlight=4,9)]
 
-Dostępne są dwie `NavLinkMatch` Opcje, które można przypisać do `Match` atrybutu `<NavLink>` elementu:
+Dostępne są dwie <xref:Microsoft.AspNetCore.Components.Routing.NavLinkMatch> Opcje, które można przypisać do `Match` atrybutu `<NavLink>` elementu:
 
-* `NavLinkMatch.All`&ndash; `NavLink` Jest aktywny, gdy jest zgodny z całym bieżącym adresem URL.
-* `NavLinkMatch.Prefix`(*ustawienie domyślne*) &ndash; `NavLink`Jest aktywny, gdy pasuje do dowolnego prefiksu bieżącego adresu URL.
+* <xref:Microsoft.AspNetCore.Components.Routing.NavLinkMatch.All?displayProperty=nameWithType>&ndash; <xref:Microsoft.AspNetCore.Components.Routing.NavLink> Jest aktywny, gdy jest zgodny z całym bieżącym adresem URL.
+* <xref:Microsoft.AspNetCore.Components.Routing.NavLinkMatch.Prefix?displayProperty=nameWithType>(*ustawienie domyślne*) &ndash; <xref:Microsoft.AspNetCore.Components.Routing.NavLink>Jest aktywny, gdy pasuje do dowolnego prefiksu bieżącego adresu URL.
 
-W poprzednim przykładzie Strona główna `NavLink` `href=""` odpowiada GŁÓWNEmu adresowi URL i odbiera tylko `active` klasy CSS przy domyślnym adresie URL ścieżki podstawowej aplikacji (na przykład `https://localhost:5001/` ). Druga `NavLink` otrzymuje klasę, `active` gdy użytkownik odwiedzi dowolny adres URL z `MyComponent` prefiksem (na przykład `https://localhost:5001/MyComponent` i `https://localhost:5001/MyComponent/AnotherSegment` ).
+W poprzednim przykładzie Strona główna <xref:Microsoft.AspNetCore.Components.Routing.NavLink> `href=""` odpowiada GŁÓWNEmu adresowi URL i odbiera tylko `active` klasy CSS przy domyślnym adresie URL ścieżki podstawowej aplikacji (na przykład `https://localhost:5001/` ). Druga <xref:Microsoft.AspNetCore.Components.Routing.NavLink> otrzymuje klasę, `active` gdy użytkownik odwiedzi dowolny adres URL z `MyComponent` prefiksem (na przykład `https://localhost:5001/MyComponent` i `https://localhost:5001/MyComponent/AnotherSegment` ).
 
-Dodatkowe `NavLink` atrybuty składników są przenoszone do renderowanego tagu zakotwiczenia. W poniższym przykładzie `NavLink` składnik zawiera `target` atrybut:
+Dodatkowe <xref:Microsoft.AspNetCore.Components.Routing.NavLink> atrybuty składników są przenoszone do renderowanego tagu zakotwiczenia. W poniższym przykładzie <xref:Microsoft.AspNetCore.Components.Routing.NavLink> składnik zawiera `target` atrybut:
 
 ```razor
 <NavLink href="my-page" target="_blank">My page</NavLink>
@@ -655,7 +655,7 @@ Renderuje następujący znacznik HTML:
 
 ## <a name="uri-and-navigation-state-helpers"></a>Pomoc dotycząca stanu identyfikatora URI i nawigacji
 
-Służy <xref:Microsoft.AspNetCore.Components.NavigationManager> do pracy z identyfikatorami URI i nawigacją w kodzie C#. `NavigationManager`zawiera zdarzenie i metody przedstawione w poniższej tabeli.
+Służy <xref:Microsoft.AspNetCore.Components.NavigationManager> do pracy z identyfikatorami URI i nawigacją w kodzie C#. <xref:Microsoft.AspNetCore.Components.NavigationManager>zawiera zdarzenie i metody przedstawione w poniższej tabeli.
 
 | Członek | Opis |
 | ---
@@ -689,7 +689,7 @@ title: "ASP.NET Core Blazor routing" Author: Description: monikerRange: MS. Auth
 - 'Razor'
 - SignalRIdentyfikator UID: 
 
------- | | Identyfikator URI | Pobiera bieżący bezwzględny identyfikator URI. | | BaseUri | Pobiera podstawowy identyfikator URI (z końcowym ukośnikiem), który można dołączać do względnych ścieżek URI w celu utworzenia bezwzględnego identyfikatora URI. Zazwyczaj `BaseUri` odpowiada `href` atrybutowi `<base>` elementu dokumentu w *wwwroot/index.html* ( Blazor webassembly) lub *Pages/_Host. cshtml* ( Blazor serwer). | | Typu NavigateTo | Przechodzi do określonego identyfikatora URI. Jeśli `forceLoad` jest `true` :<ul><li>Routing po stronie klienta jest pomijany.</li><li>W przeglądarce wymuszone jest załadowanie nowej strony z serwera, niezależnie od tego, czy identyfikator URI jest zwykle obsługiwany przez router po stronie klienta.</li></ul> | | LocationChanged | Zdarzenie, które jest wyzwalane po zmianie lokalizacji nawigacji. | | ToAbsoluteUri | Konwertuje względny identyfikator URI na bezwzględny identyfikator URI. | | <span style="word-break:normal;word-wrap:normal">ToBaseRelativePath</span> | Przy użyciu podstawowego identyfikatora URI (na przykład identyfikatora URI zwróconego wcześniej przez `GetBaseUri` ), program konwertuje bezwzględny identyfikator URI na identyfikator URI względem podstawowego prefiksu URI. |
+------ | | <xref:Microsoft.AspNetCore.Components.NavigationManager.Uri> | Pobiera bieżący bezwzględny identyfikator URI. | | <xref:Microsoft.AspNetCore.Components.NavigationManager.BaseUri> | Pobiera podstawowy identyfikator URI (z końcowym ukośnikiem), który można dołączać do względnych ścieżek URI w celu utworzenia bezwzględnego identyfikatora URI. Zazwyczaj <xref:Microsoft.AspNetCore.Components.NavigationManager.BaseUri> odpowiada `href` atrybutowi `<base>` elementu dokumentu w *wwwroot/index.html* ( Blazor webassembly) lub *Pages/_Host. cshtml* ( Blazor serwer). | | <xref:Microsoft.AspNetCore.Components.NavigationManager.NavigateTo%2A> | Przechodzi do określonego identyfikatora URI. Jeśli `forceLoad` jest `true` :<ul><li>Routing po stronie klienta jest pomijany.</li><li>W przeglądarce wymuszone jest załadowanie nowej strony z serwera, niezależnie od tego, czy identyfikator URI jest zwykle obsługiwany przez router po stronie klienta.</li></ul> | | <xref:Microsoft.AspNetCore.Components.NavigationManager.LocationChanged> | Zdarzenie, które jest wyzwalane po zmianie lokalizacji nawigacji. | | <xref:Microsoft.AspNetCore.Components.NavigationManager.ToAbsoluteUri%2A> | Konwertuje względny identyfikator URI na bezwzględny identyfikator URI. | | <span style="word-break:normal;word-wrap:normal"><xref:Microsoft.AspNetCore.Components.NavigationManager.ToBaseRelativePath%2A></span> | Przy użyciu podstawowego identyfikatora URI (na przykład identyfikatora URI zwróconego wcześniej przez <xref:Microsoft.AspNetCore.Components.NavigationManager.BaseUri> ), program konwertuje bezwzględny identyfikator URI na identyfikator URI względem podstawowego prefiksu URI. |
 
 Poniższy składnik przechodzi do `Counter` składnika aplikacji po wybraniu przycisku:
 
@@ -711,7 +711,7 @@ Poniższy składnik przechodzi do `Counter` składnika aplikacji po wybraniu prz
 }
 ```
 
-Poniższy składnik obsługuje zdarzenie zmiany lokalizacji. Metoda jest odłączana, `HandleLocationChanged` gdy `Dispose` jest wywoływana przez platformę. Odłączanie metody zezwala na wyrzucanie elementów bezużytecznych składnika.
+Poniższy składnik obsługuje zdarzenie zmiany lokalizacji przez ustawienie <xref:Microsoft.AspNetCore.Components.NavigationManager.LocationChanged?displayProperty=nameWithType> . Metoda jest odłączana, `HandleLocationChanged` gdy `Dispose` jest wywoływana przez platformę. Odłączanie metody zezwala na wyrzucanie elementów bezużytecznych składnika.
 
 ```razor
 @implements IDisposable
@@ -738,6 +738,6 @@ public void Dispose()
 <xref:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs>zawiera następujące informacje o zdarzeniu:
 
 * <xref:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs.Location>&ndash;Adres URL nowej lokalizacji.
-* <xref:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs.IsNavigationIntercepted>&ndash;Jeśli `true` Blazor przechwycono nawigację z przeglądarki. Jeśli `false` , element [nawigacyjny. typu NavigateTo](xref:Microsoft.AspNetCore.Components.NavigationManager.NavigateTo%2A) spowodował wystąpienie nawigacji.
+* <xref:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs.IsNavigationIntercepted>&ndash;Jeśli `true` Blazor przechwycono nawigację z przeglądarki. Jeśli `false` <xref:Microsoft.AspNetCore.Components.NavigationManager.NavigateTo%2A?displayProperty=nameWithType> wystąpiła nawigacja.
 
 Aby uzyskać więcej informacji na temat usuwania składników, zobacz <xref:blazor/lifecycle#component-disposal-with-idisposable> .

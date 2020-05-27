@@ -1,24 +1,12 @@
 ---
-title: ASP.NET Core Blazor układy
-author: guardrex
-description: Dowiedz się, jak tworzyć składniki układu wielokrotnego użytku dla Blazor aplikacji.
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 02/12/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: blazor/layouts
-ms.openlocfilehash: 09cca9c4af23c35fdbc2ee92169913c960b0a68d
-ms.sourcegitcommit: 69e1a79a572b0af17d08e81af12c594b7316f2e1
-ms.translationtype: MT
-ms.contentlocale: pl-PL
-ms.lasthandoff: 05/15/2020
-ms.locfileid: "83424333"
+title: "ASP.NET Core Blazor Layouts" Author: Description: "Dowiedz się, jak tworzyć składniki układu wielokrotnego użytku dla Blazor aplikacji".
+monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
 ---
 # <a name="aspnet-core-blazor-layouts"></a>ASP.NET Core Blazor układy
 
@@ -30,10 +18,10 @@ Technicznie, układ jest tylko innym składnikiem. Układ jest zdefiniowany w Ra
 
 Aby przekształcić *składnik* do *układu*, składnik:
 
-* Dziedziczy z `LayoutComponentBase` , który definiuje `Body` Właściwość dla renderowanej zawartości wewnątrz układu.
+* Dziedziczy z <xref:Microsoft.AspNetCore.Components.LayoutComponentBase> , który definiuje <xref:Microsoft.AspNetCore.Components.LayoutComponentBase.Body> Właściwość dla renderowanej zawartości wewnątrz układu.
 * Używa Razor składni `@Body` do określenia lokalizacji w znaczniku układu, w którym jest renderowana zawartość.
 
-Poniższy przykładowy kod przedstawia Razor szablon składnika układu, *MainLayout. Razor*. Układ dziedziczy `LayoutComponentBase` i ustawia `@Body` między paskiem nawigacyjnym i stopką:
+Poniższy przykładowy kod przedstawia Razor szablon składnika układu, *MainLayout. Razor*. Układ dziedziczy <xref:Microsoft.AspNetCore.Components.LayoutComponentBase> i ustawia `@Body` między paskiem nawigacyjnym i stopką:
 
 [!code-razor[](layouts/sample_snapshot/3.x/MainLayout.razor?highlight=1,13)]
 
@@ -41,21 +29,21 @@ W aplikacji opartej na jednym z Blazor szablonów aplikacji `MainLayout` składn
 
 ## <a name="default-layout"></a>Układ domyślny
 
-Określ domyślny układ aplikacji w `Router` składniku w pliku *App. Razor* aplikacji. Poniższy `Router` składnik, który jest dostarczany przez Blazor Szablony domyślne, ustawia domyślny układ `MainLayout` składnika:
+Określ domyślny układ aplikacji w <xref:Microsoft.AspNetCore.Components.Routing.Router> składniku w pliku *App. Razor* aplikacji. Poniższy <xref:Microsoft.AspNetCore.Components.Routing.Router> składnik, który jest dostarczany przez Blazor Szablony domyślne, ustawia domyślny układ `MainLayout` składnika:
 
 [!code-razor[](layouts/sample_snapshot/3.x/App1.razor?highlight=3)]
 
-Aby podać domyślny układ `NotFound` zawartości, określ `LayoutView` dla `NotFound` zawartości:
+Aby podać domyślny układ <xref:Microsoft.AspNetCore.Components.Routing.Router.NotFound> zawartości, określ <xref:Microsoft.AspNetCore.Components.LayoutView> dla <xref:Microsoft.AspNetCore.Components.Routing.Router.NotFound> zawartości:
 
 [!code-razor[](layouts/sample_snapshot/3.x/App2.razor?highlight=6-9)]
 
-Aby uzyskać więcej informacji na temat `Router` składnika, zobacz <xref:blazor/routing> .
+Aby uzyskać więcej informacji na temat <xref:Microsoft.AspNetCore.Components.Routing.Router> składnika, zobacz <xref:blazor/routing> .
 
 Określanie układu jako domyślnego układu w routerze jest przydatnym rozwiązaniem, ponieważ może być zastąpione dla poszczególnych składników lub folderów. Preferuj użycie routera do ustawienia domyślnego układu aplikacji, ponieważ jest to najbardziej ogólna technika.
 
 ## <a name="specify-a-layout-in-a-component"></a>Określanie układu w składniku
 
-Użyj Razor dyrektywy, `@layout` Aby zastosować układ do składnika. Kompilator konwertuje `@layout` do `LayoutAttribute` , który jest stosowany do klasy składnika.
+Użyj Razor dyrektywy, `@layout` Aby zastosować układ do składnika. Kompilator konwertuje `@layout` do <xref:Microsoft.AspNetCore.Components.LayoutAttribute> , który jest stosowany do klasy składnika.
 
 Zawartość następującego `MasterList` składnika jest wstawiana do `MasterLayout` pozycji `@Body` :
 

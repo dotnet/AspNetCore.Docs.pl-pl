@@ -147,7 +147,7 @@ Aby zainstalować `Microsoft.AspNetCore.ProtectedBrowserStorage` pakiet:
 
 ### <a name="save-and-load-data-within-a-component"></a>Zapisz i Załaduj dane w składniku
 
-W dowolnym składniku wymagającym ładowania lub zapisywania danych w magazynie przeglądarki Użyj, [`@inject`](xref:blazor/dependency-injection#request-a-service-in-a-component) Aby wstrzyknąć wystąpienie jednego z następujących elementów:
+W dowolnym składniku wymagającym ładowania lub zapisywania danych w magazynie przeglądarki Użyj, [`@inject`](xref:mvc/views/razor#inject) Aby wstrzyknąć wystąpienie jednego z następujących elementów:
 
 * `ProtectedLocalStorage`
 * `ProtectedSessionStorage`
@@ -184,7 +184,7 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
-Jeśli parametry składnika obejmują stan nawigacji, wywołaj `ProtectedSessionStore.GetAsync` i przypisz wynik w `OnParametersSetAsync` , nie `OnInitializedAsync` . `OnInitializedAsync`jest wywoływana tylko raz podczas pierwszego wystąpienia składnika. `OnInitializedAsync`nie zostanie wywołana ponownie później, jeśli użytkownik przejdzie do innego adresu URL, a pozostałe na tej samej stronie. Aby uzyskać więcej informacji, zobacz <xref:blazor/lifecycle>.
+Jeśli parametry składnika obejmują stan nawigacji, wywołaj `ProtectedSessionStore.GetAsync` i przypisz wynik w <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync%2A> , nie <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> . <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>jest wywoływana tylko raz podczas pierwszego wystąpienia składnika. <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>nie zostanie wywołana ponownie później, jeśli użytkownik przejdzie do innego adresu URL, a pozostałe na tej samej stronie. Aby uzyskać więcej informacji, zobacz <xref:blazor/lifecycle>.
 
 > [!WARNING]
 > Przykłady w tej sekcji działają tylko wtedy, gdy serwer nie ma włączonej obsługi przed renderowaniem. Po włączeniu obsługi przed renderowaniem zostanie wygenerowany błąd podobny do:
@@ -314,7 +314,7 @@ else
 
 `CounterStateProvider`Składnik obsługuje fazę ładowania, przez co nie renderuje jej zawartości podrzędnej do momentu ukończenia ładowania.
 
-Aby użyć `CounterStateProvider` składnika, zawiń wystąpienie składnika wokół dowolnego innego składnika, który wymaga dostępu do stanu licznika. Aby zapewnić dostępność stanu dla wszystkich składników w aplikacji, zawiń `CounterStateProvider` składnik wokół składnika `Router` w `App` składniku (*App. Razor*):
+Aby użyć `CounterStateProvider` składnika, zawiń wystąpienie składnika wokół dowolnego innego składnika, który wymaga dostępu do stanu licznika. Aby zapewnić dostępność stanu dla wszystkich składników w aplikacji, zawiń `CounterStateProvider` składnik wokół składnika <xref:Microsoft.AspNetCore.Components.Routing.Router> w `App` składniku (*App. Razor*):
 
 ```razor
 <CounterStateProvider>

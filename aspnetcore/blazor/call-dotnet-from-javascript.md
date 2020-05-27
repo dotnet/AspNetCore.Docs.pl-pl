@@ -20,9 +20,9 @@ W tym artykule opisano wywoływanie metod .NET z języka JavaScript. Aby uzyska�
 
 ## <a name="static-net-method-call"></a>Statyczne wywołanie metody .NET
 
-Aby wywołać statyczną metodę .NET z poziomu języka JavaScript, `DotNet.invokeMethod` Użyj `DotNet.invokeMethodAsync` funkcji or. Przekaż identyfikator metody statycznej, która ma być wywoływana, nazwę zestawu zawierającego funkcję i wszelkie argumenty. Wersja asynchroniczna jest preferowana do obsługi Blazor scenariuszy serwera. Metoda .NET musi być publiczna, statyczna i mieć `[JSInvokable]` atrybut. Wywoływanie otwartych metod ogólnych nie jest obecnie obsługiwane.
+Aby wywołać statyczną metodę .NET z poziomu języka JavaScript, `DotNet.invokeMethod` Użyj `DotNet.invokeMethodAsync` funkcji or. Przekaż identyfikator metody statycznej, która ma być wywoływana, nazwę zestawu zawierającego funkcję i wszelkie argumenty. Wersja asynchroniczna jest preferowana do obsługi Blazor scenariuszy serwera. Metoda .NET musi być publiczna, statyczna i mieć [`[JSInvokable]`](xref:Microsoft.JSInterop.JSInvokableAttribute) atrybut. Wywoływanie otwartych metod ogólnych nie jest obecnie obsługiwane.
 
-Przykładowa aplikacja zawiera metodę języka C#, która zwraca `int` tablicę. Ten `JSInvokable` atrybut jest stosowany do metody.
+Przykładowa aplikacja zawiera metodę języka C#, która zwraca `int` tablicę. Ten [`[JSInvokable]`](xref:Microsoft.JSInterop.JSInvokableAttribute) atrybut jest stosowany do metody.
 
 *Strony/JsInterop. Razor*:
 
@@ -57,7 +57,7 @@ Array(4) [ 1, 2, 3, 4 ]
 
 Czwarta wartość tablicy jest wypychana do tablicy ( `data.push(4);` ) zwracanej przez `ReturnArrayAsync` .
 
-Domyślnie identyfikator metody jest nazwą metody, ale można określić inny identyfikator przy użyciu `JSInvokableAttribute` konstruktora:
+Domyślnie identyfikator metody jest nazwą metody, ale można określić inny identyfikator przy użyciu [`[JSInvokable]`](xref:Microsoft.JSInterop.JSInvokableAttribute) konstruktora atrybutu:
 
 ```csharp
 @code {
@@ -86,8 +86,8 @@ returnArrayAsyncJs: function () {
 Można również wywołać metody wystąpienia platformy .NET z poziomu języka JavaScript. Aby wywołać metodę wystąpienia platformy .NET z poziomu języka JavaScript:
 
 * Przekaż wystąpienie platformy .NET przez odwołanie do języka JavaScript:
-  * Wykonaj wywołanie statyczne do `DotNetObjectReference.Create` .
-  * Zawiń wystąpienie w `DotNetObjectReference` wystąpieniu i Wywołaj wystąpienie `Create` `DotNetObjectReference` . Usuwanie `DotNetObjectReference` obiektów (przykład pojawia się w dalszej części tej sekcji).
+  * Wykonaj wywołanie statyczne do <xref:Microsoft.JSInterop.DotNetObjectReference.Create%2A?displayProperty=nameWithType> .
+  * Zawiń wystąpienie w <xref:Microsoft.JSInterop.DotNetObjectReference> wystąpieniu i Wywołaj wystąpienie <xref:Microsoft.JSInterop.DotNetObjectReference.Create%2A> <xref:Microsoft.JSInterop.DotNetObjectReference> . Usuwanie <xref:Microsoft.JSInterop.DotNetObjectReference> obiektów (przykład pojawia się w dalszej części tej sekcji).
 * Wywołaj metody wystąpienia platformy .NET w wystąpieniu przy `invokeMethod` użyciu `invokeMethodAsync` funkcji lub. Wystąpienie programu .NET może być również przekazywać jako argument podczas wywoływania innych metod .NET z JavaScript.
 
 > [!NOTE]
@@ -133,9 +133,9 @@ Dane wyjściowe konsoli w narzędziach deweloperskich sieci Web w przeglądarce:
 Hello, Blazor!
 ```
 
-Aby uniknąć przecieków pamięci i zezwolić na wyrzucanie elementów bezużytecznych w składniku, który tworzy `DotNetObjectReference` , należy zastosować jedną z następujących metod:
+Aby uniknąć przecieków pamięci i zezwolić na wyrzucanie elementów bezużytecznych w składniku, który tworzy <xref:Microsoft.JSInterop.DotNetObjectReference> , należy zastosować jedną z następujących metod:
 
-* Usuń obiekt z klasy, która utworzyła `DotNetObjectReference` wystąpienie:
+* Usuń obiekt z klasy, która utworzyła <xref:Microsoft.JSInterop.DotNetObjectReference> wystąpienie:
 
   ```csharp
   public class ExampleJsInterop : IDisposable
@@ -197,7 +197,7 @@ Aby uniknąć przecieków pamięci i zezwolić na wyrzucanie elementów bezużyt
   }
   ```
 
-* Gdy składnik lub Klasa nie usuwa `DotNetObjectReference` metody Dispose z klienta przez wywołanie `.dispose()` :
+* Gdy składnik lub Klasa nie usuwa <xref:Microsoft.JSInterop.DotNetObjectReference> metody Dispose z klienta przez wywołanie `.dispose()` :
 
   ```javascript
   window.myFunction = (dotnetHelper) => {
@@ -211,7 +211,7 @@ Aby uniknąć przecieków pamięci i zezwolić na wyrzucanie elementów bezużyt
 Aby wywołać metody .NET składnika:
 
 * Użyj `invokeMethod` funkcji or, `invokeMethodAsync` Aby wykonać wywołanie metody statycznej do składnika.
-* Metoda statyczna składnika zawija wywołanie do metody instancji jako wywołane `Action` .
+* Metoda statyczna składnika zawija wywołanie do metody instancji jako wywołane <xref:System.Action> .
 
 W języku JavaScript po stronie klienta:
 
@@ -257,11 +257,11 @@ function updateMessageCallerJS() {
 }
 ```
 
-Jeśli istnieje kilka składników, z których każda wywołuje metody wystąpienia, użyj klasy pomocnika, aby wywołać metody wystąpienia (jako `Action` s) każdego składnika.
+Jeśli istnieje kilka składników, z których każda wywołuje metody wystąpienia, użyj klasy pomocnika, aby wywołać metody wystąpienia (jako <xref:System.Action> s) każdego składnika.
 
 W poniższym przykładzie:
 
-* `JSInterop`Składnik zawiera kilka `ListItem` składników.
+* `JSInteropExample`Składnik zawiera kilka `ListItem` składników.
 * Każdy `ListItem` składnik składa się z komunikatu i przycisku.
 * Po `ListItem` wybraniu przycisku składnik `ListItem` `UpdateMessage` Metoda zmienia tekst elementu listy i ukrywa przycisk.
 
@@ -332,10 +332,10 @@ window.updateMessageCallerJS = (dotnetHelper) => {
 }
 ```
 
-*Strony/JSInterop. Razor*:
+*Strony/JSInteropExample. Razor*:
 
 ```razor
-@page "/JSInterop"
+@page "/JSInteropExample"
 
 <h1>List of components</h1>
 

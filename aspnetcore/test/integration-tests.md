@@ -143,7 +143,7 @@ Konfigurację hosta sieci Web można utworzyć niezależnie od klas testów prze
 
    Kontekst bazy danych SUT jest zarejestrowany w `Startup.ConfigureServices` metodzie. `builder.ConfigureServices`Wywołanie zwrotne aplikacji testowej jest wykonywane *po* `Startup.ConfigureServices` wykonaniu kodu aplikacji. Kolejność wykonywania jest istotną zmianą dla [hosta ogólnego](xref:fundamentals/host/generic-host) w wersji ASP.NET Core 3,0. Aby użyć innej bazy danych dla testów niż baza danych aplikacji, należy zastąpić kontekst bazy danych aplikacji `builder.ConfigureServices` .
 
-   W przypadku SUTs, które nadal korzystają z [hosta sieci Web} (linki XREF: podstawy/Host/Web-Host), `builder.ConfigureServices` wywołanie zwrotne aplikacji testowej jest wykonywane *przed* `Startup.ConfigureServices` kodem SUT. `builder.ConfigureTestServices`Wywołanie zwrotne aplikacji testowej jest wykonywane *po*.
+   W przypadku SUTs, które nadal korzystają z [hosta sieci Web](xref:fundamentals/host/web-host), `builder.ConfigureServices` wywołanie zwrotne aplikacji testowej jest wykonywane *przed* `Startup.ConfigureServices` kodem SUT. `builder.ConfigureTestServices`Wywołanie zwrotne aplikacji testowej jest wykonywane *po*.
 
    Przykładowa aplikacja znajduje deskryptor usługi dla kontekstu bazy danych i używa deskryptora do usunięcia rejestracji usługi. Następnie fabryka dodaje nową `ApplicationDbContext` , która korzysta z bazy danych w pamięci dla testów.
 
@@ -573,7 +573,7 @@ Przykładowa aplikacja odziarnauje bazę danych z trzema komunikatami w *Utiliti
 
 Kontekst bazy danych SUT jest zarejestrowany w `Startup.ConfigureServices` metodzie. `builder.ConfigureServices`Wywołanie zwrotne aplikacji testowej jest wykonywane *po* `Startup.ConfigureServices` wykonaniu kodu aplikacji. Aby użyć innej bazy danych dla testów, kontekst bazy danych aplikacji musi zostać zastąpiony `builder.ConfigureServices` . Aby uzyskać więcej informacji, zobacz sekcję [Dostosowywanie WebApplicationFactory](#customize-webapplicationfactory) .
 
-W przypadku SUTs, które nadal korzystają z [hosta sieci Web} (linki XREF: podstawy/Host/Web-Host), `builder.ConfigureServices` wywołanie zwrotne aplikacji testowej jest wykonywane *przed* `Startup.ConfigureServices` kodem SUT. `builder.ConfigureTestServices`Wywołanie zwrotne aplikacji testowej jest wykonywane *po*.
+W przypadku SUTs, które nadal korzystają z [hosta sieci Web](xref:fundamentals/host/web-host), `builder.ConfigureServices` wywołanie zwrotne aplikacji testowej jest wykonywane *przed* `Startup.ConfigureServices` kodem SUT. `builder.ConfigureTestServices`Wywołanie zwrotne aplikacji testowej jest wykonywane *po*.
 
 ::: moniker-end
 

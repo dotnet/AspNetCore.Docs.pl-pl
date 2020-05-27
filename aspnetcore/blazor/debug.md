@@ -25,13 +25,8 @@ Dostępne scenariusze obejmują:
 
 Obecnie *nie*można:
 
-* Inspekcja tablic.
-* Umieść wskaźnik myszy, aby sprawdzić członków.
-* Wkrocz debugowanie do lub z kodu zarządzanego.
-* Pełna obsługa inspekcji typów wartości.
 * Przerwij w przypadku nieobsłużonych wyjątków.
 * Trafij punkty przerwania podczas uruchamiania aplikacji.
-* Debugowanie aplikacji za pomocą procesu roboczego usługi.
 
 Będziemy nadal ulepszać środowisko debugowania w przyszłych wersjach.
 
@@ -78,7 +73,7 @@ Aby debugować Blazor aplikację webassembly w programie Visual Studio:
 
 Podczas debugowania Blazor aplikacji webassembly można także debugować kod serwera:
 
-1. Ustaw punkt przerwania na stronie *FetchData. Razor* w temacie `OnInitializedAsync` .
+1. Ustaw punkt przerwania na stronie *FetchData. Razor* w temacie <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> .
 1. Ustaw punkt przerwania w `WeatherForecastController` `Get` metodzie Action.
 1. Przejdź do karty **pobieranie danych** , aby trafić pierwszy punkt przerwania w `FetchData` składniku tuż przed wysłaniem żądania HTTP do serwera:
 

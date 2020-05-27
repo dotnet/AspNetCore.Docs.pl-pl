@@ -1,24 +1,12 @@
 ---
-title: Obsługa błędów w Blazor aplikacjach ASP.NET Core
-author: guardrex
-description: Odkryj, jak ASP.NET Core Blazor jak program Blazor zarządza nieobsługiwanymi wyjątkami i jak opracowywać aplikacje wykrywające i obsługujące błędy.
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 04/23/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: blazor/handle-errors
-ms.openlocfilehash: cca4d8ce0c783f26f33cb7b2b1535a4bc53384d6
-ms.sourcegitcommit: 69e1a79a572b0af17d08e81af12c594b7316f2e1
-ms.translationtype: MT
-ms.contentlocale: pl-PL
-ms.lasthandoff: 05/15/2020
-ms.locfileid: "83424340"
+title: "Obsługa błędów w Blazor aplikacjach ASP.NET Core" Author: Description: "Odkryj, jak ASP.NET Core w Blazor jaki sposób Blazor zarządza Nieobsłużone wyjątki i jak opracowywać aplikacje wykrywające i obsługujące błędy".
+monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
 ---
 # <a name="handle-errors-in-aspnet-core-blazor-apps"></a>Obsługa błędów w Blazor aplikacjach ASP.NET Core
 
@@ -138,7 +126,7 @@ Poprzednie Nieobsłużone wyjątki zostały opisane w poniższych sekcjach tego 
 Podczas Blazor tworzenia wystąpienia składnika:
 
 * Konstruktor składnika jest wywoływany.
-* Konstruktory wszelkich niepojedynczych usług DI dostarczonych do konstruktora składnika za pośrednictwem [`@inject`](xref:blazor/dependency-injection#request-a-service-in-a-component) dyrektywy lub [`[Inject]`](xref:blazor/dependency-injection#request-a-service-in-a-component) atrybutu są wywoływane.
+* Konstruktory wszelkich niepojedynczych usług DI dostarczonych do konstruktora składnika za pośrednictwem [`@inject`](xref:mvc/views/razor#inject) dyrektywy lub [`[Inject]`](xref:blazor/dependency-injection#request-a-service-in-a-component) atrybutu są wywoływane.
 
 BlazorObwód serwera kończy się niepowodzeniem, gdy dowolny wykonany Konstruktor lub setter dla każdej `[Inject]` właściwości zgłasza nieobsługiwany wyjątek. Wyjątek jest krytyczny, ponieważ struktura nie może utworzyć wystąpienia składnika. Jeśli logika konstruktora może generować wyjątki, aplikacja powinna zalewkować wyjątki przy użyciu instrukcji [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) z obsługą błędów i rejestrowaniem.
 
@@ -146,16 +134,16 @@ BlazorObwód serwera kończy się niepowodzeniem, gdy dowolny wykonany Konstrukt
 
 W okresie istnienia składnika program Blazor wywołuje następujące [metody cyklu życia](xref:blazor/lifecycle):
 
-* `OnInitialized` / `OnInitializedAsync`
-* `OnParametersSet` / `OnParametersSetAsync`
-* `ShouldRender` / `ShouldRenderAsync`
-* `OnAfterRender` / `OnAfterRenderAsync`
+* <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitialized%2A> / <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>
+* <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSet%2A> / <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync%2A>
+* <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A>
+* <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A> / <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRenderAsync%2A>
 
 Jeśli jakakolwiek metoda cyklu życia zgłasza wyjątek, synchronicznie lub asynchronicznie, wyjątek jest krytyczny dla Blazor obwodu serwera. Aby składniki zajmowały błędy w metodach cyklu życia, Dodaj logikę obsługi błędów.
 
-W poniższym przykładzie, gdzie `OnParametersSetAsync` wywołuje metodę w celu uzyskania produktu:
+W poniższym przykładzie, gdzie <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync%2A> wywołuje metodę w celu uzyskania produktu:
 
-* Wyjątek zgłoszony w `ProductRepository.GetProductByIdAsync` metodzie jest obsługiwany przez `try-catch` instrukcję.
+* Wyjątek zgłoszony w `ProductRepository.GetProductByIdAsync` metodzie jest obsługiwany przez instrukcję [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) .
 * Gdy `catch` blok jest wykonywany:
   * `loadFailed`jest ustawiona na `true` , która jest używana do wyświetlania komunikatu o błędzie dla użytkownika.
   * Błąd jest rejestrowany.
@@ -164,7 +152,7 @@ W poniższym przykładzie, gdzie `OnParametersSetAsync` wywołuje metodę w celu
 
 ### <a name="rendering-logic"></a>Logika renderowania
 
-Znaczniki deklaratywne w `.razor` pliku składnika są kompilowane do metody języka C# o nazwie `BuildRenderTree` . Gdy składnik renderuje, `BuildRenderTree` wykonuje i tworzy strukturę danych opisującą elementy, tekst i składniki podrzędne renderowanego składnika.
+Znaczniki deklaratywne w `.razor` pliku składnika są kompilowane do metody języka C# o nazwie <xref:Microsoft.AspNetCore.Components.ComponentBase.BuildRenderTree%2A> . Gdy składnik renderuje, <xref:Microsoft.AspNetCore.Components.ComponentBase.BuildRenderTree%2A> wykonuje i tworzy strukturę danych opisującą elementy, tekst i składniki podrzędne renderowanego składnika.
 
 Logika renderowania może zgłosić wyjątek. Przykład tego scenariusza występuje, gdy `@someObject.PropertyName` jest oceniane, ale `@someObject` jest `null` . Nieobsługiwany wyjątek zgłoszony przez logikę renderowania jest krytyczny dla Blazor obwodu serwera.
 
@@ -199,15 +187,15 @@ Aby uzyskać więcej informacji na temat usuwania składników, zobacz <xref:bla
 
 ### <a name="javascript-interop"></a>Międzyoperacyjność w języku JavaScript
 
-`IJSRuntime.InvokeAsync<T>`umożliwia programowi .NET Code wykonywanie wywołań asynchronicznych do środowiska uruchomieniowego JavaScript w przeglądarce użytkownika.
+<xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A?displayProperty=nameWithType>umożliwia programowi .NET Code wykonywanie wywołań asynchronicznych do środowiska uruchomieniowego JavaScript w przeglądarce użytkownika.
 
-Poniższe warunki dotyczą obsługi błędów w programie `InvokeAsync<T>` :
+Poniższe warunki dotyczą obsługi błędów w programie <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A> :
 
-* Jeśli wywołanie `InvokeAsync<T>` synchronicznie zakończy się niepowodzeniem, wystąpi wyjątek programu .NET. Wywołanie `InvokeAsync<T>` może zakończyć się niepowodzeniem, na przykład dlatego, że nie można serializować dostarczonych argumentów. Kod dewelopera musi przechwycić wyjątek. Jeśli kod aplikacji w obsłudze zdarzeń lub metoda cyklu życia składnika nie obsłuży wyjątku, wynikający z nich wyjątek jest krytyczny dla Blazor obwodu serwera.
-* Jeśli wywołanie `InvokeAsync<T>` powiedzie się asynchronicznie, .NET <xref:System.Threading.Tasks.Task> kończy się niepowodzeniem. Wywołanie `InvokeAsync<T>` może zakończyć się niepowodzeniem, na przykład ponieważ kod po stronie JavaScript zgłasza wyjątek lub zwraca `Promise` , który został ukończony jako `rejected` . Kod dewelopera musi przechwycić wyjątek. W przypadku użycia operatora [await](/dotnet/csharp/language-reference/keywords/await) Rozważ zapakowanie wywołania metody w instrukcji [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) z obsługą błędów i rejestrowaniem. W przeciwnym razie niepowodzenie kodu spowoduje nieobsłużony wyjątek, który jest krytyczny dla Blazor obwodu serwera.
-* Domyślnie wywołania programu `InvokeAsync<T>` muszą zakończyć się w określonym przedziale czasu lub w przeciwnym razie upłynął limit czasu połączenia. Domyślny limit czasu wynosi jedną minutę. Limit czasu chroni kod przed utratą połączenia sieciowego lub kodem JavaScript, który nigdy nie odsyła komunikat uzupełniający. Jeśli wystąpiło przełączenie, wynikiem `Task` kończy się niepowodzeniem a <xref:System.OperationCanceledException> . Zalewka i przetwórz wyjątek z rejestrowaniem.
+* Jeśli wywołanie <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A> synchronicznie zakończy się niepowodzeniem, wystąpi wyjątek programu .NET. Wywołanie <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A> może zakończyć się niepowodzeniem, na przykład dlatego, że nie można serializować dostarczonych argumentów. Kod dewelopera musi przechwycić wyjątek. Jeśli kod aplikacji w obsłudze zdarzeń lub metoda cyklu życia składnika nie obsłuży wyjątku, wynikający z nich wyjątek jest krytyczny dla Blazor obwodu serwera.
+* Jeśli wywołanie <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A> powiedzie się asynchronicznie, .NET <xref:System.Threading.Tasks.Task> kończy się niepowodzeniem. Wywołanie <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A> może zakończyć się niepowodzeniem, na przykład ponieważ kod po stronie JavaScript zgłasza wyjątek lub zwraca `Promise` , który został ukończony jako `rejected` . Kod dewelopera musi przechwycić wyjątek. W przypadku użycia operatora [await](/dotnet/csharp/language-reference/keywords/await) Rozważ zapakowanie wywołania metody w instrukcji [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) z obsługą błędów i rejestrowaniem. W przeciwnym razie niepowodzenie kodu spowoduje nieobsłużony wyjątek, który jest krytyczny dla Blazor obwodu serwera.
+* Domyślnie wywołania programu <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A> muszą zakończyć się w określonym przedziale czasu lub w przeciwnym razie upłynął limit czasu połączenia. Domyślny limit czasu wynosi jedną minutę. Limit czasu chroni kod przed utratą połączenia sieciowego lub kodem JavaScript, który nigdy nie odsyła komunikat uzupełniający. Jeśli wystąpiło przełączenie, wynikiem <xref:System.Threading.Tasks> kończy się niepowodzeniem a <xref:System.OperationCanceledException> . Zalewka i przetwórz wyjątek z rejestrowaniem.
 
-Podobnie kod JavaScript może inicjować wywołania metod .NET wskazywanych przez [`[JSInvokable]`](xref:blazor/call-dotnet-from-javascript) atrybut. Jeśli te metody .NET zgłaszają nieobsługiwany wyjątek:
+Podobnie kod JavaScript może inicjować wywołania metod .NET wskazywanych przez [`[JSInvokable]`](xref:Microsoft.JSInterop.JSInvokableAttribute) ] (linki XREF: blazor/Call-dotnet-from-JavaScript). Jeśli te metody .NET zgłaszają nieobsługiwany wyjątek:
 
 * Wyjątek nie jest traktowany jako krytyczny dla Blazor obwodu serwera.
 * Po stronie JavaScript `Promise` jest odrzucany.
@@ -230,11 +218,11 @@ Blazorskładniki mogą być wstępnie renderowane przy użyciu [pomocnika tagów
 Jeśli jakikolwiek składnik zgłasza nieobsłużony wyjątek podczas renderowania pre, na przykład podczas wykonywania metody cyklu życia lub logiki renderowania:
 
 * Wyjątek jest krytyczny dla obwodu.
-* Wyjątek jest generowany w stosie wywołań z `Component` pomocnika tagów. W związku z tym całe żądanie HTTP kończy się niepowodzeniem, chyba że wyjątek jest jawnie przechwycony przez kod dewelopera.
+* Wyjątek jest generowany w stosie wywołań z <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper> pomocnika tagów. W związku z tym całe żądanie HTTP kończy się niepowodzeniem, chyba że wyjątek jest jawnie przechwycony przez kod dewelopera.
 
 W normalnych warunkach w przypadku niepowodzenia wstępnego renderowania kontynuowanie kompilowania i renderowania składnika nie ma sensu, ponieważ nie można renderować składnika roboczego.
 
-Aby tolerować błędy, które mogą wystąpić podczas renderowania prerenderingu, logika obsługi błędów musi być umieszczona wewnątrz składnika, który może zgłaszać wyjątki. Używaj instrukcji [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) z obsługą błędów i rejestrowaniem. Zamiast zawijać `Component` pomocnika tagów w `try-catch` instrukcji, umieść logikę obsługi błędów w składniku renderowanym przez `Component` pomocnika tagów.
+Aby tolerować błędy, które mogą wystąpić podczas renderowania prerenderingu, logika obsługi błędów musi być umieszczona wewnątrz składnika, który może zgłaszać wyjątki. Używaj instrukcji [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) z obsługą błędów i rejestrowaniem. Zamiast zawijać <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper> pomocnika tagów w instrukcji [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) , należy umieścić logikę obsługi błędów w składniku renderowanym przez <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper> pomocnika tagów.
 
 ## <a name="advanced-scenarios"></a>Scenariusze zaawansowane
 
@@ -262,14 +250,14 @@ Aby uniknąć nieskończonych wzorców rekursji, należy się upewnić, że kod 
 
 ### <a name="custom-render-tree-logic"></a>Logika drzewa renderowania niestandardowego
 
-Większość Blazor składników jest zaimplementowana jako pliki *Razor* i są kompilowane do tworzenia logiki, która działa w `RenderTreeBuilder` celu renderowania danych wyjściowych. Deweloper może ręcznie zaimplementować `RenderTreeBuilder` logikę przy użyciu procedury kodu w języku C#. Aby uzyskać więcej informacji, zobacz <xref:blazor/advanced-scenarios#manual-rendertreebuilder-logic>.
+Większość Blazor składników jest zaimplementowana jako pliki *Razor* i są kompilowane do tworzenia logiki, która działa w <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> celu renderowania danych wyjściowych. Deweloper może ręcznie zaimplementować <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> logikę przy użyciu procedury kodu w języku C#. Aby uzyskać więcej informacji, zobacz <xref:blazor/advanced-scenarios#manual-rendertreebuilder-logic>.
 
 > [!WARNING]
 > Korzystanie z logiki konstruktora drzewa renderowania ręcznego jest uznawane za zaawansowane i niebezpieczne scenariusze, które nie są zalecane do ogólnego tworzenia składników.
 
-Jeśli `RenderTreeBuilder` kod zostanie zapisany, Deweloper musi zagwarantować poprawność kodu. Na przykład Deweloper musi upewnić się, że:
+Jeśli <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> kod zostanie zapisany, Deweloper musi zagwarantować poprawność kodu. Na przykład Deweloper musi upewnić się, że:
 
-* Wywołania `OpenElement` i `CloseElement` są prawidłowo zrównoważone.
+* Wywołania <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder.OpenElement%2A> i <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder.CloseElement%2A> są prawidłowo zrównoważone.
 * Atrybuty są dodawane tylko w prawidłowych miejscach.
 
 Nieprawidłowa ręczna logika konstruktora drzewa renderowania może spowodować dowolne niezdefiniowane zachowanie, w tym awarie, zawieszenie serwera i luki w zabezpieczeniach.

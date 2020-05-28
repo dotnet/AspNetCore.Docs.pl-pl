@@ -1,24 +1,11 @@
 ---
-title: Ponowne zapisywanie przez adres URL oprogramowania pośredniczącego w ASP.NET Core
-author: rick-anderson
-description: Dowiedz się więcej na temat zapisywania i przekierowywania adresów URL przy użyciu oprogramowania pośredniczącego do ponownego zapisywania adresów URL w aplikacjach ASP.NET Core.
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 08/16/2019
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: fundamentals/url-rewriting
-ms.openlocfilehash: 9e12831f57af02cd427d2a66d9d4c4d654905106
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774863"
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
 ---
 # <a name="url-rewriting-middleware-in-aspnet-core"></a>Ponowne zapisywanie przez adres URL oprogramowania pośredniczącego w ASP.NET Core
 
@@ -49,7 +36,7 @@ Różnica między *przekierowaniami adresów URL* i *przepisaniem adresów URL* 
 
 *Przekierowanie adresu URL* obejmuje operację po stronie klienta, w której klient otrzymuje dostęp do zasobu pod innym adresem niż pierwotnie żądany klient. Wymaga to przeprowadzenia rundy na serwerze. Adres URL przekierowania zwracany do klienta pojawia się na pasku adresu przeglądarki, gdy klient wysyła nowe żądanie dla zasobu.
 
-W `/resource` przypadku *przekierowania* do `/different-resource`programu serwer odpowiada, że klient powinien uzyskać zasób przy `/different-resource` użyciu kodu stanu wskazującego, że przekierowanie jest tymczasowe lub trwałe.
+W `/resource` przypadku *przekierowania* do programu `/different-resource` serwer odpowiada, że klient powinien uzyskać zasób przy `/different-resource` użyciu kodu stanu wskazującego, że przekierowanie jest tymczasowe lub trwałe.
 
 ![Punkt końcowy usługi WebAPI został tymczasowo zmieniony z wersji 1 (v1) do wersji 2 (v2) na serwerze. Klient wysyła żądanie do usługi w ścieżce w wersji 1/v1/API. Serwer wysyła odpowiedź 302 (znalezioną) z nową ścieżką tymczasową dla usługi w wersji 2/v2/API. Klient wysyła drugie żądanie do usługi przy użyciu adresu URL przekierowania. Serwer reaguje na kod stanu 200 (OK).](url-rewriting/_static/url_redirect.png)
 
@@ -63,7 +50,7 @@ Aby uzyskać więcej informacji na temat kodów stanu, zobacz [RFC 2616: definic
 
 Ponowne *Zapisywanie adresów URL* jest operacją po stronie serwera, która dostarcza zasób z innego adresu zasobu niż żądany klient. Ponowne zapisywanie adresu URL nie wymaga przejazdu na serwer. Zwrotny adres URL nie jest zwracany do klienta i nie jest wyświetlany na pasku adresu przeglądarki.
 
-Jeśli `/resource` program *rewritten* zostanie ponownie `/different-resource`zapisany w programie, serwer *wewnętrznie* pobiera i zwraca zasób w `/different-resource`.
+Jeśli `/resource` program zostanie ponownie *zapisany* w programie `/different-resource` , serwer *wewnętrznie* pobiera i zwraca zasób w `/different-resource` .
 
 Mimo że klient może być w stanie pobrać zasób przy zapisywanym adresie URL, klient nie ma informacji o tym, że zasób istnieje pod adresem URL, gdy wysyła żądanie i otrzymuje odpowiedź.
 
@@ -98,17 +85,17 @@ Oprogramowanie pośredniczące ponownego zapisywania adresów URL jest dostarcza
 
 ## <a name="extension-and-options"></a>Rozszerzenie i opcje
 
-Ustanów reguły ponownego zapisywania i przekierowywania adresów URL, tworząc wystąpienie klasy [RewriteOptions](xref:Microsoft.AspNetCore.Rewrite.RewriteOptions) z metodami rozszerzającymi dla każdej z reguł ponownego zapisywania. Łączenie wielu reguł w kolejności, w jakiej mają być przetwarzane. `RewriteOptions` Są one przesyłane do programu pośredniczącego na potrzeby ponownego zapisywania adresów URL, ponieważ są dodawane do potoku żądania przy użyciu <xref:Microsoft.AspNetCore.Builder.RewriteBuilderExtensions.UseRewriter*>:
+Ustanów reguły ponownego zapisywania i przekierowywania adresów URL, tworząc wystąpienie klasy [RewriteOptions](xref:Microsoft.AspNetCore.Rewrite.RewriteOptions) z metodami rozszerzającymi dla każdej z reguł ponownego zapisywania. Łączenie wielu reguł w kolejności, w jakiej mają być przetwarzane. `RewriteOptions`Są one przesyłane do programu pośredniczącego na potrzeby ponownego zapisywania adresów URL, ponieważ są dodawane do potoku żądania przy użyciu <xref:Microsoft.AspNetCore.Builder.RewriteBuilderExtensions.UseRewriter*> :
 
 [!code-csharp[](url-rewriting/samples/3.x/SampleApp/Startup.cs?name=snippet1)]
 
 ### <a name="redirect-non-www-to-www"></a>Przekieruj do sieci Web inne niż www
 
-Trzy opcje Zezwalaj aplikacji na przekierowywanie`www` żądań, które nie `www`są żądaniami do:
+Trzy opcje Zezwalaj aplikacji na Przekierowywanie żądań, które nie są `www` żądaniami do `www` :
 
-* <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirectToWwwPermanent*>&ndash; Trwale Przekieruj żądanie do `www` domeny podrzędnej, jeśli żądanie jest inne niż`www`. Przekierowuje kod stanu [Status308PermanentRedirect](xref:Microsoft.AspNetCore.Http.StatusCodes.Status308PermanentRedirect) .
+* <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirectToWwwPermanent*>: Trwale Przekieruj żądanie do domeny podrzędnej, `www` Jeśli żądanie jest inne niż `www` . Przekierowuje kod stanu [Status308PermanentRedirect](xref:Microsoft.AspNetCore.Http.StatusCodes.Status308PermanentRedirect) .
 
-* <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirectToWww*>&ndash; Przekieruj żądanie do `www` domeny podrzędnej, jeśli żądanie przychodzące jest inne niż`www`. Przekierowuje kod stanu [Status307TemporaryRedirect](xref:Microsoft.AspNetCore.Http.StatusCodes.Status307TemporaryRedirect) . Przeciążenie umożliwia podanie kodu stanu odpowiedzi. Użyj pola <xref:Microsoft.AspNetCore.Http.StatusCodes> klasy do przypisania kodu stanu.
+* <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirectToWww*>: Przekieruj żądanie do domeny podrzędnej `www` , jeśli żądanie przychodzące jest inne niż `www` . Przekierowuje kod stanu [Status307TemporaryRedirect](xref:Microsoft.AspNetCore.Http.StatusCodes.Status307TemporaryRedirect) . Przeciążenie umożliwia podanie kodu stanu odpowiedzi. Użyj pola <xref:Microsoft.AspNetCore.Http.StatusCodes> klasy do przypisania kodu stanu.
 
 ### <a name="url-redirect"></a>Przekierowywanie adresów URL
 
@@ -116,7 +103,7 @@ Użyj <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirect*> 
 
 [!code-csharp[](url-rewriting/samples/3.x/SampleApp/Startup.cs?name=snippet1&highlight=9)]
 
-W przeglądarce z włączonymi narzędziami deweloperskimi Utwórz żądanie do przykładowej aplikacji ze ścieżką `/redirect-rule/1234/5678`. Wyrażenie regularne dopasowuje ścieżkę żądania w `redirect-rule/(.*)`, a ścieżka jest zastępowana przez `/redirected/1234/5678`. Adres URL przekierowania jest wysyłany z powrotem do klienta z kodem stanu *znalezionym przez 302* . Przeglądarka tworzy nowe żądanie w adresie URL przekierowania, który jest wyświetlany na pasku adresu przeglądarki. Ponieważ w adresie URL przekierowania nie ma reguł pasujących do przykładowej aplikacji:
+W przeglądarce z włączonymi narzędziami deweloperskimi Utwórz żądanie do przykładowej aplikacji ze ścieżką `/redirect-rule/1234/5678` . Wyrażenie regularne dopasowuje ścieżkę żądania w `redirect-rule/(.*)` , a ścieżka jest zastępowana przez `/redirected/1234/5678` . Adres URL przekierowania jest wysyłany z powrotem do klienta z kodem stanu *znalezionym przez 302* . Przeglądarka tworzy nowe żądanie w adresie URL przekierowania, który jest wyświetlany na pasku adresu przeglądarki. Ponieważ w adresie URL przekierowania nie ma reguł pasujących do przykładowej aplikacji:
 
 * Drugie żądanie odbiera odpowiedź *200-OK* z aplikacji.
 * Treść odpowiedzi zawiera adres URL przekierowania.
@@ -130,15 +117,15 @@ Oryginalne żądanie:`/redirect-rule/1234/5678`
 
 ![Okno przeglądarki z Narzędzia deweloperskie śledzenia żądań i odpowiedzi](url-rewriting/_static/add_redirect.png)
 
-Część wyrażenia zawartego w nawiasach jest nazywana *grupą przechwytywania*. Kropka (`.`) wyrażenia oznacza *dopasowanie dowolnego znaku*. Gwiazdka (`*`) oznacza *Dopasowanie znaku poprzedzającego zero lub więcej razy*. W związku z tym, ostatnie dwa segmenty ścieżki adresu `1234/5678`URL, są przechwytywane przez `(.*)`grupę przechwytywania. Każda wartość podaną w adresie URL żądania `redirect-rule/` Po przechwyceniu przez tę pojedynczą grupę przechwytywania.
+Część wyrażenia zawartego w nawiasach jest nazywana *grupą przechwytywania*. Kropka ( `.` ) wyrażenia oznacza *dopasowanie dowolnego znaku*. Gwiazdka ( `*` ) oznacza *Dopasowanie znaku poprzedzającego zero lub więcej razy*. W związku z tym, ostatnie dwa segmenty ścieżki adresu URL, `1234/5678` są przechwytywane przez grupę przechwytywania `(.*)` . Każda wartość podaną w adresie URL żądania po `redirect-rule/` przechwyceniu przez tę pojedynczą grupę przechwytywania.
 
-W ciągu zamiennym przechwycone grupy są wstawiane do ciągu z symbolem dolara`$`(), po którym następuje numer sekwencji przechwytywania. Pierwsza wartość grupy przechwytywania jest pobierana z `$1`, sekunda z `$2`i są dalej sekwencją dla grup przechwytywania w wyrażeniach regularnych. W aplikacji przykładowej wyrażenie regularne ma tylko jedną przechwyconą grupę, więc w ciągu zamiennym istnieje tylko jedna grupa wstrzykiwana, która jest `$1`. Gdy reguła zostanie zastosowana, adres URL zmieni `/redirected/1234/5678`się.
+W ciągu zamiennym przechwycone grupy są wstawiane do ciągu z symbolem dolara ( `$` ), po którym następuje numer sekwencji przechwytywania. Pierwsza wartość grupy przechwytywania jest pobierana z `$1` , sekunda z `$2` i są dalej sekwencją dla grup przechwytywania w wyrażeniach regularnych. W aplikacji przykładowej wyrażenie regularne ma tylko jedną przechwyconą grupę, więc w ciągu zamiennym istnieje tylko jedna grupa wstrzykiwana, która jest `$1` . Gdy reguła zostanie zastosowana, adres URL zmieni się `/redirected/1234/5678` .
 
 ### <a name="url-redirect-to-a-secure-endpoint"></a>Przekierowanie adresu URL do bezpiecznego punktu końcowego
 
 Służy <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirectToHttps*> do przekierowywania żądań HTTP do tego samego hosta i ścieżki przy użyciu protokołu HTTPS. Jeśli nie podano kodu stanu, oprogramowanie pośredniczące domyślnie zostanie *znalezione na 302*. Jeśli port nie jest podany:
 
-* Ustawienia domyślne oprogramowania pośredniczącego `null`.
+* Ustawienia domyślne oprogramowania pośredniczącego `null` .
 * Schemat zmienia się na `https` (protokół https), a klient uzyskuje dostęp do zasobu na porcie 443.
 
 Poniższy przykład pokazuje, jak ustawić kod stanu na *301 — trwale przeniesiony* i zmienić port na 5001.
@@ -168,19 +155,19 @@ public void Configure(IApplicationBuilder app)
 > [!NOTE]
 > Podczas przekierowywania do bezpiecznego punktu końcowego bez wymagania dla dodatkowych reguł przekierowywania zalecamy używanie oprogramowania pośredniczącego do przekierowania protokołu HTTPS. Aby uzyskać więcej informacji, zobacz temat [Wymuś https](xref:security/enforcing-ssl#require-https) .
 
-Przykładowa aplikacja jest w stanie demonstrować, jak korzystać `AddRedirectToHttps` z `AddRedirectToHttpsPermanent`lub. Dodaj metodę rozszerzenia do `RewriteOptions`. Wprowadź niezabezpieczone żądanie do aplikacji pod dowolnym adresem URL. Odrzuć ostrzeżenie o zabezpieczeniach przeglądarki, że certyfikat z podpisem własnym jest niezaufany lub Utwórz wyjątek, aby zaufać certyfikatowi.
+Przykładowa aplikacja jest w stanie demonstrować, jak korzystać z `AddRedirectToHttps` lub `AddRedirectToHttpsPermanent` . Dodaj metodę rozszerzenia do `RewriteOptions` . Wprowadź niezabezpieczone żądanie do aplikacji pod dowolnym adresem URL. Odrzuć ostrzeżenie o zabezpieczeniach przeglądarki, że certyfikat z podpisem własnym jest niezaufany lub Utwórz wyjątek, aby zaufać certyfikatowi.
 
-Oryginalne żądanie przy `AddRedirectToHttps(301, 5001)`użyciu:`http://localhost:5000/secure`
+Oryginalne żądanie przy użyciu `AddRedirectToHttps(301, 5001)` :`http://localhost:5000/secure`
 
 ![Okno przeglądarki z Narzędzia deweloperskie śledzenia żądań i odpowiedzi](url-rewriting/_static/add_redirect_to_https.png)
 
-Oryginalne żądanie przy `AddRedirectToHttpsPermanent`użyciu:`http://localhost:5000/secure`
+Oryginalne żądanie przy użyciu `AddRedirectToHttpsPermanent` :`http://localhost:5000/secure`
 
 ![Okno przeglądarki z Narzędzia deweloperskie śledzenia żądań i odpowiedzi](url-rewriting/_static/add_redirect_to_https_permanent.png)
 
 ### <a name="url-rewrite"></a>Regenerowanie adresów URL
 
-Służy <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRewrite*> do tworzenia reguły ponownego zapisywania adresów URL. Pierwszy parametr zawiera wyrażenie regularne do dopasowania w przychodzącej ścieżce adresu URL. Drugi parametr jest ciągiem zamiennym. Trzeci parametr, `skipRemainingRules: {true|false}`, wskazuje na oprogramowanie pośredniczące, niezależnie od tego, czy pominięcia dodatkowych reguł ponownego zapisu w przypadku zastosowania bieżącej reguły.
+Służy <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRewrite*> do tworzenia reguły ponownego zapisywania adresów URL. Pierwszy parametr zawiera wyrażenie regularne do dopasowania w przychodzącej ścieżce adresu URL. Drugi parametr jest ciągiem zamiennym. Trzeci parametr, `skipRemainingRules: {true|false}` , wskazuje na oprogramowanie pośredniczące, niezależnie od tego, czy pominięcia dodatkowych reguł ponownego zapisu w przypadku zastosowania bieżącej reguły.
 
 [!code-csharp[](url-rewriting/samples/3.x/SampleApp/Startup.cs?name=snippet1&highlight=10-11)]
 
@@ -188,25 +175,251 @@ Oryginalne żądanie:`/rewrite-rule/1234/5678`
 
 ![Okno przeglądarki z Narzędzia deweloperskie śledzenia żądania i odpowiedzi](url-rewriting/_static/add_rewrite.png)
 
-W karatach`^`() na początku wyrażenia oznacza to, że dopasowanie rozpoczyna się na początku ścieżki URL.
+W karatach ( `^` ) na początku wyrażenia oznacza to, że dopasowanie rozpoczyna się na początku ścieżki URL.
 
-W poprzednim przykładzie z regułą `redirect-rule/(.*)`przekierowania nie ma żadnych karatów (`^`) na początku wyrażenia regularnego. W związku z tym wszystkie znaki `redirect-rule/` mogą poprzedzać w ścieżce pomyślne dopasowanie.
+W poprzednim przykładzie z regułą przekierowania `redirect-rule/(.*)` nie ma żadnych karatów ( `^` ) na początku wyrażenia regularnego. W związku z tym wszystkie znaki mogą poprzedzać `redirect-rule/` w ścieżce pomyślne dopasowanie.
 
 | Ścieżka                               | Dopasowanie |
-| ---------------------------------- | :---: |
-| `/redirect-rule/1234/5678`         | Tak   |
-| `/my-cool-redirect-rule/1234/5678` | Tak   |
-| `/anotherredirect-rule/1234/5678`  | Tak   |
+| ---
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
 
-Reguła ponownego zapisywania, `^rewrite-rule/(\d+)/(\d+)`,, dopasowuje się tylko do ścieżek, `rewrite-rule/`Jeśli zaczynają się od. W poniższej tabeli należy zwrócić uwagę na różnicę.
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+----------------- | :---: | | `/redirect-rule/1234/5678`         | Tak | | `/my-cool-redirect-rule/1234/5678` | Tak | | `/anotherredirect-rule/1234/5678`  | Tak |
+
+Reguła ponownego zapisywania, `^rewrite-rule/(\d+)/(\d+)` ,, dopasowuje się tylko do ścieżek, jeśli zaczynają się od `rewrite-rule/` . W poniższej tabeli należy zwrócić uwagę na różnicę.
 
 | Ścieżka                              | Dopasowanie |
-| --------------------------------- | :---: |
-| `/rewrite-rule/1234/5678`         | Yes   |
-| `/my-cool-rewrite-rule/1234/5678` | Nie    |
-| `/anotherrewrite-rule/1234/5678`  | Nie    |
+| ---
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
 
-Po `^rewrite-rule/` części wyrażenia istnieją dwie grupy przechwytywania `(\d+)/(\d+)`. `\d` Oznaczenia *są zgodne z cyfrą (* cyfrą). Znak plus (`+`) oznacza *dopasowanie co najmniej jednego znaku poprzedzającego*. W związku z tym adres URL musi zawierać numer, po którym następuje ukośnik, po którym następuje kolejny numer. Te grupy przechwytywania są wstrzykiwane do zarejestrowanego adresu URL `$1` jako `$2`i. Ciąg zastępczy reguły ponownego zapisu umieszcza przechwycone grupy w ciągu zapytania. Żądana ścieżka `/rewrite-rule/1234/5678` jest ponownie zapisywana, aby uzyskać zasób w `/rewritten?var1=1234&var2=5678`. Jeśli ciąg zapytania jest obecny w oryginalnym żądaniu, jest zachowywany, gdy adres URL zostanie ponownie zapisany.
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+----------------- | :---: | | `/rewrite-rule/1234/5678`         | Tak | | `/my-cool-rewrite-rule/1234/5678` | Nie | | `/anotherrewrite-rule/1234/5678`  | Nie |
+
+Po `^rewrite-rule/` części wyrażenia istnieją dwie grupy przechwytywania `(\d+)/(\d+)` . Oznaczenia `\d` *są zgodne z cyfrą (* cyfrą). Znak plus ( `+` ) oznacza *dopasowanie co najmniej jednego znaku poprzedzającego*. W związku z tym adres URL musi zawierać numer, po którym następuje ukośnik, po którym następuje kolejny numer. Te grupy przechwytywania są wstrzykiwane do zarejestrowanego adresu URL jako `$1` i `$2` . Ciąg zastępczy reguły ponownego zapisu umieszcza przechwycone grupy w ciągu zapytania. Żądana ścieżka `/rewrite-rule/1234/5678` jest ponownie zapisywana, aby uzyskać zasób w `/rewritten?var1=1234&var2=5678` . Jeśli ciąg zapytania jest obecny w oryginalnym żądaniu, jest zachowywany, gdy adres URL zostanie ponownie zapisany.
 
 Serwer nie może uzyskać dostępu do zasobów. Jeśli zasób istnieje, jest pobierany i zwracany do klienta przy użyciu kodu stanu *200-OK* . Ponieważ klient nie jest przekierowywany, adres URL na pasku adresu przeglądarki nie jest zmieniany. Klienci nie mogą wykryć, czy na serwerze wystąpiła operacja ponownego zapisywania adresu URL.
 
@@ -218,13 +431,13 @@ Serwer nie może uzyskać dostępu do zasobów. Jeśli zasób istnieje, jest pob
 
 ### <a name="apache-mod_rewrite"></a>Mod_rewrite Apache
 
-Zastosuj reguły mod_rewrite Apache za <xref:Microsoft.AspNetCore.Rewrite.ApacheModRewriteOptionsExtensions.AddApacheModRewrite*>pomocą programu. Upewnij się, że plik reguł został wdrożony razem z aplikacją. Aby uzyskać więcej informacji i przykłady reguł mod_rewrite, zobacz [Apache mod_rewrite](https://httpd.apache.org/docs/2.4/rewrite/).
+Zastosuj reguły mod_rewrite Apache za pomocą programu <xref:Microsoft.AspNetCore.Rewrite.ApacheModRewriteOptionsExtensions.AddApacheModRewrite*> . Upewnij się, że plik reguł został wdrożony razem z aplikacją. Aby uzyskać więcej informacji i przykłady reguł mod_rewrite, zobacz [Apache mod_rewrite](https://httpd.apache.org/docs/2.4/rewrite/).
 
-A <xref:System.IO.StreamReader> służy do odczytywania reguł z pliku reguł *ApacheModRewrite. txt* :
+A służy <xref:System.IO.StreamReader> do odczytywania reguł z pliku reguł *ApacheModRewrite. txt* :
 
 [!code-csharp[](url-rewriting/samples/3.x/SampleApp/Startup.cs?name=snippet1&highlight=3-4,12)]
 
-Przykładowa aplikacja przekierowuje żądania z `/apache-mod-rules-redirect/(.\*)` do. `/redirected?id=$1` Kod stanu odpowiedzi to *302 — znaleziono*.
+Przykładowa aplikacja przekierowuje żądania z `/apache-mod-rules-redirect/(.\*)` do `/redirected?id=$1` . Kod stanu odpowiedzi to *302 — znaleziono*.
 
 [!code[](url-rewriting/samples/3.x/SampleApp/ApacheModRewrite.txt)]
 
@@ -266,13 +479,13 @@ Oprogramowanie pośredniczące obsługuje następujące zmienne serwera Apache m
 
 ### <a name="iis-url-rewrite-module-rules"></a>Reguły modułu ponownego zapisywania adresów URL usług IIS
 
-Aby użyć tego samego zestawu reguł, który ma zastosowanie do modułu ponowne zapisywanie adresów URL usług <xref:Microsoft.AspNetCore.Rewrite.IISUrlRewriteOptionsExtensions.AddIISUrlRewrite*>IIS, użyj. Upewnij się, że plik reguł został wdrożony razem z aplikacją. Nie należy kierować oprogramowanie pośredniczące do korzystania z pliku *Web. config* aplikacji podczas uruchamiania w usługach IIS systemu Windows Server. W przypadku usług IIS te reguły powinny być przechowywane poza plikiem *Web. config* aplikacji, aby uniknąć konfliktów z modułem ponownego zapisywania usług IIS. Aby uzyskać więcej informacji i przykłady reguł modułu ponownego zapisywania adresów URL usług IIS, zobacz [using URL Rewrite module 2,0](/iis/extensions/url-rewrite-module/using-url-rewrite-module-20) i [informacje konfiguracyjne modułu ponownego zapisywania adresu URL](/iis/extensions/url-rewrite-module/url-rewrite-module-configuration-reference).
+Aby użyć tego samego zestawu reguł, który ma zastosowanie do modułu ponowne zapisywanie adresów URL usług IIS, użyj <xref:Microsoft.AspNetCore.Rewrite.IISUrlRewriteOptionsExtensions.AddIISUrlRewrite*> . Upewnij się, że plik reguł został wdrożony razem z aplikacją. Nie należy kierować oprogramowanie pośredniczące do korzystania z pliku *Web. config* aplikacji podczas uruchamiania w usługach IIS systemu Windows Server. W przypadku usług IIS te reguły powinny być przechowywane poza plikiem *Web. config* aplikacji, aby uniknąć konfliktów z modułem ponownego zapisywania usług IIS. Aby uzyskać więcej informacji i przykłady reguł modułu ponownego zapisywania adresów URL usług IIS, zobacz [using URL Rewrite module 2,0](/iis/extensions/url-rewrite-module/using-url-rewrite-module-20) i [informacje konfiguracyjne modułu ponownego zapisywania adresu URL](/iis/extensions/url-rewrite-module/url-rewrite-module-configuration-reference).
 
-A <xref:System.IO.StreamReader> służy do odczytywania reguł z pliku reguł *IISUrlRewrite. XML* :
+A służy <xref:System.IO.StreamReader> do odczytywania reguł z pliku reguł *IISUrlRewrite. XML* :
 
 [!code-csharp[](url-rewriting/samples/3.x/SampleApp/Startup.cs?name=snippet1&highlight=5-6,13)]
 
-Przykładowa aplikacja ponownie zapisuje żądania z `/iis-rules-rewrite/(.*)` programu do `/rewritten?id=$1`. Odpowiedź jest wysyłana do klienta z kodem stanu *200-OK* .
+Przykładowa aplikacja ponownie zapisuje żądania z `/iis-rules-rewrite/(.*)` programu do `/rewritten?id=$1` . Odpowiedź jest wysyłana do klienta z kodem stanu *200-OK* .
 
 [!code-xml[](url-rewriting/samples/3.x/SampleApp/IISUrlRewrite.xml)]
 
@@ -313,7 +526,7 @@ Oprogramowanie pośredniczące obsługuje następujące zmienne serwera modułu 
 * REQUEST_URI
 
 > [!NOTE]
-> Możesz również uzyskać <xref:Microsoft.Extensions.FileProviders.IFileProvider> za pośrednictwem a <xref:Microsoft.Extensions.FileProviders.PhysicalFileProvider>. Takie podejście może zapewnić większą elastyczność lokalizacji plików reguł ponownego zapisywania. Upewnij się, że pliki reguł ponownego zapisywania są wdrożone na serwerze pod podaną ścieżką.
+> Możesz również uzyskać <xref:Microsoft.Extensions.FileProviders.IFileProvider> za pośrednictwem a <xref:Microsoft.Extensions.FileProviders.PhysicalFileProvider> . Takie podejście może zapewnić większą elastyczność lokalizacji plików reguł ponownego zapisywania. Upewnij się, że pliki reguł ponownego zapisywania są wdrożone na serwerze pod podaną ścieżką.
 >
 > ```csharp
 > PhysicalFileProvider fileProvider = new PhysicalFileProvider(Directory.GetCurrentDirectory());
@@ -321,17 +534,381 @@ Oprogramowanie pośredniczące obsługuje następujące zmienne serwera modułu 
 
 ### <a name="method-based-rule"></a>Reguła oparta na metodzie
 
-Użyj <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.Add*> , aby zaimplementować własną logikę reguł w metodzie. `Add`udostępnia <xref:Microsoft.AspNetCore.Rewrite.RewriteContext>, który udostępnia <xref:Microsoft.AspNetCore.Http.HttpContext> do użycia w Twojej metodzie. [RewriteContext. Result](xref:Microsoft.AspNetCore.Rewrite.RewriteContext.Result*) określa sposób obsługi dodatkowego przetwarzania potoku. Ustaw wartość na jedno z <xref:Microsoft.AspNetCore.Rewrite.RuleResult> pól opisanych w poniższej tabeli.
+Użyj <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.Add*> , aby zaimplementować własną logikę reguł w metodzie. `Add`udostępnia <xref:Microsoft.AspNetCore.Rewrite.RewriteContext> , który udostępnia do <xref:Microsoft.AspNetCore.Http.HttpContext> użycia w Twojej metodzie. [RewriteContext. Result](xref:Microsoft.AspNetCore.Rewrite.RewriteContext.Result*) określa sposób obsługi dodatkowego przetwarzania potoku. Ustaw wartość na jedno z <xref:Microsoft.AspNetCore.Rewrite.RuleResult> pól opisanych w poniższej tabeli.
 
 | `RewriteContext.Result`              | Akcja                                                           |
-| ------------------------------------ | ---------------------------------------------------------------- |
-| `RuleResult.ContinueRules`wartooć | Kontynuuj stosowanie reguł.                                         |
-| `RuleResult.EndResponse`             | Zatrzymaj stosowanie reguł i Wyślij odpowiedź.                       |
-| `RuleResult.SkipRemainingRules`      | Zatrzymaj stosowanie reguł i Wyślij kontekst do następnego oprogramowania pośredniczącego. |
+| ---
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+------------------ | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-------------------------------- | | `RuleResult.ContinueRules`(ustawienie domyślne) | Kontynuuj stosowanie reguł.                                         | | `RuleResult.EndResponse`             | Zatrzymaj stosowanie reguł i Wyślij odpowiedź.                       | | `RuleResult.SkipRemainingRules`      | Zatrzymaj stosowanie reguł i Wyślij kontekst do następnego oprogramowania pośredniczącego. |
 
 [!code-csharp[](url-rewriting/samples/3.x/SampleApp/Startup.cs?name=snippet1&highlight=14)]
 
-Przykładowa aplikacja przedstawia metodę, która przekierowuje żądania dla ścieżek kończących się na *. XML*. Jeśli zostanie wysłane żądanie `/file.xml`, żądanie jest przekierowywane do. `/xmlfiles/file.xml` Kod stanu jest ustawiony na *301 — trwale przeniesiony*. Gdy przeglądarka wykonuje nowe żądanie dla */XmlFiles/File.XML*, oprogramowanie pośredniczące plików statycznych zachowuje ten plik na kliencie z folderu *wwwroot/XmlFiles* . W przypadku przekierowania jawnie ustaw kod stanu odpowiedzi. W przeciwnym razie zwracany jest kod stanu *200-OK* i przekierowanie nie wystąpi na kliencie.
+Przykładowa aplikacja przedstawia metodę, która przekierowuje żądania dla ścieżek kończących się na *. XML*. Jeśli zostanie wysłane żądanie `/file.xml` , żądanie jest przekierowywane do `/xmlfiles/file.xml` . Kod stanu jest ustawiony na *301 — trwale przeniesiony*. Gdy przeglądarka wykonuje nowe żądanie dla */XmlFiles/File.XML*, oprogramowanie pośredniczące plików statycznych zachowuje ten plik na kliencie z folderu *wwwroot/XmlFiles* . W przypadku przekierowania jawnie ustaw kod stanu odpowiedzi. W przeciwnym razie zwracany jest kod stanu *200-OK* i przekierowanie nie wystąpi na kliencie.
 
 *RewriteRules.cs*:
 
@@ -347,11 +924,11 @@ Takie podejście może również ponownie zapisywać żądania. Przykładowa apl
 
 ### <a name="irule-based-rule"></a>Reguła oparta na IRule
 
-Użyj <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.Add*> , aby użyć logiki reguły w klasie, która implementuje <xref:Microsoft.AspNetCore.Rewrite.IRule> interfejs. `IRule`zapewnia większą elastyczność w porównaniu z użyciem metody opartej na metodzie. Klasa implementacji może zawierać konstruktora, który umożliwia przekazywanie parametrów dla <xref:Microsoft.AspNetCore.Rewrite.IRule.ApplyRule*> metody.
+Użyj, <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.Add*> Aby użyć logiki reguły w klasie, która implementuje <xref:Microsoft.AspNetCore.Rewrite.IRule> interfejs. `IRule`zapewnia większą elastyczność w porównaniu z użyciem metody opartej na metodzie. Klasa implementacji może zawierać konstruktora, który umożliwia przekazywanie parametrów dla <xref:Microsoft.AspNetCore.Rewrite.IRule.ApplyRule*> metody.
 
 [!code-csharp[](url-rewriting/samples/3.x/SampleApp/Startup.cs?name=snippet1&highlight=16-17)]
 
-Wartości parametrów w aplikacji przykładowej dla `extension` i `newPath` są sprawdzane pod kątem spełnienia kilku warunków. `extension` Musi zawierać wartość i musi mieć wartość *. png*, *. jpg*lub *. gif*. `newPath` Jeśli <xref:System.ArgumentException> jest nieprawidłowa, zostanie zgłoszony. Jeśli zostanie wysłane żądanie dotyczące pliku *Image. png*, żądanie jest przekierowywane do `/png-images/image.png`. Jeśli zostanie wysłane żądanie do *obrazu. jpg*, żądanie jest przekierowywane do `/jpg-images/image.jpg`. Kod stanu jest ustawiony na *301 — trwale przeniesiony*, a ustawienie `context.Result` jest ustawione na zatrzymanie przetwarzania reguł i wysłanie odpowiedzi.
+Wartości parametrów w aplikacji przykładowej dla `extension` i `newPath` są sprawdzane pod kątem spełnienia kilku warunków. `extension`Musi zawierać wartość i musi mieć wartość *. png*, *. jpg*lub *. gif*. Jeśli `newPath` jest nieprawidłowa, <xref:System.ArgumentException> zostanie zgłoszony. Jeśli zostanie wysłane żądanie dotyczące pliku *Image. png*, żądanie jest przekierowywane do `/png-images/image.png` . Jeśli zostanie wysłane żądanie do *obrazu. jpg*, żądanie jest przekierowywane do `/jpg-images/image.jpg` . Kod stanu jest ustawiony na *301 — trwale przeniesiony*, a `context.Result` ustawienie jest ustawione na zatrzymanie przetwarzania reguł i wysłanie odpowiedzi.
 
 [!code-csharp[](url-rewriting/samples/3.x/SampleApp/RewriteRules.cs?name=snippet_RedirectImageRequests)]
 
@@ -366,13 +943,246 @@ Oryginalne żądanie:`/image.jpg`
 ## <a name="regex-examples"></a>Przykłady wyrażeń regularnych
 
 | Cel | Ciąg wyrażenia regularnego &<br>Przykład dopasowania | & ciągu zamiennego<br>Przykład danych wyjściowych |
-| ---- | ------------------------------- | -------------------------------------- |
-| Zapisz ścieżkę do ciągu QueryString | `^path/(.*)/(.*)`<br>`/path/abc/123` | `path?var1=$1&var2=$2`<br>`/path?var1=abc&var2=123` |
-| Ukośnik końcowy na pasku | `(.*)/$`<br>`/path/` | `$1`<br>`/path` |
-| Wymuszaj końcowy ukośnik | `(.*[^/])$`<br>`/path` | `$1/`<br>`/path/` |
-| Unikaj ponownego zapisywania określonych żądań | `^(.*)(?<!\.axd)$` lub `^(?!.*\.axd$)(.*)$`<br>Opcję`/resource.htm`<br>Znaleziono`/resource.axd` | `rewritten/$1`<br>`/rewritten/resource.htm`<br>`/resource.axd` |
-| Zmień rozmieszczenie segmentów adresu URL | `path/(.*)/(.*)/(.*)`<br>`path/1/2/3` | `path/$3/$2/$1`<br>`path/3/2/1` |
-| Zastępowanie segmentu adresu URL | `^(.*)/segment2/(.*)`<br>`/segment1/segment2/segment3` | `$1/replaced/$2`<br>`/segment1/replaced/segment3` |
+| ---- | ---
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+---------------- | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+------------------- | | Zapisz ścieżkę do ciągu QueryString |`^path/(.*)/(.*)`<br>`/path/abc/123` | `path?var1=$1&var2=$2`<br>`/path?var1=abc&var2=123`| | Ukośnik na końcu paska |`(.*)/$`<br>`/path/` | `$1`<br>`/path`| | Wymuś końcowy ukośnika |`(.*[^/])$`<br>`/path` | `$1/`<br>`/path/`| | Unikaj ponownego zapisywania konkretnych żądań | `^(.*)(?<!\.axd)$`lub`^(?!.*\.axd$)(.*)$`<br>Opcję`/resource.htm`<br>Znaleziono`/resource.axd` | `rewritten/$1`<br>`/rewritten/resource.htm`<br>`/resource.axd`| | Zmień rozmieszczenie segmentów adresu URL |`path/(.*)/(.*)/(.*)`<br>`path/1/2/3` | `path/$3/$2/$1`<br>`path/3/2/1`| | Zastępowanie segmentu adresu URL |`^(.*)/segment2/(.*)`<br>`/segment1/segment2/segment3` | `$1/replaced/$2`<br>`/segment1/replaced/segment3` |
 
 ::: moniker-end
 
@@ -401,7 +1211,7 @@ Różnica między *przekierowaniami adresów URL* i *przepisaniem adresów URL* 
 
 *Przekierowanie adresu URL* obejmuje operację po stronie klienta, w której klient otrzymuje dostęp do zasobu pod innym adresem niż pierwotnie żądany klient. Wymaga to przeprowadzenia rundy na serwerze. Adres URL przekierowania zwracany do klienta pojawia się na pasku adresu przeglądarki, gdy klient wysyła nowe żądanie dla zasobu.
 
-W `/resource` przypadku *przekierowania* do `/different-resource`programu serwer odpowiada, że klient powinien uzyskać zasób przy `/different-resource` użyciu kodu stanu wskazującego, że przekierowanie jest tymczasowe lub trwałe.
+W `/resource` przypadku *przekierowania* do programu `/different-resource` serwer odpowiada, że klient powinien uzyskać zasób przy `/different-resource` użyciu kodu stanu wskazującego, że przekierowanie jest tymczasowe lub trwałe.
 
 ![Punkt końcowy usługi WebAPI został tymczasowo zmieniony z wersji 1 (v1) do wersji 2 (v2) na serwerze. Klient wysyła żądanie do usługi w ścieżce w wersji 1/v1/API. Serwer wysyła odpowiedź 302 (znalezioną) z nową ścieżką tymczasową dla usługi w wersji 2/v2/API. Klient wysyła drugie żądanie do usługi przy użyciu adresu URL przekierowania. Serwer reaguje na kod stanu 200 (OK).](url-rewriting/_static/url_redirect.png)
 
@@ -415,7 +1225,7 @@ Aby uzyskać więcej informacji na temat kodów stanu, zobacz [RFC 2616: definic
 
 Ponowne *Zapisywanie adresów URL* jest operacją po stronie serwera, która dostarcza zasób z innego adresu zasobu niż żądany klient. Ponowne zapisywanie adresu URL nie wymaga przejazdu na serwer. Zwrotny adres URL nie jest zwracany do klienta i nie jest wyświetlany na pasku adresu przeglądarki.
 
-Jeśli `/resource` program *rewritten* zostanie ponownie `/different-resource`zapisany w programie, serwer *wewnętrznie* pobiera i zwraca zasób w `/different-resource`.
+Jeśli `/resource` program zostanie ponownie *zapisany* w programie `/different-resource` , serwer *wewnętrznie* pobiera i zwraca zasób w `/different-resource` .
 
 Mimo że klient może być w stanie pobrać zasób przy zapisywanym adresie URL, klient nie ma informacji o tym, że zasób istnieje pod adresem URL, gdy wysyła żądanie i otrzymuje odpowiedź.
 
@@ -448,21 +1258,21 @@ Główne przyczyny używania technologii zapisywania adresów URL opartych na se
 
 Aby uwzględnić oprogramowanie pośredniczące w projekcie, Dodaj odwołanie do pakietu do [pakietu Microsoft. AspNetCore. app](xref:fundamentals/metapackage-app) w pliku projektu, który zawiera pakiet [Microsoft. AspNetCore. Rewrite](https://www.nuget.org/packages/Microsoft.AspNetCore.Rewrite) .
 
-Gdy nie korzystasz `Microsoft.AspNetCore.App` z pakietu, Dodaj odwołanie do projektu do `Microsoft.AspNetCore.Rewrite` pakietu.
+Gdy nie korzystasz z `Microsoft.AspNetCore.App` pakietu, Dodaj odwołanie do projektu do `Microsoft.AspNetCore.Rewrite` pakietu.
 
 ## <a name="extension-and-options"></a>Rozszerzenie i opcje
 
-Ustanów reguły ponownego zapisywania i przekierowywania adresów URL, tworząc wystąpienie klasy [RewriteOptions](xref:Microsoft.AspNetCore.Rewrite.RewriteOptions) z metodami rozszerzającymi dla każdej z reguł ponownego zapisywania. Łączenie wielu reguł w kolejności, w jakiej mają być przetwarzane. `RewriteOptions` Są one przesyłane do programu pośredniczącego na potrzeby ponownego zapisywania adresów URL, ponieważ są dodawane do potoku żądania przy użyciu <xref:Microsoft.AspNetCore.Builder.RewriteBuilderExtensions.UseRewriter*>:
+Ustanów reguły ponownego zapisywania i przekierowywania adresów URL, tworząc wystąpienie klasy [RewriteOptions](xref:Microsoft.AspNetCore.Rewrite.RewriteOptions) z metodami rozszerzającymi dla każdej z reguł ponownego zapisywania. Łączenie wielu reguł w kolejności, w jakiej mają być przetwarzane. `RewriteOptions`Są one przesyłane do programu pośredniczącego na potrzeby ponownego zapisywania adresów URL, ponieważ są dodawane do potoku żądania przy użyciu <xref:Microsoft.AspNetCore.Builder.RewriteBuilderExtensions.UseRewriter*> :
 
 [!code-csharp[](url-rewriting/samples/2.x/SampleApp/Startup.cs?name=snippet1)]
 
 ### <a name="redirect-non-www-to-www"></a>Przekieruj do sieci Web inne niż www
 
-Trzy opcje Zezwalaj aplikacji na przekierowywanie`www` żądań, które nie `www`są żądaniami do:
+Trzy opcje Zezwalaj aplikacji na Przekierowywanie żądań, które nie są `www` żądaniami do `www` :
 
-* <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirectToWwwPermanent*>&ndash; Trwale Przekieruj żądanie do `www` domeny podrzędnej, jeśli żądanie jest inne niż`www`. Przekierowuje kod stanu [Status308PermanentRedirect](xref:Microsoft.AspNetCore.Http.StatusCodes.Status308PermanentRedirect) .
+* <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirectToWwwPermanent*>: Trwale Przekieruj żądanie do domeny podrzędnej, `www` Jeśli żądanie jest inne niż `www` . Przekierowuje kod stanu [Status308PermanentRedirect](xref:Microsoft.AspNetCore.Http.StatusCodes.Status308PermanentRedirect) .
 
-* <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirectToWww*>&ndash; Przekieruj żądanie do `www` domeny podrzędnej, jeśli żądanie przychodzące jest inne niż`www`. Przekierowuje kod stanu [Status307TemporaryRedirect](xref:Microsoft.AspNetCore.Http.StatusCodes.Status307TemporaryRedirect) . Przeciążenie umożliwia podanie kodu stanu odpowiedzi. Użyj pola <xref:Microsoft.AspNetCore.Http.StatusCodes> klasy do przypisania kodu stanu.
+* <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirectToWww*>: Przekieruj żądanie do domeny podrzędnej `www` , jeśli żądanie przychodzące jest inne niż `www` . Przekierowuje kod stanu [Status307TemporaryRedirect](xref:Microsoft.AspNetCore.Http.StatusCodes.Status307TemporaryRedirect) . Przeciążenie umożliwia podanie kodu stanu odpowiedzi. Użyj pola <xref:Microsoft.AspNetCore.Http.StatusCodes> klasy do przypisania kodu stanu.
 
 ### <a name="url-redirect"></a>Przekierowywanie adresów URL
 
@@ -470,7 +1280,7 @@ Użyj <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirect*> 
 
 [!code-csharp[](url-rewriting/samples/2.x/SampleApp/Startup.cs?name=snippet1&highlight=9)]
 
-W przeglądarce z włączonymi narzędziami deweloperskimi Utwórz żądanie do przykładowej aplikacji ze ścieżką `/redirect-rule/1234/5678`. Wyrażenie regularne dopasowuje ścieżkę żądania w `redirect-rule/(.*)`, a ścieżka jest zastępowana przez `/redirected/1234/5678`. Adres URL przekierowania jest wysyłany z powrotem do klienta z kodem stanu *znalezionym przez 302* . Przeglądarka tworzy nowe żądanie w adresie URL przekierowania, który jest wyświetlany na pasku adresu przeglądarki. Ponieważ w adresie URL przekierowania nie ma reguł pasujących do przykładowej aplikacji:
+W przeglądarce z włączonymi narzędziami deweloperskimi Utwórz żądanie do przykładowej aplikacji ze ścieżką `/redirect-rule/1234/5678` . Wyrażenie regularne dopasowuje ścieżkę żądania w `redirect-rule/(.*)` , a ścieżka jest zastępowana przez `/redirected/1234/5678` . Adres URL przekierowania jest wysyłany z powrotem do klienta z kodem stanu *znalezionym przez 302* . Przeglądarka tworzy nowe żądanie w adresie URL przekierowania, który jest wyświetlany na pasku adresu przeglądarki. Ponieważ w adresie URL przekierowania nie ma reguł pasujących do przykładowej aplikacji:
 
 * Drugie żądanie odbiera odpowiedź *200-OK* z aplikacji.
 * Treść odpowiedzi zawiera adres URL przekierowania.
@@ -484,15 +1294,15 @@ Oryginalne żądanie:`/redirect-rule/1234/5678`
 
 ![Okno przeglądarki z Narzędzia deweloperskie śledzenia żądań i odpowiedzi](url-rewriting/_static/add_redirect.png)
 
-Część wyrażenia zawartego w nawiasach jest nazywana *grupą przechwytywania*. Kropka (`.`) wyrażenia oznacza *dopasowanie dowolnego znaku*. Gwiazdka (`*`) oznacza *Dopasowanie znaku poprzedzającego zero lub więcej razy*. W związku z tym, ostatnie dwa segmenty ścieżki adresu `1234/5678`URL, są przechwytywane przez `(.*)`grupę przechwytywania. Każda wartość podaną w adresie URL żądania `redirect-rule/` Po przechwyceniu przez tę pojedynczą grupę przechwytywania.
+Część wyrażenia zawartego w nawiasach jest nazywana *grupą przechwytywania*. Kropka ( `.` ) wyrażenia oznacza *dopasowanie dowolnego znaku*. Gwiazdka ( `*` ) oznacza *Dopasowanie znaku poprzedzającego zero lub więcej razy*. W związku z tym, ostatnie dwa segmenty ścieżki adresu URL, `1234/5678` są przechwytywane przez grupę przechwytywania `(.*)` . Każda wartość podaną w adresie URL żądania po `redirect-rule/` przechwyceniu przez tę pojedynczą grupę przechwytywania.
 
-W ciągu zamiennym przechwycone grupy są wstawiane do ciągu z symbolem dolara`$`(), po którym następuje numer sekwencji przechwytywania. Pierwsza wartość grupy przechwytywania jest pobierana z `$1`, sekunda z `$2`i są dalej sekwencją dla grup przechwytywania w wyrażeniach regularnych. W aplikacji przykładowej wyrażenie regularne ma tylko jedną przechwyconą grupę, więc w ciągu zamiennym istnieje tylko jedna grupa wstrzykiwana, która jest `$1`. Gdy reguła zostanie zastosowana, adres URL zmieni `/redirected/1234/5678`się.
+W ciągu zamiennym przechwycone grupy są wstawiane do ciągu z symbolem dolara ( `$` ), po którym następuje numer sekwencji przechwytywania. Pierwsza wartość grupy przechwytywania jest pobierana z `$1` , sekunda z `$2` i są dalej sekwencją dla grup przechwytywania w wyrażeniach regularnych. W aplikacji przykładowej wyrażenie regularne ma tylko jedną przechwyconą grupę, więc w ciągu zamiennym istnieje tylko jedna grupa wstrzykiwana, która jest `$1` . Gdy reguła zostanie zastosowana, adres URL zmieni się `/redirected/1234/5678` .
 
 ### <a name="url-redirect-to-a-secure-endpoint"></a>Przekierowanie adresu URL do bezpiecznego punktu końcowego
 
 Służy <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirectToHttps*> do przekierowywania żądań HTTP do tego samego hosta i ścieżki przy użyciu protokołu HTTPS. Jeśli nie podano kodu stanu, oprogramowanie pośredniczące domyślnie zostanie *znalezione na 302*. Jeśli port nie jest podany:
 
-* Ustawienia domyślne oprogramowania pośredniczącego `null`.
+* Ustawienia domyślne oprogramowania pośredniczącego `null` .
 * Schemat zmienia się na `https` (protokół https), a klient uzyskuje dostęp do zasobu na porcie 443.
 
 Poniższy przykład pokazuje, jak ustawić kod stanu na *301 — trwale przeniesiony* i zmienić port na 5001.
@@ -522,19 +1332,19 @@ public void Configure(IApplicationBuilder app)
 > [!NOTE]
 > Podczas przekierowywania do bezpiecznego punktu końcowego bez wymagania dla dodatkowych reguł przekierowywania zalecamy używanie oprogramowania pośredniczącego do przekierowania protokołu HTTPS. Aby uzyskać więcej informacji, zobacz temat [Wymuś https](xref:security/enforcing-ssl#require-https) .
 
-Przykładowa aplikacja jest w stanie demonstrować, jak korzystać `AddRedirectToHttps` z `AddRedirectToHttpsPermanent`lub. Dodaj metodę rozszerzenia do `RewriteOptions`. Wprowadź niezabezpieczone żądanie do aplikacji pod dowolnym adresem URL. Odrzuć ostrzeżenie o zabezpieczeniach przeglądarki, że certyfikat z podpisem własnym jest niezaufany lub Utwórz wyjątek, aby zaufać certyfikatowi.
+Przykładowa aplikacja jest w stanie demonstrować, jak korzystać z `AddRedirectToHttps` lub `AddRedirectToHttpsPermanent` . Dodaj metodę rozszerzenia do `RewriteOptions` . Wprowadź niezabezpieczone żądanie do aplikacji pod dowolnym adresem URL. Odrzuć ostrzeżenie o zabezpieczeniach przeglądarki, że certyfikat z podpisem własnym jest niezaufany lub Utwórz wyjątek, aby zaufać certyfikatowi.
 
-Oryginalne żądanie przy `AddRedirectToHttps(301, 5001)`użyciu:`http://localhost:5000/secure`
+Oryginalne żądanie przy użyciu `AddRedirectToHttps(301, 5001)` :`http://localhost:5000/secure`
 
 ![Okno przeglądarki z Narzędzia deweloperskie śledzenia żądań i odpowiedzi](url-rewriting/_static/add_redirect_to_https.png)
 
-Oryginalne żądanie przy `AddRedirectToHttpsPermanent`użyciu:`http://localhost:5000/secure`
+Oryginalne żądanie przy użyciu `AddRedirectToHttpsPermanent` :`http://localhost:5000/secure`
 
 ![Okno przeglądarki z Narzędzia deweloperskie śledzenia żądań i odpowiedzi](url-rewriting/_static/add_redirect_to_https_permanent.png)
 
 ### <a name="url-rewrite"></a>Regenerowanie adresów URL
 
-Służy <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRewrite*> do tworzenia reguły ponownego zapisywania adresów URL. Pierwszy parametr zawiera wyrażenie regularne do dopasowania w przychodzącej ścieżce adresu URL. Drugi parametr jest ciągiem zamiennym. Trzeci parametr, `skipRemainingRules: {true|false}`, wskazuje na oprogramowanie pośredniczące, niezależnie od tego, czy pominięcia dodatkowych reguł ponownego zapisu w przypadku zastosowania bieżącej reguły.
+Służy <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRewrite*> do tworzenia reguły ponownego zapisywania adresów URL. Pierwszy parametr zawiera wyrażenie regularne do dopasowania w przychodzącej ścieżce adresu URL. Drugi parametr jest ciągiem zamiennym. Trzeci parametr, `skipRemainingRules: {true|false}` , wskazuje na oprogramowanie pośredniczące, niezależnie od tego, czy pominięcia dodatkowych reguł ponownego zapisu w przypadku zastosowania bieżącej reguły.
 
 [!code-csharp[](url-rewriting/samples/2.x/SampleApp/Startup.cs?name=snippet1&highlight=10-11)]
 
@@ -542,25 +1352,251 @@ Oryginalne żądanie:`/rewrite-rule/1234/5678`
 
 ![Okno przeglądarki z Narzędzia deweloperskie śledzenia żądania i odpowiedzi](url-rewriting/_static/add_rewrite.png)
 
-W karatach`^`() na początku wyrażenia oznacza to, że dopasowanie rozpoczyna się na początku ścieżki URL.
+W karatach ( `^` ) na początku wyrażenia oznacza to, że dopasowanie rozpoczyna się na początku ścieżki URL.
 
-W poprzednim przykładzie z regułą `redirect-rule/(.*)`przekierowania nie ma żadnych karatów (`^`) na początku wyrażenia regularnego. W związku z tym wszystkie znaki `redirect-rule/` mogą poprzedzać w ścieżce pomyślne dopasowanie.
+W poprzednim przykładzie z regułą przekierowania `redirect-rule/(.*)` nie ma żadnych karatów ( `^` ) na początku wyrażenia regularnego. W związku z tym wszystkie znaki mogą poprzedzać `redirect-rule/` w ścieżce pomyślne dopasowanie.
 
 | Ścieżka                               | Dopasowanie |
-| ---------------------------------- | :---: |
-| `/redirect-rule/1234/5678`         | Tak   |
-| `/my-cool-redirect-rule/1234/5678` | Tak   |
-| `/anotherredirect-rule/1234/5678`  | Tak   |
+| ---
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
 
-Reguła ponownego zapisywania, `^rewrite-rule/(\d+)/(\d+)`,, dopasowuje się tylko do ścieżek, `rewrite-rule/`Jeśli zaczynają się od. W poniższej tabeli należy zwrócić uwagę na różnicę.
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+----------------- | :---: | | `/redirect-rule/1234/5678`         | Tak | | `/my-cool-redirect-rule/1234/5678` | Tak | | `/anotherredirect-rule/1234/5678`  | Tak |
+
+Reguła ponownego zapisywania, `^rewrite-rule/(\d+)/(\d+)` ,, dopasowuje się tylko do ścieżek, jeśli zaczynają się od `rewrite-rule/` . W poniższej tabeli należy zwrócić uwagę na różnicę.
 
 | Ścieżka                              | Dopasowanie |
-| --------------------------------- | :---: |
-| `/rewrite-rule/1234/5678`         | Yes   |
-| `/my-cool-rewrite-rule/1234/5678` | Nie    |
-| `/anotherrewrite-rule/1234/5678`  | Nie    |
+| ---
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
 
-Po `^rewrite-rule/` części wyrażenia istnieją dwie grupy przechwytywania `(\d+)/(\d+)`. `\d` Oznaczenia *są zgodne z cyfrą (* cyfrą). Znak plus (`+`) oznacza *dopasowanie co najmniej jednego znaku poprzedzającego*. W związku z tym adres URL musi zawierać numer, po którym następuje ukośnik, po którym następuje kolejny numer. Te grupy przechwytywania są wstrzykiwane do zarejestrowanego adresu URL `$1` jako `$2`i. Ciąg zastępczy reguły ponownego zapisu umieszcza przechwycone grupy w ciągu zapytania. Żądana ścieżka `/rewrite-rule/1234/5678` jest ponownie zapisywana, aby uzyskać zasób w `/rewritten?var1=1234&var2=5678`. Jeśli ciąg zapytania jest obecny w oryginalnym żądaniu, jest zachowywany, gdy adres URL zostanie ponownie zapisany.
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+----------------- | :---: | | `/rewrite-rule/1234/5678`         | Tak | | `/my-cool-rewrite-rule/1234/5678` | Nie | | `/anotherrewrite-rule/1234/5678`  | Nie |
+
+Po `^rewrite-rule/` części wyrażenia istnieją dwie grupy przechwytywania `(\d+)/(\d+)` . Oznaczenia `\d` *są zgodne z cyfrą (* cyfrą). Znak plus ( `+` ) oznacza *dopasowanie co najmniej jednego znaku poprzedzającego*. W związku z tym adres URL musi zawierać numer, po którym następuje ukośnik, po którym następuje kolejny numer. Te grupy przechwytywania są wstrzykiwane do zarejestrowanego adresu URL jako `$1` i `$2` . Ciąg zastępczy reguły ponownego zapisu umieszcza przechwycone grupy w ciągu zapytania. Żądana ścieżka `/rewrite-rule/1234/5678` jest ponownie zapisywana, aby uzyskać zasób w `/rewritten?var1=1234&var2=5678` . Jeśli ciąg zapytania jest obecny w oryginalnym żądaniu, jest zachowywany, gdy adres URL zostanie ponownie zapisany.
 
 Serwer nie może uzyskać dostępu do zasobów. Jeśli zasób istnieje, jest pobierany i zwracany do klienta przy użyciu kodu stanu *200-OK* . Ponieważ klient nie jest przekierowywany, adres URL na pasku adresu przeglądarki nie jest zmieniany. Klienci nie mogą wykryć, czy na serwerze wystąpiła operacja ponownego zapisywania adresu URL.
 
@@ -572,13 +1608,13 @@ Serwer nie może uzyskać dostępu do zasobów. Jeśli zasób istnieje, jest pob
 
 ### <a name="apache-mod_rewrite"></a>Mod_rewrite Apache
 
-Zastosuj reguły mod_rewrite Apache za <xref:Microsoft.AspNetCore.Rewrite.ApacheModRewriteOptionsExtensions.AddApacheModRewrite*>pomocą programu. Upewnij się, że plik reguł został wdrożony razem z aplikacją. Aby uzyskać więcej informacji i przykłady reguł mod_rewrite, zobacz [Apache mod_rewrite](https://httpd.apache.org/docs/2.4/rewrite/).
+Zastosuj reguły mod_rewrite Apache za pomocą programu <xref:Microsoft.AspNetCore.Rewrite.ApacheModRewriteOptionsExtensions.AddApacheModRewrite*> . Upewnij się, że plik reguł został wdrożony razem z aplikacją. Aby uzyskać więcej informacji i przykłady reguł mod_rewrite, zobacz [Apache mod_rewrite](https://httpd.apache.org/docs/2.4/rewrite/).
 
-A <xref:System.IO.StreamReader> służy do odczytywania reguł z pliku reguł *ApacheModRewrite. txt* :
+A służy <xref:System.IO.StreamReader> do odczytywania reguł z pliku reguł *ApacheModRewrite. txt* :
 
 [!code-csharp[](url-rewriting/samples/2.x/SampleApp/Startup.cs?name=snippet1&highlight=3-4,12)]
 
-Przykładowa aplikacja przekierowuje żądania z `/apache-mod-rules-redirect/(.\*)` do. `/redirected?id=$1` Kod stanu odpowiedzi to *302 — znaleziono*.
+Przykładowa aplikacja przekierowuje żądania z `/apache-mod-rules-redirect/(.\*)` do `/redirected?id=$1` . Kod stanu odpowiedzi to *302 — znaleziono*.
 
 [!code[](url-rewriting/samples/2.x/SampleApp/ApacheModRewrite.txt)]
 
@@ -620,13 +1656,13 @@ Oprogramowanie pośredniczące obsługuje następujące zmienne serwera Apache m
 
 ### <a name="iis-url-rewrite-module-rules"></a>Reguły modułu ponownego zapisywania adresów URL usług IIS
 
-Aby użyć tego samego zestawu reguł, który ma zastosowanie do modułu ponowne zapisywanie adresów URL usług <xref:Microsoft.AspNetCore.Rewrite.IISUrlRewriteOptionsExtensions.AddIISUrlRewrite*>IIS, użyj. Upewnij się, że plik reguł został wdrożony razem z aplikacją. Nie należy kierować oprogramowanie pośredniczące do korzystania z pliku *Web. config* aplikacji podczas uruchamiania w usługach IIS systemu Windows Server. W przypadku usług IIS te reguły powinny być przechowywane poza plikiem *Web. config* aplikacji, aby uniknąć konfliktów z modułem ponownego zapisywania usług IIS. Aby uzyskać więcej informacji i przykłady reguł modułu ponownego zapisywania adresów URL usług IIS, zobacz [using URL Rewrite module 2,0](/iis/extensions/url-rewrite-module/using-url-rewrite-module-20) i [informacje konfiguracyjne modułu ponownego zapisywania adresu URL](/iis/extensions/url-rewrite-module/url-rewrite-module-configuration-reference).
+Aby użyć tego samego zestawu reguł, który ma zastosowanie do modułu ponowne zapisywanie adresów URL usług IIS, użyj <xref:Microsoft.AspNetCore.Rewrite.IISUrlRewriteOptionsExtensions.AddIISUrlRewrite*> . Upewnij się, że plik reguł został wdrożony razem z aplikacją. Nie należy kierować oprogramowanie pośredniczące do korzystania z pliku *Web. config* aplikacji podczas uruchamiania w usługach IIS systemu Windows Server. W przypadku usług IIS te reguły powinny być przechowywane poza plikiem *Web. config* aplikacji, aby uniknąć konfliktów z modułem ponownego zapisywania usług IIS. Aby uzyskać więcej informacji i przykłady reguł modułu ponownego zapisywania adresów URL usług IIS, zobacz [using URL Rewrite module 2,0](/iis/extensions/url-rewrite-module/using-url-rewrite-module-20) i [informacje konfiguracyjne modułu ponownego zapisywania adresu URL](/iis/extensions/url-rewrite-module/url-rewrite-module-configuration-reference).
 
-A <xref:System.IO.StreamReader> służy do odczytywania reguł z pliku reguł *IISUrlRewrite. XML* :
+A służy <xref:System.IO.StreamReader> do odczytywania reguł z pliku reguł *IISUrlRewrite. XML* :
 
 [!code-csharp[](url-rewriting/samples/2.x/SampleApp/Startup.cs?name=snippet1&highlight=5-6,13)]
 
-Przykładowa aplikacja ponownie zapisuje żądania z `/iis-rules-rewrite/(.*)` programu do `/rewritten?id=$1`. Odpowiedź jest wysyłana do klienta z kodem stanu *200-OK* .
+Przykładowa aplikacja ponownie zapisuje żądania z `/iis-rules-rewrite/(.*)` programu do `/rewritten?id=$1` . Odpowiedź jest wysyłana do klienta z kodem stanu *200-OK* .
 
 [!code-xml[](url-rewriting/samples/2.x/SampleApp/IISUrlRewrite.xml)]
 
@@ -667,7 +1703,7 @@ Oprogramowanie pośredniczące obsługuje następujące zmienne serwera modułu 
 * REQUEST_URI
 
 > [!NOTE]
-> Możesz również uzyskać <xref:Microsoft.Extensions.FileProviders.IFileProvider> za pośrednictwem a <xref:Microsoft.Extensions.FileProviders.PhysicalFileProvider>. Takie podejście może zapewnić większą elastyczność lokalizacji plików reguł ponownego zapisywania. Upewnij się, że pliki reguł ponownego zapisywania są wdrożone na serwerze pod podaną ścieżką.
+> Możesz również uzyskać <xref:Microsoft.Extensions.FileProviders.IFileProvider> za pośrednictwem a <xref:Microsoft.Extensions.FileProviders.PhysicalFileProvider> . Takie podejście może zapewnić większą elastyczność lokalizacji plików reguł ponownego zapisywania. Upewnij się, że pliki reguł ponownego zapisywania są wdrożone na serwerze pod podaną ścieżką.
 >
 > ```csharp
 > PhysicalFileProvider fileProvider = new PhysicalFileProvider(Directory.GetCurrentDirectory());
@@ -675,17 +1711,381 @@ Oprogramowanie pośredniczące obsługuje następujące zmienne serwera modułu 
 
 ### <a name="method-based-rule"></a>Reguła oparta na metodzie
 
-Użyj <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.Add*> , aby zaimplementować własną logikę reguł w metodzie. `Add`udostępnia <xref:Microsoft.AspNetCore.Rewrite.RewriteContext>, który udostępnia <xref:Microsoft.AspNetCore.Http.HttpContext> do użycia w Twojej metodzie. [RewriteContext. Result](xref:Microsoft.AspNetCore.Rewrite.RewriteContext.Result*) określa sposób obsługi dodatkowego przetwarzania potoku. Ustaw wartość na jedno z <xref:Microsoft.AspNetCore.Rewrite.RuleResult> pól opisanych w poniższej tabeli.
+Użyj <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.Add*> , aby zaimplementować własną logikę reguł w metodzie. `Add`udostępnia <xref:Microsoft.AspNetCore.Rewrite.RewriteContext> , który udostępnia do <xref:Microsoft.AspNetCore.Http.HttpContext> użycia w Twojej metodzie. [RewriteContext. Result](xref:Microsoft.AspNetCore.Rewrite.RewriteContext.Result*) określa sposób obsługi dodatkowego przetwarzania potoku. Ustaw wartość na jedno z <xref:Microsoft.AspNetCore.Rewrite.RuleResult> pól opisanych w poniższej tabeli.
 
 | `RewriteContext.Result`              | Akcja                                                           |
-| ------------------------------------ | ---------------------------------------------------------------- |
-| `RuleResult.ContinueRules`wartooć | Kontynuuj stosowanie reguł.                                         |
-| `RuleResult.EndResponse`             | Zatrzymaj stosowanie reguł i Wyślij odpowiedź.                       |
-| `RuleResult.SkipRemainingRules`      | Zatrzymaj stosowanie reguł i Wyślij kontekst do następnego oprogramowania pośredniczącego. |
+| ---
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+------------------ | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-------------------------------- | | `RuleResult.ContinueRules`(ustawienie domyślne) | Kontynuuj stosowanie reguł.                                         | | `RuleResult.EndResponse`             | Zatrzymaj stosowanie reguł i Wyślij odpowiedź.                       | | `RuleResult.SkipRemainingRules`      | Zatrzymaj stosowanie reguł i Wyślij kontekst do następnego oprogramowania pośredniczącego. |
 
 [!code-csharp[](url-rewriting/samples/2.x/SampleApp/Startup.cs?name=snippet1&highlight=14)]
 
-Przykładowa aplikacja przedstawia metodę, która przekierowuje żądania dla ścieżek kończących się na *. XML*. Jeśli zostanie wysłane żądanie `/file.xml`, żądanie jest przekierowywane do. `/xmlfiles/file.xml` Kod stanu jest ustawiony na *301 — trwale przeniesiony*. Gdy przeglądarka wykonuje nowe żądanie dla */XmlFiles/File.XML*, oprogramowanie pośredniczące plików statycznych zachowuje ten plik na kliencie z folderu *wwwroot/XmlFiles* . W przypadku przekierowania jawnie ustaw kod stanu odpowiedzi. W przeciwnym razie zwracany jest kod stanu *200-OK* i przekierowanie nie wystąpi na kliencie.
+Przykładowa aplikacja przedstawia metodę, która przekierowuje żądania dla ścieżek kończących się na *. XML*. Jeśli zostanie wysłane żądanie `/file.xml` , żądanie jest przekierowywane do `/xmlfiles/file.xml` . Kod stanu jest ustawiony na *301 — trwale przeniesiony*. Gdy przeglądarka wykonuje nowe żądanie dla */XmlFiles/File.XML*, oprogramowanie pośredniczące plików statycznych zachowuje ten plik na kliencie z folderu *wwwroot/XmlFiles* . W przypadku przekierowania jawnie ustaw kod stanu odpowiedzi. W przeciwnym razie zwracany jest kod stanu *200-OK* i przekierowanie nie wystąpi na kliencie.
 
 *RewriteRules.cs*:
 
@@ -701,11 +2101,11 @@ Takie podejście może również ponownie zapisywać żądania. Przykładowa apl
 
 ### <a name="irule-based-rule"></a>Reguła oparta na IRule
 
-Użyj <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.Add*> , aby użyć logiki reguły w klasie, która implementuje <xref:Microsoft.AspNetCore.Rewrite.IRule> interfejs. `IRule`zapewnia większą elastyczność w porównaniu z użyciem metody opartej na metodzie. Klasa implementacji może zawierać konstruktora, który umożliwia przekazywanie parametrów dla <xref:Microsoft.AspNetCore.Rewrite.IRule.ApplyRule*> metody.
+Użyj, <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.Add*> Aby użyć logiki reguły w klasie, która implementuje <xref:Microsoft.AspNetCore.Rewrite.IRule> interfejs. `IRule`zapewnia większą elastyczność w porównaniu z użyciem metody opartej na metodzie. Klasa implementacji może zawierać konstruktora, który umożliwia przekazywanie parametrów dla <xref:Microsoft.AspNetCore.Rewrite.IRule.ApplyRule*> metody.
 
 [!code-csharp[](url-rewriting/samples/2.x/SampleApp/Startup.cs?name=snippet1&highlight=16-17)]
 
-Wartości parametrów w aplikacji przykładowej dla `extension` i `newPath` są sprawdzane pod kątem spełnienia kilku warunków. `extension` Musi zawierać wartość i musi mieć wartość *. png*, *. jpg*lub *. gif*. `newPath` Jeśli <xref:System.ArgumentException> jest nieprawidłowa, zostanie zgłoszony. Jeśli zostanie wysłane żądanie dotyczące pliku *Image. png*, żądanie jest przekierowywane do `/png-images/image.png`. Jeśli zostanie wysłane żądanie do *obrazu. jpg*, żądanie jest przekierowywane do `/jpg-images/image.jpg`. Kod stanu jest ustawiony na *301 — trwale przeniesiony*, a ustawienie `context.Result` jest ustawione na zatrzymanie przetwarzania reguł i wysłanie odpowiedzi.
+Wartości parametrów w aplikacji przykładowej dla `extension` i `newPath` są sprawdzane pod kątem spełnienia kilku warunków. `extension`Musi zawierać wartość i musi mieć wartość *. png*, *. jpg*lub *. gif*. Jeśli `newPath` jest nieprawidłowa, <xref:System.ArgumentException> zostanie zgłoszony. Jeśli zostanie wysłane żądanie dotyczące pliku *Image. png*, żądanie jest przekierowywane do `/png-images/image.png` . Jeśli zostanie wysłane żądanie do *obrazu. jpg*, żądanie jest przekierowywane do `/jpg-images/image.jpg` . Kod stanu jest ustawiony na *301 — trwale przeniesiony*, a `context.Result` ustawienie jest ustawione na zatrzymanie przetwarzania reguł i wysłanie odpowiedzi.
 
 [!code-csharp[](url-rewriting/samples/2.x/SampleApp/RewriteRules.cs?name=snippet_RedirectImageRequests)]
 
@@ -720,13 +2120,246 @@ Oryginalne żądanie:`/image.jpg`
 ## <a name="regex-examples"></a>Przykłady wyrażeń regularnych
 
 | Cel | Ciąg wyrażenia regularnego &<br>Przykład dopasowania | & ciągu zamiennego<br>Przykład danych wyjściowych |
-| ---- | ------------------------------- | -------------------------------------- |
-| Zapisz ścieżkę do ciągu QueryString | `^path/(.*)/(.*)`<br>`/path/abc/123` | `path?var1=$1&var2=$2`<br>`/path?var1=abc&var2=123` |
-| Ukośnik końcowy na pasku | `(.*)/$`<br>`/path/` | `$1`<br>`/path` |
-| Wymuszaj końcowy ukośnik | `(.*[^/])$`<br>`/path` | `$1/`<br>`/path/` |
-| Unikaj ponownego zapisywania określonych żądań | `^(.*)(?<!\.axd)$` lub `^(?!.*\.axd$)(.*)$`<br>Opcję`/resource.htm`<br>Znaleziono`/resource.axd` | `rewritten/$1`<br>`/rewritten/resource.htm`<br>`/resource.axd` |
-| Zmień rozmieszczenie segmentów adresu URL | `path/(.*)/(.*)/(.*)`<br>`path/1/2/3` | `path/$3/$2/$1`<br>`path/3/2/1` |
-| Zastępowanie segmentu adresu URL | `^(.*)/segment2/(.*)`<br>`/segment1/segment2/segment3` | `$1/replaced/$2`<br>`/segment1/replaced/segment3` |
+| ---- | ---
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+---------------- | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+------------------- | | Zapisz ścieżkę do ciągu QueryString |`^path/(.*)/(.*)`<br>`/path/abc/123` | `path?var1=$1&var2=$2`<br>`/path?var1=abc&var2=123`| | Ukośnik na końcu paska |`(.*)/$`<br>`/path/` | `$1`<br>`/path`| | Wymuś końcowy ukośnika |`(.*[^/])$`<br>`/path` | `$1/`<br>`/path/`| | Unikaj ponownego zapisywania konkretnych żądań | `^(.*)(?<!\.axd)$`lub`^(?!.*\.axd$)(.*)$`<br>Opcję`/resource.htm`<br>Znaleziono`/resource.axd` | `rewritten/$1`<br>`/rewritten/resource.htm`<br>`/resource.axd`| | Zmień rozmieszczenie segmentów adresu URL |`path/(.*)/(.*)/(.*)`<br>`path/1/2/3` | `path/$3/$2/$1`<br>`path/3/2/1`| | Zastępowanie segmentu adresu URL |`^(.*)/segment2/(.*)`<br>`/segment1/segment2/segment3` | `$1/replaced/$2`<br>`/segment1/replaced/segment3` |
 
 ::: moniker-end
 

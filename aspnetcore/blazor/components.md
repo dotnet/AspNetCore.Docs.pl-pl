@@ -69,8 +69,8 @@ Razorskładniki w Blazor aplikacjach szeroko wykorzystują Razor składnię. Je�
 
 Podczas uzyskiwania dostępu do zawartości w Razor składni należy zwrócić szczególną uwagę na następujące sekcje:
 
-* [Dyrektywy](xref:mvc/views/razor#directives) &ndash; `@`— wstępnie ustalone zastrzeżone słowa kluczowe, które zwykle zmieniają sposób, w jaki znaczniki składnika są analizowane lub działają.
-* [Atrybuty dyrektywy](xref:mvc/views/razor#directive-attributes) &ndash; `@`— wstępnie ustalone zastrzeżone słowa kluczowe, które zwykle zmieniają sposób analizowania elementów składnika lub funkcji.
+* [Dyrektywy](xref:mvc/views/razor#directives): `@` — wstępnie ustalone zastrzeżone słowa kluczowe, które zwykle zmieniają sposób, w jaki znaczniki składnika są analizowane lub działają.
+* [Atrybuty dyrektywy](xref:mvc/views/razor#directive-attributes): `@` — wstępnie ustalone zastrzeżone słowa kluczowe, które zwykle zmieniają sposób analizowania lub działania elementów składnika.
 
 ## <a name="static-assets"></a>Statyczne zasoby
 
@@ -136,7 +136,7 @@ Parametry opcjonalne nie są obsługiwane, więc dwie [`@page`][9] dyrektywy są
 
 ### <a name="component-parameters"></a>Parametry składnika
 
-Składniki mogą mieć *Parametry składnika*, które są zdefiniowane przy użyciu właściwości publicznych w klasie składnika z [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) atrybutem] (linki XREF: Microsoft. AspNetCore. Components. ParameterAttribute). Użyj atrybutów, aby określić argumenty dla składnika w znaczniku.
+Składniki mogą mieć *Parametry składnika*, które są zdefiniowane przy użyciu właściwości publicznych w klasie składnika z [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) atrybutem. Użyj atrybutów, aby określić argumenty dla składnika w znaczniku.
 
 *Składniki/ChildComponent. Razor*:
 
@@ -974,7 +974,7 @@ Jednak wbudowane znaczniki SVG nie są obsługiwane we wszystkich scenariuszach.
 
 ## <a name="additional-resources"></a>Zasoby dodatkowe
 
-* <xref:security/blazor/server/threat-mitigation>&ndash;Zawiera wskazówki dotyczące tworzenia Blazor Aplikacje serwera, które muszą będą konkurować o z wyczerpaniem zasobów.
+* <xref:security/blazor/server/threat-mitigation>: Zawiera wskazówki dotyczące tworzenia Blazor aplikacji serwera, które muszą będą konkurować o z wyczerpaniem zasobów.
 
 <!--Reference links in article-->
 [1]: <xref:mvc/views/razor#code>

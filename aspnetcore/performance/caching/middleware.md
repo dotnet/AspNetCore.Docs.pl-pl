@@ -1,24 +1,11 @@
 ---
-title: Buforowanie oprogramowania pośredniczącego w ASP.NET Core
-author: rick-anderson
-description: Dowiedz się, jak skonfigurować i używać oprogramowania pośredniczącego buforowania odpowiedzi w ASP.NET Core.
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 02/07/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: performance/caching/middleware
-ms.openlocfilehash: 10359f25223d5c8e89f983633d24fbcac8a22deb
-ms.sourcegitcommit: 688b6f448d87b6f7f4440182d72388eaa68d2935
-ms.translationtype: MT
-ms.contentlocale: pl-PL
-ms.lasthandoff: 05/14/2020
-ms.locfileid: "83393834"
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
 ---
 # <a name="response-caching-middleware-in-aspnet-core"></a>Buforowanie oprogramowania pośredniczącego w ASP.NET Core
 
@@ -44,12 +31,12 @@ Skonfiguruj aplikację do korzystania z oprogramowania pośredniczącego z <xref
 
 Przykładowa aplikacja dodaje nagłówki, aby kontrolować buforowanie w kolejnych żądaniach:
 
-* [Cache-Control](https://tools.ietf.org/html/rfc7234#section-5.2) &ndash; Buforuje odpowiedzi w pamięci podręcznej przez maksymalnie 10 sekund.
-* [Różni](https://tools.ietf.org/html/rfc7231#section-7.1.4) &ndash; się Konfiguruje oprogramowanie pośredniczące do obsługiwania buforowanej odpowiedzi tylko wtedy, gdy nagłówek [Accept-Encoding](https://tools.ietf.org/html/rfc7231#section-5.3.4) kolejnych żądań jest zgodny z oryginalnym żądaniem.
+* [Cache-Control](https://tools.ietf.org/html/rfc7234#section-5.2): buforuje odpowiedzi w pamięci podręcznej przez maksymalnie 10 sekund.
+* [Zróżnicuj](https://tools.ietf.org/html/rfc7231#section-7.1.4): konfiguruje oprogramowanie pośredniczące, aby obsługiwało buforowaną odpowiedź tylko wtedy, gdy nagłówek [Accept-Encoding](https://tools.ietf.org/html/rfc7231#section-5.3.4) kolejnych żądań jest zgodny z oryginalnym żądaniem.
 
 [!code-csharp[](middleware/samples_snippets/3.x/AddHeaders.cs)]
 
-Poprzednie nagłówki nie są zapisywane w odpowiedzi i są zastępowane, gdy kontroler, Akcja lub strona Razor:
+Poprzednie nagłówki nie są zapisywane w odpowiedzi i są zastępowane, gdy kontroler, Akcja lub Razor Strona:
 
 * Ma atrybut [[ResponseCache]](xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute) . Dotyczy to nawet sytuacji, gdy właściwość nie jest ustawiona. Na przykład pominięcie właściwości [VaryByHeader](/aspnet/core/performance/caching/response#vary) spowoduje usunięcie odpowiedniego nagłówka z odpowiedzi.
 
@@ -63,10 +50,38 @@ Buforowanie odpowiedzi w pamięci podręcznej tylko buforuje odpowiedzi serwera,
 Opcje buforowania odpowiedzi przedstawiono w poniższej tabeli.
 
 | Opcja | Opis |
-| ------ | ----------- |
-| <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.MaximumBodySize> | Największy rozmiar pamięci podręcznej dla treści odpowiedzi (w bajtach). Wartość domyślna to `64 * 1024 * 1024` (64 MB). |
-| <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.SizeLimit> | Limit rozmiaru dla oprogramowania pośredniczącego pamięci podręcznej odpowiedzi w bajtach. Wartość domyślna to `100 * 1024 * 1024` (100 MB). |
-| <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.UseCaseSensitivePaths> | Określa, czy odpowiedzi są buforowane w przypadku ścieżek z uwzględnieniem wielkości liter. Wartość domyślna to `false`. |
+| ---
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+--- | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+------ | | <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.MaximumBodySize> | Największy rozmiar pamięci podręcznej dla treści odpowiedzi (w bajtach). Wartość domyślna to `64 * 1024 * 1024` (64 MB). | | <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.SizeLimit> | Limit rozmiaru dla oprogramowania pośredniczącego pamięci podręcznej odpowiedzi w bajtach. Wartość domyślna to `100 * 1024 * 1024` (100 MB). | | <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.UseCaseSensitivePaths> | Określa, czy odpowiedzi są buforowane w przypadku ścieżek z uwzględnieniem wielkości liter. Wartość domyślna to `false`. |
 
 Poniższy przykład konfiguruje oprogramowanie pośredniczące w następujący sposób:
 
@@ -83,7 +98,7 @@ services.AddResponseCaching(options =>
 
 ## <a name="varybyquerykeys"></a>VaryByQueryKeys
 
-W przypadku używania kontrolerów MVC/Web API lub Razor Pages modeli strony [`[ResponseCache]`](xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute) atrybut określa parametry niezbędne do ustawiania odpowiednich nagłówków dla buforowania odpowiedzi. Jedyny parametr `[ResponseCache]` atrybutu, który ściśle wymaga oprogramowania pośredniczącego <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute.VaryByQueryKeys> , to, który nie odpowiada rzeczywistemu nagłówkowi http. Aby uzyskać więcej informacji, zobacz <xref:performance/caching/response#responsecache-attribute>.
+W przypadku używania kontrolerów MVC/Web API lub Razor modeli stron, [`[ResponseCache]`](xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute) atrybut określa parametry niezbędne do ustawiania odpowiednich nagłówków dla buforowania odpowiedzi. Jedyny parametr `[ResponseCache]` atrybutu, który ściśle wymaga oprogramowania pośredniczącego <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute.VaryByQueryKeys> , to, który nie odpowiada rzeczywistemu nagłówkowi http. Aby uzyskać więcej informacji, zobacz <xref:performance/caching/response#responsecache-attribute>.
 
 Gdy nie korzystasz z `[ResponseCache]` atrybutu, buforowanie odpowiedzi może być zróżnicowane z `VaryByQueryKeys` . Użyj <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingFeature> bezpośrednio z [funkcji HttpContext. Features](xref:Microsoft.AspNetCore.Http.HttpContext.Features):
 
@@ -103,18 +118,22 @@ Użycie pojedynczej wartości równej `*` w w programie `VaryByQueryKeys` zmieni
 Poniższa tabela zawiera informacje dotyczące nagłówków HTTP, które mają wpływ na buforowanie odpowiedzi.
 
 | Header | Szczegóły |
-| ------ | ------- |
-| `Authorization` | Odpowiedź nie jest buforowana, jeśli nagłówek istnieje. |
-| `Cache-Control` | Oprogramowanie pośredniczące traktuje tylko odpowiedzi w pamięci `public` podręcznej oznaczone za pomocą dyrektywy Cache. Sterowanie buforowaniem przy użyciu następujących parametrów:<ul><li>maks. wiek</li><li>Max-nieodświeżone&#8224;</li><li>min — nowy</li><li>musi ponownie sprawdzić poprawność</li><li>nie-pamięć podręczna</li><li>bez sklepu</li><li>tylko-w pamięci podręcznej</li><li>private</li><li>public</li><li>s-maxage</li><li>serwer proxy — ponowne sprawdzanie poprawności&#8225;</li></ul>&#8224;Jeśli żaden limit nie zostanie określony do `max-stale` , oprogramowanie pośredniczące nie podejmuje żadnych działań.<br>&#8225;`proxy-revalidate` ma ten sam skutek co `must-revalidate` .<br><br>Aby uzyskać więcej informacji, zobacz [RFC 7231: dyrektywy kontroli pamięci podręcznej żądania](https://tools.ietf.org/html/rfc7234#section-5.2.1). |
-| `Pragma` | `Pragma: no-cache`Nagłówek w żądaniu daje ten sam skutek co `Cache-Control: no-cache` . Ten nagłówek jest zastępowany przez odpowiednie dyrektywy w `Cache-Control` nagłówku, jeśli jest obecny. Uwzględnianie zgodności z poprzednimi wersjami przy użyciu protokołu HTTP/1.0. |
-| `Set-Cookie` | Odpowiedź nie jest buforowana, jeśli nagłówek istnieje. Wszystkie oprogramowanie pośredniczące w potoku przetwarzania żądań, które ustawia jeden lub więcej plików cookie, uniemożliwia buforowanie odpowiedzi z buforowania odpowiedzi (na przykład [dostawcy TempData opartego na plikach cookie](xref:fundamentals/app-state#tempdata)).  |
-| `Vary` | `Vary`Nagłówek jest używany do różnicowania buforowanej odpowiedzi przez inny nagłówek. Na przykład w pamięci podręcznej odpowiedzi są kodowane przez dołączenie `Vary: Accept-Encoding` nagłówka, w którym są buforowane odpowiedzi na żądania z nagłówkami `Accept-Encoding: gzip` i `Accept-Encoding: text/plain` oddzielnie. Odpowiedź z wartością nagłówka `*` nigdy nie jest przechowywana. |
-| `Expires` | Odpowiedź uznana za nieodświeżoną przez ten nagłówek nie jest zapisywana ani pobierana, chyba że zostanie zastąpiona przez inne `Cache-Control` nagłówki. |
-| `If-None-Match` | Pełna odpowiedź jest obsługiwana z pamięci podręcznej, jeśli wartość nie jest `*` , a `ETag` odpowiedź nie jest zgodna z żadną z podanych wartości. W przeciwnym razie jest obsługiwana odpowiedź 304 (nie modyfikowane). |
-| `If-Modified-Since` | Jeśli `If-None-Match` nagłówek nie istnieje, jest obsługiwana Pełna odpowiedź z pamięci podręcznej, jeśli data odpowiedzi w pamięci podręcznej jest nowsza niż podana wartość. W przeciwnym razie jest obsługiwana odpowiedź *304 — nie zmodyfikowano* . |
-| `Date` | W przypadku obsługi z pamięci podręcznej `Date` nagłówek jest ustawiany przez oprogramowanie pośredniczące, jeśli nie został podany w oryginalnej odpowiedzi. |
-| `Content-Length` | W przypadku obsługi z pamięci podręcznej `Content-Length` nagłówek jest ustawiany przez oprogramowanie pośredniczące, jeśli nie został podany w oryginalnej odpowiedzi. |
-| `Age` | `Age`Nagłówek wysłany w oryginalnej odpowiedzi jest ignorowany. Oprogramowanie pośredniczące oblicza nową wartość w przypadku obsługi odpowiedzi w pamięci podręcznej. |
+| ---
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+--- | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+---- | | `Authorization` | Odpowiedź nie jest buforowana, jeśli nagłówek istnieje. | | `Cache-Control` | Oprogramowanie pośredniczące traktuje tylko odpowiedzi w pamięci `public` podręcznej oznaczone za pomocą dyrektywy Cache. Sterowanie buforowaniem przy użyciu następujących parametrów:<ul><li>maks. wiek</li><li>Max-nieodświeżone&#8224;</li><li>min — nowy</li><li>musi ponownie sprawdzić poprawność</li><li>nie-pamięć podręczna</li><li>bez sklepu</li><li>tylko-w pamięci podręcznej</li><li>private</li><li>public</li><li>s-maxage</li><li>serwer proxy — ponowne sprawdzanie poprawności&#8225;</li></ul>&#8224;Jeśli żaden limit nie zostanie określony do `max-stale` , oprogramowanie pośredniczące nie podejmuje żadnych działań.<br>&#8225;`proxy-revalidate` ma ten sam skutek co `must-revalidate` .<br><br>Aby uzyskać więcej informacji, zobacz [RFC 7231: dyrektywy kontroli pamięci podręcznej żądania](https://tools.ietf.org/html/rfc7234#section-5.2.1). | | `Pragma` | `Pragma: no-cache`Nagłówek w żądaniu daje ten sam skutek co `Cache-Control: no-cache` . Ten nagłówek jest zastępowany przez odpowiednie dyrektywy w `Cache-Control` nagłówku, jeśli jest obecny. Uwzględnianie zgodności z poprzednimi wersjami przy użyciu protokołu HTTP/1.0. | | `Set-Cookie` | Odpowiedź nie jest buforowana, jeśli nagłówek istnieje. Wszystkie oprogramowanie pośredniczące w potoku przetwarzania żądań, które ustawia jeden lub więcej plików cookie, uniemożliwia buforowanie odpowiedzi z buforowania odpowiedzi (na przykład [dostawcy TempData opartego na plikach cookie](xref:fundamentals/app-state#tempdata)).  | | `Vary` | `Vary`Nagłówek jest używany do różnicowania buforowanej odpowiedzi przez inny nagłówek. Na przykład w pamięci podręcznej odpowiedzi są kodowane przez dołączenie `Vary: Accept-Encoding` nagłówka, w którym są buforowane odpowiedzi na żądania z nagłówkami `Accept-Encoding: gzip` i `Accept-Encoding: text/plain` oddzielnie. Odpowiedź z wartością nagłówka `*` nigdy nie jest przechowywana. | | `Expires` | Odpowiedź uznana za nieodświeżoną przez ten nagłówek nie jest zapisywana ani pobierana, chyba że zostanie zastąpiona przez inne `Cache-Control` nagłówki. | | `If-None-Match` | Pełna odpowiedź jest obsługiwana z pamięci podręcznej, jeśli wartość nie jest `*` , a `ETag` odpowiedź nie jest zgodna z żadną z podanych wartości. W przeciwnym razie jest obsługiwana odpowiedź 304 (nie modyfikowane). | | `If-Modified-Since` | Jeśli `If-None-Match` nagłówek nie istnieje, jest obsługiwana Pełna odpowiedź z pamięci podręcznej, jeśli data odpowiedzi w pamięci podręcznej jest nowsza niż podana wartość. W przeciwnym razie jest obsługiwana odpowiedź *304 — nie zmodyfikowano* . | | `Date` | W przypadku obsługi z pamięci podręcznej `Date` nagłówek jest ustawiany przez oprogramowanie pośredniczące, jeśli nie został podany w oryginalnej odpowiedzi. | | `Content-Length` | W przypadku obsługi z pamięci podręcznej `Content-Length` nagłówek jest ustawiany przez oprogramowanie pośredniczące, jeśli nie został podany w oryginalnej odpowiedzi. | | `Age` | `Age`Nagłówek wysłany w oryginalnej odpowiedzi jest ignorowany. Oprogramowanie pośredniczące oblicza nową wartość w przypadku obsługi odpowiedzi w pamięci podręcznej. |
 
 ## <a name="caching-respects-request-cache-control-directives"></a>Buforowanie — dyrektywy dotyczące kontroli pamięci podręcznej żądań
 
@@ -188,12 +207,12 @@ Skonfiguruj aplikację do korzystania z oprogramowania pośredniczącego z <xref
 
 Przykładowa aplikacja dodaje nagłówki, aby kontrolować buforowanie w kolejnych żądaniach:
 
-* [Cache-Control](https://tools.ietf.org/html/rfc7234#section-5.2) &ndash; Buforuje odpowiedzi w pamięci podręcznej przez maksymalnie 10 sekund.
-* [Różni](https://tools.ietf.org/html/rfc7231#section-7.1.4) &ndash; się Konfiguruje oprogramowanie pośredniczące do obsługiwania buforowanej odpowiedzi tylko wtedy, gdy nagłówek [Accept-Encoding](https://tools.ietf.org/html/rfc7231#section-5.3.4) kolejnych żądań jest zgodny z oryginalnym żądaniem.
+* [Cache-Control](https://tools.ietf.org/html/rfc7234#section-5.2): buforuje odpowiedzi w pamięci podręcznej przez maksymalnie 10 sekund.
+* [Zróżnicuj](https://tools.ietf.org/html/rfc7231#section-7.1.4): konfiguruje oprogramowanie pośredniczące, aby obsługiwało buforowaną odpowiedź tylko wtedy, gdy nagłówek [Accept-Encoding](https://tools.ietf.org/html/rfc7231#section-5.3.4) kolejnych żądań jest zgodny z oryginalnym żądaniem.
 
 [!code-csharp[](middleware/samples_snippets/2.x/AddHeaders.cs)]
 
-Poprzednie nagłówki nie są zapisywane w odpowiedzi i są zastępowane, gdy kontroler, Akcja lub strona Razor:
+Poprzednie nagłówki nie są zapisywane w odpowiedzi i są zastępowane, gdy kontroler, Akcja lub Razor Strona:
 
 * Ma atrybut [[ResponseCache]](xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute) . Dotyczy to nawet sytuacji, gdy właściwość nie jest ustawiona. Na przykład pominięcie właściwości [VaryByHeader](/aspnet/core/performance/caching/response#vary) spowoduje usunięcie odpowiedniego nagłówka z odpowiedzi.
 
@@ -207,10 +226,38 @@ Buforowanie odpowiedzi w pamięci podręcznej tylko buforuje odpowiedzi serwera,
 Opcje buforowania odpowiedzi przedstawiono w poniższej tabeli.
 
 | Opcja | Opis |
-| ------ | ----------- |
-| <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.MaximumBodySize> | Największy rozmiar pamięci podręcznej dla treści odpowiedzi (w bajtach). Wartość domyślna to `64 * 1024 * 1024` (64 MB). |
-| <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.SizeLimit> | Limit rozmiaru dla oprogramowania pośredniczącego pamięci podręcznej odpowiedzi w bajtach. Wartość domyślna to `100 * 1024 * 1024` (100 MB). |
-| <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.UseCaseSensitivePaths> | Określa, czy odpowiedzi są buforowane w przypadku ścieżek z uwzględnieniem wielkości liter. Wartość domyślna to `false`. |
+| ---
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+--- | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+------ | | <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.MaximumBodySize> | Największy rozmiar pamięci podręcznej dla treści odpowiedzi (w bajtach). Wartość domyślna to `64 * 1024 * 1024` (64 MB). | | <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.SizeLimit> | Limit rozmiaru dla oprogramowania pośredniczącego pamięci podręcznej odpowiedzi w bajtach. Wartość domyślna to `100 * 1024 * 1024` (100 MB). | | <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.UseCaseSensitivePaths> | Określa, czy odpowiedzi są buforowane w przypadku ścieżek z uwzględnieniem wielkości liter. Wartość domyślna to `false`. |
 
 Poniższy przykład konfiguruje oprogramowanie pośredniczące w następujący sposób:
 
@@ -227,7 +274,7 @@ services.AddResponseCaching(options =>
 
 ## <a name="varybyquerykeys"></a>VaryByQueryKeys
 
-W przypadku używania kontrolerów MVC/Web API lub Razor Pages modeli strony [`[ResponseCache]`](xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute) atrybut określa parametry niezbędne do ustawiania odpowiednich nagłówków dla buforowania odpowiedzi. Jedyny parametr `[ResponseCache]` atrybutu, który ściśle wymaga oprogramowania pośredniczącego <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute.VaryByQueryKeys> , to, który nie odpowiada rzeczywistemu nagłówkowi http. Aby uzyskać więcej informacji, zobacz <xref:performance/caching/response#responsecache-attribute>.
+W przypadku używania kontrolerów MVC/Web API lub Razor modeli stron, [`[ResponseCache]`](xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute) atrybut określa parametry niezbędne do ustawiania odpowiednich nagłówków dla buforowania odpowiedzi. Jedyny parametr `[ResponseCache]` atrybutu, który ściśle wymaga oprogramowania pośredniczącego <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute.VaryByQueryKeys> , to, który nie odpowiada rzeczywistemu nagłówkowi http. Aby uzyskać więcej informacji, zobacz <xref:performance/caching/response#responsecache-attribute>.
 
 Gdy nie korzystasz z `[ResponseCache]` atrybutu, buforowanie odpowiedzi może być zróżnicowane z `VaryByQueryKeys` . Użyj <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingFeature> bezpośrednio z [funkcji HttpContext. Features](xref:Microsoft.AspNetCore.Http.HttpContext.Features):
 
@@ -247,18 +294,22 @@ Użycie pojedynczej wartości równej `*` w w programie `VaryByQueryKeys` zmieni
 Poniższa tabela zawiera informacje dotyczące nagłówków HTTP, które mają wpływ na buforowanie odpowiedzi.
 
 | Header | Szczegóły |
-| ------ | ------- |
-| `Authorization` | Odpowiedź nie jest buforowana, jeśli nagłówek istnieje. |
-| `Cache-Control` | Oprogramowanie pośredniczące traktuje tylko odpowiedzi w pamięci `public` podręcznej oznaczone za pomocą dyrektywy Cache. Sterowanie buforowaniem przy użyciu następujących parametrów:<ul><li>maks. wiek</li><li>Max-nieodświeżone&#8224;</li><li>min — nowy</li><li>musi ponownie sprawdzić poprawność</li><li>nie-pamięć podręczna</li><li>bez sklepu</li><li>tylko-w pamięci podręcznej</li><li>private</li><li>public</li><li>s-maxage</li><li>serwer proxy — ponowne sprawdzanie poprawności&#8225;</li></ul>&#8224;Jeśli żaden limit nie zostanie określony do `max-stale` , oprogramowanie pośredniczące nie podejmuje żadnych działań.<br>&#8225;`proxy-revalidate` ma ten sam skutek co `must-revalidate` .<br><br>Aby uzyskać więcej informacji, zobacz [RFC 7231: dyrektywy kontroli pamięci podręcznej żądania](https://tools.ietf.org/html/rfc7234#section-5.2.1). |
-| `Pragma` | `Pragma: no-cache`Nagłówek w żądaniu daje ten sam skutek co `Cache-Control: no-cache` . Ten nagłówek jest zastępowany przez odpowiednie dyrektywy w `Cache-Control` nagłówku, jeśli jest obecny. Uwzględnianie zgodności z poprzednimi wersjami przy użyciu protokołu HTTP/1.0. |
-| `Set-Cookie` | Odpowiedź nie jest buforowana, jeśli nagłówek istnieje. Wszystkie oprogramowanie pośredniczące w potoku przetwarzania żądań, które ustawia jeden lub więcej plików cookie, uniemożliwia buforowanie odpowiedzi z buforowania odpowiedzi (na przykład [dostawcy TempData opartego na plikach cookie](xref:fundamentals/app-state#tempdata)).  |
-| `Vary` | `Vary`Nagłówek jest używany do różnicowania buforowanej odpowiedzi przez inny nagłówek. Na przykład w pamięci podręcznej odpowiedzi są kodowane przez dołączenie `Vary: Accept-Encoding` nagłówka, w którym są buforowane odpowiedzi na żądania z nagłówkami `Accept-Encoding: gzip` i `Accept-Encoding: text/plain` oddzielnie. Odpowiedź z wartością nagłówka `*` nigdy nie jest przechowywana. |
-| `Expires` | Odpowiedź uznana za nieodświeżoną przez ten nagłówek nie jest zapisywana ani pobierana, chyba że zostanie zastąpiona przez inne `Cache-Control` nagłówki. |
-| `If-None-Match` | Pełna odpowiedź jest obsługiwana z pamięci podręcznej, jeśli wartość nie jest `*` , a `ETag` odpowiedź nie jest zgodna z żadną z podanych wartości. W przeciwnym razie jest obsługiwana odpowiedź 304 (nie modyfikowane). |
-| `If-Modified-Since` | Jeśli `If-None-Match` nagłówek nie istnieje, jest obsługiwana Pełna odpowiedź z pamięci podręcznej, jeśli data odpowiedzi w pamięci podręcznej jest nowsza niż podana wartość. W przeciwnym razie jest obsługiwana odpowiedź *304 — nie zmodyfikowano* . |
-| `Date` | W przypadku obsługi z pamięci podręcznej `Date` nagłówek jest ustawiany przez oprogramowanie pośredniczące, jeśli nie został podany w oryginalnej odpowiedzi. |
-| `Content-Length` | W przypadku obsługi z pamięci podręcznej `Content-Length` nagłówek jest ustawiany przez oprogramowanie pośredniczące, jeśli nie został podany w oryginalnej odpowiedzi. |
-| `Age` | `Age`Nagłówek wysłany w oryginalnej odpowiedzi jest ignorowany. Oprogramowanie pośredniczące oblicza nową wartość w przypadku obsługi odpowiedzi w pamięci podręcznej. |
+| ---
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+--- | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+---- | | `Authorization` | Odpowiedź nie jest buforowana, jeśli nagłówek istnieje. | | `Cache-Control` | Oprogramowanie pośredniczące traktuje tylko odpowiedzi w pamięci `public` podręcznej oznaczone za pomocą dyrektywy Cache. Sterowanie buforowaniem przy użyciu następujących parametrów:<ul><li>maks. wiek</li><li>Max-nieodświeżone&#8224;</li><li>min — nowy</li><li>musi ponownie sprawdzić poprawność</li><li>nie-pamięć podręczna</li><li>bez sklepu</li><li>tylko-w pamięci podręcznej</li><li>private</li><li>public</li><li>s-maxage</li><li>serwer proxy — ponowne sprawdzanie poprawności&#8225;</li></ul>&#8224;Jeśli żaden limit nie zostanie określony do `max-stale` , oprogramowanie pośredniczące nie podejmuje żadnych działań.<br>&#8225;`proxy-revalidate` ma ten sam skutek co `must-revalidate` .<br><br>Aby uzyskać więcej informacji, zobacz [RFC 7231: dyrektywy kontroli pamięci podręcznej żądania](https://tools.ietf.org/html/rfc7234#section-5.2.1). | | `Pragma` | `Pragma: no-cache`Nagłówek w żądaniu daje ten sam skutek co `Cache-Control: no-cache` . Ten nagłówek jest zastępowany przez odpowiednie dyrektywy w `Cache-Control` nagłówku, jeśli jest obecny. Uwzględnianie zgodności z poprzednimi wersjami przy użyciu protokołu HTTP/1.0. | | `Set-Cookie` | Odpowiedź nie jest buforowana, jeśli nagłówek istnieje. Wszystkie oprogramowanie pośredniczące w potoku przetwarzania żądań, które ustawia jeden lub więcej plików cookie, uniemożliwia buforowanie odpowiedzi z buforowania odpowiedzi (na przykład [dostawcy TempData opartego na plikach cookie](xref:fundamentals/app-state#tempdata)).  | | `Vary` | `Vary`Nagłówek jest używany do różnicowania buforowanej odpowiedzi przez inny nagłówek. Na przykład w pamięci podręcznej odpowiedzi są kodowane przez dołączenie `Vary: Accept-Encoding` nagłówka, w którym są buforowane odpowiedzi na żądania z nagłówkami `Accept-Encoding: gzip` i `Accept-Encoding: text/plain` oddzielnie. Odpowiedź z wartością nagłówka `*` nigdy nie jest przechowywana. | | `Expires` | Odpowiedź uznana za nieodświeżoną przez ten nagłówek nie jest zapisywana ani pobierana, chyba że zostanie zastąpiona przez inne `Cache-Control` nagłówki. | | `If-None-Match` | Pełna odpowiedź jest obsługiwana z pamięci podręcznej, jeśli wartość nie jest `*` , a `ETag` odpowiedź nie jest zgodna z żadną z podanych wartości. W przeciwnym razie jest obsługiwana odpowiedź 304 (nie modyfikowane). | | `If-Modified-Since` | Jeśli `If-None-Match` nagłówek nie istnieje, jest obsługiwana Pełna odpowiedź z pamięci podręcznej, jeśli data odpowiedzi w pamięci podręcznej jest nowsza niż podana wartość. W przeciwnym razie jest obsługiwana odpowiedź *304 — nie zmodyfikowano* . | | `Date` | W przypadku obsługi z pamięci podręcznej `Date` nagłówek jest ustawiany przez oprogramowanie pośredniczące, jeśli nie został podany w oryginalnej odpowiedzi. | | `Content-Length` | W przypadku obsługi z pamięci podręcznej `Content-Length` nagłówek jest ustawiany przez oprogramowanie pośredniczące, jeśli nie został podany w oryginalnej odpowiedzi. | | `Age` | `Age`Nagłówek wysłany w oryginalnej odpowiedzi jest ignorowany. Oprogramowanie pośredniczące oblicza nową wartość w przypadku obsługi odpowiedzi w pamięci podręcznej. |
 
 ## <a name="caching-respects-request-cache-control-directives"></a>Buforowanie — dyrektywy dotyczące kontroli pamięci podręcznej żądań
 

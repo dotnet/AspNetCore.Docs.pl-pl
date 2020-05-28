@@ -18,8 +18,8 @@ Jednym z metod zapobiegania występowaniu plików cookie i danych lokacji z zak�
   * Wybierz przycisk **Add** (Dodaj).
   * Podaj ścieżkę do przeglądarki w polu **program** .
   * W polu **argumenty** Podaj opcję wiersza polecenia, która jest wykorzystywana przez przeglądarkę do otwierania w trybie incognito lub prywatnym i adres URL aplikacji. Przykład:
-    * Google Chrome &ndash;`--incognito --new-window https://localhost:5001`
-    * Mozilla Firefox &ndash;`-private -url https://localhost:5001`
+    * Google Chrome:`--incognito --new-window https://localhost:5001`
+    * Mozilla Firefox:`-private -url https://localhost:5001`
   * Podaj nazwę w polu **przyjazna nazwa** . Na przykład `Firefox Auth Testing`.
   * Wybierz przycisk **OK**.
   * Aby uniknąć konieczności wybierania profilu przeglądarki dla każdej iteracji testowania w aplikacji, Ustaw profil jako domyślny przy użyciu przycisku **Ustaw jako domyślny** .

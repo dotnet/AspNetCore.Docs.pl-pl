@@ -1,44 +1,32 @@
 ---
-title: Rejestrowanie i Diagnostyka w ASP.NET CoreSignalR
-author: anurse
-description: Dowiedz się, jak zbierać diagnostykę z SignalR aplikacji ASP.NET Core.
-monikerRange: '>= aspnetcore-2.1'
-ms.author: anurse
-ms.custom: signalr
-ms.date: 11/12/2019
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: signalr/diagnostics
-ms.openlocfilehash: 0dda4fb55b1e2275d9cdb2af0b55824b12121dee
-ms.sourcegitcommit: 16b3abec1ed70f9a206f0cfa7cf6404eebaf693d
-ms.translationtype: MT
-ms.contentlocale: pl-PL
-ms.lasthandoff: 05/17/2020
-ms.locfileid: "83444220"
+title: "Rejestrowanie i Diagnostyka w ASP.NET Core SignalR " autor: Opis: "informacje o zbieraniu diagnostyki z aplikacji ASP.NET Core SignalR ".
+monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
 ---
-# <a name="logging-and-diagnostics-in-aspnet-core-signalr"></a>Rejestrowanie i Diagnostyka w ASP.NET Core sygnalizujący
+# <a name="logging-and-diagnostics-in-aspnet-core-signalr"></a>Rejestrowanie i Diagnostyka w ASP.NET CoreSignalR
 
 Według [Andrew Stanton-pielęgniarki](https://twitter.com/anurse)
 
-Ten artykuł zawiera wskazówki dotyczące zbierania danych diagnostycznych z aplikacji sygnalizującej ASP.NET Core, aby pomóc w rozwiązywaniu problemów.
+Ten artykuł zawiera wskazówki dotyczące zbierania danych diagnostycznych z SignalR aplikacji ASP.NET Core w celu ułatwienia rozwiązywania problemów.
 
 ## <a name="server-side-logging"></a>Rejestrowanie po stronie serwera
 
 > [!WARNING]
 > Dzienniki po stronie serwera mogą zawierać poufne informacje z aplikacji. **Nigdy nie** Publikuj nieprzetworzonych dzienników z aplikacji produkcyjnych na forach publicznych, takich jak GitHub.
 
-Ponieważ sygnalizujący jest częścią ASP.NET Core, używa systemu rejestrowania ASP.NET Core. W konfiguracji domyślnej program sygnalizujący rejestruje bardzo mało informacji, ale może to być skonfigurowane. Szczegółowe informacje na temat konfigurowania rejestrowania ASP.NET Core można znaleźć w dokumentacji dotyczącej [rejestrowania ASP.NET Core](xref:fundamentals/logging/index#configuration) .
+Ponieważ SignalR jest częścią ASP.NET Core, używa systemu rejestrowania ASP.NET Core. W konfiguracji domyślnej SignalR dzienniki są bardzo mało informacji, ale można je skonfigurować. Szczegółowe informacje na temat konfigurowania rejestrowania ASP.NET Core można znaleźć w dokumentacji dotyczącej [rejestrowania ASP.NET Core](xref:fundamentals/logging/index#configuration) .
 
-Sygnalizujący używa dwóch kategorii rejestratora:
+SignalRużywa dwóch kategorii rejestratora:
 
-* `Microsoft.AspNetCore.SignalR`&ndash;w przypadku dzienników związanych z protokołami centrów, aktywowanie centrów, wywoływanie metod i innych działań związanych z centrum.
-* `Microsoft.AspNetCore.Http.Connections`&ndash;w przypadku dzienników związanych z transportami, takimi jak obiekty WebSockets, długie sondowanie i zdarzenia wysyłane przez serwer oraz infrastruktura sygnałów niskiego poziomu.
+* `Microsoft.AspNetCore.SignalR`: W przypadku dzienników związanych z protokołami centrów, aktywowanie centrów, wywoływanie metod i innych działań związanych z centrum.
+* `Microsoft.AspNetCore.Http.Connections`: W przypadku dzienników związanych z transportami, takich jak obiekty WebSockets, długie sondowanie, zdarzenia wysłane przez serwer i infrastruktura niskiego poziomu SignalR .
 
-Aby włączyć szczegółowe dzienniki od sygnalizującego, skonfiguruj obie powyższe prefiksy do `Debug` poziomu w pliku *appSettings. JSON* , dodając następujące elementy do `LogLevel` podsekcji w `Logging` :
+Aby włączyć szczegółowe dzienniki SignalR , należy skonfigurować obie powyższe prefiksy na `Debug` poziomie w pliku *appSettings. JSON* przez dodanie następujących elementów do `LogLevel` podsekcji w `Logging` :
 
 [!code-json[](diagnostics/logging-config.json?highlight=7-8)]
 
@@ -61,7 +49,7 @@ Sposób dostępu do dzienników po stronie serwera zależy od środowiska, w kt�
 
 ### <a name="as-a-console-app-outside-iis"></a>Jako Aplikacja konsolowa poza usługami IIS
 
-Jeśli używasz programu w aplikacji konsolowej, [Rejestrator konsoli](xref:fundamentals/logging/index#console) powinien być domyślnie włączony. Dzienniki sygnalizujące będą wyświetlane w konsoli programu.
+Jeśli używasz programu w aplikacji konsolowej, [Rejestrator konsoli](xref:fundamentals/logging/index#console) powinien być domyślnie włączony. SignalRDzienniki będą wyświetlane w konsoli programu.
 
 ### <a name="within-iis-express-from-visual-studio"></a>W IIS Express z programu Visual Studio
 
@@ -89,18 +77,38 @@ Aby całkowicie wyłączyć rejestrowanie, określ `signalR.LogLevel.None` w `co
 W poniższej tabeli przedstawiono poziomy dziennika dostępne dla klienta JavaScript. Ustawienie poziomu dziennika na jedną z tych wartości umożliwia rejestrowanie na tym poziomie i wszystkich poziomów powyżej niego w tabeli.
 
 | Poziom | Opis |
-| ----- | ----------- |
-| `None` | Żadne komunikaty nie są rejestrowane. |
-| `Critical` | Komunikaty wskazujące niepowodzenie w całej aplikacji. |
-| `Error` | Komunikaty wskazujące niepowodzenie w bieżącej operacji. |
-| `Warning` | Komunikaty wskazujące na problem niekrytyczny. |
-| `Information` | Komunikaty informacyjne. |
-| `Debug` | Komunikaty diagnostyczne przydatne do debugowania. |
-| `Trace` | Bardzo szczegółowe komunikaty diagnostyczne przeznaczone do diagnozowania określonych problemów. |
+| ----- | ---
+title: "Rejestrowanie i Diagnostyka w ASP.NET Core SignalR " autor: Opis: "informacje o zbieraniu diagnostyki z aplikacji ASP.NET Core SignalR ".
+monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: "Rejestrowanie i Diagnostyka w ASP.NET Core SignalR " autor: Opis: "informacje o zbieraniu diagnostyki z aplikacji ASP.NET Core SignalR ".
+monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: "Rejestrowanie i Diagnostyka w ASP.NET Core SignalR " autor: Opis: "informacje o zbieraniu diagnostyki z aplikacji ASP.NET Core SignalR ".
+monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+------ | | `None` | Żadne komunikaty nie są rejestrowane. | | `Critical` | Komunikaty wskazujące niepowodzenie w całej aplikacji. | | `Error` | Komunikaty wskazujące niepowodzenie w bieżącej operacji. | | `Warning` | Komunikaty wskazujące na problem niekrytyczny. | | `Information` | Komunikaty informacyjne. | | `Debug` | Komunikaty diagnostyczne przydatne do debugowania. | | `Trace` | Bardzo szczegółowe komunikaty diagnostyczne przeznaczone do diagnozowania określonych problemów. |
 
 Po skonfigurowaniu szczegółowości dzienniki zostaną zapisane w konsoli przeglądarki (lub w standardowym wyjściu w aplikacji NodeJS).
 
-Jeśli chcesz wysłać dzienniki do niestandardowego systemu rejestrowania, możesz dostarczyć obiekt JavaScript implementujący `ILogger` interfejs. Jedyną metodą, która musi zostać wdrożona `log` , jest, która pobiera poziom zdarzenia i komunikat skojarzony ze zdarzeniem. Na przykład:
+Jeśli chcesz wysłać dzienniki do niestandardowego systemu rejestrowania, możesz dostarczyć obiekt JavaScript implementujący `ILogger` interfejs. Jedyną metodą, która musi zostać wdrożona `log` , jest, która pobiera poziom zdarzenia i komunikat skojarzony ze zdarzeniem. Przykład:
 
 [!code-typescript[](diagnostics/custom-logger.ts?highlight=3-7,13)]
 

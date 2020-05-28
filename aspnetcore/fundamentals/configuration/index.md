@@ -1495,7 +1495,7 @@ Aby zabezpieczyć poufne dane konfiguracji, należy zastosować następujące ro
 Aby uzyskać więcej informacji, zobacz następujące tematy:
 
 * <xref:fundamentals/environments>
-* <xref:security/app-secrets>&ndash;Zawiera porady dotyczące używania zmiennych środowiskowych do przechowywania poufnych danych. Menedżer wpisów tajnych używa dostawcy konfiguracji plików do przechowywania wpisów tajnych użytkownika w pliku JSON w systemie lokalnym. Dostawca konfiguracji plików został opisany w dalszej części tego tematu.
+* <xref:security/app-secrets>: Zawiera porady dotyczące używania zmiennych środowiskowych do przechowywania poufnych danych. Menedżer wpisów tajnych używa dostawcy konfiguracji plików do przechowywania wpisów tajnych użytkownika w pliku JSON w systemie lokalnym. Dostawca konfiguracji plików został opisany w dalszej części tego tematu.
 
 [Azure Key Vault](https://azure.microsoft.com/services/key-vault/) bezpieczne przechowywanie wpisów tajnych aplikacji dla ASP.NET Core aplikacji. Aby uzyskać więcej informacji, zobacz <xref:security/key-vault-configuration>.
 
@@ -1825,7 +1825,7 @@ W przypadku aplikacji opartych na ASP.NET Core szablonach program `AddCommandLin
 })
 ```
 
-**Przyklad**
+**Przykład**
 
 Przykładowa aplikacja korzysta z statycznej wygodnej metody `CreateDefaultBuilder` tworzenia hosta, który obejmuje wywołanie <xref:Microsoft.Extensions.Configuration.CommandLineConfigurationExtensions.AddCommandLine*> .
 
@@ -2341,7 +2341,7 @@ Aby zapewnić konfigurację aplikacji na podstawie dodatkowych zmiennych środow
 
 Wywołaj `AddEnvironmentVariables` ostatni, aby zezwolić na zmienne środowiskowe z danym prefiksem, aby przesłonić wartości od innych dostawców.
 
-**Przyklad**
+**Przykład**
 
 Przykładowa aplikacja korzysta z statycznej wygodnej metody `CreateDefaultBuilder` tworzenia hosta, który obejmuje wywołanie `AddEnvironmentVariables` .
 
@@ -2944,12 +2944,12 @@ title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-L
 
 ---------------------------------------- | | `CUSTOMCONNSTR_{KEY} `   | `ConnectionStrings:{KEY}`   | Wpis konfiguracji nie został utworzony.                                                | | `MYSQLCONNSTR_{KEY}`     | `ConnectionStrings:{KEY}`   | Klucz: `ConnectionStrings:{KEY}_ProviderName` :<br>Wartość: `MySql.Data.MySqlClient` | | `SQLAZURECONNSTR_{KEY}`   |  `ConnectionStrings:{KEY}`   | Klucz: `ConnectionStrings:{KEY}_ProviderName` :<br>Wartość: `System.Data.SqlClient` | | `SQLCONNSTR_{KEY}`        |  `ConnectionStrings:{KEY}`   | Klucz: `ConnectionStrings:{KEY}_ProviderName` :<br>Wartościami`System.Data.SqlClient`  |
 
-**Przyklad**
+**Przykład**
 
 Na serwerze zostanie utworzona niestandardowa zmienna środowiskowa parametrów połączenia:
 
-* Nazwa &ndash;`CUSTOMCONNSTR_ReleaseDB`
-* Wartość &ndash;`Data Source=ReleaseSQLServer;Initial Catalog=MyReleaseDB;Integrated Security=True`
+* Nazwij`CUSTOMCONNSTR_ReleaseDB`
+* Wartość:`Data Source=ReleaseSQLServer;Initial Catalog=MyReleaseDB;Integrated Security=True`
 
 Jeśli `IConfiguration` jest wstrzykiwany i przypisany do pola o nazwie `_config` , odczytaj wartość:
 
@@ -3028,8 +3028,8 @@ Przeciążania Zezwalaj na określanie:
 
 `AddJsonFile`jest automatycznie wywoływana dwukrotnie, gdy nowy Konstruktor hosta zostanie zainicjowany przy użyciu `CreateDefaultBuilder` . Metoda jest wywoływana w celu załadowania konfiguracji z:
 
-* *appSettings. JSON* &ndash; ten plik jest odczytywany jako pierwszy. Wersja środowiska pliku może przesłonić wartości dostarczone przez plik *appSettings. JSON* .
-* *appSettings. {Environment}. JSON* &ndash; wersja środowiska pliku jest ładowana na podstawie [IHostingEnvironment. EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostingEnvironment.EnvironmentName*).
+* *appSettings. JSON*: plik jest odczytywany jako pierwszy. Wersja środowiska pliku może przesłonić wartości dostarczone przez plik *appSettings. JSON* .
+* *appSettings. {Environment}. JSON*: wersja środowiska pliku jest ładowana na podstawie [IHostingEnvironment. EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostingEnvironment.EnvironmentName*).
 
 Aby uzyskać więcej informacji, zobacz sekcję [Konfiguracja domyślna](#default-configuration) .
 
@@ -3051,7 +3051,7 @@ Wywołaj `ConfigureAppConfiguration` podczas kompilowania hosta, aby określić 
 })
 ```
 
-**Przyklad**
+**Przykład**
 
 Przykładowa aplikacja korzysta z statycznej wygodnej metody `CreateDefaultBuilder` tworzenia hosta, który obejmuje dwa wywołania `AddJsonFile` :
 

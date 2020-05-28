@@ -56,9 +56,9 @@ Adres podstawowy klienta jest ustawiany na adres serwera źródłowego. Wstrzykn
 
 W poniższych przykładach przebieg internetowy interfejs API sieci Web przetwarza operacje tworzenia, odczytu, aktualizacji i usuwania (CRUD). Przykłady są oparte na `TodoItem` klasie, która przechowuje:
 
-* Identyfikator ( `Id` , `long` ) &ndash; unikatowy identyfikator elementu.
-* Nazwa ( `Name` , `string` ) &ndash; Nazwa elementu.
-* Stan ( `IsComplete` , `bool` ) &ndash; wskazujący, czy zadanie do wykonania zostało zakończone.
+* ID ( `Id` , `long` ): unikatowy identyfikator elementu.
+* Nazwa ( `Name` , `string` ): nazwa elementu.
+* Stan ( `IsComplete` , `bool` ): wskazuje, czy zadanie do wykonania zostało zakończone.
 
 ```csharp
 private class TodoItem
@@ -71,7 +71,7 @@ private class TodoItem
 
 Metody pomocnika JSON wysyłają żądania do identyfikatora URI (internetowego interfejsu API w poniższych przykładach) i przetwarzają odpowiedzi:
 
-* <xref:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsync%2A>&ndash;Wysyła żądanie HTTP GET i analizuje treść odpowiedzi JSON w celu utworzenia obiektu.
+* <xref:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsync%2A>: Wysyła żądanie HTTP GET i analizuje treść odpowiedzi JSON w celu utworzenia obiektu.
 
   W poniższym kodzie, `todoItems` są wyświetlane przez składnik. `GetTodoItems`Metoda jest wyzwalana, gdy składnik jest gotowy do renderowania ([OnInitializedAsync](xref:blazor/lifecycle#component-initialization-methods)). Pełny przykład można znaleźć w przykładowej aplikacji.
 
@@ -87,7 +87,7 @@ Metody pomocnika JSON wysyłają żądania do identyfikatora URI (internetowego 
   }
   ```
 
-* <xref:System.Net.Http.Json.HttpClientJsonExtensions.PostAsJsonAsync%2A>&ndash;Wysyła żądanie HTTP POST, w tym zawartość zakodowaną w formacie JSON, i analizuje treść odpowiedzi JSON w celu utworzenia obiektu.
+* <xref:System.Net.Http.Json.HttpClientJsonExtensions.PostAsJsonAsync%2A>: Wysyła żądanie HTTP POST, w tym zawartość zakodowaną w formacie JSON, i analizuje treść odpowiedzi JSON w celu utworzenia obiektu.
 
   W poniższym kodzie `newItemName` jest dostarczany przez powiązany element składnika. `AddItem`Metoda jest wyzwalana przez wybranie `<button>` elementu. Pełny przykład można znaleźć w przykładowej aplikacji.
 
@@ -115,7 +115,7 @@ Metody pomocnika JSON wysyłają żądania do identyfikatora URI (internetowego 
   var content = response.Content.ReadFromJsonAsync<WeatherForecast>();
   ```
 
-* <xref:System.Net.Http.Json.HttpClientJsonExtensions.PutAsJsonAsync%2A>&ndash;Wysyła żądanie HTTP Put, w tym zawartość zakodowaną w formacie JSON.
+* <xref:System.Net.Http.Json.HttpClientJsonExtensions.PutAsJsonAsync%2A>: Wysyła żądanie HTTP PUT, w tym zawartość zakodowaną w formacie JSON.
 
   W poniższym kodzie `editItem` wartości dla `Name` i `IsCompleted` są dostarczane przez powiązane elementy składnika. Element `Id` jest ustawiany, gdy element jest wybrany w innej części interfejsu użytkownika i `EditItem` jest wywoływany. `SaveItem`Metoda jest wyzwalana przez wybranie elementu Save `<button>` . Pełny przykład można znaleźć w przykładowej aplikacji.
 
@@ -301,7 +301,7 @@ Aby umożliwić innym lokacjom wykonywanie żądań funkcji udostępniania zasob
 
 ## <a name="additional-resources"></a>Zasoby dodatkowe
 
-* <xref:security/blazor/webassembly/additional-scenarios>&ndash;Obejmuje pokrycie przy użyciu <xref:System.Net.Http.HttpClient> programu w celu zapewnienia bezpiecznych żądań interfejsu API sieci Web.
+* <xref:security/blazor/webassembly/additional-scenarios>: Obejmuje pokrycie przy użyciu <xref:System.Net.Http.HttpClient> , aby zapewnić bezpieczne żądania interfejsu API sieci Web.
 * <xref:fundamentals/http-requests>
 * <xref:security/enforcing-ssl>
 * [Konfiguracja punktu końcowego HTTPS Kestrel](xref:fundamentals/servers/kestrel#endpoint-configuration)

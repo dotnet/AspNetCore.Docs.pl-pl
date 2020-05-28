@@ -8,18 +8,18 @@ products:
 - aspnet-core
 - vs
 urlFragment: aspnetcore-webapi-mongodb
-ms.openlocfilehash: 6f6022bee678af92066f45032b43b6b87e5f901e
-ms.sourcegitcommit: 7a42bc1e594de36c854fd4363c11821548a9efa7
+ms.openlocfilehash: 95a2a6fcda0a4f7148183981f7dbacd06388329d
+ms.sourcegitcommit: 58722eb309767e462bdbf3082bd38737a4ef168f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83608671"
+ms.lasthandoff: 05/27/2020
+ms.locfileid: "84106523"
 ---
 # <a name="create-a-web-api-with-aspnet-core-and-mongodb"></a>Tworzenie internetowego interfejsu API za pomocą ASP.NET Core i MongoDB
 
 W tym samouczku przedstawiono Tworzenie interfejsu API sieci Web, który wykonuje operacje tworzenia, odczytu, aktualizacji i usuwania (CRUD) w bazie danych [MongoDB](https://www.mongodb.com/what-is-mongodb) NoSQL.
 
-Z tego samouczka dowiesz się, jak wykonywać następujące czynności:
+Ten samouczek zawiera informacje na temat wykonywania następujących czynności:
 
 * Konfigurowanie MongoDB
 * Tworzenie bazy danych MongoDB
@@ -35,7 +35,7 @@ Z tego samouczka dowiesz się, jak wykonywać następujące czynności:
 
 ## <a name="configure-mongodb"></a>Konfigurowanie MongoDB
 
-W przypadku korzystania z systemu Windows MongoDB jest instalowany w *C: \\ Program Files \\ MongoDB* domyślnie. Dodaj *plik C: \\ Program Files \\ MongoDB \\ Server \\ \< version_number>\\ bin* do `Path` zmiennej środowiskowej. Ta zmiana umożliwia MongoDB dostęp z dowolnego miejsca na komputerze deweloperskim.
+W przypadku korzystania z systemu Windows MongoDB jest instalowany w *C: \\ Program Files \\ MongoDB* domyślnie. Dodaj *plik C: \\ Program Files \\ MongoDB \\ Server \\ \<version_number> \\ bin* do `Path` zmiennej środowiskowej. Ta zmiana umożliwia MongoDB dostęp z dowolnego miejsca na komputerze deweloperskim.
 
 Użyj powłoki Mongo w poniższych krokach, aby utworzyć bazę danych, utworzyć kolekcje i przechowywać dokumenty. Aby uzyskać więcej informacji na temat poleceń powłoki Mongo, zobacz [Praca z powłoką Mongo](https://docs.mongodb.com/manual/mongo/#working-with-the-mongo-shell).
 
@@ -313,7 +313,7 @@ Baza danych jest gotowa. Możesz rozpocząć tworzenie ASP.NET Core internetoweg
 
 `BookService`Klasa używa następujących `MongoDB.Driver` elementów członkowskich do wykonywania operacji CRUD w bazie danych:
 
-* [MongoClient](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_MongoClient.htm) &ndash; Odczytuje wystąpienie serwera na potrzeby wykonywania operacji bazy danych. W konstruktorze tej klasy podano parametry połączenia MongoDB:
+* [MongoClient](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_MongoClient.htm): odczytuje wystąpienie serwera na potrzeby wykonywania operacji bazy danych. W konstruktorze tej klasy podano parametry połączenia MongoDB:
 
     ```csharp
     public BookService(IBookstoreDatabaseSettings settings)
@@ -325,16 +325,16 @@ Baza danych jest gotowa. Możesz rozpocząć tworzenie ASP.NET Core internetoweg
     }
     ```
 
-* [IMongoDatabase](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_IMongoDatabase.htm) &ndash; Reprezentuje bazę danych Mongo na potrzeby wykonywania operacji. W tym samouczku do uzyskiwania dostępu do danych w określonej kolekcji jest stosowana ogólna Metoda [getcollection \< TDocument> (Collection)](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoDatabase_GetCollection__1.htm) . Wykonaj operacje CRUD w odniesieniu do kolekcji po wywołaniu tej metody. W `GetCollection<TDocument>(collection)` wywołaniu metody:
+* [IMongoDatabase](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_IMongoDatabase.htm): reprezentuje bazę danych Mongo do wykonywania operacji. W tym samouczku do uzyskiwania dostępu do danych w określonej kolekcji jest stosowana ogólna Metoda [getcollection \<TDocument> (Collection)](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoDatabase_GetCollection__1.htm) . Wykonaj operacje CRUD w odniesieniu do kolekcji po wywołaniu tej metody. W `GetCollection<TDocument>(collection)` wywołaniu metody:
   * `collection`reprezentuje nazwę kolekcji.
   * `TDocument`reprezentuje typ obiektu CLR przechowywany w kolekcji.
 
 `GetCollection<TDocument>(collection)`zwraca obiekt [MongoCollection](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_MongoCollection.htm) reprezentujący kolekcję. W tym samouczku następujące metody są wywoływane w kolekcji:
 
-* [DeleteOne](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_DeleteOne.htm) &ndash; Usuwa pojedynczy dokument pasujący do podanych kryteriów wyszukiwania.
-* [Znajdź \< TDocument>](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollectionExtensions_Find__1_1.htm) &ndash; zwraca wszystkie dokumenty w kolekcji pasujące do podanych kryteriów wyszukiwania.
-* [InsertOne](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_InsertOne.htm) &ndash; Wstawia podany obiekt jako nowy dokument w kolekcji.
-* [ReplaceOne](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_ReplaceOne.htm) &ndash; Zamienia pojedynczy dokument pasujący do podanych kryteriów wyszukiwania z podanym obiektem.
+* [DeleteOne](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_DeleteOne.htm): Usuwa pojedynczy dokument pasujący do podanych kryteriów wyszukiwania.
+* [Find \<TDocument> ](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollectionExtensions_Find__1_1.htm): zwraca wszystkie dokumenty w kolekcji pasujące do podanych kryteriów wyszukiwania.
+* [InsertOne](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_InsertOne.htm): Wstawia podany obiekt jako nowy dokument w kolekcji.
+* [ReplaceOne](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_ReplaceOne.htm): zamienia pojedynczy dokument pasujący do podanych kryteriów wyszukiwania z podanym obiektem.
 
 ## <a name="add-a-controller"></a>Dodawanie kontrolera
 

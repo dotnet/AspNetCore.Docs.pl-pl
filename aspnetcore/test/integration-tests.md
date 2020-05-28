@@ -119,7 +119,7 @@ Jeśli [środowisko](xref:fundamentals/environments) SUT nie jest ustawione, śr
 
 ## <a name="basic-tests-with-the-default-webapplicationfactory"></a>Podstawowe testy z domyślną WebApplicationFactory
 
-[WebApplicationFactory \< TEntryPoint>](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) służy do tworzenia [TestServer](/dotnet/api/microsoft.aspnetcore.testhost.testserver) dla testów integracji. `TEntryPoint`jest klasą punktu wejścia SUT, zazwyczaj `Startup` klasy.
+[WebApplicationFactory \<TEntryPoint> ](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) służy do tworzenia [TestServer](/dotnet/api/microsoft.aspnetcore.testhost.testserver) dla testów integracji. `TEntryPoint`jest klasą punktu wejścia SUT, zazwyczaj `Startup` klasy.
 
 Klasy testowe implementują interfejs *armatury klasy* ([IClassFixture](https://xunit.github.io/docs/shared-context#class-fixture)) w celu wskazania, że Klasa zawiera testy i udostępnia wystąpienia obiektów udostępnionych w ramach testów w klasie.
 
@@ -178,7 +178,7 @@ Wszelkie żądania POST do SUT muszą być zgodne z sprawdzeniem, czy jest ono a
 
 `SendAsync`Metody rozszerzenia pomocnika (*pomocnicys/HttpClientExtensions. cs*) i `GetDocumentAsync` metoda pomocnika (*pomocnicys/HtmlHelpers. cs*) w [przykładowej aplikacji](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples/) używają analizatora [AngleSharp](https://anglesharp.github.io/) do obsługi kontroli przed fałszerstwem przy użyciu następujących metod:
 
-* `GetDocumentAsync`&ndash;Odbiera [HttpResponseMessage](/dotnet/api/system.net.http.httpresponsemessage) i zwraca `IHtmlDocument` . `GetDocumentAsync`używa fabryki przygotowującej *odpowiedź wirtualną* na podstawie oryginału `HttpResponseMessage` . Aby uzyskać więcej informacji, zapoznaj się z [dokumentacją AngleSharp](https://github.com/AngleSharp/AngleSharp#documentation).
+* `GetDocumentAsync`: Odbiera [HttpResponseMessage](/dotnet/api/system.net.http.httpresponsemessage) i zwraca `IHtmlDocument` . `GetDocumentAsync`używa fabryki przygotowującej *odpowiedź wirtualną* na podstawie oryginału `HttpResponseMessage` . Aby uzyskać więcej informacji, zapoznaj się z [dokumentacją AngleSharp](https://github.com/AngleSharp/AngleSharp#documentation).
 * `SendAsync`metody rozszerzające `HttpClient` [HttpRequestMessage](/dotnet/api/system.net.http.httprequestmessage) i Call [SendAsync (HttpRequestMessage)](/dotnet/api/system.net.http.httpclient.sendasync#System_Net_Http_HttpClient_SendAsync_System_Net_Http_HttpRequestMessage_) do przesyłania żądań do SUT. Przeciążenia dla `SendAsync` Zaakceptuj formularz HTML ( `IHtmlFormElement` ) i następujące:
   * Przycisk przesyłania formularza ( `IHtmlElement` )
   * Kolekcja wartości formularza ( `IEnumerable<KeyValuePair<string, string>>` )
@@ -679,7 +679,7 @@ Jeśli [środowisko](xref:fundamentals/environments) SUT nie jest ustawione, śr
 
 ## <a name="basic-tests-with-the-default-webapplicationfactory"></a>Podstawowe testy z domyślną WebApplicationFactory
 
-[WebApplicationFactory \< TEntryPoint>](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) służy do tworzenia [TestServer](/dotnet/api/microsoft.aspnetcore.testhost.testserver) dla testów integracji. `TEntryPoint`jest klasą punktu wejścia SUT, zazwyczaj `Startup` klasy.
+[WebApplicationFactory \<TEntryPoint> ](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) służy do tworzenia [TestServer](/dotnet/api/microsoft.aspnetcore.testhost.testserver) dla testów integracji. `TEntryPoint`jest klasą punktu wejścia SUT, zazwyczaj `Startup` klasy.
 
 Klasy testowe implementują interfejs *armatury klasy* ([IClassFixture](https://xunit.github.io/docs/shared-context#class-fixture)) w celu wskazania, że Klasa zawiera testy i udostępnia wystąpienia obiektów udostępnionych w ramach testów w klasie.
 
@@ -719,7 +719,7 @@ Wszelkie żądania POST do SUT muszą być zgodne z sprawdzeniem, czy jest ono a
 
 `SendAsync`Metody rozszerzenia pomocnika (*pomocnicys/HttpClientExtensions. cs*) i `GetDocumentAsync` metoda pomocnika (*pomocnicys/HtmlHelpers. cs*) w [przykładowej aplikacji](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples/) używają analizatora [AngleSharp](https://anglesharp.github.io/) do obsługi kontroli przed fałszerstwem przy użyciu następujących metod:
 
-* `GetDocumentAsync`&ndash;Odbiera [HttpResponseMessage](/dotnet/api/system.net.http.httpresponsemessage) i zwraca `IHtmlDocument` . `GetDocumentAsync`używa fabryki przygotowującej *odpowiedź wirtualną* na podstawie oryginału `HttpResponseMessage` . Aby uzyskać więcej informacji, zapoznaj się z [dokumentacją AngleSharp](https://github.com/AngleSharp/AngleSharp#documentation).
+* `GetDocumentAsync`: Odbiera [HttpResponseMessage](/dotnet/api/system.net.http.httpresponsemessage) i zwraca `IHtmlDocument` . `GetDocumentAsync`używa fabryki przygotowującej *odpowiedź wirtualną* na podstawie oryginału `HttpResponseMessage` . Aby uzyskać więcej informacji, zapoznaj się z [dokumentacją AngleSharp](https://github.com/AngleSharp/AngleSharp#documentation).
 * `SendAsync`metody rozszerzające `HttpClient` [HttpRequestMessage](/dotnet/api/system.net.http.httprequestmessage) i Call [SendAsync (HttpRequestMessage)](/dotnet/api/system.net.http.httpclient.sendasync#System_Net_Http_HttpClient_SendAsync_System_Net_Http_HttpRequestMessage_) do przesyłania żądań do SUT. Przeciążenia dla `SendAsync` Zaakceptuj formularz HTML ( `IHtmlFormElement` ) i następujące:
   * Przycisk przesyłania formularza ( `IHtmlElement` )
   * Kolekcja wartości formularza ( `IEnumerable<KeyValuePair<string, string>>` )

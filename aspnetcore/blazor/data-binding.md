@@ -72,7 +72,10 @@ Użyj `@bind-{ATTRIBUTE}` `@bind-{ATTRIBUTE}:event` składni with, aby powiąza�
 }
 ```
 
-W powiązaniu atrybutu rozróżniana jest wielkość liter. Na przykład [`@bind`](xref:mvc/views/razor#bind) prawidłowe i [`@bind`](xref:mvc/views/razor#bind) jest nieprawidłowe.
+W powiązaniu atrybutu rozróżniana jest wielkość liter:
+
+* `@bind`jest prawidłowy.
+* `@Bind`i `@BIND` są nieprawidłowe.
 
 ## <a name="unparsable-values"></a>Wartości niemożliwy do przeanalizowania
 

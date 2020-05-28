@@ -1,24 +1,13 @@
 ---
-title: Uwierzytelnianie i autoryzacja w programie gRPC for ASP.NET Core
-author: jamesnk
-description: Dowiedz się, jak używać uwierzytelniania i autoryzacji w programie gRPC for ASP.NET Core.
-monikerRange: '>= aspnetcore-3.0'
-ms.author: jamesnk
-ms.date: 12/05/2019
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: grpc/authn-and-authz
-ms.openlocfilehash: eecdebe5ea7555df0914adfbff728331e3592093
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776171"
+title: Author: Description: monikerRange: MS. Author: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
 ---
+
 # <a name="authentication-and-authorization-in-grpc-for-aspnet-core"></a>Uwierzytelnianie i autoryzacja w programie gRPC for ASP.NET Core
 
 Przez [Kuba Kowalski-króla](https://twitter.com/jamesnk)
@@ -47,11 +36,11 @@ public void Configure(IApplicationBuilder app)
 ```
 
 > [!NOTE]
-> Kolejność, w której zarejestrowano zagadnienia dotyczące oprogramowania pośredniczącego uwierzytelniania ASP.NET Core. Zawsze używaj `UseAuthentication` metody `UseAuthorization` Call `UseRouting` i After `UseEndpoints`i before.
+> Kolejność, w której zarejestrowano zagadnienia dotyczące oprogramowania pośredniczącego uwierzytelniania ASP.NET Core. Zawsze używaj metody Call `UseAuthentication` i `UseAuthorization` After `UseRouting` i Before `UseEndpoints` .
 
-Mechanizm uwierzytelniania używany przez aplikację podczas wywołania musi być skonfigurowany. Konfiguracja uwierzytelniania jest dodawana `Startup.ConfigureServices` w programie i będzie się różnić w zależności od mechanizmu uwierzytelniania używanego przez aplikację. Przykłady metod zabezpieczania aplikacji ASP.NET Core można znaleźć w temacie [przykłady uwierzytelniania](xref:security/authentication/samples).
+Mechanizm uwierzytelniania używany przez aplikację podczas wywołania musi być skonfigurowany. Konfiguracja uwierzytelniania jest dodawana w programie `Startup.ConfigureServices` i będzie się różnić w zależności od mechanizmu uwierzytelniania używanego przez aplikację. Przykłady metod zabezpieczania aplikacji ASP.NET Core można znaleźć w temacie [przykłady uwierzytelniania](xref:security/authentication/samples).
 
-Po skonfigurowaniu uwierzytelniania można uzyskać dostęp do użytkownika w metodach usługi gRPC za pośrednictwem `ServerCallContext`.
+Po skonfigurowaniu uwierzytelniania można uzyskać dostęp do użytkownika w metodach usługi gRPC za pośrednictwem `ServerCallContext` .
 
 ```csharp
 public override Task<BuyTicketsResponse> BuyTickets(
@@ -114,12 +103,12 @@ private static GrpcChannel CreateAuthenticatedChannel(string address)
 
 ### <a name="client-certificate-authentication"></a>Uwierzytelnianie certyfikatu klienta
 
-Klient może również udostępnić certyfikat klienta na potrzeby uwierzytelniania. [Uwierzytelnianie certyfikatu](https://tools.ietf.org/html/rfc5246#section-7.4.4) odbywa się na poziomie protokołu TLS, o ile nie zostanie kiedykolwiek przeASP.NET Core. Gdy żądanie zostanie wprowadzone ASP.NET Core, [Pakiet uwierzytelniania certyfikatu klienta](xref:security/authentication/certauth) umożliwia rozpoznanie certyfikatu w usłudze `ClaimsPrincipal`.
+Klient może również udostępnić certyfikat klienta na potrzeby uwierzytelniania. [Uwierzytelnianie certyfikatu](https://tools.ietf.org/html/rfc5246#section-7.4.4) odbywa się na poziomie protokołu TLS, o ile nie zostanie kiedykolwiek przeASP.NET Core. Gdy żądanie zostanie wprowadzone ASP.NET Core, [Pakiet uwierzytelniania certyfikatu klienta](xref:security/authentication/certauth) umożliwia rozpoznanie certyfikatu w usłudze `ClaimsPrincipal` .
 
 > [!NOTE]
 > Host musi być skonfigurowany do akceptowania certyfikatów klienta. Zobacz [Konfigurowanie hosta, aby wymagać certyfikatów](xref:security/authentication/certauth#configure-your-host-to-require-certificates) w celu uzyskania informacji na temat akceptowania certyfikatów klienta w usługach Kestrel, IIS i Azure.
 
-W kliencie .NET gRPC certyfikat klienta zostaje dodany do `HttpClientHandler` programu, który jest następnie używany do tworzenia klienta gRPC:
+W kliencie .NET gRPC certyfikat klienta zostaje dodany do programu `HttpClientHandler` , który jest następnie używany do tworzenia klienta gRPC:
 
 ```csharp
 public Ticketer.TicketerClient CreateClientWithCert(
@@ -133,7 +122,7 @@ public Ticketer.TicketerClient CreateClientWithCert(
     // Create the gRPC channel
     var channel = GrpcChannel.ForAddress(baseAddress, new GrpcChannelOptions
     {
-        HttpClient = new HttpClient(handler)
+        HttpHandler = handler
     });
 
     return new Ticketer.TicketerClient(channel);
@@ -144,7 +133,7 @@ public Ticketer.TicketerClient CreateClientWithCert(
 
 Wiele ASP.NET Core obsługiwanych mechanizmów uwierzytelniania współpracuje z gRPC:
 
-* Usługa Azure Active Directory
+* Azure Active Directory
 * Certyfikat klienta
 * IdentityServer
 * Token JWT
@@ -156,7 +145,7 @@ Aby uzyskać więcej informacji na temat konfigurowania uwierzytelniania na serw
 
 Skonfigurowanie klienta gRPC do korzystania z uwierzytelniania będzie zależeć od używanego mechanizmu uwierzytelniania. W poprzednim tokenie okaziciela i certyfikatach klienta przedstawiono kilka sposobów skonfigurowania klienta gRPC do wysyłania metadanych uwierzytelniania z wywołaniami gRPC:
 
-* Klienci z jednoznacznie określonym typem `HttpClient` gRPC używają wewnętrznie. Uwierzytelnianie można skonfigurować w usłudze [HttpClientHandler](/dotnet/api/system.net.http.httpclienthandler)lub poprzez dodanie wystąpień [HttpMessageHandler](/dotnet/api/system.net.http.httpmessagehandler) do programu `HttpClient`.
+* Klienci z jednoznacznie określonym typem gRPC używają `HttpClient` wewnętrznie. Uwierzytelnianie można skonfigurować w usłudze [HttpClientHandler](/dotnet/api/system.net.http.httpclienthandler)lub poprzez dodanie wystąpień [HttpMessageHandler](/dotnet/api/system.net.http.httpmessagehandler) do programu `HttpClient` .
 * Każde wywołanie gRPC ma opcjonalny `CallOptions` argument. Nagłówki niestandardowe można wysyłać przy użyciu kolekcji nagłówków opcji.
 
 > [!NOTE]
@@ -173,7 +162,7 @@ public class TicketerService : Ticketer.TicketerBase
 }
 ```
 
-Można użyć argumentów konstruktora i właściwości `[Authorize]` atrybutu w celu ograniczenia dostępu tylko do użytkowników zgodnych z określonymi [zasadami autoryzacji](xref:security/authorization/policies). Na przykład jeśli masz zasady autoryzacji niestandardowej o nazwie `MyAuthorizationPolicy`, upewnij się, że tylko użytkownicy pasujący do tych zasad mogą uzyskać dostęp do usługi przy użyciu następującego kodu:
+Można użyć argumentów konstruktora i właściwości `[Authorize]` atrybutu w celu ograniczenia dostępu tylko do użytkowników zgodnych z określonymi [zasadami autoryzacji](xref:security/authorization/policies). Na przykład jeśli masz zasady autoryzacji niestandardowej o nazwie `MyAuthorizationPolicy` , upewnij się, że tylko użytkownicy pasujący do tych zasad mogą uzyskać dostęp do usługi przy użyciu następującego kodu:
 
 ```csharp
 [Authorize("MyAuthorizationPolicy")]
@@ -182,7 +171,7 @@ public class TicketerService : Ticketer.TicketerBase
 }
 ```
 
-Do `[Authorize]` poszczególnych metod usługi można zastosować atrybut. Jeśli bieżący użytkownik nie jest zgodny z zasadami stosowanymi **zarówno** w metodzie, jak i klasie, do obiektu wywołującego jest zwracany błąd:
+Do poszczególnych metod usługi można `[Authorize]` zastosować atrybut. Jeśli bieżący użytkownik nie jest zgodny z zasadami stosowanymi **zarówno** w metodzie, jak i klasie, do obiektu wywołującego jest zwracany błąd:
 
 ```csharp
 [Authorize]

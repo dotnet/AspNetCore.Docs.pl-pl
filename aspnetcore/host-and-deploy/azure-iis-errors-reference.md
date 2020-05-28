@@ -1,24 +1,11 @@
 ---
-title: Informacje dotyczące typowych błędów dla Azure App Service i usług IIS z ASP.NET Core
-author: rick-anderson
-description: Uzyskaj porady dotyczące rozwiązywania problemów z typowymi błędami podczas hostowania aplikacji ASP.NET Core w usłudze Azure Apps i usługach IIS.
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 02/07/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: host-and-deploy/azure-iis-errors-reference
-ms.openlocfilehash: 7b3454fbd891ca26d44125810a10eb3b3c2c3933
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775209"
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
 ---
 # <a name="common-errors-reference-for-azure-app-service-and-iis-with-aspnet-core"></a>Informacje dotyczące typowych błędów dla Azure App Service i usług IIS z ASP.NET Core
 
@@ -26,19 +13,19 @@ ms.locfileid: "82775209"
 
 W tym temacie opisano typowe błędy i przedstawiono porady dotyczące rozwiązywania problemów w przypadku hostowania aplikacji ASP.NET Core w usłudze Azure Apps i usługach IIS.
 
-Ogólne wskazówki dotyczące rozwiązywania problemów <xref:test/troubleshoot-azure-iis>znajdują się w temacie.
+Ogólne wskazówki dotyczące rozwiązywania problemów znajdują się w temacie <xref:test/troubleshoot-azure-iis> .
 
 Zbierz wymienione poniżej informacje.
 
 * Zachowanie przeglądarki (kod stanu i komunikat o błędzie)
 * Wpisy dziennika zdarzeń aplikacji
-  * Azure App Service &ndash; zobacz <xref:test/troubleshoot-azure-iis>.
+  * Azure App Service: zobacz <xref:test/troubleshoot-azure-iis> .
   * IIS
     1. Wybierz pozycję **Rozpocznij** w menu **systemu Windows** , wpisz *Podgląd zdarzeń*i naciśnij klawisz **Enter**.
-    1. Po otwarciu **Podgląd zdarzeń** rozwiń pozycję > **Dzienniki systemu Windows** **na pasku** bocznym.
+    1. Po otwarciu **Podgląd zdarzeń** rozwiń pozycję **Dzienniki systemu Windows** > **Application** na pasku bocznym.
 * Element stdout modułu ASP.NET Core i wpisy dziennika debugowania
-  * Azure App Service &ndash; zobacz <xref:test/troubleshoot-azure-iis>.
-  * Usługi &ndash; IIS postępuj zgodnie z instrukcjami w sekcjach [Tworzenie dziennika i przekierowanie](xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection) i [udoskonalone dzienniki diagnostyczne](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs) w temacie ASP.NET Core Module.
+  * Azure App Service: zobacz <xref:test/troubleshoot-azure-iis> .
+  * IIS: Postępuj zgodnie z instrukcjami w sekcjach [Tworzenie dziennika i przekierowanie](xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection) i [udoskonalone dzienniki diagnostyczne](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs) w temacie ASP.NET Core Module.
 
 Porównaj informacje o błędach z następującymi typowymi błędami. Jeśli zostanie znalezione dopasowanie, postępuj zgodnie z zaleceniami dotyczącymi rozwiązywania problemów.
 
@@ -60,11 +47,11 @@ Pliki inne niż systemowe w katalogu **C:\Windows\SysWOW64\inetsrv** nie są zac
 
 * **Przeglądarka:** Błąd HTTP 500,0 — błąd ładowania procedury obsługi ANCM w procesie
 
-* **Dziennik aplikacji:** Wywoływanie hostfxr w celu znalezienia procedury obsługi żądania przetworzenia nie powiodło się bez wyszukiwania natywnych zależności. Nie można znaleźć procedury obsługi żądania nieprzetwarzania. Przechwycono dane wyjściowe z wywołania hostfxr: nie można odnaleźć żadnej zgodnej wersji platformy. Nie znaleziono określonej struktury "Microsoft. AspNetCore. app" w wersji "{VERSION}-Preview\*-". Nie można uruchomić aplikacji "/LM/W3SVC/1416782824/ROOT", ErrorCode "0x8000FFFF".
+* **Dziennik aplikacji:** Wywoływanie hostfxr w celu znalezienia procedury obsługi żądania przetworzenia nie powiodło się bez wyszukiwania natywnych zależności. Nie można znaleźć procedury obsługi żądania nieprzetwarzania. Przechwycono dane wyjściowe z wywołania hostfxr: nie można odnaleźć żadnej zgodnej wersji platformy. Nie znaleziono określonej struktury "Microsoft. AspNetCore. app" w wersji "{VERSION}-Preview- \* ". Nie można uruchomić aplikacji "/LM/W3SVC/1416782824/ROOT", ErrorCode "0x8000FFFF".
 
-* **Dziennik stdout modułu ASP.NET Core:** Nie można znaleźć żadnej zgodnej wersji platformy. Nie znaleziono określonej struktury "Microsoft. AspNetCore. app" w wersji "{VERSION}-Preview\*-".
+* **Dziennik stdout modułu ASP.NET Core:** Nie można znaleźć żadnej zgodnej wersji platformy. Nie znaleziono określonej struktury "Microsoft. AspNetCore. app" w wersji "{VERSION}-Preview- \* ".
 
-* **Dziennik debugowania modułu ASP.NET Core:** Wywoływanie hostfxr w celu znalezienia procedury obsługi żądania przetworzenia nie powiodło się bez wyszukiwania natywnych zależności. Najbardziej prawdopodobną przyczyną jest to, że aplikacja jest nieprawidłowo skonfigurowana. Sprawdź wersje programów Microsoft. servicecore. app i Microsoft. AspNetCore. app, które są przeznaczone dla aplikacji, i są zainstalowane na komputerze. Zwrócony błąd HRESULT: 0x8000FFFF. Nie można znaleźć procedury obsługi żądania nieprzetwarzania. Nie można znaleźć żadnej zgodnej wersji platformy. Nie znaleziono określonej struktury "Microsoft. AspNetCore. app" w wersji "{VERSION}-Preview\*-".
+* **Dziennik debugowania modułu ASP.NET Core:** Wywoływanie hostfxr w celu znalezienia procedury obsługi żądania przetworzenia nie powiodło się bez wyszukiwania natywnych zależności. Najbardziej prawdopodobną przyczyną jest to, że aplikacja jest nieprawidłowo skonfigurowana. Sprawdź wersje programów Microsoft. servicecore. app i Microsoft. AspNetCore. app, które są przeznaczone dla aplikacji, i są zainstalowane na komputerze. Zwrócony błąd HRESULT: 0x8000FFFF. Nie można znaleźć procedury obsługi żądania nieprzetwarzania. Nie można znaleźć żadnej zgodnej wersji platformy. Nie znaleziono określonej struktury "Microsoft. AspNetCore. app" w wersji "{VERSION}-Preview- \* ".
 
 Rozwiązywanie problemów:
 
@@ -93,17 +80,17 @@ Aby uzyskać więcej informacji, zobacz <xref:host-and-deploy/azure-apps/index#i
 
 * **Dziennik debugowania modułu ASP.NET Core:** Zwrócony błąd HRESULT: 0x8007023e
 
-Ten scenariusz jest zalewkowany przez zestaw SDK podczas publikowania aplikacji samodzielnej. Zestaw SDK generuje błąd, jeśli identyfikator RID nie jest zgodny z obiektem docelowym platformy ( `win10-x64` na przykład `<PlatformTarget>x86</PlatformTarget>` RID z w pliku projektu).
+Ten scenariusz jest zalewkowany przez zestaw SDK podczas publikowania aplikacji samodzielnej. Zestaw SDK generuje błąd, jeśli identyfikator RID nie jest zgodny z obiektem docelowym platformy (na przykład `win10-x64` RID z `<PlatformTarget>x86</PlatformTarget>` w pliku projektu).
 
 Rozwiązywanie problemów:
 
-W przypadku wdrożenia opartego na architekturze`<PlatformTarget>x86</PlatformTarget>`x86 () Włącz pulę aplikacji usług IIS dla aplikacji 32-bitowych. W Menedżerze usług IIS Otwórz **Zaawansowane ustawienia** puli aplikacji i ustaw **wartość True**dla **aplikacji 32-bitowych** .
+W przypadku wdrożenia opartego na architekturze x86 ( `<PlatformTarget>x86</PlatformTarget>` ) Włącz pulę aplikacji usług IIS dla aplikacji 32-bitowych. W Menedżerze usług IIS Otwórz **Zaawansowane ustawienia** puli aplikacji i ustaw **wartość True**dla **aplikacji 32-bitowych** .
 
 ## <a name="platform-conflicts-with-rid"></a>Konflikty platformy z identyfikatorem RID
 
 * **Przeglądarka:** Błąd HTTP 502,5 — niepowodzenie procesu
 
-* **Dziennik aplikacji:** Nie można uruchomić procesu "MACHINE/WEBROOT/APPHOST/{ASSEMBLY}" z fizycznym\{elementem głównym "c: Path}" przy użyciu wiersza polecenia "\{" c: Path} {Assembly}.\' {exe | dll} "", ErrorCode = "0x80004005: FF.
+* **Dziennik aplikacji:** Nie można uruchomić procesu "MACHINE/WEBROOT/APPHOST/{ASSEMBLY}" z fizycznym elementem głównym "C: Path}" \{ \' przy użyciu wiersza polecenia "" c: \{ Path} {Assembly}. { exe | dll} "", ErrorCode = "0x80004005: FF.
 
 * **Dziennik stdout modułu ASP.NET Core:** Nieobsługiwany wyjątek: System. BadImageFormatException: nie można załadować pliku lub zestawu "{ASSEMBLY}. dll". Podjęto próbę załadowania programu z nieprawidłowym formatem.
 
@@ -171,9 +158,9 @@ Rozwiązywanie problemów:
 
   Aby uzyskać więcej informacji, zobacz [Instalowanie pakietu hostingu .NET Core](xref:host-and-deploy/iis/index#install-the-net-core-hosting-bundle).
 
-* Upewnij się, że **model** > **Identity** procesów **puli** > aplikacji ma wartość **ApplicationPoolIdentity** lub że niestandardowa tożsamość ma odpowiednie uprawnienia dostępu do folderu wdrożenia aplikacji.
+* Upewnij się, że **Application Pool** > **model procesów** puli aplikacji > **Identity** ma wartość **ApplicationPoolIdentity** lub że niestandardowa tożsamość ma odpowiednie uprawnienia dostępu do folderu wdrożenia aplikacji.
 
-* Jeśli odinstalowano pakiet hostingu ASP.NET Core i zainstalowano wcześniejszą wersję pakietu hostingu, plik *ApplicationHost. config* nie zawiera sekcji dla modułu ASP.NET Core. Otwórz *plik ApplicationHost. config* w lokalizacji *% windir%/system32/inetsrv/config* i `<configuration><configSections><sectionGroup name="system.webServer">` Znajdź grupę sekcji. Jeśli w grupie sekcji brakuje sekcji modułu ASP.NET Core, Dodaj element Section:
+* Jeśli odinstalowano pakiet hostingu ASP.NET Core i zainstalowano wcześniejszą wersję pakietu hostingu, plik *ApplicationHost. config* nie zawiera sekcji dla modułu ASP.NET Core. Otwórz *plik ApplicationHost. config* w lokalizacji *% windir%/system32/inetsrv/config* i Znajdź `<configuration><configSections><sectionGroup name="system.webServer">` grupę sekcji. Jeśli w grupie sekcji brakuje sekcji modułu ASP.NET Core, Dodaj element Section:
 
   ```xml
   <section name="aspNetCore" overrideModeDefault="Allow" />
@@ -185,7 +172,7 @@ Rozwiązywanie problemów:
 
 * **Przeglądarka:** Błąd HTTP 500,0 — błąd ładowania procedury obsługi ANCM w procesie
 
-* **Dziennik aplikacji:** Nie można uruchomić procesu "MACHINE/WEBROOT/APPHOST/{ASSEMBLY}" z fizycznym\{elementem głównym\' "C: Path}" przy użyciu wiersza polecenia "" {...} " ", ErrorCode =" 0x80070002:0. Aplikacja "{PATH}" nie mogła zostać uruchomiona. Nie znaleziono pliku wykonywalnego w lokalizacji "{PATH}". Nie można uruchomić aplikacji "/LM/W3SVC/2/ROOT", ErrorCode "0x8007023e".
+* **Dziennik aplikacji:** Nie można uruchomić procesu "MACHINE/WEBROOT/APPHOST/{ASSEMBLY}" z fizycznym elementem głównym "C: \{ Path} \' " przy użyciu wiersza polecenia "" {...} " ", ErrorCode =" 0x80070002:0. Aplikacja "{PATH}" nie mogła zostać uruchomiona. Nie znaleziono pliku wykonywalnego w lokalizacji "{PATH}". Nie można uruchomić aplikacji "/LM/W3SVC/2/ROOT", ErrorCode "0x8007023e".
 
 * **Dziennik stdout modułu ASP.NET Core:** Plik dziennika nie został utworzony.
 
@@ -195,9 +182,9 @@ Rozwiązywanie problemów:
 
 * Upewnij się, że aplikacja działa lokalnie na Kestrel. Niepowodzenie procesu może być wynikiem problemu w aplikacji. Aby uzyskać więcej informacji, zobacz <xref:test/troubleshoot-azure-iis>.
 
-* Sprawdź atrybut *processPath* w `<aspNetCore>` elemencie w *pliku Web. config* , aby upewnić się, `dotnet` że jest to wdrożenie zależne od platformy (FDD `.\{ASSEMBLY}.exe` ) lub [wdrożenie samodzielne (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd).
+* Sprawdź atrybut *processPath* w `<aspNetCore>` elemencie w *pliku Web. config* , aby upewnić się, że jest to `dotnet` wdrożenie zależne od platformy (FDD) lub `.\{ASSEMBLY}.exe` [wdrożenie samodzielne (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd).
 
-* W przypadku elementu FDD program *dotnet. exe* może być niedostępny za pośrednictwem ustawień ścieżki. Upewnij się, że w ustawieniach ścieżki systemowej istnieje wartość *C:\Program Files\dotnet\\ * .
+* W przypadku elementu FDD program *dotnet. exe* może być niedostępny za pośrednictwem ustawień ścieżki. Upewnij się, że w ustawieniach ścieżki systemowej istnieje wartość *C:\Program Files\dotnet \\ * .
 
 * W przypadku programu FDD program *dotnet. exe* może być niedostępny dla tożsamości użytkownika puli aplikacji. Upewnij się, że tożsamość użytkownika puli aplikacji ma dostęp do katalogu *C:\Program Files\dotnet* . Upewnij się, że nie ma skonfigurowanych reguł odmowy dla tożsamości użytkownika puli aplikacji w *folderze C:\Program Files\dotnet* i katalogach aplikacji.
 
@@ -211,7 +198,7 @@ Rozwiązywanie problemów:
 
   Jeśli jest wymagane określone środowisko uruchomieniowe, Pobierz środowisko uruchomieniowe z [archiwów pobierania programu .NET](https://dotnet.microsoft.com/download/archives) i zainstaluj je w systemie. Aby ukończyć instalację, należy ponownie uruchomić system lub ponownie uruchomić usługi IIS, wykonując polecenie **net stop** , a następnie **net start W3SVC** z wiersza polecenia.
 
-## <a name="incorrect-arguments-of-aspnetcore-element"></a>Nieprawidłowe argumenty elementu \<aspNetCore>
+## <a name="incorrect-arguments-of-aspnetcore-element"></a>Nieprawidłowe argumenty \<aspNetCore> elementu
 
 * **Przeglądarka:** Błąd HTTP 500,0 — błąd ładowania procedury obsługi ANCM w procesie
 
@@ -225,7 +212,7 @@ Rozwiązywanie problemów:
 
 * Upewnij się, że aplikacja działa lokalnie na Kestrel. Niepowodzenie procesu może być wynikiem problemu w aplikacji. Aby uzyskać więcej informacji, zobacz <xref:test/troubleshoot-azure-iis>.
 
-* Sprawdź atrybut *arguments* w `<aspNetCore>` elemencie w *pliku Web. config* , aby upewnić się, że jest ( `.\{ASSEMBLY}.dll` a) dla wdrożenia zależnego od platformy (FDD); lub (b) nieobecny, pusty ciąg (`arguments=""`) lub lista argumentów aplikacji (`arguments="{ARGUMENT_1}, {ARGUMENT_2}, ... {ARGUMENT_X}"`) dla wdrożenia samodzielnego (SCD).
+* Sprawdź atrybut *arguments* w `<aspNetCore>` elemencie w *pliku Web. config* , aby upewnić się, że jest (a) `.\{ASSEMBLY}.dll` dla wdrożenia zależnego od platformy (FDD); lub (b) nie istnieje, pusty ciąg ( `arguments=""` ) lub lista argumentów aplikacji ( `arguments="{ARGUMENT_1}, {ARGUMENT_2}, ... {ARGUMENT_X}"` ) dla wdrożenia samodzielnego (SCD).
 
 ## <a name="missing-net-core-shared-framework"></a>Brak współdzielonej platformy .NET Core
 
@@ -257,7 +244,7 @@ Rozwiązywanie problemów:
 
 Upewnij się, że Pula aplikacji nie jest w stanie *zatrzymania* .
 
-## <a name="sub-application-includes-a-handlers-section"></a>Aplikacja podrzędna zawiera sekcję \<obsługi>
+## <a name="sub-application-includes-a-handlers-section"></a>Podaplikacja zawiera \<handlers> sekcję
 
 * **Przeglądarka:** Błąd HTTP 500,19 — wewnętrzny błąd serwera
 
@@ -271,7 +258,7 @@ Rozwiązywanie problemów:
 
 Upewnij się, że plik *Web. config* aplikacji podrzędnej nie zawiera `<handlers>` sekcji lub aplikacja podrzędna nie dziedziczy programów obsługi aplikacji nadrzędnej.
 
-`<system.webServer>` Sekcja *pliku Web. config* aplikacji nadrzędnej jest umieszczona wewnątrz `<location>` elementu. <xref:System.Configuration.SectionInformation.InheritInChildApplications*> Właściwość jest ustawiona na `false` , aby wskazać, że ustawienia określone w [ \<lokalizacji>](/iis/manage/managing-your-configuration-settings/understanding-iis-configuration-delegation#the-concept-of-location) elementu nie są dziedziczone przez aplikacje, które znajdują się w podkatalogu aplikacji nadrzędnej. Aby uzyskać więcej informacji, zobacz <xref:host-and-deploy/aspnet-core-module>.
+`<system.webServer>`Sekcja *pliku Web. config* aplikacji nadrzędnej jest umieszczona wewnątrz `<location>` elementu. <xref:System.Configuration.SectionInformation.InheritInChildApplications*>Właściwość jest ustawiona na `false` , aby wskazać, że ustawienia określone w [\<location>](/iis/manage/managing-your-configuration-settings/understanding-iis-configuration-delegation#the-concept-of-location) elemencie nie są dziedziczone przez aplikacje, które znajdują się w podkatalogu aplikacji nadrzędnej. Aby uzyskać więcej informacji, zobacz <xref:host-and-deploy/aspnet-core-module>.
 
 ## <a name="stdout-log-path-incorrect"></a>Nieprawidłowa ścieżka dziennika stdout
 
@@ -285,7 +272,7 @@ Upewnij się, że plik *Web. config* aplikacji podrzędnej nie zawiera `<handler
 
 Rozwiązywanie problemów:
 
-* `stdoutLogFile` Ścieżka określona w `<aspNetCore>` elemencie *Web. config* nie istnieje. Aby uzyskać więcej informacji, zobacz [ASP.NET Core Module: Tworzenie i przekierowywanie dzienników](xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection).
+* `stdoutLogFile`Ścieżka określona w `<aspNetCore>` elemencie *Web. config* nie istnieje. Aby uzyskać więcej informacji, zobacz [ASP.NET Core Module: Tworzenie i przekierowywanie dzienników](xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection).
 
 * Użytkownik puli aplikacji nie ma dostępu do zapisu w ścieżce dziennika stdout.
 
@@ -314,19 +301,19 @@ Aby uzyskać więcej informacji, zobacz następujące tematy:
 
 W tym temacie opisano typowe błędy i przedstawiono porady dotyczące rozwiązywania problemów w przypadku hostowania aplikacji ASP.NET Core w usłudze Azure Apps i usługach IIS.
 
-Ogólne wskazówki dotyczące rozwiązywania problemów <xref:test/troubleshoot-azure-iis>znajdują się w temacie.
+Ogólne wskazówki dotyczące rozwiązywania problemów znajdują się w temacie <xref:test/troubleshoot-azure-iis> .
 
 Zbierz wymienione poniżej informacje.
 
 * Zachowanie przeglądarki (kod stanu i komunikat o błędzie)
 * Wpisy dziennika zdarzeń aplikacji
-  * Azure App Service &ndash; zobacz <xref:test/troubleshoot-azure-iis>.
+  * Azure App Service: zobacz <xref:test/troubleshoot-azure-iis> .
   * IIS
     1. Wybierz pozycję **Rozpocznij** w menu **systemu Windows** , wpisz *Podgląd zdarzeń*i naciśnij klawisz **Enter**.
-    1. Po otwarciu **Podgląd zdarzeń** rozwiń pozycję > **Dzienniki systemu Windows** **na pasku** bocznym.
+    1. Po otwarciu **Podgląd zdarzeń** rozwiń pozycję **Dzienniki systemu Windows** > **Application** na pasku bocznym.
 * Element stdout modułu ASP.NET Core i wpisy dziennika debugowania
-  * Azure App Service &ndash; zobacz <xref:test/troubleshoot-azure-iis>.
-  * Usługi &ndash; IIS postępuj zgodnie z instrukcjami w sekcjach [Tworzenie dziennika i przekierowanie](xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection) i [udoskonalone dzienniki diagnostyczne](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs) w temacie ASP.NET Core Module.
+  * Azure App Service: zobacz <xref:test/troubleshoot-azure-iis> .
+  * IIS: Postępuj zgodnie z instrukcjami w sekcjach [Tworzenie dziennika i przekierowanie](xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection) i [udoskonalone dzienniki diagnostyczne](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs) w temacie ASP.NET Core Module.
 
 Porównaj informacje o błędach z następującymi typowymi błędami. Jeśli zostanie znalezione dopasowanie, postępuj zgodnie z zaleceniami dotyczącymi rozwiązywania problemów.
 
@@ -348,9 +335,9 @@ Pliki inne niż systemowe w katalogu **C:\Windows\SysWOW64\inetsrv** nie są zac
 
 * **Przeglądarka:** Błąd HTTP 500,0 — błąd ładowania procedury obsługi ANCM w procesie
 
-* **Dziennik aplikacji:** Wywoływanie hostfxr w celu znalezienia procedury obsługi żądania przetworzenia nie powiodło się bez wyszukiwania natywnych zależności. Nie można znaleźć procedury obsługi żądania nieprzetwarzania. Przechwycono dane wyjściowe z wywołania hostfxr: nie można odnaleźć żadnej zgodnej wersji platformy. Nie znaleziono określonej struktury "Microsoft. AspNetCore. app" w wersji "{VERSION}-Preview\*-". Nie można uruchomić aplikacji "/LM/W3SVC/1416782824/ROOT", ErrorCode "0x8000FFFF".
+* **Dziennik aplikacji:** Wywoływanie hostfxr w celu znalezienia procedury obsługi żądania przetworzenia nie powiodło się bez wyszukiwania natywnych zależności. Nie można znaleźć procedury obsługi żądania nieprzetwarzania. Przechwycono dane wyjściowe z wywołania hostfxr: nie można odnaleźć żadnej zgodnej wersji platformy. Nie znaleziono określonej struktury "Microsoft. AspNetCore. app" w wersji "{VERSION}-Preview- \* ". Nie można uruchomić aplikacji "/LM/W3SVC/1416782824/ROOT", ErrorCode "0x8000FFFF".
 
-* **Dziennik stdout modułu ASP.NET Core:** Nie można znaleźć żadnej zgodnej wersji platformy. Nie znaleziono określonej struktury "Microsoft. AspNetCore. app" w wersji "{VERSION}-Preview\*-".
+* **Dziennik stdout modułu ASP.NET Core:** Nie można znaleźć żadnej zgodnej wersji platformy. Nie znaleziono określonej struktury "Microsoft. AspNetCore. app" w wersji "{VERSION}-Preview- \* ".
 
 Rozwiązywanie problemów:
 
@@ -377,17 +364,17 @@ Aby uzyskać więcej informacji, zobacz <xref:host-and-deploy/azure-apps/index#i
 
 * **Dziennik stdout modułu ASP.NET Core:** Plik dziennika jest tworzony, ale pusty.
 
-Ten scenariusz jest zalewkowany przez zestaw SDK podczas publikowania aplikacji samodzielnej. Zestaw SDK generuje błąd, jeśli identyfikator RID nie jest zgodny z obiektem docelowym platformy ( `win10-x64` na przykład `<PlatformTarget>x86</PlatformTarget>` RID z w pliku projektu).
+Ten scenariusz jest zalewkowany przez zestaw SDK podczas publikowania aplikacji samodzielnej. Zestaw SDK generuje błąd, jeśli identyfikator RID nie jest zgodny z obiektem docelowym platformy (na przykład `win10-x64` RID z `<PlatformTarget>x86</PlatformTarget>` w pliku projektu).
 
 Rozwiązywanie problemów:
 
-W przypadku wdrożenia opartego na architekturze`<PlatformTarget>x86</PlatformTarget>`x86 () Włącz pulę aplikacji usług IIS dla aplikacji 32-bitowych. W Menedżerze usług IIS Otwórz **Zaawansowane ustawienia** puli aplikacji i ustaw **wartość True**dla **aplikacji 32-bitowych** .
+W przypadku wdrożenia opartego na architekturze x86 ( `<PlatformTarget>x86</PlatformTarget>` ) Włącz pulę aplikacji usług IIS dla aplikacji 32-bitowych. W Menedżerze usług IIS Otwórz **Zaawansowane ustawienia** puli aplikacji i ustaw **wartość True**dla **aplikacji 32-bitowych** .
 
 ## <a name="platform-conflicts-with-rid"></a>Konflikty platformy z identyfikatorem RID
 
 * **Przeglądarka:** Błąd HTTP 502,5 — niepowodzenie procesu
 
-* **Dziennik aplikacji:** Nie można uruchomić procesu "MACHINE/WEBROOT/APPHOST/{ASSEMBLY}" z fizycznym\{elementem głównym "c: Path}" przy użyciu wiersza polecenia "\{" c: Path} {Assembly}.\' {exe | dll} "", ErrorCode = "0x80004005: FF.
+* **Dziennik aplikacji:** Nie można uruchomić procesu "MACHINE/WEBROOT/APPHOST/{ASSEMBLY}" z fizycznym elementem głównym "C: Path}" \{ \' przy użyciu wiersza polecenia "" c: \{ Path} {Assembly}. { exe | dll} "", ErrorCode = "0x80004005: FF.
 
 * **Dziennik stdout modułu ASP.NET Core:** Nieobsługiwany wyjątek: System. BadImageFormatException: nie można załadować pliku lub zestawu "{ASSEMBLY}. dll". Podjęto próbę załadowania programu z nieprawidłowym formatem.
 
@@ -449,9 +436,9 @@ Rozwiązywanie problemów:
 
   Aby uzyskać więcej informacji, zobacz [Instalowanie pakietu hostingu .NET Core](xref:host-and-deploy/iis/index#install-the-net-core-hosting-bundle).
 
-* Upewnij się, że **model** > **Identity** procesów **puli** > aplikacji ma wartość **ApplicationPoolIdentity** lub że niestandardowa tożsamość ma odpowiednie uprawnienia dostępu do folderu wdrożenia aplikacji.
+* Upewnij się, że **Application Pool** > **model procesów** puli aplikacji > **Identity** ma wartość **ApplicationPoolIdentity** lub że niestandardowa tożsamość ma odpowiednie uprawnienia dostępu do folderu wdrożenia aplikacji.
 
-* Jeśli odinstalowano pakiet hostingu ASP.NET Core i zainstalowano wcześniejszą wersję pakietu hostingu, plik *ApplicationHost. config* nie zawiera sekcji dla modułu ASP.NET Core. Otwórz *plik ApplicationHost. config* w lokalizacji *% windir%/system32/inetsrv/config* i `<configuration><configSections><sectionGroup name="system.webServer">` Znajdź grupę sekcji. Jeśli w grupie sekcji brakuje sekcji modułu ASP.NET Core, Dodaj element Section:
+* Jeśli odinstalowano pakiet hostingu ASP.NET Core i zainstalowano wcześniejszą wersję pakietu hostingu, plik *ApplicationHost. config* nie zawiera sekcji dla modułu ASP.NET Core. Otwórz *plik ApplicationHost. config* w lokalizacji *% windir%/system32/inetsrv/config* i Znajdź `<configuration><configSections><sectionGroup name="system.webServer">` grupę sekcji. Jeśli w grupie sekcji brakuje sekcji modułu ASP.NET Core, Dodaj element Section:
 
   ```xml
   <section name="aspNetCore" overrideModeDefault="Allow" />
@@ -463,7 +450,7 @@ Rozwiązywanie problemów:
 
 * **Przeglądarka:** Błąd HTTP 502,5 — niepowodzenie procesu
 
-* **Dziennik aplikacji:** Nie można uruchomić procesu "MACHINE/WEBROOT/APPHOST/{ASSEMBLY}" z fizycznym\{elementem głównym\' "C: Path}" przy użyciu wiersza polecenia "" {...} " ", ErrorCode =" 0x80070002:0.
+* **Dziennik aplikacji:** Nie można uruchomić procesu "MACHINE/WEBROOT/APPHOST/{ASSEMBLY}" z fizycznym elementem głównym "C: \{ Path} \' " przy użyciu wiersza polecenia "" {...} " ", ErrorCode =" 0x80070002:0.
 
 * **Dziennik stdout modułu ASP.NET Core:** Plik dziennika jest tworzony, ale pusty.
 
@@ -471,9 +458,9 @@ Rozwiązywanie problemów:
 
 * Upewnij się, że aplikacja działa lokalnie na Kestrel. Niepowodzenie procesu może być wynikiem problemu w aplikacji. Aby uzyskać więcej informacji, zobacz <xref:test/troubleshoot-azure-iis>.
 
-* Sprawdź atrybut *processPath* w `<aspNetCore>` elemencie w *pliku Web. config* , aby upewnić się, `dotnet` że jest to wdrożenie zależne od platformy (FDD `.\{ASSEMBLY}.exe` ) lub [wdrożenie samodzielne (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd).
+* Sprawdź atrybut *processPath* w `<aspNetCore>` elemencie w *pliku Web. config* , aby upewnić się, że jest to `dotnet` wdrożenie zależne od platformy (FDD) lub `.\{ASSEMBLY}.exe` [wdrożenie samodzielne (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd).
 
-* W przypadku elementu FDD program *dotnet. exe* może być niedostępny za pośrednictwem ustawień ścieżki. Upewnij się, że w ustawieniach ścieżki systemowej istnieje wartość *C:\Program Files\dotnet\\ * .
+* W przypadku elementu FDD program *dotnet. exe* może być niedostępny za pośrednictwem ustawień ścieżki. Upewnij się, że w ustawieniach ścieżki systemowej istnieje wartość *C:\Program Files\dotnet \\ * .
 
 * W przypadku programu FDD program *dotnet. exe* może być niedostępny dla tożsamości użytkownika puli aplikacji. Upewnij się, że tożsamość użytkownika puli aplikacji ma dostęp do katalogu *C:\Program Files\dotnet* . Upewnij się, że nie ma skonfigurowanych reguł odmowy dla tożsamości użytkownika puli aplikacji w *folderze C:\Program Files\dotnet* i katalogach aplikacji.
 
@@ -487,19 +474,19 @@ Rozwiązywanie problemów:
 
   Jeśli jest wymagane określone środowisko uruchomieniowe, Pobierz środowisko uruchomieniowe z [archiwów pobierania programu .NET](https://dotnet.microsoft.com/download/archives) i zainstaluj je w systemie. Aby ukończyć instalację, należy ponownie uruchomić system lub ponownie uruchomić usługi IIS, wykonując polecenie **net stop** , a następnie **net start W3SVC** z wiersza polecenia.
 
-## <a name="incorrect-arguments-of-aspnetcore-element"></a>Nieprawidłowe argumenty elementu \<aspNetCore>
+## <a name="incorrect-arguments-of-aspnetcore-element"></a>Nieprawidłowe argumenty \<aspNetCore> elementu
 
 * **Przeglądarka:** Błąd HTTP 502,5 — niepowodzenie procesu
 
-* **Dziennik aplikacji:** Nie można uruchomić procesu "MACHINE/WEBROOT/APPHOST/{ASSEMBLY}" z fizycznym\{elementem głównym\' "C: Path}" przy użyciu elementu CommandLine "" dotnet ". \{Assembly}. dll ", ErrorCode =" 0x80004005:80008081.
+* **Dziennik aplikacji:** Nie można uruchomić procesu "MACHINE/WEBROOT/APPHOST/{ASSEMBLY}" z fizycznym elementem głównym "C: \{ Path}" \' przy użyciu elementu CommandLine "" dotnet ". \{ ASSEMBLY}. dll ", ErrorCode =" 0x80004005:80008081.
 
-* **Dziennik stdout modułu ASP.NET Core:** Aplikacja do wykonania nie istnieje: "ścieżka\{zestawu}. dll"
+* **Dziennik stdout modułu ASP.NET Core:** Aplikacja do wykonania nie istnieje: "ścieżka \{ zestawu}. dll"
 
 Rozwiązywanie problemów:
 
 * Upewnij się, że aplikacja działa lokalnie na Kestrel. Niepowodzenie procesu może być wynikiem problemu w aplikacji. Aby uzyskać więcej informacji, zobacz <xref:test/troubleshoot-azure-iis>.
 
-* Sprawdź atrybut *arguments* w `<aspNetCore>` elemencie w *pliku Web. config* , aby upewnić się, że jest ( `.\{ASSEMBLY}.dll` a) dla wdrożenia zależnego od platformy (FDD); lub (b) nieobecny, pusty ciąg (`arguments=""`) lub lista argumentów aplikacji (`arguments="{ARGUMENT_1}, {ARGUMENT_2}, ... {ARGUMENT_X}"`) dla wdrożenia samodzielnego (SCD).
+* Sprawdź atrybut *arguments* w `<aspNetCore>` elemencie w *pliku Web. config* , aby upewnić się, że jest (a) `.\{ASSEMBLY}.dll` dla wdrożenia zależnego od platformy (FDD); lub (b) nie istnieje, pusty ciąg ( `arguments=""` ) lub lista argumentów aplikacji ( `arguments="{ARGUMENT_1}, {ARGUMENT_2}, ... {ARGUMENT_X}"` ) dla wdrożenia samodzielnego (SCD).
 
 Rozwiązywanie problemów:
 
@@ -517,7 +504,7 @@ Rozwiązywanie problemów:
 
 Upewnij się, że Pula aplikacji nie jest w stanie *zatrzymania* .
 
-## <a name="sub-application-includes-a-handlers-section"></a>Aplikacja podrzędna zawiera sekcję \<obsługi>
+## <a name="sub-application-includes-a-handlers-section"></a>Podaplikacja zawiera \<handlers> sekcję
 
 * **Przeglądarka:** Błąd HTTP 500,19 — wewnętrzny błąd serwera
 
@@ -533,13 +520,13 @@ Upewnij się, że plik *Web. config* aplikacji podrzędnej nie zawiera `<handler
 
 * **Przeglądarka:** Aplikacja reaguje zwykle.
 
-* **Dziennik aplikacji:** Ostrzeżenie: nie można utworzyć stdoutLogFile \\? \{Ścieżka} \ path_doesnt_exist \ STDOUT_ {proces ID} _ {timestamp}. log, ErrorCode =-2147024893.
+* **Dziennik aplikacji:** Ostrzeżenie: nie można utworzyć stdoutLogFile \\ ? \{ ŚCIEŻKA} \ path_doesnt_exist \ stdout_ {proces ID} _ {TIMESTAMP}. log, ErrorCode =-2147024893.
 
 * **Dziennik stdout modułu ASP.NET Core:** Plik dziennika nie został utworzony.
 
 Rozwiązywanie problemów:
 
-* `stdoutLogFile` Ścieżka określona w `<aspNetCore>` elemencie *Web. config* nie istnieje. Aby uzyskać więcej informacji, zobacz [ASP.NET Core Module: Tworzenie i przekierowywanie dzienników](xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection).
+* `stdoutLogFile`Ścieżka określona w `<aspNetCore>` elemencie *Web. config* nie istnieje. Aby uzyskać więcej informacji, zobacz [ASP.NET Core Module: Tworzenie i przekierowywanie dzienników](xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection).
 
 * Użytkownik puli aplikacji nie ma dostępu do zapisu w ścieżce dziennika stdout.
 
@@ -547,7 +534,7 @@ Rozwiązywanie problemów:
 
 * **Przeglądarka:** Błąd HTTP 502,5 — niepowodzenie procesu
 
-* **Dziennik aplikacji:** Utworzono proces "MACHINE/WEBROOT/APPHOST/{ASSEMBLY}" z fizycznym głównym\{katalogiem "\' c: Path}" przy użyciu polecenia CommandLine\{""\{c: Path}. {exe | dll} "", ale wystąpiła awaria lub nie nasłuchuje na danym porcie "{PORT}", ErrorCode = "{ERROR}"
+* **Dziennik aplikacji:** Utworzono proces "MACHINE/WEBROOT/APPHOST/{ASSEMBLY}" z fizycznym głównym katalogiem "C: \{ Path}" \' przy użyciu elementu CommandLine "" c: \{ Path} \{ . { exe | dll} "", ale wystąpiła awaria lub nie nasłuchuje na danym porcie "{PORT}", ErrorCode = "{ERROR}"
 
 * **Dziennik stdout modułu ASP.NET Core:** Plik dziennika jest tworzony, ale pusty.
 

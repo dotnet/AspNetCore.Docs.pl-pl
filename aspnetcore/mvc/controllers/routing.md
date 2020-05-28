@@ -92,7 +92,7 @@ endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}"
 > Routing jest konfigurowany przy użyciu programu <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseRouting*> i <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*> oprogramowania pośredniczącego. Aby użyć kontrolerów:
 >
 > * Wywołaj <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers*> wewnątrz `UseEndpoints` , aby zmapować kontrolery z [routingiem atrybutów](#ar) .
-> * Wywołaj <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*> lub <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*> , aby zamapować kontrolery z [Konwencją routingu](#cr) .
+> * Wywołaj <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*> lub <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*> , aby zamapować zarówno kontrolery z [Konwencją routingu](#cr) , jak i kontrolery [przypisane do atrybutów](#ar) .
 
 <a name="routing-conventional-ref-label"></a>
 <a name="crd"></a>
@@ -257,7 +257,7 @@ Interfejsy API REST powinny używać routingu atrybutów do modelowania funkcjon
 
 Funkcja routingu atrybutów używa zestawu atrybutów do mapowania akcji bezpośrednio do szablonów tras. Poniższy `StartUp.Configure` kod jest typowy dla interfejsu API REST i jest używany w następnym przykładzie:
 
-[!code-csharp[](routing/samples/3.x/main/StartupApi.cs?name=snippet)]
+[!code-csharp[](routing/samples/3.x/main/StartupAPI.cs?name=snippet)]
 
 W powyższym kodzie <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers*> jest wywoływana w `UseEndpoints` celu mapowania kontrolerów z routingiem atrybutu.
 
@@ -272,10 +272,7 @@ W poniższym przykładzie:
 
 W tym przykładzie przedstawiono najważniejsze różnice programistyczne między routingiem atrybutów i [routingiem konwencjonalnym](#cr). Routing atrybutów wymaga więcej danych wejściowych w celu określenia trasy. Konwencjonalne trasy domyślne obsługuje trasy bardziej zwięzłie. Jednak Routing atrybutu zezwala na ścisłą kontrolę nad tym, które szablony tras mają zastosowanie do poszczególnych [akcji](#action).
 
-W poniższym kodzie:
-
-* Nazwa kontrolera i nazwy akcji nie odgrywają **żadnej** roli, w której akcja jest dopasowana.
-* Dopasowuje te same adresy URL, co w poprzednim przykładzie:
+W przypadku routingu atrybutów nazwy kontrolerów i akcji nie odgrywają części, w której akcja jest dopasowywana, chyba że zostanie użyta [Zastępowanie tokenu](#routing-token-replacement-templates-ref-label) . Poniższy przykład dopasowuje te same adresy URL, co w poprzednim przykładzie:
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/MyDemoController.cs?name=snippet)]
 
@@ -655,8 +652,6 @@ Trasy atrybutów obsługują tę samą składnię wbudowaną co konwencjonalne t
 [!code-csharp[](routing/samples/3.x/main/Controllers/ProductsController.cs?name=snippet8&highlight=3)]
 
 W poprzednim kodzie, `[HttpPost("product/{id:int}")]` stosuje ograniczenie trasy. `ProductsController.ShowProduct`Akcja jest dopasowywana tylko przez ścieżki URL, takie jak `/product/3` . Część szablonu trasy `{id:int}` ogranicza ten segment tylko do liczb całkowitych.
-
-[!code-csharp[](routing/samples/3.x/main/Controllers/HomeController.cs?name=snippet24)]
 
 Aby uzyskać szczegółowy opis składni szablonu trasy, zobacz [odwołanie do szablonu trasy](xref:fundamentals/routing#route-template-reference) .
 

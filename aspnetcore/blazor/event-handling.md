@@ -65,7 +65,7 @@ W przypadku niektórych zdarzeń dozwolone są typy argumentów zdarzeń. Okreś
 
 Obsługiwane <xref:System.EventArgs> są przedstawione w poniższej tabeli.
 
-| Wydarzenie            | Klasa                | Zdarzenia i uwagi dotyczące modelu DOM |
+| Zdarzenie            | Klasa                | Zdarzenia i uwagi dotyczące modelu DOM |
 | ---
 title: "ASP.NET Core Blazor obsługi zdarzeń" Author: Description: "informacje o Blazor funkcjach obsługi zdarzeń, takich jak typy argumentów zdarzeń, wywołania zwrotne zdarzeń i zarządzanie domyślnymi zdarzeniami przeglądarki".
 monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
@@ -267,7 +267,7 @@ monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
 Więcej informacji zawierają następujące zasoby:
 
 * [Klasy EventArgs w źródle odwołania ASP.NET Core (gałąź dotnet/aspnetcore Release/3.1)](https://github.com/dotnet/aspnetcore/tree/release/3.1/src/Components/Web/src/Web).
-* [Powiadomienia MDN Web docs: GlobalEventHandlers](https://developer.mozilla.org/docs/Web/API/GlobalEventHandlers) &ndash; Zawiera informacje o tym, które elementy HTML obsługują każde wydarzenie DOM.
+* [Powiadomienia MDN Web docs: GlobalEventHandlers](https://developer.mozilla.org/docs/Web/API/GlobalEventHandlers): zawiera informacje o tym, które elementy HTML obsługują każde wydarzenie dom.
 
 ## <a name="lambda-expressions"></a>Wyrażenia lambda
 

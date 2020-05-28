@@ -46,8 +46,8 @@ Aby zachować stan poza pojedynczym obwodem, *nie należy przechowywać danych w
 
 Trwałość danych jest zwykle wymagana tylko w przypadku stanu wysokiego poziomu, który użytkownicy wystawią nakłady na tworzenie. W poniższych przykładach stan utrwalania polega na zapisywaniu czasu lub pomocy w działaniach komercyjnych:
 
-* Wieloetapowy formularz WebForm &ndash; , który jest czasochłonny dla użytkownika, aby ponownie wprowadzić dane dla kilku ukończonych kroków procesu wieloetapowego, jeśli ich stan zostanie utracony. Użytkownik utraci stan w tym scenariuszu, jeśli przejdą do formularza wieloetapowego i wrócisz do formularza później.
-* Koszyk &ndash; można obsłużyć wszelkie komercyjnie ważne składniki aplikacji, które reprezentują potencjalne przychody. Użytkownik, który straci swój stan, a tym samym koszyk, może zakupić mniejszą liczbę produktów lub usług w momencie powrotu do lokacji w przyszłości.
+* Wieloetapowy formularz WebForm: czasochłonny użytkownik może ponownie wprowadzić dane dla kilku ukończonych kroków procesu wieloetapowego, jeśli ich stan zostanie utracony. Użytkownik utraci stan w tym scenariuszu, jeśli przejdą do formularza wieloetapowego i wrócisz do formularza później.
+* Koszyk: każdy handlowy istotny składnik aplikacji, który reprezentuje potencjalne dochody, może być utrzymywany. Użytkownik, który straci swój stan, a tym samym koszyk, może zakupić mniejszą liczbę produktów lub usług w momencie powrotu do lokacji w przyszłości.
 
 Zwykle nie jest konieczne zachowywanie stanu łatwego ponownego tworzenia, takiego jak wprowadzona nazwa użytkownika do okna dialogowego logowania, które nie zostało przesłane.
 

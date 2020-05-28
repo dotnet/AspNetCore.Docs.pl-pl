@@ -28,14 +28,14 @@ Dostawca CSP jest obsługiwany w większości nowoczesnych przeglądarek klasycz
 
 Określ w minimalny sposób następujące dyrektywy i źródła dla Blazor aplikacji. Dodaj dodatkowe dyrektywy i źródła zgodnie z wymaganiami. Poniższe dyrektywy są używane w sekcji [stosowanie zasad](#apply-the-policy) w tym artykule, w której znajdują się przykładowe zasady zabezpieczeń dla Blazor zestawu webassembly i Blazor serwera:
 
-* [podstawowy identyfikator URI](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/base-uri) &ndash; Ogranicza adresy URL `<base>` tagu strony. Określ, `self` Aby wskazać, że pochodzenie aplikacji, w tym schemat i numer portu, jest prawidłowym źródłem.
-* [Block-All-Mixed-Content](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/block-all-mixed-content) &ndash; Uniemożliwia ładowanie mieszanej zawartości HTTP i HTTPS.
-* [default-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/default-src) &ndash; Wskazuje rezerwę na dyrektywy źródłowe, które nie są jawnie określone przez zasady. Określ, `self` Aby wskazać, że pochodzenie aplikacji, w tym schemat i numer portu, jest prawidłowym źródłem.
-* [img-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/img-src) &ndash; Wskazuje prawidłowe źródła obrazów.
+* [Base-URI](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/base-uri): ogranicza adresy URL `<base>` tagu strony. Określ, `self` Aby wskazać, że pochodzenie aplikacji, w tym schemat i numer portu, jest prawidłowym źródłem.
+* [Zablokuj wszystko-zawartość](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/block-all-mixed-content): zapobiega ładowaniu mieszanej zawartości http i https.
+* [default-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/default-src): wskazuje rezerwę dla dyrektyw źródłowych, które nie są jawnie określone przez zasady. Określ, `self` Aby wskazać, że pochodzenie aplikacji, w tym schemat i numer portu, jest prawidłowym źródłem.
+* [img-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/img-src): wskazuje prawidłowe źródła obrazów.
   * Określ `data:` , aby zezwolić na ładowanie obrazów z `data:` adresów URL.
   * Określ `https:` , aby zezwolić na ładowanie obrazów z punktów końcowych https.
-* [obiekt-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/object-src) &ndash; Wskazuje prawidłowe źródła dla `<object>` tagów, `<embed>` i `<applet>` . Określ `none` , aby uniemożliwić wszystkie źródła adresów URL.
-* [skrypt-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/script-src) &ndash; Wskazuje prawidłowe źródła dla skryptów.
+* [obiekt-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/object-src): wskazuje prawidłowe źródła dla `<object>` tagów, `<embed>` i `<applet>` . Określ `none` , aby uniemożliwić wszystkie źródła adresów URL.
+* [skrypt-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/script-src): wskazuje prawidłowe źródła dla skryptów.
   * Określ `https://stackpath.bootstrapcdn.com/` Źródło hosta dla skryptów Bootstrap.
   * Określ, `self` Aby wskazać, że pochodzenie aplikacji, w tym schemat i numer portu, jest prawidłowym źródłem.
   * W Blazor aplikacji webassembly:
@@ -45,11 +45,11 @@ Określ w minimalny sposób następujące dyrektywy i źródła dla Blazor aplik
       * `sha256-v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA=`
     * Określ `unsafe-eval` użycie `eval()` i metody tworzenia kodu z ciągów.
   * W Blazor aplikacji serwera określ `sha256-34WLX60Tw3aG6hylk0plKbZZFXCuepeQ6Hu7OqRf8PI=` skrót dla skryptu wbudowanego, który wykonuje wykrywanie powrotu dla arkuszy stylów.
-* [styl — src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/style-src) &ndash; Wskazuje prawidłowe źródła arkuszy stylów.
+* [styl-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/style-src): wskazuje prawidłowe źródła dla arkuszy stylów.
   * Określ `https://stackpath.bootstrapcdn.com/` Źródło hosta dla arkuszy stylów ładowania początkowego.
   * Określ, `self` Aby wskazać, że pochodzenie aplikacji, w tym schemat i numer portu, jest prawidłowym źródłem.
   * Określ `unsafe-inline` , aby zezwolić na używanie wbudowanych stylów. Deklaracja wbudowana jest wymagana dla interfejsu użytkownika w Blazor aplikacjach serwerowych do ponownego połączenia klienta i serwera po początkowym żądaniu. W przyszłej wersji style wbudowane mogą zostać usunięte, aby `unsafe-inline` nie były już wymagane.
-* [uaktualnienie-niezabezpieczone — żądania](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/upgrade-insecure-requests) &ndash; Wskazuje, że adresy URL zawartości ze źródeł niezabezpieczonych (HTTP) powinny zostać bezpiecznie pobrane za pośrednictwem protokołu HTTPS.
+* [uaktualnienie-niezabezpieczone-żądania](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/upgrade-insecure-requests): wskazuje, że adresy URL zawartości z źródeł niezabezpieczonych (http) powinny zostać bezpiecznie pobrane za pośrednictwem protokołu HTTPS.
 
 Powyższe dyrektywy są obsługiwane przez wszystkie przeglądarki z wyjątkiem programu Microsoft Internet Explorer.
 

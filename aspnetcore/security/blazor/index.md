@@ -55,7 +55,7 @@ Wbudowana <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStat
 
 <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider>to podstawowa usługa używana przez <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> składnik i <xref:Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState> składnik do uzyskiwania stanu uwierzytelniania.
 
-Zwykle nie są używane <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> bezpośrednio. Użyj [AuthorizeView składnika](#authorizeview-component) lub [zadania \<>AuthenticationState zadań](#expose-the-authentication-state-as-a-cascading-parameter) , które opisano w dalszej części tego artykułu. Główną wadą zwrotu z używania <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> bezpośrednio jest to, że składnik nie jest automatycznie powiadamiany o zmianach danych stanu uwierzytelniania.
+Zwykle nie są używane <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> bezpośrednio. Użyj [składnika AuthorizeView](#authorizeview-component) lub podejścia [do \<AuthenticationState> zadań](#expose-the-authentication-state-as-a-cascading-parameter) opisanych w dalszej części tego artykułu. Główną wadą zwrotu z używania <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> bezpośrednio jest to, że składnik nie jest automatycznie powiadamiany o zmianach danych stanu uwierzytelniania.
 
 <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider>Usługa może udostępniać dane bieżącego użytkownika <xref:System.Security.Claims.ClaimsPrincipal> , jak pokazano w następującym przykładzie:
 
@@ -76,7 +76,7 @@ Zwykle nie są używane <xref:Microsoft.AspNetCore.Components.Authorization.Auth
     <ul>
         @foreach (var claim in _claims)
         {
-            <li>@claim.Type &ndash; @claim.Value</li>
+            <li>@claim.Type: @claim.Value</li>
         }
     </ul>
 }
@@ -467,7 +467,7 @@ Aby uzyskać więcej informacji, zobacz artykuły poniżej <xref:security/blazor
 
 Typowe błędy:
 
-* **Autoryzacja wymaga parametru kaskadowego typu Task \< AuthenticationState>. Rozważ użycie CascadingAuthenticationState, aby to zrobić.**
+* **Autoryzacja wymaga kaskadowego parametru typu zadanie \<AuthenticationState> . Rozważ użycie CascadingAuthenticationState, aby to zrobić.**
 
 * **`null`Odebrano wartość dla`authenticationStateTask`**
 

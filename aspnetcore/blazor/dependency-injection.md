@@ -220,8 +220,8 @@ System DI jest oparty na systemie DI w ASP.NET Core. Aby uzyskać więcej inform
 
 Po dodaniu usług do kolekcji usług należy wstrzyknąć usługi do składników za pomocą dyrektywy [ \@ wstrzykiwania](xref:mvc/views/razor#inject) Razor . [`@inject`](xref:mvc/views/razor#inject)ma dwa parametry:
 
-* Wpisz &ndash; Typ usługi do dodania.
-* Właściwość &ndash; Nazwa właściwości otrzymującej wstrzykiwanej usługi App Service. Właściwość nie wymaga ręcznego tworzenia. Kompilator tworzy właściwość.
+* Typ: typ usługi do dodania.
+* Property: Nazwa właściwości otrzymującej wstrzykiwaną usługę App Service. Właściwość nie wymaga ręcznego tworzenia. Kompilator tworzy właściwość.
 
 Aby uzyskać więcej informacji, zobacz <xref:mvc/views/dependency-injection>.
 

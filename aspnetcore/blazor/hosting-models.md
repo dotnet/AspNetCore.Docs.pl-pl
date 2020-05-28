@@ -95,7 +95,7 @@ BlazorAplikacja składa się z elementów wielokrotnego użytku interfejsu użyt
 * Włączono tekst HTML (podczas renderowania prerenderingu &dagger; ).
 * Służy do wydajnej aktualizacji znaczników podczas normalnego renderowania.
 
-&dagger;*Renderowanie prerenderingu* &ndash; Żądany Razor składnik jest kompilowany na serwerze do statycznego kodu HTML i wysyłany do klienta, gdzie jest renderowany dla użytkownika. Po nawiązaniu połączenia między klientem a serwerem, statycznie renderowane elementy składnika są zastępowane elementami interaktywnymi. Renderowanie w czasie konwersji sprawia, że aplikacja będzie bardziej odpowiadać użytkownikowi.
+&dagger;*Renderowanie*wstępnie: żądany Razor składnik jest kompilowany na serwerze do statycznego kodu HTML i wysyłany do klienta, gdzie jest renderowany dla użytkownika. Po nawiązaniu połączenia między klientem a serwerem, statycznie renderowane elementy składnika są zastępowane elementami interaktywnymi. Renderowanie w czasie konwersji sprawia, że aplikacja będzie bardziej odpowiadać użytkownikowi.
 
 Aktualizacja interfejsu użytkownika w programie Blazor jest wyzwalana przez:
 

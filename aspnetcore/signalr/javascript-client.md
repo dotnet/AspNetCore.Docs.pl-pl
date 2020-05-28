@@ -46,7 +46,7 @@ npm instaluje zawartość pakietu w folderze *node_modules \\ @aspnet\signalr\di
 
 ::: moniker-end
 
-Odwołuje się do SignalR klienta JavaScript w `<script>` elemencie. Na przykład:
+Odwołuje się do SignalR klienta JavaScript w `<script>` elemencie. Przykład:
 
 ```html
 <script src="~/lib/signalr/signalr.js"></script>
@@ -54,7 +54,7 @@ Odwołuje się do SignalR klienta JavaScript w `<script>` elemencie. Na przykła
 
 ### <a name="use-a-content-delivery-network-cdn"></a>Użyj Content Delivery Network (CDN)
 
-Aby korzystać z biblioteki klienta bez wymagania wstępnego npm, odwołując się do kopii biblioteki klienckiej hostowanej w usłudze CDN. Na przykład:
+Aby korzystać z biblioteki klienta bez wymagania wstępnego npm, odwołując się do kopii biblioteki klienckiej hostowanej w usłudze CDN. Przykład:
 
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.3/signalr.min.js"></script>
@@ -141,10 +141,10 @@ SignalROkreśla, która metoda klienta ma być wywoływana przez dopasowanie naz
 
 Skonfiguruj śledzenie dzienników po stronie klienta, przekazując Rejestrator i typ zdarzenia, które będą rejestrowane po nawiązaniu połączenia. Komunikaty są rejestrowane z określonym poziomem dziennika i wyższym. Dostępne poziomy dzienników są następujące:
 
-* `signalR.LogLevel.Error`&ndash;Komunikaty o błędach. Rejestruje `Error` tylko komunikaty.
-* `signalR.LogLevel.Warning`&ndash;Komunikaty ostrzegawcze dotyczące potencjalnych błędów. Dzienniki `Warning` i `Error` komunikaty.
-* `signalR.LogLevel.Information`&ndash;Komunikaty o stanie bez błędów. Dzienniki `Information` , `Warning` i i `Error` wiadomości.
-* `signalR.LogLevel.Trace`&ndash;Komunikaty śledzenia. Rejestruje wszystko, w tym dane przesyłane między koncentratorem a klientem.
+* `signalR.LogLevel.Error`: Komunikaty o błędach. Rejestruje `Error` tylko komunikaty.
+* `signalR.LogLevel.Warning`: Komunikaty ostrzegawcze dotyczące potencjalnych błędów. Dzienniki `Warning` i `Error` komunikaty.
+* `signalR.LogLevel.Information`: Komunikaty o stanie bez błędów. Dzienniki `Information` , `Warning` i i `Error` wiadomości.
+* `signalR.LogLevel.Trace`: Komunikaty śledzenia. Rejestruje wszystko, w tym dane przesyłane między koncentratorem a klientem.
 
 Użyj metody [configureLogging](/javascript/api/%40aspnet/signalr/hubconnectionbuilder#configurelogging) w [HubConnectionBuilder](/javascript/api/%40aspnet/signalr/hubconnectionbuilder) , aby skonfigurować poziom rejestrowania. Komunikaty są rejestrowane w konsoli przeglądarki.
 

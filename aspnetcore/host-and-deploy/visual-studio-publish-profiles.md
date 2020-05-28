@@ -1,24 +1,11 @@
 ---
-title: Profile publikacji programu Visual Studio (. pubxml) dla wdrożenia aplikacji ASP.NET Core
-author: rick-anderson
-description: Dowiedz się, jak tworzyć profile publikowania w programie Visual Studio i używać ich do zarządzania wdrożeniami aplikacji ASP.NET Core w różnych celach.
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 05/14/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: host-and-deploy/visual-studio-publish-profiles
-ms.openlocfilehash: 42d790ad4942ea238fb3bbe56cb92ae4a26ddc2d
-ms.sourcegitcommit: e20653091c30e0768c4f960343e2c3dd658bba13
-ms.translationtype: MT
-ms.contentlocale: pl-PL
-ms.lasthandoff: 05/16/2020
-ms.locfileid: "83439009"
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
 ---
 # <a name="visual-studio-publish-profiles-pubxml-for-aspnet-core-app-deployment"></a>Profile publikacji programu Visual Studio (. pubxml) dla wdrożenia aplikacji ASP.NET Core
 
@@ -26,7 +13,7 @@ Autorzy [Sayed Ibrahim Hashimi](https://github.com/sayedihashimi) i [Rick Anders
 
 Ten dokument koncentruje się na używaniu programu Visual Studio 2019 lub nowszego do tworzenia profilów publikowania i używania ich. Profile publikowania utworzone za pomocą programu Visual Studio mogą być używane z użyciem programu MSBuild i programu Visual Studio. Instrukcje dotyczące publikowania na platformie Azure znajdują się w temacie <xref:tutorials/publish-to-azure-webapp-using-vs> .
 
-`dotnet new mvc`Polecenie tworzy plik projektu zawierający następujący [ \< element> projektu](/visualstudio/msbuild/project-element-msbuild)na poziomie głównym:
+`dotnet new mvc`Polecenie tworzy plik projektu zawierający następujący [ \<Project> element](/visualstudio/msbuild/project-element-msbuild)poziomu głównego:
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk.Web">
@@ -36,7 +23,7 @@ Ten dokument koncentruje się na używaniu programu Visual Studio 2019 lub nowsz
 
 Atrybut poprzedzającego `<Project>` elementu `Sdk` importuje odpowiednio [Właściwości](/visualstudio/msbuild/msbuild-properties) i [elementy docelowe](/visualstudio/msbuild/msbuild-targets) programu MSBuild z *$ (MSBuildSDKsPath) \Microsoft.NET.Sdk.Web\Sdk\Sdk.props* i *$ (MSBuildSDKsPath) \Microsoft.NET.Sdk.Web\Sdk\Sdk.targets*. Domyślną lokalizacją programu `$(MSBuildSDKsPath)` (z programem Visual Studio 2019 Enterprise) jest folder *% ProgramFiles (x86)% \ Microsoft Visual Studio\2019\Enterprise\MSBuild\Sdks* .
 
-`Microsoft.NET.Sdk.Web`([Zestaw SDK dla sieci Web](xref:razor-pages/web-sdk)) zależy od innych zestawów SDK, w tym `Microsoft.NET.Sdk` ([zestaw .NET Core SDK](/dotnet/core/project-sdk/msbuild-props)) i `Microsoft.NET.Sdk.Razor` ([SDK Razor](xref:razor-pages/sdk)). Zaimportowano właściwości i obiekty docelowe programu MSBuild skojarzone z poszczególnymi zależnymi zestawem SDK. Opublikuj obiekty docelowe zaimportuj odpowiedni zbiór obiektów docelowych na podstawie użytej metody publikacji.
+`Microsoft.NET.Sdk.Web`([Zestaw SDK dla sieci Web](xref:razor-pages/web-sdk)) zależy od innych zestawów SDK, w tym `Microsoft.NET.Sdk` ([zestaw .NET Core SDK](/dotnet/core/project-sdk/msbuild-props)) i `Microsoft.NET.Sdk.Razor` ([ Razor SDK](xref:razor-pages/sdk)). Zaimportowano właściwości i obiekty docelowe programu MSBuild skojarzone z poszczególnymi zależnymi zestawem SDK. Opublikuj obiekty docelowe zaimportuj odpowiedni zbiór obiektów docelowych na podstawie użytej metody publikacji.
 
 Gdy program MSBuild lub program Visual Studio ładuje projekt, wykonywane są następujące akcje wysokiego poziomu:
 
@@ -52,13 +39,13 @@ Po załadowaniu projektu są obliczane [elementy projektu MSBuild](/visualstudio
 
 ::: moniker range=">= aspnetcore-3.0"
 
-[Zestaw SDK sieci Web](xref:razor-pages/web-sdk) importuje [zestaw Razor SDK](xref:razor-pages/sdk). W związku z tym pliki zgodne ze wzorcami `**\*.cshtml` i `**\*.razor` również znajdują się na `Content` liście elementów.
+[Zestaw SDK sieci Web](xref:razor-pages/web-sdk) importuje [ Razor zestaw SDK](xref:razor-pages/sdk). W związku z tym pliki zgodne ze wzorcami `**\*.cshtml` i `**\*.razor` również znajdują się na `Content` liście elementów.
 
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-2.1 <= aspnetcore-2.2"
 
-[Zestaw SDK sieci Web](xref:razor-pages/web-sdk) importuje [zestaw Razor SDK](xref:razor-pages/sdk). W efekcie pliki zgodne z `**\*.cshtml` wzorcem są również uwzględnione na `Content` liście elementów.
+[Zestaw SDK sieci Web](xref:razor-pages/web-sdk) importuje [ Razor zestaw SDK](xref:razor-pages/sdk). W efekcie pliki zgodne z `**\*.cshtml` wzorcem są również uwzględnione na `Content` liście elementów.
 
 ::: moniker-end
 
@@ -76,7 +63,7 @@ Gdy projekt ASP.NET Core odwołuje się do `Microsoft.NET.Sdk.Web` pliku projekt
 
 ## <a name="basic-command-line-publishing"></a>Podstawowe publikowanie w wierszu polecenia
 
-Publikowanie w wierszu polecenia działa na wszystkich platformach obsługiwanych przez platformę .NET Core i nie wymaga programu Visual Studio. W poniższych przykładach polecenie interfejs wiersza polecenia platformy .NET Core [dotnet Publish](/dotnet/core/tools/dotnet-publish) jest uruchamiane z katalogu projektu (który zawiera plik *. csproj* ). Jeśli folder projektu nie jest bieżącym katalogiem roboczym, jawnie Przekaż ścieżkę do pliku projektu. Na przykład:
+Publikowanie w wierszu polecenia działa na wszystkich platformach obsługiwanych przez platformę .NET Core i nie wymaga programu Visual Studio. W poniższych przykładach polecenie interfejs wiersza polecenia platformy .NET Core [dotnet Publish](/dotnet/core/tools/dotnet-publish) jest uruchamiane z katalogu projektu (który zawiera plik *. csproj* ). Jeśli folder projektu nie jest bieżącym katalogiem roboczym, jawnie Przekaż ścieżkę do pliku projektu. Przykład:
 
 ```dotnetcli
 dotnet publish C:\Webs\Web1
@@ -309,10 +296,10 @@ msbuild {PATH}
     /p:Password={PASSWORD}
 ```
 
-* {PATH} &ndash; Ścieżka do pliku projektu aplikacji.
-* {PROFILE} &ndash; Nazwa profilu publikowania.
-* {USERNAME} &ndash; Nazwa użytkownika MSDeploy. {USERNAME} można znaleźć w profilu publikowania.
-* {PASSWORD} &ndash; Hasło MSDeploy. Uzyskaj {PASSWORD} z poziomu *{Profile}. Plik PublishSettings* . Pobierz *. Plik PublishSettings* z:
+* {PATH}: ścieżka do pliku projektu aplikacji.
+* {PROFILE}: Nazwa profilu publikowania.
+* {USERNAME}: Nazwa użytkownika MSDeploy. {USERNAME} można znaleźć w profilu publikowania.
+* {PASSWORD}: hasło MSDeploy. Uzyskaj {PASSWORD} z poziomu *{Profile}. Plik PublishSettings* . Pobierz *. Plik PublishSettings* z:
   * **Eksplorator rozwiązań**: wybierz pozycję **Wyświetl**  >  **Eksplorator chmury**. Połącz się ze swoją subskrypcją platformy Azure. Otwórz **App Services**. Kliknij prawym przyciskiem myszy aplikację. Wybierz pozycję **Pobierz profil publikowania**.
   * Azure Portal: wybierz pozycję **Pobierz profil publikowania** w panelu **Przegląd** aplikacji sieci Web.
 
@@ -471,7 +458,7 @@ Wyróżnione znaczniki w poniższym przykładzie pokazują:
 
 [!code-xml[](visual-studio-publish-profiles/samples/Web1.pubxml?highlight=18-23)]
 
-Poprzedni przykład używa `ResolvedFileToPublish` elementu, którego domyślnym zachowaniem jest zawsze kopiowanie plików dostarczonych w `Include` atrybucie do opublikowanej lokacji. Zastąp zachowanie domyślne, dołączając `<CopyToPublishDirectory>` element podrzędny z tekstem wewnętrznym obu `Never` lub `PreserveNewest` . Na przykład:
+Poprzedni przykład używa `ResolvedFileToPublish` elementu, którego domyślnym zachowaniem jest zawsze kopiowanie plików dostarczonych w `Include` atrybucie do opublikowanej lokacji. Zastąp zachowanie domyślne, dołączając `<CopyToPublishDirectory>` element podrzędny z tekstem wewnętrznym obu `Never` lub `PreserveNewest` . Przykład:
 
 ```xml
 <ResolvedFileToPublish Include="..\ReadMe2.md">
@@ -507,12 +494,177 @@ Dodaj `<AllowUntrustedCertificate>` Właściwość o wartości `True` do profilu
 
 ## <a name="the-kudu-service"></a>Usługa kudu
 
-Aby wyświetlić pliki w Azure App Service wdrożenia aplikacji sieci Web, należy użyć [usługi kudu](https://github.com/projectkudu/kudu/wiki/Accessing-the-kudu-service). Dołącz `scm` token do nazwy aplikacji sieci Web. Na przykład:
+Aby wyświetlić pliki w Azure App Service wdrożenia aplikacji sieci Web, należy użyć [usługi kudu](https://github.com/projectkudu/kudu/wiki/Accessing-the-kudu-service). Dołącz `scm` token do nazwy aplikacji sieci Web. Przykład:
 
 | Adres URL                                    | Wynik       |
-| -------------------------------------- | ------------ |
-| `http://mysite.azurewebsites.net/`     | Aplikacja internetowa      |
-| `http://mysite.scm.azurewebsites.net/` | Usługa kudu |
+| ---
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+------------------- | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+------ | | `http://mysite.azurewebsites.net/`     | Aplikacja sieci Web | | `http://mysite.scm.azurewebsites.net/` | Usługa kudu |
 
 Wybierz element menu [konsoli debugowania](https://github.com/projectkudu/kudu/wiki/Kudu-console) , aby wyświetlić, edytować, usunąć lub dodać pliki.
 

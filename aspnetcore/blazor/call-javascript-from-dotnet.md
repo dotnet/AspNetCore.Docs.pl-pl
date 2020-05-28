@@ -70,8 +70,8 @@ Aby użyć <xref:Microsoft.JSInterop.IJSRuntime> abstrakcji, należy zastosować
 
 W aplikacji przykładowej po stronie klienta, która jest dołączona do tego tematu, dostępne są dwie funkcje języka JavaScript, które współdziałają z modelem DOM, aby odbierać dane wejściowe użytkownika i wyświetlać komunikat powitalny:
 
-* `showPrompt`&ndash;Generuje monit o zaakceptowanie danych wprowadzonych przez użytkownika (nazwę użytkownika) i zwraca nazwę obiektu wywołującego.
-* `displayWelcome`&ndash;Przypisuje Komunikat powitalny od wywołującego do obiektu Dom z `id` `welcome` .
+* `showPrompt`: Generuje monit o zaakceptowanie danych wprowadzonych przez użytkownika (nazwę użytkownika) i zwraca nazwę obiektu wywołującego.
+* `displayWelcome`: Przypisuje Komunikat powitalny od wywołującego do obiektu DOM z `id` `welcome` .
 
 *wwwroot/exampleJsInterop. js*:
 

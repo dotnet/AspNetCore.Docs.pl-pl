@@ -1,22 +1,11 @@
 ---
-title: Omówienie platformy ASP.NET Core MVC
-author: ardalis
-description: Dowiedz się, jak ASP.NET Core MVC to rozbudowana platforma służąca do tworzenia aplikacji sieci Web i interfejsów API przy użyciu wzorca projektowego modelu widoku.
-ms.author: riande
-ms.date: 02/12/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: mvc/overview
-ms.openlocfilehash: c6c7fd1d0cb7a462b3a13d5e31a50c704a00c0ef
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775469"
+title: Author: Description: MS. Author: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
 ---
 # <a name="overview-of-aspnet-core-mvc"></a>Omówienie platformy ASP.NET Core MVC
 
@@ -169,7 +158,7 @@ Twoja aplikacja może również używać [iniekcji zależności w plikach widoku
 
 ### <a name="filters"></a>Filtry
 
-[Filtry](controllers/filters.md) ułatwiają deweloperom hermetyzację zagadnień związanych z zmniejszeniem, takich jak obsługa wyjątków czy autoryzacja. Filtry umożliwiają uruchamianie niestandardowej logiki sprzed i po przetworzeniu dla metod akcji i można ją skonfigurować do uruchamiania w określonych punktach w potoku wykonywania dla danego żądania. Filtry mogą być stosowane do kontrolerów lub akcji jako atrybuty (lub mogą być uruchamiane globalnie). W strukturze uwzględniono kilka `Authorize`filtrów (takich jak). `[Authorize]`jest atrybutem używanym do tworzenia filtrów autoryzacji MVC.
+[Filtry](controllers/filters.md) ułatwiają deweloperom hermetyzację zagadnień związanych z zmniejszeniem, takich jak obsługa wyjątków czy autoryzacja. Filtry umożliwiają uruchamianie niestandardowej logiki sprzed i po przetworzeniu dla metod akcji i można ją skonfigurować do uruchamiania w określonych punktach w potoku wykonywania dla danego żądania. Filtry mogą być stosowane do kontrolerów lub akcji jako atrybuty (lub mogą być uruchamiane globalnie). W strukturze uwzględniono kilka filtrów (takich jak `Authorize` ). `[Authorize]`jest atrybutem używanym do tworzenia filtrów autoryzacji MVC.
 
 ```csharp
 [Authorize]
@@ -210,7 +199,7 @@ Korzystając z Razor aparatu widoku, można definiować [układy](views/layout.m
 
 Razorwidoki w MVC można jednoznacznie wpisywać na podstawie modelu. Kontrolery mogą przekazać silnie wpisany model do widoków, co umożliwia kontrolowanie typów i obsługę technologii IntelliSense.
 
-Na przykład następujący widok renderuje model typu `IEnumerable<Product>`:
+Na przykład następujący widok renderuje model typu `IEnumerable<Product>` :
 
 ```cshtml
 @model IEnumerable<Product>
@@ -224,9 +213,9 @@ Na przykład następujący widok renderuje model typu `IEnumerable<Product>`:
 
 ### <a name="tag-helpers"></a>Pomocnicy tagów
 
-[Pomocnicy tagów](views/tag-helpers/intro.md) Włącz kod po stronie serwera, aby wziąć udział w tworzeniu i RENDEROWANIU elementów Razor HTML w plikach. Za pomocą pomocników tagów można definiować niestandardowe znaczniki (na przykład `<environment>`) lub modyfikować zachowanie istniejących tagów (na przykład `<label>`). Pomocnicy tagów powiążą się z określonymi elementami na podstawie nazwy elementu i jego atrybutów. Zapewniają one zalety renderowania po stronie serwera, zachowując jednocześnie środowisko edycji HTML.
+[Pomocnicy tagów](views/tag-helpers/intro.md) Włącz kod po stronie serwera, aby wziąć udział w tworzeniu i RENDEROWANIU elementów HTML w Razor plikach. Za pomocą pomocników tagów można definiować niestandardowe znaczniki (na przykład `<environment>` ) lub modyfikować zachowanie istniejących tagów (na przykład `<label>` ). Pomocnicy tagów powiążą się z określonymi elementami na podstawie nazwy elementu i jego atrybutów. Zapewniają one zalety renderowania po stronie serwera, zachowując jednocześnie środowisko edycji HTML.
 
-Istnieje wiele wbudowanych pomocników tagów dla typowych zadań, takich jak tworzenie formularzy, linków, ładowanie zasobów i inne — a nawet więcej dostępnych w publicznych repozytoriach GitHub i jako pakiety NuGet. Pomocnicy tagów są twórcy w języku C# i są elementami docelowymi elementów HTML w oparciu o nazwę elementu, nazwę atrybutu lub tag nadrzędny. Na przykład wbudowana LinkTagHelper może służyć do tworzenia linku do `Login` akcji: `AccountsController`
+Istnieje wiele wbudowanych pomocników tagów dla typowych zadań, takich jak tworzenie formularzy, linków, ładowanie zasobów i inne — a nawet więcej dostępnych w publicznych repozytoriach GitHub i jako pakiety NuGet. Pomocnicy tagów są twórcy w języku C# i są elementami docelowymi elementów HTML w oparciu o nazwę elementu, nazwę atrybutu lub tag nadrzędny. Na przykład wbudowana LinkTagHelper może służyć do tworzenia linku do `Login` akcji `AccountsController` :
 
 ```cshtml
 <p>
@@ -235,7 +224,7 @@ Istnieje wiele wbudowanych pomocników tagów dla typowych zadań, takich jak tw
 </p>
 ```
 
-`EnvironmentTagHelper` Może służyć do uwzględnienia różnych skryptów w widokach (na przykład Raw lub zminimalizowanego) w oparciu o środowisko uruchomieniowe, takie jak programowanie, przemieszczanie lub produkcja:
+`EnvironmentTagHelper`Może służyć do uwzględnienia różnych skryptów w widokach (na przykład Raw lub zminimalizowanego) w oparciu o środowisko uruchomieniowe, takie jak programowanie, przemieszczanie lub produkcja:
 
 ```cshtml
 <environment names="Development">
@@ -249,7 +238,7 @@ Istnieje wiele wbudowanych pomocników tagów dla typowych zadań, takich jak tw
 </environment>
 ```
 
-Pomocnicy tagów zapewniają przyjazne dla języka HTML środowisko programistyczne i zaawansowane środowisko IntelliSense do tworzenia kodu HTML Razor i znaczników. Większość wbudowanych pomocników tagów docelowo istniejące elementy HTML i udostępniają atrybuty po stronie serwera dla elementu.
+Pomocnicy tagów zapewniają przyjazne dla języka HTML środowisko programistyczne i zaawansowane środowisko IntelliSense do tworzenia kodu HTML i Razor znaczników. Większość wbudowanych pomocników tagów docelowo istniejące elementy HTML i udostępniają atrybuty po stronie serwera dla elementu.
 
 ### <a name="view-components"></a>Wyświetl składniki
 
@@ -257,11 +246,11 @@ Pomocnicy tagów zapewniają przyjazne dla języka HTML środowisko programistyc
 
 ## <a name="compatibility-version"></a>Wersja zgodności
 
-<xref:Microsoft.Extensions.DependencyInjection.MvcCoreMvcBuilderExtensions.SetCompatibilityVersion*> Metoda pozwala aplikacji na zgodę lub rezygnację z ewentualnych zmian w zachowaniu, wprowadzonych w ASP.NET Core MVC 2,1 lub nowszych.
+<xref:Microsoft.Extensions.DependencyInjection.MvcCoreMvcBuilderExtensions.SetCompatibilityVersion*>Metoda pozwala aplikacji na zgodę lub rezygnację z ewentualnych zmian w zachowaniu, wprowadzonych w ASP.NET Core MVC 2,1 lub nowszych.
 
 Aby uzyskać więcej informacji, zobacz <xref:mvc/compatibility-version>.
 
 ## <a name="additional-resources"></a>Zasoby dodatkowe
 
-* [AspNetCore. MVC-Fluent — Biblioteka testów dla ASP.NET Core MVC](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc) &ndash; z silnie wpisanąmi bibliotekami testów jednostkowych, zapewniając interfejs Fluent do testowania aplikacji MVC i Web API. (*Niekonserwowane lub obsługiwane przez firmę Microsoft).*
+* [AspNetCore. MVC-Fluent — Biblioteka testów dla ASP.NET Core MVC](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc): Biblioteka testów jednostkowych z jednoznacznie określonymi typami, dostarczająca interfejs Fluent do testowania aplikacji MVC i Web API. (*Niekonserwowane lub obsługiwane przez firmę Microsoft).*
 * <xref:blazor/integrate-components>

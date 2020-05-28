@@ -1,34 +1,21 @@
 ---
-title: Rejestrowanie o wysokiej wydajności za pomocą LoggerMessage w ASP.NET Core
-author: rick-anderson
-description: Dowiedz się, jak używać LoggerMessage do tworzenia delegatów z pamięcią podręczną, które wymagają mniejszej liczby alokacji obiektów do scenariuszy rejestrowania o wysokiej wydajności.
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 08/26/2019
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: fundamentals/logging/loggermessage
-ms.openlocfilehash: 67281b99f1ed8955ee29eb68b446d71a0c5c7838
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82768367"
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
 ---
 # <a name="high-performance-logging-with-loggermessage-in-aspnet-core"></a>Rejestrowanie o wysokiej wydajności za pomocą LoggerMessage w ASP.NET Core
 
 ::: moniker range=">= aspnetcore-3.0"
 
-<xref:Microsoft.Extensions.Logging.LoggerMessage>funkcje tworzą delegatów z pamięcią podręczną, którzy wymagają mniejszej liczby alokacji obiektów i zmniejszonego obciążenia obliczeniowego w <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogInformation*> porównaniu <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogDebug*>z [metodami rozszerzenia rejestratora](xref:Microsoft.Extensions.Logging.LoggerExtensions), takimi jak i. W przypadku scenariuszy rejestrowania o wysokiej wydajności Użyj <xref:Microsoft.Extensions.Logging.LoggerMessage> wzorca.
+<xref:Microsoft.Extensions.Logging.LoggerMessage>funkcje tworzą delegatów z pamięcią podręczną, którzy wymagają mniejszej liczby alokacji obiektów i zmniejszonego obciążenia obliczeniowego w porównaniu z [metodami rozszerzenia rejestratora](xref:Microsoft.Extensions.Logging.LoggerExtensions), takimi jak <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogInformation*> i <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogDebug*> . W przypadku scenariuszy rejestrowania o wysokiej wydajności Użyj <xref:Microsoft.Extensions.Logging.LoggerMessage> wzorca.
 
 <xref:Microsoft.Extensions.Logging.LoggerMessage>zapewnia następujące korzyści wynikające z wydajności w porównaniu z metodami rozszerzenia rejestratora:
 
-* Metody rozszerzenia rejestratora wymagają "opakowania" (do konwersji) typów wartości, `int`takich jak `object`, do. <xref:Microsoft.Extensions.Logging.LoggerMessage> Wzorzec unika pakowania przy użyciu pól statycznych <xref:System.Action> i metod rozszerzających z parametrami o jednoznacznie określonym typie.
+* Metody rozszerzenia rejestratora wymagają "opakowania" (do konwersji) typów wartości, takich jak `int` , do `object` . <xref:Microsoft.Extensions.Logging.LoggerMessage>Wzorzec unika pakowania przy użyciu <xref:System.Action> pól statycznych i metod rozszerzających z parametrami o jednoznacznie określonym typie.
 * Metody rozszerzenia rejestratora muszą analizować szablon wiadomości (nazwanego ciągu formatu) za każdym razem, gdy zostanie zapisany komunikat dziennika. <xref:Microsoft.Extensions.Logging.LoggerMessage>tylko wymaga analizy szablonu tylko raz, gdy komunikat jest zdefiniowany.
 
 [Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/logging/loggermessage/samples/) ([jak pobrać](xref:index#how-to-download-a-sample))
@@ -39,21 +26,21 @@ Przykładowa aplikacja pokazuje <xref:Microsoft.Extensions.Logging.LoggerMessage
 
 [Zdefiniuj (LogLevel, EventId, String)](xref:Microsoft.Extensions.Logging.LoggerMessage.Define*) tworzy <xref:System.Action> delegata do rejestrowania wiadomości. <xref:Microsoft.Extensions.Logging.LoggerMessage.Define*>przeciążenia dopuszczają przekazywanie do sześciu parametrów typu do nazwanego ciągu formatu (szablonu).
 
-Ciąg dostarczony do <xref:Microsoft.Extensions.Logging.LoggerMessage.Define*> metody jest szablonem, a nie ciągiem interpolowanym. Symbole zastępcze są wypełniane w kolejności, w jakiej są określone typy. Nazwy symboli zastępczych w szablonie powinny być opisowe i spójne w szablonach. Służą one jako nazwy właściwości w danych dziennika strukturalnego. Zalecamy używanie [wielkości liter](/dotnet/standard/design-guidelines/capitalization-conventions) w języku Pascal dla nazw zastępczych. Na przykład `{Count}`, `{FirstName}`.
+Ciąg dostarczony do <xref:Microsoft.Extensions.Logging.LoggerMessage.Define*> metody jest szablonem, a nie ciągiem interpolowanym. Symbole zastępcze są wypełniane w kolejności, w jakiej są określone typy. Nazwy symboli zastępczych w szablonie powinny być opisowe i spójne w szablonach. Służą one jako nazwy właściwości w danych dziennika strukturalnego. Zalecamy używanie [wielkości liter](/dotnet/standard/design-guidelines/capitalization-conventions) w języku Pascal dla nazw zastępczych. Na przykład `{Count}` , `{FirstName}` .
 
 Każdy komunikat dziennika jest <xref:System.Action> przechowywany w polu statycznym utworzonym przez [LoggerMessage. define](xref:Microsoft.Extensions.Logging.LoggerMessage.Define*). Przykładowo Przykładowa aplikacja tworzy pole opisujące komunikat dziennika dla żądania GET dla strony indeksu (*Internal/LoggerExtensions. cs*):
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet1)]
 
-Dla <xref:System.Action>, określ:
+Dla <xref:System.Action> , określ:
 
 * Poziom dziennika.
-* Unikatowy identyfikator zdarzenia (<xref:Microsoft.Extensions.Logging.EventId>) z nazwą statycznej metody rozszerzenia.
+* Unikatowy identyfikator zdarzenia ( <xref:Microsoft.Extensions.Logging.EventId> ) z nazwą statycznej metody rozszerzenia.
 * Szablon wiadomości (nazwany ciąg formatu). 
 
 Żądanie dotyczące strony indeksu przykładowej aplikacji ustawia:
 
-* Poziom rejestrowania do `Information`.
+* Poziom rejestrowania do `Information` .
 * Identyfikator zdarzenia do `1` nazwy `IndexPageRequested` metody.
 * Szablon wiadomości (nazwany ciąg formatu) do ciągu.
 
@@ -61,7 +48,7 @@ Dla <xref:System.Action>, określ:
 
 Magazyny rejestrowania strukturalnego mogą używać nazwy zdarzenia, gdy jest ona dostarczana z identyfikatorem zdarzenia w celu wzbogacania rejestrowania. Na przykład [Serilog](https://github.com/serilog/serilog-extensions-logging) używa nazwy zdarzenia.
 
-<xref:System.Action> Jest wywoływany za pomocą metody rozszerzającej o jednoznacznie określonym typie. `IndexPageRequested` Metoda rejestruje komunikat dla strony indeksu żądania GET w przykładowej aplikacji:
+<xref:System.Action>Jest wywoływany za pomocą metody rozszerzającej o jednoznacznie określonym typie. `IndexPageRequested`Metoda rejestruje komunikat dla strony indeksu żądania GET w przykładowej aplikacji:
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet9)]
 
@@ -81,11 +68,11 @@ Aby przekazać parametry do komunikatu dziennika, zdefiniuj maksymalnie sześć 
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet2)]
 
-Szablon komunikatu dziennika delegata otrzymuje wartości zastępcze z dostarczonych typów. Przykładowa aplikacja definiuje delegata do dodawania oferty, w której parametr Quote jest `string`:
+Szablon komunikatu dziennika delegata otrzymuje wartości zastępcze z dostarczonych typów. Przykładowa aplikacja definiuje delegata do dodawania oferty, w której parametr Quote jest `string` :
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet6)]
 
-Statyczna metoda rozszerzenia służąca do dodawania oferty `QuoteAdded`,, odbiera wartość argumentu cudzysłowu i przekazuje ją do <xref:System.Action> delegata:
+Statyczna metoda rozszerzenia służąca do dodawania oferty, `QuoteAdded` , odbiera wartość argumentu cudzysłowu i przekazuje ją do <xref:System.Action> delegata:
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet10)]
 
@@ -102,17 +89,17 @@ info: LoggerMessageSample.Pages.IndexModel[2]
           consequences of avoiding reality. - Ayn Rand')
 ```
 
-Przykładowa aplikacja implementuje wzór [try&ndash;catch](/dotnet/csharp/language-reference/keywords/try-catch) dla usunięcia oferty. Komunikat informacyjny jest rejestrowany w przypadku pomyślnego usunięcia operacji usuwania. Komunikat o błędzie jest rejestrowany dla operacji usuwania, gdy zostanie zgłoszony wyjątek. Komunikat dziennika dla nieprawidłowej operacji usuwania obejmuje ślad stosu wyjątku (*wewnętrzny/LoggerExtensions. cs*):
+Przykładowa aplikacja implementuje wzór [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) do usuwania oferty. Komunikat informacyjny jest rejestrowany w przypadku pomyślnego usunięcia operacji usuwania. Komunikat o błędzie jest rejestrowany dla operacji usuwania, gdy zostanie zgłoszony wyjątek. Komunikat dziennika dla nieprawidłowej operacji usuwania obejmuje ślad stosu wyjątku (*wewnętrzny/LoggerExtensions. cs*):
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet3)]
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet7)]
 
-Zwróć uwagę, jak wyjątek jest przesyłany do delegata w `QuoteDeleteFailed`:
+Zwróć uwagę, jak wyjątek jest przesyłany do delegata w `QuoteDeleteFailed` :
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet11)]
 
-W modelu strony dla strony indeksu pomyślne usunięcie cudzysłowu wywołuje `QuoteDeleted` metodę w rejestratorze. Gdy cytat nie zostanie znaleziony do usunięcia, <xref:System.ArgumentNullException> jest zgłaszany. Wyjątek jest zalewkowany przez instrukcję [try&ndash;catch](/dotnet/csharp/language-reference/keywords/try-catch) i rejestrowany przez wywołanie `QuoteDeleteFailed` metody w rejestratorze w bloku [catch](/dotnet/csharp/language-reference/keywords/try-catch) (*Pages/index. cshtml. cs*):
+W modelu strony dla strony indeksu pomyślne usunięcie cudzysłowu wywołuje `QuoteDeleted` metodę w rejestratorze. Gdy cytat nie zostanie znaleziony do usunięcia, <xref:System.ArgumentNullException> jest zgłaszany. Wyjątek jest zalewkowany przez instrukcję [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) i rejestrowany przez wywołanie `QuoteDeleteFailed` metody w rejestratorze w bloku [catch](/dotnet/csharp/language-reference/keywords/try-catch) (*Pages/index. cshtml. cs*):
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Pages/Index.cshtml.cs?name=snippet5&highlight=9,13)]
 
@@ -143,9 +130,9 @@ System.NullReferenceException: Object reference not set to an instance of an obj
 
 [DefineScope — (ciąg)](xref:Microsoft.Extensions.Logging.LoggerMessage.DefineScope*) tworzy <xref:System.Func%601> delegata do definiowania [zakresu dziennika](xref:fundamentals/logging/index#log-scopes). <xref:Microsoft.Extensions.Logging.LoggerMessage.DefineScope*>przeciążenia dopuszczają przekazywanie do trzech parametrów typu do nazwanego ciągu formatu (szablonu).
 
-Podobnie jak w przypadku <xref:Microsoft.Extensions.Logging.LoggerMessage.Define*> metody, ciąg dostarczony do <xref:Microsoft.Extensions.Logging.LoggerMessage.DefineScope*> metody jest szablonem, a nie ciągiem interpolowanym. Symbole zastępcze są wypełniane w kolejności, w jakiej są określone typy. Nazwy symboli zastępczych w szablonie powinny być opisowe i spójne w szablonach. Służą one jako nazwy właściwości w danych dziennika strukturalnego. Zalecamy używanie [wielkości liter](/dotnet/standard/design-guidelines/capitalization-conventions) w języku Pascal dla nazw zastępczych. Na przykład `{Count}`, `{FirstName}`.
+Podobnie jak w przypadku <xref:Microsoft.Extensions.Logging.LoggerMessage.Define*> metody, ciąg dostarczony do <xref:Microsoft.Extensions.Logging.LoggerMessage.DefineScope*> metody jest szablonem, a nie ciągiem interpolowanym. Symbole zastępcze są wypełniane w kolejności, w jakiej są określone typy. Nazwy symboli zastępczych w szablonie powinny być opisowe i spójne w szablonach. Służą one jako nazwy właściwości w danych dziennika strukturalnego. Zalecamy używanie [wielkości liter](/dotnet/standard/design-guidelines/capitalization-conventions) w języku Pascal dla nazw zastępczych. Na przykład `{Count}` , `{FirstName}` .
 
-Zdefiniuj [zakres dziennika](xref:fundamentals/logging/index#log-scopes) , który ma zostać zastosowany do serii komunikatów dziennika przy <xref:Microsoft.Extensions.Logging.LoggerMessage.DefineScope*> użyciu metody.
+Zdefiniuj [zakres dziennika](xref:fundamentals/logging/index#log-scopes) , który ma zostać zastosowany do serii komunikatów dziennika przy użyciu <xref:Microsoft.Extensions.Logging.LoggerMessage.DefineScope*> metody.
 
 Przykładowa aplikacja ma przycisk **Wyczyść wszystko** , aby usunąć wszystkie cudzysłowy w bazie danych. Cudzysłowy są usuwane, usuwając je pojedynczo. Przy każdym usunięciu oferty `QuoteDeleted` Metoda jest wywoływana w rejestratorze. Do tych komunikatów dziennika jest dodawany zakres dziennika.
 
@@ -157,11 +144,11 @@ Aby utworzyć zakres dziennika, należy dodać pole do przechowywania <xref:Syst
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet4)]
 
-Użyj <xref:Microsoft.Extensions.Logging.LoggerMessage.DefineScope*> , aby utworzyć delegata. Można określić maksymalnie trzy typy do użycia jako argumenty szablonu, gdy obiekt delegowany jest wywoływany. Przykładowa aplikacja używa szablonu komunikatu zawierającego liczbę usuniętych cudzysłowów ( `int` typ):
+Użyj, <xref:Microsoft.Extensions.Logging.LoggerMessage.DefineScope*> Aby utworzyć delegata. Można określić maksymalnie trzy typy do użycia jako argumenty szablonu, gdy obiekt delegowany jest wywoływany. Przykładowa aplikacja używa szablonu komunikatu zawierającego liczbę usuniętych cudzysłowów ( `int` Typ):
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet8)]
 
-Podaj statyczną metodę rozszerzenia dla komunikatu dziennika. Dołącz wszystkie parametry typu dla nazwanych właściwości, które są wyświetlane w szablonie wiadomości. Przykładowa aplikacja wykonuje `count` cudzysłowy, aby usunąć i zwracać `_allQuotesDeletedScope`:
+Podaj statyczną metodę rozszerzenia dla komunikatu dziennika. Dołącz wszystkie parametry typu dla nazwanych właściwości, które są wyświetlane w szablonie wiadomości. Przykładowa aplikacja wykonuje `count` cudzysłowy, aby usunąć i zwracać `_allQuotesDeletedScope` :
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet12)]
 
@@ -190,11 +177,11 @@ info: LoggerMessageSample.Pages.IndexModel[4]
 
 ::: moniker range="< aspnetcore-3.0"
 
-<xref:Microsoft.Extensions.Logging.LoggerMessage>funkcje tworzą delegatów z pamięcią podręczną, którzy wymagają mniejszej liczby alokacji obiektów i zmniejszonego obciążenia obliczeniowego w <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogInformation*> porównaniu <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogDebug*>z [metodami rozszerzenia rejestratora](xref:Microsoft.Extensions.Logging.LoggerExtensions), takimi jak i. W przypadku scenariuszy rejestrowania o wysokiej wydajności Użyj <xref:Microsoft.Extensions.Logging.LoggerMessage> wzorca.
+<xref:Microsoft.Extensions.Logging.LoggerMessage>funkcje tworzą delegatów z pamięcią podręczną, którzy wymagają mniejszej liczby alokacji obiektów i zmniejszonego obciążenia obliczeniowego w porównaniu z [metodami rozszerzenia rejestratora](xref:Microsoft.Extensions.Logging.LoggerExtensions), takimi jak <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogInformation*> i <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogDebug*> . W przypadku scenariuszy rejestrowania o wysokiej wydajności Użyj <xref:Microsoft.Extensions.Logging.LoggerMessage> wzorca.
 
 <xref:Microsoft.Extensions.Logging.LoggerMessage>zapewnia następujące korzyści wynikające z wydajności w porównaniu z metodami rozszerzenia rejestratora:
 
-* Metody rozszerzenia rejestratora wymagają "opakowania" (do konwersji) typów wartości, `int`takich jak `object`, do. <xref:Microsoft.Extensions.Logging.LoggerMessage> Wzorzec unika pakowania przy użyciu pól statycznych <xref:System.Action> i metod rozszerzających z parametrami o jednoznacznie określonym typie.
+* Metody rozszerzenia rejestratora wymagają "opakowania" (do konwersji) typów wartości, takich jak `int` , do `object` . <xref:Microsoft.Extensions.Logging.LoggerMessage>Wzorzec unika pakowania przy użyciu <xref:System.Action> pól statycznych i metod rozszerzających z parametrami o jednoznacznie określonym typie.
 * Metody rozszerzenia rejestratora muszą analizować szablon wiadomości (nazwanego ciągu formatu) za każdym razem, gdy zostanie zapisany komunikat dziennika. <xref:Microsoft.Extensions.Logging.LoggerMessage>tylko wymaga analizy szablonu tylko raz, gdy komunikat jest zdefiniowany.
 
 [Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/logging/loggermessage/samples/) ([jak pobrać](xref:index#how-to-download-a-sample))
@@ -205,21 +192,21 @@ Przykładowa aplikacja pokazuje <xref:Microsoft.Extensions.Logging.LoggerMessage
 
 [Zdefiniuj (LogLevel, EventId, String)](xref:Microsoft.Extensions.Logging.LoggerMessage.Define*) tworzy <xref:System.Action> delegata do rejestrowania wiadomości. <xref:Microsoft.Extensions.Logging.LoggerMessage.Define*>przeciążenia dopuszczają przekazywanie do sześciu parametrów typu do nazwanego ciągu formatu (szablonu).
 
-Ciąg dostarczony do <xref:Microsoft.Extensions.Logging.LoggerMessage.Define*> metody jest szablonem, a nie ciągiem interpolowanym. Symbole zastępcze są wypełniane w kolejności, w jakiej są określone typy. Nazwy symboli zastępczych w szablonie powinny być opisowe i spójne w szablonach. Służą one jako nazwy właściwości w danych dziennika strukturalnego. Zalecamy używanie [wielkości liter](/dotnet/standard/design-guidelines/capitalization-conventions) w języku Pascal dla nazw zastępczych. Na przykład `{Count}`, `{FirstName}`.
+Ciąg dostarczony do <xref:Microsoft.Extensions.Logging.LoggerMessage.Define*> metody jest szablonem, a nie ciągiem interpolowanym. Symbole zastępcze są wypełniane w kolejności, w jakiej są określone typy. Nazwy symboli zastępczych w szablonie powinny być opisowe i spójne w szablonach. Służą one jako nazwy właściwości w danych dziennika strukturalnego. Zalecamy używanie [wielkości liter](/dotnet/standard/design-guidelines/capitalization-conventions) w języku Pascal dla nazw zastępczych. Na przykład `{Count}` , `{FirstName}` .
 
 Każdy komunikat dziennika jest <xref:System.Action> przechowywany w polu statycznym utworzonym przez [LoggerMessage. define](xref:Microsoft.Extensions.Logging.LoggerMessage.Define*). Przykładowo Przykładowa aplikacja tworzy pole opisujące komunikat dziennika dla żądania GET dla strony indeksu (*Internal/LoggerExtensions. cs*):
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet1)]
 
-Dla <xref:System.Action>, określ:
+Dla <xref:System.Action> , określ:
 
 * Poziom dziennika.
-* Unikatowy identyfikator zdarzenia (<xref:Microsoft.Extensions.Logging.EventId>) z nazwą statycznej metody rozszerzenia.
+* Unikatowy identyfikator zdarzenia ( <xref:Microsoft.Extensions.Logging.EventId> ) z nazwą statycznej metody rozszerzenia.
 * Szablon wiadomości (nazwany ciąg formatu). 
 
 Żądanie dotyczące strony indeksu przykładowej aplikacji ustawia:
 
-* Poziom rejestrowania do `Information`.
+* Poziom rejestrowania do `Information` .
 * Identyfikator zdarzenia do `1` nazwy `IndexPageRequested` metody.
 * Szablon wiadomości (nazwany ciąg formatu) do ciągu.
 
@@ -227,7 +214,7 @@ Dla <xref:System.Action>, określ:
 
 Magazyny rejestrowania strukturalnego mogą używać nazwy zdarzenia, gdy jest ona dostarczana z identyfikatorem zdarzenia w celu wzbogacania rejestrowania. Na przykład [Serilog](https://github.com/serilog/serilog-extensions-logging) używa nazwy zdarzenia.
 
-<xref:System.Action> Jest wywoływany za pomocą metody rozszerzającej o jednoznacznie określonym typie. `IndexPageRequested` Metoda rejestruje komunikat dla strony indeksu żądania GET w przykładowej aplikacji:
+<xref:System.Action>Jest wywoływany za pomocą metody rozszerzającej o jednoznacznie określonym typie. `IndexPageRequested`Metoda rejestruje komunikat dla strony indeksu żądania GET w przykładowej aplikacji:
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet9)]
 
@@ -247,11 +234,11 @@ Aby przekazać parametry do komunikatu dziennika, zdefiniuj maksymalnie sześć 
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet2)]
 
-Szablon komunikatu dziennika delegata otrzymuje wartości zastępcze z dostarczonych typów. Przykładowa aplikacja definiuje delegata do dodawania oferty, w której parametr Quote jest `string`:
+Szablon komunikatu dziennika delegata otrzymuje wartości zastępcze z dostarczonych typów. Przykładowa aplikacja definiuje delegata do dodawania oferty, w której parametr Quote jest `string` :
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet6)]
 
-Statyczna metoda rozszerzenia służąca do dodawania oferty `QuoteAdded`,, odbiera wartość argumentu cudzysłowu i przekazuje ją do <xref:System.Action> delegata:
+Statyczna metoda rozszerzenia służąca do dodawania oferty, `QuoteAdded` , odbiera wartość argumentu cudzysłowu i przekazuje ją do <xref:System.Action> delegata:
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet10)]
 
@@ -268,17 +255,17 @@ info: LoggerMessageSample.Pages.IndexModel[2]
           consequences of avoiding reality. - Ayn Rand')
 ```
 
-Przykładowa aplikacja implementuje wzór [try&ndash;catch](/dotnet/csharp/language-reference/keywords/try-catch) dla usunięcia oferty. Komunikat informacyjny jest rejestrowany w przypadku pomyślnego usunięcia operacji usuwania. Komunikat o błędzie jest rejestrowany dla operacji usuwania, gdy zostanie zgłoszony wyjątek. Komunikat dziennika dla nieprawidłowej operacji usuwania obejmuje ślad stosu wyjątku (*wewnętrzny/LoggerExtensions. cs*):
+Przykładowa aplikacja implementuje wzór [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) do usuwania oferty. Komunikat informacyjny jest rejestrowany w przypadku pomyślnego usunięcia operacji usuwania. Komunikat o błędzie jest rejestrowany dla operacji usuwania, gdy zostanie zgłoszony wyjątek. Komunikat dziennika dla nieprawidłowej operacji usuwania obejmuje ślad stosu wyjątku (*wewnętrzny/LoggerExtensions. cs*):
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet3)]
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet7)]
 
-Zwróć uwagę, jak wyjątek jest przesyłany do delegata w `QuoteDeleteFailed`:
+Zwróć uwagę, jak wyjątek jest przesyłany do delegata w `QuoteDeleteFailed` :
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet11)]
 
-W modelu strony dla strony indeksu pomyślne usunięcie cudzysłowu wywołuje `QuoteDeleted` metodę w rejestratorze. Gdy cytat nie zostanie znaleziony do usunięcia, <xref:System.ArgumentNullException> jest zgłaszany. Wyjątek jest zalewkowany przez instrukcję [try&ndash;catch](/dotnet/csharp/language-reference/keywords/try-catch) i rejestrowany przez wywołanie `QuoteDeleteFailed` metody w rejestratorze w bloku [catch](/dotnet/csharp/language-reference/keywords/try-catch) (*Pages/index. cshtml. cs*):
+W modelu strony dla strony indeksu pomyślne usunięcie cudzysłowu wywołuje `QuoteDeleted` metodę w rejestratorze. Gdy cytat nie zostanie znaleziony do usunięcia, <xref:System.ArgumentNullException> jest zgłaszany. Wyjątek jest zalewkowany przez instrukcję [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) i rejestrowany przez wywołanie `QuoteDeleteFailed` metody w rejestratorze w bloku [catch](/dotnet/csharp/language-reference/keywords/try-catch) (*Pages/index. cshtml. cs*):
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Pages/Index.cshtml.cs?name=snippet5&highlight=14,18)]
 
@@ -311,9 +298,9 @@ Parameter name: entity
 
 [DefineScope — (ciąg)](xref:Microsoft.Extensions.Logging.LoggerMessage.DefineScope*) tworzy <xref:System.Func%601> delegata do definiowania [zakresu dziennika](xref:fundamentals/logging/index#log-scopes). <xref:Microsoft.Extensions.Logging.LoggerMessage.DefineScope*>przeciążenia dopuszczają przekazywanie do trzech parametrów typu do nazwanego ciągu formatu (szablonu).
 
-Podobnie jak w przypadku <xref:Microsoft.Extensions.Logging.LoggerMessage.Define*> metody, ciąg dostarczony do <xref:Microsoft.Extensions.Logging.LoggerMessage.DefineScope*> metody jest szablonem, a nie ciągiem interpolowanym. Symbole zastępcze są wypełniane w kolejności, w jakiej są określone typy. Nazwy symboli zastępczych w szablonie powinny być opisowe i spójne w szablonach. Służą one jako nazwy właściwości w danych dziennika strukturalnego. Zalecamy używanie [wielkości liter](/dotnet/standard/design-guidelines/capitalization-conventions) w języku Pascal dla nazw zastępczych. Na przykład `{Count}`, `{FirstName}`.
+Podobnie jak w przypadku <xref:Microsoft.Extensions.Logging.LoggerMessage.Define*> metody, ciąg dostarczony do <xref:Microsoft.Extensions.Logging.LoggerMessage.DefineScope*> metody jest szablonem, a nie ciągiem interpolowanym. Symbole zastępcze są wypełniane w kolejności, w jakiej są określone typy. Nazwy symboli zastępczych w szablonie powinny być opisowe i spójne w szablonach. Służą one jako nazwy właściwości w danych dziennika strukturalnego. Zalecamy używanie [wielkości liter](/dotnet/standard/design-guidelines/capitalization-conventions) w języku Pascal dla nazw zastępczych. Na przykład `{Count}` , `{FirstName}` .
 
-Zdefiniuj [zakres dziennika](xref:fundamentals/logging/index#log-scopes) , który ma zostać zastosowany do serii komunikatów dziennika przy <xref:Microsoft.Extensions.Logging.LoggerMessage.DefineScope*> użyciu metody.
+Zdefiniuj [zakres dziennika](xref:fundamentals/logging/index#log-scopes) , który ma zostać zastosowany do serii komunikatów dziennika przy użyciu <xref:Microsoft.Extensions.Logging.LoggerMessage.DefineScope*> metody.
 
 Przykładowa aplikacja ma przycisk **Wyczyść wszystko** , aby usunąć wszystkie cudzysłowy w bazie danych. Cudzysłowy są usuwane, usuwając je pojedynczo. Przy każdym usunięciu oferty `QuoteDeleted` Metoda jest wywoływana w rejestratorze. Do tych komunikatów dziennika jest dodawany zakres dziennika.
 
@@ -325,11 +312,11 @@ Aby utworzyć zakres dziennika, należy dodać pole do przechowywania <xref:Syst
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet4)]
 
-Użyj <xref:Microsoft.Extensions.Logging.LoggerMessage.DefineScope*> , aby utworzyć delegata. Można określić maksymalnie trzy typy do użycia jako argumenty szablonu, gdy obiekt delegowany jest wywoływany. Przykładowa aplikacja używa szablonu komunikatu zawierającego liczbę usuniętych cudzysłowów ( `int` typ):
+Użyj, <xref:Microsoft.Extensions.Logging.LoggerMessage.DefineScope*> Aby utworzyć delegata. Można określić maksymalnie trzy typy do użycia jako argumenty szablonu, gdy obiekt delegowany jest wywoływany. Przykładowa aplikacja używa szablonu komunikatu zawierającego liczbę usuniętych cudzysłowów ( `int` Typ):
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet8)]
 
-Podaj statyczną metodę rozszerzenia dla komunikatu dziennika. Dołącz wszystkie parametry typu dla nazwanych właściwości, które są wyświetlane w szablonie wiadomości. Przykładowa aplikacja wykonuje `count` cudzysłowy, aby usunąć i zwracać `_allQuotesDeletedScope`:
+Podaj statyczną metodę rozszerzenia dla komunikatu dziennika. Dołącz wszystkie parametry typu dla nazwanych właściwości, które są wyświetlane w szablonie wiadomości. Przykładowa aplikacja wykonuje `count` cudzysłowy, aby usunąć i zwracać `_allQuotesDeletedScope` :
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet12)]
 
@@ -356,6 +343,6 @@ info: LoggerMessageSample.Pages.IndexModel[4]
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Rejestrowanie](xref:fundamentals/logging/index)

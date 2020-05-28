@@ -1,24 +1,11 @@
 ---
-title: Routing w ASP.NET Core
-author: rick-anderson
-description: Dowiedz się, w jaki sposób Routing ASP.NET Core odpowiada za dopasowanie żądań HTTP i wysyłanie ich do wykonywalnych punktów końcowych.
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 4/1/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: fundamentals/routing
-ms.openlocfilehash: 2dd44a561debddac13250174a8e74dd912302d60
-ms.sourcegitcommit: 4a9321db7ca4e69074fa08a678dcc91e16215b1e
-ms.translationtype: MT
-ms.contentlocale: pl-PL
-ms.lasthandoff: 05/06/2020
-ms.locfileid: "82850516"
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
 ---
 # <a name="routing-in-aspnet-core"></a>Routing w ASP.NET Core
 
@@ -31,7 +18,7 @@ Routing jest odpowiedzialny za pasujące przychodzące żądania HTTP i wysyłaj
 Aplikacje mogą konfigurować Routing przy użyciu:
 
 - Kontrolery
-- Razor Pages
+- RazorPage
 - SignalR
 - Usługi gRPC Services
 - [Oprogramowanie pośredniczące](xref:fundamentals/middleware/index) z obsługą punktu końcowego, takie jak [kontrole kondycji](xref:host-and-deploy/health-checks).
@@ -39,10 +26,10 @@ Aplikacje mogą konfigurować Routing przy użyciu:
 
 W tym dokumencie przedstawiono szczegóły niskiego poziomu ASP.NET Core routingu. Aby uzyskać informacje na temat konfigurowania routingu:
 
-* W przypadku kontrolerów należy <xref:mvc/controllers/routing>zapoznać się z tematem.
-* Aby zapoznać się z konwencjami Razor Pages, zobacz <xref:razor-pages/razor-pages-conventions>.
+* W przypadku kontrolerów należy zapoznać się z tematem <xref:mvc/controllers/routing> .
+* W przypadku Razor Konwencji stron, zobacz <xref:razor-pages/razor-pages-conventions> .
 
-System routingu punktu końcowego opisany w tym dokumencie ma zastosowanie do ASP.NET Core 3,0 i nowszych. Aby uzyskać informacje dotyczące poprzedniego systemu routingu opartego <xref:Microsoft.AspNetCore.Routing.IRouter>na programie, wybierz wersję ASP.NET Core 2,1 przy użyciu jednej z następujących metod:
+System routingu punktu końcowego opisany w tym dokumencie ma zastosowanie do ASP.NET Core 3,0 i nowszych. Aby uzyskać informacje dotyczące poprzedniego systemu routingu opartego na programie <xref:Microsoft.AspNetCore.Routing.IRouter> , wybierz wersję ASP.NET Core 2,1 przy użyciu jednej z następujących metod:
 
 * Selektor wersji dla poprzedniej wersji.
 * Wybierz pozycję [ASP.NET Core 2,1 Routing](https://docs.microsoft.com/aspnet/core/fundamentals/routing?view=aspnetcore-2.1).
@@ -53,39 +40,39 @@ Próbki pobierania dla tego dokumentu są włączane przez konkretną `Startup` 
 
 ## <a name="routing-basics"></a>Podstawy routingu
 
-Wszystkie szablony ASP.NET Core obejmują Routing w wygenerowanym kodzie. Routing jest zarejestrowany w potoku [pośredniczącego](xref:fundamentals/middleware/index) w `Startup.Configure`programie.
+Wszystkie szablony ASP.NET Core obejmują Routing w wygenerowanym kodzie. Routing jest zarejestrowany w potoku [pośredniczącego](xref:fundamentals/middleware/index) w programie `Startup.Configure` .
 
 Poniższy kod przedstawia podstawowy przykład routingu:
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/Startup.cs?name=snippet&highlight=8,10)]
 
-Routing używa pary programów pośredniczących zarejestrowanych przez <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseRouting*> program i: <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*>
+Routing używa pary programów pośredniczących zarejestrowanych przez program <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseRouting*> i <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*> :
 
 * `UseRouting`dodaje dopasowanie trasy do potoku programu pośredniczącego. To oprogramowanie pośredniczące sprawdza zestaw punktów końcowych zdefiniowanych w aplikacji i wybiera [najlepsze dopasowanie](#urlm) na podstawie żądania.
 * `UseEndpoints`dodaje wykonywanie punktu końcowego do potoku programu pośredniczącego. Powoduje uruchomienie delegata skojarzonego z wybranym punktem końcowym.
 
 W powyższym przykładzie użyto pojedynczej *trasy do* punktu końcowego kodu przy użyciu metody [MapGet](xref:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions.MapGet*) :
 
-* Gdy żądanie HTTP `GET` zostanie wysłane do głównego adresu URL `/`:
+* Gdy żądanie HTTP `GET` zostanie wysłane do głównego adresu URL `/` :
   * Zostanie wyświetlony delegat żądania.
-  * `Hello World!`jest zapisywana w odpowiedzi HTTP. Domyślnie główny adres URL `/` to. `https://localhost:5001/`
-* Jeśli metoda żądania nie `GET` jest lub nie jest głównym adresem URL `/`, nie są zwracane żadne dopasowania tras i HTTP 404.
+  * `Hello World!`jest zapisywana w odpowiedzi HTTP. Domyślnie główny adres URL `/` to `https://localhost:5001/` .
+* Jeśli metoda żądania nie jest `GET` lub nie jest głównym adresem URL, nie są `/` zwracane żadne dopasowania tras i HTTP 404.
 
 ### <a name="endpoint"></a>Endpoint
 
 <a name="endpoint"></a>
 
-`MapGet` Metoda jest używana do definiowania **punktu końcowego**. Punkt końcowy to coś, co może być:
+`MapGet`Metoda jest używana do definiowania **punktu końcowego**. Punkt końcowy to coś, co może być:
 
 * Wybierany przez dopasowanie adresu URL i metody HTTP.
 * Wykonywane przez uruchomienie delegata.
 
-Punkty końcowe, które mogą być dopasowane i wykonywane przez aplikację, są `UseEndpoints`skonfigurowane w programie. Na przykład <xref:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions.MapGet*> <xref:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions.MapPost*>,, i [podobne metody](xref:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions) Połącz delegatów żądań z systemem routingu.
+Punkty końcowe, które mogą być dopasowane i wykonywane przez aplikację, są skonfigurowane w programie `UseEndpoints` . Na przykład, <xref:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions.MapGet*> , <xref:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions.MapPost*> i [podobne metody](xref:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions) Połącz delegatów żądań z systemem routingu.
 Do łączenia funkcji ASP.NET Core Framework z systemem routingu można używać dodatkowych metod:
-- [MapRazorPages Razor Pages](xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapRazorPages*)
+- [MapRazorPages dla Razor stron](xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapRazorPages*)
 - [MapControllers dla kontrolerów](xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers*)
-- [MapHub\<THub> dla sygnalizującego](xref:Microsoft.AspNetCore.SignalR.HubRouteBuilder.MapHub*) 
-- [MapGrpcService\<TService> gRPC](xref:grpc/aspnetcore)
+- [MapHub \<THub> dlaSignalR](xref:Microsoft.AspNetCore.SignalR.HubRouteBuilder.MapHub*) 
+- [MapGrpcService \<TService> dla gRPC](xref:grpc/aspnetcore)
 
 W poniższym przykładzie przedstawiono Routing z bardziej zaawansowanym szablonem trasy:
 
@@ -94,9 +81,9 @@ W poniższym przykładzie przedstawiono Routing z bardziej zaawansowanym szablon
 Ciąg `/hello/{name:alpha}` jest **szablonem trasy**. Służy do konfigurowania sposobu dopasowywania punktu końcowego. W tym przypadku szablon pasuje do:
 
 * Adres URL, taki jak`/hello/Ryan`
-* Dowolna ścieżka URL, która `/hello/` rozpoczyna się od po którym następuje sekwencja znaków alfabetu.  `:alpha`stosuje ograniczenie trasy, które pasuje tylko do znaków alfabetu. [Ograniczenia trasy](#route-constraint-reference) zostały omówione w dalszej części tego dokumentu.
+* Dowolna ścieżka URL, która rozpoczyna się od `/hello/` po którym następuje sekwencja znaków alfabetu.  `:alpha`stosuje ograniczenie trasy, które pasuje tylko do znaków alfabetu. [Ograniczenia trasy](#route-constraint-reference) zostały omówione w dalszej części tego dokumentu.
 
-Drugi segment ścieżki URL `{name:alpha}`:
+Drugi segment ścieżki URL `{name:alpha}` :
 
 * Jest powiązany z `name` parametrem.
 * Jest przechwytywany i przechowywany w usłudze [HttpRequest. RouteValues](xref:Microsoft.AspNetCore.Http.HttpRequest.RouteValues*).
@@ -114,18 +101,18 @@ W poprzednim przykładzie pokazano, jak:
 * Oprogramowanie pośredniczące autoryzacji może być używane z routingiem.
 * Punkty końcowe mogą służyć do konfigurowania zachowania autoryzacji.
 
-<xref:Microsoft.AspNetCore.Builder.HealthCheckEndpointRouteBuilderExtensions.MapHealthChecks*> Wywołanie dodaje punkt końcowy sprawdzania kondycji. Tworzenie łańcucha <xref:Microsoft.AspNetCore.Builder.AuthorizationEndpointConventionBuilderExtensions.RequireAuthorization*> w ramach tego wywołania powoduje dołączenie zasad autoryzacji do punktu końcowego.
+<xref:Microsoft.AspNetCore.Builder.HealthCheckEndpointRouteBuilderExtensions.MapHealthChecks*>Wywołanie dodaje punkt końcowy sprawdzania kondycji. Tworzenie łańcucha <xref:Microsoft.AspNetCore.Builder.AuthorizationEndpointConventionBuilderExtensions.RequireAuthorization*> w ramach tego wywołania powoduje dołączenie zasad autoryzacji do punktu końcowego.
 
-<xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*> Wywoływanie <xref:Microsoft.AspNetCore.Builder.AuthorizationAppBuilderExtensions.UseAuthorization*> i Dodawanie oprogramowania pośredniczącego uwierzytelniania i autoryzacji. Te oprogramowanie pośredniczące jest <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseRouting*> umieszczane `UseEndpoints` między programem i tak, aby mogły:
+Wywoływanie <xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*> i <xref:Microsoft.AspNetCore.Builder.AuthorizationAppBuilderExtensions.UseAuthorization*> Dodawanie oprogramowania pośredniczącego uwierzytelniania i autoryzacji. Te oprogramowanie pośredniczące jest umieszczane między programem <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseRouting*> i `UseEndpoints` tak, aby mogły:
 
-* Zobacz, który punkt końcowy został `UseRouting`wybrany przez.
+* Zobacz, który punkt końcowy został wybrany przez `UseRouting` .
 * Zastosuj zasady autoryzacji przed <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*> wysłaniem do punktu końcowego.
 
 <a name="metadata"></a>
 
 ### <a name="endpoint-metadata"></a>Metadane punktu końcowego
 
-W poprzednim przykładzie istnieją dwa punkty końcowe, ale tylko punkt końcowy sprawdzania kondycji ma dołączone zasady autoryzacji. Jeśli żądanie jest zgodne z punktem końcowym `/healthz`sprawdzania kondycji, zostanie wykonane sprawdzanie autoryzacji. Pokazuje, że punkty końcowe mogą mieć dodatkowe dane dołączone do nich. Te dodatkowe dane są nazywane **metadanymi**punktu końcowego:
+W poprzednim przykładzie istnieją dwa punkty końcowe, ale tylko punkt końcowy sprawdzania kondycji ma dołączone zasady autoryzacji. Jeśli żądanie jest zgodne z punktem końcowym sprawdzania kondycji, `/healthz` zostanie wykonane sprawdzanie autoryzacji. Pokazuje, że punkty końcowe mogą mieć dodatkowe dane dołączone do nich. Te dodatkowe dane są nazywane **metadanymi**punktu końcowego:
 
 * Metadane mogą być przetwarzane przez oprogramowanie pośredniczące obsługujące Routing.
 * Metadane mogą być dowolnego typu .NET.
@@ -140,7 +127,7 @@ System routingu jest kompilowany na podstawie potoku programu pośredniczącego 
 
 Punkt końcowy ASP.NET Core:
 
-* Plik wykonywalny: <xref:Microsoft.AspNetCore.Http.Endpoint.RequestDelegate>ma.
+* Plik wykonywalny: ma <xref:Microsoft.AspNetCore.Http.Endpoint.RequestDelegate> .
 * Rozszerzalne: zawiera kolekcję [metadanych](xref:Microsoft.AspNetCore.Http.Endpoint.Metadata*) .
 * Wybór: Opcjonalnie, zawiera [Informacje o routingu](xref:Microsoft.AspNetCore.Routing.RouteEndpoint.RoutePattern*).
 * Wyliczalne: Kolekcja punktów końcowych może być wyświetlona przez pobranie <xref:Microsoft.AspNetCore.Routing.EndpointDataSource> z elementu [di](xref:fundamentals/dependency-injection).
@@ -149,13 +136,13 @@ Poniższy kod pokazuje, jak pobrać i sprawdzić punkt końcowy pasujący do bie
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/EndpointInspectorStartup.cs?name=snippet)]
 
-Punkt końcowy, w przypadku wybrania, można pobrać z `HttpContext`. Jego właściwości można sprawdzić. Obiekty punktu końcowego są niezmienne i nie można ich modyfikować po utworzeniu. Najczęściej spotykanym typem punktu końcowego jest <xref:Microsoft.AspNetCore.Routing.RouteEndpoint>. `RouteEndpoint`zawiera informacje, które mogą być wybierane przez system routingu.
+Punkt końcowy, w przypadku wybrania, można pobrać z `HttpContext` . Jego właściwości można sprawdzić. Obiekty punktu końcowego są niezmienne i nie można ich modyfikować po utworzeniu. Najczęściej spotykanym typem punktu końcowego jest <xref:Microsoft.AspNetCore.Routing.RouteEndpoint> . `RouteEndpoint`zawiera informacje, które mogą być wybierane przez system routingu.
 
 W poprzednim kodzie [aplikacja. Służy](xref:Microsoft.AspNetCore.Builder.UseExtensions.Use*) do konfigurowania [oprogramowania pośredniczącego](xref:fundamentals/middleware/index)w wierszu.
 
 <a name="mt"></a>
 
-Poniższy kod pokazuje, że w zależności od tego, `app.Use` gdzie jest wywoływana w potoku, nie może istnieć punkt końcowy:
+Poniższy kod pokazuje, że w zależności od tego, gdzie `app.Use` jest wywoływana w potoku, nie może istnieć punkt końcowy:
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/MiddlewareFlowStartup.cs?name=snippet)]
 
@@ -179,14 +166,14 @@ Uruchomienie tego kodu z dowolnym innym adresem URL powoduje wyświetlenie:
 
 Te dane wyjściowe pokazują, że:
 
-* Punkt końcowy ma zawsze wartość null `UseRouting` przed wywołaniem metody.
-* W przypadku znalezienia dopasowania punkt końcowy nie ma wartości null między `UseRouting` i. <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*>
-* Oprogramowanie `UseEndpoints` pośredniczące jest **terminalem** , gdy zostanie znalezione dopasowanie. [Oprogramowanie pośredniczące terminalu](#tm) zostało zdefiniowane w dalszej części tego dokumentu.
-* Oprogramowanie pośredniczące po `UseEndpoints` wykonaniu tylko wtedy, gdy nie zostanie znalezione żadne dopasowanie.
+* Punkt końcowy ma zawsze wartość null przed `UseRouting` wywołaniem metody.
+* W przypadku znalezienia dopasowania punkt końcowy nie ma wartości null między `UseRouting` i <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*> .
+* `UseEndpoints`Oprogramowanie pośredniczące jest **terminalem** , gdy zostanie znalezione dopasowanie. [Oprogramowanie pośredniczące terminalu](#tm) zostało zdefiniowane w dalszej części tego dokumentu.
+* Oprogramowanie pośredniczące po wykonaniu tylko wtedy, `UseEndpoints` gdy nie zostanie znalezione żadne dopasowanie.
 
-`UseRouting` Oprogramowanie pośredniczące używa metody [setendpoint](xref:Microsoft.AspNetCore.Http.EndpointHttpContextExtensions.SetEndpoint*) do dołączania punktu końcowego do bieżącego kontekstu. Można zastąpić `UseRouting` oprogramowanie pośredniczące logiką niestandardową i nadal korzystać z punktów końcowych. Punkty końcowe są typu podstawowego niskiego poziomu, takiego jak oprogramowanie pośredniczące, i nie są połączone z implementacją routingu. Większość aplikacji nie musi zastąpić `UseRouting` logiki niestandardowej.
+`UseRouting`Oprogramowanie pośredniczące używa metody [setendpoint](xref:Microsoft.AspNetCore.Http.EndpointHttpContextExtensions.SetEndpoint*) do dołączania punktu końcowego do bieżącego kontekstu. Można zastąpić `UseRouting` oprogramowanie pośredniczące logiką niestandardową i nadal korzystać z punktów końcowych. Punkty końcowe są typu podstawowego niskiego poziomu, takiego jak oprogramowanie pośredniczące, i nie są połączone z implementacją routingu. Większość aplikacji nie musi zastąpić `UseRouting` logiki niestandardowej.
 
-`UseEndpoints` Oprogramowanie pośredniczące jest przeznaczone do użycia wspólnie z programem `UseRouting` pośredniczącym. Logika podstawowa do wykonania punktu końcowego nie jest skomplikowana. Użyj <xref:Microsoft.AspNetCore.Http.EndpointHttpContextExtensions.GetEndpoint*> do pobrania punktu końcowego, a następnie Wywołaj <xref:Microsoft.AspNetCore.Http.Endpoint.RequestDelegate> jego właściwość.
+`UseEndpoints`Oprogramowanie pośredniczące jest przeznaczone do użycia wspólnie z programem `UseRouting` pośredniczącym. Logika podstawowa do wykonania punktu końcowego nie jest skomplikowana. Użyj <xref:Microsoft.AspNetCore.Http.EndpointHttpContextExtensions.GetEndpoint*> do pobrania punktu końcowego, a następnie Wywołaj jego <xref:Microsoft.AspNetCore.Http.Endpoint.RequestDelegate> Właściwość.
 
 Poniższy kod ilustruje sposób, w jaki oprogramowanie pośredniczące może mieć wpływ na Routing lub reagować na nie:
 
@@ -194,12 +181,12 @@ Poniższy kod ilustruje sposób, w jaki oprogramowanie pośredniczące może mie
 
 W poprzednim przykładzie pokazano dwa ważne pojęcia:
 
-* Oprogramowanie pośredniczące może zostać `UseRouting` uruchomione przed modyfikacją danych, na których działa Routing.
-    * Zazwyczaj oprogramowanie pośredniczące, które pojawia się przed wybraniem trasy modyfikuje pewne właściwości <xref:Microsoft.AspNetCore.Builder.RewriteBuilderExtensions.UseRewriter*>żądania <xref:Microsoft.AspNetCore.Builder.HttpMethodOverrideExtensions.UseHttpMethodOverride*>, takie <xref:Microsoft.AspNetCore.Builder.UsePathBaseExtensions.UsePathBase*>jak, lub.
-* Oprogramowanie pośredniczące może działać `UseRouting` między <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*> programami i, aby przetwarzać wyniki routingu przed wykonaniem punktu końcowego.
-    * Oprogramowanie pośredniczące, które `UseRouting` działa `UseEndpoints`między i:
+* Oprogramowanie pośredniczące może zostać uruchomione przed `UseRouting` modyfikacją danych, na których działa Routing.
+    * Zazwyczaj oprogramowanie pośredniczące, które pojawia się przed wybraniem trasy modyfikuje pewne właściwości żądania, takie jak <xref:Microsoft.AspNetCore.Builder.RewriteBuilderExtensions.UseRewriter*> , <xref:Microsoft.AspNetCore.Builder.HttpMethodOverrideExtensions.UseHttpMethodOverride*> lub <xref:Microsoft.AspNetCore.Builder.UsePathBaseExtensions.UsePathBase*> .
+* Oprogramowanie pośredniczące może działać między programami `UseRouting` i, <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*> Aby przetwarzać wyniki routingu przed wykonaniem punktu końcowego.
+    * Oprogramowanie pośredniczące, które działa między `UseRouting` i `UseEndpoints` :
       * Zwykle sprawdza metadane, aby zrozumieć punkty końcowe.
-      * Często podejmuje decyzje dotyczące zabezpieczeń, zgodnie `UseAuthorization` z `UseCors`oczekiwaniami i.
+      * Często podejmuje decyzje dotyczące zabezpieczeń, zgodnie z oczekiwaniami `UseAuthorization` i `UseCors` .
     * Kombinacja oprogramowania pośredniczącego i metadanych umożliwia konfigurowanie zasad dla poszczególnych punktów końcowych.
 
 Powyższy kod przedstawia przykład niestandardowego oprogramowania pośredniczącego, które obsługuje zasady dotyczące poszczególnych punktów końcowych. Oprogramowanie pośredniczące zapisuje *Dziennik inspekcji* dostępu do poufnych danych w konsoli programu. Oprogramowanie pośredniczące można skonfigurować do *inspekcji* punktu końcowego przy użyciu `AuditPolicyAttribute` metadanych. Ten przykład pokazuje wzorzec *wyboru, w* którym są poddawane inspekcji tylko punkty końcowe oznaczone jako poufne. Istnieje możliwość zdefiniowania tej logiki na odwrót, przeprowadzenia inspekcji wszystkich elementów, które nie są oznaczone jako bezpieczne, na przykład. System metadanych punktu końcowego jest elastyczny. Ta logika może być zaprojektowana w dowolny sposób, jak w przypadku użycia.
@@ -209,7 +196,7 @@ Poprzedni przykładowy kod jest przeznaczony do zademonstrowania podstawowych ko
 * Zaloguj się do pliku lub bazy danych.
 * Dołącz szczegóły, takie jak użytkownik, adres IP, nazwa poufnego punktu końcowego itd.
 
-Metadane `AuditPolicyAttribute` zasad inspekcji są zdefiniowane jako `Attribute` ułatwiające korzystanie z struktur opartych na klasach, takich jak kontrolery i sygnalizujące. W przypadku używania *trasy do kodu*:
+Metadane zasad inspekcji `AuditPolicyAttribute` są zdefiniowane jako `Attribute` ułatwiające korzystanie z struktur opartych na klasach, takich jak kontrolery i SignalR . W przypadku używania *trasy do kodu*:
 
 * Metadane są dołączone do interfejsu API programu Builder.
 * Struktury oparte na klasie obejmują wszystkie atrybuty w odpowiedniej metodzie i klasie podczas tworzenia punktów końcowych.
@@ -233,15 +220,15 @@ Jest on nazywany oprogramowanie pośredniczące terminalu, ponieważ kończy wys
 
 Porównanie oprogramowania pośredniczącego i routingu w terminalu:
 * Obie metody umożliwiają zakończenie potoku przetwarzania:
-    * Oprogramowanie pośredniczące kończy potok przez zwrócenie zamiast wywoływania `next`.
+    * Oprogramowanie pośredniczące kończy potok przez zwrócenie zamiast wywoływania `next` .
     * Punkty końcowe są zawsze terminalem.
 * Oprogramowanie pośredniczące terminalu umożliwia rozmieszczenie oprogramowania pośredniczącego w dowolnym miejscu w potoku:
-    * Punkty końcowe są wykonywane na pozycji <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*>.
+    * Punkty końcowe są wykonywane na pozycji <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*> .
 * Oprogramowanie pośredniczące terminalu umożliwia dowolny kod, aby określić, kiedy oprogramowanie pośredniczące jest zgodne:
     * Niestandardowy kod dopasowania trasy może być pełny i trudny do poprawnego zapisu.
     * Routing oferuje proste rozwiązania dla typowych aplikacji. Większość aplikacji nie wymaga niestandardowego kodu dopasowania trasy.
-* Interfejs punktów końcowych z oprogramowaniemi `UseAuthorization` pośredniczącymi, takimi jak i `UseCors`.
-    * Korzystanie z oprogramowania terminalowego z `UseAuthorization` systemem `UseCors` lub wymaga ręcznej obsługi systemu autoryzacji.
+* Interfejs punktów końcowych z oprogramowaniemi pośredniczącymi, takimi jak `UseAuthorization` i `UseCors` .
+    * Korzystanie z oprogramowania terminalowego z `UseAuthorization` `UseCors` systemem lub wymaga ręcznej obsługi systemu autoryzacji.
 
 [Punkt końcowy](#endpoint) definiuje oba:
 
@@ -255,11 +242,11 @@ Oprogramowanie pośredniczące terminalu może być skutecznym narzędziem, ale 
 
 Rozważ integrację z routingiem przed zapisaniem oprogramowania pośredniczącego terminalu.
 
-Istniejące oprogramowanie pośredniczące, które integruje [Map](xref:fundamentals/middleware/index#branch-the-middleware-pipeline) się z <xref:Microsoft.AspNetCore.Builder.MapWhenExtensions.MapWhen*> usługą map lub zwykle może być przełączane do punktu końcowego z obsługą routingu. [MapHealthChecks](https://github.com/aspnet/AspNetCore/blob/master/src/Middleware/HealthChecks/src/Builder/HealthCheckEndpointRouteBuilderExtensions.cs#L16) demonstruje wzorzec dla:
-* Napisz metodę rozszerzenia <xref:Microsoft.AspNetCore.Routing.IEndpointRouteBuilder>.
-* Utwórz zagnieżdżony potok oprogramowania pośredniczącego <xref:Microsoft.AspNetCore.Routing.IEndpointRouteBuilder.CreateApplicationBuilder*>przy użyciu programu.
-* Dołącz oprogramowanie pośredniczące do nowego potoku. W takim przypadku <xref:Microsoft.AspNetCore.Builder.HealthCheckApplicationBuilderExtensions.UseHealthChecks*>.
-* <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.Build*>Oprogramowanie pośredniczące w usłudze <xref:Microsoft.AspNetCore.Http.RequestDelegate>.
+Istniejące oprogramowanie pośredniczące, które integruje się z usługą [map](xref:fundamentals/middleware/index#branch-the-middleware-pipeline) lub <xref:Microsoft.AspNetCore.Builder.MapWhenExtensions.MapWhen*> zwykle może być przełączane do punktu końcowego z obsługą routingu. [MapHealthChecks](https://github.com/aspnet/AspNetCore/blob/master/src/Middleware/HealthChecks/src/Builder/HealthCheckEndpointRouteBuilderExtensions.cs#L16) demonstruje wzorzec dla:
+* Napisz metodę rozszerzenia <xref:Microsoft.AspNetCore.Routing.IEndpointRouteBuilder> .
+* Utwórz zagnieżdżony potok oprogramowania pośredniczącego przy użyciu programu <xref:Microsoft.AspNetCore.Routing.IEndpointRouteBuilder.CreateApplicationBuilder*> .
+* Dołącz oprogramowanie pośredniczące do nowego potoku. W takim przypadku <xref:Microsoft.AspNetCore.Builder.HealthCheckApplicationBuilderExtensions.UseHealthChecks*> .
+* <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.Build*>Oprogramowanie pośredniczące w usłudze <xref:Microsoft.AspNetCore.Http.RequestDelegate> .
 * Wywołaj `Map` i podaj nowy potok pośredniczący.
 * Zwraca obiekt konstruktora dostarczony przez `Map` metodę rozszerzającą.
 
@@ -279,7 +266,7 @@ System metadanych został utworzony w odpowiedzi na problemy napotykane przez au
 * Jest oparty na danych w ścieżce URL i nagłówkach.
 * Można rozszerzyć, aby uwzględnić dowolne dane w żądaniu.
 
-Po zakończeniu routingu oprogramowanie pośredniczące ustawia wartości `Endpoint` i trasy do [funkcji żądania](xref:fundamentals/request-features) na <xref:Microsoft.AspNetCore.Http.HttpContext> podstawie bieżącego żądania:
+Po zakończeniu routingu oprogramowanie pośredniczące ustawia `Endpoint` wartości i trasy do [funkcji żądania](xref:fundamentals/request-features) na <xref:Microsoft.AspNetCore.Http.HttpContext> podstawie bieżącego żądania:
 
 * Wywołanie metody [HttpContext. GetEndPoint](<xref:Microsoft.AspNetCore.Http.EndpointHttpContextExtensions.GetEndpoint*>) Pobiera punkt końcowy.
 * `HttpRequest.RouteValues`Pobiera kolekcję wartości tras.
@@ -291,11 +278,11 @@ System routingu w ramach routingu punktów końcowych jest odpowiedzialny za wsz
 * Wszelkie decyzje, które mogą mieć wpływ na wysyłanie lub stosowanie zasad zabezpieczeń, odbywa się w systemie routingu.
 
 > [!WARNING]
-> W celu zapewnienia zgodności z poprzednimi wersjami, gdy zostanie wykonany kontroler lub Razor Pages delegata punktu końcowego, właściwości [RouteContext. RouteData](xref:Microsoft.AspNetCore.Routing.RouteContext.RouteData) są ustawiane na odpowiednie wartości na podstawie przetwarzania żądania wykonanego do tej pory.
+> W celu zapewnienia zgodności z poprzednimi wersjami, gdy Razor jest wykonywany delegat kontrolera lub stron, właściwości [RouteContext. RouteData](xref:Microsoft.AspNetCore.Routing.RouteContext.RouteData) są ustawiane na odpowiednie wartości na podstawie przetwarzania żądania wykonanego do tej pory.
 >
-> `RouteContext` Typ zostanie oznaczony jako przestarzały w przyszłej wersji:
+> `RouteContext`Typ zostanie oznaczony jako przestarzały w przyszłej wersji:
 >
-> * Migruj `RouteData.Values` do `HttpRequest.RouteValues`programu.
+> * Migruj `RouteData.Values` do programu `HttpRequest.RouteValues` .
 > * Migruj `RouteData.DataTokens` do pobierania [IDataTokensMetadata](xref:Microsoft.AspNetCore.Routing.IDataTokensMetadata) z metadanych punktu końcowego.
 
 Dopasowywanie adresów URL działa w konfigurowalnym zestawie faz. W każdej fazie dane wyjściowe są zestawem dopasowań. Zestaw dopasowań można zawęzić dalej w następnej fazie. Implementacja routingu nie gwarantuje kolejności przetwarzania pasujących punktów końcowych. **Wszystkie** możliwe dopasowania są przetwarzane jednocześnie. Fazy dopasowywania adresów URL są wykonywane w następującej kolejności. ASP.NET Core:
@@ -310,25 +297,25 @@ Lista punktów końcowych jest określana według priorytetów według:
 * [RouteEndpoint. Order](xref:Microsoft.AspNetCore.Routing.RouteEndpoint.Order*)
 * [Pierwszeństwo szablonu trasy](#rtp)
 
-Wszystkie zgodne punkty końcowe są przetwarzane w każdej fazie aż <xref:Microsoft.AspNetCore.Routing.Matching.EndpointSelector> do osiągnięcia. `EndpointSelector` Jest to Faza końcowa. Wybiera punkt końcowy o najwyższym priorytecie z dopasowań w miarę najlepszego dopasowania. Jeśli istnieją inne dopasowania o takim samym priorytecie jak najlepsze dopasowanie, zostanie zgłoszony wyjątek niejednoznacznej zgodności.
+Wszystkie zgodne punkty końcowe są przetwarzane w każdej fazie aż do <xref:Microsoft.AspNetCore.Routing.Matching.EndpointSelector> osiągnięcia. `EndpointSelector`Jest to Faza końcowa. Wybiera punkt końcowy o najwyższym priorytecie z dopasowań w miarę najlepszego dopasowania. Jeśli istnieją inne dopasowania o takim samym priorytecie jak najlepsze dopasowanie, zostanie zgłoszony wyjątek niejednoznacznej zgodności.
 
-Pierwszeństwo trasy jest obliczane na podstawie **bardziej szczegółowego** szablonu trasy o wyższym priorytecie. Rozważmy na przykład szablony `/hello` i: `/{message}`
+Pierwszeństwo trasy jest obliczane na podstawie **bardziej szczegółowego** szablonu trasy o wyższym priorytecie. Rozważmy na przykład szablony `/hello` i `/{message}` :
 
-* Oba pasują do ścieżki `/hello`URL.
+* Oba pasują do ścieżki URL `/hello` .
 * `/hello`jest bardziej szczegółowy i dlatego wyższy priorytet.
 
 Ogólnie rzecz biorąc, pierwszeństwo trasy jest dobrym zadaniem do wyboru najlepszego dopasowania dla rodzajów schematów adresów URL używanych w ćwiczeniach. Użyj <xref:Microsoft.AspNetCore.Routing.RouteEndpoint.Order> tylko w razie potrzeby, aby uniknąć niejednoznaczności.
 
-Ze względu na rodzaje rozszerzalności udostępniane przez usługę Routing nie jest możliwe, aby system routingu był obliczany przed czasem niejednoznacznych tras. Rozważmy przykład takich jak szablony `/{message:alpha}` tras i: `/{message:int}`
+Ze względu na rodzaje rozszerzalności udostępniane przez usługę Routing nie jest możliwe, aby system routingu był obliczany przed czasem niejednoznacznych tras. Rozważmy przykład takich jak szablony tras `/{message:alpha}` i `/{message:int}` :
 
-* `alpha` Ograniczenie pasuje tylko do znaków alfanumerycznych.
-* Ograniczenie `int` jest zgodne tylko z liczbami.
+* `alpha`Ograniczenie pasuje tylko do znaków alfanumerycznych.
+* `int`Ograniczenie jest zgodne tylko z liczbami.
 * Te szablony mają ten sam priorytet trasy, ale nie istnieje pojedynczy adres URL, który oba są zgodne.
 * Jeśli system routingu zgłosił błąd niejednoznaczności przy uruchamianiu, powinien zablokować ten prawidłowy przypadek użycia.
 
 > [!WARNING]
 >
-> Kolejność operacji wewnątrz <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*> nie wpływa na zachowanie routingu, z wyjątkiem jednego wyjątku. <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*>i <xref:Microsoft.AspNetCore.Builder.MvcAreaRouteBuilderExtensions.MapAreaRoute*> automatycznie Przypisz wartość zamówienia do punktów końcowych na podstawie kolejności, w której są wywoływane. Symuluje to długotrwałe zachowanie kontrolerów bez systemu routingu, zapewniając takie same gwarancje jak starsze implementacje routingu.
+> Kolejność operacji wewnątrz <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*> nie wpływa na zachowanie routingu, z wyjątkiem jednego wyjątku. <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*>i <xref:Microsoft.AspNetCore.Builder.MvcAreaRouteBuilderExtensions.MapAreaRoute*> Automatycznie przypisz wartość zamówienia do punktów końcowych na podstawie kolejności, w której są wywoływane. Symuluje to długotrwałe zachowanie kontrolerów bez systemu routingu, zapewniając takie same gwarancje jak starsze implementacje routingu.
 >
 > W starszej implementacji routingu możliwe jest wdrożenie rozszerzalności routingu, która ma zależność od kolejności przetwarzania tras. Routing punktów końcowych w ASP.NET Core 3,0 i nowszych:
 > 
@@ -346,7 +333,7 @@ Ze względu na rodzaje rozszerzalności udostępniane przez usługę Routing nie
 * Pozwala uniknąć konieczności dostosowywania kolejności punktów końcowych w typowych przypadkach.
 * Podejmuje próbę dopasowania częstych oczekiwań związanych z routingiem.
 
-Rozważmy na przykład szablony `/Products/List` i `/Products/{id}`. Należy założyć, że `/Products/List` jest to lepszy odpowiednik niż `/Products/{id}` ścieżka `/Products/List`URL. Działa, ponieważ segment `/List` literału jest uznawany za wyższy niż segment `/{id}`parametru.
+Rozważmy na przykład szablony `/Products/List` i `/Products/{id}` . Należy założyć, że `/Products/List` jest to lepszy odpowiednik niż `/Products/{id}` ścieżka URL `/Products/List` . Działa, ponieważ segment literału `/List` jest uznawany za wyższy niż segment parametru `/{id}` .
 
 Szczegóły dotyczące sposobu działania pierwszeństwa są powiązane ze sposobem definiowania szablonów tras:
 
@@ -367,20 +354,20 @@ Generowanie adresu URL:
 * To proces, za pomocą którego Routing może utworzyć ścieżkę URL na podstawie zestawu wartości trasy.
 * Umożliwia logiczne rozdzielenie między punktami końcowymi i adresami URL, które uzyskują do nich dostęp.
 
-Routing punktów końcowych <xref:Microsoft.AspNetCore.Routing.LinkGenerator> obejmuje interfejs API. `LinkGenerator`jest usługą pojedynczą dostępną w ramach programu [di](xref:fundamentals/dependency-injection). `LinkGenerator` Interfejsu API można używać poza kontekstem żądania wykonania. [MVC. IUrlHelper](xref:Microsoft.AspNetCore.Mvc.IUrlHelper) i scenariusze, które są <xref:Microsoft.AspNetCore.Mvc.IUrlHelper>zależne, takie jak [pomocnicy tagów](xref:mvc/views/tag-helpers/intro), pomocników HTML i [wyniki akcji](xref:mvc/controllers/actions), używają wewnętrznie `LinkGenerator` interfejsu API w celu zapewnienia możliwości generowania linków.
+Routing punktów końcowych obejmuje <xref:Microsoft.AspNetCore.Routing.LinkGenerator> interfejs API. `LinkGenerator`jest usługą pojedynczą dostępną w ramach programu [di](xref:fundamentals/dependency-injection). `LinkGenerator`Interfejsu API można używać poza kontekstem żądania wykonania. [MVC. IUrlHelper](xref:Microsoft.AspNetCore.Mvc.IUrlHelper) i scenariusze, które są zależne <xref:Microsoft.AspNetCore.Mvc.IUrlHelper> , takie jak [pomocnicy tagów](xref:mvc/views/tag-helpers/intro), pomocników HTML i [wyniki akcji](xref:mvc/controllers/actions), używają `LinkGenerator` wewnętrznie interfejsu API w celu zapewnienia możliwości generowania linków.
 
-Generator łącza jest objęty koncepcją i **schematami** **adresów.** Schemat adresów jest sposobem określania punktów końcowych, które należy wziąć pod uwagę podczas generowania łącza. Na przykład nazwa trasy i wartości trasy scenariusze wielu użytkowników są znane z kontrolerów, a Razor Pages są implementowane jako schemat adresów.
+Generator łącza jest objęty koncepcją i **schematami** **adresów.** Schemat adresów jest sposobem określania punktów końcowych, które należy wziąć pod uwagę podczas generowania łącza. Na przykład nazwa trasy i wartości trasy scenariusze wielu użytkowników są znane z kontrolerów, a Razor strony są implementowane jako schemat adresów.
 
-Generator łącza można połączyć z kontrolerami i Razor Pages przy użyciu następujących metod rozszerzających:
+Generator łącza może łączyć się z kontrolerami i Razor stronami przy użyciu następujących metod rozszerzających:
 
 * <xref:Microsoft.AspNetCore.Routing.ControllerLinkGeneratorExtensions.GetPathByAction*>
 * <xref:Microsoft.AspNetCore.Routing.ControllerLinkGeneratorExtensions.GetUriByAction*>
 * <xref:Microsoft.AspNetCore.Routing.PageLinkGeneratorExtensions.GetPathByPage*>
 * <xref:Microsoft.AspNetCore.Routing.PageLinkGeneratorExtensions.GetUriByPage*>
 
-Przeciążenia tych metod akceptują argumenty, które obejmują `HttpContext`. Te metody są funkcjonalnie równoważne z [adresem URL. Action](xref:System.Web.Mvc.UrlHelper.Action*) i [URL. Page](xref:Microsoft.AspNetCore.Mvc.UrlHelperExtensions.Page*), ale oferują dodatkową elastyczność i opcje.
+Przeciążenia tych metod akceptują argumenty, które obejmują `HttpContext` . Te metody są funkcjonalnie równoważne z [adresem URL. Action](xref:System.Web.Mvc.UrlHelper.Action*) i [URL. Page](xref:Microsoft.AspNetCore.Mvc.UrlHelperExtensions.Page*), ale oferują dodatkową elastyczność i opcje.
 
-`GetPath*` Metody są najbardziej podobne do `Url.Action` i `Url.Page`, w tym, że generują identyfikator URI zawierający ścieżkę bezwzględną. `GetUri*` Metody zawsze generują bezwzględny identyfikator URI zawierający schemat i hosta. Metody, które akceptują `HttpContext` identyfikator URI w kontekście żądania wykonania. Użycie wartości tras w [otoczeniu](#ambient) , ścieżki podstawowej adresu URL, schematu i hosta z żądania wykonania jest używane, chyba że zostaną zastąpione.
+`GetPath*`Metody są najbardziej podobne do `Url.Action` i `Url.Page` , w tym, że generują identyfikator URI zawierający ścieżkę bezwzględną. `GetUri*`Metody zawsze generują bezwzględny identyfikator URI zawierający schemat i hosta. Metody, które akceptują `HttpContext` Identyfikator URI w kontekście żądania wykonania. Użycie wartości tras w [otoczeniu](#ambient) , ścieżki podstawowej adresu URL, schematu i hosta z żądania wykonania jest używane, chyba że zostaną zastąpione.
 
 <xref:Microsoft.AspNetCore.Routing.LinkGenerator>jest wywoływana przy użyciu adresu. Generowanie identyfikatora URI występuje w dwóch krokach:
 
@@ -390,16 +377,85 @@ Przeciążenia tych metod akceptują argumenty, które obejmują `HttpContext`. 
 Metody zapewniane przez <xref:Microsoft.AspNetCore.Routing.LinkGenerator> obsługę funkcji generowania linków standardowych dla dowolnego typu adresu. Najbardziej wygodnym sposobem korzystania z generatora łączy są metody rozszerzające, które wykonują operacje dla określonego typu adresu:
 
 | Metoda rozszerzenia | Opis |
-| ---------------- | ----------- |
-| <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetPathByAddress*> | Generuje identyfikator URI z ścieżką bezwzględną na podstawie podanych wartości. |
-| <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetUriByAddress*> | Generuje bezwzględny identyfikator URI na podstawie podanych wartości.             |
+| ---
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-------- | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+------ | | <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetPathByAddress*> | Generuje identyfikator URI z ścieżką bezwzględną na podstawie podanych wartości. | | <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetUriByAddress*> | Generuje bezwzględny identyfikator URI na podstawie podanych wartości.             |
 
 > [!WARNING]
 > Należy zwrócić uwagę na następujące konsekwencje wywoływania <xref:Microsoft.AspNetCore.Routing.LinkGenerator> metod:
 >
-> * Użyj `GetUri*` metod rozszerzających z zachowaniem ostrożności w konfiguracji aplikacji, która `Host` nie weryfikuje nagłówka żądań przychodzących. Jeśli `Host` nagłówek żądań przychodzących nie jest zweryfikowany, dane wejściowe żądania niezaufanego mogą być wysyłane z powrotem do klienta w identyfikatorach URI w widoku lub stronie. Zaleca się, aby wszystkie aplikacje produkcyjne skonfigurowali swój serwer do `Host` sprawdzania poprawności nagłówka pod kątem znanych prawidłowych wartości.
+> * Użyj `GetUri*` metod rozszerzających z zachowaniem ostrożności w konfiguracji aplikacji, która nie weryfikuje `Host` nagłówka żądań przychodzących. Jeśli `Host` nagłówek żądań przychodzących nie jest zweryfikowany, dane wejściowe żądania niezaufanego mogą być wysyłane z powrotem do klienta w identyfikatorach URI w widoku lub stronie. Zaleca się, aby wszystkie aplikacje produkcyjne skonfigurowali swój serwer do sprawdzania poprawności `Host` nagłówka pod kątem znanych prawidłowych wartości.
 >
-> * Należy <xref:Microsoft.AspNetCore.Routing.LinkGenerator> używać z zachowaniem ostrożności w oprogramowaniu `Map` pośredniczącym w połączeniu z lub `MapWhen`. `Map*`zmienia ścieżkę podstawową żądania wykonania, która ma wpływ na dane wyjściowe generowania łącza. Wszystkie <xref:Microsoft.AspNetCore.Routing.LinkGenerator> interfejsy API umożliwiają określanie ścieżki podstawowej. Określ pustą ścieżkę bazową, `Map*` aby cofnąć wpływ na generowanie linków.
+> * Należy używać <xref:Microsoft.AspNetCore.Routing.LinkGenerator> z zachowaniem ostrożności w oprogramowaniu pośredniczącym w połączeniu z `Map` lub `MapWhen` . `Map*`zmienia ścieżkę podstawową żądania wykonania, która ma wpływ na dane wyjściowe generowania łącza. Wszystkie <xref:Microsoft.AspNetCore.Routing.LinkGenerator> interfejsy API umożliwiają określanie ścieżki podstawowej. Określ pustą ścieżkę bazową, aby cofnąć `Map*` wpływ na generowanie linków.
 
 ### <a name="middleware-example"></a>Przykład oprogramowania pośredniczącego
 
@@ -411,50 +467,537 @@ W poniższym przykładzie oprogramowanie pośredniczące używa <xref:Microsoft.
 
 ## <a name="route-template-reference"></a>Odwołanie do szablonu trasy
 
-Tokeny `{}` w ramach definiowania parametrów trasy, które są powiązane w przypadku dopasowania trasy. W segmencie trasy można zdefiniować więcej niż jeden parametr trasy, ale parametry tras muszą być rozdzielone wartością literału. Na przykład `{controller=Home}{action=Index}` nie jest prawidłową trasą, ponieważ nie ma wartości literału między `{controller}` i `{action}`.  Parametry trasy muszą mieć nazwę i mogą mieć określone dodatkowe atrybuty.
+Tokeny w ramach `{}` definiowania parametrów trasy, które są powiązane w przypadku dopasowania trasy. W segmencie trasy można zdefiniować więcej niż jeden parametr trasy, ale parametry tras muszą być rozdzielone wartością literału. Na przykład `{controller=Home}{action=Index}` nie jest prawidłową trasą, ponieważ nie ma wartości literału między `{controller}` i `{action}` .  Parametry trasy muszą mieć nazwę i mogą mieć określone dodatkowe atrybuty.
 
-Tekst literału inny niż parametry trasy (na przykład `{id}`) i separator `/` ścieżki muszą być zgodne z tekstem w adresie URL. W dopasowaniu do tekstu nie jest rozróżniana wielkość liter i w oparciu o zdekodowaną reprezentację ścieżki adresu URL. Aby dopasować Ogranicznik parametru trasy literału `{` lub `}`, należy wprowadzić ogranicznik, powtarzając znak. Na przykład `{{` lub `}}`.
+Tekst literału inny niż parametry trasy (na przykład `{id}` ) i separator ścieżki `/` muszą być zgodne z tekstem w adresie URL. W dopasowaniu do tekstu nie jest rozróżniana wielkość liter i w oparciu o zdekodowaną reprezentację ścieżki adresu URL. Aby dopasować Ogranicznik parametru trasy literału `{` lub `}` , należy wprowadzić ogranicznik, powtarzając znak. Na przykład `{{` lub `}}` .
 
-Gwiazdka `*` lub podwójna gwiazdka `**`:
+Gwiazdka `*` lub podwójna gwiazdka `**` :
 
 * Można go użyć jako prefiksu do parametru trasy, aby powiązać z pozostałą częścią identyfikatora URI.
-* Są nazywane parametrami **przechwycenia** . Na przykład `blog/{**slug}`:
-  * Dopasowuje dowolny identyfikator URI, `/blog` który rozpoczyna się od i ma dowolną wartość po nim.
+* Są nazywane parametrami **przechwycenia** . Na przykład `blog/{**slug}` :
+  * Dopasowuje dowolny identyfikator URI, który rozpoczyna się od `/blog` i ma dowolną wartość po nim.
   * Wartość poniżej `/blog` jest przypisana do wartości trasy [informacji](https://developer.mozilla.org/docs/Glossary/Slug) o sobie.
 
 [!INCLUDE[](~/includes/catchall.md)]
 
 Catch-wszystkie parametry można także dopasować do pustego ciągu.
 
-Parametr catch-all wyprowadza odpowiednie znaki, gdy trasa jest używana do generowania adresu URL, włącznie z separatorami `/` ścieżki. Na przykład trasa `foo/{*path}` z wartościami `{ path = "my/path" }` trasy jest generowana `foo/my%2Fpath`. Zwróć uwagę na odwrócony ukośnik. Aby zaokrąglić znaki separatora ścieżki, użyj prefiksu parametru `**` trasy. Trasa `foo/{**path}` z `{ path = "my/path" }` generowaniem `foo/my/path`.
+Parametr catch-all wyprowadza odpowiednie znaki, gdy trasa jest używana do generowania adresu URL, włącznie z separatorami ścieżki `/` . Na przykład trasa `foo/{*path}` z wartościami trasy jest `{ path = "my/path" }` generowana `foo/my%2Fpath` . Zwróć uwagę na odwrócony ukośnik. Aby zaokrąglić znaki separatora ścieżki, użyj `**` prefiksu parametru trasy. Trasa `foo/{**path}` z `{ path = "my/path" }` generowaniem `foo/my/path` .
 
-Wzorce adresów URL, które próbują przechwycić nazwę pliku z opcjonalnym rozszerzeniem pliku, mają dodatkowe uwagi. Rozważmy na przykład szablon `files/{filename}.{ext?}`. Gdy wartości obu `filename` i `ext` istnieją, są wypełniane obie wartości. Jeśli tylko wartość `filename` istnieje w adresie URL, trasa pasuje do siebie, ponieważ końcowe `.` jest opcjonalne. Następujące adresy URL pasują do tej trasy:
+Wzorce adresów URL, które próbują przechwycić nazwę pliku z opcjonalnym rozszerzeniem pliku, mają dodatkowe uwagi. Rozważmy na przykład szablon `files/{filename}.{ext?}` . Gdy wartości obu `filename` i `ext` istnieją, są wypełniane obie wartości. Jeśli tylko wartość `filename` istnieje w adresie URL, trasa pasuje do siebie, ponieważ końcowe `.` jest opcjonalne. Następujące adresy URL pasują do tej trasy:
 
 * `/files/myFile.txt`
 * `/files/myFile`
 
-Parametry trasy mogą mieć **wartości domyślne** , określając wartość domyślną po nazwie parametru oddzielone znakiem równości (`=`). Na przykład `{controller=Home}` definiuje `Home` jako wartość domyślną dla. `controller` Wartość domyślna jest używana, jeśli żadna wartość nie jest obecna w adresie URL dla parametru. Parametry trasy są opcjonalne przez dołączenie znaku zapytania (`?`) na końcu nazwy parametru. Na przykład `id?`. Różnica między wartościami opcjonalnymi i domyślnymi parametrami trasy to:
+Parametry trasy mogą mieć **wartości domyślne** , określając wartość domyślną po nazwie parametru oddzielone znakiem równości ( `=` ). Na przykład `{controller=Home}` definiuje `Home` jako wartość domyślną dla `controller` . Wartość domyślna jest używana, jeśli żadna wartość nie jest obecna w adresie URL dla parametru. Parametry trasy są opcjonalne przez dołączenie znaku zapytania ( `?` ) na końcu nazwy parametru. Na przykład `id?`. Różnica między wartościami opcjonalnymi i domyślnymi parametrami trasy to:
 
 * Parametr trasy z wartością domyślną zawsze generuje wartość.
 * Opcjonalny parametr ma wartość tylko wtedy, gdy wartość jest podana przez adres URL żądania.
 
 Parametry trasy mogą mieć ograniczenia, które muszą być zgodne z wartością trasy powiązaną z adresem URL. Dodawanie `:` i ograniczanie nazwy po nazwie parametru trasy określa ograniczenie wbudowane dla parametru trasy. Jeśli ograniczenie wymaga argumentów, są one ujęte w nawiasy `(...)` po nazwie ograniczenia. Można określić wiele *ograniczeń wbudowanych* , dołączając inne `:` i nazwę ograniczenia.
 
-Nazwa i argumenty ograniczenia są przekazane do <xref:Microsoft.AspNetCore.Routing.IInlineConstraintResolver> usługi w celu utworzenia wystąpienia <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> do użycia w przetwarzaniu adresów URL. Na przykład szablon `blog/{article:minlength(10)}` trasy określa `minlength` ograniczenie z argumentem. `10` Aby uzyskać więcej informacji na temat ograniczeń trasy i listę ograniczeń zapewnianych przez platformę, zobacz sekcję [odwołanie do ograniczenia trasy](#route-constraint-reference) .
+Nazwa i argumenty ograniczenia są przekazane do usługi w <xref:Microsoft.AspNetCore.Routing.IInlineConstraintResolver> celu utworzenia wystąpienia <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> do użycia w przetwarzaniu adresów URL. Na przykład szablon trasy `blog/{article:minlength(10)}` określa `minlength` ograniczenie z argumentem `10` . Aby uzyskać więcej informacji na temat ograniczeń trasy i listę ograniczeń zapewnianych przez platformę, zobacz sekcję [odwołanie do ograniczenia trasy](#route-constraint-reference) .
 
-Parametry trasy mogą także mieć Transformatory parametrów. Transformatory parametrów przekształcają wartość parametru podczas generowania linków i dopasowywania akcji i stron do adresów URL. Podobnie jak ograniczenia, transformatory parametrów można dodać do parametru trasy, dodając nazwę `:` i transformator po nazwie parametru trasy. Na przykład szablon `blog/{article:slugify}` trasy określa `slugify` transformator. Aby uzyskać więcej informacji na temat transformatorów parametrów, zobacz sekcję [informacje dotyczące transformatora parametrów](#parameter-transformer-reference) .
+Parametry trasy mogą także mieć Transformatory parametrów. Transformatory parametrów przekształcają wartość parametru podczas generowania linków i dopasowywania akcji i stron do adresów URL. Podobnie jak ograniczenia, transformatory parametrów można dodać do parametru trasy, dodając `:` nazwę i transformator po nazwie parametru trasy. Na przykład szablon trasy `blog/{article:slugify}` określa `slugify` transformator. Aby uzyskać więcej informacji na temat transformatorów parametrów, zobacz sekcję [informacje dotyczące transformatora parametrów](#parameter-transformer-reference) .
 
 W poniższej tabeli przedstawiono przykładowe szablony tras i ich zachowanie:
 
 | Szablon trasy                           | Przykładowy pasujący identyfikator URI    | Identyfikator URI żądania&hellip;                                                    |
-| ---------------------------------------- | ----------------------- | -------------------------------------------------------------------------- |
-| `hello`                                  | `/hello`                | Dopasowuje tylko jedną ścieżkę `/hello`.                                     |
-| `{Page=Home}`                            | `/`                     | Dopasowuje i `Page` ustawia `Home`jako.                                         |
-| `{Page=Home}`                            | `/Contact`              | Dopasowuje i `Page` ustawia `Contact`jako.                                      |
-| `{controller}/{action}/{id?}`            | `/Products/List`        | Mapuje do `Products` kontrolera i `List` akcji.                       |
-| `{controller}/{action}/{id?}`            | `/Products/Details/123` | Mapuje do `Products` kontrolera i `Details` akcji z`id` ustawioną na 123. |
-| `{controller=Home}/{action=Index}/{id?}` | `/`                     | Mapuje na `Home` kontroler i `Index` metodę. Parametr `id` jest ignorowany.        |
-| `{controller=Home}/{action=Index}/{id?}` | `/Products`         | Mapuje na `Products` kontroler i `Index` metodę. Parametr `id` jest ignorowany.        |
+| ---
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-------------------- | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+------------ | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+------------------------------------- | | `hello`                                  | `/hello`                | Dopasowuje tylko jedną ścieżkę `/hello` .                                     | | `{Page=Home}`                            | `/`                     | Dopasowuje i ustawia `Page` jako `Home` .                                         | | `{Page=Home}`                            | `/Contact`              | Dopasowuje i ustawia `Page` jako `Contact` .                                      | | `{controller}/{action}/{id?}`            | `/Products/List`        | Mapuje do `Products` kontrolera i `List` akcji.                       | | `{controller}/{action}/{id?}`            | `/Products/Details/123` | Mapuje do `Products` kontrolera i `Details` akcji z `id` ustawioną na 123. | | `{controller=Home}/{action=Index}/{id?}` | `/`                     | Mapuje na `Home` kontroler i `Index` metodę. Parametr `id` jest ignorowany.        | | `{controller=Home}/{action=Index}/{id?}` | `/Products`         | Mapuje na `Products` kontroler i `Index` metodę. Parametr `id` jest ignorowany.        |
 
 Użycie szablonu jest ogólnie najprostszym podejściem do routingu. Ograniczenia i wartości domyślne można także określić poza szablonem trasy.
 
@@ -465,20 +1008,20 @@ Złożone segmenty działają w określony sposób, który należy zrozumieć, a
 
 [!INCLUDE[](~/includes/regex.md)]
 
-Jest to podsumowanie kroków wykonywanych przez Routing z szablonem `/a{b}c{d}` i ścieżką `/abcd`URL. `|` Służy do wizualizacji działania algorytmu:
+Jest to podsumowanie kroków wykonywanych przez Routing z szablonem `/a{b}c{d}` i ścieżką URL `/abcd` . `|`Służy do wizualizacji działania algorytmu:
 
-* Pierwszy literał, od prawej do lewej, jest `c`. W `/abcd` związku z tym jest wyszukiwany od prawej i odnaleziony `/ab|c|d`.
-* Wszystko w prawo (`d`) jest teraz dopasowane do parametru `{d}`Route.
-* Następnym literałem, od prawej do lewej, `a`jest. W `/ab|c|d` związku z tym zostanie wyszukany od momentu, gdy został pozostawiony, a następnie `a` zostanie znaleziony `/|a|b|c|d`.
-* Wartość z prawej strony (`b`) jest teraz dopasowana do parametru `{b}`Route.
+* Pierwszy literał, od prawej do lewej, jest `c` . `/abcd`W związku z tym jest wyszukiwany od prawej i odnaleziony `/ab|c|d` .
+* Wszystko w prawo ( `d` ) jest teraz dopasowane do parametru Route `{d}` .
+* Następnym literałem, od prawej do lewej, jest `a` . W związku z tym zostanie `/ab|c|d` wyszukany od momentu, gdy został pozostawiony, a następnie `a` zostanie znaleziony `/|a|b|c|d` .
+* Wartość z prawej strony ( `b` ) jest teraz dopasowana do parametru Route `{b}` .
 * Nie ma pozostałego tekstu i nie ma pozostałego szablonu trasy, więc jest to dopasowanie.
 
-Oto przykład negatywnego przypadku przy użyciu tego samego szablonu `/a{b}c{d}` i ścieżki `/aabcd`URL. `|` Służy do wizualizacji działania algorytmu. Ten przypadek nie jest odpowiednikiem, który jest wyjaśniony przez ten sam algorytm:
-* Pierwszy literał, od prawej do lewej, jest `c`. W `/aabcd` związku z tym jest wyszukiwany od prawej i odnaleziony `/aab|c|d`.
-* Wszystko w prawo (`d`) jest teraz dopasowane do parametru `{d}`Route.
-* Następnym literałem, od prawej do lewej, `a`jest. W `/aab|c|d` związku z tym zostanie wyszukany od momentu, gdy został pozostawiony, a następnie `a` zostanie znaleziony `/a|a|b|c|d`.
-* Wartość z prawej strony (`b`) jest teraz dopasowana do parametru `{b}`Route.
-* Na tym etapie jest pozostały `a`tekst, ale algorytm został uruchomiony z szablonu trasy do analizy, więc nie jest to dopasowanie.
+Oto przykład negatywnego przypadku przy użyciu tego samego szablonu `/a{b}c{d}` i ścieżki URL `/aabcd` . `|`Służy do wizualizacji działania algorytmu. Ten przypadek nie jest odpowiednikiem, który jest wyjaśniony przez ten sam algorytm:
+* Pierwszy literał, od prawej do lewej, jest `c` . `/aabcd`W związku z tym jest wyszukiwany od prawej i odnaleziony `/aab|c|d` .
+* Wszystko w prawo ( `d` ) jest teraz dopasowane do parametru Route `{d}` .
+* Następnym literałem, od prawej do lewej, jest `a` . W związku z tym zostanie `/aab|c|d` wyszukany od momentu, gdy został pozostawiony, a następnie `a` zostanie znaleziony `/a|a|b|c|d` .
+* Wartość z prawej strony ( `b` ) jest teraz dopasowana do parametru Route `{b}` .
+* Na tym etapie jest pozostały tekst `a` , ale algorytm został uruchomiony z szablonu trasy do analizy, więc nie jest to dopasowanie.
 
 Ponieważ algorytm dopasowywania nie jest [zachłanne](#greedy):
 
@@ -496,30 +1039,82 @@ Dopasowanie zachłanne, znane także jako [Dopasowywanie z opóźnieniem](https:
 Ograniczenia trasy są wykonywane, gdy nastąpiło dopasowanie do przychodzącego adresu URL, a Ścieżka adresu URL jest zgodna z wartościami trasy. Ograniczenia trasy zwykle sprawdzają wartość trasy skojarzoną za pośrednictwem szablonu trasy i podejmują decyzję o tym, czy wartość jest akceptowalna. Niektóre ograniczenia trasy używają danych poza wartością trasy, aby uwzględnić, czy żądanie może być kierowane. Na przykład <xref:Microsoft.AspNetCore.Routing.Constraints.HttpMethodRouteConstraint> może akceptować lub odrzucać żądanie na podstawie jego zlecenia http. Ograniczenia są używane w żądaniach routingu i generowania linków.
 
 > [!WARNING]
-> Nie używaj ograniczeń sprawdzania poprawności danych wejściowych. Jeśli ograniczenia są używane do sprawdzania poprawności danych wejściowych, nieprawidłowe wyniki wejściowe `404` w odpowiedzi nie znaleziono. Nieprawidłowe dane wejściowe powinny generować `400` Nieprawidłowe żądanie z odpowiednim komunikatem o błędzie. Ograniczenia trasy są używane do odróżniania podobnych tras, a nie do sprawdzania danych wejściowych dla określonej trasy.
+> Nie używaj ograniczeń sprawdzania poprawności danych wejściowych. Jeśli ograniczenia są używane do sprawdzania poprawności danych wejściowych, nieprawidłowe wyniki wejściowe w `404` odpowiedzi nie znaleziono. Nieprawidłowe dane wejściowe powinny generować `400` Nieprawidłowe żądanie z odpowiednim komunikatem o błędzie. Ograniczenia trasy są używane do odróżniania podobnych tras, a nie do sprawdzania danych wejściowych dla określonej trasy.
 
 W poniższej tabeli przedstawiono przykładowe ograniczenia trasy i ich oczekiwane zachowanie:
 
 | ograniczenie | Przykład | Przykładowe dopasowania | Uwagi |
-| ---------- | ------- | --------------- | ----- |
-| `int` | `{id:int}` | `123456789`, `-123456789` | Dopasowuje dowolną liczbę całkowitą |
-| `bool` | `{active:bool}` | `true`, `FALSE` | `true` Dopasowuje `false`lub. Bez uwzględniania wielkości liter |
-| `datetime` | `{dob:datetime}` | `2016-12-31`, `2016-12-31 7:32pm` | Dopasowuje prawidłową `DateTime` wartość w niezmiennej kulturze. Zobacz poprzednie ostrzeżenie. |
-| `decimal` | `{price:decimal}` | `49.99`, `-1,000.01` | Dopasowuje prawidłową `decimal` wartość w niezmiennej kulturze. Zobacz poprzednie ostrzeżenie.|
-| `double` | `{weight:double}` | `1.234`, `-1,001.01e8` | Dopasowuje prawidłową `double` wartość w niezmiennej kulturze. Zobacz poprzednie ostrzeżenie.|
-| `float` | `{weight:float}` | `1.234`, `-1,001.01e8` | Dopasowuje prawidłową `float` wartość w niezmiennej kulturze. Zobacz poprzednie ostrzeżenie.|
-| `guid` | `{id:guid}` | `CD2C1638-1638-72D5-1638-DEADBEEF1638` | Dopasowuje prawidłową `Guid` wartość |
-| `long` | `{ticks:long}` | `123456789`, `-123456789` | Dopasowuje prawidłową `long` wartość |
-| `minlength(value)` | `{username:minlength(4)}` | `Rick` | Ciąg musi składać się z co najmniej 4 znaków |
-| `maxlength(value)` | `{filename:maxlength(8)}` | `MyFile` | Ciąg nie może zawierać więcej niż 8 znaków |
-| `length(length)` | `{filename:length(12)}` | `somefile.txt` | Ciąg musi zawierać dokładnie 12 znaków |
-| `length(min,max)` | `{filename:length(8,16)}` | `somefile.txt` | Ciąg musi mieć długość co najmniej 8 znaków |
-| `min(value)` | `{age:min(18)}` | `19` | Wartość całkowita musi być równa co najmniej 18 |
-| `max(value)` | `{age:max(120)}` | `91` | Wartość całkowita nie może być większa niż 120 |
-| `range(min,max)` | `{age:range(18,120)}` | `91` | Wartość całkowita musi być równa co najmniej 18, ale nie więcej niż 120 |
-| `alpha` | `{name:alpha}` | `Rick` | Ciąg musi składać się z co najmniej jednego znaku `a` - `z` alfabetycznego i nie uwzględnia wielkości liter. |
-| `regex(expression)` | `{ssn:regex(^\\d{{3}}-\\d{{2}}-\\d{{4}}$)}` | `123-45-6789` | Ciąg musi być zgodny z wyrażeniem regularnym. Zapoznaj się z poradami dotyczącymi definiowania wyrażenia regularnego. |
-| `required` | `{name:required}` | `Rick` | Służy do wymuszania, że podczas generowania adresu URL jest obecna wartość, która nie jest wartością parametru |
+| ---
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+----- | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+---- | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-------- | ----- | | `int` | `{id:int}` | `123456789`, `-123456789` | Dopasowuje dowolną liczbę całkowitą | | `bool` | `{active:bool}` | `true`, `FALSE` | Dopasowuje `true` lub `false` . Bez uwzględniania wielkości liter | | `datetime` | `{dob:datetime}` | `2016-12-31`, `2016-12-31 7:32pm` | Dopasowuje prawidłową `DateTime` wartość w niezmiennej kulturze. Zobacz poprzednie ostrzeżenie. | | `decimal` | `{price:decimal}` | `49.99`, `-1,000.01` | Dopasowuje prawidłową `decimal` wartość w niezmiennej kulturze. Zobacz poprzednie ostrzeżenie. | | `double` | `{weight:double}` | `1.234`, `-1,001.01e8` | Dopasowuje prawidłową `double` wartość w niezmiennej kulturze. Zobacz poprzednie ostrzeżenie. | | `float` | `{weight:float}` | `1.234`, `-1,001.01e8` | Dopasowuje prawidłową `float` wartość w niezmiennej kulturze. Zobacz poprzednie ostrzeżenie. | | `guid` | `{id:guid}` | `CD2C1638-1638-72D5-1638-DEADBEEF1638` | Dopasowuje prawidłową `Guid` wartość | | `long`  |  `{ticks:long}`  |  `123456789` , `-123456789` | Pasuje do prawidłowej `long` wartości | | `minlength(value)`  |  `{username:minlength(4)}`  |  `Rick` | Ciąg musi składać się z co najmniej 4 znaków | | `maxlength(value)` | `{filename:maxlength(8)}` | `MyFile` | Ciąg nie może zawierać więcej niż 8 znaków | | `length(length)` | `{filename:length(12)}` | `somefile.txt` | Ciąg musi zawierać dokładnie 12 znaków | | `length(min,max)` | `{filename:length(8,16)}` | `somefile.txt` | Ciąg musi zawierać od 8 do 16 znaków | | `min(value)` | `{age:min(18)}` | `19` | Wartość całkowita musi być co najmniej 18 | | `max(value)` | `{age:max(120)}` | `91` | Wartość całkowita nie może być większa niż 120 | | `range(min,max)` | `{age:range(18,120)}` | `91` | Wartość całkowita musi zawierać co najmniej 18, ale nie więcej niż 120 | | `alpha` | `{name:alpha}` | `Rick` | Ciąg musi składać się z co najmniej jednego znaku alfabetycznego `a` - `z` i nie uwzględnia wielkości liter. | | `regex(expression)` | `{ssn:regex(^\\d{{3}}-\\d{{2}}-\\d{{4}}$)}` | `123-45-6789` | Ciąg musi być zgodny z wyrażeniem regularnym. Zapoznaj się z poradami dotyczącymi definiowania wyrażenia regularnego. | | `required` | `{name:required}` | `Rick` | Służy do wymuszania, że podczas generowania adresu URL jest obecna wartość, która nie jest parametrem |
 
 [!INCLUDE[](~/includes/regex.md)]
 
@@ -531,7 +1126,7 @@ public User GetUserById(int id) { }
 ```
 
 > [!WARNING]
-> Ograniczenia trasy, które weryfikują adres URL i są konwertowane na typ CLR zawsze używają niezmiennej kultury. Na przykład konwersja na typ `int` CLR lub. `DateTime` W tych ograniczeniach przyjęto założenie, że adres URL nie jest Lokalizowalny. Ograniczenia trasy dostarczone przez platformę nie modyfikują wartości przechowywanych w wartościach trasy. Wszystkie wartości tras analizowane na podstawie adresu URL są przechowywane jako ciągi. Na przykład, `float` ograniczenie próbuje przekonwertować wartość trasy na float, ale przekonwertowana wartość jest używana tylko do sprawdzenia, czy może być konwertowana na typ float.
+> Ograniczenia trasy, które weryfikują adres URL i są konwertowane na typ CLR zawsze używają niezmiennej kultury. Na przykład konwersja na typ CLR `int` lub `DateTime` . W tych ograniczeniach przyjęto założenie, że adres URL nie jest Lokalizowalny. Ograniczenia trasy dostarczone przez platformę nie modyfikują wartości przechowywanych w wartościach trasy. Wszystkie wartości tras analizowane na podstawie adresu URL są przechowywane jako ciągi. Na przykład, `float` ograniczenie próbuje przekonwertować wartość trasy na float, ale przekonwertowana wartość jest używana tylko do sprawdzenia, czy może być konwertowana na typ float.
 
 ### <a name="regular-expressions-in-constraints"></a>Wyrażenia regularne w ograniczeniach
 
@@ -547,44 +1142,314 @@ Poniższy kod używa literału obiektu do określenia ograniczenia wyrażenia re
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/StartupRegex2.cs?name=snippet)]
 
-ASP.NET Core Framework dodaje `RegexOptions.IgnoreCase | RegexOptions.Compiled | RegexOptions.CultureInvariant` do konstruktora wyrażenia regularnego. Aby <xref:System.Text.RegularExpressions.RegexOptions> uzyskać opis tych elementów członkowskich, zobacz.
+ASP.NET Core Framework dodaje `RegexOptions.IgnoreCase | RegexOptions.Compiled | RegexOptions.CultureInvariant` do konstruktora wyrażenia regularnego. <xref:System.Text.RegularExpressions.RegexOptions>Aby uzyskać opis tych elementów członkowskich, zobacz.
 
-Wyrażenia regularne używają ograniczników i tokenów podobnie jak w przypadku routingu i języka C#. Tokeny wyrażenia regularnego muszą być zmienione. Aby użyć wyrażenia `^\d{3}-\d{2}-\d{4}$` regularnego w ograniczeniu wbudowanym, użyj jednego z następujących elementów:
+Wyrażenia regularne używają ograniczników i tokenów podobnie jak w przypadku routingu i języka C#. Tokeny wyrażenia regularnego muszą być zmienione. Aby użyć wyrażenia regularnego `^\d{3}-\d{2}-\d{4}$` w ograniczeniu wbudowanym, użyj jednego z następujących elementów:
 
-* Zamień `\` znaki podane w ciągu jako `\\` znaki w pliku źródłowym C# w celu ucieczki znaku ucieczki `\` ciągu.
+* Zamień `\` znaki podane w ciągu jako `\\` znaki w pliku źródłowym C# w celu ucieczki `\` znaku ucieczki ciągu.
 * [Literały ciągu Verbatim](/dotnet/csharp/language-reference/keywords/string).
 
-Aby uzyskać ogranicznik parametrów routingu ucieczki `{`, `}` `[` `]`,,, podwójne znaki w wyrażeniu, na przykład `{{` `}}` `[[`,,,. `]]` W poniższej tabeli przedstawiono wyrażenie regularne i jego wersja o zmienionym znaczeniu:
+Aby uzyskać ogranicznik parametrów routingu ucieczki,,,, `{` `}` `[` `]` podwójne znaki w wyrażeniu, na przykład, `{{` `}}` `[[` ,, `]]` . W poniższej tabeli przedstawiono wyrażenie regularne i jego wersja o zmienionym znaczeniu:
 
 | Wyrażenie regularne    | Wyrażenie regularne o zmienionym znaczeniu     |
-| --------------------- | ------------------------------ |
-| `^\d{3}-\d{2}-\d{4}$` | `^\\d{{3}}-\\d{{2}}-\\d{{4}}$` |
+| ---
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+----------- | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+--------------- | | `^\d{3}-\d{2}-\d{4}$` | `^\\d{{3}}-\\d{{2}}-\\d{{4}}$` |
 | `^[a-z]{2}$`          | `^[[a-z]]{{2}}$`               |
 
-Wyrażenia regularne używane w routingu często zaczynają się `^` od znaku i pasują do pozycji początkowej ciągu. Wyrażenia często kończą się `$` znakiem i pasują do końca ciągu. Znaki `^` i `$` zapewniają, że wyrażenie regularne dopasowuje całą wartość parametru trasy. Bez znaków `^` i `$` wyrażenie regularne dopasowuje dowolny podciąg w ciągu, co jest często niepożądane. W poniższej tabeli przedstawiono przykłady i wyjaśniono, dlaczego są one zgodne lub nie można ich dopasować:
+Wyrażenia regularne używane w routingu często zaczynają się od `^` znaku i pasują do pozycji początkowej ciągu. Wyrażenia często kończą się `$` znakiem i pasują do końca ciągu. `^`Znaki i `$` zapewniają, że wyrażenie regularne dopasowuje całą wartość parametru trasy. Bez `^` znaków i `$` wyrażenie regularne dopasowuje dowolny podciąg w ciągu, co jest często niepożądane. W poniższej tabeli przedstawiono przykłady i wyjaśniono, dlaczego są one zgodne lub nie można ich dopasować:
 
-| Wyrażenie   | String    | Dopasowanie | Komentarz               |
-| ------------ | --------- | :---: |  -------------------- |
-| `[a-z]{2}`   | hello     | Tak   | Dopasowania podciągów     |
-| `[a-z]{2}`   | 123abc456 | Tak   | Dopasowania podciągów     |
-| `[a-z]{2}`   | MZ        | Tak   | Wyrażenie dopasowania    |
-| `[a-z]{2}`   | MZ        | Tak   | Bez uwzględniania wielkości liter    |
-| `^[a-z]{2}$` | hello     | Nie    | Zobacz `^` i `$` powyżej |
-| `^[a-z]{2}$` | 123abc456 | Nie    | Zobacz `^` i `$` powyżej |
+| Wyrażenie   | String (ciąg)    | Dopasowanie | Komentarz               |
+| ---
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+------ | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+----- | :---: |  ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+---------- | | `[a-z]{2}`   | Witaj | Tak | Dopasowania podciągów | | `[a-z]{2}`   | 123abc456 | Tak | Dopasowania podciągów | | `[a-z]{2}`   | MZ | Tak | Wyrażenie dopasowania | | `[a-z]{2}`   | MZ | Tak | Bez uwzględniania wielkości liter | | `^[a-z]{2}$` | Witaj | Nie | Zobacz `^` i `$` powyżej | | `^[a-z]{2}$` | 123abc456 | Nie | Zobacz `^` i `$` powyżej |
 
 Aby uzyskać więcej informacji na temat składni wyrażeń regularnych, zobacz [.NET Framework wyrażeń regularnych](/dotnet/standard/base-types/regular-expression-language-quick-reference).
 
-Aby ograniczyć parametr do znanego zestawu możliwych wartości, użyj wyrażenia regularnego. Na `{action:regex(^(list|get|create)$)}` przykład `action` dopasowuje wartość trasy do `list`, `get`, lub. `create` Jeśli przeszedł do słownika ograniczeń, ciąg `^(list|get|create)$` jest równoważny. Ograniczenia, które są przesyłane w słowniku ograniczeń, które nie pasują do jednego ze znanych ograniczeń, są również traktowane jako wyrażenia regularne. Ograniczenia, które są przesyłane w ramach szablonu, który nie odpowiada jednemu ze znanych ograniczeń, nie są traktowane jako wyrażenia regularne.
+Aby ograniczyć parametr do znanego zestawu możliwych wartości, użyj wyrażenia regularnego. Na przykład `{action:regex(^(list|get|create)$)}` dopasowuje `action` wartość trasy do `list` , `get` , lub `create` . Jeśli przeszedł do słownika ograniczeń, ciąg `^(list|get|create)$` jest równoważny. Ograniczenia, które są przesyłane w słowniku ograniczeń, które nie pasują do jednego ze znanych ograniczeń, są również traktowane jako wyrażenia regularne. Ograniczenia, które są przesyłane w ramach szablonu, który nie odpowiada jednemu ze znanych ograniczeń, nie są traktowane jako wyrażenia regularne.
 
 ### <a name="custom-route-constraints"></a>Niestandardowe ograniczenia trasy
 
-Niestandardowe ograniczenia trasy można utworzyć przez implementację <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> interfejsu. `IRouteConstraint` Interfejs <xref:System.Web.Routing.IRouteConstraint.Match*>zawiera, który zwraca `true` , jeśli ograniczenie jest spełnione i `false` w przeciwnym razie.
+Niestandardowe ograniczenia trasy można utworzyć przez implementację <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> interfejsu. `IRouteConstraint`Interfejs zawiera <xref:System.Web.Routing.IRouteConstraint.Match*> , który zwraca, `true` Jeśli ograniczenie jest spełnione i `false` w przeciwnym razie.
 
 Niestandardowe ograniczenia trasy są rzadko zbędne. Przed wdrożeniem niestandardowego ograniczenia trasy należy rozważyć alternatywy, takie jak powiązanie modelu.
 
 Folder [ograniczenia](https://github.com/dotnet/aspnetcore/tree/master/src/Http/Routing/src/Constraints) ASP.NET Core zawiera dobre przykłady tworzenia ograniczeń. Na przykład [GuidRouteConstraint](https://github.com/dotnet/aspnetcore/blob/master/src/Http/Routing/src/Constraints/GuidRouteConstraint.cs#L18).
 
-Aby użyć niestandardowego `IRouteConstraint`, typ ograniczenia trasy musi być zarejestrowany <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> w ramach aplikacji w kontenerze usługi. `ConstraintMap` Jest słownikiem, który mapuje klucze ograniczeń trasy `IRouteConstraint` do implementacji, które weryfikują te ograniczenia. Aplikację `ConstraintMap` można zaktualizować w `Startup.ConfigureServices` ramach [usług. Wywołanie addrouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*) lub przez skonfigurowanie <xref:Microsoft.AspNetCore.Routing.RouteOptions> bezpośrednio w `services.Configure<RouteOptions>`usłudze. Przykład:
+Aby użyć niestandardowego `IRouteConstraint` , typ ograniczenia trasy musi być zarejestrowany w ramach aplikacji <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> w kontenerze usługi. `ConstraintMap`Jest słownikiem, który mapuje klucze ograniczeń trasy do `IRouteConstraint` implementacji, które weryfikują te ograniczenia. Aplikację `ConstraintMap` można zaktualizować w `Startup.ConfigureServices` ramach [usług. Wywołanie addrouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*) lub przez skonfigurowanie <xref:Microsoft.AspNetCore.Routing.RouteOptions> bezpośrednio w usłudze `services.Configure<RouteOptions>` . Przykład:
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/StartupConstraint.cs?name=snippet)]
 
@@ -605,36 +1470,36 @@ Powyższy kod ma następujące działanie:
 * Zapobiega `0` w `{id}` segmencie trasy.
 * Jest przedstawiany jako podstawowy przykład implementowania niestandardowego ograniczenia. Nie powinno być używane w aplikacji produkcyjnej.
 
-Poniższy kod jest lepszym rozwiązaniem do zapobiegania `id` przetwarzaniu danych z `0` programu.
+Poniższy kod jest lepszym rozwiązaniem do zapobiegania `id` `0` przetwarzaniu danych z programu.
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/Controllers/TestController.cs?name=snippet2)]
 
 Poprzedni kod ma następujące zalety w porównaniu z `MyCustomConstraint` podejściem:
 
 * Nie wymaga ograniczeń niestandardowych.
-* Zwraca bardziej opisowy błąd, gdy parametr Route zawiera `0`.
+* Zwraca bardziej opisowy błąd, gdy parametr Route zawiera `0` .
 
 ## <a name="parameter-transformer-reference"></a>Odwołanie do transformatora parametrów
 
 Transformatory parametrów:
 
-* Wykonaj podczas generowania linku przy <xref:Microsoft.AspNetCore.Routing.LinkGenerator>użyciu.
-* Implementacja <xref:Microsoft.AspNetCore.Routing.IOutboundParameterTransformer?displayProperty=fullName>.
-* Są konfigurowane przy <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap>użyciu.
+* Wykonaj podczas generowania linku przy użyciu <xref:Microsoft.AspNetCore.Routing.LinkGenerator> .
+* Implementacja <xref:Microsoft.AspNetCore.Routing.IOutboundParameterTransformer?displayProperty=fullName> .
+* Są konfigurowane przy użyciu <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> .
 * Wypełnij wartość trasy parametru i Przekształć ją na nową wartość ciągu.
 * Wynikiem jest użycie przekształconej wartości w wygenerowanym łączu.
 
-Na `slugify` przykład niestandardowy transformator parametrów w wzorcu `blog\{article:slugify}` trasy z `Url.Action(new { article = "MyTestArticle" })` generowaniem `blog\my-test-article`.
+Na przykład niestandardowy `slugify` transformator parametrów w wzorcu trasy `blog\{article:slugify}` z `Url.Action(new { article = "MyTestArticle" })` generowaniem `blog\my-test-article` .
 
-Weź pod uwagę `IOutboundParameterTransformer` następującą implementację:
+Weź pod uwagę następującą `IOutboundParameterTransformer` implementację:
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/StartupConstraint2.cs?name=snippet2)]
 
-Aby użyć transformatora parametrów w wzorcu trasy, skonfiguruj go przy <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> użyciu `Startup.ConfigureServices`w programie:
+Aby użyć transformatora parametrów w wzorcu trasy, skonfiguruj go przy użyciu <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> w programie `Startup.ConfigureServices` :
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/StartupConstraint2.cs?name=snippet)]
 
-ASP.NET Core Framework używa transformatorów parametrów do przekształcania identyfikatora URI, w którym jest rozpoznawany punkt końcowy. Na przykład Transformatory parametrów przekształcają wartości tras używane do dopasowania do `area`, `controller`, `action`, i `page`.
+ASP.NET Core Framework używa transformatorów parametrów do przekształcania identyfikatora URI, w którym jest rozpoznawany punkt końcowy. Na przykład Transformatory parametrów przekształcają wartości tras używane do dopasowania do `area` , `controller` , `action` , i `page` .
 
 ```csharp
 routes.MapControllerRoute(
@@ -642,20 +1507,20 @@ routes.MapControllerRoute(
     template: "{controller:slugify=Home}/{action:slugify=Index}/{id?}");
 ```
 
-W przypadku poprzedniego szablonu trasy Akcja `SubscriptionManagementController.GetAll` jest zgodna z identyfikatorem URI. `/subscription-management/get-all` Transformator parametrów nie zmienia wartości trasy użytych do wygenerowania linku. Na przykład dane `Url.Action("GetAll", "SubscriptionManagement")` wyjściowe `/subscription-management/get-all`.
+W przypadku poprzedniego szablonu trasy Akcja `SubscriptionManagementController.GetAll` jest zgodna z identyfikatorem URI `/subscription-management/get-all` . Transformator parametrów nie zmienia wartości trasy użytych do wygenerowania linku. Na przykład dane `Url.Action("GetAll", "SubscriptionManagement")` wyjściowe `/subscription-management/get-all` .
 
 ASP.NET Core udostępnia konwencje interfejsu API do korzystania z transformatorów parametrów z wygenerowanymi trasami:
 
-* Konwencja <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.RouteTokenTransformerConvention?displayProperty=fullName> MVC stosuje określony transformator parametrów do wszystkich tras atrybutów w aplikacji. Transformator parametrów przekształca tokeny trasy atrybutów po ich wymianie. Aby uzyskać więcej informacji, zobacz [używanie transformatora parametrów do dostosowywania zastępowania tokenu](xref:mvc/controllers/routing#use-a-parameter-transformer-to-customize-token-replacement).
-* Razor Pages używa konwencji <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.PageRouteTransformerConvention> interfejsu API. Ta Konwencja stosuje określony transformator parametrów do wszystkich automatycznie odnalezionych Razor Pages. Transformator parametrów przekształca segmenty i nazwy plików Razor Pages tras. Aby uzyskać więcej informacji, zobacz [używanie transformatora parametrów do dostosowywania tras stron](xref:razor-pages/razor-pages-conventions#use-a-parameter-transformer-to-customize-page-routes).
+* <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.RouteTokenTransformerConvention?displayProperty=fullName>Konwencja MVC stosuje określony transformator parametrów do wszystkich tras atrybutów w aplikacji. Transformator parametrów przekształca tokeny trasy atrybutów po ich wymianie. Aby uzyskać więcej informacji, zobacz [używanie transformatora parametrów do dostosowywania zastępowania tokenu](xref:mvc/controllers/routing#use-a-parameter-transformer-to-customize-token-replacement).
+* RazorStrony używają <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.PageRouteTransformerConvention> Konwencji interfejsu API. Ta Konwencja stosuje określony transformator parametrów do wszystkich automatycznie odnalezionych Razor stron. Transformator parametrów przekształca folder i segmenty nazw plików Razor tras. Aby uzyskać więcej informacji, zobacz [używanie transformatora parametrów do dostosowywania tras stron](xref:razor-pages/razor-pages-conventions#use-a-parameter-transformer-to-customize-page-routes).
 
 <a name="ugr"></a>
 
 ## <a name="url-generation-reference"></a>Odwołanie do generacji adresów URL
 
-Ta sekcja zawiera odwołanie do algorytmu zaimplementowane przez generowanie adresów URL. W tym przypadku najbardziej złożone przykłady generowania adresów URL używają kontrolerów lub Razor Pages. Aby uzyskać dodatkowe informacje, zobacz [Routing na kontrolerach](xref:mvc/controllers/routing) .
+Ta sekcja zawiera odwołanie do algorytmu zaimplementowane przez generowanie adresów URL. W tym przypadku najbardziej złożone przykłady generowania adresów URL używają kontrolerów lub Razor stron. Aby uzyskać dodatkowe informacje, zobacz [Routing na kontrolerach](xref:mvc/controllers/routing) .
 
-Proces generowania adresu URL rozpoczyna się od wywołania metody [LinkGenerator. GetPathByAddress](xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetPathByAddress*) lub podobną metodę. Metoda jest dostarczana z adresem, zestawem wartości tras i opcjonalnie informacjami o bieżącym żądaniu z `HttpContext`.
+Proces generowania adresu URL rozpoczyna się od wywołania metody [LinkGenerator. GetPathByAddress](xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetPathByAddress*) lub podobną metodę. Metoda jest dostarczana z adresem, zestawem wartości tras i opcjonalnie informacjami o bieżącym żądaniu z `HttpContext` .
 
 Pierwszym krokiem jest użycie adresu do rozpoznania zestawu punktów końcowych kandydujących przy użyciu [`IEndpointAddressScheme<TAddress>`](xref:Microsoft.AspNetCore.Routing.IEndpointAddressScheme`1) , który jest zgodny z typem adresu.
 
@@ -663,26 +1528,26 @@ Po znalezieniu zestawu kandydatów przez schemat adresów punkty końcowe są up
 
 ### <a name="troubleshooting-url-generation-with-logging"></a>Rozwiązywanie problemów z generowaniem adresów URL przy użyciu rejestrowania
 
-Pierwszym krokiem podczas generowania adresu URL rozwiązywania problemów jest ustawienie poziomu rejestrowania `Microsoft.AspNetCore.Routing` na `TRACE`. `LinkGenerator`rejestruje wiele szczegółowych informacji o jego przetwarzaniu, które mogą być przydatne do rozwiązywania problemów.
+Pierwszym krokiem podczas generowania adresu URL rozwiązywania problemów jest ustawienie poziomu rejestrowania `Microsoft.AspNetCore.Routing` na `TRACE` . `LinkGenerator`rejestruje wiele szczegółowych informacji o jego przetwarzaniu, które mogą być przydatne do rozwiązywania problemów.
 
 Aby uzyskać szczegółowe informacje na temat generowania adresów URL, zobacz [odwołanie do generacji adresów URL](#ugr) .
 
-### <a name="addresses"></a>Adresy
+### <a name="addresses"></a>Addresses (Adresy)
 
 Adresy są pojęciem generacji adresów URL używanym do powiązania wywołania z generatorem linków z zestawem punktów końcowych kandydatów.
 
 Adresy to rozszerzalne koncepcje, które domyślnie mają dwie implementacje:
 
-* Użycie *nazwy punktu końcowego* (`string`) jako adresu:
+* Użycie *nazwy punktu końcowego* ( `string` ) jako adresu:
     * Zapewnia podobną funkcjonalność do nazwy trasy MVC.
-    * Używa typu <xref:Microsoft.AspNetCore.Routing.IEndpointNameMetadata> metadanych.
+    * Używa <xref:Microsoft.AspNetCore.Routing.IEndpointNameMetadata> typu metadanych.
     * Rozpoznaje podany ciąg w odniesieniu do metadanych wszystkich zarejestrowanych punktów końcowych.
     * Zgłasza wyjątek podczas uruchamiania, jeśli wiele punktów końcowych używa tej samej nazwy.
-    * Zalecane do użycia poza kontrolerami i Razor Pages.
-* Użycie *wartości trasy* (<xref:Microsoft.AspNetCore.Routing.RouteValuesAddress>) jako adresu:
-    * Oferuje podobną funkcjonalność do kontrolerów i Razor Pages generowania starszych adresów URL.
+    * Zalecane do zastosowania ogólnego przeznaczenia poza kontrolerami i Razor stronami.
+* Użycie *wartości trasy* ( <xref:Microsoft.AspNetCore.Routing.RouteValuesAddress> ) jako adresu:
+    * Zapewnia podobną funkcjonalność do kontrolerów i stron, które są Razor starszej generacji adresów URL.
     * Bardzo skomplikowane do rozszerania i debugowania.
-    * Zapewnia implementację używaną `IUrlHelper`przez, pomocników tagów, pomocników HTML, wyników akcji itp.
+    * Zapewnia implementację używaną przez `IUrlHelper` , pomocników tagów, pomocników HTML, wyników akcji itp.
 
 Rolą schematu adresowania jest skojarzenie między adresem i zgodnymi punktami końcowymi przez dowolne kryterium:
 
@@ -693,9 +1558,9 @@ Rolą schematu adresowania jest skojarzenie między adresem i zgodnymi punktami 
 
 ### <a name="ambient-values-and-explicit-values"></a>Wartości otoczenia i jawne wartości
 
-Z bieżącego żądania Routing uzyskuje dostęp do wartości trasy bieżącego żądania `HttpContext.Request.RouteValues`. Wartości skojarzone z bieżącym żądaniem są określane jako **wartości otoczenia**. Na potrzeby przejrzystości dokumentacja odwołuje się do wartości trasy przekazaną do metod jako **wartości jawnych**.
+Z bieżącego żądania Routing uzyskuje dostęp do wartości trasy bieżącego żądania `HttpContext.Request.RouteValues` . Wartości skojarzone z bieżącym żądaniem są określane jako **wartości otoczenia**. Na potrzeby przejrzystości dokumentacja odwołuje się do wartości trasy przekazaną do metod jako **wartości jawnych**.
 
-Poniższy przykład pokazuje wartości otoczenia i jawne wartości. Zapewnia ona wartości otoczenia z bieżącego żądania i wartości jawne: `{ id = 17, }`:
+Poniższy przykład pokazuje wartości otoczenia i jawne wartości. Zapewnia ona wartości otoczenia z bieżącego żądania i wartości jawne: `{ id = 17, }` :
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/Controllers/WidgetController.cs?name=snippet)]
 
@@ -704,36 +1569,36 @@ Powyższy kod ma następujące działanie:
 * Typu`/Widget/Index/17`
 * Pobiera <xref:Microsoft.AspNetCore.Routing.LinkGenerator> za pośrednictwem [di](xref:fundamentals/dependency-injection).
 
-Poniższy kod nie zawiera żadnych wartości otoczenia i wartości jawnych `{ controller = "Home", action = "Subscribe", id = 17, }`::
+Poniższy kod nie zawiera żadnych wartości otoczenia i wartości jawnych: `{ controller = "Home", action = "Subscribe", id = 17, }` :
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/Controllers/WidgetController.cs?name=snippet2)]
 
 Poprzednia metoda zwraca`/Home/Subscribe/17`
 
-Następujący kod w `WidgetController` zwracaniu `/Widget/Subscribe/17`:
+Następujący kod w `WidgetController` zwracaniu `/Widget/Subscribe/17` :
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/Controllers/WidgetController.cs?name=snippet3)]
 
-Poniższy kod udostępnia kontroler z wartości otoczenia w bieżącym żądaniu i wartościach jawnych: `{ action = "Edit", id = 17, }`:
+Poniższy kod udostępnia kontroler z wartości otoczenia w bieżącym żądaniu i wartościach jawnych: `{ action = "Edit", id = 17, }` :
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/Controllers/GadgetController.cs?name=snippet)]
 
 Powyższy kod ma następujące działanie:
 
 * `/Gadget/Edit/17`jest zwracany.
-* <xref:Microsoft.AspNetCore.Mvc.ControllerBase.Url>Pobiera <xref:Microsoft.AspNetCore.Mvc.IUrlHelper>.
+* <xref:Microsoft.AspNetCore.Mvc.ControllerBase.Url>Pobiera <xref:Microsoft.AspNetCore.Mvc.IUrlHelper> .
 * <xref:Microsoft.AspNetCore.Mvc.UrlHelperExtensions.Action*>   
 generuje adres URL ze ścieżką bezwzględną dla metody akcji. Adres URL zawiera określoną `action` nazwę i `route` wartości.
 
-Poniższy kod zawiera wartości otoczenia z bieżącego żądania oraz wartości jawne: `{ page = "./Edit, id = 17, }`:
+Poniższy kod zawiera wartości otoczenia z bieżącego żądania oraz wartości jawne: `{ page = "./Edit, id = 17, }` :
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/Pages/Index.cshtml.cs?name=snippet)]
 
-Poprzedni kod jest ustawiany `url` na `/Edit/17` , gdy strona edytowanie Razor zawiera następującą dyrektywę strony:
+Poprzedni kod jest ustawiany `url` na, `/Edit/17` gdy Razor Strona Edycja zawiera następującą dyrektywę strony:
 
  `@page "{id:int}"`
 
-Jeśli strona Edycja nie zawiera szablonu `"{id:int}"` trasy, `url` to. `/Edit?id=17`
+Jeśli strona Edycja nie zawiera `"{id:int}"` szablonu trasy, `url` to `/Edit?id=17` .
 
 Zachowanie funkcji MVC <xref:Microsoft.AspNetCore.Mvc.IUrlHelper> dodaje warstwę złożoności obok zasad opisanych tutaj:
 
@@ -742,9 +1607,9 @@ Zachowanie funkcji MVC <xref:Microsoft.AspNetCore.Mvc.IUrlHelper> dodaje warstw�
 * [IUrlHelper. Page](xref:Microsoft.AspNetCore.Mvc.UrlHelperExtensions.Page*) zawsze kopiuje bieżącą `page` wartość trasy jako wartość jawną, chyba że zostanie zastąpiona. <!--by the user-->
 * `IUrlHelper.Page`zawsze zastępuje bieżącą `handler` wartość trasy wartością `null` jako jawne wartości, chyba że zostaną zastąpione.
 
-Użytkownicy są często przeniesieni przez szczegółowe informacje o zachowaniu wartości otoczenia, ponieważ MVC nie przestrzega własnych reguł. Ze względu na historyczne i zgodność niektóre wartości tras, `action`takie `controller`jak `page`,, `handler` i mają własne zachowanie specjalne.
+Użytkownicy są często przeniesieni przez szczegółowe informacje o zachowaniu wartości otoczenia, ponieważ MVC nie przestrzega własnych reguł. Ze względu na historyczne i zgodność niektóre wartości tras, takie jak `action` ,, `controller` `page` i `handler` mają własne zachowanie specjalne.
 
-Równoważne funkcje zapewniane przez `LinkGenerator.GetPathByAction` program `LinkGenerator.GetPathByPage` i duplikują te anomalie `IUrlHelper` w celu zapewnienia zgodności.
+Równoważne funkcje zapewniane przez program `LinkGenerator.GetPathByAction` i `LinkGenerator.GetPathByPage` duplikują te anomalie `IUrlHelper` w celu zapewnienia zgodności.
 
 ### <a name="url-generation-process"></a>Proces generowania adresu URL
 
@@ -764,22 +1629,22 @@ Najlepszym sposobem, aby myśleć o roli otaczających wartości, jest próba za
 
 Wywołania do `LinkGenerator` lub `IUrlHelper` zwracane `null` są zwykle spowodowane nieprawidłowym unieważnieniem wartości trasy. Rozwiązywanie problemów dotyczących unieważniania wartości trasy przez jawne określenie większej liczby wartości trasy, aby sprawdzić, czy rozwiązanie to rozwiązuje problem.
 
-Unieważnianie wartości trasy działa zgodnie z założeniem, że schemat adresu URL aplikacji jest hierarchiczny, z hierarchią utworzoną od lewej do prawej. Rozważmy szablon `{controller}/{action}/{id?}` trasy podstawowego kontrolera, aby uzyskać intuicyjny opis tego, jak to działa. **Zmiana** wartości powoduje **unieważnienie** wszystkich wartości tras, które pojawiają się po prawej stronie. Odzwierciedla to założenie hierarchii. Jeśli aplikacja ma wartość otoczenia dla `id`, a operacja określa inną wartość dla: `controller`
+Unieważnianie wartości trasy działa zgodnie z założeniem, że schemat adresu URL aplikacji jest hierarchiczny, z hierarchią utworzoną od lewej do prawej. Rozważmy szablon trasy podstawowego kontrolera, `{controller}/{action}/{id?}` Aby uzyskać intuicyjny opis tego, jak to działa. **Zmiana** wartości powoduje **unieważnienie** wszystkich wartości tras, które pojawiają się po prawej stronie. Odzwierciedla to założenie hierarchii. Jeśli aplikacja ma wartość otoczenia dla `id` , a operacja określa inną wartość dla `controller` :
 
-* `id`nie będzie ponownie używany, `{controller}` ponieważ jest z lewej strony `{id?}`.
+* `id`nie będzie ponownie używany `{controller}` , ponieważ jest z lewej strony `{id?}` .
 
 Przykłady ukazujące tę zasadę:
 
-* Jeśli jawne wartości zawierają wartość dla `id`, wartość otoczenia dla `id` jest ignorowana. Wartości otoczenia dla `controller` i `action` mogą być używane.
-* Jeśli jawne wartości zawierają wartość dla `action`, jakakolwiek wartość otoczenia dla `action` jest ignorowana. `controller` Można użyć wartości otoczenia. Jeśli wartość Explicit dla `action` jest inna niż wartość otoczenia dla `action`, `id` wartość nie zostanie użyta.  Jeśli wartość Explicit dla `action` jest taka sama jak wartość otoczenia dla `action`, można użyć `id` wartości.
-* Jeśli jawne wartości zawierają wartość dla `controller`, jakakolwiek wartość otoczenia dla `controller` jest ignorowana. Jeśli `controller` wartość Explicit dla różni się od wartości otoczenia dla `controller`, wartości `action` i `id` nie będą używane. Jeśli wartość Explicit `controller` dla jest taka sama jak wartość otoczenia dla `controller`, można użyć wartości `action` i `id` .
+* Jeśli jawne wartości zawierają wartość dla `id` , wartość otoczenia dla `id` jest ignorowana. Wartości otoczenia dla `controller` i `action` mogą być używane.
+* Jeśli jawne wartości zawierają wartość dla `action` , jakakolwiek wartość otoczenia dla `action` jest ignorowana. Można użyć wartości otoczenia `controller` . Jeśli wartość Explicit dla `action` jest inna niż wartość otoczenia dla `action` , `id` wartość nie zostanie użyta.  Jeśli wartość Explicit dla `action` jest taka sama jak wartość otoczenia dla `action` , `id` można użyć wartości.
+* Jeśli jawne wartości zawierają wartość dla `controller` , jakakolwiek wartość otoczenia dla `controller` jest ignorowana. Jeśli wartość Explicit dla różni `controller` się od wartości otoczenia dla `controller` , `action` wartości i nie będą `id` używane. Jeśli wartość Explicit dla `controller` jest taka sama jak wartość otoczenia dla `controller` , `action` `id` można użyć wartości i.
 
-Ten proces jest bardziej skomplikowany przez istnienie tras atrybutów i dedykowanych tras konwencjonalnych. Konwencjonalne trasy kontrolerów, takie `{controller}/{action}/{id?}` jak określanie hierarchii przy użyciu parametrów trasy. W przypadku [dedykowanych tras konwencjonalnych](xref:mvc/controllers/routing#dcr) i [tras atrybutów](xref:mvc/controllers/routing#ar) do kontrolerów i Razor Pages:
+Ten proces jest bardziej skomplikowany przez istnienie tras atrybutów i dedykowanych tras konwencjonalnych. Konwencjonalne trasy kontrolerów, takie jak `{controller}/{action}/{id?}` Określanie hierarchii przy użyciu parametrów trasy. W przypadku [dedykowanych tras konwencjonalnych](xref:mvc/controllers/routing#dcr) i [tras atrybutów](xref:mvc/controllers/routing#ar) do kontrolerów i Razor stron:
 
 * Istnieje hierarchia wartości tras.
 * Nie są one wyświetlane w szablonie.
 
-W takich przypadkach generowanie adresów URL definiuje **wymagane wartości** koncepcji. Punkty końcowe utworzone przez kontrolery i Razor Pages mają określone wartości, które zezwalają na działanie unieważniania wartości trasy.
+W takich przypadkach generowanie adresów URL definiuje **wymagane wartości** koncepcji. Punkty końcowe utworzone przez kontrolery i Razor strony mają określone wartości, które zezwalają na działanie unieważniania wartości trasy.
 
 Nieszczegółowy algorytm unieważniania wartości trasy:
 
@@ -802,14 +1667,339 @@ Następnie **zaakceptowane wartości** mogą służyć do rozwinięcia szablonu 
   * Jeśli którykolwiek z parametrów trasy po prawej stronie brakującego parametru opcjonalnego ma wartość, operacja kończy się niepowodzeniem.
   * <!-- review default-valued parameters optional parameters --> W miarę możliwości są zwijane ciągłe parametry wartości domyślnych i parametry opcjonalne.
 
-Wartości jawnie podane, które nie pasują do segmentu trasy, są dodawane do ciągu zapytania. W poniższej tabeli przedstawiono wynik przy użyciu szablonu `{controller}/{action}/{id?}`trasy.
+Wartości jawnie podane, które nie pasują do segmentu trasy, są dodawane do ciągu zapytania. W poniższej tabeli przedstawiono wynik przy użyciu szablonu trasy `{controller}/{action}/{id?}` .
 
 | Wartości otoczenia                     | Wartości jawne                        | Wynik                  |
-| ---------------------------------- | -------------------------------------- | ----------------------- |
-| Controller = "Strona główna"                | Action = "informacje"                       | `/Home/About`           |
-| Controller = "Strona główna"                | Controller = "Order", Action = "informacje" | `/Order/About`          |
-| Controller = "Home", Color = "Red" | Action = "informacje"                       | `/Home/About`           |
-| Controller = "Strona główna"                | Action = "informacje", Color = "Red"        | `/Home/About?color=Red` |
+| ---
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+----------------- | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+------------------- | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+------------ | | Controller = "Strona główna" | Action = "informacje" | `/Home/About`|
+| Controller = "Strona główna" | Controller = "Order", Action = "informacje" | `/Order/About`|
+| Controller = "Home", Color = "Red" | Action = "informacje" | `/Home/About`|
+| Controller = "Strona główna" | Action = "informacje", Color = "Red" | `/Home/About?color=Red`                                |
 
 ### <a name="problems-with-route-value-invalidation"></a>Problemy z nieprawidłową wartością trasy
 
@@ -819,17 +2009,17 @@ Poniższy kod przedstawia przykładowy Schemat generowania adresu URL, który ni
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/StartupUnsupported.cs?name=snippet)]
 
-W powyższym kodzie, `culture` parametr trasy jest używany do lokalizacji. Chcemy, aby `culture` parametr był zawsze akceptowany jako wartość otoczenia. Jednak `culture` parametr nie jest akceptowany jako wartość otoczenia ze względu na sposób działania wymaganych wartości:
+W powyższym kodzie, `culture` parametr trasy jest używany do lokalizacji. Chcemy, aby parametr był `culture` zawsze akceptowany jako wartość otoczenia. Jednak `culture` parametr nie jest akceptowany jako wartość otoczenia ze względu na sposób działania wymaganych wartości:
 
-* W szablonie `"default"` trasy parametr `culture` trasy jest z lewej strony `controller`, więc zmiany `controller` nie zostaną unieważnione. `culture`
-* W szablonie `"blog"` trasy parametr `culture` trasy jest uznawany za z prawej strony `controller`, która jest wyświetlana w wymaganych wartościach.
+* W `"default"` szablonie trasy `culture` parametr trasy jest z lewej strony `controller` , więc zmiany `controller` nie zostaną unieważnione `culture` .
+* W `"blog"` szablonie trasy `culture` parametr trasy jest uznawany za z prawej strony `controller` , która jest wyświetlana w wymaganych wartościach.
 
 ## <a name="configuring-endpoint-metadata"></a>Konfigurowanie metadanych punktu końcowego
 
 Poniższe linki zawierają informacje dotyczące konfigurowania metadanych punktu końcowego:
 
 * [Włączanie mechanizmu CORS przy użyciu routingu punktu końcowego](xref:security/cors#enable-cors-with-endpoint-routing)
-* [Przykład IAuthorizationPolicyProvider](https://github.com/dotnet/AspNetCore/tree/release/3.0/src/Security/samples/CustomPolicyProvider) przy użyciu atrybutu `[MinimumAgeAuthorize]` niestandardowego
+* [Przykład IAuthorizationPolicyProvider](https://github.com/dotnet/AspNetCore/tree/release/3.0/src/Security/samples/CustomPolicyProvider) przy użyciu `[MinimumAgeAuthorize]` atrybutu niestandardowego
 * [Testowanie uwierzytelniania przy użyciu atrybutu [autoryzuje]](xref:security/authentication/identity#test-identity)
 * <xref:Microsoft.AspNetCore.Builder.AuthorizationEndpointConventionBuilderExtensions.RequireAuthorization*>
 * [Wybieranie schematu z atrybutem [autoryzuje]](xref:security/authorization/limitingidentitybyscheme#selecting-the-scheme-with-the-authorize-attribute)
@@ -840,14 +2030,14 @@ Poniższe linki zawierają informacje dotyczące konfigurowania metadanych punkt
 
 ## <a name="host-matching-in-routes-with-requirehost"></a>Pasujące hosty w trasach z RequireHost
 
-<xref:Microsoft.AspNetCore.Builder.RoutingEndpointConventionBuilderExtensions.RequireHost*>stosuje ograniczenie do trasy wymagającej określonego hosta. Parametrem `RequireHost` lub [[Host]](xref:Microsoft.AspNetCore.Routing.HostAttribute) może być:
+<xref:Microsoft.AspNetCore.Builder.RoutingEndpointConventionBuilderExtensions.RequireHost*>stosuje ograniczenie do trasy wymagającej określonego hosta. `RequireHost`Parametrem lub [[Host]](xref:Microsoft.AspNetCore.Routing.HostAttribute) może być:
 
-* Host: `www.domain.com`, dopasowuje `www.domain.com` się do dowolnego portu.
-* Host z symbolami `*.domain.com`wieloznacznymi `subdomain.domain.com`:, `www.subdomain.domain.com` dopasowań `www.domain.com`, lub na dowolnym porcie.
-* Port: `*:5000`, jest zgodny z portem 5000 z dowolnym hostem.
-* Host i port: `www.domain.com:5000` lub `*.domain.com:5000`, dopasowuje hosta i port.
+* Host: `www.domain.com` , dopasowuje `www.domain.com` się do dowolnego portu.
+* Host z symbolami wieloznacznymi: `*.domain.com` , dopasowań `www.domain.com` , `subdomain.domain.com` lub `www.subdomain.domain.com` na dowolnym porcie.
+* Port: `*:5000` , jest zgodny z portem 5000 z dowolnym hostem.
+* Host i port: `www.domain.com:5000` lub `*.domain.com:5000` , dopasowuje hosta i port.
 
-Można określić wiele parametrów przy użyciu `RequireHost` lub `[Host]`. Ograniczenie jest zgodne z hostami prawidłowymi dla któregokolwiek z parametrów. Na przykład `[Host("domain.com", "*.domain.com")]` dopasowuje `domain.com`, `www.domain.com`, i `subdomain.domain.com`.
+Można określić wiele parametrów przy użyciu `RequireHost` lub `[Host]` . Ograniczenie jest zgodne z hostami prawidłowymi dla któregokolwiek z parametrów. Na przykład `[Host("domain.com", "*.domain.com")]` dopasowuje `domain.com` , `www.domain.com` , i `subdomain.domain.com` .
 
 Następujący kod używa `RequireHost` do żądania określonego hosta trasy:
 
@@ -866,7 +2056,7 @@ Gdy `[Host]` atrybut jest stosowany do obu metod:
 
 Większość routingu została zaktualizowana w ASP.NET Core 3,0, aby zwiększyć wydajność.
 
-Gdy aplikacja ma problemy z wydajnością, routing jest często podejrzany o problem. Przyczyną routingu jest podejrzenie, że struktury takie jak kontrolery i Razor Pages zgłaszają czas spędzony w ramach struktury w swoich komunikatach rejestrowania. Gdy istnieje znacząca różnica między czasem zgłoszonym przez kontrolery i łącznym czasem żądania:
+Gdy aplikacja ma problemy z wydajnością, routing jest często podejrzany o problem. Podejrzenie, że Routing jest podejrzany, że platformy, takie jak kontrolery i Razor strony, zgłaszają czas spędzony w ramach struktury w swoich komunikatach rejestrowania. Gdy istnieje znacząca różnica między czasem zgłoszonym przez kontrolery i łącznym czasem żądania:
 
 * Deweloperzy eliminują kod aplikacji jako źródło problemu.
 * Zakłada się, że kierowanie jest przyczyną.
@@ -882,7 +2072,7 @@ Do routingu czasu:
 * Pozostawij każde oprogramowanie pośredniczące z kopią oprogramowania pośredniczącego w poprzednim kodzie.
 * Dodaj unikatowy identyfikator w celu skorelowania danych chronometrażu z kodem.
 
-Jest to podstawowy sposób na zawężenie opóźnień, gdy jest to istotne, na przykład więcej niż `10ms`.  Odejmowanie `Time 2` od `Time 1` raportów czasu spędzonego w oprogramowaniu `UseRouting` pośredniczącym.
+Jest to podstawowy sposób na zawężenie opóźnień, gdy jest to istotne, na przykład więcej niż `10ms` .  Odejmowanie `Time 2` od `Time 1` raportów czasu spędzonego w oprogramowaniu `UseRouting` pośredniczącym.
 
 Poniższy kod używa bardziej kompaktowego podejścia do poprzedniego kodu czasu:
 
@@ -896,12 +2086,12 @@ Poniższa lista zawiera szczegółowe informacje o funkcjach routingu, które s�
 
 * Wyrażenia regularne: można pisać wyrażenia regularne, które są złożone, lub długi czas wykonywania z niewielką ilością danych wejściowych.
 
-* Złożone segmenty`{x}-{y}-{z}`(): 
+* Złożone segmenty ( `{x}-{y}-{z}` ): 
   * Są znacznie droższe niż analizowanie zwykłego segmentu ścieżki URL.
   * Powoduje przydzielenie wielu podciągów.
   * Logika złożonego segmentu nie została zaktualizowana w ramach aktualizacji wydajności ASP.NET Core 3,0.
 
-* Synchroniczny dostęp do danych: wiele złożonych aplikacji ma dostęp do bazy danych w ramach ich routingu. ASP.NET Core 2,2 i wcześniejsze routinge mogą nie zapewniać odpowiednich punktów rozszerzalności do obsługi routingu dostępu do bazy danych. Na przykład <xref:Microsoft.AspNetCore.Routing.IRouteConstraint>, i <xref:Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint> są synchroniczne. Punkty rozszerzalności, <xref:Microsoft.AspNetCore.Routing.MatcherPolicy> takie <xref:Microsoft.AspNetCore.Routing.EndpointSelectorContext> jak i, są asynchroniczne.
+* Synchroniczny dostęp do danych: wiele złożonych aplikacji ma dostęp do bazy danych w ramach ich routingu. ASP.NET Core 2,2 i wcześniejsze routinge mogą nie zapewniać odpowiednich punktów rozszerzalności do obsługi routingu dostępu do bazy danych. Na przykład, <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> i <xref:Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint> są synchroniczne. Punkty rozszerzalności, takie jak <xref:Microsoft.AspNetCore.Routing.MatcherPolicy> i, <xref:Microsoft.AspNetCore.Routing.EndpointSelectorContext> są asynchroniczne.
 
 ## <a name="guidance-for-library-authors"></a>Wskazówki dla autorów biblioteki
 
@@ -909,9 +2099,9 @@ Ta sekcja zawiera wskazówki dla autorów biblioteki, które są tworzone w opar
 
 ### <a name="define-endpoints"></a>Definiuj punkty końcowe
 
-Aby utworzyć platformę, która używa routingu do dopasowywania adresów URL, Zacznij od zdefiniowania środowiska użytkownika, które <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*>kompiluje się w górę.
+Aby utworzyć platformę, która używa routingu do dopasowywania adresów URL, Zacznij od zdefiniowania środowiska użytkownika, które kompiluje się w górę <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*> .
 
-**Wykonaj** kompilację w usłudze <xref:Microsoft.AspNetCore.Routing.IEndpointRouteBuilder>. Dzięki temu użytkownicy mogą redagować swoją strukturę przy użyciu innych funkcji ASP.NET Core bez pomyłek. Każdy szablon ASP.NET Core obejmuje Routing. Załóżmy, że Routing jest obecny i znany użytkownikom.
+**Wykonaj** kompilację w usłudze <xref:Microsoft.AspNetCore.Routing.IEndpointRouteBuilder> . Dzięki temu użytkownicy mogą redagować swoją strukturę przy użyciu innych funkcji ASP.NET Core bez pomyłek. Każdy szablon ASP.NET Core obejmuje Routing. Załóżmy, że Routing jest obecny i znany użytkownikom.
 
 ```csharp
 app.UseEndpoints(endpoints =>
@@ -923,7 +2113,7 @@ app.UseEndpoints(endpoints =>
 });
 ```
 
-**Należy** zwrócić zapieczętowany Typ konkretny z wywołania do `MapMyFramework(...)` tego implementującego. <xref:Microsoft.AspNetCore.Builder.IEndpointConventionBuilder> Większość metod `Map...` struktury jest zgodna z tym wzorcem. `IEndpointConventionBuilder` Interfejs:
+**Należy** zwrócić zapieczętowany Typ konkretny z wywołania do `MapMyFramework(...)` tego implementującego <xref:Microsoft.AspNetCore.Builder.IEndpointConventionBuilder> . Większość metod struktury jest `Map...` zgodna z tym wzorcem. `IEndpointConventionBuilder`Interfejs:
 
 * Umożliwia tworzenie metadanych.
 * Jest przeznaczony dla różnych metod rozszerzających.
@@ -941,11 +2131,11 @@ app.UseEndpoints(endpoints =>
 });
 ```
 
-**Rozważ** napisanie własnych <xref:Microsoft.AspNetCore.Routing.EndpointDataSource>. `EndpointDataSource`to element podstawowy niskiego poziomu służący do deklarowania i aktualizowania kolekcji punktów końcowych. `EndpointDataSource`to zaawansowany interfejs API używany przez kontrolery i Razor Pages.
+**Rozważ** napisanie własnych <xref:Microsoft.AspNetCore.Routing.EndpointDataSource> . `EndpointDataSource`to element podstawowy niskiego poziomu służący do deklarowania i aktualizowania kolekcji punktów końcowych. `EndpointDataSource`to zaawansowany interfejs API używany przez kontrolery i Razor strony.
 
 Testy routingu mają [podstawowy przykład](https://github.com/aspnet/AspNetCore/blob/master/src/Http/Routing/test/testassets/RoutingSandbox/Framework/FrameworkEndpointDataSource.cs#L17) źródła danych, które nie są aktualizowane.
 
-**Nie** należy próbować rejestrować `EndpointDataSource` domyślnie. Wymagaj od użytkowników zarejestrowania struktury w <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*>programie. Wyznaczanie trasy polega na tym, że nic nie jest uwzględniane domyślnie `UseEndpoints` , a to miejsce do rejestrowania punktów końcowych.
+**Nie** należy próbować rejestrować `EndpointDataSource` domyślnie. Wymagaj od użytkowników zarejestrowania struktury w programie <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*> . Wyznaczanie trasy polega na tym, że nic nie jest uwzględniane domyślnie, a `UseEndpoints` to miejsce do rejestrowania punktów końcowych.
 
 ### <a name="creating-routing-integrated-middleware"></a>Tworzenie oprogramowania pośredniczącego zintegrowanego z routingiem
 
@@ -955,7 +2145,7 @@ Testy routingu mają [podstawowy przykład](https://github.com/aspnet/AspNetCore
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/ICoolMetadata.cs?name=snippet2)]
 
-Platformy, takie jak kontrolery i Razor Pages obsługują stosowanie atrybutów metadanych do typów i metod. W przypadku deklarowania typów metadanych:
+Platformy, takie jak kontrolery i Razor strony, obsługują stosowanie atrybutów metadanych do typów i metod. W przypadku deklarowania typów metadanych:
 
 * Udostępnij je jako [atrybuty](/dotnet/csharp/programming-guide/concepts/attributes/).
 * Większość użytkowników zna zastosowanie atrybutów.
@@ -1005,14 +2195,14 @@ Dzięki temu oprogramowanie pośredniczące autoryzacji jest przydatne poza kont
 
 Routing jest odpowiedzialny za mapowanie identyfikatorów URI żądań na punkty końcowe i wysyłanie żądań przychodzących do tych punktów końcowych. Trasy są zdefiniowane w aplikacji i konfigurowane podczas uruchamiania aplikacji. Trasa może opcjonalnie wyodrębnić wartości z adresu URL zawartego w żądaniu. te wartości mogą być następnie używane do przetwarzania żądań. Przy użyciu informacji o trasie z aplikacji Routing jest również w stanie generować adresy URL mapowane na punkty końcowe.
 
-Aby użyć najnowszych scenariuszy routingu w ASP.NET Core 2,2, określ [wersję zgodności](xref:mvc/compatibility-version) do rejestracji usług MVC w `Startup.ConfigureServices`:
+Aby użyć najnowszych scenariuszy routingu w ASP.NET Core 2,2, określ [wersję zgodności](xref:mvc/compatibility-version) do rejestracji usług MVC w `Startup.ConfigureServices` :
 
 ```csharp
 services.AddMvc()
     .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 ```
 
-Opcja <xref:Microsoft.AspNetCore.Mvc.MvcOptions.EnableEndpointRouting> określa, czy funkcja routingu powinna wewnętrznie używać logiki opartej na punkcie <xref:Microsoft.AspNetCore.Routing.IRouter>końcowym lub logiki opartej na ASP.NET Core 2,1 lub starszej. Gdy wersja zgodności jest ustawiona na 2,2 lub nowszej, wartość domyślna to `true`. Ustaw wartość `false` na, aby użyć poprzedniej logiki routingu:
+<xref:Microsoft.AspNetCore.Mvc.MvcOptions.EnableEndpointRouting>Opcja określa, czy funkcja routingu powinna wewnętrznie używać logiki opartej na punkcie końcowym lub <xref:Microsoft.AspNetCore.Routing.IRouter> logiki opartej na ASP.NET Core 2,1 lub starszej. Gdy wersja zgodności jest ustawiona na 2,2 lub nowszej, wartość domyślna to `true` . Ustaw wartość na, aby `false` użyć poprzedniej logiki routingu:
 
 ```csharp
 // Use the routing logic of ASP.NET Core 2.1 or earlier:
@@ -1020,16 +2210,16 @@ services.AddMvc(options => options.EnableEndpointRouting = false)
     .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 ```
 
-Więcej informacji na temat <xref:Microsoft.AspNetCore.Routing.IRouter>routingu opartego na usłudze można znaleźć w [wersji ASP.NET Core 2,1 tego tematu](/aspnet/core/fundamentals/routing?view=aspnetcore-2.1).
+Więcej informacji na temat <xref:Microsoft.AspNetCore.Routing.IRouter> routingu opartego na usłudze można znaleźć w [wersji ASP.NET Core 2,1 tego tematu](/aspnet/core/fundamentals/routing?view=aspnetcore-2.1).
 
 > [!IMPORTANT]
-> Ten dokument obejmuje Routing ASP.NET Core niskiego poziomu. Aby uzyskać informacje na temat ASP.NET Core routingu MVC <xref:mvc/controllers/routing>, zobacz. Aby uzyskać informacje na temat Konwencji routingu w Razor Pages <xref:razor-pages/razor-pages-conventions>, zobacz.
+> Ten dokument obejmuje Routing ASP.NET Core niskiego poziomu. Aby uzyskać informacje na temat ASP.NET Core routingu MVC, zobacz <xref:mvc/controllers/routing> . Aby uzyskać informacje na temat Konwencji routingu na Razor stronach, zobacz <xref:razor-pages/razor-pages-conventions> .
 
 [Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/routing/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
 
 ## <a name="routing-basics"></a>Podstawy routingu
 
-Większość aplikacji powinna wybrać podstawowy i opisowy schemat routingu, aby adresy URL były czytelne i zrozumiałe. Domyślna trasa `{controller=Home}/{action=Index}/{id?}`konwencjonalna:
+Większość aplikacji powinna wybrać podstawowy i opisowy schemat routingu, aby adresy URL były czytelne i zrozumiałe. Domyślna trasa konwencjonalna `{controller=Home}/{action=Index}/{id?}` :
 
 * Obsługuje podstawowy i opisowy schemat routingu.
 * Jest użytecznym punktem wyjścia dla aplikacji opartych na interfejsie użytkownika.
@@ -1038,11 +2228,11 @@ Deweloperzy często dodają dodatkowe trasy zwięzła do obszarów o dużym ruch
 
 Interfejsy API sieci Web powinny używać routingu atrybutów do modelowania funkcjonalności aplikacji jako zestawu zasobów, w których operacje są reprezentowane przez zlecenia HTTP. Oznacza to, że wiele operacji, na przykład GET i POST, dla tego samego zasobu logicznego używa tego samego adresu URL. Routing atrybutu zapewnia poziom kontroli, który jest wymagany do dokładnego projektowania układu publicznego punktu końcowego interfejsu API.
 
-Aplikacje Razor Pages używają domyślnego routingu konwencjonalnego do obsłużenia nazwanych zasobów w folderze *strony* aplikacji. Dostępne są dodatkowe konwencje, które umożliwiają dostosowanie Razor Pages zachowaniem routingu. Aby uzyskać więcej informacji, zobacz <xref:razor-pages/index> i <xref:razor-pages/razor-pages-conventions>.
+RazorAplikacje stron używają domyślnego routingu konwencjonalnego do obsłużenia nazwanych zasobów w folderze *strony* aplikacji. Dostępne są dodatkowe konwencje umożliwiające dostosowywanie Razor zachowania routingu stron. Aby uzyskać więcej informacji, zobacz <xref:razor-pages/index> i <xref:razor-pages/razor-pages-conventions>.
 
 Obsługa generowania adresów URL umożliwia tworzenie aplikacji bez adresów URL, które mają być połączone ze sobą. Ta obsługa pozwala rozpocząć od podstawowej konfiguracji routingu i zmodyfikować trasy po ustaleniu układu zasobów aplikacji.
 
-Routing używa *punktów końcowych* (`Endpoint`) do reprezentowania logicznych punktów końcowych w aplikacji.
+Routing używa *punktów końcowych* ( `Endpoint` ) do reprezentowania logicznych punktów końcowych w aplikacji.
 
 Punkt końcowy definiuje delegata do przetwarzania żądań i kolekcji dowolnych metadanych. Metadane są używane w celu zaimplementowania zagadnień związanych z wycinaniem w oparciu o zasady i konfigurację dołączone do każdego punktu końcowego.
 
@@ -1051,18 +2241,18 @@ System routingu ma następujące cechy:
 * Składnia szablonu trasy służy do definiowania tras z parametrami trasy z tokenami.
 * Dozwolona jest konfiguracja języka końcowego w stylu konwencjonalnym i stylu atrybutu.
 * <xref:Microsoft.AspNetCore.Routing.IRouteConstraint>służy do określenia, czy parametr adresu URL zawiera prawidłową wartość dla danego ograniczenia punktu końcowego.
-* Modele aplikacji, takie jak MVC/Razor Pages, rejestrują wszystkie punkty końcowe, które mają przewidywalne implementację scenariuszy routingu.
+* Modele aplikacji, takie jak MVC/ Razor Pages, rejestrują wszystkie punkty końcowe, które mają przewidywalne implementację scenariuszy routingu.
 * Implementacja routingu podejmuje decyzje dotyczące routingu w dowolnym miejscu w potoku programu pośredniczącego.
 * Oprogramowanie pośredniczące, które pojawia się po utworzeniu oprogramowania pośredniczącego, może sprawdzić wynik decyzji punktu końcowego usługi routingu dla danego identyfikatora URI żądania.
 * Można wyliczyć wszystkie punkty końcowe w aplikacji w dowolnym miejscu w potoku programu pośredniczącego.
 * Aplikacja może używać routingu do generowania adresów URL (na przykład w przypadku przekierowania lub linków) na podstawie informacji o punkcie końcowym, a tym samym unikania zakodowanych adresów URL, co ułatwia łatwość utrzymania.
 * Generowanie adresów URL jest oparte na adresach, które obsługują arbitralną rozszerzalność:
 
-  * Interfejs API generatora linków<xref:Microsoft.AspNetCore.Routing.LinkGenerator>() można rozpoznać w dowolnym miejscu przy użyciu [iniekcji zależności (di)](xref:fundamentals/dependency-injection) do generowania adresów URL.
-  * Gdy interfejs API generatora linków nie jest dostępny za <xref:Microsoft.AspNetCore.Mvc.IUrlHelper> pośrednictwem programu di, oferuje metody tworzenia adresów URL.
+  * Interfejs API generatora linków ( <xref:Microsoft.AspNetCore.Routing.LinkGenerator> ) można rozpoznać w dowolnym miejscu przy użyciu [iniekcji zależności (di)](xref:fundamentals/dependency-injection) do generowania adresów URL.
+  * Gdy interfejs API generatora linków nie jest dostępny za pośrednictwem programu DI, <xref:Microsoft.AspNetCore.Mvc.IUrlHelper> oferuje metody tworzenia adresów URL.
 
 > [!NOTE]
-> Dzięki wydaniu routingu punktów końcowych w ASP.NET Core 2,2, łączenie punktów końcowych jest ograniczone do akcji i stron programu MVC/Razor Pages. Rozszerzenia punktów końcowych konsolidacji są planowane dla przyszłych wersji.
+> Dzięki wydaniu routingu punktów końcowych w ASP.NET Core 2,2, łączenie punktów końcowych jest ograniczone do Razor akcji i stron MVC/Pages. Rozszerzenia punktów końcowych konsolidacji są planowane dla przyszłych wersji.
 
 Routing jest połączony z potokiem [pośredniczącym](xref:fundamentals/middleware/index) przez <xref:Microsoft.AspNetCore.Builder.RouterMiddleware> klasę. [ASP.NET Core MVC](xref:mvc/overview) dodaje Routing do potoku oprogramowania pośredniczącego w ramach swojej konfiguracji i obsługuje routing w aplikacjach MVC i Razor Pages. Aby dowiedzieć się, jak używać routingu jako składnika autonomicznego, zapoznaj się z sekcją [Korzystanie z oprogramowania do routingu](#use-routing-middleware) .
 
@@ -1078,7 +2268,7 @@ Po wykonaniu delegata punktu końcowego właściwości [RouteContext. RouteData]
 
 [RouteData. DataTokens](xref:Microsoft.AspNetCore.Routing.RouteData.DataTokens*) to zbiór właściwości dodatkowych danych dotyczących dopasowanej trasy. <xref:Microsoft.AspNetCore.Routing.RouteData.DataTokens*>zapewnia obsługę kojarzenia danych stanu z każdą trasą, dzięki czemu aplikacja może podejmować decyzje na podstawie dopasowanej trasy. Te wartości są zdefiniowane przez dewelopera i **nie** mają wpływu na zachowanie routingu. Ponadto wartości umieszczane w [RouteData. Datatokeny](xref:Microsoft.AspNetCore.Routing.RouteData.DataTokens*) mogą być dowolnego typu, w przeciwieństwie do [RouteData. wartości](xref:Microsoft.AspNetCore.Routing.RouteData.Values), które muszą być konwertowane do i z ciągów.
 
-[RouteData. routers](xref:Microsoft.AspNetCore.Routing.RouteData.Routers) to lista tras, które brały udział w pomyślnie dopasowane do żądania. Trasy mogą być zagnieżdżone wewnątrz siebie. <xref:Microsoft.AspNetCore.Routing.RouteData.Routers> Właściwość odzwierciedla ścieżkę przez logiczne drzewo tras, które spowodowały dopasowanie. Ogólnie rzecz biorąc, pierwszy element <xref:Microsoft.AspNetCore.Routing.RouteData.Routers> w jest kolekcją tras i powinien być używany do generowania adresów URL. Ostatnim elementem w programie <xref:Microsoft.AspNetCore.Routing.RouteData.Routers> jest program obsługi trasy, który został dopasowany.
+[RouteData. routers](xref:Microsoft.AspNetCore.Routing.RouteData.Routers) to lista tras, które brały udział w pomyślnie dopasowane do żądania. Trasy mogą być zagnieżdżone wewnątrz siebie. <xref:Microsoft.AspNetCore.Routing.RouteData.Routers>Właściwość odzwierciedla ścieżkę przez logiczne drzewo tras, które spowodowały dopasowanie. Ogólnie rzecz biorąc, pierwszy element w <xref:Microsoft.AspNetCore.Routing.RouteData.Routers> jest kolekcją tras i powinien być używany do generowania adresów URL. Ostatnim elementem w programie <xref:Microsoft.AspNetCore.Routing.RouteData.Routers> jest program obsługi trasy, który został dopasowany.
 
 <a name="lg"></a>
 
@@ -1086,20 +2276,20 @@ Po wykonaniu delegata punktu końcowego właściwości [RouteContext. RouteData]
 
 Generowanie adresu URL to proces, za pomocą którego Routing może utworzyć ścieżkę URL na podstawie zestawu wartości trasy. Pozwala to na logiczne rozdzielenie między punktami końcowymi i adresami URL, które uzyskują do nich dostęp.
 
-Routing punktów końcowych obejmuje interfejs API generatora linków (<xref:Microsoft.AspNetCore.Routing.LinkGenerator>). <xref:Microsoft.AspNetCore.Routing.LinkGenerator>jest usługą singleton, którą można pobrać z programu [di](xref:fundamentals/dependency-injection). Interfejsu API można używać poza kontekstem żądania wykonania. MVC <xref:Microsoft.AspNetCore.Mvc.IUrlHelper> i scenariusze, które opierają <xref:Microsoft.AspNetCore.Mvc.IUrlHelper>się na, takie jak [pomocnicy tagów](xref:mvc/views/tag-helpers/intro), pomocników HTML i [wyniki akcji](xref:mvc/controllers/actions), używają generatora linków, aby zapewnić możliwości generowania linków.
+Routing punktów końcowych obejmuje interfejs API generatora linków ( <xref:Microsoft.AspNetCore.Routing.LinkGenerator> ). <xref:Microsoft.AspNetCore.Routing.LinkGenerator>jest usługą singleton, którą można pobrać z programu [di](xref:fundamentals/dependency-injection). Interfejsu API można używać poza kontekstem żądania wykonania. MVC <xref:Microsoft.AspNetCore.Mvc.IUrlHelper> i scenariusze, które opierają <xref:Microsoft.AspNetCore.Mvc.IUrlHelper> się na, takie jak [pomocnicy tagów](xref:mvc/views/tag-helpers/intro), pomocników HTML i [wyniki akcji](xref:mvc/controllers/actions), używają generatora linków, aby zapewnić możliwości generowania linków.
 
-Generator łącza jest objęty koncepcją i *schematami* *adresów.* Schemat adresów jest sposobem określania punktów końcowych, które należy wziąć pod uwagę podczas generowania łącza. Na przykład nazwa trasy i wartości trasy scenariusze wielu użytkowników są znane z programu z MVC/Razor Pages są implementowane jako schemat adresów.
+Generator łącza jest objęty koncepcją i *schematami* *adresów.* Schemat adresów jest sposobem określania punktów końcowych, które należy wziąć pod uwagę podczas generowania łącza. Na przykład nazwa trasy i wartości trasy scenariusze wielu użytkowników są znane ze względu na to, że z MVC/ Razor Pages są implementowane jako schemat adresów.
 
-Generator łącza może łączyć się z akcjami i stronami MVC/Razor Pages za pośrednictwem następujących metod rozszerzających:
+Generator łącza umożliwia łączenie z Razor akcjami i stronami MVC/Pages za pomocą następujących metod rozszerzających:
 
 * <xref:Microsoft.AspNetCore.Routing.ControllerLinkGeneratorExtensions.GetPathByAction*>
 * <xref:Microsoft.AspNetCore.Routing.ControllerLinkGeneratorExtensions.GetUriByAction*>
 * <xref:Microsoft.AspNetCore.Routing.PageLinkGeneratorExtensions.GetPathByPage*>
 * <xref:Microsoft.AspNetCore.Routing.PageLinkGeneratorExtensions.GetUriByPage*>
 
-Przeciążenie tych metod przyjmuje argumenty, które zawierają `HttpContext`. Metody te są funkcjonalnie równoważne z `Url.Action` i `Url.Page` oferują dodatkową elastyczność i opcje.
+Przeciążenie tych metod przyjmuje argumenty, które zawierają `HttpContext` . Metody te są funkcjonalnie równoważne z `Url.Action` i `Url.Page` oferują dodatkową elastyczność i opcje.
 
-`GetPath*` Metody są najbardziej podobne do `Url.Action` i `Url.Page` w tym, że generują identyfikator URI zawierający ścieżkę bezwzględną. `GetUri*` Metody zawsze generują bezwzględny identyfikator URI zawierający schemat i hosta. Metody, które akceptują `HttpContext` identyfikator URI w kontekście żądania wykonania. Użycie wartości tras w otoczeniu, ścieżki podstawowej adresu URL, schematu i hosta z żądania wykonania jest używane, chyba że zostaną zastąpione.
+`GetPath*`Metody są najbardziej podobne do `Url.Action` i `Url.Page` w tym, że generują identyfikator URI zawierający ścieżkę bezwzględną. `GetUri*`Metody zawsze generują bezwzględny identyfikator URI zawierający schemat i hosta. Metody, które akceptują `HttpContext` Identyfikator URI w kontekście żądania wykonania. Użycie wartości tras w otoczeniu, ścieżki podstawowej adresu URL, schematu i hosta z żądania wykonania jest używane, chyba że zostaną zastąpione.
 
 <xref:Microsoft.AspNetCore.Routing.LinkGenerator>jest wywoływana przy użyciu adresu. Generowanie identyfikatora URI występuje w dwóch krokach:
 
@@ -1109,24 +2299,325 @@ Przeciążenie tych metod przyjmuje argumenty, które zawierają `HttpContext`. 
 Metody zapewniane przez <xref:Microsoft.AspNetCore.Routing.LinkGenerator> obsługę funkcji generowania linków standardowych dla dowolnego typu adresu. Najbardziej wygodnym sposobem korzystania z generatora łączy są metody rozszerzające, które wykonują operacje dla określonego typu adresu.
 
 | Metoda rozszerzenia   | Opis                                                         |
-| ------------------ | ------------------------------------------------------------------- |
-| <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetPathByAddress*> | Generuje identyfikator URI z ścieżką bezwzględną na podstawie podanych wartości. |
-| <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetUriByAddress*> | Generuje bezwzględny identyfikator URI na podstawie podanych wartości.             |
+| ---
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+--------- | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+---------------------------------- | | <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetPathByAddress*> | Generuje identyfikator URI z ścieżką bezwzględną na podstawie podanych wartości. | | <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetUriByAddress*> | Generuje bezwzględny identyfikator URI na podstawie podanych wartości.             |
 
 > [!WARNING]
 > Należy zwrócić uwagę na następujące konsekwencje wywoływania <xref:Microsoft.AspNetCore.Routing.LinkGenerator> metod:
 >
-> * Użyj `GetUri*` metod rozszerzających z zachowaniem ostrożności w konfiguracji aplikacji, która `Host` nie weryfikuje nagłówka żądań przychodzących. Jeśli `Host` nagłówek żądań przychodzących nie jest zweryfikowany, dane wejściowe żądania niezaufanego mogą być wysyłane z powrotem do klienta w identyfikatorach URI w widoku/stronie. Zaleca się, aby wszystkie aplikacje produkcyjne skonfigurowali swój serwer do `Host` sprawdzania poprawności nagłówka pod kątem znanych prawidłowych wartości.
+> * Użyj `GetUri*` metod rozszerzających z zachowaniem ostrożności w konfiguracji aplikacji, która nie weryfikuje `Host` nagłówka żądań przychodzących. Jeśli `Host` nagłówek żądań przychodzących nie jest zweryfikowany, dane wejściowe żądania niezaufanego mogą być wysyłane z powrotem do klienta w identyfikatorach URI w widoku/stronie. Zaleca się, aby wszystkie aplikacje produkcyjne skonfigurowali swój serwer do sprawdzania poprawności `Host` nagłówka pod kątem znanych prawidłowych wartości.
 >
-> * Należy <xref:Microsoft.AspNetCore.Routing.LinkGenerator> używać z zachowaniem ostrożności w oprogramowaniu `Map` pośredniczącym w połączeniu z lub `MapWhen`. `Map*`zmienia ścieżkę podstawową żądania wykonania, która ma wpływ na dane wyjściowe generowania łącza. Wszystkie <xref:Microsoft.AspNetCore.Routing.LinkGenerator> interfejsy API umożliwiają określanie ścieżki podstawowej. Zawsze określaj pustą ścieżkę bazową `Map*`, która ma wpływ na generowanie linków.
+> * Należy używać <xref:Microsoft.AspNetCore.Routing.LinkGenerator> z zachowaniem ostrożności w oprogramowaniu pośredniczącym w połączeniu z `Map` lub `MapWhen` . `Map*`zmienia ścieżkę podstawową żądania wykonania, która ma wpływ na dane wyjściowe generowania łącza. Wszystkie <xref:Microsoft.AspNetCore.Routing.LinkGenerator> interfejsy API umożliwiają określanie ścieżki podstawowej. Zawsze określaj pustą ścieżkę bazową, która ma `Map*` wpływ na generowanie linków.
 
 ## <a name="differences-from-earlier-versions-of-routing"></a>Różnice wynikające z wcześniejszych wersji usługi Routing
 
 Istnieje kilka różnic między routingiem punktu końcowego w ASP.NET Core 2,2 lub nowszym i wcześniejszymi wersjami routingu w programie ASP.NET Core:
 
-* System routingu punktu końcowego nie obsługuje <xref:Microsoft.AspNetCore.Routing.IRouter>rozszerzalności opartej na systemie, w <xref:Microsoft.AspNetCore.Routing.Route>tym dziedziczenie z.
+* System routingu punktu końcowego nie obsługuje <xref:Microsoft.AspNetCore.Routing.IRouter> rozszerzalności opartej na systemie, w tym dziedziczenie z <xref:Microsoft.AspNetCore.Routing.Route> .
 
-* Routing punktów końcowych nie obsługuje [WebApiCompatShim](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.WebApiCompatShim). Użyj [wersji zgodności](xref:mvc/compatibility-version) 2,1 (`.SetCompatibilityVersion(CompatibilityVersion.Version_2_1)`), aby nadal korzystać z podkładki zgodności.
+* Routing punktów końcowych nie obsługuje [WebApiCompatShim](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.WebApiCompatShim). Użyj [wersji zgodności](xref:mvc/compatibility-version) 2,1 ( `.SetCompatibilityVersion(CompatibilityVersion.Version_2_1)` ), aby nadal korzystać z podkładki zgodności.
 
 * Routing punktów końcowych ma inne zachowanie dla wielkości liter wygenerowanych identyfikatorów URI podczas korzystania z konwencjonalnych tras.
 
@@ -1145,11 +2636,11 @@ Istnieje kilka różnic między routingiem punktu końcowego w ASP.NET Core 2,2 
   var link = Url.Action("ReadPost", "blog", new { id = 17, });
   ```
 
-  W <xref:Microsoft.AspNetCore.Routing.IRouter>przypadku routingu opartego na systemie ten kod generuje identyfikator `/blog/ReadPost/17`URI, który uwzględnia wielkość liter podanej trasy. Routing punktów końcowych w ASP.NET Core 2,2 lub `/Blog/ReadPost/17` późniejszych produkuje ("blog" jest pisane wielkimi literami). Routing punktów końcowych `IOutboundParameterTransformer` udostępnia interfejs, którego można użyć do dostosowania tego zachowania globalnie lub w celu zastosowania różnych konwencji do mapowania adresów URL.
+  W przypadku <xref:Microsoft.AspNetCore.Routing.IRouter> routingu opartego na systemie ten kod generuje identyfikator URI `/blog/ReadPost/17` , który uwzględnia wielkość liter podanej trasy. Routing punktów końcowych w ASP.NET Core 2,2 lub późniejszych produkuje `/Blog/ReadPost/17` ("blog" jest pisane wielkimi literami). Routing punktów końcowych udostępnia `IOutboundParameterTransformer` interfejs, którego można użyć do dostosowania tego zachowania globalnie lub w celu zastosowania różnych konwencji do mapowania adresów URL.
 
   Aby uzyskać więcej informacji, zobacz sekcję [informacje dotyczące transformatora parametrów](#parameter-transformer-reference) .
 
-* Generowanie linków używane przez MVC/Razor Pages z trasami konwencjonalnymi działa inaczej podczas próby połączenia z kontrolerem/akcją lub stroną, która nie istnieje.
+* Generowanie linków używane przez strony MVC/ Razor Pages z trasami konwencjonalnymi działa inaczej podczas próby połączenia z kontrolerem/akcją lub stroną, która nie istnieje.
 
   Rozważmy następujący szablon trasy domyślnej:
 
@@ -1166,7 +2657,7 @@ Istnieje kilka różnic między routingiem punktu końcowego w ASP.NET Core 2,2 
   var link = Url.Action("ReadPost", "Blog", new { id = 17, });
   ```
 
-  W `IRouter`przypadku routingu opartego na systemie wynik jest `/Blog/ReadPost/17`zawsze, nawet jeśli `BlogController` nie istnieje lub nie ma metody `ReadPost` akcji. Zgodnie z oczekiwaniami Routing punktów końcowych w ASP.NET Core 2,2 lub `/Blog/ReadPost/17` nowszej generuje, czy istnieje metoda akcji. *Jednak w przypadku, gdy akcja nie istnieje, routing punktu końcowego tworzy pusty ciąg.* Koncepcyjnie, routing punktu końcowego nie zakłada, że punkt końcowy istnieje, jeśli akcja nie istnieje.
+  W przypadku `IRouter` routingu opartego na systemie wynik jest zawsze `/Blog/ReadPost/17` , nawet jeśli `BlogController` nie istnieje lub nie ma `ReadPost` metody akcji. Zgodnie z oczekiwaniami Routing punktów końcowych w ASP.NET Core 2,2 lub nowszej generuje, `/Blog/ReadPost/17` czy istnieje metoda akcji. *Jednak w przypadku, gdy akcja nie istnieje, routing punktu końcowego tworzy pusty ciąg.* Koncepcyjnie, routing punktu końcowego nie zakłada, że punkt końcowy istnieje, jeśli akcja nie istnieje.
 
 * *Algorytm unieważniania wartości otoczenia* generacji linku działa inaczej, gdy jest używany z routingiem punktów końcowych.
 
@@ -1187,20 +2678,329 @@ Istnieje kilka różnic między routingiem punktu końcowego w ASP.NET Core 2,2 
   @page "{id?}"
   ```
 
-  Jeśli identyfikator URI znajduje `/Store/Product/18` się w ASP.NET Core 2,1 lub starszej, link wygenerowany na stronie Sklep/informacje w `@Url.Page("/Login")` usłudze `/Login/18`ma wartość. `id` Wartość 18 jest ponownie używana, mimo że miejsce docelowe linku jest częścią aplikacji. Wartość `id` trasy w kontekście `/Login` strony jest prawdopodobnie wartością identyfikatora użytkownika, a nie wartością identyfikatora produktu w sklepie.
+  Jeśli identyfikator URI znajduje się `/Store/Product/18` w ASP.NET Core 2,1 lub starszej, link wygenerowany na stronie Sklep/informacje w usłudze `@Url.Page("/Login")` ma wartość `/Login/18` . `id`Wartość 18 jest ponownie używana, mimo że miejsce docelowe linku jest częścią aplikacji. `id`Wartość trasy w kontekście `/Login` strony jest prawdopodobnie wartością identyfikatora użytkownika, a nie wartością identyfikatora produktu w sklepie.
 
-  W przypadku routingu punktów końcowych z ASP.NET Core 2,2 lub nowszym wynik `/Login`jest. Wartości otoczenia nie są ponownie używane, gdy połączone miejsce docelowe jest inną akcją lub stroną.
+  W przypadku routingu punktów końcowych z ASP.NET Core 2,2 lub nowszym wynik jest `/Login` . Wartości otoczenia nie są ponownie używane, gdy połączone miejsce docelowe jest inną akcją lub stroną.
 
-* Składnia parametru trasy okrężnej: ukośniki nie są kodowane przy użyciu podwójnej gwiazdki (`**`) składni parametrów.
+* Składnia parametru trasy okrężnej: ukośniki nie są kodowane przy użyciu podwójnej gwiazdki ( `**` ) składni parametrów.
 
-  Podczas generowania łącza system routingu koduje wartość przechwyconą w dwugwiazdkowym (`**`) parametrem catch-all (na przykład), `{**myparametername}`z wyjątkiem ukośników. Podwójna gwiazdka catch-all jest obsługiwana w `IRouter`przypadku routingu opartego na systemie ASP.NET Core 2,2 lub nowszym.
+  Podczas generowania łącza system routingu koduje wartość przechwyconą w dwugwiazdkowym ( `**` ) parametrem catch-all (na przykład), `{**myparametername}` z wyjątkiem ukośników. Podwójna gwiazdka catch-all jest obsługiwana w przypadku `IRouter` routingu opartego na systemie ASP.NET Core 2,2 lub nowszym.
 
-  Pojedyncza gwiazdka "catch-all" w poprzednich wersjach ASP.NET Core (`{*myparametername}`) pozostanie obsługiwana, a ukośniki są zakodowane.
+  Pojedyncza gwiazdka "catch-all" w poprzednich wersjach ASP.NET Core ( `{*myparametername}` ) pozostanie obsługiwana, a ukośniki są zakodowane.
 
   | Trasa              | Wygenerowano łącze<br>`Url.Action(new { category = "admin/products" })`&hellip; |
-  | ------------------ | --------------------------------------------------------------------- |
-  | `/search/{*page}`  | `/search/admin%2Fproducts`(ukośnik zostanie zakodowany)             |
-  | `/search/{**page}` | `/search/admin/products`                                              |
+  | ---
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+--------- | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+----------------------------------- |   | `/search/{*page}`| `/search/admin%2Fproducts`(ukośnik zostanie zakodowany) |   | `/search/{**page}` |  `/search/admin/products`                                              |
 
 ### <a name="middleware-example"></a>Przykład oprogramowania pośredniczącego
 
@@ -1231,9 +3031,9 @@ public class ProductsLinkMiddleware
 
 ### <a name="create-routes"></a>Tworzenie tras
 
-Większość aplikacji tworzy trasy przez wywołanie <xref:Microsoft.AspNetCore.Builder.MapRouteRouteBuilderExtensions.MapRoute*> lub jedną z podobnych metod rozszerzających zdefiniowanych w <xref:Microsoft.AspNetCore.Routing.IRouteBuilder>systemie. Dowolna z <xref:Microsoft.AspNetCore.Routing.IRouteBuilder> metod rozszerzających tworzy wystąpienie <xref:Microsoft.AspNetCore.Routing.Route> i dodaje je do kolekcji tras.
+Większość aplikacji tworzy trasy przez wywołanie <xref:Microsoft.AspNetCore.Builder.MapRouteRouteBuilderExtensions.MapRoute*> lub jedną z podobnych metod rozszerzających zdefiniowanych w systemie <xref:Microsoft.AspNetCore.Routing.IRouteBuilder> . Dowolna z <xref:Microsoft.AspNetCore.Routing.IRouteBuilder> metod rozszerzających tworzy wystąpienie <xref:Microsoft.AspNetCore.Routing.Route> i dodaje je do kolekcji tras.
 
-<xref:Microsoft.AspNetCore.Builder.MapRouteRouteBuilderExtensions.MapRoute*>nie akceptuje parametru procedury obsługi trasy. <xref:Microsoft.AspNetCore.Builder.MapRouteRouteBuilderExtensions.MapRoute*>dodaje tylko trasy, które są obsługiwane przez <xref:Microsoft.AspNetCore.Routing.RouteBuilder.DefaultHandler*>. Aby dowiedzieć się więcej na temat routingu w <xref:mvc/controllers/routing>MVC, zobacz.
+<xref:Microsoft.AspNetCore.Builder.MapRouteRouteBuilderExtensions.MapRoute*>nie akceptuje parametru procedury obsługi trasy. <xref:Microsoft.AspNetCore.Builder.MapRouteRouteBuilderExtensions.MapRoute*>dodaje tylko trasy, które są obsługiwane przez <xref:Microsoft.AspNetCore.Routing.RouteBuilder.DefaultHandler*> . Aby dowiedzieć się więcej na temat routingu w MVC, zobacz <xref:mvc/controllers/routing> .
 
 Poniższy przykład kodu jest przykładem <xref:Microsoft.AspNetCore.Builder.MapRouteRouteBuilderExtensions.MapRoute*> wywołania używanego przez typową definicję trasy MVC ASP.NET Core:
 
@@ -1243,15 +3043,15 @@ routes.MapRoute(
     template: "{controller=Home}/{action=Index}/{id?}");
 ```
 
-Ten szablon dopasowuje ścieżkę URL i wyodrębnia wartości tras. Na przykład ścieżka `/Products/Details/17` generuje następujące wartości trasy: `{ controller = Products, action = Details, id = 17 }`.
+Ten szablon dopasowuje ścieżkę URL i wyodrębnia wartości tras. Na przykład ścieżka `/Products/Details/17` generuje następujące wartości trasy: `{ controller = Products, action = Details, id = 17 }` .
 
-Wartości tras są określane przez podzielenie ścieżki URL na segmenty i dopasowanie do każdego segmentu przy użyciu nazwy *parametru trasy* w szablonie trasy. Parametry trasy są nazywane. Parametry zdefiniowane przez ujęcie nazwy parametru w nawiasach klamrowych `{ ... }`.
+Wartości tras są określane przez podzielenie ścieżki URL na segmenty i dopasowanie do każdego segmentu przy użyciu nazwy *parametru trasy* w szablonie trasy. Parametry trasy są nazywane. Parametry zdefiniowane przez ujęcie nazwy parametru w nawiasach klamrowych `{ ... }` .
 
-Poprzedni szablon może również pasować do ścieżki `/` URL i generować wartości. `{ controller = Home, action = Index }` Dzieje się tak, `{controller}` ponieważ `{action}` parametry i trasy mają wartości domyślne, `id` a parametr trasy jest opcjonalny. Znak równości (`=`), po którym następuje wartość po nazwie parametru trasy definiuje wartość domyślną dla parametru. Znak zapytania (`?`) po nazwie parametru trasy definiuje opcjonalny parametr.
+Poprzedni szablon może również pasować do ścieżki URL `/` i generować wartości `{ controller = Home, action = Index }` . Dzieje się tak, `{controller}` ponieważ `{action}` Parametry i trasy mają wartości domyślne, a `id` parametr trasy jest opcjonalny. Znak równości ( `=` ), po którym następuje wartość po nazwie parametru trasy definiuje wartość domyślną dla parametru. Znak zapytania ( `?` ) po nazwie parametru trasy definiuje opcjonalny parametr.
 
 Parametry trasy z wartością domyślną *zawsze* generują wartość trasy w przypadku dopasowania trasy. Parametry opcjonalne nie generują wartości trasy, jeśli nie ma odpowiedniego segmentu ścieżki adresu URL. Szczegółowe opisy scenariuszy i składni szablonów tras można znaleźć w sekcji [Dokumentacja dotycząca szablonu trasy](#route-template-reference) .
 
-W poniższym przykładzie definicja `{id:int}` parametru trasy definiuje [ograniczenie trasy](#route-constraint-reference) dla parametru `id` trasy:
+W poniższym przykładzie definicja parametru trasy `{id:int}` definiuje [ograniczenie trasy](#route-constraint-reference) dla `id` parametru trasy:
 
 ```csharp
 routes.MapRoute(
@@ -1259,9 +3059,9 @@ routes.MapRoute(
     template: "{controller=Home}/{action=Index}/{id:int}");
 ```
 
-Ten szablon dopasowuje ścieżkę URL, `/Products/Details/17` taką jak `/Products/Details/Apples`, ale nie. Ograniczenia trasy implementują <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> i sprawdzają wartości routingu w celu ich zweryfikowania. W tym przykładzie wartość `id` trasy musi być możliwa do przekonwertowania na liczbę całkowitą. Aby uzyskać wyjaśnienie ograniczeń trasy dostarczonych przez platformę, zobacz temat [ograniczenia trasy](#route-constraint-reference) .
+Ten szablon dopasowuje ścieżkę URL, taką jak, `/Products/Details/17` ale nie `/Products/Details/Apples` . Ograniczenia trasy implementują <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> i sprawdzają wartości routingu w celu ich zweryfikowania. W tym przykładzie wartość trasy `id` musi być możliwa do przekonwertowania na liczbę całkowitą. Aby uzyskać wyjaśnienie ograniczeń trasy dostarczonych przez platformę, zobacz temat [ograniczenia trasy](#route-constraint-reference) .
 
-Dodatkowe przeciążenia wartości <xref:Microsoft.AspNetCore.Builder.MapRouteRouteBuilderExtensions.MapRoute*> akceptują dla `constraints`, `dataTokens`i `defaults`. Typowym użyciem tych parametrów jest przekazanie anonimowo wpisanego obiektu, gdzie nazwy właściwości typu anonimowego są zgodne z nazwami parametrów trasy.
+Dodatkowe przeciążenia <xref:Microsoft.AspNetCore.Builder.MapRouteRouteBuilderExtensions.MapRoute*> wartości akceptują dla `constraints` , `dataTokens` i `defaults` . Typowym użyciem tych parametrów jest przekazanie anonimowo wpisanego obiektu, gdzie nazwy właściwości typu anonimowego są zgodne z nazwami parametrów trasy.
 
 Poniższe <xref:Microsoft.AspNetCore.Builder.MapRouteRouteBuilderExtensions.MapRoute*> przykłady tworzą równoważne trasy:
 
@@ -1288,7 +3088,7 @@ routes.MapRoute(
     defaults: new { controller = "Blog", action = "ReadArticle" });
 ```
 
-Poprzedni szablon pasuje do ścieżki URL, tak `/Blog/All-About-Routing/Introduction` jak i wyodrębnia wartości `{ controller = Blog, action = ReadArticle, article = All-About-Routing/Introduction }`. Domyślne wartości trasy dla `controller` i `action` są generowane przez trasę, nawet jeśli w szablonie nie ma odpowiednich parametrów trasy. Wartości domyślne można określić w szablonie trasy. Parametr `article` Route jest zdefiniowany jako *przechwycenie* przez wygląd podwójnej gwiazdki (`**`) przed nazwą parametru trasy. Catch-wszystkie parametry tras przechwytują resztę ścieżki URL i mogą również pasować do pustego ciągu.
+Poprzedni szablon pasuje do ścieżki URL, tak jak `/Blog/All-About-Routing/Introduction` i wyodrębnia wartości `{ controller = Blog, action = ReadArticle, article = All-About-Routing/Introduction }` . Domyślne wartości trasy dla `controller` i `action` są generowane przez trasę, nawet jeśli w szablonie nie ma odpowiednich parametrów trasy. Wartości domyślne można określić w szablonie trasy. `article`Parametr Route jest zdefiniowany jako *przechwycenie* przez wygląd podwójnej gwiazdki ( `**` ) przed nazwą parametru trasy. Catch-wszystkie parametry tras przechwytują resztę ścieżki URL i mogą również pasować do pustego ciągu.
 
 Poniższy przykład dodaje ograniczenia trasy i tokeny danych:
 
@@ -1301,13 +3101,13 @@ routes.MapRoute(
     dataTokens: new { locale = "en-US" });
 ```
 
-Poprzedni szablon pasuje do ścieżki URL, na `/en-US/Products/5` przykład i wyodrębnia wartości `{ controller = Products, action = Details, id = 5 }` i tokeny `{ locale = en-US }`danych.
+Poprzedni szablon pasuje do ścieżki URL, na przykład `/en-US/Products/5` i wyodrębnia wartości `{ controller = Products, action = Details, id = 5 }` i tokeny danych `{ locale = en-US }` .
 
 ![Lokalne tokeny systemu Windows](routing/_static/tokens.png)
 
 ### <a name="route-class-url-generation"></a>Generowanie adresu URL klasy trasy
 
-<xref:Microsoft.AspNetCore.Routing.Route> Klasa może również wykonywać generowanie adresów URL przez połączenie zestawu wartości tras z jego szablonem trasy. Jest to logicznie proces odwrotny pasujący do ścieżki URL.
+<xref:Microsoft.AspNetCore.Routing.Route>Klasa może również wykonywać generowanie adresów URL przez połączenie zestawu wartości tras z jego szablonem trasy. Jest to logicznie proces odwrotny pasujący do ścieżki URL.
 
 > [!TIP]
 > Aby lepiej zrozumieć generowanie adresów URL, Załóżmy, jaki adres URL ma zostać wygenerowany, a następnie pomyśl o sposobie dopasowania szablonu trasy do tego adresu URL. Jakie wartości zostałyby wygenerowane? Jest to sztywny odpowiednik działania generowania adresów URL w <xref:Microsoft.AspNetCore.Routing.Route> klasie.
@@ -1320,11 +3120,11 @@ routes.MapRoute(
     template: "{controller=Home}/{action=Index}/{id?}");
 ```
 
-W przypadku wartości `{ controller = Products, action = List }`trasy zostanie wygenerowany adres `/Products/List` URL. Wartości trasy są zastępowane odpowiednimi parametrami trasy w celu utworzenia ścieżki URL. Ponieważ `id` jest to opcjonalny parametr trasy, adres URL został pomyślnie wygenerowany bez wartości dla `id`.
+W przypadku wartości trasy `{ controller = Products, action = List }` `/Products/List` zostanie wygenerowany adres URL. Wartości trasy są zastępowane odpowiednimi parametrami trasy w celu utworzenia ścieżki URL. Ponieważ `id` jest to opcjonalny parametr trasy, adres URL został pomyślnie wygenerowany bez wartości dla `id` .
 
-W przypadku wartości `{ controller = Home, action = Index }`trasy zostanie wygenerowany adres `/` URL. Podane wartości trasy są zgodne z wartościami domyślnymi, a segmenty odpowiadające wartościom domyślnym są bezpiecznie pomijane.
+W przypadku wartości trasy `{ controller = Home, action = Index }` `/` zostanie wygenerowany adres URL. Podane wartości trasy są zgodne z wartościami domyślnymi, a segmenty odpowiadające wartościom domyślnym są bezpiecznie pomijane.
 
-Oba adresy URL wygenerowały rundę z następującą definicją`/Home/Index` trasy `/`(i) tworzą te same wartości trasy, które zostały użyte do wygenerowania adresu URL.
+Oba adresy URL wygenerowały rundę z następującą definicją trasy ( `/Home/Index` i `/` ) tworzą te same wartości trasy, które zostały użyte do WYGENEROWANIA adresu URL.
 
 > [!NOTE]
 > Aplikacja używająca ASP.NET Core MVC powinna używać <xref:Microsoft.AspNetCore.Mvc.Routing.UrlHelper> do generowania adresów URL zamiast bezpośredniego wywoływania routingu.
@@ -1335,14 +3135,14 @@ Aby uzyskać więcej informacji na temat generowania adresów URL, zobacz sekcj�
 
 Odwołuje się do [pakietu Microsoft. AspNetCore. app](xref:fundamentals/metapackage-app) w pliku projektu aplikacji.
 
-Dodaj Routing do kontenera usługi w `Startup.ConfigureServices`:
+Dodaj Routing do kontenera usługi w `Startup.ConfigureServices` :
 
 [!code-csharp[](routing/samples/2.x/RoutingSample/Startup.cs?name=snippet_ConfigureServices&highlight=3)]
 
 Trasy muszą być skonfigurowane w `Startup.Configure` metodzie. Przykładowa aplikacja używa następujących interfejsów API:
 
 * <xref:Microsoft.AspNetCore.Routing.RouteBuilder>
-* <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapGet*>&ndash; Dopasowuje tylko żądania HTTP GET.
+* <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapGet*>: Dopasowuje tylko żądania HTTP GET.
 * <xref:Microsoft.AspNetCore.Builder.RoutingBuilderExtensions.UseRouter*>
 
 [!code-csharp[](routing/samples/2.x/RoutingSample/Startup.cs?name=snippet_RouteHandler)]
@@ -1350,16 +3150,256 @@ Trasy muszą być skonfigurowane w `Startup.Configure` metodzie. Przykładowa ap
 W poniższej tabeli przedstawiono odpowiedzi z podanym identyfikatorem URI.
 
 | Identyfikator URI                    | Odpowiedź                                          |
-| ---------------------- | ------------------------------------------------- |
-| `/package/create/3`    | Cześć! Wartości trasy: [Operation, Create], [ID, 3] |
-| `/package/track/-3`    | Cześć! Wartości trasy: [Operation, Track], [ID,-3] |
-| `/package/track/-3/`   | Cześć! Wartości trasy: [Operation, Track], [ID,-3] |
-| `/package/track/`      | Żądanie przepada w, brak dopasowania.              |
-| `GET /hello/Joe`       | Witaj, Jan!                                          |
-| `POST /hello/Joe`      | Żądanie przepada w, dopasowuje tylko HTTP GET. |
-| `GET /hello/Joe/Smith` | Żądanie przepada w, brak dopasowania.              |
+| ---
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
 
-Struktura zawiera zestaw metod rozszerzających do tworzenia tras (<xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions>):
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+----------- | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+------------------------- | | `/package/create/3`    | Cześć! Wartości trasy: [Operation, Create], [ID, 3] | | `/package/track/-3`    | Cześć! Wartości trasy: [Operation, Track], [ID,-3] | | `/package/track/-3/`   | Cześć! Wartości trasy: [Operation, Track], [ID,-3] | | `/package/track/`      | Żądanie przepada w, brak dopasowania.              | | `GET /hello/Joe`       | Witaj, Jan!                                          | | `POST /hello/Joe`      | Żądanie przepada w, dopasowuje tylko HTTP GET. | | `GET /hello/Joe/Smith` | Żądanie przepada w, brak dopasowania.              |
+
+Struktura zawiera zestaw metod rozszerzających do tworzenia tras ( <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions> ):
 
 * <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapDelete*>
 * <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapGet*>
@@ -1374,46 +3414,534 @@ Struktura zawiera zestaw metod rozszerzających do tworzenia tras (<xref:Microso
 * <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapRoute*>
 * <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapVerb*>
 
-`Map[Verb]` Metody służą do ograniczania trasy do zlecenia HTTP w nazwie metody. Na przykład zobacz <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapGet*> i <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapVerb*>.
+`Map[Verb]`Metody służą do ograniczania trasy do zlecenia HTTP w nazwie metody. Na przykład zobacz <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapGet*> i <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapVerb*> .
 
 ## <a name="route-template-reference"></a>Odwołanie do szablonu trasy
 
-Tokeny w nawiasach klamrowych (`{ ... }`) definiują *Parametry trasy* , które są powiązane w przypadku dopasowania trasy. Można zdefiniować więcej niż jeden parametr trasy w segmencie trasy, ale muszą one być oddzielone wartością literału. Na przykład `{controller=Home}{action=Index}` nie jest prawidłową trasą, ponieważ nie ma wartości literału między `{controller}` i `{action}`. Te parametry trasy muszą mieć nazwę i mogą mieć określone dodatkowe atrybuty.
+Tokeny w nawiasach klamrowych ( `{ ... }` ) definiują *Parametry trasy* , które są powiązane w przypadku dopasowania trasy. Można zdefiniować więcej niż jeden parametr trasy w segmencie trasy, ale muszą one być oddzielone wartością literału. Na przykład `{controller=Home}{action=Index}` nie jest prawidłową trasą, ponieważ nie ma wartości literału między `{controller}` i `{action}` . Te parametry trasy muszą mieć nazwę i mogą mieć określone dodatkowe atrybuty.
 
-Tekst literału inny niż parametry trasy (na przykład `{id}`) i separator `/` ścieżki muszą być zgodne z tekstem w adresie URL. W dopasowaniu do tekstu nie jest rozróżniana wielkość liter i w oparciu o zdekodowaną reprezentację ścieżki URL. Aby dopasować Ogranicznik parametru trasy literału`{` (lub `}`), należy wprowadzić ogranicznik przez powtórzenie znaku (`{{` lub `}}`).
+Tekst literału inny niż parametry trasy (na przykład `{id}` ) i separator ścieżki `/` muszą być zgodne z tekstem w adresie URL. W dopasowaniu do tekstu nie jest rozróżniana wielkość liter i w oparciu o zdekodowaną reprezentację ścieżki URL. Aby dopasować Ogranicznik parametru trasy literału ( `{` lub `}` ), należy wprowadzić ogranicznik przez powtórzenie znaku ( `{{` lub `}}` ).
 
-Wzorce adresów URL, które próbują przechwycić nazwę pliku z opcjonalnym rozszerzeniem pliku, mają dodatkowe uwagi. Rozważmy na przykład szablon `files/{filename}.{ext?}`. Gdy wartości obu `filename` i `ext` istnieją, są wypełniane obie wartości. Jeśli w adresie URL `filename` znajduje się tylko wartość parametru, trasa pasuje do, ponieważ końcowy okres (`.`) jest opcjonalny. Następujące adresy URL pasują do tej trasy:
+Wzorce adresów URL, które próbują przechwycić nazwę pliku z opcjonalnym rozszerzeniem pliku, mają dodatkowe uwagi. Rozważmy na przykład szablon `files/{filename}.{ext?}` . Gdy wartości obu `filename` i `ext` istnieją, są wypełniane obie wartości. Jeśli `filename` w adresie URL znajduje się tylko wartość parametru, trasa pasuje do, ponieważ końcowy okres ( `.` ) jest opcjonalny. Następujące adresy URL pasują do tej trasy:
 
 * `/files/myFile.txt`
 * `/files/myFile`
 
-Możesz użyć gwiazdki (`*`) lub podwójnej gwiazdki (`**`) jako prefiksu do parametru trasy, aby powiązać z pozostałą częścią identyfikatora URI. Są one nazywane parametrami *przechwycenia* . Na przykład `blog/{**slug}` dopasowuje dowolny identyfikator URI, który `/blog` rozpoczyna się od i ma dowolną wartość, która jest przypisana `slug` do wartości trasy. Catch-wszystkie parametry można także dopasować do pustego ciągu.
+Możesz użyć gwiazdki ( `*` ) lub podwójnej gwiazdki ( `**` ) jako prefiksu do parametru trasy, aby powiązać z pozostałą częścią identyfikatora URI. Są one nazywane parametrami *przechwycenia* . Na przykład `blog/{**slug}` dopasowuje dowolny identyfikator URI, który rozpoczyna się od `/blog` i ma dowolną wartość, która jest przypisana do `slug` wartości trasy. Catch-wszystkie parametry można także dopasować do pustego ciągu.
 
-Parametr catch-all wyprowadza odpowiednie znaki, gdy trasa jest używana do generowania adresu URL, włącznie z separatorami ścieżki (`/`). Na przykład trasa `foo/{*path}` z wartościami `{ path = "my/path" }` trasy jest generowana `foo/my%2Fpath`. Zwróć uwagę na odwrócony ukośnik. Aby zaokrąglić znaki separatora ścieżki, użyj prefiksu parametru `**` trasy. Trasa `foo/{**path}` z `{ path = "my/path" }` generowaniem `foo/my/path`.
+Parametr catch-all wyprowadza odpowiednie znaki, gdy trasa jest używana do generowania adresu URL, włącznie z separatorami ścieżki ( `/` ). Na przykład trasa `foo/{*path}` z wartościami trasy jest `{ path = "my/path" }` generowana `foo/my%2Fpath` . Zwróć uwagę na odwrócony ukośnik. Aby zaokrąglić znaki separatora ścieżki, użyj `**` prefiksu parametru trasy. Trasa `foo/{**path}` z `{ path = "my/path" }` generowaniem `foo/my/path` .
 
-Parametry trasy mogą mieć *wartości domyślne* , określając wartość domyślną po nazwie parametru oddzielone znakiem równości (`=`). Na przykład `{controller=Home}` definiuje `Home` jako wartość domyślną dla. `controller` Wartość domyślna jest używana, jeśli żadna wartość nie jest obecna w adresie URL dla parametru. Parametry trasy są opcjonalne przez dołączenie znaku zapytania (`?`) na końcu nazwy parametru, jak w. `id?` Różnica między wartościami opcjonalnymi i domyślnymi parametrami trasy polega na tym, że parametr trasy z wartością domyślną zawsze&mdash;tworzy wartość, a opcjonalny parametr ma wartość tylko wtedy, gdy wartość jest dostarczana przez adres URL żądania.
+Parametry trasy mogą mieć *wartości domyślne* , określając wartość domyślną po nazwie parametru oddzielone znakiem równości ( `=` ). Na przykład `{controller=Home}` definiuje `Home` jako wartość domyślną dla `controller` . Wartość domyślna jest używana, jeśli żadna wartość nie jest obecna w adresie URL dla parametru. Parametry trasy są opcjonalne przez dołączenie znaku zapytania ( `?` ) na końcu nazwy parametru, jak w `id?` . Różnica między wartościami opcjonalnymi i domyślnymi parametrami trasy polega na tym, że parametr trasy z wartością domyślną zawsze tworzy wartość, &mdash; a opcjonalny parametr ma wartość tylko wtedy, gdy wartość jest dostarczana przez adres URL żądania.
 
-Parametry trasy mogą mieć ograniczenia, które muszą być zgodne z wartością trasy powiązaną z adresem URL. Dodanie dwukropka`:`() i nazwy ograniczenia po nazwie parametru trasy określa *ograniczenie wbudowane* dla parametru trasy. Jeśli ograniczenie wymaga argumentów, są one ujęte w nawiasy (`(...)`) po nazwie ograniczenia. Można określić wiele ograniczeń wbudowanych, dołączając inną dwukropek (`:`) i nazwę ograniczenia.
+Parametry trasy mogą mieć ograniczenia, które muszą być zgodne z wartością trasy powiązaną z adresem URL. Dodanie dwukropka ( `:` ) i nazwy ograniczenia po nazwie parametru trasy określa *ograniczenie wbudowane* dla parametru trasy. Jeśli ograniczenie wymaga argumentów, są one ujęte w nawiasy ( `(...)` ) po nazwie ograniczenia. Można określić wiele ograniczeń wbudowanych, dołączając inną dwukropek ( `:` ) i nazwę ograniczenia.
 
-Nazwa i argumenty ograniczenia są przekazane do <xref:Microsoft.AspNetCore.Routing.IInlineConstraintResolver> usługi w celu utworzenia wystąpienia <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> do użycia w przetwarzaniu adresów URL. Na przykład szablon `blog/{article:minlength(10)}` trasy określa `minlength` ograniczenie z argumentem. `10` Aby uzyskać więcej informacji na temat ograniczeń trasy i listę ograniczeń zapewnianych przez platformę, zobacz sekcję [odwołanie do ograniczenia trasy](#route-constraint-reference) .
+Nazwa i argumenty ograniczenia są przekazane do usługi w <xref:Microsoft.AspNetCore.Routing.IInlineConstraintResolver> celu utworzenia wystąpienia <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> do użycia w przetwarzaniu adresów URL. Na przykład szablon trasy `blog/{article:minlength(10)}` określa `minlength` ograniczenie z argumentem `10` . Aby uzyskać więcej informacji na temat ograniczeń trasy i listę ograniczeń zapewnianych przez platformę, zobacz sekcję [odwołanie do ograniczenia trasy](#route-constraint-reference) .
 
-Parametry trasy mogą także mieć Transformatory parametrów, które przekształcają wartość parametru podczas generowania linków i dopasowywania stron do adresów URL. Podobnie jak ograniczenia, transformatory parametrów mogą być dodawane wewnętrznie do parametru trasy przez dodanie dwukropka (`:`) i nazwy transformatora po nazwie parametru trasy. Na przykład szablon `blog/{article:slugify}` trasy określa `slugify` transformator. Aby uzyskać więcej informacji na temat transformatorów parametrów, zobacz sekcję [informacje dotyczące transformatora parametrów](#parameter-transformer-reference) .
+Parametry trasy mogą także mieć Transformatory parametrów, które przekształcają wartość parametru podczas generowania linków i dopasowywania stron do adresów URL. Podobnie jak ograniczenia, transformatory parametrów mogą być dodawane wewnętrznie do parametru trasy przez dodanie dwukropka ( `:` ) i nazwy transformatora po nazwie parametru trasy. Na przykład szablon trasy `blog/{article:slugify}` określa `slugify` transformator. Aby uzyskać więcej informacji na temat transformatorów parametrów, zobacz sekcję [informacje dotyczące transformatora parametrów](#parameter-transformer-reference) .
 
 W poniższej tabeli przedstawiono przykładowe szablony tras i ich zachowanie.
 
 | Szablon trasy                           | Przykładowy pasujący identyfikator URI    | Identyfikator URI żądania&hellip;                                                    |
-| ---------------------------------------- | ----------------------- | -------------------------------------------------------------------------- |
-| `hello`                                  | `/hello`                | Dopasowuje tylko jedną ścieżkę `/hello`.                                     |
-| `{Page=Home}`                            | `/`                     | Dopasowuje i `Page` ustawia `Home`jako.                                         |
-| `{Page=Home}`                            | `/Contact`              | Dopasowuje i `Page` ustawia `Contact`jako.                                      |
-| `{controller}/{action}/{id?}`            | `/Products/List`        | Mapuje do `Products` kontrolera i `List` akcji.                       |
-| `{controller}/{action}/{id?}`            | `/Products/Details/123` | Mapuje do `Products` kontrolera i `Details` akcji (`id` ustawienie na 123). |
-| `{controller=Home}/{action=Index}/{id?}` | `/`                     | Mapuje na `Home` kontroler i `Index` metodę (`id` jest ignorowana).        |
+| ---
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-------------------- | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+------------ | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+------------------------------------- | | `hello`                                  | `/hello`                | Dopasowuje tylko jedną ścieżkę `/hello` .                                     | | `{Page=Home}`                            | `/`                     | Dopasowuje i ustawia `Page` jako `Home` .                                         | | `{Page=Home}`                            | `/Contact`              | Dopasowuje i ustawia `Page` jako `Contact` .                                      | | `{controller}/{action}/{id?}`            | `/Products/List`        | Mapuje do `Products` kontrolera i `List` akcji.                       | | `{controller}/{action}/{id?}`            | `/Products/Details/123` | Mapuje do `Products` kontrolera i `Details` akcji ( `id` ustawienie na 123). | | `{controller=Home}/{action=Index}/{id?}` | `/`                     | Mapuje na `Home` kontroler i `Index` metodę ( `id` jest ignorowana).        |
 
 Użycie szablonu jest ogólnie najprostszym podejściem do routingu. Ograniczenia i wartości domyślne można także określić poza szablonem trasy.
 
 > [!TIP]
-> Włącz [Rejestrowanie](xref:fundamentals/logging/index) , aby zobaczyć, jak wbudowane implementacje routingu, takie jak <xref:Microsoft.AspNetCore.Routing.Route>, dopasowują żądania.
+> Włącz [Rejestrowanie](xref:fundamentals/logging/index) , aby zobaczyć, jak wbudowane implementacje routingu, takie jak <xref:Microsoft.AspNetCore.Routing.Route> , dopasowują żądania.
 
 ## <a name="reserved-routing-names"></a>Zastrzeżone nazwy routingu
 
@@ -1435,25 +3963,93 @@ Ograniczenia trasy są wykonywane, gdy nastąpiło dopasowanie do przychodząceg
 W poniższej tabeli przedstawiono przykładowe ograniczenia trasy i ich oczekiwane zachowanie.
 
 | ograniczenie | Przykład | Przykładowe dopasowania | Uwagi |
-| ---------- | ------- | --------------- | ----- |
-| `int` | `{id:int}` | `123456789`, `-123456789` | Dopasowuje dowolną liczbę całkowitą. |
-| `bool` | `{active:bool}` | `true`, `FALSE` | Dopasowuje `true` lub wartość "false". Bez uwzględniania wielkości liter. |
-| `datetime` | `{dob:datetime}` | `2016-12-31`, `2016-12-31 7:32pm` | Dopasowuje prawidłową `DateTime` wartość w niezmiennej kulturze. Zobacz poprzednie ostrzeżenie.|
-| `decimal` | `{price:decimal}` | `49.99`, `-1,000.01` | Dopasowuje prawidłową `decimal` wartość w niezmiennej kulturze. Zobacz poprzednie ostrzeżenie.|
-| `double` | `{weight:double}` | `1.234`, `-1,001.01e8` | Dopasowuje prawidłową `double` wartość w niezmiennej kulturze. Zobacz poprzednie ostrzeżenie.|
-| `float` | `{weight:float}` | `1.234`, `-1,001.01e8` | Dopasowuje prawidłową `float` wartość w niezmiennej kulturze. Zobacz poprzednie ostrzeżenie.|
-| `guid` | `{id:guid}` | `CD2C1638-1638-72D5-1638-DEADBEEF1638`, `{CD2C1638-1638-72D5-1638-DEADBEEF1638}` | Pasuje do prawidłowej `Guid` wartości. |
-| `long` | `{ticks:long}` | `123456789`, `-123456789` | Pasuje do prawidłowej `long` wartości. |
-| `minlength(value)` | `{username:minlength(4)}` | `Rick` | Ciąg musi składać się z co najmniej 4 znaków. |
-| `maxlength(value)` | `{filename:maxlength(8)}` | `MyFile` | Ciąg ma maksymalnie 8 znaków. |
-| `length(length)` | `{filename:length(12)}` | `somefile.txt` | Ciąg musi zawierać dokładnie 12 znaków. |
-| `length(min,max)` | `{filename:length(8,16)}` | `somefile.txt` | Ciąg musi zawierać co najmniej 8 znaków. |
-| `min(value)` | `{age:min(18)}` | `19` | Wartość całkowita musi być równa co najmniej 18. |
-| `max(value)` | `{age:max(120)}` | `91` | Wartość całkowita z maksymalną 120. |
-| `range(min,max)` | `{age:range(18,120)}` | `91` | Wartość całkowita musi być równa co najmniej 18 i maksymalnie 120. |
-| `alpha` | `{name:alpha}` | `Rick` | Ciąg musi składać się z co najmniej jednego znaku `a` - `z`alfabetycznego.  Bez uwzględniania wielkości liter. |
-| `regex(expression)` | `{ssn:regex(^\\d{{3}}-\\d{{2}}-\\d{{4}}$)}` | `123-45-6789` | Ciąg musi być zgodny z wyrażeniem regularnym. Zapoznaj się z poradami dotyczącymi definiowania wyrażenia regularnego. |
-| `required` | `{name:required}` | `Rick` | Służy do wymuszania, że podczas generowania adresu URL jest obecna wartość, która nie jest wartością parametru. |
+| ---
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+----- | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+---- | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-------- | ----- | | `int` | `{id:int}` | `123456789`, `-123456789` | Dopasowuje dowolną liczbę całkowitą. | | `bool` | `{active:bool}` | `true`, `FALSE` | Dopasowuje `true` lub `false. Case-insensitive. |
+| ` DateTime ` | ` {dob: DateTime} ` | ` 2016-12-31 `, ` 2016-12-31 7:32pm ` | Matches a valid ` DateTime ` value in the invariant culture. See  preceding warning.|
+| ` Decimal ` | ` {Price: decimal} ` | ` 49,99 `, ` -1 000,01 ` | Matches a valid ` dziesiętne ` value in the invariant culture. See  preceding warning.|
+| ` Double ` | ` {Waga: Double} ` | ` 1,234 `, ` -1, 001.01 E8 ` | Matches a valid ` podwójne ` value in the invariant culture. See  preceding warning.|
+| ` zmiennoprzecinkowe ` | ` {Waga: float} ` | ` 1,234 `, ` -1, 001.01 E8 ` | Matches a valid ` float ` value in the invariant culture. See  preceding warning.|
+| ` GUID ` | ` {ID: GUID} ` | ` CD2C1638-1638-72D5-1638-DEADBEEF1638 `, ` {CD2C1638-1638-72D5-1638-DEADBEEF1638} ` | Matches a valid ` GUID ` value. |
+| ` Long ` | ` {Ticks: Long} ` | ` 123456789 `, ` -123456789 ` | Matches a valid ` Long ` value. |
+| ` minLength (Value) ` | ` {username: minLength (4)} ` | ` Rick ` | String must be at least 4 characters. |
+| ` MaxLength (Value) ` | ` {filename: MaxLength (8)} ` | ` długość pliku ` | String has maximum of 8 characters. |
+| ` (długość) ` | ` {filename: length (12)} ` | ` SOMEFILE. Długość txt ` | String must be exactly 12 characters long. |
+| ` (min, max) ` | ` {filename: length (8, 16)} ` | ` SOMEFILE. txt ` | String must be at least 8 and has maximum of 16 characters. |
+| ` min (wartość) ` | ` {Age: min (18)} ` | ` 19 ` | Integer value must be at least 18. |
+| ` Max (wartość) ` | ` {Age: max (120)} ` | ` 91 ` | Integer value maximum of 120. |
+| ` zakres (min, max) ` | ` {wiek: zakres (18120)} ` | ` 91 ` | Integer value must be at least 18 and maximum of 120. |
+| ` Alpha ` | ` {name: Alpha} ` | ` Rick a z wyrażeniem ` | String must consist of one or more alphabetical characters ` `-` `.  Case-insensitive. |
+| ` regularnym (wyrażenie) ` | ` {SSN: wyrażenie regularne (^ \\ d { {3} }- \\ d { {2} }- \\ d { {4} } $)} ` | ` 123-45-6789 ` | String must match the regular expression. See tips about defining a regular expression. |
+| ` wymagana ` | ` wartość {Name: Required} ` | ` Rick "| Służy do wymuszania, że podczas generowania adresu URL jest obecna wartość, która nie jest wartością parametru. |
 
 Wielokrotne ograniczenia rozdzielane średnikami można zastosować do jednego parametru. Na przykład następujące ograniczenie ogranicza parametr do wartości całkowitej 1 lub wyższej:
 
@@ -1463,45 +4059,315 @@ public User GetUserById(int id) { }
 ```
 
 > [!WARNING]
-> Ograniczenia trasy, które weryfikują adres URL i są konwertowane na typ CLR (takie `int` jak `DateTime`lub), zawsze używają niezmiennej kultury. W tych ograniczeniach przyjęto założenie, że adres URL nie jest Lokalizowalny. Ograniczenia trasy dostarczone przez platformę nie modyfikują wartości przechowywanych w wartościach trasy. Wszystkie wartości tras analizowane na podstawie adresu URL są przechowywane jako ciągi. Na przykład, `float` ograniczenie próbuje przekonwertować wartość trasy na float, ale przekonwertowana wartość jest używana tylko do sprawdzenia, czy może być konwertowana na typ float.
+> Ograniczenia trasy, które weryfikują adres URL i są konwertowane na typ CLR (takie jak `int` lub `DateTime` ), zawsze używają niezmiennej kultury. W tych ograniczeniach przyjęto założenie, że adres URL nie jest Lokalizowalny. Ograniczenia trasy dostarczone przez platformę nie modyfikują wartości przechowywanych w wartościach trasy. Wszystkie wartości tras analizowane na podstawie adresu URL są przechowywane jako ciągi. Na przykład, `float` ograniczenie próbuje przekonwertować wartość trasy na float, ale przekonwertowana wartość jest używana tylko do sprawdzenia, czy może być konwertowana na typ float.
 
 ## <a name="regular-expressions"></a>Wyrażenia regularne
 
-ASP.NET Core Framework dodaje `RegexOptions.IgnoreCase | RegexOptions.Compiled | RegexOptions.CultureInvariant` do konstruktora wyrażenia regularnego. Aby <xref:System.Text.RegularExpressions.RegexOptions> uzyskać opis tych elementów członkowskich, zobacz.
+ASP.NET Core Framework dodaje `RegexOptions.IgnoreCase | RegexOptions.Compiled | RegexOptions.CultureInvariant` do konstruktora wyrażenia regularnego. <xref:System.Text.RegularExpressions.RegexOptions>Aby uzyskać opis tych elementów członkowskich, zobacz.
 
-Wyrażenia regularne używają ograniczników i tokenów podobnie jak w przypadku routingu i języka C#. Tokeny wyrażenia regularnego muszą być zmienione. Aby użyć wyrażenia `^\d{3}-\d{2}-\d{4}$` regularnego w routingu:
+Wyrażenia regularne używają ograniczników i tokenów podobnie jak w przypadku routingu i języka C#. Tokeny wyrażenia regularnego muszą być zmienione. Aby użyć wyrażenia regularnego `^\d{3}-\d{2}-\d{4}$` w routingu:
 
 * Wyrażenie musi mieć pojedyncze ukośniki odwrotne `\` podane w ciągu jako podwójne ukośniki odwrotne `\\` w kodzie źródłowym.
-* Aby można było użyć znaku `\\` ucieczki `\` ciągu, musi nam istnieć wyrażenie regularne.
-* Wyrażenie regularne nie jest wymagane `\\` w przypadku używania [literałów ciągu Verbatim](/dotnet/csharp/language-reference/keywords/string).
+* `\\`Aby można było użyć znaku ucieczki ciągu, musi nam istnieć wyrażenie regularne `\` .
+* Wyrażenie regularne nie jest wymagane w `\\` przypadku używania [literałów ciągu Verbatim](/dotnet/csharp/language-reference/keywords/string).
 
-Na `{`znaki `}` `[` `{{` `}` `[[` `]]`ogranicznika parametru routingu ucieczki,,,, podwójne znaki w wyrażeniu,,,. `]` W poniższej tabeli przedstawiono wyrażenie regularne i wersja o zmienionym znaczeniu:
+Na znaki ogranicznika parametru routingu ucieczki,,,, `{` `}` `[` `]` podwójne znaki w wyrażeniu `{{` ,, `}` `[[` , `]]` . W poniższej tabeli przedstawiono wyrażenie regularne i wersja o zmienionym znaczeniu:
 
 | Wyrażenie regularne    | Wyrażenie regularne o zmienionym znaczeniu     |
-| --------------------- | ------------------------------ |
-| `^\d{3}-\d{2}-\d{4}$` | `^\\d{{3}}-\\d{{2}}-\\d{{4}}$` |
+| ---
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+----------- | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+--------------- | | `^\d{3}-\d{2}-\d{4}$` | `^\\d{{3}}-\\d{{2}}-\\d{{4}}$` |
 | `^[a-z]{2}$`          | `^[[a-z]]{{2}}$`               |
 
-Wyrażenia regularne używane w routingu często zaczynają się od `^` znaku karetki i dopasowują pozycję początkową ciągu. Wyrażenia często kończą się `$` znakiem dolara i pasują do końca ciągu. Znaki `^` i `$` zapewniają, że wyrażenie regularne dopasowuje całą wartość parametru trasy. Bez znaków `^` i `$` wyrażenie regularne dopasowuje dowolny podciąg w ciągu, co jest często niepożądane. W poniższej tabeli przedstawiono przykłady i wyjaśniono, dlaczego są one zgodne lub niezgodne.
+Wyrażenia regularne używane w routingu często zaczynają się od `^` znaku karetki i dopasowują pozycję początkową ciągu. Wyrażenia często kończą się znakiem dolara `$` i pasują do końca ciągu. `^`Znaki i `$` zapewniają, że wyrażenie regularne dopasowuje całą wartość parametru trasy. Bez `^` znaków i `$` wyrażenie regularne dopasowuje dowolny podciąg w ciągu, co jest często niepożądane. W poniższej tabeli przedstawiono przykłady i wyjaśniono, dlaczego są one zgodne lub niezgodne.
 
-| Wyrażenie   | String    | Dopasowanie | Komentarz               |
-| ------------ | --------- | :---: |  -------------------- |
-| `[a-z]{2}`   | hello     | Tak   | Dopasowania podciągów     |
-| `[a-z]{2}`   | 123abc456 | Tak   | Dopasowania podciągów     |
-| `[a-z]{2}`   | MZ        | Tak   | Wyrażenie dopasowania    |
-| `[a-z]{2}`   | MZ        | Tak   | Bez uwzględniania wielkości liter    |
-| `^[a-z]{2}$` | hello     | Nie    | Zobacz `^` i `$` powyżej |
-| `^[a-z]{2}$` | 123abc456 | Nie    | Zobacz `^` i `$` powyżej |
+| Wyrażenie   | String (ciąg)    | Dopasowanie | Komentarz               |
+| ---
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+------ | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+----- | :---: |  ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+---------- | | `[a-z]{2}`   | Witaj | Tak | Dopasowania podciągów | | `[a-z]{2}`   | 123abc456 | Tak | Dopasowania podciągów | | `[a-z]{2}`   | MZ | Tak | Wyrażenie dopasowania | | `[a-z]{2}`   | MZ | Tak | Bez uwzględniania wielkości liter | | `^[a-z]{2}$` | Witaj | Nie | Zobacz `^` i `$` powyżej | | `^[a-z]{2}$` | 123abc456 | Nie | Zobacz `^` i `$` powyżej |
 
 Aby uzyskać więcej informacji na temat składni wyrażeń regularnych, zobacz [.NET Framework wyrażeń regularnych](/dotnet/standard/base-types/regular-expression-language-quick-reference).
 
-Aby ograniczyć parametr do znanego zestawu możliwych wartości, użyj wyrażenia regularnego. Na `{action:regex(^(list|get|create)$)}` przykład `action` dopasowuje wartość trasy do `list`, `get`, lub. `create` Jeśli przeszedł do słownika ograniczeń, ciąg `^(list|get|create)$` jest równoważny. Ograniczenia, które są przesyłane w słowniku ograniczenia (nie wbudowane w szablon), które nie pasują do jednego ze znanych ograniczeń, są również traktowane jako wyrażenia regularne.
+Aby ograniczyć parametr do znanego zestawu możliwych wartości, użyj wyrażenia regularnego. Na przykład `{action:regex(^(list|get|create)$)}` dopasowuje `action` wartość trasy do `list` , `get` , lub `create` . Jeśli przeszedł do słownika ograniczeń, ciąg `^(list|get|create)$` jest równoważny. Ograniczenia, które są przesyłane w słowniku ograniczenia (nie wbudowane w szablon), które nie pasują do jednego ze znanych ograniczeń, są również traktowane jako wyrażenia regularne.
 
 ## <a name="custom-route-constraints"></a>Niestandardowe ograniczenia trasy
 
-Oprócz wbudowanych ograniczeń trasy niestandardowe ograniczenia trasy mogą być tworzone przez implementację <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> interfejsu. <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> Interfejs zawiera jedną metodę, która zwraca `Match` `true` , jeśli ograniczenie jest spełnione i `false` w przeciwnym razie.
+Oprócz wbudowanych ograniczeń trasy niestandardowe ograniczenia trasy mogą być tworzone przez implementację <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> interfejsu. <xref:Microsoft.AspNetCore.Routing.IRouteConstraint>Interfejs zawiera jedną metodę, `Match` która zwraca, `true` Jeśli ograniczenie jest spełnione i `false` w przeciwnym razie.
 
-Aby użyć niestandardowego <xref:Microsoft.AspNetCore.Routing.IRouteConstraint>, typ ograniczenia trasy musi być zarejestrowany <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> w aplikacji w kontenerze usługi aplikacji. <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> Jest słownikiem, który mapuje klucze ograniczeń trasy <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> do implementacji, które weryfikują te ograniczenia. Aplikację <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> można zaktualizować w `Startup.ConfigureServices` ramach [usług. Wywołanie addrouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*) lub przez skonfigurowanie <xref:Microsoft.AspNetCore.Routing.RouteOptions> bezpośrednio w `services.Configure<RouteOptions>`usłudze. Przykład:
+Aby użyć niestandardowego <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> , typ ograniczenia trasy musi być zarejestrowany <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> w aplikacji w kontenerze usługi aplikacji. <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap>Jest słownikiem, który mapuje klucze ograniczeń trasy do <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> implementacji, które weryfikują te ograniczenia. Aplikację <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> można zaktualizować w `Startup.ConfigureServices` ramach [usług. Wywołanie addrouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*) lub przez skonfigurowanie <xref:Microsoft.AspNetCore.Routing.RouteOptions> bezpośrednio w usłudze `services.Configure<RouteOptions>` . Przykład:
 
 ```csharp
 services.AddRouting(options =>
@@ -1521,15 +4387,15 @@ public ActionResult<string> Get(string id)
 
 Transformatory parametrów:
 
-* Wykonaj podczas generowania linku dla elementu <xref:Microsoft.AspNetCore.Routing.Route>.
-* Implementacja `Microsoft.AspNetCore.Routing.IOutboundParameterTransformer`.
-* Są konfigurowane przy <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap>użyciu.
+* Wykonaj podczas generowania linku dla elementu <xref:Microsoft.AspNetCore.Routing.Route> .
+* Implementacja `Microsoft.AspNetCore.Routing.IOutboundParameterTransformer` .
+* Są konfigurowane przy użyciu <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> .
 * Wypełnij wartość trasy parametru i Przekształć ją na nową wartość ciągu.
 * Wynikiem jest użycie przekształconej wartości w wygenerowanym łączu.
 
-Na `slugify` przykład niestandardowy transformator parametrów w wzorcu `blog\{article:slugify}` trasy z `Url.Action(new { article = "MyTestArticle" })` generowaniem `blog\my-test-article`.
+Na przykład niestandardowy `slugify` transformator parametrów w wzorcu trasy `blog\{article:slugify}` z `Url.Action(new { article = "MyTestArticle" })` generowaniem `blog\my-test-article` .
 
-Aby użyć transformatora parametrów w wzorcu trasy, skonfiguruj go najpierw za <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> pomocą `Startup.ConfigureServices`polecenia w programie:
+Aby użyć transformatora parametrów w wzorcu trasy, skonfiguruj go najpierw za pomocą polecenia <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> w programie `Startup.ConfigureServices` :
 
 ```csharp
 services.AddRouting(options =>
@@ -1540,7 +4406,7 @@ services.AddRouting(options =>
 });
 ```
 
-Transformatory parametrów są używane przez platformę do przekształcania identyfikatora URI, w którym jest rozpoznawany punkt końcowy. Na przykład ASP.NET Core MVC używa transformatorów parametrów do przekształcenia wartości trasy używanej do dopasowania do `area`, `controller`, `action`, i `page`.
+Transformatory parametrów są używane przez platformę do przekształcania identyfikatora URI, w którym jest rozpoznawany punkt końcowy. Na przykład ASP.NET Core MVC używa transformatorów parametrów do przekształcenia wartości trasy używanej do dopasowania do `area` , `controller` , `action` , i `page` .
 
 ```csharp
 routes.MapRoute(
@@ -1548,33 +4414,358 @@ routes.MapRoute(
     template: "{controller:slugify=Home}/{action:slugify=Index}/{id?}");
 ```
 
-W przypadku poprzedniej trasy Akcja `SubscriptionManagementController.GetAll` jest dopasowywana do identyfikatora URI. `/subscription-management/get-all` Transformator parametrów nie zmienia wartości trasy użytych do wygenerowania linku. Na przykład dane `Url.Action("GetAll", "SubscriptionManagement")` wyjściowe `/subscription-management/get-all`.
+W przypadku poprzedniej trasy Akcja `SubscriptionManagementController.GetAll` jest dopasowywana do identyfikatora URI `/subscription-management/get-all` . Transformator parametrów nie zmienia wartości trasy użytych do wygenerowania linku. Na przykład dane `Url.Action("GetAll", "SubscriptionManagement")` wyjściowe `/subscription-management/get-all` .
 
 ASP.NET Core udostępnia konwencje interfejsu API do używania transformatorów parametrów z wygenerowanymi trasami:
 
-* ASP.NET Core MVC ma konwencję `Microsoft.AspNetCore.Mvc.ApplicationModels.RouteTokenTransformerConvention` interfejsu API. Ta Konwencja stosuje określony transformator parametrów do wszystkich tras atrybutów w aplikacji. Transformator parametrów przekształca tokeny trasy atrybutów po ich wymianie. Aby uzyskać więcej informacji, zobacz [używanie transformatora parametrów do dostosowywania zastępowania tokenu](/aspnet/core/mvc/controllers/routing#use-a-parameter-transformer-to-customize-token-replacement).
-* Razor Pages ma konwencję `Microsoft.AspNetCore.Mvc.ApplicationModels.PageRouteTransformerConvention` interfejsu API. Ta Konwencja stosuje określony transformator parametrów do wszystkich automatycznie odnalezionych Razor Pages. Transformator parametrów przekształca segmenty i nazwy plików Razor Pages tras. Aby uzyskać więcej informacji, zobacz [używanie transformatora parametrów do dostosowywania tras stron](/aspnet/core/razor-pages/razor-pages-conventions#use-a-parameter-transformer-to-customize-page-routes).
+* ASP.NET Core MVC ma `Microsoft.AspNetCore.Mvc.ApplicationModels.RouteTokenTransformerConvention` Konwencję interfejsu API. Ta Konwencja stosuje określony transformator parametrów do wszystkich tras atrybutów w aplikacji. Transformator parametrów przekształca tokeny trasy atrybutów po ich wymianie. Aby uzyskać więcej informacji, zobacz [używanie transformatora parametrów do dostosowywania zastępowania tokenu](/aspnet/core/mvc/controllers/routing#use-a-parameter-transformer-to-customize-token-replacement).
+* RazorStrony mają `Microsoft.AspNetCore.Mvc.ApplicationModels.PageRouteTransformerConvention` Konwencję interfejsu API. Ta Konwencja stosuje określony transformator parametrów do wszystkich automatycznie odnalezionych Razor stron. Transformator parametrów przekształca folder i segmenty nazw plików Razor tras. Aby uzyskać więcej informacji, zobacz [używanie transformatora parametrów do dostosowywania tras stron](/aspnet/core/razor-pages/razor-pages-conventions#use-a-parameter-transformer-to-customize-page-routes).
 
 ## <a name="url-generation-reference"></a>Odwołanie do generacji adresów URL
 
-Poniższy przykład pokazuje, jak wygenerować link do trasy, używając słownika wartości tras i <xref:Microsoft.AspNetCore.Routing.RouteCollection>.
+Poniższy przykład pokazuje, jak wygenerować link do trasy, używając słownika wartości tras i <xref:Microsoft.AspNetCore.Routing.RouteCollection> .
 
 [!code-csharp[](routing/samples/2.x/RoutingSample/Startup.cs?name=snippet_Dictionary)]
 
-<xref:Microsoft.AspNetCore.Routing.VirtualPathData.VirtualPath> Wygenerowano na końcu powyższego przykładu `/package/create/123`. Słownik zawiera wartości `operation` i `id` trasy szablonu "śledzenie trasy pakietu". `package/{operation}/{id}` Aby uzyskać szczegółowe informacje, zapoznaj się z przykładowym kodem w sekcji [Używanie oprogramowania pośredniczącego usługi routingu](#use-routing-middleware) lub [przykładowej aplikacji](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/routing/samples).
+<xref:Microsoft.AspNetCore.Routing.VirtualPathData.VirtualPath>Wygenerowano na końcu powyższego przykładu `/package/create/123` . Słownik zawiera `operation` `id` wartości i trasy szablonu "śledzenie trasy pakietu" `package/{operation}/{id}` . Aby uzyskać szczegółowe informacje, zapoznaj się z przykładowym kodem w sekcji [Używanie oprogramowania pośredniczącego usługi routingu](#use-routing-middleware) lub [przykładowej aplikacji](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/routing/samples).
 
-Drugi parametr <xref:Microsoft.AspNetCore.Routing.VirtualPathContext> konstruktora jest kolekcją *wartości otoczenia*. Wartości otoczenia są wygodne do użycia, ponieważ ograniczają liczbę wartości, które Deweloper musi określić w kontekście żądania. Bieżące wartości trasy bieżącego żądania są uznawane za wartości otoczenia dla generacji łącza. `About` W akcji aplikacji ASP.NET Core MVC `HomeController`, nie trzeba określać wartości trasy kontrolera do łączenia z `Index` akcją&mdash;, w której `Home` jest używana wartość otoczenia.
+Drugi parametr <xref:Microsoft.AspNetCore.Routing.VirtualPathContext> konstruktora jest kolekcją *wartości otoczenia*. Wartości otoczenia są wygodne do użycia, ponieważ ograniczają liczbę wartości, które Deweloper musi określić w kontekście żądania. Bieżące wartości trasy bieżącego żądania są uznawane za wartości otoczenia dla generacji łącza. W akcji aplikacji ASP.NET Core MVC `About` `HomeController` , nie trzeba określać wartości trasy kontrolera do łączenia z `Index` akcją, &mdash; w której `Home` jest używana wartość otoczenia.
 
 Wartości otoczenia, które nie pasują do parametru, są ignorowane. Wartości otoczenia są również ignorowane, gdy jawnie podana wartość przesłania wartość otoczenia. Dopasowanie występuje od lewej do prawej w adresie URL.
 
-Wartości jawnie podane, ale które nie pasują do segmentu trasy, są dodawane do ciągu zapytania. W poniższej tabeli przedstawiono wynik przy użyciu szablonu `{controller}/{action}/{id?}`trasy.
+Wartości jawnie podane, ale które nie pasują do segmentu trasy, są dodawane do ciągu zapytania. W poniższej tabeli przedstawiono wynik przy użyciu szablonu trasy `{controller}/{action}/{id?}` .
 
 | Wartości otoczenia                     | Wartości jawne                        | Wynik                  |
-| ---------------------------------- | -------------------------------------- | ----------------------- |
-| Controller = "Strona główna"                | Action = "informacje"                       | `/Home/About`           |
-| Controller = "Strona główna"                | Controller = "Order", Action = "informacje" | `/Order/About`          |
-| Controller = "Home", Color = "Red" | Action = "informacje"                       | `/Home/About`           |
-| Controller = "Strona główna"                | Action = "informacje", Color = "Red"        | `/Home/About?color=Red` |
+| ---
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+----------------- | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+------------------- | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+------------ | | Controller = "Strona główna" | Action = "informacje" | `/Home/About`|
+| Controller = "Strona główna" | Controller = "Order", Action = "informacje" | `/Order/About`|
+| Controller = "Home", Color = "Red" | Action = "informacje" | `/Home/About`|
+| Controller = "Strona główna" | Action = "informacje", Color = "Red" | `/Home/About?color=Red`                                |
 
 Jeśli trasa ma wartość domyślną, która nie odpowiada parametrowi, a ta wartość jest jawnie określona, musi być zgodna z wartością domyślną:
 
@@ -1587,7 +4778,7 @@ Generowanie linku generuje tylko łącze do tej trasy, gdy zostaną podane pasuj
 
 ## <a name="complex-segments"></a>Złożone segmenty
 
-Złożone segmenty (na `[Route("/x{token}y")]`przykład) są przetwarzane przez dopasowanie literałów z prawej strony do lewej w sposób niezachłanney. [Ten kod](https://github.com/dotnet/AspNetCore/blob/release/2.2/src/Http/Routing/src/Patterns/RoutePatternMatcher.cs#L293) zawiera szczegółowy opis sposobu dopasowywania segmentów złożonych. [Przykład kodu](https://github.com/dotnet/AspNetCore/blob/release/2.2/src/Http/Routing/src/Patterns/RoutePatternMatcher.cs#L293) nie jest używany przez ASP.NET Core, ale zapewnia dobre wyjaśnienie złożonych segmentów.
+Złożone segmenty (na przykład `[Route("/x{token}y")]` ) są przetwarzane przez dopasowanie literałów z prawej strony do lewej w sposób niezachłanney. [Ten kod](https://github.com/dotnet/AspNetCore/blob/release/2.2/src/Http/Routing/src/Patterns/RoutePatternMatcher.cs#L293) zawiera szczegółowy opis sposobu dopasowywania segmentów złożonych. [Przykład kodu](https://github.com/dotnet/AspNetCore/blob/release/2.2/src/Http/Routing/src/Patterns/RoutePatternMatcher.cs#L293) nie jest używany przez ASP.NET Core, ale zapewnia dobre wyjaśnienie złożonych segmentów.
 <!-- While that code is no longer used by ASP.NET Core for complex segment matching, it provides a good match to the current algorithm. The [current code](https://github.com/dotnet/AspNetCore/blob/91514c9af7e0f4c44029b51f05a01c6fe4c96e4c/src/Http/Routing/src/Matching/DfaMatcherBuilder.cs#L227-L244) is too abstracted from matching to be useful for understanding complex segment matching.
 -->
 
@@ -1597,7 +4788,7 @@ Złożone segmenty (na `[Route("/x{token}y")]`przykład) są przetwarzane przez 
 
 Routing jest odpowiedzialny za mapowanie identyfikatorów URI żądań w celu rozesłania procedur obsługi i wysyłania żądań przychodzących. Trasy są zdefiniowane w aplikacji i konfigurowane podczas uruchamiania aplikacji. Trasa może opcjonalnie wyodrębnić wartości z adresu URL zawartego w żądaniu. te wartości mogą być następnie używane do przetwarzania żądań. Przy użyciu skonfigurowanych tras z aplikacji Routing jest w stanie generować adresy URL mapowane na procedury obsługi tras.
 
-Aby użyć najnowszych scenariuszy routingu w ASP.NET Core 2,1, określ [wersję zgodności](xref:mvc/compatibility-version) do rejestracji usług MVC w `Startup.ConfigureServices`:
+Aby użyć najnowszych scenariuszy routingu w ASP.NET Core 2,1, określ [wersję zgodności](xref:mvc/compatibility-version) do rejestracji usług MVC w `Startup.ConfigureServices` :
 
 ```csharp
 services.AddMvc()
@@ -1605,13 +4796,13 @@ services.AddMvc()
 ```
 
 > [!IMPORTANT]
-> Ten dokument obejmuje Routing ASP.NET Core niskiego poziomu. Aby uzyskać informacje na temat ASP.NET Core routingu MVC <xref:mvc/controllers/routing>, zobacz. Aby uzyskać informacje na temat Konwencji routingu w Razor Pages <xref:razor-pages/razor-pages-conventions>, zobacz.
+> Ten dokument obejmuje Routing ASP.NET Core niskiego poziomu. Aby uzyskać informacje na temat ASP.NET Core routingu MVC, zobacz <xref:mvc/controllers/routing> . Aby uzyskać informacje na temat Konwencji routingu na Razor stronach, zobacz <xref:razor-pages/razor-pages-conventions> .
 
 [Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/routing/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
 
 ## <a name="routing-basics"></a>Podstawy routingu
 
-Większość aplikacji powinna wybrać podstawowy i opisowy schemat routingu, aby adresy URL były czytelne i zrozumiałe. Domyślna trasa `{controller=Home}/{action=Index}/{id?}`konwencjonalna:
+Większość aplikacji powinna wybrać podstawowy i opisowy schemat routingu, aby adresy URL były czytelne i zrozumiałe. Domyślna trasa konwencjonalna `{controller=Home}/{action=Index}/{id?}` :
 
 * Obsługuje podstawowy i opisowy schemat routingu.
 * Jest użytecznym punktem wyjścia dla aplikacji opartych na interfejsie użytkownika.
@@ -1620,7 +4811,7 @@ Deweloperzy często dodają dodatkowe trasy zwięzła do obszarów o dużym ruch
 
 Interfejsy API sieci Web powinny używać routingu atrybutów do modelowania funkcjonalności aplikacji jako zestawu zasobów, w których operacje są reprezentowane przez zlecenia HTTP. Oznacza to, że wiele operacji (na przykład GET, POST) dla tego samego zasobu logicznego będzie używać tego samego adresu URL. Routing atrybutu zapewnia poziom kontroli, który jest wymagany do dokładnego projektowania układu publicznego punktu końcowego interfejsu API.
 
-Aplikacje Razor Pages używają domyślnego routingu konwencjonalnego do obsłużenia nazwanych zasobów w folderze *strony* aplikacji. Dostępne są dodatkowe konwencje, które umożliwiają dostosowanie Razor Pages zachowaniem routingu. Aby uzyskać więcej informacji, zobacz <xref:razor-pages/index> i <xref:razor-pages/razor-pages-conventions>.
+RazorAplikacje stron używają domyślnego routingu konwencjonalnego do obsłużenia nazwanych zasobów w folderze *strony* aplikacji. Dostępne są dodatkowe konwencje umożliwiające dostosowywanie Razor zachowania routingu stron. Aby uzyskać więcej informacji, zobacz <xref:razor-pages/index> i <xref:razor-pages/razor-pages-conventions>.
 
 Obsługa generowania adresów URL umożliwia tworzenie aplikacji bez adresów URL, które mają być połączone ze sobą. Ta obsługa pozwala rozpocząć od podstawowej konfiguracji routingu i zmodyfikować trasy po ustaleniu układu zasobów aplikacji.
 
@@ -1636,7 +4827,7 @@ System routingu ma następujące cechy:
 * Składnia szablonu trasy służy do definiowania tras z parametrami trasy z tokenami.
 * Dozwolona jest konfiguracja języka końcowego w stylu konwencjonalnym i stylu atrybutu.
 * <xref:Microsoft.AspNetCore.Routing.IRouteConstraint>służy do określenia, czy parametr adresu URL zawiera prawidłową wartość dla danego ograniczenia punktu końcowego.
-* Modele aplikacji, takie jak MVC/Razor Pages, rejestrują wszystkie trasy z przewidywalną implementacją scenariuszy routingu.
+* Modele aplikacji, takie jak MVC/ Razor Pages, rejestrują wszystkie swoje trasy, które mają przewidywalne implementację scenariuszy routingu.
 * Odpowiedź może używać routingu do generowania adresów URL (na przykład w przypadku przekierowania lub linków) na podstawie informacji o trasach i w ten sposób unikania zakodowanych adresów URL, co ułatwia łatwość utrzymania.
 * Generacja adresów URL jest oparta na trasach, które obsługują arbitralną rozszerzalność. <xref:Microsoft.AspNetCore.Mvc.IUrlHelper>oferuje metody do kompilowania adresów URL.
 <!-- fix [middleware](xref:fundamentals/middleware/index) -->
@@ -1646,7 +4837,7 @@ Routing jest połączony z potokiem [pośredniczącym](xref:fundamentals/middlew
 
 Dopasowywanie adresów URL to proces, za pomocą którego Routing wysyła żądanie przychodzące do *procedury obsługi*. Ten proces jest oparty na danych w ścieżce URL, ale można go rozszerzyć w celu uwzględnienia wszelkich danych w żądaniu. Możliwość wysyłania żądań do oddzielnych programów obsługi jest kluczem do skalowania rozmiaru i złożoności aplikacji.
 
-Żądania przychodzące wprowadzają <xref:Microsoft.AspNetCore.Builder.RouterMiddleware>, który wywołuje <xref:Microsoft.AspNetCore.Routing.IRouter.RouteAsync*> metodę dla każdej trasy w sekwencji. Wystąpienie wybiera, czy *obsługiwać* żądanie przez ustawienie [RouteContext. Handler](xref:Microsoft.AspNetCore.Routing.RouteContext.Handler*) na wartość różną od null <xref:Microsoft.AspNetCore.Http.RequestDelegate> <xref:Microsoft.AspNetCore.Routing.IRouter> Jeśli trasa ustawi procedurę obsługi dla żądania, przetwarzanie trasy zostanie zatrzymane, a procedura obsługi zostanie wywołana w celu przetworzenia żądania. Jeśli nie znaleziono procedury obsługi trasy do przetworzenia żądania, oprogramowanie pośredniczące przekazuje żądanie do następnego oprogramowania pośredniczącego w potoku żądania.
+Żądania przychodzące wprowadzają <xref:Microsoft.AspNetCore.Builder.RouterMiddleware> , który wywołuje <xref:Microsoft.AspNetCore.Routing.IRouter.RouteAsync*> metodę dla każdej trasy w sekwencji. <xref:Microsoft.AspNetCore.Routing.IRouter>Wystąpienie wybiera, czy *obsługiwać* żądanie przez ustawienie [RouteContext. Handler](xref:Microsoft.AspNetCore.Routing.RouteContext.Handler*) na wartość różną od null <xref:Microsoft.AspNetCore.Http.RequestDelegate> . Jeśli trasa ustawi procedurę obsługi dla żądania, przetwarzanie trasy zostanie zatrzymane, a procedura obsługi zostanie wywołana w celu przetworzenia żądania. Jeśli nie znaleziono procedury obsługi trasy do przetworzenia żądania, oprogramowanie pośredniczące przekazuje żądanie do następnego oprogramowania pośredniczącego w potoku żądania.
 
 Podstawowe dane wejściowe <xref:Microsoft.AspNetCore.Routing.IRouter.RouteAsync*> to [RouteContext. HttpContext](xref:Microsoft.AspNetCore.Routing.RouteContext.HttpContext*) skojarzone z bieżącym żądaniem. [RouteContext. Handler](xref:Microsoft.AspNetCore.Routing.RouteContext.Handler) i [RouteContext. RouteData](xref:Microsoft.AspNetCore.Routing.RouteContext.RouteData*) są ustawiane jako wyjście po dopasowaniu trasy.
 
@@ -1656,7 +4847,7 @@ Dopasowanie, które wywołuje <xref:Microsoft.AspNetCore.Routing.IRouter.RouteAs
 
 [RouteData. DataTokens](xref:Microsoft.AspNetCore.Routing.RouteData.DataTokens*) to zbiór właściwości dodatkowych danych dotyczących dopasowanej trasy. <xref:Microsoft.AspNetCore.Routing.RouteData.DataTokens*>zapewnia obsługę kojarzenia danych stanu z każdą trasą, dzięki czemu aplikacja może podejmować decyzje na podstawie dopasowanej trasy. Te wartości są zdefiniowane przez dewelopera i **nie** mają wpływu na zachowanie routingu. Ponadto wartości umieszczane w [RouteData. Datatokeny](xref:Microsoft.AspNetCore.Routing.RouteData.DataTokens*) mogą być dowolnego typu, w przeciwieństwie do [RouteData. wartości](xref:Microsoft.AspNetCore.Routing.RouteData.Values), które muszą być konwertowane do i z ciągów.
 
-[RouteData. routers](xref:Microsoft.AspNetCore.Routing.RouteData.Routers) to lista tras, które brały udział w pomyślnie dopasowane do żądania. Trasy mogą być zagnieżdżone wewnątrz siebie. <xref:Microsoft.AspNetCore.Routing.RouteData.Routers> Właściwość odzwierciedla ścieżkę przez logiczne drzewo tras, które spowodowały dopasowanie. Ogólnie rzecz biorąc, pierwszy element <xref:Microsoft.AspNetCore.Routing.RouteData.Routers> w jest kolekcją tras i powinien być używany do generowania adresów URL. Ostatnim elementem w programie <xref:Microsoft.AspNetCore.Routing.RouteData.Routers> jest program obsługi trasy, który został dopasowany.
+[RouteData. routers](xref:Microsoft.AspNetCore.Routing.RouteData.Routers) to lista tras, które brały udział w pomyślnie dopasowane do żądania. Trasy mogą być zagnieżdżone wewnątrz siebie. <xref:Microsoft.AspNetCore.Routing.RouteData.Routers>Właściwość odzwierciedla ścieżkę przez logiczne drzewo tras, które spowodowały dopasowanie. Ogólnie rzecz biorąc, pierwszy element w <xref:Microsoft.AspNetCore.Routing.RouteData.Routers> jest kolekcją tras i powinien być używany do generowania adresów URL. Ostatnim elementem w programie <xref:Microsoft.AspNetCore.Routing.RouteData.Routers> jest program obsługi trasy, który został dopasowany.
 
 <a name="lg"></a>
 
@@ -1664,7 +4855,7 @@ Dopasowanie, które wywołuje <xref:Microsoft.AspNetCore.Routing.IRouter.RouteAs
 
 Generowanie adresu URL to proces, za pomocą którego Routing może utworzyć ścieżkę URL na podstawie zestawu wartości trasy. Pozwala to na logiczne rozdzielenie między programami obsługi tras i adresami URL, które uzyskują do nich dostęp.
 
-Generowanie adresu URL następuje podobny proces iteracyjny, ale rozpoczyna się od kodu użytkownika lub struktury wywołującego <xref:Microsoft.AspNetCore.Routing.IRouter.GetVirtualPath*> metodę kolekcji tras. Każda *trasa* ma <xref:Microsoft.AspNetCore.Routing.IRouter.GetVirtualPath*> metodę wywoływana w sekwencji do momentu zwrócenia wartości innej <xref:Microsoft.AspNetCore.Routing.VirtualPathData> niż null.
+Generowanie adresu URL następuje podobny proces iteracyjny, ale rozpoczyna się od kodu użytkownika lub struktury wywołującego <xref:Microsoft.AspNetCore.Routing.IRouter.GetVirtualPath*> metodę kolekcji tras. Każda *trasa* ma <xref:Microsoft.AspNetCore.Routing.IRouter.GetVirtualPath*> metodę wywoływana w sekwencji do momentu zwrócenia wartości innej niż null <xref:Microsoft.AspNetCore.Routing.VirtualPathData> .
 
 Podstawowe dane wejściowe <xref:Microsoft.AspNetCore.Routing.IRouter.GetVirtualPath*> :
 
@@ -1672,12 +4863,12 @@ Podstawowe dane wejściowe <xref:Microsoft.AspNetCore.Routing.IRouter.GetVirtual
 * [VirtualPathContext. wartości](xref:Microsoft.AspNetCore.Routing.VirtualPathContext.Values)
 * [VirtualPathContext.AmbientValues](xref:Microsoft.AspNetCore.Routing.VirtualPathContext.AmbientValues)
 
-Trasy wykorzystują głównie wartości trasy dostarczone przez <xref:Microsoft.AspNetCore.Routing.VirtualPathContext.Values> i <xref:Microsoft.AspNetCore.Routing.VirtualPathContext.AmbientValues> , aby zdecydować, czy możliwe jest wygenerowanie adresu URL i wartości do uwzględnienia. <xref:Microsoft.AspNetCore.Routing.VirtualPathContext.AmbientValues> Są to zbiór wartości tras, które zostały utworzone na podstawie dopasowania bieżącego żądania. Z kolei <xref:Microsoft.AspNetCore.Routing.VirtualPathContext.Values> są wartościami trasy, które określają sposób generowania żądanego adresu URL dla bieżącej operacji. <xref:Microsoft.AspNetCore.Routing.VirtualPathContext.HttpContext> W przypadku trasy należy uzyskać usługi lub dodatkowe dane skojarzone z bieżącym kontekstem.
+Trasy wykorzystują głównie wartości trasy dostarczone przez <xref:Microsoft.AspNetCore.Routing.VirtualPathContext.Values> i, <xref:Microsoft.AspNetCore.Routing.VirtualPathContext.AmbientValues> Aby zdecydować, czy możliwe jest WYGENEROWANIE adresu URL i wartości do uwzględnienia. <xref:Microsoft.AspNetCore.Routing.VirtualPathContext.AmbientValues>Są to zbiór wartości tras, które zostały utworzone na podstawie dopasowania bieżącego żądania. Z kolei <xref:Microsoft.AspNetCore.Routing.VirtualPathContext.Values> są wartościami trasy, które określają sposób generowania żądanego adresu URL dla bieżącej operacji. <xref:Microsoft.AspNetCore.Routing.VirtualPathContext.HttpContext>W przypadku trasy należy uzyskać usługi lub dodatkowe dane skojarzone z bieżącym kontekstem.
 
 > [!TIP]
 > Pomyśl o [VirtualPathContext. wartości](xref:Microsoft.AspNetCore.Routing.VirtualPathContext.Values*) jako zestawu zastąpień dla [VirtualPathContext. AmbientValues](xref:Microsoft.AspNetCore.Routing.VirtualPathContext.AmbientValues*). Generowanie adresów URL próbuje ponownie użyć wartości trasy z bieżącego żądania w celu wygenerowania adresów URL dla linków przy użyciu tych samych wartości trasy lub trasy.
 
-Wynik <xref:Microsoft.AspNetCore.Routing.IRouter.GetVirtualPath*> jest <xref:Microsoft.AspNetCore.Routing.VirtualPathData>. <xref:Microsoft.AspNetCore.Routing.VirtualPathData>jest równoległe z <xref:Microsoft.AspNetCore.Routing.RouteData>. <xref:Microsoft.AspNetCore.Routing.VirtualPathData>zawiera wartość <xref:Microsoft.AspNetCore.Routing.VirtualPathData.VirtualPath> dla wyjściowego adresu URL oraz kilka dodatkowych właściwości, które powinny być ustawiane przez trasę.
+Wynik <xref:Microsoft.AspNetCore.Routing.IRouter.GetVirtualPath*> jest <xref:Microsoft.AspNetCore.Routing.VirtualPathData> . <xref:Microsoft.AspNetCore.Routing.VirtualPathData>jest równoległe z <xref:Microsoft.AspNetCore.Routing.RouteData> . <xref:Microsoft.AspNetCore.Routing.VirtualPathData>zawiera wartość <xref:Microsoft.AspNetCore.Routing.VirtualPathData.VirtualPath> dla wyjściowego adresu URL oraz kilka dodatkowych właściwości, które powinny być ustawiane przez trasę.
 
 Właściwość [VirtualPathData. VirtualPath](xref:Microsoft.AspNetCore.Routing.VirtualPathData.VirtualPath*) zawiera *ścieżkę wirtualną* wygenerowaną przez trasę. W zależności od potrzeb może być konieczne dalsze przetworzenie ścieżki. Jeśli chcesz renderować wygenerowany adres URL w formacie HTML, poprzedź ścieżkę podstawową aplikacji.
 
@@ -1687,11 +4878,11 @@ Właściwości [VirtualPathData. DataTokens](xref:Microsoft.AspNetCore.Routing.V
 
 ### <a name="create-routes"></a>Tworzenie tras
 
-Routing udostępnia <xref:Microsoft.AspNetCore.Routing.Route> klasę jako standardową implementację programu <xref:Microsoft.AspNetCore.Routing.IRouter>. <xref:Microsoft.AspNetCore.Routing.Route>używa składni *szablonu trasy* do definiowania wzorców do dopasowania względem ścieżki URL, gdy <xref:Microsoft.AspNetCore.Routing.IRouter.RouteAsync*> jest wywoływana. <xref:Microsoft.AspNetCore.Routing.Route>używa tego samego szablonu trasy do wygenerowania adresu URL <xref:Microsoft.AspNetCore.Routing.IRouter.GetVirtualPath*> , gdy jest wywoływana.
+Routing udostępnia <xref:Microsoft.AspNetCore.Routing.Route> klasę jako standardową implementację programu <xref:Microsoft.AspNetCore.Routing.IRouter> . <xref:Microsoft.AspNetCore.Routing.Route>używa składni *szablonu trasy* do definiowania wzorców do dopasowania względem ścieżki URL, gdy <xref:Microsoft.AspNetCore.Routing.IRouter.RouteAsync*> jest wywoływana. <xref:Microsoft.AspNetCore.Routing.Route>używa tego samego szablonu trasy do wygenerowania adresu URL, gdy <xref:Microsoft.AspNetCore.Routing.IRouter.GetVirtualPath*> jest wywoływana.
 
-Większość aplikacji tworzy trasy przez wywołanie <xref:Microsoft.AspNetCore.Builder.MapRouteRouteBuilderExtensions.MapRoute*> lub jedną z podobnych metod rozszerzających zdefiniowanych w <xref:Microsoft.AspNetCore.Routing.IRouteBuilder>systemie. Dowolna z <xref:Microsoft.AspNetCore.Routing.IRouteBuilder> metod rozszerzających tworzy wystąpienie <xref:Microsoft.AspNetCore.Routing.Route> i dodaje je do kolekcji tras.
+Większość aplikacji tworzy trasy przez wywołanie <xref:Microsoft.AspNetCore.Builder.MapRouteRouteBuilderExtensions.MapRoute*> lub jedną z podobnych metod rozszerzających zdefiniowanych w systemie <xref:Microsoft.AspNetCore.Routing.IRouteBuilder> . Dowolna z <xref:Microsoft.AspNetCore.Routing.IRouteBuilder> metod rozszerzających tworzy wystąpienie <xref:Microsoft.AspNetCore.Routing.Route> i dodaje je do kolekcji tras.
 
-<xref:Microsoft.AspNetCore.Builder.MapRouteRouteBuilderExtensions.MapRoute*>nie akceptuje parametru procedury obsługi trasy. <xref:Microsoft.AspNetCore.Builder.MapRouteRouteBuilderExtensions.MapRoute*>dodaje tylko trasy, które są obsługiwane przez <xref:Microsoft.AspNetCore.Routing.RouteBuilder.DefaultHandler*>. Domyślna procedura obsługi to `IRouter`, a program obsługi może nie obsłużyć żądania. Na przykład ASP.NET Core MVC jest zwykle skonfigurowany jako domyślny program obsługi, który obsługuje tylko żądania zgodne z dostępnym kontrolerem i akcją. Aby dowiedzieć się więcej na temat routingu w <xref:mvc/controllers/routing>MVC, zobacz.
+<xref:Microsoft.AspNetCore.Builder.MapRouteRouteBuilderExtensions.MapRoute*>nie akceptuje parametru procedury obsługi trasy. <xref:Microsoft.AspNetCore.Builder.MapRouteRouteBuilderExtensions.MapRoute*>dodaje tylko trasy, które są obsługiwane przez <xref:Microsoft.AspNetCore.Routing.RouteBuilder.DefaultHandler*> . Domyślna procedura obsługi to `IRouter` , a program obsługi może nie obsłużyć żądania. Na przykład ASP.NET Core MVC jest zwykle skonfigurowany jako domyślny program obsługi, który obsługuje tylko żądania zgodne z dostępnym kontrolerem i akcją. Aby dowiedzieć się więcej na temat routingu w MVC, zobacz <xref:mvc/controllers/routing> .
 
 Poniższy przykład kodu jest przykładem <xref:Microsoft.AspNetCore.Builder.MapRouteRouteBuilderExtensions.MapRoute*> wywołania używanego przez typową definicję trasy MVC ASP.NET Core:
 
@@ -1701,15 +4892,15 @@ routes.MapRoute(
     template: "{controller=Home}/{action=Index}/{id?}");
 ```
 
-Ten szablon dopasowuje ścieżkę URL i wyodrębnia wartości tras. Na przykład ścieżka `/Products/Details/17` generuje następujące wartości trasy: `{ controller = Products, action = Details, id = 17 }`.
+Ten szablon dopasowuje ścieżkę URL i wyodrębnia wartości tras. Na przykład ścieżka `/Products/Details/17` generuje następujące wartości trasy: `{ controller = Products, action = Details, id = 17 }` .
 
-Wartości tras są określane przez podzielenie ścieżki URL na segmenty i dopasowanie do każdego segmentu przy użyciu nazwy *parametru trasy* w szablonie trasy. Parametry trasy są nazywane. Parametry zdefiniowane przez ujęcie nazwy parametru w nawiasach klamrowych `{ ... }`.
+Wartości tras są określane przez podzielenie ścieżki URL na segmenty i dopasowanie do każdego segmentu przy użyciu nazwy *parametru trasy* w szablonie trasy. Parametry trasy są nazywane. Parametry zdefiniowane przez ujęcie nazwy parametru w nawiasach klamrowych `{ ... }` .
 
-Poprzedni szablon może również pasować do ścieżki `/` URL i generować wartości. `{ controller = Home, action = Index }` Dzieje się tak, `{controller}` ponieważ `{action}` parametry i trasy mają wartości domyślne, `id` a parametr trasy jest opcjonalny. Znak równości (`=`), po którym następuje wartość po nazwie parametru trasy definiuje wartość domyślną dla parametru. Znak zapytania (`?`) po nazwie parametru trasy definiuje opcjonalny parametr.
+Poprzedni szablon może również pasować do ścieżki URL `/` i generować wartości `{ controller = Home, action = Index }` . Dzieje się tak, `{controller}` ponieważ `{action}` Parametry i trasy mają wartości domyślne, a `id` parametr trasy jest opcjonalny. Znak równości ( `=` ), po którym następuje wartość po nazwie parametru trasy definiuje wartość domyślną dla parametru. Znak zapytania ( `?` ) po nazwie parametru trasy definiuje opcjonalny parametr.
 
 Parametry trasy z wartością domyślną *zawsze* generują wartość trasy w przypadku dopasowania trasy. Parametry opcjonalne nie generują wartości trasy, jeśli nie ma odpowiedniego segmentu ścieżki adresu URL. Szczegółowe opisy scenariuszy i składni szablonów tras można znaleźć w sekcji [Dokumentacja dotycząca szablonu trasy](#route-template-reference) .
 
-W poniższym przykładzie definicja `{id:int}` parametru trasy definiuje [ograniczenie trasy](#route-constraint-reference) dla parametru `id` trasy:
+W poniższym przykładzie definicja parametru trasy `{id:int}` definiuje [ograniczenie trasy](#route-constraint-reference) dla `id` parametru trasy:
 
 ```csharp
 routes.MapRoute(
@@ -1717,9 +4908,9 @@ routes.MapRoute(
     template: "{controller=Home}/{action=Index}/{id:int}");
 ```
 
-Ten szablon dopasowuje ścieżkę URL, `/Products/Details/17` taką jak `/Products/Details/Apples`, ale nie. Ograniczenia trasy implementują <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> i sprawdzają wartości routingu w celu ich zweryfikowania. W tym przykładzie wartość `id` trasy musi być możliwa do przekonwertowania na liczbę całkowitą. Aby uzyskać wyjaśnienie ograniczeń trasy dostarczonych przez platformę, zobacz temat [ograniczenia trasy](#route-constraint-reference) .
+Ten szablon dopasowuje ścieżkę URL, taką jak, `/Products/Details/17` ale nie `/Products/Details/Apples` . Ograniczenia trasy implementują <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> i sprawdzają wartości routingu w celu ich zweryfikowania. W tym przykładzie wartość trasy `id` musi być możliwa do przekonwertowania na liczbę całkowitą. Aby uzyskać wyjaśnienie ograniczeń trasy dostarczonych przez platformę, zobacz temat [ograniczenia trasy](#route-constraint-reference) .
 
-Dodatkowe przeciążenia wartości <xref:Microsoft.AspNetCore.Builder.MapRouteRouteBuilderExtensions.MapRoute*> akceptują dla `constraints`, `dataTokens`i `defaults`. Typowym użyciem tych parametrów jest przekazanie anonimowo wpisanego obiektu, gdzie nazwy właściwości typu anonimowego są zgodne z nazwami parametrów trasy.
+Dodatkowe przeciążenia <xref:Microsoft.AspNetCore.Builder.MapRouteRouteBuilderExtensions.MapRoute*> wartości akceptują dla `constraints` , `dataTokens` i `defaults` . Typowym użyciem tych parametrów jest przekazanie anonimowo wpisanego obiektu, gdzie nazwy właściwości typu anonimowego są zgodne z nazwami parametrów trasy.
 
 Poniższe <xref:Microsoft.AspNetCore.Builder.MapRouteRouteBuilderExtensions.MapRoute*> przykłady tworzą równoważne trasy:
 
@@ -1746,7 +4937,7 @@ routes.MapRoute(
     defaults: new { controller = "Blog", action = "ReadArticle" });
 ```
 
-Poprzedni szablon pasuje do ścieżki URL, tak `/Blog/All-About-Routing/Introduction` jak i wyodrębnia wartości `{ controller = Blog, action = ReadArticle, article = All-About-Routing/Introduction }`. Domyślne wartości trasy dla `controller` i `action` są generowane przez trasę, nawet jeśli w szablonie nie ma odpowiednich parametrów trasy. Wartości domyślne można określić w szablonie trasy. Parametr `article` Route jest definiowany jako *przechwycenie* przez wygląd gwiazdki (`*`) przed nazwą parametru trasy. Catch-wszystkie parametry tras przechwytują resztę ścieżki URL i mogą również pasować do pustego ciągu.
+Poprzedni szablon pasuje do ścieżki URL, tak jak `/Blog/All-About-Routing/Introduction` i wyodrębnia wartości `{ controller = Blog, action = ReadArticle, article = All-About-Routing/Introduction }` . Domyślne wartości trasy dla `controller` i `action` są generowane przez trasę, nawet jeśli w szablonie nie ma odpowiednich parametrów trasy. Wartości domyślne można określić w szablonie trasy. `article`Parametr Route jest definiowany jako *przechwycenie* przez wygląd gwiazdki ( `*` ) przed nazwą parametru trasy. Catch-wszystkie parametry tras przechwytują resztę ścieżki URL i mogą również pasować do pustego ciągu.
 
 Poniższy przykład dodaje ograniczenia trasy i tokeny danych:
 
@@ -1759,13 +4950,13 @@ routes.MapRoute(
     dataTokens: new { locale = "en-US" });
 ```
 
-Poprzedni szablon pasuje do ścieżki URL, na `/en-US/Products/5` przykład i wyodrębnia wartości `{ controller = Products, action = Details, id = 5 }` i tokeny `{ locale = en-US }`danych.
+Poprzedni szablon pasuje do ścieżki URL, na przykład `/en-US/Products/5` i wyodrębnia wartości `{ controller = Products, action = Details, id = 5 }` i tokeny danych `{ locale = en-US }` .
 
 ![Lokalne tokeny systemu Windows](routing/_static/tokens.png)
 
 ### <a name="route-class-url-generation"></a>Generowanie adresu URL klasy trasy
 
-<xref:Microsoft.AspNetCore.Routing.Route> Klasa może również wykonywać generowanie adresów URL przez połączenie zestawu wartości tras z jego szablonem trasy. Jest to logicznie proces odwrotny pasujący do ścieżki URL.
+<xref:Microsoft.AspNetCore.Routing.Route>Klasa może również wykonywać generowanie adresów URL przez połączenie zestawu wartości tras z jego szablonem trasy. Jest to logicznie proces odwrotny pasujący do ścieżki URL.
 
 > [!TIP]
 > Aby lepiej zrozumieć generowanie adresów URL, Załóżmy, jaki adres URL ma zostać wygenerowany, a następnie pomyśl o sposobie dopasowania szablonu trasy do tego adresu URL. Jakie wartości zostałyby wygenerowane? Jest to sztywny odpowiednik działania generowania adresów URL w <xref:Microsoft.AspNetCore.Routing.Route> klasie.
@@ -1778,11 +4969,11 @@ routes.MapRoute(
     template: "{controller=Home}/{action=Index}/{id?}");
 ```
 
-W przypadku wartości `{ controller = Products, action = List }`trasy zostanie wygenerowany adres `/Products/List` URL. Wartości trasy są zastępowane odpowiednimi parametrami trasy w celu utworzenia ścieżki URL. Ponieważ `id` jest to opcjonalny parametr trasy, adres URL został pomyślnie wygenerowany bez wartości dla `id`.
+W przypadku wartości trasy `{ controller = Products, action = List }` `/Products/List` zostanie wygenerowany adres URL. Wartości trasy są zastępowane odpowiednimi parametrami trasy w celu utworzenia ścieżki URL. Ponieważ `id` jest to opcjonalny parametr trasy, adres URL został pomyślnie wygenerowany bez wartości dla `id` .
 
-W przypadku wartości `{ controller = Home, action = Index }`trasy zostanie wygenerowany adres `/` URL. Podane wartości trasy są zgodne z wartościami domyślnymi, a segmenty odpowiadające wartościom domyślnym są bezpiecznie pomijane.
+W przypadku wartości trasy `{ controller = Home, action = Index }` `/` zostanie wygenerowany adres URL. Podane wartości trasy są zgodne z wartościami domyślnymi, a segmenty odpowiadające wartościom domyślnym są bezpiecznie pomijane.
 
-Oba adresy URL wygenerowały rundę z następującą definicją`/Home/Index` trasy `/`(i) tworzą te same wartości trasy, które zostały użyte do wygenerowania adresu URL.
+Oba adresy URL wygenerowały rundę z następującą definicją trasy ( `/Home/Index` i `/` ) tworzą te same wartości trasy, które zostały użyte do WYGENEROWANIA adresu URL.
 
 > [!NOTE]
 > Aplikacja używająca ASP.NET Core MVC powinna używać <xref:Microsoft.AspNetCore.Mvc.Routing.UrlHelper> do generowania adresów URL zamiast bezpośredniego wywoływania routingu.
@@ -1793,14 +4984,14 @@ Aby uzyskać więcej informacji na temat generowania adresów URL, zobacz sekcj�
 
 Odwołuje się do [pakietu Microsoft. AspNetCore. app](xref:fundamentals/metapackage-app) w pliku projektu aplikacji.
 
-Dodaj Routing do kontenera usługi w `Startup.ConfigureServices`:
+Dodaj Routing do kontenera usługi w `Startup.ConfigureServices` :
 
 [!code-csharp[](routing/samples/2.x/RoutingSample/Startup.cs?name=snippet_ConfigureServices&highlight=3)]
 
 Trasy muszą być skonfigurowane w `Startup.Configure` metodzie. Przykładowa aplikacja używa następujących interfejsów API:
 
 * <xref:Microsoft.AspNetCore.Routing.RouteBuilder>
-* <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapGet*>&ndash; Dopasowuje tylko żądania HTTP GET.
+* <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapGet*>: Dopasowuje tylko żądania HTTP GET.
 * <xref:Microsoft.AspNetCore.Builder.RoutingBuilderExtensions.UseRouter*>
 
 [!code-csharp[](routing/samples/2.x/RoutingSample/Startup.cs?name=snippet_RouteHandler)]
@@ -1808,18 +4999,258 @@ Trasy muszą być skonfigurowane w `Startup.Configure` metodzie. Przykładowa ap
 W poniższej tabeli przedstawiono odpowiedzi z podanym identyfikatorem URI.
 
 | Identyfikator URI                    | Odpowiedź                                          |
-| ---------------------- | ------------------------------------------------- |
-| `/package/create/3`    | Cześć! Wartości trasy: [Operation, Create], [ID, 3] |
-| `/package/track/-3`    | Cześć! Wartości trasy: [Operation, Track], [ID,-3] |
-| `/package/track/-3/`   | Cześć! Wartości trasy: [Operation, Track], [ID,-3] |
-| `/package/track/`      | Żądanie przepada w, brak dopasowania.              |
-| `GET /hello/Joe`       | Witaj, Jan!                                          |
-| `POST /hello/Joe`      | Żądanie przepada w, dopasowuje tylko HTTP GET. |
-| `GET /hello/Joe/Smith` | Żądanie przepada w, brak dopasowania.              |
+| ---
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
 
-W przypadku konfigurowania pojedynczej trasy Wywołaj <xref:Microsoft.AspNetCore.Builder.RoutingBuilderExtensions.UseRouter*> przekazywanie w `IRouter` wystąpieniu. Nie musisz używać <xref:Microsoft.AspNetCore.Routing.RouteBuilder>.
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
 
-Struktura zawiera zestaw metod rozszerzających do tworzenia tras (<xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions>):
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+----------- | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+------------------------- | | `/package/create/3`    | Cześć! Wartości trasy: [Operation, Create], [ID, 3] | | `/package/track/-3`    | Cześć! Wartości trasy: [Operation, Track], [ID,-3] | | `/package/track/-3/`   | Cześć! Wartości trasy: [Operation, Track], [ID,-3] | | `/package/track/`      | Żądanie przepada w, brak dopasowania.              | | `GET /hello/Joe`       | Witaj, Jan!                                          | | `POST /hello/Joe`      | Żądanie przepada w, dopasowuje tylko HTTP GET. | | `GET /hello/Joe/Smith` | Żądanie przepada w, brak dopasowania.              |
+
+W przypadku konfigurowania pojedynczej trasy Wywołaj <xref:Microsoft.AspNetCore.Builder.RoutingBuilderExtensions.UseRouter*> przekazywanie w `IRouter` wystąpieniu. Nie musisz używać <xref:Microsoft.AspNetCore.Routing.RouteBuilder> .
+
+Struktura zawiera zestaw metod rozszerzających do tworzenia tras ( <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions> ):
 
 * <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapDelete*>
 * <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapGet*>
@@ -1834,46 +5265,534 @@ Struktura zawiera zestaw metod rozszerzających do tworzenia tras (<xref:Microso
 * <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapRoute*>
 * <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapVerb*>
 
-Niektóre z wymienionych metod, takie jak <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapGet*>, wymagają <xref:Microsoft.AspNetCore.Http.RequestDelegate>. <xref:Microsoft.AspNetCore.Http.RequestDelegate> Jest używany jako *program obsługi trasy* , gdy trasa pasuje. Inne metody w tej rodzinie umożliwiają skonfigurowanie potoku oprogramowania pośredniczącego, które ma być używane jako procedura obsługi trasy. Jeśli `Map*` Metoda nie akceptuje procedury obsługi, takiej jak <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapRoute*>, używa. <xref:Microsoft.AspNetCore.Routing.RouteBuilder.DefaultHandler*>
+Niektóre z wymienionych metod, takie jak <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapGet*> , wymagają <xref:Microsoft.AspNetCore.Http.RequestDelegate> . <xref:Microsoft.AspNetCore.Http.RequestDelegate>Jest używany jako *program obsługi trasy* , gdy trasa pasuje. Inne metody w tej rodzinie umożliwiają skonfigurowanie potoku oprogramowania pośredniczącego, które ma być używane jako procedura obsługi trasy. Jeśli `Map*` Metoda nie akceptuje procedury obsługi, takiej jak <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapRoute*> , używa <xref:Microsoft.AspNetCore.Routing.RouteBuilder.DefaultHandler*> .
 
-`Map[Verb]` Metody służą do ograniczania trasy do zlecenia HTTP w nazwie metody. Na przykład zobacz <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapGet*> i <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapVerb*>.
+`Map[Verb]`Metody służą do ograniczania trasy do zlecenia HTTP w nazwie metody. Na przykład zobacz <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapGet*> i <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapVerb*> .
 
 ## <a name="route-template-reference"></a>Odwołanie do szablonu trasy
 
-Tokeny w nawiasach klamrowych (`{ ... }`) definiują *Parametry trasy* , które są powiązane w przypadku dopasowania trasy. Można zdefiniować więcej niż jeden parametr trasy w segmencie trasy, ale muszą one być oddzielone wartością literału. Na przykład `{controller=Home}{action=Index}` nie jest prawidłową trasą, ponieważ nie ma wartości literału między `{controller}` i `{action}`. Te parametry trasy muszą mieć nazwę i mogą mieć określone dodatkowe atrybuty.
+Tokeny w nawiasach klamrowych ( `{ ... }` ) definiują *Parametry trasy* , które są powiązane w przypadku dopasowania trasy. Można zdefiniować więcej niż jeden parametr trasy w segmencie trasy, ale muszą one być oddzielone wartością literału. Na przykład `{controller=Home}{action=Index}` nie jest prawidłową trasą, ponieważ nie ma wartości literału między `{controller}` i `{action}` . Te parametry trasy muszą mieć nazwę i mogą mieć określone dodatkowe atrybuty.
 
-Tekst literału inny niż parametry trasy (na przykład `{id}`) i separator `/` ścieżki muszą być zgodne z tekstem w adresie URL. W dopasowaniu do tekstu nie jest rozróżniana wielkość liter i w oparciu o zdekodowaną reprezentację ścieżki URL. Aby dopasować Ogranicznik parametru trasy literału`{` (lub `}`), należy wprowadzić ogranicznik przez powtórzenie znaku (`{{` lub `}}`).
+Tekst literału inny niż parametry trasy (na przykład `{id}` ) i separator ścieżki `/` muszą być zgodne z tekstem w adresie URL. W dopasowaniu do tekstu nie jest rozróżniana wielkość liter i w oparciu o zdekodowaną reprezentację ścieżki URL. Aby dopasować Ogranicznik parametru trasy literału ( `{` lub `}` ), należy wprowadzić ogranicznik przez powtórzenie znaku ( `{{` lub `}}` ).
 
-Wzorce adresów URL, które próbują przechwycić nazwę pliku z opcjonalnym rozszerzeniem pliku, mają dodatkowe uwagi. Rozważmy na przykład szablon `files/{filename}.{ext?}`. Gdy wartości obu `filename` i `ext` istnieją, są wypełniane obie wartości. Jeśli w adresie URL `filename` znajduje się tylko wartość parametru, trasa pasuje do, ponieważ końcowy okres (`.`) jest opcjonalny. Następujące adresy URL pasują do tej trasy:
+Wzorce adresów URL, które próbują przechwycić nazwę pliku z opcjonalnym rozszerzeniem pliku, mają dodatkowe uwagi. Rozważmy na przykład szablon `files/{filename}.{ext?}` . Gdy wartości obu `filename` i `ext` istnieją, są wypełniane obie wartości. Jeśli `filename` w adresie URL znajduje się tylko wartość parametru, trasa pasuje do, ponieważ końcowy okres ( `.` ) jest opcjonalny. Następujące adresy URL pasują do tej trasy:
 
 * `/files/myFile.txt`
 * `/files/myFile`
 
-Możesz użyć gwiazdki (`*`) jako prefiksu do parametru trasy, aby powiązać z resztą identyfikatora URI. Jest to nazywane parametrem *"catch-all"* . Na przykład `blog/{*slug}` dopasowuje dowolny identyfikator URI, który `/blog` rozpoczyna się od i ma dowolną wartość, która jest przypisana `slug` do wartości trasy. Catch-wszystkie parametry można także dopasować do pustego ciągu.
+Możesz użyć gwiazdki ( `*` ) jako prefiksu do parametru trasy, aby powiązać z resztą identyfikatora URI. Jest to nazywane parametrem *"catch-all"* . Na przykład `blog/{*slug}` dopasowuje dowolny identyfikator URI, który rozpoczyna się od `/blog` i ma dowolną wartość, która jest przypisana do `slug` wartości trasy. Catch-wszystkie parametry można także dopasować do pustego ciągu.
 
-Parametr catch-all wyprowadza odpowiednie znaki, gdy trasa jest używana do generowania adresu URL, włącznie z separatorami ścieżki (`/`). Na przykład trasa `foo/{*path}` z wartościami `{ path = "my/path" }` trasy jest generowana `foo/my%2Fpath`. Zwróć uwagę na odwrócony ukośnik.
+Parametr catch-all wyprowadza odpowiednie znaki, gdy trasa jest używana do generowania adresu URL, włącznie z separatorami ścieżki ( `/` ). Na przykład trasa `foo/{*path}` z wartościami trasy jest `{ path = "my/path" }` generowana `foo/my%2Fpath` . Zwróć uwagę na odwrócony ukośnik.
 
-Parametry trasy mogą mieć *wartości domyślne* , określając wartość domyślną po nazwie parametru oddzielone znakiem równości (`=`). Na przykład `{controller=Home}` definiuje `Home` jako wartość domyślną dla. `controller` Wartość domyślna jest używana, jeśli żadna wartość nie jest obecna w adresie URL dla parametru. Parametry trasy są opcjonalne przez dołączenie znaku zapytania (`?`) na końcu nazwy parametru, jak w. `id?` Różnica między wartościami opcjonalnymi i domyślnymi parametrami trasy polega na tym, że parametr trasy z wartością domyślną zawsze&mdash;tworzy wartość, a opcjonalny parametr ma wartość tylko wtedy, gdy wartość jest dostarczana przez adres URL żądania.
+Parametry trasy mogą mieć *wartości domyślne* , określając wartość domyślną po nazwie parametru oddzielone znakiem równości ( `=` ). Na przykład `{controller=Home}` definiuje `Home` jako wartość domyślną dla `controller` . Wartość domyślna jest używana, jeśli żadna wartość nie jest obecna w adresie URL dla parametru. Parametry trasy są opcjonalne przez dołączenie znaku zapytania ( `?` ) na końcu nazwy parametru, jak w `id?` . Różnica między wartościami opcjonalnymi i domyślnymi parametrami trasy polega na tym, że parametr trasy z wartością domyślną zawsze tworzy wartość, &mdash; a opcjonalny parametr ma wartość tylko wtedy, gdy wartość jest dostarczana przez adres URL żądania.
 
-Parametry trasy mogą mieć ograniczenia, które muszą być zgodne z wartością trasy powiązaną z adresem URL. Dodanie dwukropka`:`() i nazwy ograniczenia po nazwie parametru trasy określa *ograniczenie wbudowane* dla parametru trasy. Jeśli ograniczenie wymaga argumentów, są one ujęte w nawiasy (`(...)`) po nazwie ograniczenia. Można określić wiele ograniczeń wbudowanych, dołączając inną dwukropek (`:`) i nazwę ograniczenia.
+Parametry trasy mogą mieć ograniczenia, które muszą być zgodne z wartością trasy powiązaną z adresem URL. Dodanie dwukropka ( `:` ) i nazwy ograniczenia po nazwie parametru trasy określa *ograniczenie wbudowane* dla parametru trasy. Jeśli ograniczenie wymaga argumentów, są one ujęte w nawiasy ( `(...)` ) po nazwie ograniczenia. Można określić wiele ograniczeń wbudowanych, dołączając inną dwukropek ( `:` ) i nazwę ograniczenia.
 
-Nazwa i argumenty ograniczenia są przekazane do <xref:Microsoft.AspNetCore.Routing.IInlineConstraintResolver> usługi w celu utworzenia wystąpienia <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> do użycia w przetwarzaniu adresów URL. Na przykład szablon `blog/{article:minlength(10)}` trasy określa `minlength` ograniczenie z argumentem. `10` Aby uzyskać więcej informacji na temat ograniczeń trasy i listę ograniczeń zapewnianych przez platformę, zobacz sekcję [odwołanie do ograniczenia trasy](#route-constraint-reference) .
+Nazwa i argumenty ograniczenia są przekazane do usługi w <xref:Microsoft.AspNetCore.Routing.IInlineConstraintResolver> celu utworzenia wystąpienia <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> do użycia w przetwarzaniu adresów URL. Na przykład szablon trasy `blog/{article:minlength(10)}` określa `minlength` ograniczenie z argumentem `10` . Aby uzyskać więcej informacji na temat ograniczeń trasy i listę ograniczeń zapewnianych przez platformę, zobacz sekcję [odwołanie do ograniczenia trasy](#route-constraint-reference) .
 
 W poniższej tabeli przedstawiono przykładowe szablony tras i ich zachowanie.
 
 | Szablon trasy                           | Przykładowy pasujący identyfikator URI    | Identyfikator URI żądania&hellip;                                                    |
-| ---------------------------------------- | ----------------------- | -------------------------------------------------------------------------- |
-| `hello`                                  | `/hello`                | Dopasowuje tylko jedną ścieżkę `/hello`.                                     |
-| `{Page=Home}`                            | `/`                     | Dopasowuje i `Page` ustawia `Home`jako.                                         |
-| `{Page=Home}`                            | `/Contact`              | Dopasowuje i `Page` ustawia `Contact`jako.                                      |
-| `{controller}/{action}/{id?}`            | `/Products/List`        | Mapuje do `Products` kontrolera i `List` akcji.                       |
-| `{controller}/{action}/{id?}`            | `/Products/Details/123` | Mapuje do `Products` kontrolera i `Details` akcji (`id` ustawienie na 123). |
-| `{controller=Home}/{action=Index}/{id?}` | `/`                     | Mapuje na `Home` kontroler i `Index` metodę (`id` jest ignorowana).        |
+| ---
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-------------------- | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+------------ | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+------------------------------------- | | `hello`                                  | `/hello`                | Dopasowuje tylko jedną ścieżkę `/hello` .                                     | | `{Page=Home}`                            | `/`                     | Dopasowuje i ustawia `Page` jako `Home` .                                         | | `{Page=Home}`                            | `/Contact`              | Dopasowuje i ustawia `Page` jako `Contact` .                                      | | `{controller}/{action}/{id?}`            | `/Products/List`        | Mapuje do `Products` kontrolera i `List` akcji.                       | | `{controller}/{action}/{id?}`            | `/Products/Details/123` | Mapuje do `Products` kontrolera i `Details` akcji ( `id` ustawienie na 123). | | `{controller=Home}/{action=Index}/{id?}` | `/`                     | Mapuje na `Home` kontroler i `Index` metodę ( `id` jest ignorowana).        |
 
 Użycie szablonu jest ogólnie najprostszym podejściem do routingu. Ograniczenia i wartości domyślne można także określić poza szablonem trasy.
 
 > [!TIP]
-> Włącz [Rejestrowanie](xref:fundamentals/logging/index) , aby zobaczyć, jak wbudowane implementacje routingu, takie jak <xref:Microsoft.AspNetCore.Routing.Route>, dopasowują żądania.
+> Włącz [Rejestrowanie](xref:fundamentals/logging/index) , aby zobaczyć, jak wbudowane implementacje routingu, takie jak <xref:Microsoft.AspNetCore.Routing.Route> , dopasowują żądania.
 
 ## <a name="route-constraint-reference"></a>Odwołanie do ograniczenia trasy
 
@@ -1885,25 +5804,77 @@ Ograniczenia trasy są wykonywane, gdy nastąpiło dopasowanie do przychodząceg
 W poniższej tabeli przedstawiono przykładowe ograniczenia trasy i ich oczekiwane zachowanie.
 
 | ograniczenie | Przykład | Przykładowe dopasowania | Uwagi |
-| ---------- | ------- | --------------- | ----- |
-| `int` | `{id:int}` | `123456789`, `-123456789` | Dopasowuje dowolną liczbę całkowitą |
-| `bool` | `{active:bool}` | `true`, `FALSE` | `true` Dopasowuje `false` lub (bez uwzględniania wielkości liter) |
-| `datetime` | `{dob:datetime}` | `2016-12-31`, `2016-12-31 7:32pm` | Dopasowuje prawidłową `DateTime` wartość w niezmiennej kulturze. Zobacz poprzednie ostrzeżenie.|
-| `decimal` | `{price:decimal}` | `49.99`, `-1,000.01` | Dopasowuje prawidłową `decimal` wartość w niezmiennej kulturze. Zobacz poprzednie ostrzeżenie.|
-| `double` | `{weight:double}` | `1.234`, `-1,001.01e8` | Dopasowuje prawidłową `double` wartość w niezmiennej kulturze. Zobacz poprzednie ostrzeżenie.|
-| `float` | `{weight:float}` | `1.234`, `-1,001.01e8` | Dopasowuje prawidłową `float` wartość w niezmiennej kulturze. Zobacz poprzednie ostrzeżenie.|
-| `guid` | `{id:guid}` | `CD2C1638-1638-72D5-1638-DEADBEEF1638`, `{CD2C1638-1638-72D5-1638-DEADBEEF1638}` | Dopasowuje prawidłową `Guid` wartość |
-| `long` | `{ticks:long}` | `123456789`, `-123456789` | Dopasowuje prawidłową `long` wartość |
-| `minlength(value)` | `{username:minlength(4)}` | `Rick` | Ciąg musi składać się z co najmniej 4 znaków |
-| `maxlength(value)` | `{filename:maxlength(8)}` | `Richard` | Ciąg nie może zawierać więcej niż 8 znaków |
-| `length(length)` | `{filename:length(12)}` | `somefile.txt` | Ciąg musi zawierać dokładnie 12 znaków |
-| `length(min,max)` | `{filename:length(8,16)}` | `somefile.txt` | Ciąg musi mieć długość co najmniej 8 znaków |
-| `min(value)` | `{age:min(18)}` | `19` | Wartość całkowita musi być równa co najmniej 18 |
-| `max(value)` | `{age:max(120)}` | `91` | Wartość całkowita nie może być większa niż 120 |
-| `range(min,max)` | `{age:range(18,120)}` | `91` | Wartość całkowita musi być równa co najmniej 18, ale nie więcej niż 120 |
-| `alpha` | `{name:alpha}` | `Rick` | Ciąg musi zawierać co najmniej jeden znak alfabetyczny (`a`-`z`bez uwzględniania wielkości liter) |
-| `regex(expression)` | `{ssn:regex(^\\d{{3}}-\\d{{2}}-\\d{{4}}$)}` | `123-45-6789` | Ciąg musi być zgodny z wyrażeniem regularnym (zobacz Porady dotyczące definiowania wyrażenia regularnego) |
-| `required` | `{name:required}` | `Rick` | Służy do wymuszania, że podczas generowania adresu URL jest obecna wartość, która nie jest wartością parametru |
+| ---
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+----- | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+---- | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-------- | ----- | | `int` | `{id:int}` | `123456789`, `-123456789` | Dopasowuje dowolną liczbę całkowitą | | `bool` | `{active:bool}` | `true`, `FALSE` | Dopasowuje lub (bez uwzględniania `true` `false` wielkości liter) | | `datetime`  |  `{dob:datetime}`  |  `2016-12-31` , `2016-12-31 7:32pm` | Dopasowuje prawidłową `DateTime` wartość w niezmiennej kulturze. Zobacz poprzednie ostrzeżenie. | | `decimal` | `{price:decimal}` | `49.99`, `-1,000.01` | Dopasowuje prawidłową `decimal` wartość w niezmiennej kulturze. Zobacz poprzednie ostrzeżenie. | | `double` | `{weight:double}` | `1.234`, `-1,001.01e8` | Dopasowuje prawidłową `double` wartość w niezmiennej kulturze. Zobacz poprzednie ostrzeżenie. | | `float` | `{weight:float}` | `1.234`, `-1,001.01e8` | Dopasowuje prawidłową `float` wartość w niezmiennej kulturze. Zobacz poprzednie ostrzeżenie. | | `guid` | `{id:guid}` | `CD2C1638-1638-72D5-1638-DEADBEEF1638`, `{CD2C1638-1638-72D5-1638-DEADBEEF1638}` | Dopasowuje prawidłową `Guid` wartość | | `long`  |  `{ticks:long}`  |  `123456789` , `-123456789` | Pasuje do prawidłowej `long` wartości | | `minlength(value)`  |  `{username:minlength(4)}`  |  `Rick` | Ciąg musi składać się z co najmniej 4 znaków | | `maxlength(value)` | `{filename:maxlength(8)}` | `Richard` | Ciąg nie może zawierać więcej niż 8 znaków | | `length(length)` | `{filename:length(12)}` | `somefile.txt` | Ciąg musi zawierać dokładnie 12 znaków | | `length(min,max)` | `{filename:length(8,16)}` | `somefile.txt` | Ciąg musi zawierać od 8 do 16 znaków | | `min(value)` | `{age:min(18)}` | `19` | Wartość całkowita musi być co najmniej 18 | | `max(value)` | `{age:max(120)}` | `91` | Wartość całkowita nie może być większa niż 120 | | `range(min,max)` | `{age:range(18,120)}` | `91` | Wartość całkowita musi zawierać co najmniej 18, ale nie więcej niż 120 | | `alpha` | `{name:alpha}` | `Rick` | Ciąg musi zawierać co najmniej jeden znak alfabetyczny ( `a` - `z` , bez uwzględniania wielkości liter) | | `regex(expression)`  |  `{ssn:regex(^\\d{{3}}-\\d{{2}}-\\d{{4}}$)}`  |  `123-45-6789` | Ciąg musi być zgodny z wyrażeniem regularnym (zobacz Porady dotyczące definiowania wyrażenia regularnego) | | `required` | `{name:required}` | `Rick` | Służy do wymuszania, że podczas generowania adresu URL jest obecna wartość, która nie jest parametrem |
 
 Wielokrotne ograniczenia rozdzielane średnikami można zastosować do jednego parametru. Na przykład następujące ograniczenie ogranicza parametr do wartości całkowitej 1 lub wyższej:
 
@@ -1913,39 +5884,309 @@ public User GetUserById(int id) { }
 ```
 
 > [!WARNING]
-> Ograniczenia trasy, które weryfikują adres URL i są konwertowane na typ CLR (takie `int` jak `DateTime`lub), zawsze używają niezmiennej kultury. W tych ograniczeniach przyjęto założenie, że adres URL nie jest Lokalizowalny. Ograniczenia trasy dostarczone przez platformę nie modyfikują wartości przechowywanych w wartościach trasy. Wszystkie wartości tras analizowane na podstawie adresu URL są przechowywane jako ciągi. Na przykład, `float` ograniczenie próbuje przekonwertować wartość trasy na float, ale przekonwertowana wartość jest używana tylko do sprawdzenia, czy może być konwertowana na typ float.
+> Ograniczenia trasy, które weryfikują adres URL i są konwertowane na typ CLR (takie jak `int` lub `DateTime` ), zawsze używają niezmiennej kultury. W tych ograniczeniach przyjęto założenie, że adres URL nie jest Lokalizowalny. Ograniczenia trasy dostarczone przez platformę nie modyfikują wartości przechowywanych w wartościach trasy. Wszystkie wartości tras analizowane na podstawie adresu URL są przechowywane jako ciągi. Na przykład, `float` ograniczenie próbuje przekonwertować wartość trasy na float, ale przekonwertowana wartość jest używana tylko do sprawdzenia, czy może być konwertowana na typ float.
 
 ## <a name="regular-expressions"></a>Wyrażenia regularne
 
-ASP.NET Core Framework dodaje `RegexOptions.IgnoreCase | RegexOptions.Compiled | RegexOptions.CultureInvariant` do konstruktora wyrażenia regularnego. Aby <xref:System.Text.RegularExpressions.RegexOptions> uzyskać opis tych elementów członkowskich, zobacz.
+ASP.NET Core Framework dodaje `RegexOptions.IgnoreCase | RegexOptions.Compiled | RegexOptions.CultureInvariant` do konstruktora wyrażenia regularnego. <xref:System.Text.RegularExpressions.RegexOptions>Aby uzyskać opis tych elementów członkowskich, zobacz.
 
-Wyrażenia regularne używają ograniczników i tokenów podobnie jak w przypadku routingu i języka C#. Tokeny wyrażenia regularnego muszą być zmienione. `^\d{3}-\d{2}-\d{4}$` Aby użyć wyrażenia regularnego w routingu, wyrażenie musi mieć `\` (pojedynczy ukośnik odwrotny) podany w ciągu jako `\\` (podwójny ukośnik odwrotny) w pliku źródłowym C# w celu ucieczki znaku ucieczki ciągu ( `\` chyba że używane są [literały ciągu Verbatim](/dotnet/csharp/language-reference/keywords/string)). Na znaki ogranicznika parametru routingu ucieczki (`{`, `}`, `[`, `]`), podwójne znaki w wyrażeniu`{{`(, `}`, `[[`, `]]`). W poniższej tabeli przedstawiono wyrażenie regularne i wersja z ucieczką.
+Wyrażenia regularne używają ograniczników i tokenów podobnie jak w przypadku routingu i języka C#. Tokeny wyrażenia regularnego muszą być zmienione. Aby użyć wyrażenia regularnego `^\d{3}-\d{2}-\d{4}$` w routingu, wyrażenie musi mieć `\` (pojedynczy ukośnik odwrotny) podany w ciągu jako `\\` (podwójny ukośnik odwrotny) w pliku źródłowym C# w celu ucieczki `\` znaku ucieczki ciągu (chyba że używane są [literały ciągu Verbatim](/dotnet/csharp/language-reference/keywords/string)). Na znaki ogranicznika parametru routingu ucieczki ( `{` , `}` , `[` , `]` ), podwójne znaki w wyrażeniu ( `{{` , `}` ,, `[[` `]]` ). W poniższej tabeli przedstawiono wyrażenie regularne i wersja z ucieczką.
 
 | Wyrażenie regularne    | Wyrażenie regularne o zmienionym znaczeniu     |
-| --------------------- | ------------------------------ |
-| `^\d{3}-\d{2}-\d{4}$` | `^\\d{{3}}-\\d{{2}}-\\d{{4}}$` |
+| ---
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+----------- | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+--------------- | | `^\d{3}-\d{2}-\d{4}$` | `^\\d{{3}}-\\d{{2}}-\\d{{4}}$` |
 | `^[a-z]{2}$`          | `^[[a-z]]{{2}}$`               |
 
-Wyrażenia regularne używane w routingu często zaczynają się od znaku`^`daszka () i dopasowują pozycję początkową ciągu. Wyrażenia często kończą się znakiem dolara (`$`) i końcem ciągu. Znaki `^` i `$` zapewniają, że wyrażenie regularne dopasowuje całą wartość parametru trasy. Bez znaków `^` i `$` wyrażenie regularne dopasowuje dowolny podciąg w ciągu, co jest często niepożądane. W poniższej tabeli przedstawiono przykłady i wyjaśniono, dlaczego są one zgodne lub niezgodne.
+Wyrażenia regularne używane w routingu często zaczynają się od znaku daszka ( `^` ) i dopasowują pozycję początkową ciągu. Wyrażenia często kończą się znakiem dolara ( `$` ) i końcem ciągu. `^`Znaki i `$` zapewniają, że wyrażenie regularne dopasowuje całą wartość parametru trasy. Bez `^` znaków i `$` wyrażenie regularne dopasowuje dowolny podciąg w ciągu, co jest często niepożądane. W poniższej tabeli przedstawiono przykłady i wyjaśniono, dlaczego są one zgodne lub niezgodne.
 
-| Wyrażenie   | String    | Dopasowanie | Komentarz               |
-| ------------ | --------- | :---: |  -------------------- |
-| `[a-z]{2}`   | hello     | Tak   | Dopasowania podciągów     |
-| `[a-z]{2}`   | 123abc456 | Tak   | Dopasowania podciągów     |
-| `[a-z]{2}`   | MZ        | Tak   | Wyrażenie dopasowania    |
-| `[a-z]{2}`   | MZ        | Tak   | Bez uwzględniania wielkości liter    |
-| `^[a-z]{2}$` | hello     | Nie    | Zobacz `^` i `$` powyżej |
-| `^[a-z]{2}$` | 123abc456 | Nie    | Zobacz `^` i `$` powyżej |
+| Wyrażenie   | String (ciąg)    | Dopasowanie | Komentarz               |
+| ---
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+------ | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+----- | :---: |  ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+---------- | | `[a-z]{2}`   | Witaj | Tak | Dopasowania podciągów | | `[a-z]{2}`   | 123abc456 | Tak | Dopasowania podciągów | | `[a-z]{2}`   | MZ | Tak | Wyrażenie dopasowania | | `[a-z]{2}`   | MZ | Tak | Bez uwzględniania wielkości liter | | `^[a-z]{2}$` | Witaj | Nie | Zobacz `^` i `$` powyżej | | `^[a-z]{2}$` | 123abc456 | Nie | Zobacz `^` i `$` powyżej |
 
 Aby uzyskać więcej informacji na temat składni wyrażeń regularnych, zobacz [.NET Framework wyrażeń regularnych](/dotnet/standard/base-types/regular-expression-language-quick-reference).
 
-Aby ograniczyć parametr do znanego zestawu możliwych wartości, użyj wyrażenia regularnego. Na `{action:regex(^(list|get|create)$)}` przykład `action` dopasowuje wartość trasy do `list`, `get`, lub. `create` Jeśli przeszedł do słownika ograniczeń, ciąg `^(list|get|create)$` jest równoważny. Ograniczenia, które są przesyłane w słowniku ograniczenia (nie wbudowane w szablon), które nie pasują do jednego ze znanych ograniczeń, są również traktowane jako wyrażenia regularne.
+Aby ograniczyć parametr do znanego zestawu możliwych wartości, użyj wyrażenia regularnego. Na przykład `{action:regex(^(list|get|create)$)}` dopasowuje `action` wartość trasy do `list` , `get` , lub `create` . Jeśli przeszedł do słownika ograniczeń, ciąg `^(list|get|create)$` jest równoważny. Ograniczenia, które są przesyłane w słowniku ograniczenia (nie wbudowane w szablon), które nie pasują do jednego ze znanych ograniczeń, są również traktowane jako wyrażenia regularne.
 
 ## <a name="custom-route-constraints"></a>Niestandardowe ograniczenia trasy
 
-Oprócz wbudowanych ograniczeń trasy niestandardowe ograniczenia trasy mogą być tworzone przez implementację <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> interfejsu. <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> Interfejs zawiera jedną metodę, która zwraca `Match` `true` , jeśli ograniczenie jest spełnione i `false` w przeciwnym razie.
+Oprócz wbudowanych ograniczeń trasy niestandardowe ograniczenia trasy mogą być tworzone przez implementację <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> interfejsu. <xref:Microsoft.AspNetCore.Routing.IRouteConstraint>Interfejs zawiera jedną metodę, `Match` która zwraca, `true` Jeśli ograniczenie jest spełnione i `false` w przeciwnym razie.
 
-Aby użyć niestandardowego <xref:Microsoft.AspNetCore.Routing.IRouteConstraint>, typ ograniczenia trasy musi być zarejestrowany <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> w aplikacji w kontenerze usługi aplikacji. <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> Jest słownikiem, który mapuje klucze ograniczeń trasy <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> do implementacji, które weryfikują te ograniczenia. Aplikację <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> można zaktualizować w `Startup.ConfigureServices` ramach [usług. Wywołanie addrouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*) lub przez skonfigurowanie <xref:Microsoft.AspNetCore.Routing.RouteOptions> bezpośrednio w `services.Configure<RouteOptions>`usłudze. Przykład:
+Aby użyć niestandardowego <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> , typ ograniczenia trasy musi być zarejestrowany <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> w aplikacji w kontenerze usługi aplikacji. <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap>Jest słownikiem, który mapuje klucze ograniczeń trasy do <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> implementacji, które weryfikują te ograniczenia. Aplikację <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> można zaktualizować w `Startup.ConfigureServices` ramach [usług. Wywołanie addrouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*) lub przez skonfigurowanie <xref:Microsoft.AspNetCore.Routing.RouteOptions> bezpośrednio w usłudze `services.Configure<RouteOptions>` . Przykład:
 
 ```csharp
 services.AddRouting(options =>
@@ -1963,24 +6204,349 @@ public ActionResult<string> Get(string id)
 
 ## <a name="url-generation-reference"></a>Odwołanie do generacji adresów URL
 
-Poniższy przykład pokazuje, jak wygenerować link do trasy, używając słownika wartości tras i <xref:Microsoft.AspNetCore.Routing.RouteCollection>.
+Poniższy przykład pokazuje, jak wygenerować link do trasy, używając słownika wartości tras i <xref:Microsoft.AspNetCore.Routing.RouteCollection> .
 
 [!code-csharp[](routing/samples/2.x/RoutingSample/Startup.cs?name=snippet_Dictionary)]
 
-<xref:Microsoft.AspNetCore.Routing.VirtualPathData.VirtualPath> Wygenerowano na końcu powyższego przykładu `/package/create/123`. Słownik zawiera wartości `operation` i `id` trasy szablonu "śledzenie trasy pakietu". `package/{operation}/{id}` Aby uzyskać szczegółowe informacje, zapoznaj się z przykładowym kodem w sekcji [Używanie oprogramowania pośredniczącego usługi routingu](#use-routing-middleware) lub [przykładowej aplikacji](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/routing/samples).
+<xref:Microsoft.AspNetCore.Routing.VirtualPathData.VirtualPath>Wygenerowano na końcu powyższego przykładu `/package/create/123` . Słownik zawiera `operation` `id` wartości i trasy szablonu "śledzenie trasy pakietu" `package/{operation}/{id}` . Aby uzyskać szczegółowe informacje, zapoznaj się z przykładowym kodem w sekcji [Używanie oprogramowania pośredniczącego usługi routingu](#use-routing-middleware) lub [przykładowej aplikacji](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/routing/samples).
 
-Drugi parametr <xref:Microsoft.AspNetCore.Routing.VirtualPathContext> konstruktora jest kolekcją *wartości otoczenia*. Wartości otoczenia są wygodne do użycia, ponieważ ograniczają liczbę wartości, które Deweloper musi określić w kontekście żądania. Bieżące wartości trasy bieżącego żądania są uznawane za wartości otoczenia dla generacji łącza. `About` W akcji aplikacji ASP.NET Core MVC `HomeController`, nie trzeba określać wartości trasy kontrolera do łączenia z `Index` akcją&mdash;, w której `Home` jest używana wartość otoczenia.
+Drugi parametr <xref:Microsoft.AspNetCore.Routing.VirtualPathContext> konstruktora jest kolekcją *wartości otoczenia*. Wartości otoczenia są wygodne do użycia, ponieważ ograniczają liczbę wartości, które Deweloper musi określić w kontekście żądania. Bieżące wartości trasy bieżącego żądania są uznawane za wartości otoczenia dla generacji łącza. W akcji aplikacji ASP.NET Core MVC `About` `HomeController` , nie trzeba określać wartości trasy kontrolera do łączenia z `Index` akcją, &mdash; w której `Home` jest używana wartość otoczenia.
 
 Wartości otoczenia, które nie pasują do parametru, są ignorowane. Wartości otoczenia są również ignorowane, gdy jawnie podana wartość przesłania wartość otoczenia. Dopasowanie występuje od lewej do prawej w adresie URL.
 
-Wartości jawnie podane, ale które nie pasują do segmentu trasy, są dodawane do ciągu zapytania. W poniższej tabeli przedstawiono wynik przy użyciu szablonu `{controller}/{action}/{id?}`trasy.
+Wartości jawnie podane, ale które nie pasują do segmentu trasy, są dodawane do ciągu zapytania. W poniższej tabeli przedstawiono wynik przy użyciu szablonu trasy `{controller}/{action}/{id?}` .
 
 | Wartości otoczenia                     | Wartości jawne                        | Wynik                  |
-| ---------------------------------- | -------------------------------------- | ----------------------- |
-| Controller = "Strona główna"                | Action = "informacje"                       | `/Home/About`           |
-| Controller = "Strona główna"                | Controller = "Order", Action = "informacje" | `/Order/About`          |
-| Controller = "Home", Color = "Red" | Action = "informacje"                       | `/Home/About`           |
-| Controller = "Strona główna"                | Action = "informacje", Color = "Red"        | `/Home/About?color=Red` |
+| ---
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+----------------- | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+------------------- | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+-
+title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
+------------ | | Controller = "Strona główna" | Action = "informacje" | `/Home/About`|
+| Controller = "Strona główna" | Controller = "Order", Action = "informacje" | `/Order/About`|
+| Controller = "Home", Color = "Red" | Action = "informacje" | `/Home/About`|
+| Controller = "Strona główna" | Action = "informacje", Color = "Red" | `/Home/About?color=Red`                                |
 
 Jeśli trasa ma wartość domyślną, która nie odpowiada parametrowi, a ta wartość jest jawnie określona, musi być zgodna z wartością domyślną:
 
@@ -1993,6 +6559,6 @@ Generowanie linku generuje tylko łącze do tej trasy, gdy zostaną podane pasuj
 
 ## <a name="complex-segments"></a>Złożone segmenty
 
-Złożone segmenty (na `[Route("/x{token}y")]`przykład) są przetwarzane przez dopasowanie literałów z prawej strony do lewej w sposób niezachłanney. [Ten kod](https://github.com/aspnet/AspNetCore/blob/release/2.2/src/Http/Routing/src/Patterns/RoutePatternMatcher.cs#L293) zawiera szczegółowy opis sposobu dopasowywania segmentów złożonych. [Przykład kodu](https://github.com/aspnet/AspNetCore/blob/release/2.2/src/Http/Routing/src/Patterns/RoutePatternMatcher.cs#L293) nie jest używany przez ASP.NET Core, ale zapewnia dobre wyjaśnienie złożonych segmentów.
+Złożone segmenty (na przykład `[Route("/x{token}y")]` ) są przetwarzane przez dopasowanie literałów z prawej strony do lewej w sposób niezachłanney. [Ten kod](https://github.com/aspnet/AspNetCore/blob/release/2.2/src/Http/Routing/src/Patterns/RoutePatternMatcher.cs#L293) zawiera szczegółowy opis sposobu dopasowywania segmentów złożonych. [Przykład kodu](https://github.com/aspnet/AspNetCore/blob/release/2.2/src/Http/Routing/src/Patterns/RoutePatternMatcher.cs#L293) nie jest używany przez ASP.NET Core, ale zapewnia dobre wyjaśnienie złożonych segmentów.
 
 ::: moniker-end

@@ -1,23 +1,11 @@
 ---
-title: Narzędzia kontenerów programu Visual Studio z platformą ASP.NET Core
-author: spboyer
-description: Dowiedz się, jak używać narzędzi programu Visual Studio i platformy Docker dla systemu Windows w celu konteneryzowania aplikacji ASP.NET Core.
-ms.author: scaddie
-ms.custom: mvc
-ms.date: 09/12/2018
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: host-and-deploy/docker/visual-studio-tools-for-docker
-ms.openlocfilehash: 8b62e27033bf0b7c05a70050807970fe0c74e2f8
-ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
-ms.translationtype: MT
-ms.contentlocale: pl-PL
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82967574"
+title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRIdentyfikator UID: 
+
 ---
 # <a name="visual-studio-container-tools-with-aspnet-core"></a>Narzędzia kontenerów programu Visual Studio z platformą ASP.NET Core
 
@@ -88,7 +76,7 @@ Wcześniejszy plik *Dockerfile* bazuje na obrazie [microsoft/aspnetcore](https:/
 
 ## <a name="add-container-orchestrator-support-to-an-app"></a>Dodawanie do aplikacji obsługi orkiestratora kontenerów
 
-Program Visual Studio 2017 w wersji 15.7 lub starszych jako rozwiązanie aranżacji kontenerów obsługuje tylko narzędzie [Docker Compose](https://docs.docker.com/compose/overview/). Docker Compose artefakty są dodawane za pośrednictwem **dodawania** > **obsługi platformy Docker**.
+Program Visual Studio 2017 w wersji 15.7 lub starszych jako rozwiązanie aranżacji kontenerów obsługuje tylko narzędzie [Docker Compose](https://docs.docker.com/compose/overview/). Docker Compose artefakty są dodawane za pośrednictwem **dodawania**  >  **obsługi platformy Docker**.
 
 W programie Visual Studio 2017 w wersji 15.8 i nowszych rozwiązanie aranżacji jest dodawane tylko na wyraźne żądanie. Kliknij projekt prawym przyciskiem myszy w **Eksploratorze rozwiązań** i wybierz pozycję **Dodaj** > **Obsługa orkiestratora kontenerów**. Dostępne są następujące opcje: 
 
@@ -100,10 +88,10 @@ W programie Visual Studio 2017 w wersji 15.8 i nowszych rozwiązanie aranżacji 
 
 Narzędzia kontenerów programu Visual Studio dodają do rozwiązania projekt *docker-compose* z następującymi plikami:
 
-* *docker-compose.dcproj* &ndash; plik reprezentujący projekt. Zawiera element `<DockerTargetOS>` określający system operacyjny, który ma być używany.
-* *.dockerignore* &ndash; zawiera listę wzorców plików i katalogów, które mają zostać wykluczone podczas generowania kontekstu kompilacji.
-* *docker-compose.yml* &ndash; podstawowy plik [Docker Compose](https://docs.docker.com/compose/overview/) używany do definiowania kolekcji obrazów skompilowanych i uruchomionych za pomocą poleceń `docker-compose build` i `docker-compose run`.
-* *docker-compose.override.yml* &ndash; opcjonalny plik (odczytywany przez narzędzie Docker Compose) zawierający przesłonięcia konfiguracji dla usług. Program Visual Studio wykonuje polecenie `docker-compose -f "docker-compose.yml" -f "docker-compose.override.yml"`, aby scalić te pliki.
+* *Docker-Zredaguj. dcproj*: plik reprezentujący projekt. Zawiera element `<DockerTargetOS>` określający system operacyjny, który ma być używany.
+* *. dockerignore*: wyświetla wzorce plików i katalogów, które mają zostać wykluczone podczas generowania kontekstu kompilacji.
+* *Docker-Compose. yml*: podstawowy plik [Docker Compose](https://docs.docker.com/compose/overview/) używany do definiowania kolekcji obrazów skompilowanych i uruchamianych z `docker-compose build` i `docker-compose run` , odpowiednio.
+* *Docker-Compose. override. yml*: opcjonalny plik, Odczytaj według Docker Compose, z zastąpieniami konfiguracji dla usług. Program Visual Studio wykonuje polecenie `docker-compose -f "docker-compose.yml" -f "docker-compose.override.yml"`, aby scalić te pliki.
 
 Plik *docker-compose.yml* przywołuje nazwę obrazu utworzonego podczas uruchamiania projektu:
 
@@ -130,7 +118,7 @@ Usługa Service Fabric nie obsługuje uruchamiania kontenerów systemu Linux w l
 
 Narzędzia kontenerów programu Visual Studio wykonują następujące zadania:
 
-* Dodaje * &lt;Project_Name&gt;aplikacji* **Service Fabric projektu aplikacji** do rozwiązania.
+* Dodaje * &lt; project_name &gt; aplikacji* **Service Fabric projektu aplikacji** do rozwiązania.
 * Dodają do projektu ASP.NET Core pliki *Dockerfile* i *.dockerignore*. Jeśli plik *Dockerfile* już istnieje w projekcie ASP.NET Core, jego nazwa zostanie zmieniona na *Dockerfile.original*. Tworzony jest nowy plik *Dockerfile* podobny do następującego:
 
     [!code-dockerfile[](visual-studio-tools-for-docker/samples/2.1/HelloDockerTools/Dockerfile)]
@@ -237,11 +225,11 @@ Obrazy `microsoft/aspnetcore-build` i `microsoft/aspnetcore` wyświetlane w popr
 ::: moniker-end
 
 > [!NOTE]
-> Polecenie zwraca obrazy pośredniczące z nazwami repozytoriów i tagami identyfikowanych jako * \<brak>* (niewymienione powyżej). `docker images` Te obrazy bez nazwy są tworzone przez [Wieloetapową kompilację](https://docs.docker.com/engine/userguide/eng-image/multistage-build/) *pliku dockerfile*. Poprawiają one wydajność kompilowania końcowego obrazu &mdash; w przypadku wystąpienia zmian tylko niezbędne warstwy są ponownie kompilowane. Gdy obrazy pośrednie nie będą już potrzebne, można je usunąć za pomocą polecenia [docker rmi](https://docs.docker.com/engine/reference/commandline/rmi/).
+> `docker images`Polecenie zwraca obrazy pośredniczące z nazwami repozytoriów i tagami identyfikowanych jako *\<none>* (niewymienione powyżej). Te obrazy bez nazwy są tworzone przez [Wieloetapową kompilację](https://docs.docker.com/engine/userguide/eng-image/multistage-build/) *pliku dockerfile*. Poprawiają one wydajność kompilowania końcowego obrazu &mdash; w przypadku wystąpienia zmian tylko niezbędne warstwy są ponownie kompilowane. Gdy obrazy pośrednie nie będą już potrzebne, można je usunąć za pomocą polecenia [docker rmi](https://docs.docker.com/engine/reference/commandline/rmi/).
 
 Może wystąpić oczekiwanie, że rozmiar obrazu produkcyjnego lub wydania będzie mniejszy niż obraz *dev*. Ze względu na mapowanie woluminu debuger i aplikacja były uruchomione z poziomu komputera lokalnego, a nie w kontenerze. Obraz *latest* (najnowszy) zawiera spakowany kod aplikacji niezbędny do uruchomienia aplikacji na komputerze hosta. Różnica w rozmiarach wynika zatem z rozmiaru kodu aplikacji.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Opracowywanie kontenerów w programie Visual Studio](/visualstudio/containers)
 * [Azure Service Fabric: Przygotowywanie środowiska deweloperskiego](/azure/service-fabric/service-fabric-get-started)

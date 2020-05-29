@@ -621,3 +621,15 @@ Efektem ubocznym poprzedniego podejścia jest to, że <xref:Microsoft.AspNetCore
     }
 }
 ```
+
+## <a name="troubleshoot"></a>Rozwiązywanie problemów
+
+> InvalidOperationException: EditForm wymaga parametru modelu lub parametru EditContext, ale nie obu.
+
+Upewnij się, że <xref:Microsoft.AspNetCore.Components.Forms.EditForm> element ma wartość <xref:Microsoft.AspNetCore.Components.Forms.EditForm.Model> lub <xref:Microsoft.AspNetCore.Components.Forms.EditContext> .
+
+Podczas przypisywania <xref:Microsoft.AspNetCore.Components.Forms.EditForm.Model> do formularza upewnij się, że typ modelu jest skonkretyzowany, jak pokazano na poniższym przykładzie:
+
+```csharp
+private ExampleModel exampleModel = new ExampleModel();
+```

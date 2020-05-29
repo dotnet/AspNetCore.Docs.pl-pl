@@ -164,6 +164,16 @@ Gdy usługa BLOB jest włączona dla hostingu statycznej witryny sieci Web na ko
 * Ustaw **nazwę dokumentu indeksu** na `index.html` .
 * Ustaw **ścieżkę do dokumentu błędu** `index.html` . Razorskładniki i inne punkty końcowe inne niż pliki nie znajdują się w ścieżkach fizycznych w zawartości statycznej przechowywanej przez usługę BLOB. Po otrzymaniu żądania dla jednego z tych zasobów, który Blazor powinien zostać obsłużony przez router, błąd *404-nie znaleziono* przez usługę BLOB Service kieruje żądanie do **ścieżki dokumentu błędu**. Zwracany jest obiekt BLOB *index. html* , a Blazor router ładuje i przetwarza ścieżkę.
 
+Jeśli pliki nie są ładowane w czasie wykonywania ze względu na nieodpowiednie typy MIME w `Content-Type` nagłówkach plików, wykonaj jedną z następujących czynności:
+
+* Skonfiguruj narzędzia do ustawiania prawidłowych typów MIME ( `Content-Type` nagłówkami) podczas wdrażania plików.
+* Zmień typy MIME ( `Content-Type` nagłówki) dla plików po wdrożeniu aplikacji.
+
+  W Eksplorator usługi Storage (Azure Portal) dla każdego pliku:
+  
+  1. Kliknij prawym przyciskiem myszy plik i wybierz polecenie **Właściwości**.
+  1. Ustaw wartość **ContentType** i wybierz przycisk **Zapisz** .
+
 Aby uzyskać więcej informacji, zobacz [Obsługa statycznej witryny sieci Web w usłudze Azure Storage](/azure/storage/blobs/storage-blob-static-website).
 
 ### <a name="nginx"></a>Nginx

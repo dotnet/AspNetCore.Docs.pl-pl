@@ -451,8 +451,8 @@ Podczas operacji uwierzytelniania istnieją przypadki, w których chcesz zapisa�
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 
 <RemoteAuthenticatorViewCore Action="@Action" 
-    AuthenticationState="AuthenticationState" OnLoginSucceded="RestoreState" 
-    OnLogoutSucceded="RestoreState" />
+    AuthenticationState="AuthenticationState" OnLogInSucceeded="RestoreState" 
+    OnLogOutSucceeded="RestoreState" />
 
 @code {
     [Parameter]

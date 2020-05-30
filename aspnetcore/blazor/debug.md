@@ -1,18 +1,18 @@
 ---
-title: "Debug ASP.NET Core Blazor webassembly" Author: Description: "informacje o sposobie debugowania Blazor aplikacji".
-monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+title: "Debug ASP.NET Core Blazor webassembly" Author: guardrex Description: "informacje o debugowaniu Blazor aplikacji".
+monikerRange: ">= aspnetcore-3,1" MS. Author: Riande MS. Custom: MVC MS. Date: 05/29/2020 No-Loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- SignalRIdentyfikator UID: 
+- " SignalR UID: blazor/Debug
 
 ---
 # <a name="debug-aspnet-core-blazor-webassembly"></a>Debuguj ASP.NET Core Blazor Webassembly
 
 [Daniel Roth](https://github.com/danroth27)
 
-BlazorAplikacje webassembly można debugować przy użyciu narzędzi deweloperskich przeglądarki w przeglądarkach opartych na chromie (Edge/Chrome).  Alternatywnie możesz debugować aplikację przy użyciu programu Visual Studio lub Visual Studio Code.
+BlazorAplikacje webassembly można debugować przy użyciu narzędzi deweloperskich przeglądarki w przeglądarkach opartych na chromie (Edge/Chrome). Alternatywnie możesz debugować aplikację przy użyciu programu Visual Studio lub Visual Studio Code.
 
 Dostępne scenariusze obejmują:
 
@@ -53,6 +53,8 @@ Po zaktualizowaniu plik *profilu launchsettings. JSON* powinien wyglądać podob
 
 * Umożliwia środowisku IDE wykrywanie, czy aplikacja jest Blazor aplikacją webassembly.
 * Powoduje, że infrastruktura debugowania skryptów umożliwia łączenie się z przeglądarką przez Blazor serwer proxy debugowania.
+
+Wartości zastępcze protokołu WebSockets Protocol ( `wsProtocol` ), hosta ( `url.hostname` ), portu ( `url.port` ) i kontrolera URI w uruchomionej przeglądarce ( `browserInspectUri` ) są udostępniane przez platformę.
 
 ## <a name="visual-studio"></a>Visual Studio
 
@@ -135,6 +137,7 @@ Mapy źródeł przeglądarki umożliwiają przeglądarce mapowanie skompilowanyc
 
 ## <a name="troubleshoot"></a>Rozwiązywanie problemów
 
-Jeśli występują błędy, Poniższa Wskazówka może pomóc:
+Jeśli występują błędy, następujące porady mogą pomóc:
 
-Na karcie **debuger** Otwórz narzędzia deweloperskie w przeglądarce. W konsoli programu wykonaj polecenie, `localStorage.clear()` Aby usunąć wszystkie punkty przerwania.
+* Na karcie **debuger** Otwórz narzędzia deweloperskie w przeglądarce. W konsoli programu wykonaj polecenie, `localStorage.clear()` Aby usunąć wszystkie punkty przerwania.
+* Upewnij się, że został zainstalowany i zaufany certyfikat programistyczny protokołu HTTPS ASP.NET Core. Aby uzyskać więcej informacji, zobacz <xref:security/enforcing-ssl#troubleshoot-certificate-problems>.

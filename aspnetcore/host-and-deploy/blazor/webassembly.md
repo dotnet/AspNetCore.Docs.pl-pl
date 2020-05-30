@@ -1,11 +1,11 @@
 ---
-title: "host i wdrażanie ASP.NET Core Blazor webassembly" Author: Description: "Dowiedz się, jak hostować i wdrażać Blazor aplikację przy użyciu ASP.NET Core, sieci dostarczania zawartości (CDN), serwerów plików i stron usługi GitHub.
-monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+title: "host i wdrażanie ASP.NET Core Blazor webassembly" Author: guardrex Description: "Dowiedz się, jak hostować i wdrażać Blazor aplikację przy użyciu ASP.NET Core, sieci dostarczania zawartości (CDN), serwerów plików i stron usługi GitHub.
+monikerRange: ">= aspnetcore-3,1" MS. Author: Riande MS. Custom: MVC MS. Date: 05/28/2020 No-Loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- SignalRIdentyfikator UID: 
+- " SignalR UID: Host-and-Deploy/blazor/webassembly
 
 ---
 # <a name="host-and-deploy-aspnet-core-blazor-webassembly"></a>Hostowanie i wdrażanie ASP.NET Core Blazor Webassembly
@@ -22,9 +22,20 @@ Obsługiwane są następujące strategie wdrażania:
 * BlazorAplikacja jest obsługiwana przez aplikację ASP.NET Core. Ta strategia jest objęta [wdrożeniem hostowanym za pomocą ASP.NET Core](#hosted-deployment-with-aspnet-core) sekcji.
 * BlazorAplikacja jest umieszczana na statycznym, hostingowym serwerze sieci Web lub usłudze, w której program .NET nie jest używany do obsługi Blazor aplikacji. Ta strategia została omówiona w sekcji [wdrażanie autonomiczne](#standalone-deployment) , która obejmuje informacje dotyczące hostingu Blazor aplikacji sieci webassembly jako aplikacji podrzędnej IIS.
 
-## <a name="brotli-precompression"></a>Precompression Brotli
+## <a name="precompression"></a>Prekompresowanie
 
-Po Blazor opublikowaniu aplikacji webassembly dane wyjściowe są najpierw kompresowane przy użyciu [algorytmu kompresji Brotli](https://tools.ietf.org/html/rfc7932) na najwyższym poziomie w celu zmniejszenia rozmiaru aplikacji i usunięcia potrzeby kompresji w czasie wykonywania.
+Po Blazor opublikowaniu aplikacji webassembly dane wyjściowe są najpierw kompresowane, aby zmniejszyć rozmiar aplikacji i usunąć potrzebę kompresji środowiska uruchomieniowego. Używane są następujące algorytmy kompresji:
+
+* [Brotli](https://tools.ietf.org/html/rfc7932) (najwyższy poziom)
+* [Gzip](https://tools.ietf.org/html/rfc1952))
+
+Aby wyłączyć kompresję, należy dodać `BlazorEnableCompression` Właściwość programu MSBuild do pliku projektu aplikacji i ustawić wartość na `false` :
+
+```xml
+<PropertyGroup>
+  <BlazorEnableCompression>false</BlazorEnableCompression>
+</PropertyGroup>
+```
 
 Aby poznać konfigurację kompresji *Web. config* usług IIS, zobacz sekcję [rekompresji usług IIS: Brotli i gzip](#brotli-and-gzip-compression) .
 
@@ -350,69 +361,11 @@ BlazorAplikację webassembly można zainicjować przy użyciu `loadBootResource`
 `loadBootResource`Parametry znajdują się w poniższej tabeli.
 
 | Parametr    | Opis |
-| ---
-title: "host i wdrażanie ASP.NET Core Blazor webassembly" Author: Description: "Dowiedz się, jak hostować i wdrażać Blazor aplikację przy użyciu ASP.NET Core, sieci dostarczania zawartości (CDN), serwerów plików i stron usługi GitHub.
-monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: "host i wdrażanie ASP.NET Core Blazor webassembly" Author: Description: "Dowiedz się, jak hostować i wdrażać Blazor aplikację przy użyciu ASP.NET Core, sieci dostarczania zawartości (CDN), serwerów plików i stron usługi GitHub.
-monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: "host i wdrażanie ASP.NET Core Blazor webassembly" Author: Description: "Dowiedz się, jak hostować i wdrażać Blazor aplikację przy użyciu ASP.NET Core, sieci dostarczania zawartości (CDN), serwerów plików i stron usługi GitHub.
-monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: "host i wdrażanie ASP.NET Core Blazor webassembly" Author: Description: "Dowiedz się, jak hostować i wdrażać Blazor aplikację przy użyciu ASP.NET Core, sieci dostarczania zawartości (CDN), serwerów plików i stron usługi GitHub.
-monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
------- | ---title: "host i Deploy ASP.NET Core Blazor webassembly" Author: Description: "Dowiedz się, jak hostować i wdrażać Blazor aplikację przy użyciu ASP.NET Core, sieci dostarczania zawartości (CDN), serwerów plików i stron usługi GitHub.
-monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: "host i wdrażanie ASP.NET Core Blazor webassembly" Author: Description: "Dowiedz się, jak hostować i wdrażać Blazor aplikację przy użyciu ASP.NET Core, sieci dostarczania zawartości (CDN), serwerów plików i stron usługi GitHub.
-monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: "host i wdrażanie ASP.NET Core Blazor webassembly" Author: Description: "Dowiedz się, jak hostować i wdrażać Blazor aplikację przy użyciu ASP.NET Core, sieci dostarczania zawartości (CDN), serwerów plików i stron usługi GitHub.
-monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
------- | | `type`       | Typ zasobu. Typy Permissable: `assembly` , `pdb` , `dotnetjs` , `dotnetwasm` , `timezonedata` | | `name`       | Nazwa zasobu. | | `defaultUri` | Względny lub bezwzględny identyfikator URI zasobu. | | `integrity`  | Ciąg integralności reprezentujący oczekiwaną zawartość w odpowiedzi. |
+| ------------ | ----------- |
+| `type`       | Typ zasobu. Typy Permissable: `assembly` , `pdb` , `dotnetjs` , `dotnetwasm` ,`timezonedata` |
+| `name`       | Nazwa zasobu. |
+| `defaultUri` | Względny lub bezwzględny identyfikator URI zasobu. |
+| `integrity`  | Ciąg integralności reprezentujący oczekiwaną zawartość w odpowiedzi. |
 
 `loadBootResource`zwraca jedną z następujących wartości, aby zastąpić proces ładowania:
 

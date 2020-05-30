@@ -1,11 +1,11 @@
 ---
-title: "wywoływanie internetowego interfejsu API z ASP.NET Core Blazor webassembly" Author: Description: "Dowiedz się, jak wywołać interfejs API sieci Web z Blazor aplikacji webassembly przy użyciu pomocników JSON, w tym do tworzenia żądań współużytkowania zasobów między źródłami (CORS).
-monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+title: "wywoływanie internetowego interfejsu API z ASP.NET Core Blazor webassembly" Author: guardrex Description: "Dowiedz się, jak wywołać interfejs API sieci Web z Blazor aplikacji webassembly przy użyciu pomocników JSON, w tym do tworzenia żądań współużytkowania zasobów między źródłami (CORS)".
+monikerRange: ">= aspnetcore-3,1" MS. Author: Riande MS. Custom: MVC MS. Date: 05/28/2020 No-Loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- SignalRIdentyfikator UID: 
+- " SignalR UID: blazor/Call-Web-API
 
 ---
 # <a name="call-a-web-api-from-aspnet-core-blazor"></a>Wywoływanie internetowego interfejsu API z ASP.NET CoreBlazor
@@ -168,6 +168,8 @@ W poniższym kodzie `<button>` element DELETE wywołuje `DeleteItem` metodę. El
 ## <a name="named-httpclient-with-ihttpclientfactory"></a>Nazwane HttpClient z IHttpClientFactory
 
 <xref:System.Net.Http.IHttpClientFactory>Obsługiwane są usługi i konfiguracja nazwanych <xref:System.Net.Http.HttpClient> .
+
+Odwołuje się do pakietu NuGet [Microsoft. Extensions. http](https://www.nuget.org/packages/Microsoft.Extensions.Http/) w pliku projektu.
 
 `Program.Main`(*Program.cs*):
 

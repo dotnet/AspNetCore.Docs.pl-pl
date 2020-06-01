@@ -27,7 +27,7 @@ Obsługiwane są następujące strategie wdrażania:
 Po Blazor opublikowaniu aplikacji webassembly dane wyjściowe są najpierw kompresowane, aby zmniejszyć rozmiar aplikacji i usunąć potrzebę kompresji środowiska uruchomieniowego. Używane są następujące algorytmy kompresji:
 
 * [Brotli](https://tools.ietf.org/html/rfc7932) (najwyższy poziom)
-* [Gzip](https://tools.ietf.org/html/rfc1952))
+* [Gzip](https://tools.ietf.org/html/rfc1952)
 
 Aby wyłączyć kompresję, należy dodać `BlazorEnableCompression` Właściwość programu MSBuild do pliku projektu aplikacji i ustawić wartość na `false` :
 

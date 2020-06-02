@@ -1,1 +1,1 @@
-[<span data-ttu-id="63fa6-101">.NET Core SDK 2.0 lub nowsza</span><span class="sxs-lookup"><span data-stu-id="63fa6-101">.NET Core SDK 2.0 or later</span></span>](https://dotnet.microsoft.com/download)
+[<span data-ttu-id="e4adb-101">Zestaw .NET Core SDK 2,0 lub nowszy</span><span class="sxs-lookup"><span data-stu-id="e4adb-101">.NET Core SDK 2.0 or later</span></span>](https://dotnet.microsoft.com/download)

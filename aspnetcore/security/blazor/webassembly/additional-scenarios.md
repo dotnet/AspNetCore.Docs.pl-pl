@@ -1,22 +1,90 @@
 ---
-<span data-ttu-id="a52dd-101">title: "ASP.NET Core Blazor webassembly — dodatkowe scenariusze zabezpieczeń" autor: Opis: "Dowiedz się, jak skonfigurować Blazor zestaw webassembly pod kątem dodatkowych scenariuszy zabezpieczeń".</span><span class="sxs-lookup"><span data-stu-id="a52dd-101">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
-<span data-ttu-id="a52dd-102">monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="a52dd-102">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="a52dd-103">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-103">'Blazor'</span></span>
-- <span data-ttu-id="a52dd-104">'Identity'</span><span class="sxs-lookup"><span data-stu-id="a52dd-104">'Identity'</span></span>
-- <span data-ttu-id="a52dd-105">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="a52dd-105">'Let's Encrypt'</span></span>
-- <span data-ttu-id="a52dd-106">'Razor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-106">'Razor'</span></span>
-- <span data-ttu-id="a52dd-107">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="a52dd-107">'SignalR' uid:</span></span> 
+<span data-ttu-id="33b1b-101">title: "ASP.NET Core Blazor Webassembly — dodatkowe scenariusze zabezpieczeń" autor: guardrex Description: "informacje o sposobie konfigurowania Blazor zestawu webassembly w celu uzyskania dodatkowych scenariuszy zabezpieczeń".</span><span class="sxs-lookup"><span data-stu-id="33b1b-101">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: guardrex description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
+<span data-ttu-id="33b1b-102">monikerRange: ">= aspnetcore-3,1" MS. Author: Riande MS. Custom: MVC MS. Date: 06/01/2020 No-Loc:</span><span class="sxs-lookup"><span data-stu-id="33b1b-102">monikerRange: '>= aspnetcore-3.1' ms.author: riande ms.custom: mvc ms.date: 06/01/2020 no-loc:</span></span>
+- <span data-ttu-id="33b1b-103">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="33b1b-103">'Blazor'</span></span>
+- <span data-ttu-id="33b1b-104">'Identity'</span><span class="sxs-lookup"><span data-stu-id="33b1b-104">'Identity'</span></span>
+- <span data-ttu-id="33b1b-105">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="33b1b-105">'Let's Encrypt'</span></span>
+- <span data-ttu-id="33b1b-106">'Razor'</span><span class="sxs-lookup"><span data-stu-id="33b1b-106">'Razor'</span></span>
+- <span data-ttu-id="33b1b-107">" SignalR UID: Security/blazor/webassembly/dodatkowe scenariusze</span><span class="sxs-lookup"><span data-stu-id="33b1b-107">'SignalR' uid: security/blazor/webassembly/additional-scenarios</span></span>
 
 ---
-# <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a><span data-ttu-id="a52dd-108">BlazorDodatkowe scenariusze zabezpieczeń ASP.NET Core Webassembly</span><span class="sxs-lookup"><span data-stu-id="a52dd-108">ASP.NET Core Blazor WebAssembly additional security scenarios</span></span>
+# <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a><span data-ttu-id="33b1b-108">BlazorDodatkowe scenariusze zabezpieczeń ASP.NET Core Webassembly</span><span class="sxs-lookup"><span data-stu-id="33b1b-108">ASP.NET Core Blazor WebAssembly additional security scenarios</span></span>
 
-<span data-ttu-id="a52dd-109">Autor [Javier Calvarro Nelson](https://github.com/javiercn)</span><span class="sxs-lookup"><span data-stu-id="a52dd-109">By [Javier Calvarro Nelson](https://github.com/javiercn)</span></span>
+<span data-ttu-id="33b1b-109">Autorzy [Javier Calvarro Nelson](https://github.com/javiercn) i [Luke Latham](https://github.com/guardrex)</span><span class="sxs-lookup"><span data-stu-id="33b1b-109">By [Javier Calvarro Nelson](https://github.com/javiercn) and [Luke Latham](https://github.com/guardrex)</span></span>
 
-## <a name="attach-tokens-to-outgoing-requests"></a><span data-ttu-id="a52dd-110">Dołącz tokeny do żądań wychodzących</span><span class="sxs-lookup"><span data-stu-id="a52dd-110">Attach tokens to outgoing requests</span></span>
+## <a name="attach-tokens-to-outgoing-requests"></a><span data-ttu-id="33b1b-110">Dołącz tokeny do żądań wychodzących</span><span class="sxs-lookup"><span data-stu-id="33b1b-110">Attach tokens to outgoing requests</span></span>
 
-<span data-ttu-id="a52dd-111"><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler>Usługa może być używana z programem <xref:System.Net.Http.HttpClient> w celu dołączania tokenów dostępu do żądań wychodzących.</span><span class="sxs-lookup"><span data-stu-id="a52dd-111">The <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> service can be used with <xref:System.Net.Http.HttpClient> to attach access tokens to outgoing requests.</span></span> <span data-ttu-id="a52dd-112">Tokeny są uzyskiwane przy użyciu istniejącej <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.IAccessTokenProvider> usługi.</span><span class="sxs-lookup"><span data-stu-id="a52dd-112">Tokens are acquired using the existing <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.IAccessTokenProvider> service.</span></span> <span data-ttu-id="a52dd-113">Jeśli nie można uzyskać tokenu, <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException> zgłaszany jest wyjątek.</span><span class="sxs-lookup"><span data-stu-id="a52dd-113">If a token can't be acquired, an <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException> is thrown.</span></span> <span data-ttu-id="a52dd-114"><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException>ma <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException.Redirect%2A> metodę, która może być używana do nawigowania do dostawcy tożsamości w celu uzyskania nowego tokenu.</span><span class="sxs-lookup"><span data-stu-id="a52dd-114"><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException> has a <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException.Redirect%2A> method that can be used to navigate the user to the identity provider to acquire a new token.</span></span> <span data-ttu-id="a52dd-115"><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler>Można skonfigurować z autoryzowanymi adresami URL, zakresami i zwrotnym adresem URL przy użyciu <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A> metody.</span><span class="sxs-lookup"><span data-stu-id="a52dd-115">The <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> can be configured with the authorized URLs, scopes, and return URL using the <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A> method.</span></span>
+<span data-ttu-id="33b1b-111"><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler>Usługa może być używana z programem <xref:System.Net.Http.HttpClient> w celu dołączania tokenów dostępu do żądań wychodzących.</span><span class="sxs-lookup"><span data-stu-id="33b1b-111">The <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> service can be used with <xref:System.Net.Http.HttpClient> to attach access tokens to outgoing requests.</span></span> <span data-ttu-id="33b1b-112">Tokeny są uzyskiwane przy użyciu istniejącej <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.IAccessTokenProvider> usługi.</span><span class="sxs-lookup"><span data-stu-id="33b1b-112">Tokens are acquired using the existing <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.IAccessTokenProvider> service.</span></span> <span data-ttu-id="33b1b-113">Jeśli nie można uzyskać tokenu, <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException> zgłaszany jest wyjątek.</span><span class="sxs-lookup"><span data-stu-id="33b1b-113">If a token can't be acquired, an <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException> is thrown.</span></span> <span data-ttu-id="33b1b-114"><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException>ma <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException.Redirect%2A> metodę, która może być używana do nawigowania do dostawcy tożsamości w celu uzyskania nowego tokenu.</span><span class="sxs-lookup"><span data-stu-id="33b1b-114"><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException> has a <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException.Redirect%2A> method that can be used to navigate the user to the identity provider to acquire a new token.</span></span> <span data-ttu-id="33b1b-115"><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler>Można skonfigurować z autoryzowanymi adresami URL, zakresami i zwrotnym adresem URL przy użyciu <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A> metody.</span><span class="sxs-lookup"><span data-stu-id="33b1b-115">The <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> can be configured with the authorized URLs, scopes, and return URL using the <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A> method.</span></span>
 
-<span data-ttu-id="a52dd-116">W poniższym przykładzie <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> konfiguruje <xref:System.Net.Http.HttpClient> w `Program.Main` (*program.cs*):</span><span class="sxs-lookup"><span data-stu-id="a52dd-116">In the following example, <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> configures an <xref:System.Net.Http.HttpClient> in `Program.Main` (*Program.cs*):</span></span>
+<span data-ttu-id="33b1b-116">Użyj jednej z poniższych metod, aby skonfigurować obsługę komunikatów dla żądań wychodzących:</span><span class="sxs-lookup"><span data-stu-id="33b1b-116">Use either of the following approaches to configure a message handler for outgoing requests:</span></span>
+
+* <span data-ttu-id="33b1b-117">[Niestandardowa Klasa AuthorizationMessageHandler](#custom-authorizationmessagehandler-class) (*zalecane*)</span><span class="sxs-lookup"><span data-stu-id="33b1b-117">[Custom AuthorizationMessageHandler class](#custom-authorizationmessagehandler-class) (*Recommended*)</span></span>
+* [<span data-ttu-id="33b1b-118">Konfigurowanie AuthorizationMessageHandler</span><span class="sxs-lookup"><span data-stu-id="33b1b-118">Configure AuthorizationMessageHandler</span></span>](#configure-authorizationmessagehandler)
+
+### <a name="custom-authorizationmessagehandler-class"></a><span data-ttu-id="33b1b-119">Niestandardowa Klasa AuthorizationMessageHandler</span><span class="sxs-lookup"><span data-stu-id="33b1b-119">Custom AuthorizationMessageHandler class</span></span>
+
+<span data-ttu-id="33b1b-120">W poniższym przykładzie Klasa niestandardowa rozszerza <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> , która może służyć do konfigurowania <xref:System.Net.Http.HttpClient> :</span><span class="sxs-lookup"><span data-stu-id="33b1b-120">In the following example, a custom class extends <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> that can be used to configure an <xref:System.Net.Http.HttpClient>:</span></span>
+
+```csharp
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+
+public class CustomAuthorizationMessageHandler : AuthorizationMessageHandler
+{
+    public CustomAuthorizationMessageHandler(IAccessTokenProvider provider, 
+        NavigationManager navigationManager)
+        : base(provider, navigationManager)
+    {
+        ConfigureHandler(
+            authorizedUrls: new[] { "https://www.example.com/base" },
+            scopes: new[] { "example.read", "example.write" });
+    }
+}
+```
+
+<span data-ttu-id="33b1b-121">W programie `Program.Main` (*program.cs*) <xref:System.Net.Http.HttpClient> jest skonfigurowany za pomocą niestandardowego programu obsługi komunikatów autoryzacji:</span><span class="sxs-lookup"><span data-stu-id="33b1b-121">In `Program.Main` (*Program.cs*), an <xref:System.Net.Http.HttpClient> is configured with the custom authorization message handler:</span></span>
+
+```csharp
+builder.Services.AddTransient<CustomAuthorizationMessageHandler>();
+
+builder.Services.AddHttpClient("ServerAPI",
+    client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
+        .AddHttpMessageHandler<CustomAuthorizationMessageHandler>();
+```
+
+<span data-ttu-id="33b1b-122">Skonfigurowany <xref:System.Net.Http.HttpClient> jest używany do autoryzacji żądań za pomocą wzorca [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) .</span><span class="sxs-lookup"><span data-stu-id="33b1b-122">The configured <xref:System.Net.Http.HttpClient> is used to make authorized requests using the [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) pattern.</span></span> <span data-ttu-id="33b1b-123">Gdy klient jest tworzony przy użyciu <xref:System.Net.Http.IHttpClientFactory.CreateClient%2A> [programu (Microsoft. Extensions. http](https://www.nuget.org/packages/Microsoft.Extensions.Http/) Package), <xref:System.Net.Http.HttpClient> są dostarczane wystąpienia, które obejmują tokeny dostępu podczas wykonywania żądań do interfejsu API serwera:</span><span class="sxs-lookup"><span data-stu-id="33b1b-123">Where the client is created with <xref:System.Net.Http.IHttpClientFactory.CreateClient%2A> ([Microsoft.Extensions.Http](https://www.nuget.org/packages/Microsoft.Extensions.Http/) package), the <xref:System.Net.Http.HttpClient> is supplied instances that include access tokens when making requests to the server API:</span></span>
+
+```razor
+@inject IHttpClientFactory ClientFactory
+
+...
+
+@code {
+    private ExampleType[] examples;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var client = ClientFactory.CreateClient("ServerAPI");
+
+            examples = 
+                await client.GetFromJsonAsync<ExampleType[]>("{API METHOD}");
+
+            ...
+        }
+        catch (AccessTokenNotAvailableException exception)
+        {
+            exception.Redirect();
+        }
+        
+    }
+}
+```
+
+### <a name="configure-authorizationmessagehandler"></a><span data-ttu-id="33b1b-124">Konfigurowanie AuthorizationMessageHandler</span><span class="sxs-lookup"><span data-stu-id="33b1b-124">Configure AuthorizationMessageHandler</span></span>
+
+<span data-ttu-id="33b1b-125">W poniższym przykładzie <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> konfiguruje <xref:System.Net.Http.HttpClient> w `Program.Main` (*program.cs*):</span><span class="sxs-lookup"><span data-stu-id="33b1b-125">In the following example, <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> configures an <xref:System.Net.Http.HttpClient> in `Program.Main` (*Program.cs*):</span></span>
 
 ```csharp
 using System.Net.Http;
@@ -28,7 +96,7 @@ builder.Services.AddTransient(sp =>
 {
     return new HttpClient(sp.GetRequiredService<AuthorizationMessageHandler>()
         .ConfigureHandler(
-            new [] { "https://www.example.com/base" },
+            authorizedUrls: new [] { "https://www.example.com/base" },
             scopes: new[] { "example.read", "example.write" }))
         {
             BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
@@ -36,7 +104,7 @@ builder.Services.AddTransient(sp =>
 });
 ```
 
-<span data-ttu-id="a52dd-117">Dla wygody <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> jest dołączony wstępnie skonfigurowany przy użyciu adresu podstawowego aplikacji jako autoryzowany adres URL.</span><span class="sxs-lookup"><span data-stu-id="a52dd-117">For convenience, a <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> is included that's preconfigured with the app base address as an authorized URL.</span></span> <span data-ttu-id="a52dd-118">Szablony zestawów webassembly z włączonym uwierzytelnianiem są Blazor teraz używane <xref:System.Net.Http.IHttpClientFactory> w projekcie interfejsu API serwera w celu skonfigurowania programu <xref:System.Net.Http.HttpClient> przy użyciu <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> :</span><span class="sxs-lookup"><span data-stu-id="a52dd-118">The authentication-enabled Blazor WebAssembly templates now use <xref:System.Net.Http.IHttpClientFactory> in the Server API project to set up an <xref:System.Net.Http.HttpClient> with the <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler>:</span></span>
+<span data-ttu-id="33b1b-126">Dla wygody <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> jest dołączony wstępnie skonfigurowany przy użyciu adresu podstawowego aplikacji jako autoryzowany adres URL.</span><span class="sxs-lookup"><span data-stu-id="33b1b-126">For convenience, a <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> is included that's preconfigured with the app base address as an authorized URL.</span></span> <span data-ttu-id="33b1b-127">Szablony zestawów webassembly z włączonymi uwierzytelnianiem Blazor teraz używają <xref:System.Net.Http.IHttpClientFactory> ([Microsoft. Extensions. http](https://www.nuget.org/packages/Microsoft.Extensions.Http/) Package) w projekcie interfejsu API serwera w celu skonfigurowania programu <xref:System.Net.Http.HttpClient> przy użyciu <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> :</span><span class="sxs-lookup"><span data-stu-id="33b1b-127">The authentication-enabled Blazor WebAssembly templates now use <xref:System.Net.Http.IHttpClientFactory> ([Microsoft.Extensions.Http](https://www.nuget.org/packages/Microsoft.Extensions.Http/) package) in the Server API project to set up an <xref:System.Net.Http.HttpClient> with the <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler>:</span></span>
 
 ```csharp
 using System.Net.Http;
@@ -44,21 +112,19 @@ using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
 ...
 
-builder.Services.AddHttpClient("BlazorWithIdentity.ServerAPI", 
+builder.Services.AddHttpClient("ServerAPI", 
     client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
         .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 
 builder.Services.AddTransient(sp => sp.GetRequiredService<IHttpClientFactory>()
-    .CreateClient("BlazorWithIdentity.ServerAPI"));
+    .CreateClient("ServerAPI"));
 ```
 
-<span data-ttu-id="a52dd-119">W przypadku, gdy klient został utworzony za pomocą programu <xref:System.Net.Http.IHttpClientFactory.CreateClient%2A> w powyższym przykładzie, <xref:System.Net.Http.HttpClient> jest dostarczane wystąpienia, które zawierają tokeny dostępu podczas wykonywania żądań do projektu serwera.</span><span class="sxs-lookup"><span data-stu-id="a52dd-119">Where the client is created with <xref:System.Net.Http.IHttpClientFactory.CreateClient%2A> in the preceding example, the <xref:System.Net.Http.HttpClient> is supplied instances that include access tokens when making requests to the server project.</span></span>
+<span data-ttu-id="33b1b-128">W przypadku, gdy klient został utworzony za pomocą programu <xref:System.Net.Http.IHttpClientFactory.CreateClient%2A> w powyższym przykładzie, <xref:System.Net.Http.HttpClient> jest dostarczane wystąpienia, które zawierają tokeny dostępu podczas wykonywania żądań do projektu serwera.</span><span class="sxs-lookup"><span data-stu-id="33b1b-128">Where the client is created with <xref:System.Net.Http.IHttpClientFactory.CreateClient%2A> in the preceding example, the <xref:System.Net.Http.HttpClient> is supplied instances that include access tokens when making requests to the server project.</span></span>
 
-<span data-ttu-id="a52dd-120">Skonfigurowany <xref:System.Net.Http.HttpClient> jest następnie używany do autoryzowania żądań przy użyciu prostego wzorca [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) .</span><span class="sxs-lookup"><span data-stu-id="a52dd-120">The configured <xref:System.Net.Http.HttpClient> is then used to make authorized requests using a simple [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) pattern.</span></span>
+<span data-ttu-id="33b1b-129">Skonfigurowany <xref:System.Net.Http.HttpClient> jest używany do autoryzacji żądań za pomocą wzorca [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) :</span><span class="sxs-lookup"><span data-stu-id="33b1b-129">The configured <xref:System.Net.Http.HttpClient> is used to make authorized requests using the [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) pattern:</span></span>
 
-<span data-ttu-id="a52dd-121">`FetchData`składnik (*strony/FetchData. Razor*):</span><span class="sxs-lookup"><span data-stu-id="a52dd-121">`FetchData` component (*Pages/FetchData.razor*):</span></span>
-
-```csharp
+```razor
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 @inject HttpClient Client
 
@@ -66,10 +132,14 @@ builder.Services.AddTransient(sp => sp.GetRequiredService<IHttpClientFactory>()
 
 protected override async Task OnInitializedAsync()
 {
+    private ExampleType[] examples;
+
     try
     {
-        forecasts = 
-            await Client.GetFromJsonAsync<WeatherForecast[]>("WeatherForecast");
+        examples = 
+            await Client.GetFromJsonAsync<ExampleType[]>("{API METHOD}");
+
+        ...
     }
     catch (AccessTokenNotAvailableException exception)
     {
@@ -78,11 +148,11 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
-## <a name="typed-httpclient"></a><span data-ttu-id="a52dd-122">Wpisane HttpClient</span><span class="sxs-lookup"><span data-stu-id="a52dd-122">Typed HttpClient</span></span>
+## <a name="typed-httpclient"></a><span data-ttu-id="33b1b-130">Wpisane HttpClient</span><span class="sxs-lookup"><span data-stu-id="33b1b-130">Typed HttpClient</span></span>
 
-<span data-ttu-id="a52dd-123">Można zdefiniować klienta z określonym typem, który obsługuje wszystkie problemy dotyczące pozyskiwania HTTP i tokenu w ramach jednej klasy.</span><span class="sxs-lookup"><span data-stu-id="a52dd-123">A typed client can be defined that handles all of the HTTP and token acquisition concerns within a single class.</span></span>
+<span data-ttu-id="33b1b-131">Można zdefiniować klienta z określonym typem, który obsługuje wszystkie problemy dotyczące pozyskiwania HTTP i tokenu w ramach jednej klasy.</span><span class="sxs-lookup"><span data-stu-id="33b1b-131">A typed client can be defined that handles all of the HTTP and token acquisition concerns within a single class.</span></span>
 
-<span data-ttu-id="a52dd-124">*WeatherForecastClient.cs*:</span><span class="sxs-lookup"><span data-stu-id="a52dd-124">*WeatherForecastClient.cs*:</span></span>
+<span data-ttu-id="33b1b-132">*WeatherForecastClient.cs*:</span><span class="sxs-lookup"><span data-stu-id="33b1b-132">*WeatherForecastClient.cs*:</span></span>
 
 ```csharp
 using System.Net.Http;
@@ -119,7 +189,7 @@ public class WeatherForecastClient
 }
 ```
 
-<span data-ttu-id="a52dd-125">`Program.Main`(*Program.cs*):</span><span class="sxs-lookup"><span data-stu-id="a52dd-125">`Program.Main` (*Program.cs*):</span></span>
+<span data-ttu-id="33b1b-133">`Program.Main`(*Program.cs*):</span><span class="sxs-lookup"><span data-stu-id="33b1b-133">`Program.Main` (*Program.cs*):</span></span>
 
 ```csharp
 using System.Net.Http;
@@ -132,7 +202,7 @@ builder.Services.AddHttpClient<WeatherForecastClient>(
     .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 ```
 
-<span data-ttu-id="a52dd-126">`FetchData`składnik (*strony/FetchData. Razor*):</span><span class="sxs-lookup"><span data-stu-id="a52dd-126">`FetchData` component (*Pages/FetchData.razor*):</span></span>
+<span data-ttu-id="33b1b-134">`FetchData`składnik (*strony/FetchData. Razor*):</span><span class="sxs-lookup"><span data-stu-id="33b1b-134">`FetchData` component (*Pages/FetchData.razor*):</span></span>
 
 ```razor
 @inject WeatherForecastClient Client
@@ -145,11 +215,11 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
-## <a name="configure-the-httpclient-handler"></a><span data-ttu-id="a52dd-127">Konfigurowanie procedury obsługi HttpClient</span><span class="sxs-lookup"><span data-stu-id="a52dd-127">Configure the HttpClient handler</span></span>
+## <a name="configure-the-httpclient-handler"></a><span data-ttu-id="33b1b-135">Konfigurowanie procedury obsługi HttpClient</span><span class="sxs-lookup"><span data-stu-id="33b1b-135">Configure the HttpClient handler</span></span>
 
-<span data-ttu-id="a52dd-128">Program obsługi można skonfigurować w taki sposób, <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A> Aby wychodzące żądania HTTP.</span><span class="sxs-lookup"><span data-stu-id="a52dd-128">The handler can be further configured with <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A> for outbound HTTP requests.</span></span>
+<span data-ttu-id="33b1b-136">Program obsługi można skonfigurować w taki sposób, <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A> Aby wychodzące żądania HTTP.</span><span class="sxs-lookup"><span data-stu-id="33b1b-136">The handler can be further configured with <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A> for outbound HTTP requests.</span></span>
 
-<span data-ttu-id="a52dd-129">`Program.Main`(*Program.cs*):</span><span class="sxs-lookup"><span data-stu-id="a52dd-129">`Program.Main` (*Program.cs*):</span></span>
+<span data-ttu-id="33b1b-137">`Program.Main`(*Program.cs*):</span><span class="sxs-lookup"><span data-stu-id="33b1b-137">`Program.Main` (*Program.cs*):</span></span>
 
 ```csharp
 builder.Services.AddHttpClient<WeatherForecastClient>(client => client.BaseAddress = new Uri("https://www.example.com/base"))
@@ -158,20 +228,20 @@ builder.Services.AddHttpClient<WeatherForecastClient>(client => client.BaseAddre
         scopes: new[] { "example.read", "example.write" }));
 ```
 
-## <a name="unauthenticated-or-unauthorized-web-api-requests-in-an-app-with-a-secure-default-client"></a><span data-ttu-id="a52dd-130">Nieuwierzytelnione lub nieautoryzowane żądania interfejsu API sieci Web w aplikacji z bezpiecznym klientem domyślnym</span><span class="sxs-lookup"><span data-stu-id="a52dd-130">Unauthenticated or unauthorized web API requests in an app with a secure default client</span></span>
+## <a name="unauthenticated-or-unauthorized-web-api-requests-in-an-app-with-a-secure-default-client"></a><span data-ttu-id="33b1b-138">Nieuwierzytelnione lub nieautoryzowane żądania interfejsu API sieci Web w aplikacji z bezpiecznym klientem domyślnym</span><span class="sxs-lookup"><span data-stu-id="33b1b-138">Unauthenticated or unauthorized web API requests in an app with a secure default client</span></span>
 
-<span data-ttu-id="a52dd-131">Jeśli Blazor aplikacja internetowa zestawu zwykle używa bezpiecznego ustawienia domyślnego <xref:System.Net.Http.HttpClient> , aplikacja może również wykonać nieuwierzytelnione lub nieautoryzowane żądania internetowego interfejsu API przez skonfigurowanie nazwanego elementu <xref:System.Net.Http.HttpClient> :</span><span class="sxs-lookup"><span data-stu-id="a52dd-131">If the Blazor WebAssembly app ordinarily uses a secure default <xref:System.Net.Http.HttpClient>, the app can also make unauthenticated or unauthorized web API requests by configuring a named <xref:System.Net.Http.HttpClient>:</span></span>
+<span data-ttu-id="33b1b-139">Jeśli Blazor aplikacja internetowa zestawu zwykle używa bezpiecznego ustawienia domyślnego <xref:System.Net.Http.HttpClient> , aplikacja może również wykonać nieuwierzytelnione lub nieautoryzowane żądania internetowego interfejsu API przez skonfigurowanie nazwanego elementu <xref:System.Net.Http.HttpClient> :</span><span class="sxs-lookup"><span data-stu-id="33b1b-139">If the Blazor WebAssembly app ordinarily uses a secure default <xref:System.Net.Http.HttpClient>, the app can also make unauthenticated or unauthorized web API requests by configuring a named <xref:System.Net.Http.HttpClient>:</span></span>
 
-<span data-ttu-id="a52dd-132">`Program.Main`(*Program.cs*):</span><span class="sxs-lookup"><span data-stu-id="a52dd-132">`Program.Main` (*Program.cs*):</span></span>
+<span data-ttu-id="33b1b-140">`Program.Main`(*Program.cs*):</span><span class="sxs-lookup"><span data-stu-id="33b1b-140">`Program.Main` (*Program.cs*):</span></span>
 
 ```csharp
 builder.Services.AddHttpClient("ServerAPI.NoAuthenticationClient", 
     client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
 ```
 
-<span data-ttu-id="a52dd-133">Poprzednia rejestracja jest uzupełnieniem istniejącej bezpiecznej rejestracji domyślnej <xref:System.Net.Http.HttpClient> .</span><span class="sxs-lookup"><span data-stu-id="a52dd-133">The preceding registration is in addition to the existing secure default <xref:System.Net.Http.HttpClient> registration.</span></span>
+<span data-ttu-id="33b1b-141">Poprzednia rejestracja jest uzupełnieniem istniejącej bezpiecznej rejestracji domyślnej <xref:System.Net.Http.HttpClient> .</span><span class="sxs-lookup"><span data-stu-id="33b1b-141">The preceding registration is in addition to the existing secure default <xref:System.Net.Http.HttpClient> registration.</span></span>
 
-<span data-ttu-id="a52dd-134">Składnik tworzy z programu, <xref:System.Net.Http.HttpClient> <xref:System.Net.Http.IHttpClientFactory> Aby wykonać nieuwierzytelnione lub nieautoryzowane żądania:</span><span class="sxs-lookup"><span data-stu-id="a52dd-134">A component creates the <xref:System.Net.Http.HttpClient> from the <xref:System.Net.Http.IHttpClientFactory> to make unauthenticated or unauthorized requests:</span></span>
+<span data-ttu-id="33b1b-142">Składnik tworzy <xref:System.Net.Http.HttpClient> z <xref:System.Net.Http.IHttpClientFactory> pakietu ([Microsoft. Extensions. http](https://www.nuget.org/packages/Microsoft.Extensions.Http/) ), aby wykonywać nieuwierzytelnione lub nieautoryzowane żądania:</span><span class="sxs-lookup"><span data-stu-id="33b1b-142">A component creates the <xref:System.Net.Http.HttpClient> from the <xref:System.Net.Http.IHttpClientFactory> ([Microsoft.Extensions.Http](https://www.nuget.org/packages/Microsoft.Extensions.Http/) package) to make unauthenticated or unauthorized requests:</span></span>
 
 ```razor
 @inject IHttpClientFactory ClientFactory
@@ -192,15 +262,15 @@ builder.Services.AddHttpClient("ServerAPI.NoAuthenticationClient",
 ```
 
 > [!NOTE]
-> <span data-ttu-id="a52dd-135">Kontroler w interfejsie API serwera, `WeatherForecastNoAuthenticationController` dla poprzedniego przykładu, nie jest oznaczony [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) atrybutem.</span><span class="sxs-lookup"><span data-stu-id="a52dd-135">The controller in the server API, `WeatherForecastNoAuthenticationController` for the preceding example, isn't marked with the [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) attribute.</span></span>
+> <span data-ttu-id="33b1b-143">Kontroler w interfejsie API serwera, `WeatherForecastNoAuthenticationController` dla poprzedniego przykładu, nie jest oznaczony [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) atrybutem.</span><span class="sxs-lookup"><span data-stu-id="33b1b-143">The controller in the server API, `WeatherForecastNoAuthenticationController` for the preceding example, isn't marked with the [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) attribute.</span></span>
 
-## <a name="request-additional-access-tokens"></a><span data-ttu-id="a52dd-136">Żądaj dodatkowych tokenów dostępu</span><span class="sxs-lookup"><span data-stu-id="a52dd-136">Request additional access tokens</span></span>
+## <a name="request-additional-access-tokens"></a><span data-ttu-id="33b1b-144">Żądaj dodatkowych tokenów dostępu</span><span class="sxs-lookup"><span data-stu-id="33b1b-144">Request additional access tokens</span></span>
 
-<span data-ttu-id="a52dd-137">Tokeny dostępu można uzyskać ręcznie, wywołując metodę `IAccessTokenProvider.RequestAccessToken` .</span><span class="sxs-lookup"><span data-stu-id="a52dd-137">Access tokens can be manually obtained by calling `IAccessTokenProvider.RequestAccessToken`.</span></span>
+<span data-ttu-id="33b1b-145">Tokeny dostępu można uzyskać ręcznie, wywołując metodę `IAccessTokenProvider.RequestAccessToken` .</span><span class="sxs-lookup"><span data-stu-id="33b1b-145">Access tokens can be manually obtained by calling `IAccessTokenProvider.RequestAccessToken`.</span></span>
 
-<span data-ttu-id="a52dd-138">W poniższym przykładzie dodatkowe zakresy interfejsu API usługi Azure Active Directory (AAD) Microsoft Graph są wymagane przez aplikację do odczytywania danych użytkownika i wysyłania wiadomości e-mail.</span><span class="sxs-lookup"><span data-stu-id="a52dd-138">In the following example, additional Azure Active Directory (AAD) Microsoft Graph API scopes are required by an app to read user data and send mail.</span></span> <span data-ttu-id="a52dd-139">Po dodaniu Microsoft Graph uprawnień interfejsu API w portalu usługi Azure AAD dodatkowe zakresy są konfigurowane w aplikacji klienckiej.</span><span class="sxs-lookup"><span data-stu-id="a52dd-139">After adding the Microsoft Graph API permissions in the Azure AAD portal, the additional scopes are configured in the Client app.</span></span>
+<span data-ttu-id="33b1b-146">W poniższym przykładzie dodatkowe zakresy interfejsu API usługi Azure Active Directory (AAD) Microsoft Graph są wymagane przez aplikację do odczytywania danych użytkownika i wysyłania wiadomości e-mail.</span><span class="sxs-lookup"><span data-stu-id="33b1b-146">In the following example, additional Azure Active Directory (AAD) Microsoft Graph API scopes are required by an app to read user data and send mail.</span></span> <span data-ttu-id="33b1b-147">Po dodaniu Microsoft Graph uprawnień interfejsu API w portalu usługi Azure AAD dodatkowe zakresy są konfigurowane w aplikacji klienckiej.</span><span class="sxs-lookup"><span data-stu-id="33b1b-147">After adding the Microsoft Graph API permissions in the Azure AAD portal, the additional scopes are configured in the Client app.</span></span>
 
-<span data-ttu-id="a52dd-140">`Program.Main`(*Program.cs*):</span><span class="sxs-lookup"><span data-stu-id="a52dd-140">`Program.Main` (*Program.cs*):</span></span>
+<span data-ttu-id="33b1b-148">`Program.Main`(*Program.cs*):</span><span class="sxs-lookup"><span data-stu-id="33b1b-148">`Program.Main` (*Program.cs*):</span></span>
 
 ```csharp
 builder.Services.AddMsalAuthentication(options =>
@@ -214,9 +284,9 @@ builder.Services.AddMsalAuthentication(options =>
 }
 ```
 
-<span data-ttu-id="a52dd-141">`IAccessTokenProvider.RequestToken`Metoda zapewnia Przeciążenie, które umożliwia aplikacji udostępnianie tokenu dostępu z danym zestawem zakresów.</span><span class="sxs-lookup"><span data-stu-id="a52dd-141">The `IAccessTokenProvider.RequestToken` method provides an overload that allows an app to provision an access token with a given set of scopes.</span></span>
+<span data-ttu-id="33b1b-149">`IAccessTokenProvider.RequestToken`Metoda zapewnia Przeciążenie, które umożliwia aplikacji udostępnianie tokenu dostępu z danym zestawem zakresów.</span><span class="sxs-lookup"><span data-stu-id="33b1b-149">The `IAccessTokenProvider.RequestToken` method provides an overload that allows an app to provision an access token with a given set of scopes.</span></span>
 
-<span data-ttu-id="a52dd-142">W Razor składniku:</span><span class="sxs-lookup"><span data-stu-id="a52dd-142">In a Razor component:</span></span>
+<span data-ttu-id="33b1b-150">W Razor składniku:</span><span class="sxs-lookup"><span data-stu-id="33b1b-150">In a Razor component:</span></span>
 
 ```razor
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
@@ -237,14 +307,14 @@ if (tokenResult.TryGetToken(out var token))
 }
 ```
 
-<span data-ttu-id="a52dd-143"><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenResult.TryGetToken%2A?displayProperty=nameWithType>typu</span><span class="sxs-lookup"><span data-stu-id="a52dd-143"><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenResult.TryGetToken%2A?displayProperty=nameWithType> returns:</span></span>
+<span data-ttu-id="33b1b-151"><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenResult.TryGetToken%2A?displayProperty=nameWithType>typu</span><span class="sxs-lookup"><span data-stu-id="33b1b-151"><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenResult.TryGetToken%2A?displayProperty=nameWithType> returns:</span></span>
 
-* <span data-ttu-id="a52dd-144">`true`z `token` do użycia.</span><span class="sxs-lookup"><span data-stu-id="a52dd-144">`true` with the `token` for use.</span></span>
-* <span data-ttu-id="a52dd-145">`false`Jeśli nie pobrano tokenu.</span><span class="sxs-lookup"><span data-stu-id="a52dd-145">`false` if the token isn't retrieved.</span></span>
+* <span data-ttu-id="33b1b-152">`true`z `token` do użycia.</span><span class="sxs-lookup"><span data-stu-id="33b1b-152">`true` with the `token` for use.</span></span>
+* <span data-ttu-id="33b1b-153">`false`Jeśli nie pobrano tokenu.</span><span class="sxs-lookup"><span data-stu-id="33b1b-153">`false` if the token isn't retrieved.</span></span>
 
-## <a name="httpclient-and-httprequestmessage-with-fetch-api-request-options"></a><span data-ttu-id="a52dd-146">HttpClient i HttpRequestMessage za pomocą opcji żądania interfejsu API pobierania</span><span class="sxs-lookup"><span data-stu-id="a52dd-146">HttpClient and HttpRequestMessage with Fetch API request options</span></span>
+## <a name="httpclient-and-httprequestmessage-with-fetch-api-request-options"></a><span data-ttu-id="33b1b-154">HttpClient i HttpRequestMessage za pomocą opcji żądania interfejsu API pobierania</span><span class="sxs-lookup"><span data-stu-id="33b1b-154">HttpClient and HttpRequestMessage with Fetch API request options</span></span>
 
-<span data-ttu-id="a52dd-147">W przypadku uruchamiania w zestawie webassembly w Blazor aplikacji Webassembly [HttpClient](xref:fundamentals/http-requests) i <xref:System.Net.Http.HttpRequestMessage> może służyć do dostosowywania żądań.</span><span class="sxs-lookup"><span data-stu-id="a52dd-147">When running on WebAssembly in a Blazor WebAssembly app, [HttpClient](xref:fundamentals/http-requests) and <xref:System.Net.Http.HttpRequestMessage> can be used to customize requests.</span></span> <span data-ttu-id="a52dd-148">Na przykład można określić metodę HTTP i nagłówki żądania.</span><span class="sxs-lookup"><span data-stu-id="a52dd-148">For example, you can specify the HTTP method and request headers.</span></span> <span data-ttu-id="a52dd-149">Poniższy składnik wysyła `POST` żądanie do punktu końcowego interfejsu API listy do wykonania na serwerze i wyświetla treść odpowiedzi:</span><span class="sxs-lookup"><span data-stu-id="a52dd-149">The following component makes a `POST` request to a To Do List API endpoint on the server and shows the response body:</span></span>
+<span data-ttu-id="33b1b-155">W przypadku uruchamiania w zestawie webassembly w Blazor aplikacji Webassembly [HttpClient](xref:fundamentals/http-requests) i <xref:System.Net.Http.HttpRequestMessage> może służyć do dostosowywania żądań.</span><span class="sxs-lookup"><span data-stu-id="33b1b-155">When running on WebAssembly in a Blazor WebAssembly app, [HttpClient](xref:fundamentals/http-requests) and <xref:System.Net.Http.HttpRequestMessage> can be used to customize requests.</span></span> <span data-ttu-id="33b1b-156">Na przykład można określić metodę HTTP i nagłówki żądania.</span><span class="sxs-lookup"><span data-stu-id="33b1b-156">For example, you can specify the HTTP method and request headers.</span></span> <span data-ttu-id="33b1b-157">Poniższy składnik wysyła `POST` żądanie do punktu końcowego interfejsu API listy do wykonania na serwerze i wyświetla treść odpowiedzi:</span><span class="sxs-lookup"><span data-stu-id="33b1b-157">The following component makes a `POST` request to a To Do List API endpoint on the server and shows the response body:</span></span>
 
 ```razor
 @page "/todorequest"
@@ -306,37 +376,37 @@ if (tokenResult.TryGetToken(out var token))
 }
 ```
 
-<span data-ttu-id="a52dd-150">Implementacja programu .NET webassembly <xref:System.Net.Http.HttpClient> używa [WindowOrWorkerGlobalScope. Fetch ()](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch).</span><span class="sxs-lookup"><span data-stu-id="a52dd-150">.NET WebAssembly's implementation of <xref:System.Net.Http.HttpClient> uses [WindowOrWorkerGlobalScope.fetch()](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch).</span></span> <span data-ttu-id="a52dd-151">Polecenie Pobierz umożliwia skonfigurowanie kilku [opcji specyficznych dla żądania](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters).</span><span class="sxs-lookup"><span data-stu-id="a52dd-151">Fetch allows configuring several [request-specific options](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters).</span></span> 
+<span data-ttu-id="33b1b-158">Implementacja programu .NET webassembly <xref:System.Net.Http.HttpClient> używa [WindowOrWorkerGlobalScope. Fetch ()](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch).</span><span class="sxs-lookup"><span data-stu-id="33b1b-158">.NET WebAssembly's implementation of <xref:System.Net.Http.HttpClient> uses [WindowOrWorkerGlobalScope.fetch()](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch).</span></span> <span data-ttu-id="33b1b-159">Polecenie Pobierz umożliwia skonfigurowanie kilku [opcji specyficznych dla żądania](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters).</span><span class="sxs-lookup"><span data-stu-id="33b1b-159">Fetch allows configuring several [request-specific options](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters).</span></span> 
 
-<span data-ttu-id="a52dd-152">Opcje żądania pobrania HTTP można skonfigurować przy użyciu <xref:System.Net.Http.HttpRequestMessage> metod rozszerzających pokazanych w poniższej tabeli.</span><span class="sxs-lookup"><span data-stu-id="a52dd-152">HTTP fetch request options can be configured with <xref:System.Net.Http.HttpRequestMessage> extension methods shown in the following table.</span></span>
+<span data-ttu-id="33b1b-160">Opcje żądania pobrania HTTP można skonfigurować przy użyciu <xref:System.Net.Http.HttpRequestMessage> metod rozszerzających pokazanych w poniższej tabeli.</span><span class="sxs-lookup"><span data-stu-id="33b1b-160">HTTP fetch request options can be configured with <xref:System.Net.Http.HttpRequestMessage> extension methods shown in the following table.</span></span>
 
-| <span data-ttu-id="a52dd-153">Metoda rozszerzenia</span><span class="sxs-lookup"><span data-stu-id="a52dd-153">Extension method</span></span> | <span data-ttu-id="a52dd-154">Właściwość żądania pobrania</span><span class="sxs-lookup"><span data-stu-id="a52dd-154">Fetch request property</span></span> |
+| <span data-ttu-id="33b1b-161">Metoda rozszerzenia</span><span class="sxs-lookup"><span data-stu-id="33b1b-161">Extension method</span></span> | <span data-ttu-id="33b1b-162">Właściwość żądania pobrania</span><span class="sxs-lookup"><span data-stu-id="33b1b-162">Fetch request property</span></span> |
 | --- | --- |
-| <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCredentials%2A> | [<span data-ttu-id="a52dd-155">uwierzytelniające</span><span class="sxs-lookup"><span data-stu-id="a52dd-155">credentials</span></span>](https://developer.mozilla.org/docs/Web/API/Request/credentials) |
-| <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCache%2A> | [<span data-ttu-id="a52dd-156">Chow</span><span class="sxs-lookup"><span data-stu-id="a52dd-156">cache</span></span>](https://developer.mozilla.org/docs/Web/API/Request/cache) |
-| <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestMode%2A> | [<span data-ttu-id="a52dd-157">wyst</span><span class="sxs-lookup"><span data-stu-id="a52dd-157">mode</span></span>](https://developer.mozilla.org/docs/Web/API/Request/mode) |
-| <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestIntegrity%2A> | [<span data-ttu-id="a52dd-158">spójn</span><span class="sxs-lookup"><span data-stu-id="a52dd-158">integrity</span></span>](https://developer.mozilla.org/docs/Web/API/Request/integrity) |
+| <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCredentials%2A> | [<span data-ttu-id="33b1b-163">uwierzytelniające</span><span class="sxs-lookup"><span data-stu-id="33b1b-163">credentials</span></span>](https://developer.mozilla.org/docs/Web/API/Request/credentials) |
+| <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCache%2A> | [<span data-ttu-id="33b1b-164">Chow</span><span class="sxs-lookup"><span data-stu-id="33b1b-164">cache</span></span>](https://developer.mozilla.org/docs/Web/API/Request/cache) |
+| <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestMode%2A> | [<span data-ttu-id="33b1b-165">wyst</span><span class="sxs-lookup"><span data-stu-id="33b1b-165">mode</span></span>](https://developer.mozilla.org/docs/Web/API/Request/mode) |
+| <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestIntegrity%2A> | [<span data-ttu-id="33b1b-166">spójn</span><span class="sxs-lookup"><span data-stu-id="33b1b-166">integrity</span></span>](https://developer.mozilla.org/docs/Web/API/Request/integrity) |
 
-<span data-ttu-id="a52dd-159">Można ustawić dodatkowe opcje przy użyciu bardziej generycznej <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestOption%2A> metody rozszerzenia.</span><span class="sxs-lookup"><span data-stu-id="a52dd-159">You can set additional options using the more generic <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestOption%2A> extension method.</span></span>
+<span data-ttu-id="33b1b-167">Można ustawić dodatkowe opcje przy użyciu bardziej generycznej <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestOption%2A> metody rozszerzenia.</span><span class="sxs-lookup"><span data-stu-id="33b1b-167">You can set additional options using the more generic <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestOption%2A> extension method.</span></span>
  
-<span data-ttu-id="a52dd-160">Odpowiedź HTTP jest zwykle buforowana w Blazor aplikacji Webassembly, aby umożliwić obsługę odczytów synchronizacji w zawartości odpowiedzi.</span><span class="sxs-lookup"><span data-stu-id="a52dd-160">The HTTP response is typically buffered in a Blazor WebAssembly app to enable support for sync reads on the response content.</span></span> <span data-ttu-id="a52dd-161">Aby włączyć obsługę przesyłania strumieniowego odpowiedzi, należy użyć <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserResponseStreamingEnabled%2A> metody rozszerzenia w żądaniu.</span><span class="sxs-lookup"><span data-stu-id="a52dd-161">To enable support for response streaming, use the <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserResponseStreamingEnabled%2A> extension method on the request.</span></span>
+<span data-ttu-id="33b1b-168">Odpowiedź HTTP jest zwykle buforowana w Blazor aplikacji Webassembly, aby umożliwić obsługę odczytów synchronizacji w zawartości odpowiedzi.</span><span class="sxs-lookup"><span data-stu-id="33b1b-168">The HTTP response is typically buffered in a Blazor WebAssembly app to enable support for sync reads on the response content.</span></span> <span data-ttu-id="33b1b-169">Aby włączyć obsługę przesyłania strumieniowego odpowiedzi, należy użyć <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserResponseStreamingEnabled%2A> metody rozszerzenia w żądaniu.</span><span class="sxs-lookup"><span data-stu-id="33b1b-169">To enable support for response streaming, use the <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserResponseStreamingEnabled%2A> extension method on the request.</span></span>
 
-<span data-ttu-id="a52dd-162">Aby uwzględnić poświadczenia w żądaniu między źródłami, użyj <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCredentials%2A> metody rozszerzenia:</span><span class="sxs-lookup"><span data-stu-id="a52dd-162">To include credentials in a cross-origin request, use the <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCredentials%2A> extension method:</span></span>
+<span data-ttu-id="33b1b-170">Aby uwzględnić poświadczenia w żądaniu między źródłami, użyj <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCredentials%2A> metody rozszerzenia:</span><span class="sxs-lookup"><span data-stu-id="33b1b-170">To include credentials in a cross-origin request, use the <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCredentials%2A> extension method:</span></span>
 
 ```csharp
 requestMessage.SetBrowserRequestCredentials(BrowserRequestCredentials.Include);
 ```
 
-<span data-ttu-id="a52dd-163">Aby uzyskać więcej informacji na temat opcji interfejsu API pobierania, zobacz [powiadomienia MDN Web docs: WindowOrWorkerGlobalScope. Fetch ():P arameters](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters).</span><span class="sxs-lookup"><span data-stu-id="a52dd-163">For more information on Fetch API options, see [MDN web docs: WindowOrWorkerGlobalScope.fetch():Parameters](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters).</span></span>
+<span data-ttu-id="33b1b-171">Aby uzyskać więcej informacji na temat opcji interfejsu API pobierania, zobacz [powiadomienia MDN Web docs: WindowOrWorkerGlobalScope. Fetch ():P arameters](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters).</span><span class="sxs-lookup"><span data-stu-id="33b1b-171">For more information on Fetch API options, see [MDN web docs: WindowOrWorkerGlobalScope.fetch():Parameters](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters).</span></span>
 
-<span data-ttu-id="a52dd-164">Podczas wysyłania poświadczeń (plików cookie/nagłówki autoryzacji) w żądaniach CORS `Authorization` nagłówek musi być dozwolony przez zasady CORS.</span><span class="sxs-lookup"><span data-stu-id="a52dd-164">When sending credentials (authorization cookies/headers) on CORS requests, the `Authorization` header must be allowed by the CORS policy.</span></span>
+<span data-ttu-id="33b1b-172">Podczas wysyłania poświadczeń (plików cookie/nagłówki autoryzacji) w żądaniach CORS `Authorization` nagłówek musi być dozwolony przez zasady CORS.</span><span class="sxs-lookup"><span data-stu-id="33b1b-172">When sending credentials (authorization cookies/headers) on CORS requests, the `Authorization` header must be allowed by the CORS policy.</span></span>
 
-<span data-ttu-id="a52dd-165">Następujące zasady obejmują konfigurację programu:</span><span class="sxs-lookup"><span data-stu-id="a52dd-165">The following policy includes configuration for:</span></span>
+<span data-ttu-id="33b1b-173">Następujące zasady obejmują konfigurację programu:</span><span class="sxs-lookup"><span data-stu-id="33b1b-173">The following policy includes configuration for:</span></span>
 
-* <span data-ttu-id="a52dd-166">Pochodzenie żądania ( `http://localhost:5000` , `https://localhost:5001` ).</span><span class="sxs-lookup"><span data-stu-id="a52dd-166">Request origins (`http://localhost:5000`, `https://localhost:5001`).</span></span>
-* <span data-ttu-id="a52dd-167">Dowolna Metoda (czasownik).</span><span class="sxs-lookup"><span data-stu-id="a52dd-167">Any method (verb).</span></span>
-* <span data-ttu-id="a52dd-168">`Content-Type`i `Authorization` nagłówki.</span><span class="sxs-lookup"><span data-stu-id="a52dd-168">`Content-Type` and `Authorization` headers.</span></span> <span data-ttu-id="a52dd-169">Aby zezwolić na nagłówek niestandardowy (na przykład `x-custom-header` ), Wyświetl nagłówek podczas wywoływania <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithHeaders*> .</span><span class="sxs-lookup"><span data-stu-id="a52dd-169">To allow a custom header (for example, `x-custom-header`), list the header when calling <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithHeaders*>.</span></span>
-* <span data-ttu-id="a52dd-170">Poświadczenia ustawione przez kod JavaScript po stronie klienta ( `credentials` Właściwość ustawiona na `include` ).</span><span class="sxs-lookup"><span data-stu-id="a52dd-170">Credentials set by client-side JavaScript code (`credentials` property set to `include`).</span></span>
+* <span data-ttu-id="33b1b-174">Pochodzenie żądania ( `http://localhost:5000` , `https://localhost:5001` ).</span><span class="sxs-lookup"><span data-stu-id="33b1b-174">Request origins (`http://localhost:5000`, `https://localhost:5001`).</span></span>
+* <span data-ttu-id="33b1b-175">Dowolna Metoda (czasownik).</span><span class="sxs-lookup"><span data-stu-id="33b1b-175">Any method (verb).</span></span>
+* <span data-ttu-id="33b1b-176">`Content-Type`i `Authorization` nagłówki.</span><span class="sxs-lookup"><span data-stu-id="33b1b-176">`Content-Type` and `Authorization` headers.</span></span> <span data-ttu-id="33b1b-177">Aby zezwolić na nagłówek niestandardowy (na przykład `x-custom-header` ), Wyświetl nagłówek podczas wywoływania <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithHeaders*> .</span><span class="sxs-lookup"><span data-stu-id="33b1b-177">To allow a custom header (for example, `x-custom-header`), list the header when calling <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithHeaders*>.</span></span>
+* <span data-ttu-id="33b1b-178">Poświadczenia ustawione przez kod JavaScript po stronie klienta ( `credentials` Właściwość ustawiona na `include` ).</span><span class="sxs-lookup"><span data-stu-id="33b1b-178">Credentials set by client-side JavaScript code (`credentials` property set to `include`).</span></span>
 
 ```csharp
 app.UseCors(policy => 
@@ -346,38 +416,38 @@ app.UseCors(policy =>
     .AllowCredentials());
 ```
 
-<span data-ttu-id="a52dd-171">Aby uzyskać więcej informacji, zobacz <xref:security/cors> i składnik Tester żądania HTTP aplikacji przykładowej (*Components/HTTPRequestTester. Razor*).</span><span class="sxs-lookup"><span data-stu-id="a52dd-171">For more information, see <xref:security/cors> and the sample app's HTTP Request Tester component (*Components/HTTPRequestTester.razor*).</span></span>
+<span data-ttu-id="33b1b-179">Aby uzyskać więcej informacji, zobacz <xref:security/cors> i składnik Tester żądania HTTP aplikacji przykładowej (*Components/HTTPRequestTester. Razor*).</span><span class="sxs-lookup"><span data-stu-id="33b1b-179">For more information, see <xref:security/cors> and the sample app's HTTP Request Tester component (*Components/HTTPRequestTester.razor*).</span></span>
 
-## <a name="handle-token-request-errors"></a><span data-ttu-id="a52dd-172">Obsługa błędów żądania tokenu</span><span class="sxs-lookup"><span data-stu-id="a52dd-172">Handle token request errors</span></span>
+## <a name="handle-token-request-errors"></a><span data-ttu-id="33b1b-180">Obsługa błędów żądania tokenu</span><span class="sxs-lookup"><span data-stu-id="33b1b-180">Handle token request errors</span></span>
 
-<span data-ttu-id="a52dd-173">Gdy aplikacja jednostronicowa uwierzytelnia użytkownika przy użyciu funkcji Open ID Connect (OIDC), stan uwierzytelniania jest obsługiwany lokalnie w ramach SPA i w Identity postaci pliku cookie sesji, który jest ustawiany w wyniku użytkownika dostarczającego poświadczenia.</span><span class="sxs-lookup"><span data-stu-id="a52dd-173">When a Single Page Application (SPA) authenticates a user using Open ID Connect (OIDC), the authentication state is maintained locally within the SPA and in the Identity Provider (IP) in the form of a session cookie that's set as a result of the user providing their credentials.</span></span>
+<span data-ttu-id="33b1b-181">Gdy aplikacja jednostronicowa uwierzytelnia użytkownika przy użyciu funkcji Open ID Connect (OIDC), stan uwierzytelniania jest obsługiwany lokalnie w ramach SPA i w Identity postaci pliku cookie sesji, który jest ustawiany w wyniku użytkownika dostarczającego poświadczenia.</span><span class="sxs-lookup"><span data-stu-id="33b1b-181">When a Single Page Application (SPA) authenticates a user using Open ID Connect (OIDC), the authentication state is maintained locally within the SPA and in the Identity Provider (IP) in the form of a session cookie that's set as a result of the user providing their credentials.</span></span>
 
-<span data-ttu-id="a52dd-174">Tokeny, które są emitowane przez protokół IP dla użytkownika zwykle są ważne przez krótki okresy czasu, na ogół o godzinę, więc aplikacja kliencka musi regularnie pobierać nowe tokeny.</span><span class="sxs-lookup"><span data-stu-id="a52dd-174">The tokens that the IP emits for the user typically are valid for short periods of time, about one hour normally, so the client app must regularly fetch new tokens.</span></span> <span data-ttu-id="a52dd-175">W przeciwnym razie użytkownik zostanie wylogowany po wygaśnięciu przyznanych tokenów.</span><span class="sxs-lookup"><span data-stu-id="a52dd-175">Otherwise, the user would be logged-out after the granted tokens expire.</span></span> <span data-ttu-id="a52dd-176">W większości przypadków klienci OIDC mogą udostępniać nowe tokeny, nie wymagając ponownego uwierzytelnienia użytkownika w ramach stanu uwierzytelniania lub "sesji", który jest przechowywany w ramach adresu IP.</span><span class="sxs-lookup"><span data-stu-id="a52dd-176">In most cases, OIDC clients are able to provision new tokens without requiring the user to authenticate again thanks to the authentication state or "session" that is kept within the IP.</span></span>
+<span data-ttu-id="33b1b-182">Tokeny, które są emitowane przez protokół IP dla użytkownika zwykle są ważne przez krótki okresy czasu, na ogół o godzinę, więc aplikacja kliencka musi regularnie pobierać nowe tokeny.</span><span class="sxs-lookup"><span data-stu-id="33b1b-182">The tokens that the IP emits for the user typically are valid for short periods of time, about one hour normally, so the client app must regularly fetch new tokens.</span></span> <span data-ttu-id="33b1b-183">W przeciwnym razie użytkownik zostanie wylogowany po wygaśnięciu przyznanych tokenów.</span><span class="sxs-lookup"><span data-stu-id="33b1b-183">Otherwise, the user would be logged-out after the granted tokens expire.</span></span> <span data-ttu-id="33b1b-184">W większości przypadków klienci OIDC mogą udostępniać nowe tokeny, nie wymagając ponownego uwierzytelnienia użytkownika w ramach stanu uwierzytelniania lub "sesji", który jest przechowywany w ramach adresu IP.</span><span class="sxs-lookup"><span data-stu-id="33b1b-184">In most cases, OIDC clients are able to provision new tokens without requiring the user to authenticate again thanks to the authentication state or "session" that is kept within the IP.</span></span>
 
-<span data-ttu-id="a52dd-177">Istnieją sytuacje, w których klient nie może uzyskać tokenu bez interakcji użytkownika, na przykład gdy z jakiegoś powodu użytkownik jawnie wylogowuje się z adresu IP.</span><span class="sxs-lookup"><span data-stu-id="a52dd-177">There are some cases in which the client can't get a token without user interaction, for example, when for some reason the user explicitly logs out from the IP.</span></span> <span data-ttu-id="a52dd-178">Ten scenariusz występuje, gdy użytkownik odwiedzi `https://login.microsoftonline.com` i wyloguje się. W tych scenariuszach aplikacja nie wie od razu, że użytkownik wyloguje się. Każdy token przechowywany przez klienta może już nie być prawidłowy.</span><span class="sxs-lookup"><span data-stu-id="a52dd-178">This scenario occurs if a user visits `https://login.microsoftonline.com` and logs out. In these scenarios, the app doesn't know immediately that the user has logged out. Any token that the client holds might no longer be valid.</span></span> <span data-ttu-id="a52dd-179">Ponadto klient nie może zainicjować obsługi nowego tokenu bez interakcji użytkownika po wygaśnięciu bieżącego tokenu.</span><span class="sxs-lookup"><span data-stu-id="a52dd-179">Also, the client isn't able to provision a new token without user interaction after the current token expires.</span></span>
+<span data-ttu-id="33b1b-185">Istnieją sytuacje, w których klient nie może uzyskać tokenu bez interakcji użytkownika, na przykład gdy z jakiegoś powodu użytkownik jawnie wylogowuje się z adresu IP.</span><span class="sxs-lookup"><span data-stu-id="33b1b-185">There are some cases in which the client can't get a token without user interaction, for example, when for some reason the user explicitly logs out from the IP.</span></span> <span data-ttu-id="33b1b-186">Ten scenariusz występuje, gdy użytkownik odwiedzi `https://login.microsoftonline.com` i wyloguje się. W tych scenariuszach aplikacja nie wie od razu, że użytkownik wyloguje się. Każdy token przechowywany przez klienta może już nie być prawidłowy.</span><span class="sxs-lookup"><span data-stu-id="33b1b-186">This scenario occurs if a user visits `https://login.microsoftonline.com` and logs out. In these scenarios, the app doesn't know immediately that the user has logged out. Any token that the client holds might no longer be valid.</span></span> <span data-ttu-id="33b1b-187">Ponadto klient nie może zainicjować obsługi nowego tokenu bez interakcji użytkownika po wygaśnięciu bieżącego tokenu.</span><span class="sxs-lookup"><span data-stu-id="33b1b-187">Also, the client isn't able to provision a new token without user interaction after the current token expires.</span></span>
 
-<span data-ttu-id="a52dd-180">Te scenariusze nie są specyficzne dla uwierzytelniania opartego na tokenach.</span><span class="sxs-lookup"><span data-stu-id="a52dd-180">These scenarios aren't specific to token-based authentication.</span></span> <span data-ttu-id="a52dd-181">Są one częścią charakteru aplikacji jednostronicowych.</span><span class="sxs-lookup"><span data-stu-id="a52dd-181">They are part of the nature of SPAs.</span></span> <span data-ttu-id="a52dd-182">SPA używający plików cookie również nie może wywołać interfejsu API serwera, jeśli plik cookie uwierzytelniania zostanie usunięty.</span><span class="sxs-lookup"><span data-stu-id="a52dd-182">An SPA using cookies also fails to call a server API if the authentication cookie is removed.</span></span>
+<span data-ttu-id="33b1b-188">Te scenariusze nie są specyficzne dla uwierzytelniania opartego na tokenach.</span><span class="sxs-lookup"><span data-stu-id="33b1b-188">These scenarios aren't specific to token-based authentication.</span></span> <span data-ttu-id="33b1b-189">Są one częścią charakteru aplikacji jednostronicowych.</span><span class="sxs-lookup"><span data-stu-id="33b1b-189">They are part of the nature of SPAs.</span></span> <span data-ttu-id="33b1b-190">SPA używający plików cookie również nie może wywołać interfejsu API serwera, jeśli plik cookie uwierzytelniania zostanie usunięty.</span><span class="sxs-lookup"><span data-stu-id="33b1b-190">An SPA using cookies also fails to call a server API if the authentication cookie is removed.</span></span>
 
-<span data-ttu-id="a52dd-183">Gdy aplikacja wykonuje wywołania interfejsu API do chronionych zasobów, należy pamiętać o następujących kwestiach:</span><span class="sxs-lookup"><span data-stu-id="a52dd-183">When an app performs API calls to protected resources, you must be aware of the following:</span></span>
+<span data-ttu-id="33b1b-191">Gdy aplikacja wykonuje wywołania interfejsu API do chronionych zasobów, należy pamiętać o następujących kwestiach:</span><span class="sxs-lookup"><span data-stu-id="33b1b-191">When an app performs API calls to protected resources, you must be aware of the following:</span></span>
 
-* <span data-ttu-id="a52dd-184">Aby zainicjować obsługę nowego tokenu dostępu w celu wywołania interfejsu API, może być konieczne ponowne uwierzytelnienie użytkownika.</span><span class="sxs-lookup"><span data-stu-id="a52dd-184">To provision a new access token to call the API, the user might be required to authenticate again.</span></span>
-* <span data-ttu-id="a52dd-185">Nawet jeśli klient ma token, który wydaje się być prawidłowy, wywołanie do serwera może się nie powieść, ponieważ token został odwołany przez użytkownika.</span><span class="sxs-lookup"><span data-stu-id="a52dd-185">Even if the client has a token that seems to be valid, the call to the server might fail because the token was revoked by the user.</span></span>
+* <span data-ttu-id="33b1b-192">Aby zainicjować obsługę nowego tokenu dostępu w celu wywołania interfejsu API, może być konieczne ponowne uwierzytelnienie użytkownika.</span><span class="sxs-lookup"><span data-stu-id="33b1b-192">To provision a new access token to call the API, the user might be required to authenticate again.</span></span>
+* <span data-ttu-id="33b1b-193">Nawet jeśli klient ma token, który wydaje się być prawidłowy, wywołanie do serwera może się nie powieść, ponieważ token został odwołany przez użytkownika.</span><span class="sxs-lookup"><span data-stu-id="33b1b-193">Even if the client has a token that seems to be valid, the call to the server might fail because the token was revoked by the user.</span></span>
 
-<span data-ttu-id="a52dd-186">Gdy aplikacja żąda tokenu, istnieją dwa możliwe wyniki:</span><span class="sxs-lookup"><span data-stu-id="a52dd-186">When the app requests a token, there are two possible outcomes:</span></span>
+<span data-ttu-id="33b1b-194">Gdy aplikacja żąda tokenu, istnieją dwa możliwe wyniki:</span><span class="sxs-lookup"><span data-stu-id="33b1b-194">When the app requests a token, there are two possible outcomes:</span></span>
 
-* <span data-ttu-id="a52dd-187">Żądanie powiodło się, a aplikacja ma prawidłowy token.</span><span class="sxs-lookup"><span data-stu-id="a52dd-187">The request succeeds, and the app has a valid token.</span></span>
-* <span data-ttu-id="a52dd-188">Żądanie nie powiedzie się, a aplikacja musi ponownie uwierzytelnić użytkownika w celu uzyskania nowego tokenu.</span><span class="sxs-lookup"><span data-stu-id="a52dd-188">The request fails, and the app must authenticate the user again to obtain a new token.</span></span>
+* <span data-ttu-id="33b1b-195">Żądanie powiodło się, a aplikacja ma prawidłowy token.</span><span class="sxs-lookup"><span data-stu-id="33b1b-195">The request succeeds, and the app has a valid token.</span></span>
+* <span data-ttu-id="33b1b-196">Żądanie nie powiedzie się, a aplikacja musi ponownie uwierzytelnić użytkownika w celu uzyskania nowego tokenu.</span><span class="sxs-lookup"><span data-stu-id="33b1b-196">The request fails, and the app must authenticate the user again to obtain a new token.</span></span>
 
-<span data-ttu-id="a52dd-189">Gdy żądanie tokenu nie powiedzie się, należy zdecydować, czy chcesz zapisać dowolny bieżący stan przed przeprowadzeniem przekierowania.</span><span class="sxs-lookup"><span data-stu-id="a52dd-189">When a token request fails, you need to decide whether you want to save any current state before you perform a redirection.</span></span> <span data-ttu-id="a52dd-190">Istnieją różne podejścia z rosnącymi poziomami złożoności:</span><span class="sxs-lookup"><span data-stu-id="a52dd-190">Several approaches exist with increasing levels of complexity:</span></span>
+<span data-ttu-id="33b1b-197">Gdy żądanie tokenu nie powiedzie się, należy zdecydować, czy chcesz zapisać dowolny bieżący stan przed przeprowadzeniem przekierowania.</span><span class="sxs-lookup"><span data-stu-id="33b1b-197">When a token request fails, you need to decide whether you want to save any current state before you perform a redirection.</span></span> <span data-ttu-id="33b1b-198">Istnieją różne podejścia z rosnącymi poziomami złożoności:</span><span class="sxs-lookup"><span data-stu-id="33b1b-198">Several approaches exist with increasing levels of complexity:</span></span>
 
-* <span data-ttu-id="a52dd-191">Przechowuj bieżący stan strony w magazynie sesji.</span><span class="sxs-lookup"><span data-stu-id="a52dd-191">Store the current page state in session storage.</span></span> <span data-ttu-id="a52dd-192">Przed kontynuowaniem sprawdź, czy w ramach [zdarzenia cyklu życia OnInitializedAsync](xref:blazor/lifecycle#component-initialization-methods) ( <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> ) można przywrócić stan.</span><span class="sxs-lookup"><span data-stu-id="a52dd-192">During the [OnInitializedAsync lifecycle event](xref:blazor/lifecycle#component-initialization-methods) (<xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>), check if state can be restored before continuing.</span></span>
-* <span data-ttu-id="a52dd-193">Dodaj parametr ciągu zapytania i użyj go jako sposobu sygnalizowania aplikacji, którą potrzebuje do ponownego zapisu wcześniej zapisanego stanu.</span><span class="sxs-lookup"><span data-stu-id="a52dd-193">Add a query string parameter and use that as a way to signal the app that it needs to re-hydrate the previously saved state.</span></span>
-* <span data-ttu-id="a52dd-194">Dodaj parametr ciągu zapytania z unikatowym identyfikatorem w celu przechowywania danych w magazynie sesji bez ryzyka kolizji z innymi elementami.</span><span class="sxs-lookup"><span data-stu-id="a52dd-194">Add a query string parameter with a unique identifier to store data in session storage without risking collisions with other items.</span></span>
+* <span data-ttu-id="33b1b-199">Przechowuj bieżący stan strony w magazynie sesji.</span><span class="sxs-lookup"><span data-stu-id="33b1b-199">Store the current page state in session storage.</span></span> <span data-ttu-id="33b1b-200">Przed kontynuowaniem sprawdź, czy w ramach [zdarzenia cyklu życia OnInitializedAsync](xref:blazor/lifecycle#component-initialization-methods) ( <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> ) można przywrócić stan.</span><span class="sxs-lookup"><span data-stu-id="33b1b-200">During the [OnInitializedAsync lifecycle event](xref:blazor/lifecycle#component-initialization-methods) (<xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>), check if state can be restored before continuing.</span></span>
+* <span data-ttu-id="33b1b-201">Dodaj parametr ciągu zapytania i użyj go jako sposobu sygnalizowania aplikacji, którą potrzebuje do ponownego zapisu wcześniej zapisanego stanu.</span><span class="sxs-lookup"><span data-stu-id="33b1b-201">Add a query string parameter and use that as a way to signal the app that it needs to re-hydrate the previously saved state.</span></span>
+* <span data-ttu-id="33b1b-202">Dodaj parametr ciągu zapytania z unikatowym identyfikatorem w celu przechowywania danych w magazynie sesji bez ryzyka kolizji z innymi elementami.</span><span class="sxs-lookup"><span data-stu-id="33b1b-202">Add a query string parameter with a unique identifier to store data in session storage without risking collisions with other items.</span></span>
 
-<span data-ttu-id="a52dd-195">Poniższy przykład pokazuje, jak:</span><span class="sxs-lookup"><span data-stu-id="a52dd-195">The following example shows how to:</span></span>
+<span data-ttu-id="33b1b-203">Poniższy przykład pokazuje, jak:</span><span class="sxs-lookup"><span data-stu-id="33b1b-203">The following example shows how to:</span></span>
 
-* <span data-ttu-id="a52dd-196">Zachowaj stan przed przekierowaniem do strony logowania.</span><span class="sxs-lookup"><span data-stu-id="a52dd-196">Preserve state before redirecting to the login page.</span></span>
-* <span data-ttu-id="a52dd-197">Odzyskaj poprzedni stan, a następnie Uwierzytelnij przy użyciu parametru ciągu zapytania.</span><span class="sxs-lookup"><span data-stu-id="a52dd-197">Recover the previous state afterward authentication using the query string parameter.</span></span>
+* <span data-ttu-id="33b1b-204">Zachowaj stan przed przekierowaniem do strony logowania.</span><span class="sxs-lookup"><span data-stu-id="33b1b-204">Preserve state before redirecting to the login page.</span></span>
+* <span data-ttu-id="33b1b-205">Odzyskaj poprzedni stan, a następnie Uwierzytelnij przy użyciu parametru ciągu zapytania.</span><span class="sxs-lookup"><span data-stu-id="33b1b-205">Recover the previous state afterward authentication using the query string parameter.</span></span>
 
 ```razor
 <EditForm Model="User" @onsubmit="OnSaveAsync">
@@ -438,11 +508,11 @@ app.UseCors(policy =>
 }
 ```
 
-## <a name="save-app-state-before-an-authentication-operation"></a><span data-ttu-id="a52dd-198">Zapisz stan aplikacji przed operacją uwierzytelniania</span><span class="sxs-lookup"><span data-stu-id="a52dd-198">Save app state before an authentication operation</span></span>
+## <a name="save-app-state-before-an-authentication-operation"></a><span data-ttu-id="33b1b-206">Zapisz stan aplikacji przed operacją uwierzytelniania</span><span class="sxs-lookup"><span data-stu-id="33b1b-206">Save app state before an authentication operation</span></span>
 
-<span data-ttu-id="a52dd-199">Podczas operacji uwierzytelniania istnieją przypadki, w których chcesz zapisać stan aplikacji przed przekierowaniem przeglądarki do adresu IP.</span><span class="sxs-lookup"><span data-stu-id="a52dd-199">During an authentication operation, there are cases where you want to save the app state before the browser is redirected to the IP.</span></span> <span data-ttu-id="a52dd-200">Taka sytuacja może wystąpić w przypadku korzystania z takiego elementu jak kontenera stanu i przywrócenia stanu po pomyślnym uwierzytelnieniu.</span><span class="sxs-lookup"><span data-stu-id="a52dd-200">This can be the case when you are using something like a state container and you want to restore the state after the authentication succeeds.</span></span> <span data-ttu-id="a52dd-201">Możesz użyć niestandardowego obiektu stanu uwierzytelniania, aby zachować stan specyficzny dla aplikacji lub odwołanie do niego, a następnie przywrócić ten stan po pomyślnym ukończeniu operacji uwierzytelniania.</span><span class="sxs-lookup"><span data-stu-id="a52dd-201">You can use a custom authentication state object to preserve app-specific state or a reference to it and restore that state once the authentication operation successfully completes.</span></span>
+<span data-ttu-id="33b1b-207">Podczas operacji uwierzytelniania istnieją przypadki, w których chcesz zapisać stan aplikacji przed przekierowaniem przeglądarki do adresu IP.</span><span class="sxs-lookup"><span data-stu-id="33b1b-207">During an authentication operation, there are cases where you want to save the app state before the browser is redirected to the IP.</span></span> <span data-ttu-id="33b1b-208">Taka sytuacja może wystąpić w przypadku korzystania z takiego elementu jak kontenera stanu i przywrócenia stanu po pomyślnym uwierzytelnieniu.</span><span class="sxs-lookup"><span data-stu-id="33b1b-208">This can be the case when you are using something like a state container and you want to restore the state after the authentication succeeds.</span></span> <span data-ttu-id="33b1b-209">Możesz użyć niestandardowego obiektu stanu uwierzytelniania, aby zachować stan specyficzny dla aplikacji lub odwołanie do niego, a następnie przywrócić ten stan po pomyślnym ukończeniu operacji uwierzytelniania.</span><span class="sxs-lookup"><span data-stu-id="33b1b-209">You can use a custom authentication state object to preserve app-specific state or a reference to it and restore that state once the authentication operation successfully completes.</span></span>
 
-<span data-ttu-id="a52dd-202">`Authentication`składnik (*strony/uwierzytelnianie. Razor*):</span><span class="sxs-lookup"><span data-stu-id="a52dd-202">`Authentication` component (*Pages/Authentication.razor*):</span></span>
+<span data-ttu-id="33b1b-210">`Authentication`składnik (*strony/uwierzytelnianie. Razor*):</span><span class="sxs-lookup"><span data-stu-id="33b1b-210">`Authentication` component (*Pages/Authentication.razor*):</span></span>
 
 ```razor
 @page "/authentication/{action}"
@@ -486,152 +556,27 @@ app.UseCors(policy =>
 }
 ```
 
-## <a name="customize-app-routes"></a><span data-ttu-id="a52dd-203">Dostosowywanie tras aplikacji</span><span class="sxs-lookup"><span data-stu-id="a52dd-203">Customize app routes</span></span>
+## <a name="customize-app-routes"></a><span data-ttu-id="33b1b-211">Dostosowywanie tras aplikacji</span><span class="sxs-lookup"><span data-stu-id="33b1b-211">Customize app routes</span></span>
 
-<span data-ttu-id="a52dd-204">Domyślnie Biblioteka [Microsoft. AspNetCore. Components. webassembly. Authentication](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) używa tras przedstawionych w poniższej tabeli w celu reprezentowania różnych stanów uwierzytelniania.</span><span class="sxs-lookup"><span data-stu-id="a52dd-204">By default, the [Microsoft.AspNetCore.Components.WebAssembly.Authentication](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) library uses the routes shown in the following table for representing different authentication states.</span></span>
+<span data-ttu-id="33b1b-212">Domyślnie Biblioteka [Microsoft. AspNetCore. Components. webassembly. Authentication](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) używa tras przedstawionych w poniższej tabeli w celu reprezentowania różnych stanów uwierzytelniania.</span><span class="sxs-lookup"><span data-stu-id="33b1b-212">By default, the [Microsoft.AspNetCore.Components.WebAssembly.Authentication](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) library uses the routes shown in the following table for representing different authentication states.</span></span>
 
-| <span data-ttu-id="a52dd-205">Trasa</span><span class="sxs-lookup"><span data-stu-id="a52dd-205">Route</span></span>                            | <span data-ttu-id="a52dd-206">Przeznaczenie</span><span class="sxs-lookup"><span data-stu-id="a52dd-206">Purpose</span></span> |
-| ---
-<span data-ttu-id="a52dd-207">title: "ASP.NET Core Blazor webassembly — dodatkowe scenariusze zabezpieczeń" autor: Opis: "Dowiedz się, jak skonfigurować Blazor zestaw webassembly pod kątem dodatkowych scenariuszy zabezpieczeń".</span><span class="sxs-lookup"><span data-stu-id="a52dd-207">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
-<span data-ttu-id="a52dd-208">monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="a52dd-208">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="a52dd-209">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-209">'Blazor'</span></span>
-- <span data-ttu-id="a52dd-210">'Identity'</span><span class="sxs-lookup"><span data-stu-id="a52dd-210">'Identity'</span></span>
-- <span data-ttu-id="a52dd-211">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="a52dd-211">'Let's Encrypt'</span></span>
-- <span data-ttu-id="a52dd-212">'Razor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-212">'Razor'</span></span>
-- <span data-ttu-id="a52dd-213">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="a52dd-213">'SignalR' uid:</span></span> 
+| <span data-ttu-id="33b1b-213">Trasa</span><span class="sxs-lookup"><span data-stu-id="33b1b-213">Route</span></span>                            | <span data-ttu-id="33b1b-214">Przeznaczenie</span><span class="sxs-lookup"><span data-stu-id="33b1b-214">Purpose</span></span> |
+| -------------------------------- | ------- |
+| `authentication/login`           | <span data-ttu-id="33b1b-215">Wyzwala operację logowania.</span><span class="sxs-lookup"><span data-stu-id="33b1b-215">Triggers a sign-in operation.</span></span> |
+| `authentication/login-callback`  | <span data-ttu-id="33b1b-216">Obsługuje wynik operacji logowania.</span><span class="sxs-lookup"><span data-stu-id="33b1b-216">Handles the result of any sign-in operation.</span></span> |
+| `authentication/login-failed`    | <span data-ttu-id="33b1b-217">Wyświetla komunikaty o błędach, gdy operacja logowania zakończy się niepowodzeniem z jakiegoś powodu.</span><span class="sxs-lookup"><span data-stu-id="33b1b-217">Displays error messages when the sign-in operation fails for some reason.</span></span> |
+| `authentication/logout`          | <span data-ttu-id="33b1b-218">Wyzwala operację wylogowania.</span><span class="sxs-lookup"><span data-stu-id="33b1b-218">Triggers a sign-out operation.</span></span> |
+| `authentication/logout-callback` | <span data-ttu-id="33b1b-219">Obsługuje wynik operacji wylogowania.</span><span class="sxs-lookup"><span data-stu-id="33b1b-219">Handles the result of a sign-out operation.</span></span> |
+| `authentication/logout-failed`   | <span data-ttu-id="33b1b-220">Wyświetla komunikaty o błędach, gdy operacja wylogowania nie powiedzie się z jakiegoś powodu.</span><span class="sxs-lookup"><span data-stu-id="33b1b-220">Displays error messages when the sign-out operation fails for some reason.</span></span> |
+| `authentication/logged-out`      | <span data-ttu-id="33b1b-221">Wskazuje, że użytkownik pomyślnie wylogować się.</span><span class="sxs-lookup"><span data-stu-id="33b1b-221">Indicates that the user has successfully logout.</span></span> |
+| `authentication/profile`         | <span data-ttu-id="33b1b-222">Wyzwala operację edytowania profilu użytkownika.</span><span class="sxs-lookup"><span data-stu-id="33b1b-222">Triggers an operation to edit the user profile.</span></span> |
+| `authentication/register`        | <span data-ttu-id="33b1b-223">Wyzwala operację w celu zarejestrowania nowego użytkownika.</span><span class="sxs-lookup"><span data-stu-id="33b1b-223">Triggers an operation to register a new user.</span></span> |
 
--
-<span data-ttu-id="a52dd-214">title: "ASP.NET Core Blazor webassembly — dodatkowe scenariusze zabezpieczeń" autor: Opis: "Dowiedz się, jak skonfigurować Blazor zestaw webassembly pod kątem dodatkowych scenariuszy zabezpieczeń".</span><span class="sxs-lookup"><span data-stu-id="a52dd-214">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
-<span data-ttu-id="a52dd-215">monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="a52dd-215">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="a52dd-216">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-216">'Blazor'</span></span>
-- <span data-ttu-id="a52dd-217">'Identity'</span><span class="sxs-lookup"><span data-stu-id="a52dd-217">'Identity'</span></span>
-- <span data-ttu-id="a52dd-218">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="a52dd-218">'Let's Encrypt'</span></span>
-- <span data-ttu-id="a52dd-219">'Razor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-219">'Razor'</span></span>
-- <span data-ttu-id="a52dd-220">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="a52dd-220">'SignalR' uid:</span></span> 
+<span data-ttu-id="33b1b-224">Trasy przedstawione w powyższej tabeli można konfigurować za pośrednictwem programu <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationOptions%601.AuthenticationPaths%2A?displayProperty=nameWithType> .</span><span class="sxs-lookup"><span data-stu-id="33b1b-224">The routes shown in the preceding table are configurable via <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationOptions%601.AuthenticationPaths%2A?displayProperty=nameWithType>.</span></span> <span data-ttu-id="33b1b-225">Podczas ustawiania opcji w celu zapewnienia tras niestandardowych upewnij się, że aplikacja ma trasę obsługującą każdą ścieżkę.</span><span class="sxs-lookup"><span data-stu-id="33b1b-225">When setting options to provide custom routes, confirm that the app has a route that handles each path.</span></span>
 
--
-<span data-ttu-id="a52dd-221">title: "ASP.NET Core Blazor webassembly — dodatkowe scenariusze zabezpieczeń" autor: Opis: "Dowiedz się, jak skonfigurować Blazor zestaw webassembly pod kątem dodatkowych scenariuszy zabezpieczeń".</span><span class="sxs-lookup"><span data-stu-id="a52dd-221">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
-<span data-ttu-id="a52dd-222">monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="a52dd-222">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="a52dd-223">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-223">'Blazor'</span></span>
-- <span data-ttu-id="a52dd-224">'Identity'</span><span class="sxs-lookup"><span data-stu-id="a52dd-224">'Identity'</span></span>
-- <span data-ttu-id="a52dd-225">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="a52dd-225">'Let's Encrypt'</span></span>
-- <span data-ttu-id="a52dd-226">'Razor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-226">'Razor'</span></span>
-- <span data-ttu-id="a52dd-227">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="a52dd-227">'SignalR' uid:</span></span> 
+<span data-ttu-id="33b1b-226">W poniższym przykładzie wszystkie ścieżki są poprzedzone prefiksem `/security` .</span><span class="sxs-lookup"><span data-stu-id="33b1b-226">In the following example, all the paths are prefixed with `/security`.</span></span>
 
--
-<span data-ttu-id="a52dd-228">title: "ASP.NET Core Blazor webassembly — dodatkowe scenariusze zabezpieczeń" autor: Opis: "Dowiedz się, jak skonfigurować Blazor zestaw webassembly pod kątem dodatkowych scenariuszy zabezpieczeń".</span><span class="sxs-lookup"><span data-stu-id="a52dd-228">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
-<span data-ttu-id="a52dd-229">monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="a52dd-229">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="a52dd-230">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-230">'Blazor'</span></span>
-- <span data-ttu-id="a52dd-231">'Identity'</span><span class="sxs-lookup"><span data-stu-id="a52dd-231">'Identity'</span></span>
-- <span data-ttu-id="a52dd-232">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="a52dd-232">'Let's Encrypt'</span></span>
-- <span data-ttu-id="a52dd-233">'Razor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-233">'Razor'</span></span>
-- <span data-ttu-id="a52dd-234">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="a52dd-234">'SignalR' uid:</span></span> 
-
--
-<span data-ttu-id="a52dd-235">title: "ASP.NET Core Blazor webassembly — dodatkowe scenariusze zabezpieczeń" autor: Opis: "Dowiedz się, jak skonfigurować Blazor zestaw webassembly pod kątem dodatkowych scenariuszy zabezpieczeń".</span><span class="sxs-lookup"><span data-stu-id="a52dd-235">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
-<span data-ttu-id="a52dd-236">monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="a52dd-236">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="a52dd-237">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-237">'Blazor'</span></span>
-- <span data-ttu-id="a52dd-238">'Identity'</span><span class="sxs-lookup"><span data-stu-id="a52dd-238">'Identity'</span></span>
-- <span data-ttu-id="a52dd-239">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="a52dd-239">'Let's Encrypt'</span></span>
-- <span data-ttu-id="a52dd-240">'Razor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-240">'Razor'</span></span>
-- <span data-ttu-id="a52dd-241">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="a52dd-241">'SignalR' uid:</span></span> 
-
--
-<span data-ttu-id="a52dd-242">title: "ASP.NET Core Blazor webassembly — dodatkowe scenariusze zabezpieczeń" autor: Opis: "Dowiedz się, jak skonfigurować Blazor zestaw webassembly pod kątem dodatkowych scenariuszy zabezpieczeń".</span><span class="sxs-lookup"><span data-stu-id="a52dd-242">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
-<span data-ttu-id="a52dd-243">monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="a52dd-243">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="a52dd-244">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-244">'Blazor'</span></span>
-- <span data-ttu-id="a52dd-245">'Identity'</span><span class="sxs-lookup"><span data-stu-id="a52dd-245">'Identity'</span></span>
-- <span data-ttu-id="a52dd-246">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="a52dd-246">'Let's Encrypt'</span></span>
-- <span data-ttu-id="a52dd-247">'Razor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-247">'Razor'</span></span>
-- <span data-ttu-id="a52dd-248">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="a52dd-248">'SignalR' uid:</span></span> 
-
--
-<span data-ttu-id="a52dd-249">title: "ASP.NET Core Blazor webassembly — dodatkowe scenariusze zabezpieczeń" autor: Opis: "Dowiedz się, jak skonfigurować Blazor zestaw webassembly pod kątem dodatkowych scenariuszy zabezpieczeń".</span><span class="sxs-lookup"><span data-stu-id="a52dd-249">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
-<span data-ttu-id="a52dd-250">monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="a52dd-250">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="a52dd-251">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-251">'Blazor'</span></span>
-- <span data-ttu-id="a52dd-252">'Identity'</span><span class="sxs-lookup"><span data-stu-id="a52dd-252">'Identity'</span></span>
-- <span data-ttu-id="a52dd-253">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="a52dd-253">'Let's Encrypt'</span></span>
-- <span data-ttu-id="a52dd-254">'Razor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-254">'Razor'</span></span>
-- <span data-ttu-id="a52dd-255">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="a52dd-255">'SignalR' uid:</span></span> 
-
--
-<span data-ttu-id="a52dd-256">title: "ASP.NET Core Blazor webassembly — dodatkowe scenariusze zabezpieczeń" autor: Opis: "Dowiedz się, jak skonfigurować Blazor zestaw webassembly pod kątem dodatkowych scenariuszy zabezpieczeń".</span><span class="sxs-lookup"><span data-stu-id="a52dd-256">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
-<span data-ttu-id="a52dd-257">monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="a52dd-257">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="a52dd-258">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-258">'Blazor'</span></span>
-- <span data-ttu-id="a52dd-259">'Identity'</span><span class="sxs-lookup"><span data-stu-id="a52dd-259">'Identity'</span></span>
-- <span data-ttu-id="a52dd-260">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="a52dd-260">'Let's Encrypt'</span></span>
-- <span data-ttu-id="a52dd-261">'Razor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-261">'Razor'</span></span>
-- <span data-ttu-id="a52dd-262">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="a52dd-262">'SignalR' uid:</span></span> 
-
--
-<span data-ttu-id="a52dd-263">title: "ASP.NET Core Blazor webassembly — dodatkowe scenariusze zabezpieczeń" autor: Opis: "Dowiedz się, jak skonfigurować Blazor zestaw webassembly pod kątem dodatkowych scenariuszy zabezpieczeń".</span><span class="sxs-lookup"><span data-stu-id="a52dd-263">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
-<span data-ttu-id="a52dd-264">monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="a52dd-264">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="a52dd-265">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-265">'Blazor'</span></span>
-- <span data-ttu-id="a52dd-266">'Identity'</span><span class="sxs-lookup"><span data-stu-id="a52dd-266">'Identity'</span></span>
-- <span data-ttu-id="a52dd-267">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="a52dd-267">'Let's Encrypt'</span></span>
-- <span data-ttu-id="a52dd-268">'Razor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-268">'Razor'</span></span>
-- <span data-ttu-id="a52dd-269">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="a52dd-269">'SignalR' uid:</span></span> 
-
--
-<span data-ttu-id="a52dd-270">title: "ASP.NET Core Blazor webassembly — dodatkowe scenariusze zabezpieczeń" autor: Opis: "Dowiedz się, jak skonfigurować Blazor zestaw webassembly pod kątem dodatkowych scenariuszy zabezpieczeń".</span><span class="sxs-lookup"><span data-stu-id="a52dd-270">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
-<span data-ttu-id="a52dd-271">monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="a52dd-271">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="a52dd-272">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-272">'Blazor'</span></span>
-- <span data-ttu-id="a52dd-273">'Identity'</span><span class="sxs-lookup"><span data-stu-id="a52dd-273">'Identity'</span></span>
-- <span data-ttu-id="a52dd-274">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="a52dd-274">'Let's Encrypt'</span></span>
-- <span data-ttu-id="a52dd-275">'Razor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-275">'Razor'</span></span>
-- <span data-ttu-id="a52dd-276">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="a52dd-276">'SignalR' uid:</span></span> 
-
--
-<span data-ttu-id="a52dd-277">title: "ASP.NET Core Blazor webassembly — dodatkowe scenariusze zabezpieczeń" autor: Opis: "Dowiedz się, jak skonfigurować Blazor zestaw webassembly pod kątem dodatkowych scenariuszy zabezpieczeń".</span><span class="sxs-lookup"><span data-stu-id="a52dd-277">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
-<span data-ttu-id="a52dd-278">monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="a52dd-278">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="a52dd-279">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-279">'Blazor'</span></span>
-- <span data-ttu-id="a52dd-280">'Identity'</span><span class="sxs-lookup"><span data-stu-id="a52dd-280">'Identity'</span></span>
-- <span data-ttu-id="a52dd-281">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="a52dd-281">'Let's Encrypt'</span></span>
-- <span data-ttu-id="a52dd-282">'Razor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-282">'Razor'</span></span>
-- <span data-ttu-id="a52dd-283">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="a52dd-283">'SignalR' uid:</span></span> 
-
--
-<span data-ttu-id="a52dd-284">title: "ASP.NET Core Blazor webassembly — dodatkowe scenariusze zabezpieczeń" autor: Opis: "Dowiedz się, jak skonfigurować Blazor zestaw webassembly pod kątem dodatkowych scenariuszy zabezpieczeń".</span><span class="sxs-lookup"><span data-stu-id="a52dd-284">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
-<span data-ttu-id="a52dd-285">monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="a52dd-285">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="a52dd-286">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-286">'Blazor'</span></span>
-- <span data-ttu-id="a52dd-287">'Identity'</span><span class="sxs-lookup"><span data-stu-id="a52dd-287">'Identity'</span></span>
-- <span data-ttu-id="a52dd-288">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="a52dd-288">'Let's Encrypt'</span></span>
-- <span data-ttu-id="a52dd-289">'Razor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-289">'Razor'</span></span>
-- <span data-ttu-id="a52dd-290">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="a52dd-290">'SignalR' uid:</span></span> 
-
--
-<span data-ttu-id="a52dd-291">title: "ASP.NET Core Blazor webassembly — dodatkowe scenariusze zabezpieczeń" autor: Opis: "Dowiedz się, jak skonfigurować Blazor zestaw webassembly pod kątem dodatkowych scenariuszy zabezpieczeń".</span><span class="sxs-lookup"><span data-stu-id="a52dd-291">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
-<span data-ttu-id="a52dd-292">monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="a52dd-292">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="a52dd-293">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-293">'Blazor'</span></span>
-- <span data-ttu-id="a52dd-294">'Identity'</span><span class="sxs-lookup"><span data-stu-id="a52dd-294">'Identity'</span></span>
-- <span data-ttu-id="a52dd-295">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="a52dd-295">'Let's Encrypt'</span></span>
-- <span data-ttu-id="a52dd-296">'Razor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-296">'Razor'</span></span>
-- <span data-ttu-id="a52dd-297">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="a52dd-297">'SignalR' uid:</span></span> 
-
--
-<span data-ttu-id="a52dd-298">title: "ASP.NET Core Blazor webassembly — dodatkowe scenariusze zabezpieczeń" autor: Opis: "Dowiedz się, jak skonfigurować Blazor zestaw webassembly pod kątem dodatkowych scenariuszy zabezpieczeń".</span><span class="sxs-lookup"><span data-stu-id="a52dd-298">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
-<span data-ttu-id="a52dd-299">monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="a52dd-299">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="a52dd-300">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-300">'Blazor'</span></span>
-- <span data-ttu-id="a52dd-301">'Identity'</span><span class="sxs-lookup"><span data-stu-id="a52dd-301">'Identity'</span></span>
-- <span data-ttu-id="a52dd-302">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="a52dd-302">'Let's Encrypt'</span></span>
-- <span data-ttu-id="a52dd-303">'Razor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-303">'Razor'</span></span>
-- <span data-ttu-id="a52dd-304">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="a52dd-304">'SignalR' uid:</span></span> 
-
-<span data-ttu-id="a52dd-305">---------------- | ---title: "ASP.NET Core elementu Blazor webassembly dodatkowe scenariusze zabezpieczeń" Author: Description: "informacje o konfigurowaniu Blazor zestawu webassembly w celu uzyskania dodatkowych scenariuszy zabezpieczeń".</span><span class="sxs-lookup"><span data-stu-id="a52dd-305">---------------- | --- title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
-<span data-ttu-id="a52dd-306">monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="a52dd-306">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="a52dd-307">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-307">'Blazor'</span></span>
-- <span data-ttu-id="a52dd-308">'Identity'</span><span class="sxs-lookup"><span data-stu-id="a52dd-308">'Identity'</span></span>
-- <span data-ttu-id="a52dd-309">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="a52dd-309">'Let's Encrypt'</span></span>
-- <span data-ttu-id="a52dd-310">'Razor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-310">'Razor'</span></span>
-- <span data-ttu-id="a52dd-311">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="a52dd-311">'SignalR' uid:</span></span> 
-
-<span data-ttu-id="a52dd-312">---- | | `authentication/login`           | Wyzwala operację logowania.</span><span class="sxs-lookup"><span data-stu-id="a52dd-312">---- | | `authentication/login`           | Triggers a sign-in operation.</span></span> <span data-ttu-id="a52dd-313">| | `authentication/login-callback`  | Obsługuje wynik operacji logowania.</span><span class="sxs-lookup"><span data-stu-id="a52dd-313">| | `authentication/login-callback`  | Handles the result of any sign-in operation.</span></span> <span data-ttu-id="a52dd-314">| | `authentication/login-failed`    | Wyświetla komunikaty o błędach, gdy operacja logowania zakończy się niepowodzeniem z jakiegoś powodu.</span><span class="sxs-lookup"><span data-stu-id="a52dd-314">| | `authentication/login-failed`    | Displays error messages when the sign-in operation fails for some reason.</span></span> <span data-ttu-id="a52dd-315">| | `authentication/logout`          | Wyzwala operację wylogowania.</span><span class="sxs-lookup"><span data-stu-id="a52dd-315">| | `authentication/logout`          | Triggers a sign-out operation.</span></span> <span data-ttu-id="a52dd-316">| | `authentication/logout-callback` | Obsługuje wynik operacji wylogowania.</span><span class="sxs-lookup"><span data-stu-id="a52dd-316">| | `authentication/logout-callback` | Handles the result of a sign-out operation.</span></span> <span data-ttu-id="a52dd-317">| | `authentication/logout-failed`   | Wyświetla komunikaty o błędach, gdy operacja wylogowania nie powiedzie się z jakiegoś powodu.</span><span class="sxs-lookup"><span data-stu-id="a52dd-317">| | `authentication/logout-failed`   | Displays error messages when the sign-out operation fails for some reason.</span></span> <span data-ttu-id="a52dd-318">| | `authentication/logged-out`      | Wskazuje, że użytkownik pomyślnie wylogować się.</span><span class="sxs-lookup"><span data-stu-id="a52dd-318">| | `authentication/logged-out`      | Indicates that the user has successfully logout.</span></span> <span data-ttu-id="a52dd-319">| | `authentication/profile`         | Wyzwala operację edytowania profilu użytkownika.</span><span class="sxs-lookup"><span data-stu-id="a52dd-319">| | `authentication/profile`         | Triggers an operation to edit the user profile.</span></span> <span data-ttu-id="a52dd-320">| | `authentication/register`        | Wyzwala operację w celu zarejestrowania nowego użytkownika.</span><span class="sxs-lookup"><span data-stu-id="a52dd-320">| | `authentication/register`        | Triggers an operation to register a new user.</span></span> |
-
-<span data-ttu-id="a52dd-321">Trasy przedstawione w powyższej tabeli można konfigurować za pośrednictwem programu <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationOptions%601.AuthenticationPaths%2A?displayProperty=nameWithType> .</span><span class="sxs-lookup"><span data-stu-id="a52dd-321">The routes shown in the preceding table are configurable via <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationOptions%601.AuthenticationPaths%2A?displayProperty=nameWithType>.</span></span> <span data-ttu-id="a52dd-322">Podczas ustawiania opcji w celu zapewnienia tras niestandardowych upewnij się, że aplikacja ma trasę obsługującą każdą ścieżkę.</span><span class="sxs-lookup"><span data-stu-id="a52dd-322">When setting options to provide custom routes, confirm that the app has a route that handles each path.</span></span>
-
-<span data-ttu-id="a52dd-323">W poniższym przykładzie wszystkie ścieżki są poprzedzone prefiksem `/security` .</span><span class="sxs-lookup"><span data-stu-id="a52dd-323">In the following example, all the paths are prefixed with `/security`.</span></span>
-
-<span data-ttu-id="a52dd-324">`Authentication`składnik (*strony/uwierzytelnianie. Razor*):</span><span class="sxs-lookup"><span data-stu-id="a52dd-324">`Authentication` component (*Pages/Authentication.razor*):</span></span>
+<span data-ttu-id="33b1b-227">`Authentication`składnik (*strony/uwierzytelnianie. Razor*):</span><span class="sxs-lookup"><span data-stu-id="33b1b-227">`Authentication` component (*Pages/Authentication.razor*):</span></span>
 
 ```razor
 @page "/security/{action}"
@@ -645,7 +590,7 @@ app.UseCors(policy =>
 }
 ```
 
-<span data-ttu-id="a52dd-325">`Program.Main`(*Program.cs*):</span><span class="sxs-lookup"><span data-stu-id="a52dd-325">`Program.Main` (*Program.cs*):</span></span>
+<span data-ttu-id="33b1b-228">`Program.Main`(*Program.cs*):</span><span class="sxs-lookup"><span data-stu-id="33b1b-228">`Program.Main` (*Program.cs*):</span></span>
 
 ```csharp
 builder.Services.AddApiAuthorization(options => { 
@@ -661,7 +606,7 @@ builder.Services.AddApiAuthorization(options => {
 });
 ```
 
-<span data-ttu-id="a52dd-326">Jeśli wymaganie wywołuje całkowicie różne ścieżki, należy ustawić trasy zgodnie z wcześniejszym opisem i renderować <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView> parametr z jawnym akcją:</span><span class="sxs-lookup"><span data-stu-id="a52dd-326">If the requirement calls for completely different paths, set the routes as described previously and render the <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView> with an explicit action parameter:</span></span>
+<span data-ttu-id="33b1b-229">Jeśli wymaganie wywołuje całkowicie różne ścieżki, należy ustawić trasy zgodnie z wcześniejszym opisem i renderować <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView> parametr z jawnym akcją:</span><span class="sxs-lookup"><span data-stu-id="33b1b-229">If the requirement calls for completely different paths, set the routes as described previously and render the <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView> with an explicit action parameter:</span></span>
 
 ```razor
 @page "/register"
@@ -669,13 +614,13 @@ builder.Services.AddApiAuthorization(options => {
 <RemoteAuthenticatorView Action="@RemoteAuthenticationActions.Register" />
 ```
 
-<span data-ttu-id="a52dd-327">Jeśli zdecydujesz się to zrobić, możesz przerwać interfejs użytkownika na różnych stronach.</span><span class="sxs-lookup"><span data-stu-id="a52dd-327">You're allowed to break the UI into different pages if you choose to do so.</span></span>
+<span data-ttu-id="33b1b-230">Jeśli zdecydujesz się to zrobić, możesz przerwać interfejs użytkownika na różnych stronach.</span><span class="sxs-lookup"><span data-stu-id="33b1b-230">You're allowed to break the UI into different pages if you choose to do so.</span></span>
 
-## <a name="customize-the-authentication-user-interface"></a><span data-ttu-id="a52dd-328">Dostosowywanie interfejsu użytkownika uwierzytelniania</span><span class="sxs-lookup"><span data-stu-id="a52dd-328">Customize the authentication user interface</span></span>
+## <a name="customize-the-authentication-user-interface"></a><span data-ttu-id="33b1b-231">Dostosowywanie interfejsu użytkownika uwierzytelniania</span><span class="sxs-lookup"><span data-stu-id="33b1b-231">Customize the authentication user interface</span></span>
 
-<span data-ttu-id="a52dd-329"><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView>zawiera domyślny zestaw elementów interfejsu użytkownika dla każdego stanu uwierzytelniania.</span><span class="sxs-lookup"><span data-stu-id="a52dd-329"><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView> includes a default set of UI pieces for each authentication state.</span></span> <span data-ttu-id="a52dd-330">Każdy stan można dostosować, przekazując element niestandardowe <xref:Microsoft.AspNetCore.Components.RenderFragment> .</span><span class="sxs-lookup"><span data-stu-id="a52dd-330">Each state can be customized by passing in a custom <xref:Microsoft.AspNetCore.Components.RenderFragment>.</span></span> <span data-ttu-id="a52dd-331">Aby dostosować wyświetlany tekst podczas początkowego procesu logowania, można zmienić w <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView> następujący sposób.</span><span class="sxs-lookup"><span data-stu-id="a52dd-331">To customize the displayed text during the initial login process, can change the <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView> as follows.</span></span>
+<span data-ttu-id="33b1b-232"><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView>zawiera domyślny zestaw elementów interfejsu użytkownika dla każdego stanu uwierzytelniania.</span><span class="sxs-lookup"><span data-stu-id="33b1b-232"><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView> includes a default set of UI pieces for each authentication state.</span></span> <span data-ttu-id="33b1b-233">Każdy stan można dostosować, przekazując element niestandardowe <xref:Microsoft.AspNetCore.Components.RenderFragment> .</span><span class="sxs-lookup"><span data-stu-id="33b1b-233">Each state can be customized by passing in a custom <xref:Microsoft.AspNetCore.Components.RenderFragment>.</span></span> <span data-ttu-id="33b1b-234">Aby dostosować wyświetlany tekst podczas początkowego procesu logowania, można zmienić w <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView> następujący sposób.</span><span class="sxs-lookup"><span data-stu-id="33b1b-234">To customize the displayed text during the initial login process, can change the <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView> as follows.</span></span>
 
-<span data-ttu-id="a52dd-332">`Authentication`składnik (*strony/uwierzytelnianie. Razor*):</span><span class="sxs-lookup"><span data-stu-id="a52dd-332">`Authentication` component (*Pages/Authentication.razor*):</span></span>
+<span data-ttu-id="33b1b-235">`Authentication`składnik (*strony/uwierzytelnianie. Razor*):</span><span class="sxs-lookup"><span data-stu-id="33b1b-235">`Authentication` component (*Pages/Authentication.razor*):</span></span>
 
 ```razor
 @page "/security/{action}"
@@ -693,222 +638,25 @@ builder.Services.AddApiAuthorization(options => {
 }
 ```
 
-<span data-ttu-id="a52dd-333"><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView>Ma jeden fragment, którego można użyć na trasę uwierzytelniania pokazanym w poniższej tabeli.</span><span class="sxs-lookup"><span data-stu-id="a52dd-333">The <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView> has one fragment that can be used per authentication route shown in the following table.</span></span>
+<span data-ttu-id="33b1b-236"><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView>Ma jeden fragment, którego można użyć na trasę uwierzytelniania pokazanym w poniższej tabeli.</span><span class="sxs-lookup"><span data-stu-id="33b1b-236">The <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView> has one fragment that can be used per authentication route shown in the following table.</span></span>
 
-| <span data-ttu-id="a52dd-334">Trasa</span><span class="sxs-lookup"><span data-stu-id="a52dd-334">Route</span></span>                            | <span data-ttu-id="a52dd-335">Fragment</span><span class="sxs-lookup"><span data-stu-id="a52dd-335">Fragment</span></span>                |
-| ---
-<span data-ttu-id="a52dd-336">title: "ASP.NET Core Blazor webassembly — dodatkowe scenariusze zabezpieczeń" autor: Opis: "Dowiedz się, jak skonfigurować Blazor zestaw webassembly pod kątem dodatkowych scenariuszy zabezpieczeń".</span><span class="sxs-lookup"><span data-stu-id="a52dd-336">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
-<span data-ttu-id="a52dd-337">monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="a52dd-337">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="a52dd-338">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-338">'Blazor'</span></span>
-- <span data-ttu-id="a52dd-339">'Identity'</span><span class="sxs-lookup"><span data-stu-id="a52dd-339">'Identity'</span></span>
-- <span data-ttu-id="a52dd-340">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="a52dd-340">'Let's Encrypt'</span></span>
-- <span data-ttu-id="a52dd-341">'Razor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-341">'Razor'</span></span>
-- <span data-ttu-id="a52dd-342">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="a52dd-342">'SignalR' uid:</span></span> 
+| <span data-ttu-id="33b1b-237">Trasa</span><span class="sxs-lookup"><span data-stu-id="33b1b-237">Route</span></span>                            | <span data-ttu-id="33b1b-238">Fragment</span><span class="sxs-lookup"><span data-stu-id="33b1b-238">Fragment</span></span>                |
+| -------------------------------- | ----------------------- |
+| `authentication/login`           | `<LoggingIn>`           |
+| `authentication/login-callback`  | `<CompletingLoggingIn>` |
+| `authentication/login-failed`    | `<LogInFailed>`         |
+| `authentication/logout`          | `<LogOut>`              |
+| `authentication/logout-callback` | `<CompletingLogOut>`    |
+| `authentication/logout-failed`   | `<LogOutFailed>`        |
+| `authentication/logged-out`      | `<LogOutSucceeded>`     |
+| `authentication/profile`         | `<UserProfile>`         |
+| `authentication/register`        | `<Registering>`         |
 
--
-<span data-ttu-id="a52dd-343">title: "ASP.NET Core Blazor webassembly — dodatkowe scenariusze zabezpieczeń" autor: Opis: "Dowiedz się, jak skonfigurować Blazor zestaw webassembly pod kątem dodatkowych scenariuszy zabezpieczeń".</span><span class="sxs-lookup"><span data-stu-id="a52dd-343">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
-<span data-ttu-id="a52dd-344">monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="a52dd-344">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="a52dd-345">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-345">'Blazor'</span></span>
-- <span data-ttu-id="a52dd-346">'Identity'</span><span class="sxs-lookup"><span data-stu-id="a52dd-346">'Identity'</span></span>
-- <span data-ttu-id="a52dd-347">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="a52dd-347">'Let's Encrypt'</span></span>
-- <span data-ttu-id="a52dd-348">'Razor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-348">'Razor'</span></span>
-- <span data-ttu-id="a52dd-349">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="a52dd-349">'SignalR' uid:</span></span> 
+## <a name="customize-the-user"></a><span data-ttu-id="33b1b-239">Dostosowywanie użytkownika</span><span class="sxs-lookup"><span data-stu-id="33b1b-239">Customize the user</span></span>
 
--
-<span data-ttu-id="a52dd-350">title: "ASP.NET Core Blazor webassembly — dodatkowe scenariusze zabezpieczeń" autor: Opis: "Dowiedz się, jak skonfigurować Blazor zestaw webassembly pod kątem dodatkowych scenariuszy zabezpieczeń".</span><span class="sxs-lookup"><span data-stu-id="a52dd-350">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
-<span data-ttu-id="a52dd-351">monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="a52dd-351">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="a52dd-352">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-352">'Blazor'</span></span>
-- <span data-ttu-id="a52dd-353">'Identity'</span><span class="sxs-lookup"><span data-stu-id="a52dd-353">'Identity'</span></span>
-- <span data-ttu-id="a52dd-354">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="a52dd-354">'Let's Encrypt'</span></span>
-- <span data-ttu-id="a52dd-355">'Razor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-355">'Razor'</span></span>
-- <span data-ttu-id="a52dd-356">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="a52dd-356">'SignalR' uid:</span></span> 
+<span data-ttu-id="33b1b-240">Użytkownicy powiązana z aplikacją mogą być dostosowywać.</span><span class="sxs-lookup"><span data-stu-id="33b1b-240">Users bound to the app can be customized.</span></span> <span data-ttu-id="33b1b-241">W poniższym przykładzie Wszyscy uwierzytelnieni użytkownicy otrzymują `amr` każde z metod uwierzytelniania użytkownika.</span><span class="sxs-lookup"><span data-stu-id="33b1b-241">In the following example, all authenticated users receive an `amr` claim for each of the user's authentication methods.</span></span>
 
--
-<span data-ttu-id="a52dd-357">title: "ASP.NET Core Blazor webassembly — dodatkowe scenariusze zabezpieczeń" autor: Opis: "Dowiedz się, jak skonfigurować Blazor zestaw webassembly pod kątem dodatkowych scenariuszy zabezpieczeń".</span><span class="sxs-lookup"><span data-stu-id="a52dd-357">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
-<span data-ttu-id="a52dd-358">monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="a52dd-358">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="a52dd-359">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-359">'Blazor'</span></span>
-- <span data-ttu-id="a52dd-360">'Identity'</span><span class="sxs-lookup"><span data-stu-id="a52dd-360">'Identity'</span></span>
-- <span data-ttu-id="a52dd-361">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="a52dd-361">'Let's Encrypt'</span></span>
-- <span data-ttu-id="a52dd-362">'Razor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-362">'Razor'</span></span>
-- <span data-ttu-id="a52dd-363">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="a52dd-363">'SignalR' uid:</span></span> 
-
--
-<span data-ttu-id="a52dd-364">title: "ASP.NET Core Blazor webassembly — dodatkowe scenariusze zabezpieczeń" autor: Opis: "Dowiedz się, jak skonfigurować Blazor zestaw webassembly pod kątem dodatkowych scenariuszy zabezpieczeń".</span><span class="sxs-lookup"><span data-stu-id="a52dd-364">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
-<span data-ttu-id="a52dd-365">monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="a52dd-365">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="a52dd-366">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-366">'Blazor'</span></span>
-- <span data-ttu-id="a52dd-367">'Identity'</span><span class="sxs-lookup"><span data-stu-id="a52dd-367">'Identity'</span></span>
-- <span data-ttu-id="a52dd-368">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="a52dd-368">'Let's Encrypt'</span></span>
-- <span data-ttu-id="a52dd-369">'Razor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-369">'Razor'</span></span>
-- <span data-ttu-id="a52dd-370">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="a52dd-370">'SignalR' uid:</span></span> 
-
--
-<span data-ttu-id="a52dd-371">title: "ASP.NET Core Blazor webassembly — dodatkowe scenariusze zabezpieczeń" autor: Opis: "Dowiedz się, jak skonfigurować Blazor zestaw webassembly pod kątem dodatkowych scenariuszy zabezpieczeń".</span><span class="sxs-lookup"><span data-stu-id="a52dd-371">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
-<span data-ttu-id="a52dd-372">monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="a52dd-372">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="a52dd-373">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-373">'Blazor'</span></span>
-- <span data-ttu-id="a52dd-374">'Identity'</span><span class="sxs-lookup"><span data-stu-id="a52dd-374">'Identity'</span></span>
-- <span data-ttu-id="a52dd-375">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="a52dd-375">'Let's Encrypt'</span></span>
-- <span data-ttu-id="a52dd-376">'Razor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-376">'Razor'</span></span>
-- <span data-ttu-id="a52dd-377">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="a52dd-377">'SignalR' uid:</span></span> 
-
--
-<span data-ttu-id="a52dd-378">title: "ASP.NET Core Blazor webassembly — dodatkowe scenariusze zabezpieczeń" autor: Opis: "Dowiedz się, jak skonfigurować Blazor zestaw webassembly pod kątem dodatkowych scenariuszy zabezpieczeń".</span><span class="sxs-lookup"><span data-stu-id="a52dd-378">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
-<span data-ttu-id="a52dd-379">monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="a52dd-379">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="a52dd-380">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-380">'Blazor'</span></span>
-- <span data-ttu-id="a52dd-381">'Identity'</span><span class="sxs-lookup"><span data-stu-id="a52dd-381">'Identity'</span></span>
-- <span data-ttu-id="a52dd-382">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="a52dd-382">'Let's Encrypt'</span></span>
-- <span data-ttu-id="a52dd-383">'Razor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-383">'Razor'</span></span>
-- <span data-ttu-id="a52dd-384">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="a52dd-384">'SignalR' uid:</span></span> 
-
--
-<span data-ttu-id="a52dd-385">title: "ASP.NET Core Blazor webassembly — dodatkowe scenariusze zabezpieczeń" autor: Opis: "Dowiedz się, jak skonfigurować Blazor zestaw webassembly pod kątem dodatkowych scenariuszy zabezpieczeń".</span><span class="sxs-lookup"><span data-stu-id="a52dd-385">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
-<span data-ttu-id="a52dd-386">monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="a52dd-386">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="a52dd-387">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-387">'Blazor'</span></span>
-- <span data-ttu-id="a52dd-388">'Identity'</span><span class="sxs-lookup"><span data-stu-id="a52dd-388">'Identity'</span></span>
-- <span data-ttu-id="a52dd-389">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="a52dd-389">'Let's Encrypt'</span></span>
-- <span data-ttu-id="a52dd-390">'Razor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-390">'Razor'</span></span>
-- <span data-ttu-id="a52dd-391">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="a52dd-391">'SignalR' uid:</span></span> 
-
--
-<span data-ttu-id="a52dd-392">title: "ASP.NET Core Blazor webassembly — dodatkowe scenariusze zabezpieczeń" autor: Opis: "Dowiedz się, jak skonfigurować Blazor zestaw webassembly pod kątem dodatkowych scenariuszy zabezpieczeń".</span><span class="sxs-lookup"><span data-stu-id="a52dd-392">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
-<span data-ttu-id="a52dd-393">monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="a52dd-393">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="a52dd-394">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-394">'Blazor'</span></span>
-- <span data-ttu-id="a52dd-395">'Identity'</span><span class="sxs-lookup"><span data-stu-id="a52dd-395">'Identity'</span></span>
-- <span data-ttu-id="a52dd-396">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="a52dd-396">'Let's Encrypt'</span></span>
-- <span data-ttu-id="a52dd-397">'Razor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-397">'Razor'</span></span>
-- <span data-ttu-id="a52dd-398">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="a52dd-398">'SignalR' uid:</span></span> 
-
--
-<span data-ttu-id="a52dd-399">title: "ASP.NET Core Blazor webassembly — dodatkowe scenariusze zabezpieczeń" autor: Opis: "Dowiedz się, jak skonfigurować Blazor zestaw webassembly pod kątem dodatkowych scenariuszy zabezpieczeń".</span><span class="sxs-lookup"><span data-stu-id="a52dd-399">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
-<span data-ttu-id="a52dd-400">monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="a52dd-400">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="a52dd-401">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-401">'Blazor'</span></span>
-- <span data-ttu-id="a52dd-402">'Identity'</span><span class="sxs-lookup"><span data-stu-id="a52dd-402">'Identity'</span></span>
-- <span data-ttu-id="a52dd-403">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="a52dd-403">'Let's Encrypt'</span></span>
-- <span data-ttu-id="a52dd-404">'Razor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-404">'Razor'</span></span>
-- <span data-ttu-id="a52dd-405">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="a52dd-405">'SignalR' uid:</span></span> 
-
--
-<span data-ttu-id="a52dd-406">title: "ASP.NET Core Blazor webassembly — dodatkowe scenariusze zabezpieczeń" autor: Opis: "Dowiedz się, jak skonfigurować Blazor zestaw webassembly pod kątem dodatkowych scenariuszy zabezpieczeń".</span><span class="sxs-lookup"><span data-stu-id="a52dd-406">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
-<span data-ttu-id="a52dd-407">monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="a52dd-407">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="a52dd-408">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-408">'Blazor'</span></span>
-- <span data-ttu-id="a52dd-409">'Identity'</span><span class="sxs-lookup"><span data-stu-id="a52dd-409">'Identity'</span></span>
-- <span data-ttu-id="a52dd-410">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="a52dd-410">'Let's Encrypt'</span></span>
-- <span data-ttu-id="a52dd-411">'Razor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-411">'Razor'</span></span>
-- <span data-ttu-id="a52dd-412">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="a52dd-412">'SignalR' uid:</span></span> 
-
--
-<span data-ttu-id="a52dd-413">title: "ASP.NET Core Blazor webassembly — dodatkowe scenariusze zabezpieczeń" autor: Opis: "Dowiedz się, jak skonfigurować Blazor zestaw webassembly pod kątem dodatkowych scenariuszy zabezpieczeń".</span><span class="sxs-lookup"><span data-stu-id="a52dd-413">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
-<span data-ttu-id="a52dd-414">monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="a52dd-414">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="a52dd-415">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-415">'Blazor'</span></span>
-- <span data-ttu-id="a52dd-416">'Identity'</span><span class="sxs-lookup"><span data-stu-id="a52dd-416">'Identity'</span></span>
-- <span data-ttu-id="a52dd-417">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="a52dd-417">'Let's Encrypt'</span></span>
-- <span data-ttu-id="a52dd-418">'Razor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-418">'Razor'</span></span>
-- <span data-ttu-id="a52dd-419">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="a52dd-419">'SignalR' uid:</span></span> 
-
--
-<span data-ttu-id="a52dd-420">title: "ASP.NET Core Blazor webassembly — dodatkowe scenariusze zabezpieczeń" autor: Opis: "Dowiedz się, jak skonfigurować Blazor zestaw webassembly pod kątem dodatkowych scenariuszy zabezpieczeń".</span><span class="sxs-lookup"><span data-stu-id="a52dd-420">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
-<span data-ttu-id="a52dd-421">monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="a52dd-421">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="a52dd-422">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-422">'Blazor'</span></span>
-- <span data-ttu-id="a52dd-423">'Identity'</span><span class="sxs-lookup"><span data-stu-id="a52dd-423">'Identity'</span></span>
-- <span data-ttu-id="a52dd-424">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="a52dd-424">'Let's Encrypt'</span></span>
-- <span data-ttu-id="a52dd-425">'Razor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-425">'Razor'</span></span>
-- <span data-ttu-id="a52dd-426">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="a52dd-426">'SignalR' uid:</span></span> 
-
--
-<span data-ttu-id="a52dd-427">title: "ASP.NET Core Blazor webassembly — dodatkowe scenariusze zabezpieczeń" autor: Opis: "Dowiedz się, jak skonfigurować Blazor zestaw webassembly pod kątem dodatkowych scenariuszy zabezpieczeń".</span><span class="sxs-lookup"><span data-stu-id="a52dd-427">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
-<span data-ttu-id="a52dd-428">monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="a52dd-428">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="a52dd-429">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-429">'Blazor'</span></span>
-- <span data-ttu-id="a52dd-430">'Identity'</span><span class="sxs-lookup"><span data-stu-id="a52dd-430">'Identity'</span></span>
-- <span data-ttu-id="a52dd-431">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="a52dd-431">'Let's Encrypt'</span></span>
-- <span data-ttu-id="a52dd-432">'Razor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-432">'Razor'</span></span>
-- <span data-ttu-id="a52dd-433">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="a52dd-433">'SignalR' uid:</span></span> 
-
-<span data-ttu-id="a52dd-434">---------------- | ---title: "ASP.NET Core elementu Blazor webassembly dodatkowe scenariusze zabezpieczeń" Author: Description: "informacje o konfigurowaniu Blazor zestawu webassembly w celu uzyskania dodatkowych scenariuszy zabezpieczeń".</span><span class="sxs-lookup"><span data-stu-id="a52dd-434">---------------- | --- title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
-<span data-ttu-id="a52dd-435">monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="a52dd-435">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="a52dd-436">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-436">'Blazor'</span></span>
-- <span data-ttu-id="a52dd-437">'Identity'</span><span class="sxs-lookup"><span data-stu-id="a52dd-437">'Identity'</span></span>
-- <span data-ttu-id="a52dd-438">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="a52dd-438">'Let's Encrypt'</span></span>
-- <span data-ttu-id="a52dd-439">'Razor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-439">'Razor'</span></span>
-- <span data-ttu-id="a52dd-440">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="a52dd-440">'SignalR' uid:</span></span> 
-
--
-<span data-ttu-id="a52dd-441">title: "ASP.NET Core Blazor webassembly — dodatkowe scenariusze zabezpieczeń" autor: Opis: "Dowiedz się, jak skonfigurować Blazor zestaw webassembly pod kątem dodatkowych scenariuszy zabezpieczeń".</span><span class="sxs-lookup"><span data-stu-id="a52dd-441">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
-<span data-ttu-id="a52dd-442">monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="a52dd-442">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="a52dd-443">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-443">'Blazor'</span></span>
-- <span data-ttu-id="a52dd-444">'Identity'</span><span class="sxs-lookup"><span data-stu-id="a52dd-444">'Identity'</span></span>
-- <span data-ttu-id="a52dd-445">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="a52dd-445">'Let's Encrypt'</span></span>
-- <span data-ttu-id="a52dd-446">'Razor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-446">'Razor'</span></span>
-- <span data-ttu-id="a52dd-447">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="a52dd-447">'SignalR' uid:</span></span> 
-
--
-<span data-ttu-id="a52dd-448">title: "ASP.NET Core Blazor webassembly — dodatkowe scenariusze zabezpieczeń" autor: Opis: "Dowiedz się, jak skonfigurować Blazor zestaw webassembly pod kątem dodatkowych scenariuszy zabezpieczeń".</span><span class="sxs-lookup"><span data-stu-id="a52dd-448">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
-<span data-ttu-id="a52dd-449">monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="a52dd-449">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="a52dd-450">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-450">'Blazor'</span></span>
-- <span data-ttu-id="a52dd-451">'Identity'</span><span class="sxs-lookup"><span data-stu-id="a52dd-451">'Identity'</span></span>
-- <span data-ttu-id="a52dd-452">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="a52dd-452">'Let's Encrypt'</span></span>
-- <span data-ttu-id="a52dd-453">'Razor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-453">'Razor'</span></span>
-- <span data-ttu-id="a52dd-454">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="a52dd-454">'SignalR' uid:</span></span> 
-
--
-<span data-ttu-id="a52dd-455">title: "ASP.NET Core Blazor webassembly — dodatkowe scenariusze zabezpieczeń" autor: Opis: "Dowiedz się, jak skonfigurować Blazor zestaw webassembly pod kątem dodatkowych scenariuszy zabezpieczeń".</span><span class="sxs-lookup"><span data-stu-id="a52dd-455">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
-<span data-ttu-id="a52dd-456">monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="a52dd-456">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="a52dd-457">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-457">'Blazor'</span></span>
-- <span data-ttu-id="a52dd-458">'Identity'</span><span class="sxs-lookup"><span data-stu-id="a52dd-458">'Identity'</span></span>
-- <span data-ttu-id="a52dd-459">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="a52dd-459">'Let's Encrypt'</span></span>
-- <span data-ttu-id="a52dd-460">'Razor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-460">'Razor'</span></span>
-- <span data-ttu-id="a52dd-461">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="a52dd-461">'SignalR' uid:</span></span> 
-
--
-<span data-ttu-id="a52dd-462">title: "ASP.NET Core Blazor webassembly — dodatkowe scenariusze zabezpieczeń" autor: Opis: "Dowiedz się, jak skonfigurować Blazor zestaw webassembly pod kątem dodatkowych scenariuszy zabezpieczeń".</span><span class="sxs-lookup"><span data-stu-id="a52dd-462">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
-<span data-ttu-id="a52dd-463">monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="a52dd-463">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="a52dd-464">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-464">'Blazor'</span></span>
-- <span data-ttu-id="a52dd-465">'Identity'</span><span class="sxs-lookup"><span data-stu-id="a52dd-465">'Identity'</span></span>
-- <span data-ttu-id="a52dd-466">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="a52dd-466">'Let's Encrypt'</span></span>
-- <span data-ttu-id="a52dd-467">'Razor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-467">'Razor'</span></span>
-- <span data-ttu-id="a52dd-468">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="a52dd-468">'SignalR' uid:</span></span> 
-
--
-<span data-ttu-id="a52dd-469">title: "ASP.NET Core Blazor webassembly — dodatkowe scenariusze zabezpieczeń" autor: Opis: "Dowiedz się, jak skonfigurować Blazor zestaw webassembly pod kątem dodatkowych scenariuszy zabezpieczeń".</span><span class="sxs-lookup"><span data-stu-id="a52dd-469">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
-<span data-ttu-id="a52dd-470">monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="a52dd-470">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="a52dd-471">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-471">'Blazor'</span></span>
-- <span data-ttu-id="a52dd-472">'Identity'</span><span class="sxs-lookup"><span data-stu-id="a52dd-472">'Identity'</span></span>
-- <span data-ttu-id="a52dd-473">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="a52dd-473">'Let's Encrypt'</span></span>
-- <span data-ttu-id="a52dd-474">'Razor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-474">'Razor'</span></span>
-- <span data-ttu-id="a52dd-475">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="a52dd-475">'SignalR' uid:</span></span> 
-
--
-<span data-ttu-id="a52dd-476">title: "ASP.NET Core Blazor webassembly — dodatkowe scenariusze zabezpieczeń" autor: Opis: "Dowiedz się, jak skonfigurować Blazor zestaw webassembly pod kątem dodatkowych scenariuszy zabezpieczeń".</span><span class="sxs-lookup"><span data-stu-id="a52dd-476">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
-<span data-ttu-id="a52dd-477">monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="a52dd-477">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="a52dd-478">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-478">'Blazor'</span></span>
-- <span data-ttu-id="a52dd-479">'Identity'</span><span class="sxs-lookup"><span data-stu-id="a52dd-479">'Identity'</span></span>
-- <span data-ttu-id="a52dd-480">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="a52dd-480">'Let's Encrypt'</span></span>
-- <span data-ttu-id="a52dd-481">'Razor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-481">'Razor'</span></span>
-- <span data-ttu-id="a52dd-482">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="a52dd-482">'SignalR' uid:</span></span> 
-
--
-<span data-ttu-id="a52dd-483">title: "ASP.NET Core Blazor webassembly — dodatkowe scenariusze zabezpieczeń" autor: Opis: "Dowiedz się, jak skonfigurować Blazor zestaw webassembly pod kątem dodatkowych scenariuszy zabezpieczeń".</span><span class="sxs-lookup"><span data-stu-id="a52dd-483">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
-<span data-ttu-id="a52dd-484">monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="a52dd-484">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="a52dd-485">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-485">'Blazor'</span></span>
-- <span data-ttu-id="a52dd-486">'Identity'</span><span class="sxs-lookup"><span data-stu-id="a52dd-486">'Identity'</span></span>
-- <span data-ttu-id="a52dd-487">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="a52dd-487">'Let's Encrypt'</span></span>
-- <span data-ttu-id="a52dd-488">'Razor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-488">'Razor'</span></span>
-- <span data-ttu-id="a52dd-489">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="a52dd-489">'SignalR' uid:</span></span> 
-
--
-<span data-ttu-id="a52dd-490">title: "ASP.NET Core Blazor webassembly — dodatkowe scenariusze zabezpieczeń" autor: Opis: "Dowiedz się, jak skonfigurować Blazor zestaw webassembly pod kątem dodatkowych scenariuszy zabezpieczeń".</span><span class="sxs-lookup"><span data-stu-id="a52dd-490">title: 'ASP.NET Core Blazor WebAssembly additional security scenarios' author: description: 'Learn how to configure Blazor WebAssembly for additional security scenarios.'</span></span>
-<span data-ttu-id="a52dd-491">monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:</span><span class="sxs-lookup"><span data-stu-id="a52dd-491">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="a52dd-492">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-492">'Blazor'</span></span>
-- <span data-ttu-id="a52dd-493">'Identity'</span><span class="sxs-lookup"><span data-stu-id="a52dd-493">'Identity'</span></span>
-- <span data-ttu-id="a52dd-494">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="a52dd-494">'Let's Encrypt'</span></span>
-- <span data-ttu-id="a52dd-495">'Razor'</span><span class="sxs-lookup"><span data-stu-id="a52dd-495">'Razor'</span></span>
-- <span data-ttu-id="a52dd-496">SignalRIdentyfikator UID:</span><span class="sxs-lookup"><span data-stu-id="a52dd-496">'SignalR' uid:</span></span> 
-
-<span data-ttu-id="a52dd-497">------------ | | `authentication/login`           | `<LoggingIn>`           | | `authentication/login-callback`  | `<CompletingLoggingIn>` | | `authentication/login-failed`    | `<LogInFailed>`         | | `authentication/logout`          | `<LogOut>`              | | `authentication/logout-callback` | `<CompletingLogOut>`    | | `authentication/logout-failed`   | `<LogOutFailed>`        | | `authentication/logged-out`      | `<LogOutSucceeded>`     | | `authentication/profile`         | `<UserProfile>`         | | `authentication/register`        | `<Registering>`         |</span><span class="sxs-lookup"><span data-stu-id="a52dd-497">------------ | | `authentication/login`           | `<LoggingIn>`           | | `authentication/login-callback`  | `<CompletingLoggingIn>` | | `authentication/login-failed`    | `<LogInFailed>`         | | `authentication/logout`          | `<LogOut>`              | | `authentication/logout-callback` | `<CompletingLogOut>`    | | `authentication/logout-failed`   | `<LogOutFailed>`        | | `authentication/logged-out`      | `<LogOutSucceeded>`     | | `authentication/profile`         | `<UserProfile>`         | | `authentication/register`        | `<Registering>`         |</span></span>
-
-## <a name="customize-the-user"></a><span data-ttu-id="a52dd-498">Dostosowywanie użytkownika</span><span class="sxs-lookup"><span data-stu-id="a52dd-498">Customize the user</span></span>
-
-<span data-ttu-id="a52dd-499">Użytkownicy powiązana z aplikacją mogą być dostosowywać.</span><span class="sxs-lookup"><span data-stu-id="a52dd-499">Users bound to the app can be customized.</span></span> <span data-ttu-id="a52dd-500">W poniższym przykładzie Wszyscy uwierzytelnieni użytkownicy otrzymują `amr` każde z metod uwierzytelniania użytkownika.</span><span class="sxs-lookup"><span data-stu-id="a52dd-500">In the following example, all authenticated users receive an `amr` claim for each of the user's authentication methods.</span></span>
-
-<span data-ttu-id="a52dd-501">Utwórz klasę rozszerzającą <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> klasę:</span><span class="sxs-lookup"><span data-stu-id="a52dd-501">Create a class that extends the <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> class:</span></span>
+<span data-ttu-id="33b1b-242">Utwórz klasę rozszerzającą <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> klasę:</span><span class="sxs-lookup"><span data-stu-id="33b1b-242">Create a class that extends the <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> class:</span></span>
 
 ```csharp
 using System.Text.Json.Serialization;
@@ -921,7 +669,7 @@ public class CustomUserAccount : RemoteUserAccount
 }
 ```
 
-<span data-ttu-id="a52dd-502">Utwórz fabrykę, która rozszerza <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccountClaimsPrincipalFactory%601> :</span><span class="sxs-lookup"><span data-stu-id="a52dd-502">Create a factory that extends <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccountClaimsPrincipalFactory%601>:</span></span>
+<span data-ttu-id="33b1b-243">Utwórz fabrykę, która rozszerza <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccountClaimsPrincipalFactory%601> :</span><span class="sxs-lookup"><span data-stu-id="33b1b-243">Create a factory that extends <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccountClaimsPrincipalFactory%601>:</span></span>
 
 ```csharp
 using System.Security.Claims;
@@ -957,9 +705,9 @@ public class CustomAccountFactory
 }
 ```
 
-<span data-ttu-id="a52dd-503">Zarejestruj `CustomAccountFactory` dostawcę uwierzytelniania w użyciu.</span><span class="sxs-lookup"><span data-stu-id="a52dd-503">Register the `CustomAccountFactory` for the authentication provider in use.</span></span> <span data-ttu-id="a52dd-504">Wszystkie następujące rejestracje są prawidłowe:</span><span class="sxs-lookup"><span data-stu-id="a52dd-504">Any of the following registrations are valid:</span></span> 
+<span data-ttu-id="33b1b-244">Zarejestruj `CustomAccountFactory` dostawcę uwierzytelniania w użyciu.</span><span class="sxs-lookup"><span data-stu-id="33b1b-244">Register the `CustomAccountFactory` for the authentication provider in use.</span></span> <span data-ttu-id="33b1b-245">Wszystkie następujące rejestracje są prawidłowe:</span><span class="sxs-lookup"><span data-stu-id="33b1b-245">Any of the following registrations are valid:</span></span> 
 
-* <span data-ttu-id="a52dd-505"><xref:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddOidcAuthentication%2A>:</span><span class="sxs-lookup"><span data-stu-id="a52dd-505"><xref:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddOidcAuthentication%2A>:</span></span>
+* <span data-ttu-id="33b1b-246"><xref:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddOidcAuthentication%2A>:</span><span class="sxs-lookup"><span data-stu-id="33b1b-246"><xref:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddOidcAuthentication%2A>:</span></span>
 
   ```csharp
   using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
@@ -975,7 +723,7 @@ public class CustomAccountFactory
       CustomUserAccount, CustomAccountFactory>();
   ```
 
-* <span data-ttu-id="a52dd-506"><xref:Microsoft.Extensions.DependencyInjection.MsalWebAssemblyServiceCollectionExtensions.AddMsalAuthentication%2A>:</span><span class="sxs-lookup"><span data-stu-id="a52dd-506"><xref:Microsoft.Extensions.DependencyInjection.MsalWebAssemblyServiceCollectionExtensions.AddMsalAuthentication%2A>:</span></span>
+* <span data-ttu-id="33b1b-247"><xref:Microsoft.Extensions.DependencyInjection.MsalWebAssemblyServiceCollectionExtensions.AddMsalAuthentication%2A>:</span><span class="sxs-lookup"><span data-stu-id="33b1b-247"><xref:Microsoft.Extensions.DependencyInjection.MsalWebAssemblyServiceCollectionExtensions.AddMsalAuthentication%2A>:</span></span>
 
   ```csharp
   using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
@@ -991,7 +739,7 @@ public class CustomAccountFactory
       CustomUserAccount, CustomAccountFactory>();
   ```
   
-* <span data-ttu-id="a52dd-507"><xref:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddApiAuthorization%2A>:</span><span class="sxs-lookup"><span data-stu-id="a52dd-507"><xref:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddApiAuthorization%2A>:</span></span>
+* <span data-ttu-id="33b1b-248"><xref:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddApiAuthorization%2A>:</span><span class="sxs-lookup"><span data-stu-id="33b1b-248"><xref:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddApiAuthorization%2A>:</span></span>
 
   ```csharp
   using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
@@ -1007,14 +755,14 @@ public class CustomAccountFactory
       CustomUserAccount, CustomAccountFactory>();
   ```
 
-## <a name="support-prerendering-with-authentication"></a><span data-ttu-id="a52dd-508">Obsługa prerenderowania przy użyciu uwierzytelniania</span><span class="sxs-lookup"><span data-stu-id="a52dd-508">Support prerendering with authentication</span></span>
+## <a name="support-prerendering-with-authentication"></a><span data-ttu-id="33b1b-249">Obsługa prerenderowania przy użyciu uwierzytelniania</span><span class="sxs-lookup"><span data-stu-id="33b1b-249">Support prerendering with authentication</span></span>
 
-<span data-ttu-id="a52dd-509">Po zastosowaniu wskazówek w jednej z aplikacji hostowanego Blazor zestawu webassembly Skorzystaj z poniższych instrukcji, aby utworzyć aplikację, która:</span><span class="sxs-lookup"><span data-stu-id="a52dd-509">After following the guidance in one of the hosted Blazor WebAssembly app topics, use the following instructions to create an app that:</span></span>
+<span data-ttu-id="33b1b-250">Po zastosowaniu wskazówek w jednej z aplikacji hostowanego Blazor zestawu webassembly Skorzystaj z poniższych instrukcji, aby utworzyć aplikację, która:</span><span class="sxs-lookup"><span data-stu-id="33b1b-250">After following the guidance in one of the hosted Blazor WebAssembly app topics, use the following instructions to create an app that:</span></span>
 
-* <span data-ttu-id="a52dd-510">Wstępnie renderuje ścieżki, dla których autoryzacja nie jest wymagana.</span><span class="sxs-lookup"><span data-stu-id="a52dd-510">Prerenders paths for which authorization isn't required.</span></span>
-* <span data-ttu-id="a52dd-511">Nie określa ścieżek PreRender, dla których wymagana jest autoryzacja.</span><span class="sxs-lookup"><span data-stu-id="a52dd-511">Doesn't prerender paths for which authorization is required.</span></span>
+* <span data-ttu-id="33b1b-251">Wstępnie renderuje ścieżki, dla których autoryzacja nie jest wymagana.</span><span class="sxs-lookup"><span data-stu-id="33b1b-251">Prerenders paths for which authorization isn't required.</span></span>
+* <span data-ttu-id="33b1b-252">Nie określa ścieżek PreRender, dla których wymagana jest autoryzacja.</span><span class="sxs-lookup"><span data-stu-id="33b1b-252">Doesn't prerender paths for which authorization is required.</span></span>
 
-<span data-ttu-id="a52dd-512">W klasie aplikacji klienckiej `Program` (*program.cs*) należy wykonać typowe rejestracje usługi w oddzielnym metodzie (na przykład `ConfigureCommonServices` ):</span><span class="sxs-lookup"><span data-stu-id="a52dd-512">In the Client app's `Program` class (*Program.cs*), factor common service registrations into a separate method (for example, `ConfigureCommonServices`):</span></span>
+<span data-ttu-id="33b1b-253">W klasie aplikacji klienckiej `Program` (*program.cs*) należy wykonać typowe rejestracje usługi w oddzielnym metodzie (na przykład `ConfigureCommonServices` ):</span><span class="sxs-lookup"><span data-stu-id="33b1b-253">In the Client app's `Program` class (*Program.cs*), factor common service registrations into a separate method (for example, `ConfigureCommonServices`):</span></span>
 
 ```csharp
 public class Program
@@ -1043,7 +791,7 @@ public class Program
 }
 ```
 
-<span data-ttu-id="a52dd-513">W aplikacji serwera `Startup.ConfigureServices` zarejestruj następujące dodatkowe usługi:</span><span class="sxs-lookup"><span data-stu-id="a52dd-513">In the Server app's `Startup.ConfigureServices`, register the following additional services:</span></span>
+<span data-ttu-id="33b1b-254">W aplikacji serwera `Startup.ConfigureServices` zarejestruj następujące dodatkowe usługi:</span><span class="sxs-lookup"><span data-stu-id="33b1b-254">In the Server app's `Startup.ConfigureServices`, register the following additional services:</span></span>
 
 ```csharp
 using Microsoft.AspNetCore.Components.Authorization;
@@ -1063,7 +811,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-<span data-ttu-id="a52dd-514">W metodzie aplikacji serwera `Startup.Configure` Zastąp [punkty końcowe. MapFallbackToFile ("index. html")](xref:Microsoft.AspNetCore.Builder.StaticFilesEndpointRouteBuilderExtensions.MapFallbackToFile%2A) z [punktami końcowymi. MapFallbackToPage ("/_Host")](xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage%2A):</span><span class="sxs-lookup"><span data-stu-id="a52dd-514">In the Server app's `Startup.Configure` method, replace [endpoints.MapFallbackToFile("index.html")](xref:Microsoft.AspNetCore.Builder.StaticFilesEndpointRouteBuilderExtensions.MapFallbackToFile%2A) with [endpoints.MapFallbackToPage("/_Host")](xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage%2A):</span></span>
+<span data-ttu-id="33b1b-255">W metodzie aplikacji serwera `Startup.Configure` Zastąp [punkty końcowe. MapFallbackToFile ("index. html")](xref:Microsoft.AspNetCore.Builder.StaticFilesEndpointRouteBuilderExtensions.MapFallbackToFile%2A) z [punktami końcowymi. MapFallbackToPage ("/_Host")](xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage%2A):</span><span class="sxs-lookup"><span data-stu-id="33b1b-255">In the Server app's `Startup.Configure` method, replace [endpoints.MapFallbackToFile("index.html")](xref:Microsoft.AspNetCore.Builder.StaticFilesEndpointRouteBuilderExtensions.MapFallbackToFile%2A) with [endpoints.MapFallbackToPage("/_Host")](xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage%2A):</span></span>
 
 ```csharp
 app.UseEndpoints(endpoints =>
@@ -1073,10 +821,10 @@ app.UseEndpoints(endpoints =>
 });
 ```
 
-<span data-ttu-id="a52dd-515">W aplikacji serwer Utwórz folder *strony* , jeśli nie istnieje.</span><span class="sxs-lookup"><span data-stu-id="a52dd-515">In the Server app, create a *Pages* folder if it doesn't exist.</span></span> <span data-ttu-id="a52dd-516">Utwórz stronę *_Host. cshtml* w folderze *strony* aplikacji serwera.</span><span class="sxs-lookup"><span data-stu-id="a52dd-516">Create a *_Host.cshtml* page inside the Server app's *Pages* folder.</span></span> <span data-ttu-id="a52dd-517">Wklej zawartość z pliku *wwwroot/index.html* aplikacji klienta do pliku *pages/_Host. cshtml* .</span><span class="sxs-lookup"><span data-stu-id="a52dd-517">Paste the contents from the Client app's *wwwroot/index.html* file into the *Pages/_Host.cshtml* file.</span></span> <span data-ttu-id="a52dd-518">Aktualizuj zawartość pliku:</span><span class="sxs-lookup"><span data-stu-id="a52dd-518">Update the file's contents:</span></span>
+<span data-ttu-id="33b1b-256">W aplikacji serwer Utwórz folder *strony* , jeśli nie istnieje.</span><span class="sxs-lookup"><span data-stu-id="33b1b-256">In the Server app, create a *Pages* folder if it doesn't exist.</span></span> <span data-ttu-id="33b1b-257">Utwórz stronę *_Host. cshtml* w folderze *strony* aplikacji serwera.</span><span class="sxs-lookup"><span data-stu-id="33b1b-257">Create a *_Host.cshtml* page inside the Server app's *Pages* folder.</span></span> <span data-ttu-id="33b1b-258">Wklej zawartość z pliku *wwwroot/index.html* aplikacji klienta do pliku *pages/_Host. cshtml* .</span><span class="sxs-lookup"><span data-stu-id="33b1b-258">Paste the contents from the Client app's *wwwroot/index.html* file into the *Pages/_Host.cshtml* file.</span></span> <span data-ttu-id="33b1b-259">Aktualizuj zawartość pliku:</span><span class="sxs-lookup"><span data-stu-id="33b1b-259">Update the file's contents:</span></span>
 
-* <span data-ttu-id="a52dd-519">Dodaj `@page "_Host"` na początku pliku.</span><span class="sxs-lookup"><span data-stu-id="a52dd-519">Add `@page "_Host"` to the top of the file.</span></span>
-* <span data-ttu-id="a52dd-520">Zastąp `<app>Loading...</app>` tag następującym:</span><span class="sxs-lookup"><span data-stu-id="a52dd-520">Replace the `<app>Loading...</app>` tag with the following:</span></span>
+* <span data-ttu-id="33b1b-260">Dodaj `@page "_Host"` na początku pliku.</span><span class="sxs-lookup"><span data-stu-id="33b1b-260">Add `@page "_Host"` to the top of the file.</span></span>
+* <span data-ttu-id="33b1b-261">Zastąp `<app>Loading...</app>` tag następującym:</span><span class="sxs-lookup"><span data-stu-id="33b1b-261">Replace the `<app>Loading...</app>` tag with the following:</span></span>
 
   ```cshtml
   <app>
@@ -1092,53 +840,53 @@ app.UseEndpoints(endpoints =>
   </app>
   ```
   
-## <a name="options-for-hosted-apps-and-third-party-login-providers"></a><span data-ttu-id="a52dd-521">Opcje aplikacji hostowanych i dostawców logowania innych firm</span><span class="sxs-lookup"><span data-stu-id="a52dd-521">Options for hosted apps and third-party login providers</span></span>
+## <a name="options-for-hosted-apps-and-third-party-login-providers"></a><span data-ttu-id="33b1b-262">Opcje aplikacji hostowanych i dostawców logowania innych firm</span><span class="sxs-lookup"><span data-stu-id="33b1b-262">Options for hosted apps and third-party login providers</span></span>
 
-<span data-ttu-id="a52dd-522">Podczas uwierzytelniania i autoryzowania hostowanej Blazor aplikacji sieci webassembly przy użyciu dostawcy innej firmy dostępnych jest kilka opcji uwierzytelniania użytkownika.</span><span class="sxs-lookup"><span data-stu-id="a52dd-522">When authenticating and authorizing a hosted Blazor WebAssembly app with a third-party provider, there are several options available for authenticating the user.</span></span> <span data-ttu-id="a52dd-523">Wybór jednego z nich zależy od danego scenariusza.</span><span class="sxs-lookup"><span data-stu-id="a52dd-523">Which one you choose depends on your scenario.</span></span>
+<span data-ttu-id="33b1b-263">Podczas uwierzytelniania i autoryzowania hostowanej Blazor aplikacji sieci webassembly przy użyciu dostawcy innej firmy dostępnych jest kilka opcji uwierzytelniania użytkownika.</span><span class="sxs-lookup"><span data-stu-id="33b1b-263">When authenticating and authorizing a hosted Blazor WebAssembly app with a third-party provider, there are several options available for authenticating the user.</span></span> <span data-ttu-id="33b1b-264">Wybór jednego z nich zależy od danego scenariusza.</span><span class="sxs-lookup"><span data-stu-id="33b1b-264">Which one you choose depends on your scenario.</span></span>
 
-<span data-ttu-id="a52dd-524">Aby uzyskać więcej informacji, zobacz <xref:security/authentication/social/additional-claims>.</span><span class="sxs-lookup"><span data-stu-id="a52dd-524">For more information, see <xref:security/authentication/social/additional-claims>.</span></span>
+<span data-ttu-id="33b1b-265">Aby uzyskać więcej informacji, zobacz <xref:security/authentication/social/additional-claims>.</span><span class="sxs-lookup"><span data-stu-id="33b1b-265">For more information, see <xref:security/authentication/social/additional-claims>.</span></span>
 
-### <a name="authenticate-users-to-only-call-protected-third-party-apis"></a><span data-ttu-id="a52dd-525">Uwierzytelnianie użytkowników tylko w celu wywołania chronionych interfejsów API innych firm</span><span class="sxs-lookup"><span data-stu-id="a52dd-525">Authenticate users to only call protected third party APIs</span></span>
+### <a name="authenticate-users-to-only-call-protected-third-party-apis"></a><span data-ttu-id="33b1b-266">Uwierzytelnianie użytkowników tylko w celu wywołania chronionych interfejsów API innych firm</span><span class="sxs-lookup"><span data-stu-id="33b1b-266">Authenticate users to only call protected third party APIs</span></span>
 
-<span data-ttu-id="a52dd-526">Uwierzytelnij użytkownika za pomocą przepływu OAuth po stronie klienta dla dostawcy interfejsu API innej firmy:</span><span class="sxs-lookup"><span data-stu-id="a52dd-526">Authenticate the user with a client-side OAuth flow against the third-party API provider:</span></span>
+<span data-ttu-id="33b1b-267">Uwierzytelnij użytkownika za pomocą przepływu OAuth po stronie klienta dla dostawcy interfejsu API innej firmy:</span><span class="sxs-lookup"><span data-stu-id="33b1b-267">Authenticate the user with a client-side OAuth flow against the third-party API provider:</span></span>
 
  ```csharp
  builder.services.AddOidcAuthentication(options => { ... });
  ```
  
- <span data-ttu-id="a52dd-527">W tym scenariuszu:</span><span class="sxs-lookup"><span data-stu-id="a52dd-527">In this scenario:</span></span>
+ <span data-ttu-id="33b1b-268">W tym scenariuszu:</span><span class="sxs-lookup"><span data-stu-id="33b1b-268">In this scenario:</span></span>
 
-* <span data-ttu-id="a52dd-528">Serwer hostujący aplikację nie odgrywa roli.</span><span class="sxs-lookup"><span data-stu-id="a52dd-528">The server hosting the app doesn't play a role.</span></span>
-* <span data-ttu-id="a52dd-529">Nie można chronić interfejsów API na serwerze.</span><span class="sxs-lookup"><span data-stu-id="a52dd-529">APIs on the server can't be protected.</span></span>
-* <span data-ttu-id="a52dd-530">Aplikacja może wywoływać tylko chronione interfejsy API innych firm.</span><span class="sxs-lookup"><span data-stu-id="a52dd-530">The app can only call protected third-party APIs.</span></span>
+* <span data-ttu-id="33b1b-269">Serwer hostujący aplikację nie odgrywa roli.</span><span class="sxs-lookup"><span data-stu-id="33b1b-269">The server hosting the app doesn't play a role.</span></span>
+* <span data-ttu-id="33b1b-270">Nie można chronić interfejsów API na serwerze.</span><span class="sxs-lookup"><span data-stu-id="33b1b-270">APIs on the server can't be protected.</span></span>
+* <span data-ttu-id="33b1b-271">Aplikacja może wywoływać tylko chronione interfejsy API innych firm.</span><span class="sxs-lookup"><span data-stu-id="33b1b-271">The app can only call protected third-party APIs.</span></span>
 
-### <a name="authenticate-users-with-a-third-party-provider-and-call-protected-apis-on-the-host-server-and-the-third-party"></a><span data-ttu-id="a52dd-531">Uwierzytelnianie użytkowników za pomocą dostawcy innych firm i wywoływanie chronionych interfejsów API na serwerze hosta i stronie trzeciej</span><span class="sxs-lookup"><span data-stu-id="a52dd-531">Authenticate users with a third-party provider and call protected APIs on the host server and the third party</span></span>
+### <a name="authenticate-users-with-a-third-party-provider-and-call-protected-apis-on-the-host-server-and-the-third-party"></a><span data-ttu-id="33b1b-272">Uwierzytelnianie użytkowników za pomocą dostawcy innych firm i wywoływanie chronionych interfejsów API na serwerze hosta i stronie trzeciej</span><span class="sxs-lookup"><span data-stu-id="33b1b-272">Authenticate users with a third-party provider and call protected APIs on the host server and the third party</span></span>
 
-<span data-ttu-id="a52dd-532">Skonfiguruj Identity przy użyciu innego dostawcy logowania.</span><span class="sxs-lookup"><span data-stu-id="a52dd-532">Configure Identity with a third-party login provider.</span></span> <span data-ttu-id="a52dd-533">Uzyskaj tokeny wymagane przez dostęp do interfejsu API innych firm i Zapisz je.</span><span class="sxs-lookup"><span data-stu-id="a52dd-533">Obtain the tokens required for third-party API access and store them.</span></span>
+<span data-ttu-id="33b1b-273">Skonfiguruj Identity przy użyciu innego dostawcy logowania.</span><span class="sxs-lookup"><span data-stu-id="33b1b-273">Configure Identity with a third-party login provider.</span></span> <span data-ttu-id="33b1b-274">Uzyskaj tokeny wymagane przez dostęp do interfejsu API innych firm i Zapisz je.</span><span class="sxs-lookup"><span data-stu-id="33b1b-274">Obtain the tokens required for third-party API access and store them.</span></span>
 
-<span data-ttu-id="a52dd-534">Gdy użytkownik loguje się, Identity zbiera tokeny dostępu i odświeżania w ramach procesu uwierzytelniania.</span><span class="sxs-lookup"><span data-stu-id="a52dd-534">When a user logs in, Identity collects access and refresh tokens as part of the authentication process.</span></span> <span data-ttu-id="a52dd-535">W tym momencie istnieje kilka podejścia dostępnych do wykonywania wywołań interfejsu API do interfejsów API innych firm.</span><span class="sxs-lookup"><span data-stu-id="a52dd-535">At that point, there are a couple of approaches available for making API calls to third-party APIs.</span></span>
+<span data-ttu-id="33b1b-275">Gdy użytkownik loguje się, Identity zbiera tokeny dostępu i odświeżania w ramach procesu uwierzytelniania.</span><span class="sxs-lookup"><span data-stu-id="33b1b-275">When a user logs in, Identity collects access and refresh tokens as part of the authentication process.</span></span> <span data-ttu-id="33b1b-276">W tym momencie istnieje kilka podejścia dostępnych do wykonywania wywołań interfejsu API do interfejsów API innych firm.</span><span class="sxs-lookup"><span data-stu-id="33b1b-276">At that point, there are a couple of approaches available for making API calls to third-party APIs.</span></span>
 
-#### <a name="use-a-server-access-token-to-retrieve-the-third-party-access-token"></a><span data-ttu-id="a52dd-536">Korzystanie z tokenu dostępu do serwera w celu pobrania tokenu dostępu innej firmy</span><span class="sxs-lookup"><span data-stu-id="a52dd-536">Use a server access token to retrieve the third-party access token</span></span>
+#### <a name="use-a-server-access-token-to-retrieve-the-third-party-access-token"></a><span data-ttu-id="33b1b-277">Korzystanie z tokenu dostępu do serwera w celu pobrania tokenu dostępu innej firmy</span><span class="sxs-lookup"><span data-stu-id="33b1b-277">Use a server access token to retrieve the third-party access token</span></span>
 
-<span data-ttu-id="a52dd-537">Użyj tokenu dostępu wygenerowanego na serwerze, aby pobrać token dostępu innej firmy z punktu końcowego interfejsu API serwera.</span><span class="sxs-lookup"><span data-stu-id="a52dd-537">Use the access token generated on the server to retrieve the third-party access token from a server API endpoint.</span></span> <span data-ttu-id="a52dd-538">Z tego miejsca Użyj tokenu dostępu innej firmy do wywołania zasobów interfejsu API innych firm bezpośrednio z poziomu Identity klienta.</span><span class="sxs-lookup"><span data-stu-id="a52dd-538">From there, use the third-party access token to call third-party API resources directly from Identity on the client.</span></span>
+<span data-ttu-id="33b1b-278">Użyj tokenu dostępu wygenerowanego na serwerze, aby pobrać token dostępu innej firmy z punktu końcowego interfejsu API serwera.</span><span class="sxs-lookup"><span data-stu-id="33b1b-278">Use the access token generated on the server to retrieve the third-party access token from a server API endpoint.</span></span> <span data-ttu-id="33b1b-279">Z tego miejsca Użyj tokenu dostępu innej firmy do wywołania zasobów interfejsu API innych firm bezpośrednio z poziomu Identity klienta.</span><span class="sxs-lookup"><span data-stu-id="33b1b-279">From there, use the third-party access token to call third-party API resources directly from Identity on the client.</span></span>
 
-<span data-ttu-id="a52dd-539">Nie zalecamy tego podejścia.</span><span class="sxs-lookup"><span data-stu-id="a52dd-539">We don't recommend this approach.</span></span> <span data-ttu-id="a52dd-540">Takie podejście wymaga traktowania tokenu dostępu innej firmy, tak jakby został wygenerowany dla klienta publicznego.</span><span class="sxs-lookup"><span data-stu-id="a52dd-540">This approach requires treating the third-party access token as if it were generated for a public client.</span></span> <span data-ttu-id="a52dd-541">W przypadku postanowień uwierzytelniania OAuth publiczna aplikacja nie ma tajnego klienta, ponieważ nie może być zaufana do bezpiecznego przechowywania wpisów tajnych, a token dostępu jest generowany dla klienta poufnego.</span><span class="sxs-lookup"><span data-stu-id="a52dd-541">In OAuth terms, the public app doesn't have a client secret because it can't be trusted to store secrets safely, and the access token is produced for a confidential client.</span></span> <span data-ttu-id="a52dd-542">Klient poufny jest klientem, który ma klucz tajny klienta i ma możliwość bezpiecznego przechowywania wpisów tajnych.</span><span class="sxs-lookup"><span data-stu-id="a52dd-542">A confidential client is a client that has a client secret and is assumed to be able to safely store secrets.</span></span>
+<span data-ttu-id="33b1b-280">Nie zalecamy tego podejścia.</span><span class="sxs-lookup"><span data-stu-id="33b1b-280">We don't recommend this approach.</span></span> <span data-ttu-id="33b1b-281">Takie podejście wymaga traktowania tokenu dostępu innej firmy, tak jakby został wygenerowany dla klienta publicznego.</span><span class="sxs-lookup"><span data-stu-id="33b1b-281">This approach requires treating the third-party access token as if it were generated for a public client.</span></span> <span data-ttu-id="33b1b-282">W przypadku postanowień uwierzytelniania OAuth publiczna aplikacja nie ma tajnego klienta, ponieważ nie może być zaufana do bezpiecznego przechowywania wpisów tajnych, a token dostępu jest generowany dla klienta poufnego.</span><span class="sxs-lookup"><span data-stu-id="33b1b-282">In OAuth terms, the public app doesn't have a client secret because it can't be trusted to store secrets safely, and the access token is produced for a confidential client.</span></span> <span data-ttu-id="33b1b-283">Klient poufny jest klientem, który ma klucz tajny klienta i ma możliwość bezpiecznego przechowywania wpisów tajnych.</span><span class="sxs-lookup"><span data-stu-id="33b1b-283">A confidential client is a client that has a client secret and is assumed to be able to safely store secrets.</span></span>
 
-* <span data-ttu-id="a52dd-543">Token dostępu innej firmy może mieć przyznane dodatkowe zakresy do wykonywania poufnych operacji na podstawie faktu, że firma zewnętrzna emituje token dla bardziej zaufanego klienta.</span><span class="sxs-lookup"><span data-stu-id="a52dd-543">The third-party access token might be granted additional scopes to perform sensitive operations based on the fact that the third-party emitted the token for a more trusted client.</span></span>
-* <span data-ttu-id="a52dd-544">Podobnie tokeny odświeżania nie powinny być wystawiane dla klienta, który nie jest zaufany. w takim przypadku klient nie będzie miał nieograniczonego dostępu, chyba że zostaną zastosowane inne ograniczenia.</span><span class="sxs-lookup"><span data-stu-id="a52dd-544">Similarly, refresh tokens shouldn't be issued to a client that isn't trusted, as doing so gives the client unlimited access unless other restrictions are put into place.</span></span>
+* <span data-ttu-id="33b1b-284">Token dostępu innej firmy może mieć przyznane dodatkowe zakresy do wykonywania poufnych operacji na podstawie faktu, że firma zewnętrzna emituje token dla bardziej zaufanego klienta.</span><span class="sxs-lookup"><span data-stu-id="33b1b-284">The third-party access token might be granted additional scopes to perform sensitive operations based on the fact that the third-party emitted the token for a more trusted client.</span></span>
+* <span data-ttu-id="33b1b-285">Podobnie tokeny odświeżania nie powinny być wystawiane dla klienta, który nie jest zaufany. w takim przypadku klient nie będzie miał nieograniczonego dostępu, chyba że zostaną zastosowane inne ograniczenia.</span><span class="sxs-lookup"><span data-stu-id="33b1b-285">Similarly, refresh tokens shouldn't be issued to a client that isn't trusted, as doing so gives the client unlimited access unless other restrictions are put into place.</span></span>
 
-#### <a name="make-api-calls-from-the-client-to-the-server-api-in-order-to-call-third-party-apis"></a><span data-ttu-id="a52dd-545">Wykonywanie wywołań interfejsu API z klienta do interfejsu API serwera w celu wywołania interfejsów API innych firm</span><span class="sxs-lookup"><span data-stu-id="a52dd-545">Make API calls from the client to the server API in order to call third-party APIs</span></span>
+#### <a name="make-api-calls-from-the-client-to-the-server-api-in-order-to-call-third-party-apis"></a><span data-ttu-id="33b1b-286">Wykonywanie wywołań interfejsu API z klienta do interfejsu API serwera w celu wywołania interfejsów API innych firm</span><span class="sxs-lookup"><span data-stu-id="33b1b-286">Make API calls from the client to the server API in order to call third-party APIs</span></span>
 
-<span data-ttu-id="a52dd-546">Wykonaj wywołanie interfejsu API z klienta do interfejsu API serwera.</span><span class="sxs-lookup"><span data-stu-id="a52dd-546">Make an API call from the client to the server API.</span></span> <span data-ttu-id="a52dd-547">Na serwerze programu Pobierz token dostępu dla zasobu interfejsu API innej firmy i wystaw, w jaki sposób jest wymagane.</span><span class="sxs-lookup"><span data-stu-id="a52dd-547">From the server, retrieve the access token for the third-party API resource and issue whatever call is necessary.</span></span>
+<span data-ttu-id="33b1b-287">Wykonaj wywołanie interfejsu API z klienta do interfejsu API serwera.</span><span class="sxs-lookup"><span data-stu-id="33b1b-287">Make an API call from the client to the server API.</span></span> <span data-ttu-id="33b1b-288">Na serwerze programu Pobierz token dostępu dla zasobu interfejsu API innej firmy i wystaw, w jaki sposób jest wymagane.</span><span class="sxs-lookup"><span data-stu-id="33b1b-288">From the server, retrieve the access token for the third-party API resource and issue whatever call is necessary.</span></span>
 
-<span data-ttu-id="a52dd-548">Chociaż to podejście wymaga dodatkowego skoku sieci przez serwer w celu wywołania interfejsu API innej firmy, ostatecznie powoduje bezpieczniejsze środowisko:</span><span class="sxs-lookup"><span data-stu-id="a52dd-548">While this approach requires an extra network hop through the server to call a third-party API, it ultimately results in a safer experience:</span></span>
+<span data-ttu-id="33b1b-289">Chociaż to podejście wymaga dodatkowego skoku sieci przez serwer w celu wywołania interfejsu API innej firmy, ostatecznie powoduje bezpieczniejsze środowisko:</span><span class="sxs-lookup"><span data-stu-id="33b1b-289">While this approach requires an extra network hop through the server to call a third-party API, it ultimately results in a safer experience:</span></span>
 
-* <span data-ttu-id="a52dd-549">Serwer może przechowywać tokeny odświeżania i upewnić się, że aplikacja nie utraci dostępu do zasobów innych firm.</span><span class="sxs-lookup"><span data-stu-id="a52dd-549">The server can store refresh tokens and ensure that the app doesn't lose access to third-party resources.</span></span>
-* <span data-ttu-id="a52dd-550">Aplikacja nie może wyciekować tokenów dostępu z serwera, który może zawierać bardziej poufne uprawnienia.</span><span class="sxs-lookup"><span data-stu-id="a52dd-550">The app can't leak access tokens from the server that might contain more sensitive permissions.</span></span>
+* <span data-ttu-id="33b1b-290">Serwer może przechowywać tokeny odświeżania i upewnić się, że aplikacja nie utraci dostępu do zasobów innych firm.</span><span class="sxs-lookup"><span data-stu-id="33b1b-290">The server can store refresh tokens and ensure that the app doesn't lose access to third-party resources.</span></span>
+* <span data-ttu-id="33b1b-291">Aplikacja nie może wyciekować tokenów dostępu z serwera, który może zawierać bardziej poufne uprawnienia.</span><span class="sxs-lookup"><span data-stu-id="33b1b-291">The app can't leak access tokens from the server that might contain more sensitive permissions.</span></span>
 
-## <a name="use-open-id-connect-oidc-v20-endpoints"></a><span data-ttu-id="a52dd-551">Korzystanie z punktów końcowych programu Open ID Connect (OIDC) v 2.0</span><span class="sxs-lookup"><span data-stu-id="a52dd-551">Use Open ID Connect (OIDC) v2.0 endpoints</span></span>
+## <a name="use-open-id-connect-oidc-v20-endpoints"></a><span data-ttu-id="33b1b-292">Korzystanie z punktów końcowych programu Open ID Connect (OIDC) v 2.0</span><span class="sxs-lookup"><span data-stu-id="33b1b-292">Use Open ID Connect (OIDC) v2.0 endpoints</span></span>
 
-<span data-ttu-id="a52dd-552">Biblioteka i szablony uwierzytelniania Blazor korzystają z punktów końcowych Open ID Connect (OIDC) w wersji 1.0.</span><span class="sxs-lookup"><span data-stu-id="a52dd-552">The authentication library and Blazor templates use Open ID Connect (OIDC) v1.0 endpoints.</span></span> <span data-ttu-id="a52dd-553">Aby użyć punktu końcowego v 2.0, skonfiguruj opcję okaziciela JWT <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority?displayProperty=nameWithType> .</span><span class="sxs-lookup"><span data-stu-id="a52dd-553">To use a v2.0 endpoint, configure the JWT Bearer <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority?displayProperty=nameWithType> option.</span></span> <span data-ttu-id="a52dd-554">W poniższym przykładzie skonfigurowano usługi AAD dla programu v 2.0 przez dołączenie `v2.0` segmentu do <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority> Właściwości:</span><span class="sxs-lookup"><span data-stu-id="a52dd-554">In the following example, AAD is configured for v2.0 by appending a `v2.0` segment to the <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority> property:</span></span>
+<span data-ttu-id="33b1b-293">Biblioteka i szablony uwierzytelniania Blazor korzystają z punktów końcowych Open ID Connect (OIDC) w wersji 1.0.</span><span class="sxs-lookup"><span data-stu-id="33b1b-293">The authentication library and Blazor templates use Open ID Connect (OIDC) v1.0 endpoints.</span></span> <span data-ttu-id="33b1b-294">Aby użyć punktu końcowego v 2.0, skonfiguruj opcję okaziciela JWT <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority?displayProperty=nameWithType> .</span><span class="sxs-lookup"><span data-stu-id="33b1b-294">To use a v2.0 endpoint, configure the JWT Bearer <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority?displayProperty=nameWithType> option.</span></span> <span data-ttu-id="33b1b-295">W poniższym przykładzie skonfigurowano usługi AAD dla programu v 2.0 przez dołączenie `v2.0` segmentu do <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority> Właściwości:</span><span class="sxs-lookup"><span data-stu-id="33b1b-295">In the following example, AAD is configured for v2.0 by appending a `v2.0` segment to the <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority> property:</span></span>
 
 ```csharp
 builder.Services.Configure<JwtBearerOptions>(
@@ -1149,7 +897,7 @@ builder.Services.Configure<JwtBearerOptions>(
     });
 ```
 
-<span data-ttu-id="a52dd-555">Alternatywnie można wprowadzić to ustawienie w pliku ustawień aplikacji (*appSettings. JSON*):</span><span class="sxs-lookup"><span data-stu-id="a52dd-555">Alternatively, the setting can be made in the app settings (*appsettings.json*) file:</span></span>
+<span data-ttu-id="33b1b-296">Alternatywnie można wprowadzić to ustawienie w pliku ustawień aplikacji (*appSettings. JSON*):</span><span class="sxs-lookup"><span data-stu-id="33b1b-296">Alternatively, the setting can be made in the app settings (*appsettings.json*) file:</span></span>
 
 ```json
 {
@@ -1160,6 +908,6 @@ builder.Services.Configure<JwtBearerOptions>(
 }
 ```
 
-<span data-ttu-id="a52dd-556">Jeśli znakowanie w segmencie urzędu nie jest odpowiednie dla dostawcy OIDC aplikacji, na przykład z dostawcami spoza usługi AAD, ustaw <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority> Właściwość bezpośrednio.</span><span class="sxs-lookup"><span data-stu-id="a52dd-556">If tacking on a segment to the authority isn't appropriate for the app's OIDC provider, such as with non-AAD providers, set the <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority> property directly.</span></span> <span data-ttu-id="a52dd-557">Ustaw właściwość w <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions> lub w pliku ustawień aplikacji (*appSettings. JSON*) przy użyciu `Authority` klucza.</span><span class="sxs-lookup"><span data-stu-id="a52dd-557">Either set the property in <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions> or in the app settings file (*appsettings.json*) with the `Authority` key.</span></span>
+<span data-ttu-id="33b1b-297">Jeśli znakowanie w segmencie urzędu nie jest odpowiednie dla dostawcy OIDC aplikacji, na przykład z dostawcami spoza usługi AAD, ustaw <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority> Właściwość bezpośrednio.</span><span class="sxs-lookup"><span data-stu-id="33b1b-297">If tacking on a segment to the authority isn't appropriate for the app's OIDC provider, such as with non-AAD providers, set the <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority> property directly.</span></span> <span data-ttu-id="33b1b-298">Ustaw właściwość w <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions> lub w pliku ustawień aplikacji (*appSettings. JSON*) przy użyciu `Authority` klucza.</span><span class="sxs-lookup"><span data-stu-id="33b1b-298">Either set the property in <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions> or in the app settings file (*appsettings.json*) with the `Authority` key.</span></span>
 
-<span data-ttu-id="a52dd-558">Lista oświadczeń w tokenie identyfikatora zmienia się dla punktów końcowych v 2.0.</span><span class="sxs-lookup"><span data-stu-id="a52dd-558">The list of claims in the ID token changes for v2.0 endpoints.</span></span> <span data-ttu-id="a52dd-559">Aby uzyskać więcej informacji, zobacz [Dlaczego warto zaktualizować platformę tożsamości firmy Microsoft (v 2.0)?](/azure/active-directory/azuread-dev/azure-ad-endpoint-comparison).</span><span class="sxs-lookup"><span data-stu-id="a52dd-559">For more information, see [Why update to Microsoft identity platform (v2.0)?](/azure/active-directory/azuread-dev/azure-ad-endpoint-comparison).</span></span>
+<span data-ttu-id="33b1b-299">Lista oświadczeń w tokenie identyfikatora zmienia się dla punktów końcowych v 2.0.</span><span class="sxs-lookup"><span data-stu-id="33b1b-299">The list of claims in the ID token changes for v2.0 endpoints.</span></span> <span data-ttu-id="33b1b-300">Aby uzyskać więcej informacji, zobacz [Dlaczego warto zaktualizować platformę tożsamości firmy Microsoft (v 2.0)?](/azure/active-directory/azuread-dev/azure-ad-endpoint-comparison).</span><span class="sxs-lookup"><span data-stu-id="33b1b-300">For more information, see [Why update to Microsoft identity platform (v2.0)?](/azure/active-directory/azuread-dev/azure-ad-endpoint-comparison).</span></span>

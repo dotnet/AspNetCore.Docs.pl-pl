@@ -47,9 +47,9 @@ Otwórz wygenerowany plik *csproj* i uruchom aplikację w zwykły sposób.
 
 Proces kompilacji przywraca zależności npm w pierwszym przebiegu, co może potrwać kilka minut. Kolejne kompilacje są znacznie szybsze.
 
-# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
 
-Upewnij się, że masz zmienną środowiskową o `ASPNETCORE_Environment` nazwie `Development`z wartością. W systemie Windows (w komunikatach innych niż programu PowerShell `SET ASPNETCORE_Environment=Development`) Uruchom polecenie. W systemie Linux lub macOS Uruchom `export ASPNETCORE_Environment=Development`polecenie.
+Upewnij się, że masz zmienną środowiskową o nazwie `ASPNETCORE_Environment` z wartością `Development` . W systemie Windows (w komunikatach innych niż programu PowerShell) Uruchom polecenie `SET ASPNETCORE_Environment=Development` . W systemie Linux lub macOS Uruchom polecenie `export ASPNETCORE_Environment=Development` .
 
 Uruchom [kompilację dotnet](/dotnet/core/tools/dotnet-build) , aby sprawdzić, czy aplikacja jest poprawnie skompilowana. W pierwszym uruchomieniu proces kompilacji przywraca zależności npm, co może potrwać kilka minut. Kolejne kompilacje są znacznie szybsze.
 

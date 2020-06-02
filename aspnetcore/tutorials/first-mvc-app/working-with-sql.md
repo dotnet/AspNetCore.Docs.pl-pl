@@ -24,13 +24,13 @@ ms.locfileid: "82776210"
 
 Autor: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-`MvcMovieContext` Obiekt obsługuje zadanie łączenia się z bazą danych i mapowania `Movie` obiektów do rekordów bazy danych. Kontekst bazy danych jest zarejestrowany z kontenerem [iniekcji zależności](xref:fundamentals/dependency-injection) w `ConfigureServices` metodzie w pliku *Startup.cs* :
+`MvcMovieContext`Obiekt obsługuje zadanie łączenia się z bazą danych i mapowania `Movie` obiektów do rekordów bazy danych. Kontekst bazy danych jest zarejestrowany z kontenerem [iniekcji zależności](xref:fundamentals/dependency-injection) w `ConfigureServices` metodzie w pliku *Startup.cs* :
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_ConfigureServices&highlight=5-6)]
 
-System [konfiguracji](xref:fundamentals/configuration/index) ASP.NET Core odczytuje `ConnectionString`. W przypadku lokalnego projektowania pobiera parametry połączenia z pliku *appSettings. JSON* :
+System [konfiguracji](xref:fundamentals/configuration/index) ASP.NET Core odczytuje `ConnectionString` . W przypadku lokalnego projektowania pobiera parametry połączenia z pliku *appSettings. JSON* :
 
 [!code-json[](start-mvc/sample/MvcMovie/appsettings.json?highlight=2&range=8-10)]
 
@@ -38,7 +38,7 @@ System [konfiguracji](xref:fundamentals/configuration/index) ASP.NET Core odczyt
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_UseSqlite&highlight=5-6)]
 
-System [konfiguracji](xref:fundamentals/configuration/index) ASP.NET Core odczytuje `ConnectionString`. W przypadku lokalnego projektowania pobiera parametry połączenia z pliku *appSettings. JSON* :
+System [konfiguracji](xref:fundamentals/configuration/index) ASP.NET Core odczytuje `ConnectionString` . W przypadku lokalnego projektowania pobiera parametry połączenia z pliku *appSettings. JSON* :
 
 [!code-json[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/appsettingsSQLite.json?highlight=2&range=8-10)]
 
@@ -56,15 +56,15 @@ LocalDB to uproszczona wersja aparatu bazy danych SQL Server Express, która jes
 
   ![Menu Widok](working-with-sql/_static/ssox.png)
 
-* Kliknij prawym przyciskiem `Movie` myszy tabelę **> View Designer**
+* Kliknij prawym przyciskiem myszy `Movie` tabelę **> View Designer**
 
   ![Menu kontekstowe jest otwarte w tabeli filmów](working-with-sql/_static/design.png)
 
   ![Tabela filmów otwarta w projektancie](working-with-sql/_static/dv.png)
 
-Zanotuj ikonę klucza obok pozycji `ID`. Domyślnie EF utworzy właściwość o nazwie `ID` klucz podstawowy.
+Zanotuj ikonę klucza obok pozycji `ID` . Domyślnie EF utworzy właściwość o nazwie `ID` klucz podstawowy.
 
-* Kliknij prawym przyciskiem `Movie` myszy tabelę, **> wyświetlić dane**
+* Kliknij prawym przyciskiem myszy `Movie` tabelę, **> wyświetlić dane**
 
   ![Menu kontekstowe jest otwarte w tabeli filmów](working-with-sql/_static/ssox2.png)
 
@@ -128,21 +128,21 @@ Aplikacja pokazuje dane z rozrzutu.
 ![Aplikacja filmowa MVC otwarta w przeglądarce Microsoft Edge pokazująca dane filmu](working-with-sql/_static/m55.png)
 
 > [!div class="step-by-step"]
-> [Poprzedni](adding-model.md)
-> [Następny](controller-methods-views.md)
+> [Poprzedni](adding-model.md) 
+>  [Dalej](controller-methods-views.md)
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
 Autor: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-`MvcMovieContext` Obiekt obsługuje zadanie łączenia się z bazą danych i mapowania `Movie` obiektów do rekordów bazy danych. Kontekst bazy danych jest zarejestrowany z kontenerem [iniekcji zależności](xref:fundamentals/dependency-injection) w `ConfigureServices` metodzie w pliku *Startup.cs* :
+`MvcMovieContext`Obiekt obsługuje zadanie łączenia się z bazą danych i mapowania `Movie` obiektów do rekordów bazy danych. Kontekst bazy danych jest zarejestrowany z kontenerem [iniekcji zależności](xref:fundamentals/dependency-injection) w `ConfigureServices` metodzie w pliku *Startup.cs* :
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Startup.cs?name=snippet_ConfigureServices&highlight=13-99)]
 
-System [konfiguracji](xref:fundamentals/configuration/index) ASP.NET Core odczytuje `ConnectionString`. W przypadku lokalnego projektowania pobiera parametry połączenia z pliku *appSettings. JSON* :
+System [konfiguracji](xref:fundamentals/configuration/index) ASP.NET Core odczytuje `ConnectionString` . W przypadku lokalnego projektowania pobiera parametry połączenia z pliku *appSettings. JSON* :
 
 [!code-json[](start-mvc/sample/MvcMovie/appsettings.json?highlight=2&range=8-10)]
 
@@ -150,7 +150,7 @@ System [konfiguracji](xref:fundamentals/configuration/index) ASP.NET Core odczyt
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Startup.cs?name=snippet_UseSqlite&highlight=11-12)]
 
-System [konfiguracji](xref:fundamentals/configuration/index) ASP.NET Core odczytuje `ConnectionString`. W przypadku lokalnego projektowania pobiera parametry połączenia z pliku *appSettings. JSON* :
+System [konfiguracji](xref:fundamentals/configuration/index) ASP.NET Core odczytuje `ConnectionString` . W przypadku lokalnego projektowania pobiera parametry połączenia z pliku *appSettings. JSON* :
 
 [!code-json[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/appsettingsSQLite.json?highlight=2&range=8-10)]
 
@@ -168,15 +168,15 @@ LocalDB to uproszczona wersja aparatu bazy danych SQL Server Express, która jes
 
   ![Menu Widok](working-with-sql/_static/ssox.png)
 
-* Kliknij prawym przyciskiem `Movie` myszy tabelę **> View Designer**
+* Kliknij prawym przyciskiem myszy `Movie` tabelę **> View Designer**
 
   ![Menu kontekstowe jest otwarte w tabeli filmów](working-with-sql/_static/design.png)
 
   ![Tabela filmów otwarta w projektancie](working-with-sql/_static/dv.png)
 
-Zanotuj ikonę klucza obok pozycji `ID`. Domyślnie EF utworzy właściwość o nazwie `ID` klucz podstawowy.
+Zanotuj ikonę klucza obok pozycji `ID` . Domyślnie EF utworzy właściwość o nazwie `ID` klucz podstawowy.
 
-* Kliknij prawym przyciskiem `Movie` myszy tabelę, **> wyświetlić dane**
+* Kliknij prawym przyciskiem myszy `Movie` tabelę, **> wyświetlić dane**
 
   ![Menu kontekstowe jest otwarte w tabeli filmów](working-with-sql/_static/ssox2.png)
 
@@ -240,7 +240,7 @@ Aplikacja pokazuje dane z rozrzutu.
 ![Aplikacja filmowa MVC otwarta w przeglądarce Microsoft Edge pokazująca dane filmu](working-with-sql/_static/m55_mac.png)
 
 > [!div class="step-by-step"]
-> [Poprzedni](adding-model.md)
-> [Następny](controller-methods-views.md)
+> [Poprzedni](adding-model.md) 
+>  [Dalej](controller-methods-views.md)
 
 ::: moniker-end

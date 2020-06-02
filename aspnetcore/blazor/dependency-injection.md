@@ -1,11 +1,11 @@
 ---
-title: "ASP.NET Core Blazor iniekcja zależności" autor: Opis: "Zobacz, jak Blazor aplikacje mogą wstrzyknąć usługi do składników".
-monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+title: "ASP.NET Core Blazor iniekcja zależności" autor: guardrex Description: "Zobacz, jak Blazor aplikacje mogą wstrzyknąć usługi do składników".
+monikerRange: ">= aspnetcore-3,1" MS. Author: Riande MS. Custom: MVC MS. Date: 05/19/2020 No-Loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- SignalRIdentyfikator UID: 
+- " SignalR UID: blazor/wtrysk zależności
 
 ---
 # <a name="aspnet-core-blazor-dependency-injection"></a>ASP.NET Core Blazor wstrzykiwania zależności
@@ -24,59 +24,10 @@ DI jest techniką uzyskiwania dostępu do usług skonfigurowanych w centralnej l
 Domyślne usługi są automatycznie dodawane do kolekcji usług aplikacji.
 
 | Usługa | Okres istnienia | Opis |
-| ---
-title: "ASP.NET Core Blazor iniekcja zależności" autor: Opis: "Zobacz, jak Blazor aplikacje mogą wstrzyknąć usługi do składników".
-monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
----- | ---title: "ASP.NET Core Blazor wstrzykiwania zależności" autor: Opis: "Zobacz, jak Blazor aplikacje mogą wstrzyknąć usługi do składników".
-monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: "ASP.NET Core Blazor iniekcja zależności" autor: Opis: "Zobacz, jak Blazor aplikacje mogą wstrzyknąć usługi do składników".
-monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
----- | ---title: "ASP.NET Core Blazor wstrzykiwania zależności" autor: Opis: "Zobacz, jak Blazor aplikacje mogą wstrzyknąć usługi do składników".
-monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: "ASP.NET Core Blazor iniekcja zależności" autor: Opis: "Zobacz, jak Blazor aplikacje mogą wstrzyknąć usługi do składników".
-monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: "ASP.NET Core Blazor iniekcja zależności" autor: Opis: "Zobacz, jak Blazor aplikacje mogą wstrzyknąć usługi do składników".
-monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
------- | | <xref:System.Net.Http.HttpClient> | Przejściowe | Zapewnia metody wysyłania żądań HTTP i odbierania odpowiedzi HTTP z zasobu identyfikowanego przez identyfikator URI.<br><br>Wystąpienie elementu <xref:System.Net.Http.HttpClient> w aplikacji sieci Blazor webassembly używa przeglądarki do obsługi ruchu HTTP w tle.<br><br>BlazorAplikacje serwera nie domyślnie zawierają <xref:System.Net.Http.HttpClient> skonfigurowane jako usługa. Udostępnianie <xref:System.Net.Http.HttpClient> Blazor aplikacji serwerowej.<br><br>Aby uzyskać więcej informacji, zobacz <xref:blazor/call-web-api>. | | <xref:Microsoft.JSInterop.IJSRuntime> | Pojedyncze ( Blazor zestaw webassembly)<br>Zakres ( Blazor serwer) | Reprezentuje wystąpienie środowiska uruchomieniowego JavaScript, w którym są wysyłane wywołania języka JavaScript. Aby uzyskać więcej informacji, zobacz <xref:blazor/call-javascript-from-dotnet>. | | <xref:Microsoft.AspNetCore.Components.NavigationManager> | Pojedyncze ( Blazor zestaw webassembly)<br>Zakres ( Blazor serwer) | Zawiera pomocników do pracy z identyfikatorami URI i stanem nawigacji. Aby uzyskać więcej informacji, zobacz [identyfikatory URI i pomocnika stanu nawigacji](xref:blazor/routing#uri-and-navigation-state-helpers). |
+| ------- | -------- | ----------- |
+| <xref:System.Net.Http.HttpClient> | Administracyjnej | Zapewnia metody wysyłania żądań HTTP i odbierania odpowiedzi HTTP z zasobu identyfikowanego przez identyfikator URI.<br><br>Wystąpienie elementu <xref:System.Net.Http.HttpClient> w aplikacji sieci Blazor webassembly używa przeglądarki do obsługi ruchu HTTP w tle.<br><br>BlazorAplikacje serwera nie domyślnie zawierają <xref:System.Net.Http.HttpClient> skonfigurowane jako usługa. Udostępnianie <xref:System.Net.Http.HttpClient> Blazor aplikacji serwerowej.<br><br>Aby uzyskać więcej informacji, zobacz <xref:blazor/call-web-api>. |
+| <xref:Microsoft.JSInterop.IJSRuntime> | Pojedyncze ( Blazor zestaw webassembly)<br>Zakres ( Blazor serwer) | Reprezentuje wystąpienie środowiska uruchomieniowego JavaScript, w którym są wysyłane wywołania języka JavaScript. Aby uzyskać więcej informacji, zobacz <xref:blazor/call-javascript-from-dotnet>. |
+| <xref:Microsoft.AspNetCore.Components.NavigationManager> | Pojedyncze ( Blazor zestaw webassembly)<br>Zakres ( Blazor serwer) | Zawiera pomocników do pracy z identyfikatorami URI i stanem nawigacji. Aby uzyskać więcej informacji, zobacz [identyfikatory URI i pomocnika stanu nawigacji](xref:blazor/routing#uri-and-navigation-state-helpers). |
 
 Niestandardowy dostawca usług nie dostarcza automatycznie usług domyślnych wymienionych w tabeli. W przypadku użycia niestandardowego dostawcy usług i wymagania usług wymienionych w tabeli należy dodać wymagane usługi do nowego dostawcy usług.
 
@@ -168,51 +119,10 @@ public void ConfigureServices(IServiceCollection services)
 Usługi można skonfigurować przy użyciu okresów istnienia podanych w poniższej tabeli.
 
 | Okres istnienia | Opis |
-| ---
-title: "ASP.NET Core Blazor iniekcja zależności" autor: Opis: "Zobacz, jak Blazor aplikacje mogą wstrzyknąć usługi do składników".
-monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: "ASP.NET Core Blazor iniekcja zależności" autor: Opis: "Zobacz, jak Blazor aplikacje mogą wstrzyknąć usługi do składników".
-monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
----- | ---title: "ASP.NET Core Blazor wstrzykiwania zależności" autor: Opis: "Zobacz, jak Blazor aplikacje mogą wstrzyknąć usługi do składników".
-monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: "ASP.NET Core Blazor iniekcja zależności" autor: Opis: "Zobacz, jak Blazor aplikacje mogą wstrzyknąć usługi do składników".
-monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: "ASP.NET Core Blazor iniekcja zależności" autor: Opis: "Zobacz, jak Blazor aplikacje mogą wstrzyknąć usługi do składników".
-monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
------- | | <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped%2A> | Blazor Aplikacje webassembly nie mają obecnie koncepcji DI Scopes. `Scoped`-zarejestrowane usługi zachowują się jak `Singleton` usługi. Jednak Blazor model hostingu serwera obsługuje `Scoped` okres istnienia. W przypadku Blazor aplikacji serwerowych Rejestracja usługi w zakresie jest objęta zakresem *połączenia*. Z tego powodu użycie usług objętych zakresem jest preferowane dla usług, które powinny być objęte zakresem bieżącego użytkownika, nawet jeśli bieżącym celem jest uruchomienie po stronie klienta w przeglądarce. | | <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Singleton%2A> | DI tworzy *pojedyncze wystąpienie* usługi. Wszystkie składniki wymagające `Singleton` usługi odbierają wystąpienie tej samej usługi. | | <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Transient%2A> | Za każdym razem, gdy składnik uzyskuje wystąpienie `Transient` usługi z kontenera usługi, otrzymuje *nowe wystąpienie* usługi. |
+| -------- | ----------- |
+| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped%2A> | BlazorAplikacje webassembly nie mają obecnie koncepcji DI Scopes. `Scoped`-zarejestrowane usługi zachowują się jak `Singleton` usługi. Jednak Blazor model hostingu serwera obsługuje `Scoped` okres istnienia. W przypadku Blazor aplikacji serwerowych Rejestracja usługi w zakresie jest objęta zakresem *połączenia*. Z tego powodu użycie usług objętych zakresem jest preferowane dla usług, które powinny być objęte zakresem bieżącego użytkownika, nawet jeśli bieżącym celem jest uruchomienie po stronie klienta w przeglądarce. |
+| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Singleton%2A> | DI tworzy *pojedyncze wystąpienie* usługi. Wszystkie składniki wymagające `Singleton` usługi odbierają wystąpienie tej samej usługi. |
+| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Transient%2A> | Za każdym razem, gdy składnik uzyskuje wystąpienie `Transient` usługi z kontenera usługi, otrzymuje *nowe wystąpienie* usługi. |
 
 System DI jest oparty na systemie DI w ASP.NET Core. Aby uzyskać więcej informacji, zobacz <xref:fundamentals/dependency-injection>.
 
@@ -424,4 +334,5 @@ Jeśli pojedynczy składnik może korzystać z współbieżnie <xref:Microsoft.E
 ## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:fundamentals/dependency-injection>
+* [Wskazówki interfejsu IDisposable dla wystąpień przejściowych i współużytkowanych](xref:fundamentals/dependency-injection#idisposable-guidance-for-transient-and-shared-instances)
 * <xref:mvc/views/dependency-injection>

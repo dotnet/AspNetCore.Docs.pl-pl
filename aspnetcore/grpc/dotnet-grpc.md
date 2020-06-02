@@ -41,24 +41,24 @@ dotnet tool install -g dotnet-grpc
 <Protobuf Include="Protos\greet.proto" GrpcServices="Server" />
 ```
 
-Odwołania do protobuf są używane do generowania zasobów klienta i/lub serwera w języku C#. To `dotnet-grpc` narzędzie może:
+Odwołania do protobuf są używane do generowania zasobów klienta i/lub serwera w języku C#. To `dotnet-grpc` Narzędzie może:
 
 * Utwórz odwołanie protobuf z plików lokalnych na dysku.
 * Utwórz odwołanie protobuf z pliku zdalnego określonego przez adres URL.
 * Upewnij się, że odpowiednie zależności pakietu gRPC są dodawane do projektu.
 
-Na przykład `Grpc.AspNetCore` pakiet zostanie dodany do aplikacji sieci Web. `Grpc.AspNetCore`zawiera biblioteki serwera gRPC i klienta oraz obsługę narzędzi. `Grpc.Net.Client`Alternatywnie, pakiety `Grpc.Tools` i `Google.Protobuf` , które zawierają tylko biblioteki i narzędzia klienckie gRPC, są dodawane do aplikacji konsoli.
+Na przykład `Grpc.AspNetCore` pakiet zostanie dodany do aplikacji sieci Web. `Grpc.AspNetCore`zawiera biblioteki serwera gRPC i klienta oraz obsługę narzędzi. Alternatywnie, `Grpc.Net.Client` `Grpc.Tools` pakiety i, `Google.Protobuf` które zawierają tylko biblioteki i narzędzia klienckie gRPC, są dodawane do aplikacji konsoli.
 
 ### <a name="add-file"></a>Dodaj plik
 
-`add-file` Polecenie służy do dodawania plików lokalnych na dysku jako odwołań protobuf. Podane ścieżki plików:
+`add-file`Polecenie służy do dodawania plików lokalnych na dysku jako odwołań protobuf. Podane ścieżki plików:
 
 * Może być względna względem bieżącego katalogu lub ścieżek bezwzględnych.
 * Mogą zawierać symbole wieloznaczne dla [obsługi symboli wieloznacznych](https://wikipedia.org/wiki/Glob_(programming))plików opartych na wzorcu.
 
-Jeśli jakiekolwiek pliki znajdują się poza katalogiem projektu `Link` , element zostanie dodany w celu wyświetlenia pliku w folderze `Protos` w programie Visual Studio.
+Jeśli jakiekolwiek pliki znajdują się poza katalogiem projektu, `Link` element zostanie dodany w celu wyświetlenia pliku w folderze `Protos` w programie Visual Studio.
 
-### <a name="usage"></a>Sposób użycia
+### <a name="usage"></a>Użycie
 
 ```dotnetcli
 dotnet grpc add-file [options] <files>...
@@ -75,15 +75,15 @@ dotnet grpc add-file [options] <files>...
 | Opcja krótka | Opcja Long | Opis |
 |-|-|-|
 | -p | --projekt | Ścieżka do pliku projektu, na którym mają być wykonywane działania. Jeśli plik nie zostanie określony, polecenie przeszukuje bieżący katalog.
-| -s | --usługi | Typ usług gRPC, które mają zostać wygenerowane. Jeśli `Default` jest określony, `Both` jest używany dla projektów sieci Web `Client` i jest używany dla projektów nieopartych na sieci Web. Akceptowane wartości to `Both`, `Client` `Default` `None`,,, `Server`.
+| -s | --usługi | Typ usług gRPC, które mają zostać wygenerowane. Jeśli `Default` jest określony, `Both` jest używany dla projektów sieci Web i `Client` jest używany dla projektów nieopartych na sieci Web. Akceptowane wartości to,,,, `Both` `Client` `Default` `None` `Server` .
 | -i | --dodatkowe-import-katalogów | Dodatkowe katalogi, które mają być używane podczas rozpoznawania importu dla plików protobuf. Jest to rozdzielana średnikami lista ścieżek.
-| | --dostęp | Modyfikator dostępu, który ma być używany dla wygenerowanych klas języka C#. Wartość domyślna to `Public`. Akceptowane wartości to `Internal` i `Public`.
+| | --dostęp | Modyfikator dostępu, który ma być używany dla wygenerowanych klas języka C#. Wartość domyślna to `Public`. Akceptowane wartości to `Internal` i `Public` .
 
 ### <a name="add-url"></a>Dodaj adres URL
 
-`add-url` Polecenie służy do dodawania pliku zdalnego określonego przez źródłowy adres URL jako odwołanie protobuf. Należy podać ścieżkę pliku, aby określić, gdzie pobrać plik zdalny. Ścieżka pliku może być względna względem bieżącego katalogu lub ścieżki bezwzględnej. Jeśli ścieżka pliku znajduje się poza katalogiem projektu, `Link` element zostanie dodany w celu wyświetlenia pliku w folderze `Protos` wirtualnym w programie Visual Studio.
+`add-url`Polecenie służy do dodawania pliku zdalnego określonego przez źródłowy adres URL jako odwołanie protobuf. Należy podać ścieżkę pliku, aby określić, gdzie pobrać plik zdalny. Ścieżka pliku może być względna względem bieżącego katalogu lub ścieżki bezwzględnej. Jeśli ścieżka pliku znajduje się poza katalogiem projektu, `Link` element zostanie dodany w celu wyświetlenia pliku w folderze wirtualnym `Protos` w programie Visual Studio.
 
-### <a name="usage"></a>Sposób użycia
+### <a name="usage"></a>Użycie
 
 ```dotnetcli
 dotnet-grpc add-url [options] <url>
@@ -101,18 +101,18 @@ dotnet-grpc add-url [options] <url>
 |-|-|-|
 | -o | --output | Określa ścieżkę pobierania pliku protobuf zdalnego. Ta opcja jest wymagana.
 | -p | --projekt | Ścieżka do pliku projektu, na którym mają być wykonywane działania. Jeśli plik nie zostanie określony, polecenie przeszukuje bieżący katalog.
-| -s | --usługi | Typ usług gRPC, które mają zostać wygenerowane. Jeśli `Default` jest określony, `Both` jest używany dla projektów sieci Web `Client` i jest używany dla projektów nieopartych na sieci Web. Akceptowane wartości to `Both`, `Client` `Default` `None`,,, `Server`.
+| -s | --usługi | Typ usług gRPC, które mają zostać wygenerowane. Jeśli `Default` jest określony, `Both` jest używany dla projektów sieci Web i `Client` jest używany dla projektów nieopartych na sieci Web. Akceptowane wartości to,,,, `Both` `Client` `Default` `None` `Server` .
 | -i | --dodatkowe-import-katalogów | Dodatkowe katalogi, które mają być używane podczas rozpoznawania importu dla plików protobuf. Jest to rozdzielana średnikami lista ścieżek.
-| | --dostęp | Modyfikator dostępu, który ma być używany dla wygenerowanych klas języka C#. Wartość domyślna to `Public`. Akceptowane wartości to `Internal` i `Public`.
+| | --dostęp | Modyfikator dostępu, który ma być używany dla wygenerowanych klas języka C#. Wartość domyślna to `Public` . Akceptowane wartości to `Internal` i `Public` .
 
 ## <a name="remove"></a>Usuń
 
-`remove` Polecenie służy do usuwania odwołań protobuf z pliku *csproj* . Polecenie akceptuje argumenty ścieżki i źródłowe adresy URL jako argumenty. Narzędzie:
+`remove`Polecenie służy do usuwania odwołań protobuf z pliku *csproj* . Polecenie akceptuje argumenty ścieżki i źródłowe adresy URL jako argumenty. Narzędzie:
 
 * Usuwa odwołanie protobuf.
 * Nie usuwa pliku *. proto* , nawet jeśli został pierwotnie pobrany ze zdalnego adresu URL.
 
-### <a name="usage"></a>Sposób użycia
+### <a name="usage"></a>Użycie
 
 ```dotnetcli
 dotnet-grpc remove [options] <references>...
@@ -130,16 +130,16 @@ dotnet-grpc remove [options] <references>...
 |-|-|-|
 | -p | --projekt | Ścieżka do pliku projektu, na którym mają być wykonywane działania. Jeśli plik nie zostanie określony, polecenie przeszukuje bieżący katalog.
 
-## <a name="refresh"></a>Odświeżanie
+## <a name="refresh"></a>Odśwież
 
-`refresh` Polecenie służy do aktualizowania odwołania zdalnego z najnowszą zawartością ze źródłowego adresu URL. Aby określić odwołanie, które ma zostać zaktualizowane, można użyć zarówno ścieżki pliku pobierania, jak i źródłowego adresu URL. Uwaga:
+`refresh`Polecenie służy do aktualizowania odwołania zdalnego z najnowszą zawartością ze źródłowego adresu URL. Aby określić odwołanie, które ma zostać zaktualizowane, można użyć zarówno ścieżki pliku pobierania, jak i źródłowego adresu URL. Uwaga:
 
 * Skróty zawartości plików są porównywane, aby określić, czy plik lokalny powinien zostać zaktualizowany.
 * Nie są porównywane żadne informacje o znaczniku czasu.
 
 Narzędzie zawsze zastępuje plik lokalny plikiem zdalnym, jeśli jest wymagana aktualizacja.
 
-### <a name="usage"></a>Sposób użycia
+### <a name="usage"></a>Użycie
 
 ```dotnetcli
 dotnet-grpc refresh [options] [<references>...]
@@ -158,11 +158,11 @@ dotnet-grpc refresh [options] [<references>...]
 | -p | --projekt | Ścieżka do pliku projektu, na którym mają być wykonywane działania. Jeśli plik nie zostanie określony, polecenie przeszukuje bieżący katalog.
 | | --osuszyć-Run | Wyświetla listę plików, które zostaną zaktualizowane bez pobierania nowej zawartości.
 
-## <a name="list"></a>List
+## <a name="list"></a>Lista
 
-`list` Polecenie jest używane do wyświetlania wszystkich odwołań protobuf w pliku projektu. Jeśli wszystkie wartości w kolumnie są wartościami domyślnymi, kolumna może zostać pominięta.
+`list`Polecenie jest używane do wyświetlania wszystkich odwołań protobuf w pliku projektu. Jeśli wszystkie wartości w kolumnie są wartościami domyślnymi, kolumna może zostać pominięta.
 
-### <a name="usage"></a>Sposób użycia
+### <a name="usage"></a>Użycie
 
 ```dotnetcli
 dotnet-grpc list [options]

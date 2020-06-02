@@ -67,7 +67,7 @@ Pobierz instalatora przy użyciu następującego linku:
 
 ## <a name="create-an-aspnet-core-razor-pages-app"></a>Tworzenie aplikacji Razor Pages ASP.NET Core
 
-Postępuj <xref:getting-started> zgodnie z samouczkiem, aby utworzyć aplikację Razor Pages.
+Postępuj zgodnie z <xref:getting-started> samouczkiem, aby utworzyć aplikację Razor Pages.
 
 ## <a name="publish-and-deploy-the-app"></a>Publikowanie i wdrażanie aplikacji
 
@@ -84,7 +84,7 @@ Postępuj <xref:getting-started> zgodnie z samouczkiem, aby utworzyć aplikację
    * Jeśli utworzono folder dla witryny usług IIS, która jest dostępna na komputerze deweloperskim jako udział sieciowy, podaj ścieżkę do udziału. Bieżący użytkownik musi mieć dostęp do zapisu w celu opublikowania w udziale.
    * Jeśli nie możesz wdrożyć bezpośrednio w folderze witryny usług IIS na serwerze IIS, Opublikuj je w folderze na nośniku umożliwiającym usunięcie i fizycznie Przenieś opublikowaną aplikację do folderu witryny usług IIS na serwerze, który jest **ścieżką fizyczną** lokacji w Menedżerze usług IIS. Przenieś zawartość folderu *bin/Release/{Target Framework}/Publish* do folderu witryny usług IIS na serwerze, który jest **ścieżką fizyczną** lokacji w Menedżerze usług IIS.
 
-# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
 
 1. W powłoce poleceń Opublikuj aplikację w konfiguracji wydania przy użyciu polecenia [dotnet Publish](/dotnet/core/tools/dotnet-publish) :
 
@@ -96,7 +96,7 @@ Postępuj <xref:getting-started> zgodnie z samouczkiem, aby utworzyć aplikację
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-1. Kliknij prawym przyciskiem myszy projekt w **rozwiązaniu** , a następnie wybierz pozycję **Publikuj** > **Publikowanie w folderze**.
+1. Kliknij prawym przyciskiem myszy projekt w **rozwiązaniu** , a następnie wybierz pozycję **Publikuj**  >  **Publikowanie w folderze**.
 1. Ustaw ścieżkę do **folderu wybierz** .
    * Jeśli utworzono folder dla witryny usług IIS, która jest dostępna na komputerze deweloperskim jako udział sieciowy, podaj ścieżkę do udziału. Bieżący użytkownik musi mieć dostęp do zapisu w celu opublikowania w udziale.
    * Jeśli nie możesz wdrożyć bezpośrednio w folderze witryny usług IIS na serwerze IIS, Opublikuj je w folderze na nośniku umożliwiającym usunięcie i fizycznie Przenieś opublikowaną aplikację do folderu witryny usług IIS na serwerze, który jest **ścieżką fizyczną** lokacji w Menedżerze usług IIS. Przenieś zawartość folderu *bin/Release/{Target Framework}/Publish* do folderu witryny usług IIS na serwerze, który jest **ścieżką fizyczną** lokacji w Menedżerze usług IIS.
@@ -121,7 +121,7 @@ Aby dowiedzieć się więcej na temat hostowania aplikacji ASP.NET Core w usług
 > [!div class="nextstepaction"]
 > <xref:host-and-deploy/iis/index>
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 ### <a name="articles-in-the-aspnet-core-documentation-set"></a>Artykuły w zestawie dokumentacji ASP.NET Core
 

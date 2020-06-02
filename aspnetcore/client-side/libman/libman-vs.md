@@ -28,7 +28,7 @@ Program Visual Studio ma wbudowaną obsługę [LibMan](xref:client-side/libman/i
 * Obsługa konfigurowania i uruchamiania operacji przywracania LibMan podczas kompilacji.
 * Elementy menu służące do wyzwalania operacji przywracania i czyszczenia LibMan.
 * Okno dialogowe wyszukiwania służące do znajdowania bibliotek i dodawania plików do projektu.
-* Edytowanie obsługi pliku manifestu Libman *Libman. JSON*&mdash;.
+* Edytowanie obsługi pliku manifestu LibMan *Libman. JSON* &mdash; .
 
 [Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/client-side/libman/samples/) [(jak pobrać)](xref:index#how-to-download-a-sample)
 
@@ -47,13 +47,13 @@ Pliki bibliotek można dodać do projektu ASP.NET Core na dwa różne sposoby:
 
 Wykonaj następujące kroki, aby zainstalować bibliotekę po stronie klienta:
 
-* W **Eksplorator rozwiązań**kliknij prawym przyciskiem myszy folder projektu, w którym należy dodać pliki. Wybierz pozycję **Dodaj** > **bibliotekę po stronie klienta**. Zostanie wyświetlone okno dialogowe **Dodawanie biblioteki po stronie klienta** :
+* W **Eksplorator rozwiązań**kliknij prawym przyciskiem myszy folder projektu, w którym należy dodać pliki. Wybierz pozycję **Dodaj**  >  **bibliotekę po stronie klienta**. Zostanie wyświetlone okno dialogowe **Dodawanie biblioteki po stronie klienta** :
 
   ![Okno dialogowe Dodawanie biblioteki po stronie klienta](_static/add-library-dialog.png)
 
 * Wybierz dostawcę biblioteki z listy rozwijanej **dostawca** . CDNJS jest dostawcą domyślnym.
 * Wpisz nazwę biblioteki do pobrania w polu tekstowym **Biblioteka** . Technologia IntelliSense udostępnia listę bibliotek zaczynających się od podanego tekstu.
-* Wybierz bibliotekę z listy IntelliSense. Zwróć uwagę, że nazwa biblioteki jest poddana `@` sufiksu i najnowszej wersji stabilnej znanej dla wybranego dostawcy.
+* Wybierz bibliotekę z listy IntelliSense. Zwróć uwagę, że nazwa biblioteki jest poddana sufiksu `@` i najnowszej wersji stabilnej znanej dla wybranego dostawcy.
 * Wybieranie plików do uwzględnienia:
   * Zaznacz przycisk radiowy **Dołącz wszystkie pliki bibliotek** , aby uwzględnić wszystkie pliki biblioteki.
   * Wybierz przycisk radiowy **Wybierz określone pliki** , aby dołączyć podzestaw plików biblioteki. Po wybraniu przycisku radiowego drzewo selektora plików jest włączone. Zaznacz pola po lewej stronie nazw plików do pobrania.
@@ -98,15 +98,15 @@ Aby otworzyć plik *Libman. JSON* do edycji, istnieją następujące opcje:
 * Kliknij prawym przyciskiem myszy projekt w **Eksplorator rozwiązań** i wybierz pozycję **Zarządzaj bibliotekami po stronie klienta**. **&#8224;**
 * Wybierz pozycję **Zarządzaj bibliotekami po stronie klienta** z menu **projektu** programu Visual Studio. **&#8224;**
 
-**&#8224;** Jeśli plik *Libman. JSON* nie istnieje już w katalogu głównym projektu, zostanie utworzony przy użyciu domyślnej zawartości szablonu elementu.
+**& #8224;** Jeśli plik *Libman. JSON* nie istnieje już w katalogu głównym projektu, zostanie utworzony przy użyciu domyślnej zawartości szablonu elementu.
 
-Program Visual Studio oferuje zaawansowane funkcje edycji JSON, takie jak kolorowanie, formatowanie, IntelliSense i walidacja schematu. Schemat JSON manifestu LibMan został znaleziony w lokalizacji [https://json.schemastore.org/libman](https://json.schemastore.org/libman).
+Program Visual Studio oferuje zaawansowane funkcje edycji JSON, takie jak kolorowanie, formatowanie, IntelliSense i walidacja schematu. Schemat JSON manifestu LibMan został znaleziony w lokalizacji [https://json.schemastore.org/libman](https://json.schemastore.org/libman) .
 
 Przy użyciu następującego pliku manifestu LibMan pobiera pliki zgodnie z konfiguracją zdefiniowaną we `libraries` właściwości. Wyjaśnienie literałów obiektów zdefiniowanych w `libraries` następujący sposób:
 
-* Podzestaw [jQuery](https://jquery.com/) w wersji 3.3.1 jest pobierany z dostawcy CDNJS. Podzestaw jest `files` zdefiniowany w właściwości&mdash;*jQuery. min. js*, *jQuery. js*i *jQuery. min. map*. Pliki są umieszczane w folderze *wwwroot/lib/jQuery* projektu.
-* W [całości wersja 4.1.3](https://getbootstrap.com/) jest pobierana i umieszczana w folderze *wwwroot/lib/Bootstrap* . `provider` Właściwość literału obiektu zastępuje wartość `defaultProvider` właściwości. LibMan pobiera pliki Bootstrap z dostawcy unpkg.
-* Podzbiór [Lodash](https://lodash.com/) został zatwierdzony przez organ regulujący w organizacji. *Lodash. js* i *lodash. min. js* są pobierane z lokalnego systemu plików w lokalizacji *C:\\temp\\lodash\\*. Pliki są kopiowane do folderu *wwwroot/lib/lodash* projektu.
+* Podzestaw [jQuery](https://jquery.com/) w wersji 3.3.1 jest pobierany z dostawcy CDNJS. Podzestaw jest zdefiniowany w `files` właściwości &mdash; *jQuery. min. js*, *jQuery. js*i *jQuery. min. map*. Pliki są umieszczane w folderze *wwwroot/lib/jQuery* projektu.
+* W [całości wersja 4.1.3](https://getbootstrap.com/) jest pobierana i umieszczana w folderze *wwwroot/lib/Bootstrap* . Właściwość literału obiektu `provider` zastępuje `defaultProvider` wartość właściwości. LibMan pobiera pliki Bootstrap z dostawcy unpkg.
+* Podzbiór [Lodash](https://lodash.com/) został zatwierdzony przez organ regulujący w organizacji. *Lodash. js* i *lodash. min. js* są pobierane z lokalnego systemu plików w lokalizacji *C: \\ temp \\ lodash \\ *. Pliki są kopiowane do folderu *wwwroot/lib/lodash* projektu.
 
 [!code-json[](samples/LibManSample/libman.json)]
 
@@ -133,7 +133,7 @@ Aby włączyć i przetestować zachowanie funkcji przywracania po kompilacji:
 
   [!code-xml[](samples/LibManSample/LibManSample.csproj?name=snippet_RestoreOnBuildPackage)]
 
-* Skompiluj projekt, aby upewnić się, że następuje przywracanie pliku LibMan. `Microsoft.Web.LibraryManager.Build` Pakiet wstrzyknąć obiekt docelowy MSBuild, który uruchamia LibMan podczas operacji kompilowania projektu.
+* Skompiluj projekt, aby upewnić się, że następuje przywracanie pliku LibMan. `Microsoft.Web.LibraryManager.Build`Pakiet wstrzyknąć obiekt docelowy MSBuild, który uruchamia LibMan podczas operacji kompilowania projektu.
 * Przejrzyj źródło danych **kompilacji** w oknie **danych wyjściowych** dla dziennika aktywności LibMan:
 
   ```console
@@ -207,7 +207,7 @@ Aby odinstalować pliki biblioteki:
 
 * Otwórz plik *Libman. JSON*.
 * Umieść karetkę wewnątrz odpowiedniego `libraries` literału obiektu.
-* Kliknij ikonę żarówki, która pojawia się na lewym marginesie, a następnie wybierz pozycję ** \<Odinstaluj\<library_name> @ library_version>**:
+* Kliknij ikonę żarówki, która pojawia się na lewym marginesie, a następnie wybierz pozycję **odinstaluj \< library_name> @ \< library_version>**:
 
   ![Opcja menu kontekstowego odinstalowywania biblioteki](_static/uninstall-menu-option.png)
 

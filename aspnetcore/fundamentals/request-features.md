@@ -55,15 +55,15 @@ ASP.NET Core definiuje wiele interfejsów funkcji HTTP `Microsoft.AspNetCore.Htt
 `ITlsTokenBindingFeature`Definiuje metody pracy z parametrami powiązania tokenu TLS.
 
 > [!NOTE]
-> `ISessionFeature`nie jest funkcją serwera, ale jest zaimplementowana `SessionMiddleware` przez program (zobacz [Zarządzanie stanem aplikacji](app-state.md)).
+> `ISessionFeature`nie jest funkcją serwera, ale jest zaimplementowana przez program `SessionMiddleware` (zobacz [Zarządzanie stanem aplikacji](app-state.md)).
 
 ## <a name="feature-collections"></a>Kolekcje funkcji
 
-`Features` Właściwość `HttpContext` zawiera interfejs do pobierania i ustawiania dostępnych funkcji http dla bieżącego żądania. Ponieważ kolekcja funkcji jest modyfikowalna nawet w kontekście żądania, oprogramowanie pośredniczące może służyć do modyfikowania kolekcji i dodawania obsługi dodatkowych funkcji.
+`Features`Właściwość `HttpContext` zawiera interfejs do pobierania i ustawiania dostępnych funkcji http dla bieżącego żądania. Ponieważ kolekcja funkcji jest modyfikowalna nawet w kontekście żądania, oprogramowanie pośredniczące może służyć do modyfikowania kolekcji i dodawania obsługi dodatkowych funkcji.
 
 ## <a name="middleware-and-request-features"></a>Oprogramowanie pośredniczące i funkcje żądania
 
-Chociaż serwery są odpowiedzialne za tworzenie kolekcji funkcji, oprogramowanie pośredniczące może dodawać do tej kolekcji i korzystać z funkcji z kolekcji. Na przykład `StaticFileMiddleware` program uzyskuje dostęp do `IHttpSendFileFeature` funkcji. Jeśli ta funkcja istnieje, jest używana do wysyłania żądanego pliku statycznego ze ścieżki fizycznej. W przeciwnym razie do wysłania pliku zostanie użyta mniejsza Metoda alternatywna. Jeśli jest `IHttpSendFileFeature` dostępna, umożliwia systemowi operacyjnemu otwarcie pliku i przeprowadzenie bezpośredniego kopiowania trybu jądra na kartę sieciową.
+Chociaż serwery są odpowiedzialne za tworzenie kolekcji funkcji, oprogramowanie pośredniczące może dodawać do tej kolekcji i korzystać z funkcji z kolekcji. Na przykład `StaticFileMiddleware` program uzyskuje dostęp do `IHttpSendFileFeature` funkcji. Jeśli ta funkcja istnieje, jest używana do wysyłania żądanego pliku statycznego ze ścieżki fizycznej. W przeciwnym razie do wysłania pliku zostanie użyta mniejsza Metoda alternatywna. Jeśli jest dostępna, `IHttpSendFileFeature` umożliwia systemowi operacyjnemu otwarcie pliku i przeprowadzenie bezpośredniego kopiowania trybu jądra na kartę sieciową.
 
 Ponadto oprogramowanie pośredniczące może dodać do kolekcji funkcji ustanowionej przez serwer. Istniejące funkcje mogą być nawet zastępowane przez oprogramowanie pośredniczące, co pozwala oprogramowaniu pośredniczącemu rozszerzyć funkcjonalność serwera. Funkcje dodane do kolekcji są natychmiast dostępne dla innych programów pośredniczących lub aplikacji bazowej w późniejszym czasie w potoku żądania.
 

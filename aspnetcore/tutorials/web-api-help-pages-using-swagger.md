@@ -37,7 +37,7 @@ Swagger to specyfikacja języka niezależny od do opisywania interfejsów API [r
 
 ## <a name="swagger-specification-swaggerjson"></a>Specyfikacja struktury Swagger (Swagger. JSON)
 
-Rdzeń do przepływu struktury Swagger jest domyślnie specyfikacją&mdash;Swagger dokumentu o nazwie *Swagger. JSON*. Jest on generowany przez łańcuch narzędzi programu Swagger (lub implementacje innych firm) na podstawie Twojej usługi. Opisuje możliwości interfejsu API i sposób uzyskiwania dostępu do niego przy użyciu protokołu HTTP. Służy on do tworzenia interfejsu użytkownika struktury Swagger i jest używany przez łańcuch narzędzi do włączania odnajdywania i generowania kodu klienta. Oto przykład specyfikacji struktury Swagger zredukowany dla zwięzłości:
+Rdzeń do przepływu struktury Swagger jest domyślnie specyfikacją Swagger &mdash; dokumentu o nazwie *Swagger. JSON*. Jest on generowany przez łańcuch narzędzi programu Swagger (lub implementacje innych firm) na podstawie Twojej usługi. Opisuje możliwości interfejsu API i sposób uzyskiwania dostępu do niego przy użyciu protokołu HTTP. Służy on do tworzenia interfejsu użytkownika struktury Swagger i jest używany przez łańcuch narzędzi do włączania odnajdywania i generowania kodu klienta. Oto przykład specyfikacji struktury Swagger zredukowany dla zwięzłości:
 
 ```json
 {

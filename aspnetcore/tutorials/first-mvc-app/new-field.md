@@ -35,7 +35,7 @@ Gdy Code First EF jest używany do automatycznego tworzenia bazy danych, Code Fi
 
 ## <a name="add-a-rating-property-to-the-movie-model"></a>Dodawanie właściwości oceny do modelu filmu
 
-Dodaj `Rating` właściwość do *modeli/filmów. cs*:
+Dodaj `Rating` Właściwość do *modeli/filmów. cs*:
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Models/MovieDateRating.cs?highlight=13&name=snippet)]
 
@@ -57,7 +57,7 @@ Polecenie ⌘ + B
 
 ------
 
-Ponieważ dodano nowe pole do `Movie` klasy, należy zaktualizować białe listy powiązań, aby ta nowa właściwość została uwzględniona. W *programie MoviesController.cs* `[Bind]` zaktualizuj atrybut dla obu `Create` metod i `Edit` , aby uwzględnić `Rating` Właściwość:
+Ponieważ dodano nowe pole do `Movie` klasy, należy zaktualizować białe listy powiązań, aby ta nowa właściwość została uwzględniona. W programie *MoviesController.cs*zaktualizuj `[Bind]` atrybut dla obu `Create` metod i, `Edit` Aby uwzględnić `Rating` Właściwość:
 
 ```csharp
 [Bind("Id,Title,ReleaseDate,Genre,Price,Rating")]
@@ -85,11 +85,11 @@ Możesz skopiować/wkleić poprzednią "grupę formularzy" i pozwól, aby funkcj
 
 Zaktualizuj pozostałe szablony.
 
-Zaktualizuj `SeedData` klasę, aby zapewnić wartość nowej kolumny. Poniżej przedstawiono przykładową zmianę, ale trzeba wprowadzić tę zmianę dla każdej z nich `new Movie`.
+Zaktualizuj `SeedData` klasę, aby zapewnić wartość nowej kolumny. Poniżej przedstawiono przykładową zmianę, ale trzeba wprowadzić tę zmianę dla każdej z nich `new Movie` .
 
 [!code-csharp[](start-mvc/sample/MvcMovie/Models/SeedDataRating.cs?name=snippet1&highlight=6)]
 
-Aplikacja nie będzie działała, dopóki baza danych nie zostanie zaktualizowana w celu uwzględnienia nowego pola. Jeśli jest teraz uruchomiona, zgłaszane są następujące `SqlException` elementy:
+Aplikacja nie będzie działała, dopóki baza danych nie zostanie zaktualizowana w celu uwzględnienia nowego pola. Jeśli jest teraz uruchomiona, `SqlException` zgłaszane są następujące elementy:
 
 `SqlException: Invalid column name 'Rating'.`
 
@@ -118,7 +118,7 @@ Add-Migration Rating
 Update-Database
 ```
 
-`Add-Migration` Polecenie informuje platformę migracji, aby przeanalizować `Movie` bieżący model z bieżącym `Movie` schematem bazy danych i utworzyć wymagany kod w celu przeprowadzenia migracji bazy danych do nowego modelu.
+`Add-Migration`Polecenie informuje platformę migracji, aby przeanalizować bieżący `Movie` model z bieżącym `Movie` schematem bazy danych i utworzyć wymagany kod w celu przeprowadzenia migracji bazy danych do nowego modelu.
 
 Nazwa "Rating" jest arbitralna i jest używana do nazwy pliku migracji. Warto użyć zrozumiałej nazwy dla pliku migracji.
 
@@ -139,9 +139,9 @@ dotnet ef database update
 
 Uruchom aplikację i sprawdź, czy można tworzyć, edytować i wyświetlać filmy z `Rating` polem. Zaktualizuj aplikację:
 
-* Dodaj `Rating` pole do szablonów `Edit`, `Details`i. `Delete`
-* Zaktualizuj powiązanie w metodzie Edytuj akcję elementu `MoviesController`.
+* Dodaj `Rating` pole do `Edit` `Details` szablonów, i `Delete` .
+* Zaktualizuj powiązanie w metodzie Edytuj akcję elementu `MoviesController` .
 
 > [!div class="step-by-step"]
-> [Poprzedni](search.md)
-> [Następny](validation.md)
+> [Poprzedni](search.md) 
+>  [Dalej](validation.md)

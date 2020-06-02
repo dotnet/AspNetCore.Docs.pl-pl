@@ -25,7 +25,7 @@ W tym artykule opisano obsługę [programu Visual Studio](https://visualstudio.m
 ## <a name="enable-iis"></a>Włącz usługi IIS
 
 1. W systemie Windows przejdź do pozycji **Panel sterowania** > **programy** > **programy i funkcje** > **Włącz lub wyłącz funkcje systemu Windows** (po lewej stronie ekranu).
-1. Zaznacz pole wyboru **Internet Information Services** . Kliknij przycisk **OK**.
+1. Zaznacz pole wyboru **Internet Information Services** . Wybierz przycisk **OK**.
 
 Instalacja usług IIS może wymagać ponownego uruchomienia systemu.
 
@@ -140,7 +140,7 @@ W tym artykule opisano obsługę [programu Visual Studio](https://visualstudio.m
 ## <a name="enable-iis"></a>Włącz usługi IIS
 
 1. W systemie Windows przejdź do pozycji **Panel sterowania** > **programy** > **programy i funkcje** > **Włącz lub wyłącz funkcje systemu Windows** (po lewej stronie ekranu).
-1. Zaznacz pole wyboru **Internet Information Services** . Kliknij przycisk **OK**.
+1. Zaznacz pole wyboru **Internet Information Services** . Wybierz przycisk **OK**.
 
 Instalacja usług IIS może wymagać ponownego uruchomienia systemu.
 

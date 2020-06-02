@@ -1,7 +1,7 @@
 > [!IMPORTANT]
-> **ASP.NET wersje w wersji zapoznawczej Core za pomocą usługi Azure App Service**
+> **Wersje zapoznawcze ASP.NET Core z Azure App Service**
 >
-> ASP.NET wersje w wersji zapoznawczej Core nie są domyślnie wdrażane w usłudze Azure App Service. Aby udostępnić aplikację korzystającą z wersji zapoznawczej ASP.NET Core, zobacz [Wdrażanie wersji ASP.NET Core w wersji zapoznawczej w usłudze Azure App Service](xref:host-and-deploy/azure-apps/index#deploy-aspnet-core-preview-release-to-azure-app-service).
+> Wersje zapoznawcze ASP.NET Core nie są wdrażane do Azure App Service domyślnie. Aby hostować aplikację korzystającą z wersji zapoznawczej ASP.NET Core, zobacz [wdrażanie ASP.NET Core wersja zapoznawcza do Azure App Service](xref:host-and-deploy/azure-apps/index#deploy-aspnet-core-preview-release-to-azure-app-service).
 <!-- 
 > [!IMPORTANT]
 > **ASP.NET Core 3.0 with Azure App Service**

@@ -1,11 +1,11 @@
 ---
-title: "ASP.NET Core Blazor uwierzytelniania i autoryzacji" autor: Opis: "informacje o Blazor scenariuszach uwierzytelniania i autoryzacji".
-monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+title: "ASP.NET Core Blazor uwierzytelniania i autoryzacji" autor: guardrex Description: "informacje o Blazor scenariuszach uwierzytelniania i autoryzacji".
+monikerRange: ">= aspnetcore-3,1" MS. Author: Riande MS. Custom: MVC MS. Date: 05/19/2020 No-Loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- SignalRIdentyfikator UID: 
+- " SignalR UID: Security/blazor/index
 
 ---
 # <a name="aspnet-core-blazor-authentication-and-authorization"></a>ASP.NET Core Blazor uwierzytelnianie i autoryzacja
@@ -454,14 +454,6 @@ Jeśli aplikacja jest wymagana do sprawdzenia reguł autoryzacji jako części l
 > ```
 >
 > Te przestrzenie nazw mogą być udostępniane globalnie przez dodanie ich do pliku *_Imports. Razor* aplikacji.
-
-## <a name="authorization-in-blazor-webassembly-apps"></a>Autoryzacja w Blazor aplikacjach Webassembly
-
-W Blazor aplikacjach webassembly sprawdzanie autoryzacji można obejść, ponieważ każdy kod po stronie klienta może być modyfikowany przez użytkowników. Jest to samo prawdziwe dla wszystkich technologii aplikacji po stronie klienta, w tym dla struktur SPA skryptów JavaScript lub natywnych aplikacji dla dowolnego systemu operacyjnego.
-
-**Zawsze sprawdzaj autoryzację na serwerze w ramach dowolnych punktów końcowych interfejsu API, do których uzyskuje dostęp aplikacja po stronie klienta.**
-
-Aby uzyskać więcej informacji, zobacz artykuły poniżej <xref:security/blazor/webassembly/index> .
 
 ## <a name="troubleshoot-errors"></a>Rozwiązywanie problemów
 

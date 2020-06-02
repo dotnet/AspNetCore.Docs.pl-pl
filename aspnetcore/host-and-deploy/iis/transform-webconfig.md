@@ -68,7 +68,7 @@ Przekształcenie jest stosowane, gdy konfiguracja jest ustawiona na *Release*:
 dotnet publish --configuration Release
 ```
 
-Właściwość programu MSBuild dla konfiguracji ma `$(Configuration)`wartość.
+Właściwość programu MSBuild dla konfiguracji ma wartość `$(Configuration)` .
 
 ## <a name="profile"></a>Profil
 
@@ -102,7 +102,7 @@ Przekształcenie jest stosowane, gdy profil jest *FolderProfile*:
 dotnet publish --configuration Release /p:PublishProfile=FolderProfile
 ```
 
-Właściwość programu MSBuild dla nazwy profilu to `$(PublishProfile)`.
+Właściwość programu MSBuild dla nazwy profilu to `$(PublishProfile)` .
 
 Jeśli profil nie zostanie przekazywać, domyślną nazwą profilu jest **system plików** i *Sieć Web. Plik FileSystem. config* jest stosowany, jeśli jest obecny w katalogu głównym zawartości aplikacji.
 
@@ -138,11 +138,11 @@ Transformacja jest stosowana, gdy środowisko jest *produkcyjne*:
 dotnet publish --configuration Release /p:EnvironmentName=Production
 ```
 
-Właściwość programu MSBuild dla środowiska to `$(EnvironmentName)`.
+Właściwość programu MSBuild dla środowiska to `$(EnvironmentName)` .
 
-Przy publikowaniu z programu Visual Studio i przy użyciu profilu publikowania <xref:host-and-deploy/visual-studio-publish-profiles#set-the-environment>, zobacz.
+Przy publikowaniu z programu Visual Studio i przy użyciu profilu publikowania, zobacz <xref:host-and-deploy/visual-studio-publish-profiles#set-the-environment> .
 
-Zmienna `ASPNETCORE_ENVIRONMENT` środowiskowa jest automatycznie dodawana do pliku *Web. config* po określeniu nazwy środowiska.
+`ASPNETCORE_ENVIRONMENT`Zmienna środowiskowa jest automatycznie dodawana do pliku *Web. config* po określeniu nazwy środowiska.
 
 ## <a name="custom"></a>Niestandardowy
 
@@ -170,23 +170,23 @@ W poniższym przykładzie zmienna środowiskowa transformacji niestandardowej je
 </configuration>
 ```
 
-Transformacja jest stosowana, gdy `CustomTransformFileName` właściwość jest przenoszona do [dotnet Publish](/dotnet/core/tools/dotnet-publish) polecenia:
+Transformacja jest stosowana, gdy `CustomTransformFileName` Właściwość jest przenoszona do [dotnet Publish](/dotnet/core/tools/dotnet-publish) polecenia:
 
 ```dotnetcli
 dotnet publish --configuration Release /p:CustomTransformFileName=custom.transform
 ```
 
-Właściwość programu MSBuild dla nazwy profilu to `$(CustomTransformFileName)`.
+Właściwość programu MSBuild dla nazwy profilu to `$(CustomTransformFileName)` .
 
 ## <a name="prevent-webconfig-transformation"></a>Zablokuj transformację pliku Web. config
 
-Aby zapobiec przekształceń pliku *Web. config* , ustaw właściwość `$(IsWebConfigTransformDisabled)`MSBuild:
+Aby zapobiec przekształceń pliku *Web. config* , ustaw właściwość MSBuild `$(IsWebConfigTransformDisabled)` :
 
 ```dotnetcli
 dotnet publish /p:IsWebConfigTransformDisabled=true
 ```
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Składnia transformacji Web. config dla wdrożenia projektu aplikacji sieci Web](/previous-versions/dd465326(v=vs.100))
 * [Składnia transformacji Web. config dla wdrożenia projektu sieci Web przy użyciu programu Visual Studio](/previous-versions/aspnet/dd465326(v=vs.110))

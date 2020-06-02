@@ -25,13 +25,13 @@ Autor [Ricardo Serradas](https://twitter.com/ricardoserradas)
 
 [!INCLUDE [Azure App Service Preview Notice](../includes/azure-apps-preview-notice.md)]
 
-Aby rozwiązać problem z wdrożeniem App Service, <xref:test/troubleshoot-azure-iis>Zobacz.
+Aby rozwiązać problem z wdrożeniem App Service, zobacz <xref:test/troubleshoot-azure-iis> .
 
 ## <a name="intro"></a>Wprowadzenie
 
 Korzystając z tego samouczka, dowiesz się, jak utworzyć aplikację ASP.Net Core MVC i wdrożyć ją w Visual Studio Code.
 
-## <a name="set-up"></a>Konfigurowanie
+## <a name="set-up"></a>Konfiguruj
 
 - Otwórz [bezpłatne konto platformy Azure](https://azure.microsoft.com/free/dotnet/) , jeśli go nie masz.
 - Zainstaluj [zestaw .NET Core SDK](https://dotnet.microsoft.com/download)
@@ -87,7 +87,7 @@ Po otwarciu folderu projektu zostanie wyświetlony komunikat informujący o brak
 
 ![Interfejs Visual Studio Code z załadowanym projektem](publish-to-azure-webapp-using-vscode/_static/folder-structure-restore-netcore.jpg)
 
-`.vscode` Folder zostanie utworzony w ramach struktury projektu. Będzie zawierać następujące pliki:
+`.vscode`Folder zostanie utworzony w ramach struktury projektu. Będzie zawierać następujące pliki:
 
 ```cmd
 launch.json
@@ -106,12 +106,12 @@ Aplikacja sieci Web zacznie działać na nowej karcie domyślnej przeglądarki. 
 
 ![Ostrzeżenie dotyczące prywatności podczas lokalnego debugowania aplikacji](publish-to-azure-webapp-using-vscode/_static/run-webapp-https-warning.jpg)
 
-Aby zachować sesję debugowania, kliknij przycisk `Advanced` , a `Continue to localhost (unsafe)`następnie.
+Aby zachować sesję debugowania, kliknij przycisk `Advanced` , a następnie `Continue to localhost (unsafe)` .
 
 ## <a name="generate-the-deployment-package-locally"></a>Wygeneruj lokalnie pakiet wdrożeniowy
 
 - Otwórz Visual Studio Code Terminal
-- Użyj następującego polecenia, aby wygenerować `Release` pakiet do podfolderu o nazwie `publish`:
+- Użyj następującego polecenia, aby wygenerować `Release` pakiet do podfolderu o nazwie `publish` :
   - `dotnet publish -c Release -o ./publish`
 - Nowy `publish` folder zostanie utworzony pod strukturą projektu
 
@@ -128,11 +128,11 @@ Korzystając z rozszerzenia Azure App Service Visual Studio Code, wykonaj poniż
 - Wybierz pozycję `Create New Web App`
 - Wprowadź nazwę aplikacji sieci Web
 
-Rozszerzenie utworzy nową aplikację sieci Web i rozpocznie automatyczne wdrożenie pakietu. Po zakończeniu wdrożenia kliknij `Browse Website` , aby sprawdzić poprawność wdrożenia.
+Rozszerzenie utworzy nową aplikację sieci Web i rozpocznie automatyczne wdrożenie pakietu. Po zakończeniu wdrożenia kliknij, `Browse Website` Aby sprawdzić poprawność wdrożenia.
 
 ![Komunikat wdrożenia zakończony pomyślnie](publish-to-azure-webapp-using-vscode/_static/deployment-succeeded-message.jpg)
 
-Po kliknięciu `Browse Website`przejdź do niego przy użyciu domyślnej przeglądarki:
+Po kliknięciu `Browse Website` Przejdź do niego przy użyciu domyślnej przeglądarki:
 
 ![Pomyślnie wdrożono nową aplikację sieci Web](publish-to-azure-webapp-using-vscode/_static/new-webapp-deployed.jpg)
 
@@ -143,7 +143,7 @@ Po kliknięciu `Browse Website`przejdź do niego przy użyciu domyślnej przegl�
 - Wybierz aplikację internetową z listy
 - Visual Studio Code będzie pytał, czy chcesz zastąpić istniejącą zawartość. Kliknij `Deploy` , aby potwierdzić
 
-Rozszerzenie spowoduje wdrożenie zaktualizowanej zawartości w aplikacji sieci Web. Po zakończeniu kliknij przycisk `Browse Website` , aby sprawdzić poprawność wdrożenia.
+Rozszerzenie spowoduje wdrożenie zaktualizowanej zawartości w aplikacji sieci Web. Po zakończeniu kliknij przycisk, `Browse Website` Aby sprawdzić poprawność wdrożenia.
 
 ![Istniejąca aplikacja sieci Web została pomyślnie wdrożona](publish-to-azure-webapp-using-vscode/_static/existing-webapp-deployed.jpg)
 

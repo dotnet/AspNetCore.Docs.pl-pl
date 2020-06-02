@@ -1,10 +1,11 @@
 ---
-title: Author: Description: MS. Author: MS. Date: No-Loc:
+title: globalizacja i lokalizacja w ASP.NET Core autor: Rick-Anderson Description: informacje o tym, jak ASP.NET Core udostępniają usługi i oprogramowanie pośredniczące do lokalizowania zawartości w różnych językach i kulturach.
+MS. Author: Riande MS. Date: 11/30/2019 No-Loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- SignalRIdentyfikator UID: 
+- " SignalR UID: podstawy/lokalizacja
 
 ---
 # <a name="globalization-and-localization-in-aspnet-core"></a>Globalizacja i lokalizacja w ASP.NET Core
@@ -29,7 +30,7 @@ Lokalizacja aplikacji obejmuje następujące elementy:
 
 ## <a name="make-the-apps-content-localizable"></a>Ustaw lokalizowalność zawartości aplikacji
 
-<xref:Microsoft.Extensions.Localization.IStringLocalizer>` and <xref:Microsoft.Extensions.Localization.IStringLocalizer%601> were architected to improve productivity when developing localized apps. `IStringLocalizer ` uses the [ResourceManager](/dotnet/api/system.resources.resourcemanager) and [ResourceReader](/dotnet/api/system.resources.resourcereader) to provide culture-specific resources at run time. The interface has an indexer and an ` IEnumerable ` for returning localized strings. ` IStringLocalizer ' nie wymaga zapisywania w pliku zasobów ciągów języka domyślnego. Możesz tworzyć aplikacje przeznaczone do lokalizacji i nie musisz już tworzyć plików zasobów w fazie opracowywania. Poniższy kod przedstawia sposób zawijania ciągu "informacje o tytule" dla lokalizacji.
+<xref:Microsoft.Extensions.Localization.IStringLocalizer>i <xref:Microsoft.Extensions.Localization.IStringLocalizer%601> zostały zaprojektowane w celu zwiększenia produktywności podczas tworzenia zlokalizowanych aplikacji. `IStringLocalizer`używa <xref:System.Resources.ResourceManager> i <xref:System.Resources.ResourceReader> w celu zapewnienia zasobów specyficznych dla kultury w czasie wykonywania. Interfejs ma indeksator i `IEnumerable` zwraca zlokalizowane ciągi. `IStringLocalizer`nie wymaga zapisywania w pliku zasobów domyślnych ciągów języka. Możesz tworzyć aplikacje przeznaczone do lokalizacji i nie musisz już tworzyć plików zasobów w fazie opracowywania. Poniższy kod przedstawia sposób zawijania ciągu "informacje o tytule" dla lokalizacji.
 
 [!code-csharp[](localization/sample/Localization/Controllers/AboutController.cs)]
 
@@ -70,15 +71,8 @@ Domyślna implementacja programu `IViewLocalizer` znajduje plik zasobów na pods
 Plik zasobów francuski może zawierać następujące elementy:
 
 | Klucz | Wartość |
-| ----- | ---
-title: Author: Description: MS. Author: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
---- | | `<i>Hello</i> <b>{0}!</b>` | `<i>Bonjour</i> <b>{0} !</b>` |
+| ----- | ------ |
+| `<i>Hello</i> <b>{0}!</b>` | `<i>Bonjour</i> <b>{0} !</b>` |
 
 Renderowany widok będzie zawierać znacznik HTML z pliku zasobu.
 
@@ -151,70 +145,10 @@ Zasoby są nazwane dla pełnej nazwy typu swojej klasy pomniejszonej o nazwę ze
 W przykładowym projekcie `ConfigureServices` Metoda ustawia `ResourcesPath` do "zasobów", więc ścieżka względna projektu dla francuskiego pliku zasobów kontrolera głównego to *zasoby/kontrolery. HomeController. fr. resx*. Alternatywnie można użyć folderów do organizowania plików zasobów. W przypadku kontrolera macierzystego ścieżka będzie zawierać *zasoby/kontrolery/HomeController. fr. resx*. Jeśli ta opcja nie zostanie użyta `ResourcesPath` , plik *. resx* zostanie użyty w katalogu bazowym projektu. Plik zasobu dla `HomeController` nosi nazwę *controllers. HomeController. fr. resx*. Wybór przy użyciu konwencji nazewnictwa kropka lub ścieżki zależy od tego, w jaki sposób chcesz zorganizować pliki zasobów.
 
 | Nazwa zasobu | Nazwa kropka lub ścieżki |
-| ---
-title: Author: Description: MS. Author: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: MS. Author: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: MS. Author: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: MS. Author: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
-------   | ---title: Author: Description: MS. Author: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: MS. Author: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: MS. Author: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: MS. Author: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
-------- | | Zasoby/kontrolery. HomeController. fr. resx | Kropka | | Zasoby/kontrolery/HomeController. fr. resx | Ścieżka | |    |     |
+| ------------   | ------------- |
+| Zasoby/kontrolery. HomeController. fr. resx | Kropka  |
+| Zasoby/kontrolery/HomeController. fr. resx  | Ścieżka |
+|    |     |
 
 Pliki zasobów używające `@inject IViewLocalizer` w Razor widokach są zgodne z podobnym wzorcem. Plik zasobów dla widoku może być nazwany przy użyciu nazw kropek lub nazw ścieżek. RazorWyświetl pliki zasobów, aby naśladować ścieżkę skojarzonego pliku widoku. Przy założeniu, że ustawimy `ResourcesPath` na "zasoby", plik zasobów francuski skojarzony z widokiem */Home/about. cshtml* może mieć jedną z następujących wartości:
 
@@ -444,7 +378,7 @@ Lokalizacja aplikacji obejmuje następujące elementy:
 
 ## <a name="make-the-apps-content-localizable"></a>Ustaw lokalizowalność zawartości aplikacji
 
-<xref:Microsoft.Extensions.Localization.IStringLocalizer>` and <xref:Microsoft.Extensions.Localization.IStringLocalizer%601> were architected to improve productivity when developing localized apps. `IStringLocalizer ` uses the [ResourceManager](/dotnet/api/system.resources.resourcemanager) and [ResourceReader](/dotnet/api/system.resources.resourcereader) to provide culture-specific resources at run time. The interface has an indexer and an ` IEnumerable ` for returning localized strings. ` IStringLocalizer ' nie wymaga zapisywania w pliku zasobów ciągów języka domyślnego. Możesz tworzyć aplikacje przeznaczone do lokalizacji i nie musisz już tworzyć plików zasobów w fazie opracowywania. Poniższy kod przedstawia sposób zawijania ciągu "informacje o tytule" dla lokalizacji.
+<xref:Microsoft.Extensions.Localization.IStringLocalizer>i <xref:Microsoft.Extensions.Localization.IStringLocalizer%601> zostały zaprojektowane w celu zwiększenia produktywności podczas tworzenia zlokalizowanych aplikacji. `IStringLocalizer`używa <xref:System.Resources.ResourceManager> i <xref:System.Resources.ResourceReader> w celu zapewnienia zasobów specyficznych dla kultury w czasie wykonywania. Interfejs ma indeksator i `IEnumerable` zwraca zlokalizowane ciągi. `IStringLocalizer`nie wymaga zapisywania w pliku zasobów domyślnych ciągów języka. Możesz tworzyć aplikacje przeznaczone do lokalizacji i nie musisz już tworzyć plików zasobów w fazie opracowywania. Poniższy kod przedstawia sposób zawijania ciągu "informacje o tytule" dla lokalizacji.
 
 [!code-csharp[](localization/sample/Localization/Controllers/AboutController.cs)]
 
@@ -485,15 +419,8 @@ Domyślna implementacja programu `IViewLocalizer` znajduje plik zasobów na pods
 Plik zasobów francuski może zawierać następujące elementy:
 
 | Klucz | Wartość |
-| ----- | ---
-title: Author: Description: MS. Author: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
---- | | `<i>Hello</i> <b>{0}!</b>` | `<i>Bonjour</i> <b>{0} !</b>` |
+| ----- | ------ |
+| `<i>Hello</i> <b>{0}!</b>` | `<i>Bonjour</i> <b>{0} !</b>` |
 
 Renderowany widok będzie zawierać znacznik HTML z pliku zasobu.
 
@@ -566,70 +493,10 @@ Zasoby są nazwane dla pełnej nazwy typu swojej klasy pomniejszonej o nazwę ze
 W przykładowym projekcie `ConfigureServices` Metoda ustawia `ResourcesPath` do "zasobów", więc ścieżka względna projektu dla francuskiego pliku zasobów kontrolera głównego to *zasoby/kontrolery. HomeController. fr. resx*. Alternatywnie można użyć folderów do organizowania plików zasobów. W przypadku kontrolera macierzystego ścieżka będzie zawierać *zasoby/kontrolery/HomeController. fr. resx*. Jeśli ta opcja nie zostanie użyta `ResourcesPath` , plik *. resx* zostanie użyty w katalogu bazowym projektu. Plik zasobu dla `HomeController` nosi nazwę *controllers. HomeController. fr. resx*. Wybór przy użyciu konwencji nazewnictwa kropka lub ścieżki zależy od tego, w jaki sposób chcesz zorganizować pliki zasobów.
 
 | Nazwa zasobu | Nazwa kropka lub ścieżki |
-| ---
-title: Author: Description: MS. Author: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: MS. Author: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: MS. Author: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: MS. Author: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
-------   | ---title: Author: Description: MS. Author: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: MS. Author: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: MS. Author: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: MS. Author: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
-------- | | Zasoby/kontrolery. HomeController. fr. resx | Kropka | | Zasoby/kontrolery/HomeController. fr. resx | Ścieżka | |    |     |
+| ------------   | ------------- |
+| Zasoby/kontrolery. HomeController. fr. resx | Kropka  |
+| Zasoby/kontrolery/HomeController. fr. resx  | Ścieżka |
+|    |     |
 
 Pliki zasobów używające `@inject IViewLocalizer` w Razor widokach są zgodne z podobnym wzorcem. Plik zasobów dla widoku może być nazwany przy użyciu nazw kropek lub nazw ścieżek. RazorWyświetl pliki zasobów, aby naśladować ścieżkę skojarzonego pliku widoku. Przy założeniu, że ustawimy `ResourcesPath` na "zasoby", plik zasobów francuski skojarzony z widokiem */Home/about. cshtml* może mieć jedną z następujących wartości:
 
@@ -858,7 +725,7 @@ Lokalizacja aplikacji obejmuje następujące elementy:
 
 ## <a name="make-the-apps-content-localizable"></a>Ustaw lokalizowalność zawartości aplikacji
 
-<xref:Microsoft.Extensions.Localization.IStringLocalizer>` and <xref:Microsoft.Extensions.Localization.IStringLocalizer%601> were architected to improve productivity when developing localized apps. `IStringLocalizer ` uses the [ResourceManager](/dotnet/api/system.resources.resourcemanager) and [ResourceReader](/dotnet/api/system.resources.resourcereader) to provide culture-specific resources at run time. The interface has an indexer and an ` IEnumerable ` for returning localized strings. ` IStringLocalizer ' nie wymaga zapisywania w pliku zasobów ciągów języka domyślnego. Możesz tworzyć aplikacje przeznaczone do lokalizacji i nie musisz już tworzyć plików zasobów w fazie opracowywania. Poniższy kod przedstawia sposób zawijania ciągu "informacje o tytule" dla lokalizacji.
+<xref:Microsoft.Extensions.Localization.IStringLocalizer>i <xref:Microsoft.Extensions.Localization.IStringLocalizer%601> zostały zaprojektowane w celu zwiększenia produktywności podczas tworzenia zlokalizowanych aplikacji. `IStringLocalizer`używa <xref:System.Resources.ResourceManager> i <xref:System.Resources.ResourceReader> w celu zapewnienia zasobów specyficznych dla kultury w czasie wykonywania. Interfejs ma indeksator i `IEnumerable` zwraca zlokalizowane ciągi. `IStringLocalizer`nie wymaga zapisywania w pliku zasobów domyślnych ciągów języka. Możesz tworzyć aplikacje przeznaczone do lokalizacji i nie musisz już tworzyć plików zasobów w fazie opracowywania. Poniższy kod przedstawia sposób zawijania ciągu "informacje o tytule" dla lokalizacji.
 
 [!code-csharp[](localization/sample/Localization/Controllers/AboutController.cs)]
 
@@ -899,15 +766,8 @@ Domyślna implementacja programu `IViewLocalizer` znajduje plik zasobów na pods
 Plik zasobów francuski może zawierać następujące elementy:
 
 | Klucz | Wartość |
-| ----- | ---
-title: Author: Description: MS. Author: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
---- | | `<i>Hello</i> <b>{0}!</b>` | `<i>Bonjour</i> <b>{0} !</b>` |
+| ----- | ------ |
+| `<i>Hello</i> <b>{0}!</b>` | `<i>Bonjour</i> <b>{0} !</b>` |
 
 Renderowany widok będzie zawierać znacznik HTML z pliku zasobu.
 
@@ -980,70 +840,10 @@ Zasoby są nazwane dla pełnej nazwy typu swojej klasy pomniejszonej o nazwę ze
 W przykładowym projekcie `ConfigureServices` Metoda ustawia `ResourcesPath` do "zasobów", więc ścieżka względna projektu dla francuskiego pliku zasobów kontrolera głównego to *zasoby/kontrolery. HomeController. fr. resx*. Alternatywnie można użyć folderów do organizowania plików zasobów. W przypadku kontrolera macierzystego ścieżka będzie zawierać *zasoby/kontrolery/HomeController. fr. resx*. Jeśli ta opcja nie zostanie użyta `ResourcesPath` , plik *. resx* zostanie użyty w katalogu bazowym projektu. Plik zasobu dla `HomeController` nosi nazwę *controllers. HomeController. fr. resx*. Wybór przy użyciu konwencji nazewnictwa kropka lub ścieżki zależy od tego, w jaki sposób chcesz zorganizować pliki zasobów.
 
 | Nazwa zasobu | Nazwa kropka lub ścieżki |
-| ---
-title: Author: Description: MS. Author: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: MS. Author: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: MS. Author: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: MS. Author: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
-------   | ---title: Author: Description: MS. Author: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: MS. Author: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: MS. Author: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: MS. Author: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
-------- | | Zasoby/kontrolery. HomeController. fr. resx | Kropka | | Zasoby/kontrolery/HomeController. fr. resx | Ścieżka | |    |     |
+| ------------   | ------------- |
+| Zasoby/kontrolery. HomeController. fr. resx | Kropka  |
+| Zasoby/kontrolery/HomeController. fr. resx  | Ścieżka |
+|    |     |
 
 Pliki zasobów używające `@inject IViewLocalizer` w Razor widokach są zgodne z podobnym wzorcem. Plik zasobów dla widoku może być nazwany przy użyciu nazw kropek lub nazw ścieżek. RazorWyświetl pliki zasobów, aby naśladować ścieżkę skojarzonego pliku widoku. Przy założeniu, że ustawimy `ResourcesPath` na "zasoby", plik zasobów francuski skojarzony z widokiem */Home/about. cshtml* może mieć jedną z następujących wartości:
 

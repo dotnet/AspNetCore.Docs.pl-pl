@@ -57,7 +57,7 @@ W tym przykładowym kodzie `IDbContextFactory` implementacja przebiega w postaci
 
 ## <a name="set-up-dependency-injection-in-the-aspnet-core-project"></a>Konfigurowanie iniekcji zależności w projekcie ASP.NET Core
 
-W pliku *Startup.cs* projektu podstawowego Skonfiguruj kontekst Ef6 dla iniekcji zależności (di) w `ConfigureServices`. Obiekty kontekstu EF powinny być ograniczone do zakresu okresu istnienia żądania.
+W pliku *Startup.cs* projektu podstawowego Skonfiguruj kontekst Ef6 dla iniekcji zależności (di) w `ConfigureServices` . Obiekty kontekstu EF powinny być ograniczone do zakresu okresu istnienia żądania.
 
 [!code-csharp[](entity-framework-6/sample/MVCCore/Startup.cs?name=snippet_ConfigureServices&highlight=5)]
 
@@ -73,16 +73,16 @@ Ten przykład można utworzyć od podstaw, wykonując następujące kroki w prog
 
 * Utwórz rozwiązanie.
 
-* **Dodaj** > **nową** > **Web** > **aplikację internetową ASP.NET Core** Project Web
+* **Dodaj**  >  **Nowy projekt**  >  **Sieć Web**  >  **ASP.NET Core aplikacji sieci Web**
   * W oknie dialogowym Wybieranie szablonu projektu wybierz pozycję Interfejs API i .NET Framework na liście rozwijanej
 
-* **Dodaj** > **nową** > bibliotekę klas**klasycznych** > projektu systemu Windows **(.NET Framework)**
+* **Dodaj**  >  **Nowy projekt**  >  **Pulpit**  >  systemu Windows **Biblioteka klas (.NET Framework)**
 
-* W **konsoli Menedżera pakietów** (PMC) dla obu projektów Uruchom polecenie `Install-Package Entityframework`.
+* W **konsoli Menedżera pakietów** (PMC) dla obu projektów Uruchom polecenie `Install-Package Entityframework` .
 
-* W projekcie Biblioteka klas Utwórz klasy modelu danych i klasę kontekstu oraz implementację programu `IDbContextFactory`.
+* W projekcie Biblioteka klas Utwórz klasy modelu danych i klasę kontekstu oraz implementację programu `IDbContextFactory` .
 
-* W polu PMC dla projektu biblioteki klas Uruchom polecenia `Enable-Migrations` i. `Add-Migration Initial` Jeśli ustawisz projekt ASP.NET Core jako projekt startowy, Dodaj `-StartupProjectName EF6` do tych poleceń.
+* W polu PMC dla projektu biblioteki klas Uruchom polecenia `Enable-Migrations` i `Add-Migration Initial` . Jeśli ustawisz projekt ASP.NET Core jako projekt startowy, Dodaj `-StartupProjectName EF6` do tych poleceń.
 
 * W projekcie podstawowym Dodaj odwołanie projektu do projektu biblioteki klas.
 

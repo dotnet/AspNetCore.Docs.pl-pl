@@ -47,7 +47,7 @@ dotnet tool install -g Microsoft.Web.LibraryManager.Cli --version 1.0.94-g606058
 
 W poprzednim przykładzie jest instalowane narzędzie globalne .NET Core z pliku *C:\Temp\Microsoft.Web.LibraryManager.CLI.1.0.94-g606058a278.nupkg* lokalnego komputera z systemem Windows.
 
-## <a name="usage"></a>Sposób użycia
+## <a name="usage"></a>Użycie
 
 Po pomyślnej instalacji interfejsu wiersza polecenia może być używane następujące polecenie:
 
@@ -98,7 +98,7 @@ W poniższych sekcjach znajduje się opis dostępnych poleceń interfejsu wiersz
 
 ## <a name="initialize-libman-in-the-project"></a>Inicjuj LibMan w projekcie
 
-Polecenie `libman init` tworzy plik *Libman. JSON* , jeśli taki nie istnieje. Plik jest tworzony z domyślną zawartością szablonu elementu.
+`libman init`Polecenie tworzy plik *Libman. JSON* , jeśli taki nie istnieje. Plik jest tworzony z domyślną zawartością szablonu elementu.
 
 ### <a name="synopsis"></a>Streszczenie
 
@@ -113,11 +113,11 @@ Następujące opcje są dostępne dla `libman init` polecenia:
 
 * `-d|--default-destination <PATH>`
 
-  Ścieżka względna do bieżącego folderu. Pliki bibliotek są instalowane w tej lokalizacji, jeśli `destination` żadna właściwość nie jest zdefiniowana dla biblioteki w *Libman. JSON*. `<PATH>` Wartość jest zapisywana w `defaultDestination` właściwości *Libman. JSON*.
+  Ścieżka względna do bieżącego folderu. Pliki bibliotek są instalowane w tej lokalizacji, jeśli żadna `destination` Właściwość nie jest zdefiniowana dla biblioteki w *Libman. JSON*. `<PATH>`Wartość jest zapisywana w `defaultDestination` właściwości *Libman. JSON*.
 
 * `-p|--default-provider <PROVIDER>`
 
-  Dostawca, który ma być używany, jeśli nie zdefiniowano żadnego dostawcy dla danej biblioteki. `<PROVIDER>` Wartość jest zapisywana w `defaultProvider` właściwości *Libman. JSON*. Zamień `<PROVIDER>` na jedną z następujących wartości:
+  Dostawca, który ma być używany, jeśli nie zdefiniowano żadnego dostawcy dla danej biblioteki. `<PROVIDER>`Wartość jest zapisywana w `defaultProvider` właściwości *Libman. JSON*. Zamień `<PROVIDER>` na jedną z następujących wartości:
 
   [!INCLUDE [LibMan provider names](../../includes/libman-cli/provider-names.md)]
 
@@ -134,7 +134,7 @@ Aby utworzyć plik *Libman. JSON* w projekcie ASP.NET Core:
   libman init
   ```
 
-* Wpisz nazwę domyślnego dostawcy lub naciśnij przycisk `Enter` , aby użyć domyślnego dostawcy CDNJS. Prawidłowe wartości to:
+* Wpisz nazwę domyślnego dostawcy lub naciśnij przycisk, `Enter` Aby użyć domyślnego dostawcy CDNJS. Prawidłowe wartości to:
 
   [!INCLUDE [LibMan provider names](../../includes/libman-cli/provider-names.md)]
 
@@ -152,7 +152,7 @@ Plik *Libman. JSON* zostanie dodany do katalogu głównego projektu z następuj�
 
 ## <a name="add-library-files"></a>Dodaj pliki biblioteki
 
-`libman install` Polecenie pobiera i instaluje pliki bibliotek w projekcie. Plik *Libman. JSON* zostanie dodany, jeśli taki nie istnieje. Plik *Libman. JSON* został zmodyfikowany w celu przechowywania szczegółów konfiguracji dla plików biblioteki.
+`libman install`Polecenie pobiera i instaluje pliki bibliotek w projekcie. Plik *Libman. JSON* zostanie dodany, jeśli taki nie istnieje. Plik *Libman. JSON* został zmodyfikowany w celu przechowywania szczegółów konfiguracji dla plików biblioteki.
 
 ### <a name="synopsis"></a>Streszczenie
 
@@ -165,7 +165,7 @@ libman install [-h|--help]
 
 `LIBRARY`
 
-Nazwa biblioteki do zainstalowania. Ta nazwa może zawierać notację numeru wersji (na przykład `@1.2.0`).
+Nazwa biblioteki do zainstalowania. Ta nazwa może zawierać notację numeru wersji (na przykład `@1.2.0` ).
 
 ### <a name="options"></a>Opcje
 
@@ -173,7 +173,7 @@ Następujące opcje są dostępne dla `libman install` polecenia:
 
 * `-d|--destination <PATH>`
 
-  Lokalizacja, w której ma zostać zainstalowana Biblioteka. Jeśli nie zostanie określony, zostanie użyta domyślna lokalizacja. Jeśli żadna `defaultDestination` właściwość nie jest określona w pliku *Libman. JSON*, ta opcja jest wymagana.
+  Lokalizacja, w której ma zostać zainstalowana Biblioteka. Jeśli nie zostanie określony, zostanie użyta domyślna lokalizacja. Jeśli żadna `defaultDestination` Właściwość nie jest określona w pliku *Libman. JSON*, ta opcja jest wymagana.
 
 * `--files <FILE>`
 
@@ -185,7 +185,7 @@ Następujące opcje są dostępne dla `libman install` polecenia:
   
   [!INCLUDE [LibMan provider names](../../includes/libman-cli/provider-names.md)]
 
-  Jeśli nie zostanie określony, `defaultProvider` zostanie użyta właściwość w *Libman. JSON* . Jeśli żadna `defaultProvider` właściwość nie jest określona w pliku *Libman. JSON*, ta opcja jest wymagana.
+  Jeśli nie zostanie określony, `defaultProvider` zostanie użyta właściwość w *Libman. JSON* . Jeśli żadna `defaultProvider` Właściwość nie jest określona w pliku *Libman. JSON*, ta opcja jest wymagana.
 
 [!INCLUDE [standard-cli-options](../../includes/libman-cli/standard-cli-options.md)]
 
@@ -225,7 +225,7 @@ Plik *Libman. JSON* jest podobny do następującego:
 }
 ```
 
-Aby zainstalować pliki *Calendar. js* i *Calendar. css* z pliku *C:\\temp\\contosoCalendar\\ * przy użyciu dostawcy systemu plików:
+Aby zainstalować pliki *Calendar. js* i *Calendar. css* z pliku *C: \\ temp \\ contosoCalendar \\ * przy użyciu dostawcy systemu plików:
 
   ```console
   libman install C:\temp\contosoCalendar\ --provider filesystem --files calendar.js --files calendar.css
@@ -234,7 +234,7 @@ Aby zainstalować pliki *Calendar. js* i *Calendar. css* z pliku *C:\\temp\\cont
 Następujący monit pojawia się z dwóch powodów:
 
 * Plik *Libman. JSON* nie zawiera `defaultDestination` właściwości.
-* `libman install` Polecenie nie zawiera `-d|--destination` opcji.
+* `libman install`Polecenie nie zawiera `-d|--destination` opcji.
 
 ![Libman — polecenie instalacji — miejsce docelowe](_static/libman-install-destination.png)
 
@@ -267,11 +267,11 @@ Po zaakceptowaniu domyślnego miejsca docelowego plik *Libman. JSON* jest podobn
 
 ## <a name="restore-library-files"></a>Przywróć pliki biblioteki
 
-`libman restore` Polecenie instaluje pliki bibliotek zdefiniowane w *Libman. JSON*. Mają zastosowanie następujące zasady:
+`libman restore`Polecenie instaluje pliki bibliotek zdefiniowane w *Libman. JSON*. Mają zastosowanie następujące zasady:
 
 * Jeśli w katalogu głównym projektu nie istnieje plik *Libman. JSON* , zwracany jest błąd.
-* Jeśli Biblioteka określa dostawcę, `defaultProvider` właściwość w *Libman. JSON* jest ignorowana.
-* Jeśli Biblioteka określa miejsce docelowe, `defaultDestination` właściwość w *Libman. JSON* jest ignorowana.
+* Jeśli Biblioteka określa dostawcę, `defaultProvider` Właściwość w *Libman. JSON* jest ignorowana.
+* Jeśli Biblioteka określa miejsce docelowe, `defaultDestination` Właściwość w *Libman. JSON* jest ignorowana.
 
 ### <a name="synopsis"></a>Streszczenie
 
@@ -296,7 +296,7 @@ libman restore
 
 ## <a name="delete-library-files"></a>Usuń pliki biblioteki
 
-`libman clean` Polecenie usuwa pliki biblioteki, które zostały wcześniej przywrócone za pośrednictwem LibMan. Foldery, które staną się puste po usunięciu tej operacji. Pliki biblioteki "skojarzone konfiguracje we `libraries` właściwości *Libman. JSON* nie są usuwane.
+`libman clean`Polecenie usuwa pliki biblioteki, które zostały wcześniej przywrócone za pośrednictwem LibMan. Foldery, które staną się puste po usunięciu tej operacji. Pliki biblioteki "skojarzone konfiguracje we `libraries` właściwości *Libman. JSON* nie są usuwane.
 
 ### <a name="synopsis"></a>Streszczenie
 
@@ -344,7 +344,7 @@ libman uninstall [-h|--help]
 
 `LIBRARY`
 
-Nazwa biblioteki do odinstalowania. Ta nazwa może zawierać notację numeru wersji (na przykład `@1.2.0`).
+Nazwa biblioteki do odinstalowania. Ta nazwa może zawierać notację numeru wersji (na przykład `@1.2.0` ).
 
 ### <a name="options"></a>Opcje
 
@@ -376,7 +376,7 @@ Rozważmy następujący plik *Libman. JSON* :
 
 ## <a name="update-library-version"></a>Zaktualizuj wersję biblioteki
 
-`libman update` Polecenie aktualizuje bibliotekę zainstalowaną za pośrednictwem LibMan do określonej wersji.
+`libman update`Polecenie aktualizuje bibliotekę zainstalowaną za pośrednictwem LibMan do określonej wersji.
 
 Wystąpił błąd, gdy:
 
@@ -434,7 +434,7 @@ Następujące opcje są dostępne dla `libman update` polecenia:
 
 ## <a name="manage-library-cache"></a>Zarządzaj pamięcią podręczną biblioteki
 
-`libman cache` Polecenie zarządza pamięcią podręczną biblioteki LibMan. `filesystem` Dostawca nie korzysta z pamięci podręcznej biblioteki.
+`libman cache`Polecenie zarządza pamięcią podręczną biblioteki LibMan. `filesystem`Dostawca nie korzysta z pamięci podręcznej biblioteki.
 
 ### <a name="synopsis"></a>Streszczenie
 

@@ -1,10 +1,11 @@
 ---
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+title: zadania w tle z usługami hostowanymi w ASP.NET Core Author: Rick-Anderson Description: informacje na temat implementowania zadań w tle za pomocą usług hostowanych w programie ASP.NET Core.
+monikerRange: ">= aspnetcore-2,1" MS. Author: Riande MS. Custom: MVC MS. Date: 02/10/2020 No-Loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- SignalRIdentyfikator UID: 
+- " SignalR UID: podstawy/Host/usługi hostowane
 
 ---
 # <a name="background-tasks-with-hosted-services-in-aspnet-core"></a>Zadania w tle z usługami hostowanymi w ASP.NET Core
@@ -134,7 +135,7 @@ Usługi są zarejestrowane w usłudze `IHostBuilder.ConfigureServices` (*program
 
 ## <a name="queued-background-tasks"></a>Zadania w kolejce w dół
 
-Kolejka zadań w tle jest oparta na platformie .NET 4. x <xref:System.Web.Hosting.HostingEnvironment.QueueBackgroundWorkItem*> ([wstępnie zaplanowano wbudowaną ASP.NET Core](https://github.com/aspnet/Hosting/issues/1280)):
+Kolejka zadań w tle jest oparta na platformie .NET 4. x <xref:System.Web.Hosting.HostingEnvironment.QueueBackgroundWorkItem*> :
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Services/BackgroundTaskQueue.cs?name=snippet1)]
 

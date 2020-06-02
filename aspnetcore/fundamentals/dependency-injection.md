@@ -1,15 +1,16 @@
 ---
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+title: iniekcja zależności w ASP.NET Core Author: Rick-Anderson Description: Dowiedz się, w jaki sposób ASP.NET Core implementuje iniekcję zależności i jak z niej korzystać.
+monikerRange: ">= aspnetcore-2,1" MS. Author: Riande MS. Custom: MVC MS. Date: 05/14/2020 No-Loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- SignalRIdentyfikator UID: 
+- " SignalR UID: podstawy/iniekcja zależności
 
 ---
 # <a name="dependency-injection-in-aspnet-core"></a>Dependency injection in ASP.NET Core (Wstrzykiwanie zależności na platformie ASP.NET Core)
 
-[Steve Kowalski](https://ardalis.com/) i [Scott Addie](https://scottaddie.com)
+[Steve Kowalski](https://ardalis.com/), [Scott Addie](https://scottaddie.com)i [Brandon Dahler](https://github.com/brandondahler)
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -138,54 +139,21 @@ Aby uzyskać więcej informacji, zobacz <xref:fundamentals/startup>.
 `Startup.ConfigureServices`Metoda jest odpowiedzialna za Definiowanie usług, z których korzysta aplikacja, w tym funkcje platformy, takie jak Entity Framework Core i ASP.NET Core MVC. Początkowo `IServiceCollection` dostarczone z `ConfigureServices` usługami zdefiniowanymi przez platformę, w zależności od [konfiguracji hosta](xref:fundamentals/index#host). Aplikacja oparta na ASP.NET Core szablonie nie jest nietypowa, aby mieć setki usług zarejestrowanych przez platformę. W poniższej tabeli wymieniono niewielki przykład usług zarejestrowanych w ramach platformy.
 
 | Typ usługi | Okres istnienia |
-| ---
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
------- | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
----- | | <xref:Microsoft.AspNetCore.Hosting.Builder.IApplicationBuilderFactory?displayProperty=fullName> | Przejściowe | | `IHostApplicationLifetime` | Pojedyncze | | `IWebHostEnvironment` | Pojedyncze | | <xref:Microsoft.AspNetCore.Hosting.IStartup?displayProperty=fullName> | Pojedyncze | | <xref:Microsoft.AspNetCore.Hosting.IStartupFilter?displayProperty=fullName> | Przejściowe | | <xref:Microsoft.AspNetCore.Hosting.Server.IServer?displayProperty=fullName> | Pojedyncze | | <xref:Microsoft.AspNetCore.Http.IHttpContextFactory?displayProperty=fullName> | Przejściowe | | <xref:Microsoft.Extensions.Logging.ILogger`1?displayProperty=fullName> | Pojedyncze | | <xref:Microsoft.Extensions.Logging.ILoggerFactory?displayProperty=fullName> | Pojedyncze | | <xref:Microsoft.Extensions.ObjectPool.ObjectPoolProvider?displayProperty=fullName> | Pojedyncze | | <xref:Microsoft.Extensions.Options.IConfigureOptions`1?displayProperty=fullName> | Przejściowe | | <xref:Microsoft.Extensions.Options.IOptions`1?displayProperty=fullName> | Pojedyncze | | <xref:System.Diagnostics.DiagnosticSource?displayProperty=fullName> | Pojedyncze | | <xref:System.Diagnostics.DiagnosticListener?displayProperty=fullName> | Pojedyncze |
+| ------------ | -------- |
+| <xref:Microsoft.AspNetCore.Hosting.Builder.IApplicationBuilderFactory?displayProperty=fullName> | Administracyjnej |
+| `IHostApplicationLifetime` | Pojedynczego |
+| `IWebHostEnvironment` | Pojedynczego |
+| <xref:Microsoft.AspNetCore.Hosting.IStartup?displayProperty=fullName> | Pojedynczego |
+| <xref:Microsoft.AspNetCore.Hosting.IStartupFilter?displayProperty=fullName> | Administracyjnej |
+| <xref:Microsoft.AspNetCore.Hosting.Server.IServer?displayProperty=fullName> | Pojedynczego |
+| <xref:Microsoft.AspNetCore.Http.IHttpContextFactory?displayProperty=fullName> | Administracyjnej |
+| <xref:Microsoft.Extensions.Logging.ILogger`1?displayProperty=fullName> | Pojedynczego |
+| <xref:Microsoft.Extensions.Logging.ILoggerFactory?displayProperty=fullName> | Pojedynczego |
+| <xref:Microsoft.Extensions.ObjectPool.ObjectPoolProvider?displayProperty=fullName> | Pojedynczego |
+| <xref:Microsoft.Extensions.Options.IConfigureOptions`1?displayProperty=fullName> | Administracyjnej |
+| <xref:Microsoft.Extensions.Options.IOptions`1?displayProperty=fullName> | Pojedynczego |
+| <xref:System.Diagnostics.DiagnosticSource?displayProperty=fullName> | Pojedynczego |
+| <xref:System.Diagnostics.DiagnosticListener?displayProperty=fullName> | Pojedynczego |
 
 ## <a name="register-additional-services-with-extension-methods"></a>Rejestrowanie dodatkowych usług przy użyciu metod rozszerzających
 
@@ -236,196 +204,12 @@ Pojedyncze usługi okresu istnienia ( <xref:Microsoft.Extensions.DependencyInjec
 Metody rozszerzenia rejestracji usług oferują przeciążenia, które są przydatne w określonych scenariuszach.
 
 | Metoda | Automatyczny<br>object<br>myśl | Wiele<br>implementacje | Przekaż argumenty |
-| ---
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
---- | :---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
----------------: | :---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--------------: | :---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
-----: | | `Add{LIFETIME}<{SERVICE}, {IMPLEMENTATION}>()`<br>Przykład:<br>`services.AddSingleton<IMyDep, MyDep>();`| Tak | Tak | Nie | |`Add{LIFETIME}<{SERVICE}>(sp => new {IMPLEMENTATION})`<br>Przykłady:<br>`services.AddSingleton<IMyDep>(sp => new MyDep());`<br>`services.AddSingleton<IMyDep>(sp => new MyDep("A string!"));`| Tak | Tak | Tak | |`Add{LIFETIME}<{IMPLEMENTATION}>()`<br>Przykład:<br>`services.AddSingleton<MyDep>();`| Tak | Nie | Nie | |`AddSingleton<{SERVICE}>(new {IMPLEMENTATION})`<br>Przykłady:<br>`services.AddSingleton<IMyDep>(new MyDep());`<br>`services.AddSingleton<IMyDep>(new MyDep("A string!"));`| Nie | Tak | Tak | |`AddSingleton(new {IMPLEMENTATION})`<br>Przykłady:<br>`services.AddSingleton(new MyDep());`<br>`services.AddSingleton(new MyDep("A string!"));`| Nie | Nie | Tak |
+| ------ | :-----------------------------: | :-------------------------: | :-------: |
+| `Add{LIFETIME}<{SERVICE}, {IMPLEMENTATION}>()`<br>Przykład:<br>`services.AddSingleton<IMyDep, MyDep>();` | Tak | Yes | Nie |
+| `Add{LIFETIME}<{SERVICE}>(sp => new {IMPLEMENTATION})`<br>Przykłady:<br>`services.AddSingleton<IMyDep>(sp => new MyDep());`<br>`services.AddSingleton<IMyDep>(sp => new MyDep("A string!"));` | Tak | Tak | Tak |
+| `Add{LIFETIME}<{IMPLEMENTATION}>()`<br>Przykład:<br>`services.AddSingleton<MyDep>();` | Yes | Nie | Nie |
+| `AddSingleton<{SERVICE}>(new {IMPLEMENTATION})`<br>Przykłady:<br>`services.AddSingleton<IMyDep>(new MyDep());`<br>`services.AddSingleton<IMyDep>(new MyDep("A string!"));` | Nie | Yes | Tak |
+| `AddSingleton(new {IMPLEMENTATION})`<br>Przykłady:<br>`services.AddSingleton(new MyDep());`<br>`services.AddSingleton(new MyDep("A string!"));` | Nie | Nie | Yes |
 
 Aby uzyskać więcej informacji na temat usuwania typów, zobacz sekcję [dotyczącą usuwania usług](#disposal-of-services) . Typowym scenariuszem dla wielu implementacji jest [imitacja typów do testowania](xref:test/integration-tests#inject-mock-services).
 
@@ -666,7 +450,40 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Aby zapoznać się z omówieniem opcji usuwania usług, zobacz [cztery sposoby usuwania interfejsu IDisposable w ASP.NET Core](https://andrewlock.net/four-ways-to-dispose-idisposables-in-asp-net-core/).
+### <a name="idisposable-guidance-for-transient-and-shared-instances"></a>Wskazówki interfejsu IDisposable dla wystąpień przejściowych i współużytkowanych
+
+#### <a name="transient-limited-lifetime"></a>Przejściowy, ograniczony okres istnienia
+
+**Scenariusz**
+
+Aplikacja wymaga <xref:System.IDisposable> wystąpienia z przejściowym okresem istnienia dla jednego z następujących scenariuszy:
+
+* Wystąpienie jest rozwiązane w zakresie głównym.
+* Wystąpienie powinno zostać usunięte przed zakończeniem zakresu.
+
+**Narzędzie**
+
+Użyj wzorca fabryki, aby utworzyć wystąpienie poza zakresem nadrzędnym. W tej sytuacji aplikacja zwykle ma `Create` metodę, która wywołuje bezpośrednio Konstruktor typu końcowego. Jeśli typ końcowy ma inne zależności, fabryka może:
+
+* Odbierz <xref:System.IServiceProvider> w konstruktorze.
+* Użyj, <xref:Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateInstance%2A?displayProperty=nameWithType> Aby utworzyć wystąpienie wystąpienia poza kontenerem, przy użyciu kontenera dla jego zależności.
+
+#### <a name="shared-instance-limited-lifetime"></a>Wystąpienie udostępnione, ograniczony okres istnienia
+
+**Scenariusz**
+
+Aplikacja wymaga <xref:System.IDisposable> wystąpienia udostępnionego w wielu usługach, ale <xref:System.IDisposable> powinna mieć ograniczony okres istnienia.
+
+**Narzędzie**
+
+Zarejestruj wystąpienie z okresem istnienia w zakresie. Użyj, <xref:Microsoft.Extensions.DependencyInjection.IServiceScopeFactory.CreateScope%2A?displayProperty=nameWithType> Aby rozpocząć i utworzyć nowy <xref:Microsoft.Extensions.DependencyInjection.IServiceScope> . Użyj zakresu, <xref:System.IServiceProvider> Aby uzyskać wymagane usługi. Usuń zakres, gdy okres istnienia powinien zostać zakończony.
+
+#### <a name="general-guidelines"></a>Ogólne wskazówki
+
+* Nie rejestruj <xref:System.IDisposable> wystąpień z zakresem przejściowym. Zamiast tego użyj wzorca fabryki.
+* Nie należy rozwiązywać wystąpień przejściowych lub zakresów <xref:System.IDisposable> w zakresie w zakresie głównym. Jedyny ogólny wyjątek polega na tym, że aplikacja tworzy/odtworzy i usuwa <xref:System.IServiceProvider> obiekt, który nie jest idealnym wzorcem.
+* Odebranie <xref:System.IDisposable> zależności za pośrednictwem programu di nie wymaga, aby odbiorca zaimplementował <xref:System.IDisposable> sam siebie. Odbiorca zależności nie <xref:System.IDisposable> powinien wywoływać <xref:System.IDisposable.Dispose%2A> tej zależności.
+* Zakresy powinny służyć do kontrolowania okresów istnienia usług. Zakresy nie są hierarchiczne i nie ma żadnych specjalnych połączeń między zakresami.
 
 ## <a name="default-service-container-replacement"></a>Zastępowanie kontenera usług domyślnych
 
@@ -746,7 +563,7 @@ Metoda fabryki pojedynczej usługi, taka jak drugi argument funkcji [AddSingleto
 
 * Unikaj dostępu statycznego do `HttpContext` (na przykład [IHttpContextAccessor. HttpContext](xref:Microsoft.AspNetCore.Http.IHttpContextAccessor.HttpContext)).
 
-Podobnie jak w przypadku wszystkich zestawów zaleceń, mogą wystąpić sytuacje, w których ignorowanie zalecenia jest wymagane. Wyjątki są rzadko &mdash; w większości specjalnych przypadków w ramach samej struktury.
+Podobnie jak w przypadku wszystkich zestawów zaleceń, mogą wystąpić sytuacje, w których ignorowanie zalecenia jest wymagane. Wyjątki są rzadkimi, głównie szczególnymi przypadkami w ramach samej struktury.
 
 DI jest *alternatywą* dla wzorców dostępu do obiektów static/Global. Możesz nie być w stanie korzystać z zalet programu DI w przypadku jego mieszania z dostępem do obiektów statycznych.
 
@@ -764,6 +581,7 @@ Zapoznaj się z https://github.com/OrchardCMS/OrchardCore.Samples przykładowymi
 * <xref:blazor/dependency-injection>
 * <xref:fundamentals/startup>
 * <xref:fundamentals/middleware/extensibility>
+* [Cztery sposoby usuwania interfejsu IDisposable w ASP.NET Core](https://andrewlock.net/four-ways-to-dispose-idisposables-in-asp-net-core/)
 * [Pisanie czystego kodu w ASP.NET Core z iniekcją zależności (MSDN)](https://msdn.microsoft.com/magazine/mt703433.aspx)
 * [Zasada jawnych zależności](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies)
 * [Niewersja kontenerów sterowania i wzorzec iniekcji zależności (Martin Fowlera)](https://www.martinfowler.com/articles/injection.html)
@@ -898,54 +716,21 @@ Aby uzyskać więcej informacji, zobacz <xref:fundamentals/startup>.
 `Startup.ConfigureServices`Metoda jest odpowiedzialna za Definiowanie usług, z których korzysta aplikacja, w tym funkcje platformy, takie jak Entity Framework Core i ASP.NET Core MVC. Początkowo `IServiceCollection` dostarczone z `ConfigureServices` usługami zdefiniowanymi przez platformę, w zależności od [konfiguracji hosta](xref:fundamentals/index#host). Aplikacja oparta na ASP.NET Core szablonie nie jest nietypowa, aby mieć setki usług zarejestrowanych przez platformę. W poniższej tabeli wymieniono niewielki przykład usług zarejestrowanych w ramach platformy.
 
 | Typ usługi | Okres istnienia |
-| ---
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
------- | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
----- | | <xref:Microsoft.AspNetCore.Hosting.Builder.IApplicationBuilderFactory?displayProperty=fullName> | Przejściowe | | <xref:Microsoft.AspNetCore.Hosting.IApplicationLifetime?displayProperty=fullName> | Pojedyncze | | <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment?displayProperty=fullName> | Pojedyncze | | <xref:Microsoft.AspNetCore.Hosting.IStartup?displayProperty=fullName> | Pojedyncze | | <xref:Microsoft.AspNetCore.Hosting.IStartupFilter?displayProperty=fullName> | Przejściowe | | <xref:Microsoft.AspNetCore.Hosting.Server.IServer?displayProperty=fullName> | Pojedyncze | | <xref:Microsoft.AspNetCore.Http.IHttpContextFactory?displayProperty=fullName> | Przejściowe | | <xref:Microsoft.Extensions.Logging.ILogger`1?displayProperty=fullName> | Pojedyncze | | <xref:Microsoft.Extensions.Logging.ILoggerFactory?displayProperty=fullName> | Pojedyncze | | <xref:Microsoft.Extensions.ObjectPool.ObjectPoolProvider?displayProperty=fullName> | Pojedyncze | | <xref:Microsoft.Extensions.Options.IConfigureOptions`1?displayProperty=fullName> | Przejściowe | | <xref:Microsoft.Extensions.Options.IOptions`1?displayProperty=fullName> | Pojedyncze | | <xref:System.Diagnostics.DiagnosticSource?displayProperty=fullName> | Pojedyncze | | <xref:System.Diagnostics.DiagnosticListener?displayProperty=fullName> | Pojedyncze |
+| ------------ | -------- |
+| <xref:Microsoft.AspNetCore.Hosting.Builder.IApplicationBuilderFactory?displayProperty=fullName> | Administracyjnej |
+| <xref:Microsoft.AspNetCore.Hosting.IApplicationLifetime?displayProperty=fullName> | Pojedynczego |
+| <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment?displayProperty=fullName> | Pojedynczego |
+| <xref:Microsoft.AspNetCore.Hosting.IStartup?displayProperty=fullName> | Pojedynczego |
+| <xref:Microsoft.AspNetCore.Hosting.IStartupFilter?displayProperty=fullName> | Administracyjnej |
+| <xref:Microsoft.AspNetCore.Hosting.Server.IServer?displayProperty=fullName> | Pojedynczego |
+| <xref:Microsoft.AspNetCore.Http.IHttpContextFactory?displayProperty=fullName> | Administracyjnej |
+| <xref:Microsoft.Extensions.Logging.ILogger`1?displayProperty=fullName> | Pojedynczego |
+| <xref:Microsoft.Extensions.Logging.ILoggerFactory?displayProperty=fullName> | Pojedynczego |
+| <xref:Microsoft.Extensions.ObjectPool.ObjectPoolProvider?displayProperty=fullName> | Pojedynczego |
+| <xref:Microsoft.Extensions.Options.IConfigureOptions`1?displayProperty=fullName> | Administracyjnej |
+| <xref:Microsoft.Extensions.Options.IOptions`1?displayProperty=fullName> | Pojedynczego |
+| <xref:System.Diagnostics.DiagnosticSource?displayProperty=fullName> | Pojedynczego |
+| <xref:System.Diagnostics.DiagnosticListener?displayProperty=fullName> | Pojedynczego |
 
 ## <a name="register-additional-services-with-extension-methods"></a>Rejestrowanie dodatkowych usług przy użyciu metod rozszerzających
 
@@ -996,196 +781,12 @@ Pojedyncze usługi okresu istnienia ( <xref:Microsoft.Extensions.DependencyInjec
 Metody rozszerzenia rejestracji usług oferują przeciążenia, które są przydatne w określonych scenariuszach.
 
 | Metoda | Automatyczny<br>object<br>myśl | Wiele<br>implementacje | Przekaż argumenty |
-| ---
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
---- | :---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
----------------: | :---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--------------: | :---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
-----: | | `Add{LIFETIME}<{SERVICE}, {IMPLEMENTATION}>()`<br>Przykład:<br>`services.AddSingleton<IMyDep, MyDep>();`| Tak | Tak | Nie | |`Add{LIFETIME}<{SERVICE}>(sp => new {IMPLEMENTATION})`<br>Przykłady:<br>`services.AddSingleton<IMyDep>(sp => new MyDep());`<br>`services.AddSingleton<IMyDep>(sp => new MyDep("A string!"));`| Tak | Tak | Tak | |`Add{LIFETIME}<{IMPLEMENTATION}>()`<br>Przykład:<br>`services.AddSingleton<MyDep>();`| Tak | Nie | Nie | |`AddSingleton<{SERVICE}>(new {IMPLEMENTATION})`<br>Przykłady:<br>`services.AddSingleton<IMyDep>(new MyDep());`<br>`services.AddSingleton<IMyDep>(new MyDep("A string!"));`| Nie | Tak | Tak | |`AddSingleton(new {IMPLEMENTATION})`<br>Przykłady:<br>`services.AddSingleton(new MyDep());`<br>`services.AddSingleton(new MyDep("A string!"));`| Nie | Nie | Tak |
+| ------ | :-----------------------------: | :-------------------------: | :-------: |
+| `Add{LIFETIME}<{SERVICE}, {IMPLEMENTATION}>()`<br>Przykład:<br>`services.AddSingleton<IMyDep, MyDep>();` | Tak | Yes | Nie |
+| `Add{LIFETIME}<{SERVICE}>(sp => new {IMPLEMENTATION})`<br>Przykłady:<br>`services.AddSingleton<IMyDep>(sp => new MyDep());`<br>`services.AddSingleton<IMyDep>(sp => new MyDep("A string!"));` | Tak | Tak | Tak |
+| `Add{LIFETIME}<{IMPLEMENTATION}>()`<br>Przykład:<br>`services.AddSingleton<MyDep>();` | Yes | Nie | Nie |
+| `AddSingleton<{SERVICE}>(new {IMPLEMENTATION})`<br>Przykłady:<br>`services.AddSingleton<IMyDep>(new MyDep());`<br>`services.AddSingleton<IMyDep>(new MyDep("A string!"));` | Nie | Yes | Tak |
+| `AddSingleton(new {IMPLEMENTATION})`<br>Przykłady:<br>`services.AddSingleton(new MyDep());`<br>`services.AddSingleton(new MyDep("A string!"));` | Nie | Nie | Yes |
 
 Aby uzyskać więcej informacji na temat usuwania typów, zobacz sekcję [dotyczącą usuwania usług](#disposal-of-services) . Typowym scenariuszem dla wielu implementacji jest [imitacja typów do testowania](xref:test/integration-tests#inject-mock-services).
 
@@ -1424,6 +1025,41 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
+### <a name="idisposable-guidance-for-transient-and-shared-instances"></a>Wskazówki interfejsu IDisposable dla wystąpień przejściowych i współużytkowanych
+
+#### <a name="transient-limited-lifetime"></a>Przejściowy, ograniczony okres istnienia
+
+**Scenariusz**
+
+Aplikacja wymaga <xref:System.IDisposable> wystąpienia z przejściowym okresem istnienia dla jednego z następujących scenariuszy:
+
+* Wystąpienie jest rozwiązane w zakresie głównym.
+* Wystąpienie powinno zostać usunięte przed zakończeniem zakresu.
+
+**Narzędzie**
+
+Użyj wzorca fabryki, aby utworzyć wystąpienie poza zakresem nadrzędnym. W tej sytuacji aplikacja zwykle ma `Create` metodę, która wywołuje bezpośrednio Konstruktor typu końcowego. Jeśli typ końcowy ma inne zależności, fabryka może:
+
+* Odbierz <xref:System.IServiceProvider> w konstruktorze.
+* Użyj, <xref:Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateInstance%2A?displayProperty=nameWithType> Aby utworzyć wystąpienie wystąpienia poza kontenerem, przy użyciu kontenera dla jego zależności.
+
+#### <a name="shared-instance-limited-lifetime"></a>Wystąpienie udostępnione, ograniczony okres istnienia
+
+**Scenariusz**
+
+Aplikacja wymaga <xref:System.IDisposable> wystąpienia udostępnionego w wielu usługach, ale <xref:System.IDisposable> powinna mieć ograniczony okres istnienia.
+
+**Narzędzie**
+
+Zarejestruj wystąpienie z okresem istnienia w zakresie. Użyj, <xref:Microsoft.Extensions.DependencyInjection.IServiceScopeFactory.CreateScope%2A?displayProperty=nameWithType> Aby rozpocząć i utworzyć nowy <xref:Microsoft.Extensions.DependencyInjection.IServiceScope> . Użyj zakresu, <xref:System.IServiceProvider> Aby uzyskać wymagane usługi. Usuń zakres, gdy okres istnienia powinien zostać zakończony.
+
+#### <a name="general-guidelines"></a>Ogólne wskazówki
+
+* Nie rejestruj <xref:System.IDisposable> wystąpień z zakresem przejściowym. Zamiast tego użyj wzorca fabryki.
+* Nie należy rozwiązywać wystąpień przejściowych lub zakresów <xref:System.IDisposable> w zakresie w zakresie głównym. Jedyny ogólny wyjątek polega na tym, że aplikacja tworzy/odtworzy i usuwa <xref:System.IServiceProvider> obiekt, który nie jest idealnym wzorcem.
+* Odebranie <xref:System.IDisposable> zależności za pośrednictwem programu di nie wymaga, aby odbiorca zaimplementował <xref:System.IDisposable> sam siebie. Odbiorca zależności nie <xref:System.IDisposable> powinien wywoływać <xref:System.IDisposable.Dispose%2A> tej zależności.
+* Zakresy powinny służyć do kontrolowania okresów istnienia usług. Zakresy nie są hierarchiczne i nie ma żadnych specjalnych połączeń między zakresami.
+
 ## <a name="default-service-container-replacement"></a>Zastępowanie kontenera usług domyślnych
 
 Wbudowany kontener usług został zaprojektowany z myślą o potrzebach platformy i większości aplikacji konsumenckich. Zalecamy użycie wbudowanego kontenera, chyba że potrzebna jest konkretna funkcja, która nie jest obsługiwana przez wbudowany kontener, na przykład:
@@ -1504,7 +1140,7 @@ Metoda fabryki pojedynczej usługi, taka jak drugi argument funkcji [AddSingleto
 
 * Unikaj dostępu statycznego do `HttpContext` (na przykład [IHttpContextAccessor. HttpContext](xref:Microsoft.AspNetCore.Http.IHttpContextAccessor.HttpContext)).
 
-Podobnie jak w przypadku wszystkich zestawów zaleceń, mogą wystąpić sytuacje, w których ignorowanie zalecenia jest wymagane. Wyjątki są rzadko &mdash; w większości specjalnych przypadków w ramach samej struktury.
+Podobnie jak w przypadku wszystkich zestawów zaleceń, mogą wystąpić sytuacje, w których ignorowanie zalecenia jest wymagane. Wyjątki są rzadkimi, głównie szczególnymi przypadkami w ramach samej struktury.
 
 DI jest *alternatywą* dla wzorców dostępu do obiektów static/Global. Możesz nie być w stanie korzystać z zalet programu DI w przypadku jego mieszania z dostępem do obiektów statycznych.
 
@@ -1516,6 +1152,7 @@ DI jest *alternatywą* dla wzorców dostępu do obiektów static/Global. Możesz
 * <xref:blazor/dependency-injection>
 * <xref:fundamentals/startup>
 * <xref:fundamentals/middleware/extensibility>
+* [Cztery sposoby usuwania interfejsu IDisposable w ASP.NET Core](https://andrewlock.net/four-ways-to-dispose-idisposables-in-asp-net-core/)
 * [Pisanie czystego kodu w ASP.NET Core z iniekcją zależności (MSDN)](https://msdn.microsoft.com/magazine/mt703433.aspx)
 * [Zasada jawnych zależności](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies)
 * [Niewersja kontenerów sterowania i wzorzec iniekcji zależności (Martin Fowlera)](https://www.martinfowler.com/articles/injection.html)

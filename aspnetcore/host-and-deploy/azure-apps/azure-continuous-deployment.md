@@ -44,9 +44,9 @@ W tym samouczku założono, że zainstalowano następujące oprogramowanie:
 
 1. Uruchom program Visual Studio.
 
-1. Z menu **plik** wybierz pozycję **Nowy** > **projekt**.
+1. Z menu **plik** wybierz pozycję **Nowy**  >  **projekt**.
 
-1. Wybierz szablon projektu **aplikacji sieci Web ASP.NET Core** . Jest on wyświetlany w obszarze **zainstalowane** > **Szablony** > **Visual C#** > **.NET Core**. Nadaj nazwę projektowi `SampleWebAppDemo`. Wybierz opcję **Utwórz nowe repozytorium git** , a następnie kliknij przycisk **OK**.
+1. Wybierz szablon projektu **aplikacji sieci Web ASP.NET Core** . Jest on wyświetlany w obszarze **zainstalowane**  >  **Szablony**  >  **Visual C#**  >  **.NET Core**. Nadaj nazwę projektowi `SampleWebAppDemo` . Wybierz opcję **Utwórz nowe repozytorium git** , a następnie kliknij przycisk **OK**.
 
    ![Okno dialogowe Nowy projekt](azure-continuous-deployment/_static/01-new-project.png)
 
@@ -59,7 +59,7 @@ W tym samouczku założono, że zainstalowano następujące oprogramowanie:
 
 ### <a name="running-the-web-app-locally"></a>Lokalne uruchamianie aplikacji sieci Web
 
-1. Po zakończeniu tworzenia aplikacji przez program Visual Studio Uruchom aplikację, wybierając pozycję **Debuguj** > **Rozpocznij debugowanie**. Alternatywnie naciśnij klawisz **F5**.
+1. Po zakończeniu tworzenia aplikacji przez program Visual Studio Uruchom aplikację, wybierając pozycję **Debuguj**  >  **Rozpocznij debugowanie**. Alternatywnie naciśnij klawisz **F5**.
 
    Zainicjowanie programu Visual Studio i nowej aplikacji może zająć trochę czasu. Po zakończeniu przeglądarka wyświetli działającą aplikację.
 
@@ -75,7 +75,7 @@ Poniższe kroki tworzą aplikację sieci Web w witrynie Azure Portal:
 
 1. Wybierz pozycję **Nowy** w lewym górnym rogu interfejsu portalu.
 
-1. Wybierz pozycję **Sieć Web + aplikacje mobilne** > **aplikacji sieci Web**.
+1. Wybierz pozycję **Sieć Web + aplikacje mobilne**  >  **aplikacji sieci Web**.
 
    ![Portal Microsoft Azure: nowy przycisk: Sieć Web + aplikacje mobilne na rynku Marketplace: przycisk aplikacji sieci Web w obszarze Polecane aplikacje](azure-continuous-deployment/_static/05-azure-newwebapp.png)
 
@@ -88,7 +88,7 @@ Poniższe kroki tworzą aplikację sieci Web w witrynie Azure Portal:
 
    W bloku **aplikacja sieci Web** wybierz istniejący **Plan/lokalizację App Service** lub Utwórz nowy. W przypadku tworzenia nowego planu wybierz warstwę cenową, lokalizację i inne opcje. Więcej informacji o planach App Service można znaleźć [w temacie Azure App Service planach szczegółowych](/azure/app-service/azure-web-sites-web-hosting-plans-in-depth-overview).
 
-1. Wybierz przycisk **Utwórz**. Na platformie Azure zostanie zainicjowana i uruchomiona aplikacja internetowa.
+1. Wybierz pozycję **Utwórz**. Na platformie Azure zostanie zainicjowana i uruchomiona aplikacja internetowa.
 
    ![Azure Portal: przykładowy Przykładowa aplikacja internetowa — Demonstracja 01 — blok](azure-continuous-deployment/_static/07-azure-webappblade.png)
 
@@ -102,7 +102,7 @@ Git to rozproszony system kontroli wersji, którego można użyć do wdrożenia 
 
 1. Wybierz aplikację sieci Web utworzoną w poprzedniej sekcji tego samouczka.
 
-1. W bloku **wdrożenie** wybierz pozycję **Opcje** > wdrażania**Wybierz pozycję źródłowe** > **lokalne repozytorium git**.
+1. W bloku **wdrożenie** wybierz pozycję **Opcje wdrażania**  >  **Wybierz pozycję źródłowe**  >  **lokalne repozytorium git**.
 
    ![Blok ustawień: blok źródła wdrożenia: Wybierz blok źródłowy](azure-continuous-deployment/_static/deployment-options.png)
 
@@ -110,11 +110,11 @@ Git to rozproszony system kontroli wersji, którego można użyć do wdrożenia 
 
 1. Jeśli nie skonfigurowano wcześniej poświadczeń wdrażania do publikowania aplikacji internetowej lub innej aplikacji App Service, skonfiguruj je teraz:
 
-   * Wybierz pozycję **Ustawienia** > **poświadczenia wdrożenia**. Zostanie wyświetlony blok **Ustawianie poświadczeń wdrożenia** .
+   * Wybierz pozycję **Ustawienia**  >  **poświadczenia wdrożenia**. Zostanie wyświetlony blok **Ustawianie poświadczeń wdrożenia** .
    * Utwórz nazwę użytkownika i hasło. Zapisz hasło do późniejszego użycia podczas konfigurowania usługi git.
    * Wybierz pozycję **Zapisz**.
 
-1. W bloku **aplikacja sieci Web** wybierz pozycję **Ustawienia** > **Właściwości**. Adres URL zdalnego repozytorium git do wdrożenia zostanie wyświetlony w obszarze **adres URL usługi git**.
+1. W bloku **aplikacja sieci Web** wybierz pozycję **Ustawienia**  >  **Właściwości**. Adres URL zdalnego repozytorium git do wdrożenia zostanie wyświetlony w obszarze **adres URL usługi git**.
 
 1. Skopiuj wartość **adresu URL usługi git** do późniejszego użycia w samouczku.
 
@@ -132,7 +132,7 @@ W tej sekcji Utwórz lokalne repozytorium git przy użyciu programu Visual Studi
 
    ![Karta Team Explorer Connect](azure-continuous-deployment/_static/10-team-explorer.png)
 
-1. W **Team Explorer**wybierz pozycję **Strona główna** (ikona główna) > **Settings** > **Ustawienia repozytorium**ustawień.
+1. W **Team Explorer**wybierz pozycję **Strona główna** (ikona główna) > **Settings**  >  **Ustawienia repozytorium**ustawień.
 
 1. W sekcji **Elementy zdalne** obszaru **Ustawienia repozytorium** wybierz pozycję **Dodaj**. Zostanie wyświetlone okno dialogowe **Dodawanie elementu zdalnego**.
 
@@ -147,9 +147,9 @@ W tej sekcji Utwórz lokalne repozytorium git przy użyciu programu Visual Studi
    >
    > `git remote add Azure-SampleApp https://me@sampleapp.scm.azurewebsites.net:443/SampleApp.git`
 
-1. Wybierz pozycję **Strona główna** (ikona główna) ustawienia > **Ustawienia** > **globalne**. Upewnij się, że nazwa i adres e-mail zostały ustawione. W razie potrzeby wybierz pozycję **Aktualizuj** .
+1. Wybierz pozycję **Strona główna** (ikona główna) ustawienia > **Ustawienia**  >  **globalne**. Upewnij się, że nazwa i adres e-mail zostały ustawione. W razie potrzeby wybierz pozycję **Aktualizuj** .
 
-1. Wybierz pozycję**zmiany** **Główne** > , aby powrócić do widoku **zmian** .
+1. Wybierz **Home**pozycję  >  **zmiany** główne, aby powrócić do widoku **zmian** .
 
 1. Wprowadź wiadomość dotyczącą zatwierdzenia, taką jak **początkowa #1 wypychania** i wybierz pozycję **Zatwierdź**. Ta akcja tworzy *zatwierdzenie* lokalnie.
 
@@ -162,7 +162,7 @@ W tej sekcji Utwórz lokalne repozytorium git przy użyciu programu Visual Studi
    >
    > `git commit -am "Initial Push #1"`
 
-1. Wybierz **Home** > pozycję > **Akcje****synchronizacji** > głównej**Otwórz wiersz polecenia**. Zostanie otwarty wiersz polecenia w katalogu projektu.
+1. Wybierz **Home**pozycję  >  **Sync**  >  **Akcje**synchronizacji głównej  >  **Otwórz wiersz polecenia**. Zostanie otwarty wiersz polecenia w katalogu projektu.
 
 1. Wprowadź następujące polecenie w oknie polecenia:
 
@@ -188,7 +188,7 @@ W tej sekcji Utwórz lokalne repozytorium git przy użyciu programu Visual Studi
 
 Sprawdź, czy transfer aplikacji sieci Web ze środowiska lokalnego na platformę Azure zakończył się pomyślnie.
 
-W [witrynie Azure Portal](https://portal.azure.com)wybierz aplikację internetową. Wybierz pozycję**Opcje wdrażania** **wdrożenia** > .
+W [witrynie Azure Portal](https://portal.azure.com)wybierz aplikację internetową. Wybierz **Deployment**pozycję  >  **Opcje wdrażania**wdrożenia.
 
 ![Witryna Azure Portal: blok ustawień: blok wdrożenia przedstawiający pomyślne wdrożenie](azure-continuous-deployment/_static/13-verify-deployment.png)
 
@@ -207,7 +207,7 @@ Po wprowadzeniu zmian w kodzie lokalnym należy ponownie opublikować:
 
 1. W **Eksplorator rozwiązań** programu Visual Studio otwórz plik *Startup.cs* .
 
-1. W `Configure` metodzie zmodyfikuj `Response.WriteAsync` metodę, tak aby była wyświetlana w następujący sposób:
+1. W `Configure` metodzie zmodyfikuj metodę, `Response.WriteAsync` tak aby była wyświetlana w następujący sposób:
 
    ```csharp
    await context.Response.WriteAsync("Hello World! Deploy to Azure.");
@@ -217,11 +217,11 @@ Po wprowadzeniu zmian w kodzie lokalnym należy ponownie opublikować:
 
 1. W **Eksplorator rozwiązań**kliknij prawym przyciskiem myszy **rozwiązanie "SampleWebAppDemo"** i wybierz pozycję **Zatwierdź**. Zostanie wyświetlone okno **Team Explorer**.
 
-1. Wprowadź komunikat dotyczący zatwierdzenia, taki `Update #2`jak.
+1. Wprowadź komunikat dotyczący zatwierdzenia, taki jak `Update #2` .
 
 1. Naciśnij przycisk **Zatwierdź** , aby zatwierdzić zmiany projektu.
 
-1. Wybierz **Home** > pozycję > **Akcje****synchronizacji** > narzędzia**wypychanie**.
+1. Wybierz **Home**pozycję  >  **Sync**  >  **Akcje**synchronizacji narzędzia  >  **wypychanie**.
 
 > [!NOTE]
 > Alternatywnie wypchnij zmiany z **okna polecenia** , otwierając **okno wiersza polecenia**, zmieniając katalog projektu i wprowadzając polecenie git. Przykład:

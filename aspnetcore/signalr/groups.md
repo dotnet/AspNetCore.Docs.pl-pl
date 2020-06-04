@@ -1,11 +1,11 @@
 ---
-title: "Manage Users and Groups in SignalR " Author: Description: "Overview of ASP.NET Core SignalR Zarządzanie użytkownikami i grupami".
-monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+title: "Manage Users and Groups in SignalR " Author: bradygaster Description: "Overview of ASP.NET Core SignalR Zarządzanie użytkownikami i grupami".
+monikerRange: ">= aspnetcore-2,1" MS. Author: bradyg MS. Custom: MVC MS. Date: 05/17/2020 No-Loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- SignalRIdentyfikator UID: 
+- " SignalR UID: sygnał/grupy
 
 ---
 
@@ -45,6 +45,6 @@ Aby chronić dostęp do zasobów przy użyciu grup, użyj funkcji [uwierzytelnia
 
 ## <a name="related-resources"></a>Powiązane zasoby
 
-* [Rozpoczęcie pracy](xref:tutorials/signalr)
+* [Wprowadzenie](xref:tutorials/signalr)
 * [Centra](xref:signalr/hubs)
 * [Publikowanie na platformie Azure](xref:signalr/publish-to-azure-web-app)

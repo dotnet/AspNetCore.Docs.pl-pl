@@ -1,11 +1,11 @@
 ---
-title: "Kompiluj swoją pierwszą Blazor aplikację" autor: Opis: "Kompiluj Blazor aplikację krok po kroku".
-monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
+title: "Kompiluj swoją pierwszą Blazor aplikację": guardrex Description: "Kompiluj Blazor aplikację krok po kroku".
+monikerRange: ">= aspnetcore-3,0" MS. Author: Riande MS. Custom: MVC MS. Date: 05/19/2020 No-Loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- SignalRIdentyfikator UID: 
+- SignalRUID: samouczki/First-blazor-App
 
 ---
 # <a name="build-your-first-blazor-app"></a>Tworzenie pierwszej Blazor aplikacji
@@ -131,7 +131,7 @@ W przypadku pracy z Blazor aplikacją webassembly wprowadza się w <xref:System.
 
 Dodaj do aplikacji nowy składnik implementujący prostą listę zadań do wykonania.
 
-1. Dodaj nowy `Todo` Razor składnik do aplikacji w folderze *strony* . W programie Visual Studio kliknij prawym przyciskiem myszy folder **strony** i wybierz polecenie **Dodaj**  >  **nowy element**  >  ** Razor **. Nadaj nazwę plikowi do *zrobienia. Razor*. W innych środowiskach programistycznych Dodaj pusty plik do folderu **Pages** o nazwie do *zrobienia. Razor*.
+1. Dodaj nowy `Todo` Razor składnik do aplikacji w folderze *strony* . Jeśli używasz programu Visual Studio, kliknij prawym przyciskiem myszy folder **strony** i wybierz polecenie **Dodaj**  >  **nowy element**  >  ** Razor **. Nadaj nazwę plikowi do *zrobienia. Razor*. W innych środowiskach programistycznych Dodaj pusty plik do folderu **Pages** o nazwie do *zrobienia. Razor*.
 
 1. Podaj początkowe znaczniki dla składnika:
 

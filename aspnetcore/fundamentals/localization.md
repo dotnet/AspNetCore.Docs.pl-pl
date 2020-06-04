@@ -32,35 +32,35 @@ Lokalizacja aplikacji obejmuje następujące elementy:
 
 <xref:Microsoft.Extensions.Localization.IStringLocalizer>i <xref:Microsoft.Extensions.Localization.IStringLocalizer%601> zostały zaprojektowane w celu zwiększenia produktywności podczas tworzenia zlokalizowanych aplikacji. `IStringLocalizer`używa <xref:System.Resources.ResourceManager> i <xref:System.Resources.ResourceReader> w celu zapewnienia zasobów specyficznych dla kultury w czasie wykonywania. Interfejs ma indeksator i `IEnumerable` zwraca zlokalizowane ciągi. `IStringLocalizer`nie wymaga zapisywania w pliku zasobów domyślnych ciągów języka. Możesz tworzyć aplikacje przeznaczone do lokalizacji i nie musisz już tworzyć plików zasobów w fazie opracowywania. Poniższy kod przedstawia sposób zawijania ciągu "informacje o tytule" dla lokalizacji.
 
-[!code-csharp[](localization/sample/Localization/Controllers/AboutController.cs)]
+[!code-csharp[](localization/sample/3.x/Localization/Controllers/AboutController.cs)]
 
 W poprzednim kodzie `IStringLocalizer<T>` implementacja pochodzi z [iniekcji zależności](dependency-injection.md). Jeśli zlokalizowana wartość "informacje o tytule" nie zostanie znaleziona, zostanie zwrócony klucz indeksatora, czyli ciąg "informacje o tytule". Możesz pozostawić domyślne ciągi literałów języka w aplikacji i otoczyć je w lokalizatorze, aby można było skupić się na tworzeniu aplikacji. Tworzysz aplikację przy użyciu języka domyślnego i przygotujesz ją do kroku lokalizacji bez wcześniejszego tworzenia domyślnego pliku zasobów. Alternatywnie można użyć tradycyjnego podejścia i podać klucz do pobrania domyślnego ciągu języka. Dla wielu deweloperów nowy przepływ pracy nie ma domyślnego pliku języka *. resx* i po prostu zawijający literały ciągu może zmniejszyć obciążenie lokalizowania aplikacji. Inni deweloperzy będą wolą tradycyjne przepływy pracy, ponieważ ułatwiają one pracę z dłuższymi literałami ciągów i ułatwiają aktualizowanie zlokalizowanych ciągów.
 
 Użyj `IHtmlLocalizer<T>` implementacji dla zasobów, które zawierają kod HTML. `IHtmlLocalizer`KOD HTML koduje argumenty, które są sformatowane w ciągu zasobu, ale nie kodu HTML samego samego ciągu zasobu. W przykładzie wyróżnionym poniżej tylko wartość `name` parametru jest zakodowana w formacie HTML.
 
-[!code-csharp[](../fundamentals/localization/sample/Localization/Controllers/BookController.cs?highlight=3,5,20&start=1&end=24)]
+[!code-csharp[](~/fundamentals/localization/sample/3.x/Localization/Controllers/BookController.cs?highlight=3,5,20&start=1&end=24)]
 
 **Uwaga:** Zazwyczaj chcesz zlokalizować tylko tekst, a nie HTML.
 
 Na najniższym poziomie można uzyskać możliwość `IStringLocalizerFactory` [iniekcji zależności](dependency-injection.md):
 
-[!code-csharp[](localization/sample/Localization/Controllers/TestController.cs?start=9&end=26&highlight=7-13)]
+[!code-csharp[](localization/sample/3.x/Localization/Controllers/TestController.cs?start=9&end=26&highlight=7-13)]
 
 Powyższy kod demonstruje każdą z dwóch metod tworzenia fabryk.
 
 Zlokalizowane ciągi można podzielić według kontrolera, obszaru lub tylko jednego kontenera. W aplikacji przykładowej Klasa fikcyjna o nazwie `SharedResource` jest używana do współużytkowanych zasobów.
 
-[!code-csharp[](localization/sample/Localization/Resources/SharedResource.cs)]
+[!code-csharp[](localization/sample/3.x/Localization/Resources/SharedResource.cs)]
 
 Niektórzy Deweloperzy używają `Startup` klasy, aby zawierały ciągi globalne lub udostępnione. W poniższym przykładzie `InfoController` `SharedResource` są używane i lokalizatory:
 
-[!code-csharp[](localization/sample/Localization/Controllers/InfoController.cs?range=9-26)]
+[!code-csharp[](localization/sample/3.x/Localization/Controllers/InfoController.cs?range=9-26)]
 
 ## <a name="view-localization"></a>Wyświetl lokalizację
 
 `IViewLocalizer`Usługa udostępnia zlokalizowane ciągi dla [widoku](xref:mvc/views/overview). `ViewLocalizer`Klasa implementuje ten interfejs i odnajduje lokalizację zasobu ze ścieżki pliku widoku. Poniższy kod pokazuje, jak używać domyślnej implementacji `IViewLocalizer` :
 
-[!code-cshtml[](localization/sample/Localization/Views/Home/About.cshtml)]
+[!code-cshtml[](localization/sample/3.x/Localization/Views/Home/About.cshtml)]
 
 Domyślna implementacja programu `IViewLocalizer` znajduje plik zasobów na podstawie nazwy pliku widoku. Nie ma możliwości użycia globalnego pliku zasobów udostępnionych. `ViewLocalizer`implementuje lokalizatora przy użyciu `IHtmlLocalizer` , dlatego Razor nie KODUJ kodu HTML zlokalizowanego ciągu. Można Sparametryzuj ciągi zasobów i `IViewLocalizer` zakodować w kodzie HTML parametry, ale nie ciąg zasobu. Rozważ następujące Razor oznakowanie:
 
@@ -80,7 +80,7 @@ Renderowany widok będzie zawierać znacznik HTML z pliku zasobu.
 
 Aby użyć udostępnionego pliku zasobu w widoku, wstrzyknąć `IHtmlLocalizer<T>` :
 
-[!code-cshtml[](../fundamentals/localization/sample/Localization/Views/Test/About.cshtml?highlight=5,12)]
+[!code-cshtml[](~/fundamentals/localization/sample/3.x/Localization/Views/Test/About.cshtml?highlight=5,12)]
 
 ## <a name="dataannotations-localization"></a>Lokalizacja adnotacji
 
@@ -89,7 +89,7 @@ Komunikaty o błędach DataAnnotations są zlokalizowane przy użyciu `IStringLo
 * *Zasoby/modele widoków. Account. RegisterViewModel. fr. resx*
 * *Zasoby/modele widoków/Account/RegisterViewModel. fr. resx*
 
-[!code-csharp[](localization/sample/Localization/ViewModels/Account/RegisterViewModel.cs?start=9&end=26)]
+[!code-csharp[](localization/sample/3.x/Localization/ViewModels/Account/RegisterViewModel.cs?start=9&end=26)]
 
 W ASP.NET Core MVC 1.1.0 i wyższych atrybuty inne niż Walidacja są zlokalizowane. ASP.NET Core MVC 1,0 **nie** wyszukuje zlokalizowanych ciągów dla atrybutów niezwiązanych z walidacją.
 
@@ -208,7 +208,7 @@ Każda kombinacja języka i kultury (oprócz języka domyślnego) wymaga unikato
 
 Lokalizacja jest skonfigurowana w ramach `Startup.ConfigureServices` metody:
 
-[!code-csharp[](localization/sample/Localization/Startup.cs?name=snippet1)]
+[!code-csharp[](localization/sample/3.x/Localization/Startup.cs?name=snippet1)]
 
 * `AddLocalization`Dodaje usługi lokalizacyjne do kontenera usług. Powyższy kod również ustawia ścieżkę zasobów na "zasoby".
 
@@ -220,7 +220,7 @@ Lokalizacja jest skonfigurowana w ramach `Startup.ConfigureServices` metody:
 
 Bieżąca kultura w żądaniu jest ustawiana w oprogramowaniu [pośredniczącym](xref:fundamentals/middleware/index)lokalizacji. Oprogramowanie pośredniczące lokalizacji jest włączone w tej `Startup.Configure` metodzie. Oprogramowanie pośredniczące lokalizacyjne musi być skonfigurowane przed jakimkolwiek oprogramowanie pośredniczące, które może sprawdzić kulturę żądania (na przykład `app.UseMvcWithDefaultRoute()` ).
 
-[!code-csharp[](localization/sample/Localization/Startup.cs?name=snippet2)]
+[!code-csharp[](localization/sample/3.x/Localization/Startup.cs?name=snippet2)]
 [!INCLUDE[about the series](~/includes/code-comments-loc.md)]
 
 `UseRequestLocalization`Inicjuje `RequestLocalizationOptions` obiekt. Na każdym zażądaniu listy `RequestCultureProvider` w programie `RequestLocalizationOptions` jest wyliczany, a pierwszy dostawca, który może pomyślnie ustalić kulturę żądań, jest używany. Dostawcy domyślnie pochodzą z `RequestLocalizationOptions` klasy:
@@ -306,15 +306,15 @@ Służy `RequestLocalizationOptions` do dodawania lub usuwania dostawców lokali
 
 Ten przykład **lokalizacji. StarterWeb** projekt w witrynie [GitHub](https://github.com/aspnet/entropy) zawiera interfejs użytkownika służący do ustawiania `Culture` . Plik *views/Shared/_SelectLanguagePartial. cshtml* umożliwia wybranie kultury z listy obsługiwanych kultur:
 
-[!code-cshtml[](localization/sample/Localization/Views/Shared/_SelectLanguagePartial.cshtml)]
+[!code-cshtml[](localization/sample/3.x/Localization/Views/Shared/_SelectLanguagePartial.cshtml)]
 
 Plik *views/Shared/_SelectLanguagePartial. cshtml* zostanie dodany do `footer` sekcji pliku układu, więc będzie dostępny dla wszystkich widoków:
 
-[!code-cshtml[](localization/sample/Localization/Views/Shared/_Layout.cshtml?range=43-56&highlight=10)]
+[!code-cshtml[](localization/sample/3.x/Localization/Views/Shared/_Layout.cshtml?range=43-56&highlight=10)]
 
 `SetLanguage`Metoda ustawia plik cookie kultury.
 
-[!code-csharp[](localization/sample/Localization/Controllers/HomeController.cs?range=57-67)]
+[!code-csharp[](localization/sample/3.x/Localization/Controllers/HomeController.cs?range=57-67)]
 
 Nie można podłączyć *_SelectLanguagePartial. cshtml* do przykładowego kodu dla tego projektu. Projekt **Lokalizacja. StarterWeb** w usłudze [GitHub](https://github.com/aspnet/entropy) ma kod, który umożliwia `RequestLocalizationOptions` Razor Przechodzenie do częściowej przez kontener [iniekcji zależności](dependency-injection.md) .
 
@@ -380,35 +380,35 @@ Lokalizacja aplikacji obejmuje następujące elementy:
 
 <xref:Microsoft.Extensions.Localization.IStringLocalizer>i <xref:Microsoft.Extensions.Localization.IStringLocalizer%601> zostały zaprojektowane w celu zwiększenia produktywności podczas tworzenia zlokalizowanych aplikacji. `IStringLocalizer`używa <xref:System.Resources.ResourceManager> i <xref:System.Resources.ResourceReader> w celu zapewnienia zasobów specyficznych dla kultury w czasie wykonywania. Interfejs ma indeksator i `IEnumerable` zwraca zlokalizowane ciągi. `IStringLocalizer`nie wymaga zapisywania w pliku zasobów domyślnych ciągów języka. Możesz tworzyć aplikacje przeznaczone do lokalizacji i nie musisz już tworzyć plików zasobów w fazie opracowywania. Poniższy kod przedstawia sposób zawijania ciągu "informacje o tytule" dla lokalizacji.
 
-[!code-csharp[](localization/sample/Localization/Controllers/AboutController.cs)]
+[!code-csharp[](localization/sample/3.x/Localization/Controllers/AboutController.cs)]
 
 W poprzednim kodzie `IStringLocalizer<T>` implementacja pochodzi z [iniekcji zależności](dependency-injection.md). Jeśli zlokalizowana wartość "informacje o tytule" nie zostanie znaleziona, zostanie zwrócony klucz indeksatora, czyli ciąg "informacje o tytule". Możesz pozostawić domyślne ciągi literałów języka w aplikacji i otoczyć je w lokalizatorze, aby można było skupić się na tworzeniu aplikacji. Tworzysz aplikację przy użyciu języka domyślnego i przygotujesz ją do kroku lokalizacji bez wcześniejszego tworzenia domyślnego pliku zasobów. Alternatywnie można użyć tradycyjnego podejścia i podać klucz do pobrania domyślnego ciągu języka. Dla wielu deweloperów nowy przepływ pracy nie ma domyślnego pliku języka *. resx* i po prostu zawijający literały ciągu może zmniejszyć obciążenie lokalizowania aplikacji. Inni deweloperzy będą wolą tradycyjne przepływy pracy, ponieważ ułatwiają one pracę z dłuższymi literałami ciągów i ułatwiają aktualizowanie zlokalizowanych ciągów.
 
 Użyj `IHtmlLocalizer<T>` implementacji dla zasobów, które zawierają kod HTML. `IHtmlLocalizer`KOD HTML koduje argumenty, które są sformatowane w ciągu zasobu, ale nie kodu HTML samego samego ciągu zasobu. W przykładzie wyróżnionym poniżej tylko wartość `name` parametru jest zakodowana w formacie HTML.
 
-[!code-csharp[](../fundamentals/localization/sample/Localization/Controllers/BookController.cs?highlight=3,5,20&start=1&end=24)]
+[!code-csharp[](~/fundamentals/localization/sample/3.x/Localization/Controllers/BookController.cs?highlight=3,5,20&start=1&end=24)]
 
 **Uwaga:** Zazwyczaj chcesz zlokalizować tylko tekst, a nie HTML.
 
 Na najniższym poziomie można uzyskać możliwość `IStringLocalizerFactory` [iniekcji zależności](dependency-injection.md):
 
-[!code-csharp[](localization/sample/Localization/Controllers/TestController.cs?start=9&end=26&highlight=7-13)]
+[!code-csharp[](localization/sample/3.x/Localization/Controllers/TestController.cs?start=9&end=26&highlight=7-13)]
 
 Powyższy kod demonstruje każdą z dwóch metod tworzenia fabryk.
 
 Zlokalizowane ciągi można podzielić według kontrolera, obszaru lub tylko jednego kontenera. W aplikacji przykładowej Klasa fikcyjna o nazwie `SharedResource` jest używana do współużytkowanych zasobów.
 
-[!code-csharp[](localization/sample/Localization/Resources/SharedResource.cs)]
+[!code-csharp[](localization/sample/3.x/Localization/Resources/SharedResource.cs)]
 
 Niektórzy Deweloperzy używają `Startup` klasy, aby zawierały ciągi globalne lub udostępnione. W poniższym przykładzie `InfoController` `SharedResource` są używane i lokalizatory:
 
-[!code-csharp[](localization/sample/Localization/Controllers/InfoController.cs?range=9-26)]
+[!code-csharp[](localization/sample/3.x/Localization/Controllers/InfoController.cs?range=9-26)]
 
 ## <a name="view-localization"></a>Wyświetl lokalizację
 
 `IViewLocalizer`Usługa udostępnia zlokalizowane ciągi dla [widoku](xref:mvc/views/overview). `ViewLocalizer`Klasa implementuje ten interfejs i odnajduje lokalizację zasobu ze ścieżki pliku widoku. Poniższy kod pokazuje, jak używać domyślnej implementacji `IViewLocalizer` :
 
-[!code-cshtml[](localization/sample/Localization/Views/Home/About.cshtml)]
+[!code-cshtml[](localization/sample/3.x/Localization/Views/Home/About.cshtml)]
 
 Domyślna implementacja programu `IViewLocalizer` znajduje plik zasobów na podstawie nazwy pliku widoku. Nie ma możliwości użycia globalnego pliku zasobów udostępnionych. `ViewLocalizer`implementuje lokalizatora przy użyciu `IHtmlLocalizer` , dlatego Razor nie KODUJ kodu HTML zlokalizowanego ciągu. Można Sparametryzuj ciągi zasobów i `IViewLocalizer` zakodować w kodzie HTML parametry, ale nie ciąg zasobu. Rozważ następujące Razor oznakowanie:
 
@@ -428,7 +428,7 @@ Renderowany widok będzie zawierać znacznik HTML z pliku zasobu.
 
 Aby użyć udostępnionego pliku zasobu w widoku, wstrzyknąć `IHtmlLocalizer<T>` :
 
-[!code-cshtml[](../fundamentals/localization/sample/Localization/Views/Test/About.cshtml?highlight=5,12)]
+[!code-cshtml[](~/fundamentals/localization/sample/3.x/Localization/Views/Test/About.cshtml?highlight=5,12)]
 
 ## <a name="dataannotations-localization"></a>Lokalizacja adnotacji
 
@@ -437,7 +437,7 @@ Komunikaty o błędach DataAnnotations są zlokalizowane przy użyciu `IStringLo
 * *Zasoby/modele widoków. Account. RegisterViewModel. fr. resx*
 * *Zasoby/modele widoków/Account/RegisterViewModel. fr. resx*
 
-[!code-csharp[](localization/sample/Localization/ViewModels/Account/RegisterViewModel.cs?start=9&end=26)]
+[!code-csharp[](localization/sample/3.x/Localization/ViewModels/Account/RegisterViewModel.cs?start=9&end=26)]
 
 W ASP.NET Core MVC 1.1.0 i wyższych atrybuty inne niż Walidacja są zlokalizowane. ASP.NET Core MVC 1,0 **nie** wyszukuje zlokalizowanych ciągów dla atrybutów niezwiązanych z walidacją.
 
@@ -556,7 +556,7 @@ Każda kombinacja języka i kultury (oprócz języka domyślnego) wymaga unikato
 
 Lokalizacja jest skonfigurowana w ramach `Startup.ConfigureServices` metody:
 
-[!code-csharp[](localization/sample/Localization/Startup.cs?name=snippet1)]
+[!code-csharp[](localization/sample/3.x/Localization/Startup.cs?name=snippet1)]
 
 * `AddLocalization`Dodaje usługi lokalizacyjne do kontenera usług. Powyższy kod również ustawia ścieżkę zasobów na "zasoby".
 
@@ -568,7 +568,7 @@ Lokalizacja jest skonfigurowana w ramach `Startup.ConfigureServices` metody:
 
 Bieżąca kultura w żądaniu jest ustawiana w oprogramowaniu [pośredniczącym](xref:fundamentals/middleware/index)lokalizacji. Oprogramowanie pośredniczące lokalizacji jest włączone w tej `Startup.Configure` metodzie. Oprogramowanie pośredniczące lokalizacyjne musi być skonfigurowane przed jakimkolwiek oprogramowanie pośredniczące, które może sprawdzić kulturę żądania (na przykład `app.UseMvcWithDefaultRoute()` ).
 
-[!code-csharp[](localization/sample/Localization/Startup.cs?name=snippet2)]
+[!code-csharp[](localization/sample/3.x/Localization/Startup.cs?name=snippet2)]
 [!INCLUDE[about the series](~/includes/code-comments-loc.md)]
 
 `UseRequestLocalization`Inicjuje `RequestLocalizationOptions` obiekt. Na każdym zażądaniu listy `RequestCultureProvider` w programie `RequestLocalizationOptions` jest wyliczany, a pierwszy dostawca, który może pomyślnie ustalić kulturę żądań, jest używany. Dostawcy domyślnie pochodzą z `RequestLocalizationOptions` klasy:
@@ -654,15 +654,15 @@ Służy `RequestLocalizationOptions` do dodawania lub usuwania dostawców lokali
 
 Ten przykład **lokalizacji. StarterWeb** projekt w witrynie [GitHub](https://github.com/aspnet/entropy) zawiera interfejs użytkownika służący do ustawiania `Culture` . Plik *views/Shared/_SelectLanguagePartial. cshtml* umożliwia wybranie kultury z listy obsługiwanych kultur:
 
-[!code-cshtml[](localization/sample/Localization/Views/Shared/_SelectLanguagePartial.cshtml)]
+[!code-cshtml[](localization/sample/3.x/Localization/Views/Shared/_SelectLanguagePartial.cshtml)]
 
 Plik *views/Shared/_SelectLanguagePartial. cshtml* zostanie dodany do `footer` sekcji pliku układu, więc będzie dostępny dla wszystkich widoków:
 
-[!code-cshtml[](localization/sample/Localization/Views/Shared/_Layout.cshtml?range=43-56&highlight=10)]
+[!code-cshtml[](localization/sample/3.x/Localization/Views/Shared/_Layout.cshtml?range=43-56&highlight=10)]
 
 `SetLanguage`Metoda ustawia plik cookie kultury.
 
-[!code-csharp[](localization/sample/Localization/Controllers/HomeController.cs?range=57-67)]
+[!code-csharp[](localization/sample/3.x/Localization/Controllers/HomeController.cs?range=57-67)]
 
 Nie można podłączyć *_SelectLanguagePartial. cshtml* do przykładowego kodu dla tego projektu. Projekt **Lokalizacja. StarterWeb** w usłudze [GitHub](https://github.com/aspnet/entropy) ma kod, który umożliwia `RequestLocalizationOptions` Razor Przechodzenie do częściowej przez kontener [iniekcji zależności](dependency-injection.md) .
 
@@ -727,35 +727,35 @@ Lokalizacja aplikacji obejmuje następujące elementy:
 
 <xref:Microsoft.Extensions.Localization.IStringLocalizer>i <xref:Microsoft.Extensions.Localization.IStringLocalizer%601> zostały zaprojektowane w celu zwiększenia produktywności podczas tworzenia zlokalizowanych aplikacji. `IStringLocalizer`używa <xref:System.Resources.ResourceManager> i <xref:System.Resources.ResourceReader> w celu zapewnienia zasobów specyficznych dla kultury w czasie wykonywania. Interfejs ma indeksator i `IEnumerable` zwraca zlokalizowane ciągi. `IStringLocalizer`nie wymaga zapisywania w pliku zasobów domyślnych ciągów języka. Możesz tworzyć aplikacje przeznaczone do lokalizacji i nie musisz już tworzyć plików zasobów w fazie opracowywania. Poniższy kod przedstawia sposób zawijania ciągu "informacje o tytule" dla lokalizacji.
 
-[!code-csharp[](localization/sample/Localization/Controllers/AboutController.cs)]
+[!code-csharp[](localization/sample/3.x/Localization/Controllers/AboutController.cs)]
 
 W poprzednim kodzie `IStringLocalizer<T>` implementacja pochodzi z [iniekcji zależności](dependency-injection.md). Jeśli zlokalizowana wartość "informacje o tytule" nie zostanie znaleziona, zostanie zwrócony klucz indeksatora, czyli ciąg "informacje o tytule". Możesz pozostawić domyślne ciągi literałów języka w aplikacji i otoczyć je w lokalizatorze, aby można było skupić się na tworzeniu aplikacji. Tworzysz aplikację przy użyciu języka domyślnego i przygotujesz ją do kroku lokalizacji bez wcześniejszego tworzenia domyślnego pliku zasobów. Alternatywnie można użyć tradycyjnego podejścia i podać klucz do pobrania domyślnego ciągu języka. Dla wielu deweloperów nowy przepływ pracy nie ma domyślnego pliku języka *. resx* i po prostu zawijający literały ciągu może zmniejszyć obciążenie lokalizowania aplikacji. Inni deweloperzy będą wolą tradycyjne przepływy pracy, ponieważ ułatwiają one pracę z dłuższymi literałami ciągów i ułatwiają aktualizowanie zlokalizowanych ciągów.
 
 Użyj `IHtmlLocalizer<T>` implementacji dla zasobów, które zawierają kod HTML. `IHtmlLocalizer`KOD HTML koduje argumenty, które są sformatowane w ciągu zasobu, ale nie kodu HTML samego samego ciągu zasobu. W przykładzie wyróżnionym poniżej tylko wartość `name` parametru jest zakodowana w formacie HTML.
 
-[!code-csharp[](../fundamentals/localization/sample/Localization/Controllers/BookController.cs?highlight=3,5,20&start=1&end=24)]
+[!code-csharp[](~/fundamentals/localization/sample/3.x/Localization/Controllers/BookController.cs?highlight=3,5,20&start=1&end=24)]
 
 **Uwaga:** Zazwyczaj chcesz zlokalizować tylko tekst, a nie HTML.
 
 Na najniższym poziomie można uzyskać możliwość `IStringLocalizerFactory` [iniekcji zależności](dependency-injection.md):
 
-[!code-csharp[](localization/sample/Localization/Controllers/TestController.cs?start=9&end=26&highlight=7-13)]
+[!code-csharp[](localization/sample/3.x/Localization/Controllers/TestController.cs?start=9&end=26&highlight=7-13)]
 
 Powyższy kod demonstruje każdą z dwóch metod tworzenia fabryk.
 
 Zlokalizowane ciągi można podzielić według kontrolera, obszaru lub tylko jednego kontenera. W aplikacji przykładowej Klasa fikcyjna o nazwie `SharedResource` jest używana do współużytkowanych zasobów.
 
-[!code-csharp[](localization/sample/Localization/Resources/SharedResource.cs)]
+[!code-csharp[](localization/sample/3.x/Localization/Resources/SharedResource.cs)]
 
 Niektórzy Deweloperzy używają `Startup` klasy, aby zawierały ciągi globalne lub udostępnione. W poniższym przykładzie `InfoController` `SharedResource` są używane i lokalizatory:
 
-[!code-csharp[](localization/sample/Localization/Controllers/InfoController.cs?range=9-26)]
+[!code-csharp[](localization/sample/3.x/Localization/Controllers/InfoController.cs?range=9-26)]
 
 ## <a name="view-localization"></a>Wyświetl lokalizację
 
 `IViewLocalizer`Usługa udostępnia zlokalizowane ciągi dla [widoku](xref:mvc/views/overview). `ViewLocalizer`Klasa implementuje ten interfejs i odnajduje lokalizację zasobu ze ścieżki pliku widoku. Poniższy kod pokazuje, jak używać domyślnej implementacji `IViewLocalizer` :
 
-[!code-cshtml[](localization/sample/Localization/Views/Home/About.cshtml)]
+[!code-cshtml[](localization/sample/3.x/Localization/Views/Home/About.cshtml)]
 
 Domyślna implementacja programu `IViewLocalizer` znajduje plik zasobów na podstawie nazwy pliku widoku. Nie ma możliwości użycia globalnego pliku zasobów udostępnionych. `ViewLocalizer`implementuje lokalizatora przy użyciu `IHtmlLocalizer` , dlatego Razor nie KODUJ kodu HTML zlokalizowanego ciągu. Można Sparametryzuj ciągi zasobów i `IViewLocalizer` zakodować w kodzie HTML parametry, ale nie ciąg zasobu. Rozważ następujące Razor oznakowanie:
 
@@ -775,7 +775,7 @@ Renderowany widok będzie zawierać znacznik HTML z pliku zasobu.
 
 Aby użyć udostępnionego pliku zasobu w widoku, wstrzyknąć `IHtmlLocalizer<T>` :
 
-[!code-cshtml[](../fundamentals/localization/sample/Localization/Views/Test/About.cshtml?highlight=5,12)]
+[!code-cshtml[](~/fundamentals/localization/sample/3.x/Localization/Views/Test/About.cshtml?highlight=5,12)]
 
 ## <a name="dataannotations-localization"></a>Lokalizacja adnotacji
 
@@ -784,7 +784,7 @@ Komunikaty o błędach DataAnnotations są zlokalizowane przy użyciu `IStringLo
 * *Zasoby/modele widoków. Account. RegisterViewModel. fr. resx*
 * *Zasoby/modele widoków/Account/RegisterViewModel. fr. resx*
 
-[!code-csharp[](localization/sample/Localization/ViewModels/Account/RegisterViewModel.cs?start=9&end=26)]
+[!code-csharp[](localization/sample/3.x/Localization/ViewModels/Account/RegisterViewModel.cs?start=9&end=26)]
 
 W ASP.NET Core MVC 1.1.0 i wyższych atrybuty inne niż Walidacja są zlokalizowane. ASP.NET Core MVC 1,0 **nie** wyszukuje zlokalizowanych ciągów dla atrybutów niezwiązanych z walidacją.
 
@@ -903,7 +903,7 @@ Każda kombinacja języka i kultury (oprócz języka domyślnego) wymaga unikato
 
 Lokalizacja jest skonfigurowana w ramach `Startup.ConfigureServices` metody:
 
-[!code-csharp[](localization/sample/Localization/Startup.cs?name=snippet1)]
+[!code-csharp[](localization/sample/3.x/Localization/Startup.cs?name=snippet1)]
 
 * `AddLocalization`Dodaje usługi lokalizacyjne do kontenera usług. Powyższy kod również ustawia ścieżkę zasobów na "zasoby".
 
@@ -915,7 +915,7 @@ Lokalizacja jest skonfigurowana w ramach `Startup.ConfigureServices` metody:
 
 Bieżąca kultura w żądaniu jest ustawiana w oprogramowaniu [pośredniczącym](xref:fundamentals/middleware/index)lokalizacji. Oprogramowanie pośredniczące lokalizacji jest włączone w tej `Startup.Configure` metodzie. Oprogramowanie pośredniczące lokalizacyjne musi być skonfigurowane przed jakimkolwiek oprogramowanie pośredniczące, które może sprawdzić kulturę żądania (na przykład `app.UseMvcWithDefaultRoute()` ).
 
-[!code-csharp[](localization/sample/Localization/Startup.cs?name=snippet2)]
+[!code-csharp[](localization/sample/3.x/Localization/Startup.cs?name=snippet2)]
 [!INCLUDE[about the series](~/includes/code-comments-loc.md)]
 
 `UseRequestLocalization`Inicjuje `RequestLocalizationOptions` obiekt. Na każdym zażądaniu listy `RequestCultureProvider` w programie `RequestLocalizationOptions` jest wyliczany, a pierwszy dostawca, który może pomyślnie ustalić kulturę żądań, jest używany. Dostawcy domyślnie pochodzą z `RequestLocalizationOptions` klasy:
@@ -1024,15 +1024,15 @@ Służy `RequestLocalizationOptions` do dodawania lub usuwania dostawców lokali
 
 Ten przykład **lokalizacji. StarterWeb** projekt w witrynie [GitHub](https://github.com/aspnet/entropy) zawiera interfejs użytkownika służący do ustawiania `Culture` . Plik *views/Shared/_SelectLanguagePartial. cshtml* umożliwia wybranie kultury z listy obsługiwanych kultur:
 
-[!code-cshtml[](localization/sample/Localization/Views/Shared/_SelectLanguagePartial.cshtml)]
+[!code-cshtml[](localization/sample/3.x/Localization/Views/Shared/_SelectLanguagePartial.cshtml)]
 
 Plik *views/Shared/_SelectLanguagePartial. cshtml* zostanie dodany do `footer` sekcji pliku układu, więc będzie dostępny dla wszystkich widoków:
 
-[!code-cshtml[](localization/sample/Localization/Views/Shared/_Layout.cshtml?range=43-56&highlight=10)]
+[!code-cshtml[](localization/sample/3.x/Localization/Views/Shared/_Layout.cshtml?range=43-56&highlight=10)]
 
 `SetLanguage`Metoda ustawia plik cookie kultury.
 
-[!code-csharp[](localization/sample/Localization/Controllers/HomeController.cs?range=57-67)]
+[!code-csharp[](localization/sample/3.x/Localization/Controllers/HomeController.cs?range=57-67)]
 
 Nie można podłączyć *_SelectLanguagePartial. cshtml* do przykładowego kodu dla tego projektu. Projekt **Lokalizacja. StarterWeb** w usłudze [GitHub](https://github.com/aspnet/entropy) ma kod, który umożliwia `RequestLocalizationOptions` Razor Przechodzenie do częściowej przez kontener [iniekcji zależności](dependency-injection.md) .
 

@@ -1,22 +1,12 @@
 ---
-title: Konfigurowanie lokalizacji obiektu przenośnego w ASP.NET Core
-author: sebastienros
-description: W tym artykule wprowadzono przenośne pliki obiektów i instrukcje dotyczące korzystania z nich w aplikacji ASP.NET Coreej z podstawową platformą sadu.
-ms.author: scaddie
-ms.date: 09/26/2017
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: fundamentals/portable-object-localization
-ms.openlocfilehash: 1e544b0f504c2776c678c51bff598cf011b52610
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776054"
+title: Skonfiguruj lokalizację obiektu przenośnego w ASP.NET Core autor: sebastienros Description: w tym artykule wprowadzono przenośne pliki obiektów i instrukcje dotyczące korzystania z nich w aplikacji ASP.NET Core z podstawową platformą sadu.
+MS. Author: scaddie MS. Date: 09/26/2017 No-Loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- " SignalR UID: podstawy/obiekty przenośne-lokalizacja
+
 ---
 # <a name="configure-portable-object-localization-in-aspnet-core"></a>Konfigurowanie lokalizacji obiektu przenośnego w ASP.NET Core
 
@@ -73,41 +63,41 @@ Ten przykład jest oparty na aplikacji ASP.NET Core MVC wygenerowanej na podstaw
 
 ### <a name="referencing-the-package"></a>Odwoływanie się do pakietu
 
-Dodaj odwołanie do pakietu `OrchardCore.Localization.Core` NuGet. Jest on dostępny w witrynie [MyGet](https://www.myget.org/) pod następującym źródłem pakietu:https://www.myget.org/F/orchardcore-preview/api/v3/index.json
+Dodaj odwołanie do `OrchardCore.Localization.Core` pakietu NuGet. Jest on dostępny w witrynie [MyGet](https://www.myget.org/) pod następującym źródłem pakietu:https://www.myget.org/F/orchardcore-preview/api/v3/index.json
 
 Plik *. csproj* zawiera teraz wiersz podobny do następującego (numer wersji może się różnić):
 
-[!code-xml[](localization/sample/POLocalization/POLocalization.csproj?range=9)]
+[!code-xml[](localization/sample/2.x/POLocalization/POLocalization.csproj?range=9)]
 
 ### <a name="registering-the-service"></a>Rejestrowanie usługi
 
 Dodaj wymagane usługi do `ConfigureServices` metody *Startup.cs*:
 
-[!code-csharp[](localization/sample/POLocalization/Startup.cs?name=snippet_ConfigureServices&highlight=4-21)]
+[!code-csharp[](localization/sample/2.x/POLocalization/Startup.cs?name=snippet_ConfigureServices&highlight=4-21)]
 
 Dodaj wymagane oprogramowanie pośredniczące do `Configure` metody *Startup.cs*:
 
-[!code-csharp[](localization/sample/POLocalization/Startup.cs?name=snippet_Configure&highlight=15)]
+[!code-csharp[](localization/sample/2.x/POLocalization/Startup.cs?name=snippet_Configure&highlight=15)]
 
-Dodaj następujący kod do wybranego Razor widoku. W tym przykładzie użyto *. cshtml* .
+Dodaj następujący kod do Razor wybranego widoku. W tym przykładzie użyto *. cshtml* .
 
-[!code-cshtml[](localization/sample/POLocalization/Views/Home/About.cshtml)]
+[!code-cshtml[](localization/sample/2.x/POLocalization/Views/Home/About.cshtml)]
 
-`IViewLocalizer` Wystąpienie jest wstrzykiwane i używane do tłumaczenia tekstu "Hello World!".
+`IViewLocalizer`Wystąpienie jest wstrzykiwane i używane do tłumaczenia tekstu "Hello World!".
 
 ### <a name="creating-a-po-file"></a>Tworzenie pliku ZZ
 
-Utwórz plik o nazwie * \<Culture Code>. po* w folderze głównym aplikacji. W tym przykładzie nazwa pliku to *fr. po* , ponieważ używany jest język francuski:
+Utwórz plik o nazwie * \<culture code> . ZZ* w folderze głównym aplikacji. W tym przykładzie nazwa pliku to *fr. po* , ponieważ używany jest język francuski:
 
-[!code-text[](localization/sample/POLocalization/fr.po)]
+[!code-text[](localization/sample/2.x/POLocalization/fr.po)]
 
-Ten plik przechowuje zarówno ciąg do przetłumaczenia, jak i ciąg przetłumaczony w języku francuskim. W razie potrzeby tłumaczenia są przywracane do ich kultury nadrzędnej. W tym przykładzie plik *fr. ZZ* jest używany, jeśli żądana kultura jest `fr-FR` lub. `fr-CA`
+Ten plik przechowuje zarówno ciąg do przetłumaczenia, jak i ciąg przetłumaczony w języku francuskim. W razie potrzeby tłumaczenia są przywracane do ich kultury nadrzędnej. W tym przykładzie plik *fr. ZZ* jest używany, jeśli żądana kultura jest `fr-FR` lub `fr-CA` .
 
 ### <a name="testing-the-application"></a>Testowanie aplikacji
 
-Uruchom aplikację i przejdź do adresu URL `/Home/About`. Tekst **Witaj świecie!** jest wyświetlany.
+Uruchom aplikację i przejdź do adresu URL `/Home/About` . Tekst **Witaj świecie!** jest wyświetlany.
 
-Przejdź do adresu URL `/Home/About?culture=fr-FR`. Tekst **Bonjour Le Monde!** jest wyświetlany.
+Przejdź do adresu URL `/Home/About?culture=fr-FR` . Tekst **Bonjour Le Monde!** jest wyświetlany.
 
 ## <a name="pluralization"></a>Pluralizacja
 
@@ -136,9 +126,9 @@ Nie wszystkie języki mają te same reguły. Jest to zilustrowane w języku czes
 
 Utwórz `cs.po` plik w następujący sposób i zwróć uwagę na to, jak pluralizacja potrzebuje trzech różnych tłumaczeń:
 
-[!code-text[](localization/sample/POLocalization/cs.po)]
+[!code-text[](localization/sample/2.x/POLocalization/cs.po)]
 
-Aby zaakceptować lokalizacje czeskie, należy `"cs"` dodać do listy obsługiwanych kultur w `ConfigureServices` metodzie:
+Aby zaakceptować lokalizacje czeskie, należy dodać `"cs"` do listy obsługiwanych kultur w `ConfigureServices` metodzie:
 
 ```csharp
 var supportedCultures = new List<CultureInfo>
@@ -193,11 +183,11 @@ Należy pamiętać, że w przypadku kultury Czeskiej trzy tłumaczenia są róż
 
 ### <a name="contextualizing-strings"></a>Contextualizing ciągi
 
-Aplikacje często zawierają ciągi do tłumaczenia w kilku miejscach. Ten sam ciąg może mieć inne tłumaczenie w określonych lokalizacjach w ramach aplikacji (Razor widoków lub plików klas). Plik ZZ obsługuje pojęcie kontekstu pliku, który może służyć do kategoryzowania reprezentowanego ciągu. Przy użyciu kontekstu pliku ciąg może być przetłumaczony inaczej, w zależności od kontekstu pliku (lub braku kontekstu pliku).
+Aplikacje często zawierają ciągi do tłumaczenia w kilku miejscach. Ten sam ciąg może mieć inne tłumaczenie w określonych lokalizacjach w ramach aplikacji ( Razor widoków lub plików klas). Plik ZZ obsługuje pojęcie kontekstu pliku, który może służyć do kategoryzowania reprezentowanego ciągu. Przy użyciu kontekstu pliku ciąg może być przetłumaczony inaczej, w zależności od kontekstu pliku (lub braku kontekstu pliku).
 
 Usługi lokalizowania PO stronie używają nazwy pełnej klasy lub widoku, który jest używany podczas tłumaczenia ciągu. Jest to realizowane przez ustawienie wartości `msgctxt` wpisu.
 
-Rozważmy drobne dodanie do poprzedniego przykładu *fr. po* . Widok znajdujący się w *widokach/Home/about. cshtml* można zdefiniować jako kontekst pliku przez ustawienie wartości wpisu zastrzeżonego `msgctxt` Razor
+Rozważmy drobne dodanie do poprzedniego przykładu *fr. po* . RazorWidok znajdujący się w *widokach/Home/about. cshtml* można zdefiniować jako kontekst pliku przez ustawienie `msgctxt` wartości wpisu zastrzeżonego:
 
 ```text
 msgctxt "Views.Home.About"
@@ -205,15 +195,15 @@ msgid "Hello world!"
 msgstr "Bonjour le monde!"
 ```
 
-Z `msgctxt` ustawioną opcją, tłumaczenie tekstu odbywa się podczas nawigowania do `/Home/About?culture=fr-FR`. Tłumaczenie nie będzie odbywać się podczas nawigowania `/Home/Contact?culture=fr-FR`do.
+Z `msgctxt` ustawioną opcją, tłumaczenie tekstu odbywa się podczas nawigowania do `/Home/About?culture=fr-FR` . Tłumaczenie nie będzie odbywać się podczas nawigowania do `/Home/Contact?culture=fr-FR` .
 
 Gdy żaden konkretny wpis nie jest dopasowany do danego kontekstu pliku, mechanizm rezerwowy elementu sadu rdzeń szuka odpowiedniego pliku. Przy założeniu, że nie określono określonego kontekstu pliku dla *widoków/Home/Contact. cshtml*, przechodzenie do `/Home/Contact?culture=fr-FR` ładowania pliku ZZ, takiego jak:
 
-[!code-text[](localization/sample/POLocalization/fr.po)]
+[!code-text[](localization/sample/2.x/POLocalization/fr.po)]
 
 ### <a name="changing-the-location-of-po-files"></a>Zmiana lokalizacji plików ZZ
 
-Domyślną lokalizację plików PO stronie można zmienić w `ConfigureServices`:
+Domyślną lokalizację plików PO stronie można zmienić w `ConfigureServices` :
 
 ```csharp
 services.AddPortableObjectLocalization(options => options.ResourcesPath = "Localization");
@@ -227,6 +217,6 @@ Gdy do lokalizowania plików jest wymagana bardziej złożona logika, `OrchardCo
 
 ### <a name="using-a-different-default-pluralized-language"></a>Używanie innego domyślnego języka w liczbie mnogiej
 
-Pakiet zawiera metodę `Plural` rozszerzenia, która jest specyficzna dla dwóch form w liczbie mnogiej. W przypadku języków wymagających większej liczby formularzy w liczbie mnogiej Utwórz metodę rozszerzenia. Przy użyciu metody rozszerzającej nie trzeba podawać pliku lokalizacji dla języka &mdash; domyślnego, oryginalne ciągi są już dostępne bezpośrednio w kodzie.
+Pakiet zawiera `Plural` metodę rozszerzenia, która jest specyficzna dla dwóch form w liczbie mnogiej. W przypadku języków wymagających większej liczby formularzy w liczbie mnogiej Utwórz metodę rozszerzenia. Przy użyciu metody rozszerzającej nie trzeba podawać pliku lokalizacji dla języka domyślnego &mdash; , oryginalne ciągi są już dostępne bezpośrednio w kodzie.
 
-Można użyć bardziej ogólnego `Plural(int count, string[] pluralForms, params object[] arguments)` przeciążenia, które akceptuje tablicę ciągów tłumaczeń.
+Można użyć bardziej ogólnego przeciążenia, `Plural(int count, string[] pluralForms, params object[] arguments)` które akceptuje tablicę ciągów tłumaczeń.

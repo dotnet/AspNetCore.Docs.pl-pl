@@ -12,80 +12,80 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-web-api
-ms.openlocfilehash: ddc14aba14e31c5530cda14b4792736da001246a
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 2fcfd46057935cadac76c558a78729a1c096ffc0
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82767242"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84451833"
 ---
-# <a name="tutorial-create-a-web-api-with-aspnet-core"></a><span data-ttu-id="9fb67-103">Samouczek: Tworzenie internetowego interfejsu API za pomocą ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="9fb67-103">Tutorial: Create a web API with ASP.NET Core</span></span>
+# <a name="tutorial-create-a-web-api-with-aspnet-core"></a><span data-ttu-id="9119a-103">Samouczek: Tworzenie internetowego interfejsu API za pomocą ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="9119a-103">Tutorial: Create a web API with ASP.NET Core</span></span>
 
-<span data-ttu-id="9fb67-104">Autorzy [Rick Anderson](https://twitter.com/RickAndMSFT), [Kirka Larkin](https://twitter.com/serpent5)i [Jan Wasson](https://github.com/mikewasson)</span><span class="sxs-lookup"><span data-stu-id="9fb67-104">By [Rick Anderson](https://twitter.com/RickAndMSFT), [Kirk Larkin](https://twitter.com/serpent5), and [Mike Wasson](https://github.com/mikewasson)</span></span>
+<span data-ttu-id="9119a-104">Autorzy [Rick Anderson](https://twitter.com/RickAndMSFT), [Kirka Larkin](https://twitter.com/serpent5)i [Jan Wasson](https://github.com/mikewasson)</span><span class="sxs-lookup"><span data-stu-id="9119a-104">By [Rick Anderson](https://twitter.com/RickAndMSFT), [Kirk Larkin](https://twitter.com/serpent5), and [Mike Wasson](https://github.com/mikewasson)</span></span>
 
-<span data-ttu-id="9fb67-105">Ten samouczek uczy się podstaw tworzenia interfejsu API sieci Web za pomocą ASP.NET Core.</span><span class="sxs-lookup"><span data-stu-id="9fb67-105">This tutorial teaches the basics of building a web API with ASP.NET Core.</span></span>
+<span data-ttu-id="9119a-105">Ten samouczek uczy się podstaw tworzenia interfejsu API sieci Web za pomocą ASP.NET Core.</span><span class="sxs-lookup"><span data-stu-id="9119a-105">This tutorial teaches the basics of building a web API with ASP.NET Core.</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
-<span data-ttu-id="9fb67-106">Ten samouczek zawiera informacje na temat wykonywania następujących czynności:</span><span class="sxs-lookup"><span data-stu-id="9fb67-106">In this tutorial, you learn how to:</span></span>
+<span data-ttu-id="9119a-106">Ten samouczek zawiera informacje na temat wykonywania następujących czynności:</span><span class="sxs-lookup"><span data-stu-id="9119a-106">In this tutorial, you learn how to:</span></span>
 
 > [!div class="checklist"]
-> * <span data-ttu-id="9fb67-107">Utwórz projekt interfejsu API sieci Web.</span><span class="sxs-lookup"><span data-stu-id="9fb67-107">Create a web API project.</span></span>
-> * <span data-ttu-id="9fb67-108">Dodaj klasę modelu i kontekst bazy danych.</span><span class="sxs-lookup"><span data-stu-id="9fb67-108">Add a model class and a database context.</span></span>
-> * <span data-ttu-id="9fb67-109">Tworzy szkielet kontrolera z metodami CRUD.</span><span class="sxs-lookup"><span data-stu-id="9fb67-109">Scaffold a controller with CRUD methods.</span></span>
-> * <span data-ttu-id="9fb67-110">Skonfiguruj Routing, ścieżki URL i wartości zwracane.</span><span class="sxs-lookup"><span data-stu-id="9fb67-110">Configure routing, URL paths, and return values.</span></span>
-> * <span data-ttu-id="9fb67-111">Wywołaj interfejs API sieci Web za pomocą programu Poster.</span><span class="sxs-lookup"><span data-stu-id="9fb67-111">Call the web API with Postman.</span></span>
+> * <span data-ttu-id="9119a-107">Utwórz projekt interfejsu API sieci Web.</span><span class="sxs-lookup"><span data-stu-id="9119a-107">Create a web API project.</span></span>
+> * <span data-ttu-id="9119a-108">Dodaj klasę modelu i kontekst bazy danych.</span><span class="sxs-lookup"><span data-stu-id="9119a-108">Add a model class and a database context.</span></span>
+> * <span data-ttu-id="9119a-109">Tworzy szkielet kontrolera z metodami CRUD.</span><span class="sxs-lookup"><span data-stu-id="9119a-109">Scaffold a controller with CRUD methods.</span></span>
+> * <span data-ttu-id="9119a-110">Skonfiguruj Routing, ścieżki URL i wartości zwracane.</span><span class="sxs-lookup"><span data-stu-id="9119a-110">Configure routing, URL paths, and return values.</span></span>
+> * <span data-ttu-id="9119a-111">Wywołaj interfejs API sieci Web za pomocą programu Poster.</span><span class="sxs-lookup"><span data-stu-id="9119a-111">Call the web API with Postman.</span></span>
 
-<span data-ttu-id="9fb67-112">Na końcu znajduje się internetowy interfejs API, który może zarządzać elementami do wykonania przechowywanymi w bazie danych.</span><span class="sxs-lookup"><span data-stu-id="9fb67-112">At the end, you have a web API that can manage "to-do" items stored in a database.</span></span>
+<span data-ttu-id="9119a-112">Na końcu znajduje się internetowy interfejs API, który może zarządzać elementami do wykonania przechowywanymi w bazie danych.</span><span class="sxs-lookup"><span data-stu-id="9119a-112">At the end, you have a web API that can manage "to-do" items stored in a database.</span></span>
 
-## <a name="overview"></a><span data-ttu-id="9fb67-113">Omówienie</span><span class="sxs-lookup"><span data-stu-id="9fb67-113">Overview</span></span>
+## <a name="overview"></a><span data-ttu-id="9119a-113">Omówienie</span><span class="sxs-lookup"><span data-stu-id="9119a-113">Overview</span></span>
 
-<span data-ttu-id="9fb67-114">Ten samouczek tworzy następujący interfejs API:</span><span class="sxs-lookup"><span data-stu-id="9fb67-114">This tutorial creates the following API:</span></span>
+<span data-ttu-id="9119a-114">Ten samouczek tworzy następujący interfejs API:</span><span class="sxs-lookup"><span data-stu-id="9119a-114">This tutorial creates the following API:</span></span>
 
-|<span data-ttu-id="9fb67-115">Interfejs API</span><span class="sxs-lookup"><span data-stu-id="9fb67-115">API</span></span> | <span data-ttu-id="9fb67-116">Opis</span><span class="sxs-lookup"><span data-stu-id="9fb67-116">Description</span></span> | <span data-ttu-id="9fb67-117">Treść żądania</span><span class="sxs-lookup"><span data-stu-id="9fb67-117">Request body</span></span> | <span data-ttu-id="9fb67-118">Treść odpowiedzi</span><span class="sxs-lookup"><span data-stu-id="9fb67-118">Response body</span></span> |
+|<span data-ttu-id="9119a-115">Interfejs API</span><span class="sxs-lookup"><span data-stu-id="9119a-115">API</span></span> | <span data-ttu-id="9119a-116">Opis</span><span class="sxs-lookup"><span data-stu-id="9119a-116">Description</span></span> | <span data-ttu-id="9119a-117">Treść żądania</span><span class="sxs-lookup"><span data-stu-id="9119a-117">Request body</span></span> | <span data-ttu-id="9119a-118">Treść odpowiedzi</span><span class="sxs-lookup"><span data-stu-id="9119a-118">Response body</span></span> |
 |--- | ---- | ---- | ---- |
-|`GET /api/TodoItems` | <span data-ttu-id="9fb67-119">Pobierz wszystkie elementy do wykonania</span><span class="sxs-lookup"><span data-stu-id="9fb67-119">Get all to-do items</span></span> | <span data-ttu-id="9fb67-120">Brak</span><span class="sxs-lookup"><span data-stu-id="9fb67-120">None</span></span> | <span data-ttu-id="9fb67-121">Tablica elementów do wykonania</span><span class="sxs-lookup"><span data-stu-id="9fb67-121">Array of to-do items</span></span>|
-|`GET /api/TodoItems/{id}` | <span data-ttu-id="9fb67-122">Pobieranie elementu według identyfikatora</span><span class="sxs-lookup"><span data-stu-id="9fb67-122">Get an item by ID</span></span> | <span data-ttu-id="9fb67-123">Brak</span><span class="sxs-lookup"><span data-stu-id="9fb67-123">None</span></span> | <span data-ttu-id="9fb67-124">Element do wykonania</span><span class="sxs-lookup"><span data-stu-id="9fb67-124">To-do item</span></span>|
-|`POST /api/TodoItems` | <span data-ttu-id="9fb67-125">Dodaj nowy element</span><span class="sxs-lookup"><span data-stu-id="9fb67-125">Add a new item</span></span> | <span data-ttu-id="9fb67-126">Element do wykonania</span><span class="sxs-lookup"><span data-stu-id="9fb67-126">To-do item</span></span> | <span data-ttu-id="9fb67-127">Element do wykonania</span><span class="sxs-lookup"><span data-stu-id="9fb67-127">To-do item</span></span> |
-|`PUT /api/TodoItems/{id}` | <span data-ttu-id="9fb67-128">Aktualizowanie istniejącego elementu&nbsp;</span><span class="sxs-lookup"><span data-stu-id="9fb67-128">Update an existing item &nbsp;</span></span> | <span data-ttu-id="9fb67-129">Element do wykonania</span><span class="sxs-lookup"><span data-stu-id="9fb67-129">To-do item</span></span> | <span data-ttu-id="9fb67-130">Brak</span><span class="sxs-lookup"><span data-stu-id="9fb67-130">None</span></span> |
-|<span data-ttu-id="9fb67-131">`DELETE /api/TodoItems/{id}` &nbsp; &nbsp;</span><span class="sxs-lookup"><span data-stu-id="9fb67-131">`DELETE /api/TodoItems/{id}` &nbsp; &nbsp;</span></span> | <span data-ttu-id="9fb67-132">Usuń element &nbsp;&nbsp;</span><span class="sxs-lookup"><span data-stu-id="9fb67-132">Delete an item &nbsp; &nbsp;</span></span> | <span data-ttu-id="9fb67-133">Brak</span><span class="sxs-lookup"><span data-stu-id="9fb67-133">None</span></span> | <span data-ttu-id="9fb67-134">Brak</span><span class="sxs-lookup"><span data-stu-id="9fb67-134">None</span></span>|
+|`GET /api/TodoItems` | <span data-ttu-id="9119a-119">Pobierz wszystkie elementy do wykonania</span><span class="sxs-lookup"><span data-stu-id="9119a-119">Get all to-do items</span></span> | <span data-ttu-id="9119a-120">Brak</span><span class="sxs-lookup"><span data-stu-id="9119a-120">None</span></span> | <span data-ttu-id="9119a-121">Tablica elementów do wykonania</span><span class="sxs-lookup"><span data-stu-id="9119a-121">Array of to-do items</span></span>|
+|`GET /api/TodoItems/{id}` | <span data-ttu-id="9119a-122">Pobieranie elementu według identyfikatora</span><span class="sxs-lookup"><span data-stu-id="9119a-122">Get an item by ID</span></span> | <span data-ttu-id="9119a-123">Brak</span><span class="sxs-lookup"><span data-stu-id="9119a-123">None</span></span> | <span data-ttu-id="9119a-124">Element do wykonania</span><span class="sxs-lookup"><span data-stu-id="9119a-124">To-do item</span></span>|
+|`POST /api/TodoItems` | <span data-ttu-id="9119a-125">Dodaj nowy element</span><span class="sxs-lookup"><span data-stu-id="9119a-125">Add a new item</span></span> | <span data-ttu-id="9119a-126">Element do wykonania</span><span class="sxs-lookup"><span data-stu-id="9119a-126">To-do item</span></span> | <span data-ttu-id="9119a-127">Element do wykonania</span><span class="sxs-lookup"><span data-stu-id="9119a-127">To-do item</span></span> |
+|`PUT /api/TodoItems/{id}` | <span data-ttu-id="9119a-128">Aktualizowanie istniejącego elementu&nbsp;</span><span class="sxs-lookup"><span data-stu-id="9119a-128">Update an existing item &nbsp;</span></span> | <span data-ttu-id="9119a-129">Element do wykonania</span><span class="sxs-lookup"><span data-stu-id="9119a-129">To-do item</span></span> | <span data-ttu-id="9119a-130">Brak</span><span class="sxs-lookup"><span data-stu-id="9119a-130">None</span></span> |
+|<span data-ttu-id="9119a-131">`DELETE /api/TodoItems/{id}` &nbsp; &nbsp;</span><span class="sxs-lookup"><span data-stu-id="9119a-131">`DELETE /api/TodoItems/{id}` &nbsp; &nbsp;</span></span> | <span data-ttu-id="9119a-132">Usuń element &nbsp;&nbsp;</span><span class="sxs-lookup"><span data-stu-id="9119a-132">Delete an item &nbsp; &nbsp;</span></span> | <span data-ttu-id="9119a-133">Brak</span><span class="sxs-lookup"><span data-stu-id="9119a-133">None</span></span> | <span data-ttu-id="9119a-134">Brak</span><span class="sxs-lookup"><span data-stu-id="9119a-134">None</span></span>|
 
-<span data-ttu-id="9fb67-135">Na poniższym diagramie przedstawiono projekt aplikacji.</span><span class="sxs-lookup"><span data-stu-id="9fb67-135">The following diagram shows the design of the app.</span></span>
+<span data-ttu-id="9119a-135">Na poniższym diagramie przedstawiono projekt aplikacji.</span><span class="sxs-lookup"><span data-stu-id="9119a-135">The following diagram shows the design of the app.</span></span>
 
 ![Klient jest reprezentowany przez pole po lewej stronie.](first-web-api/_static/architecture.png)
 
-## <a name="prerequisites"></a><span data-ttu-id="9fb67-141">Wymagania wstępne</span><span class="sxs-lookup"><span data-stu-id="9fb67-141">Prerequisites</span></span>
+## <a name="prerequisites"></a><span data-ttu-id="9119a-141">Wymagania wstępne</span><span class="sxs-lookup"><span data-stu-id="9119a-141">Prerequisites</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="9fb67-142">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="9fb67-142">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="9119a-142">Program Visual Studio</span><span class="sxs-lookup"><span data-stu-id="9119a-142">Visual Studio</span></span>](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs-3.1.md)]
 
-# <a name="visual-studio-code"></a>[<span data-ttu-id="9fb67-143">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="9fb67-143">Visual Studio Code</span></span>](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[<span data-ttu-id="9119a-143">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="9119a-143">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vsc-3.1.md)]
 
-# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="9fb67-144">Visual Studio dla komputerów Mac</span><span class="sxs-lookup"><span data-stu-id="9fb67-144">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="9119a-144">Visual Studio dla komputerów Mac</span><span class="sxs-lookup"><span data-stu-id="9119a-144">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
 [!INCLUDE[](~/includes/net-core-prereqs-mac-3.1.md)]
 
 ---
 
-## <a name="create-a-web-project"></a><span data-ttu-id="9fb67-145">Tworzenie projektu sieci Web</span><span class="sxs-lookup"><span data-stu-id="9fb67-145">Create a web project</span></span>
+## <a name="create-a-web-project"></a><span data-ttu-id="9119a-145">Tworzenie projektu sieci Web</span><span class="sxs-lookup"><span data-stu-id="9119a-145">Create a web project</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="9fb67-146">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="9fb67-146">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="9119a-146">Program Visual Studio</span><span class="sxs-lookup"><span data-stu-id="9119a-146">Visual Studio</span></span>](#tab/visual-studio)
 
-* <span data-ttu-id="9fb67-147">Z menu **plik** wybierz pozycję **Nowy** > **projekt**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-147">From the **File** menu, select **New** > **Project**.</span></span>
-* <span data-ttu-id="9fb67-148">Wybierz szablon **aplikacja sieci Web ASP.NET Core** a następnie kliknij przycisk **dalej**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-148">Select the **ASP.NET Core Web Application** template and click **Next**.</span></span>
-* <span data-ttu-id="9fb67-149">Nazwij projekt *TodoApi* i kliknij pozycję **Utwórz**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-149">Name the project *TodoApi* and click **Create**.</span></span>
-* <span data-ttu-id="9fb67-150">W oknie dialogowym **Tworzenie nowej ASP.NET Core aplikacji sieci Web** upewnij się, że wybrano opcję **.net Core** i **ASP.NET Core 3,1** .</span><span class="sxs-lookup"><span data-stu-id="9fb67-150">In the **Create a new ASP.NET Core Web Application** dialog, confirm that **.NET Core** and **ASP.NET Core 3.1** are selected.</span></span> <span data-ttu-id="9fb67-151">Wybierz szablon **interfejsu API** i kliknij przycisk **Utwórz**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-151">Select the **API** template and click **Create**.</span></span>
+* <span data-ttu-id="9119a-147">Z menu **plik** wybierz pozycję **Nowy** > **projekt**.</span><span class="sxs-lookup"><span data-stu-id="9119a-147">From the **File** menu, select **New** > **Project**.</span></span>
+* <span data-ttu-id="9119a-148">Wybierz szablon **aplikacja sieci Web ASP.NET Core** a następnie kliknij przycisk **dalej**.</span><span class="sxs-lookup"><span data-stu-id="9119a-148">Select the **ASP.NET Core Web Application** template and click **Next**.</span></span>
+* <span data-ttu-id="9119a-149">Nazwij projekt *TodoApi* i kliknij pozycję **Utwórz**.</span><span class="sxs-lookup"><span data-stu-id="9119a-149">Name the project *TodoApi* and click **Create**.</span></span>
+* <span data-ttu-id="9119a-150">W oknie dialogowym **Tworzenie nowej ASP.NET Core aplikacji sieci Web** upewnij się, że wybrano opcję **.net Core** i **ASP.NET Core 3,1** .</span><span class="sxs-lookup"><span data-stu-id="9119a-150">In the **Create a new ASP.NET Core Web Application** dialog, confirm that **.NET Core** and **ASP.NET Core 3.1** are selected.</span></span> <span data-ttu-id="9119a-151">Wybierz szablon **interfejsu API** i kliknij przycisk **Utwórz**.</span><span class="sxs-lookup"><span data-stu-id="9119a-151">Select the **API** template and click **Create**.</span></span>
 
 ![Okno dialogowe programu VS New Project](first-web-api/_static/vs3.png)
 
-# <a name="visual-studio-code"></a>[<span data-ttu-id="9fb67-153">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="9fb67-153">Visual Studio Code</span></span>](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[<span data-ttu-id="9119a-153">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="9119a-153">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
-* <span data-ttu-id="9fb67-154">Otwórz [zintegrowany terminal](https://code.visualstudio.com/docs/editor/integrated-terminal).</span><span class="sxs-lookup"><span data-stu-id="9fb67-154">Open the [integrated terminal](https://code.visualstudio.com/docs/editor/integrated-terminal).</span></span>
-* <span data-ttu-id="9fb67-155">Zmień katalog (`cd`) do folderu, który będzie zawierać folder projektu.</span><span class="sxs-lookup"><span data-stu-id="9fb67-155">Change directories (`cd`) to the folder that will contain the project folder.</span></span>
-* <span data-ttu-id="9fb67-156">Uruchom następujące polecenia:</span><span class="sxs-lookup"><span data-stu-id="9fb67-156">Run the following commands:</span></span>
+* <span data-ttu-id="9119a-154">Otwórz [zintegrowany terminal](https://code.visualstudio.com/docs/editor/integrated-terminal).</span><span class="sxs-lookup"><span data-stu-id="9119a-154">Open the [integrated terminal](https://code.visualstudio.com/docs/editor/integrated-terminal).</span></span>
+* <span data-ttu-id="9119a-155">Zmień katalog ( `cd` ) do folderu, który będzie zawierać folder projektu.</span><span class="sxs-lookup"><span data-stu-id="9119a-155">Change directories (`cd`) to the folder that will contain the project folder.</span></span>
+* <span data-ttu-id="9119a-156">Uruchom następujące polecenia:</span><span class="sxs-lookup"><span data-stu-id="9119a-156">Run the following commands:</span></span>
 
    ```dotnetcli
    dotnet new webapi -o TodoApi
@@ -95,32 +95,34 @@ ms.locfileid: "82767242"
    code -r ../TodoApi
    ```
 
-* <span data-ttu-id="9fb67-157">Gdy zostanie wyświetlone okno dialogowe z pytaniem, czy chcesz dodać wymagane zasoby do projektu, wybierz opcję **tak**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-157">When a dialog box asks if you want to add required assets to the project, select **Yes**.</span></span>
+* <span data-ttu-id="9119a-157">Gdy zostanie wyświetlone okno dialogowe z pytaniem, czy chcesz dodać wymagane zasoby do projektu, wybierz opcję **tak**.</span><span class="sxs-lookup"><span data-stu-id="9119a-157">When a dialog box asks if you want to add required assets to the project, select **Yes**.</span></span>
 
-  <span data-ttu-id="9fb67-158">Poprzednie polecenia:</span><span class="sxs-lookup"><span data-stu-id="9fb67-158">The preceding commands:</span></span>
+  <span data-ttu-id="9119a-158">Poprzednie polecenia:</span><span class="sxs-lookup"><span data-stu-id="9119a-158">The preceding commands:</span></span>
 
-  * <span data-ttu-id="9fb67-159">Tworzy nowy projekt internetowego interfejsu API i otwiera go w Visual Studio Code.</span><span class="sxs-lookup"><span data-stu-id="9fb67-159">Creates a new web API project and opens it in Visual Studio Code.</span></span>
-  * <span data-ttu-id="9fb67-160">Dodaje pakiety NuGet, które są wymagane w następnej sekcji.</span><span class="sxs-lookup"><span data-stu-id="9fb67-160">Adds the NuGet packages which are required in the next section.</span></span>
+  * <span data-ttu-id="9119a-159">Tworzy nowy projekt internetowego interfejsu API i otwiera go w Visual Studio Code.</span><span class="sxs-lookup"><span data-stu-id="9119a-159">Creates a new web API project and opens it in Visual Studio Code.</span></span>
+  * <span data-ttu-id="9119a-160">Dodaje pakiety NuGet, które są wymagane w następnej sekcji.</span><span class="sxs-lookup"><span data-stu-id="9119a-160">Adds the NuGet packages which are required in the next section.</span></span>
 
-# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="9fb67-161">Visual Studio dla komputerów Mac</span><span class="sxs-lookup"><span data-stu-id="9fb67-161">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="9119a-161">Visual Studio dla komputerów Mac</span><span class="sxs-lookup"><span data-stu-id="9119a-161">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-* <span data-ttu-id="9fb67-162">Wybierz pozycję **plik** > **nowe rozwiązanie**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-162">Select **File** > **New Solution**.</span></span>
+* <span data-ttu-id="9119a-162">Wybierz pozycję **plik** > **nowe rozwiązanie**.</span><span class="sxs-lookup"><span data-stu-id="9119a-162">Select **File** > **New Solution**.</span></span>
 
   ![macOS nowe rozwiązanie](first-web-api-mac/_static/sln.png)
 
-* <span data-ttu-id="9fb67-164">Wybierz pozycję **interfejs API** > **App** > > **Next**aplikacji **.NET Core** .</span><span class="sxs-lookup"><span data-stu-id="9fb67-164">Select **.NET Core** > **App** > **API** > **Next**.</span></span>
+* <span data-ttu-id="9119a-164">W Visual Studio dla komputerów Mac starszej niż wersja 8,6 Wybierz **.NET Core**pozycję  >  **App**  >  **interfejs API**aplikacji .NET Core  >  **Next**.</span><span class="sxs-lookup"><span data-stu-id="9119a-164">In Visual Studio for Mac earlier than version 8.6, select **.NET Core** > **App** > **API** > **Next**.</span></span> <span data-ttu-id="9119a-165">W wersji 8,6 lub nowszej wybierz pozycję **Web and Console**  >  **App**  >  **interfejs API**  >  **Next** aplikacji sieci Web i konsoli.</span><span class="sxs-lookup"><span data-stu-id="9119a-165">In version 8.6 or later, select **Web and Console** > **App** > **API** > **Next** .</span></span>
 
-  ![okno dialogowe nowego projektu macOS](first-web-api-mac/_static/1.png)
-  
-* <span data-ttu-id="9fb67-166">W oknie dialogowym **Konfigurowanie nowego interfejsu API sieci Web ASP.NET Core** wybierz pozycję **docelowa platforma** \**.NET Core 3,1*.</span><span class="sxs-lookup"><span data-stu-id="9fb67-166">In the **Configure your new ASP.NET Core Web API** dialog, select **Target Framework** of \**.NET Core 3.1*.</span></span>
+  ![Wybór szablonu interfejsu API macOS](first-web-api-mac/_static/api_template.png)
 
-* <span data-ttu-id="9fb67-167">Wprowadź *TodoApi* jako **nazwę projektu** , a następnie wybierz pozycję **Utwórz**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-167">Enter *TodoApi* for the **Project Name** and then select **Create**.</span></span>
+* <span data-ttu-id="9119a-167">Upewnij się, że **platforma docelowa** jest ustawiona na **platformę .NET Core 3,1**.</span><span class="sxs-lookup"><span data-stu-id="9119a-167">Confirm the **Target Framework** is set to **.NET Core 3.1**.</span></span> <span data-ttu-id="9119a-168">Wybierz pozycję **Dalej**.</span><span class="sxs-lookup"><span data-stu-id="9119a-168">Select **Next**.</span></span>
+
+  ![wybór macOS .NET Core 3,1](first-web-api-mac/_static/api_31_config.png)
+
+* <span data-ttu-id="9119a-170">Wprowadź *TodoApi* jako **nazwę projektu** , a następnie wybierz pozycję **Utwórz**.</span><span class="sxs-lookup"><span data-stu-id="9119a-170">Enter *TodoApi* for the **Project Name** and then select **Create**.</span></span>
 
   ![okno dialogowe konfiguracji](first-web-api-mac/_static/2.png)
 
 [!INCLUDE[](~/includes/mac-terminal-access.md)]
 
-<span data-ttu-id="9fb67-169">Otwórz Terminal poleceń w folderze projektu i uruchom następujące polecenia:</span><span class="sxs-lookup"><span data-stu-id="9fb67-169">Open a command terminal in the project folder and run the following commands:</span></span>
+<span data-ttu-id="9119a-172">Otwórz Terminal poleceń w folderze projektu i uruchom następujące polecenia:</span><span class="sxs-lookup"><span data-stu-id="9119a-172">Open a command terminal in the project folder and run the following commands:</span></span>
 
    ```dotnetcli
    dotnet add package Microsoft.EntityFrameworkCore.SqlServer
@@ -129,27 +131,27 @@ ms.locfileid: "82767242"
 
 ---
 
-### <a name="test-the-api"></a><span data-ttu-id="9fb67-170">Testowanie interfejsu API</span><span class="sxs-lookup"><span data-stu-id="9fb67-170">Test the API</span></span>
+### <a name="test-the-api"></a><span data-ttu-id="9119a-173">Testowanie interfejsu API</span><span class="sxs-lookup"><span data-stu-id="9119a-173">Test the API</span></span>
 
-<span data-ttu-id="9fb67-171">Szablon projektu tworzy `WeatherForecast` interfejs API.</span><span class="sxs-lookup"><span data-stu-id="9fb67-171">The project template creates a `WeatherForecast` API.</span></span> <span data-ttu-id="9fb67-172">Wywołaj `Get` metodę z przeglądarki, aby przetestować aplikację.</span><span class="sxs-lookup"><span data-stu-id="9fb67-172">Call the `Get` method from a browser to test the app.</span></span>
+<span data-ttu-id="9119a-174">Szablon projektu tworzy `WeatherForecast` interfejs API.</span><span class="sxs-lookup"><span data-stu-id="9119a-174">The project template creates a `WeatherForecast` API.</span></span> <span data-ttu-id="9119a-175">Wywołaj `Get` metodę z przeglądarki, aby przetestować aplikację.</span><span class="sxs-lookup"><span data-stu-id="9119a-175">Call the `Get` method from a browser to test the app.</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="9fb67-173">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="9fb67-173">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="9119a-176">Program Visual Studio</span><span class="sxs-lookup"><span data-stu-id="9119a-176">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="9fb67-174">Naciśnij klawisze CTRL + F5, aby uruchomić aplikację.</span><span class="sxs-lookup"><span data-stu-id="9fb67-174">Press Ctrl+F5 to run the app.</span></span> <span data-ttu-id="9fb67-175">Program Visual Studio uruchamia przeglądarkę i przechodzi do `https://localhost:<port>/WeatherForecast`lokalizacji, gdzie `<port>` jest losowo wybierany numer portu.</span><span class="sxs-lookup"><span data-stu-id="9fb67-175">Visual Studio launches a browser and navigates to `https://localhost:<port>/WeatherForecast`, where `<port>` is a randomly chosen port number.</span></span>
+<span data-ttu-id="9119a-177">Naciśnij klawisze CTRL + F5, aby uruchomić aplikację.</span><span class="sxs-lookup"><span data-stu-id="9119a-177">Press Ctrl+F5 to run the app.</span></span> <span data-ttu-id="9119a-178">Program Visual Studio uruchamia przeglądarkę i przechodzi do `https://localhost:<port>/WeatherForecast` lokalizacji, gdzie `<port>` jest losowo wybierany numer portu.</span><span class="sxs-lookup"><span data-stu-id="9119a-178">Visual Studio launches a browser and navigates to `https://localhost:<port>/WeatherForecast`, where `<port>` is a randomly chosen port number.</span></span>
 
-<span data-ttu-id="9fb67-176">Jeśli zostanie wyświetlone okno dialogowe z pytaniem, czy należy zaufać certyfikatowi IIS Express, wybierz pozycję **tak**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-176">If you get a dialog box that asks if you should trust the IIS Express certificate, select **Yes**.</span></span> <span data-ttu-id="9fb67-177">W wyświetlonym oknie dialogowym **ostrzeżenia o zabezpieczeniach** wybierz pozycję **tak**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-177">In the **Security Warning** dialog that appears next, select **Yes**.</span></span>
+<span data-ttu-id="9119a-179">Jeśli zostanie wyświetlone okno dialogowe z pytaniem, czy należy zaufać certyfikatowi IIS Express, wybierz pozycję **tak**.</span><span class="sxs-lookup"><span data-stu-id="9119a-179">If you get a dialog box that asks if you should trust the IIS Express certificate, select **Yes**.</span></span> <span data-ttu-id="9119a-180">W wyświetlonym oknie dialogowym **ostrzeżenia o zabezpieczeniach** wybierz pozycję **tak**.</span><span class="sxs-lookup"><span data-stu-id="9119a-180">In the **Security Warning** dialog that appears next, select **Yes**.</span></span>
 
-# <a name="visual-studio-code"></a>[<span data-ttu-id="9fb67-178">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="9fb67-178">Visual Studio Code</span></span>](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[<span data-ttu-id="9119a-181">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="9119a-181">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
-<span data-ttu-id="9fb67-179">Naciśnij klawisze CTRL + F5, aby uruchomić aplikację.</span><span class="sxs-lookup"><span data-stu-id="9fb67-179">Press Ctrl+F5 to run the app.</span></span> <span data-ttu-id="9fb67-180">W przeglądarce przejdź do następującego adresu URL: `https://localhost:5001/WeatherForecast`.</span><span class="sxs-lookup"><span data-stu-id="9fb67-180">In a browser, go to following URL: `https://localhost:5001/WeatherForecast`.</span></span>
+<span data-ttu-id="9119a-182">Naciśnij klawisze CTRL + F5, aby uruchomić aplikację.</span><span class="sxs-lookup"><span data-stu-id="9119a-182">Press Ctrl+F5 to run the app.</span></span> <span data-ttu-id="9119a-183">W przeglądarce przejdź do następującego adresu URL: `https://localhost:5001/WeatherForecast` .</span><span class="sxs-lookup"><span data-stu-id="9119a-183">In a browser, go to following URL: `https://localhost:5001/WeatherForecast`.</span></span>
 
-# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="9fb67-181">Visual Studio dla komputerów Mac</span><span class="sxs-lookup"><span data-stu-id="9fb67-181">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="9119a-184">Visual Studio dla komputerów Mac</span><span class="sxs-lookup"><span data-stu-id="9119a-184">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-<span data-ttu-id="9fb67-182">Wybierz pozycję **Uruchom** > **Rozpocznij debugowanie** , aby uruchomić aplikację.</span><span class="sxs-lookup"><span data-stu-id="9fb67-182">Select **Run** > **Start Debugging** to launch the app.</span></span> <span data-ttu-id="9fb67-183">Visual Studio dla komputerów Mac uruchamia przeglądarkę i nawiguje do `https://localhost:<port>`, gdzie `<port>` jest losowo wybranym numerem portu.</span><span class="sxs-lookup"><span data-stu-id="9fb67-183">Visual Studio for Mac launches a browser and navigates to `https://localhost:<port>`, where `<port>` is a randomly chosen port number.</span></span> <span data-ttu-id="9fb67-184">Zwracany jest błąd HTTP 404 (nie znaleziono).</span><span class="sxs-lookup"><span data-stu-id="9fb67-184">An HTTP 404 (Not Found) error is returned.</span></span> <span data-ttu-id="9fb67-185">Dołącz `/WeatherForecast` do adresu URL (Zmień adres URL na `https://localhost:<port>/WeatherForecast`).</span><span class="sxs-lookup"><span data-stu-id="9fb67-185">Append `/WeatherForecast` to the URL (change the URL to `https://localhost:<port>/WeatherForecast`).</span></span>
+<span data-ttu-id="9119a-185">Wybierz pozycję **Uruchom**  >  **Rozpocznij debugowanie** , aby uruchomić aplikację.</span><span class="sxs-lookup"><span data-stu-id="9119a-185">Select **Run** > **Start Debugging** to launch the app.</span></span> <span data-ttu-id="9119a-186">Visual Studio dla komputerów Mac uruchamia przeglądarkę i nawiguje do `https://localhost:<port>` , gdzie `<port>` jest losowo wybranym numerem portu.</span><span class="sxs-lookup"><span data-stu-id="9119a-186">Visual Studio for Mac launches a browser and navigates to `https://localhost:<port>`, where `<port>` is a randomly chosen port number.</span></span> <span data-ttu-id="9119a-187">Zwracany jest błąd HTTP 404 (nie znaleziono).</span><span class="sxs-lookup"><span data-stu-id="9119a-187">An HTTP 404 (Not Found) error is returned.</span></span> <span data-ttu-id="9119a-188">Dołącz `/WeatherForecast` do adresu URL (Zmień adres URL na `https://localhost:<port>/WeatherForecast` ).</span><span class="sxs-lookup"><span data-stu-id="9119a-188">Append `/WeatherForecast` to the URL (change the URL to `https://localhost:<port>/WeatherForecast`).</span></span>
 
 ---
 
-<span data-ttu-id="9fb67-186">Zwracany jest kod JSON podobny do następującego:</span><span class="sxs-lookup"><span data-stu-id="9fb67-186">JSON similar to the following is returned:</span></span>
+<span data-ttu-id="9119a-189">Zwracany jest kod JSON podobny do następującego:</span><span class="sxs-lookup"><span data-stu-id="9119a-189">JSON similar to the following is returned:</span></span>
 
 ```json
 [
@@ -186,104 +188,104 @@ ms.locfileid: "82767242"
 ]
 ```
 
-## <a name="add-a-model-class"></a><span data-ttu-id="9fb67-187">Dodaj klasę modelu</span><span class="sxs-lookup"><span data-stu-id="9fb67-187">Add a model class</span></span>
+## <a name="add-a-model-class"></a><span data-ttu-id="9119a-190">Dodaj klasę modelu</span><span class="sxs-lookup"><span data-stu-id="9119a-190">Add a model class</span></span>
 
-<span data-ttu-id="9fb67-188">*Model* to zestaw klas, które reprezentują dane zarządzane przez aplikację.</span><span class="sxs-lookup"><span data-stu-id="9fb67-188">A *model* is a set of classes that represent the data that the app manages.</span></span> <span data-ttu-id="9fb67-189">Model tej aplikacji jest pojedynczą `TodoItem` klasą.</span><span class="sxs-lookup"><span data-stu-id="9fb67-189">The model for this app is a single `TodoItem` class.</span></span>
+<span data-ttu-id="9119a-191">*Model* to zestaw klas, które reprezentują dane zarządzane przez aplikację.</span><span class="sxs-lookup"><span data-stu-id="9119a-191">A *model* is a set of classes that represent the data that the app manages.</span></span> <span data-ttu-id="9119a-192">Model tej aplikacji jest pojedynczą `TodoItem` klasą.</span><span class="sxs-lookup"><span data-stu-id="9119a-192">The model for this app is a single `TodoItem` class.</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="9fb67-190">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="9fb67-190">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="9119a-193">Program Visual Studio</span><span class="sxs-lookup"><span data-stu-id="9119a-193">Visual Studio</span></span>](#tab/visual-studio)
 
-* <span data-ttu-id="9fb67-191">W **Eksplorator rozwiązań**kliknij prawym przyciskiem myszy projekt.</span><span class="sxs-lookup"><span data-stu-id="9fb67-191">In **Solution Explorer**, right-click the project.</span></span> <span data-ttu-id="9fb67-192">Wybierz pozycję **Dodaj** > **Nowy folder**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-192">Select **Add** > **New Folder**.</span></span> <span data-ttu-id="9fb67-193">Nazwij *modele*folderów.</span><span class="sxs-lookup"><span data-stu-id="9fb67-193">Name the folder *Models*.</span></span>
+* <span data-ttu-id="9119a-194">W **Eksplorator rozwiązań**kliknij prawym przyciskiem myszy projekt.</span><span class="sxs-lookup"><span data-stu-id="9119a-194">In **Solution Explorer**, right-click the project.</span></span> <span data-ttu-id="9119a-195">Wybierz pozycję **Dodaj**  >  **Nowy folder**.</span><span class="sxs-lookup"><span data-stu-id="9119a-195">Select **Add** > **New Folder**.</span></span> <span data-ttu-id="9119a-196">Nazwij *modele*folderów.</span><span class="sxs-lookup"><span data-stu-id="9119a-196">Name the folder *Models*.</span></span>
 
-* <span data-ttu-id="9fb67-194">Kliknij prawym przyciskiem myszy folder *modele* i wybierz polecenie **Dodaj** > **klasę**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-194">Right-click the *Models* folder and select **Add** > **Class**.</span></span> <span data-ttu-id="9fb67-195">Nadaj klasie nazwę *TodoItem* i wybierz pozycję **Dodaj**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-195">Name the class *TodoItem* and select **Add**.</span></span>
+* <span data-ttu-id="9119a-197">Kliknij prawym przyciskiem myszy folder *modele* i wybierz polecenie **Dodaj**  >  **klasę**.</span><span class="sxs-lookup"><span data-stu-id="9119a-197">Right-click the *Models* folder and select **Add** > **Class**.</span></span> <span data-ttu-id="9119a-198">Nadaj klasie nazwę *TodoItem* i wybierz pozycję **Dodaj**.</span><span class="sxs-lookup"><span data-stu-id="9119a-198">Name the class *TodoItem* and select **Add**.</span></span>
 
-* <span data-ttu-id="9fb67-196">Zastąp kod szablonu następującym kodem:</span><span class="sxs-lookup"><span data-stu-id="9fb67-196">Replace the template code with the following code:</span></span>
+* <span data-ttu-id="9119a-199">Zastąp kod szablonu następującym kodem:</span><span class="sxs-lookup"><span data-stu-id="9119a-199">Replace the template code with the following code:</span></span>
 
-# <a name="visual-studio-code"></a>[<span data-ttu-id="9fb67-197">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="9fb67-197">Visual Studio Code</span></span>](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[<span data-ttu-id="9119a-200">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="9119a-200">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
-* <span data-ttu-id="9fb67-198">Dodaj folder o nazwie *models*.</span><span class="sxs-lookup"><span data-stu-id="9fb67-198">Add a folder named *Models*.</span></span>
+* <span data-ttu-id="9119a-201">Dodaj folder o nazwie *models*.</span><span class="sxs-lookup"><span data-stu-id="9119a-201">Add a folder named *Models*.</span></span>
 
-* <span data-ttu-id="9fb67-199">Dodaj `TodoItem` klasę do folderu *models* o następującym kodzie:</span><span class="sxs-lookup"><span data-stu-id="9fb67-199">Add a `TodoItem` class to the *Models* folder with the following code:</span></span>
+* <span data-ttu-id="9119a-202">Dodaj `TodoItem` klasę do folderu *models* o następującym kodzie:</span><span class="sxs-lookup"><span data-stu-id="9119a-202">Add a `TodoItem` class to the *Models* folder with the following code:</span></span>
 
-# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="9fb67-200">Visual Studio dla komputerów Mac</span><span class="sxs-lookup"><span data-stu-id="9fb67-200">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="9119a-203">Visual Studio dla komputerów Mac</span><span class="sxs-lookup"><span data-stu-id="9119a-203">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-* <span data-ttu-id="9fb67-201">Kliknij prawym przyciskiem myszy projekt.</span><span class="sxs-lookup"><span data-stu-id="9fb67-201">Right-click the project.</span></span> <span data-ttu-id="9fb67-202">Wybierz pozycję **Dodaj** > **Nowy folder**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-202">Select **Add** > **New Folder**.</span></span> <span data-ttu-id="9fb67-203">Nazwij *modele*folderów.</span><span class="sxs-lookup"><span data-stu-id="9fb67-203">Name the folder *Models*.</span></span>
+* <span data-ttu-id="9119a-204">Kliknij prawym przyciskiem myszy projekt.</span><span class="sxs-lookup"><span data-stu-id="9119a-204">Right-click the project.</span></span> <span data-ttu-id="9119a-205">Wybierz pozycję **Dodaj**  >  **Nowy folder**.</span><span class="sxs-lookup"><span data-stu-id="9119a-205">Select **Add** > **New Folder**.</span></span> <span data-ttu-id="9119a-206">Nazwij *modele*folderów.</span><span class="sxs-lookup"><span data-stu-id="9119a-206">Name the folder *Models*.</span></span>
 
   ![Nowy folder](first-web-api-mac/_static/folder.png)
 
-* <span data-ttu-id="9fb67-205">Kliknij prawym przyciskiem myszy folder *modele* , a następnie wybierz pozycję **Dodaj** > **nowy plik** > **ogólna** > **pusta Klasa**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-205">Right-click the *Models* folder, and select **Add** > **New File** > **General** > **Empty Class**.</span></span>
+* <span data-ttu-id="9119a-208">Kliknij prawym przyciskiem myszy folder *modele* , a następnie wybierz pozycję **Dodaj** > **nowy plik** > **ogólna** > **pusta Klasa**.</span><span class="sxs-lookup"><span data-stu-id="9119a-208">Right-click the *Models* folder, and select **Add** > **New File** > **General** > **Empty Class**.</span></span>
 
-* <span data-ttu-id="9fb67-206">Nazwij klasę *TodoItem*, a następnie kliknij pozycję **New (nowy**).</span><span class="sxs-lookup"><span data-stu-id="9fb67-206">Name the class *TodoItem*, and then click **New**.</span></span>
+* <span data-ttu-id="9119a-209">Nazwij klasę *TodoItem*, a następnie kliknij pozycję **New (nowy**).</span><span class="sxs-lookup"><span data-stu-id="9119a-209">Name the class *TodoItem*, and then click **New**.</span></span>
 
-* <span data-ttu-id="9fb67-207">Zastąp kod szablonu następującym kodem:</span><span class="sxs-lookup"><span data-stu-id="9fb67-207">Replace the template code with the following code:</span></span>
+* <span data-ttu-id="9119a-210">Zastąp kod szablonu następującym kodem:</span><span class="sxs-lookup"><span data-stu-id="9119a-210">Replace the template code with the following code:</span></span>
 
 ---
 
   [!code-csharp[](first-web-api/samples/3.0/TodoApi/Models/TodoItem.cs?name=snippet)]
 
-<span data-ttu-id="9fb67-208">`Id` Właściwość działa jako unikatowy klucz w relacyjnej bazie danych.</span><span class="sxs-lookup"><span data-stu-id="9fb67-208">The `Id` property functions as the unique key in a relational database.</span></span>
+<span data-ttu-id="9119a-211">`Id`Właściwość działa jako unikatowy klucz w relacyjnej bazie danych.</span><span class="sxs-lookup"><span data-stu-id="9119a-211">The `Id` property functions as the unique key in a relational database.</span></span>
 
-<span data-ttu-id="9fb67-209">Klasy modelu mogą przejść do dowolnego miejsca w projekcie, ale folder *modele* jest używany przez Konwencję.</span><span class="sxs-lookup"><span data-stu-id="9fb67-209">Model classes can go anywhere in the project, but the *Models* folder is used by convention.</span></span>
+<span data-ttu-id="9119a-212">Klasy modelu mogą przejść do dowolnego miejsca w projekcie, ale folder *modele* jest używany przez Konwencję.</span><span class="sxs-lookup"><span data-stu-id="9119a-212">Model classes can go anywhere in the project, but the *Models* folder is used by convention.</span></span>
 
-## <a name="add-a-database-context"></a><span data-ttu-id="9fb67-210">Dodawanie kontekstu bazy danych</span><span class="sxs-lookup"><span data-stu-id="9fb67-210">Add a database context</span></span>
+## <a name="add-a-database-context"></a><span data-ttu-id="9119a-213">Dodawanie kontekstu bazy danych</span><span class="sxs-lookup"><span data-stu-id="9119a-213">Add a database context</span></span>
 
-<span data-ttu-id="9fb67-211">*Kontekst bazy danych* jest główną klasą, która koordynuje Entity Framework funkcji dla modelu danych.</span><span class="sxs-lookup"><span data-stu-id="9fb67-211">The *database context* is the main class that coordinates Entity Framework functionality for a data model.</span></span> <span data-ttu-id="9fb67-212">Ta klasa jest tworzona przez wyprowadzanie z `Microsoft.EntityFrameworkCore.DbContext` klasy.</span><span class="sxs-lookup"><span data-stu-id="9fb67-212">This class is created by deriving from the `Microsoft.EntityFrameworkCore.DbContext` class.</span></span>
+<span data-ttu-id="9119a-214">*Kontekst bazy danych* jest główną klasą, która koordynuje Entity Framework funkcji dla modelu danych.</span><span class="sxs-lookup"><span data-stu-id="9119a-214">The *database context* is the main class that coordinates Entity Framework functionality for a data model.</span></span> <span data-ttu-id="9119a-215">Ta klasa jest tworzona przez wyprowadzanie z `Microsoft.EntityFrameworkCore.DbContext` klasy.</span><span class="sxs-lookup"><span data-stu-id="9119a-215">This class is created by deriving from the `Microsoft.EntityFrameworkCore.DbContext` class.</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="9fb67-213">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="9fb67-213">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="9119a-216">Program Visual Studio</span><span class="sxs-lookup"><span data-stu-id="9119a-216">Visual Studio</span></span>](#tab/visual-studio)
 
-### <a name="add-microsoftentityframeworkcoresqlserver"></a><span data-ttu-id="9fb67-214">Dodaj Microsoft. EntityFrameworkCore. SqlServer</span><span class="sxs-lookup"><span data-stu-id="9fb67-214">Add Microsoft.EntityFrameworkCore.SqlServer</span></span>
+### <a name="add-microsoftentityframeworkcoresqlserver"></a><span data-ttu-id="9119a-217">Dodaj Microsoft. EntityFrameworkCore. SqlServer</span><span class="sxs-lookup"><span data-stu-id="9119a-217">Add Microsoft.EntityFrameworkCore.SqlServer</span></span>
 
-* <span data-ttu-id="9fb67-215">W menu **Narzędzia** wybierz pozycję **menedżer pakietów NuGet > zarządzanie pakietami NuGet dla rozwiązania**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-215">From the **Tools** menu, select **NuGet Package Manager > Manage NuGet Packages for Solution**.</span></span>
-* <span data-ttu-id="9fb67-216">Wybierz kartę **Przeglądaj** , a następnie w polu wyszukiwania wprowadź ciąg **Microsoft. EntityFrameworkCore. SqlServer** .</span><span class="sxs-lookup"><span data-stu-id="9fb67-216">Select the **Browse** tab, and then enter **Microsoft.EntityFrameworkCore.SqlServer** in the search box.</span></span>
-* <span data-ttu-id="9fb67-217">W lewym okienku wybierz pozycję **Microsoft. EntityFrameworkCore. SqlServer** .</span><span class="sxs-lookup"><span data-stu-id="9fb67-217">Select **Microsoft.EntityFrameworkCore.SqlServer** in the left pane.</span></span>
-* <span data-ttu-id="9fb67-218">Zaznacz pole wyboru **projekt** w prawym okienku, a następnie wybierz pozycję **Zainstaluj**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-218">Select the **Project** check box in the right pane and then select **Install**.</span></span>
-* <span data-ttu-id="9fb67-219">Aby dodać pakiet `Microsoft.EntityFrameworkCore.InMemory` NuGet, użyj powyższych instrukcji.</span><span class="sxs-lookup"><span data-stu-id="9fb67-219">Use the preceding instructions to add the `Microsoft.EntityFrameworkCore.InMemory` NuGet package.</span></span>
+* <span data-ttu-id="9119a-218">W menu **Narzędzia** wybierz pozycję **menedżer pakietów NuGet > zarządzanie pakietami NuGet dla rozwiązania**.</span><span class="sxs-lookup"><span data-stu-id="9119a-218">From the **Tools** menu, select **NuGet Package Manager > Manage NuGet Packages for Solution**.</span></span>
+* <span data-ttu-id="9119a-219">Wybierz kartę **Przeglądaj** , a następnie w polu wyszukiwania wprowadź ciąg **Microsoft. EntityFrameworkCore. SqlServer** .</span><span class="sxs-lookup"><span data-stu-id="9119a-219">Select the **Browse** tab, and then enter **Microsoft.EntityFrameworkCore.SqlServer** in the search box.</span></span>
+* <span data-ttu-id="9119a-220">W lewym okienku wybierz pozycję **Microsoft. EntityFrameworkCore. SqlServer** .</span><span class="sxs-lookup"><span data-stu-id="9119a-220">Select **Microsoft.EntityFrameworkCore.SqlServer** in the left pane.</span></span>
+* <span data-ttu-id="9119a-221">Zaznacz pole wyboru **projekt** w prawym okienku, a następnie wybierz pozycję **Zainstaluj**.</span><span class="sxs-lookup"><span data-stu-id="9119a-221">Select the **Project** check box in the right pane and then select **Install**.</span></span>
+* <span data-ttu-id="9119a-222">Aby dodać pakiet NuGet, użyj powyższych instrukcji `Microsoft.EntityFrameworkCore.InMemory` .</span><span class="sxs-lookup"><span data-stu-id="9119a-222">Use the preceding instructions to add the `Microsoft.EntityFrameworkCore.InMemory` NuGet package.</span></span>
 
 ![Menedżer pakietów NuGet](first-web-api/_static/vs3NuGet.png)
 
-## <a name="add-the-todocontext-database-context"></a><span data-ttu-id="9fb67-221">Dodawanie kontekstu bazy danych TodoContext</span><span class="sxs-lookup"><span data-stu-id="9fb67-221">Add the TodoContext database context</span></span>
+## <a name="add-the-todocontext-database-context"></a><span data-ttu-id="9119a-224">Dodawanie kontekstu bazy danych TodoContext</span><span class="sxs-lookup"><span data-stu-id="9119a-224">Add the TodoContext database context</span></span>
 
-* <span data-ttu-id="9fb67-222">Kliknij prawym przyciskiem myszy folder *modele* i wybierz polecenie **Dodaj** > **klasę**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-222">Right-click the *Models* folder and select **Add** > **Class**.</span></span> <span data-ttu-id="9fb67-223">Nadaj klasie nazwę *TodoContext* i kliknij przycisk **Dodaj**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-223">Name the class *TodoContext* and click **Add**.</span></span>
+* <span data-ttu-id="9119a-225">Kliknij prawym przyciskiem myszy folder *modele* i wybierz polecenie **Dodaj**  >  **klasę**.</span><span class="sxs-lookup"><span data-stu-id="9119a-225">Right-click the *Models* folder and select **Add** > **Class**.</span></span> <span data-ttu-id="9119a-226">Nadaj klasie nazwę *TodoContext* i kliknij przycisk **Dodaj**.</span><span class="sxs-lookup"><span data-stu-id="9119a-226">Name the class *TodoContext* and click **Add**.</span></span>
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="9fb67-224">Visual Studio Code/Visual Studio dla komputerów Mac</span><span class="sxs-lookup"><span data-stu-id="9fb67-224">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="9119a-227">Visual Studio Code/Visual Studio dla komputerów Mac</span><span class="sxs-lookup"><span data-stu-id="9119a-227">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
-* <span data-ttu-id="9fb67-225">Dodaj `TodoContext` klasę do folderu *models* .</span><span class="sxs-lookup"><span data-stu-id="9fb67-225">Add a `TodoContext` class to the *Models* folder.</span></span>
+* <span data-ttu-id="9119a-228">Dodaj `TodoContext` klasę do folderu *models* .</span><span class="sxs-lookup"><span data-stu-id="9119a-228">Add a `TodoContext` class to the *Models* folder.</span></span>
 
 ---
 
-* <span data-ttu-id="9fb67-226">Wprowadź następujący kod:</span><span class="sxs-lookup"><span data-stu-id="9fb67-226">Enter the following code:</span></span>
+* <span data-ttu-id="9119a-229">Wprowadź następujący kod:</span><span class="sxs-lookup"><span data-stu-id="9119a-229">Enter the following code:</span></span>
 
   [!code-csharp[](first-web-api/samples/3.0/TodoApi/Models/TodoContext.cs)]
 
-## <a name="register-the-database-context"></a><span data-ttu-id="9fb67-227">Rejestrowanie kontekstu bazy danych</span><span class="sxs-lookup"><span data-stu-id="9fb67-227">Register the database context</span></span>
+## <a name="register-the-database-context"></a><span data-ttu-id="9119a-230">Rejestrowanie kontekstu bazy danych</span><span class="sxs-lookup"><span data-stu-id="9119a-230">Register the database context</span></span>
 
-<span data-ttu-id="9fb67-228">W ASP.NET Core usługi, takie jak kontekst bazy danych, muszą być zarejestrowane z kontenerem [iniekcji zależności (di)](xref:fundamentals/dependency-injection) .</span><span class="sxs-lookup"><span data-stu-id="9fb67-228">In ASP.NET Core, services such as the DB context must be registered with the [dependency injection (DI)](xref:fundamentals/dependency-injection) container.</span></span> <span data-ttu-id="9fb67-229">Kontener udostępnia usługę kontrolerom.</span><span class="sxs-lookup"><span data-stu-id="9fb67-229">The container provides the service to controllers.</span></span>
+<span data-ttu-id="9119a-231">W ASP.NET Core usługi, takie jak kontekst bazy danych, muszą być zarejestrowane z kontenerem [iniekcji zależności (di)](xref:fundamentals/dependency-injection) .</span><span class="sxs-lookup"><span data-stu-id="9119a-231">In ASP.NET Core, services such as the DB context must be registered with the [dependency injection (DI)](xref:fundamentals/dependency-injection) container.</span></span> <span data-ttu-id="9119a-232">Kontener udostępnia usługę kontrolerom.</span><span class="sxs-lookup"><span data-stu-id="9119a-232">The container provides the service to controllers.</span></span>
 
-<span data-ttu-id="9fb67-230">Zaktualizuj *Startup.cs* o następujący wyróżniony kod:</span><span class="sxs-lookup"><span data-stu-id="9fb67-230">Update *Startup.cs* with the following highlighted code:</span></span>
+<span data-ttu-id="9119a-233">Zaktualizuj *Startup.cs* o następujący wyróżniony kod:</span><span class="sxs-lookup"><span data-stu-id="9119a-233">Update *Startup.cs* with the following highlighted code:</span></span>
 
 [!code-csharp[](first-web-api/samples/3.0/TodoApi/Startup.cs?highlight=7-8,23-24&name=snippet_all)]
 
-<span data-ttu-id="9fb67-231">Powyższy kod ma następujące działanie:</span><span class="sxs-lookup"><span data-stu-id="9fb67-231">The preceding code:</span></span>
+<span data-ttu-id="9119a-234">Powyższy kod ma następujące działanie:</span><span class="sxs-lookup"><span data-stu-id="9119a-234">The preceding code:</span></span>
 
-* <span data-ttu-id="9fb67-232">Usuwa nieużywane `using` deklaracje.</span><span class="sxs-lookup"><span data-stu-id="9fb67-232">Removes unused `using` declarations.</span></span>
-* <span data-ttu-id="9fb67-233">Dodaje kontekst bazy danych do kontenera DI.</span><span class="sxs-lookup"><span data-stu-id="9fb67-233">Adds the database context to the DI container.</span></span>
-* <span data-ttu-id="9fb67-234">Określa, że kontekst bazy danych będzie używać bazy danych w pamięci.</span><span class="sxs-lookup"><span data-stu-id="9fb67-234">Specifies that the database context will use an in-memory database.</span></span>
+* <span data-ttu-id="9119a-235">Usuwa nieużywane `using` deklaracje.</span><span class="sxs-lookup"><span data-stu-id="9119a-235">Removes unused `using` declarations.</span></span>
+* <span data-ttu-id="9119a-236">Dodaje kontekst bazy danych do kontenera DI.</span><span class="sxs-lookup"><span data-stu-id="9119a-236">Adds the database context to the DI container.</span></span>
+* <span data-ttu-id="9119a-237">Określa, że kontekst bazy danych będzie używać bazy danych w pamięci.</span><span class="sxs-lookup"><span data-stu-id="9119a-237">Specifies that the database context will use an in-memory database.</span></span>
 
-## <a name="scaffold-a-controller"></a><span data-ttu-id="9fb67-235">Tworzenie szkieletu kontrolera</span><span class="sxs-lookup"><span data-stu-id="9fb67-235">Scaffold a controller</span></span>
+## <a name="scaffold-a-controller"></a><span data-ttu-id="9119a-238">Tworzenie szkieletu kontrolera</span><span class="sxs-lookup"><span data-stu-id="9119a-238">Scaffold a controller</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="9fb67-236">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="9fb67-236">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="9119a-239">Program Visual Studio</span><span class="sxs-lookup"><span data-stu-id="9119a-239">Visual Studio</span></span>](#tab/visual-studio)
 
-* <span data-ttu-id="9fb67-237">Kliknij prawym przyciskiem myszy folder *controllers* .</span><span class="sxs-lookup"><span data-stu-id="9fb67-237">Right-click the *Controllers* folder.</span></span>
-* <span data-ttu-id="9fb67-238">Wybierz pozycję **Dodaj** > **nowy element szkieletowy**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-238">Select **Add** > **New Scaffolded Item**.</span></span>
-* <span data-ttu-id="9fb67-239">Wybierz pozycję **kontroler interfejsu API z akcjami, używając Entity Framework**, a następnie wybierz pozycję **Dodaj**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-239">Select **API Controller with actions, using Entity Framework**, and then select **Add**.</span></span>
-* <span data-ttu-id="9fb67-240">Na stronie **Dodawanie kontrolera interfejsu API z akcjami przy użyciu Entity Framework** dialogowego:</span><span class="sxs-lookup"><span data-stu-id="9fb67-240">In the **Add API Controller with actions, using Entity Framework** dialog:</span></span>
+* <span data-ttu-id="9119a-240">Kliknij prawym przyciskiem myszy folder *controllers* .</span><span class="sxs-lookup"><span data-stu-id="9119a-240">Right-click the *Controllers* folder.</span></span>
+* <span data-ttu-id="9119a-241">Wybierz pozycję **Dodaj** > **nowy element szkieletowy**.</span><span class="sxs-lookup"><span data-stu-id="9119a-241">Select **Add** > **New Scaffolded Item**.</span></span>
+* <span data-ttu-id="9119a-242">Wybierz pozycję **kontroler interfejsu API z akcjami, używając Entity Framework**, a następnie wybierz pozycję **Dodaj**.</span><span class="sxs-lookup"><span data-stu-id="9119a-242">Select **API Controller with actions, using Entity Framework**, and then select **Add**.</span></span>
+* <span data-ttu-id="9119a-243">Na stronie **Dodawanie kontrolera interfejsu API z akcjami przy użyciu Entity Framework** dialogowego:</span><span class="sxs-lookup"><span data-stu-id="9119a-243">In the **Add API Controller with actions, using Entity Framework** dialog:</span></span>
 
-  * <span data-ttu-id="9fb67-241">Wybierz pozycję **TodoItem (TodoApi. models)** w **klasie model**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-241">Select **TodoItem (TodoApi.Models)** in the **Model class**.</span></span>
-  * <span data-ttu-id="9fb67-242">W **klasie kontekstu danych**wybierz pozycję **TodoContext (TodoApi. models)** .</span><span class="sxs-lookup"><span data-stu-id="9fb67-242">Select **TodoContext (TodoApi.Models)** in the **Data context class**.</span></span>
-  * <span data-ttu-id="9fb67-243">Wybierz pozycję **Dodaj**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-243">Select **Add**.</span></span>
+  * <span data-ttu-id="9119a-244">Wybierz pozycję **TodoItem (TodoApi. models)** w **klasie model**.</span><span class="sxs-lookup"><span data-stu-id="9119a-244">Select **TodoItem (TodoApi.Models)** in the **Model class**.</span></span>
+  * <span data-ttu-id="9119a-245">W **klasie kontekstu danych**wybierz pozycję **TodoContext (TodoApi. models)** .</span><span class="sxs-lookup"><span data-stu-id="9119a-245">Select **TodoContext (TodoApi.Models)** in the **Data context class**.</span></span>
+  * <span data-ttu-id="9119a-246">Wybierz pozycję **Dodaj**.</span><span class="sxs-lookup"><span data-stu-id="9119a-246">Select **Add**.</span></span>
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="9fb67-244">Visual Studio Code/Visual Studio dla komputerów Mac</span><span class="sxs-lookup"><span data-stu-id="9fb67-244">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="9119a-247">Visual Studio Code/Visual Studio dla komputerów Mac</span><span class="sxs-lookup"><span data-stu-id="9119a-247">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
-<span data-ttu-id="9fb67-245">Uruchom następujące polecenia:</span><span class="sxs-lookup"><span data-stu-id="9fb67-245">Run the following commands:</span></span>
+<span data-ttu-id="9119a-248">Uruchom następujące polecenia:</span><span class="sxs-lookup"><span data-stu-id="9119a-248">Run the following commands:</span></span>
 
 ```dotnetcli
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
@@ -292,62 +294,62 @@ dotnet tool install --global dotnet-aspnet-codegenerator
 dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m TodoItem -dc TodoContext -outDir Controllers
 ```
 
-<span data-ttu-id="9fb67-246">Poprzednie polecenia:</span><span class="sxs-lookup"><span data-stu-id="9fb67-246">The preceding commands:</span></span>
+<span data-ttu-id="9119a-249">Poprzednie polecenia:</span><span class="sxs-lookup"><span data-stu-id="9119a-249">The preceding commands:</span></span>
 
-* <span data-ttu-id="9fb67-247">Dodaj pakiety NuGet wymagane do tworzenia szkieletów.</span><span class="sxs-lookup"><span data-stu-id="9fb67-247">Add NuGet packages required for scaffolding.</span></span>
-* <span data-ttu-id="9fb67-248">Instaluje aparat tworzenia szkieletu (`dotnet-aspnet-codegenerator`).</span><span class="sxs-lookup"><span data-stu-id="9fb67-248">Installs the scaffolding engine (`dotnet-aspnet-codegenerator`).</span></span>
-* <span data-ttu-id="9fb67-249">Szkielety `TodoItemsController`.</span><span class="sxs-lookup"><span data-stu-id="9fb67-249">Scaffolds the `TodoItemsController`.</span></span>
+* <span data-ttu-id="9119a-250">Dodaj pakiety NuGet wymagane do tworzenia szkieletów.</span><span class="sxs-lookup"><span data-stu-id="9119a-250">Add NuGet packages required for scaffolding.</span></span>
+* <span data-ttu-id="9119a-251">Instaluje aparat tworzenia szkieletu ( `dotnet-aspnet-codegenerator` ).</span><span class="sxs-lookup"><span data-stu-id="9119a-251">Installs the scaffolding engine (`dotnet-aspnet-codegenerator`).</span></span>
+* <span data-ttu-id="9119a-252">Szkielety `TodoItemsController` .</span><span class="sxs-lookup"><span data-stu-id="9119a-252">Scaffolds the `TodoItemsController`.</span></span>
 
 ---
 
-<span data-ttu-id="9fb67-250">Wygenerowany kod:</span><span class="sxs-lookup"><span data-stu-id="9fb67-250">The generated code:</span></span>
+<span data-ttu-id="9119a-253">Wygenerowany kod:</span><span class="sxs-lookup"><span data-stu-id="9119a-253">The generated code:</span></span>
 
-* <span data-ttu-id="9fb67-251">Oznacza klasę [`[ApiController]`](/dotnet/api/microsoft.aspnetcore.mvc.apicontrollerattribute) atrybutem.</span><span class="sxs-lookup"><span data-stu-id="9fb67-251">Marks the class with the [`[ApiController]`](/dotnet/api/microsoft.aspnetcore.mvc.apicontrollerattribute) attribute.</span></span> <span data-ttu-id="9fb67-252">Ten atrybut wskazuje, że kontroler odpowiada na żądania interfejsu API sieci Web.</span><span class="sxs-lookup"><span data-stu-id="9fb67-252">This attribute indicates that the controller responds to web API requests.</span></span> <span data-ttu-id="9fb67-253">Aby uzyskać informacje o określonych zachowaniach, które włącza atrybut <xref:web-api/index>, zobacz.</span><span class="sxs-lookup"><span data-stu-id="9fb67-253">For information about specific behaviors that the attribute enables, see <xref:web-api/index>.</span></span>
-* <span data-ttu-id="9fb67-254">Używa funkcji DI do iniekcji kontekstu bazy`TodoContext`danych () do kontrolera.</span><span class="sxs-lookup"><span data-stu-id="9fb67-254">Uses DI to inject the database context (`TodoContext`) into the controller.</span></span> <span data-ttu-id="9fb67-255">Kontekst bazy danych jest używany w każdej z metod [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) w kontrolerze.</span><span class="sxs-lookup"><span data-stu-id="9fb67-255">The database context is used in each of the [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) methods in the controller.</span></span>
+* <span data-ttu-id="9119a-254">Oznacza klasę [`[ApiController]`](/dotnet/api/microsoft.aspnetcore.mvc.apicontrollerattribute) atrybutem.</span><span class="sxs-lookup"><span data-stu-id="9119a-254">Marks the class with the [`[ApiController]`](/dotnet/api/microsoft.aspnetcore.mvc.apicontrollerattribute) attribute.</span></span> <span data-ttu-id="9119a-255">Ten atrybut wskazuje, że kontroler odpowiada na żądania interfejsu API sieci Web.</span><span class="sxs-lookup"><span data-stu-id="9119a-255">This attribute indicates that the controller responds to web API requests.</span></span> <span data-ttu-id="9119a-256">Aby uzyskać informacje o określonych zachowaniach, które włącza atrybut, zobacz <xref:web-api/index> .</span><span class="sxs-lookup"><span data-stu-id="9119a-256">For information about specific behaviors that the attribute enables, see <xref:web-api/index>.</span></span>
+* <span data-ttu-id="9119a-257">Używa funkcji DI do iniekcji kontekstu bazy danych ( `TodoContext` ) do kontrolera.</span><span class="sxs-lookup"><span data-stu-id="9119a-257">Uses DI to inject the database context (`TodoContext`) into the controller.</span></span> <span data-ttu-id="9119a-258">Kontekst bazy danych jest używany w każdej z metod [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) w kontrolerze.</span><span class="sxs-lookup"><span data-stu-id="9119a-258">The database context is used in each of the [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) methods in the controller.</span></span>
 
-<span data-ttu-id="9fb67-256">Szablony ASP.NET Core dla:</span><span class="sxs-lookup"><span data-stu-id="9fb67-256">The ASP.NET Core templates for:</span></span>
+<span data-ttu-id="9119a-259">Szablony ASP.NET Core dla:</span><span class="sxs-lookup"><span data-stu-id="9119a-259">The ASP.NET Core templates for:</span></span>
 
-* <span data-ttu-id="9fb67-257">Kontrolery z widokami `[action]` obejmują szablon trasy.</span><span class="sxs-lookup"><span data-stu-id="9fb67-257">Controllers with views include `[action]` in the route template.</span></span>
-* <span data-ttu-id="9fb67-258">Kontrolery interfejsu API nie `[action]` należą do szablonu trasy.</span><span class="sxs-lookup"><span data-stu-id="9fb67-258">API controllers don't include `[action]` in the route template.</span></span>
+* <span data-ttu-id="9119a-260">Kontrolery z widokami obejmują `[action]` szablon trasy.</span><span class="sxs-lookup"><span data-stu-id="9119a-260">Controllers with views include `[action]` in the route template.</span></span>
+* <span data-ttu-id="9119a-261">Kontrolery interfejsu API nie należą `[action]` do szablonu trasy.</span><span class="sxs-lookup"><span data-stu-id="9119a-261">API controllers don't include `[action]` in the route template.</span></span>
 
-<span data-ttu-id="9fb67-259">Gdy `[action]` token nie znajduje się w szablonie trasy, nazwa [akcji](xref:mvc/controllers/routing#action) jest wykluczona z trasy.</span><span class="sxs-lookup"><span data-stu-id="9fb67-259">When the `[action]` token isn't in the route template, the [action](xref:mvc/controllers/routing#action) name is excluded from the route.</span></span> <span data-ttu-id="9fb67-260">Oznacza to, że nazwa metody skojarzonej z akcją nie jest używana w zgodnej trasie.</span><span class="sxs-lookup"><span data-stu-id="9fb67-260">That is, the action's associated method name isn't used in the matching route.</span></span>
+<span data-ttu-id="9119a-262">Gdy `[action]` token nie znajduje się w szablonie trasy, nazwa [akcji](xref:mvc/controllers/routing#action) jest wykluczona z trasy.</span><span class="sxs-lookup"><span data-stu-id="9119a-262">When the `[action]` token isn't in the route template, the [action](xref:mvc/controllers/routing#action) name is excluded from the route.</span></span> <span data-ttu-id="9119a-263">Oznacza to, że nazwa metody skojarzonej z akcją nie jest używana w zgodnej trasie.</span><span class="sxs-lookup"><span data-stu-id="9119a-263">That is, the action's associated method name isn't used in the matching route.</span></span>
 
-## <a name="examine-the-posttodoitem-create-method"></a><span data-ttu-id="9fb67-261">Badanie metody PostTodoItem Create</span><span class="sxs-lookup"><span data-stu-id="9fb67-261">Examine the PostTodoItem create method</span></span>
+## <a name="examine-the-posttodoitem-create-method"></a><span data-ttu-id="9119a-264">Badanie metody PostTodoItem Create</span><span class="sxs-lookup"><span data-stu-id="9119a-264">Examine the PostTodoItem create method</span></span>
 
-<span data-ttu-id="9fb67-262">Zastąp instrukcję return w, `PostTodoItem` aby użyć operatora [nameof](/dotnet/csharp/language-reference/operators/nameof) :</span><span class="sxs-lookup"><span data-stu-id="9fb67-262">Replace the return statement in the `PostTodoItem` to use the [nameof](/dotnet/csharp/language-reference/operators/nameof) operator:</span></span>
+<span data-ttu-id="9119a-265">Zastąp instrukcję return w, `PostTodoItem` Aby użyć operatora [nameof](/dotnet/csharp/language-reference/operators/nameof) :</span><span class="sxs-lookup"><span data-stu-id="9119a-265">Replace the return statement in the `PostTodoItem` to use the [nameof](/dotnet/csharp/language-reference/operators/nameof) operator:</span></span>
 
 [!code-csharp[](first-web-api/samples/3.0/TodoApi/Controllers/TodoItemsController.cs?name=snippet_Create)]
 
-<span data-ttu-id="9fb67-263">Poprzedni kod jest metodą POST protokołu HTTP, jak wskazano w [`[HttpPost]`](/dotnet/api/microsoft.aspnetcore.mvc.httppostattribute) atrybucie.</span><span class="sxs-lookup"><span data-stu-id="9fb67-263">The preceding code is an HTTP POST method, as indicated by the [`[HttpPost]`](/dotnet/api/microsoft.aspnetcore.mvc.httppostattribute) attribute.</span></span> <span data-ttu-id="9fb67-264">Metoda pobiera wartość elementu do wykonania z treści żądania HTTP.</span><span class="sxs-lookup"><span data-stu-id="9fb67-264">The method gets the value of the to-do item from the body of the HTTP request.</span></span>
+<span data-ttu-id="9119a-266">Poprzedni kod jest metodą POST protokołu HTTP, jak wskazano w [`[HttpPost]`](/dotnet/api/microsoft.aspnetcore.mvc.httppostattribute) atrybucie.</span><span class="sxs-lookup"><span data-stu-id="9119a-266">The preceding code is an HTTP POST method, as indicated by the [`[HttpPost]`](/dotnet/api/microsoft.aspnetcore.mvc.httppostattribute) attribute.</span></span> <span data-ttu-id="9119a-267">Metoda pobiera wartość elementu do wykonania z treści żądania HTTP.</span><span class="sxs-lookup"><span data-stu-id="9119a-267">The method gets the value of the to-do item from the body of the HTTP request.</span></span>
 
-<span data-ttu-id="9fb67-265"><xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction*> Metoda:</span><span class="sxs-lookup"><span data-stu-id="9fb67-265">The <xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction*> method:</span></span>
+<span data-ttu-id="9119a-268"><xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction*>Metoda:</span><span class="sxs-lookup"><span data-stu-id="9119a-268">The <xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction*> method:</span></span>
 
-* <span data-ttu-id="9fb67-266">W razie powodzenia zwraca kod stanu HTTP 201.</span><span class="sxs-lookup"><span data-stu-id="9fb67-266">Returns an HTTP 201 status code if successful.</span></span> <span data-ttu-id="9fb67-267">HTTP 201 to standardowa odpowiedź dla metody POST protokołu HTTP, która tworzy nowy zasób na serwerze.</span><span class="sxs-lookup"><span data-stu-id="9fb67-267">HTTP 201 is the standard response for an HTTP POST method that creates a new resource on the server.</span></span>
-* <span data-ttu-id="9fb67-268">Dodaje nagłówek [lokalizacji](https://developer.mozilla.org/docs/Web/HTTP/Headers/Location) do odpowiedzi.</span><span class="sxs-lookup"><span data-stu-id="9fb67-268">Adds a [Location](https://developer.mozilla.org/docs/Web/HTTP/Headers/Location) header to the response.</span></span> <span data-ttu-id="9fb67-269">`Location` Nagłówek określa [Identyfikator URI](https://developer.mozilla.org/docs/Glossary/URI) nowo utworzonego elementu do wykonania.</span><span class="sxs-lookup"><span data-stu-id="9fb67-269">The `Location` header specifies the [URI](https://developer.mozilla.org/docs/Glossary/URI) of the newly created to-do item.</span></span> <span data-ttu-id="9fb67-270">Aby uzyskać więcej informacji, zobacz [10.2.2 201](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html).</span><span class="sxs-lookup"><span data-stu-id="9fb67-270">For more information, see [10.2.2 201 Created](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html).</span></span>
-* <span data-ttu-id="9fb67-271">Odwołuje `GetTodoItem` się do akcji tworzenia `Location` identyfikatora URI nagłówka.</span><span class="sxs-lookup"><span data-stu-id="9fb67-271">References the `GetTodoItem` action to create the `Location` header's URI.</span></span> <span data-ttu-id="9fb67-272">Słowo kluczowe `nameof` języka C# służy do zapobiegania twardemu kodowaniu nazwy akcji w `CreatedAtAction` wywołaniu.</span><span class="sxs-lookup"><span data-stu-id="9fb67-272">The C# `nameof` keyword is used to avoid hard-coding the action name in the `CreatedAtAction` call.</span></span>
+* <span data-ttu-id="9119a-269">W razie powodzenia zwraca kod stanu HTTP 201.</span><span class="sxs-lookup"><span data-stu-id="9119a-269">Returns an HTTP 201 status code if successful.</span></span> <span data-ttu-id="9119a-270">HTTP 201 to standardowa odpowiedź dla metody POST protokołu HTTP, która tworzy nowy zasób na serwerze.</span><span class="sxs-lookup"><span data-stu-id="9119a-270">HTTP 201 is the standard response for an HTTP POST method that creates a new resource on the server.</span></span>
+* <span data-ttu-id="9119a-271">Dodaje nagłówek [lokalizacji](https://developer.mozilla.org/docs/Web/HTTP/Headers/Location) do odpowiedzi.</span><span class="sxs-lookup"><span data-stu-id="9119a-271">Adds a [Location](https://developer.mozilla.org/docs/Web/HTTP/Headers/Location) header to the response.</span></span> <span data-ttu-id="9119a-272">`Location`Nagłówek określa [Identyfikator URI](https://developer.mozilla.org/docs/Glossary/URI) nowo utworzonego elementu do wykonania.</span><span class="sxs-lookup"><span data-stu-id="9119a-272">The `Location` header specifies the [URI](https://developer.mozilla.org/docs/Glossary/URI) of the newly created to-do item.</span></span> <span data-ttu-id="9119a-273">Aby uzyskać więcej informacji, zobacz [10.2.2 201](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html).</span><span class="sxs-lookup"><span data-stu-id="9119a-273">For more information, see [10.2.2 201 Created](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html).</span></span>
+* <span data-ttu-id="9119a-274">Odwołuje się do `GetTodoItem` akcji tworzenia `Location` identyfikatora URI nagłówka.</span><span class="sxs-lookup"><span data-stu-id="9119a-274">References the `GetTodoItem` action to create the `Location` header's URI.</span></span> <span data-ttu-id="9119a-275">`nameof`Słowo kluczowe języka C# służy do zapobiegania twardemu kodowaniu nazwy akcji w `CreatedAtAction` wywołaniu.</span><span class="sxs-lookup"><span data-stu-id="9119a-275">The C# `nameof` keyword is used to avoid hard-coding the action name in the `CreatedAtAction` call.</span></span>
 
-### <a name="install-postman"></a><span data-ttu-id="9fb67-273">Zainstaluj program Poster</span><span class="sxs-lookup"><span data-stu-id="9fb67-273">Install Postman</span></span>
+### <a name="install-postman"></a><span data-ttu-id="9119a-276">Zainstaluj program Poster</span><span class="sxs-lookup"><span data-stu-id="9119a-276">Install Postman</span></span>
 
-<span data-ttu-id="9fb67-274">Ten samouczek używa programu do testowania interfejsu API sieci Web.</span><span class="sxs-lookup"><span data-stu-id="9fb67-274">This tutorial uses Postman to test the web API.</span></span>
+<span data-ttu-id="9119a-277">Ten samouczek używa programu do testowania interfejsu API sieci Web.</span><span class="sxs-lookup"><span data-stu-id="9119a-277">This tutorial uses Postman to test the web API.</span></span>
 
-* <span data-ttu-id="9fb67-275">Zainstaluj program [Poster](https://www.getpostman.com/downloads/)</span><span class="sxs-lookup"><span data-stu-id="9fb67-275">Install [Postman](https://www.getpostman.com/downloads/)</span></span>
-* <span data-ttu-id="9fb67-276">Uruchom aplikację internetową.</span><span class="sxs-lookup"><span data-stu-id="9fb67-276">Start the web app.</span></span>
-* <span data-ttu-id="9fb67-277">Uruchom wpis.</span><span class="sxs-lookup"><span data-stu-id="9fb67-277">Start Postman.</span></span>
-* <span data-ttu-id="9fb67-278">Wyłącz **weryfikację certyfikatu SSL**</span><span class="sxs-lookup"><span data-stu-id="9fb67-278">Disable **SSL certificate verification**</span></span>
-  * <span data-ttu-id="9fb67-279">W obszarze **Ustawienia** **pliku** > (karta**Ogólne** ) Wyłącz **weryfikację certyfikatu SSL**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-279">From **File** > **Settings** (**General** tab), disable **SSL certificate verification**.</span></span>
+* <span data-ttu-id="9119a-278">Zainstaluj program [Poster](https://www.getpostman.com/downloads/)</span><span class="sxs-lookup"><span data-stu-id="9119a-278">Install [Postman](https://www.getpostman.com/downloads/)</span></span>
+* <span data-ttu-id="9119a-279">Uruchom aplikację internetową.</span><span class="sxs-lookup"><span data-stu-id="9119a-279">Start the web app.</span></span>
+* <span data-ttu-id="9119a-280">Uruchom wpis.</span><span class="sxs-lookup"><span data-stu-id="9119a-280">Start Postman.</span></span>
+* <span data-ttu-id="9119a-281">Wyłącz **weryfikację certyfikatu SSL**</span><span class="sxs-lookup"><span data-stu-id="9119a-281">Disable **SSL certificate verification**</span></span>
+  * <span data-ttu-id="9119a-282">W **File** obszarze > **Ustawienia** pliku (karta**Ogólne** ) Wyłącz **weryfikację certyfikatu SSL**.</span><span class="sxs-lookup"><span data-stu-id="9119a-282">From **File** > **Settings** (**General** tab), disable **SSL certificate verification**.</span></span>
     > [!WARNING]
-    > <span data-ttu-id="9fb67-280">Po przetestowaniu kontrolera ponownie Włącz weryfikację certyfikatu SSL.</span><span class="sxs-lookup"><span data-stu-id="9fb67-280">Re-enable SSL certificate verification after testing the controller.</span></span>
+    > <span data-ttu-id="9119a-283">Po przetestowaniu kontrolera ponownie Włącz weryfikację certyfikatu SSL.</span><span class="sxs-lookup"><span data-stu-id="9119a-283">Re-enable SSL certificate verification after testing the controller.</span></span>
 
 <a name="post"></a>
 
-### <a name="test-posttodoitem-with-postman"></a><span data-ttu-id="9fb67-281">Test PostTodoItem za pomocą programu Poster</span><span class="sxs-lookup"><span data-stu-id="9fb67-281">Test PostTodoItem with Postman</span></span>
+### <a name="test-posttodoitem-with-postman"></a><span data-ttu-id="9119a-284">Test PostTodoItem za pomocą programu Poster</span><span class="sxs-lookup"><span data-stu-id="9119a-284">Test PostTodoItem with Postman</span></span>
 
-* <span data-ttu-id="9fb67-282">Utwórz nowe żądanie.</span><span class="sxs-lookup"><span data-stu-id="9fb67-282">Create a new request.</span></span>
-* <span data-ttu-id="9fb67-283">Ustaw metodę HTTP na `POST`.</span><span class="sxs-lookup"><span data-stu-id="9fb67-283">Set the HTTP method to `POST`.</span></span>
-* <span data-ttu-id="9fb67-284">Wybierz kartę **Treść**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-284">Select the **Body** tab.</span></span>
-* <span data-ttu-id="9fb67-285">Wybierz przycisk radiowy **RAW** .</span><span class="sxs-lookup"><span data-stu-id="9fb67-285">Select the **raw** radio button.</span></span>
-* <span data-ttu-id="9fb67-286">Ustaw typ na **JSON (Application/JSON)**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-286">Set the type to **JSON (application/json)**.</span></span>
-* <span data-ttu-id="9fb67-287">W treści żądania wprowadź kod JSON dla elementu do wykonania:</span><span class="sxs-lookup"><span data-stu-id="9fb67-287">In the request body enter JSON for a to-do item:</span></span>
+* <span data-ttu-id="9119a-285">Utwórz nowe żądanie.</span><span class="sxs-lookup"><span data-stu-id="9119a-285">Create a new request.</span></span>
+* <span data-ttu-id="9119a-286">Ustaw metodę HTTP na `POST` .</span><span class="sxs-lookup"><span data-stu-id="9119a-286">Set the HTTP method to `POST`.</span></span>
+* <span data-ttu-id="9119a-287">Wybierz kartę **Treść**.</span><span class="sxs-lookup"><span data-stu-id="9119a-287">Select the **Body** tab.</span></span>
+* <span data-ttu-id="9119a-288">Wybierz przycisk radiowy **RAW** .</span><span class="sxs-lookup"><span data-stu-id="9119a-288">Select the **raw** radio button.</span></span>
+* <span data-ttu-id="9119a-289">Ustaw typ na **JSON (Application/JSON)**.</span><span class="sxs-lookup"><span data-stu-id="9119a-289">Set the type to **JSON (application/json)**.</span></span>
+* <span data-ttu-id="9119a-290">W treści żądania wprowadź kod JSON dla elementu do wykonania:</span><span class="sxs-lookup"><span data-stu-id="9119a-290">In the request body enter JSON for a to-do item:</span></span>
 
     ```json
     {
@@ -356,34 +358,34 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
     }
     ```
 
-* <span data-ttu-id="9fb67-288">Wybierz pozycję **Wyślij**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-288">Select **Send**.</span></span>
+* <span data-ttu-id="9119a-291">Wybierz pozycję **Send** (Wyślij).</span><span class="sxs-lookup"><span data-stu-id="9119a-291">Select **Send**.</span></span>
 
   ![Ogłoś przy użyciu żądania Create](first-web-api/_static/3/create.png)
 
-### <a name="test-the-location-header-uri"></a><span data-ttu-id="9fb67-290">Testowanie identyfikatora URI nagłówka lokalizacji</span><span class="sxs-lookup"><span data-stu-id="9fb67-290">Test the location header URI</span></span>
+### <a name="test-the-location-header-uri"></a><span data-ttu-id="9119a-293">Testowanie identyfikatora URI nagłówka lokalizacji</span><span class="sxs-lookup"><span data-stu-id="9119a-293">Test the location header URI</span></span>
 
-* <span data-ttu-id="9fb67-291">Wybierz kartę **nagłówki** w okienku **odpowiedź** .</span><span class="sxs-lookup"><span data-stu-id="9fb67-291">Select the **Headers** tab in the **Response** pane.</span></span>
-* <span data-ttu-id="9fb67-292">Skopiuj wartość nagłówka **lokalizacji** :</span><span class="sxs-lookup"><span data-stu-id="9fb67-292">Copy the **Location** header value:</span></span>
+* <span data-ttu-id="9119a-294">Wybierz kartę **nagłówki** w okienku **odpowiedź** .</span><span class="sxs-lookup"><span data-stu-id="9119a-294">Select the **Headers** tab in the **Response** pane.</span></span>
+* <span data-ttu-id="9119a-295">Skopiuj wartość nagłówka **lokalizacji** :</span><span class="sxs-lookup"><span data-stu-id="9119a-295">Copy the **Location** header value:</span></span>
 
   ![Karta nagłówki w konsoli programu Poster](first-web-api/_static/3/create.png)
 
-* <span data-ttu-id="9fb67-294">Ustaw metodę, aby uzyskać.</span><span class="sxs-lookup"><span data-stu-id="9fb67-294">Set the method to GET.</span></span>
-* <span data-ttu-id="9fb67-295">Wklej URI (na przykład `https://localhost:5001/api/TodoItems/1`).</span><span class="sxs-lookup"><span data-stu-id="9fb67-295">Paste the URI (for example, `https://localhost:5001/api/TodoItems/1`).</span></span>
-* <span data-ttu-id="9fb67-296">Wybierz pozycję **Wyślij**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-296">Select **Send**.</span></span>
+* <span data-ttu-id="9119a-297">Ustaw metodę, aby uzyskać.</span><span class="sxs-lookup"><span data-stu-id="9119a-297">Set the method to GET.</span></span>
+* <span data-ttu-id="9119a-298">Wklej URI (na przykład `https://localhost:5001/api/TodoItems/1` ).</span><span class="sxs-lookup"><span data-stu-id="9119a-298">Paste the URI (for example, `https://localhost:5001/api/TodoItems/1`).</span></span>
+* <span data-ttu-id="9119a-299">Wybierz pozycję **Send** (Wyślij).</span><span class="sxs-lookup"><span data-stu-id="9119a-299">Select **Send**.</span></span>
 
-## <a name="examine-the-get-methods"></a><span data-ttu-id="9fb67-297">Badanie metod GET</span><span class="sxs-lookup"><span data-stu-id="9fb67-297">Examine the GET methods</span></span>
+## <a name="examine-the-get-methods"></a><span data-ttu-id="9119a-300">Badanie metod GET</span><span class="sxs-lookup"><span data-stu-id="9119a-300">Examine the GET methods</span></span>
 
-<span data-ttu-id="9fb67-298">Te metody implementują dwa punkty końcowe GET:</span><span class="sxs-lookup"><span data-stu-id="9fb67-298">These methods implement two GET endpoints:</span></span>
+<span data-ttu-id="9119a-301">Te metody implementują dwa punkty końcowe GET:</span><span class="sxs-lookup"><span data-stu-id="9119a-301">These methods implement two GET endpoints:</span></span>
 
 * `GET /api/TodoItems`
 * `GET /api/TodoItems/{id}`
 
-<span data-ttu-id="9fb67-299">Przetestuj aplikację, wywołując dwa punkty końcowe z przeglądarki lub wpisu.</span><span class="sxs-lookup"><span data-stu-id="9fb67-299">Test the app by calling the two endpoints from a browser or Postman.</span></span> <span data-ttu-id="9fb67-300">Przykład:</span><span class="sxs-lookup"><span data-stu-id="9fb67-300">For example:</span></span>
+<span data-ttu-id="9119a-302">Przetestuj aplikację, wywołując dwa punkty końcowe z przeglądarki lub wpisu.</span><span class="sxs-lookup"><span data-stu-id="9119a-302">Test the app by calling the two endpoints from a browser or Postman.</span></span> <span data-ttu-id="9119a-303">Przykład:</span><span class="sxs-lookup"><span data-stu-id="9119a-303">For example:</span></span>
 
 * `https://localhost:5001/api/TodoItems`
 * `https://localhost:5001/api/TodoItems/1`
 
-<span data-ttu-id="9fb67-301">Odpowiedź podobna do poniższego jest generowana przez wywołanie `GetTodoItems`:</span><span class="sxs-lookup"><span data-stu-id="9fb67-301">A response similar to the following is produced by the call to `GetTodoItems`:</span></span>
+<span data-ttu-id="9119a-304">Odpowiedź podobna do poniższego jest generowana przez wywołanie `GetTodoItems` :</span><span class="sxs-lookup"><span data-stu-id="9119a-304">A response similar to the following is produced by the call to `GetTodoItems`:</span></span>
 
 ```json
 [
@@ -395,55 +397,55 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 ]
 ```
 
-### <a name="test-get-with-postman"></a><span data-ttu-id="9fb67-302">Test get przy użyciu programu Poster</span><span class="sxs-lookup"><span data-stu-id="9fb67-302">Test Get with Postman</span></span>
+### <a name="test-get-with-postman"></a><span data-ttu-id="9119a-305">Test get przy użyciu programu Poster</span><span class="sxs-lookup"><span data-stu-id="9119a-305">Test Get with Postman</span></span>
 
-* <span data-ttu-id="9fb67-303">Utwórz nowe żądanie.</span><span class="sxs-lookup"><span data-stu-id="9fb67-303">Create a new request.</span></span>
-* <span data-ttu-id="9fb67-304">Ustaw metodę HTTP, aby **uzyskać**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-304">Set the HTTP method to **GET**.</span></span>
-* <span data-ttu-id="9fb67-305">Ustaw adres URL żądania `https://localhost:<port>/api/TodoItems`.</span><span class="sxs-lookup"><span data-stu-id="9fb67-305">Set the request URL to `https://localhost:<port>/api/TodoItems`.</span></span> <span data-ttu-id="9fb67-306">Na przykład `https://localhost:5001/api/TodoItems`.</span><span class="sxs-lookup"><span data-stu-id="9fb67-306">For example, `https://localhost:5001/api/TodoItems`.</span></span>
-* <span data-ttu-id="9fb67-307">Ustaw **dwa widoki okienka** w programie Poster.</span><span class="sxs-lookup"><span data-stu-id="9fb67-307">Set **Two pane view** in Postman.</span></span>
-* <span data-ttu-id="9fb67-308">Wybierz pozycję **Wyślij**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-308">Select **Send**.</span></span>
+* <span data-ttu-id="9119a-306">Utwórz nowe żądanie.</span><span class="sxs-lookup"><span data-stu-id="9119a-306">Create a new request.</span></span>
+* <span data-ttu-id="9119a-307">Ustaw metodę HTTP, aby **uzyskać**.</span><span class="sxs-lookup"><span data-stu-id="9119a-307">Set the HTTP method to **GET**.</span></span>
+* <span data-ttu-id="9119a-308">Ustaw adres URL żądania `https://localhost:<port>/api/TodoItems` .</span><span class="sxs-lookup"><span data-stu-id="9119a-308">Set the request URL to `https://localhost:<port>/api/TodoItems`.</span></span> <span data-ttu-id="9119a-309">Na przykład `https://localhost:5001/api/TodoItems`.</span><span class="sxs-lookup"><span data-stu-id="9119a-309">For example, `https://localhost:5001/api/TodoItems`.</span></span>
+* <span data-ttu-id="9119a-310">Ustaw **dwa widoki okienka** w programie Poster.</span><span class="sxs-lookup"><span data-stu-id="9119a-310">Set **Two pane view** in Postman.</span></span>
+* <span data-ttu-id="9119a-311">Wybierz pozycję **Send** (Wyślij).</span><span class="sxs-lookup"><span data-stu-id="9119a-311">Select **Send**.</span></span>
 
-<span data-ttu-id="9fb67-309">Ta aplikacja używa bazy danych w pamięci.</span><span class="sxs-lookup"><span data-stu-id="9fb67-309">This app uses an in-memory database.</span></span> <span data-ttu-id="9fb67-310">Jeśli aplikacja zostanie zatrzymana i uruchomiona, poprzednie żądanie GET nie zwróci żadnych danych.</span><span class="sxs-lookup"><span data-stu-id="9fb67-310">If the app is stopped and started, the preceding GET request will not return any data.</span></span> <span data-ttu-id="9fb67-311">Jeśli nie zostaną zwrócone żadne dane, [Opublikuj](#post) dane w aplikacji.</span><span class="sxs-lookup"><span data-stu-id="9fb67-311">If no data is returned, [POST](#post) data to the app.</span></span>
+<span data-ttu-id="9119a-312">Ta aplikacja używa bazy danych w pamięci.</span><span class="sxs-lookup"><span data-stu-id="9119a-312">This app uses an in-memory database.</span></span> <span data-ttu-id="9119a-313">Jeśli aplikacja zostanie zatrzymana i uruchomiona, poprzednie żądanie GET nie zwróci żadnych danych.</span><span class="sxs-lookup"><span data-stu-id="9119a-313">If the app is stopped and started, the preceding GET request will not return any data.</span></span> <span data-ttu-id="9119a-314">Jeśli nie zostaną zwrócone żadne dane, [Opublikuj](#post) dane w aplikacji.</span><span class="sxs-lookup"><span data-stu-id="9119a-314">If no data is returned, [POST](#post) data to the app.</span></span>
 
-## <a name="routing-and-url-paths"></a><span data-ttu-id="9fb67-312">Ścieżki routingu i adresów URL</span><span class="sxs-lookup"><span data-stu-id="9fb67-312">Routing and URL paths</span></span>
+## <a name="routing-and-url-paths"></a><span data-ttu-id="9119a-315">Ścieżki routingu i adresów URL</span><span class="sxs-lookup"><span data-stu-id="9119a-315">Routing and URL paths</span></span>
 
-<span data-ttu-id="9fb67-313">Ten [`[HttpGet]`](/dotnet/api/microsoft.aspnetcore.mvc.httpgetattribute) atrybut oznacza metodę, która reaguje na żądanie HTTP GET.</span><span class="sxs-lookup"><span data-stu-id="9fb67-313">The [`[HttpGet]`](/dotnet/api/microsoft.aspnetcore.mvc.httpgetattribute) attribute denotes a method that responds to an HTTP GET request.</span></span> <span data-ttu-id="9fb67-314">Ścieżka adresu URL dla każdej metody jest zbudowana w następujący sposób:</span><span class="sxs-lookup"><span data-stu-id="9fb67-314">The URL path for each method is constructed as follows:</span></span>
+<span data-ttu-id="9119a-316">Ten [`[HttpGet]`](/dotnet/api/microsoft.aspnetcore.mvc.httpgetattribute) atrybut oznacza metodę, która reaguje na żądanie HTTP GET.</span><span class="sxs-lookup"><span data-stu-id="9119a-316">The [`[HttpGet]`](/dotnet/api/microsoft.aspnetcore.mvc.httpgetattribute) attribute denotes a method that responds to an HTTP GET request.</span></span> <span data-ttu-id="9119a-317">Ścieżka adresu URL dla każdej metody jest zbudowana w następujący sposób:</span><span class="sxs-lookup"><span data-stu-id="9119a-317">The URL path for each method is constructed as follows:</span></span>
 
-* <span data-ttu-id="9fb67-315">Zacznij od ciągu szablonu w `Route` atrybucie kontrolera:</span><span class="sxs-lookup"><span data-stu-id="9fb67-315">Start with the template string in the controller's `Route` attribute:</span></span>
+* <span data-ttu-id="9119a-318">Zacznij od ciągu szablonu w `Route` atrybucie kontrolera:</span><span class="sxs-lookup"><span data-stu-id="9119a-318">Start with the template string in the controller's `Route` attribute:</span></span>
 
   [!code-csharp[](first-web-api/samples/3.0/TodoApi/Controllers/TodoItemsController.cs?name=TodoController&highlight=1)]
 
-* <span data-ttu-id="9fb67-316">Zastąp `[controller]` nazwą kontrolera, którą Konwencją jest nazwa klasy kontrolera minus sufiks "Controller".</span><span class="sxs-lookup"><span data-stu-id="9fb67-316">Replace `[controller]` with the name of the controller, which by convention is the controller class name minus the "Controller" suffix.</span></span> <span data-ttu-id="9fb67-317">Dla tego przykładu nazwa klasy kontrolera to **TodoItems**Controller, więc nazwa kontrolera to "TodoItems".</span><span class="sxs-lookup"><span data-stu-id="9fb67-317">For this sample, the controller class name is **TodoItems**Controller, so the controller name is "TodoItems".</span></span> <span data-ttu-id="9fb67-318">W ASP.NET Core [routingu](xref:mvc/controllers/routing) jest rozróżniana wielkość liter.</span><span class="sxs-lookup"><span data-stu-id="9fb67-318">ASP.NET Core [routing](xref:mvc/controllers/routing) is case insensitive.</span></span>
-* <span data-ttu-id="9fb67-319">Jeśli `[HttpGet]` atrybut ma szablon trasy (na przykład `[HttpGet("products")]`), Dodaj go do ścieżki.</span><span class="sxs-lookup"><span data-stu-id="9fb67-319">If the `[HttpGet]` attribute has a route template (for example, `[HttpGet("products")]`), append that to the path.</span></span> <span data-ttu-id="9fb67-320">Ten przykład nie używa szablonu.</span><span class="sxs-lookup"><span data-stu-id="9fb67-320">This sample doesn't use a template.</span></span> <span data-ttu-id="9fb67-321">Aby uzyskać więcej informacji, zobacz temat [Routing atrybutów z atrybutami http [Verb]](xref:mvc/controllers/routing#attribute-routing-with-httpverb-attributes).</span><span class="sxs-lookup"><span data-stu-id="9fb67-321">For more information, see [Attribute routing with Http[Verb] attributes](xref:mvc/controllers/routing#attribute-routing-with-httpverb-attributes).</span></span>
+* <span data-ttu-id="9119a-319">Zastąp `[controller]` nazwą kontrolera, którą Konwencją jest nazwa klasy kontrolera minus sufiks "Controller".</span><span class="sxs-lookup"><span data-stu-id="9119a-319">Replace `[controller]` with the name of the controller, which by convention is the controller class name minus the "Controller" suffix.</span></span> <span data-ttu-id="9119a-320">Dla tego przykładu nazwa klasy kontrolera to **TodoItems**Controller, więc nazwa kontrolera to "TodoItems".</span><span class="sxs-lookup"><span data-stu-id="9119a-320">For this sample, the controller class name is **TodoItems**Controller, so the controller name is "TodoItems".</span></span> <span data-ttu-id="9119a-321">W ASP.NET Core [routingu](xref:mvc/controllers/routing) jest rozróżniana wielkość liter.</span><span class="sxs-lookup"><span data-stu-id="9119a-321">ASP.NET Core [routing](xref:mvc/controllers/routing) is case insensitive.</span></span>
+* <span data-ttu-id="9119a-322">Jeśli `[HttpGet]` atrybut ma szablon trasy (na przykład `[HttpGet("products")]` ), Dodaj go do ścieżki.</span><span class="sxs-lookup"><span data-stu-id="9119a-322">If the `[HttpGet]` attribute has a route template (for example, `[HttpGet("products")]`), append that to the path.</span></span> <span data-ttu-id="9119a-323">Ten przykład nie używa szablonu.</span><span class="sxs-lookup"><span data-stu-id="9119a-323">This sample doesn't use a template.</span></span> <span data-ttu-id="9119a-324">Aby uzyskać więcej informacji, zobacz temat [Routing atrybutów z atrybutami http [Verb]](xref:mvc/controllers/routing#attribute-routing-with-httpverb-attributes).</span><span class="sxs-lookup"><span data-stu-id="9119a-324">For more information, see [Attribute routing with Http[Verb] attributes](xref:mvc/controllers/routing#attribute-routing-with-httpverb-attributes).</span></span>
 
-<span data-ttu-id="9fb67-322">W poniższej `GetTodoItem` metodzie `"{id}"` jest zmienną zastępczą dla unikatowego identyfikatora elementu do wykonania.</span><span class="sxs-lookup"><span data-stu-id="9fb67-322">In the following `GetTodoItem` method, `"{id}"` is a placeholder variable for the unique identifier of the to-do item.</span></span> <span data-ttu-id="9fb67-323">Gdy `GetTodoItem` jest wywoływana, wartość `"{id}"` w adresie URL jest podawana do metody w jej `id` parametrze.</span><span class="sxs-lookup"><span data-stu-id="9fb67-323">When `GetTodoItem` is invoked, the value of `"{id}"` in the URL is provided to the method in its `id` parameter.</span></span>
+<span data-ttu-id="9119a-325">W poniższej `GetTodoItem` metodzie `"{id}"` jest zmienną zastępczą dla unikatowego identyfikatora elementu do wykonania.</span><span class="sxs-lookup"><span data-stu-id="9119a-325">In the following `GetTodoItem` method, `"{id}"` is a placeholder variable for the unique identifier of the to-do item.</span></span> <span data-ttu-id="9119a-326">Gdy `GetTodoItem` jest wywoływana, wartość `"{id}"` w adresie URL jest podawana do metody w jej `id` parametrze.</span><span class="sxs-lookup"><span data-stu-id="9119a-326">When `GetTodoItem` is invoked, the value of `"{id}"` in the URL is provided to the method in its `id` parameter.</span></span>
 
 [!code-csharp[](first-web-api/samples/3.0/TodoApi/Controllers/TodoItemsController.cs?name=snippet_GetByID&highlight=1-2)]
 
-## <a name="return-values"></a><span data-ttu-id="9fb67-324">Zwracane wartości</span><span class="sxs-lookup"><span data-stu-id="9fb67-324">Return values</span></span>
+## <a name="return-values"></a><span data-ttu-id="9119a-327">Zwracane wartości</span><span class="sxs-lookup"><span data-stu-id="9119a-327">Return values</span></span>
 
-<span data-ttu-id="9fb67-325">Zwracany typ metod `GetTodoItems` i `GetTodoItem` to [ActionResult\<T> typ](xref:web-api/action-return-types#actionresultt-type).</span><span class="sxs-lookup"><span data-stu-id="9fb67-325">The return type of the `GetTodoItems` and `GetTodoItem` methods is [ActionResult\<T> type](xref:web-api/action-return-types#actionresultt-type).</span></span> <span data-ttu-id="9fb67-326">ASP.NET Core automatycznie serializować obiektu do [formatu JSON](https://www.json.org/) i zapisuje kod JSON w treści komunikatu odpowiedzi.</span><span class="sxs-lookup"><span data-stu-id="9fb67-326">ASP.NET Core automatically serializes the object to [JSON](https://www.json.org/) and writes the JSON into the body of the response message.</span></span> <span data-ttu-id="9fb67-327">Kod odpowiedzi dla tego typu zwracanego to 200, przy założeniu, że nie istnieją Nieobsłużone wyjątki.</span><span class="sxs-lookup"><span data-stu-id="9fb67-327">The response code for this return type is 200, assuming there are no unhandled exceptions.</span></span> <span data-ttu-id="9fb67-328">Nieobsłużone wyjątki są tłumaczone na błędy 5xx.</span><span class="sxs-lookup"><span data-stu-id="9fb67-328">Unhandled exceptions are translated into 5xx errors.</span></span>
+<span data-ttu-id="9119a-328">Zwracany typ `GetTodoItems` `GetTodoItem` metod i jest [ \<T> typem ActionResult](xref:web-api/action-return-types#actionresultt-type).</span><span class="sxs-lookup"><span data-stu-id="9119a-328">The return type of the `GetTodoItems` and `GetTodoItem` methods is [ActionResult\<T> type](xref:web-api/action-return-types#actionresultt-type).</span></span> <span data-ttu-id="9119a-329">ASP.NET Core automatycznie serializować obiektu do [formatu JSON](https://www.json.org/) i zapisuje kod JSON w treści komunikatu odpowiedzi.</span><span class="sxs-lookup"><span data-stu-id="9119a-329">ASP.NET Core automatically serializes the object to [JSON](https://www.json.org/) and writes the JSON into the body of the response message.</span></span> <span data-ttu-id="9119a-330">Kod odpowiedzi dla tego typu zwracanego to 200, przy założeniu, że nie istnieją Nieobsłużone wyjątki.</span><span class="sxs-lookup"><span data-stu-id="9119a-330">The response code for this return type is 200, assuming there are no unhandled exceptions.</span></span> <span data-ttu-id="9119a-331">Nieobsłużone wyjątki są tłumaczone na błędy 5xx.</span><span class="sxs-lookup"><span data-stu-id="9119a-331">Unhandled exceptions are translated into 5xx errors.</span></span>
 
-<span data-ttu-id="9fb67-329">`ActionResult`typy zwracane mogą reprezentować szeroką gamę kodów stanu HTTP.</span><span class="sxs-lookup"><span data-stu-id="9fb67-329">`ActionResult` return types can represent a wide range of HTTP status codes.</span></span> <span data-ttu-id="9fb67-330">Na przykład `GetTodoItem` może zwracać dwie różne wartości stanu:</span><span class="sxs-lookup"><span data-stu-id="9fb67-330">For example, `GetTodoItem` can return two different status values:</span></span>
+<span data-ttu-id="9119a-332">`ActionResult`typy zwracane mogą reprezentować szeroką gamę kodów stanu HTTP.</span><span class="sxs-lookup"><span data-stu-id="9119a-332">`ActionResult` return types can represent a wide range of HTTP status codes.</span></span> <span data-ttu-id="9119a-333">Na przykład `GetTodoItem` może zwracać dwie różne wartości stanu:</span><span class="sxs-lookup"><span data-stu-id="9119a-333">For example, `GetTodoItem` can return two different status values:</span></span>
 
-* <span data-ttu-id="9fb67-331">Jeśli żaden element nie jest zgodny z żądanym IDENTYFIKATORem, metoda zwraca 404 kod błędu [NOTFOUND](/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.notfound) .</span><span class="sxs-lookup"><span data-stu-id="9fb67-331">If no item matches the requested ID, the method returns a 404 [NotFound](/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.notfound) error code.</span></span>
-* <span data-ttu-id="9fb67-332">W przeciwnym razie metoda zwraca 200 z treścią odpowiedzi JSON.</span><span class="sxs-lookup"><span data-stu-id="9fb67-332">Otherwise, the method returns 200 with a JSON response body.</span></span> <span data-ttu-id="9fb67-333">Zwracanie `item` wyników w odpowiedzi HTTP 200.</span><span class="sxs-lookup"><span data-stu-id="9fb67-333">Returning `item` results in an HTTP 200 response.</span></span>
+* <span data-ttu-id="9119a-334">Jeśli żaden element nie jest zgodny z żądanym IDENTYFIKATORem, metoda zwraca 404 kod błędu [NOTFOUND](/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.notfound) .</span><span class="sxs-lookup"><span data-stu-id="9119a-334">If no item matches the requested ID, the method returns a 404 [NotFound](/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.notfound) error code.</span></span>
+* <span data-ttu-id="9119a-335">W przeciwnym razie metoda zwraca 200 z treścią odpowiedzi JSON.</span><span class="sxs-lookup"><span data-stu-id="9119a-335">Otherwise, the method returns 200 with a JSON response body.</span></span> <span data-ttu-id="9119a-336">Zwracanie `item` wyników w odpowiedzi HTTP 200.</span><span class="sxs-lookup"><span data-stu-id="9119a-336">Returning `item` results in an HTTP 200 response.</span></span>
 
-## <a name="the-puttodoitem-method"></a><span data-ttu-id="9fb67-334">Metoda PutTodoItem</span><span class="sxs-lookup"><span data-stu-id="9fb67-334">The PutTodoItem method</span></span>
+## <a name="the-puttodoitem-method"></a><span data-ttu-id="9119a-337">Metoda PutTodoItem</span><span class="sxs-lookup"><span data-stu-id="9119a-337">The PutTodoItem method</span></span>
 
-<span data-ttu-id="9fb67-335">Badanie `PutTodoItem` metody:</span><span class="sxs-lookup"><span data-stu-id="9fb67-335">Examine the `PutTodoItem` method:</span></span>
+<span data-ttu-id="9119a-338">Badanie `PutTodoItem` metody:</span><span class="sxs-lookup"><span data-stu-id="9119a-338">Examine the `PutTodoItem` method:</span></span>
 
 [!code-csharp[](first-web-api/samples/3.0/TodoApi/Controllers/TodoItemsController.cs?name=snippet_Update)]
 
-<span data-ttu-id="9fb67-336">`PutTodoItem`jest podobny do `PostTodoItem`, z tą różnicą, że używa protokołu HTTP Put.</span><span class="sxs-lookup"><span data-stu-id="9fb67-336">`PutTodoItem` is similar to `PostTodoItem`, except it uses HTTP PUT.</span></span> <span data-ttu-id="9fb67-337">Odpowiedź to [204 (brak zawartości)](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html).</span><span class="sxs-lookup"><span data-stu-id="9fb67-337">The response is [204 (No Content)](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html).</span></span> <span data-ttu-id="9fb67-338">Zgodnie ze specyfikacją protokołu HTTP żądanie PUT wymaga, aby klient wysłał całą zaktualizowaną jednostkę, a nie tylko te zmiany.</span><span class="sxs-lookup"><span data-stu-id="9fb67-338">According to the HTTP specification, a PUT request requires the client to send the entire updated entity, not just the changes.</span></span> <span data-ttu-id="9fb67-339">Aby zapewnić obsługę częściowych aktualizacji, użyj [poprawki http](xref:Microsoft.AspNetCore.Mvc.HttpPatchAttribute).</span><span class="sxs-lookup"><span data-stu-id="9fb67-339">To support partial updates, use [HTTP PATCH](xref:Microsoft.AspNetCore.Mvc.HttpPatchAttribute).</span></span>
+<span data-ttu-id="9119a-339">`PutTodoItem`jest podobny do `PostTodoItem` , z tą różnicą, że używa protokołu HTTP Put.</span><span class="sxs-lookup"><span data-stu-id="9119a-339">`PutTodoItem` is similar to `PostTodoItem`, except it uses HTTP PUT.</span></span> <span data-ttu-id="9119a-340">Odpowiedź to [204 (brak zawartości)](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html).</span><span class="sxs-lookup"><span data-stu-id="9119a-340">The response is [204 (No Content)](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html).</span></span> <span data-ttu-id="9119a-341">Zgodnie ze specyfikacją protokołu HTTP żądanie PUT wymaga, aby klient wysłał całą zaktualizowaną jednostkę, a nie tylko te zmiany.</span><span class="sxs-lookup"><span data-stu-id="9119a-341">According to the HTTP specification, a PUT request requires the client to send the entire updated entity, not just the changes.</span></span> <span data-ttu-id="9119a-342">Aby zapewnić obsługę częściowych aktualizacji, użyj [poprawki http](xref:Microsoft.AspNetCore.Mvc.HttpPatchAttribute).</span><span class="sxs-lookup"><span data-stu-id="9119a-342">To support partial updates, use [HTTP PATCH](xref:Microsoft.AspNetCore.Mvc.HttpPatchAttribute).</span></span>
 
-<span data-ttu-id="9fb67-340">Jeśli wystąpi błąd podczas wywoływania `PutTodoItem`, wywołaj `GET` , aby upewnić się, że w bazie danych znajduje się element.</span><span class="sxs-lookup"><span data-stu-id="9fb67-340">If you get an error calling `PutTodoItem`, call `GET` to ensure there's an item in the database.</span></span>
+<span data-ttu-id="9119a-343">Jeśli wystąpi błąd podczas wywoływania `PutTodoItem` , wywołaj, `GET` Aby upewnić się, że w bazie danych znajduje się element.</span><span class="sxs-lookup"><span data-stu-id="9119a-343">If you get an error calling `PutTodoItem`, call `GET` to ensure there's an item in the database.</span></span>
 
-### <a name="test-the-puttodoitem-method"></a><span data-ttu-id="9fb67-341">Testowanie metody PutTodoItem</span><span class="sxs-lookup"><span data-stu-id="9fb67-341">Test the PutTodoItem method</span></span>
+### <a name="test-the-puttodoitem-method"></a><span data-ttu-id="9119a-344">Testowanie metody PutTodoItem</span><span class="sxs-lookup"><span data-stu-id="9119a-344">Test the PutTodoItem method</span></span>
 
-<span data-ttu-id="9fb67-342">Ten przykład korzysta z bazy danych w pamięci, która musi zostać zainicjowana za każdym razem, gdy aplikacja zostanie uruchomiona.</span><span class="sxs-lookup"><span data-stu-id="9fb67-342">This sample uses an in-memory database that must be initialized each time the app is started.</span></span> <span data-ttu-id="9fb67-343">Przed wykonaniem wywołania PUT musi istnieć element w bazie danych.</span><span class="sxs-lookup"><span data-stu-id="9fb67-343">There must be an item in the database before you make a PUT call.</span></span> <span data-ttu-id="9fb67-344">Wywołaj polecenie GET, aby upewnić się, że w bazie danych znajduje się element, przed wykonaniem wywołania PUT.</span><span class="sxs-lookup"><span data-stu-id="9fb67-344">Call GET to insure there's an item in the database before making a PUT call.</span></span>
+<span data-ttu-id="9119a-345">Ten przykład korzysta z bazy danych w pamięci, która musi zostać zainicjowana za każdym razem, gdy aplikacja zostanie uruchomiona.</span><span class="sxs-lookup"><span data-stu-id="9119a-345">This sample uses an in-memory database that must be initialized each time the app is started.</span></span> <span data-ttu-id="9119a-346">Przed wykonaniem wywołania PUT musi istnieć element w bazie danych.</span><span class="sxs-lookup"><span data-stu-id="9119a-346">There must be an item in the database before you make a PUT call.</span></span> <span data-ttu-id="9119a-347">Wywołaj polecenie GET, aby upewnić się, że w bazie danych znajduje się element, przed wykonaniem wywołania PUT.</span><span class="sxs-lookup"><span data-stu-id="9119a-347">Call GET to insure there's an item in the database before making a PUT call.</span></span>
 
-<span data-ttu-id="9fb67-345">Zaktualizuj element do wykonania o IDENTYFIKATORze 1 i ustaw jego nazwę na "Źródło danych":</span><span class="sxs-lookup"><span data-stu-id="9fb67-345">Update the to-do item that has ID = 1 and set its name to "feed fish":</span></span>
+<span data-ttu-id="9119a-348">Zaktualizuj element do wykonania o IDENTYFIKATORze 1 i ustaw jego nazwę na "Źródło danych":</span><span class="sxs-lookup"><span data-stu-id="9119a-348">Update the to-do item that has ID = 1 and set its name to "feed fish":</span></span>
 
 ```json
   {
@@ -453,296 +455,294 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
   }
 ```
 
-<span data-ttu-id="9fb67-346">Na poniższej ilustracji przedstawiono aktualizację programu Poster:</span><span class="sxs-lookup"><span data-stu-id="9fb67-346">The following image shows the Postman update:</span></span>
+<span data-ttu-id="9119a-349">Na poniższej ilustracji przedstawiono aktualizację programu Poster:</span><span class="sxs-lookup"><span data-stu-id="9119a-349">The following image shows the Postman update:</span></span>
 
 ![Konsola programu Poster pokazująca odpowiedź 204 (brak zawartości)](first-web-api/_static/3/pmcput.png)
 
-## <a name="the-deletetodoitem-method"></a><span data-ttu-id="9fb67-348">Metoda DeleteTodoItem</span><span class="sxs-lookup"><span data-stu-id="9fb67-348">The DeleteTodoItem method</span></span>
+## <a name="the-deletetodoitem-method"></a><span data-ttu-id="9119a-351">Metoda DeleteTodoItem</span><span class="sxs-lookup"><span data-stu-id="9119a-351">The DeleteTodoItem method</span></span>
 
-<span data-ttu-id="9fb67-349">Badanie `DeleteTodoItem` metody:</span><span class="sxs-lookup"><span data-stu-id="9fb67-349">Examine the `DeleteTodoItem` method:</span></span>
+<span data-ttu-id="9119a-352">Badanie `DeleteTodoItem` metody:</span><span class="sxs-lookup"><span data-stu-id="9119a-352">Examine the `DeleteTodoItem` method:</span></span>
 
 [!code-csharp[](first-web-api/samples/3.0/TodoApi/Controllers/TodoItemsController.cs?name=snippet_Delete)]
 
-### <a name="test-the-deletetodoitem-method"></a><span data-ttu-id="9fb67-350">Testowanie metody DeleteTodoItem</span><span class="sxs-lookup"><span data-stu-id="9fb67-350">Test the DeleteTodoItem method</span></span>
+### <a name="test-the-deletetodoitem-method"></a><span data-ttu-id="9119a-353">Testowanie metody DeleteTodoItem</span><span class="sxs-lookup"><span data-stu-id="9119a-353">Test the DeleteTodoItem method</span></span>
 
-<span data-ttu-id="9fb67-351">Użyj programu Poster, aby usunąć element do wykonania:</span><span class="sxs-lookup"><span data-stu-id="9fb67-351">Use Postman to delete a to-do item:</span></span>
+<span data-ttu-id="9119a-354">Użyj programu Poster, aby usunąć element do wykonania:</span><span class="sxs-lookup"><span data-stu-id="9119a-354">Use Postman to delete a to-do item:</span></span>
 
-* <span data-ttu-id="9fb67-352">Ustaw metodę na `DELETE`.</span><span class="sxs-lookup"><span data-stu-id="9fb67-352">Set the method to `DELETE`.</span></span>
-* <span data-ttu-id="9fb67-353">Ustaw identyfikator URI obiektu do usunięcia (na przykład `https://localhost:5001/api/TodoItems/1`).</span><span class="sxs-lookup"><span data-stu-id="9fb67-353">Set the URI of the object to delete (for example `https://localhost:5001/api/TodoItems/1`).</span></span>
-* <span data-ttu-id="9fb67-354">Wybierz pozycję **Wyślij**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-354">Select **Send**.</span></span>
+* <span data-ttu-id="9119a-355">Ustaw metodę na `DELETE` .</span><span class="sxs-lookup"><span data-stu-id="9119a-355">Set the method to `DELETE`.</span></span>
+* <span data-ttu-id="9119a-356">Ustaw identyfikator URI obiektu do usunięcia (na przykład `https://localhost:5001/api/TodoItems/1` ).</span><span class="sxs-lookup"><span data-stu-id="9119a-356">Set the URI of the object to delete (for example `https://localhost:5001/api/TodoItems/1`).</span></span>
+* <span data-ttu-id="9119a-357">Wybierz pozycję **Send** (Wyślij).</span><span class="sxs-lookup"><span data-stu-id="9119a-357">Select **Send**.</span></span>
 
 <a name="over-post"></a>
 
-## <a name="prevent-over-posting"></a><span data-ttu-id="9fb67-355">Zapobiegaj za pośrednictwem księgowania</span><span class="sxs-lookup"><span data-stu-id="9fb67-355">Prevent over-posting</span></span>
+## <a name="prevent-over-posting"></a><span data-ttu-id="9119a-358">Zapobiegaj za pośrednictwem księgowania</span><span class="sxs-lookup"><span data-stu-id="9119a-358">Prevent over-posting</span></span>
 
-<span data-ttu-id="9fb67-356">Obecnie Przykładowa aplikacja uwidacznia cały `TodoItem` obiekt.</span><span class="sxs-lookup"><span data-stu-id="9fb67-356">Currently the sample app exposes the entire `TodoItem` object.</span></span> <span data-ttu-id="9fb67-357">Aplikacje produkcji zwykle ograniczają dane wejściowe i zwracane przy użyciu podzestawu modelu.</span><span class="sxs-lookup"><span data-stu-id="9fb67-357">Productions apps typically limit the data that's input and returned using a subset of the model.</span></span> <span data-ttu-id="9fb67-358">Istnieje wiele powodów związanych z tym, a zabezpieczenia są głównymi.</span><span class="sxs-lookup"><span data-stu-id="9fb67-358">There are multiple reasons behind this and security is a major one.</span></span> <span data-ttu-id="9fb67-359">Podzestaw modelu jest zwykle określany jako obiekt Transfer danych (DTO), model wejściowy lub model widoku.</span><span class="sxs-lookup"><span data-stu-id="9fb67-359">The subset of a model is usually referred to as a Data Transfer Object (DTO), input model, or view model.</span></span> <span data-ttu-id="9fb67-360">**DTO** jest używany w tym artykule.</span><span class="sxs-lookup"><span data-stu-id="9fb67-360">**DTO** is used in this article.</span></span>
+<span data-ttu-id="9119a-359">Obecnie Przykładowa aplikacja uwidacznia cały `TodoItem` obiekt.</span><span class="sxs-lookup"><span data-stu-id="9119a-359">Currently the sample app exposes the entire `TodoItem` object.</span></span> <span data-ttu-id="9119a-360">Aplikacje produkcji zwykle ograniczają dane wejściowe i zwracane przy użyciu podzestawu modelu.</span><span class="sxs-lookup"><span data-stu-id="9119a-360">Productions apps typically limit the data that's input and returned using a subset of the model.</span></span> <span data-ttu-id="9119a-361">Istnieje wiele powodów związanych z tym, a zabezpieczenia są głównymi.</span><span class="sxs-lookup"><span data-stu-id="9119a-361">There are multiple reasons behind this and security is a major one.</span></span> <span data-ttu-id="9119a-362">Podzestaw modelu jest zwykle określany jako obiekt Transfer danych (DTO), model wejściowy lub model widoku.</span><span class="sxs-lookup"><span data-stu-id="9119a-362">The subset of a model is usually referred to as a Data Transfer Object (DTO), input model, or view model.</span></span> <span data-ttu-id="9119a-363">**DTO** jest używany w tym artykule.</span><span class="sxs-lookup"><span data-stu-id="9119a-363">**DTO** is used in this article.</span></span>
 
-<span data-ttu-id="9fb67-361">DTO może służyć do:</span><span class="sxs-lookup"><span data-stu-id="9fb67-361">A DTO may be used to:</span></span>
+<span data-ttu-id="9119a-364">DTO może służyć do:</span><span class="sxs-lookup"><span data-stu-id="9119a-364">A DTO may be used to:</span></span>
 
-* <span data-ttu-id="9fb67-362">Zablokuj nadmierne księgowanie.</span><span class="sxs-lookup"><span data-stu-id="9fb67-362">Prevent over-posting.</span></span>
-* <span data-ttu-id="9fb67-363">Ukryj właściwości, które nie powinny być wyświetlane dla klientów.</span><span class="sxs-lookup"><span data-stu-id="9fb67-363">Hide properties that clients are not supposed to view.</span></span>
-* <span data-ttu-id="9fb67-364">Pomiń niektóre właściwości, aby zmniejszyć rozmiar ładunku.</span><span class="sxs-lookup"><span data-stu-id="9fb67-364">Omit some properties in order to reduce payload size.</span></span>
-* <span data-ttu-id="9fb67-365">Spłaszcz wykresy obiektów zawierające obiekty zagnieżdżone.</span><span class="sxs-lookup"><span data-stu-id="9fb67-365">Flatten object graphs that contain nested objects.</span></span> <span data-ttu-id="9fb67-366">Spłaszczone wykresy obiektów mogą być wygodniejsze dla klientów.</span><span class="sxs-lookup"><span data-stu-id="9fb67-366">Flattened object graphs can be more convenient for clients.</span></span>
+* <span data-ttu-id="9119a-365">Zablokuj nadmierne księgowanie.</span><span class="sxs-lookup"><span data-stu-id="9119a-365">Prevent over-posting.</span></span>
+* <span data-ttu-id="9119a-366">Ukryj właściwości, które nie powinny być wyświetlane dla klientów.</span><span class="sxs-lookup"><span data-stu-id="9119a-366">Hide properties that clients are not supposed to view.</span></span>
+* <span data-ttu-id="9119a-367">Pomiń niektóre właściwości, aby zmniejszyć rozmiar ładunku.</span><span class="sxs-lookup"><span data-stu-id="9119a-367">Omit some properties in order to reduce payload size.</span></span>
+* <span data-ttu-id="9119a-368">Spłaszcz wykresy obiektów zawierające obiekty zagnieżdżone.</span><span class="sxs-lookup"><span data-stu-id="9119a-368">Flatten object graphs that contain nested objects.</span></span> <span data-ttu-id="9119a-369">Spłaszczone wykresy obiektów mogą być wygodniejsze dla klientów.</span><span class="sxs-lookup"><span data-stu-id="9119a-369">Flattened object graphs can be more convenient for clients.</span></span>
 
-<span data-ttu-id="9fb67-367">Aby zademonstrować podejście DTO, zaktualizuj `TodoItem` klasę w celu uwzględnienia pola tajnego:</span><span class="sxs-lookup"><span data-stu-id="9fb67-367">To demonstrate the DTO approach, update the `TodoItem` class to include a secret field:</span></span>
+<span data-ttu-id="9119a-370">Aby zademonstrować podejście DTO, zaktualizuj `TodoItem` klasę w celu uwzględnienia pola tajnego:</span><span class="sxs-lookup"><span data-stu-id="9119a-370">To demonstrate the DTO approach, update the `TodoItem` class to include a secret field:</span></span>
 
 [!code-csharp[](first-web-api/samples/3.0/TodoApiDTO/Models/TodoItem.cs?name=snippet&highlight=6)]
 
-<span data-ttu-id="9fb67-368">Pole tajne musi być ukryte w tej aplikacji, ale aplikacja administracyjna mogła ją uwidocznić.</span><span class="sxs-lookup"><span data-stu-id="9fb67-368">The secret field needs to be hidden from this app, but an administrative app could choose to expose it.</span></span>
+<span data-ttu-id="9119a-371">Pole tajne musi być ukryte w tej aplikacji, ale aplikacja administracyjna mogła ją uwidocznić.</span><span class="sxs-lookup"><span data-stu-id="9119a-371">The secret field needs to be hidden from this app, but an administrative app could choose to expose it.</span></span>
 
-<span data-ttu-id="9fb67-369">Sprawdź, czy można opublikować i pobrać pole tajne.</span><span class="sxs-lookup"><span data-stu-id="9fb67-369">Verify you can post and get the secret field.</span></span>
+<span data-ttu-id="9119a-372">Sprawdź, czy można opublikować i pobrać pole tajne.</span><span class="sxs-lookup"><span data-stu-id="9119a-372">Verify you can post and get the secret field.</span></span>
 
-<span data-ttu-id="9fb67-370">Utwórz model DTO:</span><span class="sxs-lookup"><span data-stu-id="9fb67-370">Create a DTO model:</span></span>
+<span data-ttu-id="9119a-373">Utwórz model DTO:</span><span class="sxs-lookup"><span data-stu-id="9119a-373">Create a DTO model:</span></span>
 
 [!code-csharp[](first-web-api/samples/3.0/TodoApiDTO/Models/TodoItemDTO.cs?name=snippet)]
 
-<span data-ttu-id="9fb67-371">Zaktualizuj, `TodoItemsController` aby użyć `TodoItemDTO`:</span><span class="sxs-lookup"><span data-stu-id="9fb67-371">Update the `TodoItemsController` to use `TodoItemDTO`:</span></span>
+<span data-ttu-id="9119a-374">Zaktualizuj, `TodoItemsController` Aby użyć `TodoItemDTO` :</span><span class="sxs-lookup"><span data-stu-id="9119a-374">Update the `TodoItemsController` to use `TodoItemDTO`:</span></span>
 
 [!code-csharp[](first-web-api/samples/3.0/TodoApiDTO/Controllers/TodoItemsController.cs?name=snippet)]
 
-<span data-ttu-id="9fb67-372">Upewnij się, że nie można opublikować lub pobrać pola tajnego.</span><span class="sxs-lookup"><span data-stu-id="9fb67-372">Verify you can't post or get the secret field.</span></span>
+<span data-ttu-id="9119a-375">Upewnij się, że nie można opublikować lub pobrać pola tajnego.</span><span class="sxs-lookup"><span data-stu-id="9119a-375">Verify you can't post or get the secret field.</span></span>
 
-## <a name="call-the-web-api-with-javascript"></a><span data-ttu-id="9fb67-373">Wywoływanie interfejsu API sieci Web przy użyciu języka JavaScript</span><span class="sxs-lookup"><span data-stu-id="9fb67-373">Call the web API with JavaScript</span></span>
+## <a name="call-the-web-api-with-javascript"></a><span data-ttu-id="9119a-376">Wywoływanie interfejsu API sieci Web przy użyciu języka JavaScript</span><span class="sxs-lookup"><span data-stu-id="9119a-376">Call the web API with JavaScript</span></span>
 
-<span data-ttu-id="9fb67-374">Zobacz [Samouczek: wywoływanie interfejsu API sieci web ASP.NET Core przy użyciu języka JavaScript](xref:tutorials/web-api-javascript).</span><span class="sxs-lookup"><span data-stu-id="9fb67-374">See [Tutorial: Call an ASP.NET Core web API with JavaScript](xref:tutorials/web-api-javascript).</span></span>
+<span data-ttu-id="9119a-377">Zobacz [Samouczek: wywoływanie interfejsu API sieci web ASP.NET Core przy użyciu języka JavaScript](xref:tutorials/web-api-javascript).</span><span class="sxs-lookup"><span data-stu-id="9119a-377">See [Tutorial: Call an ASP.NET Core web API with JavaScript](xref:tutorials/web-api-javascript).</span></span>
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-<span data-ttu-id="9fb67-375">Ten samouczek zawiera informacje na temat wykonywania następujących czynności:</span><span class="sxs-lookup"><span data-stu-id="9fb67-375">In this tutorial, you learn how to:</span></span>
+<span data-ttu-id="9119a-378">Ten samouczek zawiera informacje na temat wykonywania następujących czynności:</span><span class="sxs-lookup"><span data-stu-id="9119a-378">In this tutorial, you learn how to:</span></span>
 
 > [!div class="checklist"]
-> * <span data-ttu-id="9fb67-376">Utwórz projekt interfejsu API sieci Web.</span><span class="sxs-lookup"><span data-stu-id="9fb67-376">Create a web API project.</span></span>
-> * <span data-ttu-id="9fb67-377">Dodaj klasę modelu i kontekst bazy danych.</span><span class="sxs-lookup"><span data-stu-id="9fb67-377">Add a model class and a database context.</span></span>
-> * <span data-ttu-id="9fb67-378">Dodaj kontroler.</span><span class="sxs-lookup"><span data-stu-id="9fb67-378">Add a controller.</span></span>
-> * <span data-ttu-id="9fb67-379">Dodaj metody CRUD.</span><span class="sxs-lookup"><span data-stu-id="9fb67-379">Add CRUD methods.</span></span>
-> * <span data-ttu-id="9fb67-380">Skonfiguruj ścieżki routingu i adresów URL.</span><span class="sxs-lookup"><span data-stu-id="9fb67-380">Configure routing and URL paths.</span></span>
-> * <span data-ttu-id="9fb67-381">Określ wartości zwracane.</span><span class="sxs-lookup"><span data-stu-id="9fb67-381">Specify return values.</span></span>
-> * <span data-ttu-id="9fb67-382">Wywołaj interfejs API sieci Web za pomocą programu Poster.</span><span class="sxs-lookup"><span data-stu-id="9fb67-382">Call the web API with Postman.</span></span>
-> * <span data-ttu-id="9fb67-383">Wywołaj interfejs API sieci Web za pomocą języka JavaScript.</span><span class="sxs-lookup"><span data-stu-id="9fb67-383">Call the web API with JavaScript.</span></span>
+> * <span data-ttu-id="9119a-379">Utwórz projekt interfejsu API sieci Web.</span><span class="sxs-lookup"><span data-stu-id="9119a-379">Create a web API project.</span></span>
+> * <span data-ttu-id="9119a-380">Dodaj klasę modelu i kontekst bazy danych.</span><span class="sxs-lookup"><span data-stu-id="9119a-380">Add a model class and a database context.</span></span>
+> * <span data-ttu-id="9119a-381">Dodaj kontroler.</span><span class="sxs-lookup"><span data-stu-id="9119a-381">Add a controller.</span></span>
+> * <span data-ttu-id="9119a-382">Dodaj metody CRUD.</span><span class="sxs-lookup"><span data-stu-id="9119a-382">Add CRUD methods.</span></span>
+> * <span data-ttu-id="9119a-383">Skonfiguruj ścieżki routingu i adresów URL.</span><span class="sxs-lookup"><span data-stu-id="9119a-383">Configure routing and URL paths.</span></span>
+> * <span data-ttu-id="9119a-384">Określ wartości zwracane.</span><span class="sxs-lookup"><span data-stu-id="9119a-384">Specify return values.</span></span>
+> * <span data-ttu-id="9119a-385">Wywołaj interfejs API sieci Web za pomocą programu Poster.</span><span class="sxs-lookup"><span data-stu-id="9119a-385">Call the web API with Postman.</span></span>
+> * <span data-ttu-id="9119a-386">Wywołaj interfejs API sieci Web za pomocą języka JavaScript.</span><span class="sxs-lookup"><span data-stu-id="9119a-386">Call the web API with JavaScript.</span></span>
 
-<span data-ttu-id="9fb67-384">Na końcu znajduje się internetowy interfejs API, który może zarządzać elementami do wykonania przechowywanymi w relacyjnej bazie danych.</span><span class="sxs-lookup"><span data-stu-id="9fb67-384">At the end, you have a web API that can manage "to-do" items stored in a relational database.</span></span>
+<span data-ttu-id="9119a-387">Na końcu znajduje się internetowy interfejs API, który może zarządzać elementami do wykonania przechowywanymi w relacyjnej bazie danych.</span><span class="sxs-lookup"><span data-stu-id="9119a-387">At the end, you have a web API that can manage "to-do" items stored in a relational database.</span></span>
 
-## <a name="overview"></a><span data-ttu-id="9fb67-385">Omówienie</span><span class="sxs-lookup"><span data-stu-id="9fb67-385">Overview</span></span>
+## <a name="overview"></a><span data-ttu-id="9119a-388">Omówienie</span><span class="sxs-lookup"><span data-stu-id="9119a-388">Overview</span></span>
 
-<span data-ttu-id="9fb67-386">Ten samouczek tworzy następujący interfejs API:</span><span class="sxs-lookup"><span data-stu-id="9fb67-386">This tutorial creates the following API:</span></span>
+<span data-ttu-id="9119a-389">Ten samouczek tworzy następujący interfejs API:</span><span class="sxs-lookup"><span data-stu-id="9119a-389">This tutorial creates the following API:</span></span>
 
-|<span data-ttu-id="9fb67-387">Interfejs API</span><span class="sxs-lookup"><span data-stu-id="9fb67-387">API</span></span> | <span data-ttu-id="9fb67-388">Opis</span><span class="sxs-lookup"><span data-stu-id="9fb67-388">Description</span></span> | <span data-ttu-id="9fb67-389">Treść żądania</span><span class="sxs-lookup"><span data-stu-id="9fb67-389">Request body</span></span> | <span data-ttu-id="9fb67-390">Treść odpowiedzi</span><span class="sxs-lookup"><span data-stu-id="9fb67-390">Response body</span></span> |
+|<span data-ttu-id="9119a-390">Interfejs API</span><span class="sxs-lookup"><span data-stu-id="9119a-390">API</span></span> | <span data-ttu-id="9119a-391">Opis</span><span class="sxs-lookup"><span data-stu-id="9119a-391">Description</span></span> | <span data-ttu-id="9119a-392">Treść żądania</span><span class="sxs-lookup"><span data-stu-id="9119a-392">Request body</span></span> | <span data-ttu-id="9119a-393">Treść odpowiedzi</span><span class="sxs-lookup"><span data-stu-id="9119a-393">Response body</span></span> |
 |--- | ---- | ---- | ---- |
-|<span data-ttu-id="9fb67-391">Pobierz/api/TodoItems</span><span class="sxs-lookup"><span data-stu-id="9fb67-391">GET /api/TodoItems</span></span> | <span data-ttu-id="9fb67-392">Pobierz wszystkie elementy do wykonania</span><span class="sxs-lookup"><span data-stu-id="9fb67-392">Get all to-do items</span></span> | <span data-ttu-id="9fb67-393">Brak</span><span class="sxs-lookup"><span data-stu-id="9fb67-393">None</span></span> | <span data-ttu-id="9fb67-394">Tablica elementów do wykonania</span><span class="sxs-lookup"><span data-stu-id="9fb67-394">Array of to-do items</span></span>|
-|<span data-ttu-id="9fb67-395">Pobierz/api/TodoItems/{id}</span><span class="sxs-lookup"><span data-stu-id="9fb67-395">GET /api/TodoItems/{id}</span></span> | <span data-ttu-id="9fb67-396">Pobieranie elementu według identyfikatora</span><span class="sxs-lookup"><span data-stu-id="9fb67-396">Get an item by ID</span></span> | <span data-ttu-id="9fb67-397">Brak</span><span class="sxs-lookup"><span data-stu-id="9fb67-397">None</span></span> | <span data-ttu-id="9fb67-398">Element do wykonania</span><span class="sxs-lookup"><span data-stu-id="9fb67-398">To-do item</span></span>|
-|<span data-ttu-id="9fb67-399">Opublikuj/api/TodoItems</span><span class="sxs-lookup"><span data-stu-id="9fb67-399">POST /api/TodoItems</span></span> | <span data-ttu-id="9fb67-400">Dodaj nowy element</span><span class="sxs-lookup"><span data-stu-id="9fb67-400">Add a new item</span></span> | <span data-ttu-id="9fb67-401">Element do wykonania</span><span class="sxs-lookup"><span data-stu-id="9fb67-401">To-do item</span></span> | <span data-ttu-id="9fb67-402">Element do wykonania</span><span class="sxs-lookup"><span data-stu-id="9fb67-402">To-do item</span></span> |
-|<span data-ttu-id="9fb67-403">Umieść/api/TodoItems/{id}</span><span class="sxs-lookup"><span data-stu-id="9fb67-403">PUT /api/TodoItems/{id}</span></span> | <span data-ttu-id="9fb67-404">Aktualizowanie istniejącego elementu&nbsp;</span><span class="sxs-lookup"><span data-stu-id="9fb67-404">Update an existing item &nbsp;</span></span> | <span data-ttu-id="9fb67-405">Element do wykonania</span><span class="sxs-lookup"><span data-stu-id="9fb67-405">To-do item</span></span> | <span data-ttu-id="9fb67-406">Brak</span><span class="sxs-lookup"><span data-stu-id="9fb67-406">None</span></span> |
-|<span data-ttu-id="9fb67-407">Usuń/api/TodoItems/{id} &nbsp;&nbsp;</span><span class="sxs-lookup"><span data-stu-id="9fb67-407">DELETE /api/TodoItems/{id} &nbsp; &nbsp;</span></span> | <span data-ttu-id="9fb67-408">Usuń element &nbsp;&nbsp;</span><span class="sxs-lookup"><span data-stu-id="9fb67-408">Delete an item &nbsp; &nbsp;</span></span> | <span data-ttu-id="9fb67-409">Brak</span><span class="sxs-lookup"><span data-stu-id="9fb67-409">None</span></span> | <span data-ttu-id="9fb67-410">Brak</span><span class="sxs-lookup"><span data-stu-id="9fb67-410">None</span></span>|
+|<span data-ttu-id="9119a-394">Pobierz/api/TodoItems</span><span class="sxs-lookup"><span data-stu-id="9119a-394">GET /api/TodoItems</span></span> | <span data-ttu-id="9119a-395">Pobierz wszystkie elementy do wykonania</span><span class="sxs-lookup"><span data-stu-id="9119a-395">Get all to-do items</span></span> | <span data-ttu-id="9119a-396">Brak</span><span class="sxs-lookup"><span data-stu-id="9119a-396">None</span></span> | <span data-ttu-id="9119a-397">Tablica elementów do wykonania</span><span class="sxs-lookup"><span data-stu-id="9119a-397">Array of to-do items</span></span>|
+|<span data-ttu-id="9119a-398">Pobierz/api/TodoItems/{id}</span><span class="sxs-lookup"><span data-stu-id="9119a-398">GET /api/TodoItems/{id}</span></span> | <span data-ttu-id="9119a-399">Pobieranie elementu według identyfikatora</span><span class="sxs-lookup"><span data-stu-id="9119a-399">Get an item by ID</span></span> | <span data-ttu-id="9119a-400">Brak</span><span class="sxs-lookup"><span data-stu-id="9119a-400">None</span></span> | <span data-ttu-id="9119a-401">Element do wykonania</span><span class="sxs-lookup"><span data-stu-id="9119a-401">To-do item</span></span>|
+|<span data-ttu-id="9119a-402">Opublikuj/api/TodoItems</span><span class="sxs-lookup"><span data-stu-id="9119a-402">POST /api/TodoItems</span></span> | <span data-ttu-id="9119a-403">Dodaj nowy element</span><span class="sxs-lookup"><span data-stu-id="9119a-403">Add a new item</span></span> | <span data-ttu-id="9119a-404">Element do wykonania</span><span class="sxs-lookup"><span data-stu-id="9119a-404">To-do item</span></span> | <span data-ttu-id="9119a-405">Element do wykonania</span><span class="sxs-lookup"><span data-stu-id="9119a-405">To-do item</span></span> |
+|<span data-ttu-id="9119a-406">Umieść/api/TodoItems/{id}</span><span class="sxs-lookup"><span data-stu-id="9119a-406">PUT /api/TodoItems/{id}</span></span> | <span data-ttu-id="9119a-407">Aktualizowanie istniejącego elementu&nbsp;</span><span class="sxs-lookup"><span data-stu-id="9119a-407">Update an existing item &nbsp;</span></span> | <span data-ttu-id="9119a-408">Element do wykonania</span><span class="sxs-lookup"><span data-stu-id="9119a-408">To-do item</span></span> | <span data-ttu-id="9119a-409">Brak</span><span class="sxs-lookup"><span data-stu-id="9119a-409">None</span></span> |
+|<span data-ttu-id="9119a-410">Usuń/api/TodoItems/{id} &nbsp;&nbsp;</span><span class="sxs-lookup"><span data-stu-id="9119a-410">DELETE /api/TodoItems/{id} &nbsp; &nbsp;</span></span> | <span data-ttu-id="9119a-411">Usuń element &nbsp;&nbsp;</span><span class="sxs-lookup"><span data-stu-id="9119a-411">Delete an item &nbsp; &nbsp;</span></span> | <span data-ttu-id="9119a-412">Brak</span><span class="sxs-lookup"><span data-stu-id="9119a-412">None</span></span> | <span data-ttu-id="9119a-413">Brak</span><span class="sxs-lookup"><span data-stu-id="9119a-413">None</span></span>|
 
-<span data-ttu-id="9fb67-411">Na poniższym diagramie przedstawiono projekt aplikacji.</span><span class="sxs-lookup"><span data-stu-id="9fb67-411">The following diagram shows the design of the app.</span></span>
+<span data-ttu-id="9119a-414">Na poniższym diagramie przedstawiono projekt aplikacji.</span><span class="sxs-lookup"><span data-stu-id="9119a-414">The following diagram shows the design of the app.</span></span>
 
 ![Klient jest reprezentowany przez pole po lewej stronie.](first-web-api/_static/architecture.png)
 
-## <a name="prerequisites"></a><span data-ttu-id="9fb67-417">Wymagania wstępne</span><span class="sxs-lookup"><span data-stu-id="9fb67-417">Prerequisites</span></span>
+## <a name="prerequisites"></a><span data-ttu-id="9119a-420">Wymagania wstępne</span><span class="sxs-lookup"><span data-stu-id="9119a-420">Prerequisites</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="9fb67-418">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="9fb67-418">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="9119a-421">Program Visual Studio</span><span class="sxs-lookup"><span data-stu-id="9119a-421">Visual Studio</span></span>](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs2019-2.2.md)]
 
-# <a name="visual-studio-code"></a>[<span data-ttu-id="9fb67-419">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="9fb67-419">Visual Studio Code</span></span>](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[<span data-ttu-id="9119a-422">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="9119a-422">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vsc-2.2.md)]
 
-# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="9fb67-420">Visual Studio dla komputerów Mac</span><span class="sxs-lookup"><span data-stu-id="9fb67-420">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="9119a-423">Visual Studio dla komputerów Mac</span><span class="sxs-lookup"><span data-stu-id="9119a-423">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
 [!INCLUDE[](~/includes/net-core-prereqs-mac-2.2.md)]
 
 ---
 
-## <a name="create-a-web-project"></a><span data-ttu-id="9fb67-421">Tworzenie projektu sieci Web</span><span class="sxs-lookup"><span data-stu-id="9fb67-421">Create a web project</span></span>
+## <a name="create-a-web-project"></a><span data-ttu-id="9119a-424">Tworzenie projektu sieci Web</span><span class="sxs-lookup"><span data-stu-id="9119a-424">Create a web project</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="9fb67-422">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="9fb67-422">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="9119a-425">Program Visual Studio</span><span class="sxs-lookup"><span data-stu-id="9119a-425">Visual Studio</span></span>](#tab/visual-studio)
 
-* <span data-ttu-id="9fb67-423">Z menu **plik** wybierz pozycję **Nowy** > **projekt**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-423">From the **File** menu, select **New** > **Project**.</span></span>
-* <span data-ttu-id="9fb67-424">Wybierz szablon **aplikacja sieci Web ASP.NET Core** a następnie kliknij przycisk **dalej**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-424">Select the **ASP.NET Core Web Application** template and click **Next**.</span></span>
-* <span data-ttu-id="9fb67-425">Nazwij projekt *TodoApi* i kliknij pozycję **Utwórz**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-425">Name the project *TodoApi* and click **Create**.</span></span>
-* <span data-ttu-id="9fb67-426">W oknie dialogowym **Tworzenie nowej ASP.NET Core aplikacji sieci Web** upewnij się, że wybrano opcję **.net Core** i **ASP.NET Core 2,2** .</span><span class="sxs-lookup"><span data-stu-id="9fb67-426">In the **Create a new ASP.NET Core Web Application** dialog, confirm that **.NET Core** and **ASP.NET Core 2.2** are selected.</span></span> <span data-ttu-id="9fb67-427">Wybierz szablon **interfejsu API** i kliknij przycisk **Utwórz**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-427">Select the **API** template and click **Create**.</span></span> <span data-ttu-id="9fb67-428">**Nie** zaznaczaj opcji **Włącz obsługę platformy Docker**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-428">**Don't** select **Enable Docker Support**.</span></span>
+* <span data-ttu-id="9119a-426">Z menu **plik** wybierz pozycję **Nowy** > **projekt**.</span><span class="sxs-lookup"><span data-stu-id="9119a-426">From the **File** menu, select **New** > **Project**.</span></span>
+* <span data-ttu-id="9119a-427">Wybierz szablon **aplikacja sieci Web ASP.NET Core** a następnie kliknij przycisk **dalej**.</span><span class="sxs-lookup"><span data-stu-id="9119a-427">Select the **ASP.NET Core Web Application** template and click **Next**.</span></span>
+* <span data-ttu-id="9119a-428">Nazwij projekt *TodoApi* i kliknij pozycję **Utwórz**.</span><span class="sxs-lookup"><span data-stu-id="9119a-428">Name the project *TodoApi* and click **Create**.</span></span>
+* <span data-ttu-id="9119a-429">W oknie dialogowym **Tworzenie nowej ASP.NET Core aplikacji sieci Web** upewnij się, że wybrano opcję **.net Core** i **ASP.NET Core 2,2** .</span><span class="sxs-lookup"><span data-stu-id="9119a-429">In the **Create a new ASP.NET Core Web Application** dialog, confirm that **.NET Core** and **ASP.NET Core 2.2** are selected.</span></span> <span data-ttu-id="9119a-430">Wybierz szablon **interfejsu API** i kliknij przycisk **Utwórz**.</span><span class="sxs-lookup"><span data-stu-id="9119a-430">Select the **API** template and click **Create**.</span></span> <span data-ttu-id="9119a-431">**Nie** zaznaczaj opcji **Włącz obsługę platformy Docker**.</span><span class="sxs-lookup"><span data-stu-id="9119a-431">**Don't** select **Enable Docker Support**.</span></span>
 
 ![Okno dialogowe programu VS New Project](first-web-api/_static/vs.png)
 
-# <a name="visual-studio-code"></a>[<span data-ttu-id="9fb67-430">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="9fb67-430">Visual Studio Code</span></span>](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[<span data-ttu-id="9119a-433">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="9119a-433">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
-* <span data-ttu-id="9fb67-431">Otwórz [zintegrowany terminal](https://code.visualstudio.com/docs/editor/integrated-terminal).</span><span class="sxs-lookup"><span data-stu-id="9fb67-431">Open the [integrated terminal](https://code.visualstudio.com/docs/editor/integrated-terminal).</span></span>
-* <span data-ttu-id="9fb67-432">Zmień katalog (`cd`) do folderu, który będzie zawierać folder projektu.</span><span class="sxs-lookup"><span data-stu-id="9fb67-432">Change directories (`cd`) to the folder that will contain the project folder.</span></span>
-* <span data-ttu-id="9fb67-433">Uruchom następujące polecenia:</span><span class="sxs-lookup"><span data-stu-id="9fb67-433">Run the following commands:</span></span>
+* <span data-ttu-id="9119a-434">Otwórz [zintegrowany terminal](https://code.visualstudio.com/docs/editor/integrated-terminal).</span><span class="sxs-lookup"><span data-stu-id="9119a-434">Open the [integrated terminal](https://code.visualstudio.com/docs/editor/integrated-terminal).</span></span>
+* <span data-ttu-id="9119a-435">Zmień katalog ( `cd` ) do folderu, który będzie zawierać folder projektu.</span><span class="sxs-lookup"><span data-stu-id="9119a-435">Change directories (`cd`) to the folder that will contain the project folder.</span></span>
+* <span data-ttu-id="9119a-436">Uruchom następujące polecenia:</span><span class="sxs-lookup"><span data-stu-id="9119a-436">Run the following commands:</span></span>
 
    ```dotnetcli
    dotnet new webapi -o TodoApi
    code -r TodoApi
    ```
 
-  <span data-ttu-id="9fb67-434">Te polecenia tworzą nowy projekt internetowego interfejsu API i otwierają nowe wystąpienie Visual Studio Code w nowym folderze projektu.</span><span class="sxs-lookup"><span data-stu-id="9fb67-434">These commands create a new web API project and open a new instance of Visual Studio Code in the new project folder.</span></span>
+  <span data-ttu-id="9119a-437">Te polecenia tworzą nowy projekt internetowego interfejsu API i otwierają nowe wystąpienie Visual Studio Code w nowym folderze projektu.</span><span class="sxs-lookup"><span data-stu-id="9119a-437">These commands create a new web API project and open a new instance of Visual Studio Code in the new project folder.</span></span>
 
-* <span data-ttu-id="9fb67-435">Gdy zostanie wyświetlone okno dialogowe z pytaniem, czy chcesz dodać wymagane zasoby do projektu, wybierz opcję **tak**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-435">When a dialog box asks if you want to add required assets to the project, select **Yes**.</span></span>
+* <span data-ttu-id="9119a-438">Gdy zostanie wyświetlone okno dialogowe z pytaniem, czy chcesz dodać wymagane zasoby do projektu, wybierz opcję **tak**.</span><span class="sxs-lookup"><span data-stu-id="9119a-438">When a dialog box asks if you want to add required assets to the project, select **Yes**.</span></span>
 
-# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="9fb67-436">Visual Studio dla komputerów Mac</span><span class="sxs-lookup"><span data-stu-id="9fb67-436">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="9119a-439">Visual Studio dla komputerów Mac</span><span class="sxs-lookup"><span data-stu-id="9119a-439">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-* <span data-ttu-id="9fb67-437">Wybierz pozycję **plik** > **nowe rozwiązanie**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-437">Select **File** > **New Solution**.</span></span>
+* <span data-ttu-id="9119a-440">Wybierz pozycję **plik** > **nowe rozwiązanie**.</span><span class="sxs-lookup"><span data-stu-id="9119a-440">Select **File** > **New Solution**.</span></span>
 
   ![macOS nowe rozwiązanie](first-web-api-mac/_static/sln.png)
 
-* <span data-ttu-id="9fb67-439">Wybierz pozycję **interfejs API** > **App** > > **Next**aplikacji **.NET Core** .</span><span class="sxs-lookup"><span data-stu-id="9fb67-439">Select **.NET Core** > **App** > **API** > **Next**.</span></span>
-
-  ![okno dialogowe nowego projektu macOS](first-web-api-mac/_static/1.png)
+* <span data-ttu-id="9119a-442">W Visual Studio dla komputerów Mac starszej niż wersja 8,6 Wybierz **.NET Core**pozycję  >  **App**  >  **interfejs API**aplikacji .NET Core  >  **Next**.</span><span class="sxs-lookup"><span data-stu-id="9119a-442">In Visual Studio for Mac earlier than version 8.6, select **.NET Core** > **App** > **API** > **Next**.</span></span> <span data-ttu-id="9119a-443">W wersji 8,6 lub nowszej wybierz pozycję **Web and Console**  >  **App**  >  **interfejs API**  >  **Next**aplikacji sieci Web i konsoli.</span><span class="sxs-lookup"><span data-stu-id="9119a-443">In version 8.6 or later, select **Web and Console** > **App** > **API** > **Next**.</span></span>
   
-* <span data-ttu-id="9fb67-441">W oknie dialogowym **Konfigurowanie nowego interfejsu API sieci Web ASP.NET Core** zaakceptuj domyślną **platformę docelową** programu \**.NET Core 2,2*.</span><span class="sxs-lookup"><span data-stu-id="9fb67-441">In the **Configure your new ASP.NET Core Web API** dialog, accept the default **Target Framework** of \**.NET Core 2.2*.</span></span>
+* <span data-ttu-id="9119a-444">W oknie dialogowym **Konfigurowanie nowego interfejsu API sieci Web ASP.NET Core** zaakceptuj domyślną **platformę docelową** programu \**.NET Core 2,2*.</span><span class="sxs-lookup"><span data-stu-id="9119a-444">In the **Configure your new ASP.NET Core Web API** dialog, accept the default **Target Framework** of \**.NET Core 2.2*.</span></span>
 
-* <span data-ttu-id="9fb67-442">Wprowadź *TodoApi* jako **nazwę projektu** , a następnie wybierz pozycję **Utwórz**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-442">Enter *TodoApi* for the **Project Name** and then select **Create**.</span></span>
+* <span data-ttu-id="9119a-445">Wprowadź *TodoApi* jako **nazwę projektu** , a następnie wybierz pozycję **Utwórz**.</span><span class="sxs-lookup"><span data-stu-id="9119a-445">Enter *TodoApi* for the **Project Name** and then select **Create**.</span></span>
 
   ![okno dialogowe konfiguracji](first-web-api-mac/_static/2.png)
 
 ---
 
-### <a name="test-the-api"></a><span data-ttu-id="9fb67-444">Testowanie interfejsu API</span><span class="sxs-lookup"><span data-stu-id="9fb67-444">Test the API</span></span>
+### <a name="test-the-api"></a><span data-ttu-id="9119a-447">Testowanie interfejsu API</span><span class="sxs-lookup"><span data-stu-id="9119a-447">Test the API</span></span>
 
-<span data-ttu-id="9fb67-445">Szablon projektu tworzy `values` interfejs API.</span><span class="sxs-lookup"><span data-stu-id="9fb67-445">The project template creates a `values` API.</span></span> <span data-ttu-id="9fb67-446">Wywołaj `Get` metodę z przeglądarki, aby przetestować aplikację.</span><span class="sxs-lookup"><span data-stu-id="9fb67-446">Call the `Get` method from a browser to test the app.</span></span>
+<span data-ttu-id="9119a-448">Szablon projektu tworzy `values` interfejs API.</span><span class="sxs-lookup"><span data-stu-id="9119a-448">The project template creates a `values` API.</span></span> <span data-ttu-id="9119a-449">Wywołaj `Get` metodę z przeglądarki, aby przetestować aplikację.</span><span class="sxs-lookup"><span data-stu-id="9119a-449">Call the `Get` method from a browser to test the app.</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="9fb67-447">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="9fb67-447">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="9119a-450">Program Visual Studio</span><span class="sxs-lookup"><span data-stu-id="9119a-450">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="9fb67-448">Naciśnij klawisze CTRL + F5, aby uruchomić aplikację.</span><span class="sxs-lookup"><span data-stu-id="9fb67-448">Press Ctrl+F5 to run the app.</span></span> <span data-ttu-id="9fb67-449">Program Visual Studio uruchamia przeglądarkę i przechodzi do `https://localhost:<port>/api/values`lokalizacji, gdzie `<port>` jest losowo wybierany numer portu.</span><span class="sxs-lookup"><span data-stu-id="9fb67-449">Visual Studio launches a browser and navigates to `https://localhost:<port>/api/values`, where `<port>` is a randomly chosen port number.</span></span>
+<span data-ttu-id="9119a-451">Naciśnij klawisze CTRL + F5, aby uruchomić aplikację.</span><span class="sxs-lookup"><span data-stu-id="9119a-451">Press Ctrl+F5 to run the app.</span></span> <span data-ttu-id="9119a-452">Program Visual Studio uruchamia przeglądarkę i przechodzi do `https://localhost:<port>/api/values` lokalizacji, gdzie `<port>` jest losowo wybierany numer portu.</span><span class="sxs-lookup"><span data-stu-id="9119a-452">Visual Studio launches a browser and navigates to `https://localhost:<port>/api/values`, where `<port>` is a randomly chosen port number.</span></span>
 
-<span data-ttu-id="9fb67-450">Jeśli zostanie wyświetlone okno dialogowe z pytaniem, czy należy zaufać certyfikatowi IIS Express, wybierz pozycję **tak**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-450">If you get a dialog box that asks if you should trust the IIS Express certificate, select **Yes**.</span></span> <span data-ttu-id="9fb67-451">W wyświetlonym oknie dialogowym **ostrzeżenia o zabezpieczeniach** wybierz pozycję **tak**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-451">In the **Security Warning** dialog that appears next, select **Yes**.</span></span>
+<span data-ttu-id="9119a-453">Jeśli zostanie wyświetlone okno dialogowe z pytaniem, czy należy zaufać certyfikatowi IIS Express, wybierz pozycję **tak**.</span><span class="sxs-lookup"><span data-stu-id="9119a-453">If you get a dialog box that asks if you should trust the IIS Express certificate, select **Yes**.</span></span> <span data-ttu-id="9119a-454">W wyświetlonym oknie dialogowym **ostrzeżenia o zabezpieczeniach** wybierz pozycję **tak**.</span><span class="sxs-lookup"><span data-stu-id="9119a-454">In the **Security Warning** dialog that appears next, select **Yes**.</span></span>
 
-# <a name="visual-studio-code"></a>[<span data-ttu-id="9fb67-452">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="9fb67-452">Visual Studio Code</span></span>](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[<span data-ttu-id="9119a-455">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="9119a-455">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
-<span data-ttu-id="9fb67-453">Naciśnij klawisze CTRL + F5, aby uruchomić aplikację.</span><span class="sxs-lookup"><span data-stu-id="9fb67-453">Press Ctrl+F5 to run the app.</span></span> <span data-ttu-id="9fb67-454">W przeglądarce przejdź do następującego adresu URL: `https://localhost:5001/api/values`.</span><span class="sxs-lookup"><span data-stu-id="9fb67-454">In a browser, go to following URL: `https://localhost:5001/api/values`.</span></span>
+<span data-ttu-id="9119a-456">Naciśnij klawisze CTRL + F5, aby uruchomić aplikację.</span><span class="sxs-lookup"><span data-stu-id="9119a-456">Press Ctrl+F5 to run the app.</span></span> <span data-ttu-id="9119a-457">W przeglądarce przejdź do następującego adresu URL: `https://localhost:5001/api/values` .</span><span class="sxs-lookup"><span data-stu-id="9119a-457">In a browser, go to following URL: `https://localhost:5001/api/values`.</span></span>
 
-# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="9fb67-455">Visual Studio dla komputerów Mac</span><span class="sxs-lookup"><span data-stu-id="9fb67-455">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="9119a-458">Visual Studio dla komputerów Mac</span><span class="sxs-lookup"><span data-stu-id="9119a-458">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-<span data-ttu-id="9fb67-456">Wybierz pozycję **Uruchom** > **Rozpocznij debugowanie** , aby uruchomić aplikację.</span><span class="sxs-lookup"><span data-stu-id="9fb67-456">Select **Run** > **Start Debugging** to launch the app.</span></span> <span data-ttu-id="9fb67-457">Visual Studio dla komputerów Mac uruchamia przeglądarkę i nawiguje do `https://localhost:<port>`, gdzie `<port>` jest losowo wybranym numerem portu.</span><span class="sxs-lookup"><span data-stu-id="9fb67-457">Visual Studio for Mac launches a browser and navigates to `https://localhost:<port>`, where `<port>` is a randomly chosen port number.</span></span> <span data-ttu-id="9fb67-458">Zwracany jest błąd HTTP 404 (nie znaleziono).</span><span class="sxs-lookup"><span data-stu-id="9fb67-458">An HTTP 404 (Not Found) error is returned.</span></span> <span data-ttu-id="9fb67-459">Dołącz `/api/values` do adresu URL (Zmień adres URL na `https://localhost:<port>/api/values`).</span><span class="sxs-lookup"><span data-stu-id="9fb67-459">Append `/api/values` to the URL (change the URL to `https://localhost:<port>/api/values`).</span></span>
+<span data-ttu-id="9119a-459">Wybierz pozycję **Uruchom**  >  **Rozpocznij debugowanie** , aby uruchomić aplikację.</span><span class="sxs-lookup"><span data-stu-id="9119a-459">Select **Run** > **Start Debugging** to launch the app.</span></span> <span data-ttu-id="9119a-460">Visual Studio dla komputerów Mac uruchamia przeglądarkę i nawiguje do `https://localhost:<port>` , gdzie `<port>` jest losowo wybranym numerem portu.</span><span class="sxs-lookup"><span data-stu-id="9119a-460">Visual Studio for Mac launches a browser and navigates to `https://localhost:<port>`, where `<port>` is a randomly chosen port number.</span></span> <span data-ttu-id="9119a-461">Zwracany jest błąd HTTP 404 (nie znaleziono).</span><span class="sxs-lookup"><span data-stu-id="9119a-461">An HTTP 404 (Not Found) error is returned.</span></span> <span data-ttu-id="9119a-462">Dołącz `/api/values` do adresu URL (Zmień adres URL na `https://localhost:<port>/api/values` ).</span><span class="sxs-lookup"><span data-stu-id="9119a-462">Append `/api/values` to the URL (change the URL to `https://localhost:<port>/api/values`).</span></span>
 
 ---
 
-<span data-ttu-id="9fb67-460">Zostanie zwrócony następujący kod JSON:</span><span class="sxs-lookup"><span data-stu-id="9fb67-460">The following JSON is returned:</span></span>
+<span data-ttu-id="9119a-463">Zostanie zwrócony następujący kod JSON:</span><span class="sxs-lookup"><span data-stu-id="9119a-463">The following JSON is returned:</span></span>
 
 ```json
 ["value1","value2"]
 ```
 
-## <a name="add-a-model-class"></a><span data-ttu-id="9fb67-461">Dodaj klasę modelu</span><span class="sxs-lookup"><span data-stu-id="9fb67-461">Add a model class</span></span>
+## <a name="add-a-model-class"></a><span data-ttu-id="9119a-464">Dodaj klasę modelu</span><span class="sxs-lookup"><span data-stu-id="9119a-464">Add a model class</span></span>
 
-<span data-ttu-id="9fb67-462">*Model* to zestaw klas, które reprezentują dane zarządzane przez aplikację.</span><span class="sxs-lookup"><span data-stu-id="9fb67-462">A *model* is a set of classes that represent the data that the app manages.</span></span> <span data-ttu-id="9fb67-463">Model tej aplikacji jest pojedynczą `TodoItem` klasą.</span><span class="sxs-lookup"><span data-stu-id="9fb67-463">The model for this app is a single `TodoItem` class.</span></span>
+<span data-ttu-id="9119a-465">*Model* to zestaw klas, które reprezentują dane zarządzane przez aplikację.</span><span class="sxs-lookup"><span data-stu-id="9119a-465">A *model* is a set of classes that represent the data that the app manages.</span></span> <span data-ttu-id="9119a-466">Model tej aplikacji jest pojedynczą `TodoItem` klasą.</span><span class="sxs-lookup"><span data-stu-id="9119a-466">The model for this app is a single `TodoItem` class.</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="9fb67-464">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="9fb67-464">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="9119a-467">Program Visual Studio</span><span class="sxs-lookup"><span data-stu-id="9119a-467">Visual Studio</span></span>](#tab/visual-studio)
 
-* <span data-ttu-id="9fb67-465">W **Eksplorator rozwiązań**kliknij prawym przyciskiem myszy projekt.</span><span class="sxs-lookup"><span data-stu-id="9fb67-465">In **Solution Explorer**, right-click the project.</span></span> <span data-ttu-id="9fb67-466">Wybierz pozycję **Dodaj** > **Nowy folder**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-466">Select **Add** > **New Folder**.</span></span> <span data-ttu-id="9fb67-467">Nazwij *modele*folderów.</span><span class="sxs-lookup"><span data-stu-id="9fb67-467">Name the folder *Models*.</span></span>
+* <span data-ttu-id="9119a-468">W **Eksplorator rozwiązań**kliknij prawym przyciskiem myszy projekt.</span><span class="sxs-lookup"><span data-stu-id="9119a-468">In **Solution Explorer**, right-click the project.</span></span> <span data-ttu-id="9119a-469">Wybierz pozycję **Dodaj**  >  **Nowy folder**.</span><span class="sxs-lookup"><span data-stu-id="9119a-469">Select **Add** > **New Folder**.</span></span> <span data-ttu-id="9119a-470">Nazwij *modele*folderów.</span><span class="sxs-lookup"><span data-stu-id="9119a-470">Name the folder *Models*.</span></span>
 
-* <span data-ttu-id="9fb67-468">Kliknij prawym przyciskiem myszy folder *modele* i wybierz polecenie **Dodaj** > **klasę**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-468">Right-click the *Models* folder and select **Add** > **Class**.</span></span> <span data-ttu-id="9fb67-469">Nadaj klasie nazwę *TodoItem* i wybierz pozycję **Dodaj**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-469">Name the class *TodoItem* and select **Add**.</span></span>
+* <span data-ttu-id="9119a-471">Kliknij prawym przyciskiem myszy folder *modele* i wybierz polecenie **Dodaj**  >  **klasę**.</span><span class="sxs-lookup"><span data-stu-id="9119a-471">Right-click the *Models* folder and select **Add** > **Class**.</span></span> <span data-ttu-id="9119a-472">Nadaj klasie nazwę *TodoItem* i wybierz pozycję **Dodaj**.</span><span class="sxs-lookup"><span data-stu-id="9119a-472">Name the class *TodoItem* and select **Add**.</span></span>
 
-* <span data-ttu-id="9fb67-470">Zastąp kod szablonu następującym kodem:</span><span class="sxs-lookup"><span data-stu-id="9fb67-470">Replace the template code with the following code:</span></span>
+* <span data-ttu-id="9119a-473">Zastąp kod szablonu następującym kodem:</span><span class="sxs-lookup"><span data-stu-id="9119a-473">Replace the template code with the following code:</span></span>
 
-# <a name="visual-studio-code"></a>[<span data-ttu-id="9fb67-471">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="9fb67-471">Visual Studio Code</span></span>](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[<span data-ttu-id="9119a-474">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="9119a-474">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
-* <span data-ttu-id="9fb67-472">Dodaj folder o nazwie *models*.</span><span class="sxs-lookup"><span data-stu-id="9fb67-472">Add a folder named *Models*.</span></span>
+* <span data-ttu-id="9119a-475">Dodaj folder o nazwie *models*.</span><span class="sxs-lookup"><span data-stu-id="9119a-475">Add a folder named *Models*.</span></span>
 
-* <span data-ttu-id="9fb67-473">Dodaj `TodoItem` klasę do folderu *models* o następującym kodzie:</span><span class="sxs-lookup"><span data-stu-id="9fb67-473">Add a `TodoItem` class to the *Models* folder with the following code:</span></span>
+* <span data-ttu-id="9119a-476">Dodaj `TodoItem` klasę do folderu *models* o następującym kodzie:</span><span class="sxs-lookup"><span data-stu-id="9119a-476">Add a `TodoItem` class to the *Models* folder with the following code:</span></span>
 
-# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="9fb67-474">Visual Studio dla komputerów Mac</span><span class="sxs-lookup"><span data-stu-id="9fb67-474">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="9119a-477">Visual Studio dla komputerów Mac</span><span class="sxs-lookup"><span data-stu-id="9119a-477">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-* <span data-ttu-id="9fb67-475">Kliknij prawym przyciskiem myszy projekt.</span><span class="sxs-lookup"><span data-stu-id="9fb67-475">Right-click the project.</span></span> <span data-ttu-id="9fb67-476">Wybierz pozycję **Dodaj** > **Nowy folder**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-476">Select **Add** > **New Folder**.</span></span> <span data-ttu-id="9fb67-477">Nazwij *modele*folderów.</span><span class="sxs-lookup"><span data-stu-id="9fb67-477">Name the folder *Models*.</span></span>
+* <span data-ttu-id="9119a-478">Kliknij prawym przyciskiem myszy projekt.</span><span class="sxs-lookup"><span data-stu-id="9119a-478">Right-click the project.</span></span> <span data-ttu-id="9119a-479">Wybierz pozycję **Dodaj**  >  **Nowy folder**.</span><span class="sxs-lookup"><span data-stu-id="9119a-479">Select **Add** > **New Folder**.</span></span> <span data-ttu-id="9119a-480">Nazwij *modele*folderów.</span><span class="sxs-lookup"><span data-stu-id="9119a-480">Name the folder *Models*.</span></span>
 
   ![Nowy folder](first-web-api-mac/_static/folder.png)
 
-* <span data-ttu-id="9fb67-479">Kliknij prawym przyciskiem myszy folder *modele* , a następnie wybierz pozycję **Dodaj** > **nowy plik** > **ogólna** > **pusta Klasa**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-479">Right-click the *Models* folder, and select **Add** > **New File** > **General** > **Empty Class**.</span></span>
+* <span data-ttu-id="9119a-482">Kliknij prawym przyciskiem myszy folder *modele* , a następnie wybierz pozycję **Dodaj** > **nowy plik** > **ogólna** > **pusta Klasa**.</span><span class="sxs-lookup"><span data-stu-id="9119a-482">Right-click the *Models* folder, and select **Add** > **New File** > **General** > **Empty Class**.</span></span>
 
-* <span data-ttu-id="9fb67-480">Nazwij klasę *TodoItem*, a następnie kliknij pozycję **New (nowy**).</span><span class="sxs-lookup"><span data-stu-id="9fb67-480">Name the class *TodoItem*, and then click **New**.</span></span>
+* <span data-ttu-id="9119a-483">Nazwij klasę *TodoItem*, a następnie kliknij pozycję **New (nowy**).</span><span class="sxs-lookup"><span data-stu-id="9119a-483">Name the class *TodoItem*, and then click **New**.</span></span>
 
-* <span data-ttu-id="9fb67-481">Zastąp kod szablonu następującym kodem:</span><span class="sxs-lookup"><span data-stu-id="9fb67-481">Replace the template code with the following code:</span></span>
+* <span data-ttu-id="9119a-484">Zastąp kod szablonu następującym kodem:</span><span class="sxs-lookup"><span data-stu-id="9119a-484">Replace the template code with the following code:</span></span>
 
 ---
 
   [!code-csharp[](first-web-api/samples/2.2/TodoApi/Models/TodoItem.cs)]
 
-<span data-ttu-id="9fb67-482">`Id` Właściwość działa jako unikatowy klucz w relacyjnej bazie danych.</span><span class="sxs-lookup"><span data-stu-id="9fb67-482">The `Id` property functions as the unique key in a relational database.</span></span>
+<span data-ttu-id="9119a-485">`Id`Właściwość działa jako unikatowy klucz w relacyjnej bazie danych.</span><span class="sxs-lookup"><span data-stu-id="9119a-485">The `Id` property functions as the unique key in a relational database.</span></span>
 
-<span data-ttu-id="9fb67-483">Klasy modelu mogą przejść do dowolnego miejsca w projekcie, ale folder *modele* jest używany przez Konwencję.</span><span class="sxs-lookup"><span data-stu-id="9fb67-483">Model classes can go anywhere in the project, but the *Models* folder is used by convention.</span></span>
+<span data-ttu-id="9119a-486">Klasy modelu mogą przejść do dowolnego miejsca w projekcie, ale folder *modele* jest używany przez Konwencję.</span><span class="sxs-lookup"><span data-stu-id="9119a-486">Model classes can go anywhere in the project, but the *Models* folder is used by convention.</span></span>
 
-## <a name="add-a-database-context"></a><span data-ttu-id="9fb67-484">Dodawanie kontekstu bazy danych</span><span class="sxs-lookup"><span data-stu-id="9fb67-484">Add a database context</span></span>
+## <a name="add-a-database-context"></a><span data-ttu-id="9119a-487">Dodawanie kontekstu bazy danych</span><span class="sxs-lookup"><span data-stu-id="9119a-487">Add a database context</span></span>
 
-<span data-ttu-id="9fb67-485">*Kontekst bazy danych* jest główną klasą, która koordynuje Entity Framework funkcji dla modelu danych.</span><span class="sxs-lookup"><span data-stu-id="9fb67-485">The *database context* is the main class that coordinates Entity Framework functionality for a data model.</span></span> <span data-ttu-id="9fb67-486">Ta klasa jest tworzona przez wyprowadzanie z `Microsoft.EntityFrameworkCore.DbContext` klasy.</span><span class="sxs-lookup"><span data-stu-id="9fb67-486">This class is created by deriving from the `Microsoft.EntityFrameworkCore.DbContext` class.</span></span>
+<span data-ttu-id="9119a-488">*Kontekst bazy danych* jest główną klasą, która koordynuje Entity Framework funkcji dla modelu danych.</span><span class="sxs-lookup"><span data-stu-id="9119a-488">The *database context* is the main class that coordinates Entity Framework functionality for a data model.</span></span> <span data-ttu-id="9119a-489">Ta klasa jest tworzona przez wyprowadzanie z `Microsoft.EntityFrameworkCore.DbContext` klasy.</span><span class="sxs-lookup"><span data-stu-id="9119a-489">This class is created by deriving from the `Microsoft.EntityFrameworkCore.DbContext` class.</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="9fb67-487">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="9fb67-487">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="9119a-490">Program Visual Studio</span><span class="sxs-lookup"><span data-stu-id="9119a-490">Visual Studio</span></span>](#tab/visual-studio)
 
-* <span data-ttu-id="9fb67-488">Kliknij prawym przyciskiem myszy folder *modele* i wybierz polecenie **Dodaj** > **klasę**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-488">Right-click the *Models* folder and select **Add** > **Class**.</span></span> <span data-ttu-id="9fb67-489">Nadaj klasie nazwę *TodoContext* i kliknij przycisk **Dodaj**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-489">Name the class *TodoContext* and click **Add**.</span></span>
+* <span data-ttu-id="9119a-491">Kliknij prawym przyciskiem myszy folder *modele* i wybierz polecenie **Dodaj**  >  **klasę**.</span><span class="sxs-lookup"><span data-stu-id="9119a-491">Right-click the *Models* folder and select **Add** > **Class**.</span></span> <span data-ttu-id="9119a-492">Nadaj klasie nazwę *TodoContext* i kliknij przycisk **Dodaj**.</span><span class="sxs-lookup"><span data-stu-id="9119a-492">Name the class *TodoContext* and click **Add**.</span></span>
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="9fb67-490">Visual Studio Code/Visual Studio dla komputerów Mac</span><span class="sxs-lookup"><span data-stu-id="9fb67-490">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="9119a-493">Visual Studio Code/Visual Studio dla komputerów Mac</span><span class="sxs-lookup"><span data-stu-id="9119a-493">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
-* <span data-ttu-id="9fb67-491">Dodaj `TodoContext` klasę do folderu *models* .</span><span class="sxs-lookup"><span data-stu-id="9fb67-491">Add a `TodoContext` class to the *Models* folder.</span></span>
+* <span data-ttu-id="9119a-494">Dodaj `TodoContext` klasę do folderu *models* .</span><span class="sxs-lookup"><span data-stu-id="9119a-494">Add a `TodoContext` class to the *Models* folder.</span></span>
 
 ---
 
-* <span data-ttu-id="9fb67-492">Zastąp kod szablonu następującym kodem:</span><span class="sxs-lookup"><span data-stu-id="9fb67-492">Replace the template code with the following code:</span></span>
+* <span data-ttu-id="9119a-495">Zastąp kod szablonu następującym kodem:</span><span class="sxs-lookup"><span data-stu-id="9119a-495">Replace the template code with the following code:</span></span>
 
   [!code-csharp[](first-web-api/samples/2.2/TodoApi/Models/TodoContext.cs)]
 
-## <a name="register-the-database-context"></a><span data-ttu-id="9fb67-493">Rejestrowanie kontekstu bazy danych</span><span class="sxs-lookup"><span data-stu-id="9fb67-493">Register the database context</span></span>
+## <a name="register-the-database-context"></a><span data-ttu-id="9119a-496">Rejestrowanie kontekstu bazy danych</span><span class="sxs-lookup"><span data-stu-id="9119a-496">Register the database context</span></span>
 
-<span data-ttu-id="9fb67-494">W ASP.NET Core usługi, takie jak kontekst bazy danych, muszą być zarejestrowane z kontenerem [iniekcji zależności (di)](xref:fundamentals/dependency-injection) .</span><span class="sxs-lookup"><span data-stu-id="9fb67-494">In ASP.NET Core, services such as the DB context must be registered with the [dependency injection (DI)](xref:fundamentals/dependency-injection) container.</span></span> <span data-ttu-id="9fb67-495">Kontener udostępnia usługę kontrolerom.</span><span class="sxs-lookup"><span data-stu-id="9fb67-495">The container provides the service to controllers.</span></span>
+<span data-ttu-id="9119a-497">W ASP.NET Core usługi, takie jak kontekst bazy danych, muszą być zarejestrowane z kontenerem [iniekcji zależności (di)](xref:fundamentals/dependency-injection) .</span><span class="sxs-lookup"><span data-stu-id="9119a-497">In ASP.NET Core, services such as the DB context must be registered with the [dependency injection (DI)](xref:fundamentals/dependency-injection) container.</span></span> <span data-ttu-id="9119a-498">Kontener udostępnia usługę kontrolerom.</span><span class="sxs-lookup"><span data-stu-id="9119a-498">The container provides the service to controllers.</span></span>
 
-<span data-ttu-id="9fb67-496">Zaktualizuj *Startup.cs* o następujący wyróżniony kod:</span><span class="sxs-lookup"><span data-stu-id="9fb67-496">Update *Startup.cs* with the following highlighted code:</span></span>
+<span data-ttu-id="9119a-499">Zaktualizuj *Startup.cs* o następujący wyróżniony kod:</span><span class="sxs-lookup"><span data-stu-id="9119a-499">Update *Startup.cs* with the following highlighted code:</span></span>
 
 [!code-csharp[](first-web-api/samples/2.2/TodoApi/Startup1.cs?highlight=5,8,25-26&name=snippet_all)]
 
-<span data-ttu-id="9fb67-497">Powyższy kod ma następujące działanie:</span><span class="sxs-lookup"><span data-stu-id="9fb67-497">The preceding code:</span></span>
+<span data-ttu-id="9119a-500">Powyższy kod ma następujące działanie:</span><span class="sxs-lookup"><span data-stu-id="9119a-500">The preceding code:</span></span>
 
-* <span data-ttu-id="9fb67-498">Usuwa nieużywane `using` deklaracje.</span><span class="sxs-lookup"><span data-stu-id="9fb67-498">Removes unused `using` declarations.</span></span>
-* <span data-ttu-id="9fb67-499">Dodaje kontekst bazy danych do kontenera DI.</span><span class="sxs-lookup"><span data-stu-id="9fb67-499">Adds the database context to the DI container.</span></span>
-* <span data-ttu-id="9fb67-500">Określa, że kontekst bazy danych będzie używać bazy danych w pamięci.</span><span class="sxs-lookup"><span data-stu-id="9fb67-500">Specifies that the database context will use an in-memory database.</span></span>
+* <span data-ttu-id="9119a-501">Usuwa nieużywane `using` deklaracje.</span><span class="sxs-lookup"><span data-stu-id="9119a-501">Removes unused `using` declarations.</span></span>
+* <span data-ttu-id="9119a-502">Dodaje kontekst bazy danych do kontenera DI.</span><span class="sxs-lookup"><span data-stu-id="9119a-502">Adds the database context to the DI container.</span></span>
+* <span data-ttu-id="9119a-503">Określa, że kontekst bazy danych będzie używać bazy danych w pamięci.</span><span class="sxs-lookup"><span data-stu-id="9119a-503">Specifies that the database context will use an in-memory database.</span></span>
 
-## <a name="add-a-controller"></a><span data-ttu-id="9fb67-501">Dodawanie kontrolera</span><span class="sxs-lookup"><span data-stu-id="9fb67-501">Add a controller</span></span>
+## <a name="add-a-controller"></a><span data-ttu-id="9119a-504">Dodawanie kontrolera</span><span class="sxs-lookup"><span data-stu-id="9119a-504">Add a controller</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="9fb67-502">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="9fb67-502">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="9119a-505">Program Visual Studio</span><span class="sxs-lookup"><span data-stu-id="9119a-505">Visual Studio</span></span>](#tab/visual-studio)
 
-* <span data-ttu-id="9fb67-503">Kliknij prawym przyciskiem myszy folder *controllers* .</span><span class="sxs-lookup"><span data-stu-id="9fb67-503">Right-click the *Controllers* folder.</span></span>
-* <span data-ttu-id="9fb67-504">Wybierz pozycję **Dodaj** > **nowy element**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-504">Select **Add** > **New Item**.</span></span>
-* <span data-ttu-id="9fb67-505">W oknie dialogowym **Dodaj nowy element** wybierz szablon **Klasa kontrolera interfejsu API** .</span><span class="sxs-lookup"><span data-stu-id="9fb67-505">In the **Add New Item** dialog, select the **API Controller Class** template.</span></span>
-* <span data-ttu-id="9fb67-506">Nadaj klasie nazwę *TodoController*i wybierz pozycję **Dodaj**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-506">Name the class *TodoController*, and select **Add**.</span></span>
+* <span data-ttu-id="9119a-506">Kliknij prawym przyciskiem myszy folder *controllers* .</span><span class="sxs-lookup"><span data-stu-id="9119a-506">Right-click the *Controllers* folder.</span></span>
+* <span data-ttu-id="9119a-507">Wybierz pozycję **Dodaj** > **nowy element**.</span><span class="sxs-lookup"><span data-stu-id="9119a-507">Select **Add** > **New Item**.</span></span>
+* <span data-ttu-id="9119a-508">W oknie dialogowym **Dodaj nowy element** wybierz szablon **Klasa kontrolera interfejsu API** .</span><span class="sxs-lookup"><span data-stu-id="9119a-508">In the **Add New Item** dialog, select the **API Controller Class** template.</span></span>
+* <span data-ttu-id="9119a-509">Nadaj klasie nazwę *TodoController*i wybierz pozycję **Dodaj**.</span><span class="sxs-lookup"><span data-stu-id="9119a-509">Name the class *TodoController*, and select **Add**.</span></span>
 
   ![Okno dialogowe Dodawanie nowego elementu z kontrolerem w polu wyszukiwania i wybranym kontrolerem interfejsu API sieci Web](first-web-api/_static/new_controller.png)
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="9fb67-508">Visual Studio Code/Visual Studio dla komputerów Mac</span><span class="sxs-lookup"><span data-stu-id="9fb67-508">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="9119a-511">Visual Studio Code/Visual Studio dla komputerów Mac</span><span class="sxs-lookup"><span data-stu-id="9119a-511">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
-* <span data-ttu-id="9fb67-509">W folderze *controllers* Utwórz klasę o nazwie `TodoController`.</span><span class="sxs-lookup"><span data-stu-id="9fb67-509">In the *Controllers* folder, create a class named `TodoController`.</span></span>
+* <span data-ttu-id="9119a-512">W folderze *controllers* Utwórz klasę o nazwie `TodoController` .</span><span class="sxs-lookup"><span data-stu-id="9119a-512">In the *Controllers* folder, create a class named `TodoController`.</span></span>
 
 ---
 
-* <span data-ttu-id="9fb67-510">Zastąp kod szablonu następującym kodem:</span><span class="sxs-lookup"><span data-stu-id="9fb67-510">Replace the template code with the following code:</span></span>
+* <span data-ttu-id="9119a-513">Zastąp kod szablonu następującym kodem:</span><span class="sxs-lookup"><span data-stu-id="9119a-513">Replace the template code with the following code:</span></span>
 
   [!code-csharp[](first-web-api/samples/2.2/TodoApi/Controllers/TodoController2.cs?name=snippet_todo1)]
 
-<span data-ttu-id="9fb67-511">Powyższy kod ma następujące działanie:</span><span class="sxs-lookup"><span data-stu-id="9fb67-511">The preceding code:</span></span>
+<span data-ttu-id="9119a-514">Powyższy kod ma następujące działanie:</span><span class="sxs-lookup"><span data-stu-id="9119a-514">The preceding code:</span></span>
 
-* <span data-ttu-id="9fb67-512">Definiuje klasę kontrolera interfejsu API bez metod.</span><span class="sxs-lookup"><span data-stu-id="9fb67-512">Defines an API controller class without methods.</span></span>
-* <span data-ttu-id="9fb67-513">Oznacza klasę [`[ApiController]`](/dotnet/api/microsoft.aspnetcore.mvc.apicontrollerattribute) atrybutem.</span><span class="sxs-lookup"><span data-stu-id="9fb67-513">Marks the class with the [`[ApiController]`](/dotnet/api/microsoft.aspnetcore.mvc.apicontrollerattribute) attribute.</span></span> <span data-ttu-id="9fb67-514">Ten atrybut wskazuje, że kontroler odpowiada na żądania interfejsu API sieci Web.</span><span class="sxs-lookup"><span data-stu-id="9fb67-514">This attribute indicates that the controller responds to web API requests.</span></span> <span data-ttu-id="9fb67-515">Aby uzyskać informacje o określonych zachowaniach, które włącza atrybut <xref:web-api/index>, zobacz.</span><span class="sxs-lookup"><span data-stu-id="9fb67-515">For information about specific behaviors that the attribute enables, see <xref:web-api/index>.</span></span>
-* <span data-ttu-id="9fb67-516">Używa funkcji DI do iniekcji kontekstu bazy`TodoContext`danych () do kontrolera.</span><span class="sxs-lookup"><span data-stu-id="9fb67-516">Uses DI to inject the database context (`TodoContext`) into the controller.</span></span> <span data-ttu-id="9fb67-517">Kontekst bazy danych jest używany w każdej z metod [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) w kontrolerze.</span><span class="sxs-lookup"><span data-stu-id="9fb67-517">The database context is used in each of the [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) methods in the controller.</span></span>
-* <span data-ttu-id="9fb67-518">Dodaje element o nazwie `Item1` do bazy danych, jeśli baza danych jest pusta.</span><span class="sxs-lookup"><span data-stu-id="9fb67-518">Adds an item named `Item1` to the database if the database is empty.</span></span> <span data-ttu-id="9fb67-519">Ten kod znajduje się w konstruktorze, więc jest uruchamiany za każdym razem, gdy istnieje nowe żądanie HTTP.</span><span class="sxs-lookup"><span data-stu-id="9fb67-519">This code is in the constructor, so it runs every time there's a new HTTP request.</span></span> <span data-ttu-id="9fb67-520">Jeśli usuniesz wszystkie elementy, Konstruktor zostanie ponownie utworzony `Item1` przy następnym wywołaniu metody interfejsu API.</span><span class="sxs-lookup"><span data-stu-id="9fb67-520">If you delete all items, the constructor creates `Item1` again the next time an API method is called.</span></span> <span data-ttu-id="9fb67-521">Dlatego może wyglądać podobnie jak usunięcie nie zadziałało, gdy rzeczywiście zadziałało.</span><span class="sxs-lookup"><span data-stu-id="9fb67-521">So it may look like the deletion didn't work when it actually did work.</span></span>
+* <span data-ttu-id="9119a-515">Definiuje klasę kontrolera interfejsu API bez metod.</span><span class="sxs-lookup"><span data-stu-id="9119a-515">Defines an API controller class without methods.</span></span>
+* <span data-ttu-id="9119a-516">Oznacza klasę [`[ApiController]`](/dotnet/api/microsoft.aspnetcore.mvc.apicontrollerattribute) atrybutem.</span><span class="sxs-lookup"><span data-stu-id="9119a-516">Marks the class with the [`[ApiController]`](/dotnet/api/microsoft.aspnetcore.mvc.apicontrollerattribute) attribute.</span></span> <span data-ttu-id="9119a-517">Ten atrybut wskazuje, że kontroler odpowiada na żądania interfejsu API sieci Web.</span><span class="sxs-lookup"><span data-stu-id="9119a-517">This attribute indicates that the controller responds to web API requests.</span></span> <span data-ttu-id="9119a-518">Aby uzyskać informacje o określonych zachowaniach, które włącza atrybut, zobacz <xref:web-api/index> .</span><span class="sxs-lookup"><span data-stu-id="9119a-518">For information about specific behaviors that the attribute enables, see <xref:web-api/index>.</span></span>
+* <span data-ttu-id="9119a-519">Używa funkcji DI do iniekcji kontekstu bazy danych ( `TodoContext` ) do kontrolera.</span><span class="sxs-lookup"><span data-stu-id="9119a-519">Uses DI to inject the database context (`TodoContext`) into the controller.</span></span> <span data-ttu-id="9119a-520">Kontekst bazy danych jest używany w każdej z metod [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) w kontrolerze.</span><span class="sxs-lookup"><span data-stu-id="9119a-520">The database context is used in each of the [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) methods in the controller.</span></span>
+* <span data-ttu-id="9119a-521">Dodaje element o nazwie `Item1` do bazy danych, jeśli baza danych jest pusta.</span><span class="sxs-lookup"><span data-stu-id="9119a-521">Adds an item named `Item1` to the database if the database is empty.</span></span> <span data-ttu-id="9119a-522">Ten kod znajduje się w konstruktorze, więc jest uruchamiany za każdym razem, gdy istnieje nowe żądanie HTTP.</span><span class="sxs-lookup"><span data-stu-id="9119a-522">This code is in the constructor, so it runs every time there's a new HTTP request.</span></span> <span data-ttu-id="9119a-523">Jeśli usuniesz wszystkie elementy, Konstruktor zostanie ponownie utworzony `Item1` przy następnym wywołaniu metody interfejsu API.</span><span class="sxs-lookup"><span data-stu-id="9119a-523">If you delete all items, the constructor creates `Item1` again the next time an API method is called.</span></span> <span data-ttu-id="9119a-524">Dlatego może wyglądać podobnie jak usunięcie nie zadziałało, gdy rzeczywiście zadziałało.</span><span class="sxs-lookup"><span data-stu-id="9119a-524">So it may look like the deletion didn't work when it actually did work.</span></span>
 
-## <a name="add-get-methods"></a><span data-ttu-id="9fb67-522">Dodawanie metod get</span><span class="sxs-lookup"><span data-stu-id="9fb67-522">Add Get methods</span></span>
+## <a name="add-get-methods"></a><span data-ttu-id="9119a-525">Dodawanie metod get</span><span class="sxs-lookup"><span data-stu-id="9119a-525">Add Get methods</span></span>
 
-<span data-ttu-id="9fb67-523">Aby udostępnić interfejs API, który pobiera elementy do wykonania, Dodaj następujące metody do `TodoController` klasy:</span><span class="sxs-lookup"><span data-stu-id="9fb67-523">To provide an API that retrieves to-do items, add the following methods to the `TodoController` class:</span></span>
+<span data-ttu-id="9119a-526">Aby udostępnić interfejs API, który pobiera elementy do wykonania, Dodaj następujące metody do `TodoController` klasy:</span><span class="sxs-lookup"><span data-stu-id="9119a-526">To provide an API that retrieves to-do items, add the following methods to the `TodoController` class:</span></span>
 
 [!code-csharp[](first-web-api/samples/2.2/TodoApi/Controllers/TodoController.cs?name=snippet_GetAll)]
 
-<span data-ttu-id="9fb67-524">Te metody implementują dwa punkty końcowe GET:</span><span class="sxs-lookup"><span data-stu-id="9fb67-524">These methods implement two GET endpoints:</span></span>
+<span data-ttu-id="9119a-527">Te metody implementują dwa punkty końcowe GET:</span><span class="sxs-lookup"><span data-stu-id="9119a-527">These methods implement two GET endpoints:</span></span>
 
 * `GET /api/todo`
 * `GET /api/todo/{id}`
 
-<span data-ttu-id="9fb67-525">Zatrzymaj aplikację, jeśli jest nadal uruchomiona.</span><span class="sxs-lookup"><span data-stu-id="9fb67-525">Stop the app if it's still running.</span></span> <span data-ttu-id="9fb67-526">Następnie uruchom ją ponownie, aby uwzględnić najnowsze zmiany.</span><span class="sxs-lookup"><span data-stu-id="9fb67-526">Then run it again to include the latest changes.</span></span>
+<span data-ttu-id="9119a-528">Zatrzymaj aplikację, jeśli jest nadal uruchomiona.</span><span class="sxs-lookup"><span data-stu-id="9119a-528">Stop the app if it's still running.</span></span> <span data-ttu-id="9119a-529">Następnie uruchom ją ponownie, aby uwzględnić najnowsze zmiany.</span><span class="sxs-lookup"><span data-stu-id="9119a-529">Then run it again to include the latest changes.</span></span>
 
-<span data-ttu-id="9fb67-527">Przetestuj aplikację, wywołując dwa punkty końcowe z przeglądarki.</span><span class="sxs-lookup"><span data-stu-id="9fb67-527">Test the app by calling the two endpoints from a browser.</span></span> <span data-ttu-id="9fb67-528">Przykład:</span><span class="sxs-lookup"><span data-stu-id="9fb67-528">For example:</span></span>
+<span data-ttu-id="9119a-530">Przetestuj aplikację, wywołując dwa punkty końcowe z przeglądarki.</span><span class="sxs-lookup"><span data-stu-id="9119a-530">Test the app by calling the two endpoints from a browser.</span></span> <span data-ttu-id="9119a-531">Przykład:</span><span class="sxs-lookup"><span data-stu-id="9119a-531">For example:</span></span>
 
 * `https://localhost:<port>/api/todo`
 * `https://localhost:<port>/api/todo/1`
 
-<span data-ttu-id="9fb67-529">Następująca odpowiedź HTTP jest generowana przez wywołanie `GetTodoItems`:</span><span class="sxs-lookup"><span data-stu-id="9fb67-529">The following HTTP response is produced by the call to `GetTodoItems`:</span></span>
+<span data-ttu-id="9119a-532">Następująca odpowiedź HTTP jest generowana przez wywołanie `GetTodoItems` :</span><span class="sxs-lookup"><span data-stu-id="9119a-532">The following HTTP response is produced by the call to `GetTodoItems`:</span></span>
 
 ```json
 [
@@ -754,84 +754,84 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 ]
 ```
 
-## <a name="routing-and-url-paths"></a><span data-ttu-id="9fb67-530">Ścieżki routingu i adresów URL</span><span class="sxs-lookup"><span data-stu-id="9fb67-530">Routing and URL paths</span></span>
+## <a name="routing-and-url-paths"></a><span data-ttu-id="9119a-533">Ścieżki routingu i adresów URL</span><span class="sxs-lookup"><span data-stu-id="9119a-533">Routing and URL paths</span></span>
 
-<span data-ttu-id="9fb67-531">Ten [`[HttpGet]`](/dotnet/api/microsoft.aspnetcore.mvc.httpgetattribute) atrybut oznacza metodę, która reaguje na żądanie HTTP GET.</span><span class="sxs-lookup"><span data-stu-id="9fb67-531">The [`[HttpGet]`](/dotnet/api/microsoft.aspnetcore.mvc.httpgetattribute) attribute denotes a method that responds to an HTTP GET request.</span></span> <span data-ttu-id="9fb67-532">Ścieżka adresu URL dla każdej metody jest zbudowana w następujący sposób:</span><span class="sxs-lookup"><span data-stu-id="9fb67-532">The URL path for each method is constructed as follows:</span></span>
+<span data-ttu-id="9119a-534">Ten [`[HttpGet]`](/dotnet/api/microsoft.aspnetcore.mvc.httpgetattribute) atrybut oznacza metodę, która reaguje na żądanie HTTP GET.</span><span class="sxs-lookup"><span data-stu-id="9119a-534">The [`[HttpGet]`](/dotnet/api/microsoft.aspnetcore.mvc.httpgetattribute) attribute denotes a method that responds to an HTTP GET request.</span></span> <span data-ttu-id="9119a-535">Ścieżka adresu URL dla każdej metody jest zbudowana w następujący sposób:</span><span class="sxs-lookup"><span data-stu-id="9119a-535">The URL path for each method is constructed as follows:</span></span>
 
-* <span data-ttu-id="9fb67-533">Zacznij od ciągu szablonu w `Route` atrybucie kontrolera:</span><span class="sxs-lookup"><span data-stu-id="9fb67-533">Start with the template string in the controller's `Route` attribute:</span></span>
+* <span data-ttu-id="9119a-536">Zacznij od ciągu szablonu w `Route` atrybucie kontrolera:</span><span class="sxs-lookup"><span data-stu-id="9119a-536">Start with the template string in the controller's `Route` attribute:</span></span>
 
   [!code-csharp[](first-web-api/samples/2.2/TodoApi/Controllers/TodoController.cs?name=TodoController&highlight=3)]
 
-* <span data-ttu-id="9fb67-534">Zastąp `[controller]` nazwą kontrolera, którą Konwencją jest nazwa klasy kontrolera minus sufiks "Controller".</span><span class="sxs-lookup"><span data-stu-id="9fb67-534">Replace `[controller]` with the name of the controller, which by convention is the controller class name minus the "Controller" suffix.</span></span> <span data-ttu-id="9fb67-535">W przypadku tego przykładu nazwa klasy kontrolera to kontroler do **zrobienia**, więc nazwa kontrolera to "do zrobienia".</span><span class="sxs-lookup"><span data-stu-id="9fb67-535">For this sample, the controller class name is **Todo**Controller, so the controller name is "todo".</span></span> <span data-ttu-id="9fb67-536">W ASP.NET Core [routingu](xref:mvc/controllers/routing) jest rozróżniana wielkość liter.</span><span class="sxs-lookup"><span data-stu-id="9fb67-536">ASP.NET Core [routing](xref:mvc/controllers/routing) is case insensitive.</span></span>
-* <span data-ttu-id="9fb67-537">Jeśli `[HttpGet]` atrybut ma szablon trasy (na przykład `[HttpGet("products")]`), Dodaj go do ścieżki.</span><span class="sxs-lookup"><span data-stu-id="9fb67-537">If the `[HttpGet]` attribute has a route template (for example, `[HttpGet("products")]`), append that to the path.</span></span> <span data-ttu-id="9fb67-538">Ten przykład nie używa szablonu.</span><span class="sxs-lookup"><span data-stu-id="9fb67-538">This sample doesn't use a template.</span></span> <span data-ttu-id="9fb67-539">Aby uzyskać więcej informacji, zobacz temat [Routing atrybutów z atrybutami http [Verb]](xref:mvc/controllers/routing#attribute-routing-with-httpverb-attributes).</span><span class="sxs-lookup"><span data-stu-id="9fb67-539">For more information, see [Attribute routing with Http[Verb] attributes](xref:mvc/controllers/routing#attribute-routing-with-httpverb-attributes).</span></span>
+* <span data-ttu-id="9119a-537">Zastąp `[controller]` nazwą kontrolera, którą Konwencją jest nazwa klasy kontrolera minus sufiks "Controller".</span><span class="sxs-lookup"><span data-stu-id="9119a-537">Replace `[controller]` with the name of the controller, which by convention is the controller class name minus the "Controller" suffix.</span></span> <span data-ttu-id="9119a-538">W przypadku tego przykładu nazwa klasy kontrolera to kontroler do **zrobienia**, więc nazwa kontrolera to "do zrobienia".</span><span class="sxs-lookup"><span data-stu-id="9119a-538">For this sample, the controller class name is **Todo**Controller, so the controller name is "todo".</span></span> <span data-ttu-id="9119a-539">W ASP.NET Core [routingu](xref:mvc/controllers/routing) jest rozróżniana wielkość liter.</span><span class="sxs-lookup"><span data-stu-id="9119a-539">ASP.NET Core [routing](xref:mvc/controllers/routing) is case insensitive.</span></span>
+* <span data-ttu-id="9119a-540">Jeśli `[HttpGet]` atrybut ma szablon trasy (na przykład `[HttpGet("products")]` ), Dodaj go do ścieżki.</span><span class="sxs-lookup"><span data-stu-id="9119a-540">If the `[HttpGet]` attribute has a route template (for example, `[HttpGet("products")]`), append that to the path.</span></span> <span data-ttu-id="9119a-541">Ten przykład nie używa szablonu.</span><span class="sxs-lookup"><span data-stu-id="9119a-541">This sample doesn't use a template.</span></span> <span data-ttu-id="9119a-542">Aby uzyskać więcej informacji, zobacz temat [Routing atrybutów z atrybutami http [Verb]](xref:mvc/controllers/routing#attribute-routing-with-httpverb-attributes).</span><span class="sxs-lookup"><span data-stu-id="9119a-542">For more information, see [Attribute routing with Http[Verb] attributes](xref:mvc/controllers/routing#attribute-routing-with-httpverb-attributes).</span></span>
 
-<span data-ttu-id="9fb67-540">W poniższej `GetTodoItem` metodzie `"{id}"` jest zmienną zastępczą dla unikatowego identyfikatora elementu do wykonania.</span><span class="sxs-lookup"><span data-stu-id="9fb67-540">In the following `GetTodoItem` method, `"{id}"` is a placeholder variable for the unique identifier of the to-do item.</span></span> <span data-ttu-id="9fb67-541">Gdy `GetTodoItem` jest wywoływana, wartość `"{id}"` w adresie URL jest podawana do metody w jej`id` parametrze.</span><span class="sxs-lookup"><span data-stu-id="9fb67-541">When `GetTodoItem` is invoked, the value of `"{id}"` in the URL is provided to the method in its`id` parameter.</span></span>
+<span data-ttu-id="9119a-543">W poniższej `GetTodoItem` metodzie `"{id}"` jest zmienną zastępczą dla unikatowego identyfikatora elementu do wykonania.</span><span class="sxs-lookup"><span data-stu-id="9119a-543">In the following `GetTodoItem` method, `"{id}"` is a placeholder variable for the unique identifier of the to-do item.</span></span> <span data-ttu-id="9119a-544">Gdy `GetTodoItem` jest wywoływana, wartość `"{id}"` w adresie URL jest podawana do metody w jej `id` parametrze.</span><span class="sxs-lookup"><span data-stu-id="9119a-544">When `GetTodoItem` is invoked, the value of `"{id}"` in the URL is provided to the method in its`id` parameter.</span></span>
 
 [!code-csharp[](first-web-api/samples/2.2/TodoApi/Controllers/TodoController.cs?name=snippet_GetByID&highlight=1-2)]
 
-## <a name="return-values"></a><span data-ttu-id="9fb67-542">Zwracane wartości</span><span class="sxs-lookup"><span data-stu-id="9fb67-542">Return values</span></span>
+## <a name="return-values"></a><span data-ttu-id="9119a-545">Zwracane wartości</span><span class="sxs-lookup"><span data-stu-id="9119a-545">Return values</span></span>
 
-<span data-ttu-id="9fb67-543">Zwracany typ metod `GetTodoItems` i `GetTodoItem` to [ActionResult\<T> typ](xref:web-api/action-return-types#actionresultt-type).</span><span class="sxs-lookup"><span data-stu-id="9fb67-543">The return type of the `GetTodoItems` and `GetTodoItem` methods is [ActionResult\<T> type](xref:web-api/action-return-types#actionresultt-type).</span></span> <span data-ttu-id="9fb67-544">ASP.NET Core automatycznie serializować obiektu do [formatu JSON](https://www.json.org/) i zapisuje kod JSON w treści komunikatu odpowiedzi.</span><span class="sxs-lookup"><span data-stu-id="9fb67-544">ASP.NET Core automatically serializes the object to [JSON](https://www.json.org/) and writes the JSON into the body of the response message.</span></span> <span data-ttu-id="9fb67-545">Kod odpowiedzi dla tego typu zwracanego to 200, przy założeniu, że nie istnieją Nieobsłużone wyjątki.</span><span class="sxs-lookup"><span data-stu-id="9fb67-545">The response code for this return type is 200, assuming there are no unhandled exceptions.</span></span> <span data-ttu-id="9fb67-546">Nieobsłużone wyjątki są tłumaczone na błędy 5xx.</span><span class="sxs-lookup"><span data-stu-id="9fb67-546">Unhandled exceptions are translated into 5xx errors.</span></span>
+<span data-ttu-id="9119a-546">Zwracany typ `GetTodoItems` `GetTodoItem` metod i jest [ \<T> typem ActionResult](xref:web-api/action-return-types#actionresultt-type).</span><span class="sxs-lookup"><span data-stu-id="9119a-546">The return type of the `GetTodoItems` and `GetTodoItem` methods is [ActionResult\<T> type](xref:web-api/action-return-types#actionresultt-type).</span></span> <span data-ttu-id="9119a-547">ASP.NET Core automatycznie serializować obiektu do [formatu JSON](https://www.json.org/) i zapisuje kod JSON w treści komunikatu odpowiedzi.</span><span class="sxs-lookup"><span data-stu-id="9119a-547">ASP.NET Core automatically serializes the object to [JSON](https://www.json.org/) and writes the JSON into the body of the response message.</span></span> <span data-ttu-id="9119a-548">Kod odpowiedzi dla tego typu zwracanego to 200, przy założeniu, że nie istnieją Nieobsłużone wyjątki.</span><span class="sxs-lookup"><span data-stu-id="9119a-548">The response code for this return type is 200, assuming there are no unhandled exceptions.</span></span> <span data-ttu-id="9119a-549">Nieobsłużone wyjątki są tłumaczone na błędy 5xx.</span><span class="sxs-lookup"><span data-stu-id="9119a-549">Unhandled exceptions are translated into 5xx errors.</span></span>
 
-<span data-ttu-id="9fb67-547">`ActionResult`typy zwracane mogą reprezentować szeroką gamę kodów stanu HTTP.</span><span class="sxs-lookup"><span data-stu-id="9fb67-547">`ActionResult` return types can represent a wide range of HTTP status codes.</span></span> <span data-ttu-id="9fb67-548">Na przykład `GetTodoItem` może zwracać dwie różne wartości stanu:</span><span class="sxs-lookup"><span data-stu-id="9fb67-548">For example, `GetTodoItem` can return two different status values:</span></span>
+<span data-ttu-id="9119a-550">`ActionResult`typy zwracane mogą reprezentować szeroką gamę kodów stanu HTTP.</span><span class="sxs-lookup"><span data-stu-id="9119a-550">`ActionResult` return types can represent a wide range of HTTP status codes.</span></span> <span data-ttu-id="9119a-551">Na przykład `GetTodoItem` może zwracać dwie różne wartości stanu:</span><span class="sxs-lookup"><span data-stu-id="9119a-551">For example, `GetTodoItem` can return two different status values:</span></span>
 
-* <span data-ttu-id="9fb67-549">Jeśli żaden element nie jest zgodny z żądanym IDENTYFIKATORem, metoda zwraca 404 kod błędu [NOTFOUND](/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.notfound) .</span><span class="sxs-lookup"><span data-stu-id="9fb67-549">If no item matches the requested ID, the method returns a 404 [NotFound](/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.notfound) error code.</span></span>
-* <span data-ttu-id="9fb67-550">W przeciwnym razie metoda zwraca 200 z treścią odpowiedzi JSON.</span><span class="sxs-lookup"><span data-stu-id="9fb67-550">Otherwise, the method returns 200 with a JSON response body.</span></span> <span data-ttu-id="9fb67-551">Zwracanie `item` wyników w odpowiedzi HTTP 200.</span><span class="sxs-lookup"><span data-stu-id="9fb67-551">Returning `item` results in an HTTP 200 response.</span></span>
+* <span data-ttu-id="9119a-552">Jeśli żaden element nie jest zgodny z żądanym IDENTYFIKATORem, metoda zwraca 404 kod błędu [NOTFOUND](/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.notfound) .</span><span class="sxs-lookup"><span data-stu-id="9119a-552">If no item matches the requested ID, the method returns a 404 [NotFound](/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.notfound) error code.</span></span>
+* <span data-ttu-id="9119a-553">W przeciwnym razie metoda zwraca 200 z treścią odpowiedzi JSON.</span><span class="sxs-lookup"><span data-stu-id="9119a-553">Otherwise, the method returns 200 with a JSON response body.</span></span> <span data-ttu-id="9119a-554">Zwracanie `item` wyników w odpowiedzi HTTP 200.</span><span class="sxs-lookup"><span data-stu-id="9119a-554">Returning `item` results in an HTTP 200 response.</span></span>
 
-## <a name="test-the-gettodoitems-method"></a><span data-ttu-id="9fb67-552">Testowanie metody GetTodoItems</span><span class="sxs-lookup"><span data-stu-id="9fb67-552">Test the GetTodoItems method</span></span>
+## <a name="test-the-gettodoitems-method"></a><span data-ttu-id="9119a-555">Testowanie metody GetTodoItems</span><span class="sxs-lookup"><span data-stu-id="9119a-555">Test the GetTodoItems method</span></span>
 
-<span data-ttu-id="9fb67-553">Ten samouczek używa programu do testowania interfejsu API sieci Web.</span><span class="sxs-lookup"><span data-stu-id="9fb67-553">This tutorial uses Postman to test the web API.</span></span>
+<span data-ttu-id="9119a-556">Ten samouczek używa programu do testowania interfejsu API sieci Web.</span><span class="sxs-lookup"><span data-stu-id="9119a-556">This tutorial uses Postman to test the web API.</span></span>
 
-* <span data-ttu-id="9fb67-554">Zainstaluj program [Poster](https://www.getpostman.com/downloads/).</span><span class="sxs-lookup"><span data-stu-id="9fb67-554">Install [Postman](https://www.getpostman.com/downloads/).</span></span>
-* <span data-ttu-id="9fb67-555">Uruchom aplikację internetową.</span><span class="sxs-lookup"><span data-stu-id="9fb67-555">Start the web app.</span></span>
-* <span data-ttu-id="9fb67-556">Uruchom wpis.</span><span class="sxs-lookup"><span data-stu-id="9fb67-556">Start Postman.</span></span>
-* <span data-ttu-id="9fb67-557">Wyłącz **weryfikację certyfikatu SSL**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-557">Disable **SSL certificate verification**.</span></span>
+* <span data-ttu-id="9119a-557">Zainstaluj program [Poster](https://www.getpostman.com/downloads/).</span><span class="sxs-lookup"><span data-stu-id="9119a-557">Install [Postman](https://www.getpostman.com/downloads/).</span></span>
+* <span data-ttu-id="9119a-558">Uruchom aplikację internetową.</span><span class="sxs-lookup"><span data-stu-id="9119a-558">Start the web app.</span></span>
+* <span data-ttu-id="9119a-559">Uruchom wpis.</span><span class="sxs-lookup"><span data-stu-id="9119a-559">Start Postman.</span></span>
+* <span data-ttu-id="9119a-560">Wyłącz **weryfikację certyfikatu SSL**.</span><span class="sxs-lookup"><span data-stu-id="9119a-560">Disable **SSL certificate verification**.</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="9fb67-558">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="9fb67-558">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="9119a-561">Program Visual Studio</span><span class="sxs-lookup"><span data-stu-id="9119a-561">Visual Studio</span></span>](#tab/visual-studio)
 
-* <span data-ttu-id="9fb67-559">W obszarze **Ustawienia** **pliku** > (karta**Ogólne** ) Wyłącz **weryfikację certyfikatu SSL**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-559">From **File** > **Settings** (**General** tab), disable **SSL certificate verification**.</span></span>
+* <span data-ttu-id="9119a-562">W **File** obszarze > **Ustawienia** pliku (karta**Ogólne** ) Wyłącz **weryfikację certyfikatu SSL**.</span><span class="sxs-lookup"><span data-stu-id="9119a-562">From **File** > **Settings** (**General** tab), disable **SSL certificate verification**.</span></span>
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="9fb67-560">Visual Studio Code/Visual Studio dla komputerów Mac</span><span class="sxs-lookup"><span data-stu-id="9fb67-560">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="9119a-563">Visual Studio Code/Visual Studio dla komputerów Mac</span><span class="sxs-lookup"><span data-stu-id="9119a-563">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
-* <span data-ttu-id="9fb67-561">Z poziomu**preferencji** programu **Poster** > (karta**Ogólne** ) Wyłącz **weryfikację certyfikatu SSL**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-561">From **Postman** > **Preferences** (**General** tab), disable **SSL certificate verification**.</span></span> <span data-ttu-id="9fb67-562">Alternatywnie wybierz klucz i wybierz pozycję **Ustawienia**, a następnie wyłącz weryfikację certyfikatu SSL.</span><span class="sxs-lookup"><span data-stu-id="9fb67-562">Alternatively, select the wrench and select **Settings**, then disable the SSL certificate verification.</span></span>
+* <span data-ttu-id="9119a-564">Z poziomu preferencji programu **Poster**  >  **Preferences** (karta**Ogólne** ) Wyłącz **weryfikację certyfikatu SSL**.</span><span class="sxs-lookup"><span data-stu-id="9119a-564">From **Postman** > **Preferences** (**General** tab), disable **SSL certificate verification**.</span></span> <span data-ttu-id="9119a-565">Alternatywnie wybierz klucz i wybierz pozycję **Ustawienia**, a następnie wyłącz weryfikację certyfikatu SSL.</span><span class="sxs-lookup"><span data-stu-id="9119a-565">Alternatively, select the wrench and select **Settings**, then disable the SSL certificate verification.</span></span>
 
 ---
   
 > [!WARNING]
-> <span data-ttu-id="9fb67-563">Po przetestowaniu kontrolera ponownie Włącz weryfikację certyfikatu SSL.</span><span class="sxs-lookup"><span data-stu-id="9fb67-563">Re-enable SSL certificate verification after testing the controller.</span></span>
+> <span data-ttu-id="9119a-566">Po przetestowaniu kontrolera ponownie Włącz weryfikację certyfikatu SSL.</span><span class="sxs-lookup"><span data-stu-id="9119a-566">Re-enable SSL certificate verification after testing the controller.</span></span>
 
-* <span data-ttu-id="9fb67-564">Utwórz nowe żądanie.</span><span class="sxs-lookup"><span data-stu-id="9fb67-564">Create a new request.</span></span>
-  * <span data-ttu-id="9fb67-565">Ustaw metodę HTTP, aby **uzyskać**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-565">Set the HTTP method to **GET**.</span></span>
-  * <span data-ttu-id="9fb67-566">Ustaw adres URL żądania `https://localhost:<port>/api/todo`.</span><span class="sxs-lookup"><span data-stu-id="9fb67-566">Set the request URL to `https://localhost:<port>/api/todo`.</span></span> <span data-ttu-id="9fb67-567">Na przykład `https://localhost:5001/api/todo`.</span><span class="sxs-lookup"><span data-stu-id="9fb67-567">For example, `https://localhost:5001/api/todo`.</span></span>
-* <span data-ttu-id="9fb67-568">Ustaw **dwa widoki okienka** w programie Poster.</span><span class="sxs-lookup"><span data-stu-id="9fb67-568">Set **Two pane view** in Postman.</span></span>
-* <span data-ttu-id="9fb67-569">Wybierz pozycję **Wyślij**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-569">Select **Send**.</span></span>
+* <span data-ttu-id="9119a-567">Utwórz nowe żądanie.</span><span class="sxs-lookup"><span data-stu-id="9119a-567">Create a new request.</span></span>
+  * <span data-ttu-id="9119a-568">Ustaw metodę HTTP, aby **uzyskać**.</span><span class="sxs-lookup"><span data-stu-id="9119a-568">Set the HTTP method to **GET**.</span></span>
+  * <span data-ttu-id="9119a-569">Ustaw adres URL żądania `https://localhost:<port>/api/todo` .</span><span class="sxs-lookup"><span data-stu-id="9119a-569">Set the request URL to `https://localhost:<port>/api/todo`.</span></span> <span data-ttu-id="9119a-570">Na przykład `https://localhost:5001/api/todo`.</span><span class="sxs-lookup"><span data-stu-id="9119a-570">For example, `https://localhost:5001/api/todo`.</span></span>
+* <span data-ttu-id="9119a-571">Ustaw **dwa widoki okienka** w programie Poster.</span><span class="sxs-lookup"><span data-stu-id="9119a-571">Set **Two pane view** in Postman.</span></span>
+* <span data-ttu-id="9119a-572">Wybierz pozycję **Send** (Wyślij).</span><span class="sxs-lookup"><span data-stu-id="9119a-572">Select **Send**.</span></span>
 
 ![Ogłoś przy użyciu żądania GET](first-web-api/_static/2pv.png)
 
-## <a name="add-a-create-method"></a><span data-ttu-id="9fb67-571">Dodawanie metody Create</span><span class="sxs-lookup"><span data-stu-id="9fb67-571">Add a Create method</span></span>
+## <a name="add-a-create-method"></a><span data-ttu-id="9119a-574">Dodawanie metody Create</span><span class="sxs-lookup"><span data-stu-id="9119a-574">Add a Create method</span></span>
 
-<span data-ttu-id="9fb67-572">Dodaj następującą `PostTodoItem` metodę w obszarze *controllers/TodoController. cs*:</span><span class="sxs-lookup"><span data-stu-id="9fb67-572">Add the following `PostTodoItem` method inside of *Controllers/TodoController.cs*:</span></span> 
+<span data-ttu-id="9119a-575">Dodaj następującą `PostTodoItem` metodę w obszarze *controllers/TodoController. cs*:</span><span class="sxs-lookup"><span data-stu-id="9119a-575">Add the following `PostTodoItem` method inside of *Controllers/TodoController.cs*:</span></span> 
 
 [!code-csharp[](first-web-api/samples/2.2/TodoApi/Controllers/TodoController.cs?name=snippet_Create)]
 
-<span data-ttu-id="9fb67-573">Poprzedni kod jest metodą POST protokołu HTTP, jak wskazano w [`[HttpPost]`](/dotnet/api/microsoft.aspnetcore.mvc.httppostattribute) atrybucie.</span><span class="sxs-lookup"><span data-stu-id="9fb67-573">The preceding code is an HTTP POST method, as indicated by the [`[HttpPost]`](/dotnet/api/microsoft.aspnetcore.mvc.httppostattribute) attribute.</span></span> <span data-ttu-id="9fb67-574">Metoda pobiera wartość elementu do wykonania z treści żądania HTTP.</span><span class="sxs-lookup"><span data-stu-id="9fb67-574">The method gets the value of the to-do item from the body of the HTTP request.</span></span>
+<span data-ttu-id="9119a-576">Poprzedni kod jest metodą POST protokołu HTTP, jak wskazano w [`[HttpPost]`](/dotnet/api/microsoft.aspnetcore.mvc.httppostattribute) atrybucie.</span><span class="sxs-lookup"><span data-stu-id="9119a-576">The preceding code is an HTTP POST method, as indicated by the [`[HttpPost]`](/dotnet/api/microsoft.aspnetcore.mvc.httppostattribute) attribute.</span></span> <span data-ttu-id="9119a-577">Metoda pobiera wartość elementu do wykonania z treści żądania HTTP.</span><span class="sxs-lookup"><span data-stu-id="9119a-577">The method gets the value of the to-do item from the body of the HTTP request.</span></span>
 
-<span data-ttu-id="9fb67-575">`CreatedAtAction` Metoda:</span><span class="sxs-lookup"><span data-stu-id="9fb67-575">The `CreatedAtAction` method:</span></span>
+<span data-ttu-id="9119a-578">`CreatedAtAction`Metoda:</span><span class="sxs-lookup"><span data-stu-id="9119a-578">The `CreatedAtAction` method:</span></span>
 
-* <span data-ttu-id="9fb67-576">Zwraca kod stanu HTTP 201, jeśli powodzenie.</span><span class="sxs-lookup"><span data-stu-id="9fb67-576">Returns an HTTP 201 status code, if successful.</span></span> <span data-ttu-id="9fb67-577">HTTP 201 to standardowa odpowiedź dla metody POST protokołu HTTP, która tworzy nowy zasób na serwerze.</span><span class="sxs-lookup"><span data-stu-id="9fb67-577">HTTP 201 is the standard response for an HTTP POST method that creates a new resource on the server.</span></span>
-* <span data-ttu-id="9fb67-578">Dodaje `Location` nagłówek do odpowiedzi.</span><span class="sxs-lookup"><span data-stu-id="9fb67-578">Adds a `Location` header to the response.</span></span> <span data-ttu-id="9fb67-579">`Location` Nagłówek określa identyfikator URI nowo utworzonego elementu do wykonania.</span><span class="sxs-lookup"><span data-stu-id="9fb67-579">The `Location` header specifies the URI of the newly created to-do item.</span></span> <span data-ttu-id="9fb67-580">Aby uzyskać więcej informacji, zobacz [10.2.2 201](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html).</span><span class="sxs-lookup"><span data-stu-id="9fb67-580">For more information, see [10.2.2 201 Created](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html).</span></span>
-* <span data-ttu-id="9fb67-581">Odwołuje `GetTodoItem` się do akcji tworzenia `Location` identyfikatora URI nagłówka.</span><span class="sxs-lookup"><span data-stu-id="9fb67-581">References the `GetTodoItem` action to create the `Location` header's URI.</span></span> <span data-ttu-id="9fb67-582">Słowo kluczowe `nameof` języka C# służy do zapobiegania twardemu kodowaniu nazwy akcji w `CreatedAtAction` wywołaniu.</span><span class="sxs-lookup"><span data-stu-id="9fb67-582">The C# `nameof` keyword is used to avoid hard-coding the action name in the `CreatedAtAction` call.</span></span>
+* <span data-ttu-id="9119a-579">Zwraca kod stanu HTTP 201, jeśli powodzenie.</span><span class="sxs-lookup"><span data-stu-id="9119a-579">Returns an HTTP 201 status code, if successful.</span></span> <span data-ttu-id="9119a-580">HTTP 201 to standardowa odpowiedź dla metody POST protokołu HTTP, która tworzy nowy zasób na serwerze.</span><span class="sxs-lookup"><span data-stu-id="9119a-580">HTTP 201 is the standard response for an HTTP POST method that creates a new resource on the server.</span></span>
+* <span data-ttu-id="9119a-581">Dodaje `Location` nagłówek do odpowiedzi.</span><span class="sxs-lookup"><span data-stu-id="9119a-581">Adds a `Location` header to the response.</span></span> <span data-ttu-id="9119a-582">`Location`Nagłówek określa identyfikator URI nowo utworzonego elementu do wykonania.</span><span class="sxs-lookup"><span data-stu-id="9119a-582">The `Location` header specifies the URI of the newly created to-do item.</span></span> <span data-ttu-id="9119a-583">Aby uzyskać więcej informacji, zobacz [10.2.2 201](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html).</span><span class="sxs-lookup"><span data-stu-id="9119a-583">For more information, see [10.2.2 201 Created](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html).</span></span>
+* <span data-ttu-id="9119a-584">Odwołuje się do `GetTodoItem` akcji tworzenia `Location` identyfikatora URI nagłówka.</span><span class="sxs-lookup"><span data-stu-id="9119a-584">References the `GetTodoItem` action to create the `Location` header's URI.</span></span> <span data-ttu-id="9119a-585">`nameof`Słowo kluczowe języka C# służy do zapobiegania twardemu kodowaniu nazwy akcji w `CreatedAtAction` wywołaniu.</span><span class="sxs-lookup"><span data-stu-id="9119a-585">The C# `nameof` keyword is used to avoid hard-coding the action name in the `CreatedAtAction` call.</span></span>
 
   [!code-csharp[](first-web-api/samples/2.2/TodoApi/Controllers/TodoController.cs?name=snippet_GetByID&highlight=1-2)]
 
-### <a name="test-the-posttodoitem-method"></a><span data-ttu-id="9fb67-583">Testowanie metody PostTodoItem</span><span class="sxs-lookup"><span data-stu-id="9fb67-583">Test the PostTodoItem method</span></span>
+### <a name="test-the-posttodoitem-method"></a><span data-ttu-id="9119a-586">Testowanie metody PostTodoItem</span><span class="sxs-lookup"><span data-stu-id="9119a-586">Test the PostTodoItem method</span></span>
 
-* <span data-ttu-id="9fb67-584">Skompiluj projekt.</span><span class="sxs-lookup"><span data-stu-id="9fb67-584">Build the project.</span></span>
-* <span data-ttu-id="9fb67-585">W programie Poster ustaw metodę HTTP na `POST`.</span><span class="sxs-lookup"><span data-stu-id="9fb67-585">In Postman, set the HTTP method to `POST`.</span></span>
-* <span data-ttu-id="9fb67-586">Wybierz kartę **Treść**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-586">Select the **Body** tab.</span></span>
-* <span data-ttu-id="9fb67-587">Wybierz przycisk radiowy **RAW** .</span><span class="sxs-lookup"><span data-stu-id="9fb67-587">Select the **raw** radio button.</span></span>
-* <span data-ttu-id="9fb67-588">Ustaw typ na **JSON (Application/JSON)**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-588">Set the type to **JSON (application/json)**.</span></span>
-* <span data-ttu-id="9fb67-589">W treści żądania wprowadź kod JSON dla elementu do wykonania:</span><span class="sxs-lookup"><span data-stu-id="9fb67-589">In the request body enter JSON for a to-do item:</span></span>
+* <span data-ttu-id="9119a-587">Skompiluj projekt.</span><span class="sxs-lookup"><span data-stu-id="9119a-587">Build the project.</span></span>
+* <span data-ttu-id="9119a-588">W programie Poster ustaw metodę HTTP na `POST` .</span><span class="sxs-lookup"><span data-stu-id="9119a-588">In Postman, set the HTTP method to `POST`.</span></span>
+* <span data-ttu-id="9119a-589">Wybierz kartę **Treść**.</span><span class="sxs-lookup"><span data-stu-id="9119a-589">Select the **Body** tab.</span></span>
+* <span data-ttu-id="9119a-590">Wybierz przycisk radiowy **RAW** .</span><span class="sxs-lookup"><span data-stu-id="9119a-590">Select the **raw** radio button.</span></span>
+* <span data-ttu-id="9119a-591">Ustaw typ na **JSON (Application/JSON)**.</span><span class="sxs-lookup"><span data-stu-id="9119a-591">Set the type to **JSON (application/json)**.</span></span>
+* <span data-ttu-id="9119a-592">W treści żądania wprowadź kod JSON dla elementu do wykonania:</span><span class="sxs-lookup"><span data-stu-id="9119a-592">In the request body enter JSON for a to-do item:</span></span>
 
     ```json
     {
@@ -840,38 +840,38 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
     }
     ```
 
-* <span data-ttu-id="9fb67-590">Wybierz pozycję **Wyślij**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-590">Select **Send**.</span></span>
+* <span data-ttu-id="9119a-593">Wybierz pozycję **Send** (Wyślij).</span><span class="sxs-lookup"><span data-stu-id="9119a-593">Select **Send**.</span></span>
 
   ![Ogłoś przy użyciu żądania Create](first-web-api/_static/create.png)
 
-  <span data-ttu-id="9fb67-592">Jeśli wystąpi błąd 405 metody niedozwolonej, jest to prawdopodobnie wynik niekompilowania projektu po dodaniu `PostTodoItem` metody.</span><span class="sxs-lookup"><span data-stu-id="9fb67-592">If you get a 405 Method Not Allowed error, it's probably the result of not compiling the project after adding the `PostTodoItem` method.</span></span>
+  <span data-ttu-id="9119a-595">Jeśli wystąpi błąd 405 metody niedozwolonej, jest to prawdopodobnie wynik niekompilowania projektu po dodaniu `PostTodoItem` metody.</span><span class="sxs-lookup"><span data-stu-id="9119a-595">If you get a 405 Method Not Allowed error, it's probably the result of not compiling the project after adding the `PostTodoItem` method.</span></span>
 
-### <a name="test-the-location-header-uri"></a><span data-ttu-id="9fb67-593">Testowanie identyfikatora URI nagłówka lokalizacji</span><span class="sxs-lookup"><span data-stu-id="9fb67-593">Test the location header URI</span></span>
+### <a name="test-the-location-header-uri"></a><span data-ttu-id="9119a-596">Testowanie identyfikatora URI nagłówka lokalizacji</span><span class="sxs-lookup"><span data-stu-id="9119a-596">Test the location header URI</span></span>
 
-* <span data-ttu-id="9fb67-594">Wybierz kartę **nagłówki** w okienku **odpowiedź** .</span><span class="sxs-lookup"><span data-stu-id="9fb67-594">Select the **Headers** tab in the **Response** pane.</span></span>
-* <span data-ttu-id="9fb67-595">Skopiuj wartość nagłówka **lokalizacji** :</span><span class="sxs-lookup"><span data-stu-id="9fb67-595">Copy the **Location** header value:</span></span>
+* <span data-ttu-id="9119a-597">Wybierz kartę **nagłówki** w okienku **odpowiedź** .</span><span class="sxs-lookup"><span data-stu-id="9119a-597">Select the **Headers** tab in the **Response** pane.</span></span>
+* <span data-ttu-id="9119a-598">Skopiuj wartość nagłówka **lokalizacji** :</span><span class="sxs-lookup"><span data-stu-id="9119a-598">Copy the **Location** header value:</span></span>
 
   ![Karta nagłówki w konsoli programu Poster](first-web-api/_static/pmc2.png)
 
-* <span data-ttu-id="9fb67-597">Ustaw metodę, aby uzyskać.</span><span class="sxs-lookup"><span data-stu-id="9fb67-597">Set the method to GET.</span></span>
-* <span data-ttu-id="9fb67-598">Wklej URI (na przykład `https://localhost:5001/api/Todo/2`).</span><span class="sxs-lookup"><span data-stu-id="9fb67-598">Paste the URI (for example, `https://localhost:5001/api/Todo/2`).</span></span>
-* <span data-ttu-id="9fb67-599">Wybierz pozycję **Wyślij**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-599">Select **Send**.</span></span>
+* <span data-ttu-id="9119a-600">Ustaw metodę, aby uzyskać.</span><span class="sxs-lookup"><span data-stu-id="9119a-600">Set the method to GET.</span></span>
+* <span data-ttu-id="9119a-601">Wklej URI (na przykład `https://localhost:5001/api/Todo/2` ).</span><span class="sxs-lookup"><span data-stu-id="9119a-601">Paste the URI (for example, `https://localhost:5001/api/Todo/2`).</span></span>
+* <span data-ttu-id="9119a-602">Wybierz pozycję **Send** (Wyślij).</span><span class="sxs-lookup"><span data-stu-id="9119a-602">Select **Send**.</span></span>
 
-## <a name="add-a-puttodoitem-method"></a><span data-ttu-id="9fb67-600">Dodawanie metody PutTodoItem</span><span class="sxs-lookup"><span data-stu-id="9fb67-600">Add a PutTodoItem method</span></span>
+## <a name="add-a-puttodoitem-method"></a><span data-ttu-id="9119a-603">Dodawanie metody PutTodoItem</span><span class="sxs-lookup"><span data-stu-id="9119a-603">Add a PutTodoItem method</span></span>
 
-<span data-ttu-id="9fb67-601">Dodaj następującą `PutTodoItem` metodę:</span><span class="sxs-lookup"><span data-stu-id="9fb67-601">Add the following `PutTodoItem` method:</span></span>
+<span data-ttu-id="9119a-604">Dodaj następującą `PutTodoItem` metodę:</span><span class="sxs-lookup"><span data-stu-id="9119a-604">Add the following `PutTodoItem` method:</span></span>
 
 [!code-csharp[](first-web-api/samples/2.2/TodoApi/Controllers/TodoController.cs?name=snippet_Update)]
 
-<span data-ttu-id="9fb67-602">`PutTodoItem`jest podobny do `PostTodoItem`, z tą różnicą, że używa protokołu HTTP Put.</span><span class="sxs-lookup"><span data-stu-id="9fb67-602">`PutTodoItem` is similar to `PostTodoItem`, except it uses HTTP PUT.</span></span> <span data-ttu-id="9fb67-603">Odpowiedź to [204 (brak zawartości)](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html).</span><span class="sxs-lookup"><span data-stu-id="9fb67-603">The response is [204 (No Content)](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html).</span></span> <span data-ttu-id="9fb67-604">Zgodnie ze specyfikacją protokołu HTTP żądanie PUT wymaga, aby klient wysłał całą zaktualizowaną jednostkę, a nie tylko te zmiany.</span><span class="sxs-lookup"><span data-stu-id="9fb67-604">According to the HTTP specification, a PUT request requires the client to send the entire updated entity, not just the changes.</span></span> <span data-ttu-id="9fb67-605">Aby zapewnić obsługę częściowych aktualizacji, użyj [poprawki http](xref:Microsoft.AspNetCore.Mvc.HttpPatchAttribute).</span><span class="sxs-lookup"><span data-stu-id="9fb67-605">To support partial updates, use [HTTP PATCH](xref:Microsoft.AspNetCore.Mvc.HttpPatchAttribute).</span></span>
+<span data-ttu-id="9119a-605">`PutTodoItem`jest podobny do `PostTodoItem` , z tą różnicą, że używa protokołu HTTP Put.</span><span class="sxs-lookup"><span data-stu-id="9119a-605">`PutTodoItem` is similar to `PostTodoItem`, except it uses HTTP PUT.</span></span> <span data-ttu-id="9119a-606">Odpowiedź to [204 (brak zawartości)](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html).</span><span class="sxs-lookup"><span data-stu-id="9119a-606">The response is [204 (No Content)](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html).</span></span> <span data-ttu-id="9119a-607">Zgodnie ze specyfikacją protokołu HTTP żądanie PUT wymaga, aby klient wysłał całą zaktualizowaną jednostkę, a nie tylko te zmiany.</span><span class="sxs-lookup"><span data-stu-id="9119a-607">According to the HTTP specification, a PUT request requires the client to send the entire updated entity, not just the changes.</span></span> <span data-ttu-id="9119a-608">Aby zapewnić obsługę częściowych aktualizacji, użyj [poprawki http](xref:Microsoft.AspNetCore.Mvc.HttpPatchAttribute).</span><span class="sxs-lookup"><span data-stu-id="9119a-608">To support partial updates, use [HTTP PATCH](xref:Microsoft.AspNetCore.Mvc.HttpPatchAttribute).</span></span>
 
-<span data-ttu-id="9fb67-606">Jeśli wystąpi błąd podczas wywoływania `PutTodoItem`, wywołaj `GET` , aby upewnić się, że w bazie danych znajduje się element.</span><span class="sxs-lookup"><span data-stu-id="9fb67-606">If you get an error calling `PutTodoItem`, call `GET` to ensure there's an item in the database.</span></span>
+<span data-ttu-id="9119a-609">Jeśli wystąpi błąd podczas wywoływania `PutTodoItem` , wywołaj, `GET` Aby upewnić się, że w bazie danych znajduje się element.</span><span class="sxs-lookup"><span data-stu-id="9119a-609">If you get an error calling `PutTodoItem`, call `GET` to ensure there's an item in the database.</span></span>
 
-### <a name="test-the-puttodoitem-method"></a><span data-ttu-id="9fb67-607">Testowanie metody PutTodoItem</span><span class="sxs-lookup"><span data-stu-id="9fb67-607">Test the PutTodoItem method</span></span>
+### <a name="test-the-puttodoitem-method"></a><span data-ttu-id="9119a-610">Testowanie metody PutTodoItem</span><span class="sxs-lookup"><span data-stu-id="9119a-610">Test the PutTodoItem method</span></span>
 
-<span data-ttu-id="9fb67-608">Ten przykład korzysta z bazy danych w pamięci, która musi zostać zainicjowana za każdym razem, gdy aplikacja zostanie uruchomiona.</span><span class="sxs-lookup"><span data-stu-id="9fb67-608">This sample uses an in-memory database that must be initialized each time the app is started.</span></span> <span data-ttu-id="9fb67-609">Przed wykonaniem wywołania PUT musi istnieć element w bazie danych.</span><span class="sxs-lookup"><span data-stu-id="9fb67-609">There must be an item in the database before you make a PUT call.</span></span> <span data-ttu-id="9fb67-610">Wywołaj polecenie GET, aby upewnić się, że w bazie danych znajduje się element, przed wykonaniem wywołania PUT.</span><span class="sxs-lookup"><span data-stu-id="9fb67-610">Call GET to insure there's an item in the database before making a PUT call.</span></span>
+<span data-ttu-id="9119a-611">Ten przykład korzysta z bazy danych w pamięci, która musi zostać zainicjowana za każdym razem, gdy aplikacja zostanie uruchomiona.</span><span class="sxs-lookup"><span data-stu-id="9119a-611">This sample uses an in-memory database that must be initialized each time the app is started.</span></span> <span data-ttu-id="9119a-612">Przed wykonaniem wywołania PUT musi istnieć element w bazie danych.</span><span class="sxs-lookup"><span data-stu-id="9119a-612">There must be an item in the database before you make a PUT call.</span></span> <span data-ttu-id="9119a-613">Wywołaj polecenie GET, aby upewnić się, że w bazie danych znajduje się element, przed wykonaniem wywołania PUT.</span><span class="sxs-lookup"><span data-stu-id="9119a-613">Call GET to insure there's an item in the database before making a PUT call.</span></span>
 
-<span data-ttu-id="9fb67-611">Zaktualizuj element do wykonania o identyfikatorze 1 i ustaw jego nazwę na "Źródło danych":</span><span class="sxs-lookup"><span data-stu-id="9fb67-611">Update the to-do item that has id = 1 and set its name to "feed fish":</span></span>
+<span data-ttu-id="9119a-614">Zaktualizuj element do wykonania o identyfikatorze 1 i ustaw jego nazwę na "Źródło danych":</span><span class="sxs-lookup"><span data-stu-id="9119a-614">Update the to-do item that has id = 1 and set its name to "feed fish":</span></span>
 
 ```json
   {
@@ -881,74 +881,74 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
   }
 ```
 
-<span data-ttu-id="9fb67-612">Na poniższej ilustracji przedstawiono aktualizację programu Poster:</span><span class="sxs-lookup"><span data-stu-id="9fb67-612">The following image shows the Postman update:</span></span>
+<span data-ttu-id="9119a-615">Na poniższej ilustracji przedstawiono aktualizację programu Poster:</span><span class="sxs-lookup"><span data-stu-id="9119a-615">The following image shows the Postman update:</span></span>
 
 ![Konsola programu Poster pokazująca odpowiedź 204 (brak zawartości)](first-web-api/_static/pmcput.png)
 
-## <a name="add-a-deletetodoitem-method"></a><span data-ttu-id="9fb67-614">Dodawanie metody DeleteTodoItem</span><span class="sxs-lookup"><span data-stu-id="9fb67-614">Add a DeleteTodoItem method</span></span>
+## <a name="add-a-deletetodoitem-method"></a><span data-ttu-id="9119a-617">Dodawanie metody DeleteTodoItem</span><span class="sxs-lookup"><span data-stu-id="9119a-617">Add a DeleteTodoItem method</span></span>
 
-<span data-ttu-id="9fb67-615">Dodaj następującą `DeleteTodoItem` metodę:</span><span class="sxs-lookup"><span data-stu-id="9fb67-615">Add the following `DeleteTodoItem` method:</span></span>
+<span data-ttu-id="9119a-618">Dodaj następującą `DeleteTodoItem` metodę:</span><span class="sxs-lookup"><span data-stu-id="9119a-618">Add the following `DeleteTodoItem` method:</span></span>
 
 [!code-csharp[](first-web-api/samples/2.2/TodoApi/Controllers/TodoController.cs?name=snippet_Delete)]
 
-<span data-ttu-id="9fb67-616">`DeleteTodoItem` Odpowiedź to [204 (brak zawartości)](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html).</span><span class="sxs-lookup"><span data-stu-id="9fb67-616">The `DeleteTodoItem` response is [204 (No Content)](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html).</span></span>
+<span data-ttu-id="9119a-619">`DeleteTodoItem`Odpowiedź to [204 (brak zawartości)](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html).</span><span class="sxs-lookup"><span data-stu-id="9119a-619">The `DeleteTodoItem` response is [204 (No Content)](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html).</span></span>
 
-### <a name="test-the-deletetodoitem-method"></a><span data-ttu-id="9fb67-617">Testowanie metody DeleteTodoItem</span><span class="sxs-lookup"><span data-stu-id="9fb67-617">Test the DeleteTodoItem method</span></span>
+### <a name="test-the-deletetodoitem-method"></a><span data-ttu-id="9119a-620">Testowanie metody DeleteTodoItem</span><span class="sxs-lookup"><span data-stu-id="9119a-620">Test the DeleteTodoItem method</span></span>
 
-<span data-ttu-id="9fb67-618">Użyj programu Poster, aby usunąć element do wykonania:</span><span class="sxs-lookup"><span data-stu-id="9fb67-618">Use Postman to delete a to-do item:</span></span>
+<span data-ttu-id="9119a-621">Użyj programu Poster, aby usunąć element do wykonania:</span><span class="sxs-lookup"><span data-stu-id="9119a-621">Use Postman to delete a to-do item:</span></span>
 
-* <span data-ttu-id="9fb67-619">Ustaw metodę na `DELETE`.</span><span class="sxs-lookup"><span data-stu-id="9fb67-619">Set the method to `DELETE`.</span></span>
-* <span data-ttu-id="9fb67-620">Ustaw identyfikator URI obiektu do usunięcia (na przykład `https://localhost:5001/api/todo/1`).</span><span class="sxs-lookup"><span data-stu-id="9fb67-620">Set the URI of the object to delete (for example, `https://localhost:5001/api/todo/1`).</span></span>
-* <span data-ttu-id="9fb67-621">Wybierz pozycję **Wyślij**.</span><span class="sxs-lookup"><span data-stu-id="9fb67-621">Select **Send**.</span></span>
+* <span data-ttu-id="9119a-622">Ustaw metodę na `DELETE` .</span><span class="sxs-lookup"><span data-stu-id="9119a-622">Set the method to `DELETE`.</span></span>
+* <span data-ttu-id="9119a-623">Ustaw identyfikator URI obiektu do usunięcia (na przykład `https://localhost:5001/api/todo/1` ).</span><span class="sxs-lookup"><span data-stu-id="9119a-623">Set the URI of the object to delete (for example, `https://localhost:5001/api/todo/1`).</span></span>
+* <span data-ttu-id="9119a-624">Wybierz pozycję **Send** (Wyślij).</span><span class="sxs-lookup"><span data-stu-id="9119a-624">Select **Send**.</span></span>
 
-<span data-ttu-id="9fb67-622">Przykładowa aplikacja umożliwia usunięcie wszystkich elementów.</span><span class="sxs-lookup"><span data-stu-id="9fb67-622">The sample app allows you to delete all the items.</span></span> <span data-ttu-id="9fb67-623">Jednak po usunięciu ostatniego elementu jest on tworzony przez konstruktora klasy modelu przy następnym wywołaniu interfejsu API.</span><span class="sxs-lookup"><span data-stu-id="9fb67-623">However, when the last item is deleted, a new one is created by the model class constructor the next time the API is called.</span></span>
+<span data-ttu-id="9119a-625">Przykładowa aplikacja umożliwia usunięcie wszystkich elementów.</span><span class="sxs-lookup"><span data-stu-id="9119a-625">The sample app allows you to delete all the items.</span></span> <span data-ttu-id="9119a-626">Jednak po usunięciu ostatniego elementu jest on tworzony przez konstruktora klasy modelu przy następnym wywołaniu interfejsu API.</span><span class="sxs-lookup"><span data-stu-id="9119a-626">However, when the last item is deleted, a new one is created by the model class constructor the next time the API is called.</span></span>
 
-## <a name="call-the-web-api-with-javascript"></a><span data-ttu-id="9fb67-624">Wywoływanie interfejsu API sieci Web przy użyciu języka JavaScript</span><span class="sxs-lookup"><span data-stu-id="9fb67-624">Call the web API with JavaScript</span></span>
+## <a name="call-the-web-api-with-javascript"></a><span data-ttu-id="9119a-627">Wywoływanie interfejsu API sieci Web przy użyciu języka JavaScript</span><span class="sxs-lookup"><span data-stu-id="9119a-627">Call the web API with JavaScript</span></span>
 
-<span data-ttu-id="9fb67-625">W tej sekcji zostanie dodana strona HTML, która używa języka JavaScript do wywoływania internetowego interfejsu API.</span><span class="sxs-lookup"><span data-stu-id="9fb67-625">In this section, an HTML page is added that uses JavaScript to call the web API.</span></span> <span data-ttu-id="9fb67-626">jQuery inicjuje żądanie.</span><span class="sxs-lookup"><span data-stu-id="9fb67-626">jQuery initiates the request.</span></span> <span data-ttu-id="9fb67-627">Język JavaScript aktualizuje stronę ze szczegółowymi informacjami z odpowiedzi internetowego interfejsu API.</span><span class="sxs-lookup"><span data-stu-id="9fb67-627">JavaScript updates the page with the details from the web API's response.</span></span>
+<span data-ttu-id="9119a-628">W tej sekcji zostanie dodana strona HTML, która używa języka JavaScript do wywoływania internetowego interfejsu API.</span><span class="sxs-lookup"><span data-stu-id="9119a-628">In this section, an HTML page is added that uses JavaScript to call the web API.</span></span> <span data-ttu-id="9119a-629">jQuery inicjuje żądanie.</span><span class="sxs-lookup"><span data-stu-id="9119a-629">jQuery initiates the request.</span></span> <span data-ttu-id="9119a-630">Język JavaScript aktualizuje stronę ze szczegółowymi informacjami z odpowiedzi internetowego interfejsu API.</span><span class="sxs-lookup"><span data-stu-id="9119a-630">JavaScript updates the page with the details from the web API's response.</span></span>
 
-<span data-ttu-id="9fb67-628">Skonfiguruj aplikację do [obsługi plików statycznych](/dotnet/api/microsoft.aspnetcore.builder.staticfileextensions.usestaticfiles#Microsoft_AspNetCore_Builder_StaticFileExtensions_UseStaticFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_) i [Włącz domyślne mapowanie plików](/dotnet/api/microsoft.aspnetcore.builder.defaultfilesextensions.usedefaultfiles#Microsoft_AspNetCore_Builder_DefaultFilesExtensions_UseDefaultFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_) , aktualizując *Startup.cs* z następującym wyróżnionym kodem:</span><span class="sxs-lookup"><span data-stu-id="9fb67-628">Configure the app to [serve static files](/dotnet/api/microsoft.aspnetcore.builder.staticfileextensions.usestaticfiles#Microsoft_AspNetCore_Builder_StaticFileExtensions_UseStaticFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_) and [enable default file mapping](/dotnet/api/microsoft.aspnetcore.builder.defaultfilesextensions.usedefaultfiles#Microsoft_AspNetCore_Builder_DefaultFilesExtensions_UseDefaultFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_) by updating *Startup.cs* with the following highlighted code:</span></span>
+<span data-ttu-id="9119a-631">Skonfiguruj aplikację do [obsługi plików statycznych](/dotnet/api/microsoft.aspnetcore.builder.staticfileextensions.usestaticfiles#Microsoft_AspNetCore_Builder_StaticFileExtensions_UseStaticFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_) i [Włącz domyślne mapowanie plików](/dotnet/api/microsoft.aspnetcore.builder.defaultfilesextensions.usedefaultfiles#Microsoft_AspNetCore_Builder_DefaultFilesExtensions_UseDefaultFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_) , aktualizując *Startup.cs* z następującym wyróżnionym kodem:</span><span class="sxs-lookup"><span data-stu-id="9119a-631">Configure the app to [serve static files](/dotnet/api/microsoft.aspnetcore.builder.staticfileextensions.usestaticfiles#Microsoft_AspNetCore_Builder_StaticFileExtensions_UseStaticFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_) and [enable default file mapping](/dotnet/api/microsoft.aspnetcore.builder.defaultfilesextensions.usedefaultfiles#Microsoft_AspNetCore_Builder_DefaultFilesExtensions_UseDefaultFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_) by updating *Startup.cs* with the following highlighted code:</span></span>
 
 [!code-csharp[](first-web-api/samples/2.2/TodoApi/Startup.cs?highlight=14-15&name=snippet_configure)]
 
-<span data-ttu-id="9fb67-629">Utwórz folder *wwwroot* w katalogu projektu.</span><span class="sxs-lookup"><span data-stu-id="9fb67-629">Create a *wwwroot* folder in the project directory.</span></span>
+<span data-ttu-id="9119a-632">Utwórz folder *wwwroot* w katalogu projektu.</span><span class="sxs-lookup"><span data-stu-id="9119a-632">Create a *wwwroot* folder in the project directory.</span></span>
 
-<span data-ttu-id="9fb67-630">Dodaj plik HTML o nazwie *index. html* do katalogu *wwwroot* .</span><span class="sxs-lookup"><span data-stu-id="9fb67-630">Add an HTML file named *index.html* to the *wwwroot* directory.</span></span> <span data-ttu-id="9fb67-631">Zastąp jego zawartość następującym znacznikiem:</span><span class="sxs-lookup"><span data-stu-id="9fb67-631">Replace its contents with the following markup:</span></span>
+<span data-ttu-id="9119a-633">Dodaj plik HTML o nazwie *index. html* do katalogu *wwwroot* .</span><span class="sxs-lookup"><span data-stu-id="9119a-633">Add an HTML file named *index.html* to the *wwwroot* directory.</span></span> <span data-ttu-id="9119a-634">Zastąp jego zawartość następującym znacznikiem:</span><span class="sxs-lookup"><span data-stu-id="9119a-634">Replace its contents with the following markup:</span></span>
 
 [!code-html[](first-web-api/samples/2.2/TodoApi/wwwroot/index.html)]
 
-<span data-ttu-id="9fb67-632">Dodaj plik języka JavaScript o nazwie *site. js* do katalogu *wwwroot* .</span><span class="sxs-lookup"><span data-stu-id="9fb67-632">Add a JavaScript file named *site.js* to the *wwwroot* directory.</span></span> <span data-ttu-id="9fb67-633">Zastąp jego zawartość następującym kodem:</span><span class="sxs-lookup"><span data-stu-id="9fb67-633">Replace its contents with the following code:</span></span>
+<span data-ttu-id="9119a-635">Dodaj plik języka JavaScript o nazwie *site. js* do katalogu *wwwroot* .</span><span class="sxs-lookup"><span data-stu-id="9119a-635">Add a JavaScript file named *site.js* to the *wwwroot* directory.</span></span> <span data-ttu-id="9119a-636">Zastąp jego zawartość następującym kodem:</span><span class="sxs-lookup"><span data-stu-id="9119a-636">Replace its contents with the following code:</span></span>
 
 [!code-javascript[](first-web-api/samples/2.2/TodoApi/wwwroot/site.js?name=snippet_SiteJs)]
 
-<span data-ttu-id="9fb67-634">Zmiana ustawień uruchamiania projektu ASP.NET Core może być wymagana do lokalnego przetestowania strony HTML:</span><span class="sxs-lookup"><span data-stu-id="9fb67-634">A change to the ASP.NET Core project's launch settings may be required to test the HTML page locally:</span></span>
+<span data-ttu-id="9119a-637">Zmiana ustawień uruchamiania projektu ASP.NET Core może być wymagana do lokalnego przetestowania strony HTML:</span><span class="sxs-lookup"><span data-stu-id="9119a-637">A change to the ASP.NET Core project's launch settings may be required to test the HTML page locally:</span></span>
 
-* <span data-ttu-id="9fb67-635">Otwórz *Properties\launchSettings.JSON*.</span><span class="sxs-lookup"><span data-stu-id="9fb67-635">Open *Properties\launchSettings.json*.</span></span>
-* <span data-ttu-id="9fb67-636">Usuń `launchUrl` właściwość, aby wymusić Otwieranie aplikacji w *indeksie. html*&mdash;plik domyślny projektu.</span><span class="sxs-lookup"><span data-stu-id="9fb67-636">Remove the `launchUrl` property to force the app to open at *index.html*&mdash;the project's default file.</span></span>
+* <span data-ttu-id="9119a-638">Otwórz *Properties\launchSettings.JSON*.</span><span class="sxs-lookup"><span data-stu-id="9119a-638">Open *Properties\launchSettings.json*.</span></span>
+* <span data-ttu-id="9119a-639">Usuń `launchUrl` Właściwość, aby wymusić Otwieranie aplikacji w *indeksie. html* &mdash; plik domyślny projektu.</span><span class="sxs-lookup"><span data-stu-id="9119a-639">Remove the `launchUrl` property to force the app to open at *index.html*&mdash;the project's default file.</span></span>
 
-<span data-ttu-id="9fb67-637">Ten przykład wywołuje wszystkie metody CRUD internetowego interfejsu API.</span><span class="sxs-lookup"><span data-stu-id="9fb67-637">This sample calls all of the CRUD methods of the web API.</span></span> <span data-ttu-id="9fb67-638">Poniżej znajdują się wyjaśnienia wywołań interfejsu API.</span><span class="sxs-lookup"><span data-stu-id="9fb67-638">Following are explanations of the calls to the API.</span></span>
+<span data-ttu-id="9119a-640">Ten przykład wywołuje wszystkie metody CRUD internetowego interfejsu API.</span><span class="sxs-lookup"><span data-stu-id="9119a-640">This sample calls all of the CRUD methods of the web API.</span></span> <span data-ttu-id="9119a-641">Poniżej znajdują się wyjaśnienia wywołań interfejsu API.</span><span class="sxs-lookup"><span data-stu-id="9119a-641">Following are explanations of the calls to the API.</span></span>
 
-### <a name="get-a-list-of-to-do-items"></a><span data-ttu-id="9fb67-639">Pobierz listę elementów do wykonania</span><span class="sxs-lookup"><span data-stu-id="9fb67-639">Get a list of to-do items</span></span>
+### <a name="get-a-list-of-to-do-items"></a><span data-ttu-id="9119a-642">Pobierz listę elementów do wykonania</span><span class="sxs-lookup"><span data-stu-id="9119a-642">Get a list of to-do items</span></span>
 
-<span data-ttu-id="9fb67-640">jQuery wysyła żądanie HTTP GET do internetowego interfejsu API, który zwraca kod JSON reprezentujący tablicę elementów do wykonania.</span><span class="sxs-lookup"><span data-stu-id="9fb67-640">jQuery sends an HTTP GET request to the web API, which returns JSON representing an array of to-do items.</span></span> <span data-ttu-id="9fb67-641">Funkcja `success` wywołania zwrotnego jest wywoływana, jeśli żądanie zakończy się pomyślnie.</span><span class="sxs-lookup"><span data-stu-id="9fb67-641">The `success` callback function is invoked if the request succeeds.</span></span> <span data-ttu-id="9fb67-642">W wywołaniu zwrotnym model DOM jest aktualizowany przy użyciu informacji o tym do wykonania.</span><span class="sxs-lookup"><span data-stu-id="9fb67-642">In the callback, the DOM is updated with the to-do information.</span></span>
+<span data-ttu-id="9119a-643">jQuery wysyła żądanie HTTP GET do internetowego interfejsu API, który zwraca kod JSON reprezentujący tablicę elementów do wykonania.</span><span class="sxs-lookup"><span data-stu-id="9119a-643">jQuery sends an HTTP GET request to the web API, which returns JSON representing an array of to-do items.</span></span> <span data-ttu-id="9119a-644">`success`Funkcja wywołania zwrotnego jest wywoływana, jeśli żądanie zakończy się pomyślnie.</span><span class="sxs-lookup"><span data-stu-id="9119a-644">The `success` callback function is invoked if the request succeeds.</span></span> <span data-ttu-id="9119a-645">W wywołaniu zwrotnym model DOM jest aktualizowany przy użyciu informacji o tym do wykonania.</span><span class="sxs-lookup"><span data-stu-id="9119a-645">In the callback, the DOM is updated with the to-do information.</span></span>
 
 [!code-javascript[](first-web-api/samples/2.2/TodoApi/wwwroot/site.js?name=snippet_GetData)]
 
-### <a name="add-a-to-do-item"></a><span data-ttu-id="9fb67-643">Dodaj element do wykonania</span><span class="sxs-lookup"><span data-stu-id="9fb67-643">Add a to-do item</span></span>
+### <a name="add-a-to-do-item"></a><span data-ttu-id="9119a-646">Dodaj element do wykonania</span><span class="sxs-lookup"><span data-stu-id="9119a-646">Add a to-do item</span></span>
 
-<span data-ttu-id="9fb67-644">jQuery wysyła żądanie HTTP POST z elementem do wykonania w treści żądania.</span><span class="sxs-lookup"><span data-stu-id="9fb67-644">jQuery sends an HTTP POST request with the to-do item in the request body.</span></span> <span data-ttu-id="9fb67-645">Opcje `accepts` i `contentType` są ustawione na `application/json` , aby określić typ nośnika odbierany i wysyłany.</span><span class="sxs-lookup"><span data-stu-id="9fb67-645">The `accepts` and `contentType` options are set to `application/json` to specify the media type being received and sent.</span></span> <span data-ttu-id="9fb67-646">Element do wykonania jest konwertowany na format JSON przy użyciu [formatu JSON. stringify](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify).</span><span class="sxs-lookup"><span data-stu-id="9fb67-646">The to-do item is converted to JSON by using [JSON.stringify](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify).</span></span> <span data-ttu-id="9fb67-647">Gdy interfejs API zwraca kod stanu pomyślnego, `getData` funkcja jest wywoływana w celu zaktualizowania tabeli HTML.</span><span class="sxs-lookup"><span data-stu-id="9fb67-647">When the API returns a successful status code, the `getData` function is invoked to update the HTML table.</span></span>
+<span data-ttu-id="9119a-647">jQuery wysyła żądanie HTTP POST z elementem do wykonania w treści żądania.</span><span class="sxs-lookup"><span data-stu-id="9119a-647">jQuery sends an HTTP POST request with the to-do item in the request body.</span></span> <span data-ttu-id="9119a-648">`accepts`Opcje i `contentType` są ustawione na, aby `application/json` określić typ nośnika odbierany i wysyłany.</span><span class="sxs-lookup"><span data-stu-id="9119a-648">The `accepts` and `contentType` options are set to `application/json` to specify the media type being received and sent.</span></span> <span data-ttu-id="9119a-649">Element do wykonania jest konwertowany na format JSON przy użyciu [formatu JSON. stringify](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify).</span><span class="sxs-lookup"><span data-stu-id="9119a-649">The to-do item is converted to JSON by using [JSON.stringify](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify).</span></span> <span data-ttu-id="9119a-650">Gdy interfejs API zwraca kod stanu pomyślnego, `getData` Funkcja jest wywoływana w celu zaktualizowania tabeli HTML.</span><span class="sxs-lookup"><span data-stu-id="9119a-650">When the API returns a successful status code, the `getData` function is invoked to update the HTML table.</span></span>
 
 [!code-javascript[](first-web-api/samples/2.2/TodoApi/wwwroot/site.js?name=snippet_AddItem)]
 
-### <a name="update-a-to-do-item"></a><span data-ttu-id="9fb67-648">Aktualizowanie elementu do wykonania</span><span class="sxs-lookup"><span data-stu-id="9fb67-648">Update a to-do item</span></span>
+### <a name="update-a-to-do-item"></a><span data-ttu-id="9119a-651">Aktualizowanie elementu do wykonania</span><span class="sxs-lookup"><span data-stu-id="9119a-651">Update a to-do item</span></span>
 
-<span data-ttu-id="9fb67-649">Aktualizowanie elementu do wykonania jest podobne do dodawania jednego.</span><span class="sxs-lookup"><span data-stu-id="9fb67-649">Updating a to-do item is similar to adding one.</span></span> <span data-ttu-id="9fb67-650">`url` Zmiany mające na celu dodanie unikatowego identyfikatora elementu i `type` is `PUT`.</span><span class="sxs-lookup"><span data-stu-id="9fb67-650">The `url` changes to add the unique identifier of the item, and the `type` is `PUT`.</span></span>
+<span data-ttu-id="9119a-652">Aktualizowanie elementu do wykonania jest podobne do dodawania jednego.</span><span class="sxs-lookup"><span data-stu-id="9119a-652">Updating a to-do item is similar to adding one.</span></span> <span data-ttu-id="9119a-653">`url`Zmiany mające na celu dodanie unikatowego identyfikatora elementu i `type` is `PUT` .</span><span class="sxs-lookup"><span data-stu-id="9119a-653">The `url` changes to add the unique identifier of the item, and the `type` is `PUT`.</span></span>
 
 [!code-javascript[](first-web-api/samples/2.2/TodoApi/wwwroot/site.js?name=snippet_AjaxPut)]
 
-### <a name="delete-a-to-do-item"></a><span data-ttu-id="9fb67-651">Usuń element do wykonania</span><span class="sxs-lookup"><span data-stu-id="9fb67-651">Delete a to-do item</span></span>
+### <a name="delete-a-to-do-item"></a><span data-ttu-id="9119a-654">Usuń element do wykonania</span><span class="sxs-lookup"><span data-stu-id="9119a-654">Delete a to-do item</span></span>
 
-<span data-ttu-id="9fb67-652">Usuwanie elementu do wykonania jest realizowane przez ustawienie `type` w wywołaniu AJAX `DELETE` i określenie unikatowego identyfikatora elementu w adresie URL.</span><span class="sxs-lookup"><span data-stu-id="9fb67-652">Deleting a to-do item is accomplished by setting the `type` on the AJAX call to `DELETE` and specifying the item's unique identifier in the URL.</span></span>
+<span data-ttu-id="9119a-655">Usuwanie elementu do wykonania jest realizowane przez ustawienie `type` w WYWOŁANIU AJAX `DELETE` i określenie unikatowego identyfikatora elementu w adresie URL.</span><span class="sxs-lookup"><span data-stu-id="9119a-655">Deleting a to-do item is accomplished by setting the `type` on the AJAX call to `DELETE` and specifying the item's unique identifier in the URL.</span></span>
 
 [!code-javascript[](first-web-api/samples/2.2/TodoApi/wwwroot/site.js?name=snippet_AjaxDelete)]
 
@@ -956,15 +956,15 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 <a name="auth"></a>
 
-## <a name="add-authentication-support-to-a-web-api"></a><span data-ttu-id="9fb67-653">Dodawanie obsługi uwierzytelniania do internetowego interfejsu API</span><span class="sxs-lookup"><span data-stu-id="9fb67-653">Add authentication support to a web API</span></span>
+## <a name="add-authentication-support-to-a-web-api"></a><span data-ttu-id="9119a-656">Dodawanie obsługi uwierzytelniania do internetowego interfejsu API</span><span class="sxs-lookup"><span data-stu-id="9119a-656">Add authentication support to a web API</span></span>
 
 [!INCLUDE[](~/includes/IdentityServer4.md)]
 
-## <a name="additional-resources"></a><span data-ttu-id="9fb67-654">Zasoby dodatkowe</span><span class="sxs-lookup"><span data-stu-id="9fb67-654">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="9119a-657">Zasoby dodatkowe</span><span class="sxs-lookup"><span data-stu-id="9119a-657">Additional resources</span></span>
 
-<span data-ttu-id="9fb67-655">[Wyświetl lub Pobierz przykładowy kod dla tego samouczka](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/first-web-api/samples).</span><span class="sxs-lookup"><span data-stu-id="9fb67-655">[View or download sample code for this tutorial](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/first-web-api/samples).</span></span> <span data-ttu-id="9fb67-656">Zobacz artykuł [jak pobrać](xref:index#how-to-download-a-sample).</span><span class="sxs-lookup"><span data-stu-id="9fb67-656">See [how to download](xref:index#how-to-download-a-sample).</span></span>
+<span data-ttu-id="9119a-658">[Wyświetl lub Pobierz przykładowy kod dla tego samouczka](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/first-web-api/samples).</span><span class="sxs-lookup"><span data-stu-id="9119a-658">[View or download sample code for this tutorial](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/first-web-api/samples).</span></span> <span data-ttu-id="9119a-659">Zobacz artykuł [jak pobrać](xref:index#how-to-download-a-sample).</span><span class="sxs-lookup"><span data-stu-id="9119a-659">See [how to download](xref:index#how-to-download-a-sample).</span></span>
 
-<span data-ttu-id="9fb67-657">Więcej informacji zawierają następujące zasoby:</span><span class="sxs-lookup"><span data-stu-id="9fb67-657">For more information, see the following resources:</span></span>
+<span data-ttu-id="9119a-660">Więcej informacji zawierają następujące zasoby:</span><span class="sxs-lookup"><span data-stu-id="9119a-660">For more information, see the following resources:</span></span>
 
 * <xref:web-api/index>
 * <xref:tutorials/web-api-help-pages-using-swagger>
@@ -973,4 +973,4 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 * <xref:web-api/action-return-types>
 * <xref:host-and-deploy/azure-apps/index>
 * <xref:host-and-deploy/index>
-* [<span data-ttu-id="9fb67-658">Wersja tego samouczka usługi YouTube</span><span class="sxs-lookup"><span data-stu-id="9fb67-658">YouTube version of this tutorial</span></span>](https://www.youtube.com/watch?v=TTkhEyGBfAk)
+* [<span data-ttu-id="9119a-661">Wersja tego samouczka usługi YouTube</span><span class="sxs-lookup"><span data-stu-id="9119a-661">YouTube version of this tutorial</span></span>](https://www.youtube.com/watch?v=TTkhEyGBfAk)

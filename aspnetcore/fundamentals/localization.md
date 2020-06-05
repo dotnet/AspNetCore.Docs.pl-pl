@@ -1,12 +1,22 @@
 ---
-title: globalizacja i lokalizacja w ASP.NET Core autor: Rick-Anderson Description: informacje o tym, jak ASP.NET Core udostępniają usługi i oprogramowanie pośredniczące do lokalizowania zawartości w różnych językach i kulturach.
-MS. Author: Riande MS. Date: 11/30/2019 No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- " SignalR UID: podstawy/lokalizacja
-
+title: Globalizacja i lokalizacja w ASP.NET Core
+author: rick-anderson
+description: Dowiedz się, jak ASP.NET Core udostępnia usługi i oprogramowanie pośredniczące do lokalizowania zawartości w różnych językach i kulturach.
+ms.author: riande
+ms.date: 11/30/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: fundamentals/localization
+ms.openlocfilehash: e3b73a7a559d2f4a0803dc26dd42257c60fab884
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: pl-PL
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84356963"
 ---
 # <a name="globalization-and-localization-in-aspnet-core"></a>Globalizacja i lokalizacja w ASP.NET Core
 
@@ -26,7 +36,7 @@ Lokalizacja aplikacji obejmuje następujące elementy:
 1. Zapewnianie zlokalizowanych zasobów dla obsługiwanych języków i kultur
 1. Zaimplementuj strategię, aby wybrać język/kulturę dla każdego żądania
 
-[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/localization/sample/Localization) ([jak pobrać](xref:index#how-to-download-a-sample))
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/localization/sample/3.x/Localization) ([jak pobrać](xref:index#how-to-download-a-sample))
 
 ## <a name="make-the-apps-content-localizable"></a>Ustaw lokalizowalność zawartości aplikacji
 
@@ -721,7 +731,7 @@ Lokalizacja aplikacji obejmuje następujące elementy:
 1. Zapewnianie zlokalizowanych zasobów dla obsługiwanych języków i kultur
 1. Zaimplementuj strategię, aby wybrać język/kulturę dla każdego żądania
 
-[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/localization/sample/Localization) ([jak pobrać](xref:index#how-to-download-a-sample))
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/localization/sample/2.x/) ([jak pobrać](xref:index#how-to-download-a-sample))
 
 ## <a name="make-the-apps-content-localizable"></a>Ustaw lokalizowalność zawartości aplikacji
 

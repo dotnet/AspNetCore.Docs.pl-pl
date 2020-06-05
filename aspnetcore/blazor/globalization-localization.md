@@ -1,12 +1,24 @@
 ---
-title: "ASP.NET Core Blazor globalizacja i lokalizacja" Author: Description: "informacje o udostępnianiu Razor składników użytkownikom w wielu kulturach i językach".
-monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
+title: ASP.NET Core Blazor globalizacja i lokalizacja
+author: guardrex
+description: Dowiedz się, jak udostępnić Razor składniki użytkownikom w wielu kulturach i językach.
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 06/04/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: blazor/globalization-localization
+ms.openlocfilehash: 94faaa57cc6dd3df9e4a7c3c090fe01527399658
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: pl-PL
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84419739"
 ---
 # <a name="aspnet-core-blazor-globalization-and-localization"></a>ASP.NET Core Blazor globalizacja i lokalizacja
 
@@ -74,34 +86,39 @@ Aby uzyskać więcej informacji i przykładów, zobacz <xref:fundamentals/locali
 
 #### <a name="cookies"></a>Pliki cookie
 
-Plik cookie kultury lokalizacji może utrzymywać kulturę użytkownika. Plik cookie jest tworzony przez `OnGet` metodę strony hosta aplikacji (*strony/host. cshtml. cs*). Oprogramowanie pośredniczące lokalizacji odczytuje plik cookie na kolejnych żądaniach, aby ustawić kulturę użytkownika. 
+Plik cookie kultury lokalizacji może utrzymywać kulturę użytkownika. Oprogramowanie pośredniczące lokalizacji odczytuje plik cookie na kolejnych żądaniach, aby ustawić kulturę użytkownika. 
 
 Użycie pliku cookie zapewnia, że połączenie z użyciem protokołu WebSocket może prawidłowo propagować kulturę. Jeśli schematy lokalizacji są oparte na ścieżce URL lub ciągu zapytania, schemat może nie być w stanie współdziałać z usługą WebSockets, więc nie będzie można zachować kultury. W związku z tym zalecanym podejściem jest użycie pliku cookie kultury lokalizacji.
 
 Każda technika może służyć do przypisywania kultury, jeśli kultura jest utrwalona w pliku cookie lokalizacji. Jeśli aplikacja ma już ustalony schemat lokalizacji dla ASP.NET Core po stronie serwera, Kontynuuj korzystanie z istniejącej infrastruktury lokalizacji aplikacji i Ustaw plik cookie kultury lokalizacji w schemacie aplikacji.
 
-Poniższy przykład pokazuje, jak ustawić bieżącą kulturę w pliku cookie, który może zostać odczytany przez oprogramowanie pośredniczące lokalizacji. Utwórz plik *Pages/_Host. cshtml. cs* z następującą zawartością w Blazor aplikacji serwerowej:
+Poniższy przykład pokazuje, jak ustawić bieżącą kulturę w pliku cookie, który może zostać odczytany przez oprogramowanie pośredniczące lokalizacji. Utwórz Razor wyrażenie w pliku *Pages/_Host. cshtml* bezpośrednio wewnątrz tagu otwierającego `<body>` :
 
-```csharp
-public class HostModel : PageModel
-{
-    public void OnGet()
-    {
-        HttpContext.Response.Cookies.Append(
+```cshtml
+@using System.Globalization
+@using Microsoft.AspNetCore.Localization
+
+...
+
+<body>
+    @{
+        this.HttpContext.Response.Cookies.Append(
             CookieRequestCultureProvider.DefaultCookieName,
             CookieRequestCultureProvider.MakeCookieValue(
                 new RequestCulture(
                     CultureInfo.CurrentCulture,
                     CultureInfo.CurrentUICulture)));
     }
-}
+
+    ...
+</body>
 ```
 
 Lokalizacja jest obsługiwana przez aplikację w następującej kolejności zdarzeń:
 
 1. Przeglądarka wysyła początkowe żądanie HTTP do aplikacji.
 1. Kultura jest przypisana przez oprogramowanie pośredniczące lokalizacji.
-1. `OnGet`Metoda w *_Host. cshtml. cs* utrzymuje kulturę w pliku cookie jako część odpowiedzi.
+1. RazorWyrażenie na `_Host` stronie (*_Host. cshtml*) utrzymuje kulturę w pliku cookie jako część odpowiedzi.
 1. Przeglądarka otwiera połączenie WebSocket, aby utworzyć interaktywną Blazor sesję serwera.
 1. Oprogramowanie pośredniczące lokalizacji odczytuje plik cookie i przypisuje kulturę.
 1. BlazorSesja serwera rozpoczyna się od poprawnej kultury.
@@ -135,6 +152,25 @@ public class CultureController : Controller
 
 > [!WARNING]
 > Użyj <xref:Microsoft.AspNetCore.Mvc.ControllerBase.LocalRedirect%2A> wyniku działania, aby zapobiec atakom typu Open redirect. Aby uzyskać więcej informacji, zobacz <xref:security/preventing-open-redirects>.
+
+Jeśli aplikacja nie jest skonfigurowana do przetwarzania akcji kontrolera:
+
+* Dodaj usługi MVC do kolekcji usług w `Startup.ConfigureServices` :
+
+  ```csharp
+  services.AddControllers();
+  ```
+
+* Dodaj Routing punktu końcowego kontrolera w `Startup.Configure` :
+
+  ```csharp
+  app.UseEndpoints(endpoints =>
+  {
+      endpoints.MapControllers();
+      endpoints.MapBlazorHub();
+      endpoints.MapFallbackToPage("/_Host");
+  });
+  ```
 
 Poniższy składnik przedstawia przykład sposobu wykonywania wstępnego przekierowania, gdy użytkownik wybierze kulturę:
 

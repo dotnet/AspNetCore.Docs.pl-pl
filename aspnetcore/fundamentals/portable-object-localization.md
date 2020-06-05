@@ -1,12 +1,22 @@
 ---
-title: Skonfiguruj lokalizację obiektu przenośnego w ASP.NET Core autor: sebastienros Description: w tym artykule wprowadzono przenośne pliki obiektów i instrukcje dotyczące korzystania z nich w aplikacji ASP.NET Core z podstawową platformą sadu.
-MS. Author: scaddie MS. Date: 09/26/2017 No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- " SignalR UID: podstawy/obiekty przenośne-lokalizacja
-
+title: Konfigurowanie lokalizacji obiektu przenośnego w ASP.NET Core
+author: sebastienros
+description: W tym artykule wprowadzono przenośne pliki obiektów i instrukcje dotyczące korzystania z nich w aplikacji ASP.NET Coreej z podstawową platformą sadu.
+ms.author: scaddie
+ms.date: 09/26/2017
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: fundamentals/portable-object-localization
+ms.openlocfilehash: 57498cc2a773e5147b6eda653cc89d303f238b78
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: pl-PL
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84355087"
 ---
 # <a name="configure-portable-object-localization-in-aspnet-core"></a>Konfigurowanie lokalizacji obiektu przenośnego w ASP.NET Core
 

@@ -1,12 +1,23 @@
 ---
-title: typ zwracany akcji kontrolera w ASP.NET Core Web API Author: scottaddie Description: informacje na temat używania różnej metody akcji kontrolera zwraca typy w ASP.NET Core internetowy interfejs API.
-MS. Author: scaddie MS. Custom: MVC MS. Date: 02/03/2020 No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: Web-API/Action-Return-Types
-
+title: Typy zwracane akcje kontrolera w ASP.NET Core Web API
+author: scottaddie
+description: Dowiedz się więcej o używaniu różnych typów zwracanych metody akcji kontrolera w interfejsie API sieci Web ASP.NET Core.
+ms.author: scaddie
+ms.custom: mvc
+ms.date: 02/03/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: web-api/action-return-types
+ms.openlocfilehash: 57bc91feb9c4242dbea120ee00db1cba46784c61
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: pl-PL
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84253789"
 ---
 # <a name="controller-action-return-types-in-aspnet-core-web-api"></a>Typy zwracane akcje kontrolera w ASP.NET Core Web API
 

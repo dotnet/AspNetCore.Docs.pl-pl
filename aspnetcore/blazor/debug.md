@@ -1,12 +1,24 @@
 ---
-title: "Debug ASP.NET Core Blazor webassembly" Author: guardrex Description: "informacje o debugowaniu Blazor aplikacji".
-monikerRange: ">= aspnetcore-3,1" MS. Author: Riande MS. Custom: MVC MS. Date: 05/31/2020 No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- " SignalR UID: blazor/Debug
-
+title: Debuguj ASP.NET Core Blazor Webassembly
+author: guardrex
+description: Dowiedz się, jak debugować Blazor aplikacje.
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/31/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: blazor/debug
+ms.openlocfilehash: 193dc656c2ee0154f0ae534bc00f8dc29bab3258
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: pl-PL
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84239203"
 ---
 # <a name="debug-aspnet-core-blazor-webassembly"></a>Debuguj ASP.NET Core Blazor Webassembly
 
@@ -127,7 +139,7 @@ Zainstaluj [rozszerzenie C#](https://marketplace.visualstudio.com/items?itemName
 
 1. Otwórz hostowaną Blazor aplikację webassembly w vs Code.
 
-1. Jeśli nie ma ustawionej konfiguracji uruchamiania dla projektu, wyświetlane jest następujące powiadomienie. Wybierz pozycję **tak**.
+1. Jeśli nie ma ustawionej konfiguracji uruchamiania dla projektu, wyświetlane jest następujące powiadomienie. Wybierz pozycję **Tak**.
 
    ![Dodaj wymagane zasoby](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-required-assets.png)
 

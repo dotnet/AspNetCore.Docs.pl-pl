@@ -1,11 +1,11 @@
 ---
 title: ASP.NET Core Blazor zestawu webassembly przy użyciu Azure Active Directory grup i ról
 author: guardrex
-description: Dowiedz się, Blazor jak skonfigurować zestaw webassembly do korzystania z Azure Active Directory grup i ról.
+description: Dowiedz się, jak skonfigurować Blazor zestaw webassembly do korzystania z Azure Active Directory grup i ról.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/08/2020
+ms.date: 05/19/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,22 +13,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/webassembly/aad-groups-roles
-ms.openlocfilehash: afdb5ddc4d4ed08d0f1ecaf7158af283dda6b302
-ms.sourcegitcommit: 363e3a2a035f4082cb92e7b75ed150ba304258b3
+ms.openlocfilehash: 3ed06cca7e20da381b870e642a6c616b2578cd0a
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82976898"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84451878"
 ---
 # <a name="azure-ad-groups-administrative-roles-and-user-defined-roles"></a>Grupy usługi Azure AD, role administracyjne i role zdefiniowane przez użytkownika
 
 Autorzy [Luke Latham](https://github.com/guardrex) i [Javier Calvarro Nelson](https://github.com/javiercn)
 
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
-
-[!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
-
-Azure Active Directory (AAD) oferuje kilka metod autoryzacji, które mogą być łączone z tożsamością ASP.NET Core:
+Azure Active Directory (AAD) oferuje kilka metod autoryzacji, które mogą być połączone z ASP.NET Core Identity :
 
 * Grupy zdefiniowane przez użytkownika
   * Zabezpieczenia
@@ -38,7 +34,7 @@ Azure Active Directory (AAD) oferuje kilka metod autoryzacji, które mogą być 
   * Wbudowane role administracyjne
   * Role zdefiniowane przez użytkownika
 
-Wskazówki zawarte w tym artykule mają zastosowanie do scenariuszy wdrażania usługi webBlazor webassembly, które opisano w następujących tematach:
+Wskazówki zawarte w tym artykule dotyczą Blazor scenariuszy wdrażania usługi webassembly w usłudze AAD, które opisano w następujących tematach:
 
 * [Autonomiczne z kontami Microsoft](xref:security/blazor/webassembly/standalone-with-microsoft-accounts)
 * [Autonomiczne z usługą AAD](xref:security/blazor/webassembly/standalone-with-azure-active-directory)
@@ -46,16 +42,16 @@ Wskazówki zawarte w tym artykule mają zastosowanie do scenariuszy wdrażania u
 
 ### <a name="user-defined-groups-and-built-in-administrative-roles"></a>Grupy zdefiniowane przez użytkownika i wbudowane role administracyjne
 
-Aby skonfigurować aplikację w Azure Portal w celu uzyskania żądania `groups` członkostwa, zobacz następujące artykuły platformy Azure. Przypisz użytkowników do grup usługi AAD zdefiniowanych przez użytkownika i wbudowanych ról administracyjnych.
+Aby skonfigurować aplikację w Azure Portal w celu uzyskania `groups` żądania członkostwa, zobacz następujące artykuły platformy Azure. Przypisz użytkowników do grup usługi AAD zdefiniowanych przez użytkownika i wbudowanych ról administracyjnych.
 
 * [Role korzystające z grup zabezpieczeń usługi Azure AD](/azure/architecture/multitenant-identity/app-roles#roles-using-azure-ad-security-groups)
 * [groupMembershipClaims — atrybut](/azure/active-directory/develop/reference-app-manifest#groupmembershipclaims-attribute)
 
 W poniższych przykładach założono, że użytkownik jest przypisany do roli *administratora rozliczeń* w usłudze AAD.
 
-Pojedyncze `groups` zgłoszenie wysyłane przez usługi AAD przedstawia grupy i role użytkownika jako identyfikatory obiektów (GUID) w tablicy JSON. Aplikacja musi skonwertować tablicę JSON grup i ról na poszczególne `group` oświadczenia, dla których aplikacja może tworzyć [zasady](xref:security/authorization/policies) .
+Pojedyncze zgłoszenie `groups` wysyłane przez usługi AAD przedstawia grupy i role użytkownika jako identyfikatory obiektów (GUID) w tablicy JSON. Aplikacja musi skonwertować tablicę JSON grup i ról na poszczególne `group` oświadczenia, dla których aplikacja może tworzyć [zasady](xref:security/authorization/policies) .
 
-`RemoteUserAccount` Umożliwia dołączenie właściwości tablicy dla grup i ról.
+<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount>Umożliwia dołączenie właściwości tablicy dla grup i ról.
 
 *CustomUserAccount.cs*:
 
@@ -135,7 +131,7 @@ builder.Services.AddMsalAuthentication<RemoteAuthenticationState,
     CustomUserFactory>();
 ```
 
-Utwórz [zasady](xref:security/authorization/policies) dla każdej grupy lub roli w programie `Program.Main`. Poniższy przykład tworzy zasady dla wbudowanej roli *administratora rozliczeń* w usłudze AAD:
+Utwórz [zasady](xref:security/authorization/policies) dla każdej grupy lub roli w programie `Program.Main` . Poniższy przykład tworzy zasady dla wbudowanej roli *administratora rozliczeń* w usłudze AAD:
 
 ```csharp
 builder.Services.AddAuthorizationCore(options =>
@@ -168,7 +164,7 @@ W poniższych przykładach aplikacja używa powyższych zasad do autoryzowania u
 </AuthorizeView>
 ```
 
-Dostęp do całego składnika może opierać się na zasadach przy użyciu dyrektywy [ `[Authorize]` dyrektywy Attribute](xref:security/blazor/index#authorize-attribute) :
+Dostęp do całego składnika może opierać się na zasadach przy użyciu `[Authorize]` dyrektywy Attribute [] (linki XREF: Security/blazor/index # Autoryzuj-Attribute) ( <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> ):
 
 ```razor
 @page "/"
@@ -232,11 +228,11 @@ W poniższym przykładzie przyjęto założenie, że aplikacja ma skonfigurowan�
 >
 > W Azure Portal są przypisane wiele ról przez **_ponowne dodanie użytkownika_** do każdego dodatkowego przypisania roli.
 
-Pojedyncze `roles` zgłoszenie wysyłane przez usługi AAD przedstawia role zdefiniowane przez użytkownika jako `appRoles` `value`elementy w tablicy JSON. Aplikacja musi skonwertować tablicę JSON ról na poszczególne `role` oświadczenia.
+Pojedyncze zgłoszenie `roles` wysyłane przez usługi AAD przedstawia role zdefiniowane przez użytkownika jako `appRoles` `value` elementy w tablicy JSON. Aplikacja musi skonwertować tablicę JSON ról na poszczególne `role` oświadczenia.
 
-Przedstawione w sekcji [zdefiniowane przez użytkownika i wbudowane role administracyjne usługi AAD](#user-defined-groups-and-built-in-administrative-roles) zostały skonfigurowane do działania w ramach `roles` roszczeń z wartością tablicy JSON. `CustomUserFactory` Dodaj i zarejestruj `CustomUserFactory` w aplikacji autonomicznej lub aplikacji klienckiej rozwiązania hostowanego, jak pokazano w sekcji [zdefiniowane przez użytkownika grupy i wbudowane role administracyjne usługi AAD](#user-defined-groups-and-built-in-administrative-roles) . Nie ma potrzeby podania kodu w celu usunięcia pierwotnego `roles` żądania, ponieważ jest ono automatycznie usuwane przez platformę.
+`CustomUserFactory`Przedstawione w sekcji [zdefiniowane przez użytkownika i wbudowane role administracyjne usługi AAD](#user-defined-groups-and-built-in-administrative-roles) zostały skonfigurowane do działania w ramach `roles` roszczeń z wartością tablicy JSON. Dodaj i zarejestruj `CustomUserFactory` w aplikacji autonomicznej lub aplikacji klienckiej rozwiązania hostowanego, jak pokazano w sekcji [zdefiniowane przez użytkownika grupy i wbudowane role administracyjne usługi AAD](#user-defined-groups-and-built-in-administrative-roles) . Nie ma potrzeby podania kodu w celu usunięcia pierwotnego `roles` żądania, ponieważ jest ono automatycznie usuwane przez platformę.
 
-W `Program.Main` aplikacji autonomicznej lub aplikacji klienckiej rozwiązania hostowanego należy określić wartość "`role`" jako rolę żądania:
+W aplikacji `Program.Main` autonomicznej lub aplikacji klienckiej rozwiązania hostowanego należy określić wartość " `role` " jako rolę żądania:
 
 ```csharp
 builder.Services.AddMsalAuthentication(options =>
@@ -249,9 +245,9 @@ builder.Services.AddMsalAuthentication(options =>
 
 Metody autoryzacji składników są w tym momencie funkcjonalne. Każdy mechanizm autoryzacji w składnikach programu może korzystać z `admin` roli w celu autoryzowania użytkownika:
 
-* [AuthorizeView — składnik](xref:security/blazor/index#authorizeview-component) (przykład `<AuthorizeView Roles="admin">`:)
-* Dyrektywa Attribute (przykład: `@attribute [Authorize(Roles = "admin")]`) [ `[Authorize]` ](xref:security/blazor/index#authorize-attribute)
-* [Logika proceduralna](xref:security/blazor/index#procedural-logic) ( `if (user.IsInRole("admin")) { ... }`przykład:)
+* [AuthorizeView — składnik](xref:security/blazor/index#authorizeview-component) (przykład: `<AuthorizeView Roles="admin">` )
+* [ `[Authorize]` ] — Dyrektywa atrybutu] (linki XREF: Security/blazor/index # autoryzuje-Attribute) ( <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> ) (Przykład: `@attribute [Authorize(Roles = "admin")]` )
+* [Logika proceduralna](xref:security/blazor/index#procedural-logic) (przykład: `if (user.IsInRole("admin")) { ... }` )
 
   Obsługiwane są wiele testów ról:
 
@@ -288,7 +284,7 @@ Administrator usługi Desktop Analytics | c62c4ac5-e4c6-4096-8a2f-1ee3cbaaae15
 Czytelnicy katalogów | e1fc84a6-7762-4b9b-8e29-518b4adbc23b
 Administrator systemu Dynamics 365 | f20a9cfa-9fdf-49a8-a977-1afe446a1d6e
 Administrator programu Exchange | b2ec2cc0-d5c9-4864-ad9b-38dd9dba2652
-Administrator Identity dostawcy zewnętrznego | febfaeb4-e478-407a-b4b3-f4d9716618a2
+IdentityAdministrator dostawcy zewnętrznego | febfaeb4-e478-407a-b4b3-f4d9716618a2
 Administrator globalny | a45ba61b-44db-462c-924b-3b2719152588
 Czytnik globalny | f6903b21-6aba-4124-B44c-76671796b9d5
 Administrator grup | 158b3e5a-d89d-460b-92b5-3b34985f0197

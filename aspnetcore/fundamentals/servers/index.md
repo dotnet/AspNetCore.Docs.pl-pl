@@ -13,18 +13,18 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/index
-ms.openlocfilehash: 74affbb7d18d80e2e55714df100d820aed2ce427
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 9d57fcd5883a869c5421b88321d4a279f3f938c9
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776184"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84452151"
 ---
 # <a name="web-server-implementations-in-aspnet-core"></a>Implementacje serwera sieci Web w ASP.NET Core
 
 Autorzy [Dykstra](https://github.com/tdykstra), [Steve Kowalski](https://ardalis.com/), [Stephen](https://twitter.com/halter73), i [Krzysztof Ross](https://github.com/Tratcher)
 
-Aplikacja ASP.NET Core jest uruchamiana z użyciem implementacji serwera HTTP w procesie. Implementacja serwera nasłuchuje żądań HTTP i umieszcza je w aplikacji jako zestaw [funkcji żądania](xref:fundamentals/request-features) złożonych w <xref:Microsoft.AspNetCore.Http.HttpContext>.
+Aplikacja ASP.NET Core jest uruchamiana z użyciem implementacji serwera HTTP w procesie. Implementacja serwera nasłuchuje żądań HTTP i umieszcza je w aplikacji jako zestaw [funkcji żądania](xref:fundamentals/request-features) złożonych w <xref:Microsoft.AspNetCore.Http.HttpContext> .
 
 ## <a name="kestrel"></a>Kestrel
 
@@ -40,9 +40,9 @@ Użyj Kestrel:
 
   ![Kestrel komunikuje się pośrednio z Internetem za pomocą odwrotnego serwera proxy, takiego jak IIS, Nginx lub Apache](kestrel/_static/kestrel-to-internet.png)
 
-Obsługiwana jest konfiguracja&mdash;hostingu z serwerem&mdash;zwrotnego serwera proxy lub bez niego.
+&mdash;Obsługiwana jest konfiguracja hostingu z serwerem zwrotnego serwera proxy lub bez niego &mdash; .
 
-Aby uzyskać wskazówki dotyczące konfiguracji Kestrel i informacje o tym, kiedy używać Kestrel w konfiguracji zwrotnego <xref:fundamentals/servers/kestrel>serwera proxy, zobacz.
+Aby uzyskać wskazówki dotyczące konfiguracji Kestrel i informacje o tym, kiedy używać Kestrel w konfiguracji zwrotnego serwera proxy, zobacz <xref:fundamentals/servers/kestrel> .
 
 ::: moniker range=">= aspnetcore-2.2"
 
@@ -103,7 +103,7 @@ Na poniższym diagramie przedstawiono relację między usługami IIS, modułem A
 
 Żądania docierają do sieci Web do sterownika HTTP. sys trybu jądra. Sterownik kieruje żądania do usług IIS na skonfigurowanym porcie witryny sieci Web, zwykle 80 (HTTP) lub 443 (HTTPS). Moduł przekazuje żądania do Kestrel na losowo wybranym porcie dla aplikacji, która nie jest portem 80 lub 443.
 
-Moduł określa port za pośrednictwem zmiennej środowiskowej podczas uruchamiania, a [oprogramowanie pośredniczące integracji usług IIS](xref:host-and-deploy/iis/index#enable-the-iisintegration-components) konfiguruje serwer do nasłuchiwania `http://localhost:{port}`. Dodatkowe sprawdzenia są wykonywane, a żądania, które nie pochodzą z modułu, są odrzucane. Moduł nie obsługuje przekazywania HTTPS, dlatego żądania są przekazywane przez protokół HTTP nawet wtedy, gdy są odbierane przez usługę IIS przez protokół HTTPS.
+Moduł określa port za pośrednictwem zmiennej środowiskowej podczas uruchamiania, a [oprogramowanie pośredniczące integracji usług IIS](xref:host-and-deploy/iis/index#enable-the-iisintegration-components) konfiguruje serwer do nasłuchiwania `http://localhost:{port}` . Dodatkowe sprawdzenia są wykonywane, a żądania, które nie pochodzą z modułu, są odrzucane. Moduł nie obsługuje przekazywania HTTPS, dlatego żądania są przekazywane przez protokół HTTP nawet wtedy, gdy są odbierane przez usługę IIS przez protokół HTTPS.
 
 Po podaniu przez Kestrel żądania z modułu żądanie jest wypychane do potoku ASP.NET Core pośredniczącego. Potok oprogramowania pośredniczącego obsługuje żądanie i przekazuje go jako `HttpContext` wystąpienie do logiki aplikacji. Oprogramowanie pośredniczące dodane przez integrację usług IIS aktualizuje schemat, zdalny adres IP i pathbase, aby można było przesłać żądanie do Kestrel. Odpowiedź aplikacji jest przesyłana z powrotem do usług IIS, która wypycha ją z powrotem do klienta HTTP, który zainicjował żądanie.
 
@@ -126,11 +126,11 @@ ASP.NET Core jest dostarczany z [serwerem Kestrel](xref:fundamentals/servers/kes
 
 ### <a name="nginx-with-kestrel"></a>Nginx z Kestrel
 
-Aby uzyskać informacje na temat używania Nginx w systemie Linux jako serwera zwrotnego proxy dla Kestrel, <xref:host-and-deploy/linux-nginx>Zobacz.
+Aby uzyskać informacje na temat używania Nginx w systemie Linux jako serwera zwrotnego proxy dla Kestrel, zobacz <xref:host-and-deploy/linux-nginx> .
 
 ### <a name="apache-with-kestrel"></a>Apache z Kestrel
 
-Aby uzyskać informacje na temat korzystania z usługi Apache w systemie Linux jako serwera zwrotnego proxy dla <xref:host-and-deploy/linux-apache>usługi Kestrel, zobacz.
+Aby uzyskać informacje na temat korzystania z usługi Apache w systemie Linux jako serwera zwrotnego proxy dla usługi Kestrel, zobacz <xref:host-and-deploy/linux-apache> .
 
 ## <a name="httpsys"></a>HTTP.sys
 
@@ -142,27 +142,27 @@ Protokołu HTTP. sys można także używać w przypadku aplikacji, które są ud
 
 ![Protokół HTTP. sys komunikuje się bezpośrednio z siecią wewnętrzną](httpsys/_static/httpsys-to-internal.png)
 
-Aby uzyskać wskazówki dotyczące konfiguracji protokołu HTTP. <xref:fundamentals/servers/httpsys>sys, zobacz.
+Aby uzyskać wskazówki dotyczące konfiguracji protokołu HTTP. sys, zobacz <xref:fundamentals/servers/httpsys> .
 
 ## <a name="aspnet-core-server-infrastructure"></a>Infrastruktura serwera ASP.NET Core
 
-<xref:Microsoft.AspNetCore.Builder.IApplicationBuilder> Dostępne `Startup.Configure` w metodzie uwidacznia <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.ServerFeatures> właściwość typu <xref:Microsoft.AspNetCore.Http.Features.IFeatureCollection>. Kestrel i HTTP. sys uwidaczniają tylko jedną funkcję, <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature>ale różne implementacje serwera mogą uwidaczniać dodatkowe funkcje.
+<xref:Microsoft.AspNetCore.Builder.IApplicationBuilder>Dostępne w `Startup.Configure` metodzie uwidacznia <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.ServerFeatures> Właściwość typu <xref:Microsoft.AspNetCore.Http.Features.IFeatureCollection> . Kestrel i HTTP. sys uwidaczniają tylko jedną funkcję, <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature> ale różne implementacje serwera mogą uwidaczniać dodatkowe funkcje.
 
 `IServerAddressesFeature`można go użyć, aby dowiedzieć się, który port implementacji serwera w czasie wykonywania.
 
 ## <a name="custom-servers"></a>Serwery niestandardowe
 
-Jeśli wbudowane serwery nie spełniają wymagań aplikacji, można utworzyć niestandardową implementację serwera. W [przewodniku otwierania interfejsu sieci Web dla platformy .NET (Owin)](xref:fundamentals/owin) przedstawiono sposób [Nowin](https://github.com/Bobris/Nowin)pisania implementacji opartej <xref:Microsoft.AspNetCore.Hosting.Server.IServer> na nowin. Tylko interfejsy funkcji używane przez aplikację wymagają implementacji, ale muszą być obsługiwane w <xref:Microsoft.AspNetCore.Http.Features.IHttpRequestFeature> minimalnym <xref:Microsoft.AspNetCore.Http.Features.IHttpResponseFeature> i wymaganym czasie.
+Jeśli wbudowane serwery nie spełniają wymagań aplikacji, można utworzyć niestandardową implementację serwera. W [przewodniku otwierania interfejsu sieci Web dla platformy .NET (Owin)](xref:fundamentals/owin) przedstawiono sposób pisania implementacji opartej na [nowin](https://github.com/Bobris/Nowin) <xref:Microsoft.AspNetCore.Hosting.Server.IServer> . Tylko interfejsy funkcji używane przez aplikację wymagają implementacji, ale <xref:Microsoft.AspNetCore.Http.Features.IHttpRequestFeature> muszą być obsługiwane w minimalnym i <xref:Microsoft.AspNetCore.Http.Features.IHttpResponseFeature> wymaganym czasie.
 
 ## <a name="server-startup"></a>Uruchamianie serwera
 
 Serwer jest uruchamiany po uruchomieniu aplikacji zintegrowanego środowiska programistycznego (IDE) lub edytora:
 
-* Profile uruchamiania [programu Visual Studio](https://visualstudio.microsoft.com) &ndash; mogą być używane do uruchamiania aplikacji i serwera za pomocą [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview)/[ASP.NET Core Module](xref:host-and-deploy/aspnet-core-module) lub konsoli programu.
-* [Visual Studio Code](https://code.visualstudio.com/) &ndash; aplikacja i serwer są uruchamiane przez [omnisharp](https://github.com/OmniSharp/omnisharp-vscode), która aktywuje debuger CoreCLR.
-* [Visual Studio dla komputerów Mac](https://visualstudio.microsoft.com/vs/mac/) &ndash; aplikacji i serwera są uruchamiane przez [debuger trybu miękkiego mono](https://www.mono-project.com/docs/advanced/runtime/docs/soft-debugger/).
+* [Visual Studio](https://visualstudio.microsoft.com): profile uruchamiania mogą służyć do uruchamiania aplikacji i serwera za pomocą [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) / [ASP.NET Core Module](xref:host-and-deploy/aspnet-core-module) lub konsoli programu.
+* [Visual Studio Code](https://code.visualstudio.com/): aplikacja i serwer są uruchamiane przez [omnisharp](https://github.com/OmniSharp/omnisharp-vscode), która aktywuje debuger CoreCLR.
+* [Visual Studio dla komputerów Mac](https://visualstudio.microsoft.com/vs/mac/): aplikacja i serwer są uruchamiane przez [debuger trybu miękkiego mono](https://www.mono-project.com/docs/advanced/runtime/docs/soft-debugger/).
 
-Podczas uruchamiania aplikacji z poziomu wiersza polecenia w folderze projektu, [uruchomienie dotnet](/dotnet/core/tools/dotnet-run) uruchamia aplikację i serwer (tylko KESTREL i http. sys). Konfiguracja jest określana przez `-c|--configuration` opcję, która jest ustawiona na wartość `Debug` (domyślnie) lub. `Release`
+Podczas uruchamiania aplikacji z poziomu wiersza polecenia w folderze projektu, [uruchomienie dotnet](/dotnet/core/tools/dotnet-run) uruchamia aplikację i serwer (tylko KESTREL i http. sys). Konfiguracja jest określana przez `-c|--configuration` opcję, która jest ustawiona na wartość `Debug` (domyślnie) lub `Release` .
 
 Plik *profilu launchsettings. JSON* zapewnia konfigurację podczas uruchamiania aplikacji przy użyciu `dotnet run` debugera wbudowanego w narzędzia, takiego jak Visual Studio. Jeśli w pliku *profilu launchsettings. JSON* znajdują się profile uruchamiania, użyj `--launch-profile {PROFILE NAME}` opcji z `dotnet run` poleceniem lub wybierz profil w programie Visual Studio. Aby uzyskać więcej informacji, [dotnet run](/dotnet/core/tools/dotnet-run) zobacz [pakietem rozkładu dotnet i .NET Core](/dotnet/core/build/distribution-packaging).
 

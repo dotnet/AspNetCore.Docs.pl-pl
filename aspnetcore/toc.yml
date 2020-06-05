@@ -1168,7 +1168,7 @@
       uid: performance/performance-best-practices
     - name: Pamięć i odzyskiwanie pamięci
       uid: performance/memory
-    - name: Buforowanie odpowiedzi
+    - name: Buforowanie
       items:
         - name: Omówienie
           uid: performance/caching/response

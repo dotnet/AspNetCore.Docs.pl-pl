@@ -1,12 +1,24 @@
 ---
-title: "ASP.NET Core Blazor iniekcja zależności" autor: guardrex Description: "Zobacz, jak Blazor aplikacje mogą wstrzyknąć usługi do składników".
-monikerRange: ">= aspnetcore-3,1" MS. Author: Riande MS. Custom: MVC MS. Date: 05/19/2020 No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- " SignalR UID: blazor/wtrysk zależności
-
+title: ASP.NET Core Blazor wstrzykiwania zależności
+author: guardrex
+description: Zobacz, jak Blazor aplikacje mogą wstrzyknąć usługi do składników programu.
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/19/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: blazor/dependency-injection
+ms.openlocfilehash: d5b0747fb0505499197d1751511600bd91fed41d
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: pl-PL
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84271786"
 ---
 # <a name="aspnet-core-blazor-dependency-injection"></a>ASP.NET Core Blazor wstrzykiwania zależności
 

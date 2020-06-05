@@ -1,7 +1,7 @@
 ---
-title: 'Samouczek: wprowadzenie do Razor stron w ASP.NET Core'
+title: "\"Samouczek: wprowadzenie do Razor stron w ASP.NET Core\""
 author: rick-anderson
-description: W tej serii samouczków pokazano, jak Razor używać stron w ASP.NET Core. Dowiedz się, jak utworzyć model, wygenerować kod Razor dla stron, użyć Entity Framework Core i SQL Server na potrzeby dostępu do danych, dodać funkcję wyszukiwania, dodać sprawdzanie poprawności danych wejściowych i użyć migracji w celu zaktualizowania modelu.
+description: W tej serii samouczków pokazano, jak używać Razor stron w ASP.NET Core. Dowiedz się, jak utworzyć model, wygenerować kod dla Razor stron, użyć Entity Framework Core i SQL Server na potrzeby dostępu do danych, dodać funkcję wyszukiwania, dodać sprawdzanie poprawności danych wejściowych i użyć migracji w celu zaktualizowania modelu.
 ms.author: riande
 ms.date: 11/12/2019
 no-loc:
@@ -11,19 +11,19 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/razor-pages-start
-ms.openlocfilehash: 8ed12b1778673962fe0b174e005bd6d8a7f54168
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 3b8ccf639bb91234f81c67750fffa170e52d636f
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774876"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84452353"
 ---
-# <a name="tutorial-get-started-with-razor-pages-in-aspnet-core"></a>Samouczek: wprowadzenie do Razor Pages w ASP.NET Core
+# <a name="tutorial-get-started-with-razor-pages-in-aspnet-core"></a>Samouczek: wprowadzenie do Razor stron w ASP.NET Core
 
 Autor: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 ::: moniker range=">= aspnetcore-3.0"
-Jest to pierwszy samouczek dotyczący serii, który uczy się podstaw tworzenia aplikacji sieci Web Razor Pages ASP.NET Core.
+Jest to pierwszy samouczek dotyczący serii, który uczy się podstaw tworzenia Razor aplikacji sieci web ASP.NET Core Pages.
 
 [!INCLUDE[](~/includes/advancedRP.md)]
 
@@ -34,17 +34,17 @@ Na końcu serii będziesz mieć aplikację, która zarządza bazą danych filmó
 W tym samouczku zostały wykonane następujące czynności:
 
 > [!div class="checklist"]
-> * Utwórz aplikację sieci Web Razor Pages.
+> * Tworzenie Razor aplikacji sieci Web dla stron.
 > * Uruchom aplikację.
 > * Przejrzyj pliki projektu.
 
-Na końcu tego samouczka będziesz mieć działającą Razor Pagesową aplikację internetową, która zostanie wdrożona w kolejnych samouczkach.
+Na końcu tego samouczka będziesz mieć Razor aplikację sieci Web strony roboczej, która zostanie utworzona w kolejnych samouczkach.
 
 ![Strona główna lub indeks](razor-pages-start/_static/home2.2.png)
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs-3.1.md)]
 
@@ -58,9 +58,9 @@ Na końcu tego samouczka będziesz mieć działającą Razor Pagesową aplikacj�
 
 ---
 
-## <a name="create-a-razor-pages-web-app"></a>Tworzenie aplikacji internetowych ze stronami Razor
+## <a name="create-a-razor-pages-web-app"></a>Tworzenie Razor aplikacji sieci Web dla stron
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 * Z menu **plik** programu Visual Studio wybierz pozycję **Nowy** > **projekt**.
 * Utwórz nową aplikację sieci Web ASP.NET Core a następnie wybierz pozycję **dalej**.
@@ -80,7 +80,7 @@ Na końcu tego samouczka będziesz mieć działającą Razor Pagesową aplikacj�
 
 * Otwórz [zintegrowany terminal](https://code.visualstudio.com/docs/editor/integrated-terminal).
 
-* Przejdź do katalogu (`cd`), który będzie zawierać projekt.
+* Przejdź do katalogu ( `cd` ), który będzie zawierać projekt.
 
 * Uruchom następujące polecenia:
 
@@ -89,10 +89,10 @@ Na końcu tego samouczka będziesz mieć działającą Razor Pagesową aplikacj�
   code -r RazorPagesMovie
   ```
 
-  * `dotnet new` Polecenie tworzy nowy projekt Razor Pages w folderze *RazorPagesMovie* .
-  * `code` Polecenie otwiera folder *RazorPagesMovie* w bieżącym wystąpieniu Visual Studio Code.
+  * `dotnet new`Polecenie tworzy nowy Razor Projekt strony w folderze *RazorPagesMovie* .
+  * `code`Polecenie otwiera folder *RazorPagesMovie* w bieżącym wystąpieniu Visual Studio Code.
 
-* Gdy ikona płomienia OmniSharp na pasku stanu zmieni kolor na zielony, w oknie dialogowym zostanie wyświetlony monit **o podanie wymaganych zasobów do skompilowania i debugowania z elementu "RazorPagesMovie". Dodać je?** Wybierz pozycję **tak**.
+* Gdy ikona płomienia OmniSharp na pasku stanu zmieni kolor na zielony, w oknie dialogowym zostanie wyświetlony monit **o podanie wymaganych zasobów do skompilowania i debugowania z elementu "RazorPagesMovie". Dodać je?** Wybierz pozycję **Tak**.
 
   Katalog *. programu vscode* , zawierający pliki *Launch. JSON* i *Tasks. JSON* , jest dodawany do katalogu głównego projektu.
 
@@ -100,19 +100,24 @@ Na końcu tego samouczka będziesz mieć działającą Razor Pagesową aplikacj�
 
 * Wybierz pozycję **plik** > **nowe rozwiązanie**.
 
-![macOS nowe rozwiązanie](../first-mvc-app/start-mvc/_static/new_project_vsmac.png)
+  ![macOS nowe rozwiązanie](../first-mvc-app/start-mvc/_static/new_project_vsmac.png)
 
-* Wybierz pozycję > **App** > **Next** **aplikacja internetowa** aplikacji > **.NET Core** .
+* W Visual Studio dla komputerów Mac starszej niż wersja 8,6 Wybierz **.NET Core**pozycję  >  **App**  >  **aplikacja internetowa aplikacji sieci Web**platformy .NET Core  >  **Next**. W wersji 8,6 lub nowszej wybierz kolejno pozycje **Sieć Web i aplikacja konsoli**aplikacji  >  **App**  >  **sieci Web**  >  **Next**.
 
-  ![okno dialogowe nowego projektu macOS](razor-pages-start/_static/webapp.png)
+  ![Wybieranie szablonu aplikacji sieci Web macOS](razor-pages-start/_static/web_app_template_vsmac.png)
 
-* W oknie dialogowym **Konfigurowanie nowej aplikacji sieci Web** Ustaw platformę **docelową** na **platformę .NET Core 3,1**.
+* Potwierdź następujące konfiguracje:
+
+  * **Platforma docelowa** jest ustawiona na **platformę .NET Core 3,1**.
+  * **Uwierzytelnianie** jest ustawione na wartość **bez uwierzytelniania**.
+   
+  Wybierz pozycję **Dalej**.
 
   ![wybór macOS .NET Core 3,1](razor-pages-start/_static/targetframework3.png)
 
 * Nazwij projekt **RazorPagesMovie**, a następnie wybierz pozycję **Utwórz**.
 
-  ![nameproj](razor-pages-start/_static/RazorPagesMovie.png)
+  ![macOS Nazwij projekt](razor-pages-start/_static/RazorPagesMovie.png)
 
 <!-- End of VS tabs -->
 
@@ -128,9 +133,9 @@ Poniżej przedstawiono Omówienie folderów i plików projektu głównego, z kt�
 
 ### <a name="pages-folder"></a>Folder stron
 
-Zawiera strony Razor i pliki pomocnicze. Każda strona Razor to para plików:
+Zawiera Razor strony i pliki pomocnicze. Każda Razor strona to para plików:
 
-* Plik *. cshtml* , który zawiera znaczniki HTML z kodem C# przy użyciu składnia Razor.
+* Plik *. cshtml* , który zawiera znaczniki HTML z kodem C# przy użyciu Razor składni.
 * Plik *. cshtml.cs* , który zawiera kod C#, który obsługuje zdarzenia strony.
 
 Pliki pomocnicze mają nazwy zaczynające się od znaku podkreślenia. Na przykład plik *_Layout. cshtml* służy do konfigurowania elementów interfejsu użytkownika wspólnych dla wszystkich stron. Ten plik konfiguruje menu nawigacji w górnej części strony i informacje o prawach autorskich w dolnej części strony. Aby uzyskać więcej informacji, zobacz <xref:mvc/views/layout>.
@@ -164,7 +169,7 @@ Przejdź do następnego samouczka z serii:
 
 ::: moniker range="< aspnetcore-3.0"
 
-Jest to pierwszy samouczek dotyczący serii. [Seria zawiera](xref:tutorials/razor-pages/index) podstawowe informacje na temat tworzenia aplikacji sieci web ASP.NET Core Razor Pages.
+Jest to pierwszy samouczek dotyczący serii. [Seria](xref:tutorials/razor-pages/index) uczy się podstaw tworzenia Razor aplikacji sieci Web ASP.NET Core Pages.
 
 [!INCLUDE[](~/includes/advancedRP.md)]
 
@@ -175,17 +180,17 @@ Na końcu serii będziesz mieć aplikację, która zarządza bazą danych filmó
 W tym samouczku zostały wykonane następujące czynności:
 
 > [!div class="checklist"]
-> * Utwórz aplikację sieci Web Razor Pages.
+> * Tworzenie Razor aplikacji sieci Web dla stron.
 > * Uruchom aplikację.
 > * Przejrzyj pliki projektu.
 
-Na końcu tego samouczka będziesz mieć działającą Razor Pagesową aplikację internetową, która zostanie wdrożona w kolejnych samouczkach.
+Na końcu tego samouczka będziesz mieć Razor aplikację sieci Web strony roboczej, która zostanie utworzona w kolejnych samouczkach.
 
 ![Strona główna lub indeks](razor-pages-start/_static/home2.2.png)
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs2019-2.2.md)]
 
@@ -199,9 +204,9 @@ Na końcu tego samouczka będziesz mieć działającą Razor Pagesową aplikacj�
 
 ---
 
-## <a name="create-a-razor-pages-web-app"></a>Tworzenie aplikacji internetowych ze stronami Razor
+## <a name="create-a-razor-pages-web-app"></a>Tworzenie Razor aplikacji sieci Web dla stron
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 * Z menu **plik** programu Visual Studio wybierz pozycję **Nowy** > **projekt**.
 
@@ -225,7 +230,7 @@ Na końcu tego samouczka będziesz mieć działającą Razor Pagesową aplikacj�
 
 * Otwórz [zintegrowany terminal](https://code.visualstudio.com/docs/editor/integrated-terminal).
 
-* Przejdź do katalogu (`cd`), który będzie zawierać projekt.
+* Przejdź do katalogu ( `cd` ), który będzie zawierać projekt.
 
 * Uruchom następujące polecenia:
 
@@ -234,10 +239,10 @@ Na końcu tego samouczka będziesz mieć działającą Razor Pagesową aplikacj�
   code -r RazorPagesMovie
   ```
 
-  * `dotnet new` Polecenie tworzy nowy projekt Razor Pages w folderze *RazorPagesMovie* .
-  * `code` Polecenie otwiera folder *RazorPagesMovie* w bieżącym wystąpieniu Visual Studio Code.
+  * `dotnet new`Polecenie tworzy nowy Razor Projekt strony w folderze *RazorPagesMovie* .
+  * `code`Polecenie otwiera folder *RazorPagesMovie* w bieżącym wystąpieniu Visual Studio Code.
 
-* Gdy ikona płomienia OmniSharp na pasku stanu zmieni kolor na zielony, w oknie dialogowym zostanie wyświetlony monit **o podanie wymaganych zasobów do skompilowania i debugowania z elementu "RazorPagesMovie". Dodać je?** Wybierz pozycję **tak**.
+* Gdy ikona płomienia OmniSharp na pasku stanu zmieni kolor na zielony, w oknie dialogowym zostanie wyświetlony monit **o podanie wymaganych zasobów do skompilowania i debugowania z elementu "RazorPagesMovie". Dodać je?** Wybierz pozycję **Tak**.
 
   Katalog *. programu vscode* , zawierający pliki *Launch. JSON* i *Tasks. JSON* , jest dodawany do katalogu głównego projektu.
 
@@ -247,9 +252,7 @@ Na końcu tego samouczka będziesz mieć działającą Razor Pagesową aplikacj�
 
 ![macOS nowe rozwiązanie](../first-mvc-app/start-mvc/_static/new_project_vsmac.png)
 
-* Wybierz pozycję > **App** > **Next** **aplikacja internetowa** aplikacji > **.NET Core** .
-
-  ![okno dialogowe nowego projektu macOS](razor-pages-start/_static/webapp.png)
+* W Visual Studio dla komputerów Mac starszej niż wersja 8,6 Wybierz **.NET Core**pozycję  >  **App**  >  **aplikacja internetowa aplikacji sieci Web**platformy .NET Core  >  **Next**. W wersji 8,6 lub nowszej wybierz kolejno pozycje **Sieć Web i aplikacja konsoli**aplikacji  >  **App**  >  **sieci Web**  >  **Next**.
 
 * W oknie dialogowym **Konfigurowanie nowego interfejsu API sieci Web ASP.NET Core** Ustaw platformę **docelową** na **.NET Core 3,1**.
 
@@ -265,13 +268,13 @@ Na końcu tego samouczka będziesz mieć działającą Razor Pagesową aplikacj�
 
 ## <a name="run-the-app"></a>Uruchomienie aplikacji
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 * Naciśnij klawisze CTRL + F5, aby uruchomić bez debugera.
 
   [!INCLUDE[](~/includes/trustCertVS.md)]
 
-  Program Visual Studio jest uruchamiany [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) i uruchomi aplikację. Na pasku adresu są `localhost:port#` wyświetlane inne elementy, `example.com`takie jak. Wynika `localhost` to z tego, że jest standardową nazwą hosta dla komputera lokalnego. Host lokalny obsługuje tylko żądania sieci Web z komputera lokalnego. Podczas tworzenia projektu internetowego w programie Visual Studio dla serwera internetowego jest używany losowy port.
+  Program Visual Studio jest uruchamiany [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) i uruchomi aplikację. Na pasku adresu są wyświetlane inne elementy `localhost:port#` , takie jak `example.com` . Wynika to z tego, że `localhost` jest standardową nazwą hosta dla komputera lokalnego. Host lokalny obsługuje tylko żądania sieci Web z komputera lokalnego. Podczas tworzenia projektu internetowego w programie Visual Studio dla serwera internetowego jest używany losowy port.
 
 * Na stronie głównej aplikacji wybierz pozycję **Akceptuj** , aby wyrazić zgodę na śledzenie.
 
@@ -289,7 +292,7 @@ Na końcu tego samouczka będziesz mieć działającą Razor Pagesową aplikacj�
 
 * Naciśnij **klawisze CTRL + F5** , aby uruchomić bez debugera.
 
-  Visual Studio Code uruchamia [Kestrel](xref:fundamentals/servers/kestrel), uruchamia przeglądarkę i nawiguje do `http://localhost:5001`. Na pasku adresu są `localhost:port#` wyświetlane inne elementy, `example.com`takie jak. Wynika `localhost` to z tego, że jest standardową nazwą hosta dla komputera lokalnego. Host lokalny obsługuje tylko żądania sieci Web z komputera lokalnego.
+  Visual Studio Code uruchamia [Kestrel](xref:fundamentals/servers/kestrel), uruchamia przeglądarkę i nawiguje do `http://localhost:5001` . Na pasku adresu są wyświetlane inne elementy `localhost:port#` , takie jak `example.com` . Wynika to z tego, że `localhost` jest standardową nazwą hosta dla komputera lokalnego. Host lokalny obsługuje tylko żądania sieci Web z komputera lokalnego.
 
 * Na stronie głównej aplikacji wybierz pozycję **Akceptuj** , aby wyrazić zgodę na śledzenie.
 
@@ -307,7 +310,7 @@ Na końcu tego samouczka będziesz mieć działającą Razor Pagesową aplikacj�
 
 * Naciśnij **polecenie cmd-opt-F5** , aby uruchomić program bez debugera.
 
-  Program Visual Studio uruchamia [Kestrel](xref:fundamentals/servers/kestrel), uruchamia przeglądarkę i przechodzi do `http://localhost:5001`.
+  Program Visual Studio uruchamia [Kestrel](xref:fundamentals/servers/kestrel), uruchamia przeglądarkę i przechodzi do `http://localhost:5001` .
 
 * Na stronie głównej aplikacji wybierz pozycję **Akceptuj** , aby wyrazić zgodę na śledzenie.
 
@@ -331,7 +334,7 @@ Poniżej przedstawiono Omówienie folderów i plików projektu głównego, z kt�
 
 Zawiera Razor strony i pliki pomocnicze. Każda Razor strona to para plików:
 
-* Plik *. cshtml* , który zawiera znaczniki HTML z kodem C# przy Razor użyciu składni.
+* Plik *. cshtml* , który zawiera znaczniki HTML z kodem C# przy użyciu Razor składni.
 * Plik *. cshtml.cs* , który zawiera kod C#, który obsługuje zdarzenia strony.
 
 Pliki pomocnicze mają nazwy zaczynające się od znaku podkreślenia. Na przykład plik *_Layout. cshtml* służy do konfigurowania elementów interfejsu użytkownika wspólnych dla wszystkich stron. Ten plik konfiguruje menu nawigacji w górnej części strony i informacje o prawach autorskich w dolnej części strony. Aby uzyskać więcej informacji, zobacz <xref:mvc/views/layout>.

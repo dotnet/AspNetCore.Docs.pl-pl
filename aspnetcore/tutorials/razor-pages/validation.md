@@ -1,5 +1,5 @@
 ---
-title: Dodawanie walidacji do strony Razor ASP.NET Core
+title: Dodawanie walidacji do Razor strony ASP.NET Core
 author: rick-anderson
 description: Dowiedz się, jak dodać weryfikację do Razor strony w ASP.NET Core.
 ms.author: riande
@@ -12,56 +12,56 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/validation
-ms.openlocfilehash: 91f0ac5fcd607f2423f9fc4647413b2bbb2336fc
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 7aeb77e836ce0546766d88f2c52f37aaf75c12c4
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773778"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84452047"
 ---
-# <a name="add-validation-to-an-aspnet-core-razor-page"></a>Dodawanie walidacji do ASP.NET Core stronie Razor
+# <a name="add-validation-to-an-aspnet-core-razor-page"></a>Dodawanie walidacji do Razor strony ASP.NET Core
 
 Autor: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-W tej sekcji logika walidacji jest dodawana `Movie` do modelu. Reguły sprawdzania poprawności są wymuszane za każdym razem, gdy użytkownik tworzy lub edytuje film.
+W tej sekcji logika walidacji jest dodawana do `Movie` modelu. Reguły sprawdzania poprawności są wymuszane za każdym razem, gdy użytkownik tworzy lub edytuje film.
 
 ## <a name="validation"></a>Walidacja
 
-Kluczową cechą rozwoju oprogramowania jest nazywana [sucha](https://wikipedia.org/wiki/Don%27t_repeat_yourself) ("**D**on't **R**EPEAT **Y**ourself"). Razor Pages zachęca do programowania, w którym funkcje są określone raz i są widoczne w całej aplikacji. SUCHy może pomóc:
+Kluczową cechą rozwoju oprogramowania jest nazywana [sucha](https://wikipedia.org/wiki/Don%27t_repeat_yourself) ("**D**on't **R**EPEAT **Y**ourself"). RazorStrony zachęcają do programowania, w którym funkcje są określone raz i są widoczne w całej aplikacji. SUCHy może pomóc:
 
 * Zmniejsz ilość kodu w aplikacji.
 * Spraw, aby kod był mniej podatny na błędy i łatwiejszy do testowania i konserwowania.
 
-Pomoc techniczna dotycząca walidacji świadczona przez Razor Pages i Entity Framework jest dobrym przykładem zasady SUCHEj. Reguły sprawdzania poprawności są deklaratywnie określone w jednym miejscu (w klasie modelu), a reguły są wymuszane wszędzie w aplikacji.
+Obsługa walidacji zapewniana przez Razor strony i Entity Framework jest dobrym przykładem tej zasady. Reguły sprawdzania poprawności są deklaratywnie określone w jednym miejscu (w klasie modelu), a reguły są wymuszane wszędzie w aplikacji.
 
 ## <a name="add-validation-rules-to-the-movie-model"></a>Dodawanie reguł walidacji do modelu filmu
 
-Przestrzeń nazw DataAnnotations zawiera zestaw wbudowanych atrybutów walidacji, które są stosowane deklaratywnie do klasy lub właściwości. Adnotacje DataAnnotation zawierają również atrybuty `DataType` formatowania, takie jak pomoc dotycząca formatowania i nie zapewniają weryfikacji.
+Przestrzeń nazw DataAnnotations zawiera zestaw wbudowanych atrybutów walidacji, które są stosowane deklaratywnie do klasy lub właściwości. Adnotacje DataAnnotation zawierają również atrybuty formatowania, takie jak `DataType` Pomoc dotycząca formatowania i nie zapewniają weryfikacji.
 
-`Movie` Zaktualizuj klasę, aby skorzystać z wbudowanych atrybutów `Required`, `StringLength`, `RegularExpression`i `Range` walidacji.
+Zaktualizuj `Movie` klasę, aby skorzystać z wbudowanych `Required` `StringLength` atrybutów,, `RegularExpression` i `Range` walidacji.
 
 [!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Models/MovieDateRatingDA.cs?name=snippet1)]
 
 Atrybuty walidacji określają zachowanie, które chcesz wymusić na właściwościach modelu, do których są stosowane:
 
-* Atrybuty `Required` i `MinimumLength` wskazują, że właściwość musi mieć wartość; jednak nic nie zapobiega wprowadzaniu przez użytkownika białych znaków w celu zaspokojenia tej walidacji.
+* `Required`Atrybuty i `MinimumLength` wskazują, że właściwość musi mieć wartość, ale nic nie zapobiega wprowadzaniu przez użytkownika odstępu w celu zaspokojenia tej walidacji.
 * Ten `RegularExpression` atrybut służy do ograniczania, jakie znaki mogą być wprowadzane. W poprzednim kodzie "gatunek":
 
   * Należy używać tylko liter.
   * Pierwsza litera musi być wielką literą. Odstępy, cyfry i znaki specjalne są niedozwolone.
 
-* `RegularExpression` "Ocena":
+* `RegularExpression`"Ocena":
 
   * Wymaga, aby pierwszy znak był wielką literą.
   * Zezwala na znaki specjalne i cyfry w kolejnych odstępach. "PG-13" jest prawidłowy dla oceny, ale kończy się niepowodzeniem dla "gatunku".
 
 * Atrybut `Range` ogranicza wartość do określonego zakresu.
 * Ten `StringLength` atrybut pozwala ustawić maksymalną długość właściwości ciągu i opcjonalnie jej długość minimalną.
-* Typy wartości (takie jak `decimal`, `int` `float`,, `DateTime`) są z założenia wymagane i nie wymagają `[Required]` atrybutu.
+* Typy wartości (takie jak `decimal` ,,, `int` `float` `DateTime` ) są z założenia wymagane i nie wymagają `[Required]` atrybutu.
 
 Automatyczne Wymuszanie reguł sprawdzania poprawności przez ASP.NET Core pomaga zwiększyć niezawodność aplikacji. Gwarantuje to również, że nie można zapomnieć, aby zweryfikować coś i przypadkowo umożliwić niewłaściwe dane w bazie danych.
 
-### <a name="validation-error-ui-in-razor-pages"></a>Interfejs użytkownika błędu walidacji w Razor Pages
+### <a name="validation-error-ui-in-razor-pages"></a>Interfejs użytkownika błędu walidacji na Razor stronach
 
 Uruchom aplikację i przejdź do stron/filmów.
 
@@ -73,7 +73,7 @@ Wybierz łącze **Utwórz nowy** . Wypełnij formularz z nieprawidłowymi warto�
 
 Zwróć uwagę, jak formularz automatycznie renderuje komunikat o błędzie walidacji w każdym polu zawierającym nieprawidłową wartość. Błędy są wymuszane po stronie klienta (przy użyciu języków JavaScript i jQuery) i po stronie serwera (gdy użytkownik ma wyłączony kod JavaScript).
 
-Znacząca korzyść polega na tym, że zmiany kodu **nie** były wymagane na stronach tworzenia i edytowania. Gdy do modelu zastosowano adnotacje DataAnnotations, interfejs użytkownika weryfikacji został włączony. Razor Pages utworzone w tym samouczku automatycznie pobiera reguły walidacji (przy użyciu atrybutów walidacji we właściwościach klasy `Movie` modelu). Sprawdzanie poprawności testu za pomocą strony Edycja, to samo sprawdzanie poprawności jest stosowane.
+Znacząca korzyść polega na tym, że zmiany kodu **nie** były wymagane na stronach tworzenia i edytowania. Gdy do modelu zastosowano adnotacje DataAnnotations, interfejs użytkownika weryfikacji został włączony. RazorStrony utworzone w tym samouczku automatycznie pobierają reguły sprawdzania poprawności (przy użyciu atrybutów walidacji we właściwościach `Movie` klasy modelu). Sprawdzanie poprawności testu za pomocą strony Edycja, to samo sprawdzanie poprawności jest stosowane.
 
 Dane formularza nie są ogłaszane na serwerze, dopóki nie zostaną wykryte błędy weryfikacji po stronie klienta. Sprawdź, czy dane formularza nie zostały ogłoszone przy użyciu co najmniej jednej z następujących metod:
 
@@ -107,23 +107,23 @@ Poniższy kod przedstawia część strony *Create. cshtml* podświetloną wcześ
 
 [Pomocnik tagu wejściowego](xref:mvc/views/working-with-forms) używa atrybutów [DataAnnotations](/aspnet/mvc/overview/older-versions/mvc-music-store/mvc-music-store-part-6) i tworzy atrybuty HTML, które są zbędne do walidacji jQuery po stronie klienta. [Pomocnik tagów walidacji](xref:mvc/views/working-with-forms#the-validation-tag-helpers) wyświetla błędy walidacji. Aby uzyskać więcej informacji, zobacz [Walidacja](xref:mvc/models/validation) .
 
-Na stronach tworzenie i edytowanie nie są dostępne żadne reguły sprawdzania poprawności. Reguły walidacji i ciągi błędów są określone tylko w `Movie` klasie. Te reguły sprawdzania poprawności są automatycznie stosowane do Razor Pages, które `Movie` edytują model.
+Na stronach tworzenie i edytowanie nie są dostępne żadne reguły sprawdzania poprawności. Reguły walidacji i ciągi błędów są określone tylko w `Movie` klasie. Te reguły sprawdzania poprawności są automatycznie stosowane do Razor stron, które edytują `Movie` model.
 
 Gdy wymagana jest zmiana logiki walidacji, jest ona wykonywana tylko w modelu. Walidacja jest stosowana spójnie w całej aplikacji (logika walidacji jest definiowana w jednym miejscu). Sprawdzanie poprawności w jednym miejscu pomaga zachować czysty kod i ułatwić jego utrzymywanie i aktualizowanie.
 
 ## <a name="using-datatype-attributes"></a>Używanie atrybutów DataType
 
-Zapoznaj `Movie` się z klasą. `System.ComponentModel.DataAnnotations` Przestrzeń nazw zawiera atrybuty formatowania oprócz wbudowanego zestawu atrybutów walidacji. Atrybut `DataType` jest stosowany do właściwości `ReleaseDate` i `Price`.
+Zapoznaj się z `Movie` klasą. `System.ComponentModel.DataAnnotations`Przestrzeń nazw zawiera atrybuty formatowania oprócz wbudowanego zestawu atrybutów walidacji. Atrybut `DataType` jest stosowany do właściwości `ReleaseDate` i `Price`.
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie/Models/MovieDateRatingDA.cs?highlight=2,6&name=snippet2)]
 
-`DataType` Atrybuty zawierają tylko wskazówki dla aparatu widoku do formatowania danych (i udostępniają atrybuty, takie jak `<a>` adresy URL i `<a href="mailto:EmailAddress.com">` wiadomości e-mail). Użyj atrybutu `RegularExpression` , aby sprawdzić poprawność formatu danych. Ten `DataType` atrybut służy do określania typu danych, który jest bardziej szczegółowy niż typ wewnętrzny bazy danych. `DataType`atrybuty nie są atrybutami walidacji. W przykładowej aplikacji tylko data jest wyświetlana bez czasu.
+`DataType`Atrybuty zawierają tylko wskazówki dla aparatu widoku do formatowania danych (i udostępniają atrybuty, takie jak `<a>` adresy URL i `<a href="mailto:EmailAddress.com">` wiadomości e-mail). Użyj `RegularExpression` atrybutu, aby sprawdzić poprawność formatu danych. Ten `DataType` atrybut służy do określania typu danych, który jest bardziej szczegółowy niż typ wewnętrzny bazy danych. `DataType`atrybuty nie są atrybutami walidacji. W przykładowej aplikacji tylko data jest wyświetlana bez czasu.
 
-`DataType` Wyliczenie zawiera wiele typów danych, takich jak data, godzina, numer telefonu, waluta, EmailAddress i inne. Ten `DataType` atrybut może również umożliwić aplikacji automatyczne udostępnianie funkcji specyficznych dla typu. Na przykład można utworzyć `mailto:` link dla `DataType.EmailAddress`. `DataType.Date` W przeglądarkach, które obsługują HTML5, można podać selektor daty. `DataType` Atrybuty EMITUJĄ pliki HTML 5 `data-` (wymawiane kreski danych) używane przez przeglądarki HTML 5. `DataType` Atrybuty **nie zapewniają żadnej** weryfikacji.
+`DataType`Wyliczenie zawiera wiele typów danych, takich jak data, godzina, numer telefonu, waluta, EmailAddress i inne. Ten `DataType` atrybut może również umożliwić aplikacji automatyczne udostępnianie funkcji specyficznych dla typu. Na przykład `mailto:` można utworzyć link dla `DataType.EmailAddress` . `DataType.Date`W przeglądarkach, które obsługują HTML5, można podać selektor daty. `DataType`Atrybuty emitują pliki HTML 5 `data-` (wymawiane kreski danych) używane przez przeglądarki HTML 5. `DataType`Atrybuty nie zapewniają **not** żadnej weryfikacji.
 
-`DataType.Date`nie określa formatu wyświetlanej daty. Domyślnie pole dane jest wyświetlane zgodnie z domyślnymi formatami opartymi na serwerze `CultureInfo`.
+`DataType.Date`nie określa formatu wyświetlanej daty. Domyślnie pole dane jest wyświetlane zgodnie z domyślnymi formatami opartymi na serwerze `CultureInfo` .
 
-Adnotacja `[Column(TypeName = "decimal(18, 2)")]` danych jest wymagana, aby Entity Framework Core prawidłowo mapować `Price` do waluty w bazie danych. Aby uzyskać więcej informacji, zobacz [typy danych](/ef/core/modeling/relational/data-types).
+`[Column(TypeName = "decimal(18, 2)")]`Adnotacja danych jest wymagana, aby Entity Framework Core prawidłowo mapować `Price` do waluty w bazie danych. Aby uzyskać więcej informacji, zobacz [typy danych](/ef/core/modeling/relational/data-types).
 
 Ten `DisplayFormat` atrybut służy do jawnego określenia formatu daty:
 
@@ -132,15 +132,15 @@ Ten `DisplayFormat` atrybut służy do jawnego określenia formatu daty:
 public DateTime ReleaseDate { get; set; }
 ```
 
-`ApplyFormatInEditMode` Ustawienie określa, że formatowanie ma być stosowane, gdy wartość jest wyświetlana do edycji. Takie zachowanie może nie być konieczne w przypadku niektórych pól. Na przykład w przypadku wartości walut prawdopodobnie nie potrzebujesz symbolu waluty w interfejsie użytkownika edycji.
+`ApplyFormatInEditMode`Ustawienie określa, że formatowanie ma być stosowane, gdy wartość jest wyświetlana do edycji. Takie zachowanie może nie być konieczne w przypadku niektórych pól. Na przykład w przypadku wartości walut prawdopodobnie nie potrzebujesz symbolu waluty w interfejsie użytkownika edycji.
 
 Ten `DisplayFormat` atrybut może być używany przez siebie, ale zazwyczaj dobrym pomysłem jest użycie `DataType` atrybutu. Ten `DataType` atrybut przekazuje semantykę danych w przeciwieństwie do sposobu renderowania na ekranie i zapewnia następujące korzyści, których nie można uzyskać za pomocą DisplayFormat:
 
 * Przeglądarka może włączać funkcje HTML5 (na przykład w celu wyświetlania kontrolki kalendarza, symbolu waluty właściwej dla ustawień regionalnych, linków e-mail itp.).
 * Domyślnie przeglądarka będzie renderować dane przy użyciu poprawnego formatu na podstawie ustawień regionalnych.
-* Ten `DataType` atrybut może umożliwić usłudze ASP.NET Core Framework wybranie odpowiedniego szablonu pola w celu renderowania danych. `DisplayFormat` Używany przez siebie sam używa szablonu ciągu.
+* Ten `DataType` atrybut może umożliwić usłudze ASP.NET Core Framework wybranie odpowiedniego szablonu pola w celu renderowania danych. `DisplayFormat`Używany przez siebie sam używa szablonu ciągu.
 
-Uwaga: Walidacja jQuery nie działa z `Range` atrybutem `DateTime`i. Na przykład poniższy kod zawsze będzie wyświetlał błąd walidacji po stronie klienta, nawet wtedy, gdy data jest w określonym zakresie:
+Uwaga: Walidacja jQuery nie działa z `Range` atrybutem i `DateTime` . Na przykład poniższy kod zawsze będzie wyświetlał błąd walidacji po stronie klienta, nawet wtedy, gdy data jest w określonym zakresie:
 
 ```csharp
 [Range(typeof(DateTime), "1/1/1966", "1/1/2020")]
@@ -152,7 +152,7 @@ Poniższy kod ilustruje łączenie atrybutów w jednym wierszu:
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Models/MovieDateRatingDAmult.cs?name=snippet1)]
 
-[Wprowadzenie do Razor Pages i EF Core](xref:data/ef-rp/intro) przedstawia zaawansowane operacje EF Core z Razor Pages.
+[Wprowadzenie do Razor Na stronach i EF Core](xref:data/ef-rp/intro) są wyświetlane zaawansowane operacje EF Core z Razor stronami.
 
 ### <a name="apply-migrations"></a>Zastosuj migracje
 
@@ -163,9 +163,9 @@ Adnotacje zastosowane do klasy zmieniają schemat. Na przykład, adnotacje zasto
 * Ogranicza znaki do 60.
 * Nie zezwala na `null` wartość.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
-`Movie` Tabela ma obecnie następujący schemat:
+`Movie`Tabela ma obecnie następujący schemat:
 
 ```sql
 CREATE TABLE [dbo].[Movie] (
@@ -217,7 +217,7 @@ Migracja nie jest wymagana w przypadku oprogramowania SQLite.
 
 Aby uzyskać informacje na temat wdrażania na platformie Azure, zobacz [Samouczek: Tworzenie aplikacji ASP.NET Core na platformie Azure przy użyciu SQL Database](/azure/app-service/app-service-web-tutorial-dotnetcore-sqldb).
 
-Dziękujemy za zakończenie tego wprowadzenia do Razor stron. [Wprowadzenie do Razor stron i EF Core](xref:data/ef-rp/intro) jest doskonałym postępowaniem z tym samouczkiem.
+Dziękujemy za zakończenie tego wprowadzenia do Razor stron. [Wprowadzenie do Razor Strony i EF Core](xref:data/ef-rp/intro) są doskonałym zaobserwują się z tym samouczkiem.
 
 ## <a name="additional-resources"></a>Zasoby dodatkowe
 

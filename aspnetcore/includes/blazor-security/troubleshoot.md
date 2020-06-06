@@ -16,8 +16,12 @@ Jednym z metod zapobiegania występowaniu plików cookie i danych lokacji z zak�
 * Użyj polecenia niestandardowego, aby otworzyć przeglądarkę w trybie incognito lub prywatnym w programie Visual Studio:
   * Otwórz okno dialogowe **Przeglądaj z programem** Visual Studio. **Run**
   * Wybierz przycisk **Add** (Dodaj).
-  * Podaj ścieżkę do przeglądarki w polu **program** .
-  * W polu **argumenty** Podaj opcję wiersza polecenia, która jest wykorzystywana przez przeglądarkę do otwierania w trybie incognito lub prywatnym i adres URL aplikacji. Przykład:
+  * Podaj ścieżkę do przeglądarki w polu **program** . Następujące ścieżki plików wykonywalnych są typowymi lokalizacjami instalacji dla systemu Windows 10. Jeśli przeglądarka jest zainstalowana w innej lokalizacji lub nie korzystasz z systemu Windows 10, podaj ścieżkę do pliku wykonywalnego przeglądarki.
+    * Microsoft Edge:`C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe`
+    * Google Chrome:`C:\Program Files (x86)\Google\Chrome\Application\chrome.exe`
+    * Mozilla Firefox:`C:\Program Files\Mozilla Firefox\firefox.exe`
+  * W polu **argumenty** Podaj opcję wiersza polecenia, która jest wykorzystywana przez przeglądarkę do otwierania w trybie incognito lub prywatnym. Niektóre przeglądarki wymagają adresu URL aplikacji.
+    * Microsoft Edge:`-inprivate`
     * Google Chrome:`--incognito --new-window https://localhost:5001`
     * Mozilla Firefox:`-private -url https://localhost:5001`
   * Podaj nazwę w polu **przyjazna nazwa** . Na przykład `Firefox Auth Testing`.

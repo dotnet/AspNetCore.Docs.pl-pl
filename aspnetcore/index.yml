@@ -1,21 +1,21 @@
 ### YamlMime:Hub
-title: Dokumentacja platformy ASP.NET
+title: Dokumentacja platformy ASP.NET Core
 summary: Dowiedz się, jak za pomocą platformy ASP.NET Core tworzyć aplikacje i usługi internetowe, które są szybkie, bezpieczne, wieloplatformowe i oparte na chmurze. Przeglądaj samouczki, przykładowy kod, podstawowe informacje, dokumentację interfejsu API i inne materiały.
 brand: aspnet
 metadata:
-  title: Dokumentacja platformy ASP.NET
+  title: Dokumentacja platformy ASP.NET Core
   description: Dowiedz się, jak za pomocą platformy ASP.NET Core tworzyć aplikacje i usługi internetowe, które są szybkie, bezpieczne, wieloplatformowe i oparte na chmurze. Przeglądaj samouczki, przykładowy kod, podstawowe informacje, dokumentację interfejsu API i inne materiały.
   ms.product: aspnet
   ms.topic: hub-page
   author: WadePickett
   ms.author: wpickett
-  ms.date: 05/01/2020
-  ms.openlocfilehash: 2d653ab5ca78fb856098fb5f250a235e3f2635d0
-  ms.sourcegitcommit: c19e388c83c981232e6f128d97440262adfe06e2
+  ms.date: 06/03/2020
+  ms.openlocfilehash: fb4b31258683c5928708e7a2a479f353972c010b
+  ms.sourcegitcommit: 829dca1d5a7dcccbfe90644101c6be1d1c94ac62
   ms.translationtype: HT
   ms.contentlocale: pl-PL
-  ms.lasthandoff: 05/02/2020
-  ms.locfileid: "82727663"
+  ms.lasthandoff: 06/04/2020
+  ms.locfileid: "84355408"
 highlightedContent:
   items:
   - title: Utwórz aplikację ASP.NET Core na dowolnej platformie w zaledwie pięć minut
@@ -39,12 +39,12 @@ highlightedContent:
   - title: Tworzenie pierwszej aplikacji internetowej w czasie rzeczywistym
     itemType: get-started
     url: tutorials/signalr.md
-  - title: Tworzenie pierwszej aplikacji internetowej MVC opartej na danych
-    itemType: get-started
-    url: tutorials/first-mvc-app//start-mvc.md
+  - title: Dokumentacja platformy ASP.NET 4.x
+    itemType: overview
+    url: https://docs.microsoft.com/aspnet/overview
 conceptualContent:
   title: Opracowywanie aplikacji ASP.NET Core
-  summary: Wybierz interaktywne aplikacje internetowe, internetowy interfejs API, aplikacje ze wzorcem MVC, aplikacje w czasie rzeczywistym i inne
+  summary: Wybierz interaktywne aplikacje internetowe, internetowy interfejs API, aplikacje ze wzorcem MVC, aplikacje w czasie rzeczywistym i inne. Aby zapoznać się z dokumentacją platformy ASP.NET 4.x, zobacz [ASP.NET](https://docs.microsoft.com/aspnet/overview).
   items:
   - title: Interaktywne aplikacje platformy Blazor po stronie klienta
     summary: Programuj za pomocą składników interfejsu użytkownika wielokrotnego użytku, które mogą wykorzystać kod WebAssembly na potrzeby niemal natywnej wydajności
@@ -306,7 +306,7 @@ additionalContent:
     - title: Platforma Azure i platforma ASP.NET Core
       links:
       - url: https://docs.microsoft.com/azure/app-service/app-service-web-get-started-dotnet
-        text: Wdrażanie aplikacji internetowej platformy ASP.NET
+        text: Wdrażanie aplikacji internetowej ASP.NET Core
       - url: https://docs.microsoft.com/visualstudio/containers/container-tools?view=vs-2019.md
         text: Platforma ASP.NET Core i platforma Docker
       - url: https://docs.microsoft.com/learn/modules/host-a-web-app-with-azure-app-service/
@@ -314,7 +314,7 @@ additionalContent:
       - url: https://docs.microsoft.com/azure/app-service/app-service-web-tutorial-dotnet-sqldatabase
         text: Usługa App Service i usługa Azure SQL Database
       - url: https://docs.microsoft.com/azure/app-service/app-service-web-tutorial-connect-msi
-        text: Zarządzana tożsamość z platformą ASP.NET i usługą Azure SQL Database
+        text: Zarządzana tożsamość z platformą ASP.NET Core i usługą Azure SQL Database
       - url: https://docs.microsoft.com/azure/app-service/app-service-web-tutorial-rest-api
         text: Internetowy interfejs API z mechanizmem CORS w usłudze Azure App Service
       - url: https://docs.microsoft.com/learn/modules/capture-application-logs-app-service/
@@ -373,4 +373,4 @@ additionalContent:
         text: Typowe technologie internetowe po stronie klienta
       - url: https://docs.microsoft.com/dotnet/architecture/modern-web-apps-azure/development-process-for-azure
         text: Proces programistyczny dla platformy Azure
-  footer: Współtwórz dokumentację platformy ASP.NET. Przeczytaj nasz [przewodnik współautora](https://github.com/aspnet/AspNetCore.Docs/blob/master/CONTRIBUTING.md).
+  footer: Współtwórz dokumentację platformy ASP.NET Core. Przeczytaj nasz [przewodnik współautora](https://github.com/aspnet/AspNetCore.Docs/blob/master/CONTRIBUTING.md).

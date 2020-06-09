@@ -1,12 +1,24 @@
 ---
-title: "Rejestrowanie i Diagnostyka w ASP.NET Core SignalR " autor: Opis: "informacje o zbieraniu diagnostyki z aplikacji ASP.NET Core SignalR ".
-monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
+title: Rejestrowanie i Diagnostyka w ASP.NET CoreSignalR
+author: anurse
+description: Dowiedz się, jak zbierać diagnostykę z SignalR aplikacji ASP.NET Core.
+monikerRange: '>= aspnetcore-2.1'
+ms.author: anurse
+ms.custom: signalr
+ms.date: 06/08/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: signalr/diagnostics
+ms.openlocfilehash: 22e1d24bc9fed5fd8588c852e07f5ca935946596
+ms.sourcegitcommit: 05490855e0c70565f0c4b509d392b0828bcfd141
+ms.translationtype: MT
+ms.contentlocale: pl-PL
+ms.lasthandoff: 06/08/2020
+ms.locfileid: "84507319"
 ---
 # <a name="logging-and-diagnostics-in-aspnet-core-signalr"></a>Rejestrowanie i Diagnostyka w ASP.NET CoreSignalR
 
@@ -77,38 +89,18 @@ Aby całkowicie wyłączyć rejestrowanie, określ `signalR.LogLevel.None` w `co
 W poniższej tabeli przedstawiono poziomy dziennika dostępne dla klienta JavaScript. Ustawienie poziomu dziennika na jedną z tych wartości umożliwia rejestrowanie na tym poziomie i wszystkich poziomów powyżej niego w tabeli.
 
 | Poziom | Opis |
-| ----- | ---
-title: "Rejestrowanie i Diagnostyka w ASP.NET Core SignalR " autor: Opis: "informacje o zbieraniu diagnostyki z aplikacji ASP.NET Core SignalR ".
-monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: "Rejestrowanie i Diagnostyka w ASP.NET Core SignalR " autor: Opis: "informacje o zbieraniu diagnostyki z aplikacji ASP.NET Core SignalR ".
-monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: "Rejestrowanie i Diagnostyka w ASP.NET Core SignalR " autor: Opis: "informacje o zbieraniu diagnostyki z aplikacji ASP.NET Core SignalR ".
-monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
------- | | `None` | Żadne komunikaty nie są rejestrowane. | | `Critical` | Komunikaty wskazujące niepowodzenie w całej aplikacji. | | `Error` | Komunikaty wskazujące niepowodzenie w bieżącej operacji. | | `Warning` | Komunikaty wskazujące na problem niekrytyczny. | | `Information` | Komunikaty informacyjne. | | `Debug` | Komunikaty diagnostyczne przydatne do debugowania. | | `Trace` | Bardzo szczegółowe komunikaty diagnostyczne przeznaczone do diagnozowania określonych problemów. |
+| ----- | ----------- |
+| `None` | Żadne komunikaty nie są rejestrowane. |
+| `Critical` | Komunikaty wskazujące niepowodzenie w całej aplikacji. |
+| `Error` | Komunikaty wskazujące niepowodzenie w bieżącej operacji. |
+| `Warning` | Komunikaty wskazujące na problem niekrytyczny. |
+| `Information` | Komunikaty informacyjne. |
+| `Debug` | Komunikaty diagnostyczne przydatne do debugowania. |
+| `Trace` | Bardzo szczegółowe komunikaty diagnostyczne przeznaczone do diagnozowania określonych problemów. |
 
 Po skonfigurowaniu szczegółowości dzienniki zostaną zapisane w konsoli przeglądarki (lub w standardowym wyjściu w aplikacji NodeJS).
 
-Jeśli chcesz wysłać dzienniki do niestandardowego systemu rejestrowania, możesz dostarczyć obiekt JavaScript implementujący `ILogger` interfejs. Jedyną metodą, która musi zostać wdrożona `log` , jest, która pobiera poziom zdarzenia i komunikat skojarzony ze zdarzeniem. Przykład:
+Jeśli chcesz wysłać dzienniki do niestandardowego systemu rejestrowania, możesz dostarczyć obiekt JavaScript implementujący `ILogger` interfejs. Jedyną metodą, która musi zostać wdrożona `log` , jest, która pobiera poziom zdarzenia i komunikat skojarzony ze zdarzeniem. Na przykład:
 
 [!code-typescript[](diagnostics/custom-logger.ts?highlight=3-7,13)]
 
@@ -217,6 +209,39 @@ Pliki diagnostyczne można dołączać do problemów z usługą GitHub, zmieniaj
 > Nie należy wklejać zawartości plików dziennika ani śladów sieci do problemu w usłudze GitHub. Te dzienniki i ślady mogą być bardzo duże, a usługi GitHub zwykle obcinają je.
 
 ![Przeciąganie plików dziennika do problemu z usługą GitHub](diagnostics/attaching-diagnostics-files.png)
+
+## <a name="metrics"></a>Metryki
+
+Metryki to reprezentacja danych miar w przedziale czasu. Na przykład żądania na sekundę. Dane metryk umożliwiają obserwację stanu aplikacji na wysokim poziomie. Metryki programu .NET gRPC są emitowane przy użyciu <xref:System.Diagnostics.Tracing.EventCounter> .
+
+### <a name="signalr-server-metrics"></a>SignalRmetryki serwera
+
+SignalRmetryki serwera są raportowane w <xref:Microsoft.AspNetCore.Http.Connections> źródle zdarzeń.
+
+| Nazwa                    | Opis                 |
+|-------------------------|-----------------------------|
+| `connections-started`   | Łączna liczba rozpoczętych połączeń   |
+| `connections-stopped`   | Łączna liczba zatrzymanych połączeń   |
+| `connections-timed-out` | Całkowita liczba limitów połączeń |
+| `current-connections`   | Bieżące połączenia         |
+| `connections-duration`  | Średni czas trwania połączenia |
+
+### <a name="observe-metrics"></a>Obserwuj metryki
+
+[dotnet-Counters](/dotnet/core/diagnostics/dotnet-counters) to narzędzie do monitorowania wydajności dla monitorowania kondycji ad hoc i badania wydajności pierwszego poziomu. Monitoruj aplikację .NET za pomocą `Microsoft.AspNetCore.Http.Connections` nazwy dostawcy. Na przykład:
+
+```console
+> dotnet-counters monitor --process-id 37016 Microsoft.AspNetCore.Http.Connections
+
+Press p to pause, r to resume, q to quit.
+    Status: Running
+[Microsoft.AspNetCore.Http.Connections]
+    Average Connection Duration (ms)       16,040.56
+    Current Connections                         1
+    Total Connections Started                   8
+    Total Connections Stopped                   7
+    Total Connections Timed Out                 0
+```
 
 ## <a name="additional-resources"></a>Zasoby dodatkowe
 

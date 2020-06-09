@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-blazor-app
-ms.openlocfilehash: 8cf356b5c9876a4114942af27a22df6bd324d0e2
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: ce3f20f7ee4ccfa73afc5f80a4429d9f4fe05591
+ms.sourcegitcommit: 05490855e0c70565f0c4b509d392b0828bcfd141
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84355217"
+ms.lasthandoff: 06/08/2020
+ms.locfileid: "84507260"
 ---
 # <a name="build-your-first-blazor-app"></a>Tworzenie pierwszej Blazor aplikacji
 
@@ -32,7 +32,7 @@ W tym samouczku pokazano, jak utworzyć i zmodyfikować Blazor aplikację. Omawi
 > * Używanie obsługi zdarzeń i powiązania danych w składnikach
 > * Używanie iniekcji zależności (DI) i routingu w Blazor aplikacji
 
-Na końcu tego samouczka będziesz mieć działającą aplikację czatu.
+Na końcu tego samouczka będziesz mieć działającą aplikację z listą zadań do wykonania.
 
 ## <a name="build-components"></a>Składniki kompilacji
 

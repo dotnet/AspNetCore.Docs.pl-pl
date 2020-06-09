@@ -11,12 +11,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-view
-ms.openlocfilehash: c89e0f0428fa7556fcd6b75cdfc1dd19109ec1c8
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 233d6cc060481c7b2efc9a1babc12f60f457a075
+ms.sourcegitcommit: 05490855e0c70565f0c4b509d392b0828bcfd141
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774603"
+ms.lasthandoff: 06/08/2020
+ms.locfileid: "84507338"
 ---
 # <a name="add-a-view-to-an-aspnet-core-mvc-app"></a>Dodawanie widoku do aplikacji ASP.NET Core MVC
 
@@ -24,19 +24,19 @@ Autor: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 ::: moniker range=">= aspnetcore-3.0"
 
-W tej sekcji zmodyfikujesz `HelloWorldController` klasę, aby używać plików widoku [Razor](xref:mvc/views/razor) do czystego hermetyzacji procesu generowania odpowiedzi HTML na klienta.
+W tej sekcji zmodyfikujesz `HelloWorldController` klasę, aby używać [Razor](xref:mvc/views/razor) plików do wyświetlania w celu czystego hermetyzowania procesu generowania odpowiedzi HTML na klienta.
 
-Tworzysz plik szablonu widoku przy użyciu Razor. Szablony widoku oparte na Razor mają rozszerzenie *. cshtml* . Zapewniają elegancki sposób tworzenia danych wyjściowych HTML przy użyciu języka C#.
+Tworzysz plik szablonu widoku przy użyciu Razor . RazorSzablony widoków oparte na programie mają rozszerzenie *. cshtml* . Zapewniają elegancki sposób tworzenia danych wyjściowych HTML przy użyciu języka C#.
 
 Obecnie `Index` Metoda zwraca ciąg z komunikatem, który jest zakodowany w klasie Controller. W `HelloWorldController` klasie Zastąp `Index` metodę następującym kodem:
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/HelloWorldController.cs?name=snippet_4)]
 
-Poprzedni kod wywołuje <xref:Microsoft.AspNetCore.Mvc.Controller.View*> metodę kontrolera. Używa szablonu widoku do wygenerowania odpowiedzi HTML. Metody kontrolera (znane także jako *metody akcji*), takie jak `Index` powyższa metoda, zazwyczaj zwracają <xref:Microsoft.AspNetCore.Mvc.IActionResult> (lub klasę pochodną <xref:Microsoft.AspNetCore.Mvc.ActionResult>), a nie typ taki jak. `string`
+Poprzedni kod wywołuje <xref:Microsoft.AspNetCore.Mvc.Controller.View*> metodę kontrolera. Używa szablonu widoku do wygenerowania odpowiedzi HTML. Metody kontrolera (znane także jako *metody akcji*), takie jak `Index` powyższa metoda, zazwyczaj zwracają <xref:Microsoft.AspNetCore.Mvc.IActionResult> (lub klasę pochodną <xref:Microsoft.AspNetCore.Mvc.ActionResult> ), a nie typ taki jak `string` .
 
 ## <a name="add-a-view"></a>Dodawanie widoku
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 * Kliknij prawym przyciskiem myszy folder *widoki* , a następnie **Dodaj > nowy folder** i nadaj mu nazwę folder *HelloWorld*.
 
@@ -46,7 +46,7 @@ Poprzedni kod wywołuje <xref:Microsoft.AspNetCore.Mvc.Controller.View*> metodę
 
   * W polu wyszukiwania w prawym górnym rogu wprowadź *Widok*
 
-  * Wybieranie **widoku Razor**
+  * Wybierz ** Razor Widok**
 
   * Zachowaj wartość pola **Nazwa** , *index. cshtml*.
 
@@ -56,7 +56,7 @@ Poprzedni kod wywołuje <xref:Microsoft.AspNetCore.Mvc.Controller.View*> metodę
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-Dodaj `Index` widok dla `HelloWorldController`.
+Dodaj `Index` widok dla `HelloWorldController` .
 
 * Dodaj nowy folder o nazwie *viewss/HelloWorld*.
 * Dodaj nowy plik do pliku *viewss/HelloWorld* Name *index. cshtml*.
@@ -76,11 +76,11 @@ Dodaj `Index` widok dla `HelloWorldController`.
 
 ---
 
-Zastąp zawartość pliku widoku Razor *widoków/HelloWorld/index. cshtml* następującym:
+Zastąp zawartość pliku widoku *widoki/HelloWorld/index. cshtml* Razor następującym:
 
 [!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/HelloWorld/Index1.cshtml?highlight=7)]
 
-Przejdź do adresu `https://localhost:{PORT}/HelloWorld`. `Index` Metoda w `HelloWorldController` niezbyt dużej mierze; uruchomiono instrukcję `return View();`, która określa, że metoda powinna używać pliku szablonu widoku, aby renderować odpowiedź do przeglądarki. Ponieważ nazwa pliku szablonu widoku nie została określona, MVC domyślnie używa domyślnego pliku widoku. Domyślny plik widoku ma taką samą nazwę jak Metoda (`Index`), więc w */views/HelloWorld/index.cshtml* jest używana. Na poniższej ilustracji przedstawiono ciąg "Hello z naszego szablonu widoku!" zakodowane w widoku.
+Przejdź do adresu `https://localhost:{PORT}/HelloWorld`. Metoda w niewykonanym `Index` `HelloWorldController` stopniu; uruchomiła instrukcję `return View();` , która określa, że metoda powinna używać pliku szablonu widoku, aby renderować odpowiedź do przeglądarki. Ponieważ nazwa pliku szablonu widoku nie została określona, MVC domyślnie używa domyślnego pliku widoku. Domyślny plik widoku ma taką samą nazwę jak Metoda ( `Index` ), więc jest używany szablon widoku w */views/HelloWorld/index.cshtml* . Na poniższej ilustracji przedstawiono ciąg "Hello z naszego szablonu widoku!" zakodowane w widoku.
 
 ![Okno przeglądarki](~/tutorials/first-mvc-app/adding-view/_static/hell_template.png)
 
@@ -98,8 +98,8 @@ Zastąp zawartość pliku *viewss/Shared/_Layout. cshtml* następującym znaczni
 
 Poprzednia Adiustacja wprowadziła następujące zmiany:
 
-* 3 wystąpienia elementu `MvcMovie` `Movie App`.
-* Element `<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">MvcMovie</a>` zakotwiczony do `<a class="navbar-brand" asp-controller="Movies" asp-action="Index">Movie App</a>`.
+* 3 wystąpienia elementu `MvcMovie` `Movie App` .
+* Element zakotwiczony `<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">MvcMovie</a>` do `<a class="navbar-brand" asp-controller="Movies" asp-action="Index">Movie App</a>` .
 
 W powyższym znaczniku `asp-area=""` [atrybut pomocnika tagu zakotwiczenia](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) i wartość atrybutu zostały pominięte, ponieważ ta aplikacja nie korzysta z [obszarów](xref:mvc/controllers/areas).
 
@@ -119,7 +119,7 @@ Przejrzyj plik *views/_ViewStart. cshtml* :
 }
 ```
 
-Plik *views/_ViewStart. cshtml* umieszcza w pliku *views/Shared/_Layout. cshtml* w każdym widoku. `Layout` Właściwość może służyć do ustawiania innego widoku układu lub ustawiania tego ustawienia tak, aby `null` nie był używany żaden plik układu.
+Plik *views/_ViewStart. cshtml* umieszcza w pliku *views/Shared/_Layout. cshtml* w każdym widoku. `Layout`Właściwość może służyć do ustawiania innego widoku układu lub ustawiania tego ustawienia tak, aby `null` nie był używany żaden plik układu.
 
 Zmień tytuł i `<h2>` element pliku widoku *widoki/HelloWorld/index. cshtml* :
 
@@ -127,13 +127,13 @@ Zmień tytuł i `<h2>` element pliku widoku *widoki/HelloWorld/index. cshtml* :
 
 Tytuł i `<h2>` element są nieco inne, więc można zobaczyć, który bit kodu zmienia ekran.
 
-`ViewData["Title"] = "Movie List";`w powyższym kodzie ustawia `Title` Właściwość `ViewData` słownika na "Lista filmów". `Title` Właściwość jest używana w elemencie `<title>` HTML na stronie układu:
+`ViewData["Title"] = "Movie List";`w powyższym kodzie ustawia `Title` Właściwość `ViewData` słownika na "Lista filmów". `Title`Właściwość jest używana w `<title>` elemencie HTML na stronie układu:
 
 ```cshtml
 <title>@ViewData["Title"] - Movie App</title>
 ```
 
-Zapisz zmiany i przejdź do `https://localhost:{PORT}/HelloWorld`. Zwróć uwagę, że tytuł przeglądarki, nagłówek podstawowy i pomocnicze nagłówki zostały zmienione. (Jeśli w przeglądarce nie są widoczne zmiany, może być wyświetlana zawartość z pamięci podręcznej. Naciśnij kombinację klawiszy CTRL + F5 w przeglądarce, aby wymusić załadowanie odpowiedzi z serwera. Zostanie utworzony tytuł przeglądarki z `ViewData["Title"]` ustawioną w szablonie *index. cshtml* , a dodatkowa "-Movie App" dodana w pliku układu.
+Zapisz zmiany i przejdź do `https://localhost:{PORT}/HelloWorld` . Zwróć uwagę, że tytuł przeglądarki, nagłówek podstawowy i pomocnicze nagłówki zostały zmienione. (Jeśli w przeglądarce nie są widoczne zmiany, może być wyświetlana zawartość z pamięci podręcznej. Naciśnij kombinację klawiszy CTRL + F5 w przeglądarce, aby wymusić załadowanie odpowiedzi z serwera. Zostanie utworzony tytuł przeglądarki z `ViewData["Title"]` ustawioną w szablonie *index. cshtml* , a dodatkowa "-Movie App" dodana w pliku układu.
 
 Zawartość szablonu widoku *index. cshtml* jest scalana z szablonem widok *widoki/udostępnione/_Layout. cshtml* . Pojedyncza odpowiedź HTML jest wysyłana do przeglądarki. Szablony układów ułatwiają wprowadzanie zmian, które są stosowane na wszystkich stronach w aplikacji. Aby dowiedzieć się więcej, zobacz [Układ](xref:mvc/views/layout).
 
@@ -147,17 +147,17 @@ Akcje kontrolera są wywoływane w odpowiedzi na żądanie przychodzącego adres
 
 Kontrolery są odpowiedzialne za dostarczanie danych wymaganych w celu renderowania odpowiedzi przez szablon widoku. Najlepsze rozwiązanie: szablony widoków **nie** powinny wykonywać logiki biznesowej ani bezpośrednio korzystać z bazy danych. Zamiast tego szablon widoku powinien współpracować tylko z danymi, które są udostępniane przez kontroler. Utrzymywanie tego "separacji zagadnień" pomaga zachować kod, weryfikowalne i łatwość utrzymania.
 
-Obecnie `Welcome` Metoda w `HelloWorldController` klasie przyjmuje `name` `ID` parametr i, a następnie wyprowadza wartości bezpośrednio do przeglądarki. Zamiast przetworzyć tę odpowiedź jako ciąg, należy zmienić kontroler tak, aby używał szablonu widoku. Szablon widoku generuje odpowiedź dynamiczną, co oznacza, że odpowiednie bity danych muszą zostać przesłane z kontrolera do widoku w celu wygenerowania odpowiedzi. W tym celu należy mieć kontroler umieszczający dane dynamiczne (parametry) wymagane przez szablon widoku w `ViewData` słowniku, do którego będzie miał dostęp ten szablon.
+Obecnie `Welcome` Metoda w `HelloWorldController` klasie przyjmuje `name` parametr i, `ID` a następnie wyprowadza wartości bezpośrednio do przeglądarki. Zamiast przetworzyć tę odpowiedź jako ciąg, należy zmienić kontroler tak, aby używał szablonu widoku. Szablon widoku generuje odpowiedź dynamiczną, co oznacza, że odpowiednie bity danych muszą zostać przesłane z kontrolera do widoku w celu wygenerowania odpowiedzi. W tym celu należy mieć kontroler umieszczający dane dynamiczne (parametry) wymagane przez szablon widoku w `ViewData` słowniku, do którego będzie miał dostęp ten szablon.
 
-W *HelloWorldController.cs*Zmień `Welcome` metodę, aby dodać wartość `Message` i `NumTimes` do `ViewData` słownika. `ViewData` Słownik jest obiektem dynamicznym, co oznacza, że można użyć dowolnego typu; `ViewData` obiekt nie ma zdefiniowanych właściwości, dopóki nie umieścisz w nim elementu. [System powiązania modelu MVC](xref:mvc/models/model-binding) automatycznie mapuje nazwane parametry (`name` i `numTimes`) z ciągu zapytania na pasku adresu na parametry w metodzie. Pełny plik *HelloWorldController.cs* wygląda następująco:
+W *HelloWorldController.cs*Zmień metodę, `Welcome` Aby dodać `Message` `NumTimes` wartość i do `ViewData` słownika. `ViewData`Słownik jest obiektem dynamicznym, co oznacza, że można użyć dowolnego typu; `ViewData` obiekt nie ma zdefiniowanych właściwości, dopóki nie umieścisz w nim elementu. [System powiązania modelu MVC](xref:mvc/models/model-binding) automatycznie mapuje nazwane parametry ( `name` i `numTimes` ) z ciągu zapytania na pasku adresu na parametry w metodzie. Pełny plik *HelloWorldController.cs* wygląda następująco:
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/HelloWorldController.cs?name=snippet_5)]
 
-Obiekt `ViewData` dictionary zawiera dane, które zostaną przesłane do widoku.
+`ViewData`Obiekt dictionary zawiera dane, które zostaną przesłane do widoku.
 
 Utwórz szablon widoku powitalnego o nazwie *przeglądający/HelloWorld/Welcome. cshtml*.
 
-Utworzysz pętlę w szablonie widoku *Welcome. cshtml* , który wyświetla "Hello" `NumTimes`. Zastąp zawartość *widoków/HelloWorld/Welcome. cshtml* następującym:
+Utworzysz pętlę w szablonie widoku *Welcome. cshtml* , który wyświetla "Hello" `NumTimes` . Zastąp zawartość *widoków/HelloWorld/Welcome. cshtml* następującym:
 
 [!code-html[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/HelloWorld/Welcome.cshtml)]
 
@@ -169,31 +169,31 @@ Dane są pobierane z adresu URL i przesyłane do kontrolera przy użyciu [spinac
 
 ![Widok prywatności pokazujący etykietę powitalną i frazę Hello Rick pokazywane cztery razy](~/tutorials/first-mvc-app/adding-view/_static/rick2.png)
 
-W powyższym przykładzie `ViewData` słownik został użyty do przekazania danych z kontrolera do widoku. W dalszej części tego samouczka model widoku służy do przekazywania danych z kontrolera do widoku. Podejście model widoku do przekazywania danych jest ogólnie preferowane względem podejścia `ViewData` słownika. Aby uzyskać więcej informacji [, zobacz Kiedy używać ViewBag, ViewData lub TempData](https://www.rachelappel.com/when-to-use-viewbag-viewdata-or-tempdata-in-asp-net-mvc-3-applications/) .
+W powyższym przykładzie `ViewData` słownik został użyty do przekazania danych z kontrolera do widoku. W dalszej części tego samouczka model widoku służy do przekazywania danych z kontrolera do widoku. Podejście model widoku do przekazywania danych jest ogólnie preferowane względem `ViewData` podejścia słownika. Aby uzyskać więcej informacji [, zobacz Kiedy używać ViewBag, ViewData lub TempData](https://www.rachelappel.com/when-to-use-viewbag-viewdata-or-tempdata-in-asp-net-mvc-3-applications/) .
 
 W następnym samouczku zostanie utworzona baza danych filmów.
 
 > [!div class="step-by-step"]
-> [Poprzedni](adding-controller.md)
-> [Następny](adding-model.md)
+> [Poprzedni](adding-controller.md) 
+>  [Dalej](adding-model.md)
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-W tej sekcji zmodyfikujesz `HelloWorldController` klasę, aby używać plików widoku [Razor](xref:mvc/views/razor) do czystego hermetyzacji procesu generowania odpowiedzi HTML na klienta.
+W tej sekcji zmodyfikujesz `HelloWorldController` klasę, aby używać [Razor](xref:mvc/views/razor) plików do wyświetlania w celu czystego hermetyzowania procesu generowania odpowiedzi HTML na klienta.
 
-Tworzysz plik szablonu widoku przy użyciu Razor. Szablony widoku oparte na Razor mają rozszerzenie *. cshtml* . Zapewniają elegancki sposób tworzenia danych wyjściowych HTML przy użyciu języka C#.
+Tworzysz plik szablonu widoku przy użyciu Razor . RazorSzablony widoków oparte na programie mają rozszerzenie *. cshtml* . Zapewniają elegancki sposób tworzenia danych wyjściowych HTML przy użyciu języka C#.
 
 Obecnie `Index` Metoda zwraca ciąg z komunikatem, który jest zakodowany w klasie Controller. W `HelloWorldController` klasie Zastąp `Index` metodę następującym kodem:
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/HelloWorldController.cs?name=snippet_4)]
 
-Poprzedni kod wywołuje <xref:Microsoft.AspNetCore.Mvc.Controller.View*> metodę kontrolera. Używa szablonu widoku do wygenerowania odpowiedzi HTML. Metody kontrolera (znane także jako *metody akcji*), takie jak `Index` powyższa metoda, zazwyczaj zwracają <xref:Microsoft.AspNetCore.Mvc.IActionResult> (lub klasę pochodną <xref:Microsoft.AspNetCore.Mvc.ActionResult>), a nie typ taki jak. `string`
+Poprzedni kod wywołuje <xref:Microsoft.AspNetCore.Mvc.Controller.View*> metodę kontrolera. Używa szablonu widoku do wygenerowania odpowiedzi HTML. Metody kontrolera (znane także jako *metody akcji*), takie jak `Index` powyższa metoda, zazwyczaj zwracają <xref:Microsoft.AspNetCore.Mvc.IActionResult> (lub klasę pochodną <xref:Microsoft.AspNetCore.Mvc.ActionResult> ), a nie typ taki jak `string` .
 
 ## <a name="add-a-view"></a>Dodawanie widoku
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 * Kliknij prawym przyciskiem myszy folder *widoki* , a następnie **Dodaj > nowy folder** i nadaj mu nazwę folder *HelloWorld*.
 
@@ -203,7 +203,7 @@ Poprzedni kod wywołuje <xref:Microsoft.AspNetCore.Mvc.Controller.View*> metodę
 
   * W polu wyszukiwania w prawym górnym rogu wprowadź *Widok*
 
-  * Wybieranie **widoku Razor**
+  * Wybierz ** Razor Widok**
 
   * Zachowaj wartość pola **Nazwa** , *index. cshtml*.
 
@@ -213,7 +213,7 @@ Poprzedni kod wywołuje <xref:Microsoft.AspNetCore.Mvc.Controller.View*> metodę
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-Dodaj `Index` widok dla `HelloWorldController`.
+Dodaj `Index` widok dla `HelloWorldController` .
 
 * Dodaj nowy folder o nazwie *viewss/HelloWorld*.
 * Dodaj nowy plik do pliku *viewss/HelloWorld* Name *index. cshtml*.
@@ -237,7 +237,7 @@ Zastąp zawartość pliku widoku *widoki/HelloWorld/index. cshtml* Razor następ
 
 [!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/HelloWorld/Index1.cshtml?highlight=7)]
 
-Przejdź do adresu `https://localhost:{PORT}/HelloWorld`. `Index` Metoda w `HelloWorldController` niezbyt dużej mierze; uruchomiono instrukcję `return View();`, która określa, że metoda powinna używać pliku szablonu widoku, aby renderować odpowiedź do przeglądarki. Ponieważ nazwa pliku szablonu widoku nie została określona, MVC domyślnie używa domyślnego pliku widoku. Domyślny plik widoku ma taką samą nazwę jak Metoda (`Index`), więc w */views/HelloWorld/index.cshtml* jest używana. Na poniższej ilustracji przedstawiono ciąg "Hello z naszego szablonu widoku!" zakodowane w widoku.
+Przejdź do adresu `https://localhost:{PORT}/HelloWorld`. Metoda w niewykonanym `Index` `HelloWorldController` stopniu; uruchomiła instrukcję `return View();` , która określa, że metoda powinna używać pliku szablonu widoku, aby renderować odpowiedź do przeglądarki. Ponieważ nazwa pliku szablonu widoku nie została określona, MVC domyślnie używa domyślnego pliku widoku. Domyślny plik widoku ma taką samą nazwę jak Metoda ( `Index` ), więc w */views/HelloWorld/index.cshtml* jest używana. Na poniższej ilustracji przedstawiono ciąg "Hello z naszego szablonu widoku!" zakodowane w widoku.
 
 ![Okno przeglądarki](~/tutorials/first-mvc-app/adding-view/_static/hell_template.png)
 
@@ -249,8 +249,8 @@ Szablony [układów](xref:mvc/views/layout) umożliwiają określenie układu ko
 
 ## <a name="change-the-title-footer-and-menu-link-in-the-layout-file"></a>Zmień tytuł, stopkę i łącze menu w pliku układu
 
-* W elementach tytuł i stopka Zmień `MvcMovie` na `Movie App`.
-* Zmień element `<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">MvcMovie</a>` zakotwiczenia na `<a class="navbar-brand" asp-controller="Movies" asp-action="Index">Movie App</a>`.
+* W elementach tytuł i stopka Zmień `MvcMovie` na `Movie App` .
+* Zmień element zakotwiczenia `<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">MvcMovie</a>` na `<a class="navbar-brand" asp-controller="Movies" asp-action="Index">Movie App</a>` .
 
 Następujące znaczniki pokazują wyróżnione zmiany:
 
@@ -279,7 +279,7 @@ Przejrzyj plik *views/_ViewStart. cshtml* :
 }
 ```
 
-Plik *views/_ViewStart. cshtml* umieszcza w pliku *views/Shared/_Layout. cshtml* w każdym widoku. `Layout` Właściwość może służyć do ustawiania innego widoku układu lub ustawiania tego ustawienia tak, aby `null` nie był używany żaden plik układu.
+Plik *views/_ViewStart. cshtml* umieszcza w pliku *views/Shared/_Layout. cshtml* w każdym widoku. `Layout`Właściwość może służyć do ustawiania innego widoku układu lub ustawiania tego ustawienia tak, aby `null` nie był używany żaden plik układu.
 
 Zmień tytuł i `<h2>` element pliku widoku *widoki/HelloWorld/index. cshtml* :
 
@@ -287,13 +287,13 @@ Zmień tytuł i `<h2>` element pliku widoku *widoki/HelloWorld/index. cshtml* :
 
 Tytuł i `<h2>` element są nieco inne, więc można zobaczyć, który bit kodu zmienia ekran.
 
-`ViewData["Title"] = "Movie List";`w powyższym kodzie ustawia `Title` Właściwość `ViewData` słownika na "Lista filmów". `Title` Właściwość jest używana w elemencie `<title>` HTML na stronie układu:
+`ViewData["Title"] = "Movie List";`w powyższym kodzie ustawia `Title` Właściwość `ViewData` słownika na "Lista filmów". `Title`Właściwość jest używana w `<title>` elemencie HTML na stronie układu:
 
 ```cshtml
 <title>@ViewData["Title"] - Movie App</title>
 ```
 
-Zapisz zmiany i przejdź do `https://localhost:{PORT}/HelloWorld`. Zwróć uwagę, że tytuł przeglądarki, nagłówek podstawowy i pomocnicze nagłówki zostały zmienione. (Jeśli w przeglądarce nie są widoczne zmiany, może być wyświetlana zawartość z pamięci podręcznej. Naciśnij kombinację klawiszy CTRL + F5 w przeglądarce, aby wymusić załadowanie odpowiedzi z serwera. Zostanie utworzony tytuł przeglądarki z `ViewData["Title"]` ustawioną w szablonie *index. cshtml* , a dodatkowa "-Movie App" dodana w pliku układu.
+Zapisz zmiany i przejdź do `https://localhost:{PORT}/HelloWorld` . Zwróć uwagę, że tytuł przeglądarki, nagłówek podstawowy i pomocnicze nagłówki zostały zmienione. (Jeśli w przeglądarce nie są widoczne zmiany, może być wyświetlana zawartość z pamięci podręcznej. Naciśnij kombinację klawiszy CTRL + F5 w przeglądarce, aby wymusić załadowanie odpowiedzi z serwera. Zostanie utworzony tytuł przeglądarki z `ViewData["Title"]` ustawioną w szablonie *index. cshtml* , a dodatkowa "-Movie App" dodana w pliku układu.
 
 Zwróć uwagę na to, jak zawartość w szablonie widoku *index. cshtml* została scalona z szablonem *widoków/Shared/_Layout. cshtml* . do przeglądarki została WYSŁANA pojedyncza odpowiedź html. Szablony układów ułatwiają wprowadzanie zmian, które są stosowane do wszystkich stron w aplikacji. Aby dowiedzieć się więcej, zobacz [Układ](xref:mvc/views/layout).
 
@@ -307,17 +307,17 @@ Akcje kontrolera są wywoływane w odpowiedzi na żądanie przychodzącego adres
 
 Kontrolery są odpowiedzialne za dostarczanie danych wymaganych w celu renderowania odpowiedzi przez szablon widoku. Najlepsze rozwiązanie: szablony widoków **nie** powinny wykonywać logiki biznesowej ani bezpośrednio korzystać z bazy danych. Zamiast tego szablon widoku powinien współpracować tylko z danymi, które są udostępniane przez kontroler. Utrzymywanie tego "separacji zagadnień" pomaga zachować kod, weryfikowalne i łatwość utrzymania.
 
-Obecnie `Welcome` Metoda w `HelloWorldController` klasie przyjmuje `name` `ID` parametr i, a następnie wyprowadza wartości bezpośrednio do przeglądarki. Zamiast przetworzyć tę odpowiedź jako ciąg, należy zmienić kontroler tak, aby używał szablonu widoku. Szablon widoku generuje odpowiedź dynamiczną, co oznacza, że odpowiednie bity danych muszą zostać przesłane z kontrolera do widoku w celu wygenerowania odpowiedzi. W tym celu należy mieć kontroler umieszczający dane dynamiczne (parametry) wymagane przez szablon widoku w `ViewData` słowniku, do którego będzie miał dostęp ten szablon.
+Obecnie `Welcome` Metoda w `HelloWorldController` klasie przyjmuje `name` parametr i, `ID` a następnie wyprowadza wartości bezpośrednio do przeglądarki. Zamiast przetworzyć tę odpowiedź jako ciąg, należy zmienić kontroler tak, aby używał szablonu widoku. Szablon widoku generuje odpowiedź dynamiczną, co oznacza, że odpowiednie bity danych muszą zostać przesłane z kontrolera do widoku w celu wygenerowania odpowiedzi. W tym celu należy mieć kontroler umieszczający dane dynamiczne (parametry) wymagane przez szablon widoku w `ViewData` słowniku, do którego będzie miał dostęp ten szablon.
 
-W *HelloWorldController.cs*Zmień `Welcome` metodę, aby dodać wartość `Message` i `NumTimes` do `ViewData` słownika. `ViewData` Słownik jest obiektem dynamicznym, co oznacza, że można użyć dowolnego typu; `ViewData` obiekt nie ma zdefiniowanych właściwości, dopóki nie umieścisz w nim elementu. [System powiązania modelu MVC](xref:mvc/models/model-binding) automatycznie mapuje nazwane parametry (`name` i `numTimes`) z ciągu zapytania na pasku adresu na parametry w metodzie. Pełny plik *HelloWorldController.cs* wygląda następująco:
+W *HelloWorldController.cs*Zmień metodę, `Welcome` Aby dodać `Message` `NumTimes` wartość i do `ViewData` słownika. `ViewData`Słownik jest obiektem dynamicznym, co oznacza, że można użyć dowolnego typu; `ViewData` obiekt nie ma zdefiniowanych właściwości, dopóki nie umieścisz w nim elementu. [System powiązania modelu MVC](xref:mvc/models/model-binding) automatycznie mapuje nazwane parametry ( `name` i `numTimes` ) z ciągu zapytania na pasku adresu na parametry w metodzie. Pełny plik *HelloWorldController.cs* wygląda następująco:
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/HelloWorldController.cs?name=snippet_5)]
 
-Obiekt `ViewData` dictionary zawiera dane, które zostaną przesłane do widoku.
+`ViewData`Obiekt dictionary zawiera dane, które zostaną przesłane do widoku.
 
 Utwórz szablon widoku powitalnego o nazwie *przeglądający/HelloWorld/Welcome. cshtml*.
 
-Utworzysz pętlę w szablonie widoku *Welcome. cshtml* , który wyświetla "Hello" `NumTimes`. Zastąp zawartość *widoków/HelloWorld/Welcome. cshtml* następującym:
+Utworzysz pętlę w szablonie widoku *Welcome. cshtml* , który wyświetla "Hello" `NumTimes` . Zastąp zawartość *widoków/HelloWorld/Welcome. cshtml* następującym:
 
 [!code-html[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/HelloWorld/Welcome.cshtml)]
 
@@ -329,12 +329,12 @@ Dane są pobierane z adresu URL i przesyłane do kontrolera przy użyciu [spinac
 
 ![Widok prywatności pokazujący etykietę powitalną i frazę Hello Rick pokazywane cztery razy](~/tutorials/first-mvc-app/adding-view/_static/rick2.png)
 
-W powyższym przykładzie `ViewData` słownik został użyty do przekazania danych z kontrolera do widoku. W dalszej części tego samouczka model widoku służy do przekazywania danych z kontrolera do widoku. Podejście model widoku do przekazywania danych jest ogólnie preferowane względem podejścia `ViewData` słownika. Aby uzyskać więcej informacji [, zobacz Kiedy używać ViewBag, ViewData lub TempData](https://www.rachelappel.com/when-to-use-viewbag-viewdata-or-tempdata-in-asp-net-mvc-3-applications/) .
+W powyższym przykładzie `ViewData` słownik został użyty do przekazania danych z kontrolera do widoku. W dalszej części tego samouczka model widoku służy do przekazywania danych z kontrolera do widoku. Podejście model widoku do przekazywania danych jest ogólnie preferowane względem `ViewData` podejścia słownika. Aby uzyskać więcej informacji [, zobacz Kiedy używać ViewBag, ViewData lub TempData](https://www.rachelappel.com/when-to-use-viewbag-viewdata-or-tempdata-in-asp-net-mvc-3-applications/) .
 
 W następnym samouczku zostanie utworzona baza danych filmów.
 
 > [!div class="step-by-step"]
-> [Poprzedni](adding-controller.md)
-> [Następny](adding-model.md)
+> [Poprzedni](adding-controller.md) 
+>  [Dalej](adding-model.md)
 
 ::: moniker-end

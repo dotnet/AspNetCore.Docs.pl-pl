@@ -1,21 +1,21 @@
 ### YamlMime:Hub
-title: Dokumentacja platformy ASP.NET Core
+title: Dokumentacja platformy ASP.NET
 summary: Dowiedz się, jak za pomocą platformy ASP.NET Core tworzyć aplikacje i usługi internetowe, które są szybkie, bezpieczne, wieloplatformowe i oparte na chmurze. Przeglądaj samouczki, przykładowy kod, podstawowe informacje, dokumentację interfejsu API i inne materiały.
 brand: aspnet
 metadata:
-  title: Dokumentacja platformy ASP.NET Core
+  title: Dokumentacja platformy ASP.NET
   description: Dowiedz się, jak za pomocą platformy ASP.NET Core tworzyć aplikacje i usługi internetowe, które są szybkie, bezpieczne, wieloplatformowe i oparte na chmurze. Przeglądaj samouczki, przykładowy kod, podstawowe informacje, dokumentację interfejsu API i inne materiały.
   ms.product: aspnet
   ms.topic: hub-page
   author: WadePickett
   ms.author: wpickett
-  ms.date: 06/03/2020
-  ms.openlocfilehash: fb4b31258683c5928708e7a2a479f353972c010b
-  ms.sourcegitcommit: 829dca1d5a7dcccbfe90644101c6be1d1c94ac62
+  ms.date: 06/05/2020
+  ms.openlocfilehash: 25b5387c8956ea7931751525ea954f6f702c0cde
+  ms.sourcegitcommit: 05490855e0c70565f0c4b509d392b0828bcfd141
   ms.translationtype: HT
   ms.contentlocale: pl-PL
-  ms.lasthandoff: 06/04/2020
-  ms.locfileid: "84355408"
+  ms.lasthandoff: 06/08/2020
+  ms.locfileid: "84507282"
 highlightedContent:
   items:
   - title: Utwórz aplikację ASP.NET Core na dowolnej platformie w zaledwie pięć minut
@@ -44,7 +44,7 @@ highlightedContent:
     url: https://docs.microsoft.com/aspnet/overview
 conceptualContent:
   title: Opracowywanie aplikacji ASP.NET Core
-  summary: Wybierz interaktywne aplikacje internetowe, internetowy interfejs API, aplikacje ze wzorcem MVC, aplikacje w czasie rzeczywistym i inne. Aby zapoznać się z dokumentacją platformy ASP.NET 4.x, zobacz [ASP.NET](https://docs.microsoft.com/aspnet/overview).
+  summary: Wybierz interaktywne aplikacje internetowe, internetowy interfejs API, aplikacje ze wzorcem MVC, aplikacje w czasie rzeczywistym i inne
   items:
   - title: Interaktywne aplikacje platformy Blazor po stronie klienta
     summary: Programuj za pomocą składników interfejsu użytkownika wielokrotnego użytku, które mogą wykorzystać kod WebAssembly na potrzeby niemal natywnej wydajności

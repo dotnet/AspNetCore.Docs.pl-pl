@@ -75,7 +75,7 @@
               uid: tutorials/first-mvc-app/new-field
             - name: Dodawanie walidacji
               uid: tutorials/first-mvc-app/validation
-            - name: Badanie metod Details i Delete
+            - name: Sprawdzanie szczegółów i usuwanie
               uid: tutorials/first-mvc-app/details
         - name: Blazor
           displayName: tutorial

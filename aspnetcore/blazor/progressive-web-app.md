@@ -5,7 +5,7 @@ description: Dowiedz się, jak utworzyć Blazor progresywną aplikację sieci We
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/19/2020
+ms.date: 06/09/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/progressive-web-app
-ms.openlocfilehash: 274516014c027972166402abc70d22fa801898de
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: ef73cbb928fb442c73acce6f5facac33236abd67
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84451852"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652403"
 ---
 # <a name="build-progressive-web-applications-with-aspnet-core-blazor-webassembly"></a>Kompilowanie progresywnych aplikacji sieci Web za pomocą ASP.NET Core Blazor Webassembly
 
@@ -272,8 +272,23 @@ Zaimplementuj dowolną logikę, aby kontrolować, który podzbiór zawartości m
 
 ### <a name="interaction-with-authentication"></a>Interakcja z uwierzytelnianiem
 
-Możliwe jest użycie opcji szablonu PWA w połączeniu z opcjami uwierzytelniania. PWA obsługujący tryb offline może również obsługiwać uwierzytelnianie, gdy użytkownik ma łączność sieciową.
+Szablon PWA może być używany w połączeniu z uwierzytelnianiem. PWA obsługujący tryb offline może również obsługiwać uwierzytelnianie, gdy użytkownik ma początkową łączność sieciową.
 
-Jeśli użytkownik nie ma łączności sieciowej, nie może uwierzytelnić ani uzyskać tokenów dostępu. Domyślnie przy próbie odwiedzenia strony logowania bez dostępu do sieci następuje komunikat "błąd sieci".
+Jeśli użytkownik nie ma łączności sieciowej, nie może uwierzytelnić ani uzyskać tokenów dostępu. Domyślnie przy próbie odwiedzenia strony logowania bez dostępu do sieci następuje komunikat "błąd sieci". Musisz zaprojektować przepływ interfejsu użytkownika, który umożliwia użytkownikowi wykonywanie użytecznych zadań w trybie offline bez próby uwierzytelnienia użytkownika lub uzyskania tokenów dostępu. Alternatywnie możesz zaprojektować aplikację, aby bezpiecznie kończyć się niepowodzeniem, gdy sieć jest niedostępna. Jeśli aplikacja nie może być zaprojektowana do obsługi tych scenariuszy, możesz nie włączyć obsługi w trybie offline.
 
-Musisz zaprojektować przepływ interfejsu użytkownika, który umożliwia użytkownikowi wykonywanie użytecznych funkcji w trybie offline bez próby uwierzytelnienia lub uzyskania tokenów dostępu. Alternatywnie możesz zaprojektować aplikację, aby nie działać prawidłowo, gdy sieć jest niedostępna. Jeśli nie jest to możliwe w aplikacji, może nie być konieczne włączenie obsługi offline.
+Gdy aplikacja przeznaczona do użycia w trybie online i offline jest ponownie dostępna w trybie online:
+
+* Aplikacja może wymagać udostępnienia nowego tokenu dostępu.
+* Aplikacja musi wykryć, czy inny użytkownik jest zalogowany w usłudze, aby mógł zastosować operacje do konta użytkownika, które zostały wprowadzone w trybie offline.
+
+Aby utworzyć aplikację w usłudze PWA w trybie offline, która współdziała z uwierzytelnianiem:
+
+* Zastąp wartość <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccountClaimsPrincipalFactory%601> fabryką, która przechowuje ostatniego zalogowanego użytkownika i używa przechowywanego użytkownika, gdy aplikacja jest w trybie offline.
+* Operacje w kolejce, gdy aplikacja jest w trybie offline i stosuje je, gdy aplikacja wraca do trybu online.
+* Podczas wylogowywania Wyczyść przechowywanego użytkownika.
+
+Przykładowa aplikacja [CarChecker](https://github.com/SteveSandersonMS/CarChecker) ilustruje powyższe podejścia. Zobacz następujące części aplikacji:
+
+* `OfflineAccountClaimsPrincipalFactory`(*Klient/dane/OfflineAccountClaimsPrincipalFactory. cs*)
+* `LocalVehiclesStore`(*Klient/dane/LocalVehiclesStore. cs*)
+* `LoginStatus`składnik (*Client/Shared/stanu logowania. Razor*)

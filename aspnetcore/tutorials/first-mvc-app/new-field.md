@@ -1,7 +1,7 @@
 ---
-title: Dodawanie nowego pola do aplikacji ASP.NET Core MVC
+title: Część 8 Dodaj nowe pole do aplikacji ASP.NET Core MVC
 author: rick-anderson
-description: Dowiedz się, jak za pomocą migracje Code First platformy Entity Framework dodać nowe pole do modelu i zmigrować tę zmianę do bazy danych.
+description: Część 8 serii samouczków na ASP.NET Core MVC.
 ms.author: riande
 ms.custom: mvc
 ms.date: 12/13/2018
@@ -12,14 +12,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/new-field
-ms.openlocfilehash: 0cc708734726e5779951d63ac10d1b750b1cc2ac
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 2dfaba166617c5d0a224f4b47028c141e59ce47f
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777075"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652912"
 ---
-# <a name="add-a-new-field-to-an-aspnet-core-mvc-app"></a>Dodawanie nowego pola do aplikacji ASP.NET Core MVC
+# <a name="part-8-add-a-new-field-to-an-aspnet-core-mvc-app"></a>Część 8 Dodaj nowe pole do aplikacji ASP.NET Core MVC
 
 Autor: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -41,7 +41,7 @@ Dodaj `Rating` Właściwość do *modeli/filmów. cs*:
 
 Kompilacja aplikacji
 
-### <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+### <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
  Ctrl+Shift+B
 
@@ -105,7 +105,7 @@ Istnieje kilka metod rozpoznawania błędu:
 
 W tym samouczku zostanie użyta Migracje Code First.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 W menu **Narzędzia** wybierz kolejno pozycje **menedżer pakietów NuGet > konsola Menedżera pakietów**.
 

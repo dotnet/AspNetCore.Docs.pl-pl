@@ -1,7 +1,7 @@
 ---
-title: Dodawanie modelu do aplikacji Razor stron w ASP.NET Core
+title: Część 2 Dodaj model do Razor aplikacji stron w ASP.NET Core
 author: rick-anderson
-description: Dowiedz się, jak dodać klasy do zarządzania filmami w bazie danych przy użyciu Entity Framework Core (EF Core).
+description: Część 2 serii samouczków na Razor stronach.
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
@@ -11,14 +11,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/model
-ms.openlocfilehash: d093d7c4dc1b355c0042f300f70a830653b168c0
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: d3f7d355625ce20a0cb45c785fbab259a5655c63
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82769835"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652946"
 ---
-# <a name="add-a-model-to-a-razor-pages-app-in-aspnet-core"></a>Dodawanie modelu do aplikacji Razor Pages w programie ASP.NET Core
+# <a name="part-2-add-a-model-to-a-razor-pages-app-in-aspnet-core"></a>Część 2 Dodaj model do Razor aplikacji stron w ASP.NET Core
 
 Autor: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -34,11 +34,11 @@ Klasy modelu są znane jako klasy POCO (z "zwykłych, starych obiektów CLR"), p
 
 ## <a name="add-a-data-model"></a>Dodawanie modelu danych
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
-Kliknij prawym przyciskiem myszy projekt **RazorPagesMovie** > **Dodaj** > **Nowy folder**. Nazwij *modele*folderów.
+Kliknij prawym przyciskiem myszy projekt **RazorPagesMovie** > **Dodaj**  >  **Nowy folder**. Nazwij *modele*folderów.
 
-Kliknij prawym przyciskiem myszy folder *modele* . Wybierz pozycję **Dodaj** > **klasę**. Nazwij **film**klasy.
+Kliknij prawym przyciskiem myszy folder *modele* . Wybierz pozycję **Dodaj**  >  **klasę**. Nazwij **film**klasy.
 
 [!INCLUDE [model 1b](~/includes/RP/model1b.md)]
 
@@ -71,7 +71,7 @@ Skompiluj projekt, aby sprawdzić, czy nie występują błędy kompilacji.
 
 W tej sekcji model filmu jest szkieletem. Oznacza to, że narzędzie tworzenia szkieletów tworzy strony dla operacji Create, Read, Update i Delete (CRUD) dla modelu filmu.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 Utwórz folder *stron/filmów* :
 
@@ -82,14 +82,14 @@ Kliknij prawym przyciskiem myszy folder *strony/filmy* > **Dodaj** > **nowy elem
 
 ![Obraz z poprzednich instrukcji.](model/_static/sca.png)
 
-W oknie dialogowym **Dodawanie szkieletu** wybierz pozycję **Razor Pages przy użyciu Entity Framework (CRUD)** > **Dodaj**.
+W oknie dialogowym **Dodawanie szkieletu** wybierz pozycję ** Razor strony z użyciem Entity Framework (CRUD)** > **Dodaj**.
 
 ![Obraz z poprzednich instrukcji.](model/_static/add_scaffold.png)
 
-Wypełnij okno dialogowe **dodawanie Razor Pages przy użyciu Entity Framework (CRUD)** :
+Wypełnij okno dialogowe **Dodawanie Razor stron przy użyciu Entity Framework (CRUD)** :
 
 * Z listy rozwijanej **Klasa modelu** wybierz pozycję **film (RazorPagesMovie. models)**.
-* W wierszu **klasy kontekstu danych** wybierz znak **+** (plus), a następnie zmień wygenerowaną nazwę z RazorPagesMovie. **Modele**. RazorPagesMovieContext do RazorPagesMovie. **Dane**. RazorPagesMovieContext. [Ta zmiana](https://developercommunity.visualstudio.com/content/problem/652166/aspnet-core-ef-scaffolder-uses-incorrect-namespace.html) nie jest wymagana. Tworzy klasę kontekstu bazy danych z poprawną przestrzenią nazw.
+* W wierszu **klasy kontekstu danych** wybierz **+** znak (plus), a następnie zmień wygenerowaną nazwę z RazorPagesMovie.** Modele**. RazorPagesMovieContext do RazorPagesMovie. **Dane**. RazorPagesMovieContext. [Ta zmiana](https://developercommunity.visualstudio.com/content/problem/652166/aspnet-core-ef-scaffolder-uses-incorrect-namespace.html) nie jest wymagana. Tworzy klasę kontekstu bazy danych z poprawną przestrzenią nazw.
 * Wybierz pozycję **Dodaj**.
 
 ![Obraz z poprzednich instrukcji.](model/_static/3/arp.png)
@@ -136,11 +136,11 @@ Kliknij prawym przyciskiem myszy folder *strony/filmy* > **Dodaj** > **nowe twor
 
 ![Obraz z poprzednich instrukcji.](model/_static/scaMac.png)
 
-W oknie dialogowym **Nowa rusztowania** wybierz pozycję **Razor Pages przy użyciu Entity Framework (CRUD)** > **dalej**.
+W oknie dialogowym **Nowa rusztowania** wybierz pozycję ** Razor strony z Entity Framework (CRUD)** > **dalej**.
 
 ![Obraz z poprzednich instrukcji.](model/_static/add_scaffoldMac.png)
 
-Wypełnij okno dialogowe **dodawanie Razor Pages przy użyciu Entity Framework (CRUD)** :
+Wypełnij okno dialogowe **Dodawanie Razor stron przy użyciu Entity Framework (CRUD)** :
 
 * W menu rozwijanym **Klasa modelu** wybierz lub wpisz **film (RazorPagesMovie. models)**.
 * W wierszu **klasy kontekstu danych** wpisz nazwę nowej klasy, RazorPagesMovie. **Dane**. RazorPagesMovieContext. [Ta zmiana](https://developercommunity.visualstudio.com/content/problem/652166/aspnet-core-ef-scaffolder-uses-incorrect-namespace.html) nie jest wymagana. Tworzy klasę kontekstu bazy danych z poprawną przestrzenią nazw.
@@ -164,7 +164,7 @@ Poprzednie polecenie dodaje Entity Framework Core narzędzia dla interfejs wiers
 
 ### <a name="files-created"></a>Utworzone pliki
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 Proces tworzenia szkieletu tworzy i aktualizuje następujące pliki:
 
@@ -204,14 +204,14 @@ Utworzone pliki zostały wyjaśnione w następnej sekcji.
 
 ## <a name="initial-migration"></a>Migracja początkowa
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 W tej sekcji konsola Menedżera pakietów (PMC) służy do:
 
 * Dodawanie początkowej migracji.
 * Zaktualizuj bazę danych przy użyciu początkowej migracji.
 
-W menu **Narzędzia** wybierz kolejno pozycje > **Menedżer pakietów NuGet** **konsola Menedżera pakietów**.
+W menu **Narzędzia** wybierz kolejno pozycje **Menedżer pakietów NuGet** > **konsola Menedżera pakietów**.
 
   ![Menu PMC](../first-mvc-app/adding-model/_static/pmc.png)
 
@@ -236,37 +236,37 @@ Powyższe polecenia generują następujące ostrzeżenie: "nie określono typu d
 
 Możesz zignorować to ostrzeżenie. zostanie on rozwiązany w kolejnym samouczku.
 
-Polecenie migrations generuje kod, aby utworzyć początkowy schemat bazy danych. Schemat jest oparty na modelu określonym w `DbContext`. `InitialCreate` Argument jest używany do nazwy migracji. Można użyć dowolnej nazwy, ale według Konwencji została wybrana nazwa opisująca migrację.
+Polecenie migrations generuje kod, aby utworzyć początkowy schemat bazy danych. Schemat jest oparty na modelu określonym w `DbContext` . `InitialCreate`Argument jest używany do nazwy migracji. Można użyć dowolnej nazwy, ale według Konwencji została wybrana nazwa opisująca migrację.
 
-`update` Polecenie uruchamia `Up` metodę w migracjach, które nie zostały zastosowane. W takim przypadku program `update` uruchamia `Up` metodę w pliku *migrations/\<sygnatura czasowa>_InitialCreate. cs* , który tworzy bazę danych.
+`update`Polecenie uruchamia `Up` metodę w migracjach, które nie zostały zastosowane. W takim przypadku program `update` uruchamia `Up` metodę w pliku *migrations/ \<time-stamp> _InitialCreate. cs* , który tworzy bazę danych.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 ### <a name="examine-the-context-registered-with-dependency-injection"></a>Sprawdzanie kontekstu zarejestrowanego przy iniekcji zależności
 
-ASP.NET Core jest skompilowana z [iniekcją zależności](xref:fundamentals/dependency-injection). Usługi (takie jak kontekst EF Core DB) są rejestrowane z iniekcją zależności podczas uruchamiania aplikacji. Składniki wymagające tych usług (takie jak Razor Pages) są udostępniane przez parametry konstruktora. Kod konstruktora, który pobiera wystąpienie kontekstu bazy danych, jest wyświetlany w dalszej części tego samouczka.
+ASP.NET Core jest skompilowana z [iniekcją zależności](xref:fundamentals/dependency-injection). Usługi (takie jak kontekst EF Core DB) są rejestrowane z iniekcją zależności podczas uruchamiania aplikacji. Składniki wymagające tych usług (takie jak Razor strony) są udostępniane przez parametry konstruktora. Kod konstruktora, który pobiera wystąpienie kontekstu bazy danych, jest wyświetlany w dalszej części tego samouczka.
 
 Narzędzie do tworzenia szkieletów automatycznie utworzyło kontekst bazy danych i zarejestrował go przy użyciu kontenera iniekcji zależności.
 
-Zapoznaj `Startup.ConfigureServices` się z tą metodą. Podświetlony wiersz został dodany przez program do tworzenia szkieletu:
+Zapoznaj się z tą `Startup.ConfigureServices` metodą. Podświetlony wiersz został dodany przez program do tworzenia szkieletu:
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Startup.cs?name=snippet_ConfigureServices&highlight=5-6)]
 
-`RazorPagesMovieContext` Współrzędne EF Core funkcje (tworzenie, Odczyt, aktualizowanie, usuwanie itp.) dla `Movie` modelu. Kontekst danych (`RazorPagesMovieContext`) pochodzi od [Microsoft. EntityFrameworkCore. DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext). Kontekst danych określa, które jednostki są uwzględnione w modelu danych.
+`RazorPagesMovieContext`Współrzędne EF Core funkcje (tworzenie, Odczyt, aktualizowanie, usuwanie itp.) dla `Movie` modelu. Kontekst danych ( `RazorPagesMovieContext` ) pochodzi od [Microsoft. EntityFrameworkCore. DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext). Kontekst danych określa, które jednostki są uwzględnione w modelu danych.
 
 [!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Data/RazorPagesMovieContext.cs)]
 
-Poprzedni kod tworzy [\<nieogólnymi>film](/dotnet/api/microsoft.entityframeworkcore.dbset-1) dla zestawu jednostek. W Entity Framework terminologii zestaw jednostek zwykle odpowiada tabeli bazy danych. Jednostka odnosi się do wiersza w tabeli.
+Poprzedni kod tworzy właściwość [nieogólnymi \<Movie> ](/dotnet/api/microsoft.entityframeworkcore.dbset-1) dla zestawu jednostek. W Entity Framework terminologii zestaw jednostek zwykle odpowiada tabeli bazy danych. Jednostka odnosi się do wiersza w tabeli.
 
 Nazwa parametrów połączenia jest przenoszona do kontekstu przez wywołanie metody w obiekcie [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) . W przypadku lokalnego projektowania [system konfiguracji ASP.NET Core](xref:fundamentals/configuration/index) odczytuje parametry połączenia z pliku *appSettings. JSON* .
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-Zapoznaj `Up` się z tą metodą.
+Zapoznaj się z tą `Up` metodą.
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-Zapoznaj `Up` się z tą metodą.
+Zapoznaj się z tą `Up` metodą.
 
 ---
 
@@ -274,7 +274,7 @@ Zapoznaj `Up` się z tą metodą.
 
 ### <a name="test-the-app"></a>Testowanie aplikacji
 
-* Uruchom aplikację i Dołącz `/Movies` do adresu URL w przeglądarce (`http://localhost:port/movies`).
+* Uruchom aplikację i Dołącz `/Movies` do adresu URL w przeglądarce ( `http://localhost:port/movies` ).
 
 Jeśli wystąpi błąd:
 
@@ -290,7 +290,7 @@ Pominięto [krok migracji](#pmc).
   ![Tworzenie strony](model/_static/conan.png)
 
   > [!NOTE]
-  > W `Price` polu nie można wprowadzać przecinków dziesiętnych. Aby zapewnić obsługę [walidacji jQuery](https://jqueryvalidation.org/) dla ustawień regionalnych innych niż angielskie, które używają przecinka (",") dla przecinka dziesiętnego i dla formatów dat innych niż angielski, aplikacja musi być globalna. Aby uzyskać instrukcje dotyczące globalizacji, zobacz [ten problem](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420)w usłudze GitHub.
+  > W polu nie można wprowadzać przecinków dziesiętnych `Price` . Aby zapewnić obsługę [walidacji jQuery](https://jqueryvalidation.org/) dla ustawień regionalnych innych niż angielskie, które używają przecinka (",") dla przecinka dziesiętnego i dla formatów dat innych niż angielski, aplikacja musi być globalna. Aby uzyskać instrukcje dotyczące globalizacji, zobacz [ten problem](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420)w usłudze GitHub.
 
 * Przetestuj linki **Edytuj**, **Szczegóły** i **Usuń**.
 
@@ -299,8 +299,8 @@ W następnym samouczku objaśniono pliki utworzone przez tworzenie szkieletu.
 ## <a name="additional-resources"></a>Zasoby dodatkowe
 
 > [!div class="step-by-step"]
-> [Poprzedni: Rozpoczynanie pracy](xref:tutorials/razor-pages/razor-pages-start)
-> [Dalej: Razor Pages szkieletowej](xref:tutorials/razor-pages/page)
+> [Poprzedni:](xref:tutorials/razor-pages/razor-pages-start) 
+>  wprowadzenie [Dalej: Rusztowania Razor Strony](xref:tutorials/razor-pages/page)
 
 ::: moniker-end
 
@@ -315,11 +315,11 @@ Klasy modelu są znane jako klasy POCO (z "zwykłych, starych obiektów CLR"), p
 
 ## <a name="add-a-data-model"></a>Dodawanie modelu danych
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
-Kliknij prawym przyciskiem myszy projekt **RazorPagesMovie** > **Dodaj** > **Nowy folder**. Nazwij *modele*folderów.
+Kliknij prawym przyciskiem myszy projekt **RazorPagesMovie** > **Dodaj**  >  **Nowy folder**. Nazwij *modele*folderów.
 
-Kliknij prawym przyciskiem myszy folder *modele* . Wybierz pozycję **Dodaj** > **klasę**. Nazwij **film**klasy.
+Kliknij prawym przyciskiem myszy folder *modele* . Wybierz pozycję **Dodaj**  >  **klasę**. Nazwij **film**klasy.
 
 [!INCLUDE [model 1b](~/includes/RP/model1b.md)]
 
@@ -334,7 +334,7 @@ Kliknij prawym przyciskiem myszy folder *modele* . Wybierz pozycję **Dodaj** > 
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-* W Eksplorator rozwiązań kliknij prawym przyciskiem myszy projekt **RazorPagesMovie** , a następnie wybierz pozycję **Dodaj** > **Nowy folder**. Nazwij *modele*folderów.
+* W Eksplorator rozwiązań kliknij prawym przyciskiem myszy projekt **RazorPagesMovie** , a następnie wybierz pozycję **Dodaj**  >  **Nowy folder**. Nazwij *modele*folderów.
 * Kliknij prawym przyciskiem myszy folder *modele* , a następnie wybierz polecenie **Dodaj** > **nowy plik**.
 * W oknie dialogowym **nowy plik** :
 
@@ -352,7 +352,7 @@ Skompiluj projekt, aby sprawdzić, czy nie występują błędy kompilacji.
 
 W tej sekcji model filmu jest szkieletem. Oznacza to, że narzędzie tworzenia szkieletów tworzy strony dla operacji Create, Read, Update i Delete (CRUD) dla modelu filmu.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 Utwórz folder *stron/filmów* :
 
@@ -363,18 +363,18 @@ Kliknij prawym przyciskiem myszy folder *strony/filmy* > **Dodaj** > **nowy elem
 
 ![Obraz z poprzednich instrukcji.](model/_static/sca.png)
 
-W oknie dialogowym **Dodawanie szkieletu** wybierz pozycję **Razor Pages przy użyciu Entity Framework (CRUD)** > **Dodaj**.
+W oknie dialogowym **Dodawanie szkieletu** wybierz pozycję ** Razor strony z użyciem Entity Framework (CRUD)** > **Dodaj**.
 
 ![Obraz z poprzednich instrukcji.](model/_static/add_scaffold.png)
 
-Wypełnij okno dialogowe **dodawanie Razor Pages przy użyciu Entity Framework (CRUD)** :
+Wypełnij okno dialogowe **Dodawanie Razor stron przy użyciu Entity Framework (CRUD)** :
 <!-- In the next section, change 
 (plus) sign and accept the generated name 
 to use Data, it should not use models. That will make the namespace the same for the VS version and the CLI version
 -->
 
 * Z listy rozwijanej **Klasa modelu** wybierz pozycję **film (RazorPagesMovie. models)**.
-* W wierszu **klasy kontekstu danych** wybierz znak **+** (plus), a następnie zaakceptuj wygenerowaną nazwę **RazorPagesMovie. models. RazorPagesMovieContext**.
+* W wierszu **klasy kontekstu danych** wybierz **+** znak (plus), a następnie zaakceptuj wygenerowaną nazwę **RazorPagesMovie. models. RazorPagesMovieContext**.
 * Wybierz pozycję **Dodaj**.
 
 ![Obraz z poprzednich instrukcji.](model/_static/arp.png)
@@ -413,11 +413,11 @@ Kliknij prawym przyciskiem myszy folder *strony/filmy* > **Dodaj** > **nowy elem
 
 ![Obraz z poprzednich instrukcji.](model/_static/scaMac.png)
 
-W oknie dialogowym **Dodawanie nowej szkieletu** wybierz pozycję **Razor Pages przy użyciu Entity Framework (CRUD)** > **Dodaj**.
+W oknie dialogowym **Dodawanie nowej szkieletu** wybierz pozycję ** Razor strony z użyciem Entity Framework (CRUD)** > **Dodaj**.
 
 ![Obraz z poprzednich instrukcji.](model/_static/add_scaffoldMac.png)
 
-Wypełnij okno dialogowe **dodawanie Razor Pages przy użyciu Entity Framework (CRUD)** :
+Wypełnij okno dialogowe **Dodawanie Razor stron przy użyciu Entity Framework (CRUD)** :
 
 * Z listy rozwijanej **Klasa modelu** wybierz lub wpisz **film**.
 * W wierszu **klasy kontekstu danych** wpisz wybierz **RazorPagesMovieContext** to spowoduje utworzenie nowej klasy kontekstu bazy danych z poprawną przestrzenią nazw. W takim przypadku będzie to **RazorPagesMovie. models. RazorPagesMovieContext**.
@@ -446,14 +446,14 @@ Pliki utworzone i zaktualizowane zostały omówione w następnej sekcji.
 
 ## <a name="initial-migration"></a>Migracja początkowa
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 W tej sekcji konsola Menedżera pakietów (PMC) służy do:
 
 * Dodawanie początkowej migracji.
 * Zaktualizuj bazę danych przy użyciu początkowej migracji.
 
-W menu **Narzędzia** wybierz kolejno pozycje > **Menedżer pakietów NuGet** **konsola Menedżera pakietów**.
+W menu **Narzędzia** wybierz kolejno pozycje **Menedżer pakietów NuGet** > **konsola Menedżera pakietów**.
 
   ![Menu PMC](../first-mvc-app/adding-model/_static/pmc.png)
 
@@ -464,9 +464,9 @@ Add-Migration Initial
 Update-Database
 ```
 
-`Add-Migration` Polecenie generuje kod, aby utworzyć początkowy schemat bazy danych. Schemat jest oparty na modelu określonym w `DbContext` (w pliku *RazorPagesMovieContext.cs* ). `InitialCreate` Argument jest używany do nazwy migracji. Można użyć dowolnej nazwy, ale według Konwencji Nazwa opisująca migrację jest używana. Aby uzyskać więcej informacji, zobacz <xref:data/ef-mvc/migrations>.
+`Add-Migration`Polecenie generuje kod, aby utworzyć początkowy schemat bazy danych. Schemat jest oparty na modelu określonym w `DbContext` (w pliku *RazorPagesMovieContext.cs* ). `InitialCreate`Argument jest używany do nazwy migracji. Można użyć dowolnej nazwy, ale według Konwencji Nazwa opisująca migrację jest używana. Aby uzyskać więcej informacji, zobacz <xref:data/ef-mvc/migrations>.
 
-`Update-Database` Polecenie uruchamia `Up` metodę w pliku *migrations/\<sygnatura czasowa>_InitialCreate. cs* . `Up` Metoda tworzy bazę danych.
+`Update-Database`Polecenie uruchamia `Up` metodę w pliku *migrations/ \<time-stamp> _InitialCreate. cs* . `Up`Metoda tworzy bazę danych.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -480,33 +480,33 @@ Update-Database
 > [!NOTE]
 > Powyższe polecenia generują następujące ostrzeżenie: "*nie określono typu dla kolumny dziesiętnej" price "w typie jednostki" Movie ". Spowoduje to, że wartości powinny być obcinane w trybie dyskretnym, jeśli nie mieszczą się w domyślnej precyzji i skali. Jawnie określ typ kolumny programu SQL Server, który może pomieścić wszystkie wartości przy użyciu "HasColumnType ()".* Możesz zignorować to ostrzeżenie. zostanie on rozwiązany w kolejnym samouczku.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 ### <a name="examine-the-context-registered-with-dependency-injection"></a>Sprawdzanie kontekstu zarejestrowanego przy iniekcji zależności
 
-ASP.NET Core jest skompilowana z [iniekcją zależności](xref:fundamentals/dependency-injection). Usługi (takie jak kontekst EF Core DB) są rejestrowane z iniekcją zależności podczas uruchamiania aplikacji. Składniki wymagające tych usług (takie jak Razor Pages) są udostępniane przez parametry konstruktora. Kod konstruktora, który pobiera wystąpienie kontekstu bazy danych, jest wyświetlany w dalszej części tego samouczka.
+ASP.NET Core jest skompilowana z [iniekcją zależności](xref:fundamentals/dependency-injection). Usługi (takie jak kontekst EF Core DB) są rejestrowane z iniekcją zależności podczas uruchamiania aplikacji. Składniki wymagające tych usług (takie jak Razor strony) są udostępniane przez parametry konstruktora. Kod konstruktora, który pobiera wystąpienie kontekstu bazy danych, jest wyświetlany w dalszej części tego samouczka.
 
 Narzędzie do tworzenia szkieletów automatycznie utworzyło kontekst bazy danych i zarejestrował go przy użyciu kontenera iniekcji zależności.
 
-Zapoznaj `Startup.ConfigureServices` się z tą metodą. Podświetlony wiersz został dodany przez program do tworzenia szkieletu:
+Zapoznaj się z tą `Startup.ConfigureServices` metodą. Podświetlony wiersz został dodany przez program do tworzenia szkieletu:
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Startup.cs?name=snippet_ConfigureServices&highlight=15-18)]
 
-`RazorPagesMovieContext` Współrzędne EF Core funkcje (tworzenie, Odczyt, aktualizowanie, usuwanie itp.) dla `Movie` modelu. Kontekst danych (`RazorPagesMovieContext`) pochodzi od [Microsoft. EntityFrameworkCore. DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext). Kontekst danych określa, które jednostki są uwzględnione w modelu danych.
+`RazorPagesMovieContext`Współrzędne EF Core funkcje (tworzenie, Odczyt, aktualizowanie, usuwanie itp.) dla `Movie` modelu. Kontekst danych ( `RazorPagesMovieContext` ) pochodzi od [Microsoft. EntityFrameworkCore. DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext). Kontekst danych określa, które jednostki są uwzględnione w modelu danych.
 
 [!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Data/RazorPagesMovieContext.cs)]
 
-Poprzedni kod tworzy [\<nieogólnymi>film](/dotnet/api/microsoft.entityframeworkcore.dbset-1) dla zestawu jednostek. W Entity Framework terminologii zestaw jednostek zwykle odpowiada tabeli bazy danych. Jednostka odnosi się do wiersza w tabeli.
+Poprzedni kod tworzy właściwość [nieogólnymi \<Movie> ](/dotnet/api/microsoft.entityframeworkcore.dbset-1) dla zestawu jednostek. W Entity Framework terminologii zestaw jednostek zwykle odpowiada tabeli bazy danych. Jednostka odnosi się do wiersza w tabeli.
 
 Nazwa parametrów połączenia jest przenoszona do kontekstu przez wywołanie metody w obiekcie [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) . W przypadku lokalnego projektowania [system konfiguracji ASP.NET Core](xref:fundamentals/configuration/index) odczytuje parametry połączenia z pliku *appSettings. JSON* .
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-Zapoznaj `Up` się z tą metodą.
+Zapoznaj się z tą `Up` metodą.
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-Zapoznaj `Up` się z tą metodą.
+Zapoznaj się z tą `Up` metodą.
 
 ---
 
@@ -514,7 +514,7 @@ Zapoznaj `Up` się z tą metodą.
 
 ### <a name="test-the-app"></a>Testowanie aplikacji
 
-* Uruchom aplikację i Dołącz `/Movies` do adresu URL w przeglądarce (`http://localhost:port/movies`).
+* Uruchom aplikację i Dołącz `/Movies` do adresu URL w przeglądarce ( `http://localhost:port/movies` ).
 
 Jeśli wystąpi błąd:
 
@@ -530,7 +530,7 @@ Pominięto [krok migracji](#pmc).
   ![Tworzenie strony](model/_static/conan.png)
 
   > [!NOTE]
-  > W `Price` polu nie można wprowadzać przecinków dziesiętnych. Aby zapewnić obsługę [walidacji jQuery](https://jqueryvalidation.org/) dla ustawień regionalnych innych niż angielskie, które używają przecinka (",") dla przecinka dziesiętnego i dla formatów dat innych niż angielski, aplikacja musi być globalna. Aby uzyskać instrukcje dotyczące globalizacji, zobacz [ten problem](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420)w usłudze GitHub.
+  > W polu nie można wprowadzać przecinków dziesiętnych `Price` . Aby zapewnić obsługę [walidacji jQuery](https://jqueryvalidation.org/) dla ustawień regionalnych innych niż angielskie, które używają przecinka (",") dla przecinka dziesiętnego i dla formatów dat innych niż angielski, aplikacja musi być globalna. Aby uzyskać instrukcje dotyczące globalizacji, zobacz [ten problem](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420)w usłudze GitHub.
 
 * Przetestuj linki **Edytuj**, **Szczegóły** i **Usuń**.
 
@@ -539,7 +539,7 @@ W następnym samouczku objaśniono pliki utworzone przez tworzenie szkieletu.
 ## <a name="additional-resources"></a>Zasoby dodatkowe
 
 > [!div class="step-by-step"]
-> [Poprzedni:](xref:tutorials/razor-pages/razor-pages-start)
-> wprowadzenie[Dalej: Razor strony szkieletowe](xref:tutorials/razor-pages/page)
+> [Poprzedni:](xref:tutorials/razor-pages/razor-pages-start) 
+>  wprowadzenie [Dalej: Rusztowania Razor Strony](xref:tutorials/razor-pages/page)
 
 ::: moniker-end

@@ -1,7 +1,7 @@
 ---
-title: Dodaj nowe pole do Razor strony w ASP.NET Core
+title: Część 7 Dodaj nowe pole do Razor strony w ASP.NET Core
 author: rick-anderson
-description: Pokazuje, jak dodać nowe pole do Razor strony z Entity Framework Core
+description: Część 7 serii samouczków na Razor stronach.
 ms.author: riande
 ms.custom: mvc
 ms.date: 7/23/2019
@@ -12,14 +12,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/new-field
-ms.openlocfilehash: 683d6718f4dcdb73c45cbcf94f6ac4f477b71bcd
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 15d4ccbe88c2147210918a3db1416983fb30132b
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82769737"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652799"
 ---
-# <a name="add-a-new-field-to-a-razor-page-in-aspnet-core"></a>Dodaj nowe pole do strony Razor w ASP.NET Core
+# <a name="part-7-add-a-new-field-to-a-razor-page-in-aspnet-core"></a>Część 7 Dodaj nowe pole do Razor strony w ASP.NET Core
 
 Autor: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -56,14 +56,14 @@ Edycja *stron/filmów/index. cshtml*i Dodawanie `Rating` pola:
 Aktualizowanie następujących stron:
 
 * Dodaj `Rating` pole do stron usuwanie i szczegóły.
-* Zaktualizuj element `Rating` [Create. cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Create.cshtml) przy użyciu pola.
+* Zaktualizuj element [Create. cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Create.cshtml) przy użyciu `Rating` pola.
 * Dodaj `Rating` pole do strony Edycja.
 
-Aplikacja nie będzie działała, dopóki baza danych nie zostanie zaktualizowana w celu uwzględnienia nowego pola. Uruchamianie aplikacji bez aktualizowania bazy danych zgłasza `SqlException`:
+Aplikacja nie będzie działała, dopóki baza danych nie zostanie zaktualizowana w celu uwzględnienia nowego pola. Uruchamianie aplikacji bez aktualizowania bazy danych zgłasza `SqlException` :
 
 `SqlException: Invalid column name 'Rating'.`
 
-`SqlException` Wyjątek jest spowodowany przez zaktualizowaną klasę filmów, która różni się od schematu tabeli filmów bazy danych. (Brak `Rating` kolumn w tabeli bazy danych).
+`SqlException`Wyjątek jest spowodowany przez zaktualizowaną klasę filmów, która różni się od schematu tabeli filmów bazy danych. (Brak `Rating` kolumn w tabeli bazy danych).
 
 Istnieje kilka metod rozpoznawania błędu:
 
@@ -83,7 +83,7 @@ Zobacz [ukończony plik SeedData.cs](https://github.com/dotnet/AspNetCore.Docs/b
 
 Skompiluj rozwiązanie.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 <a name="pmc"></a>
 
@@ -97,14 +97,14 @@ Add-Migration Rating
 Update-Database
 ```
 
-`Add-Migration` Polecenie informuje platformę, aby:
+`Add-Migration`Polecenie informuje platformę, aby:
 
-* Porównaj `Movie` model ze schematem `Movie` bazy danych.
+* Porównaj `Movie` model ze `Movie` schematem bazy danych.
 * Utwórz kod, aby zmigrować schemat bazy danych do nowego modelu.
 
 Nazwa "Rating" jest arbitralna i jest używana do nazwy pliku migracji. Warto użyć zrozumiałej nazwy dla pliku migracji.
 
-`Update-Database` Polecenie informuje platformę, aby zastosować zmiany schematu do bazy danych i zachować istniejące dane.
+`Update-Database`Polecenie informuje platformę, aby zastosować zmiany schematu do bazy danych i zachować istniejące dane.
 
 <a name="ssox"></a>
 
@@ -138,15 +138,15 @@ dotnet ef database update
 
 ---
 
-Uruchom aplikację i sprawdź, czy można tworzyć/edytować/wyświetlać filmy z `Rating` polem. Jeśli baza danych nie jest zainicjowana, ustaw punkt przerwania `SeedData.Initialize` w metodzie.
+Uruchom aplikację i sprawdź, czy można tworzyć/edytować/wyświetlać filmy z `Rating` polem. Jeśli baza danych nie jest zainicjowana, ustaw punkt przerwania w `SeedData.Initialize` metodzie.
 
 ## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Wersja tego samouczka usługi YouTube](https://youtu.be/3i7uMxiGGR8)
 
 > [!div class="step-by-step"]
-> [Poprzedni: Dodawanie wyszukiwania](xref:tutorials/razor-pages/search)
-> [Dalej: Dodawanie walidacji](xref:tutorials/razor-pages/validation)
+> [Poprzedni: Dodawanie wyszukiwania](xref:tutorials/razor-pages/search) 
+>  [Dalej: Dodawanie walidacji](xref:tutorials/razor-pages/validation)
 
 ::: moniker-end
 
@@ -181,10 +181,10 @@ Edycja *stron/filmów/index. cshtml*i Dodawanie `Rating` pola:
 Aktualizowanie następujących stron:
 
 * Dodaj `Rating` pole do stron usuwanie i szczegóły.
-* Zaktualizuj element `Rating` [Create. cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Create.cshtml) przy użyciu pola.
+* Zaktualizuj element [Create. cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Create.cshtml) przy użyciu `Rating` pola.
 * Dodaj `Rating` pole do strony Edycja.
 
-Aplikacja nie będzie działała, dopóki baza danych nie zostanie zaktualizowana w celu uwzględnienia nowego pola. Jeśli uruchomisz teraz, aplikacja zgłasza `SqlException`:
+Aplikacja nie będzie działała, dopóki baza danych nie zostanie zaktualizowana w celu uwzględnienia nowego pola. Jeśli uruchomisz teraz, aplikacja zgłasza `SqlException` :
 
 `SqlException: Invalid column name 'Rating'.`
 
@@ -208,7 +208,7 @@ Zobacz [ukończony plik SeedData.cs](https://github.com/dotnet/AspNetCore.Docs/b
 
 Skompiluj rozwiązanie.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 <a name="pmc"></a>
 
@@ -222,14 +222,14 @@ Add-Migration Rating
 Update-Database
 ```
 
-`Add-Migration` Polecenie informuje platformę, aby:
+`Add-Migration`Polecenie informuje platformę, aby:
 
-* Porównaj `Movie` model ze schematem `Movie` bazy danych.
+* Porównaj `Movie` model ze `Movie` schematem bazy danych.
 * Utwórz kod, aby zmigrować schemat bazy danych do nowego modelu.
 
 Nazwa "Rating" jest arbitralna i jest używana do nazwy pliku migracji. Warto użyć zrozumiałej nazwy dla pliku migracji.
 
-`Update-Database` Polecenie informuje platformę, aby zastosować zmiany schematu do bazy danych programu.
+`Update-Database`Polecenie informuje platformę, aby zastosować zmiany schematu do bazy danych programu.
 
 <a name="ssox"></a>
 
@@ -261,14 +261,14 @@ dotnet ef database update
 
 ---
 
-Uruchom aplikację i sprawdź, czy można tworzyć/edytować/wyświetlać filmy z `Rating` polem. Jeśli baza danych nie jest zainicjowana, ustaw punkt przerwania `SeedData.Initialize` w metodzie.
+Uruchom aplikację i sprawdź, czy można tworzyć/edytować/wyświetlać filmy z `Rating` polem. Jeśli baza danych nie jest zainicjowana, ustaw punkt przerwania w `SeedData.Initialize` metodzie.
 
 ## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Wersja tego samouczka usługi YouTube](https://youtu.be/3i7uMxiGGR8)
 
 > [!div class="step-by-step"]
-> [Poprzedni: Dodawanie wyszukiwania](xref:tutorials/razor-pages/search)
-> [Dalej: Dodawanie walidacji](xref:tutorials/razor-pages/validation)
+> [Poprzedni: Dodawanie wyszukiwania](xref:tutorials/razor-pages/search) 
+>  [Dalej: Dodawanie walidacji](xref:tutorials/razor-pages/validation)
 
 ::: moniker-end

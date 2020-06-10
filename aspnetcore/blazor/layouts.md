@@ -1,12 +1,24 @@
 ---
-title: "ASP.NET Core Blazor Layouts" Author: Description: "Dowiedz się, jak tworzyć składniki układu wielokrotnego użytku dla Blazor aplikacji".
-monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
+title: ASP.NET Core Blazor układy
+author: guardrex
+description: Dowiedz się, jak tworzyć składniki układu wielokrotnego użytku dla Blazor aplikacji.
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 02/12/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: blazor/layouts
+ms.openlocfilehash: ba172282d0cd6371ebc94b4fda1c13aee14d6fbd
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: pl-PL
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "83851995"
 ---
 # <a name="aspnet-core-blazor-layouts"></a>ASP.NET Core Blazor układy
 

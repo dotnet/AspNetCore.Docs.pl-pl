@@ -1,12 +1,23 @@
 ---
-title: "niestandardowe dostawcy magazynu dla ASP.NET Core Identity " autor: Opis: "informacje o konfigurowaniu niestandardowych dostawców magazynu dla ASP.NET Core Identity ".
-MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
+title: Niestandardowi dostawcy magazynu dla ASP.NET CoreIdentity
+author: ardalis
+description: Dowiedz się, jak skonfigurować niestandardowych dostawców magazynu dla ASP.NET Core Identity .
+ms.author: riande
+ms.custom: mvc
+ms.date: 07/23/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: security/authentication/identity-custom-storage-providers
+ms.openlocfilehash: 792a9e5f776e345fbee5726b676fe148ecaf1657
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: pl-PL
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84106588"
 ---
 # <a name="custom-storage-providers-for-aspnet-core-identity"></a>Niestandardowi dostawcy magazynu dla ASP.NET CoreIdentity
 
@@ -62,11 +73,11 @@ Zestaw instrukcji (lub [oświadczeń](/dotnet/api/system.security.claims.claim))
 
 ### <a name="user-logins"></a>Logowania użytkowników
 
-Informacje o zewnętrznym dostawcy uwierzytelniania (na przykład Facebook lub konto Microsoft) do użycia podczas logowania użytkownika. [Przykład](/dotnet/api/microsoft.aspnet.identity.corecompat.identityuserlogin)
+Informacje o zewnętrznym dostawcy uwierzytelniania (na przykład Facebook lub konto Microsoft) do użycia podczas logowania użytkownika. [Przyklad](/dotnet/api/microsoft.aspnet.identity.corecompat.identityuserlogin)
 
 ### <a name="roles"></a>Role
 
-Grupy autoryzacji dla witryny. Zawiera identyfikator roli i nazwę roli (na przykład "admin" lub "Employee"). [Przykład](/dotnet/api/microsoft.aspnet.identity.corecompat.identityrole)
+Grupy autoryzacji dla witryny. Zawiera identyfikator roli i nazwę roli (na przykład "admin" lub "Employee"). [Przyklad](/dotnet/api/microsoft.aspnet.identity.corecompat.identityrole)
 
 ## <a name="the-data-access-layer"></a>Warstwa dostępu do danych
 
@@ -82,23 +93,23 @@ Hermetyzuje informacje w celu nawiązania połączenia z mechanizmem trwałości
 
 ### <a name="user-storage"></a>Magazyn użytkowników
 
-Przechowuje i pobiera informacje o użytkowniku (takie jak nazwa użytkownika i skrót hasła). [Przykład](/dotnet/api/microsoft.aspnet.identity.corecompat.userstore-1)
+Przechowuje i pobiera informacje o użytkowniku (takie jak nazwa użytkownika i skrót hasła). [Przyklad](/dotnet/api/microsoft.aspnet.identity.corecompat.userstore-1)
 
 ### <a name="role-storage"></a>Magazyn ról
 
-Przechowuje i pobiera informacje o rolach (takie jak nazwa roli). [Przykład](/dotnet/api/microsoft.aspnetcore.identity.entityframeworkcore.rolestore-1)
+Przechowuje i pobiera informacje o rolach (takie jak nazwa roli). [Przyklad](/dotnet/api/microsoft.aspnetcore.identity.entityframeworkcore.rolestore-1)
 
 ### <a name="userclaims-storage"></a>Magazyn UserClaims
 
-Przechowuje i pobiera informacje o użytkowniku (takie jak typ i wartość żądania). [Przykład](/dotnet/api/microsoft.aspnet.identity.corecompat.userstore-1)
+Przechowuje i pobiera informacje o użytkowniku (takie jak typ i wartość żądania). [Przyklad](/dotnet/api/microsoft.aspnet.identity.corecompat.userstore-1)
 
 ### <a name="userlogins-storage"></a>Magazyn UserLogins
 
-Przechowuje i pobiera informacje logowania użytkownika (na przykład zewnętrzny dostawca uwierzytelniania). [Przykład](/dotnet/api/microsoft.aspnet.identity.corecompat.userstore-1)
+Przechowuje i pobiera informacje logowania użytkownika (na przykład zewnętrzny dostawca uwierzytelniania). [Przyklad](/dotnet/api/microsoft.aspnet.identity.corecompat.userstore-1)
 
 ### <a name="userrole-storage"></a>Przestrzeń dyskowa UserRole
 
-Przechowuje i pobiera przypisane role, do których użytkownicy. [Przykład](/dotnet/api/microsoft.aspnet.identity.corecompat.userstore-1)
+Przechowuje i pobiera przypisane role, do których użytkownicy. [Przyklad](/dotnet/api/microsoft.aspnet.identity.corecompat.userstore-1)
 
 **Porada:** Zaimplementuj tylko klasy, które mają być używane w aplikacji.
 

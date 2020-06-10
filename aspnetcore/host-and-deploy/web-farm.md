@@ -1,11 +1,24 @@
 ---
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
+title: ASP.NET Core hosta w kolektywie serwerów sieci Web
+author: rick-anderson
+description: Dowiedz się, jak hostować wiele wystąpień aplikacji ASP.NET Core z zasobami udostępnionymi w środowisku kolektywu serwerów sieci Web.
+monikerRange: '>= aspnetcore-2.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 01/13/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: host-and-deploy/web-farm
+ms.openlocfilehash: 37a50fa2939eb31e66925fa907212d54577bd20b
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: pl-PL
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84106575"
 ---
 # <a name="host-aspnet-core-in-a-web-farm"></a>ASP.NET Core hosta w kolektywie serwerów sieci Web
 
@@ -52,78 +65,12 @@ W środowisku kolektywu serwerów sieci Web mechanizm buforowania musi współdz
 Poniższe scenariusze nie wymagają dodatkowej konfiguracji, ale zależą od technologii, które wymagają konfiguracji farmy serwerów sieci Web.
 
 | Scenariusz | Zależy od&hellip; |
-| ---
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
----- | ---title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
----------- | | Uwierzytelnianie | Ochrona danych (zobacz <xref:security/data-protection/configuration/overview> ).<br><br>Aby uzyskać więcej informacji, zobacz <xref:security/authentication/cookie> i <xref:security/cookie-sharing>. | | Identity | Konfiguracja uwierzytelniania i bazy danych.<br><br>Aby uzyskać więcej informacji, zobacz <xref:security/authentication/identity>. | | Sesja | Ochrona danych (zaszyfrowane pliki cookie) (zobacz <xref:security/data-protection/configuration/overview> ) i buforowanie (zobacz <xref:performance/caching/distributed> ).<br><br>Aby uzyskać więcej informacji, zobacz [Zarządzanie sesjami i Stanami: stan sesji](xref:fundamentals/app-state#session-state). | | TempData | Ochrona danych (zaszyfrowane pliki cookie) (zobacz <xref:security/data-protection/configuration/overview> ) lub sesja (zobacz [Zarządzanie sesjami i Stanami: stan sesji](xref:fundamentals/app-state#session-state)).<br><br>Aby uzyskać więcej informacji, zobacz temat [Zarządzanie sesjami i Stanami: TempData](xref:fundamentals/app-state#tempdata). | | Ochrona przed fałszerstwem | Ochrona danych (zobacz <xref:security/data-protection/configuration/overview> ).<br><br>Aby uzyskać więcej informacji, zobacz <xref:security/anti-request-forgery>. |
+| -------- | ------------------- |
+| Authentication | Ochrona danych (zobacz <xref:security/data-protection/configuration/overview> ).<br><br>Aby uzyskać więcej informacji, zobacz <xref:security/authentication/cookie> i <xref:security/cookie-sharing>. |
+| Identity | Konfiguracja uwierzytelniania i bazy danych.<br><br>Aby uzyskać więcej informacji, zobacz <xref:security/authentication/identity>. |
+| Sesja | Ochrona danych (zaszyfrowane pliki cookie) (zobacz <xref:security/data-protection/configuration/overview> ) i buforowanie (zobacz <xref:performance/caching/distributed> ).<br><br>Aby uzyskać więcej informacji, zobacz [Zarządzanie sesjami i Stanami: stan sesji](xref:fundamentals/app-state#session-state). |
+| TempData | Ochrona danych (zaszyfrowane pliki cookie) (zobacz <xref:security/data-protection/configuration/overview> ) lub sesja (zobacz [Zarządzanie sesjami i Stanami: stan sesji](xref:fundamentals/app-state#session-state)).<br><br>Aby uzyskać więcej informacji, zobacz temat [Zarządzanie sesjami i Stanami: TempData](xref:fundamentals/app-state#tempdata). |
+| Ochrona przed fałszowaniem | Ochrona danych (zobacz <xref:security/data-protection/configuration/overview> ).<br><br>Aby uzyskać więcej informacji, zobacz <xref:security/anti-request-forgery>. |
 
 ## <a name="troubleshoot"></a>Rozwiązywanie problemów
 

@@ -1,11 +1,24 @@
 ---
-title: Author: Description: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
+title: Przekaż pliki w ASP.NET Core
+author: rick-anderson
+description: Jak używać powiązania modelu i przesyłania strumieniowego do przekazywania plików w ASP.NET Core MVC.
+monikerRange: '>= aspnetcore-2.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/03/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: mvc/models/file-uploads
+ms.openlocfilehash: 632cc9fafc5daf2923997f0113adee52491acdcc
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: pl-PL
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "83838321"
 ---
 # <a name="upload-files-in-aspnet-core"></a>Przekaż pliki w ASP.NET Core
 
@@ -94,7 +107,7 @@ Zasoby (dysk, pamięć) używane przez operacje przekazywania plików zależą o
 Buforowanie małych plików zostało omówione w następujących sekcjach tego tematu:
 
 * [Magazyn fizyczny](#upload-small-files-with-buffered-model-binding-to-physical-storage)
-* [baza danych](#upload-small-files-with-buffered-model-binding-to-a-database)
+* [Baza danych](#upload-small-files-with-buffered-model-binding-to-a-database)
 
 **Przesyłanie strumieniowe**
 
@@ -222,7 +235,7 @@ Do poszczególnych plików przekazanych do serwera można uzyskać dostęp za po
 > Przykłady udostępnione w ten sposób nie uwzględniają zagadnień związanych z bezpieczeństwem. Dodatkowe informacje są dostarczane przez następujące sekcje i [Przykładowa aplikacja](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/):
 >
 > * [Zagadnienia związane z zabezpieczeniami](#security-considerations)
-> * [Walidacja](#validation)
+> * [Zatwierdzenia](#validation)
 
 Podczas przekazywania plików przy użyciu powiązania modelu i <xref:Microsoft.AspNetCore.Http.IFormFile> , Metoda akcji może przyjmować:
 
@@ -393,7 +406,7 @@ Poprzedni przykład przypomina scenariusz przedstawiony w przykładowej aplikacj
 > Podane przykłady nie uwzględniają zagadnień związanych z zabezpieczeniami. Dodatkowe informacje są dostarczane przez następujące sekcje i [Przykładowa aplikacja](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/):
 >
 > * [Zagadnienia związane z zabezpieczeniami](#security-considerations)
-> * [Walidacja](#validation)
+> * [Zatwierdzenia](#validation)
 
 ### <a name="upload-large-files-with-streaming"></a>Przekazywanie dużych plików strumieniowo
 
@@ -707,7 +720,7 @@ Domyślny limit żądań ( `maxAllowedContentLength` ) to 30 000 000 bajtów, cz
 </system.webServer>
 ```
 
-To ustawienie dotyczy tylko usług IIS. Zachowanie nie występuje domyślnie podczas hostowania w Kestrel. Aby uzyskać więcej informacji, zobacz [limity żądań \< requestlimits>](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/).
+To ustawienie dotyczy tylko usług IIS. Zachowanie nie występuje domyślnie podczas hostowania w Kestrel. Aby uzyskać więcej informacji, zobacz [limity \<requestLimits> żądań ](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/).
 
 Ograniczenia w module ASP.NET Core lub obecność modułu filtrowania żądań usług IIS mogą ograniczyć przekazywanie do 2 lub 4 GB. Aby uzyskać więcej informacji, zobacz [nie można przekazać pliku o rozmiarze większym niż 2 GB (dotnet/AspNetCore #2711)](https://github.com/dotnet/AspNetCore/issues/2711).
 
@@ -823,7 +836,7 @@ Zasoby (dysk, pamięć) używane przez operacje przekazywania plików zależą o
 Buforowanie małych plików zostało omówione w następujących sekcjach tego tematu:
 
 * [Magazyn fizyczny](#upload-small-files-with-buffered-model-binding-to-physical-storage)
-* [baza danych](#upload-small-files-with-buffered-model-binding-to-a-database)
+* [Baza danych](#upload-small-files-with-buffered-model-binding-to-a-database)
 
 **Przesyłanie strumieniowe**
 
@@ -951,7 +964,7 @@ Do poszczególnych plików przekazanych do serwera można uzyskać dostęp za po
 > Przykłady udostępnione w ten sposób nie uwzględniają zagadnień związanych z bezpieczeństwem. Dodatkowe informacje są dostarczane przez następujące sekcje i [Przykładowa aplikacja](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/):
 >
 > * [Zagadnienia związane z zabezpieczeniami](#security-considerations)
-> * [Walidacja](#validation)
+> * [Zatwierdzenia](#validation)
 
 Podczas przekazywania plików przy użyciu powiązania modelu i <xref:Microsoft.AspNetCore.Http.IFormFile> , Metoda akcji może przyjmować:
 
@@ -1122,7 +1135,7 @@ Poprzedni przykład przypomina scenariusz przedstawiony w przykładowej aplikacj
 > Podane przykłady nie uwzględniają zagadnień związanych z zabezpieczeniami. Dodatkowe informacje są dostarczane przez następujące sekcje i [Przykładowa aplikacja](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/):
 >
 > * [Zagadnienia związane z zabezpieczeniami](#security-considerations)
-> * [Walidacja](#validation)
+> * [Zatwierdzenia](#validation)
 
 ### <a name="upload-large-files-with-streaming"></a>Przekazywanie dużych plików strumieniowo
 
@@ -1429,7 +1442,7 @@ Domyślny limit żądań ( `maxAllowedContentLength` ) to 30 000 000 bajtów, cz
 </system.webServer>
 ```
 
-To ustawienie dotyczy tylko usług IIS. Zachowanie nie występuje domyślnie podczas hostowania w Kestrel. Aby uzyskać więcej informacji, zobacz [limity żądań \< requestlimits>](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/).
+To ustawienie dotyczy tylko usług IIS. Zachowanie nie występuje domyślnie podczas hostowania w Kestrel. Aby uzyskać więcej informacji, zobacz [limity \<requestLimits> żądań ](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/).
 
 Ograniczenia w module ASP.NET Core lub obecność modułu filtrowania żądań usług IIS mogą ograniczyć przekazywanie do 2 lub 4 GB. Aby uzyskać więcej informacji, zobacz [nie można przekazać pliku o rozmiarze większym niż 2 GB (dotnet/AspNetCore #2711)](https://github.com/dotnet/AspNetCore/issues/2711).
 

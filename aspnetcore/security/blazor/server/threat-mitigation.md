@@ -1,12 +1,24 @@
 ---
-title: "wskazówki dotyczące łagodzenia zagrożeń dla ASP.NET Core Blazor serwera" autor: Opis: "informacje na temat ograniczania zagrożeń bezpieczeństwa do Blazor aplikacji serwera".
-monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
+title: Wskazówki dotyczące ograniczania zagrożeń dla Blazor serwera ASP.NET Core
+author: guardrex
+description: Dowiedz się, jak ograniczyć zagrożenia bezpieczeństwa do Blazor aplikacji serwerowych.
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/05/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: security/blazor/server/threat-mitigation
+ms.openlocfilehash: 06f9cc2d70367ea90a519ddd508a156e88adcb61
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: pl-PL
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "83864634"
 ---
 # <a name="threat-mitigation-guidance-for-aspnet-core-blazor-server"></a>Wskazówki dotyczące ograniczania zagrożeń dla Blazor serwera ASP.NET Core
 

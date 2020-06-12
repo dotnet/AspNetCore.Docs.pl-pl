@@ -5,7 +5,7 @@ description: Utwórz aplikację czatu, która używa ASP.NET Core SignalR z Blaz
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/19/2020
+ms.date: 06/10/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/signalr-blazor-webassembly
-ms.openlocfilehash: d3ce11606b4193d5c2938b5996d8dcd1cb99a731
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: 720f534426cc0e2b32778e49050c7f7d75ecd60d
+ms.sourcegitcommit: 6371114344a5f4fbc5d4a119b0be1ad3762e0216
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84451891"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84679595"
 ---
 # <a name="use-aspnet-core-signalr-with-blazor-webassembly"></a>Używanie ASP.NET Core SignalR z Blazor zestawem webassembly
 
@@ -53,7 +53,7 @@ Na końcu tego samouczka będziesz mieć działającą aplikację czatu.
 * [Visual Studio dla komputerów Mac wersja 8,6 lub nowsza](https://visualstudio.microsoft.com/vs/mac/)
 * [!INCLUDE [.NET Core 3.1 SDK](~/includes/3.1-SDK.md)]
 
-# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli/)
+# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli/)
 
 [!INCLUDE[](~/includes/3.1-SDK.md)]
 
@@ -93,7 +93,7 @@ Postępuj zgodnie ze wskazówkami dotyczącymi wybranego narzędzia:
 
 1. W Visual Studio Code Otwórz folder projektu aplikacji.
 
-1. Gdy pojawi się okno dialogowe dodawania zasobów do kompilowania i debugowania aplikacji, wybierz pozycję **tak**. Visual Studio Code automatycznie dodaje folder *. programu vscode* z wygenerowanymi plikami *Launch. JSON* i *Tasks. JSON* .
+1. Gdy pojawi się okno dialogowe dodawania zasobów do kompilowania i debugowania aplikacji, wybierz pozycję **tak**. Visual Studio Code automatycznie dodaje folder *. programu vscode* z wygenerowanym *launch.jsna* plikach i *tasks.js* .
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
@@ -103,7 +103,7 @@ Postępuj zgodnie ze wskazówkami dotyczącymi wybranego narzędzia:
 
 1. Na pasku bocznym wybierz pozycję Aplikacja **sieci Web i konsola**  >  **App**.
 
-1. Wybierz szablon ** Blazor aplikacji webassembly** . Wybierz pozycję **Dalej**.
+1. Wybierz szablon ** Blazor aplikacji webassembly** . Wybierz przycisk **Dalej**.
 
    Potwierdź następujące konfiguracje:
 
@@ -112,7 +112,7 @@ Postępuj zgodnie ze wskazówkami dotyczącymi wybranego narzędzia:
 
    Zaznacz pole wyboru **hostowane ASP.NET Core** .
 
-   Wybierz pozycję **Dalej**.
+   Wybierz przycisk **Dalej**.
 
 1. W polu **Nazwa projektu** Nadaj nazwę aplikacji `BlazorSignalRApp` . Wybierz przycisk **Utwórz**.
 
@@ -120,7 +120,7 @@ Postępuj zgodnie ze wskazówkami dotyczącymi wybranego narzędzia:
 
 1. Otwórz projekt, przechodząc do folderu projektu i otwierając plik rozwiązania projektu (*. sln*).
 
-# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli/)
+# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli/)
 
 W powłoce poleceń wykonaj następujące polecenie:
 
@@ -166,7 +166,7 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 1. Jeśli zostanie wyświetlone okno dialogowe **Akceptacja licencji** , wybierz pozycję **Akceptuj** , jeśli akceptujesz postanowienia licencyjne.
 
-# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli/)
+# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli/)
 
 W powłoce poleceń wykonaj następujące polecenia:
 
@@ -230,7 +230,7 @@ W projekcie **BlazorSignalRApp. Server** Utwórz folder *Hubs* (plural) i Dodaj 
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-1. Gdy VS Code oferuje możliwość utworzenia profilu uruchamiania dla aplikacji serwerowej (*. programu vscode/Launch. JSON*), `program` wpis będzie wyglądać podobnie do poniższego, aby wskazać zestawowi aplikacji ( `{APPLICATION NAME}.Server.dll` ):
+1. Gdy VS Code oferuje możliwość utworzenia profilu uruchamiania dla aplikacji serwerowej (*. programu vscode/launch.json*), `program` wpis będzie wyglądać podobnie do poniższego, aby wskazać zestawowi aplikacji ( `{APPLICATION NAME}.Server.dll` ):
 
    ```json
    "program": "${workspaceFolder}/Server/bin/Debug/netcoreapp3.1/{APPLICATION NAME}.Server.dll"
@@ -258,7 +258,7 @@ W projekcie **BlazorSignalRApp. Server** Utwórz folder *Hubs* (plural) i Dodaj 
 
    Cudzysłowy: *gwiazdka Trek VI: niewykrywalny kraj* &copy; 1991 [Paramount](https://www.paramountmovies.com/movies/star-trek-vi-the-undiscovered-country)
 
-# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli/)
+# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli/)
 
 1. W powłoce poleceń wykonaj następujące polecenia:
 
@@ -296,3 +296,4 @@ Aby dowiedzieć się więcej na temat tworzenia Blazor aplikacji, zapoznaj się 
 ## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:signalr/introduction>
+* [SignalRnegocjowanie między źródłami na potrzeby uwierzytelniania](xref:blazor/hosting-model-configuration#signalr-cross-origin-negotiation-for-authentication)

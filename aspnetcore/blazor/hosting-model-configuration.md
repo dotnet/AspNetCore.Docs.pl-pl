@@ -5,7 +5,7 @@ description: Dowiedz się więcej o Blazor konfiguracji modelu hostingu, w tym o
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/28/2020
+ms.date: 06/10/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/hosting-model-configuration
-ms.openlocfilehash: e3b8b91a570210e77f307c49f7be21eeab714daa
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: 3cef67806ce0e2e045122bdc962e93795be68572
+ms.sourcegitcommit: 6371114344a5f4fbc5d4a119b0be1ad3762e0216
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84355113"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84679582"
 ---
 # <a name="aspnet-core-blazor-hosting-model-configuration"></a>ASP.NET Core Blazor konfigurację modelu hostingu
 
@@ -36,7 +36,7 @@ Hostowana Blazor aplikacja sieci webassembly pobiera środowisko z serwera za po
 
 W przypadku aplikacji autonomicznej uruchomionej lokalnie serwer programistyczny dodaje `blazor-environment` nagłówek, aby określić środowisko programistyczne. Aby określić środowisko dla innych środowisk hostingu, Dodaj `blazor-environment` nagłówek.
 
-W poniższym przykładzie dla usług IIS Dodaj nagłówek niestandardowy do opublikowanego pliku *Web. config* . Plik *Web. config* znajduje się w folderze *bin/Release/{Target Framework}/Publish* :
+W poniższym przykładzie dla usług IIS Dodaj nagłówek niestandardowy do opublikowanego pliku *web.config* . Plik *web.config* znajduje się w folderze *bin/Release/{Target Framework}/Publish* :
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -55,7 +55,7 @@ W poniższym przykładzie dla usług IIS Dodaj nagłówek niestandardowy do opub
 ```
 
 > [!NOTE]
-> Aby użyć niestandardowego pliku *Web. config* dla usług IIS, które nie są zastępowane podczas publikowania aplikacji w folderze *publikowania* , zobacz <xref:host-and-deploy/blazor/webassembly#use-a-custom-webconfig> .
+> Aby użyć niestandardowego pliku *web.config* dla usług IIS, które nie są zastępowane podczas publikowania aplikacji w folderze *publikowania* , zobacz <xref:host-and-deploy/blazor/webassembly#use-a-custom-webconfig> .
 
 Uzyskaj środowisko aplikacji w składniku, wprowadzając <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment> i odczytując <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.Environment> Właściwość:
 
@@ -104,9 +104,9 @@ if (builder.HostEnvironment.IsEnvironment("Custom"))
 BlazorZestaw webassembly ładuje konfigurację z:
 
 * Pliki ustawień aplikacji domyślnie:
-  * *wwwroot/appSettings. JSON*
+  * *plik wwwroot/appsettings.json*
   * *wwwroot/appSettings. {ENVIRONMENT}. JSON*
-* Inni [dostawcy konfiguracji](xref:fundamentals/configuration/index) zarejestrowani przez aplikację. Nie wszyscy dostawcy są odpowiednim rozwiązaniem dla Blazor aplikacji webassembly. Wyjaśnienie, na których dostawców są obsługiwane dla Blazor zestawu webassembly, są śledzone przez [wyjaśnienie dostawców konfiguracji dla Blazor WASM (dotnet/AspNetCore. docs #18134)](https://github.com/dotnet/AspNetCore.Docs/issues/18134).
+* Inni [dostawcy konfiguracji](xref:fundamentals/configuration/index) zarejestrowani przez aplikację. Nie wszyscy dostawcy są odpowiednim rozwiązaniem dla Blazor aplikacji webassembly. Wyjaśnienie, na których dostawców są obsługiwane dla Blazor zestawu webassembly, są śledzone przez [wyjaśnienie dostawców konfiguracji dla Blazor WASM (#18134 dotnet/AspNetCore.Docs)](https://github.com/dotnet/AspNetCore.Docs/issues/18134).
 
 > [!WARNING]
 > Konfiguracja w Blazor aplikacji webassembly jest widoczna dla użytkowników. **Nie przechowuj wpisów tajnych aplikacji ani poświadczeń w konfiguracji.**
@@ -115,7 +115,7 @@ Aby uzyskać więcej informacji na temat dostawców konfiguracji, zobacz <xref:f
 
 #### <a name="app-settings-configuration"></a>Konfiguracja ustawień aplikacji
 
-*wwwroot/appSettings. JSON*:
+plik *wwwroot/appsettings.jsw*:
 
 ```json
 {
@@ -190,7 +190,7 @@ Wsuń <xref:Microsoft.Extensions.Configuration.IConfiguration> wystąpienie do s
 
 Aby odczytać inne pliki konfiguracji z folderu *wwwroot* do konfiguracji, użyj programu <xref:System.Net.Http.HttpClient> w celu uzyskania zawartości pliku. W przypadku korzystania z tego podejścia istniejąca <xref:System.Net.Http.HttpClient> rejestracja usługi może używać lokalnego klienta utworzonego do odczytu pliku, jak pokazano w poniższym przykładzie:
 
-plik *wwwroot/samochody. JSON*:
+plik *wwwroot/cars.jsw*:
 
 ```json
 {
@@ -220,7 +220,7 @@ builder.Configuration.AddJsonStream(stream);
 
 #### <a name="authentication-configuration"></a>Konfiguracja uwierzytelniania
 
-*wwwroot/appSettings. JSON*:
+plik *wwwroot/appsettings.jsw*:
 
 ```json
 {
@@ -240,13 +240,13 @@ builder.Services.AddOidcAuthentication(options =>
 
 #### <a name="logging-configuration"></a>Konfiguracja rejestrowania
 
-Dodaj odwołanie do pakietu dla [Microsoft. Extensions. Logging. Configuration](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Configuration/):
+Dodaj odwołanie do pakietu dla [Microsoft.Extensions.Logging.Configwersja](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Configuration/):
 
 ```xml
 <PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="{VERSION}" />
 ```
 
-*wwwroot/appSettings. JSON*:
+plik *wwwroot/appsettings.jsw*:
 
 ```json
 {
@@ -284,13 +284,44 @@ var hostname = builder.Configuration["HostName"];
 Pliki konfiguracji są buforowane do użycia w trybie offline. Przy użyciu [progresywnych aplikacji sieci Web (PWAs)](xref:blazor/progressive-web-app)można aktualizować tylko pliki konfiguracji podczas tworzenia nowego wdrożenia. Edytowanie plików konfiguracji między wdrożeniami nie ma żadnego skutku, ponieważ:
 
 * Użytkownicy mają buforowane wersje plików, które nadal są używane.
-* Pliki *Service-Worker. js* i *Service-Worker-Assets. js* programu PWA muszą zostać ponownie skompilowane w ramach kompilacji, która sygnalizuje aplikacji w następnym trybie online, że aplikacja została ponownie wdrożona.
+* Pliki *service-worker.js* i *service-worker-assets.js* programu PWA muszą zostać ponownie skompilowane w ramach kompilacji, która sygnalizuje aplikacji w następnym trybie online, że aplikacja została ponownie wdrożona.
 
 Aby uzyskać więcej informacji o tym, jak aktualizacje w tle są obsługiwane przez PWAs, zobacz <xref:blazor/progressive-web-app#background-updates> .
 
 ### <a name="logging"></a>Rejestrowanie
 
 Aby uzyskać informacje na temat Blazor obsługi rejestrowania zestawów webassembly, zobacz <xref:fundamentals/logging/index#create-logs-in-blazor> .
+
+### <a name="signalr-cross-origin-negotiation-for-authentication"></a>SignalRnegocjowanie między źródłami na potrzeby uwierzytelniania
+
+Aby skonfigurować SignalR klienta podstawowego do wysyłania poświadczeń, takich jak pliki cookie lub nagłówki uwierzytelniania http:
+
+* Użyj <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCredentials%2A> do ustawienia <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.BrowserRequestCredentials.Include> dla żądań [pobrania](https://developer.mozilla.org/docs/Web/API/Fetch_API/Using_Fetch) między źródłami:
+
+  ```csharp
+  public class IncludeRequestCredentialsMessagHandler : DelegatingHandler
+  {
+      protected override Task<HttpResponseMessage> SendAsync(
+          HttpRequestMessage request, CancellationToken cancellationToken)
+      {
+          request.SetBrowserRequestCredentials(BrowserRequestCredentials.Include);
+          return base.SendAsync(request, cancellationToken);
+      }
+  }
+  ```
+
+* Przypisz <xref:System.Net.Http.HttpMessageHandler> do <xref:Microsoft.AspNetCore.Http.Connections.Client.HttpConnectionOptions.HttpMessageHandlerFactory> opcji:
+
+  ```csharp
+  var client = new HubConnectionBuilder()
+      .WithUrl(new Uri("http://signalr.example.com"), options =>
+      {
+          options.HttpMessageHandlerFactory = innerHandler => 
+              new IncludeRequestCredentialsMessagHandler { InnerHandler = innerHandler };
+      }).Build();
+  ```
+
+Aby uzyskać więcej informacji, zobacz <xref:signalr/configuration#configure-additional-options>.
 
 ## <a name="blazor-server"></a>BlazorServer
 

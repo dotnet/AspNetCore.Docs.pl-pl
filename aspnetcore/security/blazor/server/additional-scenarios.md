@@ -5,7 +5,7 @@ description: Dowiedz się, jak skonfigurować Blazor serwer pod kątem dodatkowy
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/19/2020
+ms.date: 06/04/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/server/additional-scenarios
-ms.openlocfilehash: f172df7f2333fd79ba175ec8a3a6925ec07f1113
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 159d418a78caa3954294ad0a1067654d895147f7
+ms.sourcegitcommit: 6371114344a5f4fbc5d4a119b0be1ad3762e0216
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "83851528"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84679673"
 ---
 # <a name="aspnet-core-blazor-server-additional-security-scenarios"></a>BlazorDodatkowe scenariusze zabezpieczeń ASP.NET Core Server
 
@@ -28,7 +28,7 @@ Autor [Javier Calvarro Nelson](https://github.com/javiercn)
 
 Tokeny dostępne poza Razor składnikami w Blazor aplikacji serwerowej mogą być przesyłane do składników z podejściem opisanym w tej sekcji. Przykładowy kod, łącznie z kompletnym `Startup.ConfigureServices` przykładem, można znaleźć w temacie [przekazywanie tokenów do Blazor aplikacji po stronie serwera](https://github.com/javiercn/blazor-server-aad-sample).
 
-Uwierzytelnianie Blazor aplikacji serwerowej tak jak w przypadku zwykłych Razor stron lub aplikacji MVC. Zainicjuj obsługę administracyjną i Zapisz tokeny w pliku cookie uwierzytelniania. Przykład:
+Uwierzytelnianie Blazor aplikacji serwerowej tak jak w przypadku zwykłych Razor stron lub aplikacji MVC. Zainicjuj obsługę administracyjną i Zapisz tokeny w pliku cookie uwierzytelniania. Na przykład:
 
 ```csharp
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
@@ -148,6 +148,18 @@ public class WeatherForecastService
 }
 ```
 
+## <a name="set-the-authentication-scheme"></a>Ustawianie schematu uwierzytelniania
+
+W przypadku aplikacji, która używa więcej niż jednego oprogramowania pośredniczącego uwierzytelniania i w ten sposób ma więcej niż jeden schemat uwierzytelniania, schemat, którego Blazor używa można jawnie ustawić w konfiguracji punktu końcowego `Startup.Configure` . Poniższy przykład ustawia schemat Azure Active Directory:
+
+```csharp
+endpoints.MapBlazorHub().RequireAuthorization(
+    new AuthorizeAttribute 
+    {
+        AuthenticationSchemes = AzureADDefaults.AuthenticationScheme
+    });
+```
+
 ## <a name="use-open-id-connect-oidc-v20-endpoints"></a>Korzystanie z punktów końcowych programu Open ID Connect (OIDC) v 2.0
 
 Biblioteka i szablony uwierzytelniania Blazor korzystają z punktów końcowych Open ID Connect (OIDC) w wersji 1.0. Aby użyć punktu końcowego v 2.0, skonfiguruj <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority?displayProperty=nameWithType> opcję w <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions> :
@@ -160,7 +172,7 @@ services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme,
     }
 ```
 
-Alternatywnie można wprowadzić to ustawienie w pliku ustawień aplikacji (*appSettings. JSON*):
+Alternatywnie można wprowadzić to ustawienie w pliku ustawień aplikacji (*appsettings.json*):
 
 ```json
 {

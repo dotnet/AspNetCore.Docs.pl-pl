@@ -560,6 +560,9 @@
         - name: Zagadnienia dotyczące projektowania interfejsów API
           uid: signalr/api-design
           displayName: signalr
+        - name: Filtry centrum
+          uid: signalr/hub-filters
+          displayName: signalr
     - name: Klienci
       displayName: signalr
       items:

@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-3.0
-ms.openlocfilehash: 38a75e9577bab6bbdb5accf161659e8e301947b1
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: f2588665c26887a6e3864866425b887e97e656d5
+ms.sourcegitcommit: a423e8fcde4b6181a3073ed646a603ba20bfa5f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84105938"
+ms.lasthandoff: 06/13/2020
+ms.locfileid: "84755875"
 ---
 # <a name="whats-new-in-aspnet-core-30"></a>Co nowego w ASP.NET Core 3,0
 
@@ -84,13 +84,13 @@ Aby uzyskać więcej informacji, zobacz <xref:grpc/index>.
 
 ## SignalR
 
-Zobacz sekcję [Aktualizowanie SignalR kodu](xref:migration/22-to-30#signalr) na potrzeby instrukcji migracji. SignalRteraz używa `System.Text.Json` do serializacji/deserializacji komunikatów JSON. Aby uzyskać instrukcje dotyczące przywracania serializatora opartego na pliku, zobacz [Switch to Newtonsoft. JSON](xref:migration/22-to-30#switch-to-newtonsoftjson) `Newtonsoft.Json` .
+Zobacz sekcję [Aktualizowanie SignalR kodu](xref:migration/22-to-30#signalr) na potrzeby instrukcji migracji. SignalRteraz używa `System.Text.Json` do serializacji/deserializacji komunikatów JSON. Aby uzyskać instrukcje dotyczące przywracania serializatora opartego na programie, zobacz [przełączanie do Newtonsoft.Js](xref:migration/22-to-30#switch-to-newtonsoftjson) `Newtonsoft.Json` .
 
 W przypadku klientów z obsługą języka JavaScript i .NET dla programu SignalR Dodano obsługę automatycznego ponownego łączenia. Domyślnie klient próbuje ponownie nawiązać połączenie, a następnie ponowić próbę po 2, 10 i 30 sekundach, jeśli jest to konieczne. Jeśli klient pomyślnie nawiąże połączenie, otrzymuje nowy identyfikator połączenia. Automatyczne ponowne łączenie jest zgodą:
 
 ```javascript
 const connection = new signalR.HubConnectionBuilder()
-    .withUrl("/chatHub")
+    .withUrl("/chathub")
     .withAutomaticReconnect()
     .build();
 ```
@@ -316,7 +316,7 @@ ASP.NET Core 3,0 teraz <xref:System.Text.Json> domyślnie używa dla serializacj
 * Jest zoptymalizowany pod kątem tekstu w formacie UTF-8.
 * Zwykle wyższa wydajność niż `Newtonsoft.Json` .
 
-Aby dodać Json.NET do ASP.NET Core 3,0, zobacz [Dodawanie obsługi formatu JSON opartego na Newtonsoft. JSON](xref:web-api/advanced/formatting#add-newtonsoftjson-based-json-format-support).
+Aby dodać Json.NET do ASP.NET Core 3,0, zobacz [dodawanie Newtonsoft.Jsna podstawie obsługi formatu JSON](xref:web-api/advanced/formatting#add-newtonsoftjson-based-json-format-support).
 
 ## <a name="new-razor-directives"></a>Nowe Razor dyrektywy
 
@@ -401,7 +401,7 @@ Aby uzyskać więcej informacji, zobacz <xref:security/authentication/windowsaut
 Szablony interfejsu użytkownika sieci Web ( Razor strony, MVC z kontrolerem i widokami) mają następujące usunięte:
 
 * Interfejs użytkownika zgody na plik cookie nie jest już uwzględniony. Aby włączyć funkcję wyrażania zgody plików cookie w aplikacji wygenerowanej przez szablon ASP.NET Core 3,0, zobacz <xref:security/gdpr> .
-* Skrypty i powiązane zasoby statyczne są teraz przywoływane jako pliki lokalne zamiast używać sieci CDN. Aby uzyskać więcej informacji, zobacz [skrypty i powiązane zasoby statyczne są teraz odwołujące się do plików lokalnych zamiast używania sieci CDN w oparciu o bieżące środowisko (ASPNET/AspNetCore. Docs #14350)](https://github.com/dotnet/AspNetCore.Docs/issues/14350).
+* Skrypty i powiązane zasoby statyczne są teraz przywoływane jako pliki lokalne zamiast używać sieci CDN. Aby uzyskać więcej informacji, zobacz [skrypty i powiązane zasoby statyczne są teraz odwołujące się do plików lokalnych zamiast używania sieci CDN w oparciu o bieżące środowisko (ASPNET/AspNetCore.Docs #14350)](https://github.com/dotnet/AspNetCore.Docs/issues/14350).
 
 Szablon kątowy został zaktualizowany do użycia kątowy 8.
 
@@ -437,7 +437,7 @@ Aby uzyskać więcej informacji, zobacz <xref:migration/22-to-30#kestrel>.
 
 ## <a name="http2-enabled-by-default"></a>Protokół HTTP/2 włączony domyślnie
 
-Protokół HTTP/2 jest domyślnie włączony w Kestrel dla punktów końcowych HTTPS. Obsługa protokołu HTTP/2 dla usług IIS lub HTTP. sys jest włączona, gdy jest ona obsługiwana przez system operacyjny.
+Protokół HTTP/2 jest domyślnie włączony w Kestrel dla punktów końcowych HTTPS. Obsługa protokołu HTTP/2 dla usług IIS lub HTTP.sys jest włączona, gdy jest ona obsługiwana przez system operacyjny.
 
 ## <a name="eventcounters-on-request"></a>EventCounters na żądanie
 
@@ -536,7 +536,7 @@ Współdzielona struktura ASP.NET Core 3,0, która znajduje się w [pakiecie Mic
 
 Najbardziej istotnymi zestawami usuniętymi ze współdzielonej platformy ASP.NET Core 3,0 są:
 
-* [Newtonsoft. JSON](https://www.nuget.org/packages/Newtonsoft.Json/) (JSON.NET). Aby dodać Json.NET do ASP.NET Core 3,0, zobacz [Dodawanie obsługi formatu JSON opartego na Newtonsoft. JSON](xref:web-api/advanced/formatting#add-newtonsoftjson-based-json-format-support). ASP.NET Core 3,0 wprowadza `System.Text.Json` do odczytu i zapisu JSON. Aby uzyskać więcej informacji, zobacz [Nowa Serializacja kodu JSON](#new-json-serialization) w tym dokumencie.
+* [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json/) (JSON.NET). Aby dodać Json.NET do ASP.NET Core 3,0, zobacz [dodawanie Newtonsoft.Jsna podstawie obsługi formatu JSON](xref:web-api/advanced/formatting#add-newtonsoftjson-based-json-format-support). ASP.NET Core 3,0 wprowadza `System.Text.Json` do odczytu i zapisu JSON. Aby uzyskać więcej informacji, zobacz [Nowa Serializacja kodu JSON](#new-json-serialization) w tym dokumencie.
 * [Entity Framework Core](/ef/core/)
 
 Aby uzyskać pełną listę zestawów usuniętych z udostępnionej platformy, zobacz [zestawy usuwane z Microsoft. AspNetCore. App 3,0](https://github.com/dotnet/AspNetCore/issues/3755). Aby uzyskać więcej informacji na temat motywacji dotyczącej tej zmiany, zobacz artykuł [dotyczący zmiany w firmie Microsoft. AspNetCore. App w 3,0](https://github.com/aspnet/Announcements/issues/325) i [pierwsze spojrzenie na zmiany wprowadzone w ASP.NET Core 3,0](https://devblogs.microsoft.com/aspnet/a-first-look-at-changes-coming-in-asp-net-core-3-0/).

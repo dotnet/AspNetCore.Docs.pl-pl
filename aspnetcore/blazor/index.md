@@ -1,12 +1,24 @@
 ---
-title: "wprowadzenie do ASP.NET Core Blazor " autor: Opis: "eksploruj ASP.NET Core Blazor , sposób kompilowania interaktywnego interfejsu użytkownika sieci Web po stronie klienta przy użyciu platformy .NET w aplikacji ASP.NET Core."
-monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
+title: Wprowadzenie do ASP.NET CoreBlazor
+author: guardrex
+description: Eksploruj ASP.NET Core Blazor , jak tworzyć interaktywny interfejs użytkownika sieci Web po stronie klienta przy użyciu platformy .NET w aplikacji ASP.NET Core.
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc, seoapril2019
+ms.date: 05/19/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: blazor/index
+ms.openlocfilehash: eb8a6d2ddbd3e8f61626566878a7af5f5a2525d8
+ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
+ms.translationtype: MT
+ms.contentlocale: pl-PL
+ms.lasthandoff: 06/12/2020
+ms.locfileid: "83608190"
 ---
 # <a name="introduction-to-aspnet-core-blazor"></a>Wprowadzenie do ASP.NET CoreBlazor
 
@@ -141,7 +153,7 @@ Blazorimplementuje [.NET Standard 2,0](/dotnet/standard/net-standard). .NET Stan
 
 Interfejsy API, które nie są stosowane w przeglądarce sieci Web (na przykład dostęp do systemu plików, otwieranie gniazda i wątkowość) throw <xref:System.PlatformNotSupportedException> .
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Zestaw webassembly](https://webassembly.org/)
 * <xref:blazor/hosting-models>

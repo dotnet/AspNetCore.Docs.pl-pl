@@ -5,7 +5,7 @@ description: Dowiedz się, jak tworzyć i używać Razor składników, w tym jak
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/14/2020
+ms.date: 06/11/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components
-ms.openlocfilehash: 59b0c51e0006db0eb748b14b82a114a8bad986e8
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 2a6de1a39737f98cb151a0556f36c223d86f9752
+ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84105154"
+ms.lasthandoff: 06/12/2020
+ms.locfileid: "84723954"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>Tworzenie i używanie Razor składników ASP.NET Core
 
@@ -88,7 +88,7 @@ Podczas uzyskiwania dostępu do zawartości w Razor składni należy zwrócić s
 
 Blazorzgodnie z Konwencją ASP.NET Core aplikacje umieszczające statyczne zasoby w [folderze katalogu głównego sieci Web (wwwroot)](xref:fundamentals/index#web-root)projektu.
 
-Użyj ścieżki względnej (), `/` Aby odwołać się do katalogu głównego sieci Web dla statycznego elementu zawartości. W poniższym przykładzie *logo. png* znajduje się fizycznie w folderze *{Project root}/wwwroot/images* :
+Użyj ścieżki względnej (), `/` Aby odwołać się do katalogu głównego sieci Web dla statycznego elementu zawartości. W poniższym przykładzie *logo.png* znajduje się fizycznie w folderze *{Project root}/wwwroot/images* :
 
 ```razor
 <img alt="Company logo" src="/images/logo.png" />
@@ -365,7 +365,7 @@ Zarejestruj `NotifierService` jako singletion:
 * W obszarze Blazor serwer Zarejestruj usługę w `Startup.ConfigureServices` :
 
   ```csharp
-  services.AddSingleton<NotifierService>();
+  services.AddScoped<NotifierService>();
   ```
 
 `NotifierService`Aby zaktualizować składnik, użyj programu:
@@ -984,7 +984,7 @@ Podobnie Obrazy SVG są obsługiwane w regułach CSS pliku arkusza stylów (*CSS
 
 Jednak wbudowane znaczniki SVG nie są obsługiwane we wszystkich scenariuszach. Jeśli umieścisz `<svg>` tag bezpośrednio w pliku składnika (*. Razor*), podstawowe renderowanie obrazu jest obsługiwane, ale wiele scenariuszy zaawansowanych nie jest jeszcze obsługiwanych. Na przykład `<use>` tagi nie są obecnie przestrzegane i [`@bind`][10] nie mogą być używane z niektórymi tagami SVG. Aby uzyskać więcej informacji, zobacz [Obsługa SVG w Blazor (#18271 dotnet/aspnetcore)](https://github.com/dotnet/aspnetcore/issues/18271).
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:security/blazor/server/threat-mitigation>: Zawiera wskazówki dotyczące tworzenia Blazor aplikacji serwera, które muszą będą konkurować o z wyczerpaniem zasobów.
 

@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/authn-and-authz
-ms.openlocfilehash: f9d2e73f57d69e1eb5039019dc9e64193cf67820
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 61ddcdc75a627fe777fab88b41bdbc4c7f9be9f3
+ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84105795"
+ms.lasthandoff: 06/12/2020
+ms.locfileid: "84723993"
 ---
 # <a name="authentication-and-authorization-in-grpc-for-aspnet-core"></a>Uwierzytelnianie i autoryzacja w programie gRPC for ASP.NET Core
 
@@ -117,7 +117,7 @@ private static GrpcChannel CreateAuthenticatedChannel(string address)
 Klient może również udostępnić certyfikat klienta na potrzeby uwierzytelniania. [Uwierzytelnianie certyfikatu](https://tools.ietf.org/html/rfc5246#section-7.4.4) odbywa się na poziomie protokołu TLS, o ile nie zostanie kiedykolwiek przeASP.NET Core. Gdy żądanie zostanie wprowadzone ASP.NET Core, [Pakiet uwierzytelniania certyfikatu klienta](xref:security/authentication/certauth) umożliwia rozpoznanie certyfikatu w usłudze `ClaimsPrincipal` .
 
 > [!NOTE]
-> Host musi być skonfigurowany do akceptowania certyfikatów klienta. Zobacz [Konfigurowanie hosta, aby wymagać certyfikatów](xref:security/authentication/certauth#configure-your-host-to-require-certificates) w celu uzyskania informacji na temat akceptowania certyfikatów klienta w usługach Kestrel, IIS i Azure.
+> Skonfiguruj serwer do akceptowania certyfikatów klienta. Aby uzyskać informacje dotyczące akceptowania certyfikatów klienta w usłudze Kestrel, usługach IIS i platformie Azure, zobacz <xref:security/authentication/certauth#configure-your-server-to-require-certificates> .
 
 W kliencie .NET gRPC certyfikat klienta zostaje dodany do programu `HttpClientHandler` , który jest następnie używany do tworzenia klienta gRPC:
 
@@ -144,7 +144,7 @@ public Ticketer.TicketerClient CreateClientWithCert(
 
 Wiele ASP.NET Core obsługiwanych mechanizmów uwierzytelniania współpracuje z gRPC:
 
-* Azure Active Directory
+* Usługa Azure Active Directory
 * Certyfikat klienta
 * IdentityServer
 * Token JWT
@@ -203,7 +203,7 @@ public class TicketerService : Ticketer.TicketerBase
 }
 ```
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Uwierzytelnianie tokenu okaziciela w ASP.NET Core](https://blogs.msdn.microsoft.com/webdev/2016/10/27/bearer-token-authentication-in-asp-net-core/)
 * [Konfigurowanie uwierzytelniania certyfikatu klienta w ASP.NET Core](xref:security/authentication/certauth)

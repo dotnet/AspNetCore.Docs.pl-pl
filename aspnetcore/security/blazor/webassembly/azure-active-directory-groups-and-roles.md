@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/webassembly/aad-groups-roles
-ms.openlocfilehash: 3ed06cca7e20da381b870e642a6c616b2578cd0a
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: 87cdf02a6f6babc869d90658e6a7cd54db73bb68
+ms.sourcegitcommit: a423e8fcde4b6181a3073ed646a603ba20bfa5f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84451878"
+ms.lasthandoff: 06/13/2020
+ms.locfileid: "84756031"
 ---
 # <a name="azure-ad-groups-administrative-roles-and-user-defined-roles"></a>Grupy usługi Azure AD, role administracyjne i role zdefiniowane przez użytkownika
 
@@ -164,7 +164,7 @@ W poniższych przykładach aplikacja używa powyższych zasad do autoryzowania u
 </AuthorizeView>
 ```
 
-Dostęp do całego składnika może opierać się na zasadach przy użyciu `[Authorize]` dyrektywy Attribute [] (linki XREF: Security/blazor/index # Autoryzuj-Attribute) ( <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> ):
+Dostęp do całego składnika może opierać się na zasadach przy użyciu [ `[Authorize]` dyrektywy Attribute](xref:security/blazor/index#authorize-attribute) ( <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> ):
 
 ```razor
 @page "/"
@@ -246,7 +246,7 @@ builder.Services.AddMsalAuthentication(options =>
 Metody autoryzacji składników są w tym momencie funkcjonalne. Każdy mechanizm autoryzacji w składnikach programu może korzystać z `admin` roli w celu autoryzowania użytkownika:
 
 * [AuthorizeView — składnik](xref:security/blazor/index#authorizeview-component) (przykład: `<AuthorizeView Roles="admin">` )
-* [ `[Authorize]` ] — Dyrektywa atrybutu] (linki XREF: Security/blazor/index # autoryzuje-Attribute) ( <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> ) (Przykład: `@attribute [Authorize(Roles = "admin")]` )
+* [ `[Authorize]` dyrektywa Attribute](xref:security/blazor/index#authorize-attribute) ( <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> ) (przykład: `@attribute [Authorize(Roles = "admin")]` )
 * [Logika proceduralna](xref:security/blazor/index#procedural-logic) (przykład: `if (user.IsInRole("admin")) { ... }` )
 
   Obsługiwane są wiele testów ról:
@@ -316,7 +316,7 @@ Zespoły komunikacyjne specjalisty | ef547281-cf46-4cc6-bcaa-f5eac3f030c9
 Administrator usługi Teams | 8846a0be-197b-443a-b13c-11192691fa24
 Administrator użytkowników | 1f6eed58-7dd3-460b-a298-666f975427a1
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:security/authorization/claims>
 * <xref:security/blazor/index>

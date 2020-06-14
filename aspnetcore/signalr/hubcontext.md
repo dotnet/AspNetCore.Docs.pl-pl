@@ -1,63 +1,96 @@
 ---
-title: SignalR HubContext
+title: SignalRHubContext
 author: bradygaster
-description: Dowiedz się, jak używać usługi ASP.NET Core SignalR HubContext wysyłania powiadomień do klientów z poza koncentratora.
+description: Dowiedz się, jak używać SignalR usługi ASP.NET Core HubContext do wysyłania powiadomień do klientów spoza centrum.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
-ms.date: 11/01/2018
+ms.date: 11/12/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: signalr/hubcontext
-ms.openlocfilehash: 7ec52d4711fc191dcb83120cf54b1dc28c41f947
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 336173866e9346d836bb31955644d07403fc238d
+ms.sourcegitcommit: a423e8fcde4b6181a3073ed646a603ba20bfa5f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64900694"
+ms.lasthandoff: 06/13/2020
+ms.locfileid: "84756057"
 ---
-# <a name="send-messages-from-outside-a-hub"></a>Wysyłanie komunikatów z poza Centrum
+# <a name="send-messages-from-outside-a-hub"></a>Wysyłanie komunikatów spoza centrum
 
-Przez [Mikael Mengistu](https://twitter.com/MikaelM_12)
+Autor [Mikael Mengistu](https://twitter.com/MikaelM_12)
 
-Centrum SignalR to Abstrakcja core do wysyłania wiadomości do klientów dołączonych do serwera biblioteki SignalR. Istnieje również możliwość wysyłać komunikaty z innych miejsc w aplikacji przy użyciu `IHubContext` usługi. W tym artykule wyjaśniono, jak uzyskać dostęp biblioteki SignalR `IHubContext` do wysyłania powiadomień do klientów z poza koncentratora.
+SignalRCentrum to podstawowe streszczenie służące do wysyłania komunikatów do klientów podłączonych do SignalR serwera programu. Możliwe jest również wysyłanie komunikatów z innych miejsc w aplikacji przy użyciu `IHubContext` usługi. W tym artykule wyjaśniono, jak uzyskać dostęp do programu w SignalR `IHubContext` celu wysyłania powiadomień do klientów spoza centrum.
 
-[Wyświetlanie lub pobieranie przykładowego kodu](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/hubcontext/sample/) [(jak pobrać)](xref:index#how-to-download-a-sample)
+[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/hubcontext/sample/) [(jak pobrać)](xref:index#how-to-download-a-sample)
 
-## <a name="get-an-instance-of-ihubcontext"></a>Pobierz wystąpienia IHubContext
+## <a name="get-an-instance-of-ihubcontext"></a>Pobierz wystąpienie elementu IHubContext
 
-W biblioteki SignalR platformy ASP.NET Core, uzyskujesz dostęp do wystąpienia `IHubContext` za pomocą iniekcji zależności. Może wprowadzać wystąpienie `IHubContext` do kontrolera, oprogramowanie pośredniczące lub inna usługa DI. Aby wysyłać komunikaty do klientów, należy użyć wystąpienia.
+W ASP.NET Core SignalR można uzyskać dostęp do wystąpienia `IHubContext` przez iniekcję zależności. Można wstrzyknąć wystąpienie `IHubContext` do kontrolera, oprogramowania pośredniczącego lub innej usługi. Użyj wystąpienia, aby wysyłać komunikaty do klientów.
 
 > [!NOTE]
-> To różni się od ASP.NET 4.x SignalR, w której używane GlobalHost w celu zapewnienia dostępu do `IHubContext`. Platforma ASP.NET Core ma strukturę iniekcji zależności, która eliminuje potrzebę tym globalnego pojedynczym wystąpieniu.
+> Różni się to od ASP.NET 4. x SignalR , które były używane GlobalHost w celu zapewnienia dostępu do programu `IHubContext` . ASP.NET Core ma strukturę iniekcji zależności, która eliminuje potrzebę tego globalnej pojedynczej.
 
-### <a name="inject-an-instance-of-ihubcontext-in-a-controller"></a>Wstrzykiwanie wystąpienia IHubContext w kontrolerze
+### <a name="inject-an-instance-of-ihubcontext-in-a-controller"></a>Wstrzyknąć wystąpienie elementu IHubContext w kontrolerze
 
-Może wprowadzać wystąpienie `IHubContext` do kontrolera, dodając go do konstruktora:
+Można wstrzyknąć wystąpienie `IHubContext` do kontrolera przez dodanie go do konstruktora:
 
 [!code-csharp[IHubContext](hubcontext/sample/Controllers/HomeController.cs?range=12-19,57)]
 
-Teraz dzięki dostępowi do wystąpienia `IHubContext`, można wywoływać metod koncentratora, tak, jakby były w Centrum sam.
+Teraz, mając dostęp do wystąpienia `IHubContext` , można wywołać metody centrum, tak jakby znajdowały się one w centrum.
 
 [!code-csharp[IHubContext](hubcontext/sample/Controllers/HomeController.cs?range=21-25)]
 
-### <a name="get-an-instance-of-ihubcontext-in-middleware"></a>Pobierz wystąpienia IHubContext w oprogramowaniu pośredniczącym
+### <a name="get-an-instance-of-ihubcontext-in-middleware"></a>Pobierz wystąpienie elementu IHubContext w oprogramowaniu pośredniczącym
 
-Dostęp do `IHubContext` w ramach potoku oprogramowania pośredniczącego w następujący sposób:
+Uzyskaj dostęp do tego `IHubContext` potoku w ramach oprogramowania pośredniczącego, takiego jak:
 
 ```csharp
 app.Use(async (context, next) =>
 {
     var hubContext = context.RequestServices
-                            .GetRequiredService<IHubContext<MyHub>>();
+                            .GetRequiredService<IHubContext<ChatHub>>();
     //...
+    
+    if (next != null)
+    {
+        await next.Invoke();
+    }
 });
 ```
 
 > [!NOTE]
-> Kiedy metodach koncentratora są wywoływane z poza `Hub` klasy, nie ma żadnych wywołujący skojarzone z wywołania. Dlatego nie ma dostępu do `ConnectionId`, `Caller`, i `Others` właściwości.
+> Gdy metody piasty są wywoływane spoza `Hub` klasy, nie istnieje obiekt wywołujący skojarzony z wywołaniem. W związku z tym nie ma dostępu do `ConnectionId` `Caller` właściwości, i `Others` .
 
-### <a name="inject-a-strongly-typed-hubcontext"></a>Wstrzykiwanie HubContext silnie typizowane
+### <a name="get-an-instance-of-ihubcontext-from-ihost"></a>Pobierz wystąpienie elementu IHubContext z IHost
 
-Można wstrzyknąć HubContext silnie typizowane, upewnij się, dziedziczy Centrum `Hub<T>`. Wstrzyknięcia go przy użyciu `IHubContext<THub, T>` interfejsu zamiast `IHubContext<THub>`.
+Dostęp do programu `IHubContext` z hosta sieci Web jest przydatny do integracji z obszarami poza ASP.NET Core, na przykład przy użyciu platform wtrysku zależności innych firm:
+
+```csharp
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            var host = CreateHostBuilder(args).Build();
+            var hubContext = host.Services.GetService(typeof(IHubContext<ChatHub>));
+            host.Run();
+        }
+
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder => {
+                    webBuilder.UseStartup<Startup>();
+                });
+    }
+```
+
+### <a name="inject-a-strongly-typed-hubcontext"></a>Wstrzyknąć HubContext o jednoznacznie określonym typie
+
+Aby wstrzyknąć HubContext o jednoznacznie określonym typie, upewnij się, że koncentrator dziedziczy z `Hub<T>` . Wstrzyknąć go przy użyciu `IHubContext<THub, T>` interfejsu zamiast `IHubContext<THub>` .
 
 ```csharp
 public class ChatController : Controller
@@ -78,6 +111,6 @@ public class ChatController : Controller
 
 ## <a name="related-resources"></a>Powiązane zasoby
 
-* [Wprowadzenie](xref:tutorials/signalr)
+* [Rozpoczęcie pracy](xref:tutorials/signalr)
 * [Centra](xref:signalr/hubs)
 * [Publikowanie na platformie Azure](xref:signalr/publish-to-azure-web-app)

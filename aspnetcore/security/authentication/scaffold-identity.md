@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/scaffold-identity
-ms.openlocfilehash: 116e5d27e7585e9168db433480c3a5e9d08379f3
-ms.sourcegitcommit: 67eadd7bf28eae0b8786d85e90a7df811ffe5904
+ms.openlocfilehash: 36afa8ece58843b434ebfba6305bffdb9eb9bca0
+ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84454682"
+ms.lasthandoff: 06/12/2020
+ms.locfileid: "84724292"
 ---
 # <a name="scaffold-identity-in-aspnet-core-projects"></a>Szkielet Identity w projektach ASP.NET Core
 
@@ -195,7 +195,7 @@ Tokeny mogą być przesyłane do składników:
 * Gdy tokeny uwierzytelniania są inicjowane i zapisywane w pliku cookie uwierzytelniania, można je przesłać do składników programu.
 * Razorskładniki nie mogą być używane `HttpContext` bezpośrednio, dlatego nie ma możliwości uzyskania [tokenu fałszerstwa (XSRF)](xref:security/anti-request-forgery) w celu opublikowania w Identity punkcie końcowym wylogowywania `/Identity/Account/Logout` . Token XSRF można przesłać do składników.
 
-Aby uzyskać więcej informacji, zobacz <xref:security/blazor/server/index#pass-tokens-to-a-blazor-server-app>.
+Aby uzyskać więcej informacji, zobacz <xref:security/blazor/server/additional-scenarios#pass-tokens-to-a-blazor-server-app>.
 
 W pliku *Pages/_Host. cshtml* Ustanów token po dodaniu go do `InitialApplicationState` `TokenProvider` klas i:
 
@@ -229,7 +229,7 @@ Usługa przedstawiona `TokenProvider` w temacie jest używana w `LoginDisplay` s
 W `Startup` klasie:
 
 * Potwierdź, że Razor usługi stron są dodawane w programie `Startup.ConfigureServices` .
-* W przypadku korzystania z [TokenProvider](xref:security/blazor/server/index#pass-tokens-to-a-blazor-server-app)Zarejestruj usługę.
+* W przypadku korzystania z [TokenProvider](xref:security/blazor/server/additional-scenarios#pass-tokens-to-a-blazor-server-app)Zarejestruj usługę.
 * Zadzwoń do programu `UseDatabaseErrorPage` Application Builder w `Startup.Configure` środowisku deweloperskim.
 * Wywołanie `UseAuthentication` i `UseAuthorization` po `UseRouting` .
 * Dodaj punkt końcowy dla Razor stron.
@@ -253,7 +253,7 @@ Dodaj `RedirectToLogin` składnik (*RedirectToLogin. Razor*) do folderu *udostę
 }
 ```
 
-Dodaj `LoginDisplay` składnik (*LoginDisplay. Razor*) do folderu *udostępnionego* aplikacji. [Usługa TokenProvider](xref:security/blazor/server/index#pass-tokens-to-a-blazor-server-app) udostępnia token XSRF formularza HTML, który jest wysyłany do Identity punktu końcowego wylogowania:
+Dodaj `LoginDisplay` składnik (*LoginDisplay. Razor*) do folderu *udostępnionego* aplikacji. [Usługa TokenProvider](xref:security/blazor/server/additional-scenarios#pass-tokens-to-a-blazor-server-app) udostępnia token XSRF formularza HTML, który jest wysyłany do Identity punktu końcowego wylogowania:
 
 ```razor
 @using Microsoft.AspNetCore.Components.Authorization
@@ -398,11 +398,13 @@ cd RPauth
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.RegisterConfirmation"
 -->
-## <a name="disable-register-page"></a>Wyłącz stronę rejestracji
+## <a name="disable-a-page"></a>Wyłącz stronę
+
+W tych sekcjach pokazano, jak wyłączyć stronę rejestracji, ale podejście może być używane do wyłączania dowolnej strony.
 
 Aby wyłączyć rejestrację użytkownika:
 
-* Szkielet Identity . Uwzględnij konto. Register, Account. login i Account. RegisterConfirmation. Przykład:
+* Szkielet Identity . Uwzględnij konto. Register, Account. login i Account. RegisterConfirmation. Na przykład:
 
   ```dotnetcli
    dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.RegisterConfirmation"
@@ -418,13 +420,13 @@ Aby wyłączyć rejestrację użytkownika:
 
 * Dodawanie komentarza lub usuwanie linku rejestracji z *obszarów/ Identity /Pages/Account/Login.cshtml*
 
-```cshtml
-@*
-<p>
-    <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
-</p>
-*@
-```
+  ```cshtml
+  @*
+  <p>
+      <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+  </p>
+  *@
+  ```
 
 * Zaktualizuj stronę *obszary/ Identity /Pages/Account/RegisterConfirmation* .
 
@@ -468,7 +470,7 @@ Podobne podejście może być stosowane w scenariuszach produkcyjnych.
 
 Aby uniemożliwić publikowanie statycznych Identity zasobów w katalogu głównym sieci Web, zobacz <xref:security/authentication/identity#prevent-publish-of-static-identity-assets> .
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Zmiany w kodzie uwierzytelniania na ASP.NET Core 2,1 i nowsze](xref:migration/20_21#changes-to-authentication-code)
 
@@ -482,7 +484,7 @@ Aplikacje, które **nie** obejmują uwierzytelniania, mogą zastosować szkielet
 
 Chociaż szkielet generuje większość niezbędnego kodu, należy zaktualizować projekt, aby ukończyć proces. W tym dokumencie opisano kroki niezbędne do ukończenia Identity aktualizacji tworzenia szkieletów.
 
-Po Identity uruchomieniu szkieletu tworzony jest plik *ScaffoldingReadme. txt* w katalogu projektu. Plik *ScaffoldingReadme. txt* zawiera ogólne instrukcje dotyczące tego, co jest potrzebne do ukończenia Identity aktualizacji tworzenia szkieletów. Ten dokument zawiera pełniejsze instrukcje niż plik *ScaffoldingReadme. txt* .
+Po Identity uruchomieniu szkieletu tworzony jest plik *ScaffoldingReadme.txt* w katalogu projektu. Plik *ScaffoldingReadme.txt* zawiera ogólne instrukcje dotyczące tego, co jest potrzebne do ukończenia Identity aktualizacji tworzenia szkieletów. Ten dokument zawiera pełniejsze instrukcje niż plik *ScaffoldingReadme.txt* .
 
 Zalecamy używanie systemu kontroli źródła, który pokazuje różnice plików i pozwala na wycofanie zmian. Sprawdź zmiany po uruchomieniu Identity szkieletu.
 
@@ -647,7 +649,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 Aby wyłączyć rejestrację użytkownika:
 
-* Szkielet Identity . Uwzględnij konto. Register, Account. login i Account. RegisterConfirmation. Przykład:
+* Szkielet Identity . Uwzględnij konto. Register, Account. login i Account. RegisterConfirmation. Na przykład:
 
   ```dotnetcli
    dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.RegisterConfirmation"
@@ -709,7 +711,7 @@ Poniższy kod zawiera opis dodawania użytkownika:
 
 Podobne podejście może być stosowane w scenariuszach produkcyjnych.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Zmiany w kodzie uwierzytelniania na ASP.NET Core 2,1 i nowsze](xref:migration/20_21#changes-to-authentication-code)
 

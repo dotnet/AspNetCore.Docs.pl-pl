@@ -1,7 +1,7 @@
 ---
 title: Konfigurowanie uwierzytelniania certyfikatów w ASP.NET Core
 author: blowdart
-description: Dowiedz się, jak skonfigurować uwierzytelnianie certyfikatów w ASP.NET Core dla usług IIS i HTTP. sys.
+description: Dowiedz się, jak skonfigurować uwierzytelnianie certyfikatów w ASP.NET Core dla usług IIS i HTTP.sys.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: bdorrans
 ms.date: 01/02/2020
@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/certauth
-ms.openlocfilehash: 4511e253ea9487c5739162b9b0180e39eb3a1b9c
-ms.sourcegitcommit: 67eadd7bf28eae0b8786d85e90a7df811ffe5904
+ms.openlocfilehash: cf80f7009334f49d877d2bd296b512e23f7fded8
+ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84454613"
+ms.lasthandoff: 06/12/2020
+ms.locfileid: "84724253"
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>Konfigurowanie uwierzytelniania certyfikatów w ASP.NET Core
 
@@ -42,7 +42,7 @@ W aplikacji sieci Web Dodaj odwołanie do `Microsoft.AspNetCore.Authentication.C
 
 Jeśli uwierzytelnianie nie powiedzie się, ta procedura obsługi zwróci `403 (Forbidden)` odpowiedź zamiast elementu `401 (Unauthorized)` , zgodnie z oczekiwaniami. Powodem jest to, że uwierzytelnianie powinno nastąpić podczas początkowego połączenia TLS. Przez czas, gdy dociera do programu obsługi, jest zbyt opóźniony. Nie ma możliwości uaktualnienia połączenia z anonimowego połączenia z certyfikatem.
 
-Dodaj również `app.UseAuthentication();` `Startup.Configure` metodę. W przeciwnym razie `HttpContext.User` nie zostanie ustawiona jako `ClaimsPrincipal` utworzona na podstawie certyfikatu. Przykład:
+Dodaj również `app.UseAuthentication();` `Startup.Configure` metodę. W przeciwnym razie `HttpContext.User` nie zostanie ustawiona jako `ClaimsPrincipal` utworzona na podstawie certyfikatu. Na przykład:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -557,3 +557,36 @@ namespace AspNetCoreCertificateAuthApi
     }
 }
 ```
+
+<a name="occ"></a>
+
+## <a name="optional-client-certificates"></a>Opcjonalne certyfikaty klienta
+
+Ta sekcja zawiera informacje dotyczące aplikacji, które muszą chronić podzestaw aplikacji przy użyciu certyfikatu. Na przykład Razor Strona lub kontroler w aplikacji może wymagać certyfikatów klienta. Przedstawia to wyzwania jako certyfikaty klienta:
+  
+* Są funkcją TLS, a nie funkcją protokołu HTTP.
+* Są negocjowane dla każdego połączenia i muszą być negocjowane na początku połączenia przed udostępnieniem jakichkolwiek danych HTTP. Na początku połączenia jest znany tylko Oznaczanie nazwy serwera (SNI) &dagger; . Certyfikaty klienta i serwera są negocjowane przed pierwszym żądaniem połączenia, a żądania zwykle nie będą mogły być ponownie negocjowane. Ponowna negocjacja jest niedozwolona w przypadku protokołu HTTP/2.
+
+ASP.NET Core 5 wersja zapoznawcza 4 i nowsze dodaje bardziej wygodną obsługę opcjonalnych certyfikatów klienta. Aby uzyskać więcej informacji, zobacz [przykład opcjonalnych certyfikatów](https://github.com/dotnet/aspnetcore/tree/9ce4a970a21bace3fb262da9591ed52359309592/src/Security/Authentication/Certificate/samples/Certificate.Optional.Sample).
+
+Następujące podejście obsługuje opcjonalne certyfikaty klienta:
+
+* Skonfiguruj powiązanie dla domeny i poddomeny:
+  * Na przykład Skonfiguruj powiązania w systemach `contoso.com` i `myClient.contoso.com` . `contoso.com`Host nie wymaga certyfikatu klienta, ale `myClient.contoso.com` robi ten.
+  * Aby uzyskać więcej informacji, zobacz:
+    * [Kestrel](/fundamentals/servers/kestrel):
+      * [ListenOptions.UseHttps](xref:fundamentals/servers/kestrel#listenoptionsusehttps)
+      * <xref:Microsoft.AspNetCore.Server.Kestrel.Https.HttpsConnectionAdapterOptions.ClientCertificateMode>
+      * Uwaga Kestrel obecnie nie obsługuje wielu konfiguracji protokołu TLS w jednym powiązaniu, potrzebne są dwa powiązania z unikatowymi adresami IP lub portami. Wyświetlaniahttps://github.com/dotnet/runtime/issues/31097
+    * IIS
+      * [Hostowanie usług IIS](xref:host-and-deploy/iis/index#create-the-iis-site)
+      * [Konfigurowanie zabezpieczeń w usługach IIS](/iis/manage/configuring-security/how-to-set-up-ssl-on-iis#configure-ssl-settings-2)
+    * Http.Sys: [Konfigurowanie systemu Windows Server](xref:fundamentals/servers/httpsys#configure-windows-server)
+* W przypadku żądań do aplikacji sieci Web, które wymagają certyfikatu klienta i nie ma go:
+  * Przekieruj na tę samą stronę przy użyciu poddomeny chronionej certyfikat klienta.
+  * Na przykład Przekieruj do `myClient.contoso.com/requestedPage` . Ze względu na `myClient.contoso.com/requestedPage` to, że żądanie jest inną nazwą hosta `contoso.com/requestedPage` , a klient ustanowi inne połączenie i podano certyfikat klienta.
+  * Aby uzyskać więcej informacji, zobacz <xref:security/authorization/introduction>.
+
+Wystaw pytania, komentarze i inne opinie dotyczące opcjonalnych certyfikatów klienta w [tym](https://github.com/dotnet/AspNetCore.Docs/issues/18720) wydaniu dyskusji w witrynie GitHub.
+
+&dagger;Oznaczanie nazwy serwera (SNI) to rozszerzenie TLS służące do dołączania domeny wirtualnej w ramach negocjacji protokołu SSL. W praktyce oznacza to, że nazwa domeny wirtualnej lub nazwy hosta mogą służyć do identyfikowania punktu końcowego sieci.

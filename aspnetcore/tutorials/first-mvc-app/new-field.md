@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/new-field
-ms.openlocfilehash: 2dfaba166617c5d0a224f4b47028c141e59ce47f
-ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
+ms.openlocfilehash: d56be93c4dd46b4712fe793ccd453807517a2022
+ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84652912"
+ms.lasthandoff: 06/12/2020
+ms.locfileid: "84724337"
 ---
 # <a name="part-8-add-a-new-field-to-an-aspnet-core-mvc-app"></a>Część 8 Dodaj nowe pole do aplikacji ASP.NET Core MVC
 
@@ -137,10 +137,7 @@ dotnet ef database update
 ---
 <!-- End of VS tabs -->
 
-Uruchom aplikację i sprawdź, czy można tworzyć, edytować i wyświetlać filmy z `Rating` polem. Zaktualizuj aplikację:
-
-* Dodaj `Rating` pole do `Edit` `Details` szablonów, i `Delete` .
-* Zaktualizuj powiązanie w metodzie Edytuj akcję elementu `MoviesController` .
+Uruchom aplikację i sprawdź, czy można tworzyć, edytować i wyświetlać filmy z `Rating` polem.
 
 > [!div class="step-by-step"]
 > [Poprzedni](search.md) 

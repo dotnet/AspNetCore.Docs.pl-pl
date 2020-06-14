@@ -14,10 +14,10 @@ no-loc:
 - SignalR
 uid: blazor/lifecycle
 ms.openlocfilehash: 9dcbb2ca21cc689063198e1ccc90583db4229183
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/09/2020
+ms.lasthandoff: 06/12/2020
 ms.locfileid: "83864592"
 ---
 # <a name="aspnet-core-blazor-lifecycle"></a>ASP.NET Core Blazor cykl życia

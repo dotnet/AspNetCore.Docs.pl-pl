@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/javascript-client
-ms.openlocfilehash: 4b3a4b2323b7f221d9cd1aab1c56d1d9828eb916
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: cb2b3ddc3eba2d6e1ea91c1e7f6715ffa9ad1b08
+ms.sourcegitcommit: a423e8fcde4b6181a3073ed646a603ba20bfa5f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84106458"
+ms.lasthandoff: 06/13/2020
+ms.locfileid: "84756018"
 ---
 # <a name="aspnet-core-signalr-javascript-client"></a>SignalRKlient ASP.NET Core JavaScript
 
@@ -43,7 +43,7 @@ npm init -y
 npm install @microsoft/signalr
 ```
 
-npm instaluje zawartość pakietu w folderze *node_modules \\ @microsoft\signalr\dist\browser * . Utwórz nowy folder o nazwie *sygnalizujący* w folderze *wwwroot \\ lib* . Skopiuj plik *sygnalizującer. js* do folderu *wwwroot\lib\signalr* .
+npm instaluje zawartość pakietu w folderze *node_modules \\ @microsoft\signalr\dist\browser * . Utwórz nowy folder o nazwie *sygnalizujący* w folderze *wwwroot \\ lib* . Skopiuj plik *signalr.js* do folderu *wwwroot\lib\signalr* .
 
 ::: moniker-end
 
@@ -54,11 +54,11 @@ npm init -y
 npm install @aspnet/signalr
 ```
 
-npm instaluje zawartość pakietu w folderze *node_modules \\ @aspnet\signalr\dist\browser * . Utwórz nowy folder o nazwie *sygnalizujący* w folderze *wwwroot \\ lib* . Skopiuj plik *sygnalizującer. js* do folderu *wwwroot\lib\signalr* .
+npm instaluje zawartość pakietu w folderze *node_modules \\ @aspnet\signalr\dist\browser * . Utwórz nowy folder o nazwie *sygnalizujący* w folderze *wwwroot \\ lib* . Skopiuj plik *signalr.js* do folderu *wwwroot\lib\signalr* .
 
 ::: moniker-end
 
-Odwołuje się do SignalR klienta JavaScript w `<script>` elemencie. Przykład:
+Odwołuje się do SignalR klienta JavaScript w `<script>` elemencie. Na przykład:
 
 ```html
 <script src="~/lib/signalr/signalr.js"></script>
@@ -66,7 +66,7 @@ Odwołuje się do SignalR klienta JavaScript w `<script>` elemencie. Przykład:
 
 ### <a name="use-a-content-delivery-network-cdn"></a>Użyj Content Delivery Network (CDN)
 
-Aby korzystać z biblioteki klienta bez wymagania wstępnego npm, odwołując się do kopii biblioteki klienckiej hostowanej w usłudze CDN. Przykład:
+Aby korzystać z biblioteki klienta bez wymagania wstępnego npm, odwołując się do kopii biblioteki klienckiej hostowanej w usłudze CDN. Na przykład:
 
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.3/signalr.min.js"></script>
@@ -172,7 +172,7 @@ Klient JavaScript dla programu SignalR można skonfigurować do automatycznego p
 
 ```javascript
 const connection = new signalR.HubConnectionBuilder()
-    .withUrl("/chatHub")
+    .withUrl("/chathub")
     .withAutomaticReconnect()
     .build();
 ```
@@ -246,7 +246,7 @@ Aby skonfigurować niestandardową liczbę prób ponownego połączenia przed od
 
 ```javascript
 const connection = new signalR.HubConnectionBuilder()
-    .withUrl("/chatHub")
+    .withUrl("/chathub")
     .withAutomaticReconnect([0, 0, 10000])
     .build();
 
@@ -269,7 +269,7 @@ Jeśli chcesz jeszcze większą kontrolę nad chronometrażem i liczbą prób au
 
 ```javascript
 const connection = new signalR.HubConnectionBuilder()
-    .withUrl("/chatHub")
+    .withUrl("/chathub")
     .withAutomaticReconnect({
         nextRetryDelayInMilliseconds: retryContext => {
             if (retryContext.elapsedMilliseconds < 60000) {
@@ -307,7 +307,7 @@ Poniższy kod ilustruje typowe podejście do ponownego łączenia ręcznego:
 
 Implementacja rzeczywista będzie używać wykładniczej kopii zapasowej lub ponowić określoną liczbę razy przed pokazaniem.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Dokumentacja interfejsów API języka JavaScript](/javascript/api/?view=signalr-js-latest)
 * [Samouczek JavaScript](xref:tutorials/signalr)

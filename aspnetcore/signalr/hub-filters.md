@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/hub-filters
-ms.openlocfilehash: 26bbd175c9cd4053692d2adeca345891af0ba10e
-ms.sourcegitcommit: 6371114344a5f4fbc5d4a119b0be1ad3762e0216
+ms.openlocfilehash: afdb52039c0eff53a421038518c687c78e1d509b
+ms.sourcegitcommit: a423e8fcde4b6181a3073ed646a603ba20bfa5f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84680259"
+ms.lasthandoff: 06/13/2020
+ms.locfileid: "84756070"
 ---
 # <a name="use-hub-filters-in-aspnet-core-signalr"></a>Używanie filtrów centrum w ASP.NET CoreSignalR
 
@@ -40,7 +40,7 @@ public void ConfigureServices(IServiceCollection services)
     {
         // Global filters will run first
         options.AddFilter<CustomFilter>();
-    }).AddHubOptions<MyHub>(options =>
+    }).AddHubOptions<ChatHub>(options =>
     {
         // Local filters will run second
         options.AddFilter<CustomFilter2>();

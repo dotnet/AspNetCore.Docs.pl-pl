@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/hosting-model-configuration
-ms.openlocfilehash: 3cef67806ce0e2e045122bdc962e93795be68572
-ms.sourcegitcommit: 6371114344a5f4fbc5d4a119b0be1ad3762e0216
+ms.openlocfilehash: 74501c70df5ad33d5a2478b2ec359713e29292d8
+ms.sourcegitcommit: a423e8fcde4b6181a3073ed646a603ba20bfa5f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84679582"
+ms.lasthandoff: 06/13/2020
+ms.locfileid: "84755784"
 ---
 # <a name="aspnet-core-blazor-hosting-model-configuration"></a>ASP.NET Core Blazor konfigurację modelu hostingu
 
@@ -99,7 +99,7 @@ if (builder.HostEnvironment.IsEnvironment("Custom"))
 
 <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType>Właściwość może być używana podczas uruchamiania, gdy <xref:Microsoft.AspNetCore.Components.NavigationManager> Usługa jest niedostępna.
 
-### <a name="configuration"></a>Konfigurowanie
+### <a name="configuration"></a>Konfiguracja
 
 BlazorZestaw webassembly ładuje konfigurację z:
 
@@ -313,7 +313,7 @@ Aby skonfigurować SignalR klienta podstawowego do wysyłania poświadczeń, tak
 * Przypisz <xref:System.Net.Http.HttpMessageHandler> do <xref:Microsoft.AspNetCore.Http.Connections.Client.HttpConnectionOptions.HttpMessageHandlerFactory> opcji:
 
   ```csharp
-  var client = new HubConnectionBuilder()
+  var connection = new HubConnectionBuilder()
       .WithUrl(new Uri("http://signalr.example.com"), options =>
       {
           options.HttpMessageHandlerFactory = innerHandler => 

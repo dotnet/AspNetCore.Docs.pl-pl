@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/webassembly/hosted-with-azure-active-directory-b2c
-ms.openlocfilehash: b369bf0e9b20bcb87345e3e10c314ae6227464d1
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: 9a63d6ca0ab6b71875212d54035dfb5cf94a8cad
+ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84215084"
+ms.lasthandoff: 06/12/2020
+ms.locfileid: "84724305"
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-azure-active-directory-b2c"></a>Zabezpiecz Blazor aplikację hostowaną ASP.NET Core webassembly przy użyciu Azure Active Directory B2C
 
@@ -45,7 +45,7 @@ Postępuj zgodnie ze wskazówkami w [samouczku: Zarejestruj aplikację w Azure A
 1. Podaj **nazwę** aplikacji (na przykład ** Blazor serwer AAD B2C**).
 1. W przypadku **obsługiwanych typów kont**wybierz opcję wiele dzierżawców: **konta w dowolnym katalogu organizacyjnym lub dowolnego dostawcę tożsamości. Do uwierzytelniania użytkowników za pomocą Azure AD B2C.**
 1. *Aplikacja interfejsu API serwera* nie wymaga **identyfikatora URI przekierowania** w tym scenariuszu, więc pozostaw listę rozwijaną w **sieci Web** i nie wprowadzaj identyfikatora URI przekierowania.
-1. Upewnij się, że **uprawnienia**  >  **przyznają administratorowi wartość OpenID Connect, a uprawnienia offline_access** są włączone.
+1. Upewnij się, że **uprawnienia**  >  **udzielają zgody administratora na OpenID Connect, a uprawnienia offline_access** są włączone.
 1. Wybierz pozycję **Zarejestruj**.
 
 Zapisz następujące informacje:
@@ -77,7 +77,7 @@ Postępuj zgodnie ze wskazówkami w [samouczku: Zarejestruj aplikację w Azure A
 1. Podaj **nazwę** aplikacji (na przykład ** Blazor AAD B2C klienta**).
 1. W przypadku **obsługiwanych typów kont**wybierz opcję wiele dzierżawców: **konta w dowolnym katalogu organizacyjnym lub dowolnego dostawcę tożsamości. Do uwierzytelniania użytkowników za pomocą Azure AD B2C.**
 1. Pozostaw pole listy rozwijanej **Identyfikator URI przekierowania** jako **Sieć Web** i podaj następujący identyfikator URI przekierowania: `https://localhost:{PORT}/authentication/login-callback` . Domyślnym portem dla aplikacji działającej w Kestrel jest 5001. Jeśli aplikacja jest uruchamiana na innym porcie Kestrel, użyj portu aplikacji. W przypadku IIS Express losowo wygenerowany port dla aplikacji można znaleźć we właściwościach aplikacji serwera w panelu **debugowanie** . Ponieważ aplikacja nie istnieje w tym punkcie i port IIS Express nie jest znany, Wróć do tego kroku po utworzeniu aplikacji i zaktualizowaniu identyfikatora URI przekierowania. W sekcji [Tworzenie aplikacji](#create-the-app) zostanie wyświetlona informacja przypominająca IIS Express użytkownikom w celu zaktualizowania identyfikatora URI przekierowania.
-1. Upewnij się, że **uprawnienia**  >  **przyznają administratorowi wartość OpenID Connect, a uprawnienia offline_access** są włączone.
+1. Upewnij się, że **uprawnienia**  >  **udzielają zgody administratora na OpenID Connect, a uprawnienia offline_access** są włączone.
 1. Wybierz pozycję **Zarejestruj**.
 
 Zapisz identyfikator aplikacji (identyfikator klienta) (na przykład `11111111-1111-1111-1111-111111111111` ).
@@ -180,7 +180,7 @@ services.Configure<JwtBearerOptions>(
 
 ### <a name="app-settings"></a>Ustawienia aplikacji
 
-Plik *appSettings. JSON* zawiera opcje konfigurowania procedury obsługi okaziciela JWT używanej do sprawdzania poprawności tokenów dostępu.
+*appsettings.jsw* pliku zawiera opcje konfigurowania procedury obsługi okaziciela JWT używanej do sprawdzania poprawności tokenów dostępu.
 
 ```json
 {
@@ -273,7 +273,7 @@ builder.Services.AddMsalAuthentication(options =>
 
 <xref:Microsoft.Extensions.DependencyInjection.MsalWebAssemblyServiceCollectionExtensions.AddMsalAuthentication%2A>Metoda akceptuje wywołanie zwrotne w celu skonfigurowania parametrów wymaganych do uwierzytelnienia aplikacji. Wartości wymagane do skonfigurowania aplikacji można uzyskać z konfiguracji usługi AAD w witrynie Azure Portal podczas rejestrowania aplikacji.
 
-Konfiguracja jest dostarczana przez plik *wwwroot/appSettings. JSON* :
+Konfiguracja jest dostarczana przez plik *wwwroot/appsettings.jsw* pliku:
 
 ```json
 {
@@ -365,7 +365,7 @@ Uruchom aplikację z projektu serwera. W przypadku korzystania z programu Visual
 
 [!INCLUDE[](~/includes/blazor-security/troubleshoot.md)]
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:security/blazor/webassembly/additional-scenarios>
 * [Nieuwierzytelnione lub nieautoryzowane żądania interfejsu API sieci Web w aplikacji z bezpiecznym klientem domyślnym](xref:security/blazor/webassembly/additional-scenarios#unauthenticated-or-unauthorized-web-api-requests-in-an-app-with-a-secure-default-client)

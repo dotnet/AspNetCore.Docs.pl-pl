@@ -11,12 +11,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/accconfirm
-ms.openlocfilehash: d5e0e3865702fe4e5cbe49e7f452f367a8a53de9
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: 8d4488b3953a8c87033d3a092b656409a0c6a52d
+ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84451748"
+ms.lasthandoff: 06/12/2020
+ms.locfileid: "84724370"
 ---
 # <a name="account-confirmation-and-password-recovery-in-aspnet-core"></a>Potwierdzenie konta i odzyskiwanie hasła w ASP.NET Core
 
@@ -63,7 +63,7 @@ Uruchom aplikację, wybierz łącze **zarejestruj** i zarejestruj użytkownika. 
 
 W tym samouczku [SendGrid](https://sendgrid.com) jest używany do wysyłania wiadomości e-mail. Aby wysłać wiadomość e-mail, musisz mieć konto SendGrid i klucz. Możesz użyć innych dostawców poczty e-mail. Zalecamy użycie SendGrid lub innej usługi poczty e-mail do wysyłania wiadomości e-mail. Protokół SMTP jest trudny do poprawnego zabezpieczania i konfigurowania.
 
-Konto SendGrid my wymaga [dodania nadawcy](https://sendgrid.com/docs/ui/sending-email/senders/).
+Konto SendGrid może wymagać [dodania nadawcy](https://sendgrid.com/docs/ui/sending-email/senders/).
 
 Utwórz klasę, aby pobrać bezpieczny klucz poczty e-mail. Dla tego przykładu Utwórz *usługi/AuthMessageSenderOptions. cs*:
 
@@ -71,7 +71,7 @@ Utwórz klasę, aby pobrać bezpieczny klucz poczty e-mail. Dla tego przykładu 
 
 #### <a name="configure-sendgrid-user-secrets"></a>Konfigurowanie kluczy tajnych użytkownika SendGrid
 
-Ustaw `SendGridUser` i `SendGridKey` za pomocą [Narzędzia do zarządzania kluczami tajnymi](xref:security/app-secrets). Przykład:
+Ustaw `SendGridUser` i `SendGridKey` za pomocą [Narzędzia do zarządzania kluczami tajnymi](xref:security/app-secrets). Na przykład:
 
 ```dotnetcli
 dotnet user-secrets set SendGridUser RickAndMSFT
@@ -80,9 +80,9 @@ dotnet user-secrets set SendGridKey <key>
 Successfully saved SendGridUser = RickAndMSFT to the secret store.
 ```
 
-W systemie Windows program Secret Manager przechowuje pary klucz/wartość w pliku Secret *. JSON* w `%APPDATA%/Microsoft/UserSecrets/<WebAppName-userSecretsId>` katalogu.
+W systemie Windows Menedżer wpisów tajnych przechowuje pary klucz/wartość w *secrets.js* w pliku w `%APPDATA%/Microsoft/UserSecrets/<WebAppName-userSecretsId>` katalogu.
 
-Zawartość pliku Secret *. JSON* nie jest zaszyfrowana. W poniższym znaczniku przedstawiono plik Secret *. JSON* . `SendGridKey`Wartość została usunięta.
+Zawartość *secrets.jsw* pliku nie jest zaszyfrowana. Poniższe znaczniki przedstawiają *secrets.js* pliku. `SendGridKey`Wartość została usunięta.
 
 ```json
 {
@@ -107,7 +107,7 @@ W konsoli Menedżera pakietów wprowadź następujące polecenie:
 Install-Package SendGrid
 ```
 
-# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
 
 W konsoli programu wprowadź następujące polecenie:
 
@@ -279,16 +279,16 @@ Utwórz klasę, aby pobrać bezpieczny klucz poczty e-mail. Dla tego przykładu 
 
 #### <a name="configure-sendgrid-user-secrets"></a>Konfigurowanie kluczy tajnych użytkownika SendGrid
 
-Ustaw `SendGridUser` i `SendGridKey` za pomocą [Narzędzia do zarządzania kluczami tajnymi](xref:security/app-secrets). Przykład:
+Ustaw `SendGridUser` i `SendGridKey` za pomocą [Narzędzia do zarządzania kluczami tajnymi](xref:security/app-secrets). Na przykład:
 
 ```console
 C:/WebAppl>dotnet user-secrets set SendGridUser RickAndMSFT
 info: Successfully saved SendGridUser = RickAndMSFT to the secret store.
 ```
 
-W systemie Windows program Secret Manager przechowuje pary klucz/wartość w pliku Secret *. JSON* w `%APPDATA%/Microsoft/UserSecrets/<WebAppName-userSecretsId>` katalogu.
+W systemie Windows Menedżer wpisów tajnych przechowuje pary klucz/wartość w *secrets.js* w pliku w `%APPDATA%/Microsoft/UserSecrets/<WebAppName-userSecretsId>` katalogu.
 
-Zawartość pliku Secret *. JSON* nie jest zaszyfrowana. W poniższym znaczniku przedstawiono plik Secret *. JSON* . `SendGridKey`Wartość została usunięta.
+Zawartość *secrets.jsw* pliku nie jest zaszyfrowana. Poniższe znaczniki przedstawiają *secrets.js* pliku. `SendGridKey`Wartość została usunięta.
 
 ```json
 {
@@ -313,7 +313,7 @@ W konsoli Menedżera pakietów wprowadź następujące polecenie:
 Install-Package SendGrid
 ```
 
-# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
 
 W konsoli programu wprowadź następujące polecenie:
 

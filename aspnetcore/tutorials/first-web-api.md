@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-web-api
-ms.openlocfilehash: 2fcfd46057935cadac76c558a78729a1c096ffc0
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: 71ab0fc0a679acf540fa53fa2a9c8ba893b34edf
+ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84451833"
+ms.lasthandoff: 06/12/2020
+ms.locfileid: "84724357"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>Samouczek: Tworzenie internetowego interfejsu API za pomocą ASP.NET Core
 
@@ -27,7 +27,7 @@ Ten samouczek uczy się podstaw tworzenia interfejsu API sieci Web za pomocą AS
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Ten samouczek zawiera informacje na temat wykonywania następujących czynności:
+Z tego samouczka dowiesz się, jak wykonywać następujące czynności:
 
 > [!div class="checklist"]
 > * Utwórz projekt interfejsu API sieci Web.
@@ -112,7 +112,7 @@ Na poniższym diagramie przedstawiono projekt aplikacji.
 
   ![Wybór szablonu interfejsu API macOS](first-web-api-mac/_static/api_template.png)
 
-* Upewnij się, że **platforma docelowa** jest ustawiona na **platformę .NET Core 3,1**. Wybierz pozycję **Dalej**.
+* Upewnij się, że **platforma docelowa** jest ustawiona na **platformę .NET Core 3,1**. Wybierz przycisk **Dalej**.
 
   ![wybór macOS .NET Core 3,1](first-web-api-mac/_static/api_31_config.png)
 
@@ -380,7 +380,7 @@ Te metody implementują dwa punkty końcowe GET:
 * `GET /api/TodoItems`
 * `GET /api/TodoItems/{id}`
 
-Przetestuj aplikację, wywołując dwa punkty końcowe z przeglądarki lub wpisu. Przykład:
+Przetestuj aplikację, wywołując dwa punkty końcowe z przeglądarki lub wpisu. Na przykład:
 
 * `https://localhost:5001/api/TodoItems`
 * `https://localhost:5001/api/TodoItems/1`
@@ -477,7 +477,7 @@ Użyj programu Poster, aby usunąć element do wykonania:
 
 ## <a name="prevent-over-posting"></a>Zapobiegaj za pośrednictwem księgowania
 
-Obecnie Przykładowa aplikacja uwidacznia cały `TodoItem` obiekt. Aplikacje produkcji zwykle ograniczają dane wejściowe i zwracane przy użyciu podzestawu modelu. Istnieje wiele powodów związanych z tym, a zabezpieczenia są głównymi. Podzestaw modelu jest zwykle określany jako obiekt Transfer danych (DTO), model wejściowy lub model widoku. **DTO** jest używany w tym artykule.
+Obecnie Przykładowa aplikacja uwidacznia cały `TodoItem` obiekt. Aplikacje produkcyjne zwykle ograniczają dane wejściowe i zwracane przy użyciu podzestawu modelu. Istnieje wiele powodów związanych z tym, a zabezpieczenia są głównymi. Podzestaw modelu jest zwykle określany jako obiekt Transfer danych (DTO), model wejściowy lub model widoku. **DTO** jest używany w tym artykule.
 
 DTO może służyć do:
 
@@ -512,7 +512,7 @@ Zobacz [Samouczek: wywoływanie interfejsu API sieci web ASP.NET Core przy użyc
 
 ::: moniker range="< aspnetcore-3.0"
 
-Ten samouczek zawiera informacje na temat wykonywania następujących czynności:
+Z tego samouczka dowiesz się, jak wykonywać następujące czynności:
 
 > [!div class="checklist"]
 > * Utwórz projekt interfejsu API sieci Web.
@@ -737,7 +737,7 @@ Te metody implementują dwa punkty końcowe GET:
 
 Zatrzymaj aplikację, jeśli jest nadal uruchomiona. Następnie uruchom ją ponownie, aby uwzględnić najnowsze zmiany.
 
-Przetestuj aplikację, wywołując dwa punkty końcowe z przeglądarki. Przykład:
+Przetestuj aplikację, wywołując dwa punkty końcowe z przeglądarki. Na przykład:
 
 * `https://localhost:<port>/api/todo`
 * `https://localhost:<port>/api/todo/1`
@@ -913,18 +913,18 @@ Skonfiguruj aplikację do [obsługi plików statycznych](/dotnet/api/microsoft.a
 
 Utwórz folder *wwwroot* w katalogu projektu.
 
-Dodaj plik HTML o nazwie *index. html* do katalogu *wwwroot* . Zastąp jego zawartość następującym znacznikiem:
+Dodaj plik HTML o nazwie *index.html* do katalogu *wwwroot* . Zastąp jego zawartość następującym znacznikiem:
 
 [!code-html[](first-web-api/samples/2.2/TodoApi/wwwroot/index.html)]
 
-Dodaj plik języka JavaScript o nazwie *site. js* do katalogu *wwwroot* . Zastąp jego zawartość następującym kodem:
+Dodaj plik języka JavaScript o nazwie *site.js* do katalogu *wwwroot* . Zastąp jego zawartość następującym kodem:
 
 [!code-javascript[](first-web-api/samples/2.2/TodoApi/wwwroot/site.js?name=snippet_SiteJs)]
 
 Zmiana ustawień uruchamiania projektu ASP.NET Core może być wymagana do lokalnego przetestowania strony HTML:
 
-* Otwórz *Properties\launchSettings.JSON*.
-* Usuń `launchUrl` Właściwość, aby wymusić Otwieranie aplikacji w *indeksie. html* &mdash; plik domyślny projektu.
+* Otwórz *Properties\launchSettings.jsna*.
+* Usuń `launchUrl` Właściwość, aby wymusić otwieranie przez aplikację w *index.html* &mdash; domyślnego pliku projektu.
 
 Ten przykład wywołuje wszystkie metody CRUD internetowego interfejsu API. Poniżej znajdują się wyjaśnienia wywołań interfejsu API.
 
@@ -960,7 +960,7 @@ Usuwanie elementu do wykonania jest realizowane przez ustawienie `type` w WYWOŁ
 
 [!INCLUDE[](~/includes/IdentityServer4.md)]
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 [Wyświetl lub Pobierz przykładowy kod dla tego samouczka](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/first-web-api/samples). Zobacz artykuł [jak pobrać](xref:index#how-to-download-a-sample).
 

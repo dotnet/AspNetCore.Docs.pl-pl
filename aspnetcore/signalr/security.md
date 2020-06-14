@@ -1,7 +1,7 @@
 ---
 title: Zagadnienia dotyczące zabezpieczeń w ASP.NET CoreSignalR
 author: bradygaster
-description: Dowiedz się, jak używać uwierzytelniania i autoryzacji SignalRw programie ASP.NET Core.
+description: Dowiedz się, jak używać uwierzytelniania i autoryzacji w programie ASP.NET Core SignalR .
 monikerRange: '>= aspnetcore-2.1'
 ms.author: anurse
 ms.custom: mvc
@@ -13,32 +13,32 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/security
-ms.openlocfilehash: 2b049d9d8131c6c95b2f768620c984d0f67f92cc
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: b80ece8c74c0f1d4d8518f0da16a91db9687336c
+ms.sourcegitcommit: a423e8fcde4b6181a3073ed646a603ba20bfa5f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775326"
+ms.lasthandoff: 06/13/2020
+ms.locfileid: "84755890"
 ---
 # <a name="security-considerations-in-aspnet-core-signalr"></a>Zagadnienia dotyczące zabezpieczeń w ASP.NET CoreSignalR
 
 Według [Andrew Stanton-pielęgniarki](https://twitter.com/anurse)
 
-Ten artykuł zawiera informacje dotyczące zabezpieczania SignalR.
+Ten artykuł zawiera informacje dotyczące zabezpieczania SignalR .
 
 ## <a name="cross-origin-resource-sharing"></a>Współużytkowanie zasobów między źródłami
 
-[Współużytkowanie zasobów między źródłami (CORS)](https://www.w3.org/TR/cors/) może służyć do zezwalania na SignalR połączenia między źródłami w przeglądarce. Jeśli kod JavaScript jest hostowany w innej domenie z SignalR aplikacji, należy włączyć [oprogramowanie pośredniczące CORS](xref:security/cors) , aby umożliwić programowi JavaScript łączenie się z SignalR aplikacją. Zezwalaj na żądania między źródłami tylko z domen, które ufają lub kontrolują. Przykład:
+[Współużytkowanie zasobów między źródłami (CORS)](https://www.w3.org/TR/cors/) może służyć do zezwalania na połączenia między źródłami SignalR w przeglądarce. Jeśli kod JavaScript jest hostowany w innej domenie z SignalR aplikacji, należy włączyć [oprogramowanie pośredniczące CORS](xref:security/cors) , aby umożliwić programowi JavaScript łączenie się z SignalR aplikacją. Zezwalaj na żądania między źródłami tylko z domen, które ufają lub kontrolują. Na przykład:
 
 * Twoja witryna jest hostowana`http://www.example.com`
 * Twoja SignalR aplikacja jest hostowana`http://signalr.example.com`
 
-Funkcję CORS należy skonfigurować w SignalR aplikacji tak, aby zezwalała na `www.example.com`źródło.
+Funkcję CORS należy skonfigurować w aplikacji tak, SignalR aby zezwalała na `www.example.com` Źródło.
 
 Aby uzyskać więcej informacji na temat konfigurowania mechanizmu CORS, zobacz [Włączanie żądań między źródłami (CORS)](xref:security/cors). SignalR**wymaga** następujących zasad CORS:
 
 * Zezwalaj na określone oczekiwane źródła. Umożliwienie dowolnego pochodzenia jest możliwe, ale **nie** jest bezpieczne lub zalecane.
-* Metody `GET` http i `POST` muszą być dozwolone.
+* Metody HTTP `GET` i `POST` muszą być dozwolone.
 * Poświadczenia muszą być dozwolone w celu poprawnego działania sesji programu Sticky plików cookie. Muszą być włączone, nawet jeśli uwierzytelnianie nie jest używane.
 
 ::: moniker range=">= aspnetcore-5.0"
@@ -48,7 +48,7 @@ Opcja nieużywania poświadczeń powinna być używana tylko wtedy, gdy użytkow
 
 ::: moniker-end
 
-Na przykład następujące zasady CORS umożliwiają klientowi w SignalR przeglądarce hostowanemu w `https://example.com` celu uzyskania dostępu SignalR do aplikacji hostowanej w `https://signalr.example.com`:
+Na przykład następujące zasady CORS umożliwiają SignalR klientowi w przeglądarce hostowanemu w `https://example.com` celu uzyskania dostępu do SignalR aplikacji hostowanej w `https://signalr.example.com` :
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -71,7 +71,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
     app.UseEndpoints(endpoints =>
     {
-        endpoints.MapHub<ChatHub>("/chatHub");
+        endpoints.MapHub<ChatHub>("/chathub");
     });
 
     // ... other middleware ...
@@ -103,29 +103,29 @@ Ochrona zapewniana przez mechanizm CORS nie ma zastosowania do obiektów WebSock
 
 Jednak przeglądarki wysyłają `Origin` nagłówek podczas wystawiania żądań protokołu WebSocket. Aplikacje powinny być skonfigurowane do sprawdzania poprawności tych nagłówków, aby upewnić się, że dozwolone są tylko usługi WebSockets pochodzące z oczekiwanych źródeł.
 
-W ASP.NET Core 2,1 i nowszych walidacji nagłówka można osiągnąć przy użyciu niestandardowego oprogramowania pośredniczącego umieszczonego **przed `UseSignalR`i uwierzytelniania oprogramowania pośredniczącego** w programie `Configure`:
+W ASP.NET Core 2,1 i nowszych walidacji nagłówka można osiągnąć przy użyciu niestandardowego oprogramowania pośredniczącego umieszczonego **przed `UseSignalR` i uwierzytelniania oprogramowania pośredniczącego** w programie `Configure` :
 
 [!code-csharp[Main](security/sample/Startup.cs?name=snippet2)]
 
 > [!NOTE]
-> `Origin` Nagłówek jest kontrolowany przez klienta i, podobnie jak `Referer` nagłówek, może być sfałszowany. Tych nagłówków **nie** należy używać jako mechanizmu uwierzytelniania.
+> `Origin`Nagłówek jest kontrolowany przez klienta i, podobnie jak `Referer` nagłówek, może być sfałszowany. Tych nagłówków **nie** należy używać jako mechanizmu uwierzytelniania.
 
 ::: moniker-end
 
 ## <a name="connectionid"></a>ConnectionId
 
-Uwidacznianie `ConnectionId` może prowadzić do złośliwej personifikacji, SignalR Jeśli wersja serwera lub klienta jest ASP.NET Core 2,2 lub wcześniejsza. Jeśli wersja SignalR serwera i klienta jest ASP.NET Core 3,0 lub nowsza, `ConnectionToken` a nie `ConnectionId` musi być zachowana jako wpis tajny. Nie `ConnectionToken` jest to cel niewidoczny w żadnym interfejsie API.  Może być trudne, aby upewnić się SignalR , że starsi klienci nie będą łączyć się z serwerem, SignalR więc nawet jeśli wersja serwera ASP.NET Core 3,0 lub nowsza, nie `ConnectionId` powinno być ujawnione.
+Uwidacznianie `ConnectionId` może prowadzić do złośliwej personifikacji, jeśli SignalR wersja serwera lub klienta jest ASP.NET Core 2,2 lub wcześniejsza. Jeśli SignalR wersja serwera i klienta jest ASP.NET Core 3,0 lub nowsza, `ConnectionToken` a nie `ConnectionId` musi być zachowana jako wpis tajny. `ConnectionToken`Nie jest to cel niewidoczny w żadnym interfejsie API.  Może być trudne, aby upewnić się, że starsi SignalR klienci nie będą łączyć się z serwerem, więc nawet jeśli SignalR wersja serwera ASP.NET Core 3,0 lub nowsza, nie `ConnectionId` powinno być ujawnione.
 
 ## <a name="access-token-logging"></a>Rejestrowanie tokenu dostępu
 
-W przypadku korzystania z usługi WebSockets lub zdarzeń wysyłanych przez serwer klient przeglądarki wysyła token dostępu w ciągu zapytania. Uzyskiwanie tokenu dostępu za pośrednictwem ciągu zapytania jest zazwyczaj bezpieczne przy użyciu `Authorization` standardowego nagłówka. Zawsze używaj protokołu HTTPS, aby zapewnić bezpieczne połączenie między klientem a serwerem. Wiele serwerów sieci Web rejestruje adres URL dla każdego żądania, w tym ciąg zapytania. Rejestrowanie adresów URL może rejestrować token dostępu. ASP.NET Core domyślnie rejestruje adres URL dla każdego żądania, który będzie zawierać ciąg zapytania. Przykład:
+W przypadku korzystania z usługi WebSockets lub zdarzeń wysyłanych przez serwer klient przeglądarki wysyła token dostępu w ciągu zapytania. Uzyskiwanie tokenu dostępu za pośrednictwem ciągu zapytania jest zazwyczaj bezpieczne przy użyciu standardowego `Authorization` nagłówka. Zawsze używaj protokołu HTTPS, aby zapewnić bezpieczne połączenie między klientem a serwerem. Wiele serwerów sieci Web rejestruje adres URL dla każdego żądania, w tym ciąg zapytania. Rejestrowanie adresów URL może rejestrować token dostępu. ASP.NET Core domyślnie rejestruje adres URL dla każdego żądania, który będzie zawierać ciąg zapytania. Na przykład:
 
 ```
 info: Microsoft.AspNetCore.Hosting.Internal.WebHost[1]
-      Request starting HTTP/1.1 GET http://localhost:5000/myhub?access_token=1234
+      Request starting HTTP/1.1 GET http://localhost:5000/chathub?access_token=1234
 ```
 
-Jeśli masz problemy z rejestrowaniem tych danych w dziennikach serwera, możesz wyłączyć to rejestrowanie całkowicie przez skonfigurowanie `Microsoft.AspNetCore.Hosting` rejestratora na `Warning` poziomie lub wyższym (te komunikaty są zapisywane na `Info` poziomie). Aby uzyskać więcej informacji, zobacz [filtrowanie dzienników](xref:fundamentals/logging/index#log-filtering) , aby uzyskać więcej informacji. Jeśli nadal chcesz rejestrować pewne informacje o żądaniu, możesz [napisać oprogramowanie pośredniczące](xref:fundamentals/middleware/write) w celu zarejestrowania wymaganych danych i odfiltrować wartość ciągu `access_token` zapytania (jeśli istnieje).
+Jeśli masz problemy z rejestrowaniem tych danych w dziennikach serwera, możesz wyłączyć to rejestrowanie całkowicie przez skonfigurowanie `Microsoft.AspNetCore.Hosting` rejestratora na `Warning` poziomie lub wyższym (te komunikaty są zapisywane na `Info` poziomie). Aby uzyskać więcej informacji, zobacz [filtrowanie dzienników](xref:fundamentals/logging/index#log-filtering) , aby uzyskać więcej informacji. Jeśli nadal chcesz rejestrować pewne informacje o żądaniu, możesz [napisać oprogramowanie pośredniczące](xref:fundamentals/middleware/write) w celu zarejestrowania wymaganych danych i odfiltrować `access_token` wartość ciągu zapytania (jeśli istnieje).
 
 ## <a name="exceptions"></a>Wyjątki
 
@@ -143,7 +143,7 @@ Jeśli rozmiar komunikatów przekracza 32 KB, można zwiększyć limit. Zwiększ
 * Klient może spowodować, że serwer przydzieli bufory dużych pamięci.
 * Alokacja serwerów dużych buforów może obniżyć liczbę jednoczesnych połączeń.
 
-Istnieją limity komunikatów przychodzących i wychodzących, obie można skonfigurować w obiekcie [HttpConnectionDispatcherOptions](xref:signalr/configuration#configure-server-options) skonfigurowanym w `MapHub`:
+Istnieją limity komunikatów przychodzących i wychodzących, obie można skonfigurować w obiekcie [HttpConnectionDispatcherOptions](xref:signalr/configuration#configure-server-options) skonfigurowanym w `MapHub` :
 
 * `ApplicationMaxBufferSize`reprezentuje maksymalną liczbę bajtów od klienta, które buforuje serwer. Jeśli klient próbuje wysłać komunikat przekraczający ten limit, połączenie może być zamknięte.
 * `TransportMaxBufferSize`reprezentuje maksymalną liczbę bajtów, które może wysłać serwer. Jeśli serwer próbuje wysłać komunikat (uwzględniając wartości zwracane z metod centralnych) większy niż ten limit, zostanie zgłoszony wyjątek.

@@ -13,18 +13,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/progressive-web-app
-ms.openlocfilehash: c935f326afb77de5e083829c0bc2494efb20fec3
-ms.sourcegitcommit: 6371114344a5f4fbc5d4a119b0be1ad3762e0216
+ms.openlocfilehash: ffdc329d813dcbfffe2216dc58bbc4150f7cf786
+ms.sourcegitcommit: b0062f29cba2e5c21b95cf89eaf435ba830d11a3
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84679621"
+ms.lasthandoff: 06/15/2020
+ms.locfileid: "84776426"
 ---
 # <a name="build-progressive-web-applications-with-aspnet-core-blazor-webassembly"></a>Kompilowanie progresywnych aplikacji sieci Web za pomocą ASP.NET Core Blazor Webassembly
 
 [Steve Sanderson](https://github.com/SteveSandersonMS)
 
-Progresywna aplikacja sieci Web (PWA) to aplikacja jednostronicowa, która korzysta z nowoczesnych interfejsów API i funkcji w celu zachowania aplikacji klasycznych. BlazorWebassembly to oparta na standardach platforma aplikacji sieci Web po stronie klienta, która może korzystać z dowolnego interfejsu API przeglądarki, w tym interfejsów API programu PWA, które są wymagane dla następujących możliwości:
+Progresywna aplikacja sieci Web (PWA) jest zazwyczaj aplikacją jednostronicową, która używa nowoczesnych interfejsów API i funkcji w celu zachowania aplikacji klasycznych. BlazorWebassembly to oparta na standardach platforma aplikacji sieci Web po stronie klienta, która może korzystać z dowolnego interfejsu API przeglądarki, w tym interfejsów API programu PWA, które są wymagane dla następujących możliwości:
 
 * Praca w trybie offline i ładowanie błyskawiczne niezależnie od szybkości sieci.
 * Działa w osobnym oknie aplikacji, a nie tylko w oknie przeglądarki.
@@ -293,6 +293,6 @@ Przykładowa aplikacja [CarChecker](https://github.com/SteveSandersonMS/CarCheck
 * `LocalVehiclesStore`(*Klient/dane/LocalVehiclesStore. cs*)
 * `LoginStatus`składnik (*Client/Shared/stanu logowania. Razor*)
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [SignalRnegocjowanie między źródłami na potrzeby uwierzytelniania](xref:blazor/hosting-model-configuration#signalr-cross-origin-negotiation-for-authentication)

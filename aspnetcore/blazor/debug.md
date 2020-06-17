@@ -14,10 +14,10 @@ no-loc:
 - SignalR
 uid: blazor/debug
 ms.openlocfilehash: 193dc656c2ee0154f0ae534bc00f8dc29bab3258
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.sourcegitcommit: b0062f29cba2e5c21b95cf89eaf435ba830d11a3
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/05/2020
+ms.lasthandoff: 06/16/2020
 ms.locfileid: "84239203"
 ---
 # <a name="debug-aspnet-core-blazor-webassembly"></a>Debuguj ASP.NET Core Blazor Webassembly
@@ -51,13 +51,13 @@ Debugowanie wymaga jednej z następujących przeglądarek:
 
 ## <a name="enable-debugging-for-visual-studio-and-visual-studio-code"></a>Włącz debugowanie dla programu Visual Studio i Visual Studio Code
 
-Aby włączyć debugowanie istniejącej Blazor aplikacji webassembly, zaktualizuj plik *profilu launchsettings. JSON* w projekcie startowym w celu uwzględnienia następującej `inspectUri` właściwości w każdym profilu uruchamiania:
+Aby włączyć debugowanie istniejącej Blazor aplikacji webassembly, zaktualizuj *launchSettings.jsw* pliku w projekcie startowym w celu uwzględnienia następującej `inspectUri` właściwości w każdym profilu uruchamiania:
 
 ```json
 "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}"
 ```
 
-Po zaktualizowaniu plik *profilu launchsettings. JSON* powinien wyglądać podobnie do poniższego przykładu:
+Po aktualizacji *launchSettings.jsw* pliku powinien wyglądać podobnie do poniższego przykładu:
 
 [!code-json[](debug/launchSettings.json?highlight=14,22)]
 
@@ -145,11 +145,11 @@ Zainstaluj [rozszerzenie C#](https://marketplace.visualstudio.com/items?itemName
 
 1. W oknie Wybór wybierz projekt *serwera* w ramach hostowanego rozwiązania.
 
-Plik *Launch. JSON* jest generowany z konfiguracją uruchamiania do uruchamiania debugera.
+*launch.jsw* pliku jest generowany z konfiguracją uruchamiania do uruchamiania debugera.
 
 ### <a name="attach-to-an-existing-debugging-session"></a>Dołącz do istniejącej sesji debugowania
 
-Aby dołączyć do uruchomionej Blazor aplikacji, Utwórz plik *Launch. JSON* o następującej konfiguracji:
+Aby dołączyć do uruchomionej Blazor aplikacji, utwórz *launch.jsw* pliku z następującą konfiguracją:
 
 ```json
 {

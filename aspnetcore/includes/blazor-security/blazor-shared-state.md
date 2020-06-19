@@ -5,7 +5,7 @@ Aplikacje serwera Blazor na żywo w pamięci serwera. Oznacza to, że istnieje w
 
 W aplikacjach Blazor można używać stanowych pojedynczych usług, jeśli są one specjalnie przeznaczone do tego celu. Na przykład można użyć pamięci podręcznej pamięci jako pojedynczej, ponieważ wymaga ona klucza w celu uzyskania dostępu do danego wpisu, przy założeniu, że użytkownicy nie mają kontroli nad używanymi kluczami pamięci podręcznej.
 
-**Ponadto ze względów bezpieczeństwa nie można używać <xref:Microsoft.AspNetCore.Http.IHttpContextAccessor> w aplikacjach Blazor.** Aplikacje Blazor działają poza kontekstem potoku ASP.NET Core i <xref:Microsoft.AspNetCore.Http.HttpContext> nie ma gwarancji, że jest on dostępny w ramach <xref:Microsoft.AspNetCore.Http.IHttpContextAccessor>programu, ani nie ma gwarancji, że utrzymuje kontekst, w którym uruchomiono aplikację Blazor.
+**Ponadto ze względów bezpieczeństwa nie można używać <xref:Microsoft.AspNetCore.Http.IHttpContextAccessor> w aplikacjach Blazor.** Aplikacje Blazor działają poza kontekstem potoku ASP.NET Core i <xref:Microsoft.AspNetCore.Http.HttpContext> nie ma gwarancji, że jest on dostępny w ramach programu <xref:Microsoft.AspNetCore.Http.IHttpContextAccessor> , ani nie ma gwarancji, że utrzymuje kontekst, w którym uruchomiono aplikację Blazor.
 
 Zalecany sposób przekazywania stanu żądania do aplikacji Blazor odbywa się za pomocą parametrów do składnika głównego podczas początkowego renderowania aplikacji:
 
@@ -13,6 +13,6 @@ Zalecany sposób przekazywania stanu żądania do aplikacji Blazor odbywa się z
 * Wypełnij te dane ze strony Razor przy użyciu <xref:Microsoft.AspNetCore.Http.HttpContext> dostępnych w tym czasie.
 * Przekaż dane do aplikacji Blazor jako parametr do składnika głównego (aplikacji).
 * Zdefiniuj parametr w składniku głównym, aby przechowywać dane przesyłane do aplikacji.
-* Korzystanie z danych specyficznych dla użytkownika w aplikacji; lub alternatywnie Skopiuj te dane do usługi w zakresie w programie <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> , aby można było jej używać w całej aplikacji.
+* Korzystanie z danych specyficznych dla użytkownika w aplikacji; lub alternatywnie Skopiuj te dane do usługi w zakresie w programie, <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> Aby można było jej używać w całej aplikacji.
 
-Aby uzyskać więcej informacji i przykładowy kod, <xref:security/blazor/server/additional-scenarios#pass-tokens-to-a-blazor-server-app>Zobacz.
+Aby uzyskać więcej informacji i przykładowy kod, zobacz <xref:blazor/security/server/additional-scenarios#pass-tokens-to-a-blazor-server-app> .

@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/view-components
-ms.openlocfilehash: 28696d246c5e1e6874e0d9058813750ed1955003
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 8e97dc69ef167b5c08522c91691e0aded9f56908
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774655"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102937"
 ---
 # <a name="view-components-in-aspnet-core"></a>Wyświetl składniki w ASP.NET Core
 
@@ -46,9 +46,9 @@ Składniki widoku są zamierzone wszędzie tam, gdzie można ponownie używać l
 * Zawartość paska bocznego w typowym blogu
 * Panel logowania, który będzie renderowany na każdej stronie i pokazuje linki do wylogowania lub zalogowania, w zależności od stanu logowania użytkownika
 
-Składnik widoku składa się z dwóch części: klasy (zwykle pochodnej od [ViewComponent](/dotnet/api/microsoft.aspnetcore.mvc.viewcomponent)) i wynik zwracanego (zazwyczaj widok). Podobnie jak kontrolery, składnik widoku może być POCO, ale większość deweloperów chce skorzystać z metod i właściwości dostępnych w wyniku `ViewComponent`.
+Składnik widoku składa się z dwóch części: klasy (zwykle pochodnej od [ViewComponent](/dotnet/api/microsoft.aspnetcore.mvc.viewcomponent)) i wynik zwracanego (zazwyczaj widok). Podobnie jak kontrolery, składnik widoku może być POCO, ale większość deweloperów chce skorzystać z metod i właściwości dostępnych w wyniku `ViewComponent` .
 
-Biorąc pod uwagę, czy składniki widoku są zgodne ze specyfikacjami aplikacji Razor , zamiast tego Rozważ użycie składników. RazorSkładniki umożliwiają również łączenie znaczników z kodem C# w celu tworzenia jednostek interfejsu użytkownika wielokrotnego użytku. RazorSkładniki są przeznaczone do produktywności deweloperów podczas udostępniania logiki interfejsu użytkownika po stronie klienta. Aby uzyskać więcej informacji, zobacz <xref:blazor/components>.
+Biorąc pod uwagę, czy składniki widoku są zgodne ze specyfikacjami aplikacji, Razor zamiast tego Rozważ użycie składników. RazorSkładniki umożliwiają również łączenie znaczników z kodem C# w celu tworzenia jednostek interfejsu użytkownika wielokrotnego użytku. RazorSkładniki są przeznaczone do produktywności deweloperów podczas udostępniania logiki interfejsu użytkownika po stronie klienta. Aby uzyskać więcej informacji, zobacz <xref:blazor/components/index>.
 
 ## <a name="creating-a-view-component"></a>Tworzenie składnika widoku
 
@@ -72,9 +72,9 @@ Klasa składnika widoku:
 
 ### <a name="view-component-methods"></a>Wyświetlanie metod składników
 
-Składnik widoku definiuje swoją logikę `InvokeAsync` w metodzie, która zwraca `Task<IViewComponentResult>` lub w metodzie `Invoke` synchronicznej, która `IViewComponentResult`zwraca wartość. Parametry pochodzą bezpośrednio z wywołania składnika widoku, a nie z powiązania modelu. Składnik widoku nigdy nie obsługuje bezpośrednio żądania. Zazwyczaj składnik widoku inicjuje model i przekazuje go do widoku przez wywołanie `View` metody. Podsumowując, Wyświetl metody składników:
+Składnik widoku definiuje swoją logikę w `InvokeAsync` metodzie, która zwraca `Task<IViewComponentResult>` lub w `Invoke` metodzie synchronicznej, która zwraca wartość `IViewComponentResult` . Parametry pochodzą bezpośrednio z wywołania składnika widoku, a nie z powiązania modelu. Składnik widoku nigdy nie obsługuje bezpośrednio żądania. Zazwyczaj składnik widoku inicjuje model i przekazuje go do widoku przez wywołanie `View` metody. Podsumowując, Wyświetl metody składników:
 
-* Zdefiniuj `InvokeAsync` metodę `Task<IViewComponentResult>` zwracającą lub metodę synchroniczną `Invoke` , która zwraca obiekt. `IViewComponentResult`
+* Zdefiniuj `InvokeAsync` metodę zwracającą `Task<IViewComponentResult>` lub metodę synchroniczną `Invoke` , która zwraca obiekt `IViewComponentResult` .
 * Zazwyczaj inicjuje model i przekazuje go do widoku przez wywołanie `ViewComponent` `View` metody.
 * Parametry pochodzą z metody wywołującej, a nie HTTP. Brak powiązania modelu.
 * Nie są dostępne bezpośrednio jako punkt końcowy HTTP. Są wywoływane z kodu (zazwyczaj w widoku). Składnik widoku nigdy nie obsługuje żądania.
@@ -88,11 +88,11 @@ Składnik widoku definiuje swoją logikę `InvokeAsync` w metodzie, która zwrac
 * Nazwa składnika/Views/Shared/Components/{View}/{View Name}
 * Nazwa składnika/Pages/Shared/Components/{View}/{View Name}
 
-Ścieżka wyszukiwania ma zastosowanie do projektów korzystających z kontrolerów + Razor widoków i stron.
+Ścieżka wyszukiwania ma zastosowanie do projektów korzystających z kontrolerów + widoków i Razor stron.
 
 Domyślna nazwa widoku dla składnika widoku jest *Domyślna*, co oznacza, że plik widoku będzie zazwyczaj nazwany *default. cshtml*. Możesz określić inną nazwę widoku podczas tworzenia wyniku składnika widoku lub podczas wywoływania `View` metody.
 
-Zalecamy, aby nazwa pliku widoku *default. cshtml* i użyć ścieżki *views/Shared/Components/{View nazwa składnika}/{View Name}* . Składnik `PriorityList` widoku używany w tym przykładzie używa *widoków/Shared/Components/PriorityList/default. cshtml* dla widoku składnika widoku.
+Zalecamy, aby nazwa pliku widoku *default. cshtml* i użyć ścieżki *views/Shared/Components/{View nazwa składnika}/{View Name}* . `PriorityList`Składnik widoku używany w tym przykładzie używa *widoków/Shared/Components/PriorityList/default. cshtml* dla widoku składnika widoku.
 
 ### <a name="customize-the-view-search-path"></a>Dostosowywanie ścieżki wyszukiwania widoku
 
@@ -100,7 +100,7 @@ Aby dostosować ścieżkę wyszukiwania widoku, zmodyfikuj Razor <xref:Microsoft
 
 [!code-cs[](view-components/samples_snapshot/2.x/Startup.cs?name=snippet_ViewLocationFormats&highlight=4)]
 
-W powyższym kodzie symbol zastępczy{0}"" reprezentuje ścieżkę "Components/{View Name}/{View Name}".
+W powyższym kodzie symbol zastępczy " {0} " reprezentuje ścieżkę "Components/{View Name}/{View Name}".
 
 ## <a name="invoking-a-view-component"></a>Wywoływanie składnika widoku
 
@@ -110,7 +110,7 @@ Aby użyć składnika widoku, wywołaj następujące elementy w widoku:
 @await Component.InvokeAsync("Name of view component", {Anonymous Type Containing Parameters})
 ```
 
-Parametry zostaną przesłane do `InvokeAsync` metody. Składnik `PriorityList` widoku utworzony w artykule jest wywoływany z pliku widoku *widoków/zadania/index. cshtml* . W poniższej tabeli `InvokeAsync` Metoda jest wywoływana z dwoma parametrami:
+Parametry zostaną przesłane do `InvokeAsync` metody. `PriorityList`Składnik widoku utworzony w artykule jest wywoływany z pliku widoku *widoków/zadania/index. cshtml* . W poniższej tabeli `InvokeAsync` Metoda jest wywoływana z dwoma parametrami:
 
 [!code-cshtml[](view-components/sample/ViewCompFinal/Views/ToDo/IndexFinal.cshtml?range=35)]
 
@@ -131,7 +131,7 @@ Klasy z wielkością liter w języku Pascal i parametry metody dla pomocników t
 </vc:[view-component-name]>
 ```
 
-Aby użyć składnika widoku jako pomocnika tagów, zarejestruj zestaw zawierający składnik widoku za pomocą `@addTagHelper` dyrektywy. Jeśli składnik widoku znajduje się w zestawie o nazwie `MyWebApp`, Dodaj następującą dyrektywę do pliku *_ViewImports. cshtml* :
+Aby użyć składnika widoku jako pomocnika tagów, zarejestruj zestaw zawierający składnik widoku za pomocą `@addTagHelper` dyrektywy. Jeśli składnik widoku znajduje się w zestawie o nazwie `MyWebApp` , Dodaj następującą dyrektywę do pliku *_ViewImports. cshtml* :
 
 ```cshtml
 @addTagHelper *, MyWebApp
@@ -139,7 +139,7 @@ Aby użyć składnika widoku jako pomocnika tagów, zarejestruj zestaw zawieraj�
 
 Składnik widoku można zarejestrować jako pomocnika tagów do każdego pliku, który odwołuje się do składnika widoku. Zobacz temat [Zarządzanie zakresem pomocnika tagów](xref:mvc/views/tag-helpers/intro#managing-tag-helper-scope) , aby uzyskać więcej informacji na temat rejestrowania pomocników tagów.
 
-`InvokeAsync` Metoda używana w tym samouczku:
+`InvokeAsync`Metoda używana w tym samouczku:
 
 [!code-cshtml[](view-components/sample/ViewCompFinal/Views/ToDo/IndexFinal.cshtml?range=35)]
 
@@ -147,13 +147,13 @@ Znaczniki pomocnika tagów:
 
 [!code-cshtml[](view-components/sample/ViewCompFinal/Views/ToDo/IndexTagHelper.cshtml?range=37-38)]
 
-W powyższym przykładzie składnik `PriorityList` widoku zmieni się `priority-list`. Parametry składnika widoku są przenoszone jako atrybuty w przypadku Kebab.
+W powyższym przykładzie `PriorityList` składnik widoku zmieni się `priority-list` . Parametry składnika widoku są przenoszone jako atrybuty w przypadku Kebab.
 
 ::: moniker-end
 
 ### <a name="invoking-a-view-component-directly-from-a-controller"></a>Wywoływanie składnika widoku bezpośrednio z kontrolera
 
-Składniki widoku są zwykle wywoływane z widoku, ale można je wywołać bezpośrednio z metody kontrolera. Chociaż składniki widoku nie definiują punktów końcowych, takich jak kontrolery, można łatwo zaimplementować akcję kontrolera, która zwraca `ViewComponentResult`zawartość.
+Składniki widoku są zwykle wywoływane z widoku, ale można je wywołać bezpośrednio z metody kontrolera. Chociaż składniki widoku nie definiują punktów końcowych, takich jak kontrolery, można łatwo zaimplementować akcję kontrolera, która zwraca zawartość `ViewComponentResult` .
 
 W tym przykładzie składnik widoku jest wywoływany bezpośrednio z kontrolera:
 
@@ -161,7 +161,7 @@ W tym przykładzie składnik widoku jest wywoływany bezpośrednio z kontrolera:
 
 ## <a name="walkthrough-creating-a-simple-view-component"></a>Przewodnik: Tworzenie składnika widoku prostego
 
-[Pobierz](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/view-components/sample), skompiluj i przetestuj kod startowy. Jest to prosty projekt z `ToDo` kontrolerem, który wyświetla listę elementów do *wykonania* .
+[Pobierz](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/view-components/sample), skompiluj i przetestuj kod startowy. Jest to prosty projekt z `ToDo` kontrolerem, który wyświetla listę elementów do *ToDo* wykonania.
 
 ![Lista zadań do wykonania](view-components/_static/2dos.png)
 
@@ -182,12 +182,12 @@ Uwagi dotyczące kodu:
      public class XYZ : ViewComponent
      ```
 
-* W `[ViewComponent]` powyższym atrybucie nakazuje selektorowi składnika widoku użycie `PriorityList` nazwy podczas wyszukiwania widoków skojarzonych ze składnikiem i użycie ciągu "PriorityList" podczas odwoływania się do składnika klasy z widoku. Wyjaśnimy, że w dalszej części bardziej szczegółowo.
+* W `[ViewComponent]` powyższym atrybucie nakazuje selektorowi składnika widoku użycie nazwy `PriorityList` podczas wyszukiwania widoków skojarzonych ze składnikiem i użycie ciągu "PriorityList" podczas odwoływania się do składnika klasy z widoku. Wyjaśnimy, że w dalszej części bardziej szczegółowo.
 * Składnik używa [iniekcji zależności](../../fundamentals/dependency-injection.md) , aby udostępnić kontekst danych.
 * `InvokeAsync`uwidacznia metodę, która może być wywoływana z widoku i może przyjmować dowolną liczbę argumentów.
-* `InvokeAsync` Metoda zwraca zestaw `ToDo` elementów, które spełniają parametry `isDone` i `maxPriority` .
+* `InvokeAsync`Metoda zwraca zestaw `ToDo` elementów, które spełniają `isDone` `maxPriority` Parametry i.
 
-### <a name="create-the-view-component-razor-view"></a>Tworzenie widoku składnika Razor widoku
+### <a name="create-the-view-component-razor-view"></a>Tworzenie widoku składnika widoku Razor
 
 * Utwórz folder *widoki/udostępnione/składniki* . Ten folder **musi** być nazwanymi *składnikami*.
 
@@ -198,7 +198,7 @@ Uwagi dotyczące kodu:
 
   [!code-cshtml[](view-components/sample/ViewCompFinal/Views/Shared/Components/PriorityList/Default1.cshtml)]
 
-   Razor Widok pobiera listę `TodoItem` i wyświetla je. Jeśli metoda widoku składnika `InvokeAsync` nie przekaże nazwy widoku (jak w naszym przykładzie), *Domyślnie* jest używana jako nazwa widoku według Konwencji. W dalszej części tego samouczka pokażę, jak przekazać nazwę widoku. Aby zastąpić domyślne style dla określonego kontrolera, Dodaj widok do folderu widoku określonego dla kontrolera (na przykład *widoki/zadania/składniki/PriorityList/default. cshtml)*.
+   RazorWidok pobiera listę `TodoItem` i wyświetla je. Jeśli metoda widoku składnika `InvokeAsync` nie przekaże nazwy widoku (jak w naszym przykładzie), *Domyślnie* jest używana jako nazwa widoku według Konwencji. W dalszej części tego samouczka pokażę, jak przekazać nazwę widoku. Aby zastąpić domyślne style dla określonego kontrolera, Dodaj widok do folderu widoku określonego dla kontrolera (na przykład *widoki/zadania/składniki/PriorityList/default. cshtml)*.
 
     Jeśli składnik widoku jest specyficzny dla kontrolera, można go dodać do folderu właściwego dla kontrolera (*widoki/zadania/składniki/PriorityList/default. cshtml*).
 
@@ -266,13 +266,13 @@ Jeśli chcesz uzyskać bezpieczeństwo czasu kompilowania, możesz zastąpić us
 
 [!code-csharp[](../../mvc/views/view-components/sample/ViewCompFinal/ViewComponents/PriorityList.cs?highlight=10&range=5-35)]
 
-Dodaj `using` instrukcję do pliku Razor widoku i Użyj `nameof` operatora:
+Dodaj `using` instrukcję do Razor pliku widoku i Użyj `nameof` operatora:
 
 [!code-cshtml[](view-components/sample/ViewCompFinal/Views/ToDo/IndexNameof.cshtml?range=1-6,35-)]
 
 ## <a name="perform-synchronous-work"></a>Wykonywanie synchronicznej pracy
 
-Struktura obsługuje wywoływanie metody synchronicznej `Invoke` , jeśli nie trzeba wykonywać operacji asynchronicznej. W poniższej metodzie jest tworzony `Invoke` składnik widoku synchronicznego:
+Struktura obsługuje wywoływanie metody synchronicznej, `Invoke` Jeśli nie trzeba wykonywać operacji asynchronicznej. W poniższej metodzie jest tworzony `Invoke` składnik widoku synchronicznego:
 
 ```csharp
 public class PriorityList : ViewComponent
@@ -285,7 +285,7 @@ public class PriorityList : ViewComponent
 }
 ```
 
-Razor Plik składnika widoku zawiera listę ciągów przekazaną do `Invoke` metody (*przegląda/Home/Components/PriorityList/default. cshtml*):
+Plik składnika widoku Razor zawiera listę ciągów przekazaną do `Invoke` metody (*przegląda/Home/Components/PriorityList/default. cshtml*):
 
 ```cshtml
 @model List<string>
@@ -306,15 +306,15 @@ Składnik widoku jest wywoływany w Razor pliku (na przykład *widoki/Home/index
 * <xref:Microsoft.AspNetCore.Mvc.IViewComponentHelper>
 * [Pomocnik tagów](xref:mvc/views/tag-helpers/intro)
 
-Aby użyć <xref:Microsoft.AspNetCore.Mvc.IViewComponentHelper> podejścia, wywołaj `Component.InvokeAsync`:
+Aby użyć <xref:Microsoft.AspNetCore.Mvc.IViewComponentHelper> podejścia, wywołaj `Component.InvokeAsync` :
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-1.1"
 
-Składnik widoku jest wywoływany w Razor pliku (na przykład *przeglądas/Home/index. cshtml*) z. <xref:Microsoft.AspNetCore.Mvc.IViewComponentHelper>
+Składnik widoku jest wywoływany w Razor pliku (na przykład *przeglądas/Home/index. cshtml*) z <xref:Microsoft.AspNetCore.Mvc.IViewComponentHelper> .
 
-Wywołanie `Component.InvokeAsync`:
+Wywołanie `Component.InvokeAsync` :
 
 ::: moniker-end
 
@@ -324,13 +324,13 @@ Wywołanie `Component.InvokeAsync`:
 
 ::: moniker range=">= aspnetcore-1.1"
 
-Aby użyć pomocnika tagów, zarejestruj zestaw zawierający składnik widoku przy użyciu `@addTagHelper` dyrektywy (składnik widoku znajduje się w zestawie o nazwie `MyWebApp`):
+Aby użyć pomocnika tagów, zarejestruj zestaw zawierający składnik widoku przy użyciu `@addTagHelper` dyrektywy (składnik widoku znajduje się w zestawie o nazwie `MyWebApp` ):
 
 ```cshtml
 @addTagHelper *, MyWebApp
 ```
 
-Użyj pomocnika tagu składnika w pliku Razor znaczników:
+Użyj pomocnika tagu składnika w Razor pliku znaczników:
 
 ```cshtml
 <vc:priority-list max-priority="999" is-done="false">
@@ -345,7 +345,7 @@ Sygnatura metody `PriorityList.Invoke` jest synchroniczna, ale Razor znajduje i 
 
 Każdy parametr w składniku widoku jest atrybutem wymaganym. Zobacz [ten problem](https://github.com/dotnet/AspNetCore/issues/5011)w serwisie GitHub. Jeśli dowolny parametr zostanie pominięty:
 
-* Sygnatura `InvokeAsync` metody nie jest zgodna, dlatego metoda nie zostanie wykonana.
+* `InvokeAsync`Sygnatura metody nie jest zgodna, dlatego metoda nie zostanie wykonana.
 * ViewComponent nie renderuje żadnych znaczników.
 * Nie zostaną zgłoszone żadne błędy.
 

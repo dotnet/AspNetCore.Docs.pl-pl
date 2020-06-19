@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: 26202c45e49e64117d35fe6f1e9a65c4acc170fb
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: de04992c3e3c7ce2dc73eee801484d5e3930fa3a
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84105093"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102437"
 ---
 # <a name="call-javascript-functions-from-net-methods-in-aspnet-core-blazor"></a>Wywoływanie funkcji języka JavaScript z metod .NET w ASP.NET CoreBlazor
 
@@ -61,7 +61,7 @@ Aby użyć <xref:Microsoft.JSInterop.IJSRuntime> abstrakcji, należy zastosować
 
   [!code-razor[](call-javascript-from-dotnet/samples_snapshot/inject-abstraction.razor?highlight=1)]
 
-  W `<head>` elemencie elementu *wwwroot/index.html* ( Blazor Webassembly) lub *Pages/_Host. cshtml* ( Blazor serwer) podaj `handleTickerChanged` funkcję języka JavaScript. Funkcja jest wywoływana z <xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType> i nie zwraca wartości:
+  W `<head>` elemencie *wwwroot/index.html* ( Blazor Webassembly) lub *Pages/_Host. cshtml* ( Blazor serwer) podaj `handleTickerChanged` funkcję języka JavaScript. Funkcja jest wywoływana z <xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType> i nie zwraca wartości:
 
   [!code-html[](call-javascript-from-dotnet/samples_snapshot/index-script-handleTickerChanged1.html)]
 
@@ -69,7 +69,7 @@ Aby użyć <xref:Microsoft.JSInterop.IJSRuntime> abstrakcji, należy zastosować
 
   [!code-csharp[](call-javascript-from-dotnet/samples_snapshot/inject-abstraction-class.cs?highlight=5)]
 
-  W `<head>` elemencie elementu *wwwroot/index.html* ( Blazor Webassembly) lub *Pages/_Host. cshtml* ( Blazor serwer) podaj `handleTickerChanged` funkcję języka JavaScript. Funkcja jest wywoływana z `JSRuntime.InvokeAsync` i zwraca wartość:
+  W `<head>` elemencie *wwwroot/index.html* ( Blazor Webassembly) lub *Pages/_Host. cshtml* ( Blazor serwer) podaj `handleTickerChanged` funkcję języka JavaScript. Funkcja jest wywoływana z `JSRuntime.InvokeAsync` i zwraca wartość:
 
   [!code-html[](call-javascript-from-dotnet/samples_snapshot/index-script-handleTickerChanged2.html)]
 
@@ -85,7 +85,7 @@ W aplikacji przykładowej po stronie klienta, która jest dołączona do tego te
 * `showPrompt`: Generuje monit o zaakceptowanie danych wprowadzonych przez użytkownika (nazwę użytkownika) i zwraca nazwę obiektu wywołującego.
 * `displayWelcome`: Przypisuje Komunikat powitalny od wywołującego do obiektu DOM z `id` `welcome` .
 
-*wwwroot/exampleJsInterop. js*:
+plik *wwwroot/exampleJsInterop.js*:
 
 [!code-javascript[](./common/samples/3.x/BlazorWebAssemblySample/wwwroot/exampleJsInterop.js?highlight=2-7)]
 
@@ -101,7 +101,7 @@ Umieść `<script>` tag odwołujący się do pliku JavaScript w pliku *wwwroot/i
 
 Nie umieszczaj `<script>` znacznika w pliku składnika, ponieważ `<script>` nie można dynamicznie zaktualizować znacznika.
 
-.NET metod współdziałania z funkcjami JavaScript w pliku *exampleJsInterop. js* przez wywołanie <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A?displayProperty=nameWithType> .
+Metody .NET współdziałają z funkcjami JavaScript w pliku *exampleJsInterop.js* przez wywołanie <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A?displayProperty=nameWithType> .
 
 <xref:Microsoft.JSInterop.IJSRuntime>Abstrakcja jest asynchroniczna, aby umożliwić obsługę Blazor scenariuszy serwera. Jeśli aplikacja jest Blazor aplikacją webassembly i chcesz wywołać funkcję JavaScript synchronicznie, downcast do <xref:Microsoft.JSInterop.IJSInProcessRuntime> i Wywołaj <xref:Microsoft.JSInterop.IJSInProcessRuntime.Invoke%2A> zamiast tego. Zalecamy, aby większość bibliotek międzyoperacyjnych JS używała asynchronicznych interfejsów API, aby upewnić się, że biblioteki są dostępne we wszystkich scenariuszach.
 
@@ -142,7 +142,7 @@ Przykładowa aplikacja zawiera składnik demonstrujący międzyoperacyjność JS
 }
 ```
 
-1. Gdy `TriggerJsPrompt` jest wykonywane, zaznaczając przycisk **Monituj wyzwalacza JavaScript** składnika, funkcja języka JavaScript `showPrompt` dostępna w pliku *wwwroot/exampleJsInterop. js* jest wywoływana.
+1. Gdy `TriggerJsPrompt` jest wykonywane, zaznaczając przycisk **Monituj wyzwalacza JavaScript** składnika, funkcja języka JavaScript `showPrompt` dostępna w pliku *wwwroot/exampleJsInterop.js* jest wywoływana.
 1. `showPrompt`Funkcja akceptuje dane wejściowe użytkownika (nazwę użytkownika), które są kodowane w formacie HTML i zwracane do składnika. Składnik przechowuje nazwę użytkownika w zmiennej lokalnej, `name` .
 1. Ciąg przechowywany w programie `name` jest zawarty w komunikacie powitalnym, który jest przesyłany do funkcji języka JavaScript, `displayWelcome` która renderuje Komunikat powitalny do znacznika nagłówka.
 
@@ -193,7 +193,7 @@ W odniesieniu do kodu platformy .NET jest <xref:Microsoft.AspNetCore.Components.
 
 Na przykład poniższy kod definiuje metodę rozszerzenia .NET, która umożliwia ustawienie fokusu na elemencie:
 
-*exampleJsInterop. js*:
+*exampleJsInterop.js*:
 
 ```javascript
 window.exampleJsFunctions = {
@@ -222,7 +222,7 @@ public static async Task Focus(this ElementReference elementRef, IJSRuntime jsRu
 [!code-razor[](call-javascript-from-dotnet/samples_snapshot/component2.razor?highlight=1-4,12)]
 
 > [!IMPORTANT]
-> `username`Zmienna jest wypełniana tylko po wyrenderowaniu składnika. W przypadku przekazanie niewypełnionego <xref:Microsoft.AspNetCore.Components.ElementReference> kodu JavaScript kod JavaScript otrzymuje wartość `null` . Aby manipulować odwołaniami do elementów po zakończeniu renderowania składnika (aby ustawić początkowy fokus w elemencie), użyj [metod cyklu życia składnika OnAfterRenderAsync lub OnAfterRender](xref:blazor/lifecycle#after-component-render).
+> `username`Zmienna jest wypełniana tylko po wyrenderowaniu składnika. W przypadku przekazanie niewypełnionego <xref:Microsoft.AspNetCore.Components.ElementReference> kodu JavaScript kod JavaScript otrzymuje wartość `null` . Aby manipulować odwołaniami do elementów po zakończeniu renderowania składnika (aby ustawić początkowy fokus w elemencie), użyj [metod cyklu życia składnika OnAfterRenderAsync lub OnAfterRender](xref:blazor/components/lifecycle#after-component-render).
 
 Podczas pracy z typami ogólnymi i zwracają wartość, użyj <xref:System.Threading.Tasks.ValueTask%601> :
 
@@ -250,7 +250,7 @@ Aby składnik nadrzędny mógł udostępnić odwołanie do elementu innym skład
 
 Poniższy Blazor przykład zestawu webassembly ilustruje podejście.
 
-W `<head>` *wwwroot/index.html*:
+W obszarze `<head>` *wwwroot/index.html*:
 
 ```html
 <style>
@@ -258,7 +258,7 @@ W `<head>` *wwwroot/index.html*:
 </style>
 ```
 
-W `<body>` *wwwroot/index.html*:
+W obszarze `<body>` *wwwroot/index.html*:
 
 ```html
 <script>
@@ -459,7 +459,7 @@ Usługa JS Interop może zakończyć się niepowodzeniem z powodu błędów siec
       TimeSpan.FromSeconds({SECONDS}), new[] { "Arg1" });
   ```
 
-Więcej informacji o wyczerpaniu zasobów znajduje się w temacie <xref:security/blazor/server/threat-mitigation> .
+Więcej informacji o wyczerpaniu zasobów znajduje się w temacie <xref:blazor/security/server/threat-mitigation> .
 
 [!INCLUDE[](~/includes/blazor-share-interop-code.md)]
 

@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/ui-class
-ms.openlocfilehash: 32aa1cdab0e552a1255c01b5135e9a82a0e37c77
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: adfcc281f285892583ab8a21c014d6fcb120af9c
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84451904"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102848"
 ---
 # <a name="create-reusable-ui-using-the-razor-class-library-project-in-aspnet-core"></a>Utwórz interfejs użytkownika wielokrotnego użytku przy użyciu Razor projektu biblioteki klas w ASP.NET Core
 
@@ -25,7 +25,7 @@ Autor: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Razorwidoki, strony, kontrolery, modele stron, [ Razor składniki](xref:blazor/class-libraries), [składniki widoku](xref:mvc/views/view-components)i modele danych mogą być wbudowane w Razor bibliotekę klas (RCL). RCL można spakować i ponownie użyć. Aplikacje mogą zawierać RCL i przesłonić widoki oraz strony, które zawiera. Gdy widok, częściowy widok lub Razor Strona znajdują się zarówno w aplikacji sieci Web, jak i w RCL, Razor pierwszeństwo ma znacznik (plik *. cshtml* ) w aplikacji sieci Web.
+Razorwidoki, strony, kontrolery, modele stron, [ Razor składniki](xref:blazor/components/class-libraries), [składniki widoku](xref:mvc/views/view-components)i modele danych mogą być wbudowane w Razor bibliotekę klas (RCL). RCL można spakować i ponownie użyć. Aplikacje mogą zawierać RCL i przesłonić widoki oraz strony, które zawiera. Gdy widok, częściowy widok lub Razor Strona znajdują się zarówno w aplikacji sieci Web, jak i w RCL, Razor pierwszeństwo ma znacznik (plik *. cshtml* ) w aplikacji sieci Web.
 
 [Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/ui-class/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
 
@@ -98,7 +98,7 @@ Aby dołączyć zasoby towarzyszące jako część RCL, Utwórz folder *wwwroot*
 
 Podczas pakowania RCL wszystkie zasoby towarzyszące w folderze *wwwroot* zostaną automatycznie dołączone do pakietu.
 
-Użyj `dotnet pack` polecenia zamiast wersji NuGet. exe `nuget pack` .
+Użyj `dotnet pack` polecenia zamiast wersji NuGet.exe `nuget pack` .
 
 ### <a name="exclude-static-assets"></a>Wyklucz zasoby statyczne
 
@@ -192,7 +192,7 @@ Po opublikowaniu aplikacji składniki towarzyszące ze wszystkich przywoływanyc
 
 ::: moniker range="< aspnetcore-3.0"
 
-Razorwidoki, strony, kontrolery, modele stron, [ Razor składniki](xref:blazor/class-libraries), [składniki widoku](xref:mvc/views/view-components)i modele danych mogą być wbudowane w Razor bibliotekę klas (RCL). RCL można spakować i ponownie użyć. Aplikacje mogą zawierać RCL i przesłonić widoki oraz strony, które zawiera. Gdy widok, częściowy widok lub Razor Strona znajdują się zarówno w aplikacji sieci Web, jak i w RCL, Razor pierwszeństwo ma znacznik (plik *. cshtml* ) w aplikacji sieci Web.
+Razorwidoki, strony, kontrolery, modele stron, [ Razor składniki](xref:blazor/components/class-libraries), [składniki widoku](xref:mvc/views/view-components)i modele danych mogą być wbudowane w Razor bibliotekę klas (RCL). RCL można spakować i ponownie użyć. Aplikacje mogą zawierać RCL i przesłonić widoki oraz strony, które zawiera. Gdy widok, częściowy widok lub Razor Strona znajdują się zarówno w aplikacji sieci Web, jak i w RCL, Razor pierwszeństwo ma znacznik (plik *. cshtml* ) w aplikacji sieci Web.
 
 [Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/ui-class/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
 
@@ -322,7 +322,7 @@ Plik *_ViewStart. cshtml* jest wymagany do używania układu Razor projektu stro
   dotnet build RazorUIClassLib
   ```
 
-Dane wyjściowe kompilacji zawierają *RazorUIClassLib. dll* i *RazorUIClassLib. views. dll*. *RazorUIClassLib. views. dll* zawiera skompilowaną Razor zawartość.
+Dane wyjściowe kompilacji zawierają *RazorUIClassLib.dll* i *RazorUIClassLib.Views.dll*. *RazorUIClassLib.Views.dll* zawiera skompilowaną Razor zawartość.
 
 ### <a name="use-the-razor-ui-library-from-a-razor-pages-project"></a>Korzystanie z Razor biblioteki interfejsu użytkownika z Razor projektu stron
 
@@ -398,4 +398,4 @@ Załóżmy, że *RazorUIClassLib/Pages/Shared* zawiera dwa częściowe pliki: *_
 
 ## <a name="additional-resources"></a>Zasoby dodatkowe
 
-* <xref:blazor/class-libraries>
+* <xref:blazor/components/class-libraries>

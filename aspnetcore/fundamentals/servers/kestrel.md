@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/kestrel
-ms.openlocfilehash: 4da32b14ca640bda4df5d6c9d685f4702c6eb266
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: fd0db90e897a813e0127ce1c751569158efa8fdf
+ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84106770"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85074177"
 ---
 # <a name="kestrel-web-server-implementation-in-aspnet-core"></a>Implementacja serwera sieci Web Kestrel w ASP.NET Core
 
@@ -122,7 +122,7 @@ W poniższych przykładach użyto <xref:Microsoft.AspNetCore.Server.Kestrel.Core
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 ```
 
-W przykładach przedstawionych w dalszej części tego artykułu opcje Kestrel są konfigurowane w kodzie C#. Opcje Kestrel można również ustawić za pomocą [dostawcy konfiguracji](xref:fundamentals/configuration/index). Na przykład [dostawca konfiguracji plików](xref:fundamentals/configuration/index#file-configuration-provider) może załadować konfigurację Kestrel z pliku *appSettings. JSON* lub *appSettings. { Environment} plik JSON* :
+W przykładach przedstawionych w dalszej części tego artykułu opcje Kestrel są konfigurowane w kodzie C#. Opcje Kestrel można również ustawić za pomocą [dostawcy konfiguracji](xref:fundamentals/configuration/index). Na przykład [dostawca konfiguracji plików](xref:fundamentals/configuration/index#file-configuration-provider) może załadować konfigurację Kestrel z *appsettings.jsw* lub *appSettings. { Environment} plik JSON* :
 
 ```json
 {
@@ -486,7 +486,7 @@ Kestrel nasłuchuje w systemie `http://localhost:5000` i `https://localhost:5001
 
 `CreateDefaultBuilder`wywołania `Configure(context.Configuration.GetSection("Kestrel"))` domyślnie do ładowania konfiguracji Kestrel. Domyślny schemat konfiguracji ustawień aplikacji HTTPS jest dostępny dla Kestrel. Konfigurowanie wielu punktów końcowych, w tym adresów URL i certyfikatów do użycia, z pliku znajdującego się na dysku lub z magazynu certyfikatów.
 
-W poniższym przykładzie pliku *appSettings. JSON* :
+W poniższym *appsettings.jsna* przykład:
 
 * Ustaw **AllowInvalid** na, `true` Aby zezwolić na korzystanie z nieprawidłowych certyfikatów (na przykład certyfikatów z podpisem własnym).
 * Wszystkie punkty końcowe HTTPS, które nie określają certyfikatu (**HttpsDefaultCert** w poniższym przykładzie) powracają do certyfikatu zdefiniowanego w obszarze **Certyfikaty** > **domyślne** lub certyfikat programistyczny.
@@ -722,7 +722,7 @@ Ograniczenia protokołu TLS dla protokołu HTTP/2:
 * Minimalne rozmiary tymczasowych kluczy wymiany:
   * Krzywa eliptyczna Diffie'ego-Hellmana (ECDHE) &lbrack; [RFC4492](https://www.ietf.org/rfc/rfc4492.txt) &rbrack; : 224 bitów minimum
   * Ograniczone pole Diffie-Hellmana (DHE) &lbrack; `TLS12` &rbrack; : minimum 2048 bitów
-* Mechanizm szyfrowania nie został zabroniony
+* Mechanizm szyfrowania jest niedozwolony. 
 
 `TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256`&lbrack;`TLS-ECDHE`&rbrack; z krzywą eliptyczna P-256 &lbrack; `FIPS186` &rbrack; jest domyślnie obsługiwana.
 
@@ -848,7 +848,7 @@ webBuilder.ConfigureKestrel(serverOptions =>
 
 `CreateDefaultBuilder`wywołania `serverOptions.Configure(context.Configuration.GetSection("Kestrel"))` domyślnie do ładowania konfiguracji Kestrel.
 
-W poniższym przykładzie pliku *appSettings. JSON* jako domyślny protokół połączenia dla wszystkich punktów końcowych:
+Poniższy *appsettings.jsna* przykład ustanawia protokołu HTTP/1.1 jako domyślny protokół połączenia dla wszystkich punktów końcowych:
 
 ```json
 {
@@ -860,7 +860,7 @@ W poniższym przykładzie pliku *appSettings. JSON* jako domyślny protokół po
 }
 ```
 
-Poniższy przykład *appSettings. JSON* ustanawia protokół połączeń HTTP/1.1 dla określonego punktu końcowego:
+Poniższy *appsettings.jsna* przykład ustanawia protokół połączeń HTTP/1.1 dla określonego punktu końcowego:
 
 ```json
 {
@@ -937,7 +937,7 @@ Tylko prefiksy adresów URL HTTP są prawidłowe. Kestrel nie obsługuje protoko
   http://*:80/
   ```
 
-  Nazwy hostów, `*` i `+` , nie są specjalne. Wszystkie nie są rozpoznawane jako prawidłowy adres IP lub są `localhost` powiązane ze wszystkimi IP IPv4 i IPv6. Aby powiązać różne nazwy hostów z różnymi ASP.NET Core aplikacjami na tym samym porcie, użyj [protokołu HTTP. sys](xref:fundamentals/servers/httpsys) lub odwrotnego serwera proxy, takiego jak IIS, Nginx lub Apache.
+  Nazwy hostów, `*` i `+` , nie są specjalne. Wszystkie nie są rozpoznawane jako prawidłowy adres IP lub są `localhost` powiązane ze wszystkimi IP IPv4 i IPv6. Aby powiązać różne nazwy hostów z różnymi ASP.NET Core aplikacjami na tym samym porcie, użyj [HTTP.sys](xref:fundamentals/servers/httpsys) lub zwrotnego serwera proxy, takiego jak IIS, Nginx lub Apache.
 
   > [!WARNING]
   > Hostowanie w konfiguracji zwrotnego serwera proxy wymaga [filtrowania hosta](#host-filtering).
@@ -960,9 +960,9 @@ Aby obejść ten sposób, użyj oprogramowania pośredniczącego filtrowania hos
 
 [!code-csharp[](kestrel/samples-snapshot/2.x/KestrelSample/Program.cs?name=snippet_Program&highlight=9)]
 
-Programowe filtrowanie hosta jest domyślnie wyłączone. Aby włączyć oprogramowanie pośredniczące, zdefiniuj `AllowedHosts` klucz w pliku *appSettings. JSON* / *. \<EnvironmentName> kod JSON*. Wartość to rozdzielana średnikami lista nazw hostów bez numerów portów:
+Programowe filtrowanie hosta jest domyślnie wyłączone. Aby włączyć oprogramowanie pośredniczące, zdefiniuj `AllowedHosts` klucz w *appsettings.jsna* / *appSettings. \<EnvironmentName> kod JSON*. Wartość to rozdzielana średnikami lista nazw hostów bez numerów portów:
 
-*appSettings. JSON*:
+*appsettings.js*:
 
 ```json
 {
@@ -1094,7 +1094,7 @@ W poniższych przykładach użyto <xref:Microsoft.AspNetCore.Server.Kestrel.Core
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 ```
 
-Opcje Kestrel, które są konfigurowane w kodzie C# w poniższych przykładach, można również ustawić za pomocą [dostawcy konfiguracji](xref:fundamentals/configuration/index). Na przykład dostawca konfiguracji plików może załadować konfigurację Kestrel z pliku *appSettings. JSON* lub *appSettings. { Environment} plik JSON* :
+Opcje Kestrel, które są konfigurowane w kodzie C# w poniższych przykładach, można również ustawić za pomocą [dostawcy konfiguracji](xref:fundamentals/configuration/index). Na przykład dostawca konfiguracji plików może załadować konfigurację Kestrel z *appsettings.jsw* lub *appSettings. { Environment} plik JSON* :
 
 ```json
 {
@@ -1474,7 +1474,7 @@ Kestrel nasłuchuje w systemie `http://localhost:5000` i `https://localhost:5001
 
 `CreateDefaultBuilder`wywołania `Configure(context.Configuration.GetSection("Kestrel"))` domyślnie do ładowania konfiguracji Kestrel. Domyślny schemat konfiguracji ustawień aplikacji HTTPS jest dostępny dla Kestrel. Konfigurowanie wielu punktów końcowych, w tym adresów URL i certyfikatów do użycia, z pliku znajdującego się na dysku lub z magazynu certyfikatów.
 
-W poniższym przykładzie pliku *appSettings. JSON* :
+W poniższym *appsettings.jsna* przykład:
 
 * Ustaw **AllowInvalid** na, `true` Aby zezwolić na korzystanie z nieprawidłowych certyfikatów (na przykład certyfikatów z podpisem własnym).
 * Wszystkie punkty końcowe HTTPS, które nie określają certyfikatu (**HttpsDefaultCert** w poniższym przykładzie) powracają do certyfikatu zdefiniowanego w obszarze **Certyfikaty** > **domyślne** lub certyfikat programistyczny.
@@ -1797,7 +1797,7 @@ private class TlsFilterAdapter : IConnectionAdapter
 
 <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*>wywołania `serverOptions.Configure(context.Configuration.GetSection("Kestrel"))` domyślnie do ładowania konfiguracji Kestrel.
 
-W poniższym przykładzie pliku *appSettings. JSON* jest ustanawiany domyślny protokół połączeń (http/1.1 i http/2) dla wszystkich punktów końcowych Kestrel:
+W poniższym *appsettings.jsna* przykład dla wszystkich punktów końcowych (http/1.1 i http/2) jest ustanawiany domyślny protokół połączeń:
 
 ```json
 {
@@ -1888,7 +1888,7 @@ Tylko prefiksy adresów URL HTTP są prawidłowe. Kestrel nie obsługuje protoko
   http://*:80/
   ```
 
-  Nazwy hostów, `*` i `+` , nie są specjalne. Wszystkie nie są rozpoznawane jako prawidłowy adres IP lub są `localhost` powiązane ze wszystkimi IP IPv4 i IPv6. Aby powiązać różne nazwy hostów z różnymi ASP.NET Core aplikacjami na tym samym porcie, użyj [protokołu HTTP. sys](xref:fundamentals/servers/httpsys) lub odwrotnego serwera proxy, takiego jak IIS, Nginx lub Apache.
+  Nazwy hostów, `*` i `+` , nie są specjalne. Wszystkie nie są rozpoznawane jako prawidłowy adres IP lub są `localhost` powiązane ze wszystkimi IP IPv4 i IPv6. Aby powiązać różne nazwy hostów z różnymi ASP.NET Core aplikacjami na tym samym porcie, użyj [HTTP.sys](xref:fundamentals/servers/httpsys) lub zwrotnego serwera proxy, takiego jak IIS, Nginx lub Apache.
 
   > [!WARNING]
   > Hostowanie w konfiguracji zwrotnego serwera proxy wymaga [filtrowania hosta](#host-filtering).
@@ -1911,9 +1911,9 @@ Aby obejść ten sposób, użyj oprogramowania pośredniczącego filtrowania hos
 
 [!code-csharp[](kestrel/samples-snapshot/2.x/KestrelSample/Program.cs?name=snippet_Program&highlight=9)]
 
-Programowe filtrowanie hosta jest domyślnie wyłączone. Aby włączyć oprogramowanie pośredniczące, zdefiniuj `AllowedHosts` klucz w pliku *appSettings. JSON* / *. \<EnvironmentName> kod JSON*. Wartość to rozdzielana średnikami lista nazw hostów bez numerów portów:
+Programowe filtrowanie hosta jest domyślnie wyłączone. Aby włączyć oprogramowanie pośredniczące, zdefiniuj `AllowedHosts` klucz w *appsettings.jsna* / *appSettings. \<EnvironmentName> kod JSON*. Wartość to rozdzielana średnikami lista nazw hostów bez numerów portów:
 
-*appSettings. JSON*:
+*appsettings.js*:
 
 ```json
 {
@@ -2002,7 +2002,7 @@ W poniższych przykładach użyto <xref:Microsoft.AspNetCore.Server.Kestrel.Core
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 ```
 
-Opcje Kestrel, które są konfigurowane w kodzie C# w poniższych przykładach, można również ustawić za pomocą [dostawcy konfiguracji](xref:fundamentals/configuration/index). Na przykład dostawca konfiguracji plików może załadować konfigurację Kestrel z pliku *appSettings. JSON* lub *appSettings. { Environment} plik JSON* :
+Opcje Kestrel, które są konfigurowane w kodzie C# w poniższych przykładach, można również ustawić za pomocą [dostawcy konfiguracji](xref:fundamentals/configuration/index). Na przykład dostawca konfiguracji plików może załadować konfigurację Kestrel z *appsettings.jsw* lub *appSettings. { Environment} plik JSON* :
 
 ```json
 {
@@ -2338,7 +2338,7 @@ Kestrel nasłuchuje w systemie `http://localhost:5000` i `https://localhost:5001
 
 `CreateDefaultBuilder`wywołania `Configure(context.Configuration.GetSection("Kestrel"))` domyślnie do ładowania konfiguracji Kestrel. Domyślny schemat konfiguracji ustawień aplikacji HTTPS jest dostępny dla Kestrel. Konfigurowanie wielu punktów końcowych, w tym adresów URL i certyfikatów do użycia, z pliku znajdującego się na dysku lub z magazynu certyfikatów.
 
-W poniższym przykładzie pliku *appSettings. JSON* :
+W poniższym *appsettings.jsna* przykład:
 
 * Ustaw **AllowInvalid** na, `true` Aby zezwolić na korzystanie z nieprawidłowych certyfikatów (na przykład certyfikatów z podpisem własnym).
 * Wszystkie punkty końcowe HTTPS, które nie określają certyfikatu (**HttpsDefaultCert** w poniższym przykładzie) powracają do certyfikatu zdefiniowanego w obszarze **Certyfikaty** > **domyślne** lub certyfikat programistyczny.
@@ -2678,7 +2678,7 @@ Tylko prefiksy adresów URL HTTP są prawidłowe. Kestrel nie obsługuje protoko
   http://*:80/
   ```
 
-  Nazwy hostów, `*` i `+` , nie są specjalne. Wszystkie nie są rozpoznawane jako prawidłowy adres IP lub są `localhost` powiązane ze wszystkimi IP IPv4 i IPv6. Aby powiązać różne nazwy hostów z różnymi ASP.NET Core aplikacjami na tym samym porcie, użyj [protokołu HTTP. sys](xref:fundamentals/servers/httpsys) lub odwrotnego serwera proxy, takiego jak IIS, Nginx lub Apache.
+  Nazwy hostów, `*` i `+` , nie są specjalne. Wszystkie nie są rozpoznawane jako prawidłowy adres IP lub są `localhost` powiązane ze wszystkimi IP IPv4 i IPv6. Aby powiązać różne nazwy hostów z różnymi ASP.NET Core aplikacjami na tym samym porcie, użyj [HTTP.sys](xref:fundamentals/servers/httpsys) lub zwrotnego serwera proxy, takiego jak IIS, Nginx lub Apache.
 
   > [!WARNING]
   > Hostowanie w konfiguracji zwrotnego serwera proxy wymaga [filtrowania hosta](#host-filtering).
@@ -2701,9 +2701,9 @@ Aby obejść ten sposób, użyj oprogramowania pośredniczącego filtrowania hos
 
 [!code-csharp[](kestrel/samples-snapshot/2.x/KestrelSample/Program.cs?name=snippet_Program&highlight=9)]
 
-Programowe filtrowanie hosta jest domyślnie wyłączone. Aby włączyć oprogramowanie pośredniczące, zdefiniuj `AllowedHosts` klucz w pliku *appSettings. JSON* / *. \<EnvironmentName> kod JSON*. Wartość to rozdzielana średnikami lista nazw hostów bez numerów portów:
+Programowe filtrowanie hosta jest domyślnie wyłączone. Aby włączyć oprogramowanie pośredniczące, zdefiniuj `AllowedHosts` klucz w *appsettings.jsna* / *appSettings. \<EnvironmentName> kod JSON*. Wartość to rozdzielana średnikami lista nazw hostów bez numerów portów:
 
-*appSettings. JSON*:
+*appsettings.js*:
 
 ```json
 {

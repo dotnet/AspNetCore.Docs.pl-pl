@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/routing
-ms.openlocfilehash: f99ac6aea7bd959473fdbbfeec6ba19d4dad4ff3
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: f4bba10f7ce0b5a95c2aed8644aed18fa0637457
+ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84106549"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85074511"
 ---
 # <a name="routing-in-aspnet-core"></a>Routing w ASP.NET Core
 
@@ -563,12 +563,12 @@ Aby uzyskać ogranicznik parametrów routingu ucieczki,,,, `{` `}` `[` `]` podw�
 
 Wyrażenia regularne używane w routingu często zaczynają się od `^` znaku i pasują do pozycji początkowej ciągu. Wyrażenia często kończą się `$` znakiem i pasują do końca ciągu. `^`Znaki i `$` zapewniają, że wyrażenie regularne dopasowuje całą wartość parametru trasy. Bez `^` znaków i `$` wyrażenie regularne dopasowuje dowolny podciąg w ciągu, co jest często niepożądane. W poniższej tabeli przedstawiono przykłady i wyjaśniono, dlaczego są one zgodne lub nie można ich dopasować:
 
-| Wyrażenie   | String    | Dopasowanie | Komentarz               |
+| Wyrażenie   | Ciąg    | Dopasowanie | Komentarz               |
 | ------------ | --------- | :---: |  -------------------- |
-| `[a-z]{2}`   | hello     | Tak   | Dopasowania podciągów     |
-| `[a-z]{2}`   | 123abc456 | Tak   | Dopasowania podciągów     |
-| `[a-z]{2}`   | MZ        | Tak   | Wyrażenie dopasowania    |
-| `[a-z]{2}`   | MZ        | Tak   | Bez uwzględniania wielkości liter    |
+| `[a-z]{2}`   | hello     | Yes   | Dopasowania podciągów     |
+| `[a-z]{2}`   | 123abc456 | Yes   | Dopasowania podciągów     |
+| `[a-z]{2}`   | MZ        | Yes   | Wyrażenie dopasowania    |
+| `[a-z]{2}`   | MZ        | Yes   | Bez uwzględniania wielkości liter    |
 | `^[a-z]{2}$` | hello     | Nie    | Zobacz `^` i `$` powyżej |
 | `^[a-z]{2}$` | 123abc456 | Nie    | Zobacz `^` i `$` powyżej |
 
@@ -833,7 +833,7 @@ Poniższe linki zawierają informacje dotyczące konfigurowania metadanych punkt
 * [Testowanie uwierzytelniania przy użyciu atrybutu [autoryzuje]](xref:security/authentication/identity#test-identity)
 * <xref:Microsoft.AspNetCore.Builder.AuthorizationEndpointConventionBuilderExtensions.RequireAuthorization*>
 * [Wybieranie schematu z atrybutem [autoryzuje]](xref:security/authorization/limitingidentitybyscheme#selecting-the-scheme-with-the-authorize-attribute)
-* [Stosowanie zasad przy użyciu atrybutu [autoryzuje]](xref:security/authorization/policies#applying-policies-to-mvc-controllers)
+* [Stosowanie zasad przy użyciu atrybutu [autoryzuje]](xref:security/authorization/policies#apply-policies-to-mvc-controllers)
 * <xref:security/authorization/roles>
 
 <a name="hostmatch"></a>
@@ -1484,12 +1484,12 @@ Na znaki ogranicznika parametru routingu ucieczki,,,, `{` `}` `[` `]` podwójne 
 
 Wyrażenia regularne używane w routingu często zaczynają się od `^` znaku karetki i dopasowują pozycję początkową ciągu. Wyrażenia często kończą się znakiem dolara `$` i pasują do końca ciągu. `^`Znaki i `$` zapewniają, że wyrażenie regularne dopasowuje całą wartość parametru trasy. Bez `^` znaków i `$` wyrażenie regularne dopasowuje dowolny podciąg w ciągu, co jest często niepożądane. W poniższej tabeli przedstawiono przykłady i wyjaśniono, dlaczego są one zgodne lub niezgodne.
 
-| Wyrażenie   | String    | Dopasowanie | Komentarz               |
+| Wyrażenie   | Ciąg    | Dopasowanie | Komentarz               |
 | ------------ | --------- | :---: |  -------------------- |
-| `[a-z]{2}`   | hello     | Tak   | Dopasowania podciągów     |
-| `[a-z]{2}`   | 123abc456 | Tak   | Dopasowania podciągów     |
-| `[a-z]{2}`   | MZ        | Tak   | Wyrażenie dopasowania    |
-| `[a-z]{2}`   | MZ        | Tak   | Bez uwzględniania wielkości liter    |
+| `[a-z]{2}`   | hello     | Yes   | Dopasowania podciągów     |
+| `[a-z]{2}`   | 123abc456 | Yes   | Dopasowania podciągów     |
+| `[a-z]{2}`   | MZ        | Yes   | Wyrażenie dopasowania    |
+| `[a-z]{2}`   | MZ        | Yes   | Bez uwzględniania wielkości liter    |
 | `^[a-z]{2}$` | hello     | Nie    | Zobacz `^` i `$` powyżej |
 | `^[a-z]{2}$` | 123abc456 | Nie    | Zobacz `^` i `$` powyżej |
 
@@ -1928,12 +1928,12 @@ Wyrażenia regularne używają ograniczników i tokenów podobnie jak w przypadk
 
 Wyrażenia regularne używane w routingu często zaczynają się od znaku daszka ( `^` ) i dopasowują pozycję początkową ciągu. Wyrażenia często kończą się znakiem dolara ( `$` ) i końcem ciągu. `^`Znaki i `$` zapewniają, że wyrażenie regularne dopasowuje całą wartość parametru trasy. Bez `^` znaków i `$` wyrażenie regularne dopasowuje dowolny podciąg w ciągu, co jest często niepożądane. W poniższej tabeli przedstawiono przykłady i wyjaśniono, dlaczego są one zgodne lub niezgodne.
 
-| Wyrażenie   | String    | Dopasowanie | Komentarz               |
+| Wyrażenie   | Ciąg    | Dopasowanie | Komentarz               |
 | ------------ | --------- | :---: |  -------------------- |
-| `[a-z]{2}`   | hello     | Tak   | Dopasowania podciągów     |
-| `[a-z]{2}`   | 123abc456 | Tak   | Dopasowania podciągów     |
-| `[a-z]{2}`   | MZ        | Tak   | Wyrażenie dopasowania    |
-| `[a-z]{2}`   | MZ        | Tak   | Bez uwzględniania wielkości liter    |
+| `[a-z]{2}`   | hello     | Yes   | Dopasowania podciągów     |
+| `[a-z]{2}`   | 123abc456 | Yes   | Dopasowania podciągów     |
+| `[a-z]{2}`   | MZ        | Yes   | Wyrażenie dopasowania    |
+| `[a-z]{2}`   | MZ        | Yes   | Bez uwzględniania wielkości liter    |
 | `^[a-z]{2}$` | hello     | Nie    | Zobacz `^` i `$` powyżej |
 | `^[a-z]{2}$` | 123abc456 | Nie    | Zobacz `^` i `$` powyżej |
 

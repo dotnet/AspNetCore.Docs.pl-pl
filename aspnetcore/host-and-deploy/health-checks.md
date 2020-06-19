@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/health-checks
-ms.openlocfilehash: cb3ee4f3bf9061d212c1fee85f3f4a22946be097
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 00b2697a6b916718d9d0e01d1ea9f922eb2b5706
+ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84105782"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85074435"
 ---
 # <a name="health-checks-in-aspnet-core"></a>Kontrole kondycji w ASP.NET Core
 
@@ -46,7 +46,7 @@ Pakiet [Microsoft. AspNetCore. Diagnostics. HealthChecks](https://www.nuget.org/
 
 Przykładowa aplikacja zawiera kod uruchamiania, aby zademonstrować Sprawdzanie kondycji kilku scenariuszy. Scenariusz [sondowania bazy danych](#database-probe) sprawdza kondycję połączenia z bazą danych przy użyciu [AspNetCore. Diagnostics. HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks). Scenariusz [sondowania DbContext](#entity-framework-core-dbcontext-probe) sprawdza bazę danych przy użyciu EF Core `DbContext` . Aby poznać scenariusze baz danych, przykładową aplikację:
 
-* Tworzy bazę danych i udostępnia jej parametry połączenia w pliku *appSettings. JSON* .
+* Tworzy bazę danych i udostępnia jej parametry połączenia w *appsettings.js* pliku.
 * W pliku projektu znajdują się następujące odwołania do pakietów:
   * [AspNetCore. HealthChecks. SqlServer](https://www.nuget.org/packages/AspNetCore.HealthChecks.SqlServer/)
   * [Microsoft. Extensions. Diagnostics. HealthChecks. EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore/)
@@ -54,7 +54,7 @@ Przykładowa aplikacja zawiera kod uruchamiania, aby zademonstrować Sprawdzanie
 > [!NOTE]
 > [AspNetCore. Diagnostics. HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) nie jest obsługiwana przez firmę Microsoft lub nie są przez nią obsługiwane.
 
-W innym scenariuszu sprawdzania kondycji przedstawiono sposób filtrowania kontroli kondycji do portu zarządzania. Przykładowa aplikacja wymaga utworzenia pliku *Properties/profilu launchsettings. JSON* , który zawiera adres URL zarządzania i port zarządzania. Aby uzyskać więcej informacji, zobacz sekcję [filtrowanie według portów](#filter-by-port) .
+W innym scenariuszu sprawdzania kondycji przedstawiono sposób filtrowania kontroli kondycji do portu zarządzania. Przykładowa aplikacja wymaga utworzenia *Właściwości/launchSettings.jsw* pliku, który zawiera adres URL zarządzania i port zarządzania. Aby uzyskać więcej informacji, zobacz sekcję [filtrowanie według portów](#filter-by-port) .
 
 ## <a name="basic-health-probe"></a>Podstawowa sonda kondycji
 
@@ -324,7 +324,7 @@ Pierwszy przykład z przykładowej aplikacji pokazuje, jak używać <xref:System
 
 [!code-csharp[](health-checks/samples/3.x/HealthChecksSample/CustomWriterStartup.cs?name=snippet_WriteResponse_SystemTextJson)]
 
-Drugi przykład ilustruje sposób użycia [Newtonsoft. JSON](https://www.nuget.org/packages/Newtonsoft.Json/):
+Drugi przykład ilustruje sposób użycia [Newtonsoft.Jsw](https://www.nuget.org/packages/Newtonsoft.Json/):
 
 [!code-csharp[](health-checks/samples/3.x/HealthChecksSample/CustomWriterStartup.cs?name=snippet_WriteResponse_NewtonSoftJson)]
 
@@ -343,7 +343,7 @@ Przykładowa aplikacja używa [AspNetCore. Diagnostics. HealthChecks](https://gi
 
 Dołącz odwołanie do pakietu do [AspNetCore. HealthChecks. SqlServer](https://www.nuget.org/packages/AspNetCore.HealthChecks.SqlServer/).
 
-Podaj prawidłowe parametry połączenia z bazą danych w pliku *appSettings. JSON* przykładowej aplikacji. Aplikacja używa SQL Server bazy danych o nazwie `HealthCheckSample` :
+Podaj prawidłowe parametry połączenia z bazą danych w *appsettings.jsw* pliku przykładowej aplikacji. Aplikacja używa SQL Server bazy danych o nazwie `HealthCheckSample` :
 
 [!code-json[](health-checks/samples/3.x/HealthChecksSample/appsettings.json?highlight=3)]
 
@@ -560,11 +560,11 @@ dotnet run --scenario writer
 
 Zadzwoń do `RequireHost` `MapHealthChecks` wzorca adresu URL, który określa port, aby ograniczyć żądania sprawdzania kondycji do określonego portu. Jest to zwykle używane w środowisku kontenera w celu udostępnienia portu usług monitorowania.
 
-Przykładowa aplikacja konfiguruje port przy użyciu [zmiennej środowiskowej dostawcy konfiguracji](xref:fundamentals/configuration/index#environment-variables-configuration-provider). Port jest ustawiany w pliku *profilu launchsettings. JSON* i przekazywać do dostawcy konfiguracji za pośrednictwem zmiennej środowiskowej. Należy również skonfigurować serwer do nasłuchiwania żądań na porcie zarządzania.
+Przykładowa aplikacja konfiguruje port przy użyciu [zmiennej środowiskowej dostawcy konfiguracji](xref:fundamentals/configuration/index#environment-variables). Port jest ustawiany w *launchSettings.jsw* pliku i przeszedł do dostawcy konfiguracji za pośrednictwem zmiennej środowiskowej. Należy również skonfigurować serwer do nasłuchiwania żądań na porcie zarządzania.
 
-Aby użyć przykładowej aplikacji do zademonstrowania konfiguracji portów zarządzania, Utwórz plik *profilu launchsettings. JSON* w folderze *Właściwości* .
+Aby użyć przykładowej aplikacji do zademonstrowania konfiguracji portów zarządzania, Utwórz *launchSettings.jsw* pliku w folderze *Właściwości* .
 
-Następujące *właściwości/profilu launchsettings. JSON* w przykładowej aplikacji nie znajdują się w plikach projektu przykładowej aplikacji i muszą zostać utworzone ręcznie:
+Następujące *Właściwości/launchSettings.jsw* pliku w przykładowej aplikacji nie są uwzględnione w plikach projektu przykładowej aplikacji i muszą zostać utworzone ręcznie:
 
 ```json
 {
@@ -614,7 +614,7 @@ app.UseEndpoints(endpoints =>
 ```
 
 > [!NOTE]
-> Można uniknąć tworzenia pliku *profilu launchsettings. JSON* w przykładowej aplikacji przez ustawienie portu zarządzania jawnie w kodzie. W *program.cs* , gdzie <xref:Microsoft.Extensions.Hosting.HostBuilder> został utworzony, Dodaj wywołanie do <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenAnyIP*> i Podaj punkt końcowy portu zarządzania aplikacji. W `Configure` programie *ManagementPortStartup.cs*określ port zarządzania przy użyciu `RequireHost` :
+> Można uniknąć tworzenia *launchSettings.jsw* pliku w przykładowej aplikacji przez ustawienie portu zarządzania jawnie w kodzie. W *program.cs* , gdzie <xref:Microsoft.Extensions.Hosting.HostBuilder> został utworzony, Dodaj wywołanie do <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenAnyIP*> i Podaj punkt końcowy portu zarządzania aplikacji. W `Configure` programie *ManagementPortStartup.cs*określ port zarządzania przy użyciu `RequireHost` :
 >
 > *Program.cs*:
 >
@@ -789,7 +789,7 @@ app.UseEndpoints(endpoints =>
 });
 ```
 
-Aby uzyskać więcej informacji, zobacz <xref:fundamentals/middleware/index#use-run-and-map>.
+Aby uzyskać więcej informacji, zobacz <xref:fundamentals/middleware/index#branch-the-middleware-pipeline>.
 
 ::: moniker-end
 
@@ -815,7 +815,7 @@ Odwołującego się do pakietu [Microsoft. AspNetCore. app](xref:fundamentals/me
 
 Przykładowa aplikacja zawiera kod uruchamiania, aby zademonstrować Sprawdzanie kondycji kilku scenariuszy. Scenariusz [sondowania bazy danych](#database-probe) sprawdza kondycję połączenia z bazą danych przy użyciu [AspNetCore. Diagnostics. HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks). Scenariusz [sondowania DbContext](#entity-framework-core-dbcontext-probe) sprawdza bazę danych przy użyciu EF Core `DbContext` . Aby poznać scenariusze baz danych, przykładową aplikację:
 
-* Tworzy bazę danych i udostępnia jej parametry połączenia w pliku *appSettings. JSON* .
+* Tworzy bazę danych i udostępnia jej parametry połączenia w *appsettings.js* pliku.
 * W pliku projektu znajdują się następujące odwołania do pakietów:
   * [AspNetCore. HealthChecks. SqlServer](https://www.nuget.org/packages/AspNetCore.HealthChecks.SqlServer/)
   * [Microsoft. Extensions. Diagnostics. HealthChecks. EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore/)
@@ -823,7 +823,7 @@ Przykładowa aplikacja zawiera kod uruchamiania, aby zademonstrować Sprawdzanie
 > [!NOTE]
 > [AspNetCore. Diagnostics. HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) nie jest obsługiwana przez firmę Microsoft lub nie są przez nią obsługiwane.
 
-W innym scenariuszu sprawdzania kondycji przedstawiono sposób filtrowania kontroli kondycji do portu zarządzania. Przykładowa aplikacja wymaga utworzenia pliku *Properties/profilu launchsettings. JSON* , który zawiera adres URL zarządzania i port zarządzania. Aby uzyskać więcej informacji, zobacz sekcję [filtrowanie według portów](#filter-by-port) .
+W innym scenariuszu sprawdzania kondycji przedstawiono sposób filtrowania kontroli kondycji do portu zarządzania. Przykładowa aplikacja wymaga utworzenia *Właściwości/launchSettings.jsw* pliku, który zawiera adres URL zarządzania i port zarządzania. Aby uzyskać więcej informacji, zobacz sekcję [filtrowanie według portów](#filter-by-port) .
 
 ## <a name="basic-health-probe"></a>Podstawowa sonda kondycji
 
@@ -1062,7 +1062,7 @@ Przykładowa aplikacja używa [AspNetCore. Diagnostics. HealthChecks](https://gi
 
 Dołącz odwołanie do pakietu do [AspNetCore. HealthChecks. SqlServer](https://www.nuget.org/packages/AspNetCore.HealthChecks.SqlServer/).
 
-Podaj prawidłowe parametry połączenia z bazą danych w pliku *appSettings. JSON* przykładowej aplikacji. Aplikacja używa SQL Server bazy danych o nazwie `HealthCheckSample` :
+Podaj prawidłowe parametry połączenia z bazą danych w *appsettings.jsw* pliku przykładowej aplikacji. Aplikacja używa SQL Server bazy danych o nazwie `HealthCheckSample` :
 
 [!code-json[](health-checks/samples/2.x/HealthChecksSample/appsettings.json?highlight=3)]
 
@@ -1265,11 +1265,11 @@ dotnet run --scenario writer
 
 Wywołanie <xref:Microsoft.AspNetCore.Builder.HealthCheckApplicationBuilderExtensions.UseHealthChecks*> z portem ogranicza liczbę żądań sprawdzania kondycji do określonego portu. Jest to zwykle używane w środowisku kontenera w celu udostępnienia portu usług monitorowania.
 
-Przykładowa aplikacja konfiguruje port przy użyciu [zmiennej środowiskowej dostawcy konfiguracji](xref:fundamentals/configuration/index#environment-variables-configuration-provider). Port jest ustawiany w pliku *profilu launchsettings. JSON* i przekazywać do dostawcy konfiguracji za pośrednictwem zmiennej środowiskowej. Należy również skonfigurować serwer do nasłuchiwania żądań na porcie zarządzania.
+Przykładowa aplikacja konfiguruje port przy użyciu [zmiennej środowiskowej dostawcy konfiguracji](xref:fundamentals/configuration/index#environment-variables-configuration-provider). Port jest ustawiany w *launchSettings.jsw* pliku i przeszedł do dostawcy konfiguracji za pośrednictwem zmiennej środowiskowej. Należy również skonfigurować serwer do nasłuchiwania żądań na porcie zarządzania.
 
-Aby użyć przykładowej aplikacji do zademonstrowania konfiguracji portów zarządzania, Utwórz plik *profilu launchsettings. JSON* w folderze *Właściwości* .
+Aby użyć przykładowej aplikacji do zademonstrowania konfiguracji portów zarządzania, Utwórz *launchSettings.jsw* pliku w folderze *Właściwości* .
 
-Następujące *właściwości/profilu launchsettings. JSON* w przykładowej aplikacji nie znajdują się w plikach projektu przykładowej aplikacji i muszą zostać utworzone ręcznie:
+Następujące *Właściwości/launchSettings.jsw* pliku w przykładowej aplikacji nie są uwzględnione w plikach projektu przykładowej aplikacji i muszą zostać utworzone ręcznie:
 
 ```json
 {
@@ -1294,7 +1294,7 @@ Zarejestruj usługi sprawdzania kondycji <xref:Microsoft.Extensions.DependencyIn
 [!code-csharp[](health-checks/samples/2.x/HealthChecksSample/ManagementPortStartup.cs?name=snippet1&highlight=17)]
 
 > [!NOTE]
-> Możesz uniknąć tworzenia pliku *profilu launchsettings. JSON* w przykładowej aplikacji, ustawiając adresy URL i port zarządzania jawnie w kodzie. W *program.cs* , w którym <xref:Microsoft.AspNetCore.Hosting.WebHostBuilder> został utworzony, Dodaj wywołanie do <xref:Microsoft.AspNetCore.Hosting.HostingAbstractionsWebHostBuilderExtensions.UseUrls*> i podaj normalny punkt końcowy odpowiedzi aplikacji oraz punkt końcowy portu zarządzania. W *ManagementPortStartup.cs* <xref:Microsoft.AspNetCore.Builder.HealthCheckApplicationBuilderExtensions.UseHealthChecks*> , gdzie jest wywoływana, określ port zarządzania jawnie.
+> Możesz uniknąć tworzenia *launchSettings.jsw* pliku w przykładowej aplikacji, ustawiając adresy URL i port zarządzania jawnie w kodzie. W *program.cs* , w którym <xref:Microsoft.AspNetCore.Hosting.WebHostBuilder> został utworzony, Dodaj wywołanie do <xref:Microsoft.AspNetCore.Hosting.HostingAbstractionsWebHostBuilderExtensions.UseUrls*> i podaj normalny punkt końcowy odpowiedzi aplikacji oraz punkt końcowy portu zarządzania. W *ManagementPortStartup.cs* <xref:Microsoft.AspNetCore.Builder.HealthCheckApplicationBuilderExtensions.UseHealthChecks*> , gdzie jest wywoływana, określ port zarządzania jawnie.
 >
 > *Program.cs*:
 >

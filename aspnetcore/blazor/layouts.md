@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/layouts
-ms.openlocfilehash: ba172282d0cd6371ebc94b4fda1c13aee14d6fbd
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: fe35645aafe29838818dcaaf7c2b42ed428ac6cc
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "83851995"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102253"
 ---
 # <a name="aspnet-core-blazor-layouts"></a>ASP.NET Core Blazor układy
 
@@ -26,7 +26,7 @@ Autorzy [Rainer Stropek](https://www.timecockpit.com) i [Luke Latham](https://gi
 
 Niektóre elementy aplikacji, takie jak menu, wiadomości o prawach autorskich i logo firmy, są zwykle częścią ogólnego układu aplikacji i są używane przez każdy składnik w aplikacji. Kopiowanie kodu tych elementów do wszystkich składników aplikacji nie jest efektywnym podejściem. Za każdym razem, gdy jeden z elementów wymaga aktualizacji, należy zaktualizować każdy składnik. Taka duplikacja jest trudna do utrzymania i może prowadzić do niespójnej zawartości z upływem czasu. *Układy* rozwiązują ten problem.
 
-Technicznie, układ jest tylko innym składnikiem. Układ jest zdefiniowany w Razor szablonie lub w kodzie C# i może używać [powiązań danych](xref:blazor/data-binding), [iniekcji zależności](xref:blazor/dependency-injection)i innych scenariuszy składników.
+Technicznie, układ jest tylko innym składnikiem. Układ jest zdefiniowany w Razor szablonie lub w kodzie C# i może używać [powiązań danych](xref:blazor/components/data-binding), [iniekcji zależności](xref:blazor/fundamentals/dependency-injection)i innych scenariuszy składników.
 
 Aby przekształcić *składnik* do *układu*, składnik:
 
@@ -49,7 +49,7 @@ Aby podać domyślny układ <xref:Microsoft.AspNetCore.Components.Routing.Router
 
 [!code-razor[](layouts/sample_snapshot/3.x/App2.razor?highlight=6-9)]
 
-Aby uzyskać więcej informacji na temat <xref:Microsoft.AspNetCore.Components.Routing.Router> składnika, zobacz <xref:blazor/routing> .
+Aby uzyskać więcej informacji na temat <xref:Microsoft.AspNetCore.Components.Routing.Router> składnika, zobacz <xref:blazor/fundamentals/routing> .
 
 Określanie układu jako domyślnego układu w routerze jest przydatnym rozwiązaniem, ponieważ może być zastąpione dla poszczególnych składników lub folderów. Preferuj użycie routera do ustawienia domyślnego układu aplikacji, ponieważ jest to najbardziej ogólna technika.
 
@@ -97,7 +97,7 @@ Na koniec `MasterLayout` w *MasterLayout. Razor* zawiera elementy układu najwy�
 
 ## <a name="share-a-razor-pages-layout-with-integrated-components"></a>Udostępnianie Razor układu stron ze składnikami zintegrowanymi
 
-Gdy składniki routingu są zintegrowane Razor z aplikacją Pages, można używać współużytkowanego układu aplikacji ze składnikami. Aby uzyskać więcej informacji, zobacz <xref:blazor/integrate-components>.
+Gdy składniki routingu są zintegrowane Razor z aplikacją Pages, można używać współużytkowanego układu aplikacji ze składnikami. Aby uzyskać więcej informacji, zobacz <xref:blazor/components/integrate-components-into-razor-pages-and-mvc-apps>.
 
 ## <a name="additional-resources"></a>Zasoby dodatkowe
 

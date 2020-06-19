@@ -13,18 +13,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity/spa
-ms.openlocfilehash: 26d371161bf5f926e50cbc141ccfaac40ee96977
-ms.sourcegitcommit: ff5c47beded9264c1395beb9c905f826261f3ba3
+ms.openlocfilehash: 6d9d8cf6ca9ca3afc570c2c68510125200b96c60
+ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/16/2020
-ms.locfileid: "83440181"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85074466"
 ---
 # <a name="authentication-and-authorization-for-spas"></a>Uwierzytelnianie i autoryzacja dla aplikacji jednostronicowych
 
 ASP.NET Core 3,0 lub nowszy oferuje uwierzytelnianie w aplikacjach jednostronicowych (aplikacji jednostronicowych) przy użyciu obsługi autoryzacji interfejsu API. ASP.NET Core Identity do uwierzytelniania i przechowywania użytkowników jest połączony z [IdentityServer](https://identityserver.io/) w celu zaimplementowania programu Open ID Connect.
 
-Parametr uwierzytelniania został dodany do szablonów projektów **kątowych** i **reagowania** , które są podobne do parametrów uwierzytelniania w szablonach **aplikacji sieci Web (Model-View-Controller)** (MVC) i **aplikacji sieci Web** ( Razor strony). Dozwolone wartości parametrów to **none** i **indywidualny**. Szablon projektu **re. js i Redux** nie obsługuje teraz parametru Authentication.
+Parametr uwierzytelniania został dodany do szablonów projektów **kątowych** i **reagowania** , które są podobne do parametrów uwierzytelniania w szablonach **aplikacji sieci Web (Model-View-Controller)** (MVC) i **aplikacji sieci Web** ( Razor strony). Dozwolone wartości parametrów to **none** i **indywidualny**. Szablon projektu **React.js i Redux** nie obsługuje w tym momencie parametru Authentication.
 
 ## <a name="create-an-app-with-api-authorization-support"></a>Tworzenie aplikacji z obsługą autoryzacji interfejsu API
 
@@ -49,6 +49,8 @@ Poprzednie polecenie tworzy aplikację ASP.NET Core z katalogiem *ClientApp* zaw
 W poniższych sekcjach opisano Dodatki do projektu w przypadku włączenia obsługi uwierzytelniania:
 
 ### <a name="startup-class"></a>Klasa początkowa
+
+Poniższe przykłady kodu zależą od pakietu NuGet [Microsoft. AspNetCore. ApiAuthorization. IdentityServer](https://www.nuget.org/packages/Microsoft.AspNetCore.ApiAuthorization.IdentityServer) . Przykłady konfigurowania uwierzytelniania i autoryzacji interfejsu API przy użyciu <xref:Microsoft.Extensions.DependencyInjection.IdentityServerBuilderConfigurationExtensions.AddApiAuthorization%2A> <xref:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.ApiResourceCollection.AddIdentityServerJwt%2A> metod rozszerzenia i. Projekty używające szablonów projektów reaguje lub SPA z uwierzytelnianiem zawierają odwołanie do tego pakietu.
 
 `Startup`Klasa zawiera następujące dodatki:
 
@@ -113,9 +115,9 @@ Aby uzyskać pełną kontrolę nad schematem bazy danych, Dziedzicz z jednej z d
 
 W pliku *Controllers\OidcConfigurationController.cs* Zwróć uwagę na punkt końcowy, który jest wstępnie zainicjowany do obsługi parametrów OIDC wymaganych przez klienta.
 
-### <a name="appsettingsjson"></a>appSettings. JSON
+### <a name="appsettingsjson"></a>appsettings.jsna
 
-W pliku *appSettings. JSON* w katalogu głównym projektu znajduje się nowa `IdentityServer` sekcja opisująca listę skonfigurowanych klientów. W poniższym przykładzie istnieje pojedynczy klient. Nazwa klienta odpowiada nazwie aplikacji i jest zamapowana według Konwencji do `ClientId` parametru OAuth. Profil wskazuje konfigurowany typ aplikacji. Jest on używany wewnętrznie w przypadku Konwencji, które upraszczają proces konfiguracji serwera. Istnieje kilka dostępnych profilów, zgodnie z opisem w sekcji [Profile aplikacji](#application-profiles) .
+W *appsettings.js* w pliku katalogu głównego projektu znajduje się nowa `IdentityServer` sekcja opisująca listę skonfigurowanych klientów. W poniższym przykładzie istnieje pojedynczy klient. Nazwa klienta odpowiada nazwie aplikacji i jest zamapowana według Konwencji do `ClientId` parametru OAuth. Profil wskazuje konfigurowany typ aplikacji. Jest on używany wewnętrznie w przypadku Konwencji, które upraszczają proces konfiguracji serwera. Istnieje kilka dostępnych profilów, zgodnie z opisem w sekcji [Profile aplikacji](#application-profiles) .
 
 ```json
 "IdentityServer": {
@@ -127,9 +129,9 @@ W pliku *appSettings. JSON* w katalogu głównym projektu znajduje się nowa `Id
 }
 ```
 
-### <a name="appsettingsdevelopmentjson"></a>sekcji. Plik Development. JSON
+### <a name="appsettingsdevelopmentjson"></a>appsettings.Development.jsna
 
-W pliku *appSettings. Plik Development. JSON* w katalogu głównym projektu zawiera `IdentityServer` sekcję opisującą klucz używany do podpisywania tokenów. Podczas wdrażania w środowisku produkcyjnym należy zainicjować i wdrożyć klucz wraz z aplikacją, jak wyjaśniono w sekcji [wdrażanie w środowisku produkcyjnym](#deploy-to-production) .
+W *appsettings.Development.jsna* pliku katalogu głównego projektu znajduje się sekcja opisująca `IdentityServer` klucz używany do podpisywania tokenów. Podczas wdrażania w środowisku produkcyjnym należy zainicjować i wdrożyć klucz wraz z aplikacją, jak wyjaśniono w sekcji [wdrażanie w środowisku produkcyjnym](#deploy-to-production) .
 
 ```json
 "IdentityServer": {
@@ -159,12 +161,12 @@ Obsługa uwierzytelniania i autoryzacji interfejsu API w szablonie kątowym znaj
 Obsługa uwierzytelniania i autoryzacji interfejsu API w szablonie reagowania znajduje się w katalogu *ClientApp\src\components\api-Authorization* . Składa się z następujących elementów:
 
 * 4 składniki:
-  * *Login. js*: obsługuje przepływ logowania aplikacji.
-  * *Wyloguj. js*: obsługuje przepływ wylogowania aplikacji.
-  * *LoginMenu. js*: element widget wyświetlający jeden z następujących zestawów linków:
+  * *Login.js*: obsługuje przepływ logowania aplikacji.
+  * *Logout.js*: obsługuje przepływ wylogowania aplikacji.
+  * *LoginMenu.js*: element widget wyświetlający jeden z następujących zestawów linków:
     * Zarządzanie profilami użytkowników i wylogowywanie łączy podczas uwierzytelniania użytkownika.
     * Rejestrowanie i logowanie w przypadku braku uwierzytelnienia użytkownika.
-  * *AuthorizeRoute. js*: składnik trasy, który wymaga uwierzytelnienia użytkownika przed renderowaniem składnika wskazanego w `Component` parametrze.
+  * *AuthorizeRoute.js*: składnik trasy, który wymaga uwierzytelnienia użytkownika przed renderowaniem składnika wskazanego w `Component` parametrze.
 * Wyeksportowane `authService` wystąpienie klasy `AuthorizeService` , które obsługuje szczegóły niższego poziomu procesu uwierzytelniania i ujawnia informacje o uwierzytelnionym użytkowniku w pozostałej części aplikacji do użycia.
 
 Teraz, gdy widzisz główne składniki rozwiązania, możesz zapoznać się ze szczegółowymi scenariuszami dotyczącymi aplikacji.
@@ -191,7 +193,7 @@ services.Configure<JwtBearerOptions>(
 
 Procedura obsługi JWT interfejsu API wywołuje zdarzenia, które umożliwiają kontrolę nad procesem uwierzytelniania przy użyciu `JwtBearerEvents` . Aby zapewnić obsługę autoryzacji interfejsu API, `AddIdentityServerJwt` rejestruje własne programy obsługi zdarzeń.
 
-Aby dostosować obsługę zdarzenia, zawiń istniejący program obsługi zdarzeń z dodatkową logiką zgodnie z wymaganiami. Na przykład:
+Aby dostosować obsługę zdarzenia, zawiń istniejący program obsługi zdarzeń z dodatkową logiką zgodnie z wymaganiami. Przykład:
 
 ```csharp
 services.Configure<JwtBearerOptions>(
@@ -280,7 +282,7 @@ Aby wdrożyć aplikację w środowisku produkcyjnym, należy zainicjować nastę
 
 W tej sekcji opisano wdrażanie aplikacji do Azure App Service przy użyciu certyfikatu przechowywanego w magazynie certyfikatów. Aby zmodyfikować aplikację w celu załadowania certyfikatu z magazynu certyfikatów, podczas konfigurowania aplikacji w Azure Portal w późniejszym kroku wymagany jest plan usługi warstwy Standardowa lub lepszy.
 
-W pliku *appSettings. JSON* aplikacji zmodyfikuj `IdentityServer` sekcję, aby uwzględnić szczegóły klucza:
+W *appsettings.js* aplikacji w pliku zmodyfikuj `IdentityServer` sekcję, aby uwzględnić szczegóły klucza:
 
 ```json
 "IdentityServer": {

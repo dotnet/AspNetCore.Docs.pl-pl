@@ -11,18 +11,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/claims
-ms.openlocfilehash: de8ab915e6a8529c7401f89fad067ec33d5d0713
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 41e19896e9c43ca67aa8b1af1c6c88c9c9c20373
+ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774421"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85074489"
 ---
 # <a name="claims-based-authorization-in-aspnet-core"></a>Autoryzacja oparta na oświadczeniach w ASP.NET Core
 
 <a name="security-authorization-claims-based"></a>
 
-Po utworzeniu tożsamości może zostać przypisane jedno lub więcej oświadczeń wystawionych przez zaufaną stronę. Jest to para wartości Nazwa, która reprezentuje temat, a nie co może zrobić. Na przykład użytkownik może mieć licencję sterownika wydaną przez Urząd lokalnej licencji na kierowanie. Licencja sterownika ma swoją datę urodzenia. W takim przypadku nazwa żądania powinna być `DateOfBirth`równa dacie urodzenia, na przykład `8th June 1970` , a wystawca będzie urzędem licencjonowania. Autoryzacja oparta na oświadczeniach, w najprostszy sposób, sprawdza wartość oświadczenia i zezwala na dostęp do zasobu na podstawie tej wartości. Na przykład jeśli chcesz uzyskać dostęp do klubu nocnego, proces autoryzacji może być:
+Po utworzeniu tożsamości może zostać przypisane jedno lub więcej oświadczeń wystawionych przez zaufaną stronę. Jest to para wartości Nazwa, która reprezentuje temat, a nie co może zrobić. Na przykład użytkownik może mieć licencję sterownika wydaną przez Urząd lokalnej licencji na kierowanie. Licencja sterownika ma swoją datę urodzenia. W takim przypadku nazwa żądania powinna być równa `DateOfBirth` dacie urodzenia, na przykład, `8th June 1970` a wystawca będzie urzędem licencjonowania. Autoryzacja oparta na oświadczeniach, w najprostszy sposób, sprawdza wartość oświadczenia i zezwala na dostęp do zasobu na podstawie tej wartości. Na przykład jeśli chcesz uzyskać dostęp do klubu nocnego, proces autoryzacji może być:
 
 Specjalista ds. zabezpieczeń analizuje wartość daty wystąpienia urodzenia i czy ufa wystawcy (urząd certyfikacji kierowania) przed udzieleniem dostępu.
 
@@ -34,7 +34,7 @@ Kontrola autoryzacji oparta na oświadczeniach jest deklaratywna — deweloperzy
 
 Najprostszy typ zasad dotyczących roszczeń szuka obecności roszczeń i nie sprawdza wartości.
 
-Najpierw należy skompilować i zarejestrować zasady. Odbywa się to w ramach konfiguracji usługi autoryzacji, która zwykle `ConfigureServices()` uczestniczy w pliku *Startup.cs* .
+Najpierw należy skompilować i zarejestrować zasady. Odbywa się to w ramach konfiguracji usługi autoryzacji, która zwykle uczestniczy w `ConfigureServices()` pliku *Startup.cs* .
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -71,7 +71,7 @@ public void ConfigureServices(IServiceCollection services)
 
 W takim przypadku `EmployeeOnly` zasady sprawdzają obecność `EmployeeNumber` roszczeń w bieżącej tożsamości.
 
-Następnie należy zastosować zasady przy użyciu `Policy` właściwości w `AuthorizeAttribute` atrybucie, aby określić nazwę zasad;
+Następnie należy zastosować zasady przy użyciu `Policy` właściwości w atrybucie, `AuthorizeAttribute` Aby określić nazwę zasad;
 
 ```csharp
 [Authorize(Policy = "EmployeeOnly")]
@@ -148,7 +148,7 @@ public void ConfigureServices(IServiceCollection services)
 ::: moniker-end
 ### <a name="add-a-generic-claim-check"></a>Dodawanie ogólnego sprawdzania roszczeń
 
-Jeśli wartość oświadczenia nie jest pojedynczą wartością lub wymagana jest transformacja, użyj [RequireAssertion](/dotnet/api/microsoft.aspnetcore.authorization.authorizationpolicybuilder.requireassertion). Aby uzyskać więcej informacji, zobacz [Używanie funkcji Func do realizacji zasad](xref:security/authorization/policies#using-a-func-to-fulfill-a-policy).
+Jeśli wartość oświadczenia nie jest pojedynczą wartością lub wymagana jest transformacja, użyj [RequireAssertion](/dotnet/api/microsoft.aspnetcore.authorization.authorizationpolicybuilder.requireassertion). Aby uzyskać więcej informacji, zobacz [Używanie funkcji Func do realizacji zasad](xref:security/authorization/policies#use-a-func-to-fulfill-a-policy).
 
 ## <a name="multiple-policy-evaluation"></a>Obliczanie wielu zasad
 
@@ -169,6 +169,6 @@ public class SalaryController : Controller
 }
 ```
 
-W powyższym przykładzie Każda tożsamość, która spełnia `EmployeeOnly` zasady, może uzyskać `Payslip` dostęp do akcji, ponieważ te zasady są wymuszane na kontrolerze. Jednak w celu `UpdateSalary` wywołania akcji tożsamość musi spełniać *zarówno* `EmployeeOnly` zasady, jak i `HumanResources` zasady.
+W powyższym przykładzie Każda tożsamość, która spełnia `EmployeeOnly` zasady, może uzyskać dostęp do `Payslip` akcji, ponieważ te zasady są wymuszane na kontrolerze. Jednak w celu wywołania `UpdateSalary` akcji tożsamość musi spełniać *zarówno* `EmployeeOnly` zasady, jak i `HumanResources` zasady.
 
 Jeśli potrzebujesz bardziej skomplikowanych zasad, takich jak pobieranie daty wystąpienia urodzenia, obliczanie wieku od IT, sprawdzenie wieku wynosi 21 lub starsze, należy napisać [niestandardowe programy obsługi zasad](xref:security/authorization/policies).

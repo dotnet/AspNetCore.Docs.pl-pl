@@ -11,18 +11,18 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/razor
-ms.openlocfilehash: 53ca2a650eb6a3be0ff137953df5a546e9f0b282
-ms.sourcegitcommit: a423e8fcde4b6181a3073ed646a603ba20bfa5f9
+ms.openlocfilehash: e85c9d384361f9169035e6a3ab8770e1a96b8650
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/13/2020
-ms.locfileid: "84756135"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102725"
 ---
 # <a name="razor-syntax-reference-for-aspnet-core"></a>Razorodwołanie do składni dla ASP.NET Core
 
 Autorzy [Rick Anderson](https://twitter.com/RickAndMSFT), [Taylor Mullen](https://twitter.com/ntaylormullen)i [Dan Vicarel](https://github.com/Rabadash8820)
 
-Razorjest składnią znaczników na potrzeby osadzania kodu opartego na serwerze w stronach sieci Web. RazorSkładnia składa się z Razor znaczników, C# i HTML. Pliki zawierające Razor generalnie mają rozszerzenie *. cshtml* . Razorznajduje się również w plikach [ Razor składników](xref:blazor/components) (*. Razor*).
+Razorjest składnią znaczników na potrzeby osadzania kodu opartego na serwerze w stronach sieci Web. RazorSkładnia składa się z Razor znaczników, C# i HTML. Pliki zawierające Razor generalnie mają rozszerzenie *. cshtml* . Razorznajduje się również w plikach [ Razor składników](xref:blazor/components/index) (*. Razor*).
 
 ## <a name="rendering-html"></a>Renderowanie HTML
 
@@ -465,7 +465,7 @@ W dalszej części tego artykułu w sekcji [Badanie Razor klasy języka C# wygen
 
 *Ten scenariusz dotyczy tylko Razor składników (. Razor).*
 
-`@code`Blok umożliwia [ Razor składnikowi](xref:blazor/components) Dodawanie elementów członkowskich języka C# (pól, właściwości i metod) do składnika:
+`@code`Blok umożliwia [ Razor składnikowi](xref:blazor/components/index) Dodawanie elementów członkowskich języka C# (pól, właściwości i metod) do składnika:
 
 ```razor
 @code {
@@ -489,11 +489,11 @@ W przypadku Razor składników `@code` jest to alias [`@functions`](#functions) 
 
 ::: moniker range=">= aspnetcore-3.0"
 
-W obszarze [ Razor składniki](xref:blazor/components)Użyj `@code` , `@functions` Aby dodać elementy członkowskie języka C#.
+W obszarze [ Razor składniki](xref:blazor/components/index)Użyj `@code` , `@functions` Aby dodać elementy członkowskie języka C#.
 
 ::: moniker-end
 
-Na przykład:
+Przykład:
 
 [!code-cshtml[](razor/sample/Views/Home/Contact6.cshtml)]
 
@@ -683,7 +683,7 @@ Jeśli folder *EvenMorePages* w poprzednim przykładzie ma plik Imports z plikie
 `@page`Dyrektywa ma różne skutki w zależności od typu pliku, w którym występuje. Dyrektywa:
 
 * W pliku *. cshtml* wskazuje, że plik jest Razor stroną. Aby uzyskać więcej informacji, zobacz [trasy niestandardowe](xref:razor-pages/index#custom-routes) i <xref:razor-pages/index> .
-* Określa, że Razor składnik powinien obsługiwać żądania bezpośrednio. Aby uzyskać więcej informacji, zobacz <xref:blazor/routing>.
+* Określa, że Razor składnik powinien obsługiwać żądania bezpośrednio. Aby uzyskać więcej informacji, zobacz <xref:blazor/fundamentals/routing>.
 
 ::: moniker-end
 
@@ -707,7 +707,7 @@ Jeśli folder *EvenMorePages* w poprzednim przykładzie ma plik Imports z plikie
 
 ::: moniker range=">= aspnetcore-3.0"
 
-W [ Razor składniku składniki](xref:blazor/components), `@using` również kontroluje, które składniki znajdują się w zakresie.
+W [ Razor składniku składniki](xref:blazor/components/index), `@using` również kontroluje, które składniki znajdują się w zakresie.
 
 ::: moniker-end
 
@@ -721,19 +721,19 @@ Razoratrybuty dyrektywy są reprezentowane przez niejawne wyrażenia z zastrzeż
 
 *Ten scenariusz dotyczy tylko Razor składników (. Razor).*
 
-`@attributes`zezwala składnikowi na renderowanie niezadeklarowanych atrybutów. Aby uzyskać więcej informacji, zobacz <xref:blazor/components#attribute-splatting-and-arbitrary-parameters>.
+`@attributes`zezwala składnikowi na renderowanie niezadeklarowanych atrybutów. Aby uzyskać więcej informacji, zobacz <xref:blazor/components/index#attribute-splatting-and-arbitrary-parameters>.
 
 ### `@bind`
 
 *Ten scenariusz dotyczy tylko Razor składników (. Razor).*
 
-Powiązanie danych w składnikach jest realizowane przy użyciu `@bind` atrybutu. Aby uzyskać więcej informacji, zobacz <xref:blazor/data-binding>.
+Powiązanie danych w składnikach jest realizowane przy użyciu `@bind` atrybutu. Aby uzyskać więcej informacji, zobacz <xref:blazor/components/data-binding>.
 
 ### `@on{EVENT}`
 
 *Ten scenariusz dotyczy tylko Razor składników (. Razor).*
 
-Razorudostępnia funkcje obsługi zdarzeń dla składników programu. Aby uzyskać więcej informacji, zobacz <xref:blazor/event-handling>.
+Razorudostępnia funkcje obsługi zdarzeń dla składników programu. Aby uzyskać więcej informacji, zobacz <xref:blazor/components/event-handling>.
 
 ::: moniker-end
 
@@ -759,19 +759,19 @@ Powoduje zatrzymanie propagacji zdarzenia dla zdarzenia.
 
 *Ten scenariusz dotyczy tylko Razor składników (. Razor).*
 
-`@key`Atrybut dyrektywy powoduje, że algorytmy porównujące składniki, aby zagwarantować zachowywanie elementów lub składników na podstawie wartości klucza. Aby uzyskać więcej informacji, zobacz <xref:blazor/components#use-key-to-control-the-preservation-of-elements-and-components>.
+`@key`Atrybut dyrektywy powoduje, że algorytmy porównujące składniki, aby zagwarantować zachowywanie elementów lub składników na podstawie wartości klucza. Aby uzyskać więcej informacji, zobacz <xref:blazor/components/index#use-key-to-control-the-preservation-of-elements-and-components>.
 
 ### `@ref`
 
 *Ten scenariusz dotyczy tylko Razor składników (. Razor).*
 
-Odwołania do składników ( `@ref` ) umożliwiają odwoływanie się do wystąpienia składnika, dzięki czemu można wydać polecenia do tego wystąpienia. Aby uzyskać więcej informacji, zobacz <xref:blazor/components#capture-references-to-components>.
+Odwołania do składników ( `@ref` ) umożliwiają odwoływanie się do wystąpienia składnika, dzięki czemu można wydać polecenia do tego wystąpienia. Aby uzyskać więcej informacji, zobacz <xref:blazor/components/index#capture-references-to-components>.
 
 ### `@typeparam`
 
 *Ten scenariusz dotyczy tylko Razor składników (. Razor).*
 
-`@typeparam`Dyrektywa deklaruje parametr typu ogólnego dla wygenerowanej klasy składnika. Aby uzyskać więcej informacji, zobacz <xref:blazor/templated-components#generic-typed-components>.
+`@typeparam`Dyrektywa deklaruje parametr typu ogólnego dla wygenerowanej klasy składnika. Aby uzyskać więcej informacji, zobacz <xref:blazor/components/templated-components#generic-typed-components>.
 
 ::: moniker-end
 
@@ -1001,6 +1001,6 @@ Deweloperzy są zachęcani do dopasowania wielkości liter w nazwach plików i k
 
 Przypadek dopasowania gwarantuje, że wdrożenia znajdą swoje widoki niezależnie od systemu plików.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 [Wprowadzenie do programowania w sieci Web ASP.NET za pomocą Razor Składnia](/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c) zawiera wiele przykładów programowania z Razor składnią.

@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/linux-apache
-ms.openlocfilehash: 9f0825f65f316ee4caf67e82fe5812e3a1ae813e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 19fdd45374ee6d5489cff38798abe27b7af3da0f
+ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775911"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85074420"
 ---
 # <a name="host-aspnet-core-on-linux-with-apache"></a>Hostowanie ASP.NET Core w systemie Linux przy użyciu oprogramowania Apache
 
@@ -45,9 +45,9 @@ Skonfiguruj aplikację dla [wdrożenia zależnego od platformy](/dotnet/core/dep
 Jeśli aplikacja jest uruchamiana lokalnie i nie jest skonfigurowana do nawiązywania bezpiecznych połączeń (HTTPS), należy zastosować jedną z następujących metod:
 
 * Skonfiguruj aplikację do obsługi bezpiecznych połączeń lokalnych. Aby uzyskać więcej informacji, zobacz sekcję [Konfiguracja protokołu HTTPS](#https-configuration) .
-* Usuń `https://localhost:5001` (jeśli istnieje) z `applicationUrl` właściwości w pliku *Properties/profilu launchsettings. JSON* .
+* Usuń `https://localhost:5001` (jeśli istnieje) z `applicationUrl` Właściwości we *właściwościach/launchSettings.jsw* pliku.
 
-Uruchom [dotnet Publish](/dotnet/core/tools/dotnet-publish) ze środowiska programistycznego, aby spakować aplikację do katalogu (na przykład *bin/Release&lt;/target_framework_moniker&gt;/Publish*), które można uruchomić na serwerze:
+Uruchom [dotnet Publish](/dotnet/core/tools/dotnet-publish) ze środowiska programistycznego, aby spakować aplikację do katalogu (na przykład *bin/Release/ &lt; target_framework_moniker &gt; /Publish*), które można uruchomić na serwerze:
 
 ```dotnetcli
 dotnet publish --configuration Release
@@ -66,11 +66,13 @@ Zwrotny serwer proxy to typowa konfiguracja służąca do obsługi dynamicznych 
 
 Serwer proxy, który przekazuje żądania klientów na inny serwer zamiast zaspokajać same żądania. Zwrotny serwer proxy przesyła do stałego miejsca docelowego, zazwyczaj w imieniu dowolnych klientów. W tym przewodniku program Apache jest skonfigurowany jako zwrotny serwer proxy uruchomiony na tym samym serwerze, na którym Kestrel obsługuje aplikację ASP.NET Core.
 
-Ze względu na to, że żądania są przekazywane przez zwrotny serwer proxy, należy użyć [oprogramowania pośredniczącego "przesłane nagłówki](xref:host-and-deploy/proxy-load-balancer) " z pakietu [Microsoft. AspNetCore. HttpOverrides](https://www.nuget.org/packages/Microsoft.AspNetCore.HttpOverrides/) . Oprogramowanie pośredniczące aktualizuje `Request.Scheme`, używając `X-Forwarded-Proto` nagłówka, tak aby identyfikatory URI przekierowania i inne zasady zabezpieczeń działały prawidłowo.
+Ze względu na to, że żądania są przekazywane przez zwrotny serwer proxy, należy użyć [oprogramowania pośredniczącego "przesłane nagłówki](xref:host-and-deploy/proxy-load-balancer) " z pakietu [Microsoft. AspNetCore. HttpOverrides](https://www.nuget.org/packages/Microsoft.AspNetCore.HttpOverrides/) . Oprogramowanie pośredniczące aktualizuje `Request.Scheme` , używając `X-Forwarded-Proto` nagłówka, tak aby identyfikatory URI przekierowania i inne zasady zabezpieczeń działały prawidłowo.
 
-Wszelkie składniki, które są zależne od schematu, takie jak uwierzytelnianie, generowanie linków, przekierowania i geolokalizacja, muszą być umieszczone po wywołaniu bezpośrednich nagłówków. Zgodnie z ogólną zasadą przekazane nagłówki oprogramowania pośredniczącego powinny zostać uruchomione przed innymi oprogramowania pośredniczącego, z wyjątkiem diagnostyki i błędów obsługi oprogramowania pośredniczącego. Takie porządkowanie zapewnia, że oprogramowanie pośredniczące polegające na informacjach o przekazanych nagłówkach może zużywać wartości nagłówka do przetworzenia.
+Wszelkie składniki, które są zależne od schematu, takie jak uwierzytelnianie, generowanie linków, przekierowania i geolokalizacja, muszą być umieszczone po wywołaniu bezpośrednich nagłówków.
 
-Wywołaj <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersExtensions.UseForwardedHeaders*> metodę w górnej części `Startup.Configure` przed wywołaniem innego oprogramowania pośredniczącego. Skonfiguruj oprogramowanie pośredniczące do przesyłania dalej `X-Forwarded-For` nagłówków `X-Forwarded-Proto` i:
+[!INCLUDE[](~/includes/ForwardedHeaders.md)]
+
+Wywołaj <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersExtensions.UseForwardedHeaders*> metodę w górnej części `Startup.Configure` przed wywołaniem innego oprogramowania pośredniczącego. Skonfiguruj oprogramowanie pośredniczące do przesyłania dalej `X-Forwarded-For` `X-Forwarded-Proto` nagłówków i:
 
 ```csharp
 // using Microsoft.AspNetCore.HttpOverrides;
@@ -83,9 +85,9 @@ app.UseForwardedHeaders(new ForwardedHeadersOptions
 app.UseAuthentication();
 ```
 
-Jeśli wartość <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions> nie jest określona dla oprogramowania pośredniczącego, domyślne nagłówki są `None`do przodu.
+Jeśli wartość nie <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions> jest określona dla oprogramowania pośredniczącego, domyślne nagłówki są do przodu `None` .
 
-Serwery proxy uruchomione na adresach sprzężenia zwrotnego (127.0.0.0/8, [:: 1]), w tym standardowy adres localhost (127.0.0.1), są domyślnie zaufane. Jeśli inne zaufane serwery proxy lub sieci w organizacji obsługują żądania między Internetem a serwerem sieci Web, należy dodać je do listy <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.KnownProxies*> lub <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.KnownNetworks*> z. <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions> Poniższy przykład dodaje zaufany serwer proxy pod adresem IP 10.0.0.100 do przesyłanych nagłówków pośredniczących `KnownProxies` w programie: `Startup.ConfigureServices`
+Serwery proxy uruchomione na adresach sprzężenia zwrotnego (127.0.0.0/8, [:: 1]), w tym standardowy adres localhost (127.0.0.1), są domyślnie zaufane. Jeśli inne zaufane serwery proxy lub sieci w organizacji obsługują żądania między Internetem a serwerem sieci Web, należy dodać je do listy <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.KnownProxies*> lub <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.KnownNetworks*> z <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions> . Poniższy przykład dodaje zaufany serwer proxy pod adresem IP 10.0.0.100 do przesyłanych nagłówków pośredniczących `KnownProxies` w programie `Startup.ConfigureServices` :
 
 ```csharp
 // using System.Net;
@@ -106,7 +108,7 @@ Aktualizowanie pakietów CentOS do najnowszych stabilnych wersji:
 sudo yum update -y
 ```
 
-Zainstaluj serwer Apache Web Server w systemie CentOS za pomocą `yum` jednego polecenia:
+Zainstaluj serwer Apache Web Server w systemie CentOS za pomocą jednego `yum` polecenia:
 
 ```bash
 sudo yum -y install httpd mod_ssl
@@ -131,11 +133,11 @@ Complete!
 ```
 
 > [!NOTE]
-> W tym przykładzie dane wyjściowe odzwierciedlają http. 86_64, ponieważ wersja CentOS 7 jest 64 bit. Aby sprawdzić, gdzie jest zainstalowany program Apache `whereis httpd` , uruchom polecenie w wierszu polecenia.
+> W tym przykładzie dane wyjściowe odzwierciedlają http. 86_64, ponieważ wersja CentOS 7 jest 64 bit. Aby sprawdzić, gdzie jest zainstalowany program Apache, uruchom `whereis httpd` polecenie w wierszu polecenia.
 
 ### <a name="configure-apache"></a>Konfiguruj Apache
 
-Pliki konfiguracji dla oprogramowania Apache znajdują się `/etc/httpd/conf.d/` w katalogu. Każdy plik z rozszerzeniem *. conf* jest przetwarzany w kolejności alfabetycznej oprócz plików konfiguracji modułu w programie `/etc/httpd/conf.modules.d/`, które zawierają pliki konfiguracyjne niezbędne do załadowania modułów.
+Pliki konfiguracji dla oprogramowania Apache znajdują się w `/etc/httpd/conf.d/` katalogu. Każdy plik z rozszerzeniem *. conf* jest przetwarzany w kolejności alfabetycznej oprócz plików konfiguracji modułu w programie `/etc/httpd/conf.modules.d/` , które zawierają pliki konfiguracyjne niezbędne do załadowania modułów.
 
 Utwórz plik konfiguracji o nazwie *helloapp. conf*dla aplikacji:
 
@@ -155,14 +157,14 @@ Utwórz plik konfiguracji o nazwie *helloapp. conf*dla aplikacji:
 </VirtualHost>
 ```
 
-`VirtualHost` Blok może występować wiele razy, w co najmniej jednym pliku na serwerze. W poprzednim pliku konfiguracyjnym Apache akceptuje ruch publiczny na porcie 80. Domena `www.example.com` jest obsługiwana, a `*.example.com` alias jest rozpoznawany jako ta sama witryna sieci Web. Aby uzyskać więcej informacji, zobacz [Obsługa hosta wirtualnego opartego na nazwach](https://httpd.apache.org/docs/current/vhosts/name-based.html) . Żądania są przekazywane w katalogu głównym do portu 5000 serwera o wartości 127.0.0.1. W przypadku komunikacji dwukierunkowej `ProxyPass` i `ProxyPassReverse` są wymagane. Aby zmienić adres IP/port Kestrel, zobacz [Kestrel: Konfiguracja punktu końcowego](xref:fundamentals/servers/kestrel#endpoint-configuration).
+`VirtualHost`Blok może występować wiele razy, w co najmniej jednym pliku na serwerze. W poprzednim pliku konfiguracyjnym Apache akceptuje ruch publiczny na porcie 80. Domena `www.example.com` jest obsługiwana, a `*.example.com` alias jest rozpoznawany jako ta sama witryna sieci Web. Aby uzyskać więcej informacji, zobacz [Obsługa hosta wirtualnego opartego na nazwach](https://httpd.apache.org/docs/current/vhosts/name-based.html) . Żądania są przekazywane w katalogu głównym do portu 5000 serwera o wartości 127.0.0.1. W przypadku komunikacji dwukierunkowej `ProxyPass` i `ProxyPassReverse` są wymagane. Aby zmienić adres IP/port Kestrel, zobacz [Kestrel: Konfiguracja punktu końcowego](xref:fundamentals/servers/kestrel#endpoint-configuration).
 
 > [!WARNING]
-> Niepowodzenie określenia odpowiedniej [dyrektywy ServerName](https://httpd.apache.org/docs/current/mod/core.html#servername) w bloku **VirtualHost** uwidacznia aplikację pod kątem luk w zabezpieczeniach. Powiązanie symboli wieloznacznych z poddomeną (na przykład `*.example.com`) nie ma znaczenia dla tego zagrożenia bezpieczeństwa, jeśli kontrolujesz całą domenę `*.com`nadrzędną (w przeciwieństwie do, który jest narażony). Aby uzyskać więcej informacji, zobacz [sekcję rfc7230-5,4](https://tools.ietf.org/html/rfc7230#section-5.4) .
+> Niepowodzenie określenia odpowiedniej [dyrektywy ServerName](https://httpd.apache.org/docs/current/mod/core.html#servername) w bloku **VirtualHost** uwidacznia aplikację pod kątem luk w zabezpieczeniach. Powiązanie symboli wieloznacznych z poddomeną (na przykład `*.example.com` ) nie ma znaczenia dla tego zagrożenia bezpieczeństwa, jeśli kontrolujesz całą domenę nadrzędną (w przeciwieństwie do `*.com` , który jest narażony). Aby uzyskać więcej informacji, zobacz [sekcję rfc7230-5,4](https://tools.ietf.org/html/rfc7230#section-5.4) .
 
 Rejestrowanie można skonfigurować za `VirtualHost` pomocą `ErrorLog` dyrektyw i `CustomLog` . `ErrorLog`jest lokalizacją, w której serwer rejestruje błędy i `CustomLog` ustawia nazwę pliku dziennika oraz jego format. W tym przypadku jest to miejsce, w którym rejestrowane są informacje o żądaniu. Jeden wiersz dla każdego żądania.
 
-Zapisz plik i przetestuj konfigurację. Jeśli wszystko kończy się, odpowiedź powinna być `Syntax [OK]`.
+Zapisz plik i przetestuj konfigurację. Jeśli wszystko kończy się, odpowiedź powinna być `Syntax [OK]` .
 
 ```bash
 sudo service httpd configtest
@@ -177,7 +179,7 @@ sudo systemctl enable httpd
 
 ## <a name="monitor-the-app"></a>Monitorowanie aplikacji
 
-Program Apache jest teraz skonfigurowany do przesyłania dalej żądań `http://localhost:80` wysyłanych do aplikacji ASP.NET Core działającej w `http://127.0.0.1:5000`usłudze Kestrel pod adresem. Program Apache nie jest jednak skonfigurowany do zarządzania procesem Kestrel. Użyj *systemu* i Utwórz plik usługi, aby uruchomić i monitorować podstawową aplikację sieci Web. *system* to system inicjujący, który udostępnia wiele zaawansowanych funkcji uruchamiania, zatrzymywania i zarządzania procesami.
+Program Apache jest teraz skonfigurowany do przesyłania dalej żądań wysyłanych do `http://localhost:80` aplikacji ASP.NET Core działającej w usłudze Kestrel pod adresem `http://127.0.0.1:5000` . Program Apache nie jest jednak skonfigurowany do zarządzania procesem Kestrel. Użyj *systemu* i Utwórz plik usługi, aby uruchomić i monitorować podstawową aplikację sieci Web. *system* to system inicjujący, który udostępnia wiele zaawansowanych funkcji uruchamiania, zatrzymywania i zarządzania procesami.
 
 ### <a name="create-the-service-file"></a>Utwórz plik usługi
 
@@ -208,9 +210,9 @@ Environment=ASPNETCORE_ENVIRONMENT=Production
 WantedBy=multi-user.target
 ```
 
-W poprzednim przykładzie użytkownik zarządzający usługą jest określony przez `User` opcję. Użytkownik (`apache`) musi istnieć i mieć właściwy własność plików aplikacji.
+W poprzednim przykładzie użytkownik zarządzający usługą jest określony przez `User` opcję. Użytkownik ( `apache` ) musi istnieć i mieć właściwy własność plików aplikacji.
 
-Użyj `TimeoutStopSec` , aby skonfigurować czas oczekiwania na wyłączenie aplikacji po odebraniu początkowego sygnału przerwania. Jeśli aplikacja nie zostanie zamknięta w tym okresie, SIGKILL jest wystawiony, aby zakończyć działanie aplikacji. Podaj wartość jako bezjednostkowe sekundy (na przykład `150`), wartość przedziału czasu (na przykład `2min 30s`) lub `infinity` aby wyłączyć limit czasu. `TimeoutStopSec`wartością `DefaultTimeoutStopSec` domyślną jest wartość w pliku konfiguracji Menedżera (*systemd-system. conf*, *System. conf. d*, *systemed-User. conf*, *User. conf. d*). Domyślny limit czasu dla większości dystrybucji wynosi 90 sekund.
+Użyj `TimeoutStopSec` , aby skonfigurować czas oczekiwania na wyłączenie aplikacji po odebraniu początkowego sygnału przerwania. Jeśli aplikacja nie zostanie zamknięta w tym okresie, SIGKILL jest wystawiony, aby zakończyć działanie aplikacji. Podaj wartość jako bezjednostkowe sekundy (na przykład `150` ), wartość przedziału czasu (na przykład `2min 30s` ) lub `infinity` Aby wyłączyć limit czasu. `TimeoutStopSec`Wartością domyślną jest wartość `DefaultTimeoutStopSec` w pliku konfiguracji Menedżera (*systemd-system. conf*, *System. conf. d*, *systemed-User. conf*, *User. conf. d*). Domyślny limit czasu dla większości dystrybucji wynosi 90 sekund.
 
 ```
 # The default value is 90 seconds for most distributions.
@@ -223,7 +225,16 @@ Niektóre wartości (na przykład parametry połączenia SQL) muszą zostać zmi
 systemd-escape "<value-to-escape>"
 ```
 
-Separatory`:`dwukropek () nie są obsługiwane w nazwach zmiennych środowiskowych. Użyj podwójnego podkreślenia (`__`) zamiast dwukropka. [Dostawca konfiguracji zmiennych środowiskowych](xref:fundamentals/configuration/index#environment-variables-configuration-provider) konwertuje podwójne podkreślenie na dwukropek, gdy zmienne środowiskowe są odczytywane w konfiguracji. W poniższym przykładzie klucz `ConnectionStrings:DefaultConnection` parametrów połączenia jest ustawiany na plik definicji usługi jako: `ConnectionStrings__DefaultConnection`
+::: moniker range=">= aspnetcore-3.0"
+
+Separatory dwukropek ( `:` ) nie są obsługiwane w nazwach zmiennych środowiskowych. Użyj podwójnego podkreślenia ( `__` ) zamiast dwukropka. [Dostawca konfiguracji zmiennych środowiskowych](xref:fundamentals/configuration/index#environment-variables-configuration-provider) konwertuje podwójne podkreślenie na dwukropek, gdy zmienne środowiskowe są odczytywane w konfiguracji. W poniższym przykładzie klucz parametrów połączenia `ConnectionStrings:DefaultConnection` jest ustawiany na plik definicji usługi jako `ConnectionStrings__DefaultConnection` :
+
+::: moniker-end
+::: moniker range="< aspnetcore-3.0"
+
+Separatory dwukropek ( `:` ) nie są obsługiwane w nazwach zmiennych środowiskowych. Użyj podwójnego podkreślenia ( `__` ) zamiast dwukropka. [Dostawca konfiguracji zmiennych środowiskowych](xref:fundamentals/configuration/index#environment-variables) konwertuje podwójne podkreślenie na dwukropek, gdy zmienne środowiskowe są odczytywane w konfiguracji. W poniższym przykładzie klucz parametrów połączenia `ConnectionStrings:DefaultConnection` jest ustawiany na plik definicji usługi jako `ConnectionStrings__DefaultConnection` :
+
+::: moniker-end
 
 ```
 Environment=ConnectionStrings__DefaultConnection={Connection String}
@@ -249,7 +260,7 @@ Main PID: 9021 (dotnet)
             └─9021 /usr/local/bin/dotnet /var/www/helloapp/helloapp.dll
 ```
 
-Gdy zwrotny serwer proxy został skonfigurowany i Kestrel zarządzany za pomocą *systemu*, aplikacja sieci Web jest w pełni skonfigurowana i można uzyskać do niej dostęp z przeglądarki na `http://localhost`komputerze lokalnym pod adresem. Sprawdzanie nagłówków odpowiedzi, nagłówek **serwera** wskazuje, że aplikacja ASP.NET Core jest obsługiwana przez Kestrel:
+Gdy zwrotny serwer proxy został skonfigurowany i Kestrel zarządzany za pomocą *systemu*, aplikacja sieci Web jest w pełni skonfigurowana i można uzyskać do niej dostęp z przeglądarki na komputerze lokalnym pod adresem `http://localhost` . Sprawdzanie nagłówków odpowiedzi, nagłówek **serwera** wskazuje, że aplikacja ASP.NET Core jest obsługiwana przez Kestrel:
 
 ```
 HTTP/1.1 200 OK
@@ -262,13 +273,13 @@ Transfer-Encoding: chunked
 
 ### <a name="view-logs"></a>Wyświetlanie dzienników
 
-Ponieważ aplikacja sieci Web używająca Kestrel jest zarządzana przy użyciu *systemu*, zdarzenia i procesy są rejestrowane w scentralizowanym dzienniku. Ten dziennik zawiera jednak wpisy dla wszystkich usług i procesów zarządzanych przez *system*. Aby wyświetlić `kestrel-helloapp.service`konkretne elementy, użyj następującego polecenia:
+Ponieważ aplikacja sieci Web używająca Kestrel jest zarządzana przy użyciu *systemu*, zdarzenia i procesy są rejestrowane w scentralizowanym dzienniku. Ten dziennik zawiera jednak wpisy dla wszystkich usług i procesów zarządzanych przez *system*. Aby wyświetlić `kestrel-helloapp.service` konkretne elementy, użyj następującego polecenia:
 
 ```bash
 sudo journalctl -fu kestrel-helloapp.service
 ```
 
-W przypadku filtrowania czasu określ opcje czasu za pomocą polecenia. Na przykład użyj `--since today` , aby odfiltrować bieżący dzień lub `--until 1 hour ago` zobaczyć poprzednią godzinę. Aby uzyskać więcej informacji, zobacz [stronę Man for journalctl](https://www.unix.com/man-page/centos/1/journalctl/).
+W przypadku filtrowania czasu określ opcje czasu za pomocą polecenia. Na przykład użyj, `--since today` Aby odfiltrować bieżący dzień lub `--until 1 hour ago` zobaczyć poprzednią godzinę. Aby uzyskać więcej informacji, zobacz [stronę Man for journalctl](https://www.unix.com/man-page/centos/1/journalctl/).
 
 ```bash
 sudo journalctl -fu kestrel-helloapp.service --since "2016-10-18" --until "2016-10-18 04:00"
@@ -306,7 +317,7 @@ sudo firewall-cmd --add-port=80/tcp --permanent
 sudo firewall-cmd --add-port=443/tcp --permanent
 ```
 
-Załaduj ponownie ustawienia zapory. Sprawdź dostępne usługi i porty w strefie domyślnej. Opcje są dostępne przez sprawdzenie `firewall-cmd -h`.
+Załaduj ponownie ustawienia zapory. Sprawdź dostępne usługi i porty w strefie domyślnej. Opcje są dostępne przez sprawdzenie `firewall-cmd -h` .
 
 ```bash
 sudo firewall-cmd --reload
@@ -329,7 +340,7 @@ rich rules:
 
 **Konfigurowanie aplikacji do połączeń lokalnych (HTTPS)**
 
-Polecenie [dotnet Run](/dotnet/core/tools/dotnet-run) używa pliku *właściwości/profilu launchsettings. JSON* aplikacji, który konfiguruje aplikację do nasłuchiwania na adresach URL dostarczonych przez `applicationUrl` Właściwość (na przykład `https://localhost:5001;http://localhost:5000`).
+Polecenie [dotnet Run](/dotnet/core/tools/dotnet-run) używa *Właściwości/launchSettings.jsaplikacji w* pliku, co umożliwia skonfigurowanie aplikacji do nasłuchiwania na adresach URL dostarczonych przez `applicationUrl` Właściwość (na przykład `https://localhost:5001;http://localhost:5000` ).
 
 Skonfiguruj aplikację do korzystania z certyfikatu podczas opracowywania dla `dotnet run` polecenia lub środowiska programistycznego (F5 lub CTRL + F5 w Visual Studio Code), korzystając z jednej z następujących metod:
 
@@ -338,13 +349,13 @@ Skonfiguruj aplikację do korzystania z certyfikatu podczas opracowywania dla `d
 
 **Konfigurowanie zwrotnego serwera proxy dla połączeń zabezpieczonych za pośrednictwem protokołu HTTPS**
 
-Aby skonfigurować Apache for HTTPS, używany jest moduł *mod_ssl* . Po zainstalowaniu modułu *http* zainstalowano również moduł *mod_ssl* . Jeśli nie została zainstalowana, użyj `yum` , aby dodać ją do konfiguracji.
+Aby skonfigurować Apache for HTTPS, używany jest moduł *mod_ssl* . Po zainstalowaniu modułu *http* zainstalowano również moduł *mod_ssl* . Jeśli nie została zainstalowana, użyj, `yum` Aby dodać ją do konfiguracji.
 
 ```bash
 sudo yum install mod_ssl
 ```
 
-Aby wymusić protokół HTTPS `mod_rewrite` , zainstaluj moduł, aby włączyć ponowne zapisywanie adresów URL:
+Aby wymusić protokół HTTPS, zainstaluj `mod_rewrite` moduł, aby włączyć ponowne zapisywanie adresów URL:
 
 ```bash
 sudo yum install mod_rewrite
@@ -400,7 +411,7 @@ Po uaktualnieniu platformy udostępnionej na serwerze uruchom ponownie ASP.NET C
 
 ### <a name="additional-headers"></a>Dodatkowe nagłówki
 
-Aby zabezpieczyć przed złośliwymi atakami, istnieje kilka nagłówków, które należy zmodyfikować lub dodać. Upewnij się, `mod_headers` że moduł jest zainstalowany:
+Aby zabezpieczyć przed złośliwymi atakami, istnieje kilka nagłówków, które należy zmodyfikować lub dodać. Upewnij się, że `mod_headers` moduł jest zainstalowany:
 
 ```bash
 sudo yum install mod_headers
@@ -424,7 +435,7 @@ Aby wyeliminować ataki clickjacking:
 
 #### <a name="mime-type-sniffing"></a>Wykrywanie typu MIME
 
-Nagłówek uniemożliwia Internet Explorer z *wykrywania MIME* (określenie pliku `Content-Type` z zawartości pliku). `X-Content-Type-Options` `Content-Type` Jeśli serwer ustawi `text/html` nagłówek z zestawem `nosniff` opcji, program Internet Explorer renderuje zawartość `text/html` niezależnie od zawartości pliku.
+`X-Content-Type-Options`Nagłówek uniemożliwia Internet Explorer z *wykrywania MIME* (określenie pliku `Content-Type` z zawartości pliku). Jeśli serwer ustawi `Content-Type` nagłówek `text/html` z `nosniff` zestawem opcji, program Internet Explorer renderuje zawartość `text/html` niezależnie od zawartości pliku.
 
 Edytuj plik *http. conf* :
 
@@ -504,7 +515,7 @@ Przykładowy plik ogranicza przepustowość jako 600 KB/s w lokalizacji główne
 Ustawienia domyślne serwera proxy zwykle ograniczają pola nagłówka żądania do 8 190 bajtów. Aplikacja może wymagać pól, które są dłuższe niż domyślne (na przykład aplikacje, które używają [Azure Active Directory](https://azure.microsoft.com/services/active-directory/)). Jeśli są wymagane dłuższe pola, dyrektywa [LimitRequestFieldSize](https://httpd.apache.org/docs/2.4/mod/core.html#LimitRequestFieldSize) serwera proxy wymaga korekty. Wartość, która ma zostać zastosowana, zależy od scenariusza. Aby uzyskać więcej informacji, zapoznaj się z dokumentacją serwera.
 
 > [!WARNING]
-> Nie należy zwiększać wartości domyślnej `LimitRequestFieldSize` , chyba że jest to konieczne. Zwiększenie wartości zwiększa ryzyko ataków przepełnienia buforu (przepełnienie) i ataki typu "odmowa usługi" (DoS) przez złośliwych użytkowników.
+> Nie należy zwiększać wartości domyślnej, `LimitRequestFieldSize` chyba że jest to konieczne. Zwiększenie wartości zwiększa ryzyko ataków przepełnienia buforu (przepełnienie) i ataki typu "odmowa usługi" (DoS) przez złośliwych użytkowników.
 
 ## <a name="additional-resources"></a>Zasoby dodatkowe
 

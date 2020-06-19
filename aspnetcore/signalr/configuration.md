@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/configuration
-ms.openlocfilehash: 09866f1fd56a4d0747ef3814c85ab5070cfb8d59
-ms.sourcegitcommit: a423e8fcde4b6181a3073ed646a603ba20bfa5f9
+ms.openlocfilehash: 809bdc777b6307314a7bcde82ab5e0c6888db99b
+ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/13/2020
-ms.locfileid: "84756122"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85074463"
 ---
 # <a name="aspnet-core-signalr-configuration"></a>SignalRKonfiguracja ASP.NET Core
 
@@ -192,12 +192,12 @@ let connection = new signalR.HubConnectionBuilder()
 
 Poniższa tabela zawiera listę dostępnych poziomów dzienników. Wartość określana przez użytkownika w celu ustawienia `configureLogging` **minimalnego** poziomu dziennika, który zostanie zarejestrowany. Komunikaty zarejestrowane na tym poziomie **lub poziomy wymienione po nim w tabeli**zostaną zarejestrowane.
 
-| String                      | LogLevel               |
+| Ciąg                      | LogLevel               |
 | --------------------------- | ---------------------- |
 | `trace`                     | `LogLevel.Trace`       |
 | `debug`                     | `LogLevel.Debug`       |
-| `info`**lub**`information` | `LogLevel.Information` |
-| `warn`**lub**`warning`     | `LogLevel.Warning`     |
+| `info` **lub** `information` | `LogLevel.Information` |
+| `warn` **lub** `warning`     | `LogLevel.Warning`     |
 | `error`                     | `LogLevel.Error`       |
 | `critical`                  | `LogLevel.Critical`    |
 | `none`                      | `LogLevel.None`        |
@@ -352,6 +352,8 @@ Dodatkowe opcje można skonfigurować w `WithUrl` `withUrl` metodzie (w języku 
 | Opcja języka JavaScript | Wartość domyślna | Opis |
 | ----------------- | ------------- | ----------- |
 | `accessTokenFactory` | `null` | Funkcja zwracająca ciąg, który jest dostarczany jako token uwierzytelniania okaziciela w żądaniach HTTP. |
+| `headers` | `null` | Słownik nagłówków wysłanych z każdym żądaniem HTTP. Wysyłanie nagłówków w przeglądarce nie działa w przypadku obiektów WebSockets ani <xref:Microsoft.AspNetCore.Http.Connections.HttpTransportType.ServerSentEvents> strumienia. |
+| `logMessageContent` | `null` | Ustaw na `true` , aby rejestrować bajty/znaki komunikatów wysyłanych i odbieranych przez klienta. |
 | `skipNegotiation` | `false` | Ustaw tę wartość na `true` , aby pominąć krok negocjowania. **Obsługiwane tylko wtedy, gdy transport Sockets jest jedynym włączonym transportem**. Nie można włączyć tego ustawienia w przypadku korzystania z SignalR usługi platformy Azure. |
 | `withCredentials` | `true` | Określa, czy poświadczenia będą wysyłane z żądaniem CORS. Azure App Service używa plików cookie dla sesji programu Sticky i wymaga, aby ta opcja działała poprawnie. Aby uzyskać więcej informacji na temat mechanizmu CORS w programie SignalR , zobacz <xref:signalr/security#cross-origin-resource-sharing> . |
 
@@ -398,7 +400,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
         .build();
 ```
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:tutorials/signalr>
 * <xref:signalr/hubs>
@@ -578,12 +580,12 @@ let connection = new signalR.HubConnectionBuilder()
 
 Poniższa tabela zawiera listę dostępnych poziomów dzienników. Wartość określana przez użytkownika w celu ustawienia `configureLogging` **minimalnego** poziomu dziennika, który zostanie zarejestrowany. Komunikaty zarejestrowane na tym poziomie **lub poziomy wymienione po nim w tabeli**zostaną zarejestrowane.
 
-| String                      | LogLevel               |
+| Ciąg                      | LogLevel               |
 | --------------------------- | ---------------------- |
 | `trace`                     | `LogLevel.Trace`       |
 | `debug`                     | `LogLevel.Debug`       |
-| `info`**lub**`information` | `LogLevel.Information` |
-| `warn`**lub**`warning`     | `LogLevel.Warning`     |
+| `info` **lub** `information` | `LogLevel.Information` |
+| `warn` **lub** `warning`     | `LogLevel.Warning`     |
 | `error`                     | `LogLevel.Error`       |
 | `critical`                  | `LogLevel.Critical`    |
 | `none`                      | `LogLevel.None`        |
@@ -738,6 +740,7 @@ Dodatkowe opcje można skonfigurować w `WithUrl` `withUrl` metodzie (w języku 
 | Opcja języka JavaScript | Wartość domyślna | Opis |
 | ----------------- | ------------- | ----------- |
 | `accessTokenFactory` | `null` | Funkcja zwracająca ciąg, który jest dostarczany jako token uwierzytelniania okaziciela w żądaniach HTTP. |
+| `logMessageContent` | `null` | Ustaw na `true` , aby rejestrować bajty/znaki komunikatów wysyłanych i odbieranych przez klienta. |
 | `skipNegotiation` | `false` | Ustaw tę wartość na `true` , aby pominąć krok negocjowania. **Obsługiwane tylko wtedy, gdy transport Sockets jest jedynym włączonym transportem**. Nie można włączyć tego ustawienia w przypadku korzystania z SignalR usługi platformy Azure. |
 
 # <a name="java"></a>[Java](#tab/java)
@@ -783,7 +786,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
         .build();
 ```
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:tutorials/signalr>
 * <xref:signalr/hubs>
@@ -962,12 +965,12 @@ let connection = new signalR.HubConnectionBuilder()
 
 Poniższa tabela zawiera listę dostępnych poziomów dzienników. Wartość określana przez użytkownika w celu ustawienia `configureLogging` **minimalnego** poziomu dziennika, który zostanie zarejestrowany. Komunikaty zarejestrowane na tym poziomie **lub poziomy wymienione po nim w tabeli**zostaną zarejestrowane.
 
-| String                      | LogLevel               |
+| Ciąg                      | LogLevel               |
 | --------------------------- | ---------------------- |
 | `trace`                     | `LogLevel.Trace`       |
 | `debug`                     | `LogLevel.Debug`       |
-| `info`**lub**`information` | `LogLevel.Information` |
-| `warn`**lub**`warning`     | `LogLevel.Warning`     |
+| `info` **lub** `information` | `LogLevel.Information` |
+| `warn` **lub** `warning`     | `LogLevel.Warning`     |
 | `error`                     | `LogLevel.Error`       |
 | `critical`                  | `LogLevel.Critical`    |
 | `none`                      | `LogLevel.None`        |
@@ -1122,6 +1125,7 @@ Dodatkowe opcje można skonfigurować w `WithUrl` `withUrl` metodzie (w języku 
 | Opcja języka JavaScript | Wartość domyślna | Opis |
 | ----------------- | ------------- | ----------- |
 | `accessTokenFactory` | `null` | Funkcja zwracająca ciąg, który jest dostarczany jako token uwierzytelniania okaziciela w żądaniach HTTP. |
+| `logMessageContent` | `null` | Ustaw na `true` , aby rejestrować bajty/znaki komunikatów wysyłanych i odbieranych przez klienta. |
 | `skipNegotiation` | `false` | Ustaw tę wartość na `true` , aby pominąć krok negocjowania. **Obsługiwane tylko wtedy, gdy transport Sockets jest jedynym włączonym transportem**. Nie można włączyć tego ustawienia w przypadku korzystania z SignalR usługi platformy Azure. |
 
 # <a name="java"></a>[Java](#tab/java)
@@ -1167,7 +1171,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
         .build();
 ```
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:tutorials/signalr>
 * <xref:signalr/hubs>
@@ -1470,6 +1474,7 @@ Dodatkowe opcje można skonfigurować w `WithUrl` `withUrl` metodzie (w języku 
 | Opcja języka JavaScript | Wartość domyślna | Opis |
 | ----------------- | ------------- | ----------- |
 | `accessTokenFactory` | `null` | Funkcja zwracająca ciąg, który jest dostarczany jako token uwierzytelniania okaziciela w żądaniach HTTP. |
+| `logMessageContent` | `null` | Ustaw na `true` , aby rejestrować bajty/znaki komunikatów wysyłanych i odbieranych przez klienta. |
 | `skipNegotiation` | `false` | Ustaw tę wartość na `true` , aby pominąć krok negocjowania. **Obsługiwane tylko wtedy, gdy transport Sockets jest jedynym włączonym transportem**. Nie można włączyć tego ustawienia w przypadku korzystania z SignalR usługi platformy Azure. |
 
 # <a name="java"></a>[Java](#tab/java)
@@ -1515,7 +1520,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
         .build();
 ```
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:tutorials/signalr>
 * <xref:signalr/hubs>
@@ -1812,6 +1817,7 @@ Dodatkowe opcje można skonfigurować w `WithUrl` `withUrl` metodzie (w języku 
 | Opcja języka JavaScript | Wartość domyślna | Opis |
 | ----------------- | ------------- | ----------- |
 | `accessTokenFactory` | `null` | Funkcja zwracająca ciąg, który jest dostarczany jako token uwierzytelniania okaziciela w żądaniach HTTP. |
+| `logMessageContent` | `null` | Ustaw na `true` , aby rejestrować bajty/znaki komunikatów wysyłanych i odbieranych przez klienta. |
 | `skipNegotiation` | `false` | Ustaw tę wartość na `true` , aby pominąć krok negocjowania. **Obsługiwane tylko wtedy, gdy transport Sockets jest jedynym włączonym transportem**. Nie można włączyć tego ustawienia w przypadku korzystania z SignalR usługi platformy Azure. |
 
 # <a name="java"></a>[Java](#tab/java)
@@ -1857,7 +1863,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
         .build();
 ```
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:tutorials/signalr>
 * <xref:signalr/hubs>

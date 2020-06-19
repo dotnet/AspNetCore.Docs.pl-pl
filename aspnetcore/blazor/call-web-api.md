@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-web-api
-ms.openlocfilehash: 4f3fd1fca075098a94756757474b2cad3cc99775
-ms.sourcegitcommit: b0062f29cba2e5c21b95cf89eaf435ba830d11a3
+ms.openlocfilehash: 19e10c4eced47676c633a7d30a26726913373162
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/16/2020
-ms.locfileid: "84214779"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102432"
 ---
 # <a name="call-a-web-api-from-aspnet-core-blazor"></a>Wywoływanie internetowego interfejsu API z ASP.NET CoreBlazor
 
@@ -85,7 +85,7 @@ Metody pomocnika JSON wysyłają żądania do identyfikatora URI (internetowego 
 
 * <xref:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsync%2A>: Wysyła żądanie HTTP GET i analizuje treść odpowiedzi JSON w celu utworzenia obiektu.
 
-  W poniższym kodzie, `todoItems` są wyświetlane przez składnik. `GetTodoItems`Metoda jest wyzwalana, gdy składnik jest gotowy do renderowania ([OnInitializedAsync](xref:blazor/lifecycle#component-initialization-methods)). Pełny przykład można znaleźć w przykładowej aplikacji.
+  W poniższym kodzie, `todoItems` są wyświetlane przez składnik. `GetTodoItems`Metoda jest wyzwalana, gdy składnik jest gotowy do renderowania ([OnInitializedAsync](xref:blazor/components/lifecycle#component-initialization-methods)). Pełny przykład można znaleźć w przykładowej aplikacji.
 
   ```razor
   @using System.Net.Http
@@ -303,7 +303,7 @@ protected override async Task OnInitializedAsync()
 > [!NOTE]
 > Poprzedni przykład jest przeznaczony do celów demonstracyjnych. Aplikację serwerową interfejsu API sieci Web można skonfigurować tak, aby zwracała kod JSON nawet wtedy, gdy punkt końcowy nie istnieje lub wystąpił nieobsługiwany wdrażaniem na serwerze.
 
-Aby uzyskać więcej informacji, zobacz <xref:blazor/handle-errors>.
+Aby uzyskać więcej informacji, zobacz <xref:blazor/fundamentals/handle-errors>.
 
 ## <a name="cross-origin-resource-sharing-cors"></a>Współużytkowanie zasobów między źródłami (CORS)
 
@@ -315,7 +315,7 @@ Aby umożliwić innym lokacjom wykonywanie żądań funkcji udostępniania zasob
 
 ## <a name="additional-resources"></a>Zasoby dodatkowe
 
-* <xref:security/blazor/webassembly/additional-scenarios>: Obejmuje pokrycie przy użyciu <xref:System.Net.Http.HttpClient> , aby zapewnić bezpieczne żądania interfejsu API sieci Web.
+* <xref:blazor/security/webassembly/additional-scenarios>: Obejmuje pokrycie przy użyciu <xref:System.Net.Http.HttpClient> , aby zapewnić bezpieczne żądania interfejsu API sieci Web.
 * <xref:fundamentals/http-requests>
 * <xref:security/enforcing-ssl>
 * [Konfiguracja punktu końcowego HTTPS Kestrel](xref:fundamentals/servers/kestrel#endpoint-configuration)

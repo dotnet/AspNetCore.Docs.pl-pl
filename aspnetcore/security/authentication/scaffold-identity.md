@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/scaffold-identity
-ms.openlocfilehash: 36afa8ece58843b434ebfba6305bffdb9eb9bca0
-ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
+ms.openlocfilehash: f3314458a504af7f44dcdc276de890fa9485a2b3
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/12/2020
-ms.locfileid: "84724292"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85103037"
 ---
 # <a name="scaffold-identity-in-aspnet-core-projects"></a>Szkielet Identity w projektach ASP.NET Core
 
@@ -195,7 +195,7 @@ Tokeny mogą być przesyłane do składników:
 * Gdy tokeny uwierzytelniania są inicjowane i zapisywane w pliku cookie uwierzytelniania, można je przesłać do składników programu.
 * Razorskładniki nie mogą być używane `HttpContext` bezpośrednio, dlatego nie ma możliwości uzyskania [tokenu fałszerstwa (XSRF)](xref:security/anti-request-forgery) w celu opublikowania w Identity punkcie końcowym wylogowywania `/Identity/Account/Logout` . Token XSRF można przesłać do składników.
 
-Aby uzyskać więcej informacji, zobacz <xref:security/blazor/server/additional-scenarios#pass-tokens-to-a-blazor-server-app>.
+Aby uzyskać więcej informacji, zobacz <xref:blazor/security/server/additional-scenarios#pass-tokens-to-a-blazor-server-app>.
 
 W pliku *Pages/_Host. cshtml* Ustanów token po dodaniu go do `InitialApplicationState` `TokenProvider` klas i:
 
@@ -229,7 +229,7 @@ Usługa przedstawiona `TokenProvider` w temacie jest używana w `LoginDisplay` s
 W `Startup` klasie:
 
 * Potwierdź, że Razor usługi stron są dodawane w programie `Startup.ConfigureServices` .
-* W przypadku korzystania z [TokenProvider](xref:security/blazor/server/additional-scenarios#pass-tokens-to-a-blazor-server-app)Zarejestruj usługę.
+* W przypadku korzystania z [TokenProvider](xref:blazor/security/server/additional-scenarios#pass-tokens-to-a-blazor-server-app)Zarejestruj usługę.
 * Zadzwoń do programu `UseDatabaseErrorPage` Application Builder w `Startup.Configure` środowisku deweloperskim.
 * Wywołanie `UseAuthentication` i `UseAuthorization` po `UseRouting` .
 * Dodaj punkt końcowy dla Razor stron.
@@ -253,7 +253,7 @@ Dodaj `RedirectToLogin` składnik (*RedirectToLogin. Razor*) do folderu *udostę
 }
 ```
 
-Dodaj `LoginDisplay` składnik (*LoginDisplay. Razor*) do folderu *udostępnionego* aplikacji. [Usługa TokenProvider](xref:security/blazor/server/additional-scenarios#pass-tokens-to-a-blazor-server-app) udostępnia token XSRF formularza HTML, który jest wysyłany do Identity punktu końcowego wylogowania:
+Dodaj `LoginDisplay` składnik (*LoginDisplay. Razor*) do folderu *udostępnionego* aplikacji. [Usługa TokenProvider](xref:blazor/security/server/additional-scenarios#pass-tokens-to-a-blazor-server-app) udostępnia token XSRF formularza HTML, który jest wysyłany do Identity punktu końcowego wylogowania:
 
 ```razor
 @using Microsoft.AspNetCore.Components.Authorization
@@ -404,7 +404,7 @@ W tych sekcjach pokazano, jak wyłączyć stronę rejestracji, ale podejście mo
 
 Aby wyłączyć rejestrację użytkownika:
 
-* Szkielet Identity . Uwzględnij konto. Register, Account. login i Account. RegisterConfirmation. Na przykład:
+* Szkielet Identity . Uwzględnij konto. Register, Account. login i Account. RegisterConfirmation. Przykład:
 
   ```dotnetcli
    dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.RegisterConfirmation"
@@ -470,7 +470,7 @@ Podobne podejście może być stosowane w scenariuszach produkcyjnych.
 
 Aby uniemożliwić publikowanie statycznych Identity zasobów w katalogu głównym sieci Web, zobacz <xref:security/authentication/identity#prevent-publish-of-static-identity-assets> .
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Zmiany w kodzie uwierzytelniania na ASP.NET Core 2,1 i nowsze](xref:migration/20_21#changes-to-authentication-code)
 
@@ -649,7 +649,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 Aby wyłączyć rejestrację użytkownika:
 
-* Szkielet Identity . Uwzględnij konto. Register, Account. login i Account. RegisterConfirmation. Na przykład:
+* Szkielet Identity . Uwzględnij konto. Register, Account. login i Account. RegisterConfirmation. Przykład:
 
   ```dotnetcli
    dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.RegisterConfirmation"
@@ -711,7 +711,7 @@ Poniższy kod zawiera opis dodawania użytkownika:
 
 Podobne podejście może być stosowane w scenariuszach produkcyjnych.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Zmiany w kodzie uwierzytelniania na ASP.NET Core 2,1 i nowsze](xref:migration/20_21#changes-to-authentication-code)
 

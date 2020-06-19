@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/templates
-ms.openlocfilehash: f582e8201a3393b848cf3f2c21ce3a7df5554100
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 3a491e43aec8291fcf03696b53240bd33e0deda1
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84105535"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102491"
 ---
 # <a name="aspnet-core-blazor-templates"></a>BlazorSzablony ASP.NET Core
 
@@ -80,7 +80,7 @@ Następujące pliki i foldery tworzą Blazor aplikację wygenerowaną na podstaw
 
 * Folder *udostępniony* : zawiera inne składniki interfejsu użytkownika (*. Razor*) używane przez aplikację:
   * `MainLayout`(*MainLayout. Razor*): składnik układu aplikacji.
-  * `NavMenu`(*NavMenu. Razor*): implementuje nawigację po pasku bocznym. Zawiera [składnik NavLink](xref:blazor/routing#navlink-component) ( <xref:Microsoft.AspNetCore.Components.Routing.NavLink> ), który renderuje linki nawigacji do innych Razor składników. <xref:Microsoft.AspNetCore.Components.Routing.NavLink>Składnik automatycznie wskazuje wybrany stan podczas ładowania składnika, co pomaga użytkownikowi zrozumieć, który składnik jest aktualnie wyświetlany.
+  * `NavMenu`(*NavMenu. Razor*): implementuje nawigację po pasku bocznym. Zawiera [składnik NavLink](xref:blazor/fundamentals/routing#navlink-component) ( <xref:Microsoft.AspNetCore.Components.Routing.NavLink> ), który renderuje linki nawigacji do innych Razor składników. <xref:Microsoft.AspNetCore.Components.Routing.NavLink>Składnik automatycznie wskazuje wybrany stan podczas ładowania składnika, co pomaga użytkownikowi zrozumieć, który składnik jest aktualnie wyświetlany.
 
 * *_Imports. Razor*: zawiera wspólne Razor dyrektywy do uwzględnienia w składnikach aplikacji (*. Razor*), takich jak [`@using`](xref:mvc/views/razor#using) dyrektywy dotyczące przestrzeni nazw.
 
@@ -88,4 +88,4 @@ Następujące pliki i foldery tworzą Blazor aplikację wygenerowaną na podstaw
 
 * *wwwroot*: folder [główny sieci Web](xref:fundamentals/index#web-root) dla aplikacji zawierającej publiczne statyczne zasoby aplikacji.
 
-* *appSettings. JSON* ( Blazor serwer): ustawienia konfiguracji aplikacji.
+* *appsettings.jsna* ( Blazor serwer): ustawienia konfiguracji aplikacji.

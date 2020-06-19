@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/index
-ms.openlocfilehash: eb8a6d2ddbd3e8f61626566878a7af5f5a2525d8
-ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
+ms.openlocfilehash: feca504a39624282961fbc6405876e970a20b5d4
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/12/2020
-ms.locfileid: "83608190"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102283"
 ---
 # <a name="introduction-to-aspnet-core-blazor"></a>Wprowadzenie do ASP.NET CoreBlazor
 
@@ -126,7 +126,7 @@ Gdy Blazor aplikacja webassembly zostanie skompilowana i uruchomiona w przegląd
 
 Rozmiar opublikowanej aplikacji, jej *rozmiaru ładunku*, jest krytycznym czynnikiem wydajności dla useability aplikacji. Pobieranie dużej aplikacji do przeglądarki zajmuje stosunkowo dużo czasu, co zmniejsza środowisko użytkownika. BlazorZestaw webassembly optymalizuje rozmiar ładunku, aby skrócić czas pobierania:
 
-* Nieużywany kod jest usuwany z aplikacji, gdy jest publikowany przez [konsolidator języka pośredniego (IL)](xref:host-and-deploy/blazor/configure-linker).
+* Nieużywany kod jest usuwany z aplikacji, gdy jest publikowany przez [konsolidator języka pośredniego (IL)](xref:blazor/host-and-deploy/configure-linker).
 * Odpowiedzi HTTP są kompresowane.
 * Środowisko uruchomieniowe platformy .NET i zestawy są buforowane w przeglądarce.
 
@@ -153,7 +153,7 @@ Blazorimplementuje [.NET Standard 2,0](/dotnet/standard/net-standard). .NET Stan
 
 Interfejsy API, które nie są stosowane w przeglądarce sieci Web (na przykład dostęp do systemu plików, otwieranie gniazda i wątkowość) throw <xref:System.PlatformNotSupportedException> .
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Zestaw webassembly](https://webassembly.org/)
 * <xref:blazor/hosting-models>

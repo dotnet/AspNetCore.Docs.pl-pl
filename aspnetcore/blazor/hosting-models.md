@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: 9556fea5319956ce4ae4f4faf90cb405784c733c
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: a5323534cd76cfb60008636066ca5dcb7308d134
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84105496"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102269"
 ---
 # <a name="aspnet-core-blazor-hosting-models"></a>ASP.NET Core Blazor modele hostingu
 
@@ -28,7 +28,7 @@ Blazorjest platformą internetową, która umożliwia uruchamianie po stronie kl
 
 Aby utworzyć projekt dla modeli hostingu opisanych w tym artykule, zobacz <xref:blazor/get-started> .
 
-Aby uzyskać konfigurację zaawansowaną, zobacz <xref:blazor/hosting-model-configuration> .
+Aby uzyskać konfigurację zaawansowaną, zobacz <xref:blazor/fundamentals/configuration> .
 
 ## <a name="blazor-webassembly"></a>BlazorZestaw webassembly
 
@@ -116,7 +116,7 @@ Aktualizacja interfejsu użytkownika w programie Blazor jest wyzwalana przez:
 
 Wykres jest ponownie renderowany i obliczana *jest różnica między interfejsami* użytkownika. Różnica ta jest najmniejszym zestawem zmian modelu DOM wymaganym do zaktualizowania interfejsu użytkownika na kliencie. Różnica jest wysyłana do klienta w formacie binarnym i stosowana przez przeglądarkę.
 
-Składnik jest usuwany po przejściu przez użytkownika na klienta. Gdy użytkownik korzysta ze składnika, stan składnika (usługi, zasoby) musi być przechowywany w pamięci serwera. Ponieważ stan wielu składników może być obsługiwany przez serwer współbieżnie, wyczerpanie pamięci jest problemem, który należy rozwiązać. Aby uzyskać wskazówki dotyczące sposobu tworzenia Blazor aplikacji serwera w celu zapewnienia optymalnego wykorzystania pamięci serwera, zobacz <xref:security/blazor/server/threat-mitigation> .
+Składnik jest usuwany po przejściu przez użytkownika na klienta. Gdy użytkownik korzysta ze składnika, stan składnika (usługi, zasoby) musi być przechowywany w pamięci serwera. Ponieważ stan wielu składników może być obsługiwany przez serwer współbieżnie, wyczerpanie pamięci jest problemem, który należy rozwiązać. Aby uzyskać wskazówki dotyczące sposobu tworzenia Blazor aplikacji serwera w celu zapewnienia optymalnego wykorzystania pamięci serwera, zobacz <xref:blazor/security/server/threat-mitigation> .
 
 ### <a name="circuits"></a>Elektrycznych
 
@@ -136,10 +136,10 @@ W przypadku aplikacji biznesowych, która jest ograniczona do prywatnej sieci fi
 
 Użycie pamięci może również przyczynić się do opóźnienia aplikacji. Zwiększone użycie pamięci powoduje częste zbieranie elementów bezużytecznych lub stronicowanie pamięci na dysku, co zmniejsza wydajność aplikacji i w związku z tym zwiększa opóźnienia interfejsu użytkownika.
 
-BlazorAplikacje serwera powinny być zoptymalizowane pod kątem zminimalizowania opóźnień interfejsu użytkownika przez zmniejszenie opóźnienia sieci i użycie pamięci. Aby uzyskać podejście do mierzenia opóźnień sieci, zobacz <xref:host-and-deploy/blazor/server#measure-network-latency> . Aby uzyskać więcej informacji na temat SignalR i Blazor , zobacz:
+BlazorAplikacje serwera powinny być zoptymalizowane pod kątem zminimalizowania opóźnień interfejsu użytkownika przez zmniejszenie opóźnienia sieci i użycie pamięci. Aby uzyskać podejście do mierzenia opóźnień sieci, zobacz <xref:blazor/host-and-deploy/server#measure-network-latency> . Aby uzyskać więcej informacji na temat SignalR i Blazor , zobacz:
 
-* <xref:host-and-deploy/blazor/server>
-* <xref:security/blazor/server/threat-mitigation>
+* <xref:blazor/host-and-deploy/server>
+* <xref:blazor/security/server/threat-mitigation>
 
 ### <a name="connection-to-the-server"></a>Połączenie z serwerem
 
@@ -147,7 +147,7 @@ BlazorAplikacje serwera wymagają aktywnego SignalR połączenia z serwerem. Je�
 
 BlazorAplikacja serwera jest przedstawiona w odpowiedzi na pierwsze żądanie klienta, która konfiguruje stan interfejsu użytkownika na serwerze. Gdy klient próbuje utworzyć SignalR połączenie, klient musi ponownie nawiązać połączenie z tym samym serwerem. BlazorAplikacje serwera, które używają więcej niż jednego serwera wewnętrznej bazy danych, powinny implementować *sesje usługi Sticky Notes* dla SignalR połączeń.
 
-Zalecamy korzystanie z [ SignalR usługi platformy Azure](/azure/azure-signalr) dla Blazor aplikacji serwerowych. Usługa umożliwia skalowanie Blazor aplikacji serwera do dużej liczby jednoczesnych SignalR połączeń. Sesje programu Sticky Notes są włączone dla usługi platformy Azure SignalR , ustawiając `ServerStickyMode` opcję usługi lub wartość konfiguracji na `Required` . Aby uzyskać więcej informacji, zobacz <xref:host-and-deploy/blazor/server#signalr-configuration>.
+Zalecamy korzystanie z [ SignalR usługi platformy Azure](/azure/azure-signalr) dla Blazor aplikacji serwerowych. Usługa umożliwia skalowanie Blazor aplikacji serwera do dużej liczby jednoczesnych SignalR połączeń. Sesje programu Sticky Notes są włączone dla usługi platformy Azure SignalR , ustawiając `ServerStickyMode` opcję usługi lub wartość konfiguracji na `Required` . Aby uzyskać więcej informacji, zobacz <xref:blazor/host-and-deploy/server#signalr-configuration>.
 
 W przypadku korzystania z usług IIS sesje programu Sticky są włączane przy użyciu routingu żądań aplikacji. Aby uzyskać więcej informacji, zobacz [równoważenie obciążenia HTTP przy użyciu routingu żądań aplikacji](/iis/extensions/configuring-application-request-routing-arr/http-load-balancing-using-application-request-routing).
 
@@ -155,5 +155,5 @@ W przypadku korzystania z usług IIS sesje programu Sticky są włączane przy u
 
 * <xref:blazor/get-started>
 * <xref:signalr/introduction>
-* <xref:blazor/hosting-model-configuration>
+* <xref:blazor/fundamentals/additional-scenarios>
 * <xref:tutorials/signalr-blazor-webassembly>

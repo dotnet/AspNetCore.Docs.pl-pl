@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/azure-apps/index
-ms.openlocfilehash: 8195702a3de93bafc76dff61939dfc70d4e896b6
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: cc12dc2bc6720652866227dc2bbcbcf4e8af793d
+ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775248"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85074236"
 ---
 # <a name="deploy-aspnet-core-apps-to-azure-app-service"></a>Wdróż aplikacje ASP.NET Core w Azure App Service
 
@@ -83,23 +83,26 @@ Dołącz następujące pakiety NuGet, aby udostępnić funkcje automatycznego re
 * [Microsoft. AspNetCore. AzureAppServicesIntegration](https://www.nuget.org/packages/Microsoft.AspNetCore.AzureAppServicesIntegration/) wykonuje [AddAzureWebAppDiagnostics](/dotnet/api/microsoft.extensions.logging.azureappservicesloggerfactoryextensions.addazurewebappdiagnostics) , aby dodać Azure App Service dostawców rejestrowania diagnostyki w `Microsoft.Extensions.Logging.AzureAppServices` pakiecie.
 * [Microsoft. Extensions. Logging. AzureAppServices](https://www.nuget.org/packages/Microsoft.Extensions.Logging.AzureAppServices/) udostępnia implementacje rejestratorów umożliwiające obsługę dzienników diagnostyki Azure App Service i funkcji przesyłania strumieniowego dzienników.
 
-Poprzednie pakiety nie są dostępne w [pakiecie Microsoft. AspNetCore. app](xref:fundamentals/metapackage-app). Aplikacje, które są przeznaczone dla elementu `Microsoft.AspNetCore.App` .NET Framework lub odwołują się do pakietu, muszą jawnie odwoływać się do poszczególnych pakietów w pliku projektu aplikacji.
+Poprzednie pakiety nie są dostępne w [pakiecie Microsoft. AspNetCore. app](xref:fundamentals/metapackage-app). Aplikacje, które są przeznaczone dla elementu .NET Framework lub odwołują się do `Microsoft.AspNetCore.App` pakietu, muszą jawnie odwoływać się do poszczególnych pakietów w pliku projektu aplikacji.
 
 ## <a name="override-app-configuration-using-the-azure-portal"></a>Przesłoń konfigurację aplikacji przy użyciu witryny Azure Portal
+
+::: moniker range=">= aspnetcore-3.0"
+
+Ustawienia aplikacji w witrynie Azure Portal umożliwiają ustawianie zmiennych środowiskowych dla aplikacji. Zmienne środowiskowe mogą być używane przez [dostawcę konfiguracji zmiennych środowiskowych](xref:fundamentals/configuration/index#environment-variables).
+
+Po utworzeniu lub zmodyfikowaniu ustawienia aplikacji w witrynie Azure Portal i wybraniu przycisku **Zapisz** aplikacja platformy Azure zostanie uruchomiona ponownie. Zmienna środowiskowa jest dostępna dla aplikacji po ponownym uruchomieniu usługi.
+
+Gdy aplikacja korzysta z [hosta ogólnego](xref:fundamentals/host/generic-host), zmienne środowiskowe są ładowane do konfiguracji aplikacji, gdy <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder*> jest wywoływana w celu skompilowania hosta. Aby uzyskać więcej informacji, zobacz <xref:fundamentals/host/generic-host> i [dostawca konfiguracji zmiennych środowiskowych](xref:fundamentals/configuration/index#environment-variables).
+
+::: moniker-end
+::: moniker range="< aspnetcore-3.0"
 
 Ustawienia aplikacji w witrynie Azure Portal umożliwiają ustawianie zmiennych środowiskowych dla aplikacji. Zmienne środowiskowe mogą być używane przez [dostawcę konfiguracji zmiennych środowiskowych](xref:fundamentals/configuration/index#environment-variables-configuration-provider).
 
 Po utworzeniu lub zmodyfikowaniu ustawienia aplikacji w witrynie Azure Portal i wybraniu przycisku **Zapisz** aplikacja platformy Azure zostanie uruchomiona ponownie. Zmienna środowiskowa jest dostępna dla aplikacji po ponownym uruchomieniu usługi.
 
-::: moniker range=">= aspnetcore-3.0"
-
-Gdy aplikacja korzysta z [hosta ogólnego](xref:fundamentals/host/generic-host), zmienne środowiskowe są ładowane do konfiguracji aplikacji, gdy <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder*> jest wywoływana w celu skompilowania hosta. Aby uzyskać więcej informacji, <xref:fundamentals/host/generic-host> Zobacz i [dostawca konfiguracji zmiennych środowiskowych](xref:fundamentals/configuration/index#environment-variables-configuration-provider).
-
-::: moniker-end
-
-::: moniker range="< aspnetcore-3.0"
-
-Gdy aplikacja korzysta z [hosta sieci Web](xref:fundamentals/host/web-host), zmienne środowiskowe są ładowane do konfiguracji aplikacji, gdy <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> jest wywoływana w celu skompilowania hosta. Aby uzyskać więcej informacji, <xref:fundamentals/host/web-host> Zobacz i [dostawca konfiguracji zmiennych środowiskowych](xref:fundamentals/configuration/index#environment-variables-configuration-provider).
+Gdy aplikacja korzysta z [hosta sieci Web](xref:fundamentals/host/web-host), zmienne środowiskowe są ładowane do konfiguracji aplikacji, gdy <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> jest wywoływana w celu skompilowania hosta. Aby uzyskać więcej informacji, zobacz <xref:fundamentals/host/web-host> i [dostawca konfiguracji zmiennych środowiskowych](xref:fundamentals/configuration/index#environment-variables-configuration-provider).
 
 ::: moniker-end
 
@@ -169,11 +172,11 @@ Użyj [Azure App Service scenariuszy Ci/CD](/azure/app-service/deploy-continuous
 
 #### <a name="specify-the-net-core-sdk-version"></a>Określ wersję zestaw .NET Core SDK
 
-Korzystając z centrum wdrażania App Service, aby utworzyć kompilację usługi Azure DevOps, domyślny potok kompilacji zawiera kroki dla `Restore`, `Build` `Test`, i `Publish`. Aby określić wersję zestawu SDK, wybierz przycisk **Dodaj (+)** na liście zadań agenta, aby dodać nowy krok. Wyszukaj **zestaw .NET Core SDK** na pasku wyszukiwania. 
+Korzystając z centrum wdrażania App Service, aby utworzyć kompilację usługi Azure DevOps, domyślny potok kompilacji zawiera kroki dla `Restore` , `Build` , `Test` i `Publish` . Aby określić wersję zestawu SDK, wybierz przycisk **Dodaj (+)** na liście zadań agenta, aby dodać nowy krok. Wyszukaj **zestaw .NET Core SDK** na pasku wyszukiwania. 
 
 ![Dodaj krok zestaw .NET Core SDK](index/add-sdk-step.png)
 
-Przenieś krok do pierwszej pozycji w kompilacji, aby wykonać kroki opisane w tej wersji zestaw .NET Core SDK. Określ wersję zestaw .NET Core SDK. W tym przykładzie zestaw SDK jest ustawiony na `3.0.100`.
+Przenieś krok do pierwszej pozycji w kompilacji, aby wykonać kroki opisane w tej wersji zestaw .NET Core SDK. Określ wersję zestaw .NET Core SDK. W tym przykładzie zestaw SDK jest ustawiony na `3.0.100` .
 
 ![Ukończony krok zestawu SDK](index/sdk-step-first-place.png)
 
@@ -205,7 +208,7 @@ Jeśli wystąpi problem przy użyciu rozszerzenia witryny w wersji zapoznawczej,
 1. Wpisz "ex" w polu wyszukiwania, aby odfiltrować "rozszerzenia", lub przewiń w dół listy narzędzi do zarządzania.
 1. Wybierz pozycję **Rozszerzenia**.
 1. Wybierz pozycję **Dodaj**.
-1. ASP.NET Core wybierz z listy rozszerzenie **środowiska uruchomieniowego {X. Y} ({x64 | x86})** , na `{X.Y}` którym jest ASP.NET Core wersja zapoznawcza i `{x64|x86}` Określa platformę.
+1. ASP.NET Core wybierz z listy rozszerzenie **środowiska uruchomieniowego {X. Y} ({x64 | x86})** , na którym `{X.Y}` jest ASP.NET Core wersja zapoznawcza i `{x64|x86}` Określa platformę.
 1. Wybierz **przycisk OK** , aby zaakceptować postanowienia prawne.
 1. Wybierz **przycisk OK** , aby zainstalować rozszerzenie.
 
@@ -213,8 +216,8 @@ Po zakończeniu operacji zostanie zainstalowana najnowsza wersja programu .NET C
 
 1. Wybierz pozycję **Narzędzia zaawansowane**.
 1. Wybierz pozycję **Przejdź** do **zaawansowanych narzędzi**.
-1. Wybierz element menu > **programu PowerShell** **konsoli debugowania**.
-1. W wierszu polecenia programu PowerShell wykonaj następujące polecenie. Zastąp wersję środowiska uruchomieniowego `{X.Y}` ASP.NET Core dla programu i `{PLATFORM}` platformy dla programu w ramach polecenia:
+1. Wybierz **Debug console**  >  element menu**programu PowerShell** konsoli debugowania.
+1. W wierszu polecenia programu PowerShell wykonaj następujące polecenie. Zastąp wersję środowiska uruchomieniowego ASP.NET Core dla programu `{X.Y}` i platformy dla `{PLATFORM}` programu w ramach polecenia:
 
    ```powershell
    Test-Path D:\home\SiteExtensions\AspNetCoreRuntime.{X.Y}.{PLATFORM}\
@@ -240,7 +243,7 @@ Po zakończeniu operacji zostanie zainstalowana najnowsza wersja programu .NET C
 
 **Używanie rozszerzenia witryny w wersji zapoznawczej z szablonem ARM**
 
-Jeśli szablon ARM jest używany do tworzenia i wdrażania aplikacji, typ `siteextensions` zasobu może służyć do dodawania rozszerzenia witryny do aplikacji sieci Web. Przykład:
+Jeśli szablon ARM jest używany do tworzenia i wdrażania aplikacji, `siteextensions` Typ zasobu może służyć do dodawania rozszerzenia witryny do aplikacji sieci Web. Przykład:
 
 [!code-json[](index/sample/arm.json?highlight=2)]
 
@@ -251,15 +254,15 @@ Jeśli szablon ARM jest używany do tworzenia i wdrażania aplikacji, typ `sitee
 W przypadku wdrożenia 64-bitowego:
 
 * Aby utworzyć aplikację 64-bitową, użyj 64-bitowej zestaw .NET Core SDK.
-* Ustaw **platformę** na **64 bit** w**ustawieniach ogólnych** **konfiguracji** > App Service. Aby umożliwić wybór liczby bitów platformy, aplikacja musi korzystać z planu usługi w warstwie Podstawowa lub wyższa.
+* Ustaw **platformę** na **64 bit** w **Configuration**  >  **ustawieniach ogólnych**konfiguracji App Service. Aby umożliwić wybór liczby bitów platformy, aplikacja musi korzystać z planu usługi w warstwie Podstawowa lub wyższa.
 
 ::: moniker-end
 
 ### <a name="deploy-the-app-framework-dependent"></a>Wdróż aplikację zależną od platformy
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
-1. Wybierz pozycję **kompilacja** > **Opublikuj {nazwa aplikacji}** na pasku narzędzi programu Visual Studio lub kliknij prawym przyciskiem myszy projekt w **Eksplorator rozwiązań** i wybierz polecenie **Publikuj**.
+1. Wybierz pozycję **kompilacja**  >  **Opublikuj {nazwa aplikacji}** na pasku narzędzi programu Visual Studio lub kliknij prawym przyciskiem myszy projekt w **Eksplorator rozwiązań** i wybierz polecenie **Publikuj**.
 1. W oknie dialogowym **Wybieranie elementu docelowego publikowania** upewnij się, że **App Service** jest zaznaczone.
 1. Wybierz pozycję **Zaawansowane**. Zostanie otwarte okno dialogowe **Publikowanie** .
 1. W oknie dialogowym **publikowania** :
@@ -270,7 +273,7 @@ W przypadku wdrożenia 64-bitowego:
    * Wybierz pozycję **Zapisz**.
 1. Utwórz nową lokację lub zaktualizuj istniejącą witrynę, postępując zgodnie z pozostałymi instrukcjami Kreatora publikacji.
 
-# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli/)
+# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli/)
 
 1. W pliku projektu nie określaj [identyfikatora środowiska uruchomieniowego (RID)](/dotnet/core/rid-catalog).
 
@@ -288,9 +291,9 @@ W przypadku wdrożenia 64-bitowego:
 
 Użyj programu Visual Studio lub interfejs wiersza polecenia platformy .NET Core dla [wdrożenia samodzielnego (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd).
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
-1. Wybierz pozycję **kompilacja** > **Opublikuj {nazwa aplikacji}** na pasku narzędzi programu Visual Studio lub kliknij prawym przyciskiem myszy projekt w **Eksplorator rozwiązań** i wybierz polecenie **Publikuj**.
+1. Wybierz pozycję **kompilacja**  >  **Opublikuj {nazwa aplikacji}** na pasku narzędzi programu Visual Studio lub kliknij prawym przyciskiem myszy projekt w **Eksplorator rozwiązań** i wybierz polecenie **Publikuj**.
 1. W oknie dialogowym **Wybieranie elementu docelowego publikowania** upewnij się, że **App Service** jest zaznaczone.
 1. Wybierz pozycję **Zaawansowane**. Zostanie otwarte okno dialogowe **Publikowanie** .
 1. W oknie dialogowym **publikowania** :
@@ -301,9 +304,9 @@ Użyj programu Visual Studio lub interfejs wiersza polecenia platformy .NET Core
    * Wybierz pozycję **Zapisz**.
 1. Utwórz nową lokację lub zaktualizuj istniejącą witrynę, postępując zgodnie z pozostałymi instrukcjami Kreatora publikacji.
 
-# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli/)
+# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli/)
 
-1. W pliku projektu Określ jeden lub więcej [identyfikatorów środowiska uruchomieniowego (RID)](/dotnet/core/rid-catalog). Użyj `<RuntimeIdentifier>` (pojedyncze) dla pojedynczego identyfikatora RID lub Użyj `<RuntimeIdentifiers>` (plural), aby podać listę identyfikatorów RID rozdzielonych średnikami. W poniższym przykładzie określono `win-x86` identyfikator RID:
+1. W pliku projektu Określ jeden lub więcej [identyfikatorów środowiska uruchomieniowego (RID)](/dotnet/core/rid-catalog). Użyj `<RuntimeIdentifier>` (pojedyncze) dla pojedynczego identyfikatora RID lub Użyj `<RuntimeIdentifiers>` (plural), aby podać listę identyfikatorów RID rozdzielonych średnikami. W poniższym przykładzie `win-x86` określono identyfikator RID:
 
    ```xml
    <PropertyGroup>
@@ -312,7 +315,7 @@ Użyj programu Visual Studio lub interfejs wiersza polecenia platformy .NET Core
    </PropertyGroup>
    ```
 
-1. W powłoce poleceń Opublikuj aplikację w konfiguracji wydania dla środowiska uruchomieniowego hosta za pomocą polecenia [dotnet Publish](/dotnet/core/tools/dotnet-publish) . W poniższym przykładzie aplikacja jest publikowana dla `win-x86` identyfikatora RID. Identyfikator RID dostarczony do `--runtime` opcji musi być podany we właściwości `<RuntimeIdentifier>` (lub `<RuntimeIdentifiers>`) w pliku projektu.
+1. W powłoce poleceń Opublikuj aplikację w konfiguracji wydania dla środowiska uruchomieniowego hosta za pomocą polecenia [dotnet Publish](/dotnet/core/tools/dotnet-publish) . W poniższym przykładzie aplikacja jest publikowana dla `win-x86` identyfikatora RID. Identyfikator RID dostarczony do `--runtime` opcji musi być podany we `<RuntimeIdentifier>` właściwości (lub `<RuntimeIdentifiers>` ) w pliku projektu.
 
    ```console
    dotnet publish --configuration Release --runtime win-x86 --self-contained
@@ -328,7 +331,7 @@ Bezpieczne powiązania protokołów pozwalają określić certyfikat, który ma 
 
 ## <a name="transform-webconfig"></a>Przekształcanie pliku web.config
 
-Jeśli musisz przekształcić *plik Web. config* przy publikowaniu (na przykład ustawić zmienne środowiskowe na podstawie konfiguracji, profilu lub środowiska), zobacz <xref:host-and-deploy/iis/transform-webconfig>.
+Jeśli musisz przekształcić *web.config* przy publikowaniu (na przykład ustawić zmienne środowiskowe na podstawie konfiguracji, profilu lub środowiska), zobacz <xref:host-and-deploy/iis/transform-webconfig> .
 
 ## <a name="additional-resources"></a>Zasoby dodatkowe
 

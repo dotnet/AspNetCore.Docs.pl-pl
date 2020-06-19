@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/progressive-web-app
-ms.openlocfilehash: ffdc329d813dcbfffe2216dc58bbc4150f7cf786
-ms.sourcegitcommit: b0062f29cba2e5c21b95cf89eaf435ba830d11a3
+ms.openlocfilehash: b55619889c294a0cd6ab98ffdf228d86ee60cd7c
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/15/2020
-ms.locfileid: "84776426"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102312"
 ---
 # <a name="build-progressive-web-applications-with-aspnet-core-blazor-webassembly"></a>Kompilowanie progresywnych aplikacji sieci Web za pomocą ASP.NET Core Blazor Webassembly
 
@@ -89,7 +89,7 @@ Domyślnie aplikacje utworzone przy użyciu opcji szablonu PWA obsługują uruch
 
 Aby zobaczyć, jak działa pomoc techniczna w trybie offline:
 
-1. Opublikuj aplikację. Aby uzyskać więcej informacji, zobacz <xref:host-and-deploy/blazor/index#publish-the-app>.
+1. Opublikuj aplikację. Aby uzyskać więcej informacji, zobacz <xref:blazor/host-and-deploy/index#publish-the-app>.
 1. Wdróż aplikację na serwerze obsługującym protokół HTTPS i uzyskaj dostęp do aplikacji w przeglądarce przy użyciu bezpiecznego adresu HTTPS.
 1. Otwórz narzędzia deweloperskie przeglądarki i sprawdź, czy *proces roboczy usługi* jest zarejestrowany dla hosta na karcie **aplikacja** :
 
@@ -293,6 +293,6 @@ Przykładowa aplikacja [CarChecker](https://github.com/SteveSandersonMS/CarCheck
 * `LocalVehiclesStore`(*Klient/dane/LocalVehiclesStore. cs*)
 * `LoginStatus`składnik (*Client/Shared/stanu logowania. Razor*)
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
-* [SignalRnegocjowanie między źródłami na potrzeby uwierzytelniania](xref:blazor/hosting-model-configuration#signalr-cross-origin-negotiation-for-authentication)
+* [SignalRnegocjowanie między źródłami na potrzeby uwierzytelniania](xref:blazor/fundamentals/additional-scenarios#signalr-cross-origin-negotiation-for-authentication)

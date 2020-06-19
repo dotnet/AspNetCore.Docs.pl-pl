@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: test/loadtests
-ms.openlocfilehash: f0c930a7689c7288a58cfc3ca630d3cd324bf2cd
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 0ec69ad783a4e545ea95ddcb928d03ba6a2e0050
+ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84106809"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85074380"
 ---
 # <a name="aspnet-core-loadstress-testing"></a>ASP.NET Core testowanie obciążenia/obciążeniowego
 
@@ -29,15 +29,7 @@ Testowanie obciążeniowe i testowanie obciążeniowe są ważne, aby zapewnić,
 
 Testy obciążeniowe określają, czy aplikacja poddawana obciążeniom może odzyskać sprawność po awarii i bezpiecznie wrócić do oczekiwanego zachowania. W obszarze naprężenie aplikacja nie jest uruchamiana w normalnych warunkach.
 
-Program Visual Studio 2019 to Ostatnia wersja programu Visual Studio z funkcjami testów obciążenia. W przypadku klientów wymagających narzędzi testowania obciążenia w przyszłości zalecamy używanie alternatywnych narzędzi, takich jak Apache JMeter, Akamai CloudTest i BlazeMeter. Aby uzyskać więcej informacji, zobacz [Informacje o wersji programu Visual Studio 2019](/visualstudio/releases/2019/release-notes-v16.0#test-tools).
-
-## <a name="visual-studio-tools"></a>Narzędzia programu Visual Studio
-
-Program Visual Studio umożliwia użytkownikom tworzenie, opracowywanie i debugowanie testów wydajności i obciążenia sieci Web. Dostępna jest opcja tworzenia testów przez rejestrowanie akcji w przeglądarce internetowej.
-
-Aby uzyskać informacje na temat sposobu tworzenia, konfigurowania i uruchamiania projektów testów obciążenia przy użyciu programu Visual Studio 2017, zobacz [Szybki Start: Tworzenie projektu testu obciążenia](/visualstudio/test/quickstart-create-a-load-test-project?view=vs-2017).
-
-Testy obciążenia można skonfigurować do uruchamiania lokalnego lub uruchamiania w chmurze przy użyciu usługi Azure DevOps.
+Program Visual Studio 2019 ogłosił plany [zaniechania testowania obciążenia](https://devblogs.microsoft.com/devops/cloud-based-load-testing-service-eol/). Odpowiednia usługa testowania obciążenia opartego na chmurze platformy Azure DevOps została zamknięta.
 
 ## <a name="third-party-tools"></a>Narzędzia innych firm
 
@@ -51,4 +43,3 @@ Poniższa lista zawiera narzędzia do oceny wydajności sieci Web innych firm z 
 * [Moje przepięcio zachodnie wiatru](https://websurge.west-wind.com/)
 * [W ramach](https://github.com/hallatore/Netling)
 * [Vegeta](https://github.com/tsenart/vegeta)
-

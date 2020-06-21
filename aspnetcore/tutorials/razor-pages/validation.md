@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/validation
-ms.openlocfilehash: f72edda54d4201915e2494b75b4d49ec6c9c6d75
-ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
+ms.openlocfilehash: ff44b4b80385ffbd1a6659b2684ef2a8055ee2d0
+ms.sourcegitcommit: 77729ba225d5143c0e3954db005906f4a5c7da95
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84652835"
+ms.lasthandoff: 06/20/2020
+ms.locfileid: "85122116"
 ---
 # <a name="part-8-add-validation-to-an-aspnet-core-razor-page"></a>Część 8, Dodawanie walidacji do Razor strony ASP.NET Core
 
@@ -119,7 +119,7 @@ Zapoznaj się z `Movie` klasą. `System.ComponentModel.DataAnnotations`Przestrze
 
 `DataType`Atrybuty zawierają tylko wskazówki dla aparatu widoku do formatowania danych (i udostępniają atrybuty, takie jak `<a>` adresy URL i `<a href="mailto:EmailAddress.com">` wiadomości e-mail). Użyj `RegularExpression` atrybutu, aby sprawdzić poprawność formatu danych. Ten `DataType` atrybut służy do określania typu danych, który jest bardziej szczegółowy niż typ wewnętrzny bazy danych. `DataType`atrybuty nie są atrybutami walidacji. W przykładowej aplikacji tylko data jest wyświetlana bez czasu.
 
-`DataType`Wyliczenie zawiera wiele typów danych, takich jak data, godzina, numer telefonu, waluta, EmailAddress i inne. Ten `DataType` atrybut może również umożliwić aplikacji automatyczne udostępnianie funkcji specyficznych dla typu. Na przykład `mailto:` można utworzyć link dla `DataType.EmailAddress` . `DataType.Date`W przeglądarkach, które obsługują HTML5, można podać selektor daty. `DataType`Atrybuty emitują pliki HTML 5 `data-` (wymawiane kreski danych) używane przez przeglądarki HTML 5. `DataType`Atrybuty nie zapewniają **not** żadnej weryfikacji.
+`DataType`Wyliczenie zawiera wiele typów danych, takich jak data, godzina, numer telefonu, waluta, EmailAddress i inne. Ten `DataType` atrybut może również umożliwić aplikacji automatyczne udostępnianie funkcji specyficznych dla typu. Na przykład `mailto:` można utworzyć link dla `DataType.EmailAddress` . `DataType.Date`W przeglądarkach, które obsługują HTML5, można podać selektor daty. `DataType`Atrybuty emitują HTML 5 `data-` (wymawiane kreski danych), których używają przeglądarki HTML 5. `DataType`Atrybuty nie zapewniają **not** żadnej weryfikacji.
 
 `DataType.Date`nie określa formatu wyświetlanej daty. Domyślnie pole dane jest wyświetlane zgodnie z domyślnymi formatami opartymi na serwerze `CultureInfo` .
 
@@ -138,9 +138,9 @@ Ten `DisplayFormat` atrybut może być używany przez siebie, ale zazwyczaj dobr
 
 * Przeglądarka może włączać funkcje HTML5 (na przykład w celu wyświetlania kontrolki kalendarza, symbolu waluty właściwej dla ustawień regionalnych, linków e-mail itp.).
 * Domyślnie przeglądarka będzie renderować dane przy użyciu poprawnego formatu na podstawie ustawień regionalnych.
-* Ten `DataType` atrybut może umożliwić usłudze ASP.NET Core Framework wybranie odpowiedniego szablonu pola w celu renderowania danych. `DisplayFormat`Używany przez siebie sam używa szablonu ciągu.
+* Ten `DataType` atrybut może umożliwić usłudze ASP.NET Core Framework wybranie odpowiedniego szablonu pola w celu renderowania danych. `DisplayFormat`, Jeśli używany przez siebie, używa szablonu ciągu.
 
-Uwaga: Walidacja jQuery nie działa z `Range` atrybutem i `DateTime` . Na przykład poniższy kod zawsze będzie wyświetlał błąd walidacji po stronie klienta, nawet wtedy, gdy data jest w określonym zakresie:
+**Uwaga:** Walidacja jQuery nie działa z `Range` atrybutem i `DateTime` . Na przykład poniższy kod zawsze będzie wyświetlał błąd walidacji po stronie klienta, nawet wtedy, gdy data jest w określonym zakresie:
 
 ```csharp
 [Range(typeof(DateTime), "1/1/1966", "1/1/2020")]

@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/get-started
-ms.openlocfilehash: c90c3bf7ccef420101c66fe04d579920209b066c
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 63fee0b6a3152640a5483c2a682eec7d04742145
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85102330"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85243606"
 ---
 # <a name="get-started-with-aspnet-core-blazor"></a>Wprowadzenie do ASP.NET CoreBlazor
 
@@ -70,7 +70,7 @@ Aby rozpocząć pracę z programem Blazor , postępuj zgodnie ze wskazówkami do
 
    Aby uzyskać informacje na temat dwóch Blazor modeli hostingu, * Blazor zestawu webassembly* i * Blazor serwera*, zobacz <xref:blazor/hosting-models> .
 
-1. Otwórz folder *WebApplication1* w Visual Studio Code.
+1. Otwórz `WebApplication1` folder w Visual Studio Code.
 
 1. Żądania IDE służące do dodawania zasobów do kompilowania i debugowania projektu. Wybierz pozycję **Tak**.
 
@@ -137,15 +137,15 @@ Na pasku bocznym są dostępne wiele stron:
 * Licznik
 * Pobieranie danych
 
-Na stronie licznik wybierz przycisk **kliknij** , aby zwiększyć licznik bez odświeżania strony. Zwiększenie licznika na stronie sieci Web zwykle wymaga pisania kodu JavaScript, ale przy użyciu Blazor języka C#.
+Na stronie licznik wybierz przycisk, aby zwiększyć licznik bez odświeżania strony. Zwiększenie licznika na stronie sieci Web zwykle wymaga pisania kodu JavaScript, ale przy użyciu Blazor języka C#.
 
-*Pages/Counter. Razor*:
+`Pages/Counter.razor`:
 
 [!code-razor[](get-started/samples_snapshot/3.x/Counter1.razor?highlight=7,12-15)]
 
 Żądanie `/counter` w przeglądarce, zgodnie z definicją w `@page` dyrektywie u góry, powoduje, że `Counter` składnik renderuje jego zawartość. Składniki są renderowane w postaci reprezentacji drzewa renderowania, która może być następnie używana do aktualizowania interfejsu użytkownika w elastyczny i wydajny sposób.
 
-Za każdym razem, gdy zostanie wybrany przycisk **kliknij mnie** :
+Za każdym razem, gdy przycisk jest zaznaczony:
 
 * `onclick`Zdarzenie jest wyzwalane.
 * `IncrementCount`Metoda jest wywoływana.
@@ -156,7 +156,7 @@ Za każdym razem, gdy zostanie wybrany przycisk **kliknij mnie** :
 
 Dodaj składnik do innego składnika przy użyciu składni języka HTML. Na przykład Dodaj `Counter` składnik do strony głównej aplikacji przez dodanie `<Counter />` elementu do `Index` składnika.
 
-*Pages/index. Razor*:
+`Pages/Index.razor`:
 
 [!code-razor[](get-started/samples_snapshot/3.x/Index1.razor?highlight=7)]
 
@@ -167,17 +167,17 @@ Parametry składnika są określone przy użyciu atrybutów lub [zawartości pod
 * Dodaj właściwość publiczną dla `IncrementAmount` [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) atrybutu.
 * Zmień `IncrementCount` metodę, aby użyć `IncrementAmount` podczas zwiększania wartości `currentCount` .
 
-*Pages/Counter. Razor*:
+`Pages/Counter.razor`:
 
 [!code-razor[](get-started/samples_snapshot/3.x/Counter2.razor?highlight=12-13,17)]
 
 Określ `IncrementAmount` `Index` element w elemencie składnika `<Counter>` przy użyciu atrybutu.
 
-*Pages/index. Razor*:
+`Pages/Index.razor`:
 
 [!code-razor[](get-started/samples_snapshot/3.x/Index2.razor?highlight=7)]
 
-Uruchom aplikację. `Index`Składnik ma swój własny licznik, który zwiększa się o dziesięć za każdym razem, gdy jest zaznaczony przycisk **kliknij mnie** . `Counter`Składnik (*Counter. Razor*) w `/counter` dalszym ciągu zwiększa się o jeden.
+Uruchom aplikację. `Index`Składnik ma swój własny licznik, który zwiększa się o dziesięć za każdym razem, gdy przycisk jest zaznaczony. `Counter`Składnik ( `Pages/Counter.razor` ) w `/counter` dalszym ciągu zwiększa się o jeden.
 
 ## <a name="next-steps"></a>Następne kroki
 

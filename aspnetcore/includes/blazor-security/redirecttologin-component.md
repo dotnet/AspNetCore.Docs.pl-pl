@@ -1,4 +1,4 @@
-`RedirectToLogin`Składnik (*Shared/RedirectToLogin. Razor*):
+`RedirectToLogin`Składnik ( `Shared/RedirectToLogin.razor` ):
 
 * Zarządza przekierowywaniem nieautoryzowanych użytkowników do strony logowania.
 * Zachowuje bieżący adres URL, do którego użytkownik próbuje uzyskać dostęp, aby można go było zwrócić do tej strony w przypadku pomyślnego uwierzytelnienia.

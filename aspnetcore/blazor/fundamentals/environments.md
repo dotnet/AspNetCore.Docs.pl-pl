@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/environments
-ms.openlocfilehash: 203f29ce606a313463e416b068177ce02acd6231
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: a527e04cf97dd2d2b88dcc6e866475835498545d
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103842"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85243619"
 ---
 # <a name="aspnet-core-blazor-environments"></a>BlazorŚrodowiska ASP.NET Core
 
@@ -31,7 +31,7 @@ Hostowana Blazor aplikacja sieci webassembly pobiera środowisko z serwera za po
 
 W przypadku aplikacji autonomicznej uruchomionej lokalnie serwer programistyczny dodaje `blazor-environment` nagłówek, aby określić środowisko programistyczne. Aby określić środowisko dla innych środowisk hostingu, Dodaj `blazor-environment` nagłówek.
 
-W poniższym przykładzie dla usług IIS Dodaj nagłówek niestandardowy do opublikowanego pliku *web.config* . Plik *web.config* znajduje się w folderze *bin/Release/{Target Framework}/Publish* :
+W poniższym przykładzie dla usług IIS Dodaj nagłówek niestandardowy do opublikowanego `web.config` pliku. Plik znajduje się `web.config` w `bin/Release/{TARGET FRAMEWORK}/publish` folderze:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -50,7 +50,7 @@ W poniższym przykładzie dla usług IIS Dodaj nagłówek niestandardowy do opub
 ```
 
 > [!NOTE]
-> Aby użyć niestandardowego pliku *web.config* dla usług IIS, które nie są zastępowane podczas publikowania aplikacji w folderze *publikowania* , zobacz <xref:blazor/host-and-deploy/webassembly#use-a-custom-webconfig> .
+> Aby użyć pliku niestandardowego `web.config` dla usług IIS, który nie jest zastępowany podczas publikowania aplikacji w `publish` folderze, zobacz <xref:blazor/host-and-deploy/webassembly#use-a-custom-webconfig> .
 
 Uzyskaj środowisko aplikacji w składniku, wprowadzając <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment> i odczytując <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.Environment> Właściwość:
 

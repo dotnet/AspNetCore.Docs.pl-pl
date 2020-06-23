@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/configure-linker
-ms.openlocfilehash: efac62c325b03b5ee19cae58abb5227f3d300b69
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 76af450df70fe666ea1b951cb4b41696057c5e67
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103821"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85243580"
 ---
 # <a name="configure-the-linker-for-aspnet-core-blazor"></a>Skonfiguruj konsolidator dla ASP.NET CoreBlazor
 
@@ -55,7 +55,7 @@ Kontroluj łączenie dla poszczególnych zestawów, dostarczając plik konfigura
 </ItemGroup>
 ```
 
-*LinkerConfig.xml*:
+`LinkerConfig.xml`:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -93,7 +93,7 @@ Aby uzyskać więcej informacji i przykładów, zobacz [formaty danych (repozyto
 
 Aby skonfigurować konsolidator dla określonej biblioteki, Dodaj plik konfiguracji konsolidatora XML do biblioteki jako zasób osadzony. Osadzony zasób musi mieć taką samą nazwę jak zestaw.
 
-W poniższym przykładzie plik *LinkerConfig.xml* jest określony jako osadzony zasób, który ma taką samą nazwę jak zestaw biblioteki:
+W poniższym przykładzie `LinkerConfig.xml` plik jest określony jako osadzony zasób, który ma taką samą nazwę jak zestaw biblioteki:
 
 ```xml
 <ItemGroup>
@@ -118,12 +118,12 @@ Aby kontrolować, które zestawy I18N są zachowywane, ustaw `<BlazorWebAssembly
 | Wartość regionu     | Zestaw regionów mono    |
 | ---------------- | ----------------------- |
 | `all`            | Uwzględnione wszystkie zestawy |
-| `cjk`            | *I18N.CJK.dll*          |
-| `mideast`        | *I18N.MidEast.dll*      |
+| `cjk`            | `I18N.CJK.dll`          |
+| `mideast`        | `I18N.MidEast.dll`      |
 | `none`wartooć | Brak                    |
-| `other`          | *I18N.Other.dll*        |
-| `rare`           | *I18N.Rare.dll*         |
-| `west`           | *I18N.West.dll*         |
+| `other`          | `I18N.Other.dll`        |
+| `rare`           | `I18N.Rare.dll`         |
+| `west`           | `I18N.West.dll`         |
 
 Użyj przecinka, aby rozdzielić wiele wartości (na przykład `mideast,west` ).
 

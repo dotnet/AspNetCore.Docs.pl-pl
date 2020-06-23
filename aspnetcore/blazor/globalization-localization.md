@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/globalization-localization
-ms.openlocfilehash: 42b61c9af0c1809ecb7d9a45ec8edfa815e2df22
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 5050d99e5304c7edaf6faa43f05298b69882521d
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85102321"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85243593"
 ---
 # <a name="aspnet-core-blazor-globalization-and-localization"></a>ASP.NET Core Blazor globalizacja i lokalizacja
 
@@ -71,7 +71,7 @@ Aby jawnie skonfigurować kulturę, ustaw <xref:System.Globalization.CultureInfo
 
 Domyślnie Blazor Konfiguracja konsolidatora dla aplikacji webassembly umożliwia rozłączenie Blazor informacji o danych wielojęzycznych z wyjątkiem lokalizacji lokalnych jawnie żądanych. Aby uzyskać więcej informacji i wskazówek dotyczących kontrolowania zachowania konsolidatora, zobacz <xref:blazor/host-and-deploy/configure-linker#configure-the-linker-for-internationalization> .
 
-Chociaż kultura, która Blazor wybiera domyślnie, może być wystarczająca dla większości użytkowników, należy rozważyć umożliwienie użytkownikom określenia ich preferowanych ustawień regionalnych. Aby zapoznać się Blazor z przykładową aplikacją webassembly z selektorem kultury, zobacz przykładową aplikację [LocSample](https://github.com/pranavkm/LocSample) lokalizacyjną.
+Chociaż kultura, która Blazor wybiera domyślnie, może być wystarczająca dla większości użytkowników, należy rozważyć umożliwienie użytkownikom określenia ich preferowanych ustawień regionalnych. Aby uzyskać Blazor przykładową aplikację webassembly z selektorem kultury, zobacz [`LocSample`](https://github.com/pranavkm/LocSample) przykładową aplikację lokalizacyjną.
 
 ### <a name="blazor-server"></a>BlazorServer
 
@@ -92,7 +92,7 @@ Użycie pliku cookie zapewnia, że połączenie z użyciem protokołu WebSocket 
 
 Każda technika może służyć do przypisywania kultury, jeśli kultura jest utrwalona w pliku cookie lokalizacji. Jeśli aplikacja ma już ustalony schemat lokalizacji dla ASP.NET Core po stronie serwera, Kontynuuj korzystanie z istniejącej infrastruktury lokalizacji aplikacji i Ustaw plik cookie kultury lokalizacji w schemacie aplikacji.
 
-Poniższy przykład pokazuje, jak ustawić bieżącą kulturę w pliku cookie, który może zostać odczytany przez oprogramowanie pośredniczące lokalizacji. Utwórz Razor wyrażenie w pliku *Pages/_Host. cshtml* bezpośrednio wewnątrz tagu otwierającego `<body>` :
+Poniższy przykład pokazuje, jak ustawić bieżącą kulturę w pliku cookie, który może zostać odczytany przez oprogramowanie pośredniczące lokalizacji. Utwórz Razor wyrażenie w `Pages/_Host.cshtml` pliku bezpośrednio wewnątrz tagu otwierającego `<body>` :
 
 ```cshtml
 @using System.Globalization
@@ -118,7 +118,7 @@ Lokalizacja jest obsługiwana przez aplikację w następującej kolejności zdar
 
 1. Przeglądarka wysyła początkowe żądanie HTTP do aplikacji.
 1. Kultura jest przypisana przez oprogramowanie pośredniczące lokalizacji.
-1. RazorWyrażenie na `_Host` stronie (*_Host. cshtml*) utrzymuje kulturę w pliku cookie jako część odpowiedzi.
+1. RazorWyrażenie na `_Host` stronie ( `_Host.cshtml` ) utrwala kulturę w pliku cookie jako część odpowiedzi.
 1. Przeglądarka otwiera połączenie WebSocket, aby utworzyć interaktywną Blazor sesję serwera.
 1. Oprogramowanie pośredniczące lokalizacji odczytuje plik cookie i przypisuje kulturę.
 1. BlazorSesja serwera rozpoczyna się od poprawnej kultury.

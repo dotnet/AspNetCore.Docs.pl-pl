@@ -1,9 +1,9 @@
-<span data-ttu-id="ba70d-101">`LoginDisplay`Składnik (*Shared/LoginDisplay. Razor*) jest renderowany w `MainLayout` składniku (*Shared/MainLayout. Razor*) i zarządza następującymi zachowaniami:</span><span class="sxs-lookup"><span data-stu-id="ba70d-101">The `LoginDisplay` component (*Shared/LoginDisplay.razor*) is rendered in the `MainLayout` component (*Shared/MainLayout.razor*) and manages the following behaviors:</span></span>
+<span data-ttu-id="55d57-101">`LoginDisplay`Składnik ( `Shared/LoginDisplay.razor` ) jest renderowany w `MainLayout` składniku ( `Shared/MainLayout.razor` ) i zarządza następującymi zachowaniami:</span><span class="sxs-lookup"><span data-stu-id="55d57-101">The `LoginDisplay` component (`Shared/LoginDisplay.razor`) is rendered in the `MainLayout` component (`Shared/MainLayout.razor`) and manages the following behaviors:</span></span>
 
-* <span data-ttu-id="ba70d-102">Dla uwierzytelnionych użytkowników:</span><span class="sxs-lookup"><span data-stu-id="ba70d-102">For authenticated users:</span></span>
-  * <span data-ttu-id="ba70d-103">Wyświetla bieżącą nazwę użytkownika.</span><span class="sxs-lookup"><span data-stu-id="ba70d-103">Displays the current username.</span></span>
-  * <span data-ttu-id="ba70d-104">Oferuje przycisk umożliwiający wylogowanie się z aplikacji.</span><span class="sxs-lookup"><span data-stu-id="ba70d-104">Offers a button to log out of the app.</span></span>
-* <span data-ttu-id="ba70d-105">W przypadku użytkowników anonimowych program oferuje opcję logowania.</span><span class="sxs-lookup"><span data-stu-id="ba70d-105">For anonymous users, offers the option to log in.</span></span>
+* <span data-ttu-id="55d57-102">Dla uwierzytelnionych użytkowników:</span><span class="sxs-lookup"><span data-stu-id="55d57-102">For authenticated users:</span></span>
+  * <span data-ttu-id="55d57-103">Wyświetla bieżącą nazwę użytkownika.</span><span class="sxs-lookup"><span data-stu-id="55d57-103">Displays the current username.</span></span>
+  * <span data-ttu-id="55d57-104">Oferuje przycisk umożliwiający wylogowanie się z aplikacji.</span><span class="sxs-lookup"><span data-stu-id="55d57-104">Offers a button to log out of the app.</span></span>
+* <span data-ttu-id="55d57-105">W przypadku użytkowników anonimowych program oferuje opcję logowania.</span><span class="sxs-lookup"><span data-stu-id="55d57-105">For anonymous users, offers the option to log in.</span></span>
 
 ```razor
 @using Microsoft.AspNetCore.Components.Authorization

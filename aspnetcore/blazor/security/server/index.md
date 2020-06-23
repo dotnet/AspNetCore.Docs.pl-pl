@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/index
-ms.openlocfilehash: a8604ca6ea60386bb3c54c950205ee695d37c689
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 2bdd2f256f456cbf474181021fafc6830bfd68f4
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103791"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242930"
 ---
 # <a name="secure-aspnet-core-blazor-server-apps"></a>Bezpieczne Blazor aplikacje serwera ASP.NET Core
 
@@ -67,7 +67,7 @@ Za pomocą `-o|--output` opcji, polecenie używa wartości podanej dla `{APP NAM
 * Utwórz folder dla projektu.
 * Nadaj nazwę projektowi.
 
-Aby uzyskać więcej informacji, zobacz polecenie [dotnet New](/dotnet/core/tools/dotnet-new) w przewodniku .NET Core.
+Aby uzyskać więcej informacji, zobacz [`dotnet new`](/dotnet/core/tools/dotnet-new) polecenie w przewodniku .NET Core.
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
@@ -101,7 +101,7 @@ Za pomocą `-o|--output` opcji, polecenie używa wartości podanej dla `{APP NAM
 * Utwórz folder dla projektu.
 * Nadaj nazwę projektowi.
 
-Aby uzyskać więcej informacji, zobacz polecenie [dotnet New](/dotnet/core/tools/dotnet-new) w przewodniku .NET Core.
+Aby uzyskać więcej informacji, zobacz [`dotnet new`](/dotnet/core/tools/dotnet-new) polecenie w przewodniku .NET Core.
 
 ---
 

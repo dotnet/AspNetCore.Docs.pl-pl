@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/index
-ms.openlocfilehash: 3a3c5ab5365e5b4312dd3fd516f4906155911cc9
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 0cd21e6b4930fb6112aa448a8a44be80cc8fbf61
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103818"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85243567"
 ---
 # <a name="host-and-deploy-aspnet-core-blazor"></a>Hostowanie i wdrażanie ASP.NET CoreBlazor
 
@@ -32,16 +32,16 @@ Aplikacje są publikowane do wdrożenia w konfiguracji wydania.
 
 1. Wybierz pozycję **kompilacja**  >  **Opublikuj aplikację {aplikacja}** na pasku nawigacyjnym.
 1. Wybierz *element docelowy publikowania*. Aby opublikować lokalnie, wybierz pozycję **folder**.
-1. Zaakceptuj lokalizację domyślną w polu **Wybierz folder** lub określ inną lokalizację. Wybierz przycisk **Publikuj**.
+1. Zaakceptuj lokalizację domyślną w polu **Wybierz folder** lub określ inną lokalizację. Wybierz **`Publish`** przycisk.
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
 1. Wybierz pozycję **Kompiluj**  >  **Publikowanie do folderu**.
-1. Potwierdź, że folder otrzymuje opublikowane zasoby, a następnie wybierz pozycję **Publikuj**.
+1. Potwierdź folder, w którym mają zostać odebrane opublikowane zasoby, a następnie wybierz opcję **`Publish`** .
 
 # <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
 
-Użyj [dotnet Publish](/dotnet/core/tools/dotnet-publish) polecenia, aby opublikować aplikację z konfiguracją wydania:
+Użyj [`dotnet publish`](/dotnet/core/tools/dotnet-publish) polecenia, aby opublikować aplikację z konfiguracją wydania:
 
 ```dotnetcli
 dotnet publish -c Release
@@ -54,9 +54,9 @@ Opublikowanie aplikacji wyzwala [przywracanie](/dotnet/core/tools/dotnet-restore
 Lokalizacje publikowania:
 
 * BlazorZestaw webassembly
-  * Autonomiczne: aplikacja jest publikowana w folderze */bin/Release/{Target Framework}/Publish/wwwroot* . Aby wdrożyć aplikację jako lokację statyczną, skopiuj zawartość folderu *wwwroot* do hosta lokacji statycznej.
-  * Hostowane: Blazor aplikacja webassembly klienta jest publikowana w folderze */bin/Release/{Target Framework}/Publish/wwwroot* aplikacji serwera, wraz ze wszystkimi innymi statycznymi zasobami sieci Web aplikacji serwera. Wdróż zawartość folderu *publikowania* na hoście.
-* BlazorSerwer: aplikacja jest publikowana w folderze */bin/Release/{Target Framework}/Publish* . Wdróż zawartość folderu *publikowania* na hoście.
+  * Autonomiczne: aplikacja jest publikowana w `/bin/Release/{TARGET FRAMEWORK}/publish/wwwroot` folderze. Aby wdrożyć aplikację jako lokację statyczną, skopiuj zawartość `wwwroot` folderu do hosta lokacji statycznej.
+  * Hostowane: Blazor aplikacja webassembly klienta jest publikowana w `/bin/Release/{TARGET FRAMEWORK}/publish/wwwroot` folderze aplikacji serwerowej wraz ze wszystkimi innymi statycznymi zasobami sieci Web aplikacji serwera. Wdróż zawartość `publish` folderu na hoście.
+* BlazorSerwer: aplikacja jest publikowana w `/bin/Release/{TARGET FRAMEWORK}/publish` folderze. Wdróż zawartość `publish` folderu na hoście.
 
 Zasoby w folderze są wdrażane na serwerze sieci Web. Wdrożenie może być procesem ręcznym lub zautomatyzowanym w zależności od używanych narzędzi programistycznych.
 
@@ -65,15 +65,15 @@ Zasoby w folderze są wdrażane na serwerze sieci Web. Wdrożenie może być pro
 *Ścieżka podstawowa aplikacji* jest ścieżką głównego adresu URL aplikacji. Weź pod uwagę następujące ASP.NET Core aplikacji i aplikacji Blazor podrzędnej:
 
 * Aplikacja ASP.NET Core ma nazwę `MyApp` :
-  * Aplikacja fizycznie znajduje się na *d:/MojaApl*.
+  * Aplikacja fizycznie znajduje się w lokalizacji `d:/MyApp` .
   * Żądania są odbierane o `https://www.contoso.com/{MYAPP RESOURCE}` .
 * BlazorAplikacja o nazwie `CoolApp` jest aplikacją podrzędną `MyApp` :
-  * Aplikacja podrzędna fizycznie znajduje się na *d:/MojaApl/CoolApp*.
+  * Aplikacja podrzędna fizycznie znajduje się w `d:/MyApp/CoolApp` .
   * Żądania są odbierane o `https://www.contoso.com/CoolApp/{COOLAPP RESOURCE}` .
 
 Bez określania dodatkowej konfiguracji programu `CoolApp` aplikacja podrzędna w tym scenariuszu nie ma informacji o tym, gdzie znajduje się na serwerze. Na przykład aplikacja nie może utworzyć prawidłowych względnych adresów URL do swoich zasobów, nie wiedząc, że znajduje się w względnej ścieżce adresu URL `/CoolApp/` .
 
-Aby zapewnić konfigurację Blazor ścieżki podstawowej aplikacji `https://www.contoso.com/CoolApp/` , `<base>` `href` atrybut tagu jest ustawiany na ścieżkę względną root w pliku *Pages/_Host. cshtml* ( Blazor serwer) lub katalogu *wwwroot/index.html* ( Blazor webassembly):
+Aby zapewnić konfigurację Blazor ścieżki podstawowej aplikacji `https://www.contoso.com/CoolApp/` , `<base>` `href` atrybut tagu jest ustawiany na ścieżkę względną root w `Pages/_Host.cshtml` pliku ( Blazor serwerze) lub `wwwroot/index.html` pliku ( Blazor webassembly):
 
 ```html
 <base href="/CoolApp/">
@@ -89,7 +89,7 @@ Dostarczając względną ścieżkę adresu URL, składnik, który nie znajduje s
 
 W wielu scenariuszach hostingu względna ścieżka URL do aplikacji jest katalogiem głównym aplikacji. W takich przypadkach Ścieżka bazowa względnego adresu URL aplikacji jest ukośnikiem ( `<base href="/" />` ), który jest domyślną konfiguracją dla Blazor aplikacji. W innych scenariuszach hostingu, takich jak strony GitHub i aplikacje podrzędne IIS, ścieżka podstawowa aplikacji musi być ustawiona na względną ścieżkę URL serwera aplikacji.
 
-Aby ustawić ścieżkę bazową aplikacji, zaktualizuj `<base>` tag wewnątrz `<head>` elementów tagów *stron/_Host. cshtml* ( Blazor serwer) lub pliku *wwwroot/index.html* ( Blazor webassembly). Ustaw `href` wartość atrybutu na `/{RELATIVE URL PATH}/` (wymagany jest końcowy ukośnik), gdzie `{RELATIVE URL PATH}` jest pełną WZGLĘDNĄ ścieżkę adresu URL aplikacji.
+Aby ustawić ścieżkę bazową aplikacji, zaktualizuj `<base>` tag wewnątrz `<head>` elementów tagów `Pages/_Host.cshtml` pliku ( Blazor serwera) lub `wwwroot/index.html` pliku ( Blazor webassembly). Ustaw `href` wartość atrybutu na `/{RELATIVE URL PATH}/` (wymagany jest końcowy ukośnik), gdzie `{RELATIVE URL PATH}` jest pełną WZGLĘDNĄ ścieżkę adresu URL aplikacji.
 
 W przypadku Blazor aplikacji webassembly z ścieżką względnego adresu URL niegłówną (na przykład `<base href="/CoolApp/">` ) aplikacja nie będzie mogła znaleźć zasobów w *przypadku uruchamiania lokalnego*. Aby rozwiązać ten problem podczas lokalnego tworzenia i testowania, można podać podstawowy argument *ścieżki* , który jest zgodny z `href` wartością `<base>` tagu w czasie wykonywania. Nie dołączaj końcowego ukośnika. Aby przekazać argument podstawowy ścieżki podczas lokalnego uruchamiania aplikacji, należy wykonać `dotnet run` polecenie z katalogu aplikacji z `--pathbase` opcją:
 

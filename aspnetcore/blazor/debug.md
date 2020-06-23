@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: 193dc656c2ee0154f0ae534bc00f8dc29bab3258
-ms.sourcegitcommit: b0062f29cba2e5c21b95cf89eaf435ba830d11a3
+ms.openlocfilehash: 75db5d5e69cb200ebf3bd1dc1e0afed0300214cc
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/16/2020
-ms.locfileid: "84239203"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242774"
 ---
 # <a name="debug-aspnet-core-blazor-webassembly"></a>Debuguj ASP.NET Core Blazor Webassembly
 
@@ -51,13 +51,13 @@ Debugowanie wymaga jednej z następujących przeglądarek:
 
 ## <a name="enable-debugging-for-visual-studio-and-visual-studio-code"></a>Włącz debugowanie dla programu Visual Studio i Visual Studio Code
 
-Aby włączyć debugowanie istniejącej Blazor aplikacji webassembly, zaktualizuj *launchSettings.jsw* pliku w projekcie startowym w celu uwzględnienia następującej `inspectUri` właściwości w każdym profilu uruchamiania:
+Aby włączyć debugowanie istniejącej Blazor aplikacji webassembly, zaktualizuj `launchSettings.json` plik w projekcie startowym w celu uwzględnienia następującej `inspectUri` właściwości w każdym profilu uruchamiania:
 
 ```json
 "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}"
 ```
 
-Po aktualizacji *launchSettings.jsw* pliku powinien wyglądać podobnie do poniższego przykładu:
+Po zaktualizowaniu `launchSettings.json` plik powinien wyglądać podobnie do poniższego przykładu:
 
 [!code-json[](debug/launchSettings.json?highlight=14,22)]
 
@@ -74,8 +74,8 @@ Aby debugować Blazor aplikację webassembly w programie Visual Studio:
 
 1. Utwórz nową ASP.NET Core hostowanej Blazor aplikacji sieci webassembly.
 1. Naciśnij klawisz <kbd>F5</kbd> , aby uruchomić aplikację w debugerze.
-1. Ustaw punkt przerwania w elemencie *Counter. Razor* w `IncrementCount` metodzie.
-1. Przejdź do karty **licznik** i wybierz przycisk, aby trafić w punkt przerwania:
+1. Ustaw punkt przerwania w `Pages/Counter.razor` `IncrementCount` metodzie.
+1. Przejdź do **`Counter`** karty i wybierz przycisk, aby trafić w punkt przerwania:
 
    ![Licznik debugowania](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vs-debug-counter.png)
 
@@ -87,9 +87,9 @@ Aby debugować Blazor aplikację webassembly w programie Visual Studio:
 
 Podczas debugowania Blazor aplikacji webassembly można także debugować kod serwera:
 
-1. Ustaw punkt przerwania na stronie *FetchData. Razor* w temacie <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> .
+1. Ustaw punkt przerwania na `Pages/FetchData.razor` stronie w <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> .
 1. Ustaw punkt przerwania w `WeatherForecastController` `Get` metodzie Action.
-1. Przejdź do karty **pobieranie danych** , aby trafić pierwszy punkt przerwania w `FetchData` składniku tuż przed wysłaniem żądania HTTP do serwera:
+1. Przejdź do **`Fetch Data`** karty, aby trafić pierwszy punkt przerwania w `FetchData` składniku tuż przed wysłaniem żądania HTTP do serwera:
 
    ![Debuguj dane pobierania](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vs-debug-fetch-data.png)
 
@@ -145,11 +145,11 @@ Zainstaluj [rozszerzenie C#](https://marketplace.visualstudio.com/items?itemName
 
 1. W oknie Wybór wybierz projekt *serwera* w ramach hostowanego rozwiązania.
 
-*launch.jsw* pliku jest generowany z konfiguracją uruchamiania do uruchamiania debugera.
+`launch.json`Generowany jest plik z konfiguracją uruchamiania do uruchamiania debugera.
 
 ### <a name="attach-to-an-existing-debugging-session"></a>Dołącz do istniejącej sesji debugowania
 
-Aby dołączyć do uruchomionej Blazor aplikacji, utwórz *launch.jsw* pliku z następującą konfiguracją:
+Aby dołączyć do uruchomionej Blazor aplikacji, Utwórz `launch.json` plik z następującą konfiguracją:
 
 ```json
 {
@@ -222,7 +222,7 @@ Dla typu debugowania są obsługiwane następujące opcje konfiguracji uruchamia
 
 1. Przeglądarka musi być uruchomiona z włączonym debugowaniem zdalnym. Jeśli debugowanie zdalne jest wyłączone, **nie można odnaleźć strony błędu karty przeglądarki możliwością debugowania** . Strona błędu zawiera instrukcje dotyczące uruchamiania przeglądarki z otwartym portem debugowania, dzięki czemu Blazor serwer proxy debugowania może połączyć się z aplikacją. *Zamknij wszystkie wystąpienia przeglądarki* i uruchom ponownie przeglądarkę zgodnie z instrukcjami.
 
-Po uruchomieniu przeglądarki z włączonym debugowaniem zdalnym skrót klawiaturowy debugowania otwiera nową kartę debugera. Po chwili na karcie **źródła** zostanie wyświetlona lista zestawów .NET w aplikacji. Rozwiń każdy zestaw i Znajdź *.cs* / pliki źródłowe CS *. Razor* dostępne do debugowania. Ustaw punkty przerwania, przełącz się z powrotem do karty aplikacji, a punkty przerwania są trafień, gdy kod jest wykonywany. Po trafieniu punktu przerwania pojedynczy krok (<kbd>F10</kbd>) za pomocą kodu lub wznowienia kodu (<kbd>F8</kbd>) normalnie.
+Po uruchomieniu przeglądarki z włączonym debugowaniem zdalnym skrót klawiaturowy debugowania otwiera nową kartę debugera. Po chwili na karcie **źródła** zostanie wyświetlona lista zestawów .NET w aplikacji. Rozwiń każdy zestaw i Znajdź `.cs` / `.razor` pliki źródłowe dostępne do debugowania. Ustaw punkty przerwania, przełącz się z powrotem do karty aplikacji, a punkty przerwania są trafień, gdy kod jest wykonywany. Po trafieniu punktu przerwania pojedynczy krok (<kbd>F10</kbd>) za pomocą kodu lub wznowienia kodu (<kbd>F8</kbd>) normalnie.
 
 Blazorudostępnia serwer proxy debugowania, który implementuje [Protokół Chrome devtools](https://chromedevtools.github.io/devtools-protocol/) i rozszerza protokół z. Informacje specyficzne dla sieci. Gdy skrót klawiaturowy debugowania zostanie nacionięty, Blazor wskazuje, że program Chrome devtools na serwerze proxy. Serwer proxy nawiązuje połączenie z oknem przeglądarki, które próbujesz debugować (w związku z tym trzeba włączyć debugowanie zdalne).
 

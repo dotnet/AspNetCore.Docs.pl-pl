@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/read-related-data
-ms.openlocfilehash: e67738015f64ca7077c2f87a8f7eabe722aac9d8
-ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
+ms.openlocfilehash: 5ffb57f21c89e21fcbb14b933cb0d0cb29d9c71b
+ms.sourcegitcommit: dd2a1542a4a377123490034153368c135fdbd09e
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84652618"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85240944"
 ---
 # <a name="part-6-razor-pages-with-ef-core-in-aspnet-core---read-related-data"></a>Część 6 Razor strony z EF Core w ASP.NET Core — Odczytaj powiązane dane
 
@@ -52,7 +52,7 @@ Istnieje kilka sposobów, EF Core mogą ładować powiązane dane do właściwo�
 
   ![Przykład oddzielnych zapytań](read-related-data/_static/separate-queries.png)
 
-  Uwaga: EF Core automatycznie naprawia właściwości nawigacji do wszystkich innych jednostek, które zostały wcześniej załadowane do wystąpienia kontekstu. Nawet jeśli dane dla właściwości nawigacji *nie* są jawnie uwzględniane, właściwość można nadal wypełnić, jeśli niektóre lub wszystkie powiązane jednostki zostały wcześniej załadowane.
+  **Uwaga:** EF Core automatycznie naprawia właściwości nawigacji do wszystkich innych jednostek, które zostały wcześniej załadowane do wystąpienia kontekstu. Nawet jeśli dane dla właściwości nawigacji *nie* są jawnie uwzględniane, właściwość można nadal wypełnić, jeśli niektóre lub wszystkie powiązane jednostki zostały wcześniej załadowane.
 
 * [Jawne ładowanie](/ef/core/querying/related-data#explicit-loading). Gdy obiekt jest najpierw odczytywany, powiązane dane nie są pobierane. Kod musi być zapisany, aby można było pobrać powiązane dane, gdy jest to konieczne. Jawne ładowanie z oddzielnymi zapytania powoduje wysłanie wielu zapytań do bazy danych. W przypadku jawnego ładowania kod określa właściwości nawigacji do załadowania. Użyj `Load` metody, aby przeprowadzić jawne ładowanie. Przykład:
 
@@ -231,7 +231,7 @@ Poniższy kod jest wykonywany po wybraniu instruktora ( `id != null` ).
 
 Wybrany instruktor jest pobierany z listy instruktorów w modelu widoku. Właściwość widoku modelu `Courses` jest ładowana z `Course` jednostkami z tej `CourseAssignments` właściwości nawigacji instruktora.
 
-`Where`Metoda zwraca kolekcję. Ale w tym przypadku filtr wybierze pojedynczą jednostkę. Dlatego `Single` Metoda jest wywoływana w celu przekonwertowania kolekcji na jedną `Instructor` jednostkę. `Instructor`Jednostka zapewnia dostęp do `CourseAssignments` właściwości. `CourseAssignments`zapewnia dostęp do powiązanych `Course` jednostek.
+`Where`Metoda zwraca kolekcję. Ale w tym przypadku filtr wybierze pojedynczą jednostkę, więc `Single` Metoda jest wywoływana w celu przekonwertowania kolekcji na jedną `Instructor` jednostkę. `Instructor`Jednostka zapewnia dostęp do `CourseAssignments` właściwości. `CourseAssignments`zapewnia dostęp do powiązanych `Course` jednostek.
 
 ![M:M instruktora do kursu](complex-data-model/_static/courseassignment.png)
 

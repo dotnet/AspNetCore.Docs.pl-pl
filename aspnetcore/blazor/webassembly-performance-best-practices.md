@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-performance-best-practices
-ms.openlocfilehash: c5169231eec67a43830f761bff7585deff774613
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 2b6d4e706856cb28f26c2502feca4f959ca4abac
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103933"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85243034"
 ---
 # <a name="aspnet-core-blazor-webassembly-performance-best-practices"></a>ASP.NET Core Blazor najlepszych rozwiązań dotyczących wydajności zestawu Webassembly
 
@@ -76,10 +76,10 @@ Aby uzyskać więcej informacji, zobacz <xref:blazor/components/lifecycle#after-
 
 Składniki oferują wygodną metodę tworzenia fragmentów kodu i znaczników do ponownego użycia. Ogólnie rzecz biorąc zalecamy tworzenie pojedynczych składników, które najlepiej dopasowują się do wymagań aplikacji. Jednym z zawartoocią jest to, że każdy dodatkowy składnik podrzędny wnosi do łącznego czasu potrzebnego na renderowanie składnika nadrzędnego. W przypadku większości aplikacji dodatkowe obciążenie jest znikome. W przypadku aplikacji, które tworzą dużą liczbę składników, należy rozważyć użycie strategii w celu zmniejszenia nakładu pracy, np. ograniczenia liczby renderowanych składników.
 
-Na przykład siatka lub lista, która renderuje setki wierszy zawierających składniki, ma intensywną obsługę procesora. Rozważ wirtualizację układu siatki lub listy tak, że tylko podzestaw składników jest renderowany w danym momencie. Aby zapoznać się z przykładem renderowania podzestawu składników, zobacz następujące składniki w [przykładowej aplikacji wirtualizacji](https://github.com/aspnet/samples/tree/master/samples/aspnetcore/blazor/Virtualization):
+Na przykład siatka lub lista, która renderuje setki wierszy zawierających składniki, ma intensywną obsługę procesora. Rozważ wirtualizację układu siatki lub listy tak, że tylko podzestaw składników jest renderowany w danym momencie. Aby zapoznać się z przykładem renderowania podzestawu składników, zobacz następujące składniki w [ `Virtualization` aplikacji przykładowej (repozytorium w witrynie GitHub/przykłady)](https://github.com/aspnet/samples/tree/master/samples/aspnetcore/blazor/Virtualization):
 
-* `Virtualize`składnik ([Shared/wirtualizacja. Razor](https://github.com/aspnet/samples/blob/master/samples/aspnetcore/blazor/Virtualization/Shared/Virtualize.cs)): składnik zapisany w języku C#, który implementuje <xref:Microsoft.AspNetCore.Components.ComponentBase> zestaw wierszy danych pogody na podstawie przewijania przez użytkownika.
-* `FetchData`składnik ([strony/FetchData. Razor](https://github.com/aspnet/samples/blob/master/samples/aspnetcore/blazor/Virtualization/Pages/FetchData.razor)): używa `Virtualize` składnika do wyświetlania 25 wierszy danych pogody jednocześnie.
+* `Virtualize`składnik ( [`Shared/Virtualize.razor`](https://github.com/aspnet/samples/blob/master/samples/aspnetcore/blazor/Virtualization/Shared/Virtualize.cs) ): składnik zapisany w języku C#, który implementuje <xref:Microsoft.AspNetCore.Components.ComponentBase> zestaw wierszy danych pogody na podstawie przewijania przez użytkownika.
+* `FetchData`składnik ( [`Pages/FetchData.razor`](https://github.com/aspnet/samples/blob/master/samples/aspnetcore/blazor/Virtualization/Pages/FetchData.razor) ): używa `Virtualize` składnika do wyświetlania 25 wierszy danych pogody jednocześnie.
 
 ## <a name="avoid-javascript-interop-to-marshal-data"></a>Unikaj międzyoperacyjności JavaScript do organizowania danych
 
@@ -89,7 +89,7 @@ W elemencie Blazor webassembly wywołanie międzyoperacyjne języka JavaScript (
 
 Blazorimplementacja elementu webinterop w języku JS polega na tym <xref:System.Text.Json> , że jest to biblioteka serializacji JSON o wysokiej wydajności z alokacją małej ilości pamięci. Użycie nie powoduje, że <xref:System.Text.Json> rozmiar ładunku aplikacji jest większy niż dodanie co najmniej jednej alternatywnej biblioteki JSON.
 
-Aby uzyskać wskazówki dotyczące migracji, zobacz [Jak przeprowadzić migrację z Newtonsoft.Js, aby System.Text.Js](/dotnet/standard/serialization/system-text-json-migrate-from-newtonsoft-how-to).
+Aby uzyskać wskazówki dotyczące migracji, zobacz [Jak przeprowadzić migrację z `Newtonsoft.Json` do programu `System.Text.Json` ](/dotnet/standard/serialization/system-text-json-migrate-from-newtonsoft-how-to).
 
 ## <a name="use-synchronous-and-unmarshalled-js-interop-apis-where-appropriate"></a>Używaj synchronicznych i nieskierowanych interfejsów API międzyoperacyjności w razie potrzeby
 
@@ -138,7 +138,7 @@ BlazorZestaw webassembly oferuje dwie dodatkowe wersje programu <xref:Microsoft.
 
 ### <a name="intermediate-language-il-linking"></a>Tworzenie łączy języka pośredniego (IL)
 
-[Łączenie z Blazor Aplikacja webassembly](xref:blazor/host-and-deploy/configure-linker) zmniejsza rozmiar aplikacji przez przycinanie nieużywanego kodu w plikach binarnych aplikacji. Domyślnie konsolidator jest włączony tylko w przypadku kompilowania w `Release` konfiguracji. Aby z tego skorzystać, Opublikuj aplikację do wdrożenia za pomocą polecenia [dotnet Publish](/dotnet/core/tools/dotnet-publish) z opcją [-c |--Configuration](/dotnet/core/tools/dotnet-publish#options) ustawioną na `Release` :
+[Łączenie z Blazor Aplikacja webassembly](xref:blazor/host-and-deploy/configure-linker) zmniejsza rozmiar aplikacji przez przycinanie nieużywanego kodu w plikach binarnych aplikacji. Domyślnie konsolidator jest włączony tylko w przypadku kompilowania w `Release` konfiguracji. Aby z tego skorzystać, Opublikuj aplikację do wdrożenia przy użyciu [`dotnet publish`](/dotnet/core/tools/dotnet-publish) polecenia z opcją [-c |--Configuration](/dotnet/core/tools/dotnet-publish#options) ustawioną na `Release` :
 
 ```dotnetcli
 dotnet publish -c Release

@@ -1,4 +1,4 @@
-`App`Składnik (*App. Razor*) jest podobny do `App` składnika znalezionego w aplikacjach serwera Blazor:
+`App`Składnik ( `App.razor` ) jest podobny do `App` składnika znalezionego w aplikacjach serwera Blazor:
 
 * <xref:Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState>Składnik zarządza uwidacznianiem w <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationState> pozostałej części aplikacji.
 * <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView>Składnik gwarantuje, że bieżący użytkownik ma uprawnienia dostępu do danej strony lub w inny sposób renderuje `RedirectToLogin` składnik.

@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/additional-scenarios
-ms.openlocfilehash: 01ee18bf9b55b197c5ec03967d898f37bff43151
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 7f92f82d6e78771494b9f2358ee19153502f8dcb
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103788"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85243047"
 ---
 # <a name="aspnet-core-blazor-server-additional-security-scenarios"></a>BlazorDodatkowe scenariusze zabezpieczeń ASP.NET Core Server
 
@@ -76,7 +76,7 @@ services.AddHttpClient();
 services.AddScoped<TokenProvider>();
 ```
 
-W pliku *_Host. cshtml* Utwórz i wystąpienie `InitialApplicationState` i przekaż go jako parametr do aplikacji:
+W `_Host.cshtml` pliku Utwórz i wystąpienie `InitialApplicationState` i przekaż je jako parametr do aplikacji:
 
 ```cshtml
 @using Microsoft.AspNetCore.Authentication
@@ -97,7 +97,7 @@ W pliku *_Host. cshtml* Utwórz i wystąpienie `InitialApplicationState` i przek
 </app>
 ```
 
-W `App` składniku (*App. Razor*) Rozwiąż usługę i zainicjuj ją przy użyciu danych z parametru:
+W `App` składniku ( `App.razor` ) Rozwiąż usługę i zainicjuj ją przy użyciu danych z parametru:
 
 ```razor
 @inject TokenProvider TokenProvider
@@ -172,7 +172,7 @@ services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme,
     }
 ```
 
-Alternatywnie można wprowadzić to ustawienie w pliku ustawień aplikacji (*appsettings.json*):
+Alternatywnie można wprowadzić to ustawienie w pliku ustawień aplikacji ( `appsettings.json` ):
 
 ```json
 {
@@ -203,11 +203,11 @@ Jeśli znakowanie w segmencie urzędu nie jest odpowiednie dla dostawcy OIDC apl
 
 ### App ID URI
 
-* When using v2.0 endpoints, APIs define an *App ID URI*, which is meant to represent a unique identifier for the API.
+* When using v2.0 endpoints, APIs define an *`App ID URI`*, which is meant to represent a unique identifier for the API.
 * All scopes include the App ID URI as a prefix, and v2.0 endpoints emit access tokens with the App ID URI as the audience.
 * When using V2.0 endpoints, the client ID configured in the Server API changes from the API Application ID (Client ID) to the App ID URI.
 
-*appsettings.json*:
+`appsettings.json`:
 
 ```json
 {

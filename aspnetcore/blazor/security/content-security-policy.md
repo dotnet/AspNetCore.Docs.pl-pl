@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/content-security-policy
-ms.openlocfilehash: 63359260766846ccf14ececfae82bf02cc598cf9
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 360fff9383e25a6b5b9308cfebd397f7f4ee31a6
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103785"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242982"
 ---
 # <a name="enforce-a-content-security-policy-for-aspnet-core-blazor"></a>Wymuś zasady zabezpieczeń zawartości dla ASP.NET CoreBlazor
 
@@ -85,7 +85,7 @@ W poniższych sekcjach przedstawiono przykładowe zasady dla Blazor zestawu weba
 
 ### <a name="blazor-webassembly"></a>BlazorZestaw webassembly
 
-W `<head>` zawartości strony hosta *wwwroot/index.html* Zastosuj dyrektywy opisane w sekcji [dyrektywy zasad](#policy-directives) :
+W obszarze `<head>` zawartość `wwwroot/index.html` strony hosta Zastosuj dyrektywy opisane w sekcji [dyrektywy zasad](#policy-directives) :
 
 ```html
 <meta http-equiv="Content-Security-Policy" 
@@ -108,7 +108,7 @@ W `<head>` zawartości strony hosta *wwwroot/index.html* Zastosuj dyrektywy opis
 
 ### <a name="blazor-server"></a>BlazorServer
 
-Na `<head>` stronie hosta *strony/_Host. cshtml* Zastosuj dyrektywy opisane w sekcji [dyrektywy zasad](#policy-directives) :
+W obszarze `<head>` zawartość `Pages/_Host.cshtml` strony hosta Zastosuj dyrektywy opisane w sekcji [dyrektywy zasad](#policy-directives) :
 
 ```cshtml
 <meta http-equiv="Content-Security-Policy" 

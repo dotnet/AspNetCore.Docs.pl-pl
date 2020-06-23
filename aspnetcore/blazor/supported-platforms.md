@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/supported-platforms
-ms.openlocfilehash: c10132c87c93346af89c548363e786967609f3da
-ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
+ms.openlocfilehash: 99f14486711c2dd2a634bc51b27a8e3891deee1a
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/12/2020
-ms.locfileid: "83607982"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85243229"
 ---
 # <a name="aspnet-core-blazor-supported-platforms"></a>ASP.NET Core Blazor obsługiwane platformy
 
@@ -48,8 +48,8 @@ Autor [Luke Latham](https://github.com/guardrex)
 | Safari, w tym iOS            | Current    |
 | Microsoft Internet Explorer      | 11&dagger; |
 
-&dagger;Wymagane są dodatkowe wypełnienie (na przykład niesie obietnice zwiększenia można dodać za pośrednictwem pakietu [polyfill.IO](https://polyfill.io/v3/) ).
+&dagger;Wymagane są dodatkowe wypełnienie (na przykład niesie obietnice zwiększenia można dodać za pośrednictwem [`Polyfill.io`](https://polyfill.io/v3/) pakietu).
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:blazor/hosting-models>

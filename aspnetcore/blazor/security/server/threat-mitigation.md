@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/threat-mitigation
-ms.openlocfilehash: 073a2a85369a100352a163693c5cba907203059e
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: a94dcd818c3f4e19ace57fad6390a84e704192bd
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103797"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242969"
 ---
 # <a name="threat-mitigation-guidance-for-aspnet-core-blazor-server"></a>Wskazówki dotyczące ograniczania zagrożeń dla Blazor serwera ASP.NET Core
 
@@ -134,7 +134,7 @@ Dla wywołań z metod .NET do języka JavaScript:
 
 Wykonaj następujące środki ostrożności, aby zabezpieczyć się przed poprzednimi scenariuszami:
 
-* Zawijaj wywołania programu JS Interop w instrukcjach [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) , aby uwzględnić błędy, które mogą wystąpić podczas wywołań. Aby uzyskać więcej informacji, zobacz <xref:blazor/fundamentals/handle-errors#javascript-interop>.
+* Zawijaj wywołania programu JS Interop w [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) instrukcjach, aby uwzględnić błędy, które mogą wystąpić podczas wywołań. Aby uzyskać więcej informacji, zobacz <xref:blazor/fundamentals/handle-errors#javascript-interop>.
 * Sprawdź poprawność danych zwróconych przez wywołania międzyoperacyjności JS, w tym komunikaty o błędach, przed podjęciem jakiejkolwiek akcji.
 
 ### <a name="net-methods-invoked-from-the-browser"></a>Metody .NET wywoływane z przeglądarki
@@ -302,7 +302,7 @@ Błąd po stronie klienta nie zawiera stosu wywołań i nie zawiera szczegółó
 Włącz szczegółowe błędy w języku JavaScript za pomocą:
 
 * <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.DetailedErrors?displayProperty=nameWithType>.
-* `DetailedErrors`Klucz konfiguracji ustawiony na `true` , który można ustawić w pliku ustawień aplikacji (*appsettings.json*). Klucz można również ustawić przy użyciu `ASPNETCORE_DETAILEDERRORS` zmiennej środowiskowej o wartości `true` .
+* `DetailedErrors`Klucz konfiguracji ustawiony na `true` , który można ustawić w pliku ustawień aplikacji ( `appsettings.json` ). Klucz można również ustawić przy użyciu `ASPNETCORE_DETAILEDERRORS` zmiennej środowiskowej o wartości `true` .
 
 > [!WARNING]
 > Ujawnienie informacji o błędach klientom w Internecie stanowi zagrożenie bezpieczeństwa, które należy zawsze uniknąć.
@@ -348,7 +348,7 @@ Oprócz zabezpieczeń wdrożonych przez platformę, aplikacja musi być kodowana
 * Nie ufaj danych wejściowych w wywołaniach międzyoperacyjnych JS w obu kierunkach między językami JavaScript i .NET.
 * Aplikacja jest odpowiedzialna za sprawdzenie, czy zawartość argumentów i wyników są prawidłowe, nawet jeśli argumenty lub wyniki są prawidłowo deserializowane.
 
-W przypadku luki w zabezpieczeniach XSS aplikacja musi zawierać dane wejściowe użytkownika na renderowanej stronie. BlazorSkładniki serwera wykonują krok czasu kompilowania, w którym adiustację w pliku *Razor* są przekształcane do procedury proceduralnej logiki C#. W czasie wykonywania logika języka C# kompiluje *drzewo renderowania* opisujące elementy, tekst i składniki podrzędne. Jest on stosowany do modelu DOM przeglądarki za pośrednictwem sekwencji instrukcji języka JavaScript (lub jest serializowany do HTML w przypadku prerenderowania):
+W przypadku luki w zabezpieczeniach XSS aplikacja musi zawierać dane wejściowe użytkownika na renderowanej stronie. BlazorSkładniki serwera wykonują krok czasu kompilowania, w którym znaczniki w `.razor` pliku są przekształcane w procedurę logiki C#. W czasie wykonywania logika języka C# kompiluje *drzewo renderowania* opisujące elementy, tekst i składniki podrzędne. Jest on stosowany do modelu DOM przeglądarki za pośrednictwem sekwencji instrukcji języka JavaScript (lub jest serializowany do HTML w przypadku prerenderowania):
 
 * Dane wejściowe użytkownika renderowane za pośrednictwem normalnej Razor składni (na przykład `@someStringValue` ) nie ujawniają luki w zabezpieczeniach programu XSS, ponieważ Razor składnia jest DODAWANA do modelu Dom za pośrednictwem poleceń, które mogą zapisywać tekst. Nawet jeśli wartość zawiera znacznik HTML, wartość jest wyświetlana jako tekst statyczny. Podczas renderowania wstępnego dane wyjściowe są kodowane w formacie HTML, co spowoduje również wyświetlenie zawartości jako tekst statyczny.
 * Tagi skryptu nie są dozwolone i nie powinny być uwzględnione w drzewie renderowania składnika aplikacji. Jeśli tag skryptu jest zawarty w znaczniku składnika, generowany jest błąd czasu kompilacji.

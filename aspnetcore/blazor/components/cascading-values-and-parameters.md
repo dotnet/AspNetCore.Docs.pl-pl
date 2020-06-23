@@ -13,16 +13,16 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/cascading-values-and-parameters
-ms.openlocfilehash: 70f379b3b0e48dbb340f319f3346bbbf44588740
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 43fbaa6284fa45dee46a693ed858ed06130600b6
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103905"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242384"
 ---
 # <a name="aspnet-core-blazor-cascading-values-and-parameters"></a>ASP.NET Core Blazor kaskadowe wartości i parametry
 
-## <a name="cascading-values-and-parameters"></a>Wartości kaskadowe i parametry
+## <a name="cascading-values-and-parameters"></a>Kaskadowe wartości i parametry
 
 W niektórych scenariuszach nie można przepływać danych z składnika nadrzędnego do składnika potomnego przy użyciu [parametrów składnika](xref:blazor/components/index#component-parameters), zwłaszcza gdy istnieje kilka warstw składników. Wartości kaskadowe i parametry rozwiązują ten problem, zapewniając wygodną metodę dla składnika nadrzędnego, aby zapewnić wartość wszystkim jej składnikom potomnym. Kaskadowe wartości i parametry również zapewniają podejście do współrzędnych składników.
 
@@ -30,7 +30,7 @@ W niektórych scenariuszach nie można przepływać danych z składnika nadrzęd
 
 W poniższym przykładzie z przykładowej aplikacji `ThemeInfo` Klasa określa informacje o motywie, aby przetworzyć hierarchię składników w taki sposób, aby wszystkie przyciski w danej części aplikacji miały ten sam styl.
 
-*UIThemeClasses/themeinfo wskazuje. cs*:
+`UIThemeClasses/ThemeInfo.cs`:
 
 ```csharp
 public class ThemeInfo
@@ -144,7 +144,7 @@ W składniku potomnym, kaskadowe parametry odbierają swoje wartości z odpowied
 
 ### <a name="tabset-example"></a>Przykład TabSet
 
-Parametry kaskadowe umożliwiają również współdziałanie składników w hierarchii składników. Rozważmy na przykład następujący przykład *TabSet* w aplikacji przykładowej.
+Parametry kaskadowe umożliwiają również współdziałanie składników w hierarchii składników. Przykładowo Rozważmy poniższy `TabSet` przykład w aplikacji przykładowej.
 
 Przykładowa aplikacja ma `ITab` interfejs, który implementuje karty:
 

@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/progressive-web-app
-ms.openlocfilehash: b55619889c294a0cd6ab98ffdf228d86ee60cd7c
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: f56fb0f09845ded6ef6907221a27f71621a155d1
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85102312"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242813"
 ---
 # <a name="build-progressive-web-applications-with-aspnet-core-blazor-webassembly"></a>Kompilowanie progresywnych aplikacji sieci Web za pomocą ASP.NET Core Blazor Webassembly
 
@@ -75,7 +75,7 @@ Po zainstalowaniu aplikacja zostanie wyświetlona w osobnym oknie bez paska adre
 
 ![Aplikacja "MyBlazorPwa" działa w przeglądarce Google Chrome bez paska adresu.](progressive-web-app/_static/image3.png)
 
-Aby dostosować tytuł okna, schemat kolorów, ikonę lub inne szczegóły, zobacz *manifest.jsw* pliku w katalogu *wwwroot* projektu. Schemat tego pliku jest definiowany przez standardy sieci Web. Aby uzyskać więcej informacji, zobacz [powiadomienia MDN Web docs: manifest aplikacji sieci Web](https://developer.mozilla.org/docs/Web/Manifest).
+Aby dostosować tytuł okna, schemat kolorów, ikonę lub inne szczegóły, zobacz `manifest.json` plik w `wwwroot` katalogu projektu. Schemat tego pliku jest definiowany przez standardy sieci Web. Aby uzyskać więcej informacji, zobacz [powiadomienia MDN Web docs: manifest aplikacji sieci Web](https://developer.mozilla.org/docs/Web/Manifest).
 
 ## <a name="offline-support"></a>Obsługa offline
 
@@ -110,17 +110,17 @@ Obsługa w trybie offline przy użyciu procesu roboczego usługi jest standardem
 
 Blazorszablon aplikacji PWA tworzy dwa pliki procesów roboczych usługi:
 
-* *wwwroot/service-worker.js*, który jest używany podczas opracowywania.
-* plik *wwwroot/service-worker.published.js*, który jest używany po opublikowaniu aplikacji.
+* `wwwroot/service-worker.js`, który jest używany podczas opracowywania.
+* `wwwroot/service-worker.published.js`, który jest używany po opublikowaniu aplikacji.
 
 Aby współużytkować logikę między dwoma plikami roboczymi usługi, należy wziąć pod uwagę następujące podejście:
 
 * Dodaj trzeci plik JavaScript do przechowywania typowej logiki.
-* Użyj [funkcji Auto. importScripts](https://developer.mozilla.org/docs/Web/API/WorkerGlobalScope/importScripts) , aby załadować wspólną logikę do obu plików procesów roboczych usługi.
+* Służy [`self.importScripts`](https://developer.mozilla.org/docs/Web/API/WorkerGlobalScope/importScripts) do ładowania wspólnej logiki do obu plików procesów roboczych usługi.
 
 ### <a name="cache-first-fetch-strategy"></a>Strategia pobierania w pamięci podręcznej
 
-Wbudowany proces roboczy usługi *service-worker.published.js* rozpoznaje żądania przy użyciu strategii *pierwszej pamięci podręcznej* . Oznacza to, że pracownik usługi woli zwrócić zawartość buforowaną, bez względu na to, czy użytkownik ma dostęp do sieci czy na serwerze jest dostępna nowsza zawartość.
+Wbudowany `service-worker.published.js` proces roboczy usługi rozpoznaje żądania przy użyciu strategii *pierwszej pamięci podręcznej* . Oznacza to, że pracownik usługi woli zwrócić zawartość buforowaną, bez względu na to, czy użytkownik ma dostęp do sieci czy na serwerze jest dostępna nowsza zawartość.
 
 Strategia pierwszej pamięci podręcznej jest cenna, ponieważ:
 
@@ -139,9 +139,9 @@ Jako model psychiczny Możesz pomyśleć o tym, że w trybie offline — w przyp
 
 BlazorSzablon PWA tworzy aplikacje, które automatycznie próbują zaktualizować się w tle zawsze, gdy użytkownik odwiedza i ma działające połączenie sieciowe. Oto jak to działa:
 
-* Podczas kompilacji projekt generuje *manifest zasobów roboczych usługi*. Domyślnie jest to nazywane *service-worker-assets.js*. Manifest zawiera listę wszystkich zasobów statycznych wymaganych przez aplikację do działania w trybie offline, takich jak zestawy .NET, pliki JavaScript i CSS, w tym ich skróty zawartości. Lista zasobów jest załadowana przez proces roboczy usługi, aby uzyskać informację o tym, które zasoby mają być buforowane.
-* Za każdym razem, gdy użytkownik odwiedzi aplikację, przeglądarka żąda *service-worker.js* i *service-worker-assets.js* w tle. Pliki są porównywane bajtowo z istniejącym zainstalowanym pracownikiem usługi. Jeśli serwer zwróci zmianę zawartości dla dowolnego z tych plików, proces roboczy usługi próbuje zainstalować nową wersję programu.
-* Podczas instalowania nowej wersji, proces roboczy usługi tworzy nową, oddzielną pamięć podręczną dla zasobów w trybie offline i rozpoczyna zapełnianie pamięci podręcznej zasobami wymienionymi w *service-worker-assets.js*. Ta logika jest implementowana w `onInstall` funkcji wewnątrz *service-worker.published.js*.
+* Podczas kompilacji projekt generuje *manifest zasobów roboczych usługi*. Domyślnie jest to nazywane `service-worker-assets.js` . Manifest zawiera listę wszystkich zasobów statycznych wymaganych przez aplikację do działania w trybie offline, takich jak zestawy .NET, pliki JavaScript i CSS, w tym ich skróty zawartości. Lista zasobów jest załadowana przez proces roboczy usługi, aby uzyskać informację o tym, które zasoby mają być buforowane.
+* Za każdym razem, gdy użytkownik odwiedzi aplikację, ponowne żądania przeglądarki `service-worker.js` i `service-worker-assets.js` w tle. Pliki są porównywane bajtowo z istniejącym zainstalowanym pracownikiem usługi. Jeśli serwer zwróci zmianę zawartości dla dowolnego z tych plików, proces roboczy usługi próbuje zainstalować nową wersję programu.
+* Podczas instalowania nowej wersji, proces roboczy usługi tworzy nową, oddzielną pamięć podręczną dla zasobów w trybie offline i rozpoczyna zapełnianie pamięci podręcznej zasobami wymienionymi w temacie `service-worker-assets.js` . Ta logika jest implementowana w `onInstall` funkcji wewnątrz `service-worker.published.js` .
 * Proces zostanie zakończony pomyślnie, gdy wszystkie zasoby są ładowane bez błędu, a wszystkie skróty zawartości są zgodne. Jeśli to się powiedzie, nowy proces roboczy usługi przechodzi w stan *oczekiwania na aktywację* . Gdy tylko użytkownik zamknie aplikację (żadne pozostałe karty lub okna aplikacji), nowy proces roboczy usługi zostanie *uaktywniony* i będzie używany do kolejnych odwiedzin aplikacji. Stary proces roboczy usługi i jego pamięć podręczna są usuwane.
 * Jeśli proces nie zakończy się pomyślnie, nowe wystąpienie procesu roboczego usługi zostanie odrzucone. Proces aktualizacji jest podejmowany ponownie na następnym odwiedzeniu użytkownika, gdy miejmy nadzieję klient ma lepsze połączenie sieciowe, które może zakończyć żądania.
 
@@ -149,7 +149,7 @@ Dostosuj ten proces, edytując logikę procesu roboczego usługi. Żadne z powy�
 
 ### <a name="how-requests-are-resolved"></a>Jak są rozwiązywane żądania
 
-Zgodnie z opisem w sekcji [Strategia pobierania pamięci podręcznej](#cache-first-fetch-strategy) , domyślny proces roboczy usługi korzysta z strategii dotyczącej *pamięci podręcznej* , co oznacza, że próbuje obsłużć zawartość buforowaną, jeśli jest dostępna. W przypadku braku zawartości przechowywanej w pamięci podręcznej dla określonego adresu URL, na przykład podczas żądania danych z interfejsu API zaplecza, proces roboczy usługi powraca do zwykłego żądania sieci. Żądanie sieciowe powiedzie się, jeśli serwer jest osiągalny. Ta logika jest implementowana wewnątrz `onFetch` funkcji w *service-worker.published.js*.
+Zgodnie z opisem w sekcji [Strategia pobierania pamięci podręcznej](#cache-first-fetch-strategy) , domyślny proces roboczy usługi korzysta z strategii dotyczącej *pamięci podręcznej* , co oznacza, że próbuje obsłużć zawartość buforowaną, jeśli jest dostępna. W przypadku braku zawartości przechowywanej w pamięci podręcznej dla określonego adresu URL, na przykład podczas żądania danych z interfejsu API zaplecza, proces roboczy usługi powraca do zwykłego żądania sieci. Żądanie sieciowe powiedzie się, jeśli serwer jest osiągalny. Ta logika jest implementowana wewnątrz `onFetch` funkcji w ramach programu `service-worker.published.js` .
 
 Jeśli Razor składniki aplikacji korzystają z żądania danych z interfejsów API zaplecza i chcesz zapewnić przyjazne środowisko użytkownika dla żądań zakończonych niepowodzeniem ze względu na niedostępność sieci, zaimplementuj logikę w składnikach aplikacji. Na przykład użyj `try/catch` dookoła <xref:System.Net.Http.HttpClient> żądań.
 
@@ -157,12 +157,12 @@ Jeśli Razor składniki aplikacji korzystają z żądania danych z interfejsów 
 
 Zastanów się, co się stanie, gdy użytkownik po raz pierwszy przejdzie do adresu URL, takiego jak `/counter` lub dowolnego innego linku bezpośredniego w aplikacji. W takich przypadkach nie chcesz zwracać zawartości w pamięci podręcznej jako `/counter` , ale potrzebna jest przeglądarka do załadowania zawartości w pamięci podręcznej w `/index.html` celu uruchomienia Blazor aplikacji webassembly. Te początkowe żądania są znane jako żądania *nawigacji* , w przeciwieństwie do:
 
-* żądania *zasobów* dla obrazów, arkuszy stylów lub innych plików.
-* żądania *pobrania/XHR* dla danych interfejsu API.
+* `subresource`żądania obrazów, arkuszy stylów lub innych plików.
+* `fetch/XHR`żądania dotyczące danych interfejsu API.
 
-Domyślny proces roboczy usługi zawiera logikę przypadków specjalnych dla żądań nawigacji. Proces roboczy usługi rozwiązuje żądania, zwracając zawartość z pamięci podręcznej dla `/index.html` , niezależnie od żądanego adresu URL. Ta logika jest implementowana w `onFetch` funkcji wewnątrz *service-worker.published.js*.
+Domyślny proces roboczy usługi zawiera logikę przypadków specjalnych dla żądań nawigacji. Proces roboczy usługi rozwiązuje żądania, zwracając zawartość z pamięci podręcznej dla `/index.html` , niezależnie od żądanego adresu URL. Ta logika jest implementowana w `onFetch` funkcji wewnątrz `service-worker.published.js` .
 
-Jeśli aplikacja ma określone adresy URL, które muszą zwracać kod HTML renderowany przez serwer, a nie `/index.html` z pamięci podręcznej, należy edytować logikę w procesie roboczym usługi. Jeśli wszystkie adresy URL zawierające `/Identity/` muszą być obsługiwane jako zwykłe żądania tylko online do serwera, zmodyfikuj *service-worker.published.js* `onFetch` logikęservice-worker.published.js. Znajdź następujący kod:
+Jeśli aplikacja ma określone adresy URL, które muszą zwracać kod HTML renderowany przez serwer, a nie `/index.html` z pamięci podręcznej, należy edytować logikę w procesie roboczym usługi. Jeśli wszystkie adresy URL zawierające `/Identity/` muszą być obsługiwane jako zwykłe żądania tylko online do serwera, należy zmodyfikować `service-worker.published.js` `onFetch` logikę. Znajdź następujący kod:
 
 ```javascript
 const shouldServeIndexHtml = event.request.mode === 'navigate';
@@ -185,16 +185,16 @@ Jeśli projekt definiuje Właściwość programu `ServiceWorkerAssetsManifest` M
 <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
 ```
 
-Plik jest umieszczany w katalogu wyjściowym *wwwroot* , dzięki czemu przeglądarka może pobrać ten plik przez żądanie `/service-worker-assets.js` . Aby wyświetlić zawartość tego pliku, Otwórz */bin/debug/{Target Framework}/wwwroot/service-worker-assets.js* w edytorze tekstów. Jednak nie należy edytować pliku, ponieważ jest on ponownie generowany dla każdej kompilacji.
+Plik zostanie umieszczony w `wwwroot` katalogu wyjściowym, dzięki czemu przeglądarka może pobrać ten plik przez żądanie `/service-worker-assets.js` . Aby wyświetlić zawartość tego pliku, Otwórz `/bin/Debug/{TARGET FRAMEWORK}/wwwroot/service-worker-assets.js` w edytorze tekstu. Jednak nie należy edytować pliku, ponieważ jest on ponownie generowany dla każdej kompilacji.
 
 Domyślnie ten manifest zawiera następujące listę:
 
 * Wszelkie Blazor zarządzane zasoby, takie jak zestawy .NET i pliki środowiska uruchomieniowego Webassembly programu .NET, są wymagane do działania w trybie offline.
-* Wszystkie zasoby do publikowania w katalogu *wwwroot* aplikacji, takie jak obrazy, arkusze stylów i pliki JavaScript, w tym statyczne zasoby sieci Web dostarczane przez zewnętrzne projekty i pakiety NuGet.
+* Wszystkie zasoby do publikowania w `wwwroot` katalogu aplikacji, takie jak obrazy, arkusze stylów i pliki JavaScript, w tym statyczne zasoby sieci Web dostarczane przez zewnętrzne projekty i pakiety NuGet.
 
-Można kontrolować, które z tych zasobów są pobierane i buforowane przez proces roboczy usługi przez edytowanie logiki w `onInstall` programie w *service-worker.published.js*. Domyślnie proces roboczy usługi pobiera i buforuje pliki zgodne z typowymi rozszerzeniami nazw sieci Web, takimi jak *. html*, *CSS*, *js*i *wasm*, a także typy plików specyficzne dla Blazor zestawu webassembly (*. dll*, *. pdb*).
+Można kontrolować, które z tych zasobów są pobierane i buforowane przez proces roboczy usługi przez edytowanie logiki w `onInstall` programie w ramach programu `service-worker.published.js` . Domyślnie proces roboczy usługi pobiera i buforuje pliki zgodne z typowymi rozszerzeniami nazw sieci Web, takimi jak `.html` ,, `.css` `.js` i i `.wasm` typami plików specyficznymi dla Blazor webassembly ( `.dll` , `.pdb` ).
 
-Aby uwzględnić dodatkowe zasoby, które nie znajdują się w katalogu *wwwroot* aplikacji, Zdefiniuj dodatkowe `ItemGroup` wpisy programu MSBuild, jak pokazano w następującym przykładzie:
+Aby uwzględnić dodatkowe zasoby, które nie znajdują się w `wwwroot` katalogu aplikacji, Zdefiniuj dodatkowe `ItemGroup` wpisy programu MSBuild, jak pokazano w następującym przykładzie:
 
 ```xml
 <ItemGroup>
@@ -206,7 +206,7 @@ Aby uwzględnić dodatkowe zasoby, które nie znajdują się w katalogu *wwwroot
 `AssetUrl`Metadane określają podstawowy adres URL, który powinien być używany przez przeglądarkę podczas pobierania zasobu do pamięci podręcznej. Może to być niezależna od oryginalnej nazwy pliku źródłowego na dysku.
 
 > [!IMPORTANT]
-> Dodanie elementu `ServiceWorkerAssetsManifestItem` nie powoduje opublikowania pliku w katalogu *wwwroot* aplikacji. Publikowanie danych wyjściowych musi być kontrolowane osobno. `ServiceWorkerAssetsManifestItem`Powoduje to jedynie wprowadzenie dodatkowego wpisu w manifeście zasobów procesu roboczego usługi.
+> Dodanie elementu `ServiceWorkerAssetsManifestItem` nie powoduje opublikowania pliku w `wwwroot` katalogu aplikacji. Publikowanie danych wyjściowych musi być kontrolowane osobno. `ServiceWorkerAssetsManifestItem`Powoduje to jedynie wprowadzenie dodatkowego wpisu w manifeście zasobów procesu roboczego usługi.
 
 ## <a name="push-notifications"></a>Powiadomienia wypychane
 
@@ -264,11 +264,11 @@ Zgodnie z opisem w sekcji [strony obsługi renderowanej przez serwer](#support-s
 
 ### <a name="all-service-worker-asset-manifest-contents-are-cached-by-default"></a>Zawartość manifestu wszystkich zasobów procesu roboczego usługi jest domyślnie buforowana
 
-Zgodnie z opisem w sekcji [buforowanie zasobów kontrolki](#control-asset-caching) plik *service-worker-assets.js* jest generowany podczas kompilacji i wyświetla listę wszystkich zasobów, które pracownik usług powinien pobrać i buforować.
+Zgodnie z opisem w sekcji [buforowanie zasobów kontroli](#control-asset-caching) plik `service-worker-assets.js` jest generowany podczas kompilacji i zawiera listę wszystkich zasobów, które pracownik usług powinien pobrać i buforować.
 
-Ponieważ ta lista domyślnie obejmuje wszystkie elementy wyemitowane do *wwwroot*, w tym zawartość dostarczoną przez zewnętrzne pakiety i projekty, należy zachować ostrożność, aby nie umieścić zbyt dużej ilości zawartości. Jeśli katalog *wwwroot* zawiera miliony obrazów, proces roboczy usługi próbuje pobrać i buforować je wszystkie, zużywać nadmierną przepustowość i prawdopodobnie nie zostanie pomyślnie zakończony.
+Ponieważ ta lista domyślnie zawiera wszystkie informacje, które są emitowane do `wwwroot` , w tym zawartość dostarczaną przez zewnętrzne pakiety i projekty, należy zachować ostrożność, aby nie umieścić zbyt dużej ilości zawartości. Jeśli `wwwroot` katalog zawiera miliony obrazów, proces roboczy usługi próbuje pobrać i buforować je wszystkie, zużywać nadmierną przepustowość i prawdopodobnie nie zostanie pomyślnie zakończony.
 
-Zaimplementuj dowolną logikę, aby kontrolować, który podzbiór zawartości manifestu powinien być pobierany i buforowany przez edytowanie `onInstall` funkcji w *service-worker.published.js*.
+Implementowanie dowolnej logiki w celu kontrolowania, który podzbiór zawartości manifestu powinien być pobierany i buforowany przez edycję `onInstall` funkcji w `service-worker.published.js` .
 
 ### <a name="interaction-with-authentication"></a>Interakcja z uwierzytelnianiem
 
@@ -287,11 +287,11 @@ Aby utworzyć aplikację w usłudze PWA w trybie offline, która współdziała 
 * Operacje w kolejce, gdy aplikacja jest w trybie offline i stosuje je, gdy aplikacja wraca do trybu online.
 * Podczas wylogowywania Wyczyść przechowywanego użytkownika.
 
-Przykładowa aplikacja [CarChecker](https://github.com/SteveSandersonMS/CarChecker) ilustruje powyższe podejścia. Zobacz następujące części aplikacji:
+[`CarChecker`](https://github.com/SteveSandersonMS/CarChecker)Przykładowa aplikacja pokazuje poprzednie metody. Zobacz następujące części aplikacji:
 
-* `OfflineAccountClaimsPrincipalFactory`(*Klient/dane/OfflineAccountClaimsPrincipalFactory. cs*)
-* `LocalVehiclesStore`(*Klient/dane/LocalVehiclesStore. cs*)
-* `LoginStatus`składnik (*Client/Shared/stanu logowania. Razor*)
+* `OfflineAccountClaimsPrincipalFactory` (`Client/Data/OfflineAccountClaimsPrincipalFactory.cs`)
+* `LocalVehiclesStore` (`Client/Data/LocalVehiclesStore.cs`)
+* `LoginStatus`składnik ( `Client/Shared/LoginStatus.razor` )
 
 ## <a name="additional-resources"></a>Zasoby dodatkowe
 

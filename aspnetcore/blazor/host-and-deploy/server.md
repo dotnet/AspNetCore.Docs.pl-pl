@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/server
-ms.openlocfilehash: 891714250bc4e8b0b241e589efb268b8f8e9f0d5
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: c02d005aa5e37bc359e1c104a19c387f1c16fa34
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103815"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85243554"
 ---
 # <a name="host-and-deploy-blazor-server"></a>Hostowanie i wdrażanie Blazor serwera
 
@@ -32,7 +32,7 @@ ms.locfileid: "85103815"
 
 Przy użyciu [ Blazor modelu hostingu serwera](xref:blazor/hosting-models#blazor-server)program Blazor jest wykonywany na serwerze z poziomu aplikacji ASP.NET Core. Aktualizacje interfejsu użytkownika, obsługa zdarzeń i wywołania języka JavaScript są obsługiwane przez [SignalR](xref:signalr/introduction) połączenie.
 
-Wymagany jest serwer sieci Web obsługujący aplikację ASP.NET Core. Program Visual Studio zawiera szablon projektu ** Blazor aplikacji serwera** (szablon, który jest `blazorserverside` używany przez polecenie [dotnet New](/dotnet/core/tools/dotnet-new) ).
+Wymagany jest serwer sieci Web obsługujący aplikację ASP.NET Core. Program Visual Studio zawiera szablon projektu ** Blazor aplikacji serwera** ( `blazorserverside` szablon przy użyciu [`dotnet new`](/dotnet/core/tools/dotnet-new) polecenia).
 
 ## <a name="scalability"></a>Skalowalność
 
@@ -76,7 +76,7 @@ Zalecamy korzystanie z [ SignalR usługi platformy Azure](/azure/azure-signalr) 
 
    * Konfiguracja (Użyj **jednej** z następujących metod):
   
-     * *appsettings.js*:
+     * `appsettings.json`:
 
        ```json
        "Azure:SignalR:ServerStickyMode": "Required"

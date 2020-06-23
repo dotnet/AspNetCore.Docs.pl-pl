@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/data-binding
-ms.openlocfilehash: c901ba0cbcd79bb14cb32a6a56a2595d159f8678
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 1654c0ce40d44ad4cc679c151ef99f155e31b514
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103890"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242501"
 ---
 # <a name="aspnet-core-blazor-data-binding"></a>ASP.NET Core Blazor powiązania danych
 
@@ -240,10 +240,10 @@ Typowy scenariusz polega na łańcuchu parametru powiązanego z danymi do elemen
 
 Nie można zaimplementować powiązania łańcuchowego przy użyciu [`@bind`](xref:mvc/views/razor#bind) składni w elemencie strony. Program obsługi zdarzeń i wartość muszą być określone osobno. Składnik nadrzędny, jednak może używać [`@bind`](xref:mvc/views/razor#bind) składni z parametrem składnika.
 
-Następujący `PasswordField` składnik (*PasswordField. Razor*):
+Następujący `PasswordField` składnik ( `PasswordField.razor` ):
 
 * Ustawia `<input>` wartość elementu na `Password` Właściwość.
-* Uwidacznia zmiany `Password` właściwości w składniku nadrzędnym z [EventCallback](xref:blazor/components/event-handling#eventcallback).
+* Uwidacznia zmiany `Password` właściwości w składniku nadrzędnym z [`EventCallback`](xref:blazor/components/event-handling#eventcallback) .
 * Używa `onclick` zdarzenia, aby wyzwolić `ToggleShowPassword` metodę. Aby uzyskać więcej informacji, zobacz <xref:blazor/components/event-handling>.
 
 ```razor

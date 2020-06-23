@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/dependency-injection
-ms.openlocfilehash: b4ac0dbc6dabdeff4689544f2e11278b8302c553
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 24cd5ae837eeb4c89a15bab2948dde2eface0c0d
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103854"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242800"
 ---
 # <a name="aspnet-core-blazor-dependency-injection"></a>ASP.NET Core Blazor wstrzykiwania zależności
 
@@ -47,7 +47,7 @@ Niestandardowy dostawca usług nie dostarcza automatycznie usług domyślnych wy
 
 ### <a name="blazor-webassembly"></a>BlazorZestaw webassembly
 
-Skonfiguruj usługi dla kolekcji usług aplikacji w `Main` metodzie *program.cs*. W poniższym przykładzie `MyDependency` implementacja jest zarejestrowana dla `IMyDependency` :
+Skonfiguruj usługi dla kolekcji usług aplikacji w `Main` metodzie `Program.cs` . W poniższym przykładzie `MyDependency` implementacja jest zarejestrowana dla `IMyDependency` :
 
 ```csharp
 public class Program
@@ -84,7 +84,7 @@ public class Program
 }
 ```
 
-Host udostępnia również centralne wystąpienie konfiguracji dla aplikacji. W poprzednim przykładzie adres URL usługi Pogoda jest przesyłany z domyślnego źródła konfiguracji (na przykład *appsettings.json*) do `InitializeWeatherAsync` :
+Host udostępnia również centralne wystąpienie konfiguracji dla aplikacji. W poprzednim przykładzie adres URL usługi Pogoda jest przesyłany z domyślnego źródła konfiguracji (na przykład `appsettings.json` ) do `InitializeWeatherAsync` :
 
 ```csharp
 public class Program
@@ -193,7 +193,7 @@ public class DataAccess : IDataAccess
 Wymagania wstępne dotyczące iniekcji konstruktora:
 
 * Jeden Konstruktor musi istnieć, którego argumenty mogą być zrealizowane przez DI. Dodatkowe parametry, które nie są objęte przez DI, są dozwolone, jeśli określają wartości domyślne.
-* Odpowiedni Konstruktor musi być *publiczny*.
+* Odpowiedni Konstruktor musi być `public` .
 * Musi istnieć jeden odpowiedni Konstruktor. W przypadku niejednoznaczności, polecenie DI zgłasza wyjątek.
 
 ## <a name="utility-base-component-classes-to-manage-a-di-scope"></a>Klasy składników podstawowych narzędzi do zarządzania DI zakresem
@@ -346,5 +346,5 @@ Jeśli pojedynczy składnik może korzystać z współbieżnie <xref:Microsoft.E
 ## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:fundamentals/dependency-injection>
-* [Wskazówki interfejsu IDisposable dla wystąpień przejściowych i współużytkowanych](xref:fundamentals/dependency-injection#idisposable-guidance-for-transient-and-shared-instances)
+* [`IDisposable`Wskazówki dotyczące wystąpień przejściowych i współużytkowanych](xref:fundamentals/dependency-injection#idisposable-guidance-for-transient-and-shared-instances)
 * <xref:mvc/views/dependency-injection>

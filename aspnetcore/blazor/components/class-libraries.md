@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/class-libraries
-ms.openlocfilehash: ecc9873d7f652f27767df98196786d12789518c9
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 0c6f1330a5bac8ab37c957c5ed4e81678fe1f27d
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103899"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242514"
 ---
 # <a name="aspnet-core-razor-components-class-libraries"></a>RazorBiblioteki klas składników ASP.NET Core
 
@@ -45,13 +45,13 @@ Postępuj zgodnie ze wskazówkami zawartymi w <xref:blazor/get-started> artykule
 1. Dodaj RCL do rozwiązania:
    1. Kliknij prawym przyciskiem myszy rozwiązanie. Wybierz pozycję **Dodaj**  >  **istniejący projekt**.
    1. Przejdź do pliku projektu RCL.
-   1. Wybierz plik projektu RCL (*. csproj*).
+   1. Wybierz plik projektu RCL ( `.csproj` ).
 1. Dodaj odwołanie RCL z aplikacji:
    1. Kliknij prawym przyciskiem myszy projekt aplikacji. Wybierz pozycję **Dodaj**  >  **odwołanie**.
    1. Wybierz projekt RCL. Wybierz przycisk **OK**.
 
 > [!NOTE]
-> Jeśli pole wyboru **strony i widoki pomocy technicznej** jest zaznaczone podczas generowania RCL z szablonu, Dodaj również plik *_Imports. Razor* do katalogu głównego wygenerowanego projektu z następującą zawartością, aby włączyć Razor Tworzenie składników:
+> Jeśli pole wyboru **strony i widoki pomocy technicznej** jest zaznaczone podczas generowania RCL z szablonu, Dodaj również `_Imports.razor` plik do katalogu głównego wygenerowanego projektu z następującą zawartością, aby włączyć Razor Tworzenie składników:
 >
 > ```razor
 > @using Microsoft.AspNetCore.Components.Web
@@ -61,14 +61,14 @@ Postępuj zgodnie ze wskazówkami zawartymi w <xref:blazor/get-started> artykule
 
 # <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
 
-1. Użyj szablonu ** Razor biblioteki klas** ( `razorclasslib` ) z poleceniem [dotnet New](/dotnet/core/tools/dotnet-new) w powłoce poleceń. W poniższym przykładzie jest tworzony RCL o nazwie `MyComponentLib1` . Folder, który `MyComponentLib1` ma zostać utworzony, jest tworzony automatycznie podczas wykonywania polecenia:
+1. Użyj szablonu ** Razor biblioteki klas** ( `razorclasslib` ) za pomocą [`dotnet new`](/dotnet/core/tools/dotnet-new) polecenia w powłoce poleceń. W poniższym przykładzie jest tworzony RCL o nazwie `MyComponentLib1` . Folder, który `MyComponentLib1` ma zostać utworzony, jest tworzony automatycznie podczas wykonywania polecenia:
 
    ```dotnetcli
    dotnet new razorclasslib -o MyComponentLib1
    ```
 
    > [!NOTE]
-   > Jeśli `-s|--support-pages-and-views` przełącznik jest używany podczas generowania RCL z szablonu, Dodaj również plik *_Imports. Razor* do katalogu głównego wygenerowanego projektu z następującą zawartością, aby włączyć Razor Tworzenie składników:
+   > Jeśli `-s|--support-pages-and-views` przełącznik jest używany podczas generowania RCL z szablonu, Dodaj również `_Imports.razor` plik do katalogu głównego wygenerowanego projektu z następującą zawartością, aby włączyć Razor Tworzenie składników:
    >
    > ```razor
    > @using Microsoft.AspNetCore.Components.Web
@@ -76,7 +76,7 @@ Postępuj zgodnie ze wskazówkami zawartymi w <xref:blazor/get-started> artykule
    >
    > Ręcznie Dodaj plik do katalogu głównego wygenerowanego projektu.
 
-1. Aby dodać bibliotekę do istniejącego projektu, użyj polecenia [dotnet Add Reference](/dotnet/core/tools/dotnet-add-reference) w powłoce poleceń. W poniższym przykładzie RCL jest dodawany do aplikacji. Wykonaj następujące polecenie z folderu projektu aplikacji z ścieżką do biblioteki:
+1. Aby dodać bibliotekę do istniejącego projektu, użyj [`dotnet add reference`](/dotnet/core/tools/dotnet-add-reference) polecenia w powłoce poleceń. W poniższym przykładzie RCL jest dodawany do aplikacji. Wykonaj następujące polecenie z folderu projektu aplikacji z ścieżką do biblioteki:
 
    ```dotnetcli
    dotnet add reference {PATH TO LIBRARY}
@@ -115,7 +115,7 @@ Welcome to your new app.
 <SalesReport />
 ```
 
-Uwzględnij `@using MyComponentLib1` dyrektywę w pliku *_Import. Razor* najwyższego poziomu, aby udostępnić składniki biblioteki dla całego projektu. Dodaj dyrektywę do pliku *_Import. Razor* na dowolnym poziomie, aby zastosować przestrzeń nazw do pojedynczej strony lub zestawu stron w folderze.
+Uwzględnij `@using MyComponentLib1` dyrektywę w pliku najwyższego poziomu, `_Import.razor` Aby udostępnić składniki biblioteki dla całego projektu. Dodaj dyrektywę do `_Import.razor` pliku na dowolnym poziomie, aby zastosować przestrzeń nazw do pojedynczej strony lub zestawu stron w ramach folderu.
 
 ## <a name="create-a-razor-components-class-library-with-static-assets"></a>Tworzenie Razor biblioteki klas składników ze statycznymi zasobami
 
@@ -123,13 +123,13 @@ RCL może zawierać statyczne zasoby. Zasoby statyczne są dostępne dla każdej
 
 ## <a name="build-pack-and-ship-to-nuget"></a>Kompilowanie, pakowanie i dostarczanie do narzędzia NuGet
 
-Ponieważ biblioteki składników są standardowymi bibliotekami .NET, pakowanie i dostarczanie ich do narzędzia NuGet nie różni się od pakowania i wysyłania żadnej biblioteki do narzędzia NuGet. Pakowanie jest wykonywane przy użyciu polecenia [pakietu dotnet](/dotnet/core/tools/dotnet-pack) w powłoce poleceń:
+Ponieważ biblioteki składników są standardowymi bibliotekami .NET, pakowanie i dostarczanie ich do narzędzia NuGet nie różni się od pakowania i wysyłania żadnej biblioteki do narzędzia NuGet. Pakowanie jest wykonywane przy użyciu [`dotnet pack`](/dotnet/core/tools/dotnet-pack) polecenia w powłoce poleceń:
 
 ```dotnetcli
 dotnet pack
 ```
 
-Przekaż pakiet do narzędzia NuGet przy użyciu polecenia [push NuGet w trybie wypychania](/dotnet/core/tools/dotnet-nuget-push) w powłoce poleceń.
+Przekaż pakiet do narzędzia NuGet przy użyciu [`dotnet nuget push`](/dotnet/core/tools/dotnet-nuget-push) polecenia w powłoce poleceń.
 
 ## <a name="additional-resources"></a>Zasoby dodatkowe
 

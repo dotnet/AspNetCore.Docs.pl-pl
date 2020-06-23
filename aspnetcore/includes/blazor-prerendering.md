@@ -24,7 +24,7 @@ Aby opóźnić wywołania międzyoperacyjne języka JavaScript do momentu ustano
 }
 ```
 
-W powyższym przykładowym kodzie Podaj `setElementText` funkcję JavaScript wewnątrz `<head>` elementu *wwwroot/index.html* (Blazor Webassembly) lub *Pages/_Host. cshtml* (Blazor Server). Funkcja jest wywoływana z <xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType> i nie zwraca wartości:
+W powyższym przykładowym kodzie Podaj `setElementText` funkcję JavaScript wewnątrz `<head>` elementu `wwwroot/index.html` (Blazor webassembly) lub `Pages/_Host.cshtml` (Blazor Server). Funkcja jest wywoływana z <xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType> i nie zwraca wartości:
 
 ```html
 <script>
@@ -72,7 +72,7 @@ Set value via JS interop call:
 }
 ```
 
-W powyższym przykładowym kodzie Podaj `setElementText` funkcję JavaScript wewnątrz `<head>` elementu *wwwroot/index.html* (Blazor Webassembly) lub *Pages/_Host. cshtml* (Blazor Server). Funkcja jest wywoływana z <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A?displayProperty=nameWithType> i zwraca wartość:
+W powyższym przykładowym kodzie Podaj `setElementText` funkcję JavaScript wewnątrz `<head>` elementu `wwwroot/index.html` (Blazor webassembly) lub `Pages/_Host.cshtml` (Blazor Server). Funkcja jest wywoływana z <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A?displayProperty=nameWithType> i zwraca wartość:
 
 ```html
 <script>

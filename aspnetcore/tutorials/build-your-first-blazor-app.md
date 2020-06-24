@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-blazor-app
-ms.openlocfilehash: 2de33deccbb86bd810c4337f5aa105118de4d9b4
-ms.sourcegitcommit: 77729ba225d5143c0e3954db005906f4a5c7da95
+ms.openlocfilehash: 892663a533a207df84b0fce9af259a7dc212bc9b
+ms.sourcegitcommit: 5e462c3328c70f95969d02adce9c71592049f54c
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/20/2020
-ms.locfileid: "85122155"
+ms.lasthandoff: 06/24/2020
+ms.locfileid: "85292779"
 ---
 # <a name="build-your-first-blazor-app"></a>Tworzenie pierwszej Blazor aplikacji
 
@@ -143,7 +143,7 @@ W przypadku pracy z Blazor aplikacją webassembly <xref:System.Net.Http.HttpClie
 
 Dodaj do aplikacji nowy składnik implementujący prostą listę zadań do wykonania.
 
-1. Dodaj nowy `Todo` Razor składnik do aplikacji w `Pages` folderze. Jeśli używasz programu Visual Studio, kliknij prawym przyciskiem myszy `Pages` folder, a następnie wybierz pozycję **Dodaj**  >  **nowy element**  >  ** Razor **. Nadaj nazwę plikowi składnika `Todo.razor` . W innych środowiskach programistycznych należy dodać pusty plik do `Pages` folderu o nazwie `Todo.razor` .
+1. Dodaj nowy `Todo` Razor składnik do aplikacji w `Pages` folderze. Jeśli używasz programu Visual Studio, kliknij prawym przyciskiem myszy `Pages` folder, a następnie wybierz pozycję **Dodaj**  >  **nowy element**  >  ** Razor **. Nadaj nazwę plikowi składnika `Todo.razor` . W innych środowiskach programistycznych należy dodać pusty plik do `Pages` folderu o nazwie `Todo.razor` . Razornazwy plików składników wymagają wielkie litery, dlatego upewnij się, że `Todo` Nazwa pliku składnika zaczyna się od wielkiej litery `T` .
 
 1. Podaj początkowe znaczniki dla składnika:
 

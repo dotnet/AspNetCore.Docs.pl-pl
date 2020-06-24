@@ -5,7 +5,7 @@ description: Dowiedz się, jak skonfigurować Sprawdzanie kondycji infrastruktur
 monikerRange: '>= aspnetcore-2.2'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/15/2019
+ms.date: 06/22/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/health-checks
-ms.openlocfilehash: 00b2697a6b916718d9d0e01d1ea9f922eb2b5706
-ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
+ms.openlocfilehash: ca5540b4920bc92e968dcbc22a9407453041b01c
+ms.sourcegitcommit: 5e462c3328c70f95969d02adce9c71592049f54c
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85074435"
+ms.lasthandoff: 06/24/2020
+ms.locfileid: "85292701"
 ---
 # <a name="health-checks-in-aspnet-core"></a>Kontrole kondycji w ASP.NET Core
 
@@ -442,10 +442,10 @@ Unhealthy
 
 W niektórych scenariuszach hostingu jest używana para kontroli kondycji, która odróżnia dwa stany aplikacji:
 
-* Aplikacja działa, ale jeszcze nie jest gotowa do odbierania żądań. Jest to stan *gotowości*aplikacji.
-* Aplikacja działa i odpowiada na żądania. Ten stan jest *aktywny*.
+* *Gotowość* wskazuje, czy aplikacja działa normalnie, ale nie jest gotowa do odbierania żądań.
+* *Dynamiczna* informacja wskazuje, czy aplikacja uległa awarii i musi zostać uruchomiona ponownie.
 
-Sprawdzanie gotowości zwykle wykonuje bardziej obszerny i czasochłonny zestaw kontroli w celu ustalenia, czy wszystkie podsystemy i zasoby aplikacji są dostępne. Sprawdzenie na żywo powoduje jedynie szybkie sprawdzenie, czy aplikacja jest dostępna do przetwarzania żądań. Gdy aplikacja przejdzie kontrolę gotowości, nie ma potrzeby dalszej obciążania aplikacji przy użyciu kosztownego zestawu kontroli gotowości &mdash; sprawdza tylko, czy sprawdzanie dostępności jest wymagane.
+Rozważmy następujący przykład: aplikacja musi pobrać duży plik konfiguracji, zanim będzie gotowy do przetwarzania żądań. Nie chcemy, aby aplikacja była ponownie uruchamiana, jeśli pobieranie początkowe nie powiedzie się, ponieważ aplikacja może próbować pobrać plik kilka razy. Używamy *sondy na żywo* do opisywania wartości Live procesu, nie są wykonywane żadne dodatkowe kontrole. Chcemy również zapobiec wysyłaniu żądań do aplikacji przed pomyślnym pobraniem pliku konfiguracji. Użyjemy *sondy gotowości* , aby wskazać, że stan "nie jest gotowy" do momentu pomyślnego pobrania, a aplikacja będzie gotowa do odbierania żądań.
 
 Przykładowa aplikacja zawiera kontrolę kondycji, aby zgłosić ukończenie długotrwałego zadania uruchamiania w [hostowanej usłudze](xref:fundamentals/host/hosted-services). `StartupHostedServiceHealthCheck`Uwidacznia właściwość, `StartupTaskCompleted` która może zostać ustawiona przez usługę hostowaną `true` po zakończeniu długotrwałego zadania (*StartupHostedServiceHealthCheck.cs*):
 
@@ -1155,10 +1155,10 @@ Unhealthy
 
 W niektórych scenariuszach hostingu jest używana para kontroli kondycji, która odróżnia dwa stany aplikacji:
 
-* Aplikacja działa, ale jeszcze nie jest gotowa do odbierania żądań. Jest to stan *gotowości*aplikacji.
-* Aplikacja działa i odpowiada na żądania. Ten stan jest *aktywny*.
+* *Gotowość* wskazuje, czy aplikacja działa normalnie, ale nie jest gotowa do odbierania żądań.
+* *Dynamiczna* informacja wskazuje, czy aplikacja uległa awarii i musi zostać uruchomiona ponownie.
 
-Sprawdzanie gotowości zwykle wykonuje bardziej obszerny i czasochłonny zestaw kontroli w celu ustalenia, czy wszystkie podsystemy i zasoby aplikacji są dostępne. Sprawdzenie na żywo powoduje jedynie szybkie sprawdzenie, czy aplikacja jest dostępna do przetwarzania żądań. Gdy aplikacja przejdzie kontrolę gotowości, nie ma potrzeby dalszej obciążania aplikacji przy użyciu kosztownego zestawu kontroli gotowości &mdash; sprawdza tylko, czy sprawdzanie dostępności jest wymagane.
+Rozważmy następujący przykład: aplikacja musi pobrać duży plik konfiguracji, zanim będzie gotowy do przetwarzania żądań. Nie chcemy, aby aplikacja była ponownie uruchamiana, jeśli pobieranie początkowe nie powiedzie się, ponieważ aplikacja może próbować pobrać plik kilka razy. Używamy *sondy na żywo* do opisywania wartości Live procesu, nie są wykonywane żadne dodatkowe kontrole. Chcemy również zapobiec wysyłaniu żądań do aplikacji przed pomyślnym pobraniem pliku konfiguracji. Użyjemy *sondy gotowości* , aby wskazać, że stan "nie jest gotowy" do momentu pomyślnego pobrania, a aplikacja będzie gotowa do odbierania żądań.
 
 Przykładowa aplikacja zawiera kontrolę kondycji, aby zgłosić ukończenie długotrwałego zadania uruchamiania w [hostowanej usłudze](xref:fundamentals/host/hosted-services). `StartupHostedServiceHealthCheck`Uwidacznia właściwość, `StartupTaskCompleted` która może zostać ustawiona przez usługę hostowaną `true` po zakończeniu długotrwałego zadania (*StartupHostedServiceHealthCheck.cs*):
 

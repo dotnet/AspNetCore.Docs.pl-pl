@@ -1,7 +1,7 @@
 ---
 title: Metody filtrowania dla Razor stron w ASP.NET Core
 author: Rick-Anderson
-description: Dowiedz się, jak tworzyć metody Razor filtrowania dla stron w ASP.NET Core.
+description: Dowiedz się, jak tworzyć metody filtrowania dla Razor stron w ASP.NET Core.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 2/18/2020
@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/filter
-ms.openlocfilehash: 68962d5a3a49e52510d72899e7dead2c1983d8b6
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: ea6b897a008d1be1953928e5d90555d9a9a408ec
+ms.sourcegitcommit: 1833870ad0845326fb764fef1b530a07b9b5b099
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775521"
+ms.lasthandoff: 06/25/2020
+ms.locfileid: "85347141"
 ---
 # <a name="filter-methods-for-razor-pages-in-aspnet-core"></a>Metody filtrowania dla Razor stron w ASP.NET Core
 
@@ -25,7 +25,7 @@ ms.locfileid: "82775521"
 
 Autor: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-Razor[IPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter?view=aspnetcore-2.0) i [IAsyncPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter?view=aspnetcore-2.0) umożliwiają Razor stronom uruchamianie kodu przed uruchomieniem programu obsługi stron Razor i po nim. RazorFiltry stron są podobne do [ASP.NET Core filtrów akcji MVC](xref:mvc/controllers/filters#action-filters), z wyjątkiem sytuacji, gdy nie można ich zastosować do metod obsługi poszczególnych stron.
+Razor[IPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter?view=aspnetcore-2.0) i [IAsyncPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter?view=aspnetcore-2.0) umożliwiają Razor stronom uruchamianie kodu przed Razor uruchomieniem programu obsługi stron i po nim. RazorFiltry stron są podobne do [ASP.NET Core filtrów akcji MVC](xref:mvc/controllers/filters#action-filters), z wyjątkiem sytuacji, gdy nie można ich zastosować do metod obsługi poszczególnych stron.
 
 RazorFiltry stron:
 
@@ -36,7 +36,7 @@ RazorFiltry stron:
 * Nie można zastosować do określonych metod obsługi stron.
 * Może mieć zależności konstruktora wypełniane przez [iniekcję zależności](xref:fundamentals/dependency-injection) (di). Aby uzyskać więcej informacji, zobacz [Servicefilterattribute](/aspnet/core/mvc/controllers/filters#servicefilterattribute) i [TypeFilterAttribute](/aspnet/core/mvc/controllers/filters#typefilterattribute).
 
-Podczas gdy konstruktory stron i oprogramowanie pośredniczące umożliwiają wykonywanie kodu niestandardowego przed wykonaniem metody Razor obsługi, tylko filtry strony <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.HttpContext> umożliwiają dostęp do i strony. Oprogramowanie pośredniczące ma dostęp do `HttpContext`programu, ale nie do "kontekstu strony". Filtry mają parametr <xref:Microsoft.AspNetCore.Mvc.Filters.FilterContext> pochodny, który zapewnia dostęp do `HttpContext`. Na przykład, implementacja przykładu [atrybutu filtru](#ifa) dodaje nagłówek do odpowiedzi, co nie jest możliwe za pomocą konstruktorów lub oprogramowania pośredniczącego.
+Podczas gdy konstruktory stron i oprogramowanie pośredniczące umożliwiają wykonywanie kodu niestandardowego przed wykonaniem metody obsługi, tylko Razor filtry strony umożliwiają dostęp do <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.HttpContext> i strony. Oprogramowanie pośredniczące ma dostęp do programu `HttpContext` , ale nie do "kontekstu strony". Filtry mają <xref:Microsoft.AspNetCore.Mvc.Filters.FilterContext> parametr pochodny, który zapewnia dostęp do `HttpContext` . Oto przykład dla filtru strony: [implementuje atrybut filtru](#ifa) , który dodaje nagłówek do odpowiedzi, co nie można wykonać za pomocą konstruktorów lub oprogramowania pośredniczącego. Dostęp do kontekstu strony, który obejmuje dostęp do wystąpień strony i jej modelu, jest dostępny tylko w przypadku wykonywania filtrów, programów obsługi lub treści Razor strony.
 
 [Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/filter/3.1sample) ([jak pobrać](xref:index#how-to-download-a-sample))
 
@@ -57,7 +57,7 @@ Implementowanie synchronicznej lub asynchronicznej wersji interfejsu filtru **, 
 
 ## <a name="implement-razor-page-filters-globally"></a>Implementowanie Razor filtrów stron globalnie
 
-Poniższy kod implementuje `IAsyncPageFilter`:
+Poniższy kod implementuje `IAsyncPageFilter` :
 
 [!code-csharp[Main](filter/3.1sample/PageFilter/Filters/SampleAsyncPageFilter.cs?name=snippet1)]
 
@@ -67,15 +67,15 @@ Poniższy kod włącza `SampleAsyncPageFilter` w `Startup` klasie:
 
 [!code-csharp[Main](filter/3.1sample/PageFilter/Startup.cs?name=snippet2)]
 
-Poniższy kod wywołuje <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.PageConventionCollection.AddFolderApplicationModelConvention*> , `SampleAsyncPageFilter` aby zastosować tylko do stron w */Movies*:
+Poniższy kod wywołuje <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.PageConventionCollection.AddFolderApplicationModelConvention*> , aby zastosować `SampleAsyncPageFilter` tylko do stron w */Movies*:
 
 [!code-csharp[Main](filter/3.1sample/PageFilter/Startup2.cs?name=snippet2)]
 
-Poniższy kod implementuje synchroniczne `IPageFilter`:
+Poniższy kod implementuje synchroniczne `IPageFilter` :
 
 [!code-csharp[Main](filter/3.1sample/PageFilter/Filters/SamplePageFilter.cs?name=snippet1)]
 
-Poniższy kod włącza `SamplePageFilter`:
+Poniższy kod włącza `SamplePageFilter` :
 
 [!code-csharp[Main](filter/3.1sample/PageFilter/StartupSync.cs?name=snippet2)]
 
@@ -89,7 +89,7 @@ Poniższy kod przesłania asynchroniczne Razor filtry stron:
 
 ## <a name="implement-a-filter-attribute"></a>Implementowanie atrybutu filtru
 
-Wbudowany filtr filtru <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncResultFilter.OnResultExecutionAsync*> oparty na atrybutach może być podklasą. Poniższy filtr dodaje nagłówek do odpowiedzi:
+Wbudowany filtr filtru oparty na atrybutach <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncResultFilter.OnResultExecutionAsync*> może być podklasą. Poniższy filtr dodaje nagłówek do odpowiedzi:
 
 [!code-csharp[Main](filter/3.1sample/PageFilter/Filters/AddHeaderAttribute.cs)]
 
@@ -107,7 +107,7 @@ Zobacz [Anulowanie i krótkie obwody](xref:mvc/controllers/filters#cancellation-
 
 ## <a name="authorize-filter-attribute"></a>Autoryzuj atrybut filtru
 
-Atrybut [Autoryzuj](/dotnet/api/microsoft.aspnetcore.authorization.authorizeattribute?view=aspnetcore-2.0) można zastosować do `PageModel`:
+Atrybut [Autoryzuj](/dotnet/api/microsoft.aspnetcore.authorization.authorizeattribute?view=aspnetcore-2.0) można zastosować do `PageModel` :
 
 [!code-csharp[Main](filter/sample/PageFilter/Pages/ModelWithAuthFilter.cshtml.cs?highlight=7)]
 
@@ -117,7 +117,7 @@ Atrybut [Autoryzuj](/dotnet/api/microsoft.aspnetcore.authorization.authorizeattr
 
 Autor: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-Razor[IPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter?view=aspnetcore-2.0) i [IAsyncPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter?view=aspnetcore-2.0) umożliwiają Razor stronom uruchamianie kodu przed uruchomieniem programu obsługi stron Razor i po nim. RazorFiltry stron są podobne do [ASP.NET Core filtrów akcji MVC](xref:mvc/controllers/filters#action-filters), z wyjątkiem sytuacji, gdy nie można ich zastosować do metod obsługi poszczególnych stron.
+Razor[IPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter?view=aspnetcore-2.0) i [IAsyncPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter?view=aspnetcore-2.0) umożliwiają Razor stronom uruchamianie kodu przed Razor uruchomieniem programu obsługi stron i po nim. RazorFiltry stron są podobne do [ASP.NET Core filtrów akcji MVC](xref:mvc/controllers/filters#action-filters), z wyjątkiem sytuacji, gdy nie można ich zastosować do metod obsługi poszczególnych stron.
 
 RazorFiltry stron:
 
@@ -127,7 +127,7 @@ RazorFiltry stron:
 * Można zaimplementować na stronie lub globalnie.
 * Nie można zastosować do określonych metod obsługi stron.
 
-Kod można uruchomić przed wykonaniem metody obsługi przy użyciu konstruktora stron lub oprogramowania pośredniczącego, ale tylko Razor filtry strony mają dostęp do elementu [HttpContext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.httpcontext?view=aspnetcore-2.0#Microsoft_AspNetCore_Mvc_RazorPages_PageModel_HttpContext). Filtry mają parametr pochodny [FilterContext](/dotnet/api/microsoft.aspnetcore.mvc.filters.filtercontext?view=aspnetcore-2.0) , który zapewnia dostęp do `HttpContext`. Na przykład, implementacja przykładu [atrybutu filtru](#ifa) dodaje nagłówek do odpowiedzi, co nie jest możliwe za pomocą konstruktorów lub oprogramowania pośredniczącego.
+Kod można uruchomić przed wykonaniem metody obsługi przy użyciu konstruktora stron lub oprogramowania pośredniczącego, ale tylko Razor filtry strony mają dostęp do elementu [HttpContext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.httpcontext?view=aspnetcore-2.0#Microsoft_AspNetCore_Mvc_RazorPages_PageModel_HttpContext). Filtry mają parametr pochodny [FilterContext](/dotnet/api/microsoft.aspnetcore.mvc.filters.filtercontext?view=aspnetcore-2.0) , który zapewnia dostęp do `HttpContext` . Na przykład, implementacja przykładu [atrybutu filtru](#ifa) dodaje nagłówek do odpowiedzi, co nie jest możliwe za pomocą konstruktorów lub oprogramowania pośredniczącego.
 
 [Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/filter/sample/PageFilter) ([jak pobrać](xref:index#how-to-download-a-sample))
 
@@ -149,7 +149,7 @@ RazorFiltry stron oferują następujące metody, które mogą być stosowane glo
 
 ## <a name="implement-razor-page-filters-globally"></a>Implementowanie Razor filtrów stron globalnie
 
-Poniższy kod implementuje `IAsyncPageFilter`:
+Poniższy kod implementuje `IAsyncPageFilter` :
 
 [!code-csharp[Main](filter/sample/PageFilter/Filters/SampleAsyncPageFilter.cs?name=snippet1)]
 
@@ -163,15 +163,15 @@ Poniższy kod przedstawia kompletną `Startup` klasę:
 
 [!code-csharp[Main](filter/sample/PageFilter/Startup.cs?name=snippet1)]
 
-Poniższy kod wywołuje `AddFolderApplicationModelConvention` , `SampleAsyncPageFilter` aby zastosować tylko do stron w */subFolder*:
+Poniższy kod wywołuje `AddFolderApplicationModelConvention` , aby zastosować `SampleAsyncPageFilter` tylko do stron w */subFolder*:
 
 [!code-csharp[Main](filter/sample/PageFilter/Startup2.cs?name=snippet2)]
 
-Poniższy kod implementuje synchroniczne `IPageFilter`:
+Poniższy kod implementuje synchroniczne `IPageFilter` :
 
 [!code-csharp[Main](filter/sample/PageFilter/Filters/SamplePageFilter.cs?name=snippet1)]
 
-Poniższy kod włącza `SamplePageFilter`:
+Poniższy kod włącza `SamplePageFilter` :
 
 [!code-csharp[Main](filter/sample/PageFilter/StartupSync.cs?name=snippet2&highlight=11)]
 
@@ -201,7 +201,7 @@ Zobacz [Anulowanie i krótkie obwody](xref:mvc/controllers/filters#cancellation-
 
 ## <a name="authorize-filter-attribute"></a>Autoryzuj atrybut filtru
 
-Atrybut [Autoryzuj](/dotnet/api/microsoft.aspnetcore.authorization.authorizeattribute?view=aspnetcore-2.0) można zastosować do `PageModel`:
+Atrybut [Autoryzuj](/dotnet/api/microsoft.aspnetcore.authorization.authorizeattribute?view=aspnetcore-2.0) można zastosować do `PageModel` :
 
 [!code-csharp[Main](filter/sample/PageFilter/Pages/ModelWithAuthFilter.cshtml.cs?highlight=7)]
 

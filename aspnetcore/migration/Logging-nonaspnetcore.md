@@ -7,27 +7,29 @@ ms.custom: mvc
 ms.date: 01/04/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: migration/logging-nonaspnetcore
-ms.openlocfilehash: 2fd738ed0e0a06d0793e3c624d40a13725b53cd8
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: 0c85ca637c1e93bbde93c7d5d12408637476558e
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84274235"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399793"
 ---
-# <a name="migrate-from-microsoftextensionslogging-21-to-22-or-30"></a><span data-ttu-id="930e7-103">Migrowanie z Microsoft. Extensions. Logging 2,1 do 2,2 lub 3,0</span><span class="sxs-lookup"><span data-stu-id="930e7-103">Migrate from Microsoft.Extensions.Logging 2.1 to 2.2 or 3.0</span></span>
+# <a name="migrate-from-microsoftextensionslogging-21-to-22-or-30"></a><span data-ttu-id="566d1-103">Migrowanie z Microsoft. Extensions. Logging 2,1 do 2,2 lub 3,0</span><span class="sxs-lookup"><span data-stu-id="566d1-103">Migrate from Microsoft.Extensions.Logging 2.1 to 2.2 or 3.0</span></span>
 
-<span data-ttu-id="930e7-104">W tym artykule opisano typowe kroki migrowania aplikacji non-ASP.NET Core, która używa `Microsoft.Extensions.Logging` od 2,1 do 2,2 lub 3,0.</span><span class="sxs-lookup"><span data-stu-id="930e7-104">This article outlines the common steps for migrating a non-ASP.NET Core application that uses `Microsoft.Extensions.Logging` from 2.1 to 2.2 or 3.0.</span></span>
+<span data-ttu-id="566d1-104">W tym artykule opisano typowe kroki migrowania aplikacji non-ASP.NET Core, która używa `Microsoft.Extensions.Logging` od 2,1 do 2,2 lub 3,0.</span><span class="sxs-lookup"><span data-stu-id="566d1-104">This article outlines the common steps for migrating a non-ASP.NET Core application that uses `Microsoft.Extensions.Logging` from 2.1 to 2.2 or 3.0.</span></span>
 
-## <a name="21-to-22"></a><span data-ttu-id="930e7-105">Z wersji 2.1 do 2.2</span><span class="sxs-lookup"><span data-stu-id="930e7-105">2.1 to 2.2</span></span>
+## <a name="21-to-22"></a><span data-ttu-id="566d1-105">Z wersji 2.1 do 2.2</span><span class="sxs-lookup"><span data-stu-id="566d1-105">2.1 to 2.2</span></span>
 
-<span data-ttu-id="930e7-106">Ręcznie Utwórz `ServiceCollection` i Wywołaj `AddLogging` .</span><span class="sxs-lookup"><span data-stu-id="930e7-106">Manually create `ServiceCollection` and call `AddLogging`.</span></span>
+<span data-ttu-id="566d1-106">Ręcznie Utwórz `ServiceCollection` i Wywołaj `AddLogging` .</span><span class="sxs-lookup"><span data-stu-id="566d1-106">Manually create `ServiceCollection` and call `AddLogging`.</span></span>
 
-<span data-ttu-id="930e7-107">2,1 przykład:</span><span class="sxs-lookup"><span data-stu-id="930e7-107">2.1 example:</span></span>
+<span data-ttu-id="566d1-107">2,1 przykład:</span><span class="sxs-lookup"><span data-stu-id="566d1-107">2.1 example:</span></span>
 
 ```csharp
 using (var loggerFactory = new LoggerFactory())
@@ -38,7 +40,7 @@ using (var loggerFactory = new LoggerFactory())
 }
 ```
 
-<span data-ttu-id="930e7-108">2,2 przykład:</span><span class="sxs-lookup"><span data-stu-id="930e7-108">2.2 example:</span></span>
+<span data-ttu-id="566d1-108">2,2 przykład:</span><span class="sxs-lookup"><span data-stu-id="566d1-108">2.2 example:</span></span>
 
 ```csharp
 var serviceCollection = new ServiceCollection();
@@ -51,11 +53,11 @@ using (var loggerFactory = serviceProvider.GetService<ILoggerFactory>())
 }
 ```
 
-## <a name="21-to-30"></a><span data-ttu-id="930e7-109">2,1 do 3,0</span><span class="sxs-lookup"><span data-stu-id="930e7-109">2.1 to 3.0</span></span>
+## <a name="21-to-30"></a><span data-ttu-id="566d1-109">2,1 do 3,0</span><span class="sxs-lookup"><span data-stu-id="566d1-109">2.1 to 3.0</span></span>
 
-<span data-ttu-id="930e7-110">W 3,0 użyj `LoggingFactory.Create` .</span><span class="sxs-lookup"><span data-stu-id="930e7-110">In 3.0, use `LoggingFactory.Create`.</span></span>
+<span data-ttu-id="566d1-110">W 3,0 użyj `LoggingFactory.Create` .</span><span class="sxs-lookup"><span data-stu-id="566d1-110">In 3.0, use `LoggingFactory.Create`.</span></span>
 
-<span data-ttu-id="930e7-111">2,1 przykład:</span><span class="sxs-lookup"><span data-stu-id="930e7-111">2.1 example:</span></span>
+<span data-ttu-id="566d1-111">2,1 przykład:</span><span class="sxs-lookup"><span data-stu-id="566d1-111">2.1 example:</span></span>
 
 ```csharp
 using (var loggerFactory = new LoggerFactory())
@@ -66,7 +68,7 @@ using (var loggerFactory = new LoggerFactory())
 }
 ```
 
-<span data-ttu-id="930e7-112">3,0 przykład:</span><span class="sxs-lookup"><span data-stu-id="930e7-112">3.0 example:</span></span>
+<span data-ttu-id="566d1-112">3,0 przykład:</span><span class="sxs-lookup"><span data-stu-id="566d1-112">3.0 example:</span></span>
 
 ```csharp
 using (var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole()))
@@ -75,7 +77,7 @@ using (var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole())
 }
 ```
 
-## <a name="additional-resources"></a><span data-ttu-id="930e7-113">Zasoby dodatkowe</span><span class="sxs-lookup"><span data-stu-id="930e7-113">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="566d1-113">Zasoby dodatkowe</span><span class="sxs-lookup"><span data-stu-id="566d1-113">Additional resources</span></span>
 
-* <span data-ttu-id="930e7-114">[Microsoft. Extensions. Logging. Console pakiet NuGet](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Console/).</span><span class="sxs-lookup"><span data-stu-id="930e7-114">[Microsoft.Extensions.Logging.Console NuGet package](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Console/).</span></span>
+* <span data-ttu-id="566d1-114">[Microsoft. Extensions. Logging. Console pakiet NuGet](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Console/).</span><span class="sxs-lookup"><span data-stu-id="566d1-114">[Microsoft.Extensions.Logging.Console NuGet package](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Console/).</span></span>
 * <xref:fundamentals/logging/index>

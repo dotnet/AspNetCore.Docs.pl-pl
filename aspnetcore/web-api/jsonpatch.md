@@ -1,13 +1,26 @@
 ---
-title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
+title: JsonPatch w interfejsie Web API ASP.NET Core
+author: rick-anderson
+description: Dowiedz się, jak obsługiwać żądania poprawek w formacie JSON w ASP.NET Core internetowym interfejsie API.
+ms.author: riande
+ms.custom: mvc
+ms.date: 04/02/2020
+no-loc:
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: web-api/jsonpatch
+ms.openlocfilehash: 08ae366859c4466e6957592f78dda813d6670bb4
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.translationtype: MT
+ms.contentlocale: pl-PL
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405032"
 ---
-
 # <a name="jsonpatch-in-aspnet-core-web-api"></a>JsonPatch w interfejsie Web API ASP.NET Core
 
 Autorzy [Dykstra](https://github.com/tdykstra) i [Kirka Larkin](https://github.com/serpent5)
@@ -21,7 +34,7 @@ W tym artykule wyjaśniono, jak obsłużyć żądania poprawek w formacie JSON w
 Aby włączyć obsługę poprawek JSON w aplikacji, wykonaj następujące czynności:
 
 1. Zainstaluj [`Microsoft.AspNetCore.Mvc.NewtonsoftJson`](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson/) pakiet NuGet.
-1. Zaktualizuj `Startup.ConfigureServices` metodę projektu w celu wywołania <xref:Microsoft.Extensions.DependencyInjection.NewtonsoftJsonMvcBuilderExtensions.AddNewtonsoftJson*> . Przykład:
+1. Zaktualizuj `Startup.ConfigureServices` metodę projektu w celu wywołania <xref:Microsoft.Extensions.DependencyInjection.NewtonsoftJsonMvcBuilderExtensions.AddNewtonsoftJson*> . Na przykład:
 
     ```csharp
     services
@@ -35,7 +48,7 @@ Aby włączyć obsługę poprawek JSON w aplikacji, wykonaj następujące czynno
 * <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddControllersWithViews*>
 * <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddControllers*>
 
-## <a name="json-patch-addnewtonsoftjson-and-systemtextjson"></a>Poprawka JSON, AddNewtonsoftJson i system. Text. JSON
+## <a name="json-patch-addnewtonsoftjson-and-systemtextjson"></a>Poprawka JSON, AddNewtonsoftJson i System.Text.Jsna
 
 `AddNewtonsoftJson`zastępuje utworzone w oparciu o dane `System.Text.Json` wejściowe i wyjściowe elementy formatujące używane do formatowania **całej** zawartości JSON. Aby dodać obsługę poprawki JSON przy użyciu `Newtonsoft.Json` , pozostawiając inne elementy formatujące bez zmian, zaktualizuj `Startup.ConfigureServices` metodę projektu w następujący sposób:
 
@@ -106,147 +119,17 @@ W celu określenia elementów tablicy są używane indeksy oparte na wartości z
 W poniższej tabeli przedstawiono obsługiwane operacje zgodnie z definicją w [specyfikacji poprawek JSON](https://tools.ietf.org/html/rfc6902):
 
 |Operacja  | Uwagi |
-|---
-title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
-------|---
-title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
-----------------| | `add`     | Dodaj właściwość lub element tablicy. Dla istniejącej właściwości: Ustaw wartość. | | `remove`  | Usuń właściwość lub element tablicy. | | `replace` | Takie same, jak `remove` następuje `add` w tej samej lokalizacji. | | `move`    | Takie samo jak `remove` ze źródła, a następnie `add` do miejsca docelowego przy użyciu wartości ze źródła. | | `copy`    | Takie samo jak `add` miejsce docelowe przy użyciu wartości ze źródła. | | `test`    | Zwróć kod stanu sukcesu, jeśli wartość jest równa `path` = podano `value` . |
+|-----------|--------------------------------|
+| `add`     | Dodaj właściwość lub element tablicy. Dla istniejącej właściwości: Ustaw wartość.|
+| `remove`  | Usuń właściwość lub element tablicy. |
+| `replace` | Takie same, jak `remove` następuje `add` w tej samej lokalizacji. |
+| `move`    | Takie samo jak `remove` ze źródła, a następnie `add` do miejsca docelowego przy użyciu wartości ze źródła. |
+| `copy`    | Takie samo jak `add` miejsce docelowe przy użyciu wartości ze źródła. |
+| `test`    | Zwróć kod stanu sukcesu, jeśli wartość jest równa `path` = `value` .|
 
 ## <a name="json-patch-in-aspnet-core"></a>Poprawka JSON w ASP.NET Core
 
-ASP.NET Core implementacja poprawki JSON jest dostępna w pakiecie NuGet [Microsoft. AspNetCore. JsonPatch](https://www.nuget.org/packages/microsoft.aspnetcore.jsonpatch/) .
+ASP.NET Core implementacja poprawki JSON znajduje się w pakiecie NuGet [Microsoft.AspNetCore.Jsonpatch](https://www.nuget.org/packages/microsoft.aspnetcore.jsonpatch/) .
 
 ## <a name="action-method-code"></a>Kod metody akcji
 
@@ -256,7 +139,7 @@ W kontrolerze interfejsu API Metoda akcji dla poprawki JSON:
 * Akceptuje element `JsonPatchDocument<T>` , zazwyczaj z `[FromBody]` .
 * Wywołuje `ApplyTo` dokument poprawki, aby zastosować zmiany.
 
-Oto przykład:
+Przykład:
 
 [!code-csharp[](jsonpatch/samples/2.2/Controllers/HomeController.cs?name=snippet_PatchAction&highlight=1,3,9)]
 
@@ -448,147 +331,17 @@ W celu określenia elementów tablicy są używane indeksy oparte na wartości z
 W poniższej tabeli przedstawiono obsługiwane operacje zgodnie z definicją w [specyfikacji poprawek JSON](https://tools.ietf.org/html/rfc6902):
 
 |Operacja  | Uwagi |
-|---
-title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
-------|---
-title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
--
-title: Autor: Opis: MS. Author: MS. Custom: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
-----------------| | `add`     | Dodaj właściwość lub element tablicy. Dla istniejącej właściwości: Ustaw wartość. | | `remove`  | Usuń właściwość lub element tablicy. | | `replace` | Takie same, jak `remove` następuje `add` w tej samej lokalizacji. | | `move`    | Takie samo jak `remove` ze źródła, a następnie `add` do miejsca docelowego przy użyciu wartości ze źródła. | | `copy`    | Takie samo jak `add` miejsce docelowe przy użyciu wartości ze źródła. | | `test`    | Zwróć kod stanu sukcesu, jeśli wartość jest równa `path` = podano `value` . |
+|-----------|--------------------------------|
+| `add`     | Dodaj właściwość lub element tablicy. Dla istniejącej właściwości: Ustaw wartość.|
+| `remove`  | Usuń właściwość lub element tablicy. |
+| `replace` | Takie same, jak `remove` następuje `add` w tej samej lokalizacji. |
+| `move`    | Takie samo jak `remove` ze źródła, a następnie `add` do miejsca docelowego przy użyciu wartości ze źródła. |
+| `copy`    | Takie samo jak `add` miejsce docelowe przy użyciu wartości ze źródła. |
+| `test`    | Zwróć kod stanu sukcesu, jeśli wartość jest równa `path` = `value` .|
 
 ## <a name="jsonpatch-in-aspnet-core"></a>JsonPatch w ASP.NET Core
 
-ASP.NET Core implementacja poprawki JSON jest dostępna w pakiecie NuGet [Microsoft. AspNetCore. JsonPatch](https://www.nuget.org/packages/microsoft.aspnetcore.jsonpatch/) . Pakiet jest zawarty w pakiecie [Microsoft. AspnetCore. app](xref:fundamentals/metapackage-app) .
+ASP.NET Core implementacja poprawki JSON znajduje się w pakiecie NuGet [Microsoft.AspNetCore.Jsonpatch](https://www.nuget.org/packages/microsoft.aspnetcore.jsonpatch/) . Pakiet jest zawarty w pakiecie [Microsoft. AspnetCore. app](xref:fundamentals/metapackage-app) .
 
 ## <a name="action-method-code"></a>Kod metody akcji
 
@@ -598,7 +351,7 @@ W kontrolerze interfejsu API Metoda akcji dla poprawki JSON:
 * Akceptuje element `JsonPatchDocument<T>` , zazwyczaj z `[FromBody]` .
 * Wywołuje `ApplyTo` dokument poprawki, aby zastosować zmiany.
 
-Oto przykład:
+Przykład:
 
 [!code-csharp[](jsonpatch/samples/2.2/Controllers/HomeController.cs?name=snippet_PatchAction&highlight=1,3,9)]
 

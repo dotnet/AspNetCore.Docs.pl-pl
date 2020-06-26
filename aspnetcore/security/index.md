@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 10/24/2018
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/index
-ms.openlocfilehash: 413b4cf786c31ac3a538c8663014b53502d90d0c
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 2da3585df16cbec4b87db32cee1bb9138e6aeb16
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "83838295"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406684"
 ---
 # <a name="overview-of-aspnet-core-security"></a>Przegląd zabezpieczeń ASP.NET Core
 

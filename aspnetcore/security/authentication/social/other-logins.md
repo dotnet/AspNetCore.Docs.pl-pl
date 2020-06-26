@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 11/11/2018
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/otherlogins
-ms.openlocfilehash: c61bbef26017f14df09f8ca6f494d29f79903b6b
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 438b06dfa55a6b5bdd7b97516005e1f918f7b6ae
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776464"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406072"
 ---
 # <a name="external-oauth-authentication-providers"></a>Zewnętrzni dostawcy uwierzytelniania OAuth
 

@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 10/24/2018
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: data/entity-framework-6
-ms.openlocfilehash: 7c77ecb663bebcaf0c6239f07ac15dda23f17b9c
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 8611ea8bd6737c8b8ea366affa2158f80e9a1aa9
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775482"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405058"
 ---
 # <a name="get-started-with-aspnet-core-and-entity-framework-6"></a>Wprowadzenie do ASP.NET Core i Entity Framework 6
 
@@ -88,7 +90,7 @@ Ten przykład można utworzyć od podstaw, wykonując następujące kroki w prog
 
 * W projekcie podstawowym w *Startup.cs*Zarejestruj kontekst dla di.
 
-* W projekcie podstawowym w pliku *appSettings. JSON*Dodaj parametry połączenia.
+* W projekcie podstawowym w *appsettings.jsna*, Dodaj parametry połączenia.
 
 * W projekcie podstawowym Dodaj kontroler i widok, aby sprawdzić, czy można odczytywać i zapisywać dane. (Należy zauważyć, że ASP.NET Core tworzenie szkieletu MVC nie będzie współpracowało z kontekstem EF6, do którego odwołuje się Biblioteka klas).
 

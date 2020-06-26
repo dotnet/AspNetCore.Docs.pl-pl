@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 01/23/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/social/index
-ms.openlocfilehash: 880aeea4dce5f5ae6533a3293067d89f98587e72
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: a2c068df85290a59d45432cb168b2c882b59405b
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777153"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405370"
 ---
 # <a name="facebook-google-and-external-provider-authentication-in-aspnet-core"></a>Uwierzytelnianie w serwisach Facebook, Google i dostawcy zewnętrznym w ASP.NET Core
 
@@ -36,7 +38,7 @@ Aby zapoznać się z przykładami sposobu, w jaki nazwy logowania społeczności
 
 ## <a name="create-a-new-aspnet-core-project"></a>Utwórz nowy projekt ASP.NET Core
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 * Tworzenie nowego projektu.
 * Wybierz pozycję **ASP.NET Core aplikacja sieci Web** i przycisk **dalej**.
@@ -49,7 +51,7 @@ Aby zapoznać się z przykładami sposobu, w jaki nazwy logowania społeczności
 
 * Otwórz Terminal.  Aby uzyskać Visual Studio Code można otworzyć [zintegrowany terminal](https://code.visualstudio.com/docs/editor/integrated-terminal).
 
-* Zmień katalogi (`cd`) na folder, który będzie zawierać projekt.
+* Zmień katalogi ( `cd` ) na folder, który będzie zawierać projekt.
 
 * W systemie Windows uruchom następujące polecenie:
 
@@ -63,10 +65,10 @@ Aby zapoznać się z przykładami sposobu, w jaki nazwy logowania społeczności
   dotnet new webapp -o WebApp1 -au Individual
   ```
 
-  * `dotnet new` Polecenie tworzy nowy projekt Razor Pages w folderze *WebApp1* .
+  * `dotnet new`Polecenie tworzy nowy Razor Projekt strony w folderze *WebApp1* .
   * `-au Individual`Tworzy kod dla indywidualnego uwierzytelniania.
-  * `-uld`używa LocalDB, uproszczonej wersji SQL Server Express dla systemu Windows. Pomiń `-uld` korzystanie z oprogramowania SQLite.
-  * `code` Polecenie otwiera folder *WebApp1* w nowym wystąpieniu Visual Studio Code.
+  * `-uld`używa LocalDB, uproszczonej wersji SQL Server Express dla systemu Windows. Pomiń `-uld` Korzystanie z oprogramowania SQLite.
+  * `code`Polecenie otwiera folder *WebApp1* w nowym wystąpieniu Visual Studio Code.
 
 ---
 
@@ -80,7 +82,7 @@ Aby zapoznać się z przykładami sposobu, w jaki nazwy logowania społeczności
 
 ## <a name="use-secretmanager-to-store-tokens-assigned-by-login-providers"></a>Używanie klucza tajnego do przechowywania tokenów przypisanych przez dostawców logowania
 
-Dostawcy logowania społecznościowego przypisują **tokeny** i **identyfikatory aplikacji** podczas procesu rejestracji. Dokładne nazwy tokenów różnią się w zależności od dostawcy. Te tokeny reprezentują poświadczenia używane przez aplikację w celu uzyskania dostępu do interfejsu API. Tokeny stanowią "wpisy tajne", które mogą być połączone z konfiguracją aplikacji za pomocą [Menedżera wpisów tajnych](xref:security/app-secrets#secret-manager). Program Secret Manager jest bezpieczniejszym rozwiązaniem do przechowywania tokenów w pliku konfiguracyjnym, takim jak *appSettings. JSON*.
+Dostawcy logowania społecznościowego przypisują **tokeny** i **identyfikatory aplikacji** podczas procesu rejestracji. Dokładne nazwy tokenów różnią się w zależności od dostawcy. Te tokeny reprezentują poświadczenia używane przez aplikację w celu uzyskania dostępu do interfejsu API. Tokeny stanowią "wpisy tajne", które mogą być połączone z konfiguracją aplikacji za pomocą [Menedżera wpisów tajnych](xref:security/app-secrets#secret-manager). Program Secret Manager jest bezpieczniejszym rozwiązaniem do przechowywania tokenów w pliku konfiguracyjnym, takim jak *appsettings.json*.
 
 > [!IMPORTANT]
 > Menedżer wpisów tajnych służy tylko do celów deweloperskich. Za pomocą [dostawcy konfiguracji Azure Key Vault](xref:security/key-vault-configuration)można przechowywać i chronić wpisy tajne środowiska Azure test i produkcyjne.
@@ -105,7 +107,7 @@ Gdy zarejestrujesz się przy użyciu zewnętrznego dostawcy logowania, nie masz 
 
 Aby utworzyć hasło i zalogować się przy użyciu poczty e-mail, która została ustawiona w procesie logowania z zewnętrznymi dostawcami:
 
-* Wybierz link **Hello &lt;email alias&gt; ** w prawym górnym rogu, aby przejść do widoku **zarządzania** .
+* Wybierz link **Hello &lt; email alias &gt; ** w prawym górnym rogu, aby przejść do widoku **zarządzania** .
 
 ![Widok zarządzania aplikacjami sieci Web](index/_static/pass1a.png)
 

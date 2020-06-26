@@ -7,17 +7,19 @@ ms.author: jamesnk
 ms.date: 09/23/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: grpc/diagnostics
-ms.openlocfilehash: 33b2ee29830cd3012ff791c949c3a7c23a2e98c7
-ms.sourcegitcommit: 16b3abec1ed70f9a206f0cfa7cf6404eebaf693d
+ms.openlocfilehash: ca87ba5b03e7657132e5ebaba72370bde85c85d4
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/17/2020
-ms.locfileid: "83444350"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406774"
 ---
 # <a name="logging-and-diagnostics-in-grpc-on-net"></a>Rejestrowanie i Diagnostyka w programie gRPC na platformie .NET
 
@@ -40,7 +42,7 @@ usługi gRPC i dzienniki zapisu klienta gRPC przy użyciu funkcji [rejestrowania
 
 Ponieważ usługi gRPC Services są hostowane na ASP.NET Core, korzysta z systemu rejestrowania ASP.NET Core. W konfiguracji domyślnej gRPC rejestruje bardzo mało informacji, ale można je skonfigurować. Szczegółowe informacje na temat konfigurowania rejestrowania ASP.NET Core można znaleźć w dokumentacji dotyczącej [rejestrowania ASP.NET Core](xref:fundamentals/logging/index#configuration) .
 
-gRPC dodaje dzienniki w `Grpc` kategorii. Aby włączyć szczegółowe dzienniki z gRPC, skonfiguruj `Grpc` prefiksy do `Debug` poziomu w pliku *appSettings. JSON* , dodając następujące elementy do `LogLevel` podsekcji w `Logging` :
+gRPC dodaje dzienniki w `Grpc` kategorii. Aby włączyć szczegółowe dzienniki z gRPC, skonfiguruj `Grpc` prefiksy na `Debug` poziomie *appsettings.jsw* pliku, dodając następujące elementy do `LogLevel` podsekcji w `Logging` :
 
 [!code-json[](diagnostics/sample/logging-config.json?highlight=7)]
 

@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 12/10/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: web-api/handle-errors
-ms.openlocfilehash: 7c641fb12e0d06ebd7bb3ce9f878f0469b4a3d8e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: f756d9abfb92fd4d6d51d8762967ac2288b54b2a
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775066"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405760"
 ---
 # <a name="handle-errors-in-aspnet-core-web-apis"></a>Obsługa błędów w ASP.NET Core interfejsów API sieci Web
 
@@ -74,7 +76,7 @@ Host: localhost:44312
 User-Agent: curl/7.55.1
 ```
 
-Aby zamiast tego wyświetlić odpowiedź sformatowaną w formacie HTML, `Accept` należy ustawić nagłówek żądania HTTP `text/html` na typ nośnika. Przykład:
+Aby zamiast tego wyświetlić odpowiedź sformatowaną w formacie HTML, należy ustawić `Accept` nagłówek żądania HTTP na `text/html` Typ nośnika. Na przykład:
 
 ```bash
 curl -i -H "Accept: text/html" https://localhost:5001/weatherforecast/chicago
@@ -121,13 +123,13 @@ Odpowiedź w formacie HTML jest przydatna podczas testowania za pomocą narzędz
 ::: moniker-end
 
 > [!WARNING]
-> Stronę wyjątku dla deweloperów należy włączyć tylko wtedy, **gdy aplikacja jest uruchomiona w środowisku deweloperskim**. Nie chcesz udostępniać szczegółowych informacji o wyjątku publicznie, gdy aplikacja jest uruchamiana w środowisku produkcyjnym. Aby uzyskać więcej informacji na temat konfigurowania środowisk <xref:fundamentals/environments>, zobacz.
+> Stronę wyjątku dla deweloperów należy włączyć tylko wtedy, **gdy aplikacja jest uruchomiona w środowisku deweloperskim**. Nie chcesz udostępniać szczegółowych informacji o wyjątku publicznie, gdy aplikacja jest uruchamiana w środowisku produkcyjnym. Aby uzyskać więcej informacji na temat konfigurowania środowisk, zobacz <xref:fundamentals/environments> .
 
 ## <a name="exception-handler"></a>Procedura obsługi wyjątków
 
 W środowiskach innych niż programowanie [wyjątek obsługujący oprogramowanie pośredniczące](xref:fundamentals/error-handling) może być używany do tworzenia ładunku błędu:
 
-1. W `Startup.Configure`programie Wywołaj <xref:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler%2A> , aby użyć oprogramowania pośredniczącego:
+1. W programie `Startup.Configure` Wywołaj, <xref:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler%2A> Aby użyć oprogramowania pośredniczącego:
 
     ::: moniker range=">= aspnetcore-3.0"
 
@@ -155,11 +157,11 @@ W środowiskach innych niż programowanie [wyjątek obsługujący oprogramowanie
 
     ::: moniker-end
 
-Poprzednia `Error` akcja wysyła do klienta ładunek zgodny ze standardem [RFC 7807](https://tools.ietf.org/html/rfc7807).
+Poprzednia `Error` Akcja wysyła do klienta ładunek zgodny ze standardem [RFC 7807](https://tools.ietf.org/html/rfc7807).
 
 Wyjątek obsługujący oprogramowanie pośredniczące może również dostarczyć bardziej szczegółowe dane wyjściowe negocjowane z zawartością w lokalnym środowisku programistycznym. Wykonaj następujące kroki, aby utworzyć spójny format ładunku w środowisku deweloperskim i produkcyjnym:
 
-1. W `Startup.Configure`programie Zarejestruj wyjątek specyficzny dla środowiska obsługi oprogramowania pośredniczącego:
+1. W programie `Startup.Configure` zarejestruj wyjątek specyficzny dla środowiska obsługi oprogramowania pośredniczącego:
 
     ::: moniker range=">= aspnetcore-3.0"
 
@@ -218,17 +220,17 @@ Wyjątek obsługujący oprogramowanie pośredniczące może również dostarczy�
 
 ## <a name="use-exceptions-to-modify-the-response"></a>Modyfikowanie odpowiedzi przy użyciu wyjątków
 
-Zawartość odpowiedzi można modyfikować poza kontrolerem. W przypadku interfejsu API sieci Web ASP.NET 4. x jeden ze sposobów na to zrobić <xref:System.Web.Http.HttpResponseException> przy użyciu typu. ASP.NET Core nie zawiera równoważnego typu. Pomoc techniczną dla programu `HttpResponseException` można dodać, wykonując następujące czynności:
+Zawartość odpowiedzi można modyfikować poza kontrolerem. W przypadku interfejsu API sieci Web ASP.NET 4. x jeden ze sposobów na to zrobić przy użyciu <xref:System.Web.Http.HttpResponseException> typu. ASP.NET Core nie zawiera równoważnego typu. Pomoc techniczną dla programu `HttpResponseException` można dodać, wykonując następujące czynności:
 
-1. Utwórz dobrze znany typ wyjątku o nazwie `HttpResponseException`:
+1. Utwórz dobrze znany typ wyjątku o nazwie `HttpResponseException` :
 
     [!code-csharp[](handle-errors/samples/3.x/Exceptions/HttpResponseException.cs?name=snippet_HttpResponseException)]
 
-1. Utwórz filtr akcji o nazwie `HttpResponseExceptionFilter`:
+1. Utwórz filtr akcji o nazwie `HttpResponseExceptionFilter` :
 
     [!code-csharp[](handle-errors/samples/3.x/Filters/HttpResponseExceptionFilter.cs?name=snippet_HttpResponseExceptionFilter)]
 
-1. W `Startup.ConfigureServices`programie Dodaj filtr akcji do kolekcji filters:
+1. W programie `Startup.ConfigureServices` Dodaj filtr akcji do kolekcji filters:
 
     ::: moniker range=">= aspnetcore-3.0"
 
@@ -250,7 +252,7 @@ Zawartość odpowiedzi można modyfikować poza kontrolerem. W przypadku interfe
 
 ## <a name="validation-failure-error-response"></a>Odpowiedź na błąd niepowodzenia weryfikacji
 
-W przypadku kontrolerów interfejsu API sieci Web MVC reaguje <xref:Microsoft.AspNetCore.Mvc.ValidationProblemDetails> na typ odpowiedzi, gdy Walidacja modelu kończy się niepowodzeniem. MVC używa wyników w <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.InvalidModelStateResponseFactory> celu skonstruowania odpowiedzi na błąd w przypadku niepowodzenia walidacji. Poniższy przykład używa fabryki do zmiany domyślnego typu odpowiedzi na <xref:Microsoft.AspNetCore.Mvc.SerializableError> wartość w: `Startup.ConfigureServices`
+W przypadku kontrolerów interfejsu API sieci Web MVC reaguje na <xref:Microsoft.AspNetCore.Mvc.ValidationProblemDetails> Typ odpowiedzi, gdy Walidacja modelu kończy się niepowodzeniem. MVC używa wyników w <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.InvalidModelStateResponseFactory> celu skonstruowania odpowiedzi na błąd w przypadku niepowodzenia walidacji. Poniższy przykład używa fabryki do zmiany domyślnego typu odpowiedzi na wartość <xref:Microsoft.AspNetCore.Mvc.SerializableError> w `Startup.ConfigureServices` :
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -272,7 +274,7 @@ W przypadku kontrolerów interfejsu API sieci Web MVC reaguje <xref:Microsoft.As
 
 ## <a name="client-error-response"></a>Odpowiedź na błąd klienta
 
-*Wynik błędu* jest definiowany w wyniku przy użyciu kodu stanu HTTP 400 lub wyższego. W przypadku kontrolerów interfejsu API sieci Web MVC przekształca wynik błędu z wynikiem <xref:Microsoft.AspNetCore.Mvc.ProblemDetails>.
+*Wynik błędu* jest definiowany w wyniku przy użyciu kodu stanu HTTP 400 lub wyższego. W przypadku kontrolerów interfejsu API sieci Web MVC przekształca wynik błędu z wynikiem <xref:Microsoft.AspNetCore.Mvc.ProblemDetails> .
 
 ::: moniker range="= aspnetcore-2.1"
 
@@ -290,9 +292,9 @@ Odpowiedź na błąd można skonfigurować w jeden z następujących sposobów:
 
 ### <a name="implement-problemdetailsfactory"></a>Implementuj ProblemDetailsFactory
 
-MVC używa `Microsoft.AspNetCore.Mvc.ProblemDetailsFactory` do tworzenia wszystkich wystąpień <xref:Microsoft.AspNetCore.Mvc.ProblemDetails> i. <xref:Microsoft.AspNetCore.Mvc.ValidationProblemDetails> Obejmuje to odpowiedzi na błędy klientów, odpowiedzi na błędy walidacji i `Microsoft.AspNetCore.Mvc.ControllerBase.Problem` metody <xref:Microsoft.AspNetCore.Mvc.ControllerBase.ValidationProblem> pomocnika.
+MVC używa `Microsoft.AspNetCore.Mvc.ProblemDetailsFactory` do tworzenia wszystkich wystąpień <xref:Microsoft.AspNetCore.Mvc.ProblemDetails> i <xref:Microsoft.AspNetCore.Mvc.ValidationProblemDetails> . Obejmuje to odpowiedzi na błędy klientów, odpowiedzi na błędy walidacji i `Microsoft.AspNetCore.Mvc.ControllerBase.Problem` <xref:Microsoft.AspNetCore.Mvc.ControllerBase.ValidationProblem> metody pomocnika.
 
-Aby dostosować odpowiedź dotyczącą szczegółów problemu, zarejestruj niestandardową `ProblemDetailsFactory` implementację programu w programie `Startup.ConfigureServices`:
+Aby dostosować odpowiedź dotyczącą szczegółów problemu, zarejestruj niestandardową implementację programu `ProblemDetailsFactory` w programie `Startup.ConfigureServices` :
 
 ```csharp
 public void ConfigureServices(IServiceCollection serviceCollection)
@@ -314,7 +316,7 @@ Odpowiedź na błąd można skonfigurować zgodnie z opisem w sekcji [use ApiBeh
 
 ### <a name="use-apibehavioroptionsclienterrormapping"></a>Użyj ApiBehaviorOptions. ClientErrorMapping
 
-Użyj właściwości <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.ClientErrorMapping%2A> , aby skonfigurować zawartość `ProblemDetails` odpowiedzi. Na przykład poniższy kod w programie `Startup.ConfigureServices` aktualizuje `type` właściwość dla 404 odpowiedzi:
+Użyj <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.ClientErrorMapping%2A> właściwości, aby skonfigurować zawartość `ProblemDetails` odpowiedzi. Na przykład poniższy kod w programie `Startup.ConfigureServices` aktualizuje `type` właściwość dla 404 odpowiedzi:
 
 ::: moniker-end
 

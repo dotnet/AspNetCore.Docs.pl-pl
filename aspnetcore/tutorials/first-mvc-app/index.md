@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 10/26/2017
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/index
-ms.openlocfilehash: 3dce7b14bfbf73edcdab035af869054faaa31a8d
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 497bed916a38667312fbddae2ca044482d06fd2f
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777569"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405136"
 ---
 # <a name="create-a-web-app-with-aspnet-core-mvc"></a>Tworzenie aplikacji sieci Web za pomocą ASP.NET Core MVC
 
@@ -24,7 +26,7 @@ ms.locfileid: "82777569"
 
 Seria samouczków obejmuje następujące elementy:
 
-1. [Rozpoczęcie pracy](start-mvc.md)
+1. [Wprowadzenie](start-mvc.md)
 1. [Dodawanie kontrolera](adding-controller.md)
 1. [Dodawanie widoku](adding-view.md)
 1. [Dodawanie modelu](adding-model.md)

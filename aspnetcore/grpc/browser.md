@@ -7,17 +7,19 @@ ms.author: jamesnk
 ms.date: 05/26/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: grpc/browser
-ms.openlocfilehash: 6f66a94b41e6e13550396e2e19fdf48f9dc63d46
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 37932e755a0ef2149fb2336d2dcef87d3347d1a4
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84106601"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404759"
 ---
 # <a name="use-grpc-in-browser-apps"></a>Używanie gRPC w aplikacjach przeglądarki
 
@@ -55,9 +57,9 @@ Alternatywnie można skonfigurować oprogramowanie pośredniczące gRPC-Web, tak
 [!code-csharp[](~/grpc/browser/sample/AllServicesSupportExample_Startup.cs?name=snippet_1&highlight=12)]
 
 > [!NOTE]
-> Występuje znany problem, który powoduje niepowodzenie gRPC-Web w przypadku [hostowania przez http. sys](xref:fundamentals/servers/httpsys) w programie .NET Core 3. x.
+> Występuje znany problem, który powoduje niepowodzenie gRPC-Web, gdy jest [hostowany przez Http.sys](xref:fundamentals/servers/httpsys) w programie .NET Core 3. x.
 >
-> Obejście problemu z gRPC-Web Working for http. sys jest dostępny [tutaj](https://github.com/grpc/grpc-dotnet/issues/853#issuecomment-610078202).
+> Obejście problemu z gRPC-Web Work on Http.sys jest dostępny [tutaj](https://github.com/grpc/grpc-dotnet/issues/853#issuecomment-610078202).
 
 ### <a name="grpc-web-and-cors"></a>gRPC — Web i CORS
 
@@ -87,7 +89,7 @@ Istnieje skrypt JavaScript gRPC-Web Client. Aby uzyskać instrukcje dotyczące k
 
 ### <a name="configure-grpc-web-with-the-net-grpc-client"></a>Konfigurowanie gRPC-sieci Web za pomocą klienta .NET gRPC
 
-Klienta .NET gRPC można skonfigurować w taki sposób, aby wykonywać wywołania gRPC-sieci Web. Jest to przydatne w przypadku aplikacji [ Blazor webassembly](xref:blazor/index#blazor-webassembly) , które są hostowane w przeglądarce i mają te same ograniczenia http związane z kodem JavaScript. Wywołanie gRPC-Web z klientem .NET jest [takie samo jak http/2 gRPC](xref:grpc/client). Jedyną modyfikacją jest sposób tworzenia kanału.
+Klienta .NET gRPC można skonfigurować w taki sposób, aby wykonywać wywołania gRPC-sieci Web. Jest to przydatne w przypadku [Blazor WebAssembly](xref:blazor/index#blazor-webassembly) aplikacji, które są hostowane w przeglądarce i mają te same ograniczenia http związane z kodem JavaScript. Wywołanie gRPC-Web z klientem .NET jest [takie samo jak http/2 gRPC](xref:grpc/client). Jedyną modyfikacją jest sposób tworzenia kanału.
 
 Aby użyć gRPC-Web:
 
@@ -111,7 +113,7 @@ Powyższy kod ma następujące działanie:
 * **HttpVersion**: protokół http `Version` służący do ustawiania [HttpRequestMessage. Version](xref:System.Net.Http.HttpRequestMessage.Version) w źródłowym żądaniu HTTP gRPC. gRPC — sieć Web nie wymaga określonej wersji i nie przesłania jej domyślnie, chyba że zostanie określona.
 
 > [!IMPORTANT]
-> Wygenerowane gRPC klienci mają metody synchronizacji i asynchroniczne do wywoływania metod jednoargumentowych. Na przykład `SayHello` jest synchronizowana i `SayHelloAsync` jest asynchroniczna. Wywołanie metody synchronizacji w Blazor aplikacji webassembly spowoduje, że aplikacja przestanie odpowiadać. Metody asynchroniczne muszą być zawsze używane w Blazor zestawie webassembly.
+> Wygenerowane gRPC klienci mają metody synchronizacji i asynchroniczne do wywoływania metod jednoargumentowych. Na przykład `SayHello` jest synchronizowana i `SayHelloAsync` jest asynchroniczna. Wywołanie metody synchronizacji w Blazor WebAssembly aplikacji spowoduje, że aplikacja przestanie odpowiadać. Metody asynchroniczne muszą być zawsze używane w programie Blazor WebAssembly .
 
 ## <a name="additional-resources"></a>Zasoby dodatkowe
 

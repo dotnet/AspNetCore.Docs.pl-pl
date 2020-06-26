@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 4/05/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: performance/memory
-ms.openlocfilehash: db6f8e867fc83a211170aa59f5bad604d9c2730d
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: d261a26de7b9ba77e5f9787ae2eb37293257a0fc
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776119"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406397"
 ---
 # <a name="memory-management-and-garbage-collection-gc-in-aspnet-core"></a>Zarządzanie pamięcią i wyrzucanie elementów bezużytecznych (GC) w ASP.NET Core
 
@@ -135,7 +137,7 @@ Moduł wyrzucania elementów bezużytecznych platformy .NET ma dwa różne tryby
 * **Stacja robocza GC**: zoptymalizowana dla pulpitu.
 * **Serwer GC**. Domyślna wartość GC dla aplikacji ASP.NET Core. Zoptymalizowany pod kątem serwera.
 
-Tryb GC można jawnie ustawić w pliku projektu lub w pliku *runtimeconfig. JSON* opublikowanej aplikacji. Następujące znaczniki pokazują ustawienia `ServerGarbageCollection` w pliku projektu:
+Tryb GC można jawnie ustawić w pliku projektu lub w *runtimeconfig.jsna* pliku opublikowanej aplikacji. Następujące znaczniki pokazują ustawienia `ServerGarbageCollection` w pliku projektu:
 
 ```xml
 <PropertyGroup>
@@ -196,13 +198,13 @@ Na powyższym obrazie:
 * Proces GC próbuje zwolnić pamięć w miarę wzrostu ilości pamięci, wywołując kolekcję generacji 2.
 * GC nie może zwolnić ilości pamięci. Alokacja i zestaw roboczy zwiększają się wraz z czasem.
 
-Niektóre scenariusze, takie jak buforowanie, wymagają, aby odwołania do obiektów były przechowywane do momentu wymuszenia zwolnienia pamięci. <xref:System.WeakReference> Klasa może być używana dla tego typu kodu buforowania. `WeakReference` Obiekt jest zbierany pod ciśnieniem pamięci. Domyślna implementacja programu <xref:Microsoft.Extensions.Caching.Memory.IMemoryCache> `WeakReference`.
+Niektóre scenariusze, takie jak buforowanie, wymagają, aby odwołania do obiektów były przechowywane do momentu wymuszenia zwolnienia pamięci. <xref:System.WeakReference>Klasa może być używana dla tego typu kodu buforowania. `WeakReference`Obiekt jest zbierany pod ciśnieniem pamięci. Domyślna implementacja programu <xref:Microsoft.Extensions.Caching.Memory.IMemoryCache> `WeakReference` .
 
 ### <a name="native-memory"></a>Pamięć natywna
 
 Niektóre obiekty .NET Core są zależne od pamięci natywnej. Pamięć natywna **nie** może być zbierana przez GC. Obiekt .NET używający pamięci natywnej musi być bezpłatny przy użyciu kodu natywnego.
 
-Platforma .NET udostępnia <xref:System.IDisposable> interfejs, dzięki któremu deweloperzy mogą zwolnić pamięć natywną. Nawet jeśli <xref:System.IDisposable.Dispose*> nie jest wywoływana, prawidłowo zaimplementowane klasy są `Dispose` wywoływane po uruchomieniu [finalizatora](/dotnet/csharp/programming-guide/classes-and-structs/destructors) .
+Platforma .NET udostępnia <xref:System.IDisposable> interfejs, dzięki któremu deweloperzy mogą zwolnić pamięć natywną. Nawet jeśli <xref:System.IDisposable.Dispose*> nie jest wywoływana, prawidłowo zaimplementowane klasy są wywoływane `Dispose` po uruchomieniu [finalizatora](/dotnet/csharp/programming-guide/classes-and-structs/destructors) .
 
 Spójrzmy na poniższy kod:
 
@@ -217,7 +219,7 @@ public void GetFileProvider()
 
 [PhysicalFileProvider](/dotnet/api/microsoft.extensions.fileproviders.physicalfileprovider?view=dotnet-plat-ext-3.0) jest klasą zarządzaną, więc każde wystąpienie zostanie zebrane na końcu żądania.
 
-Na poniższej ilustracji przedstawiono profil pamięci podczas ciągłego wywoływania `fileprovider` interfejsu API.
+Na poniższej ilustracji przedstawiono profil pamięci podczas `fileprovider` ciągłego wywoływania interfejsu API.
 
 ![Poprzedni wykres](memory/_static/fileprovider.png)
 
@@ -226,7 +228,7 @@ Powyższy wykres przedstawia oczywisty problem z implementacją tej klasy, ponie
 Ten sam wyciek może wystąpić w kodzie użytkownika, wykonując jedną z następujących czynności:
 
 * Nie zwalniaj klasy prawidłowo.
-* Zapominanie o wywołaniu `Dispose`metody obiektów zależnych, które powinny zostać usunięte.
+* Zapominanie o wywołaniu `Dispose` metody obiektów zależnych, które powinny zostać usunięte.
 
 ### <a name="large-objects-heap"></a>Sterta dużych obiektów
 
@@ -270,7 +272,7 @@ Na poniższym wykresie przedstawiono profil pamięci wywołania `/api/loh/84976`
 
 ![Poprzedni wykres](memory/_static/loh2.png)
 
-Uwaga: `byte[]` struktura zawiera bajty dodatkowe. Dlatego 84 976 bajtów wyzwala limit 85 000.
+Uwaga: `byte[]` Struktura zawiera bajty dodatkowe. Dlatego 84 976 bajtów wyzwala limit 85 000.
 
 Porównanie dwóch wcześniejszych wykresów:
 
@@ -299,9 +301,9 @@ Nieprawidłowe użycie <xref:System.Net.Http.HttpClient> może skutkować wyciek
 * Jest bardziej nieograniczony niż pamięć.
 * Są bardziej problematyczne w przypadku przecieków od pamięci.
 
-Doświadczeni Deweloperzy platformy .NET wiedzą, <xref:System.IDisposable.Dispose*> jak odwoływać się <xref:System.IDisposable>do obiektów, które implementują. Nieusuwania obiektów, które `IDisposable` implementują zwykle, powoduje przeciek pamięci lub przeciek zasobów systemu.
+Doświadczeni Deweloperzy platformy .NET wiedzą, jak odwoływać się do <xref:System.IDisposable.Dispose*> obiektów, które implementują <xref:System.IDisposable> . Nieusuwania obiektów, które implementują `IDisposable` zwykle, powoduje przeciek pamięci lub przeciek zasobów systemu.
 
-`HttpClient`implementuje `IDisposable`, ale **nie** powinien być usuwany przy każdym wywołaniu. `HttpClient` Należy raczej ponownie użyć.
+`HttpClient`implementuje `IDisposable` , ale **nie** powinien być usuwany przy każdym wywołaniu. Należy raczej `HttpClient` ponownie użyć.
 
 Następujący punkt końcowy tworzy i usuwa nowe `HttpClient` wystąpienie dla każdego żądania:
 
@@ -346,9 +348,9 @@ public async Task<int> GetHttpClient2(string url)
 }
 ```
 
-`HttpClient` Wystąpienie jest wydawany, gdy aplikacja zostanie zatrzymana. Ten przykład pokazuje, że nie każdy zasób jednorazowy powinien zostać usunięty po każdym użyciu.
+`HttpClient`Wystąpienie jest wydawany, gdy aplikacja zostanie zatrzymana. Ten przykład pokazuje, że nie każdy zasób jednorazowy powinien zostać usunięty po każdym użyciu.
 
-Aby lepiej obsługiwać okres istnienia `HttpClient` wystąpienia, zobacz następujące tematy:
+Aby lepiej obsługiwać okres istnienia wystąpienia, zobacz następujące tematy `HttpClient` :
 
 * [HttpClient i zarządzanie okresem istnienia](/aspnet/core/fundamentals/http-requests#httpclient-and-lifetime-management)
 * [Blog dotyczący fabryki HTTPClient](https://devblogs.microsoft.com/aspnet/asp-net-core-2-1-preview1-introducing-httpclient-factory/)
@@ -386,7 +388,7 @@ Na poniższym wykresie przedstawiono wywoływanie poprzedzającego interfejsu AP
 
 Na poprzednim wykresie kolekcje generacji 0 są wykonywane około raz na sekundę.
 
-Poprzedni kod można zoptymalizować przez buforowanie `byte` buforu przy użyciu [ArrayPool\<T>](xref:System.Buffers.ArrayPool`1). Wystąpienie statyczne jest ponownie używane między żądaniami.
+Poprzedni kod można zoptymalizować przez buforowanie `byte` buforu przy użyciu [ \<T> ArrayPool](xref:System.Buffers.ArrayPool`1). Wystąpienie statyczne jest ponownie używane między żądaniami.
 
 Różni się to od tego, czy obiekt w puli jest zwracany z interfejsu API. Oznacza to:
 
@@ -398,7 +400,7 @@ Aby skonfigurować usuwanie obiektu:
 * Hermetyzuj tablicę w puli w obiekcie jednorazowym.
 * Zarejestruj obiekt w puli za pomocą obiektu [HttpContext. Response. RegisterForDispose](xref:Microsoft.AspNetCore.Http.HttpResponse.RegisterForDispose*).
 
-`RegisterForDispose`zajmiemy się wywoływaniem `Dispose`obiektu docelowego, tak aby był on wydawany tylko po zakończeniu żądania HTTP.
+`RegisterForDispose`zajmiemy się wywoływaniem `Dispose` obiektu docelowego, tak aby był on wydawany tylko po zakończeniu żądania HTTP.
 
 ```csharp
 private static ArrayPool<byte> _arrayPool = ArrayPool<byte>.Create();

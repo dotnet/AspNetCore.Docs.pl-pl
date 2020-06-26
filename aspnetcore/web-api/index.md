@@ -8,29 +8,31 @@ ms.custom: mvc
 ms.date: 02/02/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: web-api/index
-ms.openlocfilehash: 5ea82d36d305b1f6ba58fba1b4c5bb4dca22f912
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 7c9762d23ff612155846357bfadeaaad492c7299
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776529"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404733"
 ---
 # <a name="create-web-apis-with-aspnet-core"></a>Tworzenie internetowych interfejsów API za pomocą platformy ASP.NET Core
 
 Przez [Scott Addie](https://github.com/scottaddie) i [Tomasz Dykstra](https://github.com/tdykstra)
 
-Platforma ASP.NET Core obsługuje tworzenie usług RESTful, znanych także jako internetowe interfejsy API, za pomocą języka C#. Aby obsługiwać żądania, interfejs API sieci Web używa kontrolerów. *Kontrolery* w INTERNETowym interfejsie API są klasami `ControllerBase`pochodnymi od. W tym artykule pokazano, jak używać kontrolerów do obsługi żądań interfejsu API sieci Web.
+Platforma ASP.NET Core obsługuje tworzenie usług RESTful, znanych także jako internetowe interfejsy API, za pomocą języka C#. Aby obsługiwać żądania, interfejs API sieci Web używa kontrolerów. *Kontrolery* w INTERNETowym interfejsie API są klasami pochodnymi od `ControllerBase` . W tym artykule pokazano, jak używać kontrolerów do obsługi żądań interfejsu API sieci Web.
 
 [Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/index/samples). ([Jak pobrać](xref:index#how-to-download-a-sample)).
 
 ## <a name="controllerbase-class"></a>Klasa ControllerBase
 
-Internetowy interfejs API składa się z co najmniej jednej klasy kontrolera, <xref:Microsoft.AspNetCore.Mvc.ControllerBase>która pochodzi od. Szablon projektu internetowego interfejsu API zawiera kontroler początkowy:
+Internetowy interfejs API składa się z co najmniej jednej klasy kontrolera, która pochodzi od <xref:Microsoft.AspNetCore.Mvc.ControllerBase> . Szablon projektu internetowego interfejsu API zawiera kontroler początkowy:
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -44,9 +46,9 @@ Internetowy interfejs API składa się z co najmniej jednej klasy kontrolera, <x
 
 ::: moniker-end
 
-Nie twórz kontrolera interfejsu API sieci Web, pobierając z <xref:Microsoft.AspNetCore.Mvc.Controller> klasy. `Controller`Program dziedziczy `ControllerBase` z i dodaje obsługę widoków, dlatego służy do obsługi stron sieci Web, a nie żądań interfejsu API sieci Web. Wystąpił wyjątek dla tej reguły: Jeśli planujesz używać tego samego kontrolera dla widoków i interfejsów API sieci Web, utwórz go z `Controller`.
+Nie twórz kontrolera interfejsu API sieci Web, pobierając z <xref:Microsoft.AspNetCore.Mvc.Controller> klasy. `Controller`Program dziedziczy z `ControllerBase` i dodaje obsługę widoków, dlatego służy do obsługi stron sieci Web, a nie żądań interfejsu API sieci Web. Wystąpił wyjątek dla tej reguły: Jeśli planujesz używać tego samego kontrolera dla widoków i interfejsów API sieci Web, utwórz go z `Controller` .
 
-`ControllerBase` Klasa zawiera wiele właściwości i metod, które są przydatne do obsługi żądań HTTP. Na przykład `ControllerBase.CreatedAtAction` zwraca kod stanu 201:
+`ControllerBase`Klasa zawiera wiele właściwości i metod, które są przydatne do obsługi żądań HTTP. Na przykład `ControllerBase.CreatedAtAction` zwraca kod stanu 201:
 
 [!code-csharp[](index/samples/2.x/2.2/Controllers/PetsController.cs?name=snippet_400And201&highlight=10)]
 
@@ -60,11 +62,11 @@ Poniżej przedstawiono kilka przykładów metod, które `ControllerBase` zapewni
 |<xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync%2A>|Wywołuje [powiązanie modelu](xref:mvc/models/model-binding).|
 |<xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryValidateModel%2A>|Wywołuje [walidację modelu](xref:mvc/models/validation).|
 
-Listę wszystkich dostępnych metod i właściwości można znaleźć w temacie <xref:Microsoft.AspNetCore.Mvc.ControllerBase>.
+Listę wszystkich dostępnych metod i właściwości można znaleźć w temacie <xref:Microsoft.AspNetCore.Mvc.ControllerBase> .
 
 ## <a name="attributes"></a>Atrybuty
 
-<xref:Microsoft.AspNetCore.Mvc> Przestrzeń nazw zawiera atrybuty, których można użyć do skonfigurowania zachowania kontrolerów internetowego interfejsu API i metod akcji. Poniższy przykład używa atrybutów, aby określić obsługiwane zlecenie akcji HTTP i wszystkie znane kody stanu HTTP, które mogą zostać zwrócone:
+<xref:Microsoft.AspNetCore.Mvc>Przestrzeń nazw zawiera atrybuty, których można użyć do skonfigurowania zachowania kontrolerów internetowego interfejsu API i metod akcji. Poniższy przykład używa atrybutów, aby określić obsługiwane zlecenie akcji HTTP i wszystkie znane kody stanu HTTP, które mogą zostać zwrócone:
 
 [!code-csharp[](index/samples/2.x/2.2/Controllers/PetsController.cs?name=snippet_400And201&highlight=1-3)]
 
@@ -78,7 +80,7 @@ Poniżej przedstawiono kilka przykładów dostępnych atrybutów.
 |[`[Consumes]`](<xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute>)|Określa typy danych, które akcja akceptuje.|
 |[`[Produces]`](<xref:Microsoft.AspNetCore.Mvc.ProducesAttribute>)|Określa typy danych, które zwraca akcja.|
 
-Aby zapoznać się z listą zawierającą dostępne atrybuty, <xref:Microsoft.AspNetCore.Mvc> Zobacz Przestrzeń nazw.
+Aby zapoznać się z listą zawierającą dostępne atrybuty, zobacz <xref:Microsoft.AspNetCore.Mvc> przestrzeń nazw.
 
 ## <a name="apicontroller-attribute"></a>ApiController — atrybut
 
@@ -162,13 +164,13 @@ namespace WebApiSample
 
 ## <a name="attribute-routing-requirement"></a>Wymagania dotyczące routingu atrybutów
 
-`[ApiController]` Atrybut powoduje, że atrybut routingu wymaga. Przykład:
+`[ApiController]`Atrybut powoduje, że atrybut routingu wymaga. Na przykład:
 
 ::: moniker range=">= aspnetcore-3.0"
 
 [!code-csharp[](index/samples/3.x/Controllers/WeatherForecastController.cs?name=snippet_ControllerSignature&highlight=2)]
 
-Akcje są niedostępne za pośrednictwem [konwencjonalnych tras](xref:mvc/controllers/routing#conventional-routing) `UseEndpoints`zdefiniowanych <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvc%2A>przez, <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvcWithDefaultRoute%2A> lub `Startup.Configure`w.
+Akcje są niedostępne za pośrednictwem [konwencjonalnych tras](xref:mvc/controllers/routing#conventional-routing) zdefiniowanych przez `UseEndpoints` , <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvc%2A> lub <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvcWithDefaultRoute%2A> w `Startup.Configure` .
 
 ::: moniker-end
 
@@ -176,7 +178,7 @@ Akcje są niedostępne za pośrednictwem [konwencjonalnych tras](xref:mvc/contro
 
 [!code-csharp[](index/samples/2.x/2.2/Controllers/ValuesController.cs?name=snippet_ControllerSignature&highlight=1)]
 
-Akcje są niedostępne za pośrednictwem [konwencjonalnych tras](xref:mvc/controllers/routing#conventional-routing) zdefiniowanych <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvcWithDefaultRoute%2A> przez `Startup.Configure` <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvc%2A> lub w.
+Akcje są niedostępne za pośrednictwem [konwencjonalnych tras](xref:mvc/controllers/routing#conventional-routing) zdefiniowanych przez <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvc%2A> lub <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvcWithDefaultRoute%2A> w `Startup.Configure` .
 
 ::: moniker-end
 
@@ -191,11 +193,11 @@ if (!ModelState.IsValid)
 }
 ```
 
-ASP.NET Core MVC używa filtru <xref:Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter> akcji, aby wykonać poprzednią kontrolę.
+ASP.NET Core MVC używa <xref:Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter> filtru akcji, aby wykonać poprzednią kontrolę.
 
 ### <a name="default-badrequest-response"></a>Domyślna odpowiedź nieprawidłowego żądania
 
-W przypadku zgodności z wersją 2,1, domyślny typ odpowiedzi dla odpowiedzi HTTP 400 to <xref:Microsoft.AspNetCore.Mvc.SerializableError>. Następująca treść żądania jest przykładem serializowanego typu:
+W przypadku zgodności z wersją 2,1, domyślny typ odpowiedzi dla odpowiedzi HTTP 400 to <xref:Microsoft.AspNetCore.Mvc.SerializableError> . Następująca treść żądania jest przykładem serializowanego typu:
 
 ```json
 {
@@ -207,7 +209,7 @@ W przypadku zgodności z wersją 2,1, domyślny typ odpowiedzi dla odpowiedzi HT
 
 ::: moniker range=">= aspnetcore-2.2"
 
-W przypadku zgodności z wersją 2,2 lub nowszą domyślny typ odpowiedzi dla odpowiedzi HTTP 400 to <xref:Microsoft.AspNetCore.Mvc.ValidationProblemDetails>. Następująca treść żądania jest przykładem serializowanego typu:
+W przypadku zgodności z wersją 2,2 lub nowszą domyślny typ odpowiedzi dla odpowiedzi HTTP 400 to <xref:Microsoft.AspNetCore.Mvc.ValidationProblemDetails> . Następująca treść żądania jest przykładem serializowanego typu:
 
 ```json
 {
@@ -223,7 +225,7 @@ W przypadku zgodności z wersją 2,2 lub nowszą domyślny typ odpowiedzi dla od
 }
 ```
 
-`ValidationProblemDetails` Typ:
+`ValidationProblemDetails`Typ:
 
 * Zapewnia czytelny dla maszyn format służący do określania błędów w odpowiedziach interfejsu API sieci Web.
 * Jest zgodna ze [specyfikacją RFC 7807](https://tools.ietf.org/html/rfc7807).
@@ -232,11 +234,11 @@ W przypadku zgodności z wersją 2,2 lub nowszą domyślny typ odpowiedzi dla od
 
 ### <a name="log-automatic-400-responses"></a>Rejestruj automatyczne odpowiedzi 400
 
-Zobacz [, jak rejestrować 400 automatyczne odpowiedzi na błędy walidacji modelu (ASPNET/AspNetCore. Docs #12157)](https://github.com/dotnet/AspNetCore.Docs/issues/12157).
+Zobacz [jak rejestrować 400 automatyczne odpowiedzi na błędy walidacji modelu (#12157 ASPNET/AspNetCore.Docs)](https://github.com/dotnet/AspNetCore.Docs/issues/12157).
 
 ### <a name="disable-automatic-400-response"></a>Wyłącz automatyczną odpowiedź 400
 
-Aby wyłączyć zachowanie automatycznego 400, należy ustawić <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressModelStateInvalidFilter> właściwość na. `true` Dodaj następujący wyróżniony kod w `Startup.ConfigureServices`:
+Aby wyłączyć zachowanie automatycznego 400, należy ustawić <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressModelStateInvalidFilter> Właściwość na `true` . Dodaj następujący wyróżniony kod w `Startup.ConfigureServices` :
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -270,24 +272,24 @@ Atrybut źródłowy powiązania definiuje lokalizację, w której zostanie znale
 |[`[FromServices]`](xref:mvc/controllers/dependency-injection#action-injection-with-fromservices) | Usługa żądania wstrzykiwana jako parametr akcji |
 
 > [!WARNING]
-> Nie należy `[FromRoute]` używać, gdy wartości `%2f` mogą zawierać ( `/`to oznacza). `%2f`nie zostanie wywyprowadzane do `/`. Użyj `[FromQuery]` , jeśli wartość może zawierać `%2f`.
+> Nie należy używać `[FromRoute]` , gdy wartości mogą zawierać `%2f` (to oznacza `/` ). `%2f`nie zostanie wywyprowadzane do `/` . Użyj `[FromQuery]` , jeśli wartość może zawierać `%2f` .
 
-Bez atrybutów `[ApiController]` źródła atrybutów ani powiązań, takich `[FromQuery]`jak, środowisko uruchomieniowe ASP.NET Core próbuje użyć spinacza modelu obiektów złożonych. Segregator modelu obiektów złożonych pobiera dane od dostawców wartości w zdefiniowanej kolejności.
+Bez `[ApiController]` atrybutów źródła atrybutów ani powiązań, takich jak `[FromQuery]` , środowisko uruchomieniowe ASP.NET Core próbuje użyć spinacza modelu obiektów złożonych. Segregator modelu obiektów złożonych pobiera dane od dostawców wartości w zdefiniowanej kolejności.
 
-W poniższym przykładzie `[FromQuery]` atrybut wskazuje, że wartość `discontinuedOnly` parametru jest podana w ciągu zapytania adresu URL żądania:
+W poniższym przykładzie `[FromQuery]` atrybut wskazuje, że `discontinuedOnly` wartość parametru jest podana w ciągu zapytania adresu URL żądania:
 
 [!code-csharp[](index/samples/2.x/2.2/Controllers/ProductsController.cs?name=snippet_BindingSourceAttributes&highlight=3)]
 
 Ten `[ApiController]` atrybut stosuje reguły wnioskowania dla domyślnych źródeł danych parametrów akcji. Te reguły zapisują nie trzeba ręcznie identyfikować źródeł powiązań przez zastosowanie atrybutów do parametrów akcji. Reguły wnioskowania źródła powiązań zachowują się w następujący sposób:
 
-* `[FromBody]`jest wywnioskowany dla parametrów typu złożonego. Wyjątek od `[FromBody]` reguły wnioskowania jest dowolnego złożonego, wbudowanego typu z specjalnym znaczeniem, takim jak <xref:Microsoft.AspNetCore.Http.IFormCollection> i. <xref:System.Threading.CancellationToken> Kod wnioskowania źródła powiązania ignoruje te typy specjalne.
-* `[FromForm]`jest wywnioskowany dla parametrów akcji typu <xref:Microsoft.AspNetCore.Http.IFormFile> i. <xref:Microsoft.AspNetCore.Http.IFormFileCollection> Nie jest wywnioskowane dla żadnego prostego lub zdefiniowanego przez użytkownika typu.
-* `[FromRoute]`jest wywnioskowany dla każdej nazwy parametru akcji pasującej do parametru w szablonie trasy. W przypadku, gdy więcej niż jedna trasa pasuje do parametru akcji, uwzględniana `[FromRoute]`jest jakakolwiek wartość trasy.
+* `[FromBody]`jest wywnioskowany dla parametrów typu złożonego. Wyjątek od `[FromBody]` reguły wnioskowania jest dowolnego złożonego, wbudowanego typu z specjalnym znaczeniem, takim jak <xref:Microsoft.AspNetCore.Http.IFormCollection> i <xref:System.Threading.CancellationToken> . Kod wnioskowania źródła powiązania ignoruje te typy specjalne.
+* `[FromForm]`jest wywnioskowany dla parametrów akcji typu <xref:Microsoft.AspNetCore.Http.IFormFile> i <xref:Microsoft.AspNetCore.Http.IFormFileCollection> . Nie jest wywnioskowane dla żadnego prostego lub zdefiniowanego przez użytkownika typu.
+* `[FromRoute]`jest wywnioskowany dla każdej nazwy parametru akcji pasującej do parametru w szablonie trasy. W przypadku, gdy więcej niż jedna trasa pasuje do parametru akcji, uwzględniana jest jakakolwiek wartość trasy `[FromRoute]` .
 * `[FromQuery]`jest wywnioskowany dla wszystkich innych parametrów akcji.
 
 ### <a name="frombody-inference-notes"></a>FromBody informacje o wnioskach
 
-`[FromBody]`nie jest wywnioskowane dla typów prostych, `string` takich `int`jak lub. W związku z `[FromBody]` tym atrybut powinien być używany dla typów prostych, gdy ta funkcja jest wymagana.
+`[FromBody]`nie jest wywnioskowane dla typów prostych, takich jak `string` lub `int` . W związku z tym `[FromBody]` atrybut powinien być używany dla typów prostych, gdy ta funkcja jest wymagana.
 
 Gdy akcja ma więcej niż jeden parametr powiązany z treścią żądania, zgłaszany jest wyjątek. Na przykład, wszystkie następujące sygnatury metody akcji powodują wyjątek:
 
@@ -315,13 +317,13 @@ Gdy akcja ma więcej niż jeden parametr powiązany z treścią żądania, zgła
 ::: moniker range="= aspnetcore-2.1"
 
 > [!NOTE]
-> W ASP.NET Core 2,1 parametry typu kolekcji, takie jak listy i tablice, są nieprawidłowo wnioskowane jako `[FromQuery]`. Ten `[FromBody]` atrybut powinien być używany dla tych parametrów, jeśli mają być powiązane z treścią żądania. To zachowanie jest korygowane w ASP.NET Core 2,2 lub nowszych, gdzie parametry typu kolekcji są wyrzucane jako powiązane z treścią domyślnie.
+> W ASP.NET Core 2,1 parametry typu kolekcji, takie jak listy i tablice, są nieprawidłowo wnioskowane jako `[FromQuery]` . Ten `[FromBody]` atrybut powinien być używany dla tych parametrów, jeśli mają być powiązane z treścią żądania. To zachowanie jest korygowane w ASP.NET Core 2,2 lub nowszych, gdzie parametry typu kolekcji są wyrzucane jako powiązane z treścią domyślnie.
 
 ::: moniker-end
 
 ### <a name="disable-inference-rules"></a>Wyłącz reguły wnioskowania
 
-Aby wyłączyć wnioskowanie źródeł powiązań, ustaw <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressInferBindingSourcesForParameters> wartość `true`. Dodaj następujący kod w `Startup.ConfigureServices`:
+Aby wyłączyć wnioskowanie źródeł powiązań, ustaw <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressInferBindingSourcesForParameters> wartość `true` . Dodaj następujący kod w `Startup.ConfigureServices` :
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -343,9 +345,9 @@ Aby wyłączyć wnioskowanie źródeł powiązań, ustaw <xref:Microsoft.AspNetC
 
 ## <a name="multipartform-data-request-inference"></a>Wieloczęściowe/formularz-wnioskowanie dotyczące danych
 
-Ten `[ApiController]` atrybut stosuje regułę wnioskowania, gdy parametr akcji ma adnotację z [`[FromForm]`](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute) atrybutem. Typ `multipart/form-data` zawartości żądania jest wywnioskowany.
+Ten `[ApiController]` atrybut stosuje regułę wnioskowania, gdy parametr akcji ma adnotację z [`[FromForm]`](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute) atrybutem. `multipart/form-data`Typ zawartości żądania jest wywnioskowany.
 
-Aby wyłączyć domyślne zachowanie, ustaw <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressConsumesConstraintForFormFileParameters> właściwość na `true` wartość w: `Startup.ConfigureServices`
+Aby wyłączyć domyślne zachowanie, ustaw <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressConsumesConstraintForFormFileParameters> Właściwość na wartość `true` w `Startup.ConfigureServices` :
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -369,13 +371,13 @@ Aby wyłączyć domyślne zachowanie, ustaw <xref:Microsoft.AspNetCore.Mvc.ApiBe
 
 ## <a name="problem-details-for-error-status-codes"></a>Szczegóły problemu dotyczące kodów stanu błędu
 
-Gdy wersja zgodności to 2,2 lub nowsza, MVC przeprowadzi wynik błędu (wynik z kodem stanu 400 lub nowszym) do wyniku z <xref:Microsoft.AspNetCore.Mvc.ProblemDetails>. `ProblemDetails` Typ jest oparty na [specyfikacji RFC 7807](https://tools.ietf.org/html/rfc7807) do udostępniania szczegółowych informacji o błędach w odpowiedzi HTTP.
+Gdy wersja zgodności to 2,2 lub nowsza, MVC przeprowadzi wynik błędu (wynik z kodem stanu 400 lub nowszym) do wyniku z <xref:Microsoft.AspNetCore.Mvc.ProblemDetails> . `ProblemDetails`Typ jest oparty na [specyfikacji RFC 7807](https://tools.ietf.org/html/rfc7807) do udostępniania szczegółowych informacji o błędach w odpowiedzi HTTP.
 
 Rozważmy następujący kod w akcji kontrolera:
 
 [!code-csharp[](index/samples/2.x/2.2/Controllers/PetsController.cs?name=snippet_ProblemDetailsStatusCode)]
 
-`NotFound` Metoda generuje kod stanu HTTP 404 z `ProblemDetails` treścią. Przykład:
+`NotFound`Metoda generuje kod stanu HTTP 404 z `ProblemDetails` treścią. Na przykład:
 
 ```json
 {
@@ -388,7 +390,7 @@ Rozważmy następujący kod w akcji kontrolera:
 
 ### <a name="disable-problemdetails-response"></a>Wyłącz odpowiedź ProblemDetails
 
-Automatyczne tworzenie `ProblemDetails` kodów stanu błędu jest wyłączone, gdy <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressMapClientErrors%2A> właściwość jest ustawiona na. `true` Dodaj następujący kod w `Startup.ConfigureServices`:
+Automatyczne tworzenie `ProblemDetails` kodów stanu błędu jest wyłączone, gdy <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressMapClientErrors%2A> Właściwość jest ustawiona na `true` . Dodaj następujący kod w `Startup.ConfigureServices` :
 
 ::: moniker-end
 
@@ -408,7 +410,7 @@ Automatyczne tworzenie `ProblemDetails` kodów stanu błędu jest wyłączone, g
 
 ## <a name="define-supported-request-content-types-with-the-consumes-attribute"></a>Zdefiniuj obsługiwane typy zawartości żądania z atrybutem [Requests]
 
-Domyślnie akcja obsługuje wszystkie dostępne typy zawartości żądania. Na przykład jeśli aplikacja jest skonfigurowana do obsługi [danych wejściowych](xref:mvc/models/model-binding#input-formatters)JSON i XML, Akcja obsługuje wiele typów zawartości, w tym `application/json` i. `application/xml`
+Domyślnie akcja obsługuje wszystkie dostępne typy zawartości żądania. Na przykład jeśli aplikacja jest skonfigurowana do obsługi [danych wejściowych](xref:mvc/models/model-binding#input-formatters)JSON i XML, Akcja obsługuje wiele typów zawartości, w tym `application/json` i `application/xml` .
 
 Atrybut [[](<xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute>) Requests] umożliwia akcja ograniczenia obsługiwanych typów zawartości żądania. Zastosuj `[Consumes]` atrybut do akcji lub kontrolera, określając jeden lub więcej typów zawartości:
 
@@ -418,15 +420,15 @@ Atrybut [[](<xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute>) Requests] umożli
 public IActionResult CreateProduct(Product product)
 ```
 
-W poprzednim kodzie `CreateProduct` akcja określa typ `application/xml`zawartości. Żądania kierowane do tej akcji muszą określać `Content-Type` nagłówek `application/xml`. Żądania, które nie określają `Content-Type` nagłówka `application/xml` wyniku w [nieobsługiwanej odpowiedzi typu nośnika 415](https://developer.mozilla.org/docs/Web/HTTP/Status/415) .
+W poprzednim kodzie `CreateProduct` Akcja określa typ zawartości `application/xml` . Żądania kierowane do tej akcji muszą określać `Content-Type` nagłówek `application/xml` . Żądania, które nie określają `Content-Type` nagłówka `application/xml` wyniku w [nieobsługiwanej odpowiedzi typu nośnika 415](https://developer.mozilla.org/docs/Web/HTTP/Status/415) .
 
-Ten `[Consumes]` atrybut umożliwia również akcję, która ma wpływ na wybór w oparciu o typ zawartości przychodzącego żądania przez zastosowanie ograniczenia typu. Rozważmy następujący przykład:
+Ten `[Consumes]` atrybut umożliwia również akcję, która ma wpływ na wybór w oparciu o typ zawartości przychodzącego żądania przez zastosowanie ograniczenia typu. Rozpatrzmy następujący przykład:
 
 [!code-csharp[](index/samples/3.x/Controllers/ConsumesController.cs?name=snippet_Class)]
 
-W poprzednim kodzie program `ConsumesController` jest skonfigurowany do obsługi żądań wysyłanych do `https://localhost:5001/api/Consumes` adresu URL. Oba akcje kontrolera `PostJson` i `PostForm`obsługują żądania post z tym samym adresem URL. Bez `[Consumes]` atrybutu stosującego ograniczenie typu jest generowany niejednoznaczny wyjątek dopasowania.
+W poprzednim kodzie program `ConsumesController` jest skonfigurowany do obsługi żądań wysyłanych do `https://localhost:5001/api/Consumes` adresu URL. Oba akcje kontrolera `PostJson` i `PostForm` obsługują żądania post z tym samym adresem URL. Bez `[Consumes]` atrybutu stosującego ograniczenie typu jest generowany niejednoznaczny wyjątek dopasowania.
 
-Ten `[Consumes]` atrybut jest stosowany do obu akcji. `PostJson` Akcja obsługuje żądania wysyłane z `Content-Type` nagłówkiem `application/json`. `PostForm` Akcja obsługuje żądania wysyłane z `Content-Type` nagłówkiem `application/x-www-form-urlencoded`. 
+Ten `[Consumes]` atrybut jest stosowany do obu akcji. `PostJson`Akcja obsługuje żądania wysyłane z `Content-Type` nagłówkiem `application/json` . `PostForm`Akcja obsługuje żądania wysyłane z `Content-Type` nagłówkiem `application/x-www-form-urlencoded` . 
 
 ## <a name="additional-resources"></a>Zasoby dodatkowe
 

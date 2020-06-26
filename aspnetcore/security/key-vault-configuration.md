@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/key-vault-configuration
-ms.openlocfilehash: 4a5689af9ffea175838a869e92752de889cbb227
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 47172339f1c82a572a8a2c5d4ba49e4906e30b29
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84106679"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406878"
 ---
 # <a name="azure-key-vault-configuration-provider-in-aspnet-core"></a>Azure Key Vault dostawcę konfiguracji w programie ASP.NET Core
 
@@ -35,7 +37,7 @@ W tym dokumencie wyjaśniono, jak za pomocą dostawcy konfiguracji [Key Vault Mi
 
 ## <a name="packages"></a>Pakiety
 
-Dodaj odwołanie do pakietu do pakietu [Microsoft. Extensions. Configuration. AzureKeyVault](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.AzureKeyVault/) .
+Dodaj odwołanie do pakietu do [Microsoft.Extensions.Configwersja. Pakiet AzureKeyVault](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.AzureKeyVault/) .
 
 ## <a name="sample-app"></a>Przykładowa aplikacja
 
@@ -129,7 +131,7 @@ Przykładowa aplikacja używa identyfikatora aplikacji i certyfikatu X. 509, gdy
    1. Wybierz aplikację w usłudze Azure AD.
    1. Przejdź do **przystawki certyfikaty & wpisy tajne**.
    1. Wybierz pozycję **Przekaż certyfikat** , aby przekazać certyfikat zawierający klucz publiczny. Akceptowany jest certyfikat *CER*, *PEM*lub *CRT* .
-1. Zapisz nazwę magazynu kluczy, identyfikator aplikacji i odcisk palca certyfikatu w pliku *appSettings. JSON* aplikacji.
+1. Zapisz nazwę magazynu kluczy, identyfikator aplikacji i odcisk palca certyfikatu w *appsettings.jsaplikacji w* pliku.
 1. Przejdź do **magazynu kluczy** w Azure Portal.
 1. Wybierz magazyn kluczy utworzony w [magazynie wpisów tajnych w środowisku produkcyjnym z](#secret-storage-in-the-production-environment-with-azure-key-vault) sekcją Azure Key Vault.
 1. Wybierz pozycję **Zasady dostępu**.
@@ -147,7 +149,7 @@ Przykładowa aplikacja używa identyfikatora aplikacji i certyfikatu X. 509, gdy
   * `config["Section:SecretName"]`
   * `config.GetSection("Section")["SecretName"]`
 
-Certyfikat X. 509 jest zarządzany przez system operacyjny. Aplikacja wywołuje <xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> wartości dostarczone przez plik *appSettings. JSON* :
+Certyfikat X. 509 jest zarządzany przez system operacyjny. Aplikacja wywołuje <xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> wartości dostarczone przez *appsettings.jsw* pliku:
 
 [!code-csharp[](key-vault-configuration/samples/3.x/SampleApp/Program.cs?name=snippet1&highlight=20-23)]
 
@@ -157,7 +159,7 @@ Przykładowe wartości:
 * Identyfikator aplikacji:`627e911e-43cc-61d4-992e-12db9c81b413`
 * Odcisk palca certyfikatu:`fe14593dd66b2406c5269d742d04b6e1ab03adb1`
 
-*appSettings. JSON*:
+*appsettings.js*:
 
 [!code-json[](key-vault-configuration/samples/3.x/SampleApp/appsettings.json?highlight=10-12)]
 
@@ -169,7 +171,7 @@ Po uruchomieniu aplikacji na stronie sieci Web są wyświetlane załadowane wart
 
 Przykładowa aplikacja używa zarządzanych tożsamości dla zasobów platformy Azure, gdy w `#define` górnej części pliku *program.cs* jest ustawiona wartość `Managed` .
 
-Wprowadź nazwę magazynu w pliku *appSettings. JSON* aplikacji. Aplikacja Przykładowa nie wymaga identyfikatora aplikacji ani hasła (klucza tajnego klienta) w przypadku ustawienia `Managed` wersji, więc można zignorować te wpisy konfiguracji. Aplikacja została wdrożona na platformie Azure, a platforma Azure uwierzytelnia aplikację w celu uzyskiwania dostępu do Azure Key Vault tylko przy użyciu nazwy magazynu przechowywanej w pliku *appSettings. JSON* .
+Wprowadź nazwę magazynu do *appsettings.jsaplikacji w* pliku. Aplikacja Przykładowa nie wymaga identyfikatora aplikacji ani hasła (klucza tajnego klienta) w przypadku ustawienia `Managed` wersji, więc można zignorować te wpisy konfiguracji. Aplikacja została wdrożona na platformie Azure, a platforma Azure uwierzytelnia aplikację w celu uzyskiwania dostępu do Azure Key Vault tylko przy użyciu nazwy magazynu przechowywanej w *appsettings.js* pliku.
 
 Wdróż przykładową aplikację w Azure App Service.
 
@@ -193,7 +195,7 @@ Przykładowa aplikacja:
 
 Przykładowa wartość nazwy magazynu kluczy:`contosovault`
     
-*appSettings. JSON*:
+*appsettings.js*:
 
 ```json
 {
@@ -381,7 +383,7 @@ W tym dokumencie wyjaśniono, jak za pomocą dostawcy konfiguracji [Key Vault Mi
 
 ## <a name="packages"></a>Pakiety
 
-Dodaj odwołanie do pakietu do pakietu [Microsoft. Extensions. Configuration. AzureKeyVault](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.AzureKeyVault/) .
+Dodaj odwołanie do pakietu do [Microsoft.Extensions.Configwersja. Pakiet AzureKeyVault](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.AzureKeyVault/) .
 
 ## <a name="sample-app"></a>Przykładowa aplikacja
 
@@ -475,7 +477,7 @@ Przykładowa aplikacja używa identyfikatora aplikacji i certyfikatu X. 509, gdy
    1. Wybierz aplikację w usłudze Azure AD.
    1. Przejdź do **przystawki certyfikaty & wpisy tajne**.
    1. Wybierz pozycję **Przekaż certyfikat** , aby przekazać certyfikat zawierający klucz publiczny. Akceptowany jest certyfikat *CER*, *PEM*lub *CRT* .
-1. Zapisz nazwę magazynu kluczy, identyfikator aplikacji i odcisk palca certyfikatu w pliku *appSettings. JSON* aplikacji.
+1. Zapisz nazwę magazynu kluczy, identyfikator aplikacji i odcisk palca certyfikatu w *appsettings.jsaplikacji w* pliku.
 1. Przejdź do **magazynu kluczy** w Azure Portal.
 1. Wybierz magazyn kluczy utworzony w [magazynie wpisów tajnych w środowisku produkcyjnym z](#secret-storage-in-the-production-environment-with-azure-key-vault) sekcją Azure Key Vault.
 1. Wybierz pozycję **Zasady dostępu**.
@@ -493,7 +495,7 @@ Przykładowa aplikacja używa identyfikatora aplikacji i certyfikatu X. 509, gdy
   * `config["Section:SecretName"]`
   * `config.GetSection("Section")["SecretName"]`
 
-Certyfikat X. 509 jest zarządzany przez system operacyjny. Aplikacja wywołuje <xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> wartości dostarczone przez plik *appSettings. JSON* :
+Certyfikat X. 509 jest zarządzany przez system operacyjny. Aplikacja wywołuje <xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> wartości dostarczone przez *appsettings.jsw* pliku:
 
 [!code-csharp[](key-vault-configuration/samples/2.x/SampleApp/Program.cs?name=snippet1&highlight=20-23)]
 
@@ -503,7 +505,7 @@ Przykładowe wartości:
 * Identyfikator aplikacji:`627e911e-43cc-61d4-992e-12db9c81b413`
 * Odcisk palca certyfikatu:`fe14593dd66b2406c5269d742d04b6e1ab03adb1`
 
-*appSettings. JSON*:
+*appsettings.js*:
 
 [!code-json[](key-vault-configuration/samples/2.x/SampleApp/appsettings.json?highlight=10-12)]
 
@@ -515,7 +517,7 @@ Po uruchomieniu aplikacji na stronie sieci Web są wyświetlane załadowane wart
 
 Przykładowa aplikacja używa zarządzanych tożsamości dla zasobów platformy Azure, gdy w `#define` górnej części pliku *program.cs* jest ustawiona wartość `Managed` .
 
-Wprowadź nazwę magazynu w pliku *appSettings. JSON* aplikacji. Aplikacja Przykładowa nie wymaga identyfikatora aplikacji ani hasła (klucza tajnego klienta) w przypadku ustawienia `Managed` wersji, więc można zignorować te wpisy konfiguracji. Aplikacja została wdrożona na platformie Azure, a platforma Azure uwierzytelnia aplikację w celu uzyskiwania dostępu do Azure Key Vault tylko przy użyciu nazwy magazynu przechowywanej w pliku *appSettings. JSON* .
+Wprowadź nazwę magazynu do *appsettings.jsaplikacji w* pliku. Aplikacja Przykładowa nie wymaga identyfikatora aplikacji ani hasła (klucza tajnego klienta) w przypadku ustawienia `Managed` wersji, więc można zignorować te wpisy konfiguracji. Aplikacja została wdrożona na platformie Azure, a platforma Azure uwierzytelnia aplikację w celu uzyskiwania dostępu do Azure Key Vault tylko przy użyciu nazwy magazynu przechowywanej w *appsettings.js* pliku.
 
 Wdróż przykładową aplikację w Azure App Service.
 
@@ -539,7 +541,7 @@ Przykładowa aplikacja:
 
 Przykładowa wartość nazwy magazynu kluczy:`contosovault`
     
-*appSettings. JSON*:
+*appsettings.js*:
 
 ```json
 {

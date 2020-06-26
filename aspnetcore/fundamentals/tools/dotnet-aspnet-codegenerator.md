@@ -7,17 +7,19 @@ ms.author: riande
 ms.date: 07/04/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: fundamentals/tools/dotnet-aspnet-codegenerator
-ms.openlocfilehash: 58f7aa30d3e916307437d56c61e80765ac0c21cf
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: a106654c8a37e84e9186a2f06d90605df753e8a7
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82766475"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405604"
 ---
 # <a name="dotnet-aspnet-codegenerator"></a>dotnet ASPNET-CodeGenerator
 
@@ -29,7 +31,7 @@ Ten artykuł dotyczy [zestawu .NET Core 2,1 SDK](https://dotnet.microsoft.com/do
 
 ## <a name="installing-aspnet-codegenerator"></a>Instalowanie ASPNET-CodeGenerator
 
-`dotnet-aspnet-codegenerator`jest [globalnym narzędziem](/dotnet/core/tools/global-tools) , które musi być zainstalowane. Następujące polecenie instaluje najnowszą stabilną wersję `dotnet-aspnet-codegenerator` narzędzia:
+`dotnet-aspnet-codegenerator`jest [globalnym narzędziem](/dotnet/core/tools/global-tools) , które musi być zainstalowane. Następujące polecenie instaluje najnowszą stabilną wersję `dotnet-aspnet-codegenerator` Narzędzia:
 
 ```dotnetcli
 dotnet tool install -g dotnet-aspnet-codegenerator
@@ -50,7 +52,7 @@ dotnet aspnet-codegenerator [-h|--help]
 
 ## <a name="description"></a>Opis
 
-Polecenie `dotnet aspnet-codegenerator` globalne uruchamia ASP.NET Core generatora kodu i aparacie tworzenia szkieletów.
+`dotnet aspnet-codegenerator`Polecenie globalne uruchamia ASP.NET Core generatora kodu i aparacie tworzenia szkieletów.
 
 ## <a name="arguments"></a>Argumenty
 
@@ -62,8 +64,8 @@ Generator kodu do uruchomienia. Dostępne są następujące generatory:
 | ----------------- | ------------ | 
 | obszar      | [Szkieletuje obszar](/aspnet/core/mvc/controllers/areas) |
   kontroler| [Tworzy szkielety kontrolera](/aspnet/core/tutorials/first-mvc-app/adding-model) |
-  identity  | [Tożsamość szkieletów](/aspnet/core/security/authentication/scaffold-identity) |
-  razorpage | [Razor Pages szkieletów](/aspnet/core/tutorials/razor-pages/model) |
+  identity  | [SzkieletyIdentity](/aspnet/core/security/authentication/scaffold-identity) |
+  razorpage | [Strony szkieletów Razor](/aspnet/core/tutorials/razor-pages/model) |
   widok      | [Tworzy szkielety widoku](/aspnet/core/mvc/views/overview) |
 
 ## <a name="options"></a>Opcje
@@ -102,7 +104,7 @@ Poniższe sekcje zawierają szczegółowe informacje o opcjach dostępnych dla o
 
 * Obszar
 * Kontroler
-* Tożsamość  
+* Identity  
 * Razorpage
 * Widok
 
@@ -110,7 +112,7 @@ Poniższe sekcje zawierają szczegółowe informacje o opcjach dostępnych dla o
 
 ### <a name="area-options"></a>Opcje obszaru
 
-To narzędzie jest przeznaczone do ASP.NET Core projektów sieci Web z kontrolerami i widokami. Nie jest ona przeznaczona do Razor Pages aplikacji.
+To narzędzie jest przeznaczone do ASP.NET Core projektów sieci Web z kontrolerami i widokami. Nie jest ona przeznaczona dla Razor aplikacji stron.
 
 Użycie: `dotnet aspnet-codegenerator area AreaNameToGenerate`
 
@@ -127,11 +129,11 @@ Poprzednie polecenie generuje następujące foldery:
 
 ### <a name="controller-options"></a>Opcje kontrolera
 
-W poniższej tabeli wymieniono opcje `aspnet-codegenerator` `controller` i `razorpage`:
+W poniższej tabeli wymieniono opcje `aspnet-codegenerator` `controller` i `razorpage` :
 
 [!INCLUDE [aspnet-codegenerator-args-md.md](~/includes/aspnet-codegenerator-args-md.md)]
 
-W poniższej tabeli wymieniono opcje unikatowe `aspnet-codegenerator controller`dla:
+W poniższej tabeli wymieniono opcje unikatowe dla `aspnet-codegenerator controller` :
 
 | Opcja               | Opis|
 | ----------------- | ------------ |
@@ -141,19 +143,19 @@ W poniższej tabeli wymieniono opcje unikatowe `aspnet-codegenerator controller`
 | --restWithNoViews lub-API  | Wygeneruj kontroler z interfejsem API REST. `noViews`Założono, że wszystkie opcje powiązane z widokiem są ignorowane. |
 | --readWriteActions lub-akcje | Generuj kontroler z akcjami odczytu/zapisu bez modelu. |
 
-Użyj przełącznika `-h` , aby uzyskać pomoc dotyczącą `aspnet-codegenerator controller` polecenia:
+Użyj `-h` przełącznika, aby uzyskać pomoc dotyczącą `aspnet-codegenerator controller` polecenia:
 
 ```dotnetcli
 dotnet aspnet-codegenerator controller -h
 ```
 
-Aby zapoznać się z `dotnet aspnet-codegenerator controller`przykładem, zobacz Tworzenie [szkieletu modelu filmu](/aspnet/core/tutorials/razor-pages/model) .
+Aby zapoznać się z przykładem, zobacz Tworzenie [szkieletu modelu filmu](/aspnet/core/tutorials/razor-pages/model) `dotnet aspnet-codegenerator controller` .
 
 ### <a name="razorpage"></a>Razorpage
 
 <a name="rp"></a>
 
-Razor Pages mogą być tworzone indywidualnie przez określenie nazwy nowej strony i szablonu do użycia. Obsługiwane są następujące szablony:
+RazorStrony mogą być tworzone indywidualnie przez określenie nazwy nowej strony i szablonu do użycia. Obsługiwane są następujące szablony:
 
 * `Empty`
 * `Create`
@@ -176,11 +178,11 @@ Zazwyczaj nazwa szablonu i wygenerowanego pliku nie jest określona i tworzone s
 * `Details`
 * `List`
 
-W poniższej tabeli wymieniono opcje `aspnet-codegenerator` `razorpage` i `controller`:
+W poniższej tabeli wymieniono opcje `aspnet-codegenerator` `razorpage` i `controller` :
 
 [!INCLUDE [aspnet-codegenerator-args-md.md](~/includes/aspnet-codegenerator-args-md.md)]
 
-W poniższej tabeli wymieniono opcje unikatowe `aspnet-codegenerator razorpage`dla:
+W poniższej tabeli wymieniono opcje unikatowe dla `aspnet-codegenerator razorpage` :
 
 | Opcja               | Opis|
 | ----------------- | ------------ |
@@ -188,13 +190,13 @@ W poniższej tabeli wymieniono opcje unikatowe `aspnet-codegenerator razorpage`d
 | --partialView lub-częściowe | Generuj widok częściowy. Opcje układu-l i-UDL są ignorowane, jeśli jest określony. |
 | --noPageModel lub-npm | Przełącz, aby nie generować klasy PageModel dla pustego szablonu |
 
-Użyj przełącznika `-h` , aby uzyskać pomoc dotyczącą `aspnet-codegenerator razorpage` polecenia:
+Użyj `-h` przełącznika, aby uzyskać pomoc dotyczącą `aspnet-codegenerator razorpage` polecenia:
 
 ```dotnetcli
 dotnet aspnet-codegenerator razorpage -h
 ```
 
-Aby zapoznać się z `dotnet aspnet-codegenerator razorpage`przykładem, zobacz Tworzenie [szkieletu modelu filmu](/aspnet/core/tutorials/razor-pages/model) .
+Aby zapoznać się z przykładem, zobacz Tworzenie [szkieletu modelu filmu](/aspnet/core/tutorials/razor-pages/model) `dotnet aspnet-codegenerator razorpage` .
 
 ### Identity
 

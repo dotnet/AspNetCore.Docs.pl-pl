@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 07/30/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/views/layout
-ms.openlocfilehash: fbae94f315c1bb49f1b04be7e71c841f46826216
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 08e6284a6c5fc8e8926651f6fe873a71df449acb
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82766488"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406657"
 ---
 # <a name="layout-in-aspnet-core"></a>Układ w ASP.NET Core
 
@@ -59,19 +61,19 @@ Poniższy kod przedstawia plik układu dla szablonu utworzonego za pomocą kontr
 
 ## <a name="specifying-a-layout"></a>Określanie układu
 
-Razorwidoki mają `Layout` właściwość. Poszczególne widoki określają układ, ustawiając tę właściwość:
+Razorwidoki mają `Layout` Właściwość. Poszczególne widoki określają układ, ustawiając tę właściwość:
 
 [!code-cshtml[](../../common/samples/WebApplication1/Views/_ViewStart.cshtml?highlight=2)]
 
-Określony układ może używać pełnej ścieżki (na przykład */Pages/Shared/_Layout. cshtml* lub */views/Shared/_Layout. cshtml*) lub częściowej nazwy (przykład: `_Layout`). Po podaniu częściowej nazwy aparat Razor widoku wyszukuje plik układu przy użyciu standardowego procesu odnajdywania. Folder, w którym istnieje metoda obsługi (lub kontroler), jest wyszukiwany jako pierwszy, a następnie folder *udostępniony* . Ten proces odnajdywania jest identyczny z procesem używanym do odnajdywania [widoków częściowych](xref:mvc/views/partial#partial-view-discovery).
+Określony układ może używać pełnej ścieżki (na przykład */Pages/Shared/_Layout. cshtml* lub */views/Shared/_Layout. cshtml*) lub częściowej nazwy (przykład: `_Layout` ). Po podaniu częściowej nazwy Razor aparat widoku wyszukuje plik układu przy użyciu standardowego procesu odnajdywania. Folder, w którym istnieje metoda obsługi (lub kontroler), jest wyszukiwany jako pierwszy, a następnie folder *udostępniony* . Ten proces odnajdywania jest identyczny z procesem używanym do odnajdywania [widoków częściowych](xref:mvc/views/partial#partial-view-discovery).
 
-Domyślnie każdy układ musi wywoływać `RenderBody`. W każdym miejscu, `RenderBody` w którym jest umieszczane wywołanie, zawartość widoku będzie renderowana.
+Domyślnie każdy układ musi wywoływać `RenderBody` . W każdym miejscu, w którym `RenderBody` jest umieszczane wywołanie, zawartość widoku będzie renderowana.
 
 <a name="layout-sections-label"></a>
 <!-- https://stackoverflow.com/questions/23327578 -->
 ### <a name="sections"></a>Sekcje
 
-Układ może opcjonalnie odwoływać się do co najmniej jednej *sekcji*, `RenderSection`wywołując. Sekcje umożliwiają organizowanie miejsca, w którym należy umieścić pewne elementy strony. Każde wywołanie programu `RenderSection` może określać, czy ta sekcja jest wymagana czy opcjonalna:
+Układ może opcjonalnie odwoływać się do co najmniej jednej *sekcji*, wywołując `RenderSection` . Sekcje umożliwiają organizowanie miejsca, w którym należy umieścić pewne elementy strony. Każde wywołanie programu `RenderSection` może określać, czy ta sekcja jest wymagana czy opcjonalna:
 
 ```html
 <script type="text/javascript" src="~/scripts/global.js"></script>
@@ -79,7 +81,7 @@ Układ może opcjonalnie odwoływać się do co najmniej jednej *sekcji*, `Rende
 @RenderSection("Scripts", required: false)
 ```
 
-Jeśli wymagana sekcja nie zostanie znaleziona, zostanie zgłoszony wyjątek. Poszczególne widoki określają zawartość, która ma być renderowana w sekcji przy `@section` Razor użyciu składni. Jeśli strona lub widok definiuje sekcję, musi być renderowana (lub wystąpił błąd).
+Jeśli wymagana sekcja nie zostanie znaleziona, zostanie zgłoszony wyjątek. Poszczególne widoki określają zawartość, która ma być renderowana w sekcji przy użyciu `@section` Razor składni. Jeśli strona lub widok definiuje sekcję, musi być renderowana (lub wystąpił błąd).
 
 Przykładowa `@section` Definicja w Razor widoku stron:
 
@@ -89,7 +91,7 @@ Przykładowa `@section` Definicja w Razor widoku stron:
 }
 ```
 
-W powyższym kodzie *skrypt/Main. js* zostanie dodany do `scripts` sekcji na stronie lub w widoku. Inne strony lub widoki w tej samej aplikacji mogą nie wymagać tego skryptu i nie będą mogły definiować sekcji skryptów.
+W powyższym kodzie *skrypty/main.js* są dodawane do `scripts` sekcji na stronie lub widoku. Inne strony lub widoki w tej samej aplikacji mogą nie wymagać tego skryptu i nie będą mogły definiować sekcji skryptów.
 
 W poniższym znaczniku jest używana [pomocnik tagów częściowej](xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper) do renderowania *_ValidationScriptsPartial. cshtml*:
 
@@ -105,9 +107,9 @@ Sekcje zdefiniowane w stronie lub widoku są dostępne tylko na stronie natychmi
 
 ### <a name="ignoring-sections"></a>Ignorowanie sekcji
 
-Domyślnie treść i wszystkie sekcje na stronie zawartości muszą być renderowane na stronie układu. Aparat Razor widoku wymusza to przez śledzenie, czy treść i każda z nich zostały renderowane.
+Domyślnie treść i wszystkie sekcje na stronie zawartości muszą być renderowane na stronie układu. RazorAparat widoku wymusza to przez śledzenie, czy treść i każda z nich zostały renderowane.
 
-Aby nakazać aparatowi widoku ignorowanie treści lub sekcji, wywołaj `IgnoreBody` metody `IgnoreSection` i.
+Aby nakazać aparatowi widoku ignorowanie treści lub sekcji, wywołaj `IgnoreBody` `IgnoreSection` metody i.
 
 Treść i Każda sekcja na Razor stronie muszą być renderowane lub ignorowane.
 
@@ -115,7 +117,7 @@ Treść i Każda sekcja na Razor stronie muszą być renderowane lub ignorowane.
 
 ## <a name="importing-shared-directives"></a>Importowanie wspólnych dyrektyw
 
-Widoki i strony mogą używać Razor dyrektywy do importowania przestrzeni nazw i używania [iniekcji zależności](dependency-injection.md). Dyrektywy udostępnione przez wiele widoków można określić we wspólnym pliku *_ViewImports. cshtml* . `_ViewImports` Plik obsługuje następujące dyrektywy:
+Widoki i strony mogą używać Razor dyrektywy do importowania przestrzeni nazw i używania [iniekcji zależności](dependency-injection.md). Dyrektywy udostępnione przez wiele widoków można określić we wspólnym pliku *_ViewImports. cshtml* . `_ViewImports`Plik obsługuje następujące dyrektywy:
 
 * `@addTagHelper`
 * `@removeTagHelper`
@@ -135,14 +137,14 @@ Plik *_ViewImports. cshtml* dla aplikacji ASP.NET Core MVC zazwyczaj znajduje si
 
 Załóżmy na przykład, że:
 
-* Plik poziomu głównego *_ViewImports. cshtml* zawiera `@model MyModel1` i `@addTagHelper *, MyTagHelper1`.
-* Podfolder *_ViewImports. cshtml* zawiera `@model MyModel2` i `@addTagHelper *, MyTagHelper2`.
+* Plik poziomu głównego *_ViewImports. cshtml* zawiera `@model MyModel1` i `@addTagHelper *, MyTagHelper1` .
+* Podfolder *_ViewImports. cshtml* zawiera `@model MyModel2` i `@addTagHelper *, MyTagHelper2` .
 
 Strony i widoki w podfolderze będą miały dostęp do pomocników tagów i `MyModel2` modelu.
 
 Jeśli w hierarchii plików znaleziono wiele plików *_ViewImports. cshtml* , połączone zachowanie dyrektyw jest następujące:
 
-* `@addTagHelper`, `@removeTagHelper`: wszystkie uruchomienia, w kolejności
+* `@addTagHelper`, `@removeTagHelper` : wszystkie uruchomienia, w kolejności
 * `@tagHelperPrefix`: najbliższy jeden do widoku przesłania wszystkie inne
 * `@model`: najbliższy jeden do widoku przesłania wszystkie inne
 * `@inherits`: najbliższy jeden do widoku przesłania wszystkie inne

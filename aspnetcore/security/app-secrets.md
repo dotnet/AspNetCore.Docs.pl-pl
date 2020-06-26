@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 4/20/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/app-secrets
-ms.openlocfilehash: 7508aebcda4e14812140f13ece635428908a4abb
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: a12262d182ce84a326086935627b55d2edc4885e
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776685"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407008"
 ---
 # <a name="safe-storage-of-app-secrets-in-development-in-aspnet-core"></a>Bezpieczne przechowywanie wpisów tajnych aplikacji podczas opracowywania w ASP.NET Core
 
@@ -33,7 +35,7 @@ W tym dokumencie opisano techniki przechowywania i pobierania poufnych danych po
 
 Zmienne środowiskowe służą do uniknięcia przechowywania wpisów tajnych aplikacji w kodzie lub w lokalnych plikach konfiguracji. Zmienne środowiskowe przesłaniają wartości konfiguracyjne dla wszystkich poprzednio określonych źródeł konfiguracji.
 
-Rozważ ASP.NET Core aplikacji sieci Web, w której włączono zabezpieczenia **poszczególnych kont użytkowników** . Domyślne parametry połączenia z bazą danych są zawarte w pliku *appSettings. JSON* projektu z kluczem `DefaultConnection`. Domyślne parametry połączenia to LocalDB, które są uruchamiane w trybie użytkownika i nie wymagają hasła. Podczas wdrażania aplikacji wartość `DefaultConnection` klucza może być zastąpiona wartością zmiennej środowiskowej. Zmienna środowiskowa może przechowywać kompletne parametry połączenia z poufnymi poświadczeniami.
+Rozważ ASP.NET Core aplikacji sieci Web, w której włączono zabezpieczenia **poszczególnych kont użytkowników** . Domyślne parametry połączenia z bazą danych są dołączane do *appsettings.jsprojektu w* pliku z kluczem `DefaultConnection` . Domyślne parametry połączenia to LocalDB, które są uruchamiane w trybie użytkownika i nie wymagają hasła. Podczas wdrażania aplikacji `DefaultConnection` wartość klucza może być zastąpiona wartością zmiennej środowiskowej. Zmienna środowiskowa może przechowywać kompletne parametry połączenia z poufnymi poświadczeniami.
 
 > [!WARNING]
 > Zmienne środowiskowe są zwykle przechowywane w postaci zwykłego, nieszyfrowanego tekstu. W przypadku naruszenia zabezpieczeń komputera lub procesu zmienne środowiskowe są dostępne dla niezaufanych stron. Mogą być wymagane dodatkowe środki, które uniemożliwiają ujawnienie kluczy tajnych użytkownika.
@@ -65,7 +67,7 @@ Narzędzie tajnego Menedżera wyodrębnia szczegóły implementacji, takie jak m
 
 ---
 
-W poprzednich ścieżkach plików Zamień `<user_secrets_id>` na `UserSecretsId` wartość określoną w pliku *. csproj* .
+W poprzednich ścieżkach plików Zamień na `<user_secrets_id>` `UserSecretsId` wartość określoną w pliku *. csproj* .
 
 Nie pisz kodu, który zależy od lokalizacji lub formatu danych zapisywanych za pomocą narzędzia do zarządzania kluczami tajnymi. Te szczegóły implementacji mogą ulec zmianie. Na przykład wartości tajne nie są szyfrowane, ale mogą być w przyszłości.
 
@@ -87,7 +89,7 @@ W programie Visual Studio kliknij prawym przyciskiem myszy projekt w Eksplorator
 
 ## <a name="set-a-secret"></a>Ustaw klucz tajny
 
-Zdefiniuj klucz tajny aplikacji składający się z klucza i jego wartości. Wpis tajny jest skojarzony z `UserSecretsId` wartością projektu. Na przykład uruchom następujące polecenie z katalogu, w którym istnieje plik *. csproj* :
+Zdefiniuj klucz tajny aplikacji składający się z klucza i jego wartości. Wpis tajny jest skojarzony z wartością projektu `UserSecretsId` . Na przykład uruchom następujące polecenie z katalogu, w którym istnieje plik *. csproj* :
 
 ```dotnetcli
 dotnet user-secrets set "Movies:ServiceApiKey" "12345"
@@ -95,7 +97,7 @@ dotnet user-secrets set "Movies:ServiceApiKey" "12345"
 
 W poprzednim przykładzie dwukropek wskazuje, że `Movies` jest to literał obiektu z `ServiceApiKey` właściwością.
 
-Narzędzia do zarządzania kluczami tajnymi można również użyć z innych katalogów. Użyj `--project` opcji, aby podać ścieżkę systemu plików, w której znajduje się plik *. csproj* . Przykład:
+Narzędzia do zarządzania kluczami tajnymi można również użyć z innych katalogów. Użyj `--project` opcji, aby podać ścieżkę systemu plików, w której znajduje się plik *. csproj* . Na przykład:
 
 ```dotnetcli
 dotnet user-secrets set "Movies:ServiceApiKey" "12345" --project "C:\apps\WebApp1\src\WebApp1"
@@ -103,7 +105,7 @@ dotnet user-secrets set "Movies:ServiceApiKey" "12345" --project "C:\apps\WebApp
 
 ### <a name="json-structure-flattening-in-visual-studio"></a>Spłaszczanie struktury JSON w programie Visual Studio
 
-Gest **Zarządzanie kluczami tajnymi użytkownika** programu Visual Studio otwiera plik Secret *. JSON* w edytorze tekstów. Zastąp zawartość Secret *. JSON* wartościami par klucz-wartość, które mają być przechowywane. Przykład:
+Gest **Zarządzanie kluczami tajnymi użytkownika** programu Visual Studio otwiera *secrets.js* w pliku w edytorze tekstów. Zastąp zawartość *secrets.js* przy użyciu par klucz-wartość, które mają być przechowywane. Na przykład:
 
 ```json
 {
@@ -114,7 +116,7 @@ Gest **Zarządzanie kluczami tajnymi użytkownika** programu Visual Studio otwie
 }
 ```
 
-Struktura JSON jest spłaszczona po modyfikacji za `dotnet user-secrets remove` pośrednictwem `dotnet user-secrets set`lub. Na przykład, uruchomione `dotnet user-secrets remove "Movies:ConnectionString"` zwijanie literału `Movies` obiektu. Zmodyfikowany plik jest podobny do następującego:
+Struktura JSON jest spłaszczona po modyfikacji za pośrednictwem `dotnet user-secrets remove` lub `dotnet user-secrets set` . Na przykład, uruchomione `dotnet user-secrets remove "Movies:ConnectionString"` zwijanie `Movies` literału obiektu. Zmodyfikowany plik jest podobny do następującego:
 
 ```json
 {
@@ -124,7 +126,7 @@ Struktura JSON jest spłaszczona po modyfikacji za `dotnet user-secrets remove` 
 
 ## <a name="set-multiple-secrets"></a>Ustawianie wielu wpisów tajnych
 
-Partia wpisów tajnych można ustawić za pomocą formatu JSON dla `set` polecenia. W poniższym przykładzie zawartość pliku *Input. JSON* jest potoku do `set` polecenia.
+Partia wpisów tajnych można ustawić za pomocą formatu JSON dla `set` polecenia. W poniższym przykładzie *input.js* zawartości pliku są potoku do `set` polecenia.
 
 # <a name="windows"></a>[Windows](#tab/windows)
 
@@ -148,15 +150,15 @@ Otwórz powłokę poleceń i wykonaj następujące polecenie:
 
 [Interfejs API konfiguracji ASP.NET Core](xref:fundamentals/configuration/index) zapewnia dostęp do wpisów tajnych usługi Secret Manager.
 
-Źródło konfiguracji kluczy tajnych użytkownika jest automatycznie dodawane w trybie programistycznym, gdy <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder%2A> projekt wywoła nowe wystąpienie hosta ze wstępnie skonfigurowanymi ustawieniami domyślnymi. `CreateDefaultBuilder`wywołuje <xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A> się, <xref:Microsoft.Extensions.Hosting.IHostEnvironment.EnvironmentName> gdy <xref:Microsoft.Extensions.Hosting.EnvironmentName.Development>jest:
+Źródło konfiguracji kluczy tajnych użytkownika jest automatycznie dodawane w trybie programistycznym, gdy projekt wywoła <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder%2A> nowe wystąpienie hosta ze wstępnie skonfigurowanymi ustawieniami domyślnymi. `CreateDefaultBuilder`wywołuje <xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A> się, gdy <xref:Microsoft.Extensions.Hosting.IHostEnvironment.EnvironmentName> jest <xref:Microsoft.Extensions.Hosting.EnvironmentName.Development> :
 
 [!code-csharp[](app-secrets/samples/3.x/UserSecrets/Program.cs?name=snippet_CreateHostBuilder&highlight=2)]
 
-Gdy `CreateDefaultBuilder` nie jest wywoływana, Dodaj źródło konfiguracji kluczy tajnych użytkownika jawnie <xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A>przez wywołanie. Wywołanie `AddUserSecrets` tylko wtedy, gdy aplikacja działa w środowisku deweloperskim, jak pokazano w następującym przykładzie:
+Gdy `CreateDefaultBuilder` nie jest wywoływana, Dodaj źródło konfiguracji kluczy tajnych użytkownika jawnie przez wywołanie <xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A> . Wywołanie `AddUserSecrets` tylko wtedy, gdy aplikacja działa w środowisku deweloperskim, jak pokazano w następującym przykładzie:
 
 [!code-csharp[](app-secrets/samples/3.x/UserSecrets/Program2.cs?name=snippet_Host&highlight=6-9)]
 
-Wpisy tajne użytkownika można pobrać za `Configuration` pośrednictwem interfejsu API:
+Wpisy tajne użytkownika można pobrać za pośrednictwem `Configuration` interfejsu API:
 
 [!code-csharp[](app-secrets/samples/3.x/UserSecrets/Startup.cs?name=snippet_StartupClass&highlight=14)]
 
@@ -166,31 +168,31 @@ Mapowanie całego literału obiektu na POCO (prosta Klasa .NET z właściwościa
 
 [!INCLUDE[secrets.json file](~/includes/app-secrets/secrets-json-file-and-text.md)]
 
-Aby zmapować poprzednie wpisy tajne do POCO, użyj funkcji `Configuration` [powiązania grafu obiektów](xref:fundamentals/configuration/index#bind-to-an-object-graph) interfejsu API. Następujący kod wiąże się z niestandardowym `MovieSettings` POCO i uzyskuje `ServiceApiKey` dostęp do wartości właściwości:
+Aby zmapować poprzednie wpisy tajne do POCO, użyj `Configuration` funkcji [powiązania grafu obiektów](xref:fundamentals/configuration/index#bind-to-an-object-graph) interfejsu API. Następujący kod wiąże się z niestandardowym `MovieSettings` POCO i uzyskuje dostęp do `ServiceApiKey` wartości właściwości:
 
 [!code-csharp[](app-secrets/samples/3.x/UserSecrets/Startup3.cs?name=snippet_BindToObjectGraph)]
 
-Wpisy `Movies:ConnectionString` tajne i `Movies:ServiceApiKey` są mapowane na odpowiednie właściwości w `MovieSettings`programie:
+Wpisy `Movies:ConnectionString` `Movies:ServiceApiKey` tajne i są mapowane na odpowiednie właściwości w programie `MovieSettings` :
 
 [!code-csharp[](app-secrets/samples/3.x/UserSecrets/Models/MovieSettings.cs?name=snippet_MovieSettingsClass)]
 
 ## <a name="string-replacement-with-secrets"></a>Zastępowanie ciągów hasłami tajnymi
 
-Przechowywanie haseł w postaci zwykłego tekstu jest niebezpieczne. Na przykład parametry połączenia z bazą danych przechowywane w pliku *appSettings. JSON* mogą zawierać hasło dla określonego użytkownika:
+Przechowywanie haseł w postaci zwykłego tekstu jest niebezpieczne. Na przykład parametry połączenia z bazą danych przechowywane w *appsettings.jsna* mogą zawierać hasło dla określonego użytkownika:
 
 [!code-json[](app-secrets/samples/3.x/UserSecrets/appsettings-unsecure.json?highlight=3)]
 
-Bardziej bezpiecznym podejściem jest przechowywanie hasła jako klucza tajnego. Przykład:
+Bardziej bezpiecznym podejściem jest przechowywanie hasła jako klucza tajnego. Na przykład:
 
 ```dotnetcli
 dotnet user-secrets set "DbPassword" "pass123"
 ```
 
-Usuń parę `Password` klucz-wartość z parametrów połączenia w pliku *appSettings. JSON*. Przykład:
+Usuń `Password` parę klucz-wartość z parametrów połączenia w *appsettings.jsna*. Na przykład:
 
 [!code-json[](app-secrets/samples/3.x/UserSecrets/appsettings.json?highlight=3)]
 
-Wartość wpisu tajnego można ustawić we <xref:System.Data.SqlClient.SqlConnectionStringBuilder> <xref:System.Data.SqlClient.SqlConnectionStringBuilder.Password%2A> właściwości obiektu, aby zakończyć parametry połączenia:
+Wartość wpisu tajnego można ustawić we <xref:System.Data.SqlClient.SqlConnectionStringBuilder> właściwości obiektu, <xref:System.Data.SqlClient.SqlConnectionStringBuilder.Password%2A> Aby zakończyć parametry połączenia:
 
 [!code-csharp[](app-secrets/samples/3.x/UserSecrets/Startup2.cs?name=snippet_StartupClass&highlight=14-17)]
 
@@ -211,7 +213,7 @@ Movies:ConnectionString = Server=(localdb)\mssqllocaldb;Database=Movie-1;Trusted
 Movies:ServiceApiKey = 12345
 ```
 
-W poprzednim przykładzie dwukropek w nazwach kluczy oznacza hierarchię obiektów w formacie Secret *. JSON*.
+W poprzednim przykładzie dwukropek w nazwach kluczy oznacza hierarchię obiektów w *secrets.jsna*.
 
 ## <a name="remove-a-single-secret"></a>Usuń pojedynczy klucz tajny
 
@@ -223,7 +225,7 @@ Uruchom następujące polecenie z katalogu, w którym istnieje plik *. csproj* :
 dotnet user-secrets remove "Movies:ConnectionString"
 ```
 
-Plik Secret *. JSON* aplikacji został zmodyfikowany, aby usunąć parę klucz-wartość skojarzoną z `MoviesConnectionString` kluczem:
+*secrets.jsaplikacji w* pliku został zmodyfikowany, aby usunąć parę klucz-wartość skojarzoną z `MoviesConnectionString` kluczem:
 
 ```json
 {
@@ -249,13 +251,13 @@ Uruchom następujące polecenie z katalogu, w którym istnieje plik *. csproj* :
 dotnet user-secrets clear
 ```
 
-Wszystkie wpisy tajne użytkownika dla aplikacji zostały usunięte z pliku Secret *. JSON* :
+Wszystkie wpisy tajne użytkownika dla aplikacji zostały usunięte z *secrets.jsw* pliku:
 
 ```json
 {}
 ```
 
-Uruchomiony `dotnet user-secrets list` program wyświetla następujący komunikat:
+Uruchomiony program `dotnet user-secrets list` wyświetla następujący komunikat:
 
 ```console
 No secrets configured for this application.
@@ -281,7 +283,7 @@ W tym dokumencie opisano techniki przechowywania i pobierania poufnych danych po
 
 Zmienne środowiskowe służą do uniknięcia przechowywania wpisów tajnych aplikacji w kodzie lub w lokalnych plikach konfiguracji. Zmienne środowiskowe przesłaniają wartości konfiguracyjne dla wszystkich poprzednio określonych źródeł konfiguracji.
 
-Rozważ ASP.NET Core aplikacji sieci Web, w której włączono zabezpieczenia **poszczególnych kont użytkowników** . Domyślne parametry połączenia z bazą danych są zawarte w pliku *appSettings. JSON* projektu z kluczem `DefaultConnection`. Domyślne parametry połączenia to LocalDB, które są uruchamiane w trybie użytkownika i nie wymagają hasła. Podczas wdrażania aplikacji wartość `DefaultConnection` klucza może być zastąpiona wartością zmiennej środowiskowej. Zmienna środowiskowa może przechowywać kompletne parametry połączenia z poufnymi poświadczeniami.
+Rozważ ASP.NET Core aplikacji sieci Web, w której włączono zabezpieczenia **poszczególnych kont użytkowników** . Domyślne parametry połączenia z bazą danych są dołączane do *appsettings.jsprojektu w* pliku z kluczem `DefaultConnection` . Domyślne parametry połączenia to LocalDB, które są uruchamiane w trybie użytkownika i nie wymagają hasła. Podczas wdrażania aplikacji `DefaultConnection` wartość klucza może być zastąpiona wartością zmiennej środowiskowej. Zmienna środowiskowa może przechowywać kompletne parametry połączenia z poufnymi poświadczeniami.
 
 > [!WARNING]
 > Zmienne środowiskowe są zwykle przechowywane w postaci zwykłego, nieszyfrowanego tekstu. W przypadku naruszenia zabezpieczeń komputera lub procesu zmienne środowiskowe są dostępne dla niezaufanych stron. Mogą być wymagane dodatkowe środki, które uniemożliwiają ujawnienie kluczy tajnych użytkownika.
@@ -313,7 +315,7 @@ Narzędzie tajnego Menedżera wyodrębnia szczegóły implementacji, takie jak m
 
 ---
 
-W poprzednich ścieżkach plików Zamień `<user_secrets_id>` na `UserSecretsId` wartość określoną w pliku *. csproj* .
+W poprzednich ścieżkach plików Zamień na `<user_secrets_id>` `UserSecretsId` wartość określoną w pliku *. csproj* .
 
 Nie pisz kodu, który zależy od lokalizacji lub formatu danych zapisywanych za pomocą narzędzia do zarządzania kluczami tajnymi. Te szczegóły implementacji mogą ulec zmianie. Na przykład wartości tajne nie są szyfrowane, ale mogą być w przyszłości.
 
@@ -321,7 +323,7 @@ Nie pisz kodu, który zależy od lokalizacji lub formatu danych zapisywanych za 
 
 Narzędzie Secret Manager działa na specyficznych dla projektu ustawieniach konfiguracji przechowywanych w profilu użytkownika.
 
-Aby użyć kluczy tajnych użytkownika, `UserSecretsId` Zdefiniuj element w `PropertyGroup` pliku *. csproj* . Wewnętrzny tekst `UserSecretsId` jest dowolny, ale jest unikatowy dla projektu. Deweloperzy zwykle generują identyfikator GUID dla `UserSecretsId`.
+Aby użyć kluczy tajnych użytkownika, zdefiniuj `UserSecretsId` element w `PropertyGroup` pliku *. csproj* . Wewnętrzny tekst `UserSecretsId` jest dowolny, ale jest unikatowy dla projektu. Deweloperzy zwykle generują identyfikator GUID dla `UserSecretsId` .
 
 [!code-xml[](app-secrets/samples/2.x/UserSecrets/UserSecrets.csproj?name=snippet_PropertyGroup&highlight=3)]
 
@@ -330,7 +332,7 @@ Aby użyć kluczy tajnych użytkownika, `UserSecretsId` Zdefiniuj element w `Pro
 
 ## <a name="set-a-secret"></a>Ustaw klucz tajny
 
-Zdefiniuj klucz tajny aplikacji składający się z klucza i jego wartości. Wpis tajny jest skojarzony z `UserSecretsId` wartością projektu. Na przykład uruchom następujące polecenie z katalogu, w którym istnieje plik *. csproj* :
+Zdefiniuj klucz tajny aplikacji składający się z klucza i jego wartości. Wpis tajny jest skojarzony z wartością projektu `UserSecretsId` . Na przykład uruchom następujące polecenie z katalogu, w którym istnieje plik *. csproj* :
 
 ```dotnetcli
 dotnet user-secrets set "Movies:ServiceApiKey" "12345"
@@ -338,7 +340,7 @@ dotnet user-secrets set "Movies:ServiceApiKey" "12345"
 
 W poprzednim przykładzie dwukropek wskazuje, że `Movies` jest to literał obiektu z `ServiceApiKey` właściwością.
 
-Narzędzia do zarządzania kluczami tajnymi można również użyć z innych katalogów. Użyj `--project` opcji, aby podać ścieżkę systemu plików, w której znajduje się plik *. csproj* . Przykład:
+Narzędzia do zarządzania kluczami tajnymi można również użyć z innych katalogów. Użyj `--project` opcji, aby podać ścieżkę systemu plików, w której znajduje się plik *. csproj* . Na przykład:
 
 ```dotnetcli
 dotnet user-secrets set "Movies:ServiceApiKey" "12345" --project "C:\apps\WebApp1\src\WebApp1"
@@ -346,7 +348,7 @@ dotnet user-secrets set "Movies:ServiceApiKey" "12345" --project "C:\apps\WebApp
 
 ### <a name="json-structure-flattening-in-visual-studio"></a>Spłaszczanie struktury JSON w programie Visual Studio
 
-Gest **Zarządzanie kluczami tajnymi użytkownika** programu Visual Studio otwiera plik Secret *. JSON* w edytorze tekstów. Zastąp zawartość Secret *. JSON* wartościami par klucz-wartość, które mają być przechowywane. Przykład:
+Gest **Zarządzanie kluczami tajnymi użytkownika** programu Visual Studio otwiera *secrets.js* w pliku w edytorze tekstów. Zastąp zawartość *secrets.js* przy użyciu par klucz-wartość, które mają być przechowywane. Na przykład:
 
 ```json
 {
@@ -357,7 +359,7 @@ Gest **Zarządzanie kluczami tajnymi użytkownika** programu Visual Studio otwie
 }
 ```
 
-Struktura JSON jest spłaszczona po modyfikacji za `dotnet user-secrets remove` pośrednictwem `dotnet user-secrets set`lub. Na przykład, uruchomione `dotnet user-secrets remove "Movies:ConnectionString"` zwijanie literału `Movies` obiektu. Zmodyfikowany plik jest podobny do następującego:
+Struktura JSON jest spłaszczona po modyfikacji za pośrednictwem `dotnet user-secrets remove` lub `dotnet user-secrets set` . Na przykład, uruchomione `dotnet user-secrets remove "Movies:ConnectionString"` zwijanie `Movies` literału obiektu. Zmodyfikowany plik jest podobny do następującego:
 
 ```json
 {
@@ -367,7 +369,7 @@ Struktura JSON jest spłaszczona po modyfikacji za `dotnet user-secrets remove` 
 
 ## <a name="set-multiple-secrets"></a>Ustawianie wielu wpisów tajnych
 
-Partia wpisów tajnych można ustawić za pomocą formatu JSON dla `set` polecenia. W poniższym przykładzie zawartość pliku *Input. JSON* jest potoku do `set` polecenia.
+Partia wpisów tajnych można ustawić za pomocą formatu JSON dla `set` polecenia. W poniższym przykładzie *input.js* zawartości pliku są potoku do `set` polecenia.
 
 # <a name="windows"></a>[Windows](#tab/windows)
 
@@ -391,17 +393,17 @@ Otwórz powłokę poleceń i wykonaj następujące polecenie:
 
 [Interfejs API konfiguracji ASP.NET Core](xref:fundamentals/configuration/index) zapewnia dostęp do wpisów tajnych usługi Secret Manager.
 
-Jeśli projekt jest przeznaczony .NET Framework, zainstaluj pakiet NuGet [Microsoft. Extensions. Configuration. UserSecrets](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.UserSecrets) .
+Jeśli projekt jest przeznaczony .NET Framework, zainstaluj [Microsoft.Extensions.Configwersja. ](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.UserSecrets)Pakiet NuGet UserSecrets.
 
-W ASP.NET Core 2,0 lub nowszej Źródło konfiguracji użytkownika jest automatycznie dodawane w trybie programistycznym, gdy projekt wywoła <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder%2A> nowe wystąpienie hosta ze wstępnie skonfigurowanymi ustawieniami domyślnymi. `CreateDefaultBuilder`wywołuje <xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A> się, <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.EnvironmentName> gdy <xref:Microsoft.AspNetCore.Hosting.EnvironmentName.Development>jest:
+W ASP.NET Core 2,0 lub nowszej Źródło konfiguracji użytkownika jest automatycznie dodawane w trybie programistycznym, gdy projekt wywoła <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder%2A> nowe wystąpienie hosta ze wstępnie skonfigurowanymi ustawieniami domyślnymi. `CreateDefaultBuilder`wywołuje <xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A> się, gdy <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.EnvironmentName> jest <xref:Microsoft.AspNetCore.Hosting.EnvironmentName.Development> :
 
 [!code-csharp[](app-secrets/samples/2.x/UserSecrets/Program.cs?name=snippet_CreateWebHostBuilder&highlight=2)]
 
-Gdy `CreateDefaultBuilder` nie jest wywoływana, Dodaj źródło konfiguracji kluczy tajnych użytkownika jawnie <xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A> , wywołując `Startup` w konstruktorze. Wywołanie `AddUserSecrets` tylko wtedy, gdy aplikacja działa w środowisku deweloperskim, jak pokazano w następującym przykładzie:
+Gdy `CreateDefaultBuilder` nie jest wywoływana, Dodaj źródło konfiguracji kluczy tajnych użytkownika jawnie, wywołując <xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A> w `Startup` konstruktorze. Wywołanie `AddUserSecrets` tylko wtedy, gdy aplikacja działa w środowisku deweloperskim, jak pokazano w następującym przykładzie:
 
 [!code-csharp[](app-secrets/samples/2.x/UserSecrets/Startup3.cs?name=snippet_StartupConstructor&highlight=12)]
 
-Wpisy tajne użytkownika można pobrać za `Configuration` pośrednictwem interfejsu API:
+Wpisy tajne użytkownika można pobrać za pośrednictwem `Configuration` interfejsu API:
 
 [!code-csharp[](app-secrets/samples/2.x/UserSecrets/Startup.cs?name=snippet_StartupClass&highlight=14)]
 
@@ -411,31 +413,31 @@ Mapowanie całego literału obiektu na POCO (prosta Klasa .NET z właściwościa
 
 [!INCLUDE[secrets.json file](~/includes/app-secrets/secrets-json-file-and-text.md)]
 
-Aby zmapować poprzednie wpisy tajne do POCO, użyj funkcji `Configuration` [powiązania grafu obiektów](xref:fundamentals/configuration/index#bind-to-an-object-graph) interfejsu API. Następujący kod wiąże się z niestandardowym `MovieSettings` POCO i uzyskuje `ServiceApiKey` dostęp do wartości właściwości:
+Aby zmapować poprzednie wpisy tajne do POCO, użyj `Configuration` funkcji [powiązania grafu obiektów](xref:fundamentals/configuration/index#bind-to-an-object-graph) interfejsu API. Następujący kod wiąże się z niestandardowym `MovieSettings` POCO i uzyskuje dostęp do `ServiceApiKey` wartości właściwości:
 
 [!code-csharp[](app-secrets/samples/2.x/UserSecrets/Startup3.cs?name=snippet_BindToObjectGraph)]
 
-Wpisy `Movies:ConnectionString` tajne i `Movies:ServiceApiKey` są mapowane na odpowiednie właściwości w `MovieSettings`programie:
+Wpisy `Movies:ConnectionString` `Movies:ServiceApiKey` tajne i są mapowane na odpowiednie właściwości w programie `MovieSettings` :
 
 [!code-csharp[](app-secrets/samples/2.x/UserSecrets/Models/MovieSettings.cs?name=snippet_MovieSettingsClass)]
 
 ## <a name="string-replacement-with-secrets"></a>Zastępowanie ciągów hasłami tajnymi
 
-Przechowywanie haseł w postaci zwykłego tekstu jest niebezpieczne. Na przykład parametry połączenia z bazą danych przechowywane w pliku *appSettings. JSON* mogą zawierać hasło dla określonego użytkownika:
+Przechowywanie haseł w postaci zwykłego tekstu jest niebezpieczne. Na przykład parametry połączenia z bazą danych przechowywane w *appsettings.jsna* mogą zawierać hasło dla określonego użytkownika:
 
 [!code-json[](app-secrets/samples/2.x/UserSecrets/appsettings-unsecure.json?highlight=3)]
 
-Bardziej bezpiecznym podejściem jest przechowywanie hasła jako klucza tajnego. Przykład:
+Bardziej bezpiecznym podejściem jest przechowywanie hasła jako klucza tajnego. Na przykład:
 
 ```dotnetcli
 dotnet user-secrets set "DbPassword" "pass123"
 ```
 
-Usuń parę `Password` klucz-wartość z parametrów połączenia w pliku *appSettings. JSON*. Przykład:
+Usuń `Password` parę klucz-wartość z parametrów połączenia w *appsettings.jsna*. Na przykład:
 
 [!code-json[](app-secrets/samples/2.x/UserSecrets/appsettings.json?highlight=3)]
 
-Wartość wpisu tajnego można ustawić we <xref:System.Data.SqlClient.SqlConnectionStringBuilder> <xref:System.Data.SqlClient.SqlConnectionStringBuilder.Password%2A> właściwości obiektu, aby zakończyć parametry połączenia:
+Wartość wpisu tajnego można ustawić we <xref:System.Data.SqlClient.SqlConnectionStringBuilder> właściwości obiektu, <xref:System.Data.SqlClient.SqlConnectionStringBuilder.Password%2A> Aby zakończyć parametry połączenia:
 
 [!code-csharp[](app-secrets/samples/2.x/UserSecrets/Startup2.cs?name=snippet_StartupClass&highlight=14-17)]
 
@@ -456,7 +458,7 @@ Movies:ConnectionString = Server=(localdb)\mssqllocaldb;Database=Movie-1;Trusted
 Movies:ServiceApiKey = 12345
 ```
 
-W poprzednim przykładzie dwukropek w nazwach kluczy oznacza hierarchię obiektów w formacie Secret *. JSON*.
+W poprzednim przykładzie dwukropek w nazwach kluczy oznacza hierarchię obiektów w *secrets.jsna*.
 
 ## <a name="remove-a-single-secret"></a>Usuń pojedynczy klucz tajny
 
@@ -468,7 +470,7 @@ Uruchom następujące polecenie z katalogu, w którym istnieje plik *. csproj* :
 dotnet user-secrets remove "Movies:ConnectionString"
 ```
 
-Plik Secret *. JSON* aplikacji został zmodyfikowany, aby usunąć parę klucz-wartość skojarzoną z `MoviesConnectionString` kluczem:
+*secrets.jsaplikacji w* pliku został zmodyfikowany, aby usunąć parę klucz-wartość skojarzoną z `MoviesConnectionString` kluczem:
 
 ```json
 {
@@ -478,7 +480,7 @@ Plik Secret *. JSON* aplikacji został zmodyfikowany, aby usunąć parę klucz-w
 }
 ```
 
-Uruchomiony `dotnet user-secrets list` program wyświetla następujący komunikat:
+Uruchomiony program `dotnet user-secrets list` wyświetla następujący komunikat:
 
 ```console
 Movies:ServiceApiKey = 12345
@@ -494,13 +496,13 @@ Uruchom następujące polecenie z katalogu, w którym istnieje plik *. csproj* :
 dotnet user-secrets clear
 ```
 
-Wszystkie wpisy tajne użytkownika dla aplikacji zostały usunięte z pliku Secret *. JSON* :
+Wszystkie wpisy tajne użytkownika dla aplikacji zostały usunięte z *secrets.jsw* pliku:
 
 ```json
 {}
 ```
 
-Uruchomiony `dotnet user-secrets list` program wyświetla następujący komunikat:
+Uruchomiony program `dotnet user-secrets list` wyświetla następujący komunikat:
 
 ```console
 No secrets configured for this application.

@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 05/20/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: test/integration-tests
-ms.openlocfilehash: ee57843dc79805aed48dbb4d3a6ac97469052f5c
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 6e4a0065486f6d9d6744dcd21de10ec76782f210
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84105184"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405877"
 ---
 # <a name="integration-tests-in-aspnet-core"></a>Testy integracji w ASP.NET Core
 
@@ -341,9 +343,9 @@ protected override IWebHostBuilder CreateWebHostBuilder() =>
 
 ## <a name="disable-shadow-copying"></a>Wyłącz kopiowanie w tle
 
-Kopiowanie w tle powoduje, że testy są wykonywane w innym katalogu niż katalog wyjściowy. Aby testy działały prawidłowo, kopiowanie w tle musi być wyłączone. [Przykładowa aplikacja](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples) używa xUnit i wyłącza kopiowanie w tle dla xUnit, dołączając plik *xUnit. Runner. JSON* z prawidłowym ustawieniem konfiguracji. Aby uzyskać więcej informacji, zobacz [Configuring xUnit with JSON](https://xunit.github.io/docs/configuring-with-json.html).
+Kopiowanie w tle powoduje, że testy są wykonywane w innym katalogu niż katalog wyjściowy. Aby testy działały prawidłowo, kopiowanie w tle musi być wyłączone. [Przykładowa aplikacja](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples) używa xUnit i wyłącza kopiowanie w tle dla xUnit przez dołączenie *xunit.runner.jsw* pliku z prawidłowym ustawieniem konfiguracji. Aby uzyskać więcej informacji, zobacz [Configuring xUnit with JSON](https://xunit.github.io/docs/configuring-with-json.html).
 
-Dodaj plik *xUnit. Runner. JSON* do katalogu głównego projektu testowego z następującą zawartością:
+Dodaj *xunit.runner.js* do pliku głównego projektu testowego z następującą zawartością:
 
 ```json
 {
@@ -722,9 +724,9 @@ public class CustomWebApplicationFactory<TStartup>
 
 ## <a name="disable-shadow-copying"></a>Wyłącz kopiowanie w tle
 
-Kopiowanie w tle powoduje, że testy są wykonywane w innym katalogu niż katalog wyjściowy. Aby testy działały prawidłowo, kopiowanie w tle musi być wyłączone. [Przykładowa aplikacja](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples) używa xUnit i wyłącza kopiowanie w tle dla xUnit, dołączając plik *xUnit. Runner. JSON* z prawidłowym ustawieniem konfiguracji. Aby uzyskać więcej informacji, zobacz [Configuring xUnit with JSON](https://xunit.github.io/docs/configuring-with-json.html).
+Kopiowanie w tle powoduje, że testy są wykonywane w innym katalogu niż katalog wyjściowy. Aby testy działały prawidłowo, kopiowanie w tle musi być wyłączone. [Przykładowa aplikacja](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples) używa xUnit i wyłącza kopiowanie w tle dla xUnit przez dołączenie *xunit.runner.jsw* pliku z prawidłowym ustawieniem konfiguracji. Aby uzyskać więcej informacji, zobacz [Configuring xUnit with JSON](https://xunit.github.io/docs/configuring-with-json.html).
 
-Dodaj plik *xUnit. Runner. JSON* do katalogu głównego projektu testowego z następującą zawartością:
+Dodaj *xunit.runner.js* do pliku głównego projektu testowego z następującą zawartością:
 
 ```json
 {

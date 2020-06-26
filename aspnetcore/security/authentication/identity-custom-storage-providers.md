@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 07/23/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/identity-custom-storage-providers
-ms.openlocfilehash: 567529adc520c3fb152afae7284d31b87ec1df0a
-ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
+ms.openlocfilehash: 137b73529a6c3d2a1dece201ebd8a7a5a96da349
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84652991"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404746"
 ---
 # <a name="custom-storage-providers-for-aspnet-core-identity"></a>Niestandardowi dostawcy magazynu dla ASP.NET CoreIdentity
 
@@ -29,7 +31,7 @@ ASP.NET Core Identity to rozszerzalny system, który umożliwia utworzenie niest
 
 ## <a name="introduction"></a>Wprowadzenie
 
-Domyślnie Identity system ASP.NET Core przechowuje informacje o użytkownikach w bazie danych SQL Server przy użyciu Entity Framework Core. W przypadku wielu aplikacji to podejście działa prawidłowo. Jednak warto użyć innego mechanizmu trwałości lub schematu danych. Przykład:
+Domyślnie Identity system ASP.NET Core przechowuje informacje o użytkownikach w bazie danych SQL Server przy użyciu Entity Framework Core. W przypadku wielu aplikacji to podejście działa prawidłowo. Jednak warto użyć innego mechanizmu trwałości lub schematu danych. Na przykład:
 
 * Używasz [usługi Azure Table Storage](/azure/storage/) lub innego magazynu danych.
 * Tabele bazy danych mają inną strukturę. 
@@ -73,11 +75,11 @@ Zestaw instrukcji (lub [oświadczeń](/dotnet/api/system.security.claims.claim))
 
 ### <a name="user-logins"></a>Logowania użytkowników
 
-Informacje o zewnętrznym dostawcy uwierzytelniania (na przykład Facebook lub konto Microsoft) do użycia podczas logowania użytkownika. [Przyklad](/dotnet/api/microsoft.aspnet.identity.corecompat.identityuserlogin)
+Informacje o zewnętrznym dostawcy uwierzytelniania (na przykład Facebook lub konto Microsoft) do użycia podczas logowania użytkownika. [Przykład](/dotnet/api/microsoft.aspnet.identity.corecompat.identityuserlogin)
 
 ### <a name="roles"></a>Role
 
-Grupy autoryzacji dla witryny. Zawiera identyfikator roli i nazwę roli (na przykład "admin" lub "Employee"). [Przyklad](/dotnet/api/microsoft.aspnet.identity.corecompat.identityrole)
+Grupy autoryzacji dla witryny. Zawiera identyfikator roli i nazwę roli (na przykład "admin" lub "Employee"). [Przykład](/dotnet/api/microsoft.aspnet.identity.corecompat.identityrole)
 
 ## <a name="the-data-access-layer"></a>Warstwa dostępu do danych
 
@@ -93,23 +95,23 @@ Hermetyzuje informacje w celu nawiązania połączenia z mechanizmem trwałości
 
 ### <a name="user-storage"></a>Magazyn użytkowników
 
-Przechowuje i pobiera informacje o użytkowniku (takie jak nazwa użytkownika i skrót hasła). [Przyklad](/dotnet/api/microsoft.aspnet.identity.corecompat.userstore-1)
+Przechowuje i pobiera informacje o użytkowniku (takie jak nazwa użytkownika i skrót hasła). [Przykład](/dotnet/api/microsoft.aspnet.identity.corecompat.userstore-1)
 
 ### <a name="role-storage"></a>Magazyn ról
 
-Przechowuje i pobiera informacje o rolach (takie jak nazwa roli). [Przyklad](/dotnet/api/microsoft.aspnetcore.identity.entityframeworkcore.rolestore-1)
+Przechowuje i pobiera informacje o rolach (takie jak nazwa roli). [Przykład](/dotnet/api/microsoft.aspnetcore.identity.entityframeworkcore.rolestore-1)
 
 ### <a name="userclaims-storage"></a>Magazyn UserClaims
 
-Przechowuje i pobiera informacje o użytkowniku (takie jak typ i wartość żądania). [Przyklad](/dotnet/api/microsoft.aspnet.identity.corecompat.userstore-1)
+Przechowuje i pobiera informacje o użytkowniku (takie jak typ i wartość żądania). [Przykład](/dotnet/api/microsoft.aspnet.identity.corecompat.userstore-1)
 
 ### <a name="userlogins-storage"></a>Magazyn UserLogins
 
-Przechowuje i pobiera informacje logowania użytkownika (na przykład zewnętrzny dostawca uwierzytelniania). [Przyklad](/dotnet/api/microsoft.aspnet.identity.corecompat.userstore-1)
+Przechowuje i pobiera informacje logowania użytkownika (na przykład zewnętrzny dostawca uwierzytelniania). [Przykład](/dotnet/api/microsoft.aspnet.identity.corecompat.userstore-1)
 
 ### <a name="userrole-storage"></a>Przestrzeń dyskowa UserRole
 
-Przechowuje i pobiera przypisane role, do których użytkownicy. [Przyklad](/dotnet/api/microsoft.aspnet.identity.corecompat.userstore-1)
+Przechowuje i pobiera przypisane role, do których użytkownicy. [Przykład](/dotnet/api/microsoft.aspnet.identity.corecompat.userstore-1)
 
 **Porada:** Zaimplementuj tylko klasy, które mają być używane w aplikacji.
 
@@ -175,7 +177,7 @@ W ramach `UserStore` klasy używane są klasy dostępu do danych, które został
 * **IQueryableUserStore**  
  Interfejs [IQueryableUserStore &lt; TUser &gt; ](/dotnet/api/microsoft.aspnetcore.identity.iqueryableuserstore-1) definiuje elementy członkowskie, które są implementowane w celu udostępnienia magazynu użytkownika queryable.
 
-Implementowane są tylko interfejsy, które są potrzebne w aplikacji. Przykład:
+Implementowane są tylko interfejsy, które są potrzebne w aplikacji. Na przykład:
 
 ```csharp
 public class UserStore : IUserStore<IdentityUser>,

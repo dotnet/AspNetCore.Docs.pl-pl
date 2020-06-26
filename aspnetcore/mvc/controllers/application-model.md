@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 12/05/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/controllers/application-model
-ms.openlocfilehash: 5e31d2e6611321bec7442534ce41350de10478e0
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 61503a1a87b5d5eea36586108b65304236cf799a
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82768666"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405643"
 ---
 # <a name="work-with-the-application-model-in-aspnet-core"></a>Pracuj z modelem aplikacji w ASP.NET Core
 
@@ -35,33 +37,33 @@ Model aplikacji ASP.NET Core MVC ma następującą strukturę:
     * Akcje (ActionModel)
       * Parametry (ParameterModel)
 
-Każdy poziom modelu ma dostęp do typowej `Properties` kolekcji, a niższe poziomy mogą uzyskać dostęp do wartości właściwości ustawionych przez wyższe poziomy w hierarchii. Właściwości są utrwalane `ActionDescriptor.Properties` podczas tworzenia akcji. Następnie, gdy żądanie jest obsługiwane, można uzyskać dostęp do wszystkich właściwości dodanej lub zmodyfikowanej `ActionContext.ActionDescriptor.Properties`Konwencji. Korzystanie z właściwości to doskonały sposób konfigurowania filtrów, powiązań modelu itp. na podstawie akcji.
+Każdy poziom modelu ma dostęp do typowej `Properties` kolekcji, a niższe poziomy mogą uzyskać dostęp do wartości właściwości ustawionych przez wyższe poziomy w hierarchii. Właściwości są utrwalane `ActionDescriptor.Properties` podczas tworzenia akcji. Następnie, gdy żądanie jest obsługiwane, można uzyskać dostęp do wszystkich właściwości dodanej lub zmodyfikowanej Konwencji `ActionContext.ActionDescriptor.Properties` . Korzystanie z właściwości to doskonały sposób konfigurowania filtrów, powiązań modelu itp. na podstawie akcji.
 
 > [!NOTE]
-> `ActionDescriptor.Properties` Kolekcja nie jest bezpieczna wątkowo (dla zapisów) po zakończeniu uruchamiania aplikacji. Konwencje są najlepszym sposobem bezpiecznego dodawania danych do tej kolekcji.
+> `ActionDescriptor.Properties`Kolekcja nie jest bezpieczna wątkowo (dla zapisów) po zakończeniu uruchamiania aplikacji. Konwencje są najlepszym sposobem bezpiecznego dodawania danych do tej kolekcji.
 
 ### <a name="iapplicationmodelprovider"></a>IApplicationModelProvider
 
 ASP.NET Core MVC ładuje model aplikacji przy użyciu wzorca dostawcy zdefiniowanego przez interfejs [IApplicationModelProvider](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.iapplicationmodelprovider) . W tej sekcji omówiono niektóre wewnętrzne szczegóły implementacji działania tego dostawcy. Jest to zaawansowany temat-większość aplikacji, które wykorzystują model aplikacji, należy to zrobić przez pracę z konwencjami.
 
-Implementacje `IApplicationModelProvider` interfejsu "Otocz", przy czym każda implementacja wywołuje `OnProvidersExecuting` w kolejności rosnącej na podstawie jej `Order` właściwości. `OnProvidersExecuted` Metoda jest następnie wywoływana w odwrotnej kolejności. Struktura definiuje kilku dostawców:
+Implementacje `IApplicationModelProvider` interfejsu "Otocz", przy czym każda implementacja wywołuje `OnProvidersExecuting` w kolejności rosnącej na podstawie jej `Order` właściwości. `OnProvidersExecuted`Metoda jest następnie wywoływana w odwrotnej kolejności. Struktura definiuje kilku dostawców:
 
-First (`Order=-1000`):
+First ( `Order=-1000` ):
 
 * [`DefaultApplicationModelProvider`](/dotnet/api/microsoft.aspnetcore.mvc.internal.defaultapplicationmodelprovider)
 
-Następnie (`Order=-990`):
+Następnie ( `Order=-990` ):
 
 * [`AuthorizationApplicationModelProvider`](/dotnet/api/microsoft.aspnetcore.mvc.internal.authorizationapplicationmodelprovider)
 * [`CorsApplicationModelProvider`](/dotnet/api/microsoft.aspnetcore.mvc.cors.internal.corsapplicationmodelprovider)
 
 > [!NOTE]
-> Kolejność, w której `Order` są wywoływane dwa dostawcy o tej samej wartości, jest niezdefiniowana i dlatego nie należy jej opierać.
+> Kolejność, w której są wywoływane dwa dostawcy o tej samej wartości `Order` , jest niezdefiniowana i dlatego nie należy jej opierać.
 
 > [!NOTE]
 > `IApplicationModelProvider`jest zaawansowaną koncepcją dla autorów struktury, która ma zostać rozszerzona. Ogólnie rzecz biorąc aplikacje powinny używać konwencji i struktur, powinny używać dostawców. Odrębność klucza polega na tym, że dostawcy zawsze są uruchamiani przed konwencjami.
 
-`DefaultApplicationModelProvider` Tworzy wiele zachowań domyślnych używanych przez ASP.NET Core MVC. Jej obowiązki obejmują:
+`DefaultApplicationModelProvider`Tworzy wiele zachowań domyślnych używanych przez ASP.NET Core MVC. Jej obowiązki obejmują:
 
 * Dodawanie filtrów globalnych do kontekstu
 * Dodawanie kontrolerów do kontekstu
@@ -69,11 +71,11 @@ Następnie (`Order=-990`):
 * Dodawanie parametrów metody akcji do kontekstu
 * Stosowanie trasy i innych atrybutów
 
-Niektóre wbudowane zachowania są implementowane przez `DefaultApplicationModelProvider`. Ten dostawca jest odpowiedzialny za konstruowanie [`ControllerModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.controllermodel), który z kolei powoduje [`ActionModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.actionmodel)odtworzenie [`PropertyModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.propertymodel)odwołań [`ParameterModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.parametermodel) , i wystąpień. `DefaultApplicationModelProvider` Klasa jest szczegółami wewnętrznej implementacji platformy, które mogą i zmienią się w przyszłości. 
+Niektóre wbudowane zachowania są implementowane przez `DefaultApplicationModelProvider` . Ten dostawca jest odpowiedzialny za konstruowanie [`ControllerModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.controllermodel) , który z kolei powoduje odtworzenie odwołań [`ActionModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.actionmodel) , [`PropertyModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.propertymodel) i [`ParameterModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.parametermodel) wystąpień. `DefaultApplicationModelProvider`Klasa jest szczegółami wewnętrznej implementacji platformy, które mogą i zmienią się w przyszłości. 
 
-`AuthorizationApplicationModelProvider` Jest odpowiedzialny za stosowanie zachowań skojarzonych z atrybutami `AuthorizeFilter` i `AllowAnonymousFilter` . [Dowiedz się więcej na temat tych atrybutów](xref:security/authorization/simple).
+`AuthorizationApplicationModelProvider`Jest odpowiedzialny za stosowanie zachowań skojarzonych z `AuthorizeFilter` `AllowAnonymousFilter` atrybutami i. [Dowiedz się więcej na temat tych atrybutów](xref:security/authorization/simple).
 
-Zachowanie `CorsApplicationModelProvider` implementuje skojarzone z `IEnableCorsAttribute` i `IDisableCorsAttribute`i. `DisableCorsAuthorizationFilter` [Dowiedz się więcej na temat mechanizmu CORS](xref:security/cors).
+`CorsApplicationModelProvider`Zachowanie implementuje skojarzone z i i `IEnableCorsAttribute` `IDisableCorsAttribute` `DisableCorsAuthorizationFilter` . [Dowiedz się więcej na temat mechanizmu CORS](xref:security/cors).
 
 ## <a name="conventions"></a>Konwencje
 
@@ -86,7 +88,7 @@ Dostępne są następujące konwencje:
 * [`IActionModelConvention`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.iactionmodelconvention)
 * [`IParameterModelConvention`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.iparametermodelconvention)
 
-Konwencje są stosowane przez dodanie ich do opcji MVC lub przez `Attribute`zaimplementowanie i zastosowanie ich do kontrolerów, akcji lub parametrów akcji (podobnie [`Filters`](xref:mvc/controllers/filters)jak w przypadku). W przeciwieństwie do filtrów, konwencje są wykonywane tylko wtedy, gdy aplikacja jest uruchamiana, a nie jako część każdego żądania.
+Konwencje są stosowane przez dodanie ich do opcji MVC lub przez zaimplementowanie `Attribute` i zastosowanie ich do kontrolerów, akcji lub parametrów akcji (podobnie jak w przypadku [`Filters`](xref:mvc/controllers/filters) ). W przeciwieństwie do filtrów, konwencje są wykonywane tylko wtedy, gdy aplikacja jest uruchamiana, a nie jako część każdego żądania.
 
 ### <a name="sample-modifying-the-applicationmodel"></a>Przykład: modyfikowanie ApplicationModel
 
@@ -94,11 +96,11 @@ Poniższa Konwencja służy do dodawania właściwości do modelu aplikacji.
 
 [!code-csharp[](./application-model/sample/src/AppModelSample/Conventions/ApplicationDescription.cs)]
 
-Konwencje modelu aplikacji są stosowane jako opcje po dodaniu MVC `ConfigureServices` w `Startup`programie w programie.
+Konwencje modelu aplikacji są stosowane jako opcje po dodaniu MVC w `ConfigureServices` programie w programie `Startup` .
 
 [!code-csharp[](./application-model/sample/src/AppModelSample/Startup.cs?name=ConfigureServices&highlight=5)]
 
-Właściwości są dostępne z kolekcji `ActionDescriptor` właściwości w ramach akcji kontrolera:
+Właściwości są dostępne z `ActionDescriptor` kolekcji właściwości w ramach akcji kontrolera:
 
 [!code-csharp[](./application-model/sample/src/AppModelSample/Controllers/AppModelController.cs?name=AppModelController)]
 
@@ -126,7 +128,7 @@ Zastosowanie tego do akcji w ramach kontrolera poprzedniego przykładu pokazuje,
 
 ### <a name="sample-modifying-the-parametermodel"></a>Przykład: modyfikowanie ParameterModel
 
-Do parametrów akcji można zastosować następujące konwencje w celu zmodyfikowania `BindingInfo`ich. Poniższa Konwencja wymaga, aby parametr był parametrem trasy; inne potencjalne źródła powiązań (takie jak wartości ciągu zapytania) są ignorowane.
+Do parametrów akcji można zastosować następujące konwencje w celu zmodyfikowania ich `BindingInfo` . Poniższa Konwencja wymaga, aby parametr był parametrem trasy; inne potencjalne źródła powiązań (takie jak wartości ciągu zapytania) są ignorowane.
 
 [!code-csharp[](./application-model/sample/src/AppModelSample/Conventions/MustBeInRouteParameterModelConvention.cs)]
 
@@ -136,22 +138,22 @@ Ten atrybut może być stosowany do dowolnego parametru akcji:
 
 ### <a name="sample-modifying-the-actionmodel-name"></a>Przykład: modyfikowanie nazwy ActionModel
 
-Poniższa Konwencja modyfikuje `ActionModel` , aby zaktualizować *nazwę* akcji, do której zastosowano. Nowa nazwa jest podawana jako parametr do atrybutu. Ta nowa nazwa jest używana przez Routing, więc wpłynie ona na trasę używaną do osiągnięcia tej metody akcji.
+Poniższa Konwencja modyfikuje, `ActionModel` Aby zaktualizować *nazwę* akcji, do której zastosowano. Nowa nazwa jest podawana jako parametr do atrybutu. Ta nowa nazwa jest używana przez Routing, więc wpłynie ona na trasę używaną do osiągnięcia tej metody akcji.
 
 [!code-csharp[](./application-model/sample/src/AppModelSample/Conventions/CustomActionNameAttribute.cs)]
 
-Ten atrybut jest stosowany do metody akcji w `HomeController`:
+Ten atrybut jest stosowany do metody akcji w `HomeController` :
 
 [!code-csharp[](./application-model/sample/src/AppModelSample/Controllers/HomeController.cs?name=ActionModelConvention&highlight=2)]
 
-Mimo że nazwa metody to `SomeName`, atrybut zastępuje Konwencję MVC o użyciu nazwy metody i zamienia nazwę akcji na. `MyCoolAction` W ten sposób trasa używana do osiągnięcia tej akcji wynosi `/Home/MyCoolAction`.
+Mimo że nazwa metody to `SomeName` , atrybut zastępuje Konwencję MVC o użyciu nazwy metody i zamienia nazwę akcji na `MyCoolAction` . W ten sposób trasa używana do osiągnięcia tej akcji wynosi `/Home/MyCoolAction` .
 
 > [!NOTE]
 > Ten przykład jest zasadniczo taki sam jak użycie wbudowanego atrybutu [ActionName](/dotnet/api/microsoft.aspnetcore.mvc.actionnameattribute) .
 
 ### <a name="sample-custom-routing-convention"></a>Przykład: niestandardowa Konwencja routingu
 
-Można użyć, `IApplicationModelConvention` aby dostosować sposób działania routingu. Na przykład następująca Konwencja obejmuje obszary nazw kontrolerów, które zastępują `.` w przestrzeni nazw `/` w ramach trasy:
+Można użyć, `IApplicationModelConvention` Aby dostosować sposób działania routingu. Na przykład następująca Konwencja obejmuje obszary nazw kontrolerów, które zastępują `.` w przestrzeni nazw `/` w ramach trasy:
 
 [!code-csharp[](./application-model/sample/src/AppModelSample/Conventions/NamespaceRoutingConvention.cs)]
 
@@ -173,7 +175,7 @@ ASP.NET Core MVC używa różnych zestawów Konwencji z ASP.NET Web API 2. Przy 
 > [!NOTE]
 > Dowiedz się więcej o [migracji z interfejsu API sieci Web ASP.NET](xref:migration/webapi).
 
-Aby użyć podkładki zgodności z interfejsem API sieci Web, należy dodać pakiet do projektu, a następnie dodać konwencje do MVC, `AddWebApiConventions` wywołując `Startup`w:
+Aby użyć podkładki zgodności z interfejsem API sieci Web, należy dodać pakiet do projektu, a następnie dodać konwencje do MVC, wywołując `AddWebApiConventions` w `Startup` :
 
 ```csharp
 services.AddMvc().AddWebApiConventions();
@@ -188,25 +190,25 @@ Konwencje dostarczone przez podkładkę są stosowane tylko do części aplikacj
 
 ### <a name="action-conventions"></a>Konwencje akcji
 
-`UseWebApiActionConventionsAttribute` Służy do mapowania metody http na akcje na podstawie ich nazwy (na przykład `Get` mapuje do `HttpGet`). Ma zastosowanie tylko do akcji, które nie używają routingu atrybutów.
+Służy `UseWebApiActionConventionsAttribute` do mapowania metody http na akcje na podstawie ich nazwy (na przykład `Get` mapuje do `HttpGet` ). Ma zastosowanie tylko do akcji, które nie używają routingu atrybutów.
 
 ### <a name="overloading"></a>Przeciążenie
 
-`UseWebApiOverloadingAttribute` Służy do zastosowania `WebApiOverloadingApplicationModelConvention` Konwencji. Ta konwencja dodaje `OverloadActionConstraint` do procesu wyboru akcji, który ogranicza akcje kandydatów do tych, dla których żądanie spełnia wszystkie parametry Nieopcjonalne.
+Służy `UseWebApiOverloadingAttribute` do zastosowania `WebApiOverloadingApplicationModelConvention` Konwencji. Ta konwencja dodaje `OverloadActionConstraint` do procesu wyboru akcji, który ogranicza akcje kandydatów do tych, dla których żądanie spełnia wszystkie parametry Nieopcjonalne.
 
 ### <a name="parameter-conventions"></a>Konwencje parametrów
 
-`UseWebApiParameterConventionsAttribute` Służy do zastosowania konwencji `WebApiParameterConventionsApplicationModelConvention` akcji. Ta Konwencja określa, że proste typy używane jako parametry akcji są powiązane z identyfikatorem URI domyślnie, natomiast typy złożone są powiązane z treści żądania.
+`UseWebApiParameterConventionsAttribute`Służy do zastosowania `WebApiParameterConventionsApplicationModelConvention` Konwencji akcji. Ta Konwencja określa, że proste typy używane jako parametry akcji są powiązane z identyfikatorem URI domyślnie, natomiast typy złożone są powiązane z treści żądania.
 
 ### <a name="routes"></a>Trasy
 
-Kontroluje `UseWebApiRoutesAttribute` , czy Konwencja `WebApiApplicationModelConvention` kontrolera jest stosowana. Po włączeniu ta konwencja jest używana do dodawania obsługi [obszarów](xref:mvc/controllers/areas) do trasy.
+`UseWebApiRoutesAttribute`Kontroluje, czy `WebApiApplicationModelConvention` Konwencja kontrolera jest stosowana. Po włączeniu ta konwencja jest używana do dodawania obsługi [obszarów](xref:mvc/controllers/areas) do trasy.
 
-Oprócz zestawu Konwencji pakiet zgodności zawiera klasę `System.Web.Http.ApiController` bazową, która zastępuje ją dostarczoną przez internetowy interfejs API. Dzięki temu kontrolery napisane dla interfejsu API sieci Web i dziedziczą z `ApiController` programu, aby działały tak, jak zostały zaprojektowane, podczas uruchamiania na ASP.NET Core MVC. Wszystkie `UseWebApi*` atrybuty wymienione wcześniej są stosowane do klasy kontrolera podstawowego. `ApiController` Uwidacznia właściwości, metody i typy wyników, które są zgodne z tymi znajdującymi się w INTERNETowym interfejsie API.
+Oprócz zestawu Konwencji pakiet zgodności zawiera `System.Web.Http.ApiController` klasę bazową, która zastępuje ją dostarczoną przez internetowy interfejs API. Dzięki temu kontrolery napisane dla interfejsu API sieci Web i dziedziczą z programu `ApiController` , aby działały tak, jak zostały zaprojektowane, podczas uruchamiania na ASP.NET Core MVC. Wszystkie `UseWebApi*` atrybuty wymienione wcześniej są stosowane do klasy kontrolera podstawowego. `ApiController`Uwidacznia właściwości, metody i typy wyników, które są zgodne z tymi znajdującymi się w internetowym interfejsie API.
 
 ## <a name="using-apiexplorer-to-document-your-app"></a>Dokumentowanie aplikacji przy użyciu ApiExplorer
 
-Model aplikacji udostępnia [`ApiExplorer`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.apiexplorermodel) właściwość na każdym poziomie, która może służyć do przechodzenia przez strukturę aplikacji. Może to służyć do [generowania stron pomocy dla interfejsów API sieci Web przy użyciu narzędzi, takich jak Swagger](xref:tutorials/web-api-help-pages-using-swagger). `ApiExplorer` Właściwość uwidacznia `IsVisible` właściwość, którą można ustawić, aby określić, które części modelu aplikacji mają być uwidocznione. To ustawienie można skonfigurować przy użyciu konwencji:
+Model aplikacji udostępnia [`ApiExplorer`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.apiexplorermodel) Właściwość na każdym poziomie, która może służyć do przechodzenia przez strukturę aplikacji. Może to służyć do [generowania stron pomocy dla interfejsów API sieci Web przy użyciu narzędzi, takich jak Swagger](xref:tutorials/web-api-help-pages-using-swagger). `ApiExplorer`Właściwość uwidacznia `IsVisible` Właściwość, którą można ustawić, aby określić, które części modelu aplikacji mają być uwidocznione. To ustawienie można skonfigurować przy użyciu konwencji:
 
 [!code-csharp[](./application-model/sample/src/AppModelSample/Conventions/EnableApiExplorerApplicationConvention.cs)]
 

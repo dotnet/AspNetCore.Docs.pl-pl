@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 04/12/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: signalr/configuration
-ms.openlocfilehash: 809bdc777b6307314a7bcde82ab5e0c6888db99b
-ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
+ms.openlocfilehash: c711c2163908e3fdd20e3bb497f333ebd495d921
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85074463"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406839"
 ---
 # <a name="aspnet-core-signalr-configuration"></a>SignalRKonfiguracja ASP.NET Core
 

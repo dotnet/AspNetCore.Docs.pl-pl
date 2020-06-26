@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 10/14/2016
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/data-protection/configuration/default-settings
-ms.openlocfilehash: 1db5177230fd4076af080e208f094ce4d6537c62
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: f758c814280ee09a240d99cc59cdab2dc4590df6
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777452"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407099"
 ---
 # <a name="data-protection-key-management-and-lifetime-in-aspnet-core"></a>Zarządzanie kluczami i okres istnienia ochrony danych w ASP.NET Core
 
@@ -33,18 +35,18 @@ Aplikacja próbuje wykryć swoje środowisko operacyjne i samodzielnie obsługiw
 
 1. Jeśli profil użytkownika jest dostępny, klucze są utrwalane w folderze *%LocalAppData%\ASP.NET\DataProtection-Keys* . Jeśli system operacyjny jest Windows, klucze są szyfrowane przy użyciu funkcji DPAPI.
 
-   [Atrybut setProfileEnvironment](/iis/configuration/system.applicationhost/applicationpools/add/processmodel#configuration) puli aplikacji również musi być włączony. Wartość domyślna `setProfileEnvironment` to `true`. W niektórych scenariuszach (na przykład system operacyjny Windows) `setProfileEnvironment` jest ustawiony na. `false` Jeśli klucze nie są przechowywane w katalogu profilu użytkownika zgodnie z oczekiwaniami:
+   [Atrybut setProfileEnvironment](/iis/configuration/system.applicationhost/applicationpools/add/processmodel#configuration) puli aplikacji również musi być włączony. Wartość domyślna `setProfileEnvironment` to `true` . W niektórych scenariuszach (na przykład system operacyjny Windows) `setProfileEnvironment` jest ustawiony na `false` . Jeśli klucze nie są przechowywane w katalogu profilu użytkownika zgodnie z oczekiwaniami:
 
    1. Przejdź do folderu *% windir%/system32/inetsrv/config*
-   1. Otwórz plik *ApplicationHost. config* .
+   1. Otwórz plik *applicationHost.config* .
    1. Znajdź `<system.applicationHost><applicationPools><applicationPoolDefaults><processModel>` element.
-   1. Upewnij się, `setProfileEnvironment` że atrybut nie istnieje, który jest wartością domyślną `true`, lub jawnie ustaw wartość atrybutu na `true`.
+   1. Upewnij się, że `setProfileEnvironment` atrybut nie istnieje, który jest wartością domyślną `true` , lub jawnie ustaw wartość atrybutu na `true` .
 
 1. Jeśli aplikacja jest hostowana w usługach IIS, klucze są utrwalane w rejestrze HKLM w specjalnym kluczu rejestru, który jest ACLed tylko dla konta procesu roboczego. Klucze są szyfrowane przy użyciu funkcji DPAPI.
 
 1. Jeśli żaden z tych warunków nie jest zgodny, klucze nie są utrwalane poza bieżącym procesem. Gdy proces zostanie zamknięty, wszystkie wygenerowane klucze zostaną utracone.
 
-Deweloper ma zawsze pełną kontrolę i może przesłonić, w jaki sposób i gdzie są przechowywane klucze. Pierwsze trzy opcje powinny zapewnić dobre wartości domyślne dla większości aplikacji, podobnie jak procedury autogeneracji ASP.NET ** \<machineKey>** działały w przeszłości. Końcowa opcja powrotu jest jedynym scenariuszem, który wymaga, aby programista określił [konfigurację](xref:security/data-protection/configuration/overview) z góry, jeśli chcą, aby klucze były trwałe, ale ta wartość rezerwowa występuje tylko w rzadkich sytuacjach.
+Deweloper ma zawsze pełną kontrolę i może przesłonić, w jaki sposób i gdzie są przechowywane klucze. Pierwsze trzy opcje powinny zapewnić dobre wartości domyślne dla większości aplikacji, podobnie jak **\<machineKey>** procedury autogeneracji ASP.NET działały w przeszłości. Końcowa opcja powrotu jest jedynym scenariuszem, który wymaga, aby programista określił [konfigurację](xref:security/data-protection/configuration/overview) z góry, jeśli chcą, aby klucze były trwałe, ale ta wartość rezerwowa występuje tylko w rzadkich sytuacjach.
 
 W przypadku hostowania w kontenerze platformy Docker klucze powinny być utrwalane w folderze, który jest woluminem platformy Docker (udostępnionym woluminem lub woluminem zainstalowanym przez hosta, który utrzymuje się poza okresem istnienia kontenera) lub dostawcą zewnętrznym, takim jak [Azure Key Vault](https://azure.microsoft.com/services/key-vault/) lub [Redis](https://redis.io/). Dostawca zewnętrzny jest również przydatny w scenariuszach farmy sieci Web, jeśli aplikacje nie mogą uzyskać dostępu do udostępnionego woluminu sieciowego (zobacz [PersistKeysToFileSystem](xref:security/data-protection/configuration/overview#persistkeystofilesystem) , aby uzyskać więcej informacji).
 

@@ -7,17 +7,19 @@ ms.custom: mvc, seodec18
 ms.date: 02/12/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: fundamentals/choose-between-aspnet-and-aspnetcore
-ms.openlocfilehash: 1fb81d5a54cf332ca473af8fbe1841813a127be7
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 73495ea851cdfe5d3588b347e75f0af6adacc02e
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775885"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404941"
 ---
 # <a name="choose-between-aspnet-4x-and-aspnet-core"></a>Wybierz między ASP.NET 4. x i ASP.NET Core
 
@@ -40,7 +42,7 @@ Poniższa tabela zawiera porównanie ASP.NET Core z ASP.NET 4. x.
 | ASP.NET Core | ASP.NET 4.x |
 |---|---|
 |Kompilacja dla systemu Windows, macOS lub Linux|Kompiluj dla systemu Windows|
-|Strony to zalecane podejście do tworzenia interfejsu użytkownika sieci Web w ASP.NET Core 2. x. [ Razor ](xref:razor-pages/index) Zobacz również [MVC](xref:mvc/overview), [Web API](xref:tutorials/first-web-api)i [SignalR](xref:signalr/introduction).|Korzystanie z [formularzy sieci Web](/aspnet/web-forms), [SignalR](/aspnet/signalr), [MVC](/aspnet/mvc), internetowego [interfejsu API](/aspnet/web-api/), elementów [webhook](/aspnet/webhooks/)lub [stron sieci Web](/aspnet/web-pages)|
+|[ Razor Strony](xref:razor-pages/index) to zalecane podejście do tworzenia interfejsu użytkownika sieci Web w ASP.NET Core 2. x. Zobacz również [MVC](xref:mvc/overview), [Web API](xref:tutorials/first-web-api)i [SignalR](xref:signalr/introduction) .|Korzystanie z [formularzy sieci Web](/aspnet/web-forms), [SignalR](/aspnet/signalr) , [MVC](/aspnet/mvc), internetowego [interfejsu API](/aspnet/web-api/), elementów [webhook](/aspnet/webhooks/)lub [stron sieci Web](/aspnet/web-pages)|
 |Wiele wersji na maszynę|Jedna wersja na maszynę|
 |Programowanie za pomocą [programu Visual Studio](https://visualstudio.microsoft.com/vs/), [Visual Studio dla komputerów Mac](https://visualstudio.microsoft.com/vs/mac/)lub [Visual Studio Code](https://code.visualstudio.com/) przy użyciu języka C# lub F #|Programowanie za pomocą [programu Visual Studio](https://visualstudio.microsoft.com/vs/) przy użyciu języka C#, VB lub F #|
 |Wyższa wydajność niż ASP.NET 4. x|Dobra wydajność|

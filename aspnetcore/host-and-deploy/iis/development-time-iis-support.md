@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: host-and-deploy/iis/development-time-iis-support
-ms.openlocfilehash: 06c215156cdfa9bc1ae6ac2eb21a3f739a309bed
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: d922b2eb4d00a252b3e7da2f00de8b4571359b20
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84106783"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406436"
 ---
 # <a name="development-time-iis-support-in-visual-studio-for-aspnet-core"></a>Obsługa usług IIS w czasie opracowywania w programie Visual Studio dla platformy ASP.NET Core
 
@@ -91,7 +93,7 @@ Utwórz nowy profil uruchamiania, aby dodać obsługę usług IIS w czasie proje
 1. W przypadku ustawienia **model hostingu** w programie Visual Studio 2019 lub nowszym wybierz pozycję **domyślne** , aby użyć modelu hostingu używanego przez projekt. Jeśli projekt ustawia `<AspNetCoreHostingModel>` Właściwość w pliku projektu, używana jest wartość właściwości ( `InProcess` lub `OutOfProcess` ). Jeśli właściwość nie jest obecna, używany jest domyślny model hostingu aplikacji, który jest w procesie. Jeśli aplikacja wymaga jawnego ustawienia modelu hostingu innego niż normalny model hostingu aplikacji, należy ustawić **model hostingu** na albo `In Process` `Out Of Process` w razie potrzeby.
 1. Zapisz profil.
 
-Gdy nie korzystasz z programu Visual Studio, ręcznie Dodaj profil uruchamiania do pliku [profilu launchsettings. JSON](https://json.schemastore.org/launchsettings) w folderze *Properties* . Poniższy przykład konfiguruje profil do korzystania z protokołu HTTPS:
+Gdy nie korzystasz z programu Visual Studio, ręcznie Dodaj profil uruchamiania do [launchSettings.js](https://json.schemastore.org/launchsettings) w pliku w folderze *Właściwości* . Poniższy przykład konfiguruje profil do korzystania z protokołu HTTPS:
 
 ```json
 {
@@ -206,7 +208,7 @@ Utwórz nowy profil uruchamiania, aby dodać obsługę usług IIS w czasie proje
 1. W przypadku ustawienia **model hostingu** w programie Visual Studio 2019 lub nowszym wybierz pozycję **domyślne** , aby użyć modelu hostingu używanego przez projekt. Jeśli projekt ustawia `<AspNetCoreHostingModel>` Właściwość w pliku projektu, używana jest wartość właściwości ( `InProcess` lub `OutOfProcess` ). Jeśli właściwość nie jest obecna, używany jest domyślny model hostingu aplikacji, który jest poza procesem. Jeśli aplikacja wymaga jawnego ustawienia modelu hostingu innego niż normalny model hostingu aplikacji, należy ustawić **model hostingu** na albo `In Process` `Out Of Process` w razie potrzeby.
 1. Zapisz profil.
 
-Gdy nie korzystasz z programu Visual Studio, ręcznie Dodaj profil uruchamiania do pliku [profilu launchsettings. JSON](https://json.schemastore.org/launchsettings) w folderze *Properties* . Poniższy przykład konfiguruje profil do korzystania z protokołu HTTPS:
+Gdy nie korzystasz z programu Visual Studio, ręcznie Dodaj profil uruchamiania do [launchSettings.js](https://json.schemastore.org/launchsettings) w pliku w folderze *Właściwości* . Poniższy przykład konfiguruje profil do korzystania z protokołu HTTPS:
 
 ```json
 {

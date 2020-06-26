@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 10/14/2016
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/data-protection/configuration/machine-wide-policy
-ms.openlocfilehash: 84f54b37dfff3112ea5ca84f931103624cfde90a
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 1bde6d90a52ab8873777b5320540251170eaade6
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776841"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404889"
 ---
 # <a name="data-protection-machine-wide-policy-support-in-aspnet-core"></a>Obsługa zasad na całym komputerze ochrony danych w ASP.NET Core
 

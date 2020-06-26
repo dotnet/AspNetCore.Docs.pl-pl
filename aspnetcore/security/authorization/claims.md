@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 10/14/2016
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authorization/claims
-ms.openlocfilehash: 41e19896e9c43ca67aa8b1af1c6c88c9c9c20373
-ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
+ms.openlocfilehash: 404e26f0fb5e71dbc22b1c08a2f8caf8461ad7e1
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85074489"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406384"
 ---
 # <a name="claims-based-authorization-in-aspnet-core"></a>Autoryzacja oparta na oświadczeniach w ASP.NET Core
 
@@ -152,7 +154,7 @@ Jeśli wartość oświadczenia nie jest pojedynczą wartością lub wymagana jes
 
 ## <a name="multiple-policy-evaluation"></a>Obliczanie wielu zasad
 
-W przypadku zastosowania wielu zasad do kontrolera lub akcji wszystkie zasady muszą zostać przekazane przed udzieleniem dostępu. Przykład:
+W przypadku zastosowania wielu zasad do kontrolera lub akcji wszystkie zasady muszą zostać przekazane przed udzieleniem dostępu. Na przykład:
 
 ```csharp
 [Authorize(Policy = "EmployeeOnly")]

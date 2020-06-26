@@ -6,23 +6,25 @@ ms.author: riande
 ms.date: 12/11/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/individual
-ms.openlocfilehash: 26f53b6452e307bbd0816c1a3604f38b04c6af15
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 6d3743fc31c29bed5075ac29381aea51a64a908c
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82768653"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406254"
 ---
 # <a name="articles-based-on-aspnet-core-projects-created-with-individual-user-accounts"></a>Artykuły oparte na ASP.NET Core projektach utworzonych przy użyciu poszczególnych kont użytkowników
 
-ASP.NET Core tożsamość jest dołączona do szablonów projektu w programie Visual Studio z opcją "indywidualne konta użytkowników".
+ASP.NET Core Identity jest zawarty w szablonach projektu w programie Visual Studio z opcją "indywidualne konta użytkowników".
 
-Szablony uwierzytelniania są dostępne w interfejs wiersza polecenia platformy .NET Core z `-au Individual`:
+Szablony uwierzytelniania są dostępne w interfejs wiersza polecenia platformy .NET Core z `-au Individual` :
 
 ::: moniker range=">= aspnetcore-2.1"
 
@@ -72,8 +74,8 @@ W poniższej tabeli przedstawiono opcje uwierzytelniania dostępne dla nowych ap
 | Brak            |  Brak uwierzytelniania | | 
 | Szczegółowe      |  Uwierzytelnianie indywidualne | <xref:security/authentication/identity>
 | IndividualB2C   |  Uwierzytelnianie indywidualne hostowane w chmurze za pomocą Azure AD B2C | [Funkcje B2C platformy Azure](/azure/active-directory-b2c/) |
-| SingleOrg       |  Uwierzytelnianie organizacyjne dla pojedynczej dzierżawy | [Azure AD](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp) |
-| MultiOrg        |  Uwierzytelnianie organizacyjne dla wielu dzierżawców | [Azure AD](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp) |
+| SingleOrg       |  Uwierzytelnianie organizacyjne dla pojedynczej dzierżawy | [Usługa Azure AD](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp) |
+| MultiOrg        |  Uwierzytelnianie organizacyjne dla wielu dzierżawców | [Usługa Azure AD](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp) |
 | Windows         |  Uwierzytelnianie systemu Windows | [Uwierzytelnianie systemu Windows](xref:security/authentication/windowsauth)
 
 ## <a name="visual-studio-new-webapp-authentication-options"></a>Opcje uwierzytelniania programu Visual Studio New webapp
@@ -85,11 +87,11 @@ W poniższej tabeli przedstawiono opcje uwierzytelniania dostępne podczas tworz
 | Brak            |  Brak uwierzytelniania | | 
 | Konta użytkowników indywidualnych/konta użytkowników sklepu w aplikacji |  Uwierzytelnianie indywidualne | <xref:security/authentication/identity> |
 | Indywidualne konta użytkowników/łączenie z istniejącym magazynem użytkowników w chmurze |  Uwierzytelnianie indywidualne hostowane w chmurze za pomocą Azure AD B2C | [Funkcje B2C platformy Azure](/azure/active-directory-b2c/) |
-| Chmura służbowa/jedna organizacja  |  Uwierzytelnianie organizacyjne dla pojedynczej dzierżawy | [Azure AD](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp) |
-| Chmura służbowa/usługa szkoły i wiele organizacji |  Uwierzytelnianie organizacyjne dla wielu dzierżawców | [Azure AD](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp) |
+| Chmura służbowa/jedna organizacja  |  Uwierzytelnianie organizacyjne dla pojedynczej dzierżawy | [Usługa Azure AD](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp) |
+| Chmura służbowa/usługa szkoły i wiele organizacji |  Uwierzytelnianie organizacyjne dla wielu dzierżawców | [Usługa Azure AD](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp) |
 | Windows         |  Uwierzytelnianie systemu Windows | [Uwierzytelnianie systemu Windows](xref:security/authentication/windowsauth)
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 W poniższych artykułach pokazano, jak używać kodu wygenerowanego w szablonach ASP.NET Core, które używają poszczególnych kont użytkowników:
 

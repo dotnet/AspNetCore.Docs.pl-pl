@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 07/22/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: data/ef-rp/update-related-data
-ms.openlocfilehash: d86e57d50c414e4baabd00ca9675aa66266342ca
-ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
+ms.openlocfilehash: b084404a7fdd8b2fc18c407bd11705ccd1c496c1
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84652598"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406306"
 ---
 # <a name="part-7-razor-pages-with-ef-core-in-aspnet-core---update-related-data"></a>Część 7 Razor strony z EF Core w programie ASP.NET Core — aktualizacja powiązanych danych
 

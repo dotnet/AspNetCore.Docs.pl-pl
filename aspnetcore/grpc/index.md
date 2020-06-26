@@ -1,11 +1,25 @@
 ---
-title: Author: Description: monikerRange: MS. Author: MS. Date: No-Loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRIdentyfikator UID: 
-
+title: Wprowadzenie do gRPC na platformie .NET Core
+author: juntaoluo
+description: Dowiedz się więcej o usługach gRPC Services z serwerem Kestrel i stosem ASP.NET Core.
+monikerRange: '>= aspnetcore-3.0'
+ms.author: johluo
+ms.date: 09/20/2019
+no-loc:
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: grpc/index
+ms.openlocfilehash: 9f3a2041059c1d890ce72ce5f2a88151253d9bd9
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.translationtype: MT
+ms.contentlocale: pl-PL
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404187"
 ---
 # <a name="introduction-to-grpc-on-net-core"></a>Wprowadzenie do gRPC na platformie .NET Core
 
@@ -13,12 +27,12 @@ Przez [John Luo](https://github.com/juntaoluo) i [Kuba Kowalski-króla](https://
 
 [gRPC](https://grpc.io/docs/guides/) to język niezależny od i środowisko zdalnego wywołania procedury (RPC) o wysokiej wydajności.
 
-Główne zalety gRPC są następujące:
-* Nowoczesne, wysoce wydajne i uproszczone środowisko RPC.
-* Tworzenie aplikacji interfejsu API w pierwszej kolejności, domyślnie przy użyciu buforów protokołu, dzięki czemu można wdrażać implementacje języka niezależny od.
-* Narzędzia dostępne dla wielu języków do generowania serwerów i klientów z jednoznacznie określonymi typami.
-* Obsługuje wywołania przesyłania strumieniowego klienta, serwera i dwukierunkowego.
-* Zredukowanie użycia sieci przy użyciu serializacji binarnej protobuf.
+Główne zalety struktury gRPC są następujące:
+* Nowoczesna, wysoce wydajna i uproszczona struktura RPC.
+* Tworzenie interfejsu API za pomocą podejścia „najpierw kontrakt” z domyślnym użyciem buforów protokołu, co umożliwia implementacje niezależne od języka.
+* Dostępne dla wielu języków narzędzia do generowania silnie typizowanych serwerów i klientów.
+* Obsługa wywołania przesyłania strumieniowego klienta, serwera i dwukierunkowego.
+* Zredukowane użycie sieci dzięki serializacji binarnej Protobuf.
 
 Te korzyści sprawiają, że gRPC doskonale nadaje się do:
 * Lekkie mikrousługi, w których wydajność jest krytyczna.

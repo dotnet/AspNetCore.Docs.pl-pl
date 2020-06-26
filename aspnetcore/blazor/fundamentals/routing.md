@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/fundamentals/routing
-ms.openlocfilehash: fde30109395065014433bebde52a9eb22458c451
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
+ms.openlocfilehash: ba85cc901127725d674b699638fef5fe363081a8
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85242748"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402796"
 ---
 # <a name="aspnet-core-blazor-routing"></a>BlazorRouting ASP.NET Core
 
@@ -28,11 +30,11 @@ Dowiedz się, jak kierować żądania i jak używać <xref:Microsoft.AspNetCore.
 
 ## <a name="aspnet-core-endpoint-routing-integration"></a>ASP.NET Core integracja z routingiem punktu końcowego
 
-BlazorSerwer jest zintegrowany z [ASP.NET Core routingiem punktów końcowych](xref:fundamentals/routing). Aplikacja ASP.NET Core jest skonfigurowana do akceptowania połączeń przychodzących dla składników interaktywnych za pomocą <xref:Microsoft.AspNetCore.Builder.ComponentEndpointRouteBuilderExtensions.MapBlazorHub%2A> programu w programie `Startup.Configure` :
+Blazor ServerProgram jest zintegrowany z [ASP.NET Core routingiem punktów końcowych](xref:fundamentals/routing). Aplikacja ASP.NET Core jest skonfigurowana do akceptowania połączeń przychodzących dla składników interaktywnych za pomocą <xref:Microsoft.AspNetCore.Builder.ComponentEndpointRouteBuilderExtensions.MapBlazorHub%2A> programu w programie `Startup.Configure` :
 
 [!code-csharp[](routing/samples_snapshot/3.x/Startup.cs?highlight=5)]
 
-Najbardziej typową konfiguracją jest kierowanie wszystkich żądań do Razor strony, które pełnią rolę hosta dla części aplikacji serwerowej po stronie serwera Blazor . Zgodnie z Konwencją strona *hosta* ma zwykle nazwę `_Host.cshtml` . Trasa określona w pliku hosta jest nazywana *trasą rezerwową* , ponieważ działa z niskim priorytetem w dopasowaniu tras. Trasa rezerwowa jest brana pod uwagę, gdy inne trasy nie są zgodne. Dzięki temu aplikacja może korzystać z innych kontrolerów i stron bez zakłócania działania Blazor aplikacji serwera.
+Najbardziej typową konfiguracją jest kierowanie wszystkich żądań do Razor strony, które pełnią rolę hosta dla części aplikacji po stronie serwera Blazor Server . Zgodnie z Konwencją strona *hosta* ma zwykle nazwę `_Host.cshtml` . Trasa określona w pliku hosta jest nazywana *trasą rezerwową* , ponieważ działa z niskim priorytetem w dopasowaniu tras. Trasa rezerwowa jest brana pod uwagę, gdy inne trasy nie są zgodne. Dzięki temu aplikacja może korzystać z innych kontrolerów i stron bez zakłócania działania Blazor Server aplikacji.
 
 ## <a name="route-templates"></a>Szablony tras
 
@@ -68,7 +70,7 @@ Do składnika można zastosować wiele szablonów tras. Poniższy składnik odpo
 ```
 
 > [!IMPORTANT]
-> Aby adresy URL zostały poprawnie rozpoznane, aplikacja musi zawierać `<base>` tag w `wwwroot/index.html` pliku ( Blazor webassembly) lub `Pages/_Host.cshtml` pliku ( Blazor serwer) z ścieżką bazową aplikacji określoną w `href` atrybucie ( `<base href="/">` ). Aby uzyskać więcej informacji, zobacz <xref:blazor/host-and-deploy/index#app-base-path>.
+> Aby adresy URL zostały poprawnie rozpoznane, aplikacja musi zawierać `<base>` tag w `wwwroot/index.html` pliku ( Blazor WebAssembly ) lub `Pages/_Host.cshtml` pliku ( Blazor Server ) z ścieżką bazową aplikacji określoną w `href` atrybucie ( `<base href="/">` ). Aby uzyskać więcej informacji, zobacz <xref:blazor/host-and-deploy/index#app-base-path>.
 
 ## <a name="provide-custom-content-when-content-isnt-found"></a>Podaj zawartość niestandardową, jeśli nie można odnaleźć zawartości
 
@@ -154,7 +156,7 @@ Dostępne są ograniczenia trasy podane w poniższej tabeli. W przypadku ogranic
 
 ### <a name="routing-with-urls-that-contain-dots"></a>Routing z adresami URL zawierającymi kropki
 
-W obszarze Blazor aplikacje serwera domyślną trasą w programie `_Host.cshtml` jest `/` ( `@page "/"` ). Adres URL żądania, który zawiera kropkę ( `.` ) nie pasuje do trasy domyślnej, ponieważ adres URL wygląda na żądanie pliku. BlazorAplikacja zwraca *404 — nie odnaleziono* odpowiedzi dla pliku statycznego, który nie istnieje. Aby użyć tras zawierających kropkę, skonfiguruj `_Host.cshtml` przy użyciu następującego szablonu trasy:
+W obszarze Blazor Server aplikacje domyślna trasa w `_Host.cshtml` to `/` ( `@page "/"` ). Adres URL żądania, który zawiera kropkę ( `.` ) nie pasuje do trasy domyślnej, ponieważ adres URL wygląda na żądanie pliku. BlazorAplikacja zwraca *404 — nie odnaleziono* odpowiedzi dla pliku statycznego, który nie istnieje. Aby użyć tras zawierających kropkę, skonfiguruj `_Host.cshtml` przy użyciu następującego szablonu trasy:
 
 ```cshtml
 @page "/{**path}"
@@ -204,7 +206,7 @@ Służy <xref:Microsoft.AspNetCore.Components.NavigationManager> do pracy z iden
 | Członek | Opis |
 | ------ | ----------- |
 | <xref:Microsoft.AspNetCore.Components.NavigationManager.Uri> | Pobiera bieżący bezwzględny identyfikator URI. |
-| <xref:Microsoft.AspNetCore.Components.NavigationManager.BaseUri> | Pobiera podstawowy identyfikator URI (z końcowym ukośnikiem), który można dołączać do względnych ścieżek URI w celu utworzenia bezwzględnego identyfikatora URI. Zazwyczaj <xref:Microsoft.AspNetCore.Components.NavigationManager.BaseUri> odpowiada `href` atrybutowi `<base>` elementu dokumentu w `wwwroot/index.html` ( Blazor webassembly) lub `Pages/_Host.cshtml` ( Blazor serwer). |
+| <xref:Microsoft.AspNetCore.Components.NavigationManager.BaseUri> | Pobiera podstawowy identyfikator URI (z końcowym ukośnikiem), który można dołączać do względnych ścieżek URI w celu utworzenia bezwzględnego identyfikatora URI. Zazwyczaj <xref:Microsoft.AspNetCore.Components.NavigationManager.BaseUri> odpowiada `href` atrybutowi `<base>` elementu dokumentu w `wwwroot/index.html` ( Blazor WebAssembly ) lub `Pages/_Host.cshtml` ( Blazor Server ). |
 | <xref:Microsoft.AspNetCore.Components.NavigationManager.NavigateTo%2A> | Przechodzi do określonego identyfikatora URI. Jeśli `forceLoad` jest `true` :<ul><li>Routing po stronie klienta jest pomijany.</li><li>W przeglądarce wymuszone jest załadowanie nowej strony z serwera, niezależnie od tego, czy identyfikator URI jest zwykle obsługiwany przez router po stronie klienta.</li></ul> |
 | <xref:Microsoft.AspNetCore.Components.NavigationManager.LocationChanged> | Zdarzenie, które jest wyzwalane po zmianie lokalizacji nawigacji. |
 | <xref:Microsoft.AspNetCore.Components.NavigationManager.ToAbsoluteUri%2A> | Konwertuje względny identyfikator URI na bezwzględny identyfikator URI. |

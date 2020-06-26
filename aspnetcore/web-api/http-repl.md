@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 05/20/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: web-api/http-repl
-ms.openlocfilehash: 4c42ad56bbdb7b66824b290cd118903cbe4311e8
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: ead745ae8843173bb25b94672005cc6ce295db2e
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84452216"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85403381"
 ---
 # <a name="test-web-apis-with-the-http-repl"></a>Testowanie interfejsów API sieci Web przy użyciu protokołu HTTP REPL
 
@@ -140,7 +142,7 @@ Połącz się z interfejsem API sieci Web, uruchamiając następujące polecenie
 httprepl <ROOT URI>
 ```
 
-`<ROOT URI>`jest podstawowym identyfikatorem URI dla internetowego interfejsu API. Przykład:
+`<ROOT URI>`jest podstawowym identyfikatorem URI dla internetowego interfejsu API. Na przykład:
 
 ```console
 httprepl https://localhost:5001
@@ -152,7 +154,7 @@ Alternatywnie Uruchom następujące polecenie w dowolnym momencie podczas dział
 connect <ROOT URI>
 ```
 
-Przykład:
+Na przykład:
 
 ```console
 (Disconnected)~ connect https://localhost:5001
@@ -166,7 +168,7 @@ Powyższe polecenie Connect podejmie próbę automatycznego znalezienia dokument
 connect <ROOT URI> --swagger <SWAGGER URI>
 ```
 
-Przykład:
+Na przykład:
 
 ```console
 (Disconnected)~ connect https://localhost:5001 --swagger /swagger/v1/swagger.json
@@ -205,7 +207,7 @@ https://localhost:5001/fruits~ ls
 https://localhost:5001/fruits~
 ```
 
-Alternatywnie można uruchomić `ui` polecenie, aby otworzyć stronę interfejsu użytkownika programu Swagger interfejsu API sieci Web w przeglądarce. Przykład:
+Alternatywnie można uruchomić `ui` polecenie, aby otworzyć stronę interfejsu użytkownika programu Swagger interfejsu API sieci Web w przeglądarce. Na przykład:
 
 ```console
 https://localhost:5001/~ ui
@@ -249,7 +251,7 @@ Plik *. httpreplprefs* jest ładowany podczas uruchamiania i nie jest monitorowa
 
 ### <a name="view-the-settings"></a>Wyświetl ustawienia
 
-Aby wyświetlić dostępne ustawienia, uruchom `pref get` polecenie. Przykład:
+Aby wyświetlić dostępne ustawienia, uruchom `pref get` polecenie. Na przykład:
 
 ```console
 https://localhost:5001/~ pref get
@@ -287,7 +289,7 @@ Jeśli określone klucze kolorów nie są ustawione, brane są więcej kluczy og
 
 ### <a name="set-indentation-size"></a>Ustaw rozmiar wcięcia
 
-Dostosowanie rozmiaru wcięcia odpowiedzi jest obecnie obsługiwane tylko w przypadku formatu JSON. Domyślny rozmiar to dwie spacje. Przykład:
+Dostosowanie rozmiaru wcięcia odpowiedzi jest obecnie obsługiwane tylko w przypadku formatu JSON. Domyślny rozmiar to dwie spacje. Na przykład:
 
 ```json
 [
@@ -371,12 +373,12 @@ pref set editor.command.default.arguments "--disable-extensions --new-window"
 
 Domyślnie REPL HTTP ma zestaw ścieżek względnych, których używa do znajdowania dokumentu struktury Swagger podczas wykonywania `connect` polecenia bez `--swagger` opcji. Ścieżki względne są łączone z ścieżkami głównymi i podstawowymi określonymi w `connect` poleceniu. Domyślne ścieżki względne to:
 
-- *plik Swagger. JSON*
-- *Swagger/V1/Swagger. JSON*
-- */swagger.json*
-- */swagger/v1/swagger.json*
+- *swagger.jsna*
+- *Struktura Swagger/V1/swagger.jswłączona*
+- */swagger.jsna*
+- */Swagger/V1/swagger.jsna*
 
-Aby użyć innego zestawu ścieżek wyszukiwania w środowisku, ustaw `swagger.searchPaths` preferencję. Wartość musi być rozdzielaną potokami listą ścieżek względnych. Przykład:
+Aby użyć innego zestawu ścieżek wyszukiwania w środowisku, ustaw `swagger.searchPaths` preferencję. Wartość musi być rozdzielaną potokami listą ścieżek względnych. Na przykład:
 
 ```console
 pref set swagger.searchPaths "swagger/v2/swagger.json|swagger/v3/swagger.json"
@@ -496,7 +498,7 @@ Aby wydać żądanie HTTP POST:
     https://localhost:5001/people~ post -h Content-Type=application/json
     ```
 
-    W poprzednim poleceniu `Content-Type` nagłówek żądania HTTP jest ustawiany w taki sposób, aby wskazywał typ nośnika treści żądania JSON. Domyślny edytor tekstu otwiera plik *. tmp* z szablonem JSON reprezentującym treść żądania HTTP. Przykład:
+    W poprzednim poleceniu `Content-Type` nagłówek żądania HTTP jest ustawiany w taki sposób, aby wskazywał typ nośnika treści żądania JSON. Domyślny edytor tekstu otwiera plik *. tmp* z szablonem JSON reprezentującym treść żądania HTTP. Na przykład:
 
     ```json
     {
@@ -592,7 +594,7 @@ Aby wydać żądanie HTTP PUT:
     https://localhost:5001/fruits~ put 2 -h Content-Type=application/json
     ```
 
-    W poprzednim poleceniu `Content-Type` nagłówek żądania HTTP jest ustawiany w taki sposób, aby wskazywał typ nośnika treści żądania JSON. Domyślny edytor tekstu otwiera plik *. tmp* z szablonem JSON reprezentującym treść żądania HTTP. Przykład:
+    W poprzednim poleceniu `Content-Type` nagłówek żądania HTTP jest ustawiany w taki sposób, aby wskazywał typ nośnika treści żądania JSON. Domyślny edytor tekstu otwiera plik *. tmp* z szablonem JSON reprezentującym treść żądania HTTP. Na przykład:
 
     ```json
     {
@@ -798,7 +800,7 @@ Parametr trasy, jeśli istnieje, oczekiwany przez skojarzoną metodę akcji kont
 
 Aby ustawić nagłówek żądania HTTP, należy użyć jednej z następujących metod:
 
-* Ustaw wartość inline z żądaniem HTTP. Przykład:
+* Ustaw wartość inline z żądaniem HTTP. Na przykład:
 
     ```console
     https://localhost:5001/people~ post -h Content-Type=application/json
@@ -806,13 +808,13 @@ Aby ustawić nagłówek żądania HTTP, należy użyć jednej z następujących 
     
     W przypadku wcześniejszego podejścia każdy unikatowy nagłówek żądania HTTP wymaga własnej `-h` opcji.
 
-* Ustaw przed wysłaniem żądania HTTP. Przykład:
+* Ustaw przed wysłaniem żądania HTTP. Na przykład:
 
     ```console
     https://localhost:5001/people~ set header Content-Type application/json
     ```
     
-    Podczas ustawiania nagłówka przed wysłaniem żądania nagłówek pozostaje ustawiony na czas trwania sesji powłoki poleceń. Aby wyczyścić nagłówek, podaj wartość pustą. Przykład:
+    Podczas ustawiania nagłówka przed wysłaniem żądania nagłówek pozostaje ustawiony na czas trwania sesji powłoki poleceń. Aby wyczyścić nagłówek, podaj wartość pustą. Na przykład:
     
     ```console
     https://localhost:5001/people~ set header Content-Type
@@ -922,14 +924,14 @@ Domyślnie wyświetlanie wysyłanego żądania HTTP jest pomijane. Istnieje moż
 
 ### <a name="enable-request-display"></a>Włącz wyświetlanie żądań
 
-Wyświetl wysyłane żądanie HTTP, uruchamiając `echo on` polecenie. Przykład:
+Wyświetl wysyłane żądanie HTTP, uruchamiając `echo on` polecenie. Na przykład:
 
 ```console
 https://localhost:5001/people~ echo on
 Request echoing is on
 ```
 
-Kolejne żądania HTTP w bieżącej sesji wyświetlają nagłówki żądań. Przykład:
+Kolejne żądania HTTP w bieżącej sesji wyświetlają nagłówki żądań. Na przykład:
 
 ```console
 https://localhost:5001/people~ post
@@ -967,7 +969,7 @@ https://localhost:5001/people~
 
 ### <a name="disable-request-display"></a>Wyłącz wyświetlanie żądań
 
-Pomijaj wyświetlanie wysyłanego żądania HTTP przez uruchomienie `echo off` polecenia. Przykład:
+Pomijaj wyświetlanie wysyłanego żądania HTTP przez uruchomienie `echo off` polecenia. Na przykład:
 
 ```console
 https://localhost:5001/people~ echo off
@@ -976,9 +978,9 @@ Request echoing is off
 
 ## <a name="run-a-script"></a>Uruchamianie skryptu
 
-Jeśli często wykonujesz ten sam zestaw poleceń HTTP REPL, Rozważ przechowywanie ich w pliku tekstowym. Polecenia w pliku mają taki sam formularz jak te wykonywane ręcznie w wierszu polecenia. Polecenia mogą być wykonywane w sposób wsadowy przy użyciu `run` polecenia. Przykład:
+Jeśli często wykonujesz ten sam zestaw poleceń HTTP REPL, Rozważ przechowywanie ich w pliku tekstowym. Polecenia w pliku mają taki sam formularz jak te wykonywane ręcznie w wierszu polecenia. Polecenia mogą być wykonywane w sposób wsadowy przy użyciu `run` polecenia. Na przykład:
 
-1. Utwórz plik tekstowy zawierający zestaw poleceń rozdzielanych znakami nowego wiersza. Aby to zilustrować, należy rozważyć plik *People-Script. txt* zawierający następujące polecenia:
+1. Utwórz plik tekstowy zawierający zestaw poleceń rozdzielanych znakami nowego wiersza. Aby to zilustrować, rozważ plik *people-script.txt* zawierający następujące polecenia:
 
     ```text
     set base https://localhost:5001
@@ -988,7 +990,7 @@ Jeśli często wykonujesz ten sam zestaw poleceń HTTP REPL, Rozważ przechowywa
     get 1
     ```
 
-1. Wykonaj `run` polecenie, przekazując w ścieżce pliku tekstowego. Przykład:
+1. Wykonaj `run` polecenie, przekazując w ścieżce pliku tekstowego. Na przykład:
 
     ```console
     https://localhost:5001/~ run C:\http-repl-scripts\people-script.txt

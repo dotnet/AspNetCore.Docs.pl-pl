@@ -1,5 +1,5 @@
 ---
-title: Zabezpiecz Blazor aplikację hostowaną ASP.NET Core webassembly z Identity serwerem
+title: Zabezpieczanie Blazor WebAssembly hostowanej aplikacji ASP.NET Core Identity z serwerem
 author: guardrex
 description: Aby utworzyć nową Blazor hostowaną aplikację z uwierzytelnianiem z poziomu programu Visual Studio, który używa zaplecza [IdentityServer](https://identityserver.io/)
 monikerRange: '>= aspnetcore-3.1'
@@ -8,19 +8,21 @@ ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-identity-server
-ms.openlocfilehash: 8251658a2bb99ec17424ec26b8a44171082fab05
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
+ms.openlocfilehash: cce6b6b1ec144e362415fe34645aef567269c873
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85243483"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402211"
 ---
-# <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-identity-server"></a>Zabezpiecz Blazor aplikację hostowaną ASP.NET Core webassembly z Identity serwerem
+# <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-identity-server"></a>Zabezpieczanie Blazor WebAssembly hostowanej aplikacji ASP.NET Core Identity z serwerem
 
 Autorzy [Javier Calvarro Nelson](https://github.com/javiercn) i [Luke Latham](https://github.com/guardrex)
 
@@ -30,7 +32,7 @@ W tym artykule wyjaśniono, jak utworzyć nową Blazor hostowaną aplikację, kt
 
 W programie Visual Studio:
 
-1. Utwórz nową aplikację ** Blazor webassembly** . Aby uzyskać więcej informacji, zobacz <xref:blazor/get-started>.
+1. Utwórz nową **Blazor WebAssembly** aplikację. Aby uzyskać więcej informacji, zobacz <xref:blazor/get-started>.
 1. W oknie dialogowym **Tworzenie nowej Blazor aplikacji** wybierz pozycję **Zmień** w sekcji **uwierzytelnianie** .
 1. Wybierz **pojedyncze konta użytkowników** , a następnie **przycisk OK**.
 1. Zaznacz pole wyboru **hostowane ASP.NET Core** w sekcji **Zaawansowane** .

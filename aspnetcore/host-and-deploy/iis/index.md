@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 5/7/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: host-and-deploy/iis/index
-ms.openlocfilehash: 878af251a30fe284293e5293d2059199b42de272
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 951ae53876edf345af1a3eb32cb9be1b9668fa53
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84106107"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404174"
 ---
 # <a name="host-aspnet-core-on-windows-with-iis"></a>ASP.NET Core hosta w systemie Windows z usługami IIS
 
@@ -46,7 +48,7 @@ Obsługiwane są następujące systemy operacyjne:
 * System Windows 7 lub nowszy
 * System Windows Server 2012 R2 lub nowszy
 
-[Serwer http. sys](xref:fundamentals/servers/httpsys) (znany wcześniej jako webListener) nie działa w konfiguracji zwrotnego serwera proxy z usługami IIS. Użyj [serwera Kestrel](xref:fundamentals/servers/kestrel).
+[SerwerHTTP.sys](xref:fundamentals/servers/httpsys) (znany wcześniej jako webListener) nie działa w konfiguracji zwrotnego serwera proxy z usługami IIS. Użyj [serwera Kestrel](xref:fundamentals/servers/kestrel).
 
 Aby uzyskać informacje na temat hostingu na platformie Azure, zobacz <xref:host-and-deploy/azure-apps/index> .
 
@@ -81,7 +83,7 @@ Na poniższym diagramie przedstawiono relację między usługami IIS, modułem A
 
 ![Moduł ASP.NET Core w scenariuszu hostingu w procesie](index/_static/ancm-inprocess.png)
 
-1. Żądanie dociera do sieci Web do sterownika HTTP. sys trybu jądra.
+1. Żądanie dociera do sieci Web do sterownika HTTP.sys trybu jądra.
 1. Sterownik kieruje natywne żądanie do usług IIS na skonfigurowanym porcie witryny sieci Web, zwykle 80 (HTTP) lub 443 (HTTPS).
 1. Moduł ASP.NET Core odbiera żądanie natywne i przekazuje go do serwera HTTP usług IIS ( `IISHttpServer` ). Serwer HTTP IIS jest implementacją serwera w procesie dla usług IIS, która konwertuje żądanie z natywnego na zarządzane.
 
@@ -94,7 +96,7 @@ Po przetworzeniu żądania przez serwer HTTP IIS:
 
 Hosting w procesie jest zgodą na istniejące aplikacje. Szablony sieci Web ASP.NET Core korzystają z modelu hostingu w procesie.
 
-`CreateDefaultBuilder`dodaje <xref:Microsoft.AspNetCore.Hosting.Server.IServer> wystąpienie przez wywołanie <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIIS*> metody w celu uruchomienia [CoreCLR](/dotnet/standard/glossary#coreclr) i hostowania aplikacji w procesie roboczym usług IIS (*w3wp. exe* lub *iisexpress. exe*). Testy wydajności wskazują, że hostowanie aplikacji platformy .NET Core w procesie zapewnia znacznie wyższą przepływność żądań w porównaniu z obsługą żądań proxy poza procesem i [Kestrel](xref:fundamentals/servers/kestrel).
+`CreateDefaultBuilder`dodaje <xref:Microsoft.AspNetCore.Hosting.Server.IServer> wystąpienie przez wywołanie <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIIS*> metody w celu uruchomienia [CoreCLR](/dotnet/standard/glossary#coreclr) i hostowania aplikacji w procesie roboczym usług IIS (*w3wp.exe* lub *iisexpress.exe*). Testy wydajności wskazują, że hostowanie aplikacji platformy .NET Core w procesie zapewnia znacznie wyższą przepływność żądań w porównaniu z obsługą żądań proxy poza procesem i [Kestrel](xref:fundamentals/servers/kestrel).
 
 Aplikacje publikowane jako pojedynczy plik wykonywalny nie mogą zostać załadowane przez model hostingu w procesie.
 
@@ -106,7 +108,7 @@ Na poniższym diagramie przedstawiono relację między usługami IIS, modułem A
 
 ![Moduł ASP.NET Core w scenariuszu hostingu poza procesem](index/_static/ancm-outofprocess.png)
 
-1. Żądania docierają do sieci Web do sterownika HTTP. sys trybu jądra.
+1. Żądania docierają z sieci Web do sterownika HTTP.sys trybu jądra.
 1. Sterownik kieruje żądania do usług IIS na skonfigurowanym porcie witryny sieci Web. Skonfigurowany port jest zwykle 80 (HTTP) lub 443 (HTTPS).
 1. Moduł przekazuje żądania do Kestrel na losowo wybranym porcie dla aplikacji. Port losowy nie jest 80 lub 443.
 
@@ -151,7 +153,7 @@ services.Configure<IISServerOptions>(options =>
 | `AutomaticAuthentication`      | `true`  | Jeśli `true` serwer usług IIS ustawi uwierzytelnienie `HttpContext.User` za pomocą [uwierzytelniania systemu Windows](xref:security/authentication/windowsauth). Jeśli `false` serwer zawiera tylko tożsamość dla `HttpContext.User` i reaguje na wyzwania, gdy zostanie jawnie zlecony przez `AuthenticationScheme` . Aby program mógł działać, należy włączyć uwierzytelnianie systemu Windows `AutomaticAuthentication` . Aby uzyskać więcej informacji, zobacz [uwierzytelnianie systemu Windows](xref:security/authentication/windowsauth). |
 | `AuthenticationDisplayName`    | `null`  | Ustawia nazwę wyświetlaną pokazywaną użytkownikom na stronach logowania. |
 | `AllowSynchronousIO`           | `false` | Czy synchroniczna operacja we/wy jest dozwolona dla `HttpContext.Request` i `HttpContext.Response` . |
-| `MaxRequestBodySize`           | `30000000`  | Pobiera lub ustawia maksymalny rozmiar treści żądania dla `HttpRequest` . Należy zauważyć, że same usługi IIS mają limit, `maxAllowedContentLength` który zostanie przetworzony przed `MaxRequestBodySize` zestawem w `IISServerOptions` . Zmiana `MaxRequestBodySize` nie wpłynie na `maxAllowedContentLength` . Aby zwiększyć `maxAllowedContentLength` , Dodaj wpis w *pliku Web. config* , aby ustawić `maxAllowedContentLength` wyższą wartość. Aby uzyskać więcej informacji, zobacz [Konfiguracja](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/#configuration). |
+| `MaxRequestBodySize`           | `30000000`  | Pobiera lub ustawia maksymalny rozmiar treści żądania dla `HttpRequest` . Należy zauważyć, że same usługi IIS mają limit, `maxAllowedContentLength` który zostanie przetworzony przed `MaxRequestBodySize` zestawem w `IISServerOptions` . Zmiana `MaxRequestBodySize` nie wpłynie na `maxAllowedContentLength` . Aby zwiększyć `maxAllowedContentLength` , Dodaj wpis w *web.config* , aby ustawić `maxAllowedContentLength` wyższą wartość. Aby uzyskać więcej informacji, zobacz [Konfiguracja](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/#configuration). |
 
 **Model hostingu poza procesem**
 
@@ -181,21 +183,21 @@ services.Configure<IISOptions>(options =>
 
 W przypadku aplikacji hostowanych za dodatkowymi serwerami proxy i modułami równoważenia obciążenia może być wymagana dodatkowa konfiguracja. Aby uzyskać więcej informacji, zobacz [konfigurowanie ASP.NET Core do pracy z serwerami proxy i usługami równoważenia obciążenia](xref:host-and-deploy/proxy-load-balancer).
 
-### <a name="webconfig-file"></a>plik Web. config
+### <a name="webconfig-file"></a>Plik web.config
 
-Plik *Web. config* konfiguruje [moduł ASP.NET Core](xref:host-and-deploy/aspnet-core-module). Tworzenie, przekształcanie i publikowanie pliku *Web. config* jest obsługiwane przez obiekt docelowy MSBuild ( `_TransformWebConfig` ), gdy projekt jest publikowany. Ten element docelowy znajduje się w obiektach docelowych zestawu SDK sieci Web ( `Microsoft.NET.Sdk.Web` ). Zestaw SDK jest ustawiany u góry pliku projektu:
+Plik *web.config* konfiguruje [moduł ASP.NET Core](xref:host-and-deploy/aspnet-core-module). Tworzenie, przekształcanie i publikowanie pliku *web.config* jest obsługiwane przez obiekt docelowy MSBuild ( `_TransformWebConfig` ), gdy projekt jest publikowany. Ten element docelowy znajduje się w obiektach docelowych zestawu SDK sieci Web ( `Microsoft.NET.Sdk.Web` ). Zestaw SDK jest ustawiany u góry pliku projektu:
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk.Web">
 ```
 
-Jeśli plik *Web. config* nie jest obecny w projekcie, plik zostanie utworzony przy użyciu poprawnych *processPath* i *argumentów* w celu skonfigurowania modułu ASP.NET Core i przesunięcia do [publikowanych danych wyjściowych](xref:host-and-deploy/directory-structure).
+Jeśli plik *web.config* nie jest obecny w projekcie, plik zostanie utworzony z prawidłowymi *argumentami* *ProcessPath* i, aby skonfigurować moduł ASP.NET Core i przeniesiony do [publikowanych danych wyjściowych](xref:host-and-deploy/directory-structure).
 
-Jeśli plik *Web. config* znajduje się w projekcie, plik jest przekształcany przy użyciu poprawnych *processPath* i *argumentów* w celu skonfigurowania modułu ASP.NET Core i przesunięcia do publikowanych danych wyjściowych. Transformacja nie modyfikuje ustawień konfiguracji usług IIS w pliku.
+Jeśli plik *web.config* jest obecny w projekcie, plik zostanie przekształcony przy użyciu poprawnych *processPath* i *argumentów* w celu skonfigurowania modułu ASP.NET Core i przeniesiona do publikowanych danych wyjściowych. Transformacja nie modyfikuje ustawień konfiguracji usług IIS w pliku.
 
-Plik *Web. config* może zapewnić dodatkowe ustawienia konfiguracji usług IIS kontrolujące aktywne moduły usług IIS. Aby uzyskać informacje na temat modułów usług IIS, które mogą przetwarzać żądania z aplikacjami ASP.NET Core, zobacz temat [moduły usług IIS](xref:host-and-deploy/iis/modules) .
+Plik *web.config* może zapewnić dodatkowe ustawienia konfiguracji usług IIS kontrolujące aktywne moduły usług IIS. Aby uzyskać informacje na temat modułów usług IIS, które mogą przetwarzać żądania z aplikacjami ASP.NET Core, zobacz temat [moduły usług IIS](xref:host-and-deploy/iis/modules) .
 
-Aby zapobiec transformacje pliku *Web. config* przez zestaw SDK sieci Web, należy użyć **\<IsTransformWebConfigDisabled>** właściwości w pliku projektu:
+Aby zapobiec transformacji pliku *web.config* przez zestaw SDK sieci Web, należy użyć **\<IsTransformWebConfigDisabled>** właściwości w pliku projektu:
 
 ```xml
 <PropertyGroup>
@@ -205,17 +207,17 @@ Aby zapobiec transformacje pliku *Web. config* przez zestaw SDK sieci Web, nale�
 
 Podczas wyłączania pliku zestawu SDK sieci Web, *processPath* i *argumenty* powinny być ustawiane ręcznie przez dewelopera. Aby uzyskać więcej informacji, zobacz <xref:host-and-deploy/aspnet-core-module>.
 
-### <a name="webconfig-file-location"></a>Lokalizacja pliku Web. config
+### <a name="webconfig-file-location"></a>Lokalizacja pliku web.config
 
-Aby poprawnie skonfigurować [moduł ASP.NET Core](xref:host-and-deploy/aspnet-core-module) , plik *Web. config* musi znajdować się w ścieżce [katalogu głównego zawartości](xref:fundamentals/index#content-root) (zazwyczaj ścieżka podstawowa aplikacji) wdrożonej aplikacji. Ta sama lokalizacja jest taka sama jak ścieżka fizyczna witryny sieci Web dostarczana do usług IIS. Plik *Web. config* jest wymagany w katalogu głównym aplikacji, aby umożliwić Publikowanie wielu aplikacji przy użyciu Web Deploy.
+W celu poprawnego skonfigurowania [modułu ASP.NET Core](xref:host-and-deploy/aspnet-core-module) plik *web.config* musi znajdować się w ścieżce [katalogu głównego zawartości](xref:fundamentals/index#content-root) (zazwyczaj ścieżka podstawowa aplikacji) wdrożonej aplikacji. Ta sama lokalizacja jest taka sama jak ścieżka fizyczna witryny sieci Web dostarczana do usług IIS. Plik *web.config* jest wymagany w katalogu głównym aplikacji, aby umożliwić Publikowanie wielu aplikacji przy użyciu Web Deploy.
 
-Poufne pliki znajdują się w ścieżce fizycznej aplikacji, takiej jak * \<assembly> . runtimeconfig. JSON*, * \<assembly> . XML* (Komentarze dokumentacji XML) i * \<assembly> . deps. JSON*. Gdy plik *Web. config* jest obecny, a lokacja jest uruchamiana normalnie, usługi IIS nie będą obsługiwały tych poufnych plików, jeśli są żądane. Jeśli brakuje pliku *Web. config* o nazwie lub nie można skonfigurować lokacji do normalnego uruchamiania, usługi IIS mogą publicznie obsłużyć poufne pliki.
+Poufne pliki znajdują się w ścieżce fizycznej aplikacji, na przykład * \<assembly>.runtimeconfig.jsna*, * \<assembly> . XML* (Komentarze dokumentacji XML) i * \<assembly>.deps.js*. Gdy plik *web.config* jest obecny, a lokacja jest uruchamiana normalnie, usługi IIS nie będą obsługiwały tych poufnych plików, jeśli są żądane. Jeśli brakuje pliku *web.config* , nazwa jest nieprawidłowa lub nie można skonfigurować lokacji do normalnego uruchamiania, usługi IIS mogą publicznie udostępniać poufne pliki.
 
-**Plik *Web. config* musi być obecny we wdrożeniu przez cały czas, prawidłowo nazwany i można skonfigurować lokację pod kątem normalnego uruchamiania. Nigdy nie należy usuwać pliku *Web. config* z wdrożenia produkcyjnego.**
+**Plik *web.config* musi być obecny we wdrożeniu przez cały czas, prawidłowo nazwany i można skonfigurować lokację pod kątem normalnego uruchamiania. Nigdy nie usuwaj pliku *web.config* z wdrożenia produkcyjnego.**
 
 ### <a name="transform-webconfig"></a>Przekształcanie pliku web.config
 
-Jeśli musisz przekształcić *plik Web. config* przy publikowaniu, zobacz <xref:host-and-deploy/iis/transform-webconfig> . Może być konieczne przekształcenie *pliku Web. config* przy publikowaniu w celu ustawienia zmiennych środowiskowych na podstawie konfiguracji, profilu lub środowiska.
+Jeśli musisz przekształcić *web.config* przy publikowaniu, zobacz <xref:host-and-deploy/iis/transform-webconfig> . Może być konieczne przekształcenie *web.config* przy publikowaniu w celu ustawienia zmiennych środowiskowych na podstawie konfiguracji, profilu lub środowiska.
 
 ## <a name="iis-configuration"></a>Konfiguracja usług IIS
 
@@ -298,7 +300,7 @@ Aby uzyskać wcześniejszą wersję Instalatora:
    * `OPT_NO_RUNTIME=1`: Pomiń Instalowanie środowiska uruchomieniowego platformy .NET Core. Używany, gdy serwer obsługuje tylko [wdrożenia samodzielne (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd).
    * `OPT_NO_SHAREDFX=1`: Pomiń instalację ASP.NET Shared Framework (ASP.NET Runtime). Używany, gdy serwer obsługuje tylko [wdrożenia samodzielne (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd).
    * `OPT_NO_X86=1`: Pomiń Instalowanie środowiska uruchomieniowego x86. Użyj tego parametru, Jeśli wiesz, że nie będziesz hostować aplikacji 32-bitowych. Jeśli w przyszłości będziesz hostować zarówno aplikacje 32-bitowe, jak i 64-bitowe, nie używaj tego parametru i zainstaluj oba środowiska uruchomieniowe.
-   * `OPT_NO_SHARED_CONFIG_CHECK=1`: Wyłącz sprawdzanie przy użyciu konfiguracji udostępnionej usług IIS, gdy konfiguracja udostępniona (*ApplicationHost. config*) znajduje się na tym samym komputerze, na którym zainstalowano program IIS. *Dostępne tylko w przypadku ASP.NET Core 2,2 lub nowszych instalatorów pakietu do obsługi.* Aby uzyskać więcej informacji, zobacz <xref:host-and-deploy/aspnet-core-module#aspnet-core-module-with-an-iis-shared-configuration>.
+   * `OPT_NO_SHARED_CONFIG_CHECK=1`: Wyłącz sprawdzanie przy użyciu konfiguracji udostępnionej usług IIS, gdy konfiguracja udostępniona (*applicationHost.config*) znajduje się na tym samym komputerze, na którym zainstalowano program IIS. *Dostępne tylko w przypadku ASP.NET Core 2,2 lub nowszych instalatorów pakietu do obsługi.* Aby uzyskać więcej informacji, zobacz <xref:host-and-deploy/aspnet-core-module#aspnet-core-module-with-an-iis-shared-configuration>.
 1. Uruchom ponownie system lub wykonaj następujące polecenia w powłoce poleceń:
 
    ```console
@@ -389,9 +391,9 @@ W poniższym przykładzie lokacja jest powiązana z **nazwą hosta** usług IIS 
 
 Pliki w folderze wdrożenia są zablokowane, gdy aplikacja jest uruchomiona. Nie można zastąpić zablokowanych plików podczas wdrażania. Aby zwolnić zablokowane pliki we wdrożeniu, Zatrzymaj pulę aplikacji, korzystając z **jednej** z następujących metod:
 
-* Użyj Web Deploy i Reference `Microsoft.NET.Sdk.Web` w pliku projektu. Plik *app_offline. htm* jest umieszczany w katalogu głównym katalogu aplikacji sieci Web. Gdy plik jest obecny, moduł ASP.NET Core bezpiecznie zamyka aplikację i obsługuje plik *app_offline. htm* podczas wdrażania. Aby uzyskać więcej informacji, zobacz [Informacje o konfiguracji modułu ASP.NET Core](xref:host-and-deploy/aspnet-core-module#app_offlinehtm).
+* Użyj Web Deploy i Reference `Microsoft.NET.Sdk.Web` w pliku projektu. Plik *app_offline.htm* jest umieszczony w katalogu głównym katalogu aplikacji sieci Web. Gdy plik jest obecny, moduł ASP.NET Core bezpiecznie zamyka aplikację i obsługuje plik *app_offline.htm* podczas wdrażania. Aby uzyskać więcej informacji, zobacz [Informacje o konfiguracji modułu ASP.NET Core](xref:host-and-deploy/aspnet-core-module#app_offlinehtm).
 * Ręcznie Zatrzymaj pulę aplikacji w Menedżerze usług IIS na serwerze.
-* Porzuć *app_offline. htm* przy użyciu programu PowerShell (wymaga programu PowerShell 5 lub nowszego):
+* Użyj programu PowerShell do porzucenia *app_offline.htm* (wymaga programu PowerShell 5 lub nowszego):
 
   ```powershell
   $pathToApp = 'PATH_TO_APP'
@@ -422,7 +424,7 @@ Aby skonfigurować ochronę danych w ramach usług IIS w celu utrwalenia pierśc
 
   Klucze ochrony danych używane przez aplikacje ASP.NET Core są przechowywane w rejestrze zewnętrznym dla aplikacji. Aby utrzymać klucze dla danej aplikacji, należy utworzyć klucze rejestru dla puli aplikacji.
 
-  W przypadku autonomicznych, nieopartych na webfarmie instalacji usług IIS [skrypt programu PowerShell provision-AutoGenKeys. ps1](https://github.com/dotnet/AspNetCore/blob/master/src/DataProtection/Provision-AutoGenKeys.ps1) dla każdej puli aplikacji używanej z aplikacją ASP.NET Core. Ten skrypt tworzy klucz rejestru w rejestrze HKLM, który jest dostępny tylko dla konta procesu roboczego puli aplikacji aplikacji. Klucze są szyfrowane przy użyciu funkcji DPAPI z kluczem dla całego komputera.
+  W przypadku autonomicznych, nieopartych na webfarmie instalacji usług IIS [skrypt ochrony danych Provision-AutoGenKeys.ps1 programu PowerShell](https://github.com/dotnet/AspNetCore/blob/master/src/DataProtection/Provision-AutoGenKeys.ps1) może być używany dla każdej puli aplikacji używanej w aplikacji ASP.NET Core. Ten skrypt tworzy klucz rejestru w rejestrze HKLM, który jest dostępny tylko dla konta procesu roboczego puli aplikacji aplikacji. Klucze są szyfrowane przy użyciu funkcji DPAPI z kluczem dla całego komputera.
 
   W scenariuszach farmy sieci Web aplikacja może być skonfigurowana pod kątem używania ścieżki UNC do przechowywania tego dzwonka klucza ochrony danych. Domyślnie klucze ochrony danych nie są szyfrowane. Upewnij się, że uprawnienia do pliku dla udziału sieciowego są ograniczone do konta systemu Windows, w którym jest uruchamiana aplikacja. Certyfikat x509 może służyć do ochrony kluczy w spoczynku. Rozważ zastosowanie mechanizmu umożliwiającego użytkownikom przekazywanie certyfikatów: Umieść certyfikaty w zaufanym magazynie certyfikatów użytkownika i upewnij się, że są one dostępne na wszystkich komputerach, na których działa aplikacja użytkownika. Szczegóły można znaleźć w temacie [Konfigurowanie ochrony danych ASP.NET Core](xref:security/data-protection/configuration/overview) .
 
@@ -433,7 +435,7 @@ Aby skonfigurować ochronę danych w ramach usług IIS w celu utrwalenia pierśc
   [Atrybut setProfileEnvironment](/iis/configuration/system.applicationhost/applicationpools/add/processmodel#configuration) puli aplikacji również musi być włączony. Wartość domyślna `setProfileEnvironment` to `true` . W niektórych scenariuszach (na przykład system operacyjny Windows) `setProfileEnvironment` jest ustawiony na `false` . Jeśli klucze nie są przechowywane w katalogu profilu użytkownika zgodnie z oczekiwaniami:
 
   1. Przejdź do folderu *% windir%/system32/inetsrv/config*
-  1. Otwórz plik *ApplicationHost. config* .
+  1. Otwórz plik *applicationHost.config* .
   1. Znajdź `<system.applicationHost><applicationPools><applicationPoolDefaults><processModel>` element.
   1. Upewnij się, że `setProfileEnvironment` atrybut nie istnieje, który jest wartością domyślną `true` , lub jawnie ustaw wartość atrybutu na `true` .
 
@@ -476,9 +478,9 @@ Przypisanie oddzielnej puli aplikacji do aplikacji podrzędnej jest wymagane w p
 
 Aby uzyskać więcej informacji na temat modelu hostingu w procesie i konfigurowania modułu ASP.NET Core, zobacz <xref:host-and-deploy/aspnet-core-module> .
 
-## <a name="configuration-of-iis-with-webconfig"></a>Konfiguracja usług IIS z pliku Web. config
+## <a name="configuration-of-iis-with-webconfig"></a>Konfiguracja usług IIS z web.config
 
-Na konfigurację usług IIS wpływa `<system.webServer>` sekcja *pliku Web. config* dla scenariuszy usług IIS, które są funkcjonalne dla ASP.NET Core aplikacji z modułem ASP.NET Core. Na przykład konfiguracja usług IIS jest funkcjonalna dla kompresji dynamicznej. Jeśli usługi IIS są skonfigurowane na poziomie serwera do korzystania z kompresji dynamicznej, `<urlCompression>` element w pliku *Web. config* aplikacji może go wyłączyć dla aplikacji ASP.NET Core.
+Na konfigurację usług IIS wpływa `<system.webServer>` sekcja *web.config* dla scenariuszy usług IIS, które są funkcjonalne dla ASP.NET Core aplikacji za pomocą modułu ASP.NET Core. Na przykład konfiguracja usług IIS jest funkcjonalna dla kompresji dynamicznej. Jeśli usługi IIS są skonfigurowane na poziomie serwera do korzystania z kompresji dynamicznej, `<urlCompression>` element w pliku *web.config* aplikacji może go wyłączyć dla aplikacji ASP.NET Core.
 
 Aby uzyskać więcej informacji, zobacz następujące tematy:
 
@@ -486,11 +488,11 @@ Aby uzyskać więcej informacji, zobacz następujące tematy:
 * <xref:host-and-deploy/aspnet-core-module>
 * <xref:host-and-deploy/iis/modules>
 
-Aby ustawić zmienne środowiskowe dla poszczególnych aplikacji działających w pulach izolowanych aplikacji (obsługiwanych w przypadku usług IIS 10,0 lub nowszych), zobacz sekcję *polecenie Appcmd. exe* w temacie [ \<environmentVariables> zmienne środowiskowe](/iis/configuration/system.applicationHost/applicationPools/add/environmentVariables/#appcmdexe) w dokumentacji dotyczącej programu IIS.
+Aby ustawić zmienne środowiskowe dla poszczególnych aplikacji działających w pulach izolowanych aplikacji (obsługiwanych w przypadku usług IIS 10,0 lub nowszych), zobacz sekcję *polecenieAppCmd.exe* w temacie [ \<environmentVariables> zmienne środowiskowe](/iis/configuration/system.applicationHost/applicationPools/add/environmentVariables/#appcmdexe) w dokumentacji dotyczącej usług IIS.
 
-## <a name="configuration-sections-of-webconfig"></a>Sekcje konfiguracji pliku Web. config
+## <a name="configuration-sections-of-webconfig"></a>Sekcje konfiguracji web.config
 
-Sekcje konfiguracji aplikacji ASP.NET 4. x w *pliku Web. config* nie są używane przez aplikacje ASP.NET Core na potrzeby konfiguracji:
+Sekcje konfiguracyjne aplikacji ASP.NET 4. x w *web.config* nie są używane przez aplikacje ASP.NET Core do konfiguracji:
 
 * `<system.web>`
 * `<appSettings>`
@@ -566,7 +568,7 @@ Protokół HTTP/2 jest domyślnie włączony. Połączenia powracają do protoko
 
 *Ta sekcja dotyczy tylko ASP.NET Core aplikacji przeznaczonych dla .NET Framework.*
 
-W przypadku aplikacji ASP.NET Core, która jest przeznaczona dla .NET Framework, żądania opcji nie są domyślnie przesyłane do aplikacji w usługach IIS. Aby dowiedzieć się, jak skonfigurować obsługę usług IIS aplikacji w *pliku Web. config* w celu przekazywania żądań dotyczących opcji, zobacz [Włączanie żądań między źródłami w programie ASP.NET Web API 2: jak działa mechanizm CORS](/aspnet/web-api/overview/security/enabling-cross-origin-requests-in-web-api#how-cors-works).
+W przypadku aplikacji ASP.NET Core, która jest przeznaczona dla .NET Framework, żądania opcji nie są domyślnie przesyłane do aplikacji w usługach IIS. Aby dowiedzieć się, jak skonfigurować obsługę usług IIS w *web.config* , aby przekazywać żądania dotyczące opcji, zobacz [Włączanie żądań między źródłami w ASP.NET Web API 2: jak działa mechanizm CORS](/aspnet/web-api/overview/security/enabling-cross-origin-requests-in-web-api#how-cors-works).
 
 ## <a name="application-initialization-module-and-idle-timeout"></a>Moduł inicjalizacji aplikacji i limit czasu bezczynności
 
@@ -606,7 +608,7 @@ Użyj jednego z poniższych metod, aby włączyć moduł inicjowania aplikacji d
   1. Kliknij prawym przyciskiem myszy aplikację i wybierz pozycję Zarządzaj ustawieniami zaawansowanymi **witryny sieci Web** > **Advanced Settings**.
   1. Domyślnym ustawieniem **wstępnego ładowania** jest **wartość false**. Ustaw dla opcji **wstępnego ładowania** **wartość true**. Wybierz przycisk **OK**.
 
-* Korzystając z pliku *Web. config*, Dodaj `<applicationInitialization>` element z `doAppInitAfterRestart` ustawionym do `true` `<system.webServer>` elementów w plik *Web. config* aplikacji:
+* Za pomocą *web.config*Dodaj `<applicationInitialization>` element z `doAppInitAfterRestart` ustawionym do `true` `<system.webServer>` elementów w pliku *web.config* aplikacji:
 
   ```xml
   <?xml version="1.0" encoding="utf-8"?>
@@ -676,7 +678,7 @@ Obsługiwane są następujące systemy operacyjne:
 * System Windows 7 lub nowszy
 * Windows Server 2008 R2 lub nowszy
 
-[Serwer http. sys](xref:fundamentals/servers/httpsys) (znany wcześniej jako webListener) nie działa w konfiguracji zwrotnego serwera proxy z usługami IIS. Użyj [serwera Kestrel](xref:fundamentals/servers/kestrel).
+[SerwerHTTP.sys](xref:fundamentals/servers/httpsys) (znany wcześniej jako webListener) nie działa w konfiguracji zwrotnego serwera proxy z usługami IIS. Użyj [serwera Kestrel](xref:fundamentals/servers/kestrel).
 
 Aby uzyskać informacje na temat hostingu na platformie Azure, zobacz <xref:host-and-deploy/azure-apps/index> .
 
@@ -715,13 +717,13 @@ Na poniższym diagramie przedstawiono relację między usługami IIS, modułem A
 
 ![Moduł ASP.NET Core w scenariuszu hostingu w procesie](index/_static/ancm-inprocess.png)
 
-Żądanie dociera do sieci Web do sterownika HTTP. sys trybu jądra. Sterownik kieruje natywne żądanie do usług IIS na skonfigurowanym porcie witryny sieci Web, zwykle 80 (HTTP) lub 443 (HTTPS). Moduł ASP.NET Core odbiera żądanie natywne i przekazuje go do serwera HTTP usług IIS ( `IISHttpServer` ). Serwer HTTP IIS jest implementacją serwera w procesie dla usług IIS, która konwertuje żądanie z natywnego na zarządzane.
+Żądanie dociera do sieci Web do sterownika HTTP.sys trybu jądra. Sterownik kieruje natywne żądanie do usług IIS na skonfigurowanym porcie witryny sieci Web, zwykle 80 (HTTP) lub 443 (HTTPS). Moduł ASP.NET Core odbiera żądanie natywne i przekazuje go do serwera HTTP usług IIS ( `IISHttpServer` ). Serwer HTTP IIS jest implementacją serwera w procesie dla usług IIS, która konwertuje żądanie z natywnego na zarządzane.
 
 Po przetworzeniu żądania przez serwer HTTP IIS żądanie jest wypychane do potoku ASP.NET Core pośredniczącego. Potok oprogramowania pośredniczącego obsługuje żądanie i przekazuje go jako `HttpContext` wystąpienie do logiki aplikacji. Odpowiedź aplikacji jest przesyłana z powrotem do usług IIS za pośrednictwem serwera HTTP IIS. Program IIS wysyła odpowiedź do klienta, który zainicjował żądanie.
 
 Hosting w procesie jest nieobecny w przypadku istniejących aplikacji, ale w przypadku wszystkich scenariuszy z usługami w ramach programu z obsługą IIS Express usług w toku są domyślnie obsługiwane [nowe](/dotnet/core/tools/dotnet-new) szablony.
 
-`CreateDefaultBuilder`dodaje <xref:Microsoft.AspNetCore.Hosting.Server.IServer> wystąpienie przez wywołanie <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIIS*> metody w celu uruchomienia [CoreCLR](/dotnet/standard/glossary#coreclr) i hostowania aplikacji w procesie roboczym usług IIS (*w3wp. exe* lub *iisexpress. exe*). Testy wydajności wskazują, że hostowanie aplikacji platformy .NET Core w procesie zapewnia znacznie wyższą przepływność żądań w porównaniu z obsługą żądań serwera proxy poza procesem i serwerem [Kestrel](xref:fundamentals/servers/kestrel) .
+`CreateDefaultBuilder`dodaje <xref:Microsoft.AspNetCore.Hosting.Server.IServer> wystąpienie przez wywołanie <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIIS*> metody w celu uruchomienia [CoreCLR](/dotnet/standard/glossary#coreclr) i hostowania aplikacji w procesie roboczym usług IIS (*w3wp.exe* lub *iisexpress.exe*). Testy wydajności wskazują, że hostowanie aplikacji platformy .NET Core w procesie zapewnia znacznie wyższą przepływność żądań w porównaniu z obsługą żądań serwera proxy poza procesem i serwerem [Kestrel](xref:fundamentals/servers/kestrel) .
 
 ### <a name="out-of-process-hosting-model"></a>Model hostingu poza procesem
 
@@ -731,7 +733,7 @@ Na poniższym diagramie przedstawiono relację między usługami IIS, modułem A
 
 ![Moduł ASP.NET Core w scenariuszu hostingu poza procesem](index/_static/ancm-outofprocess.png)
 
-Żądania docierają do sieci Web do sterownika HTTP. sys trybu jądra. Sterownik kieruje żądania do usług IIS na skonfigurowanym porcie witryny sieci Web, zwykle 80 (HTTP) lub 443 (HTTPS). Moduł przekazuje żądania do Kestrel na losowo wybranym porcie dla aplikacji, która nie jest portem 80 lub 443.
+Żądania docierają z sieci Web do sterownika HTTP.sys trybu jądra. Sterownik kieruje żądania do usług IIS na skonfigurowanym porcie witryny sieci Web, zwykle 80 (HTTP) lub 443 (HTTPS). Moduł przekazuje żądania do Kestrel na losowo wybranym porcie dla aplikacji, która nie jest portem 80 lub 443.
 
 Moduł określa port za pośrednictwem zmiennej środowiskowej podczas uruchamiania, a <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIISIntegration*> rozszerzenie konfiguruje serwer do nasłuchiwania `http://localhost:{PORT}` . Dodatkowe sprawdzenia są wykonywane, a żądania, które nie pochodzą z modułu, są odrzucane. Moduł nie obsługuje przekazywania HTTPS, dlatego żądania są przekazywane przez protokół HTTP nawet wtedy, gdy są odbierane przez usługę IIS przez protokół HTTPS.
 
@@ -794,21 +796,21 @@ services.Configure<IISOptions>(options =>
 
 [Oprogramowanie pośredniczące integracji usług IIS](#enable-the-iisintegration-components), które konfiguruje przekazane nagłówki oprogramowania pośredniczącego, a moduł ASP.NET Core jest skonfigurowany do przesyłania dalej schematu (http/https) i zdalnego adresu IP, z którego pochodzi żądanie. W przypadku aplikacji hostowanych za dodatkowymi serwerami proxy i modułami równoważenia obciążenia może być wymagana dodatkowa konfiguracja. Aby uzyskać więcej informacji, zobacz [konfigurowanie ASP.NET Core do pracy z serwerami proxy i usługami równoważenia obciążenia](xref:host-and-deploy/proxy-load-balancer).
 
-### <a name="webconfig-file"></a>plik Web. config
+### <a name="webconfig-file"></a>Plik web.config
 
-Plik *Web. config* konfiguruje [moduł ASP.NET Core](xref:host-and-deploy/aspnet-core-module). Tworzenie, przekształcanie i publikowanie pliku *Web. config* jest obsługiwane przez obiekt docelowy MSBuild ( `_TransformWebConfig` ), gdy projekt jest publikowany. Ten element docelowy znajduje się w obiektach docelowych zestawu SDK sieci Web ( `Microsoft.NET.Sdk.Web` ). Zestaw SDK jest ustawiany u góry pliku projektu:
+Plik *web.config* konfiguruje [moduł ASP.NET Core](xref:host-and-deploy/aspnet-core-module). Tworzenie, przekształcanie i publikowanie pliku *web.config* jest obsługiwane przez obiekt docelowy MSBuild ( `_TransformWebConfig` ), gdy projekt jest publikowany. Ten element docelowy znajduje się w obiektach docelowych zestawu SDK sieci Web ( `Microsoft.NET.Sdk.Web` ). Zestaw SDK jest ustawiany u góry pliku projektu:
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk.Web">
 ```
 
-Jeśli plik *Web. config* nie jest obecny w projekcie, plik zostanie utworzony przy użyciu poprawnych *processPath* i *argumentów* w celu skonfigurowania modułu ASP.NET Core i przesunięcia do [publikowanych danych wyjściowych](xref:host-and-deploy/directory-structure).
+Jeśli plik *web.config* nie jest obecny w projekcie, plik zostanie utworzony z prawidłowymi *argumentami* *ProcessPath* i, aby skonfigurować moduł ASP.NET Core i przeniesiony do [publikowanych danych wyjściowych](xref:host-and-deploy/directory-structure).
 
-Jeśli plik *Web. config* znajduje się w projekcie, plik jest przekształcany przy użyciu poprawnych *processPath* i *argumentów* w celu skonfigurowania modułu ASP.NET Core i przesunięcia do publikowanych danych wyjściowych. Transformacja nie modyfikuje ustawień konfiguracji usług IIS w pliku.
+Jeśli plik *web.config* jest obecny w projekcie, plik zostanie przekształcony przy użyciu poprawnych *processPath* i *argumentów* w celu skonfigurowania modułu ASP.NET Core i przeniesiona do publikowanych danych wyjściowych. Transformacja nie modyfikuje ustawień konfiguracji usług IIS w pliku.
 
-Plik *Web. config* może zapewnić dodatkowe ustawienia konfiguracji usług IIS kontrolujące aktywne moduły usług IIS. Aby uzyskać informacje na temat modułów usług IIS, które mogą przetwarzać żądania z aplikacjami ASP.NET Core, zobacz temat [moduły usług IIS](xref:host-and-deploy/iis/modules) .
+Plik *web.config* może zapewnić dodatkowe ustawienia konfiguracji usług IIS kontrolujące aktywne moduły usług IIS. Aby uzyskać informacje na temat modułów usług IIS, które mogą przetwarzać żądania z aplikacjami ASP.NET Core, zobacz temat [moduły usług IIS](xref:host-and-deploy/iis/modules) .
 
-Aby zapobiec transformacje pliku *Web. config* przez zestaw SDK sieci Web, należy użyć **\<IsTransformWebConfigDisabled>** właściwości w pliku projektu:
+Aby zapobiec transformacji pliku *web.config* przez zestaw SDK sieci Web, należy użyć **\<IsTransformWebConfigDisabled>** właściwości w pliku projektu:
 
 ```xml
 <PropertyGroup>
@@ -818,17 +820,17 @@ Aby zapobiec transformacje pliku *Web. config* przez zestaw SDK sieci Web, nale�
 
 Podczas wyłączania pliku zestawu SDK sieci Web, *processPath* i *argumenty* powinny być ustawiane ręcznie przez dewelopera. Aby uzyskać więcej informacji, zobacz <xref:host-and-deploy/aspnet-core-module>.
 
-### <a name="webconfig-file-location"></a>Lokalizacja pliku Web. config
+### <a name="webconfig-file-location"></a>Lokalizacja pliku web.config
 
-Aby poprawnie skonfigurować [moduł ASP.NET Core](xref:host-and-deploy/aspnet-core-module) , plik *Web. config* musi znajdować się w ścieżce [katalogu głównego zawartości](xref:fundamentals/index#content-root) (zazwyczaj ścieżka podstawowa aplikacji) wdrożonej aplikacji. Ta sama lokalizacja jest taka sama jak ścieżka fizyczna witryny sieci Web dostarczana do usług IIS. Plik *Web. config* jest wymagany w katalogu głównym aplikacji, aby umożliwić Publikowanie wielu aplikacji przy użyciu Web Deploy.
+W celu poprawnego skonfigurowania [modułu ASP.NET Core](xref:host-and-deploy/aspnet-core-module) plik *web.config* musi znajdować się w ścieżce [katalogu głównego zawartości](xref:fundamentals/index#content-root) (zazwyczaj ścieżka podstawowa aplikacji) wdrożonej aplikacji. Ta sama lokalizacja jest taka sama jak ścieżka fizyczna witryny sieci Web dostarczana do usług IIS. Plik *web.config* jest wymagany w katalogu głównym aplikacji, aby umożliwić Publikowanie wielu aplikacji przy użyciu Web Deploy.
 
-Poufne pliki znajdują się w ścieżce fizycznej aplikacji, takiej jak * \<assembly> . runtimeconfig. JSON*, * \<assembly> . XML* (Komentarze dokumentacji XML) i * \<assembly> . deps. JSON*. Gdy plik *Web. config* jest obecny, a lokacja jest uruchamiana normalnie, usługi IIS nie będą obsługiwały tych poufnych plików, jeśli są żądane. Jeśli brakuje pliku *Web. config* o nazwie lub nie można skonfigurować lokacji do normalnego uruchamiania, usługi IIS mogą publicznie obsłużyć poufne pliki.
+Poufne pliki znajdują się w ścieżce fizycznej aplikacji, na przykład * \<assembly>.runtimeconfig.jsna*, * \<assembly> . XML* (Komentarze dokumentacji XML) i * \<assembly>.deps.js*. Gdy plik *web.config* jest obecny, a lokacja jest uruchamiana normalnie, usługi IIS nie będą obsługiwały tych poufnych plików, jeśli są żądane. Jeśli brakuje pliku *web.config* , nazwa jest nieprawidłowa lub nie można skonfigurować lokacji do normalnego uruchamiania, usługi IIS mogą publicznie udostępniać poufne pliki.
 
-**Plik *Web. config* musi być obecny we wdrożeniu przez cały czas, prawidłowo nazwany i można skonfigurować lokację pod kątem normalnego uruchamiania. Nigdy nie należy usuwać pliku *Web. config* z wdrożenia produkcyjnego.**
+**Plik *web.config* musi być obecny we wdrożeniu przez cały czas, prawidłowo nazwany i można skonfigurować lokację pod kątem normalnego uruchamiania. Nigdy nie usuwaj pliku *web.config* z wdrożenia produkcyjnego.**
 
 ### <a name="transform-webconfig"></a>Przekształcanie pliku web.config
 
-Jeśli musisz przekształcić *plik Web. config* przy publikowaniu (na przykład ustawić zmienne środowiskowe na podstawie konfiguracji, profilu lub środowiska), zobacz <xref:host-and-deploy/iis/transform-webconfig> .
+Jeśli musisz przekształcić *web.config* przy publikowaniu (na przykład ustawić zmienne środowiskowe na podstawie konfiguracji, profilu lub środowiska), zobacz <xref:host-and-deploy/iis/transform-webconfig> .
 
 ## <a name="iis-configuration"></a>Konfiguracja usług IIS
 
@@ -903,7 +905,7 @@ Zainstaluj *pakiet hostingu platformy .NET Core* w systemie hostingu. Pakiet ins
    * `OPT_NO_RUNTIME=1`: Pomiń Instalowanie środowiska uruchomieniowego platformy .NET Core. Używany, gdy serwer obsługuje tylko [wdrożenia samodzielne (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd).
    * `OPT_NO_SHAREDFX=1`: Pomiń instalację ASP.NET Shared Framework (ASP.NET Runtime). Używany, gdy serwer obsługuje tylko [wdrożenia samodzielne (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd).
    * `OPT_NO_X86=1`: Pomiń Instalowanie środowiska uruchomieniowego x86. Użyj tego parametru, Jeśli wiesz, że nie będziesz hostować aplikacji 32-bitowych. Jeśli w przyszłości będziesz hostować zarówno aplikacje 32-bitowe, jak i 64-bitowe, nie używaj tego parametru i zainstaluj oba środowiska uruchomieniowe.
-   * `OPT_NO_SHARED_CONFIG_CHECK=1`: Wyłącz sprawdzanie przy użyciu konfiguracji udostępnionej usług IIS, gdy konfiguracja udostępniona (*ApplicationHost. config*) znajduje się na tym samym komputerze, na którym zainstalowano program IIS. *Dostępne tylko w przypadku ASP.NET Core 2,2 lub nowszych instalatorów pakietu do obsługi.* Aby uzyskać więcej informacji, zobacz <xref:host-and-deploy/aspnet-core-module#aspnet-core-module-with-an-iis-shared-configuration>.
+   * `OPT_NO_SHARED_CONFIG_CHECK=1`: Wyłącz sprawdzanie przy użyciu konfiguracji udostępnionej usług IIS, gdy konfiguracja udostępniona (*applicationHost.config*) znajduje się na tym samym komputerze, na którym zainstalowano program IIS. *Dostępne tylko w przypadku ASP.NET Core 2,2 lub nowszych instalatorów pakietu do obsługi.* Aby uzyskać więcej informacji, zobacz <xref:host-and-deploy/aspnet-core-module#aspnet-core-module-with-an-iis-shared-configuration>.
 1. Uruchom ponownie system lub wykonaj następujące polecenia w powłoce poleceń:
 
    ```console
@@ -989,9 +991,9 @@ W poniższym przykładzie lokacja jest powiązana z **nazwą hosta** usług IIS 
 
 Pliki w folderze wdrożenia są zablokowane, gdy aplikacja jest uruchomiona. Nie można zastąpić zablokowanych plików podczas wdrażania. Aby zwolnić zablokowane pliki we wdrożeniu, Zatrzymaj pulę aplikacji, korzystając z **jednej** z następujących metod:
 
-* Użyj Web Deploy i Reference `Microsoft.NET.Sdk.Web` w pliku projektu. Plik *app_offline. htm* jest umieszczany w katalogu głównym katalogu aplikacji sieci Web. Gdy plik jest obecny, moduł ASP.NET Core bezpiecznie zamyka aplikację i obsługuje plik *app_offline. htm* podczas wdrażania. Aby uzyskać więcej informacji, zobacz [Informacje o konfiguracji modułu ASP.NET Core](xref:host-and-deploy/aspnet-core-module#app_offlinehtm).
+* Użyj Web Deploy i Reference `Microsoft.NET.Sdk.Web` w pliku projektu. Plik *app_offline.htm* jest umieszczony w katalogu głównym katalogu aplikacji sieci Web. Gdy plik jest obecny, moduł ASP.NET Core bezpiecznie zamyka aplikację i obsługuje plik *app_offline.htm* podczas wdrażania. Aby uzyskać więcej informacji, zobacz [Informacje o konfiguracji modułu ASP.NET Core](xref:host-and-deploy/aspnet-core-module#app_offlinehtm).
 * Ręcznie Zatrzymaj pulę aplikacji w Menedżerze usług IIS na serwerze.
-* Porzuć *app_offline. htm* przy użyciu programu PowerShell (wymaga programu PowerShell 5 lub nowszego):
+* Użyj programu PowerShell do porzucenia *app_offline.htm* (wymaga programu PowerShell 5 lub nowszego):
 
   ```powershell
   $pathToApp = 'PATH_TO_APP'
@@ -1022,7 +1024,7 @@ Aby skonfigurować ochronę danych w ramach usług IIS w celu utrwalenia pierśc
 
   Klucze ochrony danych używane przez aplikacje ASP.NET Core są przechowywane w rejestrze zewnętrznym dla aplikacji. Aby utrzymać klucze dla danej aplikacji, należy utworzyć klucze rejestru dla puli aplikacji.
 
-  W przypadku autonomicznych, nieopartych na webfarmie instalacji usług IIS [skrypt programu PowerShell provision-AutoGenKeys. ps1](https://github.com/dotnet/AspNetCore/blob/master/src/DataProtection/Provision-AutoGenKeys.ps1) dla każdej puli aplikacji używanej z aplikacją ASP.NET Core. Ten skrypt tworzy klucz rejestru w rejestrze HKLM, który jest dostępny tylko dla konta procesu roboczego puli aplikacji aplikacji. Klucze są szyfrowane przy użyciu funkcji DPAPI z kluczem dla całego komputera.
+  W przypadku autonomicznych, nieopartych na webfarmie instalacji usług IIS [skrypt ochrony danych Provision-AutoGenKeys.ps1 programu PowerShell](https://github.com/dotnet/AspNetCore/blob/master/src/DataProtection/Provision-AutoGenKeys.ps1) może być używany dla każdej puli aplikacji używanej w aplikacji ASP.NET Core. Ten skrypt tworzy klucz rejestru w rejestrze HKLM, który jest dostępny tylko dla konta procesu roboczego puli aplikacji aplikacji. Klucze są szyfrowane przy użyciu funkcji DPAPI z kluczem dla całego komputera.
 
   W scenariuszach farmy sieci Web aplikacja może być skonfigurowana pod kątem używania ścieżki UNC do przechowywania tego dzwonka klucza ochrony danych. Domyślnie klucze ochrony danych nie są szyfrowane. Upewnij się, że uprawnienia do pliku dla udziału sieciowego są ograniczone do konta systemu Windows, w którym jest uruchamiana aplikacja. Certyfikat x509 może służyć do ochrony kluczy w spoczynku. Rozważ zastosowanie mechanizmu umożliwiającego użytkownikom przekazywanie certyfikatów: Umieść certyfikaty w zaufanym magazynie certyfikatów użytkownika i upewnij się, że są one dostępne na wszystkich komputerach, na których działa aplikacja użytkownika. Szczegóły można znaleźć w temacie [Konfigurowanie ochrony danych ASP.NET Core](xref:security/data-protection/configuration/overview) .
 
@@ -1033,7 +1035,7 @@ Aby skonfigurować ochronę danych w ramach usług IIS w celu utrwalenia pierśc
   [Atrybut setProfileEnvironment](/iis/configuration/system.applicationhost/applicationpools/add/processmodel#configuration) puli aplikacji również musi być włączony. Wartość domyślna `setProfileEnvironment` to `true` . W niektórych scenariuszach (na przykład system operacyjny Windows) `setProfileEnvironment` jest ustawiony na `false` . Jeśli klucze nie są przechowywane w katalogu profilu użytkownika zgodnie z oczekiwaniami:
 
   1. Przejdź do folderu *% windir%/system32/inetsrv/config*
-  1. Otwórz plik *ApplicationHost. config* .
+  1. Otwórz plik *applicationHost.config* .
   1. Znajdź `<system.applicationHost><applicationPools><applicationPoolDefaults><processModel>` element.
   1. Upewnij się, że `setProfileEnvironment` atrybut nie istnieje, który jest wartością domyślną `true` , lub jawnie ustaw wartość atrybutu na `true` .
 
@@ -1076,9 +1078,9 @@ Przypisanie oddzielnej puli aplikacji do aplikacji podrzędnej jest wymagane w p
 
 Aby uzyskać więcej informacji na temat modelu hostingu w procesie i konfigurowania modułu ASP.NET Core, zobacz <xref:host-and-deploy/aspnet-core-module> .
 
-## <a name="configuration-of-iis-with-webconfig"></a>Konfiguracja usług IIS z pliku Web. config
+## <a name="configuration-of-iis-with-webconfig"></a>Konfiguracja usług IIS z web.config
 
-Na konfigurację usług IIS wpływa `<system.webServer>` sekcja *pliku Web. config* dla scenariuszy usług IIS, które są funkcjonalne dla ASP.NET Core aplikacji z modułem ASP.NET Core. Na przykład konfiguracja usług IIS jest funkcjonalna dla kompresji dynamicznej. Jeśli usługi IIS są skonfigurowane na poziomie serwera do korzystania z kompresji dynamicznej, `<urlCompression>` element w pliku *Web. config* aplikacji może go wyłączyć dla aplikacji ASP.NET Core.
+Na konfigurację usług IIS wpływa `<system.webServer>` sekcja *web.config* dla scenariuszy usług IIS, które są funkcjonalne dla ASP.NET Core aplikacji za pomocą modułu ASP.NET Core. Na przykład konfiguracja usług IIS jest funkcjonalna dla kompresji dynamicznej. Jeśli usługi IIS są skonfigurowane na poziomie serwera do korzystania z kompresji dynamicznej, `<urlCompression>` element w pliku *web.config* aplikacji może go wyłączyć dla aplikacji ASP.NET Core.
 
 Aby uzyskać więcej informacji, zobacz następujące tematy:
 
@@ -1086,11 +1088,11 @@ Aby uzyskać więcej informacji, zobacz następujące tematy:
 * <xref:host-and-deploy/aspnet-core-module>
 * <xref:host-and-deploy/iis/modules>
 
-Aby ustawić zmienne środowiskowe dla poszczególnych aplikacji działających w pulach izolowanych aplikacji (obsługiwanych w przypadku usług IIS 10,0 lub nowszych), zobacz sekcję *polecenie Appcmd. exe* w temacie [ \<environmentVariables> zmienne środowiskowe](/iis/configuration/system.applicationHost/applicationPools/add/environmentVariables/#appcmdexe) w dokumentacji dotyczącej programu IIS.
+Aby ustawić zmienne środowiskowe dla poszczególnych aplikacji działających w pulach izolowanych aplikacji (obsługiwanych w przypadku usług IIS 10,0 lub nowszych), zobacz sekcję *polecenieAppCmd.exe* w temacie [ \<environmentVariables> zmienne środowiskowe](/iis/configuration/system.applicationHost/applicationPools/add/environmentVariables/#appcmdexe) w dokumentacji dotyczącej usług IIS.
 
-## <a name="configuration-sections-of-webconfig"></a>Sekcje konfiguracji pliku Web. config
+## <a name="configuration-sections-of-webconfig"></a>Sekcje konfiguracji web.config
 
-Sekcje konfiguracji aplikacji ASP.NET 4. x w *pliku Web. config* nie są używane przez aplikacje ASP.NET Core na potrzeby konfiguracji:
+Sekcje konfiguracyjne aplikacji ASP.NET 4. x w *web.config* nie są używane przez aplikacje ASP.NET Core do konfiguracji:
 
 * `<system.web>`
 * `<appSettings>`
@@ -1166,7 +1168,7 @@ Protokół HTTP/2 jest domyślnie włączony. Połączenia powracają do protoko
 
 *Ta sekcja dotyczy tylko ASP.NET Core aplikacji przeznaczonych dla .NET Framework.*
 
-W przypadku aplikacji ASP.NET Core, która jest przeznaczona dla .NET Framework, żądania opcji nie są domyślnie przesyłane do aplikacji w usługach IIS. Aby dowiedzieć się, jak skonfigurować obsługę usług IIS aplikacji w *pliku Web. config* w celu przekazywania żądań dotyczących opcji, zobacz [Włączanie żądań między źródłami w programie ASP.NET Web API 2: jak działa mechanizm CORS](/aspnet/web-api/overview/security/enabling-cross-origin-requests-in-web-api#how-cors-works).
+W przypadku aplikacji ASP.NET Core, która jest przeznaczona dla .NET Framework, żądania opcji nie są domyślnie przesyłane do aplikacji w usługach IIS. Aby dowiedzieć się, jak skonfigurować obsługę usług IIS w *web.config* , aby przekazywać żądania dotyczące opcji, zobacz [Włączanie żądań między źródłami w ASP.NET Web API 2: jak działa mechanizm CORS](/aspnet/web-api/overview/security/enabling-cross-origin-requests-in-web-api#how-cors-works).
 
 ## <a name="application-initialization-module-and-idle-timeout"></a>Moduł inicjalizacji aplikacji i limit czasu bezczynności
 
@@ -1206,7 +1208,7 @@ Użyj jednego z poniższych metod, aby włączyć moduł inicjowania aplikacji d
   1. Kliknij prawym przyciskiem myszy aplikację i wybierz pozycję Zarządzaj ustawieniami zaawansowanymi **witryny sieci Web** > **Advanced Settings**.
   1. Domyślnym ustawieniem **wstępnego ładowania** jest **wartość false**. Ustaw dla opcji **wstępnego ładowania** **wartość true**. Wybierz przycisk **OK**.
 
-* Korzystając z pliku *Web. config*, Dodaj `<applicationInitialization>` element z `doAppInitAfterRestart` ustawionym do `true` `<system.webServer>` elementów w plik *Web. config* aplikacji:
+* Za pomocą *web.config*Dodaj `<applicationInitialization>` element z `doAppInitAfterRestart` ustawionym do `true` `<system.webServer>` elementów w pliku *web.config* aplikacji:
 
   ```xml
   <?xml version="1.0" encoding="utf-8"?>
@@ -1276,7 +1278,7 @@ Obsługiwane są następujące systemy operacyjne:
 * System Windows 7 lub nowszy
 * Windows Server 2008 R2 lub nowszy
 
-[Serwer http. sys](xref:fundamentals/servers/httpsys) (znany wcześniej jako webListener) nie działa w konfiguracji zwrotnego serwera proxy z usługami IIS. Użyj [serwera Kestrel](xref:fundamentals/servers/kestrel).
+[SerwerHTTP.sys](xref:fundamentals/servers/httpsys) (znany wcześniej jako webListener) nie działa w konfiguracji zwrotnego serwera proxy z usługami IIS. Użyj [serwera Kestrel](xref:fundamentals/servers/kestrel).
 
 Aby uzyskać informacje na temat hostingu na platformie Azure, zobacz <xref:host-and-deploy/azure-apps/index> .
 
@@ -1302,7 +1304,7 @@ Na poniższym diagramie przedstawiono relację między usługami IIS, modułem A
 
 ![Moduł ASP.NET Core](index/_static/ancm-outofprocess.png)
 
-Żądania docierają do sieci Web do sterownika HTTP. sys trybu jądra. Sterownik kieruje żądania do usług IIS na skonfigurowanym porcie witryny sieci Web, zwykle 80 (HTTP) lub 443 (HTTPS). Moduł przekazuje żądania do Kestrel na losowo wybranym porcie dla aplikacji, która nie jest portem 80 lub 443.
+Żądania docierają z sieci Web do sterownika HTTP.sys trybu jądra. Sterownik kieruje żądania do usług IIS na skonfigurowanym porcie witryny sieci Web, zwykle 80 (HTTP) lub 443 (HTTPS). Moduł przekazuje żądania do Kestrel na losowo wybranym porcie dla aplikacji, która nie jest portem 80 lub 443.
 
 Moduł określa port za pośrednictwem zmiennej środowiskowej podczas uruchamiania, a [oprogramowanie pośredniczące integracji usług IIS](xref:host-and-deploy/iis/index#enable-the-iisintegration-components) konfiguruje serwer do nasłuchiwania `http://localhost:{port}` . Dodatkowe sprawdzenia są wykonywane, a żądania, które nie pochodzą z modułu, są odrzucane. Moduł nie obsługuje przekazywania HTTPS, dlatego żądania są przekazywane przez protokół HTTP nawet wtedy, gdy są odbierane przez usługę IIS przez protokół HTTPS.
 
@@ -1362,21 +1364,21 @@ services.Configure<IISOptions>(options =>
 
 [Oprogramowanie pośredniczące integracji usług IIS](#enable-the-iisintegration-components), które konfiguruje przekazane nagłówki oprogramowania pośredniczącego, a moduł ASP.NET Core jest skonfigurowany do przesyłania dalej schematu (http/https) i zdalnego adresu IP, z którego pochodzi żądanie. W przypadku aplikacji hostowanych za dodatkowymi serwerami proxy i modułami równoważenia obciążenia może być wymagana dodatkowa konfiguracja. Aby uzyskać więcej informacji, zobacz [konfigurowanie ASP.NET Core do pracy z serwerami proxy i usługami równoważenia obciążenia](xref:host-and-deploy/proxy-load-balancer).
 
-### <a name="webconfig-file"></a>plik Web. config
+### <a name="webconfig-file"></a>Plik web.config
 
-Plik *Web. config* konfiguruje [moduł ASP.NET Core](xref:host-and-deploy/aspnet-core-module). Tworzenie, przekształcanie i publikowanie pliku *Web. config* jest obsługiwane przez obiekt docelowy MSBuild ( `_TransformWebConfig` ), gdy projekt jest publikowany. Ten element docelowy znajduje się w obiektach docelowych zestawu SDK sieci Web ( `Microsoft.NET.Sdk.Web` ). Zestaw SDK jest ustawiany u góry pliku projektu:
+Plik *web.config* konfiguruje [moduł ASP.NET Core](xref:host-and-deploy/aspnet-core-module). Tworzenie, przekształcanie i publikowanie pliku *web.config* jest obsługiwane przez obiekt docelowy MSBuild ( `_TransformWebConfig` ), gdy projekt jest publikowany. Ten element docelowy znajduje się w obiektach docelowych zestawu SDK sieci Web ( `Microsoft.NET.Sdk.Web` ). Zestaw SDK jest ustawiany u góry pliku projektu:
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk.Web">
 ```
 
-Jeśli plik *Web. config* nie jest obecny w projekcie, plik zostanie utworzony przy użyciu poprawnych *processPath* i *argumentów* w celu skonfigurowania modułu ASP.NET Core i przesunięcia do [publikowanych danych wyjściowych](xref:host-and-deploy/directory-structure).
+Jeśli plik *web.config* nie jest obecny w projekcie, plik zostanie utworzony z prawidłowymi *argumentami* *ProcessPath* i, aby skonfigurować moduł ASP.NET Core i przeniesiony do [publikowanych danych wyjściowych](xref:host-and-deploy/directory-structure).
 
-Jeśli plik *Web. config* znajduje się w projekcie, plik jest przekształcany przy użyciu poprawnych *processPath* i *argumentów* w celu skonfigurowania modułu ASP.NET Core i przesunięcia do publikowanych danych wyjściowych. Transformacja nie modyfikuje ustawień konfiguracji usług IIS w pliku.
+Jeśli plik *web.config* jest obecny w projekcie, plik zostanie przekształcony przy użyciu poprawnych *processPath* i *argumentów* w celu skonfigurowania modułu ASP.NET Core i przeniesiona do publikowanych danych wyjściowych. Transformacja nie modyfikuje ustawień konfiguracji usług IIS w pliku.
 
-Plik *Web. config* może zapewnić dodatkowe ustawienia konfiguracji usług IIS kontrolujące aktywne moduły usług IIS. Aby uzyskać informacje na temat modułów usług IIS, które mogą przetwarzać żądania z aplikacjami ASP.NET Core, zobacz temat [moduły usług IIS](xref:host-and-deploy/iis/modules) .
+Plik *web.config* może zapewnić dodatkowe ustawienia konfiguracji usług IIS kontrolujące aktywne moduły usług IIS. Aby uzyskać informacje na temat modułów usług IIS, które mogą przetwarzać żądania z aplikacjami ASP.NET Core, zobacz temat [moduły usług IIS](xref:host-and-deploy/iis/modules) .
 
-Aby zapobiec transformacje pliku *Web. config* przez zestaw SDK sieci Web, należy użyć **\<IsTransformWebConfigDisabled>** właściwości w pliku projektu:
+Aby zapobiec transformacji pliku *web.config* przez zestaw SDK sieci Web, należy użyć **\<IsTransformWebConfigDisabled>** właściwości w pliku projektu:
 
 ```xml
 <PropertyGroup>
@@ -1386,17 +1388,17 @@ Aby zapobiec transformacje pliku *Web. config* przez zestaw SDK sieci Web, nale�
 
 Podczas wyłączania pliku zestawu SDK sieci Web, *processPath* i *argumenty* powinny być ustawiane ręcznie przez dewelopera. Aby uzyskać więcej informacji, zobacz <xref:host-and-deploy/aspnet-core-module>.
 
-### <a name="webconfig-file-location"></a>Lokalizacja pliku Web. config
+### <a name="webconfig-file-location"></a>Lokalizacja pliku web.config
 
-Aby poprawnie skonfigurować [moduł ASP.NET Core](xref:host-and-deploy/aspnet-core-module) , plik *Web. config* musi znajdować się w ścieżce [katalogu głównego zawartości](xref:fundamentals/index#content-root) (zazwyczaj ścieżka podstawowa aplikacji) wdrożonej aplikacji. Ta sama lokalizacja jest taka sama jak ścieżka fizyczna witryny sieci Web dostarczana do usług IIS. Plik *Web. config* jest wymagany w katalogu głównym aplikacji, aby umożliwić Publikowanie wielu aplikacji przy użyciu Web Deploy.
+W celu poprawnego skonfigurowania [modułu ASP.NET Core](xref:host-and-deploy/aspnet-core-module) plik *web.config* musi znajdować się w ścieżce [katalogu głównego zawartości](xref:fundamentals/index#content-root) (zazwyczaj ścieżka podstawowa aplikacji) wdrożonej aplikacji. Ta sama lokalizacja jest taka sama jak ścieżka fizyczna witryny sieci Web dostarczana do usług IIS. Plik *web.config* jest wymagany w katalogu głównym aplikacji, aby umożliwić Publikowanie wielu aplikacji przy użyciu Web Deploy.
 
-Poufne pliki znajdują się w ścieżce fizycznej aplikacji, takiej jak * \<assembly> . runtimeconfig. JSON*, * \<assembly> . XML* (Komentarze dokumentacji XML) i * \<assembly> . deps. JSON*. Gdy plik *Web. config* jest obecny, a lokacja jest uruchamiana normalnie, usługi IIS nie będą obsługiwały tych poufnych plików, jeśli są żądane. Jeśli brakuje pliku *Web. config* o nazwie lub nie można skonfigurować lokacji do normalnego uruchamiania, usługi IIS mogą publicznie obsłużyć poufne pliki.
+Poufne pliki znajdują się w ścieżce fizycznej aplikacji, na przykład * \<assembly>.runtimeconfig.jsna*, * \<assembly> . XML* (Komentarze dokumentacji XML) i * \<assembly>.deps.js*. Gdy plik *web.config* jest obecny, a lokacja jest uruchamiana normalnie, usługi IIS nie będą obsługiwały tych poufnych plików, jeśli są żądane. Jeśli brakuje pliku *web.config* , nazwa jest nieprawidłowa lub nie można skonfigurować lokacji do normalnego uruchamiania, usługi IIS mogą publicznie udostępniać poufne pliki.
 
-**Plik *Web. config* musi być obecny we wdrożeniu przez cały czas, prawidłowo nazwany i można skonfigurować lokację pod kątem normalnego uruchamiania. Nigdy nie należy usuwać pliku *Web. config* z wdrożenia produkcyjnego.**
+**Plik *web.config* musi być obecny we wdrożeniu przez cały czas, prawidłowo nazwany i można skonfigurować lokację pod kątem normalnego uruchamiania. Nigdy nie usuwaj pliku *web.config* z wdrożenia produkcyjnego.**
 
 ### <a name="transform-webconfig"></a>Przekształcanie pliku web.config
 
-Jeśli musisz przekształcić *plik Web. config* przy publikowaniu (na przykład ustawić zmienne środowiskowe na podstawie konfiguracji, profilu lub środowiska), zobacz <xref:host-and-deploy/iis/transform-webconfig> .
+Jeśli musisz przekształcić *web.config* przy publikowaniu (na przykład ustawić zmienne środowiskowe na podstawie konfiguracji, profilu lub środowiska), zobacz <xref:host-and-deploy/iis/transform-webconfig> .
 
 ## <a name="iis-configuration"></a>Konfiguracja usług IIS
 
@@ -1471,7 +1473,7 @@ Zainstaluj *pakiet hostingu platformy .NET Core* w systemie hostingu. Pakiet ins
    * `OPT_NO_RUNTIME=1`: Pomiń Instalowanie środowiska uruchomieniowego platformy .NET Core. Używany, gdy serwer obsługuje tylko [wdrożenia samodzielne (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd).
    * `OPT_NO_SHAREDFX=1`: Pomiń instalację ASP.NET Shared Framework (ASP.NET Runtime). Używany, gdy serwer obsługuje tylko [wdrożenia samodzielne (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd).
    * `OPT_NO_X86=1`: Pomiń Instalowanie środowiska uruchomieniowego x86. Użyj tego parametru, Jeśli wiesz, że nie będziesz hostować aplikacji 32-bitowych. Jeśli w przyszłości będziesz hostować zarówno aplikacje 32-bitowe, jak i 64-bitowe, nie używaj tego parametru i zainstaluj oba środowiska uruchomieniowe.
-   * `OPT_NO_SHARED_CONFIG_CHECK=1`: Wyłącz sprawdzanie przy użyciu konfiguracji udostępnionej usług IIS, gdy konfiguracja udostępniona (*ApplicationHost. config*) znajduje się na tym samym komputerze, na którym zainstalowano program IIS. *Dostępne tylko w przypadku ASP.NET Core 2,2 lub nowszych instalatorów pakietu do obsługi.* Aby uzyskać więcej informacji, zobacz <xref:host-and-deploy/aspnet-core-module#aspnet-core-module-with-an-iis-shared-configuration>.
+   * `OPT_NO_SHARED_CONFIG_CHECK=1`: Wyłącz sprawdzanie przy użyciu konfiguracji udostępnionej usług IIS, gdy konfiguracja udostępniona (*applicationHost.config*) znajduje się na tym samym komputerze, na którym zainstalowano program IIS. *Dostępne tylko w przypadku ASP.NET Core 2,2 lub nowszych instalatorów pakietu do obsługi.* Aby uzyskać więcej informacji, zobacz <xref:host-and-deploy/aspnet-core-module#aspnet-core-module-with-an-iis-shared-configuration>.
 1. Uruchom ponownie system lub wykonaj następujące polecenia w powłoce poleceń:
 
    ```console
@@ -1557,9 +1559,9 @@ W poniższym przykładzie lokacja jest powiązana z **nazwą hosta** usług IIS 
 
 Pliki w folderze wdrożenia są zablokowane, gdy aplikacja jest uruchomiona. Nie można zastąpić zablokowanych plików podczas wdrażania. Aby zwolnić zablokowane pliki we wdrożeniu, Zatrzymaj pulę aplikacji, korzystając z **jednej** z następujących metod:
 
-* Użyj Web Deploy i Reference `Microsoft.NET.Sdk.Web` w pliku projektu. Plik *app_offline. htm* jest umieszczany w katalogu głównym katalogu aplikacji sieci Web. Gdy plik jest obecny, moduł ASP.NET Core bezpiecznie zamyka aplikację i obsługuje plik *app_offline. htm* podczas wdrażania. Aby uzyskać więcej informacji, zobacz [Informacje o konfiguracji modułu ASP.NET Core](xref:host-and-deploy/aspnet-core-module#app_offlinehtm).
+* Użyj Web Deploy i Reference `Microsoft.NET.Sdk.Web` w pliku projektu. Plik *app_offline.htm* jest umieszczony w katalogu głównym katalogu aplikacji sieci Web. Gdy plik jest obecny, moduł ASP.NET Core bezpiecznie zamyka aplikację i obsługuje plik *app_offline.htm* podczas wdrażania. Aby uzyskać więcej informacji, zobacz [Informacje o konfiguracji modułu ASP.NET Core](xref:host-and-deploy/aspnet-core-module#app_offlinehtm).
 * Ręcznie Zatrzymaj pulę aplikacji w Menedżerze usług IIS na serwerze.
-* Porzuć *app_offline. htm* przy użyciu programu PowerShell (wymaga programu PowerShell 5 lub nowszego):
+* Użyj programu PowerShell do porzucenia *app_offline.htm* (wymaga programu PowerShell 5 lub nowszego):
 
   ```powershell
   $pathToApp = 'PATH_TO_APP'
@@ -1590,7 +1592,7 @@ Aby skonfigurować ochronę danych w ramach usług IIS w celu utrwalenia pierśc
 
   Klucze ochrony danych używane przez aplikacje ASP.NET Core są przechowywane w rejestrze zewnętrznym dla aplikacji. Aby utrzymać klucze dla danej aplikacji, należy utworzyć klucze rejestru dla puli aplikacji.
 
-  W przypadku autonomicznych, nieopartych na webfarmie instalacji usług IIS [skrypt programu PowerShell provision-AutoGenKeys. ps1](https://github.com/dotnet/AspNetCore/blob/master/src/DataProtection/Provision-AutoGenKeys.ps1) dla każdej puli aplikacji używanej z aplikacją ASP.NET Core. Ten skrypt tworzy klucz rejestru w rejestrze HKLM, który jest dostępny tylko dla konta procesu roboczego puli aplikacji aplikacji. Klucze są szyfrowane przy użyciu funkcji DPAPI z kluczem dla całego komputera.
+  W przypadku autonomicznych, nieopartych na webfarmie instalacji usług IIS [skrypt ochrony danych Provision-AutoGenKeys.ps1 programu PowerShell](https://github.com/dotnet/AspNetCore/blob/master/src/DataProtection/Provision-AutoGenKeys.ps1) może być używany dla każdej puli aplikacji używanej w aplikacji ASP.NET Core. Ten skrypt tworzy klucz rejestru w rejestrze HKLM, który jest dostępny tylko dla konta procesu roboczego puli aplikacji aplikacji. Klucze są szyfrowane przy użyciu funkcji DPAPI z kluczem dla całego komputera.
 
   W scenariuszach farmy sieci Web aplikacja może być skonfigurowana pod kątem używania ścieżki UNC do przechowywania tego dzwonka klucza ochrony danych. Domyślnie klucze ochrony danych nie są szyfrowane. Upewnij się, że uprawnienia do pliku dla udziału sieciowego są ograniczone do konta systemu Windows, w którym jest uruchamiana aplikacja. Certyfikat x509 może służyć do ochrony kluczy w spoczynku. Rozważ zastosowanie mechanizmu umożliwiającego użytkownikom przekazywanie certyfikatów: Umieść certyfikaty w zaufanym magazynie certyfikatów użytkownika i upewnij się, że są one dostępne na wszystkich komputerach, na których działa aplikacja użytkownika. Szczegóły można znaleźć w temacie [Konfigurowanie ochrony danych ASP.NET Core](xref:security/data-protection/configuration/overview) .
 
@@ -1601,7 +1603,7 @@ Aby skonfigurować ochronę danych w ramach usług IIS w celu utrwalenia pierśc
   [Atrybut setProfileEnvironment](/iis/configuration/system.applicationhost/applicationpools/add/processmodel#configuration) puli aplikacji również musi być włączony. Wartość domyślna `setProfileEnvironment` to `true` . W niektórych scenariuszach (na przykład system operacyjny Windows) `setProfileEnvironment` jest ustawiony na `false` . Jeśli klucze nie są przechowywane w katalogu profilu użytkownika zgodnie z oczekiwaniami:
 
   1. Przejdź do folderu *% windir%/system32/inetsrv/config*
-  1. Otwórz plik *ApplicationHost. config* .
+  1. Otwórz plik *applicationHost.config* .
   1. Znajdź `<system.applicationHost><applicationPools><applicationPoolDefaults><processModel>` element.
   1. Upewnij się, że `setProfileEnvironment` atrybut nie istnieje, który jest wartością domyślną `true` , lub jawnie ustaw wartość atrybutu na `true` .
 
@@ -1626,9 +1628,9 @@ Aby skonfigurować ochronę danych w ramach usług IIS w celu utrwalenia pierśc
 
 Aplikacja ASP.NET Core może być hostowana jako [podaplikacja usług IIS (podrzędna)](/iis/get-started/planning-your-iis-architecture/understanding-sites-applications-and-virtual-directories-on-iis#applications). Ścieżka aplikacji podrzędnej jest częścią adresu URL aplikacji głównej.
 
-Aplikacja podrzędna nie powinna zawierać modułu ASP.NET Core jako programu obsługi. Jeśli moduł zostanie dodany jako program obsługi w pliku *Web. config* aplikacji podrzędnej, podczas próby przeglądania aplikacji podrzędnej *Wystąpił błąd wewnętrzny serwera 500,19* odwołujący się do uszkodzonego pliku konfiguracji.
+Aplikacja podrzędna nie powinna zawierać modułu ASP.NET Core jako programu obsługi. Jeśli moduł zostanie dodany jako program obsługi w pliku *web.config* aplikacji podrzędnej, *wystąpi błąd wewnętrzny serwera 500,19* odwołujący się do uszkodzonego pliku konfiguracji podczas próby przeglądania aplikacji podrzędnej.
 
-Poniższy przykład przedstawia opublikowany plik *Web. config* dla aplikacji podrzędnej ASP.NET Core:
+Poniższy przykład przedstawia opublikowany plik *web.config* dla ASP.NET Core aplikacji podrzędnej:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -1642,7 +1644,7 @@ Poniższy przykład przedstawia opublikowany plik *Web. config* dla aplikacji po
 </configuration>
 ```
 
-W przypadku hostowania aplikacji podrzędnej non-ASP.NET Core w aplikacji ASP.NET Core jawnie Usuń dziedziczoną procedurę obsługi w pliku *Web. config* aplikacji podrzędnej:
+W przypadku hostowania aplikacji podrzędnej non-ASP.NET Core w aplikacji ASP.NET Core jawnie Usuń dziedziczoną procedurę obsługi w pliku *web.config* aplikacji podrzędnej:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -1677,9 +1679,9 @@ Przypisanie oddzielnej puli aplikacji do aplikacji podrzędnej jest wymagane w p
 
 Aby uzyskać więcej informacji na temat modelu hostingu w procesie i konfigurowania modułu ASP.NET Core, zobacz <xref:host-and-deploy/aspnet-core-module> .
 
-## <a name="configuration-of-iis-with-webconfig"></a>Konfiguracja usług IIS z pliku Web. config
+## <a name="configuration-of-iis-with-webconfig"></a>Konfiguracja usług IIS z web.config
 
-Na konfigurację usług IIS wpływa `<system.webServer>` sekcja *pliku Web. config* dla scenariuszy usług IIS, które są funkcjonalne dla ASP.NET Core aplikacji z modułem ASP.NET Core. Na przykład konfiguracja usług IIS jest funkcjonalna dla kompresji dynamicznej. Jeśli usługi IIS są skonfigurowane na poziomie serwera do korzystania z kompresji dynamicznej, `<urlCompression>` element w pliku *Web. config* aplikacji może go wyłączyć dla aplikacji ASP.NET Core.
+Na konfigurację usług IIS wpływa `<system.webServer>` sekcja *web.config* dla scenariuszy usług IIS, które są funkcjonalne dla ASP.NET Core aplikacji za pomocą modułu ASP.NET Core. Na przykład konfiguracja usług IIS jest funkcjonalna dla kompresji dynamicznej. Jeśli usługi IIS są skonfigurowane na poziomie serwera do korzystania z kompresji dynamicznej, `<urlCompression>` element w pliku *web.config* aplikacji może go wyłączyć dla aplikacji ASP.NET Core.
 
 Aby uzyskać więcej informacji, zobacz następujące tematy:
 
@@ -1687,11 +1689,11 @@ Aby uzyskać więcej informacji, zobacz następujące tematy:
 * <xref:host-and-deploy/aspnet-core-module>
 * <xref:host-and-deploy/iis/modules>
 
-Aby ustawić zmienne środowiskowe dla poszczególnych aplikacji działających w pulach izolowanych aplikacji (obsługiwanych w przypadku usług IIS 10,0 lub nowszych), zobacz sekcję *polecenie Appcmd. exe* w temacie [ \<environmentVariables> zmienne środowiskowe](/iis/configuration/system.applicationHost/applicationPools/add/environmentVariables/#appcmdexe) w dokumentacji dotyczącej programu IIS.
+Aby ustawić zmienne środowiskowe dla poszczególnych aplikacji działających w pulach izolowanych aplikacji (obsługiwanych w przypadku usług IIS 10,0 lub nowszych), zobacz sekcję *polecenieAppCmd.exe* w temacie [ \<environmentVariables> zmienne środowiskowe](/iis/configuration/system.applicationHost/applicationPools/add/environmentVariables/#appcmdexe) w dokumentacji dotyczącej usług IIS.
 
-## <a name="configuration-sections-of-webconfig"></a>Sekcje konfiguracji pliku Web. config
+## <a name="configuration-sections-of-webconfig"></a>Sekcje konfiguracji web.config
 
-Sekcje konfiguracji aplikacji ASP.NET 4. x w *pliku Web. config* nie są używane przez aplikacje ASP.NET Core na potrzeby konfiguracji:
+Sekcje konfiguracyjne aplikacji ASP.NET 4. x w *web.config* nie są używane przez aplikacje ASP.NET Core do konfiguracji:
 
 * `<system.web>`
 * `<appSettings>`
@@ -1757,7 +1759,7 @@ Protokół HTTP/2 jest domyślnie włączony. Połączenia powracają do protoko
 
 *Ta sekcja dotyczy tylko ASP.NET Core aplikacji przeznaczonych dla .NET Framework.*
 
-W przypadku aplikacji ASP.NET Core, która jest przeznaczona dla .NET Framework, żądania opcji nie są domyślnie przesyłane do aplikacji w usługach IIS. Aby dowiedzieć się, jak skonfigurować obsługę usług IIS aplikacji w *pliku Web. config* w celu przekazywania żądań dotyczących opcji, zobacz [Włączanie żądań między źródłami w programie ASP.NET Web API 2: jak działa mechanizm CORS](/aspnet/web-api/overview/security/enabling-cross-origin-requests-in-web-api#how-cors-works).
+W przypadku aplikacji ASP.NET Core, która jest przeznaczona dla .NET Framework, żądania opcji nie są domyślnie przesyłane do aplikacji w usługach IIS. Aby dowiedzieć się, jak skonfigurować obsługę usług IIS w *web.config* , aby przekazywać żądania dotyczące opcji, zobacz [Włączanie żądań między źródłami w ASP.NET Web API 2: jak działa mechanizm CORS](/aspnet/web-api/overview/security/enabling-cross-origin-requests-in-web-api#how-cors-works).
 
 ## <a name="deployment-resources-for-iis-administrators"></a>Zasoby wdrażania dla administratorów usług IIS
 

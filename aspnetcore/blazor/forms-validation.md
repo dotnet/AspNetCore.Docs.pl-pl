@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 06/04/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/forms-validation
-ms.openlocfilehash: 588a24f7850c35bcbadc1c86edc61b23cc7a913e
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
+ms.openlocfilehash: 1ed87b4aa2519334d2339b500a615aa96ef4d57d
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85242670"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402965"
 ---
 # <a name="aspnet-core-blazor-forms-and-validation"></a>ASP.NET Core Blazor formularzy i walidacji
 

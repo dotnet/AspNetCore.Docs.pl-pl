@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/security/content-security-policy
-ms.openlocfilehash: 360fff9383e25a6b5b9308cfebd397f7f4ee31a6
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
+ms.openlocfilehash: 5c53ac64d3ae1b365b40c519eb119f913d58cad1
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85242982"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402445"
 ---
 # <a name="enforce-a-content-security-policy-for-aspnet-core-blazor"></a>Wymuś zasady zabezpieczeń zawartości dla ASP.NET CoreBlazor
 
@@ -38,7 +40,7 @@ Dostawca CSP jest obsługiwany w większości nowoczesnych przeglądarek klasycz
 
 ## <a name="policy-directives"></a>Dyrektywy zasad
 
-Określ w minimalny sposób następujące dyrektywy i źródła dla Blazor aplikacji. Dodaj dodatkowe dyrektywy i źródła zgodnie z wymaganiami. Poniższe dyrektywy są używane w sekcji [stosowanie zasad](#apply-the-policy) w tym artykule, w której znajdują się przykładowe zasady zabezpieczeń dla Blazor zestawu webassembly i Blazor serwera:
+Określ w minimalny sposób następujące dyrektywy i źródła dla Blazor aplikacji. Dodaj dodatkowe dyrektywy i źródła zgodnie z wymaganiami. Poniższe dyrektywy są używane w sekcji [stosowanie zasad](#apply-the-policy) w tym artykule, w której znajdują się przykładowe zasady zabezpieczeń dla Blazor WebAssembly i Blazor Server :
 
 * [Base-URI](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/base-uri): ogranicza adresy URL `<base>` tagu strony. Określ, `self` Aby wskazać, że pochodzenie aplikacji, w tym schemat i numer portu, jest prawidłowym źródłem.
 * [Zablokuj wszystko-zawartość](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/block-all-mixed-content): zapobiega ładowaniu mieszanej zawartości http i https.
@@ -50,17 +52,17 @@ Określ w minimalny sposób następujące dyrektywy i źródła dla Blazor aplik
 * [skrypt-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/script-src): wskazuje prawidłowe źródła dla skryptów.
   * Określ `https://stackpath.bootstrapcdn.com/` Źródło hosta dla skryptów Bootstrap.
   * Określ, `self` Aby wskazać, że pochodzenie aplikacji, w tym schemat i numer portu, jest prawidłowym źródłem.
-  * W Blazor aplikacji webassembly:
-    * Określ następujące skróty, aby zezwolić na ładowanie wymaganych Blazor skryptów wbudowanych webassembly:
+  * W Blazor WebAssembly aplikacji:
+    * Określ następujące skróty, aby zezwolić na ładowanie wymaganych Blazor WebAssembly skryptów wbudowanych:
       * `sha256-v8ZC9OgMhcnEQ/Me77/R9TlJfzOBqrMTW8e1KuqLaqc=`
       * `sha256-If//FtbPc03afjLezvWHnC3Nbu4fDM04IIzkPaf3pH0=`
       * `sha256-v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA=`
     * Określ `unsafe-eval` użycie `eval()` i metody tworzenia kodu z ciągów.
-  * W Blazor aplikacji serwera określ `sha256-34WLX60Tw3aG6hylk0plKbZZFXCuepeQ6Hu7OqRf8PI=` skrót dla skryptu wbudowanego, który wykonuje wykrywanie powrotu dla arkuszy stylów.
+  * W Blazor Server aplikacji Określ `sha256-34WLX60Tw3aG6hylk0plKbZZFXCuepeQ6Hu7OqRf8PI=` skrót do skryptu wbudowanego, który wykonuje wykrywanie powrotu dla arkuszy stylów.
 * [styl-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/style-src): wskazuje prawidłowe źródła dla arkuszy stylów.
   * Określ `https://stackpath.bootstrapcdn.com/` Źródło hosta dla arkuszy stylów ładowania początkowego.
   * Określ, `self` Aby wskazać, że pochodzenie aplikacji, w tym schemat i numer portu, jest prawidłowym źródłem.
-  * Określ `unsafe-inline` , aby zezwolić na używanie wbudowanych stylów. Deklaracja wbudowana jest wymagana dla interfejsu użytkownika w Blazor aplikacjach serwerowych do ponownego połączenia klienta i serwera po początkowym żądaniu. W przyszłej wersji style wbudowane mogą zostać usunięte, aby `unsafe-inline` nie były już wymagane.
+  * Określ `unsafe-inline` , aby zezwolić na używanie wbudowanych stylów. Deklaracja wbudowana jest wymagana dla interfejsu użytkownika w Blazor Server aplikacjach do ponownego połączenia klienta i serwera po początkowym żądaniu. W przyszłej wersji style wbudowane mogą zostać usunięte, aby `unsafe-inline` nie były już wymagane.
 * [uaktualnienie-niezabezpieczone-żądania](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/upgrade-insecure-requests): wskazuje, że adresy URL zawartości z źródeł niezabezpieczonych (http) powinny zostać bezpiecznie pobrane za pośrednictwem protokołu HTTPS.
 
 Powyższe dyrektywy są obsługiwane przez wszystkie przeglądarki z wyjątkiem programu Microsoft Internet Explorer.
@@ -81,9 +83,9 @@ Użyj `<meta>` znacznika, aby zastosować zasady:
 * Umieść dyrektywy w `content` wartości atrybutu. Oddziel dyrektywy średnikami ( `;` ).
 * Zawsze umieszczaj `meta` tag w `<head>` zawartości.
 
-W poniższych sekcjach przedstawiono przykładowe zasady dla Blazor zestawu webassembly i Blazor serwera. Te przykłady dotyczą wersji tego artykułu dla każdej wersji programu Blazor . Aby użyć wersji odpowiedniej dla wersji, wybierz wersję dokumentu z selektorem listy rozwijanej **wersji** na tej stronie sieci Web.
+W poniższych sekcjach przedstawiono przykładowe zasady dla Blazor WebAssembly i Blazor Server . Te przykłady dotyczą wersji tego artykułu dla każdej wersji programu Blazor . Aby użyć wersji odpowiedniej dla wersji, wybierz wersję dokumentu z selektorem listy rozwijanej **wersji** na tej stronie sieci Web.
 
-### <a name="blazor-webassembly"></a>BlazorZestaw webassembly
+### Blazor WebAssembly
 
 W obszarze `<head>` zawartość `wwwroot/index.html` strony hosta Zastosuj dyrektywy opisane w sekcji [dyrektywy zasad](#policy-directives) :
 
@@ -106,7 +108,7 @@ W obszarze `<head>` zawartość `wwwroot/index.html` strony hosta Zastosuj dyrek
                upgrade-insecure-requests;">
 ```
 
-### <a name="blazor-server"></a>BlazorServer
+### Blazor Server
 
 W obszarze `<head>` zawartość `Pages/_Host.cshtml` strony hosta Zastosuj dyrektywy opisane w sekcji [dyrektywy zasad](#policy-directives) :
 

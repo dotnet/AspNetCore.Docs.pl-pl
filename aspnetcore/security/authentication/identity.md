@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 01/15/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/identity
-ms.openlocfilehash: 6d9532ed8ff89735f41c362b27826436c37c6cb5
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: 97cbc5f68d20c06e92a56ead85c8377d4e8ef582
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84452138"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404590"
 ---
 # <a name="introduction-to-identity-on-aspnet-core"></a>Wprowadzenie do Identity ASP.NET Core
 
@@ -73,7 +75,7 @@ dotnet new webapp --auth Individual -uld -o WebApp1
 
 ---
 
-Wygenerowany projekt zawiera [ASP.NET Core Identity ](xref:security/authentication/identity) jako [ Razor bibliotekę klas](xref:razor-pages/ui-class). Identity Razor Biblioteka klas uwidacznia punkty końcowe z `Identity` obszarem. Przykład:
+Wygenerowany projekt zawiera [ASP.NET Core Identity ](xref:security/authentication/identity) jako [ Razor bibliotekę klas](xref:razor-pages/ui-class). Identity Razor Biblioteka klas uwidacznia punkty końcowe z `Identity` obszarem. Na przykład:
 
 * /Identity/Account/Login
 * /Identity/Account/Logout
@@ -238,6 +240,7 @@ Aby uniemożliwić publikowanie statycznych Identity zasobów (arkuszy stylów i
 
 ## <a name="next-steps"></a>Następne kroki
 
+* [ASP.NET Core Identity kod źródłowy](https://github.com/dotnet/aspnetcore/tree/master/src/Identity)
 * Zobacz [ten problem](https://github.com/dotnet/AspNetCore.Docs/issues/5131) w usłudze GitHub, aby uzyskać informacje dotyczące konfigurowania Identity za pomocą oprogramowania SQLite.
 * [PonowneIdentity](xref:security/authentication/identity-configuration)
 * <xref:security/authorization/secure-data>
@@ -293,7 +296,7 @@ dotnet new webapp --auth Individual -o WebApp1
 
 ---
 
-Wygenerowany projekt zawiera [ASP.NET Core Identity ](xref:security/authentication/identity) jako [ Razor bibliotekę klas](xref:razor-pages/ui-class). Identity Razor Biblioteka klas uwidacznia punkty końcowe z `Identity` obszarem. Przykład:
+Wygenerowany projekt zawiera [ASP.NET Core Identity ](xref:security/authentication/identity) jako [ Razor bibliotekę klas](xref:razor-pages/ui-class). Identity Razor Biblioteka klas uwidacznia punkty końcowe z `Identity` obszarem. Na przykład:
 
 * /Identity/Account/Login
 * /Identity/Account/Logout

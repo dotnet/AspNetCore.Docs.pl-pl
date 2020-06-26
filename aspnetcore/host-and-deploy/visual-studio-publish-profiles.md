@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 05/14/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: host-and-deploy/visual-studio-publish-profiles
-ms.openlocfilehash: f6fe5b4fc3eca82f2807bd0d2376bbf6ea3eb8dd
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: a386066f8d780c5e71c3634065c4e06b74e83c8c
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84106289"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85403862"
 ---
 # <a name="visual-studio-publish-profiles-pubxml-for-aspnet-core-app-deployment"></a>Profile publikacji programu Visual Studio (. pubxml) dla wdrożenia aplikacji ASP.NET Core
 
@@ -72,11 +74,11 @@ Po wybraniu przycisku **Publikuj** w programie Visual Studio lub opublikowaniu z
 * Elementy publikowania są obliczane (pliki, które są konieczne do opublikowania).
 * Projekt jest publikowany (pliki obliczane są kopiowane do lokalizacji docelowej publikowania).
 
-Gdy projekt ASP.NET Core odwołuje się do `Microsoft.NET.Sdk.Web` pliku projektu, plik *app_offline. htm* zostanie umieszczony w katalogu głównym katalogu aplikacji sieci Web. Gdy plik jest obecny, moduł ASP.NET Core bezpiecznie zamyka aplikację i obsługuje plik *app_offline. htm* podczas wdrażania. Aby uzyskać więcej informacji, zobacz [Informacje o konfiguracji modułu ASP.NET Core](xref:host-and-deploy/aspnet-core-module#app_offlinehtm).
+Gdy projekt ASP.NET Core odwołuje się do `Microsoft.NET.Sdk.Web` pliku projektu, plik *app_offline.htm* zostanie umieszczony w katalogu głównym katalogu aplikacji sieci Web. Gdy plik jest obecny, moduł ASP.NET Core bezpiecznie zamyka aplikację i obsługuje plik *app_offline.htm* podczas wdrażania. Aby uzyskać więcej informacji, zobacz [Informacje o konfiguracji modułu ASP.NET Core](xref:host-and-deploy/aspnet-core-module#app_offlinehtm).
 
 ## <a name="basic-command-line-publishing"></a>Podstawowe publikowanie w wierszu polecenia
 
-Publikowanie w wierszu polecenia działa na wszystkich platformach obsługiwanych przez platformę .NET Core i nie wymaga programu Visual Studio. W poniższych przykładach polecenie interfejs wiersza polecenia platformy .NET Core [dotnet Publish](/dotnet/core/tools/dotnet-publish) jest uruchamiane z katalogu projektu (który zawiera plik *. csproj* ). Jeśli folder projektu nie jest bieżącym katalogiem roboczym, jawnie Przekaż ścieżkę do pliku projektu. Przykład:
+Publikowanie w wierszu polecenia działa na wszystkich platformach obsługiwanych przez platformę .NET Core i nie wymaga programu Visual Studio. W poniższych przykładach polecenie interfejs wiersza polecenia platformy .NET Core [dotnet Publish](/dotnet/core/tools/dotnet-publish) jest uruchamiane z katalogu projektu (który zawiera plik *. csproj* ). Jeśli folder projektu nie jest bieżącym katalogiem roboczym, jawnie Przekaż ścieżkę do pliku projektu. Na przykład:
 
 ```dotnetcli
 dotnet publish C:\Webs\Web1
@@ -349,7 +351,7 @@ Dołącz `<EnvironmentName>` Właściwość w pliku profil publikacji (*pubxml*)
 </PropertyGroup>
 ```
 
-Jeśli wymagane są przekształcenia *Web. config* (na przykład Ustawianie zmiennych środowiskowych na podstawie konfiguracji, profilu lub środowiska), zobacz <xref:host-and-deploy/iis/transform-webconfig> .
+Jeśli potrzebujesz *web.config* transformacji (na przykład ustawienia zmiennych środowiskowych na podstawie konfiguracji, profilu lub środowiska), zobacz <xref:host-and-deploy/iis/transform-webconfig> .
 
 ## <a name="exclude-files"></a>Wyklucz pliki
 
@@ -357,8 +359,8 @@ Podczas publikowania ASP.NET Core aplikacje sieci Web uwzględniane są następu
 
 * Kompiluj artefakty
 * Foldery i pliki pasujące do następujących wzorców obsługi symboli wieloznacznych:
-  * `**\*.config`(na przykład *Web. config*)
-  * `**\*.json`(na przykład *appSettings. JSON*)
+  * `**\*.config`(na przykład *web.config*)
+  * `**\*.json`(na przykład *appsettings.json*)
   * `wwwroot\**`
 
 Program MSBuild obsługuje [wzorce obsługi symboli wieloznacznych](https://gruntjs.com/configuring-tasks#globbing-patterns). Na przykład poniższy `<Content>` element pomija kopiowanie plików tekstowych (*. txt*) w folderze *wwwroot\content* i jego podfolderach:
@@ -471,7 +473,7 @@ Wyróżnione znaczniki w poniższym przykładzie pokazują:
 
 [!code-xml[](visual-studio-publish-profiles/samples/Web1.pubxml?highlight=18-23)]
 
-Poprzedni przykład używa `ResolvedFileToPublish` elementu, którego domyślnym zachowaniem jest zawsze kopiowanie plików dostarczonych w `Include` atrybucie do opublikowanej lokacji. Zastąp zachowanie domyślne, dołączając `<CopyToPublishDirectory>` element podrzędny z tekstem wewnętrznym obu `Never` lub `PreserveNewest` . Przykład:
+Poprzedni przykład używa `ResolvedFileToPublish` elementu, którego domyślnym zachowaniem jest zawsze kopiowanie plików dostarczonych w `Include` atrybucie do opublikowanej lokacji. Zastąp zachowanie domyślne, dołączając `<CopyToPublishDirectory>` element podrzędny z tekstem wewnętrznym obu `Never` lub `PreserveNewest` . Na przykład:
 
 ```xml
 <ResolvedFileToPublish Include="..\ReadMe2.md">
@@ -507,7 +509,7 @@ Dodaj `<AllowUntrustedCertificate>` Właściwość o wartości `True` do profilu
 
 ## <a name="the-kudu-service"></a>Usługa kudu
 
-Aby wyświetlić pliki w Azure App Service wdrożenia aplikacji sieci Web, należy użyć [usługi kudu](https://github.com/projectkudu/kudu/wiki/Accessing-the-kudu-service). Dołącz `scm` token do nazwy aplikacji sieci Web. Przykład:
+Aby wyświetlić pliki w Azure App Service wdrożenia aplikacji sieci Web, należy użyć [usługi kudu](https://github.com/projectkudu/kudu/wiki/Accessing-the-kudu-service). Dołącz `scm` token do nazwy aplikacji sieci Web. Na przykład:
 
 | Adres URL                                    | Wynik       |
 | -------------------------------------- | ------------ |

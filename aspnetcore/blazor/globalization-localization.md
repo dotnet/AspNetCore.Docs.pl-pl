@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 06/04/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/globalization-localization
-ms.openlocfilehash: 5050d99e5304c7edaf6faa43f05298b69882521d
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
+ms.openlocfilehash: 1d24ebe900dfcdeb8b7bcc97f1d212deea9cecae
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85243593"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402731"
 ---
 # <a name="aspnet-core-blazor-globalization-and-localization"></a>ASP.NET Core Blazor globalizacja i lokalizacja
 
@@ -63,19 +65,19 @@ Następujące typy pól mają określone wymagania dotyczące formatowania i nie
 
 ## <a name="localization"></a>Lokalizacja
 
-### <a name="blazor-webassembly"></a>BlazorZestaw webassembly
+### Blazor WebAssembly
 
-BlazorAplikacje webassembly ustawiają kulturę przy użyciu [preferencji języka](https://developer.mozilla.org/docs/Web/API/NavigatorLanguage/languages)użytkownika.
+Blazor WebAssemblyaplikacje ustawiają kulturę przy użyciu [preferencji języka](https://developer.mozilla.org/docs/Web/API/NavigatorLanguage/languages)użytkownika.
 
 Aby jawnie skonfigurować kulturę, ustaw <xref:System.Globalization.CultureInfo.DefaultThreadCurrentCulture?displayProperty=nameWithType> i <xref:System.Globalization.CultureInfo.DefaultThreadCurrentUICulture?displayProperty=nameWithType> w `Program.Main` .
 
-Domyślnie Blazor Konfiguracja konsolidatora dla aplikacji webassembly umożliwia rozłączenie Blazor informacji o danych wielojęzycznych z wyjątkiem lokalizacji lokalnych jawnie żądanych. Aby uzyskać więcej informacji i wskazówek dotyczących kontrolowania zachowania konsolidatora, zobacz <xref:blazor/host-and-deploy/configure-linker#configure-the-linker-for-internationalization> .
+Domyślnie Blazor Konfiguracja konsolidatora aplikacji umożliwia rozłączenie Blazor WebAssembly informacji o ustawieniach regionalnych, z wyjątkiem sytuacji, w których jawnie zażądano. Aby uzyskać więcej informacji i wskazówek dotyczących kontrolowania zachowania konsolidatora, zobacz <xref:blazor/host-and-deploy/configure-linker#configure-the-linker-for-internationalization> .
 
-Chociaż kultura, która Blazor wybiera domyślnie, może być wystarczająca dla większości użytkowników, należy rozważyć umożliwienie użytkownikom określenia ich preferowanych ustawień regionalnych. Aby uzyskać Blazor przykładową aplikację webassembly z selektorem kultury, zobacz [`LocSample`](https://github.com/pranavkm/LocSample) przykładową aplikację lokalizacyjną.
+Chociaż kultura, która Blazor wybiera domyślnie, może być wystarczająca dla większości użytkowników, należy rozważyć umożliwienie użytkownikom określenia ich preferowanych ustawień regionalnych. Aby uzyskać Blazor WebAssembly przykładową aplikację z selektorem kultury, zobacz [`LocSample`](https://github.com/pranavkm/LocSample) przykładową aplikację lokalizacyjną.
 
-### <a name="blazor-server"></a>BlazorServer
+### Blazor Server
 
-BlazorAplikacje serwera są zlokalizowane przy użyciu [oprogramowania pośredniczącego](xref:fundamentals/localization#localization-middleware). Oprogramowanie pośredniczące wybiera odpowiednią kulturę dla użytkowników żądających zasobów z aplikacji.
+Blazor Serveraplikacje są zlokalizowane przy użyciu [oprogramowania pośredniczącego](xref:fundamentals/localization#localization-middleware). Oprogramowanie pośredniczące wybiera odpowiednią kulturę dla użytkowników żądających zasobów z aplikacji.
 
 Kulturę można ustawić przy użyciu jednej z następujących metod:
 
@@ -119,9 +121,9 @@ Lokalizacja jest obsługiwana przez aplikację w następującej kolejności zdar
 1. Przeglądarka wysyła początkowe żądanie HTTP do aplikacji.
 1. Kultura jest przypisana przez oprogramowanie pośredniczące lokalizacji.
 1. RazorWyrażenie na `_Host` stronie ( `_Host.cshtml` ) utrwala kulturę w pliku cookie jako część odpowiedzi.
-1. Przeglądarka otwiera połączenie WebSocket, aby utworzyć interaktywną Blazor sesję serwera.
+1. Przeglądarka otwiera połączenie WebSocket, aby utworzyć sesję interaktywną Blazor Server .
 1. Oprogramowanie pośredniczące lokalizacji odczytuje plik cookie i przypisuje kulturę.
-1. BlazorSesja serwera rozpoczyna się od poprawnej kultury.
+1. Blazor ServerSesja rozpoczyna się od poprawnej kultury.
 
 #### <a name="provide-ui-to-choose-the-culture"></a>Podaj interfejs użytkownika, aby wybrać kulturę
 

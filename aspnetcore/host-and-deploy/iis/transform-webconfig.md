@@ -1,37 +1,39 @@
 ---
 title: Przekształcanie pliku web.config
 author: rick-anderson
-description: Dowiedz się, jak przekształcić plik Web. config podczas publikowania aplikacji ASP.NET Core.
+description: Dowiedz się, jak przekształcić plik web.config podczas publikowania aplikacji ASP.NET Core.
 monikerRange: '>= aspnetcore-2.2'
 ms.author: riande
 ms.custom: mvc
 ms.date: 01/13/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: host-and-deploy/iis/transform-webconfig
-ms.openlocfilehash: f7e1fb0adc669b4bffa02e6688231c8f1447bd98
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: bebba7a72012b8be6257b14642bf130613627778
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775937"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404005"
 ---
 # <a name="transform-webconfig"></a>Przekształcanie pliku web.config
 
 Autor [Vijay Ramakrishnan](https://github.com/vijayrkn)
 
-Przekształcenia do pliku *Web. config* można zastosować automatycznie po opublikowaniu aplikacji na podstawie:
+Przekształcenia do pliku *web.config* mogą być stosowane automatycznie, gdy aplikacja zostanie opublikowana w oparciu o:
 
 * [Konfiguracja kompilacji](#build-configuration)
 * [Profil](#profile)
 * [Środowisko](#environment)
-* [Niestandardowy](#custom)
+* [Niestandardowe](#custom)
 
-Te przekształcenia występują dla jednego z następujących scenariuszy generacji *Web. config* :
+Te przekształcenia występują dla jednego z następujących scenariuszy generacji *web.config* :
 
 * Generowane automatycznie przez `Microsoft.NET.Sdk.Web` zestaw SDK.
 * Udostępnione przez dewelopera w [katalogu głównym zawartości](xref:fundamentals/index#content-root) aplikacji.
@@ -40,9 +42,9 @@ Te przekształcenia występują dla jednego z następujących scenariuszy genera
 
 Przekształcenia konfiguracji kompilacji są uruchamiane jako pierwsze.
 
-Uwzględnij *Sieć Web. { Konfiguracja}* plik konfiguracyjny dla każdej [konfiguracji kompilacji (Debuguj | Wersja)](/dotnet/core/tools/dotnet-publish#options) wymagająca przekształcenia *pliku Web. config* .
+Uwzględnij *Sieć Web. { Konfiguracja}* plik konfiguracyjny dla każdej [konfiguracji kompilacji (Debuguj | Wydanie)](/dotnet/core/tools/dotnet-publish#options) wymagające przekształcenia *web.config* .
 
-W poniższym przykładzie zmienna środowiskowa specyficzna dla konfiguracji została ustawiona w *sieci Web. Release. config*:
+W poniższym przykładzie zmienna środowiskowa specyficzna dla konfiguracji jest ustawiana w *web.Release.config*:
 
 ```xml
 <?xml version="1.0"?>
@@ -74,9 +76,9 @@ Właściwość programu MSBuild dla konfiguracji ma wartość `$(Configuration)`
 
 Przekształcenia profilu są uruchamiane po drugiej, po przeprowadzeniu [konfiguracji kompilacji](#build-configuration) .
 
-Uwzględnij *Sieć Web. { PROFIL}. config* dla każdej konfiguracji profilu wymagającej przekształcenia pliku *Web. config* .
+Uwzględnij *Sieć Web. { PROFIL}. config* dla każdej konfiguracji profilu wymagającej przekształcenia *web.config* .
 
-W poniższym przykładzie zmienna środowiskowa specyficzna dla profilu jest ustawiana w *sieci Web. FolderProfile. config* dla folderu Publikuj profil:
+W poniższym przykładzie zmienna środowiskowa specyficzna dla profilu jest ustawiana w *web.FolderProfile.config* dla profilu publikowania folderu:
 
 ```xml
 <?xml version="1.0"?>
@@ -104,15 +106,15 @@ dotnet publish --configuration Release /p:PublishProfile=FolderProfile
 
 Właściwość programu MSBuild dla nazwy profilu to `$(PublishProfile)` .
 
-Jeśli profil nie zostanie przekazywać, domyślną nazwą profilu jest **system plików** i *Sieć Web. Plik FileSystem. config* jest stosowany, jeśli jest obecny w katalogu głównym zawartości aplikacji.
+Jeśli profil nie zostanie przekazana, domyślną nazwą profilu jest **system plików** , a *web.FileSystem.config* zostanie zastosowana, jeśli plik znajduje się w katalogu głównym zawartości aplikacji.
 
 ## <a name="environment"></a>Środowisko
 
 Przekształcenia środowiska są uruchamiane trzecią po zakończeniu [konfiguracji kompilacji](#build-configuration) i przekształceń [profilu](#profile) .
 
-Uwzględnij *Sieć Web. { ŚRODOWISKO} plik konfiguracyjny* dla każdego [środowiska](xref:fundamentals/environments) wymagającego przekształcenia pliku *Web. config* .
+Uwzględnij *Sieć Web. { ŚRODOWISKO} plik konfiguracyjny* dla każdego [środowiska](xref:fundamentals/environments) wymagającego transformacji *web.config* .
 
-W poniższym przykładzie zmienna środowiskowa specyficzna dla środowiska jest ustawiona w *sieci Web. Production. config* dla środowiska produkcyjnego:
+W poniższym przykładzie zmienna środowiskowa specyficzna dla środowiska jest ustawiana w *web.Production.config* dla środowiska produkcyjnego:
 
 ```xml
 <?xml version="1.0"?>
@@ -142,13 +144,13 @@ Właściwość programu MSBuild dla środowiska to `$(EnvironmentName)` .
 
 Przy publikowaniu z programu Visual Studio i przy użyciu profilu publikowania, zobacz <xref:host-and-deploy/visual-studio-publish-profiles#set-the-environment> .
 
-`ASPNETCORE_ENVIRONMENT`Zmienna środowiskowa jest automatycznie dodawana do pliku *Web. config* po określeniu nazwy środowiska.
+`ASPNETCORE_ENVIRONMENT`Zmienna środowiskowa jest automatycznie dodawana do pliku *web.config* po określeniu nazwy środowiska.
 
 ## <a name="custom"></a>Niestandardowy
 
 Niestandardowe przekształcenia są uruchamiane jako ostatnie, po przeprowadzeniu [konfiguracji kompilacji](#build-configuration), [profilu](#profile)i [środowiska](#environment) .
 
-Uwzględnij plik *{CUSTOM_NAME}. Transform* dla każdej konfiguracji niestandardowej wymagającej przekształcenia pliku *Web. config* .
+Uwzględnij plik *{CUSTOM_NAME}. Transform* dla każdej konfiguracji niestandardowej wymagającej przekształcenia *web.config* .
 
 W poniższym przykładzie zmienna środowiskowa transformacji niestandardowej jest ustawiana w *Custom. Transform*:
 
@@ -178,9 +180,9 @@ dotnet publish --configuration Release /p:CustomTransformFileName=custom.transfo
 
 Właściwość programu MSBuild dla nazwy profilu to `$(CustomTransformFileName)` .
 
-## <a name="prevent-webconfig-transformation"></a>Zablokuj transformację pliku Web. config
+## <a name="prevent-webconfig-transformation"></a>Zapobiegaj transformacji web.config
 
-Aby zapobiec przekształceń pliku *Web. config* , ustaw właściwość MSBuild `$(IsWebConfigTransformDisabled)` :
+Aby zapobiec przekształceń pliku *web.config* , ustaw właściwość MSBuild `$(IsWebConfigTransformDisabled)` :
 
 ```dotnetcli
 dotnet publish /p:IsWebConfigTransformDisabled=true
@@ -188,5 +190,5 @@ dotnet publish /p:IsWebConfigTransformDisabled=true
 
 ## <a name="additional-resources"></a>Zasoby dodatkowe
 
-* [Składnia transformacji Web. config dla wdrożenia projektu aplikacji sieci Web](/previous-versions/dd465326(v=vs.100))
-* [Składnia transformacji Web. config dla wdrożenia projektu sieci Web przy użyciu programu Visual Studio](/previous-versions/aspnet/dd465326(v=vs.110))
+* [Składnia transformacjiWeb.config dla wdrożenia projektu aplikacji sieci Web](/previous-versions/dd465326(v=vs.100))
+* [Web.config składni transformacji dla wdrożenia projektu sieci Web przy użyciu programu Visual Studio](/previous-versions/aspnet/dd465326(v=vs.110))

@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 03/11/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/accconfirm
-ms.openlocfilehash: 8d4488b3953a8c87033d3a092b656409a0c6a52d
-ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
+ms.openlocfilehash: bf599487fdc3e574f72f1a3d35278cc9c2ce7513
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/12/2020
-ms.locfileid: "84724370"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404655"
 ---
 # <a name="account-confirmation-and-password-recovery-in-aspnet-core"></a>Potwierdzenie konta i odzyskiwanie hasła w ASP.NET Core
 
@@ -107,7 +109,7 @@ W konsoli Menedżera pakietów wprowadź następujące polecenie:
 Install-Package SendGrid
 ```
 
-# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
 
 W konsoli programu wprowadź następujące polecenie:
 
@@ -313,7 +315,7 @@ W konsoli Menedżera pakietów wprowadź następujące polecenie:
 Install-Package SendGrid
 ```
 
-# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
 
 W konsoli programu wprowadź następujące polecenie:
 

@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: client-side/libman/libman-cli
-ms.openlocfilehash: 1a42d162e28d4bb4cce284b8b5e37f1be6ff64c6
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: ed5dffb83a2f1a40f3d6596d23135c0fa5b6791f
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82770555"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85403186"
 ---
 # <a name="use-the-libman-cli-with-aspnet-core"></a>Korzystanie z interfejsu wiersza polecenia LibMan z ASP.NET Core
 
@@ -98,7 +100,7 @@ W poniższych sekcjach znajduje się opis dostępnych poleceń interfejsu wiersz
 
 ## <a name="initialize-libman-in-the-project"></a>Inicjuj LibMan w projekcie
 
-`libman init`Polecenie tworzy plik *Libman. JSON* , jeśli taki nie istnieje. Plik jest tworzony z domyślną zawartością szablonu elementu.
+`libman init`Polecenie tworzy *libman.jsw* pliku, jeśli taki nie istnieje. Plik jest tworzony z domyślną zawartością szablonu elementu.
 
 ### <a name="synopsis"></a>Streszczenie
 
@@ -113,11 +115,11 @@ Następujące opcje są dostępne dla `libman init` polecenia:
 
 * `-d|--default-destination <PATH>`
 
-  Ścieżka względna do bieżącego folderu. Pliki bibliotek są instalowane w tej lokalizacji, jeśli żadna `destination` Właściwość nie jest zdefiniowana dla biblioteki w *Libman. JSON*. `<PATH>`Wartość jest zapisywana w `defaultDestination` właściwości *Libman. JSON*.
+  Ścieżka względna do bieżącego folderu. Pliki bibliotek są instalowane w tej lokalizacji, jeśli nie `destination` zdefiniowano żadnej właściwości dla biblioteki w *libman.js*. `<PATH>`Wartość jest zapisywana we `defaultDestination` właściwości *libman.json*.
 
 * `-p|--default-provider <PROVIDER>`
 
-  Dostawca, który ma być używany, jeśli nie zdefiniowano żadnego dostawcy dla danej biblioteki. `<PROVIDER>`Wartość jest zapisywana w `defaultProvider` właściwości *Libman. JSON*. Zamień `<PROVIDER>` na jedną z następujących wartości:
+  Dostawca, który ma być używany, jeśli nie zdefiniowano żadnego dostawcy dla danej biblioteki. `<PROVIDER>`Wartość jest zapisywana we `defaultProvider` właściwości *libman.json*. Zamień `<PROVIDER>` na jedną z następujących wartości:
 
   [!INCLUDE [LibMan provider names](../../includes/libman-cli/provider-names.md)]
 
@@ -125,7 +127,7 @@ Następujące opcje są dostępne dla `libman init` polecenia:
 
 ### <a name="examples"></a>Przykłady
 
-Aby utworzyć plik *Libman. JSON* w projekcie ASP.NET Core:
+Aby utworzyć *libman.jsw* pliku w ASP.NET Core projekcie:
 
 * Przejdź do katalogu głównego projektu.
 * Uruchom następujące polecenie:
@@ -140,7 +142,7 @@ Aby utworzyć plik *Libman. JSON* w projekcie ASP.NET Core:
 
   ![Libman init — polecenie — domyślny dostawca](_static/libman-init-provider.png)
 
-Plik *Libman. JSON* zostanie dodany do katalogu głównego projektu z następującą zawartością:
+*libman.jsw* pliku zostanie dodany do katalogu głównego projektu z następującą zawartością:
 
 ```json
 {
@@ -152,7 +154,7 @@ Plik *Libman. JSON* zostanie dodany do katalogu głównego projektu z następuj�
 
 ## <a name="add-library-files"></a>Dodaj pliki biblioteki
 
-`libman install`Polecenie pobiera i instaluje pliki bibliotek w projekcie. Plik *Libman. JSON* zostanie dodany, jeśli taki nie istnieje. Plik *Libman. JSON* został zmodyfikowany w celu przechowywania szczegółów konfiguracji dla plików biblioteki.
+`libman install`Polecenie pobiera i instaluje pliki bibliotek w projekcie. Jeśli jeden nie istnieje, zostanie dodany *libman.js* pliku. *libman.jsw* pliku został zmodyfikowany w celu przechowywania szczegółów konfiguracji dla plików biblioteki.
 
 ### <a name="synopsis"></a>Streszczenie
 
@@ -173,7 +175,7 @@ Następujące opcje są dostępne dla `libman install` polecenia:
 
 * `-d|--destination <PATH>`
 
-  Lokalizacja, w której ma zostać zainstalowana Biblioteka. Jeśli nie zostanie określony, zostanie użyta domyślna lokalizacja. Jeśli żadna `defaultDestination` Właściwość nie jest określona w pliku *Libman. JSON*, ta opcja jest wymagana.
+  Lokalizacja, w której ma zostać zainstalowana Biblioteka. Jeśli nie zostanie określony, zostanie użyta domyślna lokalizacja. Jeśli żadna `defaultDestination` Właściwość nie jest określona w *libman.jsna*, ta opcja jest wymagana.
 
 * `--files <FILE>`
 
@@ -185,13 +187,13 @@ Następujące opcje są dostępne dla `libman install` polecenia:
   
   [!INCLUDE [LibMan provider names](../../includes/libman-cli/provider-names.md)]
 
-  Jeśli nie zostanie określony, `defaultProvider` zostanie użyta właściwość w *Libman. JSON* . Jeśli żadna `defaultProvider` Właściwość nie jest określona w pliku *Libman. JSON*, ta opcja jest wymagana.
+  Jeśli nie zostanie określony, `defaultProvider` Właściwość w *libman.js* jest używana. Jeśli żadna `defaultProvider` Właściwość nie jest określona w *libman.jsna*, ta opcja jest wymagana.
 
 [!INCLUDE [standard-cli-options](../../includes/libman-cli/standard-cli-options.md)]
 
 ### <a name="examples"></a>Przykłady
 
-Rozważmy następujący plik *Libman. JSON* :
+Rozważmy następujące *libman.js* pliku:
 
 ```json
 {
@@ -201,13 +203,13 @@ Rozważmy następujący plik *Libman. JSON* :
 }
 ```
 
-Aby zainstalować plik jQuery w wersji 3.2.1 *jQuery. min. js* do folderu *wwwroot/scripts/jQuery* przy użyciu dostawcy CDNJS:
+Aby zainstalować plik jQuery w wersji 3.2.1 *jquery.min.js* do folderu *wwwroot/scripts/jQuery* przy użyciu dostawcy CDNJS:
 
 ```console
 libman install jquery@3.2.1 --provider cdnjs --destination wwwroot/scripts/jquery --files jquery.min.js
 ```
 
-Plik *Libman. JSON* jest podobny do następującego:
+*libman.jsw* pliku jest podobny do następującego:
 
 ```json
 {
@@ -225,7 +227,7 @@ Plik *Libman. JSON* jest podobny do następującego:
 }
 ```
 
-Aby zainstalować pliki *Calendar. js* i *Calendar. css* z pliku *C: \\ temp \\ contosoCalendar \\ * przy użyciu dostawcy systemu plików:
+Aby zainstalować pliki *calendar.js* i *Calendar. css* z *dysku C: \\ temp \\ contosoCalendar \\ * przy użyciu dostawcy systemu plików:
 
   ```console
   libman install C:\temp\contosoCalendar\ --provider filesystem --files calendar.js --files calendar.css
@@ -233,12 +235,12 @@ Aby zainstalować pliki *Calendar. js* i *Calendar. css* z pliku *C: \\ temp \\ 
 
 Następujący monit pojawia się z dwóch powodów:
 
-* Plik *Libman. JSON* nie zawiera `defaultDestination` właściwości.
+* *libman.jsw* pliku nie zawiera `defaultDestination` właściwości.
 * `libman install`Polecenie nie zawiera `-d|--destination` opcji.
 
 ![Libman — polecenie instalacji — miejsce docelowe](_static/libman-install-destination.png)
 
-Po zaakceptowaniu domyślnego miejsca docelowego plik *Libman. JSON* jest podobny do następującego:
+Po zaakceptowaniu domyślnego miejsca docelowego *libman.jsw* pliku przypomina następujące:
 
 ```json
 {
@@ -267,11 +269,11 @@ Po zaakceptowaniu domyślnego miejsca docelowego plik *Libman. JSON* jest podobn
 
 ## <a name="restore-library-files"></a>Przywróć pliki biblioteki
 
-`libman restore`Polecenie instaluje pliki bibliotek zdefiniowane w *Libman. JSON*. Mają zastosowanie następujące zasady:
+`libman restore`Polecenie instaluje pliki bibliotek zdefiniowane w *libman.jsna*. Mają zastosowanie następujące zasady:
 
-* Jeśli w katalogu głównym projektu nie istnieje plik *Libman. JSON* , zwracany jest błąd.
-* Jeśli Biblioteka określa dostawcę, `defaultProvider` Właściwość w *Libman. JSON* jest ignorowana.
-* Jeśli Biblioteka określa miejsce docelowe, `defaultDestination` Właściwość w *Libman. JSON* jest ignorowana.
+* Jeśli w katalogu głównym projektu nie istnieje *libman.jsw* pliku, zwracany jest błąd.
+* Jeśli Biblioteka określa dostawcę, `defaultProvider` Właściwość w *libman.js* jest ignorowana.
+* Jeśli Biblioteka określa miejsce docelowe, `defaultDestination` Właściwość w *libman.js* jest ignorowana.
 
 ### <a name="synopsis"></a>Streszczenie
 
@@ -288,7 +290,7 @@ Następujące opcje są dostępne dla `libman restore` polecenia:
 
 ### <a name="examples"></a>Przykłady
 
-Aby przywrócić pliki biblioteki zdefiniowane w *Libman. JSON*:
+Aby przywrócić pliki biblioteki zdefiniowane w *libman.jsna*:
 
 ```console
 libman restore
@@ -296,7 +298,7 @@ libman restore
 
 ## <a name="delete-library-files"></a>Usuń pliki biblioteki
 
-`libman clean`Polecenie usuwa pliki biblioteki, które zostały wcześniej przywrócone za pośrednictwem LibMan. Foldery, które staną się puste po usunięciu tej operacji. Pliki biblioteki "skojarzone konfiguracje we `libraries` właściwości *Libman. JSON* nie są usuwane.
+`libman clean`Polecenie usuwa pliki biblioteki, które zostały wcześniej przywrócone za pośrednictwem LibMan. Foldery, które staną się puste po usunięciu tej operacji. Pliki biblioteki "skojarzone konfiguracje we `libraries` właściwości *libman.json* nie są usuwane.
 
 ### <a name="synopsis"></a>Streszczenie
 
@@ -323,12 +325,12 @@ libman clean
 
 Polecenie `libman uninstall`:
 
-* Usuwa wszystkie pliki skojarzone z określoną biblioteką z lokalizacji docelowej w pliku *Libman. JSON*.
-* Usuwa skojarzoną konfigurację biblioteki z *Libman. JSON*.
+* Usuwa wszystkie pliki skojarzone z określoną biblioteką z lokalizacji docelowej w *libman.jsna*.
+* Usuwa skojarzoną konfigurację biblioteki z *libman.jsna*.
 
 Wystąpił błąd, gdy:
 
-* W katalogu głównym projektu nie istnieje plik *Libman. JSON* .
+* Brak *libman.js* w pliku w katalogu głównym projektu.
 * Określona biblioteka nie istnieje.
 
 Jeśli zainstalowano więcej niż jedną bibliotekę o tej samej nazwie, zostanie wyświetlony monit o wybranie jednej z nich.
@@ -354,7 +356,7 @@ Następujące opcje są dostępne dla `libman uninstall` polecenia:
 
 ### <a name="examples"></a>Przykłady
 
-Rozważmy następujący plik *Libman. JSON* :
+Rozważmy następujące *libman.js* pliku:
 
 [!code-json[](samples/LibManSample/libman.json)]
 
@@ -380,7 +382,7 @@ Rozważmy następujący plik *Libman. JSON* :
 
 Wystąpił błąd, gdy:
 
-* W katalogu głównym projektu nie istnieje plik *Libman. JSON* .
+* Brak *libman.js* w pliku w katalogu głównym projektu.
 * Określona biblioteka nie istnieje.
 
 Jeśli zainstalowano więcej niż jedną bibliotekę o tej samej nazwie, zostanie wyświetlony monit o wybranie jednej z nich.

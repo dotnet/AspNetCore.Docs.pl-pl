@@ -8,17 +8,19 @@ ms.custom: mvc, seodec18
 ms.date: 03/26/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: razor-pages/sdk
-ms.openlocfilehash: 555965b96b0d4d541c70f8a137d4f098dc06a4d6
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 56b4d4c13023918a4ac25c8c5d8ad1ee2c346ac6
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84106627"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85403043"
 ---
 # <a name="aspnet-core-razor-sdk"></a>RazorZestaw SDK ASP.NET Core
 
@@ -109,12 +111,12 @@ Właściwości i elementy w poniższej tabeli służą do konfigurowania danych 
 
 ::: moniker-end
 
-| Items (Elementy) | Opis |
+| Elementy | Opis |
 | ----- | ----------- |
 | `RazorGenerate` | Elementy elementu (pliki *. cshtml* ), które są danymi wejściowymi do generowania kodu. |
 | `RazorComponent` | Elementy elementu (pliki*Razor* ), które są danymi wejściowymi Razor generowania kodu składnika. |
 | `RazorCompile` | Elementy elementów (pliki*CS* ), które są danymi wejściowymi do Razor elementów docelowych kompilacji. Użyj tego `ItemGroup` , aby określić dodatkowe pliki do skompilowania do Razor zestawu. |
-| `RazorTargetAssemblyAttribute` | Elementy elementów używane do tworzenia kodu atrybutów dla Razor zestawu. Przykład:  <br>`RazorAssemblyAttribute`<br>`Include="System.Reflection.AssemblyMetadataAttribute"`<br>`_Parameter1="BuildSource" _Parameter2="https://docs.microsoft.com/">` |
+| `RazorTargetAssemblyAttribute` | Elementy elementów używane do tworzenia kodu atrybutów dla Razor zestawu. Na przykład:  <br>`RazorAssemblyAttribute`<br>`Include="System.Reflection.AssemblyMetadataAttribute"`<br>`_Parameter1="BuildSource" _Parameter2="https://docs.microsoft.com/">` |
 | `RazorEmbeddedResource` | Elementy elementu dodane jako zasoby osadzone do wygenerowanego Razor zestawu. |
 
 ::: moniker range=">= aspnetcore-3.0"
@@ -124,7 +126,7 @@ Właściwości i elementy w poniższej tabeli służą do konfigurowania danych 
 | `RazorTargetName` | Nazwa pliku (bez rozszerzenia) zestawu utworzonego przez Razor . |
 | `RazorOutputPath` | RazorKatalog wyjściowy. |
 | `RazorCompileToolset` | Służy do określenia zestawu narzędzi używanego do kompilowania Razor zestawów. Prawidłowe wartości to `Implicit` , `RazorSDK` , i `PrecompilationTool` . |
-| [EnableDefaultContentItems](https://github.com/aspnet/websdk/blob/rel-2.0.0/src/ProjectSystem/Microsoft.NET.Sdk.Web.ProjectSystem.Targets/netstandard1.0/Microsoft.NET.Sdk.Web.ProjectSystem.targets#L21) | Wartość domyślna to `true`. Gdy `true` , zawiera pliki *Web. config*, *. JSON*i *. cshtml* jako zawartość projektu. Gdy jest przywoływany za pośrednictwem `Microsoft.NET.Sdk.Web` , uwzględniane są również pliki w folderze *wwwroot* i pliki konfiguracji. |
+| [EnableDefaultContentItems](https://github.com/aspnet/websdk/blob/rel-2.0.0/src/ProjectSystem/Microsoft.NET.Sdk.Web.ProjectSystem.Targets/netstandard1.0/Microsoft.NET.Sdk.Web.ProjectSystem.targets#L21) | Wartość domyślna to `true`. Gdy `true` , zawiera pliki *web.config*, *JSON*i *. cshtml* jako zawartość projektu. Gdy jest przywoływany za pośrednictwem `Microsoft.NET.Sdk.Web` , uwzględniane są również pliki w folderze *wwwroot* i pliki konfiguracji. |
 | `EnableDefaultRazorGenerateItems` | Gdy `true` , zawiera pliki *. cshtml* z `Content` elementów w `RazorGenerate` elementach. |
 | `GenerateRazorTargetAssemblyInfo` | Gdy `true` program generuje plik *. cs* zawierający atrybuty określone przez `RazorAssemblyAttribute` i zawiera plik w danych wyjściowych kompilacji. |
 | `EnableDefaultRazorTargetAssemblyInfoAttributes` | Gdy `true` program dodaje domyślny zestaw atrybutów zestawu do `RazorAssemblyAttribute` . |
@@ -148,7 +150,7 @@ Właściwości i elementy w poniższej tabeli służą do konfigurowania danych 
 | `RazorTargetName` | Nazwa pliku (bez rozszerzenia) zestawu utworzonego przez Razor . |
 | `RazorOutputPath` | RazorKatalog wyjściowy. |
 | `RazorCompileToolset` | Służy do określenia zestawu narzędzi używanego do kompilowania Razor zestawów. Prawidłowe wartości to `Implicit` , `RazorSDK` , i `PrecompilationTool` . |
-| [EnableDefaultContentItems](https://github.com/aspnet/websdk/blob/rel-2.0.0/src/ProjectSystem/Microsoft.NET.Sdk.Web.ProjectSystem.Targets/netstandard1.0/Microsoft.NET.Sdk.Web.ProjectSystem.targets#L21) | Wartość domyślna to `true`. Gdy `true` , zawiera pliki *Web. config*, *. JSON*i *. cshtml* jako zawartość projektu. Gdy jest przywoływany za pośrednictwem `Microsoft.NET.Sdk.Web` , uwzględniane są również pliki w folderze *wwwroot* i pliki konfiguracji. |
+| [EnableDefaultContentItems](https://github.com/aspnet/websdk/blob/rel-2.0.0/src/ProjectSystem/Microsoft.NET.Sdk.Web.ProjectSystem.Targets/netstandard1.0/Microsoft.NET.Sdk.Web.ProjectSystem.targets#L21) | Wartość domyślna to `true`. Gdy `true` , zawiera pliki *web.config*, *JSON*i *. cshtml* jako zawartość projektu. Gdy jest przywoływany za pośrednictwem `Microsoft.NET.Sdk.Web` , uwzględniane są również pliki w folderze *wwwroot* i pliki konfiguracji. |
 | `EnableDefaultRazorGenerateItems` | Gdy `true` , zawiera pliki *. cshtml* z `Content` elementów w `RazorGenerate` elementach. |
 | `GenerateRazorTargetAssemblyInfo` | Gdy `true` program generuje plik *. cs* zawierający atrybuty określone przez `RazorAssemblyAttribute` i zawiera plik w danych wyjściowych kompilacji. |
 | `EnableDefaultRazorTargetAssemblyInfoAttributes` | Gdy `true` program dodaje domyślny zestaw atrybutów zestawu do `RazorAssemblyAttribute` . |
@@ -196,4 +198,4 @@ Razorwersja językowa jest ściśle zintegrowana z wersją środowiska uruchomie
 ## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Dodatki do formatu csproj dla platformy .NET Core](/dotnet/core/tools/csproj)
-* [Wspólne elementy projektu MSBuild](/visualstudio/msbuild/common-msbuild-project-items)
+* [Wspólne elementy projektów MSBuild](/visualstudio/msbuild/common-msbuild-project-items)

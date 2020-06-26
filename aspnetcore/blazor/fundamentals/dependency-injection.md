@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/fundamentals/dependency-injection
-ms.openlocfilehash: 24cd5ae837eeb4c89a15bab2948dde2eface0c0d
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
+ms.openlocfilehash: 0e99e2e3e2dafae0c35d2cfe6903bf4f511f5dc1
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85242800"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402887"
 ---
 # <a name="aspnet-core-blazor-dependency-injection"></a>ASP.NET Core Blazor wstrzykiwania zależności
 
@@ -37,15 +39,15 @@ Domyślne usługi są automatycznie dodawane do kolekcji usług aplikacji.
 
 | Usługa | Okres istnienia | Opis |
 | ------- | -------- | ----------- |
-| <xref:System.Net.Http.HttpClient> | Administracyjnej | Zapewnia metody wysyłania żądań HTTP i odbierania odpowiedzi HTTP z zasobu identyfikowanego przez identyfikator URI.<br><br>Wystąpienie elementu <xref:System.Net.Http.HttpClient> w aplikacji sieci Blazor webassembly używa przeglądarki do obsługi ruchu HTTP w tle.<br><br>BlazorAplikacje serwera nie domyślnie zawierają <xref:System.Net.Http.HttpClient> skonfigurowane jako usługa. Udostępnianie <xref:System.Net.Http.HttpClient> Blazor aplikacji serwerowej.<br><br>Aby uzyskać więcej informacji, zobacz <xref:blazor/call-web-api>. |
-| <xref:Microsoft.JSInterop.IJSRuntime> | Pojedyncze ( Blazor zestaw webassembly)<br>Zakres ( Blazor serwer) | Reprezentuje wystąpienie środowiska uruchomieniowego JavaScript, w którym są wysyłane wywołania języka JavaScript. Aby uzyskać więcej informacji, zobacz <xref:blazor/call-javascript-from-dotnet>. |
-| <xref:Microsoft.AspNetCore.Components.NavigationManager> | Pojedyncze ( Blazor zestaw webassembly)<br>Zakres ( Blazor serwer) | Zawiera pomocników do pracy z identyfikatorami URI i stanem nawigacji. Aby uzyskać więcej informacji, zobacz [identyfikatory URI i pomocnika stanu nawigacji](xref:blazor/fundamentals/routing#uri-and-navigation-state-helpers). |
+| <xref:System.Net.Http.HttpClient> | Administracyjnej | Zapewnia metody wysyłania żądań HTTP i odbierania odpowiedzi HTTP z zasobu identyfikowanego przez identyfikator URI.<br><br>Wystąpienie <xref:System.Net.Http.HttpClient> w Blazor WebAssembly aplikacji używa przeglądarki do obsługi ruchu HTTP w tle.<br><br>Blazor Serveraplikacje nie domyślnie zawierają <xref:System.Net.Http.HttpClient> skonfigurowane jako usługa. Udostępnianie <xref:System.Net.Http.HttpClient> Blazor Server aplikacji.<br><br>Aby uzyskać więcej informacji, zobacz <xref:blazor/call-web-api>. |
+| <xref:Microsoft.JSInterop.IJSRuntime> | Pojedyncze ( Blazor WebAssembly )<br>W zakresie ( Blazor Server ) | Reprezentuje wystąpienie środowiska uruchomieniowego JavaScript, w którym są wysyłane wywołania języka JavaScript. Aby uzyskać więcej informacji, zobacz <xref:blazor/call-javascript-from-dotnet>. |
+| <xref:Microsoft.AspNetCore.Components.NavigationManager> | Pojedyncze ( Blazor WebAssembly )<br>W zakresie ( Blazor Server ) | Zawiera pomocników do pracy z identyfikatorami URI i stanem nawigacji. Aby uzyskać więcej informacji, zobacz [identyfikatory URI i pomocnika stanu nawigacji](xref:blazor/fundamentals/routing#uri-and-navigation-state-helpers). |
 
 Niestandardowy dostawca usług nie dostarcza automatycznie usług domyślnych wymienionych w tabeli. W przypadku użycia niestandardowego dostawcy usług i wymagania usług wymienionych w tabeli należy dodać wymagane usługi do nowego dostawcy usług.
 
 ## <a name="add-services-to-an-app"></a>Dodawanie usług do aplikacji
 
-### <a name="blazor-webassembly"></a>BlazorZestaw webassembly
+### Blazor WebAssembly
 
 Skonfiguruj usługi dla kolekcji usług aplikacji w `Main` metodzie `Program.cs` . W poniższym przykładzie `MyDependency` implementacja jest zarejestrowana dla `IMyDependency` :
 
@@ -106,7 +108,7 @@ public class Program
 }
 ```
 
-### <a name="blazor-server"></a>BlazorServer
+### Blazor Server
 
 Po utworzeniu nowej aplikacji zapoznaj się z tą `Startup.ConfigureServices` metodą:
 
@@ -132,7 +134,7 @@ Usługi można skonfigurować przy użyciu okresów istnienia podanych w poniżs
 
 | Okres istnienia | Opis |
 | -------- | ----------- |
-| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped%2A> | BlazorAplikacje webassembly nie mają obecnie koncepcji DI Scopes. `Scoped`-zarejestrowane usługi zachowują się jak `Singleton` usługi. Jednak Blazor model hostingu serwera obsługuje `Scoped` okres istnienia. W przypadku Blazor aplikacji serwerowych Rejestracja usługi w zakresie jest objęta zakresem *połączenia*. Z tego powodu użycie usług objętych zakresem jest preferowane dla usług, które powinny być objęte zakresem bieżącego użytkownika, nawet jeśli bieżącym celem jest uruchomienie po stronie klienta w przeglądarce. |
+| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped%2A> | Blazor WebAssemblyaplikacje nie mają obecnie koncepcji DI Scopes. `Scoped`-zarejestrowane usługi zachowują się jak `Singleton` usługi. Jednak Blazor Server model hostingu obsługuje `Scoped` okres istnienia. W Blazor Server aplikacjach do zakresu rejestracji usługi w zakresie jest *dołączany*zakres. Z tego powodu użycie usług objętych zakresem jest preferowane dla usług, które powinny być objęte zakresem bieżącego użytkownika, nawet jeśli bieżącym celem jest uruchomienie po stronie klienta w przeglądarce. |
 | <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Singleton%2A> | DI tworzy *pojedyncze wystąpienie* usługi. Wszystkie składniki wymagające `Singleton` usługi odbierają wystąpienie tej samej usługi. |
 | <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Transient%2A> | Za każdym razem, gdy składnik uzyskuje wystąpienie `Transient` usługi z kontenera usługi, otrzymuje *nowe wystąpienie* usługi. |
 
@@ -198,7 +200,10 @@ Wymagania wstępne dotyczące iniekcji konstruktora:
 
 ## <a name="utility-base-component-classes-to-manage-a-di-scope"></a>Klasy składników podstawowych narzędzi do zarządzania DI zakresem
 
-W przypadku aplikacji ASP.NET Core usługi o określonym zakresie są zwykle objęte zakresem bieżącego żądania. Po zakończeniu żądania wszystkie usługi w zakresie lub przejściowym są usuwane przez system DI. W obszarze Blazor aplikacje serwera zakres żądań jest używany przez czas trwania połączenia klienta, co może spowodować, że usługi przejściowe i objęte zakresem będą dużo dłużej niż oczekiwano. W Blazor aplikacjach webassembly usługi zarejestrowane w określonym okresie istnienia są traktowane jako pojedyncze, tak aby znajdowały się one dłużej niż usługi w zakresie w typowym ASP.NET Core aplikacji.
+W przypadku aplikacji ASP.NET Core usługi o określonym zakresie są zwykle objęte zakresem bieżącego żądania. Po zakończeniu żądania wszystkie usługi w zakresie lub przejściowym są usuwane przez system DI. W Blazor Server aplikacjach zakres żądań jest stosowany przez czas trwania połączenia klienta, co może spowodować, że usługi przejściowe i objęte zakresem będą dużo dłużej niż oczekiwano. W Blazor WebAssembly aplikacjach usługi zarejestrowane w określonym okresie istnienia są traktowane jako pojedyncze, tak aby znajdowały się one dłużej niż usługi w zakresie w typowym ASP.NET Core aplikacji.
+
+> [!NOTE]
+> Aby wykryć jednorazowe usługi przejściowe w aplikacji, zobacz sekcję [wykrywanie przejściowych](#detect-transient-disposables) elementów bezwzględnych.
 
 Zastosowanie tego typu w aplikacjach ogranicza okres istnienia usługi Blazor <xref:Microsoft.AspNetCore.Components.OwningComponentBase> . <xref:Microsoft.AspNetCore.Components.OwningComponentBase>jest abstrakcyjnym typem pochodnym <xref:Microsoft.AspNetCore.Components.ComponentBase> , który tworzy zakres di odpowiadający okresowi istnienia składnika. Korzystając z tego zakresu, możliwe jest korzystanie z usługi DI Services z okresem istnienia w zakresie i posiadanie ich na żywo tak długo, jak w przypadku składnika. Gdy składnik zostanie zniszczony, usługi z dostawcy usług w zasięgu składnika również zostaną usunięte. Może to być przydatne w przypadku usług, które:
 
@@ -342,6 +347,34 @@ Jeśli pojedynczy składnik może korzystać z współbieżnie <xref:Microsoft.E
         }
     }
     ```
+
+## <a name="detect-transient-disposables"></a>Wykrywanie przejściowych jednorazowych
+
+Poniższe przykłady przedstawiają sposób wykrywania jednorazowych usług przejściowych w aplikacji, która powinna być używana <xref:Microsoft.AspNetCore.Components.OwningComponentBase> . Aby uzyskać więcej informacji, zobacz [klasy składników podstawowych narzędzi, aby zarządzać sekcją di Scope](#utility-base-component-classes-to-manage-a-di-scope) .
+
+### Blazor WebAssembly
+
+`DetectIncorrectUsagesOfTransientDisposables.cs`:
+
+[!code-csharp[](dependency-injection/samples_snapshot/3.x/transient-disposables/DetectIncorrectUsagesOfTransientDisposables-wasm.cs)]
+
+`TransientDisposable`Wykryto w poniższym przykładzie ( `Program.cs` ):
+
+[!code-csharp[](dependency-injection/samples_snapshot/3.x/transient-disposables/wasm-program.cs?highlight=6,9,17,22-25)]
+
+### Blazor Server
+
+`DetectIncorrectUsagesOfTransientDisposables.cs`:
+
+[!code-csharp[](dependency-injection/samples_snapshot/3.x/transient-disposables/DetectIncorrectUsagesOfTransientDisposables-server.cs)]
+
+`Program`:
+
+[!code-csharp[](dependency-injection/samples_snapshot/3.x/transient-disposables/server-program.cs?highlight=3)]
+
+`TransientDependency`Wykryto w poniższym przykładzie ( `Startup.cs` ):
+
+[!code-csharp[](dependency-injection/samples_snapshot/3.x/transient-disposables/server-startup.cs?highlight=6-8,11-32)]
 
 ## <a name="additional-resources"></a>Zasoby dodatkowe
 

@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 10/14/2016
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/data-protection/extensibility/index
-ms.openlocfilehash: 7b73f4ba9315ad662c59f421668c0ed78602526a
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 5f28e3b23932cf812ef62f6b7a43c083ec20a4d0
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775768"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404239"
 ---
 # <a name="aspnet-core-data-protection-extensibility-apis"></a>Interfejsy API rozszerzalności ochrony danych ASP.NET Core
 

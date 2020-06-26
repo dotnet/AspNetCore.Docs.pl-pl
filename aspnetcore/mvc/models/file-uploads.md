@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 05/03/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/models/file-uploads
-ms.openlocfilehash: 632cc9fafc5daf2923997f0113adee52491acdcc
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 055dc7295aad67f92fe5f4e8271a1543262257b5
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "83838321"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404603"
 ---
 # <a name="upload-files-in-aspnet-core"></a>Przekaż pliki w ASP.NET Core
 
@@ -189,7 +191,7 @@ Poniższy przykład jest analogiczny do poprzedniego przykładu, z wyjątkiem te
 Aby wykonać formularz POST w języku JavaScript dla klientów, którzy [nie obsługują interfejsu API pobierania](https://caniuse.com/#feat=fetch), należy użyć jednej z następujących metod:
 
 * Użyj wypełniania pobierania (na przykład [window. Fetch Fill (GitHub/Fetch)](https://github.com/github/fetch)).
-* Użyj witryny `XMLHttpRequest`. Przykład:
+* Użyj witryny `XMLHttpRequest`. Na przykład:
 
   ```javascript
   <script>
@@ -235,7 +237,7 @@ Do poszczególnych plików przekazanych do serwera można uzyskać dostęp za po
 > Przykłady udostępnione w ten sposób nie uwzględniają zagadnień związanych z bezpieczeństwem. Dodatkowe informacje są dostarczane przez następujące sekcje i [Przykładowa aplikacja](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/):
 >
 > * [Zagadnienia związane z zabezpieczeniami](#security-considerations)
-> * [Zatwierdzenia](#validation)
+> * [Walidacja](#validation)
 
 Podczas przekazywania plików przy użyciu powiązania modelu i <xref:Microsoft.AspNetCore.Http.IFormFile> , Metoda akcji może przyjmować:
 
@@ -406,7 +408,7 @@ Poprzedni przykład przypomina scenariusz przedstawiony w przykładowej aplikacj
 > Podane przykłady nie uwzględniają zagadnień związanych z zabezpieczeniami. Dodatkowe informacje są dostarczane przez następujące sekcje i [Przykładowa aplikacja](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/):
 >
 > * [Zagadnienia związane z zabezpieczeniami](#security-considerations)
-> * [Zatwierdzenia](#validation)
+> * [Walidacja](#validation)
 
 ### <a name="upload-large-files-with-streaming"></a>Przekazywanie dużych plików strumieniowo
 
@@ -462,7 +464,7 @@ Skanowanie plików wymaga użycia zasobów serwera w scenariuszach o dużych ilo
 
 ### <a name="file-extension-validation"></a>Weryfikacja rozszerzenia pliku
 
-Rozszerzenie przekazanego pliku powinno być sprawdzane względem listy dozwolonych rozszerzeń. Przykład:
+Rozszerzenie przekazanego pliku powinno być sprawdzane względem listy dozwolonych rozszerzeń. Na przykład:
 
 ```csharp
 private string[] permittedExtensions = { ".txt", ".pdf" };
@@ -528,7 +530,7 @@ Wiele implementacji musi zawierać sprawdzenie, czy plik istnieje; w przeciwnym 
 
 Ogranicz rozmiar przekazanych plików.
 
-W przykładowej aplikacji rozmiar pliku jest ograniczony do 2 MB (wyrażony w bajtach). Limit jest dostarczany przez [konfigurację](xref:fundamentals/configuration/index) z pliku *appSettings. JSON* :
+W przykładowej aplikacji rozmiar pliku jest ograniczony do 2 MB (wyrażony w bajtach). Limit jest dostarczany przez [konfigurację](xref:fundamentals/configuration/index) z *appsettings.jsw* pliku:
 
 ```json
 {
@@ -707,7 +709,7 @@ Inne limity Kestrel mogą dotyczyć aplikacji hostowanych przez Kestrel:
 
 ### <a name="iis-content-length-limit"></a>Limit długości zawartości usług IIS
 
-Domyślny limit żądań ( `maxAllowedContentLength` ) to 30 000 000 bajtów, czyli około 28.6 MB. Dostosuj limit w pliku *Web. config* :
+Domyślny limit żądań ( `maxAllowedContentLength` ) to 30 000 000 bajtów, czyli około 28.6 MB. Dostosuj limit w pliku *web.config* :
 
 ```xml
 <system.webServer>
@@ -918,7 +920,7 @@ Poniższy przykład jest analogiczny do poprzedniego przykładu, z wyjątkiem te
 Aby wykonać formularz POST w języku JavaScript dla klientów, którzy [nie obsługują interfejsu API pobierania](https://caniuse.com/#feat=fetch), należy użyć jednej z następujących metod:
 
 * Użyj wypełniania pobierania (na przykład [window. Fetch Fill (GitHub/Fetch)](https://github.com/github/fetch)).
-* Użyj witryny `XMLHttpRequest`. Przykład:
+* Użyj witryny `XMLHttpRequest`. Na przykład:
 
   ```javascript
   <script>
@@ -964,7 +966,7 @@ Do poszczególnych plików przekazanych do serwera można uzyskać dostęp za po
 > Przykłady udostępnione w ten sposób nie uwzględniają zagadnień związanych z bezpieczeństwem. Dodatkowe informacje są dostarczane przez następujące sekcje i [Przykładowa aplikacja](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/):
 >
 > * [Zagadnienia związane z zabezpieczeniami](#security-considerations)
-> * [Zatwierdzenia](#validation)
+> * [Walidacja](#validation)
 
 Podczas przekazywania plików przy użyciu powiązania modelu i <xref:Microsoft.AspNetCore.Http.IFormFile> , Metoda akcji może przyjmować:
 
@@ -1135,7 +1137,7 @@ Poprzedni przykład przypomina scenariusz przedstawiony w przykładowej aplikacj
 > Podane przykłady nie uwzględniają zagadnień związanych z zabezpieczeniami. Dodatkowe informacje są dostarczane przez następujące sekcje i [Przykładowa aplikacja](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/):
 >
 > * [Zagadnienia związane z zabezpieczeniami](#security-considerations)
-> * [Zatwierdzenia](#validation)
+> * [Walidacja](#validation)
 
 ### <a name="upload-large-files-with-streaming"></a>Przekazywanie dużych plików strumieniowo
 
@@ -1191,7 +1193,7 @@ Skanowanie plików wymaga użycia zasobów serwera w scenariuszach o dużych ilo
 
 ### <a name="file-extension-validation"></a>Weryfikacja rozszerzenia pliku
 
-Rozszerzenie przekazanego pliku powinno być sprawdzane względem listy dozwolonych rozszerzeń. Przykład:
+Rozszerzenie przekazanego pliku powinno być sprawdzane względem listy dozwolonych rozszerzeń. Na przykład:
 
 ```csharp
 private string[] permittedExtensions = { ".txt", ".pdf" };
@@ -1257,7 +1259,7 @@ Wiele implementacji musi zawierać sprawdzenie, czy plik istnieje; w przeciwnym 
 
 Ogranicz rozmiar przekazanych plików.
 
-W przykładowej aplikacji rozmiar pliku jest ograniczony do 2 MB (wyrażony w bajtach). Limit jest dostarczany przez [konfigurację](xref:fundamentals/configuration/index) z pliku *appSettings. JSON* :
+W przykładowej aplikacji rozmiar pliku jest ograniczony do 2 MB (wyrażony w bajtach). Limit jest dostarczany przez [konfigurację](xref:fundamentals/configuration/index) z *appsettings.jsw* pliku:
 
 ```json
 {
@@ -1429,7 +1431,7 @@ Inne limity Kestrel mogą dotyczyć aplikacji hostowanych przez Kestrel:
 
 ### <a name="iis-content-length-limit"></a>Limit długości zawartości usług IIS
 
-Domyślny limit żądań ( `maxAllowedContentLength` ) to 30 000 000 bajtów, czyli około 28.6 MB. Dostosuj limit w pliku *Web. config* :
+Domyślny limit żądań ( `maxAllowedContentLength` ) to 30 000 000 bajtów, czyli około 28.6 MB. Dostosuj limit w pliku *web.config* :
 
 ```xml
 <system.webServer>

@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 5/6/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: fundamentals/middleware/index
-ms.openlocfilehash: 81a0da65215bc41f6dfad0de28a95bdc455bd8fb
-ms.sourcegitcommit: 5e462c3328c70f95969d02adce9c71592049f54c
+ms.openlocfilehash: 69c253171c51e08802b82415245a66921168ec80
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/24/2020
-ms.locfileid: "85292792"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404265"
 ---
 # <a name="aspnet-core-middleware"></a>ASP.NET Core oprogramowanie pośredniczące
 
@@ -91,7 +93,7 @@ Poniższa `Startup.Configure` Metoda dodaje składniki pośredniczące związane
 Powyższy kod ma następujące działanie:
 
 * Oprogramowanie pośredniczące, które nie jest dodawane podczas tworzenia nowej aplikacji sieci Web z [kontami poszczególnych użytkowników](xref:security/authentication/identity) , jest oznaczone jako komentarz.
-* Nie każde oprogramowanie pośredniczące musi przejść do tej dokładnej kolejności, ale wiele do. Przykład:
+* Nie każde oprogramowanie pośredniczące musi przejść do tej dokładnej kolejności, ale wiele do. Na przykład:
   * `UseCors`, `UseAuthentication` i `UseAuthorization` muszą przejść w podanej kolejności.
   * `UseCors`obecnie musi przejść `UseResponseCaching` do [tego błędu](https://github.com/dotnet/aspnetcore/issues/23218).
 
@@ -247,7 +249,7 @@ ASP.NET Core dostarcza z następującymi składnikami oprogramowania pośrednicz
 
 | Oprogramowanie pośredniczące | Opis | Zamówienie |
 | ---------- | ----------- | ----- |
-| [Uwierzytelnianie](xref:security/authentication/identity) | Zapewnia obsługę uwierzytelniania. | Przed zainstalowaniem `HttpContext.User` . Terminal dla wywołań zwrotnych uwierzytelniania OAuth. |
+| [Authentication](xref:security/authentication/identity) | Zapewnia obsługę uwierzytelniania. | Przed zainstalowaniem `HttpContext.User` . Terminal dla wywołań zwrotnych uwierzytelniania OAuth. |
 | [Autoryzacja](xref:Microsoft.AspNetCore.Builder.AuthorizationAppBuilderExtensions.UseAuthorization*) | Zapewnia obsługę autoryzacji. | Natychmiast po oprogramowaniu pośredniczącym uwierzytelniania. |
 | [Zasady dotyczące plików cookie](xref:security/gdpr) | Śledzi zgodę użytkowników na przechowywanie informacji osobistych i wymusza minimalne standardy dotyczące pól plików cookie, takich jak `secure` i `SameSite` . | Przed wystawianiem plików cookie przez oprogramowanie pośredniczące. Przykłady: uwierzytelnianie, sesja, MVC (TempData). |
 | [CORS](xref:security/cors) | Konfiguruje udostępnianie zasobów między źródłami. | Przed składnikami korzystającymi z mechanizmu CORS. `UseCors`obecnie musi przejść `UseResponseCaching` do [tego błędu](https://github.com/dotnet/aspnetcore/issues/23218).|
@@ -454,7 +456,7 @@ ASP.NET Core dostarcza z następującymi składnikami oprogramowania pośrednicz
 
 | Oprogramowanie pośredniczące | Opis | Zamówienie |
 | ---------- | ----------- | ----- |
-| [Uwierzytelnianie](xref:security/authentication/identity) | Zapewnia obsługę uwierzytelniania. | Przed zainstalowaniem `HttpContext.User` . Terminal dla wywołań zwrotnych uwierzytelniania OAuth. |
+| [Authentication](xref:security/authentication/identity) | Zapewnia obsługę uwierzytelniania. | Przed zainstalowaniem `HttpContext.User` . Terminal dla wywołań zwrotnych uwierzytelniania OAuth. |
 | [Zasady dotyczące plików cookie](xref:security/gdpr) | Śledzi zgodę użytkowników na przechowywanie informacji osobistych i wymusza minimalne standardy dotyczące pól plików cookie, takich jak `secure` i `SameSite` . | Przed wystawianiem plików cookie przez oprogramowanie pośredniczące. Przykłady: uwierzytelnianie, sesja, MVC (TempData). |
 | [CORS](xref:security/cors) | Konfiguruje udostępnianie zasobów między źródłami. | Przed składnikami korzystającymi z mechanizmu CORS. |
 | [Diagnostyka](xref:fundamentals/error-handling) | Kilka oddzielnych middlewares, które udostępniają stronę wyjątku dewelopera, obsługę wyjątków, strony kodu stanu i domyślną stronę sieci Web dla nowych aplikacji. | Przed składnikami, które generują błędy. Terminal dla wyjątków lub obsługa domyślnej strony sieci Web dla nowych aplikacji. |

@@ -8,17 +8,19 @@ ms.custom: mvc, seoapril2019
 ms.date: 06/19/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/index
-ms.openlocfilehash: 694be6317aaac211f5099dfca749ff8a69d146d1
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
+ms.openlocfilehash: 30f11a137e711b1cf7a8b036af92fbb5fa2a1f05
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85243515"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402575"
 ---
 # <a name="introduction-to-aspnet-core-blazor"></a>Wprowadzenie do ASP.NET CoreBlazor
 
@@ -108,37 +110,37 @@ Gdy ten składnik jest używany w aplikacji, funkcja IntelliSense w programie [V
 
 Składniki są renderowane w pamięci podręcznej Document Object Model (DOM) przeglądarki o nazwie *drzewo renderowania*, która jest używana do aktualizowania interfejsu użytkownika w elastyczny i wydajny sposób.
 
-## <a name="blazor-webassembly"></a>BlazorZestaw webassembly
+## Blazor WebAssembly
 
-BlazorWebassembly to jednostronicowa platforma aplikacji służąca do tworzenia interaktywnych aplikacji sieci Web po stronie klienta przy użyciu platformy .NET. BlazorZestaw webassembly używa otwartych standardów sieci Web bez wtyczek lub kodu transpilation i działa we wszystkich nowoczesnych przeglądarkach sieci Web, w tym w przeglądarkach mobilnych.
+Blazor WebAssemblyjest platformą aplikacji jednostronicowej do tworzenia interaktywnych aplikacji sieci Web po stronie klienta przy użyciu platformy .NET. Blazor WebAssemblyużywa otwartych standardów sieci Web bez wtyczek lub kodu transpilation i działa we wszystkich nowoczesnych przeglądarkach sieci Web, w tym w przeglądarkach mobilnych.
 
 Uruchamianie kodu platformy .NET wewnątrz przeglądarek sieci Web jest możliwe przez [zestaw webassembly](https://webassembly.org) (skrócony `wasm` ). Webassembly to kompaktowy format kodu bajtowego zoptymalizowany pod kątem szybkiego pobierania i maksymalnej szybkości wykonywania. Webassembly to otwarty standard sieci Web, który jest obsługiwany w przeglądarkach sieci Web bez wtyczek.
 
 Kod webassembly może uzyskać dostęp do pełnej funkcjonalności przeglądarki za pośrednictwem języka JavaScript, nazywanego *współdziałaniem JavaScript* (lub *międzyoperacyjną JavaScript*). Kod .NET wykonywany za pośrednictwem webassembly w przeglądarce jest uruchamiany w piaskownicy języka JavaScript przeglądarki z ochroną, którą piaskownica zapewnia przed złośliwymi działaniami na komputerze klienckim.
 
-![BlazorZestaw webassembly uruchamia kod platformy .NET w przeglądarce z zestawem webassembly.](index/_static/blazor-webassembly.png)
+![Blazor WebAssemblyuruchamia kod platformy .NET w przeglądarce z zestawem webassembly.](index/_static/blazor-webassembly.png)
 
-Gdy Blazor aplikacja webassembly zostanie skompilowana i uruchomiona w przeglądarce:
+Gdy Blazor WebAssembly aplikacja zostanie skompilowana i uruchomiona w przeglądarce:
 
 * Pliki kodu C# i Razor pliki są kompilowane do zestawów .NET.
 * Zestawy i środowisko uruchomieniowe platformy .NET są pobierane do przeglądarki.
-* BlazorZestaw webassembly Bootstrap środowisko uruchomieniowe platformy .NET i konfiguruje środowisko uruchomieniowe w celu załadowania zestawów dla aplikacji. BlazorŚrodowisko uruchomieniowe webassembly używa interfejsu JavaScript Interop do obsługi operacji manipulowania modelem Dom i interfejsów API przeglądarki.
+* Blazor WebAssemblyładuje uruchomienia środowiska uruchomieniowego .NET i konfiguruje środowisko uruchomieniowe w celu załadowania zestawów dla aplikacji. Blazor WebAssemblyŚrodowisko uruchomieniowe używa międzyoperacyjnego języka JavaScript do obsługi operacji manipulowania Dom i interfejsu API przeglądarki.
 
-Rozmiar opublikowanej aplikacji, jej *rozmiaru ładunku*, jest krytycznym czynnikiem wydajności dla useability aplikacji. Pobieranie dużej aplikacji do przeglądarki zajmuje stosunkowo dużo czasu, co zmniejsza środowisko użytkownika. BlazorZestaw webassembly optymalizuje rozmiar ładunku, aby skrócić czas pobierania:
+Rozmiar opublikowanej aplikacji, jej *rozmiaru ładunku*, jest krytycznym czynnikiem wydajności dla useability aplikacji. Pobieranie dużej aplikacji do przeglądarki zajmuje stosunkowo dużo czasu, co zmniejsza środowisko użytkownika. Blazor WebAssemblyoptymalizuje rozmiar ładunku, aby skrócić czas pobierania:
 
 * Nieużywany kod jest usuwany z aplikacji, gdy jest publikowany przez [konsolidator języka pośredniego (IL)](xref:blazor/host-and-deploy/configure-linker).
 * Odpowiedzi HTTP są kompresowane.
 * Środowisko uruchomieniowe platformy .NET i zestawy są buforowane w przeglądarce.
 
-## <a name="blazor-server"></a>BlazorServer
+## Blazor Server
 
-Blazoroddziela logikę renderowania składników od sposobu stosowania aktualizacji interfejsu użytkownika. BlazorSerwer zapewnia obsługę składników hostingu Razor na serwerze w aplikacji ASP.NET Core. Aktualizacje interfejsu użytkownika są obsługiwane przez [SignalR](xref:signalr/introduction) połączenie.
+Blazoroddziela logikę renderowania składników od sposobu stosowania aktualizacji interfejsu użytkownika. Blazor Serverzapewnia obsługę składników hostingu Razor na serwerze w aplikacji ASP.NET Core. Aktualizacje interfejsu użytkownika są obsługiwane przez [SignalR](xref:signalr/introduction) połączenie.
 
 Środowisko uruchomieniowe obsługuje wysyłanie zdarzeń interfejsu użytkownika z przeglądarki do serwera i zastosowanie aktualizacji interfejsu użytkownika wysyłanych przez serwer z powrotem do przeglądarki po uruchomieniu składników programu.
 
-Połączenie używane przez Blazor serwer do komunikacji z przeglądarką jest również używane do obsługi wywołań międzyoperacyjnych języka JavaScript.
+Połączenie używane przez Blazor Server program do komunikacji z przeglądarką jest również używane do obsługi wywołań międzyoperacyjnych języka JavaScript.
 
-![BlazorSerwer uruchamia kod platformy .NET na serwerze i współdziała z Document Object Model na kliencie przez SignalR połączenie](index/_static/blazor-server.png)
+![Blazor Serveruruchamia kod platformy .NET na serwerze i współdziała z Document Object Model na kliencie przez SignalR połączenie](index/_static/blazor-server.png)
 
 ## <a name="javascript-interop"></a>Międzyoperacyjność w języku JavaScript
 

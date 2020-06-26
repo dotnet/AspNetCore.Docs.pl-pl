@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 11/08/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/identity/spa
-ms.openlocfilehash: 6d9d8cf6ca9ca3afc570c2c68510125200b96c60
-ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
+ms.openlocfilehash: 86f9b0a3efea5315092d1c6435a1b764fbec0a1d
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85074466"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402991"
 ---
 # <a name="authentication-and-authorization-for-spas"></a>Uwierzytelnianie i autoryzacja dla aplikacji jednostronicowych
 
@@ -193,7 +195,7 @@ services.Configure<JwtBearerOptions>(
 
 Procedura obsługi JWT interfejsu API wywołuje zdarzenia, które umożliwiają kontrolę nad procesem uwierzytelniania przy użyciu `JwtBearerEvents` . Aby zapewnić obsługę autoryzacji interfejsu API, `AddIdentityServerJwt` rejestruje własne programy obsługi zdarzeń.
 
-Aby dostosować obsługę zdarzenia, zawiń istniejący program obsługi zdarzeń z dodatkową logiką zgodnie z wymaganiami. Przykład:
+Aby dostosować obsługę zdarzenia, zawiń istniejący program obsługi zdarzeń z dodatkową logiką zgodnie z wymaganiami. Na przykład:
 
 ```csharp
 services.Configure<JwtBearerOptions>(

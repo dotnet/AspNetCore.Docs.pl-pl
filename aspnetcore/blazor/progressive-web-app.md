@@ -1,5 +1,5 @@
 ---
-title: Kompilowanie progresywnych aplikacji sieci Web za pomocą ASP.NET Core Blazor Webassembly
+title: Twórz progresywne aplikacje sieci Web za pomocą ASP.NET CoreBlazor WebAssembly
 author: guardrex
 description: Dowiedz się, jak utworzyć Blazor progresywną aplikację sieci Web (PWA), która korzysta z nowoczesnych funkcji przeglądarki, aby zachować takie działanie jak aplikacja klasyczna.
 monikerRange: '>= aspnetcore-3.1'
@@ -8,23 +8,25 @@ ms.custom: mvc
 ms.date: 06/10/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/progressive-web-app
-ms.openlocfilehash: f56fb0f09845ded6ef6907221a27f71621a155d1
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
+ms.openlocfilehash: 237a8fceb75ba724625f018cf94c8d5bc5acfdad
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85242813"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402588"
 ---
-# <a name="build-progressive-web-applications-with-aspnet-core-blazor-webassembly"></a>Kompilowanie progresywnych aplikacji sieci Web za pomocą ASP.NET Core Blazor Webassembly
+# <a name="build-progressive-web-applications-with-aspnet-core-blazor-webassembly"></a>Twórz progresywne aplikacje sieci Web za pomocą ASP.NET CoreBlazor WebAssembly
 
 [Steve Sanderson](https://github.com/SteveSandersonMS)
 
-Progresywna aplikacja sieci Web (PWA) jest zazwyczaj aplikacją jednostronicową, która używa nowoczesnych interfejsów API i funkcji w celu zachowania aplikacji klasycznych. BlazorWebassembly to oparta na standardach platforma aplikacji sieci Web po stronie klienta, która może korzystać z dowolnego interfejsu API przeglądarki, w tym interfejsów API programu PWA, które są wymagane dla następujących możliwości:
+Progresywna aplikacja sieci Web (PWA) jest zazwyczaj aplikacją jednostronicową, która używa nowoczesnych interfejsów API i funkcji w celu zachowania aplikacji klasycznych. Blazor WebAssemblyto oparta na standardach platforma aplikacji sieci Web po stronie klienta, która może korzystać z dowolnego interfejsu API przeglądarki, w tym interfejsów API programu PWA, wymaganych w przypadku następujących możliwości:
 
 * Praca w trybie offline i ładowanie błyskawiczne niezależnie od szybkości sieci.
 * Działa w osobnym oknie aplikacji, a nie tylko w oknie przeglądarki.
@@ -41,7 +43,7 @@ Słowo *progresywne* służy do opisywania takich aplikacji, ponieważ:
 
 # <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
-Podczas tworzenia nowej ** Blazor aplikacji webassembly** w oknie dialogowym **Tworzenie nowego projektu** zaznacz pole wyboru **aplikacja sieci Web progresywna** :
+Gdy tworzysz nową ** Blazor WebAssembly aplikację** w oknie dialogowym **Tworzenie nowego projektu** , zaznacz pole wyboru **aplikacja sieci Web progresywna** :
 
 ![W oknie dialogowym Nowy projekt programu Visual Studio jest zaznaczone pole wyboru "progresywna aplikacja sieci Web".](progressive-web-app/_static/image1.png)
 
@@ -155,7 +157,7 @@ Jeśli Razor składniki aplikacji korzystają z żądania danych z interfejsów 
 
 ### <a name="support-server-rendered-pages"></a>Obsługa stron renderowanych na serwerze
 
-Zastanów się, co się stanie, gdy użytkownik po raz pierwszy przejdzie do adresu URL, takiego jak `/counter` lub dowolnego innego linku bezpośredniego w aplikacji. W takich przypadkach nie chcesz zwracać zawartości w pamięci podręcznej jako `/counter` , ale potrzebna jest przeglądarka do załadowania zawartości w pamięci podręcznej w `/index.html` celu uruchomienia Blazor aplikacji webassembly. Te początkowe żądania są znane jako żądania *nawigacji* , w przeciwieństwie do:
+Zastanów się, co się stanie, gdy użytkownik po raz pierwszy przejdzie do adresu URL, takiego jak `/counter` lub dowolnego innego linku bezpośredniego w aplikacji. W takich przypadkach nie chcesz zwracać zawartości w pamięci podręcznej jako `/counter` , ale potrzebna jest przeglądarka do załadowania zawartości w pamięci podręcznej w `/index.html` celu uruchomienia Blazor WebAssembly aplikacji. Te początkowe żądania są znane jako żądania *nawigacji* , w przeciwieństwie do:
 
 * `subresource`żądania obrazów, arkuszy stylów lub innych plików.
 * `fetch/XHR`żądania dotyczące danych interfejsu API.
@@ -192,7 +194,7 @@ Domyślnie ten manifest zawiera następujące listę:
 * Wszelkie Blazor zarządzane zasoby, takie jak zestawy .NET i pliki środowiska uruchomieniowego Webassembly programu .NET, są wymagane do działania w trybie offline.
 * Wszystkie zasoby do publikowania w `wwwroot` katalogu aplikacji, takie jak obrazy, arkusze stylów i pliki JavaScript, w tym statyczne zasoby sieci Web dostarczane przez zewnętrzne projekty i pakiety NuGet.
 
-Można kontrolować, które z tych zasobów są pobierane i buforowane przez proces roboczy usługi przez edytowanie logiki w `onInstall` programie w ramach programu `service-worker.published.js` . Domyślnie proces roboczy usługi pobiera i buforuje pliki zgodne z typowymi rozszerzeniami nazw sieci Web, takimi jak `.html` ,, `.css` `.js` i i `.wasm` typami plików specyficznymi dla Blazor webassembly ( `.dll` , `.pdb` ).
+Można kontrolować, które z tych zasobów są pobierane i buforowane przez proces roboczy usługi przez edytowanie logiki w `onInstall` programie w ramach programu `service-worker.published.js` . Domyślnie proces roboczy usługi pobiera i buforuje pliki zgodne z typowymi rozszerzeniami nazw sieci Web, takimi jak `.html` ,, `.css` `.js` , i oraz `.wasm` typami plików specyficznymi dla Blazor WebAssembly ( `.dll` , `.pdb` ).
 
 Aby uwzględnić dodatkowe zasoby, które nie znajdują się w `wwwroot` katalogu aplikacji, Zdefiniuj dodatkowe `ItemGroup` wpisy programu MSBuild, jak pokazano w następującym przykładzie:
 
@@ -210,11 +212,11 @@ Aby uwzględnić dodatkowe zasoby, które nie znajdują się w `wwwroot` katalog
 
 ## <a name="push-notifications"></a>Powiadomienia wypychane
 
-Podobnie jak w przypadku każdego innego PWA, zestaw Blazor może odbierać powiadomienia wypychane z serwera wewnętrznej bazy danych. Serwer może wysyłać powiadomienia wypychane w dowolnym momencie, nawet jeśli użytkownik nie korzysta aktywnie z aplikacji. Na przykład powiadomienia wypychane mogą być wysyłane, gdy inny użytkownik wykonuje odpowiednią akcję.
+Podobnie jak w przypadku innych aplikacji PWA, Blazor WebAssembly PWA może odbierać powiadomienia wypychane z serwera wewnętrznej bazy danych. Serwer może wysyłać powiadomienia wypychane w dowolnym momencie, nawet jeśli użytkownik nie korzysta aktywnie z aplikacji. Na przykład powiadomienia wypychane mogą być wysyłane, gdy inny użytkownik wykonuje odpowiednią akcję.
 
-Mechanizm wysyłania powiadomień wypychanych jest całkowicie niezależny od Blazor zestawu webassembly, ponieważ jest implementowany przez serwer wewnętrznej bazy danych, który może korzystać z dowolnej technologii. Jeśli chcesz wysyłać powiadomienia wypychane z serwera ASP.NET Core, rozważ [użycie techniki podobnej do podejścia wykonywanego w warsztatie niezwykle Pizza](https://github.com/dotnet-presentations/blazor-workshop/blob/master/docs/09-progressive-web-app.md#sending-push-notifications).
+Mechanizm wysyłania powiadomień wypychanych jest całkowicie niezależny od Blazor WebAssembly , ponieważ jest zaimplementowany przez serwer wewnętrznej bazy danych, który może korzystać z dowolnej technologii. Jeśli chcesz wysyłać powiadomienia wypychane z serwera ASP.NET Core, rozważ [użycie techniki podobnej do podejścia wykonywanego w warsztatie niezwykle Pizza](https://github.com/dotnet-presentations/blazor-workshop/blob/master/docs/09-progressive-web-app.md#sending-push-notifications).
 
-Mechanizm otrzymywania i wyświetlania powiadomień wypychanych na kliencie jest również niezależny od Blazor zestawu webassembly, ponieważ jest zaimplementowany w pliku JavaScript procesu roboczego usługi. Aby zapoznać się z przykładem, zapoznaj [się z podejściem używanym w warsztatie niezwykle Pizza](https://github.com/dotnet-presentations/blazor-workshop/blob/master/docs/09-progressive-web-app.md#displaying-notifications).
+Mechanizm otrzymywania i wyświetlania powiadomień wypychanych na kliencie jest również niezależny od Blazor WebAssembly , ponieważ jest zaimplementowany w pliku JavaScript procesu roboczego usługi. Aby zapoznać się z przykładem, zapoznaj [się z podejściem używanym w warsztatie niezwykle Pizza](https://github.com/dotnet-presentations/blazor-workshop/blob/master/docs/09-progressive-web-app.md#displaying-notifications).
 
 ## <a name="caveats-for-offline-pwas"></a>Ostrzeżenia dotyczące PWAs w trybie offline
 

@@ -1,26 +1,28 @@
 ---
-title: BlazorDodatkowe scenariusze zabezpieczeń ASP.NET Core Webassembly
+title: ASP.NET Core Blazor WebAssembly dodatkowe scenariusze zabezpieczeń
 author: guardrex
-description: Dowiedz się, jak skonfigurować Blazor zestaw webassembly pod kątem dodatkowych scenariuszy zabezpieczeń.
+description: Dowiedz się, jak skonfigurować Blazor WebAssembly dodatkowe scenariusze zabezpieczeń.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/10/2020
+ms.date: 06/24/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/security/webassembly/additional-scenarios
-ms.openlocfilehash: 13007df4ddddd31dd0508e9526775a6d33e0fd97
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
+ms.openlocfilehash: 4e7f7c89e7dbc1851069b6e7024065e96495a317
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85242917"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402185"
 ---
-# <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a>BlazorDodatkowe scenariusze zabezpieczeń ASP.NET Core Webassembly
+# <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor WebAssembly dodatkowe scenariusze zabezpieczeń
 
 Autorzy [Javier Calvarro Nelson](https://github.com/javiercn) i [Luke Latham](https://github.com/guardrex)
 
@@ -116,7 +118,7 @@ builder.Services.AddTransient(sp =>
 });
 ```
 
-Dla wygody <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> jest dołączony wstępnie skonfigurowany przy użyciu adresu podstawowego aplikacji jako autoryzowany adres URL. Szablony zestawów webassembly z włączonym uwierzytelnianiem Blazor używają teraz <xref:System.Net.Http.IHttpClientFactory> ( [`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http/) pakiet) w projekcie interfejsu API serwera, aby skonfigurować <xref:System.Net.Http.HttpClient> za pomocą <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> :
+Dla wygody <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> jest dołączony wstępnie skonfigurowany przy użyciu adresu podstawowego aplikacji jako autoryzowany adres URL. Szablony z włączonym uwierzytelnianiem Blazor WebAssembly używają teraz <xref:System.Net.Http.IHttpClientFactory> ( [`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http/) pakiet) w projekcie interfejsu API serwera w celu skonfigurowania programu <xref:System.Net.Http.HttpClient> przy użyciu <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> :
 
 ```csharp
 using System.Net.Http;
@@ -244,7 +246,7 @@ builder.Services.AddHttpClient<WeatherForecastClient>(client => client.BaseAddre
 
 ## <a name="unauthenticated-or-unauthorized-web-api-requests-in-an-app-with-a-secure-default-client"></a>Nieuwierzytelnione lub nieautoryzowane żądania interfejsu API sieci Web w aplikacji z bezpiecznym klientem domyślnym
 
-Jeśli Blazor aplikacja internetowa zestawu zwykle używa bezpiecznego ustawienia domyślnego <xref:System.Net.Http.HttpClient> , aplikacja może również wykonać nieuwierzytelnione lub nieautoryzowane żądania internetowego interfejsu API przez skonfigurowanie nazwanego elementu <xref:System.Net.Http.HttpClient> :
+Jeśli Blazor WebAssembly aplikacja zwykle korzysta z bezpiecznego ustawienia domyślnego <xref:System.Net.Http.HttpClient> , aplikacja może również wykonać nieuwierzytelnione lub nieautoryzowane żądania interfejsu API sieci Web przez skonfigurowanie nazwanego elementu <xref:System.Net.Http.HttpClient> :
 
 `Program.Main` (`Program.cs`):
 
@@ -255,7 +257,7 @@ builder.Services.AddHttpClient("ServerAPI.NoAuthenticationClient",
 
 Poprzednia rejestracja jest uzupełnieniem istniejącej bezpiecznej rejestracji domyślnej <xref:System.Net.Http.HttpClient> .
 
-Składnik tworzy <xref:System.Net.Http.HttpClient> z <xref:System.Net.Http.IHttpClientFactory> ( [`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http/) pakiet), aby wykonać nieuwierzytelnione lub nieautoryzowane żądania:
+Składnik tworzy <xref:System.Net.Http.HttpClient> z <xref:System.Net.Http.IHttpClientFactory> ( [`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http) pakiet), aby wykonać nieuwierzytelnione lub nieautoryzowane żądania:
 
 ```razor
 @inject IHttpClientFactory ClientFactory
@@ -277,6 +279,10 @@ Składnik tworzy <xref:System.Net.Http.HttpClient> z <xref:System.Net.Http.IHttp
 
 > [!NOTE]
 > Kontroler w interfejsie API serwera, `WeatherForecastNoAuthenticationController` dla poprzedniego przykładu, nie jest oznaczony [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) atrybutem.
+
+Decyzja o konieczności użycia bezpiecznego klienta lub niezabezpieczonego klienta jako <xref:System.Net.Http.HttpClient> wystąpienia domyślnego do dewelopera. Jednym ze sposobów podjęcia tej decyzji jest uwzględnienie liczby uwierzytelnionych i nieuwierzytelnionych punktów końcowych, z którymi kontaktuje się aplikacja. Jeśli większość żądań aplikacji jest zabezpieczonych punktów końcowych interfejsu API, użyj uwierzytelnionego <xref:System.Net.Http.HttpClient> wystąpienia jako domyślnego. W przeciwnym razie Zarejestruj nieuwierzytelnione <xref:System.Net.Http.HttpClient> wystąpienie jako domyślne.
+
+Alternatywnym podejściem do korzystania z programu <xref:System.Net.Http.IHttpClientFactory> jest utworzenie [klienta o określonym typie](#typed-httpclient) dla nieuwierzytelnionego dostępu do anonimowych punktów końcowych.
 
 ## <a name="request-additional-access-tokens"></a>Żądaj dodatkowych tokenów dostępu
 
@@ -328,7 +334,7 @@ if (tokenResult.TryGetToken(out var token))
 
 ## <a name="httpclient-and-httprequestmessage-with-fetch-api-request-options"></a>HttpClient i HttpRequestMessage za pomocą opcji żądania interfejsu API pobierania
 
-W przypadku uruchamiania w zestawie webassembly w Blazor aplikacji webassembly [`HttpClient`](xref:fundamentals/http-requests) i <xref:System.Net.Http.HttpRequestMessage> może służyć do dostosowywania żądań. Na przykład można określić metodę HTTP i nagłówki żądania. Poniższy składnik wysyła `POST` żądanie do punktu końcowego interfejsu API listy do wykonania na serwerze i wyświetla treść odpowiedzi:
+W przypadku uruchamiania w programie webassembly w Blazor WebAssembly aplikacji [`HttpClient`](xref:fundamentals/http-requests) i <xref:System.Net.Http.HttpRequestMessage> może służyć do dostosowywania żądań. Na przykład można określić metodę HTTP i nagłówki żądania. Poniższy składnik wysyła `POST` żądanie do punktu końcowego interfejsu API listy do wykonania na serwerze i wyświetla treść odpowiedzi:
 
 ```razor
 @page "/todorequest"
@@ -403,7 +409,7 @@ Opcje żądania pobrania HTTP można skonfigurować przy użyciu <xref:System.Ne
 
 Można ustawić dodatkowe opcje przy użyciu bardziej generycznej <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestOption%2A> metody rozszerzenia.
  
-Odpowiedź HTTP jest zwykle buforowana w Blazor aplikacji Webassembly, aby umożliwić obsługę odczytów synchronizacji w zawartości odpowiedzi. Aby włączyć obsługę przesyłania strumieniowego odpowiedzi, należy użyć <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserResponseStreamingEnabled%2A> metody rozszerzenia w żądaniu.
+Odpowiedź HTTP jest zwykle buforowana w Blazor WebAssembly aplikacji, aby umożliwić obsługę odczytów synchronizacji w zawartości odpowiedzi. Aby włączyć obsługę przesyłania strumieniowego odpowiedzi, należy użyć <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserResponseStreamingEnabled%2A> metody rozszerzenia w żądaniu.
 
 Aby uwzględnić poświadczenia w żądaniu między źródłami, użyj <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCredentials%2A> metody rozszerzenia:
 
@@ -861,7 +867,7 @@ Zarejestruj `CustomAccountFactory` dostawcę uwierzytelniania w użyciu. Wszystk
 
 ## <a name="support-prerendering-with-authentication"></a>Obsługa prerenderowania przy użyciu uwierzytelniania
 
-Po zastosowaniu wskazówek w jednej z aplikacji hostowanego Blazor zestawu webassembly Skorzystaj z poniższych instrukcji, aby utworzyć aplikację, która:
+Po zastosowaniu wskazówek w jednej z Blazor WebAssembly tematów aplikacji hostowanych należy wykonać następujące instrukcje, aby utworzyć aplikację, która:
 
 * Wstępnie renderuje ścieżki, dla których autoryzacja nie jest wymagana.
 * Nie określa ścieżek PreRender, dla których wymagana jest autoryzacja.
@@ -946,7 +952,7 @@ W aplikacji serwer Utwórz `Pages` folder, jeśli nie istnieje. Utwórz `_Host.c
   
 ## <a name="options-for-hosted-apps-and-third-party-login-providers"></a>Opcje aplikacji hostowanych i dostawców logowania innych firm
 
-Podczas uwierzytelniania i autoryzowania hostowanej Blazor aplikacji sieci webassembly przy użyciu dostawcy innej firmy dostępnych jest kilka opcji uwierzytelniania użytkownika. Wybór jednego z nich zależy od danego scenariusza.
+Podczas uwierzytelniania i autoryzowania hostowanej Blazor WebAssembly aplikacji za pomocą dostawcy innej firmy dostępnych jest kilka opcji uwierzytelniania użytkownika. Wybór jednego z nich zależy od danego scenariusza.
 
 Aby uzyskać więcej informacji, zobacz <xref:security/authentication/social/additional-claims>.
 

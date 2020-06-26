@@ -7,17 +7,19 @@ ms.date: 01/25/2020
 ms.custom: mvc, seodec18
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: razor-pages/ui-class
-ms.openlocfilehash: adfcc281f285892583ab8a21c014d6fcb120af9c
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 1d37ebaa913a2815b79b16875049bbf91f9fb941
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85102848"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404395"
 ---
 # <a name="create-reusable-ui-using-the-razor-class-library-project-in-aspnet-core"></a>Utwórz interfejs użytkownika wielokrotnego użytku przy użyciu Razor projektu biblioteki klas w ASP.NET Core
 
@@ -42,7 +44,7 @@ RazorDomyślnie szablon biblioteki klas (RCL) jest Razor domyślnym programowani
 
 # <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
 
-W wierszu polecenia Uruchom polecenie `dotnet new razorclasslib` . Przykład:
+W wierszu polecenia Uruchom polecenie `dotnet new razorclasslib` . Na przykład:
 
 ```dotnetcli
 dotnet new razorclasslib -o RazorUIClassLib
@@ -212,7 +214,7 @@ RCL ma następujący plik projektu:
 
 # <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
 
-W wierszu polecenia Uruchom polecenie `dotnet new razorclasslib` . Przykład:
+W wierszu polecenia Uruchom polecenie `dotnet new razorclasslib` . Na przykład:
 
 ```dotnetcli
 dotnet new razorclasslib -o RazorUIClassLib
@@ -308,7 +310,7 @@ Plik *_ViewStart. cshtml* jest wymagany do używania układu Razor projektu stro
 
   [!code-cshtml[](ui-class/samples/cli/RazorUIClassLib/Areas/MyFeature/Pages/Page1.cshtml)]
 
-  `@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers`jest wymagany do korzystania z widoku częściowego ( `<partial name="_Message" />` ). Zamiast `@addTagHelper` dyrektywy, można dodać plik *_ViewImports. cshtml* . Przykład:
+  `@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers`jest wymagany do korzystania z widoku częściowego ( `<partial name="_Message" />` ). Zamiast `@addTagHelper` dyrektywy, można dodać plik *_ViewImports. cshtml* . Na przykład:
 
   ```dotnetcli
   dotnet new viewimports -o RazorUIClassLib/Areas/MyFeature/Pages

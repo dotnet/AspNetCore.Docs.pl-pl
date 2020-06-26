@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 8/04/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-view
-ms.openlocfilehash: 3976ecba1a6bbf30c3147bf1cef78c5ced5bec62
-ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
+ms.openlocfilehash: 841751ffb834f77184365c3022293dbadc9f6f2c
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84652824"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85403537"
 ---
 # <a name="part-3-add-a-view-to-an-aspnet-core-mvc-app"></a>Część 3 Dodawanie widoku do aplikacji ASP.NET Core MVC
 

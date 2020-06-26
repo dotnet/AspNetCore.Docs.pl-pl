@@ -8,23 +8,25 @@ ms.custom: mvc
 ms.date: 06/10/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/fundamentals/logging
-ms.openlocfilehash: 841c4021d9217312b2601b0e775542c6455cca82
-ms.sourcegitcommit: dd2a1542a4a377123490034153368c135fdbd09e
+ms.openlocfilehash: 1f4b18bdea02016fb76b75dd01a8fcbeab9b2bc9
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85240882"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402835"
 ---
 # <a name="aspnet-core-blazor-logging"></a>BlazorRejestrowanie ASP.NET Core
 
-## <a name="blazor-webassembly"></a>BlazorZestaw webassembly
+## Blazor WebAssembly
 
-Skonfiguruj rejestrowanie w Blazor aplikacjach webassembly przy użyciu `WebAssemblyHostBuilder.Logging` właściwości w `Program.Main` :
+Skonfiguruj rejestrowanie w Blazor WebAssembly aplikacjach przy użyciu `WebAssemblyHostBuilder.Logging` właściwości w `Program.Main` :
 
 ```csharp
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
@@ -41,11 +43,11 @@ builder.Logging.AddProvider(new CustomLoggingProvider());
 
 Konfigurację rejestrowania można załadować z plików ustawień aplikacji. Aby uzyskać więcej informacji, zobacz <xref:blazor/fundamentals/configuration#logging-configuration>.
 
-## <a name="blazor-server"></a>BlazorServer
+## Blazor Server
 
 Ogólne wskazówki dotyczące rejestrowania ASP.NET Core można znaleźć w temacie <xref:fundamentals/logging/index> .
 
-## <a name="blazor-webassembly-signalr-net-client-logging"></a>BlazorSignalRRejestrowanie klientów .NET zestawu Webassembly
+## <a name="blazor-webassembly-signalr-net-client-logging"></a>Blazor WebAssemblySignalRRejestrowanie klienta platformy .NET
 
 Wstrzyknąć, <xref:Microsoft.Extensions.Logging.ILoggerProvider> Aby dodać `WebAssemblyConsoleLogger` do dostawców rejestrowania przekazaną do <xref:Microsoft.AspNetCore.SignalR.Client.HubConnectionBuilder> . W przeciwieństwie do tradycyjnego <xref:Microsoft.Extensions.Logging.Console.ConsoleLogger> , `WebAssemblyConsoleLogger` jest otoką dla interfejsów API rejestrowania specyficznych dla przeglądarki (na przykład `console.log` ). Użycie w `WebAssemblyConsoleLogger` programie umożliwia rejestrowanie w ramach programu mono wewnątrz kontekstu przeglądarki.
 

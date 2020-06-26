@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 04/15/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: client-side/bundling-and-minification
-ms.openlocfilehash: 4523ba299d5c5e50a442f84acadf06bf57c69c5d
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: de7c155189008e1f78bfb1eba062fcc86f9e4839
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82770956"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85401912"
 ---
 # <a name="bundle-and-minify-static-assets-in-aspnet-core"></a>Łączenie i zminifikować zasobów statycznych w ASP.NET Core
 
@@ -59,7 +61,7 @@ Oryginał | Zmiany
 
 W poniższej tabeli przedstawiono różnice między pojedynczym ładowaniem zasobów i użyciem grupowania i minifikacja:
 
-Akcja | Z B/M | Bez B/M | Change
+Akcja | Z B/M | Bez B/M | Zmiana
 --- | :---: | :---: | :---:
 Żądania plików  | 7   | 18     | 157%
 Przeniesiono KB | 156 | 264,68 | 70%
@@ -69,29 +71,29 @@ Przeglądarki są dość szczegółowe w odniesieniu do nagłówków żądań HT
 
 ## <a name="choose-a-bundling-and-minification-strategy"></a>Wybierz strategię tworzenia i minifikacja
 
-Szablony projektów MVC i Razor Pages udostępniają rozwiązanie do tworzenia i minifikacja składające się z pliku konfiguracji JSON. Narzędzia innych firm, takie jak [grunt](xref:client-side/using-grunt) Task Runner, spełniają te same zadania o nieco większej złożoności. Narzędzie innej firmy jest doskonałym rozwiązaniem, gdy przepływ pracy deweloperskiej wymaga przetwarzania poza dzieleniem i minifikacja&mdash;, takim jak zaznaczanie błędów i Optymalizacja obrazu. Korzystając z konstrukcji i minifikacja w czasie projektowania, pliki zminimalizowanego są tworzone przed wdrożeniem aplikacji. Przydzielenie i minifikacja przed wdrożeniem zapewnia zalety mniejszego obciążenia serwera. Należy jednak pamiętać, że konstrukcja czasu projektowania i minifikacja zwiększa złożoność kompilacji i działa tylko z plikami statycznymi.
+RazorSzablony projektu MVC i Pages zapewniają rozwiązanie do tworzenia i minifikacja składające się z pliku konfiguracji JSON. Narzędzia innych firm, takie jak [grunt](xref:client-side/using-grunt) Task Runner, spełniają te same zadania o nieco większej złożoności. Narzędzie innej firmy jest doskonałym rozwiązaniem, gdy przepływ pracy deweloperskiej wymaga przetwarzania poza dzieleniem i minifikacja, &mdash; takim jak zaznaczanie błędów i Optymalizacja obrazu. Korzystając z konstrukcji i minifikacja w czasie projektowania, pliki zminimalizowanego są tworzone przed wdrożeniem aplikacji. Przydzielenie i minifikacja przed wdrożeniem zapewnia zalety mniejszego obciążenia serwera. Należy jednak pamiętać, że konstrukcja czasu projektowania i minifikacja zwiększa złożoność kompilacji i działa tylko z plikami statycznymi.
 
 ## <a name="configure-bundling-and-minification"></a>Konfigurowanie grupowania i minifikacja
 
 ::: moniker range="<= aspnetcore-2.0"
 
-W ASP.NET Core 2,0 lub starszych, szablony projektów MVC i Razor Pages udostępniają plik konfiguracji *bundleconfig. JSON* , który definiuje opcje dla każdego pakietu:
+W ASP.NET Core 2,0 lub starszych szablon projektu MVC i Razor Pages udostępnia *bundleconfig.js* pliku konfiguracji, który definiuje opcje dla każdego pakietu:
 
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-2.1"
 
-W ASP.NET Core 2,1 lub nowszej Dodaj nowy plik JSON o nazwie *bundleconfig. JSON*, do elementu głównego MVC lub Razor Pages projektu. Dołącz następujący kod JSON do tego pliku jako punkt początkowy:
+W ASP.NET Core 2,1 lub nowszej Dodaj nowy plik JSON o nazwie *bundleconfig.json*, do Razor elementu głównego projektu MVC lub Pages. Dołącz następujący kod JSON do tego pliku jako punkt początkowy:
 
 ::: moniker-end
 
 [!code-json[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/bundleconfig.json)]
 
-Plik *bundleconfig. JSON* definiuje opcje dla każdego pakietu. W poprzednim przykładzie została zdefiniowana jedna konfiguracja pakietu dla plików niestandardowych JavaScript (*wwwroot/js/site. js*) i stylesheet (*wwwroot/CSS/site. css*).
+*bundleconfig.jsw* pliku definiuje opcje dla każdego pakietu. W poprzednim przykładzie została zdefiniowana jedna konfiguracja pakietu dla plików niestandardowych JavaScript (*wwwroot/js/site.js*) i arkusza stylów (*wwwroot/CSS/site. css*).
 
 Opcje konfiguracji obejmują:
 
-* `outputFileName`: Nazwa pliku pakietu do wyprowadzenia. Może zawierać ścieżkę względną z pliku *bundleconfig. JSON* . **Wymagane**
+* `outputFileName`: Nazwa pliku pakietu do wyprowadzenia. Może zawierać ścieżkę względną z *bundleconfig.js* pliku. **Wymagane**
 * `inputFiles`: Tablica plików do powiązania ze sobą. Są to względne ścieżki do pliku konfiguracji. **opcjonalne**, * pusta wartość powoduje pusty plik wyjściowy. Obsługiwane są wzorce [obsługi symboli wieloznacznych](https://www.tldp.org/LDP/abs/html/globbingref.html) .
 * `minify`: Opcje minifikacja dla typu danych wyjściowych. **opcjonalne**, *domyślne — `minify: { enabled: true }` *
   * Opcje konfiguracji są dostępne dla każdego typu pliku wyjściowego.
@@ -108,7 +110,7 @@ Rozważmy przykład, w którym dodatkowy *niestandardowy plik CSS* został dodan
 
 [!code-css[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/wwwroot/css/custom.css)]
 
-Aby zminifikować *niestandardowy. css* i powiązać go z plikiem *site. css* w pliku *site. min. css* , Dodaj ścieżkę względną do *bundleconfig. JSON*:
+Aby zminifikować *niestandardowy. css* i powiązać go z plikiem *site. css* w pliku *site. min. css* , Dodaj ścieżkę względną do *bundleconfig.jsna*:
 
 [!code-json[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/bundleconfig2.json?highlight=6)]
 
@@ -143,7 +145,7 @@ Następujący `environment` tag renderuje nieprzetworzone pliki CSS podczas dzia
 
 ::: moniker-end
 
-Poniższy `environment` tag renderuje powiązane i ZMINIMALIZOWANEGO pliki CSS, gdy działa w środowisku innym niż `Development`. Na przykład uruchomienie w programie `Production` lub `Staging` wyzwala renderowanie tych arkuszy stylów:
+Poniższy `environment` tag renderuje powiązane i zminimalizowanego pliki CSS, gdy działa w środowisku innym niż `Development` . Na przykład uruchomienie w programie `Production` lub `Staging` wyzwala renderowanie tych arkuszy stylów:
 
 ::: moniker range=">= aspnetcore-2.0"
 
@@ -157,20 +159,20 @@ Poniższy `environment` tag renderuje powiązane i ZMINIMALIZOWANEGO pliki CSS, 
 
 ::: moniker-end
 
-## <a name="consume-bundleconfigjson-from-gulp"></a>Korzystanie z bundleconfig. JSON z Gulp
+## <a name="consume-bundleconfigjson-from-gulp"></a>Korzystanie z bundleconfig.jsna podstawie Gulp
 
 Istnieją przypadki, w których aplikacja i przepływy pracy minifikacja aplikacji wymagają dodatkowego przetwarzania. Przykładami są Optymalizacja obrazu, Busting pamięci podręcznej i przetwarzanie zasobów sieci CDN. Aby spełnić te wymagania, można skonwertować przepływ pracy tworzenia i minifikacja w celu użycia Gulp.
 
 ### <a name="manually-convert-the-bundling-and-minification-workflow-to-use-gulp"></a>Ręcznie przekonwertuj przepływ pracy tworzenia i minifikacjaów, aby użyć Gulp
 
-Dodaj plik *Package. JSON* o następującej `devDependencies`postaci do katalogu głównego projektu:
+Dodaj *package.js* do pliku, w następujący `devDependencies` sposób, do katalogu głównego projektu:
 
 > [!WARNING]
-> `gulp-uglify` Moduł nie obsługuje języka ECMASCRIPT (ES) 2015/ES6 i nowszych. Zainstaluj [Gulp-Terser](https://www.npmjs.com/package/gulp-terser) zamiast `gulp-uglify` używać ES2015/ES6 lub nowszego.
+> `gulp-uglify`Moduł nie obsługuje języka ECMAScript (ES) 2015/ES6 i nowszych. Zainstaluj [Gulp-Terser](https://www.npmjs.com/package/gulp-terser) zamiast `gulp-uglify` używać ES2015/ES6 lub nowszego.
 
 [!code-json[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/package.json?range=5-13)]
 
-Zainstaluj zależności, uruchamiając następujące polecenie na tym samym poziomie, co plik *Package. JSON*:
+Zainstaluj zależności, uruchamiając następujące polecenie na tym samym poziomie co *package.jsna*:
 
 ```console
 npm i
@@ -182,7 +184,7 @@ Zainstaluj interfejs wiersza polecenia Gulp jako zależność globalną:
 npm i -g gulp-cli
 ```
 
-Skopiuj plik *Gulpfile. js* poniżej do katalogu głównego projektu:
+Skopiuj poniższy *gulpfile.js* plik do katalogu głównego projektu:
 
 [!code-javascript[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/gulpfile.js?range=1-11,14-)]
 

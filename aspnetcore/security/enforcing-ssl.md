@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 12/06/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/enforcing-ssl
-ms.openlocfilehash: 26e6fb38cf31b5a2d5c88c19347c867641eb55df
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: 8247d66900a0c15b3b386dca021c5c5922d26e71
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84451735"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404565"
 ---
 # <a name="enforce-https-in-aspnet-core"></a>Wymuszanie protokołu HTTPS w ASP.NET Core
 
@@ -108,7 +110,7 @@ Określ port HTTPS przy użyciu dowolnej z następujących metod:
 
   * W obszarze Konfiguracja hosta.
   * Przez ustawienie `ASPNETCORE_HTTPS_PORT` zmiennej środowiskowej.
-  * Dodając wpis najwyższego poziomu w pliku *appSettings. JSON*:
+  * Dodając wpis najwyższego poziomu w *appsettings.jsna*:
 
     [!code-json[](enforcing-ssl/sample-snapshot/3.x/appsettings.json?highlight=2)]
 
@@ -122,7 +124,7 @@ Określ port HTTPS przy użyciu dowolnej z następujących metod:
 
   * W obszarze Konfiguracja hosta.
   * Przez ustawienie `ASPNETCORE_HTTPS_PORT` zmiennej środowiskowej.
-  * Dodając wpis najwyższego poziomu w pliku *appSettings. JSON*:
+  * Dodając wpis najwyższego poziomu w *appsettings.jsna*:
 
     [!code-json[](enforcing-ssl/sample-snapshot/2.x/appsettings.json?highlight=2)]
 
@@ -130,16 +132,16 @@ Określ port HTTPS przy użyciu dowolnej z następujących metod:
 
 ::: moniker-end
 
-* W obszarze programowanie Ustaw adres URL HTTPS w pliku *profilu launchsettings. JSON*. Włącz protokół HTTPS, gdy zostanie użyta IIS Express.
+* W obszarze programowanie Ustaw adres URL HTTPS w *launchsettings.jsna*. Włącz protokół HTTPS, gdy zostanie użyta IIS Express.
 
-* Skonfiguruj punkt końcowy adresu URL HTTPS dla wdrożenia publicznej krawędzi serwera [Kestrel](xref:fundamentals/servers/kestrel) lub [http. sys](xref:fundamentals/servers/httpsys) . Aplikacja używa tylko **jednego portu HTTPS** . Oprogramowanie pośredniczące odnajduje port za pośrednictwem programu <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature> .
+* Skonfiguruj punkt końcowy adresu URL HTTPS dla wdrożenia publicznej krawędzi serwera [Kestrel](xref:fundamentals/servers/kestrel) lub serwera [HTTP.sys](xref:fundamentals/servers/httpsys) . Aplikacja używa tylko **jednego portu HTTPS** . Oprogramowanie pośredniczące odnajduje port za pośrednictwem programu <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature> .
 
 > [!NOTE]
 > Gdy aplikacja jest uruchamiana w konfiguracji zwrotnego serwera proxy, <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature> jest niedostępna. Ustaw port przy użyciu jednej z innych metod opisanych w tej sekcji.
 
 ### <a name="edge-deployments"></a>Wdrożenia brzegowe 
 
-Gdy Kestrel lub HTTP. sys jest używany jako publiczny serwer graniczny, Kestrel lub HTTP. sys musi być skonfigurowany do nasłuchiwania na obu:
+Gdy Kestrel lub HTTP.sys jest używany jako publiczny serwer graniczny, Kestrel lub HTTP.sys musi być skonfigurowany do nasłuchiwania na obu:
 
 * Bezpieczny port do przekierowania przez klienta (zazwyczaj 443 w środowisku produkcyjnym i 5001 podczas tworzenia).
 * Niezabezpieczony port (zazwyczaj 80 w środowisku produkcyjnym i 5000 podczas tworzenia).
@@ -283,7 +285,7 @@ Następujący kod:
 ::: moniker-end
 
 
-* Ustawia parametr wstępnego ładowania `Strict-Transport-Security` nagłówka. Wstępne ładowanie nie jest częścią [specyfikacji RFC HSTS](https://tools.ietf.org/html/rfc6797), ale jest obsługiwane przez przeglądarki sieci Web do wstępnego ładowania witryn HSTS w przypadku instalacji nowej. Aby uzyskać więcej informacji, zobacz [https://hstspreload.org/](https://hstspreload.org/) .
+* Ustawia parametr wstępnego ładowania `Strict-Transport-Security` nagłówka. Wstępne ładowanie nie jest częścią [specyfikacji RFC HSTS](https://tools.ietf.org/html/rfc6797), ale jest obsługiwane przez przeglądarki sieci Web do wstępnego ładowania witryn HSTS w przypadku instalacji nowej. Aby uzyskać więcej informacji, zobacz [https://hstspreload.org/](https://hstspreload.org/).
 * Włącza [includeSubDomain](https://tools.ietf.org/html/rfc6797#section-6.1.2), która stosuje zasady HSTS do hostowania poddomen.
 * Jawnie ustawia `max-age` parametr `Strict-Transport-Security` nagłówka na 60 dni. Jeśli nie zostanie ustawiona, wartość domyślna to 30 dni. Aby uzyskać więcej informacji, zobacz [dyrektywa max-age](https://tools.ietf.org/html/rfc6797#section-6.1.1).
 * Dodaje `example.com` do listy hostów, które mają zostać wykluczone.

@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 02/02/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: performance/caching/memory
-ms.openlocfilehash: 1967fb1942b4003d498800f6cf4c9dd280aca24e
-ms.sourcegitcommit: 688b6f448d87b6f7f4440182d72388eaa68d2935
+ms.openlocfilehash: 8eec361efbc3c7dca6c0bef65b6f6b40b3b46798
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/14/2020
-ms.locfileid: "83393849"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404616"
 ---
 # <a name="cache-in-memory-in-aspnet-core"></a>Buforowanie w pamięci w ASP.NET Core
 
@@ -116,7 +118,7 @@ Poniższy przykład:
 
 `MemoryCache`Wystąpienie może opcjonalnie określić i wymusić limit rozmiaru. Limit rozmiaru pamięci podręcznej nie ma zdefiniowanej jednostki miary, ponieważ pamięć podręczna nie ma mechanizmu mierzenia rozmiaru wpisów. Jeśli ustawiono limit rozmiaru pamięci podręcznej, wszystkie wpisy muszą określać rozmiar. Środowisko uruchomieniowe ASP.NET Core nie ogranicza rozmiaru pamięci podręcznej na podstawie nacisku pamięci. Aby ograniczyć rozmiar pamięci podręcznej, należy do dewelopera. Określony rozmiar jest w jednostkach wybranych przez dewelopera.
 
-Przykład:
+Na przykład:
 
 * Jeśli aplikacja sieci Web była przede wszystkim buforowania ciągów, każdy rozmiar wpisu pamięci podręcznej może być długością ciągu.
 * Aplikacja może określić rozmiar wszystkich wpisów jako 1, a limit rozmiaru to liczba wpisów.
@@ -292,7 +294,7 @@ Poniższy przykład:
 
 `MemoryCache`Wystąpienie może opcjonalnie określić i wymusić limit rozmiaru. Limit rozmiaru pamięci podręcznej nie ma zdefiniowanej jednostki miary, ponieważ pamięć podręczna nie ma mechanizmu mierzenia rozmiaru wpisów. Jeśli ustawiono limit rozmiaru pamięci podręcznej, wszystkie wpisy muszą określać rozmiar. Środowisko uruchomieniowe ASP.NET Core nie ogranicza rozmiaru pamięci podręcznej na podstawie nacisku pamięci. Aby ograniczyć rozmiar pamięci podręcznej, należy do dewelopera. Określony rozmiar jest w jednostkach wybranych przez dewelopera.
 
-Przykład:
+Na przykład:
 
 * Jeśli aplikacja sieci Web była przede wszystkim buforowania ciągów, każdy rozmiar wpisu pamięci podręcznej może być długością ciągu.
 * Aplikacja może określić rozmiar wszystkich wpisów jako 1, a limit rozmiaru to liczba wpisów.

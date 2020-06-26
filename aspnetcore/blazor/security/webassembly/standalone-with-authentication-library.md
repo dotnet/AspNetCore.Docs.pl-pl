@@ -1,5 +1,5 @@
 ---
-title: Zabezpieczanie Blazor aplikacji autonomicznej ASP.NET Core webassembly przy użyciu biblioteki uwierzytelniania
+title: Zabezpieczanie ASP.NET Core Blazor WebAssembly autonomicznej aplikacji przy użyciu biblioteki uwierzytelniania
 author: guardrex
 description: ''
 monikerRange: '>= aspnetcore-3.1'
@@ -8,25 +8,27 @@ ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/security/webassembly/standalone-with-authentication-library
-ms.openlocfilehash: 5a05543c77f1ebaebadc27236aa8f7634e84f1fd
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
+ms.openlocfilehash: be87257c5f901e9b3d1ba6a8d7c6b811419c433f
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85243420"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402198"
 ---
-# <a name="secure-an-aspnet-core-blazor-webassembly-standalone-app-with-the-authentication-library"></a>Zabezpieczanie Blazor aplikacji autonomicznej ASP.NET Core webassembly przy użyciu biblioteki uwierzytelniania
+# <a name="secure-an-aspnet-core-blazor-webassembly-standalone-app-with-the-authentication-library"></a>Zabezpieczanie ASP.NET Core Blazor WebAssembly autonomicznej aplikacji przy użyciu biblioteki uwierzytelniania
 
 Autorzy [Javier Calvarro Nelson](https://github.com/javiercn) i [Luke Latham](https://github.com/guardrex)
 
 *W przypadku Azure Active Directory (AAD) i Azure Active Directory B2C (AAD B2C) nie postępuj zgodnie ze wskazówkami w tym temacie. Zobacz tematy dotyczące usługi AAD i AAD B2C w tym węźle spisu treści.*
 
-Aby utworzyć Blazor autonomiczną aplikację Webassembly, która używa [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) biblioteki, wykonaj następujące polecenie w powłoce poleceń:
+Aby utworzyć Blazor WebAssembly autonomiczną aplikację korzystającą z [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) biblioteki, wykonaj następujące polecenie w powłoce poleceń:
 
 ```dotnetcli
 dotnet new blazorwasm -au Individual
@@ -34,7 +36,7 @@ dotnet new blazorwasm -au Individual
 
 Aby określić lokalizację wyjściową, która tworzy folder projektu, jeśli nie istnieje, Uwzględnij opcję Output w poleceniu z ścieżką (na przykład `-o BlazorSample` ). Nazwa folderu jest również częścią nazwy projektu.
 
-W programie Visual Studio [Utwórz Blazor aplikację webassembly](xref:blazor/get-started). Skonfiguruj **uwierzytelnianie** na **poszczególnych kontach użytkowników** , korzystając z opcji **Zapisz konta użytkowników w aplikacji** .
+W programie Visual Studio [Utwórz Blazor WebAssembly aplikację](xref:blazor/get-started). Skonfiguruj **uwierzytelnianie** na **poszczególnych kontach użytkowników** , korzystając z opcji **Zapisz konta użytkowników w aplikacji** .
 
 ## <a name="authentication-package"></a>Pakiet uwierzytelniania
 
@@ -76,7 +78,7 @@ Obsługa uwierzytelniania dla aplikacji autonomicznych jest oferowana przy użyc
 
 ## <a name="access-token-scopes"></a>Zakresy tokenów dostępu
 
-BlazorSzablon webassembly nie konfiguruje automatycznie aplikacji do żądania tokenu dostępu dla bezpiecznego interfejsu API. Aby zainicjować obsługę administracyjną tokenu dostępu w ramach przepływu logowania, Dodaj zakres do domyślnych zakresów tokenów <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.OidcProviderOptions> :
+Blazor WebAssemblySzablon nie konfiguruje automatycznie aplikacji do żądania tokenu dostępu dla bezpiecznego interfejsu API. Aby zainicjować obsługę administracyjną tokenu dostępu w ramach przepływu logowania, Dodaj zakres do domyślnych zakresów tokenów <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.OidcProviderOptions> :
 
 ```csharp
 builder.Services.AddOidcAuthentication(options =>

@@ -8,32 +8,34 @@ ms.custom: mvc
 ms.date: 06/10/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/fundamentals/configuration
-ms.openlocfilehash: 0e36b81d771b07e85158724c02210ee50a3ab118
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
+ms.openlocfilehash: 9c83784676e061664b2ae980faadcbe0f84c9985
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85242683"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402926"
 ---
 # <a name="aspnet-core-blazor-configuration"></a>BlazorKonfiguracja ASP.NET Core
 
 > [!NOTE]
-> Ten temat dotyczy Blazor zestawu webassembly. Ogólne wskazówki dotyczące konfiguracji aplikacji ASP.NET Core można znaleźć w temacie <xref:fundamentals/configuration/index> .
+> Ten temat ma zastosowanie do programu Blazor WebAssembly . Ogólne wskazówki dotyczące konfiguracji aplikacji ASP.NET Core można znaleźć w temacie <xref:fundamentals/configuration/index> .
 
-BlazorZestaw webassembly ładuje konfigurację z:
+Blazor WebAssemblyładuje konfigurację z:
 
 * Pliki ustawień aplikacji domyślnie:
   * `wwwroot/appsettings.json`
   * `wwwroot/appsettings.{ENVIRONMENT}.json`
-* Inni [dostawcy konfiguracji](xref:fundamentals/configuration/index) zarejestrowani przez aplikację. Nie wszyscy dostawcy są odpowiednim rozwiązaniem dla Blazor aplikacji webassembly. Wyjaśnienie, na których dostawców są obsługiwane dla Blazor zestawu webassembly, są śledzone przez [wyjaśnienie dostawców konfiguracji dla Blazor WASM (#18134 dotnet/AspNetCore.Docs)](https://github.com/dotnet/AspNetCore.Docs/issues/18134).
+* Inni [dostawcy konfiguracji](xref:fundamentals/configuration/index) zarejestrowani przez aplikację. Nie wszyscy dostawcy są odpowiednie dla Blazor WebAssembly aplikacji. Wyjaśnienie, na których dostawców są obsługiwane Blazor WebAssembly , jest śledzone przez [wyjaśnienie dostawców konfiguracji dla Blazor WASM (#18134 dotnet/AspNetCore.Docs)](https://github.com/dotnet/AspNetCore.Docs/issues/18134).
 
 > [!WARNING]
-> Konfiguracja w Blazor aplikacji webassembly jest widoczna dla użytkowników. **Nie przechowuj wpisów tajnych aplikacji ani poświadczeń w konfiguracji.**
+> Konfiguracja w Blazor WebAssembly aplikacji jest widoczna dla użytkowników. **Nie przechowuj wpisów tajnych aplikacji ani poświadczeń w konfiguracji.**
 
 Aby uzyskać więcej informacji na temat dostawców konfiguracji, zobacz <xref:fundamentals/configuration/index> .
 

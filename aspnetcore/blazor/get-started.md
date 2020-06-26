@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 05/31/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/get-started
-ms.openlocfilehash: 63fee0b6a3152640a5483c2a682eec7d04742145
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
+ms.openlocfilehash: 1eabc35175d1b696de99488981b1382d231f5544
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85243606"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402783"
 ---
 # <a name="get-started-with-aspnet-core-blazor"></a>Wprowadzenie do ASP.NET CoreBlazor
 
@@ -32,13 +34,13 @@ Aby rozpocząć pracę z programem Blazor , postępuj zgodnie ze wskazówkami do
 
 1. Tworzenie nowego projektu.
 
-1. Wybierz pozycję ** Blazor aplikacja**. Wybierz przycisk **Dalej**.
+1. Wybierz pozycję ** Blazor aplikacja**. Wybierz pozycję **Dalej**.
 
 1. Podaj nazwę projektu w polu **Nazwa projektu** lub zaakceptuj nazwę domyślną projektu. Potwierdź, że wpis **lokalizacji** jest poprawny lub podaj lokalizację dla projektu. Wybierz przycisk **Utwórz**.
 
-1. W przypadku Blazor środowiska webassembly wybierz szablon ** Blazor aplikacji webassembly** . Aby Blazor skorzystać z serwera, wybierz szablon ** Blazor aplikacja serwera** . Wybierz przycisk **Utwórz**.
+1. Aby zapoznać się z Blazor WebAssembly doświadczeniem, wybierz szablon ** Blazor WebAssembly aplikacji** . Aby zapoznać się z Blazor Server doświadczeniem, wybierz szablon ** Blazor Server aplikacji** . Wybierz przycisk **Utwórz**.
 
-   Aby uzyskać informacje na temat dwóch Blazor modeli hostingu, * Blazor zestawu webassembly* i * Blazor serwera*, zobacz <xref:blazor/hosting-models> .
+   Aby uzyskać informacje na temat dwóch Blazor modeli hostingu *Blazor WebAssembly* i *Blazor Server* , zobacz <xref:blazor/hosting-models> .
 
 1. Naciśnij klawisz <kbd>Ctrl</kbd> + <kbd>F5</kbd> , aby uruchomić aplikację.
 
@@ -56,19 +58,19 @@ Aby rozpocząć pracę z programem Blazor , postępuj zgodnie ze wskazówkami do
 
   Aby ustawić `debug.javascript.usePreview` `true` przy użyciu interfejsu użytkownika vs Code, Otwórz **File**  >  **Preferences**  >  **Ustawienia** preferencji plików i Wyszukaj `debug javascript use preview` . Zaznacz pole wyboru **Użyj nowego debugera JavaScript w wersji zapoznawczej dla Node.js i programu Chrome**.
 
-1. W przypadku Blazor środowiska webassembly wykonaj następujące polecenie w powłoce poleceń:
+1. Aby uzyskać Blazor WebAssembly środowisko, wykonaj następujące polecenie w powłoce poleceń:
 
    ```dotnetcli
    dotnet new blazorwasm -o WebApplication1
    ```
 
-   W przypadku Blazor środowiska serwerowego wykonaj następujące polecenie w powłoce poleceń:
+   Aby uzyskać Blazor Server środowisko, wykonaj następujące polecenie w powłoce poleceń:
 
    ```dotnetcli
    dotnet new blazorserver -o WebApplication1
    ```
 
-   Aby uzyskać informacje na temat dwóch Blazor modeli hostingu, * Blazor zestawu webassembly* i * Blazor serwera*, zobacz <xref:blazor/hosting-models> .
+   Aby uzyskać informacje na temat dwóch Blazor modeli hostingu *Blazor WebAssembly* i *Blazor Server* , zobacz <xref:blazor/hosting-models> .
 
 1. Otwórz `WebApplication1` folder w Visual Studio Code.
 
@@ -84,16 +86,16 @@ Aby rozpocząć pracę z programem Blazor , postępuj zgodnie ze wskazówkami do
 
 1. Na pasku bocznym wybierz pozycję Aplikacja **sieci Web i konsola**  >  **App**.
 
-   W przypadku Blazor środowiska webassembly wybierz szablon ** Blazor aplikacji webassembly** . Aby Blazor skorzystać z serwera, wybierz szablon ** Blazor aplikacja serwera** . Wybierz przycisk **Dalej**.
+   Aby zapoznać się z Blazor WebAssembly doświadczeniem, wybierz szablon ** Blazor WebAssembly aplikacji** . Aby zapoznać się z Blazor Server doświadczeniem, wybierz szablon ** Blazor Server aplikacji** . Wybierz pozycję **Dalej**.
 
-   Aby uzyskać informacje na temat dwóch Blazor modeli hostingu, * Blazor zestawu webassembly* i * Blazor serwera*, zobacz <xref:blazor/hosting-models> .
+   Aby uzyskać informacje na temat dwóch Blazor modeli hostingu *Blazor WebAssembly* i *Blazor Server* , zobacz <xref:blazor/hosting-models> .
 
 1. Potwierdź następujące konfiguracje:
 
    * **Platforma docelowa** jest ustawiona na **platformę .NET Core 3,1**.
    * **Uwierzytelnianie** jest ustawione na wartość **bez uwierzytelniania**.
    
-   Wybierz przycisk **Dalej**.
+   Wybierz pozycję **Dalej**.
 
 1. W polu **Nazwa projektu** Nadaj nazwę aplikacji `WebApplication1` . Wybierz przycisk **Utwórz**.
 
@@ -109,7 +111,7 @@ Jeśli zostanie wyświetlony monit o zaufać certyfikatowi Deweloperskiemu, zauf
    dotnet --version
    ```
 
-1. W przypadku Blazor środowiska webassembly wykonaj następujące polecenia w powłoce poleceń:
+1. Aby uzyskać Blazor WebAssembly środowisko, wykonaj następujące polecenia w powłoce poleceń:
 
    ```dotnetcli
    dotnet new blazorwasm -o WebApplication1
@@ -117,7 +119,7 @@ Jeśli zostanie wyświetlony monit o zaufać certyfikatowi Deweloperskiemu, zauf
    dotnet run
    ```
 
-   W celu Blazor korzystania z serwera wykonaj następujące polecenia w powłoce poleceń:
+   Aby uzyskać Blazor Server środowisko, wykonaj następujące polecenia w powłoce poleceń:
 
    ```dotnetcli
    dotnet new blazorserver -o WebApplication1
@@ -125,7 +127,7 @@ Jeśli zostanie wyświetlony monit o zaufać certyfikatowi Deweloperskiemu, zauf
    dotnet run
    ```
 
-   Aby uzyskać informacje na temat dwóch Blazor modeli hostingu, * Blazor zestawu webassembly* i * Blazor serwera*, zobacz <xref:blazor/hosting-models> .
+   Aby uzyskać informacje na temat dwóch Blazor modeli hostingu *Blazor WebAssembly* i *Blazor Server* , zobacz <xref:blazor/hosting-models> .
 
 1. W przeglądarce przejdź do `https://localhost:5001` .
 

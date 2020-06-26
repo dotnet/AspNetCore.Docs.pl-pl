@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 01/07/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: getting-started
-ms.openlocfilehash: 565cde233d6fc5f085ae1709e167e73980d5c3c2
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: b88460cdff5d8c30c6a28afdb4f67e8e0b6b819c
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776236"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85403368"
 ---
 # <a name="tutorial-get-started-with-aspnet-core"></a>Samouczek: wprowadzenie do ASP.NET Core
 
@@ -29,7 +31,7 @@ Omawiane tematy:
 > * Utwórz projekt aplikacji sieci Web.
 > * Zaufaj certyfikatowi Deweloperskiemu.
 > * Uruchom aplikację.
-> * Edytuj stronę Razor.
+> * Edytuj Razor stronę.
 
 Na końcu będziesz mieć działającą aplikację sieci Web na komputerze lokalnym.
 
@@ -50,7 +52,7 @@ dotnet new webapp -o aspnetcoreapp
 Poprzednie polecenie:
 
 * Tworzy nową aplikację sieci Web.  
-* `-o aspnetcoreapp` Parametr tworzy katalog o nazwie *aspnetcoreapp* z plikami źródłowymi aplikacji.
+* `-o aspnetcoreapp`Parametr tworzy katalog o nazwie *aspnetcoreapp* z plikami źródłowymi aplikacji.
 
 ### <a name="trust-the-development-certificate"></a>Ufanie certyfikatowi Deweloperskiemu
 
@@ -97,7 +99,7 @@ cd aspnetcoreapp
 dotnet watch run
 ```
 
-Po powłoce poleceń wskazuje, że aplikacja została uruchomiona, przejdź do `https://localhost:5001`.
+Po powłoce poleceń wskazuje, że aplikacja została uruchomiona, przejdź do `https://localhost:5001` .
 
 ## <a name="edit-a-razor-page"></a>Edytowanie Razor strony
 
@@ -105,7 +107,7 @@ Otwórz stronę *Pages/index. cshtml* i zmodyfikuj ją i Zapisz przy użyciu nas
 
 [!code-cshtml[](sample/index.cshtml?highlight=9)]
 
-Przejdź do `https://localhost:5001`strony, Odśwież stronę i sprawdź, czy są wyświetlane zmiany.
+Przejdź do `https://localhost:5001` strony, Odśwież stronę i sprawdź, czy są wyświetlane zmiany.
 
 ## <a name="next-steps"></a>Następne kroki
 

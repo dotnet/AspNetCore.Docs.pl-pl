@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: aspnetcore-2.0
-ms.openlocfilehash: b1fc486633ab7c7d7bee4f8981a978747b2890da
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 97d8606ba6bef0bb8bf23d1553c7cb5681fbdbd8
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775820"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404369"
 ---
 # <a name="whats-new-in-aspnet-core-20"></a>Co nowego w ASP.NET Core 2,0
 
@@ -40,7 +42,7 @@ Aby uzyskać więcej informacji, zobacz [Microsoft. AspNetCore. All pakietu dla 
 
 ## <a name="runtime-store"></a>Magazyn środowiska uruchomieniowego
 
-Aplikacje korzystające z `Microsoft.AspNetCore.All` pakietu metadanych automatycznie wykorzystują nowy magazyn środowiska uruchomieniowego platformy .NET Core. Magazyn zawiera wszystkie zasoby środowiska uruchomieniowego potrzebne do uruchamiania aplikacji ASP.NET Core 2,0. W przypadku korzystania `Microsoft.AspNetCore.All` z pakietubinding nie są wdrażane żadne zasoby z przywoływanych ASP.NET Core pakietów NuGet z aplikacją, ponieważ znajdują się one już w systemie docelowym. Elementy zawartości w magazynie środowiska uruchomieniowego są również wstępnie skompilowane w celu poprawienia czasu uruchamiania aplikacji.
+Aplikacje korzystające z `Microsoft.AspNetCore.All` pakietu metadanych automatycznie wykorzystują nowy magazyn środowiska uruchomieniowego platformy .NET Core. Magazyn zawiera wszystkie zasoby środowiska uruchomieniowego potrzebne do uruchamiania aplikacji ASP.NET Core 2,0. W przypadku korzystania z `Microsoft.AspNetCore.All` pakietubinding nie są wdrażane żadne zasoby z przywoływanych ASP.NET Core pakietów NuGet z aplikacją, ponieważ znajdują się one już w systemie docelowym. Elementy zawartości w magazynie środowiska uruchomieniowego są również wstępnie skompilowane w celu poprawienia czasu uruchamiania aplikacji.
 
 Aby uzyskać więcej informacji, zobacz [Magazyn środowiska uruchomieniowego](/dotnet/core/deploying/runtime-store)
 
@@ -48,11 +50,11 @@ Aby uzyskać więcej informacji, zobacz [Magazyn środowiska uruchomieniowego](/
 
 .NET Standard 2,0 pakietów ASP.NET Core 2,0. Do pakietów mogą odwoływać się inne .NET Standard biblioteki 2,0, które mogą być uruchamiane na .NET Standard 2,0 zgodnych implementacjach platformy .NET, w tym .NET Core 2,0 i .NET Framework 4.6.1. 
 
-`Microsoft.AspNetCore.All` Pakietem docelowym jest tylko .net Core 2,0, ponieważ jest on przeznaczony do użycia z magazynem środowiska uruchomieniowego programu .net Core 2,0.
+`Microsoft.AspNetCore.All`Pakietem docelowym jest tylko .net core 2,0, ponieważ jest on przeznaczony do użycia z magazynem środowiska uruchomieniowego programu .net core 2,0.
 
 ## <a name="configuration-update"></a>Aktualizacja konfiguracji
 
-`IConfiguration` Wystąpienie jest domyślnie dodawane do kontenera usługi w ASP.NET Core 2,0. `IConfiguration`w kontenerze usługi Usługa ułatwia aplikacjom pobieranie wartości konfiguracyjnych z kontenera.
+`IConfiguration`Wystąpienie jest domyślnie dodawane do kontenera usługi w ASP.NET Core 2,0. `IConfiguration`w kontenerze usługi Usługa ułatwia aplikacjom pobieranie wartości konfiguracyjnych z kontenera.
 
 Aby uzyskać informacje o stanie planowanej dokumentacji, zobacz problem z usługą [GitHub](https://github.com/dotnet/AspNetCore.Docs/issues/3387).
 
@@ -78,15 +80,15 @@ Aby uzyskać więcej informacji na temat zmian uwierzytelniania w 2,0, zobacz na
 
 * [Potwierdzenie konta i odzyskiwanie hasła w ASP.NET Core](xref:security/authentication/accconfirm)
 * [Włącz generowanie kodu QR dla aplikacji uwierzytelniania w ASP.NET Core](xref:security/authentication/identity-enable-qrcodes)
-* [Migrowanie uwierzytelniania Identity i do ASP.NET Core 2,0](xref:migration/1x-to-2x/identity-2x)
+* [Migrowanie uwierzytelniania i Identity do ASP.NET Core 2,0](xref:migration/1x-to-2x/identity-2x)
 
 ## <a name="spa-templates"></a>Szablony SPA
 
-Dostępne są szablony projektów aplikacji jednostronicowych (SPA) dla kątowych, Aurelia, odcinania. js, replika. js i reaguje. js z Redux. Szablon kątowy został zaktualizowany do kąta 4. Szablony kątowe i reagowanie są domyślnie dostępne; Aby uzyskać informacje o sposobach uzyskiwania innych szablonów, zobacz [Tworzenie nowego projektu Spa](xref:client-side/spa-services#create-a-new-project). Aby uzyskać informacje na temat sposobu tworzenia SPA w ASP.NET Core, zobacz <xref:client-side/spa-services>.
+Dostępne są szablony projektów aplikacji jednostronicowych (SPA) dla kątowych, Aurelia, Knockout.js, React.js i React.js z Redux. Szablon kątowy został zaktualizowany do kąta 4. Szablony kątowe i reagowanie są domyślnie dostępne; Aby uzyskać informacje o sposobach uzyskiwania innych szablonów, zobacz [Tworzenie nowego projektu Spa](xref:client-side/spa-services#create-a-new-project). Aby uzyskać informacje na temat sposobu tworzenia SPA w ASP.NET Core, zobacz <xref:client-side/spa-services> .
 
 ## <a name="kestrel-improvements"></a>Udoskonalenia Kestrel
 
-Serwer sieci Web Kestrel ma nowe funkcje, które sprawiają, że jest to bardziej odpowiednie jako serwer dostępny z Internetu. W nowej `KestrelServerOptions` `Limits` właściwości klasy są dodawane różne opcje konfiguracji ograniczeń serwera. Dodaj limity dla następujących:
+Serwer sieci Web Kestrel ma nowe funkcje, które sprawiają, że jest to bardziej odpowiednie jako serwer dostępny z Internetu. W nowej właściwości klasy są dodawane różne opcje konfiguracji ograniczeń serwera `KestrelServerOptions` `Limits` . Dodaj limity dla następujących:
 
 * Maksymalna liczba połączeń klienta
 * Maksymalny rozmiar treści żądania
@@ -94,15 +96,15 @@ Serwer sieci Web Kestrel ma nowe funkcje, które sprawiają, że jest to bardzie
 
 Aby uzyskać więcej informacji, zobacz [Implementacja serwera sieci Web Kestrel w ASP.NET Core](xref:fundamentals/servers/kestrel).
 
-## <a name="weblistener-renamed-to-httpsys"></a>Nazwa elementu webListener została zmieniona na HTTP. sys
+## <a name="weblistener-renamed-to-httpsys"></a>Nazwa elementu webListener została zmieniona na HTTP.sys
 
-Pakiety `Microsoft.AspNetCore.Server.WebListener` i `Microsoft.Net.Http.Server` zostały scalone z nowym pakietem `Microsoft.AspNetCore.Server.HttpSys`. Przestrzenie nazw zostały zaktualizowane w celu dopasowania.
+Pakiety `Microsoft.AspNetCore.Server.WebListener` i zostały `Microsoft.Net.Http.Server` scalone z nowym pakietem `Microsoft.AspNetCore.Server.HttpSys` . Przestrzenie nazw zostały zaktualizowane w celu dopasowania.
 
-Aby uzyskać więcej informacji, zobacz [Implementacja serwera sieci Web http. sys w ASP.NET Core](xref:fundamentals/servers/httpsys).
+Aby uzyskać więcej informacji, zobacz [HTTP.sys implementacja serwera sieci Web w programie ASP.NET Core](xref:fundamentals/servers/httpsys).
 
 ## <a name="enhanced-http-header-support"></a>Ulepszona obsługa nagłówka HTTP
 
-`FileStreamResult` W przypadku przesyłania lub `FileContentResult`do programu przy użyciu MVC jest teraz dostępna opcja ustawiania `ETag` lub `LastModified` daty przesyłanej zawartości. Można ustawić te wartości w zwracanej zawartości z kodem podobnym do poniższego:
+W przypadku przesyłania lub do programu przy użyciu MVC jest `FileStreamResult` `FileContentResult` teraz dostępna opcja ustawiania `ETag` lub `LastModified` daty przesyłanej zawartości. Można ustawić te wartości w zwracanej zawartości z kodem podobnym do poniższego:
 
 ```csharp
 var data = Encoding.UTF8.GetBytes("This is a sample text from a binary array");
@@ -110,7 +112,7 @@ var entityTag = new EntityTagHeaderValue("\"MyCalculatedEtagValue\"");
 return File(data, "text/plain", "downloadName.txt", lastModified: DateTime.UtcNow.AddSeconds(-5), entityTag: entityTag);
 ```
 
-Plik zwrócony do odwiedzających ma odpowiednie nagłówki HTTP dla wartości `ETag` i. `LastModified`
+Plik zwrócony do odwiedzających ma odpowiednie nagłówki HTTP dla `ETag` `LastModified` wartości i.
 
 Jeśli osoba odwiedzająca aplikację żąda zawartości z nagłówkiem żądania zakresu, ASP.NET Core rozpoznaje żądanie i obsługuje nagłówek. Jeśli żądana zawartość może zostać dostarczona częściowo, ASP.NET Core odpowiednio pomija i zwróci tylko żądany zestaw bajtów. Nie musisz pisać żadnych specjalnych programów obsługi w swoich metodach, aby dostosować lub obsłużyć tę funkcję. jest ono automatycznie obsługiwane.
 
@@ -132,11 +134,11 @@ Aby uzyskać więcej informacji, zobacz [Zapobiegaj fałszowaniu żądań międz
 
 RazorWidok sprzed kompilacji jest domyślnie włączony podczas publikowania, zmniejszając rozmiar danych wyjściowych publikowania i czas uruchamiania aplikacji.
 
-Aby uzyskać więcej informacji, [ Razor Zobacz Przeglądanie kompilacji i wstępnej kompilacji w ASP.NET Core](xref:mvc/views/view-compilation).
+Aby uzyskać więcej informacji, zobacz [ Razor przeglądanie kompilacji i wstępnej kompilacji w ASP.NET Core](xref:mvc/views/view-compilation).
 
 ## <a name="razor-support-for-c-71"></a>RazorObsługa języka C# 7,1
 
-Aparat Razor widoku został zaktualizowany, aby współpracował z nowym kompilatorem Roslyn. Obejmuje to obsługę funkcji języka C# 7,1, takich jak domyślne wyrażenia, wywnioskowane nazwy krotek i dopasowanie do wzorca przy użyciu typów ogólnych. Aby użyć języka C# 7,1 w projekcie, Dodaj następującą właściwość w pliku projektu, a następnie załaduj ponownie rozwiązanie:
+RazorAparat widoku został zaktualizowany, aby współpracował z nowym kompilatorem Roslyn. Obejmuje to obsługę funkcji języka C# 7,1, takich jak domyślne wyrażenia, wywnioskowane nazwy krotek i dopasowanie do wzorca przy użyciu typów ogólnych. Aby użyć języka C# 7,1 w projekcie, Dodaj następującą właściwość w pliku projektu, a następnie załaduj ponownie rozwiązanie:
 
 ```xml
 <LangVersion>latest</LangVersion>
@@ -158,7 +160,7 @@ Aby uzyskać informacje o stanie funkcji języka C# 7,1, zobacz [repozytorium Gi
 Aby uzyskać wskazówki dotyczące sposobu migracji aplikacji ASP.NET Core 1. x do ASP.NET Core 2,0, zobacz następujące zasoby:
 
 * [Migrowanie z ASP.NET Core 1. x do ASP.NET Core 2,0](xref:migration/1x-to-2x/index)
-* [Migrowanie uwierzytelniania Identity i do ASP.NET Core 2,0](xref:migration/1x-to-2x/identity-2x)
+* [Migrowanie uwierzytelniania i Identity do ASP.NET Core 2,0](xref:migration/1x-to-2x/identity-2x)
 
 ## <a name="additional-information"></a>Dodatkowe informacje
 

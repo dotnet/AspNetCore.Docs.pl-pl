@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 01/25/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: razor-pages/web-sdk
-ms.openlocfilehash: 2797f0b3003b8ad89093fe1115dee2acc8650c73
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 2d154ebdbcb564ff5174940691b63ecce4154987
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777166"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85403732"
 ---
 # <a name="aspnet-core-web-sdk"></a>ASP.NET Core Web SDK
 
@@ -47,6 +49,6 @@ Funkcje włączone przy użyciu zestawu SDK sieci Web:
 
 | Właściwość | Opis |
 | -------- | ----------- |
-| `DisableImplicitFrameworkReferences` | Wyłącza niejawne odwołanie `Microsoft.AspNetCore.App` do udostępnionej struktury. |
+| `DisableImplicitFrameworkReferences` | Wyłącza niejawne odwołanie do `Microsoft.AspNetCore.App` udostępnionej struktury. |
 | `DisableImplicitAspNetCoreAnalyzers` | Wyłącza niejawne odwołanie do analizatorów ASP.NET Core. |
-| `DisableImplicitComponentsAnalyzers` | Wyłącza niejawne Razor odwołanie do analizatorów składników Blazor podczas kompilowania aplikacji (serwera). |
+| `DisableImplicitComponentsAnalyzers` | Wyłącza niejawne odwołanie do Razor analizatorów składników podczas kompilowania Blazor aplikacji (serwera). |

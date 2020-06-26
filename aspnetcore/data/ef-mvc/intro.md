@@ -8,17 +8,19 @@ ms.date: 02/06/2019
 ms.topic: tutorial
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: data/ef-mvc/intro
-ms.openlocfilehash: 7f17352d2e7e3f4239b338ec961120ab3088c77a
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 3a42ce1773bef74fab35884025765d147c534dd2
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773552"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85403225"
 ---
 # <a name="tutorial-get-started-with-ef-core-in-an-aspnet-mvc-web-app"></a>Samouczek: wprowadzenie do EF Core w aplikacji sieci Web ASP.NET MVC
 
@@ -122,7 +124,7 @@ Naciśnij klawisze CTRL + F5, aby uruchomić projekt, lub wybierz polecenie **de
 
 Aby dodać obsługę EF Core do projektu, zainstaluj dostawcę bazy danych, który ma być celem. Ten samouczek używa SQL Server, a pakiet dostawcy to [Microsoft. EntityFrameworkCore. SqlServer](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer/). Ten pakiet jest zawarty w [pakiecie Microsoft. AspNetCore. app](xref:fundamentals/metapackage-app), dlatego nie musisz się odwoływać do pakietu.
 
-Pakiet EF SQL Server i jego zależności (`Microsoft.EntityFrameworkCore` oraz `Microsoft.EntityFrameworkCore.Relational`) zapewniają obsługę środowiska uruchomieniowego dla EF. Pakiet narzędzi zostanie dodany później, w samouczku [migracji](migrations.md) .
+Pakiet EF SQL Server i jego zależności ( `Microsoft.EntityFrameworkCore` oraz `Microsoft.EntityFrameworkCore.Relational` ) zapewniają obsługę środowiska uruchomieniowego dla EF. Pakiet narzędzi zostanie dodany później, w samouczku [migracji](migrations.md) .
 
 Aby uzyskać informacje o innych dostawcach baz danych, które są dostępne dla Entity Framework Core, zobacz [dostawcy bazy danych](/ef/core/providers/).
 
@@ -132,7 +134,7 @@ Następnie utworzysz klasy jednostek dla aplikacji firmy Contoso University. Zac
 
 ![Kurs — Diagram modelu danych ucznia](intro/_static/data-model-diagram.png)
 
-`Student` Istnieje relacja jeden do wielu między jednostkami i `Enrollment` i istnieje relacja jeden do wielu między elementami `Course` i. `Enrollment` Innymi słowy, student może być zarejestrowany w dowolnej liczbie kursów, a kurs może mieć dowolną liczbę uczniów zarejestrowanych w nim.
+Istnieje relacja jeden do wielu między `Student` jednostkami i i `Enrollment` istnieje relacja jeden do wielu między elementami `Course` i `Enrollment` . Innymi słowy, student może być zarejestrowany w dowolnej liczbie kursów, a kurs może mieć dowolną liczbę uczniów zarejestrowanych w nim.
 
 W poniższych sekcjach utworzysz klasę dla każdej z tych jednostek.
 
@@ -144,11 +146,11 @@ W folderze *modele* Utwórz plik klasy o nazwie *student.cs* i Zastąp kod szabl
 
 [!code-csharp[](intro/samples/cu/Models/Student.cs?name=snippet_Intro)]
 
-`ID` Właściwość stanie się kolumną klucza podstawowego tabeli bazy danych, która odnosi się do tej klasy. Domyślnie platforma Entity Framework interpretuje właściwość o nazwie `ID` lub `classnameID` jako klucz podstawowy.
+`ID`Właściwość stanie się kolumną klucza podstawowego tabeli bazy danych, która odnosi się do tej klasy. Domyślnie platforma Entity Framework interpretuje właściwość o nazwie `ID` lub `classnameID` jako klucz podstawowy.
 
-`Enrollments` Właściwość jest [właściwością nawigacji](/ef/core/modeling/relationships). Właściwości nawigacji zawierają inne jednostki, które są powiązane z tą jednostką. `Enrollments` W tym przypadku Właściwość `Student entity` a będzie zawierać wszystkie `Enrollment` jednostki, które są powiązane z tą `Student` jednostką. Innymi słowy, jeśli dany wiersz ucznia w bazie danych ma dwa powiązane wiersze rejestracji (wiersze zawierające wartość klucza podstawowego tego ucznia w kolumnie klucza obcego StudentID), właściwość `Student` `Enrollments` nawigacji tej jednostki będzie zawierać te dwie `Enrollment` jednostki.
+`Enrollments`Właściwość jest [właściwością nawigacji](/ef/core/modeling/relationships). Właściwości nawigacji zawierają inne jednostki, które są powiązane z tą jednostką. W tym przypadku `Enrollments` Właściwość a `Student entity` będzie zawierać wszystkie `Enrollment` jednostki, które są powiązane z tą `Student` jednostką. Innymi słowy, jeśli dany wiersz ucznia w bazie danych ma dwa powiązane wiersze rejestracji (wiersze zawierające wartość klucza podstawowego tego ucznia w kolumnie klucza obcego StudentID), `Student` `Enrollments` Właściwość nawigacji tej jednostki będzie zawierać te dwie `Enrollment` jednostki.
 
-Jeśli właściwość nawigacji może zawierać wiele jednostek (tak jak w przypadku relacji "wiele do wielu" lub "jeden do wielu"), jej typem musi być lista, w której można dodawać, usuwać i aktualizować wpisy, na przykład `ICollection<T>`. Możesz określić `ICollection<T>` lub typ, taki jak `List<T>` lub. `HashSet<T>` Jeśli określisz `ICollection<T>`, EF domyślnie tworzy `HashSet<T>` kolekcję.
+Jeśli właściwość nawigacji może zawierać wiele jednostek (tak jak w przypadku relacji "wiele do wielu" lub "jeden do wielu"), jej typem musi być lista, w której można dodawać, usuwać i aktualizować wpisy, na przykład `ICollection<T>` . Możesz określić `ICollection<T>` lub typ, taki jak `List<T>` lub `HashSet<T>` . Jeśli określisz `ICollection<T>` , EF domyślnie tworzy `HashSet<T>` kolekcję.
 
 ### <a name="the-enrollment-entity"></a>Jednostka rejestracji
 
@@ -158,15 +160,15 @@ W folderze *modele* Utwórz *Enrollment.cs* i Zastąp istniejący kod następuj�
 
 [!code-csharp[](intro/samples/cu/Models/Enrollment.cs?name=snippet_Intro)]
 
-`EnrollmentID` Właściwość będzie kluczem podstawowym; Ta jednostka używa `classnameID` wzorca zamiast `ID` samego siebie, jak pokazano w `Student` jednostce. Zwykle należy wybrać jeden wzorzec i używać go w całym modelu danych. Tutaj, odmiana ilustruje, że można użyć dowolnego wzorca. W [późniejszym samouczku](inheritance.md)zobaczysz, jak używać identyfikatora bez ClassName, ułatwia implementowanie dziedziczenia w modelu danych.
+`EnrollmentID`Właściwość będzie kluczem podstawowym; ta jednostka używa `classnameID` wzorca zamiast `ID` samego siebie, jak pokazano w `Student` jednostce. Zwykle należy wybrać jeden wzorzec i używać go w całym modelu danych. Tutaj, odmiana ilustruje, że można użyć dowolnego wzorca. W [późniejszym samouczku](inheritance.md)zobaczysz, jak używać identyfikatora bez ClassName, ułatwia implementowanie dziedziczenia w modelu danych.
 
-`Grade` Właściwość jest `enum`. Znak zapytania po deklaracji `Grade` typu wskazuje, że `Grade` Właściwość dopuszcza wartość null. Klasa o wartości null różni się od klasy zerowej — wartość null oznacza, że Klasa nie jest znana lub nie została jeszcze przypisana.
+`Grade`Właściwość jest `enum` . Znak zapytania po `Grade` deklaracji typu wskazuje, że `Grade` Właściwość dopuszcza wartość null. Klasa o wartości null różni się od klasy zerowej — wartość null oznacza, że Klasa nie jest znana lub nie została jeszcze przypisana.
 
-`StudentID` Właściwość jest kluczem obcym, a odpowiednia właściwość nawigacji to `Student`. `Enrollment` Jednostka jest skojarzona z jedną `Student` jednostką, więc właściwość może zawierać tylko jedną `Student` jednostkę (w przeciwieństwie do `Student.Enrollments` wytoczonej wcześniej właściwości nawigacji, która może zawierać `Enrollment` wiele jednostek).
+`StudentID`Właściwość jest kluczem obcym, a odpowiednia właściwość nawigacji to `Student` . `Enrollment`Jednostka jest skojarzona z jedną `Student` jednostką, więc właściwość może zawierać tylko jedną `Student` jednostkę (w przeciwieństwie do `Student.Enrollments` wytoczonej wcześniej właściwości nawigacji, która może zawierać wiele `Enrollment` jednostek).
 
-`CourseID` Właściwość jest kluczem obcym, a odpowiednia właściwość nawigacji to `Course`. `Enrollment` Jednostka jest skojarzona z jedną `Course` jednostką.
+`CourseID`Właściwość jest kluczem obcym, a odpowiednia właściwość nawigacji to `Course` . `Enrollment`Jednostka jest skojarzona z jedną `Course` jednostką.
 
-Entity Framework interpretuje właściwość jako właściwość klucza obcego, jeśli jest `<navigation property name><primary key property name>` nazwana (na przykład dla właściwości `StudentID` `Student` nawigacji, ponieważ klucz podstawowy `Student` jednostki to `ID`). Właściwości klucza obcego mogą być również nazywane po `<primary key property name>` prostu (na przykład `CourseID` , ponieważ `Course` klucz podstawowy jednostki to `CourseID`).
+Entity Framework interpretuje właściwość jako właściwość klucza obcego, jeśli jest nazwana `<navigation property name><primary key property name>` (na przykład `StudentID` dla `Student` właściwości nawigacji, ponieważ `Student` klucz podstawowy jednostki to `ID` ). Właściwości klucza obcego mogą być również nazywane po prostu `<primary key property name>` (na przykład, `CourseID` ponieważ `Course` klucz podstawowy jednostki to `CourseID` ).
 
 ### <a name="the-course-entity"></a>Jednostka kursu
 
@@ -176,13 +178,13 @@ W folderze *modele* Utwórz *Course.cs* i Zastąp istniejący kod następującym
 
 [!code-csharp[](intro/samples/cu/Models/Course.cs?name=snippet_Intro)]
 
-`Enrollments` Właściwość jest właściwością nawigacji. `Course` Jednostka może być powiązana z dowolną liczbą `Enrollment` jednostek.
+`Enrollments`Właściwość jest właściwością nawigacji. `Course`Jednostka może być powiązana z dowolną liczbą `Enrollment` jednostek.
 
 Dowiesz się więcej na temat `DatabaseGenerated` atrybutu w [kolejnym samouczku](complex-data-model.md) w tej serii. Zasadniczo ten atrybut umożliwia wprowadzenie klucza podstawowego dla kursu, a nie jego wygenerowanie.
 
 ## <a name="create-the-database-context"></a>Tworzenie kontekstu bazy danych
 
-Klasa główna, która koordynuje funkcje Entity Framework dla danego modelu danych, jest klasą kontekstu bazy danych. Tę klasę można utworzyć, wyprowadzając ją `Microsoft.EntityFrameworkCore.DbContext` z klasy. W kodzie możesz określić, które jednostki zostaną uwzględnione w modelu danych. Można również dostosować pewne zachowanie Entity Framework. W tym projekcie Klasa ma nazwę `SchoolContext`.
+Klasa główna, która koordynuje funkcje Entity Framework dla danego modelu danych, jest klasą kontekstu bazy danych. Tę klasę można utworzyć, wyprowadzając ją z `Microsoft.EntityFrameworkCore.DbContext` klasy. W kodzie możesz określić, które jednostki zostaną uwzględnione w modelu danych. Można również dostosować pewne zachowanie Entity Framework. W tym projekcie Klasa ma nazwę `SchoolContext` .
 
 W folderze projektu Utwórz folder o nazwie *dane*.
 
@@ -190,11 +192,11 @@ W folderze *dane* Utwórz nowy plik klasy o nazwie *SchoolContext.cs*i Zastąp k
 
 [!code-csharp[](intro/samples/cu/Data/SchoolContext.cs?name=snippet_Intro)]
 
-Ten kod tworzy `DbSet` właściwość dla każdego zestawu jednostek. W Entity Framework terminologii zestaw jednostek zwykle odpowiada tabeli bazy danych, a jednostka odpowiada wierszowi w tabeli.
+Ten kod tworzy `DbSet` Właściwość dla każdego zestawu jednostek. W Entity Framework terminologii zestaw jednostek zwykle odpowiada tabeli bazy danych, a jednostka odpowiada wierszowi w tabeli.
 
-Można pominąć instrukcje `DbSet<Enrollment>` i `DbSet<Course>` i będzie on działał tak samo. Entity Framework będzie `Student` zawierać je niejawnie, ponieważ jednostka odwołuje `Enrollment` się do jednostki `Enrollment` , a jednostka `Course` odwołuje się do jednostki.
+Można pominąć `DbSet<Enrollment>` `DbSet<Course>` instrukcje i i będzie on działał tak samo. Entity Framework będzie zawierać je niejawnie, ponieważ `Student` Jednostka odwołuje się do `Enrollment` jednostki, a `Enrollment` Jednostka odwołuje się do `Course` jednostki.
 
-Po utworzeniu bazy danych EF tworzy tabele, które mają nazwy takie same jak nazwy `DbSet` właściwości. Nazwy właściwości dla kolekcji są zwykle plural (studenci zamiast uczniów), ale deweloperzy zgadzają się na to, czy nazwy tabel powinny być wyrzucane. Te samouczki zastąpią domyślne zachowanie, określając pojedyncze nazwy tabel w kontekście DbContext. Aby to zrobić, Dodaj następujący wyróżniony kod po ostatniej właściwości Nieogólnymi.
+Po utworzeniu bazy danych EF tworzy tabele, które mają nazwy takie same jak `DbSet` nazwy właściwości. Nazwy właściwości dla kolekcji są zwykle plural (studenci zamiast uczniów), ale deweloperzy zgadzają się na to, czy nazwy tabel powinny być wyrzucane. Te samouczki zastąpią domyślne zachowanie, określając pojedyncze nazwy tabel w kontekście DbContext. Aby to zrobić, Dodaj następujący wyróżniony kod po ostatniej właściwości Nieogólnymi.
 
 [!code-csharp[](intro/samples/cu/Data/SchoolContext.cs?name=snippet_TableNames&highlight=16-21)]
 
@@ -202,17 +204,17 @@ Po utworzeniu bazy danych EF tworzy tabele, które mają nazwy takie same jak na
 
 ASP.NET Core domyślnie implementuje [iniekcję zależności](../../fundamentals/dependency-injection.md) . Usługi (takie jak kontekst bazy danych EF) są rejestrowane przy użyciu iniekcji zależności podczas uruchamiania aplikacji. Składniki, które wymagają tych usług (takich jak kontrolery MVC), są dostarczane przez parametry konstruktora. Zobaczysz kod konstruktora kontrolera, który pobiera wystąpienie kontekstu w dalszej części tego samouczka.
 
-Aby zarejestrować `SchoolContext` się jako usługa, Otwórz *Startup.cs*i Dodaj wyróżnione wiersze do `ConfigureServices` metody.
+Aby zarejestrować się `SchoolContext` jako usługa, otwórz *Startup.cs*i Dodaj wyróżnione wiersze do `ConfigureServices` metody.
 
 [!code-csharp[](intro/samples/cu/Startup.cs?name=snippet_SchoolContext&highlight=9-10)]
 
-Nazwa parametrów połączenia jest przenoszona do kontekstu przez wywołanie metody w `DbContextOptionsBuilder` obiekcie. W przypadku lokalnego projektowania [system konfiguracji ASP.NET Core](xref:fundamentals/configuration/index) odczytuje parametry połączenia z pliku *appSettings. JSON* .
+Nazwa parametrów połączenia jest przenoszona do kontekstu przez wywołanie metody w `DbContextOptionsBuilder` obiekcie. W przypadku lokalnego projektowania [system konfiguracji ASP.NET Core](xref:fundamentals/configuration/index) odczytuje parametry połączenia z *appsettings.jsna* pliku.
 
 Dodaj `using` instrukcje dla `ContosoUniversity.Data` i `Microsoft.EntityFrameworkCore` przestrzeni nazw, a następnie Skompiluj projekt.
 
 [!code-csharp[](intro/samples/cu/Startup.cs?name=snippet_Usings)]
 
-Otwórz plik *appSettings. JSON* i Dodaj parametry połączenia, jak pokazano w poniższym przykładzie.
+Otwórz *appsettings.jsw* pliku i Dodaj parametry połączenia, jak pokazano w poniższym przykładzie.
 
 [!code-json[](./intro/samples/cu/appsettings1.json?highlight=2-4)]
 
@@ -232,7 +234,7 @@ W folderze *dane* Utwórz nowy plik klasy o nazwie *DbInitializer.cs* i Zastąp 
 
 Kod sprawdza, czy w bazie danych znajdują się uczniowie i czy nie, zakłada, że baza danych jest nowa i należy ją umieścić w danych testowych. Ładuje dane testowe do tablic, a nie `List<T>` kolekcji w celu zoptymalizowania wydajności.
 
-W *program.cs*Zmień `Main` metodę, aby wykonać następujące czynności podczas uruchamiania aplikacji:
+W *program.cs*Zmień metodę, `Main` Aby wykonać następujące czynności podczas uruchamiania aplikacji:
 
 * Pobierz wystąpienie kontekstu bazy danych z kontenera iniekcji zależności.
 * Wywołaj metodę inicjatora, przekazując ją do kontekstu.
@@ -280,9 +282,9 @@ Zauważ, że kontroler przyjmuje `SchoolContext` jako parametr konstruktora.
 
 [!code-csharp[](intro/samples/cu/Controllers/StudentsController.cs?name=snippet_Context&highlight=5,7,9)]
 
-ASP.NET Core iniekcja zależności ma zadbać o przekazanie `SchoolContext` wystąpienia do kontrolera. Wcześniej skonfigurowano plik *Startup.cs* .
+ASP.NET Core iniekcja zależności ma zadbać o przekazanie wystąpienia `SchoolContext` do kontrolera. Wcześniej skonfigurowano plik *Startup.cs* .
 
-Kontroler zawiera metodę `Index` akcji, która wyświetla wszystkich uczniów w bazie danych. Metoda pobiera listę studentów z zestawu jednostek studentów, odczytując `Students` Właściwość wystąpienia kontekstu bazy danych:
+Kontroler zawiera `Index` metodę akcji, która wyświetla wszystkich uczniów w bazie danych. Metoda pobiera listę studentów z zestawu jednostek studentów, odczytując `Students` Właściwość wystąpienia kontekstu bazy danych:
 
 [!code-csharp[](intro/samples/cu/Controllers/StudentsController.cs?name=snippet_ScaffoldedIndex&highlight=3)]
 
@@ -302,13 +304,13 @@ Kliknij kartę studenci, aby zobaczyć dane testowe, które zostały `DbInitiali
 
 ## <a name="view-the-database"></a>Wyświetlanie bazy danych
 
-Po uruchomieniu aplikacji `DbInitializer.Initialize` metoda wywołuje `EnsureCreated`metodę. EF wykryto, że nie istniała baza danych i dlatego została utworzona, a następnie pozostała część kodu `Initialize` metody wypełnił bazę danych danymi. Aby wyświetlić bazę danych w programie Visual Studio, można użyć **Eksplorator obiektów SQL Server** (SSOX).
+Po uruchomieniu aplikacji `DbInitializer.Initialize` Metoda wywołuje metodę `EnsureCreated` . EF wykryto, że nie istniała baza danych i dlatego została utworzona, a następnie pozostała część `Initialize` kodu metody wypełnił bazę danych danymi. Aby wyświetlić bazę danych w programie Visual Studio, można użyć **Eksplorator obiektów SQL Server** (SSOX).
 
 Zamknij okno przeglądarki.
 
 Jeśli okno SSOX nie jest jeszcze otwarte, wybierz je z menu **Widok** w programie Visual Studio.
 
-W SSOX kliknij pozycję **(LocalDB) \MSSQLLocalDB > bazy danych**, a następnie kliknij wpis dla nazwy bazy danych znajdującej się w parametrach połączenia w pliku *appSettings. JSON* .
+W SSOX kliknij pozycję **(LocalDB) \MSSQLLocalDB > bazy danych**, a następnie kliknij pozycję Nazwa bazy danych, która znajduje się w parametrach połączenia w *appsettings.js* pliku.
 
 Rozwiń węzeł **tabele** , aby wyświetlić tabele w bazie danych.
 
@@ -318,21 +320,21 @@ Kliknij prawym przyciskiem myszy tabelę **uczniów** i kliknij polecenie **Wyś
 
 ![Tabela uczniów w SSOX](intro/_static/ssox-student-table.png)
 
-Pliki *. mdf* i *. ldf* znajdują się w folderze *C:\Users\\\<yourUserName>* .
+Pliki *. mdf* i *. ldf* znajdują się w folderze *C:\Users \\ \<yourusername> * .
 
-Ponieważ wywołujesz `EnsureCreated` metodę inicjatora, która jest uruchamiana podczas uruchamiania aplikacji, możesz teraz wprowadzić zmianę `Student` klasy, usunąć bazę danych, ponownie uruchomić aplikację, a baza danych zostanie automatycznie utworzona ponownie w celu dopasowania do zmiany. Na przykład, jeśli dodasz `EmailAddress` właściwość do `Student` klasy, zobaczysz nową `EmailAddress` kolumnę w nowo utworzonej tabeli.
+Ponieważ wywołujesz `EnsureCreated` metodę inicjatora, która jest uruchamiana podczas uruchamiania aplikacji, możesz teraz wprowadzić zmianę `Student` klasy, usunąć bazę danych, ponownie uruchomić aplikację, a baza danych zostanie automatycznie utworzona ponownie w celu dopasowania do zmiany. Na przykład, jeśli dodasz `EmailAddress` Właściwość do `Student` klasy, zobaczysz nową `EmailAddress` kolumnę w nowo utworzonej tabeli.
 
 ## <a name="conventions"></a>Konwencje
 
 Ilość kodu, który miał zostać zapisany w celu Entity Framework być w stanie utworzyć kompletną bazę danych, jest minimalny ze względu na stosowanie Konwencji lub zaEntity Framework łożeń.
 
-* Nazwy `DbSet` właściwości są używane jako nazwy tabel. W przypadku jednostek, do których `DbSet` nie odwołuje się właściwość, nazwy klas jednostek są używane jako nazwy tabel.
+* Nazwy `DbSet` właściwości są używane jako nazwy tabel. W przypadku jednostek, do których nie odwołuje się `DbSet` Właściwość, nazwy klas jednostek są używane jako nazwy tabel.
 
 * Nazwy właściwości jednostki są używane w nazwach kolumn.
 
 * Właściwości jednostki o nazwach ID lub classnameID są rozpoznawane jako właściwości klucza podstawowego.
 
-* Właściwość jest interpretowana jako właściwość klucza obcego, jeśli nazwa właściwości nawigacji jest nazywana * \<>\<nazwą właściwości klucza podstawowego>* (na przykład `StudentID` dla właściwości `Student` nawigacji, ponieważ klucz podstawowy `Student` jednostki to `ID`). Właściwości klucza obcego mogą być również nazwane * \<nazwą właściwości klucza podstawowego>* (na przykład, `EnrollmentID` ponieważ klucz podstawowy `Enrollment` jednostki to `EnrollmentID`).
+* Właściwość jest interpretowana jako właściwość klucza obcego, jeśli jest nazwana *\<navigation property name>\<primary key property name>* (na przykład `StudentID` dla `Student` właściwości nawigacji, ponieważ `Student` klucz podstawowy jednostki to `ID` ). Właściwości klucza obcego mogą być również nazywane po prostu *\<primary key property name>* (na przykład, `EnrollmentID` ponieważ `Enrollment` klucz podstawowy jednostki to `EnrollmentID` ).
 
 Zachowanie konwencjonalne można zastąpić. Na przykład można jawnie określić nazwy tabel, jak zostało to opisane wcześniej w tym samouczku. I można ustawić nazwy kolumn i ustawić dowolną właściwość jako klucz podstawowy lub klucz obcy, jak widać w [późniejszym samouczku](complex-data-model.md) w tej serii.
 
@@ -344,21 +346,21 @@ Serwer sieci Web ma ograniczoną liczbę dostępnych wątków, a w przypadku du�
 
 Kod asynchroniczny wprowadza niewielką ilość narzutu w czasie wykonywania, ale w przypadku niskiego natężenia ruchu, gdy wydajność jest niewielka, w przypadku dużych sytuacji związanych z ruchem jest istotna poprawa wydajności.
 
-W poniższym `async` kodzie słowo kluczowe `Task<T>` , wartość zwracana, `await` słowo kluczowe i `ToListAsync` Metoda sprawiają, że kod jest wykonywany asynchronicznie.
+W poniższym kodzie `async` słowo kluczowe, `Task<T>` wartość zwracana, `await` słowo kluczowe i `ToListAsync` Metoda sprawiają, że kod jest wykonywany asynchronicznie.
 
 [!code-csharp[](intro/samples/cu/Controllers/StudentsController.cs?name=snippet_ScaffoldedIndex)]
 
-* `async` Słowo kluczowe instruuje kompilator, aby generował wywołania zwrotne dla części treści metody i automatycznie utworzyć zwracany `Task<IActionResult>` obiekt.
+* `async`Słowo kluczowe instruuje kompilator, aby generował wywołania zwrotne dla części treści metody i automatycznie utworzyć `Task<IActionResult>` zwracany obiekt.
 
-* Typ `Task<IActionResult>` zwracany reprezentuje bieżącą współpracę z wynikiem typu `IActionResult`.
+* Typ zwracany `Task<IActionResult>` reprezentuje bieżącą współpracę z wynikiem typu `IActionResult` .
 
-* `await` Słowo kluczowe powoduje, że kompilator dzieli metodę na dwie części. Pierwsza część jest zakończona operacją uruchomioną asynchronicznie. Druga część jest umieszczana w metodzie wywołania zwrotnego, która jest wywoływana po zakończeniu operacji.
+* `await`Słowo kluczowe powoduje, że kompilator dzieli metodę na dwie części. Pierwsza część jest zakończona operacją uruchomioną asynchronicznie. Druga część jest umieszczana w metodzie wywołania zwrotnego, która jest wywoływana po zakończeniu operacji.
 
-* `ToListAsync`jest asynchroniczną wersją metody `ToList` rozszerzenia.
+* `ToListAsync`jest asynchroniczną wersją `ToList` metody rozszerzenia.
 
 Niektóre kwestie, o których należy wiedzieć, gdy piszesz kod asynchroniczny, który używa Entity Framework:
 
-* Tylko instrukcje, które powodują, że zapytania lub polecenia wysyłane do bazy danych są wykonywane asynchronicznie. Obejmuje to, na przykład `ToListAsync` `SingleOrDefaultAsync`,, i. `SaveChangesAsync` Nie zawiera na przykład instrukcji, które po prostu zmieniają element `IQueryable`, taki jak. `var students = context.Students.Where(s => s.LastName == "Davolio")`
+* Tylko instrukcje, które powodują, że zapytania lub polecenia wysyłane do bazy danych są wykonywane asynchronicznie. Obejmuje to, na przykład, `ToListAsync` , `SingleOrDefaultAsync` i `SaveChangesAsync` . Nie zawiera na przykład instrukcji, które po prostu zmieniają element `IQueryable` , taki jak `var students = context.Students.Where(s => s.LastName == "Davolio")` .
 
 * Kontekst EF nie jest bezpieczny wątkowo: nie próbuj wykonać równolegle wielu operacji. Gdy wywoływana jest metoda async EF, zawsze używaj `await` słowa kluczowego.
 

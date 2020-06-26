@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 02/03/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: web-api/action-return-types
-ms.openlocfilehash: 57bc91feb9c4242dbea120ee00db1cba46784c61
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: 7227a86db9b94cc68851cb1670ce9668148639ef
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84253789"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404447"
 ---
 # <a name="controller-action-return-types-in-aspnet-core-web-api"></a>Typy zwracane akcje kontrolera w ASP.NET Core Web API
 

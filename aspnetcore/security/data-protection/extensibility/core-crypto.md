@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 08/11/2017
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/data-protection/extensibility/core-crypto
-ms.openlocfilehash: c63cc124e1893f23c18581841194fa66848a2a1e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: de34968f21eec28cf375ee9f75d3cb8b212c7e70
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776425"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404278"
 ---
 # <a name="core-cryptography-extensibility-in-aspnet-core"></a>Rozszerzalność kryptografii Core w ASP.NET Core
 
@@ -126,10 +128,10 @@ Podstawowa różnica między IAuthenticatedEncryptor i IAuthenticatedEncryptorDe
 
 Deskryptor może być serializowany za pośrednictwem jego procedury ExportToXml. Ta procedura zwraca element XmlSerializedDescriptorInfo, który zawiera dwie właściwości: XElement reprezentację deskryptora i typ, który reprezentuje [IAuthenticatedEncryptorDescriptorDeserializer](xref:security/data-protection/extensibility/core-crypto#data-protection-extensibility-core-crypto-iauthenticatedencryptordescriptordeserializer) , który może być używany do przywracania aktywności tego deskryptora pod kątem odpowiedniego elementu XElement.
 
-Deskryptor serializowany może zawierać informacje poufne, takie jak materiał klucza kryptograficznego. System ochrony danych ma wbudowaną obsługę szyfrowania informacji przed utrwaleniem ich w magazynie. Aby skorzystać z tego, deskryptor powinien oznaczać element, który zawiera poufne informacje o nazwie atrybutu "requiresEncryption" (xmlns "<http://schemas.asp.net/2015/03/dataProtection>"), wartość "true".
+Deskryptor serializowany może zawierać informacje poufne, takie jak materiał klucza kryptograficznego. System ochrony danych ma wbudowaną obsługę szyfrowania informacji przed utrwaleniem ich w magazynie. Aby skorzystać z tego, deskryptor powinien oznaczać element, który zawiera poufne informacje o nazwie atrybutu "requiresEncryption" (xmlns " <http://schemas.asp.net/2015/03/dataProtection> "), wartość "true".
 
 >[!TIP]
-> Istnieje interfejs API pomocnika służący do ustawiania tego atrybutu. Wywołaj metodę rozszerzenia XElement. MarkAsRequiresEncryption () znajdującą się w przestrzeni nazw Microsoft. AspNetCore. dataprotection. AuthenticatedEncryption. ConfigurationModel.
+> Istnieje interfejs API pomocnika służący do ustawiania tego atrybutu. Wywołaj metodę rozszerzenia XElement. MarkAsRequiresEncryption () znajdującą się w przestrzeni nazw Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.
 
 Mogą również wystąpić przypadki, w których serializowany deskryptor nie zawiera informacji poufnych. Rozważ ponowne uwzględnienie wielkości liter klucza kryptograficznego przechowywanego w module HSM. Deskryptor nie może zapisywać materiału klucza podczas serializowania siebie, ponieważ moduł HSM nie ujawnia materiału w postaci zwykłego tekstu. Zamiast tego deskryptora może napisać wersję klucza zapakowanego klucza (Jeśli moduł HSM umożliwia eksport w ten sposób) lub własny unikatowy identyfikator modułu HSM.
 

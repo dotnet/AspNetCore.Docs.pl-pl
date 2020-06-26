@@ -7,17 +7,19 @@ ms.author: riande
 ms.date: 04/11/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: performance/ObjectPool
-ms.openlocfilehash: 004ca5724517bf3fbf6512c0b9653793f4e0f702
-ms.sourcegitcommit: dd2a1542a4a377123490034153368c135fdbd09e
+ms.openlocfilehash: 8244acb39a345875d80c5528a822de23f78b6e38
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85241000"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85403550"
 ---
 # <a name="object-reuse-with-objectpool-in-aspnet-core"></a>Ponowne użycie obiektu za pomocą ObjectPool w ASP.NET Core
 

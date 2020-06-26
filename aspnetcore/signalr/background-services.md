@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: signalr/background-services
-ms.openlocfilehash: 7bc3b9535055e3fccf23ffa4638bd29676910348
-ms.sourcegitcommit: e87dfa08fec0be1008249b1be678e5f79dcc5acb
+ms.openlocfilehash: bf5fff213b2cd7db0b3227922a8c5babba2fc904
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83382572"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85409088"
 ---
 # <a name="host-aspnet-core-signalr-in-background-services"></a>ASP.NET Core hosta SignalR w usługach w tle
 
@@ -62,7 +64,7 @@ W poprzednim przykładzie `ClockHub` Klasa implementuje `Hub<T>` klasę, aby utw
 Aby uzyskać więcej informacji na temat silnych typach centrów, zobacz [Używanie centrów w SignalR dla ASP.NET Core](xref:signalr/hubs#strongly-typed-hubs).
 
 > [!NOTE]
-> Ta funkcja nie jest ograniczona do klasy [Hub \< t>](xref:Microsoft.AspNetCore.SignalR.Hub`1) . Każda klasa, która dziedziczy z [koncentratora](xref:Microsoft.AspNetCore.SignalR.Hub), na przykład [DynamicHub](xref:Microsoft.AspNetCore.SignalR.DynamicHub), działa.
+> Ta funkcja nie jest ograniczona do [klasy \<T> centrum](xref:Microsoft.AspNetCore.SignalR.Hub`1) . Każda klasa, która dziedziczy z [koncentratora](xref:Microsoft.AspNetCore.SignalR.Hub), na przykład [DynamicHub](xref:Microsoft.AspNetCore.SignalR.DynamicHub), działa.
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -152,9 +154,9 @@ W trakcie `IHostedService.StopAsync` metody `HubConnection` jest usuwany asynchr
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
-* [Rozpoczęcie pracy](xref:tutorials/signalr)
+* [Wprowadzenie](xref:tutorials/signalr)
 * [Centra](xref:signalr/hubs)
 * [Publikowanie na platformie Azure](xref:signalr/publish-to-azure-web-app)
 * [Centra o jednoznacznie określonym typie](xref:signalr/hubs#strongly-typed-hubs)

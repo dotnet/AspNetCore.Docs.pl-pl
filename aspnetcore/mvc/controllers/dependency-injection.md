@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 02/24/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/controllers/dependency-injection
-ms.openlocfilehash: a7df6a5fa2d49efc332c4684ea8192f143cdebf5
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 67861b2cdb946f7cd630770507181ee853b7fbfd
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775703"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408425"
 ---
 # <a name="dependency-injection-into-controllers-in-aspnet-core"></a>Wstrzykiwanie zależności do kontrolerów w ASP.NET Core
 
@@ -34,7 +36,7 @@ Usługi są dodawane jako parametr konstruktora, a środowisko uruchomieniowe ro
 
 [!code-csharp[](dependency-injection/sample/ControllerDI/Interfaces/IDateTime.cs?name=snippet)]
 
-Poniższy kod implementuje `IDateTime` interfejs:
+Poniższy kod implementuje `IDateTime` Interfejs:
 
 [!code-csharp[](dependency-injection/sample/ControllerDI/Services/SystemDateTime.cs?name=snippet)]
 
@@ -42,7 +44,7 @@ Dodaj usługę do kontenera usługi:
 
 [!code-csharp[](dependency-injection/sample/ControllerDI/Startup1.cs?name=snippet&highlight=3)]
 
-Aby uzyskać więcej informacji <xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton*>na temat, zobacz [di okresy istnienia usługi](xref:fundamentals/dependency-injection#service-lifetimes).
+Aby uzyskać więcej informacji na temat <xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton*> , zobacz [di okresy istnienia usługi](xref:fundamentals/dependency-injection#service-lifetimes).
 
 Poniższy kod wyświetla powitanie użytkownika w oparciu o godzinę:
 
@@ -52,15 +54,15 @@ Uruchom aplikację i zostanie wyświetlony komunikat z uwzględnieniem czasu.
 
 ## <a name="action-injection-with-fromservices"></a>Iniekcja akcji przy użyciu FromServices
 
-<xref:Microsoft.AspNetCore.Mvc.FromServicesAttribute> Umożliwia wstrzyknięcie usługi bezpośrednio do metody akcji bez użycia iniekcji konstruktora:
+<xref:Microsoft.AspNetCore.Mvc.FromServicesAttribute>Umożliwia wstrzyknięcie usługi bezpośrednio do metody akcji bez użycia iniekcji konstruktora:
 
 [!code-csharp[](dependency-injection/sample/ControllerDI/Controllers/HomeController.cs?name=snippet2)]
 
 ## <a name="access-settings-from-a-controller"></a>Ustawienia dostępu z kontrolera
 
-Dostęp do ustawień aplikacji lub konfiguracji z poziomu kontrolera jest typowym wzorcem. *Wzorzec opcji* opisany w <xref:fundamentals/configuration/options> jest preferowanym podejściem do zarządzania ustawieniami. Ogólnie rzecz biorąc nie należy <xref:Microsoft.Extensions.Configuration.IConfiguration> wprowadzać bezpośrednio do kontrolera.
+Dostęp do ustawień aplikacji lub konfiguracji z poziomu kontrolera jest typowym wzorcem. *Wzorzec opcji* opisany w <xref:fundamentals/configuration/options> jest preferowanym podejściem do zarządzania ustawieniami. Ogólnie rzecz biorąc nie należy wprowadzać bezpośrednio <xref:Microsoft.Extensions.Configuration.IConfiguration> do kontrolera.
 
-Utwórz klasę, która reprezentuje opcje. Przykład:
+Utwórz klasę, która reprezentuje opcje. Na przykład:
 
 [!code-csharp[](dependency-injection/sample/ControllerDI/Models/SampleWebSettings.cs?name=snippet)]
 

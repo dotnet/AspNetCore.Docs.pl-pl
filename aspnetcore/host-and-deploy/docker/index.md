@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 01/08/2018
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: host-and-deploy/docker/index
-ms.openlocfilehash: 94996f279929f6e3837efb613c99927edbd9143e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 14758c0d35841a077b36578786402c80fa3c3b1d
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774590"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408061"
 ---
 # <a name="host-aspnet-core-in-docker-containers"></a>ASP.NET Core hosta w kontenerach platformy Docker
 

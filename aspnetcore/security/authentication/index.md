@@ -7,32 +7,34 @@ ms.custom: mvc
 ms.date: 03/03/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/index
-ms.openlocfilehash: 4e47bd91ce15836035d3e8f0a8ceed264f308b22
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: a58d48d390eefdc26cf3feb394874b0ba733e9f3
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82768640"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408347"
 ---
 # <a name="overview-of-aspnet-core-authentication"></a>Omówienie uwierzytelniania ASP.NET Core
 
 Według [Jan Rousos](https://github.com/mjrousos)
 
-Uwierzytelnianie to proces określania tożsamości użytkownika. [Autoryzacja](xref:security/authorization/introduction) to proces ustalania, czy użytkownik ma dostęp do zasobu. W ASP.NET Core uwierzytelnianie jest obsługiwane przez `IAuthenticationService`program, który jest używany przez [oprogramowanie pośredniczące](xref:fundamentals/middleware/index)uwierzytelniania. Usługa uwierzytelniania używa zarejestrowanych programów obsługi uwierzytelniania do ukończenia akcji związanych z uwierzytelnianiem. Przykłady akcji związanych z uwierzytelnianiem obejmują:
+Uwierzytelnianie to proces określania tożsamości użytkownika. [Autoryzacja](xref:security/authorization/introduction) to proces ustalania, czy użytkownik ma dostęp do zasobu. W ASP.NET Core uwierzytelnianie jest obsługiwane przez `IAuthenticationService` program, który jest używany przez [oprogramowanie pośredniczące](xref:fundamentals/middleware/index)uwierzytelniania. Usługa uwierzytelniania używa zarejestrowanych programów obsługi uwierzytelniania do ukończenia akcji związanych z uwierzytelnianiem. Przykłady akcji związanych z uwierzytelnianiem obejmują:
 
 * Uwierzytelnianie użytkownika.
 * Odpowiada, gdy nieuwierzytelniony użytkownik próbuje uzyskać dostęp do zasobu z ograniczeniami.
 
 Zarejestrowane programy obsługi uwierzytelniania i ich opcje konfiguracji są nazywane "schematami".
 
-Schematy uwierzytelniania są określane przez zarejestrowanie usług uwierzytelniania `Startup.ConfigureServices`w programie:
+Schematy uwierzytelniania są określane przez zarejestrowanie usług uwierzytelniania w programie `Startup.ConfigureServices` :
 
-* Wywołując metodę rozszerzenia specyficzną dla `services.AddAuthentication` schematu po wywołaniu metody (np. `AddJwtBearer` lub `AddCookie`, na przykład). Te metody rozszerzające używają [AuthenticationBuilder. AddSchema](xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilder.AddScheme*) do rejestrowania schematów przy użyciu odpowiednich ustawień.
+* Wywołując metodę rozszerzenia specyficzną dla schematu po wywołaniu metody (np `services.AddAuthentication` `AddJwtBearer` `AddCookie` . lub, na przykład). Te metody rozszerzające używają [AuthenticationBuilder. AddSchema](xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilder.AddScheme*) do rejestrowania schematów przy użyciu odpowiednich ustawień.
 * Rzadziej, przez wywołanie [AuthenticationBuilder. AddSchema](xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilder.AddScheme*) bezpośrednio.
 
 Na przykład poniższy kod rejestruje usługi uwierzytelniania i programy obsługi dla systemów plików cookie i uwierzytelniania okaziciela JWT:
@@ -43,16 +45,16 @@ services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options => Configuration.Bind("CookieSettings", options));
 ```
 
-`AddAuthentication` Parametr `JwtBearerDefaults.AuthenticationScheme` jest nazwą schematu, który ma być używany domyślnie, gdy określony schemat nie jest wymagany.
+`AddAuthentication`Parametr `JwtBearerDefaults.AuthenticationScheme` jest nazwą schematu, który ma być używany domyślnie, gdy określony schemat nie jest wymagany.
 
-W przypadku użycia wielu schematów zasady autoryzacji (lub atrybuty autoryzacji) mogą [określać schemat uwierzytelniania (lub schematy),](xref:security/authorization/limitingidentitybyscheme) od których zależą w celu uwierzytelnienia użytkownika. W powyższym przykładzie schemat uwierzytelniania plików cookie może być używany przez określenie jego nazwy (`CookieAuthenticationDefaults.AuthenticationScheme` domyślnie, chociaż podczas wywoływania `AddCookie`można podać inną nazwę).
+W przypadku użycia wielu schematów zasady autoryzacji (lub atrybuty autoryzacji) mogą [określać schemat uwierzytelniania (lub schematy),](xref:security/authorization/limitingidentitybyscheme) od których zależą w celu uwierzytelnienia użytkownika. W powyższym przykładzie schemat uwierzytelniania plików cookie może być używany przez określenie jego nazwy ( `CookieAuthenticationDefaults.AuthenticationScheme` Domyślnie, chociaż podczas wywoływania można podać inną nazwę `AddCookie` ).
 
 W niektórych przypadkach wywołanie `AddAuthentication` jest wykonywane automatycznie przez inne metody rozszerzenia. Na przykład podczas korzystania z [ASP.NET Core Identity ](xref:security/authentication/identity), `AddAuthentication` jest wywoływana wewnętrznie.
 
-Oprogramowanie pośredniczące uwierzytelniania jest dodawane w `Startup.Configure` programie przez wywołanie <xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*> metody rozszerzenia w aplikacji `IApplicationBuilder`. Wywołanie `UseAuthentication` rejestruje oprogramowanie pośredniczące, które używa poprzednio zarejestrowanego schematu uwierzytelniania. Wywołaj `UseAuthentication` przed każdym oprogramowanie pośredniczące zależne od użytkowników, którzy są uwierzytelniani. W przypadku korzystania z routingu punktów końcowych `UseAuthentication` wywołanie musi być następujące:
+Oprogramowanie pośredniczące uwierzytelniania jest dodawane w programie `Startup.Configure` przez wywołanie <xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*> metody rozszerzenia w aplikacji `IApplicationBuilder` . Wywołanie `UseAuthentication` rejestruje oprogramowanie pośredniczące, które używa poprzednio zarejestrowanego schematu uwierzytelniania. Wywołaj `UseAuthentication` przed każdym oprogramowanie pośredniczące zależne od użytkowników, którzy są uwierzytelniani. W przypadku korzystania z routingu punktów końcowych wywołanie `UseAuthentication` musi być następujące:
 
-* Po `UseRouting`, tak aby informacje o trasie były dostępne na potrzeby podejmowania decyzji dotyczących uwierzytelniania.
-* Wcześniej `UseEndpoints`, aby użytkownicy mieli uwierzytelnieni przed uzyskaniem dostępu do punktów końcowych.
+* Po `UseRouting` , tak aby informacje o trasie były dostępne na potrzeby podejmowania decyzji dotyczących uwierzytelniania.
+* Wcześniej `UseEndpoints` , aby użytkownicy mieli uwierzytelnieni przed uzyskaniem dostępu do punktów końcowych.
 
 ## <a name="authentication-concepts"></a>Pojęcia związane z uwierzytelnianiem
 
@@ -73,7 +75,7 @@ Schematy są przydatne jako mechanizm do odwoływania się do zachowań uwierzyt
 Procedura obsługi uwierzytelniania:
 
 * Jest typem, który implementuje zachowanie schematu.
-* Jest pochodną <xref:Microsoft.AspNetCore.Authentication.IAuthenticationHandler> lub <xref:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1>.
+* Jest pochodną <xref:Microsoft.AspNetCore.Authentication.IAuthenticationHandler> lub <xref:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1> .
 * Ma główną odpowiedzialność za uwierzytelnianie użytkowników.
 
 W oparciu o konfigurację schematu uwierzytelniania i kontekst żądania przychodzącego, programy obsługi uwierzytelniania:
@@ -86,7 +88,7 @@ W oparciu o konfigurację schematu uwierzytelniania i kontekst żądania przycho
 
 ### <a name="authenticate"></a>Uwierzytelnianie
 
-Akcja uwierzytelniania schematu uwierzytelniania jest odpowiedzialna za konstruowanie tożsamości użytkownika na podstawie kontekstu żądania. Zwraca informację <xref:Microsoft.AspNetCore.Authentication.AuthenticateResult> o tym, czy uwierzytelnianie zakończyło się pomyślnie, a jeśli tak, tożsamość użytkownika w biletu uwierzytelniania. Zobacz: <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.AuthenticateAsync%2A>. Przykłady uwierzytelniania obejmują:
+Akcja uwierzytelniania schematu uwierzytelniania jest odpowiedzialna za konstruowanie tożsamości użytkownika na podstawie kontekstu żądania. Zwraca <xref:Microsoft.AspNetCore.Authentication.AuthenticateResult> informację o tym, czy uwierzytelnianie zakończyło się pomyślnie, a jeśli tak, tożsamość użytkownika w biletu uwierzytelniania. Zobacz: <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.AuthenticateAsync%2A>. Przykłady uwierzytelniania obejmują:
 
 * Schemat uwierzytelniania plików cookie, który konstruuje tożsamość użytkownika z plików cookie.
 * Schemat okaziciela JWT deserializacji i weryfikacji tokenu okaziciela JWT w celu utworzenia tożsamości użytkownika.
@@ -129,7 +131,7 @@ Rdzeń sadu:
 
 Zobacz [podstawowe źródło sadu](https://github.com/OrchardCMS/OrchardCore) dla przykładu dostawców uwierzytelniania na dzierżawcę.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:security/authorization/limitingidentitybyscheme>
 * <xref:security/authentication/policyschemes>

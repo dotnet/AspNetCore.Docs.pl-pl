@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 10/14/2016
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/data-protection/consumer-apis/password-hashing
-ms.openlocfilehash: 6a5e0e4378241671905f2a759aad88372901e7d2
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: f7d15cab463972d9c0fff52b645be454865ce2ca
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82769783"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408958"
 ---
 # <a name="hash-passwords-in-aspnet-core"></a>Hasła skrótu w ASP.NET Core
 
@@ -24,12 +26,12 @@ Baza kodu ochrony danych zawiera pakiet *Microsoft. AspNetCore. Cryptography.* K
 
 Pakiet oferuje obecnie metodę `KeyDerivation.Pbkdf2` , która umożliwia mieszanie hasła przy użyciu [algorytmu PBKDF2](https://tools.ietf.org/html/rfc2898#section-5.2). Ten interfejs API jest bardzo podobny do istniejącego [typu Rfc2898DeriveBytes](/dotnet/api/system.security.cryptography.rfc2898derivebytes).NET Framework, ale istnieją trzy ważne rozróżnienia:
 
-1. `KeyDerivation.Pbkdf2` Metoda obsługuje zużywanie wielu PRFs `HMACSHA1`(obecnie, `HMACSHA256`i `HMACSHA512`), podczas gdy `Rfc2898DeriveBytes` Typ obsługuje `HMACSHA1`tylko.
+1. `KeyDerivation.Pbkdf2`Metoda obsługuje zużywanie wielu PRFs (obecnie `HMACSHA1` , `HMACSHA256` i `HMACSHA512` ), podczas gdy `Rfc2898DeriveBytes` Typ obsługuje tylko `HMACSHA1` .
 
-2. `KeyDerivation.Pbkdf2` Metoda wykrywa bieżący system operacyjny i próbuje wybrać najbardziej zoptymalizowaną implementację procedury, zapewniając znacznie lepszą wydajność w niektórych przypadkach. (W systemie Windows 8 oferuje około 10X przepływności `Rfc2898DeriveBytes`.)
+2. `KeyDerivation.Pbkdf2`Metoda wykrywa bieżący system operacyjny i próbuje wybrać najbardziej zoptymalizowaną implementację procedury, zapewniając znacznie lepszą wydajność w niektórych przypadkach. (W systemie Windows 8 oferuje około 10X przepływności `Rfc2898DeriveBytes` .)
 
-3. `KeyDerivation.Pbkdf2` Metoda wymaga, aby obiekt wywołujący określił wszystkie parametry (sól, PRF i liczba iteracji). `Rfc2898DeriveBytes` Typ zawiera wartości domyślne dla tych.
+3. `KeyDerivation.Pbkdf2`Metoda wymaga, aby obiekt wywołujący określił wszystkie parametry (sól, PRF i liczba iteracji). `Rfc2898DeriveBytes`Typ zawiera wartości domyślne dla tych.
 
 [!code-csharp[](password-hashing/samples/passwordhasher.cs)]
 
-Zobacz [kod źródłowy](https://github.com/dotnet/AspNetCore/blob/master/src/Identity/Extensions.Core/src/PasswordHasher.cs) dla `PasswordHasher` typu ASP.NET Core Identitydla rzeczywistego przypadku użycia.
+Zobacz [kod źródłowy](https://github.com/dotnet/AspNetCore/blob/master/src/Identity/Extensions.Core/src/PasswordHasher.cs) dla typu ASP.NET Core Identity `PasswordHasher` dla rzeczywistego przypadku użycia.

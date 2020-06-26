@@ -7,17 +7,19 @@ ms.author: riande
 ms.date: 04/06/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: performance/performance-best-practices
-ms.openlocfilehash: e83019a0f905fa9cd0f0c39960b787bc5b13b64f
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 15f3ce5a8e8d47ac567acaadcdc4bf8ba738b2ff
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775391"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408178"
 ---
 # <a name="aspnet-core-performance-best-practices"></a>ASP.NET Core najlepszych rozwiązań dotyczących wydajności
 
@@ -49,9 +51,9 @@ Typowy problem z wydajnością w aplikacjach ASP.NET Core blokuje wywołania, kt
 
 * Utwórz asynchroniczne [ścieżki kodu na gorąco](#understand-hot-code-paths) .
 * Wywołania dostępu do danych, we/wy i długotrwałych interfejsów API operacji asynchronicznie, jeśli jest dostępny asynchroniczny interfejs API. **Nie** należy używać [zadania. Run](/dotnet/api/system.threading.tasks.task.run) , aby utworzyć interfejs API synchronus jako asynchroniczny.
-* Wykonywanie akcji kontroleraRazor /strony asynchronicznej. Cały stos wywołań jest asynchroniczny, aby można było korzystać z wzorców [asynchronicznych/await](/dotnet/csharp/programming-guide/concepts/async/) .
+* Wykonywanie akcji kontrolera/ Razor strony asynchronicznej. Cały stos wywołań jest asynchroniczny, aby można było korzystać z wzorców [asynchronicznych/await](/dotnet/csharp/programming-guide/concepts/async/) .
 
-Profiler, taki jak [Narzędzia PerfView](https://github.com/Microsoft/perfview), może służyć do znajdowania wątków często dodanych do [puli wątków](/windows/desktop/procthread/thread-pools). `Microsoft-Windows-DotNETRuntime/ThreadPoolWorkerThread/Start` Zdarzenie wskazuje wątek dodany do puli wątków. <!--  For more information, see [async guidance docs](TBD-Link_To_Davifowl_Doc)  -->
+Profiler, taki jak [Narzędzia PerfView](https://github.com/Microsoft/perfview), może służyć do znajdowania wątków często dodanych do [puli wątków](/windows/desktop/procthread/thread-pools). `Microsoft-Windows-DotNETRuntime/ThreadPoolWorkerThread/Start`Zdarzenie wskazuje wątek dodany do puli wątków. <!--  For more information, see [async guidance docs](TBD-Link_To_Davifowl_Doc)  -->
 
 ## <a name="minimize-large-object-allocations"></a>Minimalizuj alokacje dużych obiektów
 
@@ -60,7 +62,7 @@ Profiler, taki jak [Narzędzia PerfView](https://github.com/Microsoft/perfview),
 Mając
 
 * **Należy rozważyć buforowanie** dużych obiektów, które są często używane. Buforowanie dużych obiektów zapobiega kosztownym alokacjom.
-* **Buforuj** bufory za pomocą [ArrayPool\<T>](/dotnet/api/system.buffers.arraypool-1) do przechowywania dużych tablic.
+* **Buforuj** bufory przy użyciu [ArrayPool \<T> ](/dotnet/api/system.buffers.arraypool-1) do przechowywania dużych tablic.
 * **Nie** przydzielaj wielu, krótkoterminowych dużych obiektów w [ścieżkach kodu gorąca](#understand-hot-code-paths).
 
 Problemy z pamięcią, takie jak poprzednia, można zdiagnozować, przeglądając statystyki dotyczące wyrzucania elementów bezużytecznych (GC) w [Narzędzia PerfView](https://github.com/Microsoft/perfview) i badając:
@@ -82,7 +84,7 @@ Mając
 * **Należy rozważyć buforowanie** często używanych danych pobieranych z bazy danych lub usługi zdalnej w przypadku niewielkich nieaktualnych danych. W zależności od scenariusza użyj elementu [elemencie MemoryCache](xref:performance/caching/memory) lub [DistributedCache](xref:performance/caching/distributed). Aby uzyskać więcej informacji, zobacz <xref:performance/caching/response>.
 * **Minimalizacja** podróży sieci. Celem jest pobranie wymaganych danych w jednym wywołaniu, a nie w kilku wywołaniach.
 * Podczas uzyskiwania dostępu do danych w celach tylko do **odczytu używaj** [zapytań bez śledzenia](/ef/core/querying/tracking#no-tracking-queries) w Entity Framework Core. EF Core może zwrócić wyniki niewydajnego śledzenia zapytań.
-* Przefiltruj i Agreguj zapytania LINQ ( `.Where`na `.Select`przykład, `.Sum` , lub), **aby filtrowanie było** wykonywane przez bazę danych.
+* **Przefiltruj** i Agreguj zapytania LINQ ( `.Where` `.Select` na przykład,, lub `.Sum` ), aby filtrowanie było wykonywane przez bazę danych.
 * **Należy wziąć pod** uwagę, że EF Core rozpoznaje niektórych operatorów zapytań na kliencie, co może prowadzić do niewydajnego wykonywania zapytań. Aby uzyskać więcej informacji, zobacz [problemy z wydajnością oceny klienta](/ef/core/querying/client-eval#client-evaluation-performance-issues).
 * **Nie** używaj zapytań projekcji w kolekcjach, co może spowodować wykonanie zapytań SQL "N + 1". Aby uzyskać więcej informacji, zobacz [Optymalizacja skorelowanych podzapytań](/ef/core/what-is-new/ef-core-2.1#optimization-of-correlated-subqueries).
 
@@ -102,7 +104,7 @@ Chociaż [HttpClient](/dotnet/api/system.net.http.httpclient) implementuje `IDis
 Mając
 
 * **Nie** Twórz ani nie usuwaj `HttpClient` wystąpień bezpośrednio.
-* Aby pobrać [HttpClientFactory](/dotnet/standard/microservices-architecture/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests) `HttpClient` wystąpienia **, użyj** HttpClientFactory. Aby uzyskać więcej informacji, zobacz [Używanie HttpClientFactory do implementowania odpornych żądań HTTP](/dotnet/standard/microservices-architecture/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests).
+* Aby pobrać wystąpienia **, użyj** [HttpClientFactory](/dotnet/standard/microservices-architecture/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests) `HttpClient` . Aby uzyskać więcej informacji, zobacz [Używanie HttpClientFactory do implementowania odpornych żądań HTTP](/dotnet/standard/microservices-architecture/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests).
 
 ## <a name="keep-common-code-paths-fast"></a>Szybkie śledzenie wspólnych ścieżek kodu
 
@@ -124,7 +126,7 @@ Mając
 
 * **Nie** czekaj na ukończenie długotrwałych zadań w ramach zwykłego przetwarzania żądań HTTP.
 * **Rozważ obsługę** długotrwałych żądań z usługami w [tle](xref:fundamentals/host/hosted-services) lub poza procesem przy użyciu [funkcji platformy Azure](/azure/azure-functions/). Zakończenie pracy poza procesem jest szczególnie przydatne w przypadku zadań intensywnie korzystających z procesora CPU.
-* **Użyj opcji** komunikacji w czasie rzeczywistym, takich jak [SignalR](xref:signalr/introduction), aby komunikować się z klientami asynchronicznie.
+* **Użyj opcji** komunikacji w czasie rzeczywistym, takich jak [SignalR](xref:signalr/introduction) , aby komunikować się z klientami asynchronicznie.
 
 ## <a name="minify-client-assets"></a>Zminifikować zasoby klienta
 
@@ -144,7 +146,7 @@ Mając
 
 ## <a name="use-the-latest-aspnet-core-release"></a>Użyj najnowszej wersji ASP.NET Core
 
-Każda nowa wersja ASP.NET Core obejmuje ulepszenia wydajności. Optymalizacje w oprogramowaniu .NET Core i ASP.NET Core oznaczają, że nowsze wersje zwykle outperform starsze wersje. Na przykład program .NET Core 2,1 dodaliśmy obsługę skompilowanych wyrażeń regularnych i benefitted [z\<zakresu T>](https://msdn.microsoft.com/magazine/mt814808.aspx). ASP.NET Core 2,2 dodano obsługę protokołu HTTP/2. [ASP.NET Core 3,0 dodaje wiele ulepszeń](xref:aspnetcore-3.0) , które zmniejszają wykorzystanie pamięci i zwiększają przepływność. Jeśli wydajność jest priorytetem, rozważ uaktualnienie do bieżącej wersji ASP.NET Core.
+Każda nowa wersja ASP.NET Core obejmuje ulepszenia wydajności. Optymalizacje w oprogramowaniu .NET Core i ASP.NET Core oznaczają, że nowsze wersje zwykle outperform starsze wersje. Na przykład program .NET Core 2,1 dodaliśmy obsługę skompilowanych wyrażeń regularnych i benefitted [z \<T> zakresu](https://msdn.microsoft.com/magazine/mt814808.aspx). ASP.NET Core 2,2 dodano obsługę protokołu HTTP/2. [ASP.NET Core 3,0 dodaje wiele ulepszeń](xref:aspnetcore-3.0) , które zmniejszają wykorzystanie pamięci i zwiększają przepływność. Jeśli wydajność jest priorytetem, rozważ uaktualnienie do bieżącej wersji ASP.NET Core.
 
 ## <a name="minimize-exceptions"></a>Minimalizuj wyjątki
 
@@ -166,7 +168,7 @@ Poniższe sekcje zawierają wskazówki dotyczące wydajności oraz znane problem
 
 Wszystkie operacje we/wy w ASP.NET Core są asynchroniczne. Serwery implementują `Stream` interfejs, który ma przeciążenia synchroniczne i asynchroniczne. Asynchronicznie powinny być preferowane, aby uniknąć blokowania wątków puli wątków. Blokowanie wątków może prowadzić do zablokowania puli wątków.
 
-**Nie wykonuj tej czynności:** Poniższy przykład używa <xref:System.IO.StreamReader.ReadToEnd*>. Blokuje bieżący wątek, aby oczekiwać na wynik. Jest to przykład [synchronizacji przez asynchroniczne](https://github.com/davidfowl/AspNetCoreDiagnosticScenarios/blob/master/AsyncGuidance.md#warning-sync-over-async
+**Nie wykonuj tej czynności:** Poniższy przykład używa <xref:System.IO.StreamReader.ReadToEnd*> . Blokuje bieżący wątek, aby oczekiwać na wynik. Jest to przykład [synchronizacji przez asynchroniczne](https://github.com/davidfowl/AspNetCoreDiagnosticScenarios/blob/master/AsyncGuidance.md#warning-sync-over-async
 ).
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/MyFirstController.cs?name=snippet1)]
@@ -190,13 +192,13 @@ Poprzedni kod asynchronicznie deserializacji treści żądania do obiektu język
 
 ## <a name="prefer-readformasync-over-requestform"></a>Preferuj ReadFormAsync przez żądanie. formularz
 
-Użyj `HttpContext.Request.ReadFormAsync` zamiast `HttpContext.Request.Form`.
+Użyj `HttpContext.Request.ReadFormAsync` zamiast `HttpContext.Request.Form` .
 `HttpContext.Request.Form`można bezpiecznie odczytać tylko z następujących warunków:
 
-* Formularz został odczytany przez wywołanie do `ReadFormAsync`, i
+* Formularz został odczytany przez wywołanie do `ReadFormAsync` , i
 * Trwa odczytywanie buforowanej wartości formularza przy użyciu`HttpContext.Request.Form`
 
-**Nie wykonuj tej czynności:** Poniższy przykład używa `HttpContext.Request.Form`.  `HttpContext.Request.Form`używa [synchronizacji przez asynchroniczne](https://github.com/davidfowl/AspNetCoreDiagnosticScenarios/blob/master/AsyncGuidance.md#warning-sync-over-async
+**Nie wykonuj tej czynności:** Poniższy przykład używa `HttpContext.Request.Form` .  `HttpContext.Request.Form`używa [synchronizacji przez asynchroniczne](https://github.com/davidfowl/AspNetCoreDiagnosticScenarios/blob/master/AsyncGuidance.md#warning-sync-over-async
 ) i może prowadzić do zablokowania puli wątków.
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/MySecondController.cs?name=snippet1)]
@@ -218,7 +220,7 @@ Ten [wpis w blogu](https://adamsitnik.com/Array-Pool/#the-problem) opisuje probl
 
 > Po przydzieleniu dużego obiektu jest on oznaczony jako obiekt generacji 2. Nie generacji 0 jako dla małych obiektów. W przypadku braku pamięci w LOH, system GC czyści całe zarządzane sterty, a nie tylko LOH. W związku z tym czyści generacji gen 0, Gen 1 i Gen 2, w tym LOH. Jest to nazywane pełnym odzyskiwaniem pamięci i jest największym czasochłonnym wyrzucaniem elementów bezużytecznych. W przypadku wielu aplikacji może to być możliwe do zaakceptowania. Ale nie tylko w przypadku serwerów sieci Web o wysokiej wydajności, w których do obsługi średniego żądania sieci Web jest wymagana część pamięci podręcznej, która jest niezbędna do obsłużenia średniej, dekompresowania, dekodowania JSON & więcej).
 
-Naively przechowywanie dużego żądania lub treści odpowiedzi w jeden `byte[]` lub: `string`
+Naively przechowywanie dużego żądania lub treści odpowiedzi w jeden `byte[]` lub `string` :
 
 * Może to spowodować, że w LOH szybko kończy się miejsce.
 * Może powodować problemy z wydajnością aplikacji ze względu na pełny operacje odzyskiwania pamięci uruchomiony.
@@ -232,26 +234,26 @@ W przypadku korzystania z serializatora/deserializatora, który obsługuje tylko
 > [!WARNING]
 > Jeśli żądanie jest duże, może prowadzić do niewystarczającej ilości pamięci (OOM). OOM może spowodować odmowę usługi.  Aby uzyskać więcej informacji, zobacz [unikanie odczytywania dużych treści żądań lub treści odpowiedzi do pamięci](#arlb) w tym dokumencie.
 
-Użycie <xref:System.Text.Json> 3,0 ASP.NET Core domyślnie dla serializacji JSON. <xref:System.Text.Json>:
+Użycie 3,0 ASP.NET Core <xref:System.Text.Json> Domyślnie dla serializacji JSON. <xref:System.Text.Json>:
 
 * Odczytuje i zapisuje dane JSON asynchronicznie.
 * Jest zoptymalizowany pod kątem tekstu w formacie UTF-8.
-* Zwykle wyższa wydajność niż `Newtonsoft.Json`.
+* Zwykle wyższa wydajność niż `Newtonsoft.Json` .
 
 ## <a name="do-not-store-ihttpcontextaccessorhttpcontext-in-a-field"></a>Nie należy przechowywać IHttpContextAccessor. HttpContext w polu
 
-[IHttpContextAccessor. HttpContext](xref:Microsoft.AspNetCore.Http.IHttpContextAccessor.HttpContext) zwraca `HttpContext` wartość aktywnego żądania, gdy uzyskuje dostęp z wątku żądania. Nie `IHttpContextAccessor.HttpContext` powinna **not** być przechowywana w polu lub zmiennej.
+[IHttpContextAccessor. HttpContext](xref:Microsoft.AspNetCore.Http.IHttpContextAccessor.HttpContext) zwraca wartość `HttpContext` aktywnego żądania, gdy uzyskuje dostęp z wątku żądania. `IHttpContextAccessor.HttpContext` **Nie** powinna być przechowywana w polu lub zmiennej.
 
 **Nie wykonuj tej czynności:** Poniższy przykład zapisuje `HttpContext` w polu, a następnie próbuje użyć go później.
 
 [!code-csharp[](performance-best-practices/samples/3.0/MyType.cs?name=snippet1)]
 
-Poprzedzający kod często przechwytuje wartość null `HttpContext` lub jest nieprawidłowy w konstruktorze.
+Poprzedzający kod często przechwytuje wartość null lub jest nieprawidłowy `HttpContext` w konstruktorze.
 
 **Wykonaj następujące czynności:** Poniższy przykład:
 
 * Przechowuje <xref:Microsoft.AspNetCore.Http.IHttpContextAccessor> w polu.
-* Używa `HttpContext` pola w poprawnym czasie i sprawdza, `null`czy.
+* Używa `HttpContext` pola w poprawnym czasie i sprawdza, czy `null` .
 
 [!code-csharp[](performance-best-practices/samples/3.0/MyType.cs?name=snippet2)]
 
@@ -269,12 +271,12 @@ Poprzedzający kod często przechwytuje wartość null `HttpContext` lub jest ni
 
 ## <a name="do-not-use-the-httpcontext-after-the-request-is-complete"></a>Nie używaj obiektu HttpContext po zakończeniu żądania
 
-`HttpContext`jest prawidłowy tylko pod warunkiem, że w potoku ASP.NET Core istnieje aktywne żądanie HTTP. Cały potok ASP.NET Core jest asynchronicznym łańcuchem delegatów, które wykonują każde żądanie. Po zakończeniu `Task` zwracanego z tego łańcucha `HttpContext` jest on odtwarzany.
+`HttpContext`jest prawidłowy tylko pod warunkiem, że w potoku ASP.NET Core istnieje aktywne żądanie HTTP. Cały potok ASP.NET Core jest asynchronicznym łańcuchem delegatów, które wykonują każde żądanie. Po `Task` zakończeniu zwracanego z tego łańcucha jest on `HttpContext` odtwarzany.
 
-**Nie wykonuj tej czynności:** Poniższy przykład korzysta `async void` z tego, że żądanie HTTP kończy się po osiągnięciu pierwszego `await` osiągnięcia:
+**Nie wykonuj tej czynności:** Poniższy przykład korzysta z tego, że `async void` żądanie HTTP kończy się po `await` osiągnięciu pierwszego osiągnięcia:
 
 * Jest to **zawsze** złe rozwiązanie w aplikacjach ASP.NET Core.
-* Uzyskuje dostęp `HttpResponse` do po zakończeniu żądania HTTP.
+* Uzyskuje dostęp do `HttpResponse` po zakończeniu żądania HTTP.
 * Powoduje awarię procesu.
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/AsyncBadVoidController.cs?name=snippet1)]
@@ -285,10 +287,10 @@ Poprzedzający kod często przechwytuje wartość null `HttpContext` lub jest ni
 
 ## <a name="do-not-capture-the-httpcontext-in-background-threads"></a>Nie Przechwytuj obiektu HttpContext w wątkach w tle
 
-**Nie wykonuj tej czynności:** Poniższy przykład pokazuje, `HttpContext` że zamknięcie jest przechwytywane z `Controller` właściwości. Jest to niewłaściwe rozwiązanie, ponieważ element roboczy może:
+**Nie wykonuj tej czynności:** Poniższy przykład pokazuje, że zamknięcie jest przechwytywane `HttpContext` z `Controller` właściwości. Jest to niewłaściwe rozwiązanie, ponieważ element roboczy może:
 
 * Uruchom poza zakresem żądania.
-* Próba odczytania nieprawidłowego błędu `HttpContext`.
+* Próba odczytania nieprawidłowego błędu `HttpContext` .
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/FireAndForgetFirstController.cs?name=snippet1)]
 
@@ -303,13 +305,13 @@ Zadania w tle należy zaimplementować jako usługi hostowane. Aby uzyskać wię
 
 ## <a name="do-not-capture-services-injected-into-the-controllers-on-background-threads"></a>Nie Przechwytuj usług wprowadzonych do kontrolerów w wątkach w tle
 
-**Nie wykonuj tej czynności:** Poniższy przykład pokazuje, że zamknięcie jest przechwytywane `DbContext` z parametru `Controller` akcji. Jest to niewłaściwe rozwiązanie.  Element roboczy można uruchomić poza zakresem żądania. `ContosoDbContext` Jest objęty zakresem żądania, co spowodowało `ObjectDisposedException`.
+**Nie wykonuj tej czynności:** Poniższy przykład pokazuje, że zamknięcie jest przechwytywane `DbContext` z `Controller` parametru akcji. Jest to niewłaściwe rozwiązanie.  Element roboczy można uruchomić poza zakresem żądania. `ContosoDbContext`Jest objęty zakresem żądania, co spowodowało `ObjectDisposedException` .
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/FireAndForgetSecondController.cs?name=snippet1)]
 
 **Wykonaj następujące czynności:** Poniższy przykład:
 
-* Wprowadza <xref:Microsoft.Extensions.DependencyInjection.IServiceScopeFactory> w celu utworzenia zakresu w tle elementu pracy. `IServiceScopeFactory`jest klasą pojedynczą.
+* Wprowadza w celu <xref:Microsoft.Extensions.DependencyInjection.IServiceScopeFactory> utworzenia zakresu w tle elementu pracy. `IServiceScopeFactory`jest klasą pojedynczą.
 * Tworzy nowy zakres iniekcji zależności w wątku w tle.
 * Nie odwołuje się do żadnego z kontrolerów.
 * Nie przechwytuje `ContosoDbContext` z przychodzącego żądania.
@@ -334,7 +336,7 @@ ASP.NET Core nie buforuje treści odpowiedzi HTTP. Podczas pierwszego zapisywani
 
 [!code-csharp[](performance-best-practices/samples/3.0/Startup22.cs?name=snippet1)]
 
-W poprzednim kodzie program zgłosi wyjątek, `context.Response.Headers["test"] = "test value";` Jeśli `next()` został zapisany w odpowiedzi.
+W poprzednim kodzie program `context.Response.Headers["test"] = "test value";` zgłosi wyjątek, jeśli `next()` został zapisany w odpowiedzi.
 
 **Wykonaj następujące czynności:** Poniższy przykład sprawdza, czy odpowiedź HTTP została uruchomiona przed zmodyfikowaniem nagłówków.
 

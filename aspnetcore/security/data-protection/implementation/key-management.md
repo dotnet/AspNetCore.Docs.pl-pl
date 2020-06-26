@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 10/14/2016
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/data-protection/implementation/key-management
-ms.openlocfilehash: 0f54ceedf3558fb4fa2349903461fdfdb4dc02e6
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 68913d13c97ba6be73dabf79e03c146a37388ad3
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776906"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408945"
 ---
 # <a name="key-management-in-aspnet-core"></a>Zarządzanie kluczami w ASP.NET Core
 
@@ -65,7 +67,7 @@ services.AddDataProtection()
        .SetDefaultKeyLifetime(TimeSpan.FromDays(14));
 ```
 
-Administrator może również zmienić domyślne ustawienie całego systemu, chociaż jawne wywołanie spowoduje zastąpienie wszystkich zasad `SetDefaultKeyLifetime` dotyczących całego systemu. Domyślny okres istnienia klucza nie może być krótszy niż 7 dni.
+Administrator może również zmienić domyślne ustawienie całego systemu, chociaż jawne wywołanie `SetDefaultKeyLifetime` spowoduje zastąpienie wszystkich zasad dotyczących całego systemu. Domyślny okres istnienia klucza nie może być krótszy niż 7 dni.
 
 ## <a name="automatic-key-ring-refresh"></a>Automatyczne odświeżanie dzwonka klucza
 

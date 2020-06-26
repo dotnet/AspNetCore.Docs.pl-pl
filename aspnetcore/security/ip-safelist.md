@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 03/12/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/ip-safelist
-ms.openlocfilehash: 7923a81e72124cfb0e11e3c1ac327c1e32194b21
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 5b74205bc7b17d61edbb73cf309f6e24e4318391
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776503"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85409010"
 ---
 # <a name="client-ip-safelist-for-aspnet-core"></a>Safelist IP klienta dla ASP.NET Core
 
@@ -43,16 +45,16 @@ Dostęp jest dozwolony, jeśli tablica zawiera adres IP. W przeciwnym razie zwra
 
 W przykładowej aplikacji adres IP Safelist:
 
-* Zdefiniowane przez `AdminSafeList` właściwość w pliku *appSettings. JSON* .
+* Zdefiniowane przez `AdminSafeList` Właściwość w *appsettings.js* pliku.
 * Rozdzielany średnikami ciąg zawierający adresy [protokołu internetowego w wersji 4 (IPv4)](https://wikipedia.org/wiki/IPv4) i [protokołu internetowego w wersji 6 (IPv6)](https://wikipedia.org/wiki/IPv6) .
 
 [!code-json[](ip-safelist/samples/3.x/ClientIpAspNetCore/appsettings.json?range=1-3&highlight=2)]
 
-W poprzednim przykładzie dozwolone są adresy `127.0.0.1` IPv4 i `192.168.1.5` adres sprzężenia zwrotnego IPv6 `::1` (format skompresowany dla `0:0:0:0:0:0:0:1`).
+W poprzednim przykładzie `127.0.0.1` dozwolone są adresy IPv4 i `192.168.1.5` adres sprzężenia zwrotnego IPv6 `::1` (format skompresowany dla `0:0:0:0:0:0:0:1` ).
 
 ## <a name="middleware"></a>Oprogramowanie pośredniczące
 
-`Startup.Configure` Metoda dodaje niestandardowy `AdminSafeListMiddleware` typ oprogramowania pośredniczącego do potoku żądania aplikacji. Safelist jest pobierany z dostawcą konfiguracji platformy .NET Core i jest przenoszona jako parametr konstruktora.
+`Startup.Configure`Metoda dodaje niestandardowy `AdminSafeListMiddleware` Typ oprogramowania pośredniczącego do potoku żądania aplikacji. Safelist jest pobierany z dostawcą konfiguracji platformy .NET Core i jest przenoszona jako parametr konstruktora.
 
 [!code-csharp[](ip-safelist/samples/3.x/ClientIpAspNetCore/Startup.cs?name=snippet_ConfigureAddMiddleware)]
 
@@ -62,11 +64,11 @@ Oprogramowanie pośredniczące analizuje ciąg w tablicę i wyszukuje zdalny adr
 
 ## <a name="action-filter"></a>Filtr akcji
 
-Jeśli potrzebujesz kontroli dostępu opartej na Safelist dla określonych kontrolerów MVC lub metod akcji, Użyj filtru akcji. Przykład:
+Jeśli potrzebujesz kontroli dostępu opartej na Safelist dla określonych kontrolerów MVC lub metod akcji, Użyj filtru akcji. Na przykład:
 
 [!code-csharp[](ip-safelist/samples/Shared/ClientIpSafelistComponents/Filters/ClientIpCheckActionFilter.cs?name=snippet_ClassOnly)]
 
-W `Startup.ConfigureServices`programie Dodaj filtr akcji do kolekcji filtrów MVC. W poniższym przykładzie zostanie dodany filtr `ClientIpCheckActionFilter` akcji. Safelist i wystąpienie rejestratora konsoli są przesyłane jako parametry konstruktora.
+W programie `Startup.ConfigureServices` Dodaj filtr akcji do kolekcji filtrów MVC. W poniższym przykładzie `ClientIpCheckActionFilter` zostanie dodany filtr akcji. Safelist i wystąpienie rejestratora konsoli są przesyłane jako parametry konstruktora.
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -84,9 +86,9 @@ Filtr akcji można następnie zastosować do kontrolera lub metody akcji z atryb
 
 [!code-csharp[](ip-safelist/samples/3.x/ClientIpAspNetCore/Controllers/ValuesController.cs?name=snippet_ActionFilter&highlight=1)]
 
-W przykładowej aplikacji filtr akcji jest stosowany do metody `Get` akcji kontrolera. Podczas testowania aplikacji, wysyłając:
+W przykładowej aplikacji filtr akcji jest stosowany do `Get` metody akcji kontrolera. Podczas testowania aplikacji, wysyłając:
 
-* Żądanie HTTP GET, ten `[ServiceFilter]` atrybut sprawdza poprawność adresu IP klienta. Jeśli dostęp jest dozwolony do metody `Get` akcji, zmiana następujących danych wyjściowych konsoli jest generowana przez filtr akcji i metodę akcji:
+* Żądanie HTTP GET, ten `[ServiceFilter]` atrybut sprawdza poprawność adresu IP klienta. Jeśli dostęp jest dozwolony do `Get` metody akcji, zmiana następujących danych wyjściowych konsoli jest generowana przez filtr akcji i metodę akcji:
 
     ```
     dbug: ClientIpSafelistComponents.Filters.ClientIpCheckActionFilter[0]
@@ -99,11 +101,11 @@ W przykładowej aplikacji filtr akcji jest stosowany do metody `Get` akcji kontr
 
 ## <a name="razor-pages-filter"></a>RazorFiltr stron
 
-Jeśli chcesz, aby dla aplikacji Razor stron była oparta safelista kontrola dostępu, użyj Razor filtru stron. Przykład:
+Jeśli chcesz, aby dla aplikacji stron była oparta safelista kontrola dostępu Razor , użyj Razor filtru stron. Na przykład:
 
 [!code-csharp[](ip-safelist/samples/Shared/ClientIpSafelistComponents/Filters/ClientIpCheckPageFilter.cs?name=snippet_ClassOnly)]
 
-W `Startup.ConfigureServices`programie Włącz filtr Razor stron, dodając go do kolekcji filtrów MVC. W poniższym przykładzie `ClientIpCheckPageFilter` Razor zostanie dodany filtr stron. Safelist i wystąpienie rejestratora konsoli są przesyłane jako parametry konstruktora.
+W programie `Startup.ConfigureServices` Włącz Razor Filtr stron, dodając go do kolekcji filtrów MVC. W poniższym przykładzie `ClientIpCheckPageFilter` Razor zostanie dodany filtr stron. Safelist i wystąpienie rejestratora konsoli są przesyłane jako parametry konstruktora.
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -117,14 +119,14 @@ W `Startup.ConfigureServices`programie Włącz filtr Razor stron, dodając go do
 
 ::: moniker-end
 
-Po zażądaniu strony *indeksu* Razor przykładowej aplikacji filtrowanie Razor stron sprawdza poprawność adresu IP klienta. Filtr tworzy odmianę następujących danych wyjściowych konsoli:
+Po zażądaniu strony *indeksu* przykładowej aplikacji Razor Razor filtrowanie stron sprawdza poprawność adresu IP klienta. Filtr tworzy odmianę następujących danych wyjściowych konsoli:
 
 ```
 dbug: ClientIpSafelistComponents.Filters.ClientIpCheckPageFilter[0]
       Remote IpAddress: ::1
 ```
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:fundamentals/middleware/index>
 * [Filtry akcji](xref:mvc/controllers/filters#action-filters)

@@ -8,26 +8,28 @@ ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: signalr/publish-to-azure-web-app
-ms.openlocfilehash: a5d19c1519c69351605e8da1d8fa70bff784efd4
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: d3f48b3171012b03fcaf7665c2089b27d37bbeca
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777192"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408841"
 ---
-# <a name="publish-an-aspnet-core-signalr-app-to-azure-app-service"></a>Opublikuj aplikację sygnalizującą ASP.NET Core, aby Azure App Service
+# <a name="publish-an-aspnet-core-signalr-app-to-azure-app-service"></a>Publikowanie aplikacji ASP.NET Core SignalR w Azure App Service
 
 Autor [Brady gastera](https://twitter.com/bradygaster)
 
 [Azure App Service](/azure/app-service/app-service-web-overview) to usługa platformy [obliczeniowej w chmurze firmy Microsoft](https://azure.microsoft.com/) do hostowania aplikacji sieci web, w tym ASP.NET Core.
 
 > [!NOTE]
-> Ten artykuł odnosi się do publikowania aplikacji sygnalizującej ASP.NET Core z programu Visual Studio. Aby uzyskać więcej informacji, zobacz [Usługa signaler dla platformy Azure](https://azure.microsoft.com/services/signalr-service).
+> Ten artykuł odnosi się do publikowania SignalR aplikacji ASP.NET Core z programu Visual Studio. Aby uzyskać więcej informacji, zobacz [ SignalR usługa Azure](https://azure.microsoft.com/services/signalr-service).
 
 ## <a name="publish-the-app"></a>Publikowanie aplikacji
 
@@ -48,11 +50,11 @@ W tym artykule opisano Publikowanie przy użyciu narzędzi w programie Visual St
    | **Grupa zasobów** | Grupa powiązanych zasobów, do której należy aplikacja. |
    | **Plan hostingu**   | Plan cenowy dla aplikacji sieci Web. |
 
-1. Wybierz pozycję **Usługa SignalR platformy Azure** na liście rozwijanej**Dodaj** **zależności** > :
+1. Wybierz pozycję ** SignalR usługa platformy Azure** na **Dependencies**  >  liście rozwijanej**Dodaj** zależności:
 
-   ![Obszar zależności przedstawiający wybór usługi platformy SignalR Azure na liście rozwijanej Dodaj](publish-to-azure-web-app/_static/signalr-service-dependency.png)
+   ![Obszar zależności przedstawiający wybór usługi platformy Azure SignalR na liście rozwijanej Dodaj](publish-to-azure-web-app/_static/signalr-service-dependency.png)
 
-1. W oknie **dialogowym SignalR usługi platformy Azure** wybierz pozycję **Utwórz nowe wystąpienie SignalR usługi platformy Azure**.
+1. W oknie **dialogowym SignalR usługi platformy Azure** wybierz pozycję **Utwórz nowe SignalR wystąpienie usługi platformy Azure**.
 
 1. Podaj **nazwę**, **grupę zasobów**i **lokalizację**. Wróć do okna **dialogowego SignalR usługi platformy Azure** i wybierz pozycję **Dodaj**.
 
@@ -63,7 +65,7 @@ Program Visual Studio wykonuje następujące zadania:
 * Publikuje aplikację.
 * Uruchamia przeglądarkę, która ładuje aplikację sieci Web.
 
-Format adresu URL aplikacji to `{APP SERVICE NAME}.azurewebsites.net`. Na przykład aplikacja o nazwie `SignalRChatApp` ma adres URL. `https://signalrchatapp.azurewebsites.net`
+Format adresu URL aplikacji to `{APP SERVICE NAME}.azurewebsites.net` . Na przykład aplikacja o nazwie `SignalRChatApp` ma adres URL `https://signalrchatapp.azurewebsites.net` .
 
 502,2 Jeśli podczas wdrażania aplikacji przeznaczonej dla wersji zapoznawczej programu .NET Core wystąpi błąd *nieprawidłowej bramy* , zapoznaj się z artykułem [Wdróż ASP.NET Core wersja zapoznawcza, aby Azure App Service](xref:host-and-deploy/azure-apps/index#deploy-aspnet-core-preview-release-to-azure-app-service) rozwiązać ten problem.
 
@@ -80,7 +82,7 @@ W przypadku aplikacji hostowanych bez SignalR usługi Azure enable:
 * [Gniazda sieci Web](xref:fundamentals/websockets) , aby umożliwić transport gniazd sieci Web. Ustawienie domyślne jest **wyłączone**.
 
 1. W Azure Portal przejdź do aplikacji sieci Web w **App Services**.
-1. Otwórz **Configuration** > **Ustawienia ogólne**konfiguracji.
+1. Otwórz **Configuration**  >  **Ustawienia ogólne**konfiguracji.
 1. Ustaw dla opcji **gniazda sieci Web** wartość **włączone**.
 1. Sprawdź, czy **koligacja ARR** jest ustawiona na wartość **włączone**.
 

@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 04/08/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/data-protection/implementation/key-storage-format
-ms.openlocfilehash: d284927e8ff4315b813fe36b9c335d8bd75ece11
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 032b3f9ccea2ae361a8f2fd12538ffb901310247
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776867"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408906"
 ---
 # <a name="key-storage-format-in-aspnet-core"></a>Format magazynu kluczy w ASP.NET Core
 
@@ -27,7 +29,7 @@ Obiekty są przechowywane w reprezentacji XML. Domyślnym katalogiem magazynu kl
 * Windows: *%LOCALAPPDATA%\ASP.NET\DataProtection-Keys\*
 * macOS/Linux: *$Home/.ASPNET/dataprotection-Keys*
 
-## <a name="the-key-element"></a>Element \<klucza>
+## <a name="the-key-element"></a>\<key>Element
 
 Klucze istnieją jako obiekty najwyższego poziomu w repozytorium kluczy. Klucze konwencji mają **klucz filename-{GUID}. XML**, gdzie {GUID} jest identyfikatorem klucza. Każdy taki plik zawiera jeden klucz. Format pliku jest następujący.
 
@@ -52,33 +54,33 @@ Klucze istnieją jako obiekty najwyższego poziomu w repozytorium kluczy. Klucze
 </key>
 ```
 
-Element \<Key> zawiera następujące atrybuty i elementy podrzędne:
+\<key>Element zawiera następujące atrybuty i elementy podrzędne:
 
 * Identyfikator klucza. Ta wartość jest traktowana jako autorytatywna; Nazwa pliku jest po prostu Nicety do czytelności.
 
-* Wersja \<kluczowego elementu>, aktualnie ustalona na 1.
+* Wersja \<key> elementu, obecnie stała się 1.
 
 * Data utworzenia, aktywacji i wygaśnięcia klucza.
 
-* \<Deskryptor> element, który zawiera informacje dotyczące uwierzytelnionej implementacji szyfrowania zawartej w tym kluczu.
+* \<descriptor>Element, który zawiera informacje dotyczące uwierzytelnionej implementacji szyfrowania zawartej w tym kluczu.
 
 W powyższym przykładzie identyfikator klucza to {80732141-ec8f-4b80-af9c-c4d2d1ff8901}, został utworzony i aktywowany w 19 marca 2015 i ma okres istnienia 90 dni. (Czasami Data aktywacji może być nieco wcześniejsza niż data utworzenia, jak w tym przykładzie. Wynika to z drobne, w jaki sposób interfejsy API działają i są nieszkodliwe w użyciu.)
 
-## <a name="the-descriptor-element"></a>\<Deskryptor> elementu
+## <a name="the-descriptor-element"></a>\<descriptor>Element
 
-Element> \<deskryptora zewnętrznego zawiera atrybut deserializatortype, który jest kwalifikowana dla zestawu nazwa typu, który implementuje IAuthenticatedEncryptorDescriptorDeserializer. Ten typ jest odpowiedzialny za odczytywanie \<deskryptora wewnętrznego> elementu oraz analizowanie zawartych w nim informacji.
+Element zewnętrzny \<descriptor> zawiera atrybut deserializatortype, który jest kwalifikowaną nazwą zestawu typu, który implementuje IAuthenticatedEncryptorDescriptorDeserializer. Ten typ jest odpowiedzialny za odczytywanie \<descriptor> elementu wewnętrznego i analizowanie zawartych w nim informacji.
 
-Określony format elementu> \<deskryptora zależy od uwierzytelnionej implementacji modułu szyfrującego hermetyzowanego przez klucz, a każdy typ deserializacji oczekuje nieco innego formatu. Ogólnie rzecz biorąc, ten element będzie zawierał informacje o algorytmach (nazwy, typy, identyfikatory OID lub podobne) i materiał klucza tajnego. W powyższym przykładzie deskryptor określa, że ten klucz otacza algorytm AES-256-CBC szyfrowanie i HMACSHA256 weryfikację.
+Określony format \<descriptor> elementu zależy od uwierzytelnionej implementacji modułu szyfrującego hermetyzowanego przez klucz, a każdy typ deserializacji oczekuje nieco innego formatu. Ogólnie rzecz biorąc, ten element będzie zawierał informacje o algorytmach (nazwy, typy, identyfikatory OID lub podobne) i materiał klucza tajnego. W powyższym przykładzie deskryptor określa, że ten klucz otacza algorytm AES-256-CBC szyfrowanie i HMACSHA256 weryfikację.
 
-## <a name="the-encryptedsecret-element"></a>Element \<> encryptedSecret
+## <a name="the-encryptedsecret-element"></a>\<encryptedSecret>Element
 
-Element ** &lt;encryptedSecret&gt; ** , który zawiera zaszyfrowaną formę materiału klucza tajnego, może być obecny, jeśli [włączono szyfrowanie wpisów tajnych w stanie spoczynku](xref:security/data-protection/implementation/key-encryption-at-rest). Ten atrybut `decryptorType` to kwalifikowana dla zestawu nazwa typu, który implementuje [IXmlDecryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.xmlencryption.ixmldecryptor). Ten typ jest odpowiedzialny za odczytywanie ** &lt;wewnętrznego&gt; elementu encryptedKey** i odszyfrowywanie go w celu odzyskania oryginalnego tekstu.
+Element ** &lt; encryptedSecret &gt; ** , który zawiera zaszyfrowaną formę materiału klucza tajnego, może być obecny, jeśli [włączono szyfrowanie wpisów tajnych w stanie spoczynku](xref:security/data-protection/implementation/key-encryption-at-rest). Ten atrybut `decryptorType` to kwalifikowana dla zestawu nazwa typu, który implementuje [IXmlDecryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.xmlencryption.ixmldecryptor). Ten typ jest odpowiedzialny za odczytywanie wewnętrznego elementu ** &lt; encryptedKey &gt; ** i odszyfrowywanie go w celu odzyskania oryginalnego tekstu.
 
-Podobnie jak `<descriptor>`w przypadku, określony format `<encryptedSecret>` elementu zależy od mechanizmu szyfrowania w trybie Rest. W powyższym przykładzie klucz główny jest szyfrowany przy użyciu funkcji DPAPI systemu Windows na komentarz.
+Podobnie jak w przypadku `<descriptor>` , określony format `<encryptedSecret>` elementu zależy od mechanizmu szyfrowania w trybie Rest. W powyższym przykładzie klucz główny jest szyfrowany przy użyciu funkcji DPAPI systemu Windows na komentarz.
 
-## <a name="the-revocation-element"></a>Element \<> odwołania
+## <a name="the-revocation-element"></a>\<revocation>Element
 
-Odwołania istnieją jako obiekty najwyższego poziomu w repozytorium kluczy. Odwołania do Konwencji mają odwołania do nazwy pliku **-{timestamp}. XML** (do odwoływania wszystkich kluczy przed określoną datą) lub **odwołania-{GUID}. XML** (na potrzeby odwoływania określonego klucza). Każdy plik zawiera pojedynczy \<element> odwołania.
+Odwołania istnieją jako obiekty najwyższego poziomu w repozytorium kluczy. Odwołania do Konwencji mają odwołania do nazwy pliku **-{timestamp}. XML** (do odwoływania wszystkich kluczy przed określoną datą) lub **odwołania-{GUID}. XML** (na potrzeby odwoływania określonego klucza). Każdy plik zawiera pojedynczy \<revocation> element.
 
 W przypadku odwołań poszczególnych kluczy zawartość pliku będzie następująca.
 
@@ -103,4 +105,4 @@ W takim przypadku tylko określony klucz jest odwołany. Jeśli identyfikator kl
 </revocation>
 ```
 
-\<Przyczyna> element nigdy nie jest odczytywany przez system. Jest to po prostu wygodne miejsce do przechowywania przyczyny odwołania przez człowieka.
+\<reason>Element nigdy nie jest odczytywany przez system. Jest to po prostu wygodne miejsce do przechowywania przyczyny odwołania przez człowieka.

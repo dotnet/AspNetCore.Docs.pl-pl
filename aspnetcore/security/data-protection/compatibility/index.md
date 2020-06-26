@@ -6,19 +6,21 @@ ms.author: riande
 ms.date: 10/14/2016
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/data-protection/compatibility/index
-ms.openlocfilehash: 103cd3529fa25c9e4c7e1afe32fef1f84748dd71
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 75eea8721910b5ecba4578440a5290599bdc1735
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777478"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408009"
 ---
 # <a name="compatibility-in-aspnet-core"></a>Zgodność w ASP.NET Core
 
-* [Zastępowanie \<> machineKey ASP.NET w ASP.NET Core](xref:security/data-protection/compatibility/replacing-machinekey)
+* [Zastępowanie ASP.NET \<machineKey> w ASP.NET Core](xref:security/data-protection/compatibility/replacing-machinekey)
 * `Microsoft.AspNetCore.DataProtection`3,1 nie jest zgodny z aplikacjami funkcji platformy Azure. Aby uzyskać więcej informacji, zobacz [ten problem](https://github.com/Azure/azure-functions-host/issues/5447) w usłudze GitHub

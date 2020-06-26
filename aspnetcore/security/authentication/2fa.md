@@ -8,17 +8,19 @@ ms.date: 09/22/2018
 ms.custom: mvc, seodec18
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/2fa
-ms.openlocfilehash: e33f22356de983c8c4e0211822d5027a33b48de6
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 032650296cfdcc4fef632c6a6a9ce2b56db6a6df
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775833"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408581"
 ---
 # <a name="two-factor-authentication-with-sms-in-aspnet-core"></a>Uwierzytelnianie dwuskładnikowe za pomocą wiadomości SMS w ASP.NET Core
 
@@ -33,7 +35,7 @@ W tym samouczku pokazano, jak skonfigurować uwierzytelnianie dwuskładnikowe (f
 
 ## <a name="create-a-new-aspnet-core-project"></a>Utwórz nowy projekt ASP.NET Core
 
-Utwórz nową aplikację sieci Web ASP.NET Core o `Web2FA` nazwie przy użyciu poszczególnych kont użytkowników. Postępuj zgodnie z <xref:security/enforcing-ssl> instrukcjami w, aby skonfigurować i wymagać protokołu HTTPS.
+Utwórz nową aplikację sieci Web ASP.NET Core o nazwie `Web2FA` przy użyciu poszczególnych kont użytkowników. Postępuj zgodnie z instrukcjami w, <xref:security/enforcing-ssl> Aby skonfigurować i wymagać protokołu HTTPS.
 
 ### <a name="create-an-sms-account"></a>Utwórz konto programu SMS
 
@@ -49,7 +51,7 @@ Na karcie Pulpit nawigacyjny konta usługi Twilio Skopiuj **Identyfikator SID ko
 
 W ustawieniach konta przejdź do **userKey** i skopiuj go wraz z **hasłem**.
 
-Te wartości zostaną później zapisane za pomocą narzędzia Menedżer kluczy tajnych w kluczach `SMSAccountIdentification` i. `SMSAccountPassword`
+Te wartości zostaną później zapisane za pomocą narzędzia Menedżer kluczy tajnych w kluczach `SMSAccountIdentification` i `SMSAccountPassword` .
 
 #### <a name="specifying-senderid--originator"></a>Określanie SenderID/inicjatora
 
@@ -57,7 +59,7 @@ Te wartości zostaną później zapisane za pomocą narzędzia Menedżer kluczy 
 
 **ASPSMS:** W menu odblokowane odblokowywanie Odblokuj co najmniej jeden inicjator lub wybierz inicjator alfanumeryczny (nieobsługiwany przez wszystkie sieci).
 
-Ta wartość zostanie później przechowana przy użyciu narzędzia do zarządzania kluczami tajnymi w ramach klucza `SMSAccountFrom`.
+Ta wartość zostanie później przechowana przy użyciu narzędzia do zarządzania kluczami tajnymi w ramach klucza `SMSAccountFrom` .
 
 ### <a name="provide-credentials-for-the-sms-service"></a>Podaj poświadczenia dla usługi programu SMS
 
@@ -67,7 +69,7 @@ Użyjemy [wzorca opcji](xref:fundamentals/configuration/options) , aby uzyskać 
 
 [!code-csharp[](2fa/sample/Web2FA/Services/SMSoptions.cs)]
 
-Ustaw `SMSAccountIdentification`opcję `SMSAccountPassword` oraz `SMSAccountFrom` za pomocą narzędzia do [zarządzania kluczami tajnymi](xref:security/app-secrets). Przykład:
+Ustaw `SMSAccountIdentification` opcję `SMSAccountPassword` oraz `SMSAccountFrom` za pomocą narzędzia do [zarządzania kluczami tajnymi](xref:security/app-secrets). Na przykład:
 
 ```none
 C:/Web2FA/src/WebApp1>dotnet user-secrets set SMSAccountIdentification 12345
@@ -108,7 +110,7 @@ Otwórz plik widoku views */Manage/index. cshtml* Razor i Usuń znaki komentarza
 
 ![Widok rejestru aplikacji sieci Web otwarty w przeglądarce Microsoft Edge](2fa/_static/login2fa1.png)
 
-* Naciśnij pozycję Nazwa użytkownika, która aktywuje metodę `Index` akcji w obszarze Zarządzanie kontrolerem. Następnie naciśnij link numer telefonu **Dodaj** .
+* Naciśnij pozycję Nazwa użytkownika, która aktywuje `Index` metodę akcji w obszarze Zarządzanie kontrolerem. Następnie naciśnij link numer telefonu **Dodaj** .
 
 ![Zarządzanie widokiem — naciśnięcie linku "Dodaj"](2fa/_static/login2fa2.png)
 
@@ -152,7 +154,7 @@ Blokada konta jest zalecana w przypadku funkcji 2FA. Gdy użytkownik zaloguje si
 
 [!code-csharp[](2fa/sample/Web2FA/Startup.cs?name=snippet2&highlight=13-17)]
 
-Potwierdź, [PasswordSignInAsync](/dotnet/api/microsoft.aspnetcore.identity.signinmanager-1.passwordsigninasync) że PasswordSignInAsync `lockoutOnFailure` ustawia `true`:
+Potwierdź, że [PasswordSignInAsync](/dotnet/api/microsoft.aspnetcore.identity.signinmanager-1.passwordsigninasync) ustawia `lockoutOnFailure` `true` :
 
 ```csharp
 var result = await _signInManager.PasswordSignInAsync(

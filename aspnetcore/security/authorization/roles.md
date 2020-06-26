@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 10/14/2016
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authorization/roles
-ms.openlocfilehash: 01d4239377b128f711a110a821e1afea58ca14a7
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 5d2ea6b9be0c993d62fa75fb8b471b5923747bac
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776542"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407866"
 ---
 # <a name="role-based-authorization-in-aspnet-core"></a>Autoryzacja oparta na rolach w ASP.NET Core
 
@@ -26,7 +28,7 @@ Po utworzeniu tożsamości może ona należeć do co najmniej jednej roli. Na pr
 
 ## <a name="adding-role-checks"></a>Dodawanie kontroli roli
 
-Kontrola autoryzacji oparta na rolach polega&mdash;na tym, że deweloperzy są osadzani w kodzie, względem kontrolera lub akcji w ramach kontrolera, określając role, do których bieżący użytkownik musi być członkiem, aby uzyskać dostęp do żądanego zasobu.
+Kontrola autoryzacji oparta na rolach polega &mdash; na tym, że deweloperzy są osadzani w kodzie, względem kontrolera lub akcji w ramach kontrolera, określając role, do których bieżący użytkownik musi być członkiem, aby uzyskać dostęp do żądanego zasobu.
 
 Na przykład poniższy kod ogranicza dostęp do wszystkich akcji w odniesieniu `AdministrationController` do użytkowników, którzy są członkami `Administrator` roli:
 
@@ -48,7 +50,7 @@ public class SalaryController : Controller
 
 Ten kontroler będzie dostępny tylko dla użytkowników, którzy są członkami `HRManager` roli lub `Finance` roli.
 
-Jeśli zastosujesz wiele atrybutów, użytkownik uzyskujący dostęp musi być członkiem wszystkich określonych ról; Poniższy przykład wymaga, aby użytkownik musiał być członkiem roli `PowerUser` i. `ControlPanelUser`
+Jeśli zastosujesz wiele atrybutów, użytkownik uzyskujący dostęp musi być członkiem wszystkich określonych ról; Poniższy przykład wymaga, aby użytkownik musiał być członkiem `PowerUser` `ControlPanelUser` roli i.
 
 ```csharp
 [Authorize(Roles = "PowerUser")]
@@ -75,7 +77,7 @@ public class ControlPanelController : Controller
 }
 ```
 
-W poprzednim `Administrator` fragmencie kodu członkowie roli lub `PowerUser` roli mogą uzyskać dostęp do kontrolera i `SetTime` akcji, ale tylko członkowie `Administrator` roli mogą uzyskać do niej `ShutDown` dostęp.
+W poprzednim fragmencie kodu członkowie `Administrator` roli lub `PowerUser` roli mogą uzyskać dostęp do kontrolera i `SetTime` akcji, ale tylko członkowie `Administrator` roli mogą uzyskać do niej dostęp `ShutDown` .
 
 Możesz również zablokować kontroler, ale zezwolić na anonimowy, nieuwierzytelniony dostęp do poszczególnych akcji.
 
@@ -96,7 +98,7 @@ public class ControlPanelController : Controller
 
 ::: moniker range=">= aspnetcore-2.0"
 
-W Razor przypadku stron można `AuthorizeAttribute` zastosować jedną z nich:
+W przypadku Razor stron `AuthorizeAttribute` można zastosować jedną z nich:
 
 * Przy użyciu [Konwencji](xref:razor-pages/razor-pages-conventions#page-model-action-conventions)lub
 * Zastosowanie `AuthorizeAttribute` do `PageModel` wystąpienia:
@@ -112,14 +114,14 @@ public class UpdateModel : PageModel
 ```
 
 > [!IMPORTANT]
-> Atrybuty filtru, w `AuthorizeAttribute`tym, mogą być stosowane tylko do PageModel i nie mogą być stosowane do określonych metod obsługi stron.
+> Atrybuty filtru, w tym `AuthorizeAttribute` , mogą być stosowane tylko do PageModel i nie mogą być stosowane do określonych metod obsługi stron.
 ::: moniker-end
 
 <a name="security-authorization-role-policy"></a>
 
 ## <a name="policy-based-role-checks"></a>Kontrola ról oparta na zasadach
 
-Wymagania dotyczące ról można również wyrazić przy użyciu nowej składni zasad, w której deweloper rejestruje zasady podczas uruchamiania w ramach konfiguracji usługi autoryzacji. Zwykle jest to wykonywane `ConfigureServices()` w pliku *Startup.cs* .
+Wymagania dotyczące ról można również wyrazić przy użyciu nowej składni zasad, w której deweloper rejestruje zasady podczas uruchamiania w ramach konfiguracji usługi autoryzacji. Zwykle jest to wykonywane w `ConfigureServices()` pliku *Startup.cs* .
 
 ::: moniker range=">= aspnetcore-3.0"
 ```csharp
@@ -169,7 +171,7 @@ options.AddPolicy("ElevatedRights", policy =>
                   policy.RequireRole("Administrator", "PowerUser", "BackupAdministrator"));
 ```
 
-Ten przykład autoryzuje użytkowników `Administrator`, `PowerUser` którzy należą do `BackupAdministrator` ról.
+Ten przykład autoryzuje użytkowników, którzy należą do `Administrator` `PowerUser` `BackupAdministrator` ról.
 
 ### <a name="add-role-services-to-identity"></a>Dodawanie usług ról do programuIdentity
 

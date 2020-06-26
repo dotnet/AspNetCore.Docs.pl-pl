@@ -8,23 +8,25 @@ ms.custom: mvc
 ms.date: 10/25/2018
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: fundamentals/metapackage
-ms.openlocfilehash: fe9e2f8f8970f9e5c182b68b2660c35cd09b97b2
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 32f324000dfe38eb578a580d7a315a1a687a094d
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775547"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407944"
 ---
 # <a name="microsoftaspnetcoreall-metapackage-for-aspnet-core-20"></a>Microsoft. AspNetCore. All, pakiet dla ASP.NET Core 2,0
 
 ::: moniker range=">= aspnetcore-3.0"
 
-`Microsoft.AspNetCore.All` Pakiet nie znajduje się w ASP.NET Core 3,0 i nowszych. Aby uzyskać więcej informacji, zobacz [ten problem](https://github.com/aspnet/Announcements/issues/314)w serwisie GitHub.
+`Microsoft.AspNetCore.All`Pakiet nie znajduje się w ASP.NET Core 3,0 i nowszych. Aby uzyskać więcej informacji, zobacz [ten problem](https://github.com/aspnet/Announcements/issues/314)w serwisie GitHub.
 
 ::: moniker-end
 
@@ -43,9 +45,9 @@ Współdzielona struktura, `Microsoft.AspNetCore.All` do której odwołuje się 
 
 Wszystkie funkcje ASP.NET Core 2. x i Entity Framework Core 2. x są zawarte w `Microsoft.AspNetCore.All` pakiecie. Domyślne szablony projektu dla ASP.NET Core 2,0 używają tego pakietu.
 
-Numer `Microsoft.AspNetCore.All` wersji pakietubinding reprezentuje minimalną wersję ASP.NET Core i Entity Framework Core.
+Numer wersji `Microsoft.AspNetCore.All` pakietubinding reprezentuje minimalną wersję ASP.NET Core i Entity Framework Core.
 
-Następujący plik *. csproj* odwołuje się `Microsoft.AspNetCore.All` do pakietu dla ASP.NET Core:
+Następujący plik *. csproj* odwołuje się do `Microsoft.AspNetCore.All` pakietu dla ASP.NET Core:
 
 [!code-xml[](metapackage/samples/Metapackage.All.Example.csproj?highlight=8)]
 
@@ -53,13 +55,13 @@ Następujący plik *. csproj* odwołuje się `Microsoft.AspNetCore.All` do pakie
 
 ## <a name="implicit-versioning"></a>Niejawna wersja
 
-W ASP.NET Core 2,1 lub nowszej można określić odwołanie do `Microsoft.AspNetCore.All` pakietu bez wersji. Gdy wersja nie jest określona, zestaw SDK (`Microsoft.NET.Sdk.Web`) nie określa wersji niejawnej. Zalecamy użycie niejawnej wersji określonej przez zestaw SDK i niejawne ustawienie numeru wersji w odwołaniu do pakietu. Jeśli masz pytania dotyczące tego podejścia, pozostaw komentarz w serwisie GitHub w [dyskusji dotyczącej wersji niejawnej Microsoft. AspNetCore. app](https://github.com/dotnet/AspNetCore.Docs/issues/6430).
+W ASP.NET Core 2,1 lub nowszej można określić `Microsoft.AspNetCore.All` odwołanie do pakietu bez wersji. Gdy wersja nie jest określona, zestaw SDK () nie określa wersji niejawnej `Microsoft.NET.Sdk.Web` . Zalecamy użycie niejawnej wersji określonej przez zestaw SDK i niejawne ustawienie numeru wersji w odwołaniu do pakietu. Jeśli masz pytania dotyczące tego podejścia, pozostaw komentarz w serwisie GitHub w [dyskusji dotyczącej wersji niejawnej Microsoft. AspNetCore. app](https://github.com/dotnet/AspNetCore.Docs/issues/6430).
 
-Niejawna wersja jest ustawiona `major.minor.0` na dla aplikacji przenośnych. Mechanizm przekazujący przechodzenie do platformy udostępnionej uruchamia aplikację w najnowszej zgodnej wersji wśród zainstalowanych platform udostępnionych. Aby zagwarantować, że ta sama wersja jest używana w środowisku deweloperskim, testowym i produkcyjnym, upewnij się, że ta sama wersja udostępnionej platformy jest zainstalowana we wszystkich środowiskach. W przypadku aplikacji samodzielnych niejawny numer wersji jest ustawiany na `major.minor.patch` współużytkowanej platformie powiązanej z ZAINSTALOWANYm zestawem SDK.
+Niejawna wersja jest ustawiona na `major.minor.0` dla aplikacji przenośnych. Mechanizm przekazujący przechodzenie do platformy udostępnionej uruchamia aplikację w najnowszej zgodnej wersji wśród zainstalowanych platform udostępnionych. Aby zagwarantować, że ta sama wersja jest używana w środowisku deweloperskim, testowym i produkcyjnym, upewnij się, że ta sama wersja udostępnionej platformy jest zainstalowana we wszystkich środowiskach. W przypadku aplikacji samodzielnych niejawny numer wersji jest ustawiany na `major.minor.patch` współużytkowanej platformie powiązanej z zainstalowanym zestawem SDK.
 
-Określenie numeru wersji w odwołaniu `Microsoft.AspNetCore.All` do pakietu nie **gwarantuje,** że jest wybrana wersja udostępnionej platformy. Załóżmy na przykład, że jest określona wersja "2.1.1", ale jest zainstalowana wartość "2.1.3". W takim przypadku aplikacja będzie używać "2.1.3". Chociaż nie jest to zalecane, można wyłączyć funkcję wycofywania do przodu (poprawka i/lub pomocnicza). Aby uzyskać więcej informacji na temat przetworzenia i konfigurowania zachowań hosta dotnet, zobacz [przewinięcie hosta dotnet do przodu](https://github.com/dotnet/core-setup/blob/master/Documentation/design-docs/roll-forward-on-no-candidate-fx.md).
+Określenie numeru wersji w `Microsoft.AspNetCore.All` odwołaniu do pakietu nie **not** gwarantuje, że jest wybrana wersja udostępnionej platformy. Załóżmy na przykład, że jest określona wersja "2.1.1", ale jest zainstalowana wartość "2.1.3". W takim przypadku aplikacja będzie używać "2.1.3". Chociaż nie jest to zalecane, można wyłączyć funkcję wycofywania do przodu (poprawka i/lub pomocnicza). Aby uzyskać więcej informacji na temat przetworzenia i konfigurowania zachowań hosta dotnet, zobacz [przewinięcie hosta dotnet do przodu](https://github.com/dotnet/core-setup/blob/master/Documentation/design-docs/roll-forward-on-no-candidate-fx.md).
 
-Zestaw SDK projektu musi być ustawiony na `Microsoft.NET.Sdk.Web` w pliku projektu, aby można było użyć niejawnej `Microsoft.AspNetCore.All`wersji programu. Gdy `Microsoft.NET.Sdk` zestaw SDK jest określony (`<Project Sdk="Microsoft.NET.Sdk">` w górnej części pliku projektu), generowane jest następujące ostrzeżenie:
+Zestaw SDK projektu musi być ustawiony na `Microsoft.NET.Sdk.Web` w pliku projektu, aby można było użyć niejawnej wersji programu `Microsoft.AspNetCore.All` . Gdy `Microsoft.NET.Sdk` zestaw SDK jest określony ( `<Project Sdk="Microsoft.NET.Sdk">` w górnej części pliku projektu), generowane jest następujące ostrzeżenie:
 
 *Ostrzeżenie NU1604: zależność projektu Microsoft. AspNetCore. All nie zawiera mniejszej granicy. Uwzględnij dolną granicę w wersji zależności, aby zapewnić spójne wyniki przywracania.*
 
@@ -71,7 +73,7 @@ Jest to znany problem z zestawem SDK platformy .NET Core 2,1 i zostanie naprawio
 
 ## <a name="migrating-from-microsoftaspnetcoreall-to-microsoftaspnetcoreapp"></a>Migrowanie z Microsoft. AspNetCore. All do Microsoft. AspNetCore. App
 
-Następujące pakiety są zawarte w `Microsoft.AspNetCore.All` `Microsoft.AspNetCore.App` pakiecie, ale nie.
+Następujące pakiety są zawarte w `Microsoft.AspNetCore.All` pakiecie, ale nie `Microsoft.AspNetCore.App` .
 
 * `Microsoft.AspNetCore.ApplicationInsights.HostingStartup`
 * `Microsoft.AspNetCore.AzureAppServices.HostingStartup`
@@ -89,9 +91,9 @@ Następujące pakiety są zawarte w `Microsoft.AspNetCore.All` `Microsoft.AspNet
 * `Microsoft.Extensions.Logging.AzureAppServices`
 * `Microsoft.VisualStudio.Web.BrowserLink`
 
-Aby przenieść z `Microsoft.AspNetCore.All` do `Microsoft.AspNetCore.App`, jeśli aplikacja używa dowolnych interfejsów API z powyższych pakietów lub pakietów wprowadzonych przez te pakiety, Dodaj odwołania do tych pakietów w projekcie.
+Aby przenieść z `Microsoft.AspNetCore.All` do `Microsoft.AspNetCore.App` , jeśli aplikacja używa dowolnych interfejsów API z powyższych pakietów lub pakietów wprowadzonych przez te pakiety, Dodaj odwołania do tych pakietów w projekcie.
 
-Wszystkie zależności poprzedzających pakietów, które w przeciwnym razie nie `Microsoft.AspNetCore.App` są zależnościami, nie są uwzględniane niejawnie. Przykład:
+Wszystkie zależności poprzedzających pakietów, które w przeciwnym razie nie są zależnościami, `Microsoft.AspNetCore.App` nie są uwzględniane niejawnie. Na przykład:
 
 * `StackExchange.Redis`jako zależność`Microsoft.Extensions.Caching.Redis`
 * `Microsoft.ApplicationInsights`jako zależność`Microsoft.AspNetCore.ApplicationInsights.HostingStartup`

@@ -7,17 +7,19 @@ ms.author: johluo
 ms.date: 09/25/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: grpc/migration
-ms.openlocfilehash: 1846195cc43aec703333e69f66380ddcabcf2ad4
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 2f0cd5f224453ee7be16f8a1d10e383de2a0d426
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82768825"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407255"
 ---
 # <a name="migrating-grpc-services-from-c-core-to-aspnet-core"></a>Migrowanie usług gRPC z dysku C-Core do ASP.NET Core
 
@@ -29,13 +31,13 @@ Ze względu na implementację bazowego stosu nie wszystkie funkcje działają w 
 
 W stosie ASP.NET Core usługi gRPC są domyślnie tworzone z [okresem istnienia w zakresie](xref:fundamentals/dependency-injection#service-lifetimes). Z kolei gRPC C-Core domyślnie wiąże się z usługą z [pojedynczym okresem istnienia](xref:fundamentals/dependency-injection#service-lifetimes).
 
-Okres istnienia w zakresie pozwala implementacji usługi rozwiązywać inne usługi z okresami istnienia w zakresie. Na przykład okres istnienia objęty zakresem można `DbContext` również rozwiązać z kontenera di przez iniekcję konstruktora. Korzystanie z okresu istnienia w zakresie:
+Okres istnienia w zakresie pozwala implementacji usługi rozwiązywać inne usługi z okresami istnienia w zakresie. Na przykład okres istnienia objęty zakresem można również rozwiązać `DbContext` z kontenera di przez iniekcję konstruktora. Korzystanie z okresu istnienia w zakresie:
 
 * Nowe wystąpienie implementacji usługi jest konstruowane dla każdego żądania.
 * Nie jest możliwe udostępnianie stanu między żądaniami za pośrednictwem elementów członkowskich wystąpienia w typie implementacji.
 * Oczekuje się, że wszystkie Stany udostępnione są przechowywane w usłudze pojedynczej w kontenerze DI. Przechowywane udostępnione Stany są rozwiązywane w konstruktorze implementacji usługi gRPC.
 
-Aby uzyskać więcej informacji na temat okresów istnienia usługi, zobacz <xref:fundamentals/dependency-injection#service-lifetimes>.
+Aby uzyskać więcej informacji na temat okresów istnienia usługi, zobacz <xref:fundamentals/dependency-injection#service-lifetimes> .
 
 ### <a name="add-a-singleton-service"></a>Dodawanie pojedynczej usługi
 
@@ -53,9 +55,9 @@ Jednak implementacja usługi z pojedynczym okresem istnienia nie jest już w sta
 
 ## <a name="configure-grpc-services-options"></a>Skonfiguruj opcje usług gRPC Services
 
-W przypadku aplikacji opartych na rdzeniu C ustawienia takie `grpc.max_receive_message_length` jak `grpc.max_send_message_length` i są konfigurowane `ChannelOption` przy użyciu programu podczas [konstruowania wystąpienia serwera](https://grpc.io/grpc/csharp/api/Grpc.Core.Server.html#Grpc_Core_Server__ctor_System_Collections_Generic_IEnumerable_Grpc_Core_ChannelOption__).
+W przypadku aplikacji opartych na rdzeniu C ustawienia takie jak `grpc.max_receive_message_length` i `grpc.max_send_message_length` są konfigurowane przy użyciu programu `ChannelOption` podczas [konstruowania wystąpienia serwera](https://grpc.io/grpc/csharp/api/Grpc.Core.Server.html#Grpc_Core_Server__ctor_System_Collections_Generic_IEnumerable_Grpc_Core_ChannelOption__).
 
-W ASP.NET Core gRPC zapewnia konfigurację przy użyciu `GrpcServiceOptions` typu. Na przykład maksymalny rozmiar komunikatu przychodzącego można skonfigurować przy użyciu `AddGrpc`usługi gRPC. Poniższy przykład zmienia domyślną wartość `MaxReceiveMessageSize` z 4 MB na 16 MB:
+W ASP.NET Core gRPC zapewnia konfigurację przy użyciu `GrpcServiceOptions` typu. Na przykład maksymalny rozmiar komunikatu przychodzącego można skonfigurować przy użyciu usługi gRPC `AddGrpc` . Poniższy przykład zmienia domyślną wartość `MaxReceiveMessageSize` z 4 MB na 16 MB:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -67,11 +69,11 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Aby uzyskać więcej informacji na temat konfiguracji <xref:grpc/configuration>, zobacz.
+Aby uzyskać więcej informacji na temat konfiguracji, zobacz <xref:grpc/configuration> .
 
 ## <a name="logging"></a>Rejestrowanie
 
-Aplikacje oparte na rdzeniu C są zależne `GrpcEnvironment` od programu w celu [skonfigurowania rejestratora](https://grpc.io/grpc/csharp/api/Grpc.Core.GrpcEnvironment.html?q=size#Grpc_Core_GrpcEnvironment_SetLogger_Grpc_Core_Logging_ILogger_) do celów debugowania. Stos ASP.NET Core udostępnia tę funkcję za pomocą [interfejsu API rejestrowania](xref:fundamentals/logging/index). Na przykład można dodać Rejestrator do usługi gRPC za pośrednictwem iniekcji konstruktora:
+Aplikacje oparte na rdzeniu C są zależne od programu w `GrpcEnvironment` celu [skonfigurowania rejestratora](https://grpc.io/grpc/csharp/api/Grpc.Core.GrpcEnvironment.html?q=size#Grpc_Core_GrpcEnvironment_SetLogger_Grpc_Core_Logging_ILogger_) do celów debugowania. Stos ASP.NET Core udostępnia tę funkcję za pomocą [interfejsu API rejestrowania](xref:fundamentals/logging/index). Na przykład można dodać Rejestrator do usługi gRPC za pośrednictwem iniekcji konstruktora:
 
 ```csharp
 public class GreeterService : Greeter.GreeterBase
@@ -92,9 +94,9 @@ ASP.NET Core [oprogramowanie pośredniczące](xref:fundamentals/middleware/index
 
 * Służy do konstruowania potoku, który obsługuje żądanie gRPC.
 * Zezwalaj na wykonywanie pracy przed lub po następnym składniku w potoku.
-* Zapewnianie dostępu `HttpContext`do:
+* Zapewnianie dostępu do `HttpContext` :
   * W oprogramowaniu pośredniczącym `HttpContext` jest parametr.
-  * W przypadku interceptorów `HttpContext` dostęp do niego można uzyskać `ServerCallContext` za pomocą parametru `ServerCallContext.GetHttpContext` z metodą rozszerzenia. Należy zauważyć, że ta funkcja jest specyficzna dla przechwyceń działających w ASP.NET Core.
+  * W przypadku interceptorów `HttpContext` dostęp do niego można uzyskać za pomocą `ServerCallContext` parametru z `ServerCallContext.GetHttpContext` metodą rozszerzenia. Należy zauważyć, że ta funkcja jest specyficzna dla przechwyceń działających w ASP.NET Core.
 
 różnice gRPC wychwytcy z ASP.NET Core oprogramowania pośredniczącego:
 
@@ -109,7 +111,7 @@ różnice gRPC wychwytcy z ASP.NET Core oprogramowania pośredniczącego:
   * Działa na podstawowych komunikatach HTTP/2.
   * Można uzyskać dostęp tylko do bajtów z strumienia żądań i odpowiedzi.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:grpc/index>
 * <xref:grpc/basics>

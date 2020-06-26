@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: tutorials/first-blazor-app
-ms.openlocfilehash: 892663a533a207df84b0fce9af259a7dc212bc9b
-ms.sourcegitcommit: 5e462c3328c70f95969d02adce9c71592049f54c
+ms.openlocfilehash: f791dae5915c87d4c36f23419961e3c53e888743
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/24/2020
-ms.locfileid: "85292779"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85409075"
 ---
 # <a name="build-your-first-blazor-app"></a>Tworzenie pierwszej Blazor aplikacji
 
@@ -71,7 +73,7 @@ Uwzględnij składnik w innym składniku przy użyciu składni języka HTML.
 
 1. Dodaj `Counter` składnik do `Index` składnika aplikacji, dodając `<Counter />` element do `Index` składnika ( `Index.razor` ).
 
-   Jeśli używasz Blazor zestawu webassembly do obsługi tego środowiska, składnik `SurveyPrompt` jest używany przez `Index` komponent. Zastąp `<SurveyPrompt>` element elementem `<Counter />` . Jeśli używasz Blazor aplikacji serwera do tego środowiska, Dodaj `<Counter />` element do `Index` składnika:
+   W przypadku korzystania z Blazor WebAssembly tego środowiska składnik `SurveyPrompt` jest używany przez `Index` składnik. Zastąp `<SurveyPrompt>` element elementem `<Counter />` . Jeśli używasz Blazor Server aplikacji do tego środowiska, Dodaj `<Counter />` element do `Index` składnika:
 
    `Pages/Index.razor`:
 
@@ -111,9 +113,9 @@ Składniki mogą także mieć parametry. Parametry składnika są definiowane pr
 
 ## <a name="dependency-injection"></a>Wstrzykiwanie zależności
 
-### <a name="blazor-server-experience"></a>BlazorŚrodowisko serwera
+### <a name="blazor-server-experience"></a>Blazor Serversystemu
 
-W przypadku pracy z Blazor aplikacją serwera `WeatherForecastService` Usługa jest rejestrowana jako [Pojedyncza](xref:fundamentals/dependency-injection#service-lifetimes) `Startup.ConfigureServices` . Wystąpienie usługi jest dostępne w całej aplikacji za pośrednictwem [iniekcji zależności (di)](xref:fundamentals/dependency-injection):
+W przypadku korzystania z Blazor Server aplikacji `WeatherForecastService` Usługa jest rejestrowana jako [Pojedyncza](xref:fundamentals/dependency-injection#service-lifetimes) `Startup.ConfigureServices` . Wystąpienie usługi jest dostępne w całej aplikacji za pośrednictwem [iniekcji zależności (di)](xref:fundamentals/dependency-injection):
 
 [!code-csharp[](build-your-first-blazor-app/samples_snapshot/3.x/Startup.cs?highlight=5)]
 
@@ -127,9 +129,9 @@ W przypadku pracy z Blazor aplikacją serwera `WeatherForecastService` Usługa j
 
 [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/FetchData2.razor?highlight=6)]
 
-### <a name="blazor-webassembly-experience"></a>BlazorŚrodowisko zestawu webassembly
+### <a name="blazor-webassembly-experience"></a>Blazor WebAssemblysystemu
 
-W przypadku pracy z Blazor aplikacją webassembly <xref:System.Net.Http.HttpClient> jest wstrzykiwana w celu uzyskania danych prognozy pogody z `weather.json` pliku w `wwwroot/sample-data` folderze.
+Jeśli pracujesz z Blazor WebAssembly aplikacją, <xref:System.Net.Http.HttpClient> jest wstrzykiwana w celu uzyskania danych prognozy pogody z `weather.json` pliku w `wwwroot/sample-data` folderze.
 
 `Pages/FetchData.razor`:
 

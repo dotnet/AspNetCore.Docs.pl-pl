@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: migration/1x-to-2x/index
-ms.openlocfilehash: 1b7b89b130f66c851bf01d0eb6d643e4b3676a1e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 97fe2f36aed4a2ac60a7ffc30ede5e682a838e5e
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774226"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408698"
 ---
 # <a name="migrate-from-aspnet-core-1x-to-20"></a>Migrowanie z ASP.NET Core 1. x do 2,0
 
@@ -37,24 +39,24 @@ Zobacz [wprowadzenie do ASP.NET Core](xref:getting-started).
 
 ## <a name="update-target-framework-moniker-tfm"></a>Aktualizuj moniker platformy docelowej (TFM)
 
-Projekty ukierunkowane na platformę .NET Core powinny korzystać z [TFM](/dotnet/standard/frameworks) wersji nowszej niż lub równej platformie .net Core 2,0. Wyszukaj `<TargetFramework>` węzeł w pliku *. csproj* i Zastąp tekst wewnętrzny tekstem `netcoreapp2.0`:
+Projekty ukierunkowane na platformę .NET Core powinny korzystać z [TFM](/dotnet/standard/frameworks) wersji nowszej niż lub równej platformie .net Core 2,0. Wyszukaj `<TargetFramework>` węzeł w pliku *. csproj* i Zastąp tekst wewnętrzny tekstem `netcoreapp2.0` :
 
 [!code-xml[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App.csproj?range=3)]
 
-Projekty ukierunkowane na .NET Framework powinny używać TFM wersji większej lub równej .NET Framework 4.6.1. Wyszukaj `<TargetFramework>` węzeł w pliku *. csproj* i Zastąp tekst wewnętrzny tekstem `net461`:
+Projekty ukierunkowane na .NET Framework powinny używać TFM wersji większej lub równej .NET Framework 4.6.1. Wyszukaj `<TargetFramework>` węzeł w pliku *. csproj* i Zastąp tekst wewnętrzny tekstem `net461` :
 
 [!code-xml[](../1x-to-2x/samples/AspNetCoreDotNetFx2.0App/AspNetCoreDotNetFx2.0App/AspNetCoreDotNetFx2.0App.csproj?range=4)]
 
 > [!NOTE]
 > Program .NET Core 2,0 oferuje znacznie większy obszar powierzchni niż .NET Core 1. x. Jeśli chcesz, aby .NET Framework tylko z powodu brakujących interfejsów API w programie .NET Core 1. x, dla których będzie możliwe działanie programu .NET Core 2,0.
 
-Jeśli plik projektu zawiera `<RuntimeFrameworkVersion>1.{sub-version}</RuntimeFrameworkVersion>`, zobacz [ten problem](https://github.com/dotnet/AspNetCore/issues/3221#issuecomment-413094268)w usłudze GitHub.
+Jeśli plik projektu zawiera `<RuntimeFrameworkVersion>1.{sub-version}</RuntimeFrameworkVersion>` , zobacz [ten problem](https://github.com/dotnet/AspNetCore/issues/3221#issuecomment-413094268)w usłudze GitHub.
 
 <a name="global-json"></a>
 
-## <a name="update-net-core-sdk-version-in-globaljson"></a>Aktualizacja wersji zestaw .NET Core SDK w pliku Global. JSON
+## <a name="update-net-core-sdk-version-in-globaljson"></a>Aktualizacja zestaw .NET Core SDK wersji w global.jsna
 
-Jeśli Twoje rozwiązanie polega na pliku [Global. JSON](/dotnet/core/tools/global-json) , który będzie przeznaczony dla konkretnej wersji zestaw .NET Core SDK, zaktualizuj `version` swoją właściwość, aby użyć wersji 2,0 zainstalowanej na maszynie:
+Jeśli rozwiązanie jest oparte na [global.jsw](/dotnet/core/tools/global-json) pliku przeznaczonym dla konkretnej wersji zestaw .NET Core SDK, zaktualizuj swoją `version` Właściwość, aby użyć wersji 2,0 zainstalowanej na maszynie:
 
 [!code-json[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/global.json?highlight=3)]
 
@@ -94,7 +96,7 @@ Plik *. csproj* projektu 1. x użył `PackageTargetFallback` węzła i zmiennej:
 
 [!code-xml[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App.csproj?range=5)]
 
-Zmień nazwę węzła i zmiennej na `AssetTargetFallback`:
+Zmień nazwę węzła i zmiennej na `AssetTargetFallback` :
 
 [!code-xml[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App.csproj?range=4)]
 
@@ -102,11 +104,11 @@ Zmień nazwę węzła i zmiennej na `AssetTargetFallback`:
 
 ## <a name="update-main-method-in-programcs"></a>Aktualizowanie metody Main w Program.cs
 
-W projektach 1. x `Main` Metoda *program.cs* wyglądać następująco:
+W projektach 1. x `Main` metoda *program.cs* wyglądać następująco:
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Program.cs?name=snippet_ProgramCs&highlight=8-19)]
 
-W przypadku projektów 2,0 `Main` Metoda *program.cs* została uproszczona:
+W przypadku projektów 2,0 `Main` metoda *program.cs* została uproszczona:
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App/Program.cs?highlight=8-11)]
 
@@ -120,21 +122,21 @@ Unable to create an object of type '<Context>'. Add an implementation of 'IDesig
 
 ## <a name="add-configuration-providers"></a>Dodawanie dostawców konfiguracji
 
-W projektach 1. x Dodawanie dostawców konfiguracji do aplikacji zostało zrealizowane za pośrednictwem `Startup` konstruktora. Kroki związane z tworzeniem wystąpienia `ConfigurationBuilder`, ładowanie odpowiednich dostawców (zmienne środowiskowe, ustawienia aplikacji itp.) i inicjowanie elementu członkowskiego. `IConfigurationRoot`
+W projektach 1. x Dodawanie dostawców konfiguracji do aplikacji zostało zrealizowane za pośrednictwem `Startup` konstruktora. Kroki związane z tworzeniem wystąpienia `ConfigurationBuilder` , ładowanie odpowiednich dostawców (zmienne środowiskowe, ustawienia aplikacji itp.) i inicjowanie elementu członkowskiego `IConfigurationRoot` .
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Startup.cs?name=snippet_1xStartup)]
 
-W powyższym przykładzie `Configuration` załaduje element członkowski z ustawieniami konfiguracji z pliku *appSettings. JSON* , a także dowolnego pliku *\< appSettings. Plik\>EnvironmentName. JSON* pasuje do `IHostingEnvironment.EnvironmentName` właściwości. Lokalizacja tych plików jest taka sama jak ścieżka *Startup.cs*.
+W powyższym przykładzie załaduje `Configuration` element członkowski z ustawieniami konfiguracji z *appsettings.jsna* , a także z dowolnym *appSettings. \<EnvironmentName\> plik JSON* pasuje do `IHostingEnvironment.EnvironmentName` właściwości. Lokalizacja tych plików jest taka sama jak ścieżka *Startup.cs*.
 
 W projektach 2,0, kod konfiguracji standardowa nieodłącz się od projektów 1. x działa w tle. Na przykład zmienne środowiskowe i ustawienia aplikacji są ładowane podczas uruchamiania. Równoważny kod *Startup.cs* został zredukowany do `IConfiguration` inicjacji z wstrzykiwanym wystąpieniem:
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetFx2.0App/AspNetCoreDotNetFx2.0App/Startup.cs?name=snippet_2xStartup)]
 
-Aby usunąć domyślnych dostawców dodanych przez `WebHostBuilder.CreateDefaultBuilder`, wywołaj `Clear` metodę we `IConfigurationBuilder.Sources` właściwości w `ConfigureAppConfiguration`. Aby dodać dostawców z powrotem, użyj `ConfigureAppConfiguration` metody w *program.cs*:
+Aby usunąć domyślnych dostawców dodanych przez `WebHostBuilder.CreateDefaultBuilder` , wywołaj `Clear` metodę we `IConfigurationBuilder.Sources` właściwości w `ConfigureAppConfiguration` . Aby dodać dostawców z powrotem, użyj `ConfigureAppConfiguration` metody w *program.cs*:
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetFx2.0App/AspNetCoreDotNetFx2.0App/Program.cs?name=snippet_ProgramMainConfigProviders&highlight=9-14)]
 
-W [tym miejscu](https://github.com/aspnet/MetaPackages/blob/rel/2.0.0/src/Microsoft.AspNetCore/WebHost.cs#L152)można zobaczyć `CreateDefaultBuilder` konfigurację używaną przez metodę w poprzednim fragmencie kodu.
+`CreateDefaultBuilder`W [tym miejscu](https://github.com/aspnet/MetaPackages/blob/rel/2.0.0/src/Microsoft.AspNetCore/WebHost.cs#L152)można zobaczyć konfigurację używaną przez metodę w poprzednim fragmencie kodu.
 
 Aby uzyskać więcej informacji, zobacz [Konfiguracja w ASP.NET Core](xref:fundamentals/configuration/index).
 
@@ -145,12 +147,12 @@ Aby uzyskać więcej informacji, zobacz [Konfiguracja w ASP.NET Core](xref:funda
 W projektach 1. x używających EF Core 1. x, polecenie takie jak `dotnet ef migrations add` wykonuje następujące czynności:
 
 1. Tworzy `Startup` wystąpienie wystąpienia
-1. Wywołuje metodę `ConfigureServices` , aby zarejestrować wszystkie usługi przy użyciu iniekcji zależności `DbContext` (w tym typów)
+1. Wywołuje `ConfigureServices` metodę, aby zarejestrować wszystkie usługi przy użyciu iniekcji zależności (w tym `DbContext` typów)
 1. Wykonuje wymagane zadania
 
-W przypadku `Program.BuildWebHost` projektów 2,0 przy użyciu EF Core 2,0 jest wywoływana w celu uzyskania usług aplikacji. W przeciwieństwie do 1. x, ma to dodatkowy efekt uboczny wywoływania `Startup.Configure`. Jeśli aplikacja 1. x wywołała kod inicjalizacji bazy `Configure` danych w swojej metodzie, mogą wystąpić nieoczekiwane problemy. Na przykład jeśli baza danych jeszcze nie istnieje, kod inicjujący jest uruchamiany przed wykonaniem polecenia EF Core migracji. Ten problem powoduje, `dotnet ef migrations list` że polecenie kończy się niepowodzeniem, jeśli baza danych jeszcze nie istnieje.
+W przypadku projektów 2,0 przy użyciu EF Core 2,0 `Program.BuildWebHost` jest wywoływana w celu uzyskania usług aplikacji. W przeciwieństwie do 1. x, ma to dodatkowy efekt uboczny wywoływania `Startup.Configure` . Jeśli aplikacja 1. x wywołała kod inicjalizacji bazy danych w swojej `Configure` metodzie, mogą wystąpić nieoczekiwane problemy. Na przykład jeśli baza danych jeszcze nie istnieje, kod inicjujący jest uruchamiany przed wykonaniem polecenia EF Core migracji. Ten problem powoduje, że `dotnet ef migrations list` polecenie kończy się niepowodzeniem, jeśli baza danych jeszcze nie istnieje.
 
-Rozważmy następujący kod inicjujący inicjatora 1. x `Configure` w metodzie *Startup.cs*:
+Rozważmy następujący kod inicjujący inicjatora 1. x w `Configure` metodzie *Startup.cs*:
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Startup.cs?name=snippet_ConfigureSeedData&highlight=8)]
 
@@ -158,17 +160,17 @@ W projektach 2,0 Przenieś `SeedData.Initialize` wywołanie do `Main` metody *pr
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App/Program2.cs?name=snippet_Main2Code&highlight=10)]
 
-Począwszy od 2,0, jest to niewłaściwe rozwiązanie w `BuildWebHost` przypadku kompilacji i konfigurowania hosta sieci Web. Wszystkie informacje o działaniu aplikacji powinny `BuildWebHost` &mdash; być obsługiwane poza zwykle w `Main` metodzie *program.cs*.
+Począwszy od 2,0, jest to niewłaściwe rozwiązanie w przypadku `BuildWebHost` kompilacji i konfigurowania hosta sieci Web. Wszystkie informacje o działaniu aplikacji powinny być obsługiwane poza `BuildWebHost` &mdash; zwykle w `Main` metodzie *program.cs*.
 
 <a name="view-compilation"></a>
 
-## <a name="review-razor-view-compilation-setting"></a>Przegląd Razor ustawienia kompilacji widoku
+## <a name="review-razor-view-compilation-setting"></a>Przegląd Razor Ustawienia kompilacji widoku
 
 Skrócenie czasu uruchamiania aplikacji i mniejszych opublikowanych pakietów mają na celu najwyższą ważność. Z tego względu [ Razor kompilacja widoku](xref:mvc/views/view-compilation) jest domyślnie włączona w ASP.NET Core 2,0.
 
 Ustawienie `MvcRazorCompileOnPublish` właściwości na wartość true nie jest już wymagane. Jeśli nie wyłączysz kompilacji widoku, właściwość może zostać usunięta z pliku *. csproj* .
 
-Podczas określania wartości docelowej .NET Framework nadal trzeba jawnie odwoływać się do [Microsoft. AspNetCore. MVCRazor.. ViewCompilation](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.ViewCompilation) pakiet NuGet w pliku *csproj* :
+Podczas określania wartości docelowej .NET Framework nadal trzeba jawnie odwoływać się do [Microsoft. AspNetCore. MVC. Razor . ViewCompilation](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.ViewCompilation) pakiet NuGet w pliku *csproj* :
 
 [!code-xml[](../1x-to-2x/samples/AspNetCoreDotNetFx2.0App/AspNetCoreDotNetFx2.0App/AspNetCoreDotNetFx2.0App.csproj?range=15)]
 
@@ -184,7 +186,7 @@ Projekty ASP.NET Core 1,1 utworzone w programie Visual Studio 2017 zostały doda
 
     [!code-xml[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App.csproj?range=10)]
 
-2. Jeśli celem jest `UseApplicationInsights` .NET Core, Usuń wywołanie metody rozszerzenia z *program.cs*:
+2. Jeśli celem jest .NET Core, Usuń `UseApplicationInsights` wywołanie metody rozszerzenia z *program.cs*:
 
     [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Program.cs?name=snippet_ProgramCsMain&highlight=8)]
 
@@ -196,9 +198,9 @@ Jeśli używasz bezpośrednio zestawu SDK Application Insights, Kontynuuj. [Paki
 
 <a name="auth-and-identity"></a>
 
-## <a name="adopt-authenticationidentity-improvements"></a>Przyjmowanie uwierzytelnianiaIdentity /ulepszeń
+## <a name="adopt-authenticationidentity-improvements"></a>Przyjmowanie uwierzytelniania/ Identity ulepszeń
 
-ASP.NET Core 2,0 ma nowy model uwierzytelniania i wiele znaczących zmian ASP.NET Core Identity. Jeśli projekt został utworzony z włączonymi indywidualnymi kontami użytkowników lub jeśli masz ręcznie dodane uwierzytelnianie lub Identity, zobacz [Migrowanie uwierzytelniania Identity i do ASP.NET Core 2,0](xref:migration/1x-to-2x/identity-2x).
+ASP.NET Core 2,0 ma nowy model uwierzytelniania i wiele znaczących zmian ASP.NET Core Identity . Jeśli projekt został utworzony z włączonymi indywidualnymi kontami użytkowników lub jeśli masz ręcznie dodane uwierzytelnianie lub Identity , zobacz [Migrowanie uwierzytelniania i Identity do ASP.NET Core 2,0](xref:migration/1x-to-2x/identity-2x).
 
 ## <a name="additional-resources"></a>Zasoby dodatkowe
 

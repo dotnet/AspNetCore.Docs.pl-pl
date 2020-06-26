@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 12/02/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/script-tag-helper
-ms.openlocfilehash: 4162221ef3401427c44fb54dee9c36b78b39564f
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: b9b90c1c40fccbc7bb6b6c9050bd525b5fa8cd92
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774668"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407411"
 ---
 # <a name="script-tag-helper-in-aspnet-core"></a>Pomocnik tagu skryptu w ASP.NET Core
 
@@ -40,7 +42,7 @@ Poniższy Razor znacznik pokazuje `script` element z rezerwą:
 </script>
 ```
 
-Nie używaj atrybutu `<script>` [Ustąp](https://developer.mozilla.org/docs/Web/HTML/Element/script) elementu, aby odroczyć ładowanie skryptu CDN. Pomocnik tagów skryptu renderuje kod JavaScript, który natychmiast wykonuje wyrażenie [ASP-Fallback-test](#asp-fallback-test) . Wyrażenie nie powiedzie się, jeśli ładowanie skryptu sieci CDN zostało odroczone.
+Nie używaj `<script>` atrybutu [Ustąp](https://developer.mozilla.org/docs/Web/HTML/Element/script) elementu, aby odroczyć ładowanie skryptu CDN. Pomocnik tagów skryptu renderuje kod JavaScript, który natychmiast wykonuje wyrażenie [ASP-Fallback-test](#asp-fallback-test) . Wyrażenie nie powiedzie się, jeśli ładowanie skryptu sieci CDN zostało odroczone.
 
 ## <a name="commonly-used-script-tag-helper-attributes"></a>Atrybuty pomocnika często używanych tagów skryptu
 

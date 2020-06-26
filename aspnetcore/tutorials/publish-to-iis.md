@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 10/03/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: tutorials/publish-to-iis
-ms.openlocfilehash: aa79ce604539b4f09d6f17d4f43da28a6b615f53
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 837a66ef36f1394df87d56132e146ef23a5d5659
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774577"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407892"
 ---
 # <a name="publish-an-aspnet-core-app-to-iis"></a>Publikowanie aplikacji ASP.NET Core w usługach IIS
 
@@ -65,9 +67,9 @@ Pobierz instalatora przy użyciu następującego linku:
 
 1. Podaj **nazwę lokacji** i ustaw **ścieżkę fizyczną** do utworzonego folderu wdrożenia aplikacji. Podaj konfigurację **powiązania** i Utwórz witrynę sieci Web, wybierając **przycisk OK**.
 
-## <a name="create-an-aspnet-core-razor-pages-app"></a>Tworzenie aplikacji Razor Pages ASP.NET Core
+## <a name="create-an-aspnet-core-razor-pages-app"></a>Tworzenie aplikacji ASP.NET Core Razor Pages
 
-Postępuj zgodnie z <xref:getting-started> samouczkiem, aby utworzyć aplikację Razor Pages.
+Postępuj zgodnie z <xref:getting-started> samouczkiem, aby utworzyć Razor aplikację Pages.
 
 ## <a name="publish-and-deploy-the-app"></a>Publikowanie i wdrażanie aplikacji
 
@@ -76,7 +78,7 @@ Postępuj zgodnie z <xref:getting-started> samouczkiem, aby utworzyć aplikację
 * Aplikacja zostanie opublikowana w folderze.
 * Zawartość folderu zostanie przeniesiona do folderu witryny usług IIS ( **Ścieżka fizyczna** do lokacji w Menedżerze usług IIS).
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 1. Kliknij prawym przyciskiem myszy projekt w **Eksplorator rozwiązań** i wybierz polecenie **Publikuj**.
 1. W oknie dialogowym **Wybieranie elementu docelowego publikowania** wybierz opcję Publikuj **folder** .

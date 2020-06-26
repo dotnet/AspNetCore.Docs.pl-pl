@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 05/17/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: signalr/groups
-ms.openlocfilehash: dfa989654069bc85f0a936751dbabe384c63e917
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: af76402d02ee4273deadac246f275c1ae7ad84ac
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "83550001"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408516"
 ---
 # <a name="manage-users-and-groups-in-signalr"></a>Zarządzanie użytkownikami i grupami w programieSignalR
 
@@ -56,6 +58,6 @@ Aby chronić dostęp do zasobów przy użyciu grup, użyj funkcji [uwierzytelnia
 
 ## <a name="related-resources"></a>Powiązane zasoby
 
-* [Rozpoczęcie pracy](xref:tutorials/signalr)
+* [Wprowadzenie](xref:tutorials/signalr)
 * [Centra](xref:signalr/hubs)
 * [Publikowanie na platformie Azure](xref:signalr/publish-to-azure-web-app)

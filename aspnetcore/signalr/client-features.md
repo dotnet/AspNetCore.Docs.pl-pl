@@ -7,33 +7,35 @@ ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: signalr/client-features
-ms.openlocfilehash: a759e473ff7ffaebd0eb9309f37a959d0e06a466
-ms.sourcegitcommit: e20653091c30e0768c4f960343e2c3dd658bba13
+ms.openlocfilehash: 10752e8cace82dc08721af7d38c0250182e9bfb0
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/16/2020
-ms.locfileid: "83438967"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408490"
 ---
-# <a name="aspnet-core-signalr-clients"></a>Klienci ASP.NET Core sygnalizujący
+# <a name="aspnet-core-signalr-clients"></a>ASP.NET Core SignalR klienci
 
 ## <a name="versioning-support-and-compatibility"></a>Przechowywanie wersji, obsługa i zgodność
 
-Klienci sygnalizujący są dostarczani wraz ze składnikami serwera i są zgodni z wersjami. Każdy obsługiwany klient może bezpiecznie połączyć się z dowolnym obsługiwanym serwerem, a wszelkie problemy ze zgodnością będą traktowane jako usterki. Klienci programu sygnalizujący są obsługiwani w tym samym cyklu pomocy technicznej co w przypadku pozostałej części platformy .NET Core. Aby uzyskać szczegółowe informacje [, zobacz zasady obsługi .NET Core](https://dotnet.microsoft.com/platform/support/policy/dotnet-core) .
+SignalRKlienci znajdują się obok składników serwera i są zgodni z wersjami. Każdy obsługiwany klient może bezpiecznie połączyć się z dowolnym obsługiwanym serwerem, a wszelkie problemy ze zgodnością będą traktowane jako usterki. SignalRKlienci są obsługiwani w tym samym cyklu pomocy technicznej co w przypadku platformy .NET Core. Aby uzyskać szczegółowe informacje [, zobacz zasady obsługi .NET Core](https://dotnet.microsoft.com/platform/support/policy/dotnet-core) .
 
 Wiele funkcji wymaga zgodnego klienta **i** serwera. Poniżej znajduje się tabela przedstawiająca minimalne wersje różnych funkcji.
 
-Wersje 1. x programu sygnalizujące są zmapowane do wersji .NET Core 2,1 i 2,2 i mają ten sam okres istnienia. W przypadku wersji 3. x i nowszych wersja sygnalizująca dokładnie pasuje do pozostałej części platformy .NET i ma ten sam cykl wsparcia technicznego.
+Wersje 1. x są SignalR mapowane do wersji .NET Core 2,1 i 2,2 i mają ten sam okres istnienia. W wersji 3. x i nowszych SignalR wersja dokładnie pasuje do pozostałej części platformy .NET i ma ten sam cykl pomocy technicznej.
 
-| Wersja sygnalizującego | Wersja platformy .NET Core | Poziom pomocy technicznej | Koniec wsparcia |
+| Wersja programu SignalR | Wersja platformy .NET Core | Poziom pomocy technicznej | Koniec wsparcia |
 | - | - | - | - |
 | 1.0. x | 2.1. x | Długoterminowa pomoc techniczna | 21 sierpnia 2021 |
 | 1.1. x | 2.2. x | Koniec okresu istnienia | 23 grudnia, 2019 |
-| 3. x lub nowszy | *taka sama jak wersja sygnalizująca* | Zobacz [zasady pomocy technicznej platformy .NET Core](https://dotnet.microsoft.com/platform/support/policy/dotnet-core) |
+| 3. x lub nowszy | *taka sama jak SignalR wersja* | Zobacz [zasady pomocy technicznej platformy .NET Core](https://dotnet.microsoft.com/platform/support/policy/dotnet-core) |
 
 **Uwaga:** W ASP.NET Core 3,0 klient JavaScript został *przeniesiony* do `@microsoft/signalr` pakietu npm.
 
@@ -41,7 +43,7 @@ Wersje 1. x programu sygnalizujące są zmapowane do wersji .NET Core 2,1 i 2,2 
 
 W poniższej tabeli przedstawiono funkcje i obsługę klientów, którzy oferują pomoc techniczną w czasie rzeczywistym. Dla każdej funkcji jest wyświetlana *minimalna* wersja obsługująca tę funkcję. Jeśli żadna wersja nie jest wymieniona, ta funkcja nie jest obsługiwana.
 
-| Cechy | Serwer | Klient .NET | Klient JavaScript | Klient Java |
+| Cecha | Serwer | Klient .NET | Klient JavaScript | Klient Java |
 | ---- | :-: | :-: | :-: | :-: |
 | SignalRObsługa usługi platformy Azure |2.1.0|1.0.0|1.0.0|1.0.0|
 | [Przesyłanie strumieniowe między serwerami i klientami](xref:signalr/streaming)          |2.1.0|1.0.0|1.0.0|1.0.0|

@@ -8,30 +8,32 @@ ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: signalr/redis-backplane
-ms.openlocfilehash: 6068890f4089a13add05bf8cf8009367e343adce
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 58c1ff2c9334e75535f6e5f0f418976176822724
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775352"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408477"
 ---
 # <a name="set-up-a-redis-backplane-for-aspnet-core-signalr-scale-out"></a>Konfigurowanie planu Redis dla ASP.NET Core SignalR skalowanie w poziomie
 
 Autorzy [Andrew Stanton-pielęgniarki](https://twitter.com/anurse), [Brady Gastera](https://twitter.com/bradygaster)i [Tomasz Dykstra](https://github.com/tdykstra),
 
-W tym artykule SignalRopisano zagadnienia dotyczące konfigurowania serwera [Redis](https://redis.io/) do użycia w celu skalowania aplikacji ASP.NET Core SignalR .
+W tym artykule opisano SignalR zagadnienia dotyczące konfigurowania serwera [Redis](https://redis.io/) do użycia w celu skalowania SignalR aplikacji ASP.NET Core.
 
 ## <a name="set-up-a-redis-backplane"></a>Konfigurowanie planu Redis
 
 * Wdróż serwer Redis.
 
   > [!IMPORTANT] 
-  > W przypadku użycia w środowisku produkcyjnym Redis planuje się tylko wtedy, gdy działa on w tym samym centrum danych SignalR co aplikacja. W przeciwnym razie opóźnienie sieci obniży wydajność. Jeśli SignalR aplikacja jest uruchomiona w chmurze platformy Azure, zalecamy użycie usługi platformy SignalR Azure zamiast planu Redis. Usługi Azure Redis Cache można używać w środowiskach deweloperskich i testowych.
+  > W przypadku użycia w środowisku produkcyjnym Redis planuje się tylko wtedy, gdy działa on w tym samym centrum danych co SignalR aplikacja. W przeciwnym razie opóźnienie sieci obniży wydajność. Jeśli SignalR aplikacja jest uruchomiona w chmurze platformy Azure, zalecamy użycie usługi platformy Azure SignalR zamiast planu Redis. Usługi Azure Redis Cache można używać w środowiskach deweloperskich i testowych.
 
   Więcej informacji zawierają następujące zasoby:
 
@@ -41,8 +43,8 @@ W tym artykule SignalRopisano zagadnienia dotyczące konfigurowania serwera [Red
 
 ::: moniker range="= aspnetcore-2.1"
 
-* W SignalR aplikacji zainstaluj pakiet `Microsoft.AspNetCore.SignalR.Redis` NuGet.
-* W `Startup.ConfigureServices` metodzie Wywołaj `AddRedis` po `AddSignalR`:
+* W SignalR aplikacji zainstaluj `Microsoft.AspNetCore.SignalR.Redis` pakiet NuGet.
+* W `Startup.ConfigureServices` metodzie Wywołaj `AddRedis` po `AddSignalR` :
 
   ```csharp
   services.AddSignalR().AddRedis("<your_Redis_connection_string>");
@@ -61,7 +63,7 @@ W tym artykule SignalRopisano zagadnienia dotyczące konfigurowania serwera [Red
     });
   ```
 
-  W powyższym kodzie `options.Configuration` , jest inicjowany za pomocą dowolnego elementu, który został określony w parametrach połączenia.
+  W powyższym kodzie, `options.Configuration` jest inicjowany za pomocą dowolnego elementu, który został określony w parametrach połączenia.
 
 ::: moniker-end
 
@@ -72,13 +74,13 @@ W tym artykule SignalRopisano zagadnienia dotyczące konfigurowania serwera [Red
   * `Microsoft.AspNetCore.SignalR.StackExchangeRedis`— Zależy od StackExchange. Redis 2. X.X. Jest to zalecany pakiet dla ASP.NET Core 2,2 i nowszych.
   * `Microsoft.AspNetCore.SignalR.Redis`— Zależy od StackExchange. Redis 1. X.X. Ten pakiet nie jest uwzględniony w ASP.NET Core 3,0 i nowszych.
 
-* W `Startup.ConfigureServices` metodzie Wywołaj <xref:Microsoft.Extensions.DependencyInjection.StackExchangeRedisDependencyInjectionExtensions.AddStackExchangeRedis*>:
+* W `Startup.ConfigureServices` metodzie Wywołaj <xref:Microsoft.Extensions.DependencyInjection.StackExchangeRedisDependencyInjectionExtensions.AddStackExchangeRedis*> :
 
   ```csharp
   services.AddSignalR().AddStackExchangeRedis("<your_Redis_connection_string>");
   ```
 
- Podczas używania `Microsoft.AspNetCore.SignalR.Redis`, wywołaj <xref:Microsoft.Extensions.DependencyInjection.RedisDependencyInjectionExtensions.AddRedis*>.
+ Podczas używania `Microsoft.AspNetCore.SignalR.Redis` , wywołaj <xref:Microsoft.Extensions.DependencyInjection.RedisDependencyInjectionExtensions.AddRedis*> .
 
 * Skonfiguruj opcje zgodnie z wymaganiami:
  
@@ -93,9 +95,9 @@ W tym artykule SignalRopisano zagadnienia dotyczące konfigurowania serwera [Red
     });
   ```
 
- Podczas używania `Microsoft.AspNetCore.SignalR.Redis`, wywołaj <xref:Microsoft.Extensions.DependencyInjection.RedisDependencyInjectionExtensions.AddRedis*>.
+ Podczas używania `Microsoft.AspNetCore.SignalR.Redis` , wywołaj <xref:Microsoft.Extensions.DependencyInjection.RedisDependencyInjectionExtensions.AddRedis*> .
 
-  W powyższym kodzie `options.Configuration` , jest inicjowany za pomocą dowolnego elementu, który został określony w parametrach połączenia.
+  W powyższym kodzie, `options.Configuration` jest inicjowany za pomocą dowolnego elementu, który został określony w parametrach połączenia.
 
   Informacje o opcjach Redis można znaleźć w [dokumentacji stackexchange Redis](https://stackexchange.github.io/StackExchange.Redis/Configuration.html).
 
@@ -107,7 +109,7 @@ W tym artykule SignalRopisano zagadnienia dotyczące konfigurowania serwera [Red
 
   * `Microsoft.AspNetCore.SignalR.StackExchangeRedis`
   
-* W `Startup.ConfigureServices` metodzie Wywołaj <xref:Microsoft.Extensions.DependencyInjection.StackExchangeRedisDependencyInjectionExtensions.AddStackExchangeRedis*>:
+* W `Startup.ConfigureServices` metodzie Wywołaj <xref:Microsoft.Extensions.DependencyInjection.StackExchangeRedisDependencyInjectionExtensions.AddStackExchangeRedis*> :
 
   ```csharp
   services.AddSignalR().AddStackExchangeRedis("<your_Redis_connection_string>");
@@ -126,7 +128,7 @@ W tym artykule SignalRopisano zagadnienia dotyczące konfigurowania serwera [Red
     });
   ```
 
-  W powyższym kodzie `options.Configuration` , jest inicjowany za pomocą dowolnego elementu, który został określony w parametrach połączenia.
+  W powyższym kodzie, `options.Configuration` jest inicjowany za pomocą dowolnego elementu, który został określony w parametrach połączenia.
 
   Informacje o opcjach Redis można znaleźć w [dokumentacji stackexchange Redis](https://stackexchange.github.io/StackExchange.Redis/Configuration.html).
 

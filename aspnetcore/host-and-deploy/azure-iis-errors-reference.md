@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: host-and-deploy/azure-iis-errors-reference
-ms.openlocfilehash: 19e8fd1ed390a160df8646a83a66d251ba6d92d8
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 1b0402ceccde0f2410ac29e9c6a251110c81eafa
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84105041"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408139"
 ---
 # <a name="common-errors-reference-for-azure-app-service-and-iis-with-aspnet-core"></a>Informacje dotyczące typowych błędów dla Azure App Service i usług IIS z ASP.NET Core
 
@@ -173,7 +175,7 @@ Rozwiązywanie problemów:
 
 * Upewnij się, że **Application Pool** > **model procesów** puli aplikacji > **Identity** ma wartość **ApplicationPoolIdentity** lub że niestandardowa tożsamość ma odpowiednie uprawnienia dostępu do folderu wdrożenia aplikacji.
 
-* Jeśli odinstalowano pakiet hostingu ASP.NET Core i zainstalowano wcześniejszą wersję pakietu hostingu, plik *ApplicationHost. config* nie zawiera sekcji dla modułu ASP.NET Core. Otwórz *plik ApplicationHost. config* w lokalizacji *% windir%/system32/inetsrv/config* i Znajdź `<configuration><configSections><sectionGroup name="system.webServer">` grupę sekcji. Jeśli w grupie sekcji brakuje sekcji modułu ASP.NET Core, Dodaj element Section:
+* Jeśli odinstalowano pakiet hostingu ASP.NET Core i zainstalowano wcześniejszą wersję pakietu hostingu, plik *applicationHost.config* nie zawiera sekcji dla modułu ASP.NET Core. Otwórz *applicationHost.config* w lokalizacji *% windir%/system32/inetsrv/config* i Znajdź `<configuration><configSections><sectionGroup name="system.webServer">` grupę sekcji. Jeśli w grupie sekcji brakuje sekcji modułu ASP.NET Core, Dodaj element Section:
 
   ```xml
   <section name="aspNetCore" overrideModeDefault="Allow" />
@@ -181,7 +183,7 @@ Rozwiązywanie problemów:
 
   Alternatywnie Zainstaluj najnowszą wersję pakietu hostingu ASP.NET Core. Najnowsza wersja jest wstecznie zgodna z obsługiwanymi ASP.NET Core aplikacjami.
 
-## <a name="incorrect-processpath-missing-path-variable-hosting-bundle-not-installed-systemiis-not-restarted-vc-redistributable-not-installed-or-dotnetexe-access-violation"></a>Nieprawidłowa processPath, brakująca zmienna PATH, pakiet hostingu nie został zainstalowany, nie uruchomiono systemu/usług IIS, pakiet redystrybucyjny programu VC + + nie został zainstalowany lub naruszenie zasad dostępu dotnet. exe
+## <a name="incorrect-processpath-missing-path-variable-hosting-bundle-not-installed-systemiis-not-restarted-vc-redistributable-not-installed-or-dotnetexe-access-violation"></a>Nieprawidłowa processPath, brakująca zmienna PATH, pakiet hostingu nie został zainstalowany, nie uruchomiono systemu/usług IIS, pakiet redystrybucyjny programu VC + + nie został zainstalowany lub dotnet.exe naruszenie dostępu
 
 * **Przeglądarka:** Błąd HTTP 500,0 — błąd ładowania procedury obsługi ANCM w procesie
 
@@ -195,11 +197,11 @@ Rozwiązywanie problemów:
 
 * Upewnij się, że aplikacja działa lokalnie na Kestrel. Niepowodzenie procesu może być wynikiem problemu w aplikacji. Aby uzyskać więcej informacji, zobacz <xref:test/troubleshoot-azure-iis>.
 
-* Sprawdź atrybut *processPath* w `<aspNetCore>` elemencie w *pliku Web. config* , aby upewnić się, że jest to `dotnet` wdrożenie zależne od platformy (FDD) lub `.\{ASSEMBLY}.exe` [wdrożenie samodzielne (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd).
+* Sprawdź atrybut *processPath* w `<aspNetCore>` elemencie w *web.config* , aby upewnić się, że jest to `dotnet` wdrożenie zależne od platformy (FDD) lub `.\{ASSEMBLY}.exe` [wdrożenie samodzielne (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd).
 
-* W przypadku elementu FDD program *dotnet. exe* może być niedostępny za pośrednictwem ustawień ścieżki. Upewnij się, że w ustawieniach ścieżki systemowej istnieje wartość *C:\Program Files\dotnet \\ * .
+* W przypadku elementu FDD *dotnet.exe* może być niedostępna za pośrednictwem ustawień ścieżki. Upewnij się, że w ustawieniach ścieżki systemowej istnieje wartość *C:\Program Files\dotnet \\ * .
 
-* W przypadku programu FDD program *dotnet. exe* może być niedostępny dla tożsamości użytkownika puli aplikacji. Upewnij się, że tożsamość użytkownika puli aplikacji ma dostęp do katalogu *C:\Program Files\dotnet* . Upewnij się, że nie ma skonfigurowanych reguł odmowy dla tożsamości użytkownika puli aplikacji w *folderze C:\Program Files\dotnet* i katalogach aplikacji.
+* W przypadku elementu FDD *dotnet.exe* może być niedostępna dla tożsamości użytkownika puli aplikacji. Upewnij się, że tożsamość użytkownika puli aplikacji ma dostęp do katalogu *C:\Program Files\dotnet* . Upewnij się, że nie ma skonfigurowanych reguł odmowy dla tożsamości użytkownika puli aplikacji w *folderze C:\Program Files\dotnet* i katalogach aplikacji.
 
 * FDD mógł zostać wdrożony, a platforma .NET Core została zainstalowana bez ponownego uruchamiania usług IIS. Uruchom ponownie serwer lub Uruchom ponownie usługi IIS, wykonując polecenie **net stop** , a następnie **net start W3SVC** z wiersza polecenia.
 
@@ -225,7 +227,7 @@ Rozwiązywanie problemów:
 
 * Upewnij się, że aplikacja działa lokalnie na Kestrel. Niepowodzenie procesu może być wynikiem problemu w aplikacji. Aby uzyskać więcej informacji, zobacz <xref:test/troubleshoot-azure-iis>.
 
-* Sprawdź atrybut *arguments* w `<aspNetCore>` elemencie w *pliku Web. config* , aby upewnić się, że jest (a) `.\{ASSEMBLY}.dll` dla wdrożenia zależnego od platformy (FDD); lub (b) nie istnieje, pusty ciąg ( `arguments=""` ) lub lista argumentów aplikacji ( `arguments="{ARGUMENT_1}, {ARGUMENT_2}, ... {ARGUMENT_X}"` ) dla wdrożenia samodzielnego (SCD).
+* Sprawdź atrybut *arguments* `<aspNetCore>` elementu w *web.config* , aby upewnić się, że jest (a) `.\{ASSEMBLY}.dll` dla wdrożenia zależnego od platformy (FDD); lub (b) nie istnieje, pusty ciąg ( `arguments=""` ) lub lista argumentów aplikacji ( `arguments="{ARGUMENT_1}, {ARGUMENT_2}, ... {ARGUMENT_X}"` ) dla wdrożenia samodzielnego (SCD).
 
 ## <a name="missing-net-core-shared-framework"></a>Brak współdzielonej platformy .NET Core
 
@@ -269,23 +271,23 @@ Upewnij się, że Pula aplikacji nie jest w stanie *zatrzymania* .
 
 Rozwiązywanie problemów:
 
-Upewnij się, że plik *Web. config* aplikacji podrzędnej nie zawiera `<handlers>` sekcji lub aplikacja podrzędna nie dziedziczy programów obsługi aplikacji nadrzędnej.
+Upewnij się, że plik *web.config* aplikacji podrzędnej nie zawiera `<handlers>` sekcji lub że aplikacja podrzędna nie dziedziczy programów obsługi aplikacji nadrzędnej.
 
-`<system.webServer>`Sekcja *pliku Web. config* aplikacji nadrzędnej jest umieszczona wewnątrz `<location>` elementu. <xref:System.Configuration.SectionInformation.InheritInChildApplications*>Właściwość jest ustawiona na `false` , aby wskazać, że ustawienia określone w [\<location>](/iis/manage/managing-your-configuration-settings/understanding-iis-configuration-delegation#the-concept-of-location) elemencie nie są dziedziczone przez aplikacje, które znajdują się w podkatalogu aplikacji nadrzędnej. Aby uzyskać więcej informacji, zobacz <xref:host-and-deploy/aspnet-core-module>.
+Sekcjaweb.configaplikacji nadrzędnej `<system.webServer>` jest *web.config* umieszczona wewnątrz `<location>` elementu. <xref:System.Configuration.SectionInformation.InheritInChildApplications*>Właściwość jest ustawiona na `false` , aby wskazać, że ustawienia określone w [\<location>](/iis/manage/managing-your-configuration-settings/understanding-iis-configuration-delegation#the-concept-of-location) elemencie nie są dziedziczone przez aplikacje, które znajdują się w podkatalogu aplikacji nadrzędnej. Aby uzyskać więcej informacji, zobacz <xref:host-and-deploy/aspnet-core-module>.
 
 ## <a name="stdout-log-path-incorrect"></a>Nieprawidłowa ścieżka dziennika stdout
 
 * **Przeglądarka:** Aplikacja reaguje zwykle.
 
-* **Dziennik aplikacji:** Nie można uruchomić przekierowania stdout w lokalizacji C:\Program Files\IIS\Asp.Net Core Module\V2\aspnetcorev2.dll. Komunikat wyjątku: HRESULT 0x80070005 zwrócony w {PATH} \aspnetcoremodulev2\commonlib\fileoutputmanager.cpp: 84. Nie można zatrzymać przekierowania strumienia stdout w folderze C:\Program Files\IIS\Asp.Net Core Module\V2\aspnetcorev2.dll. Komunikat o wyjątku: HRESULT 0x80070002 zwrócony w {PATH}. Nie można uruchomić przekierowania stdout w lokalizacji {PATH} \ aspnetcorev2_inprocess. dll.
+* **Dziennik aplikacji:** Nie można uruchomić przekierowania stdout w lokalizacji C:\Program Files\IIS\Asp.Net Core Module\V2\aspnetcorev2.dll. Komunikat wyjątku: HRESULT 0x80070005 zwrócony w {PATH} \aspnetcoremodulev2\commonlib\fileoutputmanager.cpp: 84. Nie można zatrzymać przekierowania strumienia stdout w lokalizacji C:\Program Files\IIS\Asp.Net Core Module\V2\aspnetcorev2.dll. Komunikat o wyjątku: HRESULT 0x80070002 zwrócony w {PATH}. Nie można uruchomić przekierowania stdout w ścieżce {PATH} \aspnetcorev2_inprocess.dll.
 
 * **Dziennik stdout modułu ASP.NET Core:** Plik dziennika nie został utworzony.
 
-* **Dziennik debugowania modułu ASP.NET Core:** Nie można uruchomić przekierowania stdout w lokalizacji C:\Program Files\IIS\Asp.Net Core Module\V2\aspnetcorev2.dll. Komunikat wyjątku: HRESULT 0x80070005 zwrócony w {PATH} \aspnetcoremodulev2\commonlib\fileoutputmanager.cpp: 84. Nie można zatrzymać przekierowania strumienia stdout w folderze C:\Program Files\IIS\Asp.Net Core Module\V2\aspnetcorev2.dll. Komunikat o wyjątku: HRESULT 0x80070002 zwrócony w {PATH}. Nie można uruchomić przekierowania stdout w lokalizacji {PATH} \ aspnetcorev2_inprocess. dll.
+* **Dziennik debugowania modułu ASP.NET Core:** Nie można uruchomić przekierowania stdout w lokalizacji C:\Program Files\IIS\Asp.Net Core Module\V2\aspnetcorev2.dll. Komunikat wyjątku: HRESULT 0x80070005 zwrócony w {PATH} \aspnetcoremodulev2\commonlib\fileoutputmanager.cpp: 84. Nie można zatrzymać przekierowania strumienia stdout w lokalizacji C:\Program Files\IIS\Asp.Net Core Module\V2\aspnetcorev2.dll. Komunikat o wyjątku: HRESULT 0x80070002 zwrócony w {PATH}. Nie można uruchomić przekierowania stdout w ścieżce {PATH} \aspnetcorev2_inprocess.dll.
 
 Rozwiązywanie problemów:
 
-* `stdoutLogFile`Ścieżka określona w `<aspNetCore>` elemencie *Web. config* nie istnieje. Aby uzyskać więcej informacji, zobacz [ASP.NET Core Module: Tworzenie i przekierowywanie dzienników](xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection).
+* `stdoutLogFile`Ścieżka określona w `<aspNetCore>` elemencie *web.config* nie istnieje. Aby uzyskać więcej informacji, zobacz [ASP.NET Core Module: Tworzenie i przekierowywanie dzienników](xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection).
 
 * Użytkownik puli aplikacji nie ma dostępu do zapisu w ścieżce dziennika stdout.
 
@@ -451,7 +453,7 @@ Rozwiązywanie problemów:
 
 * Upewnij się, że **Application Pool** > **model procesów** puli aplikacji > **Identity** ma wartość **ApplicationPoolIdentity** lub że niestandardowa tożsamość ma odpowiednie uprawnienia dostępu do folderu wdrożenia aplikacji.
 
-* Jeśli odinstalowano pakiet hostingu ASP.NET Core i zainstalowano wcześniejszą wersję pakietu hostingu, plik *ApplicationHost. config* nie zawiera sekcji dla modułu ASP.NET Core. Otwórz *plik ApplicationHost. config* w lokalizacji *% windir%/system32/inetsrv/config* i Znajdź `<configuration><configSections><sectionGroup name="system.webServer">` grupę sekcji. Jeśli w grupie sekcji brakuje sekcji modułu ASP.NET Core, Dodaj element Section:
+* Jeśli odinstalowano pakiet hostingu ASP.NET Core i zainstalowano wcześniejszą wersję pakietu hostingu, plik *applicationHost.config* nie zawiera sekcji dla modułu ASP.NET Core. Otwórz *applicationHost.config* w lokalizacji *% windir%/system32/inetsrv/config* i Znajdź `<configuration><configSections><sectionGroup name="system.webServer">` grupę sekcji. Jeśli w grupie sekcji brakuje sekcji modułu ASP.NET Core, Dodaj element Section:
 
   ```xml
   <section name="aspNetCore" overrideModeDefault="Allow" />
@@ -459,7 +461,7 @@ Rozwiązywanie problemów:
 
   Alternatywnie Zainstaluj najnowszą wersję pakietu hostingu ASP.NET Core. Najnowsza wersja jest wstecznie zgodna z obsługiwanymi ASP.NET Core aplikacjami.
 
-## <a name="incorrect-processpath-missing-path-variable-hosting-bundle-not-installed-systemiis-not-restarted-vc-redistributable-not-installed-or-dotnetexe-access-violation"></a>Nieprawidłowa processPath, brakująca zmienna PATH, pakiet hostingu nie został zainstalowany, nie uruchomiono systemu/usług IIS, pakiet redystrybucyjny programu VC + + nie został zainstalowany lub naruszenie zasad dostępu dotnet. exe
+## <a name="incorrect-processpath-missing-path-variable-hosting-bundle-not-installed-systemiis-not-restarted-vc-redistributable-not-installed-or-dotnetexe-access-violation"></a>Nieprawidłowa processPath, brakująca zmienna PATH, pakiet hostingu nie został zainstalowany, nie uruchomiono systemu/usług IIS, pakiet redystrybucyjny programu VC + + nie został zainstalowany lub dotnet.exe naruszenie dostępu
 
 * **Przeglądarka:** Błąd HTTP 502,5 — niepowodzenie procesu
 
@@ -471,11 +473,11 @@ Rozwiązywanie problemów:
 
 * Upewnij się, że aplikacja działa lokalnie na Kestrel. Niepowodzenie procesu może być wynikiem problemu w aplikacji. Aby uzyskać więcej informacji, zobacz <xref:test/troubleshoot-azure-iis>.
 
-* Sprawdź atrybut *processPath* w `<aspNetCore>` elemencie w *pliku Web. config* , aby upewnić się, że jest to `dotnet` wdrożenie zależne od platformy (FDD) lub `.\{ASSEMBLY}.exe` [wdrożenie samodzielne (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd).
+* Sprawdź atrybut *processPath* w `<aspNetCore>` elemencie w *web.config* , aby upewnić się, że jest to `dotnet` wdrożenie zależne od platformy (FDD) lub `.\{ASSEMBLY}.exe` [wdrożenie samodzielne (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd).
 
-* W przypadku elementu FDD program *dotnet. exe* może być niedostępny za pośrednictwem ustawień ścieżki. Upewnij się, że w ustawieniach ścieżki systemowej istnieje wartość *C:\Program Files\dotnet \\ * .
+* W przypadku elementu FDD *dotnet.exe* może być niedostępna za pośrednictwem ustawień ścieżki. Upewnij się, że w ustawieniach ścieżki systemowej istnieje wartość *C:\Program Files\dotnet \\ * .
 
-* W przypadku programu FDD program *dotnet. exe* może być niedostępny dla tożsamości użytkownika puli aplikacji. Upewnij się, że tożsamość użytkownika puli aplikacji ma dostęp do katalogu *C:\Program Files\dotnet* . Upewnij się, że nie ma skonfigurowanych reguł odmowy dla tożsamości użytkownika puli aplikacji w *folderze C:\Program Files\dotnet* i katalogach aplikacji.
+* W przypadku elementu FDD *dotnet.exe* może być niedostępna dla tożsamości użytkownika puli aplikacji. Upewnij się, że tożsamość użytkownika puli aplikacji ma dostęp do katalogu *C:\Program Files\dotnet* . Upewnij się, że nie ma skonfigurowanych reguł odmowy dla tożsamości użytkownika puli aplikacji w *folderze C:\Program Files\dotnet* i katalogach aplikacji.
 
 * FDD mógł zostać wdrożony, a platforma .NET Core została zainstalowana bez ponownego uruchamiania usług IIS. Uruchom ponownie serwer lub Uruchom ponownie usługi IIS, wykonując polecenie **net stop** , a następnie **net start W3SVC** z wiersza polecenia.
 
@@ -499,7 +501,7 @@ Rozwiązywanie problemów:
 
 * Upewnij się, że aplikacja działa lokalnie na Kestrel. Niepowodzenie procesu może być wynikiem problemu w aplikacji. Aby uzyskać więcej informacji, zobacz <xref:test/troubleshoot-azure-iis>.
 
-* Sprawdź atrybut *arguments* w `<aspNetCore>` elemencie w *pliku Web. config* , aby upewnić się, że jest (a) `.\{ASSEMBLY}.dll` dla wdrożenia zależnego od platformy (FDD); lub (b) nie istnieje, pusty ciąg ( `arguments=""` ) lub lista argumentów aplikacji ( `arguments="{ARGUMENT_1}, {ARGUMENT_2}, ... {ARGUMENT_X}"` ) dla wdrożenia samodzielnego (SCD).
+* Sprawdź atrybut *arguments* `<aspNetCore>` elementu w *web.config* , aby upewnić się, że jest (a) `.\{ASSEMBLY}.dll` dla wdrożenia zależnego od platformy (FDD); lub (b) nie istnieje, pusty ciąg ( `arguments=""` ) lub lista argumentów aplikacji ( `arguments="{ARGUMENT_1}, {ARGUMENT_2}, ... {ARGUMENT_X}"` ) dla wdrożenia samodzielnego (SCD).
 
 Rozwiązywanie problemów:
 
@@ -527,7 +529,7 @@ Upewnij się, że Pula aplikacji nie jest w stanie *zatrzymania* .
 
 Rozwiązywanie problemów:
 
-Upewnij się, że plik *Web. config* aplikacji podrzędnej nie zawiera `<handlers>` sekcji.
+Upewnij się, że plik *web.config* aplikacji podrzędnej nie zawiera `<handlers>` sekcji.
 
 ## <a name="stdout-log-path-incorrect"></a>Nieprawidłowa ścieżka dziennika stdout
 
@@ -539,7 +541,7 @@ Upewnij się, że plik *Web. config* aplikacji podrzędnej nie zawiera `<handler
 
 Rozwiązywanie problemów:
 
-* `stdoutLogFile`Ścieżka określona w `<aspNetCore>` elemencie *Web. config* nie istnieje. Aby uzyskać więcej informacji, zobacz [ASP.NET Core Module: Tworzenie i przekierowywanie dzienników](xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection).
+* `stdoutLogFile`Ścieżka określona w `<aspNetCore>` elemencie *web.config* nie istnieje. Aby uzyskać więcej informacji, zobacz [ASP.NET Core Module: Tworzenie i przekierowywanie dzienników](xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection).
 
 * Użytkownik puli aplikacji nie ma dostępu do zapisu w ścieżce dziennika stdout.
 

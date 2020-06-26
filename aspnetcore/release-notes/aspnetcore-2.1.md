@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: aspnetcore-2.1
-ms.openlocfilehash: 1f68bd5347ba1f67e56b7a2fe8914ffdaef8010c
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: bf041965b009d5c10b96ad4f2a349c6efb346eb5
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774083"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408165"
 ---
 # <a name="whats-new-in-aspnet-core-21"></a>Co nowego w ASP.NET Core 2,1
 
@@ -34,24 +36,24 @@ SignalRzostał ponownie zapisany dla ASP.NET Core 2,1. ASP.NET Core SignalR obej
 * Nowy model odpowiedzi przesyłania strumieniowego.
 * Obsługa klientów w oparciu o usługi WebSockets.
 
-Aby uzyskać więcej informacji, [zobacz SignalRASP.NET Core ](xref:signalr/introduction).
+Aby uzyskać więcej informacji, [zobacz SignalR ASP.NET Core ](xref:signalr/introduction).
 
 ## <a name="razor-class-libraries"></a>Razorbiblioteki klas
 
-ASP.NET Core 2,1 ułatwia tworzenie i dołączanie Razorinterfejsu użytkownika opartego na interfejsie w bibliotece i udostępnianie go w wielu projektach. Nowy Razor zestaw SDK umożliwia tworzenie Razor plików w projekcie biblioteki klas, który można spakować do pakietu NuGet. Widoki i strony w bibliotekach są automatycznie odnajdywane i mogą zostać zastąpione przez aplikację. Przez integrację Razor kompilacji z kompilacją:
+ASP.NET Core 2,1 ułatwia tworzenie i dołączanie Razor interfejsu użytkownika opartego na interfejsie w bibliotece i udostępnianie go w wielu projektach. Nowy Razor zestaw SDK umożliwia tworzenie Razor plików w projekcie biblioteki klas, który można spakować do pakietu NuGet. Widoki i strony w bibliotekach są automatycznie odnajdywane i mogą zostać zastąpione przez aplikację. Przez integrację kompilacji Razor z kompilacją:
 
 * Czas uruchamiania aplikacji jest znacznie szybszy.
 * Szybkie aktualizacje Razor widoków i stron w środowisku uruchomieniowym są nadal dostępne jako część iteracyjnego przepływu pracy programistycznej.
 
-Aby uzyskać więcej informacji, zobacz [Tworzenie interfejsu użytkownika wielokrotnego Razor użytku przy użyciu biblioteki klas](xref:razor-pages/ui-class).
+Aby uzyskać więcej informacji, zobacz [Tworzenie interfejsu użytkownika wielokrotnego użytku przy użyciu Razor biblioteki klas](xref:razor-pages/ui-class).
 
 ## <a name="identity-ui-library--scaffolding"></a>IdentityTworzenie szkieletu & biblioteki interfejsu użytkownika
 
-ASP.NET Core 2,1 zapewnia [ASP.NET Core Identity ](xref:security/authentication/identity) jako [ Razor bibliotekę klas](xref:razor-pages/ui-class). Aplikacje, które Identity obejmują, mogą zastosować Identity nowy szkielet, aby selektywnie dodać kod źródłowy znajdujący Identity Razor się w bibliotece klas (RCL). Może być konieczne wygenerowanie kodu źródłowego, aby można było zmodyfikować kod i zmienić zachowanie. Na przykład możesz poinstruować szkielet, aby wygenerował kod używany w rejestracji. Wygenerowany kod ma pierwszeństwo przed tym samym kodem w Identity RCL.
+ASP.NET Core 2,1 zapewnia [ASP.NET Core Identity ](xref:security/authentication/identity) jako [ Razor bibliotekę klas](xref:razor-pages/ui-class). Aplikacje, które obejmują, Identity mogą zastosować nowy Identity szkielet, aby selektywnie dodać kod źródłowy znajdujący się w Identity Razor bibliotece klas (RCL). Może być konieczne wygenerowanie kodu źródłowego, aby można było zmodyfikować kod i zmienić zachowanie. Na przykład możesz poinstruować szkielet, aby wygenerował kod używany w rejestracji. Wygenerowany kod ma pierwszeństwo przed tym samym kodem w Identity RCL.
 
-Aplikacje, które **nie** obejmują uwierzytelniania, mogą zastosować Identity szkieleter w celu dodania pakietu Identity RCL. Dostępna jest opcja wybierania Identity kodu do wygenerowania.
+Aplikacje, które **nie** obejmują uwierzytelniania, mogą zastosować Identity szkieleter w celu dodania Identity pakietu RCL. Dostępna jest opcja wybierania Identity kodu do wygenerowania.
 
-Aby uzyskać więcej informacji, [Zobacz Identity szkielet w ASP.NET Core projekty](xref:security/authentication/scaffold-identity).
+Aby uzyskać więcej informacji, zobacz [szkielet Identity w ASP.NET Core projekty](xref:security/authentication/scaffold-identity).
 
 ## <a name="https"></a>HTTPS
 
@@ -59,12 +61,12 @@ Dzięki zwiększeniu poziomu zabezpieczeń i ochrony prywatności włączenie pr
 
 ### <a name="on-by-default"></a>Domyślnie włączone
 
-Aby ułatwić tworzenie bezpiecznych witryn internetowych, protokół HTTPS jest teraz domyślnie włączony. Począwszy od 2,1, Kestrel nasłuchuje `https://localhost:5001` , gdy obecny jest lokalny certyfikat programistyczny. Tworzony jest certyfikat programistyczny:
+Aby ułatwić tworzenie bezpiecznych witryn internetowych, protokół HTTPS jest teraz domyślnie włączony. Począwszy od 2,1, Kestrel nasłuchuje, `https://localhost:5001` gdy obecny jest lokalny certyfikat programistyczny. Tworzony jest certyfikat programistyczny:
 
 * W ramach pierwszego uruchomienia zestaw .NET Core SDK, gdy zestaw SDK jest używany po raz pierwszy.
-* Ręczne korzystanie z nowego `dev-certs` narzędzia.
+* Ręczne korzystanie z nowego `dev-certs` Narzędzia.
 
-Uruchom `dotnet dev-certs https --trust` , aby zaufać certyfikatowi.
+Uruchom, `dotnet dev-certs https --trust` Aby zaufać certyfikatowi.
 
 ### <a name="https-redirection-and-enforcement"></a>Przekierowywanie i wymuszanie protokołu HTTPS
 
@@ -87,7 +89,7 @@ ASP.NET Core udostępnia interfejsy API i szablony, które pomagają spełnić n
 
 Wprowadzono nowy pakiet, który usprawnia tworzenie i wykonywanie testów. Pakiet [Microsoft. AspNetCore. MVC. test](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Testing/) obsługuje następujące zadania:
 
-* Kopiuje plik zależności (*\*. deps*) z testowanej aplikacji do folderu *bin* projektu testowego.
+* Kopiuje plik zależności (* \* . deps*) z testowanej aplikacji do folderu *bin* projektu testowego.
 * Ustawia katalog główny zawartości dla elementu głównego projektu przetestowanej aplikacji, co umożliwia znalezienie plików statycznych i stron/widoków podczas wykonywania testów.
 * Udostępnia klasę [WebApplicationFactory](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) do usprawnienia uruchamiania przetestowanej aplikacji z [TestServer](/dotnet/api/microsoft.aspnetcore.testhost.testserver).
 
@@ -122,7 +124,7 @@ Aby uzyskać więcej informacji, zobacz temat [testy integracji](xref:test/integ
 
 ## <a name="apicontroller-actionresultt"></a>[ApiController], ActionResult\<T>
 
-ASP.NET Core 2,1 dodaje nowe konwencje programowania, które ułatwiają tworzenie czystych i opisowych interfejsów API sieci Web. `ActionResult<T>`to nowy typ, który został dodany, aby umożliwić aplikacji zwracanie typu odpowiedzi lub dowolnego innego wyniku akcji (podobnego do IActionResult), przy czym wskazuje typ odpowiedzi. `[ApiController]` Atrybut został również dodany jako sposób, aby można było wyrazić zgodę na konwencje i zachowania specyficzne dla interfejsu API sieci Web.
+ASP.NET Core 2,1 dodaje nowe konwencje programowania, które ułatwiają tworzenie czystych i opisowych interfejsów API sieci Web. `ActionResult<T>`to nowy typ, który został dodany, aby umożliwić aplikacji zwracanie typu odpowiedzi lub dowolnego innego wyniku akcji (podobnego do IActionResult), przy czym wskazuje typ odpowiedzi. `[ApiController]`Atrybut został również dodany jako sposób, aby można było wyrazić zgodę na konwencje i zachowania specyficzne dla interfejsu API sieci Web.
 
 Aby uzyskać więcej informacji, zobacz [Tworzenie internetowych interfejsów API za pomocą ASP.NET Core](xref:web-api/index).
 
@@ -141,7 +143,7 @@ W wersji ASP.NET Core 2,1 Kestrel domyślny transport nie jest już oparty na Li
 
 ## <a name="generic-host-builder"></a>Ogólny Konstruktor hosta
 
-Wprowadzono ogólny Konstruktor hosta (`HostBuilder`). Tego konstruktora można używać w przypadku aplikacji, które nie przetwarzają żądań HTTP (wiadomości, zadań w tle itp.).
+Wprowadzono ogólny Konstruktor hosta ( `HostBuilder` ). Tego konstruktora można używać w przypadku aplikacji, które nie przetwarzają żądań HTTP (wiadomości, zadań w tle itp.).
 
 Aby uzyskać więcej informacji, zobacz [host ogólny programu .NET](xref:fundamentals/host/generic-host).
 
@@ -167,11 +169,11 @@ W 2,1 Razor strony szukają Razor zasobów (takich jak układy i części) w nas
 
 ## <a name="razor-pages-in-an-area"></a>RazorStrony w obszarze
 
-RazorStrony obsługują teraz [obszary](xref:mvc/controllers/areas). Aby zobaczyć przykład obszarów, Utwórz nową Razor aplikację sieci Web dla poszczególnych kont użytkowników. Aplikacja Razor internetowa stron z pojedynczymi kontami użytkowników zawiera */Areas/Identity/Pages*.
+RazorStrony obsługują teraz [obszary](xref:mvc/controllers/areas). Aby zobaczyć przykład obszarów, Utwórz nową Razor aplikację sieci Web dla poszczególnych kont użytkowników. RazorAplikacja internetowa stron z pojedynczymi kontami użytkowników zawiera */Areas/ Identity /Pages*.
 
 ## <a name="mvc-compatibility-version"></a>Wersja zgodności MVC
 
-<xref:Microsoft.Extensions.DependencyInjection.MvcCoreMvcBuilderExtensions.SetCompatibilityVersion*> Metoda pozwala aplikacji na zgodę lub rezygnację z ewentualnych zmian w zachowaniu, wprowadzonych w ASP.NET Core MVC 2,1 lub nowszych.
+<xref:Microsoft.Extensions.DependencyInjection.MvcCoreMvcBuilderExtensions.SetCompatibilityVersion*>Metoda pozwala aplikacji na zgodę lub rezygnację z ewentualnych zmian w zachowaniu, wprowadzonych w ASP.NET Core MVC 2,1 lub nowszych.
 
 Aby uzyskać więcej informacji, zobacz <xref:mvc/compatibility-version>.
 

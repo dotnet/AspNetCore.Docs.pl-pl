@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 04/15/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authorization/policies
-ms.openlocfilehash: 533bddc9c4499dad99cfdb3089045ea10aed4548
-ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
+ms.openlocfilehash: 8c68f2a15d07909d4576a2426d92f9beaa91fbb7
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85074163"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408074"
 ---
 # <a name="policy-based-authorization-in-aspnet-core"></a>Autoryzacja oparta na zasadach w ASP.NET Core
 
@@ -117,17 +119,19 @@ Użyj <xref:Microsoft.AspNetCore.Authorization.IAuthorizationService> lub `[Auth
 
 Jeśli używasz Razor stron, zobacz [stosowanie zasad do Razor stron](#apply-policies-to-razor-pages) w tym dokumencie.
 
-Zasady są stosowane do kontrolerów przy użyciu `[Authorize]` atrybutu z nazwą zasad. Przykład:
+Zasady są stosowane do kontrolerów przy użyciu `[Authorize]` atrybutu z nazwą zasad. Na przykład:
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Controllers/AlcoholPurchaseController.cs?name=snippet_AlcoholPurchaseControllerClass&highlight=4)]
 
 ## <a name="apply-policies-to-razor-pages"></a>Stosowanie zasad do Razor stron
 
-Zasady są stosowane do Razor stron przy użyciu `[Authorize]` atrybutu z nazwą zasad. Przykład:
+Zasady są stosowane do Razor stron przy użyciu `[Authorize]` atrybutu z nazwą zasad. Na przykład:
 
 [!code-csharp[](policies/samples/PoliciesAuthApp2/Pages/AlcoholPurchase.cshtml.cs?name=snippet_AlcoholPurchaseModelClass&highlight=4)]
 
-Zasady mogą być również stosowane do Razor stron przy użyciu [Konwencji autoryzacji](xref:security/authorization/razor-pages-authorization).
+***Nie*** można zastosować zasad na Razor poziomie obsługi strony, muszą one być stosowane na stronie.
+
+Zasady mogą być stosowane do Razor stron przy użyciu [Konwencji autoryzacji](xref:security/authorization/razor-pages-authorization).
 
 ## <a name="requirements"></a>Wymagania
 
@@ -170,7 +174,7 @@ Poprzedni kod przechodzi przez [PendingRequirements](/dotnet/api/microsoft.aspne
 
 ### <a name="handler-registration"></a>Rejestracja procedury obsługi
 
-Procedury obsługi są rejestrowane w kolekcji usług podczas konfiguracji. Przykład:
+Procedury obsługi są rejestrowane w kolekcji usług podczas konfiguracji. Na przykład:
 
 [!code-csharp[](policies/samples/3.0PoliciesAuthApp1/Startup.cs?range=31-32,39-40,42-45, 53-55, 58)]
 
@@ -223,7 +227,7 @@ Na przykład poprzedni można `BadgeEntryHandler` napisać ponownie w następuj�
 
 `HandleRequirementAsync`Metoda zaimplementowana w procedurze obsługi autoryzacji ma dwa parametry: `AuthorizationHandlerContext` a i `TRequirement` obsługujące. Platformy, takie jak MVC lub, SignalR mogą dodawać dowolne obiekty do `Resource` właściwości w `AuthorizationHandlerContext` celu przekazania dodatkowych informacji.
 
-W przypadku korzystania z routingu punktów końcowych Autoryzacja jest zwykle obsługiwana przez oprogramowanie pośredniczące autoryzacji. W tym przypadku `Resource` Właściwość jest wystąpieniem <xref:Microsoft.AspNetCore.Http.Endpoint> . Punkt końcowy może służyć do sondowania bazowego zasobu, z którym jest przeprowadzana Routing. Przykład:
+W przypadku korzystania z routingu punktów końcowych Autoryzacja jest zwykle obsługiwana przez oprogramowanie pośredniczące autoryzacji. W tym przypadku `Resource` Właściwość jest wystąpieniem <xref:Microsoft.AspNetCore.Http.Endpoint> . Punkt końcowy może służyć do sondowania bazowego zasobu, z którym jest przeprowadzana Routing. Na przykład:
 
 ```csharp
 if (context.Resource is Endpoint endpoint)
@@ -348,13 +352,13 @@ Użyj <xref:Microsoft.AspNetCore.Authorization.IAuthorizationService> lub `[Auth
 
 Jeśli używasz Razor stron, zobacz [stosowanie zasad do Razor stron](#apply-policies-to-razor-pages) w tym dokumencie.
 
-Zasady są stosowane do kontrolerów przy użyciu `[Authorize]` atrybutu z nazwą zasad. Przykład:
+Zasady są stosowane do kontrolerów przy użyciu `[Authorize]` atrybutu z nazwą zasad. Na przykład:
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Controllers/AlcoholPurchaseController.cs?name=snippet_AlcoholPurchaseControllerClass&highlight=4)]
 
 ## <a name="apply-policies-to-razor-pages"></a>Stosowanie zasad do Razor stron
 
-Zasady są stosowane do Razor stron przy użyciu `[Authorize]` atrybutu z nazwą zasad. Przykład:
+Zasady są stosowane do Razor stron przy użyciu `[Authorize]` atrybutu z nazwą zasad. Na przykład:
 
 [!code-csharp[](policies/samples/PoliciesAuthApp2/Pages/AlcoholPurchase.cshtml.cs?name=snippet_AlcoholPurchaseModelClass&highlight=4)]
 
@@ -401,7 +405,7 @@ Poprzedni kod przechodzi przez [PendingRequirements](/dotnet/api/microsoft.aspne
 
 ### <a name="handler-registration"></a>Rejestracja procedury obsługi
 
-Procedury obsługi są rejestrowane w kolekcji usług podczas konfiguracji. Przykład:
+Procedury obsługi są rejestrowane w kolekcji usług podczas konfiguracji. Na przykład:
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Startup.cs?range=32-33,48-53,61,62-63,66)]
 

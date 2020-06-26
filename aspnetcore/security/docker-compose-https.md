@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 03/28/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/docker-compose-https
-ms.openlocfilehash: 533d86fb17e3c89fdca59685b090645a11ba5473
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: b282af3b9c657bda4432f0d60f100f65fa7cbae9
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775144"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408620"
 ---
 # <a name="hosting-aspnet-core-images-with-docker-compose-over-https"></a>Hostowanie ASP.NET Core obrazów z Docker Compose za pośrednictwem protokołu HTTPS
 
@@ -39,11 +41,11 @@ W przypadku niektórych instrukcji przedstawionych w tym dokumencie wymagany jes
 
 Certyfikat z [urzędu certyfikacji](https://wikipedia.org/wiki/Certificate_authority) jest wymagany do hostingu w [środowisku produkcyjnym](https://blogs.msdn.microsoft.com/webdev/2017/11/29/configuring-https-in-asp-net-core-across-different-platforms/) dla domeny. [Let's Encrypt](https://letsencrypt.org/)to urząd certyfikacji, który oferuje bezpłatne certyfikaty.
 
-W tym dokumencie są stosowane [Certyfikaty deweloperskie](https://wikipedia.org/wiki/Self-signed_certificate) z podpisem własnym do obsługi wstępnie `localhost`utworzonych obrazów. Instrukcje są podobne do korzystania z certyfikatów produkcyjnych.
+W tym dokumencie są stosowane [Certyfikaty deweloperskie](https://wikipedia.org/wiki/Self-signed_certificate) z podpisem własnym do obsługi wstępnie utworzonych obrazów `localhost` . Instrukcje są podobne do korzystania z certyfikatów produkcyjnych.
 
 Dla certyfikatów produkcyjnych:
 
-* `dotnet dev-certs` Narzędzie nie jest wymagane.
+* `dotnet dev-certs`Narzędzie nie jest wymagane.
 * Certyfikaty nie muszą być przechowywane w lokalizacji używanej w instrukcjach. Przechowuj certyfikaty w dowolnej lokalizacji poza katalogiem lokacji.
 
 Instrukcje zawarte w poniższej sekcji dotyczą instalowania certyfikatów do kontenerów przy użyciu `volumes` właściwości w *Docker-Compose. yml.* Można dodać certyfikaty do obrazów kontenerów za pomocą `COPY` polecenia w *pliku dockerfile*, ale nie jest to zalecane. Nie zaleca się kopiowania certyfikatów do obrazu z następujących powodów:
@@ -65,7 +67,7 @@ dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\aspnetapp.pfx -p { passwo
 dotnet dev-certs https --trust
 ```
 
-W poprzednich poleceniach Zastąp `{ password here }` ciąg hasłem.
+W poprzednich poleceniach Zastąp ciąg `{ password here }` hasłem.
 
 Utwórz plik _Docker-Compose. Debug. yml_ o następującej zawartości:
 
@@ -105,7 +107,7 @@ dotnet dev-certs https --trust
 
 `dotnet dev-certs https --trust`jest obsługiwana tylko w systemach macOS i Windows. Należy zaufać certyfikatom w systemie Linux w sposób, który jest obsługiwany przez dystrybucji. Prawdopodobnie należy zaufać certyfikatowi w przeglądarce.
 
-W poprzednich poleceniach Zastąp `{ password here }` ciąg hasłem.
+W poprzednich poleceniach Zastąp ciąg `{ password here }` hasłem.
 
 Utwórz plik _Docker-Compose. Debug. yml_ o następującej zawartości:
 
@@ -143,7 +145,7 @@ dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\aspnetapp.pfx -p { passwo
 dotnet dev-certs https --trust
 ```
 
-W poprzednich poleceniach Zastąp `{ password here }` ciąg hasłem.
+W poprzednich poleceniach Zastąp ciąg `{ password here }` hasłem.
 
 Utwórz plik _Docker-Compose. Debug. yml_ o następującej zawartości:
 

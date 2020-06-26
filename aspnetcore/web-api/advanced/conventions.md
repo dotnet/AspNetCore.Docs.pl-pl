@@ -8,30 +8,32 @@ ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: web-api/advanced/conventions
-ms.openlocfilehash: f74327cd5bb6a5794c90ffdd3896f2b343e175a6
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: eece8130c152fdada1e1d86cf3c94932c5ee9f63
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774889"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408451"
 ---
 # <a name="use-web-api-conventions"></a>Korzystanie z Konwencji interfejsu API sieci Web
 
 Autorzy [Pranav Krishnamoorthy](https://github.com/pranavkm) i [Scott Addie](https://github.com/scottaddie)
 
-ASP.NET Core 2,2 i nowsze zawierają sposób wyodrębnienia typowej [dokumentacji interfejsu API](xref:tutorials/web-api-help-pages-using-swagger) i zastosowania jej do wielu akcji, kontrolerów lub wszystkich kontrolerów w ramach zestawu. Konwencje internetowego interfejsu API stanowią podstawę do dekorowania nazwy poszczególnych [`[ProducesResponseType]`](xref:Microsoft.AspNetCore.Mvc.ProducesResponseTypeAttribute)akcji z.
+ASP.NET Core 2,2 i nowsze zawierają sposób wyodrębnienia typowej [dokumentacji interfejsu API](xref:tutorials/web-api-help-pages-using-swagger) i zastosowania jej do wielu akcji, kontrolerów lub wszystkich kontrolerów w ramach zestawu. Konwencje internetowego interfejsu API stanowią podstawę do dekorowania nazwy poszczególnych akcji z [`[ProducesResponseType]`](xref:Microsoft.AspNetCore.Mvc.ProducesResponseTypeAttribute) .
 
 Konwencja umożliwia:
 
 * Zdefiniuj najpopularniejsze typy zwracane i kody stanu zwrócone przez określony typ akcji.
 * Zidentyfikuj akcje odbiegające od zdefiniowanego standardu.
 
-ASP.NET Core MVC 2,2 i nowsze zawierają zestaw Konwencji domyślnych w programie <xref:Microsoft.AspNetCore.Mvc.DefaultApiConventions?displayProperty=fullName>. Konwencje są oparte na kontrolerze (*ValuesController.cs*), który znajduje się w szablonie projektu **interfejsu API** ASP.NET Core. Jeśli akcje są zgodne ze wzorcami w szablonie, należy pomyślnie korzystać z domyślnych Konwencji. Jeśli domyślne konwencje nie spełniają Twoich potrzeb, zobacz [Tworzenie Konwencji internetowego interfejsu API](#create-web-api-conventions).
+ASP.NET Core MVC 2,2 i nowsze zawierają zestaw Konwencji domyślnych w programie <xref:Microsoft.AspNetCore.Mvc.DefaultApiConventions?displayProperty=fullName> . Konwencje są oparte na kontrolerze (*ValuesController.cs*), który znajduje się w szablonie projektu **interfejsu API** ASP.NET Core. Jeśli akcje są zgodne ze wzorcami w szablonie, należy pomyślnie korzystać z domyślnych Konwencji. Jeśli domyślne konwencje nie spełniają Twoich potrzeb, zobacz [Tworzenie Konwencji internetowego interfejsu API](#create-web-api-conventions).
 
 W środowisku uruchomieniowym <xref:Microsoft.AspNetCore.Mvc.ApiExplorer> rozumie konwencje. `ApiExplorer`jest abstrakcją MVC do komunikowania się z [openapi](https://www.openapis.org/) (znanego również jako Swagger) generatorami dokumentów. Atrybuty z stosowanej Konwencji są skojarzone z akcją i są zawarte w dokumentacji OpenAPI akcji. [Analizatory interfejsów API](xref:web-api/advanced/analyzers) są również zrozumiałe Konwencji. Jeśli akcja jest niekonwencjonalny (na przykład zwraca kod stanu, który nie jest udokumentowany przez zastosowana Konwencja), ostrzeżenie zachęca do dokumentowania kodu stanu.
 
@@ -41,13 +43,13 @@ W środowisku uruchomieniowym <xref:Microsoft.AspNetCore.Mvc.ApiExplorer> rozumi
 
 Konwencje nie tworzą; Każda akcja może być skojarzona z dokładnie jedną Konwencją. Bardziej szczegółowe konwencje mają pierwszeństwo przed określonymi konwencjami. Zaznaczenie jest niedeterministyczne, jeśli co najmniej dwie konwencje o takim samym priorytecie mają zastosowanie do akcji. Następujące opcje są stosowane w celu zastosowania konwencji do akcji, od najbardziej do najmniej określonych:
 
-1. `Microsoft.AspNetCore.Mvc.ApiConventionMethodAttribute`&mdash; Stosuje się do poszczególnych akcji i określa typ Konwencji oraz metodę Konwencji, która ma zastosowanie.
+1. `Microsoft.AspNetCore.Mvc.ApiConventionMethodAttribute`&mdash;Stosuje się do poszczególnych akcji i określa typ Konwencji oraz metodę Konwencji, która ma zastosowanie.
 
-    W poniższym przykładzie metoda `Microsoft.AspNetCore.Mvc.DefaultApiConventions.Put` Konwencji domyślnego typu Konwencji jest stosowana do `Update` akcji:
+    W poniższym przykładzie metoda Konwencji domyślnego typu Konwencji `Microsoft.AspNetCore.Mvc.DefaultApiConventions.Put` jest stosowana do `Update` akcji:
 
     [!code-csharp[](conventions/sample/Controllers/ContactsConventionController.cs?name=snippet_ApiConventionMethod&highlight=3)]
 
-    Metoda `Microsoft.AspNetCore.Mvc.DefaultApiConventions.Put` Konwencji stosuje następujące atrybuty do akcji:
+    `Microsoft.AspNetCore.Mvc.DefaultApiConventions.Put`Metoda Konwencji stosuje następujące atrybuty do akcji:
 
     ```csharp
     [ProducesDefaultResponseType]
@@ -56,7 +58,7 @@ Konwencje nie tworzą; Każda akcja może być skojarzona z dokładnie jedną Ko
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     ```
 
-    Aby uzyskać więcej informacji `[ProducesDefaultResponseType]`na temat, zobacz [Domyślna odpowiedź](https://swagger.io/docs/specification/describing-responses/#default).
+    Aby uzyskać więcej informacji na temat `[ProducesDefaultResponseType]` , zobacz [Domyślna odpowiedź](https://swagger.io/docs/specification/describing-responses/#default).
 
 1. `Microsoft.AspNetCore.Mvc.ApiConventionTypeAttribute`zastosowane do kontrolera &mdash; stosuje określony typ Konwencji do wszystkich akcji na kontrolerze. Metoda Konwencji jest oznaczona przy użyciu wskazówek, które określają akcje, których dotyczy Metoda Konwencji. Aby uzyskać więcej informacji na temat wskazówek, zobacz [Tworzenie Konwencji interfejsu API sieci Web](#create-web-api-conventions)).
 
@@ -79,7 +81,7 @@ Jeśli domyślne konwencje interfejsów API nie spełniają Twoich potrzeb, nale
 
 ### <a name="response-types"></a>Typy odpowiedzi
 
-Te metody są opatrzone `[ProducesResponseType]` adnotacją `[ProducesDefaultResponseType]` lub atrybutami. Przykład:
+Te metody są opatrzone adnotacją `[ProducesResponseType]` lub `[ProducesDefaultResponseType]` atrybutami. Na przykład:
 
 ```csharp
 public static class MyAppConventions
@@ -94,12 +96,12 @@ public static class MyAppConventions
 
 W przypadku braku szczegółowych atrybutów metadanych zastosowanie tej Konwencji do zestawu wymusza, że:
 
-* Metoda Konwencji ma zastosowanie do dowolnej akcji o `Find`nazwie.
-* W `Find` akcji występuje `id` parametr o nazwie.
+* Metoda Konwencji ma zastosowanie do dowolnej akcji o nazwie `Find` .
+* `id`W akcji występuje parametr o nazwie `Find` .
 
 ### <a name="naming-requirements"></a>Wymagania dotyczące nazewnictwa
 
-Atrybuty `[ApiConventionNameMatch]` i `[ApiConventionTypeMatch]` mogą być stosowane do metody Konwencji, która określa akcje, do których mają zastosowanie. Przykład:
+`[ApiConventionNameMatch]`Atrybuty i `[ApiConventionTypeMatch]` mogą być stosowane do metody Konwencji, która określa akcje, do których mają zastosowanie. Na przykład:
 
 ```csharp
 [ProducesResponseType(StatusCodes.Status200OK)]
@@ -113,8 +115,8 @@ public static void Find(
 
 W poprzednim przykładzie:
 
-* `Microsoft.AspNetCore.Mvc.ApiExplorer.ApiConventionNameMatchBehavior.Prefix` Opcja stosowana do metody wskazuje, że Konwencja pasuje do każdej akcji poprzedzonej prefiksem "Find". Przykłady akcji dopasowania obejmują `Find`, `FindPet`, i. `FindById`
-* `Microsoft.AspNetCore.Mvc.ApiExplorer.ApiConventionNameMatchBehavior.Suffix` Zastosowanie do parametru wskazuje, że Konwencja dopasowuje metody z dokładnie jednym parametrem kończącym się identyfikatorem sufiksu. Przykłady obejmują parametry, takie `id` jak `petId`lub. `ApiConventionTypeMatch`można w podobny sposób zastosować do typów, aby ograniczyć typ parametru. `params[]` Argument wskazuje pozostałe parametry, które nie muszą być jawnie dopasowane.
+* `Microsoft.AspNetCore.Mvc.ApiExplorer.ApiConventionNameMatchBehavior.Prefix`Opcja stosowana do metody wskazuje, że Konwencja pasuje do każdej akcji poprzedzonej prefiksem "Find". Przykłady akcji dopasowania obejmują `Find` , `FindPet` , i `FindById` .
+* `Microsoft.AspNetCore.Mvc.ApiExplorer.ApiConventionNameMatchBehavior.Suffix`Zastosowanie do parametru wskazuje, że Konwencja dopasowuje metody z dokładnie jednym parametrem kończącym się identyfikatorem sufiksu. Przykłady obejmują parametry, takie jak `id` lub `petId` . `ApiConventionTypeMatch`można w podobny sposób zastosować do typów, aby ograniczyć typ parametru. `params[]`Argument wskazuje pozostałe parametry, które nie muszą być jawnie dopasowane.
 
 ## <a name="additional-resources"></a>Zasoby dodatkowe
 

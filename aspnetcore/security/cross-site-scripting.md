@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 10/02/2018
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/cross-site-scripting
-ms.openlocfilehash: 5a14042db6250d5f7a47acaf4083b44272c606ab
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: a94fe1612c023468238f09a91ddb0346b65d52ba
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777491"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408022"
 ---
 # <a name="prevent-cross-site-scripting-xss-in-aspnet-core"></a>Zapobiegaj skryptom między lokacjami (XSS) w ASP.NET Core
 
@@ -30,17 +32,17 @@ Na poziomie podstawowym ataki polegają na zalewaniu aplikacji do wstawienia `<s
 
 1. Nigdy nie umieszczaj niezaufanych danych w danych wejściowych HTML, chyba że wykonujesz poniższą procedurę. Niezaufane dane to wszelkie dane, które mogą być kontrolowane przez atakującego, dane wejściowe formularza HTML, ciągi zapytań, nagłówki HTTP, nawet źródła danych z bazy danych, ponieważ osoba atakująca może mieć możliwość naruszenia bazy danych, nawet jeśli nie mogą naruszyć aplikacji.
 
-2. Przed umieszczeniem niezaufanych danych wewnątrz elementu HTML upewnij się, że jest on zakodowany w formacie HTML. Kodowanie HTML przyjmuje takie znaki, &lt; jak i zmienia je na bezpieczną formę, &amp;taką jak lt;
+2. Przed umieszczeniem niezaufanych danych wewnątrz elementu HTML upewnij się, że jest on zakodowany w formacie HTML. Kodowanie HTML przyjmuje takie znaki, jak &lt; i zmienia je na bezpieczną formę, taką jak &amp; lt;
 
 3. Przed umieszczeniem niezaufanych danych w atrybucie HTML upewnij się, że jest on zakodowany w formacie HTML. Kodowanie atrybutu HTML jest nadzbiorem kodowania HTML i koduje dodatkowe znaki takie jak "i".
 
-4. Przed umieszczeniem niezaufanych danych w języku JavaScript Umieść dane w elemencie HTML, którego zawartość jest pobierana w czasie wykonywania. Jeśli to nie jest możliwe, upewnij się, że dane są kodowane w języku JavaScript. Kodowanie JavaScript pobiera niebezpieczne znaki dla języka JavaScript i zastępuje je szesnastkową, na przykład &lt; będzie kodowane jako `\u003C`.
+4. Przed umieszczeniem niezaufanych danych w języku JavaScript Umieść dane w elemencie HTML, którego zawartość jest pobierana w czasie wykonywania. Jeśli to nie jest możliwe, upewnij się, że dane są kodowane w języku JavaScript. Kodowanie JavaScript pobiera niebezpieczne znaki dla języka JavaScript i zastępuje je szesnastkową, na przykład będzie &lt; kodowane jako `\u003C` .
 
 5. Przed umieszczeniem niezaufanych danych w ciągu zapytania adresu URL upewnij się, że adres URL został zakodowany.
 
 ## <a name="html-encoding-using-razor"></a>Kodowanie HTML przy użyciuRazor
 
-Razor Aparat używany w MVC automatycznie koduje wszystkie dane wyjściowe pochodzące ze zmiennych, chyba że naprawdę nie zadziała to w ten sposób. Używa reguł kodowania atrybutu języka HTML za każdym razem, *@* gdy używasz dyrektywy. Ponieważ kodowanie atrybutu HTML jest nadzbiorem kodowania HTML, oznacza to, że nie trzeba niczego zachodzić, niezależnie od tego, czy należy użyć kodowania HTML czy kodowania atrybutów HTML. Musisz się upewnić, że w kontekście HTML użyto tylko @, a nie przy próbie wstawienia niezaufanych danych wejściowych bezpośrednio do języka JavaScript. Pomocnicy tagów również kodują dane wejściowe, które są używane w parametrach tagów.
+RazorAparat używany w MVC automatycznie koduje wszystkie dane wyjściowe pochodzące ze zmiennych, chyba że naprawdę nie zadziała to w ten sposób. Używa reguł kodowania atrybutu języka HTML za każdym razem, gdy używasz *@* dyrektywy. Ponieważ kodowanie atrybutu HTML jest nadzbiorem kodowania HTML, oznacza to, że nie trzeba niczego zachodzić, niezależnie od tego, czy należy użyć kodowania HTML czy kodowania atrybutów HTML. Musisz się upewnić, że w kontekście HTML użyto tylko @, a nie przy próbie wstawienia niezaufanych danych wejściowych bezpośrednio do języka JavaScript. Pomocnicy tagów również kodują dane wejściowe, które są używane w parametrach tagów.
 
 Wykonaj następujące czynności Razor :
 
@@ -52,18 +54,18 @@ Wykonaj następujące czynności Razor :
    @untrustedInput
    ```
 
-Ten widok wyprowadza zawartość zmiennej *untrustedInput* . Ta zmienna zawiera znaki, które są używane w atakach XSS, &lt;mianowicie "i &gt;. Badanie źródła pokazuje renderowane dane wyjściowe kodowane jako:
+Ten widok wyprowadza zawartość zmiennej *untrustedInput* . Ta zmienna zawiera znaki, które są używane w atakach XSS, mianowicie &lt; "i &gt; . Badanie źródła pokazuje renderowane dane wyjściowe kodowane jako:
 
 ```html
 &lt;&quot;123&quot;&gt;
    ```
 
 >[!WARNING]
-> ASP.NET Core MVC udostępnia klasę `HtmlString` , która nie jest automatycznie zakodowana w danych wyjściowych. Tego elementu nie należy używać w połączeniu z niezaufanymi danymi wejściowymi, ponieważ spowoduje to ujawnienie luki w zabezpieczeniach XSS.
+> ASP.NET Core MVC udostępnia `HtmlString` klasę, która nie jest automatycznie zakodowana w danych wyjściowych. Tego elementu nie należy używać w połączeniu z niezaufanymi danymi wejściowymi, ponieważ spowoduje to ujawnienie luki w zabezpieczeniach XSS.
 
 ## <a name="javascript-encoding-using-razor"></a>Kodowanie JavaScript przy użyciuRazor
 
-Czasami może się okazać, że chcesz wstawić wartość do języka JavaScript, aby przetworzyć ją w widoku. Istnieją dwa sposoby, aby to zrobić. Najbezpieczniejszym sposobem wstawiania wartości jest umieszczenie wartości w atrybucie danych tagu i pobranie go w języku JavaScript. Przykład:
+Czasami może się okazać, że chcesz wstawić wartość do języka JavaScript, aby przetworzyć ją w widoku. Istnieją dwa sposoby, aby to zrobić. Najbezpieczniejszym sposobem wstawiania wartości jest umieszczenie wartości w atrybucie danych tagu i pobranie go w języku JavaScript. Na przykład:
 
 ```cshtml
 @{
@@ -144,7 +146,7 @@ Ta funkcja będzie renderowana w przeglądarce w następujący sposób:
 ```
 
 >[!WARNING]
-> Nie należy łączyć niezaufanych danych wejściowych w języku JavaScript w celu utworzenia elementów DOM. Należy `createElement()` używać i przypisywać odpowiednio wartości właściwości, takich `node.TextContent=`jak, lub `element.SetAttribute()` / `element[attribute]=` użyć w inny sposób, aby samodzielnie uwidocznić ataki oparte na modelu DOM.
+> Nie należy łączyć niezaufanych danych wejściowych w języku JavaScript w celu utworzenia elementów DOM. Należy używać `createElement()` i przypisywać odpowiednio wartości właściwości, takich jak `node.TextContent=` , lub użyć `element.SetAttribute()` / `element[attribute]=` w inny sposób, aby samodzielnie uwidocznić ataki oparte na modelu DOM.
 
 ## <a name="accessing-encoders-in-code"></a>Uzyskiwanie dostępu do koderów w kodzie
 
@@ -172,14 +174,14 @@ public class HomeController : Controller
 
 ## <a name="encoding-url-parameters"></a>Parametry kodowania adresu URL
 
-Jeśli chcesz skompilować ciąg zapytania URL z niezaufanymi danymi wejściowymi jako wartość, użyj `UrlEncoder` do kodowania wartości. Na przykład:
+Jeśli chcesz skompilować ciąg zapytania URL z niezaufanymi danymi wejściowymi jako wartość, użyj `UrlEncoder` do kodowania wartości. Na przykład
 
 ```csharp
 var example = "\"Quoted Value with spaces and &\"";
    var encodedValue = _urlEncoder.Encode(example);
    ```
 
-Po kodowaniu zmienna encodedValue będzie zawierać `%22Quoted%20Value%20with%20spaces%20and%20%26%22`. Spacje, cudzysłowy, interpunkcja i inne niebezpieczne znaki będą zakodowane procentowo na ich wartość szesnastkową, na przykład znak spacji stanie się %20.
+Po kodowaniu zmienna encodedValue będzie zawierać `%22Quoted%20Value%20with%20spaces%20and%20%26%22` . Spacje, cudzysłowy, interpunkcja i inne niebezpieczne znaki będą zakodowane procentowo na ich wartość szesnastkową, na przykład znak spacji stanie się %20.
 
 >[!WARNING]
 > Nie używaj niezaufanych danych wejściowych jako części ścieżki URL. Zawsze przekazuj niezaufane dane wejściowe jako wartość ciągu zapytania.
@@ -188,11 +190,11 @@ Po kodowaniu zmienna encodedValue będzie zawierać `%22Quoted%20Value%20with%20
 
 ## <a name="customizing-the-encoders"></a>Dostosowywanie koderów
 
-Domyślnie kodery wykorzystują bezpieczną listę ograniczoną do podstawowego zakresu Unicode w języku łacińskim i kodują wszystkie znaki poza tym zakresem jako odpowiedniki kodu znaku. To zachowanie ma także Razor wpływ na renderowanie TagHelper i HtmlHelper, ponieważ użyje koderów do wyprowadzania ciągów.
+Domyślnie kodery wykorzystują bezpieczną listę ograniczoną do podstawowego zakresu Unicode w języku łacińskim i kodują wszystkie znaki poza tym zakresem jako odpowiedniki kodu znaku. To zachowanie ma także wpływ na Razor renderowanie TagHelper i HtmlHelper, ponieważ użyje koderów do wyprowadzania ciągów.
 
 W związku z tym należy chronić przed nieznanymi lub przyszłymi błędami przeglądarki (poprzednie błędy przeglądarki wyzwolenie analizy na podstawie przetwarzania znaków innych niż angielski). Jeśli witryna sieci Web wykonuje duże użycie znaków innych niż łacińskie, takich jak chińskie, cyrylica lub inne, to prawdopodobnie zachowanie nie jest wymagane.
 
-Można dostosować listy bezpiecznych koderów, aby uwzględnić zakresy Unicode odpowiednie dla aplikacji podczas uruchamiania, w programie `ConfigureServices()`.
+Można dostosować listy bezpiecznych koderów, aby uwzględnić zakresy Unicode odpowiednie dla aplikacji podczas uruchamiania, w programie `ConfigureServices()` .
 
 Na przykład przy użyciu konfiguracji domyślnej można użyć Razor HtmlHelper podobnej do tego;
 
@@ -206,7 +208,7 @@ Po wyświetleniu źródła strony sieci Web zobaczysz, że został on wyrenderow
 <p>This link text is in Chinese: <a href="/">&#x6C49;&#x8BED;/&#x6F22;&#x8A9E;</a></p>
    ```
 
-Aby rozszerzyć znaki traktowane jako bezpieczne przez koder, należy wstawić następujący wiersz do `ConfigureServices()` metody w; `startup.cs`
+Aby rozszerzyć znaki traktowane jako bezpieczne przez koder, należy wstawić następujący wiersz do `ConfigureServices()` metody w `startup.cs` ;
 
 ```csharp
 services.AddSingleton<HtmlEncoder>(
@@ -223,7 +225,7 @@ Ten przykład rozszerza bezpieczną listę w celu uwzględnienia zakresu Unicode
 Zakresy bezpiecznych list są określone jako wykresy kodu Unicode, a nie Języki. [Standard Unicode](https://unicode.org/) ma listę [wykresów kodu](https://www.unicode.org/charts/index.html) , których można użyć do znalezienia wykresu zawierającego znaki. Każdy koder, kod HTML, JavaScript i adres URL, muszą być skonfigurowane osobno.
 
 > [!NOTE]
-> Dostosowanie listy bezpiecznych ma wpływ tylko na kodery, które są źródłem przez DI. Jeśli użytkownik uzyskuje bezpośredni dostęp do `System.Text.Encodings.Web.*Encoder.Default` kodera przy użyciu domyślnego, zostanie użyty tylko podstawowy safelist.
+> Dostosowanie listy bezpiecznych ma wpływ tylko na kodery, które są źródłem przez DI. Jeśli użytkownik uzyskuje bezpośredni dostęp do kodera przy użyciu `System.Text.Encodings.Web.*Encoder.Default` domyślnego, zostanie użyty tylko podstawowy safelist.
 
 ## <a name="where-should-encoding-take-place"></a>Gdzie ma nastąpić kodowanie?
 

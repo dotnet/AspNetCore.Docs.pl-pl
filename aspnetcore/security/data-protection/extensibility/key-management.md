@@ -7,17 +7,19 @@ ms.custom: mvc, seodec18
 ms.date: 10/24/2018
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/data-protection/extensibility/key-management
-ms.openlocfilehash: f8af699344473510c5579c2f0e4d2920ada013f1
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: e319872799ef4994b55ba941956836f0848dd76d
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775729"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408542"
 ---
 # <a name="key-management-extensibility-in-aspnet-core"></a>Rozszerzalność zarządzania kluczami w ASP.NET Core
 
@@ -29,7 +31,7 @@ ms.locfileid: "82775729"
 
 ## <a name="key"></a>Klucz
 
-`IKey` Interfejs jest podstawową reprezentacją klucza w cryptosystem. Klucz terminu jest używany w tym miejscu w sensie abstrakcyjnym, a nie w sensie "materiału klucza kryptograficznego". Klucz ma następujące właściwości:
+`IKey`Interfejs jest podstawową reprezentacją klucza w cryptosystem. Klucz terminu jest używany w tym miejscu w sensie abstrakcyjnym, a nie w sensie "materiału klucza kryptograficznego". Klucz ma następujące właściwości:
 
 * Data aktywacji, utworzenia i wygaśnięcia
 
@@ -39,13 +41,13 @@ ms.locfileid: "82775729"
 
 ::: moniker range=">= aspnetcore-2.0"
 
-Ponadto udostępnia `IKey` `CreateEncryptor` metodę, która może służyć do tworzenia wystąpienia [IAuthenticatedEncryptor](xref:security/data-protection/extensibility/core-crypto#data-protection-extensibility-core-crypto-iauthenticatedencryptor) powiązanego z tym kluczem.
+Ponadto `IKey` udostępnia metodę, `CreateEncryptor` która może służyć do tworzenia wystąpienia [IAuthenticatedEncryptor](xref:security/data-protection/extensibility/core-crypto#data-protection-extensibility-core-crypto-iauthenticatedencryptor) powiązanego z tym kluczem.
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-2.0"
 
-Ponadto udostępnia `IKey` `CreateEncryptorInstance` metodę, która może służyć do tworzenia wystąpienia [IAuthenticatedEncryptor](xref:security/data-protection/extensibility/core-crypto#data-protection-extensibility-core-crypto-iauthenticatedencryptor) powiązanego z tym kluczem.
+Ponadto `IKey` udostępnia metodę, `CreateEncryptorInstance` która może służyć do tworzenia wystąpienia [IAuthenticatedEncryptor](xref:security/data-protection/extensibility/core-crypto#data-protection-extensibility-core-crypto-iauthenticatedencryptor) powiązanego z tym kluczem.
 
 ::: moniker-end
 
@@ -54,7 +56,7 @@ Ponadto udostępnia `IKey` `CreateEncryptorInstance` metodę, która może słu�
 
 ## <a name="ikeymanager"></a>IKeyManager
 
-`IKeyManager` Interfejs reprezentuje obiekt odpowiedzialny za ogólny Magazyn kluczy, pobieranie i manipulowanie. Ujawnia trzy operacje na wysokim poziomie:
+`IKeyManager`Interfejs reprezentuje obiekt odpowiedzialny za ogólny Magazyn kluczy, pobieranie i manipulowanie. Ujawnia trzy operacje na wysokim poziomie:
 
 * Utwórz nowy klucz i Utrwalaj go w magazynie.
 
@@ -67,7 +69,7 @@ Ponadto udostępnia `IKey` `CreateEncryptorInstance` metodę, która może słu�
 
 ## <a name="xmlkeymanager"></a>XmlKeyManager
 
-`XmlKeyManager` Typ jest implementacją betonu w miejscu `IKeyManager`. Zapewnia ona kilka przydatnych udogodnień, w tym klucze Escrow i szyfrowanie kluczy w spoczynku. Klucze w tym systemie są reprezentowane jako elementy XML (w odniesieniu do [XElement](/dotnet/csharp/programming-guide/concepts/linq/xelement-class-overview)).
+`XmlKeyManager`Typ jest implementacją betonu w miejscu `IKeyManager` . Zapewnia ona kilka przydatnych udogodnień, w tym klucze Escrow i szyfrowanie kluczy w spoczynku. Klucze w tym systemie są reprezentowane jako elementy XML (w odniesieniu do [XElement](/dotnet/csharp/programming-guide/concepts/linq/xelement-class-overview)).
 
 `XmlKeyManager`zależy od kilku innych składników w trakcie wykonywania zadań:
 
@@ -93,7 +95,7 @@ Ponadto udostępnia `IKey` `CreateEncryptorInstance` metodę, która może słu�
 
 ::: moniker-end
 
-Poniżej znajdują się diagramy wysokiego poziomu, które wskazują, jak te składniki `XmlKeyManager`są połączone ze sobą w ramach programu.
+Poniżej znajdują się diagramy wysokiego poziomu, które wskazują, jak te składniki są połączone ze sobą w ramach programu `XmlKeyManager` .
 
 ::: moniker range=">= aspnetcore-2.0"
 
@@ -101,7 +103,7 @@ Poniżej znajdują się diagramy wysokiego poziomu, które wskazują, jak te sk�
 
 *Tworzenie klucza/CreateNewKey*
 
-W implementacji `CreateNewKey` `AlgorithmConfiguration` składnik jest używany do utworzenia unikatowego `IAuthenticatedEncryptorDescriptor`, który następnie jest serializowany w formacie XML. Jeśli istnieje klucz ujścia usługi Escrow, nieprzetworzony (niezaszyfrowany) kod XML jest dostarczany do ujścia magazynu długoterminowego. Niezaszyfrowaną zawartość XML jest następnie uruchamiana przez `IXmlEncryptor` (w razie potrzeby) do generowania zaszyfrowanego dokumentu XML. Ten zaszyfrowany dokument jest trwały w magazynie długoterminowym za pośrednictwem programu `IXmlRepository`. (Jeśli nie `IXmlEncryptor` jest skonfigurowany, niezaszyfrowane dokumenty są utrwalane w `IXmlRepository`.)
+W implementacji `CreateNewKey` `AlgorithmConfiguration` składnik jest używany do utworzenia unikatowego `IAuthenticatedEncryptorDescriptor` , który następnie jest serializowany w formacie XML. Jeśli istnieje klucz ujścia usługi Escrow, nieprzetworzony (niezaszyfrowany) kod XML jest dostarczany do ujścia magazynu długoterminowego. Niezaszyfrowaną zawartość XML jest następnie uruchamiana przez `IXmlEncryptor` (w razie potrzeby) do generowania zaszyfrowanego dokumentu XML. Ten zaszyfrowany dokument jest trwały w magazynie długoterminowym za pośrednictwem programu `IXmlRepository` . (Jeśli nie `IXmlEncryptor` jest skonfigurowany, niezaszyfrowane dokumenty są utrwalane w `IXmlRepository` .)
 
 ![Pobieranie klucza](key-management/_static/keyretrieval2.png)
 
@@ -113,7 +115,7 @@ W implementacji `CreateNewKey` `AlgorithmConfiguration` składnik jest używany 
 
 *Tworzenie klucza/CreateNewKey*
 
-W implementacji `CreateNewKey` `IAuthenticatedEncryptorConfiguration` składnik jest używany do utworzenia unikatowego `IAuthenticatedEncryptorDescriptor`, który następnie jest serializowany w formacie XML. Jeśli istnieje klucz ujścia usługi Escrow, nieprzetworzony (niezaszyfrowany) kod XML jest dostarczany do ujścia magazynu długoterminowego. Niezaszyfrowaną zawartość XML jest następnie uruchamiana przez `IXmlEncryptor` (w razie potrzeby) do generowania zaszyfrowanego dokumentu XML. Ten zaszyfrowany dokument jest trwały w magazynie długoterminowym za pośrednictwem programu `IXmlRepository`. (Jeśli nie `IXmlEncryptor` jest skonfigurowany, niezaszyfrowane dokumenty są utrwalane w `IXmlRepository`.)
+W implementacji `CreateNewKey` `IAuthenticatedEncryptorConfiguration` składnik jest używany do utworzenia unikatowego `IAuthenticatedEncryptorDescriptor` , który następnie jest serializowany w formacie XML. Jeśli istnieje klucz ujścia usługi Escrow, nieprzetworzony (niezaszyfrowany) kod XML jest dostarczany do ujścia magazynu długoterminowego. Niezaszyfrowaną zawartość XML jest następnie uruchamiana przez `IXmlEncryptor` (w razie potrzeby) do generowania zaszyfrowanego dokumentu XML. Ten zaszyfrowany dokument jest trwały w magazynie długoterminowym za pośrednictwem programu `IXmlRepository` . (Jeśli nie `IXmlEncryptor` jest skonfigurowany, niezaszyfrowane dokumenty są utrwalane w `IXmlRepository` .)
 
 ![Pobieranie klucza](key-management/_static/keyretrieval1.png)
 
@@ -121,13 +123,13 @@ W implementacji `CreateNewKey` `IAuthenticatedEncryptorConfiguration` składnik 
 
 *Pobieranie klucza/GetAllKeys*
 
-W implementacji programu `GetAllKeys`dokumenty XML reprezentujące klucze i odwołania są odczytywane z bazowego `IXmlRepository`. Jeśli te dokumenty są zaszyfrowane, system automatycznie je odszyfruje. `XmlKeyManager`tworzy odpowiednie `IAuthenticatedEncryptorDescriptorDeserializer` wystąpienia do deserializacji dokumentów z powrotem do `IAuthenticatedEncryptorDescriptor` wystąpień, które są następnie opakowane w `IKey` poszczególne wystąpienia. Ta kolekcja `IKey` wystąpień jest zwracana do obiektu wywołującego.
+W implementacji programu `GetAllKeys` dokumenty XML reprezentujące klucze i odwołania są odczytywane z bazowego `IXmlRepository` . Jeśli te dokumenty są zaszyfrowane, system automatycznie je odszyfruje. `XmlKeyManager`tworzy odpowiednie `IAuthenticatedEncryptorDescriptorDeserializer` wystąpienia do deserializacji dokumentów z powrotem do `IAuthenticatedEncryptorDescriptor` wystąpień, które są następnie opakowane w poszczególne `IKey` wystąpienia. Ta kolekcja `IKey` wystąpień jest zwracana do obiektu wywołującego.
 
 Więcej informacji o poszczególnych elementach XML można znaleźć w [dokumencie format magazynu kluczy](xref:security/data-protection/implementation/key-storage-format#data-protection-implementation-key-storage-format).
 
 ## <a name="ixmlrepository"></a>IXmlRepository
 
-`IXmlRepository` Interfejs reprezentuje typ, który może utrwalać XML i pobierać XML z magazynu zapasowego. Udostępnia dwa interfejsy API:
+`IXmlRepository`Interfejs reprezentuje typ, który może utrwalać XML i pobierać XML z magazynu zapasowego. Udostępnia dwa interfejsy API:
 
 * `GetAllElements` :`IReadOnlyCollection<XElement>`
 
@@ -135,7 +137,7 @@ Więcej informacji o poszczególnych elementach XML można znaleźć w [dokumenc
 
 Implementacje `IXmlRepository` nie muszą przeanalizować XML przechodzącego przez nie. Powinny traktować dokumenty XML jako nieprzezroczyste i pozwolić wyższym warstwom na generowanie i analizowanie dokumentów.
 
-Istnieją cztery wbudowane typy, które implementują `IXmlRepository`:
+Istnieją cztery wbudowane typy, które implementują `IXmlRepository` :
 
 ::: moniker range=">= aspnetcore-2.2"
 
@@ -159,7 +161,7 @@ Aby uzyskać więcej informacji, zobacz dokument dotyczący [dostawców magazynu
 
 Rejestracja niestandardowa `IXmlRepository` jest odpowiednia w przypadku korzystania z innego magazynu zapasowego (np. platformy Azure Table Storage).
 
-Aby zmienić domyślne repozytorium dla całej aplikacji, zarejestruj wystąpienie niestandardowe `IXmlRepository` :
+Aby zmienić domyślne repozytorium dla całej aplikacji, zarejestruj `IXmlRepository` wystąpienie niestandardowe:
 
 ::: moniker range=">= aspnetcore-2.0"
 
@@ -179,13 +181,13 @@ services.AddSingleton<IXmlRepository>(new MyCustomXmlRepository());
 
 ## <a name="ixmlencryptor"></a>IXmlEncryptor
 
-`IXmlEncryptor` Interfejs reprezentuje typ, który może zaszyfrować element XML w postaci zwykłego tekstu. Udostępnia on pojedynczy interfejs API:
+`IXmlEncryptor`Interfejs reprezentuje typ, który może zaszyfrować element XML w postaci zwykłego tekstu. Udostępnia on pojedynczy interfejs API:
 
 * Szyfruj (XElement zwykły): EncryptedXmlInfo
 
-`IAuthenticatedEncryptorDescriptor` Jeśli Serializacja zawiera dowolne elementy oznaczone jako "wymaga szyfrowania", `XmlKeyManager` program uruchomi te elementy za pośrednictwem skonfigurowanej `IXmlEncryptor` `Encrypt` metody i będzie utrzymywać element ENCIPHERED, a nie element w postaci zwykłego tekstu. `IXmlRepository` Wyjście `Encrypt` metody jest `EncryptedXmlInfo` obiektem. Ten obiekt jest otoką, która zawiera zarówno wynikowe ENCIPHERED `XElement` , jak i typ, który `IXmlDecryptor` reprezentuje, który może służyć do odszyfrowania odpowiadającego elementu.
+Jeśli Serializacja `IAuthenticatedEncryptorDescriptor` zawiera dowolne elementy oznaczone jako "wymaga szyfrowania", program uruchomi `XmlKeyManager` te elementy za pośrednictwem skonfigurowanej `IXmlEncryptor` `Encrypt` metody i będzie utrzymywać element ENCIPHERED, a nie element w postaci zwykłego tekstu `IXmlRepository` . Wyjście `Encrypt` metody jest `EncryptedXmlInfo` obiektem. Ten obiekt jest otoką, która zawiera zarówno wynikowe ENCIPHERED `XElement` , jak i typ, który reprezentuje, `IXmlDecryptor` który może służyć do odszyfrowania odpowiadającego elementu.
 
-Istnieją cztery wbudowane typy, które implementują `IXmlEncryptor`:
+Istnieją cztery wbudowane typy, które implementują `IXmlEncryptor` :
 
 * [CertificateXmlEncryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.xmlencryption.certificatexmlencryptor)
 * [DpapiNGXmlEncryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.xmlencryption.dpapingxmlencryptor)
@@ -194,7 +196,7 @@ Istnieją cztery wbudowane typy, które implementują `IXmlEncryptor`:
 
 Aby uzyskać więcej informacji, zobacz sekcję [szyfrowanie kluczy w dokumencie REST](xref:security/data-protection/implementation/key-encryption-at-rest) .
 
-Aby zmienić domyślny mechanizm szyfrowania klucza — w przypadku aplikacji, zarejestruj wystąpienie niestandardowe `IXmlEncryptor` :
+Aby zmienić domyślny mechanizm szyfrowania klucza — w przypadku aplikacji, zarejestruj `IXmlEncryptor` wystąpienie niestandardowe:
 
 ::: moniker range=">= aspnetcore-2.0"
 
@@ -214,35 +216,35 @@ services.AddSingleton<IXmlEncryptor>(new MyCustomXmlEncryptor());
 
 ## <a name="ixmldecryptor"></a>IXmlDecryptor
 
-`IXmlDecryptor` Interfejs reprezentuje typ, który zna sposób odszyfrowania `XElement` , który był ENCIPHERED za pośrednictwem `IXmlEncryptor`. Udostępnia on pojedynczy interfejs API:
+`IXmlDecryptor`Interfejs reprezentuje typ, który zna sposób odszyfrowania `XElement` , który był ENCIPHERED za pośrednictwem `IXmlEncryptor` . Udostępnia on pojedynczy interfejs API:
 
 * Odszyfruj (XElement encryptedelement): XElement
 
-`Decrypt` Metoda unwykonuje szyfrowanie wykonywane przez `IXmlEncryptor.Encrypt`. Ogólnie rzecz biorąc każda `IXmlEncryptor` konkretna implementacja będzie miała odpowiednią `IXmlDecryptor` konkretną implementację.
+`Decrypt`Metoda unwykonuje szyfrowanie wykonywane przez `IXmlEncryptor.Encrypt` . Ogólnie rzecz biorąc każda konkretna `IXmlEncryptor` implementacja będzie miała odpowiednią konkretną `IXmlDecryptor` implementację.
 
-Typy, które `IXmlDecryptor` implementują, powinny mieć jeden z następujących dwóch konstruktorów publicznych:
+Typy, które implementują, `IXmlDecryptor` powinny mieć jeden z następujących dwóch konstruktorów publicznych:
 
 * . ctor (IServiceProvider)
 * . ctor ()
 
 > [!NOTE]
-> `IServiceProvider` Przesłany do konstruktora może mieć wartość null.
+> `IServiceProvider`Przesłany do konstruktora może mieć wartość null.
 
 ## <a name="ikeyescrowsink"></a>IKeyEscrowSink
 
-`IKeyEscrowSink` Interfejs reprezentuje typ, który może prowadzić do Escrow informacji poufnych. Odwołaj te serializowane deskryptory mogą zawierać poufne informacje (takie jak materiał kryptograficzny) i to, co doprowadziło do wprowadzenia typu [IXmlEncryptor](#ixmlencryptor) w pierwszym miejscu. Jednak awarie i pierścienie kluczy można usunąć lub uszkodzić.
+`IKeyEscrowSink`Interfejs reprezentuje typ, który może prowadzić do Escrow informacji poufnych. Odwołaj te serializowane deskryptory mogą zawierać poufne informacje (takie jak materiał kryptograficzny) i to, co doprowadziło do wprowadzenia typu [IXmlEncryptor](#ixmlencryptor) w pierwszym miejscu. Jednak awarie i pierścienie kluczy można usunąć lub uszkodzić.
 
 Interfejs Escrow zapewnia awaryjny kreskę ucieczki, umożliwiając dostęp do nieprzetworzonej serializowanej XML, zanim zostanie on przekształcony przez wszystkie skonfigurowane [IXmlEncryptor](#ixmlencryptor). Interfejs uwidacznia pojedynczy interfejs API:
 
 * Magazyn (identyfikator GUID keyId, element XElement)
 
-Jest to `IKeyEscrowSink` implementacja do obsługi dostarczonego elementu w bezpieczny sposób spójny z zasadami biznesowymi. Jedną z możliwych implementacji dla ujścia usługi Escrow jest zaszyfrowanie elementu XML przy użyciu znanego certyfikatu firmowy X. 509, w którym został zgłoszony klucz prywatny certyfikatu. Ten `CertificateXmlEncryptor` typ może pomóc w tym. `IKeyEscrowSink` Implementacja jest również odpowiedzialna za utrwalanie podanego elementu.
+Jest to `IKeyEscrowSink` implementacja do obsługi dostarczonego elementu w bezpieczny sposób spójny z zasadami biznesowymi. Jedną z możliwych implementacji dla ujścia usługi Escrow jest zaszyfrowanie elementu XML przy użyciu znanego certyfikatu firmowy X. 509, w którym został zgłoszony klucz prywatny certyfikatu. `CertificateXmlEncryptor`ten typ może pomóc w tym. `IKeyEscrowSink`Implementacja jest również odpowiedzialna za utrwalanie podanego elementu.
 
-Domyślnie żaden mechanizm Escrow nie jest włączony, jednak Administratorzy serwera mogą [konfigurować to globalnie](xref:security/data-protection/configuration/machine-wide-policy). Można go również skonfigurować programowo za pośrednictwem `IDataProtectionBuilder.AddKeyEscrowSink` metody, jak pokazano w poniższym przykładzie. Przeciążania `AddKeyEscrowSink` metod `IServiceCollection.AddSingleton` dublowane `IServiceCollection.AddInstance` i przeciążenia, `IKeyEscrowSink` ponieważ wystąpienia są przeznaczone jako pojedyncze. Jeśli zarejestrowano wiele `IKeyEscrowSink` wystąpień, każda z nich zostanie wywołana podczas generowania klucza, dzięki czemu klucze mogą być jednocześnie przełączone do wielu mechanizmów.
+Domyślnie żaden mechanizm Escrow nie jest włączony, jednak Administratorzy serwera mogą [konfigurować to globalnie](xref:security/data-protection/configuration/machine-wide-policy). Można go również skonfigurować programowo za pośrednictwem `IDataProtectionBuilder.AddKeyEscrowSink` metody, jak pokazano w poniższym przykładzie. `AddKeyEscrowSink`Przeciążania metod dublowane `IServiceCollection.AddSingleton` i `IServiceCollection.AddInstance` przeciążenia, ponieważ `IKeyEscrowSink` wystąpienia są przeznaczone jako pojedyncze. Jeśli `IKeyEscrowSink` zarejestrowano wiele wystąpień, każda z nich zostanie wywołana podczas generowania klucza, dzięki czemu klucze mogą być jednocześnie przełączone do wielu mechanizmów.
 
 Brak interfejsu API do odczytu materiału z `IKeyEscrowSink` wystąpienia. Jest to zgodne z teorią konstrukcyjną mechanizmu Escrow: jest on przeznaczony do udostępnienia klucza zaufanemu Urzędowi, a ponieważ aplikacja nie jest zaufanym urzędem, nie powinna mieć dostępu do własnego materiału, w którym została zadana transakcja.
 
-Poniższy przykładowy kod demonstruje tworzenie i rejestrowanie kluczy, `IKeyEscrowSink` w których są one objęte płatnością, aby tylko członkowie grupy "Administratorzy CONTOSODomain" mogli je odzyskać.
+Poniższy przykładowy kod demonstruje tworzenie i rejestrowanie kluczy, w `IKeyEscrowSink` których są one objęte płatnością, aby tylko członkowie grupy "Administratorzy CONTOSODomain" mogli je odzyskać.
 
 > [!NOTE]
 > Aby uruchomić ten przykład, musisz być na komputerze przyłączonym do domeny systemu Windows 8/Windows Server 2012, a kontroler domeny musi być w systemie Windows Server 2012 lub nowszym.

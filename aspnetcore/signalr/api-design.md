@@ -1,83 +1,91 @@
 ---
-title: Zagadnienia dotyczące projektowania interfejsu API SignalR
+title: SignalRZagadnienia dotyczące projektowania interfejsu API
 author: anurse
-description: Dowiedz się, jak projektować interfejsy API biblioteki SignalR dla zgodności między wersjami aplikacji.
+description: Dowiedz się, jak projektować SignalR interfejsy API pod kątem zgodności między wersjami aplikacji.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: anurse
 ms.custom: mvc
-ms.date: 11/06/2018
+ms.date: 11/12/2019
+no-loc:
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: signalr/api-design
-ms.openlocfilehash: 3f17bf055b793e8fc91fbcc15f668928ca261f77
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 9ad8d30da552d3d3084534b8c7ca57386ad111ac
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64903181"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407801"
 ---
-# <a name="signalr-api-design-considerations"></a>Zagadnienia dotyczące projektowania interfejsu API SignalR
+# <a name="signalr-api-design-considerations"></a>SignalRZagadnienia dotyczące projektowania interfejsu API
 
-Przez [Andrew Stanton pielęgniarki](https://twitter.com/anurse)
+Według [Andrew Stanton-pielęgniarki](https://twitter.com/anurse)
 
-Ten artykuł zawiera wskazówki dotyczące tworzenia interfejsów API opartych na SignalR.
+Ten artykuł zawiera wskazówki dotyczące kompilowania SignalR interfejsów API.
 
-## <a name="use-custom-object-parameters-to-ensure-backwards-compatibility"></a>Korzystanie z parametrów obiektów niestandardowych w celu zapewnienia zgodności z poprzednimi wersjami
+## <a name="use-custom-object-parameters-to-ensure-backwards-compatibility"></a>Używanie niestandardowych parametrów obiektów w celu zapewnienia zgodności z poprzednimi wersjami
 
-Dodawanie parametrów do metody koncentratora SignalR (po stronie klienta lub serwera) jest *zmiana powodująca niezgodność*. Oznacza to, że starsze klientów/serwery będą występują błędy podczas próby wywołania metody bez odpowiedniej liczby parametrów. Jednak jest dodawanie właściwości do parametru niestandardowy obiekt **nie** istotnej zmiany. To może służyć do projektowania zgodnych interfejsów API, które są odporne na zmiany po stronie klienta lub serwera.
+Dodawanie parametrów do SignalR metody centrum (na kliencie lub serwerze) jest istotną *zmianą*. Oznacza to, że starsi klienci/serwery będą otrzymywać błędy podczas próby wywołania metody bez odpowiedniej liczby parametrów. Jednak Dodawanie właściwości do niestandardowego parametru obiektu **nie** jest istotną zmianą. Może to służyć do projektowania zgodnych interfejsów API, które są odporne na zmiany na kliencie lub serwerze.
 
-Na przykład należy wziąć pod uwagę interfejs API po stronie serwera, jak pokazano poniżej:
+Rozważmy na przykład interfejs API po stronie serwera, podobny do następującego:
 
 [!code-csharp[ParameterBasedOldVersion](api-design/sample/Samples.cs?name=ParameterBasedOldVersion)]
 
-Klient JavaScript wywołania tej metody przy użyciu `invoke` w następujący sposób:
+Klient JavaScript wywołuje tę metodę, wykonując `invoke` następujące czynności:
 
 [!code-typescript[CallWithOneParameter](api-design/sample/Samples.ts?name=CallWithOneParameter)]
 
-Jeśli później dodasz drugi parametr do metody serwera, starsi klienci nie będzie zapewniać wartości tego parametru. Na przykład:
+Jeśli później dodasz drugi parametr do metody serwera, starsi klienci nie będą podawać tej wartości parametru. Na przykład:
 
 [!code-csharp[ParameterBasedNewVersion](api-design/sample/Samples.cs?name=ParameterBasedNewVersion)]
 
-Gdy próbuje starego klienta do wywołania tej metody, otrzyma błąd następująco:
+Gdy stary klient próbuje wywołać tę metodę, zostanie wyświetlony następujący błąd:
 
 ```
 Microsoft.AspNetCore.SignalR.HubException: Failed to invoke 'GetTotalLength' due to an error on the server.
 ```
 
-Na serwerze zostanie wyświetlony komunikat dziennika następująco:
+Na serwerze zobaczysz komunikat dziennika następujący:
 
 ```
 System.IO.InvalidDataException: Invocation provides 1 argument(s) but target expects 2.
 ```
 
-Starego klienta wysyłane tylko jeden parametr, ale nowszej interfejsu API serwera wymagane dwa parametry. Przy użyciu niestandardowych obiektów jako parametrów zapewnia większą elastyczność. Umożliwia zmodyfikowanie oryginalny interfejs API, aby użyć niestandardowego obiektu:
+Stary klient wysłał tylko jeden parametr, ale nowszy interfejs API serwera wymaga dwóch parametrów. Używanie obiektów niestandardowych jako parametrów zapewnia większą elastyczność. Przejdźmy do projektu oryginalnego interfejsu API, aby użyć niestandardowego obiektu:
 
 [!code-csharp[ObjectBasedOldVersion](api-design/sample/Samples.cs?name=ObjectBasedOldVersion)]
 
-Teraz klient używa obiektu, aby wywołać metodę:
+Teraz klient używa obiektu do wywołania metody:
 
 [!code-typescript[CallWithObject](api-design/sample/Samples.ts?name=CallWithObject)]
 
-Zamiast opcji dodawania parametr, Dodaj właściwość do `TotalLengthRequest` obiektu:
+Zamiast dodawać parametr, Dodaj właściwość do `TotalLengthRequest` obiektu:
 
 [!code-csharp[ObjectBasedNewVersion](api-design/sample/Samples.cs?name=ObjectBasedNewVersion&highlight=4,9-13)]
 
-Gdy starego klienta wysyła pojedynczy parametr nadmiarowe `Param2` właściwość zostanie pozostawiony `null`. Można wykryć wiadomością wysłaną przez starszego klienta, sprawdzając `Param2` dla `null` i stosowanie wartości domyślnej. Nowy klient może wysyłać te parametry.
+Gdy stary klient wysyła jeden parametr, dodatkowa `Param2` Właściwość zostanie pozostawiona `null` . Możesz wykryć komunikat wysyłany przez starszego klienta, sprawdzając, czy `Param2` dla `null` i Zastosuj wartość domyślną. Nowy klient może wysyłać oba parametry.
 
 [!code-typescript[CallWithObjectNew](api-design/sample/Samples.ts?name=CallWithObjectNew)]
 
-Ta sama technika działa dla metody zdefiniowane na komputerze klienckim. Możesz wysłać niestandardowych obiektów po stronie serwera:
+Ta sama technika działa w przypadku metod zdefiniowanych na kliencie. Można wysłać obiekt niestandardowy po stronie serwera:
 
 [!code-csharp[ClientSideObjectBasedOld](api-design/sample/Samples.cs?name=ClientSideObjectBasedOld)]
 
-Po stronie klienta, możesz uzyskać dostęp do `Message` właściwości, a nie za pomocą parametru:
+Po stronie klienta uzyskuje się dostęp do `Message` właściwości, a nie za pomocą parametru:
 
 [!code-typescript[OnWithObjectOld](api-design/sample/Samples.ts?name=OnWithObjectOld)]
 
-Jeśli później zdecydujesz się dodać nadawcy wiadomości do ładunku, Dodaj właściwość do obiektu:
+Jeśli później zdecydujesz się dodać nadawcę wiadomości do ładunku, Dodaj właściwość do obiektu:
 
 [!code-csharp[ClientSideObjectBasedNew](api-design/sample/Samples.cs?name=ClientSideObjectBasedNew&highlight=5)]
 
-Starsi klienci nie oczekiwano `Sender` wartości, dzięki czemu będziesz go zignorować. Nowy klient można go zaakceptować, aktualizując odczytać nową właściwość:
+Starsze klienci nie będą oczekiwać `Sender` wartości, więc zignorują ją. Nowy klient może go zaakceptować przez aktualizację w celu odczytania nowej właściwości:
 
 [!code-typescript[OnWithObjectNew](api-design/sample/Samples.ts?name=OnWithObjectNew&highlight=2-5)]
 
-W tym przypadku nowego klienta jest również odporny na błędy starego serwera, który nie zapewnia `Sender` wartość. Ponieważ stary serwer nie będzie zapewniać `Sender` wartości, klient sprawdza, czy istnieje ona przed uzyskaniem dostępu do jej.
+W takim przypadku nowy klient jest również odporny na stary serwer, który nie udostępnia `Sender` wartości. Ponieważ stary serwer nie będzie dostarczać `Sender` wartości, klient sprawdza, czy nie istnieje przed uzyskaniem dostępu do niego.

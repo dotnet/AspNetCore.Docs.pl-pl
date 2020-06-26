@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 04/09/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: host-and-deploy/directory-structure
-ms.openlocfilehash: 29031556882dd471a5036b79dcb93a515bc98a33
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: a4f02a021bc2317e9e63cead521ff4a031a5243b
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776399"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408100"
 ---
 # <a name="aspnet-core-directory-structure"></a>Struktura katalogów ASP.NET Core
 
@@ -34,8 +36,8 @@ Katalog *publikowania* zawiera elementy możliwe do wdrożenia aplikacji wytwarz
 
 | Typ aplikacji | Struktura katalogów |
 | -------- | ------------------- |
-| [Plik wykonywalny zależny od platformy (całego)](/dotnet/core/deploying/#framework-dependent-executables-fde) | <ul><li>wycofywan&dagger;<ul><li>Przegląda&dagger; aplikacje MVC; Jeśli widoki nie są wstępnie skompilowane</li><li>Strony&dagger; MVC lub Razor Pages aplikacje, jeśli strony nie są wstępnie skompilowane</li><li>wwwroot&dagger;</li><li>\*pliki. dll</li><li>{Nazwa zestawu}. deps. JSON</li><li>{Nazwa zestawu}. dll</li><li>{NAZWA ZESTAWU} {. Rozszerzenie}. exe rozszerzenie w systemie Windows, brak rozszerzenia w systemie macOS lub Linux</li><li>{Nazwa zestawu}. pdb</li><li>{NAZWA ZESTAWU}. Widoki. dll</li><li>{NAZWA ZESTAWU}. Widoki. pdb</li><li>{Nazwa zestawu}. runtimeconfig. JSON</li><li>Web. config (wdrożenia usług IIS)</li><li>Generuj zrzut ([Narzędzie](https://github.com/dotnet/coreclr/blob/master/Documentation/botr/xplat-minidump-generation.md#configurationpolicy)do obsługi zrzutów systemu Linux)</li><li>\*. tak (Biblioteka udostępnionych obiektów systemu Linux)</li><li>\*. a (archiwum macOS)</li><li>\*. DYLIB (Biblioteka dynamiczna macOS)</li></ul></li></ul> |
-| [Wdrażanie samodzielne (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd) | <ul><li>wycofywan&dagger;<ul><li>Przegląda&dagger; aplikacje MVC, jeśli widoki nie są wstępnie skompilowane</li><li>Strony&dagger; MVC lub Razor Pages aplikacje, jeśli strony nie są wstępnie skompilowane</li><li>wwwroot&dagger;</li><li>\*pliki. dll</li><li>{Nazwa zestawu}. deps. JSON</li><li>{Nazwa zestawu}. dll</li><li>{Nazwa zestawu}. exe</li><li>{Nazwa zestawu}. pdb</li><li>{NAZWA ZESTAWU}. Widoki. dll</li><li>{NAZWA ZESTAWU}. Widoki. pdb</li><li>{Nazwa zestawu}. runtimeconfig. JSON</li><li>Web. config (wdrożenia usług IIS)</li></ul></li></ul> |
+| [Plik wykonywalny zależny od platformy (całego)](/dotnet/core/deploying/#framework-dependent-executables-fde) | <ul><li>wycofywan&dagger;<ul><li>Przegląda &dagger; aplikacje MVC; Jeśli widoki nie są wstępnie skompilowane</li><li>Strony &dagger; aplikacji MVC lub Razor Pages, jeśli strony nie są wstępnie skompilowane</li><li>wwwroot&dagger;</li><li>\*pliki. dll</li><li>{Nazwa zestawu} .deps.jsna</li><li>{Nazwa zestawu}. dll</li><li>{NAZWA ZESTAWU} {. Rozszerzenie}. exe rozszerzenie w systemie Windows, brak rozszerzenia w systemie macOS lub Linux</li><li>{Nazwa zestawu}. pdb</li><li>{NAZWA ZESTAWU} .Views.dll</li><li>{NAZWA ZESTAWU}. Widoki. pdb</li><li>{Nazwa zestawu} .runtimeconfig.jsna</li><li>web.config (wdrożenia usług IIS)</li><li>Generuj zrzut ([Narzędzie](https://github.com/dotnet/coreclr/blob/master/Documentation/botr/xplat-minidump-generation.md#configurationpolicy)do obsługi zrzutów systemu Linux)</li><li>\*. tak (Biblioteka udostępnionych obiektów systemu Linux)</li><li>\*. a (archiwum macOS)</li><li>\*. DYLIB (Biblioteka dynamiczna macOS)</li></ul></li></ul> |
+| [Wdrażanie samodzielne (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd) | <ul><li>wycofywan&dagger;<ul><li>Przegląda &dagger; aplikacje MVC, jeśli widoki nie są wstępnie skompilowane</li><li>Strony &dagger; aplikacji MVC lub Razor Pages, jeśli strony nie są wstępnie skompilowane</li><li>wwwroot&dagger;</li><li>\*pliki. dll</li><li>{Nazwa zestawu} .deps.jsna</li><li>{Nazwa zestawu}. dll</li><li>{Nazwa zestawu}. exe</li><li>{Nazwa zestawu}. pdb</li><li>{NAZWA ZESTAWU} .Views.dll</li><li>{NAZWA ZESTAWU}. Widoki. pdb</li><li>{Nazwa zestawu} .runtimeconfig.jsna</li><li>web.config (wdrożenia usług IIS)</li></ul></li></ul> |
 
 &dagger;Wskazuje katalog
 
@@ -64,8 +66,8 @@ Katalog *publikowania* zawiera elementy możliwe do wdrożenia aplikacji wytwarz
 
 | Typ aplikacji | Struktura katalogów |
 | -------- | ------------------- |
-| [Plik wykonywalny zależny od platformy (całego)](/dotnet/core/deploying/#framework-dependent-executables-fde) | <ul><li>wycofywan&dagger;<ul><li>Przegląda&dagger; aplikacje MVC; Jeśli widoki nie są wstępnie skompilowane</li><li>Strony&dagger; aplikacji MVC Razor lub Pages, jeśli strony nie są wstępnie skompilowane</li><li>wwwroot&dagger;</li><li>\*pliki. dll</li><li>{Nazwa zestawu}. deps. JSON</li><li>{Nazwa zestawu}. dll</li><li>{NAZWA ZESTAWU} {. Rozszerzenie}. exe rozszerzenie w systemie Windows, brak rozszerzenia w systemie macOS lub Linux</li><li>{Nazwa zestawu}. pdb</li><li>{NAZWA ZESTAWU}. Widoki. dll</li><li>{NAZWA ZESTAWU}. Widoki. pdb</li><li>{Nazwa zestawu}. runtimeconfig. JSON</li><li>Web. config (wdrożenia usług IIS)</li><li>Generuj zrzut ([Narzędzie](https://github.com/dotnet/coreclr/blob/master/Documentation/botr/xplat-minidump-generation.md#configurationpolicy)do obsługi zrzutów systemu Linux)</li><li>\*. tak (Biblioteka udostępnionych obiektów systemu Linux)</li><li>\*. a (archiwum macOS)</li><li>\*. DYLIB (Biblioteka dynamiczna macOS)</li></ul></li></ul> |
-| [Wdrażanie samodzielne (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd) | <ul><li>wycofywan&dagger;<ul><li>Przegląda&dagger; aplikacje MVC, jeśli widoki nie są wstępnie skompilowane</li><li>Strony&dagger; aplikacji MVC Razor lub Pages, jeśli strony nie są wstępnie skompilowane</li><li>wwwroot&dagger;</li><li>\*pliki. dll</li><li>{Nazwa zestawu}. deps. JSON</li><li>{Nazwa zestawu}. dll</li><li>{Nazwa zestawu}. exe</li><li>{Nazwa zestawu}. pdb</li><li>{NAZWA ZESTAWU}. Widoki. dll</li><li>{NAZWA ZESTAWU}. Widoki. pdb</li><li>{Nazwa zestawu}. runtimeconfig. JSON</li><li>Web. config (wdrożenia usług IIS)</li></ul></li></ul> |
+| [Plik wykonywalny zależny od platformy (całego)](/dotnet/core/deploying/#framework-dependent-executables-fde) | <ul><li>wycofywan&dagger;<ul><li>Przegląda &dagger; aplikacje MVC; Jeśli widoki nie są wstępnie skompilowane</li><li>Strony &dagger; aplikacji MVC lub Razor Pages, jeśli strony nie są wstępnie skompilowane</li><li>wwwroot&dagger;</li><li>\*pliki. dll</li><li>{Nazwa zestawu} .deps.jsna</li><li>{Nazwa zestawu}. dll</li><li>{NAZWA ZESTAWU} {. Rozszerzenie}. exe rozszerzenie w systemie Windows, brak rozszerzenia w systemie macOS lub Linux</li><li>{Nazwa zestawu}. pdb</li><li>{NAZWA ZESTAWU} .Views.dll</li><li>{NAZWA ZESTAWU}. Widoki. pdb</li><li>{Nazwa zestawu} .runtimeconfig.jsna</li><li>web.config (wdrożenia usług IIS)</li><li>Generuj zrzut ([Narzędzie](https://github.com/dotnet/coreclr/blob/master/Documentation/botr/xplat-minidump-generation.md#configurationpolicy)do obsługi zrzutów systemu Linux)</li><li>\*. tak (Biblioteka udostępnionych obiektów systemu Linux)</li><li>\*. a (archiwum macOS)</li><li>\*. DYLIB (Biblioteka dynamiczna macOS)</li></ul></li></ul> |
+| [Wdrażanie samodzielne (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd) | <ul><li>wycofywan&dagger;<ul><li>Przegląda &dagger; aplikacje MVC, jeśli widoki nie są wstępnie skompilowane</li><li>Strony &dagger; aplikacji MVC lub Razor Pages, jeśli strony nie są wstępnie skompilowane</li><li>wwwroot&dagger;</li><li>\*pliki. dll</li><li>{Nazwa zestawu} .deps.jsna</li><li>{Nazwa zestawu}. dll</li><li>{Nazwa zestawu}. exe</li><li>{Nazwa zestawu}. pdb</li><li>{NAZWA ZESTAWU} .Views.dll</li><li>{NAZWA ZESTAWU}. Widoki. pdb</li><li>{Nazwa zestawu} .runtimeconfig.jsna</li><li>web.config (wdrożenia usług IIS)</li></ul></li></ul> |
 
 &dagger;Wskazuje katalog
 
@@ -90,7 +92,7 @@ Katalog *dzienników* można utworzyć dla wdrożenia przy użyciu jednego z nas
    </Target>
    ```
 
-   `<MakeDir>` Element tworzy pusty folder *dzienników* w publikowanym danych wyjściowych. Element używa `PublishDir` właściwości, aby określić lokalizację docelową dla tworzenia folderu. Kilka metod wdrażania, takich jak Web Deploy, Pomijaj puste foldery podczas wdrażania. `<WriteLinesToFile>` Element generuje plik w folderze *Logs* , który gwarantuje wdrożenie folderu na serwerze. Tworzenie folderów przy użyciu tego podejścia kończy się niepowodzeniem, jeśli proces roboczy nie ma dostępu do zapisu do folderu docelowego.
+   `<MakeDir>`Element tworzy pusty folder *dzienników* w publikowanym danych wyjściowych. Element używa właściwości, `PublishDir` Aby określić lokalizację docelową dla tworzenia folderu. Kilka metod wdrażania, takich jak Web Deploy, Pomijaj puste foldery podczas wdrażania. `<WriteLinesToFile>`Element generuje plik w folderze *Logs* , który gwarantuje wdrożenie folderu na serwerze. Tworzenie folderów przy użyciu tego podejścia kończy się niepowodzeniem, jeśli proces roboczy nie ma dostępu do zapisu do folderu docelowego.
 
 * Fizycznie Utwórz katalog *dzienników* na serwerze we wdrożeniu.
 

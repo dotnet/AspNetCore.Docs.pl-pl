@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 08/17/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: tutorials/razor-pages/page
-ms.openlocfilehash: 6195982f902c17d835d2675c1231eed347d603c2
-ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
+ms.openlocfilehash: 898f3be045755a0ee14c738b6ffc104408ded7b6
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84652817"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407775"
 ---
 # <a name="part-3-scaffolded-razor-pages-in-aspnet-core"></a>Część 3, szkieletowe Razor strony w ASP.NET Core
 

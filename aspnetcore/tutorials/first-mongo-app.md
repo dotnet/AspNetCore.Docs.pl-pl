@@ -8,17 +8,19 @@ ms.custom: mvc, seodec18
 ms.date: 08/17/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: tutorials/first-mongo-app
-ms.openlocfilehash: 46607fc92670bb46a155ddf3248bc8a36b600a4a
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: 831479f04551441b079d3f34d043c7486bad7ac0
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84452255"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85409023"
 ---
 # <a name="create-a-web-api-with-aspnet-core-and-mongodb"></a>Tworzenie internetowego interfejsu API za pomocą ASP.NET Core i MongoDB
 
@@ -234,7 +236,7 @@ Baza danych jest gotowa. Możesz rozpocząć tworzenie ASP.NET Core internetoweg
 
 ## <a name="add-a-configuration-model"></a>Dodaj model konfiguracji
 
-1. Dodaj następujące wartości konfiguracji bazy danych do pliku *appSettings. JSON*:
+1. Dodaj następujące wartości konfiguracji bazy danych do *appsettings.jsna*:
 
    [!code-json[](first-mongo-app/samples/3.x/SampleApp/appsettings.json?highlight=2-6)]
 
@@ -242,7 +244,7 @@ Baza danych jest gotowa. Możesz rozpocząć tworzenie ASP.NET Core internetoweg
 
    [!code-csharp[](first-mongo-app/samples/3.x/SampleApp/Models/BookstoreDatabaseSettings.cs)]
 
-   Powyższa `BookstoreDatabaseSettings` Klasa jest używana do przechowywania wartości właściwości *appSettings. JSON* `BookstoreDatabaseSettings` . Nazwy właściwości JSON i C# są nazywane identycznie, aby uprościć proces mapowania.
+   Poprzednia `BookstoreDatabaseSettings` Klasa jest używana do przechowywania *appsettings.jsw* `BookstoreDatabaseSettings` wartościach właściwości pliku. Nazwy właściwości JSON i C# są nazywane identycznie, aby uprościć proces mapowania.
 
 1. Dodaj następujący wyróżniony kod do `Startup.ConfigureServices` :
 
@@ -250,7 +252,7 @@ Baza danych jest gotowa. Możesz rozpocząć tworzenie ASP.NET Core internetoweg
 
    Powyższy kod ma następujące działanie:
 
-   * Wystąpienie konfiguracji, do którego są powiązane sekcje pliku *appSettings. JSON* , `BookstoreDatabaseSettings` jest zarejestrowane w kontenerze iniekcji zależności (di). Na przykład `BookstoreDatabaseSettings` `ConnectionString` właściwość obiektu jest wypełniana `BookstoreDatabaseSettings:ConnectionString` właściwością w pliku *appSettings. JSON*.
+   * Wystąpienie konfiguracji, do którego są powiązane *appsettings.jsw* pliku, `BookstoreDatabaseSettings` jest zarejestrowane w kontenerze iniekcji zależności (di). Na przykład `BookstoreDatabaseSettings` `ConnectionString` właściwość obiektu jest wypełniana `BookstoreDatabaseSettings:ConnectionString` właściwością w *appsettings.jsna*.
    * `IBookstoreDatabaseSettings`Interfejs jest rejestrowany przy użyciu programu di z pojedynczym [okresem istnienia usługi](xref:fundamentals/dependency-injection#service-lifetimes). Po dowstrzykiwaniu wystąpienie interfejsu jest rozpoznawane jako `BookstoreDatabaseSettings` obiekt.
 
 1. Dodaj następujący kod na początku *Startup.cs* , aby rozwiązać `BookstoreDatabaseSettings` `IBookstoreDatabaseSettings` odwołania i:
@@ -264,7 +266,7 @@ Baza danych jest gotowa. Możesz rozpocząć tworzenie ASP.NET Core internetoweg
 
    [!code-csharp[](first-mongo-app/samples/3.x/SampleApp/Services/BookService.cs?name=snippet_BookServiceClass)]
 
-   W poprzednim kodzie `IBookstoreDatabaseSettings` wystąpienie jest pobierane z funkcji di przez iniekcję konstruktora. Ta technika zapewnia dostęp do wartości konfiguracyjnych *appSettings. JSON* , które zostały dodane w sekcji [Dodawanie modelu konfiguracji](#add-a-configuration-model) .
+   W poprzednim kodzie `IBookstoreDatabaseSettings` wystąpienie jest pobierane z funkcji di przez iniekcję konstruktora. Ta technika zapewnia dostęp do *appsettings.jsna* wartościach konfiguracji, które zostały dodane w sekcji [Dodawanie modelu konfiguracji](#add-a-configuration-model) .
 
 1. Dodaj następujący wyróżniony kod do `Startup.ConfigureServices` :
 
@@ -584,7 +586,7 @@ Baza danych jest gotowa. Możesz rozpocząć tworzenie ASP.NET Core internetoweg
 
 ## <a name="add-a-configuration-model"></a>Dodaj model konfiguracji
 
-1. Dodaj następujące wartości konfiguracji bazy danych do pliku *appSettings. JSON*:
+1. Dodaj następujące wartości konfiguracji bazy danych do *appsettings.jsna*:
 
    [!code-json[](first-mongo-app/samples/2.x/SampleApp/appsettings.json?highlight=2-6)]
 
@@ -592,7 +594,7 @@ Baza danych jest gotowa. Możesz rozpocząć tworzenie ASP.NET Core internetoweg
 
    [!code-csharp[](first-mongo-app/samples/2.x/SampleApp/Models/BookstoreDatabaseSettings.cs)]
 
-   Powyższa `BookstoreDatabaseSettings` Klasa jest używana do przechowywania wartości właściwości *appSettings. JSON* `BookstoreDatabaseSettings` . Nazwy właściwości JSON i C# są nazywane identycznie, aby uprościć proces mapowania.
+   Poprzednia `BookstoreDatabaseSettings` Klasa jest używana do przechowywania *appsettings.jsw* `BookstoreDatabaseSettings` wartościach właściwości pliku. Nazwy właściwości JSON i C# są nazywane identycznie, aby uprościć proces mapowania.
 
 1. Dodaj następujący wyróżniony kod do `Startup.ConfigureServices` :
 
@@ -600,7 +602,7 @@ Baza danych jest gotowa. Możesz rozpocząć tworzenie ASP.NET Core internetoweg
 
    Powyższy kod ma następujące działanie:
 
-   * Wystąpienie konfiguracji, do którego są powiązane sekcje pliku *appSettings. JSON* , `BookstoreDatabaseSettings` jest zarejestrowane w kontenerze iniekcji zależności (di). Na przykład `BookstoreDatabaseSettings` `ConnectionString` właściwość obiektu jest wypełniana `BookstoreDatabaseSettings:ConnectionString` właściwością w pliku *appSettings. JSON*.
+   * Wystąpienie konfiguracji, do którego są powiązane *appsettings.jsw* pliku, `BookstoreDatabaseSettings` jest zarejestrowane w kontenerze iniekcji zależności (di). Na przykład `BookstoreDatabaseSettings` `ConnectionString` właściwość obiektu jest wypełniana `BookstoreDatabaseSettings:ConnectionString` właściwością w *appsettings.jsna*.
    * `IBookstoreDatabaseSettings`Interfejs jest rejestrowany przy użyciu programu di z pojedynczym [okresem istnienia usługi](xref:fundamentals/dependency-injection#service-lifetimes). Po dowstrzykiwaniu wystąpienie interfejsu jest rozpoznawane jako `BookstoreDatabaseSettings` obiekt.
 
 1. Dodaj następujący kod na początku *Startup.cs* , aby rozwiązać `BookstoreDatabaseSettings` `IBookstoreDatabaseSettings` odwołania i:
@@ -614,7 +616,7 @@ Baza danych jest gotowa. Możesz rozpocząć tworzenie ASP.NET Core internetoweg
 
    [!code-csharp[](first-mongo-app/samples/2.x/SampleApp/Services/BookService.cs?name=snippet_BookServiceClass)]
 
-   W poprzednim kodzie `IBookstoreDatabaseSettings` wystąpienie jest pobierane z funkcji di przez iniekcję konstruktora. Ta technika zapewnia dostęp do wartości konfiguracyjnych *appSettings. JSON* , które zostały dodane w sekcji [Dodawanie modelu konfiguracji](#add-a-configuration-model) .
+   W poprzednim kodzie `IBookstoreDatabaseSettings` wystąpienie jest pobierane z funkcji di przez iniekcję konstruktora. Ta technika zapewnia dostęp do *appsettings.jsna* wartościach konfiguracji, które zostały dodane w sekcji [Dodawanie modelu konfiguracji](#add-a-configuration-model) .
 
 1. Dodaj następujący wyróżniony kod do `Startup.ConfigureServices` :
 

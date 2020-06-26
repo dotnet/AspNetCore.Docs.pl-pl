@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 11/26/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: tutorials/web-api-javascript
-ms.openlocfilehash: c3eb003812a31d8cf3168453fcc11601ffba19fb
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 4031289e43af75ef2026661dbecbbbce30593d43
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774356"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407983"
 ---
 # <a name="tutorial-call-an-aspnet-core-web-api-with-javascript"></a>Samouczek: wywoływanie interfejsu API sieci Web ASP.NET Core przy użyciu języka JavaScript
 
@@ -40,9 +42,9 @@ Aby uzyskać ASP.NET Core 2,2, zobacz wersja 2,2 [wywołania interfejsu API siec
 
 ## <a name="call-the-web-api-with-javascript"></a>Wywoływanie interfejsu API sieci Web przy użyciu języka JavaScript
 
-W tej sekcji dodasz stronę HTML zawierającą formularze do tworzenia elementów do wykonania i zarządzania nimi. Programy obsługi zdarzeń są dołączone do elementów na stronie. Programy obsługi zdarzeń powodują żądania HTTP do metod akcji internetowego interfejsu API. `fetch` Funkcja pobierania interfejsu API inicjuje każde żądanie HTTP.
+W tej sekcji dodasz stronę HTML zawierającą formularze do tworzenia elementów do wykonania i zarządzania nimi. Programy obsługi zdarzeń są dołączone do elementów na stronie. Programy obsługi zdarzeń powodują żądania HTTP do metod akcji internetowego interfejsu API. Funkcja pobierania interfejsu API `fetch` inicjuje każde żądanie HTTP.
 
-Funkcja zwraca obiekt [obietnicy](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise) , który zawiera odpowiedź HTTP reprezentowane jako `Response` obiekt. `fetch` Typowym wzorcem jest wyodrębnienie treści odpowiedzi JSON przez wywołanie `json` funkcji w `Response` obiekcie. Język JavaScript aktualizuje stronę ze szczegółowymi informacjami z odpowiedzi internetowego interfejsu API.
+`fetch`Funkcja zwraca obiekt [obietnicy](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise) , który zawiera odpowiedź HTTP reprezentowane jako `Response` obiekt. Typowym wzorcem jest wyodrębnienie treści odpowiedzi JSON przez wywołanie `json` funkcji w `Response` obiekcie. Język JavaScript aktualizuje stronę ze szczegółowymi informacjami z odpowiedzi internetowego interfejsu API.
 
 Najprostsze `fetch` wywołanie akceptuje pojedynczy parametr reprezentujący trasę. Drugi parametr, znany jako `init` obiekt, jest opcjonalny. `init`służy do konfigurowania żądania HTTP.
 
@@ -54,18 +56,18 @@ Najprostsze `fetch` wywołanie akceptuje pojedynczy parametr reprezentujący tra
 
 1. Utwórz folder *js* w folderze *wwwroot* .
 
-1. Dodaj plik HTML o nazwie *index. html* do folderu *wwwroot* . Zastąp zawartość *index. html* następującym znacznikiem:
+1. Dodaj plik HTML o nazwie *index.html* do folderu *wwwroot* . Zastąp zawartość *index.html* następującym znacznikiem:
 
     [!code-html[](first-web-api/samples/3.0/TodoApi/wwwroot/index.html)]
 
-1. Dodaj plik języka JavaScript o nazwie *site. js* do folderu *wwwroot/js* . Zastąp zawartość środowiska *site. js* następującym kodem:
+1. Dodaj plik języka JavaScript o nazwie *site.js* do folderu *wwwroot/js* . Zastąp zawartość *site.js* następującym kodem:
 
     [!code-javascript[](first-web-api/samples/3.0/TodoApi/wwwroot/js/site.js?name=snippet_SiteJs)]
 
 Zmiana ustawień uruchamiania projektu ASP.NET Core może być wymagana do lokalnego przetestowania strony HTML:
 
-1. Otwórz *Properties\launchSettings.JSON*.
-1. Usuń `launchUrl` właściwość, aby wymusić Otwieranie aplikacji w *indeksie. html*&mdash;plik domyślny projektu.
+1. Otwórz *Properties\launchSettings.jsna*.
+1. Usuń `launchUrl` Właściwość, aby wymusić otwieranie przez aplikację w *index.html* &mdash; domyślnego pliku projektu.
 
 Ten przykład wywołuje wszystkie metody CRUD internetowego interfejsu API. Poniżej znajdują się wyjaśnienia żądań interfejsu API sieci Web.
 
@@ -75,22 +77,22 @@ W poniższym kodzie żądanie HTTP GET jest wysyłane do trasy *API/TodoItems* :
 
 [!code-javascript[](first-web-api/samples/3.0/TodoApi/wwwroot/js/site.js?name=snippet_GetItems)]
 
-Gdy internetowy interfejs API zwraca kod stanu pomyślnego, `_displayItems` funkcja jest wywoływana. Każdy element do wykonania w parametrze tablicy akceptowane przez `_displayItems` jest dodawany do tabeli za pomocą przycisków **Edytuj** i **Usuń** . Jeśli żądanie internetowego interfejsu API nie powiedzie się, zostanie zarejestrowany błąd w konsoli przeglądarki.
+Gdy internetowy interfejs API zwraca kod stanu pomyślnego, `_displayItems` Funkcja jest wywoływana. Każdy element do wykonania w parametrze tablicy akceptowane przez `_displayItems` jest dodawany do tabeli za pomocą przycisków **Edytuj** i **Usuń** . Jeśli żądanie internetowego interfejsu API nie powiedzie się, zostanie zarejestrowany błąd w konsoli przeglądarki.
 
 ### <a name="add-a-to-do-item"></a>Dodaj element do wykonania
 
 W poniższym kodzie:
 
-* `item` Zmienna jest zadeklarowana do konstruowania reprezentacji literału obiektu elementu do wykonania.
+* `item`Zmienna jest zadeklarowana do konstruowania reprezentacji literału obiektu elementu do wykonania.
 * Żądanie pobrania jest konfigurowane z następującymi opcjami:
   * `method`&mdash;Określa czasownik akcji POST protokołu HTTP.
   * `body`&mdash;Określa reprezentację treści żądania w formacie JSON. KOD JSON jest generowany przez przekazanie literału obiektu przechowywanego w `item` funkcji [JSON. stringify](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) .
-  * `headers`&mdash;Określa nagłówki `Accept` żądań `Content-Type` http i. Oba nagłówki są ustawione na `application/json` , aby określić typ nośnika, który jest odbierany i wysyłany odpowiednio.
+  * `headers`&mdash;Określa `Accept` `Content-Type` nagłówki żądań HTTP i. Oba nagłówki są ustawione na `application/json` , aby określić typ nośnika, który jest odbierany i wysyłany odpowiednio.
 * Żądanie HTTP POST jest wysyłane do trasy *API/TodoItems* .
 
 [!code-javascript[](first-web-api/samples/3.0/TodoApi/wwwroot/js/site.js?name=snippet_AddItem)]
 
-Gdy internetowy interfejs API zwraca kod stanu pomyślnego, `getItems` funkcja jest wywoływana w celu zaktualizowania tabeli HTML. Jeśli żądanie internetowego interfejsu API nie powiedzie się, zostanie zarejestrowany błąd w konsoli przeglądarki.
+Gdy internetowy interfejs API zwraca kod stanu pomyślnego, `getItems` Funkcja jest wywoływana w celu zaktualizowania tabeli HTML. Jeśli żądanie internetowego interfejsu API nie powiedzie się, zostanie zarejestrowany błąd w konsoli przeglądarki.
 
 ### <a name="update-a-to-do-item"></a>Aktualizowanie elementu do wykonania
 

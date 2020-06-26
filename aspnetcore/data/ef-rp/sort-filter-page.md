@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 07/22/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: data/ef-rp/sort-filter-page
-ms.openlocfilehash: 99b14c99cb99d106604f1a4edacf1da0a2d6125c
-ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
+ms.openlocfilehash: 0a87fe2f4cf7014cc15752dcf25545ce7aaa4687
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84652588"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408607"
 ---
 # <a name="part-3-razor-pages-with-ef-core-in-aspnet-core---sort-filter-paging"></a>Część 3, Razor strony z EF Core w ASP.NET Core — sortowanie, filtrowanie, stronicowanie
 
@@ -146,7 +148,7 @@ Przetestuj aplikację:
 
 * Wybierz pozycję **Wyszukaj**.
 
-Zwróć uwagę, że adres URL zawiera ciąg wyszukiwania. Przykład:
+Zwróć uwagę, że adres URL zawiera ciąg wyszukiwania. Na przykład:
 
 ```
 https://localhost:<port>/Students?SearchString=an

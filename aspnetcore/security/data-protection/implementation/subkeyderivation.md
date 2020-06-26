@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 10/14/2016
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/data-protection/implementation/subkeyderivation
-ms.openlocfilehash: c4b4076d532e33b48b3438f842507a8cda2d71b6
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: f373c37a5ea4dab91463d011d3ecd6799ae6d014
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776854"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408035"
 ---
 # <a name="subkey-derivation-and-authenticated-encryption-in-aspnet-core"></a>Wyprowadzanie podkluczy i uwierzytelnione szyfrowanie w ASP.NET Core
 
@@ -31,15 +33,15 @@ Większość kluczy w pierścieniu kluczy będzie zawierać pewną postać entro
 
 ## <a name="additional-authenticated-data-and-subkey-derivation"></a>Dodatkowe uwierzytelnione dane i podklucze
 
-`IAuthenticatedEncryptor` Interfejs służy jako podstawowy interfejs dla wszystkich uwierzytelnionych operacji szyfrowania. Jego `Encrypt` Metoda przyjmuje dwa bufory: zwykły tekst i ADDITIONALAUTHENTICATEDDATA (AAD). Zawartość w postaci zwykłego tekstu nie zmieniła się `IDataProtector.Protect`z wywołaniem, ale jest generowana przez system i składa się z trzech składników:
+`IAuthenticatedEncryptor`Interfejs służy jako podstawowy interfejs dla wszystkich uwierzytelnionych operacji szyfrowania. Jego `Encrypt` Metoda przyjmuje dwa bufory: zwykły tekst i additionalAuthenticatedData (AAD). Zawartość w postaci zwykłego tekstu nie zmieniła się z wywołaniem `IDataProtector.Protect` , ale jest generowana przez system i składa się z trzech składników:
 
 1. 32-bitowy nagłówek Magic 09 F0 C9 F0, który identyfikuje tę wersję systemu ochrony danych.
 
 2. Identyfikator klucza 128-bitowego.
 
-3. Ciąg o zmiennej długości utworzony z łańcucha przeznaczenie, który utworzył `IDataProtector` tę operację.
+3. Ciąg o zmiennej długości utworzony z łańcucha przeznaczenie, który utworzył tę `IDataProtector` operację.
 
-Ponieważ usługa AAD jest unikatowa dla krotki wszystkich trzech składników, możemy użyć jej do uzyskania nowych kluczy z KM zamiast używania kilometrów we wszystkich naszych operacjach kryptograficznych. Dla każdego wywołania do `IAuthenticatedEncryptor.Encrypt`programu odbywa się następujący proces wyprowadzania klucza:
+Ponieważ usługa AAD jest unikatowa dla krotki wszystkich trzech składników, możemy użyć jej do uzyskania nowych kluczy z KM zamiast używania kilometrów we wszystkich naszych operacjach kryptograficznych. Dla każdego wywołania do programu `IAuthenticatedEncryptor.Encrypt` odbywa się następujący proces wyprowadzania klucza:
 
 (K_E, K_H) = SP800_108_CTR_HMACSHA512 (K_M, AAD, contextHeader | | | | | | | | | | | | | |)
 
@@ -66,7 +68,7 @@ Po wygenerowaniu K_E za pomocą powyższego mechanizmu generujemy losowy wektor 
 *Output: = modyfikator | | IV | | E_cbc (K_E, IV, dane) | | HMAC (K_H, IV | | E_cbc (K_E, IV, dane))*
 
 > [!NOTE]
-> `IDataProtector.Protect` Implementacja zwróci [nagłówek Magic i identyfikator klucza](xref:security/data-protection/implementation/authenticated-encryption-details) do danych wyjściowych przed przywróceniem go do obiektu wywołującego. Ponieważ nagłówek Magic i identyfikator klucza są niejawnie częścią usługi [AAD](xref:security/data-protection/implementation/subkeyderivation#data-protection-implementation-subkey-derivation-aad)i ponieważ modyfikator klucza jest podawany jako dane wejściowe do KDF, oznacza to, że każdy pojedynczy bajt końcowego zwróconego ładunku jest uwierzytelniany przez komputery Mac.
+> `IDataProtector.Protect`Implementacja zwróci [nagłówek Magic i identyfikator klucza](xref:security/data-protection/implementation/authenticated-encryption-details) do danych wyjściowych przed przywróceniem go do obiektu wywołującego. Ponieważ nagłówek Magic i identyfikator klucza są niejawnie częścią usługi [AAD](xref:security/data-protection/implementation/subkeyderivation#data-protection-implementation-subkey-derivation-aad)i ponieważ modyfikator klucza jest podawany jako dane wejściowe do KDF, oznacza to, że każdy pojedynczy bajt końcowego zwróconego ładunku jest uwierzytelniany przez komputery Mac.
 
 ## <a name="galoiscounter-mode-encryption--validation"></a>Szyfrowanie w trybie Galois/licznik + Walidacja
 

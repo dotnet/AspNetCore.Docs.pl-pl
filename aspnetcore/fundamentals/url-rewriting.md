@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 08/16/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: fundamentals/url-rewriting
-ms.openlocfilehash: e43cd5055737feaef451d27b651c1d301c1f93d2
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: c41ba2e067c8dc978b1359db548733c5f8890a2b
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84105951"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408386"
 ---
 # <a name="url-rewriting-middleware-in-aspnet-core"></a>Ponowne zapisywanie przez adres URL oprogramowania pośredniczącego w ASP.NET Core
 
@@ -81,7 +83,7 @@ Używaj ponownego zapisywania adresów URL, gdy nie możesz użyć następujący
 * [Moduł Apache mod_rewrite na serwerze Apache](https://httpd.apache.org/docs/2.4/rewrite/)
 * [Ponowne zapisywanie adresów URL w witrynie Nginx](https://www.nginx.com/blog/creating-nginx-rewrite-rules/)
 
-Należy również użyć oprogramowania pośredniczącego, gdy aplikacja jest hostowana na [serwerze HTTP. sys](xref:fundamentals/servers/httpsys) (wcześniej nazywanej webListener).
+Należy również użyć oprogramowania pośredniczącego, gdy aplikacja jest hostowana na [serwerzeHTTP.sys](xref:fundamentals/servers/httpsys) (dawniej nazywa się webListener).
 
 Główne przyczyny używania technologii zapisywania adresów URL opartych na serwerze w usługach IIS, Apache i Nginx są następujące:
 
@@ -220,7 +222,7 @@ Serwer nie może uzyskać dostępu do zasobów. Jeśli zasób istnieje, jest pob
 
 Zastosuj reguły mod_rewrite Apache za pomocą programu <xref:Microsoft.AspNetCore.Rewrite.ApacheModRewriteOptionsExtensions.AddApacheModRewrite*> . Upewnij się, że plik reguł został wdrożony razem z aplikacją. Aby uzyskać więcej informacji i przykłady reguł mod_rewrite, zobacz [Apache mod_rewrite](https://httpd.apache.org/docs/2.4/rewrite/).
 
-A służy <xref:System.IO.StreamReader> do odczytywania reguł z pliku reguł *ApacheModRewrite. txt* :
+A służy <xref:System.IO.StreamReader> do odczytywania reguł z pliku reguł *ApacheModRewrite.txt* :
 
 [!code-csharp[](url-rewriting/samples/3.x/SampleApp/Startup.cs?name=snippet1&highlight=3-4,12)]
 
@@ -266,9 +268,9 @@ Oprogramowanie pośredniczące obsługuje następujące zmienne serwera Apache m
 
 ### <a name="iis-url-rewrite-module-rules"></a>Reguły modułu ponownego zapisywania adresów URL usług IIS
 
-Aby użyć tego samego zestawu reguł, który ma zastosowanie do modułu ponowne zapisywanie adresów URL usług IIS, użyj <xref:Microsoft.AspNetCore.Rewrite.IISUrlRewriteOptionsExtensions.AddIISUrlRewrite*> . Upewnij się, że plik reguł został wdrożony razem z aplikacją. Nie należy kierować oprogramowanie pośredniczące do korzystania z pliku *Web. config* aplikacji podczas uruchamiania w usługach IIS systemu Windows Server. W przypadku usług IIS te reguły powinny być przechowywane poza plikiem *Web. config* aplikacji, aby uniknąć konfliktów z modułem ponownego zapisywania usług IIS. Aby uzyskać więcej informacji i przykłady reguł modułu ponownego zapisywania adresów URL usług IIS, zobacz [using URL Rewrite module 2,0](/iis/extensions/url-rewrite-module/using-url-rewrite-module-20) i [informacje konfiguracyjne modułu ponownego zapisywania adresu URL](/iis/extensions/url-rewrite-module/url-rewrite-module-configuration-reference).
+Aby użyć tego samego zestawu reguł, który ma zastosowanie do modułu ponowne zapisywanie adresów URL usług IIS, użyj <xref:Microsoft.AspNetCore.Rewrite.IISUrlRewriteOptionsExtensions.AddIISUrlRewrite*> . Upewnij się, że plik reguł został wdrożony razem z aplikacją. Nie należy kierować oprogramowanie pośredniczące do korzystania z pliku *web.config* aplikacji podczas uruchamiania w usługach IIS systemu Windows Server. W przypadku usług IIS te reguły powinny być przechowywane poza plikiem *web.config* aplikacji, aby uniknąć konfliktów z modułem ponownego zapisywania usług IIS. Aby uzyskać więcej informacji i przykłady reguł modułu ponownego zapisywania adresów URL usług IIS, zobacz [using URL Rewrite module 2,0](/iis/extensions/url-rewrite-module/using-url-rewrite-module-20) i [informacje konfiguracyjne modułu ponownego zapisywania adresu URL](/iis/extensions/url-rewrite-module/url-rewrite-module-configuration-reference).
 
-A służy <xref:System.IO.StreamReader> do odczytywania reguł z pliku reguł *IISUrlRewrite. XML* :
+A służy <xref:System.IO.StreamReader> do odczytywania reguł z pliku reguł *IISUrlRewrite.xml* :
 
 [!code-csharp[](url-rewriting/samples/3.x/SampleApp/Startup.cs?name=snippet1&highlight=5-6,13)]
 
@@ -331,13 +333,13 @@ Użyj <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.Add*> , aby za
 
 [!code-csharp[](url-rewriting/samples/3.x/SampleApp/Startup.cs?name=snippet1&highlight=14)]
 
-Przykładowa aplikacja przedstawia metodę, która przekierowuje żądania dla ścieżek kończących się na *. XML*. Jeśli zostanie wysłane żądanie `/file.xml` , żądanie jest przekierowywane do `/xmlfiles/file.xml` . Kod stanu jest ustawiony na *301 — trwale przeniesiony*. Gdy przeglądarka wykonuje nowe żądanie dla */XmlFiles/File.XML*, oprogramowanie pośredniczące plików statycznych zachowuje ten plik na kliencie z folderu *wwwroot/XmlFiles* . W przypadku przekierowania jawnie ustaw kod stanu odpowiedzi. W przeciwnym razie zwracany jest kod stanu *200-OK* i przekierowanie nie wystąpi na kliencie.
+Przykładowa aplikacja przedstawia metodę, która przekierowuje żądania dla ścieżek kończących się na *. XML*. Jeśli zostanie wysłane żądanie `/file.xml` , żądanie jest przekierowywane do `/xmlfiles/file.xml` . Kod stanu jest ustawiony na *301 — trwale przeniesiony*. Gdy przeglądarka wykonuje nowe żądanie */xmlfiles/file.xml*, oprogramowanie pośredniczące plików statycznych zachowuje ten plik na kliencie z folderu *wwwroot/XmlFiles* . W przypadku przekierowania jawnie ustaw kod stanu odpowiedzi. W przeciwnym razie zwracany jest kod stanu *200-OK* i przekierowanie nie wystąpi na kliencie.
 
 *RewriteRules.cs*:
 
 [!code-csharp[](url-rewriting/samples/3.x/SampleApp/RewriteRules.cs?name=snippet_RedirectXmlFileRequests&highlight=14-18)]
 
-Takie podejście może również ponownie zapisywać żądania. Przykładowa aplikacja pokazuje, jak ponownie napisać ścieżkę do dowolnego żądania pliku tekstowego, aby zapewnić obsługę pliku tekstowego *pliku. txt* z folderu *wwwroot* . Oprogramowanie pośredniczące plików statycznych obsługuje plik na podstawie zaktualizowanej ścieżki żądania:
+Takie podejście może również ponownie zapisywać żądania. Przykładowa aplikacja pokazuje, jak ponownie napisać ścieżkę do dowolnego żądania pliku tekstowego, aby *obfile.txt* plik tekstowy z folderu *wwwroot* . Oprogramowanie pośredniczące plików statycznych obsługuje plik na podstawie zaktualizowanej ścieżki żądania:
 
 [!code-csharp[](url-rewriting/samples/3.x/SampleApp/Startup.cs?name=snippet1&highlight=15,22)]
 
@@ -351,17 +353,17 @@ Użyj, <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.Add*> Aby uż
 
 [!code-csharp[](url-rewriting/samples/3.x/SampleApp/Startup.cs?name=snippet1&highlight=16-17)]
 
-Wartości parametrów w aplikacji przykładowej dla `extension` i `newPath` są sprawdzane pod kątem spełnienia kilku warunków. `extension`Musi zawierać wartość i musi mieć wartość *. png*, *. jpg*lub *. gif*. Jeśli `newPath` jest nieprawidłowa, <xref:System.ArgumentException> zostanie zgłoszony. Jeśli zostanie wysłane żądanie dotyczące pliku *Image. png*, żądanie jest przekierowywane do `/png-images/image.png` . Jeśli zostanie wysłane żądanie do *obrazu. jpg*, żądanie jest przekierowywane do `/jpg-images/image.jpg` . Kod stanu jest ustawiony na *301 — trwale przeniesiony*, a `context.Result` ustawienie jest ustawione na zatrzymanie przetwarzania reguł i wysłanie odpowiedzi.
+Wartości parametrów w aplikacji przykładowej dla `extension` i `newPath` są sprawdzane pod kątem spełnienia kilku warunków. `extension`Musi zawierać wartość i musi mieć wartość *. png*, *. jpg*lub *. gif*. Jeśli `newPath` jest nieprawidłowa, <xref:System.ArgumentException> zostanie zgłoszony. Jeśli zostanie wysłane żądanie *image.png*, żądanie jest przekierowywane do `/png-images/image.png` . Jeśli zostanie wysłane żądanie *image.jpg*, żądanie jest przekierowywane do `/jpg-images/image.jpg` . Kod stanu jest ustawiony na *301 — trwale przeniesiony*, a `context.Result` ustawienie jest ustawione na zatrzymanie przetwarzania reguł i wysłanie odpowiedzi.
 
 [!code-csharp[](url-rewriting/samples/3.x/SampleApp/RewriteRules.cs?name=snippet_RedirectImageRequests)]
 
 Oryginalne żądanie:`/image.png`
 
-![Okno przeglądarki z Narzędzia deweloperskie śledzenia żądań i odpowiedzi dla pliku Image. png](url-rewriting/_static/add_redirect_png_requests.png)
+![Okno przeglądarki z Narzędzia deweloperskie śledzenia żądań i odpowiedzi dla image.png](url-rewriting/_static/add_redirect_png_requests.png)
 
 Oryginalne żądanie:`/image.jpg`
 
-![Okno przeglądarki z Narzędzia deweloperskie śledzenia żądań i odpowiedzi dla obrazu. jpg](url-rewriting/_static/add_redirect_jpg_requests.png)
+![Okno przeglądarki z Narzędzia deweloperskie śledzenia żądań i odpowiedzi dla image.jpg](url-rewriting/_static/add_redirect_jpg_requests.png)
 
 ## <a name="regex-examples"></a>Przykłady wyrażeń regularnych
 
@@ -433,7 +435,7 @@ Używaj ponownego zapisywania adresów URL, gdy nie możesz użyć następujący
 * [Moduł Apache mod_rewrite na serwerze Apache](https://httpd.apache.org/docs/2.4/rewrite/)
 * [Ponowne zapisywanie adresów URL w witrynie Nginx](https://www.nginx.com/blog/creating-nginx-rewrite-rules/)
 
-Należy również użyć oprogramowania pośredniczącego, gdy aplikacja jest hostowana na [serwerze HTTP. sys](xref:fundamentals/servers/httpsys) (wcześniej nazywanej webListener).
+Należy również użyć oprogramowania pośredniczącego, gdy aplikacja jest hostowana na [serwerzeHTTP.sys](xref:fundamentals/servers/httpsys) (dawniej nazywa się webListener).
 
 Główne przyczyny używania technologii zapisywania adresów URL opartych na serwerze w usługach IIS, Apache i Nginx są następujące:
 
@@ -574,7 +576,7 @@ Serwer nie może uzyskać dostępu do zasobów. Jeśli zasób istnieje, jest pob
 
 Zastosuj reguły mod_rewrite Apache za pomocą programu <xref:Microsoft.AspNetCore.Rewrite.ApacheModRewriteOptionsExtensions.AddApacheModRewrite*> . Upewnij się, że plik reguł został wdrożony razem z aplikacją. Aby uzyskać więcej informacji i przykłady reguł mod_rewrite, zobacz [Apache mod_rewrite](https://httpd.apache.org/docs/2.4/rewrite/).
 
-A służy <xref:System.IO.StreamReader> do odczytywania reguł z pliku reguł *ApacheModRewrite. txt* :
+A służy <xref:System.IO.StreamReader> do odczytywania reguł z pliku reguł *ApacheModRewrite.txt* :
 
 [!code-csharp[](url-rewriting/samples/2.x/SampleApp/Startup.cs?name=snippet1&highlight=3-4,12)]
 
@@ -620,9 +622,9 @@ Oprogramowanie pośredniczące obsługuje następujące zmienne serwera Apache m
 
 ### <a name="iis-url-rewrite-module-rules"></a>Reguły modułu ponownego zapisywania adresów URL usług IIS
 
-Aby użyć tego samego zestawu reguł, który ma zastosowanie do modułu ponowne zapisywanie adresów URL usług IIS, użyj <xref:Microsoft.AspNetCore.Rewrite.IISUrlRewriteOptionsExtensions.AddIISUrlRewrite*> . Upewnij się, że plik reguł został wdrożony razem z aplikacją. Nie należy kierować oprogramowanie pośredniczące do korzystania z pliku *Web. config* aplikacji podczas uruchamiania w usługach IIS systemu Windows Server. W przypadku usług IIS te reguły powinny być przechowywane poza plikiem *Web. config* aplikacji, aby uniknąć konfliktów z modułem ponownego zapisywania usług IIS. Aby uzyskać więcej informacji i przykłady reguł modułu ponownego zapisywania adresów URL usług IIS, zobacz [using URL Rewrite module 2,0](/iis/extensions/url-rewrite-module/using-url-rewrite-module-20) i [informacje konfiguracyjne modułu ponownego zapisywania adresu URL](/iis/extensions/url-rewrite-module/url-rewrite-module-configuration-reference).
+Aby użyć tego samego zestawu reguł, który ma zastosowanie do modułu ponowne zapisywanie adresów URL usług IIS, użyj <xref:Microsoft.AspNetCore.Rewrite.IISUrlRewriteOptionsExtensions.AddIISUrlRewrite*> . Upewnij się, że plik reguł został wdrożony razem z aplikacją. Nie należy kierować oprogramowanie pośredniczące do korzystania z pliku *web.config* aplikacji podczas uruchamiania w usługach IIS systemu Windows Server. W przypadku usług IIS te reguły powinny być przechowywane poza plikiem *web.config* aplikacji, aby uniknąć konfliktów z modułem ponownego zapisywania usług IIS. Aby uzyskać więcej informacji i przykłady reguł modułu ponownego zapisywania adresów URL usług IIS, zobacz [using URL Rewrite module 2,0](/iis/extensions/url-rewrite-module/using-url-rewrite-module-20) i [informacje konfiguracyjne modułu ponownego zapisywania adresu URL](/iis/extensions/url-rewrite-module/url-rewrite-module-configuration-reference).
 
-A służy <xref:System.IO.StreamReader> do odczytywania reguł z pliku reguł *IISUrlRewrite. XML* :
+A służy <xref:System.IO.StreamReader> do odczytywania reguł z pliku reguł *IISUrlRewrite.xml* :
 
 [!code-csharp[](url-rewriting/samples/2.x/SampleApp/Startup.cs?name=snippet1&highlight=5-6,13)]
 
@@ -685,13 +687,13 @@ Użyj <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.Add*> , aby za
 
 [!code-csharp[](url-rewriting/samples/2.x/SampleApp/Startup.cs?name=snippet1&highlight=14)]
 
-Przykładowa aplikacja przedstawia metodę, która przekierowuje żądania dla ścieżek kończących się na *. XML*. Jeśli zostanie wysłane żądanie `/file.xml` , żądanie jest przekierowywane do `/xmlfiles/file.xml` . Kod stanu jest ustawiony na *301 — trwale przeniesiony*. Gdy przeglądarka wykonuje nowe żądanie dla */XmlFiles/File.XML*, oprogramowanie pośredniczące plików statycznych zachowuje ten plik na kliencie z folderu *wwwroot/XmlFiles* . W przypadku przekierowania jawnie ustaw kod stanu odpowiedzi. W przeciwnym razie zwracany jest kod stanu *200-OK* i przekierowanie nie wystąpi na kliencie.
+Przykładowa aplikacja przedstawia metodę, która przekierowuje żądania dla ścieżek kończących się na *. XML*. Jeśli zostanie wysłane żądanie `/file.xml` , żądanie jest przekierowywane do `/xmlfiles/file.xml` . Kod stanu jest ustawiony na *301 — trwale przeniesiony*. Gdy przeglądarka wykonuje nowe żądanie */xmlfiles/file.xml*, oprogramowanie pośredniczące plików statycznych zachowuje ten plik na kliencie z folderu *wwwroot/XmlFiles* . W przypadku przekierowania jawnie ustaw kod stanu odpowiedzi. W przeciwnym razie zwracany jest kod stanu *200-OK* i przekierowanie nie wystąpi na kliencie.
 
 *RewriteRules.cs*:
 
 [!code-csharp[](url-rewriting/samples/2.x/SampleApp/RewriteRules.cs?name=snippet_RedirectXmlFileRequests&highlight=14-18)]
 
-Takie podejście może również ponownie zapisywać żądania. Przykładowa aplikacja pokazuje, jak ponownie napisać ścieżkę do dowolnego żądania pliku tekstowego, aby zapewnić obsługę pliku tekstowego *pliku. txt* z folderu *wwwroot* . Oprogramowanie pośredniczące plików statycznych obsługuje plik na podstawie zaktualizowanej ścieżki żądania:
+Takie podejście może również ponownie zapisywać żądania. Przykładowa aplikacja pokazuje, jak ponownie napisać ścieżkę do dowolnego żądania pliku tekstowego, aby *obfile.txt* plik tekstowy z folderu *wwwroot* . Oprogramowanie pośredniczące plików statycznych obsługuje plik na podstawie zaktualizowanej ścieżki żądania:
 
 [!code-csharp[](url-rewriting/samples/2.x/SampleApp/Startup.cs?name=snippet1&highlight=15,22)]
 
@@ -705,17 +707,17 @@ Użyj, <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.Add*> Aby uż
 
 [!code-csharp[](url-rewriting/samples/2.x/SampleApp/Startup.cs?name=snippet1&highlight=16-17)]
 
-Wartości parametrów w aplikacji przykładowej dla `extension` i `newPath` są sprawdzane pod kątem spełnienia kilku warunków. `extension`Musi zawierać wartość i musi mieć wartość *. png*, *. jpg*lub *. gif*. Jeśli `newPath` jest nieprawidłowa, <xref:System.ArgumentException> zostanie zgłoszony. Jeśli zostanie wysłane żądanie dotyczące pliku *Image. png*, żądanie jest przekierowywane do `/png-images/image.png` . Jeśli zostanie wysłane żądanie do *obrazu. jpg*, żądanie jest przekierowywane do `/jpg-images/image.jpg` . Kod stanu jest ustawiony na *301 — trwale przeniesiony*, a `context.Result` ustawienie jest ustawione na zatrzymanie przetwarzania reguł i wysłanie odpowiedzi.
+Wartości parametrów w aplikacji przykładowej dla `extension` i `newPath` są sprawdzane pod kątem spełnienia kilku warunków. `extension`Musi zawierać wartość i musi mieć wartość *. png*, *. jpg*lub *. gif*. Jeśli `newPath` jest nieprawidłowa, <xref:System.ArgumentException> zostanie zgłoszony. Jeśli zostanie wysłane żądanie *image.png*, żądanie jest przekierowywane do `/png-images/image.png` . Jeśli zostanie wysłane żądanie *image.jpg*, żądanie jest przekierowywane do `/jpg-images/image.jpg` . Kod stanu jest ustawiony na *301 — trwale przeniesiony*, a `context.Result` ustawienie jest ustawione na zatrzymanie przetwarzania reguł i wysłanie odpowiedzi.
 
 [!code-csharp[](url-rewriting/samples/2.x/SampleApp/RewriteRules.cs?name=snippet_RedirectImageRequests)]
 
 Oryginalne żądanie:`/image.png`
 
-![Okno przeglądarki z Narzędzia deweloperskie śledzenia żądań i odpowiedzi dla pliku Image. png](url-rewriting/_static/add_redirect_png_requests.png)
+![Okno przeglądarki z Narzędzia deweloperskie śledzenia żądań i odpowiedzi dla image.png](url-rewriting/_static/add_redirect_png_requests.png)
 
 Oryginalne żądanie:`/image.jpg`
 
-![Okno przeglądarki z Narzędzia deweloperskie śledzenia żądań i odpowiedzi dla obrazu. jpg](url-rewriting/_static/add_redirect_jpg_requests.png)
+![Okno przeglądarki z Narzędzia deweloperskie śledzenia żądań i odpowiedzi dla image.jpg](url-rewriting/_static/add_redirect_jpg_requests.png)
 
 ## <a name="regex-examples"></a>Przykłady wyrażeń regularnych
 

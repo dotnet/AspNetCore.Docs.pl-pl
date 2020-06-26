@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 03/23/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/components/class-libraries
-ms.openlocfilehash: 0c6f1330a5bac8ab37c957c5ed4e81678fe1f27d
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
+ms.openlocfilehash: b54eb7142fc7e1665cc0aaaad068a67852ac2f74
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85242514"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399078"
 ---
 # <a name="aspnet-core-razor-components-class-libraries"></a>RazorBiblioteki klas składników ASP.NET Core
 
@@ -39,7 +41,7 @@ Postępuj zgodnie ze wskazówkami zawartymi w <xref:blazor/get-started> artykule
 # <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 1. Tworzenie nowego projektu.
-1. Wybierz ** Razor bibliotekę klas**. Wybierz przycisk **Dalej**.
+1. Wybierz ** Razor bibliotekę klas**. Wybierz pozycję **Dalej**.
 1. W oknie dialogowym **Utwórz nową Razor bibliotekę klas** wybierz pozycję **Utwórz**.
 1. Podaj nazwę projektu w polu **Nazwa projektu** lub zaakceptuj nazwę domyślną projektu. W przykładach w tym temacie użyto nazwy projektu `MyComponentLib1` . Wybierz przycisk **Utwórz**.
 1. Dodaj RCL do rozwiązania:

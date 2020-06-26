@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 10/14/2016
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mobile/index
-ms.openlocfilehash: 74ea8bd17b2257fbd1a80eaf9ba10bf9e34ffaa1
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 1af888a9d9e74ea4fafd35bff79d0617aa33a97c
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82766566"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400748"
 ---
 # <a name="mobile-development-with-aspnet-core"></a>Programowanie aplikacji mobilnych za pomocą ASP.NET Core
 

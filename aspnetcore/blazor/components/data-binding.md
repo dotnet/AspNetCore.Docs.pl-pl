@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 03/26/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/components/data-binding
-ms.openlocfilehash: 1654c0ce40d44ad4cc679c151ef99f155e31b514
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
+ms.openlocfilehash: 35873e57171b4d86affcb475ad2d55aef443d3b5
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85242501"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399182"
 ---
 # <a name="aspnet-core-blazor-data-binding"></a>ASP.NET Core Blazor powiązania danych
 
@@ -244,7 +246,7 @@ Następujący `PasswordField` składnik ( `PasswordField.razor` ):
 
 * Ustawia `<input>` wartość elementu na `Password` Właściwość.
 * Uwidacznia zmiany `Password` właściwości w składniku nadrzędnym z [`EventCallback`](xref:blazor/components/event-handling#eventcallback) .
-* Używa `onclick` zdarzenia, aby wyzwolić `ToggleShowPassword` metodę. Aby uzyskać więcej informacji, zobacz <xref:blazor/components/event-handling>.
+* Używa `onclick` zdarzenia do wyzwolenia `ToggleShowPassword` metody. Aby uzyskać więcej informacji, zobacz <xref:blazor/components/event-handling>.
 
 ```razor
 <h1>Child Component</h1>

@@ -8,17 +8,19 @@ ms.date: 03/27/2019
 ms.topic: tutorial
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: data/ef-mvc/complex-data-model
-ms.openlocfilehash: 10d6f0bd6f6b95efbe868e4bc21513460e1f0b67
-ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
+ms.openlocfilehash: 2264ed6f67d2394d17a79e28d1ee4a1273af73cd
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84652475"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85401639"
 ---
 # <a name="tutorial-create-a-complex-data-model---aspnet-mvc-with-ef-core"></a>Samouczek: Tworzenie złożonego modelu danych — ASP.NET MVC z EF Core
 
@@ -476,7 +478,7 @@ Zapisz zmiany i skompiluj projekt.
 
 ## <a name="change-the-connection-string"></a>Zmień parametry połączenia
 
-Teraz masz nowy kod w `DbInitializer` klasie, który dodaje dane inicjatora dla nowych jednostek do pustej bazy danych. Aby utworzyć EF Utwórz nową pustą bazę danych, należy zmienić nazwę bazy danych w parametrach pliku *appSettings. JSON* na ContosoUniversity3 lub inną nazwę, która nie została użyta na komputerze, którego używasz.
+Teraz masz nowy kod w `DbInitializer` klasie, który dodaje dane inicjatora dla nowych jednostek do pustej bazy danych. Aby program EF utworzył nową pustą bazę danych, należy zmienić nazwę bazy danych w parametrach połączenia w *appsettings.jsna* ContosoUniversity3 lub inną nazwę, która nie została użyta na komputerze, którego używasz.
 
 ```json
 {
@@ -485,7 +487,7 @@ Teraz masz nowy kod w `DbInitializer` klasie, który dodaje dane inicjatora dla 
   },
 ```
 
-Zapisz zmiany w pliku *appSettings. JSON*.
+Zapisz zmianę w *appsettings.js*.
 
 > [!NOTE]
 > Alternatywą dla zmiany nazwy bazy danych jest usunięcie bazy danych. Użyj **Eksplorator obiektów SQL Server** (SSOX) lub `database drop` interfejsu wiersza polecenia:

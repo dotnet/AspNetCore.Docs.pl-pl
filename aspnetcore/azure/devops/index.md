@@ -7,17 +7,19 @@ ms.date: 08/07/2018
 ms.custom: mvc, seodec18
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: azure/devops/index
-ms.openlocfilehash: da9d5365b6e3920dbf672f65d5fab4ea158932c2
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 138a8e04e057e5679c3d2b84d5351a3a4ab7cd8c
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82766904"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400352"
 ---
 # <a name="devops-with-aspnet-core-and-azure"></a>Metodyka DevOps z platformami ASP.NET Core i Azure
 

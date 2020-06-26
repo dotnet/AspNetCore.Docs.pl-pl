@@ -7,17 +7,19 @@ ms.date: 10/24/2018
 ms.custom: mvc, seodec18
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: azure/devops/cicd
-ms.openlocfilehash: f5b0e0ee1c903de26188815c7dc01ed547cca97e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 0edded18d766d6f2af08f6be5dbecbfd52a14a35
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82767138"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400560"
 ---
 # <a name="continuous-integration-and-deployment"></a>Ciągła integracja i ciągłe wdrażanie
 
@@ -36,7 +38,7 @@ W tej sekcji wykonasz następujące zadania:
 
 ## <a name="publish-the-apps-code-to-github"></a>Opublikuj kod aplikacji w usłudze GitHub
 
-1. Otwórz okno przeglądarki i przejdź do `https://github.com`.
+1. Otwórz okno przeglądarki i przejdź do `https://github.com` .
 1. Kliknij **+** listę rozwijaną w nagłówku i wybierz pozycję **nowe repozytorium**:
 
     ![Opcja nowego repozytorium usługi GitHub](media/cicd/github-new-repo.png)
@@ -62,13 +64,13 @@ W tej sekcji wykonasz następujące zadania:
     git push -u origin master
     ```
 
-1. Otwórz okno przeglądarki i przejdź do `https://github.com/<GitHub_username>/simple-feed-reader/`. Sprawdź, czy kod jest wyświetlany w repozytorium GitHub.
+1. Otwórz okno przeglądarki i przejdź do `https://github.com/<GitHub_username>/simple-feed-reader/` . Sprawdź, czy kod jest wyświetlany w repozytorium GitHub.
 
 ## <a name="disconnect-local-git-deployment"></a>Rozłącz lokalne wdrożenie narzędzia Git
 
 Usuń lokalne wdrożenie narzędzia Git, wykonując poniższe kroki. Azure Pipelines (usługa Azure DevOps) zamienia i rozszerza te funkcje.
 
-1. Otwórz [Azure Portal](https://portal.azure.com/)i przejdź do aplikacji sieci Web *przemieszczania (\<mywebapp\>unique_number/Staging)* . Aplikację sieci Web można szybko zlokalizować *, wprowadzając w* polu wyszukiwania portalu:
+1. Otwórz [Azure Portal](https://portal.azure.com/)i przejdź do aplikacji sieci Web *przemieszczania (mywebapp \<unique_number\> /Staging)* . Aplikację sieci Web można szybko zlokalizować *, wprowadzając w* polu wyszukiwania portalu:
 
     ![termin wyszukiwania aplikacji sieci Web](media/cicd/portal-search-box.png)
 
@@ -89,7 +91,7 @@ Usuń lokalne wdrożenie narzędzia Git, wykonując poniższe kroki. Azure Pipel
 
     ![Przycisk Rozpocznij projekt](media/cicd/vsts-start-project.png)
 
-1. Zostanie otwarta przeglądarka * \<\>account_name. VisualStudio.com*. Kliknij link *MyFirstProject* , aby rozpocząć konfigurowanie potoku DevOps projektu.
+1. Zostanie otwarta przeglądarka * \<account_name\> . VisualStudio.com*. Kliknij link *MyFirstProject* , aby rozpocząć konfigurowanie potoku DevOps projektu.
 
 ## <a name="configure-the-azure-pipelines-pipeline"></a>Konfigurowanie potoku Azure Pipelines
 
@@ -105,7 +107,7 @@ Istnieją trzy różne czynności do wykonania. Wykonanie kroków opisanych w po
 
     ![Wybierz źródło — GitHub](media/cicd/vsts-select-source.png)
 
-1. Autoryzacja jest wymagana, aby usługa Azure DevOps mogła uzyskać dostęp do Twojego repozytorium GitHub. Wprowadź *<GitHub_username> połączenia GitHub* w polu tekstowym **Nazwa połączenia** . Przykład:
+1. Autoryzacja jest wymagana, aby usługa Azure DevOps mogła uzyskać dostęp do Twojego repozytorium GitHub. Wprowadź *<GitHub_username> połączenia GitHub* w polu tekstowym **Nazwa połączenia** . Na przykład:
 
     ![Nazwa połączenia GitHub](media/cicd/vsts-repo-authz.png)
 
@@ -136,7 +138,7 @@ Istnieją trzy różne czynności do wykonania. Wykonanie kroków opisanych w po
 
     ![Zapisz definicję kompilacji — modalne okno dialogowe](media/cicd/vsts-save-modal.png)
 
-    Użyj folderu domyślnego *\\*, a następnie kliknij przycisk **Zapisz** .
+    Użyj folderu domyślnego *\\* , a następnie kliknij przycisk **Zapisz** .
 
 ### <a name="create-the-release-pipeline"></a>Tworzenie potoku wydania
 
@@ -178,7 +180,7 @@ Istnieją trzy różne czynności do wykonania. Wykonanie kroków opisanych w po
 
 1. Kliknij link **1 fazy, 2 zadania** w polu **produkcja** :
 
-    ![Potok wersji — link do środowiska produkcyjnego. png](media/cicd/vsts-production-link.png)
+    ![Potok wydania — środowisko produkcyjne link.png](media/cicd/vsts-production-link.png)
 
     Zostanie wyświetlona karta **zadania** środowiska.
 1. Kliknij zadanie **wdróż Azure App Service w miejscu** . Ustawienia są wyświetlane w panelu po prawej stronie.
@@ -197,8 +199,8 @@ Istnieją trzy różne czynności do wykonania. Wykonanie kroków opisanych w po
 ## <a name="commit-changes-to-github-and-automatically-deploy-to-azure"></a>Zatwierdzanie zmian w usłudze GitHub i automatyczne wdrażanie na platformie Azure
 
 1. Otwórz *SimpleFeedReader. sln* w programie Visual Studio.
-1. W Eksplorator rozwiązań Otwórz *Pages\Index.cshtml*. Zmień `<h2>Simple Feed Reader - V3</h2>` na `<h2>Simple Feed Reader - V4</h2>`.
-1. Naciśnij **klawisze CTRL**+**SHIFT**+**B** , aby skompilować aplikację.
+1. W Eksplorator rozwiązań Otwórz *Pages\Index.cshtml*. Zmień `<h2>Simple Feed Reader - V3</h2>` na `<h2>Simple Feed Reader - V4</h2>` .
+1. Naciśnij **klawisze CTRL** + **SHIFT** + **B** , aby skompilować aplikację.
 1. Zatwierdź plik do repozytorium GitHub. Użyj strony **zmiany** w karcie *Team Explorer* programu Visual Studio lub wykonaj następujące czynności przy użyciu powłoki poleceń komputera lokalnego:
 
     ```console
@@ -219,7 +221,7 @@ Istnieją trzy różne czynności do wykonania. Wykonanie kroków opisanych w po
 
     ![Włącz integrację ciągłą](media/cicd/enable-ci.png)
 
-1. Przejdź do karty **z kolejką** na stronie**kompilacje** **Azure Pipelines** > w Azure DevOps Services. Kompilacja w kolejce pokazuje gałąź i zatwierdzenie, które wyzwoliły kompilację:
+1. Przejdź do karty z **kolejką** na **Azure Pipelines**  >  stronie**kompilacje** Azure Pipelines w Azure DevOps Services. Kompilacja w kolejce pokazuje gałąź i zatwierdzenie, które wyzwoliły kompilację:
 
     ![Kompilacja umieszczona w kolejce](media/cicd/build-queued.png)
 
@@ -237,15 +239,15 @@ Na karcie **zadania** definicji kompilacji są wyświetlane poszczególne etapy,
 
 ![zadania definicji kompilacji](media/cicd/build-definition-tasks.png)
 
-1. **Restore** &mdash; wykonuje `dotnet restore` polecenie, aby przywrócić pakiety NuGet aplikacji. Domyślnym źródłem pakietów jest nuget.org.
-1. **Kompilacja** &mdash; wykonuje polecenie `dotnet build --configuration release` , aby skompilować kod aplikacji. Ta `--configuration` opcja służy do tworzenia zoptymalizowanej wersji kodu, która jest odpowiednia do wdrożenia w środowisku produkcyjnym. Zmodyfikuj zmienną *BuildConfiguration* na karcie **zmienne** definicji kompilacji, jeśli na przykład wymagana jest Konfiguracja debugowania.
-1. **Test** &mdash; wykonuje `dotnet test --configuration release --logger trx --results-directory <local_path_on_build_agent>` polecenie, aby uruchomić testy jednostkowe aplikacji. Testy jednostkowe są wykonywane w dowolnym projekcie języka C# `**/*Tests/*.csproj` pasującym do wzorca globalizowania. Wyniki testu są zapisywane w pliku *. TRX* w lokalizacji określonej przez `--results-directory` opcję. Jeśli jakiekolwiek testy zakończą się niepowodzeniem, kompilacja nie powiedzie się i nie zostanie wdrożona.
+1. **Przywróć** &mdash; Wykonuje `dotnet restore` polecenie, aby przywrócić pakiety NuGet aplikacji. Domyślnym źródłem pakietów jest nuget.org.
+1. **Kompilacja** &mdash; Wykonuje `dotnet build --configuration release` polecenie, aby skompilować kod aplikacji. Ta `--configuration` opcja służy do tworzenia zoptymalizowanej wersji kodu, która jest odpowiednia do wdrożenia w środowisku produkcyjnym. Zmodyfikuj zmienną *BuildConfiguration* na karcie **zmienne** definicji kompilacji, jeśli na przykład wymagana jest Konfiguracja debugowania.
+1. **Test** &mdash; Wykonuje `dotnet test --configuration release --logger trx --results-directory <local_path_on_build_agent>` polecenie, aby uruchomić testy jednostkowe aplikacji. Testy jednostkowe są wykonywane w dowolnym projekcie języka C# pasującym do `**/*Tests/*.csproj` wzorca globalizowania. Wyniki testu są zapisywane w pliku *. TRX* w lokalizacji określonej przez `--results-directory` opcję. Jeśli jakiekolwiek testy zakończą się niepowodzeniem, kompilacja nie powiedzie się i nie zostanie wdrożona.
 
     > [!NOTE]
     > Aby sprawdzić, czy testy jednostkowe działają, zmodyfikuj *SimpleFeedReader. Tests\Services\NewsServiceTests.cs* na celowo całkowicie Przerwij jeden z testów. Na przykład zmień `Assert.True(result.Count > 0);` na `Assert.False(result.Count > 0);` w `Returns_News_Stories_Given_Valid_Uri` metodzie. Zatwierdź i wypchnij zmianę do usługi GitHub. Kompilacja jest wyzwalana i kończy się niepowodzeniem. Stan potoku kompilacji zmieni się na **Niepowodzenie**. Przywróć zmiany, Zatwierdź i wypchnij ponownie. Kompilacja powiodła się.
 
-1. **Publikacja** &mdash; wykonuje `dotnet publish --configuration release --output <local_path_on_build_agent>` polecenie w celu utworzenia pliku *zip* z artefaktami do wdrożenia. `--output` Opcja określa lokalizację publikacji pliku *zip* . Ta lokalizacja jest określona przez przekazanie [wstępnie zdefiniowanej zmiennej](/azure/devops/pipelines/build/variables) o nazwie `$(build.artifactstagingdirectory)`. Ta zmienna powiększa się do ścieżki lokalnej, takiej jak *c:\agent\_work\1\a*, na agencie kompilacji.
-1. **Publikowanie artefaktu** &mdash; publikuje plik *zip* utworzony przez zadanie **publikowania** . Zadanie przyjmuje lokalizację pliku *. zip* jako parametr, który jest wstępnie zdefiniowaną zmienną `$(build.artifactstagingdirectory)`. Plik *zip* jest publikowany jako folder o nazwie *Drop*.
+1. **Publikuj** &mdash; Wykonuje `dotnet publish --configuration release --output <local_path_on_build_agent>` polecenie, aby utworzyć plik *zip* z artefaktami, które mają zostać wdrożone. `--output`Opcja określa lokalizację publikacji pliku *zip* . Ta lokalizacja jest określona przez przekazanie [wstępnie zdefiniowanej zmiennej](/azure/devops/pipelines/build/variables) o nazwie `$(build.artifactstagingdirectory)` . Ta zmienna powiększa się do ścieżki lokalnej, takiej jak *c:\agent \_ work\1\a*, na agencie kompilacji.
+1. **Publikuj artefakt** &mdash; Publikuje plik *zip* utworzony przez zadanie **publikowania** . Zadanie przyjmuje lokalizację pliku *. zip* jako parametr, który jest wstępnie zdefiniowaną zmienną `$(build.artifactstagingdirectory)` . Plik *zip* jest publikowany jako folder o nazwie *Drop*.
 
 Kliknij link **podsumowania** definicji kompilacji, aby wyświetlić historię kompilacji z definicją:
 
@@ -279,7 +281,7 @@ Potok wersji składa się z dwóch zadań: *wdróż Azure App Service w gnieźdz
 
 ![Zrzut ekranu przedstawiający zadanie wdrażania potoku wydania](media/cicd/release-definition-task1.png)
 
-Subskrypcja platformy Azure, typ usługi, nazwa aplikacji sieci Web, Grupa zasobów i miejsce wdrożenia są zdefiniowane w zadaniu wdrażania. Pole tekstowe **pakiet lub folder** zawiera ścieżkę pliku *. zip* , która ma zostać wyodrębniona i wdrożona w miejscu *przejściowym* aplikacji sieci Web *mywebapp\<unique_number\> * .
+Subskrypcja platformy Azure, typ usługi, nazwa aplikacji sieci Web, Grupa zasobów i miejsce wdrożenia są zdefiniowane w zadaniu wdrażania. Pole tekstowe **pakiet lub folder** zawiera ścieżkę pliku *. zip* , która ma zostać wyodrębniona i wdrożona w miejscu *przejściowym* aplikacji sieci Web *mywebapp \<unique_number\> * .
 
 Kliknięcie zadania wymiany gniazd powoduje wyświetlenie następującej konfiguracji zadania:
 

@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 12/16/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: host-and-deploy/azure-apps/index
-ms.openlocfilehash: cc12dc2bc6720652866227dc2bbcbcf4e8af793d
-ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
+ms.openlocfilehash: 9ffeebbf8125ddac5d6e621e411c4e86c5bd34b1
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85074236"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399312"
 ---
 # <a name="deploy-aspnet-core-apps-to-azure-app-service"></a>Wdróż aplikacje ASP.NET Core w Azure App Service
 
@@ -243,7 +245,7 @@ Po zakończeniu operacji zostanie zainstalowana najnowsza wersja programu .NET C
 
 **Używanie rozszerzenia witryny w wersji zapoznawczej z szablonem ARM**
 
-Jeśli szablon ARM jest używany do tworzenia i wdrażania aplikacji, `siteextensions` Typ zasobu może służyć do dodawania rozszerzenia witryny do aplikacji sieci Web. Przykład:
+Jeśli szablon ARM jest używany do tworzenia i wdrażania aplikacji, `siteextensions` Typ zasobu może służyć do dodawania rozszerzenia witryny do aplikacji sieci Web. Na przykład:
 
 [!code-json[](index/sample/arm.json?highlight=2)]
 

@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 04/06/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/data-protection/compatibility/replacing-machinekey
-ms.openlocfilehash: 72e736f820ec243a7ad1461fc70e2711ac8b76ee
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: db041ab4939fc7c39ac01cc02e350aca2fbee93e
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777465"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400547"
 ---
 # <a name="replace-the-aspnet-machinekey-in-aspnet-core"></a>Zastąp ASP.NET machineKey w ASP.NET Core
 
@@ -29,16 +31,16 @@ Implementacja `<machineKey>` elementu w ASP.NET [jest wymienna](https://blogs.ms
 > [!NOTE]
 > Nowy system ochrony danych można zainstalować tylko w istniejącej aplikacji ASP.NET, w której znajduje się program .NET 4.5.1 lub nowszy. Instalacja zakończy się niepowodzeniem, jeśli aplikacja jest przeznaczona dla platformy .NET 4,5 lub niższej.
 
-Aby zainstalować nowy system ochrony danych w istniejącym projekcie ASP.NET 4.5.1 +, zainstaluj pakiet Microsoft. AspNetCore. dataprotection. SystemWeb. Spowoduje to utworzenie wystąpienia systemu ochrony danych przy użyciu [domyślnych ustawień konfiguracji](xref:security/data-protection/configuration/default-settings) .
+Aby zainstalować nowy system ochrony danych w istniejącym projekcie ASP.NET 4.5.1 +, zainstaluj pakiet Microsoft.AspNetCore.DataProtection.SystemWeb. Spowoduje to utworzenie wystąpienia systemu ochrony danych przy użyciu [domyślnych ustawień konfiguracji](xref:security/data-protection/configuration/default-settings) .
 
-Po zainstalowaniu pakietu wstawia wiersz do *pliku Web. config* , który informuje ASP.NET o tym, aby użyć go do [większości operacji kryptograficznych](https://blogs.msdn.microsoft.com/webdev/2012/10/23/cryptographic-improvements-in-asp-net-4-5-pt-2/), w tym uwierzytelniania formularzy, stanu widoku i wywołań machineKey. Protect. Wstawiony wiersz odczytuje się w następujący sposób.
+Po zainstalowaniu pakietu wstawia wiersz do *Web.config* , który informuje ASP.NET o tym, aby użyć go do [większości operacji kryptograficznych](https://blogs.msdn.microsoft.com/webdev/2012/10/23/cryptographic-improvements-in-asp-net-4-5-pt-2/), w tym uwierzytelniania formularzy, stanu widoku i wywołań machineKey. Protect. Wstawiony wiersz odczytuje się w następujący sposób.
 
 ```xml
 <machineKey compatibilityMode="Framework45" dataProtectorType="..." />
 ```
 
 >[!TIP]
-> Można sprawdzić, czy nowy system ochrony danych jest aktywny, sprawdzając pola, takie jak `__VIEWSTATE`, które powinny zaczynać się od "CfDJ8", jak w poniższym przykładzie. "CfDJ8" to reprezentacja Base64 nagłówka Magic "09 F0 C9 F0", który identyfikuje ładunek chroniony przez system ochrony danych.
+> Można sprawdzić, czy nowy system ochrony danych jest aktywny, sprawdzając pola, takie jak `__VIEWSTATE` , które powinny zaczynać się od "CfDJ8", jak w poniższym przykładzie. "CfDJ8" to reprezentacja Base64 nagłówka Magic "09 F0 C9 F0", który identyfikuje ładunek chroniony przez system ochrony danych.
 
 ```html
 <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="CfDJ8AWPr2EQPTBGs3L2GCZOpk...">
@@ -73,9 +75,9 @@ namespace DataProtectionDemo
 ```
 
 >[!TIP]
-> Można również użyć `<machineKey applicationName="my-app" ... />` zamiast jawnie wywołania setapplicationname. Jest to wygodny mechanizm pozwalający uniknąć wymuszania tworzenia przez dewelopera typu DataProtectionStartup-pochodnego, jeśli wszystko, co chciało skonfigurować, została ustawiona nazwa aplikacji.
+> Można również użyć `<machineKey applicationName="my-app" ... />` zamiast jawnie wywołania Setapplicationname. Jest to wygodny mechanizm pozwalający uniknąć wymuszania tworzenia przez dewelopera typu DataProtectionStartup-pochodnego, jeśli wszystko, co chciało skonfigurować, została ustawiona nazwa aplikacji.
 
-Aby włączyć tę konfigurację niestandardową, Wróć do pliku Web. config i poszukaj `<appSettings>` elementu, który został dodany przez pakiet do tego celu. Będzie wyglądać następująco:
+Aby włączyć tę konfigurację niestandardową, Wróć do Web.config i poszukaj `<appSettings>` elementu, który został dodany do pliku konfiguracji przez pakiet. Będzie wyglądać następująco:
 
 ```xml
 <appSettings>

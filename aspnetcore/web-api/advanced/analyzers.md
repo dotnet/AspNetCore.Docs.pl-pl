@@ -8,21 +8,23 @@ ms.custom: mvc
 ms.date: 09/05/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: web-api/advanced/analyzers
-ms.openlocfilehash: 530ce2d2a7f67f549f6d188a0c571a5d58518377
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 1f44fd65836cc42ffb2303890eefb053b61c4c30
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776249"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399468"
 ---
 # <a name="use-web-api-analyzers"></a>Korzystanie z analizatorów interfejsu API sieci Web
 
-ASP.NET Core 2,2 i nowsze udostępniają pakiet analizatorów MVC przeznaczony do użycia z projektami interfejsu API sieci Web. Analizatory współpracują z kontrolerami oznaczonymi przy użyciu programu, podczas kompilowania w ramach <xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute> [Konwencji interfejsu API sieci Web](xref:web-api/advanced/conventions).
+ASP.NET Core 2,2 i nowsze udostępniają pakiet analizatorów MVC przeznaczony do użycia z projektami interfejsu API sieci Web. Analizatory współpracują z kontrolerami oznaczonymi przy użyciu programu <xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute> , podczas kompilowania w ramach [Konwencji interfejsu API sieci Web](xref:web-api/advanced/conventions).
 
 Pakiet analizatorów powiadamia użytkownika o każdej akcji kontrolera, która:
 
@@ -35,7 +37,7 @@ Pakiet analizatorów powiadamia użytkownika o każdej akcji kontrolera, która:
 
 ## <a name="reference-the-analyzer-package"></a>Odwoływanie się do pakietu analizatora
 
-W ASP.NET Core 3,0 lub nowszych analizatory są zawarte w zestaw .NET Core SDK. Aby włączyć analizator w projekcie, należy uwzględnić `IncludeOpenAPIAnalyzers` właściwość w pliku projektu:
+W ASP.NET Core 3,0 lub nowszych analizatory są zawarte w zestaw .NET Core SDK. Aby włączyć analizator w projekcie, należy uwzględnić `IncludeOpenAPIAnalyzers` Właściwość w pliku projektu:
 
 ```xml
 <PropertyGroup>
@@ -51,10 +53,10 @@ W ASP.NET Core 3,0 lub nowszych analizatory są zawarte w zestaw .NET Core SDK. 
 
 Zainstaluj pakiet NuGet [Microsoft. AspNetCore. MVC. API. analizatory](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Api.Analyzers) z jedną z następujących metod:
 
-### <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+### <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 W oknie **konsola Menedżera pakietów** :
-  * Przejdź do pozycji **Wyświetl** > inną **konsolę Menedżera pakietów** **systemu Windows** > .
+  * Przejdź do pozycji **Wyświetl** > **inną** > **konsolę Menedżera pakietów**systemu Windows.
   * Przejdź do katalogu, w którym znajduje się plik *ApiConventions. csproj* .
   * Wykonaj następujące polecenie:
 
@@ -77,7 +79,7 @@ Uruchom następujące polecenie w **zintegrowanym terminalu**:
 dotnet add ApiConventions.csproj package Microsoft.AspNetCore.Mvc.Api.Analyzers
 ```
 
-### <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
+### <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
 
 Uruchom następujące polecenie:
 
@@ -93,7 +95,7 @@ dotnet add ApiConventions.csproj package Microsoft.AspNetCore.Mvc.Api.Analyzers
 
 Dokumenty OpenAPI zawierają kody stanu i typy odpowiedzi, które może zwrócić akcja. W ASP.NET Core MVC atrybuty takie jak <xref:Microsoft.AspNetCore.Mvc.ProducesResponseTypeAttribute> i <xref:Microsoft.AspNetCore.Mvc.ProducesAttribute> są używane do dokumentowania akcji. <xref:tutorials/web-api-help-pages-using-swagger>Szczegółowe informacje na temat dokumentowania internetowego interfejsu API.
 
-Jeden z analizatorów w pakiecie sprawdza kontrolery z <xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute> adnotacją i identyfikuje akcje, które nie są w pełni udokumentowane. Rozważmy następujący przykład:
+Jeden z analizatorów w pakiecie sprawdza kontrolery z adnotacją <xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute> i identyfikuje akcje, które nie są w pełni udokumentowane. Rozpatrzmy następujący przykład:
 
 [!code-csharp[](conventions/sample/Controllers/ContactsController.cs?name=missing404docs&highlight=10)]
 

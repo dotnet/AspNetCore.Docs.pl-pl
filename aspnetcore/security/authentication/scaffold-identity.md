@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 5/1/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/scaffold-identity
-ms.openlocfilehash: f3314458a504af7f44dcdc276de890fa9485a2b3
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 155bdfbeea06022d35bbb551d5b2d0ee5a51a093
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103037"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400820"
 ---
 # <a name="scaffold-identity-in-aspnet-core-projects"></a>Szkielet Identity w projektach ASP.NET Core
 
@@ -178,7 +180,7 @@ dotnet aspnet-codegenerator identity -dc MvcAuth.Data.ApplicationDbContext  --fi
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg-auth.md)]
 
-## <a name="scaffold-identity-into-a-blazor-server-project-without-existing-authorization"></a>Tworzenie szkieletu Identity w Blazor projekcie serwera bez istniejącej autoryzacji
+## <a name="scaffold-identity-into-a-blazor-server-project-without-existing-authorization"></a>Tworzenie szkieletu Identity w Blazor Server projekcie bez istniejącej autoryzacji
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
@@ -289,11 +291,11 @@ W `MainLayout` składniku (*Shared/MainLayout. Razor*) Dodaj `LoginDisplay` skł
 
 ### <a name="style-authentication-endpoints"></a>Punkty końcowe uwierzytelniania stylu
 
-Ponieważ Blazor serwer używa Razor Identity stron stron, style interfejsu użytkownika zmieniają się, gdy użytkownik przechodzi między Identity stronami i składnikami. Dostępne są dwie opcje umożliwiające zaadresowanie stylów Incongruous:
+Ponieważ Blazor Server Razor program używa Identity stron stron, style interfejsu użytkownika zmieniają się, gdy użytkownik przechodzi między Identity stronami i składnikami. Dostępne są dwie opcje umożliwiające zaadresowanie stylów Incongruous:
 
 #### <a name="build-identity-components"></a>IdentitySkładniki kompilacji
 
-Podejście do używania składników Identity zamiast stron polega na tworzeniu Identity składników. Ponieważ `SignInManager` i `UserManager` nie są obsługiwane w Razor składnikach, użyj punktów końcowych interfejsu API w Blazor aplikacji serwera, aby przetworzyć akcje konta użytkownika.
+Podejście do używania składników Identity zamiast stron polega na tworzeniu Identity składników. Ponieważ `SignInManager` i `UserManager` nie są obsługiwane w Razor składnikach, użyj punktów końcowych interfejsu API w Blazor Server aplikacji, aby przetworzyć akcje konta użytkownika.
 
 #### <a name="use-a-custom-layout-with-blazor-app-styles"></a>Używanie układu niestandardowego ze Blazor stylami aplikacji
 
@@ -360,7 +362,7 @@ W pliku *Pages/Shared/Layout. cshtml* wprowadź następujące zmiany:
   <script src="_framework/blazor.server.js"></script>
   ```
 
-## <a name="scaffold-identity-into-a-blazor-server-project-with-authorization"></a>Tworzenie szkieletu Identity w Blazor projekcie serwera z autoryzacją
+## <a name="scaffold-identity-into-a-blazor-server-project-with-authorization"></a>Tworzenie szkieletu Identity w Blazor Server projekcie z autoryzacją
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg-auth.md)]
 
@@ -404,7 +406,7 @@ W tych sekcjach pokazano, jak wyłączyć stronę rejestracji, ale podejście mo
 
 Aby wyłączyć rejestrację użytkownika:
 
-* Szkielet Identity . Uwzględnij konto. Register, Account. login i Account. RegisterConfirmation. Przykład:
+* Szkielet Identity . Uwzględnij konto. Register, Account. login i Account. RegisterConfirmation. Na przykład:
 
   ```dotnetcli
    dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.RegisterConfirmation"
@@ -649,7 +651,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 Aby wyłączyć rejestrację użytkownika:
 
-* Szkielet Identity . Uwzględnij konto. Register, Account. login i Account. RegisterConfirmation. Przykład:
+* Szkielet Identity . Uwzględnij konto. Register, Account. login i Account. RegisterConfirmation. Na przykład:
 
   ```dotnetcli
    dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.RegisterConfirmation"

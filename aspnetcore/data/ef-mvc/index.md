@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 03/27/2017
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: data/ef-mvc/index
-ms.openlocfilehash: 8e32f8261ebd33af035990e68031e3bf2719761d
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: b04df04029a6afcc21b449ea0f1d60fb445df1cc
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773565"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400508"
 ---
 # <a name="aspnet-core-mvc-with-ef-core---tutorial-series"></a>ASP.NET Core MVC z serią EF Core-samouczków
 
@@ -28,7 +30,7 @@ Ten samouczek **nie** został zaktualizowany do ASP.NET Core 3,0. Zaktualizowano
 
 [!INCLUDE [RP better than MVC](../../includes/RP-EF/rp-over-mvc.md)]
 
-1. [Rozpoczęcie pracy](xref:data/ef-mvc/intro)
+1. [Wprowadzenie](xref:data/ef-mvc/intro)
 1. [Operacje tworzenia, odczytu, aktualizowania i usuwania](xref:data/ef-mvc/crud)
 1. [Sortowanie, filtrowanie, stronicowanie i grupowanie](xref:data/ef-mvc/sort-filter-page)
 1. [Migracje](xref:data/ef-mvc/migrations)

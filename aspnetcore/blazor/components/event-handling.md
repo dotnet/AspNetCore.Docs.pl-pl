@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 06/04/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/components/event-handling
-ms.openlocfilehash: 4ac7b82d734f078cf50901d02e7d0c4eb8bb45bb
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
+ms.openlocfilehash: 2fce394202be5df9af67e8afca27a0914f410402
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85242423"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399039"
 ---
 # <a name="aspnet-core-blazor-event-handling"></a>BlazorObsługa zdarzeń ASP.NET Core
 
@@ -139,7 +141,7 @@ Często wygodnie jest blisko dodatkowych wartości, na przykład podczas iteracj
 ```
 
 > [!NOTE]
-> **Nie** używaj zmiennej Loop bezpośrednio w wyrażeniu lambda, na przykład `i` w powyższym `for` przykładzie pętli lub zmiennej odwołania w `foreach` pętli. W przeciwnym razie ta sama zmienna jest używana przez wszystkie wyrażenia lambda, które w wyniku używają tej samej wartości we wszystkich lambdach. Zawsze Przechwytuj wartość zmiennej w zmiennej lokalnej, a następnie użyj jej. W poprzednim przykładzie zmienna Loop `i` jest przypisana do `buttonNumber` .
+> **Nie** używaj zmiennej Loop bezpośrednio w wyrażeniu lambda, na przykład `i` w powyższym `for` przykładzie pętli. W przeciwnym razie ta sama zmienna jest używana przez wszystkie wyrażenia lambda, które w wyniku używają tej samej wartości we wszystkich lambdach. Zawsze Przechwytuj wartość zmiennej w zmiennej lokalnej, a następnie użyj jej. W poprzednim przykładzie zmienna Loop `i` jest przypisana do `buttonNumber` .
 
 ## <a name="eventcallback"></a>EventCallback
 

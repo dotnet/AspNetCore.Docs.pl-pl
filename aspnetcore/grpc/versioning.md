@@ -7,17 +7,19 @@ ms.author: jamesnk
 ms.date: 01/09/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: grpc/versioning
-ms.openlocfilehash: dcf089f1e5f27639d048e91ee3aa42c7da6d8398
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: af8c6cac621ed073fc34e2afe0402e640c2c5727
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775365"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400014"
 ---
 # <a name="versioning-grpc-services"></a>Przechowywanie wersji usług gRPC
 
@@ -54,7 +56,7 @@ Następujące zmiany nie są rozrywane na poziomie protokołu gRPC, ale klient n
 
 * **Usuwanie wartości pól** z usuniętego pola jest deserializowane do [nieznanych pól](https://developers.google.com/protocol-buffers/docs/proto3#unknowns)komunikatu. Nie jest to gRPCa zmiana protokołu, ale klient należy zaktualizować w przypadku uaktualnienia do najnowszego kontraktu. Należy pamiętać, że usunięty numer pola nie jest przypadkowo ponownie używany w przyszłości. Aby się upewnić, że to się nie dzieje, określ usunięte numery pól i nazwy w komunikacie przy użyciu [zastrzeżonego](https://developers.google.com/protocol-buffers/docs/proto3#reserved) słowa kluczowego protobuf.
 * Zmiana **nazwy** komunikatów nie jest zazwyczaj wysyłana w sieci, więc nie jest to gRPCa. Po uaktualnieniu do najnowszej kontraktu klient musi zostać zaktualizowany. Jedną z sytuacji, w której nazwy komunikatów **są** wysyłane w sieci, są z [dowolnymi](https://developers.google.com/protocol-buffers/docs/proto3#any) polami, gdy nazwa komunikatu jest używana do identyfikowania typu wiadomości.
-* **Zmiana csharp_namespace** -zmiana `csharp_namespace` zmieni przestrzeń nazw wygenerowanych typów .NET. Nie jest to gRPCa zmiana protokołu, ale klient należy zaktualizować w przypadku uaktualnienia do najnowszego kontraktu.
+* **Zmiana csharp_namespace** -zmiana zmieni `csharp_namespace` przestrzeń nazw wygenerowanych typów .NET. Nie jest to gRPCa zmiana protokołu, ale klient należy zaktualizować w przypadku uaktualnienia do najnowszego kontraktu.
 
 ### <a name="protocol-breaking-changes"></a>Zmiany podczas łamania protokołu
 
@@ -79,7 +81,7 @@ Zgodność z zachowaniem jest określana na podstawie kodu specyficznego dla apl
 
 Usługi powinny dążyć do zachowania zgodności z poprzednimi klientami. Ostatecznie zmiany w aplikacji mogą wymagać przerwania zmian. Przerywanie starych klientów i wymuszanie ich aktualizacji wraz z usługą nie jest dobrym doświadczeniem użytkownika. Sposób zapewnienia zgodności z poprzednimi wersjami podczas wprowadzania istotnych zmian polega na opublikowaniu wielu wersji usługi.
 
-gRPC obsługuje opcjonalny specyfikator [pakietu](https://developers.google.com/protocol-buffers/docs/proto3#packages) , który działa podobnie jak przestrzeń nazw platformy .NET. W rzeczywistości `package` zostanie użyta jako przestrzeń nazw .NET dla wygenerowanych typów .NET, `option csharp_namespace` Jeśli nie jest ustawiona w pliku *. proto* . Pakiet może służyć do określania numeru wersji usługi i jej komunikatów:
+gRPC obsługuje opcjonalny specyfikator [pakietu](https://developers.google.com/protocol-buffers/docs/proto3#packages) , który działa podobnie jak przestrzeń nazw platformy .NET. W rzeczywistości `package` zostanie użyta jako przestrzeń nazw .NET dla wygenerowanych typów .NET, jeśli `option csharp_namespace` nie jest ustawiona w pliku *. proto* . Pakiet może służyć do określania numeru wersji usługi i jej komunikatów:
 
 [!code-protobuf[](versioning/sample/greet.v1.proto?highlight=3)]
 

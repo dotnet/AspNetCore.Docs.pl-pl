@@ -8,17 +8,19 @@ ms.custom: H1Hack27Feb2017
 ms.date: 09/06/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: client-side/spa-services
-ms.openlocfilehash: 65bd5157bb3909f8352debcb1a6dfa7d888eec0e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 05f76a7d341fc5c55b8234b6ff6d2be5aa61d6fd
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82769926"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85401834"
 ---
 # <a name="use-javascript-services-to-create-single-page-applications-in-aspnet-core"></a>Korzystanie z usług JavaScript do tworzenia aplikacji jednostronicowych w ASP.NET Core
 
@@ -67,7 +69,7 @@ Zbiorowo te składniki infrastruktury rozszerzają zarówno przepływ pracy dewe
 
 Aby korzystać z SpaServices, Zainstaluj następujące elementy:
 
-* [Node. js](https://nodejs.org/) (w wersji 6 lub nowszej) z npm
+* [Node.js](https://nodejs.org/) (wersja 6 lub nowsza) z npm
 
   * Aby sprawdzić, czy te składniki są zainstalowane i można je znaleźć, uruchom następujące polecenie w wierszu polecenia:
 
@@ -75,7 +77,7 @@ Aby korzystać z SpaServices, Zainstaluj następujące elementy:
     node -v && npm -v
     ```
 
-  * W przypadku wdrażania w witrynie sieci Web systemu Azure nie jest wymagane żadne działanie &mdash; Node. js zainstalowane i dostępne w środowiskach serwerów.
+  * W przypadku wdrażania w witrynie sieci Web systemu Azure żadna akcja nie jest wymagana &mdash;Node.js jest zainstalowana i dostępna w środowiskach serwerów.
 
 * [!INCLUDE [](~/includes/net-core-sdk-download-link.md)]
 
@@ -85,7 +87,7 @@ Aby korzystać z SpaServices, Zainstaluj następujące elementy:
 
 ## <a name="server-side-prerendering"></a>Renderowanie wstępne po stronie serwera
 
-Aplikacja uniwersalna (znana również jako isomorphic) jest aplikacją języka JavaScript, która może działać zarówno na serwerze, jak i na komputerze klienckim. Kątowy, reagowanie i inne popularne struktury zapewniają uniwersalną platformę dla tego stylu tworzenia aplikacji. Pomysłem jest, aby najpierw renderować składniki struktury na serwerze za pomocą środowiska Node. js, a następnie delegować dalsze wykonywanie do klienta.
+Aplikacja uniwersalna (znana również jako isomorphic) jest aplikacją języka JavaScript, która może działać zarówno na serwerze, jak i na komputerze klienckim. Kątowy, reagowanie i inne popularne struktury zapewniają uniwersalną platformę dla tego stylu tworzenia aplikacji. Pomysłem jest, aby najpierw renderować składniki struktury na serwerze za pośrednictwem Node.js, a następnie delegować dalsze wykonywanie do klienta.
 
 ASP.NET Core [pomocników tagów](xref:mvc/views/tag-helpers/intro) zapewnianych przez SpaServices upraszczają implementację wstępnego renderowania po stronie serwera przez wywoływanie funkcji języka JavaScript na serwerze.
 
@@ -103,23 +105,23 @@ Pomocników tagów są odnajdywani za pomocą rejestracji przestrzeni nazw w pli
 
 [!code-cshtml[](../client-side/spa-services/sample/SpaServicesSampleApp/Views/_ViewImports.cshtml?highlight=3)]
 
-Te pomocniki tagów dezłożonegoą komunikację bezpośrednio z interfejsami API niskiego poziomu, wykorzystując składnię przypominającą kod HTML w widoku Razor:
+Te pomocniki tagów dezłożonegoją komunikację bezpośrednio z interfejsami API niskiego poziomu, wykorzystując składnię przypominającą kod HTML w Razor widoku:
 
 [!code-cshtml[](../client-side/spa-services/sample/SpaServicesSampleApp/Views/Home/Index.cshtml?range=5)]
 
 ### <a name="asp-prerender-module-tag-helper"></a>skrypt ASP-PreRender-module tagów modułu
 
-`asp-prerender-module`Pomocnik tagu, użyty w poprzednim przykładzie kodu, wykonuje *ClientApp/dist/Main-Server. js* na serwerze za pośrednictwem środowiska Node. js. Na potrzeby przejrzystości plik *Main-Server. js* jest artefaktem zadania Transpilation języka TypeScript-to-JavaScript w procesie kompilacji [pakietu WebPack](https://webpack.github.io/) . Pakiet WebPack definiuje alias punktu wejścia, `main-server` a następnie przechodzenie wykresu zależności dla tego aliasu rozpoczyna się od pliku *ClientApp/Boot-Server. TS* :
+`asp-prerender-module`Pomocnik tagu, użyty w poprzednim przykładzie kodu, wykonuje *ClientApp/dist/main-server.js* na serwerze za pośrednictwem Node.js. W celu zapewnienia przejrzystości plik *main-server.js* jest artefaktem zadania Transpilation języka TypeScript-to-JavaScript w procesie kompilacji [pakietu WebPack](https://webpack.github.io/) . Pakiet WebPack definiuje alias punktu wejścia, `main-server` a następnie przechodzenie wykresu zależności dla tego aliasu rozpoczyna się od pliku *ClientApp/Boot-Server. TS* :
 
 [!code-javascript[](../client-side/spa-services/sample/SpaServicesSampleApp/webpack.config.js?range=53)]
 
-W poniższym przykładzie kątowym plik *ClientApp/Boot-Server. TS* wykorzystuje `createServerRenderer` funkcję i `RenderResult` Typ `aspnet-prerendering` pakietu npm do konfigurowania renderowania serwera za pomocą środowiska Node. js. Znaczniki HTML przeznaczone do renderowania po stronie serwera są przesyłane do wywołania funkcji rozpoznawania, które jest opakowane w obiekt JavaScript o jednoznacznie określonym typie `Promise` . `Promise`Istotność obiektu polega na tym, że asynchronicznie dostarcza znacznik HTML do strony w celu iniekcji w elemencie symbolu zastępczego modelu DOM.
+W poniższym przykładzie kątowym plik *ClientApp/Boot-Server. TS* wykorzystuje `createServerRenderer` funkcję i `RenderResult` Typ `aspnet-prerendering` pakietu npm do konfigurowania renderowania serwera za pośrednictwem Node.js. Znaczniki HTML przeznaczone do renderowania po stronie serwera są przesyłane do wywołania funkcji rozpoznawania, które jest opakowane w obiekt JavaScript o jednoznacznie określonym typie `Promise` . `Promise`Istotność obiektu polega na tym, że asynchronicznie dostarcza znacznik HTML do strony w celu iniekcji w elemencie symbolu zastępczego modelu DOM.
 
 [!code-typescript[](../client-side/spa-services/sample/SpaServicesSampleApp/ClientApp/boot-server.ts?range=6,10-34,79-)]
 
 ### <a name="asp-prerender-data-tag-helper"></a>ASP-PreRender — tag danych
 
-W połączeniu z `asp-prerender-module` pomocnikiem tagów, `asp-prerender-data` pomocnika tagów może służyć do przekazywania informacji kontekstowych z widoku Razor do kodu JavaScript po stronie serwera. Na przykład następujące znaczniki przekazują dane użytkownika do `main-server` modułu:
+W połączeniu z `asp-prerender-module` pomocnikiem tagów, `asp-prerender-data` pomocnika tagów może służyć do przekazywania informacji kontekstowych z Razor widoku do kodu JavaScript po stronie serwera. Na przykład następujące znaczniki przekazują dane użytkownika do `main-server` modułu:
 
 [!code-cshtml[](../client-side/spa-services/sample/SpaServicesSampleApp/Views/Home/Index.cshtml?range=9-12)]
 
@@ -139,7 +141,7 @@ Aby rozwijać poprzedni przykład kodu, dane mogą być przekazywane z serwera d
 
 ## <a name="webpack-dev-middleware"></a>Oprogramowanie pośredniczące dla deweloperów pakietu WebPack
 
-[Oprogramowanie pośredniczące dla deweloperów pakietu WebPack](https://webpack.js.org/guides/development/#using-webpack-dev-middleware) wprowadza Ulepszony przepływ pracy programistycznej, dzięki czemu pakiet WebPack kompiluje zasoby na żądanie. Oprogramowanie pośredniczące automatycznie kompiluje i obsługuje zasoby po stronie klienta po ponownym załadowaniu strony w przeglądarce. Alternatywnym podejściem jest ręczne wywoływanie elementu WebPack za pośrednictwem skryptu kompilacji npm projektu, gdy zostanie zmieniona zależność innej firmy lub kod niestandardowy. Skrypt kompilacji npm w pliku *Package. JSON* jest przedstawiony w poniższym przykładzie:
+[Oprogramowanie pośredniczące dla deweloperów pakietu WebPack](https://webpack.js.org/guides/development/#using-webpack-dev-middleware) wprowadza Ulepszony przepływ pracy programistycznej, dzięki czemu pakiet WebPack kompiluje zasoby na żądanie. Oprogramowanie pośredniczące automatycznie kompiluje i obsługuje zasoby po stronie klienta po ponownym załadowaniu strony w przeglądarce. Alternatywnym podejściem jest ręczne wywoływanie elementu WebPack za pośrednictwem skryptu kompilacji npm projektu, gdy zostanie zmieniona zależność innej firmy lub kod niestandardowy. Skrypt kompilacji npm w pliku *package.json* jest przedstawiony w poniższym przykładzie:
 
 ```json
 "build": "npm run build:vendor && npm run build:custom",
@@ -161,7 +163,7 @@ Oprogramowanie pośredniczące programu WebPack dla deweloperów jest rejestrowa
 
 `UseWebpackDevMiddleware`Metoda rozszerzenia musi być wywoływana przed [zarejestrowaniem hostingu pliku statycznego](xref:fundamentals/static-files) za pośrednictwem `UseStaticFiles` metody rozszerzenia. Ze względów bezpieczeństwa należy zarejestrować oprogramowanie pośredniczące tylko wtedy, gdy aplikacja działa w trybie programistycznym.
 
-Właściwość pliku *WebPack. config. js* `output.publicPath` nakazuje oprogramowaniu pośredniczącemu oglądanie `dist` folderu pod kątem zmian:
+Właściwość pliku *webpack.config.js* `output.publicPath` nakazuje oprogramowaniu pośredniczącemu oglądanie zmian w `dist` folderze:
 
 [!code-javascript[](../client-side/spa-services/sample/SpaServicesSampleApp/webpack.config.js?range=6,13-16)]
 
@@ -189,7 +191,7 @@ app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions {
 
 Podobnie jak w przypadku [oprogramowania pośredniczącego w pakiecie WebPack](#webpack-dev-middleware), `UseWebpackDevMiddleware` Metoda rozszerzenia musi być wywoływana przed `UseStaticFiles` metodą rozszerzenia. Ze względów bezpieczeństwa należy zarejestrować oprogramowanie pośredniczące tylko wtedy, gdy aplikacja działa w trybie programistycznym.
 
-Plik *WebPack. config. js* musi definiować `plugins` tablicę, nawet jeśli jest pusta:
+Plik *webpack.config.js* musi definiować `plugins` tablicę, nawet jeśli jest pusta:
 
 [!code-javascript[](../client-side/spa-services/sample/SpaServicesSampleApp/webpack.config.js?range=6,25)]
 
@@ -234,8 +236,8 @@ Zostanie wyświetlona lista dostępnych szablonów SPA:
 | Szablony                                 | Krótka nazwa | Język | Tagi        |
 | ------------------------------------------| :--------: | :------: | :---------: |
 | ASP.NET Core MVC ze Skośnością             | kątow    | Znajd     | Web/MVC/SPA |
-| ASP.NET Core MVC z funkcją reagując. js            | biern      | Znajd     | Web/MVC/SPA |
-| ASP.NET Core MVC z reakcjęmi. js i Redux  | reactredux | Znajd     | Web/MVC/SPA |
+| ASP.NET Core MVC z React.js            | biern      | Znajd     | Web/MVC/SPA |
+| ASP.NET Core MVC z React.js i Redux  | reactredux | Znajd     | Web/MVC/SPA |
 
 Aby utworzyć nowy projekt przy użyciu jednego z szablonów SPA, należy dołączyć **krótką nazwę** szablonu do polecenia [dotnet New](/dotnet/core/tools/dotnet-new) . Następujące polecenie tworzy aplikację kątową z ASP.NET Core MVC skonfigurowanym po stronie serwera:
 
@@ -290,7 +292,7 @@ Otwórz wiersz polecenia w katalogu *ClientApp* . Uruchom następujące poleceni
 npm test
 ```
 
-Skrypt uruchamia moduł Karma Test Runner, który odczytuje ustawienia zdefiniowane w pliku *Karma. conf. js* . Oprócz innych ustawień *Karma. conf. js* identyfikuje pliki testowe do wykonania za pośrednictwem `files` tablicy:
+Skrypt uruchamia moduł Karma Test Runner, który odczytuje ustawienia zdefiniowane w pliku *karma.conf.js* . Oprócz innych ustawień *karma.conf.js* identyfikuje pliki testowe do wykonania za pośrednictwem `files` tablicy:
 
 [!code-javascript[](../client-side/spa-services/sample/SpaServicesSampleApp/ClientApp/test/karma.conf.js?range=4-5,8-11)]
 

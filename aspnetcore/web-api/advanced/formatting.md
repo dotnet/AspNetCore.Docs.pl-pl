@@ -7,17 +7,19 @@ ms.custom: H1Hack27Feb2017
 ms.date: 04/17/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: web-api/advanced/formatting
-ms.openlocfilehash: 46a1ccbb3b5eeaf1beb3e33bca1b6c7065d6d56a
-ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
+ms.openlocfilehash: e6b78af3eeb858310eb772fdf0034510c10351c0
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85074226"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400365"
 ---
 # <a name="format-response-data-in-aspnet-core-web-api"></a>Formatowanie danych odpowiedzi w ASP.NET Core Web API
 
@@ -141,7 +143,7 @@ services.AddControllers().AddJsonOptions(options =>
 });
 ```
 
-Opcje serializacji danych wyjściowych dla poszczególnych akcji można skonfigurować przy użyciu polecenia `JsonResult` . Przykład:
+Opcje serializacji danych wyjściowych dla poszczególnych akcji można skonfigurować przy użyciu polecenia `JsonResult` . Na przykład:
 
 ```csharp
 public IActionResult Get()
@@ -180,7 +182,7 @@ services.AddControllers().AddNewtonsoftJson(options =>
 });
 ```
 
-Opcje serializacji danych wyjściowych dla poszczególnych akcji można skonfigurować przy użyciu polecenia `JsonResult` . Przykład:
+Opcje serializacji danych wyjściowych dla poszczególnych akcji można skonfigurować przy użyciu polecenia `JsonResult` . Na przykład:
 
 ```csharp
 public IActionResult Get()
@@ -236,7 +238,7 @@ Niektóre specjalne przypadki są implementowane przy użyciu wbudowanych elemen
 
 Bez `StringOutputFormatter` , wbudowany typ programu FORMATUJĄCEGO JSON formatuje `string` typy zwracane. Jeśli wbudowany program formatujący JSON jest usuwany, a element formatujący XML jest dostępny, format XML programu formatującego jest `string` typem zwracanym. W przeciwnym razie zwracane `string` typy zwracają `406 Not Acceptable` .
 
-Bez `HttpNoContentOutputFormatter` obiektów o wartości null są formatowane przy użyciu skonfigurowanego programu formatującego. Przykład:
+Bez `HttpNoContentOutputFormatter` obiektów o wartości null są formatowane przy użyciu skonfigurowanego programu formatującego. Na przykład:
 
 * Program formatujący JSON zwraca odpowiedź z treścią `null` .
 * Program formatujący XML zwraca pusty element XML z `xsi:nil="true"` zestawem atrybutów.
@@ -248,7 +250,7 @@ Klienci mogą zażądać określonego formatu w ramach adresu URL, na przykład:
 * W ciągu zapytania lub części ścieżki.
 * Przy użyciu rozszerzenia pliku specyficznego dla formatu, takiego jak. XML lub. JSON.
 
-Mapowanie ze ścieżki żądania należy określić w marszrucie używanej przez interfejs API. Przykład:
+Mapowanie ze ścieżki żądania należy określić w marszrucie używanej przez interfejs API. Na przykład:
 
 [!code-csharp[](./formatting/sample/Controllers/ProductsController.cs?name=snippet)]
 

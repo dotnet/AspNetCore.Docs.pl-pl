@@ -8,17 +8,19 @@ ms.date: 03/27/2019
 ms.topic: tutorial
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: data/ef-mvc/concurrency
-ms.openlocfilehash: bbf04e3500b11a339dc59b6086d910b76eace735
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 3038ae8f01273013e6c35694583d9674a1668bac
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773604"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85401561"
 ---
 # <a name="tutorial-handle-concurrency---aspnet-mvc-with-ef-core"></a>Samouczek: obsługa współbieżności ASP.NET MVC z EF Core
 
@@ -93,13 +95,13 @@ Konflikty można rozwiązać przez obsługę `DbConcurrencyException` wyjątków
 
 * W tabeli bazy danych Dołącz kolumnę śledzenia, której można użyć do określenia, kiedy wiersz został zmieniony. Następnie można skonfigurować Entity Framework, aby uwzględnić tę kolumnę w klauzuli WHERE polecenia SQL Update lub DELETE.
 
-     Typ danych kolumny śledzenia jest zwykle `rowversion`. `rowversion` Wartość jest kolejnym numerem, który jest zwiększany za każdym razem, gdy wiersz zostanie zaktualizowany. W przypadku polecenia Update lub DELETE klauzula WHERE zawiera oryginalną wartość kolumny śledzenia (oryginalną wersję wiersza). Jeśli aktualizowany wiersz został zmieniony przez innego użytkownika, wartość w `rowversion` kolumnie jest inna niż oryginalna wartość, więc instrukcja UPDATE lub DELETE nie może znaleźć wiersza do zaktualizowania z powodu klauzuli WHERE. Gdy Entity Framework stwierdzi, że żadne wiersze nie zostały zaktualizowane przez polecenie Update lub Delete (oznacza to, że gdy liczba odnośnych wierszy wynosi zero), interpretuje to jako konflikt współbieżności.
+     Typ danych kolumny śledzenia jest zwykle `rowversion` . `rowversion`Wartość jest kolejnym numerem, który jest zwiększany za każdym razem, gdy wiersz zostanie zaktualizowany. W przypadku polecenia Update lub DELETE klauzula WHERE zawiera oryginalną wartość kolumny śledzenia (oryginalną wersję wiersza). Jeśli aktualizowany wiersz został zmieniony przez innego użytkownika, wartość w `rowversion` kolumnie jest inna niż oryginalna wartość, więc instrukcja UPDATE lub DELETE nie może znaleźć wiersza do zaktualizowania z powodu klauzuli WHERE. Gdy Entity Framework stwierdzi, że żadne wiersze nie zostały zaktualizowane przez polecenie Update lub Delete (oznacza to, że gdy liczba odnośnych wierszy wynosi zero), interpretuje to jako konflikt współbieżności.
 
 * Skonfiguruj Entity Framework, aby uwzględnić oryginalne wartości każdej kolumny w tabeli w klauzuli WHERE poleceń Update i DELETE.
 
      Jak w pierwszej opcji, jeśli coś w wierszu uległo zmianie od momentu pierwszego odczytu wiersza, klauzula WHERE nie zwraca wiersza do zaktualizowania, który Entity Framework interpretuje jako konflikt współbieżności. W przypadku tabel bazy danych z wieloma kolumnami takie podejście może skutkować bardzo dużymi klauzulami WHERE i może wymagać utrzymania dużej ilości danych. Jak wspomniano wcześniej, utrzymanie dużej ilości stanu może wpłynąć na wydajność aplikacji. W związku z tym takie podejście zwykle nie jest zalecane i nie jest to metoda używana w tym samouczku.
 
-     Jeśli chcesz zaimplementować to podejście do współbieżności, musisz oznaczyć wszystkie właściwości klucza niepodstawowego w jednostce, dla której chcesz śledzić współbieżność, dodając do nich `ConcurrencyCheck` atrybut. Ta zmiana umożliwia Entity Framework uwzględnienie wszystkich kolumn w klauzuli SQL WHERE instrukcji UPDATE i DELETE.
+     Jeśli chcesz zaimplementować to podejście do współbieżności, musisz oznaczyć wszystkie właściwości klucza niepodstawowego w jednostce, dla której chcesz śledzić współbieżność, dodając `ConcurrencyCheck` do nich atrybut. Ta zmiana umożliwia Entity Framework uwzględnienie wszystkich kolumn w klauzuli SQL WHERE instrukcji UPDATE i DELETE.
 
 W pozostałej części tego samouczka dodasz `rowversion` Właściwość śledzenia do jednostki działu, utworzysz kontroler i widoki i testujesz, aby sprawdzić, czy wszystko działa prawidłowo.
 
@@ -109,7 +111,7 @@ W obszarze *modele/dział. cs*Dodaj właściwość śledzenia o nazwie rowversio
 
 [!code-csharp[](intro/samples/cu/Models/Department.cs?name=snippet_Final&highlight=26,27)]
 
-Ten `Timestamp` atrybut określa, że ta kolumna zostanie uwzględniona w klauzuli WHERE poleceń Update i DELETE wysyłanych do bazy danych. Ten atrybut jest wywoływany `Timestamp` , ponieważ poprzednie wersje SQL Server używały `timestamp` typu danych SQL przed zastąpieniem go przez program SQL Server `rowversion` . Typ .NET dla `rowversion` jest tablicą bajtów.
+Ten `Timestamp` atrybut określa, że ta kolumna zostanie uwzględniona w klauzuli WHERE poleceń Update i DELETE wysyłanych do bazy danych. Ten atrybut jest wywoływany, `Timestamp` ponieważ poprzednie wersje SQL Server używały `timestamp` typu danych SQL przed zastąpieniem go przez program SQL Server `rowversion` . Typ .NET dla `rowversion` jest tablicą bajtów.
 
 Jeśli wolisz używać interfejsu API Fluent, możesz użyć `IsConcurrencyToken` metody (w *danych/SchoolContext. cs*), aby określić właściwość śledzenia, jak pokazano w następującym przykładzie:
 
@@ -152,29 +154,29 @@ Spowoduje to zmianę nagłówka na "działy", usunięcie kolumny RowVersion i wy
 
 ## <a name="update-edit-methods"></a>Aktualizowanie metod edycji
 
-W metodzie narzędzia HttpGet `Edit` i `Details` metodzie Dodaj `AsNoTracking`. W metodzie `Edit` narzędzia HttpGet Dodaj eager ładowania dla administratora.
+W `Edit` metodzie narzędzia HttpGet i `Details` metodzie Dodaj `AsNoTracking` . W `Edit` metodzie narzędzia HttpGet Dodaj eager ładowania dla administratora.
 
 [!code-csharp[](intro/samples/cu/Controllers/DepartmentsController.cs?name=snippet_EagerLoading)]
 
-Zastąp istniejący kod metody HttpPost `Edit` następującym kodem:
+Zastąp istniejący kod `Edit` metody HTTPPOST następującym kodem:
 
 [!code-csharp[](intro/samples/cu/Controllers/DepartmentsController.cs?name=snippet_EditPost)]
 
 Kod rozpoczyna się od próby odczytu działu do zaktualizowania. Jeśli `FirstOrDefaultAsync` Metoda zwraca wartość null, dział został usunięty przez innego użytkownika. W takim przypadku kod używa opublikowanych wartości formularza do utworzenia jednostki działu, aby można było ponownie wyświetlić stronę edytowania z komunikatem o błędzie. Alternatywnie nie trzeba ponownie tworzyć jednostki działu, jeśli zostanie wyświetlony komunikat o błędzie bez ponownego wyświetlania pól działu.
 
-Widok przechowuje oryginalną `RowVersion` wartość w ukrytym polu, a ta metoda otrzymuje tę wartość w `rowVersion` parametrze. Przed wywołaniem `SaveChanges`należy umieścić tę oryginalną `RowVersion` wartość właściwości w `OriginalValues` kolekcji dla jednostki.
+Widok przechowuje oryginalną `RowVersion` wartość w ukrytym polu, a ta metoda otrzymuje tę wartość w `rowVersion` parametrze. Przed wywołaniem należy `SaveChanges` umieścić tę oryginalną `RowVersion` wartość właściwości w `OriginalValues` kolekcji dla jednostki.
 
 ```csharp
 _context.Entry(departmentToUpdate).Property("RowVersion").OriginalValue = rowVersion;
 ```
 
-Następnie, gdy Entity Framework tworzy polecenie SQL UPDATE, to polecenie będzie zawierać klauzulę WHERE, która szuka wiersza, który ma oryginalną `RowVersion` wartość. Jeśli nie ma żadnych wierszy, których dotyczy polecenie aktualizacji (żadne wiersze nie mają `RowVersion` oryginalnej wartości), Entity Framework zgłasza `DbUpdateConcurrencyException` wyjątek.
+Następnie, gdy Entity Framework tworzy polecenie SQL UPDATE, to polecenie będzie zawierać klauzulę WHERE, która szuka wiersza, który ma oryginalną `RowVersion` wartość. Jeśli nie ma żadnych wierszy, których dotyczy polecenie aktualizacji (żadne wiersze nie mają oryginalnej `RowVersion` wartości), Entity Framework zgłasza `DbUpdateConcurrencyException` wyjątek.
 
 Kod w bloku catch dla tego wyjątku pobiera jednostkę działu, której dotyczy usterka, która ma zaktualizowane wartości z `Entries` właściwości obiektu wyjątku.
 
 [!code-csharp[](intro/samples/cu/Controllers/DepartmentsController.cs?range=164)]
 
-`Entries` Kolekcja będzie zawierać tylko jeden `EntityEntry` obiekt.  Można użyć tego obiektu, aby pobrać nowe wartości wprowadzone przez użytkownika i bieżące wartości bazy danych.
+`Entries`Kolekcja będzie zawierać tylko jeden `EntityEntry` obiekt.  Można użyć tego obiektu, aby pobrać nowe wartości wprowadzone przez użytkownika i bieżące wartości bazy danych.
 
 [!code-csharp[](intro/samples/cu/Controllers/DepartmentsController.cs?range=165-166)]
 
@@ -186,13 +188,13 @@ Na koniec kod ustawia `RowVersion` wartość `departmentToUpdate` do nowej warto
 
 [!code-csharp[](intro/samples/cu/Controllers/DepartmentsController.cs?range=199-200)]
 
-Instrukcja `ModelState.Remove` jest wymagana, ponieważ `ModelState` ma starą `RowVersion` wartość. W widoku `ModelState` wartość pola ma pierwszeństwo przed wartościami właściwości modelu, gdy są obecne oba typy.
+`ModelState.Remove`Instrukcja jest wymagana, ponieważ `ModelState` ma starą `RowVersion` wartość. W widoku `ModelState` wartość pola ma pierwszeństwo przed wartościami właściwości modelu, gdy są obecne oba typy.
 
 ## <a name="update-edit-view"></a>Aktualizuj widok edycji
 
 W obszarze *widoki/działy/Edit. cshtml*wprowadź następujące zmiany:
 
-* Dodaj ukryte pole, aby zapisać wartość `RowVersion` właściwości, bezpośrednio po ukrytym polu `DepartmentID` właściwości.
+* Dodaj ukryte pole, aby zapisać `RowVersion` wartość właściwości, bezpośrednio po ukrytym polu `DepartmentID` właściwości.
 
 * Dodaj opcję "Wybierz administratora" do listy rozwijanej.
 
@@ -212,7 +214,7 @@ Zmień pole na drugiej karcie przeglądarki.
 
 ![Edycja działu Strona 2 po zmianie](concurrency/_static/edit-after-change-2.png)
 
-Kliknij przycisk **Zapisz**. Zostanie wyświetlony komunikat o błędzie:
+Kliknij pozycję **Zapisz**. Zostanie wyświetlony komunikat o błędzie:
 
 ![Komunikat o błędzie strony edytowania działu](concurrency/_static/edit-error.png)
 
@@ -228,9 +230,9 @@ W *DepartmentsController.cs*Zastąp metodę narzędzia HttpGet `Delete` następu
 
 [!code-csharp[](intro/samples/cu/Controllers/DepartmentsController.cs?name=snippet_DeleteGet&highlight=1,10,14-17,21-29)]
 
-Metoda przyjmuje opcjonalny parametr, który wskazuje, czy strona jest ponownie wyświetlana po wystąpieniu błędu współbieżności. Jeśli flaga ma wartość true, a określony dział już nie istnieje, został usunięty przez innego użytkownika. W takim przypadku kod przekieruje się do strony indeksu.  Jeśli ta flaga ma wartość true, a dział istnieje, został zmieniony przez innego użytkownika. W takim przypadku kod wysyła komunikat o błędzie do widoku przy użyciu `ViewData`.
+Metoda przyjmuje opcjonalny parametr, który wskazuje, czy strona jest ponownie wyświetlana po wystąpieniu błędu współbieżności. Jeśli flaga ma wartość true, a określony dział już nie istnieje, został usunięty przez innego użytkownika. W takim przypadku kod przekieruje się do strony indeksu.  Jeśli ta flaga ma wartość true, a dział istnieje, został zmieniony przez innego użytkownika. W takim przypadku kod wysyła komunikat o błędzie do widoku przy użyciu `ViewData` .
 
-Zastąp kod w metodzie `Delete` HTTPPOST (o `DeleteConfirmed`nazwie) następującym kodem:
+Zastąp kod w `Delete` metodzie HTTPPOST (o nazwie `DeleteConfirmed` ) następującym kodem:
 
 [!code-csharp[](intro/samples/cu/Controllers/DepartmentsController.cs?name=snippet_DeletePost&highlight=1,3,5-8,11-18)]
 
@@ -246,7 +248,7 @@ Ten parametr został zmieniony do wystąpienia jednostki działu utworzonego prz
 public async Task<IActionResult> Delete(Department department)
 ```
 
-Zmieniono także nazwę metody akcji z `DeleteConfirmed` na. `Delete` Kod szkieletu użył nazwy `DeleteConfirmed` , aby nadać metodzie HTTPPOST unikatową sygnaturę. (Środowisko CLR wymaga przeciążonych metod, aby mieć inne parametry metody). Teraz, gdy podpisy są unikatowe, można naklejić do Konwencji MVC i używać tej samej nazwy dla metod Delete HttpPost i narzędzia HttpGet.
+Zmieniono także nazwę metody akcji z `DeleteConfirmed` na `Delete` . Kod szkieletu użył nazwy, `DeleteConfirmed` Aby nadać metodzie HTTPPOST unikatową sygnaturę. (Środowisko CLR wymaga przeciążonych metod, aby mieć inne parametry metody). Teraz, gdy podpisy są unikatowe, można naklejić do Konwencji MVC i używać tej samej nazwy dla metod Delete HttpPost i narzędzia HttpGet.
 
 Jeśli dział został już usunięty, `AnyAsync` Metoda zwraca wartość false, a aplikacja po prostu wraca do metody index.
 
@@ -260,7 +262,7 @@ W obszarze *widoki/działy/Delete. cshtml*Zamień kod szkieletowy na następują
 
 Powoduje to wprowadzenie następujących zmian:
 
-* Dodaje komunikat o błędzie między nagłówki `h2` i `h3` .
+* Dodaje komunikat o błędzie między `h2` nagłówki i `h3` .
 
 * Zastępuje FirstMidName z FullName w polu **administrator** .
 

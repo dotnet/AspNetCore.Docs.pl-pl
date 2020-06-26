@@ -7,17 +7,19 @@ ms.custom: mvc, seodec18
 ms.date: 10/24/2018
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: azure/devops/deploy-to-app-service
-ms.openlocfilehash: 811b6d047e344fa98ce14f436d3cd8f03c786aff
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 7cf6395b6f57413d85532ed15e5a875af10f905b
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82767034"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400391"
 ---
 # <a name="deploy-an-app-to-app-service"></a>Wdróż aplikację w App Service
 
@@ -35,13 +37,13 @@ W tej sekcji zostaną wykonane następujące zadania:
 
 ## <a name="download-and-test-the-app"></a>Pobieranie i testowanie aplikacji
 
-Aplikacja używana w tym przewodniku jest wstępnie zbudowaną aplikacją ASP.NET Core, [prostym czytnikiem strumieniowego źródła danych](https://github.com/Azure-Samples/simple-feed-reader/). Jest to aplikacja Razor ze stronami, która używa `Microsoft.SyndicationFeed.ReaderWriter` interfejsu API do pobierania źródła danych RSS/Atom i wyświetlania elementów wiadomości na liście.
+Aplikacja używana w tym przewodniku jest wstępnie zbudowaną aplikacją ASP.NET Core, [prostym czytnikiem strumieniowego źródła danych](https://github.com/Azure-Samples/simple-feed-reader/). Jest to Razor aplikacja ze stronami, która używa `Microsoft.SyndicationFeed.ReaderWriter` interfejsu API do pobierania źródła danych RSS/Atom i wyświetlania elementów wiadomości na liście.
 
 Możesz przejrzeć kod, ale ważne jest, aby zrozumieć, że nie ma żadnych specjalnych informacji o tej aplikacji. Jest to tylko prosta aplikacja ASP.NET Core do celów informacyjnych.
 
 Z poziomu powłoki poleceń Pobierz kod, Skompiluj projekt i uruchom go w następujący sposób.
 
-> *Uwaga: Użytkownicy systemu Linux/macOS powinni wprowadzać odpowiednie zmiany w ścieżkach, np. przy użyciu ukośnika (`/`), a nie`\`ukośnika odwrotnego ().*
+> *Uwaga: Użytkownicy systemu Linux/macOS powinni wprowadzać odpowiednie zmiany w ścieżkach, np. przy użyciu ukośnika ( `/` ), a nie ukośnika odwrotnego ( `\` ).*
 
 1. Sklonuj kod do folderu na komputerze lokalnym.
 
@@ -73,7 +75,7 @@ Z poziomu powłoki poleceń Pobierz kod, Skompiluj projekt i uruchom go w nastę
 
      ![Aplikacja wyświetlająca zawartość kanału informacyjnego RSS](./media/deploying-to-app-service/app-in-browser.png)
 
-6. Po upewnieniu się, że aplikacja działa prawidłowo, zamknij ją, naciskając klawisz **Ctrl**+**C** w powłoce poleceń.
+6. Po upewnieniu się, że aplikacja działa prawidłowo, zamknij ją, naciskając klawisz **Ctrl** + **C** w powłoce poleceń.
 
 ## <a name="create-the-azure-app-service-web-app"></a>Tworzenie aplikacji sieci Web Azure App Service
 
@@ -83,7 +85,7 @@ Aby wdrożyć aplikację, musisz utworzyć App Service [aplikację sieci Web](/a
 
 2. Użyj Cloud Shell, aby wykonać następujące czynności.
 
-    a. Zadeklaruj zmienną do przechowywania nazwy aplikacji sieci Web. Nazwa musi być unikatowa, aby można jej było używać w domyślnym adresie URL. Użycie funkcji `$RANDOM` bash do konstruowania nazwy gwarantuje unikatowość i wyniki w formacie `webappname99999`.
+    a. Zadeklaruj zmienną do przechowywania nazwy aplikacji sieci Web. Nazwa musi być unikatowa, aby można jej było używać w domyślnym adresie URL. Użycie `$RANDOM` funkcji bash do konstruowania nazwy gwarantuje unikatowość i wyniki w formacie `webappname99999` .
 
     ```console
     webappname=mywebapp$RANDOM
@@ -95,7 +97,7 @@ Aby wdrożyć aplikację, musisz utworzyć App Service [aplikację sieci Web](/a
     az group create --location centralus --name AzureTutorial
     ```
 
-    `az` Polecenie wywołuje [interfejs wiersza polecenia platformy Azure](/cli/azure/). Interfejs wiersza polecenia może być uruchamiany lokalnie, ale jego użycie w Cloud Shell pozwala zaoszczędzić czas i konfigurację.
+    `az`Polecenie wywołuje [interfejs wiersza polecenia platformy Azure](/cli/azure/). Interfejs wiersza polecenia może być uruchamiany lokalnie, ale jego użycie w Cloud Shell pozwala zaoszczędzić czas i konfigurację.
 
     c. Utwórz plan App Service w warstwie S1. Plan App Service jest grupą aplikacji sieci Web, które współużytkują tę samą warstwę cenową. Warstwa S1 nie jest bezpłatna, ale jest wymagana w przypadku funkcji miejsc przejściowych.
 
@@ -127,7 +129,7 @@ Aby wdrożyć aplikację, musisz utworzyć App Service [aplikację sieci Web](/a
     echo Web app URL: http://$webappname.azurewebsites.net
     ```
 
-3. Przy użyciu powłoki poleceń na komputerze lokalnym przejdź do folderu projektu aplikacji sieci Web (na przykład `.\simple-feed-reader\SimpleFeedReader`). Wykonaj następujące polecenia, aby skonfigurować usługę git do wypychania do adresu URL wdrożenia:
+3. Przy użyciu powłoki poleceń na komputerze lokalnym przejdź do folderu projektu aplikacji sieci Web (na przykład `.\simple-feed-reader\SimpleFeedReader` ). Wykonaj następujące polecenia, aby skonfigurować usługę git do wypychania do adresu URL wdrożenia:
 
     a. Dodaj zdalny adres URL do repozytorium lokalnego.
 
@@ -143,17 +145,17 @@ Aby wdrożyć aplikację, musisz utworzyć App Service [aplikację sieci Web](/a
 
     Zostanie wyświetlony monit o utworzenie wcześniej utworzonych poświadczeń wdrożenia. Obserwuj dane wyjściowe w powłoce poleceń. Platforma Azure kompiluje aplikację ASP.NET Core zdalnie.
 
-4. W przeglądarce przejdź do *adresu URL aplikacji sieci Web* i zanotuj, że aplikacja została skompilowana i wdrożona. Dodatkowe zmiany można zatwierdzić w lokalnym repozytorium git przy `git commit`użyciu programu. Te zmiany są przekazywane do platformy Azure przy użyciu poprzedniego `git push` polecenia.
+4. W przeglądarce przejdź do *adresu URL aplikacji sieci Web* i zanotuj, że aplikacja została skompilowana i wdrożona. Dodatkowe zmiany można zatwierdzić w lokalnym repozytorium git przy użyciu programu `git commit` . Te zmiany są przekazywane do platformy Azure przy użyciu poprzedniego `git push` polecenia.
 
 ## <a name="deployment-with-visual-studio"></a>Wdrażanie za pomocą programu Visual Studio
 
-> *Uwaga: Ta sekcja dotyczy tylko systemu Windows. Użytkownicy systemów Linux i macOS powinni wprowadzić zmiany opisane w kroku 2 poniżej. Zapisz plik i zatwierdź zmianę w repozytorium lokalnym za pomocą programu `git commit`. Na koniec wypchnij zmiany z `git push`, jak w pierwszej sekcji.*
+> *Uwaga: Ta sekcja dotyczy tylko systemu Windows. Użytkownicy systemów Linux i macOS powinni wprowadzić zmiany opisane w kroku 2 poniżej. Zapisz plik i zatwierdź zmianę w repozytorium lokalnym za pomocą programu `git commit` . Na koniec wypchnij zmiany z `git push` , jak w pierwszej sekcji.*
 
 Aplikacja została już wdrożona z poziomu powłoki poleceń. Użyjmy zintegrowanych narzędzi programu Visual Studio, aby wdrożyć aktualizację do aplikacji. W tle program Visual Studio wykonuje te same czynności co w przypadku narzędzi wiersza polecenia, ale w znanym interfejsie użytkownika programu Visual Studio.
 
 1. Otwórz *SimpleFeedReader. sln* w programie Visual Studio.
-2. W Eksplorator rozwiązań Otwórz *Pages\Index.cshtml*. Zmień `<h2>Simple Feed Reader</h2>` na `<h2>Simple Feed Reader - V2</h2>`.
-3. Naciśnij **klawisze CTRL**+**SHIFT**+**B** , aby skompilować aplikację.
+2. W Eksplorator rozwiązań Otwórz *Pages\Index.cshtml*. Zmień `<h2>Simple Feed Reader</h2>` na `<h2>Simple Feed Reader - V2</h2>` .
+3. Naciśnij **klawisze CTRL** + **SHIFT** + **B** , aby skompilować aplikację.
 4. W Eksplorator rozwiązań kliknij prawym przyciskiem myszy projekt, a następnie kliknij pozycję **Publikuj**.
 
     ![Zrzut ekranu przedstawiający kliknięcie prawym przyciskiem myszy, Publikuj](./media/deploying-to-app-service/publish.png)
@@ -163,7 +165,7 @@ Aplikacja została już wdrożona z poziomu powłoki poleceń. Użyjmy zintegrow
 
     ![Zrzut ekranu przedstawiający okno dialogowe publikowania App Service](./media/deploying-to-app-service/publish-dialog.png)
 
-Program Visual Studio kompiluje i wdraża aplikację na platformie Azure. Przejdź do adresu URL aplikacji sieci Web. Sprawdź, czy `<h2>` modyfikacja elementu jest na żywo.
+Program Visual Studio kompiluje i wdraża aplikację na platformie Azure. Przejdź do adresu URL aplikacji sieci Web. Sprawdź, czy `<h2>` Modyfikacja elementu jest na żywo.
 
 ![Aplikacja ze zmienionym tytułem](./media/deploying-to-app-service/app-v2.png)
 
@@ -192,7 +194,7 @@ Miejsca wdrożenia obsługują przemieszczanie zmian bez wpływu na działanie a
     echo Staging web app URL: http://$webappname-staging.azurewebsites.net
     ```
 
-3. W edytorze tekstu lub programie Visual Studio zmodyfikuj ponownie *strony/index. cshtml* , aby `<h2>` element był odczytywany `<h2>Simple Feed Reader - V3</h2>` i zapisywał plik.
+3. W edytorze tekstu lub programie Visual Studio zmodyfikuj ponownie *strony/index. cshtml* , aby element był `<h2>` odczytywany `<h2>Simple Feed Reader - V3</h2>` i zapisywał plik.
 
 4. Zatwierdź plik w lokalnym repozytorium git, używając strony **zmiany** w karcie *Team Explorer* w programie Visual Studio lub wprowadzając następujące polecenie przy użyciu powłoki poleceń komputera lokalnego:
 

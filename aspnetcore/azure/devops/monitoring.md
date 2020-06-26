@@ -7,17 +7,19 @@ ms.custom: mvc, seodec18
 ms.date: 07/10/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: azure/devops/monitor
-ms.openlocfilehash: 3af36a37124968e13952e8bf5de1b643265a4a5b
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: a94b1e0b5ce2a24cf22eb665c9bcd03c25ffa67f
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82766891"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400378"
 ---
 # <a name="monitor-and-debug"></a>Monitorowanie i debugowanie
 
@@ -37,7 +39,7 @@ W tej sekcji wykonasz następujące zadania:
 
 App Service aplikacje sieci Web są łatwo monitorowane w czasie rzeczywistym. Azure Portal renderuje metryki w łatwych do zrozumienia grafach i wykresach.
 
-1. Otwórz [Azure Portal](https://portal.azure.com), a następnie przejdź do App Service *unique_number\<\> mywebapp* .
+1. Otwórz [Azure Portal](https://portal.azure.com), a następnie przejdź do App Service *mywebapp \<unique_number\> * .
 
 1. Karta **Przegląd** przedstawia przydatne informacje, w tym Wykresy zawierające ostatnie metryki.
 
@@ -65,7 +67,7 @@ App Service aplikacje sieci Web są łatwo monitorowane w czasie rzeczywistym. A
 
 [Application Insights](/azure/application-insights/app-insights-overview) to usługa platformy Azure do analizowania wydajności i stabilności aplikacji sieci Web oraz sposobu ich używania przez użytkowników. Dane z Application Insights są szersze i bardziej precyzyjne niż Azure Monitor. Dane mogą udostępniać deweloperom i administratorom najważniejsze informacje dotyczące ulepszania aplikacji. Application Insights można dodać do zasobu Azure App Service bez wprowadzania zmian w kodzie.
 
-1. Otwórz [Azure Portal](https://portal.azure.com), a następnie przejdź do App Service *unique_number\<\> mywebapp* .
+1. Otwórz [Azure Portal](https://portal.azure.com), a następnie przejdź do App Service *mywebapp \<unique_number\> * .
 1. Na karcie **Omówienie** kliknij kafelek **Application Insights** .
 
     ![Kafelek Application Insights](./media/monitoring/app-insights.png)
@@ -90,7 +92,7 @@ Application Insights zapewnia przydatne informacje po stronie serwera bez dodatk
 
 Dzienniki serwera sieci Web i aplikacji są domyślnie wyłączone w Azure App Service. Włącz dzienniki, wykonując następujące czynności:
 
-1. Otwórz [Azure Portal](https://portal.azure.com)i przejdź do App Service *unique_number\<\> mywebapp* .
+1. Otwórz [Azure Portal](https://portal.azure.com)i przejdź do App Service *mywebapp \<unique_number\> * .
 1. W menu po lewej stronie przewiń w dół do sekcji **monitorowanie** . Wybierz pozycję **dzienniki diagnostyczne**.
 
     ![Łącze do dzienników diagnostycznych](./media/monitoring/logging.png)
@@ -98,7 +100,7 @@ Dzienniki serwera sieci Web i aplikacji są domyślnie wyłączone w Azure App S
 1. Włącz **Rejestrowanie aplikacji (system plików)**. Jeśli zostanie wyświetlony monit, kliknij pole, aby zainstalować rozszerzenia w celu włączenia rejestrowania aplikacji w aplikacji sieci Web.
 1. Ustaw **rejestrowanie serwera sieci Web** w **systemie plików**.
 1. Wprowadź **okres przechowywania** w dniach. Na przykład 30.
-1. Kliknij przycisk **Zapisz**.
+1. Kliknij pozycję **Zapisz**.
 
 Dla aplikacji sieci Web generowane są dzienniki ASP.NET Core i serwera sieci Web (App Service). Można je pobrać przy użyciu informacji dotyczących protokołu FTP/FTPS. Hasło jest takie samo jak w przypadku poświadczeń wdrożenia utworzonych wcześniej w tym przewodniku. Dzienniki mogą być [przesyłane strumieniowo bezpośrednio do komputera lokalnego przy użyciu programu PowerShell lub interfejsu wiersza polecenia platformy Azure](/azure/app-service/web-sites-enable-diagnostic-log#download). Dzienniki mogą być również [wyświetlane w Application Insights](/azure/app-service/web-sites-enable-diagnostic-log#how-to-view-logs-in-application-insights).
 
@@ -106,7 +108,7 @@ Dla aplikacji sieci Web generowane są dzienniki ASP.NET Core i serwera sieci We
 
 Dzienniki aplikacji i serwera sieci Web mogą być przesyłane strumieniowo w czasie rzeczywistym za pomocą portalu.
 
-1. Otwórz [Azure Portal](https://portal.azure.com)i przejdź do App Service *unique_number\<\> mywebapp* .
+1. Otwórz [Azure Portal](https://portal.azure.com)i przejdź do App Service *mywebapp \<unique_number\> * .
 1. W menu po lewej stronie przewiń w dół do sekcji **monitorowanie** i wybierz pozycję **strumień dzienników**.
 
     ![Zrzut ekranu przedstawiający link strumienia dziennika](./media/monitoring/log-stream.png)

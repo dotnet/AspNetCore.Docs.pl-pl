@@ -7,17 +7,19 @@ ms.custom: mvc, seodec18
 ms.date: 10/24/2018
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: azure/devops/next-steps
-ms.openlocfilehash: 92401d45d36dd3b93d175e08a8fa8697217ca7c7
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 6e7f46a0c78575e52a8182829f7b3d2bddec70f6
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82766527"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400339"
 ---
 # <a name="next-steps"></a>Następne kroki
 
@@ -39,7 +41,7 @@ Poza hostingiem sieci Web i DevOps platforma Azure oferuje szeroką gamę usług
 
 [Azure Active Directory](/azure/active-directory/) i [Azure Active Directory B2C](/azure/active-directory-b2c/) są usługami tożsamości. Azure Active Directory jest zaprojektowana dla scenariuszy korporacyjnych i umożliwia współpracę z usługą Azure AD B2B (Business-to-Business), natomiast Azure Active Directory B2C jest zamierzonymi scenariuszami biznesowymi, w tym logowaniem do sieci społecznościowej.
 
-## <a name="mobile"></a>Urządzenia przenośne
+## <a name="mobile"></a>Aplikacje mobilne
 
 [Notification Hubs](/azure/notification-hubs/) to wieloplatformowy, Skalowalny aparat powiadomień wypychanych umożliwiający szybkie wysyłanie milionów komunikatów do aplikacji działających na różnych typach urządzeń.
 

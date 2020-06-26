@@ -7,17 +7,19 @@ ms.custom: H1Hack27Feb2017
 ms.date: 01/09/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: client-side/using-browserlink
-ms.openlocfilehash: 619d19ba90298b2455d4a558fea138c86a751f07
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 95ddf379d7cab336356cbfd3853311cb0911552a
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773660"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85401717"
 ---
 # <a name="browser-link-in-aspnet-core"></a>Link przeglądarki w ASP.NET Core
 
@@ -29,7 +31,7 @@ Link przeglądarki to funkcja programu Visual Studio. Tworzy kanał komunikacyjn
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Dodaj pakiet [Microsoft. VisualStudio. Web. BrowserLink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/) do projektu. W przypadku Razor stron ASP.NET Core lub projektów MVC należy również włączyć kompilację Razor plików (*. cshtml*) środowiska uruchomieniowego <xref:mvc/views/view-compilation>zgodnie z opisem w temacie. Razorzmiany składni są stosowane tylko wtedy, gdy Kompilacja środowiska uruchomieniowego została włączona.
+Dodaj pakiet [Microsoft. VisualStudio. Web. BrowserLink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/) do projektu. W przypadku Razor stron ASP.NET Core lub projektów MVC należy również włączyć kompilację Razor plików (*. cshtml*) środowiska uruchomieniowego zgodnie z opisem w temacie <xref:mvc/views/view-compilation> . Razorzmiany składni są stosowane tylko wtedy, gdy Kompilacja środowiska uruchomieniowego została włączona.
 
 ::: moniker-end
 
@@ -41,17 +43,17 @@ Podczas konwertowania projektu ASP.NET Core 2,0 na ASP.NET Core 2,1 i przejścia
 
 ::: moniker range="= aspnetcore-2.0"
 
-Szablony projektu **aplikacji sieci Web**, **pustej**i **internetowego interfejsu API** ASP.NET Core 2,0 używają [pakietu Microsoft. AspNetCore. All](xref:fundamentals/metapackage), który zawiera odwołanie do pakietu dla [Microsoft. VisualStudio. Web. BrowserLink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/). W związku z tym `Microsoft.AspNetCore.All` używanie pakietu nie wymaga żadnych dalszych działań w celu udostępnienia linku przeglądarki do użycia.
+Szablony projektu **aplikacji sieci Web**, **pustej**i **internetowego interfejsu API** ASP.NET Core 2,0 używają [pakietu Microsoft. AspNetCore. All](xref:fundamentals/metapackage), który zawiera odwołanie do pakietu dla [Microsoft. VisualStudio. Web. BrowserLink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/). W związku z tym używanie `Microsoft.AspNetCore.All` pakietu nie wymaga żadnych dalszych działań w celu udostępnienia linku przeglądarki do użycia.
 
 ::: moniker-end
 
 ::: moniker range="<= aspnetcore-1.1"
 
-Szablon projektu **aplikacji sieci Web** ASP.NET Core 1. x zawiera odwołanie do pakietu dla pakietu [Microsoft. VisualStudio. Web. BrowserLink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/) . Inne typy projektów wymagają dodania odwołania do pakietu do `Microsoft.VisualStudio.Web.BrowserLink`.
+Szablon projektu **aplikacji sieci Web** ASP.NET Core 1. x zawiera odwołanie do pakietu dla pakietu [Microsoft. VisualStudio. Web. BrowserLink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/) . Inne typy projektów wymagają dodania odwołania do pakietu do `Microsoft.VisualStudio.Web.BrowserLink` .
 
 ::: moniker-end
 
-### <a name="configuration"></a>Konfigurowanie
+### <a name="configuration"></a>Konfiguracja
 
 Wywołanie `UseBrowserLink` `Startup.Configure` metody:
 
@@ -59,7 +61,7 @@ Wywołanie `UseBrowserLink` `Startup.Configure` metody:
 app.UseBrowserLink();
 ```
 
-`UseBrowserLink` Wywołanie jest zwykle umieszczane wewnątrz `if` bloku, który umożliwia tylko łącze przeglądarki w środowisku deweloperskim. Przykład:
+`UseBrowserLink`Wywołanie jest zwykle umieszczane wewnątrz `if` bloku, który umożliwia tylko łącze przeglądarki w środowisku deweloperskim. Na przykład:
 
 ```csharp
 if (env.IsDevelopment())
@@ -134,7 +136,7 @@ Gdy automatyczna synchronizacja CSS jest włączona, podłączane przeglądarki 
 
 ## <a name="how-it-works"></a>Jak to działa
 
-Link do przeglądarki [SignalR](xref:signalr/introduction) używa do tworzenia kanału komunikacyjnego między programem Visual Studio i przeglądarką. Gdy łącze przeglądarki jest włączone, program Visual Studio działa jako SignalR serwer, z którym mogą się łączyć wielu klientów (przeglądarki). Link przeglądarki rejestruje również składnik pośredniczący w potoku żądania ASP.NET Core. Ten składnik wprowadza odwołania specjalne `<script>` do każdego żądania strony z serwera. Odwołania do skryptu można zobaczyć, wybierając opcję **Wyświetl źródło** w przeglądarce i przewijając do końca zawartości `<body>` tagu:
+Link do przeglądarki używa [SignalR](xref:signalr/introduction) do tworzenia kanału komunikacyjnego między programem Visual Studio i przeglądarką. Gdy łącze przeglądarki jest włączone, program Visual Studio działa jako SignalR serwer, z którym mogą się łączyć wielu klientów (przeglądarki). Link przeglądarki rejestruje również składnik pośredniczący w potoku żądania ASP.NET Core. Ten składnik `<script>` wprowadza odwołania specjalne do każdego żądania strony z serwera. Odwołania do skryptu można zobaczyć, wybierając opcję **Wyświetl źródło** w przeglądarce i przewijając do końca `<body>` zawartości tagu:
 
 ```html
     <!-- Visual Studio Browser Link -->
@@ -148,4 +150,4 @@ Link do przeglądarki [SignalR](xref:signalr/introduction) używa do tworzenia k
 
 Pliki źródłowe nie są modyfikowane. Składnik pośredniczący wprowadza odwołania do skryptów dynamicznie.
 
-Ponieważ kod po stronie przeglądarki to wszystkie skrypty JavaScript, działa on we wszystkich przeglądarkach SignalR , które obsługują nie wymaga wtyczki przeglądarki.
+Ponieważ kod po stronie przeglądarki to wszystkie skrypty JavaScript, działa on we wszystkich przeglądarkach, które SignalR obsługują nie wymaga wtyczki przeglądarki.

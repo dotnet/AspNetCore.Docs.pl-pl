@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 03/26/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: migration/claimsprincipal-current
-ms.openlocfilehash: 4bcbaa1854016d7393d019a9c275bc8221974d7a
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: f3b56b005906847e86d598f0630b8cf9534761cb
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84145619"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399741"
 ---
 # <a name="migrate-from-claimsprincipalcurrent"></a>Migruj z ClaimsPrincipal. Current
 

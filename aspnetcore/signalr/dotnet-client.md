@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 01/14/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: signalr/dotnet-client
-ms.openlocfilehash: 7423624bdddfe6cee696cf87c255415170f46455
-ms.sourcegitcommit: a423e8fcde4b6181a3073ed646a603ba20bfa5f9
+ms.openlocfilehash: 54e86479b9f9f0acc861769f9ab78958f79acfd3
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/13/2020
-ms.locfileid: "84755758"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400144"
 ---
 # <a name="aspnet-core-signalr-net-client"></a>ASP.NET Core SignalR klienta platformy .NET
 
@@ -40,7 +42,7 @@ Aby zainstalować bibliotekę kliencką, uruchom następujące polecenie w oknie
 Install-Package Microsoft.AspNetCore.SignalR.Client
 ```
 
-# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
 
 Aby zainstalować bibliotekę kliencką, uruchom następujące polecenie w powłoce poleceń:
 
@@ -260,7 +262,7 @@ Obsługa błędów przy użyciu instrukcji try-catch. Zbadaj `Exception` obiekt,
 
 [!code-csharp[Logging](dotnet-client/sample/signalrchatclient/MainWindow.xaml.cs?name=snippet_ErrorHandling)]
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Centra](xref:signalr/hubs)
 * [Klient JavaScript](xref:signalr/javascript-client)

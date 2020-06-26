@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 10/07/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: fundamentals/host/web-host
-ms.openlocfilehash: 71bca4c0987059efa0e4ff35f25fe7cdb75641d5
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 630191948a9013e88853ee1a31d15f2964b4a7f4
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773994"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399416"
 ---
 # <a name="aspnet-core-web-host"></a>ASP.NET Core hosta sieci Web
 
@@ -40,7 +42,7 @@ W tym artykule omówiono hosta sieci Web, który służy do hostowania aplikacji
 
 Utwórz hosta przy użyciu wystąpienia [IWebHostBuilder](/dotnet/api/microsoft.aspnetcore.hosting.iwebhostbuilder). Jest to zwykle wykonywane w punkcie wejścia aplikacji, w `Main` metodzie.
 
-W szablonach `Main` projektu znajduje się w *program.cs*. Typowe wywołania aplikacji [CreateDefaultBuilder](/dotnet/api/microsoft.aspnetcore.webhost.createdefaultbuilder) do rozpoczęcia konfigurowania hosta:
+W szablonach projektu `Main` znajduje się w *program.cs*. Typowe wywołania aplikacji [CreateDefaultBuilder](/dotnet/api/microsoft.aspnetcore.webhost.createdefaultbuilder) do rozpoczęcia konfigurowania hosta:
 
 ```csharp
 public class Program
@@ -56,28 +58,28 @@ public class Program
 }
 ```
 
-Kod, który wywołuje `CreateDefaultBuilder` , znajduje się w metodzie o nazwie `CreateWebHostBuilder`, która oddziela ją od kodu `Main` w ramach `Run` tego wywołania w obiekcie konstruktora. Ta separacja jest wymagana, jeśli używasz [narzędzi Entity Framework Core](/ef/core/miscellaneous/cli/). Narzędzia oczekują na znalezienie `CreateWebHostBuilder` metody, którą mogą wywołać w czasie projektowania, aby skonfigurować hosta bez uruchamiania aplikacji. Alternatywą jest zaimplementowanie `IDesignTimeDbContextFactory`. Aby uzyskać więcej informacji, zobacz [Tworzenie DbContext w czasie projektowania](/ef/core/miscellaneous/cli/dbcontext-creation).
+Kod, który wywołuje `CreateDefaultBuilder` , znajduje się w metodzie o nazwie `CreateWebHostBuilder` , która oddziela ją od kodu w ramach `Main` tego wywołania `Run` w obiekcie konstruktora. Ta separacja jest wymagana, jeśli używasz [narzędzi Entity Framework Core](/ef/core/miscellaneous/cli/). Narzędzia oczekują na znalezienie `CreateWebHostBuilder` metody, którą mogą wywołać w czasie projektowania, aby skonfigurować hosta bez uruchamiania aplikacji. Alternatywą jest zaimplementowanie `IDesignTimeDbContextFactory` . Aby uzyskać więcej informacji, zobacz [Tworzenie DbContext w czasie projektowania](/ef/core/miscellaneous/cli/dbcontext-creation).
 
 Metoda `CreateDefaultBuilder` wykonuje następujące zadania:
 
-* Konfiguruje serwer [Kestrel](xref:fundamentals/servers/kestrel) jako serwer sieci Web przy użyciu dostawców konfiguracji hostingu aplikacji. Aby poznać domyślne opcje serwera Kestrel, zobacz <xref:fundamentals/servers/kestrel#kestrel-options>.
+* Konfiguruje serwer [Kestrel](xref:fundamentals/servers/kestrel) jako serwer sieci Web przy użyciu dostawców konfiguracji hostingu aplikacji. Aby poznać domyślne opcje serwera Kestrel, zobacz <xref:fundamentals/servers/kestrel#kestrel-options> .
 * Ustawia [katalog główny zawartości](xref:fundamentals/index#content-root) dla ścieżki zwróconej przez [katalog. GetCurrentDirectory](/dotnet/api/system.io.directory.getcurrentdirectory).
 * Ładuje [konfigurację hosta](#host-configuration-values) z:
-  * Zmienne środowiskowe poprzedzone `ASPNETCORE_` prefiksem (na `ASPNETCORE_ENVIRONMENT`przykład).
+  * Zmienne środowiskowe poprzedzone prefiksem `ASPNETCORE_` (na przykład `ASPNETCORE_ENVIRONMENT` ).
   * Argumenty wiersza polecenia.
 * Ładuje konfigurację aplikacji w następującej kolejności:
-  * *appSettings. JSON*.
+  * *appsettings.js*.
   * *appSettings. {Environment}. JSON*.
-  * [Secret Manager](xref:security/app-secrets) , gdy aplikacja jest uruchamiana `Development` w środowisku przy użyciu zestawu wpisów.
+  * [Secret Manager](xref:security/app-secrets) , gdy aplikacja jest uruchamiana w `Development` środowisku przy użyciu zestawu wpisów.
   * Zmienne środowiskowe.
   * Argumenty wiersza polecenia.
-* Konfiguruje [Rejestrowanie](xref:fundamentals/logging/index) dla konsoli i danych wyjściowych debugowania. Rejestrowanie obejmuje reguły [filtrowania dzienników](xref:fundamentals/logging/index#log-filtering) określone w sekcji konfiguracja rejestrowania w pliku *appSettings. JSON* lub *appSettings. { Environment} plik JSON* .
-* Po uruchomieniu usług IIS za pomocą [modułu ASP.NET Core](xref:host-and-deploy/aspnet-core-module)program `CreateDefaultBuilder` włącza [integrację usług IIS](xref:host-and-deploy/iis/index), która konfiguruje podstawowy adres i port aplikacji. Integracja usług IIS konfiguruje również aplikację do [przechwytywania błędów uruchamiania](#capture-startup-errors). Aby poznać domyślne opcje usług IIS, <xref:host-and-deploy/iis/index#iis-options>Zobacz.
+* Konfiguruje [Rejestrowanie](xref:fundamentals/logging/index) dla konsoli i danych wyjściowych debugowania. Rejestrowanie obejmuje reguły [filtrowania dzienników](xref:fundamentals/logging/index#log-filtering) określone w sekcji konfiguracja rejestrowania w *appsettings.js* lub *appSettings. { Environment} plik JSON* .
+* Po uruchomieniu usług IIS za pomocą [modułu ASP.NET Core](xref:host-and-deploy/aspnet-core-module)program `CreateDefaultBuilder` włącza [integrację usług IIS](xref:host-and-deploy/iis/index), która konfiguruje podstawowy adres i port aplikacji. Integracja usług IIS konfiguruje również aplikację do [przechwytywania błędów uruchamiania](#capture-startup-errors). Aby poznać domyślne opcje usług IIS, zobacz <xref:host-and-deploy/iis/index#iis-options> .
 * Ustawia [ServiceProviderOptions. ValidateScopes](/dotnet/api/microsoft.extensions.dependencyinjection.serviceprovideroptions.validatescopes) na `true` , jeśli środowisko aplikacji jest opracowywane. Aby uzyskać więcej informacji, zobacz [Walidacja zakresu](#scope-validation).
 
-`CreateDefaultBuilder` Konfiguracja zdefiniowana przez można zastąpić i rozszerzyć przez [ConfigureAppConfiguration](/dotnet/api/microsoft.aspnetcore.hosting.webhostbuilderextensions.configureappconfiguration), [ConfigureLogging](/dotnet/api/microsoft.aspnetcore.hosting.webhostbuilderextensions.configurelogging)i inne metody i metody rozszerzające [IWebHostBuilder](/dotnet/api/microsoft.aspnetcore.hosting.iwebhostbuilder). Poniżej przedstawiono kilka przykładów:
+Konfiguracja zdefiniowana przez `CreateDefaultBuilder` można zastąpić i rozszerzyć przez [ConfigureAppConfiguration](/dotnet/api/microsoft.aspnetcore.hosting.webhostbuilderextensions.configureappconfiguration), [ConfigureLogging](/dotnet/api/microsoft.aspnetcore.hosting.webhostbuilderextensions.configurelogging)i inne metody i metody rozszerzające [IWebHostBuilder](/dotnet/api/microsoft.aspnetcore.hosting.iwebhostbuilder). Poniżej przedstawiono kilka przykładów:
 
-* [ConfigureAppConfiguration](/dotnet/api/microsoft.aspnetcore.hosting.webhostbuilderextensions.configureappconfiguration) służy do określania dodatkowych `IConfiguration` aplikacji. Następujące `ConfigureAppConfiguration` wywołanie dodaje delegata w celu uwzględnienia konfiguracji aplikacji w pliku *appSettings. XML* . `ConfigureAppConfiguration`może być wywoływana wiele razy. Należy zauważyć, że ta konfiguracja nie ma zastosowania do hosta (na przykład adresów URL serwera lub środowiska). Zapoznaj się z sekcją [wartości konfiguracji hosta](#host-configuration-values) .
+* [ConfigureAppConfiguration](/dotnet/api/microsoft.aspnetcore.hosting.webhostbuilderextensions.configureappconfiguration) służy do określania dodatkowych `IConfiguration` aplikacji. Następujące `ConfigureAppConfiguration` wywołanie dodaje delegata w celu uwzględnienia konfiguracji aplikacji w pliku *appsettings.xml* . `ConfigureAppConfiguration`może być wywoływana wiele razy. Należy zauważyć, że ta konfiguracja nie ma zastosowania do hosta (na przykład adresów URL serwera lub środowiska). Zapoznaj się z sekcją [wartości konfiguracji hosta](#host-configuration-values) .
 
     ```csharp
     WebHost.CreateDefaultBuilder(args)
@@ -88,7 +90,7 @@ Metoda `CreateDefaultBuilder` wykonuje następujące zadania:
         ...
     ```
 
-* Następujące `ConfigureLogging` wywołanie dodaje delegata w celu skonfigurowania minimalnego poziomu rejestrowania ([SetMinimumLevel](/dotnet/api/microsoft.extensions.logging.loggingbuilderextensions.setminimumlevel)) na wartość [LogLevel. Warning](/dotnet/api/microsoft.extensions.logging.loglevel). To ustawienie zastępuje ustawienia w *appSettings. Development. JSON* (`LogLevel.Debug`) i *appSettings. Production. JSON* (`LogLevel.Error`) skonfigurowany `CreateDefaultBuilder`przez. `ConfigureLogging`może być wywoływana wiele razy.
+* Następujące `ConfigureLogging` wywołanie dodaje delegata w celu skonfigurowania minimalnego poziomu rejestrowania ([SetMinimumLevel](/dotnet/api/microsoft.extensions.logging.loggingbuilderextensions.setminimumlevel)) na wartość [LogLevel. Warning](/dotnet/api/microsoft.extensions.logging.loglevel). To ustawienie zastępuje ustawienia w *appsettings.Development.json* ( `LogLevel.Debug` ) i *appsettings.Production.json* ( `LogLevel.Error` ) skonfigurowany przez `CreateDefaultBuilder` . `ConfigureLogging`może być wywoływana wiele razy.
 
     ```csharp
     WebHost.CreateDefaultBuilder(args)
@@ -101,7 +103,7 @@ Metoda `CreateDefaultBuilder` wykonuje następujące zadania:
 
 ::: moniker range=">= aspnetcore-2.2"
 
-* Następujące wywołanie `ConfigureKestrel` przesłania domyślne [limity. MaxRequestBodySize](/dotnet/api/microsoft.aspnetcore.server.kestrel.core.kestrelserverlimits.maxrequestbodysize) 30 000 000 bajtów ustanowionych podczas konfigurowania Kestrel przez `CreateDefaultBuilder`:
+* Następujące wywołanie `ConfigureKestrel` przesłania domyślne [limity. MaxRequestBodySize](/dotnet/api/microsoft.aspnetcore.server.kestrel.core.kestrelserverlimits.maxrequestbodysize) 30 000 000 bajtów ustanowionych podczas konfigurowania Kestrel przez `CreateDefaultBuilder` :
 
     ```csharp
     WebHost.CreateDefaultBuilder(args)
@@ -115,7 +117,7 @@ Metoda `CreateDefaultBuilder` wykonuje następujące zadania:
 
 ::: moniker range="< aspnetcore-2.2"
 
-* Następujące wywołanie [UseKestrel](/dotnet/api/microsoft.aspnetcore.hosting.webhostbuilderkestrelextensions.usekestrel) zastępuje domyślne [limity. MaxRequestBodySize](/dotnet/api/microsoft.aspnetcore.server.kestrel.core.kestrelserverlimits.maxrequestbodysize) 30 000 000 bajtów ustanowionych podczas konfigurowania Kestrel przez `CreateDefaultBuilder`:
+* Następujące wywołanie [UseKestrel](/dotnet/api/microsoft.aspnetcore.hosting.webhostbuilderkestrelextensions.usekestrel) zastępuje domyślne [limity. MaxRequestBodySize](/dotnet/api/microsoft.aspnetcore.server.kestrel.core.kestrelserverlimits.maxrequestbodysize) 30 000 000 bajtów ustanowionych podczas konfigurowania Kestrel przez `CreateDefaultBuilder` :
 
     ```csharp
     WebHost.CreateDefaultBuilder(args)
@@ -129,7 +131,7 @@ Metoda `CreateDefaultBuilder` wykonuje następujące zadania:
 
 [Katalog główny zawartości](xref:fundamentals/index#content-root) określa, gdzie host wyszukuje pliki zawartości, takie jak pliki widoku MVC. Gdy aplikacja jest uruchamiana z folderu głównego projektu, folder główny projektu jest używany jako katalog główny zawartości. Jest to ustawienie domyślne używane w programie [Visual Studio](https://visualstudio.microsoft.com) i w [nowych szablonach dotnet](/dotnet/core/tools/dotnet-new).
 
-Aby uzyskać więcej informacji na temat konfiguracji aplikacji <xref:fundamentals/configuration/index>, zobacz.
+Aby uzyskać więcej informacji na temat konfiguracji aplikacji, zobacz <xref:fundamentals/configuration/index> .
 
 > [!NOTE]
 > Alternatywą dla użycia metody statycznej `CreateDefaultBuilder` jest utworzenie hosta z [WebHostBuilder](/dotnet/api/microsoft.aspnetcore.hosting.webhostbuilder) jest obsługiwane podejście ASP.NET Core 2. x.
@@ -140,9 +142,9 @@ Podczas konfigurowania hosta można dostarczyć metody [Configure](/dotnet/api/m
 
 [WebHostBuilder](/dotnet/api/microsoft.aspnetcore.hosting.webhostbuilder) opiera się na następujących podejściach do ustawiania wartości konfiguracji hosta:
 
-* Konfiguracja konstruktora hostów, która zawiera zmienne środowiskowe w formacie `ASPNETCORE_{configurationKey}`. Na przykład `ASPNETCORE_ENVIRONMENT`.
+* Konfiguracja konstruktora hostów, która zawiera zmienne środowiskowe w formacie `ASPNETCORE_{configurationKey}` . Na przykład `ASPNETCORE_ENVIRONMENT`.
 * Rozszerzenia, takie jak [UseContentRoot](/dotnet/api/microsoft.aspnetcore.hosting.hostingabstractionswebhostbuilderextensions.usecontentroot) i [UseConfiguration](/dotnet/api/microsoft.aspnetcore.hosting.hostingabstractionswebhostbuilderextensions.useconfiguration) (zobacz sekcję [Konfiguracja zastąpień](#override-configuration) ).
-* [UseSetting](/dotnet/api/microsoft.aspnetcore.hosting.webhostbuilder.usesetting) i skojarzony klucz. Podczas ustawiania wartości za pomocą `UseSetting`, wartość jest ustawiana jako ciąg, niezależnie od typu.
+* [UseSetting](/dotnet/api/microsoft.aspnetcore.hosting.webhostbuilder.usesetting) i skojarzony klucz. Podczas ustawiania wartości za pomocą `UseSetting` , wartość jest ustawiana jako ciąg, niezależnie od typu.
 
 Host używa dowolnej opcji ustawia wartość Last. Aby uzyskać więcej informacji, zobacz [Przesłoń konfigurację](#override-configuration) w następnej sekcji.
 
@@ -150,7 +152,7 @@ Host używa dowolnej opcji ustawia wartość Last. Aby uzyskać więcej informac
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Właściwość `IWebHostEnvironment.ApplicationName` jest ustawiana automatycznie, gdy [UseStartup](/dotnet/api/microsoft.aspnetcore.hosting.webhostbuilderextensions.usestartup) lub [Configure](/dotnet/api/microsoft.aspnetcore.hosting.istartup.configure) jest wywoływana podczas konstruowania hosta. Wartość jest ustawiana na nazwę zestawu zawierającego punkt wejścia aplikacji. Aby jawnie ustawić wartość, użyj [WebHostDefaults. ApplicationKey](/dotnet/api/microsoft.aspnetcore.hosting.webhostdefaults.applicationkey):
+`IWebHostEnvironment.ApplicationName`Właściwość jest ustawiana automatycznie, gdy [UseStartup](/dotnet/api/microsoft.aspnetcore.hosting.webhostbuilderextensions.usestartup) lub [Configure](/dotnet/api/microsoft.aspnetcore.hosting.istartup.configure) jest wywoływana podczas konstruowania hosta. Wartość jest ustawiana na nazwę zestawu zawierającego punkt wejścia aplikacji. Aby jawnie ustawić wartość, użyj [WebHostDefaults. ApplicationKey](/dotnet/api/microsoft.aspnetcore.hosting.webhostdefaults.applicationkey):
 
 ::: moniker-end
 
@@ -176,12 +178,12 @@ WebHost.CreateDefaultBuilder(args)
 To ustawienie steruje przechwytywaniem błędów uruchamiania.
 
 **Klucz**: captureStartupErrors  
-**Typ**: *bool* (`true` or `1`)  
-**Domyślnie**: wartość domyślna `false` to, chyba że aplikacja działa z Kestrel za usługami IIS, gdzie `true`wartość domyślna to.  
+**Typ**: *bool* ( `true` or `1` )  
+**Domyślnie**: wartość domyślna to, `false` chyba że aplikacja działa z Kestrel za usługami IIS, gdzie wartość domyślna to `true` .  
 **Ustaw przy użyciu**:`CaptureStartupErrors`  
 **Zmienna środowiskowa**:`ASPNETCORE_CAPTURESTARTUPERRORS`
 
-Gdy `false`, błędy podczas uruchamiania, kończy się hostem. Gdy `true`Host przechwytuje wyjątki podczas uruchamiania, a następnie próbuje uruchomić serwer.
+Gdy `false` , błędy podczas uruchamiania, kończy się hostem. Gdy `true` host przechwytuje wyjątki podczas uruchamiania, a następnie próbuje uruchomić serwer.
 
 ```csharp
 WebHost.CreateDefaultBuilder(args)
@@ -215,12 +217,12 @@ Aby uzyskać więcej informacji, zobacz:
 Określa, czy mają być przechwytywane szczegółowe błędy.
 
 **Klucz**: detailedErrors  
-**Typ**: *bool* (`true` or `1`)  
+**Typ**: *bool* ( `true` or `1` )  
 **Wartość domyślna**: FAŁSZ  
 **Ustaw przy użyciu**:`UseSetting`  
 **Zmienna środowiskowa**:`ASPNETCORE_DETAILEDERRORS`
 
-Po włączeniu (lub gdy <a href="#environment">środowisko</a> jest ustawione na `Development`), aplikacja przechwytuje szczegółowe wyjątki.
+Po włączeniu (lub gdy <a href="#environment">środowisko</a> jest ustawione na `Development` ), aplikacja przechwytuje szczegółowe wyjątki.
 
 ```csharp
 WebHost.CreateDefaultBuilder(args)
@@ -237,7 +239,7 @@ Ustawia środowisko aplikacji.
 **Ustaw przy użyciu**:`UseEnvironment`  
 **Zmienna środowiskowa**:`ASPNETCORE_ENVIRONMENT`
 
-Dla środowiska można ustawić dowolną wartość. Wartości zdefiniowane przez platformę `Development`obejmują `Staging`,, `Production`i. W wartościach nie jest rozróżniana wielkość liter. Domyślnie *środowisko* jest odczytywane ze zmiennej `ASPNETCORE_ENVIRONMENT` środowiskowej. W przypadku korzystania z [programu Visual Studio](https://visualstudio.microsoft.com)zmienne środowiskowe można ustawić w pliku *profilu launchsettings. JSON* . Aby uzyskać więcej informacji, zobacz <xref:fundamentals/environments>.
+Dla środowiska można ustawić dowolną wartość. Wartości zdefiniowane przez platformę obejmują `Development` , `Staging` , i `Production` . W wartościach nie jest rozróżniana wielkość liter. Domyślnie *środowisko* jest odczytywane ze `ASPNETCORE_ENVIRONMENT` zmiennej środowiskowej. W przypadku korzystania z [programu Visual Studio](https://visualstudio.microsoft.com)zmienne środowiskowe można ustawić w *launchSettings.js* pliku. Aby uzyskać więcej informacji, zobacz <xref:fundamentals/environments>.
 
 ```csharp
 WebHost.CreateDefaultBuilder(args)
@@ -267,8 +269,8 @@ WebHost.CreateDefaultBuilder(args)
 
 Ustaw port przekierowania HTTPS. Używany do [wymuszania protokołu HTTPS](xref:security/enforcing-ssl).
 
-**Klucz**: https_port **Typ**: *ciąg*
-**domyślny**: nie ustawiono wartości domyślnej.
+**Klucz**: https_port **Typ**: *ciąg* 
+ **domyślny**: nie ustawiono wartości domyślnej.
 **Ustaw przy użyciu**: `UseSetting` 
  **zmienna środowiskowa**:`ASPNETCORE_HTTPS_PORT`
 
@@ -294,10 +296,10 @@ WebHost.CreateDefaultBuilder(args)
 
 ### <a name="prefer-hosting-urls"></a>Preferuj adresy URL hostingu
 
-Wskazuje, czy host powinien nasłuchiwać adresów URL skonfigurowanych przy `WebHostBuilder` użyciu zamiast tych skonfigurowanych przy `IServer` użyciu implementacji.
+Wskazuje, czy host powinien nasłuchiwać adresów URL skonfigurowanych przy użyciu `WebHostBuilder` zamiast tych skonfigurowanych przy użyciu `IServer` implementacji.
 
 **Klucz**: preferHostingUrls  
-**Typ**: *bool* (`true` or `1`)  
+**Typ**: *bool* ( `true` or `1` )  
 Wartość **Domyślna**: prawda  
 **Ustaw przy użyciu**:`PreferHostingUrls`  
 **Zmienna środowiskowa**:`ASPNETCORE_PREFERHOSTINGURLS`
@@ -312,7 +314,7 @@ WebHost.CreateDefaultBuilder(args)
 Zapobiega automatycznemu ładowaniu zestawów startowych hostingu, w tym hostingu zestawów startowych skonfigurowanych przez zestaw aplikacji. Aby uzyskać więcej informacji, zobacz <xref:fundamentals/configuration/platform-specific-configuration>.
 
 **Klucz**: preventHostingStartup  
-**Typ**: *bool* (`true` or `1`)  
+**Typ**: *bool* ( `true` or `1` )  
 **Wartość domyślna**: FAŁSZ  
 **Ustaw przy użyciu**:`UseSetting`  
 **Zmienna środowiskowa**:`ASPNETCORE_PREVENTHOSTINGSTARTUP`
@@ -332,7 +334,7 @@ Wskazuje adresy IP lub adresy hosta z portami i protokołami, na których serwer
 **Ustaw przy użyciu**:`UseUrls`  
 **Zmienna środowiskowa**:`ASPNETCORE_URLS`
 
-Ustaw na rozdzieloną średnikami (;) Lista prefiksów adresów URL, do których serwer powinien reagować. Na przykład `http://localhost:123`. Użyj "\*", aby wskazać, że serwer powinien nasłuchiwać żądań na dowolnym adresie IP lub nazwie hosta przy użyciu określonego portu i protokołu ( `http://*:5000`na przykład). Protokół (`http://` lub `https://`) musi być dołączony do każdego adresu URL. Obsługiwane formaty różnią się między serwerami.
+Ustaw na rozdzieloną średnikami (;) Lista prefiksów adresów URL, do których serwer powinien reagować. Na przykład `http://localhost:123`. Użyj " \* ", aby wskazać, że serwer powinien nasłuchiwać żądań na dowolnym adresie IP lub nazwie hosta przy użyciu określonego portu i protokołu (na przykład `http://*:5000` ). Protokół ( `http://` lub `https://` ) musi być dołączony do każdego adresu URL. Obsługiwane formaty różnią się między serwerami.
 
 ```csharp
 WebHost.CreateDefaultBuilder(args)
@@ -351,7 +353,7 @@ Określa czas oczekiwania na zamknięcie hosta sieci Web.
 **Ustaw przy użyciu**:`UseShutdownTimeout`  
 **Zmienna środowiskowa**:`ASPNETCORE_SHUTDOWNTIMEOUTSECONDS`
 
-Chociaż klucz akceptuje *int* z `UseSetting` (na przykład `.UseSetting(WebHostDefaults.ShutdownTimeoutKey, "10")`), Metoda rozszerzenia [UseShutdownTimeout](/dotnet/api/microsoft.aspnetcore.hosting.hostingabstractionswebhostbuilderextensions.useshutdowntimeout) przyjmuje wartość [TimeSpan](/dotnet/api/system.timespan).
+Chociaż klucz akceptuje *int* z `UseSetting` (na przykład `.UseSetting(WebHostDefaults.ShutdownTimeoutKey, "10")` ), Metoda rozszerzenia [UseShutdownTimeout](/dotnet/api/microsoft.aspnetcore.hosting.hostingabstractionswebhostbuilderextensions.useshutdowntimeout) przyjmuje wartość [TimeSpan](/dotnet/api/system.timespan).
 
 Podczas okresu przekroczenia limitu czasu hostowanie:
 
@@ -375,7 +377,7 @@ Określa zestaw, który ma być wyszukiwany dla `Startup` klasy.
 **Ustaw przy użyciu**:`UseStartup`  
 **Zmienna środowiskowa**:`ASPNETCORE_STARTUPASSEMBLY`
 
-Można odwołać się do`string`zestawu według nazwy (`TStartup`) lub typu (). Jeśli wywoływana `UseStartup` jest wiele metod, pierwszeństwo ma Ostatnia.
+`string`Można odwołać się do zestawu według nazwy () lub typu ( `TStartup` ). Jeśli `UseStartup` wywoływana jest wiele metod, pierwszeństwo ma Ostatnia.
 
 ```csharp
 WebHost.CreateDefaultBuilder(args)
@@ -393,7 +395,7 @@ Ustawia ścieżkę względną do statycznych zasobów aplikacji.
 
 **Klucz**: Webroot  
 **Typ**: *ciąg*  
-**Wartość domyślna**: wartość domyślna `wwwroot`to. Ścieżka do *elementu {content root}/wwwroot* musi istnieć. Jeśli ścieżka nie istnieje, jest używany dostawca plików No-op.  
+**Wartość domyślna**: wartość domyślna to `wwwroot` . Ścieżka do *elementu {content root}/wwwroot* musi istnieć. Jeśli ścieżka nie istnieje, jest używany dostawca plików No-op.  
 **Ustaw przy użyciu**:`UseWebRoot`  
 **Zmienna środowiskowa**:`ASPNETCORE_WEBROOT`
 
@@ -409,9 +411,9 @@ Aby uzyskać więcej informacji, zobacz:
 
 ## <a name="override-configuration"></a>Zastąp konfigurację
 
-Skonfiguruj hosta sieci Web za pomocą [konfiguracji](xref:fundamentals/configuration/index) . W poniższym przykładzie Konfiguracja hosta jest opcjonalnie określona w pliku *HostSettings. JSON* . Wszystkie konfiguracje załadowane z pliku *HostSettings. JSON* mogą zostać zastąpione przez argumenty wiersza polecenia. Utworzona konfiguracja (w programie `config`) służy do konfigurowania hosta z [UseConfiguration](/dotnet/api/microsoft.aspnetcore.hosting.hostingabstractionswebhostbuilderextensions.useconfiguration). `IWebHostBuilder`Konfiguracja jest dodawana do konfiguracji aplikacji, ale&mdash; `ConfigureAppConfiguration` nie ma ona wpływu na `IWebHostBuilder` konfigurację.
+Skonfiguruj hosta sieci Web za pomocą [konfiguracji](xref:fundamentals/configuration/index) . W poniższym przykładzie Konfiguracja hosta jest opcjonalnie określona w *hostsettings.js* pliku. Każda konfiguracja załadowana z *hostsettings.jsw* pliku może zostać przesłonięta przez argumenty wiersza polecenia. Utworzona konfiguracja (w programie `config` ) służy do konfigurowania hosta z [UseConfiguration](/dotnet/api/microsoft.aspnetcore.hosting.hostingabstractionswebhostbuilderextensions.useconfiguration). `IWebHostBuilder`Konfiguracja jest dodawana do konfiguracji aplikacji, ale nie ma ona &mdash; `ConfigureAppConfiguration` wpływu na `IWebHostBuilder` konfigurację.
 
-Zastępowanie konfiguracji podanej przy `UseUrls` użyciu pliku *HostSettings. JSON* należy najpierw skonfigurować argument wiersza polecenia Second:
+Zastępowanie konfiguracji podanej przy `UseUrls` użyciu *hostsettings.jsnajpierw w* konfiguracji, argument wiersza polecenia config sekund:
 
 ```csharp
 public class Program
@@ -441,7 +443,7 @@ public class Program
 }
 ```
 
-*HostSettings. JSON*:
+*hostsettings.js*:
 
 ```json
 {
@@ -450,9 +452,9 @@ public class Program
 ```
 
 > [!NOTE]
-> [UseConfiguration](/dotnet/api/microsoft.aspnetcore.hosting.hostingabstractionswebhostbuilderextensions.useconfiguration) kopiuje tylko klucze z dostarczonej `IConfiguration` do konfiguracji konstruktora hostów. W związku z `reloadOnChange: true` tym nie ma żadnego wpływu na ustawienia plików JSON, ini i XML.
+> [UseConfiguration](/dotnet/api/microsoft.aspnetcore.hosting.hostingabstractionswebhostbuilderextensions.useconfiguration) kopiuje tylko klucze z dostarczonej `IConfiguration` do konfiguracji konstruktora hostów. W związku z tym `reloadOnChange: true` nie ma żadnego wpływu na ustawienia plików JSON, ini i XML.
 
-Aby określić hosta na określonym adresie URL, wymagana wartość może zostać przeniesiona z wiersza polecenia podczas wykonywania [przebiegu dotnet](/dotnet/core/tools/dotnet-run). Argument wiersza polecenia zastępuje `urls` wartość z pliku *HostSettings. JSON* , a serwer nasłuchuje na porcie 8080:
+Aby określić hosta na określonym adresie URL, wymagana wartość może zostać przeniesiona z wiersza polecenia podczas wykonywania [przebiegu dotnet](/dotnet/core/tools/dotnet-run). Argument wiersza polecenia zastępuje `urls` wartość z *hostsettings.jsw* pliku, a serwer nasłuchuje na porcie 8080:
 
 ```dotnetcli
 dotnet run --urls "http://*:8080"
@@ -460,9 +462,9 @@ dotnet run --urls "http://*:8080"
 
 ## <a name="manage-the-host"></a>Zarządzanie hostem
 
-**Run**
+**Uruchom**
 
-`Run` Metoda uruchamia aplikację sieci Web i blokuje wątek wywołujący do momentu wyłączenia hosta:
+`Run`Metoda uruchamia aplikację sieci Web i blokuje wątek wywołujący do momentu wyłączenia hosta:
 
 ```csharp
 host.Run();
@@ -504,7 +506,7 @@ Aplikacja może inicjować i uruchamiać nowy host przy użyciu wstępnie skonfi
 
 **Rozpocznij (aplikacja RequestDelegate)**
 
-Zacznij od `RequestDelegate`:
+Zacznij od `RequestDelegate` :
 
 ```csharp
 using (var host = WebHost.Start(app => app.Response.WriteAsync("Hello, World!")))
@@ -518,7 +520,7 @@ Wykonaj żądanie w przeglądarce, aby `http://localhost:5000` otrzymać odpowie
 
 **Rozpocznij (adres URL ciągu, aplikacja RequestDelegate)**
 
-Zacznij od adresu URL i `RequestDelegate`:
+Zacznij od adresu URL i `RequestDelegate` :
 
 ```csharp
 using (var host = WebHost.Start("http://localhost:8080", app => app.Response.WriteAsync("Hello, World!")))
@@ -528,9 +530,9 @@ using (var host = WebHost.Start("http://localhost:8080", app => app.Response.Wri
 }
 ```
 
-Daje ten sam wynik jako **Start (RequestDelegate App)**, z wyjątkiem tego, że aplikacja `http://localhost:8080`reaguje na.
+Daje ten sam wynik jako **Start (RequestDelegate App)**, z wyjątkiem tego, że aplikacja reaguje na `http://localhost:8080` .
 
-**Uruchom (Action\<IRouteBuilder> routeBuilder)**
+**Uruchom (Akcja \<IRouteBuilder> routeBuilder)**
 
 Użyj wystąpienia programu `IRouteBuilder` ([Microsoft. AspNetCore. Routing](https://www.nuget.org/packages/Microsoft.AspNetCore.Routing/)), aby użyć oprogramowania pośredniczącego routingu:
 
@@ -564,9 +566,9 @@ Użyj poniższego żądania przeglądarki z przykładem:
 
 `WaitForShutdown`bloki do momentu wystawienia przerwy (Ctrl-C/SIGINT lub SIGTERM). Aplikacja wyświetla `Console.WriteLine` komunikat i czeka na zamknięcie naciśnięcia.
 
-**Rozpocznij (ciąg URL: Action\<IRouteBuilder> routeBuilder)**
+**Rozpocznij (ciąg URL: Action \<IRouteBuilder> routeBuilder)**
 
-Użyj adresu URL i wystąpienia `IRouteBuilder`:
+Użyj adresu URL i wystąpienia `IRouteBuilder` :
 
 ```csharp
 using (var host = WebHost.Start("http://localhost:8080", router => router
@@ -585,11 +587,11 @@ using (var host = WebHost.Start("http://localhost:8080", router => router
 }
 ```
 
-Daje ten sam wynik jako **początkowy (Action\<IRouteBuilder> routeBuilder)**, z wyjątkiem tego, że aplikacja `http://localhost:8080`reaguje na.
+Daje ten sam wynik jako **początek (Akcja \<IRouteBuilder> routeBuilder)**, z wyjątkiem tego, że aplikacja reaguje na `http://localhost:8080` .
 
-**StartWith (Akcja\<IApplicationBuilder> aplikacji)**
+**StartWith ( \<IApplicationBuilder> aplikacja działania)**
 
-Podaj delegata, aby skonfigurować `IApplicationBuilder`:
+Podaj delegata, aby skonfigurować `IApplicationBuilder` :
 
 ```csharp
 using (var host = WebHost.StartWith(app => 
@@ -608,9 +610,9 @@ using (var host = WebHost.StartWith(app =>
 
 Wykonaj żądanie w przeglądarce, aby `http://localhost:5000` otrzymać odpowiedź "Hello World!" `WaitForShutdown`bloki do momentu wystawienia przerwy (Ctrl-C/SIGINT lub SIGTERM). Aplikacja wyświetla `Console.WriteLine` komunikat i czeka na zamknięcie naciśnięcia.
 
-**StartWith (adres URL ciągu,\<akcja IApplicationBuilder> aplikacji)**
+**StartWith (adres URL ciągu, \<IApplicationBuilder> aplikacja akcji)**
 
-Podaj adres URL i delegata, aby skonfigurować `IApplicationBuilder`:
+Podaj adres URL i delegata, aby skonfigurować `IApplicationBuilder` :
 
 ```csharp
 using (var host = WebHost.StartWith("http://localhost:8080", app => 
@@ -627,13 +629,13 @@ using (var host = WebHost.StartWith("http://localhost:8080", app =>
 }
 ```
 
-Daje ten sam wynik jako **StartWith (Akcja\<IApplicationBuilder> aplikacji)**, z wyjątkiem tego, że aplikacja `http://localhost:8080`odpowiada.
+Daje ten sam wynik jako **StartWith ( \<IApplicationBuilder> aplikacja działania)**, z wyjątkiem tego, że aplikacja reaguje na `http://localhost:8080` .
 
 ::: moniker range=">= aspnetcore-3.0"
 
 ## <a name="iwebhostenvironment-interface"></a>IWebHostEnvironment, interfejs
 
-`IWebHostEnvironment` Interfejs zawiera informacje o środowisku hostingu aplikacji sieci Web. Użyj [iniekcji konstruktorów](xref:fundamentals/dependency-injection) , `IWebHostEnvironment` Aby uzyskać w celu użycia jej właściwości i metod rozszerzających:
+`IWebHostEnvironment`Interfejs zawiera informacje o środowisku hostingu aplikacji sieci Web. Użyj [iniekcji konstruktorów](xref:fundamentals/dependency-injection) , aby uzyskać `IWebHostEnvironment` w celu użycia jej właściwości i metod rozszerzających:
 
 ```csharp
 public class CustomFileReader
@@ -653,7 +655,7 @@ public class CustomFileReader
 }
 ```
 
-[Podejście oparte na Konwencji](xref:fundamentals/environments#environment-based-startup-class-and-methods) może służyć do konfigurowania aplikacji podczas uruchamiania na podstawie środowiska. Alternatywnie można wstrzyknąć `IWebHostEnvironment` do `Startup` konstruktora do użycia w: `ConfigureServices`
+[Podejście oparte na Konwencji](xref:fundamentals/environments#environment-based-startup-class-and-methods) może służyć do konfigurowania aplikacji podczas uruchamiania na podstawie środowiska. Alternatywnie można wstrzyknąć `IWebHostEnvironment` do `Startup` konstruktora do użycia w `ConfigureServices` :
 
 ```csharp
 public class Startup
@@ -682,9 +684,9 @@ public class Startup
 ```
 
 > [!NOTE]
-> `IsDevelopment` Oprócz metody rozszerzenia, `IWebHostEnvironment` oferty `IsStaging`, `IsProduction`i `IsEnvironment(string environmentName)` metody. Aby uzyskać więcej informacji, zobacz <xref:fundamentals/environments>.
+> Oprócz `IsDevelopment` metody rozszerzenia, `IWebHostEnvironment` oferty `IsStaging` , `IsProduction` i `IsEnvironment(string environmentName)` metody. Aby uzyskać więcej informacji, zobacz <xref:fundamentals/environments>.
 
-`IWebHostEnvironment` Usługę można również wstrzyknąć bezpośrednio do `Configure` metody w celu skonfigurowania potoku przetwarzania:
+`IWebHostEnvironment`Usługę można również wstrzyknąć bezpośrednio do `Configure` metody w celu skonfigurowania potoku przetwarzania:
 
 ```csharp
 public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -728,7 +730,7 @@ public async Task Invoke(HttpContext context, IWebHostEnvironment env)
 
 ## <a name="ihostingenvironment-interface"></a>IHostingEnvironment, interfejs
 
-[Interfejs IHostingEnvironment](/dotnet/api/microsoft.aspnetcore.hosting.ihostingenvironment) zawiera informacje o środowisku hostingu aplikacji sieci Web. Użyj [iniekcji konstruktorów](xref:fundamentals/dependency-injection) , `IHostingEnvironment` Aby uzyskać w celu użycia jej właściwości i metod rozszerzających:
+[Interfejs IHostingEnvironment](/dotnet/api/microsoft.aspnetcore.hosting.ihostingenvironment) zawiera informacje o środowisku hostingu aplikacji sieci Web. Użyj [iniekcji konstruktorów](xref:fundamentals/dependency-injection) , aby uzyskać `IHostingEnvironment` w celu użycia jej właściwości i metod rozszerzających:
 
 ```csharp
 public class CustomFileReader
@@ -748,7 +750,7 @@ public class CustomFileReader
 }
 ```
 
-[Podejście oparte na Konwencji](xref:fundamentals/environments#environment-based-startup-class-and-methods) może służyć do konfigurowania aplikacji podczas uruchamiania na podstawie środowiska. Alternatywnie można wstrzyknąć `IHostingEnvironment` do `Startup` konstruktora do użycia w: `ConfigureServices`
+[Podejście oparte na Konwencji](xref:fundamentals/environments#environment-based-startup-class-and-methods) może służyć do konfigurowania aplikacji podczas uruchamiania na podstawie środowiska. Alternatywnie można wstrzyknąć `IHostingEnvironment` do `Startup` konstruktora do użycia w `ConfigureServices` :
 
 ```csharp
 public class Startup
@@ -777,9 +779,9 @@ public class Startup
 ```
 
 > [!NOTE]
-> `IsDevelopment` Oprócz metody rozszerzenia, `IHostingEnvironment` oferty `IsStaging`, `IsProduction`i `IsEnvironment(string environmentName)` metody. Aby uzyskać więcej informacji, zobacz <xref:fundamentals/environments>.
+> Oprócz `IsDevelopment` metody rozszerzenia, `IHostingEnvironment` oferty `IsStaging` , `IsProduction` i `IsEnvironment(string environmentName)` metody. Aby uzyskać więcej informacji, zobacz <xref:fundamentals/environments>.
 
-`IHostingEnvironment` Usługę można również wstrzyknąć bezpośrednio do `Configure` metody w celu skonfigurowania potoku przetwarzania:
+`IHostingEnvironment`Usługę można również wstrzyknąć bezpośrednio do `Configure` metody w celu skonfigurowania potoku przetwarzania:
 
 ```csharp
 public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -865,7 +867,7 @@ public class Startup
 }
 ```
 
-`StopApplication`żąda zakończenia aplikacji. Następująca Klasa służy `StopApplication` do bezpiecznego zamykania aplikacji w przypadku wywołania `Shutdown` metody klasy:
+`StopApplication`żąda zakończenia aplikacji. Następująca Klasa służy `StopApplication` do bezpiecznego zamykania aplikacji w przypadku `Shutdown` wywołania metody klasy:
 
 ```csharp
 public class MyClass
@@ -932,7 +934,7 @@ public class Startup
 }
 ```
 
-[StopApplication](/dotnet/api/microsoft.aspnetcore.hosting.iapplicationlifetime.stopapplication) żądania zakończenia aplikacji. Następująca Klasa służy `StopApplication` do bezpiecznego zamykania aplikacji w przypadku wywołania `Shutdown` metody klasy:
+[StopApplication](/dotnet/api/microsoft.aspnetcore.hosting.iapplicationlifetime.stopapplication) żądania zakończenia aplikacji. Następująca Klasa służy `StopApplication` do bezpiecznego zamykania aplikacji w przypadku `Shutdown` wywołania metody klasy:
 
 ```csharp
 public class MyClass
@@ -957,14 +959,14 @@ public class MyClass
 
 [CreateDefaultBuilder](/dotnet/api/microsoft.aspnetcore.webhost.createdefaultbuilder) ustawia [ServiceProviderOptions. ValidateScopes](/dotnet/api/microsoft.extensions.dependencyinjection.serviceprovideroptions.validatescopes) na `true` Jeśli środowisko aplikacji jest opracowywane.
 
-Gdy `ValidateScopes` jest ustawiona na `true`, domyślny dostawca usług sprawdza, czy:
+Gdy `ValidateScopes` jest ustawiona na `true` , domyślny dostawca usług sprawdza, czy:
 
 * Usługi w zakresie nie są bezpośrednio lub pośrednio rozpoznawane przez dostawcę usług głównych.
 * Usługi w zakresie nie są bezpośrednio lub pośrednio wstrzykiwane do pojedynczych.
 
 Główny dostawca usług jest tworzony, gdy wywoływana jest [BuildServiceProvider](/dotnet/api/microsoft.extensions.dependencyinjection.servicecollectioncontainerbuilderextensions.buildserviceprovider) . Okres istnienia dostawcy usług głównych odnosi się do okresu istnienia aplikacji/serwera, gdy dostawca zaczyna się od aplikacji i jest usuwany po zamknięciu aplikacji.
 
-Usługi o określonym zakresie są usuwane przez kontener, który go utworzył. Jeśli w kontenerze głównym zostanie utworzona usługa o określonym zakresie, okres istnienia usługi zostanie skutecznie podwyższony do pojedynczej, ponieważ jest usuwany tylko przez kontener główny, gdy aplikacja/serwer jest wyłączony. Sprawdzanie poprawności zakresów usług przechwytuje te `BuildServiceProvider` sytuacje, gdy jest wywoływana.
+Usługi o określonym zakresie są usuwane przez kontener, który go utworzył. Jeśli w kontenerze głównym zostanie utworzona usługa o określonym zakresie, okres istnienia usługi zostanie skutecznie podwyższony do pojedynczej, ponieważ jest usuwany tylko przez kontener główny, gdy aplikacja/serwer jest wyłączony. Sprawdzanie poprawności zakresów usług przechwytuje te sytuacje, gdy `BuildServiceProvider` jest wywoływana.
 
 Aby zawsze weryfikować zakresy, w tym w środowisku produkcyjnym, należy skonfigurować [ServiceProviderOptions](/dotnet/api/microsoft.extensions.dependencyinjection.serviceprovideroptions) z [UseDefaultServiceProvider](/dotnet/api/microsoft.aspnetcore.hosting.webhostbuilderextensions.usedefaultserviceprovider) na konstruktorze hosta:
 

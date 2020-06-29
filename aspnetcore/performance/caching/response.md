@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/response
-ms.openlocfilehash: 25d6bdae0fce7821ec7b9195817dc07ef9aed40f
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 5c3314991d05ea868fe9190bb3a0206b27fd920f
+ms.sourcegitcommit: b06511252f165dd4590ba9b5beca4153fa220779
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408191"
+ms.lasthandoff: 06/27/2020
+ms.locfileid: "85459769"
 ---
 # <a name="response-caching-in-aspnet-core"></a>Buforowanie odpowiedzi w ASP.NET Core
 
@@ -176,7 +176,17 @@ Zamiast duplikowania ustawień pamięci podręcznej odpowiedzi w wielu atrybutac
 
 Skonfiguruj profil pamięci podręcznej. Poniższy przykład przedstawia 30-sekundowy profil pamięci podręcznej w przykładowej aplikacji `Startup.ConfigureServices` :
 
+::: moniker range=">= aspnetcore-3.0"
+
+[!code-csharp[](response/samples/3.x/Startup.cs?name=snippet1)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
 [!code-csharp[](response/samples/2.x/ResponseCacheSample/Startup.cs?name=snippet1)]
+
+::: moniker-end
 
 Model strony Cache4 aplikacji przykładowej odwołuje się do `Default30` profilu pamięci podręcznej:
 
@@ -184,9 +194,9 @@ Model strony Cache4 aplikacji przykładowej odwołuje się do `Default30` profil
 
 <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute>Można zastosować do:
 
-* RazorProcedury obsługi stron (klasy): nie można zastosować atrybutów do metod obsługi.
-* Kontrolery MVC (klasy).
-* Akcje MVC (metody): atrybuty poziomu metody zastępują ustawienia określone w atrybutach na poziomie klasy.
+* RazorStrony: nie można zastosować atrybutów do metod obsługi.
+* Kontrolery MVC.
+* Metody akcji MVC: atrybuty poziomu metody zastępują ustawienia określone w atrybutach na poziomie klasy.
 
 Otrzymany nagłówek zastosowany do odpowiedzi strony Cache4 przez `Default30` profil pamięci podręcznej:
 

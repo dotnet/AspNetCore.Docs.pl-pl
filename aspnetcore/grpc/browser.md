@@ -4,7 +4,7 @@ author: jamesnk
 description: Dowiedz się, jak skonfigurować usługi gRPC na ASP.NET Core, aby możliwe było wywoływanie z aplikacji przeglądarki za pomocą gRPC-Web.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
-ms.date: 05/26/2020
+ms.date: 06/29/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -14,18 +14,23 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/browser
-ms.openlocfilehash: 37932e755a0ef2149fb2336d2dcef87d3347d1a4
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 20f72deb9895111a6e691eb1ee5cd7419c8c4cb4
+ms.sourcegitcommit: 895e952aec11c91d703fbdd3640a979307b8cc67
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404759"
+ms.lasthandoff: 07/01/2020
+ms.locfileid: "85793505"
 ---
 # <a name="use-grpc-in-browser-apps"></a>Używanie gRPC w aplikacjach przeglądarki
 
 Przez [Kuba Kowalski-króla](https://twitter.com/jamesnk)
 
-Nie można wywołać usługi gRPC protokołu HTTP/2 z poziomu aplikacji opartej na przeglądarce. [gRPC-Web](https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-WEB.md) to protokół, który umożliwia przeglądarce JavaScript i Blazor aplikacji Wywoływanie usługi gRPC Services. W tym artykule wyjaśniono, jak używać gRPC-Web w programie .NET Core.
+ Dowiedz się, jak skonfigurować istniejącą ASP.NET Core usługę gRPC, która ma być wywoływana z aplikacji przeglądarki, przy użyciu protokołu [gRPC-Web](https://github.com/grpc/grpc/blob/2a388793792cc80944334535b7c729494d209a7e/doc/PROTOCOL-WEB.md) . gRPC-Web umożliwia przeglądarce JavaScript i Blazor aplikacjom wywoływanie usług gRPC Services. Nie można wywołać usługi gRPC protokołu HTTP/2 z poziomu aplikacji opartej na przeglądarce. usługi gRPC hostowane w ASP.NET Core można skonfigurować do obsługi gRPC-Web, a nie gRPC protokołu HTTP/2.
+
+
+Aby uzyskać instrukcje dotyczące dodawania usługi gRPC do istniejącej aplikacji ASP.NET Core, zobacz [Dodawanie usług gRPC do aplikacji ASP.NET Core](xref:grpc/aspnetcore#add-grpc-services-to-an-aspnet-core-app).
+
+Instrukcje dotyczące tworzenia projektu gRPC można znaleźć w temacie <xref:tutorials/grpc/grpc-start> .
 
 ## <a name="grpc-web-in-aspnet-core-vs-envoy"></a>gRPC — sieć Web w ASP.NET Core a wysłannika
 
@@ -34,7 +39,7 @@ Dostępne są dwa sposoby dodawania usługi gRPC-Web do aplikacji ASP.NET Core:
 * Obsługa gRPC-Web i gRPC protokołu HTTP/2 w ASP.NET Core. Ta opcja powoduje użycie oprogramowania pośredniczącego dostarczonego przez `Grpc.AspNetCore.Web` pakiet.
 * Użyj funkcji gRPC-Web [wysłannika serwera proxy](https://www.envoyproxy.io/) , aby przetłumaczyć GRPC-Web na gRPC http/2. Przetłumaczone wywołanie jest następnie przekazywane do aplikacji ASP.NET Core.
 
-Każde podejście ma pewne wady i zalety. Jeśli używasz już wysłannika jako serwera proxy w środowisku aplikacji, warto również użyć go do zapewnienia obsługi gRPC-sieci Web. Jeśli potrzebujesz prostego rozwiązania dla gRPC-Web, które wymaga ASP.NET Core, `Grpc.AspNetCore.Web` to dobry wybór.
+Każde podejście ma pewne wady i zalety. Jeśli środowisko aplikacji korzysta już z wysłannika jako serwera proxy, warto również użyć wysłannika do zapewnienia obsługi gRPC-sieci Web. W przypadku rozwiązania Basic for gRPC-Web, które wymaga tylko ASP.NET Core, `Grpc.AspNetCore.Web` to dobry wybór.
 
 ## <a name="configure-grpc-web-in-aspnet-core"></a>Konfigurowanie gRPC-sieci Web w ASP.NET Core
 
@@ -65,7 +70,7 @@ Alternatywnie można skonfigurować oprogramowanie pośredniczące gRPC-Web, tak
 
 Zabezpieczenia przeglądarki uniemożliwiają stronom sieci Web wykonywanie żądań do innej domeny niż ta, która była obsługiwana przez stronę sieci Web. To ograniczenie dotyczy tworzenia połączeń sieci Web gRPC z aplikacjami przeglądarki. Na przykład aplikacja przeglądarki obsługiwana przez program `https://www.contoso.com` ma zablokowany dostęp do usług gRPC — sieci Web hostowanych w systemie `https://services.contoso.com` . Aby osłabić to ograniczenie, można użyć funkcji udostępniania zasobów między źródłami (CORS).
 
-Aby zezwolić aplikacji przeglądarki na wykonywanie wywołań sieci Web między źródłami gRPC, skonfiguruj mechanizm [CORS w ASP.NET Core](xref:security/cors). Użyj wbudowanej obsługi mechanizmu CORS i Uwidocznij nagłówki specyficzne dla gRPC za pomocą <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithExposedHeaders*> .
+Aby zezwolić aplikacji przeglądarki na wykonywanie wywołań sieci Web między źródłami gRPC, skonfiguruj mechanizm [CORS w ASP.NET Core](xref:security/cors). Użyj wbudowanej obsługi mechanizmu CORS i Uwidocznij nagłówki specyficzne dla gRPC za pomocą <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithExposedHeaders%2A> .
 
 [!code-csharp[](~/grpc/browser/sample/CORS_Startup.cs?name=snippet_1&highlight=5-11,19,24)]
 
@@ -115,7 +120,7 @@ Powyższy kod ma następujące działanie:
 > [!IMPORTANT]
 > Wygenerowane gRPC klienci mają metody synchronizacji i asynchroniczne do wywoływania metod jednoargumentowych. Na przykład `SayHello` jest synchronizowana i `SayHelloAsync` jest asynchroniczna. Wywołanie metody synchronizacji w Blazor WebAssembly aplikacji spowoduje, że aplikacja przestanie odpowiadać. Metody asynchroniczne muszą być zawsze używane w programie Blazor WebAssembly .
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [gRPC dla klientów sieci Web — projekt GitHub](https://github.com/grpc/grpc-web)
 * <xref:security/cors>

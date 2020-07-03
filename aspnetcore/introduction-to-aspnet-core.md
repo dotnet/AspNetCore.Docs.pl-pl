@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: index
-ms.openlocfilehash: f58c25ec8b47b2bd8d425d0bfd0d52df9bbc2655
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 2ad97dd7eb38b4cb69fa7af5ae1e1d1837a97443
+ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408204"
+ms.lasthandoff: 07/03/2020
+ms.locfileid: "85944559"
 ---
 # <a name="introduction-to-aspnet-core"></a>Wprowadzenie do platformy ASP.NET Core
 
@@ -80,7 +80,7 @@ Zalecamy poniższą sekwencję samouczków, aby zapoznać się z wprowadzeniem d
    |----------|----------|----------|
    |Aplikacja internetowa                   | Tworzenie nowego interfejsu użytkownika sieci Web po stronie serwera |[Wprowadzenie do Razor stron](xref:tutorials/razor-pages/razor-pages-start) |
    |Aplikacja internetowa                   | Obsługa aplikacji MVC |[Wprowadzenie do wzorca MVC](xref:tutorials/first-mvc-app/start-mvc)|
-   |Aplikacja internetowa                   | Programowanie interfejsu użytkownika sieci Web po stronie klienta |[Wprowadzenie doBlazor](xref:tutorials/first-blazor-app) |
+   |Aplikacja internetowa                   | Programowanie interfejsu użytkownika sieci Web po stronie klienta |[Wprowadzenie doBlazor](https://dotnet.microsoft.com/learn/aspnet/blazor-tutorial/intro) |
    |Interfejs API sieci Web                   | RESTful usługi HTTP |[Tworzenie internetowego interfejsu API](xref:tutorials/first-web-api)&dagger; |
    |Aplikacja zdalnego wywołania procedury | Usługi pierwszego kontraktu przy użyciu buforów protokołu |[Wprowadzenie do usługi gRPC](xref:tutorials/grpc/grpc-start) |
    |Aplikacja czasu rzeczywistego             | Dwukierunkowa komunikacja między serwerami i połączonymi klientami |[Wprowadzenie doSignalR](xref:tutorials/signalr) |

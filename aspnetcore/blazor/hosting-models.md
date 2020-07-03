@@ -15,22 +15,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: ba43ff052fbd290412fa27cf57ace3ee3491f8d0
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 56681e713e008188d57166da9c8fd4eb6923928c
+ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402562"
+ms.lasthandoff: 07/03/2020
+ms.locfileid: "85944220"
 ---
 # <a name="aspnet-core-blazor-hosting-models"></a>ASP.NET Core Blazor modele hostingu
 
 Autor [Daniel Roth](https://github.com/danroth27)
 
 Blazorto platforma internetowa służąca do uruchamiania programu w przeglądarce w programie .NET Runtime [WebAssembly](https://webassembly.org/)( *Blazor WebAssembly* ) lub po stronie serwera w ASP.NET Core ( *Blazor Server* ). Niezależnie od modelu hostingu modele aplikacji i składników *są takie same*.
-
-Aby utworzyć projekt dla modeli hostingu opisanych w tym artykule, zobacz <xref:blazor/get-started> .
-
-Aby uzyskać konfigurację zaawansowaną, zobacz <xref:blazor/fundamentals/configuration> .
 
 ## Blazor WebAssembly
 
@@ -153,9 +149,8 @@ Zalecamy korzystanie z [ SignalR usługi platformy Azure](/azure/azure-signalr) 
 
 W przypadku korzystania z usług IIS sesje programu Sticky są włączane przy użyciu routingu żądań aplikacji. Aby uzyskać więcej informacji, zobacz [równoważenie obciążenia HTTP przy użyciu routingu żądań aplikacji](/iis/extensions/configuring-application-request-routing-arr/http-load-balancing-using-application-request-routing).
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
-* <xref:blazor/get-started>
 * <xref:signalr/introduction>
 * <xref:blazor/fundamentals/additional-scenarios>
 * <xref:tutorials/signalr-blazor-webassembly>

@@ -15,16 +15,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/samesite/mvc21
-ms.openlocfilehash: 4239321531f3a7696a15b1dea164450ea0860c2b
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: ce301cd7e2cbfbfc724d78bd5734dff231d0ab93
+ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85409062"
+ms.lasthandoff: 07/03/2020
+ms.locfileid: "85944740"
 ---
 # <a name="aspnet-core-21-mvc-samesite-cookie-sample"></a>Przykładowy plik cookie SameSite 2,1 ASP.NET Core MVC
 
 ASP.NET Core 2,1 ma wbudowaną obsługę atrybutu [SameSite](https://www.owasp.org/index.php/SameSite) , ale został on zapisany w oryginalnym standardzie. [Zachowanie poprawek](https://github.com/dotnet/aspnetcore/issues/8212) zostało zmienione tak, `SameSite.None` Aby wyemitować atrybut sameSite o wartości `None` , a nie nie emitować wartości wcale. Jeśli nie chcesz emitować wartości, możesz ustawić `SameSite` Właściwość pliku cookie na-1.
+
+[!INCLUDE[](~/includes/SameSiteIdentity.md)]
 
 ## <a name="writing-the-samesite-attribute"></a><a name="sampleCode"></a>Pisanie atrybutu SameSite
 
@@ -85,7 +87,7 @@ Na obrazie można zobaczyć, że plik cookie utworzony przez przykład po klikni
 
 W celu przechwycenia plików cookie w celu dostosowania wartości brak zgodnie z jej obsługą w agencie przeglądarki użytkownika należy użyć `CookiePolicy` oprogramowania pośredniczącego. Ta wartość musi być umieszczona w potoku żądania HTTP **przed** wszelkimi składnikami, które zapisują pliki cookie i są skonfigurowane w programie `ConfigureServices()` .
 
-Aby wstawić go do użycia potoku `app.UseCookiePolicy()` w `Configure(IApplicationBuilder, IHostingEnvironment)` metodzie w [Startup.cs](https://github.com/blowdart/AspNetSameSiteSamples/blob/master/AspNetCore21MVC/Startup.cs). Na przykład:
+Aby wstawić go do użycia potoku `app.UseCookiePolicy()` w `Configure(IApplicationBuilder, IHostingEnvironment)` metodzie w [Startup.cs](https://github.com/blowdart/AspNetSameSiteSamples/blob/master/AspNetCore21MVC/Startup.cs). Przykład:
 
 ```c#
 public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -115,7 +117,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 }
 ```
 
-Następnie w obszarze `ConfigureServices(IServiceCollection services)` Konfigurowanie zasad dotyczących plików cookie do wywołania klasy pomocnika, gdy pliki cookie są dołączane lub usuwane. Na przykład:
+Następnie w obszarze `ConfigureServices(IServiceCollection services)` Konfigurowanie zasad dotyczących plików cookie do wywołania klasy pomocnika, gdy pliki cookie są dołączane lub usuwane. Przykład:
 
 ```c#
 public void ConfigureServices(IServiceCollection services)

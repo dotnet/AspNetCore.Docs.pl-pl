@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-identity-server
-ms.openlocfilehash: cce6b6b1ec144e362415fe34645aef567269c873
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: b0c6cbd814a23afabbbf9a0d943d28125ac1f61c
+ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402211"
+ms.lasthandoff: 07/03/2020
+ms.locfileid: "85944575"
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-identity-server"></a>Zabezpieczanie Blazor WebAssembly hostowanej aplikacji ASP.NET Core Identity z serwerem
 
@@ -32,7 +32,7 @@ W tym artykule wyjaśniono, jak utworzyć nową Blazor hostowaną aplikację, kt
 
 W programie Visual Studio:
 
-1. Utwórz nową **Blazor WebAssembly** aplikację. Aby uzyskać więcej informacji, zobacz <xref:blazor/get-started>.
+1. Utwórz nową **Blazor WebAssembly** aplikację.
 1. W oknie dialogowym **Tworzenie nowej Blazor aplikacji** wybierz pozycję **Zmień** w sekcji **uwierzytelnianie** .
 1. Wybierz **pojedyncze konta użytkowników** , a następnie **przycisk OK**.
 1. Zaznacz pole wyboru **hostowane ASP.NET Core** w sekcji **Zaawansowane** .
@@ -429,7 +429,7 @@ W aplikacji klienckiej podejścia do autoryzacji składników są w tym momencie
 
 [!INCLUDE[](~/includes/blazor-security/troubleshoot.md)]
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Wdrożenie do Azure App Service](xref:security/authentication/identity/spa#deploy-to-production)
 * [Importowanie certyfikatu z Key Vault (dokumentacja platformy Azure)](/azure/app-service/configure-ssl-certificate#import-a-certificate-from-key-vault)

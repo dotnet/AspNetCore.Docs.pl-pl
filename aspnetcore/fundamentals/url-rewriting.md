@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/url-rewriting
-ms.openlocfilehash: c41ba2e067c8dc978b1359db548733c5f8890a2b
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: dbdb7cd86218fd9ba63ae4ac2aa516836d4fd1a1
+ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408386"
+ms.lasthandoff: 07/03/2020
+ms.locfileid: "85944298"
 ---
 # <a name="url-rewriting-middleware-in-aspnet-core"></a>Ponowne zapisywanie przez adres URL oprogramowania pośredniczącego w ASP.NET Core
 
@@ -325,7 +325,7 @@ Oprogramowanie pośredniczące obsługuje następujące zmienne serwera modułu 
 
 Użyj <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.Add*> , aby zaimplementować własną logikę reguł w metodzie. `Add`udostępnia <xref:Microsoft.AspNetCore.Rewrite.RewriteContext> , który udostępnia do <xref:Microsoft.AspNetCore.Http.HttpContext> użycia w Twojej metodzie. [RewriteContext. Result](xref:Microsoft.AspNetCore.Rewrite.RewriteContext.Result*) określa sposób obsługi dodatkowego przetwarzania potoku. Ustaw wartość na jedno z <xref:Microsoft.AspNetCore.Rewrite.RuleResult> pól opisanych w poniższej tabeli.
 
-| `RewriteContext.Result`              | Akcja                                                           |
+| Zapisz wynik kontekstu               | Akcja                                                           |
 | ------------------------------------ | ---------------------------------------------------------------- |
 | `RuleResult.ContinueRules`wartooć | Kontynuuj stosowanie reguł.                                         |
 | `RuleResult.EndResponse`             | Zatrzymaj stosowanie reguł i Wyślij odpowiedź.                       |
@@ -679,7 +679,7 @@ Oprogramowanie pośredniczące obsługuje następujące zmienne serwera modułu 
 
 Użyj <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.Add*> , aby zaimplementować własną logikę reguł w metodzie. `Add`udostępnia <xref:Microsoft.AspNetCore.Rewrite.RewriteContext> , który udostępnia do <xref:Microsoft.AspNetCore.Http.HttpContext> użycia w Twojej metodzie. [RewriteContext. Result](xref:Microsoft.AspNetCore.Rewrite.RewriteContext.Result*) określa sposób obsługi dodatkowego przetwarzania potoku. Ustaw wartość na jedno z <xref:Microsoft.AspNetCore.Rewrite.RuleResult> pól opisanych w poniższej tabeli.
 
-| `RewriteContext.Result`              | Akcja                                                           |
+| Zapisz wynik kontekstu               | Akcja                                                           |
 | ------------------------------------ | ---------------------------------------------------------------- |
 | `RuleResult.ContinueRules`wartooć | Kontynuuj stosowanie reguł.                                         |
 | `RuleResult.EndResponse`             | Zatrzymaj stosowanie reguł i Wyślij odpowiedź.                       |
@@ -732,7 +732,7 @@ Oryginalne żądanie:`/image.jpg`
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:fundamentals/startup>
 * <xref:fundamentals/middleware/index>

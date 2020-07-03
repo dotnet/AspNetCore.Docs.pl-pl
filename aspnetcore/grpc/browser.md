@@ -4,7 +4,7 @@ author: jamesnk
 description: Dowiedz się, jak skonfigurować usługi gRPC na ASP.NET Core, aby możliwe było wywoływanie z aplikacji przeglądarki za pomocą gRPC-Web.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
-ms.date: 06/29/2020
+ms.date: 06/30/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/browser
-ms.openlocfilehash: 20f72deb9895111a6e691eb1ee5cd7419c8c4cb4
-ms.sourcegitcommit: 895e952aec11c91d703fbdd3640a979307b8cc67
+ms.openlocfilehash: 05ff343f7116509128b7370a50bcfa3c67ffb9fe
+ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85793505"
+ms.lasthandoff: 07/03/2020
+ms.locfileid: "85944245"
 ---
 # <a name="use-grpc-in-browser-apps"></a>Używanie gRPC w aplikacjach przeglądarki
 
@@ -79,6 +79,15 @@ Powyższy kod ma następujące działanie:
 * Wywołania `AddCors` dodawania usług CORS i konfigurowania zasad CORS, które ujawniają nagłówki specyficzne dla gRPC.
 * Wywołuje `UseCors` Dodawanie oprogramowania CORS po stronie routingu i przed punktami końcowymi.
 * Określa, że `endpoints.MapGrpcService<GreeterService>()` Metoda obsługuje mechanizm CORS z `RequiresCors` .
+
+### <a name="grpc-web-and-streaming"></a>gRPC — sieć Web i przesyłanie strumieniowe
+
+Tradycyjna gRPC za pośrednictwem protokołu HTTP/2 obsługuje przesyłanie strumieniowe we wszystkich kierunkach. gRPC-Web oferuje ograniczoną obsługę przesyłania strumieniowego:
+
+* gRPC — klienci korzystający z przeglądarki sieci Web nie obsługują wywoływania przesyłania strumieniowego i dwukierunkowego przesyłania strumieniowego klienta.
+* ASP.NET Core usługi gRPC Services hostowane na Azure App Service i usługach IIS nie obsługują przesyłania strumieniowego dwukierunkowego.
+
+W przypadku korzystania z usługi gRPC-Web zalecamy użycie metod jednoargumentowych i metod przesyłania strumieniowego serwera.
 
 ## <a name="call-grpc-web-from-the-browser"></a>Wywołaj gRPC-Web z przeglądarki
 

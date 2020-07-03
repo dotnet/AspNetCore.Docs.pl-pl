@@ -1,0 +1,3 @@
+ASP.NET Core [tożsamość](xref:security/authentication/identity) jest w dużym stopniu niezależna od [plików cookie SameSite](xref:security/samesite) , z wyjątkiem zaawansowanych scenariuszy, takich jak `IFrames` lub `OpenIdConnect` integracji.
+
+W przypadku korzystania z programu nie należy `Identity` dodawać żadnych dostawców ani wywołań plików cookie ***not*** ` services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)` `Identity` .

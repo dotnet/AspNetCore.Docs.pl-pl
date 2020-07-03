@@ -15,12 +15,12 @@ no-loc:
 - SignalR
 - Electron
 uid: security/samesite
-ms.openlocfilehash: 68766591ec86e12e5602d741de74e20aec67cf49
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 3e3c12e17de3e12ead15c405e9339761a3f2f711
+ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399507"
+ms.lasthandoff: 07/03/2020
+ms.locfileid: "85944282"
 ---
 # <a name="work-with-samesite-cookies-in-aspnet-core"></a>Pracuj z plikami cookie SameSite w ASP.NET Core
 
@@ -37,6 +37,10 @@ SameSite jest projektem standardowym [IETF](https://ietf.org/about/) opracowanym
 To `SameSite=Lax` ustawienie działa w przypadku większości plików cookie aplikacji. Niektóre formy uwierzytelniania, takie jak [OpenID Connect Connect](https://openid.net/connect/) (OIDC) i [WS-Federation](https://auth0.com/docs/protocols/ws-fed) , domyślnie mogą publikować przekierowania na podstawie. Przekierowania na podstawie wpisu wyzwalają ochronę za pomocą przeglądarki SameSite, więc SameSite jest wyłączona dla tych składników. Nie ma to wpływ na większość nazw logowania [OAuth](https://oauth.net/) z powodu różnic w sposobie przepływu żądania.
 
 Każdy składnik ASP.NET Core, który emituje pliki cookie, musi zdecydować, czy SameSite jest odpowiednie.
+
+## <a name="samesite-and-identity"></a>SameSite iIdentity
+
+[!INCLUDE[](~/includes/SameSiteIdentity.md)]
 
 ## <a name="samesite-test-sample-code"></a>Przykładowy kod testu SameSite
 
@@ -93,7 +97,7 @@ Domyślna wartość SameSite dla plików cookie związanych z uwierzytelnianiem 
 
 Wszystkie składniki ASP.NET Core, które emitują pliki cookie, zastępują poprzednie wartości domyślne przy użyciu ustawień odpowiednich dla ich scenariuszy. Zastąpione poprzednie wartości domyślne nie zostały zmienione.
 
-| Składnik | plików | Domyślne |
+| Składnik | plików | Domyślny |
 | ------------- | ------------- |
 | <xref:Microsoft.AspNetCore.Http.CookieBuilder> | <xref:Microsoft.AspNetCore.Http.CookieBuilder.SameSite> | `Unspecified` |
 | <xref:Microsoft.AspNetCore.Http.HttpContext.Session>  | [SessionOptions. cookie](xref:Microsoft.AspNetCore.Builder.SessionOptions.Cookie) |`Lax` |
@@ -223,7 +227,7 @@ Flagi SameSite są ustawiane na `edge://flags/#same-site-by-default-cookies` str
 
 Wersje programu Electron obejmują starsze wersje chromu. Na przykład wersja Electron użyta przez zespoły to chrom 66, który wykazuje starsze zachowanie. Należy przeprowadzić własne testy zgodności z Electron używaną wersją produktu. Zapoznaj się z tematem [Obsługa starszych przeglądarek](#sob) w następnej sekcji.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Blog chromu: deweloperzy: przygotowanie do nowego SameSite = none; Ustawienia bezpiecznego pliku cookie](https://blog.chromium.org/2019/10/developers-get-ready-for-new.html)
 * [Wyjaśniono pliki cookie SameSite](https://web.dev/samesite-cookies-explained/)

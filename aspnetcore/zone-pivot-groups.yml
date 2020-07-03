@@ -1,0 +1,19 @@
+### YamlMime:ZonePivotGroups
+groups:
+- id: operating-systems
+  title: Systemy operacyjne
+  prompt: Wybierz system operacyjny
+  pivots:
+  - id: os-windows
+    title: Windows
+  - id: os-linux
+    title: Linux
+  - id: os-macos
+    title: macOS
+metadata:
+  ms.openlocfilehash: 2568254e2dcbea7e7f373c901c440288f3371ad2
+  ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
+  ms.translationtype: MT
+  ms.contentlocale: pl-PL
+  ms.lasthandoff: 07/03/2020
+  ms.locfileid: "85944961"

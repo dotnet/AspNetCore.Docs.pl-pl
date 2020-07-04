@@ -15,18 +15,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: d25dc3441c2373655558dfc101b899252a280814
-ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
+ms.openlocfilehash: 0a8335461b4c9cd628d9c65b97f7ab6a74487fca
+ms.sourcegitcommit: 7f423602a1475736f61fc361327d4de0976c9649
 ms.translationtype: MT
 ms.contentlocale: pl-PL
 ms.lasthandoff: 07/03/2020
-ms.locfileid: "85944448"
+ms.locfileid: "85950895"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>Tworzenie i używanie Razor składników ASP.NET Core
 
 [Luke Latham](https://github.com/guardrex), [Daniel Roth](https://github.com/danroth27)i [Tobias Bartsch](https://www.aveo-solutions.com/)
 
-[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/../common/samples/) ([jak pobrać](xref:index#how-to-download-a-sample))
+[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([jak pobrać](xref:index#how-to-download-a-sample))
 
 Blazoraplikacje są kompilowane przy użyciu *składników*programu. Składnik jest niezależnym fragmentem interfejsu użytkownika (UI), takim jak strona, okno dialogowe lub formularz. Składnik zawiera znaczniki HTML i logikę przetwarzania wymagane do iniekcji danych lub reagowania na zdarzenia interfejsu użytkownika. Składniki są elastyczne i lekkie. Mogą być zagnieżdżane, ponownie używane i udostępniane między projektami.
 

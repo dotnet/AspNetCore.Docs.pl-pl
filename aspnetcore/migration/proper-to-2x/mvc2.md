@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/mvc2
-ms.openlocfilehash: c51098ec02e5a337fd6607e970d3bf78ffcd568a
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 545027c128214f7b0936126c47068fc234065520
+ms.sourcegitcommit: d306407dc5bfe6fdfbac482214b3f59371b582bc
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405526"
+ms.lasthandoff: 07/04/2020
+ms.locfileid: "85951912"
 ---
 # <a name="migrate-from-aspnet-to-aspnet-core-20"></a>Migrowanie z ASP.NET do ASP.NET Core 2,0
 
@@ -157,7 +157,7 @@ W ASP.NET pliki statyczne są przechowywane w różnych katalogach i przywoływa
 
 W ASP.NET Core pliki statyczne są przechowywane w "katalogu głównym sieci Web" (* &lt; &gt; /wwwroot zawartości*), chyba że zostały skonfigurowane inaczej. Pliki są ładowane do potoku żądania przez wywołanie `UseStaticFiles` metody rozszerzenia z `Startup.Configure` :
 
-[!code-csharp[](../../fundamentals/static-files/samples/1x/StartupStaticFiles.cs?highlight=3&name=snippet_ConfigureMethod)]
+[!code-csharp[](../../fundamentals/static-files/samples/1.x/StaticFilesSample/StartupStaticFiles.cs?highlight=3&name=snippet_ConfigureMethod)]
 
 **Uwaga:** Jeśli .NET Framework określania wartości docelowej, zainstaluj pakiet NuGet `Microsoft.AspNetCore.StaticFiles` .
 
@@ -165,6 +165,6 @@ Na przykład zasób obrazu w folderze *wwwroot/images* jest dostępny dla przegl
 
 **Uwaga:** Aby uzyskać bardziej szczegółowe informacje na temat obsługi plików statycznych w ASP.NET Core, zobacz <xref:fundamentals/static-files> .
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Przenoszenie bibliotek do programu .NET Core](/dotnet/core/porting/libraries)

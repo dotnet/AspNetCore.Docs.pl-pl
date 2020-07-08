@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/update-related-data
-ms.openlocfilehash: 59bf94f6818108f09e9af147559fc304f48936bc
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 066bebf95a941fca5e7cc175c4c0d6d56abc9cb5
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401314"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86060062"
 ---
 # <a name="tutorial-update-related-data---aspnet-mvc-with-ef-core"></a>Samouczek: aktualizowanie powiązanych danych — ASP.NET MVC z EF Core
 
@@ -143,7 +143,7 @@ Kod wykonuje następujące czynności:
 
 * Pobiera bieżącą jednostkę instruktora z bazy danych przy użyciu eager ładowania dla `OfficeAssignment` właściwości nawigacji. Jest to takie samo, jak w przypadku `Edit` metody narzędzia HttpGet.
 
-* Aktualizuje pobraną jednostkę instruktora o wartości ze spinacza modelu. `TryUpdateModel`Przeciążenie pozwala dozwolonych właściwości, które mają zostać uwzględnione. Pozwala to uniknąć nadmiernego księgowania, jak wyjaśniono w [drugim samouczku](crud.md).
+* Aktualizuje pobraną jednostkę instruktora o wartości ze spinacza modelu. `TryUpdateModel`Przeciążenie umożliwia zadeklarować właściwości, które mają zostać uwzględnione. Pozwala to uniknąć nadmiernego księgowania, jak wyjaśniono w [drugim samouczku](crud.md).
 
     <!-- Snippets don't play well with <ul> [!code-csharp[](intro/samples/cu/Controllers/InstructorsController.cs?range=241-244)] -->
 
@@ -211,7 +211,7 @@ Następnie Dodaj kod, który jest wykonywany, gdy użytkownik kliknie przycisk *
 
 Sygnatura metody jest teraz inna niż Metoda narzędzia HttpGet `Edit` , więc nazwa metody zmienia `EditPost` się z powrotem na `Edit` .
 
-Ponieważ widok nie zawiera kolekcji jednostek kursu, spinacz modelu nie może automatycznie zaktualizować `CourseAssignments` właściwości nawigacji. Zamiast używać spinacza modelu do aktualizowania `CourseAssignments` właściwości nawigacji, należy to zrobić w nowej `UpdateInstructorCourses` metodzie. W związku z tym należy wykluczyć `CourseAssignments` Właściwość z powiązania modelu. Nie wymaga żadnych zmian w kodzie, który wywołuje się, `TryUpdateModel` ponieważ jest używane Przeciążenie listy dozwolonych i `CourseAssignments` nie znajduje się na liście dołączania.
+Ponieważ widok nie zawiera kolekcji jednostek kursu, spinacz modelu nie może automatycznie zaktualizować `CourseAssignments` właściwości nawigacji. Zamiast używać spinacza modelu do aktualizowania `CourseAssignments` właściwości nawigacji, należy to zrobić w nowej `UpdateInstructorCourses` metodzie. W związku z tym należy wykluczyć `CourseAssignments` Właściwość z powiązania modelu. Nie wymaga to żadnych zmian w kodzie, który wywołuje się, `TryUpdateModel` ponieważ używasz przeciążenia, które wymaga jawnego zatwierdzenia i `CourseAssignments` nie znajduje się na liście dołączania.
 
 Jeśli nie wybrano żadnych pól wyboru, kod w `UpdateInstructorCourses` inicjuje `CourseAssignments` Właściwość nawigacji z pustą kolekcją i zwraca:
 

@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/update-related-data
-ms.openlocfilehash: b084404a7fdd8b2fc18c407bd11705ccd1c496c1
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: b442a4ce1f63c047c123315626f559155fd06424
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406306"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86060140"
 ---
 # <a name="part-7-razor-pages-with-ef-core-in-aspnet-core---update-related-data"></a>Część 7 Razor strony z EF Core w programie ASP.NET Core — aktualizacja powiązanych danych
 
@@ -158,7 +158,7 @@ Utwórz klasę bazową *stron/instruktorów/InstructorCoursesPageModel. cs* :
 
 `InstructorCoursesPageModel`Jest klasą bazową, która będzie używana dla modeli stron Edycja i tworzenie. `PopulateAssignedCourseData`odczytuje wszystkie `Course` jednostki do wypełnienia `AssignedCourseDataList` . Dla każdego kursu kod ustawia `CourseID` , tytuł i określa, czy instruktor jest przypisany do kursu. [HashSet —](/dotnet/api/system.collections.generic.hashset-1) jest używany do wydajnego wyszukiwania.
 
-Ponieważ Razor Strona nie zawiera kolekcji jednostek kursu, spinacz modelu nie może automatycznie zaktualizować `CourseAssignments` właściwości nawigacji. Zamiast używać spinacza modelu do aktualizowania `CourseAssignments` właściwości nawigacji, należy to zrobić w nowej `UpdateInstructorCourses` metodzie. W związku z tym należy wykluczyć `CourseAssignments` Właściwość z powiązania modelu. Nie wymaga żadnych zmian w kodzie, który wywołuje się, `TryUpdateModel` ponieważ jest używane Przeciążenie listy dozwolonych i `CourseAssignments` nie znajduje się na liście dołączania.
+Ponieważ Razor Strona nie zawiera kolekcji jednostek kursu, spinacz modelu nie może automatycznie zaktualizować `CourseAssignments` właściwości nawigacji. Zamiast używać spinacza modelu do aktualizowania `CourseAssignments` właściwości nawigacji, należy to zrobić w nowej `UpdateInstructorCourses` metodzie. W związku z tym należy wykluczyć `CourseAssignments` Właściwość z powiązania modelu. Nie wymaga żadnych zmian w kodzie, który wywołuje, `TryUpdateModel` ponieważ używasz przeciążenia z zadeklarowanymi właściwościami i `CourseAssignments` nie znajduje się na liście dołączania.
 
 Jeśli nie wybrano żadnych pól wyboru, kod w `UpdateInstructorCourses` inicjuje `CourseAssignments` Właściwość nawigacji z pustą kolekcją i zwraca:
 

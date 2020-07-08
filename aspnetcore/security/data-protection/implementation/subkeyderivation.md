@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/implementation/subkeyderivation
-ms.openlocfilehash: f373c37a5ea4dab91463d011d3ecd6799ae6d014
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 619a848eb96faab6997f9ddbf4d62a1e04ee66b1
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408035"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86060374"
 ---
 # <a name="subkey-derivation-and-authenticated-encryption-in-aspnet-core"></a>Wyprowadzanie podkluczy i uwierzytelnione szyfrowanie w ASP.NET Core
 
@@ -43,11 +43,11 @@ Większość kluczy w pierścieniu kluczy będzie zawierać pewną postać entro
 
 Ponieważ usługa AAD jest unikatowa dla krotki wszystkich trzech składników, możemy użyć jej do uzyskania nowych kluczy z KM zamiast używania kilometrów we wszystkich naszych operacjach kryptograficznych. Dla każdego wywołania do programu `IAuthenticatedEncryptor.Encrypt` odbywa się następujący proces wyprowadzania klucza:
 
-(K_E, K_H) = SP800_108_CTR_HMACSHA512 (K_M, AAD, contextHeader | | | | | | | | | | | | | |)
+`( K_E, K_H ) = SP800_108_CTR_HMACSHA512(K_M, AAD, contextHeader || keyModifier)`
 
 W tym miejscu wywołujemy instytut NIST SP800-108 KDF w trybie licznika (zobacz [NIST SP800-108](https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-108.pdf), s. 5,1) z następującymi parametrami:
 
-* Klucz wyprowadzania klucza (KDK) = K_M
+* Klucz wyprowadzania klucza (KDK) =`K_M`
 
 * PRF = HMACSHA512
 
@@ -55,28 +55,28 @@ W tym miejscu wywołujemy instytut NIST SP800-108 KDF w trybie licznika (zobacz 
 
 * Context = contextHeader | | Modyfikator
 
-Nagłówek kontekstu ma zmienną długość i zasadniczo służy jako odcisk palca algorytmów, dla których są wyprowadzane K_E i K_H. Modyfikator klucza jest 128-bitowym ciągiem losowo generowanym dla każdego wywołania do `Encrypt` i służy do zagwarantowania, że założenie, że funkcja KE i KH jest unikatowa dla tej operacji szyfrowania uwierzytelniania, nawet jeśli wszystkie inne dane wejściowe KDF są stałe.
+Nagłówek kontekstu ma zmienną długość i zasadniczo służy jako odcisk palca algorytmów, dla których są wyprowadzane `K_E` i `K_H` . Modyfikator klucza jest 128-bitowym ciągiem losowo generowanym dla każdego wywołania do `Encrypt` i służy do zagwarantowania, że założenie, że funkcja KE i KH jest unikatowa dla tej operacji szyfrowania uwierzytelniania, nawet jeśli wszystkie inne dane wejściowe KDF są stałe.
 
-W przypadku operacji sprawdzania poprawności szyfrowania w trybie CBC + HMAC, | K_E | to długość klucza szyfrowania symetrycznego bloku i | K_H | jest rozmiarem podsumowania procedury HMAC. W przypadku operacji szyfrowania GCM + walidacji, | K_H | = 0.
+W przypadku operacji sprawdzania poprawności szyfrowania w trybie CBC + HMAC, `| K_E |` to długość klucza szyfrowania symetrycznego i `| K_H |` jest rozmiarem podsumowania procedury HMAC. W przypadku operacji szyfrowania GCM i walidacji `| K_H | = 0` .
 
 ## <a name="cbc-mode-encryption--hmac-validation"></a>CBC-Mode Encryption + Walidacja HMAC
 
-Po wygenerowaniu K_E za pomocą powyższego mechanizmu generujemy losowy wektor inicjalizacji i uruchamiamy algorytm szyfrowania bloku symetrycznego, aby szyfrowanie zwykły tekst. Wektor inicjalizacji i tekst szyfrowany są następnie uruchamiane za pomocą procedury HMAC, która została zainicjowana z kluczem K_H w celu utworzenia komputera MAC. Ten proces i wartość zwracana są reprezentowane graficznie poniżej.
+Po `K_E` wygenerowaniu za pomocą powyższego mechanizmu generujemy losowy wektor inicjalizacji i uruchamiamy algorytm szyfrowania bloku symetrycznego, aby szyfrowanie zwykły tekst. Wektor inicjalizacji i tekst szyfrowany są następnie uruchamiane za pomocą procedury HMAC, która została zainicjowana przy użyciu klucza `K_H` w celu utworzenia komputera Mac. Ten proces i wartość zwracana są reprezentowane graficznie poniżej.
 
 ![Proces CBC i powrót](subkeyderivation/_static/cbcprocess.png)
 
-*Output: = modyfikator | | IV | | E_cbc (K_E, IV, dane) | | HMAC (K_H, IV | | E_cbc (K_E, IV, dane))*
+`output:= keyModifier || iv || E_cbc (K_E,iv,data) || HMAC(K_H, iv || E_cbc (K_E,iv,data))`
 
 > [!NOTE]
 > `IDataProtector.Protect`Implementacja zwróci [nagłówek Magic i identyfikator klucza](xref:security/data-protection/implementation/authenticated-encryption-details) do danych wyjściowych przed przywróceniem go do obiektu wywołującego. Ponieważ nagłówek Magic i identyfikator klucza są niejawnie częścią usługi [AAD](xref:security/data-protection/implementation/subkeyderivation#data-protection-implementation-subkey-derivation-aad)i ponieważ modyfikator klucza jest podawany jako dane wejściowe do KDF, oznacza to, że każdy pojedynczy bajt końcowego zwróconego ładunku jest uwierzytelniany przez komputery Mac.
 
 ## <a name="galoiscounter-mode-encryption--validation"></a>Szyfrowanie w trybie Galois/licznik + Walidacja
 
-Po wygenerowaniu K_E za pomocą powyższego mechanizmu generujemy losowo 96-bitowy identyfikator jednorazowy i uruchomimy algorytm szyfrowania bloku symetrycznego, aby szyfrowanie zwykły tekst i utworzyć tag uwierzytelniania 128-bitowy.
+Po `K_E` wygenerowaniu za pomocą powyższego mechanizmu generujemy losowo 96-bitowy identyfikator jednorazowy i uruchamiamy algorytm szyfrowania bloku symetrycznego, aby szyfrowanie zwykły tekst i utworzyć tag uwierzytelniania 128-bitowy.
 
 ![Proces GCM i powrót](subkeyderivation/_static/galoisprocess.png)
 
-*Output: = modyfikator | | Identyfikator jednorazowy | | E_gcm (K_E, nonce, dane) | | authTag*
+`output := keyModifier || nonce || E_gcm (K_E,nonce,data) || authTag`
 
 > [!NOTE]
-> Mimo że GCM natywnie obsługuje koncepcję usługi AAD, nadal będziemy uzyskiwać dostęp do usługi AAD tylko do oryginalnego KDF, ale w celu przekazania pustego ciągu do GCM dla jego parametru AAD. Przyczyną tego jest złożenie dwóch. Najpierw, [Aby obsługiwać elastyczność](xref:security/data-protection/implementation/context-headers#data-protection-implementation-context-headers) , która nigdy nie chce używać K_M bezpośrednio jako klucz szyfrowania. Ponadto GCM nakładają na dane wejściowe bardzo rygorystyczne wymagania unikatowości. Prawdopodobieństwo wywołania procedury szyfrowania GCM w dwóch lub większej liczbie odrębnych zestawów danych wejściowych o tej samej parze (Key, nonce) nie może przekroczyć 2 ^ 32. Jeśli naprawimy K_E nie możemy wykonać więcej niż 2 ^ 32 operacji szyfrowania przed uruchomieniem afoul limitu 2 ^-32. Może to wyglądać podobnie do bardzo dużej liczby operacji, ale serwer sieci Web o wysokim natężeniu ruchu może przechodzić przez 4 000 000 000 żądań w zwykłych dniach, a także w normalnym okresie istnienia tych kluczy. Aby zachować zgodność z 2-32 ograniczeniem prawdopodobieństwa, będziemy nadal używać modyfikatora klucza 128-bitowego i 96-bitowy identyfikator jednorazowy, który radykalnie rozszerza liczbę operacji przydatnych dla danego K_M. W celu uproszczenia projektowania udostępnimy ścieżkę kodu KDF między operacjami CBC i GCM, a ponieważ usługa AAD jest już brana pod uwagę w KDF, nie ma potrzeby przechodzenia do procedury GCM.
+> Mimo że GCM natywnie obsługuje koncepcję usługi AAD, nadal będziemy uzyskiwać dostęp do usługi AAD tylko do oryginalnego KDF, ale w celu przekazania pustego ciągu do GCM dla jego parametru AAD. Przyczyną tego jest złożenie dwóch. Po pierwsze, [Aby obsługiwać elastyczność](xref:security/data-protection/implementation/context-headers#data-protection-implementation-context-headers) , nigdy nie chcemy używać `K_M` bezpośrednio jako klucza szyfrowania. Ponadto GCM nakładają na dane wejściowe bardzo rygorystyczne wymagania unikatowości. Prawdopodobieństwo wywołania procedury szyfrowania GCM w dwóch lub większej liczbie odrębnych zestawów danych wejściowych o tej samej parze (Key, nonce) nie może przekroczyć 2 ^ 32. Jeśli firma Microsoft naprawi `K_E` , nie możemy wykonać więcej niż 2 ^ 32 operacji szyfrowania przed uruchomieniem afoul limitu 2 ^-32. Może to wyglądać podobnie do bardzo dużej liczby operacji, ale serwer sieci Web o wysokim natężeniu ruchu może przechodzić przez 4 000 000 000 żądań w zwykłych dniach, a także w normalnym okresie istnienia tych kluczy. Aby zachować zgodność z 2-32 ograniczeniem prawdopodobieństwa, będziemy nadal używać modyfikatora klucza 128-bitowego i 96-bitowy identyfikator jednorazowy, który radykalnie rozszerza liczbę operacji przydatnych dla danego elementu `K_M` . W celu uproszczenia projektowania udostępnimy ścieżkę kodu KDF między operacjami CBC i GCM, a ponieważ usługa AAD jest już brana pod uwagę w KDF, nie ma potrzeby przechodzenia do procedury GCM.

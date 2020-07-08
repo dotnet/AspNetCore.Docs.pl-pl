@@ -5,7 +5,7 @@ description: Dowiedz się, jak używać scenariuszy i walidacji pól w programie
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/01/2020
+ms.date: 07/06/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/forms-validation
-ms.openlocfilehash: 925051d7426470aebfddbdb5ff83d7dab9f82726
-ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
+ms.openlocfilehash: f31a1f1d8942c9d9654dc26e946c022cf21ed9d1
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85944435"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86059867"
 ---
 # <a name="aspnet-core-blazor-forms-and-validation"></a>ASP.NET Core Blazor formularzy i walidacji
 
@@ -445,6 +445,14 @@ Wyprowadź komunikaty weryfikacji dla określonego modelu z `Model` parametrem:
 
 <xref:Microsoft.AspNetCore.Components.Forms.ValidationMessage%601>Składniki i <xref:Microsoft.AspNetCore.Components.Forms.ValidationSummary> obsługują dowolne atrybuty. Dowolny atrybut, który nie jest zgodny z parametrem składnika, jest dodawany do wygenerowanego `<div>` `<ul>` elementu or.
 
+Kontroluj styl komunikatów weryfikacyjnych w arkuszu stylów aplikacji ( `wwwroot/css/app.css` lub `wwwroot/css/site.css` ). Klasa domyślna `validation-message` Ustawia kolor tekstu komunikatów walidacji na czerwony:
+
+```css
+.validation-message {
+    color: red;
+}
+```
+
 ### <a name="custom-validation-attributes"></a>Niestandardowe atrybuty walidacji
 
 Aby upewnić się, że wynik walidacji jest prawidłowo skojarzony z polem przy użyciu [niestandardowego atrybutu walidacji](xref:mvc/models/validation#custom-attributes), należy przekazać kontekst walidacji <xref:System.ComponentModel.DataAnnotations.ValidationContext.MemberName> podczas tworzenia <xref:System.ComponentModel.DataAnnotations.ValidationResult> :
@@ -467,7 +475,7 @@ private class CustomValidator : ValidationAttribute
 ```
 
 > [!NOTE]
-> Parametr <xref:System.ComponentModel.DataAnnotations.ValidationContext.GetService%2A?displayProperty=nameWithType> ma wartość `null`. Wstrzyknięcie usług do walidacji w `IsValid` metodzie nie jest obsługiwane.
+> <xref:System.ComponentModel.DataAnnotations.ValidationContext.GetService%2A?displayProperty=nameWithType> to `null`. Wstrzyknięcie usług do walidacji w `IsValid` metodzie nie jest obsługiwane.
 
 ### <a name="blazor-data-annotations-validation-package"></a>BlazorPakiet weryfikacji adnotacji danych
 
@@ -603,7 +611,7 @@ Efektem ubocznym poprzedniego podejścia jest to, że <xref:Microsoft.AspNetCore
 }
 ```
 
-## <a name="troubleshoot"></a>Rozwiąż problemy
+## <a name="troubleshoot"></a>Rozwiązywanie problemów
 
 > InvalidOperationException: EditForm wymaga parametru modelu lub parametru EditContext, ale nie obu.
 

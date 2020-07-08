@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/cors
-ms.openlocfilehash: 76e79c2d9762e242dc44857370b0ce1d13f1d1cb
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 0a2be31092ab491e23ab9de9be676b5b4d3963ee
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403784"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86060283"
 ---
 # <a name="enable-cross-origin-requests-cors-in-aspnet-core"></a>Włącz żądania między źródłami (CORS) w ASP.NET Core
 
@@ -794,7 +794,7 @@ Na przykład rozważ zastosowanie skonfigurowanej aplikacji w następujący spos
 app.UseCors(policy => policy.WithHeaders(HeaderNames.CacheControl));
 ```
 
-Oprogramowanie pośredniczące CORS pomyślnie reaguje na żądanie inspekcji wstępnej z następującym nagłówkiem żądania, ponieważ `Content-Language` zawsze jest listy dozwolonych:
+Oprogramowanie pośredniczące CORS pomyślnie reaguje na żądanie inspekcji wstępnej z następującym nagłówkiem żądania, ponieważ `Content-Language` jest zawsze dozwolone:
 
 ```
 Access-Control-Request-Headers: Cache-Control, Content-Language
@@ -988,7 +988,7 @@ Jeśli odpowiedź nie zawiera `Access-Control-Allow-Origin` nagłówka, żądani
 Aby przetestować CORS:
 
 1. [Utwórz projekt interfejsu API](xref:tutorials/first-web-api). Możesz również [pobrać przykład](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/cors/sample/Cors).
-1. Włącz funkcję CORS przy użyciu jednego z metod w tym dokumencie. Na przykład:
+1. Włącz funkcję CORS przy użyciu jednego z metod w tym dokumencie. Przykład:
 
   [!code-csharp[](cors/sample/Cors/WebAPI/StartupTest.cs?name=snippet2&highlight=13-18)]
 

@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/crud
-ms.openlocfilehash: 0be63811874709db95285f4013e47bc1706050b1
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: e7e4c4b15cca9612a552c58029ae8b34b79070d1
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401483"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86060127"
 ---
 # <a name="tutorial-implement-crud-functionality---aspnet-mvc-with-ef-core"></a>Samouczek: Implementowanie funkcji CRUD — ASP.NET MVC z EF Core
 
@@ -187,7 +187,7 @@ Te zmiany implementują najlepsze rozwiązanie w zakresie zabezpieczeń, aby zap
 
 Nowy kod odczytuje istniejącą jednostkę i wywołuje w `TryUpdateModel` celu zaktualizowania pól w pobranej jednostce [na podstawie danych wprowadzonych przez użytkownika w opublikowanych formularzach](xref:mvc/models/model-binding). Automatyczne śledzenie zmian Entity Framework ustawia `Modified` flagę dla pól, które są zmieniane przez dane wejściowe formularza. Gdy `SaveChanges` Metoda jest wywoływana, Entity Framework tworzy instrukcje SQL, aby zaktualizować wiersz bazy danych. Konflikty współbieżności są ignorowane, a tylko kolumny tabeli, które zostały zaktualizowane przez użytkownika, są aktualizowane w bazie danych. (W dalszej części samouczka pokazano, jak obsłużyć konflikty współbieżności).
 
-Najlepszym rozwiązaniem, aby zapobiec przepełnieniu, pola, które mają być aktualizowane przez stronę **edycji** , są listy dozwolonych w `TryUpdateModel` parametrach. (Pusty ciąg poprzedzający listę pól na liście parametrów jest przeznaczony dla prefiksu do użycia z nazwami pól formularza). Obecnie nie ma żadnych dodatkowych pól, które są chronione, ale lista pól, które mają być powiązane przez spinacz modelu, zapewnia, że jeśli dodasz pola do modelu danych w przyszłości, są one automatycznie chronione, dopóki nie zostaną jawnie dodane do nich w tym miejscu.
+Najlepszym rozwiązaniem, aby zapobiec nadpisywaniu, pola, które mają być aktualizowane przez stronę **edytowania** , są deklarowane w `TryUpdateModel` parametrach. (Pusty ciąg poprzedzający listę pól na liście parametrów jest przeznaczony dla prefiksu do użycia z nazwami pól formularza). Obecnie nie ma żadnych dodatkowych pól, które są chronione, ale lista pól, które mają być powiązane przez spinacz modelu, zapewnia, że jeśli dodasz pola do modelu danych w przyszłości, są one automatycznie chronione, dopóki nie zostaną jawnie dodane do nich w tym miejscu.
 
 W wyniku tych zmian sygnatura metody HttpPost `Edit` jest taka sama jak `Edit` Metoda narzędzia HttpGet; w związku z tym zmieniono nazwę metody `EditPost` .
 

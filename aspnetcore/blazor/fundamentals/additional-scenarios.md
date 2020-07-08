@@ -5,7 +5,7 @@ description: Zapoznaj się z dodatkowymi scenariuszami ASP.NET Core Blazor konfi
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/10/2020
+ms.date: 07/07/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/additional-scenarios
-ms.openlocfilehash: ff9b2b089ca61a4ac6dd8bc6bd5ab1f1e68a050b
-ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
+ms.openlocfilehash: e62cb2ab865fbf57166d5ec3d1344183c00c2095
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85944422"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86059844"
 ---
 # <a name="aspnet-core-blazor-hosting-model-configuration"></a>ASP.NET Core Blazor konfigurację modelu hostingu
 
@@ -73,6 +73,18 @@ Aby dostosować interfejs użytkownika, zdefiniuj element z elementu `id` `compo
 <div id="components-reconnect-modal">
     ...
 </div>
+```
+
+Dodaj następujący do arkusza stylów aplikacji ( `wwwroot/css/app.css` lub `wwwroot/css/site.css` ):
+
+```css
+#components-reconnect-modal {
+    display: none;
+}
+
+#components-reconnect-modal.components-reconnect-show {
+    display: block;
+}
 ```
 
 W poniższej tabeli opisano klasy CSS stosowane do `components-reconnect-modal` elementu.
@@ -135,6 +147,6 @@ Aby skonfigurować SignalR klienta w `Pages/_Host.cshtml` pliku:
 </script>
 ```
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:fundamentals/logging/index>

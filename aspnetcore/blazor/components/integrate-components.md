@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/integrate-components-into-razor-pages-and-mvc-apps
-ms.openlocfilehash: 29360174ea86623491d5d8aacd4038162855bba8
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 6aef51a0f8bf4ec2e7cb6115856bc465a90ec2ee
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399065"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86059853"
 ---
 # <a name="integrate-aspnet-core-razor-components-into-razor-pages-and-mvc-apps"></a>Integrowanie Razor składników ASP.NET Core ze Razor stronami i aplikacjami MVC
 
@@ -149,7 +149,7 @@ Aby obsługiwać Razor składniki routingu w Razor aplikacjach stron:
    });
    ```
 
-1. Dodaj składniki routingu do aplikacji. Na przykład:
+1. Dodaj składniki routingu do aplikacji. Przykład:
 
    ```razor
    @page "/counter"
@@ -232,7 +232,7 @@ Aby obsługiwać Razor składniki routingu w aplikacjach MVC:
    });
    ```
 
-1. Utwórz `Pages` folder i Dodaj do aplikacji składniki obsługujące Routing. Na przykład:
+1. Utwórz `Pages` folder i Dodaj do aplikacji składniki obsługujące Routing. Przykład:
 
    ```razor
    @page "/counter"

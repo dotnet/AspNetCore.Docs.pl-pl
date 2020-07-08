@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/comparison
-ms.openlocfilehash: 08efb79f5085acff455744e46ca411777b2641e5
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: caf9e99bcd4a1887fe5d69a3641fabee08573ef1
+ms.sourcegitcommit: d1fa3d69dda675d7a52c7100742dfa6297413376
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406163"
+ms.lasthandoff: 07/08/2020
+ms.locfileid: "86093313"
 ---
 # <a name="compare-grpc-services-with-http-apis"></a>Porównanie usług gRPC za pomocą interfejsów API protokołu HTTP
 
@@ -104,7 +104,7 @@ Obecnie nie można bezpośrednio wywołać usługi gRPC z przeglądarki. gRPC in
 Nie wszystkie funkcje gRPC są obsługiwane przez gRPC-Web. Przesyłanie strumieniowe klienta i dwukierunkowego nie jest obsługiwane i ma ograniczoną obsługę przesyłania strumieniowego serwera.
 
 > [!TIP]
-> Platforma .NET Core ma eksperymentalną obsługę gRPC-Web. <xref:grpc/browser>Aby uzyskać więcej informacji, odwiedź stronę.
+> Platforma .NET Core obsługuje program gRPC-Web. <xref:grpc/browser>Aby uzyskać więcej informacji, odwiedź stronę.
 
 ### <a name="not-human-readable"></a>Nie można odczytać ludzi
 

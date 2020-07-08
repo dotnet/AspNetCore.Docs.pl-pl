@@ -369,6 +369,8 @@
           uid: blazor/call-javascript-from-dotnet
         - name: Wywoływanie platformy .NET ze środowiska JavaScript
           uid: blazor/call-dotnet-from-javascript
+        - name: Wywoływanie internetowego interfejsu API z kodu WebAssembly
+          uid: blazor/call-web-api
         - name: Zabezpieczenia i tożsamość
           items:
             - name: Omówienie
@@ -409,8 +411,6 @@
           uid: blazor/state-management
         - name: Debuguj kod WebAssembly
           uid: blazor/debug
-        - name: Wywoływanie internetowego interfejsu API z kodu WebAssembly
-          uid: blazor/call-web-api
         - name: Wydajność zestawu WebAssembly
           uid: blazor/webassembly-performance-best-practices
         - name: Progresywne aplikacje internetowe

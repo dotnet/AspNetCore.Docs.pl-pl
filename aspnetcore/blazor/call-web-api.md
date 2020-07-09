@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-web-api
-ms.openlocfilehash: a2e320eb24d47de9e704c2a5355d28cf90bad0cd
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: 9c90e2a6c03e02b771cfa8f589e381d52637dc26
+ms.sourcegitcommit: f7873c02c1505c99106cbc708f37e18fc0a496d1
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86059945"
+ms.lasthandoff: 07/08/2020
+ms.locfileid: "86147641"
 ---
 # <a name="call-a-web-api-from-aspnet-core-blazor"></a>Wywoływanie internetowego interfejsu API z ASP.NET CoreBlazor
 
@@ -312,11 +312,11 @@ Aby uzyskać więcej informacji, zobacz <xref:blazor/fundamentals/handle-errors>
 
 Zabezpieczenia przeglądarki uniemożliwiają stronom sieci Web wykonywanie żądań do innej domeny niż ta, która jest obsługiwana przez stronę sieci Web. To ograniczenie jest nazywane *zasadami tego samego źródła*. Zasady tego samego źródła uniemożliwiają złośliwej lokacji odczytywanie poufnych danych z innej lokacji. Aby żądania z przeglądarki były wysyłane do punktu końcowego z innym źródłem, *punkt końcowy* musi włączyć [udostępnianie zasobów między źródłami (CORS)](https://www.w3.org/TR/cors/).
 
-[ Blazor WebAssembly Aplikacja Przykładowa (BlazorWebAssemblySample)](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) DEMONSTRUJE użycie mechanizmu CORS w składniku API wywołania ( `Pages/CallWebAPI.razor` ).
+[ Blazor WebAssembly Aplikacja Przykładowa ( Blazor WebAssemblySample)](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) demonstruje użycie mechanizmu CORS w składniku API wywołania ( `Pages/CallWebAPI.razor` ).
 
-Aby uzyskać więcej informacji i przykłady kodu bezpiecznych żądań, zobacz <xref:blazor/security/webassembly/additional-scenarios> . Aby uzyskać więcej informacji na temat mechanizmu CORS z bezpiecznymi żądaniami, zapoznaj się z [sekcją CORS](xref:blazor/security/webassembly/additional-scenarios#cross-origin-resource-sharing-cors) w poprzednim artykule.
+Aby uzyskać więcej informacji na temat mechanizmu CORS z bezpiecznymi żądaniami w Blazor aplikacjach, zobacz <xref:blazor/security/webassembly/additional-scenarios#cross-origin-resource-sharing-cors> .
 
-Aby uzyskać więcej informacji, zobacz <xref:security/cors>.
+Aby uzyskać ogólne informacje na temat mechanizmu CORS z aplikacjami ASP.NET Core, zobacz <xref:security/cors> .
 
 ## <a name="additional-resources"></a>Zasoby dodatkowe
 

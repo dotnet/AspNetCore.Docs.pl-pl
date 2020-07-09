@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/signalr-blazor-webassembly
-ms.openlocfilehash: 5a58e7ae28842e2e8a0f3bae8f47e252839903fe
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: d5aa7520a637b18e014519134dfe2d2139e7c11d
+ms.sourcegitcommit: f7873c02c1505c99106cbc708f37e18fc0a496d1
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408880"
+ms.lasthandoff: 07/08/2020
+ms.locfileid: "86147780"
 ---
 # <a name="use-aspnet-core-signalr-with-blazor-webassembly"></a>Użyj ASP.NET Core SignalR zBlazor WebAssembly
 
@@ -74,13 +74,13 @@ Postępuj zgodnie ze wskazówkami dotyczącymi wybranego narzędzia:
 
 1. Wybierz pozycję ** Blazor aplikacja** i wybierz pozycję **dalej**.
 
-1. Wpisz `BlazorSignalRApp` wartość w polu **Nazwa projektu** . Potwierdź, że wpis **lokalizacji** jest poprawny lub podaj lokalizację dla projektu. Wybierz przycisk **Utwórz**.
+1. Wpisz `BlazorSignalRApp` wartość w polu **Nazwa projektu** . Potwierdź, że wpis **lokalizacji** jest poprawny lub podaj lokalizację dla projektu. Wybierz pozycję **Utwórz**.
 
 1. Wybierz szablon ** Blazor WebAssembly aplikacji** .
 
 1. W obszarze **Zaawansowane**zaznacz pole wyboru **hostowane ASP.NET Core** .
 
-1. Wybierz przycisk **Utwórz**.
+1. Wybierz pozycję **Utwórz**.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -102,18 +102,11 @@ Postępuj zgodnie ze wskazówkami dotyczącymi wybranego narzędzia:
 
 1. Na pasku bocznym wybierz pozycję Aplikacja **sieci Web i konsola**  >  **App**.
 
-1. Wybierz szablon ** Blazor WebAssembly aplikacji** . Wybierz pozycję **Dalej**.
+1. Wybierz szablon ** Blazor WebAssembly aplikacji** . Wybierz opcję **Dalej**.
 
-   Potwierdź następujące konfiguracje:
+1. Upewnij się, że **uwierzytelnianie** jest ustawione na wartość **bez uwierzytelniania**. Zaznacz pole wyboru **hostowane ASP.NET Core** . Wybierz opcję **Dalej**.
 
-   * **Platforma docelowa** jest ustawiona na **platformę .NET Core 3,1**.
-   * **Uwierzytelnianie** jest ustawione na wartość **bez uwierzytelniania**.
-
-   Zaznacz pole wyboru **hostowane ASP.NET Core** .
-
-   Wybierz pozycję **Dalej**.
-
-1. W polu **Nazwa projektu** Nadaj nazwę aplikacji `BlazorSignalRApp` . Wybierz przycisk **Utwórz**.
+1. W polu **Nazwa projektu** Nadaj nazwę aplikacji `BlazorSignalRApp` . Wybierz pozycję **Utwórz**.
 
    Jeśli zostanie wyświetlony monit o zaufać certyfikatowi Deweloperskiemu, zaufaj certyfikatowi i Kontynuuj. Hasła użytkownika i pęku kluczy są wymagane do zaufania certyfikatu.
 

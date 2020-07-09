@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/get-started-with-swashbuckle
-ms.openlocfilehash: 0a47ed3338ebfbc5361a6082978d407543fb95c5
-ms.sourcegitcommit: b06511252f165dd4590ba9b5beca4153fa220779
+ms.openlocfilehash: bf6375f8f63bb9db50c423706a48363f53e96549
+ms.sourcegitcommit: f7873c02c1505c99106cbc708f37e18fc0a496d1
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/27/2020
-ms.locfileid: "85459782"
+ms.lasthandoff: 07/08/2020
+ms.locfileid: "86147659"
 ---
 # <a name="get-started-with-swashbuckle-and-aspnet-core"></a>Wprowadzenie do Swashbuckle i ASP.NET Core
 
@@ -44,7 +44,7 @@ Swashbuckle można dodać przy użyciu następujących metod:
 * W oknie **konsola Menedżera pakietów** :
   * Przejdź do **wyświetlania**  >  **innych**  >  **konsoli Menedżera pakietów** systemu Windows
   * Przejdź do katalogu, w którym znajduje się plik *TodoApi. csproj*
-  * Wykonaj następujące polecenie:
+  * Uruchom następujące polecenie:
 
     ```powershell
     Install-Package Swashbuckle.AspNetCore -Version 5.5.0
@@ -124,7 +124,7 @@ W `Startup.Configure` metodzie Włącz oprogramowanie pośredniczące do obsług
 
 Poprzednie `UseSwaggerUI` wywołanie metody włącza [oprogramowanie pośredniczące pliku statycznego](xref:fundamentals/static-files). Jeśli obiektem docelowym jest .NET Framework lub .NET Core 1. x, Dodaj pakiet NuGet [Microsoft. AspNetCore. StaticFiles](https://www.nuget.org/packages/Microsoft.AspNetCore.StaticFiles/) do projektu.
 
-Uruchom aplikację i przejdź do `http://localhost:<port>/swagger/v1/swagger.json` . Wygenerowany dokument opisujący punkty końcowe pojawia się, jak pokazano w [specyfikacji struktury Swagger (swagger.json)](xref:tutorials/web-api-help-pages-using-swagger#swagger-specification-swaggerjson).
+Uruchom aplikację i przejdź do `http://localhost:<port>/swagger/v1/swagger.json` . Wygenerowany dokument opisujący punkty końcowe wygląda tak, jak pokazano w [specyfikacji openapi (openapi.json)](xref:tutorials/web-api-help-pages-using-swagger#openapi-specification-openapijson).
 
 Interfejs użytkownika struktury Swagger można znaleźć pod adresem `http://localhost:<port>/swagger` . Eksploruj interfejs API za pośrednictwem interfejsu użytkownika struktury Swagger i Uwzględnij go w innych programach.
 

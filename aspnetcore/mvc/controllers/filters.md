@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/filters
-ms.openlocfilehash: 7fe33a620e43603388dd0cacb3ea42f5b5adc40f
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 0141ad2df5216183424980a6ca50bf6bcd64ade5
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408295"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86213062"
 ---
 # <a name="filters-in-aspnet-core"></a>Filtry w ASP.NET Core
 
@@ -123,7 +123,7 @@ Poniższy kod implementuje `ActionFilterAttribute` , że:
 
 Opcje konfiguracji są dostępne z [systemu konfiguracji](xref:fundamentals/configuration/index) przy użyciu [wzorca opcji](xref:fundamentals/configuration/options). Na przykład, z *appsettings.jsw* pliku:
 
-[!code-csharp[](filters/3.1sample/FiltersSample/appsettings.json)]
+[!code-json[](filters/3.1sample/FiltersSample/appsettings.json)]
 
 W `StartUp.ConfigureServices` :
 
@@ -186,12 +186,12 @@ Poniższy przykład ilustruje kolejność, w której metody filtrowania są wywo
 
 | Sequence | Zakres filtru | Filter — Metoda |
 |:--------:|:------------:|:-------------:|
-| 1 | Globalnie | `OnActionExecuting` |
+| 1 | Globalny | `OnActionExecuting` |
 | 2 | Kontroler lub Razor Strona| `OnActionExecuting` |
 | 3 | Metoda | `OnActionExecuting` |
 | 4 | Metoda | `OnActionExecuted` |
 | 5 | Kontroler lub Razor Strona | `OnActionExecuted` |
-| 6 | Globalnie | `OnActionExecuted` |
+| 6 | Globalny | `OnActionExecuted` |
 
 ### <a name="controller-level-filters"></a>Filtry na poziomie kontrolera
 
@@ -730,12 +730,12 @@ Poniższy przykład ilustruje kolejność, w której metody filtrowania są wywo
 
 | Sequence | Zakres filtru | Filter — Metoda |
 |:--------:|:------------:|:-------------:|
-| 1 | Globalnie | `OnActionExecuting` |
+| 1 | Globalny | `OnActionExecuting` |
 | 2 | Kontroler | `OnActionExecuting` |
 | 3 | Metoda | `OnActionExecuting` |
 | 4 | Metoda | `OnActionExecuted` |
 | 5 | Kontroler | `OnActionExecuted` |
-| 6 | Globalnie | `OnActionExecuted` |
+| 6 | Globalny | `OnActionExecuted` |
 
 Ta sekwencja pokazuje:
 
@@ -792,8 +792,8 @@ Należy wziąć pod uwagę te same 3 filtry akcji, które przedstawiono w powyż
 |:--------:|:------------:|:-----------------:|:-------------:|
 | 1 | Metoda | 0 | `OnActionExecuting` |
 | 2 | Kontroler | 1  | `OnActionExecuting` |
-| 3 | Globalnie | 2  | `OnActionExecuting` |
-| 4 | Globalnie | 2  | `OnActionExecuted` |
+| 3 | Globalny | 2  | `OnActionExecuting` |
+| 4 | Globalny | 2  | `OnActionExecuted` |
 | 5 | Kontroler | 1  | `OnActionExecuted` |
 | 6 | Metoda | 0  | `OnActionExecuted` |
 

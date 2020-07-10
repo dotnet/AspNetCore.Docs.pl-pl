@@ -5,7 +5,7 @@ description: Aby utworzyć nową Blazor hostowaną aplikację z uwierzytelnianie
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/08/2020
+ms.date: 07/09/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-identity-server
-ms.openlocfilehash: 001fa0885c4ef4f365d9849278d3aa36e7657c54
-ms.sourcegitcommit: f7873c02c1505c99106cbc708f37e18fc0a496d1
+ms.openlocfilehash: 1e5b4e37acd11280ec41c137426ecc4776d231be
+ms.sourcegitcommit: 14c3d111f9d656c86af36ecb786037bf214f435c
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/08/2020
-ms.locfileid: "86147722"
+ms.lasthandoff: 07/09/2020
+ms.locfileid: "86176247"
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-identity-server"></a>Zabezpieczanie Blazor WebAssembly hostowanej aplikacji ASP.NET Core Identity z serwerem
 
@@ -148,7 +148,7 @@ Aby uzyskać pełną kontrolę nad schematem bazy danych, Dziedzicz z jednej z d
 
 W `OidcConfigurationController` ( `Controllers/OidcConfigurationController.cs` ) punkt końcowy klienta jest inicjowany do obsługi parametrów OIDC.
 
-### <a name="app-settings-files"></a>Pliki ustawień aplikacji
+### <a name="app-settings"></a>Ustawienia aplikacji
 
 W sekcji Ustawienia aplikacji ( `appsettings.json` ) w katalogu głównym projektu `IdentityServer` sekcja zawiera opis listy skonfigurowanych klientów. W poniższym przykładzie istnieje pojedynczy klient. Nazwa klienta odpowiada nazwie aplikacji i jest zamapowana według Konwencji do `ClientId` parametru OAuth. Profil wskazuje konfigurowany typ aplikacji. Profil jest używany wewnętrznie w celu napędu Konwencji upraszczających proces konfiguracji serwera. <!-- There are several profiles available, as explained in the [Application profiles](#application-profiles) section. -->
 
@@ -177,6 +177,22 @@ W przypadku dodawania uwierzytelniania do aplikacji ręcznie Dodaj pakiet do pli
   Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" 
   Version="3.2.0" />
 ```
+
+### <a name="httpclient-configuration"></a>`HttpClient`skonfigurować
+
+W programie `Program.Main` ( `Program.cs` ) nazwa <xref:System.Net.Http.HttpClient> ( `HostIS.ServerAPI` ) jest skonfigurowana do dostarczania <xref:System.Net.Http.HttpClient> wystąpień, które zawierają tokeny dostępu podczas wykonywania żądań do interfejsu API serwera:
+
+```csharp
+builder.Services.AddHttpClient("HostIS.ServerAPI", 
+        client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
+    .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
+
+builder.Services.AddTransient(sp => sp.GetRequiredService<IHttpClientFactory>()
+    .CreateClient("HostIS.ServerAPI"));
+```
+
+> [!NOTE]
+> Jeśli konfigurujesz Blazor WebAssembly aplikację tak, aby korzystała z istniejącego Identity wystąpienia serwera, które nie jest częścią Blazor rozwiązania hostowanego, Zmień <xref:System.Net.Http.HttpClient> rejestrację adresu podstawowego z <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> ( `builder.HostEnvironment.BaseAddress` ) na adres URL punktu końcowego autoryzacji interfejsu API aplikacji serwera.
 
 ### <a name="api-authorization-support"></a>Obsługa autoryzacji interfejsu API
 
@@ -252,7 +268,7 @@ Domyślnie konfiguracja aplikacji jest ładowana zgodnie z Konwencją z programu
 
 [!INCLUDE[](~/includes/blazor-security/fetchdata-component.md)]
 
-## <a name="run-the-app"></a>Uruchomienie aplikacji
+## <a name="run-the-app"></a>Uruchamianie aplikacji
 
 Uruchom aplikację z projektu serwera. W przypadku korzystania z programu Visual Studio:
 
@@ -445,7 +461,7 @@ W aplikacji klienckiej podejścia do autoryzacji składników są w tym momencie
 
 [!INCLUDE[](~/includes/blazor-security/troubleshoot.md)]
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Wdrożenie do Azure App Service](xref:security/authentication/identity/spa#deploy-to-production)
 * [Importowanie certyfikatu z Key Vault (dokumentacja platformy Azure)](/azure/app-service/configure-ssl-certificate#import-a-certificate-from-key-vault)

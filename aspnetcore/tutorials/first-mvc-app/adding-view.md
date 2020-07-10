@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-view
-ms.openlocfilehash: 841751ffb834f77184365c3022293dbadc9f6f2c
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: d6a541e9633d3ecc2768744956c3b43d830b0b2b
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403537"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86213128"
 ---
 # <a name="part-3-add-a-view-to-an-aspnet-core-mvc-app"></a>Część 3 Dodawanie widoku do aplikacji ASP.NET Core MVC
 
@@ -80,7 +80,7 @@ Dodaj `Index` widok dla `HelloWorldController` .
 
 Zastąp zawartość pliku widoku *widoki/HelloWorld/index. cshtml* Razor następującym:
 
-[!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/HelloWorld/Index1.cshtml?highlight=7)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/HelloWorld/Index1.cshtml?highlight=7)]
 
 Przejdź do adresu `https://localhost:{PORT}/HelloWorld`. Metoda w niewykonanym `Index` `HelloWorldController` stopniu; uruchomiła instrukcję `return View();` , która określa, że metoda powinna używać pliku szablonu widoku, aby renderować odpowiedź do przeglądarki. Ponieważ nazwa pliku szablonu widoku nie została określona, MVC domyślnie używa domyślnego pliku widoku. Domyślny plik widoku ma taką samą nazwę jak Metoda ( `Index` ), więc jest używany szablon widoku w */views/HelloWorld/index.cshtml* . Na poniższej ilustracji przedstawiono ciąg "Hello z naszego szablonu widoku!" zakodowane w widoku.
 
@@ -96,7 +96,7 @@ Szablony [układów](xref:mvc/views/layout) umożliwiają określenie układu ko
 
 Zastąp zawartość pliku *viewss/Shared/_Layout. cshtml* następującym znacznikiem. Zmiany są wyróżnione:
 
-[!code-html[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Views/Shared/_Layout.cshtml?highlight=6,14,40)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Views/Shared/_Layout.cshtml?highlight=6,14,40)]
 
 Poprzednia Adiustacja wprowadziła następujące zmiany:
 
@@ -125,7 +125,7 @@ Plik *views/_ViewStart. cshtml* umieszcza w pliku *views/Shared/_Layout. cshtml*
 
 Zmień tytuł i `<h2>` element pliku widoku *widoki/HelloWorld/index. cshtml* :
 
-[!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/HelloWorld/Index2.cshtml?highlight=2,5)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/HelloWorld/Index2.cshtml?highlight=2,5)]
 
 Tytuł i `<h2>` element są nieco inne, więc można zobaczyć, który bit kodu zmienia ekran.
 
@@ -161,7 +161,7 @@ Utwórz szablon widoku powitalnego o nazwie *przeglądający/HelloWorld/Welcome.
 
 Utworzysz pętlę w szablonie widoku *Welcome. cshtml* , który wyświetla "Hello" `NumTimes` . Zastąp zawartość *widoków/HelloWorld/Welcome. cshtml* następującym:
 
-[!code-html[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/HelloWorld/Welcome.cshtml)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/HelloWorld/Welcome.cshtml)]
 
 Zapisz zmiany i przejdź do następującego adresu URL:
 
@@ -237,7 +237,7 @@ Dodaj `Index` widok dla `HelloWorldController` .
 
 Zastąp zawartość pliku widoku *widoki/HelloWorld/index. cshtml* Razor następującym:
 
-[!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/HelloWorld/Index1.cshtml?highlight=7)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/HelloWorld/Index1.cshtml?highlight=7)]
 
 Przejdź do adresu `https://localhost:{PORT}/HelloWorld`. Metoda w niewykonanym `Index` `HelloWorldController` stopniu; uruchomiła instrukcję `return View();` , która określa, że metoda powinna używać pliku szablonu widoku, aby renderować odpowiedź do przeglądarki. Ponieważ nazwa pliku szablonu widoku nie została określona, MVC domyślnie używa domyślnego pliku widoku. Domyślny plik widoku ma taką samą nazwę jak Metoda ( `Index` ), więc w */views/HelloWorld/index.cshtml* jest używana. Na poniższej ilustracji przedstawiono ciąg "Hello z naszego szablonu widoku!" zakodowane w widoku.
 
@@ -256,7 +256,7 @@ Szablony [układów](xref:mvc/views/layout) umożliwiają określenie układu ko
 
 Następujące znaczniki pokazują wyróżnione zmiany:
 
-[!code-html[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Shared/_Layout.cshtml?highlight=6,24,51)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Shared/_Layout.cshtml?highlight=6,24,51)]
 
 W powyższym znaczniku `asp-area` [atrybut pomocnika tagu kotwicy](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) został pominięty, ponieważ ta aplikacja nie korzysta z [obszarów](xref:mvc/controllers/areas).
 
@@ -285,7 +285,7 @@ Plik *views/_ViewStart. cshtml* umieszcza w pliku *views/Shared/_Layout. cshtml*
 
 Zmień tytuł i `<h2>` element pliku widoku *widoki/HelloWorld/index. cshtml* :
 
-[!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/HelloWorld/Index2.cshtml?highlight=2,5)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/HelloWorld/Index2.cshtml?highlight=2,5)]
 
 Tytuł i `<h2>` element są nieco inne, więc można zobaczyć, który bit kodu zmienia ekran.
 
@@ -321,7 +321,7 @@ Utwórz szablon widoku powitalnego o nazwie *przeglądający/HelloWorld/Welcome.
 
 Utworzysz pętlę w szablonie widoku *Welcome. cshtml* , który wyświetla "Hello" `NumTimes` . Zastąp zawartość *widoków/HelloWorld/Welcome. cshtml* następującym:
 
-[!code-html[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/HelloWorld/Welcome.cshtml)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/HelloWorld/Welcome.cshtml)]
 
 Zapisz zmiany i przejdź do następującego adresu URL:
 

@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/intro
-ms.openlocfilehash: 79cfe50f7e074954291c88689940c3263b68e151
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 700370fd11a0df40a45c47e8c378d5bdd0c60009
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401360"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212698"
 ---
 # <a name="razor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>RazorStrony z Entity Framework Core w ASP.NET Core — samouczek 1 z 8
 
@@ -529,11 +529,11 @@ Kilka zmian powoduje skonfigurowanie menu witryny, układu i strony głównej. A
 
 Zmiany są wyróżnione. (Wszystkie znaczniki *nie* są wyświetlane).
 
-[!code-html[](intro/samples/cu21/Pages/Shared/_Layout.cshtml?highlight=6,29,35-38,50&name=snippet)]
+[!code-cshtml[](intro/samples/cu21/Pages/Shared/_Layout.cshtml?highlight=6,29,35-38,50&name=snippet)]
 
 W obszarze *Pages/index. cshtml*Zastąp zawartość pliku następującym kodem, aby zamienić tekst na ASP.NET i MVC z tekstem dotyczącym tej aplikacji:
 
-[!code-html[](intro/samples/cu21/Pages/Index.cshtml)]
+[!code-cshtml[](intro/samples/cu21/Pages/Index.cshtml)]
 
 ## <a name="create-the-data-model"></a>Tworzenie modelu danych
 
@@ -771,7 +771,7 @@ W następnym samouczku są badane podstawowe operacje CRUD (tworzenie, odczytywa
 
 
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Wersja tego samouczka usługi YouTube](https://www.youtube.com/watch?v=P7iTtQnkrNs)
 

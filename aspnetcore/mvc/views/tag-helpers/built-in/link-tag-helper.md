@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/link-tag-helper
-ms.openlocfilehash: c767ff4c2a1e0d5d10ccb3ff855126f541c04f64
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: ac9f6449e2b7b135318ecf116e1dba7b33ddff83
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408243"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212400"
 ---
 # <a name="link-tag-helper-in-aspnet-core"></a>Pomocnik tagu linku w ASP.NET Core
 
@@ -33,11 +33,11 @@ Pomocnik tagu linku umożliwia określenie sieci CDN dla pliku CSS i rezerwę, g
 
 Poniższe Razor znaczniki przedstawiają `head` element pliku układu utworzonego za pomocą szablonu ASP.NET Core Web App:
 
-[!code-html[](link-tag-helper/sample/_Layout.cshtml?name=snippet)]
+[!code-cshtml[](link-tag-helper/sample/_Layout.cshtml?name=snippet)]
 
 Następujące elementy są renderowane HTML z poprzedniego kodu (w środowisku innym niż programowanie):
 
-[!code-csharp[](link-tag-helper/sample/HtmlPage1.html)]
+[!code-html[](link-tag-helper/sample/HtmlPage1.html)]
 
 W poprzednim kodzie pomocnik tagu linku wygenerował `<meta name="x-stylesheet-fallback-test" content="" class="sr-only" />` element i następujący kod JavaScript, który jest używany do weryfikowania żądanego pliku *Bootstrap. min. css* jest dostępny w sieci CDN. W takim przypadku plik CSS był dostępny, aby pomocnik tagów wygenerował `<link />` element z plikiem CSS usługi CDN.
 
@@ -65,7 +65,7 @@ Nazwa właściwości CSS do użycia w teście Fallback. Aby uzyskać więcej inf
 
 Wartość właściwości CSS do użycia dla testu powrotu. Aby uzyskać więcej informacji, zobacz <xref:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.FallbackTestValue>.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:mvc/views/tag-helpers/intro>
 * <xref:mvc/controllers/areas>

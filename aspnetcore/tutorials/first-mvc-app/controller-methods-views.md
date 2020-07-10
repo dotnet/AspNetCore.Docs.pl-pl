@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/controller-methods-views
-ms.openlocfilehash: a22bc9f9156b671d7bf17b56b62e384a60b2568b
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: b473b8575a870b91d83e5494103d39486ef4fee1
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405266"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86213045"
 ---
 # <a name="part-6-controller-methods-and-views-in-aspnet-core"></a>Część 6, metody kontrolera i widoki w ASP.NET Core
 
@@ -42,7 +42,7 @@ Przejdź do `Movies` kontrolera i przytrzymaj wskaźnik myszy nad linkiem **edyc
 
 Linki **Edytuj**, **szczegóły**i **Usuń** są generowane przez pomocnika podstawowego tagu zakotwiczenia MVC w pliku *views/filmy/index. cshtml* .
 
-[!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Movies/IndexOriginal.cshtml?highlight=1-3&range=46-50)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Movies/IndexOriginal.cshtml?highlight=1-3&range=46-50)]
 
 [Pomocnicy tagów](xref:mvc/views/tag-helpers/intro) włączają kod po stronie serwera, aby uczestniczyć w tworzeniu i RENDEROWANIU elementów HTML w Razor plikach. W powyższym kodzie, `AnchorTagHelper` dynamicznie generuje `href` wartość atrybutu HTML z metody akcji kontrolera i identyfikatora trasy. Możesz użyć **widoku źródła** z ulubionej przeglądarki lub użyć narzędzi programistycznych do sprawdzenia wygenerowanego znacznika. Poniżej przedstawiono część wygenerowanego kodu HTML:
 
@@ -106,7 +106,7 @@ Zwróć uwagę, że druga `Edit` Metoda działania jest poprzedzona `[HttpPost]`
 
 Ten `ValidateAntiForgeryToken` atrybut służy do [zapobiegania fałszerstwu żądania](xref:security/anti-request-forgery) i jest sparowany z tokenem chroniącym przed fałszerstwem wygenerowanym w pliku widoku edycji (*widoki/filmy/Edit. cshtml*). Plik widoku edycji generuje token chroniący przed fałszerstwem za pomocą [pomocnika tagu formularza](xref:mvc/views/working-with-forms).
 
-[!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Movies/Edit.cshtml?range=9)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Movies/Edit.cshtml?range=9)]
 
 [Pomocnik tagu formularza](xref:mvc/views/working-with-forms) generuje ukryty token chroniący przed fałszerstwem, który musi być zgodny z `[ValidateAntiForgeryToken]` wygenerowanym tokenem chroniącym przed fałszerstwem w `Edit` metodzie kontrolera filmów. Aby uzyskać więcej informacji, zobacz [zabezpieczenia przed fałszowaniem](xref:security/anti-request-forgery).
 
@@ -116,7 +116,7 @@ Ten `ValidateAntiForgeryToken` atrybut służy do [zapobiegania fałszerstwu ż�
 
 Gdy system szkieletu utworzył widok edycji, zbadał `Movie` klasę i utworzony kod w celu renderowania `<label>` i `<input>` elementów dla każdej właściwości klasy. W poniższym przykładzie przedstawiono widok edycji, który został wygenerowany przez system szkieletu programu Visual Studio:
 
-[!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/EditOriginal.cshtml)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/EditOriginal.cshtml)]
 
 Zwróć uwagę, jak szablon widoku zawiera `@model MvcMovie.Models.Movie` instrukcję w górnej części pliku. `@model MvcMovie.Models.Movie`Określa, że widok oczekuje modelu dla szablonu widoku, który ma być typu `Movie` .
 
@@ -154,7 +154,7 @@ Przed opublikowaniem formularza na serwerze sprawdzanie poprawności po stronie 
 
 Wszystkie `HttpGet` metody w kontrolerze filmu są zgodne z podobnym wzorcem. Uzyskują one obiekt filmu (lub listę obiektów w przypadku `Index` ) i przekazują obiekt (model) do widoku. `Create`Metoda przekazuje pusty obiekt filmu do `Create` widoku. Wszystkie metody, które tworzą, edytują, usuwają lub w inny sposób modyfikują dane, to w ramach `[HttpPost]` przeciążenia metody. Modyfikowanie danych w `HTTP GET` metodzie stanowi zagrożenie bezpieczeństwa. Modyfikowanie danych w `HTTP GET` metodzie również narusza najlepsze rozwiązania protokołu HTTP i wzorzec [rest](http://rest.elkstein.org/) architektury, który określa, że żądania GET nie powinny zmieniać stanu aplikacji. Innymi słowy wykonanie operacji GET powinno być operacją bezpieczną, która nie ma efektów ubocznych i nie modyfikuje utrwalonych danych.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Globalizacja i lokalizacja](xref:fundamentals/localization)
 * [Wprowadzenie do pomocy tagów](xref:mvc/views/tag-helpers/intro)

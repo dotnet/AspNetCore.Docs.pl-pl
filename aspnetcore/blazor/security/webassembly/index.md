@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/index
-ms.openlocfilehash: 3fdea9f553cbd37f2c27740487cfe030ebd81937
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 0ff580dd7cbefdfe3121b30490f99e0235d93bc3
+ms.sourcegitcommit: 14c3d111f9d656c86af36ecb786037bf214f435c
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402094"
+ms.lasthandoff: 07/09/2020
+ms.locfileid: "86176147"
 ---
 # <a name="secure-aspnet-core-blazor-webassembly"></a>Bezpieczny ASP.NET CoreBlazor WebAssembly
 
@@ -56,7 +56,19 @@ Dostępne są inne opcje uwierzytelniania aplikacji jednostronicowych, takie jak
   * Jeśli proces uwierzytelniania zakończy się pomyślnie, użytkownik zostanie uwierzytelniony i opcjonalnie zostanie wysłany z powrotem do oryginalnego chronionego adresu URL, którego zażądał użytkownik.
   * Jeśli z jakiegoś powodu proces uwierzytelniania zakończy się niepowodzeniem, użytkownik zostanie wysłany do strony logowania zakończonej niepowodzeniem ( `/authentication/login-failed` ) i zostanie wyświetlony komunikat o błędzie.
 
-## <a name="authorization"></a>Autoryzacja
+## <a name="authentication-component"></a>`Authentication` cm6long
+
+`Authentication`Składnik ( `Pages/Authentication.razor` ) obsługuje operacje zdalnego uwierzytelniania i zezwala aplikacji na:
+
+* Skonfiguruj trasy aplikacji dla Stanów uwierzytelniania.
+* Ustaw zawartość interfejsu użytkownika dla Stanów uwierzytelniania.
+* Zarządzaj stanem uwierzytelniania.
+
+Akcje uwierzytelniania, takie jak rejestrowanie lub podpisywanie użytkownika, są przesyłane do Blazor <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorViewCore%601> składnika platformy, który zachowuje i kontroluje stan w ramach operacji uwierzytelniania.
+
+Aby uzyskać więcej informacji i przykładów, zobacz <xref:blazor/security/webassembly/additional-scenarios> .
+
+## <a name="authorization"></a>Authorization
 
 W Blazor WebAssembly aplikacjach można pominąć sprawdzanie autoryzacji, ponieważ wszystkie kody po stronie klienta mogą być modyfikowane przez użytkowników. Jest to samo prawdziwe dla wszystkich technologii aplikacji po stronie klienta, w tym dla struktur SPA skryptów JavaScript lub natywnych aplikacji dla dowolnego systemu operacyjnego.
 

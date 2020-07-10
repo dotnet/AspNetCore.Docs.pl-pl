@@ -4,7 +4,7 @@ author: juntaoluo
 description: Zapoznaj się z podstawowymi pojęciami dotyczącymi pisania usług gRPC Services przy użyciu języka C#.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
-ms.date: 07/03/2019
+ms.date: 07/09/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/basics
-ms.openlocfilehash: 08c755cf078fe71d09e8c7af2cc16f5c427495f1
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: a99e5c78e291469bdce5c2b5cfa6eec86caa9735
+ms.sourcegitcommit: 14c3d111f9d656c86af36ecb786037bf214f435c
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407294"
+ms.lasthandoff: 07/09/2020
+ms.locfileid: "86176293"
 ---
 # <a name="grpc-services-with-c"></a>usługi gRPC w języku C\#
 
@@ -50,6 +50,13 @@ Rozważmy na przykład plik *Greeting. proto* używany w temacie [Rozpoczynanie 
 Plik * \* proto* jest dołączany do projektu przez dodanie go do `<Protobuf>` grupy Items:
 
 [!code-xml[](~/tutorials/grpc/grpc-start/sample/GrpcGreeter/GrpcGreeter.csproj?highlight=2&range=7-9)]
+
+Domyślnie `<Protobuf>` odwołanie generuje konkretny klient i klasę bazową usługi. Atrybut elementu odwołania `GrpcServices` może służyć do ograniczania generowania elementów zawartości w języku C#. Prawidłowe `GrpcServices` Opcje to:
+
+* `Both`(domyślnie, gdy nie istnieje)
+* `Server`
+* `Client`
+* `None`
 
 ## <a name="c-tooling-support-for-proto-files"></a>Obsługa narzędzi C# dla plików. proto
 
@@ -85,7 +92,7 @@ Domyślnie zasoby serwera i klienta są generowane dla każdego pliku * \* . pro
 
 Podobnie atrybut jest ustawiany na `Client` w projektach klientów.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:grpc/index>
 * <xref:tutorials/grpc/grpc-start>

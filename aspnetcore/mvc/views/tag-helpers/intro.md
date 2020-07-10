@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/intro
-ms.openlocfilehash: 36d8c3dd42ac9d0acdb93bba4bc39ab18ad5c52f
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: d2791422e50082eab51c0735e2209e5b829d22f2
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400898"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212506"
 ---
 # <a name="tag-helpers-in-aspnet-core"></a>Pomocnicy tagów w ASP.NET Core
 
@@ -243,7 +243,7 @@ Oznakowanie jest znacznie bardziej czytelne i łatwiejsze do odczytania, edycji 
 
 Weź pod uwagę grupę *poczty e-mail* :
 
-[!code-csharp[](intro/sample/Register.cshtml?range=12-18)]
+[!code-cshtml[](intro/sample/Register.cshtml?range=12-18)]
 
 Każdy atrybut "ASP-" ma wartość "email", ale "Poczta E-mail" nie jest ciągiem. W tym kontekście "Poczta E-mail" jest właściwością wyrażenia modelu C# dla `RegisterViewModel` .
 
@@ -275,7 +275,7 @@ Możesz dostosować czcionkę i kolorowanie przy użyciu **Tools**  >  **opcji**
 
 [!INCLUDE[](~/includes/built-in-TH.md)]
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Autorzy tagów](xref:mvc/views/tag-helpers/authoring)
 * [Praca z formularzami](xref:mvc/views/working-with-forms)

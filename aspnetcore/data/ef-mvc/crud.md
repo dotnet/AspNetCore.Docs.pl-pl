@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/crud
-ms.openlocfilehash: e7e4c4b15cca9612a552c58029ae8b34b79070d1
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: c33ff357ec6b467435325578047ac851a39e533e
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86060127"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212716"
 ---
 # <a name="tutorial-implement-crud-functionality---aspnet-mvc-with-ef-core"></a>Samouczek: Implementowanie funkcji CRUD — ASP.NET MVC z EF Core
 
@@ -102,11 +102,11 @@ Aby uzyskać więcej informacji na temat pomocników tagów, zobacz <xref:mvc/vi
 
 Otwórz *Widok/studenci/szczegóły. cshtml*. Każde pole jest wyświetlane przy użyciu `DisplayNameFor` i `DisplayFor` pomocników, jak pokazano w następującym przykładzie:
 
-[!code-html[](intro/samples/cu/Views/Students/Details.cshtml?range=13-18&highlight=2,5)]
+[!code-cshtml[](intro/samples/cu/Views/Students/Details.cshtml?range=13-18&highlight=2,5)]
 
 Po ostatnim polu i bezpośrednio przed tagiem zamykającym `</dl>` Dodaj następujący kod, aby wyświetlić listę rejestracji:
 
-[!code-html[](intro/samples/cu/Views/Students/Details.cshtml?range=31-52)]
+[!code-cshtml[](intro/samples/cu/Views/Students/Details.cshtml?range=31-52)]
 
 Jeśli Wcięcie kodu jest nieprawidłowe po wklejeniu kodu, naciśnij klawisze CTRL-K-D, aby je poprawić.
 
@@ -267,7 +267,7 @@ Jeśli jednostka ma powiązane dane, które również należy usunąć, upewnij 
 
 W obszarze *widoki/student/Delete. cshtml*Dodaj komunikat o błędzie między nagłówkiem H2 i nagłówkiem H3, jak pokazano w następującym przykładzie:
 
-[!code-html[](intro/samples/cu/Views/Students/Delete.cshtml?range=7-9&highlight=2)]
+[!code-cshtml[](intro/samples/cu/Views/Students/Delete.cshtml?range=7-9&highlight=2)]
 
 Uruchom aplikację, wybierz kartę **uczniowie** i kliknij hiperłącze **Usuń** :
 

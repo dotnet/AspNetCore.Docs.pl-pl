@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/view-components
-ms.openlocfilehash: 40902da52217505822abd9bfd889ecafdd4d88e0
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 272b5a89601a9e6ef24f3e60a3da7e2a40297c97
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407840"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86213117"
 ---
 # <a name="view-components-in-aspnet-core"></a>Wyświetl składniki w ASP.NET Core
 
@@ -100,7 +100,7 @@ Zalecamy, aby nazwa pliku widoku *default. cshtml* i użyć ścieżki *views/Sha
 
 Aby dostosować ścieżkę wyszukiwania widoku, zmodyfikuj Razor <xref:Microsoft.AspNetCore.Mvc.Razor.RazorViewEngineOptions.ViewLocationFormats> kolekcję. Aby na przykład wyszukać widoki w ścieżce "/Components/{View Component Name}/{View Name}", Dodaj nowy element do kolekcji:
 
-[!code-cs[](view-components/samples_snapshot/2.x/Startup.cs?name=snippet_ViewLocationFormats&highlight=4)]
+[!code-csharp[](view-components/samples_snapshot/2.x/Startup.cs?name=snippet_ViewLocationFormats&highlight=4)]
 
 W powyższym kodzie symbol zastępczy " {0} " reprezentuje ścieżkę "Components/{View Name}/{View Name}".
 
@@ -351,6 +351,6 @@ Każdy parametr w składniku widoku jest atrybutem wymaganym. Zobacz [ten proble
 * ViewComponent nie renderuje żadnych znaczników.
 * Nie zostaną zgłoszone żadne błędy.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Wstrzykiwanie zależności do widoków](xref:mvc/views/dependency-injection)

@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/advanced
-ms.openlocfilehash: 7233d6baf139d2ef362f4e3d1a56cf7f0e2514d2
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: ebeb581cf79f2d2ab60de7df43d042fa3185cd32
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403121"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212733"
 ---
 # <a name="tutorial-learn-about-advanced-scenarios---aspnet-mvc-with-ef-core"></a>Samouczek: informacje na temat scenariuszy zaawansowanych — ASP.NET MVC z EF Core
 
@@ -105,7 +105,7 @@ W oknie dialogowym **Dodaj nowy element** kliknij **ASP.NET Core** w obszarze **
 
 W obszarze *widoki/kursy/UpdateCourseCredits. cshtml*Zastąp kod szablonu następującym kodem:
 
-[!code-html[](intro/samples/cu/Views/Courses/UpdateCourseCredits.cshtml)]
+[!code-cshtml[](intro/samples/cu/Views/Courses/UpdateCourseCredits.cshtml)]
 
 Uruchom `UpdateCourseCredits` metodę, wybierając kartę **kursy** , a następnie dodając wartość "/UpdateCourseCredits" na końcu adresu URL na pasku adresu przeglądarki (na przykład: `http://localhost:5813/Courses/UpdateCourseCredits` ). Wprowadź liczbę w polu tekstowym:
 
@@ -181,7 +181,7 @@ Entity Framework określa, w jaki sposób jednostka została zmieniona (i w zwi�
 
 * ChangeTracker. wpisy
 
-Jeśli śledzisz dużą liczbę jednostek i wywołujesz jedną z tych metod wiele razy w pętli, możesz uzyskać znaczące ulepszenia wydajności, tymczasowo wyłączając automatyczne wykrywanie zmian przy użyciu `ChangeTracker.AutoDetectChangesEnabled` właściwości. Na przykład:
+Jeśli śledzisz dużą liczbę jednostek i wywołujesz jedną z tych metod wiele razy w pętli, możesz uzyskać znaczące ulepszenia wydajności, tymczasowo wyłączając automatyczne wykrywanie zmian przy użyciu `ChangeTracker.AutoDetectChangesEnabled` właściwości. Przykład:
 
 ```csharp
 _context.ChangeTracker.AutoDetectChangesEnabled = false;
@@ -261,7 +261,7 @@ Sprawdź parametry połączenia. Jeśli plik bazy danych został ręcznie usuni�
 
 [Pobierz lub Wyświetl ukończoną aplikację.](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 Aby uzyskać więcej informacji na temat EF Core, zobacz [dokumentację Entity Framework Core](/ef/core). Dostępna jest również książka: [Entity Framework Core w działaniu](https://www.manning.com/books/entity-framework-core-in-action).
 

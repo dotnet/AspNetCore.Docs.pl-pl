@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/logging/loggermessage
-ms.openlocfilehash: dc90c6cdbcea7c36079bcb4a032014998056b56d
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: cf391c773a1187dd96e3719e0fb11d6244c8e94d
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401171"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212779"
 ---
 # <a name="high-performance-logging-with-loggermessage-in-aspnet-core"></a>Rejestrowanie o wysokiej wydajności za pomocą LoggerMessage w ASP.NET Core
 
@@ -153,7 +153,7 @@ Przykładowa aplikacja ma przycisk **Wyczyść wszystko** , aby usunąć wszystk
 
 Włącz `IncludeScopes` w sekcji rejestratora konsoli *appsettings.jsna*:
 
-[!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/appsettings.json?highlight=3-5)]
+[!code-json[](loggermessage/samples/3.x/LoggerMessageSample/appsettings.json?highlight=3-5)]
 
 Aby utworzyć zakres dziennika, należy dodać pole do przechowywania <xref:System.Func%601> delegata dla zakresu. Przykładowa aplikacja tworzy pole o nazwie `_allQuotesDeletedScope` (*wewnętrzne/LoggerExtensions. cs*):
 
@@ -321,7 +321,7 @@ Przykładowa aplikacja ma przycisk **Wyczyść wszystko** , aby usunąć wszystk
 
 Włącz `IncludeScopes` w sekcji rejestratora konsoli *appsettings.jsna*:
 
-[!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/appsettings.json?highlight=3-5)]
+[!code-json[](loggermessage/samples/2.x/LoggerMessageSample/appsettings.json?highlight=3-5)]
 
 Aby utworzyć zakres dziennika, należy dodać pole do przechowywania <xref:System.Func%601> delegata dla zakresu. Przykładowa aplikacja tworzy pole o nazwie `_allQuotesDeletedScope` (*wewnętrzne/LoggerExtensions. cs*):
 
@@ -358,6 +358,6 @@ info: LoggerMessageSample.Pages.IndexModel[4]
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Rejestrowanie](xref:fundamentals/logging/index)

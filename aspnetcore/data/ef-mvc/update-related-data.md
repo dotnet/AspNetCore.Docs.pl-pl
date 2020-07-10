@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/update-related-data
-ms.openlocfilehash: 066bebf95a941fca5e7cc175c4c0d6d56abc9cb5
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: 754ca2f94b1abde30ae650c9c3bcf00499520383
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86060062"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212578"
 ---
 # <a name="tutorial-update-related-data---aspnet-mvc-with-ef-core"></a>Samouczek: aktualizowanie powiązanych danych — ASP.NET MVC z EF Core
 
@@ -87,19 +87,19 @@ Aby zoptymalizować wydajność szczegółów kursu i stron usuwania, Dodaj `AsN
 
 W obszarze *widoki/kursy/Utwórz. cshtml*Dodaj opcję "Wybierz dział" do listy rozwijanej **dział** , Zmień podpis z **DepartmentID** na **Wydział**i Dodaj komunikat weryfikacji.
 
-[!code-html[](intro/samples/cu/Views/Courses/Create.cshtml?highlight=2-6&range=29-34)]
+[!code-cshtml[](intro/samples/cu/Views/Courses/Create.cshtml?highlight=2-6&range=29-34)]
 
 W obszarze *widoki/kursy/Edytuj. cshtml*wprowadź tę samą zmianę dla pola działu, który właśnie został *utworzony. cshtml*.
 
 Ponadto w obszarze *widoki/kursy/Edytuj. cshtml*Dodaj pole numer kursu przed polem **tytuł** . Ponieważ numer kursu jest kluczem podstawowym, jest wyświetlany, ale nie można go zmienić.
 
-[!code-html[](intro/samples/cu/Views/Courses/Edit.cshtml?range=15-18)]
+[!code-cshtml[](intro/samples/cu/Views/Courses/Edit.cshtml?range=15-18)]
 
 W widoku edycji już istnieje pole ukryte ( `<input type="hidden">` ). Dodanie `<label>` pomocnika tagów nie eliminuje potrzeby ukrytego pola, ponieważ nie powoduje, że numer kursu ma być uwzględniony w opublikowanych danych, gdy użytkownik kliknie przycisk **Zapisz** na stronie **Edycja** .
 
 W obszarze *widoki/kursy/Usuń. cshtml*Dodaj pole numer kursu z góry i zmień identyfikator działu na nazwę działu.
 
-[!code-html[](intro/samples/cu/Views/Courses/Delete.cshtml?highlight=14-19,36)]
+[!code-cshtml[](intro/samples/cu/Views/Courses/Delete.cshtml?highlight=14-19,36)]
 
 W obszarze *widoki/kursy/szczegóły. cshtml*wprowadź tę samą zmianę, która właśnie została wykonana dla elementu *DELETE. cshtml*.
 
@@ -171,7 +171,7 @@ Kod wykonuje następujące czynności:
 
 W obszarze *widoki/instruktorzy/Edit. cshtml*Dodaj nowe pole do edytowania lokalizacji biura na końcu przed przyciskiem **Zapisz** :
 
-[!code-html[](intro/samples/cu/Views/Instructors/Edit.cshtml?range=30-34)]
+[!code-cshtml[](intro/samples/cu/Views/Instructors/Edit.cshtml?range=30-34)]
 
 Uruchom aplikację, wybierz kartę **Instruktorzy** , a następnie kliknij przycisk **Edytuj** na instruktorze. Zmień **lokalizację biura** , a następnie kliknij przycisk **Zapisz**.
 
@@ -235,7 +235,7 @@ W obszarze *widoki/instruktorzy/Edit. cshtml*Dodaj pole **kursów** z tablicą p
 > [!NOTE]
 > Po wklejeniu kodu w programie Visual Studio podziały wierszy mogą być zmieniane w sposób, który przerywa kod. Jeśli kod wygląda inaczej po wklejeniu, naciśnij klawisze Ctrl + Z jednokrotne, aby cofnąć automatyczne formatowanie. Spowoduje to naprawienie podziałów wierszy w taki sposób, aby wyglądały jak w tym miejscu. Wcięcie nie musi być doskonałe, ale `@:</tr><tr>` linie,, `@:<td>` `@:</td>` i `@:</tr>` muszą znajdować się w jednym wierszu, jak pokazano, lub wystąpi błąd w czasie wykonywania. Po wybraniu bloku nowego kodu naciśnij klawisz Tab trzy razy, aby wyrównać nowy kod z istniejącym kodem. Ten problem został rozwiązany w programie Visual Studio 2019.
 
-[!code-html[](intro/samples/cu/Views/Instructors/Edit.cshtml?range=35-61)]
+[!code-cshtml[](intro/samples/cu/Views/Instructors/Edit.cshtml?range=35-61)]
 
 Ten kod tworzy tabelę HTML z trzema kolumnami. W każdej kolumnie jest pole wyboru z podpisem zawierającym numer i tytuł kursu. Wszystkie pola wyboru mają taką samą nazwę ("selectedCourses"), która informuje spinacz modelu, że są one traktowane jako Grupa. Atrybut value każdego pola wyboru ma ustawioną wartość `CourseID` . Po opublikowaniu strony spinacz modelu przekazuje tablicę do kontrolera, który składa się z `CourseID` wartości tylko dla wybranych pól wyboru.
 
@@ -299,7 +299,7 @@ Jeśli zmodyfikujesz `CourseAssignments` Właściwość w ten sposób, możesz u
 
 W obszarze *widoki/instruktor/Create. cshtml*Dodaj pole tekstowe Lokalizacja biura i pola wyboru dla kursów przed przyciskiem Prześlij. Tak jak w przypadku strony edytowania [Popraw formatowanie, jeśli program Visual Studio ponownie sformatuje kod podczas jego wklejania](#notepad).
 
-[!code-html[](intro/samples/cu/Views/Instructors/Create.cshtml?range=29-61)]
+[!code-cshtml[](intro/samples/cu/Views/Instructors/Create.cshtml?range=29-61)]
 
 Przetestuj aplikację i Utwórz instruktora.
 

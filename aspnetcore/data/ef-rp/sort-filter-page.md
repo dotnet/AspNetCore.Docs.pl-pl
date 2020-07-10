@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/sort-filter-page
-ms.openlocfilehash: 0a87fe2f4cf7014cc15752dcf25545ce7aaa4687
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 496221bb4e34e1f9e4177d1934786a77d8c9b411
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408607"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212536"
 ---
 # <a name="part-3-razor-pages-with-ef-core-in-aspnet-core---sort-filter-paging"></a>Część 3, Razor strony z EF Core w ASP.NET Core — sortowanie, filtrowanie, stronicowanie
 
@@ -148,7 +148,7 @@ Przetestuj aplikację:
 
 * Wybierz pozycję **Wyszukaj**.
 
-Zwróć uwagę, że adres URL zawiera ciąg wyszukiwania. Na przykład:
+Zwróć uwagę, że adres URL zawiera ciąg wyszukiwania. Przykład:
 
 ```
 https://localhost:<port>/Students?SearchString=an
@@ -337,7 +337,7 @@ Metoda używa LINQ to Entities, aby określić kolumnę, według której ma zost
 
 Zastąp kod w *Students/index. cshtml*następującym wyróżnionym kodem:
 
-[!code-html[](intro/samples/cu21/Pages/Students/Index2.cshtml?highlight=17-19,25-27)]
+[!code-cshtml[](intro/samples/cu21/Pages/Students/Index2.cshtml?highlight=17-19,25-27)]
 
 Powyższy kod ma następujące działanie:
 
@@ -393,7 +393,7 @@ Istnieje spadek wydajności dotyczący wywoływania `ToUpper` . `ToUpper`Kod dod
 
 W obszarze *Pages/Students/index. cshtml*Dodaj następujący wyróżniony kod w celu utworzenia przycisku **wyszukiwania** i elementów Chrome.
 
-[!code-html[](intro/samples/cu21/Pages/Students/Index3.cshtml?highlight=14-23&range=1-25)]
+[!code-cshtml[](intro/samples/cu21/Pages/Students/Index3.cshtml?highlight=14-23&range=1-25)]
 
 Poprzedni kod używa `<form>` [pomocnika tagów](xref:mvc/views/tag-helpers/intro) do dodawania pola tekstowego wyszukiwania i przycisku. Domyślnie `<form>` pomocnik tagów przesyła dane formularza z wpisem. W przypadku wpisu POST parametry są przesyłane w treści wiadomości HTTP, a nie w adresie URL. Gdy jest używany protokół HTTP GET, dane formularza są przesyłane w adresie URL jako ciągi zapytań. Przekazywanie danych za pomocą ciągów zapytań umożliwia użytkownikom tworzenie zakładek w adresie URL. [Wskazówki dotyczące W3C](https://www.w3.org/2001/tag/doc/whenToUseGet.html) zaleca się, aby pobieranie nie było wynikiem aktualizacji.
 
@@ -471,15 +471,15 @@ Dwa znaki zapytania `PaginatedList.CreateAsync` reprezentują [operator łączen
 
 Zaktualizuj znaczniki w *uczniów/index. cshtml*. Zmiany są wyróżnione:
 
-[!code-html[](intro/samples/cu21/Pages/Students/Index.cshtml?highlight=28-31,37-40,68-999)]
+[!code-cshtml[](intro/samples/cu21/Pages/Students/Index.cshtml?highlight=28-31,37-40,68-999)]
 
 Linki nagłówka kolumny używają ciągu zapytania do przekazywania bieżącego ciągu wyszukiwania do `OnGetAsync` metody, aby użytkownik mógł sortować wyniki filtru:
 
-[!code-html[](intro/samples/cu21/Pages/Students/Index.cshtml?range=28-31)]
+[!code-cshtml[](intro/samples/cu21/Pages/Students/Index.cshtml?range=28-31)]
 
 Przyciski stronicowania są wyświetlane przez pomocników tagów:
 
-[!code-html[](intro/samples/cu21/Pages/Students/Index.cshtml?range=72-)]
+[!code-cshtml[](intro/samples/cu21/Pages/Students/Index.cshtml?range=72-)]
 
 Uruchom aplikację i przejdź do strony uczniów.
 
@@ -525,7 +525,7 @@ Instrukcja LINQ grupuje jednostki studenta według daty rejestracji, oblicza lic
 
 Zastąp kod w pliku *Pages/about. cshtml* następującym kodem:
 
-[!code-html[](intro/samples/cu21/Pages/About.cshtml)]
+[!code-cshtml[](intro/samples/cu21/Pages/About.cshtml)]
 
 Uruchom aplikację i przejdź do strony informacje. W tabeli zostanie wyświetlona liczba uczniów dla każdej daty rejestracji.
 
@@ -533,7 +533,7 @@ Jeśli wystąpią problemy, których nie można rozwiązać, Pobierz [ukończon�
 
 ![Informacje o stronie](sort-filter-page/_static/about.png)
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Debugowanie ASP.NET Core 2. x](https://github.com/dotnet/AspNetCore.Docs/issues/4155)
 * [Wersja tego samouczka usługi YouTube](https://www.youtube.com/watch?v=MDs7PFpoMqI)

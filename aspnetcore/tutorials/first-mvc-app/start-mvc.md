@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/start-mvc
-ms.openlocfilehash: 01321d68defafbe79371250669f921307bcfdba6
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: d4eb1744b1186704603430584b3da0793f90ee49
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407047"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86213084"
 ---
 # <a name="get-started-with-aspnet-core-mvc"></a>Wprowadzenie do ASP.NET Core MVC
 
@@ -106,14 +106,12 @@ Samouczek założono familarity z VS Code. Aby uzyskać więcej informacji, zoba
 
   ![Wybieranie szablonu aplikacji sieci Web macOS](start-mvc/_static/web_app_template_vsmac.png)
 
-* Potwierdź następujące konfiguracje:
+* W oknie dialogowym **Konfigurowanie nowej aplikacji sieci Web** :
 
-  * **Platforma docelowa** jest ustawiona na **platformę .NET Core 3,1**.
-  * **Uwierzytelnianie** jest ustawione na wartość **bez uwierzytelniania**.
-   
+  * Upewnij się, że **uwierzytelnianie** jest ustawione na wartość **bez uwierzytelniania**.
+  * Jeśli jest prezentowana opcja wyboru **platformy docelowej**, wybierz najnowszą wersję 3. x.
+
   Wybierz pozycję **Dalej**.
-
-  ![wybór macOS .NET Core 3,1](start-mvc/_static/new_project_31_vsmac.png)
 
 * Nazwij projekt **MvcMovie**, a następnie wybierz pozycję **Utwórz**.
 
@@ -121,7 +119,7 @@ Samouczek założono familarity z VS Code. Aby uzyskać więcej informacji, zoba
 
 ---
 
-### <a name="run-the-app"></a>Uruchomienie aplikacji
+### <a name="run-the-app"></a>Uruchamianie aplikacji
 
 # <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
@@ -259,15 +257,18 @@ Samouczek założono familarity z VS Code. Aby uzyskać więcej informacji, zoba
 
 * W Visual Studio dla komputerów Mac starszej niż wersja 8,6 Wybierz **.NET Core**pozycję  >  aplikacja sieci Web**aplikacji**.NET Core  >  **(Model-View-Controller)**  >  **dalej**. W wersji 8,6 lub nowszej wybierz kolejno pozycje **Sieć Web i aplikacja konsoli**  >  **App**  >  **aplikacji sieci Web (Model-View-Controller)**  >  **dalej**.
 
-* W oknie dialogowym **Konfigurowanie nowego interfejsu API sieci Web ASP.NET Core** zaakceptuj domyślną **platformę docelową** programu **.NET Core 2,2**.
+* W oknie dialogowym **Konfigurowanie nowej aplikacji sieci Web** :
 
-  ![wybór macOS .NET Core 2,2](./start-mvc/_static/new_project_22_vsmac.png)
+  * Upewnij się, że **uwierzytelnianie** jest ustawione na wartość **bez uwierzytelniania**.
+  * Jeśli jest prezentowana opcja wyboru **platformy docelowej**, wybierz najnowszą wersję 2. x.
+
+  Wybierz pozycję **Dalej**.
 
 * Nazwij projekt **MvcMovie**, a następnie wybierz pozycję **Utwórz**.
 
 ---
 
-### <a name="run-the-app"></a>Uruchomienie aplikacji
+### <a name="run-the-app"></a>Uruchamianie aplikacji
 
 # <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
@@ -285,7 +286,7 @@ Wybierz **kombinację klawiszy CTRL-F5** , aby uruchomić aplikację w trybie be
 
   ![IIS Express](start-mvc/_static/iis_express.png)
 
-* Wybierz pozycję **Akceptuj** , aby wyrazić zgodę na śledzenie. Ta aplikacja nie śledzi informacji osobistych. Kod wygenerowany przez szablon zawiera zasoby, które pomagają spełnić [ogólne rozporządzenie o ochronie danych (Rodo)](xref:security/gdpr).
+* Wybierz pozycję **Zaakceptuj**, aby wyrazić zgodę na śledzenie. Ta aplikacja nie śledzi informacji osobistych. Kod wygenerowany przez szablon zawiera zasoby, które pomagają spełnić [ogólne rozporządzenie o ochronie danych (Rodo)](xref:security/gdpr).
 
   ![Strona główna lub indeks](start-mvc/_static/privacy.png)
 
@@ -303,7 +304,7 @@ Naciśnij klawisze CTRL + F5, aby uruchomić bez debugera.
 
   Uruchamianie aplikacji za pomocą klawiszy CTRL + F5 (tryb bez debugowania) umożliwia wprowadzanie zmian w kodzie, zapisywanie pliku, odświeżanie przeglądarki i wyświetlanie zmian w kodzie. Wielu deweloperów woli używać trybu niedebugowania do odświeżania strony i wyświetlania zmian.
 
-* Wybierz pozycję **Akceptuj** , aby wyrazić zgodę na śledzenie. Ta aplikacja nie śledzi informacji osobistych. Kod wygenerowany przez szablon zawiera zasoby, które pomagają spełnić [ogólne rozporządzenie o ochronie danych (Rodo)](xref:security/gdpr).
+* Wybierz pozycję **Zaakceptuj**, aby wyrazić zgodę na śledzenie. Ta aplikacja nie śledzi informacji osobistych. Kod wygenerowany przez szablon zawiera zasoby, które pomagają spełnić [ogólne rozporządzenie o ochronie danych (Rodo)](xref:security/gdpr).
 
   ![Strona główna lub indeks](start-mvc/_static/privacy.png)
 
@@ -320,7 +321,7 @@ Wybierz pozycję **Uruchom**  >  **Uruchom bez debugowania** , aby uruchomić ap
 * Na pasku adresu są wyświetlane inne elementy `localhost:port#` , takie jak `example.com` . To dlatego, że `localhost` jest standardową nazwą hosta dla komputera lokalnego. Podczas tworzenia projektu internetowego w programie Visual Studio dla serwera internetowego jest używany losowy port. Po uruchomieniu aplikacji zobaczysz inny numer portu.
 * Aplikację można uruchomić w trybie debugowania lub bez debugowania z menu **Run (uruchamianie** ).
 
-* Wybierz pozycję **Akceptuj** , aby wyrazić zgodę na śledzenie. Ta aplikacja nie śledzi informacji osobistych. Kod wygenerowany przez szablon zawiera zasoby, które pomagają spełnić [ogólne rozporządzenie o ochronie danych (Rodo)](xref:security/gdpr).
+* Wybierz pozycję **Zaakceptuj**, aby wyrazić zgodę na śledzenie. Ta aplikacja nie śledzi informacji osobistych. Kod wygenerowany przez szablon zawiera zasoby, które pomagają spełnić [ogólne rozporządzenie o ochronie danych (Rodo)](xref:security/gdpr).
 
   ![Strona główna lub indeks](./start-mvc/_static/output_privacy_macos.png)
 

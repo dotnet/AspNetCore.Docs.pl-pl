@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/read-related-data
-ms.openlocfilehash: 14b28f04f4077cb5622858dad1bd18b81b198f3d
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 171607544bfe89fdd0a1ed9efb68f7a532f9aee1
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405799"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212657"
 ---
 # <a name="part-6-razor-pages-with-ef-core-in-aspnet-core---read-related-data"></a>Część 6 Razor strony z EF Core w ASP.NET Core — Odczytaj powiązane dane
 
@@ -56,7 +56,7 @@ Istnieje kilka sposobów, EF Core mogą ładować powiązane dane do właściwo�
 
   **Uwaga:** EF Core automatycznie naprawia właściwości nawigacji do wszystkich innych jednostek, które zostały wcześniej załadowane do wystąpienia kontekstu. Nawet jeśli dane dla właściwości nawigacji *nie* są jawnie uwzględniane, właściwość można nadal wypełnić, jeśli niektóre lub wszystkie powiązane jednostki zostały wcześniej załadowane.
 
-* [Jawne ładowanie](/ef/core/querying/related-data#explicit-loading). Gdy obiekt jest najpierw odczytywany, powiązane dane nie są pobierane. Kod musi być zapisany, aby można było pobrać powiązane dane, gdy jest to konieczne. Jawne ładowanie z oddzielnymi zapytania powoduje wysłanie wielu zapytań do bazy danych. W przypadku jawnego ładowania kod określa właściwości nawigacji do załadowania. Użyj `Load` metody, aby przeprowadzić jawne ładowanie. Na przykład:
+* [Jawne ładowanie](/ef/core/querying/related-data#explicit-loading). Gdy obiekt jest najpierw odczytywany, powiązane dane nie są pobierane. Kod musi być zapisany, aby można było pobrać powiązane dane, gdy jest to konieczne. Jawne ładowanie z oddzielnymi zapytania powoduje wysłanie wielu zapytań do bazy danych. W przypadku jawnego ładowania kod określa właściwości nawigacji do załadowania. Użyj `Load` metody, aby przeprowadzić jawne ładowanie. Przykład:
 
   ![Przykład jawnego ładowania](read-related-data/_static/explicit-loading.png)
 
@@ -369,7 +369,7 @@ Istnieje kilka sposobów, EF Core mogą ładować powiązane dane do właściwo�
 
   Uwaga: EF Core automatycznie naprawia właściwości nawigacji do wszystkich innych jednostek, które zostały wcześniej załadowane do wystąpienia kontekstu. Nawet jeśli dane dla właściwości nawigacji *nie* są jawnie uwzględniane, właściwość można nadal wypełnić, jeśli niektóre lub wszystkie powiązane jednostki zostały wcześniej załadowane.
 
-* [Jawne ładowanie](/ef/core/querying/related-data#explicit-loading). Gdy obiekt jest najpierw odczytywany, powiązane dane nie są pobierane. Kod musi być zapisany, aby można było pobrać powiązane dane, gdy jest to konieczne. Jawne ładowanie z oddzielnymi zapytaniami powoduje wysłanie wielu zapytań do bazy danych. W przypadku jawnego ładowania kod określa właściwości nawigacji do załadowania. Użyj `Load` metody, aby przeprowadzić jawne ładowanie. Na przykład:
+* [Jawne ładowanie](/ef/core/querying/related-data#explicit-loading). Gdy obiekt jest najpierw odczytywany, powiązane dane nie są pobierane. Kod musi być zapisany, aby można było pobrać powiązane dane, gdy jest to konieczne. Jawne ładowanie z oddzielnymi zapytaniami powoduje wysłanie wielu zapytań do bazy danych. W przypadku jawnego ładowania kod określa właściwości nawigacji do załadowania. Użyj `Load` metody, aby przeprowadzić jawne ładowanie. Przykład:
 
   ![Przykład jawnego ładowania](read-related-data/_static/explicit-loading.png)
 
@@ -420,7 +420,7 @@ Poprzedni kod dodaje `AsNoTracking` . `AsNoTracking`zwiększa wydajność, ponie
 
 Aktualizuj *strony/kursy/index. cshtml* z następującymi wyróżnionymi znacznikami:
 
-[!code-html[](intro/samples/cu/Pages/Courses/Index.cshtml?highlight=4,7,15-17,34-36,44)]
+[!code-cshtml[](intro/samples/cu/Pages/Courses/Index.cshtml?highlight=4,7,15-17,34-36,44)]
 
 W kodzie szkieletowym wprowadzono następujące zmiany:
 
@@ -515,7 +515,7 @@ Zapytanie zawiera dwa:
 
 Aktualizowanie *stron/instruktorów/index. cshtml* przy użyciu następującego znacznika:
 
-[!code-html[](intro/samples/cu/Pages/Instructors/IndexRRD.cshtml?range=1-65&highlight=1,5,8,16-21,25-32,43-57)]
+[!code-cshtml[](intro/samples/cu/Pages/Instructors/IndexRRD.cshtml?range=1-65&highlight=1,5,8,16-21,25-32,43-57)]
 
 Poprzedzające znaczniki wprowadzają następujące zmiany:
 
@@ -595,7 +595,7 @@ Poniższy kod wypełnia właściwość modelu widoku w `Enrollments` przypadku w
 
 Dodaj następujący znacznik na końcu strony */instruktorów/index. cshtml* Razor :
 
-[!code-html[](intro/samples/cu/Pages/Instructors/IndexRRD.cshtml?range=60-102&highlight=7-999)]
+[!code-cshtml[](intro/samples/cu/Pages/Instructors/IndexRRD.cshtml?range=60-102&highlight=7-999)]
 
 Powyższy znacznik wyświetla listę kursów związanych z instruktorem w przypadku wybrania instruktora.
 
@@ -611,7 +611,7 @@ Zaktualizuj zapytanie w `OnGetAsync` metodzie na *stronach/instruktorów/index. 
 
 Aktualizowanie *stron/instruktorów/index. cshtml*. Dodaj następujący znacznik na końcu pliku:
 
-[!code-html[](intro/samples/cu/Pages/Instructors/IndexRRD.cshtml?range=103-)]
+[!code-cshtml[](intro/samples/cu/Pages/Instructors/IndexRRD.cshtml?range=103-)]
 
 Powyższy znacznik wyświetla listę studentów, którzy są zarejestrowani w wybranym kursie.
 
@@ -650,7 +650,7 @@ Testowanie aplikacji. Z perspektywy użytkowników aplikacja zachowuje się iden
 
 W następnym samouczku pokazano, jak zaktualizować powiązane dane.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Wersja tego samouczka usługi YouTube (part1)](https://www.youtube.com/watch?v=PzKimUDmrvE)
 * [Wersja tego samouczka usługi YouTube (part2)](https://www.youtube.com/watch?v=xvDDrIHv5ko)

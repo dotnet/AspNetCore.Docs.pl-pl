@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/sort-filter-page
-ms.openlocfilehash: 45aabc644fbeaeaa31d534877ba93cb0611f3f34
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 24643931ed84ac257d98ceb8cc6c64d0767cfc14
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401340"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212597"
 ---
 # <a name="tutorial-add-sorting-filtering-and-paging---aspnet-mvc-with-ef-core"></a>Samouczek: Dodawanie sortowania, filtrowania i stronicowania — ASP.NET MVC z EF Core
 
@@ -78,7 +78,7 @@ Ten kod może uzyskać pełne informacje z dużą liczbą kolumn. [W ostatnim sa
 
 Zastąp kod w *widokach/uczniów/index. cshtml*, używając poniższego kodu do dodawania hiperłączy nagłówka kolumny. Zmienione wiersze są wyróżnione.
 
-[!code-html[](intro/samples/cu/Views/Students/Index2.cshtml?highlight=16,22)]
+[!code-cshtml[](intro/samples/cu/Views/Students/Index2.cshtml?highlight=16,22)]
 
 Ten kod używa informacji we `ViewData` właściwościach do konfigurowania hiperłączy z odpowiednimi wartościami ciągu zapytania.
 
@@ -107,7 +107,7 @@ Dodano `searchString` parametr do `Index` metody. Wartość ciągu wyszukiwania 
 
 W obszarze *widoki/uczniów/index. cshtml*Dodaj wyróżniony kod bezpośrednio przed otwierającym tagiem tabeli, aby utworzyć podpis, pole tekstowe i przycisk **wyszukiwania** .
 
-[!code-html[](intro/samples/cu/Views/Students/Index3.cshtml?range=9-23&highlight=5-13)]
+[!code-cshtml[](intro/samples/cu/Views/Students/Index3.cshtml?range=9-23&highlight=5-13)]
 
 Ten kod używa `<form>` [pomocnika tagów](xref:mvc/views/tag-helpers/intro) do dodawania pola tekstowego wyszukiwania i przycisku. Domyślnie `<form>` pomocnik tagów przesyła dane formularza z wpisem, co oznacza, że parametry są przesyłane w treści wiadomości HTTP, a nie w adresie URL jako ciągi zapytań. Po określeniu protokołu HTTP GET dane formularza są przesyłane w adresie URL jako ciągi zapytań, co umożliwia użytkownikom tworzenie zakładek w adresie URL. Wskazówki dotyczące W3C zaleca się użycie GET, gdy akcja nie spowoduje aktualizacji.
 
@@ -186,7 +186,7 @@ return View(await PaginatedList<Student>.CreateAsync(students.AsNoTracking(), pa
 
 W obszarze *widoki/studenci/index. cshtml*Zastąp istniejący kod następującym kodem. Zmiany są wyróżnione.
 
-[!code-html[](intro/samples/cu/Views/Students/Index.cshtml?highlight=1,27,30,33,61-79)]
+[!code-cshtml[](intro/samples/cu/Views/Students/Index.cshtml?highlight=1,27,30,33,61-79)]
 
 `@model`Instrukcja w górnej części strony określa, że widok pobiera teraz `PaginatedList<T>` obiekt zamiast `List<T>` obiektu.
 
@@ -250,7 +250,7 @@ Instrukcja LINQ grupuje jednostki studenta według daty rejestracji, oblicza lic
 
 Dodaj plik *views/Home/about. cshtml* o następującym kodzie:
 
-[!code-html[](intro/samples/cu/Views/Home/About.cshtml)]
+[!code-cshtml[](intro/samples/cu/Views/Home/About.cshtml)]
 
 Uruchom aplikację i przejdź do strony informacje. W tabeli zostanie wyświetlona liczba uczniów dla każdej daty rejestracji.
 

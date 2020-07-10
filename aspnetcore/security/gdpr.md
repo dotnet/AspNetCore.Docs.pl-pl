@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/gdpr
-ms.openlocfilehash: 0fef14388f83d8b4c708194954f2b75b2164b746
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 8a7041a976ea9f0e99bfd1eba792d0e919eaf6d3
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404499"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212820"
 ---
 # <a name="eu-general-data-protection-regulation-gdpr-support-in-aspnet-core"></a>Obsługa Ogólne rozporządzenie o ochronie danych UE (Rodo) w ASP.NET Core
 
@@ -86,7 +86,7 @@ RazorStrony i projekty MVC utworzone przy użyciu szablonów projektu obejmują 
 
 Widok częściowy * \_ CookieConsentPartial. cshtml* :
 
-[!code-html[](gdpr/sample/RP2.2/Pages/Shared/_CookieConsentPartial.cshtml)]
+[!code-cshtml[](gdpr/sample/RP2.2/Pages/Shared/_CookieConsentPartial.cshtml)]
 
 Ta część częściowa:
 
@@ -140,20 +140,20 @@ Niektóre bazy danych i mechanizmy magazynu umożliwiają szyfrowanie w spoczynk
 * Jest najłatwiejszym i najbezpieczniejszą opcją.
 * Umożliwia bazie danych zarządzanie kluczami i szyfrowaniem.
 
-Na przykład:
+Przykład:
 
 * Program Microsoft SQL i usługa Azure SQL zapewniają [transparent Data Encryption](/sql/relational-databases/security/encryption/transparent-data-encryption) (TDE).
 * [Usługa SQL Azure domyślnie szyfruje bazę danych](https://azure.microsoft.com/updates/newly-created-azure-sql-databases-encrypted-by-default/)
 * [Obiekty blob, pliki, tabele i queue storage platformy Azure domyślnie są szyfrowane](https://azure.microsoft.com/blog/announcing-default-encryption-for-azure-blobs-files-table-and-queue-storage/).
 
-W przypadku baz danych, które nie zapewniają wbudowanego szyfrowania w spoczynku, może być możliwe użycie szyfrowania dysków w celu zapewnienia tej samej ochrony. Na przykład:
+W przypadku baz danych, które nie zapewniają wbudowanego szyfrowania w spoczynku, może być możliwe użycie szyfrowania dysków w celu zapewnienia tej samej ochrony. Przykład:
 
 * [Funkcja BitLocker dla systemu Windows Server](/windows/security/information-protection/bitlocker/bitlocker-how-to-deploy-on-windows-server)
 * W systemie Linux:
   * [eCryptfs](https://launchpad.net/ecryptfs)
   * [EncFs](https://github.com/vgough/encfs).
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Microsoft.com/GDPR](https://www.microsoft.com/trustcenter/Privacy/GDPR)
 * [Rodo — Dodawanie przycisku odwołaj zgodę w ASP.NET Core](https://www.joeaudette.com/blog/2018/08/28/gdpr---adding-a-revoke-consent-button-in-aspnet-core)

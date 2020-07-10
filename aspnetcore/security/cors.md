@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/cors
-ms.openlocfilehash: 0a2be31092ab491e23ab9de9be676b5b4d3963ee
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: dc8e68ef482025443147eeb27bd3f245c1a1a5ed
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86060283"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212886"
 ---
 # <a name="enable-cross-origin-requests-cors-in-aspnet-core"></a>Włącz żądania między źródłami (CORS) w ASP.NET Core
 
@@ -617,7 +617,7 @@ Poniżej `TodoItems2Controller` znajdują się podobne punkty końcowe, ale zawi
 
 Przetestuj poprzedni kod ze [strony testowej](https://cors1.azurewebsites.net/test?number=2) wdrożonej próbki. Z listy rozwijanej **kontroler** wybierz kolejno pozycje **Inspekcja wstępna** , a następnie **Ustaw kontroler**. Wszystkie wywołania mechanizmu CORS do `TodoItems2Controller` punktów końcowych powiodły się.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Współużytkowanie zasobów między źródłami (CORS)](https://developer.mozilla.org/docs/Web/HTTP/CORS)
 * [Wprowadzenie do modułu CORS usług IIS](https://blogs.iis.net/iisteam/getting-started-with-the-iis-cors-module)
@@ -998,7 +998,7 @@ Aby przetestować CORS:
 1. Utwórz projekt aplikacji sieci Web ( Razor strony lub MVC). Przykład używa Razor stron. Aplikację sieci Web można utworzyć w tym samym rozwiązaniu co projekt interfejsu API.
 1. Dodaj następujący wyróżniony kod do pliku *index. cshtml* :
 
-  [!code-csharp[](cors/sample/Cors/ClientApp/Pages/Index2.cshtml?highlight=7-99)]
+  [!code-cshtml[](cors/sample/Cors/ClientApp/Pages/Index2.cshtml?highlight=7-99)]
 
 1. W poprzednim kodzie Zastąp ciąg `url: 'https://<web app>.azurewebsites.net/api/values/1',` adresem URL wdrożonej aplikacji.
 1. Wdróż projekt interfejsu API. Na przykład [Wdróż na platformie Azure](xref:host-and-deploy/azure-apps/index).
@@ -1023,7 +1023,7 @@ Punkty końcowe z obsługą mechanizmu CORS można testować za pomocą narzędz
 
 W przypadku wdrażania w programie IIS należy uruchomić funkcję CORS przed uwierzytelnianiem systemu Windows, jeśli serwer nie jest skonfigurowany do zezwalania na dostęp anonimowy. Aby zapewnić obsługę tego scenariusza, należy zainstalować i skonfigurować [moduł CORS usług IIS](https://www.iis.net/downloads/microsoft/iis-cors-module) dla aplikacji.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Współużytkowanie zasobów między źródłami (CORS)](https://developer.mozilla.org/docs/Web/HTTP/CORS)
 * [Wprowadzenie do modułu CORS usług IIS](https://blogs.iis.net/iisteam/getting-started-with-the-iis-cors-module)

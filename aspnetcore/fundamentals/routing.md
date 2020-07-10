@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/routing
-ms.openlocfilehash: 25464817314f79c5bfd11d982cc9b09a3c72df15
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: 18f1aee5ac33b17914bd182e46453120e14b31ab
+ms.sourcegitcommit: 14c3d111f9d656c86af36ecb786037bf214f435c
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86060348"
+ms.lasthandoff: 07/09/2020
+ms.locfileid: "86176208"
 ---
 # <a name="routing-in-aspnet-core"></a>Routing w ASP.NET Core
 
@@ -73,7 +73,7 @@ W powyższym przykładzie użyto pojedynczej *trasy do* punktu końcowego kodu p
   * `Hello World!`jest zapisywana w odpowiedzi HTTP. Domyślnie główny adres URL `/` to `https://localhost:5001/` .
 * Jeśli metoda żądania nie jest `GET` lub nie jest głównym adresem URL, nie są `/` zwracane żadne dopasowania tras i HTTP 404.
 
-### <a name="endpoint"></a>Endpoint
+### <a name="endpoint"></a>Punkt końcowy
 
 <a name="endpoint"></a>
 
@@ -84,7 +84,7 @@ W powyższym przykładzie użyto pojedynczej *trasy do* punktu końcowego kodu p
 
 Punkty końcowe, które mogą być dopasowane i wykonywane przez aplikację, są skonfigurowane w programie `UseEndpoints` . Na przykład, <xref:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions.MapGet*> , <xref:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions.MapPost*> i [podobne metody](xref:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions) Połącz delegatów żądań z systemem routingu.
 Do łączenia funkcji ASP.NET Core Framework z systemem routingu można używać dodatkowych metod:
-- [MapRazorPages dla Razor stron](xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapRazorPages*)
+- [RazorStrony Razor mapy stron](xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapRazorPages*)
 - [MapControllers dla kontrolerów](xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers*)
 - [MapHub \<THub> dlaSignalR](xref:Microsoft.AspNetCore.SignalR.HubRouteBuilder.MapHub*) 
 - [MapGrpcService \<TService> dla gRPC](xref:grpc/aspnetcore)
@@ -936,7 +936,7 @@ Deklarowanie własnego typu pozwala na dodanie własnych funkcji specyficznych d
 app.UseEndpoints(endpoints =>
 {
     // Your framework
-    endpoints.MapMyFramework(...).RequrireAuthorization()
+    endpoints.MapMyFramework(...).RequireAuthorization()
                                  .WithMyFrameworkFeature(awesome: true);
 
     endpoints.MapHealthChecks("/healthz");
@@ -988,7 +988,7 @@ app.UseAuthorization(new AuthorizationPolicy() { ... });
 app.UseEndpoints(endpoints =>
 {
     // Your framework
-    endpoints.MapMyFramework(...).RequrireAuthorization();
+    endpoints.MapMyFramework(...).RequireAuthorization();
 });
 ```
 

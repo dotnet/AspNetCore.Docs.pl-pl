@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/authoring
-ms.openlocfilehash: 5e250debb5c4c2ef00b844557d31ed8281d2ff2f
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: e630bf4b0c121796315be077623abae73d240b37
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407593"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212467"
 ---
 # <a name="author-tag-helpers-in-aspnet-core"></a>Tworzenie pomocników tagów w ASP.NET Core
 
@@ -39,7 +39,7 @@ Pomocnik tagu jest klasą, która implementuje `ITagHelper` interfejs. Jednak po
 
 ## <a name="a-minimal-tag-helper"></a>Minimalny pomocnik tagów
 
-W tej sekcji napiszesz pomocnika tagu, który aktualizuje tag wiadomości e-mail. Na przykład:
+W tej sekcji napiszesz pomocnika tagu, który aktualizuje tag wiadomości e-mail. Przykład:
 
 ```html
 <email>Support</email>
@@ -87,14 +87,14 @@ Oznacza to, że tag zakotwiczony, który tworzy to łącze e-mail. Możesz to zr
 
 <!--
 the following snippet uses TagHelpers3 and should use TagHelpers (not the 3)
-    [!code-html[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/_ViewImports.cshtml?highlight=3&range=1-3)]
+    [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/_ViewImports.cshtml?highlight=3&range=1-3)]
 -->
 
 Aby dodać pomocnika tagów do widoku przy użyciu FQN, należy najpierw dodać FQN ( `AuthoringTagHelpers.TagHelpers.EmailTagHelper` ), a następnie **nazwę zestawu** (*AuthoringTagHelpers*, niekoniecznie `namespace` ). Większość deweloperów woli używać składni wieloznacznej. [Wprowadzenie do](intro.md) pomocników tagów prowadzi do szczegółów dotyczących dodawania, usuwania, hierarchii i symboli wieloznacznych.
 
 1. Zaktualizuj znaczniki w pliku *views/Home/Contact. cshtml* przy użyciu następujących zmian:
 
-   [!code-html[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/Contact.cshtml?highlight=15,16&range=1-17)]
+   [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/Contact.cshtml?highlight=15,16&range=1-17)]
 
 1. Uruchom aplikację i użyj ulubionej przeglądarki, aby wyświetlić źródło HTML, aby sprawdzić, czy Tagi poczty e-mail zostały zamienione na znaczniki zakotwiczenia (na przykład `<a>Support</a>` ). *Obsługa* i *Marketing* są renderowane jako linki, ale nie mają `href` atrybutu, aby uczynić je funkcjonalnymi. Naprawimy to w następnej sekcji.
 
@@ -118,7 +118,7 @@ To podejście działa dla atrybutu "href", o ile nie istnieje obecnie w kolekcji
 
 1. Zaktualizuj znaczniki w pliku *views/Home/Contact. cshtml* przy użyciu następujących zmian:
 
-   [!code-html[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/ContactCopy.cshtml?highlight=15,16)]
+   [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/ContactCopy.cshtml?highlight=15,16)]
 
 1. Uruchom aplikację i sprawdź, czy wygeneruje ona odpowiednie linki.
 
@@ -147,7 +147,7 @@ W tej sekcji zapiszemy pomocnika asynchronicznej poczty e-mail.
 
 1. Wprowadź następujące zmiany w pliku *views/Home/Contact. cshtml* , aby pomocnik tagów mógł uzyskać docelowy adres e-mail.
 
-   [!code-html[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/Contact.cshtml?highlight=15,16&range=1-17)]
+   [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/Contact.cshtml?highlight=15,16&range=1-17)]
 
 1. Uruchom aplikację i sprawdź, czy generuje ona prawidłowe linki do poczty e-mail.
 
@@ -163,7 +163,7 @@ W tej sekcji zapiszemy pomocnika asynchronicznej poczty e-mail.
 
 1. Zmodyfikuj widok *about. cshtml* , aby zawierał `bold` wartość atrybutu. Ukończony kod jest przedstawiony poniżej.
 
-   [!code-html[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/AboutBoldOnly.cshtml?highlight=7)]
+   [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/AboutBoldOnly.cshtml?highlight=7)]
 
 1. Uruchom aplikację. Możesz użyć ulubionej przeglądarki, aby sprawdzić źródło i sprawdzić adiustację.
 
@@ -225,7 +225,7 @@ Można również użyć, `[HtmlTargetElement]` Aby zmienić nazwę elementu wska
 
 1. Dodaj następujący znacznik do widoku *Informacje o. cshtml* . Wyróżnione znaczniki wyświetlają informacje o witrynie sieci Web.
 
-   [!code-html[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/About.cshtml?highlight=1,4-8, 18-999)]
+   [!code-cshtml[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/About.cshtml?highlight=1,4-8, 18-999)]
 
    > [!NOTE]
    > W Razor poniższym znaczniku:
@@ -251,7 +251,7 @@ Pomocnik tagów warunku renderuje dane wyjściowe, gdy przeszedł wartość true
 
 1. Zastąp zawartość pliku *viewss/Home/index. cshtml* następującym znacznikiem:
 
-   [!code-csharp[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/Index.cshtml)]
+   [!code-cshtml[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/Index.cshtml)]
 
 1. Zastąp `Index` metodę w `Home` kontrolerze następującym kodem:
 
@@ -281,7 +281,7 @@ Ponieważ te dwa pomocnicy są ściśle powiązane i w przyszłości mogą się 
 
 1. Dodaj następujący znacznik na końcu pliku *views/Home/Contact. cshtml* :
 
-   [!code-html[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/Contact.cshtml?highlight=19)]
+   [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/Contact.cshtml?highlight=19)]
 
 1. Uruchom aplikację i sprawdź, czy pomocnik tagów prawidłowo renderuje kotwicę.
 

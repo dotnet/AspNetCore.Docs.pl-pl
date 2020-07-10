@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/concurrency
-ms.openlocfilehash: 3038ae8f01273013e6c35694583d9674a1668bac
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: f6ee60bf5e75256a9bf330f56b2f09b06f720a85
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401561"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212803"
 ---
 # <a name="tutorial-handle-concurrency---aspnet-mvc-with-ef-core"></a>Samouczek: obsługa współbieżności ASP.NET MVC z EF Core
 
@@ -148,7 +148,7 @@ Aparat tworzenia szkieletów utworzył kolumnę RowVersion w widoku indeks, ale 
 
 Zastąp kod w *widokach/działach/index. cshtml* następującym kodem.
 
-[!code-html[](intro/samples/cu/Views/Departments/Index.cshtml?highlight=4,7,44)]
+[!code-cshtml[](intro/samples/cu/Views/Departments/Index.cshtml?highlight=4,7,44)]
 
 Spowoduje to zmianę nagłówka na "działy", usunięcie kolumny RowVersion i wyświetlenie pełnej nazwy zamiast imienia administratora.
 
@@ -198,7 +198,7 @@ W obszarze *widoki/działy/Edit. cshtml*wprowadź następujące zmiany:
 
 * Dodaj opcję "Wybierz administratora" do listy rozwijanej.
 
-[!code-html[](intro/samples/cu/Views/Departments/Edit.cshtml?highlight=16,34-36)]
+[!code-cshtml[](intro/samples/cu/Views/Departments/Edit.cshtml?highlight=16,34-36)]
 
 ## <a name="test-concurrency-conflicts"></a>Testuj konflikty współbieżności
 
@@ -258,7 +258,7 @@ W przypadku przechwyconego błędu współbieżności kod ponownie wyświetla st
 
 W obszarze *widoki/działy/Delete. cshtml*Zamień kod szkieletowy na następujący kod, który dodaje pole komunikatu o błędzie i ukryte pola dla właściwości DepartmentID i rowversion. Zmiany są wyróżnione.
 
-[!code-html[](intro/samples/cu/Views/Departments/Delete.cshtml?highlight=9,38,44,45,48)]
+[!code-cshtml[](intro/samples/cu/Views/Departments/Delete.cshtml?highlight=9,38,44,45,48)]
 
 Powoduje to wprowadzenie następujących zmian:
 
@@ -288,17 +288,17 @@ Opcjonalnie można oczyścić kod szkieletowy w szczegółach i w widokach.
 
 Zastąp kod w *widokach/działach/details. cshtml* , aby usunąć kolumnę rowversion i wyświetlić pełną nazwę administratora.
 
-[!code-html[](intro/samples/cu/Views/Departments/Details.cshtml?highlight=35)]
+[!code-cshtml[](intro/samples/cu/Views/Departments/Details.cshtml?highlight=35)]
 
 Zastąp kod w *widokach/działach/Create. cshtml* , aby dodać opcję Select do listy rozwijanej.
 
-[!code-html[](intro/samples/cu/Views/Departments/Create.cshtml?highlight=32-34)]
+[!code-cshtml[](intro/samples/cu/Views/Departments/Create.cshtml?highlight=32-34)]
 
 ## <a name="get-the-code"></a>Uzyskiwanie kodu
 
 [Pobierz lub Wyświetl ukończoną aplikację.](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
  Aby uzyskać więcej informacji o sposobie obsługi współbieżności w EF Core, zobacz [konflikty współbieżności](/ef/core/saving/concurrency).
 

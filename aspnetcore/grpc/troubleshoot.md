@@ -5,7 +5,7 @@ description: Rozwiązywanie problemów dotyczących błędów podczas korzystani
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.custom: mvc
-ms.date: 05/26/2020
+ms.date: 07/09/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/troubleshoot
-ms.openlocfilehash: 9a3e7269db04b79146686668879bf47f1a7dd6af
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 385291ec6bb6719a5fade927fa9f599af8c94045
+ms.sourcegitcommit: 14c3d111f9d656c86af36ecb786037bf214f435c
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400040"
+ms.lasthandoff: 07/09/2020
+ms.locfileid: "86176179"
 ---
 # <a name="troubleshoot-grpc-on-net-core"></a>Rozwiązywanie problemów z gRPC na platformie .NET Core
 
@@ -135,13 +135,6 @@ gRPC generowanie kodu dla konkretnych klientów i klas podstawowych usług wymag
 * Odwołanie do pakietu dla pakietu narzędzi gRPC [gRPC. Tools](https://www.nuget.org/packages/Grpc.Tools/).
 
 Aby uzyskać więcej informacji na temat generowania zasobów gRPC C#, zobacz <xref:grpc/basics> .
-
-Domyślnie `<Protobuf>` odwołanie generuje konkretny klient i klasę bazową usługi. Atrybut elementu odwołania `GrpcServices` może służyć do ograniczania generowania elementów zawartości w języku C#. Prawidłowe `GrpcServices` Opcje to:
-
-* `Both`(domyślnie, gdy nie istnieje)
-* `Server`
-* `Client`
-* `None`
 
 ASP.NET Core usługi gRPC Web App hosting Services wymagają tylko wygenerowania klasy bazowej usługi:
 

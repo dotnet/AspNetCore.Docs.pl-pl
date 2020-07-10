@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/forms-validation
-ms.openlocfilehash: f31a1f1d8942c9d9654dc26e946c022cf21ed9d1
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: b57e2a34f79691f7f2b1ed69cfad25de00c5ca13
+ms.sourcegitcommit: 14c3d111f9d656c86af36ecb786037bf214f435c
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86059867"
+ms.lasthandoff: 07/09/2020
+ms.locfileid: "86176221"
 ---
 # <a name="aspnet-core-blazor-forms-and-validation"></a>ASP.NET Core Blazor formularzy i walidacji
 
@@ -63,7 +63,7 @@ Formularz jest definiowany przy użyciu <xref:Microsoft.AspNetCore.Components.Fo
 }
 ```
 
-W poprzednim przykładzie:
+W powyższym przykładzie:
 
 * Formularz sprawdza poprawność danych wejściowych użytkownika w `name` polu przy użyciu walidacji zdefiniowanej w `ExampleModel` typie. Model jest tworzony w `@code` bloku składnika i przechowywany w prywatnym polu ( `exampleModel` ). Pole jest przypisane do `Model` atrybutu `<EditForm>` elementu.
 * <xref:Microsoft.AspNetCore.Components.Forms.InputText> `@bind-Value` Powiązania składnika:
@@ -72,6 +72,8 @@ W poprzednim przykładzie:
 * <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator>Składnik dołącza obsługę walidacji przy użyciu adnotacji danych.
 * <xref:Microsoft.AspNetCore.Components.Forms.ValidationSummary>Składnik podsumowuje komunikaty weryfikacyjne.
 * `HandleValidSubmit`jest wyzwalany po pomyślnym przesłaniu formularza (kończy walidację).
+
+## <a name="built-in-forms-components"></a>Wbudowane składniki formularzy
 
 Zestaw wbudowanych składników wejściowych jest dostępny do odbierania i weryfikowania danych wejściowych użytkownika. Dane wejściowe są weryfikowane po ich zmianie i po przesłaniu formularza. W poniższej tabeli przedstawiono dostępne składniki danych wejściowych.
 

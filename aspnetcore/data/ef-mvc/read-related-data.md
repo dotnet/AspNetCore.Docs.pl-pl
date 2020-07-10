@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/read-related-data
-ms.openlocfilehash: f2e989b2c6370d862b4d1e6550b09cb47b5747c1
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: abd5c4e474e30c119e2bea9e3cce3d2b277e0daf
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401522"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212752"
 ---
 # <a name="tutorial-read-related-data---aspnet-mvc-with-ef-core"></a>Samouczek: odczytywanie powiązanych danych — ASP.NET MVC z EF Core
 
@@ -55,7 +55,7 @@ Istnieje kilka sposobów, które oprogramowanie mapowanie relacyjne (ORM), takie
 
   ![Przykład oddzielnych zapytań](read-related-data/_static/separate-queries.png)
 
-* Jawne ładowanie. Gdy obiekt jest najpierw odczytywany, powiązane dane nie są pobierane. Napiszesz kod, który pobiera powiązane dane, jeśli jest to potrzebne. Tak jak w przypadku eager ładowania z oddzielnymi zapytaniami, jawne ładowanie powoduje wysłanie wielu zapytań do bazy danych. Różnica polega na tym, że z jawnym ładowaniem kod określa właściwości nawigacji do załadowania. W Entity Framework Core 1,1 można użyć `Load` metody do wykonania jawnego ładowania. Na przykład:
+* Jawne ładowanie. Gdy obiekt jest najpierw odczytywany, powiązane dane nie są pobierane. Napiszesz kod, który pobiera powiązane dane, jeśli jest to potrzebne. Tak jak w przypadku eager ładowania z oddzielnymi zapytaniami, jawne ładowanie powoduje wysłanie wielu zapytań do bazy danych. Różnica polega na tym, że z jawnym ładowaniem kod określa właściwości nawigacji do załadowania. W Entity Framework Core 1,1 można użyć `Load` metody do wykonania jawnego ładowania. Przykład:
 
   ![Przykład jawnego ładowania](read-related-data/_static/explicit-loading.png)
 
@@ -83,7 +83,7 @@ Zastąp `Index` metodę poniższym kodem, który używa bardziej odpowiedniej na
 
 Otwórz *Widok widoki/kursy/index. cshtml* i Zastąp kod szablonu poniższym kodem. Zmiany są wyróżnione:
 
-[!code-html[](intro/samples/cu/Views/Courses/Index.cshtml?highlight=4,7,15-17,34-36,44)]
+[!code-cshtml[](intro/samples/cu/Views/Courses/Index.cshtml?highlight=4,7,15-17,34-36,44)]
 
 Do kodu szkieletowego wprowadzono następujące zmiany:
 
@@ -179,7 +179,7 @@ Następnie, jeśli wybrano kurs, wybrany kurs zostanie pobrany z listy kursów w
 
 W obszarze *widoki/instruktorzy/index. cshtml*Zastąp kod szablonu poniższym kodem. Zmiany są wyróżnione.
 
-[!code-html[](intro/samples/cu/Views/Instructors/Index1.cshtml?range=1-64&highlight=1,3-7,15-19,24,26-31,41-54,56)]
+[!code-cshtml[](intro/samples/cu/Views/Instructors/Index1.cshtml?range=1-64&highlight=1,3-7,15-19,24,26-31,41-54,56)]
 
 Wprowadzono następujące zmiany w istniejącym kodzie:
 
@@ -221,7 +221,7 @@ Uruchom aplikację i wybierz kartę **Instruktorzy** . Na stronie jest wyświetl
 
 W pliku *viewss/instruktors/index. cshtml* po elemencie zamykającej tabeli (na końcu pliku) Dodaj następujący kod. Ten kod wyświetla listę kursów związanych z instruktorem w przypadku wybrania instruktora.
 
-[!code-html[](intro/samples/cu/Views/Instructors/Index1.cshtml?range=66-101)]
+[!code-cshtml[](intro/samples/cu/Views/Instructors/Index1.cshtml?range=66-101)]
 
 Ten kod odczytuje `Courses` Właściwość modelu widoku w celu wyświetlenia listy kursów. Zawiera również hiperłącze **SELECT** , które wysyła identyfikator wybranego kursu do `Index` metody akcji.
 
@@ -231,7 +231,7 @@ Odśwież stronę i wybierz instruktora. Teraz zobaczysz siatkę wyświetlając�
 
 Po dodaniu bloku kodu Dodaj następujący kod. Spowoduje to wyświetlenie listy studentów, którzy są rejestrowani w kursie po wybraniu tego kursu.
 
-[!code-html[](intro/samples/cu/Views/Instructors/Index1.cshtml?range=103-125)]
+[!code-cshtml[](intro/samples/cu/Views/Instructors/Index1.cshtml?range=103-125)]
 
 Ten kod odczytuje Właściwość Enrollments modelu widoku w celu wyświetlenia listy uczniów zarejestrowanych w kursie.
 

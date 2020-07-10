@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/concurrency
-ms.openlocfilehash: 597f396237151f49a9ae333973e91d8f4f7c6ff1
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: ff9e01df002ac0fc94ced6d5d093099d66a14f36
+ms.sourcegitcommit: 14c3d111f9d656c86af36ecb786037bf214f435c
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401379"
+ms.lasthandoff: 07/09/2020
+ms.locfileid: "86176279"
 ---
 # <a name="part-8-razor-pages-with-ef-core-in-aspnet-core---concurrency"></a>Część 8 Razor strony z EF Core w ASP.NET Core — współbieżność
 
@@ -86,7 +86,7 @@ EF Core zgłasza `DbConcurrencyException` wyjątki w przypadku wykrycia konflikt
 
 * Skonfiguruj EF Core, aby uwzględnić oryginalne wartości kolumn skonfigurowanych jako [tokeny współbieżności](/ef/core/modeling/concurrency) w klauzuli WHERE poleceń Update i DELETE.
 
-  Gdy `SaveChanges` jest wywoływana, klauzula WHERE szuka oryginalnych wartości wszelkich właściwości, które mają adnotację z atrybutem [ConcurrencyCheck](/dotnet/api/system.componentmodel.dataannotations.concurrencycheckattribute) . Instrukcja Update nie znajdzie wiersza do zaktualizowania, jeśli którykolwiek z właściwości tokenu współbieżności został zmieniony od momentu pierwszego odczytu wiersza. EF Core interpretuje ten sposób jako konflikt współbieżności. W przypadku tabel bazy danych z wieloma kolumnami takie podejście może skutkować bardzo dużymi klauzulami WHERE i może wymagać dużej ilości danych. W związku z tym takie podejście zwykle nie jest zalecane i nie jest to metoda używana w tym samouczku.
+  Gdy `SaveChanges` jest wywoływana, klauzula WHERE szuka oryginalnych wartości wszelkich właściwości adnotacji z <xref:System.ComponentModel.DataAnnotations.ConcurrencyCheckAttribute> atrybutem. Instrukcja Update nie znajdzie wiersza do zaktualizowania, jeśli którykolwiek z właściwości tokenu współbieżności został zmieniony od momentu pierwszego odczytu wiersza. EF Core interpretuje ten sposób jako konflikt współbieżności. W przypadku tabel bazy danych z wieloma kolumnami takie podejście może skutkować bardzo dużymi klauzulami WHERE i może wymagać dużej ilości danych. W związku z tym takie podejście zwykle nie jest zalecane i nie jest to metoda używana w tym samouczku.
 
 * W tabeli bazy danych Dołącz kolumnę śledzenia, której można użyć do określenia, kiedy wiersz został zmieniony.
 
@@ -98,7 +98,7 @@ W obszarze *modele/dział. cs*Dodaj właściwość śledzenia o nazwie rowversio
 
 [!code-csharp[](intro/samples/cu30/Models/Department.cs?highlight=26,27)]
 
-Atrybut [timestamp](/dotnet/api/system.componentmodel.dataannotations.timestampattribute) wskazuje, co identyfikuje kolumnę jako kolumnę śledzenia współbieżności. Interfejs API Fluent jest alternatywnym sposobem określenia właściwości śledzenia:
+Ten <xref:System.ComponentModel.DataAnnotations.TimestampAttribute> atrybut identyfikuje kolumnę jako kolumnę śledzenia współbieżności. Interfejs API Fluent jest alternatywnym sposobem określenia właściwości śledzenia:
 
 ```csharp
 modelBuilder.Entity<Department>()
@@ -250,7 +250,7 @@ Strona aktualizacji *Pages\Departments\Index.cshtml* :
 
 Poniższy kod przedstawia zaktualizowaną stronę:
 
-[!code-html[](intro/samples/cu30/Pages/Departments/Index.cshtml?highlight=5,8,29,48,51)]
+[!code-cshtml[](intro/samples/cu30/Pages/Departments/Index.cshtml?highlight=5,8,29,48,51)]
 
 ## <a name="update-the-edit-page-model"></a>Aktualizowanie modelu strony edycji
 
@@ -258,7 +258,7 @@ Zaktualizuj *Pages\Departments\Edit.cshtml.cs* przy użyciu następującego kodu
 
 [!code-csharp[](intro/samples/cu30/Pages/Departments/Edit.cshtml.cs?name=snippet_All)]
 
-[OriginalValue](/dotnet/api/microsoft.entityframeworkcore.changetracking.propertyentry.originalvalue?view=efcore-2.0#Microsoft_EntityFrameworkCore_ChangeTracking_PropertyEntry_OriginalValue) jest aktualizowany przy użyciu `rowVersion` wartości z jednostki, gdy została ona pobrana w `OnGet` metodzie. EF Core generuje polecenie SQL UPDATE z klauzulą WHERE zawierającą oryginalną `RowVersion` wartość. Jeśli nie ma żadnych wierszy, które ma wpływ na polecenie UPDATE (żadne wiersze nie mają oryginalnej `RowVersion` wartości), `DbUpdateConcurrencyException` zgłaszany jest wyjątek.
+<xref:Microsoft.EntityFrameworkCore.ChangeTracking.PropertyEntry.OriginalValue>Zostanie zaktualizowany o `rowVersion` wartość z jednostki, gdy została ona pobrana w `OnGet` metodzie. EF Core generuje polecenie SQL UPDATE z klauzulą WHERE zawierającą oryginalną `RowVersion` wartość. Jeśli nie ma żadnych wierszy, które ma wpływ na polecenie UPDATE (żadne wiersze nie mają oryginalnej `RowVersion` wartości), `DbUpdateConcurrencyException` zgłaszany jest wyjątek.
 
 [!code-csharp[](intro/samples/cu30/Pages/Departments/Edit.cshtml.cs?name=snippet_RowVersion&highlight=17-18)]
 
@@ -282,16 +282,16 @@ Poniższy wyróżniony kod ustawia `RowVersion` wartość nowej wartości pobran
 
 `ModelState.Remove`Instrukcja jest wymagana, ponieważ `ModelState` ma starą `RowVersion` wartość. Na Razor stronie `ModelState` wartość pola ma pierwszeństwo przed wartościami właściwości modelu, gdy są obecne oba typy.
 
-### <a name="update-the-razor-page"></a>Aktualizowanie Razor strony
+### <a name="update-the-edit-page"></a>Aktualizowanie strony edytowania
 
 Zaktualizuj *strony/działy/Edit. cshtml* przy użyciu następującego kodu:
 
-[!code-html[](intro/samples/cu30/Pages/Departments/Edit.cshtml?highlight=1,14,16-17,37-39)]
+[!code-cshtml[](intro/samples/cu30/Pages/Departments/Edit.cshtml?highlight=1,14,16-17,37-39)]
 
 Powyższy kod ma następujące działanie:
 
 * Aktualizuje `page` dyrektywę z `@page` do `@page "{id:int}"` .
-* Dodaje ukrytą wersję wiersza. `RowVersion`należy dodać ten wpis, aby ponownie utworzyć powiązanie z powrotem.
+* Dodaje ukrytą wersję wiersza. `RowVersion`należy dodać, aby ogłaszać zwrotnie.
 * Wyświetla ostatni bajt `RowVersion` do celów debugowania.
 * Zastępuje `ViewData` silnie wpisaną wartość `InstructorNameSL` .
 
@@ -323,7 +323,7 @@ To okno przeglądarki nie zamiało zmiany pola Nazwa. Skopiuj i wklej bieżącą
 
 Kliknij przycisk **Zapisz** ponownie. Wartość wprowadzona na drugiej karcie przeglądarki jest zapisywana. Zapisane wartości są widoczne na stronie indeks.
 
-## <a name="update-the-delete-page"></a>Aktualizowanie strony usuwania
+## <a name="update-the-delete-page-model"></a>Aktualizowanie modelu strony usuwania
 
 Zaktualizuj *strony/działy/Delete. cshtml. cs* przy użyciu następującego kodu:
 
@@ -335,11 +335,11 @@ Strona usuwania wykrywa konflikty współbieżności, gdy jednostka została zmi
 * Zgłaszany jest wyjątek DbUpdateConcurrencyException.
 * `OnGetAsync`jest wywoływana z `concurrencyError` .
 
-### <a name="update-the-delete-razor-page"></a>Aktualizowanie strony usuwania Razor
+### <a name="update-the-delete-page"></a>Aktualizowanie strony usuwania
 
 Zaktualizuj *strony/działy/Delete. cshtml* przy użyciu następującego kodu:
 
-[!code-html[](intro/samples/cu30/Pages/Departments/Delete.cshtml?highlight=1,10,39,51)]
+[!code-cshtml[](intro/samples/cu30/Pages/Departments/Delete.cshtml?highlight=1,10,39,42,51)]
 
 Poprzedni kod wprowadza następujące zmiany:
 
@@ -347,7 +347,7 @@ Poprzedni kod wprowadza następujące zmiany:
 * Dodaje komunikat o błędzie.
 * Zastępuje FirstMidName z FullName w polu **administrator** .
 * Zmiany `RowVersion` w celu wyświetlenia ostatniego bajtu.
-* Dodaje ukrytą wersję wiersza. `RowVersion`należy dodać, aby postgit dodać ponownie wiąże wartość.
+* Dodaje ukrytą wersję wiersza. `RowVersion`należy dodać, aby ogłaszać zwrotnie.
 
 ### <a name="test-concurrency-conflicts"></a>Testuj konflikty współbieżności
 
@@ -365,9 +365,9 @@ Zmień budżet na pierwszej karcie przeglądarki, a następnie kliknij przycisk 
 
 W przeglądarce zostanie wyświetlona strona indeks z wartością zmieniona i zaktualizowanym wskaźnikiem rowVersion. Zanotuj zaktualizowany wskaźnik rowVersion, który jest wyświetlany na drugim serwerze ogłaszania zwrotnego na drugiej karcie.
 
-Usuń dział testów z drugiej karty. Błąd współbieżności jest wyświetlany z bieżącymi wartościami z bazy danych. Kliknięcie przycisku **Usuń** powoduje usunięcie jednostki, o ile nie została `RowVersion` zaktualizowana. dział został usunięty.
+Usuń dział testów z drugiej karty. Błąd współbieżności jest wyświetlany z bieżącymi wartościami z bazy danych. Kliknięcie przycisku **Usuń** powoduje usunięcie jednostki, o ile `RowVersion` nie została zaktualizowana.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Tokeny współbieżności w EF Core](/ef/core/modeling/concurrency)
 * [Obsługa współbieżności w EF Core](/ef/core/saving/concurrency)
@@ -550,7 +550,7 @@ Aktualizowanie strony indeksu:
 
 Następujące znaczniki pokazują zaktualizowaną stronę:
 
-[!code-html[](intro/samples/cu/Pages/Departments/Index.cshtml?highlight=5,8,29,47,50)]
+[!code-cshtml[](intro/samples/cu/Pages/Departments/Index.cshtml?highlight=5,8,29,47,50)]
 
 ### <a name="update-the-edit-page-model"></a>Aktualizowanie modelu strony edycji
 
@@ -582,7 +582,7 @@ Poniższy wyróżniony kod ustawia `RowVersion` wartość nowej wartości pobran
 
 Aktualizuj *strony/działy/Edit. cshtml* przy użyciu następującego znacznika:
 
-[!code-html[](intro/samples/cu/Pages/Departments/Edit.cshtml?highlight=1,14,16-17,37-39)]
+[!code-cshtml[](intro/samples/cu/Pages/Departments/Edit.cshtml?highlight=1,14,16-17,37-39)]
 
 Poprzedzające znaczniki:
 
@@ -637,7 +637,7 @@ Strona usuwania wykrywa konflikty współbieżności, gdy jednostka została zmi
 
 Zaktualizuj *strony/działy/Delete. cshtml* przy użyciu następującego kodu:
 
-[!code-html[](intro/samples/cu/Pages/Departments/Delete.cshtml?highlight=1,10,39,51)]
+[!code-cshtml[](intro/samples/cu/Pages/Departments/Delete.cshtml?highlight=1,10,39,51)]
 
 Poprzedni kod wprowadza następujące zmiany:
 
@@ -663,11 +663,11 @@ Zmień budżet na pierwszej karcie przeglądarki, a następnie kliknij przycisk 
 
 W przeglądarce zostanie wyświetlona strona indeks z wartością zmieniona i zaktualizowanym wskaźnikiem rowVersion. Zanotuj zaktualizowany wskaźnik rowVersion, który jest wyświetlany na drugim serwerze ogłaszania zwrotnego na drugiej karcie.
 
-Usuń dział testów z drugiej karty. Błąd współbieżności jest wyświetlany z bieżącymi wartościami z bazy danych. Kliknięcie przycisku **Usuń** powoduje usunięcie jednostki, o ile nie została `RowVersion` zaktualizowana. dział został usunięty.
+Usuń dział testów z drugiej karty. Błąd współbieżności jest wyświetlany z bieżącymi wartościami z bazy danych. Kliknięcie przycisku **Usuń** powoduje usunięcie jednostki, o ile `RowVersion` nie została zaktualizowana.
 
 Zobacz [dziedziczenie](xref:data/ef-mvc/inheritance) sposobu dziedziczenia modelu danych.
 
-### <a name="additional-resources"></a>Zasoby dodatkowe
+### <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Tokeny współbieżności w EF Core](/ef/core/modeling/concurrency)
 * [Obsługa współbieżności w EF Core](/ef/core/saving/concurrency)

@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-web-api
-ms.openlocfilehash: 63f91086a7e9d71add7f7a5d58d96f46fa76353c
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 79f36168d0430ceee3794cfb5a4e29f3671ac73f
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407788"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212626"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>Samouczek: Tworzenie internetowego interfejsu API za pomocą ASP.NET Core
 
@@ -114,9 +114,7 @@ Na poniższym diagramie przedstawiono projekt aplikacji.
 
   ![Wybór szablonu interfejsu API macOS](first-web-api-mac/_static/api_template.png)
 
-* Upewnij się, że **platforma docelowa** jest ustawiona na **platformę .NET Core 3,1**. Wybierz pozycję **Dalej**.
-
-  ![wybór macOS .NET Core 3,1](first-web-api-mac/_static/api_31_config.png)
+* W oknie dialogowym **Konfigurowanie nowego interfejsu API sieci Web ASP.NET Core** wybierz najnowszą platformę **docelową**.NET Core 3. x. Wybierz pozycję **Dalej**.
 
 * Wprowadź *TodoApi* jako **nazwę projektu** , a następnie wybierz pozycję **Utwórz**.
 
@@ -382,7 +380,7 @@ Te metody implementują dwa punkty końcowe GET:
 * `GET /api/TodoItems`
 * `GET /api/TodoItems/{id}`
 
-Przetestuj aplikację, wywołując dwa punkty końcowe z przeglądarki lub wpisu. Na przykład:
+Przetestuj aplikację, wywołując dwa punkty końcowe z przeglądarki lub wpisu. Przykład:
 
 * `https://localhost:5001/api/TodoItems`
 * `https://localhost:5001/api/TodoItems/1`
@@ -424,7 +422,7 @@ W poniższej `GetTodoItem` metodzie `"{id}"` jest zmienną zastępczą dla unika
 
 [!code-csharp[](first-web-api/samples/3.0/TodoApi/Controllers/TodoItemsController.cs?name=snippet_GetByID&highlight=1-2)]
 
-## <a name="return-values"></a>Zwracane wartości
+## <a name="return-values"></a>Wartości zwracane
 
 Zwracany typ `GetTodoItems` `GetTodoItem` metod i jest [ \<T> typem ActionResult](xref:web-api/action-return-types#actionresultt-type). ASP.NET Core automatycznie serializować obiektu do [formatu JSON](https://www.json.org/) i zapisuje kod JSON w treści komunikatu odpowiedzi. Kod odpowiedzi dla tego typu zwracanego to 200, przy założeniu, że nie istnieją Nieobsłużone wyjątki. Nieobsłużone wyjątki są tłumaczone na błędy 5xx.
 
@@ -435,7 +433,7 @@ Zwracany typ `GetTodoItems` `GetTodoItem` metod i jest [ \<T> typem ActionResult
 
 ## <a name="the-puttodoitem-method"></a>Metoda PutTodoItem
 
-Badanie `PutTodoItem` metody:
+Przeanalizuj metodę `PutTodoItem`:
 
 [!code-csharp[](first-web-api/samples/3.0/TodoApi/Controllers/TodoItemsController.cs?name=snippet_Update)]
 
@@ -463,7 +461,7 @@ Na poniższej ilustracji przedstawiono aktualizację programu Poster:
 
 ## <a name="the-deletetodoitem-method"></a>Metoda DeleteTodoItem
 
-Badanie `DeleteTodoItem` metody:
+Przeanalizuj metodę `DeleteTodoItem`:
 
 [!code-csharp[](first-web-api/samples/3.0/TodoApi/Controllers/TodoItemsController.cs?name=snippet_Delete)]
 
@@ -594,7 +592,7 @@ Na poniższym diagramie przedstawiono projekt aplikacji.
 
 * W Visual Studio dla komputerów Mac starszej niż wersja 8,6 Wybierz **.NET Core**pozycję  >  **App**  >  **interfejs API**aplikacji .NET Core  >  **Next**. W wersji 8,6 lub nowszej wybierz pozycję **Web and Console**  >  **App**  >  **interfejs API**  >  **Next**aplikacji sieci Web i konsoli.
   
-* W oknie dialogowym **Konfigurowanie nowego interfejsu API sieci Web ASP.NET Core** zaakceptuj domyślną **platformę docelową** programu **.NET Core 2,2*.
+* W oknie dialogowym **Konfigurowanie nowego interfejsu API sieci Web ASP.NET Core** wybierz najnowszą platformę **docelową**programu .NET Core 2. x. Wybierz pozycję **Dalej**.
 
 * Wprowadź *TodoApi* jako **nazwę projektu** , a następnie wybierz pozycję **Utwórz**.
 
@@ -739,7 +737,7 @@ Te metody implementują dwa punkty końcowe GET:
 
 Zatrzymaj aplikację, jeśli jest nadal uruchomiona. Następnie uruchom ją ponownie, aby uwzględnić najnowsze zmiany.
 
-Przetestuj aplikację, wywołując dwa punkty końcowe z przeglądarki. Na przykład:
+Przetestuj aplikację, wywołując dwa punkty końcowe z przeglądarki. Przykład:
 
 * `https://localhost:<port>/api/todo`
 * `https://localhost:<port>/api/todo/1`
@@ -771,7 +769,7 @@ W poniższej `GetTodoItem` metodzie `"{id}"` jest zmienną zastępczą dla unika
 
 [!code-csharp[](first-web-api/samples/2.2/TodoApi/Controllers/TodoController.cs?name=snippet_GetByID&highlight=1-2)]
 
-## <a name="return-values"></a>Zwracane wartości
+## <a name="return-values"></a>Wartości zwracane
 
 Zwracany typ `GetTodoItems` `GetTodoItem` metod i jest [ \<T> typem ActionResult](xref:web-api/action-return-types#actionresultt-type). ASP.NET Core automatycznie serializować obiektu do [formatu JSON](https://www.json.org/) i zapisuje kod JSON w treści komunikatu odpowiedzi. Kod odpowiedzi dla tego typu zwracanego to 200, przy założeniu, że nie istnieją Nieobsłużone wyjątki. Nieobsłużone wyjątki są tłumaczone na błędy 5xx.
 
@@ -962,11 +960,11 @@ Usuwanie elementu do wykonania jest realizowane przez ustawienie `type` w WYWOŁ
 
 [!INCLUDE[](~/includes/IdentityServer4.md)]
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 [Wyświetl lub Pobierz przykładowy kod dla tego samouczka](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/first-web-api/samples). Zobacz artykuł [jak pobrać](xref:index#how-to-download-a-sample).
 
-Więcej informacji zawierają następujące zasoby:
+Więcej informacji można znaleźć w następujących zasobach:
 
 * <xref:web-api/index>
 * <xref:tutorials/web-api-help-pages-using-swagger>

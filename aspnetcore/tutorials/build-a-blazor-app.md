@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/build-a-blazor-app
-ms.openlocfilehash: 726380c42c952f47d6fdff09a811f35a20462d96
-ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
+ms.openlocfilehash: 174a8e561701bb3ebd68ed05e42dfc3d70a9b450
+ms.sourcegitcommit: 14c3d111f9d656c86af36ecb786037bf214f435c
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85944969"
+ms.lasthandoff: 07/09/2020
+ms.locfileid: "86176225"
 ---
 # <a name="build-a-blazor-todo-list-app"></a>Tworzenie aplikacji z listą zadań do wykonania Blazor
 
@@ -142,7 +142,7 @@ W niniejszym samouczku zawarto informacje na temat wykonywania następujących c
 > * Używanie obsługi zdarzeń i powiązania danych w składnikach
 > * Używanie iniekcji zależności (DI) i routingu w Blazor aplikacji
 
-Dowiedz się więcej o Blazor szablonach projektów:
+Informacje o narzędziach dla ASP.NET Core Blazor :
 
 > [!div class="nextstepaction"]
-> <xref:blazor/templates>
+> <xref:blazor/tooling>

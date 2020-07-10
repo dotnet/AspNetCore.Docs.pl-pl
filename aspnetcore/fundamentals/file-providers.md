@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/file-providers
-ms.openlocfilehash: 9c679f6cb56397632eb99708bd2edd83c55ecf50
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 30f46618cc8698c2923c169fea2b9eafec7802db
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408269"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212865"
 ---
 # <a name="file-providers-in-aspnet-core"></a>Dostawcy plików w ASP.NET Core
 
@@ -28,7 +28,7 @@ Przez [Steve Smith](https://ardalis.com/)
 
 ::: moniker range=">= aspnetcore-3.0"
 
-ASP.NET Core abstrakcję dostępu systemu plików przy użyciu dostawców plików. Dostawcy plików są używani w całym ASP.NET Core Framework. Na przykład:
+ASP.NET Core abstrakcję dostępu systemu plików przy użyciu dostawców plików. Dostawcy plików są używani w całym ASP.NET Core Framework. Przykład:
 
 * <xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment>udostępnia [katalog główny zawartości](xref:fundamentals/index#content-root) aplikacji i [katalogu głównego sieci Web](xref:fundamentals/index#web-root) jako `IFileProvider` typy.
 * [Oprogramowanie pośredniczące plików statycznych](xref:fundamentals/static-files) używa dostawców plików do lokalizowania plików statycznych.
@@ -252,7 +252,7 @@ Służy <xref:Microsoft.Extensions.FileProviders.ManifestEmbeddedFileProvider> d
 
 Aby wygenerować manifest osadzonych plików, należy ustawić `<GenerateEmbeddedFilesManifest>` Właściwość na `true` . Określ pliki do osadzenia przy użyciu [ &lt; EmbeddedResource &gt; ](/dotnet/core/tools/csproj#default-compilation-includes-in-net-core-projects):
 
-[!code-csharp[](file-providers/samples/2.x/FileProviderSample/FileProviderSample.csproj?highlight=6,14)]
+[!code-xml[](file-providers/samples/2.x/FileProviderSample/FileProviderSample.csproj?highlight=6,14)]
 
 Użyj [wzorców globalizowania](#glob-patterns) , aby określić jeden lub więcej plików do osadzenia w zestawie.
 

@@ -15,13 +15,13 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/tooling
-zone_pivot_groups: operating-systems-set-one
-ms.openlocfilehash: 30a76eda0e94ee7bb2b2d3db918bc029865bdf1a
-ms.sourcegitcommit: f7873c02c1505c99106cbc708f37e18fc0a496d1
+zone_pivot_groups: operating-systems
+ms.openlocfilehash: 0bd38d8d16365a80d7954c860a4e20e2280c36b2
+ms.sourcegitcommit: e216e8f4afa21215dc38124c28d5ee19f5ed7b1e
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/08/2020
-ms.locfileid: "86147646"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86239611"
 ---
 # <a name="tooling-for-aspnet-core-blazor"></a>Narzędzia dla ASP.NET CoreBlazor
 
@@ -33,7 +33,7 @@ Autorzy [Daniel Roth](https://github.com/danroth27) i [Luke Latham](https://gith
 
 1. Tworzenie nowego projektu.
 
-1. Wybierz pozycję ** Blazor aplikacja**. Wybierz opcję **Dalej**.
+1. Wybierz pozycję ** Blazor aplikacja**. Wybierz pozycję **Dalej**.
 
 1. Podaj nazwę projektu w polu **Nazwa projektu** lub zaakceptuj nazwę domyślną projektu. Potwierdź, że wpis **lokalizacji** jest poprawny lub podaj lokalizację dla projektu. Wybierz pozycję **Utwórz**.
 
@@ -99,11 +99,11 @@ Aby uzyskać więcej informacji, zobacz Wskazówki udostępniane przez przegląd
 
 1. Na pasku bocznym wybierz pozycję Aplikacja **sieci Web i konsola**  >  **App**.
 
-   Aby zapoznać się z Blazor WebAssembly doświadczeniem, wybierz szablon ** Blazor WebAssembly aplikacji** . Aby zapoznać się z Blazor Server doświadczeniem, wybierz szablon ** Blazor Server aplikacji** . Wybierz opcję **Dalej**.
+   Aby zapoznać się z Blazor WebAssembly doświadczeniem, wybierz szablon ** Blazor WebAssembly aplikacji** . Aby zapoznać się z Blazor Server doświadczeniem, wybierz szablon ** Blazor Server aplikacji** . Wybierz pozycję **Dalej**.
 
    Aby uzyskać informacje na temat dwóch Blazor modeli hostingu *Blazor WebAssembly* i *Blazor Server* , zobacz <xref:blazor/hosting-models> .
 
-1. Upewnij się, że **uwierzytelnianie** jest ustawione na wartość **bez uwierzytelniania**. Wybierz opcję **Dalej**.
+1. Upewnij się, że **uwierzytelnianie** jest ustawione na wartość **bez uwierzytelniania**. Wybierz pozycję **Dalej**.
 
 1. W polu **Nazwa projektu** Nadaj nazwę aplikacji `WebApplication1` . Wybierz pozycję **Utwórz**.
 

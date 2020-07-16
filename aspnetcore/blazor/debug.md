@@ -5,7 +5,7 @@ description: Dowiedz się, jak debugować Blazor aplikacje.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/06/2020
+ms.date: 07/15/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: c48eb19c5a1759aace112e2afb1637c649173a3d
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: 828fb0ce5101407b6f40195138d59c335eec389f
+ms.sourcegitcommit: 6fb27ea41a92f6d0e91dfd0eba905d2ac1a707f7
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86059906"
+ms.lasthandoff: 07/15/2020
+ms.locfileid: "86407674"
 ---
 # <a name="debug-aspnet-core-blazor-webassembly"></a>Debuguj ASP.NET CoreBlazor WebAssembly
 
@@ -48,8 +48,8 @@ Będziemy nadal ulepszać środowisko debugowania w przyszłych wersjach.
 
 Debugowanie wymaga jednej z następujących przeglądarek:
 
+* Google Chrome (wersja 70 lub nowsza) (domyślnie)
 * Microsoft Edge (wersja 80 lub nowsza)
-* Google Chrome (wersja 70 lub nowsza)
 
 ## <a name="enable-debugging-for-visual-studio-and-visual-studio-code"></a>Włącz debugowanie dla programu Visual Studio i Visual Studio Code
 
@@ -133,13 +133,13 @@ Aby uzyskać informacje na temat instalowania Visual Studio Code do Blazor tworz
 
 ### <a name="debug-hosted-blazor-webassembly"></a>Debuguj hostowaneBlazor WebAssembly
 
-1. Otwórz hostowaną Blazor WebAssembly aplikację w vs Code.
+1. Otwórz Blazor WebAssembly folder rozwiązania aplikacji hostowanej w vs Code.
 
 1. Jeśli nie ma ustawionej konfiguracji uruchamiania dla projektu, wyświetlane jest następujące powiadomienie. Wybierz pozycję **Tak**.
 
    ![Dodaj wymagane zasoby](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-required-assets.png)
 
-1. W oknie Wybór wybierz projekt *serwera* w ramach hostowanego rozwiązania.
+1. W palecie poleceń w górnej części okna wybierz projekt *serwera* w ramach rozwiązania hostowanego.
 
 `launch.json`Generowany jest plik z konfiguracją uruchamiania do uruchamiania debugera.
 
@@ -160,7 +160,7 @@ Aby dołączyć do uruchomionej Blazor aplikacji, Utwórz `launch.json` plik z n
 
 ### <a name="launch-configuration-options"></a>Opcje konfiguracji uruchamiania
 
-Dla typu debugowania są obsługiwane następujące opcje konfiguracji uruchamiania `blazorwasm` .
+Następujące opcje konfiguracji uruchamiania są obsługiwane dla `blazorwasm` typu debugowania ( `.vscode/launch.json` ).
 
 | Opcja    | Opis |
 | --------- | ----------- |
@@ -198,17 +198,23 @@ Dla typu debugowania są obsługiwane następujące opcje konfiguracji uruchamia
 }
 ```
 
-#### <a name="launch-and-debug-a-hosted-blazor-webassembly-app"></a>Uruchamianie i debugowanie hostowanej Blazor WebAssembly aplikacji
+#### <a name="launch-and-debug-a-hosted-blazor-webassembly-app-with-microsoft-edge"></a>Uruchamianie i debugowanie hostowanej Blazor WebAssembly aplikacji przy użyciu przeglądarki Microsoft Edge
+
+Domyślna konfiguracja przeglądarki w przeglądarce Google Chrome. W przypadku korzystania z przeglądarki Microsoft Edge na potrzeby debugowania ustaw wartość `browser` `edge` . Aby użyć programu Google Chrome, nie ustawiaj `browser` opcji lub ustaw wartość opcji na `chrome` .
 
 ```json
 {
+  "name": "Launch and Debug Hosted Blazor WebAssembly App",
   "type": "blazorwasm",
   "request": "launch",
-  "name": "Launch and Debug Hosted App",
+  "hosted": true,
   "program": "${workspaceFolder}/Server/bin/Debug/netcoreapp3.1/MyHostedApp.Server.dll",
-  "cwd": "${workspaceFolder}"
+  "cwd": "${workspaceFolder}/Server",
+  "browser": "edge"
 }
 ```
+
+W poprzednim przykładzie `MyHostedApp.Server.dll` jest to zestaw aplikacji *serwera* . Folder znajduje się `.vscode` w folderze rozwiązania obok `Client` `Server` folderów, i `Shared` .
 
 ## <a name="debug-in-the-browser"></a>Debuguj w przeglądarce
 

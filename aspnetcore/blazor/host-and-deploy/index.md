@@ -5,7 +5,7 @@ description: Dowiedz się, jak hostować i wdrażać Blazor aplikacje.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/19/2020
+ms.date: 07/15/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/index
-ms.openlocfilehash: 040f9560bd51841063ca2785b0c0730c6bb16002
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 77202cd60d357c27237cdb925e0adc00e66d2e56
+ms.sourcegitcommit: 6fb27ea41a92f6d0e91dfd0eba905d2ac1a707f7
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402653"
+ms.lasthandoff: 07/15/2020
+ms.locfileid: "86407713"
 ---
 # <a name="host-and-deploy-aspnet-core-blazor"></a>Hostowanie i wdrażanie ASP.NET CoreBlazor
 
@@ -30,7 +30,7 @@ ms.locfileid: "85402653"
 
 Aplikacje są publikowane do wdrożenia w konfiguracji wydania.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 1. Wybierz pozycję **kompilacja**  >  **Opublikuj aplikację {aplikacja}** na pasku nawigacyjnym.
 1. Wybierz *element docelowy publikowania*. Aby opublikować lokalnie, wybierz pozycję **folder**.
@@ -107,7 +107,21 @@ dotnet run --pathbase=/CoolApp
 
 Blazor WebAssemblyAplikacja reaguje lokalnie o `http://localhost:port/CoolApp` .
 
-## <a name="deployment"></a>Wdrożenie
+**Blazor Server`MapFallbackToPage`Konfiguracja**
+
+Przekaż następującą ścieżkę do <xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage%2A> programu w programie `Startup.Configure` :
+
+```csharp
+endpoints.MapFallbackToPage("/{RELATIVE PATH}/{**path:nonfile}");
+```
+
+Symbol zastępczy `{RELATIVE PATH}` jest ścieżką spoza katalogu głównego na serwerze. Na przykład, `CoolApp` jest segmentem symbolu zastępczego, jeśli nie jest to adres URL dla aplikacji `https://{HOST}:{PORT}/CoolApp/` :
+
+```csharp
+endpoints.MapFallbackToPage("/CoolApp/{**path:nonfile}");
+```
+
+## <a name="deployment"></a>wdrażania
 
 Aby uzyskać wskazówki dotyczące wdrażania, zobacz następujące tematy:
 

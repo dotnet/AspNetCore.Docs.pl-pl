@@ -1,0 +1,8 @@
+<a name="ddav"></a>
+### <a name="disable-default-account-verification"></a><span data-ttu-id="e1901-101">Wyłącz weryfikację konta domyślnego</span><span class="sxs-lookup"><span data-stu-id="e1901-101">Disable default account verification</span></span>
+
+<span data-ttu-id="e1901-102">W przypadku szablonów domyślnych użytkownik zostanie przekierowany do lokalizacji, w `Account.RegisterConfirmation` której można wybrać link, aby potwierdzić to konto.</span><span class="sxs-lookup"><span data-stu-id="e1901-102">With the default templates, the user is redirected to the `Account.RegisterConfirmation` where they can select a link to have the account confirmed.</span></span> <span data-ttu-id="e1901-103">Wartość domyślna `Account.RegisterConfirmation` jest używana ***tylko*** do testowania, dlatego Automatyczna weryfikacja konta powinna być wyłączona w aplikacji produkcyjnej.</span><span class="sxs-lookup"><span data-stu-id="e1901-103">The default `Account.RegisterConfirmation` is used ***only*** for testing, automatic account verification should be disabled in a production app.</span></span>
+
+<span data-ttu-id="e1901-104">Aby wymagać potwierdzonego konta i uniemożliwić natychmiastowe Logowanie przy rejestracji, ustaw wartość `DisplayConfirmAccountLink = false` w */Areas/Identity/Pages/Account/RegisterConfirmation.cshtml.cs*:</span><span class="sxs-lookup"><span data-stu-id="e1901-104">To require a confirmed account and prevent immediate login at registration, set `DisplayConfirmAccountLink = false` in */Areas/Identity/Pages/Account/RegisterConfirmation.cshtml.cs*:</span></span>
+
+[!code-csharp[](~/security/authentication/identity/sample/WebApp3/Areas/Identity/Pages/Account/RegisterConfirmation.cshtml.cs?name=snippet&highlight=34)]

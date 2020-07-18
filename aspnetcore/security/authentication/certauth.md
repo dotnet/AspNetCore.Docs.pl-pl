@@ -4,7 +4,7 @@ author: blowdart
 description: Dowiedz się, jak skonfigurować uwierzytelnianie certyfikatów w ASP.NET Core dla usług IIS i HTTP.sys.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: bdorrans
-ms.date: 01/02/2020
+ms.date: 07/16/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/certauth
-ms.openlocfilehash: 493046e288c6b1ccd8e41f15a8e6e532a10a4adc
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 2c58a274e8de0b1205b223287b7690b1d5caed23
+ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403199"
+ms.lasthandoff: 07/17/2020
+ms.locfileid: "86445128"
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>Konfigurowanie uwierzytelniania certyfikatów w ASP.NET Core
 
@@ -36,15 +36,42 @@ Uwierzytelnianie certyfikatu jest scenariuszem stanowym głównie używanym w pr
 
 Alternatywą dla uwierzytelniania certyfikatu w środowiskach, w których są używane serwery proxy i moduły równoważenia obciążenia, są Active Directory usług federacyjnych (AD FS) za pomocą OpenID Connect Connect (OIDC).
 
-## <a name="get-started"></a>Rozpoczęcie pracy
+## <a name="get-started"></a>Wprowadzenie
 
 Uzyskaj certyfikat HTTPS, zastosuj go i [Skonfiguruj serwer](#configure-your-server-to-require-certificates) tak, aby wymagał certyfikatów.
 
-W aplikacji sieci Web Dodaj odwołanie do `Microsoft.AspNetCore.Authentication.Certificate` pakietu. Następnie w `Startup.ConfigureServices` metodzie Zadzwoń `services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate(...);` z własnymi opcjami, podając delegata w `OnCertificateValidated` celu wykonania dodatkowej weryfikacji dla certyfikatu klienta wysyłanego z żądaniami. Zmień te informacje na `ClaimsPrincipal` i ustaw dla `context.Principal` właściwości.
+W aplikacji sieci Web Dodaj odwołanie do pakietu [Microsoft. AspNetCore. Authentication. Certificate](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Certificate) . Następnie w `Startup.ConfigureServices` metodzie Zadzwoń `services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate(...);` z własnymi opcjami, podając delegata w `OnCertificateValidated` celu wykonania dodatkowej weryfikacji dla certyfikatu klienta wysyłanego z żądaniami. Zmień te informacje na `ClaimsPrincipal` i ustaw dla `context.Principal` właściwości.
 
 Jeśli uwierzytelnianie nie powiedzie się, ta procedura obsługi zwróci `403 (Forbidden)` odpowiedź zamiast elementu `401 (Unauthorized)` , zgodnie z oczekiwaniami. Powodem jest to, że uwierzytelnianie powinno nastąpić podczas początkowego połączenia TLS. Przez czas, gdy dociera do programu obsługi, jest zbyt opóźniony. Nie ma możliwości uaktualnienia połączenia z anonimowego połączenia z certyfikatem.
 
-Dodaj również `app.UseAuthentication();` `Startup.Configure` metodę. W przeciwnym razie `HttpContext.User` nie zostanie ustawiona jako `ClaimsPrincipal` utworzona na podstawie certyfikatu. Na przykład:
+Dodaj również `app.UseAuthentication();` `Startup.Configure` metodę. W przeciwnym razie `HttpContext.User` nie zostanie ustawiona jako `ClaimsPrincipal` utworzona na podstawie certyfikatu. Przykład:
+
+::: moniker range=">= aspnetcore-5.0"
+
+```csharp
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddAuthentication(
+        CertificateAuthenticationDefaults.AuthenticationScheme)
+        .AddCertificate()
+        // Adding an ICertificateValidationCache results in certificate auth caching the results.
+        // The default implementation uses a memory cache.
+        .AddCertificateCache();
+
+    // All other service configuration
+}
+
+public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+{
+    app.UseAuthentication();
+
+    // All other app configuration
+}
+```
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -52,16 +79,19 @@ public void ConfigureServices(IServiceCollection services)
     services.AddAuthentication(
         CertificateAuthenticationDefaults.AuthenticationScheme)
         .AddCertificate();
-    // All the other service configuration.
+
+    // All other service configuration
 }
 
 public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 {
     app.UseAuthentication();
 
-    // All the other app configuration.
+    // All other app configuration
 }
 ```
+
+::: moniker-end
 
 W powyższym przykładzie przedstawiono domyślny sposób dodawania uwierzytelniania przy użyciu certyfikatu. Program obsługi konstruuje jednostkę główną użytkownika przy użyciu wspólnych właściwości certyfikatu.
 
@@ -343,7 +373,7 @@ namespace AspNetCoreCertificateAuthApi
 
 #### <a name="implement-an-httpclient-using-a-certificate-and-the-httpclienthandler"></a>Implementowanie HttpClient przy użyciu certyfikatu i HttpClientHandler
 
-HttpClientHandler można dodać bezpośrednio w konstruktorze klasy HttpClient. Należy zachować ostrożność podczas tworzenia wystąpień HttpClient. Następnie HttpClient wyśle certyfikat z każdym żądaniem.
+Można `HttpClientHandler` dodać bezpośrednio w konstruktorze `HttpClient` klasy. Należy zachować ostrożność podczas tworzenia wystąpień `HttpClient` . `HttpClient`Następnie wyśle certyfikat z każdym żądaniem.
 
 ```csharp
 private async Task<JsonDocument> GetApiDataUsingHttpClientHandler()
@@ -372,7 +402,7 @@ private async Task<JsonDocument> GetApiDataUsingHttpClientHandler()
 
 #### <a name="implement-an-httpclient-using-a-certificate-and-a-named-httpclient-from-ihttpclientfactory"></a>Implementowanie HttpClient przy użyciu certyfikatu i nazwanego HttpClient z usługi IHttpClientFactory 
 
-W poniższym przykładzie certyfikat klienta jest dodawany do HttpClientHandler przy użyciu właściwości ClientCertificates z procedury obsługi. Tej procedury obsługi można następnie użyć w nazwanym wystąpieniu HttpClient przy użyciu metody ConfigurePrimaryHttpMessageHandler. Jest to konfiguracja w klasie startowej w metodzie ConfigureServices.
+W poniższym przykładzie certyfikat klienta jest dodawany do `HttpClientHandler` właściwości przy użyciu programu `ClientCertificates` obsługi. Tej procedury obsługi można następnie użyć w nazwanym wystąpieniu klasy `HttpClient` przy użyciu `ConfigurePrimaryHttpMessageHandler` metody. Jest to konfiguracja w programie `Startup.ConfigureServices` :
 
 ```csharp
 var clientCertificate = 
@@ -387,7 +417,7 @@ services.AddHttpClient("namedClient", c =>
 }).ConfigurePrimaryHttpMessageHandler(() => handler);
 ```
 
-IHttpClientFactory można następnie użyć do uzyskania nazwanego wystąpienia z obsługą i certyfikatem. Metoda onclient o nazwie klienta zdefiniowanej w klasie startowej jest używana do uzyskiwania wystąpienia. Żądanie HTTP można wysłać przy użyciu klienta zgodnie z wymaganiami.
+`IHttpClientFactory`Można następnie użyć, aby uzyskać nazwane wystąpienie z programem obsługi i certyfikatem. `CreateClient`Metoda o nazwie klienta zdefiniowanej w `Startup` klasie jest używana do uzyskiwania wystąpienia. Żądanie HTTP można wysłać przy użyciu klienta zgodnie z wymaganiami.
 
 ```csharp
 private readonly IHttpClientFactory _clientFactory;
@@ -562,12 +592,43 @@ namespace AspNetCoreCertificateAuthApi
 
 <a name="occ"></a>
 
+::: moniker range=">= aspnetcore-5.0"
+
+## <a name="certificate-validation-caching"></a>Buforowanie weryfikacji certyfikatu
+
+ASP.NET Core 5,0 i nowsze wersje obsługują możliwość włączania buforowania wyników walidacji. Buforowanie znacznie poprawia wydajność uwierzytelniania certyfikatów, ponieważ Walidacja jest kosztowną operacją.
+
+Domyślnie uwierzytelnianie certyfikatu powoduje wyłączenie buforowania. Aby włączyć buforowanie, wywołaj `AddCertificateCache` w `Startup.ConfigureServices` :
+
+```csharp
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddAuthentication(
+        CertificateAuthenticationDefaults.AuthenticationScheme)
+            .AddCertificate()
+            .AddCertificateCache(options =>
+            {
+                options.CacheSize = 1024;
+                options.CacheEntryExpiration = TimeSpan.FromMinutes(2);
+            });
+}
+```
+
+Domyślna implementacja buforowania zapisuje wyniki w pamięci. Możesz zapewnić własną pamięć podręczną, implementując `ICertificateValidationCache` i rejestrując ją z iniekcją zależności. Na przykład `services.AddSingleton<ICertificateValidationCache, YourCache>()`.
+
+::: moniker-end
+
 ## <a name="optional-client-certificates"></a>Opcjonalne certyfikaty klienta
 
 Ta sekcja zawiera informacje dotyczące aplikacji, które muszą chronić podzestaw aplikacji przy użyciu certyfikatu. Na przykład Razor Strona lub kontroler w aplikacji może wymagać certyfikatów klienta. Przedstawia to wyzwania jako certyfikaty klienta:
   
 * Są funkcją TLS, a nie funkcją protokołu HTTP.
-* Są negocjowane dla każdego połączenia i muszą być negocjowane na początku połączenia przed udostępnieniem jakichkolwiek danych HTTP. Na początku połączenia jest znany tylko Oznaczanie nazwy serwera (SNI) &dagger; . Certyfikaty klienta i serwera są negocjowane przed pierwszym żądaniem połączenia, a żądania zwykle nie będą mogły być ponownie negocjowane. Ponowna negocjacja jest niedozwolona w przypadku protokołu HTTP/2.
+* Są negocjowane dla każdego połączenia i muszą być negocjowane na początku połączenia przed udostępnieniem jakichkolwiek danych HTTP. Na początku połączenia jest znany tylko Oznaczanie nazwy serwera (SNI) &dagger; . Certyfikaty klienta i serwera są negocjowane przed pierwszym żądaniem połączenia, a żądania zwykle nie mogą być ponownie negocjowane.
+
+Renegocjowanie protokołu TLS było starym sposobem implementacji opcjonalnych certyfikatów klienta. Nie jest to już zalecane, ponieważ:
+- W przypadku protokołu HTTP/1.1 ponowne negocjowanie podczas żądania POST może spowodować zakleszczenie, w którym treść żądania została wypełniona w oknie protokołu TCP i nie można odebrać pakietów renegocjacji.
+- Protokół HTTP/2 [jawnie zabrania](https://tools.ietf.org/html/rfc7540#section-9.2.1) ponownej negocjacji.
+- Protokół TLS 1,3 został [usunięty](https://tools.ietf.org/html/rfc8740#section-1) z obsługi ponownej negocjacji.
 
 ASP.NET Core 5 wersja zapoznawcza 4 i nowsze dodaje bardziej wygodną obsługę opcjonalnych certyfikatów klienta. Aby uzyskać więcej informacji, zobacz [przykład opcjonalnych certyfikatów](https://github.com/dotnet/aspnetcore/tree/9ce4a970a21bace3fb262da9591ed52359309592/src/Security/Authentication/Certificate/samples/Certificate.Optional.Sample).
 

@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: test/troubleshoot-azure-iis
-ms.openlocfilehash: 65095f3990c72224d95f1f5fe46d320ab8f12040
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 17ada36c40997353528f922bece5acc34ce760d2
+ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404837"
+ms.lasthandoff: 07/17/2020
+ms.locfileid: "86445388"
 ---
 # <a name="troubleshoot-aspnet-core-on-azure-app-service-and-iis"></a>Rozwiązywanie problemów ASP.NET Core na Azure App Service i usługach IIS
 
@@ -63,7 +63,7 @@ Ten błąd jest zwykle spowodowany przez uszkodzone wdrożenie w systemie hostin
 * W procesie wdrażania nie powiodło się przeniesienie wszystkich plików i folderów aplikacji do folderu wdrożenia w systemie hostingu.
 * W wdrożeniu brakuje pliku *web.config* lub zawartość pliku *web.config* jest źle sformułowana.
 
-Wykonaj poniższe czynności:
+Wykonaj następujące czynności:
 
 1. Usuń wszystkie pliki i foldery z folderu wdrożenia w systemie hostingu.
 1. Wdróż ponownie zawartość folderu *publikowania* aplikacji w systemie hostingu przy użyciu zwykłej metody wdrażania, takiej jak Visual Studio, PowerShell lub wdrażanie ręczne:
@@ -74,7 +74,7 @@ Wykonaj poniższe czynności:
 
 Aby uzyskać więcej informacji na temat układu opublikowanej aplikacji ASP.NET Core, zobacz <xref:host-and-deploy/directory-structure> . Aby uzyskać więcej informacji na temat pliku *web.config* , zobacz <xref:host-and-deploy/aspnet-core-module#configuration-with-webconfig> .
 
-### <a name="500-internal-server-error"></a>500 — wewnętrzny błąd serwera
+### <a name="500-internal-server-error"></a>500 Wewnętrzny błąd serwera
 
 Aplikacja zostanie uruchomiona, ale błąd uniemożliwia serwerowi spełnienie żądania.
 
@@ -299,34 +299,24 @@ Dane wyjściowe konsoli z aplikacji, pokazujące wszystkie błędy, są przekazy
 
 ### <a name="aspnet-core-module-stdout-log-azure-app-service"></a>Dziennik stdout modułu ASP.NET Core (Azure App Service)
 
-Dziennik modułu ASP.NET Core stdout często rejestruje przydatne komunikaty o błędach, które nie są dostępne w dzienniku zdarzeń aplikacji. Aby włączyć i wyświetlić dzienniki stdout:
-
-1. Przejdź do bloku **diagnozowanie i rozwiązywanie problemów** w Azure Portal.
-1. W obszarze **Wybierz kategorię problemu**wybierz przycisk **aplikacji sieci Web w dół** .
-1. W obszarze **sugerowane rozwiązania** > **Włącz przekierowywanie dziennika stdout**, wybierz przycisk, aby **otworzyć konsolę kudu, aby edytować Web.Config**.
-1. W **konsoli diagnostyki**kudu Otwórz foldery w **witrynie**Path  >  **wwwroot**. Przewiń w dół, aby odsłonić *web.config* plik w dolnej części listy.
-1. Kliknij ikonę ołówka obok pliku *web.config* .
-1. Ustaw wartość **stdoutLogEnabled** na `true` i zmień ścieżkę **stdoutLogFile** na: `\\?\%home%\LogFiles\stdout` .
-1. Wybierz pozycję **Zapisz** , aby zapisać zaktualizowany plik *web.config* .
-1. Utwórz żądanie do aplikacji.
-1. Wróć do witryny Azure Portal. Wybierz blok **Narzędzia zaawansowane** w obszarze **Narzędzia programistyczne** . Wybierz przycisk **Przejdź &rarr; ** . Konsola kudu otwiera się w nowej karcie lub oknie przeglądarki.
-1. Korzystając z paska nawigacyjnego w górnej części strony, Otwórz **konsolę debugowanie** i wybierz polecenie **cmd**.
-1. Wybierz folder **LogFiles** .
-1. Sprawdź **zmodyfikowaną** kolumnę i wybierz ikonę ołówka, aby edytować dziennik stdout z datą ostatniej modyfikacji.
-1. Po otwarciu pliku dziennika zostanie wyświetlony komunikat o błędzie.
-
-Wyłącz rejestrowanie stdout po zakończeniu rozwiązywania problemów:
-
-1. W **konsoli diagnostyki**kudu Wróć do **witryny**ścieżki  >  **wwwroot** , aby odsłonić plik *web.config* . Otwórz plik **web.config** ponownie, wybierając ikonę ołówka.
-1. Ustaw wartość **stdoutLogEnabled** na `false` .
-1. Wybierz pozycję **Zapisz** , aby zapisać plik.
-
-Aby uzyskać więcej informacji, zobacz <xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection>.
-
 > [!WARNING]
 > Niepowodzenie wyłączenia dziennika stdout może prowadzić do awarii aplikacji lub serwera. Nie ma żadnego limitu rozmiaru pliku dziennika lub liczby utworzonych plików dziennika. Rejestrowania stdout można używać tylko w celu rozwiązywania problemów z uruchamianiem aplikacji.
 >
 > Aby uzyskać ogólne rejestrowanie w aplikacji ASP.NET Core po uruchomieniu, należy użyć biblioteki rejestrowania, która ogranicza rozmiar pliku dziennika i obraca dzienniki. Aby uzyskać więcej informacji, zobacz [dostawców rejestrowania innych](xref:fundamentals/logging/index#third-party-logging-providers)firm.
+
+Dziennik modułu ASP.NET Core stdout często rejestruje przydatne komunikaty o błędach, które nie są dostępne w dzienniku zdarzeń aplikacji. Aby włączyć i wyświetlić dzienniki stdout:
+
+1. W witrynie Azure Portal przejdź do aplikacji sieci Web.
+1. W bloku **App Service** wprowadź **kudu** w polu wyszukiwania.
+1. Wybierz pozycję **Narzędzia zaawansowane** > **Przejdź**.
+1. Wybierz **konsolę debugowania > cmd**.
+1. Przejdź do *witryny/wwwroot*
+1. Wybierz ikonę ołówka, aby edytować plik *web.config* .
+1. W `<aspNetCore />` elemencie Ustaw `stdoutLogEnabled="true"` i wybierz pozycję **Zapisz**.
+
+Wyłącz rejestrowanie stdout, gdy Rozwiązywanie problemów zostanie zakończone przez ustawienie `stdoutLogEnabled="false"` .
+
+Aby uzyskać więcej informacji, zobacz <xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection>.
 
 ### <a name="aspnet-core-module-debug-log-azure-app-service"></a>Dziennik debugowania modułu ASP.NET Core (Azure App Service)
 
@@ -638,7 +628,7 @@ Ten błąd jest zwykle spowodowany przez uszkodzone wdrożenie w systemie hostin
 * W procesie wdrażania nie powiodło się przeniesienie wszystkich plików i folderów aplikacji do folderu wdrożenia w systemie hostingu.
 * W wdrożeniu brakuje pliku *web.config* lub zawartość pliku *web.config* jest źle sformułowana.
 
-Wykonaj poniższe czynności:
+Wykonaj następujące czynności:
 
 1. Usuń wszystkie pliki i foldery z folderu wdrożenia w systemie hostingu.
 1. Wdróż ponownie zawartość folderu *publikowania* aplikacji w systemie hostingu przy użyciu zwykłej metody wdrażania, takiej jak Visual Studio, PowerShell lub wdrażanie ręczne:
@@ -649,7 +639,7 @@ Wykonaj poniższe czynności:
 
 Aby uzyskać więcej informacji na temat układu opublikowanej aplikacji ASP.NET Core, zobacz <xref:host-and-deploy/directory-structure> . Aby uzyskać więcej informacji na temat pliku *web.config* , zobacz <xref:host-and-deploy/aspnet-core-module#configuration-with-webconfig> .
 
-### <a name="500-internal-server-error"></a>500 — wewnętrzny błąd serwera
+### <a name="500-internal-server-error"></a>500 Wewnętrzny błąd serwera
 
 Aplikacja zostanie uruchomiona, ale błąd uniemożliwia serwerowi spełnienie żądania.
 
@@ -1131,7 +1121,7 @@ Ten błąd jest zwykle spowodowany przez uszkodzone wdrożenie w systemie hostin
 * W procesie wdrażania nie powiodło się przeniesienie wszystkich plików i folderów aplikacji do folderu wdrożenia w systemie hostingu.
 * W wdrożeniu brakuje pliku *web.config* lub zawartość pliku *web.config* jest źle sformułowana.
 
-Wykonaj poniższe czynności:
+Wykonaj następujące czynności:
 
 1. Usuń wszystkie pliki i foldery z folderu wdrożenia w systemie hostingu.
 1. Wdróż ponownie zawartość folderu *publikowania* aplikacji w systemie hostingu przy użyciu zwykłej metody wdrażania, takiej jak Visual Studio, PowerShell lub wdrażanie ręczne:
@@ -1142,7 +1132,7 @@ Wykonaj poniższe czynności:
 
 Aby uzyskać więcej informacji na temat układu opublikowanej aplikacji ASP.NET Core, zobacz <xref:host-and-deploy/directory-structure> . Aby uzyskać więcej informacji na temat pliku *web.config* , zobacz <xref:host-and-deploy/aspnet-core-module#configuration-with-webconfig> .
 
-### <a name="500-internal-server-error"></a>500 — wewnętrzny błąd serwera
+### <a name="500-internal-server-error"></a>500 Wewnętrzny błąd serwera
 
 Aplikacja zostanie uruchomiona, ale błąd uniemożliwia serwerowi spełnienie żądania.
 

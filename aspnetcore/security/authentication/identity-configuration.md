@@ -3,6 +3,7 @@ title: Konfigurowanie ASP.NET CoreIdentity
 author: AdrienTorris
 description: Poznaj ASP.NET Core Identity wartości domyślne i Dowiedz się, jak skonfigurować Identity właściwości do używania wartości niestandardowych.
 ms.author: riande
+ms.custom: mvc
 ms.date: 02/11/2019
 no-loc:
 - Blazor
@@ -13,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity-configuration
-ms.openlocfilehash: 95c19b671602b45ba217dcb551110854cbbee359
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 262101594d57ad63bb0bac4da3cefa8d8d380908
+ms.sourcegitcommit: 3544941682869734ea0113e24e02ed0ec9e1a9ec
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408971"
+ms.lasthandoff: 07/18/2020
+ms.locfileid: "86464530"
 ---
 # <a name="configure-aspnet-core-identity"></a>Konfigurowanie ASP.NET CoreIdentity
 
@@ -26,11 +27,11 @@ ASP.NET Core Identity używa domyślnych wartości ustawień, takich jak zasady 
 
 ## <a name="identity-options"></a>IdentityOpcje
 
-Klasa [IdentityOptions](/dotnet/api/microsoft.aspnetcore.identity.identityoptions) reprezentuje opcje, których można użyć w celu skonfigurowania Identity systemu. `IdentityOptions`musi być ustawiony **po** wywołaniu `AddIdentity` lub `AddDefaultIdentity` .
+Klasa [ Identity Options](/dotnet/api/microsoft.aspnetcore.identity.identityoptions) reprezentuje opcje, których można użyć w celu skonfigurowania Identity systemu. `IdentityOptions`musi być ustawiony **po** wywołaniu `AddIdentity` lub `AddDefaultIdentity` .
 
 ### <a name="claims-identity"></a>OświadczeńIdentity
 
-[IdentityOptions. Identyfikator oświadczenia](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.claimsidentity) określa [ClaimsIdentityOptions](/dotnet/api/microsoft.aspnetcore.identity.claimsidentityoptions) z właściwościami podanymi w poniższej tabeli.
+[ Identity Opcje. oświadczenia Identity ](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.claimsidentity) określają [ Identity Opcje oświadczeń](/dotnet/api/microsoft.aspnetcore.identity.claimsidentityoptions) z właściwościami podanymi w poniższej tabeli.
 
 | Właściwość | Opis | Domyślne |
 | -------- | ----------- | :-----: |
@@ -51,43 +52,32 @@ Opcje blokady są ustawione w `StartUp.ConfigureServices` :
 
 [!code-csharp[](identity-configuration/sample/Startup.cs?name=snippet_lock)]
 
-Poprzedni kod ustawia [IdentityOptions](/dotnet/api/microsoft.aspnetcore.identity.identityoptions) [LockoutOptions](/dotnet/api/microsoft.aspnetcore.identity.lockoutoptions) z wartościami domyślnymi.
+Poprzedni kod ustawia [ Identity Opcje](/dotnet/api/microsoft.aspnetcore.identity.identityoptions) [LockoutOptions](/dotnet/api/microsoft.aspnetcore.identity.lockoutoptions) z wartościami domyślnymi.
 
 Pomyślne uwierzytelnienie resetuje liczbę prób dostępu zakończonych niepowodzeniem i resetuje zegar.
 
-[IdentityOptions. Blokada](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.lockout) określa [LockoutOptions](/dotnet/api/microsoft.aspnetcore.identity.lockoutoptions) z właściwościami przedstawionymi w tabeli.
+[ Identity Options. Blokada](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.lockout) określa [LockoutOptions](/dotnet/api/microsoft.aspnetcore.identity.lockoutoptions) z właściwościami pokazanymi w tabeli.
 
 | Właściwość | Opis | Domyślne |
 | -------- | ----------- | :-----: |
 | [AllowedForNewUsers](/dotnet/api/microsoft.aspnetcore.identity.lockoutoptions.allowedfornewusers) | Określa, czy nowy użytkownik może być zablokowany. | `true` |
-| [DefaultLockoutTimeSpan](/dotnet/api/microsoft.aspnetcore.identity.lockoutoptions.defaultlockouttimespan) | Ilość czasu, przez który użytkownik jest blokowany, gdy następuje blokada. | 5 minut |
+| [DefaultLockoutTimeSpan](/dotnet/api/microsoft.aspnetcore.identity.lockoutoptions.defaultlockouttimespan) | Ilość czasu, przez który użytkownik jest blokowany, gdy następuje blokada. | 5 min |
 | [MaxFailedAccessAttempts](/dotnet/api/microsoft.aspnetcore.identity.lockoutoptions.maxfailedaccessattempts) | Liczba nieudanych prób dostępu do momentu zablokowania użytkownika, jeśli włączono blokadę. | 5 |
 
 ### <a name="password"></a>Hasło
 
-Domyślnie program Identity wymaga, aby hasła zawierały wielkie litery, małe litery, cyfry i znaki inne niż alfanumeryczne. Długość hasła musi wynosić co najmniej 6 znaków. [PasswordOptions](/dotnet/api/microsoft.aspnetcore.identity.passwordoptions) można ustawić w `Startup.ConfigureServices` .
+Domyślnie program Identity wymaga, aby hasła zawierały wielkie litery, małe litery, cyfry i znaki inne niż alfanumeryczne. Długość hasła musi wynosić co najmniej 6 znaków.
 
-::: moniker range=">= aspnetcore-2.1"
+Hasła są konfigurowane przy użyciu:
+
+* <xref:Microsoft.AspNetCore.Identity.PasswordOptions>w programie `Startup.ConfigureServices` .
+* [ `[StringLength]` atrybuty](xref:System.ComponentModel.DataAnnotations.StringLengthAttribute) `Password` właściwości, jeśli Identity są [szkieletami w aplikacji](xref:security/authentication/scaffold-identity). `InputModel``Password`właściwości znajdują się w następujących plikach:
+  * `Areas/Identity/Pages/Account/Register.cshtml.cs`
+  * `Areas/Identity/Pages/Account/ResetPassword.cshtml.cs`
 
 [!code-csharp[](identity-configuration/sample/Startup.cs?name=snippet_pw)]
 
-::: moniker-end
-
-::: moniker range="= aspnetcore-2.0"
-
-[!code-csharp[](identity/sample/src/ASPNETv2-IdentityDemo-Configuration/Startup.cs?range=29-37,50-52)]
-
-::: moniker-end
-
-::: moniker range="<= aspnetcore-1.1"
-
-[!code-csharp[](identity/sample/src/ASPNET-IdentityDemo-PrimaryKeysConfig/Startup.cs?range=58-65,84)]
-
-::: moniker-end
-
-[IdentityOptions. Password](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.password) określa [PasswordOptions](/dotnet/api/microsoft.aspnetcore.identity.passwordoptions) z właściwościami podanymi w tabeli.
-
-::: moniker range=">= aspnetcore-2.0"
+[ Identity Options. Password](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.password) określa [PasswordOptions](/dotnet/api/microsoft.aspnetcore.identity.passwordoptions) z właściwościami podanymi w tabeli.
 
 | Właściwość | Opis | Domyślne |
 | -------- | ----------- | :-----: |
@@ -98,37 +88,13 @@ Domyślnie program Identity wymaga, aby hasła zawierały wielkie litery, małe 
 | [RequiredUniqueChars](/dotnet/api/microsoft.aspnetcore.identity.passwordoptions.requireduniquechars) | Dotyczy tylko ASP.NET Core 2,0 lub nowszych.<br><br> Wymaga podania liczby odrębnych znaków w haśle. | 1 |
 | [RequireUppercase](/dotnet/api/microsoft.aspnetcore.identity.passwordoptions.requireuppercase) | Wymaga wielkich liter w haśle. | `true` |
 
-::: moniker-end
-
-::: moniker range="< aspnetcore-2.0"
-
-| Właściwość | Opis | Domyślne |
-| -------- | ----------- | :-----: |
-| [RequireDigit](/dotnet/api/microsoft.aspnetcore.identity.passwordoptions.requiredigit) | Wymaga liczby z zakresu od 0-9 do hasła. | `true` |
-| [RequiredLength](/dotnet/api/microsoft.aspnetcore.identity.passwordoptions.requiredlength) | Minimalna długość hasła. | 6 |
-| [RequireLowercase](/dotnet/api/microsoft.aspnetcore.identity.passwordoptions.requirelowercase) | Wymaga małych liter w haśle. | `true` |
-| [RequireNonAlphanumeric](/dotnet/api/microsoft.aspnetcore.identity.passwordoptions.requirenonalphanumeric) | Wymaga znaku niealfanumerycznego w haśle. | `true` |
-| [RequireUppercase](/dotnet/api/microsoft.aspnetcore.identity.passwordoptions.requireuppercase) | Wymaga wielkich liter w haśle. | `true` |
-
-::: moniker-end
-
 ### <a name="sign-in"></a>Logowanie
 
 Poniższy kod określa `SignIn` Ustawienia (do wartości domyślnych):
 
-::: moniker range=">= aspnetcore-2.1"
-
 [!code-csharp[](identity-configuration/sample/Startup.cs?name=snippet_si)]
 
-::: moniker-end
-
-::: moniker range="<= aspnetcore-2.0"
-
-[!code-csharp[](identity/sample/src/ASPNETv2-IdentityDemo-Configuration/Startup.cs?range=29-30,44-46,50-52)] 
-
-::: moniker-end
-
-[IdentityOptions. Signer](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.signin) określa [SignInOptions](/dotnet/api/microsoft.aspnetcore.identity.signinoptions) z właściwościami podanymi w tabeli.
+[ Identity Opcje. Signer](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.signin) określa [SignInOptions](/dotnet/api/microsoft.aspnetcore.identity.signinoptions) z właściwościami podanymi w tabeli.
 
 | Właściwość | Opis | Domyślne |
 | -------- | ----------- | :-----: |
@@ -137,22 +103,22 @@ Poniższy kod określa `SignIn` Ustawienia (do wartości domyślnych):
 
 ### <a name="tokens"></a>Tokeny
 
-[IdentityOptions. tokeny](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.tokens) określa [TokenOptions](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions) z właściwościami podanymi w tabeli.
+[ Identity Options. Tokens](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.tokens) określa [TokenOptions](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions) z właściwościami podanymi w tabeli.
 
-|                                                        Właściwość                                                         |                                                                                      Opis                                                                                      |
-|-------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|     [AuthenticatorTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.authenticatortokenprovider)     |                                       Pobiera lub ustawia `AuthenticatorTokenProvider` używany do weryfikacji logowania dwuskładnikowego przy użyciu wystawcy uwierzytelnienia.                                       |
-|       [ChangeEmailTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.changeemailtokenprovider)       |                                     Pobiera lub ustawia `ChangeEmailTokenProvider` używany do generowania tokenów używanych w wiadomościach e-mail z potwierdzeniem zmiany wiadomości e-mail.                                     |
-| [ChangePhoneNumberTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.changephonenumbertokenprovider) |                                      Pobiera lub ustawia `ChangePhoneNumberTokenProvider` używany do generowania tokenów używanych podczas zmieniania numerów telefonów.                                      |
-| [EmailConfirmationTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.emailconfirmationtokenprovider) |                                             Pobiera lub ustawia dostawcę tokenu używanego do generowania tokenów używanych w wiadomościach e-mail z potwierdzeniem konta.                                              |
-|     [PasswordResetTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.passwordresettokenprovider)     | Pobiera lub ustawia [IUserTwoFactorTokenProvider \<TUser> ](/dotnet/api/microsoft.aspnetcore.identity.iusertwofactortokenprovider-1) używany do generowania tokenów używanych w wiadomościach e-mail dotyczących resetowania haseł. |
-|                    [ProviderMap](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.providermap)                    |                Służy do konstruowania [dostawcy tokenów użytkownika](/dotnet/api/microsoft.aspnetcore.identity.tokenproviderdescriptor) z kluczem używanym jako nazwa dostawcy.                 |
+| Właściwość | Opis |
+| -------- | ----------- |
+| [AuthenticatorTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.authenticatortokenprovider) | Pobiera lub ustawia `AuthenticatorTokenProvider` używany do weryfikacji logowania dwuskładnikowego przy użyciu wystawcy uwierzytelnienia. |
+| [ChangeEmailTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.changeemailtokenprovider) | Pobiera lub ustawia `ChangeEmailTokenProvider` używany do generowania tokenów używanych w wiadomościach e-mail z potwierdzeniem zmiany wiadomości e-mail. |
+| [ChangePhoneNumberTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.changephonenumbertokenprovider) | Pobiera lub ustawia `ChangePhoneNumberTokenProvider` używany do generowania tokenów używanych podczas zmieniania numerów telefonów. |
+| [EmailConfirmationTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.emailconfirmationtokenprovider) | Pobiera lub ustawia dostawcę tokenu używanego do generowania tokenów używanych w wiadomościach e-mail z potwierdzeniem konta. |
+| [PasswordResetTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.passwordresettokenprovider) | Pobiera lub ustawia [IUserTwoFactorTokenProvider \<TUser> ](/dotnet/api/microsoft.aspnetcore.identity.iusertwofactortokenprovider-1) używany do generowania tokenów używanych w wiadomościach e-mail dotyczących resetowania haseł. |
+| [ProviderMap](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.providermap) | Służy do konstruowania [dostawcy tokenów użytkownika](/dotnet/api/microsoft.aspnetcore.identity.tokenproviderdescriptor) z kluczem używanym jako nazwa dostawcy. |
 
 ### <a name="user"></a>Użytkownik
 
 [!code-csharp[](identity-configuration/sample/Startup.cs?name=snippet_user)]
 
-[IdentityOptions. User](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.user) określa [UserOptions](/dotnet/api/microsoft.aspnetcore.identity.useroptions) z właściwościami podanymi w tabeli.
+[ Identity Opcje. User](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.user) określa [UserOptions](/dotnet/api/microsoft.aspnetcore.identity.useroptions) z właściwościami podanymi w tabeli.
 
 | Właściwość | Opis | Domyślne |
 | -------- | ----------- | :-----: |
@@ -163,23 +129,7 @@ Poniższy kod określa `SignIn` Ustawienia (do wartości domyślnych):
 
 Skonfiguruj plik cookie aplikacji w programie `Startup.ConfigureServices` . [ConfigureApplicationCookie](/dotnet/api/microsoft.extensions.dependencyinjection.identityservicecollectionextensions.configureapplicationcookie#Microsoft_Extensions_DependencyInjection_IdentityServiceCollectionExtensions_ConfigureApplicationCookie_Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_Microsoft_AspNetCore_Authentication_Cookies_CookieAuthenticationOptions__) musi być wywoływana **po** wywołaniu `AddIdentity` lub `AddDefaultIdentity` .
 
-::: moniker range=">= aspnetcore-2.1"
-
 [!code-csharp[](identity-configuration/sample/Startup.cs?name=snippet_cookie)]
-
-::: moniker-end
-
-::: moniker range="= aspnetcore-2.0"
-
-[!code-csharp[](identity/sample/src/ASPNETv2-IdentityDemo-Configuration/Startup.cs?name=snippet_configurecookie)]
-
-::: moniker-end
-
-::: moniker range="<= aspnetcore-1.1"
-
-[!code-csharp[](identity/sample/src/ASPNET-IdentityDemo-PrimaryKeysConfig/Startup.cs?range=58-59,72-80,84)]
-
-::: moniker-end
 
 Aby uzyskać więcej informacji, zobacz [CookieAuthenticationOptions](/dotnet/api/microsoft.aspnetcore.authentication.cookies.cookieauthenticationoptions).
 

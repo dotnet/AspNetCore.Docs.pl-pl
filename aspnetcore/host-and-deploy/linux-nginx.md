@@ -5,7 +5,7 @@ description: Dowiedz się, jak skonfigurować Nginx jako zwrotny serwer proxy w 
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/10/2020
+ms.date: 07/09/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/linux-nginx
-ms.openlocfilehash: c936ff9a7aadd21ce99a0c37184ae8cf911c3070
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 8038c63200c7c9aaadb9e0e7a68ae315ff620197
+ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403979"
+ms.lasthandoff: 07/17/2020
+ms.locfileid: "86445297"
 ---
 # <a name="host-aspnet-core-on-linux-with-nginx"></a>Hostowanie ASP.NET Core w systemie Linux za pomocą Nginx
 
@@ -395,6 +395,9 @@ Dodaj plik konfiguracji */etc/nginx/proxy.conf* :
 Edytuj plik konfiguracji */etc/nginx/Nginx.conf* . Przykład zawiera obie `http` sekcje i `server` w jednym pliku konfiguracyjnym.
 
 [!code-nginx[](linux-nginx/nginx.conf?highlight=2)]
+
+> [!NOTE]
+> Blazor WebAssemblyaplikacje wymagają większej `burst` wartości parametru, aby pomieścić większą liczbę żądań wykonywanych przez aplikację. Aby uzyskać więcej informacji, zobacz <xref:blazor/host-and-deploy/webassembly#nginx>.
 
 #### <a name="secure-nginx-from-clickjacking"></a>Zabezpiecz Nginx z clickjacking
 

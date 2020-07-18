@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/index
-ms.openlocfilehash: e905f08f867b73fc37d5fed7138256ac89811312
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 85446ac18608b39c469da766e1a9f2e92a1f5e11
+ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402406"
+ms.lasthandoff: 07/17/2020
+ms.locfileid: "86445115"
 ---
 # <a name="aspnet-core-blazor-authentication-and-authorization"></a>ASP.NET Core Blazor uwierzytelnianie i autoryzacja
 
@@ -320,7 +320,7 @@ Jeśli ani <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Rol
 
 Blazorumożliwia określenie stanu uwierzytelniania w sposób *asynchroniczny*. Głównym scenariuszem tego podejścia jest w Blazor WebAssembly aplikacjach, które składają żądanie do zewnętrznego punktu końcowego w celu uwierzytelnienia.
 
-Gdy trwa uwierzytelnianie, <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> domyślnie nie jest wyświetlana żadna zawartość. Aby wyświetlić zawartość podczas uwierzytelniania, należy użyć `<Authorizing>` elementu:
+Gdy trwa uwierzytelnianie, <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> domyślnie nie jest wyświetlana żadna zawartość. Aby wyświetlić zawartość podczas uwierzytelniania, należy użyć `<Authorizing>` tagu:
 
 ```razor
 <AuthorizeView>
@@ -413,7 +413,7 @@ W domyślnym Blazor Server szablonie projektu `App` składnik ( `App.razor` ) de
 
 Zawartość `<NotFound>` , `<NotAuthorized>` , i `<Authorizing>` tagi mogą zawierać dowolne elementy, takie jak inne składniki interaktywne.
 
-Jeśli `<NotAuthorized>` element nie jest określony, zostanie <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView> użyty następujący komunikat rezerwowy:
+Jeśli `<NotAuthorized>` tag nie jest określony, zostanie <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView> użyty następujący komunikat rezerwowy:
 
 ```html
 Not authorized.

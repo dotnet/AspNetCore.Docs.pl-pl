@@ -5,7 +5,7 @@ description: Dowiedz się, jak testy integracji zapewniają, że składniki apli
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/20/2020
+ms.date: 07/14/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: test/integration-tests
-ms.openlocfilehash: 6e4a0065486f6d9d6744dcd21de10ec76782f210
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: c050665f630c0973abe6c9d08a4652597441639f
+ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405877"
+ms.lasthandoff: 07/17/2020
+ms.locfileid: "86445284"
 ---
 # <a name="integration-tests-in-aspnet-core"></a>Testy integracji w ASP.NET Core
 
@@ -114,7 +114,7 @@ Projekt testowy musi:
 * Odwołuje się do pakietu [Microsoft. AspNetCore. MVC. test](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Testing) .
 * Określ zestaw SDK sieci Web w pliku projektu ( `<Project Sdk="Microsoft.NET.Sdk.Web">` ).
 
-Te wymagania wstępne można zobaczyć w [przykładowej aplikacji](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples/). Sprawdź plik *Tests/RazorPagesProject. Tests/RazorPagesProject. tests. csproj* . Przykładowa aplikacja używa środowiska testowego [xUnit](https://xunit.github.io/) i biblioteki analizatora [AngleSharp](https://anglesharp.github.io/) , dzięki czemu Przykładowa aplikacja również odwołuje się do:
+Te wymagania wstępne można zobaczyć w [przykładowej aplikacji](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples/). Sprawdź plik *Tests/ Razor PagesProject. Tests/ Razor PagesProject. tests. csproj* . Przykładowa aplikacja używa środowiska testowego [xUnit](https://xunit.github.io/) i biblioteki analizatora [AngleSharp](https://anglesharp.github.io/) , dzięki czemu Przykładowa aplikacja również odwołuje się do:
 
 * [xUnit](https://www.nuget.org/packages/xunit)
 * [xUnit. Runner. VisualStudio](https://www.nuget.org/packages/xunit.runner.visualstudio)
@@ -310,7 +310,7 @@ Aplikacja testowa może zasymulować <xref:Microsoft.AspNetCore.Authentication.A
 
 [!code-csharp[](integration-tests/samples/3.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/IntegrationTests/AuthTests.cs?name=snippet4&highlight=11-18)]
 
-`TestAuthHandler`Jest wywoływana w celu uwierzytelnienia użytkownika, gdy w schemacie uwierzytelniania jest ustawiona wartość `Test` Where `AddAuthentication` jest zarejestrowana dla `ConfigureTestServices` :
+`TestAuthHandler`Jest wywoływana w celu uwierzytelnienia użytkownika, gdy w schemacie uwierzytelniania jest ustawiona wartość `Test` Where `AddAuthentication` jest zarejestrowana dla `ConfigureTestServices` . Ważne jest, aby `Test` schemat był zgodny ze schematem oczekiwanym przez aplikację. W przeciwnym razie uwierzytelnianie nie będzie działało.
 
 [!code-csharp[](integration-tests/samples/3.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/IntegrationTests/AuthTests.cs?name=snippet3&highlight=7-12)]
 
@@ -363,10 +363,10 @@ Po `IClassFixture` wykonaniu testów wdrożenia [TestServer](/dotnet/api/microso
 
 | Aplikacja | Katalog projektu | Opis |
 | --- | ----------------- | ----------- |
-| Aplikacja wiadomości (SUT) | *SRC/RazorPagesProject* | Zezwala użytkownikowi na dodawanie, usuwanie, usuwanie wszystkich i analizowanie komunikatów. |
-| Aplikacja testowa | *testy/RazorPagesProject. Tests* | Służy do integracji testu SUT. |
+| Aplikacja wiadomości (SUT) | *SRC/ Razor PagesProject* | Zezwala użytkownikowi na dodawanie, usuwanie, usuwanie wszystkich i analizowanie komunikatów. |
+| Aplikacja testowa | *testy/ Razor PagesProject. Tests* | Służy do integracji testu SUT. |
 
-Testy można uruchamiać przy użyciu wbudowanych funkcji testowych środowiska IDE, takich jak [Visual Studio](https://visualstudio.microsoft.com). W przypadku używania [Visual Studio Code](https://code.visualstudio.com/) lub wiersza polecenia wykonaj następujące polecenie w wierszu polecenia w katalogu *Tests/RazorPagesProject. Tests* :
+Testy można uruchamiać przy użyciu wbudowanych funkcji testowych środowiska IDE, takich jak [Visual Studio](https://visualstudio.microsoft.com). W przypadku używania [Visual Studio Code](https://code.visualstudio.com/) lub wiersza polecenia wykonaj następujące polecenie w wierszu polecenia w katalogu *Tests/ Razor PagesProject. Tests* :
 
 ```console
 dotnet test
@@ -389,7 +389,7 @@ Mimo że aplikacja nie korzysta ze wzorca repozytorium i nie jest skutecznym prz
 
 ### <a name="test-app-organization"></a>Testuj organizację aplikacji
 
-Aplikacja testowa to Aplikacja konsolowa w katalogu *Tests/RazorPagesProject. Tests* .
+Aplikacja testowa to Aplikacja konsolowa w katalogu *Tests/ Razor PagesProject. Tests* .
 
 | Testuj katalog aplikacji | Opis |
 | ------------------ | ----------- |
@@ -504,7 +504,7 @@ Projekt testowy musi:
   * [Microsoft. AspNetCore. MVC. test](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Testing/)
 * Określ zestaw SDK sieci Web w pliku projektu ( `<Project Sdk="Microsoft.NET.Sdk.Web">` ). Zestaw SDK sieci Web jest wymagany w przypadku odwoływania się do [pakietu Microsoft. AspNetCore. app](xref:fundamentals/metapackage-app).
 
-Te wymagania wstępne można zobaczyć w [przykładowej aplikacji](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples/). Sprawdź plik *Tests/RazorPagesProject. Tests/RazorPagesProject. tests. csproj* . Przykładowa aplikacja używa środowiska testowego [xUnit](https://xunit.github.io/) i biblioteki analizatora [AngleSharp](https://anglesharp.github.io/) , dzięki czemu Przykładowa aplikacja również odwołuje się do:
+Te wymagania wstępne można zobaczyć w [przykładowej aplikacji](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples/). Sprawdź plik *Tests/ Razor PagesProject. Tests/ Razor PagesProject. tests. csproj* . Przykładowa aplikacja używa środowiska testowego [xUnit](https://xunit.github.io/) i biblioteki analizatora [AngleSharp](https://anglesharp.github.io/) , dzięki czemu Przykładowa aplikacja również odwołuje się do:
 
 * [xUnit](https://www.nuget.org/packages/xunit/)
 * [xUnit. Runner. VisualStudio](https://www.nuget.org/packages/xunit.runner.visualstudio/)
@@ -754,10 +754,10 @@ Po `IClassFixture` wykonaniu testów wdrożenia [TestServer](/dotnet/api/microso
 
 | Aplikacja | Katalog projektu | Opis |
 | --- | ----------------- | ----------- |
-| Aplikacja wiadomości (SUT) | *SRC/RazorPagesProject* | Zezwala użytkownikowi na dodawanie, usuwanie, usuwanie wszystkich i analizowanie komunikatów. |
-| Aplikacja testowa | *testy/RazorPagesProject. Tests* | Służy do integracji testu SUT. |
+| Aplikacja wiadomości (SUT) | *SRC/ Razor PagesProject* | Zezwala użytkownikowi na dodawanie, usuwanie, usuwanie wszystkich i analizowanie komunikatów. |
+| Aplikacja testowa | *testy/ Razor PagesProject. Tests* | Służy do integracji testu SUT. |
 
-Testy można uruchamiać przy użyciu wbudowanych funkcji testowych środowiska IDE, takich jak [Visual Studio](https://visualstudio.microsoft.com). W przypadku używania [Visual Studio Code](https://code.visualstudio.com/) lub wiersza polecenia wykonaj następujące polecenie w wierszu polecenia w katalogu *Tests/RazorPagesProject. Tests* :
+Testy można uruchamiać przy użyciu wbudowanych funkcji testowych środowiska IDE, takich jak [Visual Studio](https://visualstudio.microsoft.com). W przypadku używania [Visual Studio Code](https://code.visualstudio.com/) lub wiersza polecenia wykonaj następujące polecenie w wierszu polecenia w katalogu *Tests/ Razor PagesProject. Tests* :
 
 ```dotnetcli
 dotnet test
@@ -780,7 +780,7 @@ Mimo że aplikacja nie korzysta ze wzorca repozytorium i nie jest skutecznym prz
 
 ### <a name="test-app-organization"></a>Testuj organizację aplikacji
 
-Aplikacja testowa to Aplikacja konsolowa w katalogu *Tests/RazorPagesProject. Tests* .
+Aplikacja testowa to Aplikacja konsolowa w katalogu *Tests/ Razor PagesProject. Tests* .
 
 | Testuj katalog aplikacji | Opis |
 | ------------------ | ----------- |

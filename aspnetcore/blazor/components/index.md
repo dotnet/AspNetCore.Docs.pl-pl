@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: a5401e1b423740aadf6f8de84763b5c05d451cd0
-ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
+ms.openlocfilehash: 1312ae531b0acb0ce09137cc2bae6299ddda5c32
+ms.sourcegitcommit: e6b3dd344521ce320d5c2121bbc27c211df87e57
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86445336"
+ms.lasthandoff: 07/19/2020
+ms.locfileid: "86468850"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>Tworzenie i używanie Razor składników ASP.NET Core
 
@@ -81,7 +81,7 @@ Po pierwszym wyrenderowaniu składnika składnik generuje jego drzewo renderowan
 
 Składniki to zwykłe klasy języka C# i można je umieścić w dowolnym miejscu w projekcie. Składniki, które generują strony sieci Web, zwykle znajdują się w `Pages` folderze. Składniki niestronicowe są często umieszczane w `Shared` folderze lub do folderu niestandardowego dodanego do projektu.
 
-### <a name="namespaces"></a>Namespaces
+### <a name="namespaces"></a>Przestrzenie nazw
 
 Zazwyczaj przestrzeń nazw składnika pochodzi od głównej przestrzeni nazw aplikacji i lokalizacji składnika (folderu) w aplikacji. Jeśli główna przestrzeń nazw aplikacji jest `BlazorSample` i znajduje się `Counter` w `Pages` folderze:
 
@@ -648,7 +648,7 @@ Rozważmy następujący `Expander` składnik:
 <div @onclick="@Toggle" class="card text-white bg-success mb-3">
     <div class="card-body">
         <div class="panel-heading">
-            <h2>Toggle (Expanded = @Expanded)</h2>
+            <h2>Toggle (<code>Expanded</code> = @Expanded)</h2>
         </div>
 
         @if (Expanded)
@@ -704,10 +704,10 @@ Następujący zmieniony `Expander` składnik:
 <div @onclick="@Toggle" class="card text-white bg-success mb-3">
     <div class="card-body">
         <div class="panel-heading">
-            <h2>Toggle (Expanded = @expanded)</h2>
+            <h2>Toggle (<code>expanded</code> = @expanded)</h2>
         </div>
 
-        @if (Expanded)
+        @if (expanded)
         {
             <div class="card-text">
                 @ChildContent
@@ -866,7 +866,7 @@ Podobnie Obrazy SVG są obsługiwane w regułach CSS pliku arkusza stylów ( `.c
 
 Jednak wbudowane znaczniki SVG nie są obsługiwane we wszystkich scenariuszach. Jeśli umieścisz `<svg>` tag bezpośrednio w pliku składnika ( `.razor` ), podstawowe renderowanie obrazu jest obsługiwane, ale wiele scenariuszy zaawansowanych nie jest jeszcze obsługiwanych. Na przykład `<use>` tagi nie są obecnie przestrzegane i [`@bind`][10] nie mogą być używane z niektórymi tagami SVG. Aby uzyskać więcej informacji, zobacz [Obsługa SVG w Blazor (#18271 dotnet/aspnetcore)](https://github.com/dotnet/aspnetcore/issues/18271).
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:blazor/security/server/threat-mitigation>: Zawiera wskazówki dotyczące tworzenia Blazor Server aplikacji, które muszą będą konkurować o z wyczerpaniem zasobów.
 

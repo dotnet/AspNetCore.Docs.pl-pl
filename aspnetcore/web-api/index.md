@@ -5,7 +5,7 @@ description: Poznaj podstawy tworzenia internetowego interfejsu API w programie 
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 02/02/2020
+ms.date: 07/20/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/index
-ms.openlocfilehash: 7c9762d23ff612155846357bfadeaaad492c7299
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 98fb8c0a26f5f8e7ce5f07066f2f36e748ab2398
+ms.sourcegitcommit: d9ae1f352d372a20534b57e23646c1a1d9171af1
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404733"
+ms.lasthandoff: 07/21/2020
+ms.locfileid: "86568746"
 ---
 # <a name="create-web-apis-with-aspnet-core"></a>Tworzenie internetowych interfejsów API za pomocą platformy ASP.NET Core
 
@@ -98,16 +98,12 @@ Ten [`[ApiController]`](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute) at
 
 ::: moniker-end
 
-::: moniker range="= aspnetcore-2.1"
-
 * [Wymagania dotyczące routingu atrybutów](#attribute-routing-requirement)
 * [Automatyczne odpowiedzi HTTP 400](#automatic-http-400-responses)
 * [Wnioskowanie parametru źródła powiązania](#binding-source-parameter-inference)
 * [Wieloczęściowe/formularz-wnioskowanie dotyczące danych](#multipartform-data-request-inference)
 
 Te funkcje wymagają [wersji](xref:mvc/compatibility-version) 2,1 lub nowszej.
-
-::: moniker-end
 
 ### <a name="attribute-on-specific-controllers"></a>Atrybut na określonych kontrolerach
 
@@ -232,9 +228,11 @@ W przypadku zgodności z wersją 2,2 lub nowszą domyślny typ odpowiedzi dla od
 
 ::: moniker-end
 
+Aby zapewnić spójność automatycznych i niestandardowych odpowiedzi, wywołaj <xref:Microsoft.AspNetCore.Mvc.ControllerBase.ValidationProblem%2A> metodę zamiast <xref:System.Web.Http.ApiController.BadRequest%2A> . `ValidationProblem`zwraca <xref:Microsoft.AspNetCore.Mvc.ValidationProblemDetails> obiekt, a także odpowiedź automatyczną.
+
 ### <a name="log-automatic-400-responses"></a>Rejestruj automatyczne odpowiedzi 400
 
-Zobacz [jak rejestrować 400 automatyczne odpowiedzi na błędy walidacji modelu (#12157 ASPNET/AspNetCore.Docs)](https://github.com/dotnet/AspNetCore.Docs/issues/12157).
+Zobacz [jak rejestrować 400 automatyczne odpowiedzi na błędy walidacji modelu (dotnet/AspNetCore.Docs # 12157)](https://github.com/dotnet/AspNetCore.Docs/issues/12157).
 
 ### <a name="disable-automatic-400-response"></a>Wyłącz automatyczną odpowiedź 400
 
@@ -430,7 +428,7 @@ W poprzednim kodzie program `ConsumesController` jest skonfigurowany do obsługi
 
 Ten `[Consumes]` atrybut jest stosowany do obu akcji. `PostJson`Akcja obsługuje żądania wysyłane z `Content-Type` nagłówkiem `application/json` . `PostForm`Akcja obsługuje żądania wysyłane z `Content-Type` nagłówkiem `application/x-www-form-urlencoded` . 
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:web-api/action-return-types>
 * <xref:web-api/handle-errors>

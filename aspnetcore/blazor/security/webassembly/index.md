@@ -5,7 +5,7 @@ description: Dowiedz się, jak zabezpieczyć Blazor aplikacje WebAssemlby jako a
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/01/2020
+ms.date: 07/16/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/index
-ms.openlocfilehash: 0ff580dd7cbefdfe3121b30490f99e0235d93bc3
-ms.sourcegitcommit: 14c3d111f9d656c86af36ecb786037bf214f435c
+ms.openlocfilehash: fbb3f6d254e6d294edc7af59d7980a1d67e4a801
+ms.sourcegitcommit: d9ae1f352d372a20534b57e23646c1a1d9171af1
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/09/2020
-ms.locfileid: "86176147"
+ms.lasthandoff: 07/21/2020
+ms.locfileid: "86568811"
 ---
 # <a name="secure-aspnet-core-blazor-webassembly"></a>Bezpieczny ASP.NET CoreBlazor WebAssembly
 
@@ -68,11 +68,27 @@ Akcje uwierzytelniania, takie jak rejestrowanie lub podpisywanie użytkownika, s
 
 Aby uzyskać więcej informacji i przykładów, zobacz <xref:blazor/security/webassembly/additional-scenarios> .
 
-## <a name="authorization"></a>Authorization
+## <a name="authorization"></a>Autoryzacja
 
 W Blazor WebAssembly aplikacjach można pominąć sprawdzanie autoryzacji, ponieważ wszystkie kody po stronie klienta mogą być modyfikowane przez użytkowników. Jest to samo prawdziwe dla wszystkich technologii aplikacji po stronie klienta, w tym dla struktur SPA skryptów JavaScript lub natywnych aplikacji dla dowolnego systemu operacyjnego.
 
 **Zawsze sprawdzaj autoryzację na serwerze w ramach dowolnych punktów końcowych interfejsu API, do których uzyskuje dostęp aplikacja po stronie klienta.**
+
+## <a name="require-authorization-for-the-entire-app"></a>Wymagaj autoryzacji dla całej aplikacji
+
+Zastosuj [ `[Authorize]` atrybut](xref:blazor/security/index#authorize-attribute) ([dokumentację interfejsu API](xref:System.Web.Mvc.AuthorizeAttribute)) do każdego Razor składnika aplikacji, korzystając z jednej z następujących metod:
+
+* Użyj [`@attribute`](xref:mvc/views/razor#attribute) dyrektywy w `_Imports.razor` pliku:
+
+  ```razor
+  @using Microsoft.AspNetCore.Authorization
+  @attribute [Authorize]
+  ```
+
+* Dodaj atrybut do każdego Razor składnika w `Pages` folderze.
+
+> [!NOTE]
+> Ustawianie <xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.FallbackPolicy?displayProperty=nameWithType> dla zasad w programie <xref:Microsoft.AspNetCore.Authorization.AuthorizationPolicyBuilder.RequireAuthenticatedUser%2A> **nie** jest obsługiwane.
 
 ## <a name="refresh-tokens"></a>Odśwież tokeny
 

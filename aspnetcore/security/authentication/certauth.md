@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/certauth
-ms.openlocfilehash: 2c58a274e8de0b1205b223287b7690b1d5caed23
-ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
+ms.openlocfilehash: 06803ee57824bbfac5725763938abbb9db0e360a
+ms.sourcegitcommit: d9ae1f352d372a20534b57e23646c1a1d9171af1
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86445128"
+ms.lasthandoff: 07/21/2020
+ms.locfileid: "86568850"
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>Konfigurowanie uwierzytelniania certyfikatów w ASP.NET Core
 
@@ -36,7 +36,7 @@ Uwierzytelnianie certyfikatu jest scenariuszem stanowym głównie używanym w pr
 
 Alternatywą dla uwierzytelniania certyfikatu w środowiskach, w których są używane serwery proxy i moduły równoważenia obciążenia, są Active Directory usług federacyjnych (AD FS) za pomocą OpenID Connect Connect (OIDC).
 
-## <a name="get-started"></a>Wprowadzenie
+## <a name="get-started"></a>Rozpoczęcie pracy
 
 Uzyskaj certyfikat HTTPS, zastosuj go i [Skonfiguruj serwer](#configure-your-server-to-require-certificates) tak, aby wymagał certyfikatów.
 
@@ -44,7 +44,7 @@ W aplikacji sieci Web Dodaj odwołanie do pakietu [Microsoft. AspNetCore. Authen
 
 Jeśli uwierzytelnianie nie powiedzie się, ta procedura obsługi zwróci `403 (Forbidden)` odpowiedź zamiast elementu `401 (Unauthorized)` , zgodnie z oczekiwaniami. Powodem jest to, że uwierzytelnianie powinno nastąpić podczas początkowego połączenia TLS. Przez czas, gdy dociera do programu obsługi, jest zbyt opóźniony. Nie ma możliwości uaktualnienia połączenia z anonimowego połączenia z certyfikatem.
 
-Dodaj również `app.UseAuthentication();` `Startup.Configure` metodę. W przeciwnym razie `HttpContext.User` nie zostanie ustawiona jako `ClaimsPrincipal` utworzona na podstawie certyfikatu. Przykład:
+Dodaj również `app.UseAuthentication();` `Startup.Configure` metodę. W przeciwnym razie `HttpContext.User` nie zostanie ustawiona jako `ClaimsPrincipal` utworzona na podstawie certyfikatu. Na przykład:
 
 ::: moniker range=">= aspnetcore-5.0"
 
@@ -630,7 +630,7 @@ Renegocjowanie protokołu TLS było starym sposobem implementacji opcjonalnych c
 - Protokół HTTP/2 [jawnie zabrania](https://tools.ietf.org/html/rfc7540#section-9.2.1) ponownej negocjacji.
 - Protokół TLS 1,3 został [usunięty](https://tools.ietf.org/html/rfc8740#section-1) z obsługi ponownej negocjacji.
 
-ASP.NET Core 5 wersja zapoznawcza 4 i nowsze dodaje bardziej wygodną obsługę opcjonalnych certyfikatów klienta. Aby uzyskać więcej informacji, zobacz [przykład opcjonalnych certyfikatów](https://github.com/dotnet/aspnetcore/tree/9ce4a970a21bace3fb262da9591ed52359309592/src/Security/Authentication/Certificate/samples/Certificate.Optional.Sample).
+ASP.NET Core 5 w wersji zapoznawczej 7 i nowszych dodaje bardziej wygodną obsługę opcjonalnych certyfikatów klienta. Aby uzyskać więcej informacji, zobacz [przykład opcjonalnych certyfikatów](https://github.com/dotnet/aspnetcore/tree/9ce4a970a21bace3fb262da9591ed52359309592/src/Security/Authentication/Certificate/samples/Certificate.Optional.Sample).
 
 Następujące podejście obsługuje opcjonalne certyfikaty klienta:
 

@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/filters
-ms.openlocfilehash: 0141ad2df5216183424980a6ca50bf6bcd64ade5
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.openlocfilehash: 96d24940af6c591e3c02bfa26ed9d7d6ea60d27d
+ms.sourcegitcommit: d00a200bc8347af794b24184da14ad5c8b6bba9a
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86213062"
+ms.lasthandoff: 07/21/2020
+ms.locfileid: "86869981"
 ---
 # <a name="filters-in-aspnet-core"></a>Filtry w ASP.NET Core
 
@@ -83,6 +83,8 @@ Filtry obsługują implementacje synchroniczne i asynchroniczne za pomocą róż
 Filtry synchroniczne uruchamiają kod przed i po fazie potoku. Na przykład, <xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecuting*> jest wywoływana przed wywołaniem metody akcji. <xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecuted*>jest wywoływana po powrocie metody akcji.
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/MySampleActionFilter.cs?name=snippet_ActionFilter)]
+
+W poprzednim kodzie funkcja myFunction [jest funkcją](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/controllers/filters/3.1sample/FiltersSample/Helper/MyDebug.cs) narzędziową w [przykładowym pobieraniu](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/controllers/filters/3.1sample/FiltersSample/Helper/MyDebug.cs).
 
 Filtry asynchroniczne definiują `On-Stage-ExecutionAsync` metodę. Na przykład <xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecutionAsync*> :
 
@@ -186,12 +188,12 @@ Poniższy przykład ilustruje kolejność, w której metody filtrowania są wywo
 
 | Sequence | Zakres filtru | Filter — Metoda |
 |:--------:|:------------:|:-------------:|
-| 1 | Globalny | `OnActionExecuting` |
+| 1 | Globalnie | `OnActionExecuting` |
 | 2 | Kontroler lub Razor Strona| `OnActionExecuting` |
 | 3 | Metoda | `OnActionExecuting` |
 | 4 | Metoda | `OnActionExecuted` |
 | 5 | Kontroler lub Razor Strona | `OnActionExecuted` |
-| 6 | Globalny | `OnActionExecuted` |
+| 6 | Globalnie | `OnActionExecuted` |
 
 ### <a name="controller-level-filters"></a>Filtry na poziomie kontrolera
 
@@ -211,6 +213,8 @@ Na przykład, w przykładzie pobierania, `MySampleActionFilter` jest stosowana g
 * Przesłania `OnActionExecuting` i `OnActionExecuted` .
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/TestController.cs?name=snippet)]
+
+[!INCLUDE[](~/includes/MyDisplayRouteInfo.md)]
 
 <!-- test via  webBuilder.UseStartup<Startup>(); -->
 
@@ -730,12 +734,12 @@ Poniższy przykład ilustruje kolejność, w której metody filtrowania są wywo
 
 | Sequence | Zakres filtru | Filter — Metoda |
 |:--------:|:------------:|:-------------:|
-| 1 | Globalny | `OnActionExecuting` |
+| 1 | Globalnie | `OnActionExecuting` |
 | 2 | Kontroler | `OnActionExecuting` |
 | 3 | Metoda | `OnActionExecuting` |
 | 4 | Metoda | `OnActionExecuted` |
 | 5 | Kontroler | `OnActionExecuted` |
-| 6 | Globalny | `OnActionExecuted` |
+| 6 | Globalnie | `OnActionExecuted` |
 
 Ta sekwencja pokazuje:
 
@@ -792,8 +796,8 @@ Należy wziąć pod uwagę te same 3 filtry akcji, które przedstawiono w powyż
 |:--------:|:------------:|:-----------------:|:-------------:|
 | 1 | Metoda | 0 | `OnActionExecuting` |
 | 2 | Kontroler | 1  | `OnActionExecuting` |
-| 3 | Globalny | 2  | `OnActionExecuting` |
-| 4 | Globalny | 2  | `OnActionExecuted` |
+| 3 | Globalnie | 2  | `OnActionExecuting` |
+| 4 | Globalnie | 2  | `OnActionExecuted` |
 | 5 | Kontroler | 1  | `OnActionExecuted` |
 | 6 | Metoda | 0  | `OnActionExecuted` |
 

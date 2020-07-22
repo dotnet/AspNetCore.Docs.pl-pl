@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/data-binding
-ms.openlocfilehash: 0f2741a78b58d7380fcbe84e97f5a08ef291c27b
-ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
+ms.openlocfilehash: 896eed0e55986678b6bb86638ca92b04a77b4fef
+ms.sourcegitcommit: d00a200bc8347af794b24184da14ad5c8b6bba9a
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85944516"
+ms.lasthandoff: 07/21/2020
+ms.locfileid: "86869942"
 ---
 # <a name="aspnet-core-blazor-data-binding"></a>ASP.NET Core Blazor powiązania danych
 
@@ -167,7 +167,7 @@ Następujący składnik podrzędny ( `ChildComponent` ) ma `Year` parametr skła
 }
 ```
 
-<xref:Microsoft.AspNetCore.Components.EventCallback%601>wyjaśniono w temacie <xref:blazor/components/event-handling#eventcallback> .
+<xref:Microsoft.AspNetCore.Components.EventCallback%601>Musi mieć nazwę parametru składnika, po którym następuje `Changed` sufiks ( `{PARAMETER NAME}Changed` ), `YearChanged` w poprzednim przykładzie. Aby uzyskać więcej informacji na temat <xref:Microsoft.AspNetCore.Components.EventCallback%601> , zobacz <xref:blazor/components/event-handling#eventcallback> .
 
 Poniższy składnik nadrzędny używa:
 
@@ -365,7 +365,7 @@ Password:
 }
 ```
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Powiązywanie z przyciskami radiowymi w formularzu](xref:blazor/forms-validation#radio-buttons)
 * [Powiązywanie `<select>` opcji elementu z wartościami obiektów C# `null` w formularzu](xref:blazor/forms-validation#binding-select-element-options-to-c-object-null-values)

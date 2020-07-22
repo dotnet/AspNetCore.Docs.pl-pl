@@ -6,20 +6,20 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 2/25/2020
 no-loc:
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: tutorials/first-web-api
-ms.openlocfilehash: 79f36168d0430ceee3794cfb5a4e29f3671ac73f
-ms.sourcegitcommit: d9ae1f352d372a20534b57e23646c1a1d9171af1
+ms.openlocfilehash: 2383934070a65b8131e890a170186b736d3fcec0
+ms.sourcegitcommit: d00a200bc8347af794b24184da14ad5c8b6bba9a
 ms.translationtype: MT
 ms.contentlocale: pl-PL
 ms.lasthandoff: 07/21/2020
-ms.locfileid: "86212626"
+ms.locfileid: "86869994"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>Samouczek: Tworzenie internetowego interfejsu API za pomocą ASP.NET Core
 
@@ -232,7 +232,7 @@ Klasy modelu mogą przejść do dowolnego miejsca w projekcie, ale folder *model
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-### <a name="add-microsoftentityframeworkcoresqlserver"></a>Dodaj Microsoft. EntityFrameworkCore. SqlServer
+### <a name="add-nuget-packages"></a>Dodawanie pakietów NuGet
 
 * W menu **Narzędzia** wybierz pozycję **menedżer pakietów NuGet > zarządzanie pakietami NuGet dla rozwiązania**.
 * Wybierz kartę **Przeglądaj** , a następnie w polu wyszukiwania wprowadź ciąg **Microsoft. EntityFrameworkCore. SqlServer** .
@@ -958,7 +958,7 @@ Usuwanie elementu do wykonania jest realizowane przez ustawienie `type` w WYWOŁ
 
 ## <a name="add-authentication-support-to-a-web-api"></a>Dodawanie obsługi uwierzytelniania do internetowego interfejsu API
 
-[!INCLUDE[](~/includes/:::no-loc(Identity):::Server4.md)]
+[!INCLUDE[](~/includes/IdentityServer4.md)]
 
 ## <a name="additional-resources"></a>Zasoby dodatkowe
 

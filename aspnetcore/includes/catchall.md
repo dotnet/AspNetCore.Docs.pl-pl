@@ -9,7 +9,7 @@
 >
 > Poprawka dotycząca tej usterki jest zawarta w programie [.NET Core 3.1.301 SDK i nowszych](https://dotnet.microsoft.com/download/dotnet-core/3.1). Poniższy kod ustawia przełącznik wewnętrzny, który naprawia tę usterkę:
 >
->```
+>```csharp
 >public static void Main(string[] args)
 >{
 >    AppContext.SetSwitch("Microsoft.AspNetCore.Routing.UseCorrectCatchAllBehavior", 

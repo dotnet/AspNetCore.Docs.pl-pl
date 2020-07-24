@@ -6,20 +6,20 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/15/2020
 no-loc:
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- ':::no-loc(Blazor):::'
+- ':::no-loc(Blazor Server):::'
+- ':::no-loc(Blazor WebAssembly):::'
+- ':::no-loc(Identity):::'
+- ":::no-loc(Let's Encrypt):::"
+- ':::no-loc(Razor):::'
+- ':::no-loc(SignalR):::'
 uid: security/authorization/policies
-ms.openlocfilehash: 8c68f2a15d07909d4576a2426d92f9beaa91fbb7
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 668c68bc328860ef17e1f2df09103fca07733ef7
+ms.sourcegitcommit: 1b89fc58114a251926abadfd5c69c120f1ba12d8
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408074"
+ms.lasthandoff: 07/24/2020
+ms.locfileid: "87160158"
 ---
 # <a name="policy-based-authorization-in-aspnet-core"></a>Autoryzacja oparta na zasadach w ASP.NET Core
 
@@ -109,7 +109,7 @@ public void ConfigureServices(IServiceCollection services)
 
 
     services.AddControllersWithViews();
-    services.AddRazorPages();
+    services.Add:::no-loc(Razor):::Pages();
 }
 ```
 
@@ -117,21 +117,21 @@ Użyj <xref:Microsoft.AspNetCore.Authorization.IAuthorizationService> lub `[Auth
 
 ## <a name="apply-policies-to-mvc-controllers"></a>Stosowanie zasad do kontrolerów MVC
 
-Jeśli używasz Razor stron, zobacz [stosowanie zasad do Razor stron](#apply-policies-to-razor-pages) w tym dokumencie.
+Jeśli używasz :::no-loc(Razor)::: stron, zobacz [stosowanie zasad do :::no-loc(Razor)::: stron](#apply-policies-to-razor-pages) w tym dokumencie.
 
-Zasady są stosowane do kontrolerów przy użyciu `[Authorize]` atrybutu z nazwą zasad. Na przykład:
+Zasady są stosowane do kontrolerów przy użyciu `[Authorize]` atrybutu z nazwą zasad. Przykład:
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Controllers/AlcoholPurchaseController.cs?name=snippet_AlcoholPurchaseControllerClass&highlight=4)]
 
-## <a name="apply-policies-to-razor-pages"></a>Stosowanie zasad do Razor stron
+## <a name="apply-policies-to-no-locrazor-pages"></a>Stosowanie zasad do :::no-loc(Razor)::: stron
 
-Zasady są stosowane do Razor stron przy użyciu `[Authorize]` atrybutu z nazwą zasad. Na przykład:
+Zasady są stosowane do :::no-loc(Razor)::: stron przy użyciu `[Authorize]` atrybutu z nazwą zasad. Przykład:
 
 [!code-csharp[](policies/samples/PoliciesAuthApp2/Pages/AlcoholPurchase.cshtml.cs?name=snippet_AlcoholPurchaseModelClass&highlight=4)]
 
-***Nie*** można zastosować zasad na Razor poziomie obsługi strony, muszą one być stosowane na stronie.
+***Nie*** można zastosować zasad na :::no-loc(Razor)::: poziomie obsługi strony, muszą one być stosowane na stronie.
 
-Zasady mogą być stosowane do Razor stron przy użyciu [Konwencji autoryzacji](xref:security/authorization/razor-pages-authorization).
+Zasady mogą być stosowane do :::no-loc(Razor)::: stron przy użyciu [Konwencji autoryzacji](xref:security/authorization/razor-pages-authorization).
 
 ## <a name="requirements"></a>Wymagania
 
@@ -174,7 +174,7 @@ Poprzedni kod przechodzi przez [PendingRequirements](/dotnet/api/microsoft.aspne
 
 ### <a name="handler-registration"></a>Rejestracja procedury obsługi
 
-Procedury obsługi są rejestrowane w kolekcji usług podczas konfiguracji. Na przykład:
+Procedury obsługi są rejestrowane w kolekcji usług podczas konfiguracji. Przykład:
 
 [!code-csharp[](policies/samples/3.0PoliciesAuthApp1/Startup.cs?range=31-32,39-40,42-45, 53-55, 58)]
 
@@ -225,9 +225,9 @@ Na przykład poprzedni można `BadgeEntryHandler` napisać ponownie w następuj�
 
 ## <a name="access-mvc-request-context-in-handlers"></a>Dostęp do kontekstu żądania MVC w programach obsługi
 
-`HandleRequirementAsync`Metoda zaimplementowana w procedurze obsługi autoryzacji ma dwa parametry: `AuthorizationHandlerContext` a i `TRequirement` obsługujące. Platformy, takie jak MVC lub, SignalR mogą dodawać dowolne obiekty do `Resource` właściwości w `AuthorizationHandlerContext` celu przekazania dodatkowych informacji.
+`HandleRequirementAsync`Metoda zaimplementowana w procedurze obsługi autoryzacji ma dwa parametry: `AuthorizationHandlerContext` a i `TRequirement` obsługujące. Platformy, takie jak MVC lub, :::no-loc(SignalR)::: mogą dodawać dowolne obiekty do `Resource` właściwości w `AuthorizationHandlerContext` celu przekazania dodatkowych informacji.
 
-W przypadku korzystania z routingu punktów końcowych Autoryzacja jest zwykle obsługiwana przez oprogramowanie pośredniczące autoryzacji. W tym przypadku `Resource` Właściwość jest wystąpieniem <xref:Microsoft.AspNetCore.Http.Endpoint> . Punkt końcowy może służyć do sondowania bazowego zasobu, z którym jest przeprowadzana Routing. Na przykład:
+W przypadku korzystania z routingu punktów końcowych Autoryzacja jest zwykle obsługiwana przez oprogramowanie pośredniczące autoryzacji. W tym przypadku `Resource` Właściwość jest wystąpieniem <xref:Microsoft.AspNetCore.Http.Endpoint> . Punkt końcowy może służyć do sondowania bazowego zasobu, z którym jest przeprowadzana Routing. Przykład:
 
 ```csharp
 if (context.Resource is Endpoint endpoint)
@@ -239,7 +239,7 @@ if (context.Resource is Endpoint endpoint)
 
 Punkt końcowy nie zapewnia dostępu do bieżącego `HttpContext` . W przypadku korzystania z routingu punktów końcowych Użyj programu `IHttpContextAcessor` w celu uzyskania dostępu do programu `HttpContext` obsługi autoryzacji. Aby uzyskać więcej informacji, zobacz [Korzystanie z elementu HttpContext ze składników niestandardowych](xref:fundamentals/httpcontext#use-httpcontext-from-custom-components).
 
-Przy użyciu tradycyjnego routingu lub gdy autoryzacja występuje w ramach filtru autoryzacji MVC, wartość `Resource` jest <xref:Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext> wystąpieniem. Ta właściwość zapewnia dostęp do `HttpContext` `RouteData` elementów, i innych udostępnianych przez MVC i Razor Pages.
+Przy użyciu tradycyjnego routingu lub gdy autoryzacja występuje w ramach filtru autoryzacji MVC, wartość `Resource` jest <xref:Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext> wystąpieniem. Ta właściwość zapewnia dostęp do `HttpContext` `RouteData` elementów, i innych udostępnianych przez MVC i :::no-loc(Razor)::: Pages.
 
 Użycie `Resource` właściwości jest specyficzne dla struktury. Użycie informacji we `Resource` Właściwości ogranicza zasady autoryzacji do określonych struktur. Należy rzutować `Resource` Właściwość za pomocą `is` słowa kluczowego, a następnie potwierdzić, że rzutowanie zakończyło się pomyślnie, aby upewnić się, że kod nie ulegnie awarii z `InvalidCastException` uruchomieniem w innych strukturach:
 
@@ -252,8 +252,11 @@ if (context.Resource is AuthorizationFilterContext mvcContext)
 }
 ```
 
-::: moniker-end
+## <a name="globally-require-all-users-to-be-authenticated"></a>Globalnie Wymagaj uwierzytelnienia wszystkich użytkowników
 
+[!INCLUDE[](~/includes/requireAuth.md)]
+
+::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
@@ -350,19 +353,19 @@ Użyj <xref:Microsoft.AspNetCore.Authorization.IAuthorizationService> lub `[Auth
 
 ## <a name="apply-policies-to-mvc-controllers"></a>Stosowanie zasad do kontrolerów MVC
 
-Jeśli używasz Razor stron, zobacz [stosowanie zasad do Razor stron](#apply-policies-to-razor-pages) w tym dokumencie.
+Jeśli używasz :::no-loc(Razor)::: stron, zobacz [stosowanie zasad do :::no-loc(Razor)::: stron](#apply-policies-to-razor-pages) w tym dokumencie.
 
-Zasady są stosowane do kontrolerów przy użyciu `[Authorize]` atrybutu z nazwą zasad. Na przykład:
+Zasady są stosowane do kontrolerów przy użyciu `[Authorize]` atrybutu z nazwą zasad. Przykład:
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Controllers/AlcoholPurchaseController.cs?name=snippet_AlcoholPurchaseControllerClass&highlight=4)]
 
-## <a name="apply-policies-to-razor-pages"></a>Stosowanie zasad do Razor stron
+## <a name="apply-policies-to-no-locrazor-pages"></a>Stosowanie zasad do :::no-loc(Razor)::: stron
 
-Zasady są stosowane do Razor stron przy użyciu `[Authorize]` atrybutu z nazwą zasad. Na przykład:
+Zasady są stosowane do :::no-loc(Razor)::: stron przy użyciu `[Authorize]` atrybutu z nazwą zasad. Przykład:
 
 [!code-csharp[](policies/samples/PoliciesAuthApp2/Pages/AlcoholPurchase.cshtml.cs?name=snippet_AlcoholPurchaseModelClass&highlight=4)]
 
-Zasady mogą być również stosowane do Razor stron przy użyciu [Konwencji autoryzacji](xref:security/authorization/razor-pages-authorization).
+Zasady mogą być również stosowane do :::no-loc(Razor)::: stron przy użyciu [Konwencji autoryzacji](xref:security/authorization/razor-pages-authorization).
 
 ## <a name="requirements"></a>Wymagania
 
@@ -405,7 +408,7 @@ Poprzedni kod przechodzi przez [PendingRequirements](/dotnet/api/microsoft.aspne
 
 ### <a name="handler-registration"></a>Rejestracja procedury obsługi
 
-Procedury obsługi są rejestrowane w kolekcji usług podczas konfiguracji. Na przykład:
+Procedury obsługi są rejestrowane w kolekcji usług podczas konfiguracji. Przykład:
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Startup.cs?range=32-33,48-53,61,62-63,66)]
 
@@ -456,9 +459,9 @@ Na przykład poprzedni można `BadgeEntryHandler` napisać ponownie w następuj�
 
 ## <a name="access-mvc-request-context-in-handlers"></a>Dostęp do kontekstu żądania MVC w programach obsługi
 
-`HandleRequirementAsync`Metoda zaimplementowana w procedurze obsługi autoryzacji ma dwa parametry: `AuthorizationHandlerContext` a i `TRequirement` obsługujące. Platformy, takie jak MVC lub, SignalR mogą dodawać dowolne obiekty do `Resource` właściwości w `AuthorizationHandlerContext` celu przekazania dodatkowych informacji.
+`HandleRequirementAsync`Metoda zaimplementowana w procedurze obsługi autoryzacji ma dwa parametry: `AuthorizationHandlerContext` a i `TRequirement` obsługujące. Platformy, takie jak MVC lub, :::no-loc(SignalR)::: mogą dodawać dowolne obiekty do `Resource` właściwości w `AuthorizationHandlerContext` celu przekazania dodatkowych informacji.
 
-Na przykład, MVC przekazuje wystąpienie elementu [AuthorizationFilterContext](/dotnet/api/?term=AuthorizationFilterContext) we `Resource` właściwości. Ta właściwość zapewnia dostęp do `HttpContext` `RouteData` elementów, i innych udostępnianych przez MVC i Razor Pages.
+Na przykład, MVC przekazuje wystąpienie elementu [AuthorizationFilterContext](/dotnet/api/?term=AuthorizationFilterContext) we `Resource` właściwości. Ta właściwość zapewnia dostęp do `HttpContext` `RouteData` elementów, i innych udostępnianych przez MVC i :::no-loc(Razor)::: Pages.
 
 Użycie `Resource` właściwości jest specyficzne dla struktury. Użycie informacji we `Resource` Właściwości ogranicza zasady autoryzacji do określonych struktur. Należy rzutować `Resource` Właściwość za pomocą `is` słowa kluczowego, a następnie potwierdzić, że rzutowanie zakończyło się pomyślnie, aby upewnić się, że kod nie ulegnie awarii z `InvalidCastException` uruchomieniem w innych strukturach:
 

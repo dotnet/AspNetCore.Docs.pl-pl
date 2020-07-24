@@ -13,12 +13,12 @@ no-loc:
 - ':::no-loc(Razor):::'
 - ':::no-loc(SignalR):::'
 uid: security/authentication/identity
-ms.openlocfilehash: dd3296db568700a363c427398f02239846a46ada
-ms.sourcegitcommit: d9ae1f352d372a20534b57e23646c1a1d9171af1
+ms.openlocfilehash: 25070e90050db9dca8b003ae782662811096526a
+ms.sourcegitcommit: 1b89fc58114a251926abadfd5c69c120f1ba12d8
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/21/2020
-ms.locfileid: "86445437"
+ms.lasthandoff: 07/24/2020
+ms.locfileid: "87160310"
 ---
 # <a name="introduction-to-no-locidentity-on-aspnet-core"></a>Wprowadzenie do :::no-loc(Identity)::: ASP.NET Core
 
@@ -32,6 +32,8 @@ ASP.NET Core :::no-loc(Identity)::: :
 * Zarządza użytkownikami, hasłami, danymi profilu, rolami, oświadczeniami, tokenami, potwierdzeniem wiadomości e-mail i innymi.
 
 Użytkownicy mogą utworzyć konto z informacjami logowania przechowywanymi w :::no-loc(Identity)::: usłudze lub korzystać z zewnętrznego dostawcy logowania. Obsługiwane zewnętrzne dostawcy logowania obejmują [serwis Facebook, Google, konto Microsoft i Twitter](xref:security/authentication/social/index).
+
+[!INCLUDE[](~/includes/requireAuth.md)]
 
 [ :::no-loc(Identity)::: Kod źródłowy](https://github.com/dotnet/AspNetCore/tree/master/src/:::no-loc(Identity):::) jest dostępny w serwisie GitHub. [Szkielet :::no-loc(Identity)::: ](xref:security/authentication/scaffold-identity) i Wyświetl wygenerowane pliki w celu przejrzenia interakcji z szablonem :::no-loc(Identity)::: .
 
@@ -61,7 +63,7 @@ Utwórz projekt aplikacji sieci Web ASP.NET Core przy użyciu poszczególnych ko
 * Wybierz **aplikację sieci Web**ASP.NET Core, a następnie wybierz pozycję **Zmień uwierzytelnianie**.
 * Wybierz pozycję **indywidualne konta użytkowników** , a następnie kliknij przycisk **OK**.
 
-# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
 
 ```dotnetcli
 dotnet new webapp --auth Individual -o WebApp1
@@ -75,7 +77,7 @@ dotnet new webapp --auth Individual -uld -o WebApp1
 
 ---
 
-Wygenerowany projekt zawiera [ASP.NET Core :::no-loc(Identity)::: ](xref:security/authentication/identity) jako [ :::no-loc(Razor)::: bibliotekę klas](xref:razor-pages/ui-class). :::no-loc(Identity)::: :::no-loc(Razor)::: Biblioteka klas uwidacznia punkty końcowe z `:::no-loc(Identity):::` obszarem. Na przykład:
+Wygenerowany projekt zawiera [ASP.NET Core :::no-loc(Identity)::: ](xref:security/authentication/identity) jako [ :::no-loc(Razor)::: bibliotekę klas](xref:razor-pages/ui-class). :::no-loc(Identity)::: :::no-loc(Razor)::: Biblioteka klas uwidacznia punkty końcowe z `:::no-loc(Identity):::` obszarem. Przykład:
 
 * /:::no-loc(Identity):::/Account/Login
 * /:::no-loc(Identity):::/Account/Logout
@@ -91,7 +93,7 @@ Uruchom następujące polecenie w konsoli Menedżera pakietów (PMC):
 
 `PM> Update-Database`
 
-# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
 
 W przypadku korzystania z oprogramowania SQLite migracja nie jest konieczna.
 
@@ -135,7 +137,7 @@ Aby uzyskać więcej informacji na temat programów `:::no-loc(Identity):::Optio
 
 Dodaj `Register` pliki, `Login` , `LogOut` i `RegisterConfirmation` . Postępuj zgodnie z informacjami o [tożsamości szkieletowej w :::no-loc(Razor)::: projekcie z instrukcjami autoryzacji](xref:security/authentication/scaffold-identity#scaffold-identity-into-a-razor-project-with-authorization) w celu wygenerowania kodu pokazanego w tej sekcji.
 
-# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
 
 Jeśli utworzono projekt o nazwie **WebApp1**, uruchom następujące polecenia. W przeciwnym razie użyj prawidłowej przestrzeni nazw dla `ApplicationDbContext` :
 
@@ -295,7 +297,7 @@ Utwórz projekt aplikacji sieci Web ASP.NET Core przy użyciu poszczególnych ko
 * Wybierz **aplikację sieci Web**ASP.NET Core, a następnie wybierz pozycję **Zmień uwierzytelnianie**.
 * Wybierz pozycję **indywidualne konta użytkowników** , a następnie kliknij przycisk **OK**.
 
-# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
 
 ```dotnetcli
 dotnet new webapp --auth Individual -o WebApp1
@@ -303,7 +305,7 @@ dotnet new webapp --auth Individual -o WebApp1
 
 ---
 
-Wygenerowany projekt zawiera [ASP.NET Core :::no-loc(Identity)::: ](xref:security/authentication/identity) jako [ :::no-loc(Razor)::: bibliotekę klas](xref:razor-pages/ui-class). :::no-loc(Identity)::: :::no-loc(Razor)::: Biblioteka klas uwidacznia punkty końcowe z `:::no-loc(Identity):::` obszarem. Na przykład:
+Wygenerowany projekt zawiera [ASP.NET Core :::no-loc(Identity)::: ](xref:security/authentication/identity) jako [ :::no-loc(Razor)::: bibliotekę klas](xref:razor-pages/ui-class). :::no-loc(Identity)::: :::no-loc(Razor)::: Biblioteka klas uwidacznia punkty końcowe z `:::no-loc(Identity):::` obszarem. Przykład:
 
 * /:::no-loc(Identity):::/Account/Login
 * /:::no-loc(Identity):::/Account/Logout
@@ -321,7 +323,7 @@ Uruchom następujące polecenie w konsoli Menedżera pakietów (PMC):
 Update-Database
 ```
 
-# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
 
 ```dotnetcli
 dotnet ef database update
@@ -359,7 +361,7 @@ Postępuj zgodnie z informacjami o [tożsamości szkieletowej w :::no-loc(Razor)
 
 Dodaj pliki rejestru, logowania i wylogowywania.
 
-# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
 
 Jeśli utworzono projekt o nazwie **WebApp1**, uruchom następujące polecenia. W przeciwnym razie użyj prawidłowej przestrzeni nazw dla `ApplicationDbContext` :
 

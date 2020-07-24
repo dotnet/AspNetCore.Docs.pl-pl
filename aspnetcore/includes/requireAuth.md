@@ -1,0 +1,1 @@
+Aby uzyskać informacje na temat globalnego żądania uwierzytelnienia wszystkich użytkowników, zobacz [Wymagaj uwierzytelnionych użytkowników](xref:security/authorization/secure-data#rau).

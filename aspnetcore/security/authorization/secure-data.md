@@ -1,18 +1,18 @@
 ---
 title: Tworzenie aplikacji ASP.NET Core przy użyciu danych użytkownika chronionych przez autoryzację
 author: rick-anderson
-description: 'Dowiedz się, jak utworzyć aplikację sieci Web ASP.NET Core przy użyciu danych użytkownika chronionych przez autoryzację. Obejmuje HTTPS, uwierzytelnianie, zabezpieczenia, ASP.NET Core :::no-loc(Identity)::: .'
+description: Dowiedz się, jak utworzyć aplikację sieci Web ASP.NET Core przy użyciu danych użytkownika chronionych przez autoryzację. Obejmuje HTTPS, uwierzytelnianie, zabezpieczenia, ASP.NET Core Identity .
 ms.author: riande
 ms.date: 7/18/2020
 ms.custom: mvc, seodec18
 no-loc:
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authorization/secure-data
 ms.openlocfilehash: 7d4c10fa0b1c569179fc3e0a518917ec0185c51f
 ms.sourcegitcommit: 1b89fc58114a251926abadfd5c69c120f1ba12d8
@@ -97,11 +97,11 @@ Poniższe sekcje zawierają wszystkie najważniejsze kroki umożliwiające utwor
 
 ### <a name="tie-the-contact-data-to-the-user"></a>Powiązanie danych kontaktowych z użytkownikiem
 
-Użyj [:::no-loc(Identity):::](xref:security/authentication/identity) identyfikatora użytkownika ASP.NET, aby upewnić się, że użytkownicy mogą edytować swoje dane, ale nie inne dane użytkowników. Dodaj `OwnerID` i `ContactStatus` do `Contact` modelu:
+Użyj [Identity](xref:security/authentication/identity) identyfikatora użytkownika ASP.NET, aby upewnić się, że użytkownicy mogą edytować swoje dane, ale nie inne dane użytkowników. Dodaj `OwnerID` i `ContactStatus` do `Contact` modelu:
 
 [!code-csharp[](secure-data/samples/final3/Models/Contact.cs?name=snippet1&highlight=5-6,16-999)]
 
-`OwnerID`jest IDENTYFIKATORem użytkownika z `AspNetUser` tabeli w [:::no-loc(Identity):::](xref:security/authentication/identity) bazie danych. `Status`Pole określa, czy kontakt jest widoczny dla użytkowników ogólnych.
+`OwnerID`jest IDENTYFIKATORem użytkownika z `AspNetUser` tabeli w [Identity](xref:security/authentication/identity) bazie danych. `Status`Pole określa, czy kontakt jest widoczny dla użytkowników ogólnych.
 
 Utwórz nową migrację i zaktualizuj bazę danych:
 
@@ -110,9 +110,9 @@ dotnet ef migrations add userID_Status
 dotnet ef database update
 ```
 
-### <a name="add-role-services-to-no-locidentity"></a>Dodawanie usług ról do programu:::no-loc(Identity):::
+### <a name="add-role-services-to-no-locidentity"></a>Dodawanie usług ról do programuIdentity
 
-Dołącz [Addroles](/dotnet/api/microsoft.aspnetcore.identity.identitybuilder.addroles#Microsoft_AspNetCore_:::no-loc(Identity):::_:::no-loc(Identity):::Builder_AddRoles__1) , aby dodać usługi ról:
+Dołącz [Addroles](/dotnet/api/microsoft.aspnetcore.identity.identitybuilder.addroles#Microsoft_AspNetCore_Identity_IdentityBuilder_AddRoles__1) , aby dodać usługi ról:
 
 [!code-csharp[](secure-data/samples/final3/Startup.cs?name=snippet2&highlight=9)]
 
@@ -124,19 +124,19 @@ Ustaw rezerwowe zasady uwierzytelniania, aby wymagać uwierzytelnienia użytkown
 
 [!code-csharp[](secure-data/samples/final3/Startup.cs?name=snippet&highlight=13-99)]
 
-Poprzedni wyróżniony kod ustawia [rezerwowe zasady uwierzytelniania](xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.FallbackPolicy). Rezerwowe zasady uwierzytelniania wymagają uwierzytelnienia ***wszystkich*** użytkowników, z wyjątkiem :::no-loc(Razor)::: stron, kontrolerów lub metod akcji z atrybutem uwierzytelniania. Na przykład :::no-loc(Razor)::: strony, kontrolery lub metody akcji z `[AllowAnonymous]` lub `[Authorize(PolicyName="MyPolicy")]` używają stosowanego atrybutu uwierzytelniania zamiast rezerwowych zasad uwierzytelniania.
+Poprzedni wyróżniony kod ustawia [rezerwowe zasady uwierzytelniania](xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.FallbackPolicy). Rezerwowe zasady uwierzytelniania wymagają uwierzytelnienia ***wszystkich*** użytkowników, z wyjątkiem Razor stron, kontrolerów lub metod akcji z atrybutem uwierzytelniania. Na przykład Razor strony, kontrolery lub metody akcji z `[AllowAnonymous]` lub `[Authorize(PolicyName="MyPolicy")]` używają stosowanego atrybutu uwierzytelniania zamiast rezerwowych zasad uwierzytelniania.
 
 Rezerwowe zasady uwierzytelniania:
 
 * Stosuje się do wszystkich żądań, które nie określają jawnie zasad uwierzytelniania. W przypadku żądań obsłużonych przez Routing punktów końcowych może to obejmować wszystkie punkty końcowe, które nie określają atrybutu autoryzacji. W przypadku żądań obsłużonych przez inne oprogramowanie pośredniczące po wyzwoleniu na oprogramowanie pośredniczące, takie jak [pliki statyczne](xref:fundamentals/static-files), zasady te będą stosowane do wszystkich żądań.
 
-Ustawienie rezerwowych zasad uwierzytelniania wymaga uwierzytelniania użytkowników chroniących nowo dodane :::no-loc(Razor)::: strony i kontrolery. Uwierzytelnianie wymagane domyślnie jest bezpieczniejsze niż poleganie na nowych kontrolerach i stronach w :::no-loc(Razor)::: celu uwzględnienia `[Authorize]` atrybutu.
+Ustawienie rezerwowych zasad uwierzytelniania wymaga uwierzytelniania użytkowników chroniących nowo dodane Razor strony i kontrolery. Uwierzytelnianie wymagane domyślnie jest bezpieczniejsze niż poleganie na nowych kontrolerach i stronach w Razor celu uwzględnienia `[Authorize]` atrybutu.
 
 <xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions>Klasa zawiera również <xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.DefaultPolicy?displayProperty=nameWithType> . `DefaultPolicy`To zasady używane z `[Authorize]` atrybutem, jeśli nie określono żadnych zasad. `[Authorize]`nie zawiera nazwanych zasad, w przeciwieństwie do `[Authorize(PolicyName="MyPolicy")]` .
 
 Aby uzyskać więcej informacji na temat zasad, zobacz <xref:security/authorization/policies> .
 
-Alternatywny sposób, w jaki kontrolery MVC i :::no-loc(Razor)::: strony wymagające uwierzytelnienia wszystkich użytkowników są dodawane filtr autoryzacji:
+Alternatywny sposób, w jaki kontrolery MVC i Razor strony wymagające uwierzytelnienia wszystkich użytkowników są dodawane filtr autoryzacji:
 
 [!code-csharp[](secure-data/samples/final3/Startup2.cs?name=snippet&highlight=14-99)]
 
@@ -199,7 +199,7 @@ Utwórz `ContactAdministratorsAuthorizationHandler` klasę w folderze *autoryzac
 
 ## <a name="register-the-authorization-handlers"></a>Rejestrowanie programów obsługi autoryzacji
 
-Usługi korzystające z Entity Framework Core muszą być zarejestrowane dla [iniekcji zależności](xref:fundamentals/dependency-injection) przy użyciu funkcji [addscoped](/dotnet/api/microsoft.extensions.dependencyinjection.servicecollectionserviceextensions). `ContactIsOwnerAuthorizationHandler`Używa ASP.NET Core [:::no-loc(Identity):::](xref:security/authentication/identity) , która jest oparta na Entity Framework Core. Zarejestruj procedury obsługi w kolekcji usług, aby były dostępne dla `ContactsController` [iniekcji](xref:fundamentals/dependency-injection)przez. Dodaj następujący kod na końcu `ConfigureServices` :
+Usługi korzystające z Entity Framework Core muszą być zarejestrowane dla [iniekcji zależności](xref:fundamentals/dependency-injection) przy użyciu funkcji [addscoped](/dotnet/api/microsoft.extensions.dependencyinjection.servicecollectionserviceextensions). `ContactIsOwnerAuthorizationHandler`Używa ASP.NET Core [Identity](xref:security/authentication/identity) , która jest oparta na Entity Framework Core. Zarejestruj procedury obsługi w kolekcji usług, aby były dostępne dla `ContactsController` [iniekcji](xref:fundamentals/dependency-injection)przez. Dodaj następujący kod na końcu `ConfigureServices` :
 
 [!code-csharp[](secure-data/samples/final3/Startup.cs?name=snippet_defaultPolicy&highlight=23-99)]
 
@@ -207,7 +207,7 @@ Usługi korzystające z Entity Framework Core muszą być zarejestrowane dla [in
 
 ## <a name="support-authorization"></a>Obsługa autoryzacji
 
-Ta sekcja służy do aktualizowania :::no-loc(Razor)::: stron i dodawania klasy wymagań dotyczących operacji.
+Ta sekcja służy do aktualizowania Razor stron i dodawania klasy wymagań dotyczących operacji.
 
 ### <a name="review-the-contact-operations-requirements-class"></a>Przeglądanie klasy wymagań operacji kontaktu
 
@@ -215,16 +215,16 @@ Zapoznaj się z `ContactOperations` klasą. Ta klasa zawiera wymagania obsługiw
 
 [!code-csharp[](secure-data/samples/final3/Authorization/ContactOperations.cs)]
 
-### <a name="create-a-base-class-for-the-contacts-no-locrazor-pages"></a>Utwórz klasę bazową dla stron kontaktów :::no-loc(Razor):::
+### <a name="create-a-base-class-for-the-contacts-no-locrazor-pages"></a>Utwórz klasę bazową dla stron kontaktów Razor
 
-Utwórz klasę bazową zawierającą usługi używane na :::no-loc(Razor)::: stronach kontaktów. Klasa bazowa umieszcza kod inicjujący w jednej lokalizacji:
+Utwórz klasę bazową zawierającą usługi używane na Razor stronach kontaktów. Klasa bazowa umieszcza kod inicjujący w jednej lokalizacji:
 
 [!code-csharp[](secure-data/samples/final3/Pages/Contacts/DI_BasePageModel.cs)]
 
 Powyższy kod ma następujące działanie:
 
 * Dodaje `IAuthorizationService` usługę do dostępu do programów obsługi autoryzacji.
-* Dodaje :::no-loc(Identity)::: `UserManager` usługę.
+* Dodaje Identity `UserManager` usługę.
 * Dodaj `ApplicationDbContext` .
 
 ### <a name="update-the-createmodel"></a>Aktualizowanie modelu
@@ -273,7 +273,7 @@ Zaktualizuj linki **Edytuj** i **Usuń** w obszarze *strony/Kontakty/index. csht
 [!code-cshtml[](secure-data/samples/final3/Pages/Contacts/Index.cshtml?highlight=34-36,62-999)]
 
 > [!WARNING]
-> Ukrycie linków użytkowników, którzy nie mają uprawnień do zmiany danych, nie powoduje zabezpieczenia aplikacji. Ukrycie linków sprawia, że aplikacja jest bardziej przyjazny dla użytkownika, wyświetlając tylko prawidłowe linki. Użytkownicy mogą zahakerować wygenerowane adresy URL, aby wywoływać operacje edycji i usuwania na danych, które nie są właścicielami. :::no-loc(Razor):::Strona lub kontroler muszą wymuszać testy dostępu w celu zabezpieczenia danych.
+> Ukrycie linków użytkowników, którzy nie mają uprawnień do zmiany danych, nie powoduje zabezpieczenia aplikacji. Ukrycie linków sprawia, że aplikacja jest bardziej przyjazny dla użytkownika, wyświetlając tylko prawidłowe linki. Użytkownicy mogą zahakerować wygenerowane adresy URL, aby wywoływać operacje edycji i usuwania na danych, które nie są właścicielami. RazorStrona lub kontroler muszą wymuszać testy dostępu w celu zabezpieczenia danych.
 
 ### <a name="update-details"></a>Szczegóły aktualizacji
 
@@ -338,7 +338,7 @@ Utwórz kontakt w przeglądarce administratora. Skopiuj adres URL służący do 
 
 ## <a name="create-the-starter-app"></a>Tworzenie aplikacji Starter
 
-* Tworzenie :::no-loc(Razor)::: aplikacji stronicowej o nazwie "contacter"
+* Tworzenie Razor aplikacji stronicowej o nazwie "contacter"
   * Utwórz aplikację przy użyciu **poszczególnych kont użytkowników**.
   * Nadaj mu nazwę "ContactName", aby przestrzeń nazw była zgodna z przestrzenią nazw używaną w przykładzie.
   * `-uld`Określa LocalDB zamiast oprogramowania SQLite
@@ -451,11 +451,11 @@ Poniższe sekcje zawierają wszystkie najważniejsze kroki umożliwiające utwor
 
 ### <a name="tie-the-contact-data-to-the-user"></a>Powiązanie danych kontaktowych z użytkownikiem
 
-Użyj [:::no-loc(Identity):::](xref:security/authentication/identity) identyfikatora użytkownika ASP.NET, aby upewnić się, że użytkownicy mogą edytować swoje dane, ale nie inne dane użytkowników. Dodaj `OwnerID` i `ContactStatus` do `Contact` modelu:
+Użyj [Identity](xref:security/authentication/identity) identyfikatora użytkownika ASP.NET, aby upewnić się, że użytkownicy mogą edytować swoje dane, ale nie inne dane użytkowników. Dodaj `OwnerID` i `ContactStatus` do `Contact` modelu:
 
 [!code-csharp[](secure-data/samples/final2.1/Models/Contact.cs?name=snippet1&highlight=5-6,16-999)]
 
-`OwnerID`jest IDENTYFIKATORem użytkownika z `AspNetUser` tabeli w [:::no-loc(Identity):::](xref:security/authentication/identity) bazie danych. `Status`Pole określa, czy kontakt jest widoczny dla użytkowników ogólnych.
+`OwnerID`jest IDENTYFIKATORem użytkownika z `AspNetUser` tabeli w [Identity](xref:security/authentication/identity) bazie danych. `Status`Pole określa, czy kontakt jest widoczny dla użytkowników ogólnych.
 
 Utwórz nową migrację i zaktualizuj bazę danych:
 
@@ -464,9 +464,9 @@ dotnet ef migrations add userID_Status
 dotnet ef database update
 ```
 
-### <a name="add-role-services-to-no-locidentity"></a>Dodawanie usług ról do programu:::no-loc(Identity):::
+### <a name="add-role-services-to-no-locidentity"></a>Dodawanie usług ról do programuIdentity
 
-Dołącz [Addroles](/dotnet/api/microsoft.aspnetcore.identity.identitybuilder.addroles#Microsoft_AspNetCore_:::no-loc(Identity):::_:::no-loc(Identity):::Builder_AddRoles__1) , aby dodać usługi ról:
+Dołącz [Addroles](/dotnet/api/microsoft.aspnetcore.identity.identitybuilder.addroles#Microsoft_AspNetCore_Identity_IdentityBuilder_AddRoles__1) , aby dodać usługi ról:
 
 [!code-csharp[](secure-data/samples/final2.1/Startup.cs?name=snippet2&highlight=11)]
 
@@ -476,7 +476,7 @@ Ustaw domyślne zasady uwierzytelniania, aby wymagać uwierzytelnienia użytkown
 
 [!code-csharp[](secure-data/samples/final2.1/Startup.cs?name=snippet&highlight=17-99)] 
 
- Można zrezygnować z uwierzytelniania na :::no-loc(Razor)::: poziomie strony, kontrolera lub metody akcji przy użyciu `[AllowAnonymous]` atrybutu. Ustawienie domyślnych zasad uwierzytelniania wymaga uwierzytelniania użytkowników chroniących nowo dodane :::no-loc(Razor)::: strony i kontrolery. Uwierzytelnianie wymagane domyślnie jest bezpieczniejsze niż poleganie na nowych kontrolerach i stronach w :::no-loc(Razor)::: celu uwzględnienia `[Authorize]` atrybutu.
+ Można zrezygnować z uwierzytelniania na Razor poziomie strony, kontrolera lub metody akcji przy użyciu `[AllowAnonymous]` atrybutu. Ustawienie domyślnych zasad uwierzytelniania wymaga uwierzytelniania użytkowników chroniących nowo dodane Razor strony i kontrolery. Uwierzytelnianie wymagane domyślnie jest bezpieczniejsze niż poleganie na nowych kontrolerach i stronach w Razor celu uwzględnienia `[Authorize]` atrybutu.
 
 Dodaj [AllowAnonymous](/dotnet/api/microsoft.aspnetcore.authorization.allowanonymousattribute) do strony indeks, informacje i kontakty, dzięki czemu anonimowi użytkownicy mogą uzyskać informacje o witrynie przed ich zarejestrowaniem.
 
@@ -535,7 +535,7 @@ Utwórz `ContactAdministratorsAuthorizationHandler` klasę w folderze *autoryzac
 
 ## <a name="register-the-authorization-handlers"></a>Rejestrowanie programów obsługi autoryzacji
 
-Usługi korzystające z Entity Framework Core muszą być zarejestrowane dla [iniekcji zależności](xref:fundamentals/dependency-injection) przy użyciu funkcji [addscoped](/dotnet/api/microsoft.extensions.dependencyinjection.servicecollectionserviceextensions). `ContactIsOwnerAuthorizationHandler`Używa ASP.NET Core [:::no-loc(Identity):::](xref:security/authentication/identity) , która jest oparta na Entity Framework Core. Zarejestruj procedury obsługi w kolekcji usług, aby były dostępne dla `ContactsController` [iniekcji](xref:fundamentals/dependency-injection)przez. Dodaj następujący kod na końcu `ConfigureServices` :
+Usługi korzystające z Entity Framework Core muszą być zarejestrowane dla [iniekcji zależności](xref:fundamentals/dependency-injection) przy użyciu funkcji [addscoped](/dotnet/api/microsoft.extensions.dependencyinjection.servicecollectionserviceextensions). `ContactIsOwnerAuthorizationHandler`Używa ASP.NET Core [Identity](xref:security/authentication/identity) , która jest oparta na Entity Framework Core. Zarejestruj procedury obsługi w kolekcji usług, aby były dostępne dla `ContactsController` [iniekcji](xref:fundamentals/dependency-injection)przez. Dodaj następujący kod na końcu `ConfigureServices` :
 
 [!code-csharp[](secure-data/samples/final2.1/Startup.cs?name=snippet_defaultPolicy&highlight=27-99)]
 
@@ -543,7 +543,7 @@ Usługi korzystające z Entity Framework Core muszą być zarejestrowane dla [in
 
 ## <a name="support-authorization"></a>Obsługa autoryzacji
 
-Ta sekcja służy do aktualizowania :::no-loc(Razor)::: stron i dodawania klasy wymagań dotyczących operacji.
+Ta sekcja służy do aktualizowania Razor stron i dodawania klasy wymagań dotyczących operacji.
 
 ### <a name="review-the-contact-operations-requirements-class"></a>Przeglądanie klasy wymagań operacji kontaktu
 
@@ -551,16 +551,16 @@ Zapoznaj się z `ContactOperations` klasą. Ta klasa zawiera wymagania obsługiw
 
 [!code-csharp[](secure-data/samples/final2.1/Authorization/ContactOperations.cs)]
 
-### <a name="create-a-base-class-for-the-contacts-no-locrazor-pages"></a>Utwórz klasę bazową dla stron kontaktów :::no-loc(Razor):::
+### <a name="create-a-base-class-for-the-contacts-no-locrazor-pages"></a>Utwórz klasę bazową dla stron kontaktów Razor
 
-Utwórz klasę bazową zawierającą usługi używane na :::no-loc(Razor)::: stronach kontaktów. Klasa bazowa umieszcza kod inicjujący w jednej lokalizacji:
+Utwórz klasę bazową zawierającą usługi używane na Razor stronach kontaktów. Klasa bazowa umieszcza kod inicjujący w jednej lokalizacji:
 
 [!code-csharp[](secure-data/samples/final2.1/Pages/Contacts/DI_BasePageModel.cs)]
 
 Powyższy kod ma następujące działanie:
 
 * Dodaje `IAuthorizationService` usługę do dostępu do programów obsługi autoryzacji.
-* Dodaje :::no-loc(Identity)::: `UserManager` usługę.
+* Dodaje Identity `UserManager` usługę.
 * Dodaj `ApplicationDbContext` .
 
 ### <a name="update-the-createmodel"></a>Aktualizowanie modelu
@@ -609,7 +609,7 @@ Zaktualizuj linki **Edytuj** i **Usuń** w obszarze *strony/Kontakty/index. csht
 [!code-cshtml[](secure-data/samples/final2.1/Pages/Contacts/Index.cshtml?highlight=34-36,62-999)]
 
 > [!WARNING]
-> Ukrycie linków użytkowników, którzy nie mają uprawnień do zmiany danych, nie powoduje zabezpieczenia aplikacji. Ukrycie linków sprawia, że aplikacja jest bardziej przyjazny dla użytkownika, wyświetlając tylko prawidłowe linki. Użytkownicy mogą zahakerować wygenerowane adresy URL, aby wywoływać operacje edycji i usuwania na danych, które nie są właścicielami. :::no-loc(Razor):::Strona lub kontroler muszą wymuszać testy dostępu w celu zabezpieczenia danych.
+> Ukrycie linków użytkowników, którzy nie mają uprawnień do zmiany danych, nie powoduje zabezpieczenia aplikacji. Ukrycie linków sprawia, że aplikacja jest bardziej przyjazny dla użytkownika, wyświetlając tylko prawidłowe linki. Użytkownicy mogą zahakerować wygenerowane adresy URL, aby wywoływać operacje edycji i usuwania na danych, które nie są właścicielami. RazorStrona lub kontroler muszą wymuszać testy dostępu w celu zabezpieczenia danych.
 
 ### <a name="update-details"></a>Szczegóły aktualizacji
 
@@ -665,7 +665,7 @@ Utwórz kontakt w przeglądarce administratora. Skopiuj adres URL służący do 
 
 ## <a name="create-the-starter-app"></a>Tworzenie aplikacji Starter
 
-* Tworzenie :::no-loc(Razor)::: aplikacji stronicowej o nazwie "contacter"
+* Tworzenie Razor aplikacji stronicowej o nazwie "contacter"
   * Utwórz aplikację przy użyciu **poszczególnych kont użytkowników**.
   * Nadaj mu nazwę "ContactName", aby przestrzeń nazw była zgodna z przestrzenią nazw używaną w przykładzie.
   * `-uld`Określa LocalDB zamiast oprogramowania SQLite

@@ -6,13 +6,13 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/03/2020
 no-loc:
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authentication/index
 ms.openlocfilehash: a230e1ae85a54ddf16900b2ee7ed4a18d45e4ea2
 ms.sourcegitcommit: 1b89fc58114a251926abadfd5c69c120f1ba12d8
@@ -49,7 +49,7 @@ services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 W przypadku użycia wielu schematów zasady autoryzacji (lub atrybuty autoryzacji) mogą [określać schemat uwierzytelniania (lub schematy),](xref:security/authorization/limitingidentitybyscheme) od których zależą w celu uwierzytelnienia użytkownika. W powyższym przykładzie schemat uwierzytelniania plików cookie może być używany przez określenie jego nazwy ( `CookieAuthenticationDefaults.AuthenticationScheme` Domyślnie, chociaż podczas wywoływania można podać inną nazwę `AddCookie` ).
 
-W niektórych przypadkach wywołanie `AddAuthentication` jest wykonywane automatycznie przez inne metody rozszerzenia. Na przykład podczas korzystania z [ASP.NET Core :::no-loc(Identity)::: ](xref:security/authentication/identity), `AddAuthentication` jest wywoływana wewnętrznie.
+W niektórych przypadkach wywołanie `AddAuthentication` jest wykonywane automatycznie przez inne metody rozszerzenia. Na przykład podczas korzystania z [ASP.NET Core Identity ](xref:security/authentication/identity), `AddAuthentication` jest wywoływana wewnętrznie.
 
 Oprogramowanie pośredniczące uwierzytelniania jest dodawane w programie `Startup.Configure` przez wywołanie <xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*> metody rozszerzenia w aplikacji `IApplicationBuilder` . Wywołanie `UseAuthentication` rejestruje oprogramowanie pośredniczące, które używa poprzednio zarejestrowanego schematu uwierzytelniania. Wywołaj `UseAuthentication` przed każdym oprogramowanie pośredniczące zależne od użytkowników, którzy są uwierzytelniani. W przypadku korzystania z routingu punktów końcowych wywołanie `UseAuthentication` musi być następujące:
 

@@ -5,7 +5,7 @@ description: Dowiedz się, jak debugować Blazor aplikacje.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/15/2020
+ms.date: 07/27/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: 14943b9f7847ac9144addfdf16a003f6fc8c340c
-ms.sourcegitcommit: cc845634a490c49ff869c89b6e422b6d65d0e886
+ms.openlocfilehash: b4199c3a99af5875c5d9a87f29f7c7e2758ffd71
+ms.sourcegitcommit: 5a36758cca2861aeb10840093e46d273a6e6e91d
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/24/2020
-ms.locfileid: "87159707"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87303563"
 ---
 # <a name="debug-aspnet-core-no-locblazor-webassembly"></a>Debuguj ASP.NET CoreBlazor WebAssembly
 
@@ -109,13 +109,15 @@ Podczas debugowania Blazor WebAssembly aplikacji można także debugować kod se
 
 1. Otwórz aplikację autonomiczną Blazor WebAssembly w vs Code.
 
-   Jeśli zostanie wyświetlone następujące powiadomienie, że do włączenia debugowania jest wymagana dodatkowa konfiguracja:
+   Aby włączyć debugowanie, może zostać wyświetlone następujące powiadomienie:
    
-   * Upewnij się, że zainstalowano poprawne rozszerzenia.
-   * Upewnij się, że debugowanie JavaScript Preview jest włączone.
-   * Załaduj ponownie okno.
-
    ![Wymagana dodatkowa konfiguracja](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-additional-setup.png)
+   
+   Jeśli otrzymasz powiadomienie:
+
+   * Upewnij się, że zainstalowano najnowszą wersję [języka C# dla rozszerzenia Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp) . Aby sprawdzić zainstalowane rozszerzenia, Otwórz rozszerzenia **widoku**  >  **Extensions** na pasku menu lub wybierz ikonę **rozszerzenia** na pasku bocznym **działania** .
+   * Upewnij się, że debugowanie JavaScript Preview jest włączone. Otwórz ustawienia na pasku menu (**File**  >  **Preferences**  >  **Ustawienia**preferencji plików). Wyszukaj przy użyciu słów kluczowych `debug preview` . Upewnij się, że w wynikach wyszukiwania znajduje się pole wyboru **debuguj > JavaScript: Użyj opcji Podgląd** jest zaznaczone.
+   * Załaduj ponownie okno.
 
 1. Rozpocznij debugowanie przy użyciu skrótu klawiaturowego <kbd>F5</kbd> lub elementu menu.
 

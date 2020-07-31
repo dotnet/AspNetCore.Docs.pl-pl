@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/routing
-ms.openlocfilehash: 18f1aee5ac33b17914bd182e46453120e14b31ab
-ms.sourcegitcommit: 14c3d111f9d656c86af36ecb786037bf214f435c
+ms.openlocfilehash: fcf79966abf7a023773ef892636530278b668c44
+ms.sourcegitcommit: 5a36758cca2861aeb10840093e46d273a6e6e91d
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/09/2020
-ms.locfileid: "86176208"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87303615"
 ---
 # <a name="routing-in-aspnet-core"></a>Routing w ASP.NET Core
 
@@ -586,7 +586,7 @@ Niestandardowe ograniczenia trasy są rzadko zbędne. Przed wdrożeniem niestand
 
 Folder [ograniczenia](https://github.com/dotnet/aspnetcore/tree/master/src/Http/Routing/src/Constraints) ASP.NET Core zawiera dobre przykłady tworzenia ograniczeń. Na przykład [GuidRouteConstraint](https://github.com/dotnet/aspnetcore/blob/master/src/Http/Routing/src/Constraints/GuidRouteConstraint.cs#L18).
 
-Aby użyć niestandardowego `IRouteConstraint` , typ ograniczenia trasy musi być zarejestrowany w ramach aplikacji <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> w kontenerze usługi. `ConstraintMap`Jest słownikiem, który mapuje klucze ograniczeń trasy do `IRouteConstraint` implementacji, które weryfikują te ograniczenia. Aplikację `ConstraintMap` można zaktualizować w `Startup.ConfigureServices` ramach [usług. Wywołanie addrouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*) lub przez skonfigurowanie <xref:Microsoft.AspNetCore.Routing.RouteOptions> bezpośrednio w usłudze `services.Configure<RouteOptions>` . Przykład:
+Aby użyć niestandardowego `IRouteConstraint` , typ ograniczenia trasy musi być zarejestrowany w ramach aplikacji <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> w kontenerze usługi. `ConstraintMap`Jest słownikiem, który mapuje klucze ograniczeń trasy do `IRouteConstraint` implementacji, które weryfikują te ograniczenia. Aplikację `ConstraintMap` można zaktualizować w `Startup.ConfigureServices` ramach [usług. Wywołanie addrouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*) lub przez skonfigurowanie <xref:Microsoft.AspNetCore.Routing.RouteOptions> bezpośrednio w usłudze `services.Configure<RouteOptions>` . Na przykład:
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/StartupConstraint.cs?name=snippet)]
 
@@ -669,7 +669,7 @@ Pierwszym krokiem podczas generowania adresu URL rozwiązywania problemów jest 
 
 Aby uzyskać szczegółowe informacje na temat generowania adresów URL, zobacz [odwołanie do generacji adresów URL](#ugr) .
 
-### <a name="addresses"></a>Addresses (Adresy)
+### <a name="addresses"></a>Adresy
 
 Adresy są pojęciem generacji adresów URL używanym do powiązania wywołania z generatorem linków z zestawem punktów końcowych kandydatów.
 
@@ -831,7 +831,7 @@ W powyższym kodzie, `culture` parametr trasy jest używany do lokalizacji. Chce
 Poniższe linki zawierają informacje dotyczące konfigurowania metadanych punktu końcowego:
 
 * [Włączanie mechanizmu CORS przy użyciu routingu punktu końcowego](xref:security/cors#enable-cors-with-endpoint-routing)
-* [Przykład IAuthorizationPolicyProvider](https://github.com/dotnet/AspNetCore/tree/release/3.0/src/Security/samples/CustomPolicyProvider) przy użyciu `[MinimumAgeAuthorize]` atrybutu niestandardowego
+* [Przykład IAuthorizationPolicyProvider](https://github.com/dotnet/AspNetCore/tree/release/3.1/src/Security/samples/CustomPolicyProvider) przy użyciu `[MinimumAgeAuthorize]` atrybutu niestandardowego
 * [Testowanie uwierzytelniania przy użyciu atrybutu [autoryzuje]](xref:security/authentication/identity#test-identity)
 * <xref:Microsoft.AspNetCore.Builder.AuthorizationEndpointConventionBuilderExtensions.RequireAuthorization*>
 * [Wybieranie schematu z atrybutem [autoryzuje]](xref:security/authorization/limitingidentitybyscheme#selecting-the-scheme-with-the-authorize-attribute)
@@ -1351,7 +1351,7 @@ Trasy muszą być skonfigurowane w `Startup.Configure` metodzie. Przykładowa ap
 
 W poniższej tabeli przedstawiono odpowiedzi z podanym identyfikatorem URI.
 
-| Identyfikator URI                    | Odpowiedź                                          |
+| URI                    | Odpowiedź                                          |
 | ---------------------- | ------------------------------------------------- |
 | `/package/create/3`    | Cześć! Wartości trasy: [Operation, Create], [ID, 3] |
 | `/package/track/-3`    | Cześć! Wartości trasy: [Operation, Track], [ID,-3] |
@@ -1503,7 +1503,7 @@ Aby ograniczyć parametr do znanego zestawu możliwych wartości, użyj wyrażen
 
 Oprócz wbudowanych ograniczeń trasy niestandardowe ograniczenia trasy mogą być tworzone przez implementację <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> interfejsu. <xref:Microsoft.AspNetCore.Routing.IRouteConstraint>Interfejs zawiera jedną metodę, `Match` która zwraca, `true` Jeśli ograniczenie jest spełnione i `false` w przeciwnym razie.
 
-Aby użyć niestandardowego <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> , typ ograniczenia trasy musi być zarejestrowany <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> w aplikacji w kontenerze usługi aplikacji. <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap>Jest słownikiem, który mapuje klucze ograniczeń trasy do <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> implementacji, które weryfikują te ograniczenia. Aplikację <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> można zaktualizować w `Startup.ConfigureServices` ramach [usług. Wywołanie addrouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*) lub przez skonfigurowanie <xref:Microsoft.AspNetCore.Routing.RouteOptions> bezpośrednio w usłudze `services.Configure<RouteOptions>` . Przykład:
+Aby użyć niestandardowego <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> , typ ograniczenia trasy musi być zarejestrowany <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> w aplikacji w kontenerze usługi aplikacji. <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap>Jest słownikiem, który mapuje klucze ograniczeń trasy do <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> implementacji, które weryfikują te ograniczenia. Aplikację <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> można zaktualizować w `Startup.ConfigureServices` ramach [usług. Wywołanie addrouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*) lub przez skonfigurowanie <xref:Microsoft.AspNetCore.Routing.RouteOptions> bezpośrednio w usłudze `services.Configure<RouteOptions>` . Na przykład:
 
 ```csharp
 services.AddRouting(options =>
@@ -1512,7 +1512,7 @@ services.AddRouting(options =>
 });
 ```
 
-Ograniczenie można następnie zastosować do tras w zwykły sposób, przy użyciu nazwy określonej podczas rejestrowania typu ograniczenia. Przykład:
+Ograniczenie można następnie zastosować do tras w zwykły sposób, przy użyciu nazwy określonej podczas rejestrowania typu ograniczenia. Na przykład:
 
 ```csharp
 [HttpGet("{id:customName}")]
@@ -1809,7 +1809,7 @@ Trasy muszą być skonfigurowane w `Startup.Configure` metodzie. Przykładowa ap
 
 W poniższej tabeli przedstawiono odpowiedzi z podanym identyfikatorem URI.
 
-| Identyfikator URI                    | Odpowiedź                                          |
+| URI                    | Odpowiedź                                          |
 | ---------------------- | ------------------------------------------------- |
 | `/package/create/3`    | Cześć! Wartości trasy: [Operation, Create], [ID, 3] |
 | `/package/track/-3`    | Cześć! Wartości trasy: [Operation, Track], [ID,-3] |
@@ -1947,7 +1947,7 @@ Aby ograniczyć parametr do znanego zestawu możliwych wartości, użyj wyrażen
 
 Oprócz wbudowanych ograniczeń trasy niestandardowe ograniczenia trasy mogą być tworzone przez implementację <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> interfejsu. <xref:Microsoft.AspNetCore.Routing.IRouteConstraint>Interfejs zawiera jedną metodę, `Match` która zwraca, `true` Jeśli ograniczenie jest spełnione i `false` w przeciwnym razie.
 
-Aby użyć niestandardowego <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> , typ ograniczenia trasy musi być zarejestrowany <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> w aplikacji w kontenerze usługi aplikacji. <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap>Jest słownikiem, który mapuje klucze ograniczeń trasy do <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> implementacji, które weryfikują te ograniczenia. Aplikację <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> można zaktualizować w `Startup.ConfigureServices` ramach [usług. Wywołanie addrouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*) lub przez skonfigurowanie <xref:Microsoft.AspNetCore.Routing.RouteOptions> bezpośrednio w usłudze `services.Configure<RouteOptions>` . Przykład:
+Aby użyć niestandardowego <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> , typ ograniczenia trasy musi być zarejestrowany <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> w aplikacji w kontenerze usługi aplikacji. <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap>Jest słownikiem, który mapuje klucze ograniczeń trasy do <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> implementacji, które weryfikują te ograniczenia. Aplikację <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> można zaktualizować w `Startup.ConfigureServices` ramach [usług. Wywołanie addrouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*) lub przez skonfigurowanie <xref:Microsoft.AspNetCore.Routing.RouteOptions> bezpośrednio w usłudze `services.Configure<RouteOptions>` . Na przykład:
 
 ```csharp
 services.AddRouting(options =>
@@ -1956,7 +1956,7 @@ services.AddRouting(options =>
 });
 ```
 
-Ograniczenie można następnie zastosować do tras w zwykły sposób, przy użyciu nazwy określonej podczas rejestrowania typu ograniczenia. Przykład:
+Ograniczenie można następnie zastosować do tras w zwykły sposób, przy użyciu nazwy określonej podczas rejestrowania typu ograniczenia. Na przykład:
 
 ```csharp
 [HttpGet("{id:customName}")]

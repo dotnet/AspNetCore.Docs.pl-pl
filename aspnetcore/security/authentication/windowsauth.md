@@ -1,213 +1,231 @@
 ---
-title: Konfigurowanie uwierzytelniania Windows w programie ASP.NET Core
+title: Konfigurowanie uwierzytelniania systemu Windows w ASP.NET Core
 author: scottaddie
-description: Dowiedz się, jak skonfigurować uwierzytelnianie Windows w programie ASP.NET Core dla usług IIS i sterownik HTTP.sys.
+description: Dowiedz się, jak skonfigurować uwierzytelnianie systemu Windows w ASP.NET Core dla usług IIS i HTTP.sys.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc, seodec18
-ms.date: 07/01/2019
+ms.date: 02/26/2020
+no-loc:
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authentication/windowsauth
-ms.openlocfilehash: 30f1f554a29412ed6b84115d457d2da1aba91c17
-ms.sourcegitcommit: eb3e51d58dd713eefc242148f45bd9486be3a78a
+ms.openlocfilehash: 8f6dc8620df04bcebe996119869ca2e498cffccc
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/02/2019
-ms.locfileid: "67500502"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "87330690"
 ---
-# <a name="configure-windows-authentication-in-aspnet-core"></a>Konfigurowanie uwierzytelniania Windows w programie ASP.NET Core
+# <a name="configure-windows-authentication-in-aspnet-core"></a>Konfigurowanie uwierzytelniania systemu Windows w ASP.NET Core
 
-Przez [Scott Addie](https://twitter.com/Scott_Addie) i [Luke Latham](https://github.com/guardrex)
+Przez [Scott Addie](https://twitter.com/Scott_Addie)
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Windows Authentication (nazywanego też uwierzytelnianiem Negotiate, Kerberos lub NTLM) można skonfigurować dla aplikacji platformy ASP.NET Core z [IIS](xref:host-and-deploy/iis/index), [Kestrel](xref:fundamentals/servers/kestrel), lub [HTTP.sys](xref:fundamentals/servers/httpsys) .
+Uwierzytelnianie systemu Windows (znane także jako uwierzytelnianie negocjowane, Kerberos lub NTLM) można skonfigurować dla ASP.NET Core aplikacji hostowanych za pomocą [usług IIS](xref:host-and-deploy/iis/index), [Kestrel](xref:fundamentals/servers/kestrel)lub [HTTP.sys](xref:fundamentals/servers/httpsys).
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-Windows Authentication (nazywanego też uwierzytelnianiem Negotiate, Kerberos lub NTLM) można skonfigurować dla aplikacji platformy ASP.NET Core z [IIS](xref:host-and-deploy/iis/index) lub [HTTP.sys](xref:fundamentals/servers/httpsys).
+Uwierzytelnianie systemu Windows (znane także jako uwierzytelnianie Negocjuj, Kerberos lub NTLM) można skonfigurować dla ASP.NET Core aplikacji hostowanych za pomocą [usług IIS](xref:host-and-deploy/iis/index) lub [HTTP.sys](xref:fundamentals/servers/httpsys).
 
 ::: moniker-end
 
-Uwierzytelnianie Windows opiera się uwierzytelniać użytkowników aplikacji platformy ASP.NET Core w systemie operacyjnym. Możesz użyć uwierzytelniania Windows, gdy serwer działa w sieci firmowej przy użyciu tożsamości domeny usługi Active Directory lub konta Windows do identyfikacji użytkowników. Uwierzytelnianie Windows najlepiej nadaje się do środowisk intranetowych, w którym użytkownicy, aplikacje klienckie i serwery sieci web należą do tej samej domeny Windows.
+Uwierzytelnianie systemu Windows polega na użyciu systemu operacyjnego w celu uwierzytelniania użytkowników ASP.NET Core aplikacji. Możesz użyć uwierzytelniania systemu Windows, gdy serwer działa w sieci firmowej przy użyciu tożsamości domeny Active Directory lub kont systemu Windows w celu identyfikowania użytkowników. Uwierzytelnianie systemu Windows najlepiej nadaje się w środowiskach intranetowych, w których użytkownicy, aplikacje klienckie i serwery sieci Web należą do tej samej domeny systemu Windows.
 
 > [!NOTE]
-> Uwierzytelnianie Windows nie jest obsługiwane przy użyciu protokołu HTTP/2. Mogą być wysyłane wezwań do uwierzytelnienia w odpowiedzi HTTP/2, ale klient musi obniżyć wersję usługi do protokołu HTTP/1.1 przed uwierzytelnieniem.
+> Uwierzytelnianie systemu Windows nie jest obsługiwane w przypadku protokołu HTTP/2. Problemy z uwierzytelnianiem można wysyłać w odpowiedzi HTTP/2, ale klient programu musi obniżyć poziom protokołu HTTP/1.1 Przed uwierzytelnieniem.
+
+## <a name="proxy-and-load-balancer-scenarios"></a>Scenariusze dotyczące serwerów proxy i równoważenia obciążenia
+
+Uwierzytelnianie systemu Windows jest scenariuszem stanowym głównie używanym w intranecie, gdzie serwer proxy lub moduł równoważenia obciążenia zazwyczaj nie obsługuje ruchu między klientami i serwerami. Jeśli używany jest serwer proxy lub moduł równoważenia obciążenia, uwierzytelnianie systemu Windows działa tylko wtedy, gdy serwer proxy lub moduł równoważenia obciążenia:
+
+* Obsługuje uwierzytelnianie.
+* Przekazuje informacje o uwierzytelnianiu użytkownika do aplikacji (na przykład w nagłówku żądania), która działa na informacje o uwierzytelnianiu.
+
+Alternatywą dla uwierzytelniania systemu Windows w środowiskach, w których są używane serwery proxy i moduły równoważenia obciążenia, Active Directory usług federacyjnych (AD FS) za pomocą OpenID Connect Connect (OIDC).
 
 ## <a name="iisiis-express"></a>Usługi IIS/IIS Express
 
-Dodawanie usług uwierzytelniania za pomocą wywołania <xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication*> (<xref:Microsoft.AspNetCore.Server.IISIntegration?displayProperty=fullName> przestrzeni nazw) w `Startup.ConfigureServices`:
+Dodaj usługi uwierzytelniania, wywołując <xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication*> ( <xref:Microsoft.AspNetCore.Server.IISIntegration?displayProperty=fullName> przestrzeń nazw) w `Startup.ConfigureServices` :
 
 ```csharp
 services.AddAuthentication(IISDefaults.AuthenticationScheme);
 ```
 
-### <a name="launch-settings-debugger"></a>Ustawienia (debuger) uruchamiania
+### <a name="launch-settings-debugger"></a>Ustawienia uruchamiania (debuger)
 
-Konfiguracja ustawień uruchamiania ma wpływ tylko na *Properties/launchSettings.json* plików dla usług IIS Express i nie skonfigurować uwierzytelnianie usług IIS dla Windows. Konfiguracja serwera została wyjaśniona w [IIS](#iis) sekcji.
+Konfiguracja ustawień uruchamiania ma wpływ tylko na *Właściwości/launchSettings.jsw* pliku dla IIS Express i nie KONFIGURUJE usług IIS do uwierzytelniania systemu Windows. Konfiguracja serwera została omówiona w sekcji [usług IIS](#iis) .
 
-**Aplikacji sieci Web** szablonu dostępnego za pośrednictwem programu Visual Studio lub interfejsu wiersza polecenia platformy .NET Core, można skonfigurować do obsługi uwierzytelniania Windows, która aktualizuje *Properties/launchSettings.json* pliku automatycznie.
+Szablon **aplikacji sieci Web** dostępny za pośrednictwem programu Visual Studio lub interfejs wiersza polecenia platformy .NET Core można skonfigurować do obsługi uwierzytelniania systemu Windows, który automatycznie aktualizuje *Właściwości/launchSettings.jsna* pliku.
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 **Nowy projekt**
 
-1. Utwórz nowy projekt.
-1. Wybierz **aplikacji sieci Web platformy ASP.NET Core**. Wybierz opcję **Dalej**.
-1. Podaj nazwę w **Nazwa projektu** pola. Upewnij się, **lokalizacji** wpis jest poprawny lub podaj lokalizację dla projektu. Wybierz pozycję **Utwórz**.
-1. Wybierz **zmiany** w obszarze **uwierzytelniania**.
-1. W **Zmień uwierzytelnianie** wybierz **uwierzytelniania Windows**. Kliknij przycisk **OK**.
-1. Wybierz **aplikacji sieci Web**.
+1. Tworzenie nowego projektu.
+1. Wybierz **ASP.NET Core aplikacji sieci Web**. Wybierz pozycję **Dalej**.
+1. Podaj nazwę w polu **Nazwa projektu** . Potwierdź, że wpis **lokalizacji** jest poprawny lub podaj lokalizację dla projektu. Wybierz pozycję **Utwórz**.
+1. Wybierz pozycję **Zmień** w obszarze **uwierzytelnianie**.
+1. W oknie **Zmienianie uwierzytelniania** wybierz pozycję **uwierzytelnianie systemu Windows**. Wybierz przycisk **OK**.
+1. Wybierz pozycję **aplikacja sieci Web**.
 1. Wybierz pozycję **Utwórz**.
 
-Uruchom aplikację. Nazwa użytkownika pojawia się w interfejsie użytkownika aplikacji renderowany.
+Uruchom aplikację. Nazwa użytkownika jest wyświetlana w interfejsie użytkownika renderowanej aplikacji.
 
 **Istniejący projekt**
 
-Właściwości projektu Windows uwierzytelnianie włączyć i wyłączyć uwierzytelnianie anonimowe:
+Właściwości projektu umożliwiają uwierzytelnianie systemu Windows i Wyłącz uwierzytelnianie anonimowe:
 
-1. Kliknij prawym przyciskiem myszy projekt w **Eksploratora rozwiązań** i wybierz **właściwości**.
-1. Wybierz **debugowania** kartę.
-1. Usuń zaznaczenie pola wyboru dla **Włącz uwierzytelnianie anonimowe**.
-1. Zaznacz pole wyboru dla **Włącz uwierzytelnianie Windows**.
+1. Kliknij prawym przyciskiem myszy projekt w **Eksplorator rozwiązań** i wybierz polecenie **Właściwości**.
+1. Wybierz kartę **debugowanie** .
+1. Usuń zaznaczenie pola wyboru **Włącz uwierzytelnianie anonimowe**.
+1. Zaznacz pole wyboru **Włącz uwierzytelnianie systemu Windows**.
 1. Zapisz i zamknij stronę właściwości.
 
-Alternatywnie, można skonfigurować właściwości w `iisSettings` węźle *launchSettings.json* pliku:
+Alternatywnie można skonfigurować właściwości w `iisSettings` węźle *launchSettings.jsw* pliku:
 
 [!code-json[](windowsauth/sample_snapshot/launchSettings.json?highlight=2-3)]
 
-# <a name="visual-studio-code--net-core-clitabvisual-studio-codenetcore-cli"></a>[Program Visual Studio Code / .NET Core interfejsu wiersza polecenia](#tab/visual-studio-code+netcore-cli)
+# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
 
 **Nowy projekt**
 
-Wykonaj [dotnet nowe](/dotnet/core/tools/dotnet-new) polecenia `webapp` argumentu (aplikację sieci Web platformy ASP.NET Core) i `--auth Windows` przełącznika:
+Wykonaj polecenie [dotnet New](/dotnet/core/tools/dotnet-new) przy użyciu `webapp` argumentu (ASP.NET Core aplikacji sieci Web) i `--auth Windows` Przełącz:
 
-```console
+```dotnetcli
 dotnet new webapp --auth Windows
 ```
 
 **Istniejący projekt**
 
-Aktualizacja `iisSettings` węźle *launchSettings.json* pliku:
+Aktualizuj `iisSettings` węzeł *launchSettings.jsw* pliku:
 
 [!code-json[](windowsauth/sample_snapshot/launchSettings.json?highlight=2-3)]
 
 ---
 
-Podczas modyfikowania istniejącego projektu, upewnij się, że plik projektu zawiera odwołania do pakietu dla [meta Microsoft.aspnetcore.all Microsoft.AspNetCore.App](xref:fundamentals/metapackage-app) **lub** [ Microsoft.AspNetCore.Authentication](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication/) pakietu NuGet.
+Podczas modyfikowania istniejącego projektu upewnij się, że plik projektu zawiera odwołanie do pakietu dla pakietu [Microsoft. AspNetCore. app](xref:fundamentals/metapackage-app) , **lub** pakiet NuGet [Microsoft. AspNetCore. Authentication](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication/) .
 
 ### <a name="iis"></a>IIS
 
-Usługi IIS używają [modułu ASP.NET Core](xref:host-and-deploy/aspnet-core-module) hostująca aplikacje platformy ASP.NET Core. Uwierzytelnianie Windows jest skonfigurowany dla usług IIS za pomocą *web.config* pliku. Następujące sekcje show jak:
+Usługi IIS używają [modułu ASP.NET Core](xref:host-and-deploy/aspnet-core-module) do hostowania aplikacji ASP.NET Core. Uwierzytelnianie systemu Windows jest konfigurowane dla usług IIS za pośrednictwem pliku *web.config* . W poniższych sekcjach pokazano, jak:
 
-* Zapewnia lokalny *web.config* pliku, który aktywuje uwierzytelniania Windows na serwerze, gdy aplikacja jest wdrożona.
-* Konfigurowanie za pomocą Menedżera usług IIS *web.config* pliku aplikacji platformy ASP.NET Core, która została już wdrożona na serwerze.
+* Podaj plik *web.config* lokalnego, który aktywuje uwierzytelnianie systemu Windows na serwerze podczas wdrażania aplikacji.
+* Za pomocą Menedżera usług IIS Skonfiguruj plik *web.config* aplikacji ASP.NET Core, która została już wdrożona na serwerze.
 
-Jeśli jeszcze tego nie zrobiono, Włącz usługi IIS do hostowania aplikacji platformy ASP.NET Core. Aby uzyskać więcej informacji, zobacz <xref:host-and-deploy/iis/index>.
+Jeśli jeszcze tego nie zrobiono, Włącz usługi IIS do hostowania aplikacji ASP.NET Core. Aby uzyskać więcej informacji, zobacz <xref:host-and-deploy/iis/index>.
 
-Włączyć usługi roli usług IIS na potrzeby uwierzytelniania Windows. Aby uzyskać więcej informacji, zobacz [Włącz uwierzytelnianie Windows usługami roli usług IIS (zobacz krok 2)](xref:host-and-deploy/iis/index#iis-configuration).
+Włącz usługę roli IIS na potrzeby uwierzytelniania systemu Windows. Aby uzyskać więcej informacji, zobacz [Włączanie uwierzytelniania systemu Windows w usługach ról usług IIS (zobacz krok 2)](xref:host-and-deploy/iis/index#iis-configuration).
 
-[Oprogramowania pośredniczącego integracji usługi IIS](xref:host-and-deploy/iis/index#enable-the-iisintegration-components) jest domyślnie skonfigurowana do automatycznego uwierzytelniania żądań. Aby uzyskać więcej informacji, zobacz [hosta ASP.NET Core na Windows za pomocą programu IIS: Opcje usług IIS (AutomaticAuthentication)](xref:host-and-deploy/iis/index#iis-options).
+[Oprogramowanie pośredniczące integracji usług IIS](xref:host-and-deploy/iis/index#enable-the-iisintegration-components) jest skonfigurowane do automatycznego uwierzytelniania żądań domyślnie. Aby uzyskać więcej informacji, zobacz [hostowanie ASP.NET Core w systemie Windows za pomocą usług IIS: opcje usług IIS (AutomaticAuthentication)](xref:host-and-deploy/iis/index#iis-options).
 
-Modułu ASP.NET Core jest domyślnie skonfigurowana do przekazywania tokenu uwierzytelniania Windows do aplikacji. Aby uzyskać więcej informacji, zobacz [informacje o konfiguracji modułu ASP.NET Core: Atrybuty elementu aspNetCore](xref:host-and-deploy/aspnet-core-module#attributes-of-the-aspnetcore-element).
+Moduł ASP.NET Core jest skonfigurowany do domyślnego przesyłania dalej tokenu uwierzytelniania systemu Windows do aplikacji. Aby uzyskać więcej informacji, zobacz [ASP.NET Core informacje o konfiguracji modułu: atrybuty elementu aspNetCore](xref:host-and-deploy/aspnet-core-module#attributes-of-the-aspnetcore-element).
 
-Użyj **albo** z następujących metod:
+Użyj **jednej** z następujących metod:
 
-* **Przed opublikowaniem i wdrażania projektu,** Dodaj następujący kod *web.config* plik do katalogu głównego projektu:
+* **Przed opublikowaniem i wdrożeniem projektu** Dodaj następujący plik *web.config* do katalogu głównego projektu:
 
   [!code-xml[](windowsauth/sample_snapshot/web_2.config)]
 
-  Gdy projekt zostanie opublikowany przez zestaw SDK platformy .NET Core (bez `<IsTransformWebConfigDisabled>` właściwością `true` w pliku projektu), opublikowanego *web.config* plik zawiera `<location><system.webServer><security><authentication>` sekcji. Aby uzyskać więcej informacji na temat `<IsTransformWebConfigDisabled>` właściwości, zobacz <xref:host-and-deploy/iis/index#webconfig-file>.
+  Gdy projekt jest publikowany przez zestaw .NET Core SDK (bez `<IsTransformWebConfigDisabled>` Właściwości ustawionej `true` w pliku projektu), publikowany plik *web.config* zawiera `<location><system.webServer><security><authentication>` sekcję. Aby uzyskać więcej informacji na temat `<IsTransformWebConfigDisabled>` właściwości, zobacz <xref:host-and-deploy/iis/index#webconfig-file> .
 
-* **Po publikowania i wdrażania projektu,** przeprowadzenia konfiguracji po stronie serwera za pomocą Menedżera usług IIS:
+* **Po opublikowaniu i wdrożeniu projektu** wykonaj konfigurację po stronie serwera za pomocą Menedżera usług IIS:
 
-  1. W Menedżerze usług IIS wybierz witrynę IIS, w obszarze **witryn** węźle **połączeń** pasku bocznym.
-  1. Kliknij dwukrotnie **uwierzytelniania** w **IIS** obszaru.
-  1. Wybierz **uwierzytelnianie anonimowe**. Wybierz **wyłączyć** w **akcje** pasku bocznym.
-  1. Wybierz **uwierzytelniania Windows**. Wybierz **Włącz** w **akcje** pasku bocznym.
+  1. W Menedżerze usług IIS wybierz lokację usług IIS w węźle **Lokacje** na pasku bocznym **połączenia** .
+  1. Kliknij dwukrotnie pozycję **uwierzytelnianie** w obszarze **usługi IIS** .
+  1. Wybierz opcję **uwierzytelnianie anonimowe**. Na pasku bocznym **Akcje** wybierz pozycję **Wyłącz** .
+  1. Wybierz pozycję **uwierzytelnianie systemu Windows**. Na pasku bocznym **Akcje** wybierz pozycję **Włącz** .
 
-  Kiedy te akcje są wykonywane, Menedżera usług IIS modyfikuje aplikacji *web.config* pliku. A `<system.webServer><security><authentication>` węzeł zostanie dodany ze zaktualizowanymi ustawieniami dla `anonymousAuthentication` i `windowsAuthentication`:
+  Po wykonaniu tych działań Menedżer usług IIS modyfikuje plik *web.config* aplikacji. `<system.webServer><security><authentication>`Dodano węzeł z zaktualizowanymi ustawieniami dla `anonymousAuthentication` i `windowsAuthentication` :
 
   [!code-xml[](windowsauth/sample_snapshot/web_1.config?highlight=4-5)]
 
-  `<system.webServer>` Dodany do sekcji *web.config* pliku przez Menedżera usług IIS znajduje się poza jej `<location>` sekcji dodawane przez program .NET Core SDK po opublikowaniu aplikacji. Ponieważ sekcji zostanie dodany poza `<location>` węzła, ustawienia są dziedziczone przez żaden [aplikacji podrzędnych](xref:host-and-deploy/iis/index#sub-applications) do bieżącej aplikacji. Aby zapobiec dziedziczenia, Przenieś dodany `<security>` sekcji wewnątrz `<location><system.webServer>` sekcji podanym .NET Core SDK.
+  `<system.webServer>`Sekcja dodana do pliku *web.config* przez Menedżera usług IIS znajduje się poza `<location>` sekcją aplikacji dodanej przez zestaw .NET Core SDK po opublikowaniu aplikacji. Ponieważ sekcja została dodana poza `<location>` węzłem, ustawienia są dziedziczone przez wszystkie [aplikacje podrzędne](xref:host-and-deploy/iis/index#sub-applications) do bieżącej aplikacji. Aby zapobiec dziedziczeniu, Przenieś dodaną `<security>` sekcję wewnątrz `<location><system.webServer>` sekcji dostarczonej przez zestaw .NET Core SDK.
 
-  W przypadku Menedżera usług IIS można dodać konfiguracji usług IIS dotyczy tylko aplikacji *web.config* pliku na serwerze. Kolejne wdrożenie aplikacji może zastąpić ustawienia na serwerze, jeśli kopię serwera *web.config* zastępuje projektu *web.config* pliku. Użyj **albo** z następujących metod do zarządzania ustawieniami:
+  Gdy Menedżer usług IIS jest używany do dodawania konfiguracji usług IIS, ma wpływ tylko na plik *web.config* aplikacji na serwerze. Kolejne wdrożenie aplikacji może spowodować zastąpienie ustawień na serwerze, jeśli kopia *web.config* serwera jest zastępowana przez plik *web.config* projektu. Użyj **jednego** z poniższych metod, aby zarządzać ustawieniami:
 
-  * Użyj Menedżera usług IIS, aby zresetować ustawienia w *web.config* pliku po plik jest zastępowany we wdrożeniu.
-  * Dodaj *pliku web.config* aplikacji lokalnie przy użyciu ustawień.
+  * Za pomocą Menedżera usług IIS Zresetuj ustawienia w pliku *web.config* po zastępowaniu pliku we wdrożeniu.
+  * Dodaj *plikweb.config* do aplikacji lokalnie przy użyciu ustawień.
 
 ::: moniker range=">= aspnetcore-3.0"
 
 ## <a name="kestrel"></a>Kestrel
 
- [Microsoft.AspNetCore.Authentication.Negotiate](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Negotiate) pakietu NuGet może być używany z [Kestrel](xref:fundamentals/servers/kestrel) do obsługi uwierzytelniania Windows przy użyciu Negotiate, Kerberos i NTLM w Windows, Linux i macOS.
+Pakiet NuGet [Microsoft. AspNetCore. Authentication. Negotiate](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Negotiate) może być używany z [Kestrel](xref:fundamentals/servers/kestrel) do obsługi uwierzytelniania systemu Windows przy użyciu protokołu Negotiate i Kerberos w systemach Windows, Linux i macOS.
 
 > [!WARNING]
-> Poświadczenia mogą zostać utrwalone na żądań połączenia. *Negocjowania uwierzytelniania nie może być używany z serwerami proxy, chyba że serwer proxy przechowuje koligacji połączenia 1:1 (trwałe połączenie), za pomocą Kestrel.*
+> Poświadczenia mogą być utrwalane między żądaniami w ramach połączenia. *Uwierzytelnianie negocjowane nie może być używane z serwerami proxy, chyba że serwer proxy utrzymuje koligację połączenia 1:1 (połączenie trwałe) z Kestrel.*
 
 > [!NOTE]
-> Program obsługi Negotiate wykrywa, jeśli podstawowy serwer obsługuje uwierzytelnianie Windows natywnie, a jeśli jest włączone. Jeśli serwer obsługuje uwierzytelnianie Windows, ale jest ono wyłączone, zostanie zgłoszony błąd, pytaniem, aby umożliwić implementacji serwera. Po włączeniu uwierzytelniania Windows na serwerze programu obsługi Negotiate przezroczyste przekazuje do niego.
+> Procedura obsługi negocjuje wykrywa, czy podstawowy serwer obsługuje uwierzytelnianie systemu Windows w sposób natywny, a jeśli jest włączony. Jeśli serwer obsługuje uwierzytelnianie systemu Windows, ale jest wyłączony, zostanie zgłoszony błąd z pytaniem, czy należy włączyć implementację serwera. Gdy na serwerze jest włączone uwierzytelnianie systemu Windows, program obsługi negocjuje w sposób niewidoczny do przodu.
 
- Dodawanie usług uwierzytelniania za pomocą wywołania <xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication*> (`Microsoft.AspNetCore.Authentication.Negotiate` przestrzeni nazw) i `AddNegotitate` (`Microsoft.AspNetCore.Authentication.Negotiate` przestrzeni nazw) w `Startup.ConfigureServices`:
+Dodawanie usług uwierzytelniania przez wywoływanie <xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication*> i <xref:Microsoft.Extensions.DependencyInjection.NegotiateExtensions.AddNegotiate*> w `Startup.ConfigureServices` :
 
  ```csharp
+// using Microsoft.AspNetCore.Authentication.Negotiate;
+// using Microsoft.Extensions.DependencyInjection;
+
 services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
     .AddNegotiate();
 ```
 
-Dodaj oprogramowanie pośredniczące uwierzytelniania przez wywołanie metody <xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*> w `Startup.Configure`:
+Dodaj oprogramowanie pośredniczące uwierzytelniania przez wywołanie <xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*> w `Startup.Configure` :
 
  ```csharp
 app.UseAuthentication();
-
-app.UseMvc();
 ```
 
-Aby uzyskać więcej informacji na temat oprogramowania pośredniczącego, zobacz <xref:fundamentals/middleware/index>.
+Aby uzyskać więcej informacji na temat oprogramowania pośredniczącego, zobacz <xref:fundamentals/middleware/index> .
 
-Anonimowe żądania są dozwolone. Użyj [autoryzacja w programie ASP.NET Core](xref:security/authorization/introduction) zażąda anonimowe żądania uwierzytelniania.
+Dozwolone są żądania anonimowe. Użyj [autoryzacji ASP.NET Core](xref:security/authorization/introduction) , aby zażądać anonimowych żądań uwierzytelniania.
 
-### <a name="windows-environment-configuration"></a>Konfiguracja środowiska Windows
+### <a name="windows-environment-configuration"></a>Konfiguracja środowiska systemu Windows
 
-[Microsoft.AspNetCore.Authentication.Negotiate](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Negotiate) składnik przeprowadza uwierzytelnianie w trybie użytkownika. Główne nazwy usług (SPN), należy dodać do konta użytkownika uruchamiającego usługi, a nie na koncie komputera. Wykonaj `setspn -S HTTP/mysrevername.mydomain.com myuser` w powłoce poleceń administracyjnych.
+Składnik [Microsoft. AspNetCore. Authentication. Negotiate](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Negotiate) wykonuje uwierzytelnianie w trybie użytkownika. Nazwy główne usług (SPN) należy dodać do konta użytkownika, na którym działa usługa, a nie konta komputera. Wykonaj `setspn -S HTTP/myservername.mydomain.com myuser` w powłoce poleceń administracyjnych.
 
-### <a name="linux-and-macos-environment-configuration"></a>Konfiguracja środowiska systemu Linux i macOS
+### <a name="linux-and-macos-environment-configuration"></a>Konfiguracja środowiska Linux i macOS
 
-Instrukcje dotyczące przyłączania komputera z systemem Linux lub macOS do domeny Windows są dostępne w [Połącz Studio danych platformy Azure z serwerem SQL przy użyciu uwierzytelniania Windows - Kerberos](/sql/azure-data-studio/enable-kerberos?view=sql-server-2017#join-your-os-to-the-active-directory-domain-controller) artykułu. Instrukcje Utwórz konto komputera dla maszyny z systemem Linux w domenie. Nazwy SPN należy dodać do tego konta maszyny.
+Instrukcje dotyczące przyłączania maszyny z systemem Linux lub macOS do domeny systemu Windows są dostępne w [Azure Data Studio połączenia SQL Server przy użyciu uwierzytelniania systemu Windows — artykuł Kerberos](/sql/azure-data-studio/enable-kerberos?view=sql-server-2017#join-your-os-to-the-active-directory-domain-controller) . Instrukcje tworzą konto komputera dla komputera z systemem Linux w domenie. Nazwy SPN należy dodać do tego konta komputera.
 
 > [!NOTE]
-> Gdy postępując zgodnie ze wskazówkami w [Połącz Studio danych platformy Azure z serwerem SQL przy użyciu uwierzytelniania Windows - Kerberos](/sql/azure-data-studio/enable-kerberos?view=sql-server-2017#join-your-os-to-the-active-directory-domain-controller) artykuł, Zastąp `python-software-properties` z `python3-software-properties` w razie potrzeby.
+> Po [zastosowaniu wskazówek w Azure Data Studio połącz SQL Server przy użyciu uwierzytelniania systemu Windows — artykuł Kerberos](/sql/azure-data-studio/enable-kerberos?view=sql-server-2017#join-your-os-to-the-active-directory-domain-controller) , Zastąp `python-software-properties` w `python3-software-properties` razie potrzeby.
 
-Po w systemie Linux lub macOS komputer jest przyłączony do domeny, są wymagane dodatkowe kroki w celu zapewnienia [pliku keytab](https://blogs.technet.microsoft.com/pie/2018/01/03/all-you-need-to-know-about-keytab-files/) za pomocą nazw SPN:
+Po przyłączeniu maszyny z systemem Linux lub macOS do domeny należy wykonać dodatkowe czynności, aby dostarczyć [plik plik KEYTAB](https://blogs.technet.microsoft.com/pie/2018/01/03/all-you-need-to-know-about-keytab-files/) z nazwami SPN:
 
-* Na kontrolerze domeny Dodaj nową usługę sieci web nazwy SPN konta na komputerze:
+* Na kontrolerze domeny Dodaj nowe nazwy SPN usługi sieci Web do konta komputera:
   * `setspn -S HTTP/mywebservice.mydomain.com mymachine`
   * `setspn -S HTTP/mywebservice@MYDOMAIN.COM mymachine`
-* Użyj [ktpass](/windows-server/administration/windows-commands/ktpass) do generowania pliku keytab:
+* Użyj [ktpass](/windows-server/administration/windows-commands/ktpass) , aby wygenerować plik plik KEYTAB:
   * `ktpass -princ HTTP/mywebservice.mydomain.com@MYDOMAIN.COM -pass myKeyTabFilePassword -mapuser MYDOMAIN\mymachine$ -pType KRB5_NT_PRINCIPAL -out c:\temp\mymachine.HTTP.keytab -crypto AES256-SHA1`
-  * Niektóre pola musi być określona w wielkie wskazane.
-* Skopiuj plik keytab do komputera w systemie Linux lub macOS.
-* Wybierz plik keytab za pośrednictwem zmiennej środowiskowej: `export KRB5_KTNAME=/tmp/mymachine.HTTP.keytab`
-* Wywoływanie `klist` aby pokazać nazwy SPN aktualnie dostępne do użycia.
+  * Niektóre pola muszą być określone wielkimi literami, jak wskazano.
+* Skopiuj plik plik KEYTAB na maszynę z systemem Linux lub macOS.
+* Wybierz plik plik KEYTAB za pomocą zmiennej środowiskowej:`export KRB5_KTNAME=/tmp/mymachine.HTTP.keytab`
+* Wywołaj `klist` , aby wyświetlić nazwy SPN obecnie dostępne do użycia.
 
 > [!NOTE]
-> Plik keytab zawiera poświadczenia dostępu do domeny i muszą być odpowiednio chronione.
+> Plik plik KEYTAB zawiera poświadczenia dostępu do domeny i musi być odpowiednio chroniony.
 
 ::: moniker-end
 
 ## <a name="httpsys"></a>HTTP.sys
 
-[Sterownik HTTP.sys](xref:fundamentals/servers/httpsys) obsługuje Windows uwierzytelnianie trybu jądra, przy użyciu Negotiate, NTLM lub uwierzytelniania podstawowego.
+[HTTP.sys](xref:fundamentals/servers/httpsys) obsługuje uwierzytelnianie systemu Windows trybu jądra przy użyciu protokołu negocjowania, NTLM lub uwierzytelniania podstawowego.
 
-Dodawanie usług uwierzytelniania za pomocą wywołania <xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication*> (<xref:Microsoft.AspNetCore.Server.HttpSys?displayProperty=fullName> przestrzeni nazw) w `Startup.ConfigureServices`:
+Dodaj usługi uwierzytelniania, wywołując <xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication*> ( <xref:Microsoft.AspNetCore.Server.HttpSys?displayProperty=fullName> przestrzeń nazw) w `Startup.ConfigureServices` :
 
 ```csharp
 services.AddAuthentication(HttpSysDefaults.AuthenticationScheme);
 ```
 
-Konfigurowanie aplikacji sieci web hosta HTTP.sys za pomocą uwierzytelniania Windows (*Program.cs*). <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderHttpSysExtensions.UseHttpSys*> Trwa <xref:Microsoft.AspNetCore.Server.HttpSys?displayProperty=fullName> przestrzeni nazw.
+Skonfiguruj hosta sieci Web aplikacji, aby używał HTTP.sys z uwierzytelnianiem systemu Windows (*program.cs*). <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderHttpSysExtensions.UseHttpSys*>znajduje się w <xref:Microsoft.AspNetCore.Server.HttpSys?displayProperty=fullName> przestrzeni nazw.
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -222,37 +240,37 @@ Konfigurowanie aplikacji sieci web hosta HTTP.sys za pomocą uwierzytelniania Wi
 ::: moniker-end
 
 > [!NOTE]
-> Sterownik HTTP.sys delegatów, aby uwierzytelnianie trybu jądra za pomocą protokołu uwierzytelniania Kerberos. Uwierzytelnianie w trybie użytkownika nie jest obsługiwana przy użyciu protokołu Kerberos i sterownik HTTP.sys. Konto komputera należy używany do odszyfrowywania tokenu/biletu Kerberos uzyskany z usługi Active Directory i przesyłany dalej przez klienta do serwera w celu uwierzytelnienia użytkownika. Rejestrowanie głównej nazwy usługi (SPN) dla hosta, a nie użytkownika aplikacji.
+> HTTP.sys delegatów do uwierzytelniania w trybie jądra przy użyciu protokołu uwierzytelniania Kerberos. Uwierzytelnianie w trybie użytkownika nie jest obsługiwane w przypadku używania protokołów Kerberos i HTTP.sys. Konto komputera musi służyć do odszyfrowywania tokenu lub biletu Kerberos uzyskanych z Active Directory i przesłanych przez klienta na serwer w celu uwierzytelnienia użytkownika. Zarejestruj główną nazwę usługi (SPN) dla hosta, a nie użytkownika aplikacji.
 
 > [!NOTE]
-> Sterownik HTTP.sys nie jest obsługiwana na serwerze Nano Server w wersji 1709 lub nowszej. Aby użyć uwierzytelniania Windows i sterownik HTTP.sys systemu Nano Server, użyj [Server Core (microsoft/windowsservercore) kontenera](https://hub.docker.com/r/microsoft/windowsservercore/). Aby uzyskać więcej informacji na temat Server Core, zobacz [co to jest opcja instalacji Server Core w systemie Windows Server?](/windows-server/administration/server-core/what-is-server-core).
+> HTTP.sys nie jest obsługiwana w systemie nano Server w wersji 1709 lub nowszej. Aby użyć uwierzytelniania systemu Windows i HTTP.sys z serwerem nano Server, użyj [kontenera Server Core (Microsoft/windowsservercore)](https://hub.docker.com/r/microsoft/windowsservercore/). Aby uzyskać więcej informacji na temat serwera Server Core, zobacz [co to jest opcja instalacji Server Core w systemie Windows Server?](/windows-server/administration/server-core/what-is-server-core).
 
-## <a name="authorize-users"></a>Autoryzowanie użytkowników
+## <a name="authorize-users"></a>Autoryzuj użytkowników
 
-Stan konfiguracji dostępu anonimowego określa sposób, w którym `[Authorize]` i `[AllowAnonymous]` atrybuty są używane w aplikacji. W poniższych sekcjach dwóch opisano sposób obsługi konfiguracji niedozwolonych i dozwolone stany dostęp anonimowy.
+Stan konfiguracji dostępu anonimowego określa sposób, w jaki `[Authorize]` `[AllowAnonymous]` atrybuty i są używane w aplikacji. W poniższych dwóch sekcjach opisano sposób obsługi niedozwolonych i dozwolonych Stanów konfiguracji dostępu anonimowego.
 
-### <a name="disallow-anonymous-access"></a>Nie zezwalaj na dostęp anonimowy
+### <a name="disallow-anonymous-access"></a>Nie Zezwalaj na dostęp anonimowy
 
-Gdy jest włączone uwierzytelnianie Windows i dostęp anonimowy jest wyłączony, `[Authorize]` i `[AllowAnonymous]` atrybuty mają żadnego skutku. Jeśli witryna usług IIS jest skonfigurowany do nie zezwalaj na dostęp anonimowy, żądanie nigdy nie osiągnie aplikacji. Z tego powodu `[AllowAnonymous]` atrybut nie ma zastosowania.
+Gdy uwierzytelnianie systemu Windows jest włączone i dostęp anonimowy jest wyłączony, `[Authorize]` `[AllowAnonymous]` atrybuty i nie mają żadnego wpływu. Jeśli witryna IIS jest skonfigurowana tak, aby nie zezwalać na dostęp anonimowy, żądanie nigdy nie dociera do aplikacji. Z tego powodu `[AllowAnonymous]` atrybut nie ma zastosowania.
 
 ### <a name="allow-anonymous-access"></a>Zezwalaj na dostęp anonimowy
 
-Po włączeniu uwierzytelniania Windows i dostęp anonimowy używać `[Authorize]` i `[AllowAnonymous]` atrybutów. `[Authorize]` Atrybut umożliwia bezpieczne punkty końcowe aplikacji, które wymagają uwierzytelniania. `[AllowAnonymous]` Atrybutu zastąpienia `[Authorize]` atrybutów w aplikacjach, które zezwala na dostęp anonimowy. Atrybut szczegóły użycia można znaleźć <xref:security/authorization/simple>.
+W przypadku włączenia uwierzytelniania systemu Windows i dostępu anonimowego należy użyć `[Authorize]` `[AllowAnonymous]` atrybutów i. Ten `[Authorize]` atrybut umożliwia zabezpieczenie punktów końcowych aplikacji, które wymagają uwierzytelniania. Ten `[AllowAnonymous]` atrybut zastępuje `[Authorize]` atrybut w aplikacjach, które zezwalają na dostęp anonimowy. Aby uzyskać szczegółowe informacje dotyczące użycia atrybutów, zobacz <xref:security/authorization/simple> .
 
 > [!NOTE]
-> Domyślnie użytkownicy, którzy nie mają autoryzacji do dostępu do strony są prezentowane z pustą odpowiedź HTTP 403. [Oprogramowania pośredniczącego StatusCodePages](xref:fundamentals/error-handling#usestatuscodepages) można skonfigurować, aby zapewnić użytkownikom lepsze środowisko "Odmowa dostępu".
+> Domyślnie użytkownicy, którzy nie posiadają autoryzacji dostępu do strony, są wyświetlani z pustą odpowiedzią HTTP 403. [Oprogramowanie pośredniczące StatusCodePages](xref:fundamentals/error-handling#usestatuscodepages) można skonfigurować w celu zapewnienia użytkownikom lepszego środowiska "odmowa dostępu".
 
 ## <a name="impersonation"></a>Personifikacja
 
-Platforma ASP.NET Core nie implementuje personifikacji. Aplikacje są uruchamiane przy użyciu tożsamości przez aplikację dla wszystkich żądań, przy użyciu tożsamości puli lub procesu aplikacji. Jeśli aplikacja powinna wykonać akcję w imieniu użytkownika, należy użyć [WindowsIdentity.RunImpersonated](xref:System.Security.Principal.WindowsIdentity.RunImpersonated*) w [oprogramowania pośredniczącego terminalu wbudowane](xref:fundamentals/middleware/index#create-a-middleware-pipeline-with-iapplicationbuilder) w `Startup.Configure`. Uruchomić jedną akcję w tym kontekście, a następnie zamknij kontekstu.
+ASP.NET Core nie implementuje personifikacji. Aplikacje są uruchamiane z tożsamością aplikacji dla wszystkich żądań, przy użyciu puli aplikacji lub tożsamości procesu. Jeśli aplikacja powinna wykonać akcję w imieniu użytkownika, należy użyć [WindowsIdentity. RunImpersonated](xref:System.Security.Principal.WindowsIdentity.RunImpersonated*) w ramach [wbudowanego oprogramowania terminala](xref:fundamentals/middleware/index#create-a-middleware-pipeline-with-iapplicationbuilder) w programie `Startup.Configure` . Uruchom pojedynczą akcję w tym kontekście, a następnie zamknij kontekst.
 
 [!code-csharp[](windowsauth/sample_snapshot/Startup.cs?highlight=10-19)]
 
-`RunImpersonated` nie obsługuje operacji asynchronicznych i nie powinny być używane w przypadku złożonych scenariuszy. Na przykład zawijania całego żądania lub łańcuchów oprogramowanie pośredniczące nie jest obsługiwany lub zalecane.
+`RunImpersonated`nie obsługuje operacji asynchronicznych i nie powinna być używana w scenariuszach złożonych. Na przykład Zawijanie całych żądań lub łańcuchów oprogramowania pośredniczącego nie jest obsługiwane ani zalecane.
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Gdy [Microsoft.AspNetCore.Authentication.Negotiate](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Negotiate) pakiet umożliwia uwierzytelnianie na Windows, Linux i macOS, personifikacja jest obsługiwana tylko na Windows.
+Podczas gdy pakiet [Microsoft. AspNetCore. Authentication. Negotiate](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Negotiate) umożliwia uwierzytelnianie w systemach Windows, Linux i macOS, personifikacja jest obsługiwana tylko w systemie Windows.
 
 ::: moniker-end
 
@@ -260,17 +278,17 @@ Gdy [Microsoft.AspNetCore.Authentication.Negotiate](https://www.nuget.org/packag
 
 ::: moniker range=">= aspnetcore-3.0"
 
-W przypadku hostowania za pomocą programu IIS, <xref:Microsoft.AspNetCore.Authentication.AuthenticationService.AuthenticateAsync*> nie jest wewnętrznie wywoływana w celu zainicjowania przez użytkownika. W związku z tym <xref:Microsoft.AspNetCore.Authentication.IClaimsTransformation> implementacji używanego do przekształcania oświadczeń, po każdym uwierzytelniania nie jest aktywowana domyślnie. Aby uzyskać więcej informacji i przykładowy kod, który aktywuje przekształcenia oświadczeń, zobacz <xref:host-and-deploy/aspnet-core-module#in-process-hosting-model>.
+W przypadku hostowania za pomocą usług IIS <xref:Microsoft.AspNetCore.Authentication.AuthenticationService.AuthenticateAsync*> nie jest wywoływana wewnętrznie w celu zainicjowania użytkownika. W związku z tym, <xref:Microsoft.AspNetCore.Authentication.IClaimsTransformation> implementacja użyta do przekształcenia oświadczeń po każdym uwierzytelnieniu nie jest domyślnie aktywowana. Aby uzyskać więcej informacji i przykład kodu, który aktywuje przekształcenia oświadczeń, zobacz <xref:host-and-deploy/aspnet-core-module#in-process-hosting-model> .
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-W przypadku hostowania w trybie usług IIS w trakcie <xref:Microsoft.AspNetCore.Authentication.AuthenticationService.AuthenticateAsync*> nie jest wewnętrznie wywoływana w celu zainicjowania przez użytkownika. W związku z tym <xref:Microsoft.AspNetCore.Authentication.IClaimsTransformation> implementacji używanego do przekształcania oświadczeń, po każdym uwierzytelniania nie jest aktywowana domyślnie. Aby uzyskać więcej informacji i przykładowy kod, który aktywuje przekształcenia oświadczeń w przypadku hostowania w procesie, zobacz <xref:host-and-deploy/aspnet-core-module#in-process-hosting-model>.
+W przypadku hostowania z programem IIS w trybie przetwarzania <xref:Microsoft.AspNetCore.Authentication.AuthenticationService.AuthenticateAsync*> nie jest wywoływana wewnętrznie w celu zainicjowania użytkownika. W związku z tym, <xref:Microsoft.AspNetCore.Authentication.IClaimsTransformation> implementacja użyta do przekształcenia oświadczeń po każdym uwierzytelnieniu nie jest domyślnie aktywowana. Aby uzyskać więcej informacji i przykład kodu, który aktywuje przekształcenia oświadczeń podczas hostingu w procesie, zobacz <xref:host-and-deploy/aspnet-core-module#in-process-hosting-model> .
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [dotnet publish](/dotnet/core/tools/dotnet-publish)
 * <xref:host-and-deploy/iis/index>

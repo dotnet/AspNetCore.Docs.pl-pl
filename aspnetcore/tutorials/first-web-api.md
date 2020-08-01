@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-web-api
-ms.openlocfilehash: 2383934070a65b8131e890a170186b736d3fcec0
-ms.sourcegitcommit: 5a36758cca2861aeb10840093e46d273a6e6e91d
+ms.openlocfilehash: b6a189907f521d7d9d18c1373747a13ab38a621f
+ms.sourcegitcommit: ca6a1f100c1a3f59999189aa962523442dd4ead1
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "86869994"
+ms.lasthandoff: 07/30/2020
+ms.locfileid: "87444168"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>Samouczek: Tworzenie internetowego interfejsu API za pomocą ASP.NET Core
 
@@ -238,7 +238,7 @@ Klasy modelu mogą przejść do dowolnego miejsca w projekcie, ale folder *model
 * Wybierz kartę **Przeglądaj** , a następnie w polu wyszukiwania wprowadź ciąg **Microsoft. EntityFrameworkCore. SqlServer** .
 * W lewym okienku wybierz pozycję **Microsoft. EntityFrameworkCore. SqlServer** .
 * Zaznacz pole wyboru **projekt** w prawym okienku, a następnie wybierz pozycję **Zainstaluj**.
-* Aby dodać pakiet NuGet, użyj powyższych instrukcji `Microsoft.EntityFrameworkCore.InMemory` .
+* Użyj powyższych instrukcji, aby dodać pakiet NuGet **Microsoft. EntityFrameworkCore. inMemory** .
 
 ![Menedżer pakietów NuGet](first-web-api/_static/vs3NuGet.png)
 
@@ -304,7 +304,7 @@ Poprzednie polecenia:
 
 Wygenerowany kod:
 
-* Oznacza klasę [`[ApiController]`](/dotnet/api/microsoft.aspnetcore.mvc.apicontrollerattribute) atrybutem. Ten atrybut wskazuje, że kontroler odpowiada na żądania interfejsu API sieci Web. Aby uzyskać informacje o określonych zachowaniach, które włącza atrybut, zobacz <xref:web-api/index> .
+* Oznacza klasę [`[ApiController]`](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute) atrybutem. Ten atrybut wskazuje, że kontroler odpowiada na żądania interfejsu API sieci Web. Aby uzyskać informacje o określonych zachowaniach, które włącza atrybut, zobacz <xref:web-api/index> .
 * Używa funkcji DI do iniekcji kontekstu bazy danych ( `TodoContext` ) do kontrolera. Kontekst bazy danych jest używany w każdej z metod [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) w kontrolerze.
 
 Szablony ASP.NET Core dla:
@@ -320,7 +320,7 @@ Zastąp instrukcję return w, `PostTodoItem` Aby użyć operatora [nameof](/dotn
 
 [!code-csharp[](first-web-api/samples/3.0/TodoApi/Controllers/TodoItemsController.cs?name=snippet_Create)]
 
-Poprzedni kod jest metodą POST protokołu HTTP, jak wskazano w [`[HttpPost]`](/dotnet/api/microsoft.aspnetcore.mvc.httppostattribute) atrybucie. Metoda pobiera wartość elementu do wykonania z treści żądania HTTP.
+Poprzedni kod jest metodą POST protokołu HTTP, jak wskazano w [`[HttpPost]`](xref:Microsoft.AspNetCore.Mvc.HttpPostAttribute) atrybucie. Metoda pobiera wartość elementu do wykonania z treści żądania HTTP.
 
 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction*>Metoda:
 
@@ -409,7 +409,7 @@ Ta aplikacja używa bazy danych w pamięci. Jeśli aplikacja zostanie zatrzymana
 
 ## <a name="routing-and-url-paths"></a>Ścieżki routingu i adresów URL
 
-Ten [`[HttpGet]`](/dotnet/api/microsoft.aspnetcore.mvc.httpgetattribute) atrybut oznacza metodę, która reaguje na żądanie HTTP GET. Ścieżka adresu URL dla każdej metody jest zbudowana w następujący sposób:
+Ten [`[HttpGet]`](xref:Microsoft.AspNetCore.Mvc.HttpGetAttribute) atrybut oznacza metodę, która reaguje na żądanie HTTP GET. Ścieżka adresu URL dla każdej metody jest zbudowana w następujący sposób:
 
 * Zacznij od ciągu szablonu w `Route` atrybucie kontrolera:
 
@@ -428,7 +428,7 @@ Zwracany typ `GetTodoItems` `GetTodoItem` metod i jest [ \<T> typem ActionResult
 
 `ActionResult`typy zwracane mogą reprezentować szeroką gamę kodów stanu HTTP. Na przykład `GetTodoItem` może zwracać dwie różne wartości stanu:
 
-* Jeśli żaden element nie jest zgodny z żądanym IDENTYFIKATORem, metoda zwraca 404 kod błędu [NOTFOUND](/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.notfound) .
+* Jeśli żaden element nie jest zgodny z żądanym IDENTYFIKATORem, metoda zwróci <xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound%2A> Kod błędu 404.
 * W przeciwnym razie metoda zwraca 200 z treścią odpowiedzi JSON. Zwracanie `item` wyników w odpowiedzi HTTP 200.
 
 ## <a name="the-puttodoitem-method"></a>Metoda PutTodoItem
@@ -720,7 +720,7 @@ Powyższy kod ma następujące działanie:
 Powyższy kod ma następujące działanie:
 
 * Definiuje klasę kontrolera interfejsu API bez metod.
-* Oznacza klasę [`[ApiController]`](/dotnet/api/microsoft.aspnetcore.mvc.apicontrollerattribute) atrybutem. Ten atrybut wskazuje, że kontroler odpowiada na żądania interfejsu API sieci Web. Aby uzyskać informacje o określonych zachowaniach, które włącza atrybut, zobacz <xref:web-api/index> .
+* Oznacza klasę [`[ApiController]`](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute) atrybutem. Ten atrybut wskazuje, że kontroler odpowiada na żądania interfejsu API sieci Web. Aby uzyskać informacje o określonych zachowaniach, które włącza atrybut, zobacz <xref:web-api/index> .
 * Używa funkcji DI do iniekcji kontekstu bazy danych ( `TodoContext` ) do kontrolera. Kontekst bazy danych jest używany w każdej z metod [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) w kontrolerze.
 * Dodaje element o nazwie `Item1` do bazy danych, jeśli baza danych jest pusta. Ten kod znajduje się w konstruktorze, więc jest uruchamiany za każdym razem, gdy istnieje nowe żądanie HTTP. Jeśli usuniesz wszystkie elementy, Konstruktor zostanie ponownie utworzony `Item1` przy następnym wywołaniu metody interfejsu API. Dlatego może wyglądać podobnie jak usunięcie nie zadziałało, gdy rzeczywiście zadziałało.
 
@@ -756,7 +756,7 @@ Następująca odpowiedź HTTP jest generowana przez wywołanie `GetTodoItems` :
 
 ## <a name="routing-and-url-paths"></a>Ścieżki routingu i adresów URL
 
-Ten [`[HttpGet]`](/dotnet/api/microsoft.aspnetcore.mvc.httpgetattribute) atrybut oznacza metodę, która reaguje na żądanie HTTP GET. Ścieżka adresu URL dla każdej metody jest zbudowana w następujący sposób:
+Ten [`[HttpGet]`](xref:Microsoft.AspNetCore.Mvc.HttpGetAttribute) atrybut oznacza metodę, która reaguje na żądanie HTTP GET. Ścieżka adresu URL dla każdej metody jest zbudowana w następujący sposób:
 
 * Zacznij od ciągu szablonu w `Route` atrybucie kontrolera:
 
@@ -775,7 +775,7 @@ Zwracany typ `GetTodoItems` `GetTodoItem` metod i jest [ \<T> typem ActionResult
 
 `ActionResult`typy zwracane mogą reprezentować szeroką gamę kodów stanu HTTP. Na przykład `GetTodoItem` może zwracać dwie różne wartości stanu:
 
-* Jeśli żaden element nie jest zgodny z żądanym IDENTYFIKATORem, metoda zwraca 404 kod błędu [NOTFOUND](/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.notfound) .
+* Jeśli żaden element nie jest zgodny z żądanym IDENTYFIKATORem, metoda zwróci <xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound%2A> Kod błędu 404.
 * W przeciwnym razie metoda zwraca 200 z treścią odpowiedzi JSON. Zwracanie `item` wyników w odpowiedzi HTTP 200.
 
 ## <a name="test-the-gettodoitems-method"></a>Testowanie metody GetTodoItems
@@ -814,7 +814,7 @@ Dodaj następującą `PostTodoItem` metodę w obszarze *controllers/TodoControll
 
 [!code-csharp[](first-web-api/samples/2.2/TodoApi/Controllers/TodoController.cs?name=snippet_Create)]
 
-Poprzedni kod jest metodą POST protokołu HTTP, jak wskazano w [`[HttpPost]`](/dotnet/api/microsoft.aspnetcore.mvc.httppostattribute) atrybucie. Metoda pobiera wartość elementu do wykonania z treści żądania HTTP.
+Poprzedni kod jest metodą POST protokołu HTTP, jak wskazano w [`[HttpPost]`](xref:Microsoft.AspNetCore.Mvc.HttpPostAttribute) atrybucie. Metoda pobiera wartość elementu do wykonania z treści żądania HTTP.
 
 `CreatedAtAction`Metoda:
 
@@ -907,7 +907,7 @@ Przykładowa aplikacja umożliwia usunięcie wszystkich elementów. Jednak po us
 
 W tej sekcji zostanie dodana strona HTML, która używa języka JavaScript do wywoływania internetowego interfejsu API. jQuery inicjuje żądanie. Język JavaScript aktualizuje stronę ze szczegółowymi informacjami z odpowiedzi internetowego interfejsu API.
 
-Skonfiguruj aplikację do [obsługi plików statycznych](/dotnet/api/microsoft.aspnetcore.builder.staticfileextensions.usestaticfiles#Microsoft_AspNetCore_Builder_StaticFileExtensions_UseStaticFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_) i [Włącz domyślne mapowanie plików](/dotnet/api/microsoft.aspnetcore.builder.defaultfilesextensions.usedefaultfiles#Microsoft_AspNetCore_Builder_DefaultFilesExtensions_UseDefaultFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_) , aktualizując *Startup.cs* z następującym wyróżnionym kodem:
+Skonfiguruj aplikację do [obsługi plików statycznych](xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles%2A) i [Włącz domyślne mapowanie plików](xref:Microsoft.AspNetCore.Builder.DefaultFilesExtensions.UseDefaultFiles%2A) , aktualizując *Startup.cs* z następującym wyróżnionym kodem:
 
 [!code-csharp[](first-web-api/samples/2.2/TodoApi/Startup.cs?highlight=14-15&name=snippet_configure)]
 
@@ -960,7 +960,7 @@ Usuwanie elementu do wykonania jest realizowane przez ustawienie `type` w WYWOŁ
 
 [!INCLUDE[](~/includes/IdentityServer4.md)]
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 [Wyświetl lub Pobierz przykładowy kod dla tego samouczka](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/first-web-api/samples). Zobacz artykuł [jak pobrać](xref:index#how-to-download-a-sample).
 

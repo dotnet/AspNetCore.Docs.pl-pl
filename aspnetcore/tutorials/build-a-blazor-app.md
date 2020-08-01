@@ -5,7 +5,7 @@ description: Kompiluj Blazor aplikację krok po kroku.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/02/2020
+ms.date: 07/30/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/build-a-blazor-app
-ms.openlocfilehash: 174a8e561701bb3ebd68ed05e42dfc3d70a9b450
-ms.sourcegitcommit: 14c3d111f9d656c86af36ecb786037bf214f435c
+ms.openlocfilehash: b58c0c3db685d0a5b082aaf2eb434635bd10e2eb
+ms.sourcegitcommit: ca6a1f100c1a3f59999189aa962523442dd4ead1
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/09/2020
-ms.locfileid: "86176225"
+ms.lasthandoff: 07/30/2020
+ms.locfileid: "87444029"
 ---
-# <a name="build-a-blazor-todo-list-app"></a>Tworzenie aplikacji z listą zadań do wykonania Blazor
+# <a name="build-a-no-locblazor-todo-list-app"></a>Tworzenie aplikacji z listą zadań do wykonania Blazor
 
 Autorzy [Daniel Roth](https://github.com/danroth27) i [Luke Latham](https://github.com/guardrex)
 
@@ -32,9 +32,15 @@ W tym samouczku pokazano, jak utworzyć i zmodyfikować Blazor aplikację. Omawi
 > * Tworzenie projektu aplikacji z listą zadań do zrobienia Blazor
 > * Modyfikuj Razor składniki
 > * Używanie obsługi zdarzeń i powiązania danych w składnikach
-> * Używanie iniekcji zależności (DI) i routingu w Blazor aplikacji
+> * Używanie routingu w Blazor aplikacji
 
 Na końcu tego samouczka będziesz mieć działającą aplikację z listą zadań do wykonania.
+
+## <a name="prerequisites"></a>Wymagania wstępne
+
+[!INCLUDE[](~/includes/3.1-SDK.md)]
+
+## <a name="create-a-todo-list-no-locblazor-app"></a>Tworzenie aplikacji z listą zadań do zrobienia Blazor
 
 1. Utwórz nową Blazor aplikację o nazwie `TodoList` w powłoce poleceń:
 
@@ -140,7 +146,7 @@ W niniejszym samouczku zawarto informacje na temat wykonywania następujących c
 > * Tworzenie projektu aplikacji z listą zadań do zrobienia Blazor
 > * Modyfikuj Razor składniki
 > * Używanie obsługi zdarzeń i powiązania danych w składnikach
-> * Używanie iniekcji zależności (DI) i routingu w Blazor aplikacji
+> * Używanie routingu w Blazor aplikacji
 
 Informacje o narzędziach dla ASP.NET Core Blazor :
 

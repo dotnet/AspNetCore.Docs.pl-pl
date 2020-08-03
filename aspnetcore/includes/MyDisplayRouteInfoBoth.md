@@ -1,0 +1,1 @@
+[MyDisplayRouteInfo i ToCtxString](https://github.com/Rick-Anderson/RouteInfo/blob/master/Microsoft.Docs.Samples.RouteInfo/ControllerContextExtensions.cs) są dostarczane przez pakiet NuGet [Rick.Docs. Samples. RouteInfo](https://www.nuget.org/packages/Rick.Docs.Samples.RouteInfo) . Metody wyświetlają `Controller` Informacje o trasie.

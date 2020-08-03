@@ -5,7 +5,7 @@ Aplikacje serwera Blazor na żywo w pamięci serwera. Oznacza to, że istnieje w
 
 W aplikacjach Blazor można używać stanowych pojedynczych usług, jeśli są one specjalnie przeznaczone do tego celu. Na przykład można użyć pamięci podręcznej pamięci jako pojedynczej, ponieważ wymaga ona klucza w celu uzyskania dostępu do danego wpisu, przy założeniu, że użytkownicy nie mają kontroli nad używanymi kluczami pamięci podręcznej.
 
-**Ponadto ze względów bezpieczeństwa nie można używać <xref:Microsoft.AspNetCore.Http.IHttpContextAccessor> w aplikacjach Blazor.** Aplikacje Blazor działają poza kontekstem potoku ASP.NET Core i <xref:Microsoft.AspNetCore.Http.HttpContext> nie ma gwarancji, że jest on dostępny w ramach programu <xref:Microsoft.AspNetCore.Http.IHttpContextAccessor> , ani nie ma gwarancji, że utrzymuje kontekst, w którym uruchomiono aplikację Blazor.
+**Ponadto ze względów bezpieczeństwa nie można używać <xref:Microsoft.AspNetCore.Http.IHttpContextAccessor> w aplikacjach Blazor.** Aplikacje Blazor działają poza kontekstem potoku ASP.NET Core. <xref:Microsoft.AspNetCore.Http.HttpContext>Nie ma gwarancji, że jest ona dostępna w ramach programu <xref:Microsoft.AspNetCore.Http.IHttpContextAccessor> , ani nie gwarantuje posiadania kontekstu, w którym uruchomiono aplikację Blazor.
 
 Zalecany sposób przekazywania stanu żądania do aplikacji Blazor odbywa się za pomocą parametrów do składnika głównego podczas początkowego renderowania aplikacji:
 

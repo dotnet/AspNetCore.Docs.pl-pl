@@ -15,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/index
-ms.openlocfilehash: 77202cd60d357c27237cdb925e0adc00e66d2e56
-ms.sourcegitcommit: 6fb27ea41a92f6d0e91dfd0eba905d2ac1a707f7
+ms.openlocfilehash: d8c1d340a05ebdddffcdebad400b44e31159bc28
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/15/2020
-ms.locfileid: "86407713"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87818901"
 ---
-# <a name="host-and-deploy-aspnet-core-blazor"></a>Hostowanie i wdrażanie ASP.NET CoreBlazor
+# <a name="host-and-deploy-aspnet-core-no-locblazor"></a>Hostowanie i wdrażanie ASP.NET CoreBlazor
 
 [Luke Latham](https://github.com/guardrex), [Rainer Stropek](https://www.timecockpit.com)i [Daniel Roth](https://github.com/danroth27)
 
@@ -30,7 +30,7 @@ ms.locfileid: "86407713"
 
 Aplikacje są publikowane do wdrożenia w konfiguracji wydania.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 1. Wybierz pozycję **kompilacja**  >  **Opublikuj aplikację {aplikacja}** na pasku nawigacyjnym.
 1. Wybierz *element docelowy publikowania*. Aby opublikować lokalnie, wybierz pozycję **folder**.
@@ -41,7 +41,7 @@ Aplikacje są publikowane do wdrożenia w konfiguracji wydania.
 1. Wybierz pozycję **Kompiluj**  >  **Publikowanie do folderu**.
 1. Potwierdź folder, w którym mają zostać odebrane opublikowane zasoby, a następnie wybierz opcję **`Publish`** .
 
-# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
 
 Użyj [`dotnet publish`](/dotnet/core/tools/dotnet-publish) polecenia, aby opublikować aplikację z konfiguracją wydania:
 
@@ -121,7 +121,11 @@ Symbol zastępczy `{RELATIVE PATH}` jest ścieżką spoza katalogu głównego na
 endpoints.MapFallbackToPage("/CoolApp/{**path:nonfile}");
 ```
 
-## <a name="deployment"></a>wdrażania
+**Hostowanie wielu Blazor WebAssembly aplikacji**
+
+Aby uzyskać więcej informacji na temat hostowania wielu Blazor WebAssembly aplikacji w hostowanym Blazor rozwiązaniu, zobacz <xref:blazor/host-and-deploy/webassembly#hosted-deployment-with-multiple-blazor-webassembly-apps> .
+
+## <a name="deployment"></a>Wdrożenie
 
 Aby uzyskać wskazówki dotyczące wdrażania, zobacz następujące tematy:
 

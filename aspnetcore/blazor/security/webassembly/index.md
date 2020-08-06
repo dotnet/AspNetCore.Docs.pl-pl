@@ -15,18 +15,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/index
-ms.openlocfilehash: fbb3f6d254e6d294edc7af59d7980a1d67e4a801
-ms.sourcegitcommit: d9ae1f352d372a20534b57e23646c1a1d9171af1
+ms.openlocfilehash: 8d75852c74b33fe538d05c5945829e0726a5030f
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/21/2020
-ms.locfileid: "86568811"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87818823"
 ---
-# <a name="secure-aspnet-core-blazor-webassembly"></a>Bezpieczny ASP.NET CoreBlazor WebAssembly
+# <a name="secure-aspnet-core-no-locblazor-webassembly"></a>Bezpieczny ASP.NET CoreBlazor WebAssembly
 
 Autor [Javier Calvarro Nelson](https://github.com/javiercn)
 
-Blazor WebAssemblyaplikacje są zabezpieczone w taki sam sposób, jak aplikacje jednostronicowe (aplikacji jednostronicowych). Istnieje kilka podejścia do uwierzytelniania użytkowników w aplikacji jednostronicowych, ale najpopularniejsze i kompleksowe podejście polega na użyciu implementacji opartej na [protokole OAuth 2,0](https://oauth.net/), takim jak [Open ID Connect (OIDC)](https://openid.net/connect/).
+Blazor WebAssemblyaplikacje są zabezpieczone w taki sam sposób, jak aplikacje jednostronicowe (aplikacji jednostronicowych). Istnieje kilka podejścia do uwierzytelniania użytkowników w aplikacji jednostronicowych, ale najbardziej typowym i wszechstronnym podejściem jest użycie implementacji opartej na [protokole OAuth 2,0](https://oauth.net/), takim jak [OPENID Connect Connect (OIDC)](https://openid.net/connect/).
 
 ## <a name="authentication-library"></a>Biblioteka uwierzytelniania
 

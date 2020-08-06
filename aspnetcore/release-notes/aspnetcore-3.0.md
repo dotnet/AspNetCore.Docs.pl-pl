@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-3.0
-ms.openlocfilehash: 6e31a8f49ca535f98f4e073af13896386a4a0feb
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: cebfc88a8a8313bfd975001b50db6e41b6939aed
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408217"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87819149"
 ---
 # <a name="whats-new-in-aspnet-core-30"></a>Co nowego w ASP.NET Core 3,0
 
@@ -49,11 +49,11 @@ Aby uzyskać więcej informacji, zobacz <xref:blazor/index>.
 
 Blazoroddziela logikę renderowania składników od sposobu stosowania aktualizacji interfejsu użytkownika. Blazor Serverzapewnia obsługę składników hostingu Razor na serwerze w aplikacji ASP.NET Core. Aktualizacje interfejsu użytkownika są obsługiwane przez SignalR połączenie. Blazor Serverjest obsługiwany w ASP.NET Core 3,0.
 
-### <a name="blazor-webassembly-preview"></a>Blazor WebAssemblyPrzeglądania
+### <a name="no-locblazor-webassembly-preview"></a>Blazor WebAssemblyPrzeglądania
 
 BlazorAplikacje można również uruchamiać bezpośrednio w przeglądarce przy użyciu środowiska uruchomieniowego .NET opartego na zestawie. Blazor WebAssemblyjest w wersji zapoznawczej i *nie* jest obsługiwany w ASP.NET Core 3,0. Blazor WebAssemblybędzie obsługiwany w przyszłej wersji ASP.NET Core.
 
-### <a name="razor-components"></a>Razorkomponentów
+### <a name="no-locrazor-components"></a>Razorkomponentów
 
 Blazoraplikacje są zbudowane ze składników. Składniki to samodzielne fragmenty interfejsu użytkownika (UI), takie jak strona, okno dialogowe lub formularz. Składniki to normalne klasy .NET, które definiują logikę renderowania interfejsu użytkownika i obsługę zdarzeń po stronie klienta. Możesz tworzyć rozbudowane interaktywne aplikacje sieci Web bez języka JavaScript.
 
@@ -72,7 +72,7 @@ Składniki w programie Blazor są zwykle tworzone przy użyciu Razor składni, n
   * Binarny format serializacji.
 * Udostępnia funkcje takie jak:
 
-  * Authentication
+  * Uwierzytelnianie
   * Dwukierunkowe przesyłanie strumieniowe i sterowanie przepływem.
   * Anulowanie i przekroczenie limitu czasu.
 
@@ -320,25 +320,25 @@ ASP.NET Core 3,0 teraz <xref:System.Text.Json> domyślnie używa dla serializacj
 
 Aby dodać Json.NET do ASP.NET Core 3,0, zobacz [dodawanie Newtonsoft.Jsna podstawie obsługi formatu JSON](xref:web-api/advanced/formatting#add-newtonsoftjson-based-json-format-support).
 
-## <a name="new-razor-directives"></a>Nowe Razor dyrektywy
+## <a name="new-no-locrazor-directives"></a>Nowe Razor dyrektywy
 
 Poniższa lista zawiera nowe Razor dyrektywy:
 
 * [`@attribute`](xref:mvc/views/razor#attribute): `@attribute` Dyrektywa stosuje dany atrybut do klasy wygenerowanej strony lub widoku. Na przykład `@attribute [Authorize]`.
 * [`@implements`](xref:mvc/views/razor#implements): `@implements` Dyrektywa implementuje interfejs dla wygenerowanej klasy. Na przykład `@implements IDisposable`.
 
-## <a name="identityserver4-supports-authentication-and-authorization-for-web-apis-and-spas"></a>Usługi identityserver4 obsługuje uwierzytelnianie i autoryzację dla interfejsów API sieci Web i aplikacji jednostronicowych
+## <a name="no-locidentityserver4-supports-authentication-and-authorization-for-web-apis-and-spas"></a>IdentityServer4 obsługuje uwierzytelnianie i autoryzację dla interfejsów API sieci Web i aplikacji jednostronicowych
 
-ASP.NET Core 3,0 oferuje uwierzytelnianie w aplikacjach jednostronicowych (aplikacji jednostronicowych) przy użyciu obsługi autoryzacji interfejsu API sieci Web. ASP.NET Core Identity do uwierzytelniania i przechowywania użytkowników jest połączony z [usługi identityserver4](https://identityserver.io/) w celu zaimplementowania programu Open ID Connect.
+ASP.NET Core 3,0 oferuje uwierzytelnianie w aplikacjach jednostronicowych (aplikacji jednostronicowych) przy użyciu obsługi autoryzacji interfejsu API sieci Web. ASP.NET Core Identity do uwierzytelniania i przechowywania użytkowników jest połączony z [ Identity Server4](https://identityserver.io/) w celu zaimplementowania programu OpenID Connect Connect.
 
-Usługi identityserver4 to struktura OpenID Connect Connect i OAuth 2,0 dla ASP.NET Core 3,0. Zapewnia następujące funkcje zabezpieczeń:
+IdentityServer4 to struktura OpenID Connect Connect i OAuth 2,0 dla ASP.NET Core 3,0. Zapewnia następujące funkcje zabezpieczeń:
 
 * Uwierzytelnianie jako usługa (AaaS)
 * Logowanie jednokrotne (SSO) dla wielu typów aplikacji
 * Kontrola dostępu do interfejsów API
 * Brama federacyjna
 
-Aby uzyskać więcej informacji, zapoznaj [się z dokumentacją usługi identityserver4](http://docs.identityserver.io/en/latest/index.html) lub [uwierzytelnianiem i autoryzacją aplikacji jednostronicowych](xref:security/authentication/identity/spa).
+Aby uzyskać więcej informacji, zapoznaj [się z Identity dokumentacją Server4](http://docs.identityserver.io/en/latest/index.html) lub [uwierzytelnianiem i autoryzacją aplikacji jednostronicowych](xref:security/authentication/identity/spa).
 
 ## <a name="certificate-and-kerberos-authentication"></a>Certyfikat i uwierzytelnianie Kerberos
 
@@ -485,7 +485,7 @@ Aby uzyskać więcej informacji, zobacz następujące artykuły:
 
 ## <a name="pipes-on-httpcontext"></a>Potoki w obiekcie HttpContext
 
-Teraz można odczytać treść żądania i napisać treść odpowiedzi przy użyciu <xref:System.IO.Pipelines> interfejsu API. Program <!-- <xref:Microsoft.AspNetCore.Http.HttpRequest.BodyReader> --> `HttpRequest.BodyReader`Właściwość zawiera wartość <xref:System.IO.Pipelines.PipeReader> , która może być używana do odczytywania treści żądania. Program <!-- <xref:Microsoft.AspNetCore.Http.> --> `HttpResponse.BodyWriter`Właściwość zawiera wartość <xref:System.IO.Pipelines.PipeWriter> , która może być używana do pisania treści odpowiedzi. `HttpRequest.BodyReader`jest analogiczny do `HttpRequest.Body` strumienia. `HttpResponse.BodyWriter`jest analogiczny do `HttpResponse.Body` strumienia.
+Teraz można odczytać treść żądania i napisać treść odpowiedzi przy użyciu <xref:System.IO.Pipelines> interfejsu API. Dla zasobu <!-- <xref:Microsoft.AspNetCore.Http.HttpRequest.BodyReader> --> `HttpRequest.BodyReader`Właściwość zawiera wartość <xref:System.IO.Pipelines.PipeReader> , która może być używana do odczytywania treści żądania. Dla zasobu <!-- <xref:Microsoft.AspNetCore.Http.> --> `HttpResponse.BodyWriter`Właściwość zawiera wartość <xref:System.IO.Pipelines.PipeWriter> , która może być używana do pisania treści odpowiedzi. `HttpRequest.BodyReader`jest analogiczny do `HttpRequest.Body` strumienia. `HttpResponse.BodyWriter`jest analogiczny do `HttpResponse.Body` strumienia.
 
 <!-- indirectly related, https://github.com/dotnet/docs/pull/14414 won't be published by 9/23  -->
 
@@ -509,7 +509,7 @@ W poprzednich wersjach ASP.NET Core wywoływanie <xref:Microsoft.AspNetCore.Buil
 
 Ten scenariusz jest ustalony w ASP.NET Core 3,0. Host włącza program [pośredniczący z przekierowanymi nagłówkami](xref:host-and-deploy/proxy-load-balancer#forwarded-headers-middleware-options) , gdy `ASPNETCORE_FORWARDEDHEADERS_ENABLED` zmienna środowiskowa jest ustawiona na `true` . `ASPNETCORE_FORWARDEDHEADERS_ENABLED`jest ustawiona na `true` w naszym obrazach kontenera.
 
-## <a name="performance-improvements"></a>Usprawnienia wydajności
+## <a name="performance-improvements"></a>Ulepszenia wydajności
 
 ASP.NET Core 3,0 zawiera wiele ulepszeń, które zmniejszają wykorzystanie pamięci i zwiększają przepływność:
 

@@ -15,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-performance-best-practices
-ms.openlocfilehash: f7bd0d356030e6ddb95c77d7376995320e3ec40e
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 6bd3d2f7902baf16e278e58feb83abb13f6e6821
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401886"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87818615"
 ---
-# <a name="aspnet-core-blazor-webassembly-performance-best-practices"></a>ASP.NET Core Blazor WebAssembly najlepszych rozwiązań dotyczących wydajności
+# <a name="aspnet-core-no-locblazor-webassembly-performance-best-practices"></a>ASP.NET Core Blazor WebAssembly najlepszych rozwiązań dotyczących wydajności
 
 Autor [Pranav Krishnamoorthy](https://github.com/pranavkm)
 
@@ -145,6 +145,10 @@ Blazor WebAssemblyoferuje dwie dodatkowe wersje programu dla <xref:Microsoft.JSI
 ```dotnetcli
 dotnet publish -c Release
 ```
+
+### <a name="lazy-load-assemblies"></a>Zestawy ładowania z opóźnieniem
+
+Ładuj zestawy w czasie wykonywania, gdy zestawy są wymagane przez trasę. Aby uzyskać więcej informacji, zobacz <xref:blazor/webassembly-lazy-load-assemblies>.
 
 ### <a name="compression"></a>Kompresja
 

@@ -4,16 +4,24 @@ groups:
   title: System operacyjny
   prompt: Wybierz system operacyjny
   pivots:
-  - id: os-windows
+  - id: windows
     title: Windows
-  - id: os-linux
+  - id: linux
     title: Linux
-  - id: os-macos
+  - id: macos
     title: macOS
+- id: blazor-hosting-models
+  title: Model hostingu Blazor
+  prompt: Wybierz model hostingu Blazor
+  pivots:
+  - id: webassembly
+    title: Zestaw WebAssembly Blazor
+  - id: server
+    title: Serwer Blazor
 metadata:
-  ms.openlocfilehash: 908731f60f657d52deaddbb1c7bc720ec3542b93
-  ms.sourcegitcommit: e216e8f4afa21215dc38124c28d5ee19f5ed7b1e
+  ms.openlocfilehash: f9d893840994555f04b958aea3f1f7907abdb93a
+  ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
   ms.translationtype: MT
   ms.contentlocale: pl-PL
-  ms.lasthandoff: 07/10/2020
-  ms.locfileid: "86240797"
+  ms.lasthandoff: 08/05/2020
+  ms.locfileid: "87819229"

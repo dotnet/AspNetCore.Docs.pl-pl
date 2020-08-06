@@ -5,7 +5,7 @@ description: Dowiedz się więcej na temat Blazor szablonów aplikacji ASP.NET C
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/19/2020
+ms.date: 08/04/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/templates
-ms.openlocfilehash: f1b131947a242323295a763ba2f2473af0ccfb4f
-ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
+ms.openlocfilehash: 65d6a3156419b57eae6c7e41a9778fa25fd88f4f
+ms.sourcegitcommit: 6eacadf1be61679ab8e6f781ece76b7395512879
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85944528"
+ms.lasthandoff: 08/04/2020
+ms.locfileid: "87758531"
 ---
-# <a name="aspnet-core-blazor-templates"></a>BlazorSzablony ASP.NET Core
+# <a name="aspnet-core-no-locblazor-templates"></a>BlazorSzablony ASP.NET Core
 
 Autorzy [Daniel Roth](https://github.com/danroth27) i [Luke Latham](https://github.com/guardrex)
 
@@ -40,17 +40,16 @@ dotnet new blazorwasm --help
 dotnet new blazorserver --help
 ```
 
-## <a name="blazor-project-structure"></a>BlazorStruktura projektu
+## <a name="no-locblazor-project-structure"></a>BlazorStruktura projektu
 
-Następujące pliki i foldery tworzą Blazor aplikację wygenerowaną na podstawie Blazor szablonu:
+Następujące pliki i foldery tworzą Blazor aplikację wygenerowaną na podstawie Blazor szablonu projektu:
 
 * `Program.cs`: Punkt wejścia aplikacji, który konfiguruje:
 
   * [Host](xref:fundamentals/host/generic-host) ASP.NET Core ( Blazor Server )
   * Host webassembly ( Blazor WebAssembly ): kod w tym pliku jest unikatowy dla aplikacji utworzonych na podstawie Blazor WebAssembly szablonu ( `blazorwasm` ).
-    * `App`Składnik, który jest głównym składnikiem aplikacji, jest określony jako `app` element dom dla `Add` metody.
-    * Usługi można skonfigurować przy użyciu `ConfigureServices` metody w konstruktorze hosta (na przykład `builder.Services.AddSingleton<IMyDependency, MyDependency>();` ).
-    * Konfigurację można dostarczyć za pośrednictwem konstruktora hosta ( `builder.Configuration` ).
+    * `App`Składnik jest głównym składnikiem aplikacji. `App`Składnik jest określony jako `app` element Dom ( `<app>...</app>` ) do kolekcji głównych składników ( `builder.RootComponents.Add<App>("app")` ).
+    * [Usługi](xref:blazor/fundamentals/dependency-injection) są dodawane i konfigurowane (na przykład `builder.Services.AddSingleton<IMyDependency, MyDependency>()` ).
 
 * `Startup.cs`( Blazor Server ): Zawiera logikę uruchamiania aplikacji. `Startup`Klasa definiuje dwie metody:
 
@@ -61,7 +60,7 @@ Następujące pliki i foldery tworzą Blazor aplikację wygenerowaną na podstaw
 
 * `wwwroot/index.html`( Blazor WebAssembly ): Strona główna aplikacji zaimplementowana jako strona HTML:
   * Po wstępnym zażądaniu dowolnej strony aplikacji jest ona renderowana i zwracana w odpowiedzi.
-  * Strona określa, gdzie `App` jest renderowany składnik główny. `App`Składnik ( `App.razor` ) jest określony jako `app` element dom dla `AddComponent` metody w `Startup.Configure` .
+  * Strona określa, gdzie `App` jest renderowany składnik główny. Składnik jest renderowany w lokalizacji `app` elementu Dom ( `<app>...</app>` ).
   * `_framework/blazor.webassembly.js`Plik JavaScript jest ładowany, co:
     * Pobiera środowisko uruchomieniowe platformy .NET, aplikację i zależności aplikacji.
     * Inicjuje środowisko uruchomieniowe, aby uruchomić aplikację.
@@ -77,9 +76,11 @@ Następujące pliki i foldery tworzą Blazor aplikację wygenerowaną na podstaw
   * `Error`( `Error.razor` Blazor Server tylko aplikacja): renderowane, gdy wystąpił nieobsługiwany wyjątek w aplikacji.
   * `FetchData`( `Pages/FetchData.razor` ): Implementuje stronę pobieranie danych.
   * `Index`( `Pages/Index.razor` ): Implementuje stronę główną.
+  
+* `Properties/launchSettings.json`: Zawiera [konfigurację środowiska deweloperskiego](xref:fundamentals/environments#development-and-launchsettingsjson).
 
 * `Shared`folder: zawiera inne składniki interfejsu użytkownika ( `.razor` ) używane przez aplikację:
-  * `MainLayout`( `MainLayout.razor` ): Składnik układu aplikacji.
+  * `MainLayout`( `MainLayout.razor` ): [Składnik układu](xref:blazor/layouts)aplikacji.
   * `NavMenu`( `NavMenu.razor` ): Implementuje nawigację po pasku bocznym. Zawiera [ `NavLink` składnik](xref:blazor/fundamentals/routing#navlink-component) ( <xref:Microsoft.AspNetCore.Components.Routing.NavLink> ), który renderuje linki nawigacji do innych Razor składników. <xref:Microsoft.AspNetCore.Components.Routing.NavLink>Składnik automatycznie wskazuje wybrany stan podczas ładowania składnika, co pomaga użytkownikowi zrozumieć, który składnik jest aktualnie wyświetlany.
 
 * `_Imports.razor`: Zawiera wspólne Razor dyrektywy do uwzględnienia w składnikach aplikacji ( `.razor` ), takich jak [`@using`](xref:mvc/views/razor#using) dyrektywy dotyczące przestrzeni nazw.
@@ -88,4 +89,4 @@ Następujące pliki i foldery tworzą Blazor aplikację wygenerowaną na podstaw
 
 * `wwwroot`: Folder [główny sieci Web](xref:fundamentals/index#web-root) dla aplikacji zawierającej publiczne zasoby statyczne aplikacji.
 
-* `appsettings.json`( Blazor Server ): Ustawienia konfiguracji aplikacji.
+* `appsettings.json`: Zawiera [Ustawienia konfiguracji](xref:blazor/fundamentals/configuration) aplikacji. W Blazor WebAssembly aplikacji plik ustawień aplikacji znajduje się w `wwwroot` folderze. W Blazor Server aplikacji plik ustawień aplikacji znajduje się w katalogu głównym projektu.

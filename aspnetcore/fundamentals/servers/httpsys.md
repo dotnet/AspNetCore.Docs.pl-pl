@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/httpsys
-ms.openlocfilehash: 27ee69130bc455ab2570556091692053d59e89a5
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: f7c5d75fbbbecacea8bbe3a0e54b526f000a001b
+ms.sourcegitcommit: b0fa7ff0cb158277df61bcd08058a81222c3fe10
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408230"
+ms.lasthandoff: 08/07/2020
+ms.locfileid: "87913759"
 ---
 # <a name="httpsys-web-server-implementation-in-aspnet-core"></a>HTTP.sys implementacja serwera sieci Web w programie ASP.NET Core
 
@@ -92,7 +92,7 @@ Dodatkowa konfiguracja HTTP.sys jest obsługiwana za poorednictwem [ustawień re
 
 **OpcjeHTTP.sys**
 
-| Właściwość | Opis | Domyślne |
+| Właściwość | Opis | Domyślny |
 | -------- | ----------- | :-----: |
 | [AllowSynchronousIO](xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.AllowSynchronousIO) | Określ, czy synchroniczne dane wejściowe/wyjściowe są dozwolone dla `HttpContext.Request.Body` i `HttpContext.Response.Body` . | `false` |
 | [Authentication. AllowAnonymous](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationManager.AllowAnonymous) | Zezwalaj na żądania anonimowe. | `true` |
@@ -169,7 +169,7 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
 
    Ustawienia w `UrlPrefixes` ustawieniach zastąpień `UseUrls` / `urls` / `ASPNETCORE_URLS` . Z tego względu zaletą `UseUrls` , `urls` , i `ASPNETCORE_URLS` zmiennej środowiskowej jest łatwiejsze przełączanie się między Kestrel i HTTP.sys.
 
-   HTTP.sys używa [formatów ciągu UrlPrefix interfejsu API serwera http](https://msdn.microsoft.com/library/windows/desktop/aa364698.aspx).
+   HTTP.sys używa [formatów ciągu UrlPrefix interfejsu API serwera http](/windows/win32/http/urlprefix-strings).
 
    > [!WARNING]
    > `http://*:80/` `http://+:80` **Nie** należy używać powiązań z symbolami wieloznacznymi (i) najwyższego poziomu. Powiązania z symbolami wieloznacznymi najwyższego poziomu tworzy luki w zabezpieczeniach aplikacji. Dotyczy to zarówno silnych, jak i słabych symboli wieloznacznych. Używaj jawnych nazw hostów lub adresów IP, a nie symboli wieloznacznych. Powiązanie symboli wieloznacznych w poddomenie (np `*.mysub.com` .) nie jest zagrożeniem bezpieczeństwa, jeśli kontrolujesz całą domenę nadrzędną (w przeciwieństwie do `*.com` , która jest narażona). Aby uzyskać więcej informacji, zobacz [RFC 7230: sekcja 5,4: Host](https://tools.ietf.org/html/rfc7230#section-5.4).
@@ -253,7 +253,7 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
    Dokumentacja referencyjna dla *netsh.exe*:
 
    * [Polecenia netsh dla protokołu HTTP (Hypertext Transfer Protocol)](https://technet.microsoft.com/library/cc725882.aspx)
-   * [UrlPrefix ciągi](https://msdn.microsoft.com/library/windows/desktop/aa364698.aspx)
+   * [UrlPrefix ciągi](/windows/win32/http/urlprefix-strings)
 
 1. Uruchom aplikację.
 
@@ -269,10 +269,10 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
 
 W przypadku aplikacji hostowanych przez HTTP.sys, które współdziałają z żądaniami z Internetu lub sieci firmowej, może być wymagana dodatkowa konfiguracja w przypadku hostowania za serwerami proxy i modułami równoważenia obciążenia. Aby uzyskać więcej informacji, zobacz [konfigurowanie ASP.NET Core do pracy z serwerami proxy i usługami równoważenia obciążenia](xref:host-and-deploy/proxy-load-balancer).
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Włącz uwierzytelnianie systemu Windows przy użyciu HTTP.sys](xref:security/authentication/windowsauth#httpsys)
-* [Interfejs API serwera HTTP](https://msdn.microsoft.com/library/windows/desktop/aa364510.aspx)
+* [Interfejs API serwera HTTP](/windows/win32/http/http-api-start-page)
 * [HttpSysServer lub repozytorium GitHub (kod źródłowy)](https://github.com/aspnet/HttpSysServer/)
 * [Host](xref:fundamentals/index#host)
 * <xref:test/troubleshoot>
@@ -345,7 +345,7 @@ Dodatkowa konfiguracja HTTP.sys jest obsługiwana za poorednictwem [ustawień re
 
 **OpcjeHTTP.sys**
 
-| Właściwość | Opis | Domyślne |
+| Właściwość | Opis | Domyślny |
 | -------- | ----------- | :-----: |
 | [AllowSynchronousIO](xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.AllowSynchronousIO) | Określ, czy synchroniczne dane wejściowe/wyjściowe są dozwolone dla `HttpContext.Request.Body` i `HttpContext.Response.Body` . | `false` |
 | [Authentication. AllowAnonymous](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationManager.AllowAnonymous) | Zezwalaj na żądania anonimowe. | `true` |
@@ -420,7 +420,7 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
 
    Ustawienia w `UrlPrefixes` ustawieniach zastąpień `UseUrls` / `urls` / `ASPNETCORE_URLS` . Z tego względu zaletą `UseUrls` , `urls` , i `ASPNETCORE_URLS` zmiennej środowiskowej jest łatwiejsze przełączanie się między Kestrel i HTTP.sys.
 
-   HTTP.sys używa [formatów ciągu UrlPrefix interfejsu API serwera http](https://msdn.microsoft.com/library/windows/desktop/aa364698.aspx).
+   HTTP.sys używa [formatów ciągu UrlPrefix interfejsu API serwera http](/windows/win32/http/urlprefix-strings).
 
    > [!WARNING]
    > `http://*:80/` `http://+:80` **Nie** należy używać powiązań z symbolami wieloznacznymi (i) najwyższego poziomu. Powiązania z symbolami wieloznacznymi najwyższego poziomu tworzy luki w zabezpieczeniach aplikacji. Dotyczy to zarówno silnych, jak i słabych symboli wieloznacznych. Używaj jawnych nazw hostów lub adresów IP, a nie symboli wieloznacznych. Powiązanie symboli wieloznacznych w poddomenie (np `*.mysub.com` .) nie jest zagrożeniem bezpieczeństwa, jeśli kontrolujesz całą domenę nadrzędną (w przeciwieństwie do `*.com` , która jest narażona). Aby uzyskać więcej informacji, zobacz [RFC 7230: sekcja 5,4: Host](https://tools.ietf.org/html/rfc7230#section-5.4).
@@ -504,7 +504,7 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
    Dokumentacja referencyjna dla *netsh.exe*:
 
    * [Polecenia netsh dla protokołu HTTP (Hypertext Transfer Protocol)](https://technet.microsoft.com/library/cc725882.aspx)
-   * [UrlPrefix ciągi](https://msdn.microsoft.com/library/windows/desktop/aa364698.aspx)
+   * [UrlPrefix ciągi](/windows/win32/http/urlprefix-strings)
 
 1. Uruchom aplikację.
 
@@ -520,10 +520,10 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
 
 W przypadku aplikacji hostowanych przez HTTP.sys, które współdziałają z żądaniami z Internetu lub sieci firmowej, może być wymagana dodatkowa konfiguracja w przypadku hostowania za serwerami proxy i modułami równoważenia obciążenia. Aby uzyskać więcej informacji, zobacz [konfigurowanie ASP.NET Core do pracy z serwerami proxy i usługami równoważenia obciążenia](xref:host-and-deploy/proxy-load-balancer).
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Włącz uwierzytelnianie systemu Windows przy użyciu HTTP.sys](xref:security/authentication/windowsauth#httpsys)
-* [Interfejs API serwera HTTP](https://msdn.microsoft.com/library/windows/desktop/aa364510.aspx)
+* [Interfejs API serwera HTTP](/windows/win32/http/http-api-start-page)
 * [HttpSysServer lub repozytorium GitHub (kod źródłowy)](https://github.com/aspnet/HttpSysServer/)
 * [Host](xref:fundamentals/index#host)
 * <xref:test/troubleshoot>
@@ -598,7 +598,7 @@ Dodatkowa konfiguracja HTTP.sys jest obsługiwana za poorednictwem [ustawień re
 
 **OpcjeHTTP.sys**
 
-| Właściwość | Opis | Domyślne |
+| Właściwość | Opis | Domyślny |
 | -------- | ----------- | :-----: |
 | [AllowSynchronousIO](xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.AllowSynchronousIO) | Określ, czy synchroniczne dane wejściowe/wyjściowe są dozwolone dla `HttpContext.Request.Body` i `HttpContext.Response.Body` . | `true` |
 | [Authentication. AllowAnonymous](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationManager.AllowAnonymous) | Zezwalaj na żądania anonimowe. | `true` |
@@ -673,7 +673,7 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
 
    Ustawienia w `UrlPrefixes` ustawieniach zastąpień `UseUrls` / `urls` / `ASPNETCORE_URLS` . Z tego względu zaletą `UseUrls` , `urls` , i `ASPNETCORE_URLS` zmiennej środowiskowej jest łatwiejsze przełączanie się między Kestrel i HTTP.sys.
 
-   HTTP.sys używa [formatów ciągu UrlPrefix interfejsu API serwera http](https://msdn.microsoft.com/library/windows/desktop/aa364698.aspx).
+   HTTP.sys używa [formatów ciągu UrlPrefix interfejsu API serwera http](/windows/win32/http/urlprefix-strings).
 
    > [!WARNING]
    > `http://*:80/` `http://+:80` **Nie** należy używać powiązań z symbolami wieloznacznymi (i) najwyższego poziomu. Powiązania z symbolami wieloznacznymi najwyższego poziomu tworzy luki w zabezpieczeniach aplikacji. Dotyczy to zarówno silnych, jak i słabych symboli wieloznacznych. Używaj jawnych nazw hostów lub adresów IP, a nie symboli wieloznacznych. Powiązanie symboli wieloznacznych w poddomenie (np `*.mysub.com` .) nie jest zagrożeniem bezpieczeństwa, jeśli kontrolujesz całą domenę nadrzędną (w przeciwieństwie do `*.com` , która jest narażona). Aby uzyskać więcej informacji, zobacz [RFC 7230: sekcja 5,4: Host](https://tools.ietf.org/html/rfc7230#section-5.4).
@@ -757,7 +757,7 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
    Dokumentacja referencyjna dla *netsh.exe*:
 
    * [Polecenia netsh dla protokołu HTTP (Hypertext Transfer Protocol)](https://technet.microsoft.com/library/cc725882.aspx)
-   * [UrlPrefix ciągi](https://msdn.microsoft.com/library/windows/desktop/aa364698.aspx)
+   * [UrlPrefix ciągi](/windows/win32/http/urlprefix-strings)
 
 1. Uruchom aplikację.
 
@@ -773,10 +773,10 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
 
 W przypadku aplikacji hostowanych przez HTTP.sys, które współdziałają z żądaniami z Internetu lub sieci firmowej, może być wymagana dodatkowa konfiguracja w przypadku hostowania za serwerami proxy i modułami równoważenia obciążenia. Aby uzyskać więcej informacji, zobacz [konfigurowanie ASP.NET Core do pracy z serwerami proxy i usługami równoważenia obciążenia](xref:host-and-deploy/proxy-load-balancer).
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Włącz uwierzytelnianie systemu Windows przy użyciu HTTP.sys](xref:security/authentication/windowsauth#httpsys)
-* [Interfejs API serwera HTTP](https://msdn.microsoft.com/library/windows/desktop/aa364510.aspx)
+* [Interfejs API serwera HTTP](/windows/win32/http/http-api-start-page)
 * [HttpSysServer lub repozytorium GitHub (kod źródłowy)](https://github.com/aspnet/HttpSysServer/)
 * [Host](xref:fundamentals/index#host)
 * <xref:test/troubleshoot>
@@ -851,7 +851,7 @@ Dodatkowa konfiguracja HTTP.sys jest obsługiwana za poorednictwem [ustawień re
 
 **OpcjeHTTP.sys**
 
-| Właściwość | Opis | Domyślne |
+| Właściwość | Opis | Domyślny |
 | -------- | ----------- | :-----: |
 | [AllowSynchronousIO](xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.AllowSynchronousIO) | Określ, czy synchroniczne dane wejściowe/wyjściowe są dozwolone dla `HttpContext.Request.Body` i `HttpContext.Response.Body` . | `true` |
 | [Authentication. AllowAnonymous](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationManager.AllowAnonymous) | Zezwalaj na żądania anonimowe. | `true` |
@@ -926,7 +926,7 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
 
    Ustawienia w `UrlPrefixes` ustawieniach zastąpień `UseUrls` / `urls` / `ASPNETCORE_URLS` . Z tego względu zaletą `UseUrls` , `urls` , i `ASPNETCORE_URLS` zmiennej środowiskowej jest łatwiejsze przełączanie się między Kestrel i HTTP.sys.
 
-   HTTP.sys używa [formatów ciągu UrlPrefix interfejsu API serwera http](https://msdn.microsoft.com/library/windows/desktop/aa364698.aspx).
+   HTTP.sys używa [formatów ciągu UrlPrefix interfejsu API serwera http](/windows/win32/http/urlprefix-strings).
 
    > [!WARNING]
    > `http://*:80/` `http://+:80` **Nie** należy używać powiązań z symbolami wieloznacznymi (i) najwyższego poziomu. Powiązania z symbolami wieloznacznymi najwyższego poziomu tworzy luki w zabezpieczeniach aplikacji. Dotyczy to zarówno silnych, jak i słabych symboli wieloznacznych. Używaj jawnych nazw hostów lub adresów IP, a nie symboli wieloznacznych. Powiązanie symboli wieloznacznych w poddomenie (np `*.mysub.com` .) nie jest zagrożeniem bezpieczeństwa, jeśli kontrolujesz całą domenę nadrzędną (w przeciwieństwie do `*.com` , która jest narażona). Aby uzyskać więcej informacji, zobacz [RFC 7230: sekcja 5,4: Host](https://tools.ietf.org/html/rfc7230#section-5.4).
@@ -1010,7 +1010,7 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
    Dokumentacja referencyjna dla *netsh.exe*:
 
    * [Polecenia netsh dla protokołu HTTP (Hypertext Transfer Protocol)](https://technet.microsoft.com/library/cc725882.aspx)
-   * [UrlPrefix ciągi](https://msdn.microsoft.com/library/windows/desktop/aa364698.aspx)
+   * [UrlPrefix ciągi](/windows/win32/http/urlprefix-strings)
 
 1. Uruchom aplikację.
 
@@ -1026,10 +1026,10 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
 
 W przypadku aplikacji hostowanych przez HTTP.sys, które współdziałają z żądaniami z Internetu lub sieci firmowej, może być wymagana dodatkowa konfiguracja w przypadku hostowania za serwerami proxy i modułami równoważenia obciążenia. Aby uzyskać więcej informacji, zobacz [konfigurowanie ASP.NET Core do pracy z serwerami proxy i usługami równoważenia obciążenia](xref:host-and-deploy/proxy-load-balancer).
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Włącz uwierzytelnianie systemu Windows przy użyciu HTTP.sys](xref:security/authentication/windowsauth#httpsys)
-* [Interfejs API serwera HTTP](https://msdn.microsoft.com/library/windows/desktop/aa364510.aspx)
+* [Interfejs API serwera HTTP](/windows/win32/http/http-api-start-page)
 * [HttpSysServer lub repozytorium GitHub (kod źródłowy)](https://github.com/aspnet/HttpSysServer/)
 * [Host](xref:fundamentals/index#host)
 * <xref:test/troubleshoot>

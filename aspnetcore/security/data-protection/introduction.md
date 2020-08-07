@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/introduction
-ms.openlocfilehash: 60cf659c720012d05bb2a6f1433c18d347469462
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: bf41d5a756c988b239824c19ef7a9d177a93a4a1
+ms.sourcegitcommit: b0fa7ff0cb158277df61bcd08058a81222c3fe10
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399533"
+ms.lasthandoff: 08/07/2020
+ms.locfileid: "87913823"
 ---
 # <a name="aspnet-core-data-protection"></a>Ochrona danych ASP.NET Core
 
@@ -53,7 +53,7 @@ Rozpoczęto od zidentyfikowania problemów z istniejącym stosem. Po przeprowadz
 
 Korzystając z tych zasad, opracowano prosty, [łatwy w](xref:security/data-protection/using-data-protection) obsłudze stos ochrony danych.
 
-Interfejsy API ochrony danych ASP.NET Core nie są przede wszystkim przeznaczone do nieograniczonego trwałości poufnych ładunków. Inne technologie, takie jak [Windows CNG DPAPI](https://msdn.microsoft.com/library/windows/desktop/hh706794%28v=vs.85%29.aspx) i [Azure Rights Management](/rights-management/) , są bardziej odpowiednie dla scenariusza nieograniczonego magazynu i mają odpowiadające im silne możliwości zarządzania kluczami. Oznacza to, że nie ma żadnych zakazów używania ASP.NET Core interfejsów API ochrony danych do długoterminowej ochrony poufnych danych.
+Interfejsy API ochrony danych ASP.NET Core nie są przede wszystkim przeznaczone do nieograniczonego trwałości poufnych ładunków. Inne technologie, takie jak [Windows CNG DPAPI](/windows/win32/seccng/cng-dpapi) i [Azure Rights Management](/rights-management/) , są bardziej odpowiednie dla scenariusza nieograniczonego magazynu i mają odpowiadające im silne możliwości zarządzania kluczami. Oznacza to, że nie ma żadnych zakazów używania ASP.NET Core interfejsów API ochrony danych do długoterminowej ochrony poufnych danych.
 
 ## <a name="audience"></a>Grupy odbiorców
 
@@ -85,6 +85,6 @@ Stos ochrony danych składa się z pięciu pakietów.
 
 * [Microsoft. AspNetCore. Cryptography. Datapochodny](https://www.nuget.org/packages/Microsoft.AspNetCore.Cryptography.KeyDerivation/) dostarcza implementację procedury skrótu hasła PBKDF2 i może być używana przez systemy, które muszą bezpiecznie obsługiwać hasła użytkowników. Aby uzyskać więcej informacji, zobacz <xref:security/data-protection/consumer-apis/password-hashing>.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 <xref:host-and-deploy/web-farm>

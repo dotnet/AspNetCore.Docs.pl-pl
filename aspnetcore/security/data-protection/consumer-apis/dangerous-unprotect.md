@@ -14,18 +14,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/consumer-apis/dangerous-unprotect
-ms.openlocfilehash: a0b5bb29c509e8cc999b998776da3ab4ec27ec29
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 55a7ec4052b3ab47d5ff41bbce3fc3f9662f609c
+ms.sourcegitcommit: b0fa7ff0cb158277df61bcd08058a81222c3fe10
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408399"
+ms.lasthandoff: 08/07/2020
+ms.locfileid: "87913842"
 ---
 # <a name="unprotect-payloads-whose-keys-have-been-revoked-in-aspnet-core"></a>Wyłącz ochronę ładunków, których klucze zostały odwołane w ASP.NET Core
 
 <a name="data-protection-consumer-apis-dangerous-unprotect"></a>
 
-Interfejsy API ochrony danych ASP.NET Core nie są przede wszystkim przeznaczone do nieograniczonego trwałości poufnych ładunków. Inne technologie, takie jak [Windows CNG DPAPI](https://msdn.microsoft.com/library/windows/desktop/hh706794%28v=vs.85%29.aspx) i [Azure Rights Management](/rights-management/) , są bardziej odpowiednie dla scenariusza nieograniczonego magazynu i mają odpowiadające im silne możliwości zarządzania kluczami. Oznacza to, że nie ma żadnych zakazów używania ASP.NET Core interfejsów API ochrony danych do długoterminowej ochrony poufnych danych. Klucze nigdy nie są usuwane z pierścienia kluczy, więc `IDataProtector.Unprotect` zawsze mogą odzyskiwać istniejące ładunki, o ile klucze są dostępne i prawidłowe.
+Interfejsy API ochrony danych ASP.NET Core nie są przede wszystkim przeznaczone do nieograniczonego trwałości poufnych ładunków. Inne technologie, takie jak [Windows CNG DPAPI](/windows/win32/seccng/cng-dpapi) i [Azure Rights Management](/rights-management/) , są bardziej odpowiednie dla scenariusza nieograniczonego magazynu i mają odpowiadające im silne możliwości zarządzania kluczami. Oznacza to, że nie ma żadnych zakazów używania ASP.NET Core interfejsów API ochrony danych do długoterminowej ochrony poufnych danych. Klucze nigdy nie są usuwane z pierścienia kluczy, więc `IDataProtector.Unprotect` zawsze mogą odzyskiwać istniejące ładunki, o ile klucze są dostępne i prawidłowe.
 
 Występuje jednak problem polegający na tym, że deweloper próbuje wyłączyć ochronę danych chronionych za pomocą odwołanego klucza, co `IDataProtector.Unprotect` spowoduje zgłoszenie wyjątku w tym przypadku. Może to być korzystne w przypadku ładunków krótkoterminowych lub przejściowych (takich jak tokeny uwierzytelniania), ponieważ te rodzaje ładunków mogą być w łatwy sposób odtworzone przez system, a w najgorszym miejscu może być wymagane zalogowanie się do osoby odwiedzającej. Jednak w przypadku utrwalonych ładunków, których `Unprotect` Zgłoszenie może prowadzić do niedopuszczalnej utraty danych.
 

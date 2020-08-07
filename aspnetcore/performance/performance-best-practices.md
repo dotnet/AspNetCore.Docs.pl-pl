@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/performance-best-practices
-ms.openlocfilehash: 15f3ce5a8e8d47ac567acaadcdc4bf8ba738b2ff
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: f74f6ce93093adbc931dd90b32a14de5d4f89096
+ms.sourcegitcommit: b0fa7ff0cb158277df61bcd08058a81222c3fe10
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408178"
+ms.lasthandoff: 08/07/2020
+ms.locfileid: "87913892"
 ---
 # <a name="aspnet-core-performance-best-practices"></a>ASP.NET Core najlepszych rozwiązań dotyczących wydajności
 
@@ -50,7 +50,7 @@ Typowy problem z wydajnością w aplikacjach ASP.NET Core blokuje wywołania, kt
 **Do**:
 
 * Utwórz asynchroniczne [ścieżki kodu na gorąco](#understand-hot-code-paths) .
-* Wywołania dostępu do danych, we/wy i długotrwałych interfejsów API operacji asynchronicznie, jeśli jest dostępny asynchroniczny interfejs API. **Nie** należy używać [zadania. Run](/dotnet/api/system.threading.tasks.task.run) , aby utworzyć interfejs API synchronus jako asynchroniczny.
+* Wywołania dostępu do danych, we/wy i długotrwałych interfejsów API operacji asynchronicznie, jeśli jest dostępny asynchroniczny interfejs API. **Nie** należy używać [zadania. Run](/dotnet/api/system.threading.tasks.task.run) , aby wykonać synchroniczny asynchroniczny interfejs API.
 * Wykonywanie akcji kontrolera/ Razor strony asynchronicznej. Cały stos wywołań jest asynchroniczny, aby można było korzystać z wzorców [asynchronicznych/await](/dotnet/csharp/programming-guide/concepts/async/) .
 
 Profiler, taki jak [Narzędzia PerfView](https://github.com/Microsoft/perfview), może służyć do znajdowania wątków często dodanych do [puli wątków](/windows/desktop/procthread/thread-pools). `Microsoft-Windows-DotNETRuntime/ThreadPoolWorkerThread/Start`Zdarzenie wskazuje wątek dodany do puli wątków. <!--  For more information, see [async guidance docs](TBD-Link_To_Davifowl_Doc)  -->
@@ -146,7 +146,7 @@ Mając
 
 ## <a name="use-the-latest-aspnet-core-release"></a>Użyj najnowszej wersji ASP.NET Core
 
-Każda nowa wersja ASP.NET Core obejmuje ulepszenia wydajności. Optymalizacje w oprogramowaniu .NET Core i ASP.NET Core oznaczają, że nowsze wersje zwykle outperform starsze wersje. Na przykład program .NET Core 2,1 dodaliśmy obsługę skompilowanych wyrażeń regularnych i benefitted [z \<T> zakresu](https://msdn.microsoft.com/magazine/mt814808.aspx). ASP.NET Core 2,2 dodano obsługę protokołu HTTP/2. [ASP.NET Core 3,0 dodaje wiele ulepszeń](xref:aspnetcore-3.0) , które zmniejszają wykorzystanie pamięci i zwiększają przepływność. Jeśli wydajność jest priorytetem, rozważ uaktualnienie do bieżącej wersji ASP.NET Core.
+Każda nowa wersja ASP.NET Core obejmuje ulepszenia wydajności. Optymalizacje w oprogramowaniu .NET Core i ASP.NET Core oznaczają, że nowsze wersje zwykle outperform starsze wersje. Na przykład program .NET Core 2,1 dodaliśmy obsługę skompilowanych wyrażeń regularnych i benefitted [z \<T> zakresu](/archive/msdn-magazine/2018/january/csharp-all-about-span-exploring-a-new-net-mainstay). ASP.NET Core 2,2 dodano obsługę protokołu HTTP/2. [ASP.NET Core 3,0 dodaje wiele ulepszeń](xref:aspnetcore-3.0) , które zmniejszają wykorzystanie pamięci i zwiększają przepływność. Jeśli wydajność jest priorytetem, rozważ uaktualnienie do bieżącej wersji ASP.NET Core.
 
 ## <a name="minimize-exceptions"></a>Minimalizuj wyjątki
 

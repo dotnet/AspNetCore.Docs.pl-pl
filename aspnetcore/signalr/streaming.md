@@ -7,6 +7,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,50 +17,50 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/streaming
-ms.openlocfilehash: c7a3c7bb88230d84025bdf02deb98b51a2d1f92a
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: e0eabe711fd69e42bd9bfa5e03a92e1df780e4db
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406176"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022514"
 ---
-# <a name="use-streaming-in-aspnet-core-signalr"></a><span data-ttu-id="45b07-103">Używanie przesyłania strumieniowego w ASP.NET CoreSignalR</span><span class="sxs-lookup"><span data-stu-id="45b07-103">Use streaming in ASP.NET Core SignalR</span></span>
+# <a name="use-streaming-in-aspnet-core-no-locsignalr"></a><span data-ttu-id="992be-103">Używanie przesyłania strumieniowego w ASP.NET CoreSignalR</span><span class="sxs-lookup"><span data-stu-id="992be-103">Use streaming in ASP.NET Core SignalR</span></span>
 
-<span data-ttu-id="45b07-104">Autor [Brennan Conroy](https://github.com/BrennanConroy)</span><span class="sxs-lookup"><span data-stu-id="45b07-104">By [Brennan Conroy](https://github.com/BrennanConroy)</span></span>
+<span data-ttu-id="992be-104">Autor [Brennan Conroy](https://github.com/BrennanConroy)</span><span class="sxs-lookup"><span data-stu-id="992be-104">By [Brennan Conroy](https://github.com/BrennanConroy)</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
-<span data-ttu-id="45b07-105">ASP.NET Core SignalR obsługuje przesyłanie strumieniowe z klienta do serwera i z serwera do klienta.</span><span class="sxs-lookup"><span data-stu-id="45b07-105">ASP.NET Core SignalR supports streaming from client to server and from server to client.</span></span> <span data-ttu-id="45b07-106">Jest to przydatne w scenariuszach, w których fragmenty danych docierają w czasie.</span><span class="sxs-lookup"><span data-stu-id="45b07-106">This is useful for scenarios where fragments of data arrive over time.</span></span> <span data-ttu-id="45b07-107">Podczas przesyłania strumieniowego każdy fragment jest wysyłany do klienta lub serwera zaraz po jego udostępnieniu, a nie w celu uzyskania dostępu do wszystkich danych.</span><span class="sxs-lookup"><span data-stu-id="45b07-107">When streaming, each fragment is sent to the client or server as soon as it becomes available, rather than waiting for all of the data to become available.</span></span>
+<span data-ttu-id="992be-105">ASP.NET Core SignalR obsługuje przesyłanie strumieniowe z klienta do serwera i z serwera do klienta.</span><span class="sxs-lookup"><span data-stu-id="992be-105">ASP.NET Core SignalR supports streaming from client to server and from server to client.</span></span> <span data-ttu-id="992be-106">Jest to przydatne w scenariuszach, w których fragmenty danych docierają w czasie.</span><span class="sxs-lookup"><span data-stu-id="992be-106">This is useful for scenarios where fragments of data arrive over time.</span></span> <span data-ttu-id="992be-107">Podczas przesyłania strumieniowego każdy fragment jest wysyłany do klienta lub serwera zaraz po jego udostępnieniu, a nie w celu uzyskania dostępu do wszystkich danych.</span><span class="sxs-lookup"><span data-stu-id="992be-107">When streaming, each fragment is sent to the client or server as soon as it becomes available, rather than waiting for all of the data to become available.</span></span>
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-<span data-ttu-id="45b07-108">ASP.NET Core SignalR obsługuje przesyłanie strumieniowe zwracanych wartości metod serwera.</span><span class="sxs-lookup"><span data-stu-id="45b07-108">ASP.NET Core SignalR supports streaming return values of server methods.</span></span> <span data-ttu-id="45b07-109">Jest to przydatne w scenariuszach, w których fragmenty danych docierają w czasie.</span><span class="sxs-lookup"><span data-stu-id="45b07-109">This is useful for scenarios where fragments of data arrive over time.</span></span> <span data-ttu-id="45b07-110">Gdy wartość zwracana jest przesyłana strumieniowo do klienta, każdy fragment jest wysyłany do klienta natychmiast po jego udostępnieniu, a nie czeka na udostępnienie wszystkich danych.</span><span class="sxs-lookup"><span data-stu-id="45b07-110">When a return value is streamed to the client, each fragment is sent to the client as soon as it becomes available, rather than waiting for all the data to become available.</span></span>
+<span data-ttu-id="992be-108">ASP.NET Core SignalR obsługuje przesyłanie strumieniowe zwracanych wartości metod serwera.</span><span class="sxs-lookup"><span data-stu-id="992be-108">ASP.NET Core SignalR supports streaming return values of server methods.</span></span> <span data-ttu-id="992be-109">Jest to przydatne w scenariuszach, w których fragmenty danych docierają w czasie.</span><span class="sxs-lookup"><span data-stu-id="992be-109">This is useful for scenarios where fragments of data arrive over time.</span></span> <span data-ttu-id="992be-110">Gdy wartość zwracana jest przesyłana strumieniowo do klienta, każdy fragment jest wysyłany do klienta natychmiast po jego udostępnieniu, a nie czeka na udostępnienie wszystkich danych.</span><span class="sxs-lookup"><span data-stu-id="992be-110">When a return value is streamed to the client, each fragment is sent to the client as soon as it becomes available, rather than waiting for all the data to become available.</span></span>
 
 ::: moniker-end
 
-<span data-ttu-id="45b07-111">[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/signalr/streaming/samples/) ([jak pobrać](xref:index#how-to-download-a-sample))</span><span class="sxs-lookup"><span data-stu-id="45b07-111">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/signalr/streaming/samples/) ([how to download](xref:index#how-to-download-a-sample))</span></span>
+<span data-ttu-id="992be-111">[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/signalr/streaming/samples/) ([jak pobrać](xref:index#how-to-download-a-sample))</span><span class="sxs-lookup"><span data-stu-id="992be-111">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/signalr/streaming/samples/) ([how to download](xref:index#how-to-download-a-sample))</span></span>
 
-## <a name="set-up-a-hub-for-streaming"></a><span data-ttu-id="45b07-112">Konfigurowanie centrum do przesyłania strumieniowego</span><span class="sxs-lookup"><span data-stu-id="45b07-112">Set up a hub for streaming</span></span>
+## <a name="set-up-a-hub-for-streaming"></a><span data-ttu-id="992be-112">Konfigurowanie centrum do przesyłania strumieniowego</span><span class="sxs-lookup"><span data-stu-id="992be-112">Set up a hub for streaming</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
-<span data-ttu-id="45b07-113">Metoda centrum automatycznie zmienia metodę centrum przesyłania strumieniowego, gdy zwraca <xref:System.Collections.Generic.IAsyncEnumerable`1> , <xref:System.Threading.Channels.ChannelReader%601> , `Task<IAsyncEnumerable<T>>` , lub `Task<ChannelReader<T>>` .</span><span class="sxs-lookup"><span data-stu-id="45b07-113">A hub method automatically becomes a streaming hub method when it returns <xref:System.Collections.Generic.IAsyncEnumerable`1>, <xref:System.Threading.Channels.ChannelReader%601>, `Task<IAsyncEnumerable<T>>`, or `Task<ChannelReader<T>>`.</span></span>
+<span data-ttu-id="992be-113">Metoda centrum automatycznie zmienia metodę centrum przesyłania strumieniowego, gdy zwraca <xref:System.Collections.Generic.IAsyncEnumerable`1> , <xref:System.Threading.Channels.ChannelReader%601> , `Task<IAsyncEnumerable<T>>` , lub `Task<ChannelReader<T>>` .</span><span class="sxs-lookup"><span data-stu-id="992be-113">A hub method automatically becomes a streaming hub method when it returns <xref:System.Collections.Generic.IAsyncEnumerable`1>, <xref:System.Threading.Channels.ChannelReader%601>, `Task<IAsyncEnumerable<T>>`, or `Task<ChannelReader<T>>`.</span></span>
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-<span data-ttu-id="45b07-114">Metoda centrum automatycznie zmienia metodę centrum przesyłania strumieniowego, gdy zwraca <xref:System.Threading.Channels.ChannelReader%601> lub `Task<ChannelReader<T>>` .</span><span class="sxs-lookup"><span data-stu-id="45b07-114">A hub method automatically becomes a streaming hub method when it returns a <xref:System.Threading.Channels.ChannelReader%601> or a `Task<ChannelReader<T>>`.</span></span>
+<span data-ttu-id="992be-114">Metoda centrum automatycznie zmienia metodę centrum przesyłania strumieniowego, gdy zwraca <xref:System.Threading.Channels.ChannelReader%601> lub `Task<ChannelReader<T>>` .</span><span class="sxs-lookup"><span data-stu-id="992be-114">A hub method automatically becomes a streaming hub method when it returns a <xref:System.Threading.Channels.ChannelReader%601> or a `Task<ChannelReader<T>>`.</span></span>
 
 ::: moniker-end
 
-### <a name="server-to-client-streaming"></a><span data-ttu-id="45b07-115">Przesyłanie strumieniowe między serwerami i klientami</span><span class="sxs-lookup"><span data-stu-id="45b07-115">Server-to-client streaming</span></span>
+### <a name="server-to-client-streaming"></a><span data-ttu-id="992be-115">Przesyłanie strumieniowe między serwerami i klientami</span><span class="sxs-lookup"><span data-stu-id="992be-115">Server-to-client streaming</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
-<span data-ttu-id="45b07-116">Metody centrum przesyłania strumieniowego mogą `IAsyncEnumerable<T>` być dodatkowo zwracane do programu `ChannelReader<T>` .</span><span class="sxs-lookup"><span data-stu-id="45b07-116">Streaming hub methods can return `IAsyncEnumerable<T>` in addition to `ChannelReader<T>`.</span></span> <span data-ttu-id="45b07-117">Najprostszym sposobem zwrócenia `IAsyncEnumerable<T>` jest utworzenie metody centrum jako metody asynchronicznej iteratora, jak pokazano w poniższym przykładzie.</span><span class="sxs-lookup"><span data-stu-id="45b07-117">The simplest way to return `IAsyncEnumerable<T>` is by making the hub method an async iterator method as the following sample demonstrates.</span></span> <span data-ttu-id="45b07-118">Metody iteratorów asynchronicznych centrum mogą akceptować `CancellationToken` Parametry wyzwalane, gdy klient anulował subskrypcję ze strumienia.</span><span class="sxs-lookup"><span data-stu-id="45b07-118">Hub async iterator methods can accept a `CancellationToken` parameter that's triggered when the client unsubscribes from the stream.</span></span> <span data-ttu-id="45b07-119">Metody iteratorów asynchronicznych unikają typowych problemów z kanałami, takich jak nie zwracają `ChannelReader` wystarczająco wczesnych lub kończących metodę bez wykonywania operacji <xref:System.Threading.Channels.ChannelWriter`1> .</span><span class="sxs-lookup"><span data-stu-id="45b07-119">Async iterator methods avoid problems common with Channels, such as not returning the `ChannelReader` early enough or exiting the method without completing the <xref:System.Threading.Channels.ChannelWriter`1>.</span></span>
+<span data-ttu-id="992be-116">Metody centrum przesyłania strumieniowego mogą `IAsyncEnumerable<T>` być dodatkowo zwracane do programu `ChannelReader<T>` .</span><span class="sxs-lookup"><span data-stu-id="992be-116">Streaming hub methods can return `IAsyncEnumerable<T>` in addition to `ChannelReader<T>`.</span></span> <span data-ttu-id="992be-117">Najprostszym sposobem zwrócenia `IAsyncEnumerable<T>` jest utworzenie metody centrum jako metody asynchronicznej iteratora, jak pokazano w poniższym przykładzie.</span><span class="sxs-lookup"><span data-stu-id="992be-117">The simplest way to return `IAsyncEnumerable<T>` is by making the hub method an async iterator method as the following sample demonstrates.</span></span> <span data-ttu-id="992be-118">Metody iteratorów asynchronicznych centrum mogą akceptować `CancellationToken` Parametry wyzwalane, gdy klient anulował subskrypcję ze strumienia.</span><span class="sxs-lookup"><span data-stu-id="992be-118">Hub async iterator methods can accept a `CancellationToken` parameter that's triggered when the client unsubscribes from the stream.</span></span> <span data-ttu-id="992be-119">Metody iteratorów asynchronicznych unikają typowych problemów z kanałami, takich jak nie zwracają `ChannelReader` wystarczająco wczesnych lub kończących metodę bez wykonywania operacji <xref:System.Threading.Channels.ChannelWriter`1> .</span><span class="sxs-lookup"><span data-stu-id="992be-119">Async iterator methods avoid problems common with Channels, such as not returning the `ChannelReader` early enough or exiting the method without completing the <xref:System.Threading.Channels.ChannelWriter`1>.</span></span>
 
 [!INCLUDE[](~/includes/csharp-8-required.md)]
 
@@ -66,12 +68,12 @@ ms.locfileid: "85406176"
 
 ::: moniker-end
 
-<span data-ttu-id="45b07-120">Poniższy przykład przedstawia podstawy przesyłania strumieniowego danych do klienta przy użyciu kanałów.</span><span class="sxs-lookup"><span data-stu-id="45b07-120">The following sample shows the basics of streaming data to the client using Channels.</span></span> <span data-ttu-id="45b07-121">Za każdym razem, gdy obiekt jest zapisywana w <xref:System.Threading.Channels.ChannelWriter%601> , obiekt jest natychmiast wysyłany do klienta.</span><span class="sxs-lookup"><span data-stu-id="45b07-121">Whenever an object is written to the <xref:System.Threading.Channels.ChannelWriter%601>, the object is immediately sent to the client.</span></span> <span data-ttu-id="45b07-122">Na koniec `ChannelWriter` zostanie zakończona, aby poinformować klienta, że strumień jest zamknięty.</span><span class="sxs-lookup"><span data-stu-id="45b07-122">At the end, the `ChannelWriter` is completed to tell the client the stream is closed.</span></span>
+<span data-ttu-id="992be-120">Poniższy przykład przedstawia podstawy przesyłania strumieniowego danych do klienta przy użyciu kanałów.</span><span class="sxs-lookup"><span data-stu-id="992be-120">The following sample shows the basics of streaming data to the client using Channels.</span></span> <span data-ttu-id="992be-121">Za każdym razem, gdy obiekt jest zapisywana w <xref:System.Threading.Channels.ChannelWriter%601> , obiekt jest natychmiast wysyłany do klienta.</span><span class="sxs-lookup"><span data-stu-id="992be-121">Whenever an object is written to the <xref:System.Threading.Channels.ChannelWriter%601>, the object is immediately sent to the client.</span></span> <span data-ttu-id="992be-122">Na koniec `ChannelWriter` zostanie zakończona, aby poinformować klienta, że strumień jest zamknięty.</span><span class="sxs-lookup"><span data-stu-id="992be-122">At the end, the `ChannelWriter` is completed to tell the client the stream is closed.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="45b07-123">Zapisz w `ChannelWriter<T>` wątku w tle i zwróć `ChannelReader` tak szybko, jak to możliwe.</span><span class="sxs-lookup"><span data-stu-id="45b07-123">Write to the `ChannelWriter<T>` on a background thread and return the `ChannelReader` as soon as possible.</span></span> <span data-ttu-id="45b07-124">Inne wywołania centrów są blokowane do momentu `ChannelReader` zwrócenia.</span><span class="sxs-lookup"><span data-stu-id="45b07-124">Other hub invocations are blocked until a `ChannelReader` is returned.</span></span>
+> <span data-ttu-id="992be-123">Zapisz w `ChannelWriter<T>` wątku w tle i zwróć `ChannelReader` tak szybko, jak to możliwe.</span><span class="sxs-lookup"><span data-stu-id="992be-123">Write to the `ChannelWriter<T>` on a background thread and return the `ChannelReader` as soon as possible.</span></span> <span data-ttu-id="992be-124">Inne wywołania centrów są blokowane do momentu `ChannelReader` zwrócenia.</span><span class="sxs-lookup"><span data-stu-id="992be-124">Other hub invocations are blocked until a `ChannelReader` is returned.</span></span>
 >
-> <span data-ttu-id="45b07-125">Zawijanie logiki w `try ... catch` .</span><span class="sxs-lookup"><span data-stu-id="45b07-125">Wrap logic in a `try ... catch`.</span></span> <span data-ttu-id="45b07-126">`Channel` `catch` `catch` Aby upewnić się, że wywołanie metody Hub zostało wykonane prawidłowo, Wypełnij w i poza nim.</span><span class="sxs-lookup"><span data-stu-id="45b07-126">Complete the `Channel` in the `catch` and outside the `catch` to make sure the hub method invocation is completed properly.</span></span>
+> <span data-ttu-id="992be-125">Zawijanie logiki w `try ... catch` .</span><span class="sxs-lookup"><span data-stu-id="992be-125">Wrap logic in a `try ... catch`.</span></span> <span data-ttu-id="992be-126">`Channel` `catch` `catch` Aby upewnić się, że wywołanie metody Hub zostało wykonane prawidłowo, Wypełnij w i poza nim.</span><span class="sxs-lookup"><span data-stu-id="992be-126">Complete the `Channel` in the `catch` and outside the `catch` to make sure the hub method invocation is completed properly.</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -93,19 +95,19 @@ ms.locfileid: "85406176"
 
 ::: moniker range=">= aspnetcore-2.2"
 
-<span data-ttu-id="45b07-127">Metody centrum przesyłania strumieniowego z serwera do klienta mogą akceptować `CancellationToken` Parametry wyzwalane, gdy klient anulował subskrypcję ze strumienia.</span><span class="sxs-lookup"><span data-stu-id="45b07-127">Server-to-client streaming hub methods can accept a `CancellationToken` parameter that's triggered when the client unsubscribes from the stream.</span></span> <span data-ttu-id="45b07-128">Użyj tego tokenu, aby zatrzymać operację serwera i zwolnić wszystkie zasoby, jeśli klient odłączy się przed końcem strumienia.</span><span class="sxs-lookup"><span data-stu-id="45b07-128">Use this token to stop the server operation and release any resources if the client disconnects before the end of the stream.</span></span>
+<span data-ttu-id="992be-127">Metody centrum przesyłania strumieniowego z serwera do klienta mogą akceptować `CancellationToken` Parametry wyzwalane, gdy klient anulował subskrypcję ze strumienia.</span><span class="sxs-lookup"><span data-stu-id="992be-127">Server-to-client streaming hub methods can accept a `CancellationToken` parameter that's triggered when the client unsubscribes from the stream.</span></span> <span data-ttu-id="992be-128">Użyj tego tokenu, aby zatrzymać operację serwera i zwolnić wszystkie zasoby, jeśli klient odłączy się przed końcem strumienia.</span><span class="sxs-lookup"><span data-stu-id="992be-128">Use this token to stop the server operation and release any resources if the client disconnects before the end of the stream.</span></span>
 
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-3.0"
 
-### <a name="client-to-server-streaming"></a><span data-ttu-id="45b07-129">Przesyłanie strumieniowe klient-serwer</span><span class="sxs-lookup"><span data-stu-id="45b07-129">Client-to-server streaming</span></span>
+### <a name="client-to-server-streaming"></a><span data-ttu-id="992be-129">Przesyłanie strumieniowe klient-serwer</span><span class="sxs-lookup"><span data-stu-id="992be-129">Client-to-server streaming</span></span>
 
-<span data-ttu-id="45b07-130">Metoda centrum automatycznie zmienia metodę centrum przesyłania strumieniowego klienta na serwer, gdy akceptuje jeden lub więcej obiektów typu <xref:System.Threading.Channels.ChannelReader%601> lub <xref:System.Collections.Generic.IAsyncEnumerable%601> .</span><span class="sxs-lookup"><span data-stu-id="45b07-130">A hub method automatically becomes a client-to-server streaming hub method when it accepts one or more objects of type <xref:System.Threading.Channels.ChannelReader%601> or <xref:System.Collections.Generic.IAsyncEnumerable%601>.</span></span> <span data-ttu-id="45b07-131">W poniższym przykładzie przedstawiono podstawowe informacje dotyczące odczytywania danych przesyłanych strumieniowo z klienta programu.</span><span class="sxs-lookup"><span data-stu-id="45b07-131">The following sample shows the basics of reading streaming data sent from the client.</span></span> <span data-ttu-id="45b07-132">Za każdym razem, gdy klient zapisuje w programie <xref:System.Threading.Channels.ChannelWriter%601> , dane są zapisywane na `ChannelReader` serwerze, z którego jest odczytywana Metoda centrum.</span><span class="sxs-lookup"><span data-stu-id="45b07-132">Whenever the client writes to the <xref:System.Threading.Channels.ChannelWriter%601>, the data is written into the `ChannelReader` on the server from which the hub method is reading.</span></span>
+<span data-ttu-id="992be-130">Metoda centrum automatycznie zmienia metodę centrum przesyłania strumieniowego klienta na serwer, gdy akceptuje jeden lub więcej obiektów typu <xref:System.Threading.Channels.ChannelReader%601> lub <xref:System.Collections.Generic.IAsyncEnumerable%601> .</span><span class="sxs-lookup"><span data-stu-id="992be-130">A hub method automatically becomes a client-to-server streaming hub method when it accepts one or more objects of type <xref:System.Threading.Channels.ChannelReader%601> or <xref:System.Collections.Generic.IAsyncEnumerable%601>.</span></span> <span data-ttu-id="992be-131">W poniższym przykładzie przedstawiono podstawowe informacje dotyczące odczytywania danych przesyłanych strumieniowo z klienta programu.</span><span class="sxs-lookup"><span data-stu-id="992be-131">The following sample shows the basics of reading streaming data sent from the client.</span></span> <span data-ttu-id="992be-132">Za każdym razem, gdy klient zapisuje w programie <xref:System.Threading.Channels.ChannelWriter%601> , dane są zapisywane na `ChannelReader` serwerze, z którego jest odczytywana Metoda centrum.</span><span class="sxs-lookup"><span data-stu-id="992be-132">Whenever the client writes to the <xref:System.Threading.Channels.ChannelWriter%601>, the data is written into the `ChannelReader` on the server from which the hub method is reading.</span></span>
 
 [!code-csharp[Streaming upload hub method](streaming/samples/3.0/Hubs/StreamHub.cs?name=snippet2)]
 
-<span data-ttu-id="45b07-133"><xref:System.Collections.Generic.IAsyncEnumerable%601>Poniżej znajduje się wersja metody.</span><span class="sxs-lookup"><span data-stu-id="45b07-133">An <xref:System.Collections.Generic.IAsyncEnumerable%601> version of the method follows.</span></span>
+<span data-ttu-id="992be-133"><xref:System.Collections.Generic.IAsyncEnumerable%601>Poniżej znajduje się wersja metody.</span><span class="sxs-lookup"><span data-stu-id="992be-133">An <xref:System.Collections.Generic.IAsyncEnumerable%601> version of the method follows.</span></span>
 
 [!INCLUDE[](~/includes/csharp-8-required.md)]
 
@@ -121,16 +123,16 @@ public async Task UploadStream(IAsyncEnumerable<string> stream)
 
 ::: moniker-end
 
-## <a name="net-client"></a><span data-ttu-id="45b07-134">Klient .NET</span><span class="sxs-lookup"><span data-stu-id="45b07-134">.NET client</span></span>
+## <a name="net-client"></a><span data-ttu-id="992be-134">Klient .NET</span><span class="sxs-lookup"><span data-stu-id="992be-134">.NET client</span></span>
 
-### <a name="server-to-client-streaming"></a><span data-ttu-id="45b07-135">Przesyłanie strumieniowe między serwerami i klientami</span><span class="sxs-lookup"><span data-stu-id="45b07-135">Server-to-client streaming</span></span>
+### <a name="server-to-client-streaming"></a><span data-ttu-id="992be-135">Przesyłanie strumieniowe między serwerami i klientami</span><span class="sxs-lookup"><span data-stu-id="992be-135">Server-to-client streaming</span></span>
 
 
 ::: moniker range=">= aspnetcore-3.0"
 
-<span data-ttu-id="45b07-136">`StreamAsync`Metody i `StreamAsChannelAsync` `HubConnection` są używane do wywoływania metod przesyłania strumieniowego między serwerami i klientami.</span><span class="sxs-lookup"><span data-stu-id="45b07-136">The `StreamAsync` and `StreamAsChannelAsync` methods on `HubConnection` are used to invoke server-to-client streaming methods.</span></span> <span data-ttu-id="45b07-137">Przekaż nazwę i argumenty metody centrum zdefiniowane w metodzie Hub do `StreamAsync` lub `StreamAsChannelAsync` .</span><span class="sxs-lookup"><span data-stu-id="45b07-137">Pass the hub method name and arguments defined in the hub method to `StreamAsync` or `StreamAsChannelAsync`.</span></span> <span data-ttu-id="45b07-138">Parametr generyczny dla `StreamAsync<T>` i `StreamAsChannelAsync<T>` określa typ obiektów zwracanych przez metodę przesyłania strumieniowego.</span><span class="sxs-lookup"><span data-stu-id="45b07-138">The generic parameter on `StreamAsync<T>` and `StreamAsChannelAsync<T>` specifies the type of objects returned by the streaming method.</span></span> <span data-ttu-id="45b07-139">Obiekt typu `IAsyncEnumerable<T>` lub `ChannelReader<T>` jest zwracany przez wywołanie strumienia i reprezentuje strumień na kliencie.</span><span class="sxs-lookup"><span data-stu-id="45b07-139">An object of type `IAsyncEnumerable<T>` or `ChannelReader<T>` is returned from the stream invocation and represents the stream on the client.</span></span>
+<span data-ttu-id="992be-136">`StreamAsync`Metody i `StreamAsChannelAsync` `HubConnection` są używane do wywoływania metod przesyłania strumieniowego między serwerami i klientami.</span><span class="sxs-lookup"><span data-stu-id="992be-136">The `StreamAsync` and `StreamAsChannelAsync` methods on `HubConnection` are used to invoke server-to-client streaming methods.</span></span> <span data-ttu-id="992be-137">Przekaż nazwę i argumenty metody centrum zdefiniowane w metodzie Hub do `StreamAsync` lub `StreamAsChannelAsync` .</span><span class="sxs-lookup"><span data-stu-id="992be-137">Pass the hub method name and arguments defined in the hub method to `StreamAsync` or `StreamAsChannelAsync`.</span></span> <span data-ttu-id="992be-138">Parametr generyczny dla `StreamAsync<T>` i `StreamAsChannelAsync<T>` określa typ obiektów zwracanych przez metodę przesyłania strumieniowego.</span><span class="sxs-lookup"><span data-stu-id="992be-138">The generic parameter on `StreamAsync<T>` and `StreamAsChannelAsync<T>` specifies the type of objects returned by the streaming method.</span></span> <span data-ttu-id="992be-139">Obiekt typu `IAsyncEnumerable<T>` lub `ChannelReader<T>` jest zwracany przez wywołanie strumienia i reprezentuje strumień na kliencie.</span><span class="sxs-lookup"><span data-stu-id="992be-139">An object of type `IAsyncEnumerable<T>` or `ChannelReader<T>` is returned from the stream invocation and represents the stream on the client.</span></span>
 
-<span data-ttu-id="45b07-140">`StreamAsync`Przykład, który zwraca `IAsyncEnumerable<int>` :</span><span class="sxs-lookup"><span data-stu-id="45b07-140">A `StreamAsync` example that returns `IAsyncEnumerable<int>`:</span></span>
+<span data-ttu-id="992be-140">`StreamAsync`Przykład, który zwraca `IAsyncEnumerable<int>` :</span><span class="sxs-lookup"><span data-stu-id="992be-140">A `StreamAsync` example that returns `IAsyncEnumerable<int>`:</span></span>
 
 ```csharp
 // Call "Cancel" on this CancellationTokenSource to send a cancellation message to
@@ -147,7 +149,7 @@ await foreach (var count in stream)
 Console.WriteLine("Streaming completed");
 ```
 
-<span data-ttu-id="45b07-141">Odpowiadający `StreamAsChannelAsync` przykład, który zwraca `ChannelReader<int>` :</span><span class="sxs-lookup"><span data-stu-id="45b07-141">A corresponding `StreamAsChannelAsync` example that returns `ChannelReader<int>`:</span></span>
+<span data-ttu-id="992be-141">Odpowiadający `StreamAsChannelAsync` przykład, który zwraca `ChannelReader<int>` :</span><span class="sxs-lookup"><span data-stu-id="992be-141">A corresponding `StreamAsChannelAsync` example that returns `ChannelReader<int>`:</span></span>
 
 ```csharp
 // Call "Cancel" on this CancellationTokenSource to send a cancellation message to
@@ -173,7 +175,7 @@ Console.WriteLine("Streaming completed");
 
 ::: moniker range=">= aspnetcore-2.2"
 
-<span data-ttu-id="45b07-142">`StreamAsChannelAsync`Metoda `HubConnection` jest używana do wywołania metody przesyłania strumieniowego między serwerami i klientami.</span><span class="sxs-lookup"><span data-stu-id="45b07-142">The `StreamAsChannelAsync` method on `HubConnection` is used to invoke a server-to-client streaming method.</span></span> <span data-ttu-id="45b07-143">Przekaż nazwę i argumenty metody centrum zdefiniowane w metodzie Hub do `StreamAsChannelAsync` .</span><span class="sxs-lookup"><span data-stu-id="45b07-143">Pass the hub method name and arguments defined in the hub method to `StreamAsChannelAsync`.</span></span> <span data-ttu-id="45b07-144">Parametr generyczny `StreamAsChannelAsync<T>` określa typ obiektów zwracanych przez metodę przesyłania strumieniowego.</span><span class="sxs-lookup"><span data-stu-id="45b07-144">The generic parameter on `StreamAsChannelAsync<T>` specifies the type of objects returned by the streaming method.</span></span> <span data-ttu-id="45b07-145">Element `ChannelReader<T>` jest zwracany przez wywołanie strumienia i reprezentuje strumień na kliencie.</span><span class="sxs-lookup"><span data-stu-id="45b07-145">A `ChannelReader<T>` is returned from the stream invocation and represents the stream on the client.</span></span>
+<span data-ttu-id="992be-142">`StreamAsChannelAsync`Metoda `HubConnection` jest używana do wywołania metody przesyłania strumieniowego między serwerami i klientami.</span><span class="sxs-lookup"><span data-stu-id="992be-142">The `StreamAsChannelAsync` method on `HubConnection` is used to invoke a server-to-client streaming method.</span></span> <span data-ttu-id="992be-143">Przekaż nazwę i argumenty metody centrum zdefiniowane w metodzie Hub do `StreamAsChannelAsync` .</span><span class="sxs-lookup"><span data-stu-id="992be-143">Pass the hub method name and arguments defined in the hub method to `StreamAsChannelAsync`.</span></span> <span data-ttu-id="992be-144">Parametr generyczny `StreamAsChannelAsync<T>` określa typ obiektów zwracanych przez metodę przesyłania strumieniowego.</span><span class="sxs-lookup"><span data-stu-id="992be-144">The generic parameter on `StreamAsChannelAsync<T>` specifies the type of objects returned by the streaming method.</span></span> <span data-ttu-id="992be-145">Element `ChannelReader<T>` jest zwracany przez wywołanie strumienia i reprezentuje strumień na kliencie.</span><span class="sxs-lookup"><span data-stu-id="992be-145">A `ChannelReader<T>` is returned from the stream invocation and represents the stream on the client.</span></span>
 
 ```csharp
 // Call "Cancel" on this CancellationTokenSource to send a cancellation message to
@@ -199,7 +201,7 @@ Console.WriteLine("Streaming completed");
 
 ::: moniker range="= aspnetcore-2.1"
 
-<span data-ttu-id="45b07-146">`StreamAsChannelAsync`Metoda `HubConnection` jest używana do wywołania metody przesyłania strumieniowego między serwerami i klientami.</span><span class="sxs-lookup"><span data-stu-id="45b07-146">The `StreamAsChannelAsync` method on `HubConnection` is used to invoke a server-to-client streaming method.</span></span> <span data-ttu-id="45b07-147">Przekaż nazwę i argumenty metody centrum zdefiniowane w metodzie Hub do `StreamAsChannelAsync` .</span><span class="sxs-lookup"><span data-stu-id="45b07-147">Pass the hub method name and arguments defined in the hub method to `StreamAsChannelAsync`.</span></span> <span data-ttu-id="45b07-148">Parametr generyczny `StreamAsChannelAsync<T>` określa typ obiektów zwracanych przez metodę przesyłania strumieniowego.</span><span class="sxs-lookup"><span data-stu-id="45b07-148">The generic parameter on `StreamAsChannelAsync<T>` specifies the type of objects returned by the streaming method.</span></span> <span data-ttu-id="45b07-149">Element `ChannelReader<T>` jest zwracany przez wywołanie strumienia i reprezentuje strumień na kliencie.</span><span class="sxs-lookup"><span data-stu-id="45b07-149">A `ChannelReader<T>` is returned from the stream invocation and represents the stream on the client.</span></span>
+<span data-ttu-id="992be-146">`StreamAsChannelAsync`Metoda `HubConnection` jest używana do wywołania metody przesyłania strumieniowego między serwerami i klientami.</span><span class="sxs-lookup"><span data-stu-id="992be-146">The `StreamAsChannelAsync` method on `HubConnection` is used to invoke a server-to-client streaming method.</span></span> <span data-ttu-id="992be-147">Przekaż nazwę i argumenty metody centrum zdefiniowane w metodzie Hub do `StreamAsChannelAsync` .</span><span class="sxs-lookup"><span data-stu-id="992be-147">Pass the hub method name and arguments defined in the hub method to `StreamAsChannelAsync`.</span></span> <span data-ttu-id="992be-148">Parametr generyczny `StreamAsChannelAsync<T>` określa typ obiektów zwracanych przez metodę przesyłania strumieniowego.</span><span class="sxs-lookup"><span data-stu-id="992be-148">The generic parameter on `StreamAsChannelAsync<T>` specifies the type of objects returned by the streaming method.</span></span> <span data-ttu-id="992be-149">Element `ChannelReader<T>` jest zwracany przez wywołanie strumienia i reprezentuje strumień na kliencie.</span><span class="sxs-lookup"><span data-stu-id="992be-149">A `ChannelReader<T>` is returned from the stream invocation and represents the stream on the client.</span></span>
 
 ```csharp
 var channel = await hubConnection
@@ -222,13 +224,13 @@ Console.WriteLine("Streaming completed");
 
 ::: moniker range=">= aspnetcore-3.0"
 
-### <a name="client-to-server-streaming"></a><span data-ttu-id="45b07-150">Przesyłanie strumieniowe klient-serwer</span><span class="sxs-lookup"><span data-stu-id="45b07-150">Client-to-server streaming</span></span>
+### <a name="client-to-server-streaming"></a><span data-ttu-id="992be-150">Przesyłanie strumieniowe klient-serwer</span><span class="sxs-lookup"><span data-stu-id="992be-150">Client-to-server streaming</span></span>
 
-<span data-ttu-id="45b07-151">Istnieją dwa sposoby wywołania metody centrum przesyłania strumieniowego klienta na serwer z poziomu klienta platformy .NET.</span><span class="sxs-lookup"><span data-stu-id="45b07-151">There are two ways to invoke a client-to-server streaming hub method from the .NET client.</span></span> <span data-ttu-id="45b07-152">Można przekazać parametr `IAsyncEnumerable<T>` lub a `ChannelReader` jako argument do `SendAsync` , `InvokeAsync` lub `StreamAsChannelAsync` , w zależności od wywoływanej metody centrum.</span><span class="sxs-lookup"><span data-stu-id="45b07-152">You can either pass in an `IAsyncEnumerable<T>` or a `ChannelReader` as an argument to `SendAsync`, `InvokeAsync`, or `StreamAsChannelAsync`, depending on the hub method invoked.</span></span>
+<span data-ttu-id="992be-151">Istnieją dwa sposoby wywołania metody centrum przesyłania strumieniowego klienta na serwer z poziomu klienta platformy .NET.</span><span class="sxs-lookup"><span data-stu-id="992be-151">There are two ways to invoke a client-to-server streaming hub method from the .NET client.</span></span> <span data-ttu-id="992be-152">Można przekazać parametr `IAsyncEnumerable<T>` lub a `ChannelReader` jako argument do `SendAsync` , `InvokeAsync` lub `StreamAsChannelAsync` , w zależności od wywoływanej metody centrum.</span><span class="sxs-lookup"><span data-stu-id="992be-152">You can either pass in an `IAsyncEnumerable<T>` or a `ChannelReader` as an argument to `SendAsync`, `InvokeAsync`, or `StreamAsChannelAsync`, depending on the hub method invoked.</span></span>
 
-<span data-ttu-id="45b07-153">Za każdym razem, gdy dane są zapisywane w `IAsyncEnumerable` `ChannelWriter` obiekcie lub, Metoda Hub na serwerze otrzymuje nowy element z danymi od klienta.</span><span class="sxs-lookup"><span data-stu-id="45b07-153">Whenever data is written to the `IAsyncEnumerable` or `ChannelWriter` object, the hub method on the server receives a new item with the data from the client.</span></span>
+<span data-ttu-id="992be-153">Za każdym razem, gdy dane są zapisywane w `IAsyncEnumerable` `ChannelWriter` obiekcie lub, Metoda Hub na serwerze otrzymuje nowy element z danymi od klienta.</span><span class="sxs-lookup"><span data-stu-id="992be-153">Whenever data is written to the `IAsyncEnumerable` or `ChannelWriter` object, the hub method on the server receives a new item with the data from the client.</span></span>
 
-<span data-ttu-id="45b07-154">W przypadku użycia `IAsyncEnumerable` obiektu strumień kończy się po metodzie zwracającej strumienia elementy.</span><span class="sxs-lookup"><span data-stu-id="45b07-154">If using an `IAsyncEnumerable` object, the stream ends after the method returning stream items exits.</span></span>
+<span data-ttu-id="992be-154">W przypadku użycia `IAsyncEnumerable` obiektu strumień kończy się po metodzie zwracającej strumienia elementy.</span><span class="sxs-lookup"><span data-stu-id="992be-154">If using an `IAsyncEnumerable` object, the stream ends after the method returning stream items exits.</span></span>
 
 [!INCLUDE[](~/includes/csharp-8-required.md)]
 
@@ -246,7 +248,7 @@ async IAsyncEnumerable<string> clientStreamData()
 await connection.SendAsync("UploadStream", clientStreamData());
 ```
 
-<span data-ttu-id="45b07-155">Lub jeśli korzystasz z programu `ChannelWriter` , Ukończ kanał przy użyciu `channel.Writer.Complete()` :</span><span class="sxs-lookup"><span data-stu-id="45b07-155">Or if you're using a `ChannelWriter`, you complete the channel with `channel.Writer.Complete()`:</span></span>
+<span data-ttu-id="992be-155">Lub jeśli korzystasz z programu `ChannelWriter` , Ukończ kanał przy użyciu `channel.Writer.Complete()` :</span><span class="sxs-lookup"><span data-stu-id="992be-155">Or if you're using a `ChannelWriter`, you complete the channel with `channel.Writer.Complete()`:</span></span>
 
 ```csharp
 var channel = Channel.CreateBounded<string>(10);
@@ -258,22 +260,22 @@ channel.Writer.Complete();
 
 ::: moniker-end
 
-## <a name="javascript-client"></a><span data-ttu-id="45b07-156">Klient JavaScript</span><span class="sxs-lookup"><span data-stu-id="45b07-156">JavaScript client</span></span>
+## <a name="javascript-client"></a><span data-ttu-id="992be-156">Klient JavaScript</span><span class="sxs-lookup"><span data-stu-id="992be-156">JavaScript client</span></span>
 
-### <a name="server-to-client-streaming"></a><span data-ttu-id="45b07-157">Przesyłanie strumieniowe między serwerami i klientami</span><span class="sxs-lookup"><span data-stu-id="45b07-157">Server-to-client streaming</span></span>
+### <a name="server-to-client-streaming"></a><span data-ttu-id="992be-157">Przesyłanie strumieniowe między serwerami i klientami</span><span class="sxs-lookup"><span data-stu-id="992be-157">Server-to-client streaming</span></span>
 
-<span data-ttu-id="45b07-158">Klienci języka JavaScript wywołują metody przesyłania strumieniowego z serwera do klienta w centrach za pomocą programu `connection.stream` .</span><span class="sxs-lookup"><span data-stu-id="45b07-158">JavaScript clients call server-to-client streaming methods on hubs with `connection.stream`.</span></span> <span data-ttu-id="45b07-159">`stream`Metoda akceptuje dwa argumenty:</span><span class="sxs-lookup"><span data-stu-id="45b07-159">The `stream` method accepts two arguments:</span></span>
+<span data-ttu-id="992be-158">Klienci języka JavaScript wywołują metody przesyłania strumieniowego z serwera do klienta w centrach za pomocą programu `connection.stream` .</span><span class="sxs-lookup"><span data-stu-id="992be-158">JavaScript clients call server-to-client streaming methods on hubs with `connection.stream`.</span></span> <span data-ttu-id="992be-159">`stream`Metoda akceptuje dwa argumenty:</span><span class="sxs-lookup"><span data-stu-id="992be-159">The `stream` method accepts two arguments:</span></span>
 
-* <span data-ttu-id="45b07-160">Nazwa metody centrum.</span><span class="sxs-lookup"><span data-stu-id="45b07-160">The name of the hub method.</span></span> <span data-ttu-id="45b07-161">W poniższym przykładzie nazwa metody centrum to `Counter` .</span><span class="sxs-lookup"><span data-stu-id="45b07-161">In the following example, the hub method name is `Counter`.</span></span>
-* <span data-ttu-id="45b07-162">Argumenty zdefiniowane w metodzie centrum.</span><span class="sxs-lookup"><span data-stu-id="45b07-162">Arguments defined in the hub method.</span></span> <span data-ttu-id="45b07-163">W poniższym przykładzie argumenty są liczbami elementów strumienia do odebrania oraz opóźnieniem między elementami strumienia.</span><span class="sxs-lookup"><span data-stu-id="45b07-163">In the following example, the arguments are a count for the number of stream items to receive and the delay between stream items.</span></span>
+* <span data-ttu-id="992be-160">Nazwa metody centrum.</span><span class="sxs-lookup"><span data-stu-id="992be-160">The name of the hub method.</span></span> <span data-ttu-id="992be-161">W poniższym przykładzie nazwa metody centrum to `Counter` .</span><span class="sxs-lookup"><span data-stu-id="992be-161">In the following example, the hub method name is `Counter`.</span></span>
+* <span data-ttu-id="992be-162">Argumenty zdefiniowane w metodzie centrum.</span><span class="sxs-lookup"><span data-stu-id="992be-162">Arguments defined in the hub method.</span></span> <span data-ttu-id="992be-163">W poniższym przykładzie argumenty są liczbami elementów strumienia do odebrania oraz opóźnieniem między elementami strumienia.</span><span class="sxs-lookup"><span data-stu-id="992be-163">In the following example, the arguments are a count for the number of stream items to receive and the delay between stream items.</span></span>
 
-<span data-ttu-id="45b07-164">`connection.stream`Zwraca element `IStreamResult` , który zawiera `subscribe` metodę.</span><span class="sxs-lookup"><span data-stu-id="45b07-164">`connection.stream` returns an `IStreamResult`, which contains a `subscribe` method.</span></span> <span data-ttu-id="45b07-165">Przekaż `IStreamSubscriber` do `subscribe` i ustaw `next` `error` `complete` wywołania zwrotne, i, aby otrzymywać powiadomienia z `stream` wywołania.</span><span class="sxs-lookup"><span data-stu-id="45b07-165">Pass an `IStreamSubscriber` to `subscribe` and set the `next`, `error`, and `complete` callbacks to receive notifications from the `stream` invocation.</span></span>
+<span data-ttu-id="992be-164">`connection.stream`Zwraca element `IStreamResult` , który zawiera `subscribe` metodę.</span><span class="sxs-lookup"><span data-stu-id="992be-164">`connection.stream` returns an `IStreamResult`, which contains a `subscribe` method.</span></span> <span data-ttu-id="992be-165">Przekaż `IStreamSubscriber` do `subscribe` i ustaw `next` `error` `complete` wywołania zwrotne, i, aby otrzymywać powiadomienia z `stream` wywołania.</span><span class="sxs-lookup"><span data-stu-id="992be-165">Pass an `IStreamSubscriber` to `subscribe` and set the `next`, `error`, and `complete` callbacks to receive notifications from the `stream` invocation.</span></span>
 
 ::: moniker range=">= aspnetcore-2.2"
 
 [!code-javascript[Streaming javascript](streaming/samples/2.2/wwwroot/js/stream.js?range=19-36)]
 
-<span data-ttu-id="45b07-166">Aby zakończyć strumień z klienta, wywołaj `dispose` metodę `ISubscription` zwracaną z `subscribe` metody.</span><span class="sxs-lookup"><span data-stu-id="45b07-166">To end the stream from the client, call the `dispose` method on the `ISubscription` that's returned from the `subscribe` method.</span></span> <span data-ttu-id="45b07-167">Wywołanie tej metody powoduje anulowanie `CancellationToken` parametru metody centrum, jeśli został podany.</span><span class="sxs-lookup"><span data-stu-id="45b07-167">Calling this method causes cancellation of the `CancellationToken` parameter of the Hub method, if you provided one.</span></span>
+<span data-ttu-id="992be-166">Aby zakończyć strumień z klienta, wywołaj `dispose` metodę `ISubscription` zwracaną z `subscribe` metody.</span><span class="sxs-lookup"><span data-stu-id="992be-166">To end the stream from the client, call the `dispose` method on the `ISubscription` that's returned from the `subscribe` method.</span></span> <span data-ttu-id="992be-167">Wywołanie tej metody powoduje anulowanie `CancellationToken` parametru metody centrum, jeśli został podany.</span><span class="sxs-lookup"><span data-stu-id="992be-167">Calling this method causes cancellation of the `CancellationToken` parameter of the Hub method, if you provided one.</span></span>
 
 ::: moniker-end
 
@@ -281,31 +283,31 @@ channel.Writer.Complete();
 
 [!code-javascript[Streaming javascript](streaming/samples/2.1/wwwroot/js/stream.js?range=19-36)]
 
-<span data-ttu-id="45b07-168">Aby zakończyć strumień z klienta, wywołaj `dispose` metodę `ISubscription` zwracaną z `subscribe` metody.</span><span class="sxs-lookup"><span data-stu-id="45b07-168">To end the stream from the client, call the `dispose` method on the `ISubscription` that's returned from the `subscribe` method.</span></span>
+<span data-ttu-id="992be-168">Aby zakończyć strumień z klienta, wywołaj `dispose` metodę `ISubscription` zwracaną z `subscribe` metody.</span><span class="sxs-lookup"><span data-stu-id="992be-168">To end the stream from the client, call the `dispose` method on the `ISubscription` that's returned from the `subscribe` method.</span></span>
 
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-3.0"
 
-### <a name="client-to-server-streaming"></a><span data-ttu-id="45b07-169">Przesyłanie strumieniowe klient-serwer</span><span class="sxs-lookup"><span data-stu-id="45b07-169">Client-to-server streaming</span></span>
+### <a name="client-to-server-streaming"></a><span data-ttu-id="992be-169">Przesyłanie strumieniowe klient-serwer</span><span class="sxs-lookup"><span data-stu-id="992be-169">Client-to-server streaming</span></span>
 
-<span data-ttu-id="45b07-170">Klienci języka JavaScript wywołują metody przesyłania strumieniowego klient-serwer w centrach, przekazując `Subject` jako argument do `send` , `invoke` lub `stream` , w zależności od wywoływanej metody centrum.</span><span class="sxs-lookup"><span data-stu-id="45b07-170">JavaScript clients call client-to-server streaming methods on hubs by passing in a `Subject` as an argument to `send`, `invoke`, or `stream`, depending on the hub method invoked.</span></span> <span data-ttu-id="45b07-171">`Subject`Jest klasą, która wygląda jak `Subject` .</span><span class="sxs-lookup"><span data-stu-id="45b07-171">The `Subject` is a class that looks like a `Subject`.</span></span> <span data-ttu-id="45b07-172">Na przykład w RxJS można użyć klasy [subject](https://rxjs-dev.firebaseapp.com/api/index/class/Subject) z tej biblioteki.</span><span class="sxs-lookup"><span data-stu-id="45b07-172">For example in RxJS, you can use the [Subject](https://rxjs-dev.firebaseapp.com/api/index/class/Subject) class from that library.</span></span>
+<span data-ttu-id="992be-170">Klienci języka JavaScript wywołują metody przesyłania strumieniowego klient-serwer w centrach, przekazując `Subject` jako argument do `send` , `invoke` lub `stream` , w zależności od wywoływanej metody centrum.</span><span class="sxs-lookup"><span data-stu-id="992be-170">JavaScript clients call client-to-server streaming methods on hubs by passing in a `Subject` as an argument to `send`, `invoke`, or `stream`, depending on the hub method invoked.</span></span> <span data-ttu-id="992be-171">`Subject`Jest klasą, która wygląda jak `Subject` .</span><span class="sxs-lookup"><span data-stu-id="992be-171">The `Subject` is a class that looks like a `Subject`.</span></span> <span data-ttu-id="992be-172">Na przykład w RxJS można użyć klasy [subject](https://rxjs-dev.firebaseapp.com/api/index/class/Subject) z tej biblioteki.</span><span class="sxs-lookup"><span data-stu-id="992be-172">For example in RxJS, you can use the [Subject](https://rxjs-dev.firebaseapp.com/api/index/class/Subject) class from that library.</span></span>
 
 [!code-javascript[Upload javascript](streaming/samples/3.0/wwwroot/js/stream.js?range=41-51)]
 
-<span data-ttu-id="45b07-173">Wywołanie `subject.next(item)` elementu zapisuje element do strumienia, a metoda Hub odbiera element na serwerze.</span><span class="sxs-lookup"><span data-stu-id="45b07-173">Calling `subject.next(item)` with an item writes the item to the stream, and the hub method receives the item on the server.</span></span>
+<span data-ttu-id="992be-173">Wywołanie `subject.next(item)` elementu zapisuje element do strumienia, a metoda Hub odbiera element na serwerze.</span><span class="sxs-lookup"><span data-stu-id="992be-173">Calling `subject.next(item)` with an item writes the item to the stream, and the hub method receives the item on the server.</span></span>
 
-<span data-ttu-id="45b07-174">Aby zakończyć strumień, wywołaj polecenie `subject.complete()` .</span><span class="sxs-lookup"><span data-stu-id="45b07-174">To end the stream, call `subject.complete()`.</span></span>
+<span data-ttu-id="992be-174">Aby zakończyć strumień, wywołaj polecenie `subject.complete()` .</span><span class="sxs-lookup"><span data-stu-id="992be-174">To end the stream, call `subject.complete()`.</span></span>
 
-## <a name="java-client"></a><span data-ttu-id="45b07-175">Klient Java</span><span class="sxs-lookup"><span data-stu-id="45b07-175">Java client</span></span>
+## <a name="java-client"></a><span data-ttu-id="992be-175">Klient Java</span><span class="sxs-lookup"><span data-stu-id="992be-175">Java client</span></span>
 
-### <a name="server-to-client-streaming"></a><span data-ttu-id="45b07-176">Przesyłanie strumieniowe między serwerami i klientami</span><span class="sxs-lookup"><span data-stu-id="45b07-176">Server-to-client streaming</span></span>
+### <a name="server-to-client-streaming"></a><span data-ttu-id="992be-176">Przesyłanie strumieniowe między serwerami i klientami</span><span class="sxs-lookup"><span data-stu-id="992be-176">Server-to-client streaming</span></span>
 
-<span data-ttu-id="45b07-177">SignalRKlient Java używa `stream` metody do wywoływania metod przesyłania strumieniowego.</span><span class="sxs-lookup"><span data-stu-id="45b07-177">The SignalR Java client uses the `stream` method to invoke streaming methods.</span></span> <span data-ttu-id="45b07-178">`stream`akceptuje trzy lub więcej argumentów:</span><span class="sxs-lookup"><span data-stu-id="45b07-178">`stream` accepts three or more arguments:</span></span>
+<span data-ttu-id="992be-177">SignalRKlient Java używa `stream` metody do wywoływania metod przesyłania strumieniowego.</span><span class="sxs-lookup"><span data-stu-id="992be-177">The SignalR Java client uses the `stream` method to invoke streaming methods.</span></span> <span data-ttu-id="992be-178">`stream`akceptuje trzy lub więcej argumentów:</span><span class="sxs-lookup"><span data-stu-id="992be-178">`stream` accepts three or more arguments:</span></span>
 
-* <span data-ttu-id="45b07-179">Oczekiwany typ elementów strumienia.</span><span class="sxs-lookup"><span data-stu-id="45b07-179">The expected type of the stream items.</span></span>
-* <span data-ttu-id="45b07-180">Nazwa metody centrum.</span><span class="sxs-lookup"><span data-stu-id="45b07-180">The name of the hub method.</span></span>
-* <span data-ttu-id="45b07-181">Argumenty zdefiniowane w metodzie centrum.</span><span class="sxs-lookup"><span data-stu-id="45b07-181">Arguments defined in the hub method.</span></span>
+* <span data-ttu-id="992be-179">Oczekiwany typ elementów strumienia.</span><span class="sxs-lookup"><span data-stu-id="992be-179">The expected type of the stream items.</span></span>
+* <span data-ttu-id="992be-180">Nazwa metody centrum.</span><span class="sxs-lookup"><span data-stu-id="992be-180">The name of the hub method.</span></span>
+* <span data-ttu-id="992be-181">Argumenty zdefiniowane w metodzie centrum.</span><span class="sxs-lookup"><span data-stu-id="992be-181">Arguments defined in the hub method.</span></span>
 
 ```java
 hubConnection.stream(String.class, "ExampleStreamingHubMethod", "Arg1")
@@ -315,13 +317,13 @@ hubConnection.stream(String.class, "ExampleStreamingHubMethod", "Arg1")
         () -> {/* Define your onCompleted handler here. */});
 ```
 
-<span data-ttu-id="45b07-182">`stream`Metoda on `HubConnection` zwraca widoczny dla typu elementu strumienia.</span><span class="sxs-lookup"><span data-stu-id="45b07-182">The `stream` method on `HubConnection` returns an Observable of the stream item type.</span></span> <span data-ttu-id="45b07-183">Metoda zauważalnego typu `subscribe` ma miejsce, gdzie `onNext` `onError` `onCompleted` są zdefiniowane i procedury obsługi.</span><span class="sxs-lookup"><span data-stu-id="45b07-183">The Observable type's `subscribe` method is where `onNext`, `onError` and `onCompleted` handlers are defined.</span></span>
+<span data-ttu-id="992be-182">`stream`Metoda on `HubConnection` zwraca widoczny dla typu elementu strumienia.</span><span class="sxs-lookup"><span data-stu-id="992be-182">The `stream` method on `HubConnection` returns an Observable of the stream item type.</span></span> <span data-ttu-id="992be-183">Metoda zauważalnego typu `subscribe` ma miejsce, gdzie `onNext` `onError` `onCompleted` są zdefiniowane i procedury obsługi.</span><span class="sxs-lookup"><span data-stu-id="992be-183">The Observable type's `subscribe` method is where `onNext`, `onError` and `onCompleted` handlers are defined.</span></span>
 
 ::: moniker-end
 
-## <a name="additional-resources"></a><span data-ttu-id="45b07-184">Zasoby dodatkowe</span><span class="sxs-lookup"><span data-stu-id="45b07-184">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="992be-184">Zasoby dodatkowe</span><span class="sxs-lookup"><span data-stu-id="992be-184">Additional resources</span></span>
 
-* [<span data-ttu-id="45b07-185">Centra</span><span class="sxs-lookup"><span data-stu-id="45b07-185">Hubs</span></span>](xref:signalr/hubs)
-* [<span data-ttu-id="45b07-186">Klient .NET</span><span class="sxs-lookup"><span data-stu-id="45b07-186">.NET client</span></span>](xref:signalr/dotnet-client)
-* [<span data-ttu-id="45b07-187">Klient JavaScript</span><span class="sxs-lookup"><span data-stu-id="45b07-187">JavaScript client</span></span>](xref:signalr/javascript-client)
-* [<span data-ttu-id="45b07-188">Publikowanie na platformie Azure</span><span class="sxs-lookup"><span data-stu-id="45b07-188">Publish to Azure</span></span>](xref:signalr/publish-to-azure-web-app)
+* [<span data-ttu-id="992be-185">Centra</span><span class="sxs-lookup"><span data-stu-id="992be-185">Hubs</span></span>](xref:signalr/hubs)
+* [<span data-ttu-id="992be-186">Klient .NET</span><span class="sxs-lookup"><span data-stu-id="992be-186">.NET client</span></span>](xref:signalr/dotnet-client)
+* [<span data-ttu-id="992be-187">Klient JavaScript</span><span class="sxs-lookup"><span data-stu-id="992be-187">JavaScript client</span></span>](xref:signalr/javascript-client)
+* [<span data-ttu-id="992be-188">Publikowanie na platformie Azure</span><span class="sxs-lookup"><span data-stu-id="992be-188">Publish to Azure</span></span>](xref:signalr/publish-to-azure-web-app)

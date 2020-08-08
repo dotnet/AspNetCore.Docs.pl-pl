@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/28/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/read-related-data
-ms.openlocfilehash: 171607544bfe89fdd0a1ed9efb68f7a532f9aee1
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.openlocfilehash: d2594dd05ee6d7e8e0dbd3c279ecd8783d182b62
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86212657"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88017834"
 ---
-# <a name="part-6-razor-pages-with-ef-core-in-aspnet-core---read-related-data"></a>Część 6 Razor strony z EF Core w ASP.NET Core — Odczytaj powiązane dane
+# <a name="part-6-no-locrazor-pages-with-ef-core-in-aspnet-core---read-related-data"></a>Część 6 Razor strony z EF Core w ASP.NET Core — Odczytaj powiązane dane
 
 Autorzy [Dykstra](https://github.com/tdykstra), [Jan P Kowalski](https://twitter.com/thereformedprog)i [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -147,7 +149,7 @@ Poniższy kod ładuje powiązane dane przy użyciu `Select` metody:
 
 Poprzedni kod nie zwraca żadnych typów jednostek, dlatego śledzenie nie jest wykonywane. Aby uzyskać więcej informacji na temat śledzenia EF, zobacz [śledzenie a nie śledzenie zapytań](/ef/core/querying/tracking).
 
-`CourseViewModel`:
+Pomocnik `CourseViewModel`:
 
 [!code-csharp[](intro/samples/cu30snapshots/6-related/Models/SchoolViewModels/CourseViewModel.cs?name=snippet)]
 
@@ -450,7 +452,7 @@ Poniższy kod ładuje powiązane dane przy użyciu `Select` metody:
 
 [!code-csharp[](intro/samples/cu/Pages/Courses/IndexSelect.cshtml.cs?name=snippet_RevisedIndexMethod&highlight=4)]
 
-`CourseViewModel`:
+Pomocnik `CourseViewModel`:
 
 [!code-csharp[](intro/samples/cu/Models/SchoolViewModels/CourseViewModel.cs?name=snippet)]
 
@@ -650,7 +652,7 @@ Testowanie aplikacji. Z perspektywy użytkowników aplikacja zachowuje się iden
 
 W następnym samouczku pokazano, jak zaktualizować powiązane dane.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Wersja tego samouczka usługi YouTube (part1)](https://www.youtube.com/watch?v=PzKimUDmrvE)
 * [Wersja tego samouczka usługi YouTube (part2)](https://www.youtube.com/watch?v=xvDDrIHv5ko)

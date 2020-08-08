@@ -5,6 +5,8 @@ description: Dowiedz się, jak ASP.NET Core udostępnia usługi i oprogramowanie
 ms.author: riande
 ms.date: 11/30/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/localization
-ms.openlocfilehash: 412cd7a39a0eed6800e15d235102ed367da5f746
-ms.sourcegitcommit: 895e952aec11c91d703fbdd3640a979307b8cc67
+ms.openlocfilehash: 9fd68d3b412c2cef6125c657653f605689ca6e70
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85793482"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88017223"
 ---
 # <a name="globalization-and-localization-in-aspnet-core"></a>Globalizacja i lokalizacja w ASP.NET Core
 
@@ -247,7 +249,7 @@ Lista domyślna przechodzi od najbardziej konkretnych do najmniej określonych. 
 
 ### <a name="querystringrequestcultureprovider"></a>QueryStringRequestCultureProvider
 
-Niektóre aplikacje będą używać ciągu zapytania w celu ustawienia kultur [i kultury interfejsu użytkownika](https://msdn.microsoft.com/library/system.globalization.cultureinfo.aspx). W przypadku aplikacji korzystających z metody pliku cookie lub z nagłówka Accept-Language Dodawanie ciągu zapytania do adresu URL jest przydatne w przypadku debugowania i testowania kodu. Domyślnie program `QueryStringRequestCultureProvider` jest rejestrowany jako pierwszy dostawca lokalizacji na `RequestCultureProvider` liście. Parametry ciągu zapytania są przekazywane `culture` i `ui-culture` . Poniższy przykład ustawia określoną kulturę (język i region) na hiszpański/Meksyk:
+Niektóre aplikacje będą używać ciągu zapytania w celu ustawienia kultur [i kultury interfejsu użytkownika](https://msdn.microsoft.com/library/system.globalization.cultureinfo.aspx). W przypadku aplikacji, które korzystają z cookie metody lub nagłówka Accept-Language, Dodawanie ciągu zapytania do adresu URL jest przydatne w przypadku debugowania i testowania kodu. Domyślnie program `QueryStringRequestCultureProvider` jest rejestrowany jako pierwszy dostawca lokalizacji na `RequestCultureProvider` liście. Parametry ciągu zapytania są przekazywane `culture` i `ui-culture` . Poniższy przykład ustawia określoną kulturę (język i region) na hiszpański/Meksyk:
 
    `http://localhost:5000/?culture=es-MX&ui-culture=es-MX`
 
@@ -257,13 +259,13 @@ Jeśli przekazujesz tylko jeden z dwóch ( `culture` lub `ui-culture` ), dostawc
 http://localhost:5000/?culture=es-MX
 ```
 
-### <a name="cookierequestcultureprovider"></a>CookieRequestCultureProvider
+### <a name="no-loccookierequestcultureprovider"></a>CookieRequestCultureProvider
 
-Aplikacje produkcyjne często udostępniają mechanizm ustawiania kultury przy użyciu pliku cookie ASP.NET Core kultury. Użyj `MakeCookieValue` metody, aby utworzyć plik cookie.
+Aplikacje produkcyjne często udostępniają mechanizm ustawiania kultury z kulturą ASP.NET Coreową cookie . Użyj `MakeCookieValue` metody, aby utworzyć cookie .
 
-`CookieRequestCultureProvider` `DefaultCookieName` Zwraca domyślną nazwę pliku cookie używaną do śledzenia preferowanych informacji o kulturze użytkownika. Domyślna nazwa pliku cookie to `.AspNetCore.Culture` .
+`CookieRequestCultureProvider` `DefaultCookieName` Zwraca domyślną cookie nazwę używaną do śledzenia informacji o preferowanej kulturze użytkownika. Nazwa domyślna cookie to `.AspNetCore.Culture` .
 
-Format pliku cookie to `c=%LANGCODE%|uic=%LANGCODE%` , gdzie `c` is `Culture` i `uic` is `UICulture` , na przykład:
+cookieFormat to `c=%LANGCODE%|uic=%LANGCODE%` , gdzie `c` is `Culture` i `uic` is `UICulture` , na przykład:
 
 ```
 c=en-UK|uic=en-US
@@ -330,7 +332,7 @@ Plik *views/Shared/_SelectLanguagePartial. cshtml* zostanie dodany do `footer` s
 
 [!code-cshtml[](localization/sample/3.x/Localization/Views/Shared/_Layout.cshtml?range=43-56&highlight=10)]
 
-`SetLanguage`Metoda ustawia plik cookie kultury.
+`SetLanguage`Metoda ustawia kulturę cookie .
 
 [!code-csharp[](localization/sample/3.x/Localization/Controllers/HomeController.cs?range=57-67)]
 
@@ -365,7 +367,7 @@ Odsetk
 
 [!INCLUDE[](~/includes/localization/unsupported-culture-log-level.md)]
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:fundamentals/troubleshoot-aspnet-core-localization>
 * [Projekt lokalizacji. StarterWeb](https://github.com/aspnet/Entropy/tree/master/samples/Localization.StarterWeb) używany w artykule.
@@ -601,7 +603,7 @@ Lista domyślna przechodzi od najbardziej konkretnych do najmniej określonych. 
 
 ### <a name="querystringrequestcultureprovider"></a>QueryStringRequestCultureProvider
 
-Niektóre aplikacje będą używać ciągu zapytania w celu ustawienia kultur [i kultury interfejsu użytkownika](https://msdn.microsoft.com/library/system.globalization.cultureinfo.aspx). W przypadku aplikacji korzystających z metody pliku cookie lub z nagłówka Accept-Language Dodawanie ciągu zapytania do adresu URL jest przydatne w przypadku debugowania i testowania kodu. Domyślnie program `QueryStringRequestCultureProvider` jest rejestrowany jako pierwszy dostawca lokalizacji na `RequestCultureProvider` liście. Parametry ciągu zapytania są przekazywane `culture` i `ui-culture` . Poniższy przykład ustawia określoną kulturę (język i region) na hiszpański/Meksyk:
+Niektóre aplikacje będą używać ciągu zapytania w celu ustawienia kultur [i kultury interfejsu użytkownika](https://msdn.microsoft.com/library/system.globalization.cultureinfo.aspx). W przypadku aplikacji, które korzystają z cookie metody lub nagłówka Accept-Language, Dodawanie ciągu zapytania do adresu URL jest przydatne w przypadku debugowania i testowania kodu. Domyślnie program `QueryStringRequestCultureProvider` jest rejestrowany jako pierwszy dostawca lokalizacji na `RequestCultureProvider` liście. Parametry ciągu zapytania są przekazywane `culture` i `ui-culture` . Poniższy przykład ustawia określoną kulturę (język i region) na hiszpański/Meksyk:
 
 ```
 http://localhost:5000/?culture=es-MX&ui-culture=es-MX
@@ -613,13 +615,13 @@ Jeśli przekazujesz tylko jeden z dwóch ( `culture` lub `ui-culture` ), dostawc
 http://localhost:5000/?culture=es-MX
 ```
 
-### <a name="cookierequestcultureprovider"></a>CookieRequestCultureProvider
+### <a name="no-loccookierequestcultureprovider"></a>CookieRequestCultureProvider
 
-Aplikacje produkcyjne często udostępniają mechanizm ustawiania kultury przy użyciu pliku cookie ASP.NET Core kultury. Użyj `MakeCookieValue` metody, aby utworzyć plik cookie.
+Aplikacje produkcyjne często udostępniają mechanizm ustawiania kultury z kulturą ASP.NET Coreową cookie . Użyj `MakeCookieValue` metody, aby utworzyć cookie .
 
-`CookieRequestCultureProvider` `DefaultCookieName` Zwraca domyślną nazwę pliku cookie używaną do śledzenia preferowanych informacji o kulturze użytkownika. Domyślna nazwa pliku cookie to `.AspNetCore.Culture` .
+`CookieRequestCultureProvider` `DefaultCookieName` Zwraca domyślną cookie nazwę używaną do śledzenia informacji o preferowanej kulturze użytkownika. Nazwa domyślna cookie to `.AspNetCore.Culture` .
 
-Format pliku cookie to `c=%LANGCODE%|uic=%LANGCODE%` , gdzie `c` is `Culture` i `uic` is `UICulture` , na przykład:
+cookieFormat to `c=%LANGCODE%|uic=%LANGCODE%` , gdzie `c` is `Culture` i `uic` is `UICulture` , na przykład:
 
 ```
 c=en-UK|uic=en-US
@@ -686,7 +688,7 @@ Plik *views/Shared/_SelectLanguagePartial. cshtml* zostanie dodany do `footer` s
 
 [!code-cshtml[](localization/sample/3.x/Localization/Views/Shared/_Layout.cshtml?range=43-56&highlight=10)]
 
-`SetLanguage`Metoda ustawia plik cookie kultury.
+`SetLanguage`Metoda ustawia kulturę cookie .
 
 [!code-csharp[](localization/sample/3.x/Localization/Controllers/HomeController.cs?range=57-67)]
 
@@ -719,7 +721,7 @@ Odsetk
 
 [!INCLUDE[](~/includes/localization/currency.md)]
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:fundamentals/troubleshoot-aspnet-core-localization>
 * [Projekt lokalizacji. StarterWeb](https://github.com/aspnet/Entropy/tree/master/samples/Localization.StarterWeb) używany w artykule.
@@ -956,7 +958,7 @@ Lista domyślna przechodzi od najbardziej konkretnych do najmniej określonych. 
 
 ### <a name="querystringrequestcultureprovider"></a>QueryStringRequestCultureProvider
 
-Niektóre aplikacje będą używać ciągu zapytania w celu ustawienia kultur [i kultury interfejsu użytkownika](https://msdn.microsoft.com/library/system.globalization.cultureinfo.aspx). W przypadku aplikacji korzystających z metody pliku cookie lub z nagłówka Accept-Language Dodawanie ciągu zapytania do adresu URL jest przydatne w przypadku debugowania i testowania kodu. Domyślnie program `QueryStringRequestCultureProvider` jest rejestrowany jako pierwszy dostawca lokalizacji na `RequestCultureProvider` liście. Parametry ciągu zapytania są przekazywane `culture` i `ui-culture` . Poniższy przykład ustawia określoną kulturę (język i region) na hiszpański/Meksyk:
+Niektóre aplikacje będą używać ciągu zapytania w celu ustawienia kultur [i kultury interfejsu użytkownika](https://msdn.microsoft.com/library/system.globalization.cultureinfo.aspx). W przypadku aplikacji, które korzystają z cookie metody lub nagłówka Accept-Language, Dodawanie ciągu zapytania do adresu URL jest przydatne w przypadku debugowania i testowania kodu. Domyślnie program `QueryStringRequestCultureProvider` jest rejestrowany jako pierwszy dostawca lokalizacji na `RequestCultureProvider` liście. Parametry ciągu zapytania są przekazywane `culture` i `ui-culture` . Poniższy przykład ustawia określoną kulturę (język i region) na hiszpański/Meksyk:
 
 ```
 http://localhost:5000/?culture=es-MX&ui-culture=es-MX
@@ -968,13 +970,13 @@ Jeśli przekazujesz tylko jeden z dwóch ( `culture` lub `ui-culture` ), dostawc
 http://localhost:5000/?culture=es-MX
 ```
 
-### <a name="cookierequestcultureprovider"></a>CookieRequestCultureProvider
+### <a name="no-loccookierequestcultureprovider"></a>CookieRequestCultureProvider
 
-Aplikacje produkcyjne często udostępniają mechanizm ustawiania kultury przy użyciu pliku cookie ASP.NET Core kultury. Użyj `MakeCookieValue` metody, aby utworzyć plik cookie.
+Aplikacje produkcyjne często udostępniają mechanizm ustawiania kultury z kulturą ASP.NET Coreową cookie . Użyj `MakeCookieValue` metody, aby utworzyć cookie .
 
-`CookieRequestCultureProvider` `DefaultCookieName` Zwraca domyślną nazwę pliku cookie używaną do śledzenia preferowanych informacji o kulturze użytkownika. Domyślna nazwa pliku cookie to `.AspNetCore.Culture` .
+`CookieRequestCultureProvider` `DefaultCookieName` Zwraca domyślną cookie nazwę używaną do śledzenia informacji o preferowanej kulturze użytkownika. Nazwa domyślna cookie to `.AspNetCore.Culture` .
 
-Format pliku cookie to `c=%LANGCODE%|uic=%LANGCODE%` , gdzie `c` is `Culture` i `uic` is `UICulture` , na przykład:
+cookieFormat to `c=%LANGCODE%|uic=%LANGCODE%` , gdzie `c` is `Culture` i `uic` is `UICulture` , na przykład:
 
 ```
 c=en-UK|uic=en-US
@@ -1064,7 +1066,7 @@ Plik *views/Shared/_SelectLanguagePartial. cshtml* zostanie dodany do `footer` s
 
 [!code-cshtml[](localization/sample/3.x/Localization/Views/Shared/_Layout.cshtml?range=43-56&highlight=10)]
 
-`SetLanguage`Metoda ustawia plik cookie kultury.
+`SetLanguage`Metoda ustawia kulturę cookie .
 
 [!code-csharp[](localization/sample/3.x/Localization/Controllers/HomeController.cs?range=57-67)]
 
@@ -1099,7 +1101,7 @@ Odsetk
 
 [!INCLUDE[](~/includes/localization/unsupported-culture-log-level.md)]
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:fundamentals/troubleshoot-aspnet-core-localization>
 * [Projekt lokalizacji. StarterWeb](https://github.com/aspnet/Entropy/tree/master/samples/Localization.StarterWeb) używany w artykule.

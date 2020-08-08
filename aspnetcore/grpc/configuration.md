@@ -7,6 +7,8 @@ ms.author: jamesnk
 ms.custom: mvc
 ms.date: 05/26/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/configuration
-ms.openlocfilehash: e56410d2e9a893a406ec5b60841c2b70dca7205c
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: e6767aedcf9c6dbcbd7eec97e1c7a5b6161992aa
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403563"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88016196"
 ---
 # <a name="grpc-for-net-configuration"></a>Konfiguracja programu gRPC for .NET
 
@@ -71,7 +73,7 @@ Następujący kod:
 
 [!INCLUDE[](~/includes/gRPCazure.md)]
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:grpc/aspnetcore>
 * <xref:grpc/client>

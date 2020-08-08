@@ -7,6 +7,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 12/16/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/azure-apps/index
-ms.openlocfilehash: 9ffeebbf8125ddac5d6e621e411c4e86c5bd34b1
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 11de6b04f6813161e5eaee294f3e67e223ae0db3
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399312"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88015923"
 ---
 # <a name="deploy-aspnet-core-apps-to-azure-app-service"></a>Wdróż aplikacje ASP.NET Core w Azure App Service
 
@@ -147,7 +149,7 @@ Zapoznaj się z informacjami o typowych problemach z konfiguracją wdrażania dl
 
 [Klucze ochrony danych](xref:security/data-protection/implementation/key-management#data-protection-implementation-key-management) są utrwalane w folderze *%Home%\ASP.NET\DataProtection-Keys* . Ten folder jest obsługiwany przez magazyn sieciowy i synchronizowany na wszystkich komputerach obsługujących aplikację. Klucze nie są chronione w stanie spoczynku. Ten folder dostarcza pierścień kluczy do wszystkich wystąpień aplikacji w jednym miejscu wdrożenia. Oddzielne miejsca wdrożenia, takie jak przygotowanie i środowisko produkcyjne, nie dzielą się z kluczem.
 
-W przypadku wymiany między miejscami wdrożenia każdy system korzystający z ochrony danych nie będzie w stanie odszyfrować przechowywanych danych przy użyciu dzwonka klucza w poprzednim gnieździe. Oprogramowanie pośredniczące ASP.NET plików cookie używa ochrony danych do ochrony plików cookie. Prowadzi to do użytkowników wylogowanych z aplikacji korzystającej ze standardowego oprogramowania ASP.NET cookie. W przypadku rozwiązania z niezależnym dzwonkiem, należy użyć zewnętrznego dostawcy usługi Key dystynktywnego, takiego jak:
+W przypadku wymiany między miejscami wdrożenia każdy system korzystający z ochrony danych nie będzie w stanie odszyfrować przechowywanych danych przy użyciu dzwonka klucza w poprzednim gnieździe. CookieOprogramowanie pośredniczące ASP.NET używa ochrony danych, aby chronić swoje cookie elementy. Prowadzi to do użytkowników wylogowanych z aplikacji korzystającej ze standardowego Cookie oprogramowania pośredniczącego ASP.NET. W przypadku rozwiązania z niezależnym dzwonkiem, należy użyć zewnętrznego dostawcy usługi Key dystynktywnego, takiego jak:
 
 * Azure Blob Storage
 * W usłudze Azure Key Vault
@@ -245,7 +247,7 @@ Po zakończeniu operacji zostanie zainstalowana najnowsza wersja programu .NET C
 
 **Używanie rozszerzenia witryny w wersji zapoznawczej z szablonem ARM**
 
-Jeśli szablon ARM jest używany do tworzenia i wdrażania aplikacji, `siteextensions` Typ zasobu może służyć do dodawania rozszerzenia witryny do aplikacji sieci Web. Na przykład:
+Jeśli szablon ARM jest używany do tworzenia i wdrażania aplikacji, `siteextensions` Typ zasobu może służyć do dodawania rozszerzenia witryny do aplikacji sieci Web. Przykład:
 
 [!code-json[](index/sample/arm.json?highlight=2)]
 
@@ -275,7 +277,7 @@ W przypadku wdrożenia 64-bitowego:
    * Wybierz pozycję **Zapisz**.
 1. Utwórz nową lokację lub zaktualizuj istniejącą witrynę, postępując zgodnie z pozostałymi instrukcjami Kreatora publikacji.
 
-# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli/)
+# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli/)
 
 1. W pliku projektu nie określaj [identyfikatora środowiska uruchomieniowego (RID)](/dotnet/core/rid-catalog).
 
@@ -306,7 +308,7 @@ Użyj programu Visual Studio lub interfejs wiersza polecenia platformy .NET Core
    * Wybierz pozycję **Zapisz**.
 1. Utwórz nową lokację lub zaktualizuj istniejącą witrynę, postępując zgodnie z pozostałymi instrukcjami Kreatora publikacji.
 
-# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli/)
+# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli/)
 
 1. W pliku projektu Określ jeden lub więcej [identyfikatorów środowiska uruchomieniowego (RID)](/dotnet/core/rid-catalog). Użyj `<RuntimeIdentifier>` (pojedyncze) dla pojedynczego identyfikatora RID lub Użyj `<RuntimeIdentifiers>` (plural), aby podać listę identyfikatorów RID rozdzielonych średnikami. W poniższym przykładzie `win-x86` określono identyfikator RID:
 

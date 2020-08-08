@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/13/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/aspnet-core-module
-ms.openlocfilehash: e16735ec06e6d84118e5949fe56c514015105242
-ms.sourcegitcommit: 6eacadf1be61679ab8e6f781ece76b7395512879
+ms.openlocfilehash: c5c26c72af8103167b421cfa4aa06c23c242c1d7
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/04/2020
-ms.locfileid: "87758583"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88015910"
 ---
 # <a name="aspnet-core-module"></a>Moduł ASP.NET Core
 
@@ -1051,7 +1053,7 @@ Pliki można znaleźć, wyszukując *aspnetcore* w pliku *applicationHost.config
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:host-and-deploy/iis/index>
 * <xref:host-and-deploy/azure-apps/index>

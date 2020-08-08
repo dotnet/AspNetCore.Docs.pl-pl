@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 5/7/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/index
-ms.openlocfilehash: 951ae53876edf345af1a3eb32cb9be1b9668fa53
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 0594303f3ae8c57a0a7776900e6b2a6781c919db
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404174"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88015832"
 ---
 # <a name="host-aspnet-core-on-windows-with-iis"></a>ASP.NET Core hosta w systemie Windows z usługami IIS
 
@@ -148,7 +150,7 @@ services.Configure<IISServerOptions>(options =>
 });
 ```
 
-| Opcja                         | Domyślne | Ustawienie |
+| Opcja                         | Domyślny | Ustawienie |
 | ------------------------------ | :-----: | ------- |
 | `AutomaticAuthentication`      | `true`  | Jeśli `true` serwer usług IIS ustawi uwierzytelnienie `HttpContext.User` za pomocą [uwierzytelniania systemu Windows](xref:security/authentication/windowsauth). Jeśli `false` serwer zawiera tylko tożsamość dla `HttpContext.User` i reaguje na wyzwania, gdy zostanie jawnie zlecony przez `AuthenticationScheme` . Aby program mógł działać, należy włączyć uwierzytelnianie systemu Windows `AutomaticAuthentication` . Aby uzyskać więcej informacji, zobacz [uwierzytelnianie systemu Windows](xref:security/authentication/windowsauth). |
 | `AuthenticationDisplayName`    | `null`  | Ustawia nazwę wyświetlaną pokazywaną użytkownikom na stronach logowania. |
@@ -166,7 +168,7 @@ services.Configure<IISOptions>(options =>
 });
 ```
 
-| Opcja                         | Domyślne | Ustawienie |
+| Opcja                         | Domyślny | Ustawienie |
 | ------------------------------ | :-----: | ------- |
 | `AutomaticAuthentication`      | `true`  | Jeśli `true` [oprogramowanie pośredniczące integracji usług IIS](#enable-the-iisintegration-components) ustawi uwierzytelnienie `HttpContext.User` za pomocą [uwierzytelniania systemu Windows](xref:security/authentication/windowsauth). Jeśli `false` oprogramowanie pośredniczące zapewnia tylko tożsamość `HttpContext.User` i reaguje na wyzwania, gdy zostanie jawnie zażądana przez program `AuthenticationScheme` . Aby program mógł działać, należy włączyć uwierzytelnianie systemu Windows `AutomaticAuthentication` . Aby uzyskać więcej informacji, zobacz temat [uwierzytelnianie systemu Windows](xref:security/authentication/windowsauth) . |
 | `AuthenticationDisplayName`    | `null`  | Ustawia nazwę wyświetlaną pokazywaną użytkownikom na stronach logowania. |
@@ -354,7 +356,7 @@ Podczas wdrażania aplikacji na serwerach z [Web Deploy](/iis/install/installing
 
 1. Potwierdź, że tożsamość modelu procesu ma odpowiednie uprawnienia.
 
-   Jeśli domyślna tożsamość puli aplikacji (**model procesów**  >  **Identity** ) została zmieniona z **ApplicationPoolIdentity** na inną tożsamość, sprawdź, czy Nowa tożsamość ma wymagane uprawnienia dostępu do folderu, bazy danych i innych wymaganych zasobów aplikacji. Na przykład Pula aplikacji wymaga dostępu do odczytu i zapisu do folderów, w których aplikacja odczytuje i zapisuje pliki.
+   Jeśli domyślna tożsamość puli aplikacji (**model procesów**  >  **Identity** ) została zmieniona z **ApplicationPool Identity ** na inną tożsamość, sprawdź, czy Nowa tożsamość ma wymagane uprawnienia dostępu do folderu, bazy danych i innych wymaganych zasobów aplikacji. Na przykład Pula aplikacji wymaga dostępu do odczytu i zapisu do folderów, w których aplikacja odczytuje i zapisuje pliki.
 
 **Konfiguracja uwierzytelniania systemu Windows (opcjonalnie)**  
 Aby uzyskać więcej informacji, zobacz [Konfigurowanie uwierzytelniania systemu Windows](xref:security/authentication/windowsauth).
@@ -414,9 +416,9 @@ Pliki w folderze wdrożenia są zablokowane, gdy aplikacja jest uruchomiona. Nie
 
 Jeśli pierścień kluczy jest przechowywany w pamięci po ponownym uruchomieniu aplikacji:
 
-* Wszystkie tokeny uwierzytelniania na podstawie plików cookie są unieważnione. 
+* cookieTokeny uwierzytelniania na podstawie wszystkich są unieważnione. 
 * Użytkownicy muszą ponownie zalogować się przy następnym żądaniu. 
-* Nie można już odszyfrować żadnych danych chronionych za pomocą dzwonka klucza. Może to obejmować [tokeny CSRF](xref:security/anti-request-forgery#aspnet-core-antiforgery-configuration) [ASP.NET Core i pliki cookie MVC TempData](xref:fundamentals/app-state#tempdata).
+* Nie można już odszyfrować żadnych danych chronionych za pomocą dzwonka klucza. Może to obejmować [tokeny CSRF](xref:security/anti-request-forgery#aspnet-core-antiforgery-configuration) i [ASP.NET Core MVC TempData cookie s](xref:fundamentals/app-state#tempdata).
 
 Aby skonfigurować ochronę danych w ramach usług IIS w celu utrwalenia pierścienia kluczy, należy użyć **jednej** z następujących metod:
 
@@ -510,9 +512,9 @@ Izolacja puli aplikacji jest określana przez model hostingu:
 
 Okno dialogowe **Dodaj witrynę sieci Web** usług IIS domyślnie umożliwia pojedynczej puli aplikacji na aplikację. Po podaniu **nazwy witryny** tekst zostanie automatycznie przeniesiony do pola tekstowego **Pula aplikacji** . Nowa pula aplikacji jest tworzona przy użyciu nazwy lokacji, gdy zostanie dodana lokacja.
 
-## <a name="application-pool-identity"></a>Pula aplikacjiIdentity
+## <a name="application-pool-no-locidentity"></a>Pula aplikacjiIdentity
 
-Konto tożsamości puli aplikacji umożliwia uruchamianie aplikacji na unikatowym koncie bez konieczności tworzenia domen ani kont lokalnych oraz zarządzania nimi. W przypadku usług IIS 8,0 lub nowszych proces roboczy administratora usług IIS tworzy konto wirtualne o nazwie nowej puli aplikacji i domyślnie uruchamia procesy robocze puli aplikacji w ramach tego konta. W konsoli zarządzania usługami IIS w obszarze **Ustawienia zaawansowane** dla puli aplikacji upewnij się, że **Identity** ustawiono opcję Użyj **ApplicationPoolIdentity**:
+Konto tożsamości puli aplikacji umożliwia uruchamianie aplikacji na unikatowym koncie bez konieczności tworzenia domen ani kont lokalnych oraz zarządzania nimi. W przypadku usług IIS 8,0 lub nowszych proces roboczy administratora usług IIS tworzy konto wirtualne o nazwie nowej puli aplikacji i domyślnie uruchamia procesy robocze puli aplikacji w ramach tego konta. W konsoli zarządzania usługami IIS w obszarze **Ustawienia zaawansowane** dla puli aplikacji upewnij się, że **Identity** ustawiono opcję Użyj **ApplicationPool Identity **:
 
 ![Okno dialogowe Zaawansowane ustawienia puli aplikacji](index/_static/apppool-identity.png)
 
@@ -770,7 +772,7 @@ services.Configure<IISServerOptions>(options =>
 });
 ```
 
-| Opcja                         | Domyślne | Ustawienie |
+| Opcja                         | Domyślny | Ustawienie |
 | ------------------------------ | :-----: | ------- |
 | `AutomaticAuthentication`      | `true`  | Jeśli `true` serwer usług IIS ustawi uwierzytelnienie `HttpContext.User` za pomocą [uwierzytelniania systemu Windows](xref:security/authentication/windowsauth). Jeśli `false` serwer zawiera tylko tożsamość dla `HttpContext.User` i reaguje na wyzwania, gdy zostanie jawnie zlecony przez `AuthenticationScheme` . Aby program mógł działać, należy włączyć uwierzytelnianie systemu Windows `AutomaticAuthentication` . Aby uzyskać więcej informacji, zobacz [uwierzytelnianie systemu Windows](xref:security/authentication/windowsauth). |
 | `AuthenticationDisplayName`    | `null`  | Ustawia nazwę wyświetlaną pokazywaną użytkownikom na stronach logowania. |
@@ -786,7 +788,7 @@ services.Configure<IISOptions>(options =>
 });
 ```
 
-| Opcja                         | Domyślne | Ustawienie |
+| Opcja                         | Domyślny | Ustawienie |
 | ------------------------------ | :-----: | ------- |
 | `AutomaticAuthentication`      | `true`  | Jeśli `true` [oprogramowanie pośredniczące integracji usług IIS](#enable-the-iisintegration-components) ustawi uwierzytelnienie `HttpContext.User` za pomocą [uwierzytelniania systemu Windows](xref:security/authentication/windowsauth). Jeśli `false` oprogramowanie pośredniczące zapewnia tylko tożsamość `HttpContext.User` i reaguje na wyzwania, gdy zostanie jawnie zażądana przez program `AuthenticationScheme` . Aby program mógł działać, należy włączyć uwierzytelnianie systemu Windows `AutomaticAuthentication` . Aby uzyskać więcej informacji, zobacz temat [uwierzytelnianie systemu Windows](xref:security/authentication/windowsauth) . |
 | `AuthenticationDisplayName`    | `null`  | Ustawia nazwę wyświetlaną pokazywaną użytkownikom na stronach logowania. |
@@ -954,7 +956,7 @@ Podczas wdrażania aplikacji na serwerach z [Web Deploy](/iis/install/installing
 
 1. Potwierdź, że tożsamość modelu procesu ma odpowiednie uprawnienia.
 
-   Jeśli domyślna tożsamość puli aplikacji (**model procesów**  >  **Identity** ) została zmieniona z **ApplicationPoolIdentity** na inną tożsamość, sprawdź, czy Nowa tożsamość ma wymagane uprawnienia dostępu do folderu, bazy danych i innych wymaganych zasobów aplikacji. Na przykład Pula aplikacji wymaga dostępu do odczytu i zapisu do folderów, w których aplikacja odczytuje i zapisuje pliki.
+   Jeśli domyślna tożsamość puli aplikacji (**model procesów**  >  **Identity** ) została zmieniona z **ApplicationPool Identity ** na inną tożsamość, sprawdź, czy Nowa tożsamość ma wymagane uprawnienia dostępu do folderu, bazy danych i innych wymaganych zasobów aplikacji. Na przykład Pula aplikacji wymaga dostępu do odczytu i zapisu do folderów, w których aplikacja odczytuje i zapisuje pliki.
 
 **Konfiguracja uwierzytelniania systemu Windows (opcjonalnie)**  
 Aby uzyskać więcej informacji, zobacz [Konfigurowanie uwierzytelniania systemu Windows](xref:security/authentication/windowsauth).
@@ -1014,9 +1016,9 @@ Pliki w folderze wdrożenia są zablokowane, gdy aplikacja jest uruchomiona. Nie
 
 Jeśli pierścień kluczy jest przechowywany w pamięci po ponownym uruchomieniu aplikacji:
 
-* Wszystkie tokeny uwierzytelniania na podstawie plików cookie są unieważnione. 
+* cookieTokeny uwierzytelniania na podstawie wszystkich są unieważnione. 
 * Użytkownicy muszą ponownie zalogować się przy następnym żądaniu. 
-* Nie można już odszyfrować żadnych danych chronionych za pomocą dzwonka klucza. Może to obejmować [tokeny CSRF](xref:security/anti-request-forgery#aspnet-core-antiforgery-configuration) [ASP.NET Core i pliki cookie MVC TempData](xref:fundamentals/app-state#tempdata).
+* Nie można już odszyfrować żadnych danych chronionych za pomocą dzwonka klucza. Może to obejmować [tokeny CSRF](xref:security/anti-request-forgery#aspnet-core-antiforgery-configuration) i [ASP.NET Core MVC TempData cookie s](xref:fundamentals/app-state#tempdata).
 
 Aby skonfigurować ochronę danych w ramach usług IIS w celu utrwalenia pierścienia kluczy, należy użyć **jednej** z następujących metod:
 
@@ -1110,9 +1112,9 @@ Izolacja puli aplikacji jest określana przez model hostingu:
 
 Okno dialogowe **Dodaj witrynę sieci Web** usług IIS domyślnie umożliwia pojedynczej puli aplikacji na aplikację. Po podaniu **nazwy witryny** tekst zostanie automatycznie przeniesiony do pola tekstowego **Pula aplikacji** . Nowa pula aplikacji jest tworzona przy użyciu nazwy lokacji, gdy zostanie dodana lokacja.
 
-## <a name="application-pool-identity"></a>Pula aplikacjiIdentity
+## <a name="application-pool-no-locidentity"></a>Pula aplikacjiIdentity
 
-Konto tożsamości puli aplikacji umożliwia uruchamianie aplikacji na unikatowym koncie bez konieczności tworzenia domen ani kont lokalnych oraz zarządzania nimi. W przypadku usług IIS 8,0 lub nowszych proces roboczy administratora usług IIS tworzy konto wirtualne o nazwie nowej puli aplikacji i domyślnie uruchamia procesy robocze puli aplikacji w ramach tego konta. W konsoli zarządzania usługami IIS w obszarze **Ustawienia zaawansowane** dla puli aplikacji upewnij się, że **Identity** ustawiono opcję Użyj **ApplicationPoolIdentity**:
+Konto tożsamości puli aplikacji umożliwia uruchamianie aplikacji na unikatowym koncie bez konieczności tworzenia domen ani kont lokalnych oraz zarządzania nimi. W przypadku usług IIS 8,0 lub nowszych proces roboczy administratora usług IIS tworzy konto wirtualne o nazwie nowej puli aplikacji i domyślnie uruchamia procesy robocze puli aplikacji w ramach tego konta. W konsoli zarządzania usługami IIS w obszarze **Ustawienia zaawansowane** dla puli aplikacji upewnij się, że **Identity** ustawiono opcję Użyj **ApplicationPool Identity **:
 
 ![Okno dialogowe Zaawansowane ustawienia puli aplikacji](index/_static/apppool-identity.png)
 
@@ -1340,7 +1342,7 @@ Aby uzyskać więcej informacji na temat `CreateDefaultBuilder` , zobacz <xref:f
 
 ### <a name="iis-options"></a>Opcje usług IIS
 
-| Opcja                         | Domyślne | Ustawienie |
+| Opcja                         | Domyślny | Ustawienie |
 | ------------------------------ | :-----: | ------- |
 | `AutomaticAuthentication`      | `true`  | Jeśli `true` serwer usług IIS ustawi uwierzytelnienie `HttpContext.User` za pomocą [uwierzytelniania systemu Windows](xref:security/authentication/windowsauth). Jeśli `false` serwer zawiera tylko tożsamość dla `HttpContext.User` i reaguje na wyzwania, gdy zostanie jawnie zlecony przez `AuthenticationScheme` . Aby program mógł działać, należy włączyć uwierzytelnianie systemu Windows `AutomaticAuthentication` . Aby uzyskać więcej informacji, zobacz [uwierzytelnianie systemu Windows](xref:security/authentication/windowsauth). |
 | `AuthenticationDisplayName`    | `null`  | Ustawia nazwę wyświetlaną pokazywaną użytkownikom na stronach logowania. |
@@ -1354,7 +1356,7 @@ services.Configure<IISOptions>(options =>
 });
 ```
 
-| Opcja                         | Domyślne | Ustawienie |
+| Opcja                         | Domyślny | Ustawienie |
 | ------------------------------ | :-----: | ------- |
 | `AutomaticAuthentication`      | `true`  | Jeśli `true` [oprogramowanie pośredniczące integracji usług IIS](#enable-the-iisintegration-components) ustawi uwierzytelnienie `HttpContext.User` za pomocą [uwierzytelniania systemu Windows](xref:security/authentication/windowsauth). Jeśli `false` oprogramowanie pośredniczące zapewnia tylko tożsamość `HttpContext.User` i reaguje na wyzwania, gdy zostanie jawnie zażądana przez program `AuthenticationScheme` . Aby program mógł działać, należy włączyć uwierzytelnianie systemu Windows `AutomaticAuthentication` . Aby uzyskać więcej informacji, zobacz temat [uwierzytelnianie systemu Windows](xref:security/authentication/windowsauth) . |
 | `AuthenticationDisplayName`    | `null`  | Ustawia nazwę wyświetlaną pokazywaną użytkownikom na stronach logowania. |
@@ -1522,7 +1524,7 @@ Podczas wdrażania aplikacji na serwerach z [Web Deploy](/iis/install/installing
 
 1. Potwierdź, że tożsamość modelu procesu ma odpowiednie uprawnienia.
 
-   Jeśli domyślna tożsamość puli aplikacji (**model procesów**  >  **Identity** ) została zmieniona z **ApplicationPoolIdentity** na inną tożsamość, sprawdź, czy Nowa tożsamość ma wymagane uprawnienia dostępu do folderu, bazy danych i innych wymaganych zasobów aplikacji. Na przykład Pula aplikacji wymaga dostępu do odczytu i zapisu do folderów, w których aplikacja odczytuje i zapisuje pliki.
+   Jeśli domyślna tożsamość puli aplikacji (**model procesów**  >  **Identity** ) została zmieniona z **ApplicationPool Identity ** na inną tożsamość, sprawdź, czy Nowa tożsamość ma wymagane uprawnienia dostępu do folderu, bazy danych i innych wymaganych zasobów aplikacji. Na przykład Pula aplikacji wymaga dostępu do odczytu i zapisu do folderów, w których aplikacja odczytuje i zapisuje pliki.
 
 **Konfiguracja uwierzytelniania systemu Windows (opcjonalnie)**  
 Aby uzyskać więcej informacji, zobacz [Konfigurowanie uwierzytelniania systemu Windows](xref:security/authentication/windowsauth).
@@ -1582,9 +1584,9 @@ Pliki w folderze wdrożenia są zablokowane, gdy aplikacja jest uruchomiona. Nie
 
 Jeśli pierścień kluczy jest przechowywany w pamięci po ponownym uruchomieniu aplikacji:
 
-* Wszystkie tokeny uwierzytelniania na podstawie plików cookie są unieważnione. 
+* cookieTokeny uwierzytelniania na podstawie wszystkich są unieważnione. 
 * Użytkownicy muszą ponownie zalogować się przy następnym żądaniu. 
-* Nie można już odszyfrować żadnych danych chronionych za pomocą dzwonka klucza. Może to obejmować [tokeny CSRF](xref:security/anti-request-forgery#aspnet-core-antiforgery-configuration) [ASP.NET Core i pliki cookie MVC TempData](xref:fundamentals/app-state#tempdata).
+* Nie można już odszyfrować żadnych danych chronionych za pomocą dzwonka klucza. Może to obejmować [tokeny CSRF](xref:security/anti-request-forgery#aspnet-core-antiforgery-configuration) i [ASP.NET Core MVC TempData cookie s](xref:fundamentals/app-state#tempdata).
 
 Aby skonfigurować ochronę danych w ramach usług IIS w celu utrwalenia pierścienia kluczy, należy użyć **jednej** z następujących metod:
 
@@ -1706,9 +1708,9 @@ Aplikacje ASP.NET Core są konfigurowane przy użyciu innych dostawców konfigur
 
 W przypadku hostowania wielu witryn sieci Web na serwerze zalecamy odizolowanie aplikacji od siebie, uruchamiając każdą aplikację w jej własnej puli aplikacji. W oknie dialogowym **Dodaj witrynę sieci Web** programu IIS domyślnie zostanie wydana konfiguracja. Po podaniu **nazwy witryny** tekst zostanie automatycznie przeniesiony do pola tekstowego **Pula aplikacji** . Nowa pula aplikacji jest tworzona przy użyciu nazwy lokacji, gdy zostanie dodana lokacja.
 
-## <a name="application-pool-identity"></a>Pula aplikacjiIdentity
+## <a name="application-pool-no-locidentity"></a>Pula aplikacjiIdentity
 
-Konto tożsamości puli aplikacji umożliwia uruchamianie aplikacji na unikatowym koncie bez konieczności tworzenia domen ani kont lokalnych oraz zarządzania nimi. W przypadku usług IIS 8,0 lub nowszych proces roboczy administratora usług IIS tworzy konto wirtualne o nazwie nowej puli aplikacji i domyślnie uruchamia procesy robocze puli aplikacji w ramach tego konta. W konsoli zarządzania usługami IIS w obszarze **Ustawienia zaawansowane** dla puli aplikacji upewnij się, że **Identity** ustawiono opcję Użyj **ApplicationPoolIdentity**:
+Konto tożsamości puli aplikacji umożliwia uruchamianie aplikacji na unikatowym koncie bez konieczności tworzenia domen ani kont lokalnych oraz zarządzania nimi. W przypadku usług IIS 8,0 lub nowszych proces roboczy administratora usług IIS tworzy konto wirtualne o nazwie nowej puli aplikacji i domyślnie uruchamia procesy robocze puli aplikacji w ramach tego konta. W konsoli zarządzania usługami IIS w obszarze **Ustawienia zaawansowane** dla puli aplikacji upewnij się, że **Identity** ustawiono opcję Użyj **ApplicationPool Identity **:
 
 ![Okno dialogowe Zaawansowane ustawienia puli aplikacji](index/_static/apppool-identity.png)
 

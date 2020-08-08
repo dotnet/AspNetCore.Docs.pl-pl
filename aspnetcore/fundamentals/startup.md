@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/startup
-ms.openlocfilehash: 0d1bf0dd23b7f3b99d6e9383ffc72291c1b138ec
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 84b2aa6185654789b925dc4a9262f446de6c0a3c
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400716"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88016599"
 ---
 # <a name="app-startup-in-aspnet-core"></a>Uruchamianie aplikacji w ASP.NET Core
 
@@ -76,7 +78,7 @@ Aby uzyskać więcej informacji na temat hosta, zobacz [hosta](xref:fundamentals
 
 Przed wywołaniem metod host może skonfigurować niektóre usługi `Startup` . Aby uzyskać więcej informacji, zobacz [hosta](xref:fundamentals/index#host).
 
-W przypadku funkcji wymagających znaczącej konfiguracji istnieją `Add{Service}` metody rozszerzające w systemie <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection> . Na przykład **Dodaj**DbContext, **Add**DefaultIdentity, **Add**EntityFrameworkStores i **Add**RazorPages:
+W przypadku funkcji wymagających znaczącej konfiguracji istnieją `Add{Service}` metody rozszerzające w systemie <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection> . Na przykład **Dodaj**DbContext, **Dodaj**domyślne Identity , **Dodaj**EntityFrameworkStores i **Dodaj** Razor strony:
 
 [!code-csharp[](startup/3.0_samples/StartupFilterSample/StartupIdentity.cs?name=snippet)]
 
@@ -208,7 +210,7 @@ Aby uzyskać więcej informacji na temat hosta, zobacz [hosta](xref:fundamentals
 
 Przed wywołaniem metod host może skonfigurować niektóre usługi `Startup` . Aby uzyskać więcej informacji, zobacz [hosta](xref:fundamentals/index#host).
 
-W przypadku funkcji wymagających znaczącej konfiguracji istnieją `Add{Service}` metody rozszerzające w systemie <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection> . Na przykład **Dodaj**DbContext, **Add**DefaultIdentity, **Add**EntityFrameworkStores i **Add**RazorPages:
+W przypadku funkcji wymagających znaczącej konfiguracji istnieją `Add{Service}` metody rozszerzające w systemie <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection> . Na przykład **Dodaj**DbContext, **Dodaj**domyślne Identity , **Dodaj**EntityFrameworkStores i **Dodaj** Razor strony:
 
 [!code-csharp[](startup/sample_snapshot/Startup3.cs)]
 
@@ -228,7 +230,7 @@ Aby uzyskać więcej informacji, zobacz [SetCompatibilityVersion](xref:mvc/compa
 * [Przekierowanie HTTPS](xref:security/enforcing-ssl)
 * [Pliki statyczne](xref:fundamentals/static-files)
 * ASP.NET Core [MVC](xref:mvc/overview) i [ Razor strony](xref:razor-pages/index)
-* [Ogólne rozporządzenie o ochronie danych (Rodo)](xref:security/gdpr)
+* [Ogólne rozporządzenie o ochronie danych (RODO)](xref:security/gdpr)
 
 [!code-csharp[](startup/sample_snapshot/Startup4.cs)]
 

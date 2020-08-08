@@ -6,6 +6,8 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 09/23/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/diagnostics
-ms.openlocfilehash: ca87ba5b03e7657132e5ebaba72370bde85c85d4
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: bf8068375da81288f2fbfa2c1bfafe97c03c70fc
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406774"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88016183"
 ---
 # <a name="logging-and-diagnostics-in-grpc-on-net"></a>Rejestrowanie i Diagnostyka w programie gRPC na platformie .NET
 
@@ -240,7 +242,7 @@ Określ gRPC Liczniki usługi Application Insights do zebrania w *Startup.cs*:
     }
 ```
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:fundamentals/logging/index>
 * <xref:grpc/configuration>

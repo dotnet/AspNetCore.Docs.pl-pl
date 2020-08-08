@@ -6,6 +6,8 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 06/30/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/browser
-ms.openlocfilehash: 05ff343f7116509128b7370a50bcfa3c67ffb9fe
-ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
+ms.openlocfilehash: f995fdaee1009ff51359df720c39d664aea6e3b1
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85944245"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88016274"
 ---
 # <a name="use-grpc-in-browser-apps"></a>Używanie gRPC w aplikacjach przeglądarki
 
@@ -129,7 +131,7 @@ Powyższy kod ma następujące działanie:
 > [!IMPORTANT]
 > Wygenerowane gRPC klienci mają metody synchronizacji i asynchroniczne do wywoływania metod jednoargumentowych. Na przykład `SayHello` jest synchronizowana i `SayHelloAsync` jest asynchroniczna. Wywołanie metody synchronizacji w Blazor WebAssembly aplikacji spowoduje, że aplikacja przestanie odpowiadać. Metody asynchroniczne muszą być zawsze używane w programie Blazor WebAssembly .
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [gRPC dla klientów sieci Web — projekt GitHub](https://github.com/grpc/grpc-web)
 * <xref:security/cors>

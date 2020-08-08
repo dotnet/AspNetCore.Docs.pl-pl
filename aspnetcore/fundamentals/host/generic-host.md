@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 4/17/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/host/generic-host
-ms.openlocfilehash: 26aef561ba299403df0dad9893fecd5e2a15ab0e
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.openlocfilehash: 7f662aac3714e49e6a3a63175415a1a63b0940c2
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86213009"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88017431"
 ---
 # <a name="net-generic-host"></a>Host ogólny .NET
 
@@ -34,7 +36,7 @@ Szablony ASP.NET Core tworzą hosta ogólnego platformy .NET Core, <xref:Microso
 
 * Iniekcja zależności (DI)
 * Rejestrowanie
-* Konfigurowanie
+* Konfiguracja
 * `IHostedService`metod
 
 Po uruchomieniu hosta jest on wywoływany <xref:Microsoft.Extensions.Hosting.IHostedService.StartAsync%2A?displayProperty=nameWithType> dla każdej implementacji <xref:Microsoft.Extensions.Hosting.IHostedService> zarejestrowanej w kolekcji kontenera usługi hostowanej usług. W aplikacji sieci Web jedną z `IHostedService` implementacji jest usługa sieci Web, która uruchamia [implementację serwera http](xref:fundamentals/index#servers).
@@ -613,7 +615,7 @@ Jeśli ścieżka nie istnieje, uruchomienie hosta nie powiedzie się.
 
 Aby uzyskać więcej informacji, zobacz temat [podstawy: zawartość główna](xref:fundamentals/index#content-root).
 
-### <a name="environment"></a>Environment
+### <a name="environment"></a>Środowisko
 
 Ustawia [środowisko](xref:fundamentals/environments)aplikacji.
 
@@ -1011,7 +1013,7 @@ Szablony ASP.NET Core tworzą hosta ogólnego platformy .NET Core ( <xref:Micros
 
 * Iniekcja zależności (DI)
 * Rejestrowanie
-* Konfigurowanie
+* Konfiguracja
 * `IHostedService`metod
 
 Po uruchomieniu hosta jest on wywoływany <xref:Microsoft.Extensions.Hosting.IHostedService.StartAsync%2A?displayProperty=nameWithType> dla każdej implementacji <xref:Microsoft.Extensions.Hosting.IHostedService> zarejestrowanej w kolekcji kontenera usługi hostowanej usług. W aplikacji sieci Web jedną z `IHostedService` implementacji jest usługa sieci Web, która uruchamia [implementację serwera http](xref:fundamentals/index#servers).

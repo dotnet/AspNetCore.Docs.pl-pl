@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/complex-data-model
-ms.openlocfilehash: 38d3753b889da709e2d4691590290a5438208290
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: b3531f786b3101fcbea4b25d3950d1bce9a289dc
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401457"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88018055"
 ---
-# <a name="part-5-razor-pages-with-ef-core-in-aspnet-core---data-model"></a>Część 5, Razor strony z EF Core w modelu ASP.NET Core — dane
+# <a name="part-5-no-locrazor-pages-with-ef-core-in-aspnet-core---data-model"></a>Część 5, Razor strony z EF Core w modelu ASP.NET Core — dane
 
 Autorzy [Dykstra](https://github.com/tdykstra) i [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -67,7 +69,7 @@ Poprzedni kod dodaje `FullName` Właściwość i dodaje następujące atrybuty d
 
 W przypadku dat rejestracji uczniów wszystkie strony wyświetlają teraz godzinę i datę, chociaż tylko data jest ważna. Używając atrybutów adnotacji danych, można wprowadzić jedną zmianę kodu, która naprawi format wyświetlania na każdej stronie, która wyświetla dane. 
 
-Atrybut [DataType](/dotnet/api/system.componentmodel.dataannotations.datatypeattribute?view=netframework-4.7.1) określa typ danych, który jest bardziej szczegółowy niż typ wewnętrzny bazy danych. W tym przypadku należy wyświetlić tylko datę, a nie datę i godzinę. [Wyliczenie DataType](/dotnet/api/system.componentmodel.dataannotations.datatype?view=netframework-4.7.1) zawiera wiele typów danych, takich jak data, godzina, numer telefonu, waluta, EmailAddress itp. Ten `DataType` atrybut może również umożliwić aplikacji automatyczne udostępnianie funkcji specyficznych dla typu. Na przykład:
+Atrybut [DataType](/dotnet/api/system.componentmodel.dataannotations.datatypeattribute?view=netframework-4.7.1) określa typ danych, który jest bardziej szczegółowy niż typ wewnętrzny bazy danych. W tym przypadku należy wyświetlić tylko datę, a nie datę i godzinę. [Wyliczenie DataType](/dotnet/api/system.componentmodel.dataannotations.datatype?view=netframework-4.7.1) zawiera wiele typów danych, takich jak data, godzina, numer telefonu, waluta, EmailAddress itp. Ten `DataType` atrybut może również umożliwić aplikacji automatyczne udostępnianie funkcji specyficznych dla typu. Przykład:
 
 * `mailto:`Łącze jest tworzone automatycznie dla `DataType.EmailAddress` .
 * Selektor daty jest dostępny `DataType.Date` w większości przeglądarek.
@@ -757,7 +759,7 @@ Aktualizuj *modele/uczniów. cs* przy użyciu następującego wyróżnionego kod
 
 [!code-csharp[](intro/samples/cu21/Models/Student.cs?name=snippet_DataType&highlight=3,12-13)]
 
-Atrybut [DataType](/dotnet/api/system.componentmodel.dataannotations.datatypeattribute?view=netframework-4.7.1) określa typ danych, który jest bardziej szczegółowy niż typ wewnętrzny bazy danych. W tym przypadku należy wyświetlić tylko datę, a nie datę i godzinę. [Wyliczenie DataType](/dotnet/api/system.componentmodel.dataannotations.datatype?view=netframework-4.7.1) zawiera wiele typów danych, takich jak data, godzina, numer telefonu, waluta, EmailAddress itp. Ten `DataType` atrybut może również umożliwić aplikacji automatyczne udostępnianie funkcji specyficznych dla typu. Na przykład:
+Atrybut [DataType](/dotnet/api/system.componentmodel.dataannotations.datatypeattribute?view=netframework-4.7.1) określa typ danych, który jest bardziej szczegółowy niż typ wewnętrzny bazy danych. W tym przypadku należy wyświetlić tylko datę, a nie datę i godzinę. [Wyliczenie DataType](/dotnet/api/system.componentmodel.dataannotations.datatype?view=netframework-4.7.1) zawiera wiele typów danych, takich jak data, godzina, numer telefonu, waluta, EmailAddress itp. Ten `DataType` atrybut może również umożliwić aplikacji automatyczne udostępnianie funkcji specyficznych dla typu. Przykład:
 
 * `mailto:`Łącze jest tworzone automatycznie dla `DataType.EmailAddress` .
 * Selektor daty jest dostępny `DataType.Date` w większości przeglądarek.
@@ -799,7 +801,7 @@ Poprzedni kod ogranicza nazwy do nie więcej niż 50 znaków. Ten `StringLength`
 [RegularExpression(@"^[A-Z]+[a-zA-Z]*$")]
 ```
 
-Uruchom aplikację:
+Uruchom aplikację: 
 
 * Przejdź do strony uczniów.
 * Wybierz pozycję **Utwórz nową**, a następnie wprowadź nazwę o długości większej niż 50 znaków.

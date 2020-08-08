@@ -5,6 +5,8 @@ description: Dowiedz się, jak ASP.NET Core obsługuje iniekcję zależności w 
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/dependency-injection
-ms.openlocfilehash: 335eac4b1533f4156e00f9d0140f921fa492e71a
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.openlocfilehash: 4ed3e1334994c815996bd3db073fab5e544e2ca8
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86212965"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88018224"
 ---
 # <a name="dependency-injection-into-views-in-aspnet-core"></a>Wstrzykiwanie zależności do widoków w ASP.NET Core
 

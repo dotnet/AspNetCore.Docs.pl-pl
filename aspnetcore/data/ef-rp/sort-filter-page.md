@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/sort-filter-page
-ms.openlocfilehash: 496221bb4e34e1f9e4177d1934786a77d8c9b411
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.openlocfilehash: 5bfea63cc1ff85adbe5ce572858b78a8e86b2280
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86212536"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88017730"
 ---
-# <a name="part-3-razor-pages-with-ef-core-in-aspnet-core---sort-filter-paging"></a>Część 3, Razor strony z EF Core w ASP.NET Core — sortowanie, filtrowanie, stronicowanie
+# <a name="part-3-no-locrazor-pages-with-ef-core-in-aspnet-core---sort-filter-paging"></a>Część 3, Razor strony z EF Core w ASP.NET Core — sortowanie, filtrowanie, stronicowanie
 
 Autorzy [Dykstra](https://github.com/tdykstra), [Rick Anderson](https://twitter.com/RickAndMSFT)i [Jan P Kowalski](https://twitter.com/thereformedprog)
 
@@ -134,7 +136,7 @@ Istnieje spadek wydajności dotyczący wywoływania `ToUpper` . `ToUpper`Kod dod
 
 Aby uzyskać więcej informacji, zobacz [jak używać zapytania bez uwzględniania wielkości liter z dostawcą oprogramowania SQLite](https://github.com/aspnet/EntityFrameworkCore/issues/11414).
 
-### <a name="update-the-razor-page"></a>Aktualizowanie Razor strony
+### <a name="update-the-no-locrazor-page"></a>Aktualizowanie Razor strony
 
 Zastąp kod w obszarze *Pages/Students/index. cshtml* , aby utworzyć przycisk **wyszukiwania** i w asortymentach programu Chrome.
 
@@ -211,7 +213,7 @@ Jeśli ciąg wyszukiwania zostanie zmieniony podczas stronicowania, Strona zosta
 
   Dwa znaki zapytania po `pageIndex` `PaginatedList.CreateAsync` wywołaniu reprezentują [operator łączenia wartości null](/dotnet/csharp/language-reference/operators/null-conditional-operator). Operator łączenia wartości null definiuje wartość domyślną dla typu dopuszczającego wartość null. Wyrażenie `(pageIndex ?? 1)` oznacza zwrócenie wartości, `pageIndex` Jeśli ma wartość. Jeśli `pageIndex` nie ma wartości, zwróć 1.
 
-### <a name="add-paging-links-to-the-razor-page"></a>Dodaj linki stronicowania do Razor strony
+### <a name="add-paging-links-to-the-no-locrazor-page"></a>Dodaj linki stronicowania do Razor strony
 
 Zastąp kod w *Students/index. cshtml* poniższym kodem. Zmiany są wyróżnione:
 
@@ -247,7 +249,7 @@ Utwórz *SchoolViewModels/EnrollmentDateGroup. cs* przy użyciu następującego 
 
 [!code-csharp[Main](intro/samples/cu30/Models/SchoolViewModels/EnrollmentDateGroup.cs)]
 
-### <a name="create-the-razor-page"></a>Utwórz Razor stronę
+### <a name="create-the-no-locrazor-page"></a>Utwórz Razor stronę
 
 Utwórz plik *Pages/about. cshtml* o następującym kodzie:
 
@@ -467,7 +469,7 @@ Jeśli ciąg wyszukiwania zostanie zmieniony podczas stronicowania, Strona zosta
 
 Dwa znaki zapytania `PaginatedList.CreateAsync` reprezentują [operator łączenia wartości null](/dotnet/csharp/language-reference/operators/null-conditional-operator). Operator łączenia wartości null definiuje wartość domyślną dla typu dopuszczającego wartość null. Wyrażenie `(pageIndex ?? 1)` oznacza zwrócenie wartości, `pageIndex` Jeśli ma wartość. Jeśli `pageIndex` nie ma wartości, zwróć 1.
 
-## <a name="add-paging-links-to-the-student-razor-page"></a>Dodawanie linków stronicowania do strony ucznia Razor
+## <a name="add-paging-links-to-the-student-no-locrazor-page"></a>Dodawanie linków stronicowania do strony ucznia Razor
 
 Zaktualizuj znaczniki w *uczniów/index. cshtml*. Zmiany są wyróżnione:
 
@@ -521,7 +523,7 @@ Zaktualizuj plik *Pages/about. Odpoznaj* się do następującego kodu:
 
 Instrukcja LINQ grupuje jednostki studenta według daty rejestracji, oblicza liczbę jednostek w każdej grupie i zapisuje wyniki w kolekcji `EnrollmentDateGroup` obiektów modelu widoku.
 
-### <a name="modify-the-about-razor-page"></a>Modyfikowanie strony informacje Razor
+### <a name="modify-the-about-no-locrazor-page"></a>Modyfikowanie strony informacje Razor
 
 Zastąp kod w pliku *Pages/about. cshtml* następującym kodem:
 
@@ -533,7 +535,7 @@ Jeśli wystąpią problemy, których nie można rozwiązać, Pobierz [ukończon�
 
 ![Informacje o stronie](sort-filter-page/_static/about.png)
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Debugowanie ASP.NET Core 2. x](https://github.com/dotnet/AspNetCore.Docs/issues/4155)
 * [Wersja tego samouczka usługi YouTube](https://www.youtube.com/watch?v=MDs7PFpoMqI)

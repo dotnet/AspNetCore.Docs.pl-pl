@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/07/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/index
-ms.openlocfilehash: 6ddb786b8f03a7256aeca6605c48467a297b0855
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: fb9ba7cd4fe7ce805374dd802cc7ba4258d52527
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408750"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88016755"
 ---
 # <a name="web-server-implementations-in-aspnet-core"></a>Implementacje serwera sieci Web w ASP.NET Core
 
@@ -209,7 +211,7 @@ Podczas uruchamiania aplikacji z poziomu wiersza polecenia w folderze projektu, 
 
 Połączenie HTTP/2 musi korzystać z [negocjacji protokołu warstwy aplikacji (ClientHello alpn)](https://tools.ietf.org/html/rfc7301#section-3) i TLS 1,2 lub nowszej. Aby uzyskać więcej informacji, zapoznaj się z tematami dotyczącymi scenariuszy wdrażania serwera.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:fundamentals/servers/kestrel>
 * <xref:host-and-deploy/aspnet-core-module>

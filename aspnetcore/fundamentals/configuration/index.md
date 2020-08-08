@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 3/29/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/configuration/index
-ms.openlocfilehash: 9f143523a6d02ac018ad2a869cc9d768ee25681f
-ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
+ms.openlocfilehash: 2352bbaa3c4123cd588609e22b65cd9e268f5637
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87819266"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88017665"
 ---
 # <a name="configuration-in-aspnet-core"></a>Konfiguracja w ASP.NET Core
 
@@ -356,6 +358,8 @@ Gdy zmienna środowiskowa zostanie odnaleziona i załadowana do konfiguracji z d
 | `SQLAZURECONNSTR_{KEY}`  | `ConnectionStrings:{KEY}`   | Klucz: `ConnectionStrings:{KEY}_ProviderName` :<br>Wartość: `System.Data.SqlClient`  |
 | `SQLCONNSTR_{KEY}`       | `ConnectionStrings:{KEY}`   | Klucz: `ConnectionStrings:{KEY}_ProviderName` :<br>Wartość: `System.Data.SqlClient`  |
 
+<a name="fcp"></a>
+
 ## <a name="file-configuration-provider"></a>Dostawca konfiguracji plików
 
 <xref:Microsoft.Extensions.Configuration.FileConfigurationProvider>jest klasą bazową do ładowania konfiguracji z systemu plików. Następujący dostawcy konfiguracji pochodzą z `FileConfigurationProvider` :
@@ -425,8 +429,6 @@ W powyższym kodzie ustawienia w *MyConfig.jsna* i *konfiguracji*. `Environment`
 Poniższy kod z [pobranego przykładu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) wyświetla kilka powyższych ustawień konfiguracji:
 
 [!code-csharp[](index/samples/3.x/ConfigSample/Pages/Test.cshtml.cs?name=snippet)]
-
-<a name="fcp"></a>
 
 ### <a name="xml-configuration-provider"></a>Dostawca konfiguracji XML
 
@@ -763,7 +765,7 @@ Aby uzyskać więcej informacji na temat migrowania konfiguracji aplikacji z wcz
 
 <xref:Microsoft.AspNetCore.Hosting.IHostingStartup>Implementacja umożliwia dodawanie ulepszeń do aplikacji podczas uruchamiania z zewnętrznego zestawu poza `Startup` klasą aplikacji. Aby uzyskać więcej informacji, zobacz <xref:fundamentals/configuration/platform-specific-configuration>.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Kod źródłowy konfiguracji](https://github.com/dotnet/extensions/tree/master/src/Configuration)
 * <xref:fundamentals/configuration/options>

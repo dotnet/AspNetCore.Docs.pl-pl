@@ -6,6 +6,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/16/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/target-aspnetcore
-ms.openlocfilehash: 1c794092b856a916a318956d7cfb357d46a22d1d
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: a6c20c61f7f33706e620fcbc239b2cc4bace15f0
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399650"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88016495"
 ---
 # <a name="use-aspnet-core-apis-in-a-class-library"></a>Używanie ASP.NET Core interfejsów API w bibliotece klas
 
@@ -48,7 +50,7 @@ Aby odwołać się do ASP.NET Core, Dodaj następujący `<FrameworkReference>` e
 
 Odwoływanie się ASP.NET Core w ten sposób jest obsługiwane tylko dla projektów przeznaczonych dla platformy .NET Core 3. x.
 
-## <a name="include-blazor-extensibility"></a>Uwzględnij Blazor rozszerzalność
+## <a name="include-no-locblazor-extensibility"></a>Uwzględnij Blazor rozszerzalność
 
 Blazorobsługuje [modele hostingu](xref:blazor/hosting-models)webassembly (WASM) i serwera. O ile nie ma konkretnego powodu, biblioteka [ Razor składników](xref:blazor/components/index) powinna obsługiwać oba modele hostingu. RazorBiblioteka składników musi korzystać z [zestawu Microsoft. NET. Sdk. Razor Zestaw SDK](xref:razor-pages/sdk).
 
@@ -82,7 +84,7 @@ Projekt wygenerowany na podstawie szablonu wykonuje następujące czynności:
   * [Microsoft. AspNetCore. Components](https://www.nuget.org/packages/Microsoft.AspNetCore.Components)
   * [Microsoft. AspNetCore. Components. Web](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.Web)
 
-Na przykład:
+Przykład:
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netstandard2.0-razor-components-library.csproj)]
 
@@ -93,7 +95,7 @@ Jest to bardzo mniej powszechne do obsługi jednego Blazor modelu hostingu. Przy
 * Docelowy .NET Core 3. x.
 * Dodaj `<FrameworkReference>` element dla struktury udostępnionej.
 
-Na przykład:
+Przykład:
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netcoreapp3.0-razor-components-library.csproj)]
 
@@ -109,7 +111,7 @@ W tej części przedstawiono zalecenia dotyczące bibliotek, które obejmują:
 
 Ta sekcja nie omawia wielu elementów docelowych w celu obsługi wielu wersji MVC. Aby uzyskać wskazówki dotyczące obsługi wielu wersji ASP.NET Core, zobacz [Obsługa wielu ASP.NET Core wersji](#support-multiple-aspnet-core-versions).
 
-### <a name="razor-views-or-razor-pages"></a>Razorwidoki lub Razor strony
+### <a name="no-locrazor-views-or-no-locrazor-pages"></a>Razorwidoki lub Razor strony
 
 Projekt, który zawiera [ Razor widoki](xref:mvc/views/overview) lub [ Razor strony](xref:razor-pages/index) , musi korzystać z [zestawu Microsoft. NET. Sdk. Razor Zestaw SDK](xref:razor-pages/sdk).
 
@@ -138,31 +140,31 @@ W tej chwili nie ma obsługi szablonu projektu.
 
 ---
 
-Na przykład:
+Przykład:
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netcoreapp3.0-razor-views-pages-library.csproj)]
 
-Jeśli obiekt docelowy projektu .NET Standard zamiast tego wymagane jest odwołanie do pakietu [Microsoft. AspNetCore. MVC](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc) . `Microsoft.AspNetCore.Mvc`Pakiet został przeniesiony do udostępnionej struktury w ASP.NET Core 3,0 i dlatego nie jest już opublikowany. Na przykład:
+Jeśli obiekt docelowy projektu .NET Standard zamiast tego wymagane jest odwołanie do pakietu [Microsoft. AspNetCore. MVC](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc) . `Microsoft.AspNetCore.Mvc`Pakiet został przeniesiony do udostępnionej struktury w ASP.NET Core 3,0 i dlatego nie jest już opublikowany. Przykład:
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netstandard2.0-razor-views-pages-library.csproj?highlight=8)]
 
 ### <a name="tag-helpers"></a>Pomocnicy tagów
 
-Projekt zawierający [pomocników tagów](xref:mvc/views/tag-helpers/intro) powinien korzystać z `Microsoft.NET.Sdk` zestawu SDK. Jeśli celem jest .NET Core 3. x, Dodaj `<FrameworkReference>` element dla struktury udostępnionej. Na przykład:
+Projekt zawierający [pomocników tagów](xref:mvc/views/tag-helpers/intro) powinien korzystać z `Microsoft.NET.Sdk` zestawu SDK. Jeśli celem jest .NET Core 3. x, Dodaj `<FrameworkReference>` element dla struktury udostępnionej. Przykład:
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netcoreapp3.0-basic-library.csproj)]
 
-Jeśli .NET Standard określania wartości docelowej (aby obsługiwać wersje starsze niż ASP.NET Core 3. x), Dodaj odwołanie do pakietu do [Microsoft. AspNetCore. Razor MVC.](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor). `Microsoft.AspNetCore.Mvc.Razor`Pakiet został przeniesiony do udostępnionej struktury i w związku z tym nie jest już publikowany. Na przykład:
+Jeśli .NET Standard określania wartości docelowej (aby obsługiwać wersje starsze niż ASP.NET Core 3. x), Dodaj odwołanie do pakietu do [Microsoft. AspNetCore. Razor MVC.](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor). `Microsoft.AspNetCore.Mvc.Razor`Pakiet został przeniesiony do udostępnionej struktury i w związku z tym nie jest już publikowany. Przykład:
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netstandard2.0-tag-helpers-library.csproj)]
 
 ### <a name="view-components"></a>Składniki widoku
 
-Projekt, który zawiera [składniki widoku](xref:mvc/views/view-components) , powinien korzystać z `Microsoft.NET.Sdk` zestawu SDK. Jeśli celem jest .NET Core 3. x, Dodaj `<FrameworkReference>` element dla struktury udostępnionej. Na przykład:
+Projekt, który zawiera [składniki widoku](xref:mvc/views/view-components) , powinien korzystać z `Microsoft.NET.Sdk` zestawu SDK. Jeśli celem jest .NET Core 3. x, Dodaj `<FrameworkReference>` element dla struktury udostępnionej. Przykład:
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netcoreapp3.0-basic-library.csproj)]
 
-Jeśli .NET Standard określania wartości docelowej (aby obsługiwać wersje starsze niż ASP.NET Core 3. x), Dodaj odwołanie do pakietu do [Microsoft. AspNetCore. MVC. ViewFeatures](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.ViewFeatures). `Microsoft.AspNetCore.Mvc.ViewFeatures`Pakiet został przeniesiony do udostępnionej struktury i w związku z tym nie jest już publikowany. Na przykład:
+Jeśli .NET Standard określania wartości docelowej (aby obsługiwać wersje starsze niż ASP.NET Core 3. x), Dodaj odwołanie do pakietu do [Microsoft. AspNetCore. MVC. ViewFeatures](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.ViewFeatures). `Microsoft.AspNetCore.Mvc.ViewFeatures`Pakiet został przeniesiony do udostępnionej struktury i w związku z tym nie jest już publikowany. Przykład:
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netstandard2.0-view-components-library.csproj)]
 
@@ -214,7 +216,7 @@ Jeśli nie możesz ponownie zapisać biblioteki, wykonaj następujące czynnośc
 * Dodaj `<FrameworkReference>` element dla struktury udostępnionej.
 * Użyj [dyrektywy preprocesora #if](/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-if) z odpowiednim symbolem platformy docelowej do warunkowego kompilowania kodu.
 
-Na przykład synchroniczne operacje odczytu i zapisu w strumieniach żądań HTTP i odpowiedzi są domyślnie wyłączone w ASP.NET Core 3,0. ASP.NET Core 2,2 domyślnie obsługuje zachowanie synchroniczne. Rozważmy bibliotekę oprogramowania pośredniczącego, w której operacje odczytu i zapisu synchronicznego powinny być włączone w przypadku wystąpienia operacji we/wy. Biblioteka powinna zawierać kod w celu włączenia funkcji synchronicznych w odpowiedniej dyrektywie preprocesora. Na przykład:
+Na przykład synchroniczne operacje odczytu i zapisu w strumieniach żądań HTTP i odpowiedzi są domyślnie wyłączone w ASP.NET Core 3,0. ASP.NET Core 2,2 domyślnie obsługuje zachowanie synchroniczne. Rozważmy bibliotekę oprogramowania pośredniczącego, w której operacje odczytu i zapisu synchronicznego powinny być włączone w przypadku wystąpienia operacji we/wy. Biblioteka powinna zawierać kod w celu włączenia funkcji synchronicznych w odpowiedniej dyrektywie preprocesora. Przykład:
 
 [!code-csharp[](target-aspnetcore/samples/middleware.cs?highlight=9-24)]
 

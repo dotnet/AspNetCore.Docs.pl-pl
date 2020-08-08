@@ -5,6 +5,8 @@ description: Część 2 Razor stron i Entity Framework serii samouczków.
 ms.author: riande
 ms.date: 07/22/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/crud
-ms.openlocfilehash: 46846d99230620e45d8a2baab46df320425cfb6c
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: f205e7741c8e901e9219bec2028c7bee98129161
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401210"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88018367"
 ---
-# <a name="part-2-razor-pages-with-ef-core-in-aspnet-core---crud"></a>Część 2, Razor strony z EF Core w ASP.NET Core — CRUD
+# <a name="part-2-no-locrazor-pages-with-ef-core-in-aspnet-core---crud"></a>Część 2, Razor strony z EF Core w ASP.NET Core — CRUD
 
 Autorzy [Dykstra](https://github.com/tdykstra), [Jan P Kowalski](https://twitter.com/thereformedprog)i [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -393,7 +395,7 @@ Powyższy kod pobiera wybraną jednostkę, a następnie wywołuje metodę [Remov
 * Przechwycono wyjątek bazy danych.
 * Metoda Delete Pages `OnGetAsync` jest wywoływana z `saveChangesError=true` .
 
-### <a name="update-the-delete-razor-page"></a>Aktualizowanie strony usuwania Razor
+### <a name="update-the-delete-no-locrazor-page"></a>Aktualizowanie strony usuwania Razor
 
 Dodaj następujący wyróżniony komunikat o błędzie do Razor strony usuwania.
 <!--

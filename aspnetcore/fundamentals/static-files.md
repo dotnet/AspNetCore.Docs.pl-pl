@@ -6,18 +6,20 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 6/23/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: fundamentals/static-files
-ms.openlocfilehash: 3f4fc6f7d9d44d76d0504d9666df41571fd0b12c
-ms.sourcegitcommit: d306407dc5bfe6fdfbac482214b3f59371b582bc
+ms.openlocfilehash: 32f794d498533e846343831d2360e98939105fb1
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/04/2020
-ms.locfileid: "85951943"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88016683"
 ---
 # <a name="static-files-in-aspnet-core"></a>Pliki statyczne w ASP.NET Core
 
@@ -46,7 +48,7 @@ Pliki statyczne są dostępne za pośrednictwem ścieżki względnej dla [katalo
   * `js`
   * `lib`
 
-Rozważ utworzenie folderu *wwwroot/images* i dodanie pliku *wwwroot/images/MyImage.jpg* . Format identyfikatora URI dostępu do pliku w `images` folderze to `https://<hostname>/images/<image_file_name>` . Na przykład: `https://localhost:5001/images/MyImage.jpg`
+Rozważ utworzenie folderu *wwwroot/images* i dodanie pliku *wwwroot/images/MyImage.jpg* . Format identyfikatora URI dostępu do pliku w `images` folderze to `https://<hostname>/images/<image_file_name>` . Na przykład `https://localhost:5001/images/MyImage.jpg`
 
 ### <a name="serve-files-in-web-root"></a>Obsługiwanie plików w katalogu głównym sieci Web
 
@@ -186,7 +188,7 @@ Poniższy kod umożliwia obsługę plików statycznych, plików domyślnych i pr
 
 Przy użyciu hierarchii plików i poprzedniego kodu adresy URL są rozpoznawane w następujący sposób:
 
-| Identyfikator URI            |      Odpowiedź  |
+| URI            |      Odpowiedź  |
 | ------- | ------|
 | `https://<hostname>/StaticFiles/images/MyImage.jpg` | *MyStaticFiles/obrazy/MyImage.jpg* |
 | `https://<hostname>/StaticFiles` | *MyStaticFiles/default.html* |
@@ -251,7 +253,7 @@ W powyższym kodzie żądanie dotyczące pliku z nieznanym typem zawartości jes
 
 * Umieść pliki kodu, w tym *. cs* i *. cshtml*, poza [katalogiem głównym sieci Web](xref:fundamentals/index#web-root)projektu aplikacji. W związku z tym tworzone jest podział logiczny między zawartością po stronie klienta a kodem opartym na serwerze. Zapobiega to wyciekowi kodu po stronie serwera.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Oprogramowanie pośredniczące](xref:fundamentals/middleware/index)
 * [Wprowadzenie do programu ASP.NET Core](xref:index)
@@ -283,7 +285,7 @@ Pliki statyczne są dostępne za pośrednictwem ścieżki względnej dla [katalo
   * `images`
   * `js`
 
-Format identyfikatora URI służący do uzyskiwania dostępu do pliku w podfolderze *images* to *http:// \<server_address> \<image_file_name> /images/*. Na przykład *http://localhost:9189/images/banner3.svg* .
+Format identyfikatora URI służący do uzyskiwania dostępu do pliku w podfolderze *images* to *http:// \<server_address> \<image_file_name> /images/*. Przykładowy adres URL to *http://localhost:9189/images/banner3.svg*.
 
 Jeśli .NET Framework określania wartości docelowej, Dodaj pakiet [Microsoft. AspNetCore. StaticFiles](https://www.nuget.org/packages/Microsoft.AspNetCore.StaticFiles/) do projektu. W przypadku określania platformy .NET Core [pakiet Microsoft. AspNetCore. app](xref:fundamentals/metapackage-app) zawiera ten pakiet.
 
@@ -424,7 +426,7 @@ Poniższy kod umożliwia włączenie plików statycznych, plików domyślnych i 
 
 Przy użyciu hierarchii plików i poprzedniego kodu adresy URL są rozpoznawane w następujący sposób:
 
-| Identyfikator URI            |                             Odpowiedź  |
+| URI            |                             Odpowiedź  |
 | ------- | ------|
 | *http:// \<server_address> /StaticFiles/images/banner1.SVG*    |      MyStaticFiles/images/banner1. SVG |
 | *http:// \<server_address> /StaticFiles*             |     MyStaticFiles/default.html |
@@ -480,7 +482,7 @@ W powyższym kodzie żądanie dotyczące pliku z nieznanym typem zawartości jes
 
 * Umieść pliki kodu (w tym *. cs* i *. cshtml*) poza [katalogiem głównym sieci Web](xref:fundamentals/index#web-root)projektu aplikacji. W związku z tym tworzone jest podział logiczny między zawartością po stronie klienta a kodem opartym na serwerze. Zapobiega to wyciekowi kodu po stronie serwera.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Oprogramowanie pośredniczące](xref:fundamentals/middleware/index)
 * [Wprowadzenie do programu ASP.NET Core](xref:index)

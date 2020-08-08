@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 4/1/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/routing
-ms.openlocfilehash: fcf79966abf7a023773ef892636530278b668c44
-ms.sourcegitcommit: 5a36758cca2861aeb10840093e46d273a6e6e91d
+ms.openlocfilehash: 06c4f215c1c8d970cdfe41e395f39d4215b693f7
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87303615"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88016859"
 ---
 # <a name="routing-in-aspnet-core"></a>Routing w ASP.NET Core
 
@@ -565,7 +567,7 @@ Aby uzyskać ogranicznik parametrów routingu ucieczki,,,, `{` `}` `[` `]` podw�
 
 Wyrażenia regularne używane w routingu często zaczynają się od `^` znaku i pasują do pozycji początkowej ciągu. Wyrażenia często kończą się `$` znakiem i pasują do końca ciągu. `^`Znaki i `$` zapewniają, że wyrażenie regularne dopasowuje całą wartość parametru trasy. Bez `^` znaków i `$` wyrażenie regularne dopasowuje dowolny podciąg w ciągu, co jest często niepożądane. W poniższej tabeli przedstawiono przykłady i wyjaśniono, dlaczego są one zgodne lub nie można ich dopasować:
 
-| Wyrażenie   | String    | Dopasowanie | Komentarz               |
+| Wyrażenie   | Ciąg    | Dopasowanie | Komentarz               |
 | ------------ | --------- | :---: |  -------------------- |
 | `[a-z]{2}`   | hello     | Tak   | Dopasowania podciągów     |
 | `[a-z]{2}`   | 123abc456 | Tak   | Dopasowania podciągów     |
@@ -586,7 +588,7 @@ Niestandardowe ograniczenia trasy są rzadko zbędne. Przed wdrożeniem niestand
 
 Folder [ograniczenia](https://github.com/dotnet/aspnetcore/tree/master/src/Http/Routing/src/Constraints) ASP.NET Core zawiera dobre przykłady tworzenia ograniczeń. Na przykład [GuidRouteConstraint](https://github.com/dotnet/aspnetcore/blob/master/src/Http/Routing/src/Constraints/GuidRouteConstraint.cs#L18).
 
-Aby użyć niestandardowego `IRouteConstraint` , typ ograniczenia trasy musi być zarejestrowany w ramach aplikacji <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> w kontenerze usługi. `ConstraintMap`Jest słownikiem, który mapuje klucze ograniczeń trasy do `IRouteConstraint` implementacji, które weryfikują te ograniczenia. Aplikację `ConstraintMap` można zaktualizować w `Startup.ConfigureServices` ramach [usług. Wywołanie addrouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*) lub przez skonfigurowanie <xref:Microsoft.AspNetCore.Routing.RouteOptions> bezpośrednio w usłudze `services.Configure<RouteOptions>` . Na przykład:
+Aby użyć niestandardowego `IRouteConstraint` , typ ograniczenia trasy musi być zarejestrowany w ramach aplikacji <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> w kontenerze usługi. `ConstraintMap`Jest słownikiem, który mapuje klucze ograniczeń trasy do `IRouteConstraint` implementacji, które weryfikują te ograniczenia. Aplikację `ConstraintMap` można zaktualizować w `Startup.ConfigureServices` ramach [usług. Wywołanie addrouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*) lub przez skonfigurowanie <xref:Microsoft.AspNetCore.Routing.RouteOptions> bezpośrednio w usłudze `services.Configure<RouteOptions>` . Przykład:
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/StartupConstraint.cs?name=snippet)]
 
@@ -1486,12 +1488,12 @@ Na znaki ogranicznika parametru routingu ucieczki,,,, `{` `}` `[` `]` podwójne 
 
 Wyrażenia regularne używane w routingu często zaczynają się od `^` znaku karetki i dopasowują pozycję początkową ciągu. Wyrażenia często kończą się znakiem dolara `$` i pasują do końca ciągu. `^`Znaki i `$` zapewniają, że wyrażenie regularne dopasowuje całą wartość parametru trasy. Bez `^` znaków i `$` wyrażenie regularne dopasowuje dowolny podciąg w ciągu, co jest często niepożądane. W poniższej tabeli przedstawiono przykłady i wyjaśniono, dlaczego są one zgodne lub niezgodne.
 
-| Wyrażenie   | String    | Dopasowanie | Komentarz               |
+| Wyrażenie   | Ciąg    | Dopasowanie | Komentarz               |
 | ------------ | --------- | :---: |  -------------------- |
 | `[a-z]{2}`   | hello     | Tak   | Dopasowania podciągów     |
 | `[a-z]{2}`   | 123abc456 | Tak   | Dopasowania podciągów     |
 | `[a-z]{2}`   | MZ        | Tak   | Wyrażenie dopasowania    |
-| `[a-z]{2}`   | MZ        | Tak   | Bez uwzględniania wielkości liter    |
+| `[a-z]{2}`   | MZ        | Yes   | Bez uwzględniania wielkości liter    |
 | `^[a-z]{2}$` | hello     | Nie    | Zobacz `^` i `$` powyżej |
 | `^[a-z]{2}$` | 123abc456 | Nie    | Zobacz `^` i `$` powyżej |
 
@@ -1503,7 +1505,7 @@ Aby ograniczyć parametr do znanego zestawu możliwych wartości, użyj wyrażen
 
 Oprócz wbudowanych ograniczeń trasy niestandardowe ograniczenia trasy mogą być tworzone przez implementację <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> interfejsu. <xref:Microsoft.AspNetCore.Routing.IRouteConstraint>Interfejs zawiera jedną metodę, `Match` która zwraca, `true` Jeśli ograniczenie jest spełnione i `false` w przeciwnym razie.
 
-Aby użyć niestandardowego <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> , typ ograniczenia trasy musi być zarejestrowany <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> w aplikacji w kontenerze usługi aplikacji. <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap>Jest słownikiem, który mapuje klucze ograniczeń trasy do <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> implementacji, które weryfikują te ograniczenia. Aplikację <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> można zaktualizować w `Startup.ConfigureServices` ramach [usług. Wywołanie addrouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*) lub przez skonfigurowanie <xref:Microsoft.AspNetCore.Routing.RouteOptions> bezpośrednio w usłudze `services.Configure<RouteOptions>` . Na przykład:
+Aby użyć niestandardowego <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> , typ ograniczenia trasy musi być zarejestrowany <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> w aplikacji w kontenerze usługi aplikacji. <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap>Jest słownikiem, który mapuje klucze ograniczeń trasy do <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> implementacji, które weryfikują te ograniczenia. Aplikację <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> można zaktualizować w `Startup.ConfigureServices` ramach [usług. Wywołanie addrouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*) lub przez skonfigurowanie <xref:Microsoft.AspNetCore.Routing.RouteOptions> bezpośrednio w usłudze `services.Configure<RouteOptions>` . Przykład:
 
 ```csharp
 services.AddRouting(options =>
@@ -1512,7 +1514,7 @@ services.AddRouting(options =>
 });
 ```
 
-Ograniczenie można następnie zastosować do tras w zwykły sposób, przy użyciu nazwy określonej podczas rejestrowania typu ograniczenia. Na przykład:
+Ograniczenie można następnie zastosować do tras w zwykły sposób, przy użyciu nazwy określonej podczas rejestrowania typu ograniczenia. Przykład:
 
 ```csharp
 [HttpGet("{id:customName}")]
@@ -1930,7 +1932,7 @@ Wyrażenia regularne używają ograniczników i tokenów podobnie jak w przypadk
 
 Wyrażenia regularne używane w routingu często zaczynają się od znaku daszka ( `^` ) i dopasowują pozycję początkową ciągu. Wyrażenia często kończą się znakiem dolara ( `$` ) i końcem ciągu. `^`Znaki i `$` zapewniają, że wyrażenie regularne dopasowuje całą wartość parametru trasy. Bez `^` znaków i `$` wyrażenie regularne dopasowuje dowolny podciąg w ciągu, co jest często niepożądane. W poniższej tabeli przedstawiono przykłady i wyjaśniono, dlaczego są one zgodne lub niezgodne.
 
-| Wyrażenie   | String    | Dopasowanie | Komentarz               |
+| Wyrażenie   | Ciąg    | Dopasowanie | Komentarz               |
 | ------------ | --------- | :---: |  -------------------- |
 | `[a-z]{2}`   | hello     | Tak   | Dopasowania podciągów     |
 | `[a-z]{2}`   | 123abc456 | Tak   | Dopasowania podciągów     |
@@ -1947,7 +1949,7 @@ Aby ograniczyć parametr do znanego zestawu możliwych wartości, użyj wyrażen
 
 Oprócz wbudowanych ograniczeń trasy niestandardowe ograniczenia trasy mogą być tworzone przez implementację <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> interfejsu. <xref:Microsoft.AspNetCore.Routing.IRouteConstraint>Interfejs zawiera jedną metodę, `Match` która zwraca, `true` Jeśli ograniczenie jest spełnione i `false` w przeciwnym razie.
 
-Aby użyć niestandardowego <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> , typ ograniczenia trasy musi być zarejestrowany <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> w aplikacji w kontenerze usługi aplikacji. <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap>Jest słownikiem, który mapuje klucze ograniczeń trasy do <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> implementacji, które weryfikują te ograniczenia. Aplikację <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> można zaktualizować w `Startup.ConfigureServices` ramach [usług. Wywołanie addrouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*) lub przez skonfigurowanie <xref:Microsoft.AspNetCore.Routing.RouteOptions> bezpośrednio w usłudze `services.Configure<RouteOptions>` . Na przykład:
+Aby użyć niestandardowego <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> , typ ograniczenia trasy musi być zarejestrowany <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> w aplikacji w kontenerze usługi aplikacji. <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap>Jest słownikiem, który mapuje klucze ograniczeń trasy do <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> implementacji, które weryfikują te ograniczenia. Aplikację <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> można zaktualizować w `Startup.ConfigureServices` ramach [usług. Wywołanie addrouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*) lub przez skonfigurowanie <xref:Microsoft.AspNetCore.Routing.RouteOptions> bezpośrednio w usłudze `services.Configure<RouteOptions>` . Przykład:
 
 ```csharp
 services.AddRouting(options =>
@@ -1956,7 +1958,7 @@ services.AddRouting(options =>
 });
 ```
 
-Ograniczenie można następnie zastosować do tras w zwykły sposób, przy użyciu nazwy określonej podczas rejestrowania typu ograniczenia. Na przykład:
+Ograniczenie można następnie zastosować do tras w zwykły sposób, przy użyciu nazwy określonej podczas rejestrowania typu ograniczenia. Przykład:
 
 ```csharp
 [HttpGet("{id:customName}")]

@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/25/2018
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/metapackage
-ms.openlocfilehash: 32f324000dfe38eb578a580d7a315a1a687a094d
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 58201aed604fa53c703176e11af5d749f2b3274e
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407944"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88017037"
 ---
 # <a name="microsoftaspnetcoreall-metapackage-for-aspnet-core-20"></a>Microsoft. AspNetCore. All, pakiet dla ASP.NET Core 2,0
 
@@ -93,7 +95,7 @@ Następujące pakiety są zawarte w `Microsoft.AspNetCore.All` pakiecie, ale nie
 
 Aby przenieść z `Microsoft.AspNetCore.All` do `Microsoft.AspNetCore.App` , jeśli aplikacja używa dowolnych interfejsów API z powyższych pakietów lub pakietów wprowadzonych przez te pakiety, Dodaj odwołania do tych pakietów w projekcie.
 
-Wszystkie zależności poprzedzających pakietów, które w przeciwnym razie nie są zależnościami, `Microsoft.AspNetCore.App` nie są uwzględniane niejawnie. Na przykład:
+Wszystkie zależności poprzedzających pakietów, które w przeciwnym razie nie są zależnościami, `Microsoft.AspNetCore.App` nie są uwzględniane niejawnie. Przykład:
 
 * `StackExchange.Redis`jako zależność`Microsoft.Extensions.Caching.Redis`
 * `Microsoft.ApplicationInsights`jako zależność`Microsoft.AspNetCore.ApplicationInsights.HostingStartup`

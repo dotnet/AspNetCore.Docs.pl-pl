@@ -1,5 +1,5 @@
 ---
-title: Wzorzec opcji w ASP.NET Core
+title: Wzorzec opcji na platformie ASP.NET Core
 author: rick-anderson
 description: Dowiedz się, jak używać wzorca opcji do reprezentowania grup powiązanych ustawień w aplikacjach ASP.NET Core.
 monikerRange: '>= aspnetcore-2.1'
@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/20/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/configuration/options
-ms.openlocfilehash: 300b26c198e6ea07fe83af8fb9ae967e814396fb
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: dc03e0820bc332f29e48edb73b57faf5cfd83754
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408360"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88017626"
 ---
-# <a name="options-pattern-in-aspnet-core"></a>Wzorzec opcji w ASP.NET Core
+# <a name="options-pattern-in-aspnet-core"></a>Wzorzec opcji na platformie ASP.NET Core
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -1013,6 +1015,6 @@ Nie używaj <xref:Microsoft.Extensions.Options.IOptions%601> ani <xref:Microsoft
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:fundamentals/configuration/index>

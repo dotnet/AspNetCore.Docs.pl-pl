@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/30/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/index
-ms.openlocfilehash: c797ce8bcb22aec2b56df2f3b108da4cbfde263d
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: f141e9248a702ad9a1d9737f82543a0ccc8fb573
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403303"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88017210"
 ---
 # <a name="aspnet-core-fundamentals"></a>Platforma ASP.NET Core — podstawy
 
@@ -45,7 +47,7 @@ Aby uzyskać więcej informacji, zobacz <xref:fundamentals/startup>.
 
 ASP.NET Core zawiera wbudowaną platformę wstrzykiwania zależności (DI), która udostępnia skonfigurowane usługi w aplikacji. Na przykład składnik rejestrowania to usługa.
 
-Kod do konfigurowania (lub *rejestrowania*) usług jest dodawany do `Startup.ConfigureServices` metody. Na przykład:
+Kod do konfigurowania (lub *rejestrowania*) usług jest dodawany do `Startup.ConfigureServices` metody. Przykład:
 
 [!code-csharp[](index/samples_snapshot/3.x/ConfigureServices.cs)]
 
@@ -164,7 +166,7 @@ ASP.NET Core obsługuje interfejs API rejestrowania, który współpracuje z ró
 * Azure App Service
 * Azure Application Insights
 
-Aby utworzyć dzienniki, należy rozwiązać <xref:Microsoft.Extensions.Logging.ILogger%601> usługę od iniekcji zależności (di) i wywoływać metody rejestrowania, takie jak <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogInformation*> . Na przykład:
+Aby utworzyć dzienniki, należy rozwiązać <xref:Microsoft.Extensions.Logging.ILogger%601> usługę od iniekcji zależności (di) i wywoływać metody rejestrowania, takie jak <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogInformation*> . Przykład:
 
 [!code-csharp[](index/samples_snapshot/3.x/TodoController.cs?highlight=5,13,19)]
 

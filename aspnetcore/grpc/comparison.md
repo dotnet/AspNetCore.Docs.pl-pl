@@ -6,6 +6,8 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/comparison
-ms.openlocfilehash: caf9e99bcd4a1887fe5d69a3641fabee08573ef1
-ms.sourcegitcommit: d1fa3d69dda675d7a52c7100742dfa6297413376
+ms.openlocfilehash: cdddb14e62f42bc9c0ec0bbe2a8595fe1cb27ceb
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/08/2020
-ms.locfileid: "86093313"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88016209"
 ---
 # <a name="compare-grpc-services-with-http-apis"></a>Porównanie usług gRPC za pomocą interfejsów API protokołu HTTP
 
@@ -31,7 +33,7 @@ W tym artykule wyjaśniono, w jaki sposób [usługi gRPC Services](https://grpc.
 
 Poniższa tabela zawiera porównanie funkcji między gRPC i interfejsami API protokołu HTTP z kodem JSON.
 
-| Cecha          | gRPC                                               | Interfejsy API protokołu HTTP z JSON           |
+| Cechy          | gRPC                                               | Interfejsy API protokołu HTTP z JSON           |
 | ---------------- | -------------------------------------------------- | ----------------------------- |
 | Kontrakt         | Wymagane (*. proto*)                                | Opcjonalnie (OpenAPI)            |
 | Protokół         | HTTP/2                                             | HTTP                          |
@@ -122,7 +124,7 @@ Inne struktury są zalecane w porównaniu z gRPC w następujących scenariuszach
 * **Rozgłaszanie komunikacji**w czasie rzeczywistym: gRPC obsługuje komunikację w czasie rzeczywistym za pośrednictwem przesyłania strumieniowego, ale pojęcie rozgłaszania komunikatów do zarejestrowanych połączeń nie istnieje. Na przykład w scenariuszu pokoju rozmów, w którym nowe wiadomości czatu powinny być wysyłane do wszystkich klientów w pokoju rozmowy, każde wywołanie gRPC jest wymagane do narzucania strumieniowego przesyłania nowych komunikatów rozmowy do klienta. [SignalR](xref:signalr/introduction)jest przydatną strukturą dla tego scenariusza. SignalRma koncepcję trwałych połączeń i wbudowaną obsługę rozgłaszania komunikatów.
 * **Komunikacja między procesami**: proces musi obsługiwać serwer HTTP/2 w celu akceptowania przychodzących wywołań gRPC. W przypadku systemu Windows [potoki](/dotnet/standard/io/pipe-operations) komunikacji między procesami to szybka i lekka Metoda komunikacji.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:tutorials/grpc/grpc-start>
 * <xref:grpc/index>

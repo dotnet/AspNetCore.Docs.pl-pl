@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/07/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: getting-started
-ms.openlocfilehash: b88460cdff5d8c30c6a28afdb4f67e8e0b6b819c
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 74df2ade64e0821dcbb28252e8a637f81d15e375
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403368"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88016482"
 ---
 # <a name="tutorial-get-started-with-aspnet-core"></a>Samouczek: wprowadzenie do ASP.NET Core
 
@@ -41,7 +43,7 @@ Na końcu będziesz mieć działającą aplikację sieci Web na komputerze lokal
 
 [!INCLUDE[](~/includes/3.1-SDK.md)]
 
-## <a name="create-a-web-app-project"></a>Tworzenie projektu aplikacji sieci Web
+## <a name="create-a-web-app-project"></a>Tworzenie projektu aplikacji internetowej
 
 Otwórz powłokę poleceń i wprowadź następujące polecenie:
 
@@ -49,7 +51,7 @@ Otwórz powłokę poleceń i wprowadź następujące polecenie:
 dotnet new webapp -o aspnetcoreapp
 ```
 
-Poprzednie polecenie:
+Powyższe polecenie ma następujące działanie:
 
 * Tworzy nową aplikację sieci Web.  
 * `-o aspnetcoreapp`Parametr tworzy katalog o nazwie *aspnetcoreapp* z plikami źródłowymi aplikacji.
@@ -90,7 +92,7 @@ Zapoznaj się z dokumentacją dystrybucji systemu Linux dotyczącą sposobu zauf
 
 Aby uzyskać więcej informacji, zobacz artykuł [ufanie certyfikatowi Deweloperskiemu protokołu HTTPS ASP.NET Core](xref:security/enforcing-ssl#trust-the-aspnet-core-https-development-certificate-on-windows-and-macos)
 
-## <a name="run-the-app"></a>Uruchomienie aplikacji
+## <a name="run-the-app"></a>Uruchamianie aplikacji
 
 Uruchom następujące polecenia:
 
@@ -101,7 +103,7 @@ dotnet watch run
 
 Po powłoce poleceń wskazuje, że aplikacja została uruchomiona, przejdź do `https://localhost:5001` .
 
-## <a name="edit-a-razor-page"></a>Edytowanie Razor strony
+## <a name="edit-a-no-locrazor-page"></a>Edytowanie Razor strony
 
 Otwórz stronę *Pages/index. cshtml* i zmodyfikuj ją i Zapisz przy użyciu następującego wyróżnionego znacznika:
 

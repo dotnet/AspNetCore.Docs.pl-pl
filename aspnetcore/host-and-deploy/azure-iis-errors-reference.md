@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/azure-iis-errors-reference
-ms.openlocfilehash: 1b0402ceccde0f2410ac29e9c6a251110c81eafa
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 8f21e02409a04b06c06dff5b0a113b0f21d59090
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408139"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88015871"
 ---
 # <a name="common-errors-reference-for-azure-app-service-and-iis-with-aspnet-core"></a>Informacje dotyczące typowych błędów dla Azure App Service i usług IIS z ASP.NET Core
 
@@ -173,7 +175,7 @@ Rozwiązywanie problemów:
 
   Aby uzyskać więcej informacji, zobacz [Instalowanie pakietu hostingu .NET Core](xref:host-and-deploy/iis/index#install-the-net-core-hosting-bundle).
 
-* Upewnij się, że **Application Pool** > **model procesów** puli aplikacji > **Identity** ma wartość **ApplicationPoolIdentity** lub że niestandardowa tożsamość ma odpowiednie uprawnienia dostępu do folderu wdrożenia aplikacji.
+* Upewnij się, że **Application Pool** > **model procesów** puli aplikacji > **Identity** ma wartość **ApplicationPool Identity ** lub że niestandardowa tożsamość ma odpowiednie uprawnienia dostępu do folderu wdrożenia aplikacji.
 
 * Jeśli odinstalowano pakiet hostingu ASP.NET Core i zainstalowano wcześniejszą wersję pakietu hostingu, plik *applicationHost.config* nie zawiera sekcji dla modułu ASP.NET Core. Otwórz *applicationHost.config* w lokalizacji *% windir%/system32/inetsrv/config* i Znajdź `<configuration><configSections><sectionGroup name="system.webServer">` grupę sekcji. Jeśli w grupie sekcji brakuje sekcji modułu ASP.NET Core, Dodaj element Section:
 
@@ -451,7 +453,7 @@ Rozwiązywanie problemów:
 
   Aby uzyskać więcej informacji, zobacz [Instalowanie pakietu hostingu .NET Core](xref:host-and-deploy/iis/index#install-the-net-core-hosting-bundle).
 
-* Upewnij się, że **Application Pool** > **model procesów** puli aplikacji > **Identity** ma wartość **ApplicationPoolIdentity** lub że niestandardowa tożsamość ma odpowiednie uprawnienia dostępu do folderu wdrożenia aplikacji.
+* Upewnij się, że **Application Pool** > **model procesów** puli aplikacji > **Identity** ma wartość **ApplicationPool Identity ** lub że niestandardowa tożsamość ma odpowiednie uprawnienia dostępu do folderu wdrożenia aplikacji.
 
 * Jeśli odinstalowano pakiet hostingu ASP.NET Core i zainstalowano wcześniejszą wersję pakietu hostingu, plik *applicationHost.config* nie zawiera sekcji dla modułu ASP.NET Core. Otwórz *applicationHost.config* w lokalizacji *% windir%/system32/inetsrv/config* i Znajdź `<configuration><configSections><sectionGroup name="system.webServer">` grupę sekcji. Jeśli w grupie sekcji brakuje sekcji modułu ASP.NET Core, Dodaj element Section:
 

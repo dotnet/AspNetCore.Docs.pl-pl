@@ -7,6 +7,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 02/09/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/http-requests
-ms.openlocfilehash: fb9001c06228b4290ca1e0c7cfb6b1338f431cd6
-ms.sourcegitcommit: ca6a1f100c1a3f59999189aa962523442dd4ead1
+ms.openlocfilehash: ef6ed0911c2615ea543b1c2cea31a9a453f0c604
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/30/2020
-ms.locfileid: "87444118"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88017236"
 ---
 # <a name="make-http-requests-using-ihttpclientfactory-in-aspnet-core"></a>Wykonywanie żądań HTTP przy użyciu IHttpClientFactory w ASP.NET Core
 
@@ -214,7 +216,7 @@ W poprzednim kodzie `CreateItemAsync` Metoda:
 * Wywołuje <xref:System.Net.Http.HttpClient.PostAsync%2A> wysyłanie zawartości JSON do określonego adresu URL. Jest to względny adres URL, który zostanie dodany do [HttpClient. BaseAddress](xref:System.Net.Http.HttpClient.BaseAddress).
 * Wywołuje, <xref:System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode%2A> Aby zgłosić wyjątek, jeśli kod stanu odpowiedzi nie wskazuje powodzenia.
 
-`HttpClient`obsługuje również inne typy zawartości. Na przykład <xref:System.Net.Http.MultipartContent> i <xref:System.Net.Http.StreamContent>. Aby zapoznać się z pełną listą obsługiwanych zawartości, zobacz <xref:System.Net.Http.HttpContent> .
+`HttpClient`obsługuje również inne typy zawartości. Przykład: <xref:System.Net.Http.MultipartContent> i <xref:System.Net.Http.StreamContent>. Aby zapoznać się z pełną listą obsługiwanych zawartości, zobacz <xref:System.Net.Http.HttpContent> .
 
 Poniższy przykład przedstawia żądanie HTTP PUT:
 
@@ -359,14 +361,14 @@ Powyższe podejścia rozwiązują problemy z zarządzaniem zasobami, które `IHt
 - `SocketsHttpHandler`Udostępnia połączenia między `HttpClient` wystąpieniami. To udostępnianie uniemożliwia wyczerpanie gniazda.
 - `SocketsHttpHandler`Cykle połączeń zgodnie z, aby `PooledConnectionLifetime` uniknąć nieodświeżonych problemów z usługą DNS.
 
-### <a name="cookies"></a>Pliki cookie
+### <a name="no-loccookies"></a>Cookiewolumin
 
-`HttpMessageHandler`Wystąpienia w puli powoduje, że `CookieContainer` obiekty są udostępniane. Nieoczekiwane `CookieContainer` udostępnianie obiektów często prowadzi do niepoprawnego kodu. W przypadku aplikacji wymagających plików cookie należy rozważyć następujące kwestie:
+`HttpMessageHandler`Wystąpienia w puli powoduje, że `CookieContainer` obiekty są udostępniane. Nieoczekiwane `CookieContainer` udostępnianie obiektów często prowadzi do niepoprawnego kodu. W przypadku aplikacji, które wymagają usługi cookie s, należy rozważyć następujące kwestie:
 
- - Wyłączanie obsługi automatycznej plików cookie
+ - Wyłączanie cookie obsługi automatycznej
  - Unikanie`IHttpClientFactory`
 
-Wywołaj <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*> , aby wyłączyć automatyczną obsługę plików cookie:
+Wywołanie <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*> wyłączania automatycznej cookie obsługi:
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet13)]
 
@@ -421,7 +423,7 @@ Propagacja nagłówka to ASP.NET Core oprogramowanie pośredniczące do propagow
   var response = client.GetAsync(...);
   ```
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Używanie elementu HttpClientFactory do implementowania odpornych na błędy żądań HTTP](/dotnet/standard/microservices-architecture/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests)
 * [Zaimplementuj ponowne próby wywołania HTTP przy użyciu wykładniczej wycofywania z zasadami HttpClientFactory i Polly](/dotnet/standard/microservices-architecture/implement-resilient-applications/implement-http-call-retries-exponential-backoff-polly)
@@ -677,14 +679,14 @@ Powyższe podejścia rozwiązują problemy z zarządzaniem zasobami, które `IHt
 - `SocketsHttpHandler`Udostępnia połączenia między `HttpClient` wystąpieniami. To udostępnianie uniemożliwia wyczerpanie gniazda.
 - `SocketsHttpHandler`Cykle połączeń zgodnie z, aby `PooledConnectionLifetime` uniknąć nieodświeżonych problemów z usługą DNS.
 
-### <a name="cookies"></a>Pliki cookie
+### <a name="no-loccookies"></a>Cookiewolumin
 
-`HttpMessageHandler`Wystąpienia w puli powoduje, że `CookieContainer` obiekty są udostępniane. Nieoczekiwane `CookieContainer` udostępnianie obiektów często prowadzi do niepoprawnego kodu. W przypadku aplikacji wymagających plików cookie należy rozważyć następujące kwestie:
+`HttpMessageHandler`Wystąpienia w puli powoduje, że `CookieContainer` obiekty są udostępniane. Nieoczekiwane `CookieContainer` udostępnianie obiektów często prowadzi do niepoprawnego kodu. W przypadku aplikacji, które wymagają usługi cookie s, należy rozważyć następujące kwestie:
 
- - Wyłączanie obsługi automatycznej plików cookie
+ - Wyłączanie cookie obsługi automatycznej
  - Unikanie`IHttpClientFactory`
 
-Wywołaj <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*> , aby wyłączyć automatyczną obsługę plików cookie:
+Wywołanie <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*> wyłączania automatycznej cookie obsługi:
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet13)]
 
@@ -723,7 +725,7 @@ W poniższym przykładzie:
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactoryConsoleSample/Program.cs?highlight=14-15,20,26-27,59-62)]
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Używanie elementu HttpClientFactory do implementowania odpornych na błędy żądań HTTP](/dotnet/standard/microservices-architecture/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests)
 * [Zaimplementuj ponowne próby wywołania HTTP przy użyciu wykładniczej wycofywania z zasadami HttpClientFactory i Polly](/dotnet/standard/microservices-architecture/implement-resilient-applications/implement-http-call-retries-exponential-backoff-polly)
@@ -985,14 +987,14 @@ Powyższe podejścia rozwiązują problemy z zarządzaniem zasobami, które `IHt
 - `SocketsHttpHandler`Udostępnia połączenia między `HttpClient` wystąpieniami. To udostępnianie uniemożliwia wyczerpanie gniazda.
 - `SocketsHttpHandler`Cykle połączeń zgodnie z, aby `PooledConnectionLifetime` uniknąć nieodświeżonych problemów z usługą DNS.
 
-### <a name="cookies"></a>Pliki cookie
+### <a name="no-loccookies"></a>Cookiewolumin
 
-`HttpMessageHandler`Wystąpienia w puli powoduje, że `CookieContainer` obiekty są udostępniane. Nieoczekiwane `CookieContainer` udostępnianie obiektów często prowadzi do niepoprawnego kodu. W przypadku aplikacji wymagających plików cookie należy rozważyć następujące kwestie:
+`HttpMessageHandler`Wystąpienia w puli powoduje, że `CookieContainer` obiekty są udostępniane. Nieoczekiwane `CookieContainer` udostępnianie obiektów często prowadzi do niepoprawnego kodu. W przypadku aplikacji, które wymagają usługi cookie s, należy rozważyć następujące kwestie:
 
- - Wyłączanie obsługi automatycznej plików cookie
+ - Wyłączanie cookie obsługi automatycznej
  - Unikanie`IHttpClientFactory`
 
-Wywołaj <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*> , aby wyłączyć automatyczną obsługę plików cookie:
+Wywołanie <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*> wyłączania automatycznej cookie obsługi:
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet13)]
 
@@ -1048,7 +1050,7 @@ Propagacja nagłówka to społeczność obsługiwana przez oprogramowanie pośre
   var response = client.GetAsync(...);
   ```
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Używanie elementu HttpClientFactory do implementowania odpornych na błędy żądań HTTP](/dotnet/standard/microservices-architecture/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests)
 * [Zaimplementuj ponowne próby wywołania HTTP przy użyciu wykładniczej wycofywania z zasadami HttpClientFactory i Polly](/dotnet/standard/microservices-architecture/implement-resilient-applications/implement-http-call-retries-exponential-backoff-polly)

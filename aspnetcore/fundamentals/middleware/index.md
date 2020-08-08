@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/15/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/middleware/index
-ms.openlocfilehash: 7b0212ce6463d00a4c5cc87e2b36e1e7e7c5a54e
-ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
+ms.openlocfilehash: 560f25c9acabe2860bcaaddcdb42e2b15842a29d
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86445414"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88017080"
 ---
 # <a name="aspnet-core-middleware"></a>ASP.NET Core oprogramowanie pośredniczące
 
@@ -108,11 +110,11 @@ Poniższa `Startup.Configure` Metoda dodaje składniki pośredniczące dla typow
      * Protokół pośredniczący protokołu HTTP Strict Transport Security (HSTS) ( <xref:Microsoft.AspNetCore.Builder.HstsBuilderExtensions.UseHsts%2A> ) dodaje `Strict-Transport-Security` nagłówek.
 1. Oprogramowanie pośredniczące przekierowywania HTTPS ( <xref:Microsoft.AspNetCore.Builder.HttpsPolicyBuilderExtensions.UseHttpsRedirection%2A> ) przekierowuje żądania HTTP do protokołu HTTPS.
 1. Oprogramowanie pośredniczące plików statycznych ( <xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles%2A> ) zwraca pliki statyczne i dalsze przetwarzanie żądań na krótkie obwody.
-1. Oprogramowanie pośredniczące zasad plików cookie ( <xref:Microsoft.AspNetCore.Builder.CookiePolicyAppBuilderExtensions.UseCookiePolicy%2A> ) powoduje, że aplikacja jest zgodna z przepisami ue ogólne rozporządzenie o ochronie danych (Rodo).
+1. CookieOprogramowanie pośredniczące zasad ( <xref:Microsoft.AspNetCore.Builder.CookiePolicyAppBuilderExtensions.UseCookiePolicy%2A> ) powoduje, że aplikacja jest zgodna z przepisami ue ogólne rozporządzenie o ochronie danych (Rodo).
 1. Kierowanie oprogramowania pośredniczącego ( <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseRouting%2A> ) do przesyłania żądań.
 1. Oprogramowanie pośredniczące uwierzytelniania ( <xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication%2A> ) próbuje uwierzytelnić użytkownika przed zezwoleniem im na dostęp do zabezpieczonych zasobów.
 1. Oprogramowanie pośredniczące autoryzacji ( <xref:Microsoft.AspNetCore.Builder.AuthorizationAppBuilderExtensions.UseAuthorization%2A> ) autoryzuje użytkownika do uzyskiwania dostępu do zabezpieczonych zasobów.
-1. Oprogramowanie pośredniczące sesji ( <xref:Microsoft.AspNetCore.Builder.SessionMiddlewareExtensions.UseSession%2A> ) ustanawia i utrzymuje stan sesji. Jeśli aplikacja używa stanu sesji, wywołaj oprogramowanie pośredniczące sesji po wyjściu z zasad plików cookie i przed oprogramowania MVC.
+1. Oprogramowanie pośredniczące sesji ( <xref:Microsoft.AspNetCore.Builder.SessionMiddlewareExtensions.UseSession%2A> ) ustanawia i utrzymuje stan sesji. Jeśli aplikacja używa stanu sesji, wywołaj oprogramowanie pośredniczące sesji po oprogramowaniu Cookie pośredniczącym zasad i przed oprogramowania MVC.
 1. Program pośredniczący do routingu punktu końcowego ( <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints%2A> z <xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapRazorPages%2A> ) umożliwia dodawanie Razor punktów końcowych stron do potoku żądania.
 
 <!--
@@ -200,7 +202,7 @@ Aby uzyskać więcej informacji na temat aplikacji jednostronicowych, zobacz prz
 
 W poniższej tabeli przedstawiono żądania i odpowiedzi z `http://localhost:1234` używania poprzedniego kodu.
 
-| Request             | Odpowiedź                     |
+| Żądanie             | Odpowiedź                     |
 | ------------------- | ---------------------------- |
 | localhost: 1234      | Witaj od delegata innego niż mapowanie. |
 | localhost: 1234/Map1 | Test mapy 1                   |
@@ -232,7 +234,7 @@ app.Map("/level1", level1App => {
 
 W poniższej tabeli przedstawiono żądania i odpowiedzi z `http://localhost:1234` używania poprzedniego kodu:
 
-| Request                       | Odpowiedź                     |
+| Żądanie                       | Odpowiedź                     |
 | ----------------------------- | ---------------------------- |
 | localhost: 1234                | Witaj od delegata innego niż mapowanie. |
 | localhost: 1234/? Branch = Master | Używane gałęzie = Master         |
@@ -251,7 +253,7 @@ ASP.NET Core dostarcza z następującymi składnikami oprogramowania pośrednicz
 | ---------- | ----------- | ----- |
 | [Authentication](xref:security/authentication/identity) | Zapewnia obsługę uwierzytelniania. | Przed zainstalowaniem `HttpContext.User` . Terminal dla wywołań zwrotnych uwierzytelniania OAuth. |
 | [Autoryzacja](xref:Microsoft.AspNetCore.Builder.AuthorizationAppBuilderExtensions.UseAuthorization%2A) | Zapewnia obsługę autoryzacji. | Natychmiast po oprogramowaniu pośredniczącym uwierzytelniania. |
-| [Zasady dotyczące plików cookie](xref:security/gdpr) | Śledzi zgodę użytkowników na przechowywanie informacji osobistych i wymusza minimalne standardy dotyczące pól plików cookie, takich jak `secure` i `SameSite` . | Przed wystawianiem plików cookie przez oprogramowanie pośredniczące. Przykłady: uwierzytelnianie, sesja, MVC (TempData). |
+| [CookieZasad](xref:security/gdpr) | Śledzi zgodę użytkowników na przechowywanie informacji osobistych i wymusza minimalne standardy dla cookie pól, takich jak `secure` i `SameSite` . | Przed wystawianym przez oprogramowanie pośredniczące cookie . Przykłady: uwierzytelnianie, sesja, MVC (TempData). |
 | [CORS](xref:security/cors) | Konfiguruje udostępnianie zasobów między źródłami. | Przed składnikami korzystającymi z mechanizmu CORS. `UseCors`obecnie musi przejść `UseResponseCaching` do [tego błędu](https://github.com/dotnet/aspnetcore/issues/23218).|
 | [Diagnostyka](xref:fundamentals/error-handling) | Kilka oddzielnych middlewares, które udostępniają stronę wyjątku dewelopera, obsługę wyjątków, strony kodu stanu i domyślną stronę sieci Web dla nowych aplikacji. | Przed składnikami, które generują błędy. Terminal dla wyjątków lub obsługa domyślnej strony sieci Web dla nowych aplikacji. |
 | [Nagłówki przesłane dalej](xref:host-and-deploy/proxy-load-balancer) | Przekazuje nagłówki proxy do bieżącego żądania. | Przed składnikami, które zużywają zaktualizowane pola. Przykłady: schemat, host, adres IP klienta, metoda. |
@@ -353,9 +355,9 @@ Poniższa `Startup.Configure` Metoda dodaje składniki pośredniczące dla typow
      * Protokół pośredniczący protokołu HTTP Strict Transport Security (HSTS) ( <xref:Microsoft.AspNetCore.Builder.HstsBuilderExtensions.UseHsts%2A> ) dodaje `Strict-Transport-Security` nagłówek.
 1. Oprogramowanie pośredniczące przekierowywania HTTPS ( <xref:Microsoft.AspNetCore.Builder.HttpsPolicyBuilderExtensions.UseHttpsRedirection%2A> ) przekierowuje żądania HTTP do protokołu HTTPS.
 1. Oprogramowanie pośredniczące plików statycznych ( <xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles%2A> ) zwraca pliki statyczne i dalsze przetwarzanie żądań na krótkie obwody.
-1. Oprogramowanie pośredniczące zasad plików cookie ( <xref:Microsoft.AspNetCore.Builder.CookiePolicyAppBuilderExtensions.UseCookiePolicy%2A> ) powoduje, że aplikacja jest zgodna z przepisami ue ogólne rozporządzenie o ochronie danych (Rodo).
+1. CookieOprogramowanie pośredniczące zasad ( <xref:Microsoft.AspNetCore.Builder.CookiePolicyAppBuilderExtensions.UseCookiePolicy%2A> ) powoduje, że aplikacja jest zgodna z przepisami ue ogólne rozporządzenie o ochronie danych (Rodo).
 1. Oprogramowanie pośredniczące uwierzytelniania ( <xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication%2A> ) próbuje uwierzytelnić użytkownika przed zezwoleniem im na dostęp do zabezpieczonych zasobów.
-1. Oprogramowanie pośredniczące sesji ( <xref:Microsoft.AspNetCore.Builder.SessionMiddlewareExtensions.UseSession%2A> ) ustanawia i utrzymuje stan sesji. Jeśli aplikacja używa stanu sesji, wywołaj oprogramowanie pośredniczące sesji po wyjściu z zasad plików cookie i przed oprogramowania MVC.
+1. Oprogramowanie pośredniczące sesji ( <xref:Microsoft.AspNetCore.Builder.SessionMiddlewareExtensions.UseSession%2A> ) ustanawia i utrzymuje stan sesji. Jeśli aplikacja używa stanu sesji, wywołaj oprogramowanie pośredniczące sesji po oprogramowaniu Cookie pośredniczącym zasad i przed oprogramowania MVC.
 1. MVC ( <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvc%2A> ), aby dodać MVC do potoku żądania.
 
 ```csharp
@@ -413,7 +415,7 @@ Skonfiguruj potok HTTP przy użyciu <xref:Microsoft.AspNetCore.Builder.UseExtens
 
 W poniższej tabeli przedstawiono żądania i odpowiedzi z `http://localhost:1234` używania poprzedniego kodu.
 
-| Request             | Odpowiedź                     |
+| Żądanie             | Odpowiedź                     |
 | ------------------- | ---------------------------- |
 | localhost: 1234      | Witaj od delegata innego niż mapowanie. |
 | localhost: 1234/Map1 | Test mapy 1                   |
@@ -428,7 +430,7 @@ Gdy `Map` jest używany, dopasowane segmenty ścieżki są usuwane z `HttpReques
 
 W poniższej tabeli przedstawiono żądania i odpowiedzi z `http://localhost:1234` używania poprzedniego kodu.
 
-| Request                       | Odpowiedź                     |
+| Żądanie                       | Odpowiedź                     |
 | ----------------------------- | ---------------------------- |
 | localhost: 1234                | Witaj od delegata innego niż mapowanie. |
 | localhost: 1234/? Branch = Master | Używane gałęzie = Master         |
@@ -457,7 +459,7 @@ ASP.NET Core dostarcza z następującymi składnikami oprogramowania pośrednicz
 | Oprogramowanie pośredniczące | Opis | Zamówienie |
 | ---------- | ----------- | ----- |
 | [Authentication](xref:security/authentication/identity) | Zapewnia obsługę uwierzytelniania. | Przed zainstalowaniem `HttpContext.User` . Terminal dla wywołań zwrotnych uwierzytelniania OAuth. |
-| [Zasady dotyczące plików cookie](xref:security/gdpr) | Śledzi zgodę użytkowników na przechowywanie informacji osobistych i wymusza minimalne standardy dotyczące pól plików cookie, takich jak `secure` i `SameSite` . | Przed wystawianiem plików cookie przez oprogramowanie pośredniczące. Przykłady: uwierzytelnianie, sesja, MVC (TempData). |
+| [CookieZasad](xref:security/gdpr) | Śledzi zgodę użytkowników na przechowywanie informacji osobistych i wymusza minimalne standardy dla cookie pól, takich jak `secure` i `SameSite` . | Przed wystawianym przez oprogramowanie pośredniczące cookie . Przykłady: uwierzytelnianie, sesja, MVC (TempData). |
 | [CORS](xref:security/cors) | Konfiguruje udostępnianie zasobów między źródłami. | Przed składnikami korzystającymi z mechanizmu CORS. |
 | [Diagnostyka](xref:fundamentals/error-handling) | Kilka oddzielnych middlewares, które udostępniają stronę wyjątku dewelopera, obsługę wyjątków, strony kodu stanu i domyślną stronę sieci Web dla nowych aplikacji. | Przed składnikami, które generują błędy. Terminal dla wyjątków lub obsługa domyślnej strony sieci Web dla nowych aplikacji. |
 | [Nagłówki przesłane dalej](xref:host-and-deploy/proxy-load-balancer) | Przekazuje nagłówki proxy do bieżącego żądania. | Przed składnikami, które zużywają zaktualizowane pola. Przykłady: schemat, host, adres IP klienta, metoda. |

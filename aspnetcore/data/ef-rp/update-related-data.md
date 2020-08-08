@@ -5,6 +5,8 @@ description: Część 7 Razor stron i Entity Framework serii samouczków.
 ms.author: riande
 ms.date: 07/22/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/update-related-data
-ms.openlocfilehash: b442a4ce1f63c047c123315626f559155fd06424
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: 3807c52bb843c4d6403e8236fde50c034a8d1e2b
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86060140"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88017743"
 ---
-# <a name="part-7-razor-pages-with-ef-core-in-aspnet-core---update-related-data"></a>Część 7 Razor strony z EF Core w programie ASP.NET Core — aktualizacja powiązanych danych
+# <a name="part-7-no-locrazor-pages-with-ef-core-in-aspnet-core---update-related-data"></a>Część 7 Razor strony z EF Core w programie ASP.NET Core — aktualizacja powiązanych danych
 
 Przez [Tomasz Dykstra](https://github.com/tdykstra)i [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -65,7 +67,7 @@ Powyższy kod ma następujące działanie:
 * Używa `TryUpdateModelAsync` do zapobiegania [overposting](xref:data/ef-rp/crud#overposting)przepisywaniu.
 * Usuwa `ViewData["DepartmentID"]` . `DepartmentNameSL`z klasy podstawowej jest jednoznacznie określonym modelem i będzie używany przez Razor stronę. Modele silnie wpisane są preferowane za pośrednictwem słabo wpisanych. Aby uzyskać więcej informacji, zobacz [słabo wpisane dane (ViewData i ViewBag)](xref:mvc/views/overview#VD_VB).
 
-### <a name="update-the-course-create-razor-page"></a>Aktualizowanie strony tworzenia kursu Razor
+### <a name="update-the-course-create-no-locrazor-page"></a>Aktualizowanie strony tworzenia kursu Razor
 
 Zaktualizuj *strony/kursy/Utwórz. cshtml* przy użyciu następującego kodu:
 
@@ -92,7 +94,7 @@ Zaktualizuj *strony/kursy/Edytuj. cshtml. cs* przy użyciu następującego kodu:
 
 Zmiany są podobne do tych, które zostały wprowadzone w modelu tworzenia strony. W poprzednim kodzie program `PopulateDepartmentsDropDownList` przekazuje identyfikator działu, który wybiera ten dział z listy rozwijanej.
 
-### <a name="update-the-course-edit-razor-page"></a>Aktualizowanie strony edytowania kursu Razor
+### <a name="update-the-course-edit-no-locrazor-page"></a>Aktualizowanie strony edytowania kursu Razor
 
 Aktualizowanie *stron/kursów/Edit. cshtml* przy użyciu następującego kodu:
 
@@ -120,7 +122,7 @@ Wprowadź tę samą zmianę w pliku *Pages/kurss/details. cshtml. cs* :
 
 [!code-csharp[](intro/samples/cu30/Pages/Courses/Details.cshtml.cs?highlight=28)]
 
-### <a name="update-the-course-razor-pages"></a>Aktualizowanie stron kursu Razor
+### <a name="update-the-course-no-locrazor-pages"></a>Aktualizowanie stron kursu Razor
 
 Zaktualizuj *strony/kursy/Delete. cshtml* przy użyciu następującego kodu:
 
@@ -197,7 +199,7 @@ Powyższy kod ma następujące działanie:
 * Wywołuje `UpdateInstructorCourses` program `OnPostAsync` , aby zastosować informacje z pól wyboru do edytowanej jednostki instruktora.
 * Wywołania `PopulateAssignedCourseData` i `UpdateInstructorCourses` w `OnPostAsync` przypadku `TryUpdateModel` niepowodzenia. Te wywołania metody powodują przywrócenie przypisanych danych kursu wprowadzonych na stronie, gdy jest on ponownie wyświetlany z komunikatem o błędzie.
 
-### <a name="update-the-instructor-edit-razor-page"></a>Aktualizowanie strony edytowania instruktora Razor
+### <a name="update-the-instructor-edit-no-locrazor-page"></a>Aktualizowanie strony edytowania instruktora Razor
 
 Aktualizowanie *stron/instruktorów/Edit. cshtml* przy użyciu następującego kodu:
 

@@ -5,6 +5,8 @@ description: Dowiedz się, jak ASP.NET Core MVC to rozbudowana platforma służ�
 ms.author: riande
 ms.date: 02/12/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/overview
-ms.openlocfilehash: 68a0b14eb0897f6ff6e24e74b1fe5536bee1adfe
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 64bee1966eff40e9057166adfafbf78d0cc5b6aa
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405851"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021448"
 ---
 # <a name="overview-of-aspnet-core-mvc"></a>Omówienie platformy ASP.NET Core MVC
 
@@ -194,7 +196,7 @@ Użyj generowania linków, aby włączyć obsługę multimediów. Łatwo Włącz
 
 Korzystanie z interfejsów i iniekcja zależności umożliwia odpowiednie rozwiązanie do testowania jednostkowego, a platforma obejmuje funkcje (takie jak TestHost i Dostawca pamięci dla Entity Framework), które umożliwiają szybkie i łatwe testowanie [integracji](xref:test/integration-tests) . Dowiedz się więcej [na temat testowania logiki kontrolera](controllers/testing.md).
 
-### <a name="razor-view-engine"></a>RazorWyświetl aparat
+### <a name="no-locrazor-view-engine"></a>RazorWyświetl aparat
 
 [ASP.NET Core widoki MVC](views/overview.md) wykorzystują [ Razor aparat widoku](views/razor.md) do renderowania widoków. Razorto zwarty, wyraźny i płynny język znaczników szablonów do definiowania widoków przy użyciu osadzonego kodu w języku C#. Razorsłuży do dynamicznego generowania zawartości sieci Web na serwerze. Można wyczyścić kod serwera z zawartością i kodem po stronie klienta.
 

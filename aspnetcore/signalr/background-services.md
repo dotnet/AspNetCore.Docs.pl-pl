@@ -7,6 +7,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/background-services
-ms.openlocfilehash: bf5fff213b2cd7db0b3227922a8c5babba2fc904
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 409ace5e3eaa4ab1de0b9d5f0cbd0e10d9243ea9
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85409088"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022384"
 ---
-# <a name="host-aspnet-core-signalr-in-background-services"></a>ASP.NET Core hosta SignalR w usługach w tle
+# <a name="host-aspnet-core-no-locsignalr-in-background-services"></a>ASP.NET Core hosta SignalR w usługach w tle
 
 Autor [Brady gastera](https://twitter.com/bradygaster)
 
@@ -42,7 +44,7 @@ Ten artykuł zawiera wskazówki dotyczące:
 
 ::: moniker-end
 
-## <a name="enable-signalr-in-startup"></a>Włącz SignalR przy uruchamianiu
+## <a name="enable-no-locsignalr-in-startup"></a>Włącz SignalR przy uruchamianiu
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -90,7 +92,7 @@ Interfejs używany przez silnie typ `ClockHub` jest `IClock` interfejsem.
 
 ::: moniker-end
 
-## <a name="call-a-signalr-hub-from-a-background-service"></a>Wywoływanie SignalR centrum z poziomu usługi w tle
+## <a name="call-a-no-locsignalr-hub-from-a-background-service"></a>Wywoływanie SignalR centrum z poziomu usługi w tle
 
 Podczas uruchamiania, `Worker` Klasa, a `BackgroundService` , jest włączona przy użyciu `AddHostedService` .
 
@@ -113,7 +115,7 @@ Ponieważ SignalR jest również włączona w `Startup` fazie, w którym każde 
 
 Ponieważ `ExecuteAsync` Metoda jest wywoływana iteracyjnie w usłudze w tle, bieżąca data i godzina serwera są wysyłane do podłączonych klientów przy użyciu `ClockHub` .
 
-## <a name="react-to-signalr-events-with-background-services"></a>Reagowanie na SignalR zdarzenia za pomocą usług w tle
+## <a name="react-to-no-locsignalr-events-with-background-services"></a>Reagowanie na SignalR zdarzenia za pomocą usług w tle
 
 Podobnie jak w przypadku aplikacji jednostronicowej korzystającej z klienta języka JavaScript dla programu SignalR lub aplikacji klasycznej platformy .NET, można <xref:signalr/dotnet-client> również użyć funkcji, a `BackgroundService` lub `IHostedService` do łączenia się z SignalR centrami i odpowiadać na zdarzenia.
 

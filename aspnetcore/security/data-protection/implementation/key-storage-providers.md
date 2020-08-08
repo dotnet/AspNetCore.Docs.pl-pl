@@ -5,6 +5,8 @@ description: Informacje o dostawcach magazynu kluczy w ASP.NET Core i sposobach 
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/implementation/key-storage-providers
-ms.openlocfilehash: 1bbea6f16d57d5cc107c95293e2788271bfce601
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: d54e8078180ce978b550963a03c0d4fdc6e9b12e
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408048"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021461"
 ---
 # <a name="key-storage-providers-in-aspnet-core"></a>Dostawcy magazynu kluczy w ASP.NET Core
 
@@ -43,7 +45,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="azure-storage"></a>Azure Storage
 
-Pakiet [Microsoft. AspNetCore. dataprotection. AzureStorage](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.AzureStorage/) umożliwia przechowywanie kluczy ochrony danych w usłudze Azure Blob Storage. Klucze mogą być współużytkowane przez kilka wystąpień aplikacji sieci Web. Aplikacje mogą udostępniać pliki cookie uwierzytelniania lub ochronę CSRF na wielu serwerach.
+Pakiet [Microsoft. AspNetCore. dataprotection. AzureStorage](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.AzureStorage/) umożliwia przechowywanie kluczy ochrony danych w usłudze Azure Blob Storage. Klucze mogą być współużytkowane przez kilka wystąpień aplikacji sieci Web. Aplikacje mogą udostępniać uwierzytelnianie cookie s lub CSRF na wielu serwerach.
 
 Aby skonfigurować dostawcę usługi Azure Blob Storage, wywołaj jedno z przeciążeń [PersistKeysToAzureBlobStorage](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.persistkeystoazureblobstorage) .
 
@@ -78,13 +80,13 @@ Zobacz [więcej szczegółów na temat konfigurowania uwierzytelniania](/azure/k
 
 ::: moniker range=">= aspnetcore-2.2"
 
-Pakiet [Microsoft. AspNetCore. dataprotection. StackExchangeRedis](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.StackExchangeRedis/) umożliwia przechowywanie kluczy ochrony danych w pamięci podręcznej Redis. Klucze mogą być współużytkowane przez kilka wystąpień aplikacji sieci Web. Aplikacje mogą udostępniać pliki cookie uwierzytelniania lub ochronę CSRF na wielu serwerach.
+Pakiet [Microsoft. AspNetCore. dataprotection. StackExchangeRedis](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.StackExchangeRedis/) umożliwia przechowywanie kluczy ochrony danych w pamięci podręcznej Redis. Klucze mogą być współużytkowane przez kilka wystąpień aplikacji sieci Web. Aplikacje mogą udostępniać uwierzytelnianie cookie s lub CSRF na wielu serwerach.
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-2.2"
 
-Pakiet [Microsoft. AspNetCore. dataprotection. Redis](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Redis/) umożliwia przechowywanie kluczy ochrony danych w pamięci podręcznej Redis. Klucze mogą być współużytkowane przez kilka wystąpień aplikacji sieci Web. Aplikacje mogą udostępniać pliki cookie uwierzytelniania lub ochronę CSRF na wielu serwerach.
+Pakiet [Microsoft. AspNetCore. dataprotection. Redis](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Redis/) umożliwia przechowywanie kluczy ochrony danych w pamięci podręcznej Redis. Klucze mogą być współużytkowane przez kilka wystąpień aplikacji sieci Web. Aplikacje mogą udostępniać uwierzytelnianie cookie s lub CSRF na wielu serwerach.
 
 ::: moniker-end
 
@@ -170,7 +172,7 @@ Add-Migration AddDataProtectionKeys -Context MyKeysContext
 Update-Database -Context MyKeysContext
 ```
 
-# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
 
 Wykonaj następujące polecenia w powłoce poleceń:
 

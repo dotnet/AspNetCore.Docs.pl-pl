@@ -5,6 +5,8 @@ description: W tym samouczku pokazano, jak zainstalować i używać narzędzia o
 ms.author: riande
 ms.date: 05/31/2018
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/dotnet-watch
-ms.openlocfilehash: 5648ae9e75b48fa4749ed6bcc01b91559dbd2939
-ms.sourcegitcommit: b0fa7ff0cb158277df61bcd08058a81222c3fe10
+ms.openlocfilehash: f4987e7eef496f3ba4b8f9bb084816be3b17ada7
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/07/2020
-ms.locfileid: "87913768"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022449"
 ---
 # <a name="develop-aspnet-core-apps-using-a-file-watcher"></a>Opracowywanie aplikacji ASP.NET Core przy użyciu obserwatora plików
 
@@ -77,7 +79,7 @@ Przejdź do interfejsu API produktu ( `http://localhost:<port number>/api/math/p
 
 ## <a name="run-net-core-cli-commands-using-dotnet-watch"></a>Uruchamianie poleceń interfejs wiersza polecenia platformy .NET Core przy użyciu`dotnet watch`
 
-Każde [polecenie interfejs wiersza polecenia platformy .NET Core](/dotnet/core/tools#cli-commands) można uruchomić za pomocą polecenia `dotnet watch` . Na przykład:
+Każde [polecenie interfejs wiersza polecenia platformy .NET Core](/dotnet/core/tools#cli-commands) można uruchomić za pomocą polecenia `dotnet watch` . Przykład:
 
 | Polecenie | Polecenie z zegarkiem |
 | ---- | ----- |

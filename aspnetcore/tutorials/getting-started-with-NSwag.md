@@ -6,6 +6,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/get-started-with-nswag
-ms.openlocfilehash: 7c24340af0f0d589d683b0134d186bf9304d91b1
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 8fd42c7d31edd20c2aae7577c5a490b54ab8129c
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403446"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022267"
 ---
 # <a name="get-started-with-nswag-and-aspnet-core"></a>Wprowadzenie do NSwag i ASP.NET Core
 
@@ -60,7 +62,7 @@ Aby zainstalować pakiet NuGet NSwag, należy użyć jednej z następujących me
 * W oknie **konsola Menedżera pakietów** :
   * Przejdź do **wyświetlania**  >  **innych**  >  **konsoli Menedżera pakietów** systemu Windows
   * Przejdź do katalogu, w którym znajduje się plik *TodoApi. csproj*
-  * Wykonaj następujące polecenie:
+  * Uruchom następujące polecenie:
 
     ```powershell
     Install-Package NSwag.AspNetCore
@@ -79,7 +81,7 @@ Aby zainstalować pakiet NuGet NSwag, należy użyć jednej z następujących me
 * Wprowadź ciąg "NSwag. AspNetCore" w polu wyszukiwania
 * Wybierz pakiet "NSwag. AspNetCore" z okienka wyników, a następnie kliknij pozycję **Dodaj pakiet** .
 
-# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
 
 Uruchom następujące polecenie:
 
@@ -118,7 +120,7 @@ Aby skorzystać z możliwości generowania kodu w programie NSwag, należy wybra
 ### <a name="generate-code-with-nswagstudio"></a>Generuj kod przy użyciu NSwagStudio
 
 * Zainstaluj program NSwagStudio, postępując zgodnie z instrukcjami w [repozytorium GitHub NSwagStudio](https://github.com/RicoSuter/NSwag/wiki/NSwagStudio). Na stronie wydanie NSwag można pobrać wersję narzędzia XCOPY, którą można uruchomić bez uprawnień instalacji i administratora.
-* Uruchom NSwagStudio i wprowadź *swagger.jsna* adres URL pliku w polu tekstowym **adres URL specyfikacji struktury Swagger** . Na przykład *http://localhost:44354/swagger/v1/swagger.json* .
+* Uruchom NSwagStudio i wprowadź *swagger.jsna* adres URL pliku w polu tekstowym **adres URL specyfikacji struktury Swagger** . Przykładowy adres URL to *http://localhost:44354/swagger/v1/swagger.json*.
 * Kliknij przycisk **Utwórz kopię lokalną** , aby wygenerować reprezentację JSON specyfikacji struktury Swagger.
 
   ![Utwórz lokalną kopię specyfikacji struktury Swagger](web-api-help-pages-using-swagger/_static/CreateLocalCopy-NSwagStudio.PNG)
@@ -197,7 +199,7 @@ Interfejs użytkownika struktury Swagger wyświetla informacje o wersji:
 
 ![Interfejs użytkownika struktury Swagger z informacjami o wersji](web-api-help-pages-using-swagger/_static/custom-info-nswag.png)
 
-### <a name="xml-comments"></a>komentarze XML
+### <a name="xml-comments"></a>Komentarze XML
 
 Aby włączyć Komentarze XML, wykonaj następujące czynności:
 
@@ -237,7 +239,7 @@ Aby włączyć Komentarze XML, wykonaj następujące czynności:
 
 ::: moniker-end
 
-# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
 
 Ręcznie Dodaj wyróżnione wiersze do pliku *csproj* :
 

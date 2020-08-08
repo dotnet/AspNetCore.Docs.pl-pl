@@ -5,6 +5,8 @@ description: Dowiedz się, jak dodać sprawdzanie oświadczeń pod kątem autory
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/claims
-ms.openlocfilehash: 404e26f0fb5e71dbc22b1c08a2f8caf8461ad7e1
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 639cacbab2688adfe769ef2c6954ea877cf0c66a
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406384"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022358"
 ---
 # <a name="claims-based-authorization-in-aspnet-core"></a>Autoryzacja oparta na oświadczeniach w ASP.NET Core
 
@@ -154,7 +156,7 @@ Jeśli wartość oświadczenia nie jest pojedynczą wartością lub wymagana jes
 
 ## <a name="multiple-policy-evaluation"></a>Obliczanie wielu zasad
 
-W przypadku zastosowania wielu zasad do kontrolera lub akcji wszystkie zasady muszą zostać przekazane przed udzieleniem dostępu. Na przykład:
+W przypadku zastosowania wielu zasad do kontrolera lub akcji wszystkie zasady muszą zostać przekazane przed udzieleniem dostępu. Przykład:
 
 ```csharp
 [Authorize(Policy = "EmployeeOnly")]

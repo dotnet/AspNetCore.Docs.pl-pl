@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/response-compression
-ms.openlocfilehash: 83f5b2da8fdba784131e8d159171b8433b13a091
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 1dd931d0ee654b888814df8a0d0675d32b5c3a20
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406475"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020967"
 ---
 # <a name="response-compression-in-aspnet-core"></a>Kompresja odpowiedzi w ASP.NET Core
 

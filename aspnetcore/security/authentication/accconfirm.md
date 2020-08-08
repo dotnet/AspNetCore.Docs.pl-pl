@@ -5,6 +5,8 @@ description: Dowiedz się, jak utworzyć aplikację ASP.NET Core przy użyciu po
 ms.author: riande
 ms.date: 03/11/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/accconfirm
-ms.openlocfilehash: 1156ddd2921afbfeccaf077ca29d267f8b1e844a
-ms.sourcegitcommit: 3544941682869734ea0113e24e02ed0ec9e1a9ec
+ms.openlocfilehash: 7016c2c1997d961f4b3d3cf513fc1769bd65247b
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/18/2020
-ms.locfileid: "86464556"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021617"
 ---
 # <a name="account-confirmation-and-password-recovery-in-aspnet-core"></a>Potwierdzenie konta i odzyskiwanie hasła w ASP.NET Core
 
@@ -95,7 +97,7 @@ W tym samouczku pokazano, jak dodać powiadomienia e-mail za pośrednictwem usł
 
 Zainstaluj `SendGrid` pakiet NuGet:
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 W konsoli Menedżera pakietów wprowadź następujące polecenie:
 
@@ -235,7 +237,7 @@ Włączenie potwierdzenia konta w witrynie z użytkownikami powoduje zablokowani
 
 [.NET Core 2,2 SDK lub nowszy](https://dotnet.microsoft.com/download/dotnet-core)
 
-## <a name="create-a-web--app-and-scaffold-identity"></a>Tworzenie aplikacji sieci Web i szkieletuIdentity
+## <a name="create-a-web--app-and-scaffold-no-locidentity"></a>Tworzenie aplikacji sieci Web i szkieletuIdentity
 
 Uruchom następujące polecenia, aby utworzyć aplikację sieci Web z uwierzytelnianiem.
 
@@ -313,7 +315,7 @@ W tym samouczku pokazano, jak dodać powiadomienia e-mail za pośrednictwem usł
 
 Zainstaluj `SendGrid` pakiet NuGet:
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 W konsoli Menedżera pakietów wprowadź następujące polecenie:
 

@@ -6,6 +6,8 @@ ms.author: riande
 ms.date: 03/26/2020
 ms.custom: mvc, seodec18
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/add-user-data
-ms.openlocfilehash: e5c23cc49a52b8772a43853e9e953dd416d69f69
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: d65974e9ff8e2f5be52ab79b063ed9d2dca557ea
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408737"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020863"
 ---
-# <a name="add-download-and-delete-custom-user-data-to-identity-in-an-aspnet-core-project"></a>Dodawanie, pobieranie i usuwanie niestandardowych danych użytkownika do programu Identity w projekcie ASP.NET Core
+# <a name="add-download-and-delete-custom-user-data-to-no-locidentity-in-an-aspnet-core-project"></a>Dodawanie, pobieranie i usuwanie niestandardowych danych użytkownika do programu Identity w projekcie ASP.NET Core
 
 Autor: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -48,7 +50,7 @@ Przykład projektu jest tworzony na podstawie Razor strony aplikacji sieci Web, 
 
 ::: moniker-end
 
-## <a name="create-a-razor-web-app"></a>Tworzenie Razor aplikacji sieci Web
+## <a name="create-a-no-locrazor-web-app"></a>Tworzenie Razor aplikacji sieci Web
 
 # <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
@@ -73,7 +75,7 @@ Przykład projektu jest tworzony na podstawie Razor strony aplikacji sieci Web, 
 ::: moniker-end
 
 
-# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
 
 ```dotnetcli
 dotnet new webapp -o WebApp1
@@ -81,7 +83,7 @@ dotnet new webapp -o WebApp1
 
 ---
 
-## <a name="run-the-identity-scaffolder"></a>Uruchamianie Identity szkieletu
+## <a name="run-the-no-locidentity-scaffolder"></a>Uruchamianie Identity szkieletu
 
 # <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
@@ -96,7 +98,7 @@ dotnet new webapp -o WebApp1
   * Wybierz **+** przycisk, aby utworzyć nową **klasę użytkownika**. Zaakceptuj typ (**WebApp1User** , jeśli projekt ma nazwę **WebApp1**) > **Dodaj**.
 * Wybierz pozycję **Dodaj**.
 
-# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
 
 Jeśli jeszcze nie zainstalowano szkieletu ASP.NET Core, zainstaluj go teraz:
 
@@ -137,7 +139,7 @@ Postępuj zgodnie z instrukcjami w sekcji [migracje, UseAuthentication i układ]
   * Wybierz przycisk **Pobierz** i zbadaj *PersonalData.js* pliku.
   * Przetestuj przycisk **Usuń** , który spowoduje usunięcie zalogowanego użytkownika.
 
-## <a name="add-custom-user-data-to-the-identity-db"></a>Dodawanie niestandardowych danych użytkownika do Identity bazy danych
+## <a name="add-custom-user-data-to-the-no-locidentity-db"></a>Dodawanie niestandardowych danych użytkownika do Identity bazy danych
 
 Zaktualizuj `IdentityUser` klasę pochodną o właściwościach niestandardowych. Jeśli nazwa projektu WebApp1, plik ma nazwę *obszary/ Identity /Data/WebApp1User.cs*. Zaktualizuj plik przy użyciu następującego kodu:
 
@@ -220,7 +222,7 @@ Add-Migration CustomUserData
 Update-Database
 ```
 
-# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
 
 ```dotnetcli
 dotnet ef migrations add CustomUserData
@@ -237,7 +239,7 @@ Przetestuj aplikację:
 * Wyświetlanie niestandardowych danych użytkownika na `/Identity/Account/Manage` stronie.
 * Pobierz i Przejrzyj dane osobowe użytkowników ze `/Identity/Account/Manage/PersonalData` strony.
 
-## <a name="add-claims-to-identity-using-iuserclaimsprincipalfactoryapplicationuser"></a>Dodawanie oświadczeń do Identity korzystania z IUserClaimsPrincipalFactory<ApplicationUser>
+## <a name="add-claims-to-no-locidentity-using-iuserclaimsprincipalfactoryapplicationuser"></a>Dodawanie oświadczeń do Identity korzystania z IUserClaimsPrincipalFactory<ApplicationUser>
 
 > [!NOTE]
 > Ta sekcja nie jest rozszerzeniem poprzedniego samouczka. Aby zastosować następujące kroki do aplikacji skompilowanej przy użyciu samouczka, zobacz [ten problem](https://github.com/dotnet/AspNetCore.Docs/issues/18797)w usłudze GitHub.

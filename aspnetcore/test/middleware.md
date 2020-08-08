@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 5/12/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: test/middleware
-ms.openlocfilehash: f4ed16b136da37c093a72a8866301a188a8518a2
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 235010c95cdd0c7ce1368b4abd91e75d81ae094b
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406488"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021903"
 ---
 # <a name="test-aspnet-core-middleware"></a>Testowanie ASP.NET Core oprogramowania pośredniczącego
 

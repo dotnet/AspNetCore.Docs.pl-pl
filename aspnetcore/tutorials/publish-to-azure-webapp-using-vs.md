@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/10/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/publish-to-azure-webapp-using-vs
-ms.openlocfilehash: d805d57fd1e2d83d0148900993e4bf6108a13028
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: aa078fa30217d737d579b97d4de9704b5d1dd8a3
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408412"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022085"
 ---
 # <a name="publish-an-aspnet-core-app-to-azure-with-visual-studio"></a>Publikowanie aplikacji ASP.NET Core na platformie Azure przy użyciu programu Visual Studio
 
@@ -39,7 +41,7 @@ Aby rozwiązać problem z wdrożeniem App Service, zobacz <xref:test/troubleshoo
 
 * Otwórz [bezpłatne konto platformy Azure](https://azure.microsoft.com/free/dotnet/) , jeśli go nie masz. 
 
-## <a name="create-a-web-app"></a>Tworzenie aplikacji internetowej
+## <a name="create-a-web-app"></a>tworzenie aplikacji internetowej
 
 Na stronie startowej programu Visual Studio wybierz pozycję **plik > nowy > projekt...**
 
@@ -68,7 +70,7 @@ Zostanie wyświetlone okno dialogowe **Zmienianie uwierzytelniania** .
 
 Program Visual Studio tworzy rozwiązanie.
 
-## <a name="run-the-app"></a>Uruchomienie aplikacji
+## <a name="run-the-app"></a>Uruchamianie aplikacji
 
 * Naciśnij klawisze CTRL + F5, aby uruchomić projekt.
 * Przetestuj łącze **prywatność** .
@@ -115,7 +117,7 @@ W oknie dialogowym **Publikowanie** wybierz pozycję **Utwórz nowy Azure App Se
 Zostanie wyświetlone okno dialogowe **tworzenie App Service** :
 
 * Pola **Nazwa aplikacji**, **Grupa zasobów**i zapis **planu App Service** są wypełniane. Te nazwy można zachować lub zmienić.
-* Wybierz przycisk **Utwórz**.
+* Wybierz pozycję **Utwórz**.
 
 ![Okno dialogowe Tworzenie usługi App Service](publish-to-azure-webapp-using-vs/_static/newrg1.png)
 
@@ -145,7 +147,7 @@ Zostanie wyświetlona **Azure SQL Database tworzenia** :
 
 * Pola **Nazwa bazy danych**, **Grupa zasobów**, **serwer bazy danych** i zapis **planu App Service** są wypełniane. Te wartości można zachować lub zmienić.
 * Wprowadź **nazwę użytkownika** i **hasło administratora** bazy danych dla wybranego **serwera bazy danych** (Zwróć uwagę na używane konto musi mieć uprawnienia niezbędne do utworzenia nowej bazy danych Azure SQL Database).
-* Wybierz przycisk **Utwórz**.
+* Wybierz pozycję **Utwórz**.
 
 ![Nowe okno dialogowe Azure SQL Database](publish-to-azure-webapp-using-vs/_static/sql_create.png)
 

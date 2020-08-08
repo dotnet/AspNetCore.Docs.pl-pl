@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/03/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/file-uploads
-ms.openlocfilehash: 720da8a8fe22f0e1911fd554c094661b4465a335
-ms.sourcegitcommit: d9ae1f352d372a20534b57e23646c1a1d9171af1
+ms.openlocfilehash: a11e6325143b9db57d6fbd1cd67478dc1dd6122d
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/21/2020
-ms.locfileid: "86568837"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021253"
 ---
 # <a name="upload-files-in-aspnet-core"></a>Przekaż pliki w ASP.NET Core
 
@@ -32,7 +34,7 @@ ASP.NET Core obsługuje przekazywanie co najmniej jednego pliku przy użyciu pow
 
 [Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/) ([jak pobrać](xref:index#how-to-download-a-sample))
 
-## <a name="security-considerations"></a>Zagadnienia związane z zabezpieczeniami
+## <a name="security-considerations"></a>Zagadnienia dotyczące bezpieczeństwa
 
 Należy zachować ostrożność, zapewniając użytkownikom możliwość przekazywania plików na serwer. Osoby atakujące mogą próbować:
 
@@ -191,7 +193,7 @@ Poniższy przykład jest analogiczny do poprzedniego przykładu, z wyjątkiem te
 Aby wykonać formularz POST w języku JavaScript dla klientów, którzy [nie obsługują interfejsu API pobierania](https://caniuse.com/#feat=fetch), należy użyć jednej z następujących metod:
 
 * Użyj wypełniania pobierania (na przykład [window. Fetch Fill (GitHub/Fetch)](https://github.com/github/fetch)).
-* Użyj witryny `XMLHttpRequest`. Na przykład:
+* Użyj polecenia `XMLHttpRequest`. Przykład:
 
   ```javascript
   <script>
@@ -236,8 +238,8 @@ Do poszczególnych plików przekazanych do serwera można uzyskać dostęp za po
 >
 > Przykłady udostępnione w ten sposób nie uwzględniają zagadnień związanych z bezpieczeństwem. Dodatkowe informacje są dostarczane przez następujące sekcje i [Przykładowa aplikacja](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/):
 >
-> * [Zagadnienia związane z zabezpieczeniami](#security-considerations)
-> * [Walidacja](#validation)
+> * [Zagadnienia dotyczące bezpieczeństwa](#security-considerations)
+> * [Zatwierdzenia](#validation)
 
 Podczas przekazywania plików przy użyciu powiązania modelu i <xref:Microsoft.AspNetCore.Http.IFormFile> , Metoda akcji może przyjmować:
 
@@ -407,14 +409,14 @@ Poprzedni przykład przypomina scenariusz przedstawiony w przykładowej aplikacj
 >
 > Podane przykłady nie uwzględniają zagadnień związanych z zabezpieczeniami. Dodatkowe informacje są dostarczane przez następujące sekcje i [Przykładowa aplikacja](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/):
 >
-> * [Zagadnienia związane z zabezpieczeniami](#security-considerations)
-> * [Walidacja](#validation)
+> * [Zagadnienia dotyczące bezpieczeństwa](#security-considerations)
+> * [Zatwierdzenia](#validation)
 
 ### <a name="upload-large-files-with-streaming"></a>Przekazywanie dużych plików strumieniowo
 
 Poniższy przykład ilustruje sposób użycia języka JavaScript do przesyłania strumieniowego pliku do akcji kontrolera. Token antysfałszowany pliku jest generowany przy użyciu niestandardowego atrybutu filtru i przekazywać do nagłówków HTTP klienta zamiast w treści żądania. Ponieważ metoda akcji przetwarza przekazane dane bezpośrednio, powiązanie modelu formularza jest wyłączone przez inny filtr niestandardowy. W ramach akcji zawartość formularza jest odczytywana przy użyciu `MultipartReader` , który odczytuje każdą osobę `MultipartSection` , przetwarza plik lub zapisuje zawartość odpowiednio do potrzeb. Po odczytaniu sekcji wieloczęściowej akcja wykonuje własne powiązanie modelu.
 
-Początkowa odpowiedź na stronę ładuje formularz i zapisuje token antysfałszowany w pliku cookie (za pośrednictwem `GenerateAntiforgeryTokenCookieAttribute` atrybutu). Ten atrybut używa wbudowanej [obsługi przed fałszowaniem](xref:security/anti-request-forgery) ASP.NET Core, aby ustawić plik cookie z tokenem żądania:
+Początkowa odpowiedź na stronę ładuje formularz i zapisuje token antysfałszowany w cookie (za pośrednictwem `GenerateAntiforgeryTokenCookieAttribute` atrybutu). Ten atrybut używa wbudowanej [obsługi przed fałszowaniem](xref:security/anti-request-forgery) ASP.NET Core, aby ustawić cookie token żądania:
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Filters/Antiforgery.cs?name=snippet_GenerateAntiforgeryTokenCookieAttribute)]
 
@@ -442,7 +444,7 @@ Pełna `StreamingController.UploadPhysical` Metoda przesyłania strumieniowego d
 
 W przykładowej aplikacji sprawdzanie poprawności jest obsługiwane przez program `FileHelpers.ProcessStreamedFile` .
 
-## <a name="validation"></a>Walidacja
+## <a name="validation"></a>Weryfikacja
 
 Klasa przykładowej aplikacji `FileHelpers` pokazuje kilka testów dla buforowanych <xref:Microsoft.AspNetCore.Http.IFormFile> i przesyłanych strumieniowo przekazywania plików. Aby przetwarzać <xref:Microsoft.AspNetCore.Http.IFormFile> buforowane operacje przekazywania plików w aplikacji przykładowej, zobacz `ProcessFormFile` metodę w pliku *Utilities/FileHelpers. cs* . Aby można było przetwarzać pliki przesyłane strumieniowo, zobacz `ProcessStreamedFile` metodę w tym samym pliku.
 
@@ -464,7 +466,7 @@ Skanowanie plików wymaga użycia zasobów serwera w scenariuszach o dużych ilo
 
 ### <a name="file-extension-validation"></a>Weryfikacja rozszerzenia pliku
 
-Rozszerzenie przekazanego pliku powinno być sprawdzane względem listy dozwolonych rozszerzeń. Na przykład:
+Rozszerzenie przekazanego pliku powinno być sprawdzane względem listy dozwolonych rozszerzeń. Przykład:
 
 ```csharp
 private string[] permittedExtensions = { ".txt", ".pdf" };
@@ -759,7 +761,7 @@ ASP.NET Core obsługuje przekazywanie co najmniej jednego pliku przy użyciu pow
 
 [Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/) ([jak pobrać](xref:index#how-to-download-a-sample))
 
-## <a name="security-considerations"></a>Zagadnienia związane z zabezpieczeniami
+## <a name="security-considerations"></a>Zagadnienia dotyczące bezpieczeństwa
 
 Należy zachować ostrożność, zapewniając użytkownikom możliwość przekazywania plików na serwer. Osoby atakujące mogą próbować:
 
@@ -918,7 +920,7 @@ Poniższy przykład jest analogiczny do poprzedniego przykładu, z wyjątkiem te
 Aby wykonać formularz POST w języku JavaScript dla klientów, którzy [nie obsługują interfejsu API pobierania](https://caniuse.com/#feat=fetch), należy użyć jednej z następujących metod:
 
 * Użyj wypełniania pobierania (na przykład [window. Fetch Fill (GitHub/Fetch)](https://github.com/github/fetch)).
-* Użyj witryny `XMLHttpRequest`. Na przykład:
+* Użyj polecenia `XMLHttpRequest`. Przykład:
 
   ```javascript
   <script>
@@ -963,8 +965,8 @@ Do poszczególnych plików przekazanych do serwera można uzyskać dostęp za po
 >
 > Przykłady udostępnione w ten sposób nie uwzględniają zagadnień związanych z bezpieczeństwem. Dodatkowe informacje są dostarczane przez następujące sekcje i [Przykładowa aplikacja](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/):
 >
-> * [Zagadnienia związane z zabezpieczeniami](#security-considerations)
-> * [Walidacja](#validation)
+> * [Zagadnienia dotyczące bezpieczeństwa](#security-considerations)
+> * [Zatwierdzenia](#validation)
 
 Podczas przekazywania plików przy użyciu powiązania modelu i <xref:Microsoft.AspNetCore.Http.IFormFile> , Metoda akcji może przyjmować:
 
@@ -1134,14 +1136,14 @@ Poprzedni przykład przypomina scenariusz przedstawiony w przykładowej aplikacj
 >
 > Podane przykłady nie uwzględniają zagadnień związanych z zabezpieczeniami. Dodatkowe informacje są dostarczane przez następujące sekcje i [Przykładowa aplikacja](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/):
 >
-> * [Zagadnienia związane z zabezpieczeniami](#security-considerations)
-> * [Walidacja](#validation)
+> * [Zagadnienia dotyczące bezpieczeństwa](#security-considerations)
+> * [Zatwierdzenia](#validation)
 
 ### <a name="upload-large-files-with-streaming"></a>Przekazywanie dużych plików strumieniowo
 
 Poniższy przykład ilustruje sposób użycia języka JavaScript do przesyłania strumieniowego pliku do akcji kontrolera. Token antysfałszowany pliku jest generowany przy użyciu niestandardowego atrybutu filtru i przekazywać do nagłówków HTTP klienta zamiast w treści żądania. Ponieważ metoda akcji przetwarza przekazane dane bezpośrednio, powiązanie modelu formularza jest wyłączone przez inny filtr niestandardowy. W ramach akcji zawartość formularza jest odczytywana przy użyciu `MultipartReader` , który odczytuje każdą osobę `MultipartSection` , przetwarza plik lub zapisuje zawartość odpowiednio do potrzeb. Po odczytaniu sekcji wieloczęściowej akcja wykonuje własne powiązanie modelu.
 
-Początkowa odpowiedź na stronę ładuje formularz i zapisuje token antysfałszowany w pliku cookie (za pośrednictwem `GenerateAntiforgeryTokenCookieAttribute` atrybutu). Ten atrybut używa wbudowanej [obsługi przed fałszowaniem](xref:security/anti-request-forgery) ASP.NET Core, aby ustawić plik cookie z tokenem żądania:
+Początkowa odpowiedź na stronę ładuje formularz i zapisuje token antysfałszowany w cookie (za pośrednictwem `GenerateAntiforgeryTokenCookieAttribute` atrybutu). Ten atrybut używa wbudowanej [obsługi przed fałszowaniem](xref:security/anti-request-forgery) ASP.NET Core, aby ustawić cookie token żądania:
 
 [!code-csharp[](file-uploads/samples/2.x/SampleApp/Filters/Antiforgery.cs?name=snippet_GenerateAntiforgeryTokenCookieAttribute)]
 
@@ -1169,7 +1171,7 @@ Pełna `StreamingController.UploadPhysical` Metoda przesyłania strumieniowego d
 
 W przykładowej aplikacji sprawdzanie poprawności jest obsługiwane przez program `FileHelpers.ProcessStreamedFile` .
 
-## <a name="validation"></a>Walidacja
+## <a name="validation"></a>Weryfikacja
 
 Klasa przykładowej aplikacji `FileHelpers` pokazuje kilka testów dla buforowanych <xref:Microsoft.AspNetCore.Http.IFormFile> i przesyłanych strumieniowo przekazywania plików. Aby przetwarzać <xref:Microsoft.AspNetCore.Http.IFormFile> buforowane operacje przekazywania plików w aplikacji przykładowej, zobacz `ProcessFormFile` metodę w pliku *Utilities/FileHelpers. cs* . Aby można było przetwarzać pliki przesyłane strumieniowo, zobacz `ProcessStreamedFile` metodę w tym samym pliku.
 
@@ -1191,7 +1193,7 @@ Skanowanie plików wymaga użycia zasobów serwera w scenariuszach o dużych ilo
 
 ### <a name="file-extension-validation"></a>Weryfikacja rozszerzenia pliku
 
-Rozszerzenie przekazanego pliku powinno być sprawdzane względem listy dozwolonych rozszerzeń. Na przykład:
+Rozszerzenie przekazanego pliku powinno być sprawdzane względem listy dozwolonych rozszerzeń. Przykład:
 
 ```csharp
 private string[] permittedExtensions = { ".txt", ".pdf" };

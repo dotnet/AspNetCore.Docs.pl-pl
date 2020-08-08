@@ -7,6 +7,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 01/17/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/scale
-ms.openlocfilehash: cfa1a4c67649e1816f510a33cc53e559c4a59153
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 2d128d54dc9b1189124563e45d72d74b19704ab1
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408685"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022527"
 ---
-# <a name="aspnet-core-signalr-hosting-and-scaling"></a>ASP.NET Core SignalR hosting i skalowanie
+# <a name="aspnet-core-no-locsignalr-hosting-and-scaling"></a>ASP.NET Core SignalR hosting i skalowanie
 
 Autorzy [Andrew Stanton-pielęgniarki](https://twitter.com/anurse), [Brady Gastera](https://twitter.com/bradygaster)i [Tomasz Dykstra](https://github.com/tdykstra),
 
@@ -48,7 +50,7 @@ Połączenia trwałe zużywają także dodatkową pamięć, aby śledzić każde
 
 Duże wykorzystanie zasobów związanych z połączeniami przez SignalR program może mieć wpływ na inne aplikacje sieci Web, które są hostowane na tym samym serwerze. W przypadku SignalR otwarcia i przechowywania ostatnich dostępnych połączeń TCP inne aplikacje sieci Web na tym samym serwerze również nie będą miały dostępnych połączeń.
 
-Jeśli na serwerze wykorzystano połączenia, zobaczysz losowe błędy gniazda i błędy resetowania połączenia. Na przykład:
+Jeśli na serwerze wykorzystano połączenia, zobaczysz losowe błędy gniazda i błędy resetowania połączenia. Przykład:
 
 ```
 An attempt was made to access a socket in a way forbidden by its access permissions...
@@ -62,15 +64,15 @@ Aby zapobiec SignalR wykorzystaniu przez zasoby błędów w SignalR aplikacji, P
 
 Aplikacja, która korzysta SignalR z programu, musi śledzić wszystkie połączenia, które tworzą problemy dla farmy serwerów. Dodaj serwer i pobiera nowe połączenia, o których nie wie inne serwery. Na przykład SignalR na każdym serwerze na poniższym diagramie nie można wypróbować połączeń na innych serwerach. Gdy SignalR na jednym z serwerów chce wysłać komunikat do wszystkich klientów, komunikat zostanie przekierowany do klientów podłączonych do tego serwera.
 
-![Skalowanie SignalR bez planu](scale/_static/scale-no-backplane.png)
+![Skalowanie::: No-Loc (sygnalizujący)::: bez planu](scale/_static/scale-no-backplane.png)
 
 Opcjami rozwiązywania tego problemu jest [ SignalR usługa platformy Azure](#azure-signalr-service) i [Redis plan](#redis-backplane).
 
-## <a name="azure-signalr-service"></a>Usługa platformy Azure SignalR
+## <a name="azure-no-locsignalr-service"></a>Usługa platformy Azure SignalR
 
 Usługa platformy Azure SignalR to serwer proxy, a nie plan. Za każdym razem, gdy klient inicjuje połączenie z serwerem, klient zostaje przekierowany do programu w celu nawiązania połączenia z usługą. Ten proces przedstawiono na poniższym diagramie:
 
-![Nawiązywanie połączenia z usługą platformy Azure SignalR](scale/_static/azure-signalr-service-one-connection.png)
+![Nawiązywanie połączenia z platformą Azure::: No-Loc (Sygnalizującer)::: Service](scale/_static/azure-signalr-service-one-connection.png)
 
 Wynika to z tego, że usługa zarządza wszystkimi połączeniami klientów, natomiast każdy serwer potrzebuje tylko małej stałej liczby połączeń z usługą, jak pokazano na poniższym diagramie:
 
@@ -126,14 +128,14 @@ proxy_set_header Connection $connection_upgrade;
 
 Aby uzyskać więcej informacji, zobacz [Nginx jako proxy protokołu WebSocket](https://www.nginx.com/blog/websocket-nginx/).
 
-## <a name="third-party-signalr-backplane-providers"></a>Dostawcy rozwiązań innych firm SignalR
+## <a name="third-party-no-locsignalr-backplane-providers"></a>Dostawcy rozwiązań innych firm SignalR
 
 * [NCache](https://www.alachisoft.com/ncache/asp-net-core-signalr.html)
 * [Orleans](https://github.com/OrleansContrib/SignalR.Orleans)
 
 ## <a name="next-steps"></a>Następne kroki
 
-Więcej informacji zawierają następujące zasoby:
+Więcej informacji można znaleźć w następujących zasobach:
 
 * [SignalRDokumentacja usługi platformy Azure](/azure/azure-signalr/signalr-overview)
 * [Konfigurowanie planu Redis](xref:signalr/redis-backplane)

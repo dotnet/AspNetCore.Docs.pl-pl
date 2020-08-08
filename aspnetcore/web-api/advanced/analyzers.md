@@ -7,6 +7,8 @@ ms.author: prkrishn
 ms.custom: mvc
 ms.date: 09/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/advanced/analyzers
-ms.openlocfilehash: 1f44fd65836cc42ffb2303890eefb053b61c4c30
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 571046052dbe131e9cdcf981aaee0921ed8c2ea1
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399468"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021851"
 ---
 # <a name="use-web-api-analyzers"></a>Korzystanie z analizatorów interfejsu API sieci Web
 
@@ -58,7 +60,7 @@ Zainstaluj pakiet NuGet [Microsoft. AspNetCore. MVC. API. analizatory](https://w
 W oknie **konsola Menedżera pakietów** :
   * Przejdź do pozycji **Wyświetl** > **inną** > **konsolę Menedżera pakietów**systemu Windows.
   * Przejdź do katalogu, w którym znajduje się plik *ApiConventions. csproj* .
-  * Wykonaj następujące polecenie:
+  * Uruchom następujące polecenie:
 
     ```powershell
     Install-Package Microsoft.AspNetCore.Mvc.Api.Analyzers
@@ -79,7 +81,7 @@ Uruchom następujące polecenie w **zintegrowanym terminalu**:
 dotnet add ApiConventions.csproj package Microsoft.AspNetCore.Mvc.Api.Analyzers
 ```
 
-### <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
+### <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
 
 Uruchom następujące polecenie:
 
@@ -103,7 +105,7 @@ Poprzednia akcja powoduje udokumentowanie typu zwracanego przez HTTP 200, ale ni
 
 ![Analizator raportuje ostrzeżenie](conventions/_static/Analyzer.gif)
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:web-api/advanced/conventions>
 * <xref:tutorials/web-api-help-pages-using-swagger>

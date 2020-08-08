@@ -5,6 +5,8 @@ description: Zapoznaj się ze szczegółami implementacji formatu magazynu klucz
 ms.author: riande
 ms.date: 04/08/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/implementation/key-storage-format
-ms.openlocfilehash: 032b3f9ccea2ae361a8f2fd12538ffb901310247
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 289557e2b282c108e023f6d53fa43dab80a906ae
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408906"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021435"
 ---
 # <a name="key-storage-format-in-aspnet-core"></a>Format magazynu kluczy w ASP.NET Core
 

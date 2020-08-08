@@ -5,6 +5,8 @@ description: Odkryj różne tematy ASP.NET Core dotyczące rozszerzania ochrony 
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/extensibility/index
-ms.openlocfilehash: 5f28e3b23932cf812ef62f6b7a43c083ec20a4d0
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 83b6a9518f6e16c873b83571a069987a2e5c0303
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404239"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021578"
 ---
 # <a name="aspnet-core-data-protection-extensibility-apis"></a>Interfejsy API rozszerzalności ochrony danych ASP.NET Core
 

@@ -5,6 +5,8 @@ description: Dowiedz się, jak rozpocząć pracę z ASP.NET Core MVC.
 ms.author: riande
 ms.date: 10/16/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/start-mvc
-ms.openlocfilehash: d4eb1744b1186704603430584b3da0793f90ee49
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.openlocfilehash: 3df00af8e6bca0dbf2d7871f383dd67b465aa5da
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86213084"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021175"
 ---
 # <a name="get-started-with-aspnet-core-mvc"></a>Wprowadzenie do ASP.NET Core MVC
 
@@ -58,7 +60,7 @@ Na końcu masz aplikację, która może zarządzać i wyświetlać dane filmu.
 
 ---
 
-## <a name="create-a-web-app"></a>Tworzenie aplikacji internetowej
+## <a name="create-a-web-app"></a>tworzenie aplikacji internetowej
 
 # <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
@@ -210,7 +212,7 @@ Na końcu masz aplikację, która może zarządzać i wyświetlać dane filmu.
 [!INCLUDE[](~/includes/net-core-prereqs-mac-2.2.md)]
 
 ---
-## <a name="create-a-web-app"></a>Tworzenie aplikacji internetowej
+## <a name="create-a-web-app"></a>tworzenie aplikacji internetowej
 
 # <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 

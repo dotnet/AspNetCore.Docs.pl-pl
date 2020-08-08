@@ -6,6 +6,8 @@ ms.author: casoper
 ms.custom: mvc
 ms.date: 01/21/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/azure-ad-b2c
-ms.openlocfilehash: 4933203b8bdd8f653268c1df7ff83b8e9423341f
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 78fe4d5dd9e3f64789956e58a4490bef6bdbca1e
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405071"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021708"
 ---
 # <a name="cloud-authentication-with-azure-active-directory-b2c-in-aspnet-core"></a>Uwierzytelnianie w chmurze za pomocą Azure Active Directory B2C w ASP.NET Core
 
@@ -53,15 +55,15 @@ Utwórz dzierżawę Azure Active Directory B2C [, zgodnie z opisem w dokumentacj
 
 W nowo utworzonym dzierżawie Azure AD B2C Zarejestruj swoją aplikację, korzystając [z procedury opisanej w dokumentacji](/azure/active-directory-b2c/tutorial-register-applications#register-a-web-application) w sekcji **Rejestrowanie aplikacji sieci Web** . Zatrzymaj w sekcji **Tworzenie wpisu tajnego klienta aplikacji sieci Web** . Wpis tajny klienta nie jest wymagany w tym samouczku. 
 
-Wprowadź następujące wartości:
+Użyj następujących wartości:
 
 | Ustawienie                       | Wartość                     | Uwagi                                                                                                                                                                                              |
 |-------------------------------|---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Nazwa**                      | *&lt;Nazwa aplikacji&gt;*        | Wprowadź **nazwę** aplikacji opisującą aplikację dla użytkowników.                                                                                                                                 |
-| **Uwzględnij aplikację internetową/internetowy interfejs API** | Tak                       |                                                                                                                                                                                                    |
-| **Zezwalaj na niejawny przepływ**       | Tak                       |                                                                                                                                                                                                    |
+| **Uwzględnij aplikację internetową/internetowy interfejs API** | Yes                       |                                                                                                                                                                                                    |
+| **Zezwalaj na niejawny przepływ**       | Yes                       |                                                                                                                                                                                                    |
 | **Adres URL odpowiedzi**                 | `https://localhost:44300/signin-oidc` | Adresy URL odpowiedzi to punkty końcowe, do których usługa Azure AD B2C zwraca wszelkie tokeny żądane przez aplikację. Program Visual Studio udostępnia adres URL odpowiedzi, który ma być używany. Na razie wprowadź, `https://localhost:44300/signin-oidc` Aby zakończyć formularz. |
-| **Identyfikator URI identyfikatora aplikacji**                | Pozostaw puste               | Nie jest to wymagane w tym samouczku.                                                                                                                                                                    |
+| **Identyfikator URI identyfikatora aplikacji**                | Pozostaw puste.               | Nie jest to wymagane w tym samouczku.                                                                                                                                                                    |
 | **Dołącz klienta natywnego**     | Nie                        |                                                                                                                                                                                                    |
 
 > [!WARNING]
@@ -114,7 +116,7 @@ Wykonaj kroki opisane w dokumentacji Azure AD B2C, aby [utworzyć zasady tworzen
 > [!WARNING]
 > Upewnij się, że nazwy zasad są dokładnie zgodnie z opisem w dokumentacji, ponieważ te zasady były używane w oknie dialogowym **Zmienianie uwierzytelniania** w programie Visual Studio. Nazwy zasad można weryfikować w *appsettings.js*.
 
-## <a name="configure-the-underlying-openidconnectoptionsjwtbearercookie-options"></a>Konfigurowanie podstawowych opcji OpenIdConnectOptions/JwtBearer/cookie
+## <a name="configure-the-underlying-openidconnectoptionsjwtbearerno-loccookie-options"></a>Skonfiguruj bazowe OpenIdConnectOptions/JwtBearer/ Cookie Opcje
 
 Aby bezpośrednio skonfigurować podstawowe opcje, użyj odpowiedniej stałej schematu w `Startup.ConfigureServices` :
 
@@ -138,9 +140,9 @@ services.Configure<JwtBearerOptions>(
     });
 ```
 
-## <a name="run-the-app"></a>Uruchomienie aplikacji
+## <a name="run-the-app"></a>Uruchamianie aplikacji
 
-W programie Visual Studio naciśnij klawisz **F5** , aby skompilować i uruchomić aplikację. Po uruchomieniu aplikacji sieci Web wybierz pozycję **Akceptuj** , aby zaakceptować użycie plików cookie (Jeśli zostanie wyświetlony monit), a następnie wybierz pozycję **Zaloguj się**.
+W programie Visual Studio naciśnij klawisz **F5** , aby skompilować i uruchomić aplikację. Po uruchomieniu aplikacji sieci Web wybierz pozycję **Akceptuj** , aby zaakceptować użycie cookie s (Jeśli zostanie wyświetlony monit), a następnie wybierz pozycję **Zaloguj się**.
 
 ![Zaloguj się do aplikacji](./azure-ad-b2c/_static/signin.png)
 

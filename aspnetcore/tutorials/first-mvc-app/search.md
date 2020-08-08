@@ -5,6 +5,8 @@ description: Część 7 serii samouczków na ASP.NET Core MVC.
 ms.author: riande
 ms.date: 12/13/2018
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/search
-ms.openlocfilehash: 65bf5e6b022699268f9e7e5677ea8632f1a489c7
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.openlocfilehash: 8df331ec6a6170255f357937adb8fbb6ccb59aaa
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86213136"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021318"
 ---
 # <a name="part-7-add-search-to-an-aspnet-core-mvc-app"></a>Część 7, Dodawanie wyszukiwania do aplikacji ASP.NET Core MVC
 

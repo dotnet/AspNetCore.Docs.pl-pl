@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/12/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/razor-pages-authorization
-ms.openlocfilehash: 0f4022e46993c6a957d3d0c133b3db56fa650edc
-ms.sourcegitcommit: d9ae1f352d372a20534b57e23646c1a1d9171af1
+ms.openlocfilehash: 5e0c76ea6c6b4af8e24693b1bfe8ac28bf2ce3a9
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/21/2020
-ms.locfileid: "86568824"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022280"
 ---
-# <a name="razor-pages-authorization-conventions-in-aspnet-core"></a>RazorKonwencje autoryzacji stron w ASP.NET Core
+# <a name="no-locrazor-pages-authorization-conventions-in-aspnet-core"></a>RazorKonwencje autoryzacji stron w ASP.NET Core
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -30,7 +32,7 @@ Jednym ze sposobów kontroli dostępu w Razor aplikacji stron jest korzystanie z
 
 [Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/razor-pages-authorization/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
 
-Przykładowa aplikacja używa [uwierzytelniania plików cookie bez Identity ASP.NET Core ](xref:security/authentication/cookie). Koncepcje i Przykłady przedstawione w tym temacie dotyczą również aplikacji korzystających z ASP.NET Core Identity . Aby użyć ASP.NET Core Identity , postępuj zgodnie ze wskazówkami w temacie <xref:security/authentication/identity> .
+Przykładowa aplikacja używa [ cookie uwierzytelniania bez ASP.NET Core Identity ](xref:security/authentication/cookie). Koncepcje i Przykłady przedstawione w tym temacie dotyczą również aplikacji korzystających z ASP.NET Core Identity . Aby użyć ASP.NET Core Identity , postępuj zgodnie ze wskazówkami w temacie <xref:security/authentication/identity> .
 
 ## <a name="require-authorization-to-access-a-page"></a>Wymagaj autoryzacji dostępu do strony
 
@@ -142,7 +144,7 @@ Jednym ze sposobów kontroli dostępu w Razor aplikacji stron jest korzystanie z
 
 [Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/razor-pages-authorization/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
 
-Przykładowa aplikacja używa [uwierzytelniania plików cookie bez Identity ASP.NET Core ](xref:security/authentication/cookie). Koncepcje i Przykłady przedstawione w tym temacie dotyczą również aplikacji korzystających z ASP.NET Core Identity . Aby użyć ASP.NET Core Identity , postępuj zgodnie ze wskazówkami w temacie <xref:security/authentication/identity> .
+Przykładowa aplikacja używa [ cookie uwierzytelniania bez ASP.NET Core Identity ](xref:security/authentication/cookie). Koncepcje i Przykłady przedstawione w tym temacie dotyczą również aplikacji korzystających z ASP.NET Core Identity . Aby użyć ASP.NET Core Identity , postępuj zgodnie ze wskazówkami w temacie <xref:security/authentication/identity> .
 
 ## <a name="require-authorization-to-access-a-page"></a>Wymagaj autoryzacji dostępu do strony
 

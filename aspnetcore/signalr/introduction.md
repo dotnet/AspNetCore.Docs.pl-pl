@@ -7,6 +7,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/27/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,16 +17,16 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/introduction
-ms.openlocfilehash: 816ecfc5d23e8e1d2901a8c35c657cc968fa95df
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 6f3cec83c9af5ec6e820db4a15061eddac613f36
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404954"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022176"
 ---
-# <a name="introduction-to-aspnet-core-signalr"></a>Wprowadzenie do ASP.NET CoreSignalR
+# <a name="introduction-to-aspnet-core-no-locsignalr"></a>Wprowadzenie do ASP.NET CoreSignalR
 
-## <a name="what-is-signalr"></a>Co to jest SignalR ?
+## <a name="what-is-no-locsignalr"></a>Co to jest SignalR ?
 
 ASP.NET Core SignalR to Biblioteka open source, która upraszcza Dodawanie funkcji sieci Web w czasie rzeczywistym do aplikacji. Funkcja sieci Web w czasie rzeczywistym umożliwia serwerowi natychmiastowe wypychanie zawartości do klientów.
 

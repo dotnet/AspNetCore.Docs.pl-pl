@@ -5,6 +5,8 @@ description: Więcej informacji na temat skryptów między lokacjami (XSS) i tec
 ms.author: riande
 ms.date: 10/02/2018
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,18 +15,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/cross-site-scripting
-ms.openlocfilehash: a94fe1612c023468238f09a91ddb0346b65d52ba
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 24fab313c3af30cfd4143ba29a33ba25bfcdf9a9
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408022"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021812"
 ---
 # <a name="prevent-cross-site-scripting-xss-in-aspnet-core"></a>Zapobiegaj skryptom między lokacjami (XSS) w ASP.NET Core
 
 Autor: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-Skrypt między lokacjami (XSS) stanowi lukę w zabezpieczeniach, która umożliwia atakującemu umieszczenie skryptów po stronie klienta (zazwyczaj JavaScript) na stronach sieci Web. Gdy inni użytkownicy ładują strony, których dotyczy skrypt osoby atakującej, umożliwi atakującemu kradzież plików cookie i tokenów sesji, zmianę zawartości strony sieci Web za pomocą manipulowania DOM lub przekierowanie przeglądarki na inną stronę. Luki w zabezpieczeniach XSS są zwykle wykonywane, gdy aplikacja pobiera dane wejściowe użytkownika i wyprowadza ją na stronę bez sprawdzania poprawności, kodowania lub ucieczki.
+Skrypt między lokacjami (XSS) stanowi lukę w zabezpieczeniach, która umożliwia atakującemu umieszczenie skryptów po stronie klienta (zazwyczaj JavaScript) na stronach sieci Web. Gdy inni użytkownicy ładują strony, których dotyczy skrypt osoby atakującej, co umożliwi atakującemu kradzież cookie tokenów s i sesji, należy zmienić zawartość strony sieci Web za pomocą manipulowania dom lub przekierować przeglądarkę na inną stronę. Luki w zabezpieczeniach XSS są zwykle wykonywane, gdy aplikacja pobiera dane wejściowe użytkownika i wyprowadza ją na stronę bez sprawdzania poprawności, kodowania lub ucieczki.
 
 ## <a name="protecting-your-application-against-xss"></a>Ochrona aplikacji przed XSS
 
@@ -40,7 +42,7 @@ Na poziomie podstawowym ataki polegają na zalewaniu aplikacji do wstawienia `<s
 
 5. Przed umieszczeniem niezaufanych danych w ciągu zapytania adresu URL upewnij się, że adres URL został zakodowany.
 
-## <a name="html-encoding-using-razor"></a>Kodowanie HTML przy użyciuRazor
+## <a name="html-encoding-using-no-locrazor"></a>Kodowanie HTML przy użyciuRazor
 
 RazorAparat używany w MVC automatycznie koduje wszystkie dane wyjściowe pochodzące ze zmiennych, chyba że naprawdę nie zadziała to w ten sposób. Używa reguł kodowania atrybutu języka HTML za każdym razem, gdy używasz *@* dyrektywy. Ponieważ kodowanie atrybutu HTML jest nadzbiorem kodowania HTML, oznacza to, że nie trzeba niczego zachodzić, niezależnie od tego, czy należy użyć kodowania HTML czy kodowania atrybutów HTML. Musisz się upewnić, że w kontekście HTML użyto tylko @, a nie przy próbie wstawienia niezaufanych danych wejściowych bezpośrednio do języka JavaScript. Pomocnicy tagów również kodują dane wejściowe, które są używane w parametrach tagów.
 
@@ -63,9 +65,9 @@ Ten widok wyprowadza zawartość zmiennej *untrustedInput* . Ta zmienna zawiera 
 >[!WARNING]
 > ASP.NET Core MVC udostępnia `HtmlString` klasę, która nie jest automatycznie zakodowana w danych wyjściowych. Tego elementu nie należy używać w połączeniu z niezaufanymi danymi wejściowymi, ponieważ spowoduje to ujawnienie luki w zabezpieczeniach XSS.
 
-## <a name="javascript-encoding-using-razor"></a>Kodowanie JavaScript przy użyciuRazor
+## <a name="javascript-encoding-using-no-locrazor"></a>Kodowanie JavaScript przy użyciuRazor
 
-Czasami może się okazać, że chcesz wstawić wartość do języka JavaScript, aby przetworzyć ją w widoku. Istnieją dwa sposoby, aby to zrobić. Najbezpieczniejszym sposobem wstawiania wartości jest umieszczenie wartości w atrybucie danych tagu i pobranie go w języku JavaScript. Na przykład:
+Czasami może się okazać, że chcesz wstawić wartość do języka JavaScript, aby przetworzyć ją w widoku. Istnieją dwa sposoby, aby to zrobić. Najbezpieczniejszym sposobem wstawiania wartości jest umieszczenie wartości w atrybucie danych tagu i pobranie go w języku JavaScript. Przykład:
 
 ```cshtml
 @{
@@ -174,7 +176,7 @@ public class HomeController : Controller
 
 ## <a name="encoding-url-parameters"></a>Parametry kodowania adresu URL
 
-Jeśli chcesz skompilować ciąg zapytania URL z niezaufanymi danymi wejściowymi jako wartość, użyj `UrlEncoder` do kodowania wartości. Na przykład
+Jeśli chcesz skompilować ciąg zapytania URL z niezaufanymi danymi wejściowymi jako wartość, użyj `UrlEncoder` do kodowania wartości. Przykład:
 
 ```csharp
 var example = "\"Quoted Value with spaces and &\"";

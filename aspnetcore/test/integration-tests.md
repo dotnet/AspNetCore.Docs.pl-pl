@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/14/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: test/integration-tests
-ms.openlocfilehash: c050665f630c0973abe6c9d08a4652597441639f
-ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
+ms.openlocfilehash: 508c2d2cb668f5dbf416d341c1d9a966f9d16fd4
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86445284"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021045"
 ---
 # <a name="integration-tests-in-aspnet-core"></a>Testy integracji w ASP.NET Core
 
@@ -140,11 +142,11 @@ Klasy testowe implementują interfejs *armatury klasy* ([IClassFixture](https://
 
 Poniższa klasa testowa, `BasicTests` , używa `WebApplicationFactory` do ładowania początkowego SUT i zapewnienia [HttpClient](/dotnet/api/system.net.http.httpclient) do metody testowej `Get_EndpointsReturnSuccessAndCorrectContentType` . Metoda sprawdza, czy kod stanu odpowiedzi powiedzie się (kody stanu z zakresu 200-299), a `Content-Type` nagłówek jest `text/html; charset=utf-8` dla kilku stron aplikacji.
 
-[Klient](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1.createclient) tworzy wystąpienie `HttpClient` , które automatycznie następuje po przekierowaniu i obsłuży pliki cookie.
+[Klient](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1.createclient) tworzy wystąpienie `HttpClient` , które automatycznie następuje po przekierowaniu i dojściach cookie .
 
 [!code-csharp[](integration-tests/samples/3.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/IntegrationTests/BasicTests.cs?name=snippet1)]
 
-Domyślnie nieistotne pliki cookie nie są zachowywane między żądaniami, gdy [zasady zgody Rodo](xref:security/gdpr) są włączone. Aby zachować nieistotne pliki cookie, takie jak te używane przez dostawcę TempData, oznacz je jako niezbędne w testach. Aby uzyskać instrukcje dotyczące oznaczania pliku cookie jako kluczowego, zobacz [podstawowe pliki cookie](xref:security/gdpr#essential-cookies).
+Domyślnie nieistotne cookie s nie są zachowywane między żądaniami, gdy [zasady zgody Rodo](xref:security/gdpr) są włączone. Aby zachować nieistotne cookie s, takie jak te używane przez dostawcę TempData, oznacz je jako niezbędne w testach. Aby uzyskać instrukcje dotyczące oznaczania cookie jako niezbędne, [Zobacz cookie podstawowe](xref:security/gdpr#essential-cookies)informacje.
 
 ## <a name="customize-webapplicationfactory"></a>Dostosuj WebApplicationFactory
 
@@ -188,8 +190,8 @@ Konfigurację hosta sieci Web można utworzyć niezależnie od klas testów prze
 Wszelkie żądania POST do SUT muszą być zgodne z sprawdzeniem, czy jest ono automatycznie wykonywane przez [system ochrony danych przed fałszerstwem](xref:security/data-protection/introduction). Aby można było rozmieścić żądanie POST testu, aplikacja testowa musi:
 
 1. Utwórz żądanie dla strony.
-1. Przeanalizuj plik cookie dotyczący fałszowania i token walidacji żądania z odpowiedzi.
-1. Wprowadź żądanie POST przy użyciu pliku cookie służącego do fałszerstwa i tokenu walidacji żądania.
+1. Przeanalizuj cookie token przed fałszowaniem i Żądaj tokenu weryfikacji z odpowiedzi.
+1. Wprowadź żądanie POST z użyciem reguły "antysfałszowane" cookie i tokenu walidacji żądania.
 
 `SendAsync`Metody rozszerzenia pomocnika (*pomocnicys/HttpClientExtensions. cs*) i `GetDocumentAsync` metoda pomocnika (*pomocnicys/HtmlHelpers. cs*) w [przykładowej aplikacji](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples/) używają analizatora [AngleSharp](https://anglesharp.github.io/) do obsługi kontroli przed fałszerstwem przy użyciu następujących metod:
 
@@ -200,7 +202,7 @@ Wszelkie żądania POST do SUT muszą być zgodne z sprawdzeniem, czy jest ono a
   * Przycisk Prześlij ( `IHtmlElement` ) i wartości formularza ( `IEnumerable<KeyValuePair<string, string>>` )
 
 > [!NOTE]
-> [AngleSharp](https://anglesharp.github.io/) to biblioteka analizy innej firmy używana do celów demonstracyjnych w tym temacie i Przykładowa aplikacja. AngleSharp nie jest obsługiwana ani wymagana do testowania integracji aplikacji ASP.NET Core. Można użyć innych analizatorów, takich jak [pakiet HAP (html)](https://html-agility-pack.net/). Innym podejściem jest napisać kod, który będzie obsługiwał token weryfikacji żądań systemu i bezfałszowający plik cookie.
+> [AngleSharp](https://anglesharp.github.io/) to biblioteka analizy innej firmy używana do celów demonstracyjnych w tym temacie i Przykładowa aplikacja. AngleSharp nie jest obsługiwana ani wymagana do testowania integracji aplikacji ASP.NET Core. Można użyć innych analizatorów, takich jak [pakiet HAP (html)](https://html-agility-pack.net/). Innym podejściem jest napisać kod, który będzie obsługiwał token weryfikacji żądań systemu przed fałszerstwem i bezpośrednio fałszować cookie .
 
 ## <a name="customize-the-client-with-withwebhostbuilder"></a>Dostosowywanie klienta przy użyciu WithWebHostBuilder
 
@@ -216,11 +218,11 @@ Ponieważ inny test w `IndexPageTests` klasie wykonuje operację, która usuwa w
 
 W poniższej tabeli przedstawiono domyślne [WebApplicationFactoryClientOptions](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions) dostępne podczas tworzenia `HttpClient` wystąpień.
 
-| Opcja | Opis | Domyślne |
+| Opcja | Opis | Domyślny |
 | ------ | ----------- | ------- |
 | [AllowAutoRedirect](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.allowautoredirect) | Pobiera lub ustawia, czy `HttpClient` wystąpienia powinny automatycznie śledzić odpowiedzi przekierowania. | `true` |
 | [BaseAddress](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.baseaddress) | Pobiera lub ustawia podstawowy adres `HttpClient` wystąpień. | `http://localhost` |
-| [HandleCookies](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.handlecookies) | Pobiera lub ustawia, czy `HttpClient` wystąpienia powinny obsługiwać pliki cookie. | `true` |
+| [Obsługa Cookie s](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.handlecookies) | Pobiera lub ustawia, czy `HttpClient` wystąpienia powinny obsługiwać cookie . | `true` |
 | [MaxAutomaticRedirections](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.maxautomaticredirections) | Pobiera lub ustawia maksymalną liczbę odpowiedzi przekierowań, które `HttpClient` powinny być zgodne z wystąpieniami. | 7 |
 
 Utwórz `WebApplicationFactoryClientOptions` klasę i przekaż ją do metody [onclient](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1.createclient) (wartości domyślne są pokazane w przykładzie kodu):
@@ -522,11 +524,11 @@ Klasy testowe implementują interfejs *armatury klasy* ([IClassFixture](https://
 
 Poniższa klasa testowa, `BasicTests` , używa `WebApplicationFactory` do ładowania początkowego SUT i zapewnienia [HttpClient](/dotnet/api/system.net.http.httpclient) do metody testowej `Get_EndpointsReturnSuccessAndCorrectContentType` . Metoda sprawdza, czy kod stanu odpowiedzi powiedzie się (kody stanu z zakresu 200-299), a `Content-Type` nagłówek jest `text/html; charset=utf-8` dla kilku stron aplikacji.
 
-[Klient](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1.createclient) tworzy wystąpienie `HttpClient` , które automatycznie następuje po przekierowaniu i obsłuży pliki cookie.
+[Klient](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1.createclient) tworzy wystąpienie `HttpClient` , które automatycznie następuje po przekierowaniu i dojściach cookie .
 
 [!code-csharp[](integration-tests/samples/2.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/IntegrationTests/BasicTests.cs?name=snippet1)]
 
-Domyślnie nieistotne pliki cookie nie są zachowywane między żądaniami, gdy [zasady zgody Rodo](xref:security/gdpr) są włączone. Aby zachować nieistotne pliki cookie, takie jak te używane przez dostawcę TempData, oznacz je jako niezbędne w testach. Aby uzyskać instrukcje dotyczące oznaczania pliku cookie jako kluczowego, zobacz [podstawowe pliki cookie](xref:security/gdpr#essential-cookies).
+Domyślnie nieistotne cookie s nie są zachowywane między żądaniami, gdy [zasady zgody Rodo](xref:security/gdpr) są włączone. Aby zachować nieistotne cookie s, takie jak te używane przez dostawcę TempData, oznacz je jako niezbędne w testach. Aby uzyskać instrukcje dotyczące oznaczania cookie jako niezbędne, [Zobacz cookie podstawowe](xref:security/gdpr#essential-cookies)informacje.
 
 ## <a name="customize-webapplicationfactory"></a>Dostosuj WebApplicationFactory
 
@@ -551,8 +553,8 @@ Konfigurację hosta sieci Web można utworzyć niezależnie od klas testów prze
 Wszelkie żądania POST do SUT muszą być zgodne z sprawdzeniem, czy jest ono automatycznie wykonywane przez [system ochrony danych przed fałszerstwem](xref:security/data-protection/introduction). Aby można było rozmieścić żądanie POST testu, aplikacja testowa musi:
 
 1. Utwórz żądanie dla strony.
-1. Przeanalizuj plik cookie dotyczący fałszowania i token walidacji żądania z odpowiedzi.
-1. Wprowadź żądanie POST przy użyciu pliku cookie służącego do fałszerstwa i tokenu walidacji żądania.
+1. Przeanalizuj cookie token przed fałszowaniem i Żądaj tokenu weryfikacji z odpowiedzi.
+1. Wprowadź żądanie POST z użyciem reguły "antysfałszowane" cookie i tokenu walidacji żądania.
 
 `SendAsync`Metody rozszerzenia pomocnika (*pomocnicys/HttpClientExtensions. cs*) i `GetDocumentAsync` metoda pomocnika (*pomocnicys/HtmlHelpers. cs*) w [przykładowej aplikacji](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples/) używają analizatora [AngleSharp](https://anglesharp.github.io/) do obsługi kontroli przed fałszerstwem przy użyciu następujących metod:
 
@@ -563,7 +565,7 @@ Wszelkie żądania POST do SUT muszą być zgodne z sprawdzeniem, czy jest ono a
   * Przycisk Prześlij ( `IHtmlElement` ) i wartości formularza ( `IEnumerable<KeyValuePair<string, string>>` )
 
 > [!NOTE]
-> [AngleSharp](https://anglesharp.github.io/) to biblioteka analizy innej firmy używana do celów demonstracyjnych w tym temacie i Przykładowa aplikacja. AngleSharp nie jest obsługiwana ani wymagana do testowania integracji aplikacji ASP.NET Core. Można użyć innych analizatorów, takich jak [pakiet HAP (html)](https://html-agility-pack.net/). Innym podejściem jest napisać kod, który będzie obsługiwał token weryfikacji żądań systemu i bezfałszowający plik cookie.
+> [AngleSharp](https://anglesharp.github.io/) to biblioteka analizy innej firmy używana do celów demonstracyjnych w tym temacie i Przykładowa aplikacja. AngleSharp nie jest obsługiwana ani wymagana do testowania integracji aplikacji ASP.NET Core. Można użyć innych analizatorów, takich jak [pakiet HAP (html)](https://html-agility-pack.net/). Innym podejściem jest napisać kod, który będzie obsługiwał token weryfikacji żądań systemu przed fałszerstwem i bezpośrednio fałszować cookie .
 
 ## <a name="customize-the-client-with-withwebhostbuilder"></a>Dostosowywanie klienta przy użyciu WithWebHostBuilder
 
@@ -579,11 +581,11 @@ Ponieważ inny test w `IndexPageTests` klasie wykonuje operację, która usuwa w
 
 W poniższej tabeli przedstawiono domyślne [WebApplicationFactoryClientOptions](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions) dostępne podczas tworzenia `HttpClient` wystąpień.
 
-| Opcja | Opis | Domyślne |
+| Opcja | Opis | Domyślny |
 | ------ | ----------- | ------- |
 | [AllowAutoRedirect](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.allowautoredirect) | Pobiera lub ustawia, czy `HttpClient` wystąpienia powinny automatycznie śledzić odpowiedzi przekierowania. | `true` |
 | [BaseAddress](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.baseaddress) | Pobiera lub ustawia podstawowy adres `HttpClient` wystąpień. | `http://localhost` |
-| [HandleCookies](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.handlecookies) | Pobiera lub ustawia, czy `HttpClient` wystąpienia powinny obsługiwać pliki cookie. | `true` |
+| [Obsługa Cookie s](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.handlecookies) | Pobiera lub ustawia, czy `HttpClient` wystąpienia powinny obsługiwać cookie . | `true` |
 | [MaxAutomaticRedirections](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.maxautomaticredirections) | Pobiera lub ustawia maksymalną liczbę odpowiedzi przekierowań, które `HttpClient` powinny być zgodne z wystąpieniami. | 7 |
 
 Utwórz `WebApplicationFactoryClientOptions` klasę i przekaż ją do metody [onclient](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1.createclient) (wartości domyślne są pokazane w przykładzie kodu):

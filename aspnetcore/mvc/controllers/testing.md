@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 7/22/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/testing
-ms.openlocfilehash: e75c3a382904011e30ed50dfd465a15210c64368
-ms.sourcegitcommit: c86b4e2955dc1724f2eaa7c97894ad8b3bf763fb
+ms.openlocfilehash: 311f1ce9eb2b0e358ddc01a1982dc39379f53b8f
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/22/2020
-ms.locfileid: "86949085"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020915"
 ---
 # <a name="unit-test-controller-logic-in-aspnet-core"></a>Logika kontrolera testów jednostkowych w ASP.NET Core
 
@@ -352,7 +354,7 @@ W przypadku prawidłowej sesji `id` test końcowy potwierdza, że:
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:test/integration-tests>
 * [Tworzenie i uruchamianie testów jednostkowych za pomocą programu Visual Studio](/visualstudio/test/unit-test-your-code)

@@ -7,6 +7,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 04/08/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/javascript-client
-ms.openlocfilehash: 8c7acad42f3a49ccf1bc60f8ae5b4f68a602d97b
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 04200ced41113eb9a68cefc2f485f2d3798476c6
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406930"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022345"
 ---
-# <a name="aspnet-core-signalr-javascript-client"></a>SignalRKlient ASP.NET Core JavaScript
+# <a name="aspnet-core-no-locsignalr-javascript-client"></a>SignalRKlient ASP.NET Core JavaScript
 
 Autor [Rachel Appel](https://twitter.com/rachelappel)
 
@@ -30,7 +32,7 @@ SignalRBiblioteka klienta ASP.NET Core JavaScript umożliwia deweloperom Wywoły
 
 [Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/signalr/javascript-client/sample) ([jak pobrać](xref:index#how-to-download-a-sample))
 
-## <a name="install-the-signalr-client-package"></a>Zainstaluj SignalR pakiet klienta
+## <a name="install-the-no-locsignalr-client-package"></a>Zainstaluj SignalR pakiet klienta
 
 SignalRBiblioteka klienta JavaScript jest dostarczana jako pakiet [npm](https://www.npmjs.com/) . W poniższych sekcjach opisano różne sposoby instalowania biblioteki klienta programu.
 
@@ -60,7 +62,7 @@ npm instaluje zawartość pakietu w folderze *node_modules \\ @aspnet\signalr\di
 
 ::: moniker-end
 
-Odwołuje się do SignalR klienta JavaScript w `<script>` elemencie. Na przykład:
+Odwołuje się do SignalR klienta JavaScript w `<script>` elemencie. Przykład:
 
 ```html
 <script src="~/lib/signalr/signalr.js"></script>
@@ -68,7 +70,7 @@ Odwołuje się do SignalR klienta JavaScript w `<script>` elemencie. Na przykła
 
 ### <a name="use-a-content-delivery-network-cdn"></a>Użyj Content Delivery Network (CDN)
 
-Aby korzystać z biblioteki klienta bez wymagania wstępnego npm, odwołując się do kopii biblioteki klienckiej hostowanej w usłudze CDN. Na przykład:
+Aby korzystać z biblioteki klienta bez wymagania wstępnego npm, odwołując się do kopii biblioteki klienckiej hostowanej w usłudze CDN. Przykład:
 
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.3/signalr.min.js"></script>

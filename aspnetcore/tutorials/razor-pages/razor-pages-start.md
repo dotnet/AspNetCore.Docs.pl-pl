@@ -5,6 +5,8 @@ description: W tej serii samouczków pokazano, jak używać Razor stron w ASP.NE
 ms.author: riande
 ms.date: 11/12/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/razor-pages-start
-ms.openlocfilehash: 77b230f14b4eef60d771daf8fe09288a9dd3c69c
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.openlocfilehash: 5fb841de2fa9a04cf05aaf08f255041ee1952638
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86212999"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021097"
 ---
-# <a name="tutorial-get-started-with-razor-pages-in-aspnet-core"></a>Samouczek: wprowadzenie do Razor stron w ASP.NET Core
+# <a name="tutorial-get-started-with-no-locrazor-pages-in-aspnet-core"></a>Samouczek: wprowadzenie do Razor stron w ASP.NET Core
 
 Autor: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -60,7 +62,7 @@ Na końcu tego samouczka będziesz mieć Razor aplikację sieci Web strony roboc
 
 ---
 
-## <a name="create-a-razor-pages-web-app"></a>Tworzenie Razor aplikacji sieci Web dla stron
+## <a name="create-a-no-locrazor-pages-web-app"></a>Tworzenie Razor aplikacji sieci Web dla stron
 
 # <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
@@ -204,7 +206,7 @@ Na końcu tego samouczka będziesz mieć Razor aplikację sieci Web strony roboc
 
 ---
 
-## <a name="create-a-razor-pages-web-app"></a>Tworzenie Razor aplikacji sieci Web dla stron
+## <a name="create-a-no-locrazor-pages-web-app"></a>Tworzenie Razor aplikacji sieci Web dla stron
 
 # <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
@@ -356,9 +358,9 @@ Zawiera punkt wejścia dla programu. Aby uzyskać więcej informacji, zobacz <xr
 
 ### <a name="startupcs"></a>Startup.cs
 
-Zawiera kod, który konfiguruje zachowanie aplikacji, na przykład czy wymaga zgody na pliki cookie. Aby uzyskać więcej informacji, zobacz <xref:fundamentals/startup>.
+Zawiera kod, który konfiguruje zachowanie aplikacji, na przykład czy wymaga zgody na polecenie cookie s. Aby uzyskać więcej informacji, zobacz <xref:fundamentals/startup>.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Wersja tego samouczka usługi YouTube](https://www.youtube.com/watch?v=F0SP7Ry4flQ&feature=youtu.be)
 

@@ -7,6 +7,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/publish-to-azure-web-app
-ms.openlocfilehash: d3f48b3171012b03fcaf7665c2089b27d37bbeca
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 3163a2743c544d0a07d92eb7547e77c3b200ac83
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408841"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022540"
 ---
-# <a name="publish-an-aspnet-core-signalr-app-to-azure-app-service"></a>Publikowanie aplikacji ASP.NET Core SignalR w Azure App Service
+# <a name="publish-an-aspnet-core-no-locsignalr-app-to-azure-app-service"></a>Publikowanie aplikacji ASP.NET Core SignalR w Azure App Service
 
 Autor [Brady gastera](https://twitter.com/bradygaster)
 
@@ -52,7 +54,7 @@ W tym artykule opisano Publikowanie przy użyciu narzędzi w programie Visual St
 
 1. Wybierz pozycję ** SignalR usługa platformy Azure** na **Dependencies**  >  liście rozwijanej**Dodaj** zależności:
 
-   ![Obszar zależności przedstawiający wybór usługi platformy Azure SignalR na liście rozwijanej Dodaj](publish-to-azure-web-app/_static/signalr-service-dependency.png)
+   ![Obszar zależności pokazujący wybór platformy Azure::: No-Loc (sygnalizujący)::: Service na liście rozwijanej dodawania](publish-to-azure-web-app/_static/signalr-service-dependency.png)
 
 1. W oknie **dialogowym SignalR usługi platformy Azure** wybierz pozycję **Utwórz nowe SignalR wystąpienie usługi platformy Azure**.
 
@@ -78,7 +80,7 @@ Format adresu URL aplikacji to `{APP SERVICE NAME}.azurewebsites.net` . Na przyk
 
 W przypadku aplikacji hostowanych bez SignalR usługi Azure enable:
 
-* [Koligacja ARR](https://azure.github.io/AppService/2016/05/16/Disable-Session-affinity-cookie-(ARR-cookie)-for-Azure-web-apps.html) do kierowania żądań od użytkownika z powrotem do tego samego wystąpienia App Service. Ustawieniem domyślnym jest **włączone**.
+* [Koligacja ARR] ( https://azure.github.io/AppService/2016/05/16/Disable-Session-affinity- cookie -(ARR- cookie ) -for-Azure-web-apps.html) do trasy żądań od użytkownika z powrotem do tego samego wystąpienia App Service. Ustawieniem domyślnym jest **włączone**.
 * [Gniazda sieci Web](xref:fundamentals/websockets) , aby umożliwić transport gniazd sieci Web. Ustawienie domyślne jest **wyłączone**.
 
 1. W Azure Portal przejdź do aplikacji sieci Web w **App Services**.

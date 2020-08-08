@@ -5,6 +5,8 @@ description: Informacje na temat zarządzania kluczami i okresu istnienia ochron
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/configuration/default-settings
-ms.openlocfilehash: f758c814280ee09a240d99cc59cdab2dc4590df6
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: b39187d93247dc83c34bbbe6ec6accfd77108794
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407099"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021383"
 ---
 # <a name="data-protection-key-management-and-lifetime-in-aspnet-core"></a>Zarządzanie kluczami i okres istnienia ochrony danych w ASP.NET Core
 
@@ -31,7 +33,7 @@ Aplikacja próbuje wykryć swoje środowisko operacyjne i samodzielnie obsługiw
 1. Jeśli aplikacja jest hostowana w [usłudze Azure Apps](https://azure.microsoft.com/services/app-service/), klucze są utrwalane w folderze *%Home%\ASP.NET\DataProtection-Keys* . Ten folder jest obsługiwany przez magazyn sieciowy i synchronizowany na wszystkich komputerach obsługujących aplikację.
    * Klucze nie są chronione w stanie spoczynku.
    * Folder *dataprotection-Keys* dostarcza kluczowy pierścień do wszystkich wystąpień aplikacji w jednym miejscu wdrożenia.
-   * Oddzielne miejsca wdrożenia, takie jak przygotowanie i środowisko produkcyjne, nie dzielą się z kluczem. W przypadku wymiany między miejscami wdrożenia, na przykład zamiany przejściowej na produkcję lub użycie testowania/B, dowolna aplikacja korzystająca z ochrony danych nie będzie w stanie odszyfrować przechowywanych danych przy użyciu dzwonka klucza w poprzednim gnieździe. Prowadzi to do użytkowników logujących się z aplikacji korzystającej ze standardowego uwierzytelniania plików cookie ASP.NET Core, ponieważ używa ochrony danych do ochrony plików cookie. Jeśli potrzebujesz pierścieni z kluczami niezależnymi od gniazda, Użyj zewnętrznego dostawcy usługi Key dystynktywnego, takiego jak Azure Blob Storage, Azure Key Vault, magazynu SQL lub pamięci podręcznej Redis.
+   * Oddzielne miejsca wdrożenia, takie jak przygotowanie i środowisko produkcyjne, nie dzielą się z kluczem. W przypadku wymiany między miejscami wdrożenia, na przykład zamiany przejściowej na produkcję lub użycie testowania/B, dowolna aplikacja korzystająca z ochrony danych nie będzie w stanie odszyfrować przechowywanych danych przy użyciu dzwonka klucza w poprzednim gnieździe. Prowadzi to do użytkowników logujących się z aplikacji korzystającej ze standardowego uwierzytelniania ASP.NET Core cookie , ponieważ używa ochrony danych do ochrony swoich elementów cookie . Jeśli potrzebujesz pierścieni z kluczami niezależnymi od gniazda, Użyj zewnętrznego dostawcy usługi Key dystynktywnego, takiego jak Azure Blob Storage, Azure Key Vault, magazynu SQL lub pamięci podręcznej Redis.
 
 1. Jeśli profil użytkownika jest dostępny, klucze są utrwalane w folderze *%LocalAppData%\ASP.NET\DataProtection-Keys* . Jeśli system operacyjny jest Windows, klucze są szyfrowane przy użyciu funkcji DPAPI.
 
@@ -61,7 +63,7 @@ Klucze mają domyślnie 90-dniowy okres istnienia. Po wygaśnięciu klucza aplik
 
 Domyślnym algorytmem ochrony ładunku jest algorytm AES-256-CBC w celu poufności i HMACSHA256 na potrzeby autentyczności. 512-bitowy klucz główny, zmieniony co 90 dni, jest używany do wygenerowania dwóch podkluczy używanych dla tych algorytmów dla poszczególnych ładunków. Aby uzyskać więcej informacji, zobacz [wyprowadzanie podklucza](xref:security/data-protection/implementation/subkeyderivation#additional-authenticated-data-and-subkey-derivation) .
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:security/data-protection/extensibility/key-management>
 * <xref:host-and-deploy/web-farm>

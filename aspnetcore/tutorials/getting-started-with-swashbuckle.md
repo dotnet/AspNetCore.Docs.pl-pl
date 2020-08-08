@@ -6,6 +6,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 06/26/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/get-started-with-swashbuckle
-ms.openlocfilehash: bf6375f8f63bb9db50c423706a48363f53e96549
-ms.sourcegitcommit: f7873c02c1505c99106cbc708f37e18fc0a496d1
+ms.openlocfilehash: 5ecb6379f00c3ad505a447dfc0d3fac5f857cb09
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/08/2020
-ms.locfileid: "86147659"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022189"
 ---
 # <a name="get-started-with-swashbuckle-and-aspnet-core"></a>Wprowadzenie do Swashbuckle i ASP.NET Core
 
@@ -73,7 +75,7 @@ Uruchom następujące polecenie w **zintegrowanym terminalu**:
 dotnet add TodoApi.csproj package Swashbuckle.AspNetCore -v 5.5.0
 ```
 
-### <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
+### <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
 
 Uruchom następujące polecenie:
 
@@ -168,7 +170,7 @@ Interfejs użytkownika struktury Swagger wyświetla informacje o wersji:
 
 ![Interfejs użytkownika struktury Swagger z informacjami o wersji: Description, Author i linku więcej](web-api-help-pages-using-swagger/_static/custom-info.png)
 
-### <a name="xml-comments"></a>komentarze XML
+### <a name="xml-comments"></a>Komentarze XML
 
 Komentarze XML można włączyć przy użyciu następujących metod:
 
@@ -224,7 +226,7 @@ Ręcznie Dodaj wyróżnione wiersze do pliku *csproj* :
 
 ::: moniker-end
 
-#### <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
+#### <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
 
 Ręcznie Dodaj wyróżnione wiersze do pliku *csproj* :
 

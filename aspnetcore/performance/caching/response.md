@@ -6,6 +6,8 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 11/04/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/response
-ms.openlocfilehash: 5c3314991d05ea868fe9190bb3a0206b27fd920f
-ms.sourcegitcommit: b06511252f165dd4590ba9b5beca4153fa220779
+ms.openlocfilehash: 7d2d563eef60cb8eead95c6792bcac2cda16a859
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/27/2020
-ms.locfileid: "85459769"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021344"
 ---
 # <a name="response-caching-in-aspnet-core"></a>Buforowanie odpowiedzi w ASP.NET Core
 
@@ -41,7 +43,7 @@ Wspólne `Cache-Control` dyrektywy przedstawiono w poniższej tabeli.
 
 | Dyrektywę                                                       | Akcja |
 | --------------------------------------------------------------- | ------ |
-| [społeczeństwo](https://tools.ietf.org/html/rfc7234#section-5.2.2.5)   | Pamięć podręczna może przechowywać odpowiedź. |
+| [public](https://tools.ietf.org/html/rfc7234#section-5.2.2.5)   | Pamięć podręczna może przechowywać odpowiedź. |
 | [private](https://tools.ietf.org/html/rfc7234#section-5.2.2.6)  | Odpowiedź nie może być przechowywana w udostępnionej pamięci podręcznej. Prywatna pamięć podręczna może przechowywać i ponownie używać odpowiedzi. |
 | [maks. wiek](https://tools.ietf.org/html/rfc7234#section-5.2.1.1)  | Klient nie akceptuje odpowiedzi, której wiek jest większy niż określona liczba sekund. Przykłady: `max-age=60` (60 sekund), `max-age=2592000` (1 miesiąc) |
 | [nie-pamięć podręczna](https://tools.ietf.org/html/rfc7234#section-5.2.1.4) | **Na**żądanie: pamięć podręczna nie może używać zapisanej odpowiedzi w celu spełnienia żądania. Serwer pierwotny ponownie generuje odpowiedź dla klienta, a oprogramowanie pośredniczące aktualizuje zapisaną odpowiedź w jej pamięci podręcznej.<br><br>**W odpowiedzi**: nie można używać odpowiedzi dla kolejnych żądań bez sprawdzania poprawności na serwerze źródłowym. |

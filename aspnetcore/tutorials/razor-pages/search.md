@@ -5,6 +5,8 @@ description: Część 6 serii samouczków na Razor stronach.
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/search
-ms.openlocfilehash: b0ee3294a4646b199f85d6a023e152e5eabaa225
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: b28d228449549e1071df4100ee2d52626c50845b
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408789"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021643"
 ---
-# <a name="part-6-add-search-to-aspnet-core-razor-pages"></a>Część 6, Dodawanie wyszukiwania do Razor stron ASP.NET Core
+# <a name="part-6-add-search-to-aspnet-core-no-locrazor-pages"></a>Część 6, Dodawanie wyszukiwania do Razor stron ASP.NET Core
 
 Autor: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -109,7 +111,7 @@ Poniższy kod jest zapytanie LINQ, które pobiera wszystkie gatunki z bazy danyc
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Index.cshtml.cs?name=snippet_SelectList)]
 
-### <a name="add-search-by-genre-to-the-razor-page"></a>Dodaj wyszukiwanie według gatunku na Razor stronie
+### <a name="add-search-by-genre-to-the-no-locrazor-page"></a>Dodaj wyszukiwanie według gatunku na Razor stronie
 
 Zaktualizuj *indeks. cshtml* w następujący sposób:
 
@@ -211,7 +213,7 @@ Poniższy kod jest zapytanie LINQ, które pobiera wszystkie gatunki z bazy danyc
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Index.cshtml.cs?name=snippet_SelectList)]
 
-### <a name="add-search-by-genre-to-the-razor-page"></a>Dodaj wyszukiwanie według gatunku na Razor stronie
+### <a name="add-search-by-genre-to-the-no-locrazor-page"></a>Dodaj wyszukiwanie według gatunku na Razor stronie
 
 Zaktualizuj *indeks. cshtml* w następujący sposób:
 

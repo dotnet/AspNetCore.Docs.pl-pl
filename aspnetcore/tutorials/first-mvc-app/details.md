@@ -5,6 +5,8 @@ description: Część 10 serii samouczków na ASP.NET Core MVC.
 ms.author: riande
 ms.date: 12/13/2018
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/details
-ms.openlocfilehash: 49422cdfac73e586ce3a035ee79d464e9d6a6827
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 2bde0e649af4928a03027b646436cc7b215b707c
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405162"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021656"
 ---
 # <a name="part-10-examine-the-details-and-delete-methods-of-an-aspnet-core-app"></a>Część 10, badanie szczegółów i metod usuwania aplikacji ASP.NET Core
 

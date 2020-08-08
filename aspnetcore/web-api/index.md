@@ -7,6 +7,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 07/20/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/index
-ms.openlocfilehash: 98fb8c0a26f5f8e7ce5f07066f2f36e748ab2398
-ms.sourcegitcommit: d9ae1f352d372a20534b57e23646c1a1d9171af1
+ms.openlocfilehash: 7c59867f6d6fbf0f4d8207eb5d2919967d825e8b
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/21/2020
-ms.locfileid: "86568746"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021305"
 ---
 # <a name="create-web-apis-with-aspnet-core"></a>Tworzenie internetowych interfejsów API za pomocą platformy ASP.NET Core
 
@@ -160,7 +162,7 @@ namespace WebApiSample
 
 ## <a name="attribute-routing-requirement"></a>Wymagania dotyczące routingu atrybutów
 
-`[ApiController]`Atrybut powoduje, że atrybut routingu wymaga. Na przykład:
+`[ApiController]`Atrybut powoduje, że atrybut routingu wymaga. Przykład:
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -375,7 +377,7 @@ Rozważmy następujący kod w akcji kontrolera:
 
 [!code-csharp[](index/samples/2.x/2.2/Controllers/PetsController.cs?name=snippet_ProblemDetailsStatusCode)]
 
-`NotFound`Metoda generuje kod stanu HTTP 404 z `ProblemDetails` treścią. Na przykład:
+`NotFound`Metoda generuje kod stanu HTTP 404 z `ProblemDetails` treścią. Przykład:
 
 ```json
 {

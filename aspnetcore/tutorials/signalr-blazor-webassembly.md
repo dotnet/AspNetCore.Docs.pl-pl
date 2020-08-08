@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/10/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/signalr-blazor-webassembly
-ms.openlocfilehash: d5aa7520a637b18e014519134dfe2d2139e7c11d
-ms.sourcegitcommit: f7873c02c1505c99106cbc708f37e18fc0a496d1
+ms.openlocfilehash: 3d7ae49142849c589a1a20c33d30e87747ad1935
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/08/2020
-ms.locfileid: "86147780"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021630"
 ---
-# <a name="use-aspnet-core-signalr-with-blazor-webassembly"></a>Użyj ASP.NET Core SignalR zBlazor WebAssembly
+# <a name="use-aspnet-core-no-locsignalr-with-no-locblazor-webassembly"></a>Użyj ASP.NET Core SignalR zBlazor WebAssembly
 
 Autorzy [Daniel Roth](https://github.com/danroth27) i [Luke Latham](https://github.com/guardrex)
 
@@ -55,13 +57,13 @@ Na końcu tego samouczka będziesz mieć działającą aplikację czatu.
 * [Visual Studio dla komputerów Mac wersja 8,6 lub nowsza](https://visualstudio.microsoft.com/vs/mac/)
 * [!INCLUDE [.NET Core 3.1 SDK](~/includes/3.1-SDK.md)]
 
-# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli/)
+# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli/)
 
 [!INCLUDE[](~/includes/3.1-SDK.md)]
 
 ---
 
-## <a name="create-a-hosted-blazor-webassembly-app-project"></a>Tworzenie projektu hostowanej Blazor WebAssembly aplikacji
+## <a name="create-a-hosted-no-locblazor-webassembly-app-project"></a>Tworzenie projektu hostowanej Blazor WebAssembly aplikacji
 
 Postępuj zgodnie ze wskazówkami dotyczącymi wybranego narzędzia:
 
@@ -102,9 +104,9 @@ Postępuj zgodnie ze wskazówkami dotyczącymi wybranego narzędzia:
 
 1. Na pasku bocznym wybierz pozycję Aplikacja **sieci Web i konsola**  >  **App**.
 
-1. Wybierz szablon ** Blazor WebAssembly aplikacji** . Wybierz opcję **Dalej**.
+1. Wybierz szablon ** Blazor WebAssembly aplikacji** . Wybierz pozycję **Dalej**.
 
-1. Upewnij się, że **uwierzytelnianie** jest ustawione na wartość **bez uwierzytelniania**. Zaznacz pole wyboru **hostowane ASP.NET Core** . Wybierz opcję **Dalej**.
+1. Upewnij się, że **uwierzytelnianie** jest ustawione na wartość **bez uwierzytelniania**. Zaznacz pole wyboru **hostowane ASP.NET Core** . Wybierz pozycję **Dalej**.
 
 1. W polu **Nazwa projektu** Nadaj nazwę aplikacji `BlazorSignalRApp` . Wybierz pozycję **Utwórz**.
 
@@ -112,7 +114,7 @@ Postępuj zgodnie ze wskazówkami dotyczącymi wybranego narzędzia:
 
 1. Otwórz projekt, przechodząc do folderu projektu i otwierając plik rozwiązania projektu ( `.sln` ).
 
-# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli/)
+# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli/)
 
 W powłoce poleceń wykonaj następujące polecenie:
 
@@ -122,7 +124,7 @@ dotnet new blazorwasm --hosted --output BlazorSignalRApp
 
 ---
 
-## <a name="add-the-signalr-client-library"></a>Dodawanie SignalR biblioteki klienta
+## <a name="add-the-no-locsignalr-client-library"></a>Dodawanie SignalR biblioteki klienta
 
 # <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio/)
 
@@ -158,7 +160,7 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 1. Jeśli zostanie wyświetlone okno dialogowe **Akceptacja licencji** , wybierz pozycję **Akceptuj** , jeśli akceptujesz postanowienia licencyjne.
 
-# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli/)
+# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli/)
 
 W powłoce poleceń wykonaj następujące polecenia:
 
@@ -169,13 +171,13 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 ---
 
-## <a name="add-a-signalr-hub"></a>Dodawanie SignalR centrum
+## <a name="add-a-no-locsignalr-hub"></a>Dodawanie SignalR centrum
 
 W `BlazorSignalRApp.Server` projekcie Utwórz `Hubs` folder (plural) i Dodaj następującą `ChatHub` klasę ( `Hubs/ChatHub.cs` ):
 
 [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Hubs/ChatHub.cs)]
 
-## <a name="add-services-and-an-endpoint-for-the-signalr-hub"></a>Dodaj usługi i punkt końcowy SignalR centrum
+## <a name="add-services-and-an-endpoint-for-the-no-locsignalr-hub"></a>Dodaj usługi i punkt końcowy SignalR centrum
 
 1. W `BlazorSignalRApp.Server` projekcie Otwórz `Startup.cs` plik.
 
@@ -196,7 +198,7 @@ W `BlazorSignalRApp.Server` projekcie Utwórz `Hubs` folder (plural) i Dodaj nas
 
    [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Startup.cs?name=snippet_Configure&highlight=3,25)]
 
-## <a name="add-razor-component-code-for-chat"></a>Dodawanie Razor kodu składnika dla rozmowy
+## <a name="add-no-locrazor-component-code-for-chat"></a>Dodawanie Razor kodu składnika dla rozmowy
 
 1. W `BlazorSignalRApp.Client` projekcie Otwórz `Pages/Index.razor` plik.
 
@@ -204,7 +206,7 @@ W `BlazorSignalRApp.Server` projekcie Utwórz `Hubs` folder (plural) i Dodaj nas
 
 [!code-razor[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Client/Pages/Index.razor)]
 
-## <a name="run-the-app"></a>Uruchomienie aplikacji
+## <a name="run-the-app"></a>Uruchamianie aplikacji
 
 1. Postępuj zgodnie ze wskazówkami dotyczącymi narzędzi:
 
@@ -216,7 +218,7 @@ W `BlazorSignalRApp.Server` projekcie Utwórz `Hubs` folder (plural) i Dodaj nas
 
 1. Wybierz opcję przeglądarka, wprowadź nazwę i komunikat, a następnie wybierz przycisk, aby wysłać wiadomość. Nazwa i komunikat są wyświetlane na obu stronach natychmiast:
 
-   ![SignalRBlazor WebAssemblyPrzykładowa aplikacja otwarta w dwóch oknach przeglądarki pokazująca komunikaty wymieniane.](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
+   ![::: No-Loc (Sygnalizującer):::.:: No-Loc (Blazor webassembly)::: przykładowa aplikacja otwarta w dwóch oknach przeglądarki pokazująca komunikaty wymieniane.](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
 
    Cudzysłowy: *gwiazdka Trek VI: niewykrywalny kraj* &copy; 1991 [Paramount](https://www.paramountmovies.com/movies/star-trek-vi-the-undiscovered-country)
 
@@ -234,7 +236,7 @@ W `BlazorSignalRApp.Server` projekcie Utwórz `Hubs` folder (plural) i Dodaj nas
 
 1. Wybierz opcję przeglądarka, wprowadź nazwę i komunikat, a następnie wybierz przycisk, aby wysłać wiadomość. Nazwa i komunikat są wyświetlane na obu stronach natychmiast:
 
-   ![SignalRBlazor WebAssemblyPrzykładowa aplikacja otwarta w dwóch oknach przeglądarki pokazująca komunikaty wymieniane.](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
+   ![::: No-Loc (Sygnalizującer):::.:: No-Loc (Blazor webassembly)::: przykładowa aplikacja otwarta w dwóch oknach przeglądarki pokazująca komunikaty wymieniane.](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
 
    Cudzysłowy: *gwiazdka Trek VI: niewykrywalny kraj* &copy; 1991 [Paramount](https://www.paramountmovies.com/movies/star-trek-vi-the-undiscovered-country)
 
@@ -246,11 +248,11 @@ W `BlazorSignalRApp.Server` projekcie Utwórz `Hubs` folder (plural) i Dodaj nas
 
 1. Wybierz opcję przeglądarka, wprowadź nazwę i komunikat, a następnie wybierz przycisk, aby wysłać wiadomość. Nazwa i komunikat są wyświetlane na obu stronach natychmiast:
 
-   ![SignalRBlazor WebAssemblyPrzykładowa aplikacja otwarta w dwóch oknach przeglądarki pokazująca komunikaty wymieniane.](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
+   ![::: No-Loc (Sygnalizującer):::.:: No-Loc (Blazor webassembly)::: przykładowa aplikacja otwarta w dwóch oknach przeglądarki pokazująca komunikaty wymieniane.](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
 
    Cudzysłowy: *gwiazdka Trek VI: niewykrywalny kraj* &copy; 1991 [Paramount](https://www.paramountmovies.com/movies/star-trek-vi-the-undiscovered-country)
 
-# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli/)
+# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli/)
 
 1. W powłoce poleceń wykonaj następujące polecenia:
 
@@ -263,7 +265,7 @@ W `BlazorSignalRApp.Server` projekcie Utwórz `Hubs` folder (plural) i Dodaj nas
 
 1. Wybierz opcję przeglądarka, wprowadź nazwę i komunikat, a następnie wybierz przycisk, aby wysłać wiadomość. Nazwa i komunikat są wyświetlane na obu stronach natychmiast:
 
-   ![SignalRBlazor WebAssemblyPrzykładowa aplikacja otwarta w dwóch oknach przeglądarki pokazująca komunikaty wymieniane.](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
+   ![::: No-Loc (Sygnalizującer):::.:: No-Loc (Blazor webassembly)::: przykładowa aplikacja otwarta w dwóch oknach przeglądarki pokazująca komunikaty wymieniane.](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
 
    Cudzysłowy: *gwiazdka Trek VI: niewykrywalny kraj* &copy; 1991 [Paramount](https://www.paramountmovies.com/movies/star-trek-vi-the-undiscovered-country)
 

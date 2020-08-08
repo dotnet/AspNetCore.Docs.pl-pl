@@ -6,6 +6,8 @@ ms.author: riande
 ms.date: 7/18/2020
 ms.custom: mvc, seodec18
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/secure-data
-ms.openlocfilehash: 7d4c10fa0b1c569179fc3e0a518917ec0185c51f
-ms.sourcegitcommit: 1b89fc58114a251926abadfd5c69c120f1ba12d8
+ms.openlocfilehash: 44777369693f9eb29d78c3ba638db2e692f430ae
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/24/2020
-ms.locfileid: "87160280"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021190"
 ---
 # <a name="create-an-aspnet-core-web-app-with-user-data-protected-by-authorization"></a>Tworzenie aplikacji sieci Web ASP.NET Core przy użyciu danych użytkownika chronionych przez autoryzację
 
@@ -76,7 +78,7 @@ Przykład zawiera następujące programy obsługi autoryzacji:
 Ten samouczek jest zaawansowany. Należy zapoznać się z:
 
 * [ASP.NET Core](xref:tutorials/first-mvc-app/start-mvc)
-* [Uwierzytelnianie](xref:security/authentication/identity)
+* [Authentication](xref:security/authentication/identity)
 * [Potwierdzenie konta i odzyskiwanie hasła](xref:security/authentication/accconfirm)
 * [Autoryzacja](xref:security/authorization/introduction)
 * [Entity Framework Core](xref:data/ef-mvc/intro)
@@ -430,7 +432,7 @@ Przykład zawiera następujące programy obsługi autoryzacji:
 Ten samouczek jest zaawansowany. Należy zapoznać się z:
 
 * [ASP.NET Core](xref:tutorials/first-mvc-app/start-mvc)
-* [Uwierzytelnianie](xref:security/authentication/identity)
+* [Authentication](xref:security/authentication/identity)
 * [Potwierdzenie konta i odzyskiwanie hasła](xref:security/authentication/accconfirm)
 * [Autoryzacja](xref:security/authorization/introduction)
 * [Entity Framework Core](xref:data/ef-mvc/intro)
@@ -710,7 +712,7 @@ Sprawdź, czy aplikacja wykorzystana z bazy danych. Jeśli w bazie danych kontak
 
 <a name="secure-data-add-resources-label"></a>
 
-### <a name="additional-resources"></a>Dodatkowe zasoby
+### <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Tworzenie aplikacji internetowej platformy .NET Core i usługi SQL Database w usłudze Azure App Service](/azure/app-service/app-service-web-tutorial-dotnetcore-sqldb)
 * [ASP.NET Core laboratorium autoryzacji](https://github.com/blowdart/AspNetAuthorizationWorkshop). To laboratorium prowadzi do bardziej szczegółowych informacji na temat funkcji zabezpieczeń wprowadzonych w tym samouczku.

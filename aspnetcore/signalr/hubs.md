@@ -7,6 +7,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 01/16/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,24 +17,24 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/hubs
-ms.openlocfilehash: 1757d205b583c8b3f3bbf845594d7228f8d45175
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: bd7432fc29d0cda003abed1f0e522bdddf2e4efc
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408555"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022215"
 ---
-# <a name="use-hubs-in-signalr-for-aspnet-core"></a>Korzystanie z koncentratorów w programie SignalR dla ASP.NET Core
+# <a name="use-hubs-in-no-locsignalr-for-aspnet-core"></a>Korzystanie z koncentratorów w programie SignalR dla ASP.NET Core
 
 Autor [Rachel Appel](https://twitter.com/rachelappel) i [Jan Griffin](https://twitter.com/1kevgriff)
 
 [Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/hubs/sample/ ) [(jak pobrać)](xref:index#how-to-download-a-sample)
 
-## <a name="what-is-a-signalr-hub"></a>Co to jest SignalR centrum
+## <a name="what-is-a-no-locsignalr-hub"></a>Co to jest SignalR centrum
 
 SignalRInterfejs API centrów umożliwia wywoływanie metod na podłączonych klientach z serwera. W kodzie serwera należy zdefiniować metody, które są wywoływane przez klienta. W kodzie klienta należy zdefiniować metody, które są wywoływane z serwera programu. SignalRzajmuje się wszystkimi wszystkimi scenami, które zapewniają możliwość komunikacji między klientem i serwerem w czasie rzeczywistym.
 
-## <a name="configure-signalr-hubs"></a>Konfigurowanie SignalR centrów
+## <a name="configure-no-locsignalr-hubs"></a>Konfigurowanie SignalR centrów
 
 SignalROprogramowanie pośredniczące wymaga pewnych usług, które są konfigurowane przez wywołanie metody `services.AddSignalR` .
 
@@ -152,7 +154,7 @@ Ten interfejs może służyć do refaktoryzacji poprzedniego `ChatHub` przykład
 
 Użycie `Hub<IChatClient>` umożliwia sprawdzenie w czasie kompilacji metod klienta. Zapobiega to problemom spowodowanym użyciem ciągów Magic, ponieważ `Hub<T>` może zapewnić tylko dostęp do metod zdefiniowanych w interfejsie.
 
-Użycie silnie określonego typu `Hub<T>` wyłącza możliwość użycia `SendAsync` . Wszelkie metody zdefiniowane w interfejsie mogą być nadal zdefiniowane jako asynchroniczne. W rzeczywistości każda z tych metod powinna zwrócić `Task` . Ponieważ jest to interfejs, nie używaj `async` słowa kluczowego. Na przykład:
+Użycie silnie określonego typu `Hub<T>` wyłącza możliwość użycia `SendAsync` . Wszelkie metody zdefiniowane w interfejsie mogą być nadal zdefiniowane jako asynchroniczne. W rzeczywistości każda z tych metod powinna zwrócić `Task` . Ponieważ jest to interfejs, nie używaj `async` słowa kluczowego. Przykład:
 
 ```csharp
 public interface IClient
@@ -188,7 +190,7 @@ Wyjątki zgłoszone w metodach centrum są wysyłane do klienta, który wywoła�
 
 [!code-javascript[Error](hubs/sample/wwwroot/js/chat.js?range=23)]
 
-Jeśli centrum zgłosi wyjątek, połączenia nie są zamknięte. Domyślnie program SignalR zwraca ogólny komunikat o błędzie do klienta. Na przykład:
+Jeśli centrum zgłosi wyjątek, połączenia nie są zamknięte. Domyślnie program SignalR zwraca ogólny komunikat o błędzie do klienta. Przykład:
 
 ```
 Microsoft.AspNetCore.SignalR.HubException: An unexpected error occurred invoking 'MethodName' on the server.

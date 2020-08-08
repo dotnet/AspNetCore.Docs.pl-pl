@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/12/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/partial
-ms.openlocfilehash: 47bd91f4d2bf166a4d0c9a0829e24cbe26a81a10
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 826d7cf96d95ee7eb98b0f05a233401a1e3bff33
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399715"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020837"
 ---
 # <a name="partial-views-in-aspnet-core"></a>Częściowe widoki w ASP.NET Core
 
@@ -80,7 +82,7 @@ Nazwy plików widoku częściowego często zaczynają się od znaku podkreśleni
 
 ::: moniker range=">= aspnetcore-2.0"
 
-### <a name="use-a-partial-view-in-a-razor-pages-pagemodel"></a>Używanie widoku częściowego na Razor stronach PageModel
+### <a name="use-a-partial-view-in-a-no-locrazor-pages-pagemodel"></a>Używanie widoku częściowego na Razor stronach PageModel
 
 W ASP.NET Core 2,0 lub 2,1, następująca metoda obsługi renderuje widok częściowy * \_ AuthorPartialRP. cshtml* do odpowiedzi:
 
@@ -345,7 +347,7 @@ Drugi widok częściowy renderuje sekcje artykułu:
 >
 > Jednak w większym sensie nie można przeznaczyć...
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 ::: moniker range=">= aspnetcore-2.1"
 

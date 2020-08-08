@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/18/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/view-components
-ms.openlocfilehash: 272b5a89601a9e6ef24f3e60a3da7e2a40297c97
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.openlocfilehash: 0c952502d58744bbbe06c92f51bd51bd547fb8ae
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86213117"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020954"
 ---
 # <a name="view-components-in-aspnet-core"></a>Wyświetl składniki w ASP.NET Core
 
@@ -189,7 +191,7 @@ Uwagi dotyczące kodu:
 * `InvokeAsync`uwidacznia metodę, która może być wywoływana z widoku i może przyjmować dowolną liczbę argumentów.
 * `InvokeAsync`Metoda zwraca zestaw `ToDo` elementów, które spełniają `isDone` `maxPriority` Parametry i.
 
-### <a name="create-the-view-component-razor-view"></a>Tworzenie widoku składnika widoku Razor
+### <a name="create-the-view-component-no-locrazor-view"></a>Tworzenie widoku składnika widoku Razor
 
 * Utwórz folder *widoki/udostępnione/składniki* . Ten folder **musi** być nazwanymi *składnikami*.
 
@@ -351,6 +353,6 @@ Każdy parametr w składniku widoku jest atrybutem wymaganym. Zobacz [ten proble
 * ViewComponent nie renderuje żadnych znaczników.
 * Nie zostaną zgłoszone żadne błędy.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Wstrzykiwanie zależności do widoków](xref:mvc/views/dependency-injection)

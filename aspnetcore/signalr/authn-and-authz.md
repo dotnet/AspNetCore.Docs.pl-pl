@@ -7,6 +7,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,20 +17,20 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/authn-and-authz
-ms.openlocfilehash: 794465ceb69f47ee3d5cc8c100b321cb958d9cfe
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 1e022c510dda3e39dd02d607f1d9c493aecdeb5a
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407138"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021565"
 ---
-# <a name="authentication-and-authorization-in-aspnet-core-signalr"></a>Uwierzytelnianie i autoryzacja w ASP.NET CoreSignalR
+# <a name="authentication-and-authorization-in-aspnet-core-no-locsignalr"></a>Uwierzytelnianie i autoryzacja w ASP.NET CoreSignalR
 
 Według [Andrew Stanton-pielęgniarki](https://twitter.com/anurse)
 
 [Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/authn-and-authz/sample/) [(jak pobrać)](xref:index#how-to-download-a-sample)
 
-## <a name="authenticate-users-connecting-to-a-signalr-hub"></a>Uwierzytelnianie użytkowników łączących się z SignalR centrum
+## <a name="authenticate-users-connecting-to-a-no-locsignalr-hub"></a>Uwierzytelnianie użytkowników łączących się z SignalR centrum
 
 SignalRmożna go używać z [uwierzytelnianiem ASP.NET Core](xref:security/authentication/identity) , aby skojarzyć użytkownika z każdym połączeniem. W centrum dane uwierzytelniania są dostępne z poziomu właściwości [HubConnectionContext. User](/dotnet/api/microsoft.aspnetcore.signalr.hubconnectioncontext.user) . Uwierzytelnianie umożliwia centrum wywoływanie metod we wszystkich połączeniach skojarzonych z użytkownikiem. Aby uzyskać więcej informacji, zobacz [Zarządzanie użytkownikami i grupami w programie SignalR ](xref:signalr/groups). Wiele połączeń może być skojarzonych z pojedynczym użytkownikiem.
 
@@ -86,15 +88,15 @@ public void Configure(IApplicationBuilder app)
 
 ::: moniker-end
 
-### <a name="cookie-authentication"></a>Uwierzytelnianie plików cookie
+### <a name="no-loccookie-authentication"></a>Cookieponowne
 
-W aplikacji opartej na przeglądarce uwierzytelnianie plików cookie umożliwia istniejące poświadczenia użytkownika w celu automatycznego przepływania do SignalR połączeń. W przypadku korzystania z klienta przeglądarki nie jest wymagana dodatkowa konfiguracja. Jeśli użytkownik jest zalogowany do aplikacji, SignalR połączenie automatycznie dziedziczy to uwierzytelnianie.
+W aplikacji opartej na przeglądarce cookie uwierzytelnianie umożliwia istniejące poświadczenia użytkownika w celu automatycznego przechodzenia do SignalR połączeń. W przypadku korzystania z klienta przeglądarki nie jest wymagana dodatkowa konfiguracja. Jeśli użytkownik jest zalogowany do aplikacji, SignalR połączenie automatycznie dziedziczy to uwierzytelnianie.
 
-Pliki cookie to specyficzny dla przeglądarki sposób wysyłania tokenów dostępu, ale Klienci niebędący przeglądarkami mogą je wysyłać. W przypadku korzystania z [klienta platformy .NET](xref:signalr/dotnet-client) `Cookies` Właściwość można skonfigurować w wywołaniu, `.WithUrl` Aby dostarczyć plik cookie. Jednak używanie uwierzytelniania plików cookie z poziomu klienta platformy .NET wymaga, aby aplikacja zapewniała interfejs API do wymiany danych uwierzytelniania dla plików cookie.
+Cookies to specyficzny dla przeglądarki sposób wysyłania tokenów dostępu, ale klienci nie korzystający z przeglądarki mogą wysyłać je. W przypadku korzystania z [klienta platformy .NET](xref:signalr/dotnet-client) `Cookies` Właściwość można skonfigurować w wywołaniu, `.WithUrl` Aby zapewnić cookie . Jednak używanie cookie uwierzytelniania z poziomu klienta .NET wymaga, aby aplikacja zapewniała interfejs API do danych uwierzytelniania programu Exchange cookie .
 
 ### <a name="bearer-token-authentication"></a>Uwierzytelnianie tokenu okaziciela
 
-Klient może dostarczyć token dostępu zamiast korzystać z pliku cookie. Serwer sprawdza token i używa go do identyfikowania użytkownika. Sprawdzanie poprawności jest wykonywane tylko wtedy, gdy połączenie zostało nawiązane. W trakcie trwania połączenia serwer nie zostanie automatycznie ponownie sprawdzony w celu sprawdzenia odwołania tokenu.
+Klient może dostarczyć token dostępu zamiast używać cookie . Serwer sprawdza token i używa go do identyfikowania użytkownika. Sprawdzanie poprawności jest wykonywane tylko wtedy, gdy połączenie zostało nawiązane. W trakcie trwania połączenia serwer nie zostanie automatycznie ponownie sprawdzony w celu sprawdzenia odwołania tokenu.
 
 Na serwerze uwierzytelnianie tokenu okaziciela jest konfigurowane przy użyciu [oprogramowania pośredniczącego okaziciela JWT](/dotnet/api/microsoft.extensions.dependencyinjection.jwtbearerextensions.addjwtbearer).
 
@@ -125,11 +127,11 @@ W standardowym interfejsie API sieci Web tokeny okaziciela są wysyłane w nagł
 > [!NOTE]
 > Ciąg zapytania jest używany w przeglądarkach w przypadku nawiązywania połączenia z usługą WebSockets i zdarzeniami wysłanymi przez serwer z powodu ograniczeń interfejsu API przeglądarki. W przypadku korzystania z protokołu HTTPS wartości ciągu zapytania są zabezpieczane przez połączenie TLS. Jednak wiele serwerów rejestruje wartości ciągu zapytania. Aby uzyskać więcej informacji, zobacz [zagadnienia dotyczące SignalR zabezpieczeń w ASP.NET Core ](xref:signalr/security). SignalRużywa nagłówków do przesyłania tokenów w środowiskach, które je obsługują (takich jak klienci .NET i Java).
 
-### <a name="cookies-vs-bearer-tokens"></a>Pliki cookie a tokeny okaziciela 
+### <a name="no-loccookies-vs-bearer-tokens"></a>Cookietokeny s i Bearer 
 
-Pliki cookie są specyficzne dla przeglądarek. Wysyłanie ich z innych rodzajów klientów zwiększa złożoność w porównaniu do wysyłania tokenów okaziciela. W związku z tym uwierzytelnianie plików cookie nie jest zalecane, chyba że aplikacja wymaga tylko uwierzytelnienia użytkowników z poziomu klienta przeglądarki. Uwierzytelnianie tokenów okaziciela jest zalecanym rozwiązaniem w przypadku korzystania z klientów innych niż klient przeglądarki.
+Cookies są specyficzne dla przeglądarek. Wysyłanie ich z innych rodzajów klientów zwiększa złożoność w porównaniu do wysyłania tokenów okaziciela. W związku z tym cookie uwierzytelnianie nie jest zalecane, chyba że aplikacja wymaga tylko uwierzytelnienia użytkowników z poziomu klienta przeglądarki. Uwierzytelnianie tokenów okaziciela jest zalecanym rozwiązaniem w przypadku korzystania z klientów innych niż klient przeglądarki.
 
-### <a name="windows-authentication"></a>Uwierzytelnianie systemu Windows
+### <a name="windows-authentication"></a>Uwierzytelnianie Windows
 
 Jeśli w aplikacji skonfigurowano [uwierzytelnianie systemu Windows](xref:security/authentication/windowsauth) , program SignalR może używać tej tożsamości do zabezpieczania centrów. Aby jednak wysyłać komunikaty do poszczególnych użytkowników, należy dodać niestandardowego dostawcę identyfikatora użytkownika. System uwierzytelniania systemu Windows nie zapewnia żądania "name identifier". SignalRużywa tego żądania, aby określić nazwę użytkownika.
 

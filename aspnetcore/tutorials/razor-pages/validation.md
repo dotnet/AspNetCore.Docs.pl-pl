@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 7/23/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,20 +16,20 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/validation
-ms.openlocfilehash: 1bc9b2b081c58392bd2c226ebedc804b43810bc2
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: dad2e667cb6fa3ace7cb5e5dcb982511357ed49b
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408854"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021526"
 ---
-# <a name="part-8-add-validation-to-an-aspnet-core-razor-page"></a>Część 8, Dodawanie walidacji do Razor strony ASP.NET Core
+# <a name="part-8-add-validation-to-an-aspnet-core-no-locrazor-page"></a>Część 8, Dodawanie walidacji do Razor strony ASP.NET Core
 
 Autor: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 W tej sekcji logika walidacji jest dodawana do `Movie` modelu. Reguły sprawdzania poprawności są wymuszane za każdym razem, gdy użytkownik tworzy lub edytuje film.
 
-## <a name="validation"></a>Walidacja
+## <a name="validation"></a>Weryfikacja
 
 Kluczową cechą rozwoju oprogramowania jest nazywana [sucha](https://wikipedia.org/wiki/Don%27t_repeat_yourself) ("**D**on't **R**EPEAT **Y**ourself"). RazorStrony zachęcają do programowania, w którym funkcje są określone raz i są widoczne w całej aplikacji. SUCHy może pomóc:
 
@@ -63,7 +65,7 @@ Atrybuty walidacji określają zachowanie, które chcesz wymusić na właściwo�
 
 Automatyczne Wymuszanie reguł sprawdzania poprawności przez ASP.NET Core pomaga zwiększyć niezawodność aplikacji. Gwarantuje to również, że nie można zapomnieć, aby zweryfikować coś i przypadkowo umożliwić niewłaściwe dane w bazie danych.
 
-### <a name="validation-error-ui-in-razor-pages"></a>Interfejs użytkownika błędu walidacji na Razor stronach
+### <a name="validation-error-ui-in-no-locrazor-pages"></a>Interfejs użytkownika błędu walidacji na Razor stronach
 
 Uruchom aplikację i przejdź do stron/filmów.
 
@@ -191,7 +193,7 @@ Add-Migration New_DataAnnotations
 Update-Database
 ```
 
-`Update-Database`uruchamia `Up` metody `New_DataAnnotations` klasy. Badanie `Up` metody:
+`Update-Database`uruchamia `Up` metody `New_DataAnnotations` klasy. Przeanalizuj metodę `Up`:
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Migrations/20190724163003_New_DataAnnotations.cs?name=snippet)]
 

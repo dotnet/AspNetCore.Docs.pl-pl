@@ -7,6 +7,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 05/17/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/groups
-ms.openlocfilehash: af76402d02ee4273deadac246f275c1ae7ad84ac
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 3a1182b793c7d05a11f0b5f16f4d406a9063f023
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408516"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021032"
 ---
-# <a name="manage-users-and-groups-in-signalr"></a>Zarządzanie użytkownikami i grupami w programieSignalR
+# <a name="manage-users-and-groups-in-no-locsignalr"></a>Zarządzanie użytkownikami i grupami w programieSignalR
 
 Autor [Brennan Conroy](https://github.com/BrennanConroy)
 
@@ -30,7 +32,7 @@ SignalRumożliwia wysyłanie komunikatów do wszystkich połączeń skojarzonych
 
 [Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/groups/sample/) [(jak pobrać)](xref:index#how-to-download-a-sample)
 
-## <a name="users-in-signalr"></a>Użytkownicy wSignalR
+## <a name="users-in-no-locsignalr"></a>Użytkownicy wSignalR
 
 Pojedynczy użytkownik w programie SignalR może mieć wiele połączeń z aplikacją. Na przykład użytkownik może być połączony na swoim komputerze, a także na telefonie. Każde urządzenie ma oddzielne SignalR połączenie, ale wszystkie są skojarzone z tym samym użytkownikiem. Jeśli wiadomość jest wysyłana do użytkownika, wszystkie połączenia skojarzone z tym użytkownikiem otrzymują komunikat. Do identyfikatora użytkownika dla połączenia można uzyskać dostęp do `Context.UserIdentifier` właściwości w centrum.
 
@@ -43,7 +45,7 @@ Wyślij wiadomość do określonego użytkownika, przekazując identyfikator uż
 
 [!code-csharp[Configure service](groups/sample/Hubs/ChatHub.cs?range=29-32)]
 
-## <a name="groups-in-signalr"></a>Grupy wSignalR
+## <a name="groups-in-no-locsignalr"></a>Grupy wSignalR
 
 Grupa jest kolekcją połączeń skojarzonych z nazwą. Komunikaty mogą być wysyłane do wszystkich połączeń w grupie. Grupy są zalecanym sposobem wysyłania do połączenia lub wielu połączeń, ponieważ grupy są zarządzane przez aplikację. Połączenie może być członkiem wielu grup. Grupy są idealnym rozwiązaniem dla aplikacji czatu, gdzie każde pomieszczenie może być reprezentowane jako Grupa. Połączenia są dodawane lub usuwane z grup za pośrednictwem `AddToGroupAsync` `RemoveFromGroupAsync` metod i.
 

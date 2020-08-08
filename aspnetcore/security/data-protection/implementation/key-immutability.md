@@ -5,6 +5,8 @@ description: Zapoznaj się ze szczegółami implementacji interfejsów API niezm
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/implementation/key-immutability
-ms.openlocfilehash: 01fb3a155aefa34dcd9ede8e7d6ada8fe6bb751c
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 51d7538a98ac2847f018ff1907bb5333bd132f32
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403823"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022397"
 ---
 # <a name="key-immutability-and-key-settings-in-aspnet-core"></a>Key niezmienności i ustawienia klucza w ASP.NET Core
 

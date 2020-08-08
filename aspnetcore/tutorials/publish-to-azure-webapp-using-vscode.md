@@ -6,6 +6,8 @@ ms.author: riserrad
 ms.custom: mvc
 ms.date: 07/10/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/publish-to-azure-webapp-using-vscode
-ms.openlocfilehash: 43a2c4fed3a8873f64259167d3949d720f2c5dab
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: a07786b1ae7e92e73d4336d0dd0bdbf99b571a0a
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406748"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022319"
 ---
 # <a name="publish-an-aspnet-core-app-to-azure-with-visual-studio-code"></a>Publikowanie aplikacji ASP.NET Core na platformie Azure przy użyciu Visual Studio Code
 
@@ -81,7 +83,7 @@ Jeśli poniższe polecenie nie działa, sprawdź, czy instalacja została prawid
 
 ### <a name="through-visual-studio-code-interface"></a>Za za poorednictwem Visual Studio Code interfejsu
 
-- Otwórz Visual Studio Code
+- Otwórz program Visual Studio Code
 - Z menu wybierz pozycję`File > Open Folder`
 - Wybierz katalog główny folderu, w którym został utworzony projekt MVC
 
@@ -98,7 +100,7 @@ tasks.json
 
 Są to pliki narzędzi, które ułatwiają tworzenie i debugowanie aplikacji sieci Web platformy .NET Core.
 
-## <a name="run-the-app"></a>Uruchomienie aplikacji
+## <a name="run-the-app"></a>Uruchamianie aplikacji
 
 Przed wdrożeniem aplikacji na platformie Azure upewnij się, że działa ona prawidłowo na komputerze lokalnym.
 

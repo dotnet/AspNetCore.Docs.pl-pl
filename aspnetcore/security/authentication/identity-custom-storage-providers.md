@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/23/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity-custom-storage-providers
-ms.openlocfilehash: 137b73529a6c3d2a1dece201ebd8a7a5a96da349
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 27f6130742e25e07d4b908973e1ebf26288fdbfd
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404746"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021539"
 ---
-# <a name="custom-storage-providers-for-aspnet-core-identity"></a>Niestandardowi dostawcy magazynu dla ASP.NET CoreIdentity
+# <a name="custom-storage-providers-for-aspnet-core-no-locidentity"></a>Niestandardowi dostawcy magazynu dla ASP.NET CoreIdentity
 
 Przez [Steve Smith](https://ardalis.com/)
 
@@ -31,7 +33,7 @@ ASP.NET Core Identity to rozszerzalny system, który umożliwia utworzenie niest
 
 ## <a name="introduction"></a>Wprowadzenie
 
-Domyślnie Identity system ASP.NET Core przechowuje informacje o użytkownikach w bazie danych SQL Server przy użyciu Entity Framework Core. W przypadku wielu aplikacji to podejście działa prawidłowo. Jednak warto użyć innego mechanizmu trwałości lub schematu danych. Na przykład:
+Domyślnie Identity system ASP.NET Core przechowuje informacje o użytkownikach w bazie danych SQL Server przy użyciu Entity Framework Core. W przypadku wielu aplikacji to podejście działa prawidłowo. Jednak warto użyć innego mechanizmu trwałości lub schematu danych. Przykład:
 
 * Używasz [usługi Azure Table Storage](/azure/storage/) lub innego magazynu danych.
 * Tabele bazy danych mają inną strukturę. 
@@ -47,7 +49,7 @@ Korzystając z interfejs wiersza polecenia platformy .NET Core, Dodaj `-au Indiv
 dotnet new mvc -au Individual
 ```
 
-## <a name="the-aspnet-core-identity-architecture"></a>Architektura ASP.NET Core Identity
+## <a name="the-aspnet-core-no-locidentity-architecture"></a>Architektura ASP.NET Core Identity
 
 ASP.NET Core Identity składa się z klas o nazwie menedżerowie i sklepy. *Menedżerowie* są klasami wysokiego poziomu, których deweloperzy aplikacji używają do wykonywania operacji, takich jak tworzenie Identity użytkownika. *Magazyny* są klasy niższego poziomu, które określają, jak są utrwalane jednostki, takie jak użytkownicy i role. Sklepy są zgodne ze wzorcem repozytorium i są ściśle powiązane z mechanizmem trwałości. Menedżerowie są niezależni od sklepów, co oznacza, że można zastąpić mechanizm trwałości bez zmiany kodu aplikacji (z wyjątkiem konfiguracji).
 
@@ -61,13 +63,13 @@ Podczas tworzenia nowego wystąpienia `UserManager` lub `RoleManager` podania ty
 
 [Zmień konfigurację aplikacji, aby używała nowego dostawcy magazynu](#reconfigure-app-to-use-a-new-storage-provider) pokazuje, jak utworzyć wystąpienie `UserManager` i `RoleManager` przy użyciu dostosowanego magazynu.
 
-## <a name="aspnet-core-identity-stores-data-types"></a>ASP.NET Core Identity przechowuje typy danych
+## <a name="aspnet-core-no-locidentity-stores-data-types"></a>ASP.NET Core Identity przechowuje typy danych
 
 [ASP.NET Core Identity ](https://github.com/aspnet/identity) typy danych są szczegółowo opisane w następujących sekcjach:
 
 ### <a name="users"></a>Użytkownicy
 
-Zarejestrowani użytkownicy witryny sieci Web. Typ [IdentityUser](/dotnet/api/microsoft.aspnet.identity.corecompat.identityuser) może być rozszerzony lub używany jako przykład dla własnego typu niestandardowego. Nie musisz dziedziczyć z określonego typu w celu zaimplementowania własnego niestandardowego rozwiązania do magazynowania tożsamości.
+Zarejestrowani użytkownicy witryny sieci Web. Typ [ Identity użytkownika](/dotnet/api/microsoft.aspnet.identity.corecompat.identityuser) może być rozszerzony lub używany jako przykład dla własnego typu niestandardowego. Nie musisz dziedziczyć z określonego typu w celu zaimplementowania własnego niestandardowego rozwiązania do magazynowania tożsamości.
 
 ### <a name="user-claims"></a>Oświadczenia użytkownika
 
@@ -123,7 +125,7 @@ Logika implementacji dla tworzenia użytkownika znajduje się w `_usersTable.Cre
 
 ## <a name="customize-the-user-class"></a>Dostosowywanie klasy użytkownika
 
-Podczas implementowania dostawcy magazynu należy utworzyć klasę użytkownika, która jest równoważna z [klasą IdentityUser](/dotnet/api/microsoft.aspnet.identity.corecompat.identityuser).
+Podczas implementowania dostawcy magazynu należy utworzyć klasę użytkownika, która jest równoważna z [ Identity klasą użytkownika](/dotnet/api/microsoft.aspnet.identity.corecompat.identityuser).
 
 Co najmniej Klasa użytkownika musi zawierać `Id` `UserName` Właściwość i.
 
@@ -177,7 +179,7 @@ W ramach `UserStore` klasy używane są klasy dostępu do danych, które został
 * **IQueryableUserStore**  
  Interfejs [IQueryableUserStore &lt; TUser &gt; ](/dotnet/api/microsoft.aspnetcore.identity.iqueryableuserstore-1) definiuje elementy członkowskie, które są implementowane w celu udostępnienia magazynu użytkownika queryable.
 
-Implementowane są tylko interfejsy, które są potrzebne w aplikacji. Na przykład:
+Implementowane są tylko interfejsy, które są potrzebne w aplikacji. Przykład:
 
 ```csharp
 public class UserStore : IUserStore<IdentityUser>,
@@ -191,9 +193,9 @@ public class UserStore : IUserStore<IdentityUser>,
 }
 ```
 
-### <a name="identityuserclaim-identityuserlogin-and-identityuserrole"></a>IdentityUserClaim, IdentityUserLogin i IdentityUserRole
+### <a name="no-locidentityuserclaim-no-locidentityuserlogin-and-no-locidentityuserrole"></a>IdentityUserClaim, Identity UserLogin i Identity UserRole
 
-`Microsoft.AspNet.Identity.EntityFramework`Przestrzeń nazw zawiera implementacje klas [IdentityUserClaim](/dotnet/api/microsoft.aspnetcore.identity.entityframeworkcore.identityuserclaim-1), [IdentityUserLogin](/dotnet/api/microsoft.aspnet.identity.corecompat.identityuserlogin)i [IdentityUserRole](/dotnet/api/microsoft.aspnetcore.identity.entityframeworkcore.identityuserrole-1) . Jeśli używasz tych funkcji, możesz chcieć utworzyć własne wersje tych klas i zdefiniować właściwości aplikacji. Czasami jednak wydajniejsze jest, aby nie ładować tych jednostek do pamięci podczas wykonywania podstawowych operacji (takich jak dodawanie lub usuwanie roszczeń użytkownika). Zamiast tego klasy magazynu zaplecza mogą wykonywać te operacje bezpośrednio w źródle danych. Na przykład `UserStore.GetClaimsAsync` Metoda może wywołać `userClaimTable.FindByUserId(user.Id)` metodę, aby wykonać zapytanie bezpośrednio względem tej tabeli i zwrócić listę oświadczeń.
+`Microsoft.AspNet.Identity.EntityFramework`Przestrzeń nazw zawiera implementacje klas [ Identity UserClaim](/dotnet/api/microsoft.aspnetcore.identity.entityframeworkcore.identityuserclaim-1), [ Identity UserLogin](/dotnet/api/microsoft.aspnet.identity.corecompat.identityuserlogin)i [ Identity UserRole](/dotnet/api/microsoft.aspnetcore.identity.entityframeworkcore.identityuserrole-1) . Jeśli używasz tych funkcji, możesz chcieć utworzyć własne wersje tych klas i zdefiniować właściwości aplikacji. Czasami jednak wydajniejsze jest, aby nie ładować tych jednostek do pamięci podczas wykonywania podstawowych operacji (takich jak dodawanie lub usuwanie roszczeń użytkownika). Zamiast tego klasy magazynu zaplecza mogą wykonywać te operacje bezpośrednio w źródle danych. Na przykład `UserStore.GetClaimsAsync` Metoda może wywołać `userClaimTable.FindByUserId(user.Id)` metodę, aby wykonać zapytanie bezpośrednio względem tej tabeli i zwrócić listę oświadczeń.
 
 ## <a name="customize-the-role-class"></a>Dostosowywanie klasy roli
 
@@ -219,7 +221,7 @@ Po zaimplementowaniu dostawcy magazynu należy skonfigurować aplikację do korz
 1. Usuń `Microsoft.AspNetCore.EntityFramework.Identity` pakiet NuGet.
 1. Jeśli dostawca magazynu znajduje się w osobnym projekcie lub pakiecie, Dodaj odwołanie do niego.
 1. Zastąp wszystkie odwołania do za pomocą `Microsoft.AspNetCore.EntityFramework.Identity` instrukcji using dla przestrzeni nazw dostawcy magazynu.
-1. W `ConfigureServices` metodzie Zmień metodę, `AddIdentity` tak aby korzystała z typów niestandardowych. W tym celu można utworzyć własne metody rozszerzenia. Zapoznaj się z przykładem [IdentityServiceCollectionExtensions](https://github.com/aspnet/Identity/blob/rel/1.1.0/src/Microsoft.AspNetCore.Identity/IdentityServiceCollectionExtensions.cs) .
+1. W `ConfigureServices` metodzie Zmień metodę, `AddIdentity` tak aby korzystała z typów niestandardowych. W tym celu można utworzyć własne metody rozszerzenia. Zapoznaj się z przykładem [ Identity ServiceCollectionExtensions](https://github.com/aspnet/Identity/blob/rel/1.1.0/src/Microsoft.AspNetCore.Identity/IdentityServiceCollectionExtensions.cs) .
 1. Jeśli używasz ról, zaktualizuj, `RoleManager` Aby użyć `RoleStore` klasy.
 1. Zaktualizuj parametry połączenia i poświadczenia do konfiguracji aplikacji.
 
@@ -243,7 +245,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-## <a name="references"></a>Odwołania
+## <a name="references"></a>Dokumentacja
 
 * [Niestandardowi dostawcy magazynu dla ASP.NET 4. xIdentity](/aspnet/identity/overview/extensibility/overview-of-custom-storage-providers-for-aspnet-identity)
 * [ASP.NET Core Identity ](https://github.com/dotnet/AspNetCore/tree/master/src/Identity): to repozytorium zawiera linki do dostawców sklepu obsługiwanego przez społeczność.

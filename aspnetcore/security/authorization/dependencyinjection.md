@@ -5,6 +5,8 @@ description: Dowiedz się, jak wstrzyknąć programy obsługi wymagań autoryzac
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/dependencyinjection
-ms.openlocfilehash: d12253ad1c1442c0db5cd497393daabe280fae8d
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: e58498cc7a28b598b919c5cab128249448bde32a
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406358"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021006"
 ---
 # <a name="dependency-injection-in-requirement-handlers-in-aspnet-core"></a>Wstrzykiwanie zależności w programach obsługi wymagań w ASP.NET Core
 

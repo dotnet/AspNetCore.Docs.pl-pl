@@ -5,6 +5,8 @@ description: Poznaj podstawowe informacje dotyczące autoryzacji i sposobu dzia�
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/introduction
-ms.openlocfilehash: b0d6c91adfb5dc273aeb662cb2c249626ef1d3c6
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 215c61b034abf530010b7beeb58100a1ff0e8eb3
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405435"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022124"
 ---
 # <a name="introduction-to-authorization-in-aspnet-core"></a>Wprowadzenie do autoryzacji w ASP.NET Core
 
@@ -34,7 +36,7 @@ Aby uzyskać więcej informacji na temat uwierzytelniania w ASP.NET Core, zobacz
 
 Autoryzacja ASP.NET Core zapewnia prostą, deklaratywną [rolę](xref:security/authorization/roles) i bogaty model [oparty na zasadach](xref:security/authorization/policies) . Autoryzacja jest wyrażona w wymaganiach, a programy obsługi szacują oświadczenia użytkownika względem wymagań. Bezwzględne kontrole mogą opierać się na prostych zasadach lub zasadach, które obliczają zarówno tożsamość użytkownika, jak i właściwości zasobu, do którego użytkownik próbuje uzyskać dostęp.
 
-## <a name="namespaces"></a>Przestrzenie nazw
+## <a name="namespaces"></a>Namespaces
 
 `AuthorizeAttribute` `AllowAnonymousAttribute` W przestrzeni nazw znajdują się składniki autoryzacji, w tym atrybuty i `Microsoft.AspNetCore.Authorization` .
 

@@ -5,6 +5,8 @@ description: Używanie Identity z aplikacją ASP.NET Core. Dowiedz się, jak ust
 ms.author: riande
 ms.date: 7/15/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity
-ms.openlocfilehash: 25070e90050db9dca8b003ae782662811096526a
-ms.sourcegitcommit: 5a36758cca2861aeb10840093e46d273a6e6e91d
+ms.openlocfilehash: 67bf24d8f871c4e80ed91f5f437895fe29e09087
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87160310"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021240"
 ---
 # <a name="introduction-to-no-locidentity-on-aspnet-core"></a>Wprowadzenie do Identity ASP.NET Core
 
@@ -48,7 +50,7 @@ W tym temacie dowiesz się, jak używać Identity do rejestrowania, logowania i 
 
 [!INCLUDE[](~/includes/IdentityServer4.md)]
 
-[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/identity/sample) ([jak pobrać)](xref:index#how-to-download-a-sample)).
+[Wyświetl lub Pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/identity/sample) ([jak pobrać](xref:index#how-to-download-a-sample)).
 
 <a name="adi"></a>
 
@@ -63,7 +65,7 @@ Utwórz projekt aplikacji sieci Web ASP.NET Core przy użyciu poszczególnych ko
 * Wybierz **aplikację sieci Web**ASP.NET Core, a następnie wybierz pozycję **Zmień uwierzytelnianie**.
 * Wybierz pozycję **indywidualne konta użytkowników** , a następnie kliknij przycisk **OK**.
 
-# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
 
 ```dotnetcli
 dotnet new webapp --auth Individual -o WebApp1
@@ -77,7 +79,7 @@ dotnet new webapp --auth Individual -uld -o WebApp1
 
 ---
 
-Wygenerowany projekt zawiera [ASP.NET Core Identity ](xref:security/authentication/identity) jako [ Razor bibliotekę klas](xref:razor-pages/ui-class). Identity Razor Biblioteka klas uwidacznia punkty końcowe z `Identity` obszarem. Na przykład:
+Wygenerowany projekt zawiera [ASP.NET Core Identity ](xref:security/authentication/identity) jako [ Razor bibliotekę klas](xref:razor-pages/ui-class). Identity Razor Biblioteka klas uwidacznia punkty końcowe z `Identity` obszarem. Przykład:
 
 * /Identity/Account/Login
 * /Identity/Account/Logout
@@ -93,7 +95,7 @@ Uruchom następujące polecenie w konsoli Menedżera pakietów (PMC):
 
 `PM> Update-Database`
 
-# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
 
 W przypadku korzystania z oprogramowania SQLite migracja nie jest konieczna.
 
@@ -137,7 +139,7 @@ Aby uzyskać więcej informacji na temat programów `IdentityOptions` i `Startup
 
 Dodaj `Register` pliki, `Login` , `LogOut` i `RegisterConfirmation` . Postępuj zgodnie z informacjami o [tożsamości szkieletowej w Razor projekcie z instrukcjami autoryzacji](xref:security/authentication/scaffold-identity#scaffold-identity-into-a-razor-project-with-authorization) w celu wygenerowania kodu pokazanego w tej sekcji.
 
-# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
 
 Jeśli utworzono projekt o nazwie **WebApp1**, uruchom następujące polecenia. W przeciwnym razie użyj prawidłowej przestrzeni nazw dla `ApplicationDbContext` :
 
@@ -184,7 +186,7 @@ Link **Wyloguj** wywołuje `LogoutModel.OnPost` akcję.
 
 W powyższym kodzie kod `return RedirectToPage();` musi być przekierowaniem, aby przeglądarka wykonywała nowe żądanie, a tożsamość użytkownika zostanie zaktualizowana.
 
-[SignOutAsync](/dotnet/api/microsoft.aspnetcore.identity.signinmanager-1.signoutasync#Microsoft_AspNetCore_Identity_SignInManager_1_SignOutAsync) czyści oświadczenia użytkownika przechowywane w pliku cookie.
+[SignOutAsync](/dotnet/api/microsoft.aspnetcore.identity.signinmanager-1.signoutasync#Microsoft_AspNetCore_Identity_SignInManager_1_SignOutAsync) czyści oświadczenia użytkownika przechowywane w cookie .
 
 Wpis jest określony na *stronie/Shared/_LoginPartial. cshtml*:
 
@@ -270,7 +272,7 @@ ASP.NET Core Identity to system członkostwa, który dodaje funkcje logowania do
 
 Identitymożna skonfigurować przy użyciu bazy danych SQL Server do przechowywania nazw użytkowników, haseł i danych profilu. Alternatywnie można użyć innego magazynu trwałego, na przykład Azure Table Storage.
 
-[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/identity/sample/src/ASPNETCore-IdentityDemoComplete/) ([jak pobrać)](xref:index#how-to-download-a-sample)).
+[Wyświetl lub Pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/identity/sample/src/ASPNETCore-IdentityDemoComplete/) ([jak pobrać](xref:index#how-to-download-a-sample)).
 
 W tym temacie dowiesz się, jak używać Identity do rejestrowania, logowania i wylogowywania użytkownika. Aby uzyskać bardziej szczegółowe instrukcje dotyczące tworzenia aplikacji, które używają Identity , zobacz sekcję następne kroki na końcu tego artykułu.
 
@@ -297,7 +299,7 @@ Utwórz projekt aplikacji sieci Web ASP.NET Core przy użyciu poszczególnych ko
 * Wybierz **aplikację sieci Web**ASP.NET Core, a następnie wybierz pozycję **Zmień uwierzytelnianie**.
 * Wybierz pozycję **indywidualne konta użytkowników** , a następnie kliknij przycisk **OK**.
 
-# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
 
 ```dotnetcli
 dotnet new webapp --auth Individual -o WebApp1
@@ -305,7 +307,7 @@ dotnet new webapp --auth Individual -o WebApp1
 
 ---
 
-Wygenerowany projekt zawiera [ASP.NET Core Identity ](xref:security/authentication/identity) jako [ Razor bibliotekę klas](xref:razor-pages/ui-class). Identity Razor Biblioteka klas uwidacznia punkty końcowe z `Identity` obszarem. Na przykład:
+Wygenerowany projekt zawiera [ASP.NET Core Identity ](xref:security/authentication/identity) jako [ Razor bibliotekę klas](xref:razor-pages/ui-class). Identity Razor Biblioteka klas uwidacznia punkty końcowe z `Identity` obszarem. Przykład:
 
 * /Identity/Account/Login
 * /Identity/Account/Logout
@@ -323,7 +325,7 @@ Uruchom następujące polecenie w konsoli Menedżera pakietów (PMC):
 Update-Database
 ```
 
-# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
 
 ```dotnetcli
 dotnet ef database update
@@ -361,7 +363,7 @@ Postępuj zgodnie z informacjami o [tożsamości szkieletowej w Razor projekcie 
 
 Dodaj pliki rejestru, logowania i wylogowywania.
 
-# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
 
 Jeśli utworzono projekt o nazwie **WebApp1**, uruchom następujące polecenia. W przeciwnym razie użyj prawidłowej przestrzeni nazw dla `ApplicationDbContext` :
 
@@ -403,7 +405,7 @@ Link **Wyloguj** wywołuje `LogoutModel.OnPost` akcję.
 
 [!code-csharp[](identity/sample/WebApp1/Areas/Identity/Pages/Account/Logout.cshtml.cs)]
 
-[SignOutAsync](/dotnet/api/microsoft.aspnetcore.identity.signinmanager-1.signoutasync#Microsoft_AspNetCore_Identity_SignInManager_1_SignOutAsync) czyści oświadczenia użytkownika przechowywane w pliku cookie.
+[SignOutAsync](/dotnet/api/microsoft.aspnetcore.identity.signinmanager-1.signoutasync#Microsoft_AspNetCore_Identity_SignInManager_1_SignOutAsync) czyści oświadczenia użytkownika przechowywane w cookie .
 
 Wpis jest określony na *stronie/Shared/_LoginPartial. cshtml*:
 

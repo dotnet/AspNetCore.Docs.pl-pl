@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-2.2
-ms.openlocfilehash: c2e23871866565a3f4ea0b0c72af5ec4fb770e6f
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 354839abe295b4adcbf6becfd3bd926330f0823f
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408711"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021149"
 ---
 # <a name="whats-new-in-aspnet-core-22"></a>Co nowego w ASP.NET Core 2,2
 
@@ -29,7 +31,7 @@ W tym artykule przedstawiono najbardziej znaczące zmiany w ASP.NET Core 2,2 z l
 
 OpenAPI (wcześniej znany jako Swagger) to specyfikacja języka niezależny od do opisywania interfejsów API REST. Ekosystem OpenAPI zawiera narzędzia, które umożliwiają odnajdywanie, testowanie i tworzenie kodu klienta przy użyciu specyfikacji. Obsługa generowania i wizualizacji dokumentów OpenAPI w ASP.NET Core MVC jest zapewniana za pośrednictwem projektów opartych na społeczności, takich jak [NSwag](https://github.com/RicoSuter/NSwag) i [Swashbuckle. AspNetCore](https://github.com/domaindrivendev/Swashbuckle.AspNetCore). ASP.NET Core 2,2 oferuje udoskonalone narzędzia i środowisko uruchomieniowe do tworzenia dokumentów OpenAPI.
 
-Więcej informacji zawierają następujące zasoby:
+Więcej informacji można znaleźć w następujących zasobach:
 
 * <xref:web-api/advanced/analyzers>
 * <xref:web-api/advanced/conventions>
@@ -43,7 +45,7 @@ Wprowadzono ASP.NET Core 2,1 na `ProblemDetails` podstawie specyfikacji [RFC 780
 
 ASP.NET Core 2,2 używa nowego systemu *routingu punktu końcowego* do ulepszonego wysyłania żądań. Zmiany obejmują nowe elementy członkowskie interfejsu API generacji linków i transformatory parametrów trasy.
 
-Więcej informacji zawierają następujące zasoby:
+Więcej informacji można znaleźć w następujących zasobach:
 
 * [Routing punktów końcowych w 2,2](https://blogs.msdn.microsoft.com/webdev/2018/08/27/asp-net-core-2-2-0-preview1-endpoint-routing/)
 * [Transformatory parametrów trasy](https://www.hanselman.com/blog/ASPNETCore22ParameterTransformersForCleanURLGenerationAndSlugsInRazorPagesOrMVC.aspx) (zobacz sekcję **routingu** )
@@ -76,7 +78,7 @@ Aby uzyskać więcej informacji, zobacz [Obsługa protokołu HTTP/2](xref:fundam
 
 ## <a name="kestrel-configuration"></a>Konfiguracja Kestrel
 
-We wcześniejszych wersjach ASP.NET Core opcje Kestrel są konfigurowane przez wywołanie `UseKestrel` . W 2,2 opcje Kestrel są konfigurowane przez wywołanie `ConfigureKestrel` na konstruktorze hosta. Ta zmiana rozwiązuje problem z kolejnością `IServer` rejestracji na potrzeby hostingu w procesie. Więcej informacji zawierają następujące zasoby:
+We wcześniejszych wersjach ASP.NET Core opcje Kestrel są konfigurowane przez wywołanie `UseKestrel` . W 2,2 opcje Kestrel są konfigurowane przez wywołanie `ConfigureKestrel` na konstruktorze hosta. Ta zmiana rozwiązuje problem z kolejnością `IServer` rejestracji na potrzeby hostingu w procesie. Więcej informacji można znaleźć w następujących zasobach:
 
 * [Eliminowanie konfliktu Iisurl](https://github.com/aspnet/KestrelHttpServer/issues/2760)
 * [Konfigurowanie opcji serwera Kestrel za pomocą ConfigureKestrel](xref:fundamentals/servers/kestrel?view=aspnetcore-2.2#how-to-use-kestrel-in-aspnet-core-apps)
@@ -87,7 +89,7 @@ W starszych wersjach ASP.NET Core usługi IIS pełnią funkcję zwrotnego serwer
 
 Aby uzyskać więcej informacji, zobacz [hosting w procesie dla usług IIS](xref:host-and-deploy/aspnet-core-module?view=aspnetcore-2.2#in-process-hosting-model).
 
-## <a name="signalr-java-client"></a>SignalRKlient Java
+## <a name="no-locsignalr-java-client"></a>SignalRKlient Java
 
 ASP.NET Core 2,2 wprowadza klienta Java dla programu SignalR . Ten klient obsługuje łączenie z serwerem ASP.NET Core SignalR przy użyciu kodu Java, w tym aplikacji dla systemu Android.
 

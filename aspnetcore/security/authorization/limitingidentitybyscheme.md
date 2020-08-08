@@ -6,6 +6,8 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 11/08/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,18 +16,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/limitingidentitybyscheme
-ms.openlocfilehash: 042b22a220d961773437e9d85d5f0c5782e29bea
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 66b307a3629e18e49b5bb6e65a156054c0002ba8
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406020"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022111"
 ---
 # <a name="authorize-with-a-specific-scheme-in-aspnet-core"></a>Autoryzuj z określonym schematem w ASP.NET Core
 
-W niektórych scenariuszach, takich jak aplikacje jednostronicowe (aplikacji jednostronicowych), często używane są wiele metod uwierzytelniania. Na przykład aplikacja może używać uwierzytelniania opartego na plikach cookie do logowania się i uwierzytelniania JWT dla żądań języka JavaScript. W niektórych przypadkach aplikacja może mieć wiele wystąpień programu obsługi uwierzytelniania. Na przykład dwa programy obsługi plików cookie, w których jeden zawiera tożsamość podstawową, a jedna jest tworzona podczas wyzwalania uwierzytelniania wieloskładnikowego (MFA). Uwierzytelnianie wieloskładnikowe może być wyzwalane, ponieważ użytkownik zażądał operacji wymagającej dodatkowych zabezpieczeń. Aby uzyskać więcej informacji na temat wymuszania usługi MFA, gdy użytkownik zażąda zasobu wymagającego uwierzytelniania wieloskładnikowego, zobacz [sekcję dotyczącą ochrony za pomocą](https://github.com/dotnet/AspNetCore.Docs/issues/15791#issuecomment-580464195)usługi GitHub i usługi MFA
+W niektórych scenariuszach, takich jak aplikacje jednostronicowe (aplikacji jednostronicowych), często używane są wiele metod uwierzytelniania. Na przykład aplikacja może używać cookie uwierzytelniania opartego na usłudze do logowania i uwierzytelniania JWT dla żądań języka JavaScript. W niektórych przypadkach aplikacja może mieć wiele wystąpień programu obsługi uwierzytelniania. Na przykład dwa cookie programy obsługi, w których jeden zawiera podstawową tożsamość, a jedna jest tworzona podczas wyzwalania uwierzytelniania wieloskładnikowego (MFA). Uwierzytelnianie wieloskładnikowe może być wyzwalane, ponieważ użytkownik zażądał operacji wymagającej dodatkowych zabezpieczeń. Aby uzyskać więcej informacji na temat wymuszania usługi MFA, gdy użytkownik zażąda zasobu wymagającego uwierzytelniania wieloskładnikowego, zobacz [sekcję dotyczącą ochrony za pomocą](https://github.com/dotnet/AspNetCore.Docs/issues/15791#issuecomment-580464195)usługi GitHub i usługi MFA
 
-Schemat uwierzytelniania ma nazwę, gdy usługa uwierzytelniania jest konfigurowana podczas uwierzytelniania. Na przykład:
+Schemat uwierzytelniania ma nazwę, gdy usługa uwierzytelniania jest konfigurowana podczas uwierzytelniania. Przykład:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -43,14 +45,14 @@ public void ConfigureServices(IServiceCollection services)
         });
 ```
 
-W poprzednim kodzie dodano dwa programy obsługi uwierzytelniania: jeden dla plików cookie i jeden dla okaziciela.
+W poprzednim kodzie dodano dwa programy obsługi uwierzytelniania: jeden dla cookie s i jeden dla okaziciela.
 
 >[!NOTE]
 >Określenie schematu domyślnego powoduje, że `HttpContext.User` Właściwość jest ustawiana na tę tożsamość. Jeśli takie zachowanie nie jest wymagane, należy je wyłączyć, wywołując formularz bez parametrów `AddAuthentication` .
 
 ## <a name="selecting-the-scheme-with-the-authorize-attribute"></a>Wybieranie schematu z atrybutem Autoryzuj
 
-W punkcie autoryzacji Aplikacja wskazuje program obsługi, który ma być używany. Wybierz program obsługi, za pomocą którego aplikacja będzie autoryzować, przekazując rozdzieloną przecinkami listę schematów uwierzytelniania do `[Authorize]` . Ten `[Authorize]` atrybut określa schemat lub schematy uwierzytelniania, które mają być używane niezależnie od tego, czy skonfigurowano wartość domyślną. Na przykład:
+W punkcie autoryzacji Aplikacja wskazuje program obsługi, który ma być używany. Wybierz program obsługi, za pomocą którego aplikacja będzie autoryzować, przekazując rozdzieloną przecinkami listę schematów uwierzytelniania do `[Authorize]` . Ten `[Authorize]` atrybut określa schemat lub schematy uwierzytelniania, które mają być używane niezależnie od tego, czy skonfigurowano wartość domyślną. Przykład:
 
 ```csharp
 [Authorize(AuthenticationSchemes = AuthSchemes)]
@@ -63,7 +65,7 @@ public class MixedController : Controller
         JwtBearerDefaults.AuthenticationScheme;
 ```
 
-W poprzednim przykładzie uruchomiono zarówno programy obsługi plików cookie, jak i okaziciela oraz możliwość tworzenia i dołączania tożsamości bieżącego użytkownika. Określając tylko jeden schemat, zostanie uruchomiony odpowiedni program obsługi.
+W poprzednim przykładzie zarówno program, cookie jak i programy obsługi oraz mogą tworzyć i dołączać tożsamość bieżącego użytkownika. Określając tylko jeden schemat, zostanie uruchomiony odpowiedni program obsługi.
 
 ```csharp
 [Authorize(AuthenticationSchemes = 
@@ -71,7 +73,7 @@ W poprzednim przykładzie uruchomiono zarówno programy obsługi plików cookie,
 public class MixedController : Controller
 ```
 
-W poprzednim kodzie jest tylko procedura obsługi ze schematem "Bearer". Wszystkie tożsamości oparte na plikach cookie są ignorowane.
+W poprzednim kodzie jest tylko procedura obsługi ze schematem "Bearer". Wszystkie cookie tożsamości oparte na usłudze są ignorowane.
 
 ## <a name="selecting-the-scheme-with-policies"></a>Wybieranie schematu z zasadami
 
@@ -126,7 +128,7 @@ public void ConfigureServices(IServiceCollection services)
 > [!NOTE]
 > Zarejestrowano tylko jedno uwierzytelnianie okaziciela JWT z domyślnym schematem uwierzytelniania `JwtBearerDefaults.AuthenticationScheme` . Dodatkowe uwierzytelnianie musi być zarejestrowane przy użyciu unikatowego schematu uwierzytelniania.
 
-Następnym krokiem jest zaktualizowanie domyślnych zasad autoryzacji w celu zaakceptowania obu schematów uwierzytelniania. Na przykład:
+Następnym krokiem jest zaktualizowanie domyślnych zasad autoryzacji w celu zaakceptowania obu schematów uwierzytelniania. Przykład:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)

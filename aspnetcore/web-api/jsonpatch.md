@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/02/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/jsonpatch
-ms.openlocfilehash: 08ae366859c4466e6957592f78dda813d6670bb4
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 09da557d678889ba16abe6f9af40ae1b33583d8b
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405032"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022371"
 ---
 # <a name="jsonpatch-in-aspnet-core-web-api"></a>JsonPatch w interfejsie Web API ASP.NET Core
 
@@ -34,7 +36,7 @@ W tym artykule wyjaśniono, jak obsłużyć żądania poprawek w formacie JSON w
 Aby włączyć obsługę poprawek JSON w aplikacji, wykonaj następujące czynności:
 
 1. Zainstaluj [`Microsoft.AspNetCore.Mvc.NewtonsoftJson`](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson/) pakiet NuGet.
-1. Zaktualizuj `Startup.ConfigureServices` metodę projektu w celu wywołania <xref:Microsoft.Extensions.DependencyInjection.NewtonsoftJsonMvcBuilderExtensions.AddNewtonsoftJson*> . Na przykład:
+1. Zaktualizuj `Startup.ConfigureServices` metodę projektu w celu wywołania <xref:Microsoft.Extensions.DependencyInjection.NewtonsoftJsonMvcBuilderExtensions.AddNewtonsoftJson*> . Przykład:
 
     ```csharp
     services
@@ -139,7 +141,7 @@ W kontrolerze interfejsu API Metoda akcji dla poprawki JSON:
 * Akceptuje element `JsonPatchDocument<T>` , zazwyczaj z `[FromBody]` .
 * Wywołuje `ApplyTo` dokument poprawki, aby zastosować zmiany.
 
-Przykład:
+Oto przykład:
 
 [!code-csharp[](jsonpatch/samples/2.2/Controllers/HomeController.cs?name=snippet_PatchAction&highlight=1,3,9)]
 
@@ -351,7 +353,7 @@ W kontrolerze interfejsu API Metoda akcji dla poprawki JSON:
 * Akceptuje element `JsonPatchDocument<T>` , zazwyczaj z `[FromBody]` .
 * Wywołuje `ApplyTo` dokument poprawki, aby zastosować zmiany.
 
-Przykład:
+Oto przykład:
 
 [!code-csharp[](jsonpatch/samples/2.2/Controllers/HomeController.cs?name=snippet_PatchAction&highlight=1,3,9)]
 

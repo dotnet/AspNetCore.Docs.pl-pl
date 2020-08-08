@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/17/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/cors
-ms.openlocfilehash: dc8e68ef482025443147eeb27bd3f245c1a1a5ed
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.openlocfilehash: ee640ded37f40175e3e150f713fa970e9705b62c
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86212886"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021110"
 ---
 # <a name="enable-cross-origin-requests-cors-in-aspnet-core"></a>Włącz żądania między źródłami (CORS) w ASP.NET Core
 
@@ -272,7 +274,7 @@ Specyfikacja CORS wywołuje te nagłówki *proste odpowiedzi*. Aby udostępnić 
 [!code-csharp[](cors/3.1sample/Cors/WebAPI/StartupAllowSubdomain.cs?name=snippet5)]
 ### <a name="credentials-in-cross-origin-requests"></a>Poświadczenia w żądaniach między źródłami
 
-Poświadczenia wymagają specjalnej obsługi w żądaniu CORS. Domyślnie przeglądarka nie wysyła poświadczeń z żądaniem między źródłami. Poświadczenia obejmują pliki cookie i schematy uwierzytelniania HTTP. Aby wysłać poświadczenia z żądaniem między źródłami, klient musi mieć ustawioną `XMLHttpRequest.withCredentials` wartość `true` .
+Poświadczenia wymagają specjalnej obsługi w żądaniu CORS. Domyślnie przeglądarka nie wysyła poświadczeń z żądaniem między źródłami. Poświadczenia obejmują cookie schematy uwierzytelniania s i http. Aby wysłać poświadczenia z żądaniem między źródłami, klient musi mieć ustawioną `XMLHttpRequest.withCredentials` wartość `true` .
 
 `XMLHttpRequest`Bezpośrednie używanie:
 
@@ -617,7 +619,7 @@ Poniżej `TodoItems2Controller` znajdują się podobne punkty końcowe, ale zawi
 
 Przetestuj poprzedni kod ze [strony testowej](https://cors1.azurewebsites.net/test?number=2) wdrożonej próbki. Z listy rozwijanej **kontroler** wybierz kolejno pozycje **Inspekcja wstępna** , a następnie **Ustaw kontroler**. Wszystkie wywołania mechanizmu CORS do `TodoItems2Controller` punktów końcowych powiodły się.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Współużytkowanie zasobów między źródłami (CORS)](https://developer.mozilla.org/docs/Web/HTTP/CORS)
 * [Wprowadzenie do modułu CORS usług IIS](https://blogs.iis.net/iisteam/getting-started-with-the-iis-cors-module)
@@ -819,7 +821,7 @@ Specyfikacja CORS wywołuje te nagłówki *proste odpowiedzi*. Aby udostępnić 
 
 ### <a name="credentials-in-cross-origin-requests"></a>Poświadczenia w żądaniach między źródłami
 
-Poświadczenia wymagają specjalnej obsługi w żądaniu CORS. Domyślnie przeglądarka nie wysyła poświadczeń z żądaniem między źródłami. Poświadczenia obejmują pliki cookie i schematy uwierzytelniania HTTP. Aby wysłać poświadczenia z żądaniem między źródłami, klient musi mieć ustawioną `XMLHttpRequest.withCredentials` wartość `true` .
+Poświadczenia wymagają specjalnej obsługi w żądaniu CORS. Domyślnie przeglądarka nie wysyła poświadczeń z żądaniem między źródłami. Poświadczenia obejmują cookie schematy uwierzytelniania s i http. Aby wysłać poświadczenia z żądaniem między źródłami, klient musi mieć ustawioną `XMLHttpRequest.withCredentials` wartość `true` .
 
 `XMLHttpRequest`Bezpośrednie używanie:
 
@@ -1023,7 +1025,7 @@ Punkty końcowe z obsługą mechanizmu CORS można testować za pomocą narzędz
 
 W przypadku wdrażania w programie IIS należy uruchomić funkcję CORS przed uwierzytelnianiem systemu Windows, jeśli serwer nie jest skonfigurowany do zezwalania na dostęp anonimowy. Aby zapewnić obsługę tego scenariusza, należy zainstalować i skonfigurować [moduł CORS usług IIS](https://www.iis.net/downloads/microsoft/iis-cors-module) dla aplikacji.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Współużytkowanie zasobów między źródłami (CORS)](https://developer.mozilla.org/docs/Web/HTTP/CORS)
 * [Wprowadzenie do modułu CORS usług IIS](https://blogs.iis.net/iisteam/getting-started-with-the-iis-cors-module)

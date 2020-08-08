@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,18 +16,18 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-2.0
-ms.openlocfilehash: 97d8606ba6bef0bb8bf23d1553c7cb5681fbdbd8
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 1ec51bf054f1f0d60ed27ee280f436e6d4c8c4b0
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404369"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021200"
 ---
 # <a name="whats-new-in-aspnet-core-20"></a>Co nowego w ASP.NET Core 2,0
 
 W tym artykule przedstawiono najbardziej znaczące zmiany w ASP.NET Core 2,0 z linkami do odpowiedniej dokumentacji.
 
-## <a name="razor-pages"></a>RazorPage
+## <a name="no-locrazor-pages"></a>RazorPage
 
 RazorStrony są nową funkcją ASP.NET Core MVC, która sprawia, że kodowanie scenariuszy ukierunkowanych na strony jest łatwiejsze i bardziej produktywne.
 
@@ -72,7 +74,7 @@ Nowe szablony są dostępne do konfigurowania uwierzytelniania dla aplikacji sie
 
 Aby uzyskać informacje o stanie planowanej dokumentacji, zobacz problem z usługą [GitHub](https://github.com/dotnet/AspNetCore.Docs/issues/3054).
 
-## <a name="identity-update"></a>Identityaktualizacji
+## <a name="no-locidentity-update"></a>Identityaktualizacji
 
 Ułatwiamy tworzenie bezpiecznych interfejsów API sieci Web za pomocą Identity programu w ASP.NET Core 2,0. Możesz uzyskać tokeny dostępu do uzyskiwania dostępu do interfejsów API sieci Web przy użyciu [biblioteki uwierzytelniania firmy Microsoft (MSAL)](https://www.nuget.org/packages/Microsoft.Identity.Client).
 
@@ -136,7 +138,7 @@ RazorWidok sprzed kompilacji jest domyślnie włączony podczas publikowania, zm
 
 Aby uzyskać więcej informacji, zobacz [ Razor przeglądanie kompilacji i wstępnej kompilacji w ASP.NET Core](xref:mvc/views/view-compilation).
 
-## <a name="razor-support-for-c-71"></a>RazorObsługa języka C# 7,1
+## <a name="no-locrazor-support-for-c-71"></a>RazorObsługa języka C# 7,1
 
 RazorAparat widoku został zaktualizowany, aby współpracował z nowym kompilatorem Roslyn. Obejmuje to obsługę funkcji języka C# 7,1, takich jak domyślne wyrażenia, wywnioskowane nazwy krotek i dopasowanie do wzorca przy użyciu typów ogólnych. Aby użyć języka C# 7,1 w projekcie, Dodaj następującą właściwość w pliku projektu, a następnie załaduj ponownie rozwiązanie:
 

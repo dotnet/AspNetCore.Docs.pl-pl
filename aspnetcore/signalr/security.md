@@ -7,6 +7,8 @@ ms.author: anurse
 ms.custom: mvc
 ms.date: 01/16/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/security
-ms.openlocfilehash: 4e125fd6c4ad2cd4989d692dd28a63638218ee57
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: e004899e334738f723cb98638cb31de8d314a830
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400417"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022475"
 ---
-# <a name="security-considerations-in-aspnet-core-signalr"></a>Zagadnienia dotyczące zabezpieczeń w ASP.NET CoreSignalR
+# <a name="security-considerations-in-aspnet-core-no-locsignalr"></a>Zagadnienia dotyczące zabezpieczeń w ASP.NET CoreSignalR
 
 Według [Andrew Stanton-pielęgniarki](https://twitter.com/anurse)
 
@@ -30,7 +32,7 @@ Ten artykuł zawiera informacje dotyczące zabezpieczania SignalR .
 
 ## <a name="cross-origin-resource-sharing"></a>Współużytkowanie zasobów między źródłami
 
-[Współużytkowanie zasobów między źródłami (CORS)](https://www.w3.org/TR/cors/) może służyć do zezwalania na połączenia między źródłami SignalR w przeglądarce. Jeśli kod JavaScript jest hostowany w innej domenie z SignalR aplikacji, należy włączyć [oprogramowanie pośredniczące CORS](xref:security/cors) , aby umożliwić programowi JavaScript łączenie się z SignalR aplikacją. Zezwalaj na żądania między źródłami tylko z domen, które ufają lub kontrolują. Na przykład:
+[Współużytkowanie zasobów między źródłami (CORS)](https://www.w3.org/TR/cors/) może służyć do zezwalania na połączenia między źródłami SignalR w przeglądarce. Jeśli kod JavaScript jest hostowany w innej domenie z SignalR aplikacji, należy włączyć [oprogramowanie pośredniczące CORS](xref:security/cors) , aby umożliwić programowi JavaScript łączenie się z SignalR aplikacją. Zezwalaj na żądania między źródłami tylko z domen, które ufają lub kontrolują. Przykład:
 
 * Twoja witryna jest hostowana`http://www.example.com`
 * Twoja SignalR aplikacja jest hostowana`http://signalr.example.com`
@@ -41,12 +43,12 @@ Aby uzyskać więcej informacji na temat konfigurowania mechanizmu CORS, zobacz 
 
 * Zezwalaj na określone oczekiwane źródła. Umożliwienie dowolnego pochodzenia jest możliwe, ale **nie** jest bezpieczne lub zalecane.
 * Metody HTTP `GET` i `POST` muszą być dozwolone.
-* Poświadczenia muszą być dozwolone w celu poprawnego działania sesji programu Sticky plików cookie. Muszą być włączone, nawet jeśli uwierzytelnianie nie jest używane.
+* Poświadczenia muszą być dozwolone w celu cookie poprawnego działania sesji programu Sticky Notes. Muszą być włączone, nawet jeśli uwierzytelnianie nie jest używane.
 
 ::: moniker range=">= aspnetcore-5.0"
 
 Jednak w 5,0 podano opcję w kliencie języka TypeScript, aby nie używać poświadczeń.
-Opcja nieużywania poświadczeń powinna być używana tylko wtedy, gdy użytkownik wie o 100%, że poświadczenia, takie jak pliki cookie, nie są potrzebne w aplikacji (pliki cookie są używane przez usługę Azure App Service w przypadku używania wielu serwerów do sesji programu Sticky Notes).
+Opcja nieużywania poświadczeń powinna być używana tylko w przypadku, gdy użytkownik wie o 100%, że poświadczenia takie jak Cookie s nie są potrzebne w aplikacjach ( cookie s) są używane przez usługę Azure App Service w przypadku używania wielu serwerów na potrzeby sesji programu Sticky Notes.
 
 ::: moniker-end
 
@@ -120,7 +122,7 @@ Uwidacznianie `ConnectionId` może prowadzić do złośliwej personifikacji, je�
 
 ## <a name="access-token-logging"></a>Rejestrowanie tokenu dostępu
 
-W przypadku korzystania z usługi WebSockets lub zdarzeń wysyłanych przez serwer klient przeglądarki wysyła token dostępu w ciągu zapytania. Uzyskiwanie tokenu dostępu za pośrednictwem ciągu zapytania jest zazwyczaj bezpieczne przy użyciu standardowego `Authorization` nagłówka. Zawsze używaj protokołu HTTPS, aby zapewnić bezpieczne połączenie między klientem a serwerem. Wiele serwerów sieci Web rejestruje adres URL dla każdego żądania, w tym ciąg zapytania. Rejestrowanie adresów URL może rejestrować token dostępu. ASP.NET Core domyślnie rejestruje adres URL dla każdego żądania, który będzie zawierać ciąg zapytania. Na przykład:
+W przypadku korzystania z usługi WebSockets lub zdarzeń wysyłanych przez serwer klient przeglądarki wysyła token dostępu w ciągu zapytania. Uzyskiwanie tokenu dostępu za pośrednictwem ciągu zapytania jest zazwyczaj bezpieczne przy użyciu standardowego `Authorization` nagłówka. Zawsze używaj protokołu HTTPS, aby zapewnić bezpieczne połączenie między klientem a serwerem. Wiele serwerów sieci Web rejestruje adres URL dla każdego żądania, w tym ciąg zapytania. Rejestrowanie adresów URL może rejestrować token dostępu. ASP.NET Core domyślnie rejestruje adres URL dla każdego żądania, który będzie zawierać ciąg zapytania. Przykład:
 
 ```
 info: Microsoft.AspNetCore.Hosting.Internal.WebHost[1]

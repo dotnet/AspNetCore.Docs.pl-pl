@@ -5,6 +5,8 @@ description: Część 2 z serii samouczków na ASP.NET Core MVC.
 ms.author: riande
 ms.date: 08/05/2017
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-controller
-ms.openlocfilehash: 30272900b2ff19879921f1954a1c9b3eba203ca4
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 6a2c9fe6dde725129e293a3137c1281bfb1a30ef
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400456"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021058"
 ---
 # <a name="part-2-add-a-controller-to-an-aspnet-core-mvc-app"></a>Część 2, dodawanie kontrolera do aplikacji ASP.NET Core MVC
 
@@ -96,7 +98,7 @@ Gdy przejdziesz do aplikacji i nie podasz żadnych segmentów adresu URL, domyś
 
 Pierwszy segment adresu URL określa klasę kontrolera do uruchomienia. Dlatego `localhost:{PORT}/HelloWorld` mapuje do klasy kontrolera **HelloWorld**. Druga część segmentu adresu URL określa metodę akcji klasy. `localhost:{PORT}/HelloWorld/Index`Mogłoby to spowodować `Index` uruchomienie metody `HelloWorldController` klasy. Zwróć uwagę, że trzeba tylko przeglądać do `localhost:{PORT}/HelloWorld` i `Index` Metoda została wywołana domyślnie. Dzieje się tak dlatego, że `Index` jest to metoda domyślna, która będzie wywoływana na kontrolerze, jeśli nazwa metody nie jest jawnie określona. Trzecia część segmentu URL ( `id` ) jest dla danych trasy. Dane trasy są wyjaśnione w dalszej części samouczka.
 
-Przejdź do `https://localhost:{PORT}/HelloWorld/Welcome`. `Welcome`Metoda jest uruchamiana i zwraca ciąg `This is the Welcome action method...` . Dla tego adresu URL kontroler jest `HelloWorld` i `Welcome` jest metodą akcji. Nie użyto `[Parameters]` jeszcze części adresu URL.
+Przejdź na stronę `https://localhost:{PORT}/HelloWorld/Welcome`. `Welcome`Metoda jest uruchamiana i zwraca ciąg `This is the Welcome action method...` . Dla tego adresu URL kontroler jest `HelloWorld` i `Welcome` jest metodą akcji. Nie użyto `[Parameters]` jeszcze części adresu URL.
 
 ![Okno przeglądarki pokazujące odpowiedź aplikacji jest to metoda akcji powitalnej](~/tutorials/first-mvc-app/adding-controller/_static/welcome.png)
 
@@ -215,7 +217,7 @@ Gdy przejdziesz do aplikacji i nie podasz żadnych segmentów adresu URL, domyś
 
 Pierwszy segment adresu URL określa klasę kontrolera do uruchomienia. Dlatego `localhost:{PORT}/HelloWorld` mapuje do `HelloWorldController` klasy. Druga część segmentu adresu URL określa metodę akcji klasy. `localhost:{PORT}/HelloWorld/Index`Mogłoby to spowodować `Index` uruchomienie metody `HelloWorldController` klasy. Zwróć uwagę, że trzeba tylko przeglądać do `localhost:{PORT}/HelloWorld` i `Index` Metoda została wywołana domyślnie. Jest tak dlatego `Index` , że jest to metoda domyślna, która będzie wywoływana na kontrolerze, jeśli nazwa metody nie jest jawnie określona. Trzecia część segmentu URL ( `id` ) jest dla danych trasy. Dane trasy są wyjaśnione w dalszej części samouczka.
 
-Przejdź do `https://localhost:{PORT}/HelloWorld/Welcome`. `Welcome`Metoda jest uruchamiana i zwraca ciąg `This is the Welcome action method...` . Dla tego adresu URL kontroler jest `HelloWorld` i `Welcome` jest metodą akcji. Nie użyto `[Parameters]` jeszcze części adresu URL.
+Przejdź na stronę `https://localhost:{PORT}/HelloWorld/Welcome`. `Welcome`Metoda jest uruchamiana i zwraca ciąg `This is the Welcome action method...` . Dla tego adresu URL kontroler jest `HelloWorld` i `Welcome` jest metodą akcji. Nie użyto `[Parameters]` jeszcze części adresu URL.
 
 ![Okno przeglądarki pokazujące odpowiedź aplikacji jest to metoda akcji powitalnej](~/tutorials/first-mvc-app/adding-controller/_static/welcome.png)
 

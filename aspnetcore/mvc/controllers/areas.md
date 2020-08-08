@@ -5,6 +5,8 @@ description: Dowiedz się, jak obszary są funkcją ASP.NET MVC służącą do o
 ms.author: riande
 ms.date: 03/21/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/areas
-ms.openlocfilehash: f4471f54e92b940ecb0eabab82f03e0c77a0509f
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: af765eebfa8bfd147bd3b721508b5794d15d64a7
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406410"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88018445"
 ---
 # <a name="areas-in-aspnet-core"></a>Obszary w ASP.NET Core
 
@@ -68,7 +70,7 @@ Weź pod uwagę aplikację, która ma dwie grupy logiczne, *produkty* i *usługi
         * HomeController.cs
         * ManageController.cs
       * Widoki
-        * Strona główna
+        * Domowy
           * Index.cshtml
         * Zarządzanie
           * Index.cshtml
@@ -77,7 +79,7 @@ Weź pod uwagę aplikację, która ma dwie grupy logiczne, *produkty* i *usługi
       * Kontrolery
         * HomeController.cs
       * Widoki
-        * Strona główna
+        * Domowy
           * Index.cshtml
 
 Chociaż poprzedni układ jest typowy w przypadku korzystania z obszarów, do korzystania z tej struktury folderów są wymagane tylko pliki widoku. Wyświetl wyszukiwania odnajdywania dla zgodnego pliku widoku obszaru w następującej kolejności:
@@ -162,7 +164,7 @@ Poniższy kod zmienia domyślny folder obszaru z `"Areas"` na `"MyAreas"` :
 
 <a name="arp"></a>
 
-## <a name="areas-with-razor-pages"></a>Obszary ze Razor stronami
+## <a name="areas-with-no-locrazor-pages"></a>Obszary ze Razor stronami
 
 Obszary ze Razor stronami wymagają `Areas/<area name>/Pages` folderu w folderze głównym aplikacji. Następująca struktura folderów jest używana z [przykładową aplikacją](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/31samples):
 
@@ -179,7 +181,7 @@ Obszary ze Razor stronami wymagają `Areas/<area name>/Pages` folderu w folderze
           * Informacje
           * Indeks
 
-### <a name="link-generation-with-razor-pages-and-areas"></a>Generowanie linków przy użyciu Razor stron i obszarów
+### <a name="link-generation-with-no-locrazor-pages-and-areas"></a>Generowanie linków przy użyciu Razor stron i obszarów
 
 Poniższy kod z pobranego [przykładu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples/RPareas) pokazuje Generowanie łącza z określonym obszarem (na przykład `asp-area="Products"` ):
 
@@ -222,7 +224,7 @@ W poprzednim pliku przestrzeń nazw i `@addTagHelper` dyrektywa są importowane 
 
 Aby uzyskać więcej informacji, zobacz [Zarządzanie zakresem pomocnika tagów](xref:mvc/views/tag-helpers/intro?view=aspnetcore-2.2#managing-tag-helper-scope) i [Importowanie wspólnych dyrektyw](xref:mvc/views/layout#importing-shared-directives).
 
-### <a name="shared-layout-for-razor-pages-areas"></a>Układ współużytkowany dla Razor obszarów stron
+### <a name="shared-layout-for-no-locrazor-pages-areas"></a>Układ współużytkowany dla Razor obszarów stron
 
 Aby udostępnić wspólny układ całej aplikacji, Przenieś *_ViewStart. cshtml* do folderu głównego aplikacji.
 
@@ -270,7 +272,7 @@ Weź pod uwagę aplikację, która ma dwie grupy logiczne, *produkty* i *usługi
         * HomeController.cs
         * ManageController.cs
       * Widoki
-        * Strona główna
+        * Domowy
           * Index.cshtml
         * Zarządzanie
           * Index.cshtml
@@ -279,7 +281,7 @@ Weź pod uwagę aplikację, która ma dwie grupy logiczne, *produkty* i *usługi
       * Kontrolery
         * HomeController.cs
       * Widoki
-        * Strona główna
+        * Domowy
           * Index.cshtml
 
 Chociaż poprzedni układ jest typowy w przypadku korzystania z obszarów, do korzystania z tej struktury folderów są wymagane tylko pliki widoku. Wyświetl wyszukiwania odnajdywania dla zgodnego pliku widoku obszaru w następującej kolejności:
@@ -349,7 +351,7 @@ Poniższy kod zmienia domyślny folder obszaru z `"Areas"` na `"MyAreas"` :
 
 <a name="arp"></a>
 
-## <a name="areas-with-razor-pages"></a>Obszary ze Razor stronami
+## <a name="areas-with-no-locrazor-pages"></a>Obszary ze Razor stronami
 
 Obszary ze Razor stronami wymagają `Areas/<area name>/Pages` folderu w folderze głównym aplikacji. Następująca struktura folderów jest używana z [przykładową aplikacją](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples):
 
@@ -366,7 +368,7 @@ Obszary ze Razor stronami wymagają `Areas/<area name>/Pages` folderu w folderze
           * Informacje
           * Indeks
 
-### <a name="link-generation-with-razor-pages-and-areas"></a>Generowanie linków przy użyciu Razor stron i obszarów
+### <a name="link-generation-with-no-locrazor-pages-and-areas"></a>Generowanie linków przy użyciu Razor stron i obszarów
 
 Poniższy kod z pobranego [przykładu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples/RPareas) pokazuje Generowanie łącza z określonym obszarem (na przykład `asp-area="Products"` ):
 
@@ -411,7 +413,7 @@ W poprzednim pliku przestrzeń nazw i `@addTagHelper` dyrektywa są importowane 
 
 Aby uzyskać więcej informacji, zobacz [Zarządzanie zakresem pomocnika tagów](xref:mvc/views/tag-helpers/intro?view=aspnetcore-2.2#managing-tag-helper-scope) i [Importowanie wspólnych dyrektyw](xref:mvc/views/layout#importing-shared-directives).
 
-### <a name="shared-layout-for-razor-pages-areas"></a>Układ współużytkowany dla Razor obszarów stron
+### <a name="shared-layout-for-no-locrazor-pages-areas"></a>Układ współużytkowany dla Razor obszarów stron
 
 Aby udostępnić wspólny układ całej aplikacji, Przenieś *_ViewStart. cshtml* do folderu głównego aplikacji.
 

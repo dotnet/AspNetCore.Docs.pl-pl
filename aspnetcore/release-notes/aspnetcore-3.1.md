@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/12/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,22 +16,22 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-3.1
-ms.openlocfilehash: 92804d168381526100ddb8a368f71d201bd4cad9
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 68373c39461be896a52627e21577fdda89cbb661
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407671"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019592"
 ---
 # <a name="whats-new-in-aspnet-core-31"></a>Co nowego w ASP.NET Core 3,1
 
 W tym artykule przedstawiono najbardziej znaczące zmiany w ASP.NET Core 3,1 z linkami do odpowiedniej dokumentacji.
 
-## <a name="partial-class-support-for-razor-components"></a>Obsługa częściowej klasy dla Razor składników
+## <a name="partial-class-support-for-no-locrazor-components"></a>Obsługa częściowej klasy dla Razor składników
 
 Razorskładniki są teraz generowane jako klasy częściowe. Kod Razor składnika można napisać przy użyciu pliku powiązanego z kodem zdefiniowanego jako Klasa częściowa zamiast definiować cały kod dla składnika w pojedynczym pliku. Aby uzyskać więcej informacji, zobacz temat [Obsługa klasy częściowej](xref:blazor/components/index#partial-class-support).
 
-## <a name="blazor-component-tag-helper-and-pass-parameters-to-top-level-components"></a>BlazorPomocnik tagu składnika i przekazywanie parametrów do składników najwyższego poziomu
+## <a name="no-locblazor-component-tag-helper-and-pass-parameters-to-top-level-components"></a>BlazorPomocnik tagu składnika i przekazywanie parametrów do składników najwyższego poziomu
 
 W programie Blazor z ASP.NET Core 3,0 składniki były renderowane na stronach i w widokach za pomocą pomocnika HTML ( `Html.RenderComponentAsync` ). W ASP.NET Core 3,1 Renderuj składnik ze strony lub widoku przy użyciu nowego pomocnika tagów składnika:
 
@@ -56,11 +58,11 @@ Aby uzyskać więcej informacji, zobacz [integrowanie składników na Razor stro
 
 [!code-csharp[](sample/Program.cs?name=snippet)]
 
-## <a name="breaking-changes-for-samesite-cookies"></a>Istotne zmiany plików cookie SameSite
+## <a name="breaking-changes-for-samesite-no-loccookies"></a>Istotne zmiany dotyczące SameSite cookie s
 
-Zachowanie plików cookie SameSite zostało zmienione w celu odzwierciedlenia przyszłych zmian przeglądarki. Może to mieć wpływ na scenariusze uwierzytelniania, takie jak AzureAd, OpenIdConnect lub WsFederation. Aby uzyskać więcej informacji, zobacz <xref:security/samesite>.
+Zachowanie SameSite cookie s zostało zmienione w celu odzwierciedlenia przyszłych zmian przeglądarki. Może to mieć wpływ na scenariusze uwierzytelniania, takie jak AzureAd, OpenIdConnect lub WsFederation. Aby uzyskać więcej informacji, zobacz <xref:security/samesite>.
 
-## <a name="prevent-default-actions-for-events-in-blazor-apps"></a>Zapobiegaj domyślnym akcjom dla zdarzeń w Blazor aplikacjach
+## <a name="prevent-default-actions-for-events-in-no-locblazor-apps"></a>Zapobiegaj domyślnym akcjom dla zdarzeń w Blazor aplikacjach
 
 Użyj `@on{EVENT}:preventDefault` atrybutu dyrektywy, aby zapobiec domyślnej akcji dla zdarzenia. W poniższym przykładzie jest blokowane domyślne działanie wyświetlania znaku klucza w polu tekstowym:
 
@@ -70,7 +72,7 @@ Użyj `@on{EVENT}:preventDefault` atrybutu dyrektywy, aby zapobiec domyślnej ak
 
 Aby uzyskać więcej informacji, zobacz [zapobieganie domyślnym akcjom](xref:blazor/components/event-handling#prevent-default-actions).
 
-## <a name="stop-event-propagation-in-blazor-apps"></a>Zatrzymaj propagację zdarzeń w Blazor aplikacjach
+## <a name="stop-event-propagation-in-no-locblazor-apps"></a>Zatrzymaj propagację zdarzeń w Blazor aplikacjach
 
 Użyj `@on{EVENT}:stopPropagation` atrybutu dyrektywy, aby zatrzymać propagację zdarzeń. W poniższym przykładzie, zaznaczając pole wyboru, Zapobiegaj kliknięciu zdarzeń z elementu podrzędnego `<div>` od propagowania do elementu nadrzędnego `<div>` :
 
@@ -90,7 +92,7 @@ Użyj `@on{EVENT}:stopPropagation` atrybutu dyrektywy, aby zatrzymać propagacj�
 
 Aby uzyskać więcej informacji, zobacz sekcję [Zatrzymaj propagację zdarzeń](xref:blazor/components/event-handling#stop-event-propagation).
 
-## <a name="detailed-errors-during-blazor-app-development"></a>Szczegóły błędów podczas Blazor opracowywania aplikacji
+## <a name="detailed-errors-during-no-locblazor-app-development"></a>Szczegóły błędów podczas Blazor opracowywania aplikacji
 
 Gdy Blazor aplikacja nie działa prawidłowo podczas opracowywania, otrzymuje szczegółowe informacje o błędzie z aplikacji, które pomagają w rozwiązywaniu problemów i rozwiązaniu problemu. Gdy wystąpi błąd, Blazor aplikacje wyświetlają złoty pasek u dołu ekranu:
 

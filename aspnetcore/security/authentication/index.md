@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/03/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/index
-ms.openlocfilehash: a230e1ae85a54ddf16900b2ee7ed4a18d45e4ea2
-ms.sourcegitcommit: 1b89fc58114a251926abadfd5c69c120f1ba12d8
+ms.openlocfilehash: b0258118e116b1686abbebf1c8d89135ae3cb1f6
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/24/2020
-ms.locfileid: "87160201"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019319"
 ---
 # <a name="overview-of-aspnet-core-authentication"></a>Omówienie uwierzytelniania ASP.NET Core
 
@@ -37,7 +39,7 @@ Schematy uwierzytelniania są określane przez zarejestrowanie usług uwierzytel
 * Wywołując metodę rozszerzenia specyficzną dla schematu po wywołaniu metody (np `services.AddAuthentication` `AddJwtBearer` `AddCookie` . lub, na przykład). Te metody rozszerzające używają [AuthenticationBuilder. AddSchema](xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilder.AddScheme*) do rejestrowania schematów przy użyciu odpowiednich ustawień.
 * Rzadziej, przez wywołanie [AuthenticationBuilder. AddSchema](xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilder.AddScheme*) bezpośrednio.
 
-Na przykład poniższy kod rejestruje usługi uwierzytelniania i programy obsługi dla systemów plików cookie i uwierzytelniania okaziciela JWT:
+Na przykład poniższy kod rejestruje usługi uwierzytelniania i programy obsługi programu cookie oraz schematy uwierzytelniania okaziciela JWT:
 
 ```csharp
 services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -47,7 +49,7 @@ services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 `AddAuthentication`Parametr `JwtBearerDefaults.AuthenticationScheme` jest nazwą schematu, który ma być używany domyślnie, gdy określony schemat nie jest wymagany.
 
-W przypadku użycia wielu schematów zasady autoryzacji (lub atrybuty autoryzacji) mogą [określać schemat uwierzytelniania (lub schematy),](xref:security/authorization/limitingidentitybyscheme) od których zależą w celu uwierzytelnienia użytkownika. W powyższym przykładzie schemat uwierzytelniania plików cookie może być używany przez określenie jego nazwy ( `CookieAuthenticationDefaults.AuthenticationScheme` Domyślnie, chociaż podczas wywoływania można podać inną nazwę `AddCookie` ).
+W przypadku użycia wielu schematów zasady autoryzacji (lub atrybuty autoryzacji) mogą [określać schemat uwierzytelniania (lub schematy),](xref:security/authorization/limitingidentitybyscheme) od których zależą w celu uwierzytelnienia użytkownika. W powyższym przykładzie cookie schemat uwierzytelniania może być używany przez określenie jego nazwy ( `CookieAuthenticationDefaults.AuthenticationScheme` Domyślnie, chociaż przy wywoływaniu można podać inną nazwę `AddCookie` ).
 
 W niektórych przypadkach wywołanie `AddAuthentication` jest wykonywane automatycznie przez inne metody rozszerzenia. Na przykład podczas korzystania z [ASP.NET Core Identity ](xref:security/authentication/identity), `AddAuthentication` jest wywoływana wewnętrznie.
 
@@ -90,14 +92,14 @@ W oparciu o konfigurację schematu uwierzytelniania i kontekst żądania przycho
 
 Akcja uwierzytelniania schematu uwierzytelniania jest odpowiedzialna za konstruowanie tożsamości użytkownika na podstawie kontekstu żądania. Zwraca <xref:Microsoft.AspNetCore.Authentication.AuthenticateResult> informację o tym, czy uwierzytelnianie zakończyło się pomyślnie, a jeśli tak, tożsamość użytkownika w biletu uwierzytelniania. Zobacz: <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.AuthenticateAsync%2A>. Przykłady uwierzytelniania obejmują:
 
-* Schemat uwierzytelniania plików cookie, który konstruuje tożsamość użytkownika z plików cookie.
+* cookieSchemat uwierzytelniania, który konstruuje tożsamość użytkownika z cookie s.
 * Schemat okaziciela JWT deserializacji i weryfikacji tokenu okaziciela JWT w celu utworzenia tożsamości użytkownika.
 
-### <a name="challenge"></a>Zadanie
+### <a name="challenge"></a>Wyzwanie
 
 Wyzwanie uwierzytelniania jest wywoływane przez autoryzację, gdy nieuwierzytelniony użytkownik żąda punktu końcowego wymagającego uwierzytelniania. Jest wystawiane wyzwanie uwierzytelniania, na przykład gdy użytkownik anonimowy żąda zasobu z ograniczeniami lub klika łącze logowania. Autoryzacja wywołuje wyzwanie przy użyciu określonych schematów uwierzytelniania lub wartość domyślną, jeśli nie została określona. Zobacz: <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.ChallengeAsync%2A>. Przykłady wyzwania uwierzytelniania obejmują:
 
-* Schemat uwierzytelniania plików cookie przekierowuje użytkownika do strony logowania.
+* cookieSchemat uwierzytelniania przekierowuje użytkownika do strony logowania.
 * Schemat okaziciela JWT zwracający wynik 401 z `www-authenticate: bearer` nagłówkiem.
 
 Akcja wyzwania powinna dać użytkownikowi informacje o mechanizmie uwierzytelniania używanym do uzyskiwania dostępu do żądanego zasobu.
@@ -105,7 +107,7 @@ Akcja wyzwania powinna dać użytkownikowi informacje o mechanizmie uwierzytelni
 ### <a name="forbid"></a>Uniemożliwia
 
 Akcja zabraniania schematu uwierzytelniania jest wywoływana przez autoryzację, gdy uwierzytelniony użytkownik próbuje uzyskać dostęp do zasobu, do którego nie ma dostępu. Zobacz: <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.ForbidAsync%2A>. Przykładem zabraniania uwierzytelniania są:
-* Schemat uwierzytelniania plików cookie przekierowuje użytkownika do strony wskazującej dostęp był zabroniony.
+* cookieSchemat uwierzytelniania przekierowuje użytkownika do strony wskazującej dostęp był zabroniony.
 * Schemat okaziciela JWT zwracający wynik 403.
 * Niestandardowy schemat uwierzytelniania przekierowuje do strony, na której użytkownik może zażądać dostępu do zasobu.
 
@@ -131,7 +133,7 @@ Rdzeń sadu:
 
 Zobacz [podstawowe źródło sadu](https://github.com/OrchardCMS/OrchardCore) dla przykładu dostawców uwierzytelniania na dzierżawcę.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:security/authorization/limitingidentitybyscheme>
 * <xref:security/authentication/policyschemes>

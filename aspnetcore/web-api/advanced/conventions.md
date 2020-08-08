@@ -7,6 +7,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/advanced/conventions
-ms.openlocfilehash: eece8130c152fdada1e1d86cf3c94932c5ee9f63
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: e18a2096c3b9fa788ba2a9713d0f25c1e76af2db
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408451"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019966"
 ---
 # <a name="use-web-api-conventions"></a>Korzystanie z Konwencji interfejsu API sieci Web
 
@@ -81,7 +83,7 @@ Jeśli domyślne konwencje interfejsów API nie spełniają Twoich potrzeb, nale
 
 ### <a name="response-types"></a>Typy odpowiedzi
 
-Te metody są opatrzone adnotacją `[ProducesResponseType]` lub `[ProducesDefaultResponseType]` atrybutami. Na przykład:
+Te metody są opatrzone adnotacją `[ProducesResponseType]` lub `[ProducesDefaultResponseType]` atrybutami. Przykład:
 
 ```csharp
 public static class MyAppConventions
@@ -101,7 +103,7 @@ W przypadku braku szczegółowych atrybutów metadanych zastosowanie tej Konwenc
 
 ### <a name="naming-requirements"></a>Wymagania dotyczące nazewnictwa
 
-`[ApiConventionNameMatch]`Atrybuty i `[ApiConventionTypeMatch]` mogą być stosowane do metody Konwencji, która określa akcje, do których mają zastosowanie. Na przykład:
+`[ApiConventionNameMatch]`Atrybuty i `[ApiConventionTypeMatch]` mogą być stosowane do metody Konwencji, która określa akcje, do których mają zastosowanie. Przykład:
 
 ```csharp
 [ProducesResponseType(StatusCodes.Status200OK)]
@@ -113,12 +115,12 @@ public static void Find(
 { }
 ```
 
-W poprzednim przykładzie:
+W powyższym przykładzie:
 
 * `Microsoft.AspNetCore.Mvc.ApiExplorer.ApiConventionNameMatchBehavior.Prefix`Opcja stosowana do metody wskazuje, że Konwencja pasuje do każdej akcji poprzedzonej prefiksem "Find". Przykłady akcji dopasowania obejmują `Find` , `FindPet` , i `FindById` .
 * `Microsoft.AspNetCore.Mvc.ApiExplorer.ApiConventionNameMatchBehavior.Suffix`Zastosowanie do parametru wskazuje, że Konwencja dopasowuje metody z dokładnie jednym parametrem kończącym się identyfikatorem sufiksu. Przykłady obejmują parametry, takie jak `id` lub `petId` . `ApiConventionTypeMatch`można w podobny sposób zastosować do typów, aby ograniczyć typ parametru. `params[]`Argument wskazuje pozostałe parametry, które nie muszą być jawnie dopasowane.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:web-api/advanced/analyzers>
 * <xref:tutorials/web-api-help-pages-using-swagger>

@@ -6,6 +6,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 10/13/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/anchor-tag-helper
-ms.openlocfilehash: af0f07a0f50a79f25b6a14459402f9dd8b59dae2
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 25f1716b5c80492edb72bc9555954c9c93c02a49
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408256"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88018769"
 ---
 # <a name="anchor-tag-helper-in-aspnet-core"></a>Pomocnik tagu kotwicy w ASP.NET Core
 
@@ -181,7 +183,7 @@ Tagi skrótów są przydatne podczas tworzenia aplikacji po stronie klienta. Mog
 
 Atrybut [obszaru ASP](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Area*) ustawia nazwę obszaru używaną do ustawiania odpowiedniej trasy. W poniższych przykładach przedstawiono sposób, w jaki `asp-area` atrybut powoduje ponowne mapowanie tras.
 
-#### <a name="usage-in-razor-pages"></a>Użycie na Razor stronach
+#### <a name="usage-in-no-locrazor-pages"></a>Użycie na Razor stronach
 
 RazorObszary stron są obsługiwane w ASP.NET Core 2,1 lub nowszych.
 
@@ -211,7 +213,7 @@ Wygenerowany kod HTML:
 > Aby obsługiwać obszary w Razor aplikacji stron, wykonaj jedną z następujących czynności w programie `Startup.ConfigureServices` :
 >
 > * Ustaw [wersję zgodności](xref:mvc/compatibility-version) na 2,1 lub nowszą.
-> * Ustaw właściwość [RazorPagesOptions. AllowAreas](xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.AllowAreas*) na `true` :
+> * Ustaw właściwość [ Razor PagesOptions. AllowAreas](xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.AllowAreas*) na `true` :
 >
 >   [!code-csharp[](samples/TagHelpersBuiltIn/Startup.cs?name=snippet_AllowAreas)]
 
@@ -249,7 +251,7 @@ Wygenerowany kod HTML:
 
 ### <a name="asp-protocol"></a>ASP — protokół
 
-Atrybut [ASP-Protocol](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Protocol*) służy do określania protokołu (takiego jak `https` ) w adresie URL. Na przykład:
+Atrybut [ASP-Protocol](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Protocol*) służy do określania protokołu (takiego jak `https` ) w adresie URL. Przykład:
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspProtocol)]
 
@@ -263,7 +265,7 @@ Nazwa hosta w przykładzie jest localhost. Pomocnik tagu kotwicy używa domeny p
 
 ### <a name="asp-host"></a>ASP — Host
 
-Atrybut [ASP-Host](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Host*) służy do określania nazwy hosta w adresie URL. Na przykład:
+Atrybut [ASP-Host](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Host*) służy do określania nazwy hosta w adresie URL. Przykład:
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspHost)]
 
@@ -315,7 +317,7 @@ Wygenerowany kod HTML:
 <a href="/Attendee?attendeeid=12&handler=Profile">Attendee Profile</a>
 ```
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:mvc/controllers/areas>
 * <xref:razor-pages/index>

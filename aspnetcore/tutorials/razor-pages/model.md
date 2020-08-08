@@ -5,6 +5,8 @@ description: Część 2 serii samouczków na Razor stronach.
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/model
-ms.openlocfilehash: 053e35e78b2bf58fded49c9a2860060d6a81c544
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 6b50f46863a6dabb01bcf0976a42abb504e6f7b7
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408113"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020460"
 ---
-# <a name="part-2-add-a-model-to-a-razor-pages-app-in-aspnet-core"></a>Część 2 Dodaj model do Razor aplikacji stron w ASP.NET Core
+# <a name="part-2-add-a-model-to-a-no-locrazor-pages-app-in-aspnet-core"></a>Część 2 Dodaj model do Razor aplikacji stron w ASP.NET Core
 
 Autor: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -38,7 +40,7 @@ Klasy modelu są znane jako klasy POCO (z "zwykłych, starych obiektów CLR"), p
 
 # <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
-Kliknij prawym przyciskiem myszy projekt **RazorPagesMovie** > **Dodaj**  >  **Nowy folder**. Nazwij *modele*folderów.
+Kliknij prawym przyciskiem myszy projekt ** Razor PagesMovie** > **Dodaj**  >  **Nowy folder**. Nazwij *modele*folderów.
 
 Kliknij prawym przyciskiem myszy folder *modele* . Wybierz pozycję **Dodaj**  >  **klasę**. Nazwij **film**klasy.
 
@@ -55,7 +57,7 @@ Kliknij prawym przyciskiem myszy folder *modele* . Wybierz pozycję **Dodaj**  >
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-* W okienko rozwiązania kliknij prawym przyciskiem myszy projekt **RazorPagesMovie** , a następnie wybierz pozycję **Dodaj** > **Nowy folder.**... Nazwij *modele*folderów.
+* W okienko rozwiązania kliknij prawym przyciskiem myszy projekt ** Razor PagesMovie** , a następnie wybierz pozycję **Dodaj** > **Nowy folder.**... Nazwij *modele*folderów.
 * Kliknij prawym przyciskiem myszy folder *modele* , a następnie wybierz polecenie **Dodaj** > **nowy plik.**...
 * W oknie dialogowym **nowy plik** :
 
@@ -90,8 +92,8 @@ W oknie dialogowym **Dodawanie szkieletu** wybierz pozycję ** Razor strony z u�
 
 Wypełnij okno dialogowe **Dodawanie Razor stron przy użyciu Entity Framework (CRUD)** :
 
-* Z listy rozwijanej **Klasa modelu** wybierz pozycję **film (RazorPagesMovie. models)**.
-* W wierszu **klasy kontekstu danych** wybierz **+** znak (plus), a następnie zmień wygenerowaną nazwę z RazorPagesMovie.** Modele**. RazorPagesMovieContext do RazorPagesMovie. **Dane**. RazorPagesMovieContext. [Ta zmiana](https://developercommunity.visualstudio.com/content/problem/652166/aspnet-core-ef-scaffolder-uses-incorrect-namespace.html) nie jest wymagana. Tworzy klasę kontekstu bazy danych z poprawną przestrzenią nazw.
+* Z listy rozwijanej **Klasa modelu** wybierz pozycję **film ( Razor PagesMovie. models)**.
+* W wierszu **klasy kontekstu danych** wybierz **+** znak (plus), a następnie zmień wygenerowaną nazwę z Razor PagesMovie.** Modele**. Razor PagesMovieContext do Razor PagesMovie.** Dane**. Razor PagesMovieContext. [Ta zmiana](https://developercommunity.visualstudio.com/content/problem/652166/aspnet-core-ef-scaffolder-uses-incorrect-namespace.html) nie jest wymagana. Tworzy klasę kontekstu bazy danych z poprawną przestrzenią nazw.
 * Wybierz pozycję **Dodaj**.
 
 ![Obraz z poprzednich instrukcji.](model/_static/3/arp.png)
@@ -144,8 +146,8 @@ W oknie dialogowym **Nowa rusztowania** wybierz pozycję ** Razor strony z Entit
 
 Wypełnij okno dialogowe **Dodawanie Razor stron przy użyciu Entity Framework (CRUD)** :
 
-* W menu rozwijanym **Klasa modelu** wybierz lub wpisz **film (RazorPagesMovie. models)**.
-* W wierszu **klasy kontekstu danych** wpisz nazwę nowej klasy, RazorPagesMovie. **Dane**. RazorPagesMovieContext. [Ta zmiana](https://developercommunity.visualstudio.com/content/problem/652166/aspnet-core-ef-scaffolder-uses-incorrect-namespace.html) nie jest wymagana. Tworzy klasę kontekstu bazy danych z poprawną przestrzenią nazw.
+* W menu rozwijanym **Klasa modelu** wybierz lub wpisz **film ( Razor PagesMovie. models)**.
+* W wierszu **klasy kontekstu danych** wpisz nazwę nowej klasy, Razor PagesMovie.** Dane**. Razor PagesMovieContext. [Ta zmiana](https://developercommunity.visualstudio.com/content/problem/652166/aspnet-core-ef-scaffolder-uses-incorrect-namespace.html) nie jest wymagana. Tworzy klasę kontekstu bazy danych z poprawną przestrzenią nazw.
 * Wybierz pozycję **Dodaj**.
 
 ![Obraz z poprzednich instrukcji.](model/_static/arpMac.png)
@@ -171,7 +173,7 @@ Poprzednie polecenie dodaje Entity Framework Core narzędzia dla interfejs wiers
 Proces tworzenia szkieletu tworzy i aktualizuje następujące pliki:
 
 * *Strony/filmy*: Tworzenie, usuwanie, szczegóły, edytowanie i indeksowanie.
-* *Data/RazorPagesMovieContext. cs*
+* *Dane/ Razor PagesMovieContext.cs*
 
 ### <a name="updated"></a>Po aktualizacji
 
@@ -184,7 +186,7 @@ Pliki utworzone i zaktualizowane zostały omówione w następnej sekcji.
 Proces tworzenia szkieletu tworzy i aktualizuje następujące pliki:
 
 * *Strony/filmy*: Tworzenie, usuwanie, szczegóły, edytowanie i indeksowanie.
-* *Data/RazorPagesMovieContext. cs*
+* *Dane/ Razor PagesMovieContext.cs*
 
 ### <a name="updated"></a>Po aktualizacji
 
@@ -319,7 +321,7 @@ Klasy modelu są znane jako klasy POCO (z "zwykłych, starych obiektów CLR"), p
 
 # <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
-Kliknij prawym przyciskiem myszy projekt **RazorPagesMovie** > **Dodaj**  >  **Nowy folder**. Nazwij *modele*folderów.
+Kliknij prawym przyciskiem myszy projekt ** Razor PagesMovie** > **Dodaj**  >  **Nowy folder**. Nazwij *modele*folderów.
 
 Kliknij prawym przyciskiem myszy folder *modele* . Wybierz pozycję **Dodaj**  >  **klasę**. Nazwij **film**klasy.
 
@@ -336,7 +338,7 @@ Kliknij prawym przyciskiem myszy folder *modele* . Wybierz pozycję **Dodaj**  >
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-* W Eksplorator rozwiązań kliknij prawym przyciskiem myszy projekt **RazorPagesMovie** , a następnie wybierz pozycję **Dodaj**  >  **Nowy folder**. Nazwij *modele*folderów.
+* W Eksplorator rozwiązań kliknij prawym przyciskiem myszy projekt ** Razor PagesMovie** , a następnie wybierz pozycję **Dodaj**  >  **Nowy folder**. Nazwij *modele*folderów.
 * Kliknij prawym przyciskiem myszy folder *modele* , a następnie wybierz polecenie **Dodaj** > **nowy plik**.
 * W oknie dialogowym **nowy plik** :
 
@@ -375,8 +377,8 @@ Wypełnij okno dialogowe **Dodawanie Razor stron przy użyciu Entity Framework (
 to use Data, it should not use models. That will make the namespace the same for the VS version and the CLI version
 -->
 
-* Z listy rozwijanej **Klasa modelu** wybierz pozycję **film (RazorPagesMovie. models)**.
-* W wierszu **klasy kontekstu danych** wybierz **+** znak (plus), a następnie zaakceptuj wygenerowaną nazwę **RazorPagesMovie. models. RazorPagesMovieContext**.
+* Z listy rozwijanej **Klasa modelu** wybierz pozycję **film ( Razor PagesMovie. models)**.
+* W wierszu **klasy kontekstu danych** wybierz **+** znak (plus), a następnie zaakceptuj wygenerowaną nazwę ** Razor PagesMovie. models. Razor PagesMovieContext**.
 * Wybierz pozycję **Dodaj**.
 
 ![Obraz z poprzednich instrukcji.](model/_static/arp.png)
@@ -422,7 +424,7 @@ W oknie dialogowym **Dodawanie nowej szkieletu** wybierz pozycję ** Razor stron
 Wypełnij okno dialogowe **Dodawanie Razor stron przy użyciu Entity Framework (CRUD)** :
 
 * Z listy rozwijanej **Klasa modelu** wybierz lub wpisz **film**.
-* W wierszu **klasy kontekstu danych** wpisz wybierz **RazorPagesMovieContext** to spowoduje utworzenie nowej klasy kontekstu bazy danych z poprawną przestrzenią nazw. W takim przypadku będzie to **RazorPagesMovie. models. RazorPagesMovieContext**.
+* W wierszu **klasy kontekstu danych** wpisz wybierz ** Razor PagesMovieContext** to spowoduje utworzenie nowej klasy kontekstu bazy danych z poprawną przestrzenią nazw. W takim przypadku będzie to ** Razor PagesMovie. models. Razor PagesMovieContext**.
 * Wybierz pozycję **Dodaj**.
 
 ![Obraz z poprzednich instrukcji.](model/_static/arpMac.png)
@@ -436,7 +438,7 @@ Proces tworzenia szkieletu tworzy i aktualizuje następujące pliki:
 ### <a name="files-created"></a>Utworzone pliki
 
 * *Strony/filmy*: Tworzenie, usuwanie, szczegóły, edytowanie i indeksowanie.
-* *Data/RazorPagesMovieContext. cs*
+* *Dane/ Razor PagesMovieContext.cs*
 
 ### <a name="file-updated"></a>Zaktualizowano plik
 
@@ -466,7 +468,7 @@ Add-Migration Initial
 Update-Database
 ```
 
-`Add-Migration`Polecenie generuje kod, aby utworzyć początkowy schemat bazy danych. Schemat jest oparty na modelu określonym w `DbContext` (w pliku *RazorPagesMovieContext.cs* ). `InitialCreate`Argument jest używany do nazwy migracji. Można użyć dowolnej nazwy, ale według Konwencji Nazwa opisująca migrację jest używana. Aby uzyskać więcej informacji, zobacz <xref:data/ef-mvc/migrations>.
+`Add-Migration`Polecenie generuje kod, aby utworzyć początkowy schemat bazy danych. Schemat jest oparty na modelu określonym w `DbContext` (w pliku * Razor PagesMovieContext.cs* ). `InitialCreate`Argument jest używany do nazwy migracji. Można użyć dowolnej nazwy, ale według Konwencji Nazwa opisująca migrację jest używana. Aby uzyskać więcej informacji, zobacz <xref:data/ef-mvc/migrations>.
 
 `Update-Database`Polecenie uruchamia `Up` metodę w pliku *migrations/ \<time-stamp> _InitialCreate. cs* . `Up`Metoda tworzy bazę danych.
 

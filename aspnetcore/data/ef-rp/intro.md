@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 09/26/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/intro
-ms.openlocfilehash: 700370fd11a0df40a45c47e8c378d5bdd0c60009
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.openlocfilehash: cd6624d107fb19da92a7e58a747cc85e876a6ba4
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86212698"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88018640"
 ---
-# <a name="razor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>RazorStrony z Entity Framework Core w ASP.NET Core — samouczek 1 z 8
+# <a name="no-locrazor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>RazorStrony z Entity Framework Core w ASP.NET Core — samouczek 1 z 8
 
 Autorzy [Dykstra](https://github.com/tdykstra) i [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -498,7 +500,7 @@ Użytkownicy mogą wyświetlać i aktualizować informacje dotyczące uczniów, 
 
 Styl interfejsu użytkownika tej witryny jest zbliżony do zawartości wygenerowanej przez wbudowane szablony. Fokus samouczka znajduje się na EF Core ze Razor stronami, a nie interfejsem użytkownika.
 
-## <a name="create-the-contosouniversity-razor-pages-web-app"></a>Tworzenie Razor aplikacji sieci Web ContosoUniversity Pages
+## <a name="create-the-contosouniversity-no-locrazor-pages-web-app"></a>Tworzenie Razor aplikacji sieci Web ContosoUniversity Pages
 
 # <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
@@ -673,7 +675,7 @@ Poniższy kod przedstawia zaktualizowany plik *program.cs* .
 
 ### <a name="test-the-app"></a>Testowanie aplikacji
 
-Uruchom aplikację i zaakceptuj zasady dotyczące plików cookie. Ta aplikacja nie przechowuje informacji osobistych. Informacje o zasadach dotyczących plików cookie można znaleźć na stronie [pomocy technicznej ogólne rozporządzenie o ochronie danych (Rodo)](xref:security/gdpr).
+Uruchom aplikację i zaakceptuj cookie zasady. Ta aplikacja nie przechowuje informacji osobistych. Informacje o zasadach można znaleźć cookie w witrynie [pomocy technicznej ogólne rozporządzenie O ochronie danych (Rodo)](xref:security/gdpr).
 
 * Wybierz link **Students (studenci** ), a następnie **Utwórz nowy**.
 * Przetestuj linki Edytuj, Szczegóły i Usuń.
@@ -771,7 +773,7 @@ W następnym samouczku są badane podstawowe operacje CRUD (tworzenie, odczytywa
 
 
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Wersja tego samouczka usługi YouTube](https://www.youtube.com/watch?v=P7iTtQnkrNs)
 

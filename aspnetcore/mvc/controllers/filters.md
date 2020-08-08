@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/04/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/filters
-ms.openlocfilehash: 96d24940af6c591e3c02bfa26ed9d7d6ea60d27d
-ms.sourcegitcommit: d00a200bc8347af794b24184da14ad5c8b6bba9a
+ms.openlocfilehash: 11d0c514dd15e787224510991ffb81680c9fc479
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/21/2020
-ms.locfileid: "86869981"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019345"
 ---
 # <a name="filters-in-aspnet-core"></a>Filtry w ASP.NET Core
 
@@ -207,7 +209,7 @@ Każdy kontroler, który dziedziczy z <xref:Microsoft.AspNetCore.Mvc.Controller>
 
 Na przykład, w przykładzie pobierania, `MySampleActionFilter` jest stosowana globalnie podczas uruchamiania.
 
-`TestController`:
+Pomocnik `TestController`:
 
 * Stosuje `SampleActionFilterAttribute` ( `[SampleActionFilter]` ) do `FilterTest2` akcji.
 * Przesłania `OnActionExecuting` i `OnActionExecuted` .
@@ -279,7 +281,7 @@ Potok filtru może być skrócony przez ustawienie <xref:Microsoft.AspNetCore.Mv
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/ShortCircuitingResourceFilterAttribute.cs?name=snippet)]
 
-W poniższym kodzie, zarówno, `ShortCircuitingResourceFilter` jak i jako `AddHeader` element docelowy filtru `SomeResource` metodę akcji. `ShortCircuitingResourceFilter`:
+W poniższym kodzie, zarówno, `ShortCircuitingResourceFilter` jak i jako `AddHeader` element docelowy filtru `SomeResource` metodę akcji. Pomocnik `ShortCircuitingResourceFilter`:
 
 * Uruchamiany jako pierwszy, ponieważ jest filtrem zasobów i `AddHeader` jest filtrem akcji.
 * Krótkie obwody pozostała część potoku.
@@ -746,7 +748,7 @@ Ta sekwencja pokazuje:
 * Filtr metody jest zagnieżdżony w obrębie filtru kontrolera.
 * Filtr kontrolera jest zagnieżdżony w obrębie filtru globalnego.
 
-### <a name="controller-and-razor-page-level-filters"></a>Filtry na Razor poziomie kontrolera i strony
+### <a name="controller-and-no-locrazor-page-level-filters"></a>Filtry na Razor poziomie kontrolera i strony
 
 Każdy kontroler, który dziedziczy z <xref:Microsoft.AspNetCore.Mvc.Controller> klasy podstawowej, obejmuje metody [Controller. OnActionExecuting](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecuting*), [Controller. OnActionExecutionAsync](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecutionAsync*)i [Controller. OnActionExecuted](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecuted*) 
  `OnActionExecuted` . Te metody:
@@ -758,7 +760,7 @@ Każdy kontroler, który dziedziczy z <xref:Microsoft.AspNetCore.Mvc.Controller>
 
 Na przykład, w przykładzie pobierania, `MySampleActionFilter` jest stosowana globalnie podczas uruchamiania.
 
-`TestController`:
+Pomocnik `TestController`:
 
 * Stosuje `SampleActionFilterAttribute` ( `[SampleActionFilter]` ) do `FilterTest2` akcji.
 * Przesłania `OnActionExecuting` i `OnActionExecuted` .
@@ -811,7 +813,7 @@ Potok filtru może być skrócony przez ustawienie <xref:Microsoft.AspNetCore.Mv
 
 [!code-csharp[](./filters/sample/FiltersSample/Filters/ShortCircuitingResourceFilterAttribute.cs?name=snippet)]
 
-W poniższym kodzie, zarówno, `ShortCircuitingResourceFilter` jak i jako `AddHeader` element docelowy filtru `SomeResource` metodę akcji. `ShortCircuitingResourceFilter`:
+W poniższym kodzie, zarówno, `ShortCircuitingResourceFilter` jak i jako `AddHeader` element docelowy filtru `SomeResource` metodę akcji. Pomocnik `ShortCircuitingResourceFilter`:
 
 * Uruchamiany jako pierwszy, ponieważ jest filtrem zasobów i `AddHeader` jest filtrem akcji.
 * Krótkie obwody pozostała część potoku.

@@ -5,6 +5,8 @@ description: Część 3 serii samouczków na Razor stronach.
 ms.author: riande
 ms.date: 08/17/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/page
-ms.openlocfilehash: 898f3be045755a0ee14c738b6ffc104408ded7b6
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: f8942e52b3b438817e3d1041a2c6b568eb662469
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407775"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020395"
 ---
-# <a name="part-3-scaffolded-razor-pages-in-aspnet-core"></a>Część 3, szkieletowe Razor strony w ASP.NET Core
+# <a name="part-3-scaffolded-no-locrazor-pages-in-aspnet-core"></a>Część 3, szkieletowe Razor strony w ASP.NET Core
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -72,7 +74,7 @@ Bada wyrażenie lambda użyte w następującym Pomocniku HTML:
 
 ### <a name="the-layout-page"></a>Strona układu
 
-Wybierz linki menu (**RazorPagesMovie**, **Home**i **privacy**). Każda Strona wyświetla ten sam układ menu. Układ menu jest implementowany w pliku *Pages/Shared/_Layout. cshtml* . Otwórz plik *Pages/Shared/_Layout. cshtml* .
+Wybierz linki menu (** Razor PagesMovie**, **Home**i **privacy**). Każda Strona wyświetla ten sam układ menu. Układ menu jest implementowany w pliku *Pages/Shared/_Layout. cshtml* . Otwórz plik *Pages/Shared/_Layout. cshtml* .
 
 Szablony [układów](xref:mvc/views/layout) umożliwiają układ kontenera HTML:
 
@@ -104,7 +106,7 @@ Wiersz `@*Markup removed for brevity.*@` jest Razor komentarzem. W przeciwieńst
 
 ### <a name="update-the-layout"></a>Aktualizowanie układu
 
-Zmień `<title>` element w pliku *Pages/Shared/_Layout. cshtml* , aby wyświetlał **film** zamiast **RazorPagesMovie**.
+Zmień `<title>` element w pliku *Pages/Shared/_Layout. cshtml* , aby wyświetlał **film** zamiast ** Razor PagesMovie**.
 
 [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie30/Pages/Shared/_Layout.cshtml?range=1-6&highlight=6)]
 
@@ -153,7 +155,7 @@ Jeśli występują jakieś błędy modelu, formularz jest ponownie wyświetlany 
 
 Jeśli nie ma żadnych błędów modelu, dane zostaną zapisane i przeglądarka zostanie przekierowana na stronę indeksu.
 
-### <a name="the-create-razor-page"></a>Strona tworzenie Razor
+### <a name="the-create-no-locrazor-page"></a>Strona tworzenie Razor
 
 Przejrzyj strony */filmy/Utwórz* Razor plik stronicowania. cshtml:
 
@@ -263,7 +265,7 @@ Bada wyrażenie lambda użyte w następującym Pomocniku HTML:
 
 ### <a name="the-layout-page"></a>Strona układu
 
-Wybierz linki menu (**RazorPagesMovie**, **Home**i **privacy**). Każda Strona wyświetla ten sam układ menu. Układ menu jest implementowany w pliku *Pages/Shared/_Layout. cshtml* . Otwórz plik *Pages/Shared/_Layout. cshtml* .
+Wybierz linki menu (** Razor PagesMovie**, **Home**i **privacy**). Każda Strona wyświetla ten sam układ menu. Układ menu jest implementowany w pliku *Pages/Shared/_Layout. cshtml* . Otwórz plik *Pages/Shared/_Layout. cshtml* .
 
 Szablony [układów](xref:mvc/views/layout) umożliwiają określenie układu kontenera HTML witryny w jednym miejscu, a następnie zastosowanie go na wielu stronach w witrynie. Znajdź `@RenderBody()` wiersz. `RenderBody`jest symbolem zastępczym, w którym wszystkie utworzone widoki związane ze stroną są wyświetlane, *opakowane* na stronie układ. Na przykład w przypadku wybrania linku **prywatność** widok **strony/prywatność. cshtml** jest renderowany wewnątrz `RenderBody` metody.
 
@@ -290,7 +292,7 @@ Wiersz `@*Markup removed for brevity.*@` jest Razor komentarzem, które nie poja
 
 ### <a name="update-the-layout"></a>Aktualizowanie układu
 
-Zmień `<title>` element w pliku *Pages/Shared/_Layout. cshtml* , aby wyświetlał **film** zamiast **RazorPagesMovie**.
+Zmień `<title>` element w pliku *Pages/Shared/_Layout. cshtml* , aby wyświetlał **film** zamiast ** Razor PagesMovie**.
 
 [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie22/Pages/Shared/_Layout.cshtml?range=1-6&highlight=6)]
 
@@ -339,7 +341,7 @@ Jeśli występują jakieś błędy modelu, formularz jest ponownie wyświetlany 
 
 Jeśli nie ma żadnych błędów modelu, dane zostaną zapisane i przeglądarka zostanie przekierowana na stronę indeksu.
 
-### <a name="the-create-razor-page"></a>Strona tworzenie Razor
+### <a name="the-create-no-locrazor-page"></a>Strona tworzenie Razor
 
 Przejrzyj strony */filmy/Utwórz* Razor plik stronicowania. cshtml:
 

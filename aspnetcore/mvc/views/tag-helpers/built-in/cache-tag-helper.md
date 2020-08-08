@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/10/2018
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/cache-tag-helper
-ms.openlocfilehash: 65d8bbcdaed76a308b924ba024219e8f520bb585
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 7d2ff774b7654993e2cd9b126db252f81a3032d3
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399286"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88018757"
 ---
 # <a name="cache-tag-helper-in-aspnet-core-mvc"></a>Pomocnik tagu pamięci podręcznej w ASP.NET Core MVC
 
@@ -41,7 +43,7 @@ Pierwsze żądanie do strony zawierającej pomocnika tagów wyświetla bieżąc�
 
 ### <a name="enabled"></a>enabled
 
-| Typ atrybutu  | Przykłady        | Domyślne |
+| Typ atrybutu  | Przykłady        | Domyślny |
 | --------------- | --------------- | ------- |
 | Wartość logiczna         | `true`, `false` | `true`  |
 
@@ -73,7 +75,7 @@ Poniższy przykład pamięci podręcznej zawartości pomocnika tagów pamięci p
 
 ### <a name="expires-after"></a>wygasa — po
 
-| Typ atrybutu | Przykład                      | Domyślne    |
+| Typ atrybutu | Przykład                      | Domyślny    |
 | -------------- | ---------------------------- | ---------- |
 | `TimeSpan`     | `@TimeSpan.FromSeconds(120)` | 20 minut |
 
@@ -163,15 +165,15 @@ routes.MapRoute(
 </cache>
 ```
 
-### <a name="vary-by-cookie"></a>Różne pliki cookie
+### <a name="vary-by-no-loccookie"></a>Zróżnicuj wedługcookie
 
 | Typ atrybutu | Przykłady                                                                         |
 | -------------- | -------------------------------------------------------------------------------- |
 | Ciąg         | `.AspNetCore.Identity.Application`, `.AspNetCore.Identity.Application,HairColor` |
 
-`vary-by-cookie`akceptuje rozdzielaną przecinkami listę nazw cookie, które wyzwalają Odświeżanie pamięci podręcznej, gdy zmieniają się wartości plików cookie.
+`vary-by-cookie`akceptuje rozdzielaną przecinkami listę cookie nazw, które wyzwalają Odświeżanie pamięci podręcznej po cookie zmianie wartości.
 
-Poniższy przykład monitoruje plik cookie skojarzony z ASP.NET Core Identity . Po uwierzytelnieniu użytkownika zmiana w Identity pliku cookie wyzwala odświeżenie pamięci podręcznej:
+Poniższy przykład monitoruje cookie skojarzone z ASP.NET Core Identity . Po uwierzytelnieniu użytkownika zmiany w usłudze Identity cookie wyzwalają odświeżenie pamięci podręcznej:
 
 ```cshtml
 <cache vary-by-cookie=".AspNetCore.Identity.Application">
@@ -181,7 +183,7 @@ Poniższy przykład monitoruje plik cookie skojarzony z ASP.NET Core Identity . 
 
 ### <a name="vary-by-user"></a>Zróżnicuj według użytkownika
 
-| Typ atrybutu  | Przykłady        | Domyślne |
+| Typ atrybutu  | Przykłady        | Domyślny |
 | --------------- | --------------- | ------- |
 | Wartość logiczna         | `true`, `false` | `true`  |
 
@@ -195,7 +197,7 @@ Poniższy przykład monitoruje bieżącego zalogowanego użytkownika, aby wyzwol
 </cache>
 ```
 
-Użycie tego atrybutu zachowuje zawartość w pamięci podręcznej przez proces logowania i wylogowywania. Gdy wartość jest ustawiona na `true` , cykl uwierzytelniania unieważnia pamięć podręczną dla uwierzytelnionego użytkownika. Pamięć podręczna jest unieważniona, ponieważ podczas uwierzytelniania użytkownika jest generowana Nowa unikatowa wartość cookie. Pamięć podręczna jest utrzymywana dla stanu anonimowego, gdy plik cookie nie istnieje lub plik cookie utracił ważność. Jeśli użytkownik **nie** jest uwierzytelniony, pamięć podręczna jest utrzymywana.
+Użycie tego atrybutu zachowuje zawartość w pamięci podręcznej przez proces logowania i wylogowywania. Gdy wartość jest ustawiona na `true` , cykl uwierzytelniania unieważnia pamięć podręczną dla uwierzytelnionego użytkownika. Pamięć podręczna jest unieważniona, ponieważ nowa unikatowa cookie wartość jest generowana podczas uwierzytelniania użytkownika. Pamięć podręczna jest utrzymywana dla stanu anonimowego, gdy nie cookie jest obecny lub cookie wygasła. Jeśli użytkownik **nie** jest uwierzytelniony, pamięć podręczna jest utrzymywana.
 
 ### <a name="vary-by"></a>Zróżnicuj według
 
@@ -230,7 +232,7 @@ public IActionResult Index(string myParam1, string myParam2, string myParam3)
 
 ### <a name="priority"></a>priority
 
-| Typ atrybutu      | Przykłady                               | Domyślne  |
+| Typ atrybutu      | Przykłady                               | Domyślny  |
 | ------------------- | -------------------------------------- | -------- |
 | `CacheItemPriority` | `High`, `Low`, `NeverRemove`, `Normal` | `Normal` |
 
@@ -248,7 +250,7 @@ Ten `priority` atrybut nie gwarantuje określonego poziomu przechowywania pamię
 
 Pomocnik tagu pamięci podręcznej jest zależny od [usługi pamięci podręcznej](xref:performance/caching/memory). Pomocnik tagu pamięci podręcznej dodaje usługę, jeśli nie została dodana.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:performance/caching/memory>
 * <xref:security/authentication/identity>

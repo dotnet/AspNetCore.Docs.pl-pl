@@ -6,6 +6,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 02/10/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/signalr-typescript-webpack
-ms.openlocfilehash: 49d185ce941d5f8e841224e7de3b72b8350a1c47
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 48b59fea5da3872fb29cacd9edbedd14de9e602f
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407905"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019420"
 ---
-# <a name="use-aspnet-core-signalr-with-typescript-and-webpack"></a>Używanie ASP.NET Core SignalR z językami TypeScript i WebPack
+# <a name="use-aspnet-core-no-locsignalr-with-typescript-and-webpack"></a>Używanie ASP.NET Core SignalR z językami TypeScript i WebPack
 
 Autorzy [Sébastien Sougnez](https://twitter.com/ssougnez) i [Scott Addie](https://twitter.com/Scott_Addie)
 
@@ -72,7 +74,7 @@ Skonfiguruj program Visual Studio, aby szukać npm w zmiennej środowiskowej *Pa
 Konfiguracja programu Visual Studio została ukończona.
 
 1. Użyj opcji menu **plik**  >  **Nowy**  >  **projekt** , a następnie wybierz szablon **aplikacja sieci Web ASP.NET Core** . Wybierz pozycję **Dalej**.
-1. Nazwij projekt *SignalRWebPack*, a następnie wybierz pozycję **Utwórz**.
+1. Nadaj nazwę projekt * SignalR WebPack*, a następnie wybierz pozycję **Utwórz**.
 1. Wybierz pozycję *.NET Core* z listy rozwijanej platforma docelowa, a następnie wybierz pozycję *ASP.NET Core 3,1* z listy rozwijanej selektora struktury. Wybierz **pusty** szablon i wybierz pozycję **Utwórz**.
 
 Dodaj `Microsoft.TypeScript.MSBuild` pakiet do projektu:
@@ -90,8 +92,8 @@ dotnet new web -o SignalRWebPack
 code -r SignalRWebPack
 ```
 
-* `dotnet new`Polecenie tworzy pustą aplikację sieci web ASP.NET Core w katalogu *SignalRWebPack* .
-* `code`Polecenie otwiera folder *SignalRWebPack* w bieżącym wystąpieniu Visual Studio Code.
+* `dotnet new`Polecenie tworzy pustą aplikację sieci web ASP.NET Core w katalogu * SignalR pakietu WebPack* .
+* `code`Polecenie otwiera folder * SignalR WebPack* w bieżącym wystąpieniu Visual Studio Code.
 
 Uruchom następujące polecenie interfejs wiersza polecenia platformy .NET Core w **zintegrowanym terminalu**:
 
@@ -200,11 +202,11 @@ Poniższe kroki umożliwiają skonfigurowanie konwersji języka TypeScript na Ja
 
    [!code-csharp[Startup](signalr-typescript-webpack/sample/3.x/Startup.cs?name=snippet_UseSignalR&highlight=3)]
 
-1. W `Startup.ConfigureServices` , wywołaj metodę [addsignaler](/dotnet/api/microsoft.extensions.dependencyinjection.signalrdependencyinjectionextensions.addsignalr#Microsoft_Extensions_DependencyInjection_SignalRDependencyInjectionExtensions_AddSignalR_Microsoft_Extensions_DependencyInjection_IServiceCollection_).
+1. W programie `Startup.ConfigureServices` Wywołaj polecenie [Add SignalR ](/dotnet/api/microsoft.extensions.dependencyinjection.signalrdependencyinjectionextensions.addsignalr#Microsoft_Extensions_DependencyInjection_SignalRDependencyInjectionExtensions_AddSignalR_Microsoft_Extensions_DependencyInjection_IServiceCollection_).
 
    [!code-csharp[Startup](signalr-typescript-webpack/sample/3.x/Startup.cs?name=snippet_AddSignalR)]
 
-1. Utwórz nowy katalog o nazwie *Hubs* w katalogu głównym *SignalRWebPack/* do przechowywania SignalR centrum.
+1. Utwórz nowy katalog o nazwie *Hubs* w głównym programie Project * SignalR /* w celu zapisania SignalR centrum.
 
 1. Utwórz centra centrów */ChatHub. cs* przy użyciu następującego kodu:
 
@@ -328,7 +330,7 @@ Skonfiguruj program Visual Studio, aby szukać npm w zmiennej środowiskowej *Pa
 Konfiguracja programu Visual Studio została ukończona. Czas na utworzenie projektu.
 
 1. Użyj opcji menu **plik** > **Nowy** > **projekt** , a następnie wybierz szablon **aplikacja sieci Web ASP.NET Core** .
-1. Nazwij projekt *SignalRWebPack*, a następnie wybierz pozycję **Utwórz**.
+1. Nadaj nazwę projekt * SignalR WebPack*, a następnie wybierz pozycję **Utwórz**.
 1. Wybierz pozycję *.NET Core* z listy rozwijanej platforma docelowa, a następnie wybierz pozycję *ASP.NET Core 2,2* z listy rozwijanej selektora struktury. Wybierz **pusty** szablon i wybierz pozycję **Utwórz**.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
@@ -339,7 +341,7 @@ Uruchom następujące polecenie w **zintegrowanym terminalu**:
 dotnet new web -o SignalRWebPack
 ```
 
-Pusta aplikacja sieci Web ASP.NET Core, ukierunkowana na .NET Core, jest tworzona w katalogu *SignalRWebPack* .
+Pusta aplikacja sieci Web ASP.NET Core, ukierunkowana na .NET Core, jest tworzona w katalogu * SignalR pakietu WebPack* .
 
 ---
 
@@ -436,7 +438,7 @@ Poniższe kroki umożliwiają skonfigurowanie konwersji języka TypeScript na Ja
 
     Poprzedni kod pozwala serwerowi zlokalizować i obsłużyć plik *index.html* , niezależnie od tego, czy użytkownik wprowadzi pełny adres URL, czy główny adres URL aplikacji sieci Web.
 
-1. Wywołaj metodę [Addsignaler](/dotnet/api/microsoft.extensions.dependencyinjection.signalrdependencyinjectionextensions.addsignalr#Microsoft_Extensions_DependencyInjection_SignalRDependencyInjectionExtensions_AddSignalR_Microsoft_Extensions_DependencyInjection_IServiceCollection_) w `Startup.ConfigureServices` . Dodaje SignalR usługi do projektu.
+1. Wywołanie [Add SignalR ](/dotnet/api/microsoft.extensions.dependencyinjection.signalrdependencyinjectionextensions.addsignalr#Microsoft_Extensions_DependencyInjection_SignalRDependencyInjectionExtensions_AddSignalR_Microsoft_Extensions_DependencyInjection_IServiceCollection_) in `Startup.ConfigureServices` . Dodaje SignalR usługi do projektu.
 
     [!code-csharp[Startup](signalr-typescript-webpack/sample/2.x/Startup.cs?name=snippet_AddSignalR)]
 
@@ -530,7 +532,7 @@ Upewnij się, że aplikacja działa z następującymi krokami.
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:signalr/javascript-client>
 * <xref:signalr/hubs>

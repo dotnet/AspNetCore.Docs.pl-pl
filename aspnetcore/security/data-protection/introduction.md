@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/24/2018
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/introduction
-ms.openlocfilehash: bf41d5a756c988b239824c19ef7a9d177a93a4a1
-ms.sourcegitcommit: b0fa7ff0cb158277df61bcd08058a81222c3fe10
+ms.openlocfilehash: b29711e8e1ef1558731ba58ca2ff14000af19ca2
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/07/2020
-ms.locfileid: "87913823"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019359"
 ---
 # <a name="aspnet-core-data-protection"></a>Ochrona danych ASP.NET Core
 
@@ -31,7 +33,7 @@ Stos ochrony danych ASP.NET Core został zaprojektowany tak, aby służyć jako 
 
 Ogólna Instrukcja problemu może być zwięzłie określona w jednym zdaniu: Chcę utrzymać zaufane informacje do późniejszego pobrania, ale nie mam zaufania mechanizmu trwałości. W przypadku terminów sieci Web może to być napisano jako "muszę przeprowadzić dwukierunkową relację zaufania za pośrednictwem niezaufanego klienta".
 
-Przykładem kanonicznym jest plik cookie uwierzytelniania lub token okaziciela. Serwer generuje "jestem Groot i ma uprawnienia XYZ" i udostępnia go klientowi. W przyszłości klient będzie zaprezentować ten token z powrotem do serwera, ale serwer wymaga pewnego rodzaju pewności, że klient nie wykonał sfałszowanego tokenu. W rezultacie pierwsze wymaganie: autentyczność (vel integralność, nieautoryzowane sprawdzanie poprawności).
+Przykładem kanonicznym jest cookie token uwierzytelniania lub okaziciela. Serwer generuje "jestem Groot i ma uprawnienia XYZ" i udostępnia go klientowi. W przyszłości klient będzie zaprezentować ten token z powrotem do serwera, ale serwer wymaga pewnego rodzaju pewności, że klient nie wykonał sfałszowanego tokenu. W rezultacie pierwsze wymaganie: autentyczność (vel integralność, nieautoryzowane sprawdzanie poprawności).
 
 Ponieważ trwały stan jest traktowany jako zaufany przez serwer, przewidujemy, że ten stan może zawierać informacje specyficzne dla środowiska operacyjnego. Może to być w postaci ścieżki pliku, uprawnienia, uchwytu lub innego odwołania pośredniego lub innego elementu danych specyficznych dla serwera. Takie informacje nie powinny być zwykle ujawniane niezaufanym klientom. W tym przypadku drugie wymaganie: poufność.
 

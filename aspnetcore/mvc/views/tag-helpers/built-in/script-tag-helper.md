@@ -6,6 +6,8 @@ description: Odkryj atrybuty pomocnika tagów ASP.NET Core i rolę, jaką każdy
 ms.custom: mvc
 ms.date: 12/02/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/script-tag-helper
-ms.openlocfilehash: b9b90c1c40fccbc7bb6b6c9050bd525b5fa8cd92
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: b2f10b8230c1292614927d61c1e6d997dcb5640c
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407411"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020226"
 ---
 # <a name="script-tag-helper-in-aspnet-core"></a>Pomocnik tagu skryptu w ASP.NET Core
 
@@ -56,7 +58,7 @@ Metoda skryptu zdefiniowana w podstawowym skrypcie do użycia dla testu powrotu.
 
 Adres URL tagu skryptu, do którego ma zostać nastąpi powrót w przypadku niepowodzenia pierwszego planu. Aby uzyskać więcej informacji, zobacz <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.FallbackSrc>.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:mvc/views/tag-helpers/intro>
 * <xref:mvc/controllers/areas>

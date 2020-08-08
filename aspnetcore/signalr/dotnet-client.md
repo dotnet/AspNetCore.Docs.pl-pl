@@ -7,6 +7,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 01/14/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/dotnet-client
-ms.openlocfilehash: 54e86479b9f9f0acc861769f9ab78958f79acfd3
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: a03598f887d628c8a2b6720d99826d4aef4e52fa
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400144"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020005"
 ---
-# <a name="aspnet-core-signalr-net-client"></a>ASP.NET Core SignalR klienta platformy .NET
+# <a name="aspnet-core-no-locsignalr-net-client"></a>ASP.NET Core SignalR klienta platformy .NET
 
 SignalRBiblioteka kliencka ASP.NET Core .NET umożliwia komunikowanie się z SignalR koncentratorami z poziomu aplikacji .NET.
 
@@ -30,7 +32,7 @@ SignalRBiblioteka kliencka ASP.NET Core .NET umożliwia komunikowanie się z Sig
 
 Przykładowy kod w tym artykule jest aplikacją WPF, która używa SignalR klienta programu ASP.NET Core .NET.
 
-## <a name="install-the-signalr-net-client-package"></a>Zainstaluj SignalR pakiet klienta platformy .NET
+## <a name="install-the-no-locsignalr-net-client-package"></a>Zainstaluj SignalR pakiet klienta platformy .NET
 
 [Microsoft. AspNetCore. SignalR .. ](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client)Do nawiązania połączenia z koncentratorami wymagany jest pakiet klienta platformy .NET SignalR .
 
@@ -42,7 +44,7 @@ Aby zainstalować bibliotekę kliencką, uruchom następujące polecenie w oknie
 Install-Package Microsoft.AspNetCore.SignalR.Client
 ```
 
-# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
 
 Aby zainstalować bibliotekę kliencką, uruchom następujące polecenie w powłoce poleceń:
 

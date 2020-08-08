@@ -5,6 +5,8 @@ description: Dowiedz się, w jaki sposób ASP.NET Core MVC używa programów po�
 ms.author: riande
 ms.date: 3/25/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/routing
-ms.openlocfilehash: 962b42239b2101fc95e55fb38ce214481bf0ef01
-ms.sourcegitcommit: ca6a1f100c1a3f59999189aa962523442dd4ead1
+ms.openlocfilehash: 4d367a6b15fdcf9ef6be1bac749368fd48fa259e
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/30/2020
-ms.locfileid: "87444142"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020369"
 ---
 # <a name="routing-to-controller-actions-in-aspnet-core"></a>Routing do akcji kontrolera w ASP.NET Core
 
@@ -216,7 +218,7 @@ Gdy dwa punkty końcowe pasują do routingu, routing musi wykonać jedną z nast
 * Wybierz najlepszego kandydata.
 * Zgłoś wyjątek.
 
-Na przykład:
+Przykład:
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/ProductsController.cs?name=snippet9)]
 
@@ -1009,7 +1011,7 @@ W ramach przetwarzania żądań MVC sprawdzi, czy wartości trasy mogą być uż
 
 ### <a name="disambiguating-actions"></a>Niejednoznaczne akcje
 
-Gdy dwie akcje są zgodne z routingiem, MVC musi odróżnić się, aby wybrać najlepszy kandydat lub w przeciwnym razie zgłosić wyjątek. Na przykład:
+Gdy dwie akcje są zgodne z routingiem, MVC musi odróżnić się, aby wybrać najlepszy kandydat lub w przeciwnym razie zgłosić wyjątek. Przykład:
 
 ```csharp
 public class ProductsController : Controller

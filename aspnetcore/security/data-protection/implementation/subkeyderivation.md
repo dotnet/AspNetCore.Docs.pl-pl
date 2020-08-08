@@ -5,6 +5,8 @@ description: Poznaj szczegóły implementacji wyprowadzenia podklucza ASP.NET Co
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/implementation/subkeyderivation
-ms.openlocfilehash: 619a848eb96faab6997f9ddbf4d62a1e04ee66b1
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: ef9c100df69f9f7a1b51819ebb5721cb4f875ffd
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86060374"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019693"
 ---
 # <a name="subkey-derivation-and-authenticated-encryption-in-aspnet-core"></a>Wyprowadzanie podkluczy i uwierzytelnione szyfrowanie w ASP.NET Core
 

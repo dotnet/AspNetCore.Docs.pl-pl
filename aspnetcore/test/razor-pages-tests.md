@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 7/22/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: test/razor-pages-tests
-ms.openlocfilehash: ed048d600b629335b8267b63b3cfd57b525d608e
-ms.sourcegitcommit: c86b4e2955dc1724f2eaa7c97894ad8b3bf763fb
+ms.openlocfilehash: 21810f00548ad9f9c399ec4e453dd914dc186f5d
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/22/2020
-ms.locfileid: "86949097"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88018952"
 ---
-# <a name="razor-pages-unit-tests-in-aspnet-core"></a>RazorTesty jednostkowe stron w ASP.NET Core
+# <a name="no-locrazor-pages-unit-tests-in-aspnet-core"></a>RazorTesty jednostkowe stron w ASP.NET Core
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -194,7 +196,7 @@ Inne testy w tej grupie umożliwiają tworzenie obiektów modelu strony, które 
 
 [!code-csharp[](razor-pages-tests/samples/3.x/tests/RazorPagesTestSample.Tests/UnitTests/IndexPageTests.cs?name=snippet4&highlight=11,26,29,32)]
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Testowanie jednostkowe w języku C# w programie .NET Core przy użyciu testu dotnet i xUnit](/dotnet/articles/core/testing/unit-testing-with-dotnet-test)
 * <xref:mvc/controllers/testing>
@@ -378,7 +380,7 @@ Inne testy w tej grupie umożliwiają tworzenie obiektów modelu strony, które 
 
 [!code-csharp[](razor-pages-tests/samples/2.x/tests/RazorPagesTestSample.Tests/UnitTests/IndexPageTests.cs?name=snippet4&highlight=11,26,29,32)]
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Testowanie jednostkowe w języku C# w programie .NET Core przy użyciu testu dotnet i xUnit](/dotnet/articles/core/testing/unit-testing-with-dotnet-test)
 * <xref:mvc/controllers/testing>

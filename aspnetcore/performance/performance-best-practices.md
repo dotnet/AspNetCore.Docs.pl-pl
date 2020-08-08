@@ -6,6 +6,8 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 04/06/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/performance-best-practices
-ms.openlocfilehash: f74f6ce93093adbc931dd90b32a14de5d4f89096
-ms.sourcegitcommit: b0fa7ff0cb158277df61bcd08058a81222c3fe10
+ms.openlocfilehash: 0d99c5881b1ca786287d8643c82cab6a3f98f988
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/07/2020
-ms.locfileid: "87913892"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019862"
 ---
 # <a name="aspnet-core-performance-best-practices"></a>ASP.NET Core najlepszych rozwiązań dotyczących wydajności
 
@@ -108,7 +110,7 @@ Mając
 
 ## <a name="keep-common-code-paths-fast"></a>Szybkie śledzenie wspólnych ścieżek kodu
 
-Chcesz, aby cały kod był szybki. Często nazywane ścieżki kodu są najbardziej krytyczne dla optymalizacji. Należą do nich następujące elementy:
+Chcesz, aby cały kod był szybki. Często nazywane ścieżki kodu są najbardziej krytyczne dla optymalizacji. Są to moduły:
 
 * Składniki pośredniczące w potoku przetwarzania żądań aplikacji, szczególnie oprogramowanie pośredniczące działające wczesnie w potoku. Te składniki mają duży wpływ na wydajność.
 * Kod wykonywany dla każdego żądania lub wiele razy na żądanie. Na przykład niestandardowe rejestrowanie, programy obsługi autoryzacji lub inicjowanie usług przejściowych.

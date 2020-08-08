@@ -6,6 +6,8 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 09/20/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,36 +16,36 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/index
-ms.openlocfilehash: 9f3a2041059c1d890ce72ce5f2a88151253d9bd9
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: d21d808181d44b4c7e800df61ec1f3accdb58539
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404187"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88016105"
 ---
-# <a name="introduction-to-grpc-on-net-core"></a><span data-ttu-id="3813e-103">Wprowadzenie do gRPC na platformie .NET Core</span><span class="sxs-lookup"><span data-stu-id="3813e-103">Introduction to gRPC on .NET Core</span></span>
+# <a name="introduction-to-grpc-on-net-core"></a><span data-ttu-id="51205-103">Wprowadzenie do gRPC na platformie .NET Core</span><span class="sxs-lookup"><span data-stu-id="51205-103">Introduction to gRPC on .NET Core</span></span>
 
-<span data-ttu-id="3813e-104">Przez [John Luo](https://github.com/juntaoluo) i [Kuba Kowalski-króla](https://twitter.com/jamesnk)</span><span class="sxs-lookup"><span data-stu-id="3813e-104">By [John Luo](https://github.com/juntaoluo) and [James Newton-King](https://twitter.com/jamesnk)</span></span>
+<span data-ttu-id="51205-104">Przez [John Luo](https://github.com/juntaoluo) i [Kuba Kowalski-króla](https://twitter.com/jamesnk)</span><span class="sxs-lookup"><span data-stu-id="51205-104">By [John Luo](https://github.com/juntaoluo) and [James Newton-King](https://twitter.com/jamesnk)</span></span>
 
-<span data-ttu-id="3813e-105">[gRPC](https://grpc.io/docs/guides/) to język niezależny od i środowisko zdalnego wywołania procedury (RPC) o wysokiej wydajności.</span><span class="sxs-lookup"><span data-stu-id="3813e-105">[gRPC](https://grpc.io/docs/guides/) is a language agnostic, high-performance Remote Procedure Call (RPC) framework.</span></span>
+<span data-ttu-id="51205-105">[gRPC](https://grpc.io/docs/guides/) to język niezależny od i środowisko zdalnego wywołania procedury (RPC) o wysokiej wydajności.</span><span class="sxs-lookup"><span data-stu-id="51205-105">[gRPC](https://grpc.io/docs/guides/) is a language agnostic, high-performance Remote Procedure Call (RPC) framework.</span></span>
 
-<span data-ttu-id="3813e-106">Główne zalety struktury gRPC są następujące:</span><span class="sxs-lookup"><span data-stu-id="3813e-106">The main benefits of gRPC are:</span></span>
-* <span data-ttu-id="3813e-107">Nowoczesna, wysoce wydajna i uproszczona struktura RPC.</span><span class="sxs-lookup"><span data-stu-id="3813e-107">Modern, high-performance, lightweight RPC framework.</span></span>
-* <span data-ttu-id="3813e-108">Tworzenie interfejsu API za pomocą podejścia „najpierw kontrakt” z domyślnym użyciem buforów protokołu, co umożliwia implementacje niezależne od języka.</span><span class="sxs-lookup"><span data-stu-id="3813e-108">Contract-first API development, using Protocol Buffers by default, allowing for language agnostic implementations.</span></span>
-* <span data-ttu-id="3813e-109">Dostępne dla wielu języków narzędzia do generowania silnie typizowanych serwerów i klientów.</span><span class="sxs-lookup"><span data-stu-id="3813e-109">Tooling available for many languages to generate strongly-typed servers and clients.</span></span>
-* <span data-ttu-id="3813e-110">Obsługa wywołania przesyłania strumieniowego klienta, serwera i dwukierunkowego.</span><span class="sxs-lookup"><span data-stu-id="3813e-110">Supports client, server, and bi-directional streaming calls.</span></span>
-* <span data-ttu-id="3813e-111">Zredukowane użycie sieci dzięki serializacji binarnej Protobuf.</span><span class="sxs-lookup"><span data-stu-id="3813e-111">Reduced network usage with Protobuf binary serialization.</span></span>
+<span data-ttu-id="51205-106">Główne zalety struktury gRPC są następujące:</span><span class="sxs-lookup"><span data-stu-id="51205-106">The main benefits of gRPC are:</span></span>
+* <span data-ttu-id="51205-107">Nowoczesna, wysoce wydajna i uproszczona struktura RPC.</span><span class="sxs-lookup"><span data-stu-id="51205-107">Modern, high-performance, lightweight RPC framework.</span></span>
+* <span data-ttu-id="51205-108">Tworzenie interfejsu API za pomocą podejścia „najpierw kontrakt” z domyślnym użyciem buforów protokołu, co umożliwia implementacje niezależne od języka.</span><span class="sxs-lookup"><span data-stu-id="51205-108">Contract-first API development, using Protocol Buffers by default, allowing for language agnostic implementations.</span></span>
+* <span data-ttu-id="51205-109">Dostępne dla wielu języków narzędzia do generowania silnie typizowanych serwerów i klientów.</span><span class="sxs-lookup"><span data-stu-id="51205-109">Tooling available for many languages to generate strongly-typed servers and clients.</span></span>
+* <span data-ttu-id="51205-110">Obsługa wywołania przesyłania strumieniowego klienta, serwera i dwukierunkowego.</span><span class="sxs-lookup"><span data-stu-id="51205-110">Supports client, server, and bi-directional streaming calls.</span></span>
+* <span data-ttu-id="51205-111">Zredukowane użycie sieci dzięki serializacji binarnej Protobuf.</span><span class="sxs-lookup"><span data-stu-id="51205-111">Reduced network usage with Protobuf binary serialization.</span></span>
 
-<span data-ttu-id="3813e-112">Te korzyści sprawiają, że gRPC doskonale nadaje się do:</span><span class="sxs-lookup"><span data-stu-id="3813e-112">These benefits make gRPC ideal for:</span></span>
-* <span data-ttu-id="3813e-113">Lekkie mikrousługi, w których wydajność jest krytyczna.</span><span class="sxs-lookup"><span data-stu-id="3813e-113">Lightweight microservices where efficiency is critical.</span></span>
-* <span data-ttu-id="3813e-114">Systemy Polyglot, w których wiele języków jest wymaganych do programowania.</span><span class="sxs-lookup"><span data-stu-id="3813e-114">Polyglot systems where multiple languages are required for development.</span></span>
-* <span data-ttu-id="3813e-115">Usługi w czasie rzeczywistym, które muszą obsługiwać żądania przesyłania strumieniowego lub odpowiedzi.</span><span class="sxs-lookup"><span data-stu-id="3813e-115">Point-to-point real-time services that need to handle streaming requests or responses.</span></span>
+<span data-ttu-id="51205-112">Te korzyści sprawiają, że gRPC doskonale nadaje się do:</span><span class="sxs-lookup"><span data-stu-id="51205-112">These benefits make gRPC ideal for:</span></span>
+* <span data-ttu-id="51205-113">Lekkie mikrousługi, w których wydajność jest krytyczna.</span><span class="sxs-lookup"><span data-stu-id="51205-113">Lightweight microservices where efficiency is critical.</span></span>
+* <span data-ttu-id="51205-114">Systemy Polyglot, w których wiele języków jest wymaganych do programowania.</span><span class="sxs-lookup"><span data-stu-id="51205-114">Polyglot systems where multiple languages are required for development.</span></span>
+* <span data-ttu-id="51205-115">Usługi w czasie rzeczywistym, które muszą obsługiwać żądania przesyłania strumieniowego lub odpowiedzi.</span><span class="sxs-lookup"><span data-stu-id="51205-115">Point-to-point real-time services that need to handle streaming requests or responses.</span></span>
 
 [!INCLUDE[](~/includes/gRPCazure.md)]
 
-## <a name="c-tooling-support-for-proto-files"></a><span data-ttu-id="3813e-116">Obsługa narzędzi C# dla plików. proto</span><span class="sxs-lookup"><span data-stu-id="3813e-116">C# Tooling support for .proto files</span></span>
+## <a name="c-tooling-support-for-proto-files"></a><span data-ttu-id="51205-116">Obsługa narzędzi C# dla plików. proto</span><span class="sxs-lookup"><span data-stu-id="51205-116">C# Tooling support for .proto files</span></span>
 
-<span data-ttu-id="3813e-117">gRPC używa podejścia pierwszego kontraktu do programowania interfejsu API.</span><span class="sxs-lookup"><span data-stu-id="3813e-117">gRPC uses a contract-first approach to API development.</span></span> <span data-ttu-id="3813e-118">Usługi i komunikaty są zdefiniowane w plikach \* \* . proto\* :</span><span class="sxs-lookup"><span data-stu-id="3813e-118">Services and messages are defined in *\*.proto* files:</span></span>
+<span data-ttu-id="51205-117">gRPC używa podejścia pierwszego kontraktu do programowania interfejsu API.</span><span class="sxs-lookup"><span data-stu-id="51205-117">gRPC uses a contract-first approach to API development.</span></span> <span data-ttu-id="51205-118">Usługi i komunikaty są zdefiniowane w plikach \* \* . proto\* :</span><span class="sxs-lookup"><span data-stu-id="51205-118">Services and messages are defined in *\*.proto* files:</span></span>
 
 ```protobuf
 syntax = "proto3";
@@ -61,10 +63,10 @@ message HelloReply {
 }
 ```
 
-<span data-ttu-id="3813e-119">Typy .NET dla usług, klientów i komunikatów są generowane automatycznie przez dołączenie plików \* \* proto\* w projekcie:</span><span class="sxs-lookup"><span data-stu-id="3813e-119">.NET types for services, clients and messages are automatically generated by including *\*.proto* files in a project:</span></span>
+<span data-ttu-id="51205-119">Typy .NET dla usług, klientów i komunikatów są generowane automatycznie przez dołączenie plików \* \* proto\* w projekcie:</span><span class="sxs-lookup"><span data-stu-id="51205-119">.NET types for services, clients and messages are automatically generated by including *\*.proto* files in a project:</span></span>
 
-* <span data-ttu-id="3813e-120">Dodaj odwołanie do pakietu do pakietu [GRPC. Tools](https://www.nuget.org/packages/Grpc.Tools/) .</span><span class="sxs-lookup"><span data-stu-id="3813e-120">Add a package reference to [Grpc.Tools](https://www.nuget.org/packages/Grpc.Tools/) package.</span></span>
-* <span data-ttu-id="3813e-121">Dodaj pliki \* \* . proto\* do `<Protobuf>` grupy elementów.</span><span class="sxs-lookup"><span data-stu-id="3813e-121">Add *\*.proto* files to the `<Protobuf>` item group.</span></span>
+* <span data-ttu-id="51205-120">Dodaj odwołanie do pakietu do pakietu [GRPC. Tools](https://www.nuget.org/packages/Grpc.Tools/) .</span><span class="sxs-lookup"><span data-stu-id="51205-120">Add a package reference to [Grpc.Tools](https://www.nuget.org/packages/Grpc.Tools/) package.</span></span>
+* <span data-ttu-id="51205-121">Dodaj pliki \* \* . proto\* do `<Protobuf>` grupy elementów.</span><span class="sxs-lookup"><span data-stu-id="51205-121">Add *\*.proto* files to the `<Protobuf>` item group.</span></span>
 
 ```xml
 <ItemGroup>
@@ -72,13 +74,13 @@ message HelloReply {
 </ItemGroup>
 ```
 
-<span data-ttu-id="3813e-122">Więcej informacji o obsłudze narzędzi gRPC można znaleźć w temacie <xref:grpc/basics> .</span><span class="sxs-lookup"><span data-stu-id="3813e-122">For more information on gRPC tooling support, see <xref:grpc/basics>.</span></span>
+<span data-ttu-id="51205-122">Więcej informacji o obsłudze narzędzi gRPC można znaleźć w temacie <xref:grpc/basics> .</span><span class="sxs-lookup"><span data-stu-id="51205-122">For more information on gRPC tooling support, see <xref:grpc/basics>.</span></span>
 
-## <a name="grpc-services-on-aspnet-core"></a><span data-ttu-id="3813e-123">usługi gRPC Services na ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="3813e-123">gRPC services on ASP.NET Core</span></span>
+## <a name="grpc-services-on-aspnet-core"></a><span data-ttu-id="51205-123">usługi gRPC Services na ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="51205-123">gRPC services on ASP.NET Core</span></span>
 
-<span data-ttu-id="3813e-124">usługi gRPC Services mogą być hostowane na ASP.NET Core.</span><span class="sxs-lookup"><span data-stu-id="3813e-124">gRPC services can be hosted on ASP.NET Core.</span></span> <span data-ttu-id="3813e-125">Usługi mają pełną integrację z popularnymi funkcjami ASP.NET Core, takimi jak rejestrowanie, iniekcja zależności (DI), uwierzytelnianie i autoryzacja.</span><span class="sxs-lookup"><span data-stu-id="3813e-125">Services have full integration with popular ASP.NET Core features such as logging, dependency injection (DI), authentication and authorization.</span></span>
+<span data-ttu-id="51205-124">usługi gRPC Services mogą być hostowane na ASP.NET Core.</span><span class="sxs-lookup"><span data-stu-id="51205-124">gRPC services can be hosted on ASP.NET Core.</span></span> <span data-ttu-id="51205-125">Usługi mają pełną integrację z popularnymi funkcjami ASP.NET Core, takimi jak rejestrowanie, iniekcja zależności (DI), uwierzytelnianie i autoryzacja.</span><span class="sxs-lookup"><span data-stu-id="51205-125">Services have full integration with popular ASP.NET Core features such as logging, dependency injection (DI), authentication and authorization.</span></span>
 
-<span data-ttu-id="3813e-126">Szablon projektu usługi gRPC to usługa początkowa:</span><span class="sxs-lookup"><span data-stu-id="3813e-126">The gRPC service project template provides a starter service:</span></span>
+<span data-ttu-id="51205-126">Szablon projektu usługi gRPC to usługa początkowa:</span><span class="sxs-lookup"><span data-stu-id="51205-126">The gRPC service project template provides a starter service:</span></span>
 
 ```csharp
 public class GreeterService : Greeter.GreeterBase
@@ -102,7 +104,7 @@ public class GreeterService : Greeter.GreeterBase
 }
 ```
 
-<span data-ttu-id="3813e-127">`GreeterService`dziedziczy z `GreeterBase` typu, który jest generowany na podstawie `Greeter` usługi w pliku \* \* . proto\* .</span><span class="sxs-lookup"><span data-stu-id="3813e-127">`GreeterService` inherits from the `GreeterBase` type, which is generated from the `Greeter` service in the *\*.proto* file.</span></span> <span data-ttu-id="3813e-128">Usługa jest dostępna dla klientów w *Startup.cs*:</span><span class="sxs-lookup"><span data-stu-id="3813e-128">The service is made accessible to clients in *Startup.cs*:</span></span>
+<span data-ttu-id="51205-127">`GreeterService`dziedziczy z `GreeterBase` typu, który jest generowany na podstawie `Greeter` usługi w pliku \* \* . proto\* .</span><span class="sxs-lookup"><span data-stu-id="51205-127">`GreeterService` inherits from the `GreeterBase` type, which is generated from the `Greeter` service in the *\*.proto* file.</span></span> <span data-ttu-id="51205-128">Usługa jest dostępna dla klientów w *Startup.cs*:</span><span class="sxs-lookup"><span data-stu-id="51205-128">The service is made accessible to clients in *Startup.cs*:</span></span>
 
 ```csharp
 app.UseEndpoints(endpoints =>
@@ -111,11 +113,11 @@ app.UseEndpoints(endpoints =>
 });
 ```
 
-<span data-ttu-id="3813e-129">Aby dowiedzieć się więcej na temat usług gRPC Services na ASP.NET Core, zobacz <xref:grpc/aspnetcore> .</span><span class="sxs-lookup"><span data-stu-id="3813e-129">To learn more about gRPC services on ASP.NET Core, see <xref:grpc/aspnetcore>.</span></span>
+<span data-ttu-id="51205-129">Aby dowiedzieć się więcej na temat usług gRPC Services na ASP.NET Core, zobacz <xref:grpc/aspnetcore> .</span><span class="sxs-lookup"><span data-stu-id="51205-129">To learn more about gRPC services on ASP.NET Core, see <xref:grpc/aspnetcore>.</span></span>
 
-## <a name="call-grpc-services-with-a-net-client"></a><span data-ttu-id="3813e-130">Wywoływanie usług gRPC za pomocą klienta platformy .NET</span><span class="sxs-lookup"><span data-stu-id="3813e-130">Call gRPC services with a .NET client</span></span>
+## <a name="call-grpc-services-with-a-net-client"></a><span data-ttu-id="51205-130">Wywoływanie usług gRPC za pomocą klienta platformy .NET</span><span class="sxs-lookup"><span data-stu-id="51205-130">Call gRPC services with a .NET client</span></span>
 
-<span data-ttu-id="3813e-131">gRPC klienci są konkretnymi typami klientów, które są [generowane z plików \* \* . proto\* ](xref:grpc/basics#generated-c-assets).</span><span class="sxs-lookup"><span data-stu-id="3813e-131">gRPC clients are concrete client types that are [generated from *\*.proto* files](xref:grpc/basics#generated-c-assets).</span></span> <span data-ttu-id="3813e-132">Konkretny klient gRPC ma metody, które są tłumaczone na usługę gRPC w pliku \* \* . proto\* .</span><span class="sxs-lookup"><span data-stu-id="3813e-132">The concrete gRPC client has methods that translate to the gRPC service in the *\*.proto* file.</span></span>
+<span data-ttu-id="51205-131">gRPC klienci są konkretnymi typami klientów, które są [generowane z plików \* \* . proto\* ](xref:grpc/basics#generated-c-assets).</span><span class="sxs-lookup"><span data-stu-id="51205-131">gRPC clients are concrete client types that are [generated from *\*.proto* files](xref:grpc/basics#generated-c-assets).</span></span> <span data-ttu-id="51205-132">Konkretny klient gRPC ma metody, które są tłumaczone na usługę gRPC w pliku \* \* . proto\* .</span><span class="sxs-lookup"><span data-stu-id="51205-132">The concrete gRPC client has methods that translate to the gRPC service in the *\*.proto* file.</span></span>
 
 ```csharp
 var channel = GrpcChannel.ForAddress("https://localhost:5001");
@@ -127,11 +129,11 @@ var response = await client.SayHelloAsync(
 Console.WriteLine(response.Message);
 ```
 
-<span data-ttu-id="3813e-133">Klient gRPC jest tworzony przy użyciu kanału, który reprezentuje długotrwałe połączenie z usługą gRPC.</span><span class="sxs-lookup"><span data-stu-id="3813e-133">A gRPC client is created using a channel, which represents a long-lived connection to a gRPC service.</span></span> <span data-ttu-id="3813e-134">Kanał można utworzyć przy użyciu `GrpcChannel.ForAddress` .</span><span class="sxs-lookup"><span data-stu-id="3813e-134">A channel can be created using `GrpcChannel.ForAddress`.</span></span>
+<span data-ttu-id="51205-133">Klient gRPC jest tworzony przy użyciu kanału, który reprezentuje długotrwałe połączenie z usługą gRPC.</span><span class="sxs-lookup"><span data-stu-id="51205-133">A gRPC client is created using a channel, which represents a long-lived connection to a gRPC service.</span></span> <span data-ttu-id="51205-134">Kanał można utworzyć przy użyciu `GrpcChannel.ForAddress` .</span><span class="sxs-lookup"><span data-stu-id="51205-134">A channel can be created using `GrpcChannel.ForAddress`.</span></span>
 
-<span data-ttu-id="3813e-135">Aby uzyskać więcej informacji na temat tworzenia klientów i wywoływania różnych metod usługi, zobacz <xref:grpc/client> .</span><span class="sxs-lookup"><span data-stu-id="3813e-135">For more information on creating clients, and calling different service methods, see <xref:grpc/client>.</span></span>
+<span data-ttu-id="51205-135">Aby uzyskać więcej informacji na temat tworzenia klientów i wywoływania różnych metod usługi, zobacz <xref:grpc/client> .</span><span class="sxs-lookup"><span data-stu-id="51205-135">For more information on creating clients, and calling different service methods, see <xref:grpc/client>.</span></span>
 
-## <a name="additional-resources"></a><span data-ttu-id="3813e-136">Zasoby dodatkowe</span><span class="sxs-lookup"><span data-stu-id="3813e-136">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="51205-136">Dodatkowe zasoby</span><span class="sxs-lookup"><span data-stu-id="51205-136">Additional resources</span></span>
 
 * <xref:grpc/basics>
 * <xref:grpc/aspnetcore>

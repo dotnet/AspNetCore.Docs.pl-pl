@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/18/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/templated-components
-ms.openlocfilehash: eaa04b3f5a193b00619849d5525ea8d721ace71f
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 408fc433dd6c81ac84f2198465b3191441ad0fc4
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400954"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014519"
 ---
-# <a name="aspnet-core-blazor-templated-components"></a>BlazorSkładniki szablonu ASP.NET Core
+# <a name="aspnet-core-no-locblazor-templated-components"></a>BlazorSkładniki szablonu ASP.NET Core
 
 Autorzy [Luke Latham](https://github.com/guardrex) i [Daniel Roth](https://github.com/danroth27)
 

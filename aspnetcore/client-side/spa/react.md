@@ -7,6 +7,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 03/07/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: spa/react
-ms.openlocfilehash: d5185a80895423bdd60309509ab4d1dad4dad12f
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: e9f3bbe2248d1c2fc9030745febb69177c301f7e
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401730"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88013128"
 ---
 # <a name="use-the-react-project-template-with-aspnet-core"></a>Użyj szablonu projektu reagowanie z ASP.NET Core
 
@@ -49,7 +51,7 @@ Otwórz wygenerowany plik *csproj* i uruchom aplikację w zwykły sposób.
 
 Proces kompilacji przywraca zależności npm w pierwszym przebiegu, co może potrwać kilka minut. Kolejne kompilacje są znacznie szybsze.
 
-# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
 
 Upewnij się, że masz zmienną środowiskową o nazwie `ASPNETCORE_Environment` z wartością `Development` . W systemie Windows (w komunikatach innych niż programu PowerShell) Uruchom polecenie `SET ASPNETCORE_Environment=Development` . W systemie Linux lub macOS Uruchom polecenie `export ASPNETCORE_Environment=Development` .
 
@@ -69,7 +71,7 @@ Istnieją niewielkie różnice między aplikacją reakcji utworzoną przez ten s
 
 ## <a name="install-npm-packages"></a>Zainstaluj pakiety npm
 
-Aby zainstalować pakiety npm innych firm, należy użyć wiersza polecenia w podkatalogu *ClientApp* . Na przykład:
+Aby zainstalować pakiety npm innych firm, należy użyć wiersza polecenia w podkatalogu *ClientApp* . Przykład:
 
 ```console
 cd ClientApp
@@ -116,6 +118,6 @@ Po uruchomieniu aplikacji ASP.NET Core nie zostanie uruchomiony serwer CRA. Wyst
 > [!IMPORTANT]
 > "Renderowanie po stronie serwera" nie jest obsługiwaną funkcją tego szablonu. Naszym celem tego szablonu jest spełnienie warunków dotyczących "Tworzenie — reagowanie aplikacji". W związku z tym scenariusze i funkcje, które nie są uwzględnione w projekcie "Create-rereagować na aplikacje" (na przykład SSR), nie są obsługiwane i pozostają jako ćwiczenie dla użytkownika.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:security/authentication/identity/spa>

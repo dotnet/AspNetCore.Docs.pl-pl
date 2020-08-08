@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/28/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/aad-groups-roles
-ms.openlocfilehash: 68071be9fb9f7a097c0c3693293bf8295e0173f1
-ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
+ms.openlocfilehash: 6fe96616abf423df600bfdd7198e63198358e7a3
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87818810"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88013791"
 ---
 # <a name="azure-ad-groups-administrative-roles-and-user-defined-roles"></a>Grupy usługi Azure AD, role administracyjne i role zdefiniowane przez użytkownika
 

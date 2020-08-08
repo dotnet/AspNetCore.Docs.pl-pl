@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/09/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/linux-nginx
-ms.openlocfilehash: 8038c63200c7c9aaadb9e0e7a68ae315ff620197
-ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
+ms.openlocfilehash: f6a777ab796da42402fae4f77ecc028efa2d6039
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86445297"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88015546"
 ---
 # <a name="host-aspnet-core-on-linux-with-nginx"></a>Hostowanie ASP.NET Core w systemie Linux za pomocą Nginx
 
@@ -299,13 +301,13 @@ sudo journalctl -fu kestrel-helloapp.service --since "2016-10-18" --until "2016-
 
 ## <a name="data-protection"></a>Ochrona danych
 
-[ASP.NET Core stosu ochrony danych](xref:security/data-protection/introduction) jest używany przez kilka ASP.NET Core [middlewares](xref:fundamentals/middleware/index), w tym uwierzytelnianie pośredniczące uwierzytelniania (np. Oprogramowanie pośredniczące plików cookie) i ochrona za żądania między lokacjami (CSRF). Nawet jeśli interfejsy API ochrony danych nie są wywoływane przez kod użytkownika, należy skonfigurować ochronę danych w celu utworzenia trwałego [magazynu kluczy](xref:security/data-protection/implementation/key-management)kryptograficznych. Jeśli ochrona danych nie jest skonfigurowana, klucze są przechowywane w pamięci i usuwane po ponownym uruchomieniu aplikacji.
+[ASP.NET Core stosu ochrony danych](xref:security/data-protection/introduction) jest używany przez kilka ASP.NET Core [middlewares](xref:fundamentals/middleware/index), w tym uwierzytelniania oprogramowania pośredniczącego (na przykład cookie oprogramowania pośredniczącego) i ochrony przez wiele lokacji (CSRF). Nawet jeśli interfejsy API ochrony danych nie są wywoływane przez kod użytkownika, należy skonfigurować ochronę danych w celu utworzenia trwałego [magazynu kluczy](xref:security/data-protection/implementation/key-management)kryptograficznych. Jeśli ochrona danych nie jest skonfigurowana, klucze są przechowywane w pamięci i usuwane po ponownym uruchomieniu aplikacji.
 
 Jeśli pierścień kluczy jest przechowywany w pamięci po ponownym uruchomieniu aplikacji:
 
-* Wszystkie tokeny uwierzytelniania na podstawie plików cookie są unieważnione.
+* cookieTokeny uwierzytelniania na podstawie wszystkich są unieważnione.
 * Użytkownicy muszą ponownie zalogować się przy następnym żądaniu.
-* Nie można już odszyfrować żadnych danych chronionych za pomocą dzwonka klucza. Może to obejmować [tokeny CSRF](xref:security/anti-request-forgery#aspnet-core-antiforgery-configuration) [ASP.NET Core i pliki cookie MVC TempData](xref:fundamentals/app-state#tempdata).
+* Nie można już odszyfrować żadnych danych chronionych za pomocą dzwonka klucza. Może to obejmować [tokeny CSRF](xref:security/anti-request-forgery#aspnet-core-antiforgery-configuration) i [ASP.NET Core MVC TempData cookie s](xref:fundamentals/app-state#tempdata).
 
 Aby skonfigurować ochronę danych w celu utrwalenia i szyfrowania pierścienia kluczy, zobacz:
 

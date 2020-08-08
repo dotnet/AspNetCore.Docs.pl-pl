@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/05/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/threat-mitigation
-ms.openlocfilehash: 4477b16d0d35fb90c35d17852f4639676d76aa02
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 2637645da9db7d52668c6a36c822df25520ff1f1
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402289"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88013817"
 ---
-# <a name="threat-mitigation-guidance-for-aspnet-core-blazor-server"></a>Wskazówki dotyczące łagodzenia zagrożeń dla ASP.NET CoreBlazor Server
+# <a name="threat-mitigation-guidance-for-aspnet-core-no-locblazor-server"></a>Wskazówki dotyczące łagodzenia zagrożeń dla ASP.NET CoreBlazor Server
 
 Autor [Javier Calvarro Nelson](https://github.com/javiercn)
 
@@ -37,7 +39,7 @@ W środowiskach z ograniczeniami, takimi jak wewnątrz sieci firmowej lub intran
 * Nie dotyczy w ograniczonym środowisku.
 * Nie jest kosztem wdrożenia, ponieważ zagrożenie bezpieczeństwa jest niskie w ograniczonym środowisku.
 
-## <a name="blazor-and-shared-state"></a>Blazori udostępniony stan
+## <a name="no-locblazor-and-shared-state"></a>Blazori udostępniony stan
 
 [!INCLUDE[](~/includes/blazor-security/blazor-shared-state.md)]
 
@@ -103,7 +105,7 @@ Domyślnie nie ma żadnego limitu liczby połączeń na użytkownika dla Blazor 
 
 Ataki typu "odmowa usługi" (DoS) obejmują klienta, który powoduje, że serwer wyczerpuje jeden lub więcej zasobów, dzięki czemu aplikacja jest niedostępna. Blazor ServerAplikacje obejmują pewne limity domyślne i korzystają z innych ASP.NET Core i SignalR limitów ochrony przed atakami systemu DOS ustawionymi w systemie <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions> .
 
-| Blazor Serverlimit aplikacji | Opis | Domyślne |
+| Blazor Serverlimit aplikacji | Opis | Domyślny |
 | --- | --- | --- |
 | <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.DisconnectedCircuitMaxRetained> | Maksymalna liczba odłączonych obwodów, które dany serwer przechowuje w pamięci w danym momencie. | 100 |
 | <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.DisconnectedCircuitRetentionPeriod> | Maksymalny czas przechowywania połączonego obwodu w pamięci przed jego usunięciem. | 3 minuty |
@@ -112,7 +114,7 @@ Ataki typu "odmowa usługi" (DoS) obejmują klienta, który powoduje, że serwer
 
 Ustaw maksymalny rozmiar komunikatu dla pojedynczego przychodzącego komunikatu z centrum <xref:Microsoft.AspNetCore.SignalR.HubConnectionContextOptions> .
 
-| SignalRi limit ASP.NET Core | Opis | Domyślne |
+| SignalRi limit ASP.NET Core | Opis | Domyślny |
 | --- | --- | --- |
 | <xref:Microsoft.AspNetCore.SignalR.HubConnectionContextOptions.MaximumReceiveMessageSize?displayProperty=nameWithType> | Rozmiar wiadomości dla pojedynczej wiadomości. | 32 KB |
 
@@ -158,7 +160,7 @@ Nie ufaj wywołań z języka JavaScript do metod .NET. Gdy metoda .NET jest nara
 
 Zdarzenia zapewniają punkt wejścia do Blazor Server aplikacji. Te same reguły zabezpieczania punktów końcowych w aplikacjach sieci Web mają zastosowanie do obsługi zdarzeń w Blazor Server aplikacjach. Złośliwy klient może wysłać dowolne dane, które chcą wysłać jako ładunek dla zdarzenia.
 
-Na przykład:
+Przykład:
 
 * Zdarzenie zmiany dla elementu `<select>` może wysłać wartość, która nie należy do opcji prezentowanych przez aplikację dla klienta.
 * `<input>`Może wysłać dowolne dane tekstowe do serwera, pomijając sprawdzanie poprawności po stronie klienta.

@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/03/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/additional-scenarios
-ms.openlocfilehash: 81ab2bb139dfcbea712d4eb51acfc9d7f6767d46
-ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
+ms.openlocfilehash: 15531c39a66a9f6dfd0f5c20cf960e4db5a78074
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87818836"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88013804"
 ---
 # <a name="aspnet-core-no-locblazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor WebAssembly dodatkowe scenariusze zabezpieczeń
 
@@ -444,7 +446,7 @@ Aby uzyskać więcej informacji na temat opcji interfejsu API pobierania, zobacz
 
 ## <a name="cross-origin-resource-sharing-cors"></a>Współużytkowanie zasobów między źródłami (CORS)
 
-Podczas wysyłania poświadczeń (plików cookie/nagłówki autoryzacji) w żądaniach CORS `Authorization` nagłówek musi być dozwolony przez zasady CORS.
+W przypadku wysyłania poświadczeń ( cookie nagłówki autoryzacji/nagłówków) w żądaniach CORS `Authorization` nagłówek musi być dozwolony przez zasady CORS.
 
 Następujące zasady obejmują konfigurację programu:
 
@@ -467,13 +469,13 @@ Aby uzyskać więcej informacji, zobacz <xref:security/cors> i składnik Tester 
 
 ## <a name="handle-token-request-errors"></a>Obsługa błędów żądania tokenu
 
-Gdy aplikacja jednostronicowa uwierzytelnia użytkownika przy użyciu usługi OpenID Connect Connect (OIDC), stan uwierzytelniania jest obsługiwany lokalnie w ramach SPA i w Identity postaci pliku cookie sesji, który jest ustawiany w wyniku użytkownika dostarczającego poświadczenia.
+Gdy aplikacja jednostronicowa uwierzytelnia użytkownika przy użyciu usługi OpenID Connect Connect (OIDC), stan uwierzytelniania jest obsługiwany lokalnie w ramach SPA i w Identity postaci sesji cookie , która jest ustawiona jako wynik użytkownika dostarczającego poświadczenia.
 
 Tokeny, które są emitowane przez protokół IP dla użytkownika zwykle są ważne przez krótki okresy czasu, na ogół o godzinę, więc aplikacja kliencka musi regularnie pobierać nowe tokeny. W przeciwnym razie użytkownik zostanie wylogowany po wygaśnięciu przyznanych tokenów. W większości przypadków klienci OIDC mogą udostępniać nowe tokeny, nie wymagając ponownego uwierzytelnienia użytkownika w ramach stanu uwierzytelniania lub "sesji", który jest przechowywany w ramach adresu IP.
 
 Istnieją sytuacje, w których klient nie może uzyskać tokenu bez interakcji użytkownika, na przykład gdy z jakiegoś powodu użytkownik jawnie wylogowuje się z adresu IP. Ten scenariusz występuje, gdy użytkownik odwiedzi `https://login.microsoftonline.com` i wyloguje się. W tych scenariuszach aplikacja nie wie od razu, że użytkownik wyloguje się. Każdy token przechowywany przez klienta może już nie być prawidłowy. Ponadto klient nie może zainicjować obsługi nowego tokenu bez interakcji użytkownika po wygaśnięciu bieżącego tokenu.
 
-Te scenariusze nie są specyficzne dla uwierzytelniania opartego na tokenach. Są one częścią charakteru aplikacji jednostronicowych. SPA używający plików cookie również nie może wywołać interfejsu API serwera, jeśli plik cookie uwierzytelniania zostanie usunięty.
+Te scenariusze nie są specyficzne dla uwierzytelniania opartego na tokenach. Są one częścią charakteru aplikacji jednostronicowych. SPA używa cookie również protokołu API serwera, jeśli uwierzytelnianie cookie zostało usunięte.
 
 Gdy aplikacja wykonuje wywołania interfejsu API do chronionych zasobów, należy pamiętać o następujących kwestiach:
 

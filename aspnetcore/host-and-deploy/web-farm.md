@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/13/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/web-farm
-ms.openlocfilehash: 13c4a8e287e4b62a1429f67fbe83ff5b0dc65f52
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 58409b5c47d71c96ece6f4ecfab6f18df47f798b
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408282"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88015442"
 ---
 # <a name="host-aspnet-core-in-a-web-farm"></a>ASP.NET Core hosta w kolektywie serwerów sieci Web
 
@@ -70,8 +72,8 @@ Poniższe scenariusze nie wymagają dodatkowej konfiguracji, ale zależą od tec
 | -------- | ------------------- |
 | Authentication | Ochrona danych (zobacz <xref:security/data-protection/configuration/overview> ).<br><br>Aby uzyskać więcej informacji, zobacz <xref:security/authentication/cookie> i <xref:security/cookie-sharing>. |
 | Identity | Konfiguracja uwierzytelniania i bazy danych.<br><br>Aby uzyskać więcej informacji, zobacz <xref:security/authentication/identity>. |
-| Sesja | Ochrona danych (zaszyfrowane pliki cookie) (zobacz <xref:security/data-protection/configuration/overview> ) i buforowanie (zobacz <xref:performance/caching/distributed> ).<br><br>Aby uzyskać więcej informacji, zobacz [Zarządzanie sesjami i Stanami: stan sesji](xref:fundamentals/app-state#session-state). |
-| TempData | Ochrona danych (zaszyfrowane pliki cookie) (zobacz <xref:security/data-protection/configuration/overview> ) lub sesja (zobacz [Zarządzanie sesjami i Stanami: stan sesji](xref:fundamentals/app-state#session-state)).<br><br>Aby uzyskać więcej informacji, zobacz temat [Zarządzanie sesjami i Stanami: TempData](xref:fundamentals/app-state#tempdata). |
+| Sesja | Ochrona danych (zaszyfrowane cookie s) (zobacz <xref:security/data-protection/configuration/overview> ) i buforowanie (zobacz <xref:performance/caching/distributed> ).<br><br>Aby uzyskać więcej informacji, zobacz [Zarządzanie sesjami i Stanami: stan sesji](xref:fundamentals/app-state#session-state). |
+| TempData | Ochrona danych (zaszyfrowana cookie s) (zobacz <xref:security/data-protection/configuration/overview> ) lub sesja (zobacz temat [Zarządzanie sesjami i Stanami: stan sesji](xref:fundamentals/app-state#session-state)).<br><br>Aby uzyskać więcej informacji, zobacz temat [Zarządzanie sesjami i Stanami: TempData](xref:fundamentals/app-state#tempdata). |
 | Ochrona przed fałszowaniem | Ochrona danych (zobacz <xref:security/data-protection/configuration/overview> ).<br><br>Aby uzyskać więcej informacji, zobacz <xref:security/anti-request-forgery>. |
 
 ## <a name="troubleshoot"></a>Rozwiązywanie problemów
@@ -80,11 +82,11 @@ Poniższe scenariusze nie wymagają dodatkowej konfiguracji, ale zależą od tec
 
 Gdy ochrona danych lub buforowanie nie jest skonfigurowane dla środowiska kolektywu serwerów sieci Web, podczas przetwarzania żądań występują sporadyczne błędy. Dzieje się tak, ponieważ węzły nie współdzielą tych samych zasobów i żądania użytkownika nie zawsze są kierowane do tego samego węzła.
 
-Rozważ użytkownikowi, który zaloguje się do aplikacji przy użyciu uwierzytelniania plików cookie. Użytkownik loguje się do aplikacji w jednym węźle kolektywu serwerów sieci Web. Jeśli następne żądanie zostanie odebrane w tym samym węźle, na którym się zalogowano, aplikacja będzie mogła odszyfrować plik cookie uwierzytelniania i zezwalać na dostęp do zasobu aplikacji. Jeśli kolejne żądanie dociera do innego węzła, aplikacja nie może odszyfrować pliku cookie uwierzytelniania z węzła, w którym zalogowany jest użytkownik, a autoryzacja dla żądanego zasobu kończy się niepowodzeniem.
+Rozważ użytkownikowi, który zaloguje się do aplikacji przy użyciu cookie uwierzytelniania. Użytkownik loguje się do aplikacji w jednym węźle kolektywu serwerów sieci Web. Jeśli następne żądanie zostanie odebrane w tym samym węźle, na którym się zalogowano, aplikacja będzie mogła odszyfrować uwierzytelnianie cookie i zezwala na dostęp do zasobu aplikacji. Jeśli następne żądanie zostanie odebrane w innym węźle, aplikacja nie może odszyfrować uwierzytelniania cookie z węzła, w którym zalogowany jest użytkownik, a autoryzacja dla żądanego zasobu kończy się niepowodzeniem.
 
 Gdy którykolwiek z następujących objawów występuje **sporadycznie**, problem zwykle jest śledzony do nieprawidłowej ochrony danych lub konfiguracji buforowania dla środowiska farmy sieci Web:
 
-* Przerwy uwierzytelniania: plik cookie uwierzytelniania jest niepoprawnie skonfigurowany lub nie można go odszyfrować. Logowanie OAuth (Facebook, Microsoft, Twitter) lub OpenIdConnect kończy się niepowodzeniem z błędem "korelacja nie powiodła się".
+* Przerwy uwierzytelniania: uwierzytelnianie jest błędnie cookie skonfigurowane lub nie można go odszyfrować. Logowanie OAuth (Facebook, Microsoft, Twitter) lub OpenIdConnect kończy się niepowodzeniem z błędem "korelacja nie powiodła się".
 * Przerwy autoryzacji: Identity zostały utracone.
 * Stan sesji utraci dane.
 * Wyznikane elementy w pamięci podręcznej.

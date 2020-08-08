@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/index
-ms.openlocfilehash: 7b19ac9170fc99a3524fedda419bd03498aa999a
-ms.sourcegitcommit: b0fa7ff0cb158277df61bcd08058a81222c3fe10
+ms.openlocfilehash: d2ebb5d3c3a1c3629a5bf563aecfd6fc147715d6
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/07/2020
-ms.locfileid: "87913780"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014025"
 ---
 # <a name="aspnet-core-no-locblazor-authentication-and-authorization"></a>ASP.NET Core Blazor uwierzytelnianie i autoryzacja
 
@@ -59,7 +61,7 @@ Aby uzyskać więcej informacji na temat tworzenia aplikacji i konfiguracji, zob
 
 ### <a name="no-locblazor-server-authentication"></a>Blazor Serverponowne
 
-Blazor Serveraplikacje działają za pośrednictwem połączenia w czasie rzeczywistym, które zostało utworzone za pomocą programu SignalR . [Uwierzytelnianie w SignalR aplikacjach opartych na protokole](xref:signalr/authn-and-authz) jest obsługiwane, gdy połączenie zostanie nawiązane. Uwierzytelnianie może opierać się na pliku cookie lub innym tokenie okaziciela.
+Blazor Serveraplikacje działają za pośrednictwem połączenia w czasie rzeczywistym, które zostało utworzone za pomocą programu SignalR . [Uwierzytelnianie w SignalR aplikacjach opartych na protokole](xref:signalr/authn-and-authz) jest obsługiwane, gdy połączenie zostanie nawiązane. Uwierzytelnianie może być oparte na cookie lub innym tokenie okaziciela.
 
 Wbudowana <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> Usługa dla Blazor Server aplikacji uzyskuje dane stanu uwierzytelniania z ASP.NET Core `HttpContext.User` . Jest to sposób integracji stanu uwierzytelniania z istniejącymi mechanizmami uwierzytelniania ASP.NET Core.
 
@@ -491,7 +493,7 @@ Prawdopodobnie projekt nie został utworzony przy użyciu Blazor Server szablonu
 
 <xref:Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState>Dostarcza `Task<` <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationState> `>` parametr kaskadowy, który z kolei otrzymuje od podstawowej <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> usługi di.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:security/index>
 * <xref:security/authentication/windowsauth>

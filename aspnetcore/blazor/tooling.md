@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/07/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -16,12 +18,12 @@ no-loc:
 - SignalR
 uid: blazor/tooling
 zone_pivot_groups: operating-systems
-ms.openlocfilehash: 094ec24fb6599168f0aa84f16c00deabf5f239b7
-ms.sourcegitcommit: b0fa7ff0cb158277df61bcd08058a81222c3fe10
+ms.openlocfilehash: 077d8943e424df4d5a14950dfadc2dd73d2ce4d6
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/07/2020
-ms.locfileid: "87913835"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88013401"
 ---
 # <a name="tooling-for-aspnet-core-no-locblazor"></a>Narzędzia dla ASP.NET CoreBlazor
 
@@ -35,9 +37,9 @@ Autorzy [Daniel Roth](https://github.com/danroth27) i [Luke Latham](https://gith
 
 1. Wybierz pozycję ** Blazor aplikacja**. Wybierz pozycję **Dalej**.
 
-1. Podaj nazwę projektu w polu **Nazwa projektu** lub zaakceptuj nazwę domyślną projektu. Potwierdź, że wpis **lokalizacji** jest poprawny lub podaj lokalizację dla projektu. Wybierz przycisk **Utwórz**.
+1. Podaj nazwę projektu w polu **Nazwa projektu** lub zaakceptuj nazwę domyślną projektu. Potwierdź, że wpis **lokalizacji** jest poprawny lub podaj lokalizację dla projektu. Wybierz pozycję **Utwórz**.
 
-1. Aby zapoznać się z Blazor WebAssembly doświadczeniem, wybierz szablon ** Blazor WebAssembly aplikacji** . Aby zapoznać się z Blazor Server doświadczeniem, wybierz szablon ** Blazor Server aplikacji** . Wybierz przycisk **Utwórz**.
+1. Aby zapoznać się z Blazor WebAssembly doświadczeniem, wybierz szablon ** Blazor WebAssembly aplikacji** . Aby zapoznać się z Blazor Server doświadczeniem, wybierz szablon ** Blazor Server aplikacji** . Wybierz pozycję **Utwórz**.
 
    Aby uzyskać informacje na temat dwóch Blazor modeli hostingu *Blazor WebAssembly* i *Blazor Server* , zobacz <xref:blazor/hosting-models> .
 
@@ -105,7 +107,7 @@ Aby uzyskać więcej informacji, zapoznaj się ze wskazówkami podanymi w przegl
 
 1. Upewnij się, że **uwierzytelnianie** jest ustawione na wartość **bez uwierzytelniania**. Wybierz pozycję **Dalej**.
 
-1. W polu **Nazwa projektu** Nadaj nazwę aplikacji `WebApplication1` . Wybierz przycisk **Utwórz**.
+1. W polu **Nazwa projektu** Nadaj nazwę aplikacji `WebApplication1` . Wybierz pozycję **Utwórz**.
 
 1. Wybierz pozycję **Uruchom**  >  **Uruchom bez debugowania** , aby uruchomić aplikację *bez debugera*. Uruchom **aplikację z**  >  przyciskiem Uruchom**debugowanie** lub Uruchom (&#9654;), aby uruchomić aplikację *z debugerem*.
 

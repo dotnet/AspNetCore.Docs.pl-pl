@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/28/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/visual-studio-publish-profiles
-ms.openlocfilehash: 7ad85de1a566c993e59203a5efe31458f3acdc53
-ms.sourcegitcommit: 5a36758cca2861aeb10840093e46d273a6e6e91d
+ms.openlocfilehash: 1c4b1def75a76b8392427fd6916a7b5927737cac
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87303628"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88015455"
 ---
 # <a name="visual-studio-publish-profiles-pubxml-for-aspnet-core-app-deployment"></a>Profile publikacji programu Visual Studio (. pubxml) dla wdrożenia aplikacji ASP.NET Core
 
@@ -78,7 +80,7 @@ Gdy projekt ASP.NET Core odwołuje się do `Microsoft.NET.Sdk.Web` pliku projekt
 
 ## <a name="basic-command-line-publishing"></a>Podstawowe publikowanie w wierszu polecenia
 
-Publikowanie w wierszu polecenia działa na wszystkich platformach obsługiwanych przez platformę .NET Core i nie wymaga programu Visual Studio. W poniższych przykładach polecenie interfejs wiersza polecenia platformy .NET Core [dotnet Publish](/dotnet/core/tools/dotnet-publish) jest uruchamiane z katalogu projektu (który zawiera plik *. csproj* ). Jeśli folder projektu nie jest bieżącym katalogiem roboczym, jawnie Przekaż ścieżkę do pliku projektu. Na przykład:
+Publikowanie w wierszu polecenia działa na wszystkich platformach obsługiwanych przez platformę .NET Core i nie wymaga programu Visual Studio. W poniższych przykładach polecenie interfejs wiersza polecenia platformy .NET Core [dotnet Publish](/dotnet/core/tools/dotnet-publish) jest uruchamiane z katalogu projektu (który zawiera plik *. csproj* ). Jeśli folder projektu nie jest bieżącym katalogiem roboczym, jawnie Przekaż ścieżkę do pliku projektu. Przykład:
 
 ```dotnetcli
 dotnet publish C:\Webs\Web1
@@ -461,7 +463,7 @@ Wyróżnione znaczniki w poniższym przykładzie pokazują:
 
 [!code-xml[](visual-studio-publish-profiles/samples/Web1.pubxml?highlight=18-23)]
 
-Poprzedni przykład używa `ResolvedFileToPublish` elementu, którego domyślnym zachowaniem jest zawsze kopiowanie plików dostarczonych w `Include` atrybucie do opublikowanej lokacji. Zastąp zachowanie domyślne, dołączając `<CopyToPublishDirectory>` element podrzędny z tekstem wewnętrznym obu `Never` lub `PreserveNewest` . Na przykład:
+Poprzedni przykład używa `ResolvedFileToPublish` elementu, którego domyślnym zachowaniem jest zawsze kopiowanie plików dostarczonych w `Include` atrybucie do opublikowanej lokacji. Zastąp zachowanie domyślne, dołączając `<CopyToPublishDirectory>` element podrzędny z tekstem wewnętrznym obu `Never` lub `PreserveNewest` . Przykład:
 
 ```xml
 <ResolvedFileToPublish Include="..\ReadMe2.md">
@@ -497,7 +499,7 @@ Dodaj `<AllowUntrustedCertificate>` Właściwość o wartości `True` do profilu
 
 ## <a name="the-kudu-service"></a>Usługa kudu
 
-Aby wyświetlić pliki w Azure App Service wdrożenia aplikacji sieci Web, należy użyć [usługi kudu](https://github.com/projectkudu/kudu/wiki/Accessing-the-kudu-service). Dołącz `scm` token do nazwy aplikacji sieci Web. Na przykład:
+Aby wyświetlić pliki w Azure App Service wdrożenia aplikacji sieci Web, należy użyć [usługi kudu](https://github.com/projectkudu/kudu/wiki/Accessing-the-kudu-service). Dołącz `scm` token do nazwy aplikacji sieci Web. Przykład:
 
 | Adres URL                                    | Wynik       |
 | -------------------------------------- | ------------ |

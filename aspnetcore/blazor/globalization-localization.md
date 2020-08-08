@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/04/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/globalization-localization
-ms.openlocfilehash: 1d24ebe900dfcdeb8b7bcc97f1d212deea9cecae
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 59b6e4cb2f466594d8a105a239e175e9c7b37ad8
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402731"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014249"
 ---
-# <a name="aspnet-core-blazor-globalization-and-localization"></a>ASP.NET Core Blazor globalizacja i lokalizacja
+# <a name="aspnet-core-no-locblazor-globalization-and-localization"></a>ASP.NET Core Blazor globalizacja i lokalizacja
 
 Autorzy [Luke Latham](https://github.com/guardrex) i [Daniel Roth](https://github.com/danroth27)
 
@@ -81,20 +83,20 @@ Blazor Serveraplikacje są zlokalizowane przy użyciu [oprogramowania pośrednic
 
 Kulturę można ustawić przy użyciu jednej z następujących metod:
 
-* [Plik cookie](#cookies)
+* [Cookiewolumin](#cookies)
 * [Podaj interfejs użytkownika, aby wybrać kulturę](#provide-ui-to-choose-the-culture)
 
 Aby uzyskać więcej informacji i przykładów, zobacz <xref:fundamentals/localization> .
 
-#### <a name="cookies"></a>Pliki cookie
+#### <a name="no-loccookies"></a>Cookiewolumin
 
-Plik cookie kultury lokalizacji może utrzymywać kulturę użytkownika. Oprogramowanie pośredniczące lokalizacji odczytuje plik cookie na kolejnych żądaniach, aby ustawić kulturę użytkownika. 
+Kultura lokalizacji cookie może utrwalać kulturę użytkownika. Oprogramowanie pośredniczące lokalizacji odczytuje cookie kolejne żądania, aby ustawić kulturę użytkownika. 
 
-Użycie pliku cookie zapewnia, że połączenie z użyciem protokołu WebSocket może prawidłowo propagować kulturę. Jeśli schematy lokalizacji są oparte na ścieżce URL lub ciągu zapytania, schemat może nie być w stanie współdziałać z usługą WebSockets, więc nie będzie można zachować kultury. W związku z tym zalecanym podejściem jest użycie pliku cookie kultury lokalizacji.
+Użycie a cookie zapewnia, że połączenie WebSocket może prawidłowo propagować kulturę. Jeśli schematy lokalizacji są oparte na ścieżce URL lub ciągu zapytania, schemat może nie być w stanie współdziałać z usługą WebSockets, więc nie będzie można zachować kultury. W związku z tym zaleca się użycie kultury lokalizacji cookie .
 
-Każda technika może służyć do przypisywania kultury, jeśli kultura jest utrwalona w pliku cookie lokalizacji. Jeśli aplikacja ma już ustalony schemat lokalizacji dla ASP.NET Core po stronie serwera, Kontynuuj korzystanie z istniejącej infrastruktury lokalizacji aplikacji i Ustaw plik cookie kultury lokalizacji w schemacie aplikacji.
+Każda technika może służyć do przypisywania kultury, jeśli kultura jest utrwalona w lokalizacji cookie . Jeśli aplikacja ma już ustalony schemat lokalizacji dla ASP.NET Core po stronie serwera, Kontynuuj korzystanie z istniejącej infrastruktury lokalizacji aplikacji i ustaw kulturę lokalizacji cookie w schemacie aplikacji.
 
-Poniższy przykład pokazuje, jak ustawić bieżącą kulturę w pliku cookie, który może zostać odczytany przez oprogramowanie pośredniczące lokalizacji. Utwórz Razor wyrażenie w `Pages/_Host.cshtml` pliku bezpośrednio wewnątrz tagu otwierającego `<body>` :
+Poniższy przykład pokazuje, jak ustawić bieżącą kulturę cookie , która może być odczytana przez oprogramowanie pośredniczące lokalizacji. Utwórz Razor wyrażenie w `Pages/_Host.cshtml` pliku bezpośrednio wewnątrz tagu otwierającego `<body>` :
 
 ```cshtml
 @using System.Globalization
@@ -120,18 +122,18 @@ Lokalizacja jest obsługiwana przez aplikację w następującej kolejności zdar
 
 1. Przeglądarka wysyła początkowe żądanie HTTP do aplikacji.
 1. Kultura jest przypisana przez oprogramowanie pośredniczące lokalizacji.
-1. RazorWyrażenie na `_Host` stronie ( `_Host.cshtml` ) utrwala kulturę w pliku cookie jako część odpowiedzi.
+1. RazorWyrażenie na `_Host` stronie ( `_Host.cshtml` ) utrwala kulturę w cookie jako część odpowiedzi.
 1. Przeglądarka otwiera połączenie WebSocket, aby utworzyć sesję interaktywną Blazor Server .
-1. Oprogramowanie pośredniczące lokalizacji odczytuje plik cookie i przypisuje kulturę.
+1. Oprogramowanie pośredniczące lokalizacji odczytuje cookie i przypisuje kulturę.
 1. Blazor ServerSesja rozpoczyna się od poprawnej kultury.
 
 #### <a name="provide-ui-to-choose-the-culture"></a>Podaj interfejs użytkownika, aby wybrać kulturę
 
 Aby zapewnić interfejs użytkownika, aby umożliwić użytkownikowi wybranie kultury, zalecane jest *podejście oparte na przekierowaniu* . Ten proces jest podobny do tego, co się dzieje w aplikacji sieci Web, gdy użytkownik próbuje uzyskać dostęp do bezpiecznego zasobu. Użytkownik zostanie przekierowany do strony logowania, a następnie przekierowany z powrotem do oryginalnego zasobu. 
 
-Aplikacja utrzymuje wybraną kulturę użytkownika za pośrednictwem przekierowania do kontrolera. Kontroler ustawia wybraną kulturę użytkownika na plik cookie i przekierowuje użytkownika z powrotem do oryginalnego identyfikatora URI.
+Aplikacja utrzymuje wybraną kulturę użytkownika za pośrednictwem przekierowania do kontrolera. Kontroler ustawia wybraną kulturę użytkownika na cookie i przekierowuje użytkownika z powrotem do oryginalnego identyfikatora URI.
 
-Ustanów punkt końcowy HTTP na serwerze, aby ustawić kulturę wybraną przez użytkownika w pliku cookie i wykonać przekierowanie z powrotem do oryginalnego identyfikatora URI:
+Ustanów punkt końcowy HTTP na serwerze, aby ustawić kulturę wybraną przez użytkownika cookie i przekierować z powrotem do oryginalnego identyfikatora URI:
 
 ```csharp
 [Route("[controller]/[action]")]
@@ -201,6 +203,6 @@ Poniższy składnik przedstawia przykład sposobu wykonywania wstępnego przekie
 }
 ```
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:fundamentals/localization>

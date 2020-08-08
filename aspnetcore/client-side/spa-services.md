@@ -7,6 +7,8 @@ ms.author: scaddie
 ms.custom: H1Hack27Feb2017
 ms.date: 09/06/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: client-side/spa-services
-ms.openlocfilehash: 05f76a7d341fc5c55b8234b6ff6d2be5aa61d6fd
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 2c91fa13c6fcb92c5985cae21c175c0a2a2a313e
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401834"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88013271"
 ---
 # <a name="use-javascript-services-to-create-single-page-applications-in-aspnet-core"></a>Korzystanie z usług JavaScript do tworzenia aplikacji jednostronicowych w ASP.NET Core
 

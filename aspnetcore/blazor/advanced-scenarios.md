@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/18/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/advanced-scenarios
-ms.openlocfilehash: bdea9f2fe5c552b56414bb49588733c8dc2a34db
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: d6446447a51e22b7df1289e7ef20a4a6381c2b20
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400222"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88012530"
 ---
-# <a name="aspnet-core-blazor-advanced-scenarios"></a>BlazorZaawansowane scenariusze ASP.NET Core
+# <a name="aspnet-core-no-locblazor-advanced-scenarios"></a>BlazorZaawansowane scenariusze ASP.NET Core
 
 Autorzy [Luke Latham](https://github.com/guardrex) i [Daniel Roth](https://github.com/danroth27)
 
-## <a name="blazor-server-circuit-handler"></a>Blazor ServerProcedura obsługi obwodu
+## <a name="no-locblazor-server-circuit-handler"></a>Blazor ServerProcedura obsługi obwodu
 
 Blazor Serverumożliwia kodowi Definiowanie *procedury obsługi obwodu*, która umożliwia uruchamianie kodu na zmiany stanu obwodu użytkownika. Procedura obsługi obwodu jest implementowana przez wyprowadzanie z `CircuitHandler` i rejestrowanie klasy w kontenerze usługi aplikacji. Poniższy przykład obsługi obwodu śledzi otwarte SignalR połączenia:
 
@@ -165,14 +167,14 @@ Gdy kod jest wykonywany po raz pierwszy, jeśli `someFlag` jest `true` , Konstru
 
 | Sequence | Typ      | Dane   |
 | :------: | --------- | :----: |
-| 0        | Węzeł tekstu | First  |
-| 1        | Węzeł tekstu | Sekunda |
+| 0        | Węzeł tekstu | Pierwsze  |
+| 1        | Węzeł tekstu | Second |
 
 Wyobraź sobie `someFlag` , że zostanie ona `false` przerenderowana, a znaczniki są renderowane ponownie. Tym razem Konstruktor odbiera:
 
 | Sequence | Typ       | Dane   |
 | :------: | ---------- | :----: |
-| 1        | Węzeł tekstu  | Sekunda |
+| 1        | Węzeł tekstu  | Second |
 
 Gdy środowisko uruchomieniowe wykonuje porównanie, zobaczy, że element w sekwencji `0` został usunięty, więc generuje następujący *skrypt*uproszczonej edycji:
 
@@ -197,14 +199,14 @@ Teraz pierwsze dane wyjściowe to:
 
 | Sequence | Typ      | Dane   |
 | :------: | --------- | :----: |
-| 0        | Węzeł tekstu | First  |
-| 1        | Węzeł tekstu | Sekunda |
+| 0        | Węzeł tekstu | Pierwsze  |
+| 1        | Węzeł tekstu | Second |
 
 Ten wynik jest identyczny z poprzednim przypadkiem, dlatego nie istnieją żadne negatywne problemy. `someFlag`znajduje się `false` na drugim renderingu, a dane wyjściowe:
 
 | Sequence | Typ      | Dane   |
 | :------: | --------- | ------ |
-| 0        | Węzeł tekstu | Sekunda |
+| 0        | Węzeł tekstu | Second |
 
 Tym razem algorytm diff widzi, że pojawiły się *dwie* zmiany, a algorytm generuje następujący skrypt edycji:
 
@@ -223,7 +225,7 @@ Jest to prosty przykład. W bardziej realistycznych przypadkach ze złożonymi i
 * Jeśli numery sekwencji są stałee, algorytm diff wymaga tylko zwiększenia wartości sekwencji. Początkowa wartość i przerwy są nieistotne. Jedną z wiarygodnych opcji jest użycie numeru wiersza kodu jako numeru sekwencyjnego lub rozpoczęcie od zera i zwiększenie według wartości lub setek (lub dowolnego preferowanego interwału). 
 * Blazorużywa numerów sekwencji, podczas gdy inne struktury interfejsu użytkownika rozróżniania drzewa nie są używane. Różnica jest znacznie szybsza, gdy są używane numery sekwencyjne i Blazor ma zalety krok kompilacji, który zajmuje się automatycznie numerami sekwencyjnymi dla deweloperów tworzących `.razor` pliki.
 
-## <a name="perform-large-data-transfers-in-blazor-server-apps"></a>Wykonywanie dużych transferów danych w Blazor Server aplikacjach
+## <a name="perform-large-data-transfers-in-no-locblazor-server-apps"></a>Wykonywanie dużych transferów danych w Blazor Server aplikacjach
 
 W niektórych scenariuszach należy przenieść duże ilości danych między językami JavaScript i Blazor . Zwykle duże transfery danych odbywają się w przypadku:
 
@@ -335,7 +337,7 @@ public class FileUploader : IDisposable
 }
 ```
 
-W poprzednim przykładzie:
+W powyższym przykładzie:
 
 * `maxBase64SegmentSize`Jest ustawiona na `8192` , który jest obliczany z `maxBase64SegmentSize = segmentSize * 4 / 3` .
 * Interfejsy API zarządzania pamięcią programu .NET Core na niskim poziomie są używane do przechowywania segmentów pamięci na serwerze w systemie `uploadedSegments` .

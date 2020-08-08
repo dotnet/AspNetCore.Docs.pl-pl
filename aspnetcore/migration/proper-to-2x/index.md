@@ -5,6 +5,8 @@ description: Otrzymuj wskazówki dotyczące migrowania istniejących aplikacji A
 ms.author: scaddie
 ms.date: 10/18/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/proper-to-2x/index
-ms.openlocfilehash: 1530a5e6cc4b241b916ed7c64587b515186cc6ca
-ms.sourcegitcommit: d306407dc5bfe6fdfbac482214b3f59371b582bc
+ms.openlocfilehash: defdb190acf915eaa7c4aa8469ee47888f771526
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/04/2020
-ms.locfileid: "85951934"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014922"
 ---
 # <a name="migrate-from-aspnet-to-aspnet-core"></a>Migrowanie z ASP.NET do ASP.NET Core
 
@@ -163,9 +165,9 @@ Na przykład zasób obrazu w folderze *wwwroot/images* jest dostępny dla przegl
 > [!NOTE]
 > Aby uzyskać bardziej szczegółowe informacje na temat obsługi plików statycznych w ASP.NET Core, zobacz [pliki statyczne](xref:fundamentals/static-files).
 
-## <a name="multi-value-cookies"></a>Wiele wartości plików cookie
+## <a name="multi-value-no-loccookies"></a>Wiele wartości cookie s
 
-[Wielowartościowe pliki cookie](xref:System.Web.HttpCookie.Values) nie są obsługiwane w ASP.NET Core. Utwórz jeden plik cookie na wartość.
+W ASP.NET Core nie są obsługiwane [wiele wartości cookie s](xref:System.Web.HttpCookie.Values) . Utwórz jedną cookie na wartość.
 
 ## <a name="partial-app-migration"></a>Migracja częściowej aplikacji
 
@@ -201,6 +203,6 @@ Struktura katalogów:
     └── web.config
 ```
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 - [Przenoszenie bibliotek do programu .NET Core](/dotnet/core/porting/libraries)

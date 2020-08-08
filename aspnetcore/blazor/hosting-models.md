@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: 6e3753131388c294130f11aa913a0bb7e8127fa3
-ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
+ms.openlocfilehash: 0d2ee7862c5737a1e16335a5d5987779884d5536
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87818953"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014285"
 ---
 # <a name="aspnet-core-no-locblazor-hosting-models"></a>ASP.NET Core Blazor modele hostingu
 

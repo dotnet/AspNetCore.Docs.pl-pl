@@ -6,6 +6,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 08/20/2018
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: client-side/libman/libman-vs
-ms.openlocfilehash: 504c34ccd8813273161b86504700704f8a932538
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 2dc944ffd4307aa108a54b70d58f298c26959ce0
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403173"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88013349"
 ---
 # <a name="use-libman-with-aspnet-core-in-visual-studio"></a>Używanie LibMan z ASP.NET Core w programie Visual Studio
 
@@ -77,7 +79,7 @@ Wykonaj następujące kroki, aby zainstalować bibliotekę po stronie klienta:
   |Folder *stron* w projekcie                 |*Strony/jQuery/*       |
 
 * Kliknij przycisk **Zainstaluj** , aby pobrać pliki, na konfigurację w *libman.jsna*.
-* Zapoznaj się z informacjami dotyczącymi instalacji w oknie **danych wyjściowych** programu **Library Manager** . Na przykład:
+* Zapoznaj się z informacjami dotyczącymi instalacji w oknie **danych wyjściowych** programu **Library Manager** . Przykład:
 
   ```console
   Restore operation started...
@@ -168,7 +170,7 @@ Aby ręcznie przywrócić pliki biblioteki:
 Podczas gdy operacja przywracania jest uruchomiona:
 
 * Ikona centrum stanu zadań (TSC) na pasku stanu programu Visual Studio zostanie animowana i zostanie *rozpoczęta operacja przywracania*. Kliknięcie ikony powoduje otwarcie etykietki narzędzia zawierającego listę znanych zadań w tle.
-* Komunikaty będą wysyłane do paska stanu i źródła danych programu **Library Manager** okna **danych wyjściowych** . Na przykład:
+* Komunikaty będą wysyłane do paska stanu i źródła danych programu **Library Manager** okna **danych wyjściowych** . Przykład:
 
   ```console
   Restore operation started...
@@ -193,7 +195,7 @@ Aby zapobiec przypadkowemu usunięciu plików nienależących do biblioteki, ope
 Podczas gdy operacja czyszczenia jest uruchomiona:
 
 * Ikona TSC na pasku stanu programu Visual Studio będzie animowana i zostanie *rozpoczęta operacja odczytywania bibliotek klienckich*. Kliknięcie ikony powoduje otwarcie etykietki narzędzia zawierającego listę znanych zadań w tle.
-* Komunikaty są wysyłane do paska stanu i źródła danych programu **Library Manager** okna **danych wyjściowych** . Na przykład:
+* Komunikaty są wysyłane do paska stanu i źródła danych programu **Library Manager** okna **danych wyjściowych** . Przykład:
 
 ```console
 Clean libraries operation started...

@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc, seoapril2019
 ms.date: 06/19/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/index
-ms.openlocfilehash: 30f11a137e711b1cf7a8b036af92fbb5fa2a1f05
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: ad543087243658f09a23e4f6d957d0c6aa77b361
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402575"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014181"
 ---
-# <a name="introduction-to-aspnet-core-blazor"></a>Wprowadzenie do ASP.NET CoreBlazor
+# <a name="introduction-to-aspnet-core-no-locblazor"></a>Wprowadzenie do ASP.NET CoreBlazor
 
 Autorzy [Daniel Roth](https://github.com/danroth27) i [Luke Latham](https://github.com/guardrex)
 
@@ -118,7 +120,7 @@ Uruchamianie kodu platformy .NET wewnątrz przeglądarek sieci Web jest możliwe
 
 Kod webassembly może uzyskać dostęp do pełnej funkcjonalności przeglądarki za pośrednictwem języka JavaScript, nazywanego *współdziałaniem JavaScript* (lub *międzyoperacyjną JavaScript*). Kod .NET wykonywany za pośrednictwem webassembly w przeglądarce jest uruchamiany w piaskownicy języka JavaScript przeglądarki z ochroną, którą piaskownica zapewnia przed złośliwymi działaniami na komputerze klienckim.
 
-![Blazor WebAssemblyuruchamia kod platformy .NET w przeglądarce z zestawem webassembly.](index/_static/blazor-webassembly.png)
+![::: No-Loc (Blazor webassembly)::: uruchamia kod .NET w przeglądarce z zestawem webassembly.](index/_static/blazor-webassembly.png)
 
 Gdy Blazor WebAssembly aplikacja zostanie skompilowana i uruchomiona w przeglądarce:
 
@@ -140,7 +142,7 @@ Blazoroddziela logikę renderowania składników od sposobu stosowania aktualiza
 
 Połączenie używane przez Blazor Server program do komunikacji z przeglądarką jest również używane do obsługi wywołań międzyoperacyjnych języka JavaScript.
 
-![Blazor Serveruruchamia kod platformy .NET na serwerze i współdziała z Document Object Model na kliencie przez SignalR połączenie](index/_static/blazor-server.png)
+![::: No-Loc (Blazor Server)::: uruchamia kod platformy .NET na serwerze i współdziała z Document Object Model na kliencie za pośrednictwem::: No-Loc (Sygnalizującer)::: Connection](index/_static/blazor-server.png)
 
 ## <a name="javascript-interop"></a>Międzyoperacyjność w języku JavaScript
 

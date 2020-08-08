@@ -7,6 +7,8 @@ ms.author: stevesa
 ms.custom: mvc
 ms.date: 02/06/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: spa/angular
-ms.openlocfilehash: 1c91f1adadca8b339e4daf33207ca60008679810
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: ce29d891b0fba2581d352637c2ae50ac792b785e
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401782"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88013167"
 ---
 # <a name="use-the-angular-project-template-with-aspnet-core"></a>Użyj szablonu projektu kątowego z ASP.NET Core
 
@@ -47,7 +49,7 @@ Otwórz wygenerowany plik *csproj* i uruchom aplikację w zwykły sposób.
 
 Proces kompilacji przywraca zależności npm w pierwszym przebiegu, co może potrwać kilka minut. Kolejne kompilacje są znacznie szybsze.
 
-# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli/)
+# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli/)
 
 Upewnij się, że masz zmienną środowiskową o nazwie `ASPNETCORE_Environment` z wartością `Development` . W systemie Windows (w komunikatach innych niż programu PowerShell) Uruchom polecenie `SET ASPNETCORE_Environment=Development` . W systemie Linux lub macOS Uruchom polecenie `export ASPNETCORE_Environment=Development` .
 
@@ -88,7 +90,7 @@ Jeśli nie masz `ng` zainstalowanego narzędzia, uruchom polecenie `npm run ng` 
 
 ## <a name="install-npm-packages"></a>Zainstaluj pakiety npm
 
-Aby zainstalować pakiety npm innych firm, należy użyć wiersza polecenia w podkatalogu *ClientApp* . Na przykład:
+Aby zainstalować pakiety npm innych firm, należy użyć wiersza polecenia w podkatalogu *ClientApp* . Przykład:
 
 ```console
 cd ClientApp
@@ -129,7 +131,7 @@ Po uruchomieniu aplikacji ASP.NET Core nie zostanie uruchomiony kątowy serwer i
 
 ### <a name="pass-data-from-net-code-into-typescript-code"></a>Przekazywanie danych z kodu platformy .NET do kodu TypeScript
 
-Podczas procesu SSR możesz chcieć przekazać dane dla żądania z aplikacji ASP.NET Core do aplikacji kątowej. Na przykład można przekazać informacje o pliku cookie lub coś odczytanego z bazy danych. Aby to zrobić, Edytuj klasę *uruchomieniową* . W polu wywołania zwrotne dla `UseSpaPrerendering` Ustaw wartość dla `options.SupplyData` opcji:
+Podczas procesu SSR możesz chcieć przekazać dane dla żądania z aplikacji ASP.NET Core do aplikacji kątowej. Na przykład można przekazać cookie informacje lub coś odczytanego z bazy danych. Aby to zrobić, Edytuj klasę *uruchomieniową* . W polu wywołania zwrotne dla `UseSpaPrerendering` Ustaw wartość dla `options.SupplyData` opcji:
 
 ```csharp
 options.SupplyData = (context, data) =>
@@ -157,6 +159,6 @@ W tym samym czasie istnieją znaczne wady umożliwiające włączenie SSR. Zwię
     }
     ```
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:security/authentication/identity/spa>

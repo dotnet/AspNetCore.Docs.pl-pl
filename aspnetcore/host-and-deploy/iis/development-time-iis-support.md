@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/development-time-iis-support
-ms.openlocfilehash: d922b2eb4d00a252b3e7da2f00de8b4571359b20
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: ba4d47e0500d7f3287e6a57d10036d774c4b19f4
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406436"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88015668"
 ---
 # <a name="development-time-iis-support-in-visual-studio-for-aspnet-core"></a>Obsługa usług IIS w czasie opracowywania w programie Visual Studio dla platformy ASP.NET Core
 

@@ -6,6 +6,8 @@ ms.author: casoper
 ms.custom: mvc, seodec18
 ms.date: 10/24/2018
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: azure/devops/deploy-to-app-service
-ms.openlocfilehash: 7cf6395b6f57413d85532ed15e5a875af10f905b
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 4349e8a994cfa4007ce847b2952c53f4223f1b3d
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400391"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88012361"
 ---
 # <a name="deploy-an-app-to-app-service"></a>Wdróż aplikację w App Service
 
@@ -123,7 +125,7 @@ Aby wdrożyć aplikację, musisz utworzyć App Service [aplikację sieci Web](/a
     echo Git deployment URL: $(az webapp deployment source config-local-git --name $webappname --resource-group AzureTutorial --query url --output tsv)
     ```
 
-    g. Wyświetl *adres URL aplikacji sieci Web*. Przejdź do tego adresu URL, aby wyświetlić pustą aplikację sieci Web. **Zanotuj ten adres URL później**.
+    przykład Wyświetl *adres URL aplikacji sieci Web*. Przejdź do tego adresu URL, aby wyświetlić pustą aplikację sieci Web. **Zanotuj ten adres URL później**.
 
     ```console
     echo Web app URL: http://$webappname.azurewebsites.net
@@ -246,7 +248,7 @@ W tej sekcji zostały wykonane następujące zadania:
 
 W następnej sekcji dowiesz się, jak utworzyć potok DevOps za pomocą Azure Pipelines.
 
-## <a name="additional-reading"></a>Dodatkowy odczyt
+## <a name="additional-reading"></a>Materiały uzupełniające
 
 * [Przegląd Web Apps](/azure/app-service/app-service-web-overview)
 * [Tworzenie aplikacji internetowej platformy .NET Core i usługi SQL Database w usłudze Azure App Service](/azure/app-service/app-service-web-tutorial-dotnetcore-sqldb)

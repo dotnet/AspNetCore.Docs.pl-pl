@@ -7,6 +7,8 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/concurrency
-ms.openlocfilehash: f6ee60bf5e75256a9bf330f56b2f09b06f720a85
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.openlocfilehash: f97d551348ca31cc35ab5b04493ea702311a069e
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86212803"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88012959"
 ---
 # <a name="tutorial-handle-concurrency---aspnet-mvc-with-ef-core"></a>Samouczek: obsługa współbieżności ASP.NET MVC z EF Core
 
@@ -79,7 +81,7 @@ Dostępne są następujące opcje:
 
 * Można śledzić, która właściwość została zmodyfikowana przez użytkownika i zaktualizować tylko odpowiednie kolumny w bazie danych.
 
-     W przykładowym scenariuszu żadne dane nie zostaną utracone, ponieważ różne właściwości zostały zaktualizowane przez dwóch użytkowników. Następnym razem, gdy ktoś przegląda ten dział w języku angielskim, zobaczy zmiany w kategorii Janina i Jan — datę początkową 9/1/2013 i budżet zerowych dolarów. Ta metoda aktualizacji może zmniejszyć liczbę konfliktów, które mogłyby spowodować utratę danych, ale nie może uniknąć utraty danych, jeśli wprowadzono konkurencyjne zmiany w tej samej właściwości jednostki. Czy Entity Framework działa w ten sposób, zależy od sposobu implementacji kodu aktualizacji. Często nie jest to praktyczne w aplikacji sieci Web, ponieważ może wymagać utrzymania dużej ilości danych w celu śledzenia wszystkich oryginalnych wartości właściwości dla jednostki, a także nowych wartości. Obsługa dużych ilości Stanów może wpłynąć na wydajność aplikacji, ponieważ wymaga zasobów serwera lub musi być uwzględniona na stronie sieci Web (na przykład w ukrytych polach) lub w pliku cookie.
+     W przykładowym scenariuszu żadne dane nie zostaną utracone, ponieważ różne właściwości zostały zaktualizowane przez dwóch użytkowników. Następnym razem, gdy ktoś przegląda ten dział w języku angielskim, zobaczy zmiany w kategorii Janina i Jan — datę początkową 9/1/2013 i budżet zerowych dolarów. Ta metoda aktualizacji może zmniejszyć liczbę konfliktów, które mogłyby spowodować utratę danych, ale nie może uniknąć utraty danych, jeśli wprowadzono konkurencyjne zmiany w tej samej właściwości jednostki. Czy Entity Framework działa w ten sposób, zależy od sposobu implementacji kodu aktualizacji. Często nie jest to praktyczne w aplikacji sieci Web, ponieważ może wymagać utrzymania dużej ilości danych w celu śledzenia wszystkich oryginalnych wartości właściwości dla jednostki, a także nowych wartości. Utrzymywanie dużej ilości stanu może wpłynąć na wydajność aplikacji, ponieważ wymaga ona zasobów serwera lub musi być uwzględniona na stronie sieci Web (na przykład w ukrytych polach) lub w cookie .
 
 * Możesz pozwolić, aby zmiana została zastąpiona przez Jan.
 
@@ -298,7 +300,7 @@ Zastąp kod w *widokach/działach/Create. cshtml* , aby dodać opcję Select do 
 
 [Pobierz lub Wyświetl ukończoną aplikację.](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
  Aby uzyskać więcej informacji o sposobie obsługi współbieżności w EF Core, zobacz [konflikty współbieżności](/ef/core/saving/concurrency).
 

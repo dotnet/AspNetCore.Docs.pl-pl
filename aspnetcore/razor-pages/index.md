@@ -6,6 +6,8 @@ monikerRange: '>= aspnetcore-2.0'
 ms.author: riande
 ms.date: 02/12/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/index
-ms.openlocfilehash: bd9f991a2aba32cbbeb193ad422005f910e6795b
-ms.sourcegitcommit: ca6a1f100c1a3f59999189aa962523442dd4ead1
+ms.openlocfilehash: 203d77a2caaba9156419a04754fe162dd57052c1
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/30/2020
-ms.locfileid: "87444074"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88012712"
 ---
 # <a name="introduction-to-no-locrazor-pages-in-aspnet-core"></a>Wprowadzenie do Razor stron w ASP.NET Core
 
@@ -264,7 +266,7 @@ Plik *Edit.cshtml.cs* :
 
 [!code-csharp[](index/3.0sample/RazorPagesContacts/Pages/Customers/Edit.cshtml.cs?name=snippet)]
 
-## <a name="validation"></a>Walidacja
+## <a name="validation"></a>Weryfikacja
 
 Reguły walidacji:
 
@@ -440,13 +442,13 @@ Aplikacja ma następującą strukturę plików/folderów:
     * *Edytuj. cshtml*
     * *Index. cshtml*
 
-Strony */Customers/Create. cshtml* i *Pages/Customers/Edit. cshtml* przekierowywać do *stron/Customers/index. cshtml* po powodzeniu. Ciąg `./Index` jest względną nazwą strony używaną w celu uzyskania dostępu do poprzedniej strony. Służy do generowania adresów URL na stronie *strony/klienci/index. cshtml* . Na przykład:
+Strony */Customers/Create. cshtml* i *Pages/Customers/Edit. cshtml* przekierowywać do *stron/Customers/index. cshtml* po powodzeniu. Ciąg `./Index` jest względną nazwą strony używaną w celu uzyskania dostępu do poprzedniej strony. Służy do generowania adresów URL na stronie *strony/klienci/index. cshtml* . Przykład:
 
 * `Url.Page("./Index", ...)`
 * `<a asp-page="./Index">Customers Index Page</a>`
 * `RedirectToPage("./Index")`
 
-Bezwzględna nazwa strony `/Index` służy do generowania adresów URL na stronie *stron/index. cshtml* . Na przykład:
+Bezwzględna nazwa strony `/Index` służy do generowania adresów URL na stronie *stron/index. cshtml* . Przykład:
 
 * `Url.Page("/Index", ...)`
 * `<a asp-page="/Index">Home Index Page</a>`
@@ -599,7 +601,7 @@ Dodaj <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcCoreBuilder
 
 [!code-csharp[](index/3.0sample/RazorPagesContacts/StartupWithRazorPagesRoot.cs?name=snippet)]
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * Zobacz Rozpoczynanie [pracy ze Razor stronami](xref:tutorials/razor-pages/razor-pages-start), które kompilują się w tym wprowadzeniu.
 * [Autoryzuj atrybut i Razor strony](xref:security/authorization/simple#aarp)
@@ -956,7 +958,7 @@ Aplikacja ma następującą strukturę plików/folderów:
     * *Edytuj. cshtml*
     * *Index. cshtml*
 
-Strony */Customers/Create. cshtml* i *Pages/Customers/Edit. cshtml* przekierują do *stron/index. cshtml* po powodzeniu. Ciąg `/Index` jest częścią identyfikatora URI, aby uzyskać dostęp do poprzedniej strony. Ten ciąg `/Index` może służyć do generowania identyfikatorów URI na stronie *stron/index. cshtml* . Na przykład:
+Strony */Customers/Create. cshtml* i *Pages/Customers/Edit. cshtml* przekierują do *stron/index. cshtml* po powodzeniu. Ciąg `/Index` jest częścią identyfikatora URI, aby uzyskać dostęp do poprzedniej strony. Ten ciąg `/Index` może służyć do generowania identyfikatorów URI na stronie *stron/index. cshtml* . Przykład:
 
 * `Url.Page("/Index", ...)`
 * `<a asp-page="/Index">My Index Page</a>`
@@ -1122,7 +1124,7 @@ services.AddMvc()
     .WithRazorPagesRoot("/path/to/razor/pages");
 ```
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Autoryzuj atrybut i Razor strony](xref:security/authorization/simple#aarp)
 * <xref:index>

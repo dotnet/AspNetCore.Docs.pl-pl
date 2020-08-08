@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -16,12 +18,12 @@ no-loc:
 - SignalR
 uid: blazor/state-management
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: e4ec360e1f9fb0bc5784b3120d7842faf24cfa5b
-ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
+ms.openlocfilehash: 28ca3b5c4472dc21e709d01705dc64168107ca61
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87818771"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88013557"
 ---
 # <a name="aspnet-core-no-locblazor-state-management"></a>BlazorZarządzanie stanem ASP.NET Core
 
@@ -68,7 +70,7 @@ W przypadku trwałej trwałości danych obejmującej wielu użytkowników i wszy
 * Blob Storage
 * Magazyn kluczy i wartości
 * Relacyjna baza danych
-* Magazyn tabel
+* Table Storage
 
 Po zapisaniu danych stan użytkownika jest zachowywany i dostępny w każdej nowej sesji przeglądarki.
 
@@ -172,7 +174,7 @@ W przypadku trwałej trwałości danych obejmującej wielu użytkowników i urz�
 * Blob Storage
 * Magazyn kluczy i wartości
 * Relacyjna baza danych
-* Magazyn tabel
+* Table Storage
 
 Po zapisaniu danych stan użytkownika jest zachowywany i dostępny w dowolnym nowym obwodie.
 
@@ -227,7 +229,7 @@ ASP.NET Core magazynu chronionej przeglądarki wykorzystuje [ochronę danych ASP
 > [!NOTE]
 > Magazyn chronionej przeglądarki opiera się na ASP.NET Core ochrony danych i jest obsługiwany tylko w przypadku Blazor Server aplikacji.
 
-### <a name="configuration"></a>Konfigurowanie
+### <a name="configuration"></a>Konfiguracja
 
 1. Dodaj odwołanie do pakietu do [`Microsoft.AspNetCore.Components.Web.Extensions`](https://www.nuget.org/packages/Microsoft.AspNetCore.Http.Extensions) .
 1. W programie `Startup.ConfigureServices` Wywołaj `AddProtectedBrowserStorage` `localStorage` kolekcję usługi i Dodaj do `sessionStorage` niej usługi:
@@ -467,7 +469,7 @@ ASP.NET Core magazynu chronionej przeglądarki wykorzystuje [ochronę danych ASP
 >
 > Pakiet jest dostępny tylko do użytku w aplikacjach ASP.NET Core 3,1 Blazor Server .
 
-### <a name="configuration"></a>Konfigurowanie
+### <a name="configuration"></a>Konfiguracja
 
 1. Dodaj odwołanie do pakietu do [`Microsoft.AspNetCore.ProtectedBrowserStorage`](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage) .
 1. W `Pages/_Host.cshtml` pliku Dodaj następujący skrypt wewnątrz tagu zamykającego `</body>` :

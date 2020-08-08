@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/10/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/progressive-web-app
-ms.openlocfilehash: 237a8fceb75ba724625f018cf94c8d5bc5acfdad
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 1c33a3abd2ebee60a4025d4598495d276663dc9b
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402588"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014168"
 ---
-# <a name="build-progressive-web-applications-with-aspnet-core-blazor-webassembly"></a>Twórz progresywne aplikacje sieci Web za pomocą ASP.NET CoreBlazor WebAssembly
+# <a name="build-progressive-web-applications-with-aspnet-core-no-locblazor-webassembly"></a>Twórz progresywne aplikacje sieci Web za pomocą ASP.NET CoreBlazor WebAssembly
 
 [Steve Sanderson](https://github.com/SteveSandersonMS)
 
@@ -69,13 +71,13 @@ Opcjonalnie można skonfigurować PWA dla aplikacji utworzonej przy użyciu szab
 
 Podczas odwiedzania aplikacji utworzonej przy użyciu szablonu PWA użytkownicy mają możliwość instalowania aplikacji w menu Start, zadokowanym lub na ekranie głównym systemu operacyjnego. Sposób przedstawiania tej opcji zależy od przeglądarki użytkownika. W przypadku korzystania z przeglądarek programu Desktop w formacie chromu, takich jak Edge lub Chrome, na pasku adresu URL pojawia się przycisk **Dodaj** . Gdy użytkownik wybierze przycisk **Dodaj** , pojawi się okno dialogowe potwierdzenia:
 
-![Potwierdzenie diaglog w usłudze Google Chrome prezentuje przycisk przycisku Zainstaluj użytkownikowi dla aplikacji "MyBlazorPwa".](progressive-web-app/_static/image2.png)
+![Potwierdzenie diaglog w usłudze Google Chrome prezentuje przycisk przycisku Zainstaluj użytkownikowi dla aplikacji "my::: No-Loc (Blazor):::P wa".](progressive-web-app/_static/image2.png)
 
 W systemie iOS osoby odwiedzające mogą zainstalować program PWA przy użyciu przycisku **udostępniania** Safari i jego opcji **Dodaj do homescreen** . W programie Chrome dla systemu Android użytkownicy powinni wybrać przycisk **menu** w prawym górnym rogu, a następnie **dodać do ekranu głównego**.
 
 Po zainstalowaniu aplikacja zostanie wyświetlona w osobnym oknie bez paska adresu:
 
-![Aplikacja "MyBlazorPwa" działa w przeglądarce Google Chrome bez paska adresu.](progressive-web-app/_static/image3.png)
+![Aplikacja "my::: No-Loc (Blazor):::P wa jest uruchamiana w przeglądarce Google Chrome bez paska adresu.](progressive-web-app/_static/image3.png)
 
 Aby dostosować tytuł okna, schemat kolorów, ikonę lub inne szczegóły, zobacz `manifest.json` plik w `wwwroot` katalogu projektu. Schemat tego pliku jest definiowany przez standardy sieci Web. Aby uzyskać więcej informacji, zobacz [powiadomienia MDN Web docs: manifest aplikacji sieci Web](https://developer.mozilla.org/docs/Web/Manifest).
 

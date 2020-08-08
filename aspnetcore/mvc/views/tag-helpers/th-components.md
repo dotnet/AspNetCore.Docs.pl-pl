@@ -6,6 +6,8 @@ monikerRange: '>= aspnetcore-2.0'
 ms.author: scaddie
 ms.date: 06/12/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/th-components
-ms.openlocfilehash: 58781880764b26a67d71e70c225ab4ed4e5da109
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 736288b6e7d2e9be7f23f6df02183a813951eb56
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406709"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014727"
 ---
 # <a name="tag-helper-components-in-aspnet-core"></a>Oznacz składniki pomocnika w ASP.NET Core
 
@@ -80,7 +82,7 @@ Jeśli Klasa składnika pomocnika tagów nie jest zarządzana za pomocą program
 
 [!code-csharp[](th-components/samples/RazorPagesSample/Startup.cs?name=snippet_ConfigureServices&highlight=12-15)]
 
-### <a name="registration-via-razor-file"></a>Rejestracja za pośrednictwem Razor pliku
+### <a name="registration-via-no-locrazor-file"></a>Rejestracja za pośrednictwem Razor pliku
 
 Jeśli składnik pomocnika tagów nie jest zarejestrowany przy użyciu DI, można go zarejestrować ze Razor strony stron lub widoku MVC. Ta technika służy do kontrolowania wstrzykniętego znacznika i kolejności wykonywania składników z Razor pliku.
 
@@ -163,7 +165,7 @@ Na przykład, `if` instrukcja daje w wyniku wartość true podczas przetwarzania
 
 [!code-cshtml[](th-components/samples/RazorPagesSample/Pages/Contact.cshtml?name=snippet_AddressPrintable)]
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:fundamentals/dependency-injection>
 * <xref:mvc/views/dependency-injection>

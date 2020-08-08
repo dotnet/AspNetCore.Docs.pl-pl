@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/10/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/additional-scenarios
-ms.openlocfilehash: b32710e515d111b7dd6556f1db55082cd56a82b5
-ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
+ms.openlocfilehash: dbad91e46a95d9ab5ec62d66e0d9a18938ff4520
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87819005"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014467"
 ---
 # <a name="aspnet-core-no-locblazor-hosting-model-configuration"></a>ASP.NET Core Blazor konfigurację modelu hostingu
 
@@ -32,7 +34,7 @@ W tym artykule opisano hostowanie konfiguracji modelu.
 
 *Ta sekcja ma zastosowanie do Blazor WebAssembly .*
 
-Aby skonfigurować SignalR klienta podstawowego do wysyłania poświadczeń, takich jak pliki cookie lub nagłówki uwierzytelniania http:
+Aby skonfigurować SignalR klienta podstawowego do wysyłania poświadczeń, takich jak cookie nagłówki uwierzytelniania s lub http:
 
 * Użyj <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCredentials%2A> do ustawienia <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.BrowserRequestCredentials.Include> na żądania między źródłami [`fetch`](https://developer.mozilla.org/docs/Web/API/Fetch_API/Using_Fetch) :
 
@@ -231,11 +233,9 @@ Blazor.defaultReconnectionHandler._reconnectionDisplay =
 
 Symbol zastępczy `{ELEMENT ID}` jest identyfikatorem elementu HTML do wyświetlenia.
 
-::: moniker range=">= aspnetcore-5.0"
-
 ## <a name="influence-html-head-tag-elements"></a>Wpływ na `<head>` elementy tagów HTML
 
-*Ta sekcja dotyczy Blazor WebAssembly i Blazor Server .*
+*Ta sekcja ma zastosowanie do nadchodzącego ASP.NET Core 5,0 wersji Blazor WebAssembly i Blazor Server .*
 
 Gdy renderowane,, `Title` `Link` i `Meta` składniki dodają lub aktualizują dane w `<head>` elementach tagów HTML:
 
@@ -263,8 +263,6 @@ Gdy jeden ze składników platformy jest używany w składniku podrzędnym, rend
 
 * Mogą być modyfikowane przez stan aplikacji. Nie można zmodyfikować oznakowanego języka HTML w stanie aplikacji.
 * Jest usuwany z kodu HTML, `<head>` gdy składnik nadrzędny nie jest już renderowany.
-
-::: moniker-end
 
 ## <a name="additional-resources"></a>Dodatkowe zasoby
 

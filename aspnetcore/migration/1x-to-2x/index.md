@@ -6,6 +6,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/1x-to-2x/index
-ms.openlocfilehash: 97fe2f36aed4a2ac60a7ffc30ede5e682a838e5e
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: cad1cd868ef8c972d7e0fbfec79cd1d8b49c3b6e
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408698"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88015338"
 ---
 # <a name="migrate-from-aspnet-core-1x-to-20"></a>Migrowanie z ASP.NET Core 1. x do 2,0
 
@@ -164,7 +166,7 @@ Począwszy od 2,0, jest to niewłaściwe rozwiązanie w przypadku `BuildWebHost`
 
 <a name="view-compilation"></a>
 
-## <a name="review-razor-view-compilation-setting"></a>Przegląd Razor Ustawienia kompilacji widoku
+## <a name="review-no-locrazor-view-compilation-setting"></a>Przegląd Razor Ustawienia kompilacji widoku
 
 Skrócenie czasu uruchamiania aplikacji i mniejszych opublikowanych pakietów mają na celu najwyższą ważność. Z tego względu [ Razor kompilacja widoku](xref:mvc/views/view-compilation) jest domyślnie włączona w ASP.NET Core 2,0.
 
@@ -198,7 +200,7 @@ Jeśli używasz bezpośrednio zestawu SDK Application Insights, Kontynuuj. [Paki
 
 <a name="auth-and-identity"></a>
 
-## <a name="adopt-authenticationidentity-improvements"></a>Przyjmowanie uwierzytelniania/ Identity ulepszeń
+## <a name="adopt-authenticationno-locidentity-improvements"></a>Przyjmowanie uwierzytelniania/ Identity ulepszeń
 
 ASP.NET Core 2,0 ma nowy model uwierzytelniania i wiele znaczących zmian ASP.NET Core Identity . Jeśli projekt został utworzony z włączonymi indywidualnymi kontami użytkowników lub jeśli masz ręcznie dodane uwierzytelnianie lub Identity , zobacz [Migrowanie uwierzytelniania i Identity do ASP.NET Core 2,0](xref:migration/1x-to-2x/identity-2x).
 

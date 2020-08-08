@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/windows-service
-ms.openlocfilehash: 61280a82fc46116b3ecf057a00cf3f78f0af8951
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 7740774cad33418489fc1d94240574167f84fae6
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408464"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88015364"
 ---
 # <a name="host-aspnet-core-in-a-windows-service"></a>ASP.NET Core hosta w usłudze systemu Windows
 
@@ -397,7 +399,7 @@ Jeśli usługa wykonuje tylko zadania w tle (na przykład [usługi hostowane](xr
 
 Wdrożenie zależne od platformy (FDD) zależy od obecności udostępnionej systemowej wersji platformy .NET Core w systemie docelowym. Po przyjęciu scenariusza FDD zgodnie ze wskazówkami zawartymi w tym artykule zestaw SDK tworzy plik wykonywalny (*. exe*), nazywany *plik wykonywalny zależny od platformy*.
 
-[Identyfikator środowiska uruchomieniowego systemu Windows (RID)](/dotnet/core/rid-catalog) ( [\<RuntimeIdentifier>](/dotnet/core/tools/csproj#runtimeidentifier) ) zawiera platformę docelową. W poniższym przykładzie identyfikator RID jest ustawiony na `win7-x64` . `<SelfContained>`Właściwość jest ustawiona na `false` . Te właściwości instruują zestaw SDK, aby wygenerował plik wykonywalny (*exe*) dla systemu Windows i aplikację, która zależy od współużytkowanej platformy .NET Core.
+[Identyfikator środowiska uruchomieniowego systemu Windows (RID)](/dotnet/core/rid-catalog) ( [\<RuntimeIdentifier>](/dotnet/core/tools/csproj#runtimeidentifier) ) zawiera platformę docelową. W poniższym przykładzie identyfikator RID jest ustawiony na `win7-x64` . Właściwość `<SelfContained>` ma ustawioną wartość `false`. Te właściwości instruują zestaw SDK, aby wygenerował plik wykonywalny (*exe*) dla systemu Windows i aplikację, która zależy od współużytkowanej platformy .NET Core.
 
 Plik *web.config* , który jest zwykle tworzony podczas publikowania aplikacji ASP.NET Core, nie jest konieczny dla aplikacji usług systemu Windows. Aby wyłączyć tworzenie pliku *web.config* , należy dodać `<IsTransformWebConfigDisabled>` Właściwość ustawioną na `true` .
 
@@ -731,9 +733,9 @@ Jeśli usługa wykonuje tylko zadania w tle (na przykład [usługi hostowane](xr
 
 Wdrożenie zależne od platformy (FDD) zależy od obecności udostępnionej systemowej wersji platformy .NET Core w systemie docelowym. Po przyjęciu scenariusza FDD zgodnie ze wskazówkami zawartymi w tym artykule zestaw SDK tworzy plik wykonywalny (*. exe*), nazywany *plik wykonywalny zależny od platformy*.
 
-[Identyfikator środowiska uruchomieniowego systemu Windows (RID)](/dotnet/core/rid-catalog) ( [\<RuntimeIdentifier>](/dotnet/core/tools/csproj#runtimeidentifier) ) zawiera platformę docelową. W poniższym przykładzie identyfikator RID jest ustawiony na `win7-x64` . `<SelfContained>`Właściwość jest ustawiona na `false` . Te właściwości instruują zestaw SDK, aby wygenerował plik wykonywalny (*exe*) dla systemu Windows i aplikację, która zależy od współużytkowanej platformy .NET Core.
+[Identyfikator środowiska uruchomieniowego systemu Windows (RID)](/dotnet/core/rid-catalog) ( [\<RuntimeIdentifier>](/dotnet/core/tools/csproj#runtimeidentifier) ) zawiera platformę docelową. W poniższym przykładzie identyfikator RID jest ustawiony na `win7-x64` . Właściwość `<SelfContained>` ma ustawioną wartość `false`. Te właściwości instruują zestaw SDK, aby wygenerował plik wykonywalny (*exe*) dla systemu Windows i aplikację, która zależy od współużytkowanej platformy .NET Core.
 
-`<UseAppHost>`Właściwość jest ustawiona na `true` . Ta właściwość zapewnia usługę ze ścieżką aktywacji (plik wykonywalny, *exe*) dla FDD.
+Właściwość `<UseAppHost>` ma ustawioną wartość `true`. Ta właściwość zapewnia usługę ze ścieżką aktywacji (plik wykonywalny, *exe*) dla FDD.
 
 Plik *web.config* , który jest zwykle tworzony podczas publikowania aplikacji ASP.NET Core, nie jest konieczny dla aplikacji usług systemu Windows. Aby wyłączyć tworzenie pliku *web.config* , należy dodać `<IsTransformWebConfigDisabled>` Właściwość ustawioną na `true` .
 

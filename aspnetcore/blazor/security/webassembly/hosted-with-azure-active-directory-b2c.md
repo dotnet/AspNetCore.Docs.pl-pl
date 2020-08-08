@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/08/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-azure-active-directory-b2c
-ms.openlocfilehash: 40ec40423de82926bd861ef352546b3dfe63dae0
-ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
+ms.openlocfilehash: 4949964c3fd0139aa679cc6af28b7cf29e581f0f
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86445258"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88013960"
 ---
-# <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-azure-active-directory-b2c"></a>Zabezpieczanie Blazor WebAssembly hostowanej aplikacji ASP.NET Core przy użyciu Azure Active Directory B2C
+# <a name="secure-an-aspnet-core-no-locblazor-webassembly-hosted-app-with-azure-active-directory-b2c"></a>Zabezpieczanie Blazor WebAssembly hostowanej aplikacji ASP.NET Core przy użyciu Azure Active Directory B2C
 
 Autorzy [Javier Calvarro Nelson](https://github.com/javiercn) i [Luke Latham](https://github.com/guardrex)
 
@@ -171,7 +173,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 ```
 
-### <a name="useridentityname"></a>Użytkownik. Identity . Nazwij
+### <a name="userno-locidentityname"></a>Użytkownik. Identity . Nazwij
 
 Domyślnie wartość `User.Identity.Name` nie jest wypełniona.
 

@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/10/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/logging
-ms.openlocfilehash: 1f4b18bdea02016fb76b75dd01a8fcbeab9b2bc9
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: c2e8ee24c135b3c2f9b6be5b0e0efa54750c68b2
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402835"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014362"
 ---
-# <a name="aspnet-core-blazor-logging"></a>BlazorRejestrowanie ASP.NET Core
+# <a name="aspnet-core-no-locblazor-logging"></a>BlazorRejestrowanie ASP.NET Core
 
 ## Blazor WebAssembly
 
@@ -47,7 +49,7 @@ Konfigurację rejestrowania można załadować z plików ustawień aplikacji. Ab
 
 Ogólne wskazówki dotyczące rejestrowania ASP.NET Core można znaleźć w temacie <xref:fundamentals/logging/index> .
 
-## <a name="blazor-webassembly-signalr-net-client-logging"></a>Blazor WebAssemblySignalRRejestrowanie klienta platformy .NET
+## <a name="no-locblazor-webassembly-no-locsignalr-net-client-logging"></a>Blazor WebAssemblySignalRRejestrowanie klienta platformy .NET
 
 Wstrzyknąć, <xref:Microsoft.Extensions.Logging.ILoggerProvider> Aby dodać `WebAssemblyConsoleLogger` do dostawców rejestrowania przekazaną do <xref:Microsoft.AspNetCore.SignalR.Client.HubConnectionBuilder> . W przeciwieństwie do tradycyjnego <xref:Microsoft.Extensions.Logging.Console.ConsoleLogger> , `WebAssemblyConsoleLogger` jest otoką dla interfejsów API rejestrowania specyficznych dla przeglądarki (na przykład `console.log` ). Użycie w `WebAssemblyConsoleLogger` programie umożliwia rejestrowanie w ramach programu mono wewnątrz kontekstu przeglądarki.
 
@@ -63,7 +65,7 @@ var connection = new HubConnectionBuilder()
     .Build();
 ```
 
-## <a name="log-in-razor-components"></a>Składniki logowania Razor
+## <a name="log-in-no-locrazor-components"></a>Składniki logowania Razor
 
 Rejestratory respektują konfigurację uruchamiania aplikacji.
 
@@ -120,6 +122,6 @@ Poniższy przykład demonstruje logowanie za pomocą <xref:Microsoft.Extensions.
 }
 ```
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:fundamentals/logging/index>

@@ -6,6 +6,8 @@ ms.author: scaddie
 ms.date: 10/24/2018
 ms.custom: mvc, seodec18
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: azure/devops/cicd
-ms.openlocfilehash: 0edded18d766d6f2af08f6be5dbecbfd52a14a35
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 780d233014c26e37886d6bc5bd8fcb23d857dff0
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400560"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88012621"
 ---
 # <a name="continuous-integration-and-deployment"></a>Ciągła integracja i ciągłe wdrażanie
 
@@ -46,19 +48,19 @@ W tej sekcji wykonasz następujące zadania:
 1. Wybierz swoje konto z listy rozwijanej **właściciel** , a *następnie wprowadź tekst* w polu tekstowym **Nazwa repozytorium** .
 1. Kliknij przycisk **Utwórz repozytorium** .
 1. Otwórz powłokę poleceń komputera lokalnego. Przejdź do katalogu, w którym jest przechowywane repozytorium git programu *Simple-Reader* .
-1. Zmień nazwę istniejącego *pochodzenia* zdalnego na *nadrzędny*. Wykonaj następujące polecenie:
+1. Zmień nazwę istniejącego *pochodzenia* zdalnego na *nadrzędny*. Uruchom następujące polecenie:
 
     ```console
     git remote rename origin upstream
     ```
 
-1. Dodaj nowe *Źródło* zdalne wskazujące swoją kopię repozytorium w serwisie GitHub. Wykonaj następujące polecenie:
+1. Dodaj nowe *Źródło* zdalne wskazujące swoją kopię repozytorium w serwisie GitHub. Uruchom następujące polecenie:
 
     ```console
     git remote add origin https://github.com/<GitHub_username>/simple-feed-reader/
     ```
 
-1. Opublikuj lokalne repozytorium Git w nowo utworzonym repozytorium GitHub. Wykonaj następujące polecenie:
+1. Opublikuj lokalne repozytorium Git w nowo utworzonym repozytorium GitHub. Uruchom następujące polecenie:
 
     ```console
     git push -u origin master
@@ -107,7 +109,7 @@ Istnieją trzy różne czynności do wykonania. Wykonanie kroków opisanych w po
 
     ![Wybierz źródło — GitHub](media/cicd/vsts-select-source.png)
 
-1. Autoryzacja jest wymagana, aby usługa Azure DevOps mogła uzyskać dostęp do Twojego repozytorium GitHub. Wprowadź *<GitHub_username> połączenia GitHub* w polu tekstowym **Nazwa połączenia** . Na przykład:
+1. Autoryzacja jest wymagana, aby usługa Azure DevOps mogła uzyskać dostęp do Twojego repozytorium GitHub. Wprowadź *<GitHub_username> połączenia GitHub* w polu tekstowym **Nazwa połączenia** . Przykład:
 
     ![Nazwa połączenia GitHub](media/cicd/vsts-repo-authz.png)
 
@@ -132,7 +134,7 @@ Istnieją trzy różne czynności do wykonania. Wykonanie kroków opisanych w po
 
 1. Kliknij przycisk **zapisz & kolejkę** i wybierz opcję **Zapisz** :
 
-    ![Przycisk Save (Zapisz)](media/cicd/vsts-save-build.png)
+    ![Przycisk Zapisz](media/cicd/vsts-save-build.png)
 
 1. Wyświetlane jest następujące modalne okno dialogowe:
 
@@ -289,7 +291,7 @@ Kliknięcie zadania wymiany gniazd powoduje wyświetlenie następującej konfigu
 
 Podane są szczegóły subskrypcji, grupy zasobów, typu usługi, nazwy aplikacji sieci Web i miejsca wdrożenia. Pole wyboru **Zamień z produkcją** jest zaznaczone. W związku z tym bity wdrożone w miejscu *przejściowym* są wymieniane w środowisku produkcyjnym.
 
-## <a name="additional-reading"></a>Dodatkowy odczyt
+## <a name="additional-reading"></a>Materiały uzupełniające
 
 * [Tworzenie pierwszego potoku za pomocą Azure Pipelines](/azure/devops/pipelines/get-started-yaml)
 * [Kompilacja i projekt .NET Core](/azure/devops/pipelines/languages/dotnet-core)

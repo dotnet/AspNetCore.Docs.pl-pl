@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/14/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/routing
-ms.openlocfilehash: f7110688a7a03dd0cf533fa5f9759af3363169f8
-ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
+ms.openlocfilehash: 2e0c1a479554b704b4a8cd87bc177d0f76ddc7e2
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87818940"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014350"
 ---
 # <a name="aspnet-core-no-locblazor-routing"></a>BlazorRouting ASP.NET Core
 
@@ -150,7 +152,7 @@ Dostępne są ograniczenia trasy podane w poniższej tabeli. W przypadku ogranic
 | `double`   | `{weight:double}` | `1.234`, `-1,001.01e8`                                                           | Tak                              |
 | `float`    | `{weight:float}`  | `1.234`, `-1,001.01e8`                                                           | Tak                              |
 | `guid`     | `{id:guid}`       | `CD2C1638-1638-72D5-1638-DEADBEEF1638`, `{CD2C1638-1638-72D5-1638-DEADBEEF1638}` | Nie                               |
-| `int`      | `{id:int}`        | `123456789`, `-123456789`                                                        | Tak                              |
+| `int`      | `{id:int}`        | `123456789`, `-123456789`                                                        | Yes                              |
 | `long`     | `{ticks:long}`    | `123456789`, `-123456789`                                                        | Tak                              |
 
 > [!WARNING]

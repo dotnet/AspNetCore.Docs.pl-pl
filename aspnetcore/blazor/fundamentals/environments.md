@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/10/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/environments
-ms.openlocfilehash: f8d0fc3cba22973628f405b4399cef39d562d6ed
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 8a672b3d2aff4dd2b80465b0f6dac038d299eaa9
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402900"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014428"
 ---
-# <a name="aspnet-core-blazor-environments"></a>BlazorŚrodowiska ASP.NET Core
+# <a name="aspnet-core-no-locblazor-environments"></a>BlazorŚrodowiska ASP.NET Core
 
 > [!NOTE]
 > Ten temat ma zastosowanie do programu Blazor WebAssembly . Ogólne wskazówki dotyczące konfiguracji aplikacji ASP.NET Core można znaleźć w temacie <xref:fundamentals/environments> .
@@ -96,6 +98,6 @@ if (builder.HostEnvironment.IsEnvironment("Custom"))
 
 <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType>Właściwość może być używana podczas uruchamiania, gdy <xref:Microsoft.AspNetCore.Components.NavigationManager> Usługa jest niedostępna.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:fundamentals/environments>

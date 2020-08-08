@@ -5,6 +5,8 @@ description: ''
 ms.author: riande
 ms.date: 12/07/2016
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/http-modules
-ms.openlocfilehash: 362dd16db358f7ceb6730bde908fff9854c73a84
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 92672b2d05ee6bbdfcf0255ae14529a5c28c41b7
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403654"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014987"
 ---
 # <a name="migrate-http-handlers-and-modules-to-aspnet-core-middleware"></a>Migrowanie programów obsługi i modułów HTTP do ASP.NET Core oprogramowania pośredniczącego
 
@@ -291,7 +293,7 @@ Element **HttpContext. Request. UserHostAddress** Wykonuje translację na:
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Host)]
 
-Element **HttpContext. Request. cookies** tłumaczy na:
+Element **HttpContext. Request. Cookie s** tłumaczy na:
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Cookies)]
 
@@ -374,9 +376,9 @@ public async Task Invoke(HttpContext httpContext)
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_SetHeaders)]
 
-**HttpContext. Response. cookies**
+**HttpContext. Response. Cookie wolumin**
 
-Pliki cookie są przesyłane do przeglądarki w nagłówku odpowiedzi *Set-Cookie* . W związku z tym wysyłanie plików cookie wymaga tego samego wywołania zwrotnego, które są używane do wysyłania nagłówków odpowiedzi:
+Cookies przenoszone do przeglądarki w nagłówku *zestawu Cookie * odpowiedzi. W związku z tym wysyłanie cookie s wymaga tego samego wywołania zwrotnego, które jest używane do wysyłania nagłówków odpowiedzi:
 
 ```csharp
 public async Task Invoke(HttpContext httpContext)

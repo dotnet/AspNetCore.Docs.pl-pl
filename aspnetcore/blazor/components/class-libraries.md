@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/27/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/class-libraries
-ms.openlocfilehash: 8293d61f88f53e55d94b114ca2143fdfb6fd8468
-ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
+ms.openlocfilehash: 0bace66e0aab41cf31e18fe9f86dbf9bbcf59447
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87819070"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014701"
 ---
 # <a name="aspnet-core-no-locrazor-components-class-libraries"></a>RazorBiblioteki klas składników ASP.NET Core
 
@@ -41,7 +43,7 @@ Podobnie jak składniki są zwykłymi typami .NET, składniki udostępniane prze
 1. Tworzenie nowego projektu.
 1. Wybierz ** Razor bibliotekę klas**. Wybierz pozycję **Dalej**.
 1. W oknie dialogowym **Utwórz nową Razor bibliotekę klas** wybierz pozycję **Utwórz**.
-1. Podaj nazwę projektu w polu **Nazwa projektu** lub zaakceptuj nazwę domyślną projektu. W przykładach w tym temacie użyto nazwy projektu `ComponentLibrary` . Wybierz przycisk **Utwórz**.
+1. Podaj nazwę projektu w polu **Nazwa projektu** lub zaakceptuj nazwę domyślną projektu. W przykładach w tym temacie użyto nazwy projektu `ComponentLibrary` . Wybierz pozycję **Utwórz**.
 1. Dodaj RCL do rozwiązania:
    1. Kliknij prawym przyciskiem myszy rozwiązanie. Wybierz pozycję **Dodaj**  >  **istniejący projekt**.
    1. Przejdź do pliku projektu RCL.
@@ -178,7 +180,7 @@ dotnet pack
 
 Przekaż pakiet do narzędzia NuGet przy użyciu [`dotnet nuget push`](/dotnet/core/tools/dotnet-nuget-push) polecenia w powłoce poleceń.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:razor-pages/ui-class>
 * [Dodawanie pliku konfiguracji konsolidatora XML do biblioteki](xref:blazor/host-and-deploy/configure-linker#add-an-xml-linker-configuration-file-to-a-library)

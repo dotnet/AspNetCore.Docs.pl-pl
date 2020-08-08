@@ -5,6 +5,8 @@ description: W tym artykule opisano najczęstsze kroki migracji ASP.NET Core 1. 
 ms.author: scaddie
 ms.date: 06/21/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/1x-to-2x/identity-2x
-ms.openlocfilehash: dacf6fa7191f51f36b9ba65a90746a26f958fc03
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 46f10df25235b532f188eda2a079aef71070cd6d
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408672"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88015293"
 ---
-# <a name="migrate-authentication-and-identity-to-aspnet-core-20"></a>Migrowanie uwierzytelniania i Identity do ASP.NET Core 2,0
+# <a name="migrate-authentication-and-no-locidentity-to-aspnet-core-20"></a>Migrowanie uwierzytelniania i Identity do ASP.NET Core 2,0
 
 Przez [Scott Addie](https://github.com/scottaddie) i [Hao Kung](https://github.com/HaoK)
 
@@ -86,19 +88,19 @@ public void Configure(IApplicationBuilder app, ILoggerFactory loggerfactory) {
 
 Poniżej przedstawiono 2,0 instrukcje dotyczące migracji dla każdego głównego schematu uwierzytelniania.
 
-### <a name="cookie-based-authentication"></a>Uwierzytelnianie na podstawie plików cookie
+### <a name="no-loccookie-based-authentication"></a>Cookieuwierzytelnianie oparte na usłudze
 
 Wybierz jedną z dwóch opcji poniżej i wprowadź niezbędne zmiany w programie *Startup.cs*:
 
-1. Używanie plików cookie zIdentity
+1. Użyj cookie s zIdentity
     - Zamień `UseIdentity` na `UseAuthentication` w `Configure` metodzie:
 
         ```csharp
         app.UseAuthentication();
         ```
 
-    - Wywołaj `AddIdentity` metodę w `ConfigureServices` metodzie, aby dodać usługi uwierzytelniania plików cookie.
-    - Opcjonalnie Wywołaj `ConfigureApplicationCookie` metodę lub `ConfigureExternalCookie` w `ConfigureServices` metodzie, aby dostosować Identity Ustawienia plików cookie.
+    - Wywołaj `AddIdentity` metodę w `ConfigureServices` metodzie, aby dodać cookie usługi uwierzytelniania.
+    - Opcjonalnie Wywołaj `ConfigureApplicationCookie` metodę lub `ConfigureExternalCookie` w `ConfigureServices` metodzie, aby dostosować Identity cookie Ustawienia.
 
         ```csharp
         services.AddIdentity<ApplicationUser, IdentityRole>()
@@ -108,7 +110,7 @@ Wybierz jedną z dwóch opcji poniżej i wprowadź niezbędne zmiany w programie
         services.ConfigureApplicationCookie(options => options.LoginPath = "/Account/LogIn");
         ```
 
-2. Używanie plików cookie bezIdentity
+2. Użyj cookie bezIdentity
     - Zastąp `UseCookieAuthentication` wywołanie metody w `Configure` metodzie `UseAuthentication` :
 
         ```csharp
@@ -277,7 +279,7 @@ W 2,0 te dwie właściwości zostały usunięte jako właściwości w poszczegó
 services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme);
 ```
 
-W poprzednim fragmencie kodu domyślny schemat jest ustawiany na `CookieAuthenticationDefaults.AuthenticationScheme` ("pliki cookie").
+W poprzednim fragmencie kodu domyślny schemat jest ustawiany na `CookieAuthenticationDefaults.AuthenticationScheme` (" Cookie s").
 
 Alternatywnie można użyć przeciążonej wersji `AddAuthentication` metody do ustawienia więcej niż jednej właściwości. W poniższym przykładzie przeciążonej metody domyślny schemat jest ustawiany na `CookieAuthenticationDefaults.AuthenticationScheme` . Schemat uwierzytelniania można także określić w ramach poszczególnych `[Authorize]` atrybutów lub zasad autoryzacji.
 
@@ -293,7 +295,7 @@ Zdefiniuj domyślny schemat w 2,0, jeśli spełniony jest jeden z następującyc
 - Chcesz, aby użytkownik był zalogowany automatycznie
 - Używasz `[Authorize]` zasad atrybutu lub autoryzacji bez określania schematów
 
-Wyjątkiem od tej reguły jest `AddIdentity` Metoda. Ta metoda umożliwia dodanie plików cookie i ustawienie domyślnych schematów uwierzytelniania i wyzwania do pliku cookie aplikacji `IdentityConstants.ApplicationScheme` . Ponadto ustawia domyślny schemat logowania na zewnętrzny plik cookie `IdentityConstants.ExternalScheme` .
+Wyjątkiem od tej reguły jest `AddIdentity` Metoda. Ta metoda dodaje cookie do użytkownika i ustawia domyślne schematy uwierzytelniania i wyzwania dla aplikacji cookie `IdentityConstants.ApplicationScheme` . Ponadto ustawia domyślny schemat logowania na zewnętrzny cookie `IdentityConstants.ExternalScheme` .
 
 <a name="obsolete-interface"></a>
 
@@ -342,11 +344,11 @@ Aby uzyskać więcej informacji, zobacz <xref:security/authentication/windowsaut
 
 <a name="identity-cookie-options"></a>
 
-## <a name="identitycookieoptions-instances"></a>Wystąpienia IdentityCookieOptions
+## <a name="no-locidentityno-loccookieoptions-instances"></a>IdentityCookieWystąpienia opcji
 
-Efektem ubocznym zmian 2,0 jest przełączenie do użycia nazwanych opcji zamiast wystąpień opcji plików cookie. Możliwość dostosowywania Identity nazw schematu plików cookie jest usuwana.
+Efektem ubocznym zmian 2,0 jest przełączenie do użycia nazwanych opcji zamiast cookie wystąpień opcji. Możliwość dostosowywania Identity cookie nazw schematów jest usuwana.
 
-Na przykład projekty 1. x wykorzystują [iniekcję konstruktora](xref:mvc/controllers/dependency-injection#constructor-injection) do przekazania `IdentityCookieOptions` parametru do *AccountController.cs* i *ManageController.cs*. Do schematu uwierzytelniania zewnętrznego pliku cookie jest uzyskiwany dostęp z podanego wystąpienia:
+Na przykład projekty 1. x wykorzystują [iniekcję konstruktora](xref:mvc/controllers/dependency-injection#constructor-injection) do przekazania `IdentityCookieOptions` parametru do *AccountController.cs* i *ManageController.cs*. Zewnętrzny cookie schemat uwierzytelniania jest dostępny z podanego wystąpienia:
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Controllers/AccountController.cs?name=snippet_AccountControllerConstructor&highlight=4,11)]
 
@@ -368,7 +370,7 @@ Usuń nowo dodane `SignOutAsync` wywołanie, importując następującą przestrz
 
 <a name="navigation-properties"></a>
 
-## <a name="add-identityuser-poco-navigation-properties"></a>Dodawanie właściwości nawigacji IdentityUser POCO
+## <a name="add-no-locidentityuser-poco-navigation-properties"></a>Dodawanie Identity właściwości nawigacji poco użytkownika
 
 Wszystkie podstawowe właściwości nawigacji Entity Framework (EF) podstawowego `IdentityUser` poco (stary obiekt CLR) zostały usunięte. Jeśli projekt 1. x użył tych właściwości, ręcznie dodaj je z powrotem do projektu 2,0:
 

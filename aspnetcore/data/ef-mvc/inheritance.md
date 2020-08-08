@@ -7,6 +7,8 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/inheritance
-ms.openlocfilehash: cea19044294482adf834d998b75e0f3fc386cc46
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: b57adeb2712eb58907b53809cbd938e8ec0c1f6f
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400534"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88012842"
 ---
 # <a name="tutorial-implement-inheritance---aspnet-mvc-with-ef-core"></a>Samouczek: implementowanie dziedziczenia-ASP.NET MVC z EF Core
 

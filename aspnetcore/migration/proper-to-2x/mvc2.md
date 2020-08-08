@@ -6,6 +6,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 10/24/2018
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/mvc2
-ms.openlocfilehash: 545027c128214f7b0936126c47068fc234065520
-ms.sourcegitcommit: d306407dc5bfe6fdfbac482214b3f59371b582bc
+ms.openlocfilehash: afbc5196eaaaa402ddbf50f6330a683ee88984eb
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/04/2020
-ms.locfileid: "85951912"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014870"
 ---
 # <a name="migrate-from-aspnet-to-aspnet-core-20"></a>Migrowanie z ASP.NET do ASP.NET Core 2,0
 
@@ -165,6 +167,6 @@ Na przykład zasób obrazu w folderze *wwwroot/images* jest dostępny dla przegl
 
 **Uwaga:** Aby uzyskać bardziej szczegółowe informacje na temat obsługi plików statycznych w ASP.NET Core, zobacz <xref:fundamentals/static-files> .
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Przenoszenie bibliotek do programu .NET Core](/dotnet/core/porting/libraries)

@@ -6,6 +6,8 @@ ms.author: casoper
 ms.custom: mvc, seodec18
 ms.date: 10/24/2018
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: azure/devops/next-steps
-ms.openlocfilehash: 6e7f46a0c78575e52a8182829f7b3d2bddec70f6
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: feff73b307791c0a7ad8968b5145c0388df1ca10
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400339"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88012592"
 ---
 # <a name="next-steps"></a>Następne kroki
 

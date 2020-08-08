@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/09/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-identity-server
-ms.openlocfilehash: 87424f413ab21ae51fc1b1b2033069f5a41da566
-ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
+ms.openlocfilehash: 630425c4efd5fc4dfffd402018b90d45056f5d46
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87818888"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88013830"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-hosted-app-with-no-locidentity-server"></a>Zabezpieczanie Blazor WebAssembly hostowanej aplikacji ASP.NET Core Identity z serwerem
 
@@ -464,7 +466,7 @@ W aplikacji klienckiej podejścia do autoryzacji składników są w tym momencie
 
 [!INCLUDE[](~/includes/blazor-security/troubleshoot.md)]
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Wdrożenie do Azure App Service](xref:security/authentication/identity/spa#deploy-to-production)
 * [Importowanie certyfikatu z Key Vault (dokumentacja platformy Azure)](/azure/app-service/configure-ssl-certificate#import-a-certificate-from-key-vault)

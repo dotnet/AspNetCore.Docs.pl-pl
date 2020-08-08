@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/17/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: index
-ms.openlocfilehash: 2ad97dd7eb38b4cb69fa7af5ae1e1d1837a97443
-ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
+ms.openlocfilehash: 9cf721b381d3c4c737c15225edcf7918dd1fcf5b
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85944559"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88015351"
 ---
 # <a name="introduction-to-aspnet-core"></a>Wprowadzenie do platformy ASP.NET Core
 
@@ -244,7 +246,7 @@ Aby uzyskać więcej informacji, zobacz [Współtworzenie dokumentacji platformy
 
 ## <a name="next-steps"></a>Następne kroki
 
-Więcej informacji zawierają następujące zasoby:
+Więcej informacji można znaleźć w następujących zasobach:
 
 * <xref:getting-started>
 * <xref:tutorials/publish-to-azure-webapp-using-vs>

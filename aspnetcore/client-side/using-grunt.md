@@ -5,6 +5,8 @@ description: Używanie grunt w ASP.NET Core
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: client-side/using-grunt
-ms.openlocfilehash: fc871e22f9bd5a9c137008f1d87019542c45b5d2
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 019f31c1a6fa3a33783f78f2fee71f710642ce6d
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401769"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88013206"
 ---
 # <a name="use-grunt-in-aspnet-core"></a>Używanie grunt w ASP.NET Core
 

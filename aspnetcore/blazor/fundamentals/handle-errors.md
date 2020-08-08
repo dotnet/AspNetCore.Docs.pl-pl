@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/23/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/handle-errors
-ms.openlocfilehash: e3ce3a62f351255fd059adaa6e9b0a8e9bdc2ce7
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: 5f7112d9a072f28d387e07bdf69ec0b7595ff6b4
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86059880"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014441"
 ---
-# <a name="handle-errors-in-aspnet-core-blazor-apps"></a>Obsługa błędów w Blazor aplikacjach ASP.NET Core
+# <a name="handle-errors-in-aspnet-core-no-locblazor-apps"></a>Obsługa błędów w Blazor aplikacjach ASP.NET Core
 
 [Steve Sanderson](https://github.com/SteveSandersonMS)
 
@@ -85,7 +87,7 @@ W Blazor Server aplikacji Dostosuj środowisko w `Pages/_Host.cshtml` pliku:
 }
 ```
 
-## <a name="how-a-blazor-server-app-reacts-to-unhandled-exceptions"></a>Jak Blazor Server Aplikacja reaguje na Nieobsłużone wyjątki
+## <a name="how-a-no-locblazor-server-app-reacts-to-unhandled-exceptions"></a>Jak Blazor Server Aplikacja reaguje na Nieobsłużone wyjątki
 
 Blazor Serverjest strukturą stanową. Gdy użytkownicy współpracują z aplikacją, utrzymują połączenie z serwerem znanym jako *obwód*. Obwód zawiera aktywne wystąpienia składnika, a także wiele innych aspektów stanu, takich jak:
 
@@ -221,7 +223,7 @@ Aby uzyskać więcej informacji, zobacz następujące artykuły:
 * <xref:blazor/call-javascript-from-dotnet>
 * <xref:blazor/call-dotnet-from-javascript>
 
-### <a name="blazor-server-prerendering"></a>Blazor ServerRenderowanie prerenderingu
+### <a name="no-locblazor-server-prerendering"></a>Blazor ServerRenderowanie prerenderingu
 
 Blazorskładniki mogą być wstępnie renderowane przy użyciu [pomocnika tagów składnika](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper) , dzięki czemu RENDEROWANE znaczniki HTML są zwracane jako część początkowego żądania HTTP użytkownika. Działa to w następujący sposób:
 

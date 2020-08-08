@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/14/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: 1312ae531b0acb0ce09137cc2bae6299ddda5c32
-ms.sourcegitcommit: e6b3dd344521ce320d5c2121bbc27c211df87e57
+ms.openlocfilehash: a145cfd551650445f9ff35259cbedf71ebb686f0
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/19/2020
-ms.locfileid: "86468850"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014597"
 ---
-# <a name="create-and-use-aspnet-core-razor-components"></a>Tworzenie i używanie Razor składników ASP.NET Core
+# <a name="create-and-use-aspnet-core-no-locrazor-components"></a>Tworzenie i używanie Razor składników ASP.NET Core
 
 [Luke Latham](https://github.com/guardrex), [Daniel Roth](https://github.com/danroth27)i [Tobias Bartsch](https://www.aveo-solutions.com/)
 
@@ -34,7 +36,7 @@ Blazoraplikacje są kompilowane przy użyciu *składników*programu. Składnik j
 
 Składniki są implementowane w [Razor](xref:mvc/views/razor) plikach składników ( `.razor` ) przy użyciu kombinacji języka C# i znaczników HTML. Składnik w programie Blazor jest formalnie nazywany * Razor składnikiem*.
 
-### <a name="razor-syntax"></a>Razorobowiązuje
+### <a name="no-locrazor-syntax"></a>Razorobowiązuje
 
 Razorskładniki w Blazor aplikacjach szeroko wykorzystują Razor składnię. Jeśli nie znasz Razor języka znaczników, zalecamy przeczytanie <xref:mvc/views/razor> przed kontynuowaniem.
 
@@ -81,7 +83,7 @@ Po pierwszym wyrenderowaniu składnika składnik generuje jego drzewo renderowan
 
 Składniki to zwykłe klasy języka C# i można je umieścić w dowolnym miejscu w projekcie. Składniki, które generują strony sieci Web, zwykle znajdują się w `Pages` folderze. Składniki niestronicowe są często umieszczane w `Shared` folderze lub do folderu niestandardowego dodanego do projektu.
 
-### <a name="namespaces"></a>Przestrzenie nazw
+### <a name="namespaces"></a>Namespaces
 
 Zazwyczaj przestrzeń nazw składnika pochodzi od głównej przestrzeni nazw aplikacji i lokalizacji składnika (folderu) w aplikacji. Jeśli główna przestrzeń nazw aplikacji jest `BlazorSample` i znajduje się `Counter` w `Pages` folderze:
 
@@ -796,7 +798,7 @@ W poniższym przykładzie pokazano, jak za pomocą `MarkupString` typu dodać bl
 }
 ```
 
-## <a name="razor-templates"></a>Razorprzystawki
+## <a name="no-locrazor-templates"></a>Razorprzystawki
 
 Fragmenty renderowania można definiować przy użyciu Razor składni szablonu. RazorSzablony są sposobem definiowania fragmentu interfejsu użytkownika i przyjmuje następujący format:
 
@@ -866,7 +868,7 @@ Podobnie Obrazy SVG są obsługiwane w regułach CSS pliku arkusza stylów ( `.c
 
 Jednak wbudowane znaczniki SVG nie są obsługiwane we wszystkich scenariuszach. Jeśli umieścisz `<svg>` tag bezpośrednio w pliku składnika ( `.razor` ), podstawowe renderowanie obrazu jest obsługiwane, ale wiele scenariuszy zaawansowanych nie jest jeszcze obsługiwanych. Na przykład `<use>` tagi nie są obecnie przestrzegane i [`@bind`][10] nie mogą być używane z niektórymi tagami SVG. Aby uzyskać więcej informacji, zobacz [Obsługa SVG w Blazor (#18271 dotnet/aspnetcore)](https://github.com/dotnet/aspnetcore/issues/18271).
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:blazor/security/server/threat-mitigation>: Zawiera wskazówki dotyczące tworzenia Blazor Server aplikacji, które muszą będą konkurować o z wyczerpaniem zasobów.
 

@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/30/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: cb0a8737fb975db285986d18b995e488f09580e8
-ms.sourcegitcommit: 37f6f2e13ceb4eae268d20973d76e4b83acf6a24
+ms.openlocfilehash: 225916411550cc8e89c604e1426316843bb0ff52
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/03/2020
-ms.locfileid: "87526293"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014545"
 ---
 # <a name="debug-aspnet-core-no-locblazor-webassembly"></a>Debuguj ASP.NET CoreBlazor WebAssembly
 
@@ -76,6 +78,10 @@ Aby debugować Blazor WebAssembly aplikację w programie Visual Studio:
 
 1. Utwórz nową aplikację hostowaną ASP.NET Core Blazor WebAssembly .
 1. Naciśnij klawisz <kbd>F5</kbd> , aby uruchomić aplikację w debugerze.
+
+   > [!NOTE]
+   > **Uruchamianie bez debugowania** (<kbd>Ctrl</kbd> + <kbd>F5</kbd>) nie jest obsługiwane.
+
 1. Ustaw punkt przerwania w `Pages/Counter.razor` `IncrementCount` metodzie.
 1. Przejdź do **`Counter`** karty i wybierz przycisk, aby trafić w punkt przerwania:
 
@@ -116,10 +122,13 @@ Podczas debugowania Blazor WebAssembly aplikacji można także debugować kod se
    Jeśli otrzymasz powiadomienie:
 
    * Upewnij się, że zainstalowano najnowszą wersję [języka C# dla rozszerzenia Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp) . Aby sprawdzić zainstalowane rozszerzenia, Otwórz rozszerzenia **widoku**  >  **Extensions** na pasku menu lub wybierz ikonę **rozszerzenia** na pasku bocznym **działania** .
-   * Upewnij się, że debugowanie JavaScript Preview jest włączone. Otwórz ustawienia na pasku menu (**File**  >  **Preferences**  >  **Ustawienia**preferencji plików). Wyszukaj przy użyciu słów kluczowych `debug preview` . Upewnij się, że w wynikach wyszukiwania znajduje się pole wyboru **debuguj > JavaScript: Użyj opcji Podgląd** jest zaznaczone.
+   * Upewnij się, że debugowanie JavaScript Preview jest włączone. Otwórz ustawienia na pasku menu (**File**  >  **Preferences**  >  **Ustawienia**preferencji plików). Wyszukaj przy użyciu słów kluczowych `debug preview` . Upewnij się, że w wynikach wyszukiwania znajduje się pole wyboru **debuguj > JavaScript: Użyj opcji Podgląd** jest zaznaczone. Jeśli opcja Włącz debugowanie podglądu nie istnieje, Uaktualnij do najnowszej wersji VS Code lub zainstaluj [rozszerzenie debugera JavaScript](https://marketplace.visualstudio.com/items?itemName=ms-vscode.js-debug-nightly) (vs Code w wersji 1,46 lub starszej).
    * Załaduj ponownie okno.
 
 1. Rozpocznij debugowanie przy użyciu skrótu klawiaturowego <kbd>F5</kbd> lub elementu menu.
+
+   > [!NOTE]
+   > **Uruchamianie bez debugowania** (<kbd>Ctrl</kbd> + <kbd>F5</kbd>) nie jest obsługiwane.
 
 1. Po wyświetleniu monitu wybierz opcję ** Blazor WebAssembly Debuguj** , aby rozpocząć debugowanie.
 

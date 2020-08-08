@@ -6,6 +6,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 05/26/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/webapi
-ms.openlocfilehash: 530455c85c4c869f06ba795d9fb63dcfd1c8d5cf
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 4888de6ad55037be540cb62b6e4f02878e2b57ab
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407229"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014818"
 ---
 # <a name="migrate-from-aspnet-web-api-to-aspnet-core"></a>Migrowanie z interfejsu API sieci Web ASP.NET do ASP.NET Core
 
@@ -61,7 +63,7 @@ Utwórz nowe puste rozwiązanie w programie Visual Studio i Dodaj projekt interf
 
 1. Z menu **plik** wybierz pozycję **Nowy** > **projekt**.
 1. Wybierz szablon **pustego rozwiązania** i wybierz pozycję **dalej**.
-1. Nazwij rozwiązanie *WebAPIMigration*. Wybierz przycisk **Utwórz**.
+1. Nazwij rozwiązanie *WebAPIMigration*. Wybierz pozycję **Utwórz**.
 1. Dodaj istniejący projekt *ProductsApp* do rozwiązania.
 
 Dodaj nowy projekt interfejsu API do migracji do:
@@ -142,7 +144,7 @@ Skonfiguruj Routing w następujący sposób:
     * Zastosuj [`[HttpGet]`](xref:Microsoft.AspNetCore.Mvc.HttpGetAttribute) atrybut do `GetAllProducts` akcji.
     * Zastosuj `[HttpGet("{id}")]` atrybut do `GetProduct` akcji.
 
-Uruchom zmigrowany projekt i przejdź do `/api/products` . Zostanie wyświetlona pełna lista trzech produktów. Przejdź do `/api/products/1`. Zostanie wyświetlony pierwszy produkt.
+Uruchom zmigrowany projekt i przejdź do `/api/products` . Zostanie wyświetlona pełna lista trzech produktów. Przejdź na stronę `/api/products/1`. Zostanie wyświetlony pierwszy produkt.
 
 ## <a name="additional-resources"></a>Zasoby dodatkowe
 
@@ -255,7 +257,7 @@ Skonfiguruj Routing w następujący sposób:
     * Zastosuj [`[HttpGet]`](xref:Microsoft.AspNetCore.Mvc.HttpGetAttribute) atrybut do `GetAllProducts` akcji.
     * Zastosuj `[HttpGet("{id}")]` atrybut do `GetProduct` akcji.
 
-Uruchom zmigrowany projekt i przejdź do `/api/products` . Zostanie wyświetlona pełna lista trzech produktów. Przejdź do `/api/products/1`. Zostanie wyświetlony pierwszy produkt.
+Uruchom zmigrowany projekt i przejdź do `/api/products` . Zostanie wyświetlona pełna lista trzech produktów. Przejdź na stronę `/api/products/1`. Zostanie wyświetlony pierwszy produkt.
 
 ## <a name="compatibility-shim"></a>Podkładka zgodności
 
@@ -288,7 +290,7 @@ Aby użyć podkładek zgodności:
 1. Zarejestruj usługi podkładki zgodności z kontenerem DI aplikacji, wywołując `services.AddMvc().AddWebApiConventions()` w `Startup.ConfigureServices` .
 1. Zdefiniuj trasy specyficzne dla interfejsu API sieci Web za pomocą polecenia `MapWebApiRoute` `IRouteBuilder` w `IApplicationBuilder.UseMvc` wywołaniu aplikacji.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:web-api/index>
 * <xref:web-api/action-return-types>

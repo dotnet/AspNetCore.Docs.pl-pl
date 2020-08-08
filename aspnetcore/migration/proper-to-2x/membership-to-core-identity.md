@@ -6,6 +6,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 01/10/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/proper-to-2x/membership-to-core-identity
-ms.openlocfilehash: afad542a18a357a77f4542511a3d2c3108dbfb31
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: 97039ac1c7bcd6a1ff7b53e1579c623b26564d26
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86059776"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014896"
 ---
-# <a name="migrate-from-aspnet-membership-authentication-to-aspnet-core-20-identity"></a>Migrowanie z uwierzytelniania członkostwa ASP.NET do ASP.NET Core 2,0Identity
+# <a name="migrate-from-aspnet-membership-authentication-to-aspnet-core-20-no-locidentity"></a>Migrowanie z uwierzytelniania członkostwa ASP.NET do ASP.NET Core 2,0Identity
 
 Autor [Tomasz Levin](https://isaaclevin.com)
 
@@ -38,14 +40,14 @@ Przed ASP.NET 2,0, deweloperzy byli poddani do tworzenia całego procesu uwierzy
 
 Aby przeprowadzić migrację istniejących aplikacji do ASP.NET Core 2,0 Identity , dane w tych tabelach muszą zostać zmigrowane do tabel używanych przez nowy Identity schemat.
 
-## <a name="aspnet-core-identity-20-schema"></a>IdentitySchemat ASP.NET Core 2,0
+## <a name="aspnet-core-no-locidentity-20-schema"></a>IdentitySchemat ASP.NET Core 2,0
 
 ASP.NET Core 2,0 jest zgodna z [Identity](/aspnet/identity/index) zasadą wprowadzoną w ASP.NET 4,5. Chociaż zasada jest współdzielona, implementacja między strukturami jest różna, nawet między wersjami ASP.NET Core (zobacz [Migrowanie uwierzytelniania i Identity do ASP.NET Core 2,0](xref:migration/1x-to-2x/index)).
 
 Najszybszym sposobem wyświetlenia schematu dla ASP.NET Core 2,0 Identity jest utworzenie nowej aplikacji ASP.NET Core 2,0. Wykonaj następujące kroki w programie Visual Studio 2017:
 
 1. Wybierz pozycję **plik**  >  **Nowy**  >  **projekt**.
-1. Utwórz nowy projekt **ASP.NET Core aplikacji sieci Web** o nazwie *CoreIdentitySample*.
+1. Utwórz nowy projekt **aplikacji sieci Web ASP.NET Core** o nazwie *Core Identity Sample*.
 1. Wybierz pozycję **ASP.NET Core 2,0** na liście rozwijanej, a następnie wybierz pozycję **aplikacja sieci Web**. Ten szablon generuje aplikację [ Razor Pages](xref:razor-pages/index) . Przed kliknięciem przycisku **OK**kliknij pozycję **Zmień uwierzytelnianie**.
 1. Wybierz **konta poszczególnych użytkowników** dla Identity szablonów. Na koniec kliknij przycisk **OK**, a następnie **OK**. Program Visual Studio tworzy projekt przy użyciu Identity szablonu ASP.NET Core.
 1. Wybierz kolejno pozycje **Narzędzia**Menedżer  >  **pakietów NuGet**  >  **konsola Menedżera** pakietów, aby otworzyć okno **konsoli Menedżera pakietów** (PMC).
@@ -67,7 +69,7 @@ Najszybszym sposobem wyświetlenia schematu dla ASP.NET Core 2,0 Identity jest u
 
     `Update-Database`Polecenie utworzyło bazę danych określoną za pomocą schematu i wszystkie dane potrzebne do zainicjowania aplikacji. Na poniższej ilustracji przedstawiono strukturę tabeli, która została utworzona z poprzednimi krokami.
 
-    ![IdentityTabelę](identity/_static/identity-tables.png)
+    ![::: No-Loc (tożsamość)::: Tables](identity/_static/identity-tables.png)
 
 ## <a name="migrate-the-schema"></a>Migrowanie schematu
 
@@ -103,7 +105,7 @@ Istnieją delikatne różnice w strukturach tabel i polach zarówno dla członko
 |`RoleId`                 |`string`  |`RoleId`      |`string`                   |
 |`UserId`                 |`string`  |`UserId`      |`string`                   |
 
-Odwołuje się do powyższej tabeli mapowania podczas tworzenia skryptu migracji dla *użytkowników* i *ról*. W poniższym przykładzie założono, że masz dwie bazy danych na serwerze bazy danych. Jedna baza danych zawiera istniejący schemat i dane członkostwa ASP.NET. Druga baza danych *CoreIdentitySample* została utworzona za pomocą opisanej wcześniej procedury. Komentarze są zawarte w tekście, aby uzyskać więcej szczegółów.
+Odwołuje się do powyższej tabeli mapowania podczas tworzenia skryptu migracji dla *użytkowników* i *ról*. W poniższym przykładzie założono, że masz dwie bazy danych na serwerze bazy danych. Jedna baza danych zawiera istniejący schemat i dane członkostwa ASP.NET. Druga *podstawowa Identity Przykładowa* baza danych została utworzona przy użyciu opisanej wcześniej procedury. Komentarze są zawarte w tekście, aby uzyskać więcej szczegółów.
 
 ```sql
 -- THIS SCRIPT NEEDS TO RUN FROM THE CONTEXT OF THE MEMBERSHIP DB

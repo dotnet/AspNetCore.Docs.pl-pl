@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: H1Hack27Feb2017
 ms.date: 03/18/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/intro
-ms.openlocfilehash: d2791422e50082eab51c0735e2209e5b829d22f2
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.openlocfilehash: 067698687268ac072d8944fd5d9ae47c49fd4a24
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86212506"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88015014"
 ---
 # <a name="tag-helpers-in-aspnet-core"></a>Pomocnicy tagów w ASP.NET Core
 
@@ -275,7 +277,7 @@ Możesz dostosować czcionkę i kolorowanie przy użyciu **Tools**  >  **opcji**
 
 [!INCLUDE[](~/includes/built-in-TH.md)]
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Autorzy tagów](xref:mvc/views/tag-helpers/authoring)
 * [Praca z formularzami](xref:mvc/views/working-with-forms)

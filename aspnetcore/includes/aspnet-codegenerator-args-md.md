@@ -2,8 +2,8 @@
 | Opcja               | Opis|
 | ----------------- | ------------ |
 | --model lub-m  | Klasa modelu do użycia. |
-| --DataContext lub-DC  | Klasa `DbContext` , która ma zostać użyta. |
-| --bootstrapVersion lub-b  | Określa wersję ładowania początkowego. Prawidłowe wartości to `3` lub `4`. Wartość domyślna to `4`. W razie konieczności i nieobecny katalog *wwwroot* zostanie utworzony, który zawiera pliki Bootstrap określonej wersji. |
+| --DataContext lub-DC  | `DbContext`Klasa, która ma zostać użyta. |
+| --bootstrapVersion lub-b  | Określa wersję ładowania początkowego. Prawidłowe wartości to `3` lub `4` . Wartość domyślna to `4`. W razie konieczności i nieobecny katalog *wwwroot* zostanie utworzony, który zawiera pliki Bootstrap określonej wersji. |
 | --referenceScriptLibraries lub-scripts |  Odwołuj się do bibliotek skryptów w wygenerowanych widokach. Dodaje `_ValidationScriptsPartial` do edycji i tworzenia stron. |
 | --układ lub-l | Strona układu niestandardowego do użycia. |
 | --useDefaultLayout lub-UDL | Użyj domyślnego układu dla widoków. |

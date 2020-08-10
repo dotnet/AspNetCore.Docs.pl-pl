@@ -7,6 +7,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/redis-backplane
-ms.openlocfilehash: 58c1ff2c9334e75535f6e5f0f418976176822724
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: d80bce204b467d436a3580933718147bc3fbe75c
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408477"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022488"
 ---
-# <a name="set-up-a-redis-backplane-for-aspnet-core-signalr-scale-out"></a>Konfigurowanie planu Redis dla ASP.NET Core SignalR skalowanie w poziomie
+# <a name="set-up-a-redis-backplane-for-aspnet-core-no-locsignalr-scale-out"></a>Konfigurowanie planu Redis dla ASP.NET Core SignalR skalowanie w poziomie
 
 Autorzy [Andrew Stanton-pielęgniarki](https://twitter.com/anurse), [Brady Gastera](https://twitter.com/bradygaster)i [Tomasz Dykstra](https://github.com/tdykstra),
 
@@ -35,7 +37,7 @@ W tym artykule opisano SignalR zagadnienia dotyczące konfigurowania serwera [Re
   > [!IMPORTANT] 
   > W przypadku użycia w środowisku produkcyjnym Redis planuje się tylko wtedy, gdy działa on w tym samym centrum danych co SignalR aplikacja. W przeciwnym razie opóźnienie sieci obniży wydajność. Jeśli SignalR aplikacja jest uruchomiona w chmurze platformy Azure, zalecamy użycie usługi platformy Azure SignalR zamiast planu Redis. Usługi Azure Redis Cache można używać w środowiskach deweloperskich i testowych.
 
-  Więcej informacji zawierają następujące zasoby:
+  Więcej informacji można znaleźć w następujących zasobach:
 
   * <xref:signalr/scale>
   * [Dokumentacja Redis](https://redis.io/)
@@ -232,7 +234,7 @@ services.AddSignalR()
 
 ## <a name="next-steps"></a>Następne kroki
 
-Więcej informacji zawierają następujące zasoby:
+Więcej informacji można znaleźć w następujących zasobach:
 
 * <xref:signalr/scale>
 * [Dokumentacja Redis](https://redis.io/documentation)

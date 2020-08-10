@@ -63,7 +63,7 @@ Wywołanie `UseBrowserLink` `Startup.Configure` metody:
 app.UseBrowserLink();
 ```
 
-`UseBrowserLink`Wywołanie jest zwykle umieszczane wewnątrz `if` bloku, który umożliwia tylko łącze przeglądarki w środowisku deweloperskim. Przykład:
+`UseBrowserLink`Wywołanie jest zwykle umieszczane wewnątrz `if` bloku, który umożliwia tylko łącze przeglądarki w środowisku deweloperskim. Na przykład:
 
 ```csharp
 if (env.IsDevelopment())

@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-controller
-ms.openlocfilehash: 6a2c9fe6dde725129e293a3137c1281bfb1a30ef
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 46f8cbc5ef3d9fe00a5151160a9119f68a9fe572
+ms.sourcegitcommit: 68d03d1aee8906b53bda66f8f1e0747efc3007e6
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021058"
+ms.lasthandoff: 08/10/2020
+ms.locfileid: "88051813"
 ---
 # <a name="part-2-add-a-controller-to-an-aspnet-core-mvc-app"></a>Część 2, dodawanie kontrolera do aplikacji ASP.NET Core MVC
 
@@ -42,12 +42,12 @@ Omawiamy te koncepcje w tej serii samouczków i pokazano, jak używać ich do ko
 
 ## <a name="add-a-controller"></a>Dodawanie kontrolera
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * W **Eksplorator rozwiązań**kliknij prawym przyciskiem myszy pozycję **Kontrolery > Dodaj** 
    ![ menu kontekstowe kontrolera >](adding-controller/_static/add_controller.png)
 
-* W oknie dialogowym **Dodawanie szkieletu** wybierz pozycję **kontroler MVC — pusty**
+* W oknie dialogowym **Dodawanie szkieletu** wybierz pozycję **Klasa kontrolera — puste**
 
   ![Dodaj kontroler MVC i nadaj mu nazwę](adding-controller/_static/ac.png)
 
@@ -64,7 +64,7 @@ Wybierz ikonę **Eksploratora** , a następnie kliknij przycisk Control (kliknij
 W **Eksplorator rozwiązań**kliknij prawym przyciskiem myszy pozycję **kontrolery > Dodaj > nowy plik**.
 ![Menu kontekstowe](~/tutorials/first-mvc-app-mac/adding-controller/_static/add_controller.png)
 
-Wybierz klasę **ASP.NET Core** i **kontrolera MVC**.
+Wybierz **ASP.NET Core** i **klasy kontrolera**.
 
 Nadaj nazwę kontrolerowi **HelloWorldController**.
 
@@ -156,7 +156,7 @@ Omawiamy te koncepcje w tej serii samouczków i pokazano, jak używać ich do ko
 
 ## <a name="add-a-controller"></a>Dodawanie kontrolera
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * W **Eksplorator rozwiązań**kliknij prawym przyciskiem myszy pozycję **Kontrolery > Dodaj** 
    ![ menu kontekstowe kontrolera >](adding-controller/_static/add_controller.png)

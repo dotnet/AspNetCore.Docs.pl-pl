@@ -163,9 +163,14 @@
         - name: Aplikacje internetowego interfejsu API >>
           displayName: tutorial
           href: /learn/modules/build-web-api-net-core/
-        - name: Mikrousługi natywne dla chmury >>
-          displayName: 'tutorial, kubernetes, aks, acr, docker'
-          href: /learn/modules/microservices-aspnet-core/
+        - name: Mikrousługi natywne dla chmury
+          items:
+            - name: Tworzenie i wdrażanie >>
+              displayName: 'tutorial, kubernetes, aks, acr, docker'
+              href: /learn/modules/microservices-aspnet-core/
+            - name: Implementowanie odporności >>
+              displayName: 'tutorial, kubernetes, aks, acr, docker'
+              href: /learn/modules/microservices-resiliency-aspnet-core/
         - name: Dostęp do danych >>
           displayName: 'tutorial, ef, entity framework'
           href: /learn/modules/persist-data-ef-core/
@@ -1191,6 +1196,8 @@
       uid: performance/diagnostic-tools
     - name: Obciążenie i testy przeciążeniowe
       uid: test/loadtests
+    - name: Liczniki zdarzeń
+      href: /dotnet/core/diagnostics/event-counter-perf
 - name: Globalizacja i lokalizacja
   items:
     - name: Omówienie

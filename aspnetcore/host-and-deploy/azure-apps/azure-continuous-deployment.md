@@ -3,7 +3,7 @@ title: Ciągłe wdrażanie na platformie Azure za pomocą programu Visual Studio
 author: rick-anderson
 description: Dowiedz się, jak utworzyć aplikację internetową ASP.NET Core przy użyciu programu Visual Studio i wdrożyć ją do Azure App Service przy użyciu narzędzia Git do ciągłego wdrażania.
 ms.author: riande
-ms.custom: mvc
+ms.custom: devx-track-csharp, mvc
 ms.date: 12/06/2018
 no-loc:
 - cookie
@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/azure-apps/azure-continuous-deployment
-ms.openlocfilehash: af983a2bc8a2802f9be07b30ab733ed2cfb7933c
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 0def05f73fd5264b1fb01e0a2ae4fd8d70588d9c
+ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88016092"
+ms.lasthandoff: 08/12/2020
+ms.locfileid: "88130564"
 ---
 # <a name="continuous-deployment-to-azure-with-visual-studio-and-git-with-aspnet-core"></a>Ciągłe wdrażanie na platformie Azure za pomocą programu Visual Studio i rozwiązania Git na platformie ASP.NET Core
 
@@ -40,7 +40,7 @@ Zobacz również [Tworzenie pierwszego potoku za pomocą Azure Pipelines](/azure
 
 W tym samouczku założono, że zainstalowano następujące oprogramowanie:
 
-* [Program Visual Studio](https://visualstudio.microsoft.com)
+* [Visual Studio](https://visualstudio.microsoft.com)
 * [!INCLUDE [](~/includes/net-core-sdk-download-link.md)]
 * [Git](https://git-scm.com/downloads) dla systemu Windows
 
@@ -110,7 +110,7 @@ Git to rozproszony system kontroli wersji, którego można użyć do wdrożenia 
 
    ![Blok ustawień: blok źródła wdrożenia: Wybierz blok źródłowy](azure-continuous-deployment/_static/deployment-options.png)
 
-1. Wybierz przycisk **OK**.
+1. Wybierz pozycję **OK**.
 
 1. Jeśli nie skonfigurowano wcześniej poświadczeń wdrażania do publikowania aplikacji internetowej lub innej aplikacji App Service, skonfiguruj je teraz:
 

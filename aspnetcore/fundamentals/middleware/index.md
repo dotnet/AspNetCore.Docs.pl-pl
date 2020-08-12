@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/middleware/index
-ms.openlocfilehash: 560f25c9acabe2860bcaaddcdb42e2b15842a29d
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: a9f158bf875da75afbccc1a6d226bc842fa1c62c
+ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88017080"
+ms.lasthandoff: 08/12/2020
+ms.locfileid: "88130512"
 ---
 # <a name="aspnet-core-middleware"></a>ASP.NET Core oprogramowanie pośredniczące
 
@@ -95,7 +95,7 @@ Poniższa `Startup.Configure` Metoda dodaje składniki pośredniczące związane
 Powyższy kod ma następujące działanie:
 
 * Oprogramowanie pośredniczące, które nie jest dodawane podczas tworzenia nowej aplikacji sieci Web z [kontami poszczególnych użytkowników](xref:security/authentication/identity) , jest oznaczone jako komentarz.
-* Nie każde oprogramowanie pośredniczące musi przejść do tej dokładnej kolejności, ale wiele do. Przykład:
+* Nie każde oprogramowanie pośredniczące musi przejść do tej dokładnej kolejności, ale wiele do. Na przykład:
   * `UseCors`, `UseAuthentication` i `UseAuthorization` muszą przejść w podanej kolejności.
   * `UseCors`obecnie musi przejść `UseResponseCaching` do [tego błędu](https://github.com/dotnet/aspnetcore/issues/23218).
 
@@ -276,6 +276,7 @@ ASP.NET Core dostarcza z następującymi składnikami oprogramowania pośrednicz
 
 ## <a name="additional-resources"></a>Zasoby dodatkowe
 
+* [Opcje okresu istnienia i rejestracji](xref:fundamentals/dependency-injection#lifetime-and-registration-options) zawierają pełny przykład oprogramowania pośredniczącego z usługami *objętymi zakresem*, *przejściowymi*i *pojedynczymi* okresami istnienia.
 * <xref:fundamentals/middleware/write>
 * <xref:test/middleware>
 * <xref:migration/http-modules>

@@ -3,7 +3,7 @@ title: Monitorowanie i debugowanie — DevOps z użyciem ASP.NET Core i platform
 author: CamSoper
 description: Monitorowanie i debugowanie kodu w ramach rozwiązania DevOps z użyciem ASP.NET Core i platformy Azure
 ms.author: casoper
-ms.custom: mvc, seodec18
+ms.custom: devx-track-csharp, mvc, seodec18
 ms.date: 07/10/2019
 no-loc:
 - cookie
@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: azure/devops/monitor
-ms.openlocfilehash: 9e8b48df5a3ecf78e315c7f33b5ab75d6f329cc2
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 98d7c820b20f4f4c6b57f283ef718ce056dcdcae
+ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88012777"
+ms.lasthandoff: 08/12/2020
+ms.locfileid: "88130499"
 ---
 # <a name="monitor-and-debug"></a>Monitorowanie i debugowanie
 
@@ -79,7 +79,7 @@ App Service aplikacje sieci Web są łatwo monitorowane w czasie rzeczywistym. A
     ![Konfiguracja Application Insights](./media/monitoring/new-app-insights.png)
 
 1. Dla **środowiska uruchomieniowego/platformy**wybierz pozycję **ASP.NET Core**. Zaakceptuj ustawienia domyślne.
-1. Wybierz przycisk **OK**. Jeśli zostanie wyświetlony monit o potwierdzenie, wybierz pozycję **Kontynuuj**.
+1. Wybierz pozycję **OK**. Jeśli zostanie wyświetlony monit o potwierdzenie, wybierz pozycję **Kontynuuj**.
 1. Po utworzeniu zasobu kliknij nazwę Application Insights zasobu, aby przejść bezpośrednio do strony Application Insights.
 
     ![Nowy zasób Application Insights jest gotowy](./media/monitoring/new-app-insights-done.png)

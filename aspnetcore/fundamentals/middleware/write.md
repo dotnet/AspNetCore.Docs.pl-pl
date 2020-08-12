@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/middleware/write
-ms.openlocfilehash: dd6a26d07e20f9795bbe3fbe6da59027e757782e
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 480120718959a364ce8008949c3b76c558c0e995
+ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88016921"
+ms.lasthandoff: 08/12/2020
+ms.locfileid: "88130590"
 ---
 # <a name="write-custom-aspnet-core-middleware"></a>Napisz niestandardowe oprogramowanie pośredniczące ASP.NET Core
 
@@ -85,6 +85,8 @@ public class CustomMiddleware
 }
 ```
 
+[Opcje okresu istnienia i rejestracji](xref:fundamentals/dependency-injection#lifetime-and-registration-options) zawierają pełny przykład oprogramowania pośredniczącego z usługami o okresie istnienia w *zakresie* .
+
 ## <a name="middleware-extension-method"></a>Metoda rozszerzenia oprogramowania pośredniczącego
 
 Następujące metody rozszerzające udostępniają oprogramowanie pośredniczące <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder> :
@@ -95,8 +97,9 @@ Poniższy kod wywołuje oprogramowanie pośredniczące z `Startup.Configure` :
 
 [!code-csharp[](write/snapshot/Startup.cs?highlight=5)]
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
+* [Opcje okresu istnienia i rejestracji](xref:fundamentals/dependency-injection#lifetime-and-registration-options) zawierają pełny przykład oprogramowania pośredniczącego z usługami *objętymi zakresem*, *przejściowymi*i *pojedynczymi* okresami istnienia.
 * <xref:fundamentals/middleware/index>
 * <xref:test/middleware>
 * <xref:migration/http-modules>

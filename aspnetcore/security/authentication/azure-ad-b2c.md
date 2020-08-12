@@ -3,7 +3,7 @@ title: Uwierzytelnianie w chmurze za pomocą Azure Active Directory B2C w ASP.NE
 author: camsoper
 description: Dowiedz się, jak skonfigurować uwierzytelnianie Azure Active Directory B2C przy użyciu ASP.NET Core.
 ms.author: casoper
-ms.custom: mvc
+ms.custom: devx-track-csharp, mvc
 ms.date: 01/21/2019
 no-loc:
 - cookie
@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/azure-ad-b2c
-ms.openlocfilehash: 78fe4d5dd9e3f64789956e58a4490bef6bdbca1e
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: ccd3868c4b3294098e692f7a20e06d59ba482e7c
+ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021708"
+ms.lasthandoff: 08/12/2020
+ms.locfileid: "88130525"
 ---
 # <a name="cloud-authentication-with-azure-active-directory-b2c-in-aspnet-core"></a>Uwierzytelnianie w chmurze za pomocą Azure Active Directory B2C w ASP.NET Core
 
@@ -60,8 +60,8 @@ Użyj następujących wartości:
 | Ustawienie                       | Wartość                     | Uwagi                                                                                                                                                                                              |
 |-------------------------------|---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Nazwa**                      | *&lt;Nazwa aplikacji&gt;*        | Wprowadź **nazwę** aplikacji opisującą aplikację dla użytkowników.                                                                                                                                 |
-| **Uwzględnij aplikację internetową/internetowy interfejs API** | Yes                       |                                                                                                                                                                                                    |
-| **Zezwalaj na niejawny przepływ**       | Yes                       |                                                                                                                                                                                                    |
+| **Uwzględnij aplikację internetową/internetowy interfejs API** | Tak                       |                                                                                                                                                                                                    |
+| **Zezwalaj na niejawny przepływ**       | Tak                       |                                                                                                                                                                                                    |
 | **Adres URL odpowiedzi**                 | `https://localhost:44300/signin-oidc` | Adresy URL odpowiedzi to punkty końcowe, do których usługa Azure AD B2C zwraca wszelkie tokeny żądane przez aplikację. Program Visual Studio udostępnia adres URL odpowiedzi, który ma być używany. Na razie wprowadź, `https://localhost:44300/signin-oidc` Aby zakończyć formularz. |
 | **Identyfikator URI identyfikatora aplikacji**                | Pozostaw puste.               | Nie jest to wymagane w tym samouczku.                                                                                                                                                                    |
 | **Dołącz klienta natywnego**     | Nie                        |                                                                                                                                                                                                    |

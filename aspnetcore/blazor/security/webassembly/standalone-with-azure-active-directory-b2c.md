@@ -17,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/standalone-with-azure-active-directory-b2c
-ms.openlocfilehash: ce09acc5d123db90e48e95df01770b64f85a848d
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 300da88bfba5baaeee646111bf3fe50caad5d60e
+ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88013752"
+ms.lasthandoff: 08/12/2020
+ms.locfileid: "88130369"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-standalone-app-with-azure-active-directory-b2c"></a>Zabezpieczanie ASP.NET Core Blazor WebAssembly aplikacji autonomicznej za pomocą Azure Active Directory B2C
 
 Autorzy [Javier Calvarro Nelson](https://github.com/javiercn) i [Luke Latham](https://github.com/guardrex)
 
-Aby utworzyć Blazor WebAssembly autonomiczną aplikację korzystającą z [Azure Active Directory (AAD) B2C](/azure/active-directory-b2c/overview) do uwierzytelniania:
+Aby utworzyć [autonomiczną Blazor WebAssembly aplikację](xref:blazor/hosting-models#blazor-webassembly) korzystającą z [Azure Active Directory (AAD) B2C](/azure/active-directory-b2c/overview) do uwierzytelniania:
 
 Postępuj zgodnie ze wskazówkami w poniższych tematach, aby utworzyć dzierżawę i zarejestrować aplikację sieci Web w witrynie Azure Portal:
 

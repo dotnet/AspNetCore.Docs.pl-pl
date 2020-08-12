@@ -3,7 +3,7 @@ title: Następne kroki — DevOps z ASP.NET Core i platformą Azure
 author: CamSoper
 description: Dodatkowe ścieżki szkoleniowe dla DevOps z ASP.NET Core i platformą Azure.
 ms.author: casoper
-ms.custom: mvc, seodec18
+ms.custom: devx-track-csharp, mvc, seodec18
 ms.date: 10/24/2018
 no-loc:
 - cookie
@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: azure/devops/next-steps
-ms.openlocfilehash: feff73b307791c0a7ad8968b5145c0388df1ca10
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: a9a6b0a588b7813f9d6e2b215630a1b9100be890
+ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88012592"
+ms.lasthandoff: 08/12/2020
+ms.locfileid: "88130434"
 ---
 # <a name="next-steps"></a>Następne kroki
 
@@ -43,7 +43,7 @@ Poza hostingiem sieci Web i DevOps platforma Azure oferuje szeroką gamę usług
 
 [Azure Active Directory](/azure/active-directory/) i [Azure Active Directory B2C](/azure/active-directory-b2c/) są usługami tożsamości. Azure Active Directory jest zaprojektowana dla scenariuszy korporacyjnych i umożliwia współpracę z usługą Azure AD B2B (Business-to-Business), natomiast Azure Active Directory B2C jest zamierzonymi scenariuszami biznesowymi, w tym logowaniem do sieci społecznościowej.
 
-## <a name="mobile"></a>Aplikacje mobilne
+## <a name="mobile"></a>Komórkowy
 
 [Notification Hubs](/azure/notification-hubs/) to wieloplatformowy, Skalowalny aparat powiadomień wypychanych umożliwiający szybkie wysyłanie milionów komunikatów do aplikacji działających na różnych typach urządzeń.
 

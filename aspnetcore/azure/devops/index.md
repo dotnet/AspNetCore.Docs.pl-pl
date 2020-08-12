@@ -4,7 +4,7 @@ author: CamSoper
 description: Przewodnik, który oferuje kompleksowe wskazówki dotyczące tworzenia potoku DevOps dla aplikacji ASP.NET Core hostowanej na platformie Azure.
 ms.author: casoper
 ms.date: 08/07/2018
-ms.custom: mvc, seodec18
+ms.custom: devx-track-csharp, mvc, seodec18
 no-loc:
 - cookie
 - Cookie
@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: azure/devops/index
-ms.openlocfilehash: 10df1eab6de064b824ce067aff3ecc07e81c38fd
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: efabfd7fdcd695186207654887292c6b2104342d
+ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88012270"
+ms.lasthandoff: 08/12/2020
+ms.locfileid: "88130187"
 ---
 # <a name="devops-with-aspnet-core-and-azure"></a>Metodyka DevOps z platformami ASP.NET Core i Azure
 

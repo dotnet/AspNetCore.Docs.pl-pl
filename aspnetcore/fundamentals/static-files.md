@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/static-files
-ms.openlocfilehash: 32f794d498533e846343831d2360e98939105fb1
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: b1f84a936ee1327498abce660cd64f8d7d0a2864
+ms.sourcegitcommit: ec41ab354952b75557240923756a8c2ac79b49f8
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88016683"
+ms.lasthandoff: 08/13/2020
+ms.locfileid: "88202783"
 ---
 # <a name="static-files-in-aspnet-core"></a>Pliki statyczne w ASP.NET Core
 
@@ -117,8 +117,8 @@ Przeglądanie katalogów jest domyślnie wyłączone ze względów bezpieczeńst
 
 Włącz przeglądanie katalogów za pomocą:
 
-* <xref:Microsoft.Extensions.DependencyInjection.DirectoryBrowserServiceExtensions.AddDirectoryBrowser%2A>w programie `Startup.ConfigureServices` .
-* <xref:Microsoft.AspNetCore.Builder.DirectoryBrowserExtensions.UseDirectoryBrowser%2A>w programie `Startup.Configure` .
+* <xref:Microsoft.Extensions.DependencyInjection.DirectoryBrowserServiceExtensions.AddDirectoryBrowser%2A> w programie `Startup.ConfigureServices` .
+* <xref:Microsoft.AspNetCore.Builder.DirectoryBrowserExtensions.UseDirectoryBrowser%2A> w programie `Startup.Configure` .
 
 [!code-csharp[](~/fundamentals/static-files/samples/3.x/StaticFilesSample/StartupBrowse.cs?name=snippet_ClassMembers&highlight=4,21-35)]
 
@@ -132,7 +132,7 @@ Ustawienie strony domyślnej umożliwia odwiedzającym punkt startowy w witrynie
 
 [!code-csharp[](~/fundamentals/static-files/samples/3.x/StaticFilesSample/StartupEmpty.cs?name=snippet_Configure&highlight=15)]
 
-`UseDefaultFiles`musi być wywoływana przed zapisaniem `UseStaticFiles` pliku domyślnego. `UseDefaultFiles`to adres URL służący do ponownego zapisu, który nie obsługuje tego pliku.
+`UseDefaultFiles` musi być wywoływana przed zapisaniem `UseStaticFiles` pliku domyślnego. `UseDefaultFiles` to adres URL służący do ponownego zapisu, który nie obsługuje tego pliku.
 
 W programie `UseDefaultFiles` żądania do folderu w usłudze `wwwroot` Search dla:
 
@@ -153,7 +153,7 @@ Poniższy kod ilustruje `Startup.Configure` poprzedni kod:
 
 ### <a name="usefileserver-for-default-documents"></a>UseFileServer dla dokumentów domyślnych
 
-<xref:Microsoft.AspNetCore.Builder.FileServerExtensions.UseFileServer*>łączy funkcje `UseStaticFiles` , `UseDefaultFiles` i opcjonalnie `UseDirectoryBrowser` .
+<xref:Microsoft.AspNetCore.Builder.FileServerExtensions.UseFileServer*> łączy funkcje `UseStaticFiles` , `UseDefaultFiles` i opcjonalnie `UseDirectoryBrowser` .
 
 Wywołaj, `app.UseFileServer` Aby włączyć obsługę plików statycznych i pliku domyślnego. Przeglądanie katalogów nie jest włączone. Poniższy kod ilustruje `Startup.Configure` `UseFileServer` :
 
@@ -184,11 +184,11 @@ Poniższy kod umożliwia obsługę plików statycznych, plików domyślnych i pr
 
 [!code-csharp[](~/fundamentals/static-files/samples/3.x/StaticFilesSample/StartupFileServer.cs?name=snippet_ClassMembers&highlight=4,21-31)]
 
-<xref:Microsoft.Extensions.DependencyInjection.DirectoryBrowserServiceExtensions.AddDirectoryBrowser%2A>musi być wywoływana, gdy `EnableDirectoryBrowsing` wartość właściwości to `true` .
+<xref:Microsoft.Extensions.DependencyInjection.DirectoryBrowserServiceExtensions.AddDirectoryBrowser%2A> musi być wywoływana, gdy `EnableDirectoryBrowsing` wartość właściwości to `true` .
 
 Przy użyciu hierarchii plików i poprzedniego kodu adresy URL są rozpoznawane w następujący sposób:
 
-| URI            |      Odpowiedź  |
+| URI            |      Reakcja  |
 | ------- | ------|
 | `https://<hostname>/StaticFiles/images/MyImage.jpg` | *MyStaticFiles/obrazy/MyImage.jpg* |
 | `https://<hostname>/StaticFiles` | *MyStaticFiles/default.html* |
@@ -197,7 +197,7 @@ Jeśli plik o nazwie Default nie istnieje w katalogu *MyStaticFiles* , `https://
 
 ![Lista plików statycznych](static-files/_static/db2.png)
 
-<xref:Microsoft.AspNetCore.Builder.DefaultFilesExtensions.UseDefaultFiles*>i <xref:Microsoft.AspNetCore.Builder.DirectoryBrowserExtensions.UseDirectoryBrowser*> wykonać przekierowanie po stronie klienta z docelowego identyfikatora URI bez końcowej `/` do docelowego identyfikatora URI kończącego się na końcu `/` . Na przykład z `https://<hostname>/StaticFiles` do `https://<hostname>/StaticFiles/` . Względne adresy URL w katalogu *StaticFiles* są nieprawidłowe bez końcowego ukośnika ( `/` ).
+<xref:Microsoft.AspNetCore.Builder.DefaultFilesExtensions.UseDefaultFiles*> i <xref:Microsoft.AspNetCore.Builder.DirectoryBrowserExtensions.UseDirectoryBrowser*> wykonać przekierowanie po stronie klienta z docelowego identyfikatora URI bez końcowej `/`  do docelowego identyfikatora URI kończącego się na końcu `/` . Na przykład z `https://<hostname>/StaticFiles` do `https://<hostname>/StaticFiles/` . Względne adresy URL w katalogu *StaticFiles* są nieprawidłowe bez końcowego ukośnika ( `/` ).
 
 ## <a name="fileextensioncontenttypeprovider"></a>FileExtensionContentTypeProvider
 
@@ -230,14 +230,14 @@ W powyższym kodzie żądanie dotyczące pliku z nieznanym typem zawartości jes
 
 ## <a name="serve-files-from-multiple-locations"></a>Obsługiwanie plików z wielu lokalizacji
 
-`UseStaticFiles`i `UseFileServer` domyślny dla dostawcy plików wskazywanego przez `wwwroot` . Dodatkowe wystąpienia `UseStaticFiles` i `UseFileServer` mogą być dostarczone z innymi dostawcami plików w celu obsłużenia plików z innych lokalizacji. Aby uzyskać więcej informacji, zobacz [ten problem](https://github.com/dotnet/AspNetCore.Docs/issues/15578)w serwisie GitHub.
+`UseStaticFiles` i `UseFileServer` domyślny dla dostawcy plików wskazywanego przez `wwwroot` . Dodatkowe wystąpienia `UseStaticFiles` i `UseFileServer` mogą być dostarczone z innymi dostawcami plików w celu obsłużenia plików z innych lokalizacji. Aby uzyskać więcej informacji, zobacz [ten problem](https://github.com/dotnet/AspNetCore.Docs/issues/15578)w serwisie GitHub.
 
 <a name="sc"></a>
 
 ### <a name="security-considerations-for-static-files"></a>Zagadnienia dotyczące zabezpieczeń plików statycznych
 
 > [!WARNING]
-> `UseDirectoryBrowser`i `UseStaticFiles` mogą wyciekać klucze tajne. Wyłączenie przeglądania katalogów w środowisku produkcyjnym jest zdecydowanie zalecane. Uważnie Przejrzyj katalogi, które są włączone za pośrednictwem `UseStaticFiles` lub `UseDirectoryBrowser` . Cały katalog i jego katalogi podrzędne stają się publicznie dostępne. Pliki magazynu odpowiednie do obsłużenia publicznie w dedykowanym katalogu, na przykład `<content_root>/wwwroot` . Oddziel te pliki od widoków MVC, Razor stron, plików konfiguracji itp.
+> `UseDirectoryBrowser` i `UseStaticFiles` mogą wyciekać klucze tajne. Wyłączenie przeglądania katalogów w środowisku produkcyjnym jest zdecydowanie zalecane. Uważnie Przejrzyj katalogi, które są włączone za pośrednictwem `UseStaticFiles` lub `UseDirectoryBrowser` . Cały katalog i jego katalogi podrzędne stają się publicznie dostępne. Pliki magazynu odpowiednie do obsłużenia publicznie w dedykowanym katalogu, na przykład `<content_root>/wwwroot` . Oddziel te pliki od widoków MVC, Razor stron, plików konfiguracji itp.
 
 * Adresy URL dla zawartości uwidocznionej `UseDirectoryBrowser` i `UseStaticFiles` podlegają ograniczeniom dotyczącym wielkości liter i znaków w źródłowym systemie plików. Na przykład w systemie Windows nie jest rozróżniana wielkość liter, ale macOS i Linux nie są.
 
@@ -374,7 +374,7 @@ Ustawienie domyślnej strony głównej zapewnia odwiedzającym logiczny punkt wy
 [!code-csharp[](static-files/samples/1.x/StaticFilesSample/StartupEmpty.cs?name=snippet_ConfigureMethod&highlight=3)]
 
 > [!IMPORTANT]
-> `UseDefaultFiles`musi być wywoływana przed zapisaniem `UseStaticFiles` pliku domyślnego. `UseDefaultFiles`to adres URL, który faktycznie nie obsługuje pliku. Włącz oprogramowanie pośredniczące plików statycznych za pośrednictwem programu `UseStaticFiles` w celu obsługi pliku.
+> `UseDefaultFiles` musi być wywoływana przed zapisaniem `UseStaticFiles` pliku domyślnego. `UseDefaultFiles` to adres URL, który faktycznie nie obsługuje pliku. Włącz oprogramowanie pośredniczące plików statycznych za pośrednictwem programu `UseStaticFiles` w celu obsługi pliku.
 
 W programie `UseDefaultFiles` żądania do folderu wyszukują:
 
@@ -391,7 +391,7 @@ Następujący kod zmienia domyślną nazwę pliku na *mydefault.html*:
 
 ## <a name="usefileserver"></a>UseFileServer
 
-<xref:Microsoft.AspNetCore.Builder.FileServerExtensions.UseFileServer*>łączy funkcje `UseStaticFiles` , `UseDefaultFiles` i opcjonalnie `UseDirectoryBrowser` .
+<xref:Microsoft.AspNetCore.Builder.FileServerExtensions.UseFileServer*> łączy funkcje `UseStaticFiles` , `UseDefaultFiles` i opcjonalnie `UseDirectoryBrowser` .
 
 Poniższy kod umożliwia obsługę plików statycznych i pliku domyślnego. Przeglądanie katalogów nie jest włączone.
 
@@ -420,13 +420,13 @@ Poniższy kod umożliwia włączenie plików statycznych, plików domyślnych i 
 
 [!code-csharp[](static-files/samples/1.x/StaticFilesSample/StartupUseFileServer.cs?name=snippet_ConfigureMethod&highlight=5-11)]
 
-`AddDirectoryBrowser`musi być wywoływana, gdy `EnableDirectoryBrowsing` wartość właściwości to `true` :
+`AddDirectoryBrowser` musi być wywoływana, gdy `EnableDirectoryBrowsing` wartość właściwości to `true` :
 
 [!code-csharp[](static-files/samples/1.x/StaticFilesSample/StartupUseFileServer.cs?name=snippet_ConfigureServicesMethod)]
 
 Przy użyciu hierarchii plików i poprzedniego kodu adresy URL są rozpoznawane w następujący sposób:
 
-| URI            |                             Odpowiedź  |
+| URI            |                             Reakcja  |
 | ------- | ------|
 | *http:// \<server_address> /StaticFiles/images/banner1.SVG*    |      MyStaticFiles/images/banner1. SVG |
 | *http:// \<server_address> /StaticFiles*             |     MyStaticFiles/default.html |
@@ -436,7 +436,7 @@ Jeśli plik o nazwie Default nie istnieje w katalogu *MyStaticFiles* , *http:// 
 ![Lista plików statycznych](static-files/_static/db2.png)
 
 > [!NOTE]
-> <xref:Microsoft.AspNetCore.Builder.DefaultFilesExtensions.UseDefaultFiles*>i <xref:Microsoft.AspNetCore.Builder.DirectoryBrowserExtensions.UseDirectoryBrowser*> przekierować po stronie klienta z `http://{SERVER ADDRESS}/StaticFiles` (bez końcowego ukośnika) do `http://{SERVER ADDRESS}/StaticFiles/` (z końcowym ukośnikiem). Względne adresy URL w katalogu *StaticFiles* są nieprawidłowe bez końcowej kreski ułamkowej.
+> <xref:Microsoft.AspNetCore.Builder.DefaultFilesExtensions.UseDefaultFiles*> i <xref:Microsoft.AspNetCore.Builder.DirectoryBrowserExtensions.UseDirectoryBrowser*> przekierować po stronie klienta z `http://{SERVER ADDRESS}/StaticFiles` (bez końcowego ukośnika) do `http://{SERVER ADDRESS}/StaticFiles/` (z końcowym ukośnikiem). Względne adresy URL w katalogu *StaticFiles* są nieprawidłowe bez końcowej kreski ułamkowej.
 
 ## <a name="fileextensioncontenttypeprovider"></a>FileExtensionContentTypeProvider
 
@@ -445,6 +445,8 @@ Jeśli plik o nazwie Default nie istnieje w katalogu *MyStaticFiles* , *http:// 
 [!code-csharp[](static-files/samples/1.x/StaticFilesSample/StartupFileExtensionContentTypeProvider.cs?name=snippet_ConfigureMethod&highlight=3-12,19)]
 
 Zobacz [typy zawartości MIME](https://www.iana.org/assignments/media-types/media-types.xhtml).
+
+Aby uzyskać informacje na temat używania niestandardowego <xref:Microsoft.AspNetCore.StaticFiles.FileExtensionContentTypeProvider> lub do konfigurowania <xref:Microsoft.AspNetCore.Builder.StaticFileOptions> innych Blazor aplikacji serwerowych, zobacz <xref:blazor/fundamentals/additional-scenarios#static-files> .
 
 ## <a name="non-standard-content-types"></a>Niestandardowe typy zawartości
 
@@ -461,12 +463,12 @@ W powyższym kodzie żądanie dotyczące pliku z nieznanym typem zawartości jes
 
 ## <a name="serve-files-from-multiple-locations"></a>Obsługiwanie plików z wielu lokalizacji
 
-`UseStaticFiles`i `UseFileServer` domyślnym dostawcą plików wskazywanym w lokalizacji *wwwroot*. Można podać dodatkowe wystąpienia `UseStaticFiles` i `UseFileServer` z innymi dostawcami plików do obsługi plików z innych lokalizacji. Aby uzyskać więcej informacji, zobacz [ten problem](https://github.com/dotnet/AspNetCore.Docs/issues/15578)w serwisie GitHub.
+`UseStaticFiles` i `UseFileServer` domyślnym dostawcą plików wskazywanym w lokalizacji *wwwroot*. Można podać dodatkowe wystąpienia `UseStaticFiles` i `UseFileServer` z innymi dostawcami plików do obsługi plików z innych lokalizacji. Aby uzyskać więcej informacji, zobacz [ten problem](https://github.com/dotnet/AspNetCore.Docs/issues/15578)w serwisie GitHub.
 
 ### <a name="considerations"></a>Zagadnienia do rozważenia
 
 > [!WARNING]
-> `UseDirectoryBrowser`i `UseStaticFiles` mogą wyciekać klucze tajne. Wyłączenie przeglądania katalogów w środowisku produkcyjnym jest zdecydowanie zalecane. Uważnie Przejrzyj katalogi, które są włączone za pośrednictwem `UseStaticFiles` lub `UseDirectoryBrowser` . Cały katalog i jego katalogi podrzędne stają się publicznie dostępne. Pliki magazynu odpowiednie do obsłużenia publicznie w dedykowanym katalogu, takie jak * \<content_root> /wwwroot*. Oddziel te pliki od widoków MVC, Razor stron (tylko 2. x), plików konfiguracji itp.
+> `UseDirectoryBrowser` i `UseStaticFiles` mogą wyciekać klucze tajne. Wyłączenie przeglądania katalogów w środowisku produkcyjnym jest zdecydowanie zalecane. Uważnie Przejrzyj katalogi, które są włączone za pośrednictwem `UseStaticFiles` lub `UseDirectoryBrowser` . Cały katalog i jego katalogi podrzędne stają się publicznie dostępne. Pliki magazynu odpowiednie do obsłużenia publicznie w dedykowanym katalogu, takie jak * \<content_root> /wwwroot*. Oddziel te pliki od widoków MVC, Razor stron (tylko 2. x), plików konfiguracji itp.
 
 * Adresy URL dla zawartości uwidocznionej `UseDirectoryBrowser` i `UseStaticFiles` podlegają ograniczeniom dotyczącym wielkości liter i znaków w źródłowym systemie plików. Na przykład w systemie Windows nie jest rozróżniana wielkość liter &mdash; macOS i Linux.
 

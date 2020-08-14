@@ -1,11 +1,11 @@
 ---
-title: Wywoływanie metod .NET z funkcji języka JavaScript w ASP.NET CoreBlazor
+title: Wywoływanie metod .NET z funkcji języka JavaScript w ASP.NET Core Blazor
 author: guardrex
 description: Dowiedz się, jak wywoływać metody .NET z funkcji języka JavaScript w Blazor aplikacjach.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/07/2020
+ms.date: 08/12/2020
 no-loc:
 - cookie
 - Cookie
@@ -17,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-dotnet-from-javascript
-ms.openlocfilehash: 5a0731b45424ffd8560bb3b0d9123c686ae9e247
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 65a339bc7b246ab1825ad9bad5a2b5523259b488
+ms.sourcegitcommit: ec41ab354952b75557240923756a8c2ac79b49f8
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88012569"
+ms.lasthandoff: 08/13/2020
+ms.locfileid: "88202736"
 ---
-# <a name="call-net-methods-from-javascript-functions-in-aspnet-core-no-locblazor"></a>Wywoływanie metod .NET z funkcji języka JavaScript w ASP.NET CoreBlazor
+# <a name="call-net-methods-from-javascript-functions-in-aspnet-core-no-locblazor"></a>Wywoływanie metod .NET z funkcji języka JavaScript w ASP.NET Core Blazor
 
 [Javier Calvarro Nelson](https://github.com/javiercn), [Daniel Roth](https://github.com/danroth27), [Shashikant Rudrawadi](http://wisne.co)i [Luke](https://github.com/guardrex) Latham
 
@@ -129,7 +129,7 @@ Gdy **`Trigger .NET instance method HelloHelper.SayHello`** przycisk jest zaznac
 }
 ```
 
-`CallHelloHelperSayHello`wywołuje funkcję JavaScript `sayHello` z nowym wystąpieniem `HelloHelper` .
+`CallHelloHelperSayHello` wywołuje funkcję JavaScript `sayHello` z nowym wystąpieniem `HelloHelper` .
 
 `JsInteropClasses/ExampleJsInterop.cs`:
 
@@ -233,11 +233,16 @@ Aby wywołać metody .NET składnika:
 * Użyj `invokeMethod` funkcji or, `invokeMethodAsync` Aby wykonać wywołanie metody statycznej do składnika.
 * Metoda statyczna składnika zawija wywołanie do metody instancji jako wywołane <xref:System.Action> .
 
+> [!NOTE]
+> W przypadku Blazor Server aplikacji, w których kilku użytkowników może jednocześnie korzystać z tego samego składnika, użyj klasy pomocnika, aby wywołać metody instancji.
+>
+> Aby uzyskać więcej informacji, zobacz sekcję [Klasa pomocnika metody wystąpienia składnika](#component-instance-method-helper-class) .
+
 W języku JavaScript po stronie klienta:
 
 ```javascript
 function updateMessageCallerJS() {
-  DotNet.invokeMethod('{APP ASSEMBLY}', 'UpdateMessageCaller');
+  DotNet.invokeMethodAsync('{APP ASSEMBLY}', 'UpdateMessageCaller');
 }
 ```
 
@@ -279,7 +284,70 @@ Symbol zastępczy `{APP ASSEMBLY}` to nazwa zestawu aplikacji aplikacji (na przy
 }
 ```
 
-Jeśli istnieje kilka składników, z których każda wywołuje metody wystąpienia, użyj klasy pomocnika, aby wywołać metody wystąpienia (jako <xref:System.Action> s) każdego składnika.
+Aby przekazać argumenty do metody wystąpienia:
+
+* Dodaj parametry do wywołania metody JS. W poniższym przykładzie nazwa jest przenoszona do metody. W razie potrzeby można dodać do listy dodatkowe parametry.
+
+  ```javascript
+  function updateMessageCallerJS(name) {
+    DotNet.invokeMethodAsync('{APP ASSEMBLY}', 'UpdateMessageCaller', name);
+  }
+  ```
+  
+  Symbol zastępczy `{APP ASSEMBLY}` to nazwa zestawu aplikacji aplikacji (na przykład `BlazorSample` ).
+
+* Podaj prawidłowe typy <xref:System.Action> dla parametrów. Podaj listę parametrów w metodach języka C#. Wywołaj <xref:System.Action> ( `UpdateMessage` ) z parametrami ( `action.Invoke(name)` ).
+
+  `Pages/JSInteropComponent.razor`:
+
+  ```razor
+  @page "/JSInteropComponent"
+
+  <p>
+      Message: @message
+  </p>
+
+  <p>
+      <button onclick="updateMessageCallerJS('Sarah Jane')">
+          Call JS Method
+      </button>
+  </p>
+
+  @code {
+      private static Action<string> action;
+      private string message = "Select the button.";
+
+      protected override void OnInitialized()
+      {
+          action = UpdateMessage;
+      }
+
+      private void UpdateMessage(string name)
+      {
+          message = $"{name}, UpdateMessage Called!";
+          StateHasChanged();
+      }
+
+      [JSInvokable]
+      public static void UpdateMessageCaller(string name)
+      {
+          action.Invoke(name);
+      }
+  }
+  ```
+
+  Wyjście `message` , gdy zostanie wybrany przycisk **metody wywołania js** :
+
+  ```
+  Sarah Jane, UpdateMessage Called!
+  ```
+
+## <a name="component-instance-method-helper-class"></a>Klasa pomocnika metody wystąpienia składnika
+
+Klasa pomocnika służy do wywoływania metody wystąpienia jako <xref:System.Action> . Klasy pomocnika są przydatne w przypadku:
+
+* Niektóre składniki tego samego typu są renderowane na tej samej stronie.
+* Blazor ServerUżywana jest aplikacja, w której wielu użytkowników może używać składnika współbieżnie.
 
 W poniższym przykładzie:
 
@@ -388,5 +456,5 @@ Aby uzyskać więcej informacji, zobacz następujące problemy:
 ## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:blazor/call-javascript-from-dotnet>
-* [`InteropComponent.razor`przykład (repozytorium dotnet/AspNetCore w witrynie GitHub, 3,1 gałęzi wydania)](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)
+* [`InteropComponent.razor` przykład (repozytorium dotnet/AspNetCore w witrynie GitHub, 3,1 gałęzi wydania)](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)
 * [Wykonywanie dużych transferów danych w Blazor Server aplikacjach](xref:blazor/advanced-scenarios#perform-large-data-transfers-in-blazor-server-apps)

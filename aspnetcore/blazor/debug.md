@@ -1,5 +1,5 @@
 ---
-title: Debuguj ASP.NET CoreBlazor WebAssembly
+title: Debuguj ASP.NET Core Blazor WebAssembly
 author: guardrex
 description: Dowiedz się, jak debugować Blazor aplikacje.
 monikerRange: '>= aspnetcore-3.1'
@@ -17,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: 225916411550cc8e89c604e1426316843bb0ff52
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 838ed1a10ab3312e449782a29c305a976265550c
+ms.sourcegitcommit: 503b348e9046fcd969de85898394a1ea8274ec38
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014545"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88227595"
 ---
-# <a name="debug-aspnet-core-no-locblazor-webassembly"></a>Debuguj ASP.NET CoreBlazor WebAssembly
+# <a name="debug-aspnet-core-no-locblazor-webassembly"></a>Debuguj ASP.NET Core Blazor WebAssembly
 
 [Daniel Roth](https://github.com/danroth27)
 
-Blazor WebAssemblyaplikacje mogą być debugowane przy użyciu narzędzi deweloperskich przeglądarki w przeglądarkach opartych na chromie (Edge/Chrome). Alternatywnie możesz debugować aplikację przy użyciu programu Visual Studio lub Visual Studio Code.
+Blazor WebAssembly aplikacje mogą być debugowane przy użyciu narzędzi deweloperskich przeglądarki w przeglądarkach opartych na chromie (Edge/Chrome). Alternatywnie możesz debugować aplikację przy użyciu programu Visual Studio lub Visual Studio Code.
 
 Dostępne scenariusze obejmują:
 
@@ -80,7 +80,7 @@ Aby debugować Blazor WebAssembly aplikację w programie Visual Studio:
 1. Naciśnij klawisz <kbd>F5</kbd> , aby uruchomić aplikację w debugerze.
 
    > [!NOTE]
-   > **Uruchamianie bez debugowania** (<kbd>Ctrl</kbd> + <kbd>F5</kbd>) nie jest obsługiwane.
+   > **Uruchamianie bez debugowania** (<kbd>Ctrl</kbd> + <kbd>F5</kbd>) nie jest obsługiwane. Gdy aplikacja jest uruchamiana w konfiguracji debugowania, obciążenie związane z debugowaniem zawsze skutkuje niewielkim obniżeniem wydajności.
 
 1. Ustaw punkt przerwania w `Pages/Counter.razor` `IncrementCount` metodzie.
 1. Przejdź do **`Counter`** karty i wybierz przycisk, aby trafić w punkt przerwania:
@@ -111,7 +111,7 @@ Podczas debugowania Blazor WebAssembly aplikacji można także debugować kod se
 
 ## <a name="visual-studio-code"></a>Visual Studio Code
 
-### <a name="debug-standalone-no-locblazor-webassembly"></a>Debuguj autonomiczneBlazor WebAssembly
+### <a name="debug-standalone-no-locblazor-webassembly"></a>Debuguj autonomiczne Blazor WebAssembly
 
 1. Otwórz aplikację autonomiczną Blazor WebAssembly w vs Code.
 
@@ -128,7 +128,7 @@ Podczas debugowania Blazor WebAssembly aplikacji można także debugować kod se
 1. Rozpocznij debugowanie przy użyciu skrótu klawiaturowego <kbd>F5</kbd> lub elementu menu.
 
    > [!NOTE]
-   > **Uruchamianie bez debugowania** (<kbd>Ctrl</kbd> + <kbd>F5</kbd>) nie jest obsługiwane.
+   > **Uruchamianie bez debugowania** (<kbd>Ctrl</kbd> + <kbd>F5</kbd>) nie jest obsługiwane. Gdy aplikacja jest uruchamiana w konfiguracji debugowania, obciążenie związane z debugowaniem zawsze skutkuje niewielkim obniżeniem wydajności.
 
 1. Po wyświetleniu monitu wybierz opcję ** Blazor WebAssembly Debuguj** , aby rozpocząć debugowanie.
 
@@ -140,7 +140,7 @@ Podczas debugowania Blazor WebAssembly aplikacji można także debugować kod se
 
    ![Debuguj licznik w VS Code](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-debug-counter.png)
 
-### <a name="debug-hosted-no-locblazor-webassembly"></a>Debuguj hostowaneBlazor WebAssembly
+### <a name="debug-hosted-no-locblazor-webassembly"></a>Debuguj hostowane Blazor WebAssembly
 
 1. Otwórz Blazor WebAssembly folder rozwiązania aplikacji hostowanej w vs Code.
 
@@ -241,7 +241,7 @@ W poprzednim przykładzie `MyHostedApp.Server.dll` jest to zestaw aplikacji *ser
 
 1. W kodzie składnika ( `.razor` pliki) i pliki kodu C# ( `.cs` ) punkty przerwania, które można ustawić, są trafień, gdy zostanie wykonany kod. Po trafieniu punktu przerwania pojedynczy krok (<kbd>F10</kbd>) za pomocą kodu lub wznowienia kodu (<kbd>F8</kbd>) normalnie.
 
-Blazorudostępnia serwer proxy debugowania, który implementuje [Protokół Chrome devtools](https://chromedevtools.github.io/devtools-protocol/) i rozszerza protokół z. Informacje specyficzne dla sieci. Gdy skrót klawiaturowy debugowania zostanie nacionięty, Blazor wskazuje, że program Chrome devtools na serwerze proxy. Serwer proxy nawiązuje połączenie z oknem przeglądarki, które próbujesz debugować (w związku z tym trzeba włączyć debugowanie zdalne).
+Blazor udostępnia serwer proxy debugowania, który implementuje [Protokół Chrome devtools](https://chromedevtools.github.io/devtools-protocol/) i rozszerza protokół z. Informacje specyficzne dla sieci. Gdy skrót klawiaturowy debugowania zostanie nacionięty, Blazor wskazuje, że program Chrome devtools na serwerze proxy. Serwer proxy nawiązuje połączenie z oknem przeglądarki, które próbujesz debugować (w związku z tym trzeba włączyć debugowanie zdalne).
 
 ## <a name="browser-source-maps"></a>Mapy źródeł przeglądarki
 

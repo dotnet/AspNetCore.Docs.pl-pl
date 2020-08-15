@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/dependency-injection
-ms.openlocfilehash: 0d8b349d0381e2902907ea841e07bbc96db5b847
-ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
+ms.openlocfilehash: b0ba7c7598df13413c00934a30e03681129de98a
+ms.sourcegitcommit: 503b348e9046fcd969de85898394a1ea8274ec38
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/12/2020
-ms.locfileid: "88130668"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88227582"
 ---
 # <a name="dependency-injection-in-aspnet-core"></a>Dependency injection in ASP.NET Core (Wstrzykiwanie zależności na platformie ASP.NET Core)
 
@@ -111,9 +111,9 @@ Zaktualizowana `ConfigureServices` Metoda rejestruje nową `IMyDependency` imple
 
 [!code-csharp[](dependency-injection/samples/3.x/DependencyInjectionSample/StartupMyDependency2.cs?name=snippet1)]
 
-`MyDependency2`żąda <xref:Microsoft.Extensions.Logging.ILogger`1> w konstruktorze. Użycie iniekcji zależności w łańcuchu nie jest nietypowe. Każda żądana zależność z kolei żąda własnych zależności. Kontener rozwiązuje zależności w grafie i zwraca w pełni rozwiązane usługi. Zestaw zbiorczy zależności, które muszą zostać rozwiązane, jest zwykle nazywany *drzewem zależności*, *wykresem zależności*lub *wykresem obiektów*.
+`MyDependency2` żąda <xref:Microsoft.Extensions.Logging.ILogger`1> w konstruktorze. Użycie iniekcji zależności w łańcuchu nie jest nietypowe. Każda żądana zależność z kolei żąda własnych zależności. Kontener rozwiązuje zależności w grafie i zwraca w pełni rozwiązane usługi. Zestaw zbiorczy zależności, które muszą zostać rozwiązane, jest zwykle nazywany *drzewem zależności*, *wykresem zależności*lub *wykresem obiektów*.
 
-`ILogger<TCategoryName>`to [Usługa udostępniona przez platformę](#framework-provided-services).
+`ILogger<TCategoryName>` to [Usługa udostępniona przez platformę](#framework-provided-services).
 
 Kontener jest rozpoznawany `ILogger<TCategoryName>` przez wykorzystanie [(rodzajowe) otwartych typów](/dotnet/csharp/language-reference/language-specification/types#open-and-closed-types), eliminując konieczność zarejestrowania każdego [(rodzajowego) konstruowanego typu](/dotnet/csharp/language-reference/language-specification/types#constructed-types).
 
@@ -192,7 +192,7 @@ W przypadku aplikacji, które przetwarzają żądania, usługi o określonym zak
 Korzystanie z usług objętych zakresem w oprogramowaniu pośredniczącym z jedną z następujących metod:
 
 * Wsuń usługę do `Invoke` `InvokeAsync` metody lub. Wstrzyknięcie przez [iniekcję konstruktora](xref:mvc/controllers/dependency-injection#constructor-injection) zgłasza wyjątek w czasie wykonywania, ponieważ wymusza zachowanie usługi jako pojedynczej. Przykład w [opcjach okres istnienia i rejestracji](#lifetime-and-registration-options) używa `InvokeAsync` metody.
-* [Oprogramowanie pośredniczące oparte na fabryce](<xref:fundamentals/middleware/extensibility>). <xref:Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.UseMiddleware*>metody rozszerzające sprawdzają, czy typ zarejestrowanego oprogramowania pośredniczącego jest zaimplementowany <xref:Microsoft.AspNetCore.Http.IMiddleware> . W <xref:Microsoft.AspNetCore.Http.IMiddlewareFactory> takim przypadku wystąpienie zarejestrowane w kontenerze jest używane do rozpoznawania <xref:Microsoft.AspNetCore.Http.IMiddleware> implementacji zamiast korzystania z logiki aktywacji oprogramowania pośredniczącego opartego na Konwencji. Oprogramowanie pośredniczące jest rejestrowane jako usługa w zakresie lub przejściowym w kontenerze usługi aplikacji.
+* [Oprogramowanie pośredniczące oparte na fabryce](<xref:fundamentals/middleware/extensibility>). <xref:Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.UseMiddleware*> metody rozszerzające sprawdzają, czy typ zarejestrowanego oprogramowania pośredniczącego jest zaimplementowany <xref:Microsoft.AspNetCore.Http.IMiddleware> . W <xref:Microsoft.AspNetCore.Http.IMiddlewareFactory> takim przypadku wystąpienie zarejestrowane w kontenerze jest używane do rozpoznawania <xref:Microsoft.AspNetCore.Http.IMiddleware> implementacji zamiast korzystania z logiki aktywacji oprogramowania pośredniczącego opartego na Konwencji. Oprogramowanie pośredniczące jest rejestrowane jako usługa w zakresie lub przejściowym w kontenerze usługi aplikacji.
 
 Aby uzyskać więcej informacji, zobacz <xref:fundamentals/middleware/write#per-request-middleware-dependencies>.
 
@@ -234,7 +234,7 @@ Metody rozszerzenia rejestracji usług oferują przeciążenia, które są przyd
 
 Aby uzyskać więcej informacji na temat usuwania typów, zobacz sekcję [dotyczącą usuwania usług](#disposal-of-services) . Typowym scenariuszem dla wielu implementacji jest [imitacja typów do testowania](xref:test/integration-tests#inject-mock-services).
 
-`TryAdd{LIFETIME}`Metody rejestrują usługę, jeśli nie została jeszcze zarejestrowana implementacja.
+`TryAdd{LIFETIME}` Metody rejestrują usługę, jeśli nie została jeszcze zarejestrowana implementacja.
 
 W poniższym przykładzie pierwszy wiersz rejestruje `MyDependency` `IMyDependency` . Drugi wiersz nie ma wpływu, ponieważ `IMyDependency` ma już zarejestrowaną implementację:
 
@@ -268,7 +268,7 @@ services.TryAddEnumerable(ServiceDescriptor.Singleton<IMyDep1, MyDep>());
 
 Rejestracja usługi jest zazwyczaj kolejnością niezależną, z wyjątkiem rejestracji wielu implementacji tego samego typu.
 
-`IServiceCollection`jest kolekcją <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor> . Poniższy kod pokazuje, jak dodać usługę z konstruktorem:
+`IServiceCollection` jest kolekcją <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor> . Poniższy kod pokazuje, jak dodać usługę z konstruktorem:
 
 [!code-csharp[](dependency-injection/samples/3.x/DependencyInjectionSample/Startup5.cs?name=snippet)]
 
@@ -502,7 +502,7 @@ Wbudowany kontener usług został zaprojektowany z myślą o potrzebach platform
 * Iniekcja oparta na nazwie
 * Kontenery podrzędne
 * Niestandardowe zarządzanie okresem istnienia
-* `Func<T>`Obsługa inicjowania z opóźnieniem
+* `Func<T>` Obsługa inicjowania z opóźnieniem
 * Rejestracja oparta na Konwencji
 
 Za pomocą aplikacji ASP.NET Core można używać następujących kontenerów innych firm:
@@ -608,6 +608,7 @@ Zapoznaj się z https://github.com/OrchardCMS/OrchardCore.Samples przykładowymi
 * <xref:mvc/controllers/dependency-injection>
 * <xref:security/authorization/dependencyinjection>
 * <xref:blazor/fundamentals/dependency-injection>
+* [Wzorce konferencji NDC na potrzeby tworzenia aplikacji](https://www.youtube.com/watch?v=x-C-CNBVTaY)
 * <xref:fundamentals/startup>
 * <xref:fundamentals/middleware/extensibility>
 * [Cztery sposoby usuwania interfejsu IDisposable w ASP.NET Core](https://andrewlock.net/four-ways-to-dispose-idisposables-in-asp-net-core/)
@@ -684,9 +685,9 @@ Ten interfejs jest implementowany przez konkretny typ `MyDependency` :
 
 [!code-csharp[](dependency-injection/samples/2.x/DependencyInjectionSample/Services/MyDependency.cs?name=snippet1)]
 
-`MyDependency`żąda <xref:Microsoft.Extensions.Logging.ILogger`1> w konstruktorze. Użycie iniekcji zależności w łańcuchu nie jest nietypowe. Każda żądana zależność z kolei żąda własnych zależności. Kontener rozwiązuje zależności w grafie i zwraca w pełni rozwiązane usługi. Zestaw zbiorczy zależności, które muszą zostać rozwiązane, jest zwykle nazywany *drzewem zależności*, *wykresem zależności*lub *wykresem obiektów*.
+`MyDependency` żąda <xref:Microsoft.Extensions.Logging.ILogger`1> w konstruktorze. Użycie iniekcji zależności w łańcuchu nie jest nietypowe. Każda żądana zależność z kolei żąda własnych zależności. Kontener rozwiązuje zależności w grafie i zwraca w pełni rozwiązane usługi. Zestaw zbiorczy zależności, które muszą zostać rozwiązane, jest zwykle nazywany *drzewem zależności*, *wykresem zależności*lub *wykresem obiektów*.
 
-`IMyDependency`i `ILogger<TCategoryName>` musi być zarejestrowany w kontenerze usługi. `IMyDependency`jest zarejestrowany w `Startup.ConfigureServices` . `ILogger<TCategoryName>`jest zarejestrowany przez infrastrukturę abstrakcji rejestrowania, więc jest to [Usługa udostępniona przez platformę](#framework-provided-services) zarejestrowana domyślnie przez platformę.
+`IMyDependency` i `ILogger<TCategoryName>` musi być zarejestrowany w kontenerze usługi. `IMyDependency` jest zarejestrowany w `Startup.ConfigureServices` . `ILogger<TCategoryName>` jest zarejestrowany przez infrastrukturę abstrakcji rejestrowania, więc jest to [Usługa udostępniona przez platformę](#framework-provided-services) zarejestrowana domyślnie przez platformę.
 
 Kontener jest rozpoznawany `ILogger<TCategoryName>` przez wykorzystanie [(rodzajowe) otwartych typów](/dotnet/csharp/language-reference/language-specification/types#open-and-closed-types), eliminując konieczność zarejestrowania każdego [(rodzajowego) konstruowanego typu](/dotnet/csharp/language-reference/language-specification/types#constructed-types):
 
@@ -827,7 +828,7 @@ Metody rozszerzenia rejestracji usług oferują przeciążenia, które są przyd
 
 Aby uzyskać więcej informacji na temat usuwania typów, zobacz sekcję [dotyczącą usuwania usług](#disposal-of-services) . Typowym scenariuszem dla wielu implementacji jest [imitacja typów do testowania](xref:test/integration-tests#inject-mock-services).
 
-`TryAdd{LIFETIME}`Metody rejestrują usługę tylko wtedy, gdy nie zarejestrowano jeszcze implementacji.
+`TryAdd{LIFETIME}` Metody rejestrują usługę tylko wtedy, gdy nie zarejestrowano jeszcze implementacji.
 
 W poniższym przykładzie pierwszy wiersz rejestruje `MyDependency` `IMyDependency` . Drugi wiersz nie ma wpływu, ponieważ `IMyDependency` ma już zarejestrowaną implementację:
 
@@ -865,7 +866,7 @@ services.TryAddEnumerable(ServiceDescriptor.Singleton<IMyDep1, MyDep>());
 Usługi mogą być rozwiązywane przez dwa mechanizmy:
 
 * <xref:System.IServiceProvider>
-* <xref:Microsoft.Extensions.DependencyInjection.ActivatorUtilities>: Zezwala na tworzenie obiektów bez rejestracji usługi w kontenerze iniekcji zależności. `ActivatorUtilities`jest używany z abstrakcjami dostępnymi dla użytkowników, takimi jak pomocnicy tagów, kontrolery MVC i powiązania modelu.
+* <xref:Microsoft.Extensions.DependencyInjection.ActivatorUtilities>: Zezwala na tworzenie obiektów bez rejestracji usługi w kontenerze iniekcji zależności. `ActivatorUtilities` jest używany z abstrakcjami dostępnymi dla użytkowników, takimi jak pomocnicy tagów, kontrolery MVC i powiązania modelu.
 
 Konstruktory mogą akceptować argumenty, które nie są dostarczane przez iniekcję zależności, ale argumenty muszą przypisywać wartości domyślne.
 
@@ -889,7 +890,7 @@ Interfejsy są zaimplementowane w `Operation` klasie. `Operation`Konstruktor gen
 
 `OperationService`Zarejestrowano, który zależy od poszczególnych `Operation` typów. Gdy `OperationService` żądanie jest wykonywane za pośrednictwem iniekcji zależności, otrzymuje nowe wystąpienie każdej usługi lub istniejące wystąpienie na podstawie okresu istnienia usługi zależnej.
 
-* Gdy usługi przejściowe są tworzone po zażądaniu kontenera, `OperationId` Usługa różni `IOperationTransient` się od `OperationId` `OperationService` . `OperationService`odbiera nowe wystąpienie `IOperationTransient` klasy. Nowe wystąpienie daje inną wartość `OperationId` .
+* Gdy usługi przejściowe są tworzone po zażądaniu kontenera, `OperationId` Usługa różni `IOperationTransient` się od `OperationId` `OperationService` . `OperationService` odbiera nowe wystąpienie `IOperationTransient` klasy. Nowe wystąpienie daje inną wartość `OperationId` .
 * Gdy usługi w zakresie są tworzone dla każdego żądania klienta, `OperationId` `IOperationScoped` Usługa jest taka sama jak `OperationService` w ramach żądania klienta. W przypadku żądań klientów obie te usługi współdzielą inną `OperationId` wartość.
 * Gdy pojedyncze i pojedyncze usługi wystąpienia są tworzone raz i używane przez wszystkie żądania klientów i wszystkie usługi, `OperationId` jest to stała między wszystkimi żądaniami obsługi.
 
@@ -916,7 +917,7 @@ Zakres: 5d997e2d-55f5-4a64-8388-51c4e3a1ad19
 Pojedyncze: 01271bc1-9e31-48e7-8f7c-7261b040ded9  
 Wystąpienie: 00000000-0000-0000-0000-000000000000
 
-`OperationService`składowa
+`OperationService` składowa
 
 Przejściowy: c6b049eb-1318-4e31-90f1-eb2dd849ff64  
 Zakres: 5d997e2d-55f5-4a64-8388-51c4e3a1ad19  
@@ -932,7 +933,7 @@ Zakres: 31e820c5-4834-4d22-83fc-a60118acb9f4
 Pojedyncze: 01271bc1-9e31-48e7-8f7c-7261b040ded9  
 Wystąpienie: 00000000-0000-0000-0000-000000000000
 
-`OperationService`składowa
+`OperationService` składowa
 
 Przejściowy: c4cbacb8-36a2-436d-81c8-8c1b78808aaf  
 Zakres: 31e820c5-4834-4d22-83fc-a60118acb9f4  
@@ -1105,7 +1106,7 @@ Wbudowany kontener usług został zaprojektowany z myślą o potrzebach platform
 * Iniekcja oparta na nazwie
 * Kontenery podrzędne
 * Niestandardowe zarządzanie okresem istnienia
-* `Func<T>`Obsługa inicjowania z opóźnieniem
+* `Func<T>` Obsługa inicjowania z opóźnieniem
 * Rejestracja oparta na Konwencji
 
 Za pomocą aplikacji ASP.NET Core można używać następujących kontenerów innych firm:

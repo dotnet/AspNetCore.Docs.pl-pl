@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/static-files
-ms.openlocfilehash: b1f84a936ee1327498abce660cd64f8d7d0a2864
-ms.sourcegitcommit: ec41ab354952b75557240923756a8c2ac79b49f8
+ms.openlocfilehash: 3dbc233cef752bbf593e677728aee7b9e93c1621
+ms.sourcegitcommit: 4df445e7d49a99f81625430f728c28e5d6bf2107
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/13/2020
-ms.locfileid: "88202783"
+ms.lasthandoff: 08/15/2020
+ms.locfileid: "88253632"
 ---
 # <a name="static-files-in-aspnet-core"></a>Pliki statyczne w ASP.NET Core
 
@@ -103,6 +103,19 @@ Pliki statyczne są publicznie buforowane przez 600 sekund:
 ## <a name="static-file-authorization"></a>Autoryzacja pliku statycznego
 
 Oprogramowanie pośredniczące plików statycznych nie zapewnia kontroli autoryzacji. Wszystkie pliki obsługiwane przez ten program, w tym w ramach `wwwroot` programu, są publicznie dostępne. Aby obpracować pliki na podstawie autoryzacji:
+
+* Przechowuj je poza programem `wwwroot` i dowolnym katalogiem dostępnym dla domyślnego oprogramowania pośredniczącego plików statycznych.
+* Wywołaj `UseStaticFiles` po `UseAuthorization` i określ ścieżkę:
+
+  [!code-csharp[](static-files/samples/3.x/StaticFileAuth/Startup.cs?name=snippet2)]
+  
+  Powyższe zestawy podejścia wymagają uwierzytelnienia użytkowników:
+
+  [!code-csharp[](static-files/samples/3.x/StaticFileAuth/Startup.cs?name=snippet1&highlight=20-99)]
+
+   [!INCLUDE[](~/includes/requireAuth.md)]
+
+Alternatywne podejście do obsługiwania plików na podstawie autoryzacji:
 
 * Przechowuj je poza programem `wwwroot` i dowolnym katalogiem dostępnym dla oprogramowania pośredniczącego plików statycznych.
 * Można je obsłużyć za pomocą metody akcji, do której zastosowano autoryzację i zwrócić <xref:Microsoft.AspNetCore.Mvc.FileResult> obiekt:

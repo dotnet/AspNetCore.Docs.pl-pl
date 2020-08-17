@@ -426,6 +426,8 @@
           uid: blazor/webassembly-lazy-load-assemblies
         - name: Wydajność zestawu WebAssembly
           uid: blazor/webassembly-performance-best-practices
+        - name: Testowanie
+          uid: blazor/test
         - name: Progresywne aplikacje internetowe
           uid: blazor/progressive-web-app
         - name: Hostowanie i wdrażanie
@@ -438,6 +440,8 @@
               uid: blazor/host-and-deploy/server
             - name: Konfigurowanie konsolidatora
               uid: blazor/host-and-deploy/configure-linker
+        - name: Model Blazor Server i technologia EF Core
+          uid: blazor/blazor-server-ef-core
         - name: Scenariusze zaawansowane
           uid: blazor/advanced-scenarios
     - name: Programowanie po stronie klienta
@@ -945,7 +949,7 @@
   items:
     - name: Omówienie
       uid: security/index
-    - name: Uwierzytelnianie
+    - name: Authentication
       items:
         - name: Omówienie
           uid: security/authentication/index

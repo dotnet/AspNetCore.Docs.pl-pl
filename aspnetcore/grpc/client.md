@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/client
-ms.openlocfilehash: 5aca81da34e5ed51b2dc4f404c1ba4d7377a422f
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 65e386298af26d36900f13a5eb11aab7c012c2b0
+ms.sourcegitcommit: 756c78f6dbfa77c5d718969cdce20639b8ca0a17
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88016248"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515612"
 ---
 # <a name="call-grpc-services-with-the-net-client"></a>Wywoływanie usług gRPC przy użyciu klienta platformy .NET
 
@@ -73,7 +73,7 @@ Wydajność i użycie kanału i klienta:
 * Kanał i klienci utworzeni z kanału mogą być bezpiecznie używani przez wiele wątków.
 * Klienci utworzeni z kanału mogą wykonywać wiele jednoczesnych wywołań.
 
-`GrpcChannel.ForAddress`nie jest jedyną opcją tworzenia klienta gRPC. W przypadku wywoływania usług gRPC z poziomu aplikacji ASP.NET Core należy wziąć pod uwagę [integrację klienta gRPC](xref:grpc/clientfactory). Integracja gRPC z programem `HttpClientFactory` oferuje scentralizowaną alternatywę do tworzenia klientów gRPC.
+`GrpcChannel.ForAddress` nie jest jedyną opcją tworzenia klienta gRPC. W przypadku wywoływania usług gRPC z poziomu aplikacji ASP.NET Core należy wziąć pod uwagę [integrację klienta gRPC](xref:grpc/clientfactory). Integracja gRPC z programem `HttpClientFactory` oferuje scentralizowaną alternatywę do tworzenia klientów gRPC.
 
 > [!NOTE]
 > Wywoływanie gRPC za pośrednictwem protokołu HTTP/2 z `Grpc.Net.Client` nie jest obecnie obsługiwane w oprogramowaniu Xamarin. Pracujemy nad ulepszeniem obsługi protokołu HTTP/2 w przyszłej wersji platformy Xamarin. [GRPC. Core](https://www.nuget.org/packages/Grpc.Core) i [GRPC-Web](xref:grpc/browser) to żywotne alternatywy, które działają dzisiaj.
@@ -103,12 +103,12 @@ Console.WriteLine("Greeting: " + response.Message);
 
 Każda Jednoargumentowa metoda usługi w pliku * \* . proto* powoduje dwie metody .NET na konkretnym typie klienta gRPC do wywoływania metody: Metoda asynchroniczna i Metoda blokująca. Na przykład istnieją `GreeterClient` dwa sposoby wywoływania `SayHello` :
 
-* `GreeterClient.SayHelloAsync`-wywołuje `Greeter.SayHello` usługę asynchronicznie. Można oczekiwać.
-* `GreeterClient.SayHello`-wywołuje `Greeter.SayHello` usługę i bloki do momentu ukończenia. Nie używaj w kodzie asynchronicznym.
+* `GreeterClient.SayHelloAsync` -wywołuje `Greeter.SayHello` usługę asynchronicznie. Można oczekiwać.
+* `GreeterClient.SayHello` -wywołuje `Greeter.SayHello` usługę i bloki do momentu ukończenia. Nie używaj w kodzie asynchronicznym.
 
 ### <a name="server-streaming-call"></a>Wywołanie przesyłania strumieniowego serwera
 
-Wywołanie przesyłania strumieniowego serwera rozpoczyna się od klienta wysyłającego komunikat żądania. `ResponseStream.MoveNext()`odczytuje komunikaty przesyłane strumieniowo z usługi. Wywołanie przesyłania strumieniowego serwera jest kompletne, gdy `ResponseStream.MoveNext()` zwraca `false` .
+Wywołanie przesyłania strumieniowego serwera rozpoczyna się od klienta wysyłającego komunikat żądania. `ResponseStream.MoveNext()` odczytuje komunikaty przesyłane strumieniowo z usługi. Wywołanie przesyłania strumieniowego serwera jest kompletne, gdy `ResponseStream.MoveNext()` zwraca `false` .
 
 ```csharp
 var client = new Greet.GreeterClient(channel);
@@ -136,7 +136,7 @@ await foreach (var response in call.ResponseStream.ReadAllAsync())
 
 ### <a name="client-streaming-call"></a>Wywołanie przesyłania strumieniowego klienta
 
-Wywołanie przesyłania strumieniowego klienta rozpoczyna się *bez* wysyłania komunikatu przez klienta. Klient może wysyłać wiadomości za pomocą polecenia `RequestStream.WriteAsync` . Gdy klient zakończył wysyłanie komunikatów, `RequestStream.CompleteAsync` powinien zostać wywołany w celu powiadomienia usługi. Wywołanie jest zakończone, gdy usługa zwróci komunikat odpowiedzi.
+Wywołanie przesyłania strumieniowego klienta rozpoczyna się *bez* wysyłania komunikatu przez klienta. Klient może wysyłać wiadomości za pomocą polecenia `RequestStream.WriteAsync` . Gdy klient zakończył wysyłanie komunikatów, `RequestStream.CompleteAsync()` powinien zostać wywołany w celu powiadomienia usługi. Wywołanie jest zakończone, gdy usługa zwróci komunikat odpowiedzi.
 
 ```csharp
 var client = new Counter.CounterClient(channel);
@@ -188,6 +188,14 @@ Console.WriteLine("Disconnecting");
 await call.RequestStream.CompleteAsync();
 await readTask;
 ```
+
+Aby uzyskać najlepszą wydajność i uniknąć niepotrzebnych błędów w kliencie i usłudze, spróbuj bezpiecznie wykonać wywołania przesyłania strumieniowego dwukierunkowe. Wywołanie dwukierunkowe kończy się bezpiecznie, gdy serwer zakończył odczytywanie strumienia żądań, a klient zakończył odczytywanie strumienia odpowiedzi. Poprzednie przykładowe wywołanie to jeden przykład dwukierunkowego wywołania, które się zakończyło. W wywołaniu klient:
+
+1. Uruchamia nowe dwukierunkowe wywołanie przesyłania strumieniowego przez wywołanie `EchoClient.Echo` .
+2. Tworzy zadanie w tle do odczytywania wiadomości z usługi przy użyciu programu `ResponseStream.ReadAllAsync()` .
+3. Wysyła komunikaty do serwera przy użyciu programu `RequestStream.WriteAsync` .
+4. Powiadamia serwer, który zakończył wysyłanie komunikatów z programu `RequestStream.CompleteAsync()` .
+5. Czeka, aż zadanie w tle odczytaje wszystkie wiadomości przychodzące.
 
 W trakcie dwukierunkowego wywołania przesyłania strumieniowego klient i usługa mogą w dowolnym momencie wysyłać komunikaty do siebie. Najlepsza logika klienta do współpracy z dwukierunkowym wywołaniem różni się w zależności od logiki usługi.
 

@@ -1,5 +1,5 @@
 ---
-title: Wywoływanie internetowego interfejsu API z ASP.NET CoreBlazor WebAssembly
+title: Wywoływanie internetowego interfejsu API z ASP.NET Core Blazor WebAssembly
 author: guardrex
 description: Dowiedz się, jak wywołać interfejs API sieci Web z Blazor WebAssembly aplikacji za pomocą pomocników JSON, w tym do tworzenia żądań wymiany zasobów między źródłami (CORS).
 monikerRange: '>= aspnetcore-3.1'
@@ -17,21 +17,21 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-web-api
-ms.openlocfilehash: ef31d3d9b3914f3c86aa397ff214778fe295964b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: f8c105624506d13f3ea8e963ceb49aeaf6d22a66
+ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88012591"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88504570"
 ---
-# <a name="call-a-web-api-from-aspnet-core-no-locblazor"></a>Wywoływanie internetowego interfejsu API z ASP.NET CoreBlazor
+# <a name="call-a-web-api-from-aspnet-core-no-locblazor"></a>Wywoływanie internetowego interfejsu API z ASP.NET Core Blazor
 
 [Luke Latham](https://github.com/guardrex), [Daniel Roth](https://github.com/danroth27)i [Juan de la Cruz](https://github.com/juandelacruz23)
 
 > [!NOTE]
-> Ten temat ma zastosowanie do programu Blazor WebAssembly . [Blazor Server](xref:blazor/hosting-models#blazor-server)aplikacje wywołują interfejsy API sieci Web przy użyciu <xref:System.Net.Http.HttpClient> wystąpień, zwykle utworzonych przy użyciu <xref:System.Net.Http.IHttpClientFactory> . Aby uzyskać wskazówki dotyczące programu Blazor Server , zobacz <xref:fundamentals/http-requests> .
+> Ten temat ma zastosowanie do programu Blazor WebAssembly . [Blazor Server](xref:blazor/hosting-models#blazor-server) aplikacje wywołują interfejsy API sieci Web przy użyciu <xref:System.Net.Http.HttpClient> wystąpień, zwykle utworzonych przy użyciu <xref:System.Net.Http.IHttpClientFactory> . Aby uzyskać wskazówki dotyczące programu Blazor Server , zobacz <xref:fundamentals/http-requests> .
 
-[Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly)aplikacje wywołują interfejsy API sieci Web przy użyciu wstępnie skonfigurowanej <xref:System.Net.Http.HttpClient> usługi. Twórz żądania, które mogą obejmować opcje [interfejsu API pobierania](https://developer.mozilla.org/docs/Web/API/Fetch_API) JavaScript, za pomocą Blazor pomocników JSON lub z <xref:System.Net.Http.HttpRequestMessage> . <xref:System.Net.Http.HttpClient>Usługa w Blazor WebAssembly aplikacjach koncentruje się na przesyłaniu żądań z powrotem do serwera pochodzenia. Wskazówki zawarte w tym temacie dotyczą tylko Blazor WebAssembly aplikacji.
+[Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly) aplikacje wywołują interfejsy API sieci Web przy użyciu wstępnie skonfigurowanej <xref:System.Net.Http.HttpClient> usługi. Twórz żądania, które mogą obejmować opcje [interfejsu API pobierania](https://developer.mozilla.org/docs/Web/API/Fetch_API) JavaScript, za pomocą Blazor pomocników JSON lub z <xref:System.Net.Http.HttpRequestMessage> . <xref:System.Net.Http.HttpClient>Usługa w Blazor WebAssembly aplikacjach koncentruje się na przesyłaniu żądań z powrotem do serwera pochodzenia. Wskazówki zawarte w tym temacie dotyczą tylko Blazor WebAssembly aplikacji.
 
 [Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([jak pobrać](xref:index#how-to-download-a-sample)): Wybierz `BlazorWebAssemblySample` aplikację.
 
@@ -42,7 +42,7 @@ Zobacz następujące składniki w `BlazorWebAssemblySample` przykładowej aplika
 
 ## <a name="packages"></a>Pakiety
 
-Odwołuje się do [`System.Net.Http.Json`](https://www.nuget.org/packages/System.Net.Http.Json/) pakietu NuGet w pliku projektu.
+Odwołuje się do [`System.Net.Http.Json`](https://www.nuget.org/packages/System.Net.Http.Json) pakietu NuGet w pliku projektu.
 
 ## <a name="add-the-httpclient-service"></a>Dodaj usługę HttpClient
 
@@ -62,7 +62,7 @@ W Blazor WebAssembly aplikacji [`HttpClient`](xref:fundamentals/http-requests) j
 
 Blazor ServerAplikacja nie <xref:System.Net.Http.HttpClient> domyślnie zawiera usługi. Udostępnienie <xref:System.Net.Http.HttpClient> aplikacji przy użyciu [ `HttpClient` infrastruktury fabryki](xref:fundamentals/http-requests).
 
-<xref:System.Net.Http.HttpClient>i pomocniki JSON są również używane do wywoływania punktów końcowych interfejsu API sieci Web innych firm. <xref:System.Net.Http.HttpClient>Program jest implementowany przy użyciu [interfejsu API pobierania](https://developer.mozilla.org/docs/Web/API/Fetch_API) przeglądarki i podlega jego ograniczeniom, w tym wymuszania tych samych zasad pochodzenia.
+<xref:System.Net.Http.HttpClient> i pomocniki JSON są również używane do wywoływania punktów końcowych interfejsu API sieci Web innych firm. <xref:System.Net.Http.HttpClient> Program jest implementowany przy użyciu [interfejsu API pobierania](https://developer.mozilla.org/docs/Web/API/Fetch_API) przeglądarki i podlega jego ograniczeniom, w tym wymuszania tych samych zasad pochodzenia.
 
 Adres podstawowy klienta jest ustawiany na adres serwera źródłowego. Wstrzyknąć <xref:System.Net.Http.HttpClient> wystąpienie przy użyciu [`@inject`](xref:mvc/views/razor#inject) dyrektywy:
 
@@ -163,7 +163,7 @@ Metody pomocnika JSON wysyłają żądania do identyfikatora URI (internetowego 
   var content = response.Content.ReadFromJsonAsync<WeatherForecast>();
   ```
 
-<xref:System.Net.Http>zawiera dodatkowe metody rozszerzające do wysyłania żądań HTTP i otrzymywania odpowiedzi HTTP. <xref:System.Net.Http.HttpClient.DeleteAsync%2A?displayProperty=nameWithType>służy do wysyłania żądania HTTP DELETE do internetowego interfejsu API.
+<xref:System.Net.Http> zawiera dodatkowe metody rozszerzające do wysyłania żądań HTTP i otrzymywania odpowiedzi HTTP. <xref:System.Net.Http.HttpClient.DeleteAsync%2A?displayProperty=nameWithType> służy do wysyłania żądania HTTP DELETE do internetowego interfejsu API.
 
 W poniższym kodzie `<button>` element DELETE wywołuje `DeleteItem` metodę. Element powiązany zawiera `<input>` `id` element do usunięcia. Pełny przykład można znaleźć w przykładowej aplikacji.
 
@@ -184,9 +184,9 @@ W poniższym kodzie `<button>` element DELETE wywołuje `DeleteItem` metodę. El
 
 ## <a name="named-httpclient-with-ihttpclientfactory"></a>Nazwane HttpClient z IHttpClientFactory
 
-<xref:System.Net.Http.IHttpClientFactory>Obsługiwane są usługi i konfiguracja nazwanych <xref:System.Net.Http.HttpClient> .
+<xref:System.Net.Http.IHttpClientFactory> Obsługiwane są usługi i konfiguracja nazwanych <xref:System.Net.Http.HttpClient> .
 
-Odwołuje się do [`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http/) pakietu NuGet w pliku projektu.
+Odwołuje się do [`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http) pakietu NuGet w pliku projektu.
 
 `Program.Main` (`Program.cs`):
 
@@ -195,7 +195,7 @@ builder.Services.AddHttpClient("ServerAPI", client =>
     client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
 ```
 
-`FetchData`składnik ( `Pages/FetchData.razor` ):
+`FetchData` składnik ( `Pages/FetchData.razor` ):
 
 ```razor
 @inject IHttpClientFactory ClientFactory
@@ -263,7 +263,7 @@ builder.Services.AddHttpClient<WeatherForecastClient>(client =>
 
 Składniki wprowadzają wpisane <xref:System.Net.Http.HttpClient> do wywołania interfejsu API sieci Web.
 
-`FetchData`składnik ( `Pages/FetchData.razor` ):
+`FetchData` składnik ( `Pages/FetchData.razor` ):
 
 ```razor
 @inject WeatherForecastClient Client

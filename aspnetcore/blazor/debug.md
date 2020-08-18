@@ -5,7 +5,7 @@ description: Dowiedz się, jak debugować Blazor aplikacje.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/14/2020
+ms.date: 08/17/2020
 no-loc:
 - cookie
 - Cookie
@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: 7b5dac5c634ae3eef180ef2c7c7287da94342169
-ms.sourcegitcommit: 4df445e7d49a99f81625430f728c28e5d6bf2107
+ms.openlocfilehash: ac649b80a6cb1106de8acbb4764b53017afaa238
+ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/15/2020
-ms.locfileid: "88253580"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88504596"
 ---
 # <a name="debug-aspnet-core-no-locblazor-webassembly"></a>Debuguj ASP.NET Core Blazor WebAssembly
 
@@ -42,7 +42,7 @@ Dostępne scenariusze obejmują:
 Obecnie *nie*można:
 
 * Przerwij w przypadku nieobsłużonych wyjątków.
-* Trafij punkty przerwania podczas uruchamiania aplikacji.
+* Punkty przerwania trafień podczas uruchamiania aplikacji przed uruchomieniem serwera proxy debugowania. Obejmuje to punkty przerwania w `Program.Main` ( `Program.cs` ) i punkty przerwania w [ `OnInitialized{Async}` metodach](xref:blazor/components/lifecycle#component-initialization-methods) składników ładowanych przez pierwszą stronę żądaną przez aplikację.
 
 Będziemy nadal ulepszać środowisko debugowania w przyszłych wersjach.
 

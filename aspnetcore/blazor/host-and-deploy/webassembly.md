@@ -1,5 +1,5 @@
 ---
-title: Hostowanie i wdrażanie ASP.NET CoreBlazor WebAssembly
+title: Hostowanie i wdrażanie ASP.NET Core Blazor WebAssembly
 author: guardrex
 description: Dowiedz się, jak hostować i wdrażać Blazor aplikację przy użyciu ASP.NET Core, sieci dostarczania zawartości (CDN), serwerów plików i stron usługi GitHub.
 monikerRange: '>= aspnetcore-3.1'
@@ -17,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: 06059e0f9ff6a3f4073d8d01d1ac541c30ad1ab1
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: e66a470bf5bd23950bdb0ccf61c6743916ed9349
+ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014194"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88504557"
 ---
-# <a name="host-and-deploy-aspnet-core-no-locblazor-webassembly"></a>Hostowanie i wdrażanie ASP.NET CoreBlazor WebAssembly
+# <a name="host-and-deploy-aspnet-core-no-locblazor-webassembly"></a>Hostowanie i wdrażanie ASP.NET Core Blazor WebAssembly
 
 [Luke Latham](https://github.com/guardrex), [Rainer Stropek](https://www.timecockpit.com), [Daniel Roth](https://github.com/danroth27), [Ben Adams](https://twitter.com/ben_a_adams)i [Safia Abdalla](https://safia.rocks)
 
@@ -45,7 +45,7 @@ Po Blazor WebAssembly opublikowaniu aplikacji dane wyjściowe są kompresowane s
 * [Brotli](https://tools.ietf.org/html/rfc7932) (najwyższy poziom)
 * [Gzip](https://tools.ietf.org/html/rfc1952)
 
-Blazorkorzysta z hosta, aby zapewnić odpowiednie skompresowane pliki. W przypadku korzystania z ASP.NET Core hostowanego projektu host jest w stanie wykonywać negocjacje zawartości i obsługiwać statycznie skompresowane pliki. W przypadku udostępniania Blazor WebAssembly aplikacji autonomicznej może być wymagane dodatkowe działanie, aby zapewnić obsługę plików skompresowanych statycznie:
+Blazor korzysta z hosta, aby zapewnić odpowiednie skompresowane pliki. W przypadku korzystania z ASP.NET Core hostowanego projektu host jest w stanie wykonywać negocjacje zawartości i obsługiwać statycznie skompresowane pliki. W przypadku udostępniania Blazor WebAssembly aplikacji autonomicznej może być wymagane dodatkowe działanie, aby zapewnić obsługę plików skompresowanych statycznie:
 
 * Aby uzyskać `web.config` konfigurację kompresji usług IIS, zobacz sekcję [rekompresji usług IIS: Brotli i gzip](#brotli-and-gzip-compression) . 
 * Podczas hostingu w rozwiązaniach hostingu statycznego, które nie obsługują negocjowanej statycznie negocjacji zawartości plików, na przykład stron usługi GitHub, należy rozważyć skonfigurowanie aplikacji do pobierania i dekodowania skompresowanych plików Brotli:
@@ -87,6 +87,12 @@ Aby wyłączyć kompresję, należy dodać `BlazorEnableCompression` Właściwo�
 </PropertyGroup>
 ```
 
+`BlazorEnableCompression`Właściwość można przesłać do [`dotnet publish`](/dotnet/core/tools/dotnet-publish) polecenia z następującą składnią w powłoce poleceń:
+
+```dotnetcli
+dotnet publish -p:BlazorEnableCompression=false
+```
+
 ## <a name="rewrite-urls-for-correct-routing"></a>Ponownie Napisz adresy URL pod kątem prawidłowego routingu
 
 Żądania routingu dla składników strony w Blazor WebAssembly aplikacji nie są tak proste jak żądania routingu w Blazor Server hostowanej aplikacji. Weź pod uwagę Blazor WebAssembly aplikację z dwoma składnikami:
@@ -98,7 +104,7 @@ Gdy zażądano dokumentu domyślnego aplikacji przy użyciu paska adresu przegl�
 
 1. Przeglądarka wykonuje żądanie.
 1. Zostanie zwrócona domyślna strona, która zwykle `index.html` .
-1. `index.html`wyładowania aplikacji.
+1. `index.html` wyładowania aplikacji.
 1. Blazorładuje router, a Razor `Main` składnik jest renderowany.
 
 Na stronie głównej wybranie linku do `About` składnika działa na kliencie, ponieważ Blazor router uniemożliwia przeglądarce wykonywanie żądania w Internecie do `www.contoso.com` programu `About` i obsługuje wyrenderowany `About` składnik. Wszystkie żądania dotyczące wewnętrznych punktów końcowych *w Blazor WebAssembly aplikacji* działają w taki sam sposób: żądania nie wyzwalają żądań przeglądarki do zasobów hostowanych przez serwer w Internecie. Router obsługuje wewnętrznie żądania.
@@ -410,7 +416,7 @@ Zasoby wdrażania autonomicznego są publikowane w `/bin/Release/{TARGET FRAMEWO
 
 ### <a name="azure-app-service"></a>Azure App Service
 
-Blazor WebAssemblyAplikacje można wdrażać w usłudze Azure App Services w systemie Windows, który jest hostem aplikacji w [usługach IIS](#iis).
+Blazor WebAssembly Aplikacje można wdrażać w usłudze Azure App Services w systemie Windows, który jest hostem aplikacji w [usługach IIS](#iis).
 
 Wdrażanie autonomicznej Blazor WebAssembly aplikacji do Azure App Service dla systemu Linux nie jest obecnie obsługiwane. Obraz serwera z systemem Linux do hostowania aplikacji nie jest obecnie dostępny. Trwa wykonywanie pracy, aby włączyć ten scenariusz.
 
@@ -504,7 +510,7 @@ Hosting pliku statycznego [usługi Azure Storage](/azure/storage/) umożliwia Bl
 Gdy usługa BLOB jest włączona dla hostingu statycznej witryny sieci Web na koncie magazynu:
 
 * Ustaw **nazwę dokumentu indeksu** na `index.html` .
-* Ustaw **ścieżkę do dokumentu błędu** `index.html` . Razorskładniki i inne punkty końcowe inne niż pliki nie znajdują się w ścieżkach fizycznych w zawartości statycznej przechowywanej przez usługę BLOB. Po otrzymaniu żądania dla jednego z tych zasobów, który Blazor powinien zostać obsłużony przez router, błąd *404-nie znaleziono* przez usługę BLOB Service kieruje żądanie do **ścieżki dokumentu błędu**. `index.html`Obiekt BLOB jest zwracany, a Blazor router ładuje i przetwarza ścieżkę.
+* Ustaw **ścieżkę do dokumentu błędu** `index.html` . Razor składniki i inne punkty końcowe inne niż pliki nie znajdują się w ścieżkach fizycznych w zawartości statycznej przechowywanej przez usługę BLOB. Po otrzymaniu żądania dla jednego z tych zasobów, który Blazor powinien zostać obsłużony przez router, błąd *404-nie znaleziono* przez usługę BLOB Service kieruje żądanie do **ścieżki dokumentu błędu**. `index.html`Obiekt BLOB jest zwracany, a Blazor router ładuje i przetwarza ścieżkę.
 
 Jeśli pliki nie są ładowane w czasie wykonywania ze względu na nieodpowiednie typy MIME w `Content-Type` nagłówkach plików, wykonaj jedną z następujących czynności:
 
@@ -703,7 +709,7 @@ W przypadku korzystania z witryny projektu zamiast witryny organizacji zaktualiz
 
 ## <a name="configure-the-linker"></a>Konfigurowanie konsolidatora
 
-Blazorwykonuje konsolidację języka pośredniego (IL) dla każdej kompilacji wydania, aby usunąć niepotrzebny kod IL z zestawów wyjściowych. Aby uzyskać więcej informacji, zobacz <xref:blazor/host-and-deploy/configure-linker>.
+Blazor wykonuje konsolidację języka pośredniego (IL) dla każdej kompilacji wydania, aby usunąć niepotrzebny kod IL z zestawów wyjściowych. Aby uzyskać więcej informacji, zobacz <xref:blazor/host-and-deploy/configure-linker>.
 
 ## <a name="custom-boot-resource-loading"></a>Ładowanie niestandardowego zasobu rozruchowego
 
@@ -713,16 +719,16 @@ Blazor WebAssemblyAplikacja może zostać zainicjowana przy użyciu `loadBootRes
 * Załaduj skompresowane zestawy za pomocą żądania HTTP i zdekompresuj je na kliencie dla hostów, które nie obsługują pobierania skompresowanej zawartości z serwera.
 * Aliasowanie zasobów do innej nazwy przez przekierowanie każdego `fetch` żądania do nowej nazwy.
 
-`loadBootResource`Parametry znajdują się w poniższej tabeli.
+`loadBootResource` Parametry znajdują się w poniższej tabeli.
 
 | Parametr    | Opis |
 | ------------ | ----------- |
-| `type`       | Typ zasobu. Typy Permissable: `assembly` , `pdb` , `dotnetjs` , `dotnetwasm` ,`timezonedata` |
+| `type`       | Typ zasobu. Typy Permissable: `assembly` , `pdb` , `dotnetjs` , `dotnetwasm` , `timezonedata` |
 | `name`       | Nazwa zasobu. |
 | `defaultUri` | Względny lub bezwzględny identyfikator URI zasobu. |
 | `integrity`  | Ciąg integralności reprezentujący oczekiwaną zawartość w odpowiedzi. |
 
-`loadBootResource`zwraca jedną z następujących wartości, aby zastąpić proces ładowania:
+`loadBootResource` zwraca jedną z następujących wartości, aby zastąpić proces ładowania:
 
 * Ciąg identyfikatora URI. W poniższym przykładzie ( `wwwroot/index.html` ) następujące pliki są obsługiwane z sieci CDN w `https://my-awesome-cdn.com/` :
 

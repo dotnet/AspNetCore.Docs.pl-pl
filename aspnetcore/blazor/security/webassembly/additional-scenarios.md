@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/additional-scenarios
-ms.openlocfilehash: 15531c39a66a9f6dfd0f5c20cf960e4db5a78074
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 8cb09b9ecf8fc67652125e92aa15b484526c121e
+ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88013804"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88504661"
 ---
 # <a name="aspnet-core-no-locblazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor WebAssembly dodatkowe scenariusze zabezpieczeń
 
@@ -30,7 +30,7 @@ Autorzy [Javier Calvarro Nelson](https://github.com/javiercn) i [Luke Latham](ht
 
 ## <a name="attach-tokens-to-outgoing-requests"></a>Dołącz tokeny do żądań wychodzących
 
-<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler>jest <xref:System.Net.Http.DelegatingHandler> używany do dołączania tokenów dostępu do <xref:System.Net.Http.HttpResponseMessage> wystąpień wychodzących. Tokeny są uzyskiwane przy użyciu <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.IAccessTokenProvider> usługi, która jest rejestrowana przez platformę. Jeśli nie można uzyskać tokenu, <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException> zgłaszany jest wyjątek. <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException>ma <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException.Redirect%2A> metodę, która może być używana do nawigowania do dostawcy tożsamości w celu uzyskania nowego tokenu.
+<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> jest <xref:System.Net.Http.DelegatingHandler> używany do dołączania tokenów dostępu do <xref:System.Net.Http.HttpResponseMessage> wystąpień wychodzących. Tokeny są uzyskiwane przy użyciu <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.IAccessTokenProvider> usługi, która jest rejestrowana przez platformę. Jeśli nie można uzyskać tokenu, <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException> zgłaszany jest wyjątek. <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException> ma <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException.Redirect%2A> metodę, która może być używana do nawigowania do dostawcy tożsamości w celu uzyskania nowego tokenu.
 
 Dla wygody, struktura zapewnia <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> wstępnie skonfigurowany adres podstawowy aplikacji jako autoryzowany adres URL. **Tokeny dostępu są dodawane tylko wtedy, gdy identyfikator URI żądania jest w podstawowym identyfikatorze URI aplikacji.** Gdy identyfikatory URI żądania wychodzącego nie znajdują się w podstawowym identyfikatorze URI aplikacji, użyj [niestandardowej `AuthorizationMessageHandler` klasy (*zalecane*)](#custom-authorizationmessagehandler-class) lub [Skonfiguruj `AuthorizationMessageHandler` ](#configure-authorizationmessagehandler).
 
@@ -39,9 +39,9 @@ Dla wygody, struktura zapewnia <xref:Microsoft.AspNetCore.Components.WebAssembly
 
 W poniższym przykładzie:
 
-* <xref:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient%2A>dodaje <xref:System.Net.Http.IHttpClientFactory> i pokrewnych usług do kolekcji usług i konfiguruje nazwę <xref:System.Net.Http.HttpClient> ( `ServerAPI` ). <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType>jest adresem podstawowym identyfikatora URI zasobu podczas wysyłania żądań. <xref:System.Net.Http.IHttpClientFactory>jest dostarczany przez [`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http) pakiet NuGet.
-* <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler>jest <xref:System.Net.Http.DelegatingHandler> używany do dołączania tokenów dostępu do <xref:System.Net.Http.HttpResponseMessage> wystąpień wychodzących. Tokeny dostępu są dodawane tylko wtedy, gdy identyfikator URI żądania jest w podstawowym identyfikatorze URI aplikacji.
-* <xref:System.Net.Http.IHttpClientFactory.CreateClient%2A?displayProperty=nameWithType>tworzy i konfiguruje <xref:System.Net.Http.HttpClient> wystąpienie dla żądań wychodzących przy użyciu konfiguracji, która odnosi się do nazwy <xref:System.Net.Http.HttpClient> ( `ServerAPI` ).
+* <xref:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient%2A> dodaje <xref:System.Net.Http.IHttpClientFactory> i pokrewnych usług do kolekcji usług i konfiguruje nazwę <xref:System.Net.Http.HttpClient> ( `ServerAPI` ). <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> jest adresem podstawowym identyfikatora URI zasobu podczas wysyłania żądań. <xref:System.Net.Http.IHttpClientFactory> jest dostarczany przez [`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http) pakiet NuGet.
+* <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> jest <xref:System.Net.Http.DelegatingHandler> używany do dołączania tokenów dostępu do <xref:System.Net.Http.HttpResponseMessage> wystąpień wychodzących. Tokeny dostępu są dodawane tylko wtedy, gdy identyfikator URI żądania jest w podstawowym identyfikatorze URI aplikacji.
+* <xref:System.Net.Http.IHttpClientFactory.CreateClient%2A?displayProperty=nameWithType> tworzy i konfiguruje <xref:System.Net.Http.HttpClient> wystąpienie dla żądań wychodzących przy użyciu konfiguracji, która odnosi się do nazwy <xref:System.Net.Http.HttpClient> ( `ServerAPI` ).
 
 ```csharp
 using System.Net.Http;
@@ -89,7 +89,7 @@ protected override async Task OnInitializedAsync()
 
 *Te wskazówki w tej sekcji są zalecane dla aplikacji klienckich, które wysyłają żądania wychodzące do identyfikatorów URI, które nie znajdują się w podstawowym identyfikatorze URI aplikacji.*
 
-W poniższym przykładzie Klasa niestandardowa rozszerza <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> się do użycia jako <xref:System.Net.Http.DelegatingHandler> dla elementu <xref:System.Net.Http.HttpClient> . <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A>konfiguruje ten program obsługi do autoryzacji wychodzących żądań HTTP przy użyciu tokenu dostępu. Token dostępu jest dołączany tylko wtedy, gdy co najmniej jeden z autoryzowanych adresów URL jest podstawą identyfikatora URI żądania ( <xref:System.Net.Http.HttpRequestMessage.RequestUri?displayProperty=nameWithType> ).
+W poniższym przykładzie Klasa niestandardowa rozszerza <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> się do użycia jako <xref:System.Net.Http.DelegatingHandler> dla elementu <xref:System.Net.Http.HttpClient> . <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A> konfiguruje ten program obsługi do autoryzacji wychodzących żądań HTTP przy użyciu tokenu dostępu. Token dostępu jest dołączany tylko wtedy, gdy co najmniej jeden z autoryzowanych adresów URL jest podstawą identyfikatora URI żądania ( <xref:System.Net.Http.HttpRequestMessage.RequestUri?displayProperty=nameWithType> ).
 
 ```csharp
 using Microsoft.AspNetCore.Components;
@@ -149,9 +149,9 @@ Skonfigurowany <xref:System.Net.Http.HttpClient> jest używany do autoryzacji ż
 }
 ```
 
-### <a name="configure-authorizationmessagehandler"></a>Ponowne`AuthorizationMessageHandler`
+### <a name="configure-authorizationmessagehandler"></a>Ponowne `AuthorizationMessageHandler`
 
-<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler>można skonfigurować z autoryzowanymi adresami URL, zakresami i zwrotnym adresem URL przy użyciu <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A> metody. <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A>konfiguruje procedurę obsługi autoryzacji wychodzących żądań HTTP przy użyciu tokenu dostępu. Token dostępu jest dołączany tylko wtedy, gdy co najmniej jeden z autoryzowanych adresów URL jest podstawą identyfikatora URI żądania ( <xref:System.Net.Http.HttpRequestMessage.RequestUri?displayProperty=nameWithType> ). Jeśli identyfikator URI żądania jest względnym identyfikatorem URI, jest on połączony z <xref:System.Net.Http.HttpClient.BaseAddress> .
+<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> można skonfigurować z autoryzowanymi adresami URL, zakresami i zwrotnym adresem URL przy użyciu <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A> metody. <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A> konfiguruje procedurę obsługi autoryzacji wychodzących żądań HTTP przy użyciu tokenu dostępu. Token dostępu jest dołączany tylko wtedy, gdy co najmniej jeden z autoryzowanych adresów URL jest podstawą identyfikatora URI żądania ( <xref:System.Net.Http.HttpRequestMessage.RequestUri?displayProperty=nameWithType> ). Jeśli identyfikator URI żądania jest względnym identyfikatorem URI, jest on połączony z <xref:System.Net.Http.HttpClient.BaseAddress> .
 
 W poniższym przykładzie <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> konfiguruje <xref:System.Net.Http.HttpClient> w `Program.Main` ( `Program.cs` ):
 
@@ -176,7 +176,7 @@ W przypadku Blazor aplikacji na podstawie Blazor WebAssembly szablonu hostowaneg
 * <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType>( `new Uri(builder.HostEnvironment.BaseAddress)` ).
 * Adres URL `authorizedUrls` tablicy.
 
-## <a name="typed-httpclient"></a>Wpisane`HttpClient`
+## <a name="typed-httpclient"></a>Wpisane `HttpClient`
 
 Można zdefiniować klienta z określonym typem, który obsługuje wszystkie problemy dotyczące pozyskiwania HTTP i tokenu w ramach jednej klasy.
 
@@ -234,7 +234,7 @@ builder.Services.AddHttpClient<WeatherForecastClient>(
 
 W przypadku Blazor aplikacji opartej na Blazor WebAssembly szablonie projektu hostowanego <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> ( `new Uri(builder.HostEnvironment.BaseAddress)` ) jest domyślnie przypisany do <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> .
 
-`FetchData`składnik ( `Pages/FetchData.razor` ):
+`FetchData` składnik ( `Pages/FetchData.razor` ):
 
 ```razor
 @inject WeatherForecastClient Client
@@ -352,12 +352,12 @@ if (tokenResult.TryGetToken(out var token))
 }
 ```
 
-<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenResult.TryGetToken%2A?displayProperty=nameWithType>typu
+<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenResult.TryGetToken%2A?displayProperty=nameWithType> typu
 
-* `true`z `token` do użycia.
-* `false`Jeśli nie pobrano tokenu.
+* `true` z `token` do użycia.
+* `false` Jeśli nie pobrano tokenu.
 
-## <a name="httpclient-and-httprequestmessage-with-fetch-api-request-options"></a>`HttpClient`i `HttpRequestMessage` z opcjami żądania interfejsu API pobierania
+## <a name="httpclient-and-httprequestmessage-with-fetch-api-request-options"></a>`HttpClient` i `HttpRequestMessage` z opcjami żądania interfejsu API pobierania
 
 W przypadku uruchamiania w zestawie webassembly w Blazor WebAssembly aplikacji [`HttpClient`](xref:fundamentals/http-requests) ([Dokumentacja interfejsu API](xref:System.Net.Http.HttpClient)) i <xref:System.Net.Http.HttpRequestMessage> może służyć do dostosowywania żądań. Na przykład można określić metodę HTTP i nagłówki żądania. Poniższy składnik wysyła `POST` żądanie do punktu końcowego interfejsu API listy do wykonania na serwerze i wyświetla treść odpowiedzi:
 
@@ -452,7 +452,7 @@ Następujące zasady obejmują konfigurację programu:
 
 * Pochodzenie żądania ( `http://localhost:5000` , `https://localhost:5001` ).
 * Dowolna Metoda (czasownik).
-* `Content-Type`i `Authorization` nagłówki. Aby zezwolić na nagłówek niestandardowy (na przykład `x-custom-header` ), Wyświetl nagłówek podczas wywoływania <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithHeaders*> .
+* `Content-Type` i `Authorization` nagłówki. Aby zezwolić na nagłówek niestandardowy (na przykład `x-custom-header` ), Wyświetl nagłówek podczas wywoływania <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithHeaders*> .
 * Poświadczenia ustawione przez kod JavaScript po stronie klienta ( `credentials` Właściwość ustawiona na `include` ).
 
 ```csharp
@@ -697,7 +697,7 @@ builder.Services.AddSingleton<StateContainer>();
 
 ## <a name="customize-app-routes"></a>Dostosowywanie tras aplikacji
 
-Domyślnie [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) Biblioteka używa tras przedstawionych w poniższej tabeli w celu reprezentowania różnych stanów uwierzytelniania.
+Domyślnie [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication) Biblioteka używa tras przedstawionych w poniższej tabeli w celu reprezentowania różnych stanów uwierzytelniania.
 
 | Trasa                            | Przeznaczenie |
 | -------------------------------- | ------- |
@@ -715,7 +715,7 @@ Trasy przedstawione w powyższej tabeli można konfigurować za pośrednictwem p
 
 W poniższym przykładzie wszystkie ścieżki są poprzedzone prefiksem `/security` .
 
-`Authentication`składnik ( `Pages/Authentication.razor` ):
+`Authentication` składnik ( `Pages/Authentication.razor` ):
 
 ```razor
 @page "/security/{action}"
@@ -757,9 +757,9 @@ Jeśli zdecydujesz się to zrobić, możesz przerwać interfejs użytkownika na 
 
 ## <a name="customize-the-authentication-user-interface"></a>Dostosowywanie interfejsu użytkownika uwierzytelniania
 
-<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView>zawiera domyślny zestaw elementów interfejsu użytkownika dla każdego stanu uwierzytelniania. Każdy stan można dostosować, przekazując element niestandardowe <xref:Microsoft.AspNetCore.Components.RenderFragment> . Aby dostosować wyświetlany tekst podczas początkowego procesu logowania, można zmienić w <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView> następujący sposób.
+<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView> zawiera domyślny zestaw elementów interfejsu użytkownika dla każdego stanu uwierzytelniania. Każdy stan można dostosować, przekazując element niestandardowe <xref:Microsoft.AspNetCore.Components.RenderFragment> . Aby dostosować wyświetlany tekst podczas początkowego procesu logowania, można zmienić w <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView> następujący sposób.
 
-`Authentication`składnik ( `Pages/Authentication.razor` ):
+`Authentication` składnik ( `Pages/Authentication.razor` ):
 
 ```razor
 @page "/security/{action}"

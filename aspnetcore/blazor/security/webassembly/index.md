@@ -1,5 +1,5 @@
 ---
-title: Bezpieczny ASP.NET CoreBlazor WebAssembly
+title: Bezpieczny ASP.NET Core Blazor WebAssembly
 author: guardrex
 description: Dowiedz się, jak zabezpieczyć Blazor aplikacje WebAssemlby jako aplikacje jednostronicowe (aplikacji jednostronicowych).
 monikerRange: '>= aspnetcore-3.1'
@@ -17,22 +17,22 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/index
-ms.openlocfilehash: fef638d592cacfe2f4f67e522900979993905859
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: fe9bd270ce509e8389dd3d4f3f6f3a6dda03d425
+ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88013596"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88504544"
 ---
-# <a name="secure-aspnet-core-no-locblazor-webassembly"></a>Bezpieczny ASP.NET CoreBlazor WebAssembly
+# <a name="secure-aspnet-core-no-locblazor-webassembly"></a>Bezpieczny ASP.NET Core Blazor WebAssembly
 
 Autor [Javier Calvarro Nelson](https://github.com/javiercn)
 
-Blazor WebAssemblyaplikacje są zabezpieczone w taki sam sposób, jak aplikacje jednostronicowe (aplikacji jednostronicowych). Istnieje kilka podejścia do uwierzytelniania użytkowników w aplikacji jednostronicowych, ale najbardziej typowym i wszechstronnym podejściem jest użycie implementacji opartej na [protokole OAuth 2,0](https://oauth.net/), takim jak [OPENID Connect Connect (OIDC)](https://openid.net/connect/).
+Blazor WebAssembly aplikacje są zabezpieczone w taki sam sposób, jak aplikacje jednostronicowe (aplikacji jednostronicowych). Istnieje kilka podejścia do uwierzytelniania użytkowników w aplikacji jednostronicowych, ale najbardziej typowym i wszechstronnym podejściem jest użycie implementacji opartej na [protokole OAuth 2,0](https://oauth.net/), takim jak [OPENID Connect Connect (OIDC)](https://openid.net/connect/).
 
 ## <a name="authentication-library"></a>Biblioteka uwierzytelniania
 
-Blazor WebAssemblyobsługuje uwierzytelnianie i Autoryzowanie aplikacji przy użyciu programu OIDC za pośrednictwem [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) biblioteki. Biblioteka zawiera zestaw elementów pierwotnych do bezproblemowego uwierzytelniania w odniesieniu do ASP.NET Core. Biblioteka integruje ASP.NET Core Identity z obsługą autoryzacji interfejsu API utworzoną na [ Identity serwerze](https://identityserver.io/). Biblioteka może być uwierzytelniana względem dowolnego dostawcy innej firmy, Identity który obsługuje OIDC, które są nazywane dostawcami OpenID Connect (op).
+Blazor WebAssembly obsługuje uwierzytelnianie i Autoryzowanie aplikacji przy użyciu programu OIDC za pośrednictwem [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication) biblioteki. Biblioteka zawiera zestaw elementów pierwotnych do bezproblemowego uwierzytelniania w odniesieniu do ASP.NET Core. Biblioteka integruje ASP.NET Core Identity z obsługą autoryzacji interfejsu API utworzoną na [ Identity serwerze](https://identityserver.io/). Biblioteka może być uwierzytelniana względem dowolnego dostawcy innej firmy, Identity który obsługuje OIDC, które są nazywane dostawcami OpenID Connect (op).
 
 Obsługa uwierzytelniania w programie Blazor WebAssembly jest oparta na bazie `oidc-client.js` biblioteki, która jest używana do obsługi szczegółowych informacji o podstawowym protokole uwierzytelniania.
 
@@ -48,7 +48,7 @@ Dostępne są inne opcje uwierzytelniania aplikacji jednostronicowych, takie jak
 
 ## <a name="authentication-process-with-oidc"></a>Proces uwierzytelniania za pomocą OIDC
 
-[`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/)Biblioteka zawiera kilka elementów podstawowych, które implementują uwierzytelnianie i autoryzację przy użyciu OIDC. Uwierzytelnianie odbywa się w następujący sposób:
+[`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication)Biblioteka zawiera kilka elementów podstawowych, które implementują uwierzytelnianie i autoryzację przy użyciu OIDC. Uwierzytelnianie odbywa się w następujący sposób:
 
 * Gdy użytkownik anonimowy wybierze przycisk Zaloguj lub zażąda strony z [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) zastosowanym atrybutem, użytkownik zostanie przekierowany do strony logowania aplikacji ( `/authentication/login` ).
 * Na stronie Logowanie Biblioteka uwierzytelniania przygotowuje przekierowanie do punktu końcowego autoryzacji. Punkt końcowy autoryzacji jest poza Blazor WebAssembly aplikacją i może być hostowany w osobnym miejscu pochodzenia. Punkt końcowy jest odpowiedzialny za określenie, czy użytkownik jest uwierzytelniany i w celu wystawiania co najmniej jednego tokenu w odpowiedzi. Biblioteka uwierzytelniania umożliwia wywołanie zwrotne logowania w celu uzyskania odpowiedzi uwierzytelniania.
@@ -113,6 +113,6 @@ Hostowane Blazor WebAssembly aplikacje:
 
 * [Usługa Azure Active Directory (AAD)](xref:blazor/security/webassembly/hosted-with-azure-active-directory)
 * [Azure Active Directory (AAD) B2C](xref:blazor/security/webassembly/hosted-with-azure-active-directory-b2c)
-* [IdentityServer](xref:blazor/security/webassembly/hosted-with-identity-server)
+* [Identity Server](xref:blazor/security/webassembly/hosted-with-identity-server)
 
 Dalsze wskazówki dotyczące konfiguracji znajdują się w temacie <xref:blazor/security/webassembly/additional-scenarios> .

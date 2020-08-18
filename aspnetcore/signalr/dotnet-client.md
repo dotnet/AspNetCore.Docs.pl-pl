@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/dotnet-client
-ms.openlocfilehash: a03598f887d628c8a2b6720d99826d4aef4e52fa
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: e27748e8267a931390f831119a3fd1d45e87745a
+ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020005"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88504739"
 ---
 # <a name="aspnet-core-no-locsignalr-net-client"></a>ASP.NET Core SignalR klienta platformy .NET
 
@@ -36,7 +36,7 @@ Przykładowy kod w tym artykule jest aplikacją WPF, która używa SignalR klien
 
 [Microsoft. AspNetCore. SignalR .. ](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client)Do nawiązania połączenia z koncentratorami wymagany jest pakiet klienta platformy .NET SignalR .
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Aby zainstalować bibliotekę kliencką, uruchom następujące polecenie w oknie **konsola Menedżera pakietów** :
 
@@ -44,7 +44,7 @@ Aby zainstalować bibliotekę kliencką, uruchom następujące polecenie w oknie
 Install-Package Microsoft.AspNetCore.SignalR.Client
 ```
 
-# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
 
 Aby zainstalować bibliotekę kliencką, uruchom następujące polecenie w powłoce poleceń:
 
@@ -110,7 +110,7 @@ connection.Reconnected += connectionId =>
 };
 ```
 
-`WithAutomaticReconnect()`nie zostanie skonfigurowana `HubConnection` do ponawiania początkowych nieudanych uruchomień, dlatego należy ręcznie obsługiwać błędy uruchamiania:
+`WithAutomaticReconnect()` nie zostanie skonfigurowana `HubConnection` do ponawiania początkowych nieudanych uruchomień, dlatego należy ręcznie obsługiwać błędy uruchamiania:
 
 ```csharp
 public static async Task<bool> ConnectWithRetryAsync(HubConnection connection, CancellationToken token)
@@ -172,9 +172,9 @@ Zachowanie niestandardowe jest następnie ponownie niezależne od zachowania dom
 
 Jeśli chcesz jeszcze większą kontrolę nad chronometrażem i liczbą prób automatycznego ponownego połączenia, `WithAutomaticReconnect` zaakceptuje obiekt implementujący `IRetryPolicy` interfejs, który ma pojedynczą metodę o nazwie `NextRetryDelay` .
 
-`NextRetryDelay`przyjmuje jeden argument z typem `RetryContext` . `RetryContext`Ma trzy właściwości: `PreviousRetryCount` , `ElapsedTime` i `RetryReason` , które są, a `long` `TimeSpan` i `Exception` odpowiednio. Przed pierwszym ponownym połączeniem, oba `PreviousRetryCount` i `ElapsedTime` będą miały wartość zero, a `RetryReason` będzie wyjątek, który spowodował utratę połączenia. Po każdym nieudanej próbie ponowieniu próby `PreviousRetryCount` zostanie zaktualizowany w `ElapsedTime` celu odzwierciedlenia czasu, który połączył się do tej pory, i `RetryReason` będzie to wyjątek, który spowodował, że Ostatnia próba ponownego połączenia nie powiedzie się.
+`NextRetryDelay` przyjmuje jeden argument z typem `RetryContext` . `RetryContext`Ma trzy właściwości: `PreviousRetryCount` , `ElapsedTime` i `RetryReason` , które są, a `long` `TimeSpan` i `Exception` odpowiednio. Przed pierwszym ponownym połączeniem, oba `PreviousRetryCount` i `ElapsedTime` będą miały wartość zero, a `RetryReason` będzie wyjątek, który spowodował utratę połączenia. Po każdym nieudanej próbie ponowieniu próby `PreviousRetryCount` zostanie zaktualizowany w `ElapsedTime` celu odzwierciedlenia czasu, który połączył się do tej pory, i `RetryReason` będzie to wyjątek, który spowodował, że Ostatnia próba ponownego połączenia nie powiedzie się.
 
-`NextRetryDelay`musi zwrócić wartość TimeSpan reprezentującą czas oczekiwania przed kolejną próbą ponownego połączenia lub `null` Jeśli `HubConnection` należy zatrzymać Ponowne nawiązywanie połączenia.
+`NextRetryDelay` musi zwrócić wartość TimeSpan reprezentującą czas oczekiwania przed kolejną próbą ponownego połączenia lub `null` Jeśli `HubConnection` należy zatrzymać Ponowne nawiązywanie połączenia.
 
 ```csharp
 public class RandomRetryPolicy : IRetryPolicy
@@ -237,7 +237,7 @@ W programie `Closed` obsługi, który ponownie uruchamia połączenie, rozważ o
 
 ## <a name="call-hub-methods-from-client"></a>Wywoływanie metod centrów z klienta
 
-`InvokeAsync`wywołuje metody w centrum. Przekaż nazwę metody Hub i wszystkie argumenty zdefiniowane w metodzie Hub do `InvokeAsync` . SignalRjest asynchroniczny, więc używaj `async` i `await` podczas wykonywania wywołań.
+`InvokeAsync` wywołuje metody w centrum. Przekaż nazwę metody Hub i wszystkie argumenty zdefiniowane w metodzie Hub do `InvokeAsync` . SignalR jest asynchroniczny, więc używaj `async` i `await` podczas wykonywania wywołań.
 
 [!code-csharp[InvokeAsync method](dotnet-client/sample/signalrchatclient/MainWindow.xaml.cs?name=snippet_InvokeAsync)]
 
@@ -246,7 +246,7 @@ W programie `Closed` obsługi, który ponownie uruchamia połączenie, rozważ o
 `SendAsync`Metoda zwraca, `Task` która kończy się, gdy komunikat został wysłany do serwera. Nie podano wartości zwracanej od momentu `Task` zaczekania na zakończenie metody serwera. Wszystkie wyjątki zgłoszone na kliencie podczas wysyłania komunikatu generują błędy `Task` . Użyj `await` składni i, `try...catch` Aby obsłużyć błędy wysyłania.
 
 > [!NOTE]
-> W przypadku korzystania z usługi platformy Azure SignalR w *trybie bezserwerowym*nie można wywoływać metod centralnych z poziomu klienta. Aby uzyskać więcej informacji, zobacz [ SignalR dokumentację usługi](/azure/azure-signalr/signalr-concept-serverless-development-config).
+> Wywoływanie metod centrów z poziomu klienta jest obsługiwane tylko w przypadku korzystania z usługi platformy Azure SignalR w trybie *domyślnym* . Aby uzyskać więcej informacji, zobacz [często zadawane pytania (repozytorium Azure-sygnalizujące GitHub)](https://github.com/Azure/azure-signalr/blob/dev/docs/faq.md#what-is-the-meaning-of-service-mode-defaultserverlessclassic-how-can-i-choose).
 
 ## <a name="call-client-methods-from-hub"></a>Wywoływanie metod klienta z centrum
 

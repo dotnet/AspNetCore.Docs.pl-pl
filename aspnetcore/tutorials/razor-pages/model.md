@@ -5,6 +5,7 @@ description: Część 2 serii samouczków na Razor stronach.
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/model
-ms.openlocfilehash: 6b50f46863a6dabb01bcf0976a42abb504e6f7b7
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 4099873142b99afb7f0659dfd9a4fde8bec3081d
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020460"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633776"
 ---
 # <a name="part-2-add-a-model-to-a-no-locrazor-pages-app-in-aspnet-core"></a>Część 2 Dodaj model do Razor aplikacji stron w ASP.NET Core
 
@@ -38,7 +39,7 @@ Klasy modelu są znane jako klasy POCO (z "zwykłych, starych obiektów CLR"), p
 
 ## <a name="add-a-data-model"></a>Dodawanie modelu danych
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Kliknij prawym przyciskiem myszy projekt ** Razor PagesMovie** > **Dodaj**  >  **Nowy folder**. Nazwij *modele*folderów.
 
@@ -75,7 +76,7 @@ Skompiluj projekt, aby sprawdzić, czy nie występują błędy kompilacji.
 
 W tej sekcji model filmu jest szkieletem. Oznacza to, że narzędzie tworzenia szkieletów tworzy strony dla operacji Create, Read, Update i Delete (CRUD) dla modelu filmu.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Utwórz folder *stron/filmów* :
 
@@ -168,7 +169,7 @@ Poprzednie polecenie dodaje Entity Framework Core narzędzia dla interfejs wiers
 
 ### <a name="files-created"></a>Utworzone pliki
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Proces tworzenia szkieletu tworzy i aktualizuje następujące pliki:
 
@@ -208,7 +209,7 @@ Utworzone pliki zostały wyjaśnione w następnej sekcji.
 
 ## <a name="initial-migration"></a>Migracja początkowa
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 W tej sekcji konsola Menedżera pakietów (PMC) służy do:
 
@@ -242,9 +243,9 @@ Możesz zignorować to ostrzeżenie. zostanie on rozwiązany w kolejnym samouczk
 
 Polecenie migrations generuje kod, aby utworzyć początkowy schemat bazy danych. Schemat jest oparty na modelu określonym w `DbContext` . `InitialCreate`Argument jest używany do nazwy migracji. Można użyć dowolnej nazwy, ale według Konwencji została wybrana nazwa opisująca migrację.
 
-`update`Polecenie uruchamia `Up` metodę w migracjach, które nie zostały zastosowane. W takim przypadku program `update` uruchamia `Up` metodę w pliku *migrations/ \<time-stamp> _InitialCreate. cs* , który tworzy bazę danych.
+`update`Polecenie uruchamia `Up` metodę w migracjach, które nie zostały zastosowane. W takim przypadku program `update` uruchamia `Up` metodę w pliku  *migrations/ \<time-stamp> _InitialCreate. cs* , który tworzy bazę danych.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 ### <a name="examine-the-context-registered-with-dependency-injection"></a>Sprawdzanie kontekstu zarejestrowanego przy iniekcji zależności
 
@@ -300,7 +301,7 @@ Pominięto [krok migracji](#pmc).
 
 W następnym samouczku objaśniono pliki utworzone przez tworzenie szkieletu.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 > [!div class="step-by-step"]
 > [Poprzedni:](xref:tutorials/razor-pages/razor-pages-start) 
@@ -319,7 +320,7 @@ Klasy modelu są znane jako klasy POCO (z "zwykłych, starych obiektów CLR"), p
 
 ## <a name="add-a-data-model"></a>Dodawanie modelu danych
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Kliknij prawym przyciskiem myszy projekt ** Razor PagesMovie** > **Dodaj**  >  **Nowy folder**. Nazwij *modele*folderów.
 
@@ -356,7 +357,7 @@ Skompiluj projekt, aby sprawdzić, czy nie występują błędy kompilacji.
 
 W tej sekcji model filmu jest szkieletem. Oznacza to, że narzędzie tworzenia szkieletów tworzy strony dla operacji Create, Read, Update i Delete (CRUD) dla modelu filmu.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Utwórz folder *stron/filmów* :
 
@@ -450,7 +451,7 @@ Pliki utworzone i zaktualizowane zostały omówione w następnej sekcji.
 
 ## <a name="initial-migration"></a>Migracja początkowa
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 W tej sekcji konsola Menedżera pakietów (PMC) służy do:
 
@@ -484,7 +485,7 @@ Update-Database
 > [!NOTE]
 > Powyższe polecenia generują następujące ostrzeżenie: "*nie określono typu dla kolumny dziesiętnej" price "w typie jednostki" Movie ". Spowoduje to, że wartości powinny być obcinane w trybie dyskretnym, jeśli nie mieszczą się w domyślnej precyzji i skali. Jawnie określ typ kolumny programu SQL Server, który może pomieścić wszystkie wartości przy użyciu "HasColumnType ()".* Możesz zignorować to ostrzeżenie. zostanie on rozwiązany w kolejnym samouczku.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 ### <a name="examine-the-context-registered-with-dependency-injection"></a>Sprawdzanie kontekstu zarejestrowanego przy iniekcji zależności
 
@@ -540,7 +541,7 @@ Pominięto [krok migracji](#pmc).
 
 W następnym samouczku objaśniono pliki utworzone przez tworzenie szkieletu.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 > [!div class="step-by-step"]
 > [Poprzedni:](xref:tutorials/razor-pages/razor-pages-start) 

@@ -7,6 +7,7 @@ ms.custom: mvc
 ms.date: 02/04/2019
 ms.topic: tutorial
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/crud
-ms.openlocfilehash: 2c71ea0eaccf4daeb8937dd5839481a506864fbe
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: c17461f8d1d43335230a967a4b62943c055c06b9
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88012855"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629213"
 ---
 # <a name="tutorial-implement-crud-functionality---aspnet-mvc-with-ef-core"></a>Samouczek: Implementowanie funkcji CRUD — ASP.NET MVC z EF Core
 
@@ -128,9 +129,9 @@ Ten kod dodaje jednostkę ucznia utworzoną przez spinacz modelu ASP.NET Core MV
 
 Usunięto `ID` z `Bind` atrybutu, ponieważ identyfikator jest wartością klucza podstawowego, która SQL Server zostanie ustawiona automatycznie podczas wstawiania wiersza. Dane wejściowe użytkownika nie ustawiają wartości identyfikatora.
 
-Poza `Bind` atrybutem blok try-catch jest jedyną zmianą dokonaną w kodzie szkieletowym. Jeśli wyjątek pochodzący z `DbUpdateException` jest przechwytywany podczas zapisywania zmian, zostanie wyświetlony ogólny komunikat o błędzie. `DbUpdateException`wyjątki są czasami spowodowane przez coś zewnętrznego dla aplikacji, a nie z błędem programistycznym, więc użytkownik jest zalecany ponownie. Chociaż nie jest zaimplementowany w tym przykładzie, aplikacja do jakości produkcyjnej mógłby rejestrować wyjątek. Aby uzyskać więcej informacji, zobacz sekcję **log for Insight** w temacie [monitorowanie i telemetrię (Tworzenie aplikacji w chmurze w rzeczywistości na platformie Azure)](/aspnet/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/monitoring-and-telemetry).
+Poza `Bind` atrybutem blok try-catch jest jedyną zmianą dokonaną w kodzie szkieletowym. Jeśli wyjątek pochodzący z `DbUpdateException` jest przechwytywany podczas zapisywania zmian, zostanie wyświetlony ogólny komunikat o błędzie. `DbUpdateException` wyjątki są czasami spowodowane przez coś zewnętrznego dla aplikacji, a nie z błędem programistycznym, więc użytkownik jest zalecany ponownie. Chociaż nie jest zaimplementowany w tym przykładzie, aplikacja do jakości produkcyjnej mógłby rejestrować wyjątek. Aby uzyskać więcej informacji, zobacz sekcję **log for Insight** w temacie [monitorowanie i telemetrię (Tworzenie aplikacji w chmurze w rzeczywistości na platformie Azure)](/aspnet/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/monitoring-and-telemetry).
 
-Ten `ValidateAntiForgeryToken` atrybut pomaga zapobiegać atakom z wykorzystaniem fałszerstwa żądań między witrynami (CSRF). Token jest automatycznie wprowadzany do widoku przez [FormTagHelper](xref:mvc/views/working-with-forms#the-form-tag-helper) i jest dołączany, gdy formularz zostanie przesłany przez użytkownika. Token jest weryfikowany przez `ValidateAntiForgeryToken` atrybut. Aby uzyskać więcej informacji na temat CSRF, zobacz [zapobieganie żądaniu fałszerstwa](../../security/anti-request-forgery.md).
+Ten `ValidateAntiForgeryToken` atrybut pomaga zapobiegać atakom z wykorzystaniem fałszerstwa żądań między witrynami (CSRF). Token jest automatycznie wprowadzany do widoku przez [FormTagHelper](xref:mvc/views/working-with-forms#the-form-tag-helper) i jest dołączany, gdy formularz zostanie przesłany przez użytkownika. Token jest weryfikowany przez `ValidateAntiForgeryToken` atrybut. Aby uzyskać więcej informacji, zobacz <xref:security/anti-request-forgery>.
 
 <a id="overpost"></a>
 
@@ -281,7 +282,7 @@ Kliknij polecenie **Usuń**. Strona indeks zostanie wyświetlona bez usuniętego
 
 Aby zwolnić zasoby, które są przechowywane przez połączenie z bazą danych, wystąpienie kontekstu musi zostać usunięte najszybciej, jak to możliwe, gdy wszystko będzie gotowe. ASP.NET Core wbudowane [iniekcja zależności](../../fundamentals/dependency-injection.md) zajmuje się tym zadaniem.
 
-W *Startup.cs*należy wywołać [metodę rozszerzenia AddDbContext](https://github.com/aspnet/EntityFrameworkCore/blob/03bcb5122e3f577a84498545fcf130ba79a3d987/src/Microsoft.EntityFrameworkCore/EntityFrameworkServiceCollectionExtensions.cs) , aby zainicjować obsługę `DbContext` klasy w ASP.NET Core di kontenera. Ta metoda ustawia domyślnie okres istnienia usługi `Scoped` . `Scoped`oznacza, że okres istnienia obiektu kontekstu pokrywa się z czasem trwania żądania sieci Web, a `Dispose` Metoda zostanie wywołana automatycznie na końcu żądania sieci Web.
+W *Startup.cs*należy wywołać [metodę rozszerzenia AddDbContext](https://github.com/aspnet/EntityFrameworkCore/blob/03bcb5122e3f577a84498545fcf130ba79a3d987/src/Microsoft.EntityFrameworkCore/EntityFrameworkServiceCollectionExtensions.cs) , aby zainicjować obsługę `DbContext` klasy w ASP.NET Core di kontenera. Ta metoda ustawia domyślnie okres istnienia usługi `Scoped` . `Scoped` oznacza, że okres istnienia obiektu kontekstu pokrywa się z czasem trwania żądania sieci Web, a `Dispose` Metoda zostanie wywołana automatycznie na końcu żądania sieci Web.
 
 ## <a name="handle-transactions"></a>Obsługa transakcji
 

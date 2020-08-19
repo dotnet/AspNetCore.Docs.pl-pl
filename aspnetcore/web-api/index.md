@@ -7,6 +7,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 07/20/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/index
-ms.openlocfilehash: 7c59867f6d6fbf0f4d8207eb5d2919967d825e8b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 594d3dcbf55ed0a3476bb580df8e122cedb1dcd3
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021305"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634374"
 ---
 # <a name="create-web-apis-with-aspnet-core"></a>Tworzenie internetowych interfejsów API za pomocą platformy ASP.NET Core
 
@@ -48,7 +49,7 @@ Internetowy interfejs API składa się z co najmniej jednej klasy kontrolera, kt
 
 ::: moniker-end
 
-Nie twórz kontrolera interfejsu API sieci Web, pobierając z <xref:Microsoft.AspNetCore.Mvc.Controller> klasy. `Controller`Program dziedziczy z `ControllerBase` i dodaje obsługę widoków, dlatego służy do obsługi stron sieci Web, a nie żądań interfejsu API sieci Web. Wystąpił wyjątek dla tej reguły: Jeśli planujesz używać tego samego kontrolera dla widoków i interfejsów API sieci Web, utwórz go z `Controller` .
+Nie twórz kontrolera interfejsu API sieci Web, pobierając z <xref:Microsoft.AspNetCore.Mvc.Controller> klasy. `Controller` Program dziedziczy z `ControllerBase` i dodaje obsługę widoków, dlatego służy do obsługi stron sieci Web, a nie żądań interfejsu API sieci Web. Wystąpił wyjątek dla tej reguły: Jeśli planujesz używać tego samego kontrolera dla widoków i interfejsów API sieci Web, utwórz go z `Controller` .
 
 `ControllerBase`Klasa zawiera wiele właściwości i metod, które są przydatne do obsługi żądań HTTP. Na przykład `ControllerBase.CreatedAtAction` zwraca kod stanu 201:
 
@@ -162,7 +163,7 @@ namespace WebApiSample
 
 ## <a name="attribute-routing-requirement"></a>Wymagania dotyczące routingu atrybutów
 
-`[ApiController]`Atrybut powoduje, że atrybut routingu wymaga. Przykład:
+`[ApiController]`Atrybut powoduje, że atrybut routingu wymaga. Na przykład:
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -230,7 +231,7 @@ W przypadku zgodności z wersją 2,2 lub nowszą domyślny typ odpowiedzi dla od
 
 ::: moniker-end
 
-Aby zapewnić spójność automatycznych i niestandardowych odpowiedzi, wywołaj <xref:Microsoft.AspNetCore.Mvc.ControllerBase.ValidationProblem%2A> metodę zamiast <xref:System.Web.Http.ApiController.BadRequest%2A> . `ValidationProblem`zwraca <xref:Microsoft.AspNetCore.Mvc.ValidationProblemDetails> obiekt, a także odpowiedź automatyczną.
+Aby zapewnić spójność automatycznych i niestandardowych odpowiedzi, wywołaj <xref:Microsoft.AspNetCore.Mvc.ControllerBase.ValidationProblem%2A> metodę zamiast <xref:System.Web.Http.ApiController.BadRequest%2A> . `ValidationProblem` zwraca <xref:Microsoft.AspNetCore.Mvc.ValidationProblemDetails> obiekt, a także odpowiedź automatyczną.
 
 ### <a name="log-automatic-400-responses"></a>Rejestruj automatyczne odpowiedzi 400
 
@@ -272,7 +273,7 @@ Atrybut źródłowy powiązania definiuje lokalizację, w której zostanie znale
 |[`[FromServices]`](xref:mvc/controllers/dependency-injection#action-injection-with-fromservices) | Usługa żądania wstrzykiwana jako parametr akcji |
 
 > [!WARNING]
-> Nie należy używać `[FromRoute]` , gdy wartości mogą zawierać `%2f` (to oznacza `/` ). `%2f`nie zostanie wywyprowadzane do `/` . Użyj `[FromQuery]` , jeśli wartość może zawierać `%2f` .
+> Nie należy używać `[FromRoute]` , gdy wartości mogą zawierać `%2f` (to oznacza `/` ). `%2f` nie zostanie wywyprowadzane do `/` . Użyj `[FromQuery]` , jeśli wartość może zawierać `%2f` .
 
 Bez `[ApiController]` atrybutów źródła atrybutów ani powiązań, takich jak `[FromQuery]` , środowisko uruchomieniowe ASP.NET Core próbuje użyć spinacza modelu obiektów złożonych. Segregator modelu obiektów złożonych pobiera dane od dostawców wartości w zdefiniowanej kolejności.
 
@@ -282,32 +283,32 @@ W poniższym przykładzie `[FromQuery]` atrybut wskazuje, że `discontinuedOnly`
 
 Ten `[ApiController]` atrybut stosuje reguły wnioskowania dla domyślnych źródeł danych parametrów akcji. Te reguły zapisują nie trzeba ręcznie identyfikować źródeł powiązań przez zastosowanie atrybutów do parametrów akcji. Reguły wnioskowania źródła powiązań zachowują się w następujący sposób:
 
-* `[FromBody]`jest wywnioskowany dla parametrów typu złożonego. Wyjątek od `[FromBody]` reguły wnioskowania jest dowolnego złożonego, wbudowanego typu z specjalnym znaczeniem, takim jak <xref:Microsoft.AspNetCore.Http.IFormCollection> i <xref:System.Threading.CancellationToken> . Kod wnioskowania źródła powiązania ignoruje te typy specjalne.
-* `[FromForm]`jest wywnioskowany dla parametrów akcji typu <xref:Microsoft.AspNetCore.Http.IFormFile> i <xref:Microsoft.AspNetCore.Http.IFormFileCollection> . Nie jest wywnioskowane dla żadnego prostego lub zdefiniowanego przez użytkownika typu.
-* `[FromRoute]`jest wywnioskowany dla każdej nazwy parametru akcji pasującej do parametru w szablonie trasy. W przypadku, gdy więcej niż jedna trasa pasuje do parametru akcji, uwzględniana jest jakakolwiek wartość trasy `[FromRoute]` .
-* `[FromQuery]`jest wywnioskowany dla wszystkich innych parametrów akcji.
+* `[FromBody]` jest wywnioskowany dla parametrów typu złożonego. Wyjątek od `[FromBody]` reguły wnioskowania jest dowolnego złożonego, wbudowanego typu z specjalnym znaczeniem, takim jak <xref:Microsoft.AspNetCore.Http.IFormCollection> i <xref:System.Threading.CancellationToken> . Kod wnioskowania źródła powiązania ignoruje te typy specjalne.
+* `[FromForm]` jest wywnioskowany dla parametrów akcji typu <xref:Microsoft.AspNetCore.Http.IFormFile> i <xref:Microsoft.AspNetCore.Http.IFormFileCollection> . Nie jest wywnioskowane dla żadnego prostego lub zdefiniowanego przez użytkownika typu.
+* `[FromRoute]` jest wywnioskowany dla każdej nazwy parametru akcji pasującej do parametru w szablonie trasy. W przypadku, gdy więcej niż jedna trasa pasuje do parametru akcji, uwzględniana jest jakakolwiek wartość trasy `[FromRoute]` .
+* `[FromQuery]` jest wywnioskowany dla wszystkich innych parametrów akcji.
 
 ### <a name="frombody-inference-notes"></a>FromBody informacje o wnioskach
 
-`[FromBody]`nie jest wywnioskowane dla typów prostych, takich jak `string` lub `int` . W związku z tym `[FromBody]` atrybut powinien być używany dla typów prostych, gdy ta funkcja jest wymagana.
+`[FromBody]` nie jest wywnioskowane dla typów prostych, takich jak `string` lub `int` . W związku z tym `[FromBody]` atrybut powinien być używany dla typów prostych, gdy ta funkcja jest wymagana.
 
 Gdy akcja ma więcej niż jeden parametr powiązany z treścią żądania, zgłaszany jest wyjątek. Na przykład, wszystkie następujące sygnatury metody akcji powodują wyjątek:
 
-* `[FromBody]`wywnioskowane na obu, ponieważ są to typy złożone.
+* `[FromBody]` wywnioskowane na obu, ponieważ są to typy złożone.
 
   ```csharp
   [HttpPost]
   public IActionResult Action1(Product product, Order order)
   ```
 
-* `[FromBody]`atrybut na jeden, wywnioskowany na drugim, ponieważ jest typem złożonym.
+* `[FromBody]` atrybut na jeden, wywnioskowany na drugim, ponieważ jest typem złożonym.
 
   ```csharp
   [HttpPost]
   public IActionResult Action2(Product product, [FromBody] Order order)
   ```
 
-* `[FromBody]`atrybut na obu.
+* `[FromBody]` atrybut na obu.
 
   ```csharp
   [HttpPost]
@@ -377,7 +378,7 @@ Rozważmy następujący kod w akcji kontrolera:
 
 [!code-csharp[](index/samples/2.x/2.2/Controllers/PetsController.cs?name=snippet_ProblemDetailsStatusCode)]
 
-`NotFound`Metoda generuje kod stanu HTTP 404 z `ProblemDetails` treścią. Przykład:
+`NotFound`Metoda generuje kod stanu HTTP 404 z `ProblemDetails` treścią. Na przykład:
 
 ```json
 {

@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/12/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/ip-safelist
-ms.openlocfilehash: 75c1ea3a6087f89a200d1f73b1ff65080c819ccd
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 621be5351acb251335a42f57e8ea670af1b35a87
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021773"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634452"
 ---
 # <a name="client-ip-safelist-for-aspnet-core"></a>Safelist IP klienta dla ASP.NET Core
 
@@ -32,7 +33,7 @@ W tym artykule przedstawiono trzy sposoby implementacji adresu IP Safelist (znan
 
 * Oprogramowanie pośredniczące do sprawdzenia zdalnego adresu IP każdego żądania.
 * Filtry akcji MVC do sprawdzenia zdalnego adresu IP żądań określonych kontrolerów lub metod akcji.
-* RazorStrony filtrują, aby sprawdzić zdalny adres IP żądań Razor stron.
+* Razor Strony filtrują, aby sprawdzić zdalny adres IP żądań Razor stron.
 
 W każdym przypadku ciąg zawierający zatwierdzone adresy IP klienta jest przechowywany w ustawieniu aplikacji. Oprogramowanie pośredniczące lub filtr:
 
@@ -66,7 +67,7 @@ Oprogramowanie pośredniczące analizuje ciąg w tablicę i wyszukuje zdalny adr
 
 ## <a name="action-filter"></a>Filtr akcji
 
-Jeśli potrzebujesz kontroli dostępu opartej na Safelist dla określonych kontrolerów MVC lub metod akcji, Użyj filtru akcji. Przykład:
+Jeśli potrzebujesz kontroli dostępu opartej na Safelist dla określonych kontrolerów MVC lub metod akcji, Użyj filtru akcji. Na przykład:
 
 [!code-csharp[](ip-safelist/samples/Shared/ClientIpSafelistComponents/Filters/ClientIpCheckActionFilter.cs?name=snippet_ClassOnly)]
 
@@ -101,9 +102,9 @@ W przykładowej aplikacji filtr akcji jest stosowany do `Get` metody akcji kontr
 
 * Zlecenie żądania HTTP inne niż GET, `AdminSafeListMiddleware` oprogramowanie pośredniczące sprawdza adres IP klienta.
 
-## <a name="no-locrazor-pages-filter"></a>RazorFiltr stron
+## <a name="no-locrazor-pages-filter"></a>Razor Filtr stron
 
-Jeśli chcesz, aby dla aplikacji stron była oparta safelista kontrola dostępu Razor , użyj Razor filtru stron. Przykład:
+Jeśli chcesz, aby dla aplikacji stron była oparta safelista kontrola dostępu Razor , użyj Razor filtru stron. Na przykład:
 
 [!code-csharp[](ip-safelist/samples/Shared/ClientIpSafelistComponents/Filters/ClientIpCheckPageFilter.cs?name=snippet_ClassOnly)]
 
@@ -128,7 +129,7 @@ dbug: ClientIpSafelistComponents.Filters.ClientIpCheckPageFilter[0]
       Remote IpAddress: ::1
 ```
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:fundamentals/middleware/index>
 * [Filtry akcji](xref:mvc/controllers/filters#action-filters)

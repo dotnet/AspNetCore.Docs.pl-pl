@@ -1,11 +1,12 @@
 ---
-title: Wprowadzenie do ASP.NET CoreSignalR
+title: Wprowadzenie do ASP.NET Core SignalR
 author: bradygaster
 description: W tym samouczku utworzysz aplikację czatu korzystającą ASP.NET Core SignalR .
 ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/21/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/signalr
-ms.openlocfilehash: 51b9eae0d4746001696e0795467eaf4c0ab2c990
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: e98cfc5e95233ce4d1001ab1225fc15e5fd23733
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022033"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634504"
 ---
-# <a name="tutorial-get-started-with-aspnet-core-no-locsignalr"></a>Samouczek: wprowadzenie do ASP.NET CoreSignalR
+# <a name="tutorial-get-started-with-aspnet-core-no-locsignalr"></a>Samouczek: wprowadzenie do ASP.NET Core SignalR
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -42,7 +43,7 @@ Na końcu będziesz mieć działającą aplikację czatu:
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs-3.0.md)]
 
@@ -58,7 +59,7 @@ Na końcu będziesz mieć działającą aplikację czatu:
 
 ## <a name="create-a-web-app-project"></a>Tworzenie projektu aplikacji internetowej
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio/)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)
 
 * Z menu wybierz pozycję **plik > nowy projekt**.
 
@@ -99,7 +100,7 @@ Na końcu będziesz mieć działającą aplikację czatu:
 
 SignalRBiblioteka serwerów jest dołączona do struktury udostępnionej ASP.NET Core 3,0. Biblioteka klienta JavaScript nie jest automatycznie dołączana do projektu. W tym samouczku użyjesz programu Library Manager (LibMan), aby uzyskać bibliotekę kliencką z *unpkg*. unpkg to usługa Content Delivery Network (CDN), która umożliwia dostarczanie elementów znalezionych w npm, Menedżer pakietów Node.js.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio/)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)
 
 * W **Eksplorator rozwiązań**kliknij prawym przyciskiem myszy projekt, a następnie wybierz polecenie **Dodaj** > **bibliotekę po stronie klienta**.
 
@@ -185,9 +186,9 @@ SignalRBiblioteka serwerów jest dołączona do struktury udostępnionej ASP.NET
 
   `ChatHub`Klasa dziedziczy z SignalR `Hub` klasy. `Hub`Klasa zarządza połączeniami, grupami i obsługą wiadomości.
 
-  `SendMessage`Metoda może być wywoływana przez połączonego klienta w celu wysłania komunikatu do wszystkich klientów. Kod klienta JavaScript, który wywołuje metodę, jest wyświetlany w dalszej części samouczka. SignalRkod jest asynchroniczny, aby zapewnić maksymalną skalowalność.
+  `SendMessage`Metoda może być wywoływana przez połączonego klienta w celu wysłania komunikatu do wszystkich klientów. Kod klienta JavaScript, który wywołuje metodę, jest wyświetlany w dalszej części samouczka. SignalR kod jest asynchroniczny, aby zapewnić maksymalną skalowalność.
 
-## <a name="configure-no-locsignalr"></a>PonowneSignalR
+## <a name="configure-no-locsignalr"></a>Ponowne SignalR
 
 SignalRSerwer musi być skonfigurowany tak, aby przekazywać SignalR żądania do SignalR .
 
@@ -221,7 +222,7 @@ SignalRSerwer musi być skonfigurowany tak, aby przekazywać SignalR żądania d
 
 ## <a name="run-the-app"></a>Uruchamianie aplikacji
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Naciśnij **klawisze CTRL + F5** , aby uruchomić aplikację bez debugowania.
 
@@ -249,7 +250,7 @@ SignalRSerwer musi być skonfigurowany tak, aby przekazywać SignalR żądania d
 
 > [!TIP]
 > * Jeśli aplikacja nie działa, Otwórz narzędzia deweloperskie przeglądarki (F12) i przejdź do konsoli programu. Mogą pojawić się błędy związane z kodem HTML i JavaScript. Załóżmy na przykład, że należy umieścić *signalr.js* w innym folderze niż skierowany. W takim przypadku odwołanie do tego pliku nie będzie działało i zobaczysz błąd 404 w konsoli.
->   ![Błąd nie znalezionosignalr.js](signalr/_static/3.x/f12-console.png)
+>   ![ Błąd nie znalezionosignalr.js](signalr/_static/3.x/f12-console.png)
 > * Jeśli zostanie wyświetlony komunikat o błędzie ERR_SPDY_INADEQUATE_TRANSPORT_SECURITY w programie Chrome, uruchom następujące polecenia, aby zaktualizować certyfikat deweloperski:
 >
 >   ```dotnetcli
@@ -273,7 +274,7 @@ Na końcu będziesz mieć działającą aplikację czatu:::: ![ no-Loc (signaler
 
 ## <a name="prerequisites"></a>Wymagania wstępne    
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)   
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)   
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs2017-2.2.md)] 
 
@@ -289,7 +290,7 @@ Na końcu będziesz mieć działającą aplikację czatu:::: ![ no-Loc (signaler
 
 ## <a name="create-a-web-project"></a>Tworzenie projektu sieci Web 
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio/)  
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)  
 
 * Z menu wybierz pozycję **plik > nowy projekt**. 
 
@@ -330,7 +331,7 @@ Na końcu będziesz mieć działającą aplikację czatu:::: ![ no-Loc (signaler
 
 SignalRBiblioteka serwerów jest dołączona do `Microsoft.AspNetCore.App` pakietu. Biblioteka klienta JavaScript nie jest automatycznie dołączana do projektu. W tym samouczku użyjesz programu Library Manager (LibMan), aby uzyskać bibliotekę kliencką z *unpkg*. unpkg to usługa Content Delivery Network (CDN), która umożliwia dostarczanie elementów znalezionych w npm, Menedżer pakietów Node.js.   
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio/)  
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)  
 
 * W **Eksplorator rozwiązań**kliknij prawym przyciskiem myszy projekt, a następnie wybierz polecenie **Dodaj** > **bibliotekę po stronie klienta**.  
 
@@ -418,9 +419,9 @@ SignalRBiblioteka serwerów jest dołączona do `Microsoft.AspNetCore.App` pakie
 
   `ChatHub`Klasa dziedziczy z SignalR `Hub` klasy. `Hub`Klasa zarządza połączeniami, grupami i obsługą wiadomości.  
 
-  `SendMessage`Metoda może być wywoływana przez połączonego klienta w celu wysłania komunikatu do wszystkich klientów. Kod klienta JavaScript, który wywołuje metodę, jest wyświetlany w dalszej części samouczka. SignalRkod jest asynchroniczny, aby zapewnić maksymalną skalowalność.    
+  `SendMessage`Metoda może być wywoływana przez połączonego klienta w celu wysłania komunikatu do wszystkich klientów. Kod klienta JavaScript, który wywołuje metodę, jest wyświetlany w dalszej części samouczka. SignalR kod jest asynchroniczny, aby zapewnić maksymalną skalowalność.    
 
-## <a name="configure-no-locsignalr"></a>PonowneSignalR  
+## <a name="configure-no-locsignalr"></a>Ponowne SignalR  
 
 SignalRSerwer musi być skonfigurowany tak, aby przekazywać SignalR żądania do SignalR .    
 
@@ -454,7 +455,7 @@ SignalRSerwer musi być skonfigurowany tak, aby przekazywać SignalR żądania d
 
 ## <a name="run-the-app"></a>Uruchamianie aplikacji  
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)   
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)   
 
 * Naciśnij **klawisze CTRL + F5** , aby uruchomić aplikację bez debugowania.   
 
@@ -482,8 +483,8 @@ SignalRSerwer musi być skonfigurowany tak, aby przekazywać SignalR żądania d
 
 > [!TIP]    
 > Jeśli aplikacja nie działa, Otwórz narzędzia deweloperskie przeglądarki (F12) i przejdź do konsoli programu. Mogą pojawić się błędy związane z kodem HTML i JavaScript. Załóżmy na przykład, że należy umieścić *signalr.js* w innym folderze niż skierowany. W takim przypadku odwołanie do tego pliku nie będzie działało i zobaczysz błąd 404 w konsoli.   
-> ![Błąd nie znalezionosignalr.js](signalr/_static/2.x/f12-console.png)    
-## <a name="additional-resources"></a>Zasoby dodatkowe 
+> ![ Błąd nie znalezionosignalr.js](signalr/_static/2.x/f12-console.png)    
+## <a name="additional-resources"></a>Dodatkowe zasoby 
 * [Wersja tego samouczka usługi YouTube](https://www.youtube.com/watch?v=iKlVmu-r0JQ)   
 
 ::: moniker-end

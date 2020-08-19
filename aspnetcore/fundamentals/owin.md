@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: H1Hack27Feb2017
 ms.date: 12/18/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/owin
-ms.openlocfilehash: e6069e5051530e88c43d99758d891b53c9f35233
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: d766ba3387edbfb9298b6f3cf8a485738b7d7139
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88016898"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628602"
 ---
 # <a name="open-web-interface-for-net-owin-with-aspnet-core"></a>Otwórz interfejs sieci Web dla platformy .NET (OWIN) z ASP.NET Core
 
@@ -109,9 +110,9 @@ Serwery z systemem OWIN mogą hostować aplikacje ASP.NET Core. Jeden taki serwe
 
 [!code-csharp[](owin/sample/src/NowinSample/Program.cs?highlight=15)]
 
-`IServer`jest interfejsem, który wymaga `Features` właściwości i `Start` metody.
+`IServer` jest interfejsem, który wymaga `Features` właściwości i `Start` metody.
 
-`Start`jest odpowiedzialny za konfigurowanie i uruchamianie serwera, co w tym przypadku jest realizowane za pośrednictwem szeregu wywołań interfejsu API Fluent, które ustawiają adresy przeanalizowane z IServerAddressesFeature. Należy zauważyć, że konfiguracja Fluent `_builder` zmiennej określa, że żądania będą obsługiwane przez `appFunc` zdefiniowane wcześniej w metodzie. `Func`Jest on wywoływany dla każdego żądania w celu przetworzenia żądań przychodzących.
+`Start` jest odpowiedzialny za konfigurowanie i uruchamianie serwera, co w tym przypadku jest realizowane za pośrednictwem szeregu wywołań interfejsu API Fluent, które ustawiają adresy przeanalizowane z IServerAddressesFeature. Należy zauważyć, że konfiguracja Fluent `_builder` zmiennej określa, że żądania będą obsługiwane przez `appFunc` zdefiniowane wcześniej w metodzie. `Func`Jest on wywoływany dla każdego żądania w celu przetworzenia żądań przychodzących.
 
 Dodamy również rozszerzenie, `IWebHostBuilder` Aby ułatwić Dodawanie i Konfigurowanie serwera nowin.
 
@@ -323,7 +324,7 @@ OWIN zależy od `IDictionary<string,object>` obiektu do przekazywania informacji
 | akceptowan. ClientCloseStatus | `int` | Opcjonalne |
 | akceptowan. ClientCloseDescription | `String` | Opcjonalne |
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Oprogramowanie pośredniczące](xref:fundamentals/middleware/index)
 * [Serwery](xref:fundamentals/servers/index)

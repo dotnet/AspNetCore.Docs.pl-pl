@@ -5,6 +5,7 @@ description: Dowiedz się, jak ograniczyć okres istnienia chronionego ładunku 
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/consumer-apis/limited-lifetime-payloads
-ms.openlocfilehash: c7bc86cd42a725f21cf66187c033376a8c5a9e65
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: f76aca460c293b5f814ba10ee6c8ac68b3d147bb
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014831"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634426"
 ---
 # <a name="limit-the-lifetime-of-protected-payloads-in-aspnet-core"></a>Ogranicz okres istnienia chronionych ładunków w ASP.NET Core
 
@@ -32,7 +33,7 @@ Aby ułatwić naszym użytkownikom deweloperów, pakiet [Microsoft. AspNetCore. 
 
 `ITimeLimitedDataProtector`Interfejs to podstawowy interfejs do ochrony i nieochrony ładunków z ograniczeniami czasowymi/z własnym wygaśnięciem. Aby utworzyć wystąpienie obiektu, należy `ITimeLimitedDataProtector` najpierw potrzebować wystąpienia regularnego [IDataProtector](xref:security/data-protection/consumer-apis/overview) skonstruowanego z określonym przeznaczeniem. Gdy `IDataProtector` wystąpienie jest dostępne, wywołaj `IDataProtector.ToTimeLimitedDataProtector` metodę rozszerzenia, aby odzyskać funkcję ochrony z wbudowanymi funkcjami wygaśnięcia.
 
-`ITimeLimitedDataProtector`udostępnia następujące metody:
+`ITimeLimitedDataProtector` udostępnia następujące metody:
 
 * Funkcja onprotecter (przeznaczenie ciągu): ITimeLimitedDataProtector — ten interfejs API jest podobny do istniejącego `IDataProtectionProvider.CreateProtector` w programie, który może służyć do tworzenia [łańcuchów celów](xref:security/data-protection/consumer-apis/purpose-strings) z poziomu głównej ochrony ograniczonej czasowo.
 

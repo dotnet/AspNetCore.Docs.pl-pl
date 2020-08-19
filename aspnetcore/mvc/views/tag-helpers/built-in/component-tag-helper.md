@@ -6,6 +6,7 @@ description: Dowiedz się, jak używać pomocnika tagów składnika ASP.NET Core
 ms.custom: mvc
 ms.date: 04/15/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/component-tag-helper
-ms.openlocfilehash: 09291b537e35d00df6f8006aaccdf4db12acfaea
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 1a0422da6bd48049cac73debe7d335da91e311be
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018692"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633919"
 ---
 # <a name="component-tag-helper-in-aspnet-core"></a>Pomocnik tagu składnika w ASP.NET Core
 
@@ -155,9 +156,9 @@ public class MyClass
     param-MyObject="@myObject" />
 ```
 
-W poprzednim przykładzie przyjęto założenie, że `MyComponent` składnik znajduje się w folderze *udostępnionym* aplikacji. Symbol zastępczy `{APP ASSEMBLY}` jest nazwą zestawu aplikacji (na przykład `@using BlazorSample` i `@using BlazorSample.Shared` ). `MyClass`znajduje się w przestrzeni nazw aplikacji.
+W poprzednim przykładzie przyjęto założenie, że `MyComponent` składnik znajduje się w folderze *udostępnionym* aplikacji. Symbol zastępczy `{APP ASSEMBLY}` jest nazwą zestawu aplikacji (na przykład `@using BlazorSample` i `@using BlazorSample.Shared` ). `MyClass` znajduje się w przestrzeni nazw aplikacji.
 
-<xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode>Określa, czy składnik:
+<xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode> Określa, czy składnik:
 
 * Jest wstępnie renderowany na stronie.
 * Jest renderowany jako statyczny kod HTML na stronie lub zawiera informacje niezbędne do uruchomienia Blazor aplikacji przez agenta użytkownika.

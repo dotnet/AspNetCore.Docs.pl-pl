@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 03/26/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/sdk
-ms.openlocfilehash: b960460a50558a11bc47f9a1844931aa32e3d696
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: d11600af88d499d63adf9eae90d6deb929f9d92a
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021422"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88632918"
 ---
 # <a name="aspnet-core-no-locrazor-sdk"></a>RazorZestaw SDK ASP.NET Core
 
@@ -118,7 +119,7 @@ Właściwości i elementy w poniższej tabeli służą do konfigurowania danych 
 | `RazorGenerate` | Elementy elementu (pliki *. cshtml* ), które są danymi wejściowymi do generowania kodu. |
 | `RazorComponent` | Elementy elementu (pliki*Razor* ), które są danymi wejściowymi Razor generowania kodu składnika. |
 | `RazorCompile` | Elementy elementów (pliki*CS* ), które są danymi wejściowymi do Razor elementów docelowych kompilacji. Użyj tego `ItemGroup` , aby określić dodatkowe pliki do skompilowania do Razor zestawu. |
-| `RazorTargetAssemblyAttribute` | Elementy elementów używane do tworzenia kodu atrybutów dla Razor zestawu. Przykład:  <br>`RazorAssemblyAttribute`<br>`Include="System.Reflection.AssemblyMetadataAttribute"`<br>`_Parameter1="BuildSource" _Parameter2="https://docs.microsoft.com/">` |
+| `RazorTargetAssemblyAttribute` | Elementy elementów używane do tworzenia kodu atrybutów dla Razor zestawu. Na przykład:  <br>`RazorAssemblyAttribute`<br>`Include="System.Reflection.AssemblyMetadataAttribute"`<br>`_Parameter1="BuildSource" _Parameter2="https://docs.microsoft.com/">` |
 | `RazorEmbeddedResource` | Elementy elementu dodane jako zasoby osadzone do wygenerowanego Razor zestawu. |
 
 ::: moniker range=">= aspnetcore-3.0"
@@ -171,7 +172,7 @@ Właściwości i elementy w poniższej tabeli służą do konfigurowania danych 
 
 Aby uzyskać więcej informacji na temat właściwości, zobacz [Właściwości programu MSBuild](/visualstudio/msbuild/msbuild-properties).
 
-### <a name="targets"></a>Obiekty docelowe
+### <a name="targets"></a>Targets (Obiekty docelowe)
 
 RazorZestaw SDK definiuje dwa podstawowe elementy docelowe:
 
@@ -185,7 +186,7 @@ RazorZestaw SDK definiuje dwa podstawowe elementy docelowe:
 
 * W przypadku aplikacji sieci Web upewnij się, że aplikacja jest ukierunkowana na `Microsoft.NET.Sdk.Web` zestaw SDK.
 
-## <a name="no-locrazor-language-version"></a>Razorwersja językowa
+## <a name="no-locrazor-language-version"></a>Razor wersja językowa
 
 W przypadku określania `Microsoft.NET.Sdk.Web` zestawu SDK Razor wersja językowa jest wywnioskowana z wersji platformy docelowej aplikacji. W przypadku projektów przeznaczonych dla `Microsoft.NET.Sdk.Razor` zestawu SDK lub w rzadkich przypadkach, gdy aplikacja wymaga innej Razor wersji językowej niż wnioskowana wartość, można skonfigurować wersję, ustawiając `<RazorLangVersion>` Właściwość w pliku projektu aplikacji:
 
@@ -197,7 +198,7 @@ W przypadku określania `Microsoft.NET.Sdk.Web` zestawu SDK Razor wersja języko
 
 Razorwersja językowa jest ściśle zintegrowana z wersją środowiska uruchomieniowego, dla którego została skompilowana. Określanie wersji językowej, która nie jest przeznaczona dla środowiska uruchomieniowego, nie jest obsługiwane i prawdopodobnie powoduje błędy kompilacji.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Dodatki do formatu csproj dla platformy .NET Core](/dotnet/core/tools/csproj)
 * [Wspólne elementy projektów MSBuild](/visualstudio/msbuild/common-msbuild-project-items)

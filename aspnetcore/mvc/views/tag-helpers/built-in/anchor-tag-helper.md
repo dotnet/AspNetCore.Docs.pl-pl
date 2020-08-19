@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 10/13/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/anchor-tag-helper
-ms.openlocfilehash: 25f1716b5c80492edb72bc9555954c9c93c02a49
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: fcb58e2e0bfc6598edeb8c7f79986c3faf84e316
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018769"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633932"
 ---
 # <a name="anchor-tag-helper-in-aspnet-core"></a>Pomocnik tagu kotwicy w ASP.NET Core
 
@@ -185,7 +186,7 @@ Atrybut [obszaru ASP](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.A
 
 #### <a name="usage-in-no-locrazor-pages"></a>Użycie na Razor stronach
 
-RazorObszary stron są obsługiwane w ASP.NET Core 2,1 lub nowszych.
+Razor Obszary stron są obsługiwane w ASP.NET Core 2,1 lub nowszych.
 
 Weź pod uwagę następującą hierarchię katalogów:
 
@@ -251,7 +252,7 @@ Wygenerowany kod HTML:
 
 ### <a name="asp-protocol"></a>ASP — protokół
 
-Atrybut [ASP-Protocol](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Protocol*) służy do określania protokołu (takiego jak `https` ) w adresie URL. Przykład:
+Atrybut [ASP-Protocol](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Protocol*) służy do określania protokołu (takiego jak `https` ) w adresie URL. Na przykład:
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspProtocol)]
 
@@ -265,7 +266,7 @@ Nazwa hosta w przykładzie jest localhost. Pomocnik tagu kotwicy używa domeny p
 
 ### <a name="asp-host"></a>ASP — Host
 
-Atrybut [ASP-Host](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Host*) służy do określania nazwy hosta w adresie URL. Przykład:
+Atrybut [ASP-Host](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Host*) służy do określania nazwy hosta w adresie URL. Na przykład:
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspHost)]
 

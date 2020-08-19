@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/redis-backplane
-ms.openlocfilehash: d80bce204b467d436a3580933718147bc3fbe75c
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: bc28eb3096e88455347f68ca381c9a280d5a153e
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022488"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633659"
 ---
 # <a name="set-up-a-redis-backplane-for-aspnet-core-no-locsignalr-scale-out"></a>Konfigurowanie planu Redis dla ASP.NET Core SignalR skalowanie w poziomie
 
@@ -73,8 +74,8 @@ W tym artykule opisano SignalR zagadnienia dotyczące konfigurowania serwera [Re
 
 * W SignalR aplikacji zainstaluj jeden z następujących pakietów NuGet:
 
-  * `Microsoft.AspNetCore.SignalR.StackExchangeRedis`— Zależy od StackExchange. Redis 2. X.X. Jest to zalecany pakiet dla ASP.NET Core 2,2 i nowszych.
-  * `Microsoft.AspNetCore.SignalR.Redis`— Zależy od StackExchange. Redis 1. X.X. Ten pakiet nie jest uwzględniony w ASP.NET Core 3,0 i nowszych.
+  * `Microsoft.AspNetCore.SignalR.StackExchangeRedis` — Zależy od StackExchange. Redis 2. X.X. Jest to zalecany pakiet dla ASP.NET Core 2,2 i nowszych.
+  * `Microsoft.AspNetCore.SignalR.Redis` — Zależy od StackExchange. Redis 1. X.X. Ten pakiet nie jest uwzględniony w ASP.NET Core 3,0 i nowszych.
 
 * W `Startup.ConfigureServices` metodzie Wywołaj <xref:Microsoft.Extensions.DependencyInjection.StackExchangeRedisDependencyInjectionExtensions.AddStackExchangeRedis*> :
 
@@ -155,9 +156,9 @@ Gdy serwer Redis ulegnie awarii, program SignalR generuje wyjątki wskazujące, 
 * *Nie można wywołać metody centrum "MethodName"*
 * *Nie można nawiązać połączenia z Redis*
 
-SignalRnie buforuje komunikatów, aby wysłać je, gdy serwer powróci do tworzenia kopii zapasowej. Wszystkie komunikaty wysyłane w trakcie działania serwera Redis są tracone.
+SignalR nie buforuje komunikatów, aby wysłać je, gdy serwer powróci do tworzenia kopii zapasowej. Wszystkie komunikaty wysyłane w trakcie działania serwera Redis są tracone.
 
-SignalRautomatycznie ponownie nawiązuje połączenie po ponownym udostępnieniu serwera Redis.
+SignalR automatycznie ponownie nawiązuje połączenie po ponownym udostępnieniu serwera Redis.
 
 ### <a name="custom-behavior-for-connection-failures"></a>Niestandardowe zachowanie dla błędów połączeń
 

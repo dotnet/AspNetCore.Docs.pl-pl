@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 06/30/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/browser
-ms.openlocfilehash: f995fdaee1009ff51359df720c39d664aea6e3b1
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 8d1f761731ab3840d009eba1ff5316808bafec40
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88016274"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634413"
 ---
 # <a name="use-grpc-in-browser-apps"></a>Używanie gRPC w aplikacjach przeglądarki
 
@@ -120,18 +121,18 @@ Powyższy kod ma następujące działanie:
 * Konfiguruje kanał do korzystania z gRPC-sieci Web.
 * Tworzy klienta i wywołuje połączenie przy użyciu kanału.
 
-`GrpcWebHandler`dostępne są następujące opcje konfiguracji:
+`GrpcWebHandler` dostępne są następujące opcje konfiguracji:
 
 * **InnerHandler**: podstawowy, <xref:System.Net.Http.HttpMessageHandler> który wysyła żądanie HTTP gRPC, na przykład `HttpClientHandler` .
 * **GrpcWebMode**: typ wyliczeniowy, który określa, czy żądanie HTTP gRPC `Content-Type` ma wartość `application/grpc-web` lub `application/grpc-web-text` .
-    * `GrpcWebMode.GrpcWeb`konfiguruje zawartość do wysłania bez kodowania. Wartość domyślna.
-    * `GrpcWebMode.GrpcWebText`konfiguruje zawartość do kodowania base64. Wymagane dla wywołań przesyłania strumieniowego serwera w przeglądarkach.
+    * `GrpcWebMode.GrpcWeb` konfiguruje zawartość do wysłania bez kodowania. Wartość domyślna.
+    * `GrpcWebMode.GrpcWebText` konfiguruje zawartość do kodowania base64. Wymagane dla wywołań przesyłania strumieniowego serwera w przeglądarkach.
 * **HttpVersion**: protokół http `Version` służący do ustawiania [HttpRequestMessage. Version](xref:System.Net.Http.HttpRequestMessage.Version) w źródłowym żądaniu HTTP gRPC. gRPC — sieć Web nie wymaga określonej wersji i nie przesłania jej domyślnie, chyba że zostanie określona.
 
 > [!IMPORTANT]
 > Wygenerowane gRPC klienci mają metody synchronizacji i asynchroniczne do wywoływania metod jednoargumentowych. Na przykład `SayHello` jest synchronizowana i `SayHelloAsync` jest asynchroniczna. Wywołanie metody synchronizacji w Blazor WebAssembly aplikacji spowoduje, że aplikacja przestanie odpowiadać. Metody asynchroniczne muszą być zawsze używane w programie Blazor WebAssembly .
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [gRPC dla klientów sieci Web — projekt GitHub](https://github.com/grpc/grpc-web)
 * <xref:security/cors>

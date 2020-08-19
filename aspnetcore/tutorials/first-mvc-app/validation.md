@@ -5,6 +5,7 @@ description: Część 9 serii samouczków w ASP.NET Core MVC.
 ms.author: riande
 ms.date: 04/13/2017
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/validation
-ms.openlocfilehash: 43e8fbb46a3154cf2c4a50cc1683defeb5f898b6
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: c6904606cfe82a6c3a375667b2b2fcae0ab31d26
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020785"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628641"
 ---
 # <a name="part-9-add-validation-to-an-aspnet-core-mvc-app"></a>Część 9, Dodawanie walidacji do aplikacji ASP.NET Core MVC
 
@@ -97,7 +98,7 @@ Otwórz plik *Movie.cs* i zapoznaj się z `Movie` klasą. `System.ComponentModel
 
 `DataType`Atrybuty zawierają tylko wskazówki dla aparatu widoku do formatowania danych (i udostępniają elementy/atrybuty, takie jak `<a>` adresy URL i `<a href="mailto:EmailAddress.com">` wiadomości e-mail. Możesz użyć atrybutu, `RegularExpression` Aby sprawdzić poprawność formatu danych. Ten `DataType` atrybut służy do określania typu danych, który jest bardziej szczegółowy niż typ wewnętrzny bazy danych, nie są atrybutami walidacji. W tym przypadku chcemy tylko śledzić datę, a nie godzinę. `DataType`Wyliczenie zawiera wiele typów danych, takich jak data, godzina, numer telefonu, waluta, EmailAddress i inne. Ten `DataType` atrybut może również umożliwić aplikacji automatyczne udostępnianie funkcji specyficznych dla typu. Na przykład `mailto:` można utworzyć łącze dla i dla programu `DataType.EmailAddress` `DataType.Date` w przeglądarkach, które obsługują HTML5, można podać selektor daty. `DataType`Atrybuty emitują HTML 5 `data-` (wymawiane kreski danych), które mogą zrozumieć przeglądarki HTML 5. `DataType`Atrybuty nie zapewniają **not** żadnej weryfikacji.
 
-`DataType.Date`nie określa formatu wyświetlanej daty. Domyślnie pole dane jest wyświetlane zgodnie z domyślnymi formatami opartymi na serwerze `CultureInfo` .
+`DataType.Date` nie określa formatu wyświetlanej daty. Domyślnie pole dane jest wyświetlane zgodnie z domyślnymi formatami opartymi na serwerze `CultureInfo` .
 
 Ten `DisplayFormat` atrybut służy do jawnego określenia formatu daty:
 
@@ -129,7 +130,7 @@ Poniższy kod ilustruje łączenie atrybutów w jednym wierszu:
 
 W następnej części serii przeglądamy aplikację i wprowadzamy pewne ulepszenia dla automatycznie generowanych `Details` i `Delete` metod.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Praca z formularzami](xref:mvc/views/working-with-forms)
 * [Globalizacja i lokalizacja](xref:fundamentals/localization)

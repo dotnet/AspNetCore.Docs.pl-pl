@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/1x-to-2x/index
-ms.openlocfilehash: cad1cd868ef8c972d7e0fbfec79cd1d8b49c3b6e
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 6160dfd117235065ba4b990b95bbc1f4abdf1626
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015338"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634348"
 ---
 # <a name="migrate-from-aspnet-core-1x-to-20"></a>Migrowanie z ASP.NET Core 1. x do 2,0
 
@@ -204,6 +205,6 @@ Jeśli używasz bezpośrednio zestawu SDK Application Insights, Kontynuuj. [Paki
 
 ASP.NET Core 2,0 ma nowy model uwierzytelniania i wiele znaczących zmian ASP.NET Core Identity . Jeśli projekt został utworzony z włączonymi indywidualnymi kontami użytkowników lub jeśli masz ręcznie dodane uwierzytelnianie lub Identity , zobacz [Migrowanie uwierzytelniania i Identity do ASP.NET Core 2,0](xref:migration/1x-to-2x/identity-2x).
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Istotne zmiany w ASP.NET Core 2,0](https://github.com/aspnet/announcements/issues?page=1&q=is%3Aissue+is%3Aopen+label%3A2.0.0+label%3A%22Breaking+change%22&utf8=%E2%9C%93)

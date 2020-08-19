@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/03/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/localization-extensibility
-ms.openlocfilehash: e31a724107145ab72adfb395afec1cbd2775bac0
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 2e1041ed4cce3c3919d75ff47e2bc24fc446e9c3
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88017132"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88627614"
 ---
 # <a name="localization-extensibility"></a>Rozszerzalność lokalizacji
 
@@ -35,7 +36,7 @@ W tym artykule:
 
 ## <a name="extensible-points-in-localization-apis"></a>Rozszerzalne punkty w interfejsach API lokalizacji
 
-Interfejsy API lokalizacji ASP.NET Core są kompilowane do rozszerzalności. Rozszerzalność umożliwia deweloperom dostosowanie lokalizacji zgodnie z ich potrzebami. Na przykład [OrchardCore](https://github.com/orchardCMS/OrchardCore/) ma `POStringLocalizer` . `POStringLocalizer`szczegółowo opisano przy użyciu [lokalizacji obiektów przenośnych](xref:fundamentals/portable-object-localization) do `PO` przechowywania zasobów lokalizacji.
+Interfejsy API lokalizacji ASP.NET Core są kompilowane do rozszerzalności. Rozszerzalność umożliwia deweloperom dostosowanie lokalizacji zgodnie z ich potrzebami. Na przykład [OrchardCore](https://github.com/orchardCMS/OrchardCore/) ma `POStringLocalizer` . `POStringLocalizer` szczegółowo opisano przy użyciu [lokalizacji obiektów przenośnych](xref:fundamentals/portable-object-localization) do `PO` przechowywania zasobów lokalizacji.
 
 W tym artykule wymieniono dwa główne punkty rozszerzalności zapewniane przez interfejsy API lokalizacji: 
 
@@ -55,7 +56,7 @@ Poprzedni dostawcy są szczegółowo opisane w dokumentacji [oprogramowania poś
 
 ### <a name="use-customrequestcultureprovider"></a>Użyj CustomRequestCultureProvider
 
-<xref:Microsoft.AspNetCore.Localization.CustomRequestCultureProvider>zapewnia niestandardowy <xref:Microsoft.AspNetCore.Localization.RequestCultureProvider> , który używa prostego delegata do określenia bieżącej kultury lokalizacji:
+<xref:Microsoft.AspNetCore.Localization.CustomRequestCultureProvider> zapewnia niestandardowy <xref:Microsoft.AspNetCore.Localization.RequestCultureProvider> , który używa prostego delegata do określenia bieżącej kultury lokalizacji:
 
 ::: moniker range="< aspnetcore-3.0"
 ```csharp
@@ -147,7 +148,7 @@ public class AppSettingsRequestCultureProvider : RequestCultureProvider
 
 ## <a name="localization-resources"></a>Zasoby lokalizacji
 
-Zapewnia ASP.NET Core lokalizacji <xref:Microsoft.Extensions.Localization.ResourceManagerStringLocalizer> . <xref:Microsoft.Extensions.Localization.ResourceManagerStringLocalizer>jest implementacją programu <xref:Microsoft.Extensions.Localization.IStringLocalizer> , która jest stosowana `resx` do przechowywania zasobów lokalizacji.
+Zapewnia ASP.NET Core lokalizacji <xref:Microsoft.Extensions.Localization.ResourceManagerStringLocalizer> . <xref:Microsoft.Extensions.Localization.ResourceManagerStringLocalizer> jest implementacją programu <xref:Microsoft.Extensions.Localization.IStringLocalizer> , która jest stosowana `resx` do przechowywania zasobów lokalizacji.
 
 Nie można używać `resx` plików. Implementując `IStringLocalized` , można użyć dowolnego źródła danych.
 

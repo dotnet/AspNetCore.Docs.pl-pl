@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 07/27/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/client
-ms.openlocfilehash: 65e386298af26d36900f13a5eb11aab7c012c2b0
-ms.sourcegitcommit: 756c78f6dbfa77c5d718969cdce20639b8ca0a17
+ms.openlocfilehash: 28e4f372e301a673644bfa97763ebc930f2d0ad5
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/18/2020
-ms.locfileid: "88515612"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634335"
 ---
 # <a name="call-grpc-services-with-the-net-client"></a>Wywoływanie usług gRPC przy użyciu klienta platformy .NET
 

@@ -5,6 +5,7 @@ description: W tym artykule opisano najczęstsze kroki migracji ASP.NET Core 1. 
 ms.author: scaddie
 ms.date: 06/21/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/1x-to-2x/identity-2x
-ms.openlocfilehash: 46f10df25235b532f188eda2a079aef71070cd6d
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 63f2fadc328650063078339467e65c6b0e97a08e
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015293"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634322"
 ---
 # <a name="migrate-authentication-and-no-locidentity-to-aspnet-core-20"></a>Migrowanie uwierzytelniania i Identity do ASP.NET Core 2,0
 
@@ -92,7 +93,7 @@ Poniżej przedstawiono 2,0 instrukcje dotyczące migracji dla każdego główneg
 
 Wybierz jedną z dwóch opcji poniżej i wprowadź niezbędne zmiany w programie *Startup.cs*:
 
-1. Użyj cookie s zIdentity
+1. Użyj cookie s z Identity
     - Zamień `UseIdentity` na `UseAuthentication` w `Configure` metodzie:
 
         ```csharp
@@ -110,7 +111,7 @@ Wybierz jedną z dwóch opcji poniżej i wprowadź niezbędne zmiany w programie
         services.ConfigureApplicationCookie(options => options.LoginPath = "/Account/LogIn");
         ```
 
-2. Użyj cookie bezIdentity
+2. Użyj cookie bez Identity
     - Zastąp `UseCookieAuthentication` wywołanie metody w `Configure` metodzie `UseAuthentication` :
 
         ```csharp
@@ -458,6 +459,6 @@ W projektach 2,0 typ zwracany zmieni się na `IList<AuthenticationScheme>` . Ten
 
 <a name="additional-resources"></a>
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 Aby uzyskać więcej informacji, zobacz [Omówienie problemu z uwierzytelnianiem 2,0](https://github.com/aspnet/Security/issues/1338) w witrynie GitHub.

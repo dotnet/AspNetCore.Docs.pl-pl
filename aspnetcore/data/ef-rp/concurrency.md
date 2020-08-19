@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/concurrency
-ms.openlocfilehash: bb29001e30578e0992e578c2f98cda82c5dcf185
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: e03711d970c83c2b7d6cc76039cb0d556a751018
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018666"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628914"
 ---
 # <a name="part-8-no-locrazor-pages-with-ef-core-in-aspnet-core---concurrency"></a>Część 8 Razor strony z EF Core w ASP.NET Core — współbieżność
 
@@ -108,7 +109,7 @@ modelBuilder.Entity<Department>()
   .IsRowVersion();
 ```
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 W przypadku bazy danych SQL Server `[Timestamp]` atrybut klasy Entity został zdefiniowany jako tablica bajtowa:
 
@@ -154,7 +155,7 @@ Dodanie `RowVersion` Właściwości zmienia model danych, który wymaga migracji
 
 Skompiluj projekt. 
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Uruchom następujące polecenie w obszarze PMC:
 
@@ -179,7 +180,7 @@ To polecenie:
 
   [!code-csharp[](intro/samples/cu30/Migrations/SchoolContextModelSnapshot.cs?name=snippet_Department&highlight=15-17)]
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Uruchom następujące polecenie w obszarze PMC:
 
@@ -210,7 +211,7 @@ To polecenie:
 
 ## <a name="scaffold-department-pages"></a>Strony działu szkieletu
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Postępuj zgodnie z instrukcjami na [stronach uczniów tworzenia szkieletów](xref:data/ef-rp/intro#scaffold-student-pages) z następującymi wyjątkami:
 
@@ -267,7 +268,7 @@ Zaktualizuj *Pages\Departments\Edit.cshtml.cs* przy użyciu następującego kodu
 W poprzednim wyróżnionym kodzie:
 
 * Wartość w `Department.RowVersion` to co było w jednostce, gdy została pierwotnie pobrana w żądaniu pobrania dla strony edycji. Wartość jest dostarczana do `OnPost` metody przez ukryte pole na Razor stronie, które wyświetla jednostkę do edycji. Wartość pola ukrytego jest kopiowana do `Department.RowVersion` przez spinacz modelu.
-* `OriginalValue`Czy EF Core będą używane w klauzuli WHERE. Przed wykonaniem wyróżnionego wiersza kodu program `OriginalValue` ma wartość znajdującą się w bazie danych `FirstOrDefaultAsync` , gdy została wywołana w tej metodzie, która może się różnić od tego, co zostało wyświetlone na stronie Edycja.
+* `OriginalValue` Czy EF Core będą używane w klauzuli WHERE. Przed wykonaniem wyróżnionego wiersza kodu program `OriginalValue` ma wartość znajdującą się w bazie danych `FirstOrDefaultAsync` , gdy została wywołana w tej metodzie, która może się różnić od tego, co zostało wyświetlone na stronie Edycja.
 * Wyróżniony kod sprawdza, czy EF Core używa oryginalnej `RowVersion` wartości z wyświetlonej `Department` jednostki w klauzuli WHERE instrukcji SQL Update.
 
 Gdy wystąpi błąd współbieżności, poniższy wyróżniony kod pobiera wartości klienta (wartości ogłoszone w tej metodzie) oraz wartości bazy danych.
@@ -293,7 +294,7 @@ Zaktualizuj *strony/działy/Edit. cshtml* przy użyciu następującego kodu:
 Powyższy kod ma następujące działanie:
 
 * Aktualizuje `page` dyrektywę z `@page` do `@page "{id:int}"` .
-* Dodaje ukrytą wersję wiersza. `RowVersion`należy dodać, aby ogłaszać zwrotnie.
+* Dodaje ukrytą wersję wiersza. `RowVersion` należy dodać, aby ogłaszać zwrotnie.
 * Wyświetla ostatni bajt `RowVersion` do celów debugowania.
 * Zastępuje `ViewData` silnie wpisaną wartość `InstructorNameSL` .
 
@@ -331,11 +332,11 @@ Zaktualizuj *strony/działy/Delete. cshtml. cs* przy użyciu następującego kod
 
 [!code-csharp[](intro/samples/cu30/Pages/Departments/Delete.cshtml.cs)]
 
-Strona usuwania wykrywa konflikty współbieżności, gdy jednostka została zmieniona po pobraniu. `Department.RowVersion`jest to wersja wiersza, gdy jednostka została pobrana. Gdy EF Core tworzy polecenie SQL DELETE, zawiera klauzulę WHERE z `RowVersion` . Jeśli polecenie SQL DELETE skutkuje niezerowymi wierszami:
+Strona usuwania wykrywa konflikty współbieżności, gdy jednostka została zmieniona po pobraniu. `Department.RowVersion` jest to wersja wiersza, gdy jednostka została pobrana. Gdy EF Core tworzy polecenie SQL DELETE, zawiera klauzulę WHERE z `RowVersion` . Jeśli polecenie SQL DELETE skutkuje niezerowymi wierszami:
 
 * `RowVersion`Polecenie w instrukcji SQL Delete nie jest zgodne z `RowVersion` bazą danych.
 * Zgłaszany jest wyjątek DbUpdateConcurrencyException.
-* `OnGetAsync`jest wywoływana z `concurrencyError` .
+* `OnGetAsync` jest wywoływana z `concurrencyError` .
 
 ### <a name="update-the-delete-page"></a>Aktualizowanie strony usuwania
 
@@ -349,7 +350,7 @@ Poprzedni kod wprowadza następujące zmiany:
 * Dodaje komunikat o błędzie.
 * Zastępuje FirstMidName z FullName w polu **administrator** .
 * Zmiany `RowVersion` w celu wyświetlenia ostatniego bajtu.
-* Dodaje ukrytą wersję wiersza. `RowVersion`należy dodać, aby ogłaszać zwrotnie.
+* Dodaje ukrytą wersję wiersza. `RowVersion` należy dodać, aby ogłaszać zwrotnie.
 
 ### <a name="test-concurrency-conflicts"></a>Testuj konflikty współbieżności
 
@@ -369,7 +370,7 @@ W przeglądarce zostanie wyświetlona strona indeks z wartością zmieniona i za
 
 Usuń dział testów z drugiej karty. Błąd współbieżności jest wyświetlany z bieżącymi wartościami z bazy danych. Kliknięcie przycisku **Usuń** powoduje usunięcie jednostki, o ile `RowVersion` nie została zaktualizowana.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Tokeny współbieżności w EF Core](/ef/core/modeling/concurrency)
 * [Obsługa współbieżności w EF Core](/ef/core/saving/concurrency)
@@ -462,7 +463,7 @@ Aby wykrywać konflikty współbieżności, do modelu dodawana jest kolumna śle
 
 Baza danych generuje numer sekwencyjny `rowversion` , który jest zwiększany za każdym razem, gdy wiersz zostanie zaktualizowany. W `Update` `Delete` poleceniu lub, `Where` klauzula zawiera pobrana wartość `rowversion` . Jeśli aktualizowany wiersz został zmieniony:
 
-* `rowversion`nie jest zgodna z pobraną wartością.
+* `rowversion` nie jest zgodna z pobraną wartością.
 * `Update`Polecenia lub `Delete` nie znalazły wiersza, ponieważ `Where` klauzula zawiera pobrane `rowversion` .
 * `DbUpdateConcurrencyException`Jest zgłaszany.
 
@@ -522,7 +523,7 @@ Poprzednie polecenia:
 
 ## <a name="scaffold-the-departments-model"></a>Tworzenie szkieletu modelu działów
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio) 
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio) 
 
 Postępuj zgodnie z instrukcjami w obszarze [szkieletem model ucznia](xref:data/ef-rp/intro#scaffold-student-pages) i Użyj `Department` klasy modelu.
 
@@ -564,7 +565,7 @@ Aby wykryć problem współbieżności, [OriginalValue](/dotnet/api/microsoft.en
 
 [!code-csharp[](intro/samples/cu/Pages/Departments/Edit.cshtml.cs?name=snippet_rv&highlight=24-999)]
 
-W poprzednim kodzie `Department.RowVersion` jest wartością, gdy jednostka została pobrana. `OriginalValue`jest wartością w bazie danych, gdy `FirstOrDefaultAsync` została wywołana w tej metodzie.
+W poprzednim kodzie `Department.RowVersion` jest wartością, gdy jednostka została pobrana. `OriginalValue` jest wartością w bazie danych, gdy `FirstOrDefaultAsync` została wywołana w tej metodzie.
 
 Poniższy kod pobiera wartości klienta (wartości ogłoszone w tej metodzie) i wartości bazy danych:
 
@@ -589,7 +590,7 @@ Aktualizuj *strony/działy/Edit. cshtml* przy użyciu następującego znacznika:
 Poprzedzające znaczniki:
 
 * Aktualizuje `page` dyrektywę z `@page` do `@page "{id:int}"` .
-* Dodaje ukrytą wersję wiersza. `RowVersion`należy dodać ten wpis, aby ponownie utworzyć powiązanie z powrotem.
+* Dodaje ukrytą wersję wiersza. `RowVersion` należy dodać ten wpis, aby ponownie utworzyć powiązanie z powrotem.
 * Wyświetla ostatni bajt `RowVersion` do celów debugowania.
 * Zastępuje `ViewData` silnie wpisaną wartość `InstructorNameSL` .
 
@@ -629,11 +630,11 @@ Zaktualizuj model usuwania stron przy użyciu następującego kodu:
 
 [!code-csharp[](intro/samples/cu/Pages/Departments/Delete.cshtml.cs)]
 
-Strona usuwania wykrywa konflikty współbieżności, gdy jednostka została zmieniona po pobraniu. `Department.RowVersion`jest to wersja wiersza, gdy jednostka została pobrana. Gdy EF Core tworzy polecenie SQL DELETE, zawiera klauzulę WHERE z `RowVersion` . Jeśli polecenie SQL DELETE skutkuje niezerowymi wierszami:
+Strona usuwania wykrywa konflikty współbieżności, gdy jednostka została zmieniona po pobraniu. `Department.RowVersion` jest to wersja wiersza, gdy jednostka została pobrana. Gdy EF Core tworzy polecenie SQL DELETE, zawiera klauzulę WHERE z `RowVersion` . Jeśli polecenie SQL DELETE skutkuje niezerowymi wierszami:
 
 * `RowVersion`Polecenie w instrukcji SQL Delete nie jest zgodne z `RowVersion` bazą danych.
 * Zgłaszany jest wyjątek DbUpdateConcurrencyException.
-* `OnGetAsync`jest wywoływana z `concurrencyError` .
+* `OnGetAsync` jest wywoływana z `concurrencyError` .
 
 ### <a name="update-the-delete-page"></a>Aktualizowanie strony usuwania
 
@@ -647,7 +648,7 @@ Poprzedni kod wprowadza następujące zmiany:
 * Dodaje komunikat o błędzie.
 * Zastępuje FirstMidName z FullName w polu **administrator** .
 * Zmiany `RowVersion` w celu wyświetlenia ostatniego bajtu.
-* Dodaje ukrytą wersję wiersza. `RowVersion`należy dodać ten wpis, aby ponownie utworzyć powiązanie z powrotem.
+* Dodaje ukrytą wersję wiersza. `RowVersion` należy dodać ten wpis, aby ponownie utworzyć powiązanie z powrotem.
 
 ### <a name="test-concurrency-conflicts-with-the-delete-page"></a>Konflikty współbieżności testów ze stroną usuwania
 
@@ -669,7 +670,7 @@ Usuń dział testów z drugiej karty. Błąd współbieżności jest wyświetlan
 
 Zobacz [dziedziczenie](xref:data/ef-mvc/inheritance) sposobu dziedziczenia modelu danych.
 
-### <a name="additional-resources"></a>Zasoby dodatkowe
+### <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Tokeny współbieżności w EF Core](/ef/core/modeling/concurrency)
 * [Obsługa współbieżności w EF Core](/ef/core/saving/concurrency)

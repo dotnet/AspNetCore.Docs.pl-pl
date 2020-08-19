@@ -1,11 +1,12 @@
 ---
-title: Migrowanie z uwierzytelniania członkostwa ASP.NET do ASP.NET Core 2,0Identity
+title: Migrowanie z uwierzytelniania członkostwa ASP.NET do ASP.NET Core 2,0 Identity
 author: isaac2004
 description: Dowiedz się, jak migrować istniejące aplikacje ASP.NET przy użyciu uwierzytelniania członkostwa do ASP.NET Core 2,0 Identity .
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 01/10/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,21 +17,21 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/proper-to-2x/membership-to-core-identity
-ms.openlocfilehash: 97039ac1c7bcd6a1ff7b53e1579c623b26564d26
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: de9d1e5f6f595269595212fbab60d12dfd5a29e4
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014896"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633646"
 ---
-# <a name="migrate-from-aspnet-membership-authentication-to-aspnet-core-20-no-locidentity"></a>Migrowanie z uwierzytelniania członkostwa ASP.NET do ASP.NET Core 2,0Identity
+# <a name="migrate-from-aspnet-membership-authentication-to-aspnet-core-20-no-locidentity"></a>Migrowanie z uwierzytelniania członkostwa ASP.NET do ASP.NET Core 2,0 Identity
 
 Autor [Tomasz Levin](https://isaaclevin.com)
 
 W tym artykule przedstawiono Migrowanie schematu bazy danych dla aplikacji ASP.NET przy użyciu uwierzytelniania członkostwa w ASP.NET Core 2,0 Identity .
 
 > [!NOTE]
-> Ten dokument zawiera kroki niezbędne do przeprowadzenia migracji schematu bazy danych dla aplikacji opartych na członkostwie ASP.NET do schematu bazy danych używanego dla ASP.NET Core Identity . Aby uzyskać więcej informacji na temat migrowania z uwierzytelniania opartego na członkostwie ASP.NET do usługi ASP.NET Identity , zobacz [Migrowanie istniejącej Identity aplikacji z członkostwa SQL do usługi ASP.NET ](/aspnet/identity/overview/migrations/migrating-an-existing-website-from-sql-membership-to-aspnet-identity). Aby uzyskać więcej informacji na temat ASP.NET Core Identity , zobacz [wprowadzenie do Identity ASP.NET Core](xref:security/authentication/identity).
+> Ten dokument zawiera kroki niezbędne do migracji schematu bazy danych dla aplikacji opartych na członkostwie ASP.NET do schematu bazy danych używanego przez program ASP.NET Core Identity . Aby uzyskać więcej informacji na temat migrowania z uwierzytelniania opartego na członkostwie ASP.NET do usługi ASP.NET Identity , zobacz [Migrowanie istniejącej Identity aplikacji z członkostwa SQL do usługi ASP.NET ](/aspnet/identity/overview/migrations/migrating-an-existing-website-from-sql-membership-to-aspnet-identity). Aby uzyskać więcej informacji na temat ASP.NET Core Identity , zobacz [wprowadzenie do Identity ASP.NET Core](xref:security/authentication/identity).
 
 ## <a name="review-of-membership-schema"></a>Przegląd schematu członkostwa
 
@@ -40,7 +41,7 @@ Przed ASP.NET 2,0, deweloperzy byli poddani do tworzenia całego procesu uwierzy
 
 Aby przeprowadzić migrację istniejących aplikacji do ASP.NET Core 2,0 Identity , dane w tych tabelach muszą zostać zmigrowane do tabel używanych przez nowy Identity schemat.
 
-## <a name="aspnet-core-no-locidentity-20-schema"></a>IdentitySchemat ASP.NET Core 2,0
+## <a name="no-locaspnet-core-identity-20-schema"></a>ASP.NET Core Identity Schemat 2,0
 
 ASP.NET Core 2,0 jest zgodna z [Identity](/aspnet/identity/index) zasadą wprowadzoną w ASP.NET 4,5. Chociaż zasada jest współdzielona, implementacja między strukturami jest różna, nawet między wersjami ASP.NET Core (zobacz [Migrowanie uwierzytelniania i Identity do ASP.NET Core 2,0](xref:migration/1x-to-2x/index)).
 
@@ -49,7 +50,7 @@ Najszybszym sposobem wyświetlenia schematu dla ASP.NET Core 2,0 Identity jest u
 1. Wybierz pozycję **plik**  >  **Nowy**  >  **projekt**.
 1. Utwórz nowy projekt **aplikacji sieci Web ASP.NET Core** o nazwie *Core Identity Sample*.
 1. Wybierz pozycję **ASP.NET Core 2,0** na liście rozwijanej, a następnie wybierz pozycję **aplikacja sieci Web**. Ten szablon generuje aplikację [ Razor Pages](xref:razor-pages/index) . Przed kliknięciem przycisku **OK**kliknij pozycję **Zmień uwierzytelnianie**.
-1. Wybierz **konta poszczególnych użytkowników** dla Identity szablonów. Na koniec kliknij przycisk **OK**, a następnie **OK**. Program Visual Studio tworzy projekt przy użyciu Identity szablonu ASP.NET Core.
+1. Wybierz **konta poszczególnych użytkowników** dla Identity szablonów. Na koniec kliknij przycisk **OK**, a następnie **OK**. Program Visual Studio tworzy projekt przy użyciu ASP.NET Core Identity szablonu.
 1. Wybierz kolejno pozycje **Narzędzia**Menedżer  >  **pakietów NuGet**  >  **konsola Menedżera** pakietów, aby otworzyć okno **konsoli Menedżera pakietów** (PMC).
 1. Przejdź do katalogu głównego projektu w PMC i uruchom polecenie [Entity Framework (EF) Core](/ef/core) `Update-Database` .
 
@@ -73,7 +74,7 @@ Najszybszym sposobem wyświetlenia schematu dla ASP.NET Core 2,0 Identity jest u
 
 ## <a name="migrate-the-schema"></a>Migrowanie schematu
 
-Istnieją delikatne różnice w strukturach tabel i polach zarówno dla członkostwa, jak i ASP.NET Core Identity . Wzorzec został znacząco zmieniony na potrzeby uwierzytelniania/autoryzacji za pomocą aplikacji ASP.NET i ASP.NET Core. Obiekty kluczowe, które są nadal używane w połączeniu z Identity *użytkownikami* i *rolami*. Oto Mapowanie tabel dla *użytkowników*, *ról*i *roli użytkownika*.
+Istnieją delikatne różnice w strukturach tabel i polach dla członkostwa i ASP.NET Core Identity . Wzorzec został znacząco zmieniony na potrzeby uwierzytelniania/autoryzacji za pomocą aplikacji ASP.NET i ASP.NET Core. Obiekty kluczowe, które są nadal używane w połączeniu z Identity *użytkownikami* i *rolami*. Oto Mapowanie tabel dla *użytkowników*, *ról*i *roli użytkownika*.
 
 ### <a name="users"></a>Użytkownicy
 
@@ -88,7 +89,7 @@ Istnieją delikatne różnice w strukturach tabel i polach zarówno dla członko
 | `LockoutEnabled`                | `bit`   | `aspnet_Membership.IsLockedOut`                            | `bit`    |
 
 > [!NOTE]
-> Nie wszystkie mapowania pól są podobne do relacji jeden-do-jednego z członkostwa do ASP.NET Core Identity . Powyższa tabela przyjmuje domyślny schemat użytkownika członkostwa i mapuje go na schemat ASP.NET Core Identity . Wszystkie inne pola niestandardowe, które były używane na potrzeby członkostwa, muszą być mapowane ręcznie. W przypadku tego mapowania nie ma mapy haseł, ponieważ zarówno kryterium hasła, jak i sole hasła nie są migrowane między nimi. **Zaleca się pozostawienie hasła jako wartości null i poproszenie użytkowników o zresetowanie haseł.** W ASP.NET Core Identity , `LockoutEnd` należy ustawić na pewną datę w przyszłości, jeśli użytkownik jest zablokowany. Jest to pokazane w skrypcie migracji.
+> Nie wszystkie mapowania pól są podobne do relacji jeden-do-jednego z członkostwa do ASP.NET Core Identity . Powyższa tabela przyjmuje domyślny schemat użytkownika członkostwa i mapuje go na ASP.NET Core Identity schemat. Wszystkie inne pola niestandardowe, które były używane na potrzeby członkostwa, muszą być mapowane ręcznie. W przypadku tego mapowania nie ma mapy haseł, ponieważ zarówno kryterium hasła, jak i sole hasła nie są migrowane między nimi. **Zaleca się pozostawienie hasła jako wartości null i poproszenie użytkowników o zresetowanie haseł.** W ASP.NET Core Identity programie `LockoutEnd` należy ustawić na pewną datę w przyszłości, jeśli użytkownik jest zablokowany. Jest to pokazane w skrypcie migracji.
 
 ### <a name="roles"></a>Role
 
@@ -194,7 +195,7 @@ IF @@ERROR <> 0
 COMMIT TRANSACTION MigrateUsersAndRoles
 ```
 
-Po ukończeniu poprzedniego skryptu Identity utworzona wcześniej aplikacja ASP.NET Core zostanie wypełniona użytkownikom członkostwa. Użytkownicy muszą zmienić swoje hasła przed zalogowaniem się.
+Po zakończeniu poprzedniego skryptu ASP.NET Core Identity utworzona wcześniej aplikacja zostanie wypełniona użytkownikami członkostwa. Użytkownicy muszą zmienić swoje hasła przed zalogowaniem się.
 
 > [!NOTE]
 > Jeśli system członkostwa ma użytkowników z nazwami użytkowników, którzy nie są zgodni z ich adresem e-mail, zmiany są wymagane w przypadku aplikacji utworzonej wcześniej w celu tego celu. Szablon domyślny oczekuje `UserName` i jest taki `Email` sam. W sytuacjach, w których są różne, proces logowania należy zmodyfikować do użycia `UserName` zamiast `Email` .

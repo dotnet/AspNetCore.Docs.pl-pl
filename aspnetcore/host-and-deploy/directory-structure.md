@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/09/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/directory-structure
-ms.openlocfilehash: 8756fa5b85deb3a30991062942803e701e5e0792
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: b557f1d1650b3deadcda679f300b1bc45a6202e7
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015819"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88627380"
 ---
 # <a name="aspnet-core-directory-structure"></a>Struktura katalogów ASP.NET Core
 
@@ -47,7 +48,7 @@ Katalog *publikowania* reprezentuje *ścieżkę katalogu głównego zawartości*
 
 Katalog *wwwroot* (jeśli istnieje) zawiera tylko zasoby statyczne.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [dotnet publish](/dotnet/core/tools/dotnet-publish)
 * [Wdrażanie aplikacji .NET Core](/dotnet/core/deploying/)
@@ -100,7 +101,7 @@ Katalog *dzienników* można utworzyć dla wdrożenia przy użyciu jednego z nas
 
 Katalog wdrożenia wymaga uprawnień do odczytu/wykonania. Katalog *dzienników* wymaga uprawnień do odczytu/zapisu. Dodatkowe katalogi, w przypadku których zapisano pliki wymagają uprawnień do odczytu/zapisu.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [dotnet publish](/dotnet/core/tools/dotnet-publish)
 * [Wdrażanie aplikacji .NET Core](/dotnet/core/deploying/)

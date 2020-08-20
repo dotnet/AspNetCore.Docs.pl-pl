@@ -1,5 +1,5 @@
 ---
-title: RazorKonwencje dotyczące tras i aplikacji na stronach ASP.NET Core
+title: Razor Konwencje dotyczące tras i aplikacji na stronach ASP.NET Core
 author: rick-anderson
 description: Dowiedz się, w jaki sposób Konwencja i konwencje dostawcy modelu aplikacji ułatwiają kontrolowanie routingu, odnajdywania i przetwarzania stron.
 monikerRange: '>= aspnetcore-2.1'
@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,14 +18,14 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/razor-pages-conventions
-ms.openlocfilehash: 5fbb72d2195ca9fc1494f15ba0045cbb2707f72c
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: fc639178fc29438e16ad0989e61bd8dd32cf7590
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019511"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88625495"
 ---
-# <a name="no-locrazor-pages-route-and-app-conventions-in-aspnet-core"></a>RazorKonwencje dotyczące tras i aplikacji na stronach ASP.NET Core
+# <a name="no-locrazor-pages-route-and-app-conventions-in-aspnet-core"></a>Razor Konwencje dotyczące tras i aplikacji na stronach ASP.NET Core
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -44,7 +45,7 @@ Istnieją słowa zastrzeżone, których nie można używać jako segmentów tras
 | [Konwencje akcji trasy strony](#page-route-action-conventions)<ul><li>AddFolderRouteModelConvention</li><li>AddPageRouteModelConvention</li><li>AddPageRoute</li></ul> | Dodaj szablon trasy do stron w folderze i do pojedynczej strony. |
 | [Konwencje akcji modelu strony](#page-model-action-conventions)<ul><li>AddFolderApplicationModelConvention</li><li>AddPageApplicationModelConvention</li><li>ConfigureFilter (Klasa filtru, wyrażenie lambda lub fabryka filtrów)</li></ul> | Dodaj nagłówek do stron w folderze, Dodaj nagłówek do jednej strony i skonfiguruj [fabrykę filtrów](xref:mvc/controllers/filters#ifilterfactory) , aby dodać nagłówek do stron aplikacji. |
 
-RazorKonwencje stron są konfigurowane przy użyciu <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddRazorPages%2A> przeciążenia, które konfiguruje <xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions> w programie `Startup.ConfigureServices` . Poniższe przykłady Konwencji zostały omówione w dalszej części tego tematu:
+Razor Konwencje stron są konfigurowane przy użyciu <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddRazorPages%2A> przeciążenia, które konfiguruje <xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions> w programie `Startup.ConfigureServices` . Poniższe przykłady Konwencji zostały omówione w dalszej części tego tematu:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -86,7 +87,7 @@ Przetwarzanie trasy zostało ustanowione według Konwencji:
 
 Jeśli to możliwe, unikaj w zależności od ustalonej kolejności przetwarzania trasy. Ogólnie rzecz biorąc, routing wybiera prawidłową trasę z dopasowywaniem adresów URL. Jeśli musisz ustawić właściwości trasy `Order` , aby poprawnie kierować żądania, schemat routingu aplikacji jest prawdopodobnie mylący dla klientów i jest nierozsądny do utrzymania. Postaraj się, aby uprościć schemat routingu aplikacji. Przykładowa aplikacja wymaga jawnej kolejności przetwarzania trasy, aby przedstawić kilka scenariuszy routingu przy użyciu jednej aplikacji. Należy jednak podjąć próbę uniknięcia praktycznego ustawienia trasy `Order` w aplikacjach produkcyjnych.
 
-RazorStrony routingu i routingu kontrolera MVC współdzielą implementację. Informacje o zamówieniu trasy w tematach MVC są dostępne w obszarze [routing do akcji kontrolera: porządkowanie tras atrybutów](xref:mvc/controllers/routing#ordering-attribute-routes).
+Razor Strony routingu i routingu kontrolera MVC współdzielą implementację. Informacje o zamówieniu trasy w tematach MVC są dostępne w obszarze [routing do akcji kontrolera: porządkowanie tras atrybutów](xref:mvc/controllers/routing#ordering-attribute-routes).
 
 ## <a name="model-conventions"></a>Konwencje modelu
 
@@ -108,7 +109,7 @@ Przykładowa aplikacja dodaje `{globalTemplate?}` szablon trasy do wszystkich st
 
 Wszędzie tam, gdzie to możliwe, nie ustawiaj `Order` , która powoduje `Order = 0` . Należy polegać na routingu w celu wybrania odpowiedniej trasy.
 
-RazorOpcje stron, takie jak dodawanie <xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.Conventions> , są dodawane po Razor dodaniu stron do kolekcji usług w programie `Startup.ConfigureServices` . Aby zapoznać się z przykładem, zobacz przykładową [aplikację](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/razor-pages-conventions/samples/).
+Razor Opcje stron, takie jak dodawanie <xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.Conventions> , są dodawane po Razor dodaniu stron do kolekcji usług w programie `Startup.ConfigureServices` . Aby zapoznać się z przykładem, zobacz przykładową [aplikację](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/razor-pages-conventions/samples/).
 
 [!code-csharp[](razor-pages-conventions/samples/3.x/SampleApp/Startup.cs?name=snippet1)]
 
@@ -186,7 +187,7 @@ Trasy stron generowane przez ASP.NET Core mogą być dostosowywane przy użyciu 
 
 `PageRouteTransformerConvention`Konwencja model trasy strony stosuje transformator parametrów do segmentów nazw folderów i plików w przypadku automatycznie generowanych tras stron w aplikacji. Na przykład Razor plik Pages w lokalizacji */Pages/SubscriptionManagement/ViewAll.cshtml* będzie mógł zostać ponownie zapisany w `/SubscriptionManagement/ViewAll` usłudze do `/subscription-management/view-all` .
 
-`PageRouteTransformerConvention`przekształca automatycznie generowane segmenty trasy strony, która pochodzi z Razor folderu stron i nazwy pliku. Nie przekształca segmentów tras dodanych do `@page` dyrektywy. Konwencja nie przetwarza również tras dodanych przez <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AddPageRoute*> .
+`PageRouteTransformerConvention` przekształca automatycznie generowane segmenty trasy strony, która pochodzi z Razor folderu stron i nazwy pliku. Nie przekształca segmentów tras dodanych do `@page` dyrektywy. Konwencja nie przetwarza również tras dodanych przez <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AddPageRoute*> .
 
 `PageRouteTransformerConvention`Zarejestrowano jako opcję w `Startup.ConfigureServices` :
 
@@ -208,7 +209,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="configure-a-page-route"></a>Konfigurowanie trasy strony
 
-Służy <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AddPageRoute*> do konfigurowania trasy do strony pod określoną ścieżką strony. Wygenerowane linki do strony używają określonej trasy. `AddPageRoute`używa `AddPageRouteModelConvention` do ustanowienia trasy.
+Służy <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AddPageRoute*> do konfigurowania trasy do strony pod określoną ścieżką strony. Wygenerowane linki do strony używają określonej trasy. `AddPageRoute` używa `AddPageRouteModelConvention` do ustanowienia trasy.
 
 Przykładowa aplikacja tworzy trasę do `/TheContactPage` *Contact. cshtml*:
 
@@ -266,13 +267,13 @@ Zażądaj strony o podanej próbce `localhost:5000/About` i sprawdź nagłówki,
 
 **Konfigurowanie filtru**
 
-<xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.ConfigureFilter*>konfiguruje określony filtr, który ma zostać zastosowany. Można zaimplementować klasę filtru, ale Przykładowa aplikacja pokazuje, jak zaimplementować filtr w wyrażeniu lambda, które jest zaimplementowane w tle jako fabryka, która zwraca filtr:
+<xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.ConfigureFilter*> konfiguruje określony filtr, który ma zostać zastosowany. Można zaimplementować klasę filtru, ale Przykładowa aplikacja pokazuje, jak zaimplementować filtr w wyrażeniu lambda, które jest zaimplementowane w tle jako fabryka, która zwraca filtr:
 
 [!code-csharp[](razor-pages-conventions/samples/3.x/SampleApp/Startup.cs?name=snippet8)]
 
 Model aplikacji strony służy do sprawdzania ścieżki względnej dla segmentów, które prowadzą do strony PAGE2 w folderze *OtherPages* . Jeśli warunek zostanie spełniony, zostanie dodany nagłówek. Jeśli nie, `EmptyFilter` jest stosowane.
 
-`EmptyFilter`jest [filtrem akcji](xref:mvc/controllers/filters#action-filters). Ze względu na to, że filtry akcji są ignorowane przez Razor strony, nie `EmptyFilter` ma ona wpływu na zamierzone, jeśli ścieżka nie zawiera `OtherPages/Page2` .
+`EmptyFilter` jest [filtrem akcji](xref:mvc/controllers/filters#action-filters). Ze względu na to, że filtry akcji są ignorowane przez Razor strony, nie `EmptyFilter` ma ona wpływu na zamierzone, jeśli ścieżka nie zawiera `OtherPages/Page2` .
 
 Zażądaj strony PAGE2 próbki na `localhost:5000/OtherPages/Page2` i sprawdź nagłówki, aby wyświetlić wyniki:
 
@@ -280,7 +281,7 @@ Zażądaj strony PAGE2 próbki na `localhost:5000/OtherPages/Page2` i sprawdź n
 
 **Konfigurowanie fabryki filtrów**
 
-<xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.ConfigureFilter*>konfiguruje określoną fabrykę do zastosowania [filtrów](xref:mvc/controllers/filters) do wszystkich Razor stron.
+<xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.ConfigureFilter*> konfiguruje określoną fabrykę do zastosowania [filtrów](xref:mvc/controllers/filters) do wszystkich Razor stron.
 
 Przykładowa aplikacja zawiera przykładowe użycie [fabryki filtrów](xref:mvc/controllers/filters#ifilterfactory) przez dodanie nagłówka, `FilterFactoryHeader` z dwoma wartościami do stron aplikacji:
 
@@ -300,7 +301,7 @@ Zażądaj strony o podanej próbce `localhost:5000/About` i sprawdź nagłówki,
 
 Filtr strony ( <xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter> ) to filtr, który ma zastosowanie do Razor stron. Aby uzyskać więcej informacji, zobacz [metody filtrowania dla Razor stron](xref:razor-pages/filter).
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:security/authorization/razor-pages-authorization>
 * <xref:mvc/controllers/areas#areas-with-razor-pages>
@@ -325,7 +326,7 @@ Istnieją słowa zastrzeżone, których nie można używać jako segmentów tras
 | [Konwencje akcji trasy strony](#page-route-action-conventions)<ul><li>AddFolderRouteModelConvention</li><li>AddPageRouteModelConvention</li><li>AddPageRoute</li></ul> | Dodaj szablon trasy do stron w folderze i do pojedynczej strony. |
 | [Konwencje akcji modelu strony](#page-model-action-conventions)<ul><li>AddFolderApplicationModelConvention</li><li>AddPageApplicationModelConvention</li><li>ConfigureFilter (Klasa filtru, wyrażenie lambda lub fabryka filtrów)</li></ul> | Dodaj nagłówek do stron w folderze, Dodaj nagłówek do jednej strony i skonfiguruj [fabrykę filtrów](xref:mvc/controllers/filters#ifilterfactory) , aby dodać nagłówek do stron aplikacji. |
 
-RazorKonwencje stron są dodawane i konfigurowane przy użyciu <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*> metody rozszerzenia do <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddMvc*> kolekcji usług w `Startup` klasie. Poniższe przykłady Konwencji zostały omówione w dalszej części tego tematu:
+Razor Konwencje stron są dodawane i konfigurowane przy użyciu <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*> metody rozszerzenia do <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddMvc*> kolekcji usług w `Startup` klasie. Poniższe przykłady Konwencji zostały omówione w dalszej części tego tematu:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -368,7 +369,7 @@ Przetwarzanie trasy zostało ustanowione według Konwencji:
 
 Jeśli to możliwe, unikaj w zależności od ustalonej kolejności przetwarzania trasy. Ogólnie rzecz biorąc, routing wybiera prawidłową trasę z dopasowywaniem adresów URL. Jeśli musisz ustawić właściwości trasy `Order` , aby poprawnie kierować żądania, schemat routingu aplikacji jest prawdopodobnie mylący dla klientów i jest nierozsądny do utrzymania. Postaraj się, aby uprościć schemat routingu aplikacji. Przykładowa aplikacja wymaga jawnej kolejności przetwarzania trasy, aby przedstawić kilka scenariuszy routingu przy użyciu jednej aplikacji. Należy jednak podjąć próbę uniknięcia praktycznego ustawienia trasy `Order` w aplikacjach produkcyjnych.
 
-RazorStrony routingu i routingu kontrolera MVC współdzielą implementację. Informacje o zamówieniu trasy w tematach MVC są dostępne w obszarze [routing do akcji kontrolera: porządkowanie tras atrybutów](xref:mvc/controllers/routing#ordering-attribute-routes).
+Razor Strony routingu i routingu kontrolera MVC współdzielą implementację. Informacje o zamówieniu trasy w tematach MVC są dostępne w obszarze [routing do akcji kontrolera: porządkowanie tras atrybutów](xref:mvc/controllers/routing#ordering-attribute-routes).
 
 ## <a name="model-conventions"></a>Konwencje modelu
 
@@ -390,7 +391,7 @@ Przykładowa aplikacja dodaje `{globalTemplate?}` szablon trasy do wszystkich st
 
 Wszędzie tam, gdzie to możliwe, nie ustawiaj `Order` , która powoduje `Order = 0` . Należy polegać na routingu w celu wybrania odpowiedniej trasy.
 
-RazorOpcje stron, takie jak dodawanie <xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.Conventions> , są dodawane po dodaniu MVC do kolekcji usług w programie `Startup.ConfigureServices` . Aby zapoznać się z przykładem, zobacz przykładową [aplikację](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/razor-pages-conventions/samples/).
+Razor Opcje stron, takie jak dodawanie <xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.Conventions> , są dodawane po dodaniu MVC do kolekcji usług w programie `Startup.ConfigureServices` . Aby zapoznać się z przykładem, zobacz przykładową [aplikację](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/razor-pages-conventions/samples/).
 
 [!code-csharp[](razor-pages-conventions/samples/2.x/SampleApp/Startup.cs?name=snippet1)]
 
@@ -468,7 +469,7 @@ Trasy stron generowane przez ASP.NET Core mogą być dostosowywane przy użyciu 
 
 `PageRouteTransformerConvention`Konwencja model trasy strony stosuje transformator parametrów do segmentów nazw folderów i plików w przypadku automatycznie generowanych tras stron w aplikacji. Na przykład Razor plik Pages w lokalizacji */Pages/SubscriptionManagement/ViewAll.cshtml* będzie mógł zostać ponownie zapisany w `/SubscriptionManagement/ViewAll` usłudze do `/subscription-management/view-all` .
 
-`PageRouteTransformerConvention`przekształca automatycznie generowane segmenty trasy strony, która pochodzi z Razor folderu stron i nazwy pliku. Nie przekształca segmentów tras dodanych do `@page` dyrektywy. Konwencja nie przetwarza również tras dodanych przez <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AddPageRoute*> .
+`PageRouteTransformerConvention` przekształca automatycznie generowane segmenty trasy strony, która pochodzi z Razor folderu stron i nazwy pliku. Nie przekształca segmentów tras dodanych do `@page` dyrektywy. Konwencja nie przetwarza również tras dodanych przez <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AddPageRoute*> .
 
 `PageRouteTransformerConvention`Zarejestrowano jako opcję w `Startup.ConfigureServices` :
 
@@ -498,7 +499,7 @@ public class SlugifyParameterTransformer : IOutboundParameterTransformer
 
 ## <a name="configure-a-page-route"></a>Konfigurowanie trasy strony
 
-Służy <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AddPageRoute*> do konfigurowania trasy do strony pod określoną ścieżką strony. Wygenerowane linki do strony używają określonej trasy. `AddPageRoute`używa `AddPageRouteModelConvention` do ustanowienia trasy.
+Służy <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AddPageRoute*> do konfigurowania trasy do strony pod określoną ścieżką strony. Wygenerowane linki do strony używają określonej trasy. `AddPageRoute` używa `AddPageRouteModelConvention` do ustanowienia trasy.
 
 Przykładowa aplikacja tworzy trasę do `/TheContactPage` *Contact. cshtml*:
 
@@ -556,13 +557,13 @@ Zażądaj strony o podanej próbce `localhost:5000/About` i sprawdź nagłówki,
 
 **Konfigurowanie filtru**
 
-<xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.ConfigureFilter*>konfiguruje określony filtr, który ma zostać zastosowany. Można zaimplementować klasę filtru, ale Przykładowa aplikacja pokazuje, jak zaimplementować filtr w wyrażeniu lambda, które jest zaimplementowane w tle jako fabryka, która zwraca filtr:
+<xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.ConfigureFilter*> konfiguruje określony filtr, który ma zostać zastosowany. Można zaimplementować klasę filtru, ale Przykładowa aplikacja pokazuje, jak zaimplementować filtr w wyrażeniu lambda, które jest zaimplementowane w tle jako fabryka, która zwraca filtr:
 
 [!code-csharp[](razor-pages-conventions/samples/2.x/SampleApp/Startup.cs?name=snippet8)]
 
 Model aplikacji strony służy do sprawdzania ścieżki względnej dla segmentów, które prowadzą do strony PAGE2 w folderze *OtherPages* . Jeśli warunek zostanie spełniony, zostanie dodany nagłówek. Jeśli nie, `EmptyFilter` jest stosowane.
 
-`EmptyFilter`jest [filtrem akcji](xref:mvc/controllers/filters#action-filters). Ze względu na to, że filtry akcji są ignorowane przez Razor strony, nie `EmptyFilter` ma ona wpływu na zamierzone, jeśli ścieżka nie zawiera `OtherPages/Page2` .
+`EmptyFilter` jest [filtrem akcji](xref:mvc/controllers/filters#action-filters). Ze względu na to, że filtry akcji są ignorowane przez Razor strony, nie `EmptyFilter` ma ona wpływu na zamierzone, jeśli ścieżka nie zawiera `OtherPages/Page2` .
 
 Zażądaj strony PAGE2 próbki na `localhost:5000/OtherPages/Page2` i sprawdź nagłówki, aby wyświetlić wyniki:
 
@@ -570,7 +571,7 @@ Zażądaj strony PAGE2 próbki na `localhost:5000/OtherPages/Page2` i sprawdź n
 
 **Konfigurowanie fabryki filtrów**
 
-<xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.ConfigureFilter*>konfiguruje określoną fabrykę do zastosowania [filtrów](xref:mvc/controllers/filters) do wszystkich Razor stron.
+<xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.ConfigureFilter*> konfiguruje określoną fabrykę do zastosowania [filtrów](xref:mvc/controllers/filters) do wszystkich Razor stron.
 
 Przykładowa aplikacja zawiera przykładowe użycie [fabryki filtrów](xref:mvc/controllers/filters#ifilterfactory) przez dodanie nagłówka, `FilterFactoryHeader` z dwoma wartościami do stron aplikacji:
 
@@ -590,7 +591,7 @@ Zażądaj strony o podanej próbce `localhost:5000/About` i sprawdź nagłówki,
 
 Filtr strony ( <xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter> ) to filtr, który ma zastosowanie do Razor stron. Aby uzyskać więcej informacji, zobacz [metody filtrowania dla Razor stron](xref:razor-pages/filter).
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:security/authorization/razor-pages-authorization>
 * <xref:mvc/controllers/areas#areas-with-razor-pages>
@@ -615,7 +616,7 @@ Istnieją słowa zastrzeżone, których nie można używać jako segmentów tras
 | [Konwencje akcji trasy strony](#page-route-action-conventions)<ul><li>AddFolderRouteModelConvention</li><li>AddPageRouteModelConvention</li><li>AddPageRoute</li></ul> | Dodaj szablon trasy do stron w folderze i do pojedynczej strony. |
 | [Konwencje akcji modelu strony](#page-model-action-conventions)<ul><li>AddFolderApplicationModelConvention</li><li>AddPageApplicationModelConvention</li><li>ConfigureFilter (Klasa filtru, wyrażenie lambda lub fabryka filtrów)</li></ul> | Dodaj nagłówek do stron w folderze, Dodaj nagłówek do jednej strony i skonfiguruj [fabrykę filtrów](xref:mvc/controllers/filters#ifilterfactory) , aby dodać nagłówek do stron aplikacji. |
 
-RazorKonwencje stron są dodawane i konfigurowane przy użyciu <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*> metody rozszerzenia do <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddMvc*> kolekcji usług w `Startup` klasie. Poniższe przykłady Konwencji zostały omówione w dalszej części tego tematu:
+Razor Konwencje stron są dodawane i konfigurowane przy użyciu <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*> metody rozszerzenia do <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddMvc*> kolekcji usług w `Startup` klasie. Poniższe przykłady Konwencji zostały omówione w dalszej części tego tematu:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -658,7 +659,7 @@ Przetwarzanie trasy zostało ustanowione według Konwencji:
 
 Jeśli to możliwe, unikaj w zależności od ustalonej kolejności przetwarzania trasy. Ogólnie rzecz biorąc, routing wybiera prawidłową trasę z dopasowywaniem adresów URL. Jeśli musisz ustawić właściwości trasy `Order` , aby poprawnie kierować żądania, schemat routingu aplikacji jest prawdopodobnie mylący dla klientów i jest nierozsądny do utrzymania. Postaraj się, aby uprościć schemat routingu aplikacji. Przykładowa aplikacja wymaga jawnej kolejności przetwarzania trasy, aby przedstawić kilka scenariuszy routingu przy użyciu jednej aplikacji. Należy jednak podjąć próbę uniknięcia praktycznego ustawienia trasy `Order` w aplikacjach produkcyjnych.
 
-RazorStrony routingu i routingu kontrolera MVC współdzielą implementację. Informacje o zamówieniu trasy w tematach MVC są dostępne w obszarze [routing do akcji kontrolera: porządkowanie tras atrybutów](xref:mvc/controllers/routing#ordering-attribute-routes).
+Razor Strony routingu i routingu kontrolera MVC współdzielą implementację. Informacje o zamówieniu trasy w tematach MVC są dostępne w obszarze [routing do akcji kontrolera: porządkowanie tras atrybutów](xref:mvc/controllers/routing#ordering-attribute-routes).
 
 ## <a name="model-conventions"></a>Konwencje modelu
 
@@ -680,7 +681,7 @@ Przykładowa aplikacja dodaje `{globalTemplate?}` szablon trasy do wszystkich st
 
 Wszędzie tam, gdzie to możliwe, nie ustawiaj `Order` , która powoduje `Order = 0` . Należy polegać na routingu w celu wybrania odpowiedniej trasy.
 
-RazorOpcje stron, takie jak dodawanie <xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.Conventions> , są dodawane po dodaniu MVC do kolekcji usług w programie `Startup.ConfigureServices` . Aby zapoznać się z przykładem, zobacz przykładową [aplikację](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/razor-pages-conventions/samples/).
+Razor Opcje stron, takie jak dodawanie <xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.Conventions> , są dodawane po dodaniu MVC do kolekcji usług w programie `Startup.ConfigureServices` . Aby zapoznać się z przykładem, zobacz przykładową [aplikację](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/razor-pages-conventions/samples/).
 
 [!code-csharp[](razor-pages-conventions/samples/2.x/SampleApp/Startup.cs?name=snippet1)]
 
@@ -754,7 +755,7 @@ Zażądaj przykładowej strony o podanej godzinie `localhost:5000/About/GlobalRo
 
 ## <a name="configure-a-page-route"></a>Konfigurowanie trasy strony
 
-Służy <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AddPageRoute*> do konfigurowania trasy do strony pod określoną ścieżką strony. Wygenerowane linki do strony używają określonej trasy. `AddPageRoute`używa `AddPageRouteModelConvention` do ustanowienia trasy.
+Służy <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AddPageRoute*> do konfigurowania trasy do strony pod określoną ścieżką strony. Wygenerowane linki do strony używają określonej trasy. `AddPageRoute` używa `AddPageRouteModelConvention` do ustanowienia trasy.
 
 Przykładowa aplikacja tworzy trasę do `/TheContactPage` *Contact. cshtml*:
 
@@ -812,13 +813,13 @@ Zażądaj strony o podanej próbce `localhost:5000/About` i sprawdź nagłówki,
 
 **Konfigurowanie filtru**
 
-<xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.ConfigureFilter*>konfiguruje określony filtr, który ma zostać zastosowany. Można zaimplementować klasę filtru, ale Przykładowa aplikacja pokazuje, jak zaimplementować filtr w wyrażeniu lambda, które jest zaimplementowane w tle jako fabryka, która zwraca filtr:
+<xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.ConfigureFilter*> konfiguruje określony filtr, który ma zostać zastosowany. Można zaimplementować klasę filtru, ale Przykładowa aplikacja pokazuje, jak zaimplementować filtr w wyrażeniu lambda, które jest zaimplementowane w tle jako fabryka, która zwraca filtr:
 
 [!code-csharp[](razor-pages-conventions/samples/2.x/SampleApp/Startup.cs?name=snippet8)]
 
 Model aplikacji strony służy do sprawdzania ścieżki względnej dla segmentów, które prowadzą do strony PAGE2 w folderze *OtherPages* . Jeśli warunek zostanie spełniony, zostanie dodany nagłówek. Jeśli nie, `EmptyFilter` jest stosowane.
 
-`EmptyFilter`jest [filtrem akcji](xref:mvc/controllers/filters#action-filters). Ze względu na to, że filtry akcji są ignorowane przez Razor strony, nie `EmptyFilter` ma ona wpływu na zamierzone, jeśli ścieżka nie zawiera `OtherPages/Page2` .
+`EmptyFilter` jest [filtrem akcji](xref:mvc/controllers/filters#action-filters). Ze względu na to, że filtry akcji są ignorowane przez Razor strony, nie `EmptyFilter` ma ona wpływu na zamierzone, jeśli ścieżka nie zawiera `OtherPages/Page2` .
 
 Zażądaj strony PAGE2 próbki na `localhost:5000/OtherPages/Page2` i sprawdź nagłówki, aby wyświetlić wyniki:
 
@@ -826,7 +827,7 @@ Zażądaj strony PAGE2 próbki na `localhost:5000/OtherPages/Page2` i sprawdź n
 
 **Konfigurowanie fabryki filtrów**
 
-<xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.ConfigureFilter*>konfiguruje określoną fabrykę do zastosowania [filtrów](xref:mvc/controllers/filters) do wszystkich Razor stron.
+<xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.ConfigureFilter*> konfiguruje określoną fabrykę do zastosowania [filtrów](xref:mvc/controllers/filters) do wszystkich Razor stron.
 
 Przykładowa aplikacja zawiera przykładowe użycie [fabryki filtrów](xref:mvc/controllers/filters#ifilterfactory) przez dodanie nagłówka, `FilterFactoryHeader` z dwoma wartościami do stron aplikacji:
 

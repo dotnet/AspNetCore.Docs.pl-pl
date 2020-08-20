@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 09/26/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/configuration/platform-specific-configuration
-ms.openlocfilehash: 13728bca9d382bad39a85144ae9efd5b63a05dc4
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: fadd93cf28603653e20ed6c7dceadcabf0dfb9a5
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88017392"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88627523"
 ---
 # <a name="use-hosting-startup-assemblies-in-aspnet-core"></a>Używanie zestawów startowych hostingu w ASP.NET Core
 
@@ -69,7 +70,7 @@ Aby wyłączyć automatyczne ładowanie zestawów startowych hostingu, należy u
             });
     ```
 
-  * `ASPNETCORE_PREVENTHOSTINGSTARTUP`Zmienna środowiskowa.
+  * `ASPNETCORE_PREVENTHOSTINGSTARTUP` Zmienna środowiskowa.
 
 * Aby zapobiec ładowaniu określonych początkowych zestawów uruchamiania, należy ustawić jedną z następujących wartości rozdzielanej średnikami ciąg początkowych zestawów startowych do wykluczenia podczas uruchamiania:
 
@@ -87,7 +88,7 @@ Aby wyłączyć automatyczne ładowanie zestawów startowych hostingu, należy u
             });
     ```
 
-  * `ASPNETCORE_HOSTINGSTARTUPEXCLUDEASSEMBLIES`Zmienna środowiskowa.
+  * `ASPNETCORE_HOSTINGSTARTUPEXCLUDEASSEMBLIES` Zmienna środowiskowa.
 
 Jeśli ustawienia konfiguracji hosta i zmienna środowiskowa są ustawione, ustawienie hosta steruje zachowaniem.
 
@@ -106,7 +107,7 @@ Rozszerzenie uruchamiania hostingu można podać w bibliotece klas. Biblioteka z
 
 [Przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) zawiera Razor aplikacje Pages, *HostingStartupApp*i Biblioteka klas *HostingStartupLibrary*. Biblioteka klas:
 
-* Zawiera klasę uruchomieniową hostingu, `ServiceKeyInjection` która implementuje `IHostingStartup` . `ServiceKeyInjection`Dodaje parę ciągów usługi do konfiguracji aplikacji za pomocą dostawcy konfiguracji w pamięci ([AddInMemoryCollection](xref:Microsoft.Extensions.Configuration.MemoryConfigurationBuilderExtensions.AddInMemoryCollection*)).
+* Zawiera klasę uruchomieniową hostingu, `ServiceKeyInjection` która implementuje `IHostingStartup` . `ServiceKeyInjection` Dodaje parę ciągów usługi do konfiguracji aplikacji za pomocą dostawcy konfiguracji w pamięci ([AddInMemoryCollection](xref:Microsoft.Extensions.Configuration.MemoryConfigurationBuilderExtensions.AddInMemoryCollection*)).
 * Zawiera `HostingStartup` atrybut, który identyfikuje przestrzeń nazw i klasę uruchomienia hostingu.
 
 `ServiceKeyInjection` <xref:Microsoft.AspNetCore.Hosting.IHostingStartup.Configure*> Metoda klasy używa <xref:Microsoft.AspNetCore.Hosting.IWebHostBuilder> do dodawania ulepszeń do aplikacji.
@@ -123,7 +124,7 @@ Strona indeksu aplikacji odczytuje i renderuje wartości konfiguracyjne dla dwó
 
 [Przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) zawiera również projekt pakietu NuGet, który zapewnia oddzielne uruchamianie hostingu, *HostingStartupPackage*. Pakiet ma takie same charakterystyki biblioteki klas opisanej wcześniej. Pakiet:
 
-* Zawiera klasę uruchomieniową hostingu, `ServiceKeyInjection` która implementuje `IHostingStartup` . `ServiceKeyInjection`Dodaje parę ciągów usługi do konfiguracji aplikacji.
+* Zawiera klasę uruchomieniową hostingu, `ServiceKeyInjection` która implementuje `IHostingStartup` . `ServiceKeyInjection` Dodaje parę ciągów usługi do konfiguracji aplikacji.
 * Zawiera `HostingStartup` atrybut.
 
 *HostingStartupPackage/ServiceKeyInjection. cs*:
@@ -164,7 +165,7 @@ Atrybut [HostingStartup](xref:Microsoft.AspNetCore.Hosting.HostingStartupAttribu
 
 [!code-csharp[](platform-specific-configuration/samples-snapshot/3.x/StartupEnhancement.cs?name=snippet1)]
 
-Implementuje klasę `IHostingStartup` . <xref:Microsoft.AspNetCore.Hosting.IHostingStartup.Configure*>Metoda klasy używa <xref:Microsoft.AspNetCore.Hosting.IWebHostBuilder> do dodawania ulepszeń do aplikacji. `IHostingStartup.Configure`w zestawie startowym hostingu jest wywoływany przez środowisko uruchomieniowe przed `Startup.Configure` kodem użytkownika, co umożliwia kod użytkownika zastępowanie dowolnej konfiguracji podanej przez zestaw startowy hostingu.
+Implementuje klasę `IHostingStartup` . <xref:Microsoft.AspNetCore.Hosting.IHostingStartup.Configure*>Metoda klasy używa <xref:Microsoft.AspNetCore.Hosting.IWebHostBuilder> do dodawania ulepszeń do aplikacji. `IHostingStartup.Configure` w zestawie startowym hostingu jest wywoływany przez środowisko uruchomieniowe przed `Startup.Configure` kodem użytkownika, co umożliwia kod użytkownika zastępowanie dowolnej konfiguracji podanej przez zestaw startowy hostingu.
 
 [!code-csharp[](platform-specific-configuration/samples-snapshot/3.x/StartupEnhancement.cs?name=snippet2&highlight=3,5)]
 
@@ -271,7 +272,7 @@ Aby środowisko uruchomieniowe wykrywało magazyn środowiska uruchomieniowego, 
 
 **Modyfikuj i umieść plik zależności uruchamiania hostingu**
 
-Aby aktywować rozszerzanie bez odwołania do pakietu do rozszerzenia, określ dodatkowe zależności od środowiska uruchomieniowego za pomocą programu `additionalDeps` . `additionalDeps`umożliwia:
+Aby aktywować rozszerzanie bez odwołania do pakietu do rozszerzenia, określ dodatkowe zależności od środowiska uruchomieniowego za pomocą programu `additionalDeps` . `additionalDeps` umożliwia:
 
 * Rozwiń Graf biblioteki aplikacji, dostarczając zestaw dodatkowych *.deps.jsna* plikach do scalenia z własnym *.deps.jsaplikacji podczas* uruchamiania.
 * Ustaw możliwość odnajdywania i ładowania zestawu uruchamiania hostingu.
@@ -446,7 +447,7 @@ dotnet nuget locals all --clear
    * Generuje `additionalDeps` dla elementu `StartupDiagnostics` w folderze *additionalDeps* . Dodatkowe zależności byłyby później przenoszone do dodatkowych zależności użytkownika lub systemu. `StartupDiagnostics`Dodatkowa lokalizacja instalacji zależności użytkownika to *. dotnet/x64/AdditionalDeps/StartupDiagnostics/Shared/Microsoft. servicecore. app/3.0.0/StartupDiagnostics.deps.json*.
    * Umieszcza plik *deploy.ps1* w folderze *wdrożenia* .
 1. Uruchom skrypt *deploy.ps1* w folderze *Deployment* . Dołączenie skryptu:
-   * `StartupDiagnostics`do `ASPNETCORE_HOSTINGSTARTUPASSEMBLIES` zmiennej środowiskowej.
+   * `StartupDiagnostics` do `ASPNETCORE_HOSTINGSTARTUPASSEMBLIES` zmiennej środowiskowej.
    * Ścieżka zależności uruchamiania hostingu (w folderze *wdrażania* projektu RuntimeStore) do `DOTNET_ADDITIONAL_DEPS` zmiennej środowiskowej.
    * Ścieżka magazynu środowiska uruchomieniowego (w folderze *wdrażania* projektu RuntimeStore) do `DOTNET_SHARED_STORE` zmiennej środowiskowej.
 1. Uruchom przykładową aplikację.
@@ -482,10 +483,10 @@ Aby wyłączyć automatyczne ładowanie zestawów startowych hostingu, należy u
 
 * Aby zapobiec ładowaniu wszystkich początkowych zestawów uruchamiania, należy ustawić jedną z następujących opcji na `true` lub `1` :
   * [Zapobiegaj](xref:fundamentals/host/web-host#prevent-hosting-startup) ustawieniu konfiguracji hosta uruchamiania hostingu.
-  * `ASPNETCORE_PREVENTHOSTINGSTARTUP`Zmienna środowiskowa.
+  * `ASPNETCORE_PREVENTHOSTINGSTARTUP` Zmienna środowiskowa.
 * Aby zapobiec ładowaniu określonych początkowych zestawów uruchamiania, należy ustawić jedną z następujących wartości rozdzielanej średnikami ciąg początkowych zestawów startowych do wykluczenia podczas uruchamiania:
   * [Uruchamianie hostingu Wyklucz](xref:fundamentals/host/web-host#hosting-startup-exclude-assemblies) ustawienia konfiguracja hosta.
-  * `ASPNETCORE_HOSTINGSTARTUPEXCLUDEASSEMBLIES`Zmienna środowiskowa.
+  * `ASPNETCORE_HOSTINGSTARTUPEXCLUDEASSEMBLIES` Zmienna środowiskowa.
 
 Jeśli ustawienia konfiguracji hosta i zmienna środowiskowa są ustawione, ustawienie hosta steruje zachowaniem.
 
@@ -504,7 +505,7 @@ Rozszerzenie uruchamiania hostingu można podać w bibliotece klas. Biblioteka z
 
 [Przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) zawiera Razor aplikacje Pages, *HostingStartupApp*i Biblioteka klas *HostingStartupLibrary*. Biblioteka klas:
 
-* Zawiera klasę uruchomieniową hostingu, `ServiceKeyInjection` która implementuje `IHostingStartup` . `ServiceKeyInjection`Dodaje parę ciągów usługi do konfiguracji aplikacji za pomocą dostawcy konfiguracji w pamięci ([AddInMemoryCollection](xref:Microsoft.Extensions.Configuration.MemoryConfigurationBuilderExtensions.AddInMemoryCollection*)).
+* Zawiera klasę uruchomieniową hostingu, `ServiceKeyInjection` która implementuje `IHostingStartup` . `ServiceKeyInjection` Dodaje parę ciągów usługi do konfiguracji aplikacji za pomocą dostawcy konfiguracji w pamięci ([AddInMemoryCollection](xref:Microsoft.Extensions.Configuration.MemoryConfigurationBuilderExtensions.AddInMemoryCollection*)).
 * Zawiera `HostingStartup` atrybut, który identyfikuje przestrzeń nazw i klasę uruchomienia hostingu.
 
 `ServiceKeyInjection` <xref:Microsoft.AspNetCore.Hosting.IHostingStartup.Configure*> Metoda klasy używa <xref:Microsoft.AspNetCore.Hosting.IWebHostBuilder> do dodawania ulepszeń do aplikacji.
@@ -521,7 +522,7 @@ Strona indeksu aplikacji odczytuje i renderuje wartości konfiguracyjne dla dwó
 
 [Przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) zawiera również projekt pakietu NuGet, który zapewnia oddzielne uruchamianie hostingu, *HostingStartupPackage*. Pakiet ma takie same charakterystyki biblioteki klas opisanej wcześniej. Pakiet:
 
-* Zawiera klasę uruchomieniową hostingu, `ServiceKeyInjection` która implementuje `IHostingStartup` . `ServiceKeyInjection`Dodaje parę ciągów usługi do konfiguracji aplikacji.
+* Zawiera klasę uruchomieniową hostingu, `ServiceKeyInjection` która implementuje `IHostingStartup` . `ServiceKeyInjection` Dodaje parę ciągów usługi do konfiguracji aplikacji.
 * Zawiera `HostingStartup` atrybut.
 
 *HostingStartupPackage/ServiceKeyInjection. cs*:
@@ -562,7 +563,7 @@ Atrybut [HostingStartup](xref:Microsoft.AspNetCore.Hosting.HostingStartupAttribu
 
 [!code-csharp[](platform-specific-configuration/samples-snapshot/2.x/StartupEnhancement.cs?name=snippet1)]
 
-Implementuje klasę `IHostingStartup` . <xref:Microsoft.AspNetCore.Hosting.IHostingStartup.Configure*>Metoda klasy używa <xref:Microsoft.AspNetCore.Hosting.IWebHostBuilder> do dodawania ulepszeń do aplikacji. `IHostingStartup.Configure`w zestawie startowym hostingu jest wywoływany przez środowisko uruchomieniowe przed `Startup.Configure` kodem użytkownika, co umożliwia kod użytkownika zastępowanie dowolnej konfiguracji podanej przez zestaw startowy hostingu.
+Implementuje klasę `IHostingStartup` . <xref:Microsoft.AspNetCore.Hosting.IHostingStartup.Configure*>Metoda klasy używa <xref:Microsoft.AspNetCore.Hosting.IWebHostBuilder> do dodawania ulepszeń do aplikacji. `IHostingStartup.Configure` w zestawie startowym hostingu jest wywoływany przez środowisko uruchomieniowe przed `Startup.Configure` kodem użytkownika, co umożliwia kod użytkownika zastępowanie dowolnej konfiguracji podanej przez zestaw startowy hostingu.
 
 [!code-csharp[](platform-specific-configuration/samples-snapshot/2.x/StartupEnhancement.cs?name=snippet2&highlight=3,5)]
 
@@ -657,7 +658,7 @@ Aby środowisko uruchomieniowe wykrywało magazyn środowiska uruchomieniowego, 
 
 **Modyfikuj i umieść plik zależności uruchamiania hostingu**
 
-Aby aktywować rozszerzanie bez odwołania do pakietu do rozszerzenia, określ dodatkowe zależności od środowiska uruchomieniowego za pomocą programu `additionalDeps` . `additionalDeps`umożliwia:
+Aby aktywować rozszerzanie bez odwołania do pakietu do rozszerzenia, określ dodatkowe zależności od środowiska uruchomieniowego za pomocą programu `additionalDeps` . `additionalDeps` umożliwia:
 
 * Rozwiń Graf biblioteki aplikacji, dostarczając zestaw dodatkowych *.deps.jsna* plikach do scalenia z własnym *.deps.jsaplikacji podczas* uruchamiania.
 * Ustaw możliwość odnajdywania i ładowania zestawu uruchamiania hostingu.
@@ -832,7 +833,7 @@ dotnet nuget locals all --clear
    * Generuje `additionalDeps` dla elementu `StartupDiagnostics` w folderze *additionalDeps* . Dodatkowe zależności byłyby później przenoszone do dodatkowych zależności użytkownika lub systemu. `StartupDiagnostics`Dodatkowa lokalizacja instalacji zależności użytkownika to *. dotnet/x64/AdditionalDeps/StartupDiagnostics/Shared/Microsoft. servicecore. App/2.2.0/StartupDiagnostics.deps.json*.
    * Umieszcza plik *deploy.ps1* w folderze *wdrożenia* .
 1. Uruchom skrypt *deploy.ps1* w folderze *Deployment* . Dołączenie skryptu:
-   * `StartupDiagnostics`do `ASPNETCORE_HOSTINGSTARTUPASSEMBLIES` zmiennej środowiskowej.
+   * `StartupDiagnostics` do `ASPNETCORE_HOSTINGSTARTUPASSEMBLIES` zmiennej środowiskowej.
    * Ścieżka zależności uruchamiania hostingu (w folderze *wdrażania* projektu RuntimeStore) do `DOTNET_ADDITIONAL_DEPS` zmiennej środowiskowej.
    * Ścieżka magazynu środowiska uruchomieniowego (w folderze *wdrażania* projektu RuntimeStore) do `DOTNET_SHARED_STORE` zmiennej środowiskowej.
 1. Uruchom przykładową aplikację.

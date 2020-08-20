@@ -5,6 +5,7 @@ description: Część 2 Razor stron i Entity Framework serii samouczków.
 ms.author: riande
 ms.date: 07/22/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/crud
-ms.openlocfilehash: f205e7741c8e901e9219bec2028c7bee98129161
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: a6a99d736a60a55b81eb7e852413dc52b733d2fb
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018367"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88627536"
 ---
 # <a name="part-2-no-locrazor-pages-with-ef-core-in-aspnet-core---crud"></a>Część 2, Razor strony z EF Core w ASP.NET Core — CRUD
 
@@ -52,7 +53,7 @@ Zastąp `OnGetAsync` metodę poniższym kodem, aby odczytywać dane rejestracyjn
 
 Metody [include](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.include) i [ThenInclude](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.theninclude#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_ThenInclude__3_Microsoft_EntityFrameworkCore_Query_IIncludableQueryable___0_System_Collections_Generic_IEnumerable___1___System_Linq_Expressions_Expression_System_Func___1___2___) powodują, że kontekst ładuje `Student.Enrollments` Właściwość nawigacji i w ramach każdej rejestracji `Enrollment.Course` właściwości nawigacji. Te metody są szczegółowo opisane w samouczku [odczytywanie powiązanych danych](xref:data/ef-rp/read-related-data) .
 
-Metoda [AsNoTracking](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.asnotracking#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_AsNoTracking__1_System_Linq_IQueryable___0__) zwiększa wydajność w scenariuszach, w których zwrócone jednostki nie są aktualizowane w bieżącym kontekście. `AsNoTracking`omówiono w dalszej części tego samouczka.
+Metoda [AsNoTracking](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.asnotracking#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_AsNoTracking__1_System_Linq_IQueryable___0__) zwiększa wydajność w scenariuszach, w których zwrócone jednostki nie są aktualizowane w bieżącym kontekście. `AsNoTracking` omówiono w dalszej części tego samouczka.
 
 ### <a name="display-enrollments"></a>Wyświetl rejestracje
 
@@ -66,7 +67,7 @@ Uruchom aplikację, wybierz kartę **studenci** i kliknij link **szczegóły** d
 
 ### <a name="ways-to-read-one-entity"></a>Sposoby odczytywania jednej jednostki
 
-Wygenerowany kod używa [FirstOrDefaultAsync](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.firstordefaultasync#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_FirstOrDefaultAsync__1_System_Linq_IQueryable___0__System_Threading_CancellationToken_) do odczytu jednej jednostki. Ta metoda zwraca wartość null, jeśli nic nie zostanie znalezione; w przeciwnym razie zwraca pierwszy znaleziony wiersz, który spełnia kryteria filtru zapytania. `FirstOrDefaultAsync`jest ogólnie lepszym rozwiązaniem niż następujące alternatywy:
+Wygenerowany kod używa [FirstOrDefaultAsync](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.firstordefaultasync#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_FirstOrDefaultAsync__1_System_Linq_IQueryable___0__System_Threading_CancellationToken_) do odczytu jednej jednostki. Ta metoda zwraca wartość null, jeśli nic nie zostanie znalezione; w przeciwnym razie zwraca pierwszy znaleziony wiersz, który spełnia kryteria filtru zapytania. `FirstOrDefaultAsync` jest ogólnie lepszym rozwiązaniem niż następujące alternatywy:
 
 * [SingleOrDefaultAsync](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.singleordefaultasync#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_SingleOrDefaultAsync__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Threading_CancellationToken_) — zgłasza wyjątek, jeśli istnieje więcej niż jedna jednostka, która spełnia kryteria filtru zapytań. Aby określić, czy zapytanie może zwrócić więcej niż jeden wiersz, `SingleOrDefaultAsync` próbuje pobrać wiele wierszy. Ta dodatkowa operacja jest niezbędna, jeśli zapytanie może zwrócić tylko jedną jednostkę, tak jak podczas wyszukiwania unikatowego klucza.
 * [FindAsync](/dotnet/api/microsoft.entityframeworkcore.dbcontext.findasync#Microsoft_EntityFrameworkCore_DbContext_FindAsync_System_Type_System_Object___) — umożliwia znalezienie jednostki z kluczem podstawowym (PK). Jeśli jednostka z PK jest śledzona przez kontekst, jest zwracana bez żądania do bazy danych. Ta metoda jest zoptymalizowana pod kątem wyszukiwania pojedynczej jednostki, ale nie można wywoływać `Include` z `FindAsync` .  Tak więc, jeśli dane pokrewne są zbędne, `FirstOrDefaultAsync` to lepszy wybór.
@@ -124,7 +125,7 @@ Poniższy kod używa `StudentVM` modelu widoku do utworzenia nowego ucznia:
 
 [!code-csharp[Main](intro/samples/cu30snapshots/2-crud/Pages/Students/CreateVM.cshtml.cs?name=snippet_OnPostAsync)]
 
-Metoda [setValues](/dotnet/api/microsoft.entityframeworkcore.changetracking.propertyvalues.setvalues#Microsoft_EntityFrameworkCore_ChangeTracking_PropertyValues_SetValues_System_Object_) ustawia wartości tego obiektu, odczytując wartości z innego obiektu [propertyValues](/dotnet/api/microsoft.entityframeworkcore.changetracking.propertyvalues) . `SetValues`używa dopasowywania nazw właściwości. Typ modelu widoku nie musi być powiązany z typem modelu, dlatego musi mieć już pasujące właściwości.
+Metoda [setValues](/dotnet/api/microsoft.entityframeworkcore.changetracking.propertyvalues.setvalues#Microsoft_EntityFrameworkCore_ChangeTracking_PropertyValues_SetValues_System_Object_) ustawia wartości tego obiektu, odczytując wartości z innego obiektu [propertyValues](/dotnet/api/microsoft.entityframeworkcore.changetracking.propertyvalues) . `SetValues` używa dopasowywania nazw właściwości. Typ modelu widoku nie musi być powiązany z typem modelu, dlatego musi mieć już pasujące właściwości.
 
 Użycie `StudentVM` wymaga, aby funkcja [Create. cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu30snapshots/2-crud/Pages/Students/CreateVM.cshtml) była aktualizowana do użycia, `StudentVM` a nie `Student` .
 
@@ -136,8 +137,8 @@ W obszarze *strony/studenci/Edytuj. cshtml. cs*Zastąp `OnGetAsync` `OnPostAsync
 
 Zmiany w kodzie są podobne do strony tworzenie z kilkoma wyjątkami:
 
-* `FirstOrDefaultAsync`został zastąpiony [FindAsync](/dotnet/api/microsoft.entityframeworkcore.dbset-1.findasync). Gdy nie musisz zawierać powiązanych danych, `FindAsync` jest bardziej wydajne.
-* `OnPostAsync`ma `id` parametr.
+* `FirstOrDefaultAsync` został zastąpiony [FindAsync](/dotnet/api/microsoft.entityframeworkcore.dbset-1.findasync). Gdy nie musisz zawierać powiązanych danych, `FindAsync` jest bardziej wydajne.
+* `OnPostAsync` ma `id` parametr.
 * Bieżący student jest pobierany z bazy danych, a nie od tworzenia pustego ucznia.
 
 Uruchom aplikację i przetestuj ją, tworząc i edytując ucznia.
@@ -170,7 +171,7 @@ Zastąp kod w obszarze *Pages/Students/Delete. cshtml. cs* poniższym kodem. Zmi
 
 [!code-csharp[Main](intro/samples/cu30/Pages/Students/Delete.cshtml.cs?name=snippet_All&highlight=20,22,30,38-41,53-71)]
 
-Poprzedni kod dodaje opcjonalny parametr `saveChangesError` do `OnGetAsync` sygnatury metody. `saveChangesError`wskazuje, czy metoda została wywołana po niepowodzeniu usunięcia obiektu studenta. Operacja usuwania może zakończyć się niepowodzeniem z powodu przejściowych problemów z siecią. Przejściowe błędy sieciowe są bardziej prawdopodobnie, gdy baza danych znajduje się w chmurze. `saveChangesError`Parametr ma wartość false, gdy strona usuwania `OnGetAsync` jest wywoływana z interfejsu użytkownika. Gdy `OnGetAsync` jest wywoływana przez `OnPostAsync` (ponieważ operacja usuwania nie powiodła się), `saveChangesError` parametr ma wartość true.
+Poprzedni kod dodaje opcjonalny parametr `saveChangesError` do `OnGetAsync` sygnatury metody. `saveChangesError` wskazuje, czy metoda została wywołana po niepowodzeniu usunięcia obiektu studenta. Operacja usuwania może zakończyć się niepowodzeniem z powodu przejściowych problemów z siecią. Przejściowe błędy sieciowe są bardziej prawdopodobnie, gdy baza danych znajduje się w chmurze. `saveChangesError`Parametr ma wartość false, gdy strona usuwania `OnGetAsync` jest wywoływana z interfejsu użytkownika. Gdy `OnGetAsync` jest wywoływana przez `OnPostAsync` (ponieważ operacja usuwania nie powiodła się), `saveChangesError` parametr ma wartość true.
 
 `OnPostAsync`Metoda pobiera wybraną jednostkę, a następnie wywołuje metodę [Remove](/dotnet/api/microsoft.entityframeworkcore.dbcontext.remove#Microsoft_EntityFrameworkCore_DbContext_Remove_System_Object_) w celu ustawienia stanu jednostki na `Deleted` . Gdy `SaveChanges` jest wywoływana, generowane jest polecenie SQL Delete. W przypadku `Remove` niepowodzenia:
 
@@ -204,18 +205,18 @@ Kod szkieletowy używa następującego wzorca do tworzenia, edytowania i usuwani
 * Pobieranie i wyświetlanie żądanych danych za pomocą metody HTTP GET `OnGetAsync` .
 * Zapisz zmiany w danych za pomocą metody POST protokołu HTTP `OnPostAsync` .
 
-Strony indeks i szczegóły pobierają i wyświetlają żądane dane za pomocą metody HTTP GET`OnGetAsync`
+Strony indeks i szczegóły pobierają i wyświetlają żądane dane za pomocą metody HTTP GET `OnGetAsync`
 
 ## <a name="singleordefaultasync-vs-firstordefaultasync"></a>SingleOrDefaultAsync a FirstOrDefaultAsync
 
 Wygenerowany kod używa [FirstOrDefaultAsync](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.firstordefaultasync#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_FirstOrDefaultAsync__1_System_Linq_IQueryable___0__System_Threading_CancellationToken_), który jest ogólnie preferowany względem [SingleOrDefaultAsync](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.singleordefaultasync#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_SingleOrDefaultAsync__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Threading_CancellationToken_).
 
- `FirstOrDefaultAsync`jest wydajniejsze niż `SingleOrDefaultAsync` podczas pobierania jednej jednostki:
+ `FirstOrDefaultAsync` jest wydajniejsze niż `SingleOrDefaultAsync` podczas pobierania jednej jednostki:
 
 * Chyba że kod musi sprawdzić, czy nie ma więcej niż jednej jednostki zwróconej przez zapytanie.
-* `SingleOrDefaultAsync`Pobiera więcej danych i niezbędny przepływ pracy.
-* `SingleOrDefaultAsync`zgłasza wyjątek, jeśli istnieje więcej niż jedna jednostka, która pasuje do części filtru.
-* `FirstOrDefaultAsync`nie zgłasza, jeśli istnieje więcej niż jedna jednostka, która pasuje do części filtru.
+* `SingleOrDefaultAsync` Pobiera więcej danych i niezbędny przepływ pracy.
+* `SingleOrDefaultAsync` zgłasza wyjątek, jeśli istnieje więcej niż jedna jednostka, która pasuje do części filtru.
+* `FirstOrDefaultAsync` nie zgłasza, jeśli istnieje więcej niż jedna jednostka, która pasuje do części filtru.
 
 <a name="FindAsync"></a>
 
@@ -265,7 +266,7 @@ Kod szkieletowy strony indeksu uczniów nie zawiera `Enrollments` właściwości
 
 Metody [include](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.include) i [ThenInclude](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.theninclude#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_ThenInclude__3_Microsoft_EntityFrameworkCore_Query_IIncludableQueryable___0_System_Collections_Generic_IEnumerable___1___System_Linq_Expressions_Expression_System_Func___1___2___) powodują, że kontekst ładuje `Student.Enrollments` Właściwość nawigacji i w ramach każdej rejestracji `Enrollment.Course` właściwości nawigacji. Te metody są szczegółowo opisane w samouczku dotyczącym odczytywania danych.
 
-Metoda [AsNoTracking](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.asnotracking#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_AsNoTracking__1_System_Linq_IQueryable___0__) zwiększa wydajność w scenariuszach, gdy zwrócone jednostki nie są aktualizowane w bieżącym kontekście. `AsNoTracking`omówiono w dalszej części tego samouczka.
+Metoda [AsNoTracking](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.asnotracking#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_AsNoTracking__1_System_Linq_IQueryable___0__) zwiększa wydajność w scenariuszach, gdy zwrócone jednostki nie są aktualizowane w bieżącym kontekście. `AsNoTracking` omówiono w dalszej części tego samouczka.
 
 ### <a name="display-related-enrollments-on-the-details-page"></a>Wyświetl powiązane rejestracje na stronie szczegółów
 
@@ -293,7 +294,7 @@ Obejrzyj kod [TryUpdateModelAsync](/dotnet/api/microsoft.aspnetcore.mvc.controll
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Create.cshtml.cs?name=snippet_TryUpdateModelAsync)]
 
-W poprzednim kodzie program `TryUpdateModelAsync<Student>` próbuje zaktualizować obiekt, `emptyStudent` używając wartości ogłoszonych formularzy z właściwości [PageContext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.pagecontext#Microsoft_AspNetCore_Mvc_RazorPages_PageModel_PageContext) w [PageModel](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel). `TryUpdateModelAsync`aktualizuje tylko wymienione właściwości ( `s => s.FirstMidName, s => s.LastName, s => s.EnrollmentDate` ).
+W poprzednim kodzie program `TryUpdateModelAsync<Student>` próbuje zaktualizować obiekt, `emptyStudent` używając wartości ogłoszonych formularzy z właściwości [PageContext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.pagecontext#Microsoft_AspNetCore_Mvc_RazorPages_PageModel_PageContext) w [PageModel](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel). `TryUpdateModelAsync` aktualizuje tylko wymienione właściwości ( `s => s.FirstMidName, s => s.LastName, s => s.EnrollmentDate` ).
 
 W poprzednim przykładzie:
 
@@ -330,7 +331,7 @@ Poniższy kod używa `StudentVM` modelu widoku do utworzenia nowego ucznia:
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/CreateVM.cshtml.cs?name=snippet_OnPostAsync)]
 
-Metoda [setValues](/dotnet/api/microsoft.entityframeworkcore.changetracking.propertyvalues.setvalues#Microsoft_EntityFrameworkCore_ChangeTracking_PropertyValues_SetValues_System_Object_) ustawia wartości tego obiektu, odczytując wartości z innego obiektu [propertyValues](/dotnet/api/microsoft.entityframeworkcore.changetracking.propertyvalues) . `SetValues`używa dopasowywania nazw właściwości. Typ modelu widoku nie musi być powiązany z typem modelu, dlatego musi mieć już pasujące właściwości.
+Metoda [setValues](/dotnet/api/microsoft.entityframeworkcore.changetracking.propertyvalues.setvalues#Microsoft_EntityFrameworkCore_ChangeTracking_PropertyValues_SetValues_System_Object_) ustawia wartości tego obiektu, odczytując wartości z innego obiektu [propertyValues](/dotnet/api/microsoft.entityframeworkcore.changetracking.propertyvalues) . `SetValues` używa dopasowywania nazw właściwości. Typ modelu widoku nie musi być powiązany z typem modelu, dlatego musi mieć już pasujące właściwości.
 
 Użycie `StudentVM` wymaga aktualizacji [CreateVM. cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu21/Pages/Students/CreateVM.cshtml) `StudentVM` zamiast `Student` .
 
@@ -344,9 +345,9 @@ Zaktualizuj model strony dla strony Edycja. Najważniejsze zmiany są wyróżnio
 
 Zmiany w kodzie są podobne do strony tworzenie z kilkoma wyjątkami:
 
-* `OnPostAsync`ma opcjonalny `id` parametr.
+* `OnPostAsync` ma opcjonalny `id` parametr.
 * Bieżący student jest pobierany z bazy danych, a nie od tworzenia pustego ucznia.
-* `FirstOrDefaultAsync`został zastąpiony [FindAsync](/dotnet/api/microsoft.entityframeworkcore.dbset-1.findasync). `FindAsync`jest dobrym wyborem podczas wybierania jednostki z klucza podstawowego. Aby uzyskać więcej informacji, zobacz [FindAsync](#FindAsync) .
+* `FirstOrDefaultAsync` został zastąpiony [FindAsync](/dotnet/api/microsoft.entityframeworkcore.dbset-1.findasync). `FindAsync` jest dobrym wyborem podczas wybierania jednostki z klucza podstawowego. Aby uzyskać więcej informacji, zobacz [FindAsync](#FindAsync) .
 
 ### <a name="test-the-edit-and-create-pages"></a>Testowanie stron Edycja i tworzenie
 
@@ -382,7 +383,7 @@ Zastąp metodę `OnGetAsync` poniższym kodem:
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Delete.cshtml.cs?name=snippet_OnGetAsync&highlight=1,9,17-20)]
 
-Poprzedni kod zawiera opcjonalny parametr `saveChangesError` . `saveChangesError`wskazuje, czy metoda została wywołana po niepowodzeniu usunięcia obiektu studenta. Operacja usuwania może zakończyć się niepowodzeniem z powodu przejściowych problemów z siecią. Przejściowe błędy sieciowe są bardziej podobne do chmury. `saveChangesError`ma wartość false, gdy strona usuwania `OnGetAsync` jest wywoływana z interfejsu użytkownika. Gdy `OnGetAsync` jest wywoływana przez `OnPostAsync` (ponieważ operacja usuwania nie powiodła się), `saveChangesError` parametr ma wartość true.
+Poprzedni kod zawiera opcjonalny parametr `saveChangesError` . `saveChangesError` wskazuje, czy metoda została wywołana po niepowodzeniu usunięcia obiektu studenta. Operacja usuwania może zakończyć się niepowodzeniem z powodu przejściowych problemów z siecią. Przejściowe błędy sieciowe są bardziej podobne do chmury. `saveChangesError`ma wartość false, gdy strona usuwania `OnGetAsync` jest wywoływana z interfejsu użytkownika. Gdy `OnGetAsync` jest wywoływana przez `OnPostAsync` (ponieważ operacja usuwania nie powiodła się), `saveChangesError` parametr ma wartość true.
 
 ### <a name="the-delete-pages-onpostasync-method"></a>Metoda Delete Pages OnPostAsync
 
@@ -419,7 +420,7 @@ Każda Razor Strona musi zawierać `@page` dyrektywę.
 
 
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Wersja tego samouczka usługi YouTube](https://www.youtube.com/watch?v=K4X1MT2jt6o)
 

@@ -7,6 +7,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 04/06/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/partial-tag-helper
-ms.openlocfilehash: 5925594b5429f011a0694dbe14218211a52d6377
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 4a9f1958cd26bb57fcf3944aabacd57c470fb17e
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018458"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88626951"
 ---
 # <a name="partial-tag-helper-in-aspnet-core"></a>Pomocnik tagów częściowych w ASP.NET Core
 
@@ -61,7 +62,7 @@ Następujące oznakowanie używa jawnej ścieżki, wskazując, że *_ProductPart
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Pages/Product.cshtml?name=snippet_Name)]
 
-## <a name="for"></a>for
+## <a name="for"></a>dla
 
 Ten `for` atrybut przypisuje [ModelExpression](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.modelexpression) do oceny względem bieżącego modelu. A `ModelExpression` wnioskuje `@Model.` składnię. Na przykład, `for="Product"` można użyć zamiast `for="@Model.Product"` . To domyślne zachowanie wnioskowania jest zastępowane przy użyciu `@` symbolu do zdefiniowania wyrażenia wbudowanego.
 

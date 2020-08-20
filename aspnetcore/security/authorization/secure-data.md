@@ -1,11 +1,12 @@
 ---
 title: Tworzenie aplikacji ASP.NET Core przy użyciu danych użytkownika chronionych przez autoryzację
 author: rick-anderson
-description: Dowiedz się, jak utworzyć aplikację sieci Web ASP.NET Core przy użyciu danych użytkownika chronionych przez autoryzację. Obejmuje HTTPS, uwierzytelnianie, zabezpieczenia, ASP.NET Core Identity .
+description: Dowiedz się, jak utworzyć aplikację sieci Web ASP.NET Core przy użyciu danych użytkownika chronionych przez autoryzację. Obejmuje protokół HTTPS, uwierzytelnianie, zabezpieczenia, ASP.NET Core Identity .
 ms.author: riande
 ms.date: 7/18/2020
 ms.custom: mvc, seodec18
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/secure-data
-ms.openlocfilehash: 44777369693f9eb29d78c3ba638db2e692f430ae
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 5f86e514ee6339888171d83ab3117e9b3fcf107e
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021190"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88627822"
 ---
 # <a name="create-an-aspnet-core-web-app-with-user-data-protected-by-authorization"></a>Tworzenie aplikacji sieci Web ASP.NET Core przy użyciu danych użytkownika chronionych przez autoryzację
 
@@ -103,7 +104,7 @@ Użyj [Identity](xref:security/authentication/identity) identyfikatora użytkown
 
 [!code-csharp[](secure-data/samples/final3/Models/Contact.cs?name=snippet1&highlight=5-6,16-999)]
 
-`OwnerID`jest IDENTYFIKATORem użytkownika z `AspNetUser` tabeli w [Identity](xref:security/authentication/identity) bazie danych. `Status`Pole określa, czy kontakt jest widoczny dla użytkowników ogólnych.
+`OwnerID` jest IDENTYFIKATORem użytkownika z `AspNetUser` tabeli w [Identity](xref:security/authentication/identity) bazie danych. `Status`Pole określa, czy kontakt jest widoczny dla użytkowników ogólnych.
 
 Utwórz nową migrację i zaktualizuj bazę danych:
 
@@ -112,7 +113,7 @@ dotnet ef migrations add userID_Status
 dotnet ef database update
 ```
 
-### <a name="add-role-services-to-no-locidentity"></a>Dodawanie usług ról do programuIdentity
+### <a name="add-role-services-to-no-locidentity"></a>Dodawanie usług ról do programu Identity
 
 Dołącz [Addroles](/dotnet/api/microsoft.aspnetcore.identity.identitybuilder.addroles#Microsoft_AspNetCore_Identity_IdentityBuilder_AddRoles__1) , aby dodać usługi ról:
 
@@ -134,7 +135,7 @@ Rezerwowe zasady uwierzytelniania:
 
 Ustawienie rezerwowych zasad uwierzytelniania wymaga uwierzytelniania użytkowników chroniących nowo dodane Razor strony i kontrolery. Uwierzytelnianie wymagane domyślnie jest bezpieczniejsze niż poleganie na nowych kontrolerach i stronach w Razor celu uwzględnienia `[Authorize]` atrybutu.
 
-<xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions>Klasa zawiera również <xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.DefaultPolicy?displayProperty=nameWithType> . `DefaultPolicy`To zasady używane z `[Authorize]` atrybutem, jeśli nie określono żadnych zasad. `[Authorize]`nie zawiera nazwanych zasad, w przeciwieństwie do `[Authorize(PolicyName="MyPolicy")]` .
+<xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions>Klasa zawiera również <xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.DefaultPolicy?displayProperty=nameWithType> . `DefaultPolicy`To zasady używane z `[Authorize]` atrybutem, jeśli nie określono żadnych zasad. `[Authorize]` nie zawiera nazwanych zasad, w przeciwieństwie do `[Authorize(PolicyName="MyPolicy")]` .
 
 Aby uzyskać więcej informacji na temat zasad, zobacz <xref:security/authorization/policies> .
 
@@ -181,11 +182,11 @@ Utwórz `ContactIsOwnerAuthorizationHandler` klasę w folderze *autoryzacji* . `
 `ContactIsOwnerAuthorizationHandler`Kontekst wywołań [. Powodzenie](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandlercontext.succeed#Microsoft_AspNetCore_Authorization_AuthorizationHandlerContext_Succeed_Microsoft_AspNetCore_Authorization_IAuthorizationRequirement_) , jeśli bieżący użytkownik uwierzytelniony jest właścicielem osoby kontaktowej. Obsługa autoryzacji zazwyczaj:
 
 * Zwróć `context.Succeed` , gdy wymagania są spełnione.
-* Zwracaj, `Task.CompletedTask` gdy wymagania nie są spełnione. `Task.CompletedTask`nie powiodło się lub niepowodzenie — &mdash; zezwala na uruchamianie innych programów obsługi autoryzacji.
+* Zwracaj, `Task.CompletedTask` gdy wymagania nie są spełnione. `Task.CompletedTask` nie powiodło się lub niepowodzenie — &mdash; zezwala na uruchamianie innych programów obsługi autoryzacji.
 
 Jeśli musisz jawnie niepowodzeniem, zwróć [kontekst. Nie powiodło się](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandlercontext.fail).
 
-Aplikacja umożliwia właścicielom kontaktu Edytowanie/usuwanie/tworzenie własnych danych. `ContactIsOwnerAuthorizationHandler`nie trzeba sprawdzać operacji przesłanej w parametrze wymagania.
+Aplikacja umożliwia właścicielom kontaktu Edytowanie/usuwanie/tworzenie własnych danych. `ContactIsOwnerAuthorizationHandler` nie trzeba sprawdzać operacji przesłanej w parametrze wymagania.
 
 ### <a name="create-a-manager-authorization-handler"></a>Tworzenie procedury obsługi autoryzacji Menedżera
 
@@ -205,7 +206,7 @@ Usługi korzystające z Entity Framework Core muszą być zarejestrowane dla [in
 
 [!code-csharp[](secure-data/samples/final3/Startup.cs?name=snippet_defaultPolicy&highlight=23-99)]
 
-`ContactAdministratorsAuthorizationHandler`i `ContactManagerAuthorizationHandler` są dodawane jako pojedyncze. Są one pojedynczymi, ponieważ nie korzystają z EF, a wszystkie potrzebne informacje znajdują się w `Context` parametrze `HandleRequirementAsync` metody.
+`ContactAdministratorsAuthorizationHandler` i `ContactManagerAuthorizationHandler` są dodawane jako pojedyncze. Są one pojedynczymi, ponieważ nie korzystają z EF, a wszystkie potrzebne informacje znajdują się w `Context` parametrze `HandleRequirementAsync` metody.
 
 ## <a name="support-authorization"></a>Obsługa autoryzacji
 
@@ -343,7 +344,7 @@ Utwórz kontakt w przeglądarce administratora. Skopiuj adres URL służący do 
 * Tworzenie Razor aplikacji stronicowej o nazwie "contacter"
   * Utwórz aplikację przy użyciu **poszczególnych kont użytkowników**.
   * Nadaj mu nazwę "ContactName", aby przestrzeń nazw była zgodna z przestrzenią nazw używaną w przykładzie.
-  * `-uld`Określa LocalDB zamiast oprogramowania SQLite
+  * `-uld` Określa LocalDB zamiast oprogramowania SQLite
 
   ```dotnetcli
   dotnet new webapp -o ContactManager -au Individual -uld
@@ -457,7 +458,7 @@ Użyj [Identity](xref:security/authentication/identity) identyfikatora użytkown
 
 [!code-csharp[](secure-data/samples/final2.1/Models/Contact.cs?name=snippet1&highlight=5-6,16-999)]
 
-`OwnerID`jest IDENTYFIKATORem użytkownika z `AspNetUser` tabeli w [Identity](xref:security/authentication/identity) bazie danych. `Status`Pole określa, czy kontakt jest widoczny dla użytkowników ogólnych.
+`OwnerID` jest IDENTYFIKATORem użytkownika z `AspNetUser` tabeli w [Identity](xref:security/authentication/identity) bazie danych. `Status`Pole określa, czy kontakt jest widoczny dla użytkowników ogólnych.
 
 Utwórz nową migrację i zaktualizuj bazę danych:
 
@@ -466,7 +467,7 @@ dotnet ef migrations add userID_Status
 dotnet ef database update
 ```
 
-### <a name="add-role-services-to-no-locidentity"></a>Dodawanie usług ról do programuIdentity
+### <a name="add-role-services-to-no-locidentity"></a>Dodawanie usług ról do programu Identity
 
 Dołącz [Addroles](/dotnet/api/microsoft.aspnetcore.identity.identitybuilder.addroles#Microsoft_AspNetCore_Identity_IdentityBuilder_AddRoles__1) , aby dodać usługi ról:
 
@@ -517,11 +518,11 @@ Utwórz folder *autoryzacji* i Utwórz `ContactIsOwnerAuthorizationHandler` w ni
 `ContactIsOwnerAuthorizationHandler`Kontekst wywołań [. Powodzenie](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandlercontext.succeed#Microsoft_AspNetCore_Authorization_AuthorizationHandlerContext_Succeed_Microsoft_AspNetCore_Authorization_IAuthorizationRequirement_) , jeśli bieżący użytkownik uwierzytelniony jest właścicielem osoby kontaktowej. Obsługa autoryzacji zazwyczaj:
 
 * Zwróć `context.Succeed` , gdy wymagania są spełnione.
-* Zwracaj, `Task.CompletedTask` gdy wymagania nie są spełnione. `Task.CompletedTask`nie powiodło się lub niepowodzenie — &mdash; zezwala na uruchamianie innych programów obsługi autoryzacji.
+* Zwracaj, `Task.CompletedTask` gdy wymagania nie są spełnione. `Task.CompletedTask` nie powiodło się lub niepowodzenie — &mdash; zezwala na uruchamianie innych programów obsługi autoryzacji.
 
 Jeśli musisz jawnie niepowodzeniem, zwróć [kontekst. Nie powiodło się](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandlercontext.fail).
 
-Aplikacja umożliwia właścicielom kontaktu Edytowanie/usuwanie/tworzenie własnych danych. `ContactIsOwnerAuthorizationHandler`nie trzeba sprawdzać operacji przesłanej w parametrze wymagania.
+Aplikacja umożliwia właścicielom kontaktu Edytowanie/usuwanie/tworzenie własnych danych. `ContactIsOwnerAuthorizationHandler` nie trzeba sprawdzać operacji przesłanej w parametrze wymagania.
 
 ### <a name="create-a-manager-authorization-handler"></a>Tworzenie procedury obsługi autoryzacji Menedżera
 
@@ -541,7 +542,7 @@ Usługi korzystające z Entity Framework Core muszą być zarejestrowane dla [in
 
 [!code-csharp[](secure-data/samples/final2.1/Startup.cs?name=snippet_defaultPolicy&highlight=27-99)]
 
-`ContactAdministratorsAuthorizationHandler`i `ContactManagerAuthorizationHandler` są dodawane jako pojedyncze. Są one pojedynczymi, ponieważ nie korzystają z EF, a wszystkie potrzebne informacje znajdują się w `Context` parametrze `HandleRequirementAsync` metody.
+`ContactAdministratorsAuthorizationHandler` i `ContactManagerAuthorizationHandler` są dodawane jako pojedyncze. Są one pojedynczymi, ponieważ nie korzystają z EF, a wszystkie potrzebne informacje znajdują się w `Context` parametrze `HandleRequirementAsync` metody.
 
 ## <a name="support-authorization"></a>Obsługa autoryzacji
 
@@ -670,7 +671,7 @@ Utwórz kontakt w przeglądarce administratora. Skopiuj adres URL służący do 
 * Tworzenie Razor aplikacji stronicowej o nazwie "contacter"
   * Utwórz aplikację przy użyciu **poszczególnych kont użytkowników**.
   * Nadaj mu nazwę "ContactName", aby przestrzeń nazw była zgodna z przestrzenią nazw używaną w przykładzie.
-  * `-uld`Określa LocalDB zamiast oprogramowania SQLite
+  * `-uld` Określa LocalDB zamiast oprogramowania SQLite
 
   ```dotnetcli
   dotnet new webapp -o ContactManager -au Individual -uld
@@ -712,7 +713,7 @@ Sprawdź, czy aplikacja wykorzystana z bazy danych. Jeśli w bazie danych kontak
 
 <a name="secure-data-add-resources-label"></a>
 
-### <a name="additional-resources"></a>Zasoby dodatkowe
+### <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Tworzenie aplikacji internetowej platformy .NET Core i usługi SQL Database w usłudze Azure App Service](/azure/app-service/app-service-web-tutorial-dotnetcore-sqldb)
 * [ASP.NET Core laboratorium autoryzacji](https://github.com/blowdart/AspNetAuthorizationWorkshop). To laboratorium prowadzi do bardziej szczegółowych informacji na temat funkcji zabezpieczeń wprowadzonych w tym samouczku.

@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/11/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: 14fa13bafa984c0ca7b9fd8cde538042cc0ec2cc
-ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
+ms.openlocfilehash: 53293ae9780129530ce5a41639e19284f47aa245
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/12/2020
-ms.locfileid: "88130447"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628082"
 ---
 # <a name="aspnet-core-no-locblazor-hosting-models"></a>ASP.NET Core Blazor modele hostingu
 
@@ -102,7 +103,7 @@ Gdy Razor Strona lub widok jest renderowany, każdy wiersz Razor kodu EMITUJE ko
 * Cała strona zostanie ponownie przerenderowana na tekst HTML.
 * Strona jest wysyłana do klienta.
 
-BlazorAplikacja składa się z elementów wielokrotnego użytku interfejsu użytkownika o nazwie *Components*. Składnik zawiera kod C#, znacznik i inne składniki. Gdy składnik jest renderowany, program Blazor tworzy wykres dołączonych składników podobny do Document Object Model HTML lub XML (dom). Ten wykres zawiera stan składnika przechowywany w właściwościach i polach. Blazoroblicza wykres składnika, aby utworzyć binarną reprezentację znacznika. Format binarny może:
+BlazorAplikacja składa się z elementów wielokrotnego użytku interfejsu użytkownika o nazwie *Components*. Składnik zawiera kod C#, znacznik i inne składniki. Gdy składnik jest renderowany, program Blazor tworzy wykres dołączonych składników podobny do Document Object Model HTML lub XML (dom). Ten wykres zawiera stan składnika przechowywany w właściwościach i polach. Blazor oblicza wykres składnika, aby utworzyć binarną reprezentację znacznika. Format binarny może:
 
 * Włączono tekst HTML (podczas renderowania prerenderingu &dagger; ).
 * Służy do wydajnej aktualizacji znaczników podczas normalnego renderowania.
@@ -124,9 +125,9 @@ Blazor ServerAplikacja została utworzona na podstawie [ASP.NET Core SignalR ](x
 
 Każdy ekran przeglądarki (karta przeglądarki lub iframe), który jest połączony z Blazor Server aplikacją, używa SignalR połączenia. Jest to jeszcze inna ważna różnica w porównaniu z typowymi aplikacjami renderowanymi przez serwer. W aplikacji renderowanej na serwerze otwieranie tej samej aplikacji na wielu ekranach przeglądarki zazwyczaj nie jest przeważnie uwzględniane w dodatkowych wymaganiach dotyczących zasobów na serwerze. W Blazor Server aplikacji każdy ekran przeglądarki wymaga oddzielnego obwodu i oddzielnych wystąpień stanu składnika, które mają być zarządzane przez serwer programu.
 
-Blazoruważa *, że zamyka* kartę przeglądarki lub przechodzenie do zewnętrznego adresu URL. W przypadku bezpiecznego zakończenia obwód i skojarzone zasoby są natychmiast uwalniane. Klient może również odłączyć się niebezpiecznie, na przykład z powodu przerwy w działaniu sieci. Blazor Serverprzechowuje połączone obwody przez konfigurowalne interwały, aby umożliwić klientowi ponowne nawiązanie połączenia.
+Blazor uważa *, że zamyka* kartę przeglądarki lub przechodzenie do zewnętrznego adresu URL. W przypadku bezpiecznego zakończenia obwód i skojarzone zasoby są natychmiast uwalniane. Klient może również odłączyć się niebezpiecznie, na przykład z powodu przerwy w działaniu sieci. Blazor Server przechowuje połączone obwody przez konfigurowalne interwały, aby umożliwić klientowi ponowne nawiązanie połączenia.
 
-Blazor Serverumożliwia kodowi Definiowanie *procedury obsługi obwodu*, która umożliwia uruchamianie kodu na zmiany stanu obwodu użytkownika. Aby uzyskać więcej informacji, zobacz <xref:blazor/advanced-scenarios#blazor-server-circuit-handler>.
+Blazor Server umożliwia kodowi Definiowanie *procedury obsługi obwodu*, która umożliwia uruchamianie kodu na zmiany stanu obwodu użytkownika. Aby uzyskać więcej informacji, zobacz <xref:blazor/advanced-scenarios#blazor-server-circuit-handler>.
 
 ### <a name="ui-latency"></a>Opóźnienie interfejsu użytkownika
 
@@ -136,16 +137,16 @@ W przypadku aplikacji biznesowych, która jest ograniczona do prywatnej sieci fi
 
 Użycie pamięci może również przyczynić się do opóźnienia aplikacji. Zwiększone użycie pamięci powoduje częste zbieranie elementów bezużytecznych lub stronicowanie pamięci na dysku, co zmniejsza wydajność aplikacji i w związku z tym zwiększa opóźnienia interfejsu użytkownika.
 
-Blazor Serveraplikacje powinny być zoptymalizowane w celu zminimalizowania opóźnień interfejsu użytkownika przez zmniejszenie opóźnienia sieci i użycie pamięci. Aby uzyskać podejście do mierzenia opóźnień sieci, zobacz <xref:blazor/host-and-deploy/server#measure-network-latency> . Aby uzyskać więcej informacji na temat SignalR i Blazor , zobacz:
+Blazor Server aplikacje powinny być zoptymalizowane w celu zminimalizowania opóźnień interfejsu użytkownika przez zmniejszenie opóźnienia sieci i użycie pamięci. Aby uzyskać podejście do mierzenia opóźnień sieci, zobacz <xref:blazor/host-and-deploy/server#measure-network-latency> . Aby uzyskać więcej informacji na temat SignalR i Blazor , zobacz:
 
 * <xref:blazor/host-and-deploy/server>
 * <xref:blazor/security/server/threat-mitigation>
 
 ### <a name="connection-to-the-server"></a>Połączenie z serwerem
 
-Blazor Serveraplikacje wymagają aktywnego SignalR połączenia z serwerem. Jeśli połączenie zostanie utracone, aplikacja spróbuje ponownie nawiązać połączenie z serwerem. O ile stan klienta nadal znajduje się w pamięci, sesja klienta zostaje wznowiona bez utraty stanu.
+Blazor Server aplikacje wymagają aktywnego SignalR połączenia z serwerem. Jeśli połączenie zostanie utracone, aplikacja spróbuje ponownie nawiązać połączenie z serwerem. O ile stan klienta nadal znajduje się w pamięci, sesja klienta zostaje wznowiona bez utraty stanu.
 
-Blazor ServerAplikacja jest przedstawiona w odpowiedzi na pierwsze żądanie klienta, która konfiguruje stan interfejsu użytkownika na serwerze. Gdy klient próbuje utworzyć SignalR połączenie, klient musi ponownie nawiązać połączenie z tym samym serwerem. Blazor Serveraplikacje korzystające z więcej niż jednego serwera wewnętrznej bazy danych powinny implementować *sesje usługi Sticky Notes* dla SignalR połączeń.
+Blazor ServerAplikacja jest przedstawiona w odpowiedzi na pierwsze żądanie klienta, która konfiguruje stan interfejsu użytkownika na serwerze. Gdy klient próbuje utworzyć SignalR połączenie, klient musi ponownie nawiązać połączenie z tym samym serwerem. Blazor Server aplikacje korzystające z więcej niż jednego serwera wewnętrznej bazy danych powinny implementować *sesje usługi Sticky Notes* dla SignalR połączeń.
 
 Zalecamy korzystanie z [ SignalR usługi platformy Azure](/azure/azure-signalr) dla Blazor Server aplikacji. Usługa umożliwia skalowanie Blazor Server aplikacji w górę do dużej liczby jednoczesnych SignalR połączeń. Sesje programu Sticky Notes są włączone dla usługi platformy Azure SignalR , ustawiając `ServerStickyMode` opcję usługi lub wartość konfiguracji na `Required` . Aby uzyskać więcej informacji, zobacz <xref:blazor/host-and-deploy/server#signalr-configuration>.
 

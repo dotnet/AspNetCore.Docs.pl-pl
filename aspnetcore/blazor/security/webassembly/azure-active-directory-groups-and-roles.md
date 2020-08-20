@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: devx-track-csharp, mvc
 ms.date: 07/28/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/aad-groups-roles
-ms.openlocfilehash: bd0a7c5a905ae4888ea6ad326be5b16cbfaa10fc
-ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
+ms.openlocfilehash: 50d019897310f9edd560069137ab73b39d780be8
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/12/2020
-ms.locfileid: "88130408"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88626236"
 ---
 # <a name="azure-ad-groups-administrative-roles-and-user-defined-roles"></a>Grupy usługi Azure AD, role administracyjne i role zdefiniowane przez użytkownika
 
@@ -54,14 +55,14 @@ Aby zezwolić na interfejs API programu Graph wywołań, nadaj aplikacji autonom
 * `Directory.ReadWrite.All`
 * `Directory.AccessAsUser.All`
 
-`Directory.Read.All`jest uprawnieniem z najniższymi uprawnieniami i jest uprawnieniem używanym do przykładu opisanego w tym artykule.
+`Directory.Read.All` jest uprawnieniem z najniższymi uprawnieniami i jest uprawnieniem używanym do przykładu opisanego w tym artykule.
 
 ## <a name="user-defined-groups-and-built-in-administrative-roles"></a>Grupy zdefiniowane przez użytkownika i wbudowane role administracyjne
 
 Aby skonfigurować aplikację w Azure Portal w celu uzyskania `groups` żądania członkostwa, zobacz następujące artykuły platformy Azure. Przypisz użytkowników do grup usługi AAD zdefiniowanych przez użytkownika i wbudowanych ról administracyjnych.
 
 * [Role korzystające z grup zabezpieczeń usługi Azure AD](/azure/architecture/multitenant-identity/app-roles#roles-using-azure-ad-security-groups)
-* [`groupMembershipClaims`przypisane](/azure/active-directory/develop/reference-app-manifest#groupmembershipclaims-attribute)
+* [`groupMembershipClaims` przypisane](/azure/active-directory/develop/reference-app-manifest#groupmembershipclaims-attribute)
 
 W poniższych przykładach założono, że użytkownik jest przypisany do roli *administratora rozliczeń* w usłudze AAD.
 

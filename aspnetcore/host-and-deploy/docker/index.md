@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/08/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/docker/index
-ms.openlocfilehash: 35837eb2bd1ed2321663e1ae334eb20b18e5587a
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: bcb09300ccfd0fa1595bff325da1049d4d185b64
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015780"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88627354"
 ---
 # <a name="host-aspnet-core-in-docker-containers"></a>ASP.NET Core hosta w kontenerach platformy Docker
 
@@ -39,7 +40,7 @@ Poznaj warunki i definicje dotyczące technologii platformy Docker.
 [Kontenery, obrazy i rejestry platformy Docker](/dotnet/standard/microservices-architecture/container-docker-introduction/docker-containers-images-registries)  
 Dowiedz się, w jaki sposób obrazy kontenerów platformy Docker są przechowywane w rejestrze obrazów na potrzeby spójnego wdrażania w różnych środowiskach.
 
-<xref:host-and-deploy/docker/building-net-docker-images>Dowiedz się, jak kompilować i przekształcać aplikację ASP.NET Core. Eksploruj obrazy platformy Docker obsługiwane przez firmę Microsoft i badaj przypadki użycia.
+<xref:host-and-deploy/docker/building-net-docker-images> Dowiedz się, jak kompilować i przekształcać aplikację ASP.NET Core. Eksploruj obrazy platformy Docker obsługiwane przez firmę Microsoft i badaj przypadki użycia.
 
 [Narzędzia kontenerów programu Visual Studio](xref:host-and-deploy/docker/visual-studio-tools-for-docker)  
 Dowiedz się, w jaki sposób program Visual Studio obsługuje kompilowanie, debugowanie i uruchamianie aplikacji ASP.NET Core przeznaczonych dla .NET Framework lub .NET Core w Docker for Windows. Obsługiwane są kontenery zarówno systemu Windows, jak i Linux.

@@ -1,5 +1,5 @@
 ---
-title: Twórz progresywne aplikacje sieci Web za pomocą ASP.NET CoreBlazor WebAssembly
+title: Twórz progresywne aplikacje sieci Web za pomocą ASP.NET Core Blazor WebAssembly
 author: guardrex
 description: Dowiedz się, jak utworzyć Blazor progresywną aplikację sieci Web (PWA), która korzysta z nowoczesnych funkcji przeglądarki, aby zachować takie działanie jak aplikacja klasyczna.
 monikerRange: '>= aspnetcore-3.1'
@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/10/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/progressive-web-app
-ms.openlocfilehash: 1c33a3abd2ebee60a4025d4598495d276663dc9b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 230b2a801a76e2d719fba8e2b97fddb0b32a9634
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014168"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88627965"
 ---
-# <a name="build-progressive-web-applications-with-aspnet-core-no-locblazor-webassembly"></a>Twórz progresywne aplikacje sieci Web za pomocą ASP.NET CoreBlazor WebAssembly
+# <a name="build-progressive-web-applications-with-aspnet-core-no-locblazor-webassembly"></a>Twórz progresywne aplikacje sieci Web za pomocą ASP.NET Core Blazor WebAssembly
 
 [Steve Sanderson](https://github.com/SteveSandersonMS)
 
-Progresywna aplikacja sieci Web (PWA) jest zazwyczaj aplikacją jednostronicową, która używa nowoczesnych interfejsów API i funkcji w celu zachowania aplikacji klasycznych. Blazor WebAssemblyto oparta na standardach platforma aplikacji sieci Web po stronie klienta, która może korzystać z dowolnego interfejsu API przeglądarki, w tym interfejsów API programu PWA, wymaganych w przypadku następujących możliwości:
+Progresywna aplikacja sieci Web (PWA) jest zazwyczaj aplikacją jednostronicową, która używa nowoczesnych interfejsów API i funkcji w celu zachowania aplikacji klasycznych. Blazor WebAssembly to oparta na standardach platforma aplikacji sieci Web po stronie klienta, która może korzystać z dowolnego interfejsu API przeglądarki, w tym interfejsów API programu PWA, wymaganych w przypadku następujących możliwości:
 
 * Praca w trybie offline i ładowanie błyskawiczne niezależnie od szybkości sieci.
 * Działa w osobnym oknie aplikacji, a nie tylko w oknie przeglądarki.
@@ -43,7 +44,7 @@ Słowo *progresywne* służy do opisywania takich aplikacji, ponieważ:
 
 ## <a name="create-a-project-from-the-pwa-template"></a>Tworzenie projektu na podstawie szablonu PWA
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Gdy tworzysz nową ** Blazor WebAssembly aplikację** w oknie dialogowym **Tworzenie nowego projektu** , zaznacz pole wyboru **aplikacja sieci Web progresywna** :
 
@@ -161,8 +162,8 @@ Jeśli Razor składniki aplikacji korzystają z żądania danych z interfejsów 
 
 Zastanów się, co się stanie, gdy użytkownik po raz pierwszy przejdzie do adresu URL, takiego jak `/counter` lub dowolnego innego linku bezpośredniego w aplikacji. W takich przypadkach nie chcesz zwracać zawartości w pamięci podręcznej jako `/counter` , ale potrzebna jest przeglądarka do załadowania zawartości w pamięci podręcznej w `/index.html` celu uruchomienia Blazor WebAssembly aplikacji. Te początkowe żądania są znane jako żądania *nawigacji* , w przeciwieństwie do:
 
-* `subresource`żądania obrazów, arkuszy stylów lub innych plików.
-* `fetch/XHR`żądania dotyczące danych interfejsu API.
+* `subresource` żądania obrazów, arkuszy stylów lub innych plików.
+* `fetch/XHR` żądania dotyczące danych interfejsu API.
 
 Domyślny proces roboczy usługi zawiera logikę przypadków specjalnych dla żądań nawigacji. Proces roboczy usługi rozwiązuje żądania, zwracając zawartość z pamięci podręcznej dla `/index.html` , niezależnie od żądanego adresu URL. Ta logika jest implementowana w `onFetch` funkcji wewnątrz `service-worker.published.js` .
 
@@ -295,8 +296,8 @@ Aby utworzyć aplikację w usłudze PWA w trybie offline, która współdziała 
 
 * `OfflineAccountClaimsPrincipalFactory` (`Client/Data/OfflineAccountClaimsPrincipalFactory.cs`)
 * `LocalVehiclesStore` (`Client/Data/LocalVehiclesStore.cs`)
-* `LoginStatus`składnik ( `Client/Shared/LoginStatus.razor` )
+* `LoginStatus` składnik ( `Client/Shared/LoginStatus.razor` )
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
-* [SignalRnegocjowanie między źródłami na potrzeby uwierzytelniania](xref:blazor/fundamentals/additional-scenarios#signalr-cross-origin-negotiation-for-authentication)
+* [SignalR negocjowanie między źródłami na potrzeby uwierzytelniania](xref:blazor/fundamentals/additional-scenarios#signalr-cross-origin-negotiation-for-authentication)

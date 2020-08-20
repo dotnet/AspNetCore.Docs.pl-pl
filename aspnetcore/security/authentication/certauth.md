@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: bdorrans
 ms.date: 07/16/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,16 +17,16 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/certauth
-ms.openlocfilehash: 7a23f2b17cc8fb3a4989b9fddd5c128add13db5b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 54780e2d67c70d945fd875c41c8d6483aa358bbf
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021955"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88627198"
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>Konfigurowanie uwierzytelniania certyfikatów w ASP.NET Core
 
-`Microsoft.AspNetCore.Authentication.Certificate`zawiera implementację podobną do [uwierzytelniania certyfikatu](https://tools.ietf.org/html/rfc5246#section-7.4.4) dla ASP.NET Core. Uwierzytelnianie certyfikatu odbywa się na poziomie protokołu TLS, o ile nie zostanie kiedykolwiek przeASP.NET Core. Dokładniej, jest to procedura obsługi uwierzytelniania, która sprawdza poprawność certyfikatu, a następnie przekazuje zdarzenie, w którym można rozwiązać ten certyfikat do `ClaimsPrincipal` . 
+`Microsoft.AspNetCore.Authentication.Certificate` zawiera implementację podobną do [uwierzytelniania certyfikatu](https://tools.ietf.org/html/rfc5246#section-7.4.4) dla ASP.NET Core. Uwierzytelnianie certyfikatu odbywa się na poziomie protokołu TLS, o ile nie zostanie kiedykolwiek przeASP.NET Core. Dokładniej, jest to procedura obsługi uwierzytelniania, która sprawdza poprawność certyfikatu, a następnie przekazuje zdarzenie, w którym można rozwiązać ten certyfikat do `ClaimsPrincipal` . 
 
 [Skonfiguruj serwer](#configure-your-server-to-require-certificates) pod kątem uwierzytelniania przy użyciu certyfikatu, to usługi IIS, Kestrel, Azure Web Apps lub inne, z których korzystasz.
 
@@ -38,7 +39,7 @@ Uwierzytelnianie certyfikatu jest scenariuszem stanowym głównie używanym w pr
 
 Alternatywą dla uwierzytelniania certyfikatu w środowiskach, w których są używane serwery proxy i moduły równoważenia obciążenia, są Active Directory usług federacyjnych (AD FS) za pomocą OpenID Connect Connect (OIDC).
 
-## <a name="get-started"></a>Wprowadzenie
+## <a name="get-started"></a>Rozpoczęcie pracy
 
 Uzyskaj certyfikat HTTPS, zastosuj go i [Skonfiguruj serwer](#configure-your-server-to-require-certificates) tak, aby wymagał certyfikatów.
 
@@ -46,7 +47,7 @@ W aplikacji sieci Web Dodaj odwołanie do pakietu [Microsoft. AspNetCore. Authen
 
 Jeśli uwierzytelnianie nie powiedzie się, ta procedura obsługi zwróci `403 (Forbidden)` odpowiedź zamiast elementu `401 (Unauthorized)` , zgodnie z oczekiwaniami. Powodem jest to, że uwierzytelnianie powinno nastąpić podczas początkowego połączenia TLS. Przez czas, gdy dociera do programu obsługi, jest zbyt opóźniony. Nie ma możliwości uaktualnienia połączenia z anonimowego połączenia z certyfikatem.
 
-Dodaj również `app.UseAuthentication();` `Startup.Configure` metodę. W przeciwnym razie `HttpContext.User` nie zostanie ustawiona jako `ClaimsPrincipal` utworzona na podstawie certyfikatu. Przykład:
+Dodaj również `app.UseAuthentication();` `Startup.Configure` metodę. W przeciwnym razie `HttpContext.User` nie zostanie ustawiona jako `ClaimsPrincipal` utworzona na podstawie certyfikatu. Na przykład:
 
 ::: moniker range=">= aspnetcore-5.0"
 
@@ -103,25 +104,25 @@ W powyższym przykładzie przedstawiono domyślny sposób dodawania uwierzytelni
 
 ### <a name="allowedcertificatetypes--chained-selfsigned-or-all-chained--selfsigned"></a>AllowedCertificateTypes = łańcuchy, SelfSigned lub wszystkie (łańcuchowo | SelfSigned)
 
-Wartość domyślna:`CertificateTypes.Chained`
+Wartość domyślna: `CertificateTypes.Chained`
 
 Ten test sprawdza, czy dozwolony jest tylko odpowiedni typ certyfikatu. Jeśli aplikacja korzysta z certyfikatów z podpisem własnym, ta opcja musi być ustawiona na `CertificateTypes.All` lub `CertificateTypes.SelfSigned` .
 
 ### <a name="validatecertificateuse"></a>ValidateCertificateUse
 
-Wartość domyślna:`true`
+Wartość domyślna: `true`
 
 Ten test sprawdza, czy certyfikat przedstawiony przez klienta ma rozszerzone użycie klucza uwierzytelniania klienta (EKU) lub nie rozszerzeń EKU w ogóle. Zgodnie ze specyfikacją, jeśli nie określono rozszerzenia EKU, wszystkie rozszerzeń EKU są uznawane za prawidłowe.
 
 ### <a name="validatevalidityperiod"></a>ValidateValidityPeriod
 
-Wartość domyślna:`true`
+Wartość domyślna: `true`
 
 Ten test sprawdza, czy certyfikat jest w jego okresie ważności. W przypadku każdego żądania program obsługi zapewnia, że certyfikat, który był ważny, gdy był prezentowany, nie upłynął podczas bieżącej sesji.
 
 ### <a name="revocationflag"></a>RevocationFlag
 
-Wartość domyślna:`X509RevocationFlag.ExcludeRoot`
+Wartość domyślna: `X509RevocationFlag.ExcludeRoot`
 
 Flaga określająca, które certyfikaty w łańcuchu są sprawdzane pod kątem odwołania.
 
@@ -129,7 +130,7 @@ Sprawdzanie odwołań jest wykonywane tylko wtedy, gdy certyfikat jest powiązan
 
 ### <a name="revocationmode"></a>Odwołaniemode
 
-Wartość domyślna:`X509RevocationMode.Online`
+Wartość domyślna: `X509RevocationMode.Online`
 
 Flaga określająca sposób sprawdzania odwołania.
 
@@ -325,7 +326,7 @@ private static byte[] StringToByteArray(string hex)
 }
 ```
 
-`Startup.Configure`Następnie Metoda dodaje oprogramowanie pośredniczące. `UseCertificateForwarding`jest wywoływana przed wywołaniem do `UseAuthentication` i `UseAuthorization` :
+`Startup.Configure`Następnie Metoda dodaje oprogramowanie pośredniczące. `UseCertificateForwarding` jest wywoływana przed wywołaniem do `UseAuthentication` i `UseAuthorization` :
 
 ```csharp
 public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -642,7 +643,7 @@ Następujące podejście obsługuje opcjonalne certyfikaty klienta:
     * [Kestrel](/fundamentals/servers/kestrel):
       * [ListenOptions.UseHttps](xref:fundamentals/servers/kestrel#listenoptionsusehttps)
       * <xref:Microsoft.AspNetCore.Server.Kestrel.Https.HttpsConnectionAdapterOptions.ClientCertificateMode>
-      * Uwaga Kestrel obecnie nie obsługuje wielu konfiguracji protokołu TLS w jednym powiązaniu, potrzebne są dwa powiązania z unikatowymi adresami IP lub portami. Wyświetlaniahttps://github.com/dotnet/runtime/issues/31097
+      * Uwaga Kestrel obecnie nie obsługuje wielu konfiguracji protokołu TLS w jednym powiązaniu, potrzebne są dwa powiązania z unikatowymi adresami IP lub portami. Wyświetlania https://github.com/dotnet/runtime/issues/31097
     * IIS
       * [Hostowanie usług IIS](xref:host-and-deploy/iis/index#create-the-iis-site)
       * [Konfigurowanie zabezpieczeń w usługach IIS](/iis/manage/configuring-security/how-to-set-up-ssl-on-iis#configure-ssl-settings-2)
@@ -654,4 +655,4 @@ Następujące podejście obsługuje opcjonalne certyfikaty klienta:
 
 Wystaw pytania, komentarze i inne opinie dotyczące opcjonalnych certyfikatów klienta w [tym](https://github.com/dotnet/AspNetCore.Docs/issues/18720) wydaniu dyskusji w witrynie GitHub.
 
-&dagger;Oznaczanie nazwy serwera (SNI) to rozszerzenie TLS służące do dołączania domeny wirtualnej w ramach negocjacji protokołu SSL. W praktyce oznacza to, że nazwa domeny wirtualnej lub nazwy hosta mogą służyć do identyfikowania punktu końcowego sieci.
+&dagger; Oznaczanie nazwy serwera (SNI) to rozszerzenie TLS służące do dołączania domeny wirtualnej w ramach negocjacji protokołu SSL. W praktyce oznacza to, że nazwa domeny wirtualnej lub nazwy hosta mogą służyć do identyfikowania punktu końcowego sieci.

@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.date: 10/24/2018
 ms.custom: devx-track-csharp, mvc, seodec18
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: azure/devops/cicd
-ms.openlocfilehash: 26ca6c416691c75c4bad73dca4c8383325af025d
-ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
+ms.openlocfilehash: 3632f1c4bd419aae08105005de3d81fc2cb9e410
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/12/2020
-ms.locfileid: "88130474"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88625885"
 ---
 # <a name="continuous-integration-and-deployment"></a>Ciągła integracja i ciągłe wdrażanie
 
@@ -48,19 +49,19 @@ W tej sekcji wykonasz następujące zadania:
 1. Wybierz swoje konto z listy rozwijanej **właściciel** , a *następnie wprowadź tekst* w polu tekstowym **Nazwa repozytorium** .
 1. Kliknij przycisk **Utwórz repozytorium** .
 1. Otwórz powłokę poleceń komputera lokalnego. Przejdź do katalogu, w którym jest przechowywane repozytorium git programu *Simple-Reader* .
-1. Zmień nazwę istniejącego *pochodzenia* zdalnego na *nadrzędny*. Uruchom następujące polecenie:
+1. Zmień nazwę istniejącego *pochodzenia* zdalnego na *nadrzędny*. Wykonaj następujące polecenie:
 
     ```console
     git remote rename origin upstream
     ```
 
-1. Dodaj nowe *Źródło* zdalne wskazujące swoją kopię repozytorium w serwisie GitHub. Uruchom następujące polecenie:
+1. Dodaj nowe *Źródło* zdalne wskazujące swoją kopię repozytorium w serwisie GitHub. Wykonaj następujące polecenie:
 
     ```console
     git remote add origin https://github.com/<GitHub_username>/simple-feed-reader/
     ```
 
-1. Opublikuj lokalne repozytorium Git w nowo utworzonym repozytorium GitHub. Uruchom następujące polecenie:
+1. Opublikuj lokalne repozytorium Git w nowo utworzonym repozytorium GitHub. Wykonaj następujące polecenie:
 
     ```console
     git push -u origin master

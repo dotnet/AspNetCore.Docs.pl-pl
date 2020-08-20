@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/16/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/index
-ms.openlocfilehash: fe9bd270ce509e8389dd3d4f3f6f3a6dda03d425
-ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
+ms.openlocfilehash: 391a38e9af42b162fc74bac803e6aa3cf687e7d5
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/18/2020
-ms.locfileid: "88504544"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88626067"
 ---
 # <a name="secure-aspnet-core-no-locblazor-webassembly"></a>Bezpieczny ASP.NET Core Blazor WebAssembly
 
@@ -32,7 +33,7 @@ Blazor WebAssembly aplikacje są zabezpieczone w taki sam sposób, jak aplikacje
 
 ## <a name="authentication-library"></a>Biblioteka uwierzytelniania
 
-Blazor WebAssembly obsługuje uwierzytelnianie i Autoryzowanie aplikacji przy użyciu programu OIDC za pośrednictwem [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication) biblioteki. Biblioteka zawiera zestaw elementów pierwotnych do bezproblemowego uwierzytelniania w odniesieniu do ASP.NET Core. Biblioteka integruje ASP.NET Core Identity z obsługą autoryzacji interfejsu API utworzoną na [ Identity serwerze](https://identityserver.io/). Biblioteka może być uwierzytelniana względem dowolnego dostawcy innej firmy, Identity który obsługuje OIDC, które są nazywane dostawcami OpenID Connect (op).
+Blazor WebAssembly obsługuje uwierzytelnianie i Autoryzowanie aplikacji przy użyciu programu OIDC za pośrednictwem [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication) biblioteki. Biblioteka zawiera zestaw elementów pierwotnych do bezproblemowego uwierzytelniania w odniesieniu do ASP.NET Core. Biblioteka jest zintegrowana ASP.NET Core Identity z obsługą autoryzacji interfejsu API wbudowaną na [ Identity serwerze](https://identityserver.io/). Biblioteka może być uwierzytelniana względem dowolnego dostawcy innej firmy, Identity który obsługuje OIDC, które są nazywane dostawcami OpenID Connect (op).
 
 Obsługa uwierzytelniania w programie Blazor WebAssembly jest oparta na bazie `oidc-client.js` biblioteki, która jest używana do obsługi szczegółowych informacji o podstawowym protokole uwierzytelniania.
 
@@ -52,7 +53,7 @@ Dostępne są inne opcje uwierzytelniania aplikacji jednostronicowych, takie jak
 
 * Gdy użytkownik anonimowy wybierze przycisk Zaloguj lub zażąda strony z [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) zastosowanym atrybutem, użytkownik zostanie przekierowany do strony logowania aplikacji ( `/authentication/login` ).
 * Na stronie Logowanie Biblioteka uwierzytelniania przygotowuje przekierowanie do punktu końcowego autoryzacji. Punkt końcowy autoryzacji jest poza Blazor WebAssembly aplikacją i może być hostowany w osobnym miejscu pochodzenia. Punkt końcowy jest odpowiedzialny za określenie, czy użytkownik jest uwierzytelniany i w celu wystawiania co najmniej jednego tokenu w odpowiedzi. Biblioteka uwierzytelniania umożliwia wywołanie zwrotne logowania w celu uzyskania odpowiedzi uwierzytelniania.
-  * Jeśli użytkownik nie jest uwierzytelniony, użytkownik zostanie przekierowany do podstawowego systemu uwierzytelniania, który jest zwykle ASP.NET Core Identity .
+  * Jeśli użytkownik nie jest uwierzytelniony, użytkownik zostanie przekierowany do podstawowego systemu uwierzytelniania, który zwykle jest ASP.NET Core Identity .
   * Jeśli użytkownik został już uwierzytelniony, punkt końcowy autoryzacji generuje odpowiednie tokeny i przekierowuje przeglądarkę z powrotem do punktu końcowego wywołania zwrotnego logowania ( `/authentication/login-callback` ).
 * Gdy Blazor WebAssembly aplikacja ładuje punkt końcowy wywołania zwrotnego logowania ( `/authentication/login-callback` ), odpowiedź uwierzytelniania jest przetwarzana.
   * Jeśli proces uwierzytelniania zakończy się pomyślnie, użytkownik zostanie uwierzytelniony i opcjonalnie zostanie wysłany z powrotem do oryginalnego chronionego adresu URL, którego zażądał użytkownik.

@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/23/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/handle-errors
-ms.openlocfilehash: 5f7112d9a072f28d387e07bdf69ec0b7595ff6b4
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: dfe6f1ac79732d158e31fb5250645d4ff98d1c0b
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014441"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628342"
 ---
 # <a name="handle-errors-in-aspnet-core-no-locblazor-apps"></a>Obsługa błędów w Blazor aplikacjach ASP.NET Core
 
@@ -89,14 +90,14 @@ W Blazor Server aplikacji Dostosuj środowisko w `Pages/_Host.cshtml` pliku:
 
 ## <a name="how-a-no-locblazor-server-app-reacts-to-unhandled-exceptions"></a>Jak Blazor Server Aplikacja reaguje na Nieobsłużone wyjątki
 
-Blazor Serverjest strukturą stanową. Gdy użytkownicy współpracują z aplikacją, utrzymują połączenie z serwerem znanym jako *obwód*. Obwód zawiera aktywne wystąpienia składnika, a także wiele innych aspektów stanu, takich jak:
+Blazor Server jest strukturą stanową. Gdy użytkownicy współpracują z aplikacją, utrzymują połączenie z serwerem znanym jako *obwód*. Obwód zawiera aktywne wystąpienia składnika, a także wiele innych aspektów stanu, takich jak:
 
 * Najnowsze renderowane dane wyjściowe składników.
 * Bieżący zestaw delegatów obsługi zdarzeń, które mogą być wyzwalane przez zdarzenia po stronie klienta.
 
 Jeśli użytkownik otworzy aplikację na wielu kartach przeglądarki, mają one wiele niezależnych obwodów.
 
-Blazortraktuje większość nieobsłużonych wyjątków jako krytyczne dla obwodu, w którym występują. Jeśli obwód zostanie przerwany z powodu nieobsługiwanego wyjątku, użytkownik może nadal korzystać z aplikacji tylko przez ponowne załadowanie strony w celu utworzenia nowego obwodu. Nie ma to wpływu na obwody, które zostały przerwane, które są obwody dla innych użytkowników lub kart przeglądarki. Ten scenariusz jest podobny do aplikacji klasycznej, która ulega awarii. Aplikacja, która uległa awarii, musi zostać ponownie uruchomiona, ale nie ma to wpływu na inne aplikacje.
+Blazor traktuje większość nieobsłużonych wyjątków jako krytyczne dla obwodu, w którym występują. Jeśli obwód zostanie przerwany z powodu nieobsługiwanego wyjątku, użytkownik może nadal korzystać z aplikacji tylko przez ponowne załadowanie strony w celu utworzenia nowego obwodu. Nie ma to wpływu na obwody, które zostały przerwane, które są obwody dla innych użytkowników lub kart przeglądarki. Ten scenariusz jest podobny do aplikacji klasycznej, która ulega awarii. Aplikacja, która uległa awarii, musi zostać ponownie uruchomiona, ale nie ma to wpływu na inne aplikacje.
 
 Obwód jest zakończony, gdy wystąpił nieobsługiwany wyjątek z następujących powodów:
 
@@ -133,7 +134,7 @@ Kod struktury i aplikacji może wyzwolić Nieobsłużone wyjątki w jednej z nas
 * [Procedury obsługi zdarzeń](#event-handlers)
 * [Usuwanie składników](#component-disposal)
 * [Międzyoperacyjność w języku JavaScript](#javascript-interop)
-* [Blazor ServerRenderowanie](#blazor-server-prerendering)
+* [Blazor Server Renderowanie](#blazor-server-prerendering)
 
 Poprzednie Nieobsłużone wyjątki zostały opisane w poniższych sekcjach tego artykułu.
 
@@ -161,7 +162,7 @@ W poniższym przykładzie, gdzie <xref:Microsoft.AspNetCore.Components.Component
 
 * Wyjątek zgłoszony w `ProductRepository.GetProductByIdAsync` metodzie jest obsługiwany przez [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) instrukcję.
 * Gdy `catch` blok jest wykonywany:
-  * `loadFailed`jest ustawiona na `true` , która jest używana do wyświetlania komunikatu o błędzie dla użytkownika.
+  * `loadFailed` jest ustawiona na `true` , która jest używana do wyświetlania komunikatu o błędzie dla użytkownika.
   * Błąd jest rejestrowany.
 
 [!code-razor[](handle-errors/samples_snapshot/3.x/product-details.razor?highlight=11,27-39)]
@@ -203,7 +204,7 @@ Aby uzyskać więcej informacji na temat usuwania składników, zobacz <xref:bla
 
 ### <a name="javascript-interop"></a>Międzyoperacyjność w języku JavaScript
 
-<xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A?displayProperty=nameWithType>umożliwia programowi .NET Code wykonywanie wywołań asynchronicznych do środowiska uruchomieniowego JavaScript w przeglądarce użytkownika.
+<xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A?displayProperty=nameWithType> umożliwia programowi .NET Code wykonywanie wywołań asynchronicznych do środowiska uruchomieniowego JavaScript w przeglądarce użytkownika.
 
 Poniższe warunki dotyczą obsługi błędów w programie <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A> :
 
@@ -223,9 +224,9 @@ Aby uzyskać więcej informacji, zobacz następujące artykuły:
 * <xref:blazor/call-javascript-from-dotnet>
 * <xref:blazor/call-dotnet-from-javascript>
 
-### <a name="no-locblazor-server-prerendering"></a>Blazor ServerRenderowanie prerenderingu
+### <a name="no-locblazor-server-prerendering"></a>Blazor Server Renderowanie prerenderingu
 
-Blazorskładniki mogą być wstępnie renderowane przy użyciu [pomocnika tagów składnika](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper) , dzięki czemu RENDEROWANE znaczniki HTML są zwracane jako część początkowego żądania HTTP użytkownika. Działa to w następujący sposób:
+Blazor składniki mogą być wstępnie renderowane przy użyciu [pomocnika tagów składnika](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper) , dzięki czemu RENDEROWANE znaczniki HTML są zwracane jako część początkowego żądania HTTP użytkownika. Działa to w następujący sposób:
 
 * Tworzenie nowego obwodu dla wszystkich wstępnie renderowanych składników, które są częścią tej samej strony.
 * Generowanie początkowego kodu HTML.

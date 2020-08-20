@@ -5,8 +5,9 @@ description: Dowiedz się, jak tworzyć i używać Razor składników, w tym jak
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/14/2020
+ms.date: 08/19/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: a145cfd551650445f9ff35259cbedf71ebb686f0
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 6ee767ee76b622e15a1dc5a7fe2f3e05f03dabd0
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014597"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628498"
 ---
 # <a name="create-and-use-aspnet-core-no-locrazor-components"></a>Tworzenie i używanie Razor składników ASP.NET Core
 
@@ -30,15 +31,15 @@ ms.locfileid: "88014597"
 
 [Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([jak pobrać](xref:index#how-to-download-a-sample))
 
-Blazoraplikacje są kompilowane przy użyciu *składników*programu. Składnik jest niezależnym fragmentem interfejsu użytkownika (UI), takim jak strona, okno dialogowe lub formularz. Składnik zawiera znaczniki HTML i logikę przetwarzania wymagane do iniekcji danych lub reagowania na zdarzenia interfejsu użytkownika. Składniki są elastyczne i lekkie. Mogą być zagnieżdżane, ponownie używane i udostępniane między projektami.
+Blazor aplikacje są kompilowane przy użyciu *składników*programu. Składnik jest niezależnym fragmentem interfejsu użytkownika (UI), takim jak strona, okno dialogowe lub formularz. Składnik zawiera znaczniki HTML i logikę przetwarzania wymagane do iniekcji danych lub reagowania na zdarzenia interfejsu użytkownika. Składniki są elastyczne i lekkie. Mogą być zagnieżdżane, ponownie używane i udostępniane między projektami.
 
 ## <a name="component-classes"></a>Klasy składników
 
 Składniki są implementowane w [Razor](xref:mvc/views/razor) plikach składników ( `.razor` ) przy użyciu kombinacji języka C# i znaczników HTML. Składnik w programie Blazor jest formalnie nazywany * Razor składnikiem*.
 
-### <a name="no-locrazor-syntax"></a>Razorobowiązuje
+### <a name="no-locrazor-syntax"></a>Razor obowiązuje
 
-Razorskładniki w Blazor aplikacjach szeroko wykorzystują Razor składnię. Jeśli nie znasz Razor języka znaczników, zalecamy przeczytanie <xref:mvc/views/razor> przed kontynuowaniem.
+Razor składniki w Blazor aplikacjach szeroko wykorzystują Razor składnię. Jeśli nie znasz Razor języka znaczników, zalecamy przeczytanie <xref:mvc/views/razor> przed kontynuowaniem.
 
 Podczas uzyskiwania dostępu do zawartości w Razor składni należy zwrócić szczególną uwagę na następujące sekcje:
 
@@ -67,8 +68,8 @@ Elementy członkowskie klasy składnika są zdefiniowane w [`@code`][1] bloku. W
 
 Składowe składnika mogą być używane jako część logiki renderowania składnika przy użyciu wyrażeń języka C#, które zaczynają się od `@` . Na przykład pole C# jest renderowane przez utworzenie prefiksu `@` do nazwy pola. Poniższy przykład szacuje i renderuje:
 
-* `headingFontStyle`na wartość właściwości CSS dla elementu `font-style` .
-* `headingText`do zawartości `<h1>` elementu.
+* `headingFontStyle` na wartość właściwości CSS dla elementu `font-style` .
+* `headingText` do zawartości `<h1>` elementu.
 
 ```razor
 <h1 style="font-style:@headingFontStyle">@headingText</h1>
@@ -79,11 +80,11 @@ Składowe składnika mogą być używane jako część logiki renderowania skła
 }
 ```
 
-Po pierwszym wyrenderowaniu składnika składnik generuje jego drzewo renderowania w odpowiedzi na zdarzenia. BlazorNastępnie porównuje nowe drzewo renderowania z poprzednim i stosuje wszelkie modyfikacje Document Object Model przeglądarki (DOM).
+Po pierwszym wyrenderowaniu składnika składnik generuje jego drzewo renderowania w odpowiedzi na zdarzenia. Blazor Następnie porównuje nowe drzewo renderowania z poprzednim i stosuje wszelkie modyfikacje Document Object Model przeglądarki (DOM).
 
 Składniki to zwykłe klasy języka C# i można je umieścić w dowolnym miejscu w projekcie. Składniki, które generują strony sieci Web, zwykle znajdują się w `Pages` folderze. Składniki niestronicowe są często umieszczane w `Shared` folderze lub do folderu niestandardowego dodanego do projektu.
 
-### <a name="namespaces"></a>Namespaces
+### <a name="namespaces"></a>Przestrzenie nazw
 
 Zazwyczaj przestrzeń nazw składnika pochodzi od głównej przestrzeni nazw aplikacji i lokalizacji składnika (folderu) w aplikacji. Jeśli główna przestrzeń nazw aplikacji jest `BlazorSample` i znajduje się `Counter` w `Pages` folderze:
 
@@ -104,7 +105,7 @@ Do składników można także odwoływać się za pomocą ich w pełni kwalifiko
 
 Przestrzeń nazw składnika utworzona w programie Razor jest oparta na (w kolejności priorytetu):
 
-* [`@namespace`][8]oznaczenie w Razor pliku ( `.razor` ) Markup ( `@namespace BlazorSample.MyNamespace` ).
+* [`@namespace`][8] oznaczenie w Razor pliku ( `.razor` ) Markup ( `@namespace BlazorSample.MyNamespace` ).
 * Projekt znajduje się `RootNamespace` w pliku projektu ( `<RootNamespace>BlazorSample</RootNamespace>` ).
 * Nazwa projektu, pobrana z pliku projektu nazwa pliku ( `.csproj` ) i ścieżka z katalogu głównego projektu do składnika. Na przykład struktura rozpoznaje `{PROJECT ROOT}/Pages/Index.razor` ( `BlazorSample.csproj` ) do przestrzeni nazw `BlazorSample.Pages` . Składniki przestrzegają reguł powiązań nazw języka C#. W przypadku `Index` składnika w tym przykładzie składniki należące do zakresu są wszystkich składników:
   * W tym samym folderze, `Pages` .
@@ -119,9 +120,9 @@ Przestrzeń nazw składnika utworzona w programie Razor jest oparta na (w kolejn
 
 ### <a name="partial-class-support"></a>Obsługa klasy częściowej
 
-Razorskładniki są generowane jako klasy częściowe. Razorskładniki są tworzone przy użyciu jednej z następujących metod:
+Razor składniki są generowane jako klasy częściowe. Razor składniki są tworzone przy użyciu jednej z następujących metod:
 
-* Kod C# jest zdefiniowany w [`@code`][1] bloku z oznaczeniem HTML i Razor kodem w pojedynczym pliku. BlazorSzablony definiują ich Razor składniki przy użyciu tego podejścia.
+* Kod C# jest zdefiniowany w [`@code`][1] bloku z oznaczeniem HTML i Razor kodem w pojedynczym pliku. Blazor Szablony definiują ich Razor składniki przy użyciu tego podejścia.
 * Kod C# jest umieszczany w pliku związanym z kodem zdefiniowanym jako Klasa częściowa.
 
 Poniższy przykład pokazuje `Counter` składnik domyślny z [`@code`][1] blokiem w aplikacji wygenerowanej na podstawie Blazor szablonu. Znaczniki HTML, Razor kod i kod C# są w tym samym pliku:
@@ -190,7 +191,7 @@ using Microsoft.AspNetCore.Components.Web;
 ```
 
 > [!IMPORTANT]
-> [`@using`][2]dyrektywy w `_Imports.razor` pliku są stosowane tylko do Razor plików ( `.razor` ), nie plików C# ( `.cs` ).
+> [`@using`][2] dyrektywy w `_Imports.razor` pliku są stosowane tylko do Razor plików ( `.razor` ), nie plików C# ( `.cs` ).
 
 ### <a name="specify-a-base-class"></a>Określ klasę bazową
 
@@ -265,7 +266,7 @@ W poniższym przykładzie z przykładowej aplikacji `ParentComponent` ustawia wa
 [!code-razor[](index/samples_snapshot/ParentComponent.razor?highlight=5-6)]
 
 > [!WARNING]
-> Nie należy tworzyć składników, które zapisują do własnych *parametrów składników*, zamiast tego należy użyć pola private. Aby uzyskać więcej informacji, zobacz sekcję [nie twórz składników, które zapisują we własnych właściwościach parametrów](#dont-create-components-that-write-to-their-own-parameter-properties) .
+> Nie należy tworzyć składników, które zapisują do własnych *parametrów składników* , gdy zawartość składnika jest renderowana przy użyciu <xref:Microsoft.AspNetCore.Components.RenderFragment> , zamiast tego należy użyć pola private. Aby uzyskać więcej informacji, zobacz sekcję [zastąpione parametry `RenderFragment` ](#overwritten-parameters-with-renderfragment) .
 
 ## <a name="child-content"></a>Zawartość podrzędna
 
@@ -317,28 +318,20 @@ W poniższym przykładzie pierwszy `<input>` element ( `id="useIndividualParams"
 
 ```razor
 <input id="useIndividualParams"
-       maxlength="@Maxlength"
-       placeholder="@Placeholder"
-       required="@Required"
-       size="@Size" />
+       maxlength="@maxlength"
+       placeholder="@placeholder"
+       required="@required"
+       size="@size" />
 
 <input id="useAttributesDict"
        @attributes="InputAttributes" />
 
 @code {
-    [Parameter]
-    public string Maxlength { get; set; } = "10";
+    public string maxlength = "10";
+    public string placeholder = "Input placeholder text";
+    public string required = "required";
+    public string size = "50";
 
-    [Parameter]
-    public string Placeholder { get; set; } = "Input placeholder text";
-
-    [Parameter]
-    public string Required { get; set; } = "required";
-
-    [Parameter]
-    public string Size { get; set; } = "50";
-
-    [Parameter]
     public Dictionary<string, object> InputAttributes { get; set; } =
         new Dictionary<string, object>()
         {
@@ -350,7 +343,7 @@ W poniższym przykładzie pierwszy `<input>` element ( `id="useIndividualParams"
 }
 ```
 
-Typ parametru musi być zaimplementowany `IEnumerable<KeyValuePair<string, object>>` przy użyciu kluczy ciągu. Korzystanie z programu `IReadOnlyDictionary<string, object>` jest również opcją w tym scenariuszu.
+Typ parametru musi być zaimplementowany `IEnumerable<KeyValuePair<string, object>>` lub `IReadOnlyDictionary<string, object>` z kluczami ciągu.
 
 Renderowane `<input>` elementy korzystające z obu metod są identyczne:
 
@@ -377,7 +370,7 @@ Aby zaakceptować dowolne atrybuty, zdefiniuj parametr składnika przy użyciu [
 }
 ```
 
-<xref:Microsoft.AspNetCore.Components.ParameterAttribute.CaptureUnmatchedValues>Właściwość on [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) umożliwia dopasowanie parametru do wszystkich atrybutów, które nie są zgodne z żadnym innym parametrem. Składnik może definiować tylko jeden parametr z <xref:Microsoft.AspNetCore.Components.ParameterAttribute.CaptureUnmatchedValues> . Typ właściwości używany z elementem <xref:Microsoft.AspNetCore.Components.ParameterAttribute.CaptureUnmatchedValues> musi być możliwy do przypisania z `Dictionary<string, object>` klucza ciągu. `IEnumerable<KeyValuePair<string, object>>`lub `IReadOnlyDictionary<string, object>` są również opcje w tym scenariuszu.
+<xref:Microsoft.AspNetCore.Components.ParameterAttribute.CaptureUnmatchedValues>Właściwość on [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) umożliwia dopasowanie parametru do wszystkich atrybutów, które nie są zgodne z żadnym innym parametrem. Składnik może definiować tylko jeden parametr z <xref:Microsoft.AspNetCore.Components.ParameterAttribute.CaptureUnmatchedValues> . Typ właściwości używany z elementem <xref:Microsoft.AspNetCore.Components.ParameterAttribute.CaptureUnmatchedValues> musi być możliwy do przypisania z `Dictionary<string, object>` klucza ciągu. `IEnumerable<KeyValuePair<string, object>>` lub `IReadOnlyDictionary<string, object>` są również opcje w tym scenariuszu.
 
 Pozycja [`@attributes`][3] względem pozycji atrybutów elementu jest ważna. Gdy [`@attributes`][3] są splatted w elemencie, atrybuty są przetwarzane od prawej do lewej (Ostatnia do). Rozważmy następujący przykład składnika, który zużywa `Child` składnik:
 
@@ -433,10 +426,10 @@ Odwołania do składników zapewniają sposób odwoływania się do wystąpienia
 * Zdefiniuj pole z tym samym typem co składnik podrzędny.
 
 ```razor
-<MyLoginDialog @ref="loginDialog" ... />
+<CustomLoginDialog @ref="loginDialog" ... />
 
 @code {
-    private MyLoginDialog loginDialog;
+    private CustomLoginDialog loginDialog;
 
     private void OnSomething()
     {
@@ -474,7 +467,7 @@ Podczas przechwytywania odwołań do składników użycie podobnej składni do [
 
 ## <a name="synchronization-context"></a>Kontekst synchronizacji
 
-Blazorużywa kontekstu synchronizacji ( <xref:System.Threading.SynchronizationContext> ) w celu wymuszenia pojedynczego wątku logicznego wykonywania. [Metody cyklu życia](xref:blazor/components/lifecycle) składnika i wszelkie wywołania zwrotne zdarzeń, które są wywoływane przez Blazor są wykonywane w kontekście synchronizacji.
+Blazor używa kontekstu synchronizacji ( <xref:System.Threading.SynchronizationContext> ) w celu wymuszenia pojedynczego wątku logicznego wykonywania. [Metody cyklu życia](xref:blazor/components/lifecycle) składnika i wszelkie wywołania zwrotne zdarzeń, które są wywoływane przez Blazor są wykonywane w kontekście synchronizacji.
 
 Blazor Serverkontekst synchronizacji programu próbuje emulować środowisko jednowątkowe, aby dokładnie pasowało do modelu webassembly w przeglądarce, który jest pojedynczym wątkiem. W dowolnym momencie prace są wykonywane na dokładnie jednym wątku, co daje wrażenie pojedynczego wątku logicznego. Nie wykonano jednocześnie dwóch operacji.
 
@@ -556,7 +549,7 @@ Zarejestruj `NotifierService` :
 }
 ```
 
-W poprzednim przykładzie `NotifierService` wywołuje `OnNotify` metodę składnika poza Blazor kontekstem synchronizacji. `InvokeAsync`służy do przełączania do poprawnego kontekstu i kolejki renderowania.
+W poprzednim przykładzie `NotifierService` wywołuje `OnNotify` metodę składnika poza Blazor kontekstem synchronizacji. `InvokeAsync` służy do przełączania do poprawnego kontekstu i kolejki renderowania.
 
 ## <a name="use-key-to-control-the-preservation-of-elements-and-components"></a>Użyj \@ klawisza, aby kontrolować zachowywanie elementów i składników
 
@@ -578,7 +571,7 @@ Rozpatrzmy następujący przykład:
 
 Zawartość `People` kolekcji może ulec zmianie z wstawionymi, usuniętymi lub z ponownymi zamówieniami. Gdy składnik jest przerenderowany, `<DetailsEditor>` składnik może ulec zmianie, aby otrzymywać różne `Details` wartości parametrów. Może to spowodować bardziej złożone odwzorowanie niż oczekiwano. W niektórych przypadkach odzyskanie może prowadzić do zauważalnych różnic w zachowaniu, takich jak brak fokusu elementu.
 
-Proces mapowania można kontrolować przy użyciu [`@key`][5] atrybutu dyrektywy. [`@key`][5]powoduje, że algorytm różnicowego gwarantuje zachowywanie elementów lub składników na podstawie wartości klucza:
+Proces mapowania można kontrolować przy użyciu [`@key`][5] atrybutu dyrektywy. [`@key`][5] powoduje, że algorytm różnicowego gwarantuje zachowywanie elementów lub składników na podstawie wartości klucza:
 
 ```csharp
 @foreach (var person in People)
@@ -632,12 +625,12 @@ Ogólnie rzecz biorąc, warto podać jeden z następujących rodzajów wartości
 
 Upewnij się, że wartości używane do [`@key`][5] nie kolidują. Jeśli w tym samym elemencie nadrzędnym zostaną wykryte wartości powodujące konflikt, program Blazor zgłosi wyjątek, ponieważ nie może on w sposób jednoznaczny zmapować starych elementów lub składników na nowe elementy lub składniki. Używaj tylko odrębnych wartości, takich jak wystąpienia obiektów lub wartości klucza podstawowego.
 
-## <a name="dont-create-components-that-write-to-their-own-parameter-properties"></a>Nie twórz składników, które zapisują do własnych właściwości parametrów
+## <a name="overwritten-parameters-with-renderfragment"></a>Zastępowanie parametrów `RenderFragment`
 
 Parametry są zastępowane w następujących warunkach:
 
 * Zawartość składnika podrzędnego jest renderowana przy użyciu <xref:Microsoft.AspNetCore.Components.RenderFragment> .
-* <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A>jest wywoływana w składniku nadrzędnym.
+* <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> jest wywoływana w składniku nadrzędnym.
 
 Parametry są resetowane, ponieważ składnik nadrzędny jest ponownie renderowany, gdy <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> jest wywoływana, i nowe wartości parametrów są dostarczane do składnika podrzędnego.
 
@@ -647,17 +640,13 @@ Rozważmy następujący `Expander` składnik:
 * Włącza lub wyłącza wyświetlanie zawartości podrzędnej za pomocą parametru składnika.
 
 ```razor
-<div @onclick="@Toggle" class="card text-white bg-success mb-3">
+<div @onclick="@Toggle" class="card bg-light mb-3" style="width:30rem">
     <div class="card-body">
-        <div class="panel-heading">
-            <h2>Toggle (<code>Expanded</code> = @Expanded)</h2>
-        </div>
+        <h2 class="card-title">Toggle (<code>Expanded</code> = @Expanded)</h2>
 
         @if (Expanded)
         {
-            <div class="card-text">
-                @ChildContent
-            </div>
+            <p class="card-text">@ChildContent</p>
         }
     </div>
 </div>
@@ -703,17 +692,13 @@ Następujący zmieniony `Expander` składnik:
 * Używa prywatnego pola do utrzymania stanu wewnętrznego przełączania.
 
 ```razor
-<div @onclick="@Toggle" class="card text-white bg-success mb-3">
+<div @onclick="@Toggle" class="card bg-light mb-3" style="width:30rem">
     <div class="card-body">
-        <div class="panel-heading">
-            <h2>Toggle (<code>expanded</code> = @expanded)</h2>
-        </div>
+        <h2 class="card-title">Toggle (<code>expanded</code> = @expanded)</h2>
 
         @if (expanded)
         {
-            <div class="card-text">
-                @ChildContent
-            </div>
+            <p class="card-text">@ChildContent</p>
         }
     </div>
 </div>
@@ -798,9 +783,9 @@ W poniższym przykładzie pokazano, jak za pomocą `MarkupString` typu dodać bl
 }
 ```
 
-## <a name="no-locrazor-templates"></a>Razorprzystawki
+## <a name="no-locrazor-templates"></a>Razor przystawki
 
-Fragmenty renderowania można definiować przy użyciu Razor składni szablonu. RazorSzablony są sposobem definiowania fragmentu interfejsu użytkownika i przyjmuje następujący format:
+Fragmenty renderowania można definiować przy użyciu Razor składni szablonu. Razor Szablony są sposobem definiowania fragmentu interfejsu użytkownika i przyjmuje następujący format:
 
 ```razor
 @<{HTML tag}>...</{HTML tag}>
@@ -842,13 +827,13 @@ Użyj ścieżki względnej (), `/` Aby odwołać się do katalogu głównego sie
 <img alt="Company logo" src="/images/logo.png" />
 ```
 
-Razorskładniki nie **obsługują** notacji ukośnika odwrotnego ( `~/` ).
+Razor składniki nie **obsługują** notacji ukośnika odwrotnego ( `~/` ).
 
 Aby uzyskać informacje na temat ustawiania ścieżki podstawowej aplikacji, zobacz <xref:blazor/host-and-deploy/index#app-base-path> .
 
 ## <a name="tag-helpers-arent-supported-in-components"></a>Pomocnicy tagów nie są obsługiwani w składnikach
 
-[`Tag Helpers`](xref:mvc/views/tag-helpers/intro)nie są obsługiwane w Razor składnikach ( `.razor` pliki). Aby zapewnić funkcję przypominającą pomocnik tagów w programie Blazor , należy utworzyć składnik o tej samej funkcji co pomocnik tagów i użyć składnika zamiast niego.
+[`Tag Helpers`](xref:mvc/views/tag-helpers/intro) nie są obsługiwane w Razor składnikach ( `.razor` pliki). Aby zapewnić funkcję przypominającą pomocnik tagów w programie Blazor , należy utworzyć składnik o tej samej funkcji co pomocnik tagów i użyć składnika zamiast niego.
 
 ## <a name="scalable-vector-graphics-svg-images"></a>Skalowalne obrazy wektorowe (SVG)
 
@@ -868,7 +853,7 @@ Podobnie Obrazy SVG są obsługiwane w regułach CSS pliku arkusza stylów ( `.c
 
 Jednak wbudowane znaczniki SVG nie są obsługiwane we wszystkich scenariuszach. Jeśli umieścisz `<svg>` tag bezpośrednio w pliku składnika ( `.razor` ), podstawowe renderowanie obrazu jest obsługiwane, ale wiele scenariuszy zaawansowanych nie jest jeszcze obsługiwanych. Na przykład `<use>` tagi nie są obecnie przestrzegane i [`@bind`][10] nie mogą być używane z niektórymi tagami SVG. Aby uzyskać więcej informacji, zobacz [Obsługa SVG w Blazor (#18271 dotnet/aspnetcore)](https://github.com/dotnet/aspnetcore/issues/18271).
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:blazor/security/server/threat-mitigation>: Zawiera wskazówki dotyczące tworzenia Blazor Server aplikacji, które muszą będą konkurować o z wyczerpaniem zasobów.
 

@@ -5,6 +5,7 @@ description: Część 4 Razor stron i Entity Framework serii samouczków.
 ms.author: riande
 ms.date: 07/22/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/migrations
-ms.openlocfilehash: ebdcf5605e8b4067c52841b138184e51668f9c25
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: d922e3a4ad3660bdd1c70dc262acc2f87bdd4214
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019654"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88627003"
 ---
 # <a name="part-4-no-locrazor-pages-with-ef-core-migrations-in-aspnet-core"></a>Część 4 Razor strony z migracjami EF Core w programie ASP.NET Core
 
@@ -42,7 +43,7 @@ Zamiast upuszczania i ponownego tworzenia bazy danych, gdy zmieni się model dan
 
 ## <a name="drop-the-database"></a>Porzuć bazę danych
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Użyj **Eksplorator obiektów SQL Server** (SSOX), aby usunąć bazę danych, lub uruchom następujące polecenie w **konsoli Menedżera pakietów** (PMC):
 
@@ -70,7 +71,7 @@ Drop-Database
 
 ## <a name="create-an-initial-migration"></a>Tworzenie początkowej migracji
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Uruchom następujące polecenia w obszarze PMC:
 
@@ -118,7 +119,7 @@ Ponieważ plik migawek śledzi stan modelu danych, nie można usunąć migracji,
 
 ## <a name="remove-ensurecreated"></a>Usuń EnsureCreated
 
-Ta seria samouczków została uruchomiona przy użyciu `EnsureCreated` . `EnsureCreated`nie tworzy tabeli historii migracji i dlatego nie można jej używać z migracjami. Jest ona przeznaczona do testowania lub szybkiego tworzenia prototypów, w których baza danych została porzucona i wielokrotnie utworzona.
+Ta seria samouczków została uruchomiona przy użyciu `EnsureCreated` . `EnsureCreated` nie tworzy tabeli historii migracji i dlatego nie można jej używać z migracjami. Jest ona przeznaczona do testowania lub szybkiego tworzenia prototypów, w których baza danych została porzucona i wielokrotnie utworzona.
 
 Od tego momentu samouczki będą korzystać z migracji.
 
@@ -131,7 +132,7 @@ Uruchom aplikację i sprawdź, czy baza danych została zainicjowana.
 
 ## <a name="applying-migrations-in-production"></a>Stosowanie migracji w środowisku produkcyjnym
 
-Zalecamy, aby aplikacje produkcyjne **nie** wywoływały [bazy danych. Przeprowadź migrację](/dotnet/api/microsoft.entityframeworkcore.relationaldatabasefacadeextensions.migrate?view=efcore-2.0#Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions_Migrate_Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_) podczas uruchamiania aplikacji. `Migrate`nie należy wywoływać z aplikacji wdrożonej w farmie serwerów. Jeśli aplikacja jest skalowana w poziomie wielu wystąpień serwera, trudno jest upewnić się, że aktualizacje schematu bazy danych nie występują z wielu serwerów lub powodują konflikt z dostępem do odczytu i zapisu.
+Zalecamy, aby aplikacje produkcyjne **nie** wywoływały [bazy danych. Przeprowadź migrację](/dotnet/api/microsoft.entityframeworkcore.relationaldatabasefacadeextensions.migrate?view=efcore-2.0#Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions_Migrate_Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_) podczas uruchamiania aplikacji. `Migrate` nie należy wywoływać z aplikacji wdrożonej w farmie serwerów. Jeśli aplikacja jest skalowana w poziomie wielu wystąpień serwera, trudno jest upewnić się, że aktualizacje schematu bazy danych nie występują z wielu serwerów lub powodują konflikt z dostępem do odczytu i zapisu.
 
 Migracja bazy danych powinna odbywać się w ramach wdrożenia i w sposób kontrolowany. Podejścia do migracji produkcyjnej bazy danych obejmują:
 
@@ -150,7 +151,7 @@ Login failed for user 'user name'.
 
 Rozwiązanie może być uruchamiane z `dotnet ef database update` wiersza polecenia.
 
-### <a name="additional-resources"></a>Zasoby dodatkowe
+### <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Interfejs wiersza polecenia EF Core](/ef/core/miscellaneous/cli/dotnet).
 * [Konsola menedżera pakietów (Visual Studio)](/ef/core/miscellaneous/cli/powershell)
@@ -186,7 +187,7 @@ Zamiast upuszczania i ponownego tworzenia bazy danych, gdy zmieni się model, mi
 
 Użyj **Eksplorator obiektów SQL Server** (SSOX) lub `database drop` polecenia:
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 W **konsoli Menedżera pakietów** (PMC) Uruchom następujące polecenie:
 
@@ -212,7 +213,7 @@ Wprowadź następujące polecenie w oknie polecenia:
 
 Kompilowanie projektu i Tworzenie pierwszej migracji.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 ```powershell
 Add-Migration InitialCreate
@@ -253,7 +254,7 @@ Migracje tworzą *migawkę* bieżącego schematu bazy danych w *migracji/SchoolC
 
 Aby usunąć migrację, użyj następującego polecenia:
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Usuń migrację
 
@@ -271,7 +272,7 @@ Polecenie Usuń migracje powoduje usunięcie migracji i gwarantuje, że migawka 
 
 ### <a name="remove-ensurecreated-and-test-the-app"></a>Usuń EnsureCreated i przetestuj aplikację
 
-W przypadku wczesnego opracowywania programu `EnsureCreated` została użyta. W tym samouczku zostaną użyte migracje. `EnsureCreated`ma następujące ograniczenia:
+W przypadku wczesnego opracowywania programu `EnsureCreated` została użyta. W tym samouczku zostaną użyte migracje. `EnsureCreated` ma następujące ograniczenia:
 
 * Pomija migracje i tworzy bazę danych i schemat.
 * Nie tworzy tabeli migracji.
@@ -294,7 +295,7 @@ Uruchom aplikację i sprawdź, czy wszystko działa.
 
 ## <a name="applying-migrations-in-production"></a>Stosowanie migracji w środowisku produkcyjnym
 
-Zalecamy, aby aplikacje produkcyjne **nie** wywoływały metody [Database. migruje](/dotnet/api/microsoft.entityframeworkcore.relationaldatabasefacadeextensions.migrate?view=efcore-2.0#Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions_Migrate_Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_) podczas uruchamiania aplikacji. `Migrate`nie należy wywoływać z aplikacji w farmie serwerów. Na przykład jeśli aplikacja została wdrożona w chmurze przy użyciu skalowania w poziomie (uruchomiono wiele wystąpień aplikacji).
+Zalecamy, aby aplikacje produkcyjne **nie** wywoływały metody [Database. migruje](/dotnet/api/microsoft.entityframeworkcore.relationaldatabasefacadeextensions.migrate?view=efcore-2.0#Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions_Migrate_Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_) podczas uruchamiania aplikacji. `Migrate` nie należy wywoływać z aplikacji w farmie serwerów. Na przykład jeśli aplikacja została wdrożona w chmurze przy użyciu skalowania w poziomie (uruchomiono wiele wystąpień aplikacji).
 
 Migracja bazy danych powinna odbywać się w ramach wdrożenia i w sposób kontrolowany. Podejścia do migracji produkcyjnej bazy danych obejmują:
 
@@ -316,9 +317,9 @@ The login failed.
 Login failed for user 'user name'.
 ```
 
-Rozwiązanie: Uruchom`dotnet ef database update`
+Rozwiązanie: Uruchom `dotnet ef database update`
 
-### <a name="additional-resources"></a>Zasoby dodatkowe
+### <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Wersja tego samouczka usługi YouTube](https://www.youtube.com/watch?v=OWSUuMLKTJo)
 * [Interfejs wiersza polecenia platformy .NET Core](/ef/core/miscellaneous/cli/dotnet).

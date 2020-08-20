@@ -1,5 +1,5 @@
 ---
-title: Hostowanie i wdrażanie ASP.NET CoreBlazor
+title: Hostowanie i wdrażanie ASP.NET Core Blazor
 author: guardrex
 description: Dowiedz się, jak hostować i wdrażać Blazor aplikacje.
 monikerRange: '>= aspnetcore-3.1'
@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/15/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,14 +18,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/index
-ms.openlocfilehash: 8a5172db22a17138f7462d140fd97316586e5282
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 7bde61b0ff1d122b449ccc9d7ea9629fc8fb6108
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014207"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628095"
 ---
-# <a name="host-and-deploy-aspnet-core-no-locblazor"></a>Hostowanie i wdrażanie ASP.NET CoreBlazor
+# <a name="host-and-deploy-aspnet-core-no-locblazor"></a>Hostowanie i wdrażanie ASP.NET Core Blazor
 
 [Luke Latham](https://github.com/guardrex), [Rainer Stropek](https://www.timecockpit.com)i [Daniel Roth](https://github.com/danroth27)
 
@@ -32,18 +33,18 @@ ms.locfileid: "88014207"
 
 Aplikacje są publikowane do wdrożenia w konfiguracji wydania.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 1. Wybierz pozycję **kompilacja**  >  **Opublikuj aplikację {aplikacja}** na pasku nawigacyjnym.
 1. Wybierz *element docelowy publikowania*. Aby opublikować lokalnie, wybierz pozycję **folder**.
-1. Zaakceptuj lokalizację domyślną w polu **Wybierz folder** lub określ inną lokalizację. Wybierz **`Publish`** przycisk.
+1. Zaakceptuj lokalizację domyślną w polu **Wybierz folder** lub określ inną lokalizację. Wybierz przycisk **`Publish`**.
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
 1. Wybierz pozycję **Kompiluj**  >  **Publikowanie do folderu**.
 1. Potwierdź folder, w którym mają zostać odebrane opublikowane zasoby, a następnie wybierz opcję **`Publish`** .
 
-# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
 
 Użyj [`dotnet publish`](/dotnet/core/tools/dotnet-publish) polecenia, aby opublikować aplikację z konfiguracją wydania:
 
@@ -83,7 +84,7 @@ Aby zapewnić konfigurację Blazor ścieżki podstawowej aplikacji `https://www.
 <base href="/CoolApp/">
 ```
 
-Blazor ServerPonadto aplikacje ustawiają ścieżkę bazową po stronie serwera, wywołując <xref:Microsoft.AspNetCore.Builder.UsePathBaseExtensions.UsePathBase*> w potoku żądania aplikacji `Startup.Configure` :
+Blazor Server Ponadto aplikacje ustawiają ścieżkę bazową po stronie serwera, wywołując <xref:Microsoft.AspNetCore.Builder.UsePathBaseExtensions.UsePathBase*> w potoku żądania aplikacji `Startup.Configure` :
 
 ```csharp
 app.UsePathBase("/CoolApp");

@@ -5,6 +5,7 @@ description: Odkryj tematy objaśniające sposób konfigurowania ochrony danych 
 ms.author: riande
 ms.date: 10/12/2017
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/configuration/index
-ms.openlocfilehash: 241bdd9baf5aeb3a7c34f13a893ba5fc7ac7d033
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: a5eba29f21241b5ad4ab2bbca472c9b4c4574a3d
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021396"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88627757"
 ---
 # <a name="data-protection-configuration-in-aspnet-core"></a>Konfiguracja ochrony danych w ASP.NET Core
 

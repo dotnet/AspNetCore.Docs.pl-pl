@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 09/12/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/docker/visual-studio-tools-for-docker
-ms.openlocfilehash: 2bdbbcfe4a94e5333ae11c4ab486ee0676d24b31
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 68ecc4961401211f1304ac4a26fff1b31e4ad7eb
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015728"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88627341"
 ---
 # <a name="visual-studio-container-tools-with-aspnet-core"></a>Narzędzia kontenerów programu Visual Studio z platformą ASP.NET Core
 
@@ -38,7 +39,7 @@ Program Visual Studio 2017 i jego nowsze wersje obsługują kompilowanie, debugo
 
 W przypadku instalacji platformy Docker zapoznaj się z informacjami w [Docker for Windows: co należy wiedzieć przed zainstalowaniem](https://docs.docker.com/docker-for-windows/install/#what-to-know-before-you-install)programu. Następnie zainstaluj [platformę Docker dla systemu Windows](https://docs.docker.com/docker-for-windows/install/).
 
-**[Udostępnione dyski](https://docs.docker.com/docker-for-windows/#shared-drives)** na platformie Docker dla systemu Windows muszą być skonfigurowane do obsługi mapowania woluminów i debugowania. Kliknij prawym przyciskiem myszy ikonę platformy Docker na pasku zadań, wybierz pozycję **Settings** (Ustawienia) i wybierz pozycję **Shared Drives** (Udostępnione dyski). Wybierz dysk, na którym platforma Docker przechowuje pliki. Kliknij przycisk **Zastosuj**.
+**[Udostępnione dyski](https://docs.docker.com/docker-for-windows/#shared-drives)** na platformie Docker dla systemu Windows muszą być skonfigurowane do obsługi mapowania woluminów i debugowania. Kliknij prawym przyciskiem myszy ikonę platformy Docker na pasku zadań, wybierz pozycję **Settings** (Ustawienia) i wybierz pozycję **Shared Drives** (Udostępnione dyski). Wybierz dysk, na którym platforma Docker przechowuje pliki. Kliknij pozycję **Zastosuj**.
 
 ![Okno dialogowe umożliwiające wybranie lokalnego udostępnionego dysku C na potrzeby kontenerów](visual-studio-tools-for-docker/_static/settings-shared-drives-win.png)
 
@@ -98,7 +99,7 @@ W programie Visual Studio 2017 w wersji 15.8 i nowszych rozwiązanie aranżacji 
 
 * [Docker Compose](#docker-compose)
 * [Service Fabric](#service-fabric)
-* [Kubernetes/Helm](https://helm.sh/)
+* [Kubernetes/Helm ](https://helm.sh/)
 
 ### <a name="docker-compose"></a>Docker Compose
 
@@ -245,7 +246,7 @@ Obrazy `microsoft/aspnetcore-build` i `microsoft/aspnetcore` wyświetlane w popr
 
 Może wystąpić oczekiwanie, że rozmiar obrazu produkcyjnego lub wydania będzie mniejszy niż obraz *dev*. Ze względu na mapowanie woluminu debuger i aplikacja były uruchomione z poziomu komputera lokalnego, a nie w kontenerze. Obraz *latest* (najnowszy) zawiera spakowany kod aplikacji niezbędny do uruchomienia aplikacji na komputerze hosta. Różnica w rozmiarach wynika zatem z rozmiaru kodu aplikacji.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Opracowywanie kontenerów w programie Visual Studio](/visualstudio/containers)
 * [Azure Service Fabric: Przygotowywanie środowiska deweloperskiego](/azure/service-fabric/service-fabric-get-started)

@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/distributed
-ms.openlocfilehash: 64a4b6f606a4f5f8e73ef08f53cbb6e4003245aa
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: a25cbaf9a4e7dc5f1bd3706d01f409208a39aaa3
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020681"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88626730"
 ---
 # <a name="distributed-caching-in-aspnet-core"></a>Rozproszone buforowanie w ASP.NET Core
 
@@ -174,7 +175,7 @@ Podczas decydowania, która implementacja <xref:Microsoft.Extensions.Caching.Dis
 
 * Istniejąca infrastruktura
 * Wymagania dotyczące wydajności
-* Koszty
+* Cost (Koszt)
 * Środowisko pracy zespołu
 
 Rozwiązania pamięci podręcznej zwykle polegają na magazynie w pamięci, aby zapewnić szybkie pobieranie danych z pamięci podręcznej, ale pamięć jest ograniczonym zasobem i kosztowna. Przechowuj tylko często używane dane w pamięci podręcznej.
@@ -183,7 +184,7 @@ Ogólnie pamięć podręczna Redis zapewnia wyższą przepływność i mniejsze 
 
 Gdy SQL Server jest używany jako magazyn zapasowy rozproszonej pamięci podręcznej, korzystanie z tej samej bazy danych dla pamięci podręcznej i zwykłego magazynu danych aplikacji może mieć negatywny wpływ na wydajność obu tych elementów. Zalecamy używanie dedykowanego wystąpienia SQL Server dla magazynu zapasowego rozproszonej pamięci podręcznej.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Redis Cache na platformie Azure](/azure/azure-cache-for-redis/)
 * [SQL Database na platformie Azure](/azure/sql-database/)
@@ -344,7 +345,7 @@ Podczas decydowania, która implementacja <xref:Microsoft.Extensions.Caching.Dis
 
 * Istniejąca infrastruktura
 * Wymagania dotyczące wydajności
-* Koszty
+* Cost (Koszt)
 * Środowisko pracy zespołu
 
 Rozwiązania pamięci podręcznej zwykle polegają na magazynie w pamięci, aby zapewnić szybkie pobieranie danych z pamięci podręcznej, ale pamięć jest ograniczonym zasobem i kosztowna. Przechowuj tylko często używane dane w pamięci podręcznej.
@@ -353,7 +354,7 @@ Ogólnie pamięć podręczna Redis zapewnia wyższą przepływność i mniejsze 
 
 Gdy SQL Server jest używany jako magazyn zapasowy rozproszonej pamięci podręcznej, korzystanie z tej samej bazy danych dla pamięci podręcznej i zwykłego magazynu danych aplikacji może mieć negatywny wpływ na wydajność obu tych elementów. Zalecamy używanie dedykowanego wystąpienia SQL Server dla magazynu zapasowego rozproszonej pamięci podręcznej.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Redis Cache na platformie Azure](/azure/azure-cache-for-redis/)
 * [SQL Database na platformie Azure](/azure/sql-database/)
@@ -520,7 +521,7 @@ Podczas decydowania, która implementacja <xref:Microsoft.Extensions.Caching.Dis
 
 * Istniejąca infrastruktura
 * Wymagania dotyczące wydajności
-* Koszty
+* Cost (Koszt)
 * Środowisko pracy zespołu
 
 Rozwiązania pamięci podręcznej zwykle polegają na magazynie w pamięci, aby zapewnić szybkie pobieranie danych z pamięci podręcznej, ale pamięć jest ograniczonym zasobem i kosztowna. Przechowuj tylko często używane dane w pamięci podręcznej.
@@ -529,7 +530,7 @@ Ogólnie pamięć podręczna Redis zapewnia wyższą przepływność i mniejsze 
 
 Gdy SQL Server jest używany jako magazyn zapasowy rozproszonej pamięci podręcznej, korzystanie z tej samej bazy danych dla pamięci podręcznej i zwykłego magazynu danych aplikacji może mieć negatywny wpływ na wydajność obu tych elementów. Zalecamy używanie dedykowanego wystąpienia SQL Server dla magazynu zapasowego rozproszonej pamięci podręcznej.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Redis Cache na platformie Azure](/azure/azure-cache-for-redis/)
 * [SQL Database na platformie Azure](/azure/sql-database/)

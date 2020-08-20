@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/18/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/forms-validation
-ms.openlocfilehash: 5220a969dbc677d1df9594c0ddd8d1a13ca6e8f4
-ms.sourcegitcommit: 756c78f6dbfa77c5d718969cdce20639b8ca0a17
+ms.openlocfilehash: 4690c279c24ef23806a6e72aece5f7cd821752bc
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/18/2020
-ms.locfileid: "88515599"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628329"
 ---
 # <a name="aspnet-core-no-locblazor-forms-and-validation"></a>ASP.NET Core Blazor formularzy i walidacji
 

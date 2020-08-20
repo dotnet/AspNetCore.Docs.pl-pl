@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/04/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,25 +18,25 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/globalization-localization
-ms.openlocfilehash: 59b6e4cb2f466594d8a105a239e175e9c7b37ad8
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: deb68b50f408532af22d20ba9b06a9ee3eccb335
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014249"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628225"
 ---
 # <a name="aspnet-core-no-locblazor-globalization-and-localization"></a>ASP.NET Core Blazor globalizacja i lokalizacja
 
 Autorzy [Luke Latham](https://github.com/guardrex) i [Daniel Roth](https://github.com/danroth27)
 
-Razorskładniki mogą być udostępniane użytkownikom w wielu kulturach i językach. Dostępne są następujące scenariusze globalizacji i lokalizacji platformy .NET:
+Razor składniki mogą być udostępniane użytkownikom w wielu kulturach i językach. Dostępne są następujące scenariusze globalizacji i lokalizacji platformy .NET:
 
 * . System zasobów netto
 * Formatowanie liczb i dat specyficznych dla kultury
 
 Obecnie obsługiwane są ograniczone zestawy ASP.NET Core scenariuszy lokalizacji:
 
-* <xref:Microsoft.Extensions.Localization.IStringLocalizer>i <xref:Microsoft.Extensions.Localization.IStringLocalizer%601> *są obsługiwane* w Blazor aplikacjach.
+* <xref:Microsoft.Extensions.Localization.IStringLocalizer> i <xref:Microsoft.Extensions.Localization.IStringLocalizer%601> *są obsługiwane* w Blazor aplikacjach.
 * <xref:Microsoft.AspNetCore.Mvc.Localization.IHtmlLocalizer><xref:Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer>lokalizacje adnotacji danych są ASP.NET Core w SCENARIUSZACH MVC i **nie są obsługiwane** w Blazor aplikacjach.
 
 Aby uzyskać więcej informacji, zobacz <xref:fundamentals/localization>.
@@ -46,7 +47,7 @@ Blazor[`@bind`](xref:mvc/views/razor#bind)Funkcja wykonuje formatowanie i analiz
 
 Dla bieżącej kultury można uzyskać dostęp z <xref:System.Globalization.CultureInfo.CurrentCulture?displayProperty=fullName> właściwości.
 
-<xref:System.Globalization.CultureInfo.InvariantCulture?displayProperty=nameWithType>jest używany dla następujących typów pól ( `<input type="{TYPE}" />` ):
+<xref:System.Globalization.CultureInfo.InvariantCulture?displayProperty=nameWithType> jest używany dla następujących typów pól ( `<input type="{TYPE}" />` ):
 
 * `date`
 * `number`
@@ -63,13 +64,13 @@ Następujące typy pól mają określone wymagania dotyczące formatowania i nie
 * `month`
 * `week`
 
-[`@bind`](xref:mvc/views/razor#bind)obsługuje `@bind:culture` parametr, aby zapewnić <xref:System.Globalization.CultureInfo?displayProperty=fullName> analizę i formatowanie wartości. Określanie kultury nie jest zalecane w przypadku używania `date` `number` typów pól i. `date`i `number` ma wbudowaną Blazor obsługę, która udostępnia wymaganą kulturę.
+[`@bind`](xref:mvc/views/razor#bind) obsługuje `@bind:culture` parametr, aby zapewnić <xref:System.Globalization.CultureInfo?displayProperty=fullName> analizę i formatowanie wartości. Określanie kultury nie jest zalecane w przypadku używania `date` `number` typów pól i. `date` i `number` ma wbudowaną Blazor obsługę, która udostępnia wymaganą kulturę.
 
 ## <a name="localization"></a>Lokalizacja
 
 ### Blazor WebAssembly
 
-Blazor WebAssemblyaplikacje ustawiają kulturę przy użyciu [preferencji języka](https://developer.mozilla.org/docs/Web/API/NavigatorLanguage/languages)użytkownika.
+Blazor WebAssembly aplikacje ustawiają kulturę przy użyciu [preferencji języka](https://developer.mozilla.org/docs/Web/API/NavigatorLanguage/languages)użytkownika.
 
 Aby jawnie skonfigurować kulturę, ustaw <xref:System.Globalization.CultureInfo.DefaultThreadCurrentCulture?displayProperty=nameWithType> i <xref:System.Globalization.CultureInfo.DefaultThreadCurrentUICulture?displayProperty=nameWithType> w `Program.Main` .
 
@@ -79,7 +80,7 @@ Chociaż kultura, która Blazor wybiera domyślnie, może być wystarczająca dl
 
 ### Blazor Server
 
-Blazor Serveraplikacje są zlokalizowane przy użyciu [oprogramowania pośredniczącego](xref:fundamentals/localization#localization-middleware). Oprogramowanie pośredniczące wybiera odpowiednią kulturę dla użytkowników żądających zasobów z aplikacji.
+Blazor Server aplikacje są zlokalizowane przy użyciu [oprogramowania pośredniczącego](xref:fundamentals/localization#localization-middleware). Oprogramowanie pośredniczące wybiera odpowiednią kulturę dla użytkowników żądających zasobów z aplikacji.
 
 Kulturę można ustawić przy użyciu jednej z następujących metod:
 

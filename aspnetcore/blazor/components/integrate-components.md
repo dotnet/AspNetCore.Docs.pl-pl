@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/25/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/integrate-components-into-razor-pages-and-mvc-apps
-ms.openlocfilehash: 7abf15b240c0acdae159784a8863b2988758c916
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: e2045d7d169e81c85f4c7dbd97357455ecd70ea3
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014558"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628485"
 ---
 # <a name="integrate-aspnet-core-no-locrazor-components-into-no-locrazor-pages-and-mvc-apps"></a>Integrowanie Razor składników ASP.NET Core ze Razor stronami i aplikacjami MVC
 
 Autorzy [Luke Latham](https://github.com/guardrex) i [Daniel Roth](https://github.com/danroth27)
 
-Razorskładniki można zintegrować ze Razor stronami i aplikacjami MVC. Gdy strona lub widok jest renderowany, składniki mogą być wstępnie renderowane w tym samym czasie.
+Razor składniki można zintegrować ze Razor stronami i aplikacjami MVC. Gdy strona lub widok jest renderowany, składniki mogą być wstępnie renderowane w tym samym czasie.
 
 Po [przygotowaniu aplikacji](#prepare-the-app)należy użyć wskazówek w poniższych sekcjach, w zależności od wymagań aplikacji:
 
@@ -127,7 +128,7 @@ Aby obsługiwać Razor składniki routingu w Razor aplikacjach stron:
 
    Składniki używają udostępnionego `_Layout.cshtml` pliku do ich układu.
 
-   <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode>Określa, czy `App` składnik:
+   <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode> Określa, czy `App` składnik:
 
    * Jest wstępnie renderowany na stronie.
    * Jest renderowany jako statyczny kod HTML na stronie lub zawiera informacje niezbędne do uruchomienia Blazor aplikacji przez agenta użytkownika.
@@ -151,7 +152,7 @@ Aby obsługiwać Razor składniki routingu w Razor aplikacjach stron:
    });
    ```
 
-1. Dodaj składniki routingu do aplikacji. Przykład:
+1. Dodaj składniki routingu do aplikacji. Na przykład:
 
    ```razor
    @page "/counter"
@@ -201,7 +202,7 @@ Aby obsługiwać Razor składniki routingu w aplikacjach MVC:
 
    Składniki używają udostępnionego `_Layout.cshtml` pliku do ich układu.
    
-   <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode>Określa, czy `App` składnik:
+   <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode> Określa, czy `App` składnik:
 
    * Jest wstępnie renderowany na stronie.
    * Jest renderowany jako statyczny kod HTML na stronie lub zawiera informacje niezbędne do uruchomienia Blazor aplikacji przez agenta użytkownika.
@@ -234,7 +235,7 @@ Aby obsługiwać Razor składniki routingu w aplikacjach MVC:
    });
    ```
 
-1. Utwórz `Pages` folder i Dodaj do aplikacji składniki obsługujące Routing. Przykład:
+1. Utwórz `Pages` folder i Dodaj do aplikacji składniki obsługujące Routing. Na przykład:
 
    ```razor
    @page "/counter"

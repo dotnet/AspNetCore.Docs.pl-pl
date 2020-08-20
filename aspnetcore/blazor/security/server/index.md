@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/02/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,20 +18,20 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/index
-ms.openlocfilehash: 4dc9040b9410304eb33e5df7c47db2f9a42152d3
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: ba9fe3c0149679fa5760c0c9214cd426f1804c31
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88013999"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88626457"
 ---
 # <a name="secure-aspnet-core-no-locblazor-server-apps"></a>Bezpieczne Blazor Server aplikacje ASP.NET Core
 
 Autor [Luke Latham](https://github.com/guardrex)
 
-Blazor Serveraplikacje są skonfigurowane pod kątem zabezpieczeń w taki sam sposób, jak aplikacje ASP.NET Core. Aby uzyskać więcej informacji, zobacz artykuły poniżej <xref:security/index> . Tematy w ramach tego omówienia stosują się w odniesieniu do programu Blazor Server . 
+Blazor Server aplikacje są skonfigurowane pod kątem zabezpieczeń w taki sam sposób, jak aplikacje ASP.NET Core. Aby uzyskać więcej informacji, zobacz artykuły poniżej <xref:security/index> . Tematy w ramach tego omówienia stosują się w odniesieniu do programu Blazor Server . 
 
-## <a name="no-locblazor-server-project-template"></a>Blazor Serverszablon projektu
+## <a name="no-locblazor-server-project-template"></a>Blazor Server szablon projektu
 
 Blazor ServerSzablon projektu można skonfigurować do uwierzytelniania podczas tworzenia projektu.
 
@@ -61,8 +62,8 @@ dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 
 | Mechanizm uwierzytelniania | Opis |
 | ------------------------ | ----------- |
-| `None`wartooć         | Brak uwierzytelniania |
-| `Individual`             | Użytkownicy przechowywani w aplikacji przy użyciu ASP.NET CoreIdentity |
+| `None` wartooć         | Brak uwierzytelniania |
+| `Individual`             | Użytkownicy przechowywani w aplikacji za pomocą ASP.NET Core Identity |
 | `IndividualB2C`          | Użytkownicy przechowywani w [Azure AD B2C](xref:security/authentication/azure-ad-b2c) |
 | `SingleOrg`              | Uwierzytelnianie organizacyjne dla pojedynczej dzierżawy |
 | `MultiOrg`               | Uwierzytelnianie organizacyjne dla wielu dzierżawców |
@@ -81,9 +82,9 @@ Aby uzyskać więcej informacji, zobacz [`dotnet new`](/dotnet/core/tools/dotnet
 
 1. W kroku **Skonfiguruj nową Blazor Server aplikację** wybierz pozycję **uwierzytelnianie indywidualne (w aplikacji)** na liście rozwijanej **uwierzytelnianie** .
 
-1. Aplikacja jest tworzona dla poszczególnych użytkowników przechowywanych w aplikacji z ASP.NET Core Identity .
+1. Aplikacja jest tworzona dla poszczególnych użytkowników przechowywanych w aplikacji za pomocą usługi ASP.NET Core Identity .
 
-# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli/)
+# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli/)
 
 Utwórz nowy Blazor Server projekt z mechanizmem uwierzytelniania przy użyciu następującego polecenia w powłoce poleceń:
 
@@ -95,8 +96,8 @@ dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 
 | Mechanizm uwierzytelniania | Opis |
 | ------------------------ | ----------- |
-| `None`wartooć         | Brak uwierzytelniania |
-| `Individual`             | Użytkownicy przechowywani w aplikacji przy użyciu ASP.NET CoreIdentity |
+| `None` wartooć         | Brak uwierzytelniania |
+| `Individual`             | Użytkownicy przechowywani w aplikacji za pomocą ASP.NET Core Identity |
 | `IndividualB2C`          | Użytkownicy przechowywani w [Azure AD B2C](xref:security/authentication/azure-ad-b2c) |
 | `SingleOrg`              | Uwierzytelnianie organizacyjne dla pojedynczej dzierżawy |
 | `MultiOrg`               | Uwierzytelnianie organizacyjne dla wielu dzierżawców |
@@ -111,7 +112,7 @@ Aby uzyskać więcej informacji, zobacz [`dotnet new`](/dotnet/core/tools/dotnet
 
 ---
 
-## <a name="scaffold-no-locidentity"></a>FunkcjaIdentity
+## <a name="scaffold-no-locidentity"></a>Funkcja Identity
 
 Tworzenie szkieletu Identity w Blazor Server projekcie:
 

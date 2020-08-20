@@ -1,5 +1,5 @@
 ---
-title: Wskazówki dotyczące łagodzenia zagrożeń dla ASP.NET CoreBlazor Server
+title: Wskazówki dotyczące łagodzenia zagrożeń dla ASP.NET Core Blazor Server
 author: guardrex
 description: Dowiedz się, jak ograniczyć zagrożenia bezpieczeństwa do Blazor Server aplikacji.
 monikerRange: '>= aspnetcore-3.1'
@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/05/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/threat-mitigation
-ms.openlocfilehash: 2637645da9db7d52668c6a36c822df25520ff1f1
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: a9bdf68e30d2688d4d7836410a7913794a73fe01
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88013817"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88626431"
 ---
-# <a name="threat-mitigation-guidance-for-aspnet-core-no-locblazor-server"></a>Wskazówki dotyczące łagodzenia zagrożeń dla ASP.NET CoreBlazor Server
+# <a name="threat-mitigation-guidance-for-aspnet-core-no-locblazor-server"></a>Wskazówki dotyczące łagodzenia zagrożeń dla ASP.NET Core Blazor Server
 
 Autor [Javier Calvarro Nelson](https://github.com/javiercn)
 
-Blazor Serveraplikacje przyjmują model przetwarzania danych *stanowych* , w którym serwer i klient utrzymują długoterminową relację. Stan trwały jest obsługiwany przez [obwód](xref:blazor/state-management), który może obejmować połączenia, które są również potencjalnie długotrwałe.
+Blazor Server aplikacje przyjmują model przetwarzania danych *stanowych* , w którym serwer i klient utrzymują długoterminową relację. Stan trwały jest obsługiwany przez [obwód](xref:blazor/state-management), który może obejmować połączenia, które są również potencjalnie długotrwałe.
 
 Gdy użytkownik odwiedza Blazor Server lokację, serwer tworzy obwód w pamięci serwera. Obwód wskazuje przeglądarce zawartość do renderowania i reagowanie na zdarzenia, na przykład gdy użytkownik wybierze przycisk w interfejsie użytkownika. Aby wykonać te czynności, obwód wywołuje funkcje języka JavaScript w przeglądarce użytkownika i metody .NET na serwerze. Ta dwukierunkowa interakcja oparta na języku JavaScript jest nazywana JavaScript międzyoperacyjną [(js Interop)](xref:blazor/call-javascript-from-dotnet).
 
@@ -39,7 +40,7 @@ W środowiskach z ograniczeniami, takimi jak wewnątrz sieci firmowej lub intran
 * Nie dotyczy w ograniczonym środowisku.
 * Nie jest kosztem wdrożenia, ponieważ zagrożenie bezpieczeństwa jest niskie w ograniczonym środowisku.
 
-## <a name="no-locblazor-and-shared-state"></a>Blazori udostępniony stan
+## <a name="no-locblazor-and-shared-state"></a>Blazor i udostępniony stan
 
 [!INCLUDE[](~/includes/blazor-security/blazor-shared-state.md)]
 
@@ -48,7 +49,7 @@ W środowiskach z ograniczeniami, takimi jak wewnątrz sieci firmowej lub intran
 Wyczerpanie zasobów może wystąpić, gdy klient współdziała z serwerem i powoduje, że serwer zużywa nadmierne zasoby. Nadmierne wykorzystanie zasobów dotyczy głównie:
 
 * [Procesor CPU](#cpu)
-* [Memory (Pamięć)](#memory)
+* [Pamięć](#memory)
 * [Połączenia klienta](#client-connections)
 
 Ataki typu "odmowa usługi" (DoS) zwykle poszukują wyczerpania zasobów aplikacji lub serwera. Jednak wyczerpanie zasobów nie musi być przyczyną ataku w systemie. Na przykład ograniczone zasoby mogą być wyczerpane ze względu na wysokie zapotrzebowanie użytkownika. System DoS został szczegółowo omówiony w sekcji [ataki typu "odmowa usługi" (DOS)](#denial-of-service-dos-attacks) .
@@ -61,9 +62,9 @@ Wyczerpanie procesora może wystąpić, gdy jeden lub więcej klientów wymusza 
 
 Rozważmy na przykład Blazor Server aplikację, która oblicza *numer Fibonnacci*. Numer Fibonnacci jest tworzony z sekwencji Fibonnacci, gdzie każda liczba w sekwencji jest sumą dwóch poprzednich numerów. Ilość pracy wymaganej do osiągnięcia odpowiedzi zależy od długości sekwencji i rozmiaru wartości początkowej. Jeśli aplikacja nie nakłada limitów na żądanie klienta, obliczenia intensywnie korzystające z procesora CPU mogą wzniżyć czas procesora i zmniejszyć wydajność innych zadań. Nadmierne zużycie zasobów to wpływ na dostępność.
 
-Wykorzystanie procesora CPU jest problemem w przypadku wszystkich aplikacji publicznych. W zwykłych aplikacjach sieci Web żądania i połączenia przekroczą limit czasu jako zabezpieczenie, ale Blazor Server aplikacje nie zapewniają tych samych zabezpieczeń. Blazor Serveraplikacje muszą zawierać odpowiednie sprawdzenia i limity przed przeprowadzeniem potencjalnej pracy intensywnie obciążającej procesor CPU.
+Wykorzystanie procesora CPU jest problemem w przypadku wszystkich aplikacji publicznych. W zwykłych aplikacjach sieci Web żądania i połączenia przekroczą limit czasu jako zabezpieczenie, ale Blazor Server aplikacje nie zapewniają tych samych zabezpieczeń. Blazor Server aplikacje muszą zawierać odpowiednie sprawdzenia i limity przed przeprowadzeniem potencjalnej pracy intensywnie obciążającej procesor CPU.
 
-### <a name="memory"></a>Memory (Pamięć)
+### <a name="memory"></a>Pamięć
 
 Wyczerpanie pamięci może wystąpić, gdy co najmniej jeden klient wymusić zużywanie dużej ilości pamięci na serwerze.
 
@@ -77,7 +78,7 @@ Rozważmy następujący scenariusz utrzymywania i wyświetlania listy elementów
   * Wyświetlić tylko pierwsze 100 do 1 000 elementów i wymagać od użytkownika wprowadzenia kryteriów wyszukiwania, aby znaleźć elementy poza wyświetlanymi elementami.
   * Aby zapoznać się z bardziej zaawansowanym scenariuszem renderowania, zaimplementuj listy lub siatki obsługujące *wirtualizację*. Przy użyciu wirtualizacji program wyświetla tylko podzbiór elementów, które są obecnie widoczne dla użytkownika. Gdy użytkownik współdziała z paskiem przewijania w interfejsie użytkownika, składnik renderuje tylko te elementy, które są wymagane do wyświetlenia. Elementy, które nie są obecnie wymagane do wyświetlania, mogą być przechowywane w magazynie pomocniczym, co jest idealnym rozwiązaniem. Niewyświetlane elementy można również przechowywać w pamięci, co jest mniej idealne.
 
-Blazor Serveraplikacje oferują podobny model programowania dla innych platform interfejsu użytkownika dla aplikacji stanowych, takich jak WPF, Windows Forms lub Blazor WebAssembly . Główną różnicą jest to, że w kilku strukturach interfejsu użytkownika używana przez aplikację pamięć należy do klienta i ma wpływ tylko na danego klienta. Na przykład Blazor WebAssembly aplikacja działa wyłącznie na kliencie i używa zasobów pamięci klienta. W tym Blazor Server scenariuszu pamięć używana przez aplikację należy do serwera i jest współdzielona przez klientów w wystąpieniu serwera.
+Blazor Server aplikacje oferują podobny model programowania dla innych platform interfejsu użytkownika dla aplikacji stanowych, takich jak WPF, Windows Forms lub Blazor WebAssembly . Główną różnicą jest to, że w kilku strukturach interfejsu użytkownika używana przez aplikację pamięć należy do klienta i ma wpływ tylko na danego klienta. Na przykład Blazor WebAssembly aplikacja działa wyłącznie na kliencie i używa zasobów pamięci klienta. W tym Blazor Server scenariuszu pamięć używana przez aplikację należy do serwera i jest współdzielona przez klientów w wystąpieniu serwera.
 
 Wymagania dotyczące pamięci po stronie serwera są rozpatrywane dla wszystkich Blazor Server aplikacji. Większość aplikacji sieci Web jest jednak bezstanowa, a pamięć użyta podczas przetwarzania żądania jest wydawana po zwróceniu odpowiedzi. Zgodnie z ogólnym zaleceniem nie należy zezwalać klientom na przydzielanie nieograniczonej ilości pamięci, tak jak w przypadku innych aplikacji po stronie serwera, które utrzymują połączenia klientów. Ilość pamięci zużywanej przez Blazor Server aplikację jest zachowywana przez dłuższy czas niż pojedyncze żądanie.
 
@@ -88,7 +89,7 @@ Wymagania dotyczące pamięci po stronie serwera są rozpatrywane dla wszystkich
 
 Wyczerpanie połączenia może wystąpić, gdy co najmniej jeden klient otwiera zbyt wiele równoczesnych połączeń z serwerem, uniemożliwiając innym klientom nawiązywanie nowych połączeń.
 
-BlazorKlienci nawiązują pojedyncze połączenie dla każdej sesji i przechowują połączenie tak długo, jak okno przeglądarki jest otwarte. Wymagania na serwerze utrzymywania wszystkich połączeń nie są specyficzne dla Blazor aplikacji. Ze względu na trwały charakter połączeń i stanowy charakter Blazor Server aplikacji, wyczerpanie połączenia jest bardziej ryzykowne dla dostępności aplikacji.
+Blazor Klienci nawiązują pojedyncze połączenie dla każdej sesji i przechowują połączenie tak długo, jak okno przeglądarki jest otwarte. Wymagania na serwerze utrzymywania wszystkich połączeń nie są specyficzne dla Blazor aplikacji. Ze względu na trwały charakter połączeń i stanowy charakter Blazor Server aplikacji, wyczerpanie połączenia jest bardziej ryzykowne dla dostępności aplikacji.
 
 Domyślnie nie ma żadnego limitu liczby połączeń na użytkownika dla Blazor Server aplikacji. Jeśli aplikacja wymaga limitu połączeń, należy wykonać co najmniej jedną z następujących metod:
 
@@ -103,9 +104,9 @@ Domyślnie nie ma żadnego limitu liczby połączeń na użytkownika dla Blazor 
 
 ## <a name="denial-of-service-dos-attacks"></a>Ataki typu "odmowa usługi" (DoS)
 
-Ataki typu "odmowa usługi" (DoS) obejmują klienta, który powoduje, że serwer wyczerpuje jeden lub więcej zasobów, dzięki czemu aplikacja jest niedostępna. Blazor ServerAplikacje obejmują pewne limity domyślne i korzystają z innych ASP.NET Core i SignalR limitów ochrony przed atakami systemu DOS ustawionymi w systemie <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions> .
+Ataki typu "odmowa usługi" (DoS) obejmują klienta, który powoduje, że serwer wyczerpuje jeden lub więcej zasobów, dzięki czemu aplikacja jest niedostępna. Blazor Server Aplikacje obejmują pewne limity domyślne i korzystają z innych ASP.NET Core i SignalR limitów ochrony przed atakami systemu DOS ustawionymi w systemie <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions> .
 
-| Blazor Serverlimit aplikacji | Opis | Domyślny |
+| Blazor Server limit aplikacji | Opis | Domyślny |
 | --- | --- | --- |
 | <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.DisconnectedCircuitMaxRetained> | Maksymalna liczba odłączonych obwodów, które dany serwer przechowuje w pamięci w danym momencie. | 100 |
 | <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.DisconnectedCircuitRetentionPeriod> | Maksymalny czas przechowywania połączonego obwodu w pamięci przed jego usunięciem. | 3 minuty |
@@ -114,7 +115,7 @@ Ataki typu "odmowa usługi" (DoS) obejmują klienta, który powoduje, że serwer
 
 Ustaw maksymalny rozmiar komunikatu dla pojedynczego przychodzącego komunikatu z centrum <xref:Microsoft.AspNetCore.SignalR.HubConnectionContextOptions> .
 
-| SignalRi limit ASP.NET Core | Opis | Domyślny |
+| SignalR i limit ASP.NET Core | Opis | Domyślny |
 | --- | --- | --- |
 | <xref:Microsoft.AspNetCore.SignalR.HubConnectionContextOptions.MaximumReceiveMessageSize?displayProperty=nameWithType> | Rozmiar wiadomości dla pojedynczej wiadomości. | 32 KB |
 
@@ -160,14 +161,14 @@ Nie ufaj wywołań z języka JavaScript do metod .NET. Gdy metoda .NET jest nara
 
 Zdarzenia zapewniają punkt wejścia do Blazor Server aplikacji. Te same reguły zabezpieczania punktów końcowych w aplikacjach sieci Web mają zastosowanie do obsługi zdarzeń w Blazor Server aplikacjach. Złośliwy klient może wysłać dowolne dane, które chcą wysłać jako ładunek dla zdarzenia.
 
-Przykład:
+Na przykład:
 
 * Zdarzenie zmiany dla elementu `<select>` może wysłać wartość, która nie należy do opcji prezentowanych przez aplikację dla klienta.
 * `<input>`Może wysłać dowolne dane tekstowe do serwera, pomijając sprawdzanie poprawności po stronie klienta.
 
 Aplikacja musi sprawdzić poprawność danych dla każdego zdarzenia, które obsługuje aplikacja. Blazor [Składniki formularzy](xref:blazor/forms-validation) struktury wykonują podstawowe walidacje. Jeśli aplikacja używa składników formularzy niestandardowych, kod niestandardowy musi być zapisany, aby sprawdzić poprawność danych zdarzenia.
 
-Blazor Serverzdarzenia są asynchroniczne, więc do serwera można wysłać wiele zdarzeń, zanim aplikacja ma czas na reagowanie, generując nowe renderowanie. Ma to pewne konsekwencje dla bezpieczeństwa. Ograniczanie akcji klienta w aplikacji musi być wykonywane wewnątrz obsługi zdarzeń i nie zależy od aktualnie renderowanego stanu widoku.
+Blazor Server zdarzenia są asynchroniczne, więc do serwera można wysłać wiele zdarzeń, zanim aplikacja ma czas na reagowanie, generując nowe renderowanie. Ma to pewne konsekwencje dla bezpieczeństwa. Ograniczanie akcji klienta w aplikacji musi być wykonywane wewnątrz obsługi zdarzeń i nie zależy od aktualnie renderowanego stanu widoku.
 
 Rozważmy składnik licznika, który powinien zezwalać użytkownikowi na zwiększenie licznika maksymalnie trzy razy. Przycisk służący do zwiększania licznika jest warunkowo oparty na wartości `count` :
 
@@ -297,7 +298,7 @@ Wskazówki dotyczące zabezpieczania aplikacji ASP.NET Core mają zastosowanie d
 
 ### <a name="logging-and-sensitive-data"></a>Rejestrowanie i dane poufne
 
-Interakcje między klientem a serwerem są rejestrowane w dziennikach serwera z <xref:Microsoft.Extensions.Logging.ILogger> wystąpieniami. Blazorpozwala uniknąć rejestrowania poufnych informacji, takich jak zdarzenia rzeczywiste lub dane wejściowe i wyjściowe w programie JS.
+Interakcje między klientem a serwerem są rejestrowane w dziennikach serwera z <xref:Microsoft.Extensions.Logging.ILogger> wystąpieniami. Blazor pozwala uniknąć rejestrowania poufnych informacji, takich jak zdarzenia rzeczywiste lub dane wejściowe i wyjściowe w programie JS.
 
 Gdy na serwerze wystąpi błąd, struktura powiadamia klienta i rozłączy sesję. Domyślnie klient otrzymuje ogólny komunikat o błędzie, który można zobaczyć w narzędziach deweloperskich w przeglądarce.
 
@@ -313,9 +314,9 @@ Włącz szczegółowe błędy w języku JavaScript za pomocą:
 
 ### <a name="protect-information-in-transit-with-https"></a>Ochrona informacji przesyłanych przy użyciu protokołu HTTPS
 
-Blazor Serverużywa SignalR do komunikacji między klientem a serwerem. Blazor Serverzwykle używa transportu, który SignalR negocjuje, który jest zwykle gniazdem.
+Blazor Server używa SignalR do komunikacji między klientem a serwerem. Blazor Server zwykle używa transportu, który SignalR negocjuje, który jest zwykle gniazdem.
 
-Blazor Servernie zapewnia integralności i poufności danych przesyłanych między serwerem a klientem. Zawsze używaj protokołu HTTPS.
+Blazor Server nie zapewnia integralności i poufności danych przesyłanych między serwerem a klientem. Zawsze używaj protokołu HTTPS.
 
 ### <a name="cross-site-scripting-xss"></a>Skrypty między lokacjami (XSS)
 
@@ -352,7 +353,7 @@ Oprócz zabezpieczeń wdrożonych przez platformę, aplikacja musi być kodowana
 * Nie ufaj danych wejściowych w wywołaniach międzyoperacyjnych JS w obu kierunkach między językami JavaScript i .NET.
 * Aplikacja jest odpowiedzialna za sprawdzenie, czy zawartość argumentów i wyników są prawidłowe, nawet jeśli argumenty lub wyniki są prawidłowo deserializowane.
 
-W przypadku luki w zabezpieczeniach XSS aplikacja musi zawierać dane wejściowe użytkownika na renderowanej stronie. Blazor Serverskładniki wykonują krok czasu kompilacji, w którym Adiustacja w `.razor` pliku są przekształcane w procedurę logiki C#. W czasie wykonywania logika języka C# kompiluje *drzewo renderowania* opisujące elementy, tekst i składniki podrzędne. Jest on stosowany do modelu DOM przeglądarki za pośrednictwem sekwencji instrukcji języka JavaScript (lub jest serializowany do HTML w przypadku prerenderowania):
+W przypadku luki w zabezpieczeniach XSS aplikacja musi zawierać dane wejściowe użytkownika na renderowanej stronie. Blazor Server składniki wykonują krok czasu kompilacji, w którym Adiustacja w `.razor` pliku są przekształcane w procedurę logiki C#. W czasie wykonywania logika języka C# kompiluje *drzewo renderowania* opisujące elementy, tekst i składniki podrzędne. Jest on stosowany do modelu DOM przeglądarki za pośrednictwem sekwencji instrukcji języka JavaScript (lub jest serializowany do HTML w przypadku prerenderowania):
 
 * Dane wejściowe użytkownika renderowane za pośrednictwem normalnej Razor składni (na przykład `@someStringValue` ) nie ujawniają luki w zabezpieczeniach programu XSS, ponieważ Razor składnia jest DODAWANA do modelu Dom za pośrednictwem poleceń, które mogą zapisywać tekst. Nawet jeśli wartość zawiera znacznik HTML, wartość jest wyświetlana jako tekst statyczny. Podczas renderowania wstępnego dane wyjściowe są kodowane w formacie HTML, co spowoduje również wyświetlenie zawartości jako tekst statyczny.
 * Tagi skryptu nie są dozwolone i nie powinny być uwzględnione w drzewie renderowania składnika aplikacji. Jeśli tag skryptu jest zawarty w znaczniku składnika, generowany jest błąd czasu kompilacji.
@@ -364,9 +365,9 @@ Aby uzyskać więcej informacji, zobacz <xref:security/cross-site-scripting>.
 
 ### <a name="cross-origin-protection"></a>Ochrona między źródłami
 
-Ataki między źródłami obejmują klienta z innego źródła, wykonującego akcję względem serwera. Złośliwa akcja to zwykle żądanie GET lub formularz POST (CSRF żądania między lokacjami), ale możliwe jest również otwarcie złośliwego protokołu WebSocket. Blazor Serveraplikacje oferują te [same gwarancje, że każda inna SignalR Aplikacja korzystająca z usługi Hub jest oferowana](xref:signalr/security):
+Ataki między źródłami obejmują klienta z innego źródła, wykonującego akcję względem serwera. Złośliwa akcja to zwykle żądanie GET lub formularz POST (CSRF żądania między lokacjami), ale możliwe jest również otwarcie złośliwego protokołu WebSocket. Blazor Server aplikacje oferują te [same gwarancje, że każda inna SignalR Aplikacja korzystająca z usługi Hub jest oferowana](xref:signalr/security):
 
-* Blazor Serverdostęp do aplikacji można uzyskać, chyba że zostaną podjęte dodatkowe środki w celu ich uniemożliwienia. Aby wyłączyć dostęp między źródłami, wyłącz funkcję CORS w punkcie końcowym przez dodanie oprogramowania pośredniczącego CORS do potoku i dodanie <xref:Microsoft.AspNetCore.Cors.DisableCorsAttribute> do Blazor metadanych punktu końcowego lub ograniczenie zestawu dozwolonych źródeł przez [skonfigurowanie SignalR dla udostępniania zasobów między źródłami](xref:signalr/security#cross-origin-resource-sharing).
+* Blazor Server dostęp do aplikacji można uzyskać, chyba że zostaną podjęte dodatkowe środki w celu ich uniemożliwienia. Aby wyłączyć dostęp między źródłami, wyłącz funkcję CORS w punkcie końcowym przez dodanie oprogramowania pośredniczącego CORS do potoku i dodanie <xref:Microsoft.AspNetCore.Cors.DisableCorsAttribute> do Blazor metadanych punktu końcowego lub ograniczenie zestawu dozwolonych źródeł przez [skonfigurowanie SignalR dla udostępniania zasobów między źródłami](xref:signalr/security#cross-origin-resource-sharing).
 * Jeśli jest włączona funkcja CORS, w zależności od konfiguracji specyfikacji CORS może być wymagane wykonanie dodatkowych czynności w celu ochrony aplikacji. Jeśli funkcja CORS jest włączona globalnie, funkcję CORS można wyłączyć dla Blazor Server centrum, dodając <xref:Microsoft.AspNetCore.Cors.DisableCorsAttribute> metadane do metadanych punktu końcowego po wywołaniu <xref:Microsoft.AspNetCore.Builder.ComponentEndpointRouteBuilderExtensions.MapBlazorHub%2A> konstruktora trasy punktu końcowego.
 
 Aby uzyskać więcej informacji, zobacz <xref:security/anti-request-forgery>.
@@ -408,7 +409,7 @@ Poniżej wymieniono zagadnienia dotyczące zabezpieczeń, które nie są wyczerp
 * Należy unikać używania (lub weryfikowania wcześniej) danych wejściowych użytkownika dla wywołań międzyoperacyjnych platformy .NET i JS.
 * Uniemożliwiaj klientowi alokowanie nieograniczonej ilości pamięci.
   * Dane w składniku.
-  * `DotNetObject`odwołania zwracane do klienta.
+  * `DotNetObject` odwołania zwracane do klienta.
 * Ochrona przed wieloma operacjami wysyłania.
 * Anuluj długotrwałe operacje, gdy składnik zostanie usunięty.
 * Unikaj zdarzeń, które generują duże ilości danych.

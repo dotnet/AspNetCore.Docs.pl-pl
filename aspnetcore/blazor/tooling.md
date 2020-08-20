@@ -1,5 +1,5 @@
 ---
-title: Narzędzia dla ASP.NET CoreBlazor
+title: Narzędzia dla ASP.NET Core Blazor
 author: guardrex
 description: Dowiedz się więcej o narzędziach dostępnych do kompilowania Blazor aplikacji.
 monikerRange: '>= aspnetcore-3.1'
@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/07/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -18,14 +19,14 @@ no-loc:
 - SignalR
 uid: blazor/tooling
 zone_pivot_groups: operating-systems
-ms.openlocfilehash: 077d8943e424df4d5a14950dfadc2dd73d2ce4d6
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: d7e3743d12c235c20cc27f6a3263e2994a9e160a
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88013401"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88625833"
 ---
-# <a name="tooling-for-aspnet-core-no-locblazor"></a>Narzędzia dla ASP.NET CoreBlazor
+# <a name="tooling-for-aspnet-core-no-locblazor"></a>Narzędzia dla ASP.NET Core Blazor
 
 Autorzy [Daniel Roth](https://github.com/danroth27) i [Luke Latham](https://github.com/guardrex)
 
@@ -37,9 +38,9 @@ Autorzy [Daniel Roth](https://github.com/danroth27) i [Luke Latham](https://gith
 
 1. Wybierz pozycję ** Blazor aplikacja**. Wybierz pozycję **Dalej**.
 
-1. Podaj nazwę projektu w polu **Nazwa projektu** lub zaakceptuj nazwę domyślną projektu. Potwierdź, że wpis **lokalizacji** jest poprawny lub podaj lokalizację dla projektu. Wybierz pozycję **Utwórz**.
+1. Podaj nazwę projektu w polu **Nazwa projektu** lub zaakceptuj nazwę domyślną projektu. Potwierdź, że wpis **lokalizacji** jest poprawny lub podaj lokalizację dla projektu. Wybierz przycisk **Utwórz**.
 
-1. Aby zapoznać się z Blazor WebAssembly doświadczeniem, wybierz szablon ** Blazor WebAssembly aplikacji** . Aby zapoznać się z Blazor Server doświadczeniem, wybierz szablon ** Blazor Server aplikacji** . Wybierz pozycję **Utwórz**.
+1. Aby zapoznać się z Blazor WebAssembly doświadczeniem, wybierz szablon ** Blazor WebAssembly aplikacji** . Aby zapoznać się z Blazor Server doświadczeniem, wybierz szablon ** Blazor Server aplikacji** . Wybierz przycisk **Utwórz**.
 
    Aby uzyskać informacje na temat dwóch Blazor modeli hostingu *Blazor WebAssembly* i *Blazor Server* , zobacz <xref:blazor/hosting-models> .
 
@@ -107,7 +108,7 @@ Aby uzyskać więcej informacji, zapoznaj się ze wskazówkami podanymi w przegl
 
 1. Upewnij się, że **uwierzytelnianie** jest ustawione na wartość **bez uwierzytelniania**. Wybierz pozycję **Dalej**.
 
-1. W polu **Nazwa projektu** Nadaj nazwę aplikacji `WebApplication1` . Wybierz pozycję **Utwórz**.
+1. W polu **Nazwa projektu** Nadaj nazwę aplikacji `WebApplication1` . Wybierz przycisk **Utwórz**.
 
 1. Wybierz pozycję **Uruchom**  >  **Uruchom bez debugowania** , aby uruchomić aplikację *bez debugera*. Uruchom **aplikację z**  >  przyciskiem Uruchom**debugowanie** lub Uruchom (&#9654;), aby uruchomić aplikację *z debugerem*.
 

@@ -6,6 +6,7 @@ ms.author: riserrad
 ms.custom: devx-track-csharp, mvc
 ms.date: 07/10/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/publish-to-azure-webapp-using-vscode
-ms.openlocfilehash: 28074d64e9d4d0ec35af06e8b6daae939e316b2b
-ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
+ms.openlocfilehash: 113ebbefe338f49738095633c95ee3327b615078
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/12/2020
-ms.locfileid: "88130213"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88627900"
 ---
 # <a name="publish-an-aspnet-core-app-to-azure-with-visual-studio-code"></a>Publikowanie aplikacji ASP.NET Core na platformie Azure przy użyciu Visual Studio Code
 
@@ -84,7 +85,7 @@ Jeśli poniższe polecenie nie działa, sprawdź, czy instalacja została prawid
 ### <a name="through-visual-studio-code-interface"></a>Za za poorednictwem Visual Studio Code interfejsu
 
 - Otwórz program Visual Studio Code
-- Z menu wybierz pozycję`File > Open Folder`
+- Z menu wybierz pozycję `File > Open Folder`
 - Wybierz katalog główny folderu, w którym został utworzony projekt MVC
 
 Po otwarciu folderu projektu zostanie wyświetlony komunikat informujący o braku wymaganych zasobów do skompilowania i debugowania. Zaakceptuj pomoc, aby je dodać.
@@ -127,7 +128,7 @@ Korzystając z rozszerzenia Azure App Service Visual Studio Code, wykonaj poniż
 
 ### <a name="if-youre-creating-a-new-web-app"></a>Jeśli tworzysz nową aplikację sieci Web
 
-- Kliknij prawym przyciskiem myszy `publish` folder, a następnie wybierz pozycję`Deploy to Web App...`
+- Kliknij prawym przyciskiem myszy `publish` folder, a następnie wybierz pozycję `Deploy to Web App...`
 - Wybierz subskrypcję, dla której chcesz utworzyć aplikację sieci Web
 - Wybierz pozycję `Create New Web App`
 - Wprowadź nazwę aplikacji sieci Web
@@ -142,7 +143,7 @@ Po kliknięciu `Browse Website` Przejdź do niego przy użyciu domyślnej przegl
 
 ### <a name="if-youre-deploying-to-an-existing-web-app"></a>Jeśli wdrażasz w istniejącej aplikacji sieci Web
 
-- Kliknij prawym przyciskiem myszy `publish` folder, a następnie wybierz pozycję`Deploy to Web App...`
+- Kliknij prawym przyciskiem myszy `publish` folder, a następnie wybierz pozycję `Deploy to Web App...`
 - Wybierz subskrypcję istniejącej aplikacji sieci Web
 - Wybierz aplikację internetową z listy
 - Visual Studio Code będzie pytał, czy chcesz zastąpić istniejącą zawartość. Kliknij `Deploy` , aby potwierdzić
@@ -155,7 +156,7 @@ Rozszerzenie spowoduje wdrożenie zaktualizowanej zawartości w aplikacji sieci 
 
 - [Tworzenie pierwszego potoku usługi Azure DevOps](/azure/devops/pipelines/create-first-pipeline)
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 - [Azure App Service](/azure/app-service/app-service-web-overview)
 - [Grupa zasobów platformy Azure](/azure/azure-resource-manager/resource-group-overview#resource-groups)

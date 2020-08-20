@@ -6,6 +6,7 @@ ms.author: rybrande
 ms.date: 09/26/2019
 monikerRange: '>= aspnetcore-3.0'
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/Microsoft.dotnet-openapi
-ms.openlocfilehash: 6a9b80e868a54bd76503a6421c34ae159421699b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 45921deb35452876b0a92a8731da68539a880c1d
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022241"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88626561"
 ---
 # <a name="develop-aspnet-core-apps-using-openapi-tools"></a>Opracowywanie aplikacji ASP.NET Core przy użyciu narzędzi OpenAPI
 
@@ -93,7 +94,7 @@ Poprzednie odwołanie jest wymagane, aby aplikacja mogła wywołać wygenerowany
 
 |  Argument  | Opis | Przykład |
 |-------------|-------------|---------|
-| adres URL źródła | Źródło, z którego ma zostać utworzone odwołanie. Musi być adresem URL. |Dodawanie adresu URL openapi dotnet`https://contoso.com/openapi.json` |
+| adres URL źródła | Źródło, z którego ma zostać utworzone odwołanie. Musi być adresem URL. |Dodawanie adresu URL openapi dotnet `https://contoso.com/openapi.json` |
 
 ## <a name="remove"></a>Usuń
 
@@ -127,4 +128,4 @@ Odświeża lokalną wersję pliku, który został pobrany przy użyciu najnowsze
 
 |  Argument  | Opis | Przykład |
 | ------------|-------------|---------|
-| adres URL źródła | Adres URL, z którego ma zostać odświeżone odwołanie. | Odświeżanie openapi dotnet`https://contoso.com/openapi.json` |
+| adres URL źródła | Adres URL, z którego ma zostać odświeżone odwołanie. | Odświeżanie openapi dotnet `https://contoso.com/openapi.json` |

@@ -1,5 +1,5 @@
 ---
-title: Zestawy ładowania z opóźnieniem w ASP.NET CoreBlazor WebAssembly
+title: Zestawy ładowania z opóźnieniem w ASP.NET Core Blazor WebAssembly
 author: guardrex
 description: Odkryj, jak ładować zestawy w aplikacjach ASP.NET Core Blazor WebAssembly .
 monikerRange: '>= aspnetcore-5.0'
@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/16/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-lazy-load-assemblies
-ms.openlocfilehash: 0ce03badccad4e06aa3c316580ab82be38a806c6
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 31e6c9638d3262d3cb0a5e0fbcf34d24e2d1e91c
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88013375"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88625807"
 ---
-# <a name="lazy-load-assemblies-in-aspnet-core-no-locblazor-webassembly"></a>Zestawy ładowania z opóźnieniem w ASP.NET CoreBlazor WebAssembly
+# <a name="lazy-load-assemblies-in-aspnet-core-no-locblazor-webassembly"></a>Zestawy ładowania z opóźnieniem w ASP.NET Core Blazor WebAssembly
 
 Autorzy [Safia Abdalla](https://safia.rocks) i [Luke Latham](https://github.com/guardrex)
 
-Blazor WebAssemblywydajność uruchamiania aplikacji można ulepszyć, odwołując ładowanie niektórych zestawów aplikacji do momentu, gdy nie są wymagane, co jest nazywane *ładowaniem z opóźnieniem*. Na przykład zestawy, które są używane tylko do renderowania pojedynczego składnika, można skonfigurować tak, aby ładowały się tylko wtedy, gdy użytkownik nawiguje do tego składnika. Po załadowaniu zestawy są buforowane po stronie klienta i są dostępne dla wszystkich przyszłych nawigacji.
+Blazor WebAssembly wydajność uruchamiania aplikacji można ulepszyć, odwołując ładowanie niektórych zestawów aplikacji do momentu, gdy nie są wymagane, co jest nazywane *ładowaniem z opóźnieniem*. Na przykład zestawy, które są używane tylko do renderowania pojedynczego składnika, można skonfigurować tak, aby ładowały się tylko wtedy, gdy użytkownik nawiguje do tego składnika. Po załadowaniu zestawy są buforowane po stronie klienta i są dostępne dla wszystkich przyszłych nawigacji.
 
 BlazorFunkcja ładowania z opóźnieniem umożliwia oznaczanie zestawów aplikacji na potrzeby ładowania z opóźnieniem, które ładuje zestawy podczas środowiska uruchomieniowego, gdy użytkownik przechodzi do określonej trasy. Funkcja składa się z zmian w pliku projektu i zmian w routerze aplikacji.
 
@@ -77,19 +78,19 @@ W `Router` składniku aplikacji ( `App.razor` ):
 
 Jeśli `OnNavigateAsync` wywołanie zwrotne zgłasza nieobsłużony wyjątek, zostanie wywołany [ Blazor interfejs użytkownika błędu](xref:blazor/fundamentals/handle-errors#detailed-errors-during-development) .
 
-### <a name="assembly-load-logic-in-onnavigateasync"></a>Logika ładowania zestawu w`OnNavigateAsync`
+### <a name="assembly-load-logic-in-onnavigateasync"></a>Logika ładowania zestawu w `OnNavigateAsync`
 
-`OnNavigateAsync`zawiera `NavigationContext` parametr, który zawiera informacje o bieżącym asynchronicznym zdarzeniu nawigacji, w tym ścieżkę docelową ( `Path` ) i tokenem anulowania ( `CancellationToken` ):
+`OnNavigateAsync` zawiera `NavigationContext` parametr, który zawiera informacje o bieżącym asynchronicznym zdarzeniu nawigacji, w tym ścieżkę docelową ( `Path` ) i tokenem anulowania ( `CancellationToken` ):
 
 * `Path`Właściwość jest ścieżką docelową użytkownika względem ścieżki podstawowej aplikacji, na przykład `/robot` .
-* `CancellationToken`Może służyć do obserwowania anulowania zadania asynchronicznego. `OnNavigateAsync`automatycznie anuluje aktualnie uruchomione zadanie nawigacji, gdy użytkownik nawiguje do innej strony.
+* `CancellationToken`Może służyć do obserwowania anulowania zadania asynchronicznego. `OnNavigateAsync` automatycznie anuluje aktualnie uruchomione zadanie nawigacji, gdy użytkownik nawiguje do innej strony.
 
-Wewnątrz `OnNavigateAsync` , należy wdrożyć logikę, aby określić zestawy do załadowania. Dostępne są następujące opcje:
+Wewnątrz `OnNavigateAsync` , należy wdrożyć logikę, aby określić zestawy do załadowania. Dostępne opcje:
 
 * Kontrole warunkowe wewnątrz `OnNavigateAsync` metody.
 * Tabela wyszukiwania, w której są mapowane trasy do nazw zestawów, które zostały dodane do składnika lub zaimplementowane w [`@code`](xref:mvc/views/razor#code) bloku.
 
-`LazyAssemblyLoader`to usługa singleton udostępniona przez platformę do ładowania zestawów. Wsuń `LazyAssemblyLoader` do `Router` składnika:
+`LazyAssemblyLoader` to usługa singleton udostępniona przez platformę do ładowania zestawów. Wsuń `LazyAssemblyLoader` do `Router` składnika:
 
 ```razor
 ...
@@ -130,7 +131,7 @@ Podczas ładowania zestawów, które mogą potrwać kilka sekund, `Router` skła
 ...
 ```
 
-### <a name="handle-cancellations-in-onnavigateasync"></a>Obsługa anulowania w`OnNavigateAsync`
+### <a name="handle-cancellations-in-onnavigateasync"></a>Obsługa anulowania w `OnNavigateAsync`
 
 `NavigationContext`Obiekt przesłany do `OnNavigateAsync` wywołania zwrotnego zawiera `CancellationToken` zestaw, który jest ustawiony w momencie wystąpienia nowego zdarzenia nawigacji. `OnNavigateAsync`Wywołanie zwrotne musi zgłosić, gdy ten token anulowania jest ustawiony tak, aby uniknąć kontynuowania uruchamiania `OnNavigateAsync` wywołania zwrotnego w nieaktualnej nawigacji.
 

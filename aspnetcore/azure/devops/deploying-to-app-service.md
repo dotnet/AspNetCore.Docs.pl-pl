@@ -6,6 +6,7 @@ ms.author: casoper
 ms.custom: devx-track-csharp, mvc, seodec18
 ms.date: 10/24/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: azure/devops/deploy-to-app-service
-ms.openlocfilehash: f27c33d692512130ba0a36e9d00d46dffe90da16
-ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
+ms.openlocfilehash: 31cd1f6ac8e1243b25569ae34ea252185bbf6467
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/12/2020
-ms.locfileid: "88130239"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88625482"
 ---
 # <a name="deploy-an-app-to-app-service"></a>Wdróż aplikację w App Service
 
@@ -163,7 +164,7 @@ Aplikacja została już wdrożona z poziomu powłoki poleceń. Użyjmy zintegrow
     ![Zrzut ekranu przedstawiający kliknięcie prawym przyciskiem myszy, Publikuj](./media/deploying-to-app-service/publish.png)
 5. Program Visual Studio może utworzyć nowy zasób App Service, ale ta aktualizacja zostanie opublikowana w ramach istniejącego wdrożenia. W oknie dialogowym **Wybieranie elementu docelowego publikowania** wybierz pozycję **App Service** z listy po lewej stronie, a następnie wybierz pozycję **Wybierz istniejące**. Kliknij przycisk **Opublikuj**.
 6. W oknie dialogowym **App Service** upewnij się, że konto Microsoft lub organizacyjne używane do tworzenia subskrypcji platformy Azure jest wyświetlane w prawym górnym rogu. Jeśli nie, kliknij listę rozwijaną i Dodaj ją.
-7. Upewnij się, że wybrano poprawną **subskrypcję** platformy Azure. W obszarze **Widok**wybierz pozycję **Grupa zasobów**. Rozwiń grupę zasobów **AzureTutorial** , a następnie wybierz istniejącą aplikację sieci Web. Kliknij przycisk **OK**.
+7. Upewnij się, że wybrano poprawną **subskrypcję** platformy Azure. W obszarze **Widok**wybierz pozycję **Grupa zasobów**. Rozwiń grupę zasobów **AzureTutorial** , a następnie wybierz istniejącą aplikację sieci Web. Kliknij pozycję **OK**.
 
     ![Zrzut ekranu przedstawiający okno dialogowe publikowania App Service](./media/deploying-to-app-service/publish-dialog.png)
 

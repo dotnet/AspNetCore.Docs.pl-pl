@@ -1,5 +1,5 @@
 ---
-title: Wymuś zasady zabezpieczeń zawartości dla ASP.NET CoreBlazor
+title: Wymuś zasady zabezpieczeń zawartości dla ASP.NET Core Blazor
 author: guardrex
 description: Dowiedz się, jak używać zasad zabezpieczeń zawartości (CSP) z Blazor aplikacjami ASP.NET Core, aby chronić przed atakami na skrypty krzyżowe (XSS).
 monikerRange: '>= aspnetcore-3.1'
@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,14 +18,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/content-security-policy
-ms.openlocfilehash: bbe4bf1b0999d66471743c9efa1a9a9f121f2e05
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 09f4cb5ba11feb7d81a410dd3869f9863d104d0e
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014039"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88627848"
 ---
-# <a name="enforce-a-content-security-policy-for-aspnet-core-no-locblazor"></a>Wymuś zasady zabezpieczeń zawartości dla ASP.NET CoreBlazor
+# <a name="enforce-a-content-security-policy-for-aspnet-core-no-locblazor"></a>Wymuś zasady zabezpieczeń zawartości dla ASP.NET Core Blazor
 
 Autorzy [Javier Calvarro Nelson](https://github.com/javiercn) i [Luke Latham](https://github.com/guardrex)
 
@@ -163,7 +164,7 @@ Testowanie i aktualizowanie zasad aplikacji w każdej wersji.
   * Jak zmodyfikować zasady, aby umożliwić zablokowanie elementu.
 * Zasady są całkowicie skuteczne tylko wtedy, gdy przeglądarka klienta obsługuje wszystkie dyrektywy dołączone. Aby zapoznać się z bieżącą matrycą obsługi, zobacz temat [: Content-Security-Policy](https://caniuse.com/#search=Content-Security-Policy).
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [POWIADOMIENIA MDN Web docs: Content-Security-Policy](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy)
 * [Poziom zabezpieczeń zawartości 2](https://www.w3.org/TR/CSP2/)

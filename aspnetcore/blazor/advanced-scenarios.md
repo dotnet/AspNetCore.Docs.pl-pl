@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/18/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,20 +18,20 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/advanced-scenarios
-ms.openlocfilehash: 4bd73acd821a8791d7f6cc93545edc2e39a6f2c7
-ms.sourcegitcommit: 68d03d1aee8906b53bda66f8f1e0747efc3007e6
+ms.openlocfilehash: ce1786f644d1c0a70487f44ec3051de8189c5381
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/10/2020
-ms.locfileid: "88051787"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88625326"
 ---
 # <a name="aspnet-core-no-locblazor-advanced-scenarios"></a>BlazorZaawansowane scenariusze ASP.NET Core
 
 Autorzy [Luke Latham](https://github.com/guardrex) i [Daniel Roth](https://github.com/danroth27)
 
-## <a name="no-locblazor-server-circuit-handler"></a>Blazor ServerProcedura obsługi obwodu
+## <a name="no-locblazor-server-circuit-handler"></a>Blazor Server Procedura obsługi obwodu
 
-Blazor Serverumożliwia kodowi Definiowanie *procedury obsługi obwodu*, która umożliwia uruchamianie kodu na zmiany stanu obwodu użytkownika. Procedura obsługi obwodu jest implementowana przez wyprowadzanie z `CircuitHandler` i rejestrowanie klasy w kontenerze usługi aplikacji. Poniższy przykład obsługi obwodu śledzi otwarte SignalR połączenia:
+Blazor Server umożliwia kodowi Definiowanie *procedury obsługi obwodu*, która umożliwia uruchamianie kodu na zmiany stanu obwodu użytkownika. Procedura obsługi obwodu jest implementowana przez wyprowadzanie z `CircuitHandler` i rejestrowanie klasy w kontenerze usługi aplikacji. Poniższy przykład obsługi obwodu śledzi otwarte SignalR połączenia:
 
 ```csharp
 using System.Collections.Generic;
@@ -78,7 +79,7 @@ Gdy obwód kończy się, ponieważ użytkownik odłączył się i struktura czy�
 
 ## <a name="manual-rendertreebuilder-logic"></a>Ręczna logika RenderTreeBuilder
 
-<xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder>zapewnia metody manipulowania składnikami i elementami, w tym ręczne Kompilowanie składników w kodzie C#.
+<xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> zapewnia metody manipulowania składnikami i elementami, w tym ręczne Kompilowanie składników w kodzie C#.
 
 > [!NOTE]
 > Korzystanie z programu <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> do tworzenia składników jest zaawansowanym scenariuszem. Nieprawidłowo sformułowany składnik (na przykład niezamknięty tag znacznika) może spowodować niezdefiniowane zachowanie.
@@ -99,7 +100,7 @@ Rozważmy następujący `PetDetails` składnik, który można ręcznie utworzyć
 
 W poniższym przykładzie pętla w `CreateComponent` metodzie generuje trzy `PetDetails` składniki. W <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> metodach z numerem sekwencyjnym numery sekwencji są numerami wierszy kodu źródłowego. BlazorAlgorytm różnic polega na numerach sekwencji odpowiadających odrębnym wierszom kodu, a nie odrębnym wywoływaniu wywołań. Podczas tworzenia składnika przy użyciu <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> metod umieszczaj argumenty dla numerów sekwencji. **Użycie obliczenia lub licznika do wygenerowania numeru sekwencji może prowadzić do niskiej wydajności.** Aby uzyskać więcej informacji, zobacz sekcję [numery sekwencji powiązane z numerami wierszy kodu i kolejnością niewykonania](#sequence-numbers-relate-to-code-line-numbers-and-not-execution-order) .
 
-`BuiltContent`składnika
+`BuiltContent` składnika
 
 ```razor
 @page "/BuiltContent"
@@ -137,7 +138,7 @@ W poniższym przykładzie pętla w `CreateComponent` metodzie generuje trzy `Pet
 
 ### <a name="sequence-numbers-relate-to-code-line-numbers-and-not-execution-order"></a>Numery sekwencji odnoszą się do numerów wierszy kodu, a nie kolejności wykonywania
 
-RazorPliki składników ( `.razor` ) są zawsze kompilowane. Kompilacja jest potencjalną możliwością przekroczenia interpretacji kodu, ponieważ krok kompilacji może służyć do iniekcji informacji, które zwiększają wydajność aplikacji w czasie wykonywania.
+Razor Pliki składników ( `.razor` ) są zawsze kompilowane. Kompilacja jest potencjalną możliwością przekroczenia interpretacji kodu, ponieważ krok kompilacji może służyć do iniekcji informacji, które zwiększają wydajność aplikacji w czasie wykonywania.
 
 Najważniejszym przykładem tych ulepszeń są *numery sekwencji*. Numery sekwencji wskazują na środowisko uruchomieniowe, które pochodzą z różnych i uporządkowanych wierszy kodu. Środowisko uruchomieniowe używa tych informacji do generowania wydajnych różnic drzewa w czasie liniowym, które są znacznie szybsze niż zwykle jest to możliwe dla algorytmu różnicowego drzewa ogólnego.
 
@@ -202,7 +203,7 @@ Teraz pierwsze dane wyjściowe to:
 | 0        | Węzeł tekstu | Pierwsze  |
 | 1        | Węzeł tekstu | Second |
 
-Ten wynik jest identyczny z poprzednim przypadkiem, dlatego nie istnieją żadne negatywne problemy. `someFlag`znajduje się `false` na drugim renderingu, a dane wyjściowe:
+Ten wynik jest identyczny z poprzednim przypadkiem, dlatego nie istnieją żadne negatywne problemy. `someFlag` znajduje się `false` na drugim renderingu, a dane wyjściowe:
 
 | Sequence | Typ      | Dane   |
 | :------: | --------- | ------ |
@@ -223,7 +224,7 @@ Jest to prosty przykład. W bardziej realistycznych przypadkach ze złożonymi i
 * Struktura nie może automatycznie tworzyć własnych numerów sekwencji w czasie wykonywania, ponieważ niezbędne informacje nie istnieją, chyba że są przechwytywane w czasie kompilacji.
 * Nie zapisuj długich bloków logiki wykonywanej ręcznie <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> . Preferuj `.razor` pliki i Zezwalaj kompilatorowi na rozpatruje numery sekwencji. Jeśli nie możesz uniknąć ręcznej <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> logiki, Podziel długie bloki kodu na mniejsze fragmenty opakowane <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder.OpenRegion%2A> / <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder.CloseRegion%2A> . Każdy region ma własne oddzielne miejsce numerów sekwencyjnych, więc można uruchomić ponownie od zera (lub dowolnego innego numeru) w każdym regionie.
 * Jeśli numery sekwencji są stałee, algorytm diff wymaga tylko zwiększenia wartości sekwencji. Początkowa wartość i przerwy są nieistotne. Jedną z wiarygodnych opcji jest użycie numeru wiersza kodu jako numeru sekwencyjnego lub rozpoczęcie od zera i zwiększenie według wartości lub setek (lub dowolnego preferowanego interwału). 
-* Blazorużywa numerów sekwencji, podczas gdy inne struktury interfejsu użytkownika rozróżniania drzewa nie są używane. Różnica jest znacznie szybsza, gdy są używane numery sekwencyjne i Blazor ma zalety krok kompilacji, który zajmuje się automatycznie numerami sekwencyjnymi dla deweloperów tworzących `.razor` pliki.
+* Blazor używa numerów sekwencji, podczas gdy inne struktury interfejsu użytkownika rozróżniania drzewa nie są używane. Różnica jest znacznie szybsza, gdy są używane numery sekwencyjne i Blazor ma zalety krok kompilacji, który zajmuje się automatycznie numerami sekwencyjnymi dla deweloperów tworzących `.razor` pliki.
 
 ## <a name="perform-large-data-transfers-in-no-locblazor-server-apps"></a>Wykonywanie dużych transferów danych w Blazor Server aplikacjach
 

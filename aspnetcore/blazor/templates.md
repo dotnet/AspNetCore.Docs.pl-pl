@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/04/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/templates
-ms.openlocfilehash: 8f5792bc5cde358105f396112ed1b17b7695f248
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 0069a6d25c1a8edcfaa454623a95702aae58ca22
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88013544"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88625898"
 ---
 # <a name="aspnet-core-no-locblazor-templates"></a>BlazorSzablony ASP.NET Core
 
@@ -42,7 +43,7 @@ dotnet new blazorwasm --help
 dotnet new blazorserver --help
 ```
 
-## <a name="no-locblazor-project-structure"></a>BlazorStruktura projektu
+## <a name="no-locblazor-project-structure"></a>Blazor Struktura projektu
 
 Następujące pliki i foldery tworzą Blazor aplikację wygenerowaną na podstawie Blazor szablonu projektu:
 
@@ -53,14 +54,14 @@ Następujące pliki i foldery tworzą Blazor aplikację wygenerowaną na podstaw
     * `App`Składnik jest głównym składnikiem aplikacji. `App`Składnik jest określony jako `app` element Dom ( `<app>...</app>` ) do kolekcji głównych składników ( `builder.RootComponents.Add<App>("app")` ).
     * [Usługi](xref:blazor/fundamentals/dependency-injection) są dodawane i konfigurowane (na przykład `builder.Services.AddSingleton<IMyDependency, MyDependency>()` ).
 
-* `Startup.cs`( Blazor Server ): Zawiera logikę uruchamiania aplikacji. `Startup`Klasa definiuje dwie metody:
+* `Startup.cs` ( Blazor Server ): Zawiera logikę uruchamiania aplikacji. `Startup`Klasa definiuje dwie metody:
 
   * `ConfigureServices`: Służy do konfigurowania usług [iniekcji zależności](xref:fundamentals/dependency-injection) aplikacji. W obszarze Blazor Server aplikacje usługi są dodawane przez wywołanie <xref:Microsoft.Extensions.DependencyInjection.ComponentServiceCollectionExtensions.AddServerSideBlazor%2A> i `WeatherForecastService` dodawane do kontenera usługi do użycia przez przykładowy `FetchData` składnik.
   * `Configure`: Konfiguruje potok obsługi żądania aplikacji:
-    * <xref:Microsoft.AspNetCore.Builder.ComponentEndpointRouteBuilderExtensions.MapBlazorHub%2A>jest wywoływana w celu skonfigurowania punktu końcowego dla połączenia w czasie rzeczywistym z przeglądarką. Połączenie jest tworzone przy użyciu [SignalR](xref:signalr/introduction) , który jest strukturą do dodawania funkcji sieci Web w czasie rzeczywistym do aplikacji.
-    * [`MapFallbackToPage("/_Host")`](xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage*)jest wywoływana w celu skonfigurowania strony głównej aplikacji ( `Pages/_Host.cshtml` ) i włączenia nawigacji.
+    * <xref:Microsoft.AspNetCore.Builder.ComponentEndpointRouteBuilderExtensions.MapBlazorHub%2A> jest wywoływana w celu skonfigurowania punktu końcowego dla połączenia w czasie rzeczywistym z przeglądarką. Połączenie jest tworzone przy użyciu [SignalR](xref:signalr/introduction) , który jest strukturą do dodawania funkcji sieci Web w czasie rzeczywistym do aplikacji.
+    * [`MapFallbackToPage("/_Host")`](xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage*) jest wywoływana w celu skonfigurowania strony głównej aplikacji ( `Pages/_Host.cshtml` ) i włączenia nawigacji.
 
-* `wwwroot/index.html`( Blazor WebAssembly ): Strona główna aplikacji zaimplementowana jako strona HTML:
+* `wwwroot/index.html` ( Blazor WebAssembly ): Strona główna aplikacji zaimplementowana jako strona HTML:
   * Po wstępnym zażądaniu dowolnej strony aplikacji jest ona renderowana i zwracana w odpowiedzi.
   * Strona określa, gdzie `App` jest renderowany składnik główny. Składnik jest renderowany w lokalizacji `app` elementu Dom ( `<app>...</app>` ).
   * `_framework/blazor.webassembly.js`Plik JavaScript jest ładowany, co:
@@ -69,25 +70,25 @@ Następujące pliki i foldery tworzą Blazor aplikację wygenerowaną na podstaw
 
 * `App.razor`: Główny składnik aplikacji, który konfiguruje Routing po stronie klienta za pomocą <xref:Microsoft.AspNetCore.Components.Routing.Router> składnika. <xref:Microsoft.AspNetCore.Components.Routing.Router>Składnik przechwytuje nawigację przeglądarki i renderuje stronę pasującą do żądanego adresu.
 
-* `Pages`folder: zawiera składniki/strony z obsługą routingu ( `.razor` ), które tworzą Blazor aplikację i Razor stronę główną Blazor Server aplikacji. Trasy dla każdej strony są określone za pomocą [`@page`](xref:mvc/views/razor#page) dyrektywy. Szablon zawiera następujące elementy:
-  * `_Host.cshtml`( Blazor Server ): Strona główna aplikacji zaimplementowana jako Razor Stronic
+* `Pages` folder: zawiera składniki/strony z obsługą routingu ( `.razor` ), które tworzą Blazor aplikację i Razor stronę główną Blazor Server aplikacji. Trasy dla każdej strony są określone za pomocą [`@page`](xref:mvc/views/razor#page) dyrektywy. Szablon zawiera następujące elementy:
+  * `_Host.cshtml` ( Blazor Server ): Strona główna aplikacji zaimplementowana jako Razor Stronic
     * Po wstępnym zażądaniu dowolnej strony aplikacji jest ona renderowana i zwracana w odpowiedzi.
     * `_framework/blazor.server.js`Plik JavaScript jest ładowany, który konfiguruje połączenie w czasie rzeczywistym SignalR między przeglądarką a serwerem.
     * Strona hosta określa, gdzie `App` jest renderowany składnik główny ( `App.razor` ).
-  * `Counter`( `Pages/Counter.razor` ): Implementuje stronę licznika.
-  * `Error`( `Error.razor` Blazor Server tylko aplikacja): renderowane, gdy wystąpił nieobsługiwany wyjątek w aplikacji.
-  * `FetchData`( `Pages/FetchData.razor` ): Implementuje stronę pobieranie danych.
-  * `Index`( `Pages/Index.razor` ): Implementuje stronę główną.
+  * `Counter` ( `Pages/Counter.razor` ): Implementuje stronę licznika.
+  * `Error` ( `Error.razor` Blazor Server tylko aplikacja): renderowane, gdy wystąpił nieobsługiwany wyjątek w aplikacji.
+  * `FetchData` ( `Pages/FetchData.razor` ): Implementuje stronę pobieranie danych.
+  * `Index` ( `Pages/Index.razor` ): Implementuje stronę główną.
   
 * `Properties/launchSettings.json`: Zawiera [konfigurację środowiska deweloperskiego](xref:fundamentals/environments#development-and-launchsettingsjson).
 
-* `Shared`folder: zawiera inne składniki interfejsu użytkownika ( `.razor` ) używane przez aplikację:
-  * `MainLayout`( `MainLayout.razor` ): [Składnik układu](xref:blazor/layouts)aplikacji.
-  * `NavMenu`( `NavMenu.razor` ): Implementuje nawigację po pasku bocznym. Zawiera [ `NavLink` składnik](xref:blazor/fundamentals/routing#navlink-component) ( <xref:Microsoft.AspNetCore.Components.Routing.NavLink> ), który renderuje linki nawigacji do innych Razor składników. <xref:Microsoft.AspNetCore.Components.Routing.NavLink>Składnik automatycznie wskazuje wybrany stan podczas ładowania składnika, co pomaga użytkownikowi zrozumieć, który składnik jest aktualnie wyświetlany.
+* `Shared` folder: zawiera inne składniki interfejsu użytkownika ( `.razor` ) używane przez aplikację:
+  * `MainLayout` ( `MainLayout.razor` ): [Składnik układu](xref:blazor/layouts)aplikacji.
+  * `NavMenu` ( `NavMenu.razor` ): Implementuje nawigację po pasku bocznym. Zawiera [ `NavLink` składnik](xref:blazor/fundamentals/routing#navlink-component) ( <xref:Microsoft.AspNetCore.Components.Routing.NavLink> ), który renderuje linki nawigacji do innych Razor składników. <xref:Microsoft.AspNetCore.Components.Routing.NavLink>Składnik automatycznie wskazuje wybrany stan podczas ładowania składnika, co pomaga użytkownikowi zrozumieć, który składnik jest aktualnie wyświetlany.
 
 * `_Imports.razor`: Zawiera wspólne Razor dyrektywy do uwzględnienia w składnikach aplikacji ( `.razor` ), takich jak [`@using`](xref:mvc/views/razor#using) dyrektywy dotyczące przestrzeni nazw.
 
-* `Data`folder ( Blazor Server ): zawiera `WeatherForecast` klasę i implementację `WeatherForecastService` , która zapewnia przykładowe dane pogodowe do `FetchData` składnika aplikacji.
+* `Data` folder ( Blazor Server ): zawiera `WeatherForecast` klasę i implementację `WeatherForecastService` , która zapewnia przykładowe dane pogodowe do `FetchData` składnika aplikacji.
 
 * `wwwroot`: Folder [główny sieci Web](xref:fundamentals/index#web-root) dla aplikacji zawierającej publiczne zasoby statyczne aplikacji.
 

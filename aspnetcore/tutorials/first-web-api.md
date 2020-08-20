@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/13/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-web-api
-ms.openlocfilehash: 15e5c838e6dae824a189f170b28730a63f8c3ea7
-ms.sourcegitcommit: 4df445e7d49a99f81625430f728c28e5d6bf2107
+ms.openlocfilehash: ce0dfdf1ce88b55790d33918a2d20bc19a09b288
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/15/2020
-ms.locfileid: "88253645"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88626899"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>Samouczek: Tworzenie internetowego interfejsu API za pomocą ASP.NET Core
 
@@ -351,7 +352,7 @@ Ten samouczek używa programu do testowania interfejsu API sieci Web.
 
 * Utwórz nowe żądanie.
 * Ustaw metodę HTTP na `POST` .
-* Ustaw identyfikator URI na `https://localhost:<port>/api/TodoItem` . Na przykład `https://localhost:5001/api/TodoItem`.
+* Ustaw identyfikator URI na `https://localhost:<port>/api/TodoItems` . Na przykład `https://localhost:5001/api/TodoItems`.
 * Wybierz kartę **Treść**.
 * Wybierz przycisk radiowy **RAW** .
 * Ustaw typ na **JSON (Application/JSON)**.
@@ -386,7 +387,7 @@ Te metody implementują dwa punkty końcowe GET:
 * `GET /api/TodoItems`
 * `GET /api/TodoItems/{id}`
 
-Przetestuj aplikację, wywołując dwa punkty końcowe z przeglądarki lub wpisu. Przykład:
+Przetestuj aplikację, wywołując dwa punkty końcowe z przeglądarki lub wpisu. Na przykład:
 
 * `https://localhost:5001/api/TodoItems`
 * `https://localhost:5001/api/TodoItems/1`
@@ -743,7 +744,7 @@ Te metody implementują dwa punkty końcowe GET:
 
 Zatrzymaj aplikację, jeśli jest nadal uruchomiona. Następnie uruchom ją ponownie, aby uwzględnić najnowsze zmiany.
 
-Przetestuj aplikację, wywołując dwa punkty końcowe z przeglądarki. Przykład:
+Przetestuj aplikację, wywołując dwa punkty końcowe z przeglądarki. Na przykład:
 
 * `https://localhost:<port>/api/todo`
 * `https://localhost:<port>/api/todo/1`
@@ -967,7 +968,7 @@ Usuwanie elementu do wykonania jest realizowane przez ustawienie `type` w WYWOŁ
 
 [!INCLUDE[](~/includes/IdentityServer4.md)]
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 [Wyświetl lub Pobierz przykładowy kod dla tego samouczka](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/first-web-api/samples). Zobacz artykuł [jak pobrać](xref:index#how-to-download-a-sample).
 

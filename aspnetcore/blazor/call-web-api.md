@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/24/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-web-api
-ms.openlocfilehash: f8c105624506d13f3ea8e963ceb49aeaf6d22a66
-ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
+ms.openlocfilehash: cffd9e33636f98d50300de851d696ae753c10a0d
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/18/2020
-ms.locfileid: "88504570"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88625339"
 ---
 # <a name="call-a-web-api-from-aspnet-core-no-locblazor"></a>Wywoływanie internetowego interfejsu API z ASP.NET Core Blazor
 
@@ -320,7 +321,7 @@ Aby uzyskać więcej informacji na temat mechanizmu CORS z bezpiecznymi żądani
 
 Aby uzyskać ogólne informacje na temat mechanizmu CORS z aplikacjami ASP.NET Core, zobacz <xref:security/cors> .
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:blazor/security/webassembly/additional-scenarios>: Obejmuje pokrycie przy użyciu <xref:System.Net.Http.HttpClient> , aby zapewnić bezpieczne żądania interfejsu API sieci Web.
 * <xref:fundamentals/http-requests>

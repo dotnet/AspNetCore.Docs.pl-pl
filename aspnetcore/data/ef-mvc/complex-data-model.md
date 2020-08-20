@@ -7,6 +7,7 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/complex-data-model
-ms.openlocfilehash: 7774716905ade1b2b32a513a09899b563d48679b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 07f5e910236f78105c039e462ab51d6e62b09439
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88012998"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88626938"
 ---
 # <a name="tutorial-create-a-complex-data-model---aspnet-mvc-with-ef-core"></a>Samouczek: Tworzenie złożonego modelu danych — ASP.NET MVC z EF Core
 
@@ -66,7 +67,7 @@ W *modelach/student. cs*Dodaj `using` instrukcję do `System.ComponentModel.Data
 
 Ten `DataType` atrybut służy do określania typu danych, który jest bardziej szczegółowy niż typ wewnętrzny bazy danych. W tym przypadku chcemy tylko śledzić datę, a nie datę i godzinę. `DataType`Wyliczenie zawiera wiele typów danych, takich jak data, godzina, numer telefonu, waluta, EmailAddress i inne. Ten `DataType` atrybut może również umożliwić aplikacji automatyczne udostępnianie funkcji specyficznych dla typu. Na przykład `mailto:` można utworzyć łącze dla i dla programu `DataType.EmailAddress` `DataType.Date` w przeglądarkach, które obsługują HTML5, można podać selektor daty. Ten `DataType` atrybut emituje kod HTML 5 `data-` (wymawiane kreski danych), które przeglądarki HTML 5 mogą zrozumieć. `DataType`Atrybuty nie zapewniają żadnych weryfikacji.
 
-`DataType.Date`nie określa formatu wyświetlanej daty. Domyślnie pole dane jest wyświetlane zgodnie z domyślnymi formatami opartymi na CultureInfo serwera.
+`DataType.Date` nie określa formatu wyświetlanej daty. Domyślnie pole dane jest wyświetlane zgodnie z domyślnymi formatami opartymi na CultureInfo serwera.
 
 Ten `DisplayFormat` atrybut służy do jawnego określenia formatu daty:
 
@@ -180,7 +181,7 @@ Ten `Display` atrybut określa, że podpis pól tekstowych powinien mieć warto�
 
 ### <a name="the-fullname-calculated-property"></a>Właściwość obliczeniowa FullName
 
-`FullName`jest właściwością obliczaną, która zwraca wartość utworzoną przez połączenie dwóch innych właściwości. W związku z tym ma tylko metodę dostępu get i żadna `FullName` kolumna nie zostanie wygenerowana w bazie danych.
+`FullName` jest właściwością obliczaną, która zwraca wartość utworzoną przez połączenie dwóch innych właściwości. W związku z tym ma tylko metodę dostępu get i żadna `FullName` kolumna nie zostanie wygenerowana w bazie danych.
 
 ## <a name="create-instructor-entity"></a>Utwórz jednostkę instruktora
 

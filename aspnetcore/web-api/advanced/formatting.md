@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: H1Hack27Feb2017
 ms.date: 04/17/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/advanced/formatting
-ms.openlocfilehash: 8aa94bd1f33d1dd8ce8e7f50468ed60b4ccb2515
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 618bb60ea382437b2787adb814f319b1f0cea4ca
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019940"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88626535"
 ---
 # <a name="format-response-data-in-aspnet-core-web-api"></a>Formatowanie danych odpowiedzi w ASP.NET Core Web API
 
@@ -37,7 +38,7 @@ Niektóre typy wyników akcji są specyficzne dla określonego formatu, takiego 
 
 Akcja nie jest wymagana do zwrócenia żadnego określonego typu. ASP.NET Core obsługuje dowolną wartość zwracaną przez obiekt.  Wyniki akcji, które zwracają obiekty, które nie są <xref:Microsoft.AspNetCore.Mvc.IActionResult> typami, są serializowane przy użyciu odpowiedniej <xref:Microsoft.AspNetCore.Mvc.Formatters.IOutputFormatter> implementacji. Aby uzyskać więcej informacji, zobacz <xref:web-api/action-return-types>.
 
-Wbudowana metoda pomocnika <xref:Microsoft.AspNetCore.Mvc.ControllerBase.Ok*> zwraca dane sformatowane w formacie JSON:[!code-csharp[](./formatting/sample/Controllers/AuthorsController.cs?name=snippet_get)]
+Wbudowana metoda pomocnika <xref:Microsoft.AspNetCore.Mvc.ControllerBase.Ok*> zwraca dane sformatowane w formacie JSON: [!code-csharp[](./formatting/sample/Controllers/AuthorsController.cs?name=snippet_get)]
 
 Pobieranie próbek zwraca listę autorów. Za pomocą narzędzi deweloperskich przeglądarki F12 lub [po](https://www.getpostman.com/tools) powyższym kodzie:
 
@@ -145,7 +146,7 @@ services.AddControllers().AddJsonOptions(options =>
 });
 ```
 
-Opcje serializacji danych wyjściowych dla poszczególnych akcji można skonfigurować przy użyciu polecenia `JsonResult` . Przykład:
+Opcje serializacji danych wyjściowych dla poszczególnych akcji można skonfigurować przy użyciu polecenia `JsonResult` . Na przykład:
 
 ```csharp
 public IActionResult Get()
@@ -184,7 +185,7 @@ services.AddControllers().AddNewtonsoftJson(options =>
 });
 ```
 
-Opcje serializacji danych wyjściowych dla poszczególnych akcji można skonfigurować przy użyciu polecenia `JsonResult` . Przykład:
+Opcje serializacji danych wyjściowych dla poszczególnych akcji można skonfigurować przy użyciu polecenia `JsonResult` . Na przykład:
 
 ```csharp
 public IActionResult Get()
@@ -240,7 +241,7 @@ Niektóre specjalne przypadki są implementowane przy użyciu wbudowanych elemen
 
 Bez `StringOutputFormatter` , wbudowany typ programu FORMATUJĄCEGO JSON formatuje `string` typy zwracane. Jeśli wbudowany program formatujący JSON jest usuwany, a element formatujący XML jest dostępny, format XML programu formatującego jest `string` typem zwracanym. W przeciwnym razie zwracane `string` typy zwracają `406 Not Acceptable` .
 
-Bez `HttpNoContentOutputFormatter` obiektów o wartości null są formatowane przy użyciu skonfigurowanego programu formatującego. Przykład:
+Bez `HttpNoContentOutputFormatter` obiektów o wartości null są formatowane przy użyciu skonfigurowanego programu formatującego. Na przykład:
 
 * Program formatujący JSON zwraca odpowiedź z treścią `null` .
 * Program formatujący XML zwraca pusty element XML z `xsi:nil="true"` zestawem atrybutów.
@@ -252,7 +253,7 @@ Klienci mogą zażądać określonego formatu w ramach adresu URL, na przykład:
 * W ciągu zapytania lub części ścieżki.
 * Przy użyciu rozszerzenia pliku specyficznego dla formatu, takiego jak. XML lub. JSON.
 
-Mapowanie ze ścieżki żądania należy określić w marszrucie używanej przez interfejs API. Przykład:
+Mapowanie ze ścieżki żądania należy określić w marszrucie używanej przez interfejs API. Na przykład:
 
 [!code-csharp[](./formatting/sample/Controllers/ProductsController.cs?name=snippet)]
 

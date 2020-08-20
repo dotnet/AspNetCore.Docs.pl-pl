@@ -5,6 +5,7 @@ description: Więcej informacji na temat skryptów między lokacjami (XSS) i tec
 ms.author: riande
 ms.date: 10/02/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/cross-site-scripting
-ms.openlocfilehash: 24fab313c3af30cfd4143ba29a33ba25bfcdf9a9
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: ec8b321be08447ca634a1e28799f790f723f17d1
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021812"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88625625"
 ---
 # <a name="prevent-cross-site-scripting-xss-in-aspnet-core"></a>Zapobiegaj skryptom między lokacjami (XSS) w ASP.NET Core
 
@@ -42,7 +43,7 @@ Na poziomie podstawowym ataki polegają na zalewaniu aplikacji do wstawienia `<s
 
 5. Przed umieszczeniem niezaufanych danych w ciągu zapytania adresu URL upewnij się, że adres URL został zakodowany.
 
-## <a name="html-encoding-using-no-locrazor"></a>Kodowanie HTML przy użyciuRazor
+## <a name="html-encoding-using-no-locrazor"></a>Kodowanie HTML przy użyciu Razor
 
 RazorAparat używany w MVC automatycznie koduje wszystkie dane wyjściowe pochodzące ze zmiennych, chyba że naprawdę nie zadziała to w ten sposób. Używa reguł kodowania atrybutu języka HTML za każdym razem, gdy używasz *@* dyrektywy. Ponieważ kodowanie atrybutu HTML jest nadzbiorem kodowania HTML, oznacza to, że nie trzeba niczego zachodzić, niezależnie od tego, czy należy użyć kodowania HTML czy kodowania atrybutów HTML. Musisz się upewnić, że w kontekście HTML użyto tylko @, a nie przy próbie wstawienia niezaufanych danych wejściowych bezpośrednio do języka JavaScript. Pomocnicy tagów również kodują dane wejściowe, które są używane w parametrach tagów.
 
@@ -65,9 +66,9 @@ Ten widok wyprowadza zawartość zmiennej *untrustedInput* . Ta zmienna zawiera 
 >[!WARNING]
 > ASP.NET Core MVC udostępnia `HtmlString` klasę, która nie jest automatycznie zakodowana w danych wyjściowych. Tego elementu nie należy używać w połączeniu z niezaufanymi danymi wejściowymi, ponieważ spowoduje to ujawnienie luki w zabezpieczeniach XSS.
 
-## <a name="javascript-encoding-using-no-locrazor"></a>Kodowanie JavaScript przy użyciuRazor
+## <a name="javascript-encoding-using-no-locrazor"></a>Kodowanie JavaScript przy użyciu Razor
 
-Czasami może się okazać, że chcesz wstawić wartość do języka JavaScript, aby przetworzyć ją w widoku. Istnieją dwa sposoby, aby to zrobić. Najbezpieczniejszym sposobem wstawiania wartości jest umieszczenie wartości w atrybucie danych tagu i pobranie go w języku JavaScript. Przykład:
+Czasami może się okazać, że chcesz wstawić wartość do języka JavaScript, aby przetworzyć ją w widoku. Istnieją dwa sposoby, aby to zrobić. Najbezpieczniejszym sposobem wstawiania wartości jest umieszczenie wartości w atrybucie danych tagu i pobranie go w języku JavaScript. Na przykład:
 
 ```cshtml
 @{

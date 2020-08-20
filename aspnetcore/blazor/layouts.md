@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/23/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/layouts
-ms.openlocfilehash: 68fc4c9bd516948eeb2c46c67fdb5bde7cfeefca
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: f41b41194f597505d775c95f1e65960c2f827e3b
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014155"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628017"
 ---
 # <a name="aspnet-core-no-locblazor-layouts"></a>ASP.NET Core Blazor układy
 
@@ -73,7 +74,7 @@ Określanie układu bezpośrednio w składniku zastępuje domyślny zestaw *ukł
 
 ## <a name="centralized-layout-selection"></a>Scentralizowany wybór układu
 
-Każdy folder aplikacji może opcjonalnie zawierać plik szablonu o nazwie `_Imports.razor` . Kompilator zawiera dyrektywy określone w pliku Imports we wszystkich Razor szablonach w tym samym folderze i rekursywnie we wszystkich jego podfolderach. W związku z tym `_Imports.razor` plik zawierający `@layout MyCoolLayout` wszystkie składniki w folderze jest używany `MyCoolLayout` . Nie trzeba wielokrotnie dodawać `@layout MyCoolLayout` do wszystkich `.razor` plików w folderze i podfolderach. `@using`dyrektywy są również stosowane do składników w ten sam sposób.
+Każdy folder aplikacji może opcjonalnie zawierać plik szablonu o nazwie `_Imports.razor` . Kompilator zawiera dyrektywy określone w pliku Imports we wszystkich Razor szablonach w tym samym folderze i rekursywnie we wszystkich jego podfolderach. W związku z tym `_Imports.razor` plik zawierający `@layout MyCoolLayout` wszystkie składniki w folderze jest używany `MyCoolLayout` . Nie trzeba wielokrotnie dodawać `@layout MyCoolLayout` do wszystkich `.razor` plików w folderze i podfolderach. `@using` dyrektywy są również stosowane do składników w ten sam sposób.
 
 Następujące `_Imports.razor` Importy plików:
 
@@ -98,11 +99,11 @@ Poniższy przykład pokazuje, jak używać układów zagnieżdżonych. `Episodes
 
 [!code-razor[](layouts/sample_snapshot/3.x/EpisodesComponent.razor?highlight=1)]
 
-`MasterListLayout.razor`Plik zawiera `MasterListLayout` . Układ odwołuje się do innego układu, `MasterLayout` w którym jest renderowany. `EpisodesComponent`jest renderowany w miejscu, gdzie `@Body` pojawia się:
+`MasterListLayout.razor`Plik zawiera `MasterListLayout` . Układ odwołuje się do innego układu, `MasterLayout` w którym jest renderowany. `EpisodesComponent` jest renderowany w miejscu, gdzie `@Body` pojawia się:
 
 [!code-razor[](layouts/sample_snapshot/3.x/MasterListLayout.razor?highlight=1,9)]
 
-Na koniec `MasterLayout` w programie `MasterLayout.razor` znajdują się elementy układu najwyższego poziomu, takie jak nagłówek, menu główne i stopka. `MasterListLayout`z `EpisodesComponent` renderowanym miejscem, `@Body` gdzie pojawia się:
+Na koniec `MasterLayout` w programie `MasterLayout.razor` znajdują się elementy układu najwyższego poziomu, takie jak nagłówek, menu główne i stopka. `MasterListLayout` z `EpisodesComponent` renderowanym miejscem, `@Body` gdzie pojawia się:
 
 [!code-razor[](layouts/sample_snapshot/3.x/MasterLayout.razor?highlight=6)]
 

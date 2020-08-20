@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/14/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/server
-ms.openlocfilehash: ce767e591bd87ccb293f4698308e0bdbd6817d1f
-ms.sourcegitcommit: 503b348e9046fcd969de85898394a1ea8274ec38
+ms.openlocfilehash: 72a22fc2dd50bbcda230bb1824bb4fe176bf2189
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/14/2020
-ms.locfileid: "88227621"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628056"
 ---
 # <a name="host-and-deploy-no-locblazor-server"></a>Hostowanie i wdrażanie Blazor Server
 

@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/03/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: e66a470bf5bd23950bdb0ccf61c6743916ed9349
-ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
+ms.openlocfilehash: 9e3933d8800c00eb135c041bb1c65fbf01d4ef83
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/18/2020
-ms.locfileid: "88504557"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628043"
 ---
 # <a name="host-and-deploy-aspnet-core-no-locblazor-webassembly"></a>Hostowanie i wdrażanie ASP.NET Core Blazor WebAssembly
 

@@ -7,6 +7,7 @@ ms.author: jeliknes
 ms.custom: mvc
 ms.date: 08/14/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/blazor-server-ef-core
-ms.openlocfilehash: 2ce2467ccda04b584a6bc04d1c6d9c66bcd659f2
-ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
+ms.openlocfilehash: db817827cc0132c15b82f4cda74e35a7d7807c48
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/18/2020
-ms.locfileid: "88504258"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88625417"
 ---
 # <a name="aspnet-core-no-locblazor-server-with-entity-framework-core-efcore"></a>ASP.NET Core Blazor Server z Entity Framework Core (EFCore)
 
@@ -235,6 +236,6 @@ W powyższym przykładzie:
 
 :::moniker-end
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 > [Dokumentacja EF Core](/ef/)

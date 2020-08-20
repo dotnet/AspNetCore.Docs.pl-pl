@@ -5,6 +5,7 @@ description: Dowiedz się, jak używać typowych układów, udostępniać dyrekt
 ms.author: riande
 ms.date: 07/30/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/layout
-ms.openlocfilehash: 4d5032f02db28341d7781dd57d58d776636fd16d
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 308e567e0480f83972ab7a55c7b957af83a164fd
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020447"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630695"
 ---
 # <a name="layout-in-aspnet-core"></a>Układ w ASP.NET Core
 
@@ -34,7 +35,7 @@ Strony i widoki często udostępniają wizualizacje i programistyczne elementy. 
 
 W tym dokumencie omówiono układy dla dwóch różnych metod ASP.NET Core MVC: Razor Pages i controllers z widokami. W tym temacie różnice są minimalne:
 
-* RazorStrony znajdują się w folderze *strony* .
+* Razor Strony znajdują się w folderze *strony* .
 * Kontrolery z widokami używają folderu *widoki* dla widoków.
 
 ## <a name="what-is-a-layout"></a>Co to jest układ
@@ -47,7 +48,7 @@ Typowe struktury HTML, takie jak skrypty i arkusze stylów, również są częst
 
 Zgodnie z Konwencją domyślny układ aplikacji ASP.NET Core ma nazwę *_Layout. cshtml*. Pliki układów dla nowych projektów ASP.NET Core utworzonych przy użyciu szablonów są następujące:
 
-* RazorStrony: *Pages/Shared/_Layout. cshtml*
+* Razor Strony: *Pages/Shared/_Layout. cshtml*
 
   ![Folder stron w Eksplorator rozwiązań](layout/_static/rp-web-project-views.png)
 
@@ -63,7 +64,7 @@ Poniższy kod przedstawia plik układu dla szablonu utworzonego za pomocą kontr
 
 ## <a name="specifying-a-layout"></a>Określanie układu
 
-Razorwidoki mają `Layout` Właściwość. Poszczególne widoki określają układ, ustawiając tę właściwość:
+Razor widoki mają `Layout` Właściwość. Poszczególne widoki określają układ, ustawiając tę właściwość:
 
 [!code-cshtml[](../../common/samples/WebApplication1/Views/_ViewStart.cshtml?highlight=2)]
 
@@ -95,7 +96,7 @@ Przykładowa `@section` Definicja w Razor widoku stron:
 
 W powyższym kodzie *skrypty/main.js* są dodawane do `scripts` sekcji na stronie lub widoku. Inne strony lub widoki w tej samej aplikacji mogą nie wymagać tego skryptu i nie będą mogły definiować sekcji skryptów.
 
-W poniższym znaczniku jest używana [pomocnik tagów częściowej](xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper) do renderowania *_ValidationScriptsPartial. cshtml*:
+W poniższym znaczniku jest używana [pomocnik tagów częściowej](xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper) do renderowania  *_ValidationScriptsPartial. cshtml*:
 
 ```html
 @section Scripts {
@@ -135,12 +136,12 @@ Przykładowy `_ViewImports.cshtml` plik:
 
 [!code-cshtml[](../../common/samples/WebApplication1/Views/_ViewImports.cshtml)]
 
-Plik *_ViewImports. cshtml* dla aplikacji ASP.NET Core MVC zazwyczaj znajduje się w folderze *stron* (lub *widoków*). Plik *_ViewImports. cshtml* można umieścić w dowolnym folderze. w takim przypadku zostanie on zastosowany tylko do stron lub widoków w tym folderze i jego podfolderach. `_ViewImports`pliki są przetwarzane, rozpoczynając od poziomu głównego, a następnie dla każdego folderu, który zaczyna się do lokalizacji strony lub widoku. `_ViewImports`ustawienia określone na poziomie głównym mogą zostać zastąpione na poziomie folderu.
+Plik *_ViewImports. cshtml* dla aplikacji ASP.NET Core MVC zazwyczaj znajduje się w folderze *stron* (lub *widoków*). Plik *_ViewImports. cshtml* można umieścić w dowolnym folderze. w takim przypadku zostanie on zastosowany tylko do stron lub widoków w tym folderze i jego podfolderach. `_ViewImports` pliki są przetwarzane, rozpoczynając od poziomu głównego, a następnie dla każdego folderu, który zaczyna się do lokalizacji strony lub widoku. `_ViewImports` ustawienia określone na poziomie głównym mogą zostać zastąpione na poziomie folderu.
 
 Załóżmy na przykład, że:
 
 * Plik poziomu głównego *_ViewImports. cshtml* zawiera `@model MyModel1` i `@addTagHelper *, MyTagHelper1` .
-* Podfolder *_ViewImports. cshtml* zawiera `@model MyModel2` i `@addTagHelper *, MyTagHelper2` .
+* Podfolder  *_ViewImports. cshtml* zawiera `@model MyModel2` i `@addTagHelper *, MyTagHelper2` .
 
 Strony i widoki w podfolderze będą miały dostęp do pomocników tagów i `MyModel2` modelu.
 

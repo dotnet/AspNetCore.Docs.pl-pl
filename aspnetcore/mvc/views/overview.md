@@ -5,6 +5,7 @@ description: Dowiedz się, w jaki sposób widoki obsługują prezentację danych
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/overview
-ms.openlocfilehash: 8630df0ad8ea556c6edf0ab251b3c86493f751e2
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 6afd69414f2dc0158f724c6e6f7b3a3e51c1e92c
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020876"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630682"
 ---
 # <a name="views-in-aspnet-core-mvc"></a>Widoki w ASP.NET Core MVC
 
@@ -28,7 +29,7 @@ Przez [Steve Smith](https://ardalis.com/)
 
 W tym dokumencie objaśniono widoki używane w aplikacjach ASP.NET Core MVC. Aby uzyskać informacje na temat Razor stron, zobacz [wprowadzenie do Razor stron](xref:razor-pages/index).
 
-W wzorcu Model-View-Controller (MVC) *Widok* obsługuje prezentację danych aplikacji i interakcję użytkownika. Widok to szablon HTML z osadzonym [ Razor znacznikiem](xref:mvc/views/razor). RazorZnaczniki to kod, który współdziała ze znacznikiem HTML, aby utworzyć stronę sieci Web, która jest wysyłana do klienta.
+W wzorcu Model-View-Controller (MVC) *Widok* obsługuje prezentację danych aplikacji i interakcję użytkownika. Widok to szablon HTML z osadzonym [ Razor znacznikiem](xref:mvc/views/razor). Razor Znaczniki to kod, który współdziała ze znacznikiem HTML, aby utworzyć stronę sieci Web, która jest wysyłana do klienta.
 
 W ASP.NET Core MVC, widoki są plikami *. cshtml* , które używają [języka programowania C#](/dotnet/csharp/) w Razor znacznikach. Zazwyczaj pliki widoku są pogrupowane w foldery o nazwie dla każdej z [kontrolerów](xref:mvc/controllers/actions)aplikacji. Foldery są przechowywane w folderze *widoki* w katalogu głównym aplikacji:
 
@@ -214,13 +215,13 @@ W przypadku widoków o jednoznacznie określonym typie widoki mają dostęp do j
 
 Do tej kolekcji można odwoływać się za `ViewData` pomocą `ViewBag` właściwości lub na kontrolerach i w widokach. `ViewData`Właściwość jest słownikiem obiektów o nieprawidłowym typie. `ViewBag`Właściwość to otoka `ViewData` , która udostępnia właściwości dynamiczne dla kolekcji źródłowej `ViewData` . Uwaga: w przypadku wyszukiwania kluczy nie jest rozróżniana wielkość liter w obu `ViewData` i `ViewBag` .
 
-`ViewData`i `ViewBag` są dynamicznie rozwiązywane w czasie wykonywania. Ponieważ nie oferują sprawdzania typu w czasie kompilacji, obie są zwykle bardziej podatne na błędy niż przy użyciu ViewModel. Z tego powodu niektórzy deweloperzy wolą do minimalnej lub nigdy nie używać `ViewData` i `ViewBag` .
+`ViewData` i `ViewBag` są dynamicznie rozwiązywane w czasie wykonywania. Ponieważ nie oferują sprawdzania typu w czasie kompilacji, obie są zwykle bardziej podatne na błędy niż przy użyciu ViewModel. Z tego powodu niektórzy deweloperzy wolą do minimalnej lub nigdy nie używać `ViewData` i `ViewBag` .
 
 <a name="VD"></a>
 
 **ViewData**
 
-`ViewData`jest obiektem [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary) dostępnym za pomocą `string` kluczy. Dane ciągu mogą być przechowywane i używane bezpośrednio bez konieczności rzutowania, ale należy rzutować inne `ViewData` wartości obiektów na określone typy podczas ich wyodrębniania. Można użyć `ViewData` do przekazywania danych z kontrolerów do widoków i w widokach, w tym [częściowych widoków](xref:mvc/views/partial) i [układów](xref:mvc/views/layout).
+`ViewData` jest obiektem [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary) dostępnym za pomocą `string` kluczy. Dane ciągu mogą być przechowywane i używane bezpośrednio bez konieczności rzutowania, ale należy rzutować inne `ViewData` wartości obiektów na określone typy podczas ich wyodrębniania. Można użyć `ViewData` do przekazywania danych z kontrolerów do widoków i w widokach, w tym [częściowych widoków](xref:mvc/views/partial) i [układów](xref:mvc/views/layout).
 
 Poniżej znajduje się przykład, który ustawia wartości dla powitania i adresu przy użyciu `ViewData` w akcji:
 
@@ -298,7 +299,7 @@ W układzie tytuł jest odczytywany ze słownika ViewData:
 
 `ViewBag`*nie jest dostępny w Razor Strony.*
 
-`ViewBag`jest obiektem [DynamicViewData](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.internal.dynamicviewdata) , który zapewnia dynamiczny dostęp do obiektów przechowywanych w `ViewData` . `ViewBag`może być wygodniejszy do pracy z, ponieważ nie wymaga rzutowania. Poniższy przykład pokazuje, jak używać tego `ViewBag` samego wyniku, jak w przypadku użycia `ViewData` powyżej:
+`ViewBag` jest obiektem [DynamicViewData](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.internal.dynamicviewdata) , który zapewnia dynamiczny dostęp do obiektów przechowywanych w `ViewData` . `ViewBag` może być wygodniejszy do pracy z, ponieważ nie wymaga rzutowania. Poniższy przykład pokazuje, jak używać tego `ViewBag` samego wyniku, jak w przypadku użycia `ViewData` powyżej:
 
 ```csharp
 public IActionResult SomeAction()
@@ -369,7 +370,7 @@ Użycie jednocześnie `ViewData` i `ViewBag` w tym samym czasie działa tak, jak
 
 **Podsumowanie różnic między ViewData i ViewBag**
 
- `ViewBag`nie jest dostępny na Razor stronach.
+ `ViewBag` nie jest dostępny na Razor stronach.
 
 * `ViewData`
   * Pochodzi z [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary), więc ma właściwości słownika, które mogą być przydatne, takie jak `ContainsKey` , `Add` , `Remove` , i `Clear` .

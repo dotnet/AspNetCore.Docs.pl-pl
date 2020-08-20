@@ -5,6 +5,7 @@ description: Dowiedz się, jak skrócić hasła przy użyciu interfejsów API oc
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/consumer-apis/password-hashing
-ms.openlocfilehash: 643d468763c6a935fc618a22920cb79119258087
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 19263400397a9dfe2d9e6044109d6d063023f6f4
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018393"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629863"
 ---
 # <a name="hash-passwords-in-aspnet-core"></a>Hasła skrótu w ASP.NET Core
 
@@ -36,4 +37,4 @@ Pakiet oferuje obecnie metodę `KeyDerivation.Pbkdf2` , która umożliwia miesza
 
 [!code-csharp[](password-hashing/samples/passwordhasher.cs)]
 
-Zobacz [kod źródłowy](https://github.com/dotnet/AspNetCore/blob/master/src/Identity/Extensions.Core/src/PasswordHasher.cs) dla typu ASP.NET Core Identity `PasswordHasher` dla rzeczywistego przypadku użycia.
+Zobacz [kod źródłowy](https://github.com/dotnet/AspNetCore/blob/master/src/Identity/Extensions.Core/src/PasswordHasher.cs) typu dla ASP.NET Core Identity `PasswordHasher` rzeczywistego przypadku użycia.

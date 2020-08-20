@@ -1,5 +1,5 @@
 ---
-title: Rejestrowanie i Diagnostyka w ASP.NET CoreSignalR
+title: Rejestrowanie i Diagnostyka w ASP.NET Core SignalR
 author: anurse
 description: Dowiedz się, jak zbierać diagnostykę z SignalR aplikacji ASP.NET Core.
 monikerRange: '>= aspnetcore-2.1'
@@ -7,6 +7,7 @@ ms.author: anurse
 ms.custom: devx-track-csharp, signalr
 ms.date: 06/12/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,14 +18,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/diagnostics
-ms.openlocfilehash: 922b2ca0aa7933e1010db7ca319631766ffbf753
-ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
+ms.openlocfilehash: 649398a3868117b2e7f3358aa25544c99cc625b3
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/12/2020
-ms.locfileid: "88130538"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631345"
 ---
-# <a name="logging-and-diagnostics-in-aspnet-core-no-locsignalr"></a>Rejestrowanie i Diagnostyka w ASP.NET CoreSignalR
+# <a name="logging-and-diagnostics-in-aspnet-core-no-locsignalr"></a>Rejestrowanie i Diagnostyka w ASP.NET Core SignalR
 
 Według [Andrew Stanton-pielęgniarki](https://twitter.com/anurse)
 
@@ -37,7 +38,7 @@ Ten artykuł zawiera wskazówki dotyczące zbierania danych diagnostycznych z Si
 
 Ponieważ SignalR jest częścią ASP.NET Core, używa systemu rejestrowania ASP.NET Core. W konfiguracji domyślnej SignalR dzienniki są bardzo mało informacji, ale można je skonfigurować. Szczegółowe informacje na temat konfigurowania rejestrowania ASP.NET Core można znaleźć w dokumentacji dotyczącej [rejestrowania ASP.NET Core](xref:fundamentals/logging/index#configuration) .
 
-SignalRużywa dwóch kategorii rejestratora:
+SignalR używa dwóch kategorii rejestratora:
 
 * `Microsoft.AspNetCore.SignalR`: W przypadku dzienników związanych z protokołami centrów, aktywowanie centrów, wywoływanie metod i innych działań związanych z centrum.
 * `Microsoft.AspNetCore.Http.Connections`: W przypadku dzienników związanych z transportami, takich jak obiekty WebSockets, długie sondowanie, zdarzenia wysłane przez serwer i infrastruktura niskiego poziomu SignalR .
@@ -65,7 +66,7 @@ Sposób dostępu do dzienników po stronie serwera zależy od środowiska, w kt�
 
 ### <a name="as-a-console-app-outside-iis"></a>Jako Aplikacja konsolowa poza usługami IIS
 
-Jeśli używasz programu w aplikacji konsolowej, [Rejestrator konsoli](xref:fundamentals/logging/index#console) powinien być domyślnie włączony. SignalRDzienniki będą wyświetlane w konsoli programu.
+Jeśli używasz programu w aplikacji konsolowej, [Rejestrator konsoli](xref:fundamentals/logging/index#console) powinien być domyślnie włączony. SignalR Dzienniki będą wyświetlane w konsoli programu.
 
 ### <a name="within-iis-express-from-visual-studio"></a>W IIS Express z programu Visual Studio
 
@@ -131,7 +132,7 @@ Możesz również skonfigurować dzienniki, aby przejść do okna **danych wyjś
 
 ### <a name="other-logging-providers"></a>Inni dostawcy rejestrowania
 
-SignalRobsługuje innych dostawców rejestrowania, takich jak Serilog, SEQ, NLog lub dowolny inny system rejestrowania, który integruje się z programem `Microsoft.Extensions.Logging` . Jeśli system rejestrowania zapewnia, możesz `ILoggerProvider` zarejestrować go za pomocą `AddProvider` :
+SignalR obsługuje innych dostawców rejestrowania, takich jak Serilog, SEQ, NLog lub dowolny inny system rejestrowania, który integruje się z programem `Microsoft.Extensions.Logging` . Jeśli system rejestrowania zapewnia, możesz `ILoggerProvider` zarejestrować go za pomocą `AddProvider` :
 
 [!code-csharp[](diagnostics/net-client-custom-log.cs?highlight=6)]
 
@@ -220,9 +221,9 @@ Pliki diagnostyczne można dołączać do problemów z usługą GitHub, zmieniaj
 
 Metryki to reprezentacja danych miar w przedziale czasu. Na przykład żądania na sekundę. Dane metryk umożliwiają obserwację stanu aplikacji na wysokim poziomie. Metryki programu .NET gRPC są emitowane przy użyciu <xref:System.Diagnostics.Tracing.EventCounter> .
 
-### <a name="no-locsignalr-server-metrics"></a>SignalRmetryki serwera
+### <a name="no-locsignalr-server-metrics"></a>SignalR metryki serwera
 
-SignalRmetryki serwera są raportowane w <xref:Microsoft.AspNetCore.Http.Connections> źródle zdarzeń.
+SignalR metryki serwera są raportowane w <xref:Microsoft.AspNetCore.Http.Connections> źródle zdarzeń.
 
 | Nazwa                    | Opis                 |
 |-------------------------|-----------------------------|

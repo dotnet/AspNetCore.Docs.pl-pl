@@ -1,11 +1,12 @@
 ---
-title: RazorStrony z Entity Framework Core w ASP.NET Core — samouczek 1 z 8
+title: Razor Strony z Entity Framework Core w ASP.NET Core — samouczek 1 z 8
 author: rick-anderson
 description: Pokazuje, jak utworzyć Razor aplikację stron przy użyciu Entity Framework Core
 ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 09/26/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/intro
-ms.openlocfilehash: cd6624d107fb19da92a7e58a747cc85e876a6ba4
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 00d5c348b7ab06f9044e6705026e43feb7807ae3
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018640"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630310"
 ---
-# <a name="no-locrazor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>RazorStrony z Entity Framework Core w ASP.NET Core — samouczek 1 z 8
+# <a name="no-locrazor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>Razor Strony z Entity Framework Core w ASP.NET Core — samouczek 1 z 8
 
 Autorzy [Dykstra](https://github.com/tdykstra) i [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -37,7 +38,7 @@ Jest to pierwsza z serii samouczków, które pokazują, jak używać rdzenia Ent
 
 * Jeśli Razor dopiero zaczynasz korzystać z stron, przejdź do serii samouczek wprowadzenie [do Razor stron](xref:tutorials/razor-pages/razor-pages-start) .
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[VS prereqs](~/includes/net-core-prereqs-vs-3.0.md)]
 
@@ -71,7 +72,7 @@ Styl interfejsu użytkownika tej witryny jest oparty na wbudowanych szablonach p
 
 Skorzystaj z linku w górnej części strony, aby uzyskać kod źródłowy dla ukończonego projektu. Folder *cu30* ma kod dla ASP.NET Core wersji 3,0 samouczka. Pliki odzwierciedlające stan kodu dla samouczków 1-7 można znaleźć w folderze *cu30snapshots* .
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Aby uruchomić aplikację po pobraniu ukończonego projektu:
 
@@ -89,7 +90,7 @@ Aby uruchomić aplikację po pobraniu ukończonego projektu:
 Aby uruchomić aplikację po pobraniu ukończonego projektu:
 
 * Usuń *ContosoUniversity. csproj*i Zmień nazwę *ContosoUniversitySQLite. csproj* na *ContosoUniversity. csproj*.
-* Usuń *Startup.cs*i zmień nazwę *StartupSQLite.cs* na *Startup.cs*.
+* W *program.cs*, komentarz `#define Startup` `StartupSQLite` jest używany.
 * Usuń *appSettings.js*i zmień nazwę *appSettingsSQLite.jsna* na *appSettings.jsna*.
 * Usuń folder *migracji* , a następnie zmień nazwę *MigrationsSQL* na *migracji*.
 * Wykonaj wyszukiwanie globalne dla `#if SQLiteVersion` i Usuń `#if SQLiteVersion` oraz skojarzoną `#endif` instrukcję.
@@ -113,7 +114,7 @@ Aby uruchomić aplikację po pobraniu ukończonego projektu:
 
 ## <a name="create-the-web-app-project"></a>Tworzenie projektu aplikacji sieci Web
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Z menu **plik** programu Visual Studio wybierz pozycję **Nowy** > **projekt**.
 * Wybierz **ASP.NET Core aplikacji sieci Web**.
@@ -214,9 +215,9 @@ Skompiluj projekt, aby sprawdzić, czy nie występują błędy kompilatora.
 W tej sekcji użyjesz narzędzia do tworzenia szkieletów ASP.NET Core do wygenerowania:
 
 * Klasa *kontekstu* EF Core. Kontekst jest klasą główną, która koordynuje Entity Framework funkcji dla danego modelu danych. Pochodzi od `Microsoft.EntityFrameworkCore.DbContext` klasy.
-* Razorstrony obsługujące operacje tworzenia, odczytu, aktualizacji i usuwania (CRUD) dla `Student` jednostki.
+* Razor strony obsługujące operacje tworzenia, odczytu, aktualizacji i usuwania (CRUD) dla `Student` jednostki.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Utwórz folder *uczniów* w folderze *strony* .
 * W **Eksplorator rozwiązań**kliknij prawym przyciskiem myszy folder *strony/uczniowie* i wybierz polecenie **Dodaj** > **nowy element szkieletowy**.
@@ -292,7 +293,7 @@ Proces tworzenia szkieletu:
 
 ## <a name="database-connection-string"></a>Parametry połączenia z bazą danych
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Parametry połączenia określają [SQL Server LocalDB](/sql/database-engine/configure-windows/sql-server-2016-express-localdb). 
 
@@ -333,7 +334,7 @@ ASP.NET Core jest skompilowana z [iniekcją zależności](xref:fundamentals/depe
 
 Narzędzie do tworzenia szkieletów automatycznie zarejestrowało klasę kontekstu z kontenerem iniekcji zależności.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * W programie `ConfigureServices` wyróżnione wiersze zostały dodane przez program do tworzenia szkieletu:
 
@@ -355,12 +356,12 @@ Zaktualizuj *program.cs* , aby utworzyć bazę danych, jeśli nie istnieje:
 
 [!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Program.cs?highlight=1-2,14-18,21-38)]
 
-Jeśli istnieje baza danych dla kontekstu, Metoda [EnsureCreated](/dotnet/api/microsoft.entityframeworkcore.infrastructure.databasefacade.ensurecreated#Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_EnsureCreated) nie przyjmuje żadnej akcji. Jeśli baza danych nie istnieje, tworzy bazę danych i schemat. `EnsureCreated`umożliwia korzystanie z następującego przepływu pracy w celu obsługi zmian modelu danych:
+Jeśli istnieje baza danych dla kontekstu, Metoda [EnsureCreated](/dotnet/api/microsoft.entityframeworkcore.infrastructure.databasefacade.ensurecreated#Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_EnsureCreated) nie przyjmuje żadnej akcji. Jeśli baza danych nie istnieje, tworzy bazę danych i schemat. `EnsureCreated` umożliwia korzystanie z następującego przepływu pracy w celu obsługi zmian modelu danych:
 
 * Usuń bazę danych. Wszystkie istniejące dane zostaną utracone.
 * Zmień model danych. Na przykład Dodaj `EmailAddress` pole.
 * Uruchom aplikację.
-* `EnsureCreated`tworzy bazę danych z nowym schematem.
+* `EnsureCreated` tworzy bazę danych z nowym schematem.
 
 Ten przepływ pracy działa dobrze na etapie opracowywania, gdy schemat jest gwałtownie zmieniany, o ile nie trzeba zachować danych. Sytuacja jest inna, gdy dane wprowadzone do bazy danych muszą zostać zachowane. W takim przypadku należy użyć migracji.
 
@@ -389,7 +390,7 @@ Utwórz *dane/Dbinitializeer. cs* przy użyciu następującego kodu:
   DbInitializer.Initialize(context);
   ```
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Zatrzymaj aplikację, jeśli jest uruchomiona, a następnie uruchom następujące polecenie w **konsoli Menedżera pakietów** (PMC):
 
@@ -409,7 +410,7 @@ Drop-Database
 
 ## <a name="view-the-database"></a>Wyświetlanie bazy danych
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Otwórz **Eksplorator obiektów SQL Server** (SSOX) z menu **Widok** w programie Visual Studio.
 * W SSOX wybierz pozycję **(LocalDB) \MSSQLLocalDB > bazy danych > SchoolContext-{GUID}**. Nazwa bazy danych jest generowana na podstawie podanej wcześniej nazwy kontekstu oraz łącznika i identyfikatora GUID.
@@ -445,7 +446,7 @@ public async Task OnGetAsync()
   * Utwórz obiekt [zadania](/dotnet/csharp/programming-guide/concepts/async/async-return-types#BKMK_TaskReturnType) , który jest zwracany.
 * `Task<T>`Typ zwracany reprezentuje bieżącą liczbę zadań.
 * `await`Słowo kluczowe powoduje, że kompilator dzieli metodę na dwie części. Pierwsza część jest zakończona operacją uruchomioną asynchronicznie. Druga część jest umieszczana w metodzie wywołania zwrotnego, która jest wywoływana po zakończeniu operacji.
-* `ToListAsync`jest asynchroniczną wersją `ToList` metody rozszerzenia.
+* `ToListAsync` jest asynchroniczną wersją `ToList` metody rozszerzenia.
 
 Niektóre kwestie, o których należy pamiętać podczas pisania asynchronicznego kodu, który używa EF Core:
 
@@ -472,7 +473,7 @@ Przykładowa aplikacja jest witryną internetową fikcyjnej firmy Contoso Univer
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 [!INCLUDE [](~/includes/net-core-prereqs-windows.md)]
 
@@ -502,7 +503,7 @@ Styl interfejsu użytkownika tej witryny jest zbliżony do zawartości wygenerow
 
 ## <a name="create-the-contosouniversity-no-locrazor-pages-web-app"></a>Tworzenie Razor aplikacji sieci Web ContosoUniversity Pages
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Z menu **plik** programu Visual Studio wybierz pozycję **Nowy** > **projekt**.
 * Utwórz nową aplikację sieci Web ASP.NET Core. Nazwij projekt **ContosoUniversity**. Ważne jest, aby nazwa projektu *ContosoUniversity* , tak aby przestrzenie nazw były zgodne, gdy kod jest kopiowany/wklejany.
@@ -557,9 +558,9 @@ Utwórz folder *models* . W folderze *modele* Utwórz plik klasy o nazwie *stude
 
 `ID`Właściwość zostanie przestała kolumną klucza podstawowego tabeli bazy danych (DB), która odnosi się do tej klasy. Domyślnie EF Core interpretuje właściwość o nazwie `ID` lub `classnameID` jako klucz podstawowy. W `classnameID` , `classname` jest nazwą klasy. Alternatywny automatycznie rozpoznany klucz podstawowy znajduje się `StudentID` w poprzednim przykładzie.
 
-`Enrollments`Właściwość jest [właściwością nawigacji](/ef/core/modeling/relationships). Właściwości nawigacji łączą się z innymi jednostkami, które są powiązane z tą jednostką. W tym przypadku `Enrollments` Właściwość a `Student entity` zawiera wszystkie `Enrollment` jednostki, które są powiązane z tym `Student` . Na przykład jeśli wiersz student w bazie danych ma dwa powiązane wiersze rejestracji, `Enrollments` Właściwość nawigacji zawiera te dwie `Enrollment` jednostki. Powiązany `Enrollment` wiersz jest wierszem zawierającym wartość klucza podstawowego studenta w `StudentID` kolumnie. Załóżmy na przykład, że student o IDENTYFIKATORze 1 ma dwa wiersze w `Enrollment` tabeli. `Enrollment`Tabela ma dwa wiersze z `StudentID` = 1. `StudentID`jest kluczem obcym w `Enrollment` tabeli, który określa student w `Student` tabeli.
+`Enrollments`Właściwość jest [właściwością nawigacji](/ef/core/modeling/relationships). Właściwości nawigacji łączą się z innymi jednostkami, które są powiązane z tą jednostką. W tym przypadku `Enrollments` Właściwość a `Student entity` zawiera wszystkie `Enrollment` jednostki, które są powiązane z tym `Student` . Na przykład jeśli wiersz student w bazie danych ma dwa powiązane wiersze rejestracji, `Enrollments` Właściwość nawigacji zawiera te dwie `Enrollment` jednostki. Powiązany `Enrollment` wiersz jest wierszem zawierającym wartość klucza podstawowego studenta w `StudentID` kolumnie. Załóżmy na przykład, że student o IDENTYFIKATORze 1 ma dwa wiersze w `Enrollment` tabeli. `Enrollment`Tabela ma dwa wiersze z `StudentID` = 1. `StudentID` jest kluczem obcym w `Enrollment` tabeli, który określa student w `Student` tabeli.
 
-Jeśli właściwość nawigacji może zawierać wiele jednostek, właściwość nawigacji musi być typem listy, na przykład `ICollection<T>` . `ICollection<T>`można określić typ, taki jak `List<T>` lub `HashSet<T>` . Gdy `ICollection<T>` jest używany, EF Core domyślnie tworzy `HashSet<T>` kolekcję. Właściwości nawigacji, które przechowują wiele jednostek, pochodzą z relacji "wiele do wielu" i "jeden do wielu".
+Jeśli właściwość nawigacji może zawierać wiele jednostek, właściwość nawigacji musi być typem listy, na przykład `ICollection<T>` . `ICollection<T>` można określić typ, taki jak `List<T>` lub `HashSet<T>` . Gdy `ICollection<T>` jest używany, EF Core domyślnie tworzy `HashSet<T>` kolekcję. Właściwości nawigacji, które przechowują wiele jednostek, pochodzą z relacji "wiele do wielu" i "jeden do wielu".
 
 ### <a name="the-enrollment-entity"></a>Jednostka rejestracji
 
@@ -598,7 +599,7 @@ W tej sekcji model ucznia jest szkieletem. Oznacza to, że narzędzie tworzenia 
 * Skompiluj projekt.
 * Utwórz folder *strony/uczniowie* .
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * W **Eksplorator rozwiązań**kliknij prawym przyciskiem myszy folder *strony/uczniowie* > **Dodaj** > **nowy element szkieletowy**.
 * W oknie dialogowym **Dodawanie szkieletu** wybierz pozycję ** Razor strony z użyciem Entity Framework (CRUD)** > **Dodaj**.
@@ -655,23 +656,23 @@ Nazwa parametrów połączenia jest przenoszona do kontekstu przez wywołanie me
 W *program.cs*Zmień metodę, `Main` Aby wykonać następujące czynności:
 
 * Pobierz wystąpienie kontekstu bazy danych z kontenera iniekcji zależności.
-* Wywołaj [EnsureCreated](/dotnet/api/microsoft.entityframeworkcore.infrastructure.databasefacade.ensurecreated#Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_EnsureCreated).
+* Wywołaj  [EnsureCreated](/dotnet/api/microsoft.entityframeworkcore.infrastructure.databasefacade.ensurecreated#Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_EnsureCreated).
 * Usuń kontekst, gdy `EnsureCreated` Metoda zostanie zakończona.
 
 Poniższy kod przedstawia zaktualizowany plik *program.cs* .
 
 [!code-csharp[](intro/samples/cu21/Program.cs?name=snippet)]
 
-`EnsureCreated`zapewnia, że baza danych dla kontekstu istnieje. Jeśli istnieje, nie zostanie podjęta żadna akcja. Jeśli nie istnieje, zostanie utworzona baza danych i jej wszystkie schematy. `EnsureCreated`Program nie korzysta z migracji w celu utworzenia bazy danych. Baza danych utworzona za pomocą programu `EnsureCreated` nie może zostać zaktualizowana później przy użyciu migracji.
+`EnsureCreated` zapewnia, że baza danych dla kontekstu istnieje. Jeśli istnieje, nie zostanie podjęta żadna akcja. Jeśli nie istnieje, zostanie utworzona baza danych i jej wszystkie schematy. `EnsureCreated` Program nie korzysta z migracji w celu utworzenia bazy danych. Baza danych utworzona za pomocą programu `EnsureCreated` nie może zostać zaktualizowana później przy użyciu migracji.
 
-`EnsureCreated`jest wywoływana podczas uruchamiania aplikacji, co pozwala na następujący przepływ pracy:
+`EnsureCreated` jest wywoływana podczas uruchamiania aplikacji, co pozwala na następujący przepływ pracy:
 
 * Usuń bazę danych.
 * Zmień schemat bazy danych (na przykład Dodaj `EmailAddress` pole).
 * Uruchom aplikację.
-* `EnsureCreated`tworzy bazę danych z `EmailAddress` kolumną.
+* `EnsureCreated` tworzy bazę danych z `EmailAddress` kolumną.
 
-`EnsureCreated`jest wygodnie wczesny podczas opracowywania, gdy schemat jest szybko zmieniany. W dalszej części tego samouczka baza danych została usunięta, a migracja jest używana.
+`EnsureCreated` jest wygodnie wczesny podczas opracowywania, gdy schemat jest szybko zmieniany. W dalszej części tego samouczka baza danych została usunięta, a migracja jest używana.
 
 ### <a name="test-the-app"></a>Testowanie aplikacji
 
@@ -693,7 +694,7 @@ Wyróżniony kod tworzy właściwość [nieogólnymi \<TEntity> ](/dotnet/api/mi
 * Zestaw jednostek zwykle odpowiada tabeli bazy danych.
 * Jednostka odnosi się do wiersza w tabeli.
 
-`DbSet<Enrollment>`i można `DbSet<Course>` je pominąć. EF Core obejmuje te niejawnie `Student` , ponieważ jednostka odwołuje się do `Enrollment` jednostki, a `Enrollment` Jednostka odwołuje się do `Course` jednostki. W tym samouczku należy zachować `DbSet<Enrollment>` i `DbSet<Course>` w `SchoolContext` .
+`DbSet<Enrollment>` i można `DbSet<Course>` je pominąć. EF Core obejmuje te niejawnie `Student` , ponieważ jednostka odwołuje się do `Enrollment` jednostki, a `Enrollment` Jednostka odwołuje się do `Course` jednostki. W tym samouczku należy zachować `DbSet<Enrollment>` i `DbSet<Course>` w `SchoolContext` .
 
 ### <a name="sql-server-express-localdb"></a>SQL Server Express LocalDB
 
@@ -707,7 +708,7 @@ W folderze *dane* Utwórz nowy plik klasy o nazwie *DbInitializer.cs* i Dodaj na
 
 [!code-csharp[](intro/samples/cu21/Data/DbInitializer.cs?name=snippet_Intro)]
 
-Uwaga: Poprzedni kod używa `Models` dla przestrzeni nazw ( `namespace ContosoUniversity.Models` ), a nie `Data` . `Models`jest spójny z kodem generowanym przez program rusztowaer. Aby uzyskać więcej informacji, zobacz [ten problem z szkieletem usługi GitHub](https://github.com/aspnet/Scaffolding/issues/822).
+Uwaga: Poprzedni kod używa `Models` dla przestrzeni nazw ( `namespace ContosoUniversity.Models` ), a nie `Data` . `Models` jest spójny z kodem generowanym przez program rusztowaer. Aby uzyskać więcej informacji, zobacz [ten problem z szkieletem usługi GitHub](https://github.com/aspnet/Scaffolding/issues/822).
 
 Kod sprawdza, czy w bazie danych istnieją uczniowie. Jeśli w bazie danych nie ma studentów, baza danych zostanie zainicjowana z danymi testowymi. Ładuje dane testowe do tablic, a nie `List<T>` kolekcji w celu zoptymalizowania wydajności.
 
@@ -717,7 +718,7 @@ W *program.cs*Zmień metodę, `Main` Aby wywołać `Initialize` :
 
 [!code-csharp[](intro/samples/cu21/Program.cs?name=snippet2&highlight=14-15)]
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Zatrzymaj aplikację, jeśli jest uruchomiona, a następnie uruchom następujące polecenie w **konsoli Menedżera pakietów** (PMC):
 
@@ -759,7 +760,7 @@ W poniższym kodzie słowo kluczowe [Async](/dotnet/csharp/language-reference/ke
 
 * Niejawny typ zwracany `Task` reprezentuje bieżącą liczbę zadań.
 * `await`Słowo kluczowe powoduje, że kompilator dzieli metodę na dwie części. Pierwsza część jest zakończona operacją uruchomioną asynchronicznie. Druga część jest umieszczana w metodzie wywołania zwrotnego, która jest wywoływana po zakończeniu operacji.
-* `ToListAsync`jest asynchroniczną wersją `ToList` metody rozszerzenia.
+* `ToListAsync` jest asynchroniczną wersją `ToList` metody rozszerzenia.
 
 Niektóre kwestie, o których należy pamiętać podczas pisania asynchronicznego kodu, który używa EF Core:
 
@@ -773,7 +774,7 @@ W następnym samouczku są badane podstawowe operacje CRUD (tworzenie, odczytywa
 
 
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Wersja tego samouczka usługi YouTube](https://www.youtube.com/watch?v=P7iTtQnkrNs)
 

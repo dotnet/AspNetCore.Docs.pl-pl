@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 06/26/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/get-started-with-swashbuckle
-ms.openlocfilehash: 5ecb6379f00c3ad505a447dfc0d3fac5f857cb09
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 84094dce306e10470ec7b7be3efe6da024470330
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022189"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628849"
 ---
 # <a name="get-started-with-swashbuckle-and-aspnet-core"></a>Wprowadzenie do Swashbuckle i ASP.NET Core
 
@@ -41,12 +42,12 @@ Pakiet Swashbuckle składa się z trzech głównych składników:
 
 Swashbuckle można dodać przy użyciu następujących metod:
 
-### <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+### <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * W oknie **konsola Menedżera pakietów** :
   * Przejdź do **wyświetlania**  >  **innych**  >  **konsoli Menedżera pakietów** systemu Windows
   * Przejdź do katalogu, w którym znajduje się plik *TodoApi. csproj*
-  * Uruchom następujące polecenie:
+  * Wykonaj następujące polecenie:
 
     ```powershell
     Install-Package Swashbuckle.AspNetCore -Version 5.5.0
@@ -75,7 +76,7 @@ Uruchom następujące polecenie w **zintegrowanym terminalu**:
 dotnet add TodoApi.csproj package Swashbuckle.AspNetCore -v 5.5.0
 ```
 
-### <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
+### <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
 
 Uruchom następujące polecenie:
 
@@ -174,7 +175,7 @@ Interfejs użytkownika struktury Swagger wyświetla informacje o wersji:
 
 Komentarze XML można włączyć przy użyciu następujących metod:
 
-#### <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+#### <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 ::: moniker range=">= aspnetcore-2.0"
 
@@ -226,7 +227,7 @@ Ręcznie Dodaj wyróżnione wiersze do pliku *csproj* :
 
 ::: moniker-end
 
-#### <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
+#### <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
 
 Ręcznie Dodaj wyróżnione wiersze do pliku *csproj* :
 

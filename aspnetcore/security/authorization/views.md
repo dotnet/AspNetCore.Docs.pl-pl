@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 11/08/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/views
-ms.openlocfilehash: a9576a48ad6badc5130d89940e4112e69eada1b2
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 775ebdffe2b0753de18bf07d9ff1193235a45b17
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021942"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629889"
 ---
 # <a name="view-based-authorization-in-aspnet-core-mvc"></a>Autoryzacja na podstawie widoku w ASP.NET Core MVC
 

@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/websockets
-ms.openlocfilehash: d0116a50051c1e9ddc9783e0102a3b32fb20cdce
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 685e694a3d974a8a51255bdbb83d33459137a3d9
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88016456"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629018"
 ---
 # <a name="websockets-support-in-aspnet-core"></a>Obsługa obiektów WebSockets w ASP.NET Core
 
@@ -36,7 +37,7 @@ W tym artykule wyjaśniono, jak rozpocząć pracę z usługą WebSockets w ASP.N
 
 [ASP.NET Core SignalR ](xref:signalr/introduction) to biblioteka, która upraszcza Dodawanie funkcji sieci Web w czasie rzeczywistym do aplikacji. W miarę możliwości używa obiektów WebSockets.
 
-W przypadku większości aplikacji zalecamy użycie SignalR nieprzetworzonych obiektów WebSockets. SignalRzapewnia rezerwę transportową dla środowisk, w których usługi WebSockets są niedostępne. Udostępnia także prosty, zdalny model aplikacji. W większości scenariuszy SignalR nie ma znaczącej niekorzystnej wydajności w porównaniu z użyciem nieprzetworzonych gniazd WebSockets.
+W przypadku większości aplikacji zalecamy użycie SignalR nieprzetworzonych obiektów WebSockets. SignalR zapewnia rezerwę transportową dla środowisk, w których usługi WebSockets są niedostępne. Udostępnia także prosty, zdalny model aplikacji. W większości scenariuszy SignalR nie ma znaczącej niekorzystnej wydajności w porównaniu z użyciem nieprzetworzonych gniazd WebSockets.
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
@@ -78,8 +79,8 @@ Dodaj oprogramowanie pośredniczące obiektów WebSockets do `Configure` metody 
 
 Można skonfigurować następujące ustawienia:
 
-* `KeepAliveInterval`-Jak często wysyłać ramki "ping" do klienta, aby upewnić się, że serwer proxy utrzymuje otwarte połączenie. Wartość domyślna to dwie minuty.
-* `ReceiveBufferSize`— Rozmiar buforu używany do odbierania danych. Użytkownicy zaawansowani mogą wymagać zmiany wydajności na podstawie rozmiaru danych. Wartość domyślna to 4 KB.
+* `KeepAliveInterval` -Jak często wysyłać ramki "ping" do klienta, aby upewnić się, że serwer proxy utrzymuje otwarte połączenie. Wartość domyślna to dwie minuty.
+* `ReceiveBufferSize` — Rozmiar buforu używany do odbierania danych. Użytkownicy zaawansowani mogą wymagać zmiany wydajności na podstawie rozmiaru danych. Wartość domyślna to 4 KB.
 
 ::: moniker-end
 
@@ -87,9 +88,9 @@ Można skonfigurować następujące ustawienia:
 
 Można skonfigurować następujące ustawienia:
 
-* `KeepAliveInterval`-Jak często wysyłać ramki "ping" do klienta, aby upewnić się, że serwer proxy utrzymuje otwarte połączenie. Wartość domyślna to dwie minuty.
-* <xref:Microsoft.AspNetCore.Builder.WebSocketOptions.ReceiveBufferSize>— Rozmiar buforu używany do odbierania danych. Użytkownicy zaawansowani mogą wymagać zmiany wydajności na podstawie rozmiaru danych. Wartość domyślna to 4 KB.
-* `AllowedOrigins`-Lista dozwolonych wartości nagłówka pierwotnego dla żądań protokołu WebSocket. Domyślnie wszystkie źródła są dozwolone. Aby uzyskać szczegółowe informacje, zobacz sekcję "ograniczenie pochodzenia protokołu WebSocket" poniżej.
+* `KeepAliveInterval` -Jak często wysyłać ramki "ping" do klienta, aby upewnić się, że serwer proxy utrzymuje otwarte połączenie. Wartość domyślna to dwie minuty.
+* <xref:Microsoft.AspNetCore.Builder.WebSocketOptions.ReceiveBufferSize> — Rozmiar buforu używany do odbierania danych. Użytkownicy zaawansowani mogą wymagać zmiany wydajności na podstawie rozmiaru danych. Wartość domyślna to 4 KB.
+* `AllowedOrigins` -Lista dozwolonych wartości nagłówka pierwotnego dla żądań protokołu WebSocket. Domyślnie wszystkie źródła są dozwolone. Aby uzyskać szczegółowe informacje, zobacz sekcję "ograniczenie pochodzenia protokołu WebSocket" poniżej.
 
 ::: moniker-end
 
@@ -194,7 +195,7 @@ Aby włączyć obsługę protokołu WebSocket w systemie Windows 8 lub nowszym:
 
 1. Przejdź do pozycji **Panel sterowania**  >  **programy**  >  **programy i funkcje**  >  **Włącz lub wyłącz funkcje systemu Windows** (po lewej stronie ekranu).
 1. Otwórz następujące węzły: **Internet Information Services**  >  **World Wide Web Services**  >  **Application Development Features**.
-1. Wybierz funkcję **protokołu WebSocket** . Wybierz przycisk **OK**.
+1. Wybierz funkcję **protokołu WebSocket** . Kliknij przycisk **OK**.
 
 ### <a name="disable-websocket-when-using-socketio-on-nodejs"></a>Wyłącz protokół WebSocket przy użyciu socket.io na Node.js
 

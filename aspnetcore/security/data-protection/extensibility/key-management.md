@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 10/24/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/extensibility/key-management
-ms.openlocfilehash: 5f55b56bd35a583e1f078a5a281788b68412e4f7
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 797df457a5584233043210e9ba2657b7fd7f3893
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021695"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631007"
 ---
 # <a name="key-management-extensibility-in-aspnet-core"></a>Rozszerzalność zarządzania kluczami w ASP.NET Core
 
@@ -73,7 +74,7 @@ Ponadto `IKey` udostępnia metodę, `CreateEncryptorInstance` która może słu�
 
 `XmlKeyManager`Typ jest implementacją betonu w miejscu `IKeyManager` . Zapewnia ona kilka przydatnych udogodnień, w tym klucze Escrow i szyfrowanie kluczy w spoczynku. Klucze w tym systemie są reprezentowane jako elementy XML (w odniesieniu do [XElement](/dotnet/csharp/programming-guide/concepts/linq/xelement-class-overview)).
 
-`XmlKeyManager`zależy od kilku innych składników w trakcie wykonywania zadań:
+`XmlKeyManager` zależy od kilku innych składników w trakcie wykonywania zadań:
 
 ::: moniker range=">= aspnetcore-2.0"
 
@@ -81,9 +82,9 @@ Ponadto `IKey` udostępnia metodę, `CreateEncryptorInstance` która może słu�
 
 * `IXmlRepository`, która kontroluje, gdzie klucze są utrwalane w magazynie.
 
-* `IXmlEncryptor`[opcjonalne], co umożliwia szyfrowanie kluczy w spoczynku.
+* `IXmlEncryptor` [opcjonalne], co umożliwia szyfrowanie kluczy w spoczynku.
 
-* `IKeyEscrowSink`[opcjonalny], który zapewnia usługi Key Escrow.
+* `IKeyEscrowSink` [opcjonalny], który zapewnia usługi Key Escrow.
 
 ::: moniker-end
 
@@ -91,9 +92,9 @@ Ponadto `IKey` udostępnia metodę, `CreateEncryptorInstance` która może słu�
 
 * `IXmlRepository`, która kontroluje, gdzie klucze są utrwalane w magazynie.
 
-* `IXmlEncryptor`[opcjonalne], co umożliwia szyfrowanie kluczy w spoczynku.
+* `IXmlEncryptor` [opcjonalne], co umożliwia szyfrowanie kluczy w spoczynku.
 
-* `IKeyEscrowSink`[opcjonalny], który zapewnia usługi Key Escrow.
+* `IKeyEscrowSink` [opcjonalny], który zapewnia usługi Key Escrow.
 
 ::: moniker-end
 
@@ -125,7 +126,7 @@ W implementacji `CreateNewKey` `IAuthenticatedEncryptorConfiguration` składnik 
 
 *Pobieranie klucza/GetAllKeys*
 
-W implementacji programu `GetAllKeys` dokumenty XML reprezentujące klucze i odwołania są odczytywane z bazowego `IXmlRepository` . Jeśli te dokumenty są zaszyfrowane, system automatycznie je odszyfruje. `XmlKeyManager`tworzy odpowiednie `IAuthenticatedEncryptorDescriptorDeserializer` wystąpienia do deserializacji dokumentów z powrotem do `IAuthenticatedEncryptorDescriptor` wystąpień, które są następnie opakowane w poszczególne `IKey` wystąpienia. Ta kolekcja `IKey` wystąpień jest zwracana do obiektu wywołującego.
+W implementacji programu `GetAllKeys` dokumenty XML reprezentujące klucze i odwołania są odczytywane z bazowego `IXmlRepository` . Jeśli te dokumenty są zaszyfrowane, system automatycznie je odszyfruje. `XmlKeyManager` tworzy odpowiednie `IAuthenticatedEncryptorDescriptorDeserializer` wystąpienia do deserializacji dokumentów z powrotem do `IAuthenticatedEncryptorDescriptor` wystąpień, które są następnie opakowane w poszczególne `IKey` wystąpienia. Ta kolekcja `IKey` wystąpień jest zwracana do obiektu wywołującego.
 
 Więcej informacji o poszczególnych elementach XML można znaleźć w [dokumencie format magazynu kluczy](xref:security/data-protection/implementation/key-storage-format#data-protection-implementation-key-storage-format).
 
@@ -240,7 +241,7 @@ Interfejs Escrow zapewnia awaryjny kreskę ucieczki, umożliwiając dostęp do n
 
 * Magazyn (identyfikator GUID keyId, element XElement)
 
-Jest to `IKeyEscrowSink` implementacja do obsługi dostarczonego elementu w bezpieczny sposób spójny z zasadami biznesowymi. Jedną z możliwych implementacji dla ujścia usługi Escrow jest zaszyfrowanie elementu XML przy użyciu znanego certyfikatu firmowy X. 509, w którym został zgłoszony klucz prywatny certyfikatu. `CertificateXmlEncryptor`ten typ może pomóc w tym. `IKeyEscrowSink`Implementacja jest również odpowiedzialna za utrwalanie podanego elementu.
+Jest to `IKeyEscrowSink` implementacja do obsługi dostarczonego elementu w bezpieczny sposób spójny z zasadami biznesowymi. Jedną z możliwych implementacji dla ujścia usługi Escrow jest zaszyfrowanie elementu XML przy użyciu znanego certyfikatu firmowy X. 509, w którym został zgłoszony klucz prywatny certyfikatu. `CertificateXmlEncryptor` ten typ może pomóc w tym. `IKeyEscrowSink`Implementacja jest również odpowiedzialna za utrwalanie podanego elementu.
 
 Domyślnie żaden mechanizm Escrow nie jest włączony, jednak Administratorzy serwera mogą [konfigurować to globalnie](xref:security/data-protection/configuration/machine-wide-policy). Można go również skonfigurować programowo za pośrednictwem `IDataProtectionBuilder.AddKeyEscrowSink` metody, jak pokazano w poniższym przykładzie. `AddKeyEscrowSink`Przeciążania metod dublowane `IServiceCollection.AddSingleton` i `IServiceCollection.AddInstance` przeciążenia, ponieważ `IKeyEscrowSink` wystąpienia są przeznaczone jako pojedyncze. Jeśli `IKeyEscrowSink` zarejestrowano wiele wystąpień, każda z nich zostanie wywołana podczas generowania klucza, dzięki czemu klucze mogą być jednocześnie przełączone do wielu mechanizmów.
 

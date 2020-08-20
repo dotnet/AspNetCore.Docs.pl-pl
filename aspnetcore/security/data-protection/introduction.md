@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/24/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/introduction
-ms.openlocfilehash: b29711e8e1ef1558731ba58ca2ff14000af19ca2
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 4f578e30a972b0d4ce5db08b2ec844e270c11406
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019359"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630084"
 ---
 # <a name="aspnet-core-data-protection"></a>Ochrona danych ASP.NET Core
 

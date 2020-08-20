@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/httpsys
-ms.openlocfilehash: 384b6559b4ee6140da5cf785ffda3978aafbb132
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 29af28f512764b9efec682b44c8de1d2ae03ee04
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88016768"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631137"
 ---
 # <a name="httpsys-web-server-implementation-in-aspnet-core"></a>HTTP.sys implementacja serwera sieci Web w programie ASP.NET Core
 
@@ -92,7 +93,7 @@ Wywołaj <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderHttpSysExtensions.UseH
 
 Dodatkowa konfiguracja HTTP.sys jest obsługiwana za poorednictwem [ustawień rejestru](https://support.microsoft.com/help/820129/http-sys-registry-settings-for-windows).
 
-**OpcjeHTTP.sys**
+** OpcjeHTTP.sys**
 
 | Właściwość | Opis | Domyślny |
 | -------- | ----------- | :-----: |
@@ -105,7 +106,7 @@ Dodatkowa konfiguracja HTTP.sys jest obsługiwana za poorednictwem [ustawień re
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxRequestBodySize> | Zobacz sekcję <a href="#maxrequestbodysize">MaxRequestBodySize</a> . | 30000000 bajtów<br>(~ 28,6 MB) |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.RequestQueueLimit> | Maksymalna liczba żądań, które można umieścić w kolejce. | 1000 |
 | `RequestQueueMode` | Wskazuje, czy serwer jest odpowiedzialny za tworzenie i Konfigurowanie kolejki żądań, czy też ma zostać dołączony do istniejącej kolejki.<br>W przypadku dołączania do istniejącej kolejki nie mają zastosowania większość istniejących opcji konfiguracji. | `RequestQueueMode.Create` |
-| `RequestQueueName` | Nazwa kolejki żądań HTTP.sys. | `null`(Kolejka anonimowa) |
+| `RequestQueueName` | Nazwa kolejki żądań HTTP.sys. | `null` (Kolejka anonimowa) |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.ThrowWriteExceptions> | Wskaż, czy zapisy treści odpowiedzi nie powiodą się, ponieważ rozłączenia klienta nie powiedzie się, jeśli wyjątki lub są normalnie kompletne. | `false`<br>(normalne zakończenie) |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.Timeouts> | Uwidoczni konfigurację HTTP.sys <xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager> , która może być również skonfigurowana w rejestrze. Postępuj zgodnie z linkami interfejsu API, aby dowiedzieć się więcej na temat każdego ustawienia, w tym wartości domyślnych:<ul><li>[TimeoutManager. DrainEntityBody](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.DrainEntityBody): czas dozwolony na opróżnianie przez interfejs API serwera HTTP treści jednostki w ramach połączenia Keep-Alive.</li><li>[TimeoutManager. EntityBody](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.EntityBody): czas dozwolony dla treści jednostki żądania.</li><li>[TimeoutManager. HeaderWait](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.HeaderWait): czas dozwolony dla interfejsu API serwera HTTP do analizowania nagłówka żądania.</li><li>[TimeoutManager. IdleConnection](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.IdleConnection): czas dozwolony dla połączenia bezczynnego.</li><li>[TimeoutManager. MinSendBytesPerSecond](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.MinSendBytesPerSecond): Minimalna szybkość wysyłania dla odpowiedzi.</li><li>[TimeoutManager. RequestQueue](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.RequestQueue): czas, przez który żądanie pozostanie w kolejce żądań przed jego usunięciem.</li></ul> |  |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.UrlPrefixes> | Określ, <xref:Microsoft.AspNetCore.Server.HttpSys.UrlPrefixCollection> Aby zarejestrować się w HTTP.sys. Najbardziej przydatne jest [UrlPrefixCollection. Add](xref:Microsoft.AspNetCore.Server.HttpSys.UrlPrefixCollection.Add*), który służy do dodawania prefiksu do kolekcji. Można je zmodyfikować w dowolnym momencie przed wyjęciem odbiornika. |  |
@@ -159,8 +160,8 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
    Domyślnie ASP.NET Core wiąże się z `http://localhost:5000` . Aby skonfigurować prefiksy i porty adresów URL, dostępne są następujące opcje:
 
    * <xref:Microsoft.AspNetCore.Hosting.HostingAbstractionsWebHostBuilderExtensions.UseUrls*>
-   * `urls`argument wiersza polecenia
-   * `ASPNETCORE_URLS`Zmienna środowiskowa
+   * `urls` argument wiersza polecenia
+   * `ASPNETCORE_URLS` Zmienna środowiskowa
    * <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.UrlPrefixes>
 
    Poniższy przykład kodu pokazuje, jak używać <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.UrlPrefixes> z lokalnym adresem IP serwera `10.0.0.4` na porcie 443:
@@ -271,7 +272,7 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
 
 W przypadku aplikacji hostowanych przez HTTP.sys, które współdziałają z żądaniami z Internetu lub sieci firmowej, może być wymagana dodatkowa konfiguracja w przypadku hostowania za serwerami proxy i modułami równoważenia obciążenia. Aby uzyskać więcej informacji, zobacz [konfigurowanie ASP.NET Core do pracy z serwerami proxy i usługami równoważenia obciążenia](xref:host-and-deploy/proxy-load-balancer).
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Włącz uwierzytelnianie systemu Windows przy użyciu HTTP.sys](xref:security/authentication/windowsauth#httpsys)
 * [Interfejs API serwera HTTP](/windows/win32/http/http-api-start-page)
@@ -345,7 +346,7 @@ Wywołaj <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderHttpSysExtensions.UseH
 
 Dodatkowa konfiguracja HTTP.sys jest obsługiwana za poorednictwem [ustawień rejestru](https://support.microsoft.com/help/820129/http-sys-registry-settings-for-windows).
 
-**OpcjeHTTP.sys**
+** OpcjeHTTP.sys**
 
 | Właściwość | Opis | Domyślny |
 | -------- | ----------- | :-----: |
@@ -410,8 +411,8 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
    Domyślnie ASP.NET Core wiąże się z `http://localhost:5000` . Aby skonfigurować prefiksy i porty adresów URL, dostępne są następujące opcje:
 
    * <xref:Microsoft.AspNetCore.Hosting.HostingAbstractionsWebHostBuilderExtensions.UseUrls*>
-   * `urls`argument wiersza polecenia
-   * `ASPNETCORE_URLS`Zmienna środowiskowa
+   * `urls` argument wiersza polecenia
+   * `ASPNETCORE_URLS` Zmienna środowiskowa
    * <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.UrlPrefixes>
 
    Poniższy przykład kodu pokazuje, jak używać <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.UrlPrefixes> z lokalnym adresem IP serwera `10.0.0.4` na porcie 443:
@@ -522,7 +523,7 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
 
 W przypadku aplikacji hostowanych przez HTTP.sys, które współdziałają z żądaniami z Internetu lub sieci firmowej, może być wymagana dodatkowa konfiguracja w przypadku hostowania za serwerami proxy i modułami równoważenia obciążenia. Aby uzyskać więcej informacji, zobacz [konfigurowanie ASP.NET Core do pracy z serwerami proxy i usługami równoważenia obciążenia](xref:host-and-deploy/proxy-load-balancer).
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Włącz uwierzytelnianie systemu Windows przy użyciu HTTP.sys](xref:security/authentication/windowsauth#httpsys)
 * [Interfejs API serwera HTTP](/windows/win32/http/http-api-start-page)
@@ -598,7 +599,7 @@ Wywołaj <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderHttpSysExtensions.UseH
 
 Dodatkowa konfiguracja HTTP.sys jest obsługiwana za poorednictwem [ustawień rejestru](https://support.microsoft.com/help/820129/http-sys-registry-settings-for-windows).
 
-**OpcjeHTTP.sys**
+** OpcjeHTTP.sys**
 
 | Właściwość | Opis | Domyślny |
 | -------- | ----------- | :-----: |
@@ -663,8 +664,8 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
    Domyślnie ASP.NET Core wiąże się z `http://localhost:5000` . Aby skonfigurować prefiksy i porty adresów URL, dostępne są następujące opcje:
 
    * <xref:Microsoft.AspNetCore.Hosting.HostingAbstractionsWebHostBuilderExtensions.UseUrls*>
-   * `urls`argument wiersza polecenia
-   * `ASPNETCORE_URLS`Zmienna środowiskowa
+   * `urls` argument wiersza polecenia
+   * `ASPNETCORE_URLS` Zmienna środowiskowa
    * <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.UrlPrefixes>
 
    Poniższy przykład kodu pokazuje, jak używać <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.UrlPrefixes> z lokalnym adresem IP serwera `10.0.0.4` na porcie 443:
@@ -775,7 +776,7 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
 
 W przypadku aplikacji hostowanych przez HTTP.sys, które współdziałają z żądaniami z Internetu lub sieci firmowej, może być wymagana dodatkowa konfiguracja w przypadku hostowania za serwerami proxy i modułami równoważenia obciążenia. Aby uzyskać więcej informacji, zobacz [konfigurowanie ASP.NET Core do pracy z serwerami proxy i usługami równoważenia obciążenia](xref:host-and-deploy/proxy-load-balancer).
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Włącz uwierzytelnianie systemu Windows przy użyciu HTTP.sys](xref:security/authentication/windowsauth#httpsys)
 * [Interfejs API serwera HTTP](/windows/win32/http/http-api-start-page)
@@ -851,7 +852,7 @@ Wywołaj <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderHttpSysExtensions.UseH
 
 Dodatkowa konfiguracja HTTP.sys jest obsługiwana za poorednictwem [ustawień rejestru](https://support.microsoft.com/help/820129/http-sys-registry-settings-for-windows).
 
-**OpcjeHTTP.sys**
+** OpcjeHTTP.sys**
 
 | Właściwość | Opis | Domyślny |
 | -------- | ----------- | :-----: |
@@ -916,8 +917,8 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
    Domyślnie ASP.NET Core wiąże się z `http://localhost:5000` . Aby skonfigurować prefiksy i porty adresów URL, dostępne są następujące opcje:
 
    * <xref:Microsoft.AspNetCore.Hosting.HostingAbstractionsWebHostBuilderExtensions.UseUrls*>
-   * `urls`argument wiersza polecenia
-   * `ASPNETCORE_URLS`Zmienna środowiskowa
+   * `urls` argument wiersza polecenia
+   * `ASPNETCORE_URLS` Zmienna środowiskowa
    * <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.UrlPrefixes>
 
    Poniższy przykład kodu pokazuje, jak używać <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.UrlPrefixes> z lokalnym adresem IP serwera `10.0.0.4` na porcie 443:
@@ -1028,7 +1029,7 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
 
 W przypadku aplikacji hostowanych przez HTTP.sys, które współdziałają z żądaniami z Internetu lub sieci firmowej, może być wymagana dodatkowa konfiguracja w przypadku hostowania za serwerami proxy i modułami równoważenia obciążenia. Aby uzyskać więcej informacji, zobacz [konfigurowanie ASP.NET Core do pracy z serwerami proxy i usługami równoważenia obciążenia](xref:host-and-deploy/proxy-load-balancer).
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Włącz uwierzytelnianie systemu Windows przy użyciu HTTP.sys](xref:security/authentication/windowsauth#httpsys)
 * [Interfejs API serwera HTTP](/windows/win32/http/http-api-start-page)

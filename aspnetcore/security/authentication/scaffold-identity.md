@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 5/1/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/scaffold-identity
-ms.openlocfilehash: 4404a5513d9dc989e50c904f3e7863de59991939
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 09535f41d15b90fa5e50eb1f22f6aecef0530f0c
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022332"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629564"
 ---
 # <a name="scaffold-no-locidentity-in-aspnet-core-projects"></a>Szkielet Identity w projektach ASP.NET Core
 
@@ -30,7 +31,7 @@ Autor: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 ::: moniker range=">= aspnetcore-3.0"
 
-ASP.NET Core zapewnia [ASP.NET Core Identity ](xref:security/authentication/identity) jako [ Razor bibliotekę klas](xref:razor-pages/ui-class). Aplikacje, które obejmują, Identity mogą zastosować szkieleter, aby selektywnie dodać kod źródłowy znajdujący się w Identity Razor bibliotece klas (RCL). Może być konieczne wygenerowanie kodu źródłowego, aby można było zmodyfikować kod i zmienić zachowanie. Na przykład możesz poinstruować szkielet, aby wygenerował kod używany w rejestracji. Wygenerowany kod ma pierwszeństwo przed tym samym kodem w Identity RCL. Aby uzyskać pełną kontrolę nad interfejsem użytkownika i nie używać RCL domyślnego, zobacz sekcję [Tworzenie pełnego Identity źródła interfejsu użytkownika](#full).
+ASP.NET Core udostępnia [ASP.NET Core Identity](xref:security/authentication/identity) jako [ Razor Biblioteka klas](xref:razor-pages/ui-class). Aplikacje, które obejmują, Identity mogą zastosować szkieleter, aby selektywnie dodać kod źródłowy znajdujący się w Identity Razor bibliotece klas (RCL). Może być konieczne wygenerowanie kodu źródłowego, aby można było zmodyfikować kod i zmienić zachowanie. Na przykład możesz poinstruować szkielet, aby wygenerował kod używany w rejestracji. Wygenerowany kod ma pierwszeństwo przed tym samym kodem w Identity RCL. Aby uzyskać pełną kontrolę nad interfejsem użytkownika i nie używać RCL domyślnego, zobacz sekcję [Tworzenie pełnego Identity źródła interfejsu użytkownika](#full).
 
 Aplikacje, które **nie** obejmują uwierzytelniania, mogą zastosować szkieleter w celu dodania Identity pakietu RCL. Dostępna jest opcja wybierania Identity kodu do wygenerowania.
 
@@ -197,7 +198,7 @@ Identityjest skonfigurowany w *obszarach/ Identity / Identity HostingStartup.cs*
 Tokeny mogą być przesyłane do składników:
 
 * Gdy tokeny uwierzytelniania są inicjowane i zapisywane w ramach uwierzytelniania cookie , można je przekazywać do składników programu.
-* Razorskładniki nie mogą być używane `HttpContext` bezpośrednio, dlatego nie ma możliwości uzyskania [tokenu fałszerstwa (XSRF)](xref:security/anti-request-forgery) w celu opublikowania w Identity punkcie końcowym wylogowywania `/Identity/Account/Logout` . Token XSRF można przesłać do składników.
+* Razor składniki nie mogą być używane `HttpContext` bezpośrednio, dlatego nie ma możliwości uzyskania [tokenu fałszerstwa (XSRF)](xref:security/anti-request-forgery) w celu opublikowania w Identity punkcie końcowym wylogowywania `/Identity/Account/Logout` . Token XSRF można przesłać do składników.
 
 Aby uzyskać więcej informacji, zobacz <xref:blazor/security/server/additional-scenarios#pass-tokens-to-a-blazor-server-app>.
 
@@ -416,7 +417,7 @@ W tych sekcjach pokazano, jak wyłączyć stronę rejestracji, ale podejście mo
 
 Aby wyłączyć rejestrację użytkownika:
 
-* Szkielet Identity . Uwzględnij konto. Register, Account. login i Account. RegisterConfirmation. Przykład:
+* Szkielet Identity . Uwzględnij konto. Register, Account. login i Account. RegisterConfirmation. Na przykład:
 
   ```dotnetcli
    dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.RegisterConfirmation"
@@ -482,7 +483,7 @@ Podobne podejście może być stosowane w scenariuszach produkcyjnych.
 
 Aby uniemożliwić publikowanie statycznych Identity zasobów w katalogu głównym sieci Web, zobacz <xref:security/authentication/identity#prevent-publish-of-static-identity-assets> .
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Zmiany w kodzie uwierzytelniania na ASP.NET Core 2,1 i nowsze](xref:migration/20_21#changes-to-authentication-code)
 
@@ -490,7 +491,7 @@ Aby uniemożliwić publikowanie statycznych Identity zasobów w katalogu główn
 
 ::: moniker range="< aspnetcore-3.0"
 
-ASP.NET Core 2,1 i nowsze udostępniają [ASP.NET Core Identity ](xref:security/authentication/identity) jako [ Razor Biblioteka klas](xref:razor-pages/ui-class). Aplikacje, które obejmują, Identity mogą zastosować szkieleter, aby selektywnie dodać kod źródłowy znajdujący się w Identity Razor bibliotece klas (RCL). Może być konieczne wygenerowanie kodu źródłowego, aby można było zmodyfikować kod i zmienić zachowanie. Na przykład możesz poinstruować szkielet, aby wygenerował kod używany w rejestracji. Wygenerowany kod ma pierwszeństwo przed tym samym kodem w Identity RCL. Aby uzyskać pełną kontrolę nad interfejsem użytkownika i nie używać domyślnego RCL, zobacz sekcję [Tworzenie źródła interfejsu użytkownika pełnej tożsamości](#full).
+ASP.NET Core 2,1 i nowszy stanowi [ASP.NET Core Identity](xref:security/authentication/identity) [ Razor bibliotekę klas](xref:razor-pages/ui-class). Aplikacje, które obejmują, Identity mogą zastosować szkieleter, aby selektywnie dodać kod źródłowy znajdujący się w Identity Razor bibliotece klas (RCL). Może być konieczne wygenerowanie kodu źródłowego, aby można było zmodyfikować kod i zmienić zachowanie. Na przykład możesz poinstruować szkielet, aby wygenerował kod używany w rejestracji. Wygenerowany kod ma pierwszeństwo przed tym samym kodem w Identity RCL. Aby uzyskać pełną kontrolę nad interfejsem użytkownika i nie używać domyślnego RCL, zobacz sekcję [Tworzenie źródła interfejsu użytkownika pełnej tożsamości](#full).
 
 Aplikacje, które **nie** obejmują uwierzytelniania, mogą zastosować szkieleter w celu dodania Identity pakietu RCL. Dostępna jest opcja wybierania Identity kodu do wygenerowania.
 
@@ -669,7 +670,7 @@ Jeśli <xref:Microsoft.AspNetCore.Identity.PasswordOptions> są skonfigurowane w
 
 Aby wyłączyć rejestrację użytkownika:
 
-* Szkielet Identity . Uwzględnij konto. Register, Account. login i Account. RegisterConfirmation. Przykład:
+* Szkielet Identity . Uwzględnij konto. Register, Account. login i Account. RegisterConfirmation. Na przykład:
 
   ```dotnetcli
    dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.RegisterConfirmation"
@@ -731,7 +732,7 @@ Poniższy kod zawiera opis dodawania użytkownika:
 
 Podobne podejście może być stosowane w scenariuszach produkcyjnych.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Zmiany w kodzie uwierzytelniania na ASP.NET Core 2,1 i nowsze](xref:migration/20_21#changes-to-authentication-code)
 

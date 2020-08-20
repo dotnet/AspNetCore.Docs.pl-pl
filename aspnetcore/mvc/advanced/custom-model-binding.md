@@ -5,6 +5,7 @@ description: Dowiedz się, jak powiązanie modelu umożliwia akcjom kontrolera b
 ms.author: riande
 ms.date: 01/06/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/advanced/custom-model-binding
-ms.openlocfilehash: 6e52d9c19a3d9c16f980021000db0bdecca5ed58
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 4bef68fffbdfaff023f71964a27ead56863e4192
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018913"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630435"
 ---
 # <a name="custom-model-binding-in-aspnet-core"></a>Niestandardowe powiązanie modelu w ASP.NET Core
 
@@ -120,7 +121,7 @@ Zamiast stosować atrybut, można zaimplementować `IModelBinderProvider` . Jest
 
 [!code-csharp[](custom-model-binding/samples/3.x/CustomModelBindingSample/Binders/AuthorEntityBinderProvider.cs?highlight=17-20)]
 
-> Uwaga: Poprzedni kod zwraca wartość `BinderTypeModelBinder` . `BinderTypeModelBinder`działa jako fabryka dla segregatorów modelu i zapewnia iniekcję zależności (DI). `AuthorEntityBinder`Program wymaga dostępu EF Core. Użyj, `BinderTypeModelBinder` Jeśli model spinacza wymaga usług z di.
+> Uwaga: Poprzedni kod zwraca wartość `BinderTypeModelBinder` . `BinderTypeModelBinder` działa jako fabryka dla segregatorów modelu i zapewnia iniekcję zależności (DI). `AuthorEntityBinder`Program wymaga dostępu EF Core. Użyj, `BinderTypeModelBinder` Jeśli model spinacza wymaga usług z di.
 
 Aby użyć niestandardowego dostawcy segregatorów modelu, Dodaj go w `ConfigureServices` :
 
@@ -242,7 +243,7 @@ Zamiast stosować atrybut, można zaimplementować `IModelBinderProvider` . Jest
 
 [!code-csharp[](custom-model-binding/samples/2.x/CustomModelBindingSample/Binders/AuthorEntityBinderProvider.cs?highlight=17-20)]
 
-> Uwaga: Poprzedni kod zwraca wartość `BinderTypeModelBinder` . `BinderTypeModelBinder`działa jako fabryka dla segregatorów modelu i zapewnia iniekcję zależności (DI). `AuthorEntityBinder`Program wymaga dostępu EF Core. Użyj, `BinderTypeModelBinder` Jeśli model spinacza wymaga usług z di.
+> Uwaga: Poprzedni kod zwraca wartość `BinderTypeModelBinder` . `BinderTypeModelBinder` działa jako fabryka dla segregatorów modelu i zapewnia iniekcję zależności (DI). `AuthorEntityBinder`Program wymaga dostępu EF Core. Użyj, `BinderTypeModelBinder` Jeśli model spinacza wymaga usług z di.
 
 Aby użyć niestandardowego dostawcy segregatorów modelu, Dodaj go w `ConfigureServices` :
 

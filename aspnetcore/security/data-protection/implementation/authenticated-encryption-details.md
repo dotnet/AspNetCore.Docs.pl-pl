@@ -5,6 +5,7 @@ description: Poznaj szczegóły implementacji uwierzytelnionego szyfrowania ASP.
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/implementation/authenticated-encryption-details
-ms.openlocfilehash: ebd784b493b7f283df2cc84a39113e3d714472a0
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: ed75ab235a95a88bbe60615526137b4c2bb719ef
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022072"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630851"
 ---
 # <a name="authenticated-encryption-details-in-aspnet-core"></a>Szczegóły uwierzytelnionego szyfrowania w ASP.NET Core
 

@@ -5,6 +5,7 @@ description: Część 7 Razor stron i Entity Framework serii samouczków.
 ms.author: riande
 ms.date: 07/22/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/update-related-data
-ms.openlocfilehash: 3807c52bb843c4d6403e8236fde50c034a8d1e2b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 603c5e7c9f095c380461f8c6e4ead783ad35abe2
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88017743"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630864"
 ---
 # <a name="part-7-no-locrazor-pages-with-ef-core-in-aspnet-core---update-related-data"></a>Część 7 Razor strony z EF Core w programie ASP.NET Core — aktualizacja powiązanych danych
 
@@ -65,7 +66,7 @@ Powyższy kod ma następujące działanie:
 
 * Pochodzi od `DepartmentNamePageModel` .
 * Używa `TryUpdateModelAsync` do zapobiegania [overposting](xref:data/ef-rp/crud#overposting)przepisywaniu.
-* Usuwa `ViewData["DepartmentID"]` . `DepartmentNameSL`z klasy podstawowej jest jednoznacznie określonym modelem i będzie używany przez Razor stronę. Modele silnie wpisane są preferowane za pośrednictwem słabo wpisanych. Aby uzyskać więcej informacji, zobacz [słabo wpisane dane (ViewData i ViewBag)](xref:mvc/views/overview#VD_VB).
+* Usuwa `ViewData["DepartmentID"]` . `DepartmentNameSL` z klasy podstawowej jest jednoznacznie określonym modelem i będzie używany przez Razor stronę. Modele silnie wpisane są preferowane za pośrednictwem słabo wpisanych. Aby uzyskać więcej informacji, zobacz [słabo wpisane dane (ViewData i ViewBag)](xref:mvc/views/overview#VD_VB).
 
 ### <a name="update-the-course-create-no-locrazor-page"></a>Aktualizowanie strony tworzenia kursu Razor
 
@@ -106,7 +107,7 @@ Poprzedni kod wprowadza następujące zmiany:
 * Zmienia podpis dla listy rozwijanej działu od **DepartmentID** do **działu**.
 * Zamienia wartość `"ViewBag.DepartmentID"` na `DepartmentNameSL` (z klasy bazowej).
 
-Ta strona zawiera ukryte pole ( `<input type="hidden">` ) dla numeru kursu. Dodanie `<label>` pomocnika tagów z `asp-for="Course.CourseID"` nie eliminuje potrzeby pola ukrytego. `<input type="hidden">`jest wymagana do uwzględnienia numeru kursu w opublikowanych danych, gdy użytkownik kliknie przycisk **Zapisz**.
+Ta strona zawiera ukryte pole ( `<input type="hidden">` ) dla numeru kursu. Dodanie `<label>` pomocnika tagów z `asp-for="Course.CourseID"` nie eliminuje potrzeby pola ukrytego. `<input type="hidden">` jest wymagana do uwzględnienia numeru kursu w opublikowanych danych, gdy użytkownik kliknie przycisk **Zapisz**.
 
 ## <a name="update-the-course-details-and-delete-pages"></a>Aktualizowanie szczegółów kursu i stron usuwania
 
@@ -158,7 +159,7 @@ Utwórz klasę bazową *stron/instruktorów/InstructorCoursesPageModel. cs* :
 
 [!code-csharp[](intro/samples/cu30/Pages/Instructors/InstructorCoursesPageModel.cs?name=snippet_All)]
 
-`InstructorCoursesPageModel`Jest klasą bazową, która będzie używana dla modeli stron Edycja i tworzenie. `PopulateAssignedCourseData`odczytuje wszystkie `Course` jednostki do wypełnienia `AssignedCourseDataList` . Dla każdego kursu kod ustawia `CourseID` , tytuł i określa, czy instruktor jest przypisany do kursu. [HashSet —](/dotnet/api/system.collections.generic.hashset-1) jest używany do wydajnego wyszukiwania.
+`InstructorCoursesPageModel`Jest klasą bazową, która będzie używana dla modeli stron Edycja i tworzenie. `PopulateAssignedCourseData` odczytuje wszystkie `Course` jednostki do wypełnienia `AssignedCourseDataList` . Dla każdego kursu kod ustawia `CourseID` , tytuł i określa, czy instruktor jest przypisany do kursu. [HashSet —](/dotnet/api/system.collections.generic.hashset-1) jest używany do wydajnego wyszukiwania.
 
 Ponieważ Razor Strona nie zawiera kolekcji jednostek kursu, spinacz modelu nie może automatycznie zaktualizować `CourseAssignments` właściwości nawigacji. Zamiast używać spinacza modelu do aktualizowania `CourseAssignments` właściwości nawigacji, należy to zrobić w nowej `UpdateInstructorCourses` metodzie. W związku z tym należy wykluczyć `CourseAssignments` Właściwość z powiązania modelu. Nie wymaga żadnych zmian w kodzie, który wywołuje, `TryUpdateModel` ponieważ używasz przeciążenia z zadeklarowanymi właściwościami i `CourseAssignments` nie znajduje się na liście dołączania.
 
@@ -231,7 +232,7 @@ Zaktualizuj *strony/instruktorów/Delete. cshtml. cs* przy użyciu następujące
 
 Poprzedni kod wprowadza następujące zmiany:
 
-* Używa ładowania eager dla `CourseAssignments` właściwości nawigacji. `CourseAssignments`musi być dołączony lub nie jest usuwany po usunięciu instruktora. Aby uniknąć konieczności ich odczytywania, skonfiguruj kaskadowe usuwanie w bazie danych.
+* Używa ładowania eager dla `CourseAssignments` właściwości nawigacji. `CourseAssignments` musi być dołączony lub nie jest usuwany po usunięciu instruktora. Aby uniknąć konieczności ich odczytywania, skonfiguruj kaskadowe usuwanie w bazie danych.
 
 * Jeśli instruktor zostanie usunięty, zostanie przypisany jako administrator jakichkolwiek działów, program usunie przypisanie instruktora z tych urzędów.
 
@@ -282,7 +283,7 @@ Powyższy kod ma następujące działanie:
 * Używa `TryUpdateModelAsync` do zapobiegania [overposting](xref:data/ef-rp/crud#overposting)przepisywaniu.
 * Zamienia wartość `ViewData["DepartmentID"]` na `DepartmentNameSL` (z klasy bazowej).
 
-`ViewData["DepartmentID"]`jest zastępowany silną typem `DepartmentNameSL` . Modele silnie wpisane są preferowane za pośrednictwem słabo wpisanych. Aby uzyskać więcej informacji, zobacz [słabo wpisane dane (ViewData i ViewBag)](xref:mvc/views/overview#VD_VB).
+`ViewData["DepartmentID"]` jest zastępowany silną typem `DepartmentNameSL` . Modele silnie wpisane są preferowane za pośrednictwem słabo wpisanych. Aby uzyskać więcej informacji, zobacz [słabo wpisane dane (ViewData i ViewBag)](xref:mvc/views/overview#VD_VB).
 
 ### <a name="update-the-courses-create-page"></a>Aktualizowanie strony Tworzenie kursów
 
@@ -321,7 +322,7 @@ Poprzedzające znaczniki wprowadzają następujące zmiany:
 * Zmienia podpis z **DepartmentID** na **dział**.
 * Zamienia wartość `"ViewBag.DepartmentID"` na `DepartmentNameSL` (z klasy bazowej).
 
-Ta strona zawiera ukryte pole ( `<input type="hidden">` ) dla numeru kursu. Dodanie `<label>` pomocnika tagów z `asp-for="Course.CourseID"` nie eliminuje potrzeby pola ukrytego. `<input type="hidden">`jest wymagana do uwzględnienia numeru kursu w opublikowanych danych, gdy użytkownik kliknie przycisk **Zapisz**.
+Ta strona zawiera ukryte pole ( `<input type="hidden">` ) dla numeru kursu. Dodanie `<label>` pomocnika tagów z `asp-for="Course.CourseID"` nie eliminuje potrzeby pola ukrytego. `<input type="hidden">` jest wymagana do uwzględnienia numeru kursu w opublikowanych danych, gdy użytkownik kliknie przycisk **Zapisz**.
 
 Przetestuj zaktualizowany kod. Tworzenie, edytowanie i usuwanie kursu.
 
@@ -383,7 +384,7 @@ Instruktorzy mogą uczyć się dowolnej liczby kursów. W tej sekcji dodasz moż
 
 ![Instruktor strony edytowania za pomocą kursów](update-related-data/_static/instructor-edit-courses.png)
 
-`Course`i `Instructor` ma relację wiele-do-wielu. Aby dodać i usunąć relacje, należy dodać i usunąć jednostki z `CourseAssignments` zestawu jednostek sprzężenia.
+`Course` i `Instructor` ma relację wiele-do-wielu. Aby dodać i usunąć relacje, należy dodać i usunąć jednostki z `CourseAssignments` zestawu jednostek sprzężenia.
 
 Pola wyboru umożliwiają zmianę kursów, do których zostanie przypisany instruktor. Pole wyboru jest wyświetlane dla każdego kursu w bazie danych. Kursy, do których jest przypisany instruktor, są sprawdzane. Użytkownik może zaznaczyć lub wyczyścić pola wyboru, aby zmienić przypisania kursu. Jeśli liczba kursów była znacznie większa:
 
@@ -402,7 +403,7 @@ Utwórz klasę bazową *stron/instruktorów/InstructorCoursesPageModel. cshtml. 
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/InstructorCoursesPageModel.cshtml.cs)]
 
-`InstructorCoursesPageModel`Jest klasą bazową, która będzie używana dla modeli stron Edycja i tworzenie. `PopulateAssignedCourseData`odczytuje wszystkie `Course` jednostki do wypełnienia `AssignedCourseDataList` . Dla każdego kursu kod ustawia `CourseID` , tytuł i określa, czy instruktor jest przypisany do kursu. [HashSet —](/dotnet/api/system.collections.generic.hashset-1) jest używany do tworzenia wydajnych wyszukiwań.
+`InstructorCoursesPageModel`Jest klasą bazową, która będzie używana dla modeli stron Edycja i tworzenie. `PopulateAssignedCourseData` odczytuje wszystkie `Course` jednostki do wypełnienia `AssignedCourseDataList` . Dla każdego kursu kod ustawia `CourseID` , tytuł i określa, czy instruktor jest przypisany do kursu. [HashSet —](/dotnet/api/system.collections.generic.hashset-1) jest używany do tworzenia wydajnych wyszukiwań.
 
 ### <a name="instructors-edit-page-model"></a>Instruktorzy edytują model strony
 
@@ -450,11 +451,11 @@ Zaktualizuj model usuwania stron przy użyciu następującego kodu:
 
 Poprzedni kod wprowadza następujące zmiany:
 
-* Używa ładowania eager dla `CourseAssignments` właściwości nawigacji. `CourseAssignments`musi być dołączony lub nie jest usuwany po usunięciu instruktora. Aby uniknąć konieczności ich odczytywania, skonfiguruj kaskadowe usuwanie w bazie danych.
+* Używa ładowania eager dla `CourseAssignments` właściwości nawigacji. `CourseAssignments` musi być dołączony lub nie jest usuwany po usunięciu instruktora. Aby uniknąć konieczności ich odczytywania, skonfiguruj kaskadowe usuwanie w bazie danych.
 
 * Jeśli instruktor zostanie usunięty, zostanie przypisany jako administrator jakichkolwiek działów, program usunie przypisanie instruktora z tych urzędów.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Wersja usługi YouTube w tym samouczku (część 1)](https://www.youtube.com/watch?v=Csh6gkmwc9E)
 * [Wersja usługi YouTube w tym samouczku (część 2)](https://www.youtube.com/watch?v=mOAankB_Zgc)

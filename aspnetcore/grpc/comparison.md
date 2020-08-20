@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 12/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/comparison
-ms.openlocfilehash: cdddb14e62f42bc9c0ec0bbe2a8595fe1cb27ceb
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: d20740950f7ac56a3a3b2951b474151aaf9c6f5a
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88016209"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631228"
 ---
 # <a name="compare-grpc-services-with-http-apis"></a>Porównanie usług gRPC za pomocą interfejsów API protokołu HTTP
 
@@ -121,7 +122,7 @@ Funkcje takie jak [odbicie serwera](https://github.com/grpc/grpc/blob/master/doc
 Inne struktury są zalecane w porównaniu z gRPC w następujących scenariuszach:
 
 * **Interfejsy API dostępne dla przeglądarki**: gRPC nie jest w pełni obsługiwane w przeglądarce. gRPC — sieć Web może oferować pomoc techniczną przeglądarki, ale ma ograniczenia i wprowadza serwer proxy serwera.
-* **Rozgłaszanie komunikacji**w czasie rzeczywistym: gRPC obsługuje komunikację w czasie rzeczywistym za pośrednictwem przesyłania strumieniowego, ale pojęcie rozgłaszania komunikatów do zarejestrowanych połączeń nie istnieje. Na przykład w scenariuszu pokoju rozmów, w którym nowe wiadomości czatu powinny być wysyłane do wszystkich klientów w pokoju rozmowy, każde wywołanie gRPC jest wymagane do narzucania strumieniowego przesyłania nowych komunikatów rozmowy do klienta. [SignalR](xref:signalr/introduction)jest przydatną strukturą dla tego scenariusza. SignalRma koncepcję trwałych połączeń i wbudowaną obsługę rozgłaszania komunikatów.
+* **Rozgłaszanie komunikacji**w czasie rzeczywistym: gRPC obsługuje komunikację w czasie rzeczywistym za pośrednictwem przesyłania strumieniowego, ale pojęcie rozgłaszania komunikatów do zarejestrowanych połączeń nie istnieje. Na przykład w scenariuszu pokoju rozmów, w którym nowe wiadomości czatu powinny być wysyłane do wszystkich klientów w pokoju rozmowy, każde wywołanie gRPC jest wymagane do narzucania strumieniowego przesyłania nowych komunikatów rozmowy do klienta. [SignalR](xref:signalr/introduction) jest przydatną strukturą dla tego scenariusza. SignalR ma koncepcję trwałych połączeń i wbudowaną obsługę rozgłaszania komunikatów.
 * **Komunikacja między procesami**: proces musi obsługiwać serwer HTTP/2 w celu akceptowania przychodzących wywołań gRPC. W przypadku systemu Windows [potoki](/dotnet/standard/io/pipe-operations) komunikacji między procesami to szybka i lekka Metoda komunikacji.
 
 ## <a name="additional-resources"></a>Dodatkowe zasoby

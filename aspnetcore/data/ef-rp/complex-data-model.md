@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/complex-data-model
-ms.openlocfilehash: b3531f786b3101fcbea4b25d3950d1bce9a289dc
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 3fab57df84e6902a8041940939c067da41f1674c
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018055"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629733"
 ---
 # <a name="part-5-no-locrazor-pages-with-ef-core-in-aspnet-core---data-model"></a>Część 5, Razor strony z EF Core w modelu ASP.NET Core — dane
 
@@ -59,7 +60,7 @@ Poprzedni kod dodaje `FullName` Właściwość i dodaje następujące atrybuty d
 
 ### <a name="the-fullname-calculated-property"></a>Właściwość obliczeniowa FullName
 
-`FullName`jest właściwością obliczaną, która zwraca wartość utworzoną przez połączenie dwóch innych właściwości. `FullName`nie można ustawić, dlatego ma tylko metodę dostępu get. Nie `FullName` utworzono żadnej kolumny w bazie danych.
+`FullName` jest właściwością obliczaną, która zwraca wartość utworzoną przez połączenie dwóch innych właściwości. `FullName` nie można ustawić, dlatego ma tylko metodę dostępu get. Nie `FullName` utworzono żadnej kolumny w bazie danych.
 
 ### <a name="the-datatype-attribute"></a>Atrybut DataType
 
@@ -69,7 +70,7 @@ Poprzedni kod dodaje `FullName` Właściwość i dodaje następujące atrybuty d
 
 W przypadku dat rejestracji uczniów wszystkie strony wyświetlają teraz godzinę i datę, chociaż tylko data jest ważna. Używając atrybutów adnotacji danych, można wprowadzić jedną zmianę kodu, która naprawi format wyświetlania na każdej stronie, która wyświetla dane. 
 
-Atrybut [DataType](/dotnet/api/system.componentmodel.dataannotations.datatypeattribute?view=netframework-4.7.1) określa typ danych, który jest bardziej szczegółowy niż typ wewnętrzny bazy danych. W tym przypadku należy wyświetlić tylko datę, a nie datę i godzinę. [Wyliczenie DataType](/dotnet/api/system.componentmodel.dataannotations.datatype?view=netframework-4.7.1) zawiera wiele typów danych, takich jak data, godzina, numer telefonu, waluta, EmailAddress itp. Ten `DataType` atrybut może również umożliwić aplikacji automatyczne udostępnianie funkcji specyficznych dla typu. Przykład:
+Atrybut [DataType](/dotnet/api/system.componentmodel.dataannotations.datatypeattribute?view=netframework-4.7.1) określa typ danych, który jest bardziej szczegółowy niż typ wewnętrzny bazy danych. W tym przypadku należy wyświetlić tylko datę, a nie datę i godzinę. [Wyliczenie DataType](/dotnet/api/system.componentmodel.dataannotations.datatype?view=netframework-4.7.1) zawiera wiele typów danych, takich jak data, godzina, numer telefonu, waluta, EmailAddress itp. Ten `DataType` atrybut może również umożliwić aplikacji automatyczne udostępnianie funkcji specyficznych dla typu. Na przykład:
 
 * `mailto:`Łącze jest tworzone automatycznie dla `DataType.EmailAddress` .
 * Selektor daty jest dostępny `DataType.Date` w większości przeglądarek.
@@ -82,7 +83,7 @@ Ten `DataType` atrybut emituje atrybuty HTML 5 `data-` (wymawiane kreski danych)
 [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
 ```
 
-`DataType.Date`nie określa formatu wyświetlanej daty. Domyślnie pole Date jest wyświetlane zgodnie z domyślnymi formatami opartymi na [CultureInfo](xref:fundamentals/localization#provide-localized-resources-for-the-languages-and-cultures-you-support)serwera.
+`DataType.Date` nie określa formatu wyświetlanej daty. Domyślnie pole Date jest wyświetlane zgodnie z domyślnymi formatami opartymi na [CultureInfo](xref:fundamentals/localization#provide-localized-resources-for-the-languages-and-cultures-you-support)serwera.
 
 Ten `DisplayFormat` atrybut służy do jawnego określenia formatu daty. `ApplyFormatInEditMode`Ustawienie określa, że formatowanie ma być również stosowane do interfejsu użytkownika edytowania. Niektóre pola nie powinny być używane `ApplyFormatInEditMode` . Na przykład symbol waluty zazwyczaj nie powinien być wyświetlany w polu tekstowym Edycja.
 
@@ -109,7 +110,7 @@ Ten `StringLength` atrybut nie uniemożliwia użytkownikowi wprowadzania białyc
 [RegularExpression(@"^[A-Z]+[a-zA-Z]*$")]
 ```
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 W **Eksplorator obiektów SQL Server** (SSOX) Otwórz projektanta tabeli uczniów, klikając dwukrotnie tabelę **uczniów** .
 
@@ -153,7 +154,7 @@ Po utworzeniu bazy danych nazwy właściwości w modelu są używane dla nazw ko
 public string LastName { get; set; }
 ```
 
-`MinimumLength`i `Required` Zezwalaj na odstępy, aby spełnić kryteria weryfikacji. Użyj `RegularExpression` atrybutu w celu zapewnienia pełnej kontroli nad ciągiem.
+`MinimumLength` i `Required` Zezwalaj na odstępy, aby spełnić kryteria weryfikacji. Użyj `RegularExpression` atrybutu w celu zapewnienia pełnej kontroli nad ciągiem.
 
 ### <a name="the-display-attribute"></a>Atrybut wyświetlania
 
@@ -167,7 +168,7 @@ Ten `Display` atrybut określa, że podpis pól tekstowych powinien mieć warto�
 
 Uruchom aplikację i przejdź do strony uczniów. Zgłaszany jest wyjątek. Ten `[Column]` atrybut powoduje, że Dr powinien znaleźć kolumnę o nazwie `FirstName` , ale nazwa kolumny w bazie danych jest nadal `FirstMidName` .
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Komunikat o błędzie jest podobny do poniższego przykładu:
 
@@ -264,7 +265,7 @@ Instruktor może nauczyć dowolną liczbę kursów, więc `CourseAssignments` je
 public ICollection<CourseAssignment> CourseAssignments { get; set; }
 ```
 
-Instruktor może mieć co najwyżej jednego biura, więc `OfficeAssignment` Właściwość zawiera jedną `OfficeAssignment` jednostkę. `OfficeAssignment`ma wartość null, jeśli nie przypisano pakietu Office.
+Instruktor może mieć co najwyżej jednego biura, więc `OfficeAssignment` Właściwość zawiera jedną `OfficeAssignment` jednostkę. `OfficeAssignment` ma wartość null, jeśli nie przypisano pakietu Office.
 
 ```csharp
 public OfficeAssignment OfficeAssignment { get; set; }
@@ -309,7 +310,7 @@ Aktualizuj *modele/kurs. cs* przy użyciu następującego kodu:
 
 [!code-csharp[](intro/samples/cu30/Models/Course.cs?highlight=2,10,13,16,19,21,23)]
 
-`Course`Jednostka ma właściwość klucza obcego (obcy) `DepartmentID` . `DepartmentID`wskazuje powiązaną `Department` jednostkę. `Course`Jednostka ma `Department` Właściwość nawigacji.
+`Course`Jednostka ma właściwość klucza obcego (obcy) `DepartmentID` . `DepartmentID` wskazuje powiązaną `Department` jednostkę. `Course`Jednostka ma `Department` Właściwość nawigacji.
 
 EF Core nie wymaga właściwości klucza obcego dla modelu danych, gdy model ma właściwość nawigacji dla powiązanej jednostki. EF Core automatycznie tworzy FKs w bazie danych wszędzie tam, gdzie są one zbędne. EF Core tworzy [Właściwości cienia](/ef/core/modeling/shadow-properties) dla automatycznie utworzonych FKs. Jednak jawne dołączenie klucza obcego w modelu danych może spowodować uproszczenie i wydajniejsze aktualizacje. Rozważmy na przykład model, w którym Właściwość FK `DepartmentID` *nie* jest uwzględniona. Gdy jednostka kursu jest pobierana do edycji:
 
@@ -355,7 +356,7 @@ Kurs może być nauczany przez wiele instruktorów, więc `CourseAssignments` W�
 public ICollection<CourseAssignment> CourseAssignments { get; set; }
 ```
 
-`CourseAssignment`wyjaśniono [później](#many-to-many-relationships).
+`CourseAssignment` wyjaśniono [później](#many-to-many-relationships).
 
 ## <a name="the-department-entity"></a>Jednostka działu
 
@@ -374,7 +375,7 @@ Wcześniej `Column` atrybut został użyty do zmiany mapowania nazw kolumn. W ko
 public decimal Budget { get; set; }
 ```
 
-Mapowanie kolumn zazwyczaj nie jest wymagane. EF Core wybiera odpowiedni SQL Server typ danych na podstawie typu CLR dla właściwości. Typ CLR jest `decimal` mapowany na typ SQL Server `decimal` . `Budget`jest dla waluty, a typ danych walutowych jest bardziej odpowiedni dla waluty.
+Mapowanie kolumn zazwyczaj nie jest wymagane. EF Core wybiera odpowiedni SQL Server typ danych na podstawie typu CLR dla właściwości. Typ CLR jest `decimal` mapowany na typ SQL Server `decimal` . `Budget` jest dla waluty, a typ danych walutowych jest bardziej odpowiedni dla waluty.
 
 ### <a name="foreign-key-and-navigation-properties"></a>Właściwości klucza obcego i nawigacji
 
@@ -471,7 +472,7 @@ Modele danych rozpoczynają się od siebie i rosną. Tabele sprzężenia bez ła
 
 ### <a name="composite-key"></a>Klucz złożony
 
-Dwa FKs w `CourseAssignment` ( `InstructorID` i `CourseID` ) jednoznacznie identyfikują każdy wiersz `CourseAssignment` tabeli. `CourseAssignment`nie wymaga dedykowanego klucza podstawowego. `InstructorID`Właściwości i `CourseID` działają jako złożony klucz podstawowy. Jedynym sposobem określenia złożonego PKs do EF Core jest *interfejs API Fluent*. W następnej sekcji przedstawiono sposób konfigurowania złożonego klucza podstawowego.
+Dwa FKs w `CourseAssignment` ( `InstructorID` i `CourseID` ) jednoznacznie identyfikują każdy wiersz `CourseAssignment` tabeli. `CourseAssignment` nie wymaga dedykowanego klucza podstawowego. `InstructorID`Właściwości i `CourseID` działają jako złożony klucz podstawowy. Jedynym sposobem określenia złożonego PKs do EF Core jest *interfejs API Fluent*. W następnej sekcji przedstawiono sposób konfigurowania złożonego klucza podstawowego.
 
 Klucz złożony gwarantuje, że:
 
@@ -507,7 +508,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
 W tym samouczku interfejs API Fluent jest używany tylko na potrzeby mapowania bazy danych, której nie można wykonać przy użyciu atrybutów. Jednak interfejs API Fluent może określić większość reguł formatowania, walidacji i mapowania, które mogą być wykonywane przy użyciu atrybutów.
 
-Niektórych atrybutów, takich jak `MinimumLength` nie można zastosować w interfejsie API Fluent. `MinimumLength`nie zmienia schematu, stosuje tylko regułę walidacji o minimalnej długości.
+Niektórych atrybutów, takich jak `MinimumLength` nie można zastosować w interfejsie API Fluent. `MinimumLength` nie zmienia schematu, stosuje tylko regułę walidacji o minimalnej długości.
 
 Niektórzy deweloperzy wolą korzystać z interfejsu API Fluent wyłącznie w taki sposób, aby mogli utrzymać czyste klasy jednostek. Atrybuty i interfejs API Fluent mogą być mieszane. Istnieją pewne konfiguracje, które można wykonać tylko przy użyciu interfejsu API Fluent (określenie złożonego klucza podstawowego). Istnieją pewne konfiguracje, które można wykonać tylko z atrybutami ( `MinimumLength` ). Zalecane rozwiązanie dotyczące korzystania z interfejsu API Fluent lub atrybutów:
 
@@ -546,7 +547,7 @@ Poprzedni kod zawiera dane inicjatora dla nowych jednostek. Większość tego ko
 
 Skompiluj projekt.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 W obszarze PMC Uruchom następujące polecenie.
 
@@ -601,7 +602,7 @@ Dowolny wybór działa dla SQL Server. Chociaż metoda Apply-Migration jest bard
 
 Aby wymusić EF Core tworzenia nowej bazy danych, Porzuć i zaktualizuj bazę danych:
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * W **konsoli Menedżera pakietów** (PMC) Uruchom następujące polecenie:
 
@@ -637,7 +638,7 @@ Aby wymusić EF Core tworzenia nowej bazy danych, Porzuć i zaktualizuj bazę da
 
 Uruchom aplikację. Uruchomienie aplikacji uruchamia `DbInitializer.Initialize` metodę. `DbInitializer.Initialize`Wypełnia nową bazę danych.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Otwórz bazę danych w programie SSOX:
 
@@ -701,7 +702,7 @@ Sposób obsługi pokazanej tutaj sytuacji jest uproszczony dla tego samouczka. A
 * Dołącz kod lub skrypty, aby dodać `Department` wiersze i powiązane `Course` wiersze do nowych `Department` wierszy.
 * Nie używaj działu "Temp" ani wartości domyślnej dla `Course.DepartmentID` .
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * W **konsoli Menedżera pakietów** (PMC) Uruchom następujące polecenie:
 
@@ -759,14 +760,14 @@ Aktualizuj *modele/uczniów. cs* przy użyciu następującego wyróżnionego kod
 
 [!code-csharp[](intro/samples/cu21/Models/Student.cs?name=snippet_DataType&highlight=3,12-13)]
 
-Atrybut [DataType](/dotnet/api/system.componentmodel.dataannotations.datatypeattribute?view=netframework-4.7.1) określa typ danych, który jest bardziej szczegółowy niż typ wewnętrzny bazy danych. W tym przypadku należy wyświetlić tylko datę, a nie datę i godzinę. [Wyliczenie DataType](/dotnet/api/system.componentmodel.dataannotations.datatype?view=netframework-4.7.1) zawiera wiele typów danych, takich jak data, godzina, numer telefonu, waluta, EmailAddress itp. Ten `DataType` atrybut może również umożliwić aplikacji automatyczne udostępnianie funkcji specyficznych dla typu. Przykład:
+Atrybut [DataType](/dotnet/api/system.componentmodel.dataannotations.datatypeattribute?view=netframework-4.7.1) określa typ danych, który jest bardziej szczegółowy niż typ wewnętrzny bazy danych. W tym przypadku należy wyświetlić tylko datę, a nie datę i godzinę. [Wyliczenie DataType](/dotnet/api/system.componentmodel.dataannotations.datatype?view=netframework-4.7.1) zawiera wiele typów danych, takich jak data, godzina, numer telefonu, waluta, EmailAddress itp. Ten `DataType` atrybut może również umożliwić aplikacji automatyczne udostępnianie funkcji specyficznych dla typu. Na przykład:
 
 * `mailto:`Łącze jest tworzone automatycznie dla `DataType.EmailAddress` .
 * Selektor daty jest dostępny `DataType.Date` w większości przeglądarek.
 
 Ten `DataType` atrybut emituje kod HTML 5 `data-` (wymawiane kreski danych), które wykorzystują przeglądarki HTML 5. `DataType`Atrybuty nie zapewniają walidacji.
 
-`DataType.Date`nie określa formatu wyświetlanej daty. Domyślnie pole Date jest wyświetlane zgodnie z domyślnymi formatami opartymi na [CultureInfo](xref:fundamentals/localization#provide-localized-resources-for-the-languages-and-cultures-you-support)serwera.
+`DataType.Date` nie określa formatu wyświetlanej daty. Domyślnie pole Date jest wyświetlane zgodnie z domyślnymi formatami opartymi na [CultureInfo](xref:fundamentals/localization#provide-localized-resources-for-the-languages-and-cultures-you-support)serwera.
 
 Ten `DisplayFormat` atrybut służy do jawnego określenia formatu daty:
 
@@ -840,7 +841,7 @@ Aby zaktualizować bazę danych:
 * Skompiluj projekt.
 * Otwórz okno polecenia w folderze projektu. Wprowadź następujące polecenia, aby utworzyć nową migrację i zaktualizować bazę danych:
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 ```powershell
 Add-Migration ColumnFirstName
@@ -902,7 +903,7 @@ Ten `Display` atrybut określa, że podpis pól tekstowych powinien mieć warto�
 
 ### <a name="the-fullname-calculated-property"></a>Właściwość obliczeniowa FullName
 
-`FullName`jest właściwością obliczaną, która zwraca wartość utworzoną przez połączenie dwóch innych właściwości. `FullName`nie można ustawić, ma tylko metodę dostępu get. Nie `FullName` utworzono żadnej kolumny w bazie danych.
+`FullName` jest właściwością obliczaną, która zwraca wartość utworzoną przez połączenie dwóch innych właściwości. `FullName` nie można ustawić, ma tylko metodę dostępu get. Nie `FullName` utworzono żadnej kolumny w bazie danych.
 
 ## <a name="create-the-instructor-entity"></a>Tworzenie jednostki instruktora
 
@@ -942,7 +943,7 @@ Jeśli `ICollection<T>` jest określony, EF Core domyślnie tworzy `HashSet<T>` 
 
 `CourseAssignment`Jednostka została omówiona w sekcji dotyczącej relacji wiele-do-wielu.
 
-Firma Contoso University Rules States, że instruktor może mieć co najwyżej jednego biura. `OfficeAssignment`Właściwość zawiera jedną `OfficeAssignment` jednostkę. `OfficeAssignment`ma wartość null, jeśli nie przypisano pakietu Office.
+Firma Contoso University Rules States, że instruktor może mieć co najwyżej jednego biura. `OfficeAssignment`Właściwość zawiera jedną `OfficeAssignment` jednostkę. `OfficeAssignment` ma wartość null, jeśli nie przypisano pakietu Office.
 
 ```csharp
 public OfficeAssignment OfficeAssignment { get; set; }
@@ -962,7 +963,7 @@ Ten `[Key]` atrybut służy do identyfikowania właściwości jako klucza podsta
 
 Istnieje relacja jeden do zera między `Instructor` `OfficeAssignment` jednostkami i. Przypisanie pakietu Office istnieje tylko w odniesieniu do instruktora, do którego jest przypisane. `OfficeAssignment`Klucz podstawowy jest również jego kluczem obcym (obcy) do `Instructor` jednostki. EF Core nie może automatycznie rozpoznać `InstructorID` jako klucz podstawowy dla `OfficeAssignment` :
 
-* `InstructorID`nie jest zgodna z konwencją nazewnictwa ID lub classnameID.
+* `InstructorID` nie jest zgodna z konwencją nazewnictwa ID lub classnameID.
 
 W związku z tym `Key` atrybut jest używany do identyfikacji `InstructorID` jako klucz podstawowy:
 
@@ -982,7 +983,7 @@ Domyślnie EF Core traktuje klucz jako wygenerowane poza bazą danych, ponieważ
 
 `OfficeAssignment`Jednostka ma właściwość nawigacji, która nie dopuszcza wartości null, `Instructor` ponieważ:
 
-* `InstructorID`nie dopuszcza wartości null.
+* `InstructorID` nie dopuszcza wartości null.
 * Przypisanie pakietu Office nie może istnieć bez instruktora.
 
 Gdy `Instructor` jednostka ma powiązaną `OfficeAssignment` jednostkę, każda jednostka ma odwołanie do drugiej z nich we właściwości nawigacji.
@@ -1004,7 +1005,7 @@ Aktualizuj *modele/kurs. cs* przy użyciu następującego kodu:
 
 [!code-csharp[](intro/samples/cu21/Models/Course.cs?name=snippet_Final&highlight=2,10,13,16,19,21,23)]
 
-`Course`Jednostka ma właściwość klucza obcego (obcy) `DepartmentID` . `DepartmentID`wskazuje powiązaną `Department` jednostkę. `Course`Jednostka ma `Department` Właściwość nawigacji.
+`Course`Jednostka ma właściwość klucza obcego (obcy) `DepartmentID` . `DepartmentID` wskazuje powiązaną `Department` jednostkę. `Course`Jednostka ma `Department` Właściwość nawigacji.
 
 EF Core nie wymaga właściwości FK dla modelu danych, gdy model ma właściwość nawigacji dla powiązanej jednostki.
 
@@ -1052,7 +1053,7 @@ Kurs może być nauczany przez wiele instruktorów, więc `CourseAssignments` W�
 public ICollection<CourseAssignment> CourseAssignments { get; set; }
 ```
 
-`CourseAssignment`wyjaśniono [później](#many-to-many-relationships).
+`CourseAssignment` wyjaśniono [później](#many-to-many-relationships).
 
 ## <a name="create-the-department-entity"></a>Tworzenie jednostki działu
 
@@ -1071,7 +1072,7 @@ Wcześniej `Column` atrybut został użyty do zmiany mapowania nazw kolumn. W ko
 public decimal Budget { get; set; }
 ```
 
-Mapowanie kolumn zazwyczaj nie jest wymagane. EF Core zwykle wybiera odpowiedni SQL Server typ danych oparty na typie CLR właściwości. Typ CLR jest `decimal` mapowany na typ SQL Server `decimal` . `Budget`jest dla waluty, a typ danych walutowych jest bardziej odpowiedni dla waluty.
+Mapowanie kolumn zazwyczaj nie jest wymagane. EF Core zwykle wybiera odpowiedni SQL Server typ danych oparty na typie CLR właściwości. Typ CLR jest `decimal` mapowany na typ SQL Server `decimal` . `Budget` jest dla waluty, a typ danych walutowych jest bardziej odpowiedni dla waluty.
 
 ### <a name="foreign-key-and-navigation-properties"></a>Właściwości klucza obcego i nawigacji
 
@@ -1179,7 +1180,7 @@ Modele danych rozpoczynają się od siebie i rosną. Sprzężenia bez ładunku (
 
 ### <a name="composite-key"></a>Klucz złożony
 
-FKs nie dopuszcza wartości null. Dwa FKs w `CourseAssignment` ( `InstructorID` i `CourseID` ) jednoznacznie identyfikują każdy wiersz `CourseAssignment` tabeli. `CourseAssignment`nie wymaga dedykowanego klucza podstawowego. `InstructorID`Właściwości i `CourseID` działają jako złożony klucz podstawowy. Jedynym sposobem określenia złożonego PKs do EF Core jest *interfejs API Fluent*. W następnej sekcji przedstawiono sposób konfigurowania złożonego klucza podstawowego.
+FKs nie dopuszcza wartości null. Dwa FKs w `CourseAssignment` ( `InstructorID` i `CourseID` ) jednoznacznie identyfikują każdy wiersz `CourseAssignment` tabeli. `CourseAssignment` nie wymaga dedykowanego klucza podstawowego. `InstructorID`Właściwości i `CourseID` działają jako złożony klucz podstawowy. Jedynym sposobem określenia złożonego PKs do EF Core jest *interfejs API Fluent*. W następnej sekcji przedstawiono sposób konfigurowania złożonego klucza podstawowego.
 
 Klucz złożony gwarantuje:
 
@@ -1215,7 +1216,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
 W tym samouczku interfejs API Fluent jest używany tylko w przypadku mapowania bazy danych, której nie można wykonać przy użyciu atrybutów. Jednak interfejs API Fluent może określić większość reguł formatowania, walidacji i mapowania, które mogą być wykonywane przy użyciu atrybutów.
 
-Niektórych atrybutów, takich jak `MinimumLength` nie można zastosować w interfejsie API Fluent. `MinimumLength`nie zmienia schematu, stosuje tylko regułę walidacji o minimalnej długości.
+Niektórych atrybutów, takich jak `MinimumLength` nie można zastosować w interfejsie API Fluent. `MinimumLength` nie zmienia schematu, stosuje tylko regułę walidacji o minimalnej długości.
 
 Niektórzy deweloperzy wolą korzystać z interfejsu API Fluent wyłącznie w taki sposób, aby mogli utrzymać czyste klasy jednostek. Atrybuty i interfejs API Fluent mogą być mieszane. Istnieją pewne konfiguracje, które można wykonać tylko przy użyciu interfejsu API Fluent (określenie złożonego klucza podstawowego). Istnieją pewne konfiguracje, które można wykonać tylko z atrybutami ( `MinimumLength` ). Zalecane rozwiązanie dotyczące korzystania z interfejsu API Fluent lub atrybutów:
 
@@ -1254,7 +1255,7 @@ Poprzedni kod zawiera dane inicjatora dla nowych jednostek. Większość tego ko
 
 Skompiluj projekt.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 ```powershell
 Add-Migration ComplexDataModel
@@ -1296,7 +1297,7 @@ Teraz, gdy masz już istniejącą bazę danych, musisz się zastanowić, jak zas
 
 Kod w zaktualizowanych `DbInitializer` dodaje dane inicjatora dla nowych jednostek. Aby wymusić EF Core tworzenia nowej bazy danych, Porzuć i zaktualizuj bazę danych:
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 W **konsoli Menedżera pakietów** (PMC) Uruchom następujące polecenie:
 
@@ -1377,7 +1378,7 @@ Aplikacja produkcyjna:
 
 Następny samouczek obejmuje powiązane dane.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Wersja usługi YouTube w tym samouczku (część 1)](https://www.youtube.com/watch?v=0n2f0ObgCoA)
 * [Wersja usługi YouTube w tym samouczku (część 2)](https://www.youtube.com/watch?v=Je0Z5K1TNmY)

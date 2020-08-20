@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/22/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/health-checks
-ms.openlocfilehash: a74d31107d30ce04448e30f1c53e5ac475127870
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: fcd6a679c5401ec58cc219f56b5dce1cfee07372
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015689"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629694"
 ---
 # <a name="health-checks-in-aspnet-core"></a>Kontrole kondycji w ASP.NET Core
 
@@ -106,7 +107,7 @@ HEALTHCHECK CMD curl --fail http://localhost:5000/health || exit
 
 ## <a name="create-health-checks"></a>Utwórz kontrole kondycji
 
-Kontrole kondycji są tworzone przez implementację <xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck> interfejsu. <xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck.CheckHealthAsync*>Metoda zwraca wartość <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult> wskazującą kondycję jako `Healthy` , `Degraded` lub `Unhealthy` . Wynik jest zapisywana jako odpowiedź w postaci zwykłego tekstu ze konfigurowalnym kodem stanu (Konfiguracja jest opisana w sekcji [Opcje sprawdzania kondycji](#health-check-options) ). <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult>może również zwracać opcjonalne pary klucz-wartość.
+Kontrole kondycji są tworzone przez implementację <xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck> interfejsu. <xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck.CheckHealthAsync*>Metoda zwraca wartość <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult> wskazującą kondycję jako `Healthy` , `Degraded` lub `Unhealthy` . Wynik jest zapisywana jako odpowiedź w postaci zwykłego tekstu ze konfigurowalnym kodem stanu (Konfiguracja jest opisana w sekcji [Opcje sprawdzania kondycji](#health-check-options) ). <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult> może również zwracać opcjonalne pary klucz-wartość.
 
 W poniższej `ExampleHealthCheck` klasie przedstawiono układ kontroli kondycji. Logika kontroli kondycji jest umieszczana w `CheckHealthAsync` metodzie. Poniższy przykład ustawia zmienną fikcyjną, `healthCheckResultHealthy` do `true` . Jeśli wartość jest równa `healthCheckResultHealthy` `false` , zwracany jest stan [HealthCheckResult. złej kondycji](xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult.Unhealthy*) .
 
@@ -152,7 +153,7 @@ services.AddHealthChecks()
         tags: new[] { "example" });
 ```
 
-<xref:Microsoft.Extensions.DependencyInjection.HealthChecksBuilderAddCheckExtensions.AddCheck*>można również wykonać funkcję lambda. W poniższym przykładzie nazwa sprawdzania kondycji jest określona jako, `Example` a sprawdzanie zawsze zwraca prawidłowy stan:
+<xref:Microsoft.Extensions.DependencyInjection.HealthChecksBuilderAddCheckExtensions.AddCheck*> można również wykonać funkcję lambda. W poniższym przykładzie nazwa sprawdzania kondycji jest określona jako, `Example` a sprawdzanie zawsze zwraca prawidłowy stan:
 
 ```csharp
 services.AddHealthChecks()
@@ -183,7 +184,7 @@ private class TestHealthCheckWithArgs : IHealthCheck
 }
 ```
 
-`TestHealthCheckWithArgs`jest zarejestrowany przez wywołanie `AddTypeActivatedCheck` z liczbą całkowitą i ciągiem przekazaną do implementacji:
+`TestHealthCheckWithArgs` jest zarejestrowany przez wywołanie `AddTypeActivatedCheck` z liczbą całkowitą i ciągiem przekazaną do implementacji:
 
 ```csharp
 services.AddHealthChecks()
@@ -235,7 +236,7 @@ Mimo że kontrole kondycji są wykonywane ręcznie z przeglądarki, nie jest to 
 
 ## <a name="health-check-options"></a>Opcje sprawdzania kondycji
 
-<xref:Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions>możliwość dostosowania zachowania kontroli kondycji:
+<xref:Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions> możliwość dostosowania zachowania kontroli kondycji:
 
 * [Filtrowanie kontroli kondycji](#filter-health-checks)
 * [Dostosowywanie kodu stanu HTTP](#customize-the-http-status-code)
@@ -294,7 +295,7 @@ app.UseEndpoints(endpoints =>
 
 ### <a name="suppress-cache-headers"></a>Pomiń nagłówki pamięci podręcznej
 
-<xref:Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions.AllowCachingResponses>Określa, czy kontrole kondycji powodują dodanie nagłówków HTTP do odpowiedzi sondy, aby zapobiec buforowaniu odpowiedzi. Jeśli wartość jest `false` (domyślnie), oprogramowanie pośredniczące ustawia lub zastępuje `Cache-Control` `Expires` nagłówki, i, `Pragma` Aby zapobiec buforowaniu odpowiedzi. Jeśli wartość to `true` , oprogramowanie pośredniczące nie modyfikuje nagłówków pamięci podręcznej odpowiedzi.
+<xref:Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions.AllowCachingResponses> Określa, czy kontrole kondycji powodują dodanie nagłówków HTTP do odpowiedzi sondy, aby zapobiec buforowaniu odpowiedzi. Jeśli wartość jest `false` (domyślnie), oprogramowanie pośredniczące ustawia lub zastępuje `Cache-Control` `Expires` nagłówki, i, `Pragma` Aby zapobiec buforowaniu odpowiedzi. Jeśli wartość to `true` , oprogramowanie pośredniczące nie modyfikuje nagłówków pamięci podręcznej odpowiedzi.
 
 W pliku `Startup.Configure`:
 
@@ -340,7 +341,7 @@ Interfejs API kontroli kondycji nie zapewnia wbudowanej obsługi złożonych for
 
 Kontrola kondycji może określić zapytanie bazy danych, które ma zostać uruchomione jako test logiczny, aby wskazać, czy baza danych ma zwykle odpowiadać.
 
-Przykładowa aplikacja używa [AspNetCore. Diagnostics. HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks), biblioteki sprawdzania kondycji dla aplikacji ASP.NET Core, aby przeprowadzić kontrolę kondycji SQL Server bazie danych. `AspNetCore.Diagnostics.HealthChecks`wykonuje `SELECT 1` zapytanie względem bazy danych w celu potwierdzenia, że połączenie z bazą danych jest w dobrej kondycji.
+Przykładowa aplikacja używa [AspNetCore. Diagnostics. HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks), biblioteki sprawdzania kondycji dla aplikacji ASP.NET Core, aby przeprowadzić kontrolę kondycji SQL Server bazie danych. `AspNetCore.Diagnostics.HealthChecks` wykonuje `SELECT 1` zapytanie względem bazy danych w celu potwierdzenia, że połączenie z bazą danych jest w dobrej kondycji.
 
 > [!WARNING]
 > Podczas sprawdzania połączenia z bazą danych za pomocą zapytania wybierz zapytanie, które zwraca szybko. Podejście zapytania uruchamia ryzyko przeciążenia bazy danych i spadek jej wydajności. W większości przypadków uruchomienie zapytania testowego nie jest konieczne. Wystarczy, że połączenie z bazą danych zostało zakończone pomyślnie. Jeśli okaże się, że konieczne jest uruchomienie zapytania, wybierz proste zapytanie SELECT, takie jak `SELECT 1` .
@@ -380,7 +381,7 @@ dotnet run --scenario db
 * Użyj [Entity Framework (EF) Core](/ef/core/).
 * Dołącz odwołanie do pakietu do [Microsoft. Extensions. Diagnostics. HealthChecks. EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore/).
 
-`AddDbContextCheck<TContext>`rejestruje kontrolę kondycji dla elementu `DbContext` . `DbContext`Jest dostarczany jako `TContext` do metody. Jest dostępne Przeciążenie umożliwiające skonfigurowanie stanu niepowodzenia, tagów i niestandardowego zapytania testowego.
+`AddDbContextCheck<TContext>` rejestruje kontrolę kondycji dla elementu `DbContext` . `DbContext`Jest dostarczany jako `TContext` do metody. Jest dostępne Przeciążenie umożliwiające skonfigurowanie stanu niepowodzenia, tagów i niestandardowego zapytania testowego.
 
 Domyślnie:
 
@@ -465,8 +466,8 @@ Kontrola kondycji jest zarejestrowana <xref:Microsoft.Extensions.DependencyInjec
 
 Punkt końcowy sprawdzania kondycji jest tworzony przez wywołanie `MapHealthChecks` w `Startup.Configure` . W przykładowej aplikacji punkty końcowe sprawdzania kondycji są tworzone w:
 
-* `/health/ready`w celu sprawdzenia gotowości. Sprawdzanie gotowości filtruje kontrolę kondycji w celu sprawdzenia kondycji za pomocą `ready` znacznika.
-* `/health/live`na potrzeby kontroli na żywo. Sprawdzenie stanu na żywo odfiltruje `StartupHostedServiceHealthCheck` przez zwrócenie `false` elementu [HealthCheckOptions. predykatu](xref:Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions.Predicate) (Aby uzyskać więcej informacji, [zobacz Sprawdzanie kondycji filtru](#filter-health-checks))
+* `/health/ready` w celu sprawdzenia gotowości. Sprawdzanie gotowości filtruje kontrolę kondycji w celu sprawdzenia kondycji za pomocą `ready` znacznika.
+* `/health/live` na potrzeby kontroli na żywo. Sprawdzenie stanu na żywo odfiltruje `StartupHostedServiceHealthCheck` przez zwrócenie `false` elementu [HealthCheckOptions. predykatu](xref:Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions.Predicate) (Aby uzyskać więcej informacji, [zobacz Sprawdzanie kondycji filtru](#filter-health-checks))
 
 W poniższym przykładowym kodzie:
 
@@ -525,7 +526,7 @@ spec:
 
 Przykładowa aplikacja demonstruje kontrolę kondycji pamięci za pomocą modułu zapisywania odpowiedzi niestandardowych.
 
-`MemoryHealthCheck`zgłasza stan obniżonej wydajności, jeśli aplikacja używa więcej niż danego progu pamięci (1 GB w przykładowej aplikacji). <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult>Zawiera informacje dotyczące modułu wyrzucania elementów bezużytecznych (GC) dla aplikacji (*MemoryHealthCheck.cs*):
+`MemoryHealthCheck` zgłasza stan obniżonej wydajności, jeśli aplikacja używa więcej niż danego progu pamięci (1 GB w przykładowej aplikacji). <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult>Zawiera informacje dotyczące modułu wyrzucania elementów bezużytecznych (GC) dla aplikacji (*MemoryHealthCheck.cs*):
 
 [!code-csharp[](health-checks/samples/3.x/HealthChecksSample/MemoryHealthCheck.cs?name=snippet1)]
 
@@ -659,8 +660,8 @@ Aby rozpowszechnić kontrolę kondycji jako bibliotekę:
 
    W logice kontroli kondycji `CheckHealthAsync` :
 
-   * `data1`i `data2` są używane w metodzie do uruchamiania logiki sprawdzania kondycji sondy.
-   * `AccessViolationException`jest obsługiwane.
+   * `data1` i `data2` są używane w metodzie do uruchamiania logiki sprawdzania kondycji sondy.
+   * `AccessViolationException` jest obsługiwane.
 
    Gdy wystąpi <xref:System.AccessViolationException> , <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckRegistration.FailureStatus> zostaje zwrócony z, <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult> Aby umożliwić użytkownikom Konfigurowanie stanu niepowodzenia sprawdzania kondycji.
 
@@ -752,7 +753,7 @@ Po <xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheckPublisher> do
 Task PublishAsync(HealthReport report, CancellationToken cancellationToken);
 ```
 
-<xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckPublisherOptions>Zezwól na ustawienie:
+<xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckPublisherOptions> Zezwól na ustawienie:
 
 * <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckPublisherOptions.Delay>: Początkowe opóźnienie stosowane po uruchomieniu aplikacji przed wykonaniem <xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheckPublisher> wystąpień. Opóźnienie jest stosowane raz podczas uruchamiania i nie ma zastosowania do kolejnych iteracji. Wartość domyślna to pięć sekund.
 * <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckPublisherOptions.Period>: Okres <xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheckPublisher> wykonania. Wartość domyślna to 30 sekund.
@@ -870,7 +871,7 @@ HEALTHCHECK CMD curl --fail http://localhost:5000/health || exit
 
 ## <a name="create-health-checks"></a>Utwórz kontrole kondycji
 
-Kontrole kondycji są tworzone przez implementację <xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck> interfejsu. <xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck.CheckHealthAsync*>Metoda zwraca wartość <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult> wskazującą kondycję jako `Healthy` , `Degraded` lub `Unhealthy` . Wynik jest zapisywana jako odpowiedź w postaci zwykłego tekstu ze konfigurowalnym kodem stanu (Konfiguracja jest opisana w sekcji [Opcje sprawdzania kondycji](#health-check-options) ). <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult>może również zwracać opcjonalne pary klucz-wartość.
+Kontrole kondycji są tworzone przez implementację <xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck> interfejsu. <xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck.CheckHealthAsync*>Metoda zwraca wartość <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult> wskazującą kondycję jako `Healthy` , `Degraded` lub `Unhealthy` . Wynik jest zapisywana jako odpowiedź w postaci zwykłego tekstu ze konfigurowalnym kodem stanu (Konfiguracja jest opisana w sekcji [Opcje sprawdzania kondycji](#health-check-options) ). <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult> może również zwracać opcjonalne pary klucz-wartość.
 
 ### <a name="example-health-check"></a>Przykładowe Sprawdzenie kondycji
 
@@ -918,7 +919,7 @@ services.AddHealthChecks()
         tags: new[] { "example" });
 ```
 
-<xref:Microsoft.Extensions.DependencyInjection.HealthChecksBuilderAddCheckExtensions.AddCheck*>można również wykonać funkcję lambda. W poniższym `Startup.ConfigureServices` przykładzie nazwa sprawdzania kondycji jest określona jako, `Example` a sprawdzanie zawsze zwraca prawidłowy stan:
+<xref:Microsoft.Extensions.DependencyInjection.HealthChecksBuilderAddCheckExtensions.AddCheck*> można również wykonać funkcję lambda. W poniższym `Startup.ConfigureServices` przykładzie nazwa sprawdzania kondycji jest określona jako, `Example` a sprawdzanie zawsze zwraca prawidłowy stan:
 
 ```csharp
 services.AddHealthChecks()
@@ -942,7 +943,7 @@ app.UseHealthChecks("/health", port: 8000);
 
 ## <a name="health-check-options"></a>Opcje sprawdzania kondycji
 
-<xref:Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions>możliwość dostosowania zachowania kontroli kondycji:
+<xref:Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions> możliwość dostosowania zachowania kontroli kondycji:
 
 * [Filtrowanie kontroli kondycji](#filter-health-checks)
 * [Dostosowywanie kodu stanu HTTP](#customize-the-http-status-code)
@@ -1003,7 +1004,7 @@ app.UseHealthChecks("/health", new HealthCheckOptions()
 
 ### <a name="suppress-cache-headers"></a>Pomiń nagłówki pamięci podręcznej
 
-<xref:Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions.AllowCachingResponses>Określa, czy kontrole kondycji powodują dodanie nagłówków HTTP do odpowiedzi sondy, aby zapobiec buforowaniu odpowiedzi. Jeśli wartość jest `false` (domyślnie), oprogramowanie pośredniczące ustawia lub zastępuje `Cache-Control` `Expires` nagłówki, i, `Pragma` Aby zapobiec buforowaniu odpowiedzi. Jeśli wartość to `true` , oprogramowanie pośredniczące nie modyfikuje nagłówków pamięci podręcznej odpowiedzi.
+<xref:Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions.AllowCachingResponses> Określa, czy kontrole kondycji powodują dodanie nagłówków HTTP do odpowiedzi sondy, aby zapobiec buforowaniu odpowiedzi. Jeśli wartość jest `false` (domyślnie), oprogramowanie pośredniczące ustawia lub zastępuje `Cache-Control` `Expires` nagłówki, i, `Pragma` Aby zapobiec buforowaniu odpowiedzi. Jeśli wartość to `true` , oprogramowanie pośredniczące nie modyfikuje nagłówków pamięci podręcznej odpowiedzi.
 
 W pliku `Startup.Configure`:
 
@@ -1059,7 +1060,7 @@ System kontroli kondycji nie zapewnia wbudowanej obsługi złożonych formatów 
 
 Kontrola kondycji może określić zapytanie bazy danych, które ma zostać uruchomione jako test logiczny, aby wskazać, czy baza danych ma zwykle odpowiadać.
 
-Przykładowa aplikacja używa [AspNetCore. Diagnostics. HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks), biblioteki sprawdzania kondycji dla aplikacji ASP.NET Core, aby przeprowadzić kontrolę kondycji SQL Server bazie danych. `AspNetCore.Diagnostics.HealthChecks`wykonuje `SELECT 1` zapytanie względem bazy danych w celu potwierdzenia, że połączenie z bazą danych jest w dobrej kondycji.
+Przykładowa aplikacja używa [AspNetCore. Diagnostics. HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks), biblioteki sprawdzania kondycji dla aplikacji ASP.NET Core, aby przeprowadzić kontrolę kondycji SQL Server bazie danych. `AspNetCore.Diagnostics.HealthChecks` wykonuje `SELECT 1` zapytanie względem bazy danych w celu potwierdzenia, że połączenie z bazą danych jest w dobrej kondycji.
 
 > [!WARNING]
 > Podczas sprawdzania połączenia z bazą danych za pomocą zapytania wybierz zapytanie, które zwraca szybko. Podejście zapytania uruchamia ryzyko przeciążenia bazy danych i spadek jej wydajności. W większości przypadków uruchomienie zapytania testowego nie jest konieczne. Wystarczy, że połączenie z bazą danych zostało zakończone pomyślnie. Jeśli okaże się, że konieczne jest uruchomienie zapytania, wybierz proste zapytanie SELECT, takie jak `SELECT 1` .
@@ -1096,7 +1097,7 @@ dotnet run --scenario db
 * Użyj [Entity Framework (EF) Core](/ef/core/).
 * Dołącz odwołanie do pakietu do [Microsoft. Extensions. Diagnostics. HealthChecks. EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore/).
 
-`AddDbContextCheck<TContext>`rejestruje kontrolę kondycji dla elementu `DbContext` . `DbContext`Jest dostarczany jako `TContext` do metody. Jest dostępne Przeciążenie umożliwiające skonfigurowanie stanu niepowodzenia, tagów i niestandardowego zapytania testowego.
+`AddDbContextCheck<TContext>` rejestruje kontrolę kondycji dla elementu `DbContext` . `DbContext`Jest dostarczany jako `TContext` do metody. Jest dostępne Przeciążenie umożliwiające skonfigurowanie stanu niepowodzenia, tagów i niestandardowego zapytania testowego.
 
 Domyślnie:
 
@@ -1227,7 +1228,7 @@ spec:
 
 Przykładowa aplikacja demonstruje kontrolę kondycji pamięci za pomocą modułu zapisywania odpowiedzi niestandardowych.
 
-`MemoryHealthCheck`zgłasza stan złej kondycji, jeśli aplikacja używa więcej niż danego progu pamięci (1 GB w przykładowej aplikacji). <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult>Zawiera informacje dotyczące modułu wyrzucania elementów bezużytecznych (GC) dla aplikacji (*MemoryHealthCheck.cs*):
+`MemoryHealthCheck` zgłasza stan złej kondycji, jeśli aplikacja używa więcej niż danego progu pamięci (1 GB w przykładowej aplikacji). <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult>Zawiera informacje dotyczące modułu wyrzucania elementów bezużytecznych (GC) dla aplikacji (*MemoryHealthCheck.cs*):
 
 [!code-csharp[](health-checks/samples/2.x/HealthChecksSample/MemoryHealthCheck.cs?name=snippet1)]
 
@@ -1337,8 +1338,8 @@ Aby rozpowszechnić kontrolę kondycji jako bibliotekę:
 
    W logice kontroli kondycji `CheckHealthAsync` :
 
-   * `data1`i `data2` są używane w metodzie do uruchamiania logiki sprawdzania kondycji sondy.
-   * `AccessViolationException`jest obsługiwane.
+   * `data1` i `data2` są używane w metodzie do uruchamiania logiki sprawdzania kondycji sondy.
+   * `AccessViolationException` jest obsługiwane.
 
    Gdy wystąpi <xref:System.AccessViolationException> , <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckRegistration.FailureStatus> zostaje zwrócony z, <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult> Aby umożliwić użytkownikom Konfigurowanie stanu niepowodzenia sprawdzania kondycji.
 
@@ -1427,7 +1428,7 @@ Po <xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheckPublisher> do
 Task PublishAsync(HealthReport report, CancellationToken cancellationToken);
 ```
 
-<xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckPublisherOptions>Zezwól na ustawienie:
+<xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckPublisherOptions> Zezwól na ustawienie:
 
 * <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckPublisherOptions.Delay>: Początkowe opóźnienie stosowane po uruchomieniu aplikacji przed wykonaniem <xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheckPublisher> wystąpień. Opóźnienie jest stosowane raz podczas uruchamiania i nie ma zastosowania do kolejnych iteracji. Wartość domyślna to pięć sekund.
 * <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckPublisherOptions.Period>: Okres <xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheckPublisher> wykonania. Wartość domyślna to 30 sekund.

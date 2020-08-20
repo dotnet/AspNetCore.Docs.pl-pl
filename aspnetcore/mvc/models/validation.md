@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/15/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/validation
-ms.openlocfilehash: c0edf56c966cb90c1c308f300a8944d392fdc0e7
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: e911512c1dce892c670659f04959be89cea067bb
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020980"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630110"
 ---
 # <a name="model-validation-in-aspnet-core-mvc-and-no-locrazor-pages"></a>Walidacja modelu w ASP.NET Core MVC i Razor stronach
 
@@ -51,7 +52,7 @@ Walidacja jest automatyczna, ale warto powtórzyć ją ręcznie. Na przykład mo
 
 ## <a name="validation-attributes"></a>Atrybuty walidacji
 
-Atrybuty walidacji umożliwiają określanie reguł walidacji dla właściwości modelu. W poniższym przykładzie z przykładowej aplikacji przedstawiono klasę modelu, która ma adnotację z atrybutami walidacji. Ten `[ClassicMovie]` atrybut jest niestandardowym atrybutem walidacji, a inne są wbudowane. Niepokazywany `[ClassicMovieWithClientValidator]` . `[ClassicMovieWithClientValidator]`pokazuje alternatywny sposób implementacji atrybutu niestandardowego.
+Atrybuty walidacji umożliwiają określanie reguł walidacji dla właściwości modelu. W poniższym przykładzie z przykładowej aplikacji przedstawiono klasę modelu, która ma adnotację z atrybutami walidacji. Ten `[ClassicMovie]` atrybut jest niestandardowym atrybutem walidacji, a inne są wbudowane. Niepokazywany `[ClassicMovieWithClientValidator]` . `[ClassicMovieWithClientValidator]` pokazuje alternatywny sposób implementacji atrybutu niestandardowego.
 
 [!code-csharp[](validation/samples/3.x/ValidationSample/Models/Movie.cs?name=snippet_Class)]
 
@@ -74,13 +75,13 @@ Pełną listę atrybutów sprawdzania poprawności można znaleźć w przestrzen
 
 ### <a name="error-messages"></a>Komunikaty o błędach
 
-Atrybuty walidacji pozwalają określić komunikat o błędzie, który ma być wyświetlany dla nieprawidłowych danych wejściowych. Przykład:
+Atrybuty walidacji pozwalają określić komunikat o błędzie, który ma być wyświetlany dla nieprawidłowych danych wejściowych. Na przykład:
 
 ```csharp
 [StringLength(8, ErrorMessage = "Name length can't be more than 8.")]
 ```
 
-Wewnętrznie atrybuty są wywoływane `String.Format` przy użyciu symbolu zastępczego dla nazwy pola i czasami dodatkowych symboli zastępczych. Przykład:
+Wewnętrznie atrybuty są wywoływane `String.Format` przy użyciu symbolu zastępczego dla nazwy pola i czasami dodatkowych symboli zastępczych. Na przykład:
 
 ```csharp
 [StringLength(8, ErrorMessage = "{0} length must be between {2} and {1}.", MinimumLength = 6)]
@@ -128,7 +129,7 @@ Aby zaimplementować zdalne sprawdzanie poprawności:
 
 1. Utwórz metodę akcji dla języka JavaScript do wywołania.  Metoda [zdalna](https://jqueryvalidation.org/remote-method/) walidacji jQuery oczekuje odpowiedzi JSON:
 
-   * `true`oznacza, że dane wejściowe są prawidłowe.
+   * `true` oznacza, że dane wejściowe są prawidłowe.
    * `false`, `undefined` lub `null` oznacza, że dane wejściowe są nieprawidłowe. Wyświetl domyślny komunikat o błędzie.
    * Każdy inny ciąg oznacza, że dane wejściowe są nieprawidłowe. Wyświetl ciąg jako niestandardowy komunikat o błędzie.
 
@@ -148,7 +149,7 @@ Aby zaimplementować zdalne sprawdzanie poprawności:
 
 [!code-csharp[](validation/samples/3.x/ValidationSample/Models/User.cs?name=snippet_Name&highlight=1,5)]
 
-`AdditionalFields`można jawnie ustawić dla ciągów "FirstName" i "LastName", ale użycie operatora [nameof](/dotnet/csharp/language-reference/keywords/nameof) upraszcza późniejsze refaktoryzacje. Metoda akcji dla tej walidacji musi akceptować zarówno `firstName` argumenty, jak i `lastName` :
+`AdditionalFields` można jawnie ustawić dla ciągów "FirstName" i "LastName", ale użycie operatora [nameof](/dotnet/csharp/language-reference/keywords/nameof) upraszcza późniejsze refaktoryzacje. Metoda akcji dla tej walidacji musi akceptować zarówno `firstName` argumenty, jak i `lastName` :
 
 [!code-csharp[](validation/samples/3.x/ValidationSample/Controllers/UsersController.cs?name=snippet_VerifyName)]
 
@@ -222,7 +223,7 @@ Walidacja jest zatrzymywana, gdy zostanie osiągnięta maksymalna liczba błęd�
 
 ## <a name="maximum-recursion"></a>Maksymalna rekursja
 
-<xref:Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationVisitor>przechodzi do grafu obiektów sprawdzanego przez model. W przypadku modeli, które są głębokie lub nieskończonie cykliczne, walidacja może spowodować przepełnienie stosu. [MvcOptions. MaxValidationDepth](xref:Microsoft.AspNetCore.Mvc.MvcOptions.MaxValidationDepth) umożliwia szybkie zakończenie sprawdzania poprawności, Jeśli rekursja odwiedzających przekracza skonfigurowaną głębokość. Wartość domyślna `MvcOptions.MaxValidationDepth` to 32.
+<xref:Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationVisitor> przechodzi do grafu obiektów sprawdzanego przez model. W przypadku modeli, które są głębokie lub nieskończonie cykliczne, walidacja może spowodować przepełnienie stosu. [MvcOptions. MaxValidationDepth](xref:Microsoft.AspNetCore.Mvc.MvcOptions.MaxValidationDepth) umożliwia szybkie zakończenie sprawdzania poprawności, Jeśli rekursja odwiedzających przekracza skonfigurowaną głębokość. Wartość domyślna `MvcOptions.MaxValidationDepth` to 32.
 
 ## <a name="automatic-short-circuit"></a>Automatyczny krótki obwód
 
@@ -271,7 +272,7 @@ Poprzednie pomocnicy tagów renderują następujący kod HTML:
 
 Zauważ, że `data-` atrybuty w danych wyjściowych HTML odpowiadają atrybutom walidacji `Movie.ReleaseDate` właściwości. Ten `data-val-required` atrybut zawiera komunikat o błędzie, który zostanie wyświetlony, jeśli użytkownik nie wypełni pola Data wydania. niezauważalne sprawdzenie poprawności przez funkcję jQuery spowoduje przekazanie tej wartości do metody sprawdzania poprawności jQuery [()](https://jqueryvalidation.org/required-method/) , która następnie wyświetla ten komunikat w elemencie towarzyszącym **\<span>** .
 
-Walidacja typu danych jest oparta na typie .NET właściwości, chyba że zostanie zastąpiona przez `[DataType]` atrybut. Przeglądarki mają własne domyślne komunikaty o błędach, ale pakietem weryfikacji jQuery nie dyskretnego sprawdzania poprawności może przesłonić te komunikaty. `[DataType]`atrybuty i podklasy, takie jak `[EmailAddress]` pozwalają określić komunikat o błędzie.
+Walidacja typu danych jest oparta na typie .NET właściwości, chyba że zostanie zastąpiona przez `[DataType]` atrybut. Przeglądarki mają własne domyślne komunikaty o błędach, ale pakietem weryfikacji jQuery nie dyskretnego sprawdzania poprawności może przesłonić te komunikaty. `[DataType]` atrybuty i podklasy, takie jak `[EmailAddress]` pozwalają określić komunikat o błędzie.
 
 ## <a name="unobtrusive-validation"></a>Niezauważalna weryfikacja
 
@@ -388,7 +389,7 @@ Inne opcje wyłączenia weryfikacji po stronie klienta:
 
 Poprzednie podejście nie zapobiega weryfikacji po stronie klienta ASP.NET Core Identity Razor biblioteki klas. Aby uzyskać więcej informacji, zobacz <xref:security/authentication/scaffold-identity>.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Przestrzeń nazw System. ComponentModel. DataAnnotations](xref:System.ComponentModel.DataAnnotations)
 * [Powiązanie modelu](model-binding.md)
@@ -444,13 +445,13 @@ Pełną listę atrybutów sprawdzania poprawności można znaleźć w przestrzen
 
 ### <a name="error-messages"></a>Komunikaty o błędach
 
-Atrybuty walidacji pozwalają określić komunikat o błędzie, który ma być wyświetlany dla nieprawidłowych danych wejściowych. Przykład:
+Atrybuty walidacji pozwalają określić komunikat o błędzie, który ma być wyświetlany dla nieprawidłowych danych wejściowych. Na przykład:
 
 ```csharp
 [StringLength(8, ErrorMessage = "Name length can't be more than 8.")]
 ```
 
-Wewnętrznie atrybuty są wywoływane `String.Format` przy użyciu symbolu zastępczego dla nazwy pola i czasami dodatkowych symboli zastępczych. Przykład:
+Wewnętrznie atrybuty są wywoływane `String.Format` przy użyciu symbolu zastępczego dla nazwy pola i czasami dodatkowych symboli zastępczych. Na przykład:
 
 ```csharp
 [StringLength(8, ErrorMessage = "{0} length must be between {2} and {1}.", MinimumLength = 6)]
@@ -494,7 +495,7 @@ Aby zaimplementować zdalne sprawdzanie poprawności:
 
 1. Utwórz metodę akcji dla języka JavaScript do wywołania.  Metoda [zdalna](https://jqueryvalidation.org/remote-method/) walidacji jQuery oczekuje odpowiedzi JSON:
 
-   * `"true"`oznacza, że dane wejściowe są prawidłowe.
+   * `"true"` oznacza, że dane wejściowe są prawidłowe.
    * `"false"`, `undefined` lub `null` oznacza, że dane wejściowe są nieprawidłowe.  Wyświetl domyślny komunikat o błędzie.
    * Każdy inny ciąg oznacza, że dane wejściowe są nieprawidłowe. Wyświetl ciąg jako niestandardowy komunikat o błędzie.
 
@@ -514,7 +515,7 @@ Aby zaimplementować zdalne sprawdzanie poprawności:
 
 [!code-csharp[](validation/samples/2.x/ValidationSample/Models/User.cs?name=snippet_UserNameProperties)]
 
-`AdditionalFields`może być jawnie ustawiona dla ciągów `"FirstName"` i `"LastName"` , ale użycie operatora [nameof](/dotnet/csharp/language-reference/keywords/nameof) upraszcza późniejsze refaktoryzacje. Metoda akcji dla tej weryfikacji musi akceptować zarówno imiona, jak i nazwiska:
+`AdditionalFields` może być jawnie ustawiona dla ciągów `"FirstName"` i `"LastName"` , ale użycie operatora [nameof](/dotnet/csharp/language-reference/keywords/nameof) upraszcza późniejsze refaktoryzacje. Metoda akcji dla tej weryfikacji musi akceptować zarówno imiona, jak i nazwiska:
 
 [!code-csharp[](validation/samples/2.x/ValidationSample/Controllers/UsersController.cs?name=snippet_VerifyName)]
 
@@ -589,7 +590,7 @@ Walidacja jest zatrzymywana, gdy zostanie osiągnięta maksymalna liczba błęd�
 
 ## <a name="maximum-recursion"></a>Maksymalna rekursja
 
-<xref:Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationVisitor>przechodzi do grafu obiektów sprawdzanego przez model. W przypadku modeli, które są bardzo głębokie lub nieskończonie cykliczne, walidacja może spowodować przepełnienie stosu. [MvcOptions. MaxValidationDepth](xref:Microsoft.AspNetCore.Mvc.MvcOptions.MaxValidationDepth) umożliwia szybkie zakończenie sprawdzania poprawności, Jeśli rekursja odwiedzających przekracza skonfigurowaną głębokość. Wartość domyślna `MvcOptions.MaxValidationDepth` to 32 w przypadku uruchamiania z systemem `CompatibilityVersion.Version_2_2` lub nowszym. W przypadku wcześniejszych wersji wartość jest równa null, co oznacza brak ograniczenia głębokości.
+<xref:Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationVisitor> przechodzi do grafu obiektów sprawdzanego przez model. W przypadku modeli, które są bardzo głębokie lub nieskończonie cykliczne, walidacja może spowodować przepełnienie stosu. [MvcOptions. MaxValidationDepth](xref:Microsoft.AspNetCore.Mvc.MvcOptions.MaxValidationDepth) umożliwia szybkie zakończenie sprawdzania poprawności, Jeśli rekursja odwiedzających przekracza skonfigurowaną głębokość. Wartość domyślna `MvcOptions.MaxValidationDepth` to 32 w przypadku uruchamiania z systemem `CompatibilityVersion.Version_2_2` lub nowszym. W przypadku wcześniejszych wersji wartość jest równa null, co oznacza brak ograniczenia głębokości.
 
 ## <a name="automatic-short-circuit"></a>Automatyczny krótki obwód
 
@@ -646,7 +647,7 @@ Poprzednie pomocnicy tagów renderują następujący kod HTML.
 
 Zauważ, że `data-` atrybuty w danych wyjściowych HTML odpowiadają atrybutom walidacji `ReleaseDate` właściwości. Ten `data-val-required` atrybut zawiera komunikat o błędzie, który zostanie wyświetlony, jeśli użytkownik nie wypełni pola Data wydania. niezauważalne sprawdzenie poprawności przez funkcję jQuery powoduje, że ta wartość jest przekazywana do walidacji [wymaganej metody ()](https://jqueryvalidation.org/required-method/) , która następnie wyświetla ten komunikat w elemencie towarzyszącym **\<span>** .
 
-Walidacja typu danych jest oparta na typie .NET właściwości, chyba że zostanie zastąpiona przez `[DataType]` atrybut. Przeglądarki mają własne domyślne komunikaty o błędach, ale pakietem weryfikacji jQuery nie dyskretnego sprawdzania poprawności może przesłonić te komunikaty. `[DataType]`atrybuty i podklasy, takie jak `[EmailAddress]` pozwalają określić komunikat o błędzie.
+Walidacja typu danych jest oparta na typie .NET właściwości, chyba że zostanie zastąpiona przez `[DataType]` atrybut. Przeglądarki mają własne domyślne komunikaty o błędach, ale pakietem weryfikacji jQuery nie dyskretnego sprawdzania poprawności może przesłonić te komunikaty. `[DataType]` atrybuty i podklasy, takie jak `[EmailAddress]` pozwalają określić komunikat o błędzie.
 
 ### <a name="add-validation-to-dynamic-forms"></a>Dodawanie walidacji do formularzy dynamicznych
 
@@ -758,7 +759,7 @@ I na Razor stronach:
 
 Kolejną opcją wyłączenia sprawdzania poprawności klienta jest komentarz do odwołania do `_ValidationScriptsPartial` w pliku *. cshtml* .
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Przestrzeń nazw System. ComponentModel. DataAnnotations](xref:System.ComponentModel.DataAnnotations)
 * [Powiązanie modelu](model-binding.md)

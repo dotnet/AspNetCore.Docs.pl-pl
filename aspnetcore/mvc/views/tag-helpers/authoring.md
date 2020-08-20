@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/authoring
-ms.openlocfilehash: d40b37a4ca8acf57b662124597a8ebc3b90bffd2
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: c1891b8093c5a4c1599cd3c4ed4e5e60e2fd13e8
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018171"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629005"
 ---
 # <a name="author-tag-helpers-in-aspnet-core"></a>Tworzenie pomocników tagów w ASP.NET Core
 
@@ -41,7 +42,7 @@ Pomocnik tagu jest klasą, która implementuje `ITagHelper` interfejs. Jednak po
 
 ## <a name="a-minimal-tag-helper"></a>Minimalny pomocnik tagów
 
-W tej sekcji napiszesz pomocnika tagu, który aktualizuje tag wiadomości e-mail. Przykład:
+W tej sekcji napiszesz pomocnika tagu, który aktualizuje tag wiadomości e-mail. Na przykład:
 
 ```html
 <email>Support</email>
@@ -234,7 +235,7 @@ Można również użyć, `[HtmlTargetElement]` Aby zmienić nazwę elementu wska
    >
    > [!code-html[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/About.cshtml?range=18-18)]
    >
-   > Razorwie, że `info` atrybut jest klasą, a nie ciągiem, i chcesz napisać kod w języku C#. Dowolny atrybut pomocnika tagów niebędących ciągami powinien być zapisany bez `@` znaku.
+   > Razor wie, że `info` atrybut jest klasą, a nie ciągiem, i chcesz napisać kod w języku C#. Dowolny atrybut pomocnika tagów niebędących ciągami powinien być zapisany bez `@` znaku.
 
 1. Uruchom aplikację i przejdź do widoku informacje, aby wyświetlić informacje o witrynie sieci Web.
 
@@ -259,7 +260,7 @@ Pomocnik tagów warunku renderuje dane wyjściowe, gdy przeszedł wartość true
 
    [!code-csharp[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Controllers/HomeController.cs?range=9-18)]
 
-1. Uruchom aplikację i przejdź do strony głównej. Adiustacja w warunku `div` nie będzie renderowana. Dołącz ciąg zapytania `?approved=true` do adresu URL (na przykład `http://localhost:1235/Home/Index?approved=true` ). `approved`jest ustawiona na wartość true i zostanie wyświetlona Adiustacja warunkowa.
+1. Uruchom aplikację i przejdź do strony głównej. Adiustacja w warunku `div` nie będzie renderowana. Dołącz ciąg zapytania `?approved=true` do adresu URL (na przykład `http://localhost:1235/Home/Index?approved=true` ). `approved` jest ustawiona na wartość true i zostanie wyświetlona Adiustacja warunkowa.
 
 > [!NOTE]
 > Użyj operatora [nameof](/dotnet/csharp/language-reference/keywords/nameof) , aby określić atrybut docelowy zamiast określać ciąg, jak za pomocą pomocnika tagów pogrubionych:

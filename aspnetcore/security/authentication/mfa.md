@@ -7,6 +7,7 @@ ms.author: rick-anderson
 ms.custom: mvc
 ms.date: 03/17/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/mfa
-ms.openlocfilehash: 4538030b4ce6aba6c78edb69cf44fc5812ddff76
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 048d88a121d0a4a7ab3d3adee9b426b95fd68a80
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88017860"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629590"
 ---
 # <a name="multi-factor-authentication-in-aspnet-core"></a>Uwierzytelnianie wieloskładnikowe w ASP.NET Core
 
@@ -33,7 +34,7 @@ Uwierzytelnianie wieloskładnikowe (MFA) to proces, w którym użytkownik jest p
 W tym artykule opisano następujące zagadnienia:
 
 * Co to jest MFA i jakie są zalecane przepływy uwierzytelniania MFA
-* Konfigurowanie uwierzytelniania wieloskładnikowego dla stron administracyjnych przy użyciu ASP.NET CoreIdentity
+* Konfigurowanie uwierzytelniania wieloskładnikowego dla stron administracyjnych przy użyciu ASP.NET Core Identity
 * Wyślij wymaganie logowania MFA do serwera OpenID Connect Connect
 * Wymuś ASP.NET Core OpenID Connect Połącz klienta, aby wymagać uwierzytelniania wieloskładnikowego
 
@@ -45,7 +46,7 @@ Uwierzytelnianie dwuskładnikowe (funkcji 2FA) jest podobne do podzestawu MFA, a
 
 ### <a name="mfa-totp-time-based-one-time-password-algorithm"></a>TOTP MFA (algorytm hasła jednorazowego oparty na czasie)
 
-Uwierzytelnianie wieloskładnikowe przy użyciu usługi TOTP to obsługiwana implementacja przy użyciu ASP.NET Core Identity . Może być używany razem z dowolną zgodną aplikacją uwierzytelniania, w tym:
+Uwierzytelnianie wieloskładnikowe przy użyciu usługi TOTP to obsługiwana implementacja przy użyciu programu ASP.NET Core Identity . Może być używany razem z dowolną zgodną aplikacją uwierzytelniania, w tym:
 
 * Aplikacja Microsoft Authenticator
 * Aplikacja Google Authenticator
@@ -71,9 +72,9 @@ Funkcja MFA z programem SMS zwiększa bezpieczeństwo w dużej porównaniu z uwi
 
 [Wskazówki dotyczące NIST](https://pages.nist.gov/800-63-3/sp800-63b.html)
 
-## <a name="configure-mfa-for-administration-pages-using-aspnet-core-no-locidentity"></a>Konfigurowanie uwierzytelniania wieloskładnikowego dla stron administracyjnych przy użyciu ASP.NET CoreIdentity
+## <a name="configure-mfa-for-administration-pages-using-no-locaspnet-core-identity"></a>Konfigurowanie uwierzytelniania wieloskładnikowego dla stron administracyjnych przy użyciu ASP.NET Core Identity
 
-Uwierzytelnianie wieloskładnikowe może być wymuszane dla użytkowników w celu uzyskania dostępu do poufnych stron w ramach Identity aplikacji ASP.NET Core. Może to być przydatne w przypadku aplikacji, w których istnieją różne poziomy dostępu dla różnych tożsamości. Na przykład użytkownicy mogą wyświetlać dane profilu przy użyciu hasła logowania, ale do uzyskiwania dostępu do stron administracyjnych będzie wymagane użycie usługi MFA.
+Uwierzytelnianie wieloskładnikowe może być wymuszane dla użytkowników w celu uzyskania dostępu do poufnych stron w ramach ASP.NET Core Identity aplikacji. Może to być przydatne w przypadku aplikacji, w których istnieją różne poziomy dostępu dla różnych tożsamości. Na przykład użytkownicy mogą wyświetlać dane profilu przy użyciu hasła logowania, ale do uzyskiwania dostępu do stron administracyjnych będzie wymagane użycie usługi MFA.
 
 ### <a name="extend-the-login-with-an-mfa-claim"></a>Zwiększanie nazwy logowania przy użyciu żądania MFA
 
@@ -304,9 +305,9 @@ public void ConfigureServices(IServiceCollection services)
     });
 ```
 
-### <a name="example-openid-connect-no-locidentityserver-4-server-with-aspnet-core-no-locidentity"></a>Przykład OpenID Connect Connect Identity Server 4 Server z ASP.NET CoreIdentity
+### <a name="example-openid-connect-no-locidentityserver-4-server-with-no-locaspnet-core-identity"></a>Przykład OpenID Connect Connect Identity Server 4 Server z ASP.NET Core Identity
 
-Na serwerze OpenID Connect Connect, który jest implementowany przy użyciu ASP.NET Core Identity z widokami MVC, tworzony jest nowy widok o nazwie *ErrorEnable2FA. cshtml* . Widok:
+Na serwerze OpenID Connect Connect, który jest implementowany przy użyciu ASP.NET Core Identity programu z widokami MVC, tworzony jest nowy widok o nazwie *ErrorEnable2FA. cshtml* . Widok:
 
 * Wyświetla, jeśli Identity pochodzi z aplikacji, która wymaga uwierzytelniania wieloskładnikowego, ale nie została aktywowana przez użytkownika w programie Identity .
 * Informuje użytkownika i dodaje link umożliwiający jego aktywowanie.
@@ -329,7 +330,7 @@ You can enable MFA to login here:
 
 W `Login` metodzie `IIdentityServerInteractionService` Implementacja interfejsu `_interaction` jest używana w celu uzyskania dostępu do parametrów żądania OpenID Connect Connect. `acr_values`Do parametru uzyskuje się dostęp przy użyciu `AcrValues` właściwości. Gdy klient wysłał ten program za pomocą `mfa` zestawu, można to sprawdzić.
 
-Jeśli wymagana jest usługa MFA, a użytkownik w ASP.NET Core Identity ma włączoną usługę MFA, logowanie będzie kontynuowane. Jeśli użytkownik nie ma włączonej usługi MFA, użytkownik zostanie przekierowany do widoku niestandardowego *ErrorEnable2FA. cshtml*. Następnie ASP.NET Core Identity podpisać użytkownika w programie.
+Jeśli wymagana jest usługa MFA, a użytkownik w programie ASP.NET Core Identity ma włączoną usługę MFA, logowanie jest kontynuowane. Jeśli użytkownik nie ma włączonej usługi MFA, użytkownik zostanie przekierowany do widoku niestandardowego *ErrorEnable2FA. cshtml*. Następnie ASP.NET Core Identity podpisuje użytkownika w programie.
 
 ```csharp
 //
@@ -410,7 +411,7 @@ public async Task<IActionResult> ExternalLoginCallback(
 Jeśli użytkownik jest już zalogowany, aplikacja kliencka:
 
 * Nadal sprawdza poprawność `amr` .
-* Usługę MFA można skonfigurować za pomocą linku do widoku ASP.NET Core Identity .
+* Usługę MFA można skonfigurować za pomocą linku do ASP.NET Core Identity widoku.
 
 ![acr_values-1](mfa/_static/acr_values-1.png)
 
@@ -577,7 +578,7 @@ Alternatywnie, logowanie przy użyciu uwierzytelniania OTP z Identity :
 
 ![require_mfa_oidc_01.png](mfa/_static/require_mfa_oidc_01.png)
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Włącz generowanie kodu QR dla aplikacji TOTP Authenticator w ASP.NET Core](xref:security/authentication/identity-enable-qrcodes)
 * [Opcje uwierzytelniania bezhasło dla Azure Active Directory](/azure/active-directory/authentication/concept-authentication-passwordless)

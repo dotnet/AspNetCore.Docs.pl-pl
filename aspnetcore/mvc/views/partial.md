@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/12/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/partial
-ms.openlocfilehash: 826d7cf96d95ee7eb98b0f05a233401a1e3bff33
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 7a370042520adfe5b06784b76acf41a81eb2c72d
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020837"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630630"
 ---
 # <a name="partial-views-in-aspnet-core"></a>Częściowe widoki w ASP.NET Core
 
@@ -147,7 +148,7 @@ Gdy rozszerzenie pliku jest obecne, pomocnik tagów odwołuje się do widoku cz�
 
 Poniższy przykład odwołuje się do widoku częściowego z poziomu głównego aplikacji. Ścieżki, które zaczynają się od ukośnika ( `~/` ) lub ukośnika ( `/` ), można znaleźć w katalogu głównym aplikacji:
 
-**RazorPage**
+**Razor Page**
 
 ```cshtml
 <partial name="~/Pages/Folder/_PartialName.cshtml" />
@@ -173,7 +174,7 @@ Aby uzyskać więcej informacji, zobacz <xref:mvc/views/tag-helpers/builtin-th/p
 
 ### <a name="asynchronous-html-helper"></a>Asynchroniczny pomocnik HTML
 
-W przypadku korzystania z pomocnika HTML najlepszym rozwiązaniem jest użycie <xref:Microsoft.AspNetCore.Mvc.Rendering.HtmlHelperPartialExtensions.PartialAsync*> . `PartialAsync`zwraca <xref:Microsoft.AspNetCore.Html.IHtmlContent> Typ opakowany w <xref:System.Threading.Tasks.Task%601> . Metoda jest przywoływana przez odtworzenie prefiksu oczekującego wywołania przy użyciu `@` znaku:
+W przypadku korzystania z pomocnika HTML najlepszym rozwiązaniem jest użycie <xref:Microsoft.AspNetCore.Mvc.Rendering.HtmlHelperPartialExtensions.PartialAsync*> . `PartialAsync` zwraca <xref:Microsoft.AspNetCore.Html.IHtmlContent> Typ opakowany w <xref:System.Threading.Tasks.Task%601> . Metoda jest przywoływana przez odtworzenie prefiksu oczekującego wywołania przy użyciu `@` znaku:
 
 ```cshtml
 @await Html.PartialAsync("_PartialName")
@@ -189,7 +190,7 @@ Poniższy przykład odwołuje się do widoku częściowego z poziomu głównego 
 
 ::: moniker range=">= aspnetcore-2.1"
 
-**RazorPage**
+**Razor Page**
 
 ```cshtml
 @await Html.PartialAsync("~/Pages/Folder/_PartialName.cshtml")
@@ -219,7 +220,7 @@ Ponieważ `RenderPartialAsync` strumienie są renderowane, zapewnia lepszą wyda
 
 ### <a name="synchronous-html-helper"></a>Synchroniczny pomocnik HTML
 
-<xref:Microsoft.AspNetCore.Mvc.Rendering.HtmlHelperPartialExtensions.Partial*>i <xref:Microsoft.AspNetCore.Mvc.Rendering.HtmlHelperPartialExtensions.RenderPartial*> są synchronicznymi odpowiednikami `PartialAsync` i `RenderPartialAsync` , odpowiednio. Nie zaleca się synchronicznych odpowiedników, ponieważ występują scenariusze, w których są one zakleszczeniami. Metody synchroniczne są przeznaczone do usunięcia w przyszłej wersji.
+<xref:Microsoft.AspNetCore.Mvc.Rendering.HtmlHelperPartialExtensions.Partial*> i <xref:Microsoft.AspNetCore.Mvc.Rendering.HtmlHelperPartialExtensions.RenderPartial*> są synchronicznymi odpowiednikami `PartialAsync` i `RenderPartialAsync` , odpowiednio. Nie zaleca się synchronicznych odpowiedników, ponieważ występują scenariusze, w których są one zakleszczeniami. Metody synchroniczne są przeznaczone do usunięcia w przyszłej wersji.
 
 > [!IMPORTANT]
 > Jeśli musisz wykonać kod, użyj [składnika widoku](xref:mvc/views/view-components) zamiast widoku częściowego.
@@ -240,7 +241,7 @@ Gdy do widoku częściowego odwołuje się nazwa bez rozszerzenia pliku, następ
 
 ::: moniker range=">= aspnetcore-2.1"
 
-**RazorPage**
+**Razor Page**
 
 1. Aktualnie wykonywany folder strony
 1. Wykres katalogu powyżej folderu strony
@@ -280,7 +281,7 @@ Następujące konwencje dotyczą odnajdywania widoku częściowego:
 
 ## <a name="access-data-from-partial-views"></a>Dostęp do danych z widoków częściowych
 
-Po utworzeniu wystąpienia widoku częściowego otrzymuje on *kopię* słownika elementu nadrzędnego `ViewData` . Aktualizacje wprowadzone do danych w widoku częściowym nie są utrwalane w widoku nadrzędnym. `ViewData`zmiany w częściowym widoku są tracone po powrocie widoku częściowego.
+Po utworzeniu wystąpienia widoku częściowego otrzymuje on *kopię* słownika elementu nadrzędnego `ViewData` . Aktualizacje wprowadzone do danych w widoku częściowym nie są utrwalane w widoku nadrzędnym. `ViewData` zmiany w częściowym widoku są tracone po powrocie widoku częściowego.
 
 Poniższy przykład ilustruje, jak przekazać wystąpienie elementu [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary) do widoku częściowego:
 
@@ -296,7 +297,7 @@ Można przekazać model do widoku częściowego. Model może być obiektem niest
 
 ::: moniker range=">= aspnetcore-2.1"
 
-**RazorPage**
+**Razor Page**
 
 Następujące znaczniki w przykładowej aplikacji pochodzą ze strony *stron/ArticlesRP/ReadRP. cshtml* . Strona zawiera dwa widoki częściowe. Drugi widok częściowy przechodzi w modelu i `ViewData` do widoku częściowego. `ViewDataDictionary`Przeciążenie konstruktora służy do przekazywania nowego `ViewData` słownika podczas zachowywania istniejącego `ViewData` słownika.
 

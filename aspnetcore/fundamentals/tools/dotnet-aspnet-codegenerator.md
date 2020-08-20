@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 07/04/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,24 +17,24 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/tools/dotnet-aspnet-codegenerator
-ms.openlocfilehash: 071f2269081e63ad1355547bccb449180c59c997
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 12825c13e1c9de984251b5554833f7194edff8c3
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88016508"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629941"
 ---
 # <a name="dotnet-aspnet-codegenerator"></a>dotnet ASPNET-CodeGenerator
 
 Autor: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-`dotnet aspnet-codegenerator`-Uruchamia aparat tworzenia szkieletów ASP.NET Core. `dotnet aspnet-codegenerator`jest wymagany tylko dla szkieletu z wiersza polecenia, nie jest potrzebny do korzystania z szkieletów w programie Visual Studio.
+`dotnet aspnet-codegenerator` -Uruchamia aparat tworzenia szkieletów ASP.NET Core. `dotnet aspnet-codegenerator` jest wymagany tylko dla szkieletu z wiersza polecenia, nie jest potrzebny do korzystania z szkieletów w programie Visual Studio.
 
 Ten artykuł dotyczy [zestawu .NET Core 2,1 SDK](https://dotnet.microsoft.com/download/dotnet-core/2.1) i nowszych wersji.
 
 ## <a name="installing-aspnet-codegenerator"></a>Instalowanie ASPNET-CodeGenerator
 
-`dotnet-aspnet-codegenerator`jest [globalnym narzędziem](/dotnet/core/tools/global-tools) , które musi być zainstalowane. Następujące polecenie instaluje najnowszą stabilną wersję `dotnet-aspnet-codegenerator` Narzędzia:
+`dotnet-aspnet-codegenerator` jest [globalnym narzędziem](/dotnet/core/tools/global-tools) , które musi być zainstalowane. Następujące polecenie instaluje najnowszą stabilną wersję `dotnet-aspnet-codegenerator` Narzędzia:
 
 ```dotnetcli
 dotnet tool install -g dotnet-aspnet-codegenerator
@@ -66,7 +67,7 @@ Generator kodu do uruchomienia. Dostępne są następujące generatory:
 | ---------- | -------------------------------------------------------------------- |
 | obszar       | [Szkieletuje obszar](xref:mvc/controllers/areas)                      |
 | kontroler | [Tworzy szkielety kontrolera](xref:tutorials/first-mvc-app/adding-model)  |
-| identity   | [SzkieletyIdentity](xref:security/authentication/scaffold-identity) |
+| identity   | [Szkielety Identity](xref:security/authentication/scaffold-identity) |
 | razorpage  | [Strony szkieletów Razor](xref:tutorials/razor-pages/model)            |
 | widok       | [Tworzy szkielety widoku](xref:mvc/views/overview)                          |
 
@@ -131,18 +132,18 @@ Poprzednie polecenie generuje następujące foldery:
 
 ### <a name="controller-options"></a>Opcje kontrolera
 
-W poniższej tabeli wymieniono opcje `aspnet-codegenerator` `controller` i `razorpage` :
+W poniższej tabeli wymieniono opcje  `aspnet-codegenerator` `controller` i `razorpage` :
 
 [!INCLUDE [aspnet-codegenerator-args-md.md](~/includes/aspnet-codegenerator-args-md.md)]
 
-W poniższej tabeli wymieniono opcje unikatowe dla `aspnet-codegenerator controller` :
+W poniższej tabeli wymieniono opcje unikatowe dla  `aspnet-codegenerator controller` :
 
 | Opcja                         | Opis                                                                                               |
 | ------------------------------ | --------------------------------------------------------------------------------------------------------- |
 | --ControllerName lub-Name      | Nazwa kontrolera.                                                                                   |
 | --useAsyncActions lub-async    | Generuj akcje kontrolerów asynchronicznych.                                                                        |
 | --noviews lub NV               | **Nie Generuj żadnych** widoków.                                                                                    |
-| --restWithNoViews lub-API      | Wygeneruj kontroler z interfejsem API REST. `noViews`Założono, że wszystkie opcje powiązane z widokiem są ignorowane. |
+| --restWithNoViews lub-API      | Wygeneruj kontroler z interfejsem API REST. `noViews` Założono, że wszystkie opcje powiązane z widokiem są ignorowane. |
 | --readWriteActions lub-akcje | Generuj kontroler z akcjami odczytu/zapisu bez modelu.                                              |
 
 Użyj `-h` przełącznika, aby uzyskać pomoc dotyczącą `aspnet-codegenerator controller` polecenia:
@@ -157,7 +158,7 @@ Aby zapoznać się z przykładem, zobacz Tworzenie [szkieletu modelu filmu](xref
 
 <a name="rp"></a>
 
-RazorStrony mogą być tworzone indywidualnie przez określenie nazwy nowej strony i szablonu do użycia. Obsługiwane są następujące szablony:
+Razor Strony mogą być tworzone indywidualnie przez określenie nazwy nowej strony i szablonu do użycia. Obsługiwane są następujące szablony:
 
 * `Empty`
 * `Create`
@@ -180,11 +181,11 @@ Zazwyczaj nazwa szablonu i wygenerowanego pliku nie jest określona i tworzone s
 * `Details`
 * `List`
 
-W poniższej tabeli wymieniono opcje `aspnet-codegenerator` `razorpage` i `controller` :
+W poniższej tabeli wymieniono opcje  `aspnet-codegenerator` `razorpage` i `controller` :
 
 [!INCLUDE [aspnet-codegenerator-args-md.md](~/includes/aspnet-codegenerator-args-md.md)]
 
-W poniższej tabeli wymieniono opcje unikatowe dla `aspnet-codegenerator razorpage` :
+W poniższej tabeli wymieniono opcje unikatowe dla  `aspnet-codegenerator razorpage` :
 
 | Opcja                        | Opis                                                                           |
 | ----------------------------- | ------------------------------------------------------------------------------------- |

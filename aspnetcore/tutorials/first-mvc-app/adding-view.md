@@ -5,6 +5,7 @@ description: Część 3 serii samouczków na ASP.NET Core MVC.
 ms.author: riande
 ms.date: 8/04/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-view
-ms.openlocfilehash: 45ae6059e039ccfb4d835c615b660abc39251530
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 970cc1fe6e0a0e0204ddafec09c15db6fed9aa66
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021994"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629759"
 ---
 # <a name="part-3-add-a-view-to-an-aspnet-core-mvc-app"></a>Część 3 Dodawanie widoku do aplikacji ASP.NET Core MVC
 
@@ -40,7 +41,7 @@ Poprzedni kod wywołuje <xref:Microsoft.AspNetCore.Mvc.Controller.View*> metodę
 
 ## <a name="add-a-view"></a>Dodawanie widoku
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Kliknij prawym przyciskiem myszy folder *widoki* , a następnie **Dodaj > nowy folder** i nadaj mu nazwę folder *HelloWorld*.
 
@@ -92,7 +93,7 @@ Przejdź do adresu `https://localhost:{PORT}/HelloWorld`. Metoda w niewykonanym 
 
 Wybierz linki menu (**MvcMovie**, **Home**i **privacy**). Każda Strona wyświetla ten sam układ menu. Układ menu jest implementowany w pliku *views/Shared/_Layout. cshtml* . Otwórz plik *views/Shared/_Layout. cshtml* .
 
-Szablony [układów](xref:mvc/views/layout) umożliwiają określenie układu kontenera HTML witryny w jednym miejscu, a następnie zastosowanie go na wielu stronach w witrynie. Znajdź `@RenderBody()` wiersz. `RenderBody`jest symbolem zastępczym, w którym wszystkie utworzone strony specyficzne dla widoku są *widoczne na stronie* układ. Na przykład po wybraniu linku **prywatności** widok **widoki/główna/prywatność. cshtml** jest renderowany wewnątrz `RenderBody` metody.
+Szablony [układów](xref:mvc/views/layout) umożliwiają określenie układu kontenera HTML witryny w jednym miejscu, a następnie zastosowanie go na wielu stronach w witrynie. Znajdź `@RenderBody()` wiersz. `RenderBody` jest symbolem zastępczym, w którym wszystkie utworzone strony specyficzne dla widoku są *widoczne na stronie* układ. Na przykład po wybraniu linku **prywatności** widok **widoki/główna/prywatność. cshtml** jest renderowany wewnątrz `RenderBody` metody.
 
 ## <a name="change-the-title-footer-and-menu-link-in-the-layout-file"></a>Zmień tytuł, stopkę i łącze menu w pliku układu
 
@@ -131,7 +132,7 @@ Zmień tytuł i `<h2>` element pliku widoku *widoki/HelloWorld/index. cshtml* :
 
 Tytuł i `<h2>` element są nieco inne, więc można zobaczyć, który bit kodu zmienia ekran.
 
-`ViewData["Title"] = "Movie List";`w powyższym kodzie ustawia `Title` Właściwość `ViewData` słownika na "Lista filmów". `Title`Właściwość jest używana w `<title>` elemencie HTML na stronie układu:
+`ViewData["Title"] = "Movie List";` w powyższym kodzie ustawia `Title` Właściwość `ViewData` słownika na "Lista filmów". `Title`Właściwość jest używana w `<title>` elemencie HTML na stronie układu:
 
 ```cshtml
 <title>@ViewData["Title"] - Movie App</title>
@@ -197,7 +198,7 @@ Poprzedni kod wywołuje <xref:Microsoft.AspNetCore.Mvc.Controller.View*> metodę
 
 ## <a name="add-a-view"></a>Dodawanie widoku
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Kliknij prawym przyciskiem myszy folder *widoki* , a następnie **Dodaj > nowy folder** i nadaj mu nazwę folder *HelloWorld*.
 
@@ -249,7 +250,7 @@ Przejdź do adresu `https://localhost:{PORT}/HelloWorld`. Metoda w niewykonanym 
 
 Wybierz linki menu (**MvcMovie**, **Home**i **privacy**). Każda Strona wyświetla ten sam układ menu. Układ menu jest implementowany w pliku *views/Shared/_Layout. cshtml* . Otwórz plik *views/Shared/_Layout. cshtml* .
 
-Szablony [układów](xref:mvc/views/layout) umożliwiają określenie układu kontenera HTML witryny w jednym miejscu, a następnie zastosowanie go na wielu stronach w witrynie. Znajdź `@RenderBody()` wiersz. `RenderBody`jest symbolem zastępczym, w którym wszystkie utworzone strony specyficzne dla widoku są *widoczne na stronie* układ. Na przykład po wybraniu linku **prywatności** widok **widoki/główna/prywatność. cshtml** jest renderowany wewnątrz `RenderBody` metody.
+Szablony [układów](xref:mvc/views/layout) umożliwiają określenie układu kontenera HTML witryny w jednym miejscu, a następnie zastosowanie go na wielu stronach w witrynie. Znajdź `@RenderBody()` wiersz. `RenderBody` jest symbolem zastępczym, w którym wszystkie utworzone strony specyficzne dla widoku są *widoczne na stronie* układ. Na przykład po wybraniu linku **prywatności** widok **widoki/główna/prywatność. cshtml** jest renderowany wewnątrz `RenderBody` metody.
 
 ## <a name="change-the-title-footer-and-menu-link-in-the-layout-file"></a>Zmień tytuł, stopkę i łącze menu w pliku układu
 
@@ -291,7 +292,7 @@ Zmień tytuł i `<h2>` element pliku widoku *widoki/HelloWorld/index. cshtml* :
 
 Tytuł i `<h2>` element są nieco inne, więc można zobaczyć, który bit kodu zmienia ekran.
 
-`ViewData["Title"] = "Movie List";`w powyższym kodzie ustawia `Title` Właściwość `ViewData` słownika na "Lista filmów". `Title`Właściwość jest używana w `<title>` elemencie HTML na stronie układu:
+`ViewData["Title"] = "Movie List";` w powyższym kodzie ustawia `Title` Właściwość `ViewData` słownika na "Lista filmów". `Title`Właściwość jest używana w `<title>` elemencie HTML na stronie układu:
 
 ```cshtml
 <title>@ViewData["Title"] - Movie App</title>

@@ -1,5 +1,5 @@
 ---
-title: Uwierzytelnianie i autoryzacja w ASP.NET CoreSignalR
+title: Uwierzytelnianie i autoryzacja w ASP.NET Core SignalR
 author: bradygaster
 description: Dowiedz się, jak używać uwierzytelniania i autoryzacji w programie ASP.NET Core SignalR .
 monikerRange: '>= aspnetcore-2.1'
@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,14 +18,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/authn-and-authz
-ms.openlocfilehash: 1e022c510dda3e39dd02d607f1d9c493aecdeb5a
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 3a2ae5c7bc4853bad7b94af0d26ad5cd0358688f
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021565"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628940"
 ---
-# <a name="authentication-and-authorization-in-aspnet-core-no-locsignalr"></a>Uwierzytelnianie i autoryzacja w ASP.NET CoreSignalR
+# <a name="authentication-and-authorization-in-aspnet-core-no-locsignalr"></a>Uwierzytelnianie i autoryzacja w ASP.NET Core SignalR
 
 Według [Andrew Stanton-pielęgniarki](https://twitter.com/anurse)
 
@@ -32,7 +33,7 @@ Według [Andrew Stanton-pielęgniarki](https://twitter.com/anurse)
 
 ## <a name="authenticate-users-connecting-to-a-no-locsignalr-hub"></a>Uwierzytelnianie użytkowników łączących się z SignalR centrum
 
-SignalRmożna go używać z [uwierzytelnianiem ASP.NET Core](xref:security/authentication/identity) , aby skojarzyć użytkownika z każdym połączeniem. W centrum dane uwierzytelniania są dostępne z poziomu właściwości [HubConnectionContext. User](/dotnet/api/microsoft.aspnetcore.signalr.hubconnectioncontext.user) . Uwierzytelnianie umożliwia centrum wywoływanie metod we wszystkich połączeniach skojarzonych z użytkownikiem. Aby uzyskać więcej informacji, zobacz [Zarządzanie użytkownikami i grupami w programie SignalR ](xref:signalr/groups). Wiele połączeń może być skojarzonych z pojedynczym użytkownikiem.
+SignalR można go używać z [uwierzytelnianiem ASP.NET Core](xref:security/authentication/identity) , aby skojarzyć użytkownika z każdym połączeniem. W centrum dane uwierzytelniania są dostępne z poziomu właściwości [HubConnectionContext. User](/dotnet/api/microsoft.aspnetcore.signalr.hubconnectioncontext.user) . Uwierzytelnianie umożliwia centrum wywoływanie metod we wszystkich połączeniach skojarzonych z użytkownikiem. Aby uzyskać więcej informacji, zobacz [Zarządzanie użytkownikami i grupami w programie SignalR ](xref:signalr/groups). Wiele połączeń może być skojarzonych z pojedynczym użytkownikiem.
 
 Poniżej przedstawiono przykład `Startup.Configure` użycia SignalR i ASP.NET Core uwierzytelniania:
 
@@ -88,7 +89,7 @@ public void Configure(IApplicationBuilder app)
 
 ::: moniker-end
 
-### <a name="no-loccookie-authentication"></a>Cookieponowne
+### <a name="no-loccookie-authentication"></a>Cookie ponowne
 
 W aplikacji opartej na przeglądarce cookie uwierzytelnianie umożliwia istniejące poświadczenia użytkownika w celu automatycznego przechodzenia do SignalR połączeń. W przypadku korzystania z klienta przeglądarki nie jest wymagana dodatkowa konfiguracja. Jeśli użytkownik jest zalogowany do aplikacji, SignalR połączenie automatycznie dziedziczy to uwierzytelnianie.
 
@@ -125,7 +126,7 @@ W standardowym interfejsie API sieci Web tokeny okaziciela są wysyłane w nagł
 [!INCLUDE[request localized comments](~/includes/code-comments-loc.md)]
 
 > [!NOTE]
-> Ciąg zapytania jest używany w przeglądarkach w przypadku nawiązywania połączenia z usługą WebSockets i zdarzeniami wysłanymi przez serwer z powodu ograniczeń interfejsu API przeglądarki. W przypadku korzystania z protokołu HTTPS wartości ciągu zapytania są zabezpieczane przez połączenie TLS. Jednak wiele serwerów rejestruje wartości ciągu zapytania. Aby uzyskać więcej informacji, zobacz [zagadnienia dotyczące SignalR zabezpieczeń w ASP.NET Core ](xref:signalr/security). SignalRużywa nagłówków do przesyłania tokenów w środowiskach, które je obsługują (takich jak klienci .NET i Java).
+> Ciąg zapytania jest używany w przeglądarkach w przypadku nawiązywania połączenia z usługą WebSockets i zdarzeniami wysłanymi przez serwer z powodu ograniczeń interfejsu API przeglądarki. W przypadku korzystania z protokołu HTTPS wartości ciągu zapytania są zabezpieczane przez połączenie TLS. Jednak wiele serwerów rejestruje wartości ciągu zapytania. Aby uzyskać więcej informacji, zobacz [zagadnienia dotyczące SignalR zabezpieczeń w ASP.NET Core ](xref:signalr/security). SignalR używa nagłówków do przesyłania tokenów w środowiskach, które je obsługują (takich jak klienci .NET i Java).
 
 ### <a name="no-loccookies-vs-bearer-tokens"></a>Cookietokeny s i Bearer 
 
@@ -133,7 +134,7 @@ Cookies są specyficzne dla przeglądarek. Wysyłanie ich z innych rodzajów kli
 
 ### <a name="windows-authentication"></a>Uwierzytelnianie Windows
 
-Jeśli w aplikacji skonfigurowano [uwierzytelnianie systemu Windows](xref:security/authentication/windowsauth) , program SignalR może używać tej tożsamości do zabezpieczania centrów. Aby jednak wysyłać komunikaty do poszczególnych użytkowników, należy dodać niestandardowego dostawcę identyfikatora użytkownika. System uwierzytelniania systemu Windows nie zapewnia żądania "name identifier". SignalRużywa tego żądania, aby określić nazwę użytkownika.
+Jeśli w aplikacji skonfigurowano [uwierzytelnianie systemu Windows](xref:security/authentication/windowsauth) , program SignalR może używać tej tożsamości do zabezpieczania centrów. Aby jednak wysyłać komunikaty do poszczególnych użytkowników, należy dodać niestandardowego dostawcę identyfikatora użytkownika. System uwierzytelniania systemu Windows nie zapewnia żądania "name identifier". SignalR używa tego żądania, aby określić nazwę użytkownika.
 
 Dodaj nową klasę, która implementuje `IUserIdProvider` i pobiera jedno z oświadczeń od użytkownika do użycia jako identyfikator. Aby na przykład użyć żądania "name" (czyli nazwy użytkownika systemu Windows w formularzu `[Domain]\[Username]` ), Utwórz następującą klasę:
 
@@ -228,7 +229,7 @@ public class ChatHub : Hub
 
 ### <a name="use-authorization-handlers-to-customize-hub-method-authorization"></a>Używanie programów obsługi autoryzacji do dostosowywania autoryzacji metody centrum
 
-SignalRudostępnia zasób niestandardowy do obsługi autoryzacji, gdy metoda centrum wymaga autoryzacji. Zasób jest wystąpieniem `HubInvocationContext` . `HubInvocationContext`Obejmuje `HubCallerContext` , nazwę wywoływanej metody centrum oraz argumenty metody centrum.
+SignalR udostępnia zasób niestandardowy do obsługi autoryzacji, gdy metoda centrum wymaga autoryzacji. Zasób jest wystąpieniem `HubInvocationContext` . `HubInvocationContext`Obejmuje `HubCallerContext` , nazwę wywoływanej metody centrum oraz argumenty metody centrum.
 
 Rozważmy przykład pokoju czatu umożliwiającego logowanie do wielu organizacji za pośrednictwem Azure Active Directory. Każda osoba mająca konto Microsoft może zalogować się do programu chat, ale tylko członkowie organizacji będącej właścicielem będą mogli uniemożliwić użytkownikom lub wyświetlać historie rozmów użytkowników. Ponadto możemy chcieć ograniczyć niektóre funkcje do określonych użytkowników. Korzystanie z zaktualizowanych funkcji w ASP.NET Core 3,0 jest to w całości możliwe. Zwróć uwagę na to, jak `DomainRestrictedRequirement` służy jako niestandardowy `IAuthorizationRequirement` . Teraz, gdy `HubInvocationContext` parametr zasobu jest przesyłany, wewnętrzna logika może sprawdzić kontekst, w którym jest wywoływana centrum, i podjąć decyzje dotyczące umożliwienia użytkownikowi wykonywania poszczególnych metod centrów.
 
@@ -298,7 +299,7 @@ W poprzednim przykładzie `DomainRestrictedRequirement` Klasa jest zarówno, `IA
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Uwierzytelnianie tokenu okaziciela w ASP.NET Core](https://blogs.msdn.microsoft.com/webdev/2016/10/27/bearer-token-authentication-in-asp-net-core/)
 * [Autoryzacja na podstawie zasobów](xref:security/authorization/resourcebased)

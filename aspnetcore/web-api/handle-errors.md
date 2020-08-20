@@ -7,6 +7,7 @@ ms.author: prkrishn
 ms.custom: mvc
 ms.date: 07/23/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/handle-errors
-ms.openlocfilehash: a17db9de5f19d11853fb3f9f8c45ade8391ff600
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: d9d5703e6c02ed2b95cbe95d3624cd0647ee239f
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021500"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631267"
 ---
 # <a name="handle-errors-in-aspnet-core-web-apis"></a>Obsługa błędów w ASP.NET Core interfejsów API sieci Web
 
@@ -78,7 +79,7 @@ Host: localhost:44312
 User-Agent: curl/7.55.1
 ```
 
-Aby zamiast tego wyświetlić odpowiedź sformatowaną w formacie HTML, należy ustawić `Accept` nagłówek żądania HTTP na `text/html` Typ nośnika. Przykład:
+Aby zamiast tego wyświetlić odpowiedź sformatowaną w formacie HTML, należy ustawić `Accept` nagłówek żądania HTTP na `text/html` Typ nośnika. Na przykład:
 
 ```bash
 curl -i -H "Accept: text/html" https://localhost:5001/weatherforecast/chicago
@@ -294,7 +295,7 @@ Odpowiedź na błąd można skonfigurować w jeden z następujących sposobów:
 1. [Implementuj ProblemDetailsFactory](#implement-problemdetailsfactory)
 1. [Użyj ApiBehaviorOptions. ClientErrorMapping](#use-apibehavioroptionsclienterrormapping)
 
-### <a name="implement-problemdetailsfactory"></a>Wprowadzą`ProblemDetailsFactory`
+### <a name="implement-problemdetailsfactory"></a>Wprowadzą `ProblemDetailsFactory`
 
 MVC używa <xref:Microsoft.AspNetCore.Mvc.Infrastructure.ProblemDetailsFactory?displayProperty=fullName> do tworzenia wszystkich wystąpień <xref:Microsoft.AspNetCore.Mvc.ProblemDetails> i <xref:Microsoft.AspNetCore.Mvc.ValidationProblemDetails> . Obejmuje to odpowiedzi na błędy klientów, odpowiedzi na błędy walidacji i <xref:Microsoft.AspNetCore.Mvc.ControllerBase.Problem%2A?displayProperty=nameWithType> <xref:Microsoft.AspNetCore.Mvc.ControllerBase.ValidationProblem%2A?displayProperty=nameWithType> metody pomocnika.
 

@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/key-vault-configuration
-ms.openlocfilehash: 20561b2608b343d0c0bcf545cc9c48d1886b7cb9
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 32967e039671721852b8e421fe5a08763b23e418
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022020"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629785"
 ---
 # <a name="azure-key-vault-configuration-provider-in-aspnet-core"></a>Azure Key Vault dostawcę konfiguracji w programie ASP.NET Core
 
@@ -157,9 +158,9 @@ Certyfikat X. 509 jest zarządzany przez system operacyjny. Aplikacja wywołuje 
 
 Przykładowe wartości:
 
-* Nazwa magazynu kluczy:`contosovault`
-* Identyfikator aplikacji:`627e911e-43cc-61d4-992e-12db9c81b413`
-* Odcisk palca certyfikatu:`fe14593dd66b2406c5269d742d04b6e1ab03adb1`
+* Nazwa magazynu kluczy: `contosovault`
+* Identyfikator aplikacji: `627e911e-43cc-61d4-992e-12db9c81b413`
+* Odcisk palca certyfikatu: `fe14593dd66b2406c5269d742d04b6e1ab03adb1`
 
 *appsettings.js*:
 
@@ -195,7 +196,7 @@ Przykładowa aplikacja:
 
 [!code-csharp[](key-vault-configuration/samples/3.x/SampleApp/Program.cs?name=snippet2&highlight=13-21)]
 
-Przykładowa wartość nazwy magazynu kluczy:`contosovault`
+Przykładowa wartość nazwy magazynu kluczy: `contosovault`
     
 *appsettings.js*:
 
@@ -213,7 +214,7 @@ Aby uzyskać informacje na temat używania dostawcy z zarządzaną tożsamości�
 
 ## <a name="configuration-options"></a>Opcje konfiguracji
 
-<xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*>może akceptować <xref:Microsoft.Extensions.Configuration.AzureKeyVault.AzureKeyVaultConfigurationOptions> :
+<xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> może akceptować <xref:Microsoft.Extensions.Configuration.AzureKeyVault.AzureKeyVaultConfigurationOptions> :
 
 ```csharp
 config.AddAzureKeyVault(
@@ -225,27 +226,27 @@ config.AddAzureKeyVault(
 
 | Właściwość         | Opis |
 | ---------------- | ----------- |
-| `Client`         | <xref:Microsoft.Azure.KeyVault.KeyVaultClient>służy do pobierania wartości. |
-| `Manager`        | <xref:Microsoft.Extensions.Configuration.AzureKeyVault.IKeyVaultSecretManager>wystąpienie używane do kontrolowania ładowania klucza tajnego. |
-| `ReloadInterval` | `Timespan`aby poczekać między kolejnymi próbami sondowania magazynu kluczy pod kątem zmian. Wartość domyślna to `null` (konfiguracja nie jest ponownie ładowana). |
+| `Client`         | <xref:Microsoft.Azure.KeyVault.KeyVaultClient> służy do pobierania wartości. |
+| `Manager`        | <xref:Microsoft.Extensions.Configuration.AzureKeyVault.IKeyVaultSecretManager> wystąpienie używane do kontrolowania ładowania klucza tajnego. |
+| `ReloadInterval` | `Timespan` aby poczekać między kolejnymi próbami sondowania magazynu kluczy pod kątem zmian. Wartość domyślna to `null` (konfiguracja nie jest ponownie ładowana). |
 | `Vault`          | Identyfikator URI magazynu kluczy. |
 
 ## <a name="use-a-key-name-prefix"></a>Użyj prefiksu nazwy klucza
 
-<xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*>zapewnia Przeciążenie, które akceptuje implementację <xref:Microsoft.Extensions.Configuration.AzureKeyVault.IKeyVaultSecretManager> , która pozwala na kontrolowanie sposobu, w jaki wpisy tajne magazynu kluczy są konwertowane na klucze konfiguracji. Na przykład można zaimplementować interfejs w celu załadowania wartości tajnych na podstawie wartości prefiksu podanej podczas uruchamiania aplikacji. Dzięki temu można na przykład ładować wpisy tajne na podstawie wersji aplikacji.
+<xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> zapewnia Przeciążenie, które akceptuje implementację <xref:Microsoft.Extensions.Configuration.AzureKeyVault.IKeyVaultSecretManager> , która pozwala na kontrolowanie sposobu, w jaki wpisy tajne magazynu kluczy są konwertowane na klucze konfiguracji. Na przykład można zaimplementować interfejs w celu załadowania wartości tajnych na podstawie wartości prefiksu podanej podczas uruchamiania aplikacji. Dzięki temu można na przykład ładować wpisy tajne na podstawie wersji aplikacji.
 
 > [!WARNING]
 > Nie należy używać prefiksów w kluczach tajnych magazynu kluczy w celu umieszczenia wpisów tajnych dla wielu aplikacji w tym samym magazynie kluczy lub umieszczenia tajemnicy środowiskowej (na przykład *tworzenia* i *produkcji* wpisów tajnych) w tym samym magazynie. Firma Microsoft zaleca, aby różne aplikacje i środowiska deweloperskie i produkcyjne używały oddzielnych magazynów kluczy do izolowania środowisk aplikacji w celu uzyskania najwyższego poziomu zabezpieczeń.
 
 W poniższym przykładzie wpis tajny jest ustanowiony w magazynie kluczy (oraz za pomocą narzędzia tajnego Menedżera dla środowiska programistycznego) `5000-AppSecret` (okresy nie są dozwolone w nazwach wpisów tajnych magazynu kluczy). Ten klucz tajny reprezentuje wpis tajny aplikacji dla 5.0.0.0 wersji aplikacji. W przypadku innej wersji aplikacji 5.1.0.0 wpis tajny jest dodawany do magazynu kluczy (i przy użyciu narzędzia do zarządzania kluczami tajnymi) dla programu `5100-AppSecret` . Każda wersja aplikacji ładuje wartość tajnej wersji do swojej konfiguracji jako `AppSecret` , oddzielając ją od wersji podczas ładowania klucza tajnego.
 
-<xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*>jest wywoływana z niestandardowym <xref:Microsoft.Extensions.Configuration.AzureKeyVault.IKeyVaultSecretManager> :
+<xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> jest wywoływana z niestandardowym <xref:Microsoft.Extensions.Configuration.AzureKeyVault.IKeyVaultSecretManager> :
 
 [!code-csharp[](key-vault-configuration/samples_snapshot/Program.cs)]
 
 <xref:Microsoft.Extensions.Configuration.AzureKeyVault.IKeyVaultSecretManager>Implementacja reaguje na prefiksy wersji wpisów tajnych w celu załadowania odpowiedniego wpisu tajnego do konfiguracji:
 
-* `Load`ładuje wpis tajny, gdy jego nazwa zaczyna się od prefiksu. Inne wpisy tajne nie są ładowane.
+* `Load` ładuje wpis tajny, gdy jego nazwa zaczyna się od prefiksu. Inne wpisy tajne nie są ładowane.
 * `GetKey`:
   * Usuwa prefiks z nazwy wpisu tajnego.
   * Zastępuje dwie kreski w dowolnej nazwie znakiem `KeyDelimiter` , który jest ogranicznikiem używanym w konfiguracji (zazwyczaj dwukropek). Azure Key Vault nie zezwala na dwukropek w nazwach kluczy tajnych.
@@ -362,7 +363,7 @@ Gdy aplikacja nie może załadować konfiguracji przy użyciu dostawcy, komunika
 * Klucz konfiguracji (nazwa) jest niepoprawny w aplikacji dla wartości, którą próbujesz załadować.
 * Podczas dodawania zasad dostępu dla aplikacji do magazynu kluczy zasady zostały utworzone, ale nie wybrano przycisku **Zapisz** w interfejsie użytkownika **zasad dostępu** .
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:fundamentals/configuration/index>
 * [Microsoft Azure: Key Vault](https://azure.microsoft.com/services/key-vault/)
@@ -503,9 +504,9 @@ Certyfikat X. 509 jest zarządzany przez system operacyjny. Aplikacja wywołuje 
 
 Przykładowe wartości:
 
-* Nazwa magazynu kluczy:`contosovault`
-* Identyfikator aplikacji:`627e911e-43cc-61d4-992e-12db9c81b413`
-* Odcisk palca certyfikatu:`fe14593dd66b2406c5269d742d04b6e1ab03adb1`
+* Nazwa magazynu kluczy: `contosovault`
+* Identyfikator aplikacji: `627e911e-43cc-61d4-992e-12db9c81b413`
+* Odcisk palca certyfikatu: `fe14593dd66b2406c5269d742d04b6e1ab03adb1`
 
 *appsettings.js*:
 
@@ -541,7 +542,7 @@ Przykładowa aplikacja:
 
 [!code-csharp[](key-vault-configuration/samples/2.x/SampleApp/Program.cs?name=snippet2&highlight=13-21)]
 
-Przykładowa wartość nazwy magazynu kluczy:`contosovault`
+Przykładowa wartość nazwy magazynu kluczy: `contosovault`
     
 *appsettings.js*:
 
@@ -559,20 +560,20 @@ Aby uzyskać informacje na temat używania dostawcy z zarządzaną tożsamości�
 
 ## <a name="use-a-key-name-prefix"></a>Użyj prefiksu nazwy klucza
 
-<xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*>zapewnia Przeciążenie, które akceptuje implementację <xref:Microsoft.Extensions.Configuration.AzureKeyVault.IKeyVaultSecretManager> , która pozwala na kontrolowanie sposobu, w jaki wpisy tajne magazynu kluczy są konwertowane na klucze konfiguracji. Na przykład można zaimplementować interfejs w celu załadowania wartości tajnych na podstawie wartości prefiksu podanej podczas uruchamiania aplikacji. Dzięki temu można na przykład ładować wpisy tajne na podstawie wersji aplikacji.
+<xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> zapewnia Przeciążenie, które akceptuje implementację <xref:Microsoft.Extensions.Configuration.AzureKeyVault.IKeyVaultSecretManager> , która pozwala na kontrolowanie sposobu, w jaki wpisy tajne magazynu kluczy są konwertowane na klucze konfiguracji. Na przykład można zaimplementować interfejs w celu załadowania wartości tajnych na podstawie wartości prefiksu podanej podczas uruchamiania aplikacji. Dzięki temu można na przykład ładować wpisy tajne na podstawie wersji aplikacji.
 
 > [!WARNING]
 > Nie należy używać prefiksów w kluczach tajnych magazynu kluczy w celu umieszczenia wpisów tajnych dla wielu aplikacji w tym samym magazynie kluczy lub umieszczenia tajemnicy środowiskowej (na przykład *tworzenia* i *produkcji* wpisów tajnych) w tym samym magazynie. Firma Microsoft zaleca, aby różne aplikacje i środowiska deweloperskie i produkcyjne używały oddzielnych magazynów kluczy do izolowania środowisk aplikacji w celu uzyskania najwyższego poziomu zabezpieczeń.
 
 W poniższym przykładzie wpis tajny jest ustanowiony w magazynie kluczy (oraz za pomocą narzędzia tajnego Menedżera dla środowiska programistycznego) `5000-AppSecret` (okresy nie są dozwolone w nazwach wpisów tajnych magazynu kluczy). Ten klucz tajny reprezentuje wpis tajny aplikacji dla 5.0.0.0 wersji aplikacji. W przypadku innej wersji aplikacji 5.1.0.0 wpis tajny jest dodawany do magazynu kluczy (i przy użyciu narzędzia do zarządzania kluczami tajnymi) dla programu `5100-AppSecret` . Każda wersja aplikacji ładuje wartość tajnej wersji do swojej konfiguracji jako `AppSecret` , oddzielając ją od wersji podczas ładowania klucza tajnego.
 
-<xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*>jest wywoływana z niestandardowym <xref:Microsoft.Extensions.Configuration.AzureKeyVault.IKeyVaultSecretManager> :
+<xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> jest wywoływana z niestandardowym <xref:Microsoft.Extensions.Configuration.AzureKeyVault.IKeyVaultSecretManager> :
 
 [!code-csharp[](key-vault-configuration/samples_snapshot/Program.cs)]
 
 <xref:Microsoft.Extensions.Configuration.AzureKeyVault.IKeyVaultSecretManager>Implementacja reaguje na prefiksy wersji wpisów tajnych w celu załadowania odpowiedniego wpisu tajnego do konfiguracji:
 
-* `Load`ładuje wpis tajny, gdy jego nazwa zaczyna się od prefiksu. Inne wpisy tajne nie są ładowane.
+* `Load` ładuje wpis tajny, gdy jego nazwa zaczyna się od prefiksu. Inne wpisy tajne nie są ładowane.
 * `GetKey`:
   * Usuwa prefiks z nazwy wpisu tajnego.
   * Zastępuje dwie kreski w dowolnej nazwie znakiem `KeyDelimiter` , który jest ogranicznikiem używanym w konfiguracji (zazwyczaj dwukropek). Azure Key Vault nie zezwala na dwukropek w nazwach kluczy tajnych.
@@ -689,7 +690,7 @@ Gdy aplikacja nie może załadować konfiguracji przy użyciu dostawcy, komunika
 * Klucz konfiguracji (nazwa) jest niepoprawny w aplikacji dla wartości, którą próbujesz załadować.
 * Podczas dodawania zasad dostępu dla aplikacji do magazynu kluczy zasady zostały utworzone, ale nie wybrano przycisku **Zapisz** w interfejsie użytkownika **zasad dostępu** .
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:fundamentals/configuration/index>
 * [Microsoft Azure: Key Vault](https://azure.microsoft.com/services/key-vault/)

@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 09/24/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/metapackage-app
-ms.openlocfilehash: 182d167a1848492846a04c938749a6de30bce377
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: d9753a43bdc47b467dcf781c97069edfaa693a8f
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88017067"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630513"
 ---
 # <a name="microsoftaspnetcoreapp-for-aspnet-core"></a>Microsoft. AspNetCore. App dla ASP.NET Core
 
 ::: moniker range=">= aspnetcore-3.0"
 
- ASP.NET Core Shared Framework ( `Microsoft.AspNetCore.App` ) zawiera zestawy, które są opracowywane i obsługiwane przez firmę Microsoft. `Microsoft.AspNetCore.App`Program jest instalowany podczas instalowania [zestawu SDK platformy .NET Core 3,0 lub nowszego](https://dotnet.microsoft.com/download/dotnet-core/3.0) . *Platforma udostępniona* to zestaw zestawów (plików*dll* ), które są zainstalowane na komputerze i zawiera składnik środowiska uruchomieniowego oraz pakiet docelowy. Aby uzyskać więcej informacji, zobacz [udostępnioną strukturę](https://natemcmaster.com/blog/2018/08/29/netcore-primitives-2/).
+ ASP.NET Core Shared Framework ( `Microsoft.AspNetCore.App` ) zawiera zestawy, które są opracowywane i obsługiwane przez firmę Microsoft. `Microsoft.AspNetCore.App` Program jest instalowany podczas instalowania [zestawu SDK platformy .NET Core 3,0 lub nowszego](https://dotnet.microsoft.com/download/dotnet-core/3.0) . *Platforma udostępniona* to zestaw zestawów (plików*dll* ), które są zainstalowane na komputerze i zawiera składnik środowiska uruchomieniowego oraz pakiet docelowy. Aby uzyskać więcej informacji, zobacz [udostępnioną strukturę](https://natemcmaster.com/blog/2018/08/29/netcore-primitives-2/).
 
 * Projekty przeznaczone dla `Microsoft.NET.Sdk.Web` zestawu SDK niejawnie odwołują się do `Microsoft.AspNetCore.App` struktury.
 
@@ -67,7 +68,7 @@ Użycie `Microsoft.AspNetCore.App` pakietu z pakietem zawiera ograniczenia wersj
 
 * W przypadku dołączenia pakietu, który ma zależność przechodnią (nie bezpośrednią) w pakiecie w programie `Microsoft.AspNetCore.App` , a numery wersji różnią się, pakiet NuGet wygeneruje błąd.
 * Inne pakiety dodane do aplikacji nie mogą zmienić wersji pakietów uwzględnionych w programie `Microsoft.AspNetCore.App` .
-* Spójność wersji zapewnia niezawodne środowisko pracy. `Microsoft.AspNetCore.App`została zaprojektowana tak, aby uniemożliwić nietestowaną kombinację pokrewnych bitów w tej samej aplikacji.
+* Spójność wersji zapewnia niezawodne środowisko pracy. `Microsoft.AspNetCore.App` została zaprojektowana tak, aby uniemożliwić nietestowaną kombinację pokrewnych bitów w tej samej aplikacji.
 
 Aplikacje korzystające z `Microsoft.AspNetCore.App` pakietubinding automatycznie wykorzystują ASP.NET Core udostępnionej platformy. W przypadku korzystania z `Microsoft.AspNetCore.App` pakietubinding nie są wdrażane **żadne** zasoby z przywoływanych ASP.NET Core pakietów NuGet z aplikacją &mdash; , ASP.NET Core udostępnione środowisko zawiera te zasoby. Zasoby w udostępnionej architekturze są wstępnie skompilowane w celu poprawienia czasu uruchamiania aplikacji. Aby uzyskać więcej informacji, zobacz [udostępnioną strukturę](https://natemcmaster.com/blog/2018/08/29/netcore-primitives-2/).
 
@@ -97,7 +98,7 @@ Określenie numeru wersji w `Microsoft.AspNetCore.App` odwołaniu nie gwarantuje
 
 ::: moniker range="= aspnetcore-2.1"
 
-`<Project Sdk`musi być ustawiona na, aby można było `Microsoft.NET.Sdk.Web` używać niejawnej wersji `Microsoft.AspNetCore.App` . Gdy `<Project Sdk="Microsoft.NET.Sdk">` jest używane (bez końcowego `.Web` ):
+`<Project Sdk` musi być ustawiona na, aby można było `Microsoft.NET.Sdk.Web` używać niejawnej wersji `Microsoft.AspNetCore.App` . Gdy `<Project Sdk="Microsoft.NET.Sdk">` jest używane (bez końcowego `.Web` ):
 
 * Zostanie wygenerowane następujące ostrzeżenie:
 

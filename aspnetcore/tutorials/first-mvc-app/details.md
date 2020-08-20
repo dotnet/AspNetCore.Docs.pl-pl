@@ -5,6 +5,7 @@ description: Część 10 serii samouczków na ASP.NET Core MVC.
 ms.author: riande
 ms.date: 12/13/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/details
-ms.openlocfilehash: 2bde0e649af4928a03027b646436cc7b215b707c
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: b25113f8e2132c06e06d53a25e71ed2a42deb00f
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021656"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629707"
 ---
 # <a name="part-10-examine-the-details-and-delete-methods-of-an-aspnet-core-app"></a>Część 10, badanie szczegółów i metod usuwania aplikacji ASP.NET Core
 
@@ -34,7 +35,7 @@ Aparat tworzenia szkieletu MVC, który utworzył tę metodę akcji, dodaje komen
 
 [!code-csharp[](start-mvc/sample/MvcMovie3/Startup.cs?highlight=5&name=snippet_1)]
 
-EF ułatwia wyszukiwanie danych przy użyciu `FirstOrDefaultAsync` metody. Ważna funkcja zabezpieczeń wbudowana w metodę polega na tym, że kod sprawdza, czy metoda wyszukiwania znalazła film przed podjęciem próby wykonania jakichkolwiek czynności. Na przykład haker może wprowadzić błędy do witryny przez zmianę adresu URL utworzonego przez linki z `http://localhost:{PORT}/Movies/Details/1` do czegoś takiego jak `http://localhost:{PORT}/Movies/Details/12345` (lub innej wartości, która nie reprezentuje rzeczywistego filmu). Jeśli nie zaznaczono filmu o wartości null, aplikacja zgłosi wyjątek.
+EF ułatwia wyszukiwanie danych przy użyciu `FirstOrDefaultAsync` metody. Ważna funkcja zabezpieczeń wbudowana w metodę polega na tym, że kod sprawdza, czy metoda wyszukiwania znalazła film przed podjęciem próby wykonania jakichkolwiek czynności. Na przykład haker może wprowadzić błędy do witryny przez zmianę adresu URL utworzonego przez linki z `http://localhost:{PORT}/Movies/Details/1` do czegoś takiego jak  `http://localhost:{PORT}/Movies/Details/12345` (lub innej wartości, która nie reprezentuje rzeczywistego filmu). Jeśli nie zaznaczono filmu o wartości null, aplikacja zgłosi wyjątek.
 
 Przejrzyj `Delete` metody i `DeleteConfirmed` .
 

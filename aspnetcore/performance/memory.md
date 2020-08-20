@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 4/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/memory
-ms.openlocfilehash: 09df67657c9b6e4e59d6a1379bf801c289028819
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: c409eaaf07109d363581ee7d61dc76521d6818d0
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020941"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630669"
 ---
 # <a name="memory-management-and-garbage-collection-gc-in-aspnet-core"></a>Zarządzanie pamięcią i wyrzucanie elementów bezużytecznych (GC) w ASP.NET Core
 
@@ -305,9 +306,9 @@ Nieprawidłowe użycie <xref:System.Net.Http.HttpClient> może skutkować wyciek
 
 Doświadczeni Deweloperzy platformy .NET wiedzą, jak odwoływać się do <xref:System.IDisposable.Dispose*> obiektów, które implementują <xref:System.IDisposable> . Nieusuwania obiektów, które implementują `IDisposable` zwykle, powoduje przeciek pamięci lub przeciek zasobów systemu.
 
-`HttpClient`implementuje `IDisposable` , ale **nie** powinien być usuwany przy każdym wywołaniu. Należy raczej `HttpClient` ponownie użyć.
+`HttpClient` implementuje `IDisposable` , ale **nie** powinien być usuwany przy każdym wywołaniu. Należy raczej `HttpClient` ponownie użyć.
 
-Następujący punkt końcowy tworzy i usuwa nowe `HttpClient` wystąpienie dla każdego żądania:
+Następujący punkt końcowy tworzy i usuwa nowe  `HttpClient` wystąpienie dla każdego żądania:
 
 ```csharp
 [HttpGet("httpclient1")]
@@ -402,7 +403,7 @@ Aby skonfigurować usuwanie obiektu:
 * Hermetyzuj tablicę w puli w obiekcie jednorazowym.
 * Zarejestruj obiekt w puli za pomocą obiektu [HttpContext. Response. RegisterForDispose](xref:Microsoft.AspNetCore.Http.HttpResponse.RegisterForDispose*).
 
-`RegisterForDispose`zajmiemy się wywoływaniem `Dispose` obiektu docelowego, tak aby był on wydawany tylko po zakończeniu żądania HTTP.
+`RegisterForDispose` zajmiemy się wywoływaniem `Dispose` obiektu docelowego, tak aby był on wydawany tylko po zakończeniu żądania HTTP.
 
 ```csharp
 private static ArrayPool<byte> _arrayPool = ArrayPool<byte>.Create();
@@ -442,7 +443,7 @@ Zastosowanie tego samego obciążenia co wersja niebędąca w puli powoduje, że
 
 Główną różnicą jest przydzieloną liczbę bajtów, a jako wiele mniejszych kolekcji generacji 0.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Odzyskiwanie pamięci](/dotnet/standard/garbage-collection/)
 * [Zrozumienie różnych trybów GC przy użyciu wizualizatora współbieżności](https://blogs.msdn.microsoft.com/seteplia/2017/01/05/understanding-different-gc-modes-with-concurrency-visualizer/)

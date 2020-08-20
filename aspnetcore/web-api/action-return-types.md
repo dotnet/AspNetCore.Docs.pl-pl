@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 02/03/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/action-return-types
-ms.openlocfilehash: 3058fabb0c08ac62956c18f3c294692d35122e12
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 8e33a2628986146d1d72e1d4772e3d9e42de119c
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022163"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629395"
 ---
 # <a name="controller-action-return-types-in-aspnet-core-web-api"></a>Typy zwracane akcje kontrolera w ASP.NET Core Web API
 
@@ -102,7 +103,7 @@ Obie powyższe akcje nie są blokowane w przypadku ASP.NET Core 3,0.
 
 <xref:Microsoft.AspNetCore.Mvc.IActionResult>Typ zwracany jest odpowiedni, gdy `ActionResult` w akcji jest możliwe wiele typów zwracanych. `ActionResult`Typy reprezentują różne kody stanu HTTP. Każda Klasa nieabstrakcyjna będąca wynikiem `ActionResult` kwalifikatora jest prawidłowym typem zwracanym. Niektóre typowe typy zwracane w tej kategorii to <xref:Microsoft.AspNetCore.Mvc.BadRequestResult> (400), <xref:Microsoft.AspNetCore.Mvc.NotFoundResult> (404) i <xref:Microsoft.AspNetCore.Mvc.OkObjectResult> (200). Alternatywnie, wygodne metody <xref:Microsoft.AspNetCore.Mvc.ControllerBase> klasy mogą być używane do zwracania `ActionResult` typów z akcji. Na przykład, `return BadRequest();` jest to Skrócona forma `return new BadRequestResult();` .
 
-Ponieważ istnieje wiele typów zwracanych i ścieżek w tym typie akcji, konieczne jest zliberalizowane użycie [`[ProducesResponseType]`](xref:Microsoft.AspNetCore.Mvc.ProducesResponseTypeAttribute) atrybutu. Ten atrybut zawiera bardziej szczegółowe szczegóły odpowiedzi dla stron pomocy interfejsu API sieci Web generowanych przez narzędzia takie jak [Swagger](xref:tutorials/web-api-help-pages-using-swagger). `[ProducesResponseType]`wskazuje znane typy i kody stanu HTTP do zwrócenia przez akcję.
+Ponieważ istnieje wiele typów zwracanych i ścieżek w tym typie akcji, konieczne jest zliberalizowane użycie [`[ProducesResponseType]`](xref:Microsoft.AspNetCore.Mvc.ProducesResponseTypeAttribute) atrybutu. Ten atrybut zawiera bardziej szczegółowe szczegóły odpowiedzi dla stron pomocy interfejsu API sieci Web generowanych przez narzędzia takie jak [Swagger](xref:tutorials/web-api-help-pages-using-swagger). `[ProducesResponseType]` wskazuje znane typy i kody stanu HTTP do zwrócenia przez akcję.
 
 ### <a name="synchronous-action"></a>Akcja synchroniczna
 
@@ -156,10 +157,10 @@ Jeśli [`[ApiController]`](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute)
 
 ## <a name="actionresultt-type"></a>\<T>Typ ActionResult
 
-ASP.NET Core 2,1 wprowadził typ [zwracany \<T> ActionResult](xref:Microsoft.AspNetCore.Mvc.ActionResult`1) dla akcji kontrolera interfejsu API sieci Web. Umożliwia zwracanie typu pochodnego <xref:Microsoft.AspNetCore.Mvc.ActionResult> lub zwracanego [określonego typu](#specific-type). `ActionResult<T>`oferuje następujące korzyści dotyczące [typu IActionResult](#iactionresult-type):
+ASP.NET Core 2,1 wprowadził typ [zwracany \<T> ActionResult](xref:Microsoft.AspNetCore.Mvc.ActionResult`1) dla akcji kontrolera interfejsu API sieci Web. Umożliwia zwracanie typu pochodnego <xref:Microsoft.AspNetCore.Mvc.ActionResult> lub zwracanego [określonego typu](#specific-type). `ActionResult<T>` oferuje następujące korzyści dotyczące [typu IActionResult](#iactionresult-type):
 
 * [`[ProducesResponseType]`](xref:Microsoft.AspNetCore.Mvc.ProducesResponseTypeAttribute) `Type` Właściwość atrybutu może być wykluczona. Na przykład `[ProducesResponseType(200, Type = typeof(Product))]` uproszczony dla `[ProducesResponseType(200)]` . Oczekiwany typ zwracany akcji jest wywnioskowany na podstawie `T` `ActionResult<T>` .
-* [Operatory rzutowania niejawnego](/dotnet/csharp/language-reference/keywords/implicit) obsługują konwersję obu `T` i `ActionResult` do `ActionResult<T>` . `T`Konwertuje na <xref:Microsoft.AspNetCore.Mvc.ObjectResult> , co oznacza, że `return new ObjectResult(T);` jest uproszczony dla `return T;` .
+* [Operatory rzutowania niejawnego](/dotnet/csharp/language-reference/keywords/implicit) obsługują konwersję obu `T` i `ActionResult` do `ActionResult<T>` . `T` Konwertuje na <xref:Microsoft.AspNetCore.Mvc.ObjectResult> , co oznacza, że `return new ObjectResult(T);` jest uproszczony dla `return T;` .
 
 Język C# nie obsługuje operatorów rzutowania niejawnego w interfejsach. W związku z tym konwersja interfejsu na konkretny typ jest niezbędna do użycia `ActionResult<T>` . Na przykład użycie `IEnumerable` w programie w poniższym przykładzie nie działa:
 

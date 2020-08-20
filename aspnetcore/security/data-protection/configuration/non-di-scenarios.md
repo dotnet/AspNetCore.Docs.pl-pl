@@ -5,6 +5,7 @@ description: Dowiedz się, jak obsługiwać scenariusze ochrony danych, w który
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/configuration/non-di-scenarios
-ms.openlocfilehash: 633548eabe38508ff0cc76ae880220e1dac9b414
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 5b27d21b046333d7a01f2e81f25d7bd34253cf36
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020122"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629174"
 ---
 # <a name="non-di-aware-scenarios-for-data-protection-in-aspnet-core"></a>Scenariusze nieobsługujące ochrony danych w ASP.NET Core
 

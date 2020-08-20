@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: H1Hack27Feb2017
 ms.date: 01/09/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: client-side/using-browserlink
-ms.openlocfilehash: 737abc8b9abea45654a86a4dc20584948ece9fc5
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: ab4ca78fa50768ff66536608a7cf03e73aecf73a
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88013180"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628823"
 ---
 # <a name="browser-link-in-aspnet-core"></a>Link przeglądarki w ASP.NET Core
 
@@ -33,7 +34,7 @@ Link przeglądarki to funkcja programu Visual Studio. Tworzy kanał komunikacyjn
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Dodaj pakiet [Microsoft. VisualStudio. Web. BrowserLink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/) do projektu. W przypadku Razor stron ASP.NET Core lub projektów MVC należy również włączyć kompilację Razor plików (*. cshtml*) środowiska uruchomieniowego zgodnie z opisem w temacie <xref:mvc/views/view-compilation> . Razorzmiany składni są stosowane tylko wtedy, gdy Kompilacja środowiska uruchomieniowego została włączona.
+Dodaj pakiet [Microsoft. VisualStudio. Web. BrowserLink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/) do projektu. W przypadku Razor stron ASP.NET Core lub projektów MVC należy również włączyć kompilację Razor plików (*. cshtml*) środowiska uruchomieniowego zgodnie z opisem w temacie <xref:mvc/views/view-compilation> . Razor zmiany składni są stosowane tylko wtedy, gdy Kompilacja środowiska uruchomieniowego została włączona.
 
 ::: moniker-end
 
@@ -55,7 +56,7 @@ Szablon projektu **aplikacji sieci Web** ASP.NET Core 1. x zawiera odwołanie do
 
 ::: moniker-end
 
-### <a name="configuration"></a>Konfiguracja
+### <a name="configuration"></a>Konfigurowanie
 
 Wywołanie `UseBrowserLink` `Startup.Configure` metody:
 

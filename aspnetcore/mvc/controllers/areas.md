@@ -5,6 +5,7 @@ description: Dowiedz się, jak obszary są funkcją ASP.NET MVC służącą do o
 ms.author: riande
 ms.date: 03/21/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/areas
-ms.openlocfilehash: af765eebfa8bfd147bd3b721508b5794d15d64a7
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 033b57f5406d0344347b2f787fa2b2fbb2da8604
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018445"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630253"
 ---
 # <a name="areas-in-aspnet-core"></a>Obszary w ASP.NET Core
 
@@ -70,7 +71,7 @@ Weź pod uwagę aplikację, która ma dwie grupy logiczne, *produkty* i *usługi
         * HomeController.cs
         * ManageController.cs
       * Widoki
-        * Domowy
+        * Strona główna
           * Index.cshtml
         * Zarządzanie
           * Index.cshtml
@@ -79,7 +80,7 @@ Weź pod uwagę aplikację, która ma dwie grupy logiczne, *produkty* i *usługi
       * Kontrolery
         * HomeController.cs
       * Widoki
-        * Domowy
+        * Strona główna
           * Index.cshtml
 
 Chociaż poprzedni układ jest typowy w przypadku korzystania z obszarów, do korzystania z tej struktury folderów są wymagane tylko pliki widoku. Wyświetl wyszukiwania odnajdywania dla zgodnego pliku widoku obszaru w następującej kolejności:
@@ -101,9 +102,9 @@ Kontrolery obszaru są oznaczone atrybutem [ &lbrack; obszaru &rbrack; ](xref:Mi
 
 ### <a name="add-area-route"></a>Dodaj trasę obszaru
 
-Trasy obszaru zwykle używają [konwencjonalnego routingu](xref:mvc/controllers/routing#cr) , a nie [routingu atrybutu](xref:mvc/controllers/routing#ar). Routowanie konwencjonalne jest zależne od kolejności. Ogólnie rzecz biorąc, trasy z obszarami należy umieścić wcześniej w tabeli tras, ponieważ są one bardziej specyficzne niż trasy bez obszaru.
+Trasy obszaru zwykle używają  [konwencjonalnego routingu](xref:mvc/controllers/routing#cr) , a nie [routingu atrybutu](xref:mvc/controllers/routing#ar). Routowanie konwencjonalne jest zależne od kolejności. Ogólnie rzecz biorąc, trasy z obszarami należy umieścić wcześniej w tabeli tras, ponieważ są one bardziej specyficzne niż trasy bez obszaru.
 
-`{area:...}`może służyć jako token w szablonach tras, jeśli przestrzeń adresów URL jest jednolita dla wszystkich obszarów:
+`{area:...}` może służyć jako token w szablonach tras, jeśli przestrzeń adresów URL jest jednolita dla wszystkich obszarów:
 
 [!code-csharp[](areas/31samples/MVCareas/Startup.cs?name=snippet&highlight=21-23)]
 
@@ -210,7 +211,7 @@ Weź pod uwagę obszar *usług* przykładowego kodu, który nie zawiera pliku *_
 W powyższym znaczniku:
 
 * W pełni kwalifikowana nazwa domeny musi zostać użyta do określenia modelu ( `@model RPareas.Areas.Services.Pages.Manage.AboutModel` ).
-* [Pomocnicy tagów](xref:mvc/views/tag-helpers/intro) są włączani przez`@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers`
+* [Pomocnicy tagów](xref:mvc/views/tag-helpers/intro) są włączani przez `@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers`
 
 W przykładowym pobieranym obszarze produkty znajdują się następujące *_ViewImports. cshtml* :
 
@@ -272,7 +273,7 @@ Weź pod uwagę aplikację, która ma dwie grupy logiczne, *produkty* i *usługi
         * HomeController.cs
         * ManageController.cs
       * Widoki
-        * Domowy
+        * Strona główna
           * Index.cshtml
         * Zarządzanie
           * Index.cshtml
@@ -281,7 +282,7 @@ Weź pod uwagę aplikację, która ma dwie grupy logiczne, *produkty* i *usługi
       * Kontrolery
         * HomeController.cs
       * Widoki
-        * Domowy
+        * Strona główna
           * Index.cshtml
 
 Chociaż poprzedni układ jest typowy w przypadku korzystania z obszarów, do korzystania z tej struktury folderów są wymagane tylko pliki widoku. Wyświetl wyszukiwania odnajdywania dla zgodnego pliku widoku obszaru w następującej kolejności:
@@ -305,7 +306,7 @@ Kontrolery obszaru są oznaczone atrybutem [ &lbrack; obszaru &rbrack; ](xref:Mi
 
 Trasy obszaru zwykle używają konwencjonalnego routingu, a nie routingu atrybutu. Routowanie konwencjonalne jest zależne od kolejności. Ogólnie rzecz biorąc, trasy z obszarami należy umieścić wcześniej w tabeli tras, ponieważ są one bardziej specyficzne niż trasy bez obszaru.
 
-`{area:...}`może służyć jako token w szablonach tras, jeśli przestrzeń adresów URL jest jednolita dla wszystkich obszarów:
+`{area:...}` może służyć jako token w szablonach tras, jeśli przestrzeń adresów URL jest jednolita dla wszystkich obszarów:
 
 [!code-csharp[](areas/samples/MVCareas/Startup.cs?name=snippet&highlight=18-21)]
 
@@ -399,7 +400,7 @@ Weź pod uwagę obszar *usług* przykładowego kodu, który nie zawiera pliku *_
 W powyższym znaczniku:
 
 * W pełni kwalifikowana nazwa domeny musi zostać użyta do określenia modelu ( `@model RPareas.Areas.Services.Pages.Manage.AboutModel` ).
-* [Pomocnicy tagów](xref:mvc/views/tag-helpers/intro) są włączani przez`@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers`
+* [Pomocnicy tagów](xref:mvc/views/tag-helpers/intro) są włączani przez `@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers`
 
 W przykładowym pobieranym obszarze produkty znajdują się następujące *_ViewImports. cshtml* :
 

@@ -6,6 +6,7 @@ ms.author: riande
 ms.date: 03/27/2019
 ms.topic: tutorial
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/sort-filter-page
-ms.openlocfilehash: f19f7c9ce8a525c5798e95ac376325f573a114a6
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 16a0b264f8395670b02d091afd44e71d0dad4d0b
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018003"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629356"
 ---
 # <a name="tutorial-add-sorting-filtering-and-paging---aspnet-mvc-with-ef-core"></a>Samouczek: Dodawanie sortowania, filtrowania i stronicowania — ASP.NET MVC z EF Core
 
@@ -103,7 +104,7 @@ Dodano `searchString` parametr do `Index` metody. Wartość ciągu wyszukiwania 
 > [!NOTE]
 > W tym miejscu wywoływana jest `Where` Metoda `IQueryable` obiektu, a filtr zostanie przetworzony na serwerze. W niektórych scenariuszach może być wywoływana `Where` Metoda jako metoda rozszerzająca w kolekcji w pamięci. (Na przykład załóżmy, że zmienisz odwołanie na `_context.Students` tak, aby zamiast EF `DbSet` odwołuje się do metody repozytorium, która zwraca `IEnumerable` kolekcję). Wyniki byłyby zwykle takie same, ale w niektórych przypadkach mogą być różne.
 >
->Na przykład .NET Framework implementacja `Contains` metody domyślnie wykonuje porównanie z uwzględnieniem wielkości liter, ale w SQL Server jest określana przez ustawienie sortowania wystąpienia SQL Server. Ustawienie domyślne nie uwzględnia wielkości liter. Można wywołać metodę, `ToUpper` Aby test jawnie nie uwzględniał wielkości liter: *gdzie (s => s. LastName. ToUpper (). Zawiera (Ciągwyszukiwania. ToUpper ())*. Dzięki temu wyniki są takie same, jeśli później zmienisz kod w celu użycia repozytorium, które zwraca `IEnumerable` kolekcję zamiast `IQueryable` obiektu. (Po wywołaniu `Contains` metody w `IEnumerable` kolekcji jest pobierana .NET Framework implementacja. po wywołaniu dla `IQueryable` obiektu zostanie wykorzystana implementacja dostawcy bazy danych). Istnieje jednak spadek wydajności dla tego rozwiązania. `ToUpper`Kod mógłby umieścić funkcję w klauzuli WHERE instrukcji SELECT TSQL. Uniemożliwi to Optymalizatorowi użycie indeksu. Mając na względzie, że program SQL jest przede wszystkim instalowany jako bez uwzględniania wielkości liter, najlepszym rozwiązaniem jest uniknięcie `ToUpper` kodu do momentu przeprowadzenia migracji do magazynu danych z uwzględnieniem wielkości liter.
+>Na przykład .NET Framework implementacja `Contains` metody domyślnie wykonuje porównanie z uwzględnieniem wielkości liter, ale w SQL Server jest określana przez ustawienie sortowania wystąpienia SQL Server. Ustawienie domyślne nie uwzględnia wielkości liter. Można wywołać metodę, `ToUpper` Aby test jawnie nie uwzględniał wielkości liter:  *gdzie (s => s. LastName. ToUpper (). Zawiera (Ciągwyszukiwania. ToUpper ())*. Dzięki temu wyniki są takie same, jeśli później zmienisz kod w celu użycia repozytorium, które zwraca `IEnumerable` kolekcję zamiast `IQueryable` obiektu. (Po wywołaniu `Contains` metody w `IEnumerable` kolekcji jest pobierana .NET Framework implementacja. po wywołaniu dla `IQueryable` obiektu zostanie wykorzystana implementacja dostawcy bazy danych). Istnieje jednak spadek wydajności dla tego rozwiązania. `ToUpper`Kod mógłby umieścić funkcję w klauzuli WHERE instrukcji SELECT TSQL. Uniemożliwi to Optymalizatorowi użycie indeksu. Mając na względzie, że program SQL jest przede wszystkim instalowany jako bez uwzględniania wielkości liter, najlepszym rozwiązaniem jest uniknięcie `ToUpper` kodu do momentu przeprowadzenia migracji do magazynu danych z uwzględnieniem wielkości liter.
 
 ### <a name="add-a-search-box-to-the-student-index-view"></a>Dodawanie pola wyszukiwania do widoku indeksu ucznia
 

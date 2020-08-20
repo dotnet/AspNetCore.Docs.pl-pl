@@ -1,5 +1,5 @@
 ---
-title: Zagadnienia dotyczące zabezpieczeń w ASP.NET CoreSignalR
+title: Zagadnienia dotyczące zabezpieczeń w ASP.NET Core SignalR
 author: bradygaster
 description: Dowiedz się, jak używać uwierzytelniania i autoryzacji w programie ASP.NET Core SignalR .
 monikerRange: '>= aspnetcore-2.1'
@@ -7,6 +7,7 @@ ms.author: anurse
 ms.custom: mvc
 ms.date: 01/16/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,14 +18,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/security
-ms.openlocfilehash: e004899e334738f723cb98638cb31de8d314a830
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 12293c5cb3dc49d505225f1b44e824e9273cfffc
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022475"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630994"
 ---
-# <a name="security-considerations-in-aspnet-core-no-locsignalr"></a>Zagadnienia dotyczące zabezpieczeń w ASP.NET CoreSignalR
+# <a name="security-considerations-in-aspnet-core-no-locsignalr"></a>Zagadnienia dotyczące zabezpieczeń w ASP.NET Core SignalR
 
 Według [Andrew Stanton-pielęgniarki](https://twitter.com/anurse)
 
@@ -34,8 +35,8 @@ Ten artykuł zawiera informacje dotyczące zabezpieczania SignalR .
 
 [Współużytkowanie zasobów między źródłami (CORS)](https://www.w3.org/TR/cors/) może służyć do zezwalania na połączenia między źródłami SignalR w przeglądarce. Jeśli kod JavaScript jest hostowany w innej domenie z SignalR aplikacji, należy włączyć [oprogramowanie pośredniczące CORS](xref:security/cors) , aby umożliwić programowi JavaScript łączenie się z SignalR aplikacją. Zezwalaj na żądania między źródłami tylko z domen, które ufają lub kontrolują. Na przykład:
 
-* Twoja witryna jest hostowana`http://www.example.com`
-* Twoja SignalR aplikacja jest hostowana`http://signalr.example.com`
+* Twoja witryna jest hostowana `http://www.example.com`
+* Twoja SignalR aplikacja jest hostowana `http://signalr.example.com`
 
 Funkcję CORS należy skonfigurować w aplikacji tak, SignalR aby zezwalała na `www.example.com` Źródło.
 
@@ -137,7 +138,7 @@ Komunikaty o wyjątkach są zwykle uznawane za dane poufne, które nie powinny b
 
 ## <a name="buffer-management"></a>Zarządzanie buforem
 
-SignalRużywa buforów dla połączeń przychodzących i wychodzących. Domyślnie program SignalR ogranicza te bufory do 32 KB. Największym komunikatem, który klient lub serwer może wysłać, to 32 KB. Maksymalna ilość pamięci zużywanej przez połączenie dla komunikatów to 32 KB. Jeśli komunikaty są zawsze mniejsze niż 32 KB, można zmniejszyć limit, który:
+SignalR używa buforów dla połączeń przychodzących i wychodzących. Domyślnie program SignalR ogranicza te bufory do 32 KB. Największym komunikatem, który klient lub serwer może wysłać, to 32 KB. Maksymalna ilość pamięci zużywanej przez połączenie dla komunikatów to 32 KB. Jeśli komunikaty są zawsze mniejsze niż 32 KB, można zmniejszyć limit, który:
 
 * Uniemożliwia klientowi wysyłanie większej wiadomości.
 * Serwer nigdy nie będzie musiał przydzielić dużych buforów, aby akceptować komunikaty.
@@ -149,7 +150,7 @@ Jeśli rozmiar komunikatów przekracza 32 KB, można zwiększyć limit. Zwiększ
 
 Istnieją limity komunikatów przychodzących i wychodzących, obie można skonfigurować w obiekcie [HttpConnectionDispatcherOptions](xref:signalr/configuration#configure-server-options) skonfigurowanym w `MapHub` :
 
-* `ApplicationMaxBufferSize`reprezentuje maksymalną liczbę bajtów od klienta, które buforuje serwer. Jeśli klient próbuje wysłać komunikat przekraczający ten limit, połączenie może być zamknięte.
-* `TransportMaxBufferSize`reprezentuje maksymalną liczbę bajtów, które może wysłać serwer. Jeśli serwer próbuje wysłać komunikat (uwzględniając wartości zwracane z metod centralnych) większy niż ten limit, zostanie zgłoszony wyjątek.
+* `ApplicationMaxBufferSize` reprezentuje maksymalną liczbę bajtów od klienta, które buforuje serwer. Jeśli klient próbuje wysłać komunikat przekraczający ten limit, połączenie może być zamknięte.
+* `TransportMaxBufferSize` reprezentuje maksymalną liczbę bajtów, które może wysłać serwer. Jeśli serwer próbuje wysłać komunikat (uwzględniając wartości zwracane z metod centralnych) większy niż ten limit, zostanie zgłoszony wyjątek.
 
 Ustawienie limitu powoduje `0` wyłączenie limitu. Usunięcie limitu umożliwia klientowi wysłanie komunikatu o dowolnym rozmiarze. Złośliwi klienci wysyłający duże wiadomości mogą spowodować przydzielenie nadmiernej ilości pamięci. Nadmierne użycie pamięci może znacznie zmniejszyć liczbę jednoczesnych połączeń.

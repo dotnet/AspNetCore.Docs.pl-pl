@@ -5,6 +5,7 @@ description: Informacje o dostawcach magazynu kluczy w ASP.NET Core i sposobach 
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/implementation/key-storage-providers
-ms.openlocfilehash: d54e8078180ce978b550963a03c0d4fdc6e9b12e
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: fb21f7d4d784451096db5c420f2ffd4532c2b490
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021461"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631332"
 ---
 # <a name="key-storage-providers-in-aspnet-core"></a>Dostawcy magazynu kluczy w ASP.NET Core
 
@@ -163,7 +164,7 @@ Parametr generyczny `TContext` musi dziedziczyć z [DbContext](/dotnet/api/micro
 
 Utwórz `DataProtectionKeys` tabelę.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 W oknie **konsola Menedżera pakietów** (PMC) wykonaj następujące polecenia:
 
@@ -172,7 +173,7 @@ Add-Migration AddDataProtectionKeys -Context MyKeysContext
 Update-Database -Context MyKeysContext
 ```
 
-# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
 
 Wykonaj następujące polecenia w powłoce poleceń:
 
@@ -183,7 +184,7 @@ dotnet ef database update --context MyKeysContext
 
 ---
 
-`MyKeysContext`jest `DbContext` zdefiniowany w poprzednim przykładzie kodu. Jeśli używasz `DbContext` innej nazwy, Zastąp `DbContext` nazwę `MyKeysContext` .
+`MyKeysContext` jest `DbContext` zdefiniowany w poprzednim przykładzie kodu. Jeśli używasz `DbContext` innej nazwy, Zastąp `DbContext` nazwę `MyKeysContext` .
 
 `DataProtectionKeys`Klasa/jednostka przyjmuje strukturę pokazaną w poniższej tabeli.
 

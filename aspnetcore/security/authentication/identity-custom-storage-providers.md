@@ -1,11 +1,12 @@
 ---
-title: Niestandardowi dostawcy magazynu dla ASP.NET CoreIdentity
+title: Niestandardowi dostawcy magazynu dla programu ASP.NET Core Identity
 author: ardalis
-description: Dowiedz się, jak skonfigurować niestandardowych dostawców magazynu dla ASP.NET Core Identity .
+description: Dowiedz się, jak skonfigurować niestandardowych dostawców magazynu dla programu ASP.NET Core Identity .
 ms.author: riande
 ms.custom: mvc
 ms.date: 07/23/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,24 +17,24 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity-custom-storage-providers
-ms.openlocfilehash: 27f6130742e25e07d4b908973e1ebf26288fdbfd
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: a8414efeece1afd55d0f30d232ef360d0a21714c
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021539"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630136"
 ---
-# <a name="custom-storage-providers-for-aspnet-core-no-locidentity"></a>Niestandardowi dostawcy magazynu dla ASP.NET CoreIdentity
+# <a name="custom-storage-providers-for-no-locaspnet-core-identity"></a>Niestandardowi dostawcy magazynu dla programu ASP.NET Core Identity
 
 Przez [Steve Smith](https://ardalis.com/)
 
-ASP.NET Core Identity to rozszerzalny system, który umożliwia utworzenie niestandardowego dostawcy magazynu i połączenie go z aplikacją. W tym temacie opisano sposób tworzenia niestandardowego dostawcy magazynu dla ASP.NET Core Identity . Dotyczy to ważnych koncepcji tworzenia własnego dostawcy magazynu, ale nie jest to przewodnik krok po kroku.
+ASP.NET Core Identity to rozszerzalny system, który umożliwia utworzenie niestandardowego dostawcy magazynu i połączenie go z aplikacją. W tym temacie opisano sposób tworzenia niestandardowego dostawcy magazynu dla programu ASP.NET Core Identity . Dotyczy to ważnych koncepcji tworzenia własnego dostawcy magazynu, ale nie jest to przewodnik krok po kroku.
 
 [Wyświetl lub Pobierz przykład z witryny GitHub](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/identity-custom-storage-providers/sample/CustomIdentityProviderSample).
 
 ## <a name="introduction"></a>Wprowadzenie
 
-Domyślnie Identity system ASP.NET Core przechowuje informacje o użytkownikach w bazie danych SQL Server przy użyciu Entity Framework Core. W przypadku wielu aplikacji to podejście działa prawidłowo. Jednak warto użyć innego mechanizmu trwałości lub schematu danych. Przykład:
+Domyślnie ASP.NET Core Identity System przechowuje informacje o użytkowniku w bazie danych SQL Server przy użyciu Entity Framework Core. W przypadku wielu aplikacji to podejście działa prawidłowo. Jednak warto użyć innego mechanizmu trwałości lub schematu danych. Na przykład:
 
 * Używasz [usługi Azure Table Storage](/azure/storage/) lub innego magazynu danych.
 * Tabele bazy danych mają inną strukturę. 
@@ -41,7 +42,7 @@ Domyślnie Identity system ASP.NET Core przechowuje informacje o użytkownikach 
 
 W każdym z tych przypadków można napisać niestandardowego dostawcę dla mechanizmu magazynu i podłączyć tego dostawcę do aplikacji.
 
-ASP.NET Core Identity jest zawarty w szablonach projektu w programie Visual Studio z opcją "indywidualne konta użytkowników".
+ASP.NET Core Identity jest uwzględniony w szablonach projektu w programie Visual Studio z opcją "indywidualne konta użytkowników".
 
 Korzystając z interfejs wiersza polecenia platformy .NET Core, Dodaj `-au Individual` :
 
@@ -49,7 +50,7 @@ Korzystając z interfejs wiersza polecenia platformy .NET Core, Dodaj `-au Indiv
 dotnet new mvc -au Individual
 ```
 
-## <a name="the-aspnet-core-no-locidentity-architecture"></a>Architektura ASP.NET Core Identity
+## <a name="the-no-locaspnet-core-identity-architecture"></a>ASP.NET Core IdentityArchitektura
 
 ASP.NET Core Identity składa się z klas o nazwie menedżerowie i sklepy. *Menedżerowie* są klasami wysokiego poziomu, których deweloperzy aplikacji używają do wykonywania operacji, takich jak tworzenie Identity użytkownika. *Magazyny* są klasy niższego poziomu, które określają, jak są utrwalane jednostki, takie jak użytkownicy i role. Sklepy są zgodne ze wzorcem repozytorium i są ściśle powiązane z mechanizmem trwałości. Menedżerowie są niezależni od sklepów, co oznacza, że można zastąpić mechanizm trwałości bez zmiany kodu aplikacji (z wyjątkiem konfiguracji).
 
@@ -63,9 +64,9 @@ Podczas tworzenia nowego wystąpienia `UserManager` lub `RoleManager` podania ty
 
 [Zmień konfigurację aplikacji, aby używała nowego dostawcy magazynu](#reconfigure-app-to-use-a-new-storage-provider) pokazuje, jak utworzyć wystąpienie `UserManager` i `RoleManager` przy użyciu dostosowanego magazynu.
 
-## <a name="aspnet-core-no-locidentity-stores-data-types"></a>ASP.NET Core Identity przechowuje typy danych
+## <a name="no-locaspnet-core-identity-stores-data-types"></a>ASP.NET Core Identity przechowuje typy danych
 
-[ASP.NET Core Identity ](https://github.com/aspnet/identity) typy danych są szczegółowo opisane w następujących sekcjach:
+[ASP.NET Core Identity](https://github.com/aspnet/identity) typy danych są szczegółowo opisane w następujących sekcjach:
 
 ### <a name="users"></a>Użytkownicy
 
@@ -85,11 +86,11 @@ Grupy autoryzacji dla witryny. Zawiera identyfikator roli i nazwę roli (na przy
 
 ## <a name="the-data-access-layer"></a>Warstwa dostępu do danych
 
-W tym temacie założono, że znasz mechanizm trwałości, który ma być używany, oraz sposób tworzenia jednostek dla tego mechanizmu. Ten temat nie zawiera szczegółowych informacji o sposobie tworzenia repozytoriów lub klas dostępu do danych; zawiera ona kilka sugestii dotyczących decyzji projektowych podczas pracy z ASP.NET Core Identity .
+W tym temacie założono, że znasz mechanizm trwałości, który ma być używany, oraz sposób tworzenia jednostek dla tego mechanizmu. Ten temat nie zawiera szczegółowych informacji o sposobie tworzenia repozytoriów lub klas dostępu do danych; zawiera ona kilka sugestii dotyczących decyzji projektowych podczas pracy z programem ASP.NET Core Identity .
 
-Podczas projektowania warstwy dostępu do danych dla niestandardowego dostawcy magazynu istnieje dużo swobody. Należy tylko utworzyć mechanizmy trwałości dla funkcji, które mają być używane w aplikacji. Jeśli na przykład nie korzystasz z ról w aplikacji, nie musisz tworzyć magazynu dla ról lub skojarzeń roli użytkownika. Twoja technologia i istniejąca infrastruktura mogą wymagać struktury, która różni się od domyślnej implementacji ASP.NET Core Identity . W warstwie dostępu do danych można zapewnić logikę do pracy ze strukturą wdrożenia magazynu.
+Podczas projektowania warstwy dostępu do danych dla niestandardowego dostawcy magazynu istnieje dużo swobody. Należy tylko utworzyć mechanizmy trwałości dla funkcji, które mają być używane w aplikacji. Jeśli na przykład nie korzystasz z ról w aplikacji, nie musisz tworzyć magazynu dla ról lub skojarzeń roli użytkownika. Twoja technologia i istniejąca infrastruktura mogą wymagać struktury, która różni się od domyślnej implementacji programu ASP.NET Core Identity . W warstwie dostępu do danych można zapewnić logikę do pracy ze strukturą wdrożenia magazynu.
 
-Warstwa dostępu do danych udostępnia logikę umożliwiającą zapisanie danych z ASP.NET Core Identity do źródła danych. Warstwa dostępu do danych dla niestandardowego dostawcy magazynu może zawierać następujące klasy służące do przechowywania informacji o użytkowniku i roli.
+Warstwa dostępu do danych umożliwia logikę zapisywania danych ze ASP.NET Core Identity źródła danych. Warstwa dostępu do danych dla niestandardowego dostawcy magazynu może zawierać następujące klasy służące do przechowywania informacji o użytkowniku i roli.
 
 ### <a name="context-class"></a>Context — Klasa
 
@@ -179,7 +180,7 @@ W ramach `UserStore` klasy używane są klasy dostępu do danych, które został
 * **IQueryableUserStore**  
  Interfejs [IQueryableUserStore &lt; TUser &gt; ](/dotnet/api/microsoft.aspnetcore.identity.iqueryableuserstore-1) definiuje elementy członkowskie, które są implementowane w celu udostępnienia magazynu użytkownika queryable.
 
-Implementowane są tylko interfejsy, które są potrzebne w aplikacji. Przykład:
+Implementowane są tylko interfejsy, które są potrzebne w aplikacji. Na przykład:
 
 ```csharp
 public class UserStore : IUserStore<IdentityUser>,
@@ -245,7 +246,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-## <a name="references"></a>Dokumentacja
+## <a name="references"></a>Odwołania
 
-* [Niestandardowi dostawcy magazynu dla ASP.NET 4. xIdentity](/aspnet/identity/overview/extensibility/overview-of-custom-storage-providers-for-aspnet-identity)
-* [ASP.NET Core Identity ](https://github.com/dotnet/AspNetCore/tree/master/src/Identity): to repozytorium zawiera linki do dostawców sklepu obsługiwanego przez społeczność.
+* [Niestandardowi dostawcy magazynu dla ASP.NET 4. x Identity](/aspnet/identity/overview/extensibility/overview-of-custom-storage-providers-for-aspnet-identity)
+* [ASP.NET Core Identity](https://github.com/dotnet/AspNetCore/tree/master/src/Identity): To repozytorium zawiera linki do dostawców sklepu obsługiwanego przez społeczność.

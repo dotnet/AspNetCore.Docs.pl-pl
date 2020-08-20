@@ -5,6 +5,7 @@ description: Dowiedz się, jak czytać i manipulować modelem aplikacji, aby mod
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/application-model
-ms.openlocfilehash: de831a8b5012a2fe61642887ad816466df7a1bcb
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: f2e86a8607ddd00dc7f4bec36079660f0cd1eea3
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019901"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630292"
 ---
 # <a name="work-with-the-application-model-in-aspnet-core"></a>Pracuj z modelem aplikacji w ASP.NET Core
 
@@ -63,7 +64,7 @@ Następnie ( `Order=-990` ):
 > Kolejność, w której są wywoływane dwa dostawcy o tej samej wartości `Order` , jest niezdefiniowana i dlatego nie należy jej opierać.
 
 > [!NOTE]
-> `IApplicationModelProvider`jest zaawansowaną koncepcją dla autorów struktury, która ma zostać rozszerzona. Ogólnie rzecz biorąc aplikacje powinny używać konwencji i struktur, powinny używać dostawców. Odrębność klucza polega na tym, że dostawcy zawsze są uruchamiani przed konwencjami.
+> `IApplicationModelProvider` jest zaawansowaną koncepcją dla autorów struktury, która ma zostać rozszerzona. Ogólnie rzecz biorąc aplikacje powinny używać konwencji i struktur, powinny używać dostawców. Odrębność klucza polega na tym, że dostawcy zawsze są uruchamiani przed konwencjami.
 
 `DefaultApplicationModelProvider`Tworzy wiele zachowań domyślnych używanych przez ASP.NET Core MVC. Jej obowiązki obejmują:
 
@@ -164,7 +165,7 @@ Konwencja jest dodawana jako opcja podczas uruchamiania.
 [!code-csharp[](./application-model/sample/src/AppModelSample/Startup.cs?name=ConfigureServices&highlight=6)]
 
 > [!TIP]
-> Możesz dodawać konwencje do [oprogramowania pośredniczącego](xref:fundamentals/middleware/index) , uzyskując dostęp do `MvcOptions` użycia`services.Configure<MvcOptions>(c => c.Conventions.Add(YOURCONVENTION));`
+> Możesz dodawać konwencje do [oprogramowania pośredniczącego](xref:fundamentals/middleware/index) , uzyskując dostęp do `MvcOptions` użycia `services.Configure<MvcOptions>(c => c.Conventions.Add(YOURCONVENTION));`
 
 Ten przykład dotyczy tras, które nie korzystają z routingu atrybutu, w którym kontroler ma nazwę "namespace". Następujący kontroler demonstruje tę Konwencję:
 

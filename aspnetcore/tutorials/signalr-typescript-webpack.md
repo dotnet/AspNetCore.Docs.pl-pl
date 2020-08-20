@@ -6,6 +6,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 02/10/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/signalr-typescript-webpack
-ms.openlocfilehash: 48b59fea5da3872fb29cacd9edbedd14de9e602f
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 912f6f5d20add99cd0173b6d1ebcf06161c448f5
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019420"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629681"
 ---
 # <a name="use-aspnet-core-no-locsignalr-with-typescript-and-webpack"></a>Używanie ASP.NET Core SignalR z językami TypeScript i WebPack
 
@@ -44,7 +45,7 @@ Ten samouczek zawiera informacje na temat wykonywania następujących czynności
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * [Program Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) z **ASP.NET i programowaniem aplikacji sieci Web**
 * [Zestaw .NET Core SDK 3.0 lub nowszy](https://dotnet.microsoft.com/download/dotnet-core)
@@ -61,7 +62,7 @@ Ten samouczek zawiera informacje na temat wykonywania następujących czynności
 
 ## <a name="create-the-aspnet-core-web-app"></a>Tworzenie aplikacji sieci Web ASP.NET Core
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Skonfiguruj program Visual Studio, aby szukać npm w zmiennej środowiskowej *Path* . Domyślnie program Visual Studio używa wersji npm znajdującej się w katalogu instalacyjnym. Wykonaj te instrukcje w programie Visual Studio:
 
@@ -237,7 +238,7 @@ W aplikacji jest obecnie wyświetlany podstawowy formularz służący do wysyła
 
     Poprzedni kod obsługuje otrzymywanie komunikatów z serwera. `HubConnectionBuilder`Klasa tworzy nowy Konstruktor służący do konfigurowania połączenia z serwerem. `withUrl`Funkcja konfiguruje adres URL centrum.
 
-    SignalRWłącza wymianę komunikatów między klientem a serwerem. Każdy komunikat ma określoną nazwę. Na przykład komunikaty o nazwie `messageReceived` mogą uruchamiać logikę odpowiedzialną za wyświetlanie nowej wiadomości w strefie messages. Nasłuchiwanie określonego komunikatu można wykonać za pomocą `on` funkcji. Dowolna liczba nazw komunikatów może być nasłuchiwanie. Możliwe jest również przekazywanie parametrów do wiadomości, takich jak nazwa autora i zawartość otrzymanej wiadomości. Po odebraniu komunikatu przez klienta `div` zostanie utworzony nowy element z nazwą autora i treścią komunikatu w jego `innerHTML` atrybucie. Jest on dodawany do elementu głównego `div` wyświetlającego komunikaty.
+    SignalR Włącza wymianę komunikatów między klientem a serwerem. Każdy komunikat ma określoną nazwę. Na przykład komunikaty o nazwie `messageReceived` mogą uruchamiać logikę odpowiedzialną za wyświetlanie nowej wiadomości w strefie messages. Nasłuchiwanie określonego komunikatu można wykonać za pomocą `on` funkcji. Dowolna liczba nazw komunikatów może być nasłuchiwanie. Możliwe jest również przekazywanie parametrów do wiadomości, takich jak nazwa autora i zawartość otrzymanej wiadomości. Po odebraniu komunikatu przez klienta `div` zostanie utworzony nowy element z nazwą autora i treścią komunikatu w jego `innerHTML` atrybucie. Jest on dodawany do elementu głównego `div` wyświetlającego komunikaty.
 
 1. Teraz, gdy klient może odebrać komunikat, skonfiguruj go do wysyłania wiadomości. Dodaj wyróżniony kod do pliku *src/index. TS* :
 
@@ -257,7 +258,7 @@ W aplikacji jest obecnie wyświetlany podstawowy formularz służący do wysyła
 
 Upewnij się, że aplikacja działa z następującymi krokami.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 1. Uruchom pakiet WebPack w trybie *wydania* . Korzystając z okna **konsoli Menedżera pakietów** , uruchom następujące polecenie w katalogu głównym projektu. Jeśli nie jesteś w katalogu głównym projektu, wprowadź `cd SignalRWebPack` przed wprowadzeniem polecenia.
 
@@ -301,7 +302,7 @@ Upewnij się, że aplikacja działa z następującymi krokami.
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * [Program Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) z **ASP.NET i programowaniem aplikacji sieci Web**
 * [Zestaw .NET Core SDK 2,2 lub nowszy](https://dotnet.microsoft.com/download/dotnet-core)
@@ -318,7 +319,7 @@ Upewnij się, że aplikacja działa z następującymi krokami.
 
 ## <a name="create-the-aspnet-core-web-app"></a>Tworzenie aplikacji sieci Web ASP.NET Core
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Skonfiguruj program Visual Studio, aby szukać npm w zmiennej środowiskowej *Path* . Domyślnie program Visual Studio używa wersji npm znajdującej się w katalogu instalacyjnym. Wykonaj te instrukcje w programie Visual Studio:
 
@@ -474,7 +475,7 @@ W aplikacji jest obecnie wyświetlany prosty formularz służący do wysyłania 
 
     Poprzedni kod obsługuje otrzymywanie komunikatów z serwera. `HubConnectionBuilder`Klasa tworzy nowy Konstruktor służący do konfigurowania połączenia z serwerem. `withUrl`Funkcja konfiguruje adres URL centrum.
 
-    SignalRWłącza wymianę komunikatów między klientem a serwerem. Każdy komunikat ma określoną nazwę. Na przykład komunikaty o nazwie `messageReceived` mogą uruchamiać logikę odpowiedzialną za wyświetlanie nowej wiadomości w strefie messages. Nasłuchiwanie określonego komunikatu można wykonać za pomocą `on` funkcji. Można nasłuchiwać dowolnej liczby nazw komunikatów. Możliwe jest również przekazywanie parametrów do wiadomości, takich jak nazwa autora i zawartość otrzymanej wiadomości. Po odebraniu komunikatu przez klienta `div` zostanie utworzony nowy element z nazwą autora i treścią komunikatu w jego `innerHTML` atrybucie. Nowa wiadomość zostanie dodana do głównego `div` elementu wyświetlającego komunikaty.
+    SignalR Włącza wymianę komunikatów między klientem a serwerem. Każdy komunikat ma określoną nazwę. Na przykład komunikaty o nazwie `messageReceived` mogą uruchamiać logikę odpowiedzialną za wyświetlanie nowej wiadomości w strefie messages. Nasłuchiwanie określonego komunikatu można wykonać za pomocą `on` funkcji. Można nasłuchiwać dowolnej liczby nazw komunikatów. Możliwe jest również przekazywanie parametrów do wiadomości, takich jak nazwa autora i zawartość otrzymanej wiadomości. Po odebraniu komunikatu przez klienta `div` zostanie utworzony nowy element z nazwą autora i treścią komunikatu w jego `innerHTML` atrybucie. Nowa wiadomość zostanie dodana do głównego `div` elementu wyświetlającego komunikaty.
 
 1. Teraz, gdy klient może odebrać komunikat, skonfiguruj go do wysyłania wiadomości. Dodaj wyróżniony kod do pliku *src/index. TS* :
 
@@ -494,7 +495,7 @@ W aplikacji jest obecnie wyświetlany prosty formularz służący do wysyłania 
 
 Upewnij się, że aplikacja działa z następującymi krokami.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 1. Uruchom pakiet WebPack w trybie *wydania* . Korzystając z okna **konsoli Menedżera pakietów** , uruchom następujące polecenie w katalogu głównym projektu. Jeśli nie jesteś w katalogu głównym projektu, wprowadź `cd SignalRWebPack` przed wprowadzeniem polecenia.
 

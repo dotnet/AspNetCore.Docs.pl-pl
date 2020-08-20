@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/23/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/social/index
-ms.openlocfilehash: 7dacbb00b40d2741fcbfc78ec7cdf2a67482a8da
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: da025cb8dced8ac8a6ecf559d4de7795c9797f71
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020473"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634283"
 ---
 # <a name="facebook-google-and-external-provider-authentication-in-aspnet-core"></a>Uwierzytelnianie w serwisach Facebook, Google i dostawcy zewnętrznym w ASP.NET Core
 
@@ -40,13 +41,13 @@ Aby zapoznać się z przykładami sposobu, w jaki nazwy logowania społeczności
 
 ## <a name="create-a-new-aspnet-core-project"></a>Utwórz nowy projekt ASP.NET Core
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Tworzenie nowego projektu.
 * Wybierz pozycję **ASP.NET Core aplikacja sieci Web** i przycisk **dalej**.
-* Podaj **nazwę projektu** i Potwierdź lub Zmień **lokalizację**. Wybierz pozycję **Utwórz**.
+* Podaj **nazwę projektu** i Potwierdź lub Zmień **lokalizację**. Wybierz przycisk **Utwórz**.
 * Wybierz najnowszą wersję ASP.NET Core z listy rozwijanej (**ASP.NET Core {X. Y}**), a następnie wybierz pozycję **aplikacja sieci Web**.
-* W obszarze **uwierzytelnianie**wybierz opcję **Zmień** i ustaw uwierzytelnianie na **konta poszczególnych użytkowników**. Wybierz przycisk **OK**.
+* W obszarze **uwierzytelnianie**wybierz opcję **Zmień** i ustaw uwierzytelnianie na **konta poszczególnych użytkowników**. Kliknij przycisk **OK**.
 * W oknie **Tworzenie nowej ASP.NET Core aplikacji sieci Web** wybierz pozycję **Utwórz**.
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Visual Studio dla komputerów Mac](#tab/visual-studio-code+visual-studio-mac)
@@ -68,8 +69,8 @@ Aby zapoznać się z przykładami sposobu, w jaki nazwy logowania społeczności
   ```
 
   * `dotnet new`Polecenie tworzy nowy Razor Projekt strony w folderze *WebApp1* .
-  * `-au Individual`Tworzy kod dla indywidualnego uwierzytelniania.
-  * `-uld`używa LocalDB, uproszczonej wersji SQL Server Express dla systemu Windows. Pomiń `-uld` Korzystanie z oprogramowania SQLite.
+  * `-au Individual` Tworzy kod dla indywidualnego uwierzytelniania.
+  * `-uld` używa LocalDB, uproszczonej wersji SQL Server Express dla systemu Windows. Pomiń `-uld` Korzystanie z oprogramowania SQLite.
   * `code`Polecenie otwiera folder *WebApp1* w nowym wystąpieniu Visual Studio Code.
 
 ---

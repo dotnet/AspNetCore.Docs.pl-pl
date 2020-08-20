@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/index
-ms.openlocfilehash: 1084cdb9120b1b40acd21fa2de45c7f280337da3
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 0111b7944bc95932937f0fd74524e3960c5fb681
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015598"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634621"
 ---
 # <a name="host-and-deploy-aspnet-core"></a>Hostowanie i wdrażanie ASP.NET Core
 
@@ -97,7 +98,7 @@ Aby uzyskać więcej informacji, zobacz <xref:host-and-deploy/docker/index>.
 
 Używaj oprogramowania do sprawdzania kondycji, aby przeprowadzać kontrole kondycji aplikacji i jej zależności. Aby uzyskać więcej informacji, zobacz <xref:host-and-deploy/health-checks>.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:test/troubleshoot>
 * [Hosting ASP.NET](https://dotnet.microsoft.com/apps/aspnet/hosting)
@@ -171,7 +172,7 @@ Aby uzyskać informacje na temat konfiguracji do hostowania aplikacji ASP.NET Co
 
 Aby uzyskać więcej informacji, zobacz <xref:host-and-deploy/docker/index>.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:test/troubleshoot>
 * [Hosting ASP.NET](https://dotnet.microsoft.com/apps/aspnet/hosting)

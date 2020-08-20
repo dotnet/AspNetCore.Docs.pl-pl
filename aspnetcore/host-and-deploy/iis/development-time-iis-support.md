@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/development-time-iis-support
-ms.openlocfilehash: ba4d47e0500d7f3287e6a57d10036d774c4b19f4
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 5636abef928ed8a8122ec907ef025d55baa65127
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015668"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635362"
 ---
 # <a name="development-time-iis-support-in-visual-studio-for-aspnet-core"></a>Obsługa usług IIS w czasie opracowywania w programie Visual Studio dla platformy ASP.NET Core
 
@@ -42,7 +43,7 @@ W tym artykule opisano obsługę [programu Visual Studio](https://visualstudio.m
 ## <a name="enable-iis"></a>Włącz usługi IIS
 
 1. W systemie Windows przejdź do pozycji **Panel sterowania** > **programy** > **programy i funkcje** > **Włącz lub wyłącz funkcje systemu Windows** (po lewej stronie ekranu).
-1. Zaznacz pole wyboru **Internet Information Services** . Wybierz przycisk **OK**.
+1. Zaznacz pole wyboru **Internet Information Services** . Kliknij przycisk **OK**.
 
 Instalacja usług IIS może wymagać ponownego uruchomienia systemu.
 
@@ -136,7 +137,7 @@ Jeśli jest używany niezaufany certyfikat programistyczny, w przeglądarce moż
 > [!NOTE]
 > Debugowanie konfiguracji kompilacji wydania z optymalizacjami [tylko mój kod](/visualstudio/debugger/just-my-code) i kompilatora skutkuje obniżeniem wydajności. Na przykład punkty przerwania nie trafią.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Wprowadzenie z menedżerem usług IIS w usługach IIS](/iis/get-started/getting-started-with-iis/getting-started-with-the-iis-manager-in-iis-7-and-iis-8)
 * <xref:security/enforcing-ssl>
@@ -157,7 +158,7 @@ W tym artykule opisano obsługę [programu Visual Studio](https://visualstudio.m
 ## <a name="enable-iis"></a>Włącz usługi IIS
 
 1. W systemie Windows przejdź do pozycji **Panel sterowania** > **programy** > **programy i funkcje** > **Włącz lub wyłącz funkcje systemu Windows** (po lewej stronie ekranu).
-1. Zaznacz pole wyboru **Internet Information Services** . Wybierz przycisk **OK**.
+1. Zaznacz pole wyboru **Internet Information Services** . Kliknij przycisk **OK**.
 
 Instalacja usług IIS może wymagać ponownego uruchomienia systemu.
 
@@ -251,7 +252,7 @@ Jeśli jest używany niezaufany certyfikat programistyczny, w przeglądarce moż
 > [!NOTE]
 > Debugowanie konfiguracji kompilacji wydania z optymalizacjami [tylko mój kod](/visualstudio/debugger/just-my-code) i kompilatora skutkuje obniżeniem wydajności. Na przykład punkty przerwania nie trafią.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Wprowadzenie z menedżerem usług IIS w usługach IIS](/iis/get-started/getting-started-with-iis/getting-started-with-the-iis-manager-in-iis-7-and-iis-8)
 * <xref:security/enforcing-ssl>

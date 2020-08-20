@@ -1,5 +1,5 @@
 ---
-title: Wprowadzenie do ASP.NET CoreSignalR
+title: Wprowadzenie do ASP.NET Core SignalR
 author: bradygaster
 description: Dowiedz się, w jaki sposób SignalR biblioteka ASP.NET Core upraszcza Dodawanie funkcji w czasie rzeczywistym do aplikacji.
 monikerRange: '>= aspnetcore-2.1'
@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/27/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,14 +18,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/introduction
-ms.openlocfilehash: 6f3cec83c9af5ec6e820db4a15061eddac613f36
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: ab850fa8afbee9d2664868937362388a03374908
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022176"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634699"
 ---
-# <a name="introduction-to-aspnet-core-no-locsignalr"></a>Wprowadzenie do ASP.NET CoreSignalR
+# <a name="introduction-to-aspnet-core-no-locsignalr"></a>Wprowadzenie do ASP.NET Core SignalR
 
 ## <a name="what-is-no-locsignalr"></a>Co to jest SignalR ?
 
@@ -37,7 +38,7 @@ Dobre kandydaci dla SignalR :
 * Aplikacje do współpracy. Przykładami aplikacji do współpracy są aplikacje tablicy i oprogramowanie do spotkań zespołowych.
 * Aplikacje, które wymagają powiadomień. Wiele aplikacji korzysta z powiadomień, w tym gry i aplikacje do obsługi sieci społecznościowych, poczty e-mail, czatów i alertów dotyczących podróży.
 
-SignalRudostępnia interfejs API służący do tworzenia [zdalnych wywołań procedur serwer-klient (RPC)](https://wikipedia.org/wiki/Remote_procedure_call). Wywołania RPC wywołują funkcje JavaScript na klientach z kodu .NET Core po stronie serwera.
+SignalR udostępnia interfejs API służący do tworzenia [zdalnych wywołań procedur serwer-klient (RPC)](https://wikipedia.org/wiki/Remote_procedure_call). Wywołania RPC wywołują funkcje JavaScript na klientach z kodu .NET Core po stronie serwera.
 
 Poniżej przedstawiono niektóre funkcje programu SignalR dla programu ASP.NET Core:
 
@@ -50,25 +51,25 @@ Poniżej przedstawiono niektóre funkcje programu SignalR dla programu ASP.NET C
 
 ## <a name="transports"></a>Transporty
 
-SignalRobsługuje następujące techniki obsługi komunikacji w czasie rzeczywistym (w kolejności bezpiecznego powrotu):
+SignalR obsługuje następujące techniki obsługi komunikacji w czasie rzeczywistym (w kolejności bezpiecznego powrotu):
 
 * [Protokoły WebSocket](https://tools.ietf.org/html/rfc7118)
 * Zdarzenia wysłane przez serwer
 * Długotrwałe sondowanie
 
-SignalRautomatycznie wybiera najlepszą metodę transportu, która znajduje się w możliwościach serwera i klienta.
+SignalR automatycznie wybiera najlepszą metodę transportu, która znajduje się w możliwościach serwera i klienta.
 
-## <a name="hubs"></a>Centra
+## <a name="hubs"></a>Koncentratory
 
-SignalRużywa *centrów* do komunikacji między klientami a serwerami.
+SignalR używa *centrów* do komunikacji między klientami a serwerami.
 
-Koncentrator jest potokiem wysokiego poziomu, który umożliwia klientowi i serwerowi wywoływanie metod ze sobą. SignalRobsługuje automatyczne wysyłanie między granicami maszyn, umożliwiając klientom wywoływanie metod na serwerze i odwrotnie. Parametry z jednoznacznie określonymi typami można przekazać do metod, które umożliwiają powiązanie modelu. SignalRProgram udostępnia dwa wbudowane protokoły centrum: protokół tekstowy oparty na formacie JSON i protokół binarny oparty na [MessagePack](https://msgpack.org/).  MessagePack zazwyczaj tworzy mniejsze komunikaty w porównaniu z formatem JSON. Starsze przeglądarki muszą obsługiwać [XHR Level 2](https://caniuse.com/#feat=xhr2) , aby zapewnić obsługę protokołu MessagePack.
+Koncentrator jest potokiem wysokiego poziomu, który umożliwia klientowi i serwerowi wywoływanie metod ze sobą. SignalR obsługuje automatyczne wysyłanie między granicami maszyn, umożliwiając klientom wywoływanie metod na serwerze i odwrotnie. Parametry z jednoznacznie określonymi typami można przekazać do metod, które umożliwiają powiązanie modelu. SignalR Program udostępnia dwa wbudowane protokoły centrum: protokół tekstowy oparty na formacie JSON i protokół binarny oparty na [MessagePack](https://msgpack.org/).  MessagePack zazwyczaj tworzy mniejsze komunikaty w porównaniu z formatem JSON. Starsze przeglądarki muszą obsługiwać [XHR Level 2](https://caniuse.com/#feat=xhr2) , aby zapewnić obsługę protokołu MessagePack.
 
 Centra wywołują kod po stronie klienta, wysyłając komunikaty zawierające nazwę i parametry metody po stronie klienta. Obiekty wysyłane jako parametry metody są deserializowane przy użyciu skonfigurowanego protokołu. Klient próbuje dopasować nazwę do metody w kodzie po stronie klienta. Gdy klient znajdzie dopasowanie, wywołuje metodę i przekazuje do niej dane parametrów, które są deserializowane.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Wprowadzenie SignalR do ASP.NET Core](xref:tutorials/signalr)
 * [Obsługiwane platformy](xref:signalr/supported-platforms)
-* [Centra](xref:signalr/hubs)
+* [Koncentratory](xref:signalr/hubs)
 * [Klient JavaScript](xref:signalr/javascript-client)

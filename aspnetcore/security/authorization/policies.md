@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/15/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/policies
-ms.openlocfilehash: 03d6e7fdc4ab4b5e4925508952bfd6c835d90486
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 82ed4cc2ce47d3bd85ca9c2ba2bbeb075eaefcef
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021279"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635336"
 ---
 # <a name="policy-based-authorization-in-aspnet-core"></a>Autoryzacja oparta na zasadach w ASP.NET Core
 
@@ -43,7 +44,7 @@ Podstawowa usługa, która określa, czy autoryzacja powiodła się <xref:Micros
 
 Poprzedni kod wyróżnia dwie metody [IAuthorizationService](https://github.com/dotnet/AspNetCore/blob/v2.2.4/src/Security/Authorization/Core/src/IAuthorizationService.cs).
 
-<xref:Microsoft.AspNetCore.Authorization.IAuthorizationRequirement>to usługa znacznika bez metod i mechanizm śledzenia, czy autoryzacja zakończyła się pomyślnie.
+<xref:Microsoft.AspNetCore.Authorization.IAuthorizationRequirement> to usługa znacznika bez metod i mechanizm śledzenia, czy autoryzacja zakończyła się pomyślnie.
 
 Każdy <xref:Microsoft.AspNetCore.Authorization.IAuthorizationHandler> jest odpowiedzialny za sprawdzenie, czy są spełnione wymagania:
 <!--The following code is a copy/paste from 
@@ -121,13 +122,13 @@ Użyj <xref:Microsoft.AspNetCore.Authorization.IAuthorizationService> lub `[Auth
 
 Jeśli używasz Razor stron, zobacz [stosowanie zasad do Razor stron](#apply-policies-to-razor-pages) w tym dokumencie.
 
-Zasady są stosowane do kontrolerów przy użyciu `[Authorize]` atrybutu z nazwą zasad. Przykład:
+Zasady są stosowane do kontrolerów przy użyciu `[Authorize]` atrybutu z nazwą zasad. Na przykład:
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Controllers/AlcoholPurchaseController.cs?name=snippet_AlcoholPurchaseControllerClass&highlight=4)]
 
 ## <a name="apply-policies-to-no-locrazor-pages"></a>Stosowanie zasad do Razor stron
 
-Zasady są stosowane do Razor stron przy użyciu `[Authorize]` atrybutu z nazwą zasad. Przykład:
+Zasady są stosowane do Razor stron przy użyciu `[Authorize]` atrybutu z nazwą zasad. Na przykład:
 
 [!code-csharp[](policies/samples/PoliciesAuthApp2/Pages/AlcoholPurchase.cshtml.cs?name=snippet_AlcoholPurchaseModelClass&highlight=4)]
 
@@ -176,7 +177,7 @@ Poprzedni kod przechodzi przez [PendingRequirements](/dotnet/api/microsoft.aspne
 
 ### <a name="handler-registration"></a>Rejestracja procedury obsługi
 
-Procedury obsługi są rejestrowane w kolekcji usług podczas konfiguracji. Przykład:
+Procedury obsługi są rejestrowane w kolekcji usług podczas konfiguracji. Na przykład:
 
 [!code-csharp[](policies/samples/3.0PoliciesAuthApp1/Startup.cs?range=31-32,39-40,42-45, 53-55, 58)]
 
@@ -192,7 +193,7 @@ Należy zauważyć, że `Handle` Metoda w [przykładzie procedury obsługi](#sec
 
 * W celu zagwarantowania niepowodzenia, nawet w przypadku pomyślnego zajścia innych wymagań `context.Fail` .
 
-Jeśli program obsługi wywołuje `context.Succeed` lub `context.Fail` , wszystkie inne procedury obsługi są nadal wywoływane. Pozwala to na spełnienie wymagań związanych z generowaniem efektów ubocznych, takich jak rejestrowanie, które odbywa się nawet w przypadku pomyślnej weryfikacji lub niepowodzenia przez inną procedurę obsługi. Po ustawieniu na `false` Właściwość [InvokeHandlersAfterFailure](/dotnet/api/microsoft.aspnetcore.authorization.authorizationoptions.invokehandlersafterfailure#Microsoft_AspNetCore_Authorization_AuthorizationOptions_InvokeHandlersAfterFailure) (dostępna w ASP.NET Core 1,1 i nowszych) krótkie obwody wykonywania programów obsługi po `context.Fail` wywołaniu. `InvokeHandlersAfterFailure`wartość domyślna to `true` , w którym to przypadku są wywoływane wszystkie programy obsługi.
+Jeśli program obsługi wywołuje `context.Succeed` lub `context.Fail` , wszystkie inne procedury obsługi są nadal wywoływane. Pozwala to na spełnienie wymagań związanych z generowaniem efektów ubocznych, takich jak rejestrowanie, które odbywa się nawet w przypadku pomyślnej weryfikacji lub niepowodzenia przez inną procedurę obsługi. Po ustawieniu na `false` Właściwość [InvokeHandlersAfterFailure](/dotnet/api/microsoft.aspnetcore.authorization.authorizationoptions.invokehandlersafterfailure#Microsoft_AspNetCore_Authorization_AuthorizationOptions_InvokeHandlersAfterFailure) (dostępna w ASP.NET Core 1,1 i nowszych) krótkie obwody wykonywania programów obsługi po `context.Fail` wywołaniu. `InvokeHandlersAfterFailure` wartość domyślna to `true` , w którym to przypadku są wywoływane wszystkie programy obsługi.
 
 > [!NOTE]
 > Procedury obsługi autoryzacji są wywoływane, nawet jeśli uwierzytelnianie nie powiedzie się.
@@ -229,7 +230,7 @@ Na przykład poprzedni można `BadgeEntryHandler` napisać ponownie w następuj�
 
 `HandleRequirementAsync`Metoda zaimplementowana w procedurze obsługi autoryzacji ma dwa parametry: `AuthorizationHandlerContext` a i `TRequirement` obsługujące. Platformy, takie jak MVC lub, SignalR mogą dodawać dowolne obiekty do `Resource` właściwości w `AuthorizationHandlerContext` celu przekazania dodatkowych informacji.
 
-W przypadku korzystania z routingu punktów końcowych Autoryzacja jest zwykle obsługiwana przez oprogramowanie pośredniczące autoryzacji. W tym przypadku `Resource` Właściwość jest wystąpieniem <xref:Microsoft.AspNetCore.Http.Endpoint> . Punkt końcowy może służyć do sondowania bazowego zasobu, z którym jest przeprowadzana Routing. Przykład:
+W przypadku korzystania z routingu punktów końcowych Autoryzacja jest zwykle obsługiwana przez oprogramowanie pośredniczące autoryzacji. W tym przypadku `Resource` Właściwość jest wystąpieniem <xref:Microsoft.AspNetCore.Http.Endpoint> . Punkt końcowy może służyć do sondowania bazowego zasobu, z którym jest przeprowadzana Routing. Na przykład:
 
 ```csharp
 if (context.Resource is Endpoint endpoint)
@@ -280,7 +281,7 @@ Podstawowa usługa, która określa, czy autoryzacja powiodła się <xref:Micros
 
 Poprzedni kod wyróżnia dwie metody [IAuthorizationService](https://github.com/dotnet/AspNetCore/blob/v2.2.4/src/Security/Authorization/Core/src/IAuthorizationService.cs).
 
-<xref:Microsoft.AspNetCore.Authorization.IAuthorizationRequirement>to usługa znacznika bez metod i mechanizm śledzenia, czy autoryzacja zakończyła się pomyślnie.
+<xref:Microsoft.AspNetCore.Authorization.IAuthorizationRequirement> to usługa znacznika bez metod i mechanizm śledzenia, czy autoryzacja zakończyła się pomyślnie.
 
 Każdy <xref:Microsoft.AspNetCore.Authorization.IAuthorizationHandler> jest odpowiedzialny za sprawdzenie, czy są spełnione wymagania:
 <!--The following code is a copy/paste from 
@@ -357,13 +358,13 @@ Użyj <xref:Microsoft.AspNetCore.Authorization.IAuthorizationService> lub `[Auth
 
 Jeśli używasz Razor stron, zobacz [stosowanie zasad do Razor stron](#apply-policies-to-razor-pages) w tym dokumencie.
 
-Zasady są stosowane do kontrolerów przy użyciu `[Authorize]` atrybutu z nazwą zasad. Przykład:
+Zasady są stosowane do kontrolerów przy użyciu `[Authorize]` atrybutu z nazwą zasad. Na przykład:
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Controllers/AlcoholPurchaseController.cs?name=snippet_AlcoholPurchaseControllerClass&highlight=4)]
 
 ## <a name="apply-policies-to-no-locrazor-pages"></a>Stosowanie zasad do Razor stron
 
-Zasady są stosowane do Razor stron przy użyciu `[Authorize]` atrybutu z nazwą zasad. Przykład:
+Zasady są stosowane do Razor stron przy użyciu `[Authorize]` atrybutu z nazwą zasad. Na przykład:
 
 [!code-csharp[](policies/samples/PoliciesAuthApp2/Pages/AlcoholPurchase.cshtml.cs?name=snippet_AlcoholPurchaseModelClass&highlight=4)]
 
@@ -410,7 +411,7 @@ Poprzedni kod przechodzi przez [PendingRequirements](/dotnet/api/microsoft.aspne
 
 ### <a name="handler-registration"></a>Rejestracja procedury obsługi
 
-Procedury obsługi są rejestrowane w kolekcji usług podczas konfiguracji. Przykład:
+Procedury obsługi są rejestrowane w kolekcji usług podczas konfiguracji. Na przykład:
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Startup.cs?range=32-33,48-53,61,62-63,66)]
 
@@ -426,7 +427,7 @@ Należy zauważyć, że `Handle` Metoda w [przykładzie procedury obsługi](#sec
 
 * W celu zagwarantowania niepowodzenia, nawet w przypadku pomyślnego zajścia innych wymagań `context.Fail` .
 
-Jeśli program obsługi wywołuje `context.Succeed` lub `context.Fail` , wszystkie inne procedury obsługi są nadal wywoływane. Pozwala to na spełnienie wymagań związanych z generowaniem efektów ubocznych, takich jak rejestrowanie, które odbywa się nawet w przypadku pomyślnej weryfikacji lub niepowodzenia przez inną procedurę obsługi. Po ustawieniu na `false` Właściwość [InvokeHandlersAfterFailure](/dotnet/api/microsoft.aspnetcore.authorization.authorizationoptions.invokehandlersafterfailure#Microsoft_AspNetCore_Authorization_AuthorizationOptions_InvokeHandlersAfterFailure) (dostępna w ASP.NET Core 1,1 i nowszych) krótkie obwody wykonywania programów obsługi po `context.Fail` wywołaniu. `InvokeHandlersAfterFailure`wartość domyślna to `true` , w którym to przypadku są wywoływane wszystkie programy obsługi.
+Jeśli program obsługi wywołuje `context.Succeed` lub `context.Fail` , wszystkie inne procedury obsługi są nadal wywoływane. Pozwala to na spełnienie wymagań związanych z generowaniem efektów ubocznych, takich jak rejestrowanie, które odbywa się nawet w przypadku pomyślnej weryfikacji lub niepowodzenia przez inną procedurę obsługi. Po ustawieniu na `false` Właściwość [InvokeHandlersAfterFailure](/dotnet/api/microsoft.aspnetcore.authorization.authorizationoptions.invokehandlersafterfailure#Microsoft_AspNetCore_Authorization_AuthorizationOptions_InvokeHandlersAfterFailure) (dostępna w ASP.NET Core 1,1 i nowszych) krótkie obwody wykonywania programów obsługi po `context.Fail` wywołaniu. `InvokeHandlersAfterFailure` wartość domyślna to `true` , w którym to przypadku są wywoływane wszystkie programy obsługi.
 
 > [!NOTE]
 > Procedury obsługi autoryzacji są wywoływane, nawet jeśli uwierzytelnianie nie powiedzie się.

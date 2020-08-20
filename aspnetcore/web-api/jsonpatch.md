@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/02/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/jsonpatch
-ms.openlocfilehash: 09da557d678889ba16abe6f9af40ae1b33583d8b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: e57c5185323305ccbef7960653c9174931e45d75
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022371"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635401"
 ---
 # <a name="jsonpatch-in-aspnet-core-web-api"></a>JsonPatch w interfejsie Web API ASP.NET Core
 
@@ -36,7 +37,7 @@ W tym artykule wyjaśniono, jak obsłużyć żądania poprawek w formacie JSON w
 Aby włączyć obsługę poprawek JSON w aplikacji, wykonaj następujące czynności:
 
 1. Zainstaluj [`Microsoft.AspNetCore.Mvc.NewtonsoftJson`](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson/) pakiet NuGet.
-1. Zaktualizuj `Startup.ConfigureServices` metodę projektu w celu wywołania <xref:Microsoft.Extensions.DependencyInjection.NewtonsoftJsonMvcBuilderExtensions.AddNewtonsoftJson*> . Przykład:
+1. Zaktualizuj `Startup.ConfigureServices` metodę projektu w celu wywołania <xref:Microsoft.Extensions.DependencyInjection.NewtonsoftJsonMvcBuilderExtensions.AddNewtonsoftJson*> . Na przykład:
 
     ```csharp
     services
@@ -44,7 +45,7 @@ Aby włączyć obsługę poprawek JSON w aplikacji, wykonaj następujące czynno
         .AddNewtonsoftJson();
     ```
 
-`AddNewtonsoftJson`jest zgodny z metodami rejestracji usługi MVC:
+`AddNewtonsoftJson` jest zgodny z metodami rejestracji usługi MVC:
 
 * <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddRazorPages*>
 * <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddControllersWithViews*>
@@ -52,7 +53,7 @@ Aby włączyć obsługę poprawek JSON w aplikacji, wykonaj następujące czynno
 
 ## <a name="json-patch-addnewtonsoftjson-and-systemtextjson"></a>Poprawka JSON, AddNewtonsoftJson i System.Text.Jsna
 
-`AddNewtonsoftJson`zastępuje utworzone w oparciu o dane `System.Text.Json` wejściowe i wyjściowe elementy formatujące używane do formatowania **całej** zawartości JSON. Aby dodać obsługę poprawki JSON przy użyciu `Newtonsoft.Json` , pozostawiając inne elementy formatujące bez zmian, zaktualizuj `Startup.ConfigureServices` metodę projektu w następujący sposób:
+`AddNewtonsoftJson` zastępuje utworzone w oparciu o dane `System.Text.Json` wejściowe i wyjściowe elementy formatujące używane do formatowania **całej** zawartości JSON. Aby dodać obsługę poprawki JSON przy użyciu `Newtonsoft.Json` , pozostawiając inne elementy formatujące bez zmian, zaktualizuj `Startup.ConfigureServices` metodę projektu w następujący sposób:
 
 [!code-csharp[](jsonpatch/samples/3.0/WebApp1/Startup.cs?name=snippet)]
 
@@ -253,12 +254,12 @@ Następujący przykładowy dokument poprawek nie ma wpływu, jeśli początkowa 
 
 Aby przetestować przykład, uruchom aplikację i Wyślij żądania HTTP z następującymi ustawieniami:
 
-* Adres URL:`http://localhost:{port}/jsonpatch/jsonpatchwithmodelstate`
-* Metoda HTTP:`PATCH`
-* Nagłówki`Content-Type: application/json-patch+json`
+* Adres URL: `http://localhost:{port}/jsonpatch/jsonpatchwithmodelstate`
+* Metoda HTTP: `PATCH`
+* Nagłówki `Content-Type: application/json-patch+json`
 * Treść: Skopiuj i wklej jeden z przykładów dokumentu poprawki JSON z folderu projektu *JSON* .
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [IETF RFC 5789 Specyfikacja metody poprawek](https://tools.ietf.org/html/rfc5789)
 * [IETF RFC 6902 — Specyfikacja poprawek JSON](https://tools.ietf.org/html/rfc6902)
@@ -465,12 +466,12 @@ Następujący przykładowy dokument poprawek nie ma wpływu, jeśli początkowa 
 
 Aby przetestować przykład, uruchom aplikację i Wyślij żądania HTTP z następującymi ustawieniami:
 
-* Adres URL:`http://localhost:{port}/jsonpatch/jsonpatchwithmodelstate`
-* Metoda HTTP:`PATCH`
-* Nagłówki`Content-Type: application/json-patch+json`
+* Adres URL: `http://localhost:{port}/jsonpatch/jsonpatchwithmodelstate`
+* Metoda HTTP: `PATCH`
+* Nagłówki `Content-Type: application/json-patch+json`
 * Treść: Skopiuj i wklej jeden z przykładów dokumentu poprawki JSON z folderu projektu *JSON* .
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [IETF RFC 5789 Specyfikacja metody poprawek](https://tools.ietf.org/html/rfc5789)
 * [IETF RFC 6902 — Specyfikacja poprawek JSON](https://tools.ietf.org/html/rfc6902)

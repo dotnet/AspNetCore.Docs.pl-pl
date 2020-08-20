@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 04/06/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/performance-best-practices
-ms.openlocfilehash: 0d99c5881b1ca786287d8643c82cab6a3f98f988
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 94ae9e52ed99c3fe8e7044f474cdf5b702dc5adf
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019862"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634465"
 ---
 # <a name="aspnet-core-performance-best-practices"></a>ASP.NET Core najlepszych rozwiązań dotyczących wydajności
 
@@ -110,7 +111,7 @@ Mając
 
 ## <a name="keep-common-code-paths-fast"></a>Szybkie śledzenie wspólnych ścieżek kodu
 
-Chcesz, aby cały kod był szybki. Często nazywane ścieżki kodu są najbardziej krytyczne dla optymalizacji. Są to moduły:
+Chcesz, aby cały kod był szybki. Często nazywane ścieżki kodu są najbardziej krytyczne dla optymalizacji. Należą do nich:
 
 * Składniki pośredniczące w potoku przetwarzania żądań aplikacji, szczególnie oprogramowanie pośredniczące działające wczesnie w potoku. Te składniki mają duży wpływ na wydajność.
 * Kod wykonywany dla każdego żądania lub wiele razy na żądanie. Na przykład niestandardowe rejestrowanie, programy obsługi autoryzacji lub inicjowanie usług przejściowych.
@@ -195,12 +196,12 @@ Poprzedni kod asynchronicznie deserializacji treści żądania do obiektu język
 ## <a name="prefer-readformasync-over-requestform"></a>Preferuj ReadFormAsync przez żądanie. formularz
 
 Użyj `HttpContext.Request.ReadFormAsync` zamiast `HttpContext.Request.Form` .
-`HttpContext.Request.Form`można bezpiecznie odczytać tylko z następujących warunków:
+`HttpContext.Request.Form` można bezpiecznie odczytać tylko z następujących warunków:
 
 * Formularz został odczytany przez wywołanie do `ReadFormAsync` , i
-* Trwa odczytywanie buforowanej wartości formularza przy użyciu`HttpContext.Request.Form`
+* Trwa odczytywanie buforowanej wartości formularza przy użyciu `HttpContext.Request.Form`
 
-**Nie wykonuj tej czynności:** Poniższy przykład używa `HttpContext.Request.Form` .  `HttpContext.Request.Form`używa [synchronizacji przez asynchroniczne](https://github.com/davidfowl/AspNetCoreDiagnosticScenarios/blob/master/AsyncGuidance.md#warning-sync-over-async
+**Nie wykonuj tej czynności:** Poniższy przykład używa `HttpContext.Request.Form` .  `HttpContext.Request.Form` używa [synchronizacji przez asynchroniczne](https://github.com/davidfowl/AspNetCoreDiagnosticScenarios/blob/master/AsyncGuidance.md#warning-sync-over-async
 ) i może prowadzić do zablokowania puli wątków.
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/MySecondController.cs?name=snippet1)]
@@ -229,7 +230,7 @@ Naively przechowywanie dużego żądania lub treści odpowiedzi w jeden `byte[]`
 
 ## <a name="working-with-a-synchronous-data-processing-api"></a>Praca z synchronicznym interfejsem API przetwarzania danych
 
-W przypadku korzystania z serializatora/deserializatora, który obsługuje tylko odczyty synchroniczne i zapisy (na przykład [JSON.NET](https://www.newtonsoft.com/json/help/html/Introduction.htm)):
+W przypadku korzystania z serializatora/deserializatora, który obsługuje tylko odczyty synchroniczne i zapisy (na przykład  [JSON.NET](https://www.newtonsoft.com/json/help/html/Introduction.htm)):
 
 * Przebuforuj dane do pamięci asynchronicznie przed przekazaniem ich do serializatora/deserializatora.
 
@@ -273,7 +274,7 @@ Poprzedzający kod często przechwytuje wartość null lub jest nieprawidłowy `
 
 ## <a name="do-not-use-the-httpcontext-after-the-request-is-complete"></a>Nie używaj obiektu HttpContext po zakończeniu żądania
 
-`HttpContext`jest prawidłowy tylko pod warunkiem, że w potoku ASP.NET Core istnieje aktywne żądanie HTTP. Cały potok ASP.NET Core jest asynchronicznym łańcuchem delegatów, które wykonują każde żądanie. Po `Task` zakończeniu zwracanego z tego łańcucha jest on `HttpContext` odtwarzany.
+`HttpContext` jest prawidłowy tylko pod warunkiem, że w potoku ASP.NET Core istnieje aktywne żądanie HTTP. Cały potok ASP.NET Core jest asynchronicznym łańcuchem delegatów, które wykonują każde żądanie. Po `Task` zakończeniu zwracanego z tego łańcucha jest on `HttpContext` odtwarzany.
 
 **Nie wykonuj tej czynności:** Poniższy przykład korzysta z tego, że `async void` żądanie HTTP kończy się po `await` osiągnięciu pierwszego osiągnięcia:
 
@@ -313,7 +314,7 @@ Zadania w tle należy zaimplementować jako usługi hostowane. Aby uzyskać wię
 
 **Wykonaj następujące czynności:** Poniższy przykład:
 
-* Wprowadza w celu <xref:Microsoft.Extensions.DependencyInjection.IServiceScopeFactory> utworzenia zakresu w tle elementu pracy. `IServiceScopeFactory`jest klasą pojedynczą.
+* Wprowadza w celu <xref:Microsoft.Extensions.DependencyInjection.IServiceScopeFactory> utworzenia zakresu w tle elementu pracy. `IServiceScopeFactory` jest klasą pojedynczą.
 * Tworzy nowy zakres iniekcji zależności w wątku w tle.
 * Nie odwołuje się do żadnego z kontrolerów.
 * Nie przechwytuje `ContosoDbContext` z przychodzącego żądania.

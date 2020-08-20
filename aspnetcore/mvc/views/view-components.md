@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/18/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/view-components
-ms.openlocfilehash: 0c952502d58744bbbe06c92f51bd51bd547fb8ae
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 32ae699c4ef501096a9c4ab7bca6673139910f02
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020954"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635089"
 ---
 # <a name="view-components-in-aspnet-core"></a>Wyświetl składniki w ASP.NET Core
 
@@ -52,7 +53,7 @@ Składniki widoku są zamierzone wszędzie tam, gdzie można ponownie używać l
 
 Składnik widoku składa się z dwóch części: klasy (zwykle pochodnej od [ViewComponent](/dotnet/api/microsoft.aspnetcore.mvc.viewcomponent)) i wynik zwracanego (zazwyczaj widok). Podobnie jak kontrolery, składnik widoku może być POCO, ale większość deweloperów chce skorzystać z metod i właściwości dostępnych w wyniku `ViewComponent` .
 
-Biorąc pod uwagę, czy składniki widoku są zgodne ze specyfikacjami aplikacji, Razor zamiast tego Rozważ użycie składników. RazorSkładniki umożliwiają również łączenie znaczników z kodem C# w celu tworzenia jednostek interfejsu użytkownika wielokrotnego użytku. RazorSkładniki są przeznaczone do produktywności deweloperów podczas udostępniania logiki interfejsu użytkownika po stronie klienta. Aby uzyskać więcej informacji, zobacz <xref:blazor/components/index>.
+Biorąc pod uwagę, czy składniki widoku są zgodne ze specyfikacjami aplikacji, Razor zamiast tego Rozważ użycie składników. Razor Składniki umożliwiają również łączenie znaczników z kodem C# w celu tworzenia jednostek interfejsu użytkownika wielokrotnego użytku. Razor Składniki są przeznaczone do produktywności deweloperów podczas udostępniania logiki interfejsu użytkownika po stronie klienta. Aby uzyskać więcej informacji, zobacz <xref:blazor/components/index>.
 
 ## <a name="creating-a-view-component"></a>Tworzenie składnika widoku
 
@@ -188,7 +189,7 @@ Uwagi dotyczące kodu:
 
 * W `[ViewComponent]` powyższym atrybucie nakazuje selektorowi składnika widoku użycie nazwy `PriorityList` podczas wyszukiwania widoków skojarzonych ze składnikiem i użycie ciągu "PriorityList" podczas odwoływania się do składnika klasy z widoku. Wyjaśnimy, że w dalszej części bardziej szczegółowo.
 * Składnik używa [iniekcji zależności](../../fundamentals/dependency-injection.md) , aby udostępnić kontekst danych.
-* `InvokeAsync`uwidacznia metodę, która może być wywoływana z widoku i może przyjmować dowolną liczbę argumentów.
+* `InvokeAsync` uwidacznia metodę, która może być wywoływana z widoku i może przyjmować dowolną liczbę argumentów.
 * `InvokeAsync`Metoda zwraca zestaw `ToDo` elementów, które spełniają `isDone` `maxPriority` Parametry i.
 
 ### <a name="create-the-view-component-no-locrazor-view"></a>Tworzenie widoku składnika widoku Razor
@@ -210,7 +211,7 @@ Uwagi dotyczące kodu:
 
     [!code-cshtml[](view-components/sample/ViewCompFinal/Views/ToDo/IndexFirst.cshtml?range=34-38)]
 
-Znacznik `@await Component.InvokeAsync` pokazuje składnię dla wywoływanych składników widoku. Pierwszy argument jest nazwą składnika, który ma zostać wywołany lub wywołany. Kolejne parametry są przesyłane do składnika. `InvokeAsync`może przyjmować dowolną liczbę argumentów.
+Znacznik `@await Component.InvokeAsync` pokazuje składnię dla wywoływanych składników widoku. Pierwszy argument jest nazwą składnika, który ma zostać wywołany lub wywołany. Kolejne parametry są przesyłane do składnika. `InvokeAsync` może przyjmować dowolną liczbę argumentów.
 
 Testowanie aplikacji. Na poniższej ilustracji przedstawiono listę zadań do wykonania i priorytet:
 
@@ -353,6 +354,6 @@ Każdy parametr w składniku widoku jest atrybutem wymaganym. Zobacz [ten proble
 * ViewComponent nie renderuje żadnych znaczników.
 * Nie zostaną zgłoszone żadne błędy.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Wstrzykiwanie zależności do widoków](xref:mvc/views/dependency-injection)

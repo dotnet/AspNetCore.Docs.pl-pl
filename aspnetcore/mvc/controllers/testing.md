@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 7/22/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/testing
-ms.openlocfilehash: 311f1ce9eb2b0e358ddc01a1982dc39379f53b8f
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: d6c70d828d6c2f62f9e7b849a299df3077f2da32
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020915"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635232"
 ---
 # <a name="unit-test-controller-logic-in-aspnet-core"></a>Logika kontrolera testów jednostkowych w ASP.NET Core
 
@@ -54,7 +55,7 @@ Poprzedni kontroler:
 
 `HTTP GET Index`Metoda nie ma pętli ani rozgałęziania i wywołuje tylko jedną metodę. Test jednostkowy dla tej akcji:
 
-* Program umożliwia imitację `IBrainstormSessionRepository` usługi przy użyciu `GetTestSessions` metody. `GetTestSessions`tworzy dwie sesje z burzą mózgów z datami i nazwami sesji.
+* Program umożliwia imitację `IBrainstormSessionRepository` usługi przy użyciu `GetTestSessions` metody. `GetTestSessions` tworzy dwie sesje z burzą mózgów z datami i nazwami sesji.
 * Wykonuje `Index` metodę.
 * Wykonuje potwierdzenia w wyniku zwróconym przez metodę:
   * <xref:Microsoft.AspNetCore.Mvc.ViewResult>Jest zwracany.
@@ -162,9 +163,9 @@ W przypadku prawidłowej sesji `id` drugi test potwierdza, że metoda zwraca:
 
 Przykładowa aplikacja zawiera również metodę tworzenia nowego `Idea` dla danej sesji. Kontroler zwraca:
 
-* <xref:Microsoft.AspNetCore.Mvc.ControllerBase.BadRequest*>dla nieprawidłowego modelu.
-* <xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound*>Jeśli sesja nie istnieje.
-* <xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction*>gdy sesja zostanie zaktualizowana przy użyciu nowego pomysłu.
+* <xref:Microsoft.AspNetCore.Mvc.ControllerBase.BadRequest*> dla nieprawidłowego modelu.
+* <xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound*> Jeśli sesja nie istnieje.
+* <xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction*> gdy sesja zostanie zaktualizowana przy użyciu nowego pomysłu.
 
 [!code-csharp[](testing/samples/3.x/TestingControllersSample/src/TestingControllersSample/Api/IdeasController.cs?name=snippet_CreateActionResult&highlight=9,16,29)]
 
@@ -181,7 +182,7 @@ Drugi test sprawdza, czy <xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound*
 W przypadku prawidłowej sesji `id` test końcowy potwierdza, że:
 
 * Metoda zwraca obiekt `ActionResult` z `BrainstormSession` typem.
-* [ActionResult \<T> . Wynik](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Result*) to <xref:Microsoft.AspNetCore.Mvc.CreatedAtActionResult> . `CreatedAtActionResult`jest analogiczny do *201 utworzonej* odpowiedzi z `Location` nagłówkiem.
+* [ActionResult \<T> . Wynik](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Result*) to <xref:Microsoft.AspNetCore.Mvc.CreatedAtActionResult> . `CreatedAtActionResult` jest analogiczny do *201 utworzonej* odpowiedzi z `Location` nagłówkiem.
 * [ActionResult \<T> . Wartość](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*) jest `BrainstormSession` typem.
 * Wywołano wywołanie makiety w celu zaktualizowania sesji `UpdateAsync(testSession)` . `Verifiable`Wywołanie metody jest sprawdzane przez wykonanie `mockRepo.Verify()` w potwierdzeniach.
 * `Idea`Dla sesji zwracane są dwa obiekty.
@@ -217,7 +218,7 @@ Poprzedni kontroler:
 
 `HTTP GET Index`Metoda nie ma pętli ani rozgałęziania i wywołuje tylko jedną metodę. Test jednostkowy dla tej akcji:
 
-* Program umożliwia imitację `IBrainstormSessionRepository` usługi przy użyciu `GetTestSessions` metody. `GetTestSessions`tworzy dwie sesje z burzą mózgów z datami i nazwami sesji.
+* Program umożliwia imitację `IBrainstormSessionRepository` usługi przy użyciu `GetTestSessions` metody. `GetTestSessions` tworzy dwie sesje z burzą mózgów z datami i nazwami sesji.
 * Wykonuje `Index` metodę.
 * Wykonuje potwierdzenia w wyniku zwróconym przez metodę:
   * <xref:Microsoft.AspNetCore.Mvc.ViewResult>Jest zwracany.
@@ -325,9 +326,9 @@ W przypadku prawidłowej sesji `id` drugi test potwierdza, że metoda zwraca:
 
 Przykładowa aplikacja zawiera również metodę tworzenia nowego `Idea` dla danej sesji. Kontroler zwraca:
 
-* <xref:Microsoft.AspNetCore.Mvc.ControllerBase.BadRequest*>dla nieprawidłowego modelu.
-* <xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound*>Jeśli sesja nie istnieje.
-* <xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction*>gdy sesja zostanie zaktualizowana przy użyciu nowego pomysłu.
+* <xref:Microsoft.AspNetCore.Mvc.ControllerBase.BadRequest*> dla nieprawidłowego modelu.
+* <xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound*> Jeśli sesja nie istnieje.
+* <xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction*> gdy sesja zostanie zaktualizowana przy użyciu nowego pomysłu.
 
 [!code-csharp[](testing/samples/2.x/TestingControllersSample/src/TestingControllersSample/Api/IdeasController.cs?name=snippet_CreateActionResult&highlight=9,16,29)]
 
@@ -344,7 +345,7 @@ Drugi test sprawdza, czy <xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound*
 W przypadku prawidłowej sesji `id` test końcowy potwierdza, że:
 
 * Metoda zwraca obiekt `ActionResult` z `BrainstormSession` typem.
-* [ActionResult \<T> . Wynik](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Result*) to <xref:Microsoft.AspNetCore.Mvc.CreatedAtActionResult> . `CreatedAtActionResult`jest analogiczny do *201 utworzonej* odpowiedzi z `Location` nagłówkiem.
+* [ActionResult \<T> . Wynik](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Result*) to <xref:Microsoft.AspNetCore.Mvc.CreatedAtActionResult> . `CreatedAtActionResult` jest analogiczny do *201 utworzonej* odpowiedzi z `Location` nagłówkiem.
 * [ActionResult \<T> . Wartość](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*) jest `BrainstormSession` typem.
 * Wywołano wywołanie makiety w celu zaktualizowania sesji `UpdateAsync(testSession)` . `Verifiable`Wywołanie metody jest sprawdzane przez wykonanie `mockRepo.Verify()` w potwierdzeniach.
 * `Idea`Dla sesji zwracane są dwa obiekty.
@@ -354,7 +355,7 @@ W przypadku prawidłowej sesji `id` test końcowy potwierdza, że:
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:test/integration-tests>
 * [Tworzenie i uruchamianie testów jednostkowych za pomocą programu Visual Studio](/visualstudio/test/unit-test-your-code)

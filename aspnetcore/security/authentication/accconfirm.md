@@ -5,6 +5,7 @@ description: Dowiedz się, jak utworzyć aplikację ASP.NET Core przy użyciu po
 ms.author: riande
 ms.date: 03/11/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/accconfirm
-ms.openlocfilehash: 7016c2c1997d961f4b3d3cf513fc1769bd65247b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 57607390e7d5e58df9f27437faecd57504ad64df
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021617"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635375"
 ---
 # <a name="account-confirmation-and-password-recovery-in-aspnet-core"></a>Potwierdzenie konta i odzyskiwanie hasła w ASP.NET Core
 
@@ -52,7 +53,7 @@ dotnet run
 
 Uruchom aplikację, wybierz łącze **zarejestruj** i zarejestruj użytkownika. Po zarejestrowaniu nastąpi przekierowanie na `/Identity/Account/RegisterConfirmation` stronę do, która zawiera link umożliwiający zasymulowanie potwierdzenia wiadomości e-mail:
 
-* Wybierz `Click here to confirm your account` łącze.
+* Wybierz link `Click here to confirm your account`.
 * Wybierz łącze **logowania** i zaloguj się przy użyciu tych samych poświadczeń.
 * Wybierz `Hello YourEmail@provider.com!` link, który przekierowuje Cię do `/Identity/Account/Manage/PersonalData` strony.
 * Wybierz kartę **dane osobowe** po lewej stronie, a następnie wybierz pozycję **Usuń**.
@@ -69,7 +70,7 @@ Utwórz klasę, aby pobrać bezpieczny klucz poczty e-mail. Dla tego przykładu 
 
 #### <a name="configure-sendgrid-user-secrets"></a>Konfigurowanie kluczy tajnych użytkownika SendGrid
 
-Ustaw `SendGridUser` i `SendGridKey` za pomocą [Narzędzia do zarządzania kluczami tajnymi](xref:security/app-secrets). Przykład:
+Ustaw `SendGridUser` i `SendGridKey` za pomocą [Narzędzia do zarządzania kluczami tajnymi](xref:security/app-secrets). Na przykład:
 
 ```dotnetcli
 dotnet user-secrets set SendGridUser RickAndMSFT
@@ -97,7 +98,7 @@ W tym samouczku pokazano, jak dodać powiadomienia e-mail za pośrednictwem usł
 
 Zainstaluj `SendGrid` pakiet NuGet:
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 W konsoli Menedżera pakietów wprowadź następujące polecenie:
 
@@ -105,7 +106,7 @@ W konsoli Menedżera pakietów wprowadź następujące polecenie:
 Install-Package SendGrid
 ```
 
-# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
 
 W konsoli programu wprowadź następujące polecenie:
 
@@ -237,7 +238,7 @@ Włączenie potwierdzenia konta w witrynie z użytkownikami powoduje zablokowani
 
 [.NET Core 2,2 SDK lub nowszy](https://dotnet.microsoft.com/download/dotnet-core)
 
-## <a name="create-a-web--app-and-scaffold-no-locidentity"></a>Tworzenie aplikacji sieci Web i szkieletuIdentity
+## <a name="create-a-web--app-and-scaffold-no-locidentity"></a>Tworzenie aplikacji sieci Web i szkieletu Identity
 
 Uruchom następujące polecenia, aby utworzyć aplikację sieci Web z uwierzytelnianiem.
 
@@ -273,11 +274,11 @@ Najlepszym rozwiązaniem jest potwierdzenie wiadomości e-mail o nowej rejestrac
 
 Zazwyczaj chcesz uniemożliwić nowym użytkownikom ogłaszanie danych w witrynie sieci Web przed potwierdzeniem wiadomości e-mail.
 
-Aktualizuj `Startup.ConfigureServices` , aby wymagać potwierdzonej wiadomości e-mail:
+Aktualizuj `Startup.ConfigureServices`  , aby wymagać potwierdzonej wiadomości e-mail:
 
 [!code-csharp[](accconfirm/sample/WebPWrecover22/Startup.cs?name=snippet1&highlight=8-11)]
 
-`config.SignIn.RequireConfirmedEmail = true;`zapobiega logowaniu się zarejestrowanych użytkowników do momentu potwierdzenia ich wiadomości e-mail.
+`config.SignIn.RequireConfirmedEmail = true;` zapobiega logowaniu się zarejestrowanych użytkowników do momentu potwierdzenia ich wiadomości e-mail.
 
 ### <a name="configure-email-provider"></a>Konfigurowanie dostawcy poczty e-mail
 
@@ -289,7 +290,7 @@ Utwórz klasę, aby pobrać bezpieczny klucz poczty e-mail. Dla tego przykładu 
 
 #### <a name="configure-sendgrid-user-secrets"></a>Konfigurowanie kluczy tajnych użytkownika SendGrid
 
-Ustaw `SendGridUser` i `SendGridKey` za pomocą [Narzędzia do zarządzania kluczami tajnymi](xref:security/app-secrets). Przykład:
+Ustaw `SendGridUser` i `SendGridKey` za pomocą [Narzędzia do zarządzania kluczami tajnymi](xref:security/app-secrets). Na przykład:
 
 ```console
 C:/WebAppl>dotnet user-secrets set SendGridUser RickAndMSFT
@@ -315,7 +316,7 @@ W tym samouczku pokazano, jak dodać powiadomienia e-mail za pośrednictwem usł
 
 Zainstaluj `SendGrid` pakiet NuGet:
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 W konsoli Menedżera pakietów wprowadź następujące polecenie:
 
@@ -323,7 +324,7 @@ W konsoli Menedżera pakietów wprowadź następujące polecenie:
 Install-Package SendGrid
 ```
 
-# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
 
 W konsoli programu wprowadź następujące polecenie:
 

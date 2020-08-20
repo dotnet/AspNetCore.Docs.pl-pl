@@ -5,6 +5,7 @@ description: Omówienie Microsoft. NET. Sdk. Web.
 ms.author: riande
 ms.date: 01/25/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,18 +16,18 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/web-sdk
-ms.openlocfilehash: a717d9dc0e326e62ec920d2a838e8b18be3db013
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 163bc2679deda449f97cb4e50da1093e6b1edda4
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020694"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634816"
 ---
 # <a name="aspnet-core-web-sdk"></a>ASP.NET Core Web SDK
 
 ### <a name="overview"></a>Omówienie
 
-`Microsoft.NET.Sdk.Web`jest [zestawem SDK programu MSBuild](https://docs.microsoft.com/visualstudio/msbuild/how-to-use-project-sdk) do kompilowania aplikacji ASP.NET Core. Istnieje możliwość utworzenia aplikacji ASP.NET Core bez tego zestawu SDK, ale zestaw SDK sieci Web:
+`Microsoft.NET.Sdk.Web` jest [zestawem SDK programu MSBuild](https://docs.microsoft.com/visualstudio/msbuild/how-to-use-project-sdk) do kompilowania aplikacji ASP.NET Core. Istnieje możliwość utworzenia aplikacji ASP.NET Core bez tego zestawu SDK, ale zestaw SDK sieci Web:
 
 * Dostosowany do zapewniania środowiska pierwszej klasy.
 * Zalecany element docelowy dla większości użytkowników.

@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/17/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: index
-ms.openlocfilehash: 9cf721b381d3c4c737c15225edcf7918dd1fcf5b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: f1235337748bacdb6eaa775a5853238bf729e605
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015351"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634556"
 ---
 # <a name="introduction-to-aspnet-core"></a>Wprowadzenie do platformy ASP.NET Core
 
@@ -70,7 +71,7 @@ Jest kilka zalet przyjmowania platformy .NET Core jako docelowej, a ich liczba r
 * Większa wydajność
 * [Przechowywanie wersji obok siebie](/dotnet/standard/choosing-core-framework-server#side-by-side-net-versions-per-application-level)
 * Nowe interfejsy API
-* Kod open source
+* Technologia open source
 
 ## <a name="recommended-learning-path"></a>Zalecana ścieżka szkoleniowa
 
@@ -82,16 +83,16 @@ Zalecamy poniższą sekwencję samouczków, aby zapoznać się z wprowadzeniem d
    |----------|----------|----------|
    |Aplikacja internetowa                   | Tworzenie nowego interfejsu użytkownika sieci Web po stronie serwera |[Wprowadzenie do Razor stron](xref:tutorials/razor-pages/razor-pages-start) |
    |Aplikacja internetowa                   | Obsługa aplikacji MVC |[Wprowadzenie do wzorca MVC](xref:tutorials/first-mvc-app/start-mvc)|
-   |Aplikacja internetowa                   | Programowanie interfejsu użytkownika sieci Web po stronie klienta |[Wprowadzenie doBlazor](https://dotnet.microsoft.com/learn/aspnet/blazor-tutorial/intro) |
+   |Aplikacja internetowa                   | Programowanie interfejsu użytkownika sieci Web po stronie klienta |[Wprowadzenie do Blazor](https://dotnet.microsoft.com/learn/aspnet/blazor-tutorial/intro) |
    |Interfejs API sieci Web                   | RESTful usługi HTTP |[Tworzenie internetowego interfejsu API](xref:tutorials/first-web-api)&dagger; |
    |Aplikacja zdalnego wywołania procedury | Usługi pierwszego kontraktu przy użyciu buforów protokołu |[Wprowadzenie do usługi gRPC](xref:tutorials/grpc/grpc-start) |
-   |Aplikacja czasu rzeczywistego             | Dwukierunkowa komunikacja między serwerami i połączonymi klientami |[Wprowadzenie doSignalR](xref:tutorials/signalr) |
+   |Aplikacja czasu rzeczywistego             | Dwukierunkowa komunikacja między serwerami i połączonymi klientami |[Wprowadzenie do SignalR](xref:tutorials/signalr) |
 
 1. Postępuj zgodnie z samouczkiem, który pokazuje, jak przeprowadzić podstawowy dostęp do danych.
 
    |Scenariusz  |Samouczek  |
    |----------|----------|
-   |Nowe programowanie        |[RazorStrony z Entity Framework Core](xref:data/ef-rp/intro) |
+   |Nowe programowanie        |[Razor Strony z Entity Framework Core](xref:data/ef-rp/intro) |
    |Obsługa aplikacji MVC |[Wzorzec MVC z platformą Entity Framework Core](xref:data/ef-mvc/intro) |
 
 1. Zapoznaj się z omówieniem ASP.NET Core [podstawowych](xref:fundamentals/index) , które mają zastosowanie do wszystkich typów aplikacji.
@@ -156,7 +157,7 @@ Jest kilka zalet przyjmowania platformy .NET Core jako docelowej, a ich liczba r
 * Większa wydajność
 * [Przechowywanie wersji obok siebie](/dotnet/standard/choosing-core-framework-server#side-by-side-net-versions-per-application-level)
 * Nowe interfejsy API
-* Kod open source
+* Technologia open source
 
 Aby pomóc w zamknięciu przerwy w interfejsie API z .NET Framework do programu .NET Core, [pakiet zgodności systemu Windows](/dotnet/core/porting/windows-compat-pack) wprowadził tysiące interfejsów API tylko dla systemu Windows dostępnych w programie .NET Core. Te interfejsy API nie były dostępne na platformie .NET Core 1.x.
 
@@ -171,13 +172,13 @@ Przy rozpoczynaniu programowania aplikacji platformy ASP.NET Core zalecamy nast�
    |Aplikacja internetowa                   | Programowanie od nowa        |[Wprowadzenie do Razor stron](xref:tutorials/razor-pages/razor-pages-start) |
    |Aplikacja internetowa                   | Konserwacja aplikacji MVC |[Wprowadzenie do wzorca MVC](xref:tutorials/first-mvc-app/start-mvc)|
    |Interfejs API sieci Web                   |                            |[Tworzenie internetowego interfejsu API](xref:tutorials/first-web-api)&dagger; |
-   |Aplikacja czasu rzeczywistego             |                            |[Wprowadzenie doSignalR](xref:tutorials/signalr) |
+   |Aplikacja czasu rzeczywistego             |                            |[Wprowadzenie do SignalR](xref:tutorials/signalr) |
 
 1. Postępuj zgodnie z samouczkiem, który pokazuje, jak przeprowadzić podstawowy dostęp do danych.
 
    |Scenariusz  |Samouczek  |
    |----------|----------|
-   | Programowanie od nowa        |[RazorStrony z Entity Framework Core](xref:data/ef-rp/intro) |
+   | Programowanie od nowa        |[Razor Strony z Entity Framework Core](xref:data/ef-rp/intro) |
    | Konserwacja aplikacji MVC |[Wzorzec MVC z platformą Entity Framework Core](xref:data/ef-mvc/intro) |
 
 1. Zapoznaj się z omówieniem ASP.NET Core [podstawowych](xref:fundamentals/index) , które mają zastosowanie do wszystkich typów aplikacji.

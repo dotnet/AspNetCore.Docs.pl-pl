@@ -6,6 +6,7 @@ description: Odkryj atrybuty pomocnika znacznika łącza ASP.NET Core i rolę, j
 ms.custom: mvc
 ms.date: 09/24/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/link-tag-helper
-ms.openlocfilehash: 7487bc64f8e20f85ef95e5389409c0194ec31337
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 09507294b90f08bbaf134f611aad0b91504ccffb
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018562"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635076"
 ---
 # <a name="link-tag-helper-in-aspnet-core"></a>Pomocnik tagu linku w ASP.NET Core
 
@@ -45,7 +46,7 @@ W poprzednim kodzie pomocnik tagu linku wygenerował `<meta name="x-stylesheet-f
 
 ## <a name="commonly-used-link-tag-helper-attributes"></a>Atrybuty pomocnika często używanych tagów linków
 
-Zobacz [pomocnika tagów linków](xref:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper) dla wszystkich atrybutów pomocnika tagów linków, właściwości i metod.
+Zobacz [pomocnika tagów linków](xref:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper)  dla wszystkich atrybutów pomocnika tagów linków, właściwości i metod.
 
 ### <a name="href"></a>Tag
 

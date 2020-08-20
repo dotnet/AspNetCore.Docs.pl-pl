@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/response-compression
-ms.openlocfilehash: 1dd931d0ee654b888814df8a0d0675d32b5c3a20
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: b8947e3c3c4f634fbd838c22ff60799257143480
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020967"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634998"
 ---
 # <a name="response-compression-in-aspnet-core"></a>Kompresja odpowiedzi w ASP.NET Core
 
@@ -43,7 +44,7 @@ Użyj oprogramowania pośredniczącego kompresji odpowiedzi, gdy jesteś:
   * [Moduł mod_deflate Apache](https://httpd.apache.org/docs/current/mod/mod_deflate.html)
   * [Kompresja i dekompresja Nginx](https://www.nginx.com/resources/admin-guide/compression-and-decompression/)
 * Hosting bezpośrednio na:
-  * [SerwerHTTP.sys](xref:fundamentals/servers/httpsys) (znany wcześniej jako webListener)
+  * [ SerwerHTTP.sys](xref:fundamentals/servers/httpsys) (znany wcześniej jako webListener)
   * [Serwer Kestrel](xref:fundamentals/servers/kestrel)
 
 ## <a name="response-compression"></a>Kompresja odpowiedzi
@@ -52,7 +53,7 @@ Zazwyczaj Każda odpowiedź nieskompresowana natywnie może korzystać z kompres
 
 Gdy klient może przetwarzać skompresowaną zawartość, klient musi poinformować serwer o swoich możliwościach, wysyłając `Accept-Encoding` Nagłówek z żądaniem. Gdy serwer wysyła skompresowaną zawartość, musi zawierać informacje w `Content-Encoding` nagłówku dotyczące sposobu kodowania skompresowanej odpowiedzi. Oznaczenia kodowania zawartości obsługiwane przez oprogramowanie pośredniczące przedstawiono w poniższej tabeli.
 
-| `Accept-Encoding`wartości nagłówka | Obsługiwane oprogramowanie pośredniczące | Opis |
+| `Accept-Encoding` wartości nagłówka | Obsługiwane oprogramowanie pośredniczące | Opis |
 | ------------------------------- | :------------------: | ----------- |
 | `br`                            | Tak (ustawienie domyślne)        | [Format skompresowanych danych Brotli](https://tools.ietf.org/html/rfc7932) |
 | `deflate`                       | Nie                   | [WKLĘŚNIĘCIE — skompresowany format danych](https://tools.ietf.org/html/rfc1951) |
@@ -90,7 +91,7 @@ Poznaj funkcje oprogramowania pośredniczącego kompresji odpowiedzi z [przykła
 
 Oprogramowanie pośredniczące kompresji odpowiedzi jest dostarczane przez pakiet [Microsoft. AspNetCore. ResponseCompression](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCompression/) , który jest niejawnie uwzględniony w aplikacjach ASP.NET Core.
 
-## <a name="configuration"></a>Konfiguracja
+## <a name="configuration"></a>Konfigurowanie
 
 Poniższy kod pokazuje, jak włączyć oprogramowanie pośredniczące kompresji odpowiedzi dla domyślnych typów MIME i dostawców kompresji ([Brotli](#brotli-compression-provider) i [gzip](#gzip-compression-provider)):
 
@@ -111,7 +112,7 @@ public class Startup
 
 Uwagi:
 
-* `app.UseResponseCompression`musi być wywoływana przed dowolnym oprogramowanie pośredniczące, które kompresuje odpowiedzi. Aby uzyskać więcej informacji, zobacz <xref:fundamentals/middleware/index#middleware-order>.
+* `app.UseResponseCompression` musi być wywoływana przed dowolnym oprogramowanie pośredniczące, które kompresuje odpowiedzi. Aby uzyskać więcej informacji, zobacz <xref:fundamentals/middleware/index#middleware-order>.
 * Użyj narzędzia, takiego jak [programu Fiddler](https://www.telerik.com/fiddler), [Firebug](https://getfirebug.com/)lub [Poster](https://www.getpostman.com/) , aby ustawić `Accept-Encoding` nagłówek żądania i zbadać nagłówki, rozmiar i treść odpowiedzi.
 
 Prześlij żądanie do przykładowej aplikacji bez `Accept-Encoding` nagłówka i zwróć uwagę na to, że odpowiedź jest nieskompresowana. `Content-Encoding`Nagłówki i `Vary` nie są obecne w odpowiedzi.
@@ -261,7 +262,7 @@ Użyj narzędzia, takiego jak [programu Fiddler](https://www.telerik.com/fiddler
 * Żądanie nie może zawierać `Content-Range` nagłówka.
 * Żądanie musi korzystać z protokołu niezabezpieczonego (http), o ile nie skonfigurowano protokołu Secure Protocol (https) w opcjach oprogramowania pośredniczącego kompresji odpowiedzi. *Należy pamiętać o niebezpieczeństwie [opisanym powyżej](#compression-with-secure-protocol) podczas włączania bezpiecznej kompresji zawartości.*
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:fundamentals/startup>
 * <xref:fundamentals/middleware/index>
@@ -289,7 +290,7 @@ Użyj oprogramowania pośredniczącego kompresji odpowiedzi, gdy jesteś:
   * [Moduł mod_deflate Apache](https://httpd.apache.org/docs/current/mod/mod_deflate.html)
   * [Kompresja i dekompresja Nginx](https://www.nginx.com/resources/admin-guide/compression-and-decompression/)
 * Hosting bezpośrednio na:
-  * [SerwerHTTP.sys](xref:fundamentals/servers/httpsys) (znany wcześniej jako webListener)
+  * [ SerwerHTTP.sys](xref:fundamentals/servers/httpsys) (znany wcześniej jako webListener)
   * [Serwer Kestrel](xref:fundamentals/servers/kestrel)
 
 ## <a name="response-compression"></a>Kompresja odpowiedzi
@@ -298,7 +299,7 @@ Zazwyczaj Każda odpowiedź nieskompresowana natywnie może korzystać z kompres
 
 Gdy klient może przetwarzać skompresowaną zawartość, klient musi poinformować serwer o swoich możliwościach, wysyłając `Accept-Encoding` Nagłówek z żądaniem. Gdy serwer wysyła skompresowaną zawartość, musi zawierać informacje w `Content-Encoding` nagłówku dotyczące sposobu kodowania skompresowanej odpowiedzi. Oznaczenia kodowania zawartości obsługiwane przez oprogramowanie pośredniczące przedstawiono w poniższej tabeli.
 
-| `Accept-Encoding`wartości nagłówka | Obsługiwane oprogramowanie pośredniczące | Opis |
+| `Accept-Encoding` wartości nagłówka | Obsługiwane oprogramowanie pośredniczące | Opis |
 | ------------------------------- | :------------------: | ----------- |
 | `br`                            | Tak (ustawienie domyślne)        | [Format skompresowanych danych Brotli](https://tools.ietf.org/html/rfc7932) |
 | `deflate`                       | Nie                   | [WKLĘŚNIĘCIE — skompresowany format danych](https://tools.ietf.org/html/rfc1951) |
@@ -336,7 +337,7 @@ Poznaj funkcje oprogramowania pośredniczącego kompresji odpowiedzi z [przykła
 
 Aby uwzględnić oprogramowanie pośredniczące w projekcie, Dodaj odwołanie do pakietu [Microsoft. AspNetCore. app](xref:fundamentals/metapackage-app), który obejmuje pakiet [Microsoft. AspNetCore. ResponseCompression](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCompression/) .
 
-## <a name="configuration"></a>Konfiguracja
+## <a name="configuration"></a>Konfigurowanie
 
 Poniższy kod pokazuje, jak włączyć oprogramowanie pośredniczące kompresji odpowiedzi dla domyślnych typów MIME i dostawców kompresji ([Brotli](#brotli-compression-provider) i [gzip](#gzip-compression-provider)):
 
@@ -357,7 +358,7 @@ public class Startup
 
 Uwagi:
 
-* `app.UseResponseCompression`musi być wywoływana przed dowolnym oprogramowanie pośredniczące, które kompresuje odpowiedzi. Aby uzyskać więcej informacji, zobacz <xref:fundamentals/middleware/index#middleware-order>.
+* `app.UseResponseCompression` musi być wywoływana przed dowolnym oprogramowanie pośredniczące, które kompresuje odpowiedzi. Aby uzyskać więcej informacji, zobacz <xref:fundamentals/middleware/index#middleware-order>.
 * Użyj narzędzia, takiego jak [programu Fiddler](https://www.telerik.com/fiddler), [Firebug](https://getfirebug.com/)lub [Poster](https://www.getpostman.com/) , aby ustawić `Accept-Encoding` nagłówek żądania i zbadać nagłówki, rozmiar i treść odpowiedzi.
 
 Prześlij żądanie do przykładowej aplikacji bez `Accept-Encoding` nagłówka i zwróć uwagę na to, że odpowiedź jest nieskompresowana. `Content-Encoding`Nagłówki i `Vary` nie są obecne w odpowiedzi.
@@ -506,7 +507,7 @@ Użyj narzędzia, takiego jak [programu Fiddler](https://www.telerik.com/fiddler
 * Żądanie nie może zawierać `Content-Range` nagłówka.
 * Żądanie musi korzystać z protokołu niezabezpieczonego (http), o ile nie skonfigurowano protokołu Secure Protocol (https) w opcjach oprogramowania pośredniczącego kompresji odpowiedzi. *Należy pamiętać o niebezpieczeństwie [opisanym powyżej](#compression-with-secure-protocol) podczas włączania bezpiecznej kompresji zawartości.*
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:fundamentals/startup>
 * <xref:fundamentals/middleware/index>
@@ -534,7 +535,7 @@ Użyj oprogramowania pośredniczącego kompresji odpowiedzi, gdy jesteś:
   * [Moduł mod_deflate Apache](https://httpd.apache.org/docs/current/mod/mod_deflate.html)
   * [Kompresja i dekompresja Nginx](https://www.nginx.com/resources/admin-guide/compression-and-decompression/)
 * Hosting bezpośrednio na:
-  * [SerwerHTTP.sys](xref:fundamentals/servers/httpsys) (znany wcześniej jako webListener)
+  * [ SerwerHTTP.sys](xref:fundamentals/servers/httpsys) (znany wcześniej jako webListener)
   * [Serwer Kestrel](xref:fundamentals/servers/kestrel)
 
 ## <a name="response-compression"></a>Kompresja odpowiedzi
@@ -543,7 +544,7 @@ Zazwyczaj Każda odpowiedź nieskompresowana natywnie może korzystać z kompres
 
 Gdy klient może przetwarzać skompresowaną zawartość, klient musi poinformować serwer o swoich możliwościach, wysyłając `Accept-Encoding` Nagłówek z żądaniem. Gdy serwer wysyła skompresowaną zawartość, musi zawierać informacje w `Content-Encoding` nagłówku dotyczące sposobu kodowania skompresowanej odpowiedzi. Oznaczenia kodowania zawartości obsługiwane przez oprogramowanie pośredniczące przedstawiono w poniższej tabeli.
 
-| `Accept-Encoding`wartości nagłówka | Obsługiwane oprogramowanie pośredniczące | Opis |
+| `Accept-Encoding` wartości nagłówka | Obsługiwane oprogramowanie pośredniczące | Opis |
 | ------------------------------- | :------------------: | ----------- |
 | `br`                            | Nie                   | [Format skompresowanych danych Brotli](https://tools.ietf.org/html/rfc7932) |
 | `deflate`                       | Nie                   | [WKLĘŚNIĘCIE — skompresowany format danych](https://tools.ietf.org/html/rfc1951) |
@@ -581,7 +582,7 @@ Poznaj funkcje oprogramowania pośredniczącego kompresji odpowiedzi z [przykła
 
 Aby uwzględnić oprogramowanie pośredniczące w projekcie, Dodaj odwołanie do pakietu [Microsoft. AspNetCore. app](xref:fundamentals/metapackage-app), który obejmuje pakiet [Microsoft. AspNetCore. ResponseCompression](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCompression/) .
 
-## <a name="configuration"></a>Konfiguracja
+## <a name="configuration"></a>Konfigurowanie
 
 Poniższy kod pokazuje, jak włączyć oprogramowanie pośredniczące kompresji odpowiedzi dla domyślnych typów MIME i [dostawcy kompresji gzip](#gzip-compression-provider):
 
@@ -602,7 +603,7 @@ public class Startup
 
 Uwagi:
 
-* `app.UseResponseCompression`musi być wywoływana przed dowolnym oprogramowanie pośredniczące, które kompresuje odpowiedzi. Aby uzyskać więcej informacji, zobacz <xref:fundamentals/middleware/index#middleware-order>.
+* `app.UseResponseCompression` musi być wywoływana przed dowolnym oprogramowanie pośredniczące, które kompresuje odpowiedzi. Aby uzyskać więcej informacji, zobacz <xref:fundamentals/middleware/index#middleware-order>.
 * Użyj narzędzia, takiego jak [programu Fiddler](https://www.telerik.com/fiddler), [Firebug](https://getfirebug.com/)lub [Poster](https://www.getpostman.com/) , aby ustawić `Accept-Encoding` nagłówek żądania i zbadać nagłówki, rozmiar i treść odpowiedzi.
 
 Prześlij żądanie do przykładowej aplikacji bez `Accept-Encoding` nagłówka i zwróć uwagę na to, że odpowiedź jest nieskompresowana. `Content-Encoding`Nagłówki i `Vary` nie są obecne w odpowiedzi.
@@ -711,7 +712,7 @@ Użyj narzędzia, takiego jak [programu Fiddler](https://www.telerik.com/fiddler
 * Żądanie nie może zawierać `Content-Range` nagłówka.
 * Żądanie musi korzystać z protokołu niezabezpieczonego (http), o ile nie skonfigurowano protokołu Secure Protocol (https) w opcjach oprogramowania pośredniczącego kompresji odpowiedzi. *Należy pamiętać o niebezpieczeństwie [opisanym powyżej](#compression-with-secure-protocol) podczas włączania bezpiecznej kompresji zawartości.*
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:fundamentals/startup>
 * <xref:fundamentals/middleware/index>

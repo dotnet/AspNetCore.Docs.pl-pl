@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 2/18/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/filter
-ms.openlocfilehash: b8942020e98d0f985e5445bb1816c540bcb7829b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: b6d6585c0cbd52715c4192d4ab3bee756dbb41b3
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021409"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635050"
 ---
 # <a name="filter-methods-for-no-locrazor-pages-in-aspnet-core"></a>Metody filtrowania dla Razor stron w ASP.NET Core
 
@@ -29,9 +30,9 @@ ms.locfileid: "88021409"
 
 Autor: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-Razor[IPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter?view=aspnetcore-2.0) i [IAsyncPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter?view=aspnetcore-2.0) umożliwiają Razor stronom uruchamianie kodu przed Razor uruchomieniem programu obsługi stron i po nim. RazorFiltry stron są podobne do [ASP.NET Core filtrów akcji MVC](xref:mvc/controllers/filters#action-filters), z wyjątkiem sytuacji, gdy nie można ich zastosować do metod obsługi poszczególnych stron.
+Razor[IPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter?view=aspnetcore-2.0) i [IAsyncPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter?view=aspnetcore-2.0) umożliwiają Razor stronom uruchamianie kodu przed Razor uruchomieniem programu obsługi stron i po nim. Razor Filtry stron są podobne do [ASP.NET Core filtrów akcji MVC](xref:mvc/controllers/filters#action-filters), z wyjątkiem sytuacji, gdy nie można ich zastosować do metod obsługi poszczególnych stron.
 
-RazorFiltry stron:
+Razor Filtry stron:
 
 * Uruchom kod po wybraniu metody obsługi, ale przed wystąpieniem powiązania modelu.
 * Uruchom kod przed wykonaniem metody obsługi, po utworzeniu powiązania modelu.
@@ -44,7 +45,7 @@ Podczas gdy konstruktory stron i oprogramowanie pośredniczące umożliwiają wy
 
 [Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/filter/3.1sample) ([jak pobrać](xref:index#how-to-download-a-sample))
 
-RazorFiltry stron oferują następujące metody, które mogą być stosowane globalnie lub na poziomie strony:
+Razor Filtry stron oferują następujące metody, które mogą być stosowane globalnie lub na poziomie strony:
 
 * Metody synchroniczne:
 
@@ -121,9 +122,9 @@ Atrybut [Autoryzuj](/dotnet/api/microsoft.aspnetcore.authorization.authorizeattr
 
 Autor: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-Razor[IPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter?view=aspnetcore-2.0) i [IAsyncPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter?view=aspnetcore-2.0) umożliwiają Razor stronom uruchamianie kodu przed Razor uruchomieniem programu obsługi stron i po nim. RazorFiltry stron są podobne do [ASP.NET Core filtrów akcji MVC](xref:mvc/controllers/filters#action-filters), z wyjątkiem sytuacji, gdy nie można ich zastosować do metod obsługi poszczególnych stron.
+Razor[IPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter?view=aspnetcore-2.0) i [IAsyncPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter?view=aspnetcore-2.0) umożliwiają Razor stronom uruchamianie kodu przed Razor uruchomieniem programu obsługi stron i po nim. Razor Filtry stron są podobne do [ASP.NET Core filtrów akcji MVC](xref:mvc/controllers/filters#action-filters), z wyjątkiem sytuacji, gdy nie można ich zastosować do metod obsługi poszczególnych stron.
 
-RazorFiltry stron:
+Razor Filtry stron:
 
 * Uruchom kod po wybraniu metody obsługi, ale przed wystąpieniem powiązania modelu.
 * Uruchom kod przed wykonaniem metody obsługi, po utworzeniu powiązania modelu.
@@ -135,7 +136,7 @@ Kod można uruchomić przed wykonaniem metody obsługi przy użyciu konstruktora
 
 [Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/filter/sample/PageFilter) ([jak pobrać](xref:index#how-to-download-a-sample))
 
-RazorFiltry stron oferują następujące metody, które mogą być stosowane globalnie lub na poziomie strony:
+Razor Filtry stron oferują następujące metody, które mogą być stosowane globalnie lub na poziomie strony:
 
 * Metody synchroniczne:
 

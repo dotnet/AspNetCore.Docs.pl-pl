@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/13/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/modules
-ms.openlocfilehash: c526fc779d778cd0f99bcdaae283b6a5a0fe09ab
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 7ddc1b0f80625fbc39ac49f305f745b005cbce46
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015611"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634673"
 ---
 # <a name="iis-modules-with-aspnet-core"></a>Moduły usług IIS z ASP.NET Core
 
@@ -40,7 +41,7 @@ Tabela wskazuje natywne moduły usług IIS, które działają w aplikacjach ASP.
 | **CGI**<br>`CgiModule`                                                                           | Nie  | |
 | **Weryfikacja konfiguracji**<br>`ConfigurationValidationModule`                                  | Tak | |
 | **Błędy HTTP**<br>`CustomErrorModule`                                                           | Nie  | [Oprogramowanie pośredniczące stron kodu stanu](xref:fundamentals/error-handling#usestatuscodepages) |
-| **Rejestrowanie niestandardowe**<br>`CustomLoggingModule`                                                      | Yes | |
+| **Rejestrowanie niestandardowe**<br>`CustomLoggingModule`                                                      | Tak | |
 | **Dokument domyślny**<br>`DefaultDocumentModule`                                                  | Nie  | [Pliki domyślne oprogramowania pośredniczącego](xref:fundamentals/static-files#serve-a-default-document) |
 | **Uwierzytelnianie szyfrowane**<br>`DigestAuthenticationModule`                                        | Tak | |
 | **Przeglądanie katalogów**<br>`DirectoryListingModule`                                               | Nie  | [Oprogramowanie pośredniczące przeglądania katalogów](xref:fundamentals/static-files#enable-directory-browsing) |
@@ -50,13 +51,13 @@ Tabela wskazuje natywne moduły usług IIS, które działają w aplikacjach ASP.
 | **Buforowanie HTTP**<br>`HttpCacheModule`                                                            | Nie  | [Oprogramowanie pośredniczące buforowania odpowiedzi](xref:performance/caching/middleware) |
 | **Rejestrowanie HTTP**<br>`HttpLoggingModule`                                                          | Tak | [Rejestrowanie ASP.NET Core](xref:fundamentals/logging/index) |
 | **Przekierowywanie ruchu HTTP**<br>`HttpRedirectionModule`                                                  | Tak | [Oprogramowanie pośredniczące ponownego zapisywania adresów URL](xref:fundamentals/url-rewriting) |
-| **Śledzenie HTTP**<br>`TracingModule`                                                              | Yes | |
-| **Uwierzytelnianie mapowania certyfikatu klienta usług IIS**<br>`IISCertificateMappingAuthenticationModule` | Yes | |
-| **Ograniczenia adresów IP i domen**<br>`IpRestrictionModule`                                          | Yes | |
+| **Śledzenie HTTP**<br>`TracingModule`                                                              | Tak | |
+| **Uwierzytelnianie mapowania certyfikatu klienta usług IIS**<br>`IISCertificateMappingAuthenticationModule` | Tak | |
+| **Ograniczenia adresów IP i domen**<br>`IpRestrictionModule`                                          | Tak | |
 | **Filtry ISAPI**<br>`IsapiFilterModule`                                                         | Tak | [Oprogramowanie pośredniczące](xref:fundamentals/middleware/index) |
-| **INTERCEPTOR**<br>`IsapiModule`                                                                       | Yes | [Oprogramowanie pośredniczące](xref:fundamentals/middleware/index) |
-| **Obsługa protokołu**<br>`ProtocolSupportModule`                                                  | Yes | |
-| **Filtrowanie żądań**<br>`RequestFilteringModule`                                                | Tak | [Ponowne zapisywanie przez adres URL oprogramowania pośredniczącego`IRule`](xref:fundamentals/url-rewriting#irule-based-rule) |
+| **INTERCEPTOR**<br>`IsapiModule`                                                                       | Tak | [Oprogramowanie pośredniczące](xref:fundamentals/middleware/index) |
+| **Obsługa protokołu**<br>`ProtocolSupportModule`                                                  | Tak | |
+| **Filtrowanie żądań**<br>`RequestFilteringModule`                                                | Tak | [Ponowne zapisywanie przez adres URL oprogramowania pośredniczącego `IRule`](xref:fundamentals/url-rewriting#irule-based-rule) |
 | **Monitor żądań**<br>`RequestMonitorModule`                                                    | Tak | |
 | Ponowne **Zapisywanie adresów URL**&#8224;<br>`RewriteModule`                                                      | Tak | [Oprogramowanie pośredniczące ponownego zapisywania adresów URL](xref:fundamentals/url-rewriting) |
 | **Zawiera po stronie serwera**<br>`ServerSideIncludeModule`                                            | Nie  | |
@@ -64,7 +65,7 @@ Tabela wskazuje natywne moduły usług IIS, które działają w aplikacjach ASP.
 | **Zawartość statyczna**<br>`StaticFileModule`                                                         | Nie  | [Oprogramowanie pośredniczące plików statycznych](xref:fundamentals/static-files) |
 | **Buforowanie tokenów**<br>`TokenCacheModule`                                                          | Tak | |
 | **Buforowanie URI**<br>`UriCacheModule`                                                              | Tak | |
-| **Autoryzacja adresów URL**<br>`UrlAuthorizationModule`                                                | Yes | [ASP.NET CoreIdentity](xref:security/authentication/identity) |
+| **Autoryzacja adresów URL**<br>`UrlAuthorizationModule`                                                | Tak | [ASP.NET Core Identity](xref:security/authentication/identity) |
 | **Uwierzytelnianie systemu Windows**<br>`WindowsAuthenticationModule`                                      | Tak | |
 
 &#8224;typy i dopasowania modułu ponownego zapisywania adresu URL `isFile` `isDirectory` nie działają z aplikacjami ASP.NET Core ze względu na zmiany [struktury katalogów](xref:host-and-deploy/directory-structure).
@@ -78,7 +79,7 @@ Moduły zarządzane *nie* działają w przypadku hostowanych aplikacji ASP.NET C
 | AnonymousIdentification | |
 | DefaultAuthentication   | |
 | FileAuthorization       | |
-| FormsAuthentication     | [CookieOprogramowanie pośredniczące uwierzytelniania](xref:security/authentication/cookie) |
+| FormsAuthentication     | [Cookie Oprogramowanie pośredniczące uwierzytelniania](xref:security/authentication/cookie) |
 | OutputCache             | [Oprogramowanie pośredniczące buforowania odpowiedzi](xref:performance/caching/middleware) |
 | Profil                 | |
 | RoleManager             | |
@@ -86,7 +87,7 @@ Moduły zarządzane *nie* działają w przypadku hostowanych aplikacji ASP.NET C
 | Sesja                 | [Oprogramowanie pośredniczące sesji](xref:fundamentals/app-state) |
 | UrlAuthorization        | |
 | UrlMappingsModule       | [Oprogramowanie pośredniczące ponownego zapisywania adresów URL](xref:fundamentals/url-rewriting) |
-| UrlRoutingModule-4,0    | [ASP.NET CoreIdentity](xref:security/authentication/identity) |
+| UrlRoutingModule-4,0    | [ASP.NET Core Identity](xref:security/authentication/identity) |
 | WindowsAuthentication   | |
 
 ## <a name="iis-manager-application-changes"></a>Zmiany aplikacji Menedżera usług IIS
@@ -173,9 +174,9 @@ Moduł buforowania URI ( `UriCacheModule` ) umożliwia usługom IIS buforowanie 
 
 Moduł buforowania HTTP ( `HttpCacheModule` ) implementuje wyjściową pamięć podręczną programu IIS, a także logikę dla elementów buforowania w pamięci podręcznej HTTP.sys. Bez tego modułu zawartość nie jest już buforowana w trybie jądra, a profile pamięci podręcznej są ignorowane. Usunięcie modułu buforowania HTTP zwykle ma niekorzystne skutki dla wydajności i użycia zasobów. *Chociaż moduł buforowania HTTP nie jest ściśle wymagany do uruchomienia hostowanej aplikacji ASP.NET Core, zalecamy włączenie modułu buforowania HTTP we wszystkich wdrożeniach ASP.NET Core.*
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Wprowadzenie do architektury usług IIS: moduły w usługach IIS](/iis/get-started/introduction-to-iis/introduction-to-iis-architecture#modules-in-iis)
 * [Przegląd modułów usług IIS](/iis/get-started/introduction-to-iis/iis-modules-overview)
 * [Dostosowywanie ról i modułów usług IIS 7,0](https://technet.microsoft.com/library/cc627313.aspx)
-* [SERWERZE\<system.webServer>](/iis/configuration/system.webServer/)
+* [SERWERZE \<system.webServer>](/iis/configuration/system.webServer/)

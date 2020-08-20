@@ -5,6 +5,7 @@ description: Dowiedz się, jak ograniczyć dostęp do kontrolera ASP.NET Core i 
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/roles
-ms.openlocfilehash: 44e5f9a2a429c9f4a510d2f3e564ddd6bbe77205
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 7673bb006c344e6f9baaa3cd99c4bdb4a6fc2862
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021123"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635180"
 ---
 # <a name="role-based-authorization-in-aspnet-core"></a>Autoryzacja oparta na rolach w ASP.NET Core
 
@@ -175,7 +176,7 @@ options.AddPolicy("ElevatedRights", policy =>
 
 Ten przykład autoryzuje użytkowników, którzy należą do `Administrator` `PowerUser` `BackupAdministrator` ról.
 
-### <a name="add-role-services-to-no-locidentity"></a>Dodawanie usług ról do programuIdentity
+### <a name="add-role-services-to-no-locidentity"></a>Dodawanie usług ról do programu Identity
 
 Dołącz [Addroles](/dotnet/api/microsoft.aspnetcore.identity.identitybuilder.addroles#Microsoft_AspNetCore_Identity_IdentityBuilder_AddRoles__1) , aby dodać usługi ról:
 

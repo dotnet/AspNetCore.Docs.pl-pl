@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/28/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/read-related-data
-ms.openlocfilehash: d2594dd05ee6d7e8e0dbd3c279ecd8783d182b62
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 41b2ce35a6910df7587af7ebabe8a4984cda6ae5
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88017834"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634972"
 ---
 # <a name="part-6-no-locrazor-pages-with-ef-core-in-aspnet-core---read-related-data"></a>Część 6 Razor strony z EF Core w ASP.NET Core — Odczytaj powiązane dane
 
@@ -58,7 +59,7 @@ Istnieje kilka sposobów, EF Core mogą ładować powiązane dane do właściwo�
 
   **Uwaga:** EF Core automatycznie naprawia właściwości nawigacji do wszystkich innych jednostek, które zostały wcześniej załadowane do wystąpienia kontekstu. Nawet jeśli dane dla właściwości nawigacji *nie* są jawnie uwzględniane, właściwość można nadal wypełnić, jeśli niektóre lub wszystkie powiązane jednostki zostały wcześniej załadowane.
 
-* [Jawne ładowanie](/ef/core/querying/related-data#explicit-loading). Gdy obiekt jest najpierw odczytywany, powiązane dane nie są pobierane. Kod musi być zapisany, aby można było pobrać powiązane dane, gdy jest to konieczne. Jawne ładowanie z oddzielnymi zapytania powoduje wysłanie wielu zapytań do bazy danych. W przypadku jawnego ładowania kod określa właściwości nawigacji do załadowania. Użyj `Load` metody, aby przeprowadzić jawne ładowanie. Przykład:
+* [Jawne ładowanie](/ef/core/querying/related-data#explicit-loading). Gdy obiekt jest najpierw odczytywany, powiązane dane nie są pobierane. Kod musi być zapisany, aby można było pobrać powiązane dane, gdy jest to konieczne. Jawne ładowanie z oddzielnymi zapytania powoduje wysłanie wielu zapytań do bazy danych. W przypadku jawnego ładowania kod określa właściwości nawigacji do załadowania. Użyj `Load` metody, aby przeprowadzić jawne ładowanie. Na przykład:
 
   ![Przykład jawnego ładowania](read-related-data/_static/explicit-loading.png)
 
@@ -79,7 +80,7 @@ Aby wyświetlić nazwę przypisanego działu dla kursu:
 
 ### <a name="scaffold-course-pages"></a>Strony kursu szkieletowego
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Postępuj zgodnie z instrukcjami na [stronach uczniów tworzenia szkieletów](xref:data/ef-rp/intro#scaffold-student-pages) z następującymi wyjątkami:
 
@@ -117,7 +118,7 @@ Zaktualizuj strony/kursy/index. cshtml. cs przy użyciu następującego kodu:
 
 [!code-csharp[](intro/samples/cu30/Pages/Courses/Index.cshtml.cs?highlight=18,22,24)]
 
-Poprzedni kod zmienia `Course` Właściwość na `Courses` i dodaje `AsNoTracking` . `AsNoTracking`zwiększa wydajność, ponieważ zwrócone jednostki nie są śledzone. Nie trzeba śledzić jednostek, ponieważ nie są one aktualizowane w bieżącym kontekście.
+Poprzedni kod zmienia `Course` Właściwość na `Courses` i dodaje `AsNoTracking` . `AsNoTracking` zwiększa wydajność, ponieważ zwrócone jednostki nie są śledzone. Nie trzeba śledzić jednostek, ponieważ nie są one aktualizowane w bieżącym kontekście.
 
 Zaktualizuj *strony/kursy/index. cshtml* przy użyciu następującego kodu.
 
@@ -178,7 +179,7 @@ Utwórz *SchoolViewModels/InstructorIndexData. cs* przy użyciu następującego 
 
 ### <a name="scaffold-instructor-pages"></a>Strony instruktorów dla szkieletów
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Postępuj zgodnie z instrukcjami w temacie Tworzenie [szkieletu stron uczniów](xref:data/ef-rp/intro#scaffold-student-pages) z następującymi wyjątkami:
 
@@ -235,7 +236,7 @@ Poniższy kod jest wykonywany po wybraniu instruktora ( `id != null` ).
 
 Wybrany instruktor jest pobierany z listy instruktorów w modelu widoku. Właściwość widoku modelu `Courses` jest ładowana z `Course` jednostkami z tej `CourseAssignments` właściwości nawigacji instruktora.
 
-`Where`Metoda zwraca kolekcję. Ale w tym przypadku filtr wybierze pojedynczą jednostkę, więc `Single` Metoda jest wywoływana w celu przekonwertowania kolekcji na jedną `Instructor` jednostkę. `Instructor`Jednostka zapewnia dostęp do `CourseAssignments` właściwości. `CourseAssignments`zapewnia dostęp do powiązanych `Course` jednostek.
+`Where`Metoda zwraca kolekcję. Ale w tym przypadku filtr wybierze pojedynczą jednostkę, więc `Single` Metoda jest wywoływana w celu przekonwertowania kolekcji na jedną `Instructor` jednostkę. `Instructor`Jednostka zapewnia dostęp do `CourseAssignments` właściwości. `CourseAssignments` zapewnia dostęp do powiązanych `Course` jednostek.
 
 ![M:M instruktora do kursu](complex-data-model/_static/courseassignment.png)
 
@@ -253,7 +254,7 @@ Aktualizowanie *stron/instruktorów/index. cshtml* przy użyciu następującego 
 
 Poprzedni kod wprowadza następujące zmiany:
 
-* Aktualizuje `page` dyrektywę z `@page` do `@page "{id:int?}"` . `"{id:int?}"`jest szablonem trasy. Szablon trasy zmienia ciągi zapytań liczb całkowitych w adresie URL, aby przesyłać dane. Na przykład kliknięcie linku **Wybierz** dla instruktora z tylko `@page` dyrektywą spowoduje utworzenie adresu URL w następujący sposób:
+* Aktualizuje `page` dyrektywę z `@page` do `@page "{id:int?}"` . `"{id:int?}"` jest szablonem trasy. Szablon trasy zmienia ciągi zapytań liczb całkowitych w adresie URL, aby przesyłać dane. Na przykład kliknięcie linku **Wybierz** dla instruktora z tylko `@page` dyrektywą spowoduje utworzenie adresu URL w następujący sposób:
 
   `https://localhost:5001/Instructors?id=2`
 
@@ -371,7 +372,7 @@ Istnieje kilka sposobów, EF Core mogą ładować powiązane dane do właściwo�
 
   Uwaga: EF Core automatycznie naprawia właściwości nawigacji do wszystkich innych jednostek, które zostały wcześniej załadowane do wystąpienia kontekstu. Nawet jeśli dane dla właściwości nawigacji *nie* są jawnie uwzględniane, właściwość można nadal wypełnić, jeśli niektóre lub wszystkie powiązane jednostki zostały wcześniej załadowane.
 
-* [Jawne ładowanie](/ef/core/querying/related-data#explicit-loading). Gdy obiekt jest najpierw odczytywany, powiązane dane nie są pobierane. Kod musi być zapisany, aby można było pobrać powiązane dane, gdy jest to konieczne. Jawne ładowanie z oddzielnymi zapytaniami powoduje wysłanie wielu zapytań do bazy danych. W przypadku jawnego ładowania kod określa właściwości nawigacji do załadowania. Użyj `Load` metody, aby przeprowadzić jawne ładowanie. Przykład:
+* [Jawne ładowanie](/ef/core/querying/related-data#explicit-loading). Gdy obiekt jest najpierw odczytywany, powiązane dane nie są pobierane. Kod musi być zapisany, aby można było pobrać powiązane dane, gdy jest to konieczne. Jawne ładowanie z oddzielnymi zapytaniami powoduje wysłanie wielu zapytań do bazy danych. W przypadku jawnego ładowania kod określa właściwości nawigacji do załadowania. Użyj `Load` metody, aby przeprowadzić jawne ładowanie. Na przykład:
 
   ![Przykład jawnego ładowania](read-related-data/_static/explicit-loading.png)
 
@@ -394,7 +395,7 @@ Aby wyświetlić nazwę przypisanego działu na liście kursów:
 
 ### <a name="scaffold-the-course-model"></a>Tworzenie szkieletu modelu kursu
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio) 
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio) 
 
 Postępuj zgodnie z instrukcjami w obszarze [szkieletem model ucznia](xref:data/ef-rp/intro#scaffold-the-student-model) i Użyj `Course` klasy modelu.
 
@@ -418,7 +419,7 @@ Zaktualizuj `OnGetAsync` metodę przy użyciu następującego kodu:
 
 [!code-csharp[](intro/samples/cu/Pages/Courses/Index.cshtml.cs?name=snippet_RevisedIndexMethod)]
 
-Poprzedni kod dodaje `AsNoTracking` . `AsNoTracking`zwiększa wydajność, ponieważ zwrócone jednostki nie są śledzone. Jednostki nie są śledzone, ponieważ nie są aktualizowane w bieżącym kontekście.
+Poprzedni kod dodaje `AsNoTracking` . `AsNoTracking` zwiększa wydajność, ponieważ zwrócone jednostki nie są śledzone. Jednostki nie są śledzone, ponieważ nie są aktualizowane w bieżącym kontekście.
 
 Aktualizuj *strony/kursy/index. cshtml* z następującymi wyróżnionymi znacznikami:
 
@@ -481,7 +482,7 @@ W folderze *SchoolViewModels* Utwórz *InstructorIndexData.cs* przy użyciu nast
 
 ### <a name="scaffold-the-instructor-model"></a>Tworzenie szkieletu modelu instruktora
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio) 
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio) 
 
 Postępuj zgodnie z instrukcjami w obszarze [szkieletem model ucznia](xref:data/ef-rp/intro#scaffold-the-student-model) i Użyj `Instructor` klasy modelu.
 
@@ -521,7 +522,7 @@ Aktualizowanie *stron/instruktorów/index. cshtml* przy użyciu następującego 
 
 Poprzedzające znaczniki wprowadzają następujące zmiany:
 
-* Aktualizuje `page` dyrektywę z `@page` do `@page "{id:int?}"` . `"{id:int?}"`jest szablonem trasy. Szablon trasy zmienia ciągi zapytań liczb całkowitych w adresie URL, aby przesyłać dane. Na przykład kliknięcie linku **Wybierz** dla instruktora z tylko `@page` dyrektywą spowoduje utworzenie adresu URL w następujący sposób:
+* Aktualizuje `page` dyrektywę z `@page` do `@page "{id:int?}"` . `"{id:int?}"` jest szablonem trasy. Szablon trasy zmienia ciągi zapytań liczb całkowitych w adresie URL, aby przesyłać dane. Na przykład kliknięcie linku **Wybierz** dla instruktora z tylko `@page` dyrektywą spowoduje utworzenie adresu URL w następujący sposób:
 
   `http://localhost:1234/Instructors?id=2`
 
@@ -568,7 +569,7 @@ Zaktualizuj `OnGetAsync` metodę na *stronach/instruktorów/index. cshtml. cs* p
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/Index2.cshtml.cs?name=snippet_OnGetAsync&highlight=1,8,16-999)]
 
-Dodana`public int CourseID { get; set; }`
+Dodana `public int CourseID { get; set; }`
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/Index2.cshtml.cs?name=snippet_1&highlight=12)]
 
@@ -582,7 +583,7 @@ Poniższy kod jest wykonywany po wybraniu instruktora ( `id != null` ). Wybrany 
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/Index2.cshtml.cs?name=snippet_ID)]
 
-`Where`Metoda zwraca kolekcję. W poprzedniej `Where` metodzie zwracana jest tylko pojedyncza `Instructor` jednostka. `Single`Metoda konwertuje kolekcję na jedną `Instructor` jednostkę. `Instructor`Jednostka zapewnia dostęp do `CourseAssignments` właściwości. `CourseAssignments`zapewnia dostęp do powiązanych `Course` jednostek.
+`Where`Metoda zwraca kolekcję. W poprzedniej `Where` metodzie zwracana jest tylko pojedyncza `Instructor` jednostka. `Single`Metoda konwertuje kolekcję na jedną `Instructor` jednostkę. `Instructor`Jednostka zapewnia dostęp do `CourseAssignments` właściwości. `CourseAssignments` zapewnia dostęp do powiązanych `Course` jednostek.
 
 ![M:M instruktora do kursu](complex-data-model/_static/courseassignment.png)
 
@@ -652,7 +653,7 @@ Testowanie aplikacji. Z perspektywy użytkowników aplikacja zachowuje się iden
 
 W następnym samouczku pokazano, jak zaktualizować powiązane dane.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Wersja tego samouczka usługi YouTube (part1)](https://www.youtube.com/watch?v=PzKimUDmrvE)
 * [Wersja tego samouczka usługi YouTube (part2)](https://www.youtube.com/watch?v=xvDDrIHv5ko)

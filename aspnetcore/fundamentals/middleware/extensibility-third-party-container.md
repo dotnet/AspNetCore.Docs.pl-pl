@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/22/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/middleware/extensibility-third-party-container
-ms.openlocfilehash: 5d453de26b265b795768befeaa4071e7b0e1ec08
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: e0ebcd46e6b506b7b2172f087f12773910ea4d9c
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88017038"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634868"
 ---
 # <a name="middleware-activation-with-a-third-party-container-in-aspnet-core"></a>Aktywacja oprogramowania pośredniczącego za pomocą kontenera innej firmy w ASP.NET Core
 
@@ -41,7 +42,7 @@ Implementacja przykładowego oprogramowania pośredniczącego rejestruje wartoś
 
 ## <a name="imiddlewarefactory"></a>IMiddlewareFactory
 
-<xref:Microsoft.AspNetCore.Http.IMiddlewareFactory>zapewnia metody tworzenia oprogramowania pośredniczącego.
+<xref:Microsoft.AspNetCore.Http.IMiddlewareFactory> zapewnia metody tworzenia oprogramowania pośredniczącego.
 
 W przykładowej aplikacji jest zaimplementowana fabryka oprogramowania pośredniczącego w celu utworzenia `SimpleInjectorActivatedMiddleware` wystąpienia. Fabryka programów pośredniczących używa prostego kontenera iniektora do rozpoznawania oprogramowania pośredniczącego:
 
@@ -49,7 +50,7 @@ W przykładowej aplikacji jest zaimplementowana fabryka oprogramowania pośredni
 
 ## <a name="imiddleware"></a>IMiddleware
 
-<xref:Microsoft.AspNetCore.Http.IMiddleware>definiuje oprogramowanie pośredniczące dla potoku żądania aplikacji.
+<xref:Microsoft.AspNetCore.Http.IMiddleware> definiuje oprogramowanie pośredniczące dla potoku żądania aplikacji.
 
 Oprogramowanie pośredniczące aktywowane przez `IMiddlewareFactory` implementację (*oprogramowanie pośredniczące/SimpleInjectorActivatedMiddleware. cs*):
 
@@ -59,7 +60,7 @@ Utworzono rozszerzenie dla oprogramowania pośredniczącego (*oprogramowanie po�
 
 [!code-csharp[](extensibility-third-party-container/samples/3.x/SampleApp/Middleware/MiddlewareExtensions.cs?name=snippet1)]
 
-`Startup.ConfigureServices`należy wykonać kilka zadań:
+`Startup.ConfigureServices` należy wykonać kilka zadań:
 
 * Skonfiguruj prosty kontener iniektora.
 * Zarejestruj fabrykę i oprogramowanie pośredniczące.
@@ -88,7 +89,7 @@ Implementacja przykładowego oprogramowania pośredniczącego rejestruje wartoś
 
 ## <a name="imiddlewarefactory"></a>IMiddlewareFactory
 
-<xref:Microsoft.AspNetCore.Http.IMiddlewareFactory>zapewnia metody tworzenia oprogramowania pośredniczącego.
+<xref:Microsoft.AspNetCore.Http.IMiddlewareFactory> zapewnia metody tworzenia oprogramowania pośredniczącego.
 
 W przykładowej aplikacji jest zaimplementowana fabryka oprogramowania pośredniczącego w celu utworzenia `SimpleInjectorActivatedMiddleware` wystąpienia. Fabryka programów pośredniczących używa prostego kontenera iniektora do rozpoznawania oprogramowania pośredniczącego:
 
@@ -96,7 +97,7 @@ W przykładowej aplikacji jest zaimplementowana fabryka oprogramowania pośredni
 
 ## <a name="imiddleware"></a>IMiddleware
 
-<xref:Microsoft.AspNetCore.Http.IMiddleware>definiuje oprogramowanie pośredniczące dla potoku żądania aplikacji.
+<xref:Microsoft.AspNetCore.Http.IMiddleware> definiuje oprogramowanie pośredniczące dla potoku żądania aplikacji.
 
 Oprogramowanie pośredniczące aktywowane przez `IMiddlewareFactory` implementację (*oprogramowanie pośredniczące/SimpleInjectorActivatedMiddleware. cs*):
 
@@ -106,7 +107,7 @@ Utworzono rozszerzenie dla oprogramowania pośredniczącego (*oprogramowanie po�
 
 [!code-csharp[](extensibility-third-party-container/samples/2.x/SampleApp/Middleware/MiddlewareExtensions.cs?name=snippet1)]
 
-`Startup.ConfigureServices`należy wykonać kilka zadań:
+`Startup.ConfigureServices` należy wykonać kilka zadań:
 
 * Skonfiguruj prosty kontener iniektora.
 * Zarejestruj fabrykę i oprogramowanie pośredniczące.
@@ -120,7 +121,7 @@ Oprogramowanie pośredniczące jest zarejestrowane w potoku przetwarzania żąda
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Oprogramowanie pośredniczące](xref:fundamentals/middleware/index)
 * [Aktywacja oprogramowania pośredniczącego oparta na fabryce](xref:fundamentals/middleware/extensibility)

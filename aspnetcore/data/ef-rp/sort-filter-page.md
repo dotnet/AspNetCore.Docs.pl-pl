@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/sort-filter-page
-ms.openlocfilehash: 5bfea63cc1ff85adbe5ce572858b78a8e86b2280
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 5e073845acbecdf0db4c30c4725f12033cfc42ac
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88017730"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634686"
 ---
 # <a name="part-3-no-locrazor-pages-with-ef-core-in-aspnet-core---sort-filter-paging"></a>Część 3, Razor strony z EF Core w ASP.NET Core — sortowanie, filtrowanie, stronicowanie
 
@@ -55,7 +56,7 @@ Powyższy kod ma następujące działanie:
 
 Gdy strona indeksu zostanie zażądana od linku **uczniów** , nie ma ciągu zapytania. Studenci są wyświetlani w porządku rosnącym według nazwiska. Kolejność rosnąca według nazwiska jest wartością domyślną (w przypadku `switch` przyciągania) w instrukcji. Gdy użytkownik kliknie łącze nagłówka kolumny, odpowiednia `sortOrder` wartość jest podana w wartości ciągu zapytania.
 
-`NameSort`i `DateSort` są używane przez Razor stronę do konfigurowania hiperłączy nagłówka kolumny z odpowiednimi wartościami ciągu zapytania:
+`NameSort` i `DateSort` są używane przez Razor stronę do konfigurowania hiperłączy nagłówka kolumny z odpowiednimi wartościami ciągu zapytania:
 
 [!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml.cs?name=snippet_Ternary)]
 
@@ -74,11 +75,11 @@ Metoda używa LINQ to Entities, aby określić kolumnę, według której ma zost
 
 [!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml.cs?name=snippet_IQueryable)]
 
-Po `IQueryable` utworzeniu lub zmodyfikowaniu nie są wysyłane żadne zapytania do bazy danych. Zapytanie nie jest wykonywane, dopóki `IQueryable` obiekt nie zostanie skonwertowany do kolekcji. `IQueryable`są konwertowane do kolekcji przez wywołanie metody, takiej jak `ToListAsync` . W związku z tym `IQueryable` kod skutkuje pojedynczym zapytaniem, które nie jest wykonywane do następującej instrukcji:
+Po `IQueryable` utworzeniu lub zmodyfikowaniu nie są wysyłane żadne zapytania do bazy danych. Zapytanie nie jest wykonywane, dopóki `IQueryable` obiekt nie zostanie skonwertowany do kolekcji. `IQueryable` są konwertowane do kolekcji przez wywołanie metody, takiej jak `ToListAsync` . W związku z tym `IQueryable` kod skutkuje pojedynczym zapytaniem, które nie jest wykonywane do następującej instrukcji:
 
 [!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml.cs?name=snippet_SortOnlyRtn)]
 
-`OnGetAsync`może uzyskać pełne informacje o dużej liczbie kolumn do sortowania. Aby uzyskać informacje o alternatywnym sposobie kodowania tej funkcji, zobacz [Używanie dynamicznego LINQ do uproszczenia kodu](xref:data/ef-mvc/advanced#dynamic-linq) w wersji MVC tej serii samouczków.
+`OnGetAsync` może uzyskać pełne informacje o dużej liczbie kolumn do sortowania. Aby uzyskać informacje o alternatywnym sposobie kodowania tej funkcji, zobacz [Używanie dynamicznego LINQ do uproszczenia kodu](xref:data/ef-mvc/advanced#dynamic-linq) w wersji MVC tej serii samouczków.
 
 ### <a name="add-column-heading-hyperlinks-to-the-student-index-page"></a>Dodawanie hiperłączy nagłówka kolumny do strony indeksu ucznia
 
@@ -120,7 +121,7 @@ Powyższy kod ma następujące działanie:
 
 Kod wywołuje `Where` metodę na `IQueryable` obiekcie, a filtr jest przetwarzany na serwerze. W niektórych scenariuszach aplikacja może wywołać `Where` metodę jako metodę rozszerzenia w kolekcji w pamięci. Załóżmy na przykład, że `_context.Students` zmiany z EF Core `DbSet` do metody repozytorium, która zwraca `IEnumerable` kolekcję. Wyniki byłyby zwykle takie same, ale w niektórych przypadkach mogą być różne.
 
-Na przykład implementacja .NET Framework `Contains` Domyślnie wykonuje porównanie z uwzględnieniem wielkości liter. W SQL Server `Contains` wielkość liter jest określana na podstawie ustawienia sortowania wystąpienia SQL Server. SQL Server domyślnie nie uwzględnia wielkości liter. Domyślna wielkość liter w programie SQLite. `ToUpper`można wywołać, aby test jawnie nie uwzględniał wielkości liter:
+Na przykład implementacja .NET Framework `Contains` Domyślnie wykonuje porównanie z uwzględnieniem wielkości liter. W SQL Server `Contains` wielkość liter jest określana na podstawie ustawienia sortowania wystąpienia SQL Server. SQL Server domyślnie nie uwzględnia wielkości liter. Domyślna wielkość liter w programie SQLite. `ToUpper` można wywołać, aby test jawnie nie uwzględniał wielkości liter:
 
 ```csharp
 Where(s => s.LastName.ToUpper().Contains(searchString.ToUpper())`
@@ -150,7 +151,7 @@ Przetestuj aplikację:
 
 * Wybierz pozycję **Wyszukaj**.
 
-Zwróć uwagę, że adres URL zawiera ciąg wyszukiwania. Przykład:
+Zwróć uwagę, że adres URL zawiera ciąg wyszukiwania. Na przykład:
 
 ```
 https://localhost:<port>/Students?SearchString=an
@@ -304,7 +305,7 @@ Poprzedni kod otrzymuje `sortOrder` parametr z ciągu zapytania w adresie URL. A
 
 Gdy strona indeksu zostanie zażądana od linku **uczniów** , nie ma ciągu zapytania. Studenci są wyświetlani w porządku rosnącym według nazwiska. Kolejność rosnąca według nazwiska jest wartością domyślną (w przypadku `switch` przyciągania) w instrukcji. Gdy użytkownik kliknie łącze nagłówka kolumny, odpowiednia `sortOrder` wartość jest podana w wartości ciągu zapytania.
 
-`NameSort`i `DateSort` są używane przez Razor stronę do konfigurowania hiperłączy nagłówka kolumny z odpowiednimi wartościami ciągu zapytania:
+`NameSort` i `DateSort` są używane przez Razor stronę do konfigurowania hiperłączy nagłówka kolumny z odpowiednimi wartościami ciągu zapytania:
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Index.cshtml.cs?name=snippet_SortOnly&highlight=3-4)]
 
@@ -329,11 +330,11 @@ Metoda używa LINQ to Entities, aby określić kolumnę, według której ma zost
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Index.cshtml.cs?name=snippet_SortOnly&highlight=6-999)]
 
- Po `IQueryable` utworzeniu lub zmodyfikowaniu nie są wysyłane żadne zapytania do bazy danych. Zapytanie nie jest wykonywane, dopóki `IQueryable` obiekt nie zostanie skonwertowany do kolekcji. `IQueryable`są konwertowane do kolekcji przez wywołanie metody, takiej jak `ToListAsync` . W związku z tym `IQueryable` kod skutkuje pojedynczym zapytaniem, które nie jest wykonywane do następującej instrukcji:
+ Po `IQueryable` utworzeniu lub zmodyfikowaniu nie są wysyłane żadne zapytania do bazy danych. Zapytanie nie jest wykonywane, dopóki `IQueryable` obiekt nie zostanie skonwertowany do kolekcji. `IQueryable` są konwertowane do kolekcji przez wywołanie metody, takiej jak `ToListAsync` . W związku z tym `IQueryable` kod skutkuje pojedynczym zapytaniem, które nie jest wykonywane do następującej instrukcji:
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Index.cshtml.cs?name=snippet_SortOnlyRtn)]
 
-`OnGetAsync`może uzyskać pełne informacje o dużej liczbie kolumn do sortowania.
+`OnGetAsync` może uzyskać pełne informacje o dużej liczbie kolumn do sortowania.
 
 ### <a name="add-column-heading-hyperlinks-to-the-student-index-page"></a>Dodawanie hiperłączy nagłówka kolumny do strony indeksu ucznia
 
@@ -380,7 +381,7 @@ Powyższy kod ma następujące działanie:
 
 Uwaga: Poprzedni kod wywołuje `Where` metodę na `IQueryable` obiekcie, a filtr jest przetwarzany na serwerze. W niektórych scenariuszach aplikacja może wywołać `Where` metodę jako metodę rozszerzenia w kolekcji w pamięci. Załóżmy na przykład, że `_context.Students` zmiany z EF Core `DbSet` do metody repozytorium, która zwraca `IEnumerable` kolekcję. Wyniki byłyby zwykle takie same, ale w niektórych przypadkach mogą być różne.
 
-Na przykład implementacja .NET Framework `Contains` Domyślnie wykonuje porównanie z uwzględnieniem wielkości liter. W SQL Server `Contains` wielkość liter jest określana na podstawie ustawienia sortowania wystąpienia SQL Server. SQL Server domyślnie nie uwzględnia wielkości liter. `ToUpper`można wywołać, aby test jawnie nie uwzględniał wielkości liter:
+Na przykład implementacja .NET Framework `Contains` Domyślnie wykonuje porównanie z uwzględnieniem wielkości liter. W SQL Server `Contains` wielkość liter jest określana na podstawie ustawienia sortowania wystąpienia SQL Server. SQL Server domyślnie nie uwzględnia wielkości liter. `ToUpper` można wywołać, aby test jawnie nie uwzględniał wielkości liter:
 
 `Where(s => s.LastName.ToUpper().Contains(searchString.ToUpper())`
 
@@ -449,9 +450,9 @@ Wszystkie parametry mają wartość null, gdy:
 
 Po kliknięciu łącza stronicowania zmienna indeksu strony zawiera numer strony do wyświetlenia.
 
-`CurrentSort`udostępnia Razor stronę z bieżącą kolejnością sortowania. Bieżąca kolejność sortowania musi być uwzględniona w łączach stronicowania, aby zachować porządek sortowania podczas stronicowania.
+`CurrentSort` udostępnia Razor stronę z bieżącą kolejnością sortowania. Bieżąca kolejność sortowania musi być uwzględniona w łączach stronicowania, aby zachować porządek sortowania podczas stronicowania.
 
-`CurrentFilter`udostępnia Razor stronę z bieżącym ciągiem filtru. `CurrentFilter`Wartość:
+`CurrentFilter` udostępnia Razor stronę z bieżącym ciągiem filtru. `CurrentFilter`Wartość:
 
 * Musi być uwzględniony w łączach stronicowania, aby zachować ustawienia filtru podczas stronicowania.
 * Musi zostać przywrócone do pola tekstowego, gdy strona jest ponownie wyświetlana.
@@ -535,7 +536,7 @@ Jeśli wystąpią problemy, których nie można rozwiązać, Pobierz [ukończon�
 
 ![Informacje o stronie](sort-filter-page/_static/about.png)
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Debugowanie ASP.NET Core 2. x](https://github.com/dotnet/AspNetCore.Docs/issues/4155)
 * [Wersja tego samouczka usługi YouTube](https://www.youtube.com/watch?v=MDs7PFpoMqI)

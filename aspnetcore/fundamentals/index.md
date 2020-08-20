@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/30/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/index
-ms.openlocfilehash: f141e9248a702ad9a1d9737f82543a0ccc8fb573
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 8fa44f567906ecf36a9bbaa5076cd36c75c10781
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88017210"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634881"
 ---
 # <a name="aspnet-core-fundamentals"></a>Platforma ASP.NET Core — podstawy
 
@@ -47,7 +48,7 @@ Aby uzyskać więcej informacji, zobacz <xref:fundamentals/startup>.
 
 ASP.NET Core zawiera wbudowaną platformę wstrzykiwania zależności (DI), która udostępnia skonfigurowane usługi w aplikacji. Na przykład składnik rejestrowania to usługa.
 
-Kod do konfigurowania (lub *rejestrowania*) usług jest dodawany do `Startup.ConfigureServices` metody. Przykład:
+Kod do konfigurowania (lub *rejestrowania*) usług jest dodawany do `Startup.ConfigureServices` metody. Na przykład:
 
 [!code-csharp[](index/samples_snapshot/3.x/ConfigureServices.cs)]
 
@@ -83,7 +84,7 @@ Podczas uruchamiania aplikacja ASP.NET Core kompiluje *hosta*. Host hermetyzuje 
 * Składniki oprogramowania pośredniczącego
 * Rejestrowanie
 * Usługi iniekcji zależności (DI)
-* Konfiguracja
+* Konfigurowanie
 
 Istnieją dwa różne hosty: 
 
@@ -132,7 +133,7 @@ ASP.NET Core udostępnia międzyplatformową implementację serwera *Kestrel* . 
 
 Aby uzyskać więcej informacji, zobacz <xref:fundamentals/servers/index>.
 
-## <a name="configuration"></a>Konfiguracja
+## <a name="configuration"></a>Konfigurowanie
 
 ASP.NET Core udostępnia platformę konfiguracji, która pobiera ustawienia jako pary nazwa-wartość z uporządkowanego zestawu dostawców konfiguracji. Wbudowani dostawcy konfiguracji są dostępni dla różnych źródeł, takich jak pliki *. JSON* , pliki *. XML* , zmienne środowiskowe i argumenty wiersza polecenia. Napisz niestandardowych dostawców konfiguracji, aby obsługiwać inne źródła.
 
@@ -166,7 +167,7 @@ ASP.NET Core obsługuje interfejs API rejestrowania, który współpracuje z ró
 * Azure App Service
 * Azure Application Insights
 
-Aby utworzyć dzienniki, należy rozwiązać <xref:Microsoft.Extensions.Logging.ILogger%601> usługę od iniekcji zależności (di) i wywoływać metody rejestrowania, takie jak <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogInformation*> . Przykład:
+Aby utworzyć dzienniki, należy rozwiązać <xref:Microsoft.Extensions.Logging.ILogger%601> usługę od iniekcji zależności (di) i wywoływać metody rejestrowania, takie jak <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogInformation*> . Na przykład:
 
 [!code-csharp[](index/samples_snapshot/3.x/TodoController.cs?highlight=5,13,19)]
 
@@ -210,7 +211,7 @@ Katalog główny zawartości jest ścieżką podstawową dla:
 * Plik wykonywalny obsługujący aplikację (*. exe*).
 * Skompilowane zestawy wchodzące w skład aplikacji (*. dll*).
 * Pliki zawartości używane przez aplikację, takie jak:
-  * Razorpliki (*. cshtml*, *. Razor*)
+  * Razor pliki (*. cshtml*, *. Razor*)
   * Pliki konfiguracji (*. JSON*, *. XML*)
   * Pliki danych (*. DB*)
 * [Katalog główny sieci Web](#web-root), zazwyczaj folder *wwwroot* .
@@ -296,7 +297,7 @@ Aplikacja ASP.NET Core kompiluje *hosta* podczas uruchamiania. Host jest obiekte
 * Składniki oprogramowania pośredniczącego
 * Rejestrowanie
 * FOSFORAN
-* Konfiguracja
+* Konfigurowanie
 
 Główną przyczyną uwzględnienia wszystkich zasobów zależnych od aplikacji w jednym obiekcie jest zarządzanie okresem istnienia: Kontrola uruchamiania aplikacji i bezpieczne zamykanie.
 
@@ -371,7 +372,7 @@ ASP.NET Core udostępnia międzyplatformową implementację serwera *Kestrel* . 
 
 Aby uzyskać więcej informacji, zobacz <xref:fundamentals/servers/index>.
 
-## <a name="configuration"></a>Konfiguracja
+## <a name="configuration"></a>Konfigurowanie
 
 ASP.NET Core udostępnia platformę konfiguracji, która pobiera ustawienia jako pary nazwa-wartość z uporządkowanego zestawu dostawców konfiguracji. Istnieją Wbudowani dostawcy konfiguracji dla różnych źródeł, takich jak pliki *. JSON* , pliki *. XML* , zmienne środowiskowe i argumenty wiersza polecenia. Możesz również napisać niestandardowych dostawców konfiguracji.
 
@@ -459,7 +460,7 @@ Katalog główny zawartości jest ścieżką podstawową do:
 * Plik wykonywalny obsługujący aplikację (*. exe*).
 * Skompilowane zestawy wchodzące w skład aplikacji (*. dll*).
 * Pliki zawartości inne niż kod używane przez aplikację, takie jak:
-  * Razorpliki (*. cshtml*, *. Razor*)
+  * Razor pliki (*. cshtml*, *. Razor*)
   * Pliki konfiguracji (*. JSON*, *. XML*)
   * Pliki danych (*. DB*)
 * [Katalog główny sieci Web](#web-root), zazwyczaj opublikowany folder *wwwroot* .

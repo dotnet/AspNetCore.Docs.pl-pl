@@ -1,10 +1,11 @@
 ---
 title: Identity dostosowanie modelu w ASP.NET Core
 author: ajcvickers
-description: W tym artykule opisano sposób dostosowywania bazowego modelu danych Entity Framework Core dla ASP.NET Core Identity .
+description: W tym artykule opisano sposób dostosowywania bazowego Entity Framework Core modelu danych dla programu ASP.NET Core Identity .
 ms.author: avickers
 ms.date: 07/01/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,18 +16,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/customize_identity_model
-ms.openlocfilehash: 7c325bbc96ad4a8c5e4686073266d730eb924c10
-ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
+ms.openlocfilehash: 71f532aa00c2afeeb0d6b93c01cb6a1fbd0a686c
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/18/2020
-ms.locfileid: "88504674"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634309"
 ---
 # <a name="no-locidentity-model-customization-in-aspnet-core"></a>Identity dostosowanie modelu w ASP.NET Core
 
 Autor [Arthur Vickers](https://github.com/ajcvickers)
 
-ASP.NET Core Identity zapewnia platformę do zarządzania kontami użytkowników w aplikacjach ASP.NET Core i ich przechowywania. Identity jest dodawany do projektu, gdy wybrane są **indywidualne konta użytkowników** jako mechanizm uwierzytelniania. Domyślnie program Identity korzysta z podstawowego modelu danych Entity Framework (EF). W tym artykule opisano sposób dostosowywania Identity modelu.
+ASP.NET Core Identity zapewnia platformę do zarządzania kontami użytkowników i ich przechowywania w aplikacjach ASP.NET Core. Identity jest dodawany do projektu, gdy wybrane są **indywidualne konta użytkowników** jako mechanizm uwierzytelniania. Domyślnie program Identity korzysta z podstawowego modelu danych Entity Framework (EF). W tym artykule opisano sposób dostosowywania Identity modelu.
 
 ## <a name="no-locidentity-and-ef-core-migrations"></a>Identity i EF Core migracji
 

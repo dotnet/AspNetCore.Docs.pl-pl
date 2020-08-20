@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/25/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/metapackage
-ms.openlocfilehash: 58201aed604fa53c703176e11af5d749f2b3274e
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 133eee71fcd85a95ac53684c3c6e475a54592967
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88017037"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634569"
 ---
 # <a name="microsoftaspnetcoreall-metapackage-for-aspnet-core-20"></a>Microsoft. AspNetCore. All, pakiet dla ASP.NET Core 2,0
 
@@ -97,8 +98,8 @@ Aby przenieść z `Microsoft.AspNetCore.All` do `Microsoft.AspNetCore.App` , je�
 
 Wszystkie zależności poprzedzających pakietów, które w przeciwnym razie nie są zależnościami, `Microsoft.AspNetCore.App` nie są uwzględniane niejawnie. Na przykład:
 
-* `StackExchange.Redis`jako zależność`Microsoft.Extensions.Caching.Redis`
-* `Microsoft.ApplicationInsights`jako zależność`Microsoft.AspNetCore.ApplicationInsights.HostingStartup`
+* `StackExchange.Redis` jako zależność `Microsoft.Extensions.Caching.Redis`
+* `Microsoft.ApplicationInsights` jako zależność `Microsoft.AspNetCore.ApplicationInsights.HostingStartup`
 
 ## <a name="update-aspnet-core-21"></a>Aktualizacja ASP.NET Core 2,1
 

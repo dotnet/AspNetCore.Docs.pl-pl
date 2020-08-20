@@ -1,5 +1,5 @@
 ---
-title: RazorTesty jednostkowe stron w ASP.NET Core
+title: Razor Testy jednostkowe stron w ASP.NET Core
 author: rick-anderson
 description: Dowiedz się, jak tworzyć testy jednostkowe dla Razor aplikacji stron.
 monikerRange: '>= aspnetcore-2.1'
@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 7/22/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,14 +18,14 @@ no-loc:
 - Razor
 - SignalR
 uid: test/razor-pages-tests
-ms.openlocfilehash: 21810f00548ad9f9c399ec4e453dd914dc186f5d
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: bb376412daafd49b307c3c13ea7c88f34628f1c3
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018952"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634842"
 ---
-# <a name="no-locrazor-pages-unit-tests-in-aspnet-core"></a>RazorTesty jednostkowe stron w ASP.NET Core
+# <a name="no-locrazor-pages-unit-tests-in-aspnet-core"></a>Razor Testy jednostkowe stron w ASP.NET Core
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -182,7 +183,7 @@ Krok działania testów jednostkowych (*testy/ Razor PagesTestSample. Tests/Unit
 
 [!code-csharp[](razor-pages-tests/samples/3.x/tests/RazorPagesTestSample.Tests/UnitTests/IndexPageTests.cs?name=snippet2)]
 
-`IndexPage`Metoda modelu strony `OnGetAsync` (*src/ Razor PagesTestSample/Pages/index. cshtml. cs*):
+`IndexPage` Metoda modelu strony `OnGetAsync` (*src/ Razor PagesTestSample/Pages/index. cshtml. cs*):
 
 [!code-csharp[](razor-pages-tests/samples/3.x/src/RazorPagesTestSample/Pages/Index.cshtml.cs?name=snippet1&highlight=3)]
 
@@ -196,7 +197,7 @@ Inne testy w tej grupie umożliwiają tworzenie obiektów modelu strony, które 
 
 [!code-csharp[](razor-pages-tests/samples/3.x/tests/RazorPagesTestSample.Tests/UnitTests/IndexPageTests.cs?name=snippet4&highlight=11,26,29,32)]
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Testowanie jednostkowe w języku C# w programie .NET Core przy użyciu testu dotnet i xUnit](/dotnet/articles/core/testing/unit-testing-with-dotnet-test)
 * <xref:mvc/controllers/testing>
@@ -366,7 +367,7 @@ Krok działania testów jednostkowych (*testy/ Razor PagesTestSample. Tests/Unit
 
 [!code-csharp[](razor-pages-tests/samples/2.x/tests/RazorPagesTestSample.Tests/UnitTests/IndexPageTests.cs?name=snippet2)]
 
-`IndexPage`Metoda modelu strony `OnGetAsync` (*src/ Razor PagesTestSample/Pages/index. cshtml. cs*):
+`IndexPage` Metoda modelu strony `OnGetAsync` (*src/ Razor PagesTestSample/Pages/index. cshtml. cs*):
 
 [!code-csharp[](razor-pages-tests/samples/2.x/src/RazorPagesTestSample/Pages/Index.cshtml.cs?name=snippet1&highlight=3)]
 
@@ -380,7 +381,7 @@ Inne testy w tej grupie umożliwiają tworzenie obiektów modelu strony, które 
 
 [!code-csharp[](razor-pages-tests/samples/2.x/tests/RazorPagesTestSample.Tests/UnitTests/IndexPageTests.cs?name=snippet4&highlight=11,26,29,32)]
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Testowanie jednostkowe w języku C# w programie .NET Core przy użyciu testu dotnet i xUnit](/dotnet/articles/core/testing/unit-testing-with-dotnet-test)
 * <xref:mvc/controllers/testing>

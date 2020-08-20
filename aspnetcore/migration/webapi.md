@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 05/26/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/webapi
-ms.openlocfilehash: 4888de6ad55037be540cb62b6e4f02878e2b57ab
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: e3e46f8050ba87c3108885341675c9d2a2cb7847
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014818"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635167"
 ---
 # <a name="migrate-from-aspnet-web-api-to-aspnet-core"></a>Migrowanie z interfejsu API sieci Web ASP.NET do ASP.NET Core
 
@@ -63,7 +64,7 @@ Utwórz nowe puste rozwiązanie w programie Visual Studio i Dodaj projekt interf
 
 1. Z menu **plik** wybierz pozycję **Nowy** > **projekt**.
 1. Wybierz szablon **pustego rozwiązania** i wybierz pozycję **dalej**.
-1. Nazwij rozwiązanie *WebAPIMigration*. Wybierz pozycję **Utwórz**.
+1. Nazwij rozwiązanie *WebAPIMigration*. Wybierz przycisk **Utwórz**.
 1. Dodaj istniejący projekt *ProductsApp* do rozwiązania.
 
 Dodaj nowy projekt interfejsu API do migracji do:
@@ -101,8 +102,8 @@ Zaktualizuj `ProductsController` dla ASP.NET Core:
 Następujące składniki nie istnieją w ASP.NET Core:
 
 * Klasa `ApiController`
-* `System.Web.Http`obszaru
-* `IHttpActionResult`interfejsu
+* `System.Web.Http` obszaru
+* `IHttpActionResult` interfejsu
 
 Wprowadź następujące zmiany:
 
@@ -146,7 +147,7 @@ Skonfiguruj Routing w następujący sposób:
 
 Uruchom zmigrowany projekt i przejdź do `/api/products` . Zostanie wyświetlona pełna lista trzech produktów. Przejdź na stronę `/api/products/1`. Zostanie wyświetlony pierwszy produkt.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:web-api/index>
 * <xref:web-api/action-return-types>
@@ -205,7 +206,7 @@ W ASP.NET Core MVC, routing atrybutu jest uwzględniany domyślnie, gdy <xref:Mi
 
 ## <a name="migrate-models-and-controllers"></a>Migrowanie modeli i kontrolerów
 
-Poniższy kod przedstawia `ProductsController` aktualizację ASP.NET Core:[!code-csharp[](webapi/sample/2.x/ProductsApp/Controllers/ProductsController.cs)]
+Poniższy kod przedstawia `ProductsController` aktualizację ASP.NET Core: [!code-csharp[](webapi/sample/2.x/ProductsApp/Controllers/ProductsController.cs)]
 
 Zaktualizuj `ProductsController` dla ASP.NET Core:
 
@@ -217,8 +218,8 @@ Zaktualizuj `ProductsController` dla ASP.NET Core:
 Następujące składniki nie istnieją w ASP.NET Core:
 
 * Klasa `ApiController`
-* `System.Web.Http`obszaru
-* `IHttpActionResult`interfejsu
+* `System.Web.Http` obszaru
+* `IHttpActionResult` interfejsu
 
 Wprowadź następujące zmiany:
 
@@ -272,7 +273,7 @@ Funkcje zgodności zawarte w programie `Microsoft.AspNetCore.Mvc.WebApiCompatShi
 * Rozszerza powiązanie modelu, aby akcje kontrolera mogły przyjmować parametry typu `HttpRequestMessage` .
 * Dodaje elementy formatujące komunikaty umożliwiające działanie zwracające wyniki typu `HttpResponseMessage` .
 * Dodaje dodatkowe metody odpowiedzi, które mogą być używane przez działania Web API 2 do obsłużenia odpowiedzi:
-  * `HttpResponseMessage`wytwornic
+  * `HttpResponseMessage` wytwornic
     * `CreateResponse<T>`
     * `CreateErrorResponse`
   * Metody wyniku akcji:

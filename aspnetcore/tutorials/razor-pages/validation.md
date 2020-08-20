@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 7/23/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/validation
-ms.openlocfilehash: dad2e667cb6fa3ace7cb5e5dcb982511357ed49b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 86c523c69d3ee85f56bf1a51719a0bd93cbe97fc
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021526"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633555"
 ---
 # <a name="part-8-add-validation-to-an-aspnet-core-no-locrazor-page"></a>Część 8, Dodawanie walidacji do Razor strony ASP.NET Core
 
@@ -29,9 +30,9 @@ Autor: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 W tej sekcji logika walidacji jest dodawana do `Movie` modelu. Reguły sprawdzania poprawności są wymuszane za każdym razem, gdy użytkownik tworzy lub edytuje film.
 
-## <a name="validation"></a>Weryfikacja
+## <a name="validation"></a>Walidacja
 
-Kluczową cechą rozwoju oprogramowania jest nazywana [sucha](https://wikipedia.org/wiki/Don%27t_repeat_yourself) ("**D**on't **R**EPEAT **Y**ourself"). RazorStrony zachęcają do programowania, w którym funkcje są określone raz i są widoczne w całej aplikacji. SUCHy może pomóc:
+Kluczową cechą rozwoju oprogramowania jest nazywana [sucha](https://wikipedia.org/wiki/Don%27t_repeat_yourself) ("**D**on't **R**EPEAT **Y**ourself"). Razor Strony zachęcają do programowania, w którym funkcje są określone raz i są widoczne w całej aplikacji. SUCHy może pomóc:
 
 * Zmniejsz ilość kodu w aplikacji.
 * Spraw, aby kod był mniej podatny na błędy i łatwiejszy do testowania i konserwowania.
@@ -121,11 +122,11 @@ Zapoznaj się z `Movie` klasą. `System.ComponentModel.DataAnnotations`Przestrze
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie/Models/MovieDateRatingDA.cs?highlight=2,6&name=snippet2)]
 
-`DataType`Atrybuty zawierają tylko wskazówki dla aparatu widoku do formatowania danych (i udostępniają atrybuty, takie jak `<a>` adresy URL i `<a href="mailto:EmailAddress.com">` wiadomości e-mail). Użyj `RegularExpression` atrybutu, aby sprawdzić poprawność formatu danych. Ten `DataType` atrybut służy do określania typu danych, który jest bardziej szczegółowy niż typ wewnętrzny bazy danych. `DataType`atrybuty nie są atrybutami walidacji. W przykładowej aplikacji tylko data jest wyświetlana bez czasu.
+`DataType`Atrybuty zawierają tylko wskazówki dla aparatu widoku do formatowania danych (i udostępniają atrybuty, takie jak `<a>` adresy URL i `<a href="mailto:EmailAddress.com">` wiadomości e-mail). Użyj `RegularExpression` atrybutu, aby sprawdzić poprawność formatu danych. Ten `DataType` atrybut służy do określania typu danych, który jest bardziej szczegółowy niż typ wewnętrzny bazy danych. `DataType` atrybuty nie są atrybutami walidacji. W przykładowej aplikacji tylko data jest wyświetlana bez czasu.
 
 `DataType`Wyliczenie zawiera wiele typów danych, takich jak data, godzina, numer telefonu, waluta, EmailAddress i inne. Ten `DataType` atrybut może również umożliwić aplikacji automatyczne udostępnianie funkcji specyficznych dla typu. Na przykład `mailto:` można utworzyć link dla `DataType.EmailAddress` . `DataType.Date`W przeglądarkach, które obsługują HTML5, można podać selektor daty. `DataType`Atrybuty emitują HTML 5 `data-` (wymawiane kreski danych), których używają przeglądarki HTML 5. `DataType`Atrybuty nie zapewniają **not** żadnej weryfikacji.
 
-`DataType.Date`nie określa formatu wyświetlanej daty. Domyślnie pole dane jest wyświetlane zgodnie z domyślnymi formatami opartymi na serwerze `CultureInfo` .
+`DataType.Date` nie określa formatu wyświetlanej daty. Domyślnie pole dane jest wyświetlane zgodnie z domyślnymi formatami opartymi na serwerze `CultureInfo` .
 
 `[Column(TypeName = "decimal(18, 2)")]`Adnotacja danych jest wymagana, aby Entity Framework Core prawidłowo mapować `Price` do waluty w bazie danych. Aby uzyskać więcej informacji, zobacz [typy danych](/ef/core/modeling/relational/data-types).
 
@@ -167,7 +168,7 @@ Adnotacje zastosowane do klasy zmieniają schemat. Na przykład, adnotacje zasto
 * Ogranicza znaki do 60.
 * Nie zezwala na `null` wartość.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 `Movie`Tabela ma obecnie następujący schemat:
 
@@ -193,7 +194,7 @@ Add-Migration New_DataAnnotations
 Update-Database
 ```
 
-`Update-Database`uruchamia `Up` metody `New_DataAnnotations` klasy. Przeanalizuj metodę `Up`:
+`Update-Database` uruchamia `Up` metody `New_DataAnnotations` klasy. Przeanalizuj metodę `Up`:
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Migrations/20190724163003_New_DataAnnotations.cs?name=snippet)]
 
@@ -223,7 +224,7 @@ Aby uzyskać informacje na temat wdrażania na platformie Azure, zobacz [Samoucz
 
 Dziękujemy za zakończenie tego wprowadzenia do Razor stron. [Wprowadzenie do Razor Strony i EF Core](xref:data/ef-rp/intro) są doskonałym zaobserwują się z tym samouczkiem.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:mvc/views/working-with-forms>
 * <xref:fundamentals/localization>

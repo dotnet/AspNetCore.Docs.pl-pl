@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: H1Hack27Feb2017
 ms.date: 03/18/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/intro
-ms.openlocfilehash: 067698687268ac072d8944fd5d9ae47c49fd4a24
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 42a7231b529dd9f8ecbce4f8116111e1c96c830d
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015014"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633100"
 ---
 # <a name="tag-helpers-in-aspnet-core"></a>Pomocnicy tagów w ASP.NET Core
 
@@ -72,7 +73,7 @@ Zakres pomocników tagów jest kontrolowany przez kombinację `@addTagHelper` `@
 
 <a name="add-helper-label"></a>
 
-### <a name="addtaghelper-makes-tag-helpers-available"></a>`@addTagHelper`udostępnia pomocników tagów
+### <a name="addtaghelper-makes-tag-helpers-available"></a>`@addTagHelper` udostępnia pomocników tagów
 
 Jeśli utworzysz nową aplikację sieci Web ASP.NET Core o nazwie *AuthoringTagHelpers*, do projektu zostanie dodany następujący plik *widoków/_ViewImports. cshtml* :
 
@@ -103,7 +104,7 @@ Jak wspomniano wcześniej, dodanie `@addTagHelper` dyrektywy do pliku *views/_Vi
 
 <a name="remove-razor-directives-label"></a>
 
-### <a name="removetaghelper-removes-tag-helpers"></a>`@removeTagHelper`usuwa pomocników tagów
+### <a name="removetaghelper-removes-tag-helpers"></a>`@removeTagHelper` usuwa pomocników tagów
 
 `@removeTagHelper`Ma takie same dwa parametry jak `@addTagHelper` i usuwa pomocnika tagu, który został wcześniej dodany. Na przykład `@removeTagHelper` zastosowana do określonego widoku powoduje usunięcie określonego pomocnika tagów z widoku. Użycie `@removeTagHelper` w pliku *viewss/Folder/_ViewImports. cshtml* usuwa określony pomocnik tagów ze wszystkich widoków w *folderze*.
 
@@ -267,7 +268,7 @@ Edytor programu Visual Studio pomaga napisać **wszystkie** znaczniki w podejśc
 
 * Formanty serwera sieci Web używają konwerterów typów do konwertowania ciągów na obiekty. Korzystając z pomocników tagów, pracujesz natywnie w języku C#, więc nie musisz wykonywać konwersji typów.
 
-* Formanty serwera sieci Web używają elementu [System. ComponentModel](/dotnet/api/system.componentmodel) , aby zaimplementować zachowanie składników i formantów w czasie wykonywania oraz w czasie projektowania. `System.ComponentModel`zawiera klasy bazowe i interfejsy służące do implementowania atrybutów i konwerterów typów, powiązania ze źródłami danych i składnikami licencjonowania. Kontrast służący do tagowania pomocników, które zazwyczaj pochodzą z `TagHelper` , i `TagHelper` klasy bazowej uwidacznia tylko dwie metody `Process` i `ProcessAsync` .
+* Formanty serwera sieci Web używają elementu [System. ComponentModel](/dotnet/api/system.componentmodel) , aby zaimplementować zachowanie składników i formantów w czasie wykonywania oraz w czasie projektowania. `System.ComponentModel` zawiera klasy bazowe i interfejsy służące do implementowania atrybutów i konwerterów typów, powiązania ze źródłami danych i składnikami licencjonowania. Kontrast służący do tagowania pomocników, które zazwyczaj pochodzą z `TagHelper` , i `TagHelper` klasy bazowej uwidacznia tylko dwie metody `Process` i `ProcessAsync` .
 
 ## <a name="customizing-the-tag-helper-element-font"></a>Dostosowywanie czcionki elementu pomocnika tagów
 
@@ -277,7 +278,7 @@ Możesz dostosować czcionkę i kolorowanie przy użyciu **Tools**  >  **opcji**
 
 [!INCLUDE[](~/includes/built-in-TH.md)]
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Autorzy tagów](xref:mvc/views/tag-helpers/authoring)
 * [Praca z formularzami](xref:mvc/views/working-with-forms)

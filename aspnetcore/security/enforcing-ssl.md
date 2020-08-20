@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/06/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/enforcing-ssl
-ms.openlocfilehash: 5dcdf50ff9f750e4966ed3bdf24a71b9f433240a
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 1cb2c2d18b717dc99c6ef4dac9954fef149c6deb
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019004"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631566"
 ---
 # <a name="enforce-https-in-aspnet-core"></a>Wymuszanie protokołu HTTPS w ASP.NET Core
 
@@ -39,7 +40,7 @@ W tym dokumencie przedstawiono sposób:
 > [!WARNING]
 > ## <a name="api-projects"></a>Projekty interfejsu API
 >
-> **Nie** należy używać [RequireHttpsAttribute](/dotnet/api/microsoft.aspnetcore.mvc.requirehttpsattribute) w interfejsach API sieci Web, które otrzymują poufne informacje. `RequireHttpsAttribute`używa kodów stanu HTTP do przekierowywania przeglądarek z protokołu HTTP do HTTPS. Klienci interfejsu API nie mogą zrozumieć ani przestrzegać przekierowania z protokołu HTTP do protokołu HTTPS. Tacy klienci mogą wysyłać informacje za pośrednictwem protokołu HTTP. Interfejsy API sieci Web powinny:
+> **Nie** należy używać [RequireHttpsAttribute](/dotnet/api/microsoft.aspnetcore.mvc.requirehttpsattribute) w interfejsach API sieci Web, które otrzymują poufne informacje. `RequireHttpsAttribute` używa kodów stanu HTTP do przekierowywania przeglądarek z protokołu HTTP do HTTPS. Klienci interfejsu API nie mogą zrozumieć ani przestrzegać przekierowania z protokołu HTTP do protokołu HTTPS. Tacy klienci mogą wysyłać informacje za pośrednictwem protokołu HTTP. Interfejsy API sieci Web powinny:
 >
 > * Nie nasłuchuje na protokole HTTP.
 > * Zamknij połączenie z kodem stanu 400 (złe żądanie) i nie obsługuj żądania.
@@ -55,7 +56,7 @@ W tym dokumencie przedstawiono sposób:
 > [!WARNING]
 > ## <a name="api-projects"></a>Projekty interfejsu API
 >
-> **Nie** należy używać [RequireHttpsAttribute](/dotnet/api/microsoft.aspnetcore.mvc.requirehttpsattribute) w interfejsach API sieci Web, które otrzymują poufne informacje. `RequireHttpsAttribute`używa kodów stanu HTTP do przekierowywania przeglądarek z protokołu HTTP do HTTPS. Klienci interfejsu API nie mogą zrozumieć ani przestrzegać przekierowania z protokołu HTTP do protokołu HTTPS. Tacy klienci mogą wysyłać informacje za pośrednictwem protokołu HTTP. Interfejsy API sieci Web powinny:
+> **Nie** należy używać [RequireHttpsAttribute](/dotnet/api/microsoft.aspnetcore.mvc.requirehttpsattribute) w interfejsach API sieci Web, które otrzymują poufne informacje. `RequireHttpsAttribute` używa kodów stanu HTTP do przekierowywania przeglądarek z protokołu HTTP do HTTPS. Klienci interfejsu API nie mogą zrozumieć ani przestrzegać przekierowania z protokołu HTTP do protokołu HTTPS. Tacy klienci mogą wysyłać informacje za pośrednictwem protokołu HTTP. Interfejsy API sieci Web powinny:
 >
 > * Nie nasłuchuje na protokole HTTP.
 > * Zamknij połączenie z kodem stanu 400 (złe żądanie) i nie obsługuj żądania.
@@ -234,7 +235,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="https-redirection-middleware-alternative-approach"></a>Alternatywne podejście do przekierowania protokołu HTTPS
 
-Alternatywą dla korzystania z oprogramowania pośredniczącego do przekierowania protokołu HTTPS `UseHttpsRedirection` jest użycie oprogramowania pośredniczącego ( `AddRedirectToHttps` ). `AddRedirectToHttps`można również ustawić kod stanu i port, gdy przekierowanie jest wykonywane. Aby uzyskać więcej informacji, zobacz Ponowne [Zapisywanie oprogramowania pośredniczącego w adresie URL](xref:fundamentals/url-rewriting).
+Alternatywą dla korzystania z oprogramowania pośredniczącego do przekierowania protokołu HTTPS `UseHttpsRedirection` jest użycie oprogramowania pośredniczącego ( `AddRedirectToHttps` ). `AddRedirectToHttps` można również ustawić kod stanu i port, gdy przekierowanie jest wykonywane. Aby uzyskać więcej informacji, zobacz Ponowne [Zapisywanie oprogramowania pośredniczącego w adresie URL](xref:fundamentals/url-rewriting).
 
 Podczas przekierowywania do protokołu HTTPS bez wymagania dotyczącego dodatkowych reguł przekierowywania zalecamy używanie oprogramowania pośredniczącego do przekierowania protokołu HTTPS ( `UseHttpsRedirection` ) opisanego w tym temacie.
 
@@ -267,7 +268,7 @@ ASP.NET Core 2,1 i nowsze implementują HSTS z `UseHsts` metodą rozszerzenia. N
 
 ::: moniker-end
 
-`UseHsts`nie jest zalecane w programowaniu, ponieważ ustawienia HSTS mają wysoką pamięć podręczną przez przeglądarki. Domyślnie program `UseHsts` wyklucza adres lokalnego sprzężenia zwrotnego.
+`UseHsts` nie jest zalecane w programowaniu, ponieważ ustawienia HSTS mają wysoką pamięć podręczną przez przeglądarki. Domyślnie program `UseHsts` wyklucza adres lokalnego sprzężenia zwrotnego.
 
 W przypadku środowisk produkcyjnych, które wdrażają protokół HTTPS po raz pierwszy, należy ustawić początkowy [HstsOptions. maxAge](xref:Microsoft.AspNetCore.HttpsPolicy.HstsOptions.MaxAge*) na małą wartość przy użyciu jednej z <xref:System.TimeSpan> metod. Ustaw wartość od godziny na nie więcej niż jeden dzień w przypadku konieczności przywrócenia infrastruktury HTTPS do protokołu HTTP. Po upewnieniu się, że trwałość konfiguracji protokołu HTTPS jest stabilna, zwiększ `max-age` wartość HSTS. najczęściej używaną wartością jest jeden rok.
 
@@ -292,11 +293,11 @@ Następujący kod:
 * Jawnie ustawia `max-age` parametr `Strict-Transport-Security` nagłówka na 60 dni. Jeśli nie zostanie ustawiona, wartość domyślna to 30 dni. Aby uzyskać więcej informacji, zobacz [dyrektywa max-age](https://tools.ietf.org/html/rfc6797#section-6.1.1).
 * Dodaje `example.com` do listy hostów, które mają zostać wykluczone.
 
-`UseHsts`wyklucza następujące hosty sprzężenia zwrotnego:
+`UseHsts` wyklucza następujące hosty sprzężenia zwrotnego:
 
-* `localhost`: Adres sprzężenia zwrotnego IPv4.
-* `127.0.0.1`: Adres sprzężenia zwrotnego IPv4.
-* `[::1]`: Adres sprzężenia zwrotnego IPv6.
+* `localhost` : Adres sprzężenia zwrotnego IPv4.
+* `127.0.0.1` : Adres sprzężenia zwrotnego IPv4.
+* `[::1]` : Adres sprzężenia zwrotnego IPv6.
 
 ## <a name="opt-out-of-httpshsts-on-project-creation"></a>Zrezygnuj z protokołu HTTPS/HSTS podczas tworzenia projektu
 
@@ -304,7 +305,7 @@ W niektórych scenariuszach usługi zaplecza, w których zabezpieczenia połącz
 
 Aby zrezygnować z protokołu HTTPS/HSTS:
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio) 
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio) 
 
 Usuń zaznaczenie pola wyboru **Konfiguruj dla protokołu HTTPS** .
 
@@ -321,7 +322,7 @@ Usuń zaznaczenie pola wyboru **Konfiguruj dla protokołu HTTPS** .
 ::: moniker-end
 
 
-# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli) 
+# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli) 
 
 Użyj `--no-https` opcji. Na przykład
 
@@ -361,6 +362,14 @@ dotnet dev-certs https --help
 ## <a name="how-to-set-up-a-developer-certificate-for-docker"></a>Jak skonfigurować certyfikat dewelopera dla platformy Docker
 
 Zobacz [ten problem](https://github.com/dotnet/AspNetCore.Docs/issues/6199)w serwisie GitHub.
+
+<a name="ssl-linux"></a>
+
+## <a name="trust-https-certificate-on-linux"></a>Ufaj certyfikatowi HTTPS w systemie Linux
+
+<!-- Instructions to be updated by engineering team after 5.0 RTM. -->
+
+Instrukcje dotyczące systemu Linux można znaleźć w dokumentacji dotyczącej dystrybucji.
 
 <a name="wsl"></a>
 
@@ -408,7 +417,7 @@ Powyższe polecenia rozwiązują większość problemów z zaufaniem do przeglą
 
 ### <a name="windows---certificate-not-trusted"></a>Windows-certyfikat niezaufany
 
-* Sprawdź certyfikaty w magazynie certyfikatów. Powinien istnieć `localhost` certyfikat o `ASP.NET Core HTTPS development certificate` przyjaznej nazwie w obszarze `Current User > Personal > Certificates` i`Current User > Trusted root certification authorities > Certificates`
+* Sprawdź certyfikaty w magazynie certyfikatów. Powinien istnieć `localhost` certyfikat o `ASP.NET Core HTTPS development certificate` przyjaznej nazwie w obszarze `Current User > Personal > Certificates` i `Current User > Trusted root certification authorities > Certificates`
 * Usuń wszystkie znalezione certyfikaty zarówno z prywatnych, jak i zaufanych głównych urzędów certyfikacji. **Nie** usuwaj IIS Express certyfikatu localhost.
 * Uruchom następujące polecenia:
 

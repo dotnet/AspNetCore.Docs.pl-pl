@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/cookie-sharing
-ms.openlocfilehash: f4762871cbae77f690d8478e1342e0d53918eb51
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 6ac808d11790ae27e82606b442ff215d95b93e41
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022202"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631371"
 ---
 # <a name="share-authentication-no-loccookies-among-aspnet-apps"></a>Udostępnianie uwierzytelniania cookie między aplikacjami ASP.NET
 
@@ -35,16 +36,16 @@ W następujących przykładach:
 * Nazwa uwierzytelniania cookie ma ustawioną wspólną wartość `.AspNet.SharedCookie` .
 * `AuthenticationType`Jest ustawiona `Identity.Application` jawnie lub domyślnie.
 * Nazwa wspólnej aplikacji jest używana w celu umożliwienia systemowi ochrony danych udostępniania kluczy ochrony danych ( `SharedCookieApp` ).
-* `Identity.Application`jest używany jako schemat uwierzytelniania. Niezależnie od tego, jaki schemat jest używany, musi być używany spójnie *w ramach i między* udostępnionymi cookie aplikacjami jako schemat domyślny lub przez jawne ustawienie go. Schemat jest używany podczas szyfrowania i odszyfrowywania cookie , więc w aplikacjach musi być używany spójny schemat.
+* `Identity.Application` jest używany jako schemat uwierzytelniania. Niezależnie od tego, jaki schemat jest używany, musi być używany spójnie *w ramach i między* udostępnionymi cookie aplikacjami jako schemat domyślny lub przez jawne ustawienie go. Schemat jest używany podczas szyfrowania i odszyfrowywania cookie , więc w aplikacjach musi być używany spójny schemat.
 * Używana jest wspólna lokalizacja magazynu [kluczy ochrony danych](xref:security/data-protection/implementation/key-management) .
   * W ASP.NET Core aplikacje <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.PersistKeysToFileSystem*> służy do ustawiania lokalizacji magazynu kluczy.
-  * W aplikacjach .NET Framework, Cookie oprogramowanie pośredniczące uwierzytelniania korzysta z implementacji programu <xref:Microsoft.AspNetCore.DataProtection.DataProtectionProvider> . `DataProtectionProvider`zapewnia usługi ochrony danych do szyfrowania i odszyfrowywania cookie danych ładunku uwierzytelniania. `DataProtectionProvider`Wystąpienie jest odizolowane od systemu ochrony danych używanego przez inne części aplikacji. [DataProtectionProvider. Create (System. IO. DirectoryInfo, Action \<IDataProtectionBuilder> )](xref:Microsoft.AspNetCore.DataProtection.DataProtectionProvider.Create*) przyjmuje wartość <xref:System.IO.DirectoryInfo> określającą lokalizację magazynu kluczy ochrony danych.
-* `DataProtectionProvider`wymaga pakietu NuGet [Microsoft. AspNetCore. dataprotection. Extensions](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Extensions/) :
+  * W aplikacjach .NET Framework, Cookie oprogramowanie pośredniczące uwierzytelniania korzysta z implementacji programu <xref:Microsoft.AspNetCore.DataProtection.DataProtectionProvider> . `DataProtectionProvider` zapewnia usługi ochrony danych do szyfrowania i odszyfrowywania cookie danych ładunku uwierzytelniania. `DataProtectionProvider`Wystąpienie jest odizolowane od systemu ochrony danych używanego przez inne części aplikacji. [DataProtectionProvider. Create (System. IO. DirectoryInfo, Action \<IDataProtectionBuilder> )](xref:Microsoft.AspNetCore.DataProtection.DataProtectionProvider.Create*) przyjmuje wartość <xref:System.IO.DirectoryInfo> określającą lokalizację magazynu kluczy ochrony danych.
+* `DataProtectionProvider` wymaga pakietu NuGet [Microsoft. AspNetCore. dataprotection. Extensions](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Extensions/) :
   * W ASP.NET Core 2. x aplikacje odwołują się do [pakietu Microsoft. AspNetCore. app](xref:fundamentals/metapackage-app).
   * W .NET Framework aplikacje Dodaj odwołanie do pakietu do [Microsoft. AspNetCore. dataprotection. Extensions](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Extensions/).
-* <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.SetApplicationName*>Ustawia wspólną nazwę aplikacji.
+* <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.SetApplicationName*> Ustawia wspólną nazwę aplikacji.
 
-## <a name="share-authentication-no-loccookies-with-aspnet-core-no-locidentity"></a>Udostępnianie uwierzytelniania cookie przy użyciu ASP.NET CoreIdentity
+## <a name="share-authentication-no-loccookies-with-no-locaspnet-core-identity"></a>Udostępnianie uwierzytelniania cookie przy użyciu ASP.NET Core Identity
 
 W przypadku korzystania z ASP.NET Core Identity :
 
@@ -64,9 +65,9 @@ services.ConfigureApplicationCookie(options => {
 });
 ```
 
-## <a name="share-authentication-no-loccookies-without-aspnet-core-no-locidentity"></a>Udostępnianie uwierzytelniania cookie bez ASP.NET CoreIdentity
+## <a name="share-authentication-no-loccookies-without-no-locaspnet-core-identity"></a>Udostępnianie uwierzytelniania cookie bez ASP.NET Core Identity
 
-W przypadku używania cookie s bezpośrednio bez ASP.NET Core Identity Skonfiguruj ochronę danych i uwierzytelnianie w programie `Startup.ConfigureServices` . W poniższym przykładzie typ uwierzytelniania jest ustawiony na `Identity.Application` :
+W przypadku korzystania z usługi cookie s bezpośrednio ASP.NET Core Identity , w programie należy skonfigurować ochronę danych i uwierzytelnianie `Startup.ConfigureServices` . W poniższym przykładzie typ uwierzytelniania jest ustawiony na `Identity.Application` :
 
 ```csharp
 services.AddDataProtection()

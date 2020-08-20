@@ -5,6 +5,7 @@ description: Część 2 z serii samouczków na ASP.NET Core MVC.
 ms.author: riande
 ms.date: 08/05/2017
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-controller
-ms.openlocfilehash: 46f8cbc5ef3d9fe00a5151160a9119f68a9fe572
-ms.sourcegitcommit: 68d03d1aee8906b53bda66f8f1e0747efc3007e6
+ms.openlocfilehash: b5ef99d5645e0bbd453d09809a446bf4af38a975
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/10/2020
-ms.locfileid: "88051813"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634049"
 ---
 # <a name="part-2-add-a-controller-to-an-aspnet-core-mvc-app"></a>Część 2, dodawanie kontrolera do aplikacji ASP.NET Core MVC
 
@@ -34,7 +35,7 @@ Wzorzec architektoniczny Model-View-Controller (MVC) oddziela aplikację do trze
 
 * **V**Iews: widoki są składnikami, które wyświetlają interfejs użytkownika aplikacji. Zazwyczaj ten interfejs użytkownika wyświetla dane modelu.
 
-* **C**Ontrollers: klasy, które obsługują żądania przeglądarki. Pobierają one dane modelu i szablony widoków wywołań, które zwracają odpowiedź. W aplikacji MVC widok wyświetla tylko informacje; kontroler obsługuje i reaguje na dane wejściowe użytkownika i interakcje. Na przykład kontroler obsługuje dane tras i wartości ciągu zapytania i przekazuje te wartości do modelu. Model może używać tych wartości do wykonywania zapytań w bazie danych. Na przykład `https://localhost:5001/Home/Privacy` ma dane trasy `Home` (kontroler) i `Privacy` (Metoda akcji do wywołania na kontrolerze głównym). `https://localhost:5001/Movies/Edit/5`jest żądaniem edycji filmu o IDENTYFIKATORze 5 przy użyciu kontrolera filmu. Dane trasy są wyjaśnione w dalszej części samouczka.
+* **C**Ontrollers: klasy, które obsługują żądania przeglądarki. Pobierają one dane modelu i szablony widoków wywołań, które zwracają odpowiedź. W aplikacji MVC widok wyświetla tylko informacje; kontroler obsługuje i reaguje na dane wejściowe użytkownika i interakcje. Na przykład kontroler obsługuje dane tras i wartości ciągu zapytania i przekazuje te wartości do modelu. Model może używać tych wartości do wykonywania zapytań w bazie danych. Na przykład `https://localhost:5001/Home/Privacy` ma dane trasy `Home` (kontroler) i `Privacy` (Metoda akcji do wywołania na kontrolerze głównym). `https://localhost:5001/Movies/Edit/5` jest żądaniem edycji filmu o IDENTYFIKATORze 5 przy użyciu kontrolera filmu. Dane trasy są wyjaśnione w dalszej części samouczka.
 
 Wzorzec MVC ułatwia tworzenie aplikacji, które oddzielają różne aspekty aplikacji (logiki wejściowej, logiki biznesowej i logiki interfejsu użytkownika), jednocześnie zapewniając swobodny sprzężenie między tymi elementami. Wzorzec określa, gdzie poszczególne rodzaje logiki powinny znajdować się w aplikacji. Logika interfejsu użytkownika należy do widoku. Logika wejściowa należy do kontrolera. Logika biznesowa należy do modelu. Ta separacja ułatwia zarządzanie złożonością podczas kompilowania aplikacji, ponieważ umożliwia pracę nad jednym aspektem implementacji jednocześnie bez wpływu na kod innego. Na przykład można korzystać z kodu widoku bez w zależności od kodu logiki biznesowej.
 
@@ -126,7 +127,7 @@ Zastąp metodę `Welcome` poniższym kodem:
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/HelloWorldController.cs?name=snippet_3)]
 
-Uruchom aplikację i wprowadź następujący adres URL:`https://localhost:{PORT}/HelloWorld/Welcome/3?name=Rick`
+Uruchom aplikację i wprowadź następujący adres URL: `https://localhost:{PORT}/HelloWorld/Welcome/3?name=Rick`
 
 Tym razem trzeci segment adresu URL pasuje do parametru Route `id` . `Welcome`Metoda zawiera parametr `id` , który jest zgodny z szablonem adresu URL w `MapControllerRoute` metodzie. Końcowe `?` (w `id?` ) wskazuje, że `id` parametr jest opcjonalny.
 
@@ -148,7 +149,7 @@ Wzorzec architektoniczny Model-View-Controller (MVC) oddziela aplikację do trze
 
 * **V**Iews: widoki są składnikami, które wyświetlają interfejs użytkownika aplikacji. Zazwyczaj ten interfejs użytkownika wyświetla dane modelu.
 
-* **C**Ontrollers: klasy, które obsługują żądania przeglądarki. Pobierają one dane modelu i szablony widoków wywołań, które zwracają odpowiedź. W aplikacji MVC widok wyświetla tylko informacje; kontroler obsługuje i reaguje na dane wejściowe użytkownika i interakcje. Na przykład kontroler obsługuje dane tras i wartości ciągu zapytania i przekazuje te wartości do modelu. Model może używać tych wartości do wykonywania zapytań w bazie danych. Na przykład `https://localhost:5001/Home/About` ma dane trasy `Home` (kontroler) i `About` (Metoda akcji do wywołania na kontrolerze głównym). `https://localhost:5001/Movies/Edit/5`jest żądaniem edycji filmu o IDENTYFIKATORze 5 przy użyciu kontrolera filmu. Dane trasy są wyjaśnione w dalszej części samouczka.
+* **C**Ontrollers: klasy, które obsługują żądania przeglądarki. Pobierają one dane modelu i szablony widoków wywołań, które zwracają odpowiedź. W aplikacji MVC widok wyświetla tylko informacje; kontroler obsługuje i reaguje na dane wejściowe użytkownika i interakcje. Na przykład kontroler obsługuje dane tras i wartości ciągu zapytania i przekazuje te wartości do modelu. Model może używać tych wartości do wykonywania zapytań w bazie danych. Na przykład `https://localhost:5001/Home/About` ma dane trasy `Home` (kontroler) i `About` (Metoda akcji do wywołania na kontrolerze głównym). `https://localhost:5001/Movies/Edit/5` jest żądaniem edycji filmu o IDENTYFIKATORze 5 przy użyciu kontrolera filmu. Dane trasy są wyjaśnione w dalszej części samouczka.
 
 Wzorzec MVC ułatwia tworzenie aplikacji, które oddzielają różne aspekty aplikacji (logiki wejściowej, logiki biznesowej i logiki interfejsu użytkownika), jednocześnie zapewniając swobodny sprzężenie między tymi elementami. Wzorzec określa, gdzie poszczególne rodzaje logiki powinny znajdować się w aplikacji. Logika interfejsu użytkownika należy do widoku. Logika wejściowa należy do kontrolera. Logika biznesowa należy do modelu. Ta separacja ułatwia zarządzanie złożonością podczas kompilowania aplikacji, ponieważ umożliwia pracę nad jednym aspektem implementacji jednocześnie bez wpływu na kod innego. Na przykład można korzystać z kodu widoku bez w zależności od kodu logiki biznesowej.
 
@@ -245,7 +246,7 @@ Zastąp metodę `Welcome` poniższym kodem:
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/HelloWorldController.cs?name=snippet_3)]
 
-Uruchom aplikację i wprowadź następujący adres URL:`https://localhost:{PORT}/HelloWorld/Welcome/3?name=Rick`
+Uruchom aplikację i wprowadź następujący adres URL: `https://localhost:{PORT}/HelloWorld/Welcome/3?name=Rick`
 
 Tym razem trzeci segment adresu URL pasuje do parametru Route `id` . `Welcome`Metoda zawiera parametr `id` , który jest zgodny z szablonem adresu URL w `MapRoute` metodzie. Końcowe `?` (w `id?` ) wskazuje, że `id` parametr jest opcjonalny.
 

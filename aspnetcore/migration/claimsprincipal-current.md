@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 03/26/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/claimsprincipal-current
-ms.openlocfilehash: faa3db1a4b9cb7ff3fb54ec8a7caf21e8a9bfb7b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 426fd90374a460cb283d0d3ba921e1312fb17940
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015130"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634075"
 ---
 # <a name="migrate-from-claimsprincipalcurrent"></a>Migruj z ClaimsPrincipal. Current
 
@@ -38,7 +39,7 @@ Istnieje kilka opcji pobierania bieżącego uwierzytelnionego użytkownika `Clai
 * **ControllerBase. User**. Kontrolery MVC mogą uzyskać dostęp do bieżącego uwierzytelnionego użytkownika przy użyciu ich właściwości [użytkownika](/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.user) .
 * **HttpContext. User**. Składniki z dostępem do bieżącego `HttpContext` (na przykład oprogramowania pośredniczącego) mogą pobrać bieżącego użytkownika `ClaimsPrincipal` z elementu [HttpContext. User](/dotnet/api/microsoft.aspnetcore.http.httpcontext.user).
 * **Przeszedł z elementu wywołującego**. Biblioteki bez dostępu do bieżącej `HttpContext` są często wywoływane z poziomu kontrolerów lub składników pośredniczących, a tożsamość bieżącego użytkownika jest przenoszona jako argument.
-* **IHttpContextAccessor**. Projekt migrowany do ASP.NET Core może być zbyt duży, aby można było łatwo przekazać tożsamość bieżącego użytkownika do wszystkich potrzebnych lokalizacji. W takich przypadkach [IHttpContextAccessor](/dotnet/api/microsoft.aspnetcore.http.ihttpcontextaccessor) może służyć jako obejście problemu. `IHttpContextAccessor`jest w stanie uzyskać dostęp do bieżącego `HttpContext` (jeśli istnieje). Jeśli jest używana, zobacz <xref:fundamentals/httpcontext> . Krótkoterminowe rozwiązanie do uzyskiwania informacji o tożsamości bieżącego użytkownika w kodzie, który nie został jeszcze zaktualizowany do pracy z ASP.NET Core architekturą o regulowanej mocy, będzie:
+* **IHttpContextAccessor**. Projekt migrowany do ASP.NET Core może być zbyt duży, aby można było łatwo przekazać tożsamość bieżącego użytkownika do wszystkich potrzebnych lokalizacji. W takich przypadkach [IHttpContextAccessor](/dotnet/api/microsoft.aspnetcore.http.ihttpcontextaccessor) może służyć jako obejście problemu. `IHttpContextAccessor` jest w stanie uzyskać dostęp do bieżącego `HttpContext` (jeśli istnieje). Jeśli jest używana, zobacz <xref:fundamentals/httpcontext> . Krótkoterminowe rozwiązanie do uzyskiwania informacji o tożsamości bieżącego użytkownika w kodzie, który nie został jeszcze zaktualizowany do pracy z ASP.NET Core architekturą o regulowanej mocy, będzie:
 
   * Udostępnij `IHttpContextAccessor` w kontenerze di przez wywołanie [AddHttpContextAccessor](https://github.com/aspnet/Hosting/issues/793) w `Startup.ConfigureServices` .
   * Pobierz wystąpienie `IHttpContextAccessor` podczas uruchamiania i Zapisz je w zmiennej statycznej. Wystąpienie jest udostępniane dla kodu, który wcześniej pobiera bieżącego użytkownika z właściwości statycznej.

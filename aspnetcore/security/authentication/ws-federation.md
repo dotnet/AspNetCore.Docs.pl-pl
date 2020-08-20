@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 01/16/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/ws-federation
-ms.openlocfilehash: e303679190a7d7f42d8525541cec031ba090fd7a
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 8a593efd799e900483d0337a06e02c3558b63bfb
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022306"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634088"
 ---
 # <a name="authenticate-users-with-ws-federation-in-aspnet-core"></a>Uwierzytelnianie użytkowników za pomocą usługi WS-Federation w ASP.NET Core
 
@@ -71,7 +72,7 @@ Domyślnie nowe oprogramowanie pośredniczące:
 
 * Kliknij przycisk **Zakończ**  >  **OK** w oknie **Edytowanie reguł roszczeń** .
 
-### <a name="azure-active-directory"></a>Azure Active Directory
+### <a name="azure-active-directory"></a>Usługa Azure Active Directory
 
 * Przejdź do bloku rejestracje aplikacji dzierżawy usługi AAD. Kliknij pozycję **rejestracja nowej aplikacji**:
 
@@ -86,13 +87,13 @@ Domyślnie nowe oprogramowanie pośredniczące:
 
 ![Azure Active Directory: punkty końcowe](ws-federation/_static/AadFederationMetadataDocument.png)
 
-* Przejdź do rejestracji nowej aplikacji. Kliknij pozycję **uwidaczniaj interfejs API**. Kliknij przycisk identyfikatora aplikacji identyfikator URI **Ustawienia**  >  **Zapisz**. Zanotuj **Identyfikator URI aplikacji**. To jest oprogramowanie pośredniczące WS-Federation `Wtrealm` :
+* Przejdź do rejestracji nowej aplikacji. Kliknij pozycję **uwidaczniaj interfejs API**. Kliknij przycisk identyfikatora aplikacji identyfikator URI **Ustawienia**  >  **Zapisz**. Zanotuj  **Identyfikator URI aplikacji**. To jest oprogramowanie pośredniczące WS-Federation `Wtrealm` :
 
 ![Azure Active Directory: właściwości rejestracji aplikacji](ws-federation/_static/AadAppIdUri.png)
 
-## <a name="use-ws-federation-without-aspnet-core-no-locidentity"></a>Korzystanie z protokołu WS-Federation bez ASP.NET CoreIdentity
+## <a name="use-ws-federation-without-no-locaspnet-core-identity"></a>Korzystanie z protokołu WS-Federation bez ASP.NET Core Identity
 
-Oprogramowanie pośredniczące WS-Federation może być używane bez programu Identity . Przykład:
+Oprogramowanie pośredniczące WS-Federation może być używane bez programu Identity . Na przykład:
 ::: moniker range=">= aspnetcore-3.0"
 [!code-csharp[](ws-federation/samples/StartupNon31.cs?name=snippet)]
 ::: moniker-end
@@ -101,7 +102,7 @@ Oprogramowanie pośredniczące WS-Federation może być używane bez programu Id
 [!code-csharp[](ws-federation/samples/StartupNon21.cs?name=snippet)]
 ::: moniker-end
 
-## <a name="add-ws-federation-as-an-external-login-provider-for-aspnet-core-no-locidentity"></a>Dodaj usługę WS-Federation jako zewnętrznego dostawcę logowania dla ASP.NET CoreIdentity
+## <a name="add-ws-federation-as-an-external-login-provider-for-no-locaspnet-core-identity"></a>Dodaj usługę WS-Federation jako zewnętrznego dostawcę logowania dla ASP.NET Core Identity
 
 * Dodaj zależność od elementu [Microsoft. AspNetCore. Authentication. WsFederation](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.WsFederation) do projektu.
 * Dodaj usługę WS-Federation do `Startup.ConfigureServices` :

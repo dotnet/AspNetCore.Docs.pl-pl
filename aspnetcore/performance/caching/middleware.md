@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/middleware
-ms.openlocfilehash: 7e1463671323cddd2b95c03de994d497449d7884
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 43b0ef1dcbf6d0137b14be9e58eb056f06ae093d
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019095"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633451"
 ---
 # <a name="response-caching-middleware-in-aspnet-core"></a>Buforowanie oprogramowania pośredniczącego w ASP.NET Core
 
@@ -34,7 +35,7 @@ W tym artykule opisano sposób konfigurowania oprogramowania pośredniczącego b
 
 [Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/middleware/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
 
-## <a name="configuration"></a>Konfiguracja
+## <a name="configuration"></a>Konfigurowanie
 
 Oprogramowanie pośredniczące buforowania odpowiedzi jest niejawnie dostępne dla aplikacji ASP.NET Core za pośrednictwem udostępnionej platformy.
 
@@ -47,7 +48,7 @@ Skonfiguruj aplikację do korzystania z oprogramowania pośredniczącego z <xref
 [!code-csharp[](middleware/samples/3.x/ResponseCachingMiddleware/Startup.cs?name=snippet2&highlight=17)]
 
 > [!WARNING]
-> <xref:Owin.CorsExtensions.UseCors%2A>musi być wywoływana przed <xref:Microsoft.AspNetCore.Builder.ResponseCachingExtensions.UseResponseCaching%2A> użyciem [oprogramowania pośredniczącego CORS](xref:security/cors).
+> <xref:Owin.CorsExtensions.UseCors%2A> musi być wywoływana przed <xref:Microsoft.AspNetCore.Builder.ResponseCachingExtensions.UseResponseCaching%2A> użyciem [oprogramowania pośredniczącego CORS](xref:security/cors).
 
 Przykładowa aplikacja dodaje nagłówki, aby kontrolować buforowanie w kolejnych żądaniach:
 
@@ -149,10 +150,10 @@ Podczas testowania i rozwiązywania problemów z pamięcią podręczną przeglą
 * Metoda żądania musi mieć wartość GET lub $.
 * W programie `Startup.Configure` oprogramowanie pośredniczące buforowania odpowiedzi należy umieścić przed oprogramowanie pośredniczące wymagające buforowania. Aby uzyskać więcej informacji, zobacz <xref:fundamentals/middleware/index>.
 * `Authorization`Nagłówek nie może być obecny.
-* `Cache-Control`parametry nagłówka muszą być prawidłowe, a odpowiedź musi być oznaczona jako `public` nieoznaczona `private` .
+* `Cache-Control` parametry nagłówka muszą być prawidłowe, a odpowiedź musi być oznaczona jako `public` nieoznaczona `private` .
 * `Pragma: no-cache`Nagłówek nie może być obecny `Cache-Control` , jeśli nagłówek nie istnieje, jako że `Cache-Control` nagłówek zastępuje nagłówek, `Pragma` gdy jest obecny.
 * `Set-Cookie`Nagłówek nie może być obecny.
-* `Vary`parametry nagłówka muszą być prawidłowe i nie mogą być równe `*` .
+* `Vary` parametry nagłówka muszą być prawidłowe i nie mogą być równe `*` .
 * `Content-Length`Wartość nagłówka (jeśli jest ustawiona) musi być zgodna z rozmiarem treści odpowiedzi.
 * <xref:Microsoft.AspNetCore.Http.Features.IHttpSendFileFeature>Nie jest używany.
 * Odpowiedź nie może być nieodświeżona zgodnie z definicją `Expires` nagłówka i `max-age` `s-maxage` dyrektywy pamięci podręcznej.
@@ -162,7 +163,7 @@ Podczas testowania i rozwiązywania problemów z pamięcią podręczną przeglą
 > [!NOTE]
 > System antysfałszowany służący do generowania zabezpieczonych tokenów, aby zapobiec atakom przez wiele witryn (CSRF), w `Cache-Control` związku z czym `Pragma` `no-cache` odpowiedzi nie są buforowane. Aby uzyskać informacje na temat sposobu wyłączania tokenów antysfałszowanych dla elementów formularza HTML, zobacz <xref:security/anti-request-forgery#aspnet-core-antiforgery-configuration> .
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:fundamentals/startup>
 * <xref:fundamentals/middleware/index>
@@ -181,7 +182,7 @@ W tym artykule opisano sposób konfigurowania oprogramowania pośredniczącego b
 
 [Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/middleware/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
 
-## <a name="configuration"></a>Konfiguracja
+## <a name="configuration"></a>Konfigurowanie
 
 Użyj pakietu [Microsoft. AspNetCore. app](xref:fundamentals/metapackage-app) lub Dodaj odwołanie do pakietu do pakietu [Microsoft. AspNetCore. ResponseCaching](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCaching/) .
 
@@ -293,10 +294,10 @@ Podczas testowania i rozwiązywania problemów z pamięcią podręczną przeglą
 * Metoda żądania musi mieć wartość GET lub $.
 * W programie `Startup.Configure` oprogramowanie pośredniczące buforowania odpowiedzi należy umieścić przed oprogramowanie pośredniczące wymagające buforowania. Aby uzyskać więcej informacji, zobacz <xref:fundamentals/middleware/index>.
 * `Authorization`Nagłówek nie może być obecny.
-* `Cache-Control`parametry nagłówka muszą być prawidłowe, a odpowiedź musi być oznaczona jako `public` nieoznaczona `private` .
+* `Cache-Control` parametry nagłówka muszą być prawidłowe, a odpowiedź musi być oznaczona jako `public` nieoznaczona `private` .
 * `Pragma: no-cache`Nagłówek nie może być obecny `Cache-Control` , jeśli nagłówek nie istnieje, jako że `Cache-Control` nagłówek zastępuje nagłówek, `Pragma` gdy jest obecny.
 * `Set-Cookie`Nagłówek nie może być obecny.
-* `Vary`parametry nagłówka muszą być prawidłowe i nie mogą być równe `*` .
+* `Vary` parametry nagłówka muszą być prawidłowe i nie mogą być równe `*` .
 * `Content-Length`Wartość nagłówka (jeśli jest ustawiona) musi być zgodna z rozmiarem treści odpowiedzi.
 * <xref:Microsoft.AspNetCore.Http.Features.IHttpSendFileFeature>Nie jest używany.
 * Odpowiedź nie może być nieodświeżona zgodnie z definicją `Expires` nagłówka i `max-age` `s-maxage` dyrektywy pamięci podręcznej.

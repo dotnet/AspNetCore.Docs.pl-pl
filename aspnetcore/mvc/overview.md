@@ -5,6 +5,7 @@ description: Dowiedz się, jak ASP.NET Core MVC to rozbudowana platforma służ�
 ms.author: riande
 ms.date: 02/12/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/overview
-ms.openlocfilehash: 64bee1966eff40e9057166adfafbf78d0cc5b6aa
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 29701506d9f6c1ff90081a548d524bc0deb65cda
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021448"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633620"
 ---
 # <a name="overview-of-aspnet-core-mvc"></a>Omówienie platformy ASP.NET Core MVC
 
@@ -77,7 +78,7 @@ ASP.NET Core MVC obejmuje następujące elementy:
 * [Obszary](#areas)
 * [Interfejsy API sieci Web](#web-apis)
 * [Testowalności](#testability)
-* [RazorWyświetl aparat](#razor-view-engine)
+* [Razor Wyświetl aparat](#razor-view-engine)
 * [Widoki o jednoznacznie określonym typie](#strongly-typed-views)
 * [Pomocnicy tagów](#tag-helpers)
 * [Wyświetl składniki](#view-components)
@@ -173,7 +174,7 @@ Twoja aplikacja może również używać [iniekcji zależności w plikach widoku
 
 ### <a name="filters"></a>Filtry
 
-[Filtry](controllers/filters.md) ułatwiają deweloperom hermetyzację zagadnień związanych z zmniejszeniem, takich jak obsługa wyjątków czy autoryzacja. Filtry umożliwiają uruchamianie niestandardowej logiki sprzed i po przetworzeniu dla metod akcji i można ją skonfigurować do uruchamiania w określonych punktach w potoku wykonywania dla danego żądania. Filtry mogą być stosowane do kontrolerów lub akcji jako atrybuty (lub mogą być uruchamiane globalnie). W strukturze uwzględniono kilka filtrów (takich jak `Authorize` ). `[Authorize]`jest atrybutem używanym do tworzenia filtrów autoryzacji MVC.
+[Filtry](controllers/filters.md) ułatwiają deweloperom hermetyzację zagadnień związanych z zmniejszeniem, takich jak obsługa wyjątków czy autoryzacja. Filtry umożliwiają uruchamianie niestandardowej logiki sprzed i po przetworzeniu dla metod akcji i można ją skonfigurować do uruchamiania w określonych punktach w potoku wykonywania dla danego żądania. Filtry mogą być stosowane do kontrolerów lub akcji jako atrybuty (lub mogą być uruchamiane globalnie). W strukturze uwzględniono kilka filtrów (takich jak `Authorize` ). `[Authorize]` jest atrybutem używanym do tworzenia filtrów autoryzacji MVC.
 
 ```csharp
 [Authorize]
@@ -196,9 +197,9 @@ Użyj generowania linków, aby włączyć obsługę multimediów. Łatwo Włącz
 
 Korzystanie z interfejsów i iniekcja zależności umożliwia odpowiednie rozwiązanie do testowania jednostkowego, a platforma obejmuje funkcje (takie jak TestHost i Dostawca pamięci dla Entity Framework), które umożliwiają szybkie i łatwe testowanie [integracji](xref:test/integration-tests) . Dowiedz się więcej [na temat testowania logiki kontrolera](controllers/testing.md).
 
-### <a name="no-locrazor-view-engine"></a>RazorWyświetl aparat
+### <a name="no-locrazor-view-engine"></a>Razor Wyświetl aparat
 
-[ASP.NET Core widoki MVC](views/overview.md) wykorzystują [ Razor aparat widoku](views/razor.md) do renderowania widoków. Razorto zwarty, wyraźny i płynny język znaczników szablonów do definiowania widoków przy użyciu osadzonego kodu w języku C#. Razorsłuży do dynamicznego generowania zawartości sieci Web na serwerze. Można wyczyścić kod serwera z zawartością i kodem po stronie klienta.
+[ASP.NET Core widoki MVC](views/overview.md) wykorzystują [ Razor aparat widoku](views/razor.md) do renderowania widoków. Razor to zwarty, wyraźny i płynny język znaczników szablonów do definiowania widoków przy użyciu osadzonego kodu w języku C#. Razor służy do dynamicznego generowania zawartości sieci Web na serwerze. Można wyczyścić kod serwera z zawartością i kodem po stronie klienta.
 
 ```cshtml
 <ul>
@@ -212,7 +213,7 @@ Korzystając z Razor aparatu widoku, można definiować [układy](views/layout.m
 
 ### <a name="strongly-typed-views"></a>Widoki o jednoznacznie określonym typie
 
-Razorwidoki w MVC można jednoznacznie wpisywać na podstawie modelu. Kontrolery mogą przekazać silnie wpisany model do widoków, co umożliwia kontrolowanie typów i obsługę technologii IntelliSense.
+Razor widoki w MVC można jednoznacznie wpisywać na podstawie modelu. Kontrolery mogą przekazać silnie wpisany model do widoków, co umożliwia kontrolowanie typów i obsługę technologii IntelliSense.
 
 Na przykład następujący widok renderuje model typu `IEnumerable<Product>` :
 
@@ -265,7 +266,7 @@ Pomocnicy tagów zapewniają przyjazne dla języka HTML środowisko programistyc
 
 Aby uzyskać więcej informacji, zobacz <xref:mvc/compatibility-version>.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [AspNetCore. MVC-Fluent — Biblioteka testów dla ASP.NET Core MVC](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc): Biblioteka testów jednostkowych z jednoznacznie określonymi typami, dostarczająca interfejs Fluent do testowania aplikacji MVC i Web API. (*Niekonserwowane lub obsługiwane przez firmę Microsoft).*
 * <xref:blazor/components/integrate-components-into-razor-pages-and-mvc-apps>

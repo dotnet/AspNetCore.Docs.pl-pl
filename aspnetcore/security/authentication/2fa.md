@@ -7,6 +7,7 @@ ms.author: riande
 ms.date: 09/22/2018
 ms.custom: mvc, seodec18
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/2fa
-ms.openlocfilehash: 28aef65234eaf162ba6e18a2594feb575c93b02f
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: e5e606afaf0219f3a0eb7301203b7142a00322be
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019493"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634114"
 ---
 # <a name="two-factor-authentication-with-sms-in-aspnet-core"></a>Uwierzytelnianie dwuskładnikowe za pomocą wiadomości SMS w ASP.NET Core
 
@@ -96,7 +97,7 @@ info: Successfully saved SMSAccountIdentification = 12345 to the secret store.
 **ASPSMS:**  
 [!code-csharp[](2fa/sample/Web2FA/Services/MessageServices_ASPSMS.cs)]
 
-### <a name="configure-startup-to-use-smsoptions"></a>Konfigurowanie uruchamiania do użycia`SMSoptions`
+### <a name="configure-startup-to-use-smsoptions"></a>Konfigurowanie uruchamiania do użycia `SMSoptions`
 
 Dodaj `SMSoptions` do kontenera usługi w `ConfigureServices` metodzie w *Startup.cs*:
 
@@ -146,7 +147,7 @@ Jeśli nie otrzymasz wiadomości tekstowej, zobacz stronę dziennika Twilio.
 
 * Wprowadź kod uzyskany w wiadomości SMS.
 
-* Kliknięcie pola wyboru **Zapamiętaj tę przeglądarkę** spowoduje zwolnienie z używania funkcji 2FA do logowania się w przypadku korzystania z tego samego urządzenia i przeglądarki. Włączenie funkcji 2FA i kliknięcie opcji **Zapamiętaj, że ta przeglądarka** zapewni mocną ochronę funkcji 2FA przed złośliwymi użytkownikami próbującymi uzyskać dostęp do Twojego konta, o ile nie mają dostępu do urządzenia. Można to zrobić na dowolnym używanym przez siebie urządzeniu prywatnym. Dzięki ustawieniu **Zapamiętaj tę przeglądarkę**możesz uzyskać dodatkowe zabezpieczenia funkcji 2FA z urządzeń, które nie są regularnie używane, i uzyskać wygodę, aby nie mieć możliwości przechodzenia przez funkcji 2FA na własne urządzenia.
+* Kliknięcie pola wyboru **Zapamiętaj tę przeglądarkę** spowoduje zwolnienie z używania funkcji 2FA do logowania się w przypadku korzystania z tego samego urządzenia i przeglądarki. Włączenie funkcji 2FA i kliknięcie opcji **Zapamiętaj, że ta przeglądarka** zapewni mocną ochronę funkcji 2FA przed złośliwymi użytkownikami próbującymi uzyskać dostęp do Twojego konta, o ile nie mają dostępu do urządzenia. Można to zrobić na dowolnym używanym przez siebie urządzeniu prywatnym. Dzięki ustawieniu  **Zapamiętaj tę przeglądarkę**możesz uzyskać dodatkowe zabezpieczenia funkcji 2FA z urządzeń, które nie są regularnie używane, i uzyskać wygodę, aby nie mieć możliwości przechodzenia przez funkcji 2FA na własne urządzenia.
 
 ![Weryfikuj widok](2fa/_static/login2fa8.png)
 

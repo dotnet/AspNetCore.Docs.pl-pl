@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: devx-track-csharp, mvc
 ms.date: 07/10/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/publish-to-azure-webapp-using-vs
-ms.openlocfilehash: 1fced12700fcd5910c1484ebb9190c7652b2646e
-ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
+ms.openlocfilehash: 380e18d1826159fa0780909aba58fe8334ede8bb
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/12/2020
-ms.locfileid: "88130707"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631943"
 ---
 # <a name="publish-an-aspnet-core-app-to-azure-with-visual-studio"></a>Publikowanie aplikacji ASP.NET Core na platformie Azure przy użyciu programu Visual Studio
 
@@ -117,7 +118,7 @@ W oknie dialogowym **Publikowanie** wybierz pozycję **Utwórz nowy Azure App Se
 Zostanie wyświetlone okno dialogowe **tworzenie App Service** :
 
 * Pola **Nazwa aplikacji**, **Grupa zasobów**i zapis **planu App Service** są wypełniane. Te nazwy można zachować lub zmienić.
-* Wybierz pozycję **Utwórz**.
+* Wybierz przycisk **Utwórz**.
 
 ![Okno dialogowe Tworzenie usługi App Service](publish-to-azure-webapp-using-vs/_static/newrg1.png)
 
@@ -147,7 +148,7 @@ Zostanie wyświetlona **Azure SQL Database tworzenia** :
 
 * Pola **Nazwa bazy danych**, **Grupa zasobów**, **serwer bazy danych** i zapis **planu App Service** są wypełniane. Te wartości można zachować lub zmienić.
 * Wprowadź **nazwę użytkownika** i **hasło administratora** bazy danych dla wybranego **serwera bazy danych** (Zwróć uwagę na używane konto musi mieć uprawnienia niezbędne do utworzenia nowej bazy danych Azure SQL Database).
-* Wybierz pozycję **Utwórz**.
+* Wybierz przycisk **Utwórz**.
 
 ![Nowe okno dialogowe Azure SQL Database](publish-to-azure-webapp-using-vs/_static/sql_create.png)
 
@@ -196,7 +197,7 @@ Kliknij przycisk **Opublikuj**. Program Visual Studio publikuje aplikację na pl
 
 ![Sprawdzanie, czy zadanie zostało ukończone](publish-to-azure-webapp-using-vs/_static/final.png)
 
-### <a name="clean-up"></a>Czyszczenie zasobów
+### <a name="clean-up"></a>Czyszczenie
 
 Po zakończeniu testowania aplikacji przejdź do [Azure Portal](https://portal.azure.com/) i Usuń aplikację.
 
@@ -214,7 +215,7 @@ Po zakończeniu testowania aplikacji przejdź do [Azure Portal](https://portal.a
 
 * <xref:host-and-deploy/azure-apps/azure-continuous-deployment>
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * Aby uzyskać Visual Studio Code, zobacz temat [Publikowanie profilów](xref:host-and-deploy/visual-studio-publish-profiles#publish-profiles).
 * [Azure App Service](/azure/app-service/app-service-web-overview)

@@ -1,10 +1,11 @@
 ---
-title: Uwierzytelnianie w serwisach Facebook, Google i dostawcy zewnętrznym bez ASP.NET CoreIdentity
+title: Uwierzytelnianie w serwisach Facebook, Google i dostawcy zewnętrznym bez ASP.NET Core Identity
 author: rick-anderson
 description: Wyjaśnienie dotyczące korzystania z usługi Facebook, Google, Twitter itp. i uwierzytelniania użytkownika konta bez ASP.NET Core Identity .
 ms.author: riande
 ms.date: 12/10/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,22 +16,22 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/social/social-without-identity
-ms.openlocfilehash: 73055a262ac69c0fd6a7f59e77d23121e71ea3dd
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: a91a2f2fb7873e5a672c624e9cf863ae720c8005
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021669"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634231"
 ---
-# <a name="use-social-sign-in-provider-authentication-without-aspnet-core-no-locidentity"></a>Korzystanie z uwierzytelniania przy użyciu dostawcy logowania społecznego bez ASP.NET CoreIdentity
+# <a name="use-social-sign-in-provider-authentication-without-no-locaspnet-core-identity"></a>Korzystanie z uwierzytelniania przy użyciu dostawcy logowania społecznego bez ASP.NET Core Identity
 
 Autorzy [Kirka Larkin](https://twitter.com/serpent5) i [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 ::: moniker range=">= aspnetcore-3.0"
 
-<xref:security/authentication/social/index>Opisuje, jak umożliwić użytkownikom logowanie się przy użyciu protokołu OAuth 2,0 z poświadczeniami od zewnętrznych dostawców uwierzytelniania. Podejście opisane w tym temacie zawiera ASP.NET Core Identity jako dostawcę uwierzytelniania.
+<xref:security/authentication/social/index> Opisuje, jak umożliwić użytkownikom logowanie się przy użyciu protokołu OAuth 2,0 z poświadczeniami od zewnętrznych dostawców uwierzytelniania. Podejście opisane w tym temacie obejmuje ASP.NET Core Identity jako dostawcę uwierzytelniania.
 
-Ten przykład pokazuje, jak używać zewnętrznego dostawcy uwierzytelniania **bez** ASP.NET Core Identity . Jest to przydatne w przypadku aplikacji, które nie wymagają wszystkich funkcji ASP.NET Core Identity , ale nadal wymagają integracji z zaufanym dostawcą uwierzytelniania zewnętrznego.
+Ten przykład pokazuje, jak używać zewnętrznego dostawcy uwierzytelniania **bez** ASP.NET Core Identity . Jest to przydatne w przypadku aplikacji, które nie wymagają wszystkich funkcji programu ASP.NET Core Identity , ale nadal wymagają integracji z zaufanym dostawcą uwierzytelniania zewnętrznego.
 
 Ten przykład używa [uwierzytelniania Google](xref:security/authentication/google-logins) do uwierzytelniania użytkowników. Korzystanie z usługi Google Authentication przenosi wiele złożoności zarządzania procesem logowania do usługi Google. Aby zintegrować z innym zewnętrznym dostawcą uwierzytelniania, zapoznaj się z następującymi tematami:
 
@@ -39,7 +40,7 @@ Ten przykład używa [uwierzytelniania Google](xref:security/authentication/goog
 * [Uwierzytelnianie przy użyciu usługi Twitter](xref:security/authentication/twitter-logins)
 * [Inni dostawcy](xref:security/authentication/otherlogins)
 
-## <a name="configuration"></a>Konfiguracja
+## <a name="configuration"></a>Konfigurowanie
 
 W tej `ConfigureServices` metodzie Skonfiguruj schematy uwierzytelniania aplikacji przy użyciu <xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication*> <xref:Microsoft.Extensions.DependencyInjection.CookieExtensions.AddCookie*> metod, i <xref:Microsoft.Extensions.DependencyInjection.GoogleExtensions.AddGoogle*> :
 
@@ -53,7 +54,7 @@ Wywołanie <xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceC
 * <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignInAsync*>
 * <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignOutAsync*>
 
-Ustawienie aplikacji `DefaultScheme` na [ Cookie AuthenticationDefaults. AuthenticationScheme](xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme) (" Cookie s") spowoduje skonfigurowanie aplikacji do użycia Cookie jako schemat domyślny dla tych metod rozszerzających. Ustawienie aplikacji <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions.DefaultChallengeScheme> na [GoogleDefaults. AuthenticationScheme](xref:Microsoft.AspNetCore.Authentication.Google.GoogleDefaults.AuthenticationScheme) ("Google") spowoduje skonfigurowanie aplikacji do korzystania z usługi Google jako domyślnego schematu dla wywołań usługi `ChallengeAsync` . `DefaultChallengeScheme`zastąpień `DefaultScheme` . Zobacz <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions> , aby uzyskać dodatkowe właściwości, które przesłonić, `DefaultScheme` gdy ustawione.
+Ustawienie aplikacji `DefaultScheme` na [ Cookie AuthenticationDefaults. AuthenticationScheme](xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme) (" Cookie s") spowoduje skonfigurowanie aplikacji do użycia Cookie jako schemat domyślny dla tych metod rozszerzających. Ustawienie aplikacji <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions.DefaultChallengeScheme> na [GoogleDefaults. AuthenticationScheme](xref:Microsoft.AspNetCore.Authentication.Google.GoogleDefaults.AuthenticationScheme) ("Google") spowoduje skonfigurowanie aplikacji do korzystania z usługi Google jako domyślnego schematu dla wywołań usługi `ChallengeAsync` . `DefaultChallengeScheme` zastąpień `DefaultScheme` . Zobacz <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions> , aby uzyskać dodatkowe właściwości, które przesłonić, `DefaultScheme` gdy ustawione.
 
 W `Startup.Configure` , wywołaj `UseAuthentication` i `UseAuthorization` między wywołaniem `UseRouting` i `UseEndpoints` . Ustawia `HttpContext.User` Właściwość i uruchamia oprogramowanie pośredniczące autoryzacji dla żądań:
 
@@ -75,7 +76,7 @@ Aby wylogować bieżącego użytkownika i usunąć jego cookie , wywołaj [SignO
 
 Zwróć uwagę, że wywołanie metody nie `SignOutAsync` określa schematu uwierzytelniania. Aplikacja `DefaultScheme` `CookieAuthenticationDefaults.AuthenticationScheme` jest używana jako wraca.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:security/authorization/simple>
 * <xref:security/authentication/social/additional-claims>
@@ -83,9 +84,9 @@ Zwróć uwagę, że wywołanie metody nie `SignOutAsync` określa schematu uwier
 ::: moniker-end
 ::: moniker range="< aspnetcore-3.0"
 
-<xref:security/authentication/social/index>Opisuje, jak umożliwić użytkownikom logowanie się przy użyciu protokołu OAuth 2,0 z poświadczeniami od zewnętrznych dostawców uwierzytelniania. Podejście opisane w tym temacie zawiera ASP.NET Core Identity jako dostawcę uwierzytelniania.
+<xref:security/authentication/social/index> Opisuje, jak umożliwić użytkownikom logowanie się przy użyciu protokołu OAuth 2,0 z poświadczeniami od zewnętrznych dostawców uwierzytelniania. Podejście opisane w tym temacie obejmuje ASP.NET Core Identity jako dostawcę uwierzytelniania.
 
-Ten przykład pokazuje, jak używać zewnętrznego dostawcy uwierzytelniania **bez** ASP.NET Core Identity . Jest to przydatne w przypadku aplikacji, które nie wymagają wszystkich funkcji ASP.NET Core Identity , ale nadal wymagają integracji z zaufanym dostawcą uwierzytelniania zewnętrznego.
+Ten przykład pokazuje, jak używać zewnętrznego dostawcy uwierzytelniania **bez** ASP.NET Core Identity . Jest to przydatne w przypadku aplikacji, które nie wymagają wszystkich funkcji programu ASP.NET Core Identity , ale nadal wymagają integracji z zaufanym dostawcą uwierzytelniania zewnętrznego.
 
 Ten przykład używa [uwierzytelniania Google](xref:security/authentication/google-logins) do uwierzytelniania użytkowników. Korzystanie z usługi Google Authentication przenosi wiele złożoności zarządzania procesem logowania do usługi Google. Aby zintegrować z innym zewnętrznym dostawcą uwierzytelniania, zapoznaj się z następującymi tematami:
 
@@ -94,7 +95,7 @@ Ten przykład używa [uwierzytelniania Google](xref:security/authentication/goog
 * [Uwierzytelnianie przy użyciu usługi Twitter](xref:security/authentication/twitter-logins)
 * [Inni dostawcy](xref:security/authentication/otherlogins)
 
-## <a name="configuration"></a>Konfiguracja
+## <a name="configuration"></a>Konfigurowanie
 
 W tej `ConfigureServices` metodzie Skonfiguruj schematy uwierzytelniania aplikacji przy użyciu `AddAuthentication` `AddCookie` metod, i `AddGoogle` :
 
@@ -108,7 +109,7 @@ Wywołanie metody [addauthentication](/dotnet/api/microsoft.extensions.dependenc
 * <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignInAsync*>
 * <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignOutAsync*>
 
-Ustawienie aplikacji `DefaultScheme` na [ Cookie AuthenticationDefaults. AuthenticationScheme](xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme) (" Cookie s") spowoduje skonfigurowanie aplikacji do użycia Cookie jako schemat domyślny dla tych metod rozszerzających. Ustawienie aplikacji <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions.DefaultChallengeScheme> na [GoogleDefaults. AuthenticationScheme](xref:Microsoft.AspNetCore.Authentication.Google.GoogleDefaults.AuthenticationScheme) ("Google") spowoduje skonfigurowanie aplikacji do korzystania z usługi Google jako domyślnego schematu dla wywołań usługi `ChallengeAsync` . `DefaultChallengeScheme`zastąpień `DefaultScheme` . Zobacz <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions> , aby uzyskać dodatkowe właściwości, które przesłonić, `DefaultScheme` gdy ustawione.
+Ustawienie aplikacji `DefaultScheme` na [ Cookie AuthenticationDefaults. AuthenticationScheme](xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme) (" Cookie s") spowoduje skonfigurowanie aplikacji do użycia Cookie jako schemat domyślny dla tych metod rozszerzających. Ustawienie aplikacji <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions.DefaultChallengeScheme> na [GoogleDefaults. AuthenticationScheme](xref:Microsoft.AspNetCore.Authentication.Google.GoogleDefaults.AuthenticationScheme) ("Google") spowoduje skonfigurowanie aplikacji do korzystania z usługi Google jako domyślnego schematu dla wywołań usługi `ChallengeAsync` . `DefaultChallengeScheme` zastąpień `DefaultScheme` . Zobacz <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions> , aby uzyskać dodatkowe właściwości, które przesłonić, `DefaultScheme` gdy ustawione.
 
 W `Configure` metodzie Wywołaj `UseAuthentication` metodę, aby wywołać oprogramowanie pośredniczące uwierzytelniania, które ustawia `HttpContext.User` Właściwość. Wywołaj `UseAuthentication` metodę przed wywołaniem `UseMvcWithDefaultRoute` lub `UseMvc` :
 

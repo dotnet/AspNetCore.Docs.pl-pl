@@ -5,6 +5,7 @@ description: Dowiedz się, jak używać interfejsów API ochrony danych ASP.NET 
 ms.author: riande
 ms.date: 11/12/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/using-data-protection
-ms.openlocfilehash: 0d088e0e974742e51d9ca39a5cec5b84b46f5d21
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: bfe1dc800f65eaca00bb1dd145d6ecc4159b783f
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022436"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631683"
 ---
 # <a name="get-started-with-the-data-protection-apis-in-aspnet-core"></a>Wprowadzenie do interfejsów API ochrony danych w ASP.NET Core
 

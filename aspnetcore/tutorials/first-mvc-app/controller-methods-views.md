@@ -5,6 +5,7 @@ description: Część 6 Dodaj model do aplikacji ASP.NET Core MVC
 ms.author: riande
 ms.date: 12/13/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/controller-methods-views
-ms.openlocfilehash: b5b54adb1d86e4ab982647dc8207839cc9afdac9
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 07b67cd7c267c39b99277114b73642b5caa3e312
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021071"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88632840"
 ---
 # <a name="part-6-controller-methods-and-views-in-aspnet-core"></a>Część 6, metody kontrolera i widoki w ASP.NET Core
 
@@ -110,7 +111,7 @@ Ten `ValidateAntiForgeryToken` atrybut służy do [zapobiegania fałszerstwu ż�
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Movies/Edit.cshtml?range=9)]
 
-[Pomocnik tagu formularza](xref:mvc/views/working-with-forms) generuje ukryty token chroniący przed fałszerstwem, który musi być zgodny z `[ValidateAntiForgeryToken]` wygenerowanym tokenem chroniącym przed fałszerstwem w `Edit` metodzie kontrolera filmów. Aby uzyskać więcej informacji, zobacz [zabezpieczenia przed fałszowaniem](xref:security/anti-request-forgery).
+[Pomocnik tagu formularza](xref:mvc/views/working-with-forms) generuje ukryty token chroniący przed fałszerstwem, który musi być zgodny z `[ValidateAntiForgeryToken]` wygenerowanym tokenem chroniącym przed fałszerstwem w `Edit` metodzie kontrolera filmów. Aby uzyskać więcej informacji, zobacz <xref:security/anti-request-forgery>.
 
 `HttpGet Edit`Metoda przyjmuje `ID` parametr filmu, wyszukuje film przy użyciu metody Entity Framework `FindAsync` i zwraca wybrany film do widoku edycji. Jeśli nie można znaleźć filmu, `NotFound` zwracany jest (HTTP 404).
 
@@ -120,7 +121,7 @@ Gdy system szkieletu utworzył widok edycji, zbadał `Movie` klasę i utworzony 
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/EditOriginal.cshtml)]
 
-Zwróć uwagę, jak szablon widoku zawiera `@model MvcMovie.Models.Movie` instrukcję w górnej części pliku. `@model MvcMovie.Models.Movie`Określa, że widok oczekuje modelu dla szablonu widoku, który ma być typu `Movie` .
+Zwróć uwagę, jak szablon widoku zawiera `@model MvcMovie.Models.Movie` instrukcję w górnej części pliku. `@model MvcMovie.Models.Movie` Określa, że widok oczekuje modelu dla szablonu widoku, który ma być typu `Movie` .
 
 Kod szkieletowy używa kilku metod pomocnika tagów do uproszczenia znacznika HTML. [Pomocnik tagu etykiety](xref:mvc/views/working-with-forms) wyświetla nazwę pola ("title", "ReleaseDate", "gatunek" lub "price"). [Pomocnik tagu wejściowego](xref:mvc/views/working-with-forms) renderuje `<input>` element HTML. [Pomocnik tagów walidacji](xref:mvc/views/working-with-forms) wyświetla wszystkie komunikaty weryfikacyjne skojarzone z tą właściwością.
 
@@ -156,12 +157,12 @@ Przed opublikowaniem formularza na serwerze sprawdzanie poprawności po stronie 
 
 Wszystkie `HttpGet` metody w kontrolerze filmu są zgodne z podobnym wzorcem. Uzyskują one obiekt filmu (lub listę obiektów w przypadku `Index` ) i przekazują obiekt (model) do widoku. `Create`Metoda przekazuje pusty obiekt filmu do `Create` widoku. Wszystkie metody, które tworzą, edytują, usuwają lub w inny sposób modyfikują dane, to w ramach `[HttpPost]` przeciążenia metody. Modyfikowanie danych w `HTTP GET` metodzie stanowi zagrożenie bezpieczeństwa. Modyfikowanie danych w `HTTP GET` metodzie również narusza najlepsze rozwiązania protokołu HTTP i wzorzec [rest](http://rest.elkstein.org/) architektury, który określa, że żądania GET nie powinny zmieniać stanu aplikacji. Innymi słowy wykonanie operacji GET powinno być operacją bezpieczną, która nie ma efektów ubocznych i nie modyfikuje utrwalonych danych.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Globalizacja i lokalizacja](xref:fundamentals/localization)
 * [Wprowadzenie do pomocy tagów](xref:mvc/views/tag-helpers/intro)
 * [Autorzy tagów](xref:mvc/views/tag-helpers/authoring)
-* [Zabezpieczenia przed fałszerstwem żądania](xref:security/anti-request-forgery)
+* <xref:security/anti-request-forgery>
 * Chroń kontroler przed [nadmiernym publikowaniem](/aspnet/mvc/overview/getting-started/getting-started-with-ef-using-mvc/implementing-basic-crud-functionality-with-the-entity-framework-in-asp-net-mvc-application)
 * [Modele widoków](https://rachelappel.com/use-viewmodels-to-manage-data-amp-organize-code-in-asp-net-mvc-applications/)
 * [Pomocnik tagu formularza](xref:mvc/views/working-with-forms)

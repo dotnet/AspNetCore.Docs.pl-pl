@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 02/12/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/choose-between-aspnet-and-aspnetcore
-ms.openlocfilehash: 29596f1d974d585570af5ad686ff6be4b1f9b837
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: e0b0311622a841183433363a55fcf33e22b6b115
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88017496"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633477"
 ---
 # <a name="choose-between-aspnet-4x-and-aspnet-core"></a>Wybierz między ASP.NET 4. x i ASP.NET Core
 
@@ -66,7 +67,7 @@ Aby uzyskać informacje na temat obsługi programu ASP.NET Core 2. x w systemie 
 * [Przesyłanie w czasie rzeczywistym](/aspnet/signalr)
 * [Tworzenie aplikacji sieci Web ASP.NET 4. x na platformie Azure](/azure/app-service/app-service-web-get-started-dotnet-framework)
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Wprowadzenie do platformy ASP.NET](/aspnet/overview)
 * [Wprowadzenie do programu ASP.NET Core](xref:index)

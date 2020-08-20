@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-2.1
-ms.openlocfilehash: 3fb524748b9e2aa2c12b64f67a7960c4f0f911b0
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: d10fd89a3eac34e855ba92673033edc541aa6393
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021162"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88632411"
 ---
 # <a name="whats-new-in-aspnet-core-21"></a>Co nowego w ASP.NET Core 2,1
 
@@ -29,7 +30,7 @@ W tym artykule przedstawiono najbardziej znaczące zmiany w ASP.NET Core 2,1 z l
 
 ## SignalR
 
-SignalRzostał ponownie zapisany dla ASP.NET Core 2,1. ASP.NET Core SignalR obejmuje kilka ulepszeń:
+SignalR został ponownie zapisany dla ASP.NET Core 2,1. ASP.NET Core SignalR obejmuje kilka ulepszeń:
 
 * Uproszczony model skalowalny w poziomie.
 * Nowy klient JavaScript bez zależności jQuery.
@@ -40,7 +41,7 @@ SignalRzostał ponownie zapisany dla ASP.NET Core 2,1. ASP.NET Core SignalR obej
 
 Aby uzyskać więcej informacji, [zobacz SignalR ASP.NET Core ](xref:signalr/introduction).
 
-## <a name="no-locrazor-class-libraries"></a>Razorbiblioteki klas
+## <a name="no-locrazor-class-libraries"></a>Razor biblioteki klas
 
 ASP.NET Core 2,1 ułatwia tworzenie i dołączanie Razor interfejsu użytkownika opartego na interfejsie w bibliotece i udostępnianie go w wielu projektach. Nowy Razor zestaw SDK umożliwia tworzenie Razor plików w projekcie biblioteki klas, który można spakować do pakietu NuGet. Widoki i strony w bibliotekach są automatycznie odnajdywane i mogą zostać zastąpione przez aplikację. Przez integrację kompilacji Razor z kompilacją:
 
@@ -49,9 +50,9 @@ ASP.NET Core 2,1 ułatwia tworzenie i dołączanie Razor interfejsu użytkownika
 
 Aby uzyskać więcej informacji, zobacz [Tworzenie interfejsu użytkownika wielokrotnego użytku przy użyciu Razor biblioteki klas](xref:razor-pages/ui-class).
 
-## <a name="no-locidentity-ui-library--scaffolding"></a>IdentityTworzenie szkieletu & biblioteki interfejsu użytkownika
+## <a name="no-locidentity-ui-library--scaffolding"></a>Identity Tworzenie szkieletu & biblioteki interfejsu użytkownika
 
-ASP.NET Core 2,1 zapewnia [ASP.NET Core Identity ](xref:security/authentication/identity) jako [ Razor bibliotekę klas](xref:razor-pages/ui-class). Aplikacje, które obejmują, Identity mogą zastosować nowy Identity szkielet, aby selektywnie dodać kod źródłowy znajdujący się w Identity Razor bibliotece klas (RCL). Może być konieczne wygenerowanie kodu źródłowego, aby można było zmodyfikować kod i zmienić zachowanie. Na przykład możesz poinstruować szkielet, aby wygenerował kod używany w rejestracji. Wygenerowany kod ma pierwszeństwo przed tym samym kodem w Identity RCL.
+ASP.NET Core 2,1 stanowi [ASP.NET Core Identity](xref:security/authentication/identity) [ Razor bibliotekę klas](xref:razor-pages/ui-class). Aplikacje, które obejmują, Identity mogą zastosować nowy Identity szkielet, aby selektywnie dodać kod źródłowy znajdujący się w Identity Razor bibliotece klas (RCL). Może być konieczne wygenerowanie kodu źródłowego, aby można było zmodyfikować kod i zmienić zachowanie. Na przykład możesz poinstruować szkielet, aby wygenerował kod używany w rejestracji. Wygenerowany kod ma pierwszeństwo przed tym samym kodem w Identity RCL.
 
 Aplikacje, które **nie** obejmują uwierzytelniania, mogą zastosować Identity szkieleter w celu dodania Identity pakietu RCL. Dostępna jest opcja wybierania Identity kodu do wygenerowania.
 
@@ -126,13 +127,13 @@ Aby uzyskać więcej informacji, zobacz temat [testy integracji](xref:test/integ
 
 ## <a name="apicontroller-actionresultt"></a>[ApiController], ActionResult\<T>
 
-ASP.NET Core 2,1 dodaje nowe konwencje programowania, które ułatwiają tworzenie czystych i opisowych interfejsów API sieci Web. `ActionResult<T>`to nowy typ, który został dodany, aby umożliwić aplikacji zwracanie typu odpowiedzi lub dowolnego innego wyniku akcji (podobnego do IActionResult), przy czym wskazuje typ odpowiedzi. `[ApiController]`Atrybut został również dodany jako sposób, aby można było wyrazić zgodę na konwencje i zachowania specyficzne dla interfejsu API sieci Web.
+ASP.NET Core 2,1 dodaje nowe konwencje programowania, które ułatwiają tworzenie czystych i opisowych interfejsów API sieci Web. `ActionResult<T>` to nowy typ, który został dodany, aby umożliwić aplikacji zwracanie typu odpowiedzi lub dowolnego innego wyniku akcji (podobnego do IActionResult), przy czym wskazuje typ odpowiedzi. `[ApiController]`Atrybut został również dodany jako sposób, aby można było wyrazić zgodę na konwencje i zachowania specyficzne dla interfejsu API sieci Web.
 
 Aby uzyskać więcej informacji, zobacz [Tworzenie internetowych interfejsów API za pomocą ASP.NET Core](xref:web-api/index).
 
 ## <a name="ihttpclientfactory"></a>IHttpClientFactory
 
-ASP.NET Core 2,1 obejmuje nową `IHttpClientFactory` usługę, która ułatwia konfigurowanie i używanie wystąpień `HttpClient` w aplikacjach. `HttpClient`ma już koncepcję delegowania programów obsługi, które mogą być połączone ze sobą w przypadku wychodzących żądań HTTP. Fabryka:
+ASP.NET Core 2,1 obejmuje nową `IHttpClientFactory` usługę, która ułatwia konfigurowanie i używanie wystąpień `HttpClient` w aplikacjach. `HttpClient` ma już koncepcję delegowania programów obsługi, które mogą być połączone ze sobą w przypadku wychodzących żądań HTTP. Fabryka:
 
 * Sprawia, że rejestrowanie wystąpień `HttpClient` na nazwę klienta jest bardziej intuicyjne.
 * Implementuje procedurę obsługi Polly, która umożliwia używanie zasad Polly do ponawiania, CircuitBreakers itd.
@@ -161,7 +162,7 @@ Aby uzyskać więcej informacji, zobacz:
 * <xref:spa/react>
 * <xref:spa/react-with-redux>
 
-## <a name="no-locrazor-pages-search-for-no-locrazor-assets"></a>RazorStrony szukają Razor elementów zawartości
+## <a name="no-locrazor-pages-search-for-no-locrazor-assets"></a>Razor Strony szukają Razor elementów zawartości
 
 W 2,1 Razor strony szukają Razor zasobów (takich jak układy i części) w następujących katalogach w podanej kolejności:
 
@@ -169,9 +170,9 @@ W 2,1 Razor strony szukają Razor zasobów (takich jak układy i części) w nas
 1. */Pages/Shared/*
 1. */Views/Shared/*
 
-## <a name="no-locrazor-pages-in-an-area"></a>RazorStrony w obszarze
+## <a name="no-locrazor-pages-in-an-area"></a>Razor Strony w obszarze
 
-RazorStrony obsługują teraz [obszary](xref:mvc/controllers/areas). Aby zobaczyć przykład obszarów, Utwórz nową Razor aplikację sieci Web dla poszczególnych kont użytkowników. RazorAplikacja internetowa stron z pojedynczymi kontami użytkowników zawiera */Areas/ Identity /Pages*.
+Razor Strony obsługują teraz [obszary](xref:mvc/controllers/areas). Aby zobaczyć przykład obszarów, Utwórz nową Razor aplikację sieci Web dla poszczególnych kont użytkowników. RazorAplikacja internetowa stron z pojedynczymi kontami użytkowników zawiera */Areas/ Identity /Pages*.
 
 ## <a name="mvc-compatibility-version"></a>Wersja zgodności MVC
 

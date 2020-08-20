@@ -1,5 +1,5 @@
 ---
-title: Używanie przesyłania strumieniowego w ASP.NET CoreSignalR
+title: Używanie przesyłania strumieniowego w ASP.NET Core SignalR
 author: bradygaster
 description: Dowiedz się, jak przesyłać strumieniowo dane między klientem a serwerem.
 monikerRange: '>= aspnetcore-2.1'
@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,14 +18,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/streaming
-ms.openlocfilehash: e0eabe711fd69e42bd9bfa5e03a92e1df780e4db
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 29748ebe24fea03415b5a01b21300433e3fbc0f0
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022514"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634218"
 ---
-# <a name="use-streaming-in-aspnet-core-no-locsignalr"></a>Używanie przesyłania strumieniowego w ASP.NET CoreSignalR
+# <a name="use-streaming-in-aspnet-core-no-locsignalr"></a>Używanie przesyłania strumieniowego w ASP.NET Core SignalR
 
 Autor [Brennan Conroy](https://github.com/BrennanConroy)
 
@@ -269,7 +270,7 @@ Klienci języka JavaScript wywołują metody przesyłania strumieniowego z serwe
 * Nazwa metody centrum. W poniższym przykładzie nazwa metody centrum to `Counter` .
 * Argumenty zdefiniowane w metodzie centrum. W poniższym przykładzie argumenty są liczbami elementów strumienia do odebrania oraz opóźnieniem między elementami strumienia.
 
-`connection.stream`Zwraca element `IStreamResult` , który zawiera `subscribe` metodę. Przekaż `IStreamSubscriber` do `subscribe` i ustaw `next` `error` `complete` wywołania zwrotne, i, aby otrzymywać powiadomienia z `stream` wywołania.
+`connection.stream` Zwraca element `IStreamResult` , który zawiera `subscribe` metodę. Przekaż `IStreamSubscriber` do `subscribe` i ustaw `next` `error` `complete` wywołania zwrotne, i, aby otrzymywać powiadomienia z `stream` wywołania.
 
 ::: moniker range=">= aspnetcore-2.2"
 
@@ -303,7 +304,7 @@ Aby zakończyć strumień, wywołaj polecenie `subject.complete()` .
 
 ### <a name="server-to-client-streaming"></a>Przesyłanie strumieniowe między serwerami i klientami
 
-SignalRKlient Java używa `stream` metody do wywoływania metod przesyłania strumieniowego. `stream`akceptuje trzy lub więcej argumentów:
+SignalRKlient Java używa `stream` metody do wywoływania metod przesyłania strumieniowego. `stream` akceptuje trzy lub więcej argumentów:
 
 * Oczekiwany typ elementów strumienia.
 * Nazwa metody centrum.
@@ -321,9 +322,9 @@ hubConnection.stream(String.class, "ExampleStreamingHubMethod", "Arg1")
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
-* [Centra](xref:signalr/hubs)
+* [Koncentratory](xref:signalr/hubs)
 * [Klient .NET](xref:signalr/dotnet-client)
 * [Klient JavaScript](xref:signalr/javascript-client)
 * [Publikowanie na platformie Azure](xref:signalr/publish-to-azure-web-app)

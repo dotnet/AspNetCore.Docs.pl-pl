@@ -5,6 +5,7 @@ description: Poznaj szczegóły implementacji nagłówków kontekstu ochrony dan
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/implementation/context-headers
-ms.openlocfilehash: 572f930dbf78aaef1ed47d1a154b5ba56633b4f1
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 2f07db4b7d8bca9f64aee5d60e88fc92dc8965eb
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018822"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633711"
 ---
 # <a name="context-headers-in-aspnet-core"></a>Nagłówki kontekstu w ASP.NET Core
 
@@ -95,15 +96,15 @@ DB 6F D4 79 11 84 B9 96 09 2E E1 20 2F 36 E8 60
 
 Ten nagłówek kontekstu jest odciskiem palca uwierzytelnionej pary algorytmu szyfrowania (AES-192-CBC Encryption + HMACSHA256 Validation). Składniki, zgodnie z [powyższym](xref:security/data-protection/implementation/context-headers#data-protection-implementation-context-headers-cbc-components) opisem, to:
 
-* znacznik`(00 00)`
+* znacznik `(00 00)`
 
-* Długość klucza szyfrowania bloku`(00 00 00 18)`
+* Długość klucza szyfrowania bloku `(00 00 00 18)`
 
-* rozmiar bloku szyfrowania bloku`(00 00 00 10)`
+* rozmiar bloku szyfrowania bloku `(00 00 00 10)`
 
-* Długość klucza HMAC`(00 00 00 20)`
+* Długość klucza HMAC `(00 00 00 20)`
 
-* rozmiar podsumowania HMAC`(00 00 00 20)`
+* rozmiar podsumowania HMAC `(00 00 00 20)`
 
 * blokowe szyfrowanie danych wyjściowych szyfrowania `(F4 74 - DB 6F)` i
 
@@ -140,15 +141,15 @@ Spowoduje to utworzenie pełnego nagłówka kontekstu, który jest odciskiem pal
 
 Składniki są podzielone w następujący sposób:
 
-* znacznik`(00 00)`
+* znacznik `(00 00)`
 
-* Długość klucza szyfrowania bloku`(00 00 00 18)`
+* Długość klucza szyfrowania bloku `(00 00 00 18)`
 
-* rozmiar bloku szyfrowania bloku`(00 00 00 08)`
+* rozmiar bloku szyfrowania bloku `(00 00 00 08)`
 
-* Długość klucza HMAC`(00 00 00 14)`
+* Długość klucza HMAC `(00 00 00 14)`
 
-* rozmiar podsumowania HMAC`(00 00 00 14)`
+* rozmiar podsumowania HMAC `(00 00 00 14)`
 
 * blokowe szyfrowanie danych wyjściowych szyfrowania `(AB B1 - E1 0E)` i
 
@@ -170,7 +171,7 @@ Nagłówek kontekstu składa się z następujących składników:
 
 * [128 bitów] Tag `Enc_GCM (K_E, nonce, "")` , który jest wyjściem algorytmu szyfrowania bloku symetrycznego, z uwzględnieniem pustego ciągu wejściowego i gdzie nonce to 96-bit All-zero Vector.
 
-`K_E`jest tworzony przy użyciu takiego samego mechanizmu jak w scenariuszu uwierzytelniania CBC Encryption + HMAC. Jednak ponieważ nie ma nic `K_H` w tym miejscu, firma Microsoft ma głównie `| K_H | = 0` , a algorytm jest zwijany do poniższego formularza.
+`K_E` jest tworzony przy użyciu takiego samego mechanizmu jak w scenariuszu uwierzytelniania CBC Encryption + HMAC. Jednak ponieważ nie ma nic `K_H` w tym miejscu, firma Microsoft ma głównie `| K_H | = 0` , a algorytm jest zwijany do poniższego formularza.
 
 `K_E = SP800_108_CTR(prf = HMACSHA512, key = "", label = "", context = "")`
 
@@ -194,13 +195,13 @@ BE 45
 
 Składniki są podzielone w następujący sposób:
 
-* znacznik`(00 01)`
+* znacznik `(00 01)`
 
-* Długość klucza szyfrowania bloku`(00 00 00 20)`
+* Długość klucza szyfrowania bloku `(00 00 00 20)`
 
-* rozmiar nonce`(00 00 00 0C)`
+* rozmiar nonce `(00 00 00 0C)`
 
-* rozmiar bloku szyfrowania bloku`(00 00 00 10)`
+* rozmiar bloku szyfrowania bloku `(00 00 00 10)`
 
 * rozmiar znacznika uwierzytelniania `(00 00 00 10)` i
 

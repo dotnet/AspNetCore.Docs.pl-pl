@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/03/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/samesite/mvc21
-ms.openlocfilehash: 4285432d48ba11b5069d109c5667192a99fe115e
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 0a719ae48199f7854ded534446045eb304d4d9f0
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021786"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88632359"
 ---
 # <a name="aspnet-core-21-mvc-samesite-no-loccookie-sample"></a>Przykład ASP.NET Core SameSite 2,1 MVC cookie
 
@@ -56,7 +57,7 @@ Response.Cookies.Append(CookieName, "cookieValue", cookieOptions);
 
 ## <a name="setting-no-loccookie-authentication-and-session-state-no-loccookies"></a>Ustawianie Cookie stanu uwierzytelniania i sesji cookie
 
-Cookieuwierzytelnianie, stan sesji i [różne inne składniki](https://docs.microsoft.com/aspnet/core/security/samesite?view=aspnetcore-2.1) ustawiają opcje sameSiteymi za pomocą Cookie opcji, na przykład
+Cookie uwierzytelnianie, stan sesji i [różne inne składniki](https://docs.microsoft.com/aspnet/core/security/samesite?view=aspnetcore-2.1) ustawiają opcje sameSiteymi za pomocą Cookie opcji, na przykład
 
 ```c#
 services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -89,7 +90,7 @@ Po kliknięciu przycisku "Utwórz SameSite" w powyższym obrazie można zobaczy�
 
 W celu przechwycenia elementu cookie s, aby dostosować wartość Brak zgodnie z obsługą agenta przeglądarki użytkownika, należy użyć `CookiePolicy` oprogramowania pośredniczącego. Ta wartość musi być umieszczona w potoku żądania HTTP **przed** wszelkimi składnikami, które zapisują cookie i konfigurują w ramach `ConfigureServices()` .
 
-Aby wstawić go do użycia potoku `app.UseCookiePolicy()` w `Configure(IApplicationBuilder, IHostingEnvironment)` metodzie w [Startup.cs](https://github.com/blowdart/AspNetSameSiteSamples/blob/master/AspNetCore21MVC/Startup.cs). Przykład:
+Aby wstawić go do użycia potoku `app.UseCookiePolicy()` w `Configure(IApplicationBuilder, IHostingEnvironment)` metodzie w [Startup.cs](https://github.com/blowdart/AspNetSameSiteSamples/blob/master/AspNetCore21MVC/Startup.cs). Na przykład:
 
 ```c#
 public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -119,7 +120,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 }
 ```
 
-Następnie w obszarze `ConfigureServices(IServiceCollection services)` Konfigurowanie cookie zasad do wywołania klasy pomocnika, gdy cookie s są dołączane lub usuwane. Przykład:
+Następnie w obszarze `ConfigureServices(IServiceCollection services)` Konfigurowanie cookie zasad do wywołania klasy pomocnika, gdy cookie s są dołączane lub usuwane. Na przykład:
 
 ```c#
 public void ConfigureServices(IServiceCollection services)
@@ -153,7 +154,7 @@ Funkcja pomocnika `CheckSameSite(HttpContext, CookieOptions)` :
 * Jest wywoływana, gdy cookie s jest dołączany do żądania lub usuwany z żądania.
 * Sprawdza, czy `SameSite` Właściwość jest ustawiona na `None` .
 * Jeśli `SameSite` jest ustawiona na `None` , a bieżący agent użytkownika jest znany jako nieobsługujący wartości atrybutu none. Sprawdzanie jest wykonywane przy użyciu klasy [SameSiteSupport](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/samesite/sample/snippets/SameSiteSupport.cs) :
-  * Ustawia, `SameSite` aby nie emitować wartości przez ustawienie właściwości na`(SameSiteMode)(-1)`
+  * Ustawia, `SameSite` aby nie emitować wartości przez ustawienie właściwości na `(SameSiteMode)(-1)`
 
 ## <a name="targeting-net-framework"></a>.NET Framework określania wartości docelowej
 

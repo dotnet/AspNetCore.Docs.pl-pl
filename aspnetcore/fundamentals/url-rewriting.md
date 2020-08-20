@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/16/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/url-rewriting
-ms.openlocfilehash: 9f7eb15271a0b7adb3964b4fe039497bda7fef08
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: a1d31428945adade6748185c17d42ef60a61b5dc
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88016547"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631709"
 ---
 # <a name="url-rewriting-middleware-in-aspnet-core"></a>Ponowne zapisywanie przez adres URL oprogramowania pośredniczącego w ASP.NET Core
 
@@ -85,7 +86,7 @@ Używaj ponownego zapisywania adresów URL, gdy nie możesz użyć następujący
 * [Moduł Apache mod_rewrite na serwerze Apache](https://httpd.apache.org/docs/2.4/rewrite/)
 * [Ponowne zapisywanie adresów URL w witrynie Nginx](https://www.nginx.com/blog/creating-nginx-rewrite-rules/)
 
-Należy również użyć oprogramowania pośredniczącego, gdy aplikacja jest hostowana na [serwerzeHTTP.sys](xref:fundamentals/servers/httpsys) (dawniej nazywa się webListener).
+Należy również użyć oprogramowania pośredniczącego, gdy aplikacja jest hostowana na [ serwerzeHTTP.sys](xref:fundamentals/servers/httpsys) (dawniej nazywa się webListener).
 
 Główne przyczyny używania technologii zapisywania adresów URL opartych na serwerze w usługach IIS, Apache i Nginx są następujące:
 
@@ -130,7 +131,7 @@ Po *przekierowaniu*adresu URL do serwera zostanie przeprowadzona runda.
 > [!WARNING]
 > Należy zachować ostrożność podczas ustanawiania reguł przekierowań. Reguły przekierowania są oceniane dla każdego żądania do aplikacji, w tym po przekierowaniu. Można łatwo przypadkowo utworzyć *pętlę nieskończonych przekierowań*.
 
-Oryginalne żądanie:`/redirect-rule/1234/5678`
+Oryginalne żądanie: `/redirect-rule/1234/5678`
 
 ![Okno przeglądarki z Narzędzia deweloperskie śledzenia żądań i odpowiedzi](url-rewriting/_static/add_redirect.png)
 
@@ -174,11 +175,11 @@ public void Configure(IApplicationBuilder app)
 
 Przykładowa aplikacja jest w stanie demonstrować, jak korzystać z `AddRedirectToHttps` lub `AddRedirectToHttpsPermanent` . Dodaj metodę rozszerzenia do `RewriteOptions` . Wprowadź niezabezpieczone żądanie do aplikacji pod dowolnym adresem URL. Odrzuć ostrzeżenie o zabezpieczeniach przeglądarki, że certyfikat z podpisem własnym jest niezaufany lub Utwórz wyjątek, aby zaufać certyfikatowi.
 
-Oryginalne żądanie przy użyciu `AddRedirectToHttps(301, 5001)` :`http://localhost:5000/secure`
+Oryginalne żądanie przy użyciu `AddRedirectToHttps(301, 5001)` : `http://localhost:5000/secure`
 
 ![Okno przeglądarki z Narzędzia deweloperskie śledzenia żądań i odpowiedzi](url-rewriting/_static/add_redirect_to_https.png)
 
-Oryginalne żądanie przy użyciu `AddRedirectToHttpsPermanent` :`http://localhost:5000/secure`
+Oryginalne żądanie przy użyciu `AddRedirectToHttpsPermanent` : `http://localhost:5000/secure`
 
 ![Okno przeglądarki z Narzędzia deweloperskie śledzenia żądań i odpowiedzi](url-rewriting/_static/add_redirect_to_https_permanent.png)
 
@@ -188,7 +189,7 @@ Służy <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRewrite*>
 
 [!code-csharp[](url-rewriting/samples/3.x/SampleApp/Startup.cs?name=snippet1&highlight=10-11)]
 
-Oryginalne żądanie:`/rewrite-rule/1234/5678`
+Oryginalne żądanie: `/rewrite-rule/1234/5678`
 
 ![Okno przeglądarki z Narzędzia deweloperskie śledzenia żądania i odpowiedzi](url-rewriting/_static/add_rewrite.png)
 
@@ -206,7 +207,7 @@ Reguła ponownego zapisywania, `^rewrite-rule/(\d+)/(\d+)` ,, dopasowuje się ty
 
 | Ścieżka                              | Dopasowanie |
 | --------------------------------- | :---: |
-| `/rewrite-rule/1234/5678`         | Yes   |
+| `/rewrite-rule/1234/5678`         | Tak   |
 | `/my-cool-rewrite-rule/1234/5678` | Nie    |
 | `/anotherrewrite-rule/1234/5678`  | Nie    |
 
@@ -232,7 +233,7 @@ Przykładowa aplikacja przekierowuje żądania z `/apache-mod-rules-redirect/(.\
 
 [!code[](url-rewriting/samples/3.x/SampleApp/ApacheModRewrite.txt)]
 
-Oryginalne żądanie:`/apache-mod-rules-redirect/1234`
+Oryginalne żądanie: `/apache-mod-rules-redirect/1234`
 
 ![Okno przeglądarki z Narzędzia deweloperskie śledzenia żądań i odpowiedzi](url-rewriting/_static/add_apache_mod_redirect.png)
 
@@ -280,7 +281,7 @@ Przykładowa aplikacja ponownie zapisuje żądania z `/iis-rules-rewrite/(.*)` p
 
 [!code-xml[](url-rewriting/samples/3.x/SampleApp/IISUrlRewrite.xml)]
 
-Oryginalne żądanie:`/iis-rules-rewrite/1234`
+Oryginalne żądanie: `/iis-rules-rewrite/1234`
 
 ![Okno przeglądarki z Narzędzia deweloperskie śledzenia żądania i odpowiedzi](url-rewriting/_static/add_iis_url_rewrite.png)
 
@@ -325,11 +326,11 @@ Oprogramowanie pośredniczące obsługuje następujące zmienne serwera modułu 
 
 ### <a name="method-based-rule"></a>Reguła oparta na metodzie
 
-Użyj <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.Add*> , aby zaimplementować własną logikę reguł w metodzie. `Add`udostępnia <xref:Microsoft.AspNetCore.Rewrite.RewriteContext> , który udostępnia do <xref:Microsoft.AspNetCore.Http.HttpContext> użycia w Twojej metodzie. [RewriteContext. Result](xref:Microsoft.AspNetCore.Rewrite.RewriteContext.Result*) określa sposób obsługi dodatkowego przetwarzania potoku. Ustaw wartość na jedno z <xref:Microsoft.AspNetCore.Rewrite.RuleResult> pól opisanych w poniższej tabeli.
+Użyj <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.Add*> , aby zaimplementować własną logikę reguł w metodzie. `Add` udostępnia <xref:Microsoft.AspNetCore.Rewrite.RewriteContext> , który udostępnia do <xref:Microsoft.AspNetCore.Http.HttpContext> użycia w Twojej metodzie. [RewriteContext. Result](xref:Microsoft.AspNetCore.Rewrite.RewriteContext.Result*) określa sposób obsługi dodatkowego przetwarzania potoku. Ustaw wartość na jedno z <xref:Microsoft.AspNetCore.Rewrite.RuleResult> pól opisanych w poniższej tabeli.
 
 | Zapisz wynik kontekstu               | Akcja                                                           |
 | ------------------------------------ | ---------------------------------------------------------------- |
-| `RuleResult.ContinueRules`wartooć | Kontynuuj stosowanie reguł.                                         |
+| `RuleResult.ContinueRules` wartooć | Kontynuuj stosowanie reguł.                                         |
 | `RuleResult.EndResponse`             | Zatrzymaj stosowanie reguł i Wyślij odpowiedź.                       |
 | `RuleResult.SkipRemainingRules`      | Zatrzymaj stosowanie reguł i Wyślij kontekst do następnego oprogramowania pośredniczącego. |
 
@@ -341,7 +342,7 @@ Przykładowa aplikacja przedstawia metodę, która przekierowuje żądania dla �
 
 [!code-csharp[](url-rewriting/samples/3.x/SampleApp/RewriteRules.cs?name=snippet_RedirectXmlFileRequests&highlight=14-18)]
 
-Takie podejście może również ponownie zapisywać żądania. Przykładowa aplikacja pokazuje, jak ponownie napisać ścieżkę do dowolnego żądania pliku tekstowego, aby *obfile.txt* plik tekstowy z folderu *wwwroot* . Oprogramowanie pośredniczące plików statycznych obsługuje plik na podstawie zaktualizowanej ścieżki żądania:
+Takie podejście może również ponownie zapisywać żądania. Przykładowa aplikacja pokazuje, jak ponownie napisać ścieżkę do dowolnego żądania pliku tekstowego, aby * obfile.txt* plik tekstowy z folderu *wwwroot* . Oprogramowanie pośredniczące plików statycznych obsługuje plik na podstawie zaktualizowanej ścieżki żądania:
 
 [!code-csharp[](url-rewriting/samples/3.x/SampleApp/Startup.cs?name=snippet1&highlight=15,22)]
 
@@ -351,7 +352,7 @@ Takie podejście może również ponownie zapisywać żądania. Przykładowa apl
 
 ### <a name="irule-based-rule"></a>Reguła oparta na IRule
 
-Użyj, <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.Add*> Aby użyć logiki reguły w klasie, która implementuje <xref:Microsoft.AspNetCore.Rewrite.IRule> interfejs. `IRule`zapewnia większą elastyczność w porównaniu z użyciem metody opartej na metodzie. Klasa implementacji może zawierać konstruktora, który umożliwia przekazywanie parametrów dla <xref:Microsoft.AspNetCore.Rewrite.IRule.ApplyRule*> metody.
+Użyj, <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.Add*> Aby użyć logiki reguły w klasie, która implementuje <xref:Microsoft.AspNetCore.Rewrite.IRule> interfejs. `IRule` zapewnia większą elastyczność w porównaniu z użyciem metody opartej na metodzie. Klasa implementacji może zawierać konstruktora, który umożliwia przekazywanie parametrów dla <xref:Microsoft.AspNetCore.Rewrite.IRule.ApplyRule*> metody.
 
 [!code-csharp[](url-rewriting/samples/3.x/SampleApp/Startup.cs?name=snippet1&highlight=16-17)]
 
@@ -359,11 +360,11 @@ Wartości parametrów w aplikacji przykładowej dla `extension` i `newPath` są 
 
 [!code-csharp[](url-rewriting/samples/3.x/SampleApp/RewriteRules.cs?name=snippet_RedirectImageRequests)]
 
-Oryginalne żądanie:`/image.png`
+Oryginalne żądanie: `/image.png`
 
 ![Okno przeglądarki z Narzędzia deweloperskie śledzenia żądań i odpowiedzi dla image.png](url-rewriting/_static/add_redirect_png_requests.png)
 
-Oryginalne żądanie:`/image.jpg`
+Oryginalne żądanie: `/image.jpg`
 
 ![Okno przeglądarki z Narzędzia deweloperskie śledzenia żądań i odpowiedzi dla image.jpg](url-rewriting/_static/add_redirect_jpg_requests.png)
 
@@ -374,7 +375,7 @@ Oryginalne żądanie:`/image.jpg`
 | Zapisz ścieżkę do ciągu QueryString | `^path/(.*)/(.*)`<br>`/path/abc/123` | `path?var1=$1&var2=$2`<br>`/path?var1=abc&var2=123` |
 | Ukośnik końcowy na pasku | `(.*)/$`<br>`/path/` | `$1`<br>`/path` |
 | Wymuszaj końcowy ukośnik | `(.*[^/])$`<br>`/path` | `$1/`<br>`/path/` |
-| Unikaj ponownego zapisywania określonych żądań | `^(.*)(?<!\.axd)$` lub `^(?!.*\.axd$)(.*)$`<br>Opcję`/resource.htm`<br>Znaleziono`/resource.axd` | `rewritten/$1`<br>`/rewritten/resource.htm`<br>`/resource.axd` |
+| Unikaj ponownego zapisywania określonych żądań | `^(.*)(?<!\.axd)$` lub `^(?!.*\.axd$)(.*)$`<br>Opcję `/resource.htm`<br>Znaleziono `/resource.axd` | `rewritten/$1`<br>`/rewritten/resource.htm`<br>`/resource.axd` |
 | Zmień rozmieszczenie segmentów adresu URL | `path/(.*)/(.*)/(.*)`<br>`path/1/2/3` | `path/$3/$2/$1`<br>`path/3/2/1` |
 | Zastępowanie segmentu adresu URL | `^(.*)/segment2/(.*)`<br>`/segment1/segment2/segment3` | `$1/replaced/$2`<br>`/segment1/replaced/segment3` |
 
@@ -437,7 +438,7 @@ Używaj ponownego zapisywania adresów URL, gdy nie możesz użyć następujący
 * [Moduł Apache mod_rewrite na serwerze Apache](https://httpd.apache.org/docs/2.4/rewrite/)
 * [Ponowne zapisywanie adresów URL w witrynie Nginx](https://www.nginx.com/blog/creating-nginx-rewrite-rules/)
 
-Należy również użyć oprogramowania pośredniczącego, gdy aplikacja jest hostowana na [serwerzeHTTP.sys](xref:fundamentals/servers/httpsys) (dawniej nazywa się webListener).
+Należy również użyć oprogramowania pośredniczącego, gdy aplikacja jest hostowana na [ serwerzeHTTP.sys](xref:fundamentals/servers/httpsys) (dawniej nazywa się webListener).
 
 Główne przyczyny używania technologii zapisywania adresów URL opartych na serwerze w usługach IIS, Apache i Nginx są następujące:
 
@@ -484,7 +485,7 @@ Po *przekierowaniu*adresu URL do serwera zostanie przeprowadzona runda.
 > [!WARNING]
 > Należy zachować ostrożność podczas ustanawiania reguł przekierowań. Reguły przekierowania są oceniane dla każdego żądania do aplikacji, w tym po przekierowaniu. Można łatwo przypadkowo utworzyć *pętlę nieskończonych przekierowań*.
 
-Oryginalne żądanie:`/redirect-rule/1234/5678`
+Oryginalne żądanie: `/redirect-rule/1234/5678`
 
 ![Okno przeglądarki z Narzędzia deweloperskie śledzenia żądań i odpowiedzi](url-rewriting/_static/add_redirect.png)
 
@@ -528,11 +529,11 @@ public void Configure(IApplicationBuilder app)
 
 Przykładowa aplikacja jest w stanie demonstrować, jak korzystać z `AddRedirectToHttps` lub `AddRedirectToHttpsPermanent` . Dodaj metodę rozszerzenia do `RewriteOptions` . Wprowadź niezabezpieczone żądanie do aplikacji pod dowolnym adresem URL. Odrzuć ostrzeżenie o zabezpieczeniach przeglądarki, że certyfikat z podpisem własnym jest niezaufany lub Utwórz wyjątek, aby zaufać certyfikatowi.
 
-Oryginalne żądanie przy użyciu `AddRedirectToHttps(301, 5001)` :`http://localhost:5000/secure`
+Oryginalne żądanie przy użyciu `AddRedirectToHttps(301, 5001)` : `http://localhost:5000/secure`
 
 ![Okno przeglądarki z Narzędzia deweloperskie śledzenia żądań i odpowiedzi](url-rewriting/_static/add_redirect_to_https.png)
 
-Oryginalne żądanie przy użyciu `AddRedirectToHttpsPermanent` :`http://localhost:5000/secure`
+Oryginalne żądanie przy użyciu `AddRedirectToHttpsPermanent` : `http://localhost:5000/secure`
 
 ![Okno przeglądarki z Narzędzia deweloperskie śledzenia żądań i odpowiedzi](url-rewriting/_static/add_redirect_to_https_permanent.png)
 
@@ -542,7 +543,7 @@ Służy <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRewrite*>
 
 [!code-csharp[](url-rewriting/samples/2.x/SampleApp/Startup.cs?name=snippet1&highlight=10-11)]
 
-Oryginalne żądanie:`/rewrite-rule/1234/5678`
+Oryginalne żądanie: `/rewrite-rule/1234/5678`
 
 ![Okno przeglądarki z Narzędzia deweloperskie śledzenia żądania i odpowiedzi](url-rewriting/_static/add_rewrite.png)
 
@@ -560,7 +561,7 @@ Reguła ponownego zapisywania, `^rewrite-rule/(\d+)/(\d+)` ,, dopasowuje się ty
 
 | Ścieżka                              | Dopasowanie |
 | --------------------------------- | :---: |
-| `/rewrite-rule/1234/5678`         | Yes   |
+| `/rewrite-rule/1234/5678`         | Tak   |
 | `/my-cool-rewrite-rule/1234/5678` | Nie    |
 | `/anotherrewrite-rule/1234/5678`  | Nie    |
 
@@ -586,7 +587,7 @@ Przykładowa aplikacja przekierowuje żądania z `/apache-mod-rules-redirect/(.\
 
 [!code[](url-rewriting/samples/2.x/SampleApp/ApacheModRewrite.txt)]
 
-Oryginalne żądanie:`/apache-mod-rules-redirect/1234`
+Oryginalne żądanie: `/apache-mod-rules-redirect/1234`
 
 ![Okno przeglądarki z Narzędzia deweloperskie śledzenia żądań i odpowiedzi](url-rewriting/_static/add_apache_mod_redirect.png)
 
@@ -634,7 +635,7 @@ Przykładowa aplikacja ponownie zapisuje żądania z `/iis-rules-rewrite/(.*)` p
 
 [!code-xml[](url-rewriting/samples/2.x/SampleApp/IISUrlRewrite.xml)]
 
-Oryginalne żądanie:`/iis-rules-rewrite/1234`
+Oryginalne żądanie: `/iis-rules-rewrite/1234`
 
 ![Okno przeglądarki z Narzędzia deweloperskie śledzenia żądania i odpowiedzi](url-rewriting/_static/add_iis_url_rewrite.png)
 
@@ -679,11 +680,11 @@ Oprogramowanie pośredniczące obsługuje następujące zmienne serwera modułu 
 
 ### <a name="method-based-rule"></a>Reguła oparta na metodzie
 
-Użyj <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.Add*> , aby zaimplementować własną logikę reguł w metodzie. `Add`udostępnia <xref:Microsoft.AspNetCore.Rewrite.RewriteContext> , który udostępnia do <xref:Microsoft.AspNetCore.Http.HttpContext> użycia w Twojej metodzie. [RewriteContext. Result](xref:Microsoft.AspNetCore.Rewrite.RewriteContext.Result*) określa sposób obsługi dodatkowego przetwarzania potoku. Ustaw wartość na jedno z <xref:Microsoft.AspNetCore.Rewrite.RuleResult> pól opisanych w poniższej tabeli.
+Użyj <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.Add*> , aby zaimplementować własną logikę reguł w metodzie. `Add` udostępnia <xref:Microsoft.AspNetCore.Rewrite.RewriteContext> , który udostępnia do <xref:Microsoft.AspNetCore.Http.HttpContext> użycia w Twojej metodzie. [RewriteContext. Result](xref:Microsoft.AspNetCore.Rewrite.RewriteContext.Result*) określa sposób obsługi dodatkowego przetwarzania potoku. Ustaw wartość na jedno z <xref:Microsoft.AspNetCore.Rewrite.RuleResult> pól opisanych w poniższej tabeli.
 
 | Zapisz wynik kontekstu               | Akcja                                                           |
 | ------------------------------------ | ---------------------------------------------------------------- |
-| `RuleResult.ContinueRules`wartooć | Kontynuuj stosowanie reguł.                                         |
+| `RuleResult.ContinueRules` wartooć | Kontynuuj stosowanie reguł.                                         |
 | `RuleResult.EndResponse`             | Zatrzymaj stosowanie reguł i Wyślij odpowiedź.                       |
 | `RuleResult.SkipRemainingRules`      | Zatrzymaj stosowanie reguł i Wyślij kontekst do następnego oprogramowania pośredniczącego. |
 
@@ -695,7 +696,7 @@ Przykładowa aplikacja przedstawia metodę, która przekierowuje żądania dla �
 
 [!code-csharp[](url-rewriting/samples/2.x/SampleApp/RewriteRules.cs?name=snippet_RedirectXmlFileRequests&highlight=14-18)]
 
-Takie podejście może również ponownie zapisywać żądania. Przykładowa aplikacja pokazuje, jak ponownie napisać ścieżkę do dowolnego żądania pliku tekstowego, aby *obfile.txt* plik tekstowy z folderu *wwwroot* . Oprogramowanie pośredniczące plików statycznych obsługuje plik na podstawie zaktualizowanej ścieżki żądania:
+Takie podejście może również ponownie zapisywać żądania. Przykładowa aplikacja pokazuje, jak ponownie napisać ścieżkę do dowolnego żądania pliku tekstowego, aby * obfile.txt* plik tekstowy z folderu *wwwroot* . Oprogramowanie pośredniczące plików statycznych obsługuje plik na podstawie zaktualizowanej ścieżki żądania:
 
 [!code-csharp[](url-rewriting/samples/2.x/SampleApp/Startup.cs?name=snippet1&highlight=15,22)]
 
@@ -705,7 +706,7 @@ Takie podejście może również ponownie zapisywać żądania. Przykładowa apl
 
 ### <a name="irule-based-rule"></a>Reguła oparta na IRule
 
-Użyj, <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.Add*> Aby użyć logiki reguły w klasie, która implementuje <xref:Microsoft.AspNetCore.Rewrite.IRule> interfejs. `IRule`zapewnia większą elastyczność w porównaniu z użyciem metody opartej na metodzie. Klasa implementacji może zawierać konstruktora, który umożliwia przekazywanie parametrów dla <xref:Microsoft.AspNetCore.Rewrite.IRule.ApplyRule*> metody.
+Użyj, <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.Add*> Aby użyć logiki reguły w klasie, która implementuje <xref:Microsoft.AspNetCore.Rewrite.IRule> interfejs. `IRule` zapewnia większą elastyczność w porównaniu z użyciem metody opartej na metodzie. Klasa implementacji może zawierać konstruktora, który umożliwia przekazywanie parametrów dla <xref:Microsoft.AspNetCore.Rewrite.IRule.ApplyRule*> metody.
 
 [!code-csharp[](url-rewriting/samples/2.x/SampleApp/Startup.cs?name=snippet1&highlight=16-17)]
 
@@ -713,11 +714,11 @@ Wartości parametrów w aplikacji przykładowej dla `extension` i `newPath` są 
 
 [!code-csharp[](url-rewriting/samples/2.x/SampleApp/RewriteRules.cs?name=snippet_RedirectImageRequests)]
 
-Oryginalne żądanie:`/image.png`
+Oryginalne żądanie: `/image.png`
 
 ![Okno przeglądarki z Narzędzia deweloperskie śledzenia żądań i odpowiedzi dla image.png](url-rewriting/_static/add_redirect_png_requests.png)
 
-Oryginalne żądanie:`/image.jpg`
+Oryginalne żądanie: `/image.jpg`
 
 ![Okno przeglądarki z Narzędzia deweloperskie śledzenia żądań i odpowiedzi dla image.jpg](url-rewriting/_static/add_redirect_jpg_requests.png)
 
@@ -728,13 +729,13 @@ Oryginalne żądanie:`/image.jpg`
 | Zapisz ścieżkę do ciągu QueryString | `^path/(.*)/(.*)`<br>`/path/abc/123` | `path?var1=$1&var2=$2`<br>`/path?var1=abc&var2=123` |
 | Ukośnik końcowy na pasku | `(.*)/$`<br>`/path/` | `$1`<br>`/path` |
 | Wymuszaj końcowy ukośnik | `(.*[^/])$`<br>`/path` | `$1/`<br>`/path/` |
-| Unikaj ponownego zapisywania określonych żądań | `^(.*)(?<!\.axd)$` lub `^(?!.*\.axd$)(.*)$`<br>Opcję`/resource.htm`<br>Znaleziono`/resource.axd` | `rewritten/$1`<br>`/rewritten/resource.htm`<br>`/resource.axd` |
+| Unikaj ponownego zapisywania określonych żądań | `^(.*)(?<!\.axd)$` lub `^(?!.*\.axd$)(.*)$`<br>Opcję `/resource.htm`<br>Znaleziono `/resource.axd` | `rewritten/$1`<br>`/rewritten/resource.htm`<br>`/resource.axd` |
 | Zmień rozmieszczenie segmentów adresu URL | `path/(.*)/(.*)/(.*)`<br>`path/1/2/3` | `path/$3/$2/$1`<br>`path/3/2/1` |
 | Zastępowanie segmentu adresu URL | `^(.*)/segment2/(.*)`<br>`/segment1/segment2/segment3` | `$1/replaced/$2`<br>`/segment1/replaced/segment3` |
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:fundamentals/startup>
 * <xref:fundamentals/middleware/index>

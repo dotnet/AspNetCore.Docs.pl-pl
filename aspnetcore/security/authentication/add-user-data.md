@@ -6,6 +6,7 @@ ms.author: riande
 ms.date: 03/26/2020
 ms.custom: mvc, seodec18
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/add-user-data
-ms.openlocfilehash: d65974e9ff8e2f5be52ab79b063ed9d2dca557ea
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: a71395e82ed15dae753888a438471495208a14da
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020863"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631852"
 ---
 # <a name="add-download-and-delete-custom-user-data-to-no-locidentity-in-an-aspnet-core-project"></a>Dodawanie, pobieranie i usuwanie niestandardowych danych użytkownika do programu Identity w projekcie ASP.NET Core
 
@@ -52,7 +53,7 @@ Przykład projektu jest tworzony na podstawie Razor strony aplikacji sieci Web, 
 
 ## <a name="create-a-no-locrazor-web-app"></a>Tworzenie Razor aplikacji sieci Web
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -75,7 +76,7 @@ Przykład projektu jest tworzony na podstawie Razor strony aplikacji sieci Web, 
 ::: moniker-end
 
 
-# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
 
 ```dotnetcli
 dotnet new webapp -o WebApp1
@@ -85,12 +86,12 @@ dotnet new webapp -o WebApp1
 
 ## <a name="run-the-no-locidentity-scaffolder"></a>Uruchamianie Identity szkieletu
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * W **Eksplorator rozwiązań**kliknij prawym przyciskiem myszy projekt > **Dodaj**  >  **nowy element szkieletowy**.
 * W lewym okienku okna dialogowego **Dodawanie szkieletu** wybierz pozycję **Identity**  >  **Dodaj**.
 * W oknie **dialogowym Identity Dodawanie** następujące opcje:
-  * Wybierz istniejący plik układu *~/Pages/Shared/_Layout. cshtml*
+  * Wybierz istniejący plik układu  *~/Pages/Shared/_Layout. cshtml*
   * Wybierz następujące pliki do przesłonięcia:
     * **Konto/rejestr**
     * **Konto/Zarządzanie/indeks**
@@ -98,7 +99,7 @@ dotnet new webapp -o WebApp1
   * Wybierz **+** przycisk, aby utworzyć nową **klasę użytkownika**. Zaakceptuj typ (**WebApp1User** , jeśli projekt ma nazwę **WebApp1**) > **Dodaj**.
 * Wybierz pozycję **Dodaj**.
 
-# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
 
 Jeśli jeszcze nie zainstalowano szkieletu ASP.NET Core, zainstaluj go teraz:
 
@@ -213,7 +214,7 @@ Skompiluj projekt.
 
 ### <a name="add-a-migration-for-the-custom-user-data"></a>Dodawanie migracji niestandardowych danych użytkownika
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 W **konsoli Menedżera pakietów**programu Visual Studio:
 
@@ -222,7 +223,7 @@ Add-Migration CustomUserData
 Update-Database
 ```
 
-# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
 
 ```dotnetcli
 dotnet ef migrations add CustomUserData
@@ -244,7 +245,7 @@ Przetestuj aplikację:
 > [!NOTE]
 > Ta sekcja nie jest rozszerzeniem poprzedniego samouczka. Aby zastosować następujące kroki do aplikacji skompilowanej przy użyciu samouczka, zobacz [ten problem](https://github.com/dotnet/AspNetCore.Docs/issues/18797)w usłudze GitHub.
 
-Dodatkowe oświadczenia można dodać do ASP.NET Core Identity za pomocą `IUserClaimsPrincipalFactory<T>` interfejsu. Tę klasę można dodać do aplikacji w `Startup.ConfigureServices` metodzie. Dodaj niestandardową implementację klasy w następujący sposób:
+Dodatkowe oświadczenia można dodać do programu przy ASP.NET Core Identity użyciu `IUserClaimsPrincipalFactory<T>` interfejsu. Tę klasę można dodać do aplikacji w `Startup.ConfigureServices` metodzie. Dodaj niestandardową implementację klasy w następujący sposób:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)

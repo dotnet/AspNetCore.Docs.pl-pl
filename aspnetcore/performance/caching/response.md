@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 11/04/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/response
-ms.openlocfilehash: 7d2d563eef60cb8eead95c6792bcac2cda16a859
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 9516410399ce69f1d69b09781b2530d052a11e7a
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021344"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631878"
 ---
 # <a name="response-caching-in-aspnet-core"></a>Buforowanie odpowiedzi w ASP.NET Core
 
@@ -99,7 +100,7 @@ Aby uzyskać więcej informacji, zobacz <xref:mvc/views/tag-helpers/builtin-th/d
 > [!WARNING]
 > Wyłącz buforowanie zawartości zawierającej informacje dla uwierzytelnionych klientów. Buforowanie powinno być włączone tylko dla zawartości, która nie zmienia się na podstawie tożsamości użytkownika ani od tego, czy użytkownik jest zalogowany.
 
-<xref:Microsoft.AspNetCore.Mvc.CacheProfile.VaryByQueryKeys>zmienia zapisaną odpowiedź przez wartości podanej listy kluczy zapytań. Gdy podano jedną wartość `*` , oprogramowanie pośredniczące zmienia odpowiedzi przez wszystkie parametry ciągu zapytania żądania.
+<xref:Microsoft.AspNetCore.Mvc.CacheProfile.VaryByQueryKeys> zmienia zapisaną odpowiedź przez wartości podanej listy kluczy zapytań. Gdy podano jedną wartość `*` , oprogramowanie pośredniczące zmienia odpowiedzi przez wszystkie parametry ciągu zapytania żądania.
 
 Aby ustawić właściwość, należy włączyć [oprogramowanie pośredniczące buforowania odpowiedzi](xref:performance/caching/middleware) <xref:Microsoft.AspNetCore.Mvc.CacheProfile.VaryByQueryKeys> . W przeciwnym razie zostanie zgłoszony wyjątek czasu wykonywania. Brak odpowiadającego mu nagłówka HTTP dla <xref:Microsoft.AspNetCore.Mvc.CacheProfile.VaryByQueryKeys> właściwości. Właściwość jest funkcją HTTP, która jest obsługiwana przez oprogramowanie pośredniczące buforowania odpowiedzi. Aby oprogramowanie pośredniczące obsługiwało buforowaną odpowiedź, ciąg zapytania i wartość ciągu zapytania muszą być zgodne z poprzednim żądaniem. Rozważmy na przykład sekwencję żądań i wyniki przedstawione w poniższej tabeli.
 
@@ -132,14 +133,14 @@ Vary: User-Agent
 
 ### <a name="nostore-and-locationnone"></a>NoStore i Location. None
 
-<xref:Microsoft.AspNetCore.Mvc.CacheProfile.NoStore>przesłania większość innych właściwości. Gdy ta właściwość jest ustawiona na `true` , `Cache-Control` nagłówek jest ustawiony na `no-store` . Jeśli <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Location> jest ustawiona na `None` :
+<xref:Microsoft.AspNetCore.Mvc.CacheProfile.NoStore> przesłania większość innych właściwości. Gdy ta właściwość jest ustawiona na `true` , `Cache-Control` nagłówek jest ustawiony na `no-store` . Jeśli <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Location> jest ustawiona na `None` :
 
-* `Cache-Control`jest ustawiony na `no-store,no-cache` .
-* `Pragma`jest ustawiony na `no-cache` .
+* `Cache-Control` jest ustawiony na `no-store,no-cache` .
+* `Pragma` jest ustawiony na `no-cache` .
 
 Jeśli <xref:Microsoft.AspNetCore.Mvc.CacheProfile.NoStore> jest `false` i <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Location> ma `None` `Cache-Control` wartość, i `Pragma` są ustawione na `no-cache` .
 
-<xref:Microsoft.AspNetCore.Mvc.CacheProfile.NoStore>jest zwykle ustawiony na `true` dla stron błędów. Strona Cache2 w przykładowej aplikacji generuje nagłówki odpowiedzi, które instruują klienta, aby nie przechowywał odpowiedzi.
+<xref:Microsoft.AspNetCore.Mvc.CacheProfile.NoStore> jest zwykle ustawiony na `true` dla stron błędów. Strona Cache2 w przykładowej aplikacji generuje nagłówki odpowiedzi, które instruują klienta, aby nie przechowywał odpowiedzi.
 
 [!code-csharp[](response/samples/2.x/ResponseCacheSample/Pages/Cache2.cshtml.cs?name=snippet)]
 
@@ -156,9 +157,9 @@ Aby włączyć buforowanie, <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Duration
 
 <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Location>Opcje `Any` i `Client` przetłumaczą `Cache-Control` odpowiednio wartości nagłówka `public` i `private` . Jak zostało to opisane w sekcji [NoStore and Location. None](#nostore-and-locationnone) , <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Location> ustawienie `None` Ustawia zarówno, jak `Cache-Control` i `Pragma` nagłówki `no-cache` .
 
-`Location.Any`( `Cache-Control` ustawienie wartości `public` ) oznacza, że *klient lub dowolny pośredni serwer proxy* może buforować wartość, w tym [oprogramowanie pośredniczące buforowania odpowiedzi](xref:performance/caching/middleware).
+`Location.Any` ( `Cache-Control` ustawienie wartości `public` ) oznacza, że *klient lub dowolny pośredni serwer proxy* może buforować wartość, w tym [oprogramowanie pośredniczące buforowania odpowiedzi](xref:performance/caching/middleware).
 
-`Location.Client`( `Cache-Control` ustawienie to `private` ) wskazuje, że *tylko klient* może buforować wartość. Żadna pośrednia pamięć podręczna powinna buforować wartość, w tym [oprogramowanie pośredniczące buforowania odpowiedzi](xref:performance/caching/middleware).
+`Location.Client` ( `Cache-Control` ustawienie to `private` ) wskazuje, że *tylko klient* może buforować wartość. Żadna pośrednia pamięć podręczna powinna buforować wartość, w tym [oprogramowanie pośredniczące buforowania odpowiedzi](xref:performance/caching/middleware).
 
 Nagłówki kontroli pamięci podręcznej jedynie zapewniają wskazówki klientom i pośrednim serwerom proxy, kiedy i w jaki sposób należy buforować odpowiedzi. Nie ma gwarancji, że klienci i serwery proxy będą przestrzegać [specyfikacji buforowania HTTP 1,1](https://tools.ietf.org/html/rfc7234). [Oprogramowanie pośredniczące buforowania odpowiedzi](xref:performance/caching/middleware) zawsze jest zgodne z regułami buforowania ustanowionymi przez specyfikację.
 
@@ -196,7 +197,7 @@ Model strony Cache4 aplikacji przykładowej odwołuje się do `Default30` profil
 
 <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute>Można zastosować do:
 
-* RazorStrony: nie można zastosować atrybutów do metod obsługi.
+* Razor Strony: nie można zastosować atrybutów do metod obsługi.
 * Kontrolery MVC.
 * Metody akcji MVC: atrybuty poziomu metody zastępują ustawienia określone w atrybutach na poziomie klasy.
 
@@ -206,7 +207,7 @@ Otrzymany nagłówek zastosowany do odpowiedzi strony Cache4 przez `Default30` p
 Cache-Control: public,max-age=30
 ```
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Przechowywanie odpowiedzi w pamięci podręcznej](https://tools.ietf.org/html/rfc7234#section-3)
 * [Cache-Control](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9)

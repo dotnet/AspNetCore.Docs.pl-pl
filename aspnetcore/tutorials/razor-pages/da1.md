@@ -5,6 +5,7 @@ description: Część 5 serii samouczków na Razor stronach.
 ms.author: riande
 ms.date: 12/20/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/da1
-ms.openlocfilehash: d8f1a256bfa3491ff1cc7f38a23c61beb719bd49
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 04479e5c3a0b1e9badbb4e58043cf059beefb4ab
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022098"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88632801"
 ---
 # <a name="part-5-update-the-generated-pages-in-an-aspnet-core-app"></a>Część 5. aktualizowanie wygenerowanych stron w aplikacji ASP.NET Core
 
@@ -62,7 +63,7 @@ Użyj **widoku źródła** z ulubionej przeglądarki, aby sprawdzić wygenerowan
 </td>
 ```
 
-Dynamicznie generowane linki przekażą identyfikator filmu z ciągiem zapytania (na przykład `?id=1` w `https://localhost:5001/Movies/Details?id=1` ).
+Dynamicznie generowane linki przekażą identyfikator filmu z ciągiem zapytania (na przykład `?id=1` w  `https://localhost:5001/Movies/Details?id=1` ).
 
 ### <a name="add-route-template"></a>Dodawanie szablonu trasy
 
@@ -100,7 +101,7 @@ Poprzedni kod wykrywa wyjątki współbieżności, gdy jeden klient usuwa film, 
 
 Aby przetestować `catch` blok:
 
-* Ustaw punkt przerwania na`catch (DbUpdateConcurrencyException)`
+* Ustaw punkt przerwania na `catch (DbUpdateConcurrencyException)`
 * Wybierz pozycję **Edytuj** dla filmu, wprowadź zmiany, ale nie wprowadzaj opcji **Zapisz**.
 * W innym oknie przeglądarki wybierz łącze **Usuń** dla tego samego filmu, a następnie usuń film.
 * W poprzednim oknie przeglądarki Opublikuj zmiany w filmie.
@@ -133,7 +134,7 @@ Po opublikowaniu strony filmy/Edycja:
 
 Metody GET protokołu HTTP na stronach index, Create i DELETE są Razor zgodne z podobnym wzorcem. Metoda POST protokołu HTTP `OnPostAsync` na stronie Tworzenie jest Razor zgodna z podobnym wzorcem do `OnPostAsync` metody na Razor stronie edytowania.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 > [!div class="step-by-step"]
 > [Poprzedni: Praca z bazą danych](xref:tutorials/razor-pages/sql) 
@@ -177,7 +178,7 @@ Użyj **widoku źródła** z ulubionej przeglądarki, aby sprawdzić wygenerowan
 </td>
 ```
 
-Dynamicznie generowane linki przekażą identyfikator filmu z ciągiem zapytania (na przykład `?id=1` w `https://localhost:5001/Movies/Details?id=1` ).
+Dynamicznie generowane linki przekażą identyfikator filmu z ciągiem zapytania (na przykład `?id=1` w  `https://localhost:5001/Movies/Details?id=1` ).
 
 Zaktualizuj strony edytowania, szczegółów i usuwania, Razor Aby użyć szablonu trasy "{ID: int}". Zmień dyrektywę Page dla każdej z tych stron z `@page` na `@page "{id:int}"` . Uruchom aplikację, a następnie Wyświetl źródło. Wygenerowany kod HTML dodaje identyfikator do części ścieżki adresu URL:
 
@@ -213,7 +214,7 @@ Poprzedni kod wykrywa wyjątki współbieżności, gdy jeden klient usuwa film, 
 
 Aby przetestować `catch` blok:
 
-* Ustaw punkt przerwania na`catch (DbUpdateConcurrencyException)`
+* Ustaw punkt przerwania na `catch (DbUpdateConcurrencyException)`
 * Wybierz pozycję **Edytuj** dla filmu, wprowadź zmiany, ale nie wprowadzaj opcji **Zapisz**.
 * W innym oknie przeglądarki wybierz łącze **Usuń** dla tego samego filmu, a następnie usuń film.
 * W poprzednim oknie przeglądarki Opublikuj zmiany w filmie.
@@ -248,7 +249,7 @@ Metody GET protokołu HTTP na stronach index, Create i DELETE są Razor zgodne z
 
 W następnym samouczku zostanie dodane Wyszukiwanie.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Wersja tego samouczka usługi YouTube](https://youtu.be/yLnnleREMtQ)
 

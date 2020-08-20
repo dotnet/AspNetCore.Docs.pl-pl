@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/28/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/visual-studio-publish-profiles
-ms.openlocfilehash: 1c4b1def75a76b8392427fd6916a7b5927737cac
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: a7bbc3f3a0a0d5a320bd290d325f0c01390828b4
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015455"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634166"
 ---
 # <a name="visual-studio-publish-profiles-pubxml-for-aspnet-core-app-deployment"></a>Profile publikacji programu Visual Studio (. pubxml) dla wdrożenia aplikacji ASP.NET Core
 
@@ -80,7 +81,7 @@ Gdy projekt ASP.NET Core odwołuje się do `Microsoft.NET.Sdk.Web` pliku projekt
 
 ## <a name="basic-command-line-publishing"></a>Podstawowe publikowanie w wierszu polecenia
 
-Publikowanie w wierszu polecenia działa na wszystkich platformach obsługiwanych przez platformę .NET Core i nie wymaga programu Visual Studio. W poniższych przykładach polecenie interfejs wiersza polecenia platformy .NET Core [dotnet Publish](/dotnet/core/tools/dotnet-publish) jest uruchamiane z katalogu projektu (który zawiera plik *. csproj* ). Jeśli folder projektu nie jest bieżącym katalogiem roboczym, jawnie Przekaż ścieżkę do pliku projektu. Przykład:
+Publikowanie w wierszu polecenia działa na wszystkich platformach obsługiwanych przez platformę .NET Core i nie wymaga programu Visual Studio. W poniższych przykładach polecenie interfejs wiersza polecenia platformy .NET Core [dotnet Publish](/dotnet/core/tools/dotnet-publish) jest uruchamiane z katalogu projektu (który zawiera plik *. csproj* ). Jeśli folder projektu nie jest bieżącym katalogiem roboczym, jawnie Przekaż ścieżkę do pliku projektu. Na przykład:
 
 ```dotnetcli
 dotnet publish C:\Webs\Web1
@@ -198,7 +199,7 @@ dotnet build WebApplication.csproj /p:DeployOnBuild=true /p:PublishProfile=<MsDe
 
 W powyższych przykładach:
 
-* `dotnet publish`i `dotnet build` obsługują interfejsy API kudu do publikowania na platformie Azure z dowolnej platformy. Usługa Publish programu Visual Studio obsługuje interfejsy API kudu, ale jest obsługiwana przez WebSDK dla wieloplatformowego publikowania na platformie Azure.
+* `dotnet publish` i `dotnet build` obsługują interfejsy API kudu do publikowania na platformie Azure z dowolnej platformy. Usługa Publish programu Visual Studio obsługuje interfejsy API kudu, ale jest obsługiwana przez WebSDK dla wieloplatformowego publikowania na platformie Azure.
 * Nie przekazuj `DeployOnBuild` do `dotnet publish` polecenia.
 
 Aby uzyskać więcej informacji, zobacz [Microsoft. NET. Sdk. publish](https://github.com/dotnet/websdk#microsoftnetsdkpublish).
@@ -266,7 +267,7 @@ MSBuild file.
 W powyższym przykładzie:
 
 * `<ExcludeApp_Data>`Właściwość jest obecna tylko w celu spełnienia wymagań schematu XML. `<ExcludeApp_Data>`Właściwość nie ma wpływu na proces publikowania, nawet jeśli w katalogu głównym projektu znajduje się folder *App_Data* . Folder *App_Data* nie otrzymuje specjalnego traktowania, ponieważ w projektach ASP.NET 4. x.
-* Właściwość `<LastUsedBuildConfiguration>` ma ustawioną wartość `Release`. Podczas publikowania z programu Visual Studio, wartość `<LastUsedBuildConfiguration>` jest ustawiana za pomocą wartości podczas uruchamiania procesu publikowania. `<LastUsedBuildConfiguration>`jest specjalne i nie należy go przesłaniać w zaimportowanym pliku MSBuild. Tę właściwość można jednak zastąpić z wiersza polecenia przy użyciu jednego z poniższych metod.
+* Właściwość `<LastUsedBuildConfiguration>` ma ustawioną wartość `Release`. Podczas publikowania z programu Visual Studio, wartość `<LastUsedBuildConfiguration>` jest ustawiana za pomocą wartości podczas uruchamiania procesu publikowania. `<LastUsedBuildConfiguration>` jest specjalne i nie należy go przesłaniać w zaimportowanym pliku MSBuild. Tę właściwość można jednak zastąpić z wiersza polecenia przy użyciu jednego z poniższych metod.
   * Przy użyciu interfejs wiersza polecenia platformy .NET Core:
 
     ```dotnetcli
@@ -349,8 +350,8 @@ Podczas publikowania ASP.NET Core aplikacje sieci Web uwzględniane są następu
 
 * Kompiluj artefakty
 * Foldery i pliki pasujące do następujących wzorców obsługi symboli wieloznacznych:
-  * `**\*.config`(na przykład *web.config*)
-  * `**\*.json`(na przykład *appsettings.json*)
+  * `**\*.config` (na przykład *web.config*)
+  * `**\*.json` (na przykład *appsettings.json*)
   * `wwwroot\**`
 
 Program MSBuild obsługuje [wzorce obsługi symboli wieloznacznych](https://gruntjs.com/configuring-tasks#globbing-patterns). Na przykład poniższy `<Content>` element pomija kopiowanie plików tekstowych (*. txt*) w folderze *wwwroot\content* i jego podfolderach:
@@ -374,7 +375,7 @@ Następujący `<MsDeploySkipRules>` element wyklucza wszystkie pliki z folderu *
 </ItemGroup>
 ```
 
-`<MsDeploySkipRules>`nie można usunąć obiektów docelowych *pomijania* z lokacji wdrożenia. `<Content>`pliki i foldery wybrane są usuwane z lokacji wdrożenia. Załóżmy na przykład, że wdrożona aplikacja sieci Web miała następujące pliki:
+`<MsDeploySkipRules>` nie można usunąć obiektów docelowych *pomijania* z lokacji wdrożenia. `<Content>` pliki i foldery wybrane są usuwane z lokacji wdrożenia. Załóżmy na przykład, że wdrożona aplikacja sieci Web miała następujące pliki:
 
 * *Widoki/Home/About1. cshtml*
 * *Widoki/Home/About2. cshtml*
@@ -463,7 +464,7 @@ Wyróżnione znaczniki w poniższym przykładzie pokazują:
 
 [!code-xml[](visual-studio-publish-profiles/samples/Web1.pubxml?highlight=18-23)]
 
-Poprzedni przykład używa `ResolvedFileToPublish` elementu, którego domyślnym zachowaniem jest zawsze kopiowanie plików dostarczonych w `Include` atrybucie do opublikowanej lokacji. Zastąp zachowanie domyślne, dołączając `<CopyToPublishDirectory>` element podrzędny z tekstem wewnętrznym obu `Never` lub `PreserveNewest` . Przykład:
+Poprzedni przykład używa `ResolvedFileToPublish` elementu, którego domyślnym zachowaniem jest zawsze kopiowanie plików dostarczonych w `Include` atrybucie do opublikowanej lokacji. Zastąp zachowanie domyślne, dołączając `<CopyToPublishDirectory>` element podrzędny z tekstem wewnętrznym obu `Never` lub `PreserveNewest` . Na przykład:
 
 ```xml
 <ResolvedFileToPublish Include="..\ReadMe2.md">
@@ -499,7 +500,7 @@ Dodaj `<AllowUntrustedCertificate>` Właściwość o wartości `True` do profilu
 
 ## <a name="the-kudu-service"></a>Usługa kudu
 
-Aby wyświetlić pliki w Azure App Service wdrożenia aplikacji sieci Web, należy użyć [usługi kudu](https://github.com/projectkudu/kudu/wiki/Accessing-the-kudu-service). Dołącz `scm` token do nazwy aplikacji sieci Web. Przykład:
+Aby wyświetlić pliki w Azure App Service wdrożenia aplikacji sieci Web, należy użyć [usługi kudu](https://github.com/projectkudu/kudu/wiki/Accessing-the-kudu-service). Dołącz `scm` token do nazwy aplikacji sieci Web. Na przykład:
 
 | Adres URL                                    | Wynik       |
 | -------------------------------------- | ------------ |
@@ -508,7 +509,7 @@ Aby wyświetlić pliki w Azure App Service wdrożenia aplikacji sieci Web, nale�
 
 Wybierz element menu [konsoli debugowania](https://github.com/projectkudu/kudu/wiki/Kudu-console) , aby wyświetlić, edytować, usunąć lub dodać pliki.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Web Deploy](https://www.iis.net/downloads/microsoft/web-deploy) (MSDeploy) upraszcza wdrażanie aplikacji sieci Web i witryn internetowych na serwerach usług IIS.
 * [Repozytorium GitHub zestawu SDK sieci Web](https://github.com/dotnet/websdk/issues): problemy z plikami i żądania wdrożenia.

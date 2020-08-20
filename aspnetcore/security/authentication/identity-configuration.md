@@ -1,11 +1,12 @@
 ---
-title: Konfigurowanie ASP.NET CoreIdentity
+title: Ponowne ASP.NET Core Identity
 author: AdrienTorris
 description: Poznaj ASP.NET Core Identity wartości domyślne i Dowiedz się, jak skonfigurować Identity właściwości do używania wartości niestandardowych.
 ms.author: riande
 ms.custom: mvc
 ms.date: 02/11/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,22 +17,22 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity-configuration
-ms.openlocfilehash: b7f6eaba1a0e819a077e3d63b4f997e75b8cd317
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: ae4a2eb9d95339651c3810a9f8489d703d73a3fe
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020603"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88632684"
 ---
-# <a name="configure-aspnet-core-no-locidentity"></a>Konfigurowanie ASP.NET CoreIdentity
+# <a name="configure-no-locaspnet-core-identity"></a>Ponowne ASP.NET Core Identity
 
 ASP.NET Core Identity używa wartości domyślnych dla ustawień, takich jak zasady haseł, blokada i cookie Konfiguracja. Te ustawienia można przesłonić w `Startup` klasie.
 
-## <a name="no-locidentity-options"></a>IdentityOpcje
+## <a name="no-locidentity-options"></a>Identity Opcje
 
-Klasa [ Identity Options](/dotnet/api/microsoft.aspnetcore.identity.identityoptions) reprezentuje opcje, których można użyć w celu skonfigurowania Identity systemu. `IdentityOptions`musi być ustawiony **po** wywołaniu `AddIdentity` lub `AddDefaultIdentity` .
+Klasa [ Identity Options](/dotnet/api/microsoft.aspnetcore.identity.identityoptions) reprezentuje opcje, których można użyć w celu skonfigurowania Identity systemu. `IdentityOptions` musi być ustawiony **po** wywołaniu `AddIdentity` lub `AddDefaultIdentity` .
 
-### <a name="claims-no-locidentity"></a>OświadczeńIdentity
+### <a name="claims-no-locidentity"></a>Oświadczeń Identity
 
 [ Identity Opcje. oświadczenia Identity ](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.claimsidentity) określają [ Identity Opcje oświadczeń](/dotnet/api/microsoft.aspnetcore.identity.claimsidentityoptions) z właściwościami podanymi w poniższej tabeli.
 
@@ -72,7 +73,7 @@ Domyślnie program Identity wymaga, aby hasła zawierały wielkie litery, małe 
 
 Hasła są konfigurowane przy użyciu:
 
-* <xref:Microsoft.AspNetCore.Identity.PasswordOptions>w programie `Startup.ConfigureServices` .
+* <xref:Microsoft.AspNetCore.Identity.PasswordOptions> w programie `Startup.ConfigureServices` .
 * [ `[StringLength]` atrybuty](xref:System.ComponentModel.DataAnnotations.StringLengthAttribute) `Password` właściwości, jeśli Identity są [szkieletami w aplikacji](xref:security/authentication/scaffold-identity). `InputModel``Password`właściwości znajdują się w następujących plikach:
   * `Areas/Identity/Pages/Account/Register.cshtml.cs`
   * `Areas/Identity/Pages/Account/ResetPassword.cshtml.cs`
@@ -137,7 +138,7 @@ Aby uzyskać więcej informacji, zobacz [ Cookie AuthenticationOptions](/dotnet/
 
 ## <a name="password-hasher-options"></a>Opcje skrótu hasła
 
-<xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions>Pobiera i ustawia opcje tworzenia skrótów haseł.
+<xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions> Pobiera i ustawia opcje tworzenia skrótów haseł.
 
 | Opcja | Opis |
 | ------ | ----------- |

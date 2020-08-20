@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-1.1'
 ms.author: riande
 ms.date: 04/11/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/ObjectPool
-ms.openlocfilehash: 1f57bc4662296333b3d2c659c057230548541b91
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 6997dbfdd5c654e4a8b15a026fd3ec61d024f02d
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020408"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88632372"
 ---
 # <a name="object-reuse-with-objectpool-in-aspnet-core"></a>Ponowne użycie obiektu za pomocą ObjectPool w ASP.NET Core
 
 [Steve Gordon](https://twitter.com/stevejgordon), [Ryan Nowak](https://github.com/rynowak)i [Günther Foidl](https://github.com/gfoidl)
 
-<xref:Microsoft.Extensions.ObjectPool>jest częścią infrastruktury ASP.NET Core, która obsługuje przechowywanie w pamięci grupy obiektów do ponownego użycia, a nie pozwala na wyrzucanie obiektów jako elementów bezużytecznych.
+<xref:Microsoft.Extensions.ObjectPool> jest częścią infrastruktury ASP.NET Core, która obsługuje przechowywanie w pamięci grupy obiektów do ponownego użycia, a nie pozwala na wyrzucanie obiektów jako elementów bezużytecznych.
 
 Może być konieczne użycie puli obiektów, jeśli zarządzane obiekty są następujące:
 
@@ -35,7 +36,7 @@ Może być konieczne użycie puli obiektów, jeśli zarządzane obiekty są nast
 - Reprezentuje ograniczony zasób.
 - Używane do przewidywania i często.
 
-Na przykład, struktura ASP.NET Core używa puli obiektów w niektórych miejscach do ponownego użycia <xref:System.Text.StringBuilder> wystąpień. `StringBuilder`przypisuje własne bufory i zarządza nimi do przechowywania danych znakowych. ASP.NET Core regularnie używa `StringBuilder` do implementowania funkcji, a ich użycie umożliwia korzystanie z zalet wydajności.
+Na przykład, struktura ASP.NET Core używa puli obiektów w niektórych miejscach do ponownego użycia <xref:System.Text.StringBuilder> wystąpień. `StringBuilder` przypisuje własne bufory i zarządza nimi do przechowywania danych znakowych. ASP.NET Core regularnie używa `StringBuilder` do implementowania funkcji, a ich użycie umożliwia korzystanie z zalet wydajności.
 
 Buforowanie obiektów nie zawsze poprawia wydajność:
 
@@ -45,18 +46,18 @@ Buforowanie obiektów nie zawsze poprawia wydajność:
 Używaj buforowania obiektów tylko po zebraniu danych wydajności przy użyciu realistycznych scenariuszy dla aplikacji lub biblioteki.
 
 ::: moniker range="< aspnetcore-3.0"
-**Ostrzeżenie: `ObjectPool` nie implementuje `IDisposable` . Nie zalecamy używania jej z typami, które wymagają usunięcia.** `ObjectPool`w ASP.NET Core 3,0 i nowszych `IDisposable` .
+**Ostrzeżenie: `ObjectPool` nie implementuje `IDisposable` . Nie zalecamy używania jej z typami, które wymagają usunięcia.** `ObjectPool` w ASP.NET Core 3,0 i nowszych `IDisposable` .
 ::: moniker-end
 
 **Uwaga: ObjectPool nie nakłada limitu liczby obiektów, które zostanie przydzielone, spowoduje ograniczenie liczby obiektów zachowywanych.**
 
 ## <a name="concepts"></a>Pojęcia
 
-<xref:Microsoft.Extensions.ObjectPool.ObjectPool`1>— Abstrakcja puli obiektów podstawowych. Służy do pobierania i zwracania obiektów.
+<xref:Microsoft.Extensions.ObjectPool.ObjectPool`1> — Abstrakcja puli obiektów podstawowych. Służy do pobierania i zwracania obiektów.
 
-<xref:Microsoft.Extensions.ObjectPool.PooledObjectPolicy%601>-implementuje ten element, aby dostosować sposób tworzenia obiektu i sposobu jego *resetowania* w przypadku powrotu do puli. Ten element może zostać przesłany do puli obiektów, która została skonstruowana bezpośrednio... ORAZ
+<xref:Microsoft.Extensions.ObjectPool.PooledObjectPolicy%601> -implementuje ten element, aby dostosować sposób tworzenia obiektu i sposobu jego *resetowania* w przypadku powrotu do puli. Ten element może zostać przesłany do puli obiektów, która została skonstruowana bezpośrednio... ORAZ
 
-<xref:Microsoft.Extensions.ObjectPool.ObjectPoolProvider.Create*>pełni rolę fabryki do tworzenia pul obiektów.
+<xref:Microsoft.Extensions.ObjectPool.ObjectPoolProvider.Create*> pełni rolę fabryki do tworzenia pul obiektów.
 <!-- REview, there is no ObjectPoolProvider<T> -->
 
 ObjectPool może być używana w aplikacji na wiele sposobów:
@@ -78,7 +79,7 @@ Gdy <xref:Microsoft.Extensions.ObjectPool.DefaultObjectPoolProvider> jest używa
 Uwaga: po usunięciu puli:
 
 * Wywoływanie `Get` zwraca `ObjectDisposedException` .
-* `return`Usuwa dany element.
+* `return` Usuwa dany element.
 
 ::: moniker-end
 
@@ -92,7 +93,7 @@ Następujący kod:
 
 [!code-csharp[](ObjectPool/ObjectPoolSample/Startup.cs?name=snippet)]
 
-Poniższy kod implementuje`BirthdayMiddleware`
+Poniższy kod implementuje `BirthdayMiddleware`
 
 [!code-csharp[](ObjectPool/ObjectPoolSample/BirthdayMiddleware.cs?name=snippet)]
 

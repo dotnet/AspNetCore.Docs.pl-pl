@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/proper-to-2x/index
-ms.openlocfilehash: 7f5d2835d93631ac73b3da0c3dc26d87ef64c57d
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: f1a5af60f8dce83d9622ed9d2c6bcb4b8fc22b73
+ms.sourcegitcommit: 9a90b956af8d8584d597f1e5c1dbfb0ea9bb8454
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634764"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88712496"
 ---
 # <a name="migrate-from-aspnet-to-aspnet-core"></a>Migrowanie z ASP.NET do ASP.NET Core
 
@@ -204,6 +204,12 @@ Struktura katalogów:
     └── web.config
 ```
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="bind-and-input-formatters"></a>[BIND] i wejściowe elementy formatującego
+
+[Poprzednie wersje ASP.NET](/aspnet/mvc/overview/getting-started/introduction/examining-the-edit-methods-and-edit-view) używały `[Bind]` atrybutu do ochrony przed atakami polegającymi na przeniesieniu. [Wejściowe elementy formatującego](xref:mvc/models/model-binding#input-formatters) działają inaczej w ASP.NET Core. Ten `[Bind]` atrybut nie jest już zaprojektowany tak, aby zapobiec nadpisywaniu, gdy jest używany z danymi wejściowymi w celu przeanalizowania JSON lub XML. Te atrybuty wpływają na powiązanie modelu, gdy źródło danych jest formularzem danych publikowanych z `x-www-form-urlencoded` typem zawartości.
+
+W przypadku aplikacji, które wysyłają informacje JSON do kontrolerów i używają programu formatującego dane wejściowe JSON w celu przeanalizowania danych, zalecamy zamianę `[Bind]` atrybutu z modelem widoku, który odpowiada właściwościom zdefiniowanym przez `[Bind]` atrybut.
+
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 - [Przenoszenie bibliotek do programu .NET Core](/dotnet/core/porting/libraries)

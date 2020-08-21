@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/distributed
-ms.openlocfilehash: a25cbaf9a4e7dc5f1bd3706d01f409208a39aaa3
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 0d27206412a098f4ea749ec10189bf24d2322de1
+ms.sourcegitcommit: 9a90b956af8d8584d597f1e5c1dbfb0ea9bb8454
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88626730"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88712483"
 ---
 # <a name="distributed-caching-in-aspnet-core"></a>Rozproszone buforowanie w ASP.NET Core
 
@@ -116,16 +116,13 @@ Przykładowa aplikacja jest wdrażana <xref:Microsoft.Extensions.Caching.SqlServ
 
 ### <a name="distributed-redis-cache"></a>Redis Cache dystrybuowane
 
-[Redis](https://redis.io/) to magazyn danych typu "open source", który jest często używany jako rozproszonej pamięci podręcznej. Można używać Redis lokalnie i można skonfigurować [Azure Redis Cache](https://azure.microsoft.com/services/cache/) dla aplikacji ASP.NET Core hostowanej na platformie Azure.
+[Redis](https://redis.io/) to magazyn danych typu "open source", który jest często używany jako rozproszonej pamięci podręcznej.  [Azure Redis Cache](https://azure.microsoft.com/services/cache/) można skonfigurować dla aplikacji ASP.NET Core hostowanej na platformie Azure i użyć Azure Redis Cache do lokalnego projektowania.
 
-Aplikacja konfiguruje implementację pamięci podręcznej przy użyciu <xref:Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache> wystąpienia ( <xref:Microsoft.Extensions.DependencyInjection.StackExchangeRedisCacheServiceCollectionExtensions.AddStackExchangeRedisCache*> ) w środowisku innym niż programowanie w programie `Startup.ConfigureServices` :
+Aplikacja konfiguruje implementację pamięci podręcznej przy użyciu <xref:Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache> wystąpienia ( <xref:Microsoft.Extensions.DependencyInjection.StackExchangeRedisCacheServiceCollectionExtensions.AddStackExchangeRedisCache*> ).
 
-[!code-csharp[](distributed/samples/3.x/DistCacheSample/Startup.cs?name=snippet_AddStackExchangeRedisCache)]
+Aby uzyskać więcej informacji, zobacz [Pamięć podręczna Azure Cache for Redis](/azure/azure-cache-for-redis/cache-overview).
 
-Aby zainstalować Redis na komputerze lokalnym:
-
-1. Zainstaluj [pakiet Redis czekolady](https://chocolatey.org/packages/redis-64/).
-1. Uruchom `redis-server` polecenie w wierszu polecenia.
+[Ten problem](https://github.com/dotnet/AspNetCore.Docs/issues/19542) w usłudze GitHub zawiera omówienie alternatywnych metod w lokalnej pamięci podręcznej Redis.
 
 ### <a name="distributed-ncache-cache"></a>Pamięć podręczna NCache rozproszonej
 
@@ -184,7 +181,7 @@ Ogólnie pamięć podręczna Redis zapewnia wyższą przepływność i mniejsze 
 
 Gdy SQL Server jest używany jako magazyn zapasowy rozproszonej pamięci podręcznej, korzystanie z tej samej bazy danych dla pamięci podręcznej i zwykłego magazynu danych aplikacji może mieć negatywny wpływ na wydajność obu tych elementów. Zalecamy używanie dedykowanego wystąpienia SQL Server dla magazynu zapasowego rozproszonej pamięci podręcznej.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Redis Cache na platformie Azure](/azure/azure-cache-for-redis/)
 * [SQL Database na platformie Azure](/azure/sql-database/)
@@ -354,7 +351,7 @@ Ogólnie pamięć podręczna Redis zapewnia wyższą przepływność i mniejsze 
 
 Gdy SQL Server jest używany jako magazyn zapasowy rozproszonej pamięci podręcznej, korzystanie z tej samej bazy danych dla pamięci podręcznej i zwykłego magazynu danych aplikacji może mieć negatywny wpływ na wydajność obu tych elementów. Zalecamy używanie dedykowanego wystąpienia SQL Server dla magazynu zapasowego rozproszonej pamięci podręcznej.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Redis Cache na platformie Azure](/azure/azure-cache-for-redis/)
 * [SQL Database na platformie Azure](/azure/sql-database/)
@@ -530,7 +527,7 @@ Ogólnie pamięć podręczna Redis zapewnia wyższą przepływność i mniejsze 
 
 Gdy SQL Server jest używany jako magazyn zapasowy rozproszonej pamięci podręcznej, korzystanie z tej samej bazy danych dla pamięci podręcznej i zwykłego magazynu danych aplikacji może mieć negatywny wpływ na wydajność obu tych elementów. Zalecamy używanie dedykowanego wystąpienia SQL Server dla magazynu zapasowego rozproszonej pamięci podręcznej.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Redis Cache na platformie Azure](/azure/azure-cache-for-redis/)
 * [SQL Database na platformie Azure](/azure/sql-database/)
@@ -544,4 +541,3 @@ Gdy SQL Server jest używany jako magazyn zapasowy rozproszonej pamięci podręc
 * <xref:host-and-deploy/web-farm>
 
 ::: moniker-end
- 

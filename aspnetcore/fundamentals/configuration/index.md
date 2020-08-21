@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/configuration/index
-ms.openlocfilehash: fe0a0d3dbb87455be602234825d702fab02df936
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: ed40800f3e363cc3fd6f57492d76a42095e5b97b
+ms.sourcegitcommit: 9a90b956af8d8584d597f1e5c1dbfb0ea9bb8454
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634595"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88712561"
 ---
 # <a name="configuration-in-aspnet-core"></a>Konfiguracja w ASP.NET Core
 
@@ -98,6 +98,8 @@ Domyślna <xref:Microsoft.Extensions.Configuration.Json.JsonConfigurationProvide
 Korzystając z konfiguracji [domyślnej](#default) , *appsettings.jsna* i *appSettings.* `Environment` pliki *. JSON* są włączone z [reloadOnChange: true](https://github.com/dotnet/extensions/blob/release/3.1/src/Hosting/Hosting/src/Host.cs#L74-L75). Zmiany wprowadzone w *appsettings.js* i *appSettings.* `Environment` plik *. JSON* ***po*** uruchomieniu aplikacji jest odczytywany przez [dostawcę konfiguracji JSON](#jcp).
 
 Aby uzyskać informacje na temat dodawania dodatkowych plików konfiguracji JSON, zobacz [dostawca konfiguracji JSON](#jcp) w tym dokumencie.
+
+## <a name="combining-service-collection"></a>Łączenie kolekcji usług
 
 [!INCLUDE[](~/includes/combine-di.md)]
 
@@ -760,7 +762,7 @@ Aby uzyskać więcej informacji na temat migrowania konfiguracji aplikacji z wcz
 
 <xref:Microsoft.AspNetCore.Hosting.IHostingStartup>Implementacja umożliwia dodawanie ulepszeń do aplikacji podczas uruchamiania z zewnętrznego zestawu poza `Startup` klasą aplikacji. Aby uzyskać więcej informacji, zobacz <xref:fundamentals/configuration/platform-specific-configuration>.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Kod źródłowy konfiguracji](https://github.com/dotnet/extensions/tree/master/src/Configuration)
 * <xref:fundamentals/configuration/options>

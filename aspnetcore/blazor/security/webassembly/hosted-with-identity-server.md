@@ -1,7 +1,7 @@
 ---
 title: Zabezpieczanie hostowanej Blazor WebAssembly aplikacji ASP.NET Core z Identity serwerem
 author: guardrex
-description: Aby utworzyć nowe rozwiązanie hostowane Blazor z uwierzytelnianiem z poziomu programu Visual Studio, które korzysta z zaplecza [ Identity serwera](https://identityserver.io/)
+description: Dowiedz się, jak zabezpieczyć hostowaną Blazor WebAssembly aplikację ASP.NET Core z Identity serwerem.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-identity-server
-ms.openlocfilehash: ef5e9e1becb511ef383b22fc96441b0f61537354
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 58c21f4dbe831e99570ca8b0d7bc78616c1e5bfb
+ms.sourcegitcommit: 9a90b956af8d8584d597f1e5c1dbfb0ea9bb8454
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88626223"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88712379"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-hosted-app-with-no-locidentity-server"></a>Zabezpieczanie Blazor WebAssembly hostowanej aplikacji ASP.NET Core Identity z serwerem
 
@@ -469,7 +469,7 @@ W aplikacji klienckiej podejścia do autoryzacji składników są w tym momencie
 
 [!INCLUDE[](~/includes/blazor-security/troubleshoot.md)]
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Wdrożenie do Azure App Service](xref:security/authentication/identity/spa#deploy-to-production)
 * [Importowanie certyfikatu z Key Vault (dokumentacja platformy Azure)](/azure/app-service/configure-ssl-certificate#import-a-certificate-from-key-vault)

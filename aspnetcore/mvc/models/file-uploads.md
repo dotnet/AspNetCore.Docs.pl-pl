@@ -194,7 +194,7 @@ Poniższy przykład jest analogiczny do poprzedniego przykładu, z wyjątkiem te
 Aby wykonać formularz POST w języku JavaScript dla klientów, którzy [nie obsługują interfejsu API pobierania](https://caniuse.com/#feat=fetch), należy użyć jednej z następujących metod:
 
 * Użyj wypełniania pobierania (na przykład [window. Fetch Fill (GitHub/Fetch)](https://github.com/github/fetch)).
-* Użyj polecenia `XMLHttpRequest`. Przykład:
+* Użyj polecenia `XMLHttpRequest`. Na przykład:
 
   ```javascript
   <script>
@@ -467,7 +467,7 @@ Skanowanie plików wymaga użycia zasobów serwera w scenariuszach o dużych ilo
 
 ### <a name="file-extension-validation"></a>Weryfikacja rozszerzenia pliku
 
-Rozszerzenie przekazanego pliku powinno być sprawdzane względem listy dozwolonych rozszerzeń. Przykład:
+Rozszerzenie przekazanego pliku powinno być sprawdzane względem listy dozwolonych rozszerzeń. Na przykład:
 
 ```csharp
 private string[] permittedExtensions = { ".txt", ".pdf" };
@@ -918,7 +918,7 @@ Poniższy przykład jest analogiczny do poprzedniego przykładu, z wyjątkiem te
 Aby wykonać formularz POST w języku JavaScript dla klientów, którzy [nie obsługują interfejsu API pobierania](https://caniuse.com/#feat=fetch), należy użyć jednej z następujących metod:
 
 * Użyj wypełniania pobierania (na przykład [window. Fetch Fill (GitHub/Fetch)](https://github.com/github/fetch)).
-* Użyj polecenia `XMLHttpRequest`. Przykład:
+* Użyj polecenia `XMLHttpRequest`. Na przykład:
 
   ```javascript
   <script>
@@ -1191,7 +1191,7 @@ Skanowanie plików wymaga użycia zasobów serwera w scenariuszach o dużych ilo
 
 ### <a name="file-extension-validation"></a>Weryfikacja rozszerzenia pliku
 
-Rozszerzenie przekazanego pliku powinno być sprawdzane względem listy dozwolonych rozszerzeń. Przykład:
+Rozszerzenie przekazanego pliku powinno być sprawdzane względem listy dozwolonych rozszerzeń. Na przykład:
 
 ```csharp
 private string[] permittedExtensions = { ".txt", ".pdf" };
@@ -1653,7 +1653,7 @@ Poniższy przykład jest analogiczny do poprzedniego przykładu, z wyjątkiem te
 Aby wykonać formularz POST w języku JavaScript dla klientów, którzy [nie obsługują interfejsu API pobierania](https://caniuse.com/#feat=fetch), należy użyć jednej z następujących metod:
 
 * Użyj wypełniania pobierania (na przykład [window. Fetch Fill (GitHub/Fetch)](https://github.com/github/fetch)).
-* Użyj polecenia `XMLHttpRequest`. Przykład:
+* Użyj polecenia `XMLHttpRequest`. Na przykład:
 
   ```javascript
   <script>
@@ -1926,7 +1926,7 @@ Skanowanie plików wymaga użycia zasobów serwera w scenariuszach o dużych ilo
 
 ### <a name="file-extension-validation"></a>Weryfikacja rozszerzenia pliku
 
-Rozszerzenie przekazanego pliku powinno być sprawdzane względem listy dozwolonych rozszerzeń. Przykład:
+Rozszerzenie przekazanego pliku powinno być sprawdzane względem listy dozwolonych rozszerzeń. Na przykład:
 
 ```csharp
 private string[] permittedExtensions = { ".txt", ".pdf" };

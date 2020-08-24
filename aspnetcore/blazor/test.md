@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/test
-ms.openlocfilehash: 8a6fa8f25c8209584488fb2578c70e884877d666
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 572b9a293e2fd6f51431cd1de6ada737addf5efa
+ms.sourcegitcommit: dd0e87abf2bb50ee992d9185bb256ed79d48f545
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88625872"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88746536"
 ---
 # <a name="test-components-in-aspnet-core-no-locblazor"></a>Testowanie składników w ASP.NET Core Blazor
 
@@ -63,7 +63,7 @@ Testowanie E2E polega na uruchamianiu wielu procesów, operacji we/wy na dysku o
 
 Poniższa tabela zawiera podsumowanie różnic między dwoma podejściami do testowania.
 
-| Możliwość                       | Testy jednostkowe                     | Testowanie E2E                             |
+| Możliwość                       | Testowanie jednostek                     | Testowanie E2E                             |
 | -------------------------------- | -------------------------------- | --------------------------------------- |
 | Zakres testu                       | Blazor tylko składnik ( Razor /c #) | Blazor składnik ( Razor /c #) z CSS/JS |
 | Czas wykonywania testu              | )                     | Sekundy                                 |
@@ -77,8 +77,8 @@ Rozważmy scenariusz podczas wybierania typu testów do wykonania. Niektóre zag
 
 | Scenariusz | Sugerowane podejście | Uwagi |
 | -------- | ------------------ | ------- |
-| Składnik bez logiki międzyoperacyjna JS | Testy jednostkowe | Jeśli w składniku nie ma zależności od współdziałania ze JS Blazor , składnik można przetestować bez dostępu do js lub interfejsu API modelu DOM. W tym scenariuszu nie ma żadnych wad, aby wybrać testy jednostkowe. |
-| Składnik z prostą logiką międzyoperacyjną JS | Testy jednostkowe | Jest to typowy element dla składników służących do wykonywania zapytań względem modelu DOM lub wyzwalania animacji za pomocą międzyoperacyjnego JS. Testowanie jednostkowe jest zwykle preferowane w tym scenariuszu, ponieważ jest to proste, aby zasymulować interakcję JS za pomocą <xref:Microsoft.JSInterop.IJSRuntime> interfejsu. |
+| Składnik bez logiki międzyoperacyjna JS | Testowanie jednostek | Jeśli w składniku nie ma zależności od współdziałania ze JS Blazor , składnik można przetestować bez dostępu do js lub interfejsu API modelu DOM. W tym scenariuszu nie ma żadnych wad, aby wybrać testy jednostkowe. |
+| Składnik z prostą logiką międzyoperacyjną JS | Testowanie jednostek | Jest to typowy element dla składników służących do wykonywania zapytań względem modelu DOM lub wyzwalania animacji za pomocą międzyoperacyjnego JS. Testowanie jednostkowe jest zwykle preferowane w tym scenariuszu, ponieważ jest to proste, aby zasymulować interakcję JS za pomocą <xref:Microsoft.JSInterop.IJSRuntime> interfejsu. |
 | Składnik, który zależy od złożonego kodu JS | Testowanie jednostkowe i oddzielne testowanie JS | Jeśli składnik używa interfejsu JS Interop do wywołania dużej lub złożonej biblioteki JS, ale interakcja między Blazor biblioteką składnika i JS jest prosta, najlepszym rozwiązaniem jest prawdopodobnie traktowanie składnika i biblioteki js lub kodu jako dwóch oddzielnych części i przetestowanie każdego z nich. Przetestuj Blazor składnik przy użyciu biblioteki testów jednostkowych i przetestuj go przy użyciu biblioteki testowej js. |
 | Składnik z logiką, który zależy od manipulowania JS w modelu DOM przeglądarki | Testowanie E2E | Gdy funkcje składnika są zależne od kodu JS i jego manipulowania modelem DOM, sprawdź, czy zarówno JS, jak i Blazor kod w teście E2E. Jest to podejście, które deweloperzy architektury pobrały Blazor za pomocą Blazor logiki renderowania przeglądarki, która ma ściśle połączony kod C# i JS. Kod C# i JS musi współpracować ze sobą w celu poprawnego renderowania Blazor składników w przeglądarce.
 | Składnik zależny od biblioteki składników innych firm z niezależnymi zależnościami | Testowanie E2E | Gdy funkcjonalność składnika jest zależna od biblioteki składników innej firmy, która ma trudne do makiety zależności, takich jak program JS Interop, testowanie E2E może być jedyną opcją do testowania składnika. |
@@ -127,7 +127,7 @@ Poniższy test bUnit sprawdza, czy licznik wycinania jest zwiększany prawidłow
 public void CounterShouldIncrementWhenSelected()
 {
     // Arrange
-    using var cxt = new TestContext();
+    using var ctx = new TestContext();
     var cut = ctx.RenderComponent<Counter>();
     var paraElm = cut.Find("p");
 
@@ -151,6 +151,6 @@ W każdym kroku testu odbywają się następujące działania:
 > [!NOTE]
 > `MarkupMatches`Metoda Assert różni się od zwykłego potwierdzenia porównania ciągów (na przykład `Assert.Equal("Current count: 1", paraElmText);` ) `MarkupMatches` wykonuje porównanie semantyczne danych wejściowych i oczekiwanych znaczników HTML. Porównanie semantyczne ma świadomość semantyki języka HTML, co oznacza, że ignorowanie nieznaczących białych znaków. Powoduje to bardziej stabilne testy. Aby uzyskać więcej informacji, zobacz [Dostosowywanie semantycznego porównania kodu HTML](https://bunit.egilhansen.com/docs/verification/semantic-html-comparison).
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Wprowadzenie z bUnit](https://bunit.egilhansen.com/docs/getting-started/): bUnit instrukcje obejmują wskazówki dotyczące tworzenia projektu testowego, odwoływania się do pakietów platformy testowania i kompilowania i uruchamiania testów.

@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/performance-best-practices
-ms.openlocfilehash: 94ae9e52ed99c3fe8e7044f474cdf5b702dc5adf
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 587872b269d897d7c86eb77c110a4b6432218ed3
+ms.sourcegitcommit: dd0e87abf2bb50ee992d9185bb256ed79d48f545
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634465"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88746562"
 ---
 # <a name="aspnet-core-performance-best-practices"></a>ASP.NET Core najlepszych rozwiązań dotyczących wydajności
 
@@ -57,6 +57,12 @@ Typowy problem z wydajnością w aplikacjach ASP.NET Core blokuje wywołania, kt
 * Wykonywanie akcji kontrolera/ Razor strony asynchronicznej. Cały stos wywołań jest asynchroniczny, aby można było korzystać z wzorców [asynchronicznych/await](/dotnet/csharp/programming-guide/concepts/async/) .
 
 Profiler, taki jak [Narzędzia PerfView](https://github.com/Microsoft/perfview), może służyć do znajdowania wątków często dodanych do [puli wątków](/windows/desktop/procthread/thread-pools). `Microsoft-Windows-DotNETRuntime/ThreadPoolWorkerThread/Start`Zdarzenie wskazuje wątek dodany do puli wątków. <!--  For more information, see [async guidance docs](TBD-Link_To_Davifowl_Doc)  -->
+
+## <a name="return-ienumerablet-or-iasyncenumerablet"></a>Zwróć interfejs IEnumerable \<T> lub IAsyncEnumerable\<T>
+
+Powrót `IEnumerable<T>` z akcji powoduje synchroniczną iterację kolekcji przez serializator. Wynikiem jest blokowanie wywołań i potencjalna blokada puli wątków. Aby uniknąć synchronicznego wyliczania, należy użyć `ToListAsync` przed zwróceniem wartości wyliczalnej.
+
+Począwszy od ASP.NET Core 3,0, `IAsyncEnumerable<T>` może być używany jako alternatywa dla `IEnumerable<T>` tego wyliczenia asynchronicznie. Aby uzyskać więcej informacji, zobacz [typy zwracanych akcji kontrolera](xref:web-api/action-return-types#return-ienumerablet-or-iasyncenumerablet).
 
 ## <a name="minimize-large-object-allocations"></a>Minimalizuj alokacje dużych obiektów
 
@@ -111,7 +117,7 @@ Mając
 
 ## <a name="keep-common-code-paths-fast"></a>Szybkie śledzenie wspólnych ścieżek kodu
 
-Chcesz, aby cały kod był szybki. Często nazywane ścieżki kodu są najbardziej krytyczne dla optymalizacji. Należą do nich:
+Chcesz, aby cały kod był szybki. Często nazywane ścieżki kodu są najbardziej krytyczne dla optymalizacji. Należą do nich następujące elementy:
 
 * Składniki pośredniczące w potoku przetwarzania żądań aplikacji, szczególnie oprogramowanie pośredniczące działające wczesnie w potoku. Te składniki mają duży wpływ na wydajność.
 * Kod wykonywany dla każdego żądania lub wiele razy na żądanie. Na przykład niestandardowe rejestrowanie, programy obsługi autoryzacji lub inicjowanie usług przejściowych.
@@ -357,3 +363,11 @@ Sprawdzanie, czy odpowiedź nie została rozpoczęta, umożliwia rejestrowanie w
 ## <a name="do-not-call-next-if-you-have-already-started-writing-to-the-response-body"></a>Nie wywołuj Next (), jeśli już rozpoczęto zapisywanie do treści odpowiedzi
 
 Składniki należy wywołać tylko wtedy, gdy jest to możliwe, aby obsługiwać i manipulować odpowiedzią.
+
+## <a name="use-in-process-hosting-with-iis"></a>Używanie hostingu w procesie z usługami IIS
+
+Korzystając z hostingu w procesie, aplikacja ASP.NET Core jest uruchamiana w tym samym procesie co proces roboczy usług IIS. Hosting w procesie zapewnia lepszą wydajność w porównaniu do hostingu poza procesem, ponieważ żądania nie są przekazywane za pośrednictwem karty sprzężenia zwrotnego. Karta sprzężenia zwrotnego jest interfejsem sieciowym, który zwraca wychodzący ruch sieciowy z powrotem do tego samego komputera. Usługi IIS obsługują zarządzanie procesami przy użyciu [usługi aktywacji procesów systemu Windows (was)](/iis/manage/provisioning-and-managing-iis/features-of-the-windows-process-activation-service-was).
+
+Projekty są domyślne dla modelu hostingu w procesie w ASP.NET Core 3,0 i nowszych.
+
+Aby uzyskać więcej informacji, zobacz [hostowanie ASP.NET Core w systemie Windows przy użyciu usług IIS](xref:host-and-deploy/iis/index)

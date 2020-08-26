@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/entity-framework-6
-ms.openlocfilehash: d01c0a1bdf29dbb79c04504d747b319fff710d89
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 64d420d7076f1da453ee423cc4a3732eeb47b221
+ms.sourcegitcommit: 4df148cbbfae9ec8d377283ee71394944a284051
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633763"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88876701"
 ---
 # <a name="aspnet-core-and-entity-framework-6"></a>ASP.NET Core i Entity Framework 6
 ::: moniker range=">= aspnetcore-3.0"
@@ -31,7 +31,7 @@ Zgodnie z [dobrymi](https://github.com/attrib75)
 
 [Entity Framework Core](/ef/) należy używać w przypadku nowych rozwiązań programistycznych. [Przykład pobierania](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/entity-framework-6/3.xsample) używa [Entity Framework 6 (Ef6)](/ef/ef6), który może służyć do migrowania zamykania aplikacji do ASP.NET Core.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Konfiguracja oparta na kodzie Entity Framework](/ef/ef6/fundamentals/configuring/code-based)
 
@@ -51,7 +51,7 @@ Zalecanym sposobem użycia Entity Framework 6 w aplikacji ASP.NET Core jest umie
 
 Nie można umieścić kontekstu EF6 w projekcie ASP.NET Core, ponieważ projekty .NET Core nie obsługują wszystkich funkcji, które EF6 polecenia, takie jak *enable-migrations* .    
 
-Niezależnie od typu projektu, w którym znajduje się kontekst EF6, tylko narzędzia wiersza polecenia EF6 współpracują z kontekstem EF6. Na przykład, `Scaffold-DbContext` jest dostępna tylko w Entity Framework Core. Jeśli musisz przeprowadzić odtwarzanie bazy danych do modelu EF6, zobacz [Code First do istniejącej bazy danych](https://msdn.microsoft.com/jj200620).  
+Niezależnie od typu projektu, w którym znajduje się kontekst EF6, tylko narzędzia wiersza polecenia EF6 współpracują z kontekstem EF6. Na przykład, `Scaffold-DbContext` jest dostępna tylko w Entity Framework Core. Jeśli potrzebujesz przeprowadzenia odtwarzania bazy danych do modelu EF6, zobacz <https://docs.microsoft.com/ef/ef6/modeling/code-first/workflows/existing-database> .    
 
 ## <a name="reference-full-framework-and-ef6-in-the-aspnet-core-project"></a>Odwołuje się do pełnej struktury i EF6 w projekcie ASP.NET Core 
 
@@ -67,7 +67,7 @@ Narzędzia wiersza polecenia EF6, które będą używane w projekcie biblioteki 
 
 [!code-csharp[](entity-framework-6/sample/EF6/SchoolContext.cs?name=snippet_Constructor)]   
 
-Ponieważ kontekst EF6 nie ma konstruktora bez parametrów, projekt EF6 musi dostarczyć implementację [IDbContextFactory](https://msdn.microsoft.com/library/hh506876). Narzędzia wiersza polecenia EF6 znajdą i używają tej implementacji, aby mogli utworzyć wystąpienie kontekstu. Oto przykład.    
+Ponieważ kontekst EF6 nie ma konstruktora bez parametrów, projekt EF6 musi zapewniać implementację <https://docs.microsoft.com/dotnet/api/system.data.entity.infrastructure.idbcontextfactory-1?view=entity-framework-6.2.0> . Narzędzia wiersza polecenia EF6 znajdą i używają tej implementacji, aby mogli utworzyć wystąpienie kontekstu. Oto przykład.   
 
 [!code-csharp[](entity-framework-6/sample/EF6/SchoolContextFactory.cs?name=snippet_IDbContextFactory)]  
 

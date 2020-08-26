@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/cookie
-ms.openlocfilehash: 48b9c41b468f04134164a9c499e7fadca107cab2
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: 04d2f0d289e2c9ec13aeb880df47240bec19d3ec
+ms.sourcegitcommit: 4df148cbbfae9ec8d377283ee71394944a284051
 ms.translationtype: MT
 ms.contentlocale: pl-PL
 ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865103"
+ms.locfileid: "88876766"
 ---
 # <a name="use-no-loccookie-authentication-without-no-locaspnet-core-identity"></a>Użyj cookie uwierzytelniania bez ASP.NET Core Identity
 
@@ -116,6 +116,8 @@ Aby wylogować bieżącego użytkownika i usunąć cookie połączenie, wywołaj
 [!code-csharp[](cookie/samples/3.x/CookieSample/Pages/Account/Login.cshtml.cs?name=snippet2)]
 
 Jeśli `CookieAuthenticationDefaults.AuthenticationScheme` (lub " Cookie s") nie jest używany jako schemat (na przykład "contoso Cookie "), podaj Schemat używany podczas konfigurowania dostawcy uwierzytelniania. W przeciwnym razie używany jest domyślny schemat.
+
+Serwer nie ma kontroli nad przeglądarką klientów. Jeśli użytkownik zamknie przeglądarkę lub kartę, serwer nie może wylogować użytkownika. Aby zaimplementować wylogowywanie użytkownika po zamknięciu przeglądarki, należy wykryć, że w języku JavaScript. Wyszukaj ciąg "Jak wykryć zdarzenie zamknięcia karty okna przeglądarki?".
 
 ## <a name="react-to-back-end-changes"></a>Reagowanie na zmiany zaplecza
 

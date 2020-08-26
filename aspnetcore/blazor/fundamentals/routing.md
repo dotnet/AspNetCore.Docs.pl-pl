@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/routing
-ms.openlocfilehash: 0c878a05a50e5a6879278ee737ada167669ee0ff
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: eb9e3cbddd2eaca8fef9a6782c28bbce4c029f58
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88626483"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865331"
 ---
 # <a name="aspnet-core-no-locblazor-routing"></a>BlazorRouting ASP.NET Core
 
@@ -169,13 +169,43 @@ W obszarze Blazor Server aplikacje domyślna trasa w `_Host.cshtml` to `/` ( `@p
 
 `"/{**path}"`Szablon zawiera:
 
-* Podwójna gwiazdka *catch-all* ( `**` ) do przechwytywania ścieżki między wieloma granicami folderów bez kodowania ukośników ( `/` ).
+* Podwójna gwiazdka *catch-all* ( `**` ), aby przechwycić ścieżkę między wieloma granicami folderów bez dekodowania ukośników ( `/` ).
 * `path` Nazwa parametru trasy.
 
-> [!NOTE]
-> Składnia *catch-all* parametru ( `*` / `**` ) **nie** jest obsługiwana w Razor składnikach ( `.razor` ).
-
 Aby uzyskać więcej informacji, zobacz <xref:fundamentals/routing>.
+
+## <a name="catch-all-route-parameters"></a>Catch-wszystkie parametry tras
+
+::: moniker range=">= aspnetcore-5.0"
+
+*Ta sekcja dotyczy programu .NET 5 Release Candidate 1 (RC1) lub nowszego, który zostanie zwolniony w połowie września.*
+
+Wszystkie parametry trasy, które przechwytują ścieżki między wieloma granicami folderów, są obsługiwane w składnikach. Wartość parametru catch-all musi być:
+
+* Nazwa jest zgodna z nazwą segmentu trasy. W nazewnictwie nie jest rozróżniana wielkość liter.
+* `string`Typ. Struktura nie zapewnia automatycznego rzutowania.
+* Na końcu adresu URL.
+
+```razor
+@page "/page/{*pageRoute}"
+
+@code {
+    [Parameter]
+    public string PageRoute { get; set; }
+}
+```
+
+Dla adresu URL `/page/this/is/a/test` z szablonem trasy dla `/page/{*pageRoute}` , wartość `PageRoute` jest ustawiona na `this/is/a/test` .
+
+Ukośniki i segmenty ścieżki przechwyconej są zdekodowane. Dla szablonu trasy w programie `/page/{*pageRoute}` adres URL `/page/this/is/a%2Ftest%2A` daje wartość `this/is/a/test*` .
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+Wszystkie parametry trasy będą obsługiwane w programie .NET 5 Release Candidate 1 (RC1) lub nowszym, który zostanie zwolniony w połowie września. *
+
+::: moniker-end
 
 ## <a name="navlink-component"></a>Składnik NavLink
 

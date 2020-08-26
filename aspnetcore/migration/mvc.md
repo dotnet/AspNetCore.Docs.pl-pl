@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/mvc
-ms.openlocfilehash: cd1a7ff57d911f96f0adfe4b548fa80ec844886d
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: d615f67fc5cb23499ee7e14b747390a7a1b5a693
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632242"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865133"
 ---
 # <a name="migrate-from-aspnet-mvc-to-aspnet-core-mvc"></a>Migrowanie z ASP.NET MVC do ASP.NET Core MVC
 
@@ -97,7 +97,7 @@ W ASP.NET Core projekcie zostanie dodana nowa pusta Klasa kontrolera i Klasa wid
 
 Projekt ASP.NET Core *WebApp1* zawiera już minimalny przykładowy kontroler i widok o takiej samej nazwie jak projekt ASP.NET MVC. Dzięki temu będą one służyć jako symbole zastępcze dla kontrolera ASP.NET MVC i widoków do migracji z projektu ASP.NET MVC *WebApp1* .
 
-1. Skopiuj metody z ASP.NET MVC, `HomeController` Aby zastąpić nowe `HomeController` metody ASP.NET Core. Nie trzeba zmieniać zwracanego typu metod akcji. Zwracany typ metody akcji kontrolera wbudowanego szablonu MVC ASP.NET ma wartość [ActionResult](https://msdn.microsoft.com/library/system.web.mvc.actionresult(v=vs.118).aspx); w ASP.NET Core MVC, zamiast tego zwracają metody akcji `IActionResult` . `ActionResult` implementuje `IActionResult` .
+1. Skopiuj metody z ASP.NET MVC, `HomeController` Aby zastąpić nowe `HomeController` metody ASP.NET Core. Nie trzeba zmieniać zwracanego typu metod akcji. Zwracany typ metody akcji kontrolera wbudowanego szablonu MVC ASP.NET to <https://docs.microsoft.com/dotnet/api/system.web.mvc.actionresult?view=aspnet-mvc-5.2> ; w ASP.NET Core MVC, zamiast tego zwracają metody akcji `IActionResult` . `ActionResult` implementuje `IActionResult` .
 1. W projekcie ASP.NET Core kliknij prawym przyciskiem myszy *widok/katalog macierzysty* , wybierz polecenie **Dodaj** > **istniejący element**.
 1. W oknie dialogowym **Dodaj istniejący element** przejdź do *widoku/katalogu macierzystego* projektu ASP.NET MVC *WebApp1* .
 1. Zaznacz pliki widoku *Informacje o. cshtml*, *Contact. cshtml*i *index. cshtml* Razor , a następnie wybierz pozycję **Dodaj**, zastępując istniejące pliki.
@@ -186,7 +186,7 @@ ASP.NET Core konwertuje Nieobsłużone wyjątki na odpowiedzi na błędy HTTP 50
 
 * <xref:migration/identity>
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:blazor/index>
 * <xref:mvc/views/tag-helpers/intro>
@@ -291,7 +291,7 @@ Poniższe funkcje wymagają migracji z przykładowego projektu MVC ASP.NET do pr
 
 ## <a name="controllers-and-views"></a>Kontrolery i widoki
 
-* Skopiuj każdą z metod z ASP.NET MVC `HomeController` do nowej `HomeController` . W ASP.NET MVC Metoda akcji kontrolera wbudowanego szablonu ma wartość [ActionResult](https://msdn.microsoft.com/library/system.web.mvc.actionresult(v=vs.118).aspx); w ASP.NET Core MVC, zamiast tego zwracają metody akcji `IActionResult` . `ActionResult` implementuje `IActionResult` , dlatego nie trzeba zmieniać zwracanego typu metod akcji.
+* Skopiuj każdą z metod z ASP.NET MVC `HomeController` do nowej `HomeController` . W ASP.NET MVC typ zwracany metody akcji kontrolera wbudowanego szablonu to <https://docs.microsoft.com/dotnet/api/system.web.mvc.actionresult?view=aspnet-mvc-5.2> ; w ASP.NET Core MVC, zamiast tego zwracają metody akcji `IActionResult` . `ActionResult` implementuje `IActionResult` , dlatego nie trzeba zmieniać zwracanego typu metod akcji.
 
 * Skopiuj pliki *. cshtml*, *Contact. cshtml*i *Index. cshtml* Razor z projektu ASP.NET MVC do projektu ASP.NET Core.
 
@@ -372,7 +372,7 @@ Istnieje wiele problemów, które mogą spowodować, że komunikaty o błędach 
 
 ASP.NET Core konwertuje Nieobsłużone wyjątki na odpowiedzi na błędy HTTP 500. Zwykle szczegóły błędu nie są uwzględniane w tych odpowiedziach, aby zapobiec ujawnieniu potencjalnie poufnych informacji o serwerze. Aby uzyskać więcej informacji, zobacz [stronę wyjątków dla deweloperów](xref:fundamentals/error-handling#developer-exception-page).
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:blazor/index>
 * <xref:mvc/views/tag-helpers/intro>
@@ -477,7 +477,7 @@ Poniższe funkcje wymagają migracji z przykładowego projektu MVC ASP.NET do pr
 
 ## <a name="controllers-and-views"></a>Kontrolery i widoki
 
-* Skopiuj każdą z metod z ASP.NET MVC `HomeController` do nowej `HomeController` . W ASP.NET MVC Metoda akcji kontrolera wbudowanego szablonu ma wartość [ActionResult](https://msdn.microsoft.com/library/system.web.mvc.actionresult(v=vs.118).aspx); w ASP.NET Core MVC, zamiast tego zwracają metody akcji `IActionResult` . `ActionResult` implementuje `IActionResult` , dlatego nie trzeba zmieniać zwracanego typu metod akcji.
+* Skopiuj każdą z metod z ASP.NET MVC `HomeController` do nowej `HomeController` . W ASP.NET MVC typ zwracany metody akcji kontrolera wbudowanego szablonu to <https://docs.microsoft.com/dotnet/api/system.web.mvc.actionresult?view=aspnet-mvc-5.2> ; w ASP.NET Core MVC, zamiast tego zwracają metody akcji `IActionResult` . `ActionResult` implementuje `IActionResult` , dlatego nie trzeba zmieniać zwracanego typu metod akcji.
 
 * Skopiuj pliki *. cshtml*, *Contact. cshtml*i *Index. cshtml* Razor z projektu ASP.NET MVC do projektu ASP.NET Core.
 

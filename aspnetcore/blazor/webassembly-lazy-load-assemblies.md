@@ -5,7 +5,7 @@ description: Odkryj, jak ładować zestawy w aplikacjach ASP.NET Core Blazor Web
 monikerRange: '>= aspnetcore-5.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/16/2020
+ms.date: 08/25/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-lazy-load-assemblies
-ms.openlocfilehash: 31e6c9638d3262d3cb0a5e0fbcf34d24e2d1e91c
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 46f98080ad40f614f9cb1af2190f263d205c1016
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88625807"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865158"
 ---
 # <a name="lazy-load-assemblies-in-aspnet-core-no-locblazor-webassembly"></a>Zestawy ładowania z opóźnieniem w ASP.NET Core Blazor WebAssembly
 
@@ -47,6 +47,15 @@ Oznacz zestawy do ładowania z opóźnieniem w pliku projektu aplikacji ( `.cspr
 ```
 
 Opóźnieniem ładować można tylko zestawy, które są używane przez aplikację. Paski konsolidatora nieużywane zestawy z opublikowanych danych wyjściowych.
+
+> [!NOTE]
+> W programie .NET 5 Release Candidate 1 (RC1) lub nowszym, który zostanie zwolniony w połowie września, nazwa zestawu będzie wymagała `.dll` rozszerzenia:
+>
+> ```xml
+> <ItemGroup>
+>  <BlazorWebAssemblyLazyLoad Include="GrantImaharaRobotControls.dll" />
+> </ItemGroup>
+> ```
 
 ## <a name="router-component"></a>`Router` cm6long
 
@@ -170,6 +179,15 @@ Jeśli użytkownik przejdzie do trasy a, a następnie natychmiast do trasy B, ap
 
 > [!NOTE]
 > Nie zgłaszaj, czy token anulowania w programie `NavigationContext` został anulowany może spowodować niezamierzone zachowanie, takie jak renderowanie składnika z poprzedniej nawigacji.
+
+### <a name="onnavigateasync-events-and-renamed-assembly-files"></a>`OnNavigateAsync` zdarzenia i pliki zestawu o zmienionej nazwie
+
+Moduł ładujący zasoby opiera się na nazwach zestawów, które są zdefiniowane w `blazor.boot.json` pliku. W przypadku [zmiany nazwy zestawów](xref:blazor/host-and-deploy/webassembly#change-the-filename-extension-of-dll-files)nazwy zestawów używane w `OnNavigateAsync` metodach i nazwach zestawów w `blazor.boot.json` pliku nie są zsynchronizowane.
+
+Aby to skorygować:
+
+* Sprawdź, czy aplikacja jest uruchomiona w środowisku produkcyjnym podczas określania, które nazwy zestawów mają być używane.
+* Zapisz nazwy zestawów o zmienionej nazwie w osobnym pliku i odczytaj z tego pliku, aby określić nazwę zestawu, który ma być używany w `LazyLoadAssemblyService` `OnNavigateAsync` metodach i.
 
 ### <a name="complete-example"></a>Pełny przykład
 

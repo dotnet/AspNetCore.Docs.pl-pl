@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/localization
-ms.openlocfilehash: 254cae2b66773d7bb71aa6313fd08b6f739b7682
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: d5be01c67f455a2706a654574ef9f5e273551e70
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634647"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865447"
 ---
 # <a name="globalization-and-localization-in-aspnet-core"></a>Globalizacja i lokalizacja w ASP.NET Core
 
@@ -250,7 +250,7 @@ Lista domyślna przechodzi od najbardziej konkretnych do najmniej określonych. 
 
 ### <a name="querystringrequestcultureprovider"></a>QueryStringRequestCultureProvider
 
-Niektóre aplikacje będą używać ciągu zapytania w celu ustawienia kultur [i kultury interfejsu użytkownika](https://msdn.microsoft.com/library/system.globalization.cultureinfo.aspx). W przypadku aplikacji, które korzystają z cookie metody lub nagłówka Accept-Language, Dodawanie ciągu zapytania do adresu URL jest przydatne w przypadku debugowania i testowania kodu. Domyślnie program `QueryStringRequestCultureProvider` jest rejestrowany jako pierwszy dostawca lokalizacji na `RequestCultureProvider` liście. Parametry ciągu zapytania są przekazywane `culture` i `ui-culture` . Poniższy przykład ustawia określoną kulturę (język i region) na hiszpański/Meksyk:
+Niektóre aplikacje będą używać ciągu zapytania do ustawienia <https://docs.microsoft.com/dotnet/api/system.globalization.cultureinfo?view=netcore-3.1> . W przypadku aplikacji, które korzystają z cookie metody lub nagłówka Accept-Language, Dodawanie ciągu zapytania do adresu URL jest przydatne w przypadku debugowania i testowania kodu. Domyślnie program `QueryStringRequestCultureProvider` jest rejestrowany jako pierwszy dostawca lokalizacji na `RequestCultureProvider` liście. Parametry ciągu zapytania są przekazywane `culture` i `ui-culture` . Poniższy przykład ustawia określoną kulturę (język i region) na hiszpański/Meksyk:
 
    `http://localhost:5000/?culture=es-MX&ui-culture=es-MX`
 
@@ -349,7 +349,7 @@ Proces lokalizowania aplikacji wymaga również podstawowej znajomości odpowied
 
 Możliwość [lokalizowania](/dotnet/standard/globalization-localization/localizability-review) to proces pośredni służący do sprawdzania, czy aplikacja globalna jest gotowa do lokalizacji.
 
-Format [RFC 4646](https://www.ietf.org/rfc/rfc4646.txt) dla nazwy kultury to `<languagecode2>-<country/regioncode2>` , gdzie `<languagecode2>` jest kodem języka i `<country/regioncode2>` jest kodem podkultury. Na przykład `es-CL` w przypadku języka hiszpańskiego (Chile) `en-US` dla języka angielskiego (Stany Zjednoczone) i `en-AU` dla języka angielskiego (Australia). [RFC 4646](https://www.ietf.org/rfc/rfc4646.txt) jest kombinacją kodu ISO 639 2 litery małymi literami związanymi z językiem i ISO 3166 2 literą w postaci wielkiej litery, skojarzonej z krajem lub regionem. Zobacz [nazwa kultury języka](https://msdn.microsoft.com/library/ee825488(v=cs.20).aspx).
+Format [RFC 4646](https://www.ietf.org/rfc/rfc4646.txt) dla nazwy kultury to `<languagecode2>-<country/regioncode2>` , gdzie `<languagecode2>` jest kodem języka i `<country/regioncode2>` jest kodem podkultury. Na przykład `es-CL` w przypadku języka hiszpańskiego (Chile) `en-US` dla języka angielskiego (Stany Zjednoczone) i `en-AU` dla języka angielskiego (Australia). [RFC 4646](https://www.ietf.org/rfc/rfc4646.txt) jest kombinacją kodu ISO 639 2 litery małymi literami związanymi z językiem i ISO 3166 2 literą w postaci wielkiej litery, skojarzonej z krajem lub regionem. Zobacz: <https://docs.microsoft.com/previous-versions/commerce-server/ee825488(v=cs.20)>.
 
 Międzynarodowe jest często skracane do "I18N". Skrót przyjmuje pierwszą i ostatnią literę oraz liczbę liter między nimi, więc 18 oznacza liczbę liter między pierwszym "I" i ostatnim "N". Dotyczy to zarówno globalizacji (G11N), jak i lokalizacji (L10N).
 
@@ -368,7 +368,7 @@ Odsetk
 
 [!INCLUDE[](~/includes/localization/unsupported-culture-log-level.md)]
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:fundamentals/troubleshoot-aspnet-core-localization>
 * [Projekt lokalizacji. StarterWeb](https://github.com/aspnet/Entropy/tree/master/samples/Localization.StarterWeb) używany w artykule.
@@ -604,7 +604,7 @@ Lista domyślna przechodzi od najbardziej konkretnych do najmniej określonych. 
 
 ### <a name="querystringrequestcultureprovider"></a>QueryStringRequestCultureProvider
 
-Niektóre aplikacje będą używać ciągu zapytania w celu ustawienia kultur [i kultury interfejsu użytkownika](https://msdn.microsoft.com/library/system.globalization.cultureinfo.aspx). W przypadku aplikacji, które korzystają z cookie metody lub nagłówka Accept-Language, Dodawanie ciągu zapytania do adresu URL jest przydatne w przypadku debugowania i testowania kodu. Domyślnie program `QueryStringRequestCultureProvider` jest rejestrowany jako pierwszy dostawca lokalizacji na `RequestCultureProvider` liście. Parametry ciągu zapytania są przekazywane `culture` i `ui-culture` . Poniższy przykład ustawia określoną kulturę (język i region) na hiszpański/Meksyk:
+Niektóre aplikacje będą używać ciągu zapytania do ustawienia <https://docs.microsoft.com/dotnet/api/system.globalization.cultureinfo?view=netcore-3.1> . W przypadku aplikacji, które korzystają z cookie metody lub nagłówka Accept-Language, Dodawanie ciągu zapytania do adresu URL jest przydatne w przypadku debugowania i testowania kodu. Domyślnie program `QueryStringRequestCultureProvider` jest rejestrowany jako pierwszy dostawca lokalizacji na `RequestCultureProvider` liście. Parametry ciągu zapytania są przekazywane `culture` i `ui-culture` . Poniższy przykład ustawia określoną kulturę (język i region) na hiszpański/Meksyk:
 
 ```
 http://localhost:5000/?culture=es-MX&ui-culture=es-MX
@@ -705,7 +705,7 @@ Proces lokalizowania aplikacji wymaga również podstawowej znajomości odpowied
 
 Możliwość [lokalizowania](/dotnet/standard/globalization-localization/localizability-review) to proces pośredni służący do sprawdzania, czy aplikacja globalna jest gotowa do lokalizacji.
 
-Format [RFC 4646](https://www.ietf.org/rfc/rfc4646.txt) dla nazwy kultury to `<languagecode2>-<country/regioncode2>` , gdzie `<languagecode2>` jest kodem języka i `<country/regioncode2>` jest kodem podkultury. Na przykład `es-CL` w przypadku języka hiszpańskiego (Chile) `en-US` dla języka angielskiego (Stany Zjednoczone) i `en-AU` dla języka angielskiego (Australia). [RFC 4646](https://www.ietf.org/rfc/rfc4646.txt) jest kombinacją kodu ISO 639 2 litery małymi literami związanymi z językiem i ISO 3166 2 literą w postaci wielkiej litery, skojarzonej z krajem lub regionem. Zobacz [nazwa kultury języka](https://msdn.microsoft.com/library/ee825488(v=cs.20).aspx).
+Format [RFC 4646](https://www.ietf.org/rfc/rfc4646.txt) dla nazwy kultury to `<languagecode2>-<country/regioncode2>` , gdzie `<languagecode2>` jest kodem języka i `<country/regioncode2>` jest kodem podkultury. Na przykład `es-CL` w przypadku języka hiszpańskiego (Chile) `en-US` dla języka angielskiego (Stany Zjednoczone) i `en-AU` dla języka angielskiego (Australia). [RFC 4646](https://www.ietf.org/rfc/rfc4646.txt) jest kombinacją kodu ISO 639 2 litery małymi literami związanymi z językiem i ISO 3166 2 literą w postaci wielkiej litery, skojarzonej z krajem lub regionem. Zobacz: <https://docs.microsoft.com/previous-versions/commerce-server/ee825488(v=cs.20)>.
 
 Międzynarodowe jest często skracane do "I18N". Skrót przyjmuje pierwszą i ostatnią literę oraz liczbę liter między nimi, więc 18 oznacza liczbę liter między pierwszym "I" i ostatnim "N". Dotyczy to zarówno globalizacji (G11N), jak i lokalizacji (L10N).
 
@@ -722,7 +722,7 @@ Odsetk
 
 [!INCLUDE[](~/includes/localization/currency.md)]
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:fundamentals/troubleshoot-aspnet-core-localization>
 * [Projekt lokalizacji. StarterWeb](https://github.com/aspnet/Entropy/tree/master/samples/Localization.StarterWeb) używany w artykule.
@@ -959,7 +959,7 @@ Lista domyślna przechodzi od najbardziej konkretnych do najmniej określonych. 
 
 ### <a name="querystringrequestcultureprovider"></a>QueryStringRequestCultureProvider
 
-Niektóre aplikacje będą używać ciągu zapytania w celu ustawienia kultur [i kultury interfejsu użytkownika](https://msdn.microsoft.com/library/system.globalization.cultureinfo.aspx). W przypadku aplikacji, które korzystają z cookie metody lub nagłówka Accept-Language, Dodawanie ciągu zapytania do adresu URL jest przydatne w przypadku debugowania i testowania kodu. Domyślnie program `QueryStringRequestCultureProvider` jest rejestrowany jako pierwszy dostawca lokalizacji na `RequestCultureProvider` liście. Parametry ciągu zapytania są przekazywane `culture` i `ui-culture` . Poniższy przykład ustawia określoną kulturę (język i region) na hiszpański/Meksyk:
+Niektóre aplikacje będą używać ciągu zapytania do ustawienia <https://docs.microsoft.com/dotnet/api/system.globalization.cultureinfo?view=netcore-3.1> . W przypadku aplikacji, które korzystają z cookie metody lub nagłówka Accept-Language, Dodawanie ciągu zapytania do adresu URL jest przydatne w przypadku debugowania i testowania kodu. Domyślnie program `QueryStringRequestCultureProvider` jest rejestrowany jako pierwszy dostawca lokalizacji na `RequestCultureProvider` liście. Parametry ciągu zapytania są przekazywane `culture` i `ui-culture` . Poniższy przykład ustawia określoną kulturę (język i region) na hiszpański/Meksyk:
 
 ```
 http://localhost:5000/?culture=es-MX&ui-culture=es-MX
@@ -1007,7 +1007,7 @@ Jeśli określisz tylko jedną z informacji o kulturze i kulturze interfejsu uż
 
 ### <a name="the-content-language-http-header"></a>Nagłówek HTTP w języku zawartości
 
-Nagłówek jednostki [zawartości w języku](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Language) :
+Nagłówek jednostki [zawartości w języku](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Language) :
 
 * Służy do opisywania języków przeznaczonych dla odbiorców.
 * Umożliwia użytkownikowi odróżnienie zgodnie z preferowanym językiem użytkownika.
@@ -1083,7 +1083,7 @@ Proces lokalizowania aplikacji wymaga również podstawowej znajomości odpowied
 
 Możliwość [lokalizowania](/dotnet/standard/globalization-localization/localizability-review) to proces pośredni służący do sprawdzania, czy aplikacja globalna jest gotowa do lokalizacji.
 
-Format [RFC 4646](https://www.ietf.org/rfc/rfc4646.txt) dla nazwy kultury to `<languagecode2>-<country/regioncode2>` , gdzie `<languagecode2>` jest kodem języka i `<country/regioncode2>` jest kodem podkultury. Na przykład `es-CL` w przypadku języka hiszpańskiego (Chile) `en-US` dla języka angielskiego (Stany Zjednoczone) i `en-AU` dla języka angielskiego (Australia). [RFC 4646](https://www.ietf.org/rfc/rfc4646.txt) jest kombinacją kodu ISO 639 2 litery małymi literami związanymi z językiem i ISO 3166 2 literą w postaci wielkiej litery, skojarzonej z krajem lub regionem. Zobacz [nazwa kultury języka](https://msdn.microsoft.com/library/ee825488(v=cs.20).aspx).
+Format [RFC 4646](https://www.ietf.org/rfc/rfc4646.txt) dla nazwy kultury to `<languagecode2>-<country/regioncode2>` , gdzie `<languagecode2>` jest kodem języka i `<country/regioncode2>` jest kodem podkultury. Na przykład `es-CL` w przypadku języka hiszpańskiego (Chile) `en-US` dla języka angielskiego (Stany Zjednoczone) i `en-AU` dla języka angielskiego (Australia). [RFC 4646](https://www.ietf.org/rfc/rfc4646.txt) jest kombinacją kodu ISO 639 2 litery małymi literami związanymi z językiem i ISO 3166 2 literą w postaci wielkiej litery, skojarzonej z krajem lub regionem. Zobacz: <https://docs.microsoft.com/previous-versions/commerce-server/ee825488(v=cs.20)>.
 
 Międzynarodowe jest często skracane do "I18N". Skrót przyjmuje pierwszą i ostatnią literę oraz liczbę liter między nimi, więc 18 oznacza liczbę liter między pierwszym "I" i ostatnim "N". Dotyczy to zarówno globalizacji (G11N), jak i lokalizacji (L10N).
 
@@ -1102,7 +1102,7 @@ Odsetk
 
 [!INCLUDE[](~/includes/localization/unsupported-culture-log-level.md)]
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:fundamentals/troubleshoot-aspnet-core-localization>
 * [Projekt lokalizacji. StarterWeb](https://github.com/aspnet/Entropy/tree/master/samples/Localization.StarterWeb) używany w artykule.

@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/proper-to-2x/membership-to-core-identity
-ms.openlocfilehash: de9d1e5f6f595269595212fbab60d12dfd5a29e4
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: a9ec02381b156a6599042d8e504a476036246302
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633646"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865558"
 ---
 # <a name="migrate-from-aspnet-membership-authentication-to-aspnet-core-20-no-locidentity"></a>Migrowanie z uwierzytelniania członkostwa ASP.NET do ASP.NET Core 2,0 Identity
 
@@ -35,7 +35,7 @@ W tym artykule przedstawiono Migrowanie schematu bazy danych dla aplikacji ASP.N
 
 ## <a name="review-of-membership-schema"></a>Przegląd schematu członkostwa
 
-Przed ASP.NET 2,0, deweloperzy byli poddani do tworzenia całego procesu uwierzytelniania i autoryzacji dla swoich aplikacji. W przypadku ASP.NET 2,0 wprowadzono członkostwo, które zapewnia standardowe rozwiązanie do obsługi zabezpieczeń w aplikacjach ASP.NET. Deweloperzy mogli teraz załadować schemat do bazy danych SQL Server za pomocą polecenia [aspnet_regsql.exe](https://msdn.microsoft.com/library/ms229862.aspx) . Po uruchomieniu tego polecenia następujące tabele zostały utworzone w bazie danych programu.
+Przed ASP.NET 2,0, deweloperzy byli poddani do tworzenia całego procesu uwierzytelniania i autoryzacji dla swoich aplikacji. W przypadku ASP.NET 2,0 wprowadzono członkostwo, które zapewnia standardowe rozwiązanie do obsługi zabezpieczeń w aplikacjach ASP.NET. Deweloperzy mogli teraz załadować schemat do SQL Server bazy danych za pomocą <https://docs.microsoft.com/previous-versions/ms229862(v=vs.140)> polecenia. Po uruchomieniu tego polecenia następujące tabele zostały utworzone w bazie danych programu.
 
   ![Tabele członkostwa](identity/_static/membership-tables.png)
 

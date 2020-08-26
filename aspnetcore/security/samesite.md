@@ -18,12 +18,12 @@ no-loc:
 - SignalR
 - Electron
 uid: security/samesite
-ms.openlocfilehash: c95952face8763dc9f2dd12312cab1a1bc07528a
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 3ba033b4165b19131d11311e5ae9d64e6afe48ca
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632346"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865433"
 ---
 # <a name="work-with-samesite-no-loccookies-in-aspnet-core"></a>Pracuj z SameSite cookie s w ASP.NET Core
 
@@ -73,11 +73,11 @@ Można pobrać i przetestować następujący przykład:
 
 ## <a name="net-core-support-for-the-samesite-attribute"></a>Obsługa platformy .NET Core dla atrybutu sameSite
 
-Program .NET Core 2,2 obsługuje wersję standardową 2019 dla SameSite od momentu wydania aktualizacji w grudniu 2019. Deweloperzy mogą programowo kontrolować wartość atrybutu sameSite przy użyciu `HttpCookie.SameSite` właściwości. Ustawienie `SameSite` właściwości na Strict, swobodny lub None powoduje, że te wartości są zapisywane w sieci przy użyciu cookie . Ustawienie równe (SameSiteMode) (-1) wskazuje, że żaden atrybut sameSite nie powinien być uwzględniony w sieci z cookie
+Program .NET Core 2,2 i nowszy obsługują wersję 2019 wersji Standard dla SameSite od czasu wydania aktualizacji w grudniu 2019. Deweloperzy mogą programowo kontrolować wartość atrybutu sameSite przy użyciu `HttpCookie.SameSite` właściwości. Ustawienie `SameSite` właściwości na Strict, swobodny lub None powoduje, że te wartości są zapisywane w sieci przy użyciu cookie . Ustawienie równe `(SameSiteMode)(-1)` wskazuje, że żaden atrybut sameSite nie powinien być uwzględniony w sieci z cookie
 
 [!code-csharp[](samesite/snippets/Privacy.cshtml.cs?name=snippet)]
 
-Program .NET Core 3,0 obsługuje zaktualizowane wartości SameSite i dodaje dodatkową wartość enum `SameSiteMode.Unspecified` do `SameSiteMode` wyliczenia.
+Platforma .NET Core 3,0 i nowsze obsługują zaktualizowane wartości SameSite i dodaje dodatkową wartość enum `SameSiteMode.Unspecified` do `SameSiteMode` wyliczenia.
 Ta nowa wartość wskazuje, że żaden sameSite nie powinien być wysyłany z cookie .
 
 ::: moniker-end
@@ -230,7 +230,7 @@ Flagi SameSite są ustawiane na `edge://flags/#same-site-by-default-cookies` str
 
 Wersje programu Electron obejmują starsze wersje chromu. Na przykład wersja Electron użyta przez zespoły to chrom 66, który wykazuje starsze zachowanie. Należy przeprowadzić własne testy zgodności z Electron używaną wersją produktu. Zapoznaj się z tematem [Obsługa starszych przeglądarek](#sob) w następnej sekcji.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Blog chromu: deweloperzy: przygotowanie do nowego SameSite = none; Cookie Ustawienia zabezpieczeń](https://blog.chromium.org/2019/10/developers-get-ready-for-new.html)
 * [SameSite cookie s](https://web.dev/samesite-cookies-explained/)

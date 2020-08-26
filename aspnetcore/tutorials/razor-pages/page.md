@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/page
-ms.openlocfilehash: 9fc44d228a31b8ae6c78dc12988392806dd95823
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 03febbd71df19cd3524d26e229a8bd8798a874b5
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633438"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865124"
 ---
 # <a name="part-3-scaffolded-no-locrazor-pages-in-aspnet-core"></a>Część 3, szkieletowe Razor strony w ASP.NET Core
 
@@ -98,9 +98,8 @@ Poprzedni wyróżniony znacznik jest przykładem Razor przejścia do języka C#.
 
 `"Title"`Właściwość jest używana w pliku *Pages/Shared/_Layout. cshtml* . Poniższy znacznik pokazuje pierwsze kilka wierszy pliku *_Layout. cshtml* .
 
-<!-- we need a snapshot copy of layout because we are
-changing in in the next step.
--->
+<!-- We need a snapshot copy of layout because we are changing in the next step. -->
+
 [!code-cshtml[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/NU/_Layout.cshtml?highlight=6)]
 
 Wiersz `@*Markup removed for brevity.*@` jest Razor komentarzem. W przeciwieństwie do komentarzy HTML ( `<!-- -->` ), Razor Komentarze nie są wysyłane do klienta.
@@ -210,7 +209,7 @@ Aparat szkieletu tworzy Razor znaczniki dla każdego pola w modelu (z wyjątkiem
 
 Aby uzyskać więcej informacji na temat pomocników tagów `<form method="post">` , takich jak, zobacz [pomocnicy tagów w ASP.NET Core](xref:mvc/views/tag-helpers/intro).
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 > [!div class="step-by-step"]
 > [Poprzedni: Dodawanie modelu](xref:tutorials/razor-pages/model) 
@@ -284,9 +283,8 @@ Poprzedni wyróżniony kod jest przykładem Razor przejścia do języka C#. `{`Z
 
 Właściwość "title" jest używana w pliku *Pages/Shared/_Layout. cshtml* . Poniższy znacznik pokazuje pierwsze kilka wierszy pliku *_Layout. cshtml* .
 
-<!-- we need a snapshot copy of layout because we are
-changing in in the next step.
--->
+<!-- We need a snapshot copy of layout because we are changing in the next step. -->
+
 [!code-cshtml[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/NU/_Layout.cshtml?highlight=6-99)]
 
 Wiersz `@*Markup removed for brevity.*@` jest Razor komentarzem, które nie pojawia się w pliku układu. W przeciwieństwie do komentarzy HTML ( `<!-- -->` ), Razor Komentarze nie są wysyłane do klienta.
@@ -376,7 +374,7 @@ Aparat szkieletu tworzy Razor znaczniki dla każdego pola w modelu (z wyjątkiem
 
 [Pomocnik tagu wejściowego](xref:mvc/views/working-with-forms) ( `<input asp-for="Movie.Title" class="form-control">` ) używa atrybutów [DataAnnotations](/aspnet/mvc/overview/older-versions/mvc-music-store/mvc-music-store-part-6) i tworzy atrybuty HTML, które są zbędne do walidacji jQuery po stronie klienta.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Wersja tego samouczka usługi YouTube](https://youtu.be/zxgKjPYnOMM)
 

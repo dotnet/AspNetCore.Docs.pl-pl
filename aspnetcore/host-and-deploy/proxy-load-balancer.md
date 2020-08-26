@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/proxy-load-balancer
-ms.openlocfilehash: 737575667be0e6b776a4d9ec9fb75bc0d11309dc
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 209f75edc2901422b94c619a505e0b8316aec699
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634179"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865393"
 ---
 # <a name="configure-aspnet-core-to-work-with-proxy-servers-and-load-balancers"></a>Konfigurowanie ASP.NET Core do pracy z serwerami proxy i usługami równoważenia obciążenia
 
@@ -78,7 +78,7 @@ Skonfiguruj oprogramowanie pośredniczące w programie <xref:Microsoft.AspNetCor
 
 ### <a name="forwarded-headers-middleware-order"></a>Przekierowane nagłówki — zamówienie oprogramowania
 
-Przekierowane nagłówki oprogramowanie pośredniczące powinno być uruchamiane przed innym programem pośredniczącym. Takie porządkowanie zapewnia, że oprogramowanie pośredniczące polegające na informacjach o przekazanych nagłówkach może zużywać wartości nagłówka do przetworzenia. Przesłane nagłówki — oprogramowanie pośredniczące może zostać uruchomione po diagnostyki i obsłudze błędów, ale należy je uruchomić przed wywołaniem `UseHsts` :
+Przekierowane nagłówki oprogramowanie pośredniczące powinno być uruchamiane przed innym programem pośredniczącym. Takie porządkowanie zapewnia, że oprogramowanie pośredniczące polegające na informacjach o przekazanych nagłówkach może zużywać wartości nagłówka do przetworzenia. Przekierowane nagłówki oprogramowanie pośredniczące może zostać uruchomione po obsłudze diagnostyki i błędów, ale należy je uruchomić przed wywołaniem `UseHsts` :
 
 [!code-csharp[](~/host-and-deploy/proxy-load-balancer/3.1samples/Startup.cs?name=snippet&highlight=13-17,25,30)]
 
@@ -208,7 +208,7 @@ Możesz również podać adres w formacie szesnastkowym ( `10.11.12.1` reprezent
 
 ```csharp
 // To access IPNetwork and IPAddress, add the following namespaces:
-// using using System.Net;
+// using System.Net;
 // using Microsoft.AspNetCore.HttpOverrides;
 services.Configure<ForwardedHeadersOptions>(options =>
 {
@@ -380,7 +380,7 @@ services.Configure<ForwardedHeadersOptions>(options =>
 > [!IMPORTANT]
 > Zezwalanie na nagłówki tylko zaufanym serwerom proxy i sieciom. W przeciwnym razie ataki [metodą fałszowania adresów IP](https://www.iplocation.net/ip-spoofing) są możliwe.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:host-and-deploy/web-farm>
 * [Poradnik zabezpieczeń firmy Microsoft CVE-2018-0787: ASP.NET Core podniesienia poziomu uprawnień](https://github.com/aspnet/Announcements/issues/295)
@@ -586,7 +586,7 @@ Możesz również podać adres w formacie szesnastkowym ( `10.11.12.1` reprezent
 
 ```csharp
 // To access IPNetwork and IPAddress, add the following namespaces:
-// using using System.Net;
+// using System.Net;
 // using Microsoft.AspNetCore.HttpOverrides;
 services.Configure<ForwardedHeadersOptions>(options =>
 {
@@ -708,7 +708,7 @@ services.Configure<ForwardedHeadersOptions>(options =>
 > [!IMPORTANT]
 > Zezwalanie na nagłówki tylko zaufanym serwerom proxy i sieciom. W przeciwnym razie ataki [metodą fałszowania adresów IP](https://www.iplocation.net/ip-spoofing) są możliwe.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:host-and-deploy/web-farm>
 * [Poradnik zabezpieczeń firmy Microsoft CVE-2018-0787: ASP.NET Core podniesienia poziomu uprawnień](https://github.com/aspnet/Announcements/issues/295)

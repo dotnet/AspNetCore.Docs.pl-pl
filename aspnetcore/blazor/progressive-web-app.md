@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/progressive-web-app
-ms.openlocfilehash: 230b2a801a76e2d719fba8e2b97fddb0b32a9634
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 4f184a1264614b16ce98ba5474aacd60f175bd8a
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88627965"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865207"
 ---
 # <a name="build-progressive-web-applications-with-aspnet-core-no-locblazor-webassembly"></a>Twórz progresywne aplikacje sieci Web za pomocą ASP.NET Core Blazor WebAssembly
 
@@ -72,7 +72,7 @@ Opcjonalnie można skonfigurować PWA dla aplikacji utworzonej przy użyciu szab
 
 Podczas odwiedzania aplikacji utworzonej przy użyciu szablonu PWA użytkownicy mają możliwość instalowania aplikacji w menu Start, zadokowanym lub na ekranie głównym systemu operacyjnego. Sposób przedstawiania tej opcji zależy od przeglądarki użytkownika. W przypadku korzystania z przeglądarek programu Desktop w formacie chromu, takich jak Edge lub Chrome, na pasku adresu URL pojawia się przycisk **Dodaj** . Gdy użytkownik wybierze przycisk **Dodaj** , pojawi się okno dialogowe potwierdzenia:
 
-![Potwierdzenie diaglog w usłudze Google Chrome prezentuje przycisk przycisku Zainstaluj użytkownikowi dla aplikacji "my::: No-Loc (Blazor):::P wa".](progressive-web-app/_static/image2.png)
+![Okno dialogowe potwierdzenia w usłudze Google Chrome prezentuje przycisk Zainstaluj użytkownikowi dla aplikacji "my::: No-Loc (Blazor):::P wa".](progressive-web-app/_static/image2.png)
 
 W systemie iOS osoby odwiedzające mogą zainstalować program PWA przy użyciu przycisku **udostępniania** Safari i jego opcji **Dodaj do homescreen** . W programie Chrome dla systemu Android użytkownicy powinni wybrać przycisk **menu** w prawym górnym rogu, a następnie **dodać do ekranu głównego**.
 
@@ -298,6 +298,6 @@ Aby utworzyć aplikację w usłudze PWA w trybie offline, która współdziała 
 * `LocalVehiclesStore` (`Client/Data/LocalVehiclesStore.cs`)
 * `LoginStatus` składnik ( `Client/Shared/LoginStatus.razor` )
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [SignalR negocjowanie między źródłami na potrzeby uwierzytelniania](xref:blazor/fundamentals/additional-scenarios#signalr-cross-origin-negotiation-for-authentication)

@@ -5,7 +5,7 @@ description: Kompiluj Blazor aplikację krok po kroku.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/30/2020
+ms.date: 08/22/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/build-a-blazor-app
-ms.openlocfilehash: 769b3bda591252c51bec3ffd72a43eaa5929349e
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 7335b68ad06b9d2b8d7e056cfc1a6d8214119b21
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630838"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865415"
 ---
 # <a name="build-a-no-locblazor-todo-list-app"></a>Tworzenie aplikacji z listą zadań do wykonania Blazor
 
@@ -51,7 +51,7 @@ Na końcu tego samouczka będziesz mieć działającą aplikację z listą zada�
    dotnet new blazorserver -o TodoList
    ```
 
-   Poprzednie polecenie tworzy folder o nazwie `TodoList` do przechowywania aplikacji. Zmień katalogi na `TodoList` folder za pomocą następującego polecenia:
+   Poprzednie polecenie tworzy folder o nazwie `TodoList` do przechowywania aplikacji. `TodoList`Folder jest *folderem głównym* projektu. Zmień katalogi na `TodoList` folder za pomocą następującego polecenia:
 
    ```dotnetcli
    cd TodoList
@@ -64,7 +64,7 @@ Na końcu tego samouczka będziesz mieć działającą aplikację z listą zada�
    ```
 
    > [!IMPORTANT]
-   > Razor nazwy plików składników wymagają wielkie litery, dlatego upewnij się, że `Todo` Nazwa pliku składnika zaczyna się od wielkiej litery `T` .
+   > Razor nazwy plików składników wymagają wielkich liter. Otwórz `Pages` folder i upewnij się, że `Todo` Nazwa pliku składnika zaczyna się od wielkiej litery `T` . Nazwa pliku powinna być `Todo.razor` .
 
 1. W polu `Pages/Todo.razor` Podaj początkowe znaczniki dla składnika:
 
@@ -88,9 +88,9 @@ Na końcu tego samouczka będziesz mieć działającą aplikację z listą zada�
    </li>
    ```
 
-1. Skompiluj ponownie i uruchom aplikację. Odwiedź stronę nowych zadań do wykonania, aby upewnić się, że łącze do `Todo` składnika działa.
+1. Skompiluj i uruchom aplikację, wykonując `dotnet run` polecenie w powłoce poleceń z `TodoList` folderu. Odwiedź stronę nowych zadań do wykonania, aby upewnić się, że łącze do `Todo` składnika działa.
 
-1. Dodaj `TodoItem.cs` plik do katalogu głównego projektu w celu przechowywania klasy, która reprezentuje element do wykonania. Użyj następującego kodu w języku C# dla `TodoItem` klasy:
+1. Dodaj `TodoItem.cs` plik do katalogu głównego projektu ( `TodoList` folderu) do przechowywania klasy, która reprezentuje element do wykonania. Użyj następującego kodu w języku C# dla `TodoItem` klasy:
 
    [!code-csharp[](build-a-blazor-app/samples_snapshot/3.x/TodoItem.cs)]
 
@@ -105,7 +105,7 @@ Na końcu tego samouczka będziesz mieć działającą aplikację z listą zada�
 
    [!code-razor[](build-a-blazor-app/samples_snapshot/3.x/ToDo5.razor?highlight=12-13)]
 
-1. Skompiluj ponownie i uruchom aplikację. Gdy **`Add todo`** przycisk jest zaznaczony, nic się nie dzieje, ponieważ program obsługi zdarzeń nie jest połączony z przyciskiem.
+1. Zatrzymaj uruchomioną aplikację w powłoce poleceń. Wiele powłok poleceń akceptuje polecenie klawiatury <kbd>Ctrl</kbd> + <kbd>c</kbd> , aby zatrzymać aplikację. Skompiluj ponownie i uruchom aplikację za pomocą `dotnet run` polecenia. Gdy **`Add todo`** przycisk jest zaznaczony, nic się nie dzieje, ponieważ program obsługi zdarzeń nie jest połączony z przyciskiem.
 
 1. Dodaj `AddTodo` metodę do `Todo` składnika i zarejestruj ją w celu wybrania opcji przy użyciu `@onclick` atrybutu. `AddTodo`Metoda C# jest wywoływana, gdy przycisk jest zaznaczony:
 
@@ -123,7 +123,7 @@ Na końcu tego samouczka będziesz mieć działającą aplikację z listą zada�
 
    [!code-razor[](build-a-blazor-app/samples_snapshot/3.x/ToDo8.razor?highlight=19-26)]
 
-1. Skompiluj ponownie i uruchom aplikację. Dodaj do listy zadań do zrobienia elementy do wykonania, aby przetestować nowy kod.
+1. Zatrzymaj uruchomioną aplikację w powłoce poleceń. Skompiluj ponownie i uruchom aplikację za pomocą `dotnet run` polecenia. Dodaj do listy zadań do zrobienia elementy do wykonania, aby przetestować nowy kod.
 
 1. Tekst tytułu dla każdego elementu do wykonania można edytować, a pole wyboru może pomóc użytkownikowi śledzić elementy ukończone. Dodaj pole wyboru dla każdego elementu do wykonania i powiąż jego wartość z `IsDone` właściwością. Zmień `@todo.Title` na `<input>` element powiązany z `@todo.Title` :
 
@@ -139,7 +139,7 @@ Na końcu tego samouczka będziesz mieć działającą aplikację z listą zada�
 
    [!code-razor[](build-a-blazor-app/samples_snapshot/3.x/Todo.razor)]
 
-1. Skompiluj ponownie i uruchom aplikację. Dodaj elementy do wykonania, aby przetestować nowy kod.
+1. Zatrzymaj uruchomioną aplikację w powłoce poleceń. Skompiluj ponownie i uruchom aplikację za pomocą `dotnet run` polecenia. Dodaj elementy do wykonania, aby przetestować nowy kod.
 
 ## <a name="next-steps"></a>Następne kroki
 

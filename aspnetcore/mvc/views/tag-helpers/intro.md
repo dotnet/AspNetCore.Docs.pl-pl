@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/intro
-ms.openlocfilehash: 42a7231b529dd9f8ecbce4f8116111e1c96c830d
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 345d20494111b808dac9678637de060169730a53
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633100"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865354"
 ---
 # <a name="tag-helpers-in-aspnet-core"></a>Pomocnicy tagów w ASP.NET Core
 
@@ -254,9 +254,9 @@ Edytor programu Visual Studio pomaga napisać **wszystkie** znaczniki w podejśc
 
 ## <a name="tag-helpers-compared-to-web-server-controls"></a>Pomocnicy tagów w porównaniu do kontrolek serwera sieci Web
 
-* Pomocnicy tagów nie są własnością elementu, z którym są skojarzone; po prostu biorą udział w renderowaniu elementu i zawartości. [Kontrolki serwera sieci Web](https://msdn.microsoft.com/library/7698y1f0.aspx) ASP.NET są deklarowane i wywoływane na stronie.
+* Pomocnicy tagów nie są własnością elementu, z którym są skojarzone; po prostu biorą udział w renderowaniu elementu i zawartości. ASP.NET <https://docs.microsoft.com/previous-versions/dotnet/netframework-3.0/7698y1f0(v=vs.85)> są zadeklarowane i wywoływane na stronie.
 
-* [Kontrolki serwera sieci Web](https://msdn.microsoft.com/library/zsyt68f1.aspx) mają nieuproszczony cykl życia, który może sprawiać, że programowanie i debugowanie jest trudne.
+* <https://docs.microsoft.com/previous-versions/zsyt68f1(v=vs.140)> mieć nieuproszczony cykl życia, który może sprawiać, że programowanie i debugowanie jest trudne.
 
 * Kontrolki serwera sieci Web umożliwiają dodawanie funkcji do elementów Document Object Model klienta (DOM) przy użyciu formantu klienta. Pomocnicy tagów nie mają modelu DOM.
 
@@ -278,7 +278,7 @@ Możesz dostosować czcionkę i kolorowanie przy użyciu **Tools**  >  **opcji**
 
 [!INCLUDE[](~/includes/built-in-TH.md)]
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Autorzy tagów](xref:mvc/views/tag-helpers/authoring)
 * [Praca z formularzami](xref:mvc/views/working-with-forms)

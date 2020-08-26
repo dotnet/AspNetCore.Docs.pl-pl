@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/http-modules
-ms.openlocfilehash: 8be09171991964540cd41a1324fb87503591151f
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 213807634a2a6990e9025de7871295cf97a81faf
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632177"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865590"
 ---
 # <a name="migrate-http-handlers-and-modules-to-aspnet-core-middleware"></a>Migrowanie programów obsługi i modułów HTTP do ASP.NET Core oprogramowania pośredniczącego
 
@@ -55,7 +55,7 @@ Przed przystąpieniem do ASP.NET Core oprogramowania pośredniczącego najpierw 
 
 **Kolejność, w której moduły przetwarzają żądania przychodzące, jest określana na podstawie:**
 
-1. [Cykl życia aplikacji](https://msdn.microsoft.com/library/ms227673.aspx), czyli zdarzenia serii wywoływane przez ASP.NET: [BeginRequest](/dotnet/api/system.web.httpapplication.beginrequest), [AuthenticateRequest](/dotnet/api/system.web.httpapplication.authenticaterequest)itd. Każdy moduł może utworzyć procedurę obsługi dla jednego lub wielu zdarzeń.
+1. <https://docs.microsoft.com/previous-versions/ms227673(v=vs.140)>, Czyli zdarzenia serii wywoływane przez ASP.NET: [BeginRequest](/dotnet/api/system.web.httpapplication.beginrequest), [AuthenticateRequest](/dotnet/api/system.web.httpapplication.authenticaterequest)itd. Każdy moduł może utworzyć procedurę obsługi dla jednego lub wielu zdarzeń.
 
 2. Dla tego samego zdarzenia kolejność, w jakiej są skonfigurowane w *Web.config*.
 
@@ -92,7 +92,7 @@ Oprócz modułów można dodać programy obsługi dla zdarzeń cyklu życia do p
 
 **Oprogramowanie pośredniczące i moduły są przetwarzane w innej kolejności:**
 
-* Kolejność oprogramowania pośredniczącego opiera się na kolejności, w której są wstawiane do potoku żądania, natomiast kolejność modułów opiera się głównie na zdarzeniach [cyklu życia aplikacji](https://msdn.microsoft.com/library/ms227673.aspx) .
+* Kolejność oprogramowania pośredniczącego opiera się na kolejności, w której są wstawiane do potoku żądania, natomiast kolejność modułów opiera się głównie na <https://docs.microsoft.com/previous-versions/ms227673(v=vs.140)> zdarzeniach
 
 * Kolejność oprogramowania pośredniczącego w odniesieniu do odpowiedzi to odwrotność od żądania, natomiast kolejność modułów jest taka sama dla żądań i odpowiedzi
 
@@ -393,7 +393,7 @@ public async Task Invoke(HttpContext httpContext)
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_SetCookies)]
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Obsługa protokołu HTTP i moduły HTTP — Omówienie](/iis/configuration/system.webserver/)
 * [Konfiguracja](xref:fundamentals/configuration/index)

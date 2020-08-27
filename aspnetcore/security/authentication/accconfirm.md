@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/accconfirm
-ms.openlocfilehash: 57607390e7d5e58df9f27437faecd57504ad64df
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: d6ea37ceb83ffbaa94187e0c541c79428594e4b4
+ms.sourcegitcommit: 2039e60eb7b482da8298f82dcd5eda27cf747f32
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635375"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88906452"
 ---
 # <a name="account-confirmation-and-password-recovery-in-aspnet-core"></a>Potwierdzenie konta i odzyskiwanie hasła w ASP.NET Core
 
@@ -70,7 +70,7 @@ Utwórz klasę, aby pobrać bezpieczny klucz poczty e-mail. Dla tego przykładu 
 
 #### <a name="configure-sendgrid-user-secrets"></a>Konfigurowanie kluczy tajnych użytkownika SendGrid
 
-Ustaw `SendGridUser` i `SendGridKey` za pomocą [Narzędzia do zarządzania kluczami tajnymi](xref:security/app-secrets). Na przykład:
+Ustaw `SendGridUser` i `SendGridKey` za pomocą [Narzędzia do zarządzania kluczami tajnymi](xref:security/app-secrets). Przykład:
 
 ```dotnetcli
 dotnet user-secrets set SendGridUser RickAndMSFT
@@ -106,7 +106,7 @@ W konsoli Menedżera pakietów wprowadź następujące polecenie:
 Install-Package SendGrid
 ```
 
-# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
 
 W konsoli programu wprowadź następujące polecenie:
 
@@ -160,7 +160,13 @@ Uruchom aplikację internetową, a następnie przetestuj potwierdzenie konta i p
 * Wprowadź adres e-mail, który został użyty do zarejestrowania konta.
 * Zostanie wysłana wiadomość e-mail z linkiem służącym do resetowania hasła. Sprawdź swój adres e-mail i kliknij link, aby zresetować hasło. Po pomyślnym zresetowaniu hasła możesz zalogować się przy użyciu adresu e-mail i nowego hasła.
 
-## <a name="change-email-and-activity-timeout"></a>Zmień limit czasu wiadomości e-mail i aktywności
+<a name="resend"></a>
+
+## <a name="resend-email-confirmation"></a>Potwierdzenie ponownego wysłania wiadomości e-mail
+
+W ASP.NET Core 5,0 i nowszych wybierz link **Wyślij wiadomość e-mail z potwierdzeniem** na stronie **logowania** .
+
+### <a name="change-email-and-activity-timeout"></a>Zmień limit czasu wiadomości e-mail i aktywności
 
 Domyślny limit czasu braku aktywności wynosi 14 dni. Następujący kod ustawia limit czasu braku aktywności na 5 dni:
 
@@ -185,10 +191,6 @@ Dodaj niestandardową [DataProtectorTokenProvider \<TUser> ](/dotnet/api/microso
 Dodaj dostawcę niestandardowego do kontenera usługi:
 
 [!code-csharp[](accconfirm/sample/WebPWrecover30/StartupEmail.cs?name=snippet1&highlight=10-16)]
-
-### <a name="resend-email-confirmation"></a>Potwierdzenie ponownego wysłania wiadomości e-mail
-
-Zobacz [ten problem](https://github.com/dotnet/AspNetCore/issues/5410)w serwisie GitHub.
 
 <a name="debug"></a>
 
@@ -290,7 +292,7 @@ Utwórz klasę, aby pobrać bezpieczny klucz poczty e-mail. Dla tego przykładu 
 
 #### <a name="configure-sendgrid-user-secrets"></a>Konfigurowanie kluczy tajnych użytkownika SendGrid
 
-Ustaw `SendGridUser` i `SendGridKey` za pomocą [Narzędzia do zarządzania kluczami tajnymi](xref:security/app-secrets). Na przykład:
+Ustaw `SendGridUser` i `SendGridKey` za pomocą [Narzędzia do zarządzania kluczami tajnymi](xref:security/app-secrets). Przykład:
 
 ```console
 C:/WebAppl>dotnet user-secrets set SendGridUser RickAndMSFT
@@ -324,7 +326,7 @@ W konsoli Menedżera pakietów wprowadź następujące polecenie:
 Install-Package SendGrid
 ```
 
-# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
 
 W konsoli programu wprowadź następujące polecenie:
 

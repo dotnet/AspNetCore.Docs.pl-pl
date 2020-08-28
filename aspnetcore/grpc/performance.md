@@ -1,5 +1,5 @@
 ---
-title: Najlepsze rozwiązania dotyczące wydajności w programie gRPC for ASP.NET Core
+title: Najlepsze rozwiązania w zakresie wydajności z gRPC
 author: jamesnk
 description: Poznaj najlepsze rozwiązania dotyczące tworzenia usług gRPC o wysokiej wydajności.
 monikerRange: '>= aspnetcore-3.0'
@@ -17,24 +17,24 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/performance
-ms.openlocfilehash: f9cefa89ec6e533920b33223b34333f6ebe38428
-ms.sourcegitcommit: 4df148cbbfae9ec8d377283ee71394944a284051
+ms.openlocfilehash: 7d4d5732e6edb0d0a156fdcec5f59cc09a69d7de
+ms.sourcegitcommit: 111b4e451da2e275fb074cde5d8a84b26a81937d
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88876727"
+ms.lasthandoff: 08/27/2020
+ms.locfileid: "89040882"
 ---
-# <a name="performance-best-practices-in-grpc-for-aspnet-core"></a>Najlepsze rozwiązania dotyczące wydajności w programie gRPC for ASP.NET Core
+# <a name="performance-best-practices-with-grpc"></a>Najlepsze rozwiązania w zakresie wydajności z gRPC
 
 Przez [Kuba Kowalski-króla](https://twitter.com/jamesnk)
 
 gRPC jest przeznaczony dla usług o wysokiej wydajności. W tym dokumencie wyjaśniono, jak uzyskać najlepszą wydajność z gRPC.
 
-## <a name="reuse-channel"></a>Użyj ponownie kanału
+## <a name="reuse-grpc-channels"></a>Ponowne używanie kanałów gRPC
 
 Podczas wykonywania wywołań gRPC należy ponownie użyć kanału gRPC. Ponowne użycie kanału umożliwia wywoływanie wywołań przez istniejące połączenie HTTP/2.
 
-Jeśli dla każdego wywołania gRPC zostanie utworzony nowy kanał, ilość czasu, jaką zajmie ukończenie, może znacząco wzrosnąć. Każde wywołanie będzie wymagało wielu operacji sieciowych między klientem a serwerem w celu utworzenia połączenia HTTP/2:
+Jeśli dla każdego wywołania gRPC zostanie utworzony nowy kanał, ilość czasu, jaką zajmie ukończenie, może znacząco wzrosnąć. Każde wywołanie będzie wymagało wielu operacji sieciowych między klientem a serwerem w celu utworzenia nowego połączenia HTTP/2:
 
 1. Otwieranie gniazda
 2. Nawiązywanie połączenia TCP
@@ -86,7 +86,45 @@ Istnieją kilka obejść dla aplikacji platformy .NET Core 3,1:
 > * Rywalizacja o wątki między strumieniami próbującymi wykonać zapis w połączeniu.
 > * Utrata pakietów połączenia powoduje, że wszystkie wywołania są blokowane w warstwie TCP.
 
+## <a name="load-balancing"></a>Równoważenie obciążenia
+
+Niektóre usługi równoważenia obciążenia nie działają efektywnie z usługą gRPC. Usługi równoważenia obciążenia P4 (transport) działają na poziomie połączenia przez dystrybuowanie połączeń TCP między punktami końcowymi. Takie podejście dobrze sprawdza się w przypadku ładowania wywołań interfejsu API równoważenia przy użyciu protokołu HTTP/1.1. Współbieżne wywołania wykonane przy użyciu protokołu HTTP/1.1 są wysyłane w różnych połączeniach, co umożliwia Równoważenie obciążenia między punktami końcowymi.
+
+Moduły równoważenia obciążenia P4 działają na poziomie połączenia, ale nie działają prawidłowo z gRPC. gRPC używa protokołu HTTP/2, który multipleksuje wiele wywołań w jednym połączeniu TCP. Wszystkie wywołania gRPC za pośrednictwem tego połączenia przejdą do jednego punktu końcowego.
+
+Dostępne są dwie opcje efektywnego równoważenia obciążenia gRPC:
+
+1. Równoważenie obciążenia po stronie klienta
+2. Równoważenie obciążenia serwera proxy P7 (aplikacji)
+
+> [!NOTE]
+> Tylko wywołania gRPC można równoważyć obciążeniem między punktami końcowymi. Po nawiązaniu połączenia gRPC przesyłania strumieniowego wszystkie komunikaty wysyłane przez strumień są przenoszone do jednego punktu końcowego.
+
+### <a name="client-side-load-balancing"></a>Równoważenie obciążenia po stronie klienta
+
+Za pomocą równoważenia obciążenia po stronie klienta Klient zna informacje o punktach końcowych. Dla każdego wywołania gRPC wybiera inny punkt końcowy do wysłania wywołania. Równoważenie obciążenia po stronie klienta jest dobrym rozwiązaniem, gdy opóźnienie jest ważne. Między klientem a usługą nie istnieje serwer proxy, dlatego wywołanie jest wysyłane bezpośrednio do usługi. Minusem do równoważenia obciążenia po stronie klienta polega na tym, że każdy klient musi śledzić dostępne punkty końcowe, których należy użyć.
+
+Referencyjna równoważenia obciążenia klienta jest techniką, w której stan równoważenia obciążenia jest przechowywany w centralnej lokalizacji. Klienci okresowo wysyłają zapytanie do centralnej lokalizacji, aby uzyskać informacje do użycia podczas podejmowania decyzji dotyczących równoważenia obciążenia.
+
+`Grpc.Net.Client` obecnie nie obsługuje równoważenia obciążenia po stronie klienta. [GRPC. Core](https://www.nuget.org/packages/Grpc.Core) to dobry wybór w przypadku, gdy w programie .NET jest wymagane Równoważenie obciążenia po stronie klienta.
+
+### <a name="proxy-load-balancing"></a>Równoważenie obciążenia serwera proxy
+
+Serwer proxy P7 (aplikacja) działa na wyższym poziomie niż serwer proxy P4 (transport). Serwery proxy P7 mają świadomość protokołu HTTP/2 i umożliwiają dystrybucję wywołań gRPC do serwera proxy na jednym połączeniu HTTP/2 w wielu punktach końcowych. Użycie serwera proxy jest prostsze niż Równoważenie obciążenia po stronie klienta, ale może zwiększyć dodatkowe opóźnienie dla wywołań gRPC.
+
+Istnieje wiele dostępnych serwerów proxy P7. Dostępne są następujące opcje:
+
+1. [Wysłannika](https://www.envoyproxy.io/) serwer proxy — popularny serwer proxy typu open source.
+2. [Łącząca](https://linkerd.io/) się z siatką usługi dla Kubernetes.
+2. [YARP: odwrotny serwer](https://microsoft.github.io/reverse-proxy/) proxy — Podgląd typu open source zapisany w środowisku .NET.
+
 ::: moniker range=">= aspnetcore-5.0"
+
+## <a name="inter-process-communication"></a>Komunikacja między procesami
+
+wywołania gRPC między klientem a usługą są zwykle wysyłane za pośrednictwem gniazd TCP. Protokół TCP doskonale nadaje się do komunikacji w sieci, ale [komunikacja między procesami (IPC)](https://wikipedia.org/wiki/Inter-process_communication) jest bardziej wydajna, gdy klient i usługa znajdują się na tym samym komputerze.
+
+Rozważ użycie transportu, takiego jak gniazda domeny systemu UNIX lub nazwane potoki, dla wywołań gRPC między procesami na tym samym komputerze. Aby uzyskać więcej informacji, zobacz <xref:grpc/interprocess>.
 
 ## <a name="keep-alive-pings"></a>Utrzymywanie aktywności poleceń ping
 

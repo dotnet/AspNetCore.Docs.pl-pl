@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/protobuf
-ms.openlocfilehash: b8149b79c1e7b204e52cc8595d1193b623bb0008
-ms.sourcegitcommit: 47c9a59ff8a359baa6bca2637d3af87ddca1245b
+ms.openlocfilehash: f898907e5bae7c67cfca72c70dc8497f36de2622
+ms.sourcegitcommit: 111b4e451da2e275fb074cde5d8a84b26a81937d
 ms.translationtype: MT
 ms.contentlocale: pl-PL
 ms.lasthandoff: 08/27/2020
-ms.locfileid: "88945766"
+ms.locfileid: "89040856"
 ---
 # <a name="create-protobuf-messages-for-net-apps"></a>Tworzenie komunikatów protobuf dla aplikacji platformy .NET
 
@@ -338,7 +338,7 @@ Pola w `oneof` zestawie muszą mieć unikatowe numery pól w ogólnej deklaracji
 W przypadku korzystania `oneof` z programu wygenerowany kod C# zawiera wyliczenie, które określa, które z pól zostały ustawione. Możesz przetestować Wyliczenie, aby znaleźć pole, które zostało ustawione. Pola, które nie ustawiają `null` wartości zwracanej lub domyślnej, zamiast zgłaszać wyjątek.
 
 ```csharp
-var response = client.GetPersonAsync(new RequestMessage());
+var response = await client.GetPersonAsync(new RequestMessage());
 
 switch (response.ResultCase)
 {

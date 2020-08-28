@@ -94,6 +94,9 @@
         - name: Zaplecze dla urządzeń przenośnych
           displayName: tutorial
           uid: mobile/native-mobile-backend
+        - name: Publikowanie w usłudze Azure API Management
+          displayName: tutorial
+          uid: tutorials/publish-to-azure-api-management-using-vs
     - name: Aplikacje internetowe w czasie rzeczywistym
       items:
         - name: Usługa SignalR za pomocą języka JavaScript
@@ -702,7 +705,11 @@
         - name: Wprowadzenie do usługi gRPC
           uid: tutorials/grpc/grpc-start
     - name: Usługi gRPC w środowisku C#
-      uid: grpc/basics
+      items:
+        - name: Omówienie
+          uid: grpc/basics
+        - name: Tworzenie usług gRPC
+          uid: grpc/services
     - name: Usługi gRPC na platformie ASP.NET Core
       uid: grpc/aspnetcore
     - name: Wywoływanie usług gRPC przy użyciu klienta .NET
@@ -711,6 +718,8 @@
       uid: grpc/clientfactory
     - name: Używanie gRPC w aplikacjach przeglądarki
       uid: grpc/browser
+    - name: Komunikacja między procesami przy użyciu gRPC
+      uid: grpc/interprocess
     - name: Konfiguracja
       uid: grpc/configuration
     - name: Uwierzytelnianie i autoryzacja
@@ -719,6 +728,8 @@
       uid: grpc/diagnostics
     - name: Zagadnienia dotyczące bezpieczeństwa
       uid: grpc/security
+    - name: Tworzenie komunikatów Protobuf
+      uid: grpc/protobuf
     - name: Najlepsze rozwiązania w zakresie wydajności
       uid: grpc/performance
     - name: Przechowywanie wersji usług gRPC
@@ -955,7 +966,7 @@
   items:
     - name: Omówienie
       uid: security/index
-    - name: Uwierzytelnianie
+    - name: Authentication
       items:
         - name: Omówienie
           uid: security/authentication/index

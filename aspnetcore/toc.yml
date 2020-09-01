@@ -722,6 +722,8 @@
       uid: grpc/browser
     - name: Komunikacja między procesami przy użyciu gRPC
       uid: grpc/interprocess
+    - name: Tworzenie internetowych interfejsów API JSON z usługi gRPC
+      uid: grpc/httpapi
     - name: Konfiguracja
       uid: grpc/configuration
     - name: Uwierzytelnianie i autoryzacja
@@ -966,7 +968,7 @@
   items:
     - name: Omówienie
       uid: security/index
-    - name: Authentication
+    - name: Uwierzytelnianie
       items:
         - name: Omówienie
           uid: security/authentication/index

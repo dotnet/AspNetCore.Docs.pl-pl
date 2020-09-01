@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/data-binding
-ms.openlocfilehash: 3b41aedcbd0d2c22b20d8fa3a21b8af97d1fbb2c
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: d88cad10314872271250cd43212a64698f485381
+ms.sourcegitcommit: 8ed9a413bdc2d665ad11add8828898d726ccb106
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628563"
+ms.lasthandoff: 09/01/2020
+ms.locfileid: "89280403"
 ---
 # <a name="aspnet-core-no-locblazor-data-binding"></a>ASP.NET Core Blazor powiązania danych
 
@@ -79,27 +79,7 @@ Powiąż właściwość lub pole w innych zdarzeniach, dołączając także `@bi
 
 W przeciwieństwie do `onchange` , które jest wyzwalane, gdy element utraci fokus, `oninput` jest uruchamiany po zmianie wartości pola tekstowego.
 
-Użyj `@bind-{ATTRIBUTE}` `@bind-{ATTRIBUTE}:event` składni with, aby powiązać atrybuty elementu inne niż `value` . W poniższym przykładzie:
-
-* Styl akapitu jest **czerwony** , gdy składnik ładuje ( `style="color:red"` ).
-* Użytkownik zmienia wartość pola tekstowego, aby odzwierciedlała inny styl koloru CSS i zmienia fokus elementu strony. Na przykład użytkownik zmienia wartość pola tekstowego na `color:blue` i naciska klawisz <kbd>Tab</kbd> na klawiaturze.
-* Po zmianie fokusu elementu:
-  * Wartość `paragraphStyle` jest przypisana z `<input>` wartości elementu.
-  * Styl akapitu zostanie zaktualizowany w celu odzwierciedlenia nowego stylu w `paragraphStyle` . Jeśli styl zostanie zaktualizowany do `color:blue` , kolor tekstu zmieni się na **niebieski**.
-
-```razor
-<p>
-    <input type="text" @bind="paragraphStyle" />
-</p>
-
-<p @bind-style="paragraphStyle" @bind-style:event="onchange">
-    Blazorify the app!
-</p>
-
-@code {
-    private string paragraphStyle = "color:red";
-}
-```
+<!-- Hold location for resolution of https://github.com/dotnet/AspNetCore.Docs/issues/19721 -->
 
 W powiązaniu atrybutu rozróżniana jest wielkość liter:
 

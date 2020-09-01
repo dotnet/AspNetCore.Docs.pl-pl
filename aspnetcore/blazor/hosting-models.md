@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: 53293ae9780129530ce5a41639e19284f47aa245
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: a8d2ceaffb670723d7662234f3dc964c864e6763
+ms.sourcegitcommit: 8ed9a413bdc2d665ad11add8828898d726ccb106
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628082"
+ms.lasthandoff: 09/01/2020
+ms.locfileid: "89280429"
 ---
 # <a name="aspnet-core-no-locblazor-hosting-models"></a>ASP.NET Core Blazor modele hostingu
 
@@ -84,6 +84,9 @@ Blazor ServerModel hostingu oferuje kilka korzyści:
 * Program .NET Core na serwerze jest używany do uruchamiania aplikacji, więc istniejące narzędzia platformy .NET, takie jak debugowanie, działają zgodnie z oczekiwaniami.
 * Klienci zubożoni są obsługiwani. Na przykład Blazor Server aplikacje pracują z przeglądarkami, które nie obsługują zestawów webassembly i na urządzeniach z ograniczeniami zasobów.
 * Baza kodu platformy .NET/C#, w tym kod składnika aplikacji, nie jest obsługiwana dla klientów.
+
+> [!IMPORTANT]
+> Blazor ServerAplikacja jest przedstawiona w odpowiedzi na pierwsze żądanie klienta, która konfiguruje stan interfejsu użytkownika na serwerze. Gdy klient próbuje utworzyć SignalR połączenie, **Klient musi ponownie nawiązać połączenie z tym samym serwerem**. Blazor Server aplikacje korzystające z więcej niż jednego serwera wewnętrznej bazy danych powinny implementować *sesje usługi Sticky Notes* dla SignalR połączeń. Aby uzyskać więcej informacji, zobacz sekcję [połączenie z serwerem](#connection-to-the-server) .
 
 Istnieją Downsides do Blazor Server hostingu:
 

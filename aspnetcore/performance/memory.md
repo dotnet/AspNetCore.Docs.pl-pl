@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/memory
-ms.openlocfilehash: c409eaaf07109d363581ee7d61dc76521d6818d0
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 9bb055670b73c9a1ae04083bc326200a42151708
+ms.sourcegitcommit: 7258e94cf60c16e5b6883138e5e68516751ead0f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630669"
+ms.lasthandoff: 08/29/2020
+ms.locfileid: "89102799"
 ---
 # <a name="memory-management-and-garbage-collection-gc-in-aspnet-core"></a>Zarządzanie pamięcią i wyrzucanie elementów bezużytecznych (GC) w ASP.NET Core
 
@@ -235,7 +235,7 @@ Ten sam wyciek może wystąpić w kodzie użytkownika, wykonując jedną z nast�
 
 ### <a name="large-objects-heap"></a>Sterta dużych obiektów
 
-Częste alokacje pamięci/wolne cykle mogą fragmentacji pamięci, szczególnie podczas przydzielania dużych fragmentów pamięci. Obiekty są przydzielono w ciągłych blokach pamięci. W celu ograniczenia fragmentacji, gdy pamięć podwolna zostanie zwolniona, Trys ją do defragmentacji. Ten proces jest nazywany **kompaktowania**. Kompaktowanie obejmuje przeniesienie obiektów. Przeniesienie dużych obiektów nakłada spadek wydajności. Z tego powodu w wykazie globalnym tworzona jest specjalna strefa pamięci dla _dużych_ obiektów, nazywana [stertą dużego obiektu](/dotnet/standard/garbage-collection/large-object-heap) (LOH). Obiekty, które są większe niż 85 000 bajtów (około 83 KB) są następujące:
+Częste alokacje pamięci/wolne cykle mogą fragmentacji pamięci, szczególnie podczas przydzielania dużych fragmentów pamięci. Obiekty są przydzielono w ciągłych blokach pamięci. W celu ograniczenia fragmentacji, gdy pamięć podwolna zostanie zwolniona, próbuje ją zdefragmentować. Ten proces jest nazywany **kompaktowania**. Kompaktowanie obejmuje przeniesienie obiektów. Przeniesienie dużych obiektów nakłada spadek wydajności. Z tego powodu w wykazie globalnym tworzona jest specjalna strefa pamięci dla _dużych_ obiektów, nazywana [stertą dużego obiektu](/dotnet/standard/garbage-collection/large-object-heap) (LOH). Obiekty, które są większe niż 85 000 bajtów (około 83 KB) są następujące:
 
 * Umieszczone na LOH.
 * Nie kompaktuje.

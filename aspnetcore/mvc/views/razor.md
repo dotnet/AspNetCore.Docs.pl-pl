@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/razor
-ms.openlocfilehash: e42ee7a80475e784ea4791395d9b0665aca94a03
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: 9c2bbd2d463af8a2ea7db716d01bf1436338ea77
+ms.sourcegitcommit: cd861463faf44956855e3c4b3669483bbc4a7463
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865171"
+ms.lasthandoff: 08/29/2020
+ms.locfileid: "89101364"
 ---
 # <a name="no-locrazor-syntax-reference-for-aspnet-core"></a>Razor odwołanie do składni dla ASP.NET Core
 
@@ -131,17 +131,15 @@ Wyrażenia języka C#, które są obliczane jako ciąg, są kodowane w formacie 
 @("<span>Hello World</span>")
 ```
 
-Kod renderuje następujący HTML:
+Poprzedni kod renderuje następujący HTML:
 
 ```html
 &lt;span&gt;Hello World&lt;/span&gt;
 ```
 
-KOD HTML jest wyświetlany w przeglądarce jako:
+KOD HTML jest wyświetlany w przeglądarce jako zwykły tekst:
 
-```html
-<span>Hello World</span>
-```
+&lt;zakres &gt; Hello World &lt; /span&gt;
 
 `HtmlHelper.Raw` dane wyjściowe nie są kodowane, ale renderowane jako znaczniki HTML.
 
@@ -1006,6 +1004,6 @@ Deweloperzy są zachęcani do dopasowania wielkości liter w nazwach plików i k
 
 Przypadek dopasowania gwarantuje, że wdrożenia znajdą swoje widoki niezależnie od systemu plików.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 [Wprowadzenie do programowania w sieci Web ASP.NET za pomocą Razor Składnia](/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c) zawiera wiele przykładów programowania z Razor składnią.

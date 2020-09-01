@@ -17,20 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/extensibility/key-management
-ms.openlocfilehash: 797df457a5584233043210e9ba2657b7fd7f3893
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: db718b8d4c305b75ad52054efde6b2d03f6825ed
+ms.sourcegitcommit: 4cce99cbd44372fd4575e8da8c0f4345949f4d9a
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631007"
+ms.lasthandoff: 08/31/2020
+ms.locfileid: "89153535"
 ---
 # <a name="key-management-extensibility-in-aspnet-core"></a>Rozszerzalność zarządzania kluczami w ASP.NET Core
 
-> [!TIP]
-> Przeczytaj sekcję [Zarządzanie kluczami](xref:security/data-protection/implementation/key-management#data-protection-implementation-key-management) przed przeczytaniem tej sekcji, ponieważ objaśnia ona niektóre podstawowe koncepcje związane z tymi interfejsami API.
+Przeczytaj sekcję [Zarządzanie kluczami](xref:security/data-protection/implementation/key-management#data-protection-implementation-key-management) przed przeczytaniem tej sekcji, ponieważ objaśnia ona niektóre podstawowe koncepcje związane z tymi interfejsami API.
 
-> [!WARNING]
-> Typy implementujące jeden z następujących interfejsów powinny być bezpieczne dla wątków dla wielu wywołań.
+**Ostrzeżenie**: typy implementujące jeden z następujących interfejsów powinny być bezpieczne dla wątków dla wielu wywołań.
 
 ## <a name="key"></a>Klucz
 

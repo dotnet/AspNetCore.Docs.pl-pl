@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/browser
-ms.openlocfilehash: fd4cae386b8c9654192cd0c66e095500290c4aa0
-ms.sourcegitcommit: 7258e94cf60c16e5b6883138e5e68516751ead0f
+ms.openlocfilehash: 5c9501b3e7cbdcbb02e3d78d67185a0a75ccba7c
+ms.sourcegitcommit: c9b03d8a6a4dcc59e4aacb30a691f349235a74c8
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/29/2020
-ms.locfileid: "89102695"
+ms.lasthandoff: 09/02/2020
+ms.locfileid: "89379410"
 ---
 # <a name="use-grpc-in-browser-apps"></a>Używanie gRPC w aplikacjach przeglądarki
 
@@ -132,7 +132,31 @@ Powyższy kod ma następujące działanie:
 > [!IMPORTANT]
 > Wygenerowane gRPC klienci mają metody synchronizacji i asynchroniczne do wywoływania metod jednoargumentowych. Na przykład `SayHello` jest synchronizowana i `SayHelloAsync` jest asynchroniczna. Wywołanie metody synchronizacji w Blazor WebAssembly aplikacji spowoduje, że aplikacja przestanie odpowiadać. Metody asynchroniczne muszą być zawsze używane w programie Blazor WebAssembly .
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+### <a name="use-grpc-client-factory-with-grpc-web"></a>Używanie fabryki klienta gRPC z usługą gRPC-Web
+
+Klienta .NET zgodnego z programem gRPC-Web można utworzyć przy użyciu integracji usługi gRPC z usługą [HttpClientFactory](xref:System.Net.Http.IHttpClientFactory).
+
+Aby użyć gRPC-Web z fabryką klienta:
+
+* Dodaj odwołania do pakietu do pliku projektu dla następujących pakietów:
+  * [GRPC .NET. Client. Web](https://www.nuget.org/packages/Grpc.Net.Client.Web)
+  * [GRPC .NET. ClientFactory](https://www.nuget.org/packages/Grpc.Net.ClientFactory)
+* Zarejestruj klienta gRPC z iniekcją zależności (DI) przy użyciu uniwersalnej `AddGrpcClient` metody rozszerzania. W Blazor WebAssembly aplikacji usługi są zarejestrowane przy użyciu programu "di in" `Program.cs` .
+* Skonfiguruj `GrpcWebHandler` przy użyciu <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler%2A> metody rozszerzenia.
+
+```csharp
+builder.Services
+    .AddGrpcClient<Greet.GreeterClient>((services, options) =>
+    {
+        options.Address = new Uri("https://localhost:5001");
+    })
+    .ConfigurePrimaryHttpMessageHandler(
+        () => new GrpcWebHandler(GrpcWebMode.GrpcWebText, new HttpClientHandler()));
+```
+
+Aby uzyskać więcej informacji, zobacz <xref:grpc/clientfactory>.
+
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [gRPC dla klientów sieci Web — projekt GitHub](https://github.com/grpc/grpc-web)
 * <xref:security/cors>

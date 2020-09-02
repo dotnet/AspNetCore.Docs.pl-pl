@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/performance
-ms.openlocfilehash: 7d4d5732e6edb0d0a156fdcec5f59cc09a69d7de
-ms.sourcegitcommit: 111b4e451da2e275fb074cde5d8a84b26a81937d
+ms.openlocfilehash: a0a1a6901e07fb0074ca403870378f267d3d4403
+ms.sourcegitcommit: c9b03d8a6a4dcc59e4aacb30a691f349235a74c8
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/27/2020
-ms.locfileid: "89040882"
+ms.lasthandoff: 09/02/2020
+ms.locfileid: "89379448"
 ---
 # <a name="performance-best-practices-with-grpc"></a>Najlepsze rozwiązania w zakresie wydajności z gRPC
 
@@ -48,6 +48,8 @@ Kanały można bezpiecznie udostępniać i ponownie używać między gRPC wywoł
 * Wielu klientów gRPC można utworzyć na podstawie kanału, w tym różnych typów klientów.
 * Kanał i klienci utworzeni z kanału mogą być bezpiecznie używani przez wiele wątków.
 * Klienci utworzeni z kanału mogą wykonywać wiele jednoczesnych wywołań.
+
+Fabryka klientów gRPC oferuje scentralizowany sposób konfigurowania kanałów. Automatycznie ponownie używa kanałów bazowych. Aby uzyskać więcej informacji, zobacz <xref:grpc/clientfactory>.
 
 ## <a name="connection-concurrency"></a>Współbieżność połączenia
 
@@ -94,8 +96,8 @@ Moduły równoważenia obciążenia P4 działają na poziomie połączenia, ale 
 
 Dostępne są dwie opcje efektywnego równoważenia obciążenia gRPC:
 
-1. Równoważenie obciążenia po stronie klienta
-2. Równoważenie obciążenia serwera proxy P7 (aplikacji)
+* Równoważenie obciążenia po stronie klienta
+* Równoważenie obciążenia serwera proxy P7 (aplikacji)
 
 > [!NOTE]
 > Tylko wywołania gRPC można równoważyć obciążeniem między punktami końcowymi. Po nawiązaniu połączenia gRPC przesyłania strumieniowego wszystkie komunikaty wysyłane przez strumień są przenoszone do jednego punktu końcowego.
@@ -114,17 +116,11 @@ Serwer proxy P7 (aplikacja) działa na wyższym poziomie niż serwer proxy P4 (t
 
 Istnieje wiele dostępnych serwerów proxy P7. Dostępne są następujące opcje:
 
-1. [Wysłannika](https://www.envoyproxy.io/) serwer proxy — popularny serwer proxy typu open source.
-2. [Łącząca](https://linkerd.io/) się z siatką usługi dla Kubernetes.
-2. [YARP: odwrotny serwer](https://microsoft.github.io/reverse-proxy/) proxy — Podgląd typu open source zapisany w środowisku .NET.
+* [Wysłannika](https://www.envoyproxy.io/) — popularny serwer proxy typu open source.
+* [Łącząca](https://linkerd.io/) się z siatką usługi dla Kubernetes.
+* [YARP: odwrotny serwer](https://microsoft.github.io/reverse-proxy/) proxy — Podgląd typu open source zapisany w środowisku .NET.
 
 ::: moniker range=">= aspnetcore-5.0"
-
-## <a name="inter-process-communication"></a>Komunikacja między procesami
-
-wywołania gRPC między klientem a usługą są zwykle wysyłane za pośrednictwem gniazd TCP. Protokół TCP doskonale nadaje się do komunikacji w sieci, ale [komunikacja między procesami (IPC)](https://wikipedia.org/wiki/Inter-process_communication) jest bardziej wydajna, gdy klient i usługa znajdują się na tym samym komputerze.
-
-Rozważ użycie transportu, takiego jak gniazda domeny systemu UNIX lub nazwane potoki, dla wywołań gRPC między procesami na tym samym komputerze. Aby uzyskać więcej informacji, zobacz <xref:grpc/interprocess>.
 
 ## <a name="keep-alive-pings"></a>Utrzymywanie aktywności poleceń ping
 

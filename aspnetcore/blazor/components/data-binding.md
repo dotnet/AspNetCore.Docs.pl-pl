@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/data-binding
-ms.openlocfilehash: d88cad10314872271250cd43212a64698f485381
-ms.sourcegitcommit: 8ed9a413bdc2d665ad11add8828898d726ccb106
+ms.openlocfilehash: eef08d8236241d2930a1a1a45ca0181669f2432c
+ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/01/2020
-ms.locfileid: "89280403"
+ms.lasthandoff: 09/11/2020
+ms.locfileid: "90009651"
 ---
 # <a name="aspnet-core-no-locblazor-data-binding"></a>ASP.NET Core Blazor powiązania danych
 
@@ -145,37 +145,22 @@ Określanie formatu dla `date` typu pola nie jest zalecane, ponieważ Blazor ma 
 
 Parametry składnika umożliwiają powiązanie właściwości i pól składnika nadrzędnego z `@bind-{PROPERTY OR FIELD}` składnią.
 
-Następujący `Child` składnik ( `Child.razor` ) ma `Year` parametr składnika i `YearChanged` wywołanie zwrotne:
+Następujący `Child` składnik ( `Shared/Child.razor` ) ma `Year` parametr składnika i `YearChanged` wywołanie zwrotne:
 
 ```razor
 <div class="card bg-light mt-3" style="width:18rem ">
     <div class="card-body">
         <h3 class="card-title">Child Component</h3>
         <p class="card-text">Child <code>Year</code>: @Year</p>
-        <p>
-            <button @onclick="UpdateYear">
-                Update Child <code>Year</code> and call 
-                <code>YearChanged.InvokeAsync(Year)</code>
-            </button>
-        </p>
     </div>
 </div>
 
 @code {
-    private Random r = new Random();
-
     [Parameter]
     public int Year { get; set; }
 
     [Parameter]
     public EventCallback<int> YearChanged { get; set; }
-
-    private Task UpdateYear()
-    {
-        Year = r.Next(10050, 12021);
-
-        return YearChanged.InvokeAsync(Year);
-    }
 }
 ```
 
@@ -196,7 +181,7 @@ W poniższym `Parent` składniku ( `Parent.razor` ) `year` pole jest powiązane 
 
 @code {
     private Random r = new Random();
-    private int year = 1978;
+    private int year = 1979;
 
     private void UpdateYear()
     {
@@ -221,19 +206,19 @@ Nie można zaimplementować powiązania łańcuchowego ze [`@bind`](xref:mvc/vie
 
 Następujący `PasswordField` składnik ( `PasswordField.razor` ):
 
-* Ustawia `<input>` wartość elementu na `Password` Właściwość.
-* Uwidacznia zmiany `Password` właściwości w składniku nadrzędnym z [`EventCallback`](xref:blazor/components/event-handling#eventcallback) .
+* Ustawia `<input>` wartość elementu na `password` pole.
+* Uwidacznia zmiany właściwości w `Password` składniku nadrzędnym [`EventCallback`](xref:blazor/components/event-handling#eventcallback) , który przekazuje w bieżącej wartości pola elementu podrzędnego `password` jako argument.
 * Używa `onclick` zdarzenia do wyzwolenia `ToggleShowPassword` metody. Aby uzyskać więcej informacji, zobacz <xref:blazor/components/event-handling>.
 
 ```razor
-<h1>Child Component</h1>
+<h1>Provide your password</h1>
 
 Password:
 
 <input @oninput="OnPasswordChanged" 
        required 
        type="@(showPassword ? "text" : "password")" 
-       value="@Password" />
+       value="@password" />
 
 <button class="btn btn-primary" @onclick="ToggleShowPassword">
     Show password
@@ -241,6 +226,7 @@ Password:
 
 @code {
     private bool showPassword;
+    private string password;
 
     [Parameter]
     public string Password { get; set; }
@@ -250,9 +236,9 @@ Password:
 
     private Task OnPasswordChanged(ChangeEventArgs e)
     {
-        Password = e.Value.ToString();
+        password = e.Value.ToString();
 
-        return PasswordChanged.InvokeAsync(Password);
+        return PasswordChanged.InvokeAsync(password);
     }
 
     private void ToggleShowPassword()
@@ -276,12 +262,7 @@ Password:
 }
 ```
 
-Aby przeprowadzić sprawdzenia lub błędy pułapki dla hasła w poprzednim przykładzie:
-
-* Utwórz pole zapasowe dla `Password` ( `password` w poniższym przykładowym kodzie).
-* Wykonaj testy lub błędy pułapek w metodzie `Password` ustawiającej.
-
-Poniższy przykład przedstawia natychmiastową opinię dla użytkownika, jeśli w wartości hasła jest używana spacja:
+Wykonaj sprawdzenia lub błędy pułapki w metodzie, która wywołuje delegata powiązania. Poniższy przykład przedstawia natychmiastową opinię dla użytkownika, jeśli w wartości hasła jest używana spacja:
 
 ```razor
 <h1>Child Component</h1>
@@ -291,7 +272,7 @@ Password:
 <input @oninput="OnPasswordChanged" 
        required 
        type="@(showPassword ? "text" : "password")" 
-       value="@Password" />
+       value="@password" />
 
 <button class="btn btn-primary" @onclick="ToggleShowPassword">
     Show password
@@ -305,34 +286,25 @@ Password:
     private string validationMessage;
 
     [Parameter]
-    public string Password
-    {
-        get { return password ?? string.Empty; }
-        set
-        {
-            if (password != value)
-            {
-                if (value.Contains(' '))
-                {
-                    validationMessage = "Spaces not allowed!";
-                }
-                else
-                {
-                    password = value;
-                    validationMessage = string.Empty;
-                }
-            }
-        }
-    }
+    public string Password { get; set; }
 
     [Parameter]
     public EventCallback<string> PasswordChanged { get; set; }
 
     private Task OnPasswordChanged(ChangeEventArgs e)
     {
-        Password = e.Value.ToString();
+        if (password.Contains(' '))
+        {
+            validationMessage = "Spaces not allowed!";
 
-        return PasswordChanged.InvokeAsync(Password);
+            return Task.CompletedTask;
+        }
+        else
+        {
+            validationMessage = string.Empty;
+
+            return PasswordChanged.InvokeAsync(password);
+        }
     }
 
     private void ToggleShowPassword()

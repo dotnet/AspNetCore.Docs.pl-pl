@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/additional-scenarios
-ms.openlocfilehash: 6f092f3f9a18883c31b217b59d0b0abe802aff01
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 870509a3cbbcbea9b1c4804185c49a831af22630
+ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628304"
+ms.lasthandoff: 09/11/2020
+ms.locfileid: "90009638"
 ---
 # <a name="aspnet-core-no-locblazor-hosting-model-configuration"></a>ASP.NET Core Blazor konfigurację modelu hostingu
 
@@ -128,20 +128,62 @@ Blazor Server aplikacje są domyślnie skonfigurowane, aby skonfigurować interf
 
 Renderowanie składników serwera ze statyczną stroną HTML nie jest obsługiwane.
 
-## <a name="configure-the-no-locsignalr-client-for-no-locblazor-server-apps"></a>Konfigurowanie SignalR klienta dla Blazor Server aplikacji
+## <a name="initialize-the-no-locblazor-circuit"></a>Inicjowanie Blazor obwodu
 
 *Ta sekcja ma zastosowanie do Blazor Server .*
 
-Skonfiguruj SignalR klienta używanego przez Blazor Server aplikacje w `Pages/_Host.cshtml` pliku. Umieść skrypt wywołujący `Blazor.start` po `_framework/blazor.server.js` skrypcie i wewnątrz `</body>` znacznika.
-
-### <a name="logging"></a>Rejestrowanie
-
-Aby skonfigurować SignalR Rejestrowanie klientów:
+Skonfiguruj ręczne uruchamianie Blazor Server [ SignalR obwodu](xref:blazor/hosting-models#circuits) aplikacji w `Pages/_Host.cshtml` pliku:
 
 * Dodaj `autostart="false"` atrybut do `<script>` znacznika `blazor.server.js` skryptu.
-* Przekaż obiekt konfiguracji ( `configureSignalR` ), który jest wywoływany `configureLogging` z poziomem rejestrowania w konstruktorze klienta.
+* Umieść skrypt wywołujący `Blazor.start` po `blazor.server.js` tagu skryptu i wewnątrz taga zamykającego `</body>` .
+
+Gdy `autostart` jest wyłączone, dowolny aspekt aplikacji, która nie zależy od obwodu, zwykle działa. Na przykład Routing po stronie klienta działa. Jednak każdy aspekt, który zależy od obwodu, nie działa do momentu `Blazor.start` wywołania. Zachowanie aplikacji jest nieprzewidywalne bez ustalonego obwodu. Na przykład metody komponentów nie są wykonywane podczas odłączania obwodu.
+
+### <a name="initialize-no-locblazor-when-the-document-is-ready"></a>Inicjuj Blazor , gdy dokument jest gotowy
+
+Aby zainicjować Blazor aplikację, gdy dokument jest gotowy:
 
 ```cshtml
+<body>
+
+    ...
+
+    <script autostart="false" src="_framework/blazor.server.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        Blazor.start();
+      });
+    </script>
+</body>
+```
+
+### <a name="chain-to-the-promise-that-results-from-a-manual-start"></a>Łańcuch z `Promise` wynikami ręcznego uruchamiania
+
+Aby wykonać dodatkowe zadania, takie jak Inicjalizacja międzyoperacyjna JS, użyj `then` do łańcucha z `Promise` wynikami ręcznego Blazor uruchamiania aplikacji:
+
+```cshtml
+<body>
+
+    ...
+
+    <script autostart="false" src="_framework/blazor.server.js"></script>
+    <script>
+      Blazor.start().then(function () {
+        ...
+      });
+    </script>
+</body>
+```
+
+### <a name="configure-the-no-locsignalr-client"></a>Konfigurowanie SignalR klienta programu
+
+#### <a name="logging"></a>Rejestrowanie
+
+Aby skonfigurować SignalR Rejestrowanie klienta, należy przekazać obiekt konfiguracji ( `configureSignalR` ), który wywołuje `configureLogging` z poziomem rejestrowania w konstruktorze klienta:
+
+```cshtml
+<body>
+
     ...
 
     <script autostart="false" src="_framework/blazor.server.js"></script>
@@ -164,12 +206,16 @@ Zdarzenia połączenia obwodu procedury obsługi ponownego połączenia można m
 * Powiadomienie użytkownika, jeśli połączenie zostało porzucone.
 * W celu przeprowadzenia rejestrowania (od klienta), gdy obwód jest połączony.
 
-Aby zmodyfikować zdarzenia połączenia:
+Aby zmodyfikować zdarzenia połączenia, zarejestruj wywołania zwrotne dla następujących zmian połączeń:
 
-* Dodaj `autostart="false"` atrybut do `<script>` znacznika `blazor.server.js` skryptu.
-* Zarejestruj wywołania zwrotne dla zmian połączenia dla porzuconych połączeń ( `onConnectionDown` ) i ustanowionych/ponownie ustanowionych połączeń ( `onConnectionUp` ). **Oba** `onConnectionDown` elementy i `onConnectionUp` musi być określony.
+* Porzucone użycie połączeń `onConnectionDown` .
+* Nawiązane/ponownie nawiązane połączenia `onConnectionUp` .
+
+**Oba** `onConnectionDown` elementy i `onConnectionUp` muszą być określone:
 
 ```cshtml
+<body>
+
     ...
 
     <script autostart="false" src="_framework/blazor.server.js"></script>
@@ -186,12 +232,11 @@ Aby zmodyfikować zdarzenia połączenia:
 
 ### <a name="adjust-the-reconnection-retry-count-and-interval"></a>Dostosuj liczbę ponownych prób ponownego połączenia i interwał
 
-Aby dostosować liczbę ponownych prób ponownego połączenia i interwał:
-
-* Dodaj `autostart="false"` atrybut do `<script>` znacznika `blazor.server.js` skryptu.
-* Ustaw liczbę ponownych prób ( `maxRetries` ) i okres w milisekundach dozwolony dla każdej próby ponowienia prób ( `retryIntervalMilliseconds` ).
+Aby dostosować liczbę ponownych prób ponownego połączenia i interwał, ustaw liczbę ponownych prób ( `maxRetries` ) i okres w milisekundach dozwolony dla każdej próbnej próby ( `retryIntervalMilliseconds` ):
 
 ```cshtml
+<body>
+
     ...
 
     <script autostart="false" src="_framework/blazor.server.js"></script>
@@ -206,14 +251,13 @@ Aby dostosować liczbę ponownych prób ponownego połączenia i interwał:
 </body>
 ```
 
-### <a name="hide-or-replace-the-reconnection-display"></a>Ukryj lub Zastąp ekran ponownego połączenia
+## <a name="hide-or-replace-the-reconnection-display"></a>Ukryj lub Zastąp ekran ponownego połączenia
 
-Aby ukryć ekran Ponowne łączenie:
-
-* Dodaj `autostart="false"` atrybut do `<script>` znacznika `blazor.server.js` skryptu.
-* Ustaw dla programu obsługi ponownego połączenia `_reconnectionDisplay` pusty obiekt ( `{}` lub `new Object()` ).
+Aby ukryć ekran ponowne połączenie, ustaw dla programu obsługi ponownego połączenia `_reconnectionDisplay` pusty obiekt ( `{}` lub `new Object()` ):
 
 ```cshtml
+<body>
+
     ...
 
     <script autostart="false" src="_framework/blazor.server.js"></script>
@@ -221,6 +265,8 @@ Aby ukryć ekran Ponowne łączenie:
       window.addEventListener('beforeunload', function () {
         Blazor.defaultReconnectionHandler._reconnectionDisplay = {};
       });
+
+      Blazor.start();
     </script>
 </body>
 ```
@@ -233,6 +279,18 @@ Blazor.defaultReconnectionHandler._reconnectionDisplay =
 ```
 
 Symbol zastępczy `{ELEMENT ID}` jest identyfikatorem elementu HTML do wyświetlenia.
+
+::: moniker range=">= aspnetcore-5.0"
+
+Dostosuj opóźnienie przed wyświetleniem ekranu ponownego połączenia przez ustawienie `transition-delay` właściwości w kodzie CSS aplikacji ( `wwwroot/css/site.css` ) dla elementu modalnego. W poniższym przykładzie ustawiono opóźnienie przejścia z 500 ms (domyślnie) do 1 000 MS (1 sekunda):
+
+```css
+#components-reconnect-modal {
+    transition: visibility 0s linear 1000ms;
+}
+```
+
+::: moniker-end
 
 ## <a name="influence-html-head-tag-elements"></a>Wpływ na `<head>` elementy tagów HTML
 

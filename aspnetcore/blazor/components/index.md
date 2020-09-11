@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: 26e8239634c3edb99c7606ab2e250c69af4e746f
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: be1584e72fc1504ac9f8ca10a6b084c95a579b5b
+ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865285"
+ms.lasthandoff: 09/11/2020
+ms.locfileid: "90009625"
 ---
 # <a name="create-and-use-aspnet-core-no-locrazor-components"></a>Tworzenie i używanie Razor składników ASP.NET Core
 
@@ -266,7 +266,7 @@ W poniższym przykładzie z przykładowej aplikacji `ParentComponent` ustawia wa
 [!code-razor[](index/samples_snapshot/ParentComponent.razor?highlight=5-6)]
 
 > [!WARNING]
-> Nie należy tworzyć składników, które zapisują do własnych *parametrów składników* , gdy zawartość składnika jest renderowana przy użyciu <xref:Microsoft.AspNetCore.Components.RenderFragment> , zamiast tego należy użyć pola private. Aby uzyskać więcej informacji, zobacz sekcję [zastąpione parametry `RenderFragment` ](#overwritten-parameters-with-renderfragment) .
+> Nie należy tworzyć składników, które zapisują do własnych *parametrów składników*, zamiast tego należy użyć pola private. Aby uzyskać więcej informacji, zobacz sekcję [zastępowanie parametrów](#overwritten-parameters) .
 
 ## <a name="child-content"></a>Zawartość podrzędna
 
@@ -625,14 +625,9 @@ Ogólnie rzecz biorąc, warto podać jeden z następujących rodzajów wartości
 
 Upewnij się, że wartości używane do [`@key`][5] nie kolidują. Jeśli w tym samym elemencie nadrzędnym zostaną wykryte wartości powodujące konflikt, program Blazor zgłosi wyjątek, ponieważ nie może on w sposób jednoznaczny zmapować starych elementów lub składników na nowe elementy lub składniki. Używaj tylko odrębnych wartości, takich jak wystąpienia obiektów lub wartości klucza podstawowego.
 
-## <a name="overwritten-parameters-with-renderfragment"></a>Zastępowanie parametrów `RenderFragment`
+## <a name="overwritten-parameters"></a>Zastępowanie parametrów
 
-Parametry są zastępowane w następujących warunkach:
-
-* Zawartość składnika podrzędnego jest renderowana przy użyciu <xref:Microsoft.AspNetCore.Components.RenderFragment> .
-* <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> jest wywoływana w składniku nadrzędnym.
-
-Parametry są resetowane, ponieważ składnik nadrzędny jest ponownie renderowany, gdy <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> jest wywoływana, i nowe wartości parametrów są dostarczane do składnika podrzędnego.
+Podawane są nowe wartości parametrów, zwykle zastępując istniejące, gdy składnik nadrzędny zostanie przerenderowany.
 
 Rozważmy następujący `Expander` składnik:
 
@@ -853,7 +848,7 @@ Podobnie Obrazy SVG są obsługiwane w regułach CSS pliku arkusza stylów ( `.c
 
 Jednak wbudowane znaczniki SVG nie są obsługiwane we wszystkich scenariuszach. Jeśli umieścisz `<svg>` tag bezpośrednio w pliku składnika ( `.razor` ), podstawowe renderowanie obrazu jest obsługiwane, ale wiele scenariuszy zaawansowanych nie jest jeszcze obsługiwanych. Na przykład `<use>` tagi nie są obecnie przestrzegane i [`@bind`][10] nie mogą być używane z niektórymi tagami SVG. Aby uzyskać więcej informacji, zobacz [Obsługa SVG w Blazor (#18271 dotnet/aspnetcore)](https://github.com/dotnet/aspnetcore/issues/18271).
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:blazor/security/server/threat-mitigation>: Zawiera wskazówki dotyczące tworzenia Blazor Server aplikacji, które muszą będą konkurować o z wyczerpaniem zasobów.
 

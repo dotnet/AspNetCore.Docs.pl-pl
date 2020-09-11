@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: test/troubleshoot-azure-iis
-ms.openlocfilehash: 117c777dc9ae1b8c6448f097132454b714a1b5dc
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: bc968489a35405c1be0a4ac2e52e6dff4c3af050
+ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632164"
+ms.lasthandoff: 09/11/2020
+ms.locfileid: "90009742"
 ---
 # <a name="troubleshoot-aspnet-core-on-azure-app-service-and-iis"></a>Rozwiązywanie problemów ASP.NET Core na Azure App Service i usługach IIS
 
@@ -167,7 +167,7 @@ Aby naprawić ten błąd, napraw instalację [pakietu hostingu platformy .NET Co
 
 ### <a name="50037-ancm-failed-to-start-within-startup-time-limit"></a>Nie można uruchomić 500,37 ANCM w ramach limitu czasu uruchamiania
 
-Nie można uruchomić ANCM w limicie czasu uruchamiania dostarczają. Domyślnie limit czasu wynosi 120 sekund.
+Nie można uruchomić ANCM w określonym limicie czasu uruchamiania. Domyślnie limit czasu wynosi 120 sekund.
 
 Ten błąd może wystąpić podczas uruchamiania dużej liczby aplikacji na tym samym komputerze. Podczas uruchamiania Sprawdź, czy na serwerze są naskoki użycie procesora CPU/pamięci. Może być konieczne rozłożenie procesu uruchamiania wielu aplikacji.
 

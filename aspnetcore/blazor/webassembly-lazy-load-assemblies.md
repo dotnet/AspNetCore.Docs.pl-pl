@@ -5,7 +5,7 @@ description: Odkryj, jak ładować zestawy w aplikacjach ASP.NET Core Blazor Web
 monikerRange: '>= aspnetcore-5.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/25/2020
+ms.date: 09/09/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-lazy-load-assemblies
-ms.openlocfilehash: 46f98080ad40f614f9cb1af2190f263d205c1016
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: f9b6766c2f46274e06cab18fd35b5e417e9bfa97
+ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865158"
+ms.lasthandoff: 09/11/2020
+ms.locfileid: "90009612"
 ---
 # <a name="lazy-load-assemblies-in-aspnet-core-no-locblazor-webassembly"></a>Zestawy ładowania z opóźnieniem w ASP.NET Core Blazor WebAssembly
 
@@ -94,7 +94,7 @@ Jeśli `OnNavigateAsync` wywołanie zwrotne zgłasza nieobsłużony wyjątek, zo
 * `Path`Właściwość jest ścieżką docelową użytkownika względem ścieżki podstawowej aplikacji, na przykład `/robot` .
 * `CancellationToken`Może służyć do obserwowania anulowania zadania asynchronicznego. `OnNavigateAsync` automatycznie anuluje aktualnie uruchomione zadanie nawigacji, gdy użytkownik nawiguje do innej strony.
 
-Wewnątrz `OnNavigateAsync` , należy wdrożyć logikę, aby określić zestawy do załadowania. Dostępne opcje:
+Wewnątrz `OnNavigateAsync` , należy wdrożyć logikę, aby określić zestawy do załadowania. Dostępne są następujące opcje:
 
 * Kontrole warunkowe wewnątrz `OnNavigateAsync` metody.
 * Tabela wyszukiwania, w której są mapowane trasy do nazw zestawów, które zostały dodane do składnika lub zaimplementowane w [`@code`](xref:mvc/views/razor#code) bloku.
@@ -114,8 +114,11 @@ Wewnątrz `OnNavigateAsync` , należy wdrożyć logikę, aby określić zestawy 
 * Używa programu JS Interop do pobierania zestawów za pośrednictwem połączenia sieciowego.
 * Ładuje zestawy do wykonywania w środowisku uruchomieniowym w zestawie webassembly w przeglądarce.
 
-> [!NOTE]
-> Implementacja wdrożenia z opóźnieniem struktury obsługuje funkcję prerenderowania na serwerze. Podczas renderowania prerenderingu założono, że wszystkie zestawy, w tym zaznaczone dla ładowania z opóźnieniem, zostały załadowane.
+Implementacja wdrożenia z opóźnieniem platformy obsługuje ładowanie z opóźnieniem z użyciem prerenderowania w hostowanym Blazor rozwiązaniu. Podczas renderowania prerenderingu założono, że wszystkie zestawy, w tym zaznaczone dla ładowania z opóźnieniem, zostały załadowane. Zarejestruj ręcznie `LazyAssemblyLoader` w metodzie projektu *serwera* `Startup.ConfigureServices` ( `Startup.cs` ):
+
+```csharp
+services.AddSingleton<LazyAssemblyLoader>();
+```
 
 ### <a name="user-interaction-with-navigating-content"></a>Interakcja użytkownika z `<Navigating>` zawartością
 

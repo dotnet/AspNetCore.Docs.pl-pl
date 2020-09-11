@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: a8d2ceaffb670723d7662234f3dc964c864e6763
-ms.sourcegitcommit: 8ed9a413bdc2d665ad11add8828898d726ccb106
+ms.openlocfilehash: 0830214029d59d0820ed3c5806267c766314c74f
+ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/01/2020
-ms.locfileid: "89280429"
+ms.lasthandoff: 09/11/2020
+ms.locfileid: "90009677"
 ---
 # <a name="aspnet-core-no-locblazor-hosting-models"></a>ASP.NET Core Blazor modele hostingu
 
@@ -41,7 +41,7 @@ Aby utworzyć Blazor aplikację przy użyciu modelu hostingu po stronie klienta,
 
 Po wybraniu szablonu ** Blazor WebAssembly aplikacji** można skonfigurować aplikację do używania zaplecza ASP.NET Core, zaznaczając pole wyboru **hostowane ASP.NET Core** ( [`dotnet new blazorwasm --hosted`](/dotnet/core/tools/dotnet-new) ). Aplikacja ASP.NET Core obsługuje Blazor klientów. Aplikacja z zapleczem ASP.NET Core jest nazywana * Blazor WebAssembly aplikacją hostowaną*. Blazor WebAssemblyAplikacja może współdziałać z serwerem za pośrednictwem sieci przy użyciu wywołań interfejsu API sieci Web lub [SignalR](xref:signalr/introduction) ( <xref:tutorials/signalr-blazor-webassembly> ).
 
-Szablony obejmują `blazor.webassembly.js` skrypt, który obsługuje:
+`blazor.webassembly.js`Skrypt jest dostarczany przez strukturę i dojścia:
 
 * Pobieranie środowiska uruchomieniowego platformy .NET, aplikacji i zależności aplikacji.
 * Inicjowanie środowiska uruchomieniowego w celu uruchomienia aplikacji.
@@ -75,7 +75,7 @@ Aplikacja ASP.NET Core odwołuje się `Startup` do klasy aplikacji do dodania:
 * Usługi po stronie serwera.
 * Aplikacja do potoku obsługi żądania.
 
-`blazor.server.js`Skrypt ustanawia połączenie z klientem. Jest on odpowiedzialny za utrzymanie i przywrócenie stanu aplikacji zgodnie z wymaganiami (na przykład w przypadku utraconego połączenia sieciowego). `blazor.server.js`Skrypt jest obsługiwany z zasobów osadzonych w ASP.NET Core udostępnionej platformie.
+Na kliencie `blazor.server.js` skrypt nawiązuje SignalR połączenie z serwerem. Skrypt jest obsługiwany przez aplikację po stronie klienta z osadzonego zasobu w ASP.NET Core udostępnionej platformie. Aplikacja po stronie klienta jest odpowiedzialna za utrwalanie i przywracanie stanu aplikacji zgodnie z potrzebami. 
 
 Blazor ServerModel hostingu oferuje kilka korzyści:
 

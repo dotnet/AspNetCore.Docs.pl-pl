@@ -5,7 +5,7 @@ description: Dowiedz się, jak kierować żądania w aplikacjach i informacje o 
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/14/2020
+ms.date: 09/02/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/routing
-ms.openlocfilehash: eb9e3cbddd2eaca8fef9a6782c28bbce4c029f58
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: fe67ebfefb463ab698e5ff1bb7d9b527a28a596e
+ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865331"
+ms.lasthandoff: 09/11/2020
+ms.locfileid: "90009586"
 ---
 # <a name="aspnet-core-no-locblazor-routing"></a>BlazorRouting ASP.NET Core
 
@@ -161,16 +161,35 @@ Dostępne są ograniczenia trasy podane w poniższej tabeli. W przypadku ogranic
 
 ### <a name="routing-with-urls-that-contain-dots"></a>Routing z adresami URL zawierającymi kropki
 
-W obszarze Blazor Server aplikacje domyślna trasa w `_Host.cshtml` to `/` ( `@page "/"` ). Adres URL żądania, który zawiera kropkę ( `.` ) nie pasuje do trasy domyślnej, ponieważ adres URL wygląda na żądanie pliku. BlazorAplikacja zwraca *404 — nie odnaleziono* odpowiedzi dla pliku statycznego, który nie istnieje. Aby użyć tras zawierających kropkę, skonfiguruj `_Host.cshtml` przy użyciu następującego szablonu trasy:
+W przypadku hostowanych Blazor WebAssembly i Blazor Server aplikacji szablon trasy domyślnej po stronie serwera zakłada, że jeśli ostatni segment adresu URL żądania zawiera kropkę ( `.` ), w której zażądano pliku (na przykład `https://localhost.com:5001/example/some.thing` ). Bez dodatkowej konfiguracji aplikacja zwraca odpowiedź *404 — nie można znaleźć* , jeśli było to przeznaczone do kierowania do składnika. Aby użyć trasy z co najmniej jednym parametrem zawierającym kropkę, aplikacja musi skonfigurować trasę z szablonem niestandardowym.
 
-```cshtml
-@page "/{**path}"
+Rozważmy następujący `Example` składnik, który może odebrać parametr trasy z ostatniego segmentu adresu URL:
+
+```razor
+@page "/example"
+@page "/example/{param}"
+
+<p>
+    Param: @Param
+</p>
+
+@code {
+    [Parameter]
+    public string Param { get; set; }
+}
 ```
 
-`"/{**path}"`Szablon zawiera:
+Aby zezwolić aplikacji *serwera* hostowanego Blazor WebAssembly rozwiązania na kierowanie żądania z kropką w `param` parametrze, Dodaj szablon alternatywnej trasy pliku z opcjonalnym parametrem w `Startup.Configure` ( `Startup.cs` ):
 
-* Podwójna gwiazdka *catch-all* ( `**` ), aby przechwycić ścieżkę między wieloma granicami folderów bez dekodowania ukośników ( `/` ).
-* `path` Nazwa parametru trasy.
+```csharp
+endpoints.MapFallbackToFile("/example/{param?}", "index.html");
+```
+
+Aby skonfigurować Blazor Server aplikację do kierowania żądania z kropką w `param` parametrze, Dodaj szablon trasy strony rezerwowej z opcjonalnym parametrem w `Startup.Configure` ( `Startup.cs` ):
+
+```csharp
+endpoints.MapFallbackToPage("/example/{param?}", "/_Host");
+```
 
 Aby uzyskać więcej informacji, zobacz <xref:fundamentals/routing>.
 

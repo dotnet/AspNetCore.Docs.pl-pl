@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/dotnet-watch
-ms.openlocfilehash: cc152c2ca553b00619ddbf829f6044867c53bb98
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 3569e9440b8e431ec0e5357e548af2e3783481ac
+ms.sourcegitcommit: 422e02bad384775bfe19a90910737340ad106c5b
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635141"
+ms.lasthandoff: 09/15/2020
+ms.locfileid: "90083456"
 ---
 # <a name="develop-aspnet-core-apps-using-a-file-watcher"></a>Opracowywanie aplikacji ASP.NET Core przy użyciu obserwatora plików
 
@@ -85,11 +85,25 @@ Każde [polecenie interfejs wiersza polecenia platformy .NET Core](/dotnet/core/
 | Polecenie | Polecenie z zegarkiem |
 | ---- | ----- |
 | dotnet run | uruchomienie czujka dotnet |
-| uruchomienie dotnet-f netcoreapp 2.0 | uruchomienie czujka dotnet-f netcoreapp 2.0 |
-| uruchomienie dotnet-f netcoreapp 2.0----arg1 | uruchomienie czujka dotnet-f netcoreapp 2.0----arg1 |
+| uruchomienie dotnet-f netcoreapp 3.1 | uruchomienie czujka dotnet-f netcoreapp 3.1 |
+| uruchomienie dotnet-f netcoreapp 3.1----arg1 | uruchomienie czujka dotnet-f netcoreapp 3.1----arg1 |
 | dotnet test | Test czujki dotnet |
 
 Uruchom `dotnet watch run` w folderze *webapp* . Dane wyjściowe konsoli wskazują, że `watch` uruchomiono.
+
+::: moniker range=">= aspnetcore-5.0"
+Uruchomienie `dotnet watch run` w aplikacji sieci Web powoduje uruchomienie przeglądarki, która przechodzi do adresu URL aplikacji po jej przygotowaniu. `dotnet watch` w tym celu należy odczytać dane wyjściowe konsoli aplikacji i oczekiwanie na komunikat o gotowości wyświetlany przez <xref:Microsoft.AspNetCore.WebHost> .
+
+`dotnet watch` Odświeża przeglądarkę po wykryciu zmian w oglądanych plikach. W tym celu polecenie czujki wstawia oprogramowanie pośredniczące do aplikacji, która modyfikuje odpowiedzi HTML utworzone przez aplikację. Oprogramowanie pośredniczące dodaje blok skryptu JavaScript do strony, która umożliwia `dotnet watch` poinstruujenie przeglądarki w celu odświeżenia. Obecnie zmiany wszystkich obserwowanych plików, w tym zawartości statycznej, takiej jak pliki *. html* i *. css* , powodują ponowne skompilowanie aplikacji.
+
+`dotnet watch`:
+
+* Program domyślnie Obserwujący pliki, które mają wpływ na kompilacje.
+* Wszystkie dodatkowo obserwowane pliki (za pośrednictwem konfiguracji) nadal będą miały miejsce w kompilacji.
+
+Aby uzyskać więcej informacji na temat konfiguracji, zobacz [Konfiguracja dotnet-Obejrzyj konfigurację](#dotnet-watch-configuration) w tym dokumencie
+
+::: moniker-end
 
 > [!NOTE]
 > Możesz użyć, `dotnet watch --project <PROJECT>` Aby określić projekt do obejrzenia. Na przykład uruchomienie `dotnet watch --project WebApp run` z poziomu głównego przykładowej aplikacji również uruchomi się i obejrzyj projekt *webapp* .
@@ -193,6 +207,17 @@ dotnet watch msbuild /t:Test
 ```
 
 VSTest wykonuje się, gdy jakiekolwiek zmiany pliku w każdym projekcie testowym.
+
+## <a name="dotnet-watch-configuration"></a>Konfiguracja monitorowania dotnet
+
+Niektóre opcje konfiguracji mogą być przesyłane `dotnet watch` przez zmienne środowiskowe. Dostępne są następujące zmienne:
+
+| Ustawienie  | Opis |
+| ------------- | ------------- |
+| `DOTNET_USE_POLLING_FILE_WATCHER`                | W przypadku ustawienia wartości "1" lub "true" program `dotnet watch` używa obserwatora pliku sondowania zamiast CoreFx `FileSystemWatcher` . Używane podczas oglądania plików w udziałach sieciowych lub zainstalowanych woluminów platformy Docker.                       |
+| `DOTNET_WATCH_SUPPRESS_MSBUILD_INCREMENTALISM`   | Domyślnie program `dotnet watch` optymalizuje kompilację, unikając niektórych operacji, takich jak uruchamianie przywracania lub ponowne ocenianie zestawu obserwowanych plików podczas każdej zmiany pliku. W przypadku ustawienia wartości "1" lub "true" te optymalizacje są wyłączone. |
+| `DOTNET_WATCH_SUPPRESS_LAUNCH_BROWSER`   | `dotnet watch run` próbuje uruchomić przeglądarki dla aplikacji sieci Web `launchBrowser` skonfigurowanych w *launchSettings.jsna*. W przypadku ustawienia wartości "1" lub "prawda" to zachowanie jest pomijane. |
+| `DOTNET_WATCH_SUPPRESS_BROWSER_REFRESH`   | `dotnet watch run` próbuje odświeżyć przeglądarki po wykryciu zmian plików. W przypadku ustawienia wartości "1" lub "prawda" to zachowanie jest pomijane. To zachowanie jest również pomijane, jeśli `DOTNET_WATCH_SUPPRESS_LAUNCH_BROWSER` jest ustawiona. |
 
 ## <a name="dotnet-watch-in-github"></a>`dotnet-watch` w witrynie GitHub
 

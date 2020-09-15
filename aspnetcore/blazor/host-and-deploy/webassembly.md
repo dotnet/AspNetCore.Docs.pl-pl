@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: 6b4c3d55d77af104c969cac0fcbf642f35c7dd7f
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: dadf6076e7f07c07381856aa225667a6eb38046a
+ms.sourcegitcommit: 600666440398788db5db25dc0496b9ca8fe50915
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865265"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90080319"
 ---
 # <a name="host-and-deploy-aspnet-core-no-locblazor-webassembly"></a>Hostowanie i wdrażanie ASP.NET Core Blazor WebAssembly
 
@@ -708,9 +708,21 @@ W przypadku korzystania z witryny projektu zamiast witryny organizacji zaktualiz
   --urls=http://127.0.0.1:0
   ```
 
+::: moniker range=">= aspnetcore-5.0"
+
+## <a name="configure-the-trimmer"></a>Konfigurowanie elementu dostosowującego
+
+Blazor wykonuje przycinanie języka pośredniego (IL) dla każdej kompilacji wydania, aby usunąć niepotrzebny kod IL z zestawów wyjściowych. Aby uzyskać więcej informacji, zobacz <xref:blazor/host-and-deploy/configure-trimmer>.
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
 ## <a name="configure-the-linker"></a>Konfigurowanie konsolidatora
 
 Blazor wykonuje konsolidację języka pośredniego (IL) dla każdej kompilacji wydania, aby usunąć niepotrzebny kod IL z zestawów wyjściowych. Aby uzyskać więcej informacji, zobacz <xref:blazor/host-and-deploy/configure-linker>.
+
+::: moniker-end
 
 ## <a name="custom-boot-resource-loading"></a>Ładowanie niestandardowego zasobu rozruchowego
 

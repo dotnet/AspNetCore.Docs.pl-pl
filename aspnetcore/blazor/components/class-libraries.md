@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/class-libraries
-ms.openlocfilehash: d933a677a063d50fbe708264106e3ce19400a270
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 82969bf92965bfdeb1d1474ab47ca74ecbe6dd97
+ms.sourcegitcommit: 600666440398788db5db25dc0496b9ca8fe50915
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628576"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90080306"
 ---
 # <a name="aspnet-core-no-locrazor-components-class-libraries"></a>RazorBiblioteki klas składników ASP.NET Core
 
@@ -51,7 +51,7 @@ Podobnie jak składniki są zwykłymi typami .NET, składniki udostępniane prze
    1. Wybierz plik projektu RCL ( `.csproj` ).
 1. Dodaj odwołanie RCL z aplikacji:
    1. Kliknij prawym przyciskiem myszy projekt aplikacji. Wybierz pozycję **Dodaj**  >  **odwołanie**.
-   1. Wybierz projekt RCL. Kliknij przycisk **OK**.
+   1. Wybierz projekt RCL. Wybierz przycisk **OK**.
 
 > [!NOTE]
 > Jeśli pole wyboru **strony i widoki pomocy technicznej** jest zaznaczone podczas generowania RCL z szablonu, Dodaj również `_Imports.razor` plik do katalogu głównego wygenerowanego projektu z następującą zawartością, aby włączyć Razor Tworzenie składników:
@@ -62,7 +62,7 @@ Podobnie jak składniki są zwykłymi typami .NET, składniki udostępniane prze
 >
 > Ręcznie Dodaj plik do katalogu głównego wygenerowanego projektu.
 
-# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
 
 1. Użyj szablonu ** Razor biblioteki klas** ( `razorclasslib` ) za pomocą [`dotnet new`](/dotnet/core/tools/dotnet-new) polecenia w powłoce poleceń. W poniższym przykładzie jest tworzony RCL o nazwie `ComponentLibrary` . Folder, który `ComponentLibrary` ma zostać utworzony, jest tworzony automatycznie podczas wykonywania polecenia:
 
@@ -183,5 +183,16 @@ Przekaż pakiet do narzędzia NuGet przy użyciu [`dotnet nuget push`](/dotnet/c
 
 ## <a name="additional-resources"></a>Dodatkowe zasoby
 
+::: moniker range=">= aspnetcore-5.0"
+
 * <xref:razor-pages/ui-class>
-* [Dodawanie pliku konfiguracji konsolidatora XML do biblioteki](xref:blazor/host-and-deploy/configure-linker#add-an-xml-linker-configuration-file-to-a-library)
+* [Dodawanie pliku konfiguracji programu do biblioteki języka pośredniego (IL) w formacie XML](xref:blazor/host-and-deploy/configure-trimmer)
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+* <xref:razor-pages/ui-class>
+* [Dodawanie pliku konfiguracji konsolidatora języka pośredniego (IL) XML do biblioteki](xref:blazor/host-and-deploy/configure-linker#add-an-xml-linker-configuration-file-to-a-library)
+
+::: moniker-end

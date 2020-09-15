@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/blazor-server-ef-core
-ms.openlocfilehash: a1b295b2ce42bc5ee06b8b9579ea2c70d480580a
-ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
+ms.openlocfilehash: e548465b3d79279802fbfacd66c69724d864d14d
+ms.sourcegitcommit: 600666440398788db5db25dc0496b9ca8fe50915
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/11/2020
-ms.locfileid: "90009664"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90080332"
 ---
 # <a name="aspnet-core-no-locblazor-server-with-entity-framework-core-efcore"></a>ASP.NET Core Blazor Server z Entity Framework Core (EFCore)
 
@@ -36,7 +36,7 @@ Blazor Server jest platformą aplikacji stanowych. Aplikacja utrzymuje ciągłe 
 > [!NOTE]
 > Ten artykuł zawiera adresy EF Core w Blazor Server aplikacjach. Blazor WebAssembly aplikacje działają w piaskownicy zestawu webassembly, które uniemożliwiają większość bezpośrednich połączeń z bazą danych. Uruchamianie EF Core w programie Blazor WebAssembly wykracza poza zakres tego artykułu.
 
-## <a name="sample-app"></a>Przykładowa aplikacja
+<h2 id="sample-app-5x">Przykładowa aplikacja</h2>
 
 Przykładowa aplikacja została skompilowana jako odwołanie do Blazor Server aplikacji korzystających EF Core. Przykładowa aplikacja zawiera siatkę z operacjami sortowania i filtrowania, usuwania, dodawania i aktualizowania. Przykład ilustruje użycie EF Core do obsługi optymistycznej współbieżności.
 
@@ -51,7 +51,7 @@ Składniki Grid, Add i View używają wzorca "context-per-Operation", który two
 > [!NOTE]
 > Niektóre przykłady kodu w tym temacie wymagają przestrzeni nazw i usług, które nie są wyświetlane. Aby sprawdzić w pełni działający kod, w tym wymagania [`@using`](xref:mvc/views/razor#using) i [`@inject`](xref:mvc/views/razor#inject) dyrektywy dotyczące Razor przykładów, zobacz [przykładową aplikację](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/5.x/BlazorServerEFCoreSample).
 
-## <a name="database-access"></a>Dostęp do bazy danych
+<h2 id="database-access-5x">Dostęp do bazy danych</h2>
 
 EF Core opiera się na <xref:Microsoft.EntityFrameworkCore.DbContext> metodzie [konfigurowania dostępu do bazy danych](/ef/core/miscellaneous/configuring-dbcontext) i działania jako [*jednostki pracy*](https://martinfowler.com/eaaCatalog/unitOfWork.html). EF Core zapewnia <xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContext%2A> rozszerzenie dla ASP.NET Core aplikacji, które domyślnie rejestruje kontekst jako usługę *objętą zakresem* . W Blazor Server aplikacjach usługa rejestracji w zakresie może być problematyczna, ponieważ wystąpienie jest udostępniane między składnikami w ramach obwodu użytkownika. <xref:Microsoft.EntityFrameworkCore.DbContext> nie jest bezpieczny dla wątków i nie jest przeznaczony do współbieżnego użycia. Istniejące okresy istnienia są nieodpowiednie z następujących powodów:
 
@@ -91,9 +91,9 @@ Poniższe zalecenia zaprojektowano w celu zapewnienia spójnego podejścia do ko
 
   Umieść operacje po `Loading = true;` wierszu w `try` bloku.
 
-* W przypadku długotrwałych operacji, które korzystają z [funkcji śledzenia zmian](/ef/core/querying/tracking) EF Core lub [kontroli współbieżności](/ef/core/saving/concurrency), należy [ograniczyć kontekst do okresu istnienia składnika](#scope-to-the-component-lifetime).
+* W przypadku długotrwałych operacji, które korzystają z [funkcji śledzenia zmian](/ef/core/querying/tracking) EF Core lub [kontroli współbieżności](/ef/core/saving/concurrency), należy [ograniczyć kontekst do okresu istnienia składnika](#scope-to-the-component-lifetime-5x).
 
-### <a name="new-dbcontext-instances"></a>Nowe wystąpienia DbContext
+<h3 id="new-dbcontext-instances-5x">Nowe wystąpienia DbContext</h3>
 
 Najszybszą metodą tworzenia nowego <xref:Microsoft.EntityFrameworkCore.DbContext> wystąpienia jest `new` utworzenie nowego wystąpienia przy użyciu programu. Istnieje jednak kilka scenariuszy, które mogą wymagać rozwiązania dodatkowych zależności. Na przykład możesz użyć, [`DbContextOptions`](/ef/core/miscellaneous/configuring-dbcontext#configuring-dbcontextoptions) Aby skonfigurować kontekst.
 
@@ -110,7 +110,7 @@ Fabryka jest wstrzykiwana do składników i używana do tworzenia nowych wystąp
 > [!NOTE]
 > `Wrapper` jest [odwołaniem](xref:blazor/components/index#capture-references-to-components) do składnika `GridWrapper` . Zobacz `Index` składnik ( `Pages/Index.razor` ) w [przykładowej aplikacji](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/common/samples/5.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Pages/Index.razor).
 
-### <a name="scope-to-the-component-lifetime"></a>Zakres czasu istnienia składnika
+<h3 id="scope-to-the-component-lifetime-5x">Zakres czasu istnienia składnika</h3>
 
 Można utworzyć element <xref:Microsoft.EntityFrameworkCore.DbContext> , który istnieje w okresie istnienia składnika. Dzięki temu można używać go jako [jednostki pracy](https://martinfowler.com/eaaCatalog/unitOfWork.html) i korzystać z wbudowanych funkcji, takich jak śledzenie zmian i rozwiązywanie współbieżności.
 Możesz użyć fabryki, aby utworzyć kontekst i śledzić go na okres istnienia składnika. Najpierw Zaimplementuj <xref:System.IDisposable> i wsuń fabrykę, jak pokazano w `Pages/EditContact.razor` :
@@ -137,7 +137,7 @@ Blazor Server jest platformą aplikacji stanowych. Aplikacja utrzymuje ciągłe 
 > [!NOTE]
 > Ten artykuł zawiera adresy EF Core w Blazor Server aplikacjach. Blazor WebAssembly aplikacje działają w piaskownicy zestawu webassembly, które uniemożliwiają większość bezpośrednich połączeń z bazą danych. Uruchamianie EF Core w programie Blazor WebAssembly wykracza poza zakres tego artykułu.
 
-## <a name="sample-app"></a>Przykładowa aplikacja
+<h2 id="sample-app-3x">Przykładowa aplikacja</h2>
 
 Przykładowa aplikacja została skompilowana jako odwołanie do Blazor Server aplikacji korzystających EF Core. Przykładowa aplikacja zawiera siatkę z operacjami sortowania i filtrowania, usuwania, dodawania i aktualizowania. Przykład ilustruje użycie EF Core do obsługi optymistycznej współbieżności.
 
@@ -152,15 +152,13 @@ Składniki Grid, Add i View używają wzorca "context-per-Operation", który two
 > [!NOTE]
 > Niektóre przykłady kodu w tym temacie wymagają przestrzeni nazw i usług, które nie są wyświetlane. Aby sprawdzić w pełni działający kod, w tym wymagania [`@using`](xref:mvc/views/razor#using) i [`@inject`](xref:mvc/views/razor#inject) dyrektywy dotyczące Razor przykładów, zobacz [przykładową aplikację](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/3.x/BlazorServerEFCoreSample).
 
-## <a name="database-access"></a>Dostęp do bazy danych
+<h2 id="database-access-3x">Dostęp do bazy danych</h2>
 
 EF Core opiera się na <xref:Microsoft.EntityFrameworkCore.DbContext> metodzie [konfigurowania dostępu do bazy danych](/ef/core/miscellaneous/configuring-dbcontext) i działania jako [*jednostki pracy*](https://martinfowler.com/eaaCatalog/unitOfWork.html). EF Core zapewnia <xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContext%2A> rozszerzenie dla ASP.NET Core aplikacji, które domyślnie rejestruje kontekst jako usługę *objętą zakresem* . W Blazor Server aplikacjach może to być problematyczne, ponieważ wystąpienie jest udostępniane między składnikami w ramach obwodu użytkownika. <xref:Microsoft.EntityFrameworkCore.DbContext> nie jest bezpieczny dla wątków i nie jest przeznaczony do współbieżnego użycia. Istniejące okresy istnienia są nieodpowiednie z następujących powodów:
 
 * **Pojedyncze** udziały są w stanie wszyscy użytkownicy aplikacji i potencjalni klienci mają nieodpowiednie współbieżne użycie.
 * **Zakres** (wartość domyślna) stanowi podobny problem między składnikami dla tego samego użytkownika.
 * **Przejściowe** wyniki w nowym wystąpieniu na żądanie; Jednak w przypadku, gdy składniki mogą być długotrwałe, wynik może być dłuższy niż w przypadku, gdy jest to możliwe.
-
-## <a name="database-access"></a>Dostęp do bazy danych
 
 Poniższe zalecenia zaprojektowano w celu zapewnienia spójnego podejścia do korzystania z EF Core w Blazor Server aplikacjach.
 
@@ -194,9 +192,9 @@ Poniższe zalecenia zaprojektowano w celu zapewnienia spójnego podejścia do ko
 
   Umieść operacje po `Loading = true;` wierszu w `try` bloku.
 
-* W przypadku długotrwałych operacji, które korzystają z [funkcji śledzenia zmian](/ef/core/querying/tracking) EF Core lub [kontroli współbieżności](/ef/core/saving/concurrency), należy [ograniczyć kontekst do okresu istnienia składnika](#scope-to-the-component-lifetime).
+* W przypadku długotrwałych operacji, które korzystają z [funkcji śledzenia zmian](/ef/core/querying/tracking) EF Core lub [kontroli współbieżności](/ef/core/saving/concurrency), należy [ograniczyć kontekst do okresu istnienia składnika](#scope-to-the-component-lifetime-3x).
 
-### <a name="create-new-dbcontext-instances"></a>Utwórz nowe wystąpienia DbContext
+<h3 id="new-dbcontext-instances-3x">Nowe wystąpienia DbContext</h3>
 
 Najszybszą metodą tworzenia nowego <xref:Microsoft.EntityFrameworkCore.DbContext> wystąpienia jest `new` utworzenie nowego wystąpienia przy użyciu programu. Istnieje jednak kilka scenariuszy, które mogą wymagać rozwiązania dodatkowych zależności. Na przykład możesz użyć, [`DbContextOptions`](/ef/core/miscellaneous/configuring-dbcontext#configuring-dbcontextoptions) Aby skonfigurować kontekst.
 
@@ -217,7 +215,7 @@ Fabryka jest wstrzykiwana do składników i używana do tworzenia nowych wystąp
 > [!NOTE]
 > `Wrapper` jest [odwołaniem](xref:blazor/components/index#capture-references-to-components) do składnika `GridWrapper` . Zobacz `Index` składnik ( `Pages/Index.razor` ) w [przykładowej aplikacji](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/common/samples/3.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Pages/Index.razor).
 
-### <a name="scope-to-the-component-lifetime"></a>Zakres czasu istnienia składnika
+<h3 id="scope-to-the-component-lifetime-3x">Zakres czasu istnienia składnika</h3>
 
 Można utworzyć element <xref:Microsoft.EntityFrameworkCore.DbContext> , który istnieje w okresie istnienia składnika. Dzięki temu można używać go jako [jednostki pracy](https://martinfowler.com/eaaCatalog/unitOfWork.html) i korzystać z wbudowanych funkcji, takich jak śledzenie zmian i rozwiązywanie współbieżności.
 Możesz użyć fabryki, aby utworzyć kontekst i śledzić go na okres istnienia składnika. Najpierw Zaimplementuj <xref:System.IDisposable> i wsuń fabrykę, jak pokazano w `Pages/EditContact.razor` :

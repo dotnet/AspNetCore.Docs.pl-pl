@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/index
-ms.openlocfilehash: abebd5fde514975b1dcb642a3d378e33c3836fa9
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: ace2285e3265e7bb2ec50c8afce2eb9c296fd524
+ms.sourcegitcommit: 600666440398788db5db25dc0496b9ca8fe50915
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628069"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90080345"
 ---
 # <a name="introduction-to-aspnet-core-no-locblazor"></a>Wprowadzenie do ASP.NET Core Blazor
 
@@ -131,9 +131,21 @@ Gdy Blazor WebAssembly aplikacja zostanie skompilowana i uruchomiona w przegląd
 
 Rozmiar opublikowanej aplikacji, jej *rozmiaru ładunku*, jest krytycznym czynnikiem wydajności dla useability aplikacji. Pobieranie dużej aplikacji do przeglądarki zajmuje stosunkowo dużo czasu, co zmniejsza środowisko użytkownika. Blazor WebAssembly optymalizuje rozmiar ładunku, aby skrócić czas pobierania:
 
+::: moniker range=">= aspnetcore-5.0"
+
+* Nieużywany kod jest usuwany z aplikacji, gdy jest publikowany za pomocą elementu [dostosowującego języka pośredniego (IL)](xref:blazor/host-and-deploy/configure-trimmer).
+* Odpowiedzi HTTP są kompresowane.
+* Środowisko uruchomieniowe platformy .NET i zestawy są buforowane w przeglądarce.
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
 * Nieużywany kod jest usuwany z aplikacji, gdy jest publikowany przez [konsolidator języka pośredniego (IL)](xref:blazor/host-and-deploy/configure-linker).
 * Odpowiedzi HTTP są kompresowane.
 * Środowisko uruchomieniowe platformy .NET i zestawy są buforowane w przeglądarce.
+
+::: moniker-end
 
 ## Blazor Server
 
@@ -163,7 +175,7 @@ Interfejsy API, które nie są stosowane w przeglądarce sieci Web (na przykład
 * [Zestaw webassembly](https://webassembly.org/)
 * <xref:blazor/hosting-models>
 * <xref:tutorials/signalr-blazor-webassembly>
-* [Przewodnik C#](/dotnet/csharp/)
+* [Przewodnik języka C#](/dotnet/csharp/)
 * <xref:mvc/views/razor>
 * [HTML](https://www.w3.org/html/)
 * [Firma Blazor Awesome](https://github.com/AdrienTorris/awesome-blazor) linki społeczności

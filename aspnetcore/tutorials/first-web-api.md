@@ -16,13 +16,14 @@ no-loc:
 - Let's Encrypt
 - Razor
 - SignalR
+- Models
 uid: tutorials/first-web-api
-ms.openlocfilehash: 3d83141b8b638a369b08b0fadafccd96c0b48214
-ms.sourcegitcommit: 4df148cbbfae9ec8d377283ee71394944a284051
+ms.openlocfilehash: ebce9f2f4992d83c6b28edb5c771cdfc8a7a0b6a
+ms.sourcegitcommit: 600666440398788db5db25dc0496b9ca8fe50915
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88876792"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90080384"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>Samouczek: Tworzenie internetowego interfejsu API za pomocą ASP.NET Core
 
@@ -32,7 +33,7 @@ Ten samouczek uczy się podstaw tworzenia interfejsu API sieci Web za pomocą AS
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Z tego samouczka dowiesz się, jak wykonywać następujące czynności:
+Ten samouczek zawiera informacje na temat wykonywania następujących czynności:
 
 > [!div class="checklist"]
 > * Utwórz projekt interfejsu API sieci Web.
@@ -197,25 +198,25 @@ Zwracany jest kod JSON podobny do następującego:
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* W **Eksplorator rozwiązań**kliknij prawym przyciskiem myszy projekt. Wybierz pozycję **Dodaj**  >  **Nowy folder**. Nazwij *modele*folderów.
+* W **Eksplorator rozwiązań**kliknij prawym przyciskiem myszy projekt. Wybierz pozycję **Dodaj**  >  **Nowy folder**. Nazwij folder *Models* .
 
-* Kliknij prawym przyciskiem myszy folder *modele* i wybierz polecenie **Dodaj**  >  **klasę**. Nadaj klasie nazwę *TodoItem* i wybierz pozycję **Dodaj**.
+* Kliknij prawym przyciskiem myszy *Models* folder i wybierz polecenie **Dodaj**  >  **klasę**. Nadaj klasie nazwę *TodoItem* i wybierz pozycję **Dodaj**.
 
 * Zastąp kod szablonu następującym kodem:
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-* Dodaj folder o nazwie *models*.
+* Dodaj folder o nazwie *Models* .
 
-* Dodaj `TodoItem` klasę do folderu *models* o następującym kodzie:
+* Dodaj `TodoItem` do *Models* folderu klasę o następującym kodzie:
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-* Kliknij prawym przyciskiem myszy projekt. Wybierz pozycję **Dodaj**  >  **Nowy folder**. Nazwij *modele*folderów.
+* Kliknij prawym przyciskiem myszy projekt. Wybierz pozycję **Dodaj**  >  **Nowy folder**. Nazwij folder *Models* .
 
   ![Nowy folder](first-web-api-mac/_static/folder.png)
 
-* Kliknij prawym przyciskiem myszy folder *modele* , a następnie wybierz pozycję **Dodaj** > **nowy plik** > **ogólna** > **pusta Klasa**.
+* Kliknij prawym przyciskiem myszy *Models* folder, a następnie wybierz pozycję **Dodaj** > **nowy plik** > **ogólna** > **pusta Klasa**.
 
 * Nazwij klasę *TodoItem*, a następnie kliknij pozycję **New (nowy**).
 
@@ -227,7 +228,7 @@ Zwracany jest kod JSON podobny do następującego:
 
 `Id`Właściwość działa jako unikatowy klucz w relacyjnej bazie danych.
 
-Klasy modelu mogą przejść do dowolnego miejsca w projekcie, ale folder *modele* jest używany przez Konwencję.
+Klasy modelu mogą przejść do dowolnego miejsca w projekcie, ale *Models* folder jest używany przez Konwencję.
 
 ## <a name="add-a-database-context"></a>Dodawanie kontekstu bazy danych
 
@@ -247,11 +248,11 @@ Klasy modelu mogą przejść do dowolnego miejsca w projekcie, ale folder *model
 
 ## <a name="add-the-todocontext-database-context"></a>Dodawanie kontekstu bazy danych TodoContext
 
-* Kliknij prawym przyciskiem myszy folder *modele* i wybierz polecenie **Dodaj**  >  **klasę**. Nadaj klasie nazwę *TodoContext* i kliknij przycisk **Dodaj**.
+* Kliknij prawym przyciskiem myszy *Models* folder i wybierz polecenie **Dodaj**  >  **klasę**. Nadaj klasie nazwę *TodoContext* i kliknij przycisk **Dodaj**.
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Visual Studio dla komputerów Mac](#tab/visual-studio-code+visual-studio-mac)
 
-* Dodaj `TodoContext` klasę do folderu *models* .
+* Dodaj `TodoContext` klasę do *Models* folderu.
 
 ---
 
@@ -282,8 +283,8 @@ Powyższy kod ma następujące działanie:
 * Wybierz pozycję **kontroler interfejsu API z akcjami, używając Entity Framework**, a następnie wybierz pozycję **Dodaj**.
 * Na stronie **Dodawanie kontrolera interfejsu API z akcjami przy użyciu Entity Framework** dialogowego:
 
-  * Wybierz pozycję **TodoItem (TodoApi. models)** w **klasie model**.
-  * W **klasie kontekstu danych**wybierz pozycję **TodoContext (TodoApi. models)** .
+  * Wybierz pozycję **TodoItem (TodoApi. Models )** w **klasie model**.
+  * Wybierz pozycję **TodoContext (TodoApi. Models )** w **klasie kontekstu danych**.
   * Wybierz pozycję **Dodaj**.
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Visual Studio dla komputerów Mac](#tab/visual-studio-code+visual-studio-mac)
@@ -365,7 +366,7 @@ Ten samouczek używa programu do testowania interfejsu API sieci Web.
     }
     ```
 
-* Wybierz pozycję **Send** (Wyślij).
+* Wybierz pozycję **Wyślij**.
 
   ![Ogłoś przy użyciu żądania Create](first-web-api/_static/3/create.png)
 
@@ -378,7 +379,7 @@ Ten samouczek używa programu do testowania interfejsu API sieci Web.
 
 * Ustaw metodę HTTP na `GET` .
 * Ustaw identyfikator URI na `https://localhost:<port>/api/TodoItems/1` . Na przykład `https://localhost:5001/api/TodoItems/1`.
-* Wybierz pozycję **Send** (Wyślij).
+* Wybierz pozycję **Wyślij**.
 
 ## <a name="examine-the-get-methods"></a>Badanie metod GET
 
@@ -387,7 +388,7 @@ Te metody implementują dwa punkty końcowe GET:
 * `GET /api/TodoItems`
 * `GET /api/TodoItems/{id}`
 
-Przetestuj aplikację, wywołując dwa punkty końcowe z przeglądarki lub wpisu. Przykład:
+Przetestuj aplikację, wywołując dwa punkty końcowe z przeglądarki lub wpisu. Na przykład:
 
 * `https://localhost:5001/api/TodoItems`
 * `https://localhost:5001/api/TodoItems/1`
@@ -410,7 +411,7 @@ Odpowiedź podobna do poniższego jest generowana przez wywołanie `GetTodoItems
 * Ustaw metodę HTTP, aby **uzyskać**.
 * Ustaw identyfikator URI żądania na `https://localhost:<port>/api/TodoItems` . Na przykład `https://localhost:5001/api/TodoItems`.
 * Ustaw **dwa widoki okienka** w programie Poster.
-* Wybierz pozycję **Send** (Wyślij).
+* Wybierz pozycję **Wyślij**.
 
 Ta aplikacja używa bazy danych w pamięci. Jeśli aplikacja zostanie zatrzymana i uruchomiona, poprzednie żądanie GET nie zwróci żadnych danych. Jeśli nie zostaną zwrócone żadne dane, [Opublikuj](#post) dane w aplikacji.
 
@@ -478,7 +479,7 @@ Użyj programu Poster, aby usunąć element do wykonania:
 
 * Ustaw metodę na `DELETE` .
 * Ustaw identyfikator URI obiektu do usunięcia (na przykład `https://localhost:5001/api/TodoItems/1` ).
-* Wybierz pozycję **Send** (Wyślij).
+* Wybierz pozycję **Wyślij**.
 
 <a name="over-post"></a>
 
@@ -519,7 +520,7 @@ Zobacz [Samouczek: wywoływanie interfejsu API sieci web ASP.NET Core przy użyc
 
 ::: moniker range="< aspnetcore-3.0"
 
-Z tego samouczka dowiesz się, jak wykonywać następujące czynności:
+Ten samouczek zawiera informacje na temat wykonywania następujących czynności:
 
 > [!div class="checklist"]
 > * Utwórz projekt interfejsu API sieci Web.
@@ -639,25 +640,25 @@ Zostanie zwrócony następujący kod JSON:
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* W **Eksplorator rozwiązań**kliknij prawym przyciskiem myszy projekt. Wybierz pozycję **Dodaj**  >  **Nowy folder**. Nazwij *modele*folderów.
+* W **Eksplorator rozwiązań**kliknij prawym przyciskiem myszy projekt. Wybierz pozycję **Dodaj**  >  **Nowy folder**. Nazwij folder *Models* .
 
-* Kliknij prawym przyciskiem myszy folder *modele* i wybierz polecenie **Dodaj**  >  **klasę**. Nadaj klasie nazwę *TodoItem* i wybierz pozycję **Dodaj**.
+* Kliknij prawym przyciskiem myszy *Models* folder i wybierz polecenie **Dodaj**  >  **klasę**. Nadaj klasie nazwę *TodoItem* i wybierz pozycję **Dodaj**.
 
 * Zastąp kod szablonu następującym kodem:
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-* Dodaj folder o nazwie *models*.
+* Dodaj folder o nazwie *Models* .
 
-* Dodaj `TodoItem` klasę do folderu *models* o następującym kodzie:
+* Dodaj `TodoItem` do *Models* folderu klasę o następującym kodzie:
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-* Kliknij prawym przyciskiem myszy projekt. Wybierz pozycję **Dodaj**  >  **Nowy folder**. Nazwij *modele*folderów.
+* Kliknij prawym przyciskiem myszy projekt. Wybierz pozycję **Dodaj**  >  **Nowy folder**. Nazwij folder *Models* .
 
   ![Nowy folder](first-web-api-mac/_static/folder.png)
 
-* Kliknij prawym przyciskiem myszy folder *modele* , a następnie wybierz pozycję **Dodaj** > **nowy plik** > **ogólna** > **pusta Klasa**.
+* Kliknij prawym przyciskiem myszy *Models* folder, a następnie wybierz pozycję **Dodaj** > **nowy plik** > **ogólna** > **pusta Klasa**.
 
 * Nazwij klasę *TodoItem*, a następnie kliknij pozycję **New (nowy**).
 
@@ -669,7 +670,7 @@ Zostanie zwrócony następujący kod JSON:
 
 `Id`Właściwość działa jako unikatowy klucz w relacyjnej bazie danych.
 
-Klasy modelu mogą przejść do dowolnego miejsca w projekcie, ale folder *modele* jest używany przez Konwencję.
+Klasy modelu mogą przejść do dowolnego miejsca w projekcie, ale *Models* folder jest używany przez Konwencję.
 
 ## <a name="add-a-database-context"></a>Dodawanie kontekstu bazy danych
 
@@ -677,11 +678,11 @@ Klasy modelu mogą przejść do dowolnego miejsca w projekcie, ale folder *model
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Kliknij prawym przyciskiem myszy folder *modele* i wybierz polecenie **Dodaj**  >  **klasę**. Nadaj klasie nazwę *TodoContext* i kliknij przycisk **Dodaj**.
+* Kliknij prawym przyciskiem myszy *Models* folder i wybierz polecenie **Dodaj**  >  **klasę**. Nadaj klasie nazwę *TodoContext* i kliknij przycisk **Dodaj**.
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Visual Studio dla komputerów Mac](#tab/visual-studio-code+visual-studio-mac)
 
-* Dodaj `TodoContext` klasę do folderu *models* .
+* Dodaj `TodoContext` klasę do *Models* folderu.
 
 ---
 
@@ -744,7 +745,7 @@ Te metody implementują dwa punkty końcowe GET:
 
 Zatrzymaj aplikację, jeśli jest nadal uruchomiona. Następnie uruchom ją ponownie, aby uwzględnić najnowsze zmiany.
 
-Przetestuj aplikację, wywołując dwa punkty końcowe z przeglądarki. Przykład:
+Przetestuj aplikację, wywołując dwa punkty końcowe z przeglądarki. Na przykład:
 
 * `https://localhost:<port>/api/todo`
 * `https://localhost:<port>/api/todo/1`
@@ -811,7 +812,7 @@ Ten samouczek używa programu do testowania interfejsu API sieci Web.
   * Ustaw metodę HTTP, aby **uzyskać**.
   * Ustaw identyfikator URI żądania na `https://localhost:<port>/api/todo` . Na przykład `https://localhost:5001/api/todo`.
 * Ustaw **dwa widoki okienka** w programie Poster.
-* Wybierz pozycję **Send** (Wyślij).
+* Wybierz pozycję **Wyślij**.
 
 ![Ogłoś przy użyciu żądania GET](first-web-api/_static/2pv.png)
 
@@ -848,7 +849,7 @@ Poprzedni kod jest metodą POST protokołu HTTP, jak wskazano w [`[HttpPost]`](x
     }
     ```
 
-* Wybierz pozycję **Send** (Wyślij).
+* Wybierz pozycję **Wyślij**.
 
   ![Ogłoś przy użyciu żądania Create](first-web-api/_static/create.png)
 
@@ -863,7 +864,7 @@ Poprzedni kod jest metodą POST protokołu HTTP, jak wskazano w [`[HttpPost]`](x
 
 * Ustaw metodę, aby uzyskać.
 * Ustaw identyfikator URI na  `https://localhost:<port>/api/TodoItems/2` .Na przykład  `https://localhost:5001/api/TodoItems/2` .
-* Wybierz pozycję **Send** (Wyślij).
+* Wybierz pozycję **Wyślij**.
 
 ## <a name="add-a-puttodoitem-method"></a>Dodawanie metody PutTodoItem
 
@@ -907,7 +908,7 @@ Użyj programu Poster, aby usunąć element do wykonania:
 
 * Ustaw metodę na `DELETE` .
 * Ustaw identyfikator URI obiektu do usunięcia (na przykład `https://localhost:5001/api/todo/1` ).
-* Wybierz pozycję **Send** (Wyślij).
+* Wybierz pozycję **Wyślij**.
 
 Przykładowa aplikacja umożliwia usunięcie wszystkich elementów. Jednak po usunięciu ostatniego elementu jest on tworzony przez konstruktora klasy modelu przy następnym wywołaniu interfejsu API.
 
@@ -968,7 +969,7 @@ Usuwanie elementu do wykonania jest realizowane przez ustawienie `type` w WYWOŁ
 
 [!INCLUDE[](~/includes/IdentityServer4.md)]
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 [Wyświetl lub Pobierz przykładowy kod dla tego samouczka](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/first-web-api/samples). Zobacz artykuł [jak pobrać](xref:index#how-to-download-a-sample).
 

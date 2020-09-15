@@ -12,7 +12,7 @@
       href: /dotnet/standard/choosing-core-framework-server?toc=/aspnet/core/toc.json&bc=/aspnet/core/breadcrumb/toc.json
 - name: Wprowadzenie
   uid: getting-started
-- name: Uwagi do wersji
+- name: Informacje o wersji
   items:
     - name: Co nowego w wersji 3.1
       uid: aspnetcore-3.1
@@ -738,6 +738,8 @@
       uid: grpc/dotnet-grpc
     - name: Migracja usług gRPC ze środowiska C-core
       uid: grpc/migration
+    - name: Dlaczego warto przeprowadzić migrację aplikacji WCF do usługi gRPC platformy ASP.NET Core
+      uid: grpc/wcf
     - name: Porównanie usług gRPC za pomocą interfejsów API protokołu HTTP
       uid: grpc/comparison
     - name: Przykłady

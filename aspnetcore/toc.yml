@@ -447,6 +447,8 @@
               uid: blazor/host-and-deploy/server
             - name: Konfigurowanie konsolidatora
               uid: blazor/host-and-deploy/configure-linker
+            - name: Konfigurowanie elementu przycinającego
+              uid: blazor/host-and-deploy/configure-trimmer
         - name: Model Blazor Server i technologia EF Core
           uid: blazor/blazor-server-ef-core
         - name: Scenariusze zaawansowane

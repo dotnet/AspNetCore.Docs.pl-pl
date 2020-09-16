@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/client
-ms.openlocfilehash: 28e4f372e301a673644bfa97763ebc930f2d0ad5
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 9406c2a34126f3e5cd1406a55c3585e7a28f3dd9
+ms.sourcegitcommit: a07f83b00db11f32313045b3492e5d1ff83c4437
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634335"
+ms.lasthandoff: 09/15/2020
+ms.locfileid: "90593050"
 ---
 # <a name="call-grpc-services-with-the-net-client"></a>Wywoływanie usług gRPC przy użyciu klienta platformy .NET
 
@@ -260,7 +260,18 @@ catch (RpcException ex)
 }
 ```
 
+## <a name="configure-deadline"></a>Konfigurowanie terminu ostatecznego
+
+Zaleca się skonfigurowanie ostatecznego terminu wywołania gRPC, ponieważ zawiera on górny limit czasu, w którym można uruchomić wywołanie. Usługa błędna uniemożliwia uruchamianie nieograniczonego i wyczerpania zasobów serwera. Terminy są przydatnym narzędziem do tworzenia niezawodnych aplikacji.
+
+Skonfiguruj, `CallOptions.Deadline` Aby ustawić ostateczny termin wywołania gRPC:
+
+[!code-csharp[](~/grpc/deadlines-cancellation/deadline-client.cs?highlight=7,12)]
+
+Aby uzyskać więcej informacji, zobacz <xref:grpc/deadlines-cancellation#deadlines>.
+
 ## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:grpc/clientfactory>
+* <xref:grpc/deadlines-cancellation>
 * <xref:grpc/basics>

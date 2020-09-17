@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/enforcing-ssl
-ms.openlocfilehash: 1cb2c2d18b717dc99c6ef4dac9954fef149c6deb
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: b5260084c2fdd296168e918f06d8b54faf1865d5
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631566"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722660"
 ---
 # <a name="enforce-https-in-aspnet-core"></a>Wymuszanie protokołu HTTPS w ASP.NET Core
 
@@ -109,7 +109,7 @@ Określ port HTTPS przy użyciu dowolnej z następujących metod:
 
 ::: moniker range=">= aspnetcore-3.0"
 
-* Ustaw `https_port` [ustawienie hosta](/aspnet/core/fundamentals/host/generic-host?view=aspnetcore-3.0#https_port):
+* Ustaw `https_port` [ustawienie hosta](../fundamentals/host/generic-host.md?view=aspnetcore-3.0#https_port):
 
   * W obszarze Konfiguracja hosta.
   * Przez ustawienie `ASPNETCORE_HTTPS_PORT` zmiennej środowiskowej.
@@ -117,7 +117,7 @@ Określ port HTTPS przy użyciu dowolnej z następujących metod:
 
     [!code-json[](enforcing-ssl/sample-snapshot/3.x/appsettings.json?highlight=2)]
 
-* Wskaż port z bezpiecznym schematem przy użyciu [zmiennej środowiskowej ASPNETCORE_URLS](/aspnet/core/fundamentals/host/generic-host?view=aspnetcore-3.0#urls). Zmienna środowiskowa służy do konfigurowania serwera. Oprogramowanie pośredniczące pośrednio wykrywa port HTTPS za pośrednictwem <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature> . Takie podejście nie działa w przypadku wdrożeń zwrotnych serwerów proxy.
+* Wskaż port z bezpiecznym schematem przy użyciu [zmiennej środowiskowej ASPNETCORE_URLS](../fundamentals/host/generic-host.md?view=aspnetcore-3.0#urls). Zmienna środowiskowa służy do konfigurowania serwera. Oprogramowanie pośredniczące pośrednio wykrywa port HTTPS za pośrednictwem <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature> . Takie podejście nie działa w przypadku wdrożeń zwrotnych serwerów proxy.
 
 ::: moniker-end
 

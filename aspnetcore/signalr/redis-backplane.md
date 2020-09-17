@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/redis-backplane
-ms.openlocfilehash: bc28eb3096e88455347f68ca381c9a280d5a153e
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: a57176409c5f9bcc620db7e070f6616951eb9a54
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633659"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722777"
 ---
 # <a name="set-up-a-redis-backplane-for-aspnet-core-no-locsignalr-scale-out"></a>Konfigurowanie planu Redis dla ASP.NET Core SignalR skalowanie w poziomie
 
@@ -42,7 +42,7 @@ W tym artykule opisano SignalR zagadnienia dotyczące konfigurowania serwera [Re
 
   * <xref:signalr/scale>
   * [Dokumentacja Redis](https://redis.io/)
-  * [Dokumentacja Azure Redis Cache](https://docs.microsoft.com/azure/redis-cache/)
+  * [Dokumentacja Azure Redis Cache](/azure/redis-cache/)
 
 ::: moniker range="= aspnetcore-2.1"
 
@@ -240,4 +240,4 @@ Więcej informacji można znaleźć w następujących zasobach:
 * <xref:signalr/scale>
 * [Dokumentacja Redis](https://redis.io/documentation)
 * [Dokumentacja StackExchange Redis](https://stackexchange.github.io/StackExchange.Redis/)
-* [Dokumentacja Azure Redis Cache](https://docs.microsoft.com/azure/redis-cache/)
+* [Dokumentacja Azure Redis Cache](/azure/redis-cache/)

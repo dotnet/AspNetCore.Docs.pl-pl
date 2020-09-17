@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/memory
-ms.openlocfilehash: 9bb055670b73c9a1ae04083bc326200a42151708
-ms.sourcegitcommit: 7258e94cf60c16e5b6883138e5e68516751ead0f
+ms.openlocfilehash: 7f1d20687f6dd588e125acf3815815c2bcf0cd04
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/29/2020
-ms.locfileid: "89102799"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722686"
 ---
 # <a name="memory-management-and-garbage-collection-gc-in-aspnet-core"></a>Zarządzanie pamięcią i wyrzucanie elementów bezużytecznych (GC) w ASP.NET Core
 
@@ -355,7 +355,7 @@ public async Task<int> GetHttpClient2(string url)
 
 Aby lepiej obsługiwać okres istnienia wystąpienia, zobacz następujące tematy `HttpClient` :
 
-* [HttpClient i zarządzanie okresem istnienia](/aspnet/core/fundamentals/http-requests#httpclient-and-lifetime-management)
+* [HttpClient i zarządzanie okresem istnienia](../fundamentals/http-requests.md#httpclient-and-lifetime-management)
 * [Blog dotyczący fabryki HTTPClient](https://devblogs.microsoft.com/aspnet/asp-net-core-2-1-preview1-introducing-httpclient-factory/)
  
 ### <a name="object-pooling"></a>Buforowanie obiektów
@@ -443,7 +443,7 @@ Zastosowanie tego samego obciążenia co wersja niebędąca w puli powoduje, że
 
 Główną różnicą jest przydzieloną liczbę bajtów, a jako wiele mniejszych kolekcji generacji 0.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Odzyskiwanie pamięci](/dotnet/standard/garbage-collection/)
 * [Zrozumienie różnych trybów GC przy użyciu wizualizatora współbieżności](https://blogs.msdn.microsoft.com/seteplia/2017/01/05/understanding-different-gc-modes-with-concurrency-visualizer/)

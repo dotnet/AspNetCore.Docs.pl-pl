@@ -1,8 +1,8 @@
 ---
-title: Usługi testowe z narzędziami gRPC
+title: Testowanie usług gRPC za pomocą gRPCurl w ASP.NET Core
 author: jamesnk
 description: Dowiedz się, jak testować usługi za pomocą narzędzi gRPC. gRPCurl narzędzie wiersza polecenia do współpracy z usługami gRPC Services. gRPCui to interaktywny interfejs użytkownika sieci Web.
-monikerRange: '>= aspnetcore-3.0'
+monikerRange: '>= aspnetcore-3.1'
 ms.author: jamesnk
 ms.date: 08/09/2020
 no-loc:
@@ -17,18 +17,21 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/test-tools
-ms.openlocfilehash: ba51d9b5db2e9fbc7583856d79ab8658eff9b586
-ms.sourcegitcommit: a07f83b00db11f32313045b3492e5d1ff83c4437
+ms.openlocfilehash: 15652431ea4bebc879af4c57667cbf854c49330c
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/15/2020
-ms.locfileid: "90594432"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90721826"
 ---
-# <a name="test-services-with-grpc-tools"></a>Usługi testowe z narzędziami gRPC
+# <a name="test-grpc-services-with-grpcurl-in-aspnet-core"></a>Testowanie usług gRPC za pomocą gRPCurl w ASP.NET Core
 
 Przez [Kuba Kowalski-króla](https://twitter.com/jamesnk)
 
-Narzędzia są dostępne dla gRPC, dzięki czemu deweloperzy mogą testować usługi bez kompilowania aplikacji klienckich. [gRPCurl](https://github.com/fullstorydev/grpcurl) to narzędzie wiersza polecenia, które umożliwia interakcję z usługami gRPC Services. [gRPCui](https://github.com/fullstorydev/grpcui) dodaje interaktywny interfejs użytkownika sieci Web dla gRPC.
+Dostępne są narzędzia dla programu gRPC, które umożliwiają deweloperom Testowanie usług bez kompilowania aplikacji klienckich:
+
+* [gRPCurl](https://github.com/fullstorydev/grpcurl) to narzędzie wiersza polecenia, które umożliwia interakcję z usługami gRPC Services.
+* [gRPCui](https://github.com/fullstorydev/grpcui) kompiluje się w oparciu o gRPCurl i dodaje interaktywny interfejs użytkownika sieci Web dla gRPC, podobny do narzędzi, takich jak interfejs użytkownika programu Poster i programu Swagger.
 
 W tym artykule omówiono sposób wykonywania tych zagadnień:
 
@@ -48,21 +51,31 @@ gRPCurl to narzędzie wiersza polecenia utworzone przez społeczność gRPC. Dos
 
 Aby uzyskać informacje na temat pobierania i instalowania `grpcurl` , zobacz [stronę główną usługi GitHub gRPCurl](https://github.com/fullstorydev/grpcurl#installation).
 
-## <a name="setup-grpc-reflection"></a>Ustawienia odbicia gRPC
+![wiersz polecenia gRPCurl](~/grpc/test-tools/static/grpcurl.png)
+
+## <a name="set-up-grpc-reflection"></a>Konfigurowanie odbicia gRPC
 
 `grpcurl` musi znać protobuf kontrakt usług, zanim będzie mógł je wywoływać. Istnieją dwa sposoby wykonania tej czynności:
 
-* Użyj odbicia gRPC, aby odnaleźć kontrakty usługi.
-* Określ pliki *. proto* w argumentach wiersza polecenia.
+* Skonfiguruj [odbicie gRPC](https://github.com/grpc/grpc/blob/master/doc/server-reflection.md) na serwerze. gRPCurl automatycznie odnajduje kontrakty usługi.
+* Określ `.proto` pliki w argumentach wiersza polecenia do gRPCurl.
 
-Łatwiej jest używać gRPCurl z odbiciem gRPC i odnajdywaniem usług. gRPC ASP.NET Core ma wbudowaną obsługę odbicia gRPC z pakietem [gRPC. AspNetCore. Server. odbicie](https://www.nuget.org/packages/Grpc.AspNetCore.Server.Reflection) . Aby skonfigurować odbicie w aplikacji:
+Łatwiej jest używać gRPCurl z odbiciem gRPC. odbicie gRPC dodaje nową usługę gRPC do aplikacji, którą klienci mogą wywoływać w celu odnajdywania usług.
+
+gRPC ASP.NET Core ma wbudowaną obsługę odbicia gRPC z [`Grpc.AspNetCore.Server.Reflection`](https://www.nuget.org/packages/Grpc.AspNetCore.Server.Reflection) pakietem. Aby skonfigurować odbicie w aplikacji:
 
 * Dodaj `Grpc.AspNetCore.Server.Reflection` odwołanie do pakietu.
-* Rejestruj odbicie w *Startup.cs*:
+* Rejestruj odbicie w `Startup.cs` :
   * `AddGrpcReflection` Aby zarejestrować usługi, które umożliwiają odbicie.
   * `MapGrpcReflectionService` Aby dodać punkt końcowy usługi odbicia.
 
-[!code-csharp[](~/grpc/test-tools/Startup.cs?name=snippet_1&highlight=4,14)]
+[!code-csharp[](~/grpc/test-tools/Startup.cs?name=snippet_1&highlight=4,15-18)]
+
+Po skonfigurowaniu odbicia gRPC:
+
+* Usługa odbicia gRPC zostanie dodana do aplikacji serwera.
+* Aplikacje klienckie, które obsługują odbicie gRPC, mogą wywołać usługę odbicia w celu odnalezienia usług hostowanych przez serwer.
+* usługi gRPC są nadal wywoływane z klienta programu. Odbicie włącza tylko odnajdowanie usług i nie pomija zabezpieczeń po stronie serwera. Punkty końcowe chronione [uwierzytelnianiem i autoryzacją](xref:grpc/authn-and-authz) wymagają, aby obiekt wywołujący przeszedł poświadczenia dla punktu końcowego, który ma zostać wywołany pomyślnie.
 
 ## <a name="use-grpcurl"></a>Korzystanie z polecenia `grpcurl`
 
@@ -117,33 +130,33 @@ Wywołaj usługę gRPC, określając nazwę usługi i metody wraz z argumentem J
 }
 ```
 
-Powyższy przykład:
+W powyższym przykładzie:
 
-* `-d` argument określa komunikat żądania o formacie JSON. Ten argument musi występować przed adresem serwera i nazwą metody.
+* `-d`Argument określa komunikat żądania o formacie JSON. Ten argument musi występować przed adresem serwera i nazwą metody.
 * Wywołuje `SayHello` metodę w `greeter.Greeter` usłudze.
 * Drukuje komunikat odpowiedzi w formacie JSON.
 
 ## <a name="about-grpcui"></a>Informacje o gRPCui
 
-gRPCui to interaktywny interfejs użytkownika sieci Web dla gRPC. Jest ona oparta na gRPCurl i oferuje graficzny interfejs użytkownika do odnajdywania i testowania usług gRPC, podobnie jak w przypadku narzędzi HTTP, takich jak Poster.
+gRPCui to interaktywny interfejs użytkownika sieci Web dla gRPC. Jest ona oparta na gRPCurl i oferuje graficzny interfejs użytkownika do odnajdywania i testowania usług gRPC, podobnie jak w przypadku narzędzi HTTP, takich jak Poster lub Swagger.
 
 Aby uzyskać informacje na temat pobierania i instalowania `grpcui` , zobacz [stronę główną usługi GitHub gRPCui](https://github.com/fullstorydev/grpcui#installation).
 
 ## <a name="using-grpcui"></a>Korzystanie z akcji `grpcui`
 
-Uruchom `grpcui` z adresem serwera, aby współdziałać z programem jako argumentem.
+Uruchom `grpcui` z adresem serwera, aby korzystać z programu jako argumentu:
 
 ```powershell
 > grpcui.exe localhost:5001
 gRPC Web UI available at http://127.0.0.1:55038/
 ```
 
-Narzędzie uruchomi okno przeglądarki z interaktywnym interfejsem użytkownika sieci Web. usługi gRPC są automatycznie wykrywane przy użyciu odbicia gRPC.
+Narzędzie uruchamia okno przeglądarki z interaktywnym interfejsem użytkownika sieci Web. usługi gRPC są automatycznie wykrywane przy użyciu odbicia gRPC.
 
 ![Interfejs użytkownika sieci Web gRPCui](~/grpc/test-tools/static/grpcui.png)
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Strona główna usługi GitHub gRPCurl](https://github.com/fullstorydev/grpcurl)
 * [Strona główna usługi GitHub gRPCui](https://github.com/fullstorydev/grpcui)
-* [GRPC. AspNetCore. Server. odbicie](https://www.nuget.org/packages/Grpc.AspNetCore.Server.Reflection)
+* [`Grpc.AspNetCore.Server.Reflection`](https://www.nuget.org/packages/Grpc.AspNetCore.Server.Reflection)

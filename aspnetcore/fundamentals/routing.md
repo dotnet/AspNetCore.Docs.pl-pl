@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/routing
-ms.openlocfilehash: cf450385db3c7327de233357d4c13d556ee44bad
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 1b8ccb510927fbc8a40f7424ae1ca4a131799095
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633672"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722887"
 ---
 # <a name="routing-in-aspnet-core"></a>Routing w ASP.NET Core
 
@@ -50,7 +50,7 @@ W tym dokumencie przedstawiono szczegóły niskiego poziomu ASP.NET Core routing
 System routingu punktu końcowego opisany w tym dokumencie ma zastosowanie do ASP.NET Core 3,0 i nowszych. Aby uzyskać informacje dotyczące poprzedniego systemu routingu opartego na programie <xref:Microsoft.AspNetCore.Routing.IRouter> , wybierz wersję ASP.NET Core 2,1 przy użyciu jednej z następujących metod:
 
 * Selektor wersji dla poprzedniej wersji.
-* Wybierz pozycję [ASP.NET Core 2,1 Routing](https://docs.microsoft.com/aspnet/core/fundamentals/routing?view=aspnetcore-2.1).
+* Wybierz pozycję [ASP.NET Core 2,1 Routing](?view=aspnetcore-2.1).
 
 [Wyświetl lub pobierz przykładowy kod](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/routing/samples/3.x) ([jak pobrać](xref:index#how-to-download-a-sample))
 
@@ -1025,7 +1025,7 @@ services.AddMvc(options => options.EnableEndpointRouting = false)
     .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 ```
 
-Więcej informacji na temat <xref:Microsoft.AspNetCore.Routing.IRouter> routingu opartego na usłudze można znaleźć w [wersji ASP.NET Core 2,1 tego tematu](/aspnet/core/fundamentals/routing?view=aspnetcore-2.1).
+Więcej informacji na temat <xref:Microsoft.AspNetCore.Routing.IRouter> routingu opartego na usłudze można znaleźć w [wersji ASP.NET Core 2,1 tego tematu](?view=aspnetcore-2.1).
 
 > [!IMPORTANT]
 > Ten dokument obejmuje Routing ASP.NET Core niskiego poziomu. Aby uzyskać informacje na temat ASP.NET Core routingu MVC, zobacz <xref:mvc/controllers/routing> . Aby uzyskać informacje na temat Konwencji routingu na Razor stronach, zobacz <xref:razor-pages/razor-pages-conventions> .
@@ -1557,8 +1557,8 @@ W przypadku poprzedniej trasy Akcja `SubscriptionManagementController.GetAll` je
 
 ASP.NET Core udostępnia konwencje interfejsu API do używania transformatorów parametrów z wygenerowanymi trasami:
 
-* ASP.NET Core MVC ma `Microsoft.AspNetCore.Mvc.ApplicationModels.RouteTokenTransformerConvention` Konwencję interfejsu API. Ta Konwencja stosuje określony transformator parametrów do wszystkich tras atrybutów w aplikacji. Transformator parametrów przekształca tokeny trasy atrybutów po ich wymianie. Aby uzyskać więcej informacji, zobacz [używanie transformatora parametrów do dostosowywania zastępowania tokenu](/aspnet/core/mvc/controllers/routing#use-a-parameter-transformer-to-customize-token-replacement).
-* Razor Strony mają `Microsoft.AspNetCore.Mvc.ApplicationModels.PageRouteTransformerConvention` Konwencję interfejsu API. Ta Konwencja stosuje określony transformator parametrów do wszystkich automatycznie odnalezionych Razor stron. Transformator parametrów przekształca folder i segmenty nazw plików Razor tras. Aby uzyskać więcej informacji, zobacz [używanie transformatora parametrów do dostosowywania tras stron](/aspnet/core/razor-pages/razor-pages-conventions#use-a-parameter-transformer-to-customize-page-routes).
+* ASP.NET Core MVC ma `Microsoft.AspNetCore.Mvc.ApplicationModels.RouteTokenTransformerConvention` Konwencję interfejsu API. Ta Konwencja stosuje określony transformator parametrów do wszystkich tras atrybutów w aplikacji. Transformator parametrów przekształca tokeny trasy atrybutów po ich wymianie. Aby uzyskać więcej informacji, zobacz [używanie transformatora parametrów do dostosowywania zastępowania tokenu](xref:mvc/controllers/routing#use-a-parameter-transformer-to-customize-token-replacement).
+* Razor Strony mają `Microsoft.AspNetCore.Mvc.ApplicationModels.PageRouteTransformerConvention` Konwencję interfejsu API. Ta Konwencja stosuje określony transformator parametrów do wszystkich automatycznie odnalezionych Razor stron. Transformator parametrów przekształca folder i segmenty nazw plików Razor tras. Aby uzyskać więcej informacji, zobacz [używanie transformatora parametrów do dostosowywania tras stron](xref:razor-pages/razor-pages-conventions#use-a-parameter-transformer-to-customize-page-routes).
 
 ## <a name="url-generation-reference"></a>Odwołanie do generacji adresów URL
 

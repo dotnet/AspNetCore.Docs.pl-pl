@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/protobuf
-ms.openlocfilehash: 60af1add9ae2f8b2b94bc19b65667d7af91fb122
-ms.sourcegitcommit: 7258e94cf60c16e5b6883138e5e68516751ead0f
+ms.openlocfilehash: ea46e04bc4aa6269efbf8917d5f32194402a66ef
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/29/2020
-ms.locfileid: "89102669"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722699"
 ---
 # <a name="create-protobuf-messages-for-net-apps"></a>Tworzenie komunikatów protobuf dla aplikacji platformy .NET
 
@@ -85,6 +85,10 @@ Protobuf obsługuje zakres natywnych typów wartości skalarnych. W poniższej t
 | `string`      | `string`     |
 | `bytes`       | `ByteString` |
 
+Wartości skalarne zawsze mają wartość domyślną i nie można jej ustawić na `null` . To ograniczenie obejmuje `string` `ByteString` klasy języka C#. `string` Wartością domyślną jest wartość pustego ciągu, a `ByteString` wartością domyślną jest wartość puste bajty. Podjęto próbę ustawienia wyrzucania `null` błędów.
+
+[Typy otoki dopuszczające wartość](#nullable-types) null mogą służyć do obsługi wartości zerowych.
+
 ### <a name="dates-and-times"></a>Daty i godziny
 
 Natywne typy skalarne nie zapewniają wartości daty i godziny, równoważne z. SIECI <xref:System.DateTimeOffset> , <xref:System.DateTime> i <xref:System.TimeSpan> . Te typy można określić za pomocą niektórych rozszerzeń *znanych typów* protobuf. Rozszerzenia te zapewniają obsługę generowania kodu i środowiska uruchomieniowego dla złożonych typów pól na obsługiwanych platformach.
@@ -145,19 +149,42 @@ message Person {
 }
 ```
 
-Protobuf używa typów platformy .NET dopuszczających wartości null, na przykład `int?` dla wygenerowanej właściwości wiadomości.
+`wrappers.proto` typy nie są ujawniane we właściwościach wygenerowanych. Protobuf automatycznie mapuje je na odpowiednie typy platformy .NET dopuszczające wartość null w komunikatach w języku C#. Na przykład `google.protobuf.Int32Value` pole generuje `int?` Właściwość. Właściwości typu referencyjnego `string` , takie jak i, `ByteString` są niezmienione, z wyjątkiem sytuacji, `null` w których można je przypisać bez błędu.
 
 W poniższej tabeli przedstawiono pełną listę typów otoki z równoważnym typem języka C#:
 
-| Typ C#   | Otoka dobrze znanego typu       |
-| --------- | ----------------------------- |
-| `bool?`   | `google.protobuf.BoolValue`   |
-| `double?` | `google.protobuf.DoubleValue` |
-| `float?`  | `google.protobuf.FloatValue`  |
-| `int?`    | `google.protobuf.Int32Value`  |
-| `long?`   | `google.protobuf.Int64Value`  |
-| `uint?`   | `google.protobuf.UInt32Value` |
-| `ulong?`  | `google.protobuf.UInt64Value` |
+| Typ C#      | Otoka dobrze znanego typu       |
+| ------------ | ----------------------------- |
+| `bool?`      | `google.protobuf.BoolValue`   |
+| `double?`    | `google.protobuf.DoubleValue` |
+| `float?`     | `google.protobuf.FloatValue`  |
+| `int?`       | `google.protobuf.Int32Value`  |
+| `long?`      | `google.protobuf.Int64Value`  |
+| `uint?`      | `google.protobuf.UInt32Value` |
+| `ulong?`     | `google.protobuf.UInt64Value` |
+| `string`     | `google.protobuf.StringValue` |
+| `ByteString` | `google.protobuf.BytesValue`  |
+
+### <a name="bytes"></a>Bajty
+
+Ładunki binarne są obsługiwane w protobuf z `bytes` typem wartości skalarnej. Wygenerowana właściwość w języku C# używa `ByteString` jako typ właściwości.
+
+Użyj `ByteString.CopyFrom(byte[] data)` , aby utworzyć nowe wystąpienie z tablicy bajtowej:
+
+```csharp
+var data = await File.ReadAllBytesAsync(path);
+
+var payload = new PayloadResponse();
+payload.Data = ByteString.CopyFrom(data);
+```
+
+`ByteString` dostęp do danych odbywa się bezpośrednio przy użyciu `ByteString.Span` lub `ByteString.Memory` . Lub wywołaj, `ByteString.ToByteArray()` Aby przekonwertować wystąpienie z powrotem na tablicę bajtową:
+
+```csharp
+var payload = await client.GetPayload(new PayloadRequest());
+
+await File.WriteAllBytesAsync(path, payload.Data.ToByteArray());
+```
 
 ### <a name="decimals"></a>Miejsca dziesiętne
 
@@ -417,7 +444,7 @@ var json = JsonFormatter.Default.Format(status.Metadata);
 var document = JsonDocument.Parse(json);
 ```
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Przewodnik po języku protobuf](https://developers.google.com/protocol-buffers/docs/proto3#simple)
 * <xref:grpc/versioning>

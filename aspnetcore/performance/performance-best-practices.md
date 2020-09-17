@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/performance-best-practices
-ms.openlocfilehash: 587872b269d897d7c86eb77c110a4b6432218ed3
-ms.sourcegitcommit: dd0e87abf2bb50ee992d9185bb256ed79d48f545
+ms.openlocfilehash: 01575ec87d2d346da7367523ca5e257d53de4983
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/21/2020
-ms.locfileid: "88746562"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722621"
 ---
 # <a name="aspnet-core-performance-best-practices"></a>ASP.NET Core najlepszych rozwiązań dotyczących wydajności
 
@@ -42,7 +42,7 @@ W tym dokumencie ścieżka do *kodu gorącego* jest definiowana jako ścieżka k
 
 Aplikacje ASP.NET Core powinny być przeznaczone do przetwarzania wielu żądań jednocześnie. Asynchroniczne interfejsy API umożliwiają obsługę tysięcy współbieżnych żądań przez niewielką pulę wątków. Zamiast czekać na ukończenie długotrwałego zadania synchronicznego, wątek może działać na innym żądaniu.
 
-Typowy problem z wydajnością w aplikacjach ASP.NET Core blokuje wywołania, które mogą być asynchroniczne. Wiele wywołań blokowania synchronicznego prowadzi do [przetrzymania puli wątków](https://blogs.msdn.microsoft.com/vancem/2018/10/16/diagnosing-net-core-threadpool-starvation-with-perfview-why-my-service-is-not-saturating-all-cores-or-seems-to-stall/) i nieprawidłowej reakcji.
+Typowy problem z wydajnością w aplikacjach ASP.NET Core blokuje wywołania, które mogą być asynchroniczne. Wiele wywołań blokowania synchronicznego prowadzi do [przetrzymania puli wątków](/archive/blogs/vancem/diagnosing-net-core-threadpool-starvation-with-perfview-why-my-service-is-not-saturating-all-cores-or-seems-to-stall) i nieprawidłowej reakcji.
 
 **Nie należy**:
 

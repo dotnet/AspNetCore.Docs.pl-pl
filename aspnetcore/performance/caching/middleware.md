@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/middleware
-ms.openlocfilehash: 43b0ef1dcbf6d0137b14be9e58eb056f06ae093d
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 7fe9629e1c60a6156c69e546736049653a4229b7
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633451"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722647"
 ---
 # <a name="response-caching-middleware-in-aspnet-core"></a>Buforowanie oprogramowania pośredniczącego w ASP.NET Core
 
@@ -35,7 +35,7 @@ W tym artykule opisano sposób konfigurowania oprogramowania pośredniczącego b
 
 [Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/middleware/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
 
-## <a name="configuration"></a>Konfigurowanie
+## <a name="configuration"></a>Konfiguracja
 
 Oprogramowanie pośredniczące buforowania odpowiedzi jest niejawnie dostępne dla aplikacji ASP.NET Core za pośrednictwem udostępnionej platformy.
 
@@ -59,7 +59,7 @@ Przykładowa aplikacja dodaje nagłówki, aby kontrolować buforowanie w kolejny
 
 Poprzednie nagłówki nie są zapisywane w odpowiedzi i są zastępowane, gdy kontroler, Akcja lub Razor Strona:
 
-* Ma atrybut [[ResponseCache]](xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute) . Dotyczy to nawet sytuacji, gdy właściwość nie jest ustawiona. Na przykład pominięcie właściwości [VaryByHeader](/aspnet/core/performance/caching/response#vary) spowoduje usunięcie odpowiedniego nagłówka z odpowiedzi.
+* Ma atrybut [[ResponseCache]](xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute) . Dotyczy to nawet sytuacji, gdy właściwość nie jest ustawiona. Na przykład pominięcie właściwości [VaryByHeader](./response.md#vary) spowoduje usunięcie odpowiedniego nagłówka z odpowiedzi.
 
 Buforowanie odpowiedzi w pamięci podręcznej tylko buforuje odpowiedzi serwera, które powodują, że jest to kod stanu 200 (OK). Wszystkie inne odpowiedzi, w tym [strony błędów](xref:fundamentals/error-handling), są ignorowane przez oprogramowanie pośredniczące.
 
@@ -163,7 +163,7 @@ Podczas testowania i rozwiązywania problemów z pamięcią podręczną przeglą
 > [!NOTE]
 > System antysfałszowany służący do generowania zabezpieczonych tokenów, aby zapobiec atakom przez wiele witryn (CSRF), w `Cache-Control` związku z czym `Pragma` `no-cache` odpowiedzi nie są buforowane. Aby uzyskać informacje na temat sposobu wyłączania tokenów antysfałszowanych dla elementów formularza HTML, zobacz <xref:security/anti-request-forgery#aspnet-core-antiforgery-configuration> .
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:fundamentals/startup>
 * <xref:fundamentals/middleware/index>
@@ -182,7 +182,7 @@ W tym artykule opisano sposób konfigurowania oprogramowania pośredniczącego b
 
 [Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/middleware/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
 
-## <a name="configuration"></a>Konfigurowanie
+## <a name="configuration"></a>Konfiguracja
 
 Użyj pakietu [Microsoft. AspNetCore. app](xref:fundamentals/metapackage-app) lub Dodaj odwołanie do pakietu do pakietu [Microsoft. AspNetCore. ResponseCaching](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCaching/) .
 
@@ -203,7 +203,7 @@ Przykładowa aplikacja dodaje nagłówki, aby kontrolować buforowanie w kolejny
 
 Poprzednie nagłówki nie są zapisywane w odpowiedzi i są zastępowane, gdy kontroler, Akcja lub Razor Strona:
 
-* Ma atrybut [[ResponseCache]](xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute) . Dotyczy to nawet sytuacji, gdy właściwość nie jest ustawiona. Na przykład pominięcie właściwości [VaryByHeader](/aspnet/core/performance/caching/response#vary) spowoduje usunięcie odpowiedniego nagłówka z odpowiedzi.
+* Ma atrybut [[ResponseCache]](xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute) . Dotyczy to nawet sytuacji, gdy właściwość nie jest ustawiona. Na przykład pominięcie właściwości [VaryByHeader](./response.md#vary) spowoduje usunięcie odpowiedniego nagłówka z odpowiedzi.
 
 Buforowanie odpowiedzi w pamięci podręcznej tylko buforuje odpowiedzi serwera, które powodują, że jest to kod stanu 200 (OK). Wszystkie inne odpowiedzi, w tym [strony błędów](xref:fundamentals/error-handling), są ignorowane przez oprogramowanie pośredniczące.
 

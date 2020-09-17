@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/publish-to-azure-webapp-using-vs
-ms.openlocfilehash: 380e18d1826159fa0780909aba58fe8334ede8bb
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: ebfe89d68725d597d6975015bbf84414ff818829
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631943"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722913"
 ---
 # <a name="publish-an-aspnet-core-app-to-azure-with-visual-studio"></a>Publikowanie aplikacji ASP.NET Core na platformie Azure przy użyciu programu Visual Studio
 
@@ -34,7 +34,7 @@ Autor: [Rick Anderson](https://twitter.com/RickAndMSFT)
 ::: moniker-end
 
 
-Zobacz [publikowanie aplikacji sieci Web, aby Azure App Service przy użyciu Visual Studio dla komputerów Mac](https://docs.microsoft.com/visualstudio/mac/publish-app-svc?view=vsmac-2019) , jeśli pracujesz na macOS.
+Zobacz [publikowanie aplikacji sieci Web, aby Azure App Service przy użyciu Visual Studio dla komputerów Mac](/visualstudio/mac/publish-app-svc?view=vsmac-2019) , jeśli pracujesz na macOS.
 
 Aby rozwiązać problem z wdrożeniem App Service, zobacz <xref:test/troubleshoot-azure-iis> .
 
@@ -42,7 +42,7 @@ Aby rozwiązać problem z wdrożeniem App Service, zobacz <xref:test/troubleshoo
 
 * Otwórz [bezpłatne konto platformy Azure](https://azure.microsoft.com/free/dotnet/) , jeśli go nie masz. 
 
-## <a name="create-a-web-app"></a>tworzenie aplikacji internetowej
+## <a name="create-a-web-app"></a>Tworzenie aplikacji internetowej
 
 Na stronie startowej programu Visual Studio wybierz pozycję **plik > nowy > projekt...**
 
@@ -118,7 +118,7 @@ W oknie dialogowym **Publikowanie** wybierz pozycję **Utwórz nowy Azure App Se
 Zostanie wyświetlone okno dialogowe **tworzenie App Service** :
 
 * Pola **Nazwa aplikacji**, **Grupa zasobów**i zapis **planu App Service** są wypełniane. Te nazwy można zachować lub zmienić.
-* Wybierz przycisk **Utwórz**.
+* Wybierz pozycję **Utwórz**.
 
 ![Okno dialogowe Tworzenie usługi App Service](publish-to-azure-webapp-using-vs/_static/newrg1.png)
 
@@ -148,7 +148,7 @@ Zostanie wyświetlona **Azure SQL Database tworzenia** :
 
 * Pola **Nazwa bazy danych**, **Grupa zasobów**, **serwer bazy danych** i zapis **planu App Service** są wypełniane. Te wartości można zachować lub zmienić.
 * Wprowadź **nazwę użytkownika** i **hasło administratora** bazy danych dla wybranego **serwera bazy danych** (Zwróć uwagę na używane konto musi mieć uprawnienia niezbędne do utworzenia nowej bazy danych Azure SQL Database).
-* Wybierz przycisk **Utwórz**.
+* Wybierz pozycję **Utwórz**.
 
 ![Nowe okno dialogowe Azure SQL Database](publish-to-azure-webapp-using-vs/_static/sql_create.png)
 
@@ -215,7 +215,7 @@ Po zakończeniu testowania aplikacji przejdź do [Azure Portal](https://portal.a
 
 * <xref:host-and-deploy/azure-apps/azure-continuous-deployment>
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * Aby uzyskać Visual Studio Code, zobacz temat [Publikowanie profilów](xref:host-and-deploy/visual-studio-publish-profiles#publish-profiles).
 * [Azure App Service](/azure/app-service/app-service-web-overview)

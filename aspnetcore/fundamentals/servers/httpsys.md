@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/httpsys
-ms.openlocfilehash: 29af28f512764b9efec682b44c8de1d2ae03ee04
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: e5346c1e58127747d777b5040fe7bc7d99b9a489
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631137"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722874"
 ---
 # <a name="httpsys-web-server-implementation-in-aspnet-core"></a>HTTP.sys implementacja serwera sieci Web w programie ASP.NET Core
 
@@ -255,7 +255,7 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
 
    Dokumentacja referencyjna dla *netsh.exe*:
 
-   * [Polecenia netsh dla protokołu HTTP (Hypertext Transfer Protocol)](https://technet.microsoft.com/library/cc725882.aspx)
+   * [Polecenia netsh dla protokołu HTTP (Hypertext Transfer Protocol)](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc725882(v=ws.10))
    * [UrlPrefix ciągi](/windows/win32/http/urlprefix-strings)
 
 1. Uruchom aplikację.
@@ -272,7 +272,7 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
 
 W przypadku aplikacji hostowanych przez HTTP.sys, które współdziałają z żądaniami z Internetu lub sieci firmowej, może być wymagana dodatkowa konfiguracja w przypadku hostowania za serwerami proxy i modułami równoważenia obciążenia. Aby uzyskać więcej informacji, zobacz [konfigurowanie ASP.NET Core do pracy z serwerami proxy i usługami równoważenia obciążenia](xref:host-and-deploy/proxy-load-balancer).
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Włącz uwierzytelnianie systemu Windows przy użyciu HTTP.sys](xref:security/authentication/windowsauth#httpsys)
 * [Interfejs API serwera HTTP](/windows/win32/http/http-api-start-page)
@@ -506,7 +506,7 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
 
    Dokumentacja referencyjna dla *netsh.exe*:
 
-   * [Polecenia netsh dla protokołu HTTP (Hypertext Transfer Protocol)](https://technet.microsoft.com/library/cc725882.aspx)
+   * [Polecenia netsh dla protokołu HTTP (Hypertext Transfer Protocol)](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc725882(v=ws.10))
    * [UrlPrefix ciągi](/windows/win32/http/urlprefix-strings)
 
 1. Uruchom aplikację.
@@ -523,7 +523,7 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
 
 W przypadku aplikacji hostowanych przez HTTP.sys, które współdziałają z żądaniami z Internetu lub sieci firmowej, może być wymagana dodatkowa konfiguracja w przypadku hostowania za serwerami proxy i modułami równoważenia obciążenia. Aby uzyskać więcej informacji, zobacz [konfigurowanie ASP.NET Core do pracy z serwerami proxy i usługami równoważenia obciążenia](xref:host-and-deploy/proxy-load-balancer).
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Włącz uwierzytelnianie systemu Windows przy użyciu HTTP.sys](xref:security/authentication/windowsauth#httpsys)
 * [Interfejs API serwera HTTP](/windows/win32/http/http-api-start-page)
@@ -759,7 +759,7 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
 
    Dokumentacja referencyjna dla *netsh.exe*:
 
-   * [Polecenia netsh dla protokołu HTTP (Hypertext Transfer Protocol)](https://technet.microsoft.com/library/cc725882.aspx)
+   * [Polecenia netsh dla protokołu HTTP (Hypertext Transfer Protocol)](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc725882(v=ws.10))
    * [UrlPrefix ciągi](/windows/win32/http/urlprefix-strings)
 
 1. Uruchom aplikację.
@@ -776,7 +776,7 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
 
 W przypadku aplikacji hostowanych przez HTTP.sys, które współdziałają z żądaniami z Internetu lub sieci firmowej, może być wymagana dodatkowa konfiguracja w przypadku hostowania za serwerami proxy i modułami równoważenia obciążenia. Aby uzyskać więcej informacji, zobacz [konfigurowanie ASP.NET Core do pracy z serwerami proxy i usługami równoważenia obciążenia](xref:host-and-deploy/proxy-load-balancer).
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Włącz uwierzytelnianie systemu Windows przy użyciu HTTP.sys](xref:security/authentication/windowsauth#httpsys)
 * [Interfejs API serwera HTTP](/windows/win32/http/http-api-start-page)
@@ -1012,7 +1012,7 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
 
    Dokumentacja referencyjna dla *netsh.exe*:
 
-   * [Polecenia netsh dla protokołu HTTP (Hypertext Transfer Protocol)](https://technet.microsoft.com/library/cc725882.aspx)
+   * [Polecenia netsh dla protokołu HTTP (Hypertext Transfer Protocol)](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc725882(v=ws.10))
    * [UrlPrefix ciągi](/windows/win32/http/urlprefix-strings)
 
 1. Uruchom aplikację.
@@ -1029,7 +1029,7 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
 
 W przypadku aplikacji hostowanych przez HTTP.sys, które współdziałają z żądaniami z Internetu lub sieci firmowej, może być wymagana dodatkowa konfiguracja w przypadku hostowania za serwerami proxy i modułami równoważenia obciążenia. Aby uzyskać więcej informacji, zobacz [konfigurowanie ASP.NET Core do pracy z serwerami proxy i usługami równoważenia obciążenia](xref:host-and-deploy/proxy-load-balancer).
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Włącz uwierzytelnianie systemu Windows przy użyciu HTTP.sys](xref:security/authentication/windowsauth#httpsys)
 * [Interfejs API serwera HTTP](/windows/win32/http/http-api-start-page)

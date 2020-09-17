@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/version-differences
-ms.openlocfilehash: a8336a6c13c502f5a0fad150785cd9d484064618
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 965fbb3d8007cb64aaf51d82d87ed7a3a5298e9b
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633009"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90721791"
 ---
 # <a name="differences-between-aspnet-no-locsignalr-and-aspnet-core-no-locsignalr"></a>Różnice między ASP.NET SignalR i ASP.NET Core SignalR
 
@@ -156,7 +156,7 @@ Możliwość przekazania dowolnego stanu między klientami a centrum (często wy
 
 ### <a name="persistentconnection-removal"></a>Usuwanie PersistentConnection
 
-W ASP.NET Core SignalR Klasa [PersistentConnection](https://docs.microsoft.com/previous-versions/aspnet/jj919047(v%3dvs.118)) została usunięta.
+W ASP.NET Core SignalR Klasa [PersistentConnection](/previous-versions/aspnet/jj919047(v=vs.118)) została usunięta.
 
 ### <a name="globalhost"></a>GlobalHost
 
@@ -289,9 +289,9 @@ ASP.NET SignalR obsługuje SQL Server i Redis. ASP.NET Core SignalR obsługuje u
 * [Usługa platformy Azure SignalR](/azure/azure-signalr/)
 * [Redis](xref:signalr/redis-backplane)
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
-* [Koncentratory](xref:signalr/hubs)
+* [Centra](xref:signalr/hubs)
 * [Klient JavaScript](xref:signalr/javascript-client)
 * [Klient .NET](xref:signalr/dotnet-client)
 * [Obsługiwane platformy](xref:signalr/supported-platforms)

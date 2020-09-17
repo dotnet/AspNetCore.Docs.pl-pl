@@ -6,12 +6,12 @@ metadata:
   description: Więcej informacji na temat nowej i zaktualizowanej zawartości znajduje się w dokumentacji ASP.NET Core.
   ms.topic: landing-page
   ms.date: 08/03/2020
-  ms.openlocfilehash: 5d8bc150d91010cce31d885b3a15e80a8efc7ac3
-  ms.sourcegitcommit: 8ed9a413bdc2d665ad11add8828898d726ccb106
+  ms.openlocfilehash: cb0db16ae400573fb5dafb1d2295037f15e0b9e9
+  ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
   ms.translationtype: MT
   ms.contentlocale: pl-PL
-  ms.lasthandoff: 09/01/2020
-  ms.locfileid: "89280416"
+  ms.lasthandoff: 09/17/2020
+  ms.locfileid: "90721648"
 landingContent:
 - title: Znajdź aktualizacje ASP.NET Core docs
   linkLists:
@@ -40,7 +40,7 @@ landingContent:
   - linkListType: concept
     links:
     - text: Przewodnik współautora witryny Microsoft docs
-      url: https://docs.microsoft.com/contribute
+      url: /contribute
     - text: Przewodnik współautora ASP.NET Core docs
       url: https://github.com/dotnet/AspNetCore.Docs/blob/master/CONTRIBUTING.md
     - text: Przewodnik współautora dokumentacji dotyczącej interfejsów API ASP.NET Core
@@ -60,7 +60,7 @@ landingContent:
     - text: Informacje o wersji platformy .NET Core
       url: https://github.com/dotnet/core/blob/master/release-notes/README.md
     - text: Informacje o wersji ASP.NET Core
-      url: /aspnet/core/release-notes/aspnetcore-3.1
+      url: ../release-notes/aspnetcore-3.1.md
     - text: Informacje o wersji kompilatora C# (Roslyn)
       url: https://github.com/dotnet/roslyn/tree/master/docs/ide
     - text: Informacje o wersji programu Visual Studio

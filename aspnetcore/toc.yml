@@ -722,8 +722,8 @@
       uid: grpc/clientfactory
     - name: Używanie gRPC w aplikacjach przeglądarki
       uid: grpc/browser
-    - name: Tworzenie internetowych interfejsów API JSON z usługi gRPC
-      uid: grpc/httpapi
+    - name: Terminy i anulowanie
+      uid: grpc/deadlines-cancellation
     - name: Konfiguracja
       uid: grpc/configuration
     - name: Uwierzytelnianie i autoryzacja
@@ -738,12 +738,16 @@
       uid: grpc/versioning
     - name: Zarządzanie odwołaniami narzędzia Protobuf za pomocą narzędzia dotnet-GRPC
       uid: grpc/dotnet-grpc
+    - name: Testowanie usług przy użyciu narzędzi usługi gRPC
+      uid: grpc/test-tools
     - name: Migracja usług gRPC ze środowiska C-core
       uid: grpc/migration
     - name: Dlaczego warto przeprowadzić migrację aplikacji WCF do usługi gRPC platformy ASP.NET Core
       uid: grpc/wcf
     - name: Porównanie usług gRPC za pomocą interfejsów API protokołu HTTP
       uid: grpc/comparison
+    - name: Tworzenie internetowych interfejsów API JSON z usługi gRPC
+      uid: grpc/httpapi
     - name: Przykłady
       href: 'https://github.com/grpc/grpc-dotnet/tree/master/examples'
     - name: Rozwiązywanie problemów

@@ -337,6 +337,8 @@
                   href: blazor/forms-validation.md#built-in-forms-components
                 - name: InputDate
                   href: blazor/forms-validation.md#built-in-forms-components
+                - name: InputFile
+                  href: blazor/file-uploads.md
                 - name: InputNumber
                   href: blazor/forms-validation.md#built-in-forms-components
                 - name: InputRadio
@@ -363,6 +365,8 @@
                   href: blazor/fundamentals/routing.md#route-templates
                 - name: Tytuł
                   href: blazor/fundamentals/additional-scenarios.md#influence-html-head-tag-elements
+                - name: Virtualize
+                  href: blazor/components/virtualization.md
             - name: Kaskadowe wartości i parametry
               uid: blazor/components/cascading-values-and-parameters
             - name: Powiązanie danych
@@ -371,6 +375,8 @@
               uid: blazor/components/event-handling
             - name: Cykl życia
               uid: blazor/components/lifecycle
+            - name: Wirtualizacja składników
+              uid: blazor/components/virtualization
             - name: Składniki z szablonami
               uid: blazor/components/templated-components
             - name: Integracja składników
@@ -383,6 +389,8 @@
           uid: blazor/layouts
         - name: Formularze i walidacja
           uid: blazor/forms-validation
+        - name: Operacje przekazywania plików
+          uid: blazor/file-uploads
         - name: Wywoływanie kodu JavaScript z platformy .NET
           uid: blazor/call-javascript-from-dotnet
         - name: Wywoływanie platformy .NET ze środowiska JavaScript
@@ -714,16 +722,20 @@
           uid: grpc/services
         - name: Tworzenie komunikatów Protobuf
           uid: grpc/protobuf
+        - name: Przechowywanie wersji usług gRPC
+          uid: grpc/versioning
+    - name: Wywoływanie usług gRPC w środowisku C#
+      items:
+        - name: Omówienie
+          uid: grpc/client
+        - name: Integracja z fabryką klienta gRPC
+          uid: grpc/clientfactory
+        - name: Terminy i anulowanie
+          uid: grpc/deadlines-cancellation
     - name: Usługi gRPC na platformie ASP.NET Core
       uid: grpc/aspnetcore
-    - name: Wywoływanie usług gRPC przy użyciu klienta .NET
-      uid: grpc/client
-    - name: Integracja z fabryką klienta gRPC
-      uid: grpc/clientfactory
     - name: Używanie gRPC w aplikacjach przeglądarki
       uid: grpc/browser
-    - name: Terminy i anulowanie
-      uid: grpc/deadlines-cancellation
     - name: Konfiguracja
       uid: grpc/configuration
     - name: Uwierzytelnianie i autoryzacja
@@ -734,11 +746,13 @@
       uid: grpc/security
     - name: Najlepsze rozwiązania w zakresie wydajności
       uid: grpc/performance
-    - name: Przechowywanie wersji usług gRPC
-      uid: grpc/versioning
+    - name: Komunikacja między procesami
+      uid: grpc/interprocess
+    - name: Tworzenie internetowych interfejsów API JSON z usługi gRPC
+      uid: grpc/httpapi
     - name: Zarządzanie odwołaniami narzędzia Protobuf za pomocą narzędzia dotnet-GRPC
       uid: grpc/dotnet-grpc
-    - name: Testowanie usług przy użyciu narzędzi usługi gRPC
+    - name: Testowanie usług gRPC przy użyciu narzędzia gRPCurl
       uid: grpc/test-tools
     - name: Migracja usług gRPC ze środowiska C-core
       uid: grpc/migration
@@ -746,8 +760,6 @@
       uid: grpc/wcf
     - name: Porównanie usług gRPC za pomocą interfejsów API protokołu HTTP
       uid: grpc/comparison
-    - name: Tworzenie internetowych interfejsów API JSON z usługi gRPC
-      uid: grpc/httpapi
     - name: Przykłady
       href: 'https://github.com/grpc/grpc-dotnet/tree/master/examples'
     - name: Rozwiązywanie problemów
@@ -974,7 +986,7 @@
   items:
     - name: Omówienie
       uid: security/index
-    - name: Authentication
+    - name: Uwierzytelnianie
       items:
         - name: Omówienie
           uid: security/authentication/index

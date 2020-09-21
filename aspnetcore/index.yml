@@ -10,12 +10,12 @@ metadata:
   author: WadePickett
   ms.author: wpickett
   ms.date: 06/05/2020
-  ms.openlocfilehash: c90bd79b68252505120a0b28bce2a2b5b9d627d7
-  ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
+  ms.openlocfilehash: d01cb4dee4c7539c0337343615a259fc7346eb6a
+  ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
   ms.translationtype: HT
   ms.contentlocale: pl-PL
-  ms.lasthandoff: 07/03/2020
-  ms.locfileid: "85944307"
+  ms.lasthandoff: 09/17/2020
+  ms.locfileid: "90722285"
 highlightedContent:
   items:
   - title: Utwórz aplikację ASP.NET Core na dowolnej platformie w zaledwie pięć minut
@@ -41,7 +41,7 @@ highlightedContent:
     url: tutorials/signalr.md
   - title: Dokumentacja platformy ASP.NET 4.x
     itemType: overview
-    url: https://docs.microsoft.com/aspnet/overview
+    url: /aspnet/overview
 conceptualContent:
   title: Opracowywanie aplikacji ASP.NET Core
   summary: Wybierz interaktywne aplikacje internetowe, internetowy interfejs API, aplikacje ze wzorcem MVC, aplikacje w czasie rzeczywistym i inne
@@ -67,7 +67,7 @@ conceptualContent:
     - url: tutorials/first-web-api.md
       itemType: get-started
       text: Tworzenie internetowego interfejsu API za pomocą platformy ASP.NET Core
-    - url: https://docs.microsoft.com/learn/modules/build-web-api-net-core/
+    - url: /learn/modules/build-web-api-net-core/
       itemType: learn
       text: Tworzenie internetowych interfejsów API za pomocą platformy ASP.NET Core
     - url: tutorials/web-api-help-pages-using-swagger.md
@@ -91,7 +91,7 @@ conceptualContent:
     - url: tutorials/razor-pages/razor-pages-start.md
       itemType: get-started
       text: Tworzenie pierwszej aplikacji internetowej ze stronami Razor Pages
-    - url: https://docs.microsoft.com/learn/modules/create-razor-pages-aspnet-core/
+    - url: /learn/modules/create-razor-pages-aspnet-core/
       itemType: tutorial
       text: Tworzenie internetowego interfejsu użytkownika ukierunkowanego na strony, który korzysta z internetowego interfejsu API
     - url: mvc/views/razor.md
@@ -187,7 +187,7 @@ conceptualContent:
     - url: tutorials/first-mvc-app/start-mvc.md
       itemType: tutorial
       text: Usługa SQL z platformą ASP.NET Core
-    - url: blazor/data-binding.md
+    - url: ./blazor/components/data-binding.md
       itemType: concept
       text: Powiązanie danych na platformie ASP.NET Core Blazor
     - url: tutorials/razor-pages/razor-pages-start.md
@@ -199,19 +199,19 @@ conceptualContent:
     - url: data/ef-rp/intro.md
       itemType: tutorial
       text: Program Entity Framework Core z produktem ASP.NET Core MVC
-    - url: https://docs.microsoft.com/visualstudio/azure/vs-azure-tools-connected-services-storage?view=vs-2019&viewFallbackFrom=aspnetcore-3.1
+    - url: /visualstudio/azure/vs-azure-tools-connected-services-storage?view=vs-2019&viewFallbackFrom=aspnetcore-3.1
       itemType: tutorial
       text: Azure Storage
-    - url: https://docs.microsoft.com/azure/visual-studio/vs-storage-aspnet5-getting-started-blobs?toc=%2Faspnet%2Fcore%2Ftoc.json&bc=%2Faspnet%2Fcore%2Fbreadcrumb%2Ftoc.json&view=aspnetcore-3.1
+    - url: /azure/visual-studio/vs-storage-aspnet5-getting-started-blobs?bc=%252faspnet%252fcore%252fbreadcrumb%252ftoc.json&toc=%252faspnet%252fcore%252ftoc.json&view=aspnetcore-3.1
       itemType: tutorial
       text: Blob Storage
-    - url: https://docs.microsoft.com/azure/visual-studio/vs-storage-aspnet5-getting-started-tables?toc=%2Faspnet%2Fcore%2Ftoc.json&bc=%2Faspnet%2Fcore%2Fbreadcrumb%2Ftoc.json&view=aspnetcore-3.1
+    - url: /azure/visual-studio/vs-storage-aspnet5-getting-started-tables?bc=%252faspnet%252fcore%252fbreadcrumb%252ftoc.json&toc=%252faspnet%252fcore%252ftoc.json&view=aspnetcore-3.1
       itemType: concept
       text: Azure Table Storage
   - title: Poprzednie wersje platformy ASP.NET Framework
     summary: Poznaj przeglądy, samouczki, podstawowe pojęcie, informacje o architekturze i interfejsie API dla poprzednich wersji platformy ASP.NET Framework
     links:
-    - url: https://docs.microsoft.com/aspnet/overview
+    - url: /aspnet/overview
       itemType: concept
       text: ASP.NET 4.x
   - title: Samouczki wideo dotyczące platformy ASP.NET Core
@@ -237,7 +237,7 @@ additionalContent:
     items:
     - title: Dokumentacja interfejsu API dla platformy ASP.NET Core
       links:
-      - url: https://docs.microsoft.com/dotnet/api/?view=aspnetcore-3.1
+      - url: /dotnet/api/?view=aspnetcore-3.1
         text: Przeglądarka interfejsów API na platformie .NET
     - title: Hostowanie i wdrażanie
       links:
@@ -265,7 +265,7 @@ additionalContent:
         text: Uwierzytelnianie
       - url: security/authorization/introduction.md
         text: Autoryzacja
-      - url: https://docs.microsoft.com/learn/modules/secure-aspnet-core-identity/
+      - url: /learn/modules/secure-aspnet-core-identity/
         text: 'Kurs: Zabezpieczanie aplikacji internetowej platformy ASP.NET Core za pomocą platformy tożsamości'
       - url: security/data-protection/introduction.md
         text: Ochrona danych
@@ -289,9 +289,9 @@ additionalContent:
       links:
       - url: test/razor-pages-tests.md
         text: Testy jednostkowe Razor Pages
-      - url: https://docs.microsoft.com/visualstudio/debugger/remote-debugging-azure?view=vs-2019&viewFallbackFrom=aspnetcore-3.1
+      - url: /visualstudio/debugger/remote-debugging-azure?view=vs-2019&viewFallbackFrom=aspnetcore-3.1
         text: Debugowanie zdalne
-      - url: https://docs.microsoft.com/azure/azure-monitor/app/snapshot-debugger?toc=%2Faspnet%2Fcore%2Ftoc.json&bc=%2Faspnet%2Fcore%2Fbreadcrumb%2Ftoc.json&view=aspnetcore-3.1
+      - url: /azure/azure-monitor/app/snapshot-debugger?bc=%252faspnet%252fcore%252fbreadcrumb%252ftoc.json&toc=%252faspnet%252fcore%252ftoc.json&view=aspnetcore-3.1
         text: Debugowanie migawek
       - url: test/integration-tests.md
         text: Testy integracji
@@ -301,23 +301,23 @@ additionalContent:
         text: Rozwiązywanie problemów i debugowanie
       - url: fundamentals/logging/index.md
         text: Rejestrowanie
-      - url: https://docs.microsoft.com/learn/modules/load-test-web-app-azure-devops/
+      - url: /learn/modules/load-test-web-app-azure-devops/
         text: Testowanie obciążenia aplikacji sieci Web platformy Azure za pomocą usługi Azure DevOps
     - title: Platforma Azure i platforma ASP.NET Core
       links:
-      - url: https://docs.microsoft.com/azure/app-service/app-service-web-get-started-dotnet
+      - url: /azure/app-service/app-service-web-get-started-dotnet
         text: Wdrażanie aplikacji internetowej ASP.NET Core
-      - url: https://docs.microsoft.com/visualstudio/containers/container-tools?view=vs-2019.md
+      - url: /visualstudio/containers/container-tools?view=vs-2019.md
         text: Platforma ASP.NET Core i platforma Docker
-      - url: https://docs.microsoft.com/learn/modules/host-a-web-app-with-azure-app-service/
+      - url: /learn/modules/host-a-web-app-with-azure-app-service/
         text: Hostowanie aplikacji internetowej za pomocą usługi Azure App Service
-      - url: https://docs.microsoft.com/azure/app-service/app-service-web-tutorial-dotnet-sqldatabase
+      - url: /azure/app-service/app-service-web-tutorial-dotnet-sqldatabase
         text: Usługa App Service i usługa Azure SQL Database
-      - url: https://docs.microsoft.com/azure/app-service/app-service-web-tutorial-connect-msi
+      - url: /azure/app-service/app-service-web-tutorial-connect-msi
         text: Zarządzana tożsamość z platformą ASP.NET Core i usługą Azure SQL Database
-      - url: https://docs.microsoft.com/azure/app-service/app-service-web-tutorial-rest-api
+      - url: /azure/app-service/app-service-web-tutorial-rest-api
         text: Internetowy interfejs API z mechanizmem CORS w usłudze Azure App Service
-      - url: https://docs.microsoft.com/learn/modules/capture-application-logs-app-service/
+      - url: /learn/modules/capture-application-logs-app-service/
         text: Przechwytywanie dzienników aplikacji internetowej za pomocą funkcji rejestrowania diagnostyki w usłudze App Service
     - title: Wydajność
       links:
@@ -339,7 +339,7 @@ additionalContent:
         text: Powiązanie modelu
       - url: mvc/models/validation.md
         text: Walidacja modelu
-      - url: fundamentals/middleware.md
+      - url: ./fundamentals/middleware/index.md
         text: Pisanie oprogramowania pośredniczącego
       - url: fundamentals/middleware/request-response.md
         text: Operacje żądań i odpowiedzi
@@ -363,14 +363,14 @@ additionalContent:
         text: Z programu ASP.NET do ASP.NET Core
     - title: Architektura
       links:
-      - url: https://docs.microsoft.com/dotnet/architecture/modern-web-apps-azure/choose-between-traditional-web-and-single-page-apps
+      - url: /dotnet/architecture/modern-web-apps-azure/choose-between-traditional-web-and-single-page-apps
         text: Wybieranie między tradycyjnymi aplikacjami internetowymi a aplikacjami jednostronicowymi
-      - url: https://docs.microsoft.com/dotnet/architecture/modern-web-apps-azure/architectural-principles
+      - url: /dotnet/architecture/modern-web-apps-azure/architectural-principles
         text: Zasady dotyczące architektury
-      - url: https://docs.microsoft.com/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures
+      - url: /dotnet/architecture/modern-web-apps-azure/common-web-application-architectures
         text: Typowe architektury aplikacji internetowych
-      - url: https://docs.microsoft.com/dotnet/architecture/modern-web-apps-azure/common-client-side-web-technologies
+      - url: /dotnet/architecture/modern-web-apps-azure/common-client-side-web-technologies
         text: Typowe technologie internetowe po stronie klienta
-      - url: https://docs.microsoft.com/dotnet/architecture/modern-web-apps-azure/development-process-for-azure
+      - url: /dotnet/architecture/modern-web-apps-azure/development-process-for-azure
         text: Proces programistyczny dla platformy Azure
   footer: Współtwórz dokumentację platformy ASP.NET Core. Przeczytaj nasz [przewodnik współautora](https://github.com/aspnet/AspNetCore.Docs/blob/master/CONTRIBUTING.md).

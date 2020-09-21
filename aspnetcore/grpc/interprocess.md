@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/interprocess
-ms.openlocfilehash: 7278ebd001aea4ba52c1134b3bac696c01950a27
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 34876f31cbc51ba66a91ae32ea6a5213dc34a369
+ms.sourcegitcommit: 9c031530d2e652fe422e786bd43392bc500d622f
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90723004"
+ms.lasthandoff: 09/18/2020
+ms.locfileid: "90770158"
 ---
 # <a name="inter-process-communication-with-grpc"></a>Komunikacja między procesami przy użyciu gRPC
 
@@ -109,7 +109,7 @@ public static GrpcChannel CreateChannel()
     var connectionFactory = new UnixDomainSocketConnectionFactory(udsEndPoint);
     var socketsHttpHandler = new SocketsHttpHandler
     {
-        ConnectionFactory = connectionFactory.ConnectAsync
+        ConnectCallback = connectionFactory.ConnectAsync
     };
 
     return GrpcChannel.ForAddress("http://localhost", new GrpcChannelOptions

@@ -5,7 +5,7 @@ description: Dowiedz się, jak używać wirtualizacji składników w Blazor apli
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/16/2020
+ms.date: 09/21/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/virtualization
-ms.openlocfilehash: c904a3f330531f80d1dc69bf63621c59790e1cb0
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 911eeeb445741aa1519e1464dd4a75e26f6f12ab
+ms.sourcegitcommit: 62cc131969b2379f7a45c286a751e22d961dfbdb
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722999"
+ms.lasthandoff: 09/22/2020
+ms.locfileid: "90847575"
 ---
 # <a name="aspnet-core-no-locblazor-component-virtualization"></a>BlazorWirtualizacja składników ASP.NET Core
 
@@ -169,3 +169,7 @@ Na przykład siatka lub lista, która renderuje setki wierszy zawierających sk�
 * `FetchData` składnik ( [`Pages/FetchData.razor`](https://github.com/aspnet/samples/blob/master/samples/aspnetcore/blazor/Virtualization/Pages/FetchData.razor) ): używa `Virtualize` składnika do wyświetlania 25 wierszy danych pogody jednocześnie.
 
 ::: moniker-end
+
+## <a name="state-changes"></a>Zmiany stanu
+
+Podczas wprowadzania zmian do elementów renderowanych przez `Virtualize` składnik Wywołaj metodę <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> wymuszenia ponownej oceny i ponownego renderowania składnika.

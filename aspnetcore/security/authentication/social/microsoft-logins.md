@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/microsoft-logins
-ms.openlocfilehash: 3430d842b6a4f7da30370977f72e6f132e28bb7f
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 36341a0e439be57d7da4f787aa6103b92c624e96
+ms.sourcegitcommit: 62cc131969b2379f7a45c286a751e22d961dfbdb
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634257"
+ms.lasthandoff: 09/22/2020
+ms.locfileid: "90847588"
 ---
 # <a name="microsoft-account-external-login-setup-with-aspnet-core"></a>Konfiguracja logowania zewnętrznego konta Microsoft z ASP.NET Core
 
@@ -41,6 +41,8 @@ Jeśli nie masz konto Microsoft, wybierz pozycję **Utwórz**. Po zalogowaniu na
 * Wybierz **nową rejestrację**
 * Wprowadź **nazwę**.
 * Wybierz opcję dla **obsługiwanych typów kont**.  <!-- Accounts for any org work with MS domain accounts. Most folks probably want the last option, personal MS accounts. It took 24 hours after setting this up for the keys to work -->
+  * `MicrosoftAccount`Pakiet obsługuje rejestracje aplikacji utworzone przy użyciu opcji "konta w dowolnym katalogu organizacyjnym" lub "konta w dowolnym katalogu organizacyjnym i na kontach Microsoft".
+  * Aby skorzystać z innych opcji, ustaw `AuthorizationEndpoint` i `TokenEndpoint` elementy członkowskie `MicrosoftAccountOptions` użyte do zainicjowania uwierzytelniania konta Microsoft do adresów URL wyświetlanych na stronie **punkty końcowe** rejestracji aplikacji po jej utworzeniu (dostępne przez kliknięcie punktów końcowych na stronie **Przegląd** ).
 * W obszarze **Identyfikator URI przekierowania**wprowadź adres URL programowania z `/signin-microsoft` dołączonym. Na przykład `https://localhost:5001/signin-microsoft`. Schemat uwierzytelniania firmy Microsoft skonfigurowany w dalszej części tego przykładu będzie automatycznie obsługiwał żądania w `/signin-microsoft` marszrucie w celu zaimplementowania przepływu OAuth.
 * Wybierz pozycję **zarejestruj**
 

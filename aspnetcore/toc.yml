@@ -174,6 +174,9 @@
             - name: Implementowanie odporności >>
               displayName: 'tutorial, kubernetes, aks, acr, docker'
               href: /learn/modules/microservices-resiliency-aspnet-core/
+            - name: Wdrażanie przy użyciu funkcji GitHub Actions >>
+              display: 'tutorial, kubernetes, aks, acr, docker, devops'
+              href: /learn/modules/microservices-devops-aspnet-core/
         - name: Dostęp do danych >>
           displayName: 'tutorial, ef, entity framework'
           href: /learn/modules/persist-data-ef-core/

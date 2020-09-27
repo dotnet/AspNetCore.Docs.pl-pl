@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/model-binding
-ms.openlocfilehash: ec36ff6d646e0554550a4372389aed89aa267b1f
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: ca2f071ccb84fdb2eb06f533fc4d088ad1b1c785
+ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633984"
+ms.lasthandoff: 09/27/2020
+ms.locfileid: "91393889"
 ---
 # <a name="model-binding-in-aspnet-core"></a>Powiązanie modelu w ASP.NET Core
 
@@ -208,12 +208,12 @@ Typy proste, które tworzą spinacz modelu mogą konwertować ciągi źródłowe
 * [Delikatn](xref:System.ComponentModel.CharConverter)
 * [Data/godzina](xref:System.ComponentModel.DateTimeConverter)
 * [DateTimeOffset](xref:System.ComponentModel.DateTimeOffsetConverter)
-* [Liczba dziesiętna](xref:System.ComponentModel.DecimalConverter)
+* [Dokładności](xref:System.ComponentModel.DecimalConverter)
 * [Double](xref:System.ComponentModel.DoubleConverter)
 * [Wyliczenie](xref:System.ComponentModel.EnumConverter)
 * [Ident](xref:System.ComponentModel.GuidConverter)
 * [Int16](xref:System.ComponentModel.Int16Converter), [Int32](xref:System.ComponentModel.Int32Converter), [Int64](xref:System.ComponentModel.Int64Converter)
-* [Pojedyncze](xref:System.ComponentModel.SingleConverter)
+* [Pojedynczy](xref:System.ComponentModel.SingleConverter)
 * [Czasu](xref:System.ComponentModel.TimeSpanConverter)
 * [UInt16](xref:System.ComponentModel.UInt16Converter), [UInt32](xref:System.ComponentModel.UInt32Converter), [UInt64](xref:System.ComponentModel.UInt64Converter)
 * [Adresu](xref:System.UriTypeConverter)
@@ -393,6 +393,47 @@ Dla `Dictionary` elementów docelowych powiązanie modelu wyszukuje dopasowania 
 
   * selectedCourses ["1050"] = "Chemia"
   * selectedCourses ["2000"] = "ekonomia"
+  
+::: moniker-end
+
+::: moniker range=">= aspnetcore-5.0"
+
+## <a name="constructor-binding-and-record-types"></a>Typy powiązań konstruktora i rekordów
+
+Powiązanie modelu wymaga, aby typy złożone miały Konstruktor bez parametrów. Zarówno programowy `System.Text.Json` , jak i `Newtonsoft.Json` oparty na danych wejściowych elementy formatujące obsługują deserializacja klas, które nie mają konstruktora bez parametrów. 
+
+W języku C# 9 wprowadzono typy rekordów, które są doskonałym sposobem na zwięzłe przedstawianie danych przez sieć. ASP.NET Core dodaje obsługę powiązania modelu i sprawdzanie poprawności typów rekordów przy użyciu pojedynczego konstruktora:
+
+```csharp
+public record Person([Required] string Name, [Range(0, 150)] int Age);
+
+public class PersonController
+{
+   public IActionResult Index() => View();
+
+   [HttpPost]
+   public IActionResult Index(Person person)
+   {
+       ...
+   }
+}
+```
+
+`Person/Index.cshtml`:
+
+```cshtml
+@model Person
+
+Name: <input asp-for="Name" />
+...
+Age: <input asp-for="Age" />
+```
+
+Podczas sprawdzania poprawności typów rekordów środowisko uruchomieniowe wyszukuje metadane walidacji w zależności od parametrów, a nie właściwości.
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0"
 
 <a name="glob"></a>
 
@@ -506,12 +547,13 @@ Aby uzyskać więcej informacji, zobacz [TryUpdateModelAsync](xref:data/ef-rp/cr
 
 Nazwa tego atrybutu jest zgodna ze wzorcem atrybutów powiązania modelu, które określają źródło danych. Ale nie informacje o powiązaniu danych od dostawcy wartości. Pobiera wystąpienie typu z kontenera [iniekcji zależności](xref:fundamentals/dependency-injection) . Jego celem jest zapewnienie alternatywy dla iniekcji konstruktorów, gdy potrzebna jest usługa tylko wtedy, gdy jest wywoływana konkretna metoda.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:mvc/models/validation>
 * <xref:mvc/advanced/custom-model-binding>
 
 ::: moniker-end
+
 ::: moniker range="< aspnetcore-3.0"
 
 W tym artykule wyjaśniono, co to jest powiązanie modelu, jak to działa i jak dostosować jego zachowanie.
@@ -694,12 +736,12 @@ Typy proste, które tworzą spinacz modelu mogą konwertować ciągi źródłowe
 * [Delikatn](xref:System.ComponentModel.CharConverter)
 * [Data/godzina](xref:System.ComponentModel.DateTimeConverter)
 * [DateTimeOffset](xref:System.ComponentModel.DateTimeOffsetConverter)
-* [Liczba dziesiętna](xref:System.ComponentModel.DecimalConverter)
+* [Dokładności](xref:System.ComponentModel.DecimalConverter)
 * [Double](xref:System.ComponentModel.DoubleConverter)
 * [Wyliczenie](xref:System.ComponentModel.EnumConverter)
 * [Ident](xref:System.ComponentModel.GuidConverter)
 * [Int16](xref:System.ComponentModel.Int16Converter), [Int32](xref:System.ComponentModel.Int32Converter), [Int64](xref:System.ComponentModel.Int64Converter)
-* [Pojedyncze](xref:System.ComponentModel.SingleConverter)
+* [Pojedynczy](xref:System.ComponentModel.SingleConverter)
 * [Czasu](xref:System.ComponentModel.TimeSpanConverter)
 * [UInt16](xref:System.ComponentModel.UInt16Converter), [UInt32](xref:System.ComponentModel.UInt32Converter), [UInt64](xref:System.ComponentModel.UInt64Converter)
 * [Adresu](xref:System.UriTypeConverter)

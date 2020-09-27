@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/configuration
-ms.openlocfilehash: fc0e6398884bb5c3b806a587a8a361d7f279461f
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 579491cfe60a26593ca038a1691f9b52f0fb1d06
+ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88625560"
+ms.lasthandoff: 09/27/2020
+ms.locfileid: "91393876"
 ---
 # <a name="aspnet-core-no-locsignalr-configuration"></a>SignalRKonfiguracja ASP.NET Core
 
@@ -85,6 +85,7 @@ W poniższej tabeli opisano opcje konfigurowania SignalR centrów:
 | `EnableDetailedErrors` | `false` | Jeśli `true` szczegółowe komunikaty o wyjątkach są zwracane do klientów, gdy wyjątek jest zgłaszany w metodzie centrum. Wartość domyślna to `false` , ponieważ te komunikaty o wyjątkach mogą zawierać informacje poufne. |
 | `StreamBufferCapacity` | `10` | Maksymalna liczba elementów, które mogą być buforowane dla strumieni przekazywania klientów. Po osiągnięciu tego limitu przetwarzanie wywołań jest blokowane, dopóki serwer nie przetwarza elementów strumienia.|
 | `MaximumReceiveMessageSize` | 32 KB | Maksymalny rozmiar pojedynczego przychodzącego komunikatu centrum. |
+| `MaximumParallelInvocationsPerClient` | 1 | Maksymalna liczba metod centralnych, które każdy klient może wywołać równolegle przed kolejkowanie. |
 
 Opcje można skonfigurować dla wszystkich centrów, dostarczając opcje delegata do `AddSignalR` wywołania w `Startup.ConfigureServices` .
 
@@ -197,7 +198,7 @@ let connection = new signalR.HubConnectionBuilder()
 
 Poniższa tabela zawiera listę dostępnych poziomów dzienników. Wartość określana przez użytkownika w celu ustawienia `configureLogging` **minimalnego** poziomu dziennika, który zostanie zarejestrowany. Komunikaty zarejestrowane na tym poziomie **lub poziomy wymienione po nim w tabeli**zostaną zarejestrowane.
 
-| Ciąg                      | LogLevel               |
+| String                      | LogLevel               |
 | --------------------------- | ---------------------- |
 | `trace`                     | `LogLevel.Trace`       |
 | `debug`                     | `LogLevel.Debug`       |
@@ -405,7 +406,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
         .build();
 ```
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:tutorials/signalr>
 * <xref:signalr/hubs>
@@ -585,7 +586,7 @@ let connection = new signalR.HubConnectionBuilder()
 
 Poniższa tabela zawiera listę dostępnych poziomów dzienników. Wartość określana przez użytkownika w celu ustawienia `configureLogging` **minimalnego** poziomu dziennika, który zostanie zarejestrowany. Komunikaty zarejestrowane na tym poziomie **lub poziomy wymienione po nim w tabeli**zostaną zarejestrowane.
 
-| Ciąg                      | LogLevel               |
+| String                      | LogLevel               |
 | --------------------------- | ---------------------- |
 | `trace`                     | `LogLevel.Trace`       |
 | `debug`                     | `LogLevel.Debug`       |
@@ -791,7 +792,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
         .build();
 ```
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:tutorials/signalr>
 * <xref:signalr/hubs>
@@ -970,7 +971,7 @@ let connection = new signalR.HubConnectionBuilder()
 
 Poniższa tabela zawiera listę dostępnych poziomów dzienników. Wartość określana przez użytkownika w celu ustawienia `configureLogging` **minimalnego** poziomu dziennika, który zostanie zarejestrowany. Komunikaty zarejestrowane na tym poziomie **lub poziomy wymienione po nim w tabeli**zostaną zarejestrowane.
 
-| Ciąg                      | LogLevel               |
+| String                      | LogLevel               |
 | --------------------------- | ---------------------- |
 | `trace`                     | `LogLevel.Trace`       |
 | `debug`                     | `LogLevel.Debug`       |
@@ -1176,7 +1177,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
         .build();
 ```
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:tutorials/signalr>
 * <xref:signalr/hubs>
@@ -1525,7 +1526,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
         .build();
 ```
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:tutorials/signalr>
 * <xref:signalr/hubs>

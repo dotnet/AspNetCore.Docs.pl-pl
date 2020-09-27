@@ -17,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/partial
-ms.openlocfilehash: 7a370042520adfe5b06784b76acf41a81eb2c72d
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: bb75d8b7d78c82c9c32605ac645b8895fdfb78e3
+ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630630"
+ms.lasthandoff: 09/27/2020
+ms.locfileid: "91393655"
 ---
 # <a name="partial-views-in-aspnet-core"></a>Częściowe widoki w ASP.NET Core
 
 [Steve Kowalski](https://ardalis.com/), [Maher JENDOUBI](https://twitter.com/maherjend), [Rick Anderson](https://twitter.com/RickAndMSFT)i [Scott Sauber](https://twitter.com/scottsauber)
 
-Widok częściowy to [Razor](xref:mvc/views/razor) plik znaczników (*. cshtml*), który renderuje dane wyjściowe HTML *w* innym renderowanym wyjściu pliku znaczników.
+Widok częściowy to [Razor](xref:mvc/views/razor) plik znaczników (*. cshtml*) bez [`@page`](xref:mvc/views/razor#page) dyrektywy, która renderuje dane wyjściowe HTML *w* innym wyrenderowanym danych wyjściowych.
 
 ::: moniker range=">= aspnetcore-2.1"
 
@@ -57,7 +57,7 @@ Nie używaj widoku częściowego, w którym wymagana jest funkcja logiki rendero
 
 ::: moniker range=">= aspnetcore-2.0"
 
-Widok częściowy to plik *. cshtml* , który jest przechowywany w folderze *widoki* (MVC) lub na *stronie* ( Razor strony).
+Widok częściowy to plik *. cshtml* , bez [`@page`](xref:mvc/views/razor#page) dyrektywy obsługiwanej w folderze *widoki* (MVC) lub folderze *strony* ( Razor strony).
 
 W ASP.NET Core MVC kontroler <xref:Microsoft.AspNetCore.Mvc.ViewResult> może zwrócić widok lub widok częściowy. Na Razor stronach <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> można zwrócić widok częściowy reprezentowany jako <xref:Microsoft.AspNetCore.Mvc.PartialViewResult> obiekt. Odwołania do widoków częściowych i renderowania są opisane w sekcji [odwołanie do częściowego widoku](#reference-a-partial-view) .
 

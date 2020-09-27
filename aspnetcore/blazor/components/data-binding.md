@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/data-binding
-ms.openlocfilehash: eef08d8236241d2930a1a1a45ca0181669f2432c
-ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
+ms.openlocfilehash: 493aa7f9cfbf2b47ffcb7d6f8e40de7b62ecfce3
+ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/11/2020
-ms.locfileid: "90009651"
+ms.lasthandoff: 09/27/2020
+ms.locfileid: "91393824"
 ---
 # <a name="aspnet-core-no-locblazor-data-binding"></a>ASP.NET Core Blazor powiązania danych
 
@@ -49,7 +49,7 @@ Poniższy przykład wiąże `<input>` element z `currentValue` polem i `<input>`
 }
 ```
 
-Gdy jeden z elementów niesie fokus, jego powiązane pole lub właściwość są aktualizowane.
+Gdy jeden z elementów utraci fokus, jego powiązane pole lub właściwość jest aktualizowana.
 
 Pole tekstowe jest aktualizowane w interfejsie użytkownika tylko wtedy, gdy składnik jest renderowany, a nie w odpowiedzi na zmianę wartości pola lub właściwości. Ponieważ składniki renderują się po wykonaniu kodu procedury obsługi zdarzeń, aktualizacje pól i właściwości są *zwykle* odzwierciedlane w interfejsie użytkownika natychmiast po wyzwoleniu programu obsługi zdarzeń.
 
@@ -314,7 +314,7 @@ Password:
 }
 ```
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Powiązywanie z przyciskami radiowymi w formularzu](xref:blazor/forms-validation#radio-buttons)
 * [Powiązywanie `<select>` opcji elementu z wartościami obiektów C# `null` w formularzu](xref:blazor/forms-validation#binding-select-element-options-to-c-object-null-values)

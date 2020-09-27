@@ -18,12 +18,12 @@ no-loc:
 - SignalR
 - Models
 uid: tutorials/first-web-api
-ms.openlocfilehash: 7f684d96ee9fd640abdc750503bed1b2a836a459
-ms.sourcegitcommit: 62cc131969b2379f7a45c286a751e22d961dfbdb
+ms.openlocfilehash: 212d8a80bdc466479c34bc5fbd9c3261ca9d54c4
+ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/22/2020
-ms.locfileid: "90847751"
+ms.lasthandoff: 09/27/2020
+ms.locfileid: "91393915"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>Samouczek: Tworzenie internetowego interfejsu API za pomocą ASP.NET Core
 
@@ -118,7 +118,7 @@ Na poniższym diagramie przedstawiono projekt aplikacji.
 
   ![Wybór szablonu interfejsu API macOS](first-web-api-mac/_static/api_template.png)
 
-* W oknie dialogowym **Konfigurowanie nowego interfejsu API sieci Web ASP.NET Core** wybierz najnowszą platformę **docelową**.NET Core 3. x. Wybierz pozycję **Dalej**.
+* W oknie dialogowym **Konfigurowanie nowego interfejsu API sieci Web ASP.NET Core** wybierz najnowszą platformę **docelową**.NET Core 3. x. Wybierz opcję **Dalej**.
 
 * Wprowadź *TodoApi* jako **nazwę projektu** , a następnie wybierz pozycję **Utwórz**.
 
@@ -427,7 +427,7 @@ Zaimplementowane są dwa punkty końcowe GET:
 * `GET /api/TodoItems`
 * `GET /api/TodoItems/{id}`
 
-Przetestuj aplikację, wywołując dwa punkty końcowe z przeglądarki lub wpisu. Przykład:
+Przetestuj aplikację, wywołując dwa punkty końcowe z przeglądarki lub wpisu. Na przykład:
 
 * `https://localhost:5001/api/TodoItems`
 * `https://localhost:5001/api/TodoItems/1`
@@ -644,7 +644,7 @@ Na poniższym diagramie przedstawiono projekt aplikacji.
 
   ![Wybór szablonu interfejsu API macOS](first-web-api-mac/_static/api_template.png)
 
-* W oknie dialogowym **Konfigurowanie nowego interfejsu API sieci Web ASP.NET Core** wybierz najnowszą platformę **docelową**.NET Core 3. x. Wybierz pozycję **Dalej**.
+* W oknie dialogowym **Konfigurowanie nowego interfejsu API sieci Web ASP.NET Core** wybierz najnowszą platformę **docelową**.NET Core 3. x. Wybierz opcję **Dalej**.
 
 * Wprowadź *TodoApi* jako **nazwę projektu** , a następnie wybierz pozycję **Utwórz**.
 
@@ -914,7 +914,7 @@ Te metody implementują dwa punkty końcowe GET:
 * `GET /api/TodoItems`
 * `GET /api/TodoItems/{id}`
 
-Przetestuj aplikację, wywołując dwa punkty końcowe z przeglądarki lub wpisu. Przykład:
+Przetestuj aplikację, wywołując dwa punkty końcowe z przeglądarki lub wpisu. Na przykład:
 
 * `https://localhost:5001/api/TodoItems`
 * `https://localhost:5001/api/TodoItems/1`
@@ -983,7 +983,7 @@ Zaktualizuj element do wykonania o identyfikatorze 1 i ustaw jego nazwę na "Źr
 
 ```json
   {
-    "Id":1,
+    "id":1,
     "name":"feed fish",
     "isComplete":true
   }
@@ -1126,7 +1126,7 @@ Na poniższym diagramie przedstawiono projekt aplikacji.
 
 * W Visual Studio dla komputerów Mac starszej niż wersja 8,6 Wybierz **.NET Core**pozycję  >  **App**  >  **interfejs API**aplikacji .NET Core  >  **Next**. W wersji 8,6 lub nowszej wybierz pozycję **Web and Console**  >  **App**  >  **interfejs API**  >  **Next**aplikacji sieci Web i konsoli.
   
-* W oknie dialogowym **Konfigurowanie nowego interfejsu API sieci Web ASP.NET Core** wybierz najnowszą platformę **docelową**programu .NET Core 2. x. Wybierz pozycję **Dalej**.
+* W oknie dialogowym **Konfigurowanie nowego interfejsu API sieci Web ASP.NET Core** wybierz najnowszą platformę **docelową**programu .NET Core 2. x. Wybierz opcję **Dalej**.
 
 * Wprowadź *TodoApi* jako **nazwę projektu** , a następnie wybierz pozycję **Utwórz**.
 
@@ -1271,7 +1271,7 @@ Te metody implementują dwa punkty końcowe GET:
 
 Zatrzymaj aplikację, jeśli jest nadal uruchomiona. Następnie uruchom ją ponownie, aby uwzględnić najnowsze zmiany.
 
-Przetestuj aplikację, wywołując dwa punkty końcowe z przeglądarki. Przykład:
+Przetestuj aplikację, wywołując dwa punkty końcowe z przeglądarki. Na przykład:
 
 * `https://localhost:<port>/api/todo`
 * `https://localhost:<port>/api/todo/1`
@@ -1410,7 +1410,7 @@ Zaktualizuj element do wykonania o identyfikatorze 1 i ustaw jego nazwę na "Źr
 
 ```json
   {
-    "Id":1,
+    "id":1,
     "name":"feed fish",
     "isComplete":true
   }

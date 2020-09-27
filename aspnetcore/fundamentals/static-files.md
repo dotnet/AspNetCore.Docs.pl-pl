@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/static-files
-ms.openlocfilehash: 24fda96dbe48945d172eb36e8a91af31f168ff7f
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 36eeb3532ed5ea6f5f75c20cbe14331ed840a788
+ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88627666"
+ms.lasthandoff: 09/27/2020
+ms.locfileid: "91393941"
 ---
 # <a name="static-files-in-aspnet-core"></a>Pliki statyczne w ASP.NET Core
 
@@ -127,7 +127,7 @@ Alternatywne podejście do obsługiwania plików na podstawie autoryzacji:
 
 Przeglądanie katalogów umożliwia wyświetlanie listy katalogów w określonych katalogach.
 
-Przeglądanie katalogów jest domyślnie wyłączone ze względów bezpieczeństwa. Aby uzyskać więcej informacji, zobacz [uwagi](#sc).
+Przeglądanie katalogów jest domyślnie wyłączone ze względów bezpieczeństwa. Aby uzyskać więcej informacji, zobacz [uwagi](#considerations).
 
 Włącz przeglądanie katalogów za pomocą:
 
@@ -267,7 +267,7 @@ W powyższym kodzie żądanie dotyczące pliku z nieznanym typem zawartości jes
 
 * Umieść pliki kodu, w tym *. cs* i *. cshtml*, poza [katalogiem głównym sieci Web](xref:fundamentals/index#web-root)projektu aplikacji. W związku z tym tworzone jest podział logiczny między zawartością po stronie klienta a kodem opartym na serwerze. Zapobiega to wyciekowi kodu po stronie serwera.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Oprogramowanie pośredniczące](xref:fundamentals/middleware/index)
 * [Wprowadzenie do programu ASP.NET Core](xref:index)
@@ -363,7 +363,7 @@ Oprogramowanie pośredniczące plików statycznych nie zapewnia kontroli autoryz
 
 ## <a name="enable-directory-browsing"></a>Włącz przeglądanie katalogów
 
-Przeglądanie katalogów umożliwia użytkownikom aplikacji sieci Web Wyświetlanie listy katalogów i plików w określonym katalogu. Przeglądanie katalogów jest domyślnie wyłączone ze względów bezpieczeństwa (zobacz [uwagi](#sc)). Włącz przeglądanie katalogów przez wywołanie <xref:Microsoft.AspNetCore.Builder.DirectoryBrowserExtensions.UseDirectoryBrowser%2A> metody w `Startup.Configure` :
+Przeglądanie katalogów umożliwia użytkownikom aplikacji sieci Web Wyświetlanie listy katalogów i plików w określonym katalogu. Przeglądanie katalogów jest domyślnie wyłączone ze względów bezpieczeństwa (zobacz [uwagi](#considerations)). Włącz przeglądanie katalogów przez wywołanie <xref:Microsoft.AspNetCore.Builder.DirectoryBrowserExtensions.UseDirectoryBrowser%2A> metody w `Startup.Configure` :
 
 [!code-csharp[](static-files/samples/1.x/StaticFilesSample/StartupBrowse.cs?name=snippet_ConfigureMethod&highlight=12-17)]
 
@@ -498,7 +498,7 @@ W powyższym kodzie żądanie dotyczące pliku z nieznanym typem zawartości jes
 
 * Umieść pliki kodu (w tym *. cs* i *. cshtml*) poza [katalogiem głównym sieci Web](xref:fundamentals/index#web-root)projektu aplikacji. W związku z tym tworzone jest podział logiczny między zawartością po stronie klienta a kodem opartym na serwerze. Zapobiega to wyciekowi kodu po stronie serwera.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Oprogramowanie pośredniczące](xref:fundamentals/middleware/index)
 * [Wprowadzenie do programu ASP.NET Core](xref:index)

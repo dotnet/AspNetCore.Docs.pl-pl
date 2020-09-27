@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: dadf6076e7f07c07381856aa225667a6eb38046a
-ms.sourcegitcommit: 600666440398788db5db25dc0496b9ca8fe50915
+ms.openlocfilehash: 3436620123618ab32daa44c4a37057aaadb89563
+ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90080319"
+ms.lasthandoff: 09/27/2020
+ms.locfileid: "91393694"
 ---
 # <a name="host-and-deploy-aspnet-core-no-locblazor-webassembly"></a>Hostowanie i wdrażanie ASP.NET Core Blazor WebAssembly
 
@@ -51,11 +51,15 @@ Blazor korzysta z hosta, aby zapewnić odpowiednie skompresowane pliki. W przypa
 * Aby uzyskać `web.config` konfigurację kompresji usług IIS, zobacz sekcję [rekompresji usług IIS: Brotli i gzip](#brotli-and-gzip-compression) . 
 * Podczas hostingu w rozwiązaniach hostingu statycznego, które nie obsługują negocjowanej statycznie negocjacji zawartości plików, na przykład stron usługi GitHub, należy rozważyć skonfigurowanie aplikacji do pobierania i dekodowania skompresowanych plików Brotli:
 
-  * Uzyskaj dekoder JavaScript Brotli z repozytorium usługi [GitHub firmy Google/Brotli](https://github.com/google/brotli). Od lipca 2020 plik dekodera ma nazwę `decode.min.js` i znajduje się w [ `js` folderze](https://github.com/google/brotli/tree/master/js)repozytorium.
+  * Uzyskaj dekoder JavaScript Brotli z repozytorium usługi [GitHub firmy Google/Brotli](https://github.com/google/brotli). Od września 2020 plik dekodera ma nazwę `decode.js` i znajduje się w [ `js` folderze](https://github.com/google/brotli/tree/master/js)repozytorium.
+  
+    > [!NOTE]
+    > Regresja jest obecna w wersji zminimalizowanego `decode.js` skryptu ( `decode.min.js` ) w [repozytorium usługi GitHub Google/brotli](https://github.com/google/brotli). Zminifikować skrypt samodzielnie lub Użyj [pakietu npm](https://www.npmjs.com/package/brotli) do momentu, gdy zostanie usunięte [okno problemu. BrotliDecode nie jest ustawiona w decode.min.js (google/brotli #844)](https://github.com/google/brotli/issues/844) . Przykładowy kod w tej sekcji używa wersji **unminified** skryptu.
+
   * Zaktualizuj aplikację, aby użyć dekodera. Zmień adiustację wewnątrz tagu zamykającego `<body>` w `wwwroot/index.html` następujący sposób:
   
     ```html
-    <script src="decode.min.js"></script>
+    <script src="decode.js"></script>
     <script src="_framework/blazor.webassembly.js" autostart="false"></script>
     <script>
       Blazor.start({
@@ -710,7 +714,7 @@ W przypadku korzystania z witryny projektu zamiast witryny organizacji zaktualiz
 
 ::: moniker range=">= aspnetcore-5.0"
 
-## <a name="configure-the-trimmer"></a>Konfigurowanie elementu dostosowującego
+## <a name="configure-the-trimmer"></a>Konfigurowanie elementu przycinającego
 
 Blazor wykonuje przycinanie języka pośredniego (IL) dla każdej kompilacji wydania, aby usunąć niepotrzebny kod IL z zestawów wyjściowych. Aby uzyskać więcej informacji, zobacz <xref:blazor/host-and-deploy/configure-trimmer>.
 
@@ -863,5 +867,3 @@ W pliku projektu skrypt jest uruchamiany po opublikowaniu aplikacji:
 
 > [!NOTE]
 > Podczas zmiany nazwy i opóźnionego ładowania tych samych zestawów zobacz wskazówki w temacie <xref:blazor/webassembly-lazy-load-assemblies#onnavigateasync-events-and-renamed-assembly-files> .
-
-Aby przekazać opinię, odwiedź stronę [aspnetcore/problemy #5477](https://github.com/dotnet/aspnetcore/issues/5477).

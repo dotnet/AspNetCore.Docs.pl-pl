@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/streaming
-ms.openlocfilehash: 29748ebe24fea03415b5a01b21300433e3fbc0f0
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 5a172818f8910a637b731dc1b1315965f448b2ba
+ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634218"
+ms.lasthandoff: 09/27/2020
+ms.locfileid: "91393577"
 ---
 # <a name="use-streaming-in-aspnet-core-no-locsignalr"></a>Używanie przesyłania strumieniowego w ASP.NET Core SignalR
 
@@ -74,7 +74,7 @@ Poniższy przykład przedstawia podstawy przesyłania strumieniowego danych do k
 > [!NOTE]
 > Zapisz w `ChannelWriter<T>` wątku w tle i zwróć `ChannelReader` tak szybko, jak to możliwe. Inne wywołania centrów są blokowane do momentu `ChannelReader` zwrócenia.
 >
-> Zawijanie logiki w `try ... catch` . `Channel` `catch` `catch` Aby upewnić się, że wywołanie metody Hub zostało wykonane prawidłowo, Wypełnij w i poza nim.
+> Zawijanie logiki w [ `try ... catch` instrukcji](/dotnet/csharp/language-reference/keywords/try-catch). Ukończ `Channel` w [ `finally` bloku](/dotnet/csharp/language-reference/keywords/try-catch-finally). Jeśli chcesz utworzyć przepływ błędu, Przechwyć go wewnątrz `catch` bloku i Zapisz go w `finally` bloku.
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -322,9 +322,9 @@ hubConnection.stream(String.class, "ExampleStreamingHubMethod", "Arg1")
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
-* [Koncentratory](xref:signalr/hubs)
+* [Centra](xref:signalr/hubs)
 * [Klient .NET](xref:signalr/dotnet-client)
 * [Klient JavaScript](xref:signalr/javascript-client)
 * [Publikowanie na platformie Azure](xref:signalr/publish-to-azure-web-app)

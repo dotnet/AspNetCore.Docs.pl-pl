@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: 7681deb70610a8fbc27ccda7317b73921646794a
-ms.sourcegitcommit: 4df148cbbfae9ec8d377283ee71394944a284051
+ms.openlocfilehash: e12b0e6d1bf9eab751f6605b9a156f637f2b0c0f
+ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88876779"
+ms.lasthandoff: 09/27/2020
+ms.locfileid: "91393837"
 ---
 # <a name="debug-aspnet-core-no-locblazor-webassembly"></a>Debuguj ASP.NET Core Blazor WebAssembly
 
@@ -109,11 +109,55 @@ Podczas debugowania Blazor WebAssembly aplikacji można także debugować kod se
 > [!NOTE]
 > Punkty przerwania **nie** są trafiania podczas uruchamiania aplikacji przed uruchomieniem serwera proxy debugowania. Obejmuje to punkty przerwania w `Program.Main` ( `Program.cs` ) i punkty przerwania w [ `OnInitialized{Async}` metodach](xref:blazor/components/lifecycle#component-initialization-methods) składników ładowanych przez pierwszą stronę żądaną przez aplikację.
 
+Jeśli aplikacja jest hostowana pod inną [ścieżką bazową aplikacji](xref:blazor/host-and-deploy/index#app-base-path) niż `/` , zaktualizuj następujące właściwości w programie w `Properties/launchSettings.json` celu odzwierciedlenia podstawowej ścieżki aplikacji:
+
+* `applicationUrl`:
+
+  ```json
+  "iisSettings": {
+    ...
+    "iisExpress": {
+      "applicationUrl": "http://localhost:{INSECURE PORT}/{APP BASE PATH}/",
+      "sslPort": {SECURE PORT}
+    }
+  },
+  ```
+
+* `inspectUri` dla każdego profilu:
+
+  ```json
+  "profiles": {
+    ...
+    "{PROFILE 1, 2, ... N}": {
+      ...
+      "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/{APP BASE PATH}/_framework/debug/ws-proxy?browser={browserInspectUri}",
+      ...
+    }
+  }
+  ```
+
+Symbole zastępcze w poprzednich ustawieniach:
+
+* `{INSECURE PORT}`: Niezabezpieczony port. Wartość losowa jest domyślnie określona, ale jest dozwolony port niestandardowy.
+* `{APP BASE PATH}`: Ścieżka podstawowa aplikacji.
+* `{SECURE PORT}`: Bezpieczny port. Wartość losowa jest domyślnie określona, ale jest dozwolony port niestandardowy.
+* `{PROFILE 1, 2, ... N}`: Uruchamianie profilów ustawień. Zazwyczaj aplikacja określa domyślnie więcej niż jeden profil (na przykład profil IIS Express i profil projektu, który jest używany przez serwer Kestrel).
+
+W poniższych przykładach aplikacja jest hostowana `/OAT` z ścieżką bazową aplikacji skonfigurowaną w programie `wwwroot/index.html` jako `<base href="/OAT/">` :
+
+```json
+"applicationUrl": "http://localhost:{INSECURE PORT}/OAT/",
+```
+
+```json
+"inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/OAT/_framework/debug/ws-proxy?browser={browserInspectUri}",
+```
+
+Aby uzyskać informacje na temat używania niestandardowej ścieżki bazy aplikacji dla Blazor WebAssembly aplikacji, zobacz <xref:blazor/host-and-deploy/index#app-base-path> .
+
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-<a id="vscode"></a>
-
-## <a name="debug-standalone-no-locblazor-webassembly"></a>Debuguj autonomiczne Blazor WebAssembly
+<h2 id="vscode">Debuguj autonomiczne Blazor WebAssembly</h2>
 
 1. Otwórz aplikację autonomiczną Blazor WebAssembly w vs Code.
 
@@ -257,7 +301,7 @@ Podczas debugowania Blazor WebAssembly aplikacji można także debugować kod se
 > [!NOTE]
 > Punkty przerwania **nie** są trafiania podczas uruchamiania aplikacji przed uruchomieniem serwera proxy debugowania. Obejmuje to punkty przerwania w `Program.Main` ( `Program.cs` ) i punkty przerwania w [ `OnInitialized{Async}` metodach](xref:blazor/components/lifecycle#component-initialization-methods) składników ładowanych przez pierwszą stronę żądaną przez aplikację.
 
-Aby uzyskać więcej informacji, zobacz [debugowanie za pomocą Visual Studio dla komputerów Mac](/visualstudio/mac/debugging?view=vsmac-2019).
+Aby uzyskać więcej informacji, zobacz [debugowanie za pomocą Visual Studio dla komputerów Mac](/visualstudio/mac/debugging).
 
 ---
 

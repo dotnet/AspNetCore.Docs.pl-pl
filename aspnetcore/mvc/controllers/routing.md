@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/routing
-ms.openlocfilehash: 08cd6396cca78488827dfa7c2cca62a35c500dbd
-ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
+ms.openlocfilehash: e451d511ab7791a05024d88635d8005132ad4edd
+ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/11/2020
-ms.locfileid: "90009703"
+ms.lasthandoff: 09/27/2020
+ms.locfileid: "91393928"
 ---
 # <a name="routing-to-controller-actions-in-aspnet-core"></a>Routing do akcji kontrolera w ASP.NET Core
 
@@ -353,7 +353,7 @@ Rozważmy następujący kontroler:
 Powyższy kod ma następujące działanie:
 
 * Każda akcja zawiera `[HttpGet]` atrybut, który ogranicza dopasowywanie do żądań HTTP GET.
-* `GetProduct`Akcja obejmuje `"{id}"` szablon, dlatego `id` jest dołączany do `"api/[controller]"` szablonu na kontrolerze. Szablon metod to `"api/[controller]/"{id}""` . W związku z tym ta akcja dopasowuje tylko żądania GET dla formularza `/api/test2/xyz` ,, `/api/test2/123` `/api/test2/{any string}` itp.
+* `GetProduct`Akcja obejmuje `"{id}"` szablon, dlatego `id` jest dołączany do `"api/[controller]"` szablonu na kontrolerze. Szablon metod to `"api/[controller]/"{id}""` . W związku z tym ta akcja dopasowuje tylko żądania GET dla formularza `/api/test2/xyz` , itp `/api/test2/123` `/api/test2/{any string}` .
   [!code-csharp[](routing/samples/3.x/main/Controllers/Test2Controller.cs?name=snippet2)]
 * `GetIntProduct`Akcja zawiera `"int/{id:int}")` szablon. `:int`Część szablonu ogranicza `id` wartości trasy do ciągów, które mogą być konwertowane na liczbę całkowitą. Żądanie GET `/api/test2/int/abc` :
   * Nie jest zgodna z tą akcją.

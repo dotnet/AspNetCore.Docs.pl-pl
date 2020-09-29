@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/additional-scenarios
-ms.openlocfilehash: 870509a3cbbcbea9b1c4804185c49a831af22630
-ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
+ms.openlocfilehash: 236d95e54b772ea522911421084ec0d9022c45ff
+ms.sourcegitcommit: 6c82d78662332cd40d614019b9ed17c46e25be28
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/11/2020
-ms.locfileid: "90009638"
+ms.lasthandoff: 09/29/2020
+ms.locfileid: "91424142"
 ---
 # <a name="aspnet-core-no-locblazor-hosting-model-configuration"></a>ASP.NET Core Blazor konfigurację modelu hostingu
 
@@ -290,7 +290,15 @@ Dostosuj opóźnienie przed wyświetleniem ekranu ponownego połączenia przez u
 }
 ```
 
-::: moniker-end
+## <a name="disconnect-the-no-locblazor-circuit-from-the-client"></a>Odłączanie Blazor obwodu od klienta
+
+Domyślnie Blazor obwód jest odłączony, gdy wyzwalane jest [ `unload` zdarzenie strony](https://developer.mozilla.org/docs/Web/API/Window/unload_event) . Aby odłączyć obwód dla innych scenariuszy na kliencie, wywołaj `Blazor.disconnect` w odpowiedniej procedurze obsługi zdarzeń. W poniższym przykładzie obwód jest odłączony, gdy strona jest ukryta ([ `pagehide` zdarzenie](https://developer.mozilla.org/docs/Web/API/Window/pagehide_event)):
+
+```javascript
+window.addEventListener('pagehide', () => {
+  Blazor.disconnect();
+});
+```
 
 ## <a name="influence-html-head-tag-elements"></a>Wpływ na `<head>` elementy tagów HTML
 
@@ -322,6 +330,8 @@ Gdy jeden ze składników platformy jest używany w składniku podrzędnym, rend
 
 * Mogą być modyfikowane przez stan aplikacji. Nie można zmodyfikować oznakowanego języka HTML w stanie aplikacji.
 * Jest usuwany z kodu HTML, `<head>` gdy składnik nadrzędny nie jest już renderowany.
+
+::: moniker-end
 
 ## <a name="static-files"></a>Pliki statyczne
 

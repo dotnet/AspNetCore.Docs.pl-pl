@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/policies
-ms.openlocfilehash: 82ed4cc2ce47d3bd85ca9c2ba2bbeb075eaefcef
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: af282ec1f82b2ac31fd0b46b2406110e24e9211b
+ms.sourcegitcommit: 6c82d78662332cd40d614019b9ed17c46e25be28
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635336"
+ms.lasthandoff: 09/29/2020
+ms.locfileid: "91424246"
 ---
 # <a name="policy-based-authorization-in-aspnet-core"></a>Autoryzacja oparta na zasadach w ASP.NET Core
 
@@ -193,7 +193,7 @@ Należy zauważyć, że `Handle` Metoda w [przykładzie procedury obsługi](#sec
 
 * W celu zagwarantowania niepowodzenia, nawet w przypadku pomyślnego zajścia innych wymagań `context.Fail` .
 
-Jeśli program obsługi wywołuje `context.Succeed` lub `context.Fail` , wszystkie inne procedury obsługi są nadal wywoływane. Pozwala to na spełnienie wymagań związanych z generowaniem efektów ubocznych, takich jak rejestrowanie, które odbywa się nawet w przypadku pomyślnej weryfikacji lub niepowodzenia przez inną procedurę obsługi. Po ustawieniu na `false` Właściwość [InvokeHandlersAfterFailure](/dotnet/api/microsoft.aspnetcore.authorization.authorizationoptions.invokehandlersafterfailure#Microsoft_AspNetCore_Authorization_AuthorizationOptions_InvokeHandlersAfterFailure) (dostępna w ASP.NET Core 1,1 i nowszych) krótkie obwody wykonywania programów obsługi po `context.Fail` wywołaniu. `InvokeHandlersAfterFailure` wartość domyślna to `true` , w którym to przypadku są wywoływane wszystkie programy obsługi.
+Jeśli program obsługi wywołuje `context.Succeed` lub `context.Fail` , wszystkie inne procedury obsługi są nadal wywoływane. Pozwala to na spełnienie wymagań związanych z generowaniem efektów ubocznych, takich jak rejestrowanie, które odbywa się nawet w przypadku pomyślnej weryfikacji lub niepowodzenia przez inną procedurę obsługi. Gdy jest ustawiona na `false` , właściwość [InvokeHandlersAfterFailure](/dotnet/api/microsoft.aspnetcore.authorization.authorizationoptions.invokehandlersafterfailure#Microsoft_AspNetCore_Authorization_AuthorizationOptions_InvokeHandlersAfterFailure) jest krótka, gdy `context.Fail` zostanie wywołane wykonywanie programów obsługi. `InvokeHandlersAfterFailure` wartość domyślna to `true` , w którym to przypadku są wywoływane wszystkie programy obsługi.
 
 > [!NOTE]
 > Procedury obsługi autoryzacji są wywoływane, nawet jeśli uwierzytelnianie nie powiedzie się.
@@ -427,7 +427,7 @@ Należy zauważyć, że `Handle` Metoda w [przykładzie procedury obsługi](#sec
 
 * W celu zagwarantowania niepowodzenia, nawet w przypadku pomyślnego zajścia innych wymagań `context.Fail` .
 
-Jeśli program obsługi wywołuje `context.Succeed` lub `context.Fail` , wszystkie inne procedury obsługi są nadal wywoływane. Pozwala to na spełnienie wymagań związanych z generowaniem efektów ubocznych, takich jak rejestrowanie, które odbywa się nawet w przypadku pomyślnej weryfikacji lub niepowodzenia przez inną procedurę obsługi. Po ustawieniu na `false` Właściwość [InvokeHandlersAfterFailure](/dotnet/api/microsoft.aspnetcore.authorization.authorizationoptions.invokehandlersafterfailure#Microsoft_AspNetCore_Authorization_AuthorizationOptions_InvokeHandlersAfterFailure) (dostępna w ASP.NET Core 1,1 i nowszych) krótkie obwody wykonywania programów obsługi po `context.Fail` wywołaniu. `InvokeHandlersAfterFailure` wartość domyślna to `true` , w którym to przypadku są wywoływane wszystkie programy obsługi.
+Jeśli program obsługi wywołuje `context.Succeed` lub `context.Fail` , wszystkie inne procedury obsługi są nadal wywoływane. Pozwala to na spełnienie wymagań związanych z generowaniem efektów ubocznych, takich jak rejestrowanie, które odbywa się nawet w przypadku pomyślnej weryfikacji lub niepowodzenia przez inną procedurę obsługi. Gdy jest ustawiona na `false` , właściwość [InvokeHandlersAfterFailure](/dotnet/api/microsoft.aspnetcore.authorization.authorizationoptions.invokehandlersafterfailure#Microsoft_AspNetCore_Authorization_AuthorizationOptions_InvokeHandlersAfterFailure) jest krótka, gdy `context.Fail` zostanie wywołane wykonywanie programów obsługi. `InvokeHandlersAfterFailure` wartość domyślna to `true` , w którym to przypadku są wywoływane wszystkie programy obsługi.
 
 > [!NOTE]
 > Procedury obsługi autoryzacji są wywoływane, nawet jeśli uwierzytelnianie nie powiedzie się.

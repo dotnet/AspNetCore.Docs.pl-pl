@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/intro
-ms.openlocfilehash: 9dd8d293e189eebe6b61f6f0b35aee71977d2f77
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 35a5758500ae2bc691c8d08eccb22340f9998c39
+ms.sourcegitcommit: 6c82d78662332cd40d614019b9ed17c46e25be28
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722556"
+ms.lasthandoff: 09/29/2020
+ms.locfileid: "91424292"
 ---
 # <a name="no-locrazor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>Razor Strony z Entity Framework Core w ASP.NET Core — samouczek 1 z 8
 
@@ -40,11 +40,11 @@ Jest to pierwsza z serii samouczków, które pokazują, jak używać rdzenia Ent
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-[!INCLUDE[VS prereqs](~/includes/net-core-prereqs-vs-3.0.md)]
+[!INCLUDE[VS prereqs](~/includes/net-core-prereqs-vs-5.0.md)]
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-[!INCLUDE[VS Code prereqs](~/includes/net-core-prereqs-vsc-3.0.md)]
+[!INCLUDE[VS Code prereqs](~/includes/net-core-prereqs-vsc-5.0.md)]
 
 ---
 
@@ -68,49 +68,51 @@ Aplikacja skompilowana w tych samouczkach jest podstawową szkołą w sieci Web.
 
 ![Strona edycji uczniów](intro/_static/student-edit30.png)
 
-Styl interfejsu użytkownika tej witryny jest oparty na wbudowanych szablonach projektów. Fokus samouczka dotyczy korzystania z EF Core, a nie dostosowywania interfejsu użytkownika.
+Styl interfejsu użytkownika tej witryny jest oparty na wbudowanych szablonach projektów. Fokus samouczka polega na tym, jak używać EF Core z ASP.NET Core, a nie sposobu dostosowywania interfejsu użytkownika.
 
-Skorzystaj z linku w górnej części strony, aby uzyskać kod źródłowy dla ukończonego projektu. Folder *cu30* ma kod dla ASP.NET Core wersji 3,0 samouczka. Pliki odzwierciedlające stan kodu dla samouczków 1-7 można znaleźć w folderze *cu30snapshots* .
+<!-- 
+Follow the link at the top of the page to get the source code for the completed project. The *cu50* folder has the code for the ASP.NET Core 5.0 version of the tutorial. Files that reflect the state of the code for tutorials 1-7 can be found in the *cu50snapshots* folder.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# [Visual Studio](#tab/visual-studio)
 
-Aby uruchomić aplikację po pobraniu ukończonego projektu:
+To run the app after downloading the completed project:
 
-* Skompiluj projekt.
-* W konsoli Menedżera pakietów (PMC) Uruchom następujące polecenie:
+* Build the project.
+* In Package Manager Console (PMC) run the following command:
 
   ```powershell
   Update-Database
   ```
 
-* Uruchom projekt, aby wypełniać bazę danych.
+* Run the project to seed the database.
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# [Visual Studio Code](#tab/visual-studio-code)
 
-Aby uruchomić aplikację po pobraniu ukończonego projektu:
+To run the app after downloading the completed project:
 
-* Usuń *ContosoUniversity. csproj*i Zmień nazwę *ContosoUniversitySQLite. csproj* na *ContosoUniversity. csproj*.
-* W *program.cs*, komentarz `#define Startup` `StartupSQLite` jest używany.
-* Usuń *appSettings.js*i zmień nazwę *appSettingsSQLite.jsna* na *appSettings.jsna*.
-* Usuń folder *migracji* , a następnie zmień nazwę *MigrationsSQL* na *migracji*.
-* Wykonaj wyszukiwanie globalne dla `#if SQLiteVersion` i Usuń `#if SQLiteVersion` oraz skojarzoną `#endif` instrukcję.
-* Skompiluj projekt.
-* W wierszu polecenia w folderze projektu uruchom następujące polecenia:
+* In *Program.cs*, remove the comments from `// webBuilder.UseStartup<StartupSQLite>();`  so `StartupSQLite` is used.
+* Copy the contents of *appSettingsSQLite.json* into *appSettings.json*.
+* Delete the *Migrations* folder, and rename *MigrationsSQL* to *Migrations*.
+* Do a global search for `#if SQLiteVersion` and remove `#if SQLiteVersion` and the associated `#endif` statement.
+* Build the project.
+* At a command prompt in the project folder, run the following commands:
 
   ```dotnetcli
-  dotnet tool install --global dotnet-ef
+  dotnet tool install --global dotnet-ef -v 5.0.0-*
   dotnet ef database update
   ```
 
-* W narzędziu SQLite uruchom następującą instrukcję SQL:
+* In your SQLite tool, run the following SQL statement:
 
   ```sql
   UPDATE Department SET RowVersion = randomblob(8)
   ```
 
-* Uruchom projekt, aby wypełniać bazę danych.
+* Run the project to seed the database.
 
 ---
+
+-->
 
 ## <a name="create-the-web-app-project"></a>Tworzenie projektu aplikacji sieci Web
 
@@ -119,36 +121,35 @@ Aby uruchomić aplikację po pobraniu ukończonego projektu:
 * Z menu **plik** programu Visual Studio wybierz pozycję **Nowy** > **projekt**.
 * Wybierz **ASP.NET Core aplikacji sieci Web**.
 * Nazwij projekt *ContosoUniversity*. Ważne jest, aby użyć tej dokładnej nazwy, łącznie z wielką literą, więc przestrzenie nazw są zgodne, gdy kod jest kopiowany i wklejany.
-* Na liście rozwijanej wybierz pozycję **.NET Core** i **ASP.NET Core 3,0** , a następnie wybierz pozycję **aplikacja sieci Web**.
+* Na liście rozwijanej wybierz pozycję **.NET Core** i **ASP.NET Core 5,0** , a następnie wybierz pozycję **aplikacja sieci Web**.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * W terminalu przejdź do folderu, w którym ma zostać utworzony folder projektu.
-
 * Uruchom następujące polecenia, aby utworzyć Razor Projekt strony i `cd` do nowego folderu projektu:
 
   ```dotnetcli
   dotnet new webapp -o ContosoUniversity
-  cd ContosoUniversity
+  cd ContosoUniversity  
   ```
 
 ---
 
 ## <a name="set-up-the-site-style"></a>Konfigurowanie stylu witryny
 
-Skonfiguruj nagłówek, stopkę i menu witryny przez aktualizację *stron/Shared/_Layout. cshtml*:
+Skopiuj i wklej następujący kod do pliku *Pages/Shared/_Layout. cshtml* : [!code-cshtml[Main](intro/samples/cu50/Pages/Shared/_Layout.cshtml?highlight=6,14,21-35,49)]
 
-* Zmień każde wystąpienie "ContosoUniversity" na "Uniwersytet firmy Contoso". Istnieją trzy wystąpienia.
+Plik układu ustawia nagłówek, stopkę i menu witryny. Poprzedni kod wprowadza następujące zmiany:
 
-* Usuń wpisy menu **Home** i **privacy** oraz Dodaj wpisy dotyczące **osób,** **studentów**, **kursów**, **instruktorów**i **działów**.
+* Każde wystąpienie "ContosoUniversity" na "University-Uniwersytet". Istnieją trzy wystąpienia.
+* Wpisy menu **Home** i **privacy** są usuwane.
+* Wpisy są **dodawane do programu**, **studentów**, **kursów**, **instruktorów**i **działów**.
 
-Zmiany są wyróżnione.
+W obszarze *Pages/index. cshtml*Zastąp zawartość pliku następującym kodem:
 
-[!code-cshtml[Main](intro/samples/cu30/Pages/Shared/_Layout.cshtml?highlight=6,14,21-35,49)]
+[!code-cshtml[Main](intro/samples/cu50/Pages/Index.cshtml)]
 
-W obszarze *Pages/index. cshtml*Zastąp zawartość pliku następującym kodem, aby zamienić tekst na ASP.NET Core z tekstem dotyczącym tej aplikacji:
-
-[!code-cshtml[Main](intro/samples/cu30/Pages/Index.cshtml)]
+Poprzedni kod zastępuje tekst dotyczący ASP.NET Core tekstem dla tej aplikacji.
 
 Uruchom aplikację, aby sprawdzić, czy zostanie wyświetlona strona główna.
 
@@ -214,51 +215,50 @@ Skompiluj projekt, aby sprawdzić, czy nie występują błędy kompilatora.
 
 W tej sekcji użyjesz narzędzia do tworzenia szkieletów ASP.NET Core do wygenerowania:
 
-* Klasa *kontekstu* EF Core. Kontekst jest klasą główną, która koordynuje Entity Framework funkcji dla danego modelu danych. Pochodzi od `Microsoft.EntityFrameworkCore.DbContext` klasy.
+* Klasa EF Core `DbContext` . Kontekst jest klasą główną, która koordynuje Entity Framework funkcji dla danego modelu danych. Pochodzi od <xref:Microsoft.EntityFrameworkCore.DbContext?displayProperty=fullName> klasy.
 * Razor strony obsługujące operacje tworzenia, odczytu, aktualizacji i usuwania (CRUD) dla `Student` jednostki.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Utwórz folder *uczniów* w folderze *strony* .
+* Utwórz folder *stron/uczniów* .
 * W **Eksplorator rozwiązań**kliknij prawym przyciskiem myszy folder *strony/uczniowie* i wybierz polecenie **Dodaj** > **nowy element szkieletowy**.
-* W oknie dialogowym **Dodawanie szkieletu** wybierz pozycję ** Razor strony z użyciem Entity Framework (CRUD)** > **Dodaj**.
+* W oknie dialogowym **Dodaj nowy element szkieletowy** :
+  * Na lewej karcie Wybierz pozycję **zainstalowane > typowe Razor strony >**
+  * Wybierz ** Razor strony przy użyciu Entity Framework (CRUD)** > **Dodaj**.
 * Na **stronie Dodawanie Razor stron przy użyciu Entity Framework (CRUD)** okna dialogowego:
   * Z listy rozwijanej **Klasa modelu** wybierz pozycję **student (ContosoUniversity. models)**.
   * W wierszu **klasy kontekstu danych** wybierz **+** znak (plus).
-  * Zmień nazwę kontekstu danych z *ContosoUniversity. models. ContosoUniversityContext* na *ContosoUniversity. Data. SchoolContext*.
-  * Wybierz pozycję **Dodaj**.
+    * Zmień nazwę kontekstu danych na End `SchoolContext` zamiast `ContosoUniversityContext` . Nazwa zaktualizowanego kontekstu: `ContosoUniversity.Data.SchoolContext`
+   * Wybierz pozycję **Dodaj**.
 
 Następujące pakiety są instalowane automatycznie:
 
-* `Microsoft.VisualStudio.Web.CodeGeneration.Design`
 * `Microsoft.EntityFrameworkCore.SqlServer`
-* `Microsoft.Extensions.Logging.Debug`
 * `Microsoft.EntityFrameworkCore.Tools`
+* `Microsoft.VisualStudio.Web.CodeGeneration.Design`
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * Uruchom następujące polecenia interfejs wiersza polecenia platformy .NET Core, aby zainstalować wymagane pakiety NuGet:
-<!-- TO DO  After testing, Replace with
-[!INCLUDE[](~/includes/includes/add-EF-NuGet-SQLite-CLI.md)]
-remove dotnet tool install --global  below
- -->
+
   ```dotnetcli
-  dotnet add package Microsoft.EntityFrameworkCore.SQLite
-  dotnet add package Microsoft.EntityFrameworkCore.SqlServer
-  dotnet add package Microsoft.EntityFrameworkCore.Design
-  dotnet add package Microsoft.EntityFrameworkCore.Tools
-  dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
-  dotnet add package Microsoft.Extensions.Logging.Debug
+  dotnet add package Microsoft.EntityFrameworkCore.SQLite -v 5.0.0-*
+  dotnet add package Microsoft.EntityFrameworkCore.SqlServer -v 5.0.0-*
+  dotnet add package Microsoft.EntityFrameworkCore.Design -v 5.0.0-*
+  dotnet add package Microsoft.EntityFrameworkCore.Tools -v 5.0.0-*
+  dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design -v 5.0.0-*
+  dotnet add package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore -v 5.0.0-*  
   ```
 
-  Pakiet Microsoft. VisualStudio. Web. CodeGeneration. Design jest wymagany do tworzenia szkieletów. Mimo że aplikacja nie będzie używać SQL Server, narzędzie do tworzenia szkieletów musi być pakietem SQL Server.
+   Pakiet Microsoft. VisualStudio. Web. CodeGeneration. Design jest wymagany do tworzenia szkieletów. Mimo że aplikacja nie będzie używać SQL Server, narzędzie do tworzenia szkieletów musi być pakietem SQL Server.
 
 * Utwórz folder *stron/uczniów* .
 
 * Uruchom następujące polecenie, aby zainstalować narzędzie do tworzenia [szkieletu ASPNET-CodeGenerator](xref:fundamentals/tools/dotnet-aspnet-codegenerator).
 
   ```dotnetcli
-  dotnet tool install --global dotnet-aspnet-codegenerator
+  dotnet tool uninstall --global dotnet-aspnet-codegenerator
+  dotnet tool install --global dotnet-aspnet-codegenerator --version 5.0.0-*  
   ```
 
 * Uruchom następujące polecenie, aby uzyskać możliwość tworzenia szkieletu stron z uczniami.
@@ -266,18 +266,18 @@ remove dotnet tool install --global  below
   **W systemie Windows**
 
   ```dotnetcli
-  dotnet aspnet-codegenerator razorpage -m Student -dc ContosoUniversity.Data.SchoolContext -udl -outDir Pages\Students --referenceScriptLibraries
+  dotnet aspnet-codegenerator razorpage -m Student -dc ContosoUniversity.Data.SchoolContext -udl -outDir Pages\Students --referenceScriptLibraries -sqlite  
   ```
 
   **W systemie macOS lub Linux**
 
   ```dotnetcli
-  dotnet aspnet-codegenerator razorpage -m Student -dc ContosoUniversity.Data.SchoolContext -udl -outDir Pages/Students --referenceScriptLibraries
+  dotnet aspnet-codegenerator razorpage -m Student -dc ContosoUniversity.Data.SchoolContext -udl -outDir Pages/Students --referenceScriptLibraries -sqlite  
   ```
 
 ---
 
-Jeśli wystąpił problem z poprzednim krokiem, Skompiluj projekt i ponów próbę wykonania szkieletu.
+Jeśli poprzedni krok zakończy się niepowodzeniem, Skompiluj projekt i ponów próbę wykonania szkieletu.
 
 Proces tworzenia szkieletu:
 
@@ -293,19 +293,21 @@ Proces tworzenia szkieletu:
 
 ## <a name="database-connection-string"></a>Parametry połączenia z bazą danych
 
+Narzędzie do tworzenia szkieletu generuje parametry połączenia w *appsettings.js* pliku.
+
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Parametry połączenia określają [SQL Server LocalDB](/sql/database-engine/configure-windows/sql-server-2016-express-localdb). 
+Parametry połączenia określają [SQL Server LocalDB](/sql/database-engine/configure-windows/sql-server-2016-express-localdb):
 
-[!code-json[Main](intro/samples/cu30/appsettings.json?highlight=11)]
+[!code-json[Main](intro/samples/cu50/appsettings.json?highlight=11)]
 
 LocalDB to uproszczona wersja aparatu bazy danych SQL Server Express i jest przeznaczona do tworzenia aplikacji, a nie do użycia w środowisku produkcyjnym. Domyślnie LocalDB tworzy pliki *MDF* w `C:/Users/<user>` katalogu.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-Zmień parametry połączenia w taki sposób, aby wskazywały plik bazy danych programu SQLite o nazwie *cu. DB*:
+Skróć parametry połączenia oprogramowania SQLite do *bazy danych cu. DB*:
 
-[!code-json[Main](intro/samples/cu30/appsettingsSQLite.json?highlight=11)]
+[!code-json[Main](intro/samples/cu50/appsettingsSQLite.json?highlight=11)]
 
 ---
 
@@ -313,42 +315,76 @@ Zmień parametry połączenia w taki sposób, aby wskazywały plik bazy danych p
 
 Klasa główna, która koordynuje funkcje EF Core dla danego modelu danych, jest klasą kontekstu bazy danych. Kontekst pochodzi od [Microsoft. EntityFrameworkCore. DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext). Kontekst określa, które jednostki są uwzględnione w modelu danych. W tym projekcie Klasa ma nazwę `SchoolContext` .
 
-Zaktualizuj *SchoolContext.cs* przy użyciu następującego kodu:
+Zaktualizuj *dane/SchoolContext. cs* przy użyciu następującego kodu:
 
 [!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Data/SchoolContext.cs?highlight=13-22)]
 
-Wyróżniony kod tworzy właściwość [nieogólnymi \<TEntity> ](/dotnet/api/microsoft.entityframeworkcore.dbset-1) dla każdego zestawu jednostek. W EF Core terminologii:
+Poprzedni kod zmienia się z pojedynczej `DbSet<Student> Student` na plural `DbSet<Student> Students` . Aby Razor kod stron był zgodny z nową `DBSet` nazwą, wprowadź globalną zmianę z: `_context.Student.`
+do `_context.Students.`
 
-* Zestaw jednostek zwykle odpowiada tabeli bazy danych.
-* Jednostka odnosi się do wiersza w tabeli.
+Istnieją 8 wystąpień.
 
-Ponieważ zestaw jednostek zawiera wiele jednostek, właściwości Nieogólnymi powinny mieć nazwy w liczbie mnogiej. Ponieważ narzędzie tworzenia szkieletów utworzyło `Student` nieogólnymi, ten krok zmienia go na plural `Students` . 
+Ponieważ zestaw jednostek zawiera wiele jednostek, wielu deweloperów preferuje `DBSet` nazwy właściwości.
 
-Aby Razor kod stron był zgodny z nową nazwą nieogólnymi, wprowadź globalną zmianę w całym projekcie `_context.Student` do `_context.Students` .  Istnieją 8 wystąpień.
+Wyróżniony kod:
+
+* Tworzy właściwość [nieogólnymi \<TEntity> ](/dotnet/api/microsoft.entityframeworkcore.dbset-1) dla każdego zestawu jednostek. W EF Core terminologii:
+  * Zestaw jednostek zwykle odpowiada tabeli bazy danych.
+  * Jednostka odnosi się do wiersza w tabeli.
+* Wywołania <xref:Microsoft.EntityFrameworkCore.DbContext.OnModelCreating%2A> . `OnModelCreating`:
+  * Jest wywoływana, gdy została `SchoolContext` zainicjowana, ale zanim model zostanie zablokowany i użyty do zainicjowania kontekstu.
+  * Jest wymagany, ponieważ w dalszej części samouczka `Student` jednostka będzie miała odwołania do innych jednostek.
+  <!-- Review, OnModelCreating needs review -->
 
 Skompiluj projekt, aby sprawdzić, czy nie występują błędy kompilatora.
 
 ## <a name="startupcs"></a>Startup.cs
 
-ASP.NET Core jest skompilowana z [iniekcją zależności](xref:fundamentals/dependency-injection). Usługi (takie jak kontekst bazy danych EF Core) są rejestrowane z iniekcją zależności podczas uruchamiania aplikacji. Składniki wymagające tych usług (takie jak Razor strony) są udostępniane przez parametry konstruktora. Kod konstruktora, który pobiera wystąpienie kontekstu bazy danych jest wyświetlany w dalszej części samouczka.
+ASP.NET Core jest skompilowana z [iniekcją zależności](xref:fundamentals/dependency-injection). Usługi takie jak `SchoolContext` są rejestrowane przy użyciu iniekcji zależności podczas uruchamiania aplikacji. Składniki, które wymagają tych usług, takie jak Razor strony, są dostarczane przez parametry konstruktora. Kod konstruktora, który pobiera wystąpienie kontekstu bazy danych jest wyświetlany w dalszej części samouczka.
 
 Narzędzie do tworzenia szkieletów automatycznie zarejestrowało klasę kontekstu z kontenerem iniekcji zależności.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* W programie `ConfigureServices` wyróżnione wiersze zostały dodane przez program do tworzenia szkieletu:
+Program szkieleter dodał następujące wyróżnione wiersze:
 
-  [!code-csharp[Main](intro/samples/cu30/Startup.cs?name=snippet_ConfigureServices&highlight=5-6)]
+[!code-csharp[Main](intro/samples/cu30/Startup.cs?name=snippet_ConfigureServices&highlight=5-6)]
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-* W programie upewnij `ConfigureServices` się, że kod dodany przez program tworzący szkielet jest wywoływany `UseSqlite` .
+Sprawdź kod dodany przez wywołania szkieletu `UseSqlite` .
 
-  [!code-csharp[Main](intro/samples/cu30/StartupSQLite.cs?name=snippet_ConfigureServices&highlight=5-6)]
+[!code-csharp[Main](intro/samples/cu30/StartupSQLite.cs?name=snippet_ConfigureServices&highlight=5-6)]
+
+Aby uzyskać informacje na temat korzystania z produkcyjnej bazy danych, zobacz temat [Korzystanie z oprogramowania SQLite na potrzeby programowania. SQL Server do produkcji](xref:tutorials/razor-pages/model#use-sqlite-for-development-sql-server-for-production) .
 
 ---
 
 Nazwa parametrów połączenia jest przenoszona do kontekstu przez wywołanie metody w obiekcie [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) . W przypadku lokalnego projektowania [system konfiguracji ASP.NET Core](xref:fundamentals/configuration/index) odczytuje parametry połączenia z *appsettings.jsna* pliku.
+
+### <a name="add-the-database-exception-filter"></a>Dodaj filtr wyjątku bazy danych
+
+Dodaj `AddDatabaseDeveloperPageExceptionFilter` do `ConfigureServices` , jak pokazano w poniższym kodzie:
+
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+
+[!code-csharp[Main](intro/samples/cu50/Startup.cs?name=snippet_ConfigureServices&highlight=8)]
+
+Dodaj pakiet NuGet [Microsoft. AspNetCore. Diagnostics. EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore) .
+
+W obszarze PMC wprowadź następujące polecenie, aby dodać pakiet NuGet:
+
+```powershell
+Install-Package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore -Version 5.0.0-rc.1.20451.17
+```
+
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+
+[!code-csharp[Main](intro/samples/cu50/StartupSQLite.cs?name=snippet_ConfigureServices&highlight=8)]
+
+---
+
+`Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore`Pakiet NuGet zawiera ASP.NET Core oprogramowanie pośredniczące dla Entity Framework Core stron błędów. To oprogramowanie pośredniczące pomaga wykrywać i diagnozować błędy za pomocą migracji Entity Framework Core.
 
 ## <a name="create-the-database"></a>Tworzenie bazy danych
 
@@ -383,7 +419,7 @@ Utwórz *dane/Dbinitializeer. cs* przy użyciu następującego kodu:
 
   Kod sprawdza, czy w bazie danych istnieją uczniowie. Jeśli nie ma uczniów, dodaje dane testowe do bazy danych. Tworzy dane testowe w tablicach, a nie w `List<T>` celu zoptymalizowania wydajności.
 
-* W *program.cs*Zastąp wywołanie wywołaniem `EnsureCreated` `DbInitializer.Initialize` :
+W *program.cs*Zastąp wywołanie wywołaniem `EnsureCreated` `DbInitializer.Initialize` :
 
   ```csharp
   // context.Database.EnsureCreated();
@@ -395,8 +431,10 @@ Utwórz *dane/Dbinitializeer. cs* przy użyciu następującego kodu:
 Zatrzymaj aplikację, jeśli jest uruchomiona, a następnie uruchom następujące polecenie w **konsoli Menedżera pakietów** (PMC):
 
 ```powershell
-Drop-Database
+Drop-Database -Confirm
 ```
+
+Odpowiedz przy użyciu `Y` , aby usunąć bazę danych.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -405,7 +443,6 @@ Drop-Database
 ---
 
 * Uruchom ponownie aplikację.
-
 * Wybierz stronę uczniów, aby zobaczyć dane z rozrzutu.
 
 ## <a name="view-the-database"></a>Wyświetlanie bazy danych
@@ -428,7 +465,7 @@ Użyj narzędzia SQLite, aby wyświetlić schemat bazy danych i dane referencyjn
 
 Programowanie asynchroniczne jest trybem domyślnym dla ASP.NET Core i EF Core.
 
-Serwer sieci Web ma ograniczoną liczbę dostępnych wątków, a w przypadku dużego obciążenia mogą być używane wszystkie dostępne wątki. W takim przypadku serwer nie może przetwarzać nowych żądań, dopóki wątki nie zostaną zwolnione. W przypadku kodu synchronicznego wiele wątków może zostać powiązanych, podczas gdy nie wykonuje żadnej pracy, ponieważ oczekuje na ukończenie operacji we/wy. W przypadku kodu asynchronicznego, gdy proces oczekuje na ukończenie operacji we/wy, jego wątek zostanie zwolniony dla serwera do użycia na potrzeby przetwarzania innych żądań. W efekcie kod asynchroniczny umożliwia efektywniejsze wykorzystanie zasobów serwera, a serwer może obsłużyć więcej ruchu bez opóźnień.
+Serwer sieci Web ma ograniczoną liczbę dostępnych wątków, a w przypadku dużego obciążenia mogą być używane wszystkie dostępne wątki. W takim przypadku serwer nie może przetwarzać nowych żądań, dopóki wątki nie zostaną zwolnione. W przypadku kodu synchronicznego wiele wątków może zostać rozwiązanych, chociaż nie działają, ponieważ oczekują na ukończenie operacji we/wy. W przypadku kodu asynchronicznego, gdy proces oczekuje na ukończenie operacji we/wy, jego wątek zostanie zwolniony dla serwera do użycia na potrzeby przetwarzania innych żądań. W efekcie kod asynchroniczny umożliwia efektywniejsze wykorzystanie zasobów serwera, a serwer może obsłużyć więcej ruchu bez opóźnień.
 
 Kod asynchroniczny wprowadza niewielką ilość zapasową w czasie wykonywania. W przypadku niskiego ruchu zwiększenie wydajności jest nieznaczne, a jednocześnie w przypadku dużego ruchu, potencjalne udoskonalenia wydajności są istotne.
 
@@ -455,6 +492,21 @@ Niektóre kwestie, o których należy pamiętać podczas pisania asynchroniczneg
 * Aby skorzystać z zalet wydajności w kodzie asynchronicznym, należy sprawdzić, czy pakiety biblioteki (na przykład stronicowania) używają wartości asynchronicznej, jeśli są wywoływane EF Core metod wysyłających zapytania do bazy danych.
 
 Aby uzyskać więcej informacji na temat programowania asynchronicznego w programie .NET, zobacz [Omówienie asynchroniczne](/dotnet/standard/async) i [programowanie asynchroniczne z Async i await](/dotnet/csharp/programming-guide/concepts/async/).
+
+<!-- Review: See https://github.com/dotnet/AspNetCore.Docs/issues/14528 -->
+## <a name="performance-considerations"></a>Zagadnienia dotyczące wydajności
+
+Ogólnie rzecz biorąc, Strona sieci Web nie powinna ładować dowolnej liczby wierszy. Zapytanie powinno używać podejścia do ograniczania. Na przykład poprzednie zapytanie może użyć, `Take` Aby ograniczyć liczbę zwracanych wierszy:
+
+[!code-csharp[Main](intro/samples/cu50snapshots/Index.cshtml.cs?name=snippet)]
+
+Wyliczenie dużej tabeli w widoku może zwrócić częściowo skonstruowaną odpowiedź HTTP 200, jeśli wyjątek bazy danych wystąpił częściowo przez wyliczenie.
+
+<xref:Microsoft.AspNetCore.Mvc.MvcOptions.MaxModelBindingCollectionSize> wartość domyślna to 1024. Następujące zestawy kodu `MaxModelBindingCollectionSize` :
+
+[!code-csharp[Main](intro/samples/cu50/StartupMaxMBsize.cs?name=snippet_ConfigureServices)]
+
+Stronicowanie jest omówione w dalszej części samouczka.
 
 ## <a name="next-steps"></a>Następne kroki
 
@@ -533,7 +585,8 @@ Aby uruchomić aplikację po pobraniu ukończonego projektu:
 * W wierszu polecenia w folderze projektu uruchom następujące polecenia:
 
   ```dotnetcli
-  dotnet tool install --global dotnet-ef
+  dotnet tool uninstall --global dotnet-ef
+  dotnet tool install --global dotnet-ef --version 5.0.0-*
   dotnet ef database update
   ```
 
@@ -542,7 +595,7 @@ Aby uruchomić aplikację po pobraniu ukończonego projektu:
   ```sql
   UPDATE Department SET RowVersion = randomblob(8)
   ```
-
+  
 * Uruchom projekt, aby wypełniać bazę danych.
 
 ---
@@ -599,8 +652,7 @@ Student może zarejestrować się w dowolnej liczbie kursów, a kurs może mieć
 
 ![Diagram jednostek uczniów](intro/_static/student-entity.png)
 
-* Utwórz folder *models* w folderze projektu. 
-
+* Utwórz folder *models* w folderze projektu.
 * Utwórz *modele/uczniów. cs* przy użyciu następującego kodu:
 
   [!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Models/Student.cs)]
@@ -730,7 +782,7 @@ Proces tworzenia szkieletu:
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Parametry połączenia określają [SQL Server LocalDB](/sql/database-engine/configure-windows/sql-server-2016-express-localdb). 
+*appsettings.jsw* pliku określa parametry połączenia [SQL Server LocalDB](/sql/database-engine/configure-windows/sql-server-2016-express-localdb).
 
 [!code-json[Main](intro/samples/cu30/appsettings.json?highlight=11)]
 
@@ -748,7 +800,7 @@ Zmień parametry połączenia w taki sposób, aby wskazywały plik bazy danych p
 
 Klasa główna, która koordynuje funkcje EF Core dla danego modelu danych, jest klasą kontekstu bazy danych. Kontekst pochodzi od [Microsoft. EntityFrameworkCore. DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext). Kontekst określa, które jednostki są uwzględnione w modelu danych. W tym projekcie Klasa ma nazwę `SchoolContext` .
 
-Zaktualizuj *SchoolContext.cs* przy użyciu następującego kodu:
+Zaktualizuj *dane/SchoolContext. cs* przy użyciu następującego kodu:
 
 [!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Data/SchoolContext.cs?highlight=13-22)]
 
@@ -1209,7 +1261,7 @@ W następnym samouczku są badane podstawowe operacje CRUD (tworzenie, odczytywa
 
 
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Wersja tego samouczka usługi YouTube](https://www.youtube.com/watch?v=P7iTtQnkrNs)
 

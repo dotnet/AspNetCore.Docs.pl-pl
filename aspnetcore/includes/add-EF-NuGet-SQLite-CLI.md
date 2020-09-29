@@ -1,4 +1,4 @@
-Uruchom następujące polecenia .NET Core CLI:
+Uruchom następujące polecenia interfejs wiersza polecenia platformy .NET Core:
 
 ```dotnetcli
 dotnet tool install --global dotnet-ef
@@ -7,15 +7,16 @@ dotnet add package Microsoft.EntityFrameworkCore.SQLite
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet add package Microsoft.EntityFrameworkCore.Design
 dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+dotnet add package Microsoft.Extensions.Logging.Debug
 ```
 
-Poprzednie polecenia dodają:
+Powyższe polecenia powodują dodanie:
 
-* [Narzędzie do rusztowania aspnet-codegenerator](xref:fundamentals/tools/dotnet-aspnet-codegenerator).
-* Podstawowe narzędzia frameworka dla interfejsu wiersza polecenia .NET Core.
-* Dostawca EF Core SQLite, który instaluje pakiet EF Core jako zależność.
-* Paczki potrzebne do rusztowania: `Microsoft.VisualStudio.Web.CodeGeneration.Design` i `Microsoft.EntityFrameworkCore.SqlServer`.
+* Narzędzie do tworzenia [szkieletu ASPNET-CodeGenerator](xref:fundamentals/tools/dotnet-aspnet-codegenerator).
+* Entity Framework Core narzędzia dla interfejs wiersza polecenia platformy .NET Core.
+* EF Core dostawca oprogramowania SQLite, który instaluje pakiet EF Core jako zależność.
+* Pakiety wymagające tworzenia szkieletów: `Microsoft.VisualStudio.Web.CodeGeneration.Design` i `Microsoft.EntityFrameworkCore.SqlServer` .
 
-Aby uzyskać wskazówki dotyczące konfiguracji wielu środowisk, która umożliwia aplikacji <xref:fundamentals/environments#environment-based-startup-class-and-methods>konfigurowanie kontekstów bazy danych według środowiska, zobacz .
+Aby uzyskać wskazówki dotyczące wielu konfiguracji środowiska, które umożliwiają aplikacji skonfigurowanie kontekstów bazy danych według środowiska, zobacz <xref:fundamentals/environments#environment-based-startup-class-and-methods> .
 
 [!INCLUDE[](~/includes/scaffoldTFM.md)]

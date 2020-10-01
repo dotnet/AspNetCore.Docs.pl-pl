@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/crud
-ms.openlocfilehash: a6a99d736a60a55b81eb7e852413dc52b733d2fb
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 083214c01dbec6c6f44d6b82f5b514a029e57cbe
+ms.sourcegitcommit: d1a897ebd89daa05170ac448e4831d327f6b21a8
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88627536"
+ms.lasthandoff: 10/01/2020
+ms.locfileid: "91606737"
 ---
 # <a name="part-2-no-locrazor-pages-with-ef-core-in-aspnet-core---crud"></a>Część 2, Razor strony z EF Core w ASP.NET Core — CRUD
 
@@ -29,7 +29,7 @@ Autorzy [Dykstra](https://github.com/tdykstra), [Jan P Kowalski](https://twitter
 
 [!INCLUDE [about the series](~/includes/RP-EF/intro.md)]
 
-::: moniker range=">= aspnetcore-3.0"
+::: moniker range=">= aspnetcore-5.0"
 
 W tym samouczku kod szkieletu CRUD (tworzenie, odczytywanie, aktualizowanie, usuwanie) zostanie sprawdzony i dostosowany.
 
@@ -44,6 +44,174 @@ Kod szkieletowy dla stron uczniów nie obejmuje danych rejestracji. W tej sekcji
 ### <a name="read-enrollments"></a>Odczytaj rejestracje
 
 Aby wyświetlić na stronie dane rejestracyjne ucznia, należy je przeczytać. Kod szkieletowy na *stronach/studentów/szczegóły. cshtml. cs* odczytuje tylko dane uczniów, bez danych rejestracji:
+
+[!code-csharp[Main](intro/samples/cu30snapshots/2-crud/Pages/Students/Details1.cshtml.cs?name=snippet_OnGetAsync&highlight=8)]
+
+Zastąp `OnGetAsync` metodę poniższym kodem, aby odczytywać dane rejestracyjne dla wybranego ucznia. Zmiany są wyróżnione.
+
+[!code-csharp[Main](intro/samples/cu30/Pages/Students/Details.cshtml.cs?name=snippet_OnGetAsync&highlight=8-12)]
+
+Metody [include](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.include) i [ThenInclude](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.theninclude#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_ThenInclude__3_Microsoft_EntityFrameworkCore_Query_IIncludableQueryable___0_System_Collections_Generic_IEnumerable___1___System_Linq_Expressions_Expression_System_Func___1___2___) powodują, że kontekst ładuje `Student.Enrollments` Właściwość nawigacji i w ramach każdej rejestracji `Enrollment.Course` właściwości nawigacji. Te metody są szczegółowo opisane w samouczku [odczytywanie powiązanych danych](xref:data/ef-rp/read-related-data) .
+
+Metoda [AsNoTracking](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.asnotracking#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_AsNoTracking__1_System_Linq_IQueryable___0__) zwiększa wydajność w scenariuszach, w których zwrócone jednostki nie są aktualizowane w bieżącym kontekście. `AsNoTracking` omówiono w dalszej części tego samouczka.
+
+### <a name="display-enrollments"></a>Wyświetl rejestracje
+
+Zastąp kod w obszarze *Pages/Students/details. cshtml* następującym kodem, aby wyświetlić listę rejestracji. Zmiany są wyróżnione.
+
+[!code-cshtml[Main](intro/samples/cu30/Pages/Students/Details.cshtml?highlight=32-53)]
+
+Poprzedni kod pętle za pomocą jednostek we `Enrollments` właściwości nawigacji. Dla każdej rejestracji jest wyświetlany tytuł kursu i Klasa. Tytuł kursu jest pobierany z jednostki kursu przechowywanej we `Course` właściwości nawigacji jednostki rejestracji.
+
+Uruchom aplikację, wybierz kartę **studenci** i kliknij link **szczegóły** dla ucznia. Zostanie wyświetlona lista kursów i ocen dla wybranego ucznia.
+
+### <a name="ways-to-read-one-entity"></a>Sposoby odczytywania jednej jednostki
+
+Wygenerowany kod używa [FirstOrDefaultAsync](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.firstordefaultasync#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_FirstOrDefaultAsync__1_System_Linq_IQueryable___0__System_Threading_CancellationToken_) do odczytu jednej jednostki. Ta metoda zwraca wartość null, jeśli nic nie zostanie znalezione; w przeciwnym razie zwraca pierwszy znaleziony wiersz, który spełnia kryteria filtru zapytania. `FirstOrDefaultAsync` jest ogólnie lepszym rozwiązaniem niż następujące alternatywy:
+
+* [SingleOrDefaultAsync](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.singleordefaultasync#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_SingleOrDefaultAsync__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Threading_CancellationToken_) — zgłasza wyjątek, jeśli istnieje więcej niż jedna jednostka, która spełnia kryteria filtru zapytań. Aby określić, czy zapytanie może zwrócić więcej niż jeden wiersz, `SingleOrDefaultAsync` próbuje pobrać wiele wierszy. Ta dodatkowa operacja jest niezbędna, jeśli zapytanie może zwrócić tylko jedną jednostkę, tak jak podczas wyszukiwania unikatowego klucza.
+* [FindAsync](/dotnet/api/microsoft.entityframeworkcore.dbcontext.findasync#Microsoft_EntityFrameworkCore_DbContext_FindAsync_System_Type_System_Object___) — umożliwia znalezienie jednostki z kluczem podstawowym (PK). Jeśli jednostka z PK jest śledzona przez kontekst, jest zwracana bez żądania do bazy danych. Ta metoda jest zoptymalizowana pod kątem wyszukiwania pojedynczej jednostki, ale nie można wywoływać `Include` z `FindAsync` .  Tak więc, jeśli dane pokrewne są zbędne, `FirstOrDefaultAsync` to lepszy wybór.
+
+### <a name="route-data-vs-query-string"></a>Dane trasy a ciąg zapytania
+
+Adres URL strony szczegółów to `https://localhost:<port>/Students/Details?id=1` . Wartość klucza podstawowego jednostki znajduje się w ciągu zapytania. Niektórzy deweloperzy wolą przekazać wartość klucza w polu dane trasy: `https://localhost:<port>/Students/Details/1` . Aby uzyskać więcej informacji, zobacz temat [Aktualizowanie wygenerowanego kodu](xref:tutorials/razor-pages/da1#update-the-generated-code).
+
+## <a name="update-the-create-page"></a>Aktualizowanie strony tworzenia
+
+Kod szkieletowy `OnPostAsync` dla strony tworzenia jest narażony na [nadpublikowanie](#overposting). Zastąp `OnPostAsync` metodę w obszarze *Pages/Students/Create. cshtml. cs* poniższym kodem.
+
+[!code-csharp[Main](intro/samples/cu30/Pages/Students/Create.cshtml.cs?name=snippet_OnPostAsync)]
+
+<a name="TryUpdateModelAsync"></a>
+
+### <a name="tryupdatemodelasync"></a>TryUpdateModelAsync
+
+Poprzedni kod tworzy obiekt studenta, a następnie używa opublikowanych pól formularza do aktualizowania właściwości obiektu ucznia. Metoda [TryUpdateModelAsync](/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.tryupdatemodelasync#Microsoft_AspNetCore_Mvc_ControllerBase_TryUpdateModelAsync_System_Object_System_Type_System_String_) :
+
+* Używa opublikowanych wartości formularza z właściwości [PageContext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.pagecontext#Microsoft_AspNetCore_Mvc_RazorPages_PageModel_PageContext) w [PageModel](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel).
+* Aktualizuje tylko wymienione właściwości ( `s => s.FirstMidName, s => s.LastName, s => s.EnrollmentDate` ).
+* Szuka pól formularza z prefiksem "Student". Na przykład `Student.FirstMidName`. Wielkość liter nie jest uwzględniana.
+* Używa systemu [powiązań modelu](xref:mvc/models/model-binding) do konwersji wartości formularza z ciągów do typów w `Student` modelu. Na przykład, `EnrollmentDate` jest konwertowany na `DateTime` .
+
+Uruchom aplikację i Utwórz jednostkę ucznia, aby przetestować stronę tworzenie.
+
+## <a name="overposting"></a>Przefinalizowanie
+
+Używanie `TryUpdateModel` do aktualizowania pól z opublikowanymi wartościami jest najlepszym rozwiązaniem w zakresie zabezpieczeń, ponieważ uniemożliwia przekazanie. Załóżmy na przykład, że jednostka ucznia zawiera `Secret` Właściwość, której ta strona sieci Web nie powinna aktualizować ani dodawać:
+
+[!code-csharp[Main](intro/samples/cu30snapshots/2-crud/Models/StudentZsecret.cs?name=snippet_Intro&highlight=7)]
+
+Nawet jeśli aplikacja nie ma `Secret` pola na stronie Tworzenie lub aktualizowanie Razor , haker może ustawić wartość przez przepełnianie `Secret` . Haker może użyć narzędzia takiego jak programu Fiddler lub napisać kod JavaScript w celu opublikowania `Secret` wartości formularza. Oryginalny kod nie ogranicza pól używanych przez spinacz modelu podczas tworzenia wystąpienia ucznia.
+
+Niezależnie od wartości, która hakera określona dla `Secret` pola formularza zostanie zaktualizowana w bazie danych. Na poniższej ilustracji przedstawiono Narzędzie programu Fiddler, które dodaje `Secret` pole, z wartością "naddawaj" do wartości zaksięgowanych formularzy.
+
+![Programu Fiddler Dodawanie pola tajnego](../ef-mvc/crud/_static/fiddler.png)
+
+Wartość "Zaksięguj" została pomyślnie dodana do `Secret` Właściwości wstawionego wiersza. Dzieje się tak, mimo że projektant aplikacji nigdy nie zamierzy `Secret` właściwości, które mają być ustawione przy użyciu strony Tworzenie.
+
+### <a name="view-model"></a>Wyświetlanie modelu
+
+Modele widoków zapewniają alternatywny sposób zapobiegania przepisywaniu.
+
+Model aplikacji jest często nazywany modelem domeny. Model domeny zwykle zawiera wszystkie właściwości wymagane przez odpowiednią jednostkę w bazie danych. Model widoku zawiera tylko właściwości, które są odpowiednie dla strony interfejsu użytkownika, na przykład na stronie Tworzenie.
+
+Poza modelem widoku niektóre aplikacje wykorzystują model powiązań lub model wejściowy do przekazywania danych między Razor klasą modelu strony stron i przeglądarką. 
+
+Rozważmy następujący `StudentVM` model widoku:
+
+[!code-csharp[Main](intro/samples/cu50/ViewModels/StudentVM.cs?name=snippet)]
+
+Poniższy kod używa `StudentVM` modelu widoku do utworzenia nowego ucznia:
+
+[!code-csharp[Main](intro/samples/cu50/Pages/Students/CreateVM.cshtml.cs?name=snippet)]
+
+Metoda [setValues](/dotnet/api/microsoft.entityframeworkcore.changetracking.propertyvalues.setvalues#Microsoft_EntityFrameworkCore_ChangeTracking_PropertyValues_SetValues_System_Object_) ustawia wartości tego obiektu, odczytując wartości z innego obiektu [propertyValues](/dotnet/api/microsoft.entityframeworkcore.changetracking.propertyvalues) . `SetValues` używa dopasowywania nazw właściwości. Typ modelu widoku:
+
+* Nie musi być powiązane z typem modelu.
+* Musi mieć właściwości, które pasują do siebie.
+
+Użycie `StudentVM` wymaga użycia strony tworzenia `StudentVM` zamiast `Student` :
+
+[!code-cshtml[Main](intro/samples/cu50/Pages/Students/CreateVM.cshtml)]
+
+## <a name="update-the-edit-page"></a>Aktualizowanie strony edytowania
+
+W obszarze *strony/studenci/Edytuj. cshtml. cs*Zastąp `OnGetAsync` `OnPostAsync` metody i poniższym kodem.
+
+[!code-csharp[Main](intro/samples/cu30/Pages/Students/Edit.cshtml.cs?name=snippet_OnGetPost)]
+
+Zmiany w kodzie są podobne do strony tworzenie z kilkoma wyjątkami:
+
+* `FirstOrDefaultAsync` został zastąpiony [FindAsync](/dotnet/api/microsoft.entityframeworkcore.dbset-1.findasync). Gdy nie musisz zawierać powiązanych danych, `FindAsync` jest bardziej wydajne.
+* `OnPostAsync` ma `id` parametr.
+* Bieżący student jest pobierany z bazy danych, a nie od tworzenia pustego ucznia.
+
+Uruchom aplikację i przetestuj ją, tworząc i edytując ucznia.
+
+## <a name="entity-states"></a>Stany jednostek
+
+Kontekst bazy danych śledzi, czy jednostki w pamięci są zsynchronizowane z odpowiadającymi im wierszami w bazie danych. Te informacje śledzenia decydują o tym, co się stanie w przypadku wywołania [SaveChangesAsync](/dotnet/api/microsoft.entityframeworkcore.dbcontext.savechangesasync#Microsoft_EntityFrameworkCore_DbContext_SaveChangesAsync_System_Threading_CancellationToken_) . Na przykład gdy nowa jednostka jest przenoszona do metody [addasync](/dotnet/api/microsoft.entityframeworkcore.dbcontext.addasync) , stan tej jednostki jest ustawiany na wartość [dodana](/dotnet/api/microsoft.entityframeworkcore.entitystate#Microsoft_EntityFrameworkCore_EntityState_Added). Gdy `SaveChangesAsync` jest wywoływana, kontekst bazy danych wystawia `INSERT` polecenie SQL.
+
+Jednostka może być w jednym z [następujących stanów](/dotnet/api/microsoft.entityframeworkcore.entitystate):
+
+* `Added`: Jednostka jeszcze nie istnieje w bazie danych. `SaveChanges`Metoda wystawia `INSERT` instrukcję.
+
+* `Unchanged`: Nie trzeba zapisywać zmian w tej jednostce. Jednostka ma ten stan, gdy jest odczytywany z bazy danych.
+
+* `Modified`: Zmodyfikowano niektóre lub wszystkie wartości właściwości jednostki. `SaveChanges`Metoda wystawia `UPDATE` instrukcję.
+
+* `Deleted`: Jednostka została oznaczona do usunięcia. `SaveChanges`Metoda wystawia `DELETE` instrukcję.
+
+* `Detached`: Jednostka nie jest śledzona przez kontekst bazy danych.
+
+W aplikacji klasycznej zmiany stanu są zazwyczaj ustawiane automatycznie. Odczytano jednostkę, wprowadzono zmiany, a stan jednostki jest automatycznie zmieniany na `Modified` . Wywołanie `SaveChanges` generuje instrukcję SQL `UPDATE` , która aktualizuje tylko zmienione właściwości.
+
+W aplikacji sieci Web, `DbContext` która odczytuje jednostkę i wyświetla dane są usuwane po wyrenderowaniu strony. Gdy `OnPostAsync` wywoływana jest metoda strony, tworzone jest nowe żądanie sieci Web i nowe wystąpienie `DbContext` . Odczytanie jednostki w tym nowym kontekście symuluje przetwarzanie pulpitu.
+
+## <a name="update-the-delete-page"></a>Aktualizowanie strony usuwania
+
+W tej sekcji niestandardowy komunikat o błędzie jest implementowany, gdy wywołanie `SaveChanges` zakończy się niepowodzeniem.
+
+Zastąp kod w obszarze *Pages/Students/Delete. cshtml. cs* poniższym kodem. Zmiany są wyróżnione:
+
+[!code-csharp[Main](intro/samples/cu50/Pages/Students/Delete.cshtml.cs?name=snippet_All&highlight=12-14,22,30-33,45-99)]
+
+Poprzedni kod dodaje opcjonalny parametr `saveChangesError` do `OnGetAsync` sygnatury metody. `saveChangesError` wskazuje, czy metoda została wywołana po niepowodzeniu usunięcia obiektu studenta. Operacja usuwania może zakończyć się niepowodzeniem z powodu przejściowych problemów z siecią. Przejściowe błędy sieciowe są bardziej prawdopodobnie, gdy baza danych znajduje się w chmurze. `saveChangesError`Parametr jest `false` wywoływany, gdy strona usuwania `OnGetAsync` jest wywoływana z interfejsu użytkownika. Gdy `OnGetAsync` jest wywoływana przez `OnPostAsync` , ponieważ operacja usuwania nie powiodła się, `saveChangesError` parametr ma wartość `true` .
+
+`OnPostAsync`Metoda pobiera wybraną jednostkę, a następnie wywołuje metodę [Remove](/dotnet/api/microsoft.entityframeworkcore.dbcontext.remove#Microsoft_EntityFrameworkCore_DbContext_Remove_System_Object_) w celu ustawienia stanu jednostki na `Deleted` . Gdy `SaveChanges` jest wywoływana, `DELETE` generowane jest polecenie SQL. W przypadku `Remove` niepowodzenia:
+
+* Przechwycono wyjątek bazy danych.
+* Metoda Delete Pages `OnGetAsync` jest wywoływana z `saveChangesError=true` .
+
+Dodaj komunikat o błędzie do *stron/uczniów/Delete. cshtml*:
+
+[!code-cshtml[Main](intro/samples/cu30/Pages/Students/Delete.cshtml?highlight=10)]
+
+Uruchom aplikację i Usuń uczniów, aby przetestować stronę usuwania.
+
+## <a name="next-steps"></a>Następne kroki
+
+> [!div class="step-by-step"]
+> [Poprzedni samouczek](xref:data/ef-rp/intro) 
+>  [Następny samouczek](xref:data/ef-rp/sort-filter-page)
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0 < aspnetcore-5.0"
+
+W tym samouczku kod szkieletu CRUD (tworzenie, odczytywanie, aktualizowanie, usuwanie) zostanie sprawdzony i dostosowany.
+
+## <a name="no-repository"></a>Brak repozytorium
+
+Niektórzy Deweloperzy używają warstwy usług lub wzorca repozytorium, aby utworzyć warstwę abstrakcji między interfejsem użytkownika ( Razor stronami) i warstwą dostępu do danych. Ten samouczek nie działa. Aby zminimalizować złożoność i utrzymywać samouczek na EF Core, kod EF Core zostanie dodany bezpośrednio do klas modelu strony. 
+
+## <a name="update-the-details-page"></a>Aktualizowanie strony szczegółów
+
+Kod szkieletowy dla stron uczniów nie obejmuje danych rejestracji. W tej sekcji rejestracje są dodawane do strony szczegółów.
+
+### <a name="read-enrollments"></a>Odczytaj rejestracje
+
+Aby wyświetlić na stronie dane rejestracyjne ucznia, należy odczytać dane rejestrację. Kod szkieletowy na *stronach/studentów/szczegóły. cshtml. cs* odczytuje tylko dane uczniów, bez danych rejestracji:
 
 [!code-csharp[Main](intro/samples/cu30snapshots/2-crud/Pages/Students/Details1.cshtml.cs?name=snippet_OnGetAsync&highlight=8)]
 
@@ -137,7 +305,7 @@ W obszarze *strony/studenci/Edytuj. cshtml. cs*Zastąp `OnGetAsync` `OnPostAsync
 
 Zmiany w kodzie są podobne do strony tworzenie z kilkoma wyjątkami:
 
-* `FirstOrDefaultAsync` został zastąpiony [FindAsync](/dotnet/api/microsoft.entityframeworkcore.dbset-1.findasync). Gdy nie musisz zawierać powiązanych danych, `FindAsync` jest bardziej wydajne.
+* `FirstOrDefaultAsync` został zastąpiony [FindAsync](/dotnet/api/microsoft.entityframeworkcore.dbset-1.findasync). Gdy dołączone dane powiązane nie są zbędne, `FindAsync` są bardziej wydajne.
 * `OnPostAsync` ma `id` parametr.
 * Bieżący student jest pobierany z bazy danych, a nie od tworzenia pustego ucznia.
 

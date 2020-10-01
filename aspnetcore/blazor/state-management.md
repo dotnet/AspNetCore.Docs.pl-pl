@@ -19,12 +19,12 @@ no-loc:
 - SignalR
 uid: blazor/state-management
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: 43794fad36efe44cad6fbb2f1a1cae293a2ddad1
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: a74f056447839c4cf057948f26a9ece9b5799656
+ms.sourcegitcommit: d1a897ebd89daa05170ac448e4831d327f6b21a8
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88625963"
+ms.lasthandoff: 10/01/2020
+ms.locfileid: "91606717"
 ---
 # <a name="aspnet-core-no-locblazor-state-management"></a>BlazorZarządzanie stanem ASP.NET Core
 
@@ -58,11 +58,12 @@ Aplikacja może utrzymywać tylko *stan aplikacji*. Interfejsów użytkownika ni
 
 ## <a name="where-to-persist-state"></a>Gdzie będzie trwały stan
 
-Trzy typowe lokalizacje istnieją dla stanu utrwalania:
+Istnieją wspólne lokalizacje dla stanu utrwalania:
 
 * [Magazyn po stronie serwera](#server-side-storage)
 * [Adres URL](#url)
 * [Magazyn przeglądarki](#browser-storage)
+* [Usługa kontenera stanu w pamięci](#in-memory-state-container-service)
 
 ### <a name="server-side-storage"></a>Magazyn po stronie serwera
 
@@ -71,7 +72,7 @@ W przypadku trwałej trwałości danych obejmującej wielu użytkowników i wszy
 * Blob Storage
 * Magazyn kluczy i wartości
 * Relacyjna baza danych
-* Table Storage
+* Magazyn tabel
 
 Po zapisaniu danych stan użytkownika jest zachowywany i dostępny w każdej nowej sesji przeglądarki.
 
@@ -119,6 +120,10 @@ Ogólnie rzecz biorąc, `sessionStorage` jest bezpiecznie używać. `sessionStor
 > [!WARNING]
 > Użytkownicy mogą wyświetlać lub naruszać dane przechowywane w `localStorage` i `sessionStorage` .
 
+## <a name="in-memory-state-container-service"></a>Usługa kontenera stanu w pamięci
+
+[!INCLUDE[](~/includes/blazor-state-management/state-container.md)]
+
 ## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Zapisz stan aplikacji przed operacją uwierzytelniania](xref:blazor/security/webassembly/additional-scenarios#save-app-state-before-an-authentication-operation)
@@ -162,11 +167,12 @@ Aplikacja może utrzymywać tylko *stan aplikacji*. Interfejsów użytkownika ni
 
 ## <a name="where-to-persist-state"></a>Gdzie będzie trwały stan
 
-Trzy typowe lokalizacje istnieją dla stanu utrwalania:
+Istnieją wspólne lokalizacje dla stanu utrwalania:
 
 * [Magazyn po stronie serwera](#server-side-storage)
 * [Adres URL](#url)
 * [Magazyn przeglądarki](#browser-storage)
+* [Usługa kontenera stanu w pamięci](#in-memory-state-container-service)
 
 ### <a name="server-side-storage"></a>Magazyn po stronie serwera
 
@@ -175,7 +181,7 @@ W przypadku trwałej trwałości danych obejmującej wielu użytkowników i urz�
 * Blob Storage
 * Magazyn kluczy i wartości
 * Relacyjna baza danych
-* Table Storage
+* Magazyn tabel
 
 Po zapisaniu danych stan użytkownika jest zachowywany i dostępny w dowolnym nowym obwodie.
 
@@ -701,5 +707,9 @@ Ogólnie rzecz biorąc, zalecany jest wzorzec *składnika nadrzędnego dostawcy 
 Aby zachować wiele różnych obiektów stanu i korzystać z różnych podzbiorów obiektów w różnych miejscach, lepiej jest unikać utrwalania stanu w całości.
 
 ::: moniker-end
+
+## <a name="in-memory-state-container-service"></a>Usługa kontenera stanu w pamięci
+
+[!INCLUDE[](~/includes/blazor-state-management/state-container.md)]
 
 ::: zone-end

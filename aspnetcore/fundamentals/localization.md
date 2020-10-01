@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/localization
-ms.openlocfilehash: 478e9e58f265a8c372dd048f9ba8593424050e01
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: fcf69bdaaed5cf0283ae27440c28061857d2cbcb
+ms.sourcegitcommit: d1a897ebd89daa05170ac448e4831d327f6b21a8
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722673"
+ms.lasthandoff: 10/01/2020
+ms.locfileid: "91606774"
 ---
 # <a name="globalization-and-localization-in-aspnet-core"></a>Globalizacja i lokalizacja w ASP.NET Core
 
@@ -368,7 +368,7 @@ Odsetk
 
 [!INCLUDE[](~/includes/localization/unsupported-culture-log-level.md)]
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:fundamentals/troubleshoot-aspnet-core-localization>
 * [Projekt lokalizacji. StarterWeb](https://github.com/aspnet/Entropy/tree/master/samples/Localization.StarterWeb) używany w artykule.
@@ -722,7 +722,7 @@ Odsetk
 
 [!INCLUDE[](~/includes/localization/currency.md)]
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:fundamentals/troubleshoot-aspnet-core-localization>
 * [Projekt lokalizacji. StarterWeb](https://github.com/aspnet/Entropy/tree/master/samples/Localization.StarterWeb) używany w artykule.
@@ -959,7 +959,7 @@ Lista domyślna przechodzi od najbardziej konkretnych do najmniej określonych. 
 
 ### <a name="querystringrequestcultureprovider"></a>QueryStringRequestCultureProvider
 
-Niektóre aplikacje będą używać ciągu zapytania do ustawienia <https://docs.microsoft.com/dotnet/api/system.globalization.cultureinfo?view=netcore-3.1> . W przypadku aplikacji, które korzystają z cookie metody lub nagłówka Accept-Language, Dodawanie ciągu zapytania do adresu URL jest przydatne w przypadku debugowania i testowania kodu. Domyślnie program `QueryStringRequestCultureProvider` jest rejestrowany jako pierwszy dostawca lokalizacji na `RequestCultureProvider` liście. Parametry ciągu zapytania są przekazywane `culture` i `ui-culture` . Poniższy przykład ustawia określoną kulturę (język i region) na hiszpański/Meksyk:
+Niektóre aplikacje będą używać ciągu zapytania do ustawienia <xref:System.Globalization.CultureInfo> . W przypadku aplikacji, które korzystają z cookie metody lub nagłówka Accept-Language, Dodawanie ciągu zapytania do adresu URL jest przydatne w przypadku debugowania i testowania kodu. Domyślnie program `QueryStringRequestCultureProvider` jest rejestrowany jako pierwszy dostawca lokalizacji na `RequestCultureProvider` liście. Parametry ciągu zapytania są przekazywane `culture` i `ui-culture` . Poniższy przykład ustawia określoną kulturę (język i region) na hiszpański/Meksyk:
 
 ```
 http://localhost:5000/?culture=es-MX&ui-culture=es-MX
@@ -1102,7 +1102,7 @@ Odsetk
 
 [!INCLUDE[](~/includes/localization/unsupported-culture-log-level.md)]
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:fundamentals/troubleshoot-aspnet-core-localization>
 * [Projekt lokalizacji. StarterWeb](https://github.com/aspnet/Entropy/tree/master/samples/Localization.StarterWeb) używany w artykule.

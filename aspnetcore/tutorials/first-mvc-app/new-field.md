@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/new-field
-ms.openlocfilehash: 40e615d0698a0ed1d3ef40a222e064d72184f0c8
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: a0c53755bd56b6c169437ca9f0ea915e46ad79ec
+ms.sourcegitcommit: d1a897ebd89daa05170ac448e4831d327f6b21a8
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635297"
+ms.lasthandoff: 10/01/2020
+ms.locfileid: "91606750"
 ---
 # <a name="part-8-add-a-new-field-to-an-aspnet-core-mvc-app"></a>Część 8 Dodaj nowe pole do aplikacji ASP.NET Core MVC
 
@@ -46,7 +46,7 @@ Dodaj `Rating` Właściwość do *modeli/filmów. cs*:
 
 Tworzenie aplikacji
 
-### <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+### <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
  Ctrl+Shift+B
 
@@ -62,7 +62,7 @@ Polecenie ⌘ + B
 
 ------
 
-Ponieważ dodano nowe pole do `Movie` klasy, należy zaktualizować białe listy powiązań, aby ta nowa właściwość została uwzględniona. W programie *MoviesController.cs*zaktualizuj `[Bind]` atrybut dla obu `Create` metod i, `Edit` Aby uwzględnić `Rating` Właściwość:
+Ponieważ dodano nowe pole do `Movie` klasy, należy zaktualizować listę powiązań właściwości, aby ta nowa właściwość została uwzględniona. W programie *MoviesController.cs*zaktualizuj `[Bind]` atrybut dla obu `Create` metod i, `Edit` Aby uwzględnić `Rating` Właściwość:
 
 ```csharp
 [Bind("Id,Title,ReleaseDate,Genre,Price,Rating")]
@@ -110,7 +110,7 @@ Istnieje kilka metod rozpoznawania błędu:
 
 W tym samouczku zostanie użyta Migracje Code First.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 W menu **Narzędzia** wybierz kolejno pozycje **menedżer pakietów NuGet > konsola Menedżera pakietów**.
 
@@ -133,7 +133,7 @@ Jeśli wszystkie rekordy w bazie danych zostaną usunięte, metoda Initialize b�
 
 [!INCLUDE[](~/includes/RP-mvc-shared/sqlite-warn.md)]
 
-Usuń bazę danych i użyj migracji, aby ponownie utworzyć bazę danych. Aby usunąć bazę danych, usuń plik bazy danych (*MvcMovie. DB*). Następnie uruchom `ef database update` polecenie:
+Usuń bazę danych i użyj migracji, aby ponownie utworzyć bazę danych. Aby usunąć bazę danych, usuń plik bazy danych *MvcMovie. DB* . Następnie uruchom `ef database update` polecenie:
 
 ```dotnetcli
 dotnet ef database update

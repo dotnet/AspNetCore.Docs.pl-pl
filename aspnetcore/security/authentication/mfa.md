@@ -18,16 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/mfa
-ms.openlocfilehash: e224f947335ea8ea6ed8887dfadb52202bfd7866
-ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
+ms.openlocfilehash: 76a11aa7b89b3ce60ed11bd7553a7e5898f661f4
+ms.sourcegitcommit: d1a897ebd89daa05170ac448e4831d327f6b21a8
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/11/2020
-ms.locfileid: "90009508"
+ms.lasthandoff: 10/01/2020
+ms.locfileid: "91606800"
 ---
 # <a name="multi-factor-authentication-in-aspnet-core"></a>Uwierzytelnianie wieloskładnikowe w ASP.NET Core
 
 Autor [Damien Bowden](https://github.com/damienbod)
+
+[Wyświetlanie lub Pobieranie przykładowego kodu (damienbod/AspNetCoreHybridFlowWithApi repozytorium GitHub)](https://github.com/damienbod/AspNetCoreHybridFlowWithApi)
 
 Uwierzytelnianie wieloskładnikowe (MFA) to proces, w którym użytkownik jest proszony podczas logowania w celu uzyskania dodatkowych form identyfikacji. Ten monit może być wprowadzeniem kodu z Cellphone, użycie klucza FIDO2 lub w celu przeskanowania odcisku palca. Gdy wymagana jest druga forma uwierzytelniania, zabezpieczenia są rozszerzane. Dodatkowy czynnik nie jest łatwo uzyskiwany ani duplikowany przez osobę atakującą.
 

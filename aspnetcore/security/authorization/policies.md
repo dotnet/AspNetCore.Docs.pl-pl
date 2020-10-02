@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/policies
-ms.openlocfilehash: af282ec1f82b2ac31fd0b46b2406110e24e9211b
-ms.sourcegitcommit: 6c82d78662332cd40d614019b9ed17c46e25be28
+ms.openlocfilehash: 140969c80191c9549bc19507b9c4818b88fed0d1
+ms.sourcegitcommit: c026bf76a0e14a5ee68983519a63574c674e9ff7
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/29/2020
-ms.locfileid: "91424246"
+ms.lasthandoff: 10/01/2020
+ms.locfileid: "91636806"
 ---
 # <a name="policy-based-authorization-in-aspnet-core"></a>Autoryzacja oparta na zasadach w ASP.NET Core
 
@@ -36,7 +36,7 @@ Zasady autoryzacji składają się z co najmniej jednego wymagania. Jest ona zar
 
 W poprzednim przykładzie tworzone są zasady "AtLeast21". Ma jedno wymaganie &mdash; o minimalnym wieku, które jest dostarczane jako parametr do wymagania.
 
-## <a name="iauthorizationservice"></a>IAuthorizationService 
+## <a name="iauthorizationservice"></a>IAuthorizationService
 
 Podstawowa usługa, która określa, czy autoryzacja powiodła się <xref:Microsoft.AspNetCore.Authorization.IAuthorizationService> :
 

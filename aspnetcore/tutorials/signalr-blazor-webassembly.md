@@ -5,7 +5,7 @@ description: Utwórz aplikację czatu korzystającą z ASP.NET Core SignalR z Bl
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/10/2020
+ms.date: 10/01/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/signalr-blazor-webassembly
-ms.openlocfilehash: 4d33e99ceb8273487144447eae324469df67c9ff
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: a8b1e7cd94836e89c438045df4bb8dd049da7f72
+ms.sourcegitcommit: e519d95d17443abafba8f712ac168347b15c8b57
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633386"
+ms.lasthandoff: 10/02/2020
+ms.locfileid: "91653987"
 ---
 # <a name="use-aspnet-core-no-locsignalr-with-no-locblazor-webassembly"></a>Użyj ASP.NET Core SignalR z Blazor WebAssembly
 
@@ -44,7 +44,35 @@ Na końcu tego samouczka będziesz mieć działającą aplikację czatu.
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+::: moniker range=">= aspnetcore-5.0"
+
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+
+<!-- * [Visual Studio 2019 16.8 or later](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) with the **ASP.NET and web development** workload -->
+* [Program Visual Studio 2019 16,8 lub nowszy (w wersji zapoznawczej)](https://visualstudio.microsoft.com/vs/preview/) z **ASP.NET i programowaniem aplikacji sieci Web**
+* [!INCLUDE [.NET Core 5.0 SDK](~/includes/5.0-SDK.md)]
+
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+
+[!INCLUDE[](~/includes/net-core-prereqs-vsc-5.0.md)]
+
+# <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
+
+<!-- * [Visual Studio for Mac version 8.8 or later (in preview)](https://visualstudio.microsoft.com/vs/mac/) -->
+* [Visual Studio dla komputerów Mac wersja 8,8 lub nowsza (w wersji zapoznawczej)](https://docs.microsoft.com/visualstudio/releasenotes/vs2019-mac-preview-relnotes)
+* [!INCLUDE [.NET Core 5.0 SDK](~/includes/5.0-SDK.md)]
+
+# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli/)
+
+[!INCLUDE[](~/includes/5.0-SDK.md)]
+
+---
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 * [Program Visual Studio 2019 16,6 lub nowszy](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) z **ASP.NET i programowaniem aplikacji sieci Web**
 * [!INCLUDE [.NET Core 3.1 SDK](~/includes/3.1-SDK.md)]
@@ -58,20 +86,33 @@ Na końcu tego samouczka będziesz mieć działającą aplikację czatu.
 * [Visual Studio dla komputerów Mac wersja 8,6 lub nowsza](https://visualstudio.microsoft.com/vs/mac/)
 * [!INCLUDE [.NET Core 3.1 SDK](~/includes/3.1-SDK.md)]
 
-# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli/)
+# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli/)
 
 [!INCLUDE[](~/includes/3.1-SDK.md)]
 
 ---
 
+::: moniker-end
+
 ## <a name="create-a-hosted-no-locblazor-webassembly-app-project"></a>Tworzenie projektu hostowanej Blazor WebAssembly aplikacji
 
 Postępuj zgodnie ze wskazówkami dotyczącymi wybranego narzędzia:
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+
+::: moniker range=">= aspnetcore-5.0"
+
+> [!NOTE]
+> Wymagany jest program Visual Studio 16,8 lub nowszy oraz zestaw .NET Core SDK 5.0.0 lub nowszy.
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
 
 > [!NOTE]
 > Wymagany jest program Visual Studio 16,6 lub nowszy oraz zestaw .NET Core SDK 3.1.300 lub nowszy.
+
+::: moniker-end
 
 1. Tworzenie nowego projektu.
 
@@ -115,7 +156,7 @@ Postępuj zgodnie ze wskazówkami dotyczącymi wybranego narzędzia:
 
 1. Otwórz projekt, przechodząc do folderu projektu i otwierając plik rozwiązania projektu ( `.sln` ).
 
-# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli/)
+# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli/)
 
 W powłoce poleceń wykonaj następujące polecenie:
 
@@ -127,7 +168,7 @@ dotnet new blazorwasm --hosted --output BlazorSignalRApp
 
 ## <a name="add-the-no-locsignalr-client-library"></a>Dodawanie SignalR biblioteki klienta
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio/)
 
 1. W **Eksplorator rozwiązań**kliknij prawym przyciskiem myszy `BlazorSignalRApp.Client` projekt i wybierz polecenie **Zarządzaj pakietami NuGet**.
 
@@ -161,7 +202,7 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 1. Jeśli zostanie wyświetlone okno dialogowe **Akceptacja licencji** , wybierz pozycję **Akceptuj** , jeśli akceptujesz postanowienia licencyjne.
 
-# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli/)
+# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli/)
 
 W powłoce poleceń wykonaj następujące polecenia:
 
@@ -176,7 +217,17 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 W `BlazorSignalRApp.Server` projekcie Utwórz `Hubs` folder (plural) i Dodaj następującą `ChatHub` klasę ( `Hubs/ChatHub.cs` ):
 
+::: moniker range=">= aspnetcore-5.0"
+
+[!code-csharp[](signalr-blazor-webassembly/samples/5.x/BlazorSignalRApp/Server/Hubs/ChatHub.cs)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
 [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Hubs/ChatHub.cs)]
+
+::: moniker-end
 
 ## <a name="add-services-and-an-endpoint-for-the-no-locsignalr-hub"></a>Dodaj usługi i punkt końcowy SignalR centrum
 
@@ -190,14 +241,34 @@ W `BlazorSignalRApp.Server` projekcie Utwórz `Hubs` folder (plural) i Dodaj nas
 
 1. Dodaj SignalR i Odpowiedz usługi pośredniczące kompresji w programie `Startup.ConfigureServices` :
 
+::: moniker range=">= aspnetcore-5.0"
+
+   [!code-csharp[](signalr-blazor-webassembly/samples/5.x/BlazorSignalRApp/Server/Startup.cs?name=snippet_ConfigureServices&highlight=3,5-9)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
    [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Startup.cs?name=snippet_ConfigureServices&highlight=3,5-9)]
+
+::: moniker-end
 
 1. W pliku `Startup.Configure`:
 
    * Użyj oprogramowania pośredniczącego kompresji odpowiedzi w górnej części konfiguracji potoku przetwarzania.
    * Między punktami końcowymi kontrolerów i powrotu po stronie klienta należy dodać punkt końcowy centrum.
 
+::: moniker range=">= aspnetcore-5.0"
+
+   [!code-csharp[](signalr-blazor-webassembly/samples/5.x/BlazorSignalRApp/Server/Startup.cs?name=snippet_Configure&highlight=3,25)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
    [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Startup.cs?name=snippet_Configure&highlight=3,25)]
+
+::: moniker-end
 
 ## <a name="add-no-locrazor-component-code-for-chat"></a>Dodawanie Razor kodu składnika dla rozmowy
 
@@ -205,13 +276,23 @@ W `BlazorSignalRApp.Server` projekcie Utwórz `Hubs` folder (plural) i Dodaj nas
 
 1. Zastąp znacznik następującym kodem:
 
-[!code-razor[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Client/Pages/Index.razor)]
+::: moniker range=">= aspnetcore-5.0"
+
+   [!code-razor[](signalr-blazor-webassembly/samples/5.x/BlazorSignalRApp/Client/Pages/Index.razor)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+   [!code-razor[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Client/Pages/Index.razor)]
+
+::: moniker-end
 
 ## <a name="run-the-app"></a>Uruchamianie aplikacji
 
 1. Postępuj zgodnie ze wskazówkami dotyczącymi narzędzi:
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 1. W **Eksplorator rozwiązań**wybierz `BlazorSignalRApp.Server` projekt. Naciśnij klawisz <kbd>F5</kbd> , aby uruchomić aplikację z debugowaniem lub <kbd>klawiszem Ctrl</kbd> + <kbd>F5</kbd> , aby uruchomić aplikację bez debugowania.
 
@@ -227,9 +308,21 @@ W `BlazorSignalRApp.Server` projekcie Utwórz `Hubs` folder (plural) i Dodaj nas
 
 1. Gdy VS Code oferuje możliwość utworzenia profilu uruchamiania dla aplikacji serwera ( `.vscode/launch.json` ), `program` wpis będzie wyglądać podobnie do poniższego, aby wskazać zestaw aplikacji ( `{APPLICATION NAME}.Server.dll` ):
 
+::: moniker range=">= aspnetcore-5.0"
+
+   ```json
+   "program": "${workspaceFolder}/Server/bin/Debug/net5.0/{APPLICATION NAME}.Server.dll"
+   ```
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
    ```json
    "program": "${workspaceFolder}/Server/bin/Debug/netcoreapp3.1/{APPLICATION NAME}.Server.dll"
    ```
+
+::: moniker-end
 
 1. Naciśnij klawisz <kbd>F5</kbd> , aby uruchomić aplikację z debugowaniem lub <kbd>klawiszem Ctrl</kbd> + <kbd>F5</kbd> , aby uruchomić aplikację bez debugowania.
 
@@ -253,7 +346,7 @@ W `BlazorSignalRApp.Server` projekcie Utwórz `Hubs` folder (plural) i Dodaj nas
 
    Cudzysłowy: *gwiazdka Trek VI: niewykrywalny kraj* &copy; 1991 [Paramount](https://www.paramountmovies.com/movies/star-trek-vi-the-undiscovered-country)
 
-# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli/)
+# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli/)
 
 1. W powłoce poleceń wykonaj następujące polecenia:
 

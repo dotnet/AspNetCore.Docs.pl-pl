@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/httpsys
-ms.openlocfilehash: e5346c1e58127747d777b5040fe7bc7d99b9a489
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 8ed9ec3447205107194ffa5c329c0e5ae0fc5553
+ms.sourcegitcommit: e519d95d17443abafba8f712ac168347b15c8b57
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722874"
+ms.lasthandoff: 10/02/2020
+ms.locfileid: "91653974"
 ---
 # <a name="httpsys-web-server-implementation-in-aspnet-core"></a>HTTP.sys implementacja serwera sieci Web w programie ASP.NET Core
 
@@ -272,7 +272,24 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
 
 W przypadku aplikacji hostowanych przez HTTP.sys, które współdziałają z żądaniami z Internetu lub sieci firmowej, może być wymagana dodatkowa konfiguracja w przypadku hostowania za serwerami proxy i modułami równoważenia obciążenia. Aby uzyskać więcej informacji, zobacz [konfigurowanie ASP.NET Core do pracy z serwerami proxy i usługami równoważenia obciążenia](xref:host-and-deploy/proxy-load-balancer).
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="advanced-http2-features-to-support-grpc"></a>Zaawansowane funkcje protokołu HTTP/2 do obsługi gRPC
+
+Dodatkowe funkcje protokołu HTTP/2 w HTTP.sys obsługują gRPC, w tym obsługę przyczep z odpowiedziami i wysyłanie ramek resetowania.
+
+Wymagania dotyczące uruchamiania gRPC z HTTP.SYS:
+
+* Windows 10, kompilacja systemu operacyjnego 19041,508 lub nowsza
+* Połączenie TLS 1,2 lub nowsze
+
+### <a name="trailers"></a>Przyczep
+
+[!INCLUDE[](~/includes/trailers.md)]
+
+### <a name="reset"></a>Reset
+
+[!INCLUDE[](~/includes/reset.md)]
+
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Włącz uwierzytelnianie systemu Windows przy użyciu HTTP.sys](xref:security/authentication/windowsauth#httpsys)
 * [Interfejs API serwera HTTP](/windows/win32/http/http-api-start-page)
@@ -523,7 +540,7 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
 
 W przypadku aplikacji hostowanych przez HTTP.sys, które współdziałają z żądaniami z Internetu lub sieci firmowej, może być wymagana dodatkowa konfiguracja w przypadku hostowania za serwerami proxy i modułami równoważenia obciążenia. Aby uzyskać więcej informacji, zobacz [konfigurowanie ASP.NET Core do pracy z serwerami proxy i usługami równoważenia obciążenia](xref:host-and-deploy/proxy-load-balancer).
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Włącz uwierzytelnianie systemu Windows przy użyciu HTTP.sys](xref:security/authentication/windowsauth#httpsys)
 * [Interfejs API serwera HTTP](/windows/win32/http/http-api-start-page)
@@ -776,7 +793,7 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
 
 W przypadku aplikacji hostowanych przez HTTP.sys, które współdziałają z żądaniami z Internetu lub sieci firmowej, może być wymagana dodatkowa konfiguracja w przypadku hostowania za serwerami proxy i modułami równoważenia obciążenia. Aby uzyskać więcej informacji, zobacz [konfigurowanie ASP.NET Core do pracy z serwerami proxy i usługami równoważenia obciążenia](xref:host-and-deploy/proxy-load-balancer).
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Włącz uwierzytelnianie systemu Windows przy użyciu HTTP.sys](xref:security/authentication/windowsauth#httpsys)
 * [Interfejs API serwera HTTP](/windows/win32/http/http-api-start-page)
@@ -1029,7 +1046,7 @@ W programie Visual Studio domyślny profil uruchamiania jest przeznaczony dla II
 
 W przypadku aplikacji hostowanych przez HTTP.sys, które współdziałają z żądaniami z Internetu lub sieci firmowej, może być wymagana dodatkowa konfiguracja w przypadku hostowania za serwerami proxy i modułami równoważenia obciążenia. Aby uzyskać więcej informacji, zobacz [konfigurowanie ASP.NET Core do pracy z serwerami proxy i usługami równoważenia obciążenia](xref:host-and-deploy/proxy-load-balancer).
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Włącz uwierzytelnianie systemu Windows przy użyciu HTTP.sys](xref:security/authentication/windowsauth#httpsys)
 * [Interfejs API serwera HTTP](/windows/win32/http/http-api-start-page)

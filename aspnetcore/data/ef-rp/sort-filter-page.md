@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/sort-filter-page
-ms.openlocfilehash: 5e073845acbecdf0db4c30c4725f12033cfc42ac
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: e01704cb10c88f3e9442e74034f5e5d39787f300
+ms.sourcegitcommit: e519d95d17443abafba8f712ac168347b15c8b57
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634686"
+ms.lasthandoff: 10/02/2020
+ms.locfileid: "91653896"
 ---
 # <a name="part-3-no-locrazor-pages-with-ef-core-in-aspnet-core---sort-filter-paging"></a>Część 3, Razor strony z EF Core w ASP.NET Core — sortowanie, filtrowanie, stronicowanie
 
@@ -42,25 +42,26 @@ Na poniższej ilustracji przedstawiono kompletną stronę. Nagłówkami kolumn s
 
 Zastąp kod w obszarze *Pages/Students/index. cshtml. cs* następującym kodem, aby dodać sortowanie.
 
-[!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml.cs?name=snippet_All&highlight=21-24,26,28-52)]
+[!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml.cs?name=snippet_All)]
 
 Powyższy kod ma następujące działanie:
 
+* Wymaga dodania `using System;` .
 * Dodaje właściwości, aby zawierały parametry sortowania.
 * Zmienia nazwę `Student` właściwości na `Students` .
 * Zastępuje kod w `OnGetAsync` metodzie.
 
-`OnGetAsync`Metoda otrzymuje `sortOrder` parametr z ciągu zapytania w adresie URL. Adres URL (łącznie z ciągiem zapytania) jest generowany przez [pomocnika tagu zakotwiczenia](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper).
+`OnGetAsync`Metoda otrzymuje `sortOrder` parametr z ciągu zapytania w adresie URL. Adres URL i ciąg zapytania są generowane przez [pomocnika tagu zakotwiczenia](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper).
 
-`sortOrder`Parametr ma wartość "name" lub "date". `sortOrder`Parametr jest opcjonalny, po którym następuje "_desc", aby określić kolejność malejącą. Domyślna kolejność sortowania to Ascending.
+`sortOrder`Parametr ma wartość `Name` lub `Date` . `sortOrder`Opcjonalnie, po którym następuje `_desc` określenie kolejności malejącej. Domyślna kolejność sortowania to Ascending.
 
-Gdy strona indeksu zostanie zażądana od linku **uczniów** , nie ma ciągu zapytania. Studenci są wyświetlani w porządku rosnącym według nazwiska. Kolejność rosnąca według nazwiska jest wartością domyślną (w przypadku `switch` przyciągania) w instrukcji. Gdy użytkownik kliknie łącze nagłówka kolumny, odpowiednia `sortOrder` wartość jest podana w wartości ciągu zapytania.
+Gdy strona indeksu zostanie zażądana od linku **uczniów** , nie ma ciągu zapytania. Studenci są wyświetlani w porządku rosnącym według nazwiska. Rosnąca kolejność według nazwiska jest `default` w `switch` instrukcji. Gdy użytkownik kliknie łącze nagłówka kolumny, odpowiednia `sortOrder` wartość jest podana w wartości ciągu zapytania.
 
 `NameSort` i `DateSort` są używane przez Razor stronę do konfigurowania hiperłączy nagłówka kolumny z odpowiednimi wartościami ciągu zapytania:
 
 [!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml.cs?name=snippet_Ternary)]
 
-Kod używa warunkowego operatora języka C# [?:](/dotnet/csharp/language-reference/operators/conditional-operator). `?:`Operator jest operatorem Trzyelementowy (przyjmuje trzy operandy). Pierwszy wiersz określa, że gdy `sortOrder` ma wartość null lub jest pusty, `NameSort` jest ustawiony na wartość "name_desc". Jeśli `sortOrder` wartość **nie** jest równa null lub pusta, `NameSort` jest ustawiona na pusty ciąg.
+Kod używa [warunkowego operatora języka C#?:](/dotnet/csharp/language-reference/operators/conditional-operator). `?:`Operator jest operatorem Trzyelementowy, przyjmuje trzy operandy. Pierwszy wiersz określa, że gdy `sortOrder` ma wartość null lub jest pusty, `NameSort` jest ustawiony na `name_desc` . Jeśli `sortOrder` wartość ***nie*** jest równa null lub pusta, `NameSort` jest ustawiona na pusty ciąg.
 
 Te dwie instrukcje umożliwiają stronie ustawienie hiperłączy nagłówka kolumny w następujący sposób:
 
@@ -110,7 +111,7 @@ Aby dodać filtrowanie do strony indeksu uczniów:
 
 Zastąp kod w *Students/index. cshtml. cs* następującym kodem, aby dodać filtrowanie:
 
-[!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index2.cshtml.cs?name=snippet_All&highlight=28,33,37-41)]
+[!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index2.cshtml.cs?name=snippet_All&highlight=17,22,26-30)]
 
 Powyższy kod ma następujące działanie:
 
@@ -119,7 +120,7 @@ Powyższy kod ma następujące działanie:
 
 ### <a name="iqueryable-vs-ienumerable"></a>IQueryable a IEnumerable
 
-Kod wywołuje `Where` metodę na `IQueryable` obiekcie, a filtr jest przetwarzany na serwerze. W niektórych scenariuszach aplikacja może wywołać `Where` metodę jako metodę rozszerzenia w kolekcji w pamięci. Załóżmy na przykład, że `_context.Students` zmiany z EF Core `DbSet` do metody repozytorium, która zwraca `IEnumerable` kolekcję. Wyniki byłyby zwykle takie same, ale w niektórych przypadkach mogą być różne.
+Kod wywołuje <xref:System.Linq.Queryable.Where%2A> metodę na `IQueryable` obiekcie, a filtr jest przetwarzany na serwerze. W niektórych scenariuszach aplikacja może wywołać `Where` metodę jako metodę rozszerzenia w kolekcji w pamięci. Załóżmy na przykład, że `_context.Students` zmiany z EF Core `DbSet` do metody repozytorium, która zwraca `IEnumerable` kolekcję. Wyniki byłyby zwykle takie same, ale w niektórych przypadkach mogą być różne.
 
 Na przykład implementacja .NET Framework `Contains` Domyślnie wykonuje porównanie z uwzględnieniem wielkości liter. W SQL Server `Contains` wielkość liter jest określana na podstawie ustawienia sortowania wystąpienia SQL Server. SQL Server domyślnie nie uwzględnia wielkości liter. Domyślna wielkość liter w programie SQLite. `ToUpper` można wywołać, aby test jawnie nie uwzględniał wielkości liter:
 
@@ -139,7 +140,7 @@ Aby uzyskać więcej informacji, zobacz [jak używać zapytania bez uwzględnian
 
 ### <a name="update-the-no-locrazor-page"></a>Aktualizowanie Razor strony
 
-Zastąp kod w obszarze *Pages/Students/index. cshtml* , aby utworzyć przycisk **wyszukiwania** i w asortymentach programu Chrome.
+Zastąp kod w obszarze *Pages/Students/index. cshtml* , aby dodać przycisk **wyszukiwania** .
 
 [!code-cshtml[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index2.cshtml?highlight=14-23)]
 
@@ -153,8 +154,8 @@ Przetestuj aplikację:
 
 Zwróć uwagę, że adres URL zawiera ciąg wyszukiwania. Na przykład:
 
-```
-https://localhost:<port>/Students?SearchString=an
+```browser-address-bar
+https://localhost:5001/Students?SearchString=an
 ```
 
 Jeśli strona jest zakładką, zakładka zawiera adres URL strony i `SearchString` ciąg zapytania. `method="get"`W `form` tagu jest co spowodowało wygenerowanie ciągu zapytania.
@@ -181,15 +182,16 @@ W folderze projektu Utwórz `PaginatedList.cs` przy użyciu następującego kodu
 
 Zastąp kod w *Students/index. cshtml. cs* , aby dodać stronicowanie.
 
-[!code-csharp[Main](intro/samples/cu30/Pages/Students/Index.cshtml.cs?name=snippet_All&highlight=26,28-29,31,34-41,68-70)]
+[!code-csharp[Main](intro/samples/cu30/Pages/Students/Index.cshtml.cs?name=snippet_All&highlight=15-20,23-30,57-59)]
 
 Powyższy kod ma następujące działanie:
 
 * Zmienia typ `Students` właściwości z `IList<Student>` na `PaginatedList<Student>` .
 * Dodaje indeks strony, bieżącą `sortOrder` i `currentFilter` do `OnGetAsync` sygnatury metody.
-* Zapisuje porządek sortowania we właściwości CurrentSort.
+* Zapisuje porządek sortowania we `CurrentSort` właściwości.
 * Resetuje indeks strony do 1, gdy istnieje nowy ciąg wyszukiwania.
 * Używa `PaginatedList` klasy do uzyskiwania jednostek ucznia.
+* Ustawia `pageSize` na 3. Rzeczywista aplikacja użyje [konfiguracji](xref:fundamentals/configuration/index) w celu ustawienia wartości rozmiaru strony.
 
 Wszystkie `OnGetAsync` otrzymane parametry mają wartość null, gdy:
 
@@ -212,7 +214,7 @@ Jeśli ciąg wyszukiwania zostanie zmieniony podczas stronicowania, Strona zosta
 
   `PaginatedList.CreateAsync`Metoda konwertuje studenta zapytania na jedną stronę uczniów w typie kolekcji, który obsługuje stronicowanie. Ta pojedyncza strona studentów jest przenoszona na Razor stronę.
 
-  Dwa znaki zapytania po `pageIndex` `PaginatedList.CreateAsync` wywołaniu reprezentują [operator łączenia wartości null](/dotnet/csharp/language-reference/operators/null-conditional-operator). Operator łączenia wartości null definiuje wartość domyślną dla typu dopuszczającego wartość null. Wyrażenie `(pageIndex ?? 1)` oznacza zwrócenie wartości, `pageIndex` Jeśli ma wartość. Jeśli `pageIndex` nie ma wartości, zwróć 1.
+  Dwa znaki zapytania po `pageIndex` `PaginatedList.CreateAsync` wywołaniu reprezentują [operator łączenia wartości null](/dotnet/csharp/language-reference/operators/null-conditional-operator). Operator łączenia wartości null definiuje wartość domyślną dla typu dopuszczającego wartość null. Wyrażenie `pageIndex ?? 1` zwraca wartość `pageIndex` , jeśli ma wartość, w przeciwnym razie zwraca 1.
 
 ### <a name="add-paging-links-to-the-no-locrazor-page"></a>Dodaj linki stronicowania do Razor strony
 
@@ -258,7 +260,7 @@ Utwórz plik *Pages/about. cshtml* o następującym kodzie:
 
 ### <a name="create-the-page-model"></a>Tworzenie modelu strony
 
-Utwórz plik *Pages/on. cshtml. cs* o następującym kodzie:
+Zaktualizuj plik *Pages/about. Odpoznaj* się do następującego kodu:
 
 [!code-csharp[Main](intro/samples/cu30/Pages/About.cshtml.cs)]
 

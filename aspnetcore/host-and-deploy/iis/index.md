@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/index
-ms.openlocfilehash: 1338ecd6205a351b54a58522b1713a6d70e2d22a
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: f648837ce42bef4a828d7eda1a6abdfdd8ac07a2
+ms.sourcegitcommit: e519d95d17443abafba8f712ac168347b15c8b57
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634751"
+ms.lasthandoff: 10/02/2020
+ms.locfileid: "91654039"
 ---
 # <a name="host-aspnet-core-on-windows-with-iis"></a>ASP.NET Core hosta w systemie Windows z usługami IIS
 
@@ -475,7 +475,7 @@ Aby hostować aplikację ASP.NET Core jako aplikację podrzędną w innej aplika
 
 1. Kliknij prawym przyciskiem myszy folder subapp w Menedżerze usług IIS, a następnie wybierz polecenie **Konwertuj na aplikację**.
 
-1. W oknie dialogowym **Dodawanie aplikacji** Użyj przycisku **Wybierz** dla **puli aplikacji** , aby przypisać pulę aplikacji utworzoną dla aplikacji podrzędnej. Kliknij przycisk **OK**.
+1. W oknie dialogowym **Dodawanie aplikacji** Użyj przycisku **Wybierz** dla **puli aplikacji** , aby przypisać pulę aplikacji utworzoną dla aplikacji podrzędnej. Wybierz przycisk **OK**.
 
 Przypisanie oddzielnej puli aplikacji do aplikacji podrzędnej jest wymagane w przypadku korzystania z modelu hostingu w procesie.
 
@@ -535,7 +535,7 @@ Jeśli proces roboczy usług IIS wymaga podwyższonego poziomu dostępu do aplik
 
    ![Okno dialogowe Wybieranie użytkowników lub grup dla folderu aplikacji: Nazwa puli aplikacji "domyślna pula" jest dołączana do "puli aplikacji IIS \" w obszarze nazw obiektów przed wybraniem pozycji" Sprawdź nazwy ".](index/_static/select-users-or-groups-1.png)
 
-1. Kliknij przycisk **OK**.
+1. Wybierz przycisk **OK**.
 
    ![Okno dialogowe Wybieranie użytkowników lub grup dla folderu aplikacji: po wybraniu pozycji "Sprawdź nazwy" w obszarze nazwy obiektów zostanie wyświetlona nazwa obiektu "domyślna pula aplikacji".](index/_static/select-users-or-groups-2.png)
 
@@ -548,24 +548,6 @@ ICACLS C:\sites\MyWebApp /grant "IIS AppPool\DefaultAppPool":F
 ```
 
 Aby uzyskać więcej informacji, zobacz temat [icacls](/windows-server/administration/windows-commands/icacls) .
-
-## <a name="http2-support"></a>Obsługa protokołu HTTP/2
-
-[Protokół HTTP/2](https://httpwg.org/specs/rfc7540.html) jest obsługiwany z ASP.NET Core w następujących scenariuszach wdrażania usług IIS:
-
-* W procesie
-  * Windows Server 2016/Windows 10 lub nowszy; Program IIS 10 lub nowszy
-  * Połączenie TLS 1,2 lub nowsze
-* Pozaprocesowe
-  * Windows Server 2016/Windows 10 lub nowszy; Program IIS 10 lub nowszy
-  * Połączenia z serwerem granicznym dostępnym publicznie korzystają z protokołu HTTP/2, ale połączenie zwrotnego serwera proxy z [serwerem Kestrel](xref:fundamentals/servers/kestrel) korzysta z protokołu HTTP/1.1.
-  * Połączenie TLS 1,2 lub nowsze
-
-W przypadku wdrożenia w procesie podczas ustanawiania połączenia HTTP/2 w raportach [HttpRequest. Protocol](xref:Microsoft.AspNetCore.Http.HttpRequest.Protocol*) `HTTP/2` . W przypadku wdrożenia poza procesem, gdy jest nawiązywane połączenie HTTP/2, raporty [HttpRequest. Protocol](xref:Microsoft.AspNetCore.Http.HttpRequest.Protocol*) `HTTP/1.1` .
-
-Aby uzyskać więcej informacji na temat modeli hostingu w procesie i poza procesami, zobacz <xref:host-and-deploy/aspnet-core-module> .
-
-Protokół HTTP/2 jest domyślnie włączony. Połączenia powracają do protokołu HTTP/1.1, jeśli połączenie HTTP/2 nie zostało ustanowione. Aby uzyskać więcej informacji na temat konfiguracji protokołu HTTP/2 z wdrożeniami usług IIS, zobacz [http/2 w usługach IIS](/iis/get-started/whats-new-in-iis-10/http2-on-iis).
 
 ## <a name="cors-preflight-requests"></a>Żądania inspekcji wstępnej CORS
 
@@ -606,10 +588,10 @@ Użyj jednego z poniższych metod, aby włączyć moduł inicjowania aplikacji d
 
   1. W panelu **połączenia** wybierz pozycję **Pule aplikacji** .
   1. Kliknij prawym przyciskiem myszy pulę aplikacji aplikacji na liście i wybierz pozycję **Ustawienia zaawansowane**.
-  1. Domyślny **tryb uruchamiania** to **OnDemand**. Ustaw **tryb uruchamiania** na **AlwaysRunning**. Kliknij przycisk **OK**.
+  1. Domyślny **tryb uruchamiania** to **OnDemand**. Ustaw **tryb uruchamiania** na **AlwaysRunning**. Wybierz przycisk **OK**.
   1. Otwórz węzeł **Lokacje** w panelu **połączenia** .
   1. Kliknij prawym przyciskiem myszy aplikację i wybierz pozycję Zarządzaj ustawieniami zaawansowanymi **witryny sieci Web** > **Advanced Settings**.
-  1. Domyślnym ustawieniem **wstępnego ładowania** jest **wartość false**. Ustaw dla opcji **wstępnego ładowania** **wartość true**. Kliknij przycisk **OK**.
+  1. Domyślnym ustawieniem **wstępnego ładowania** jest **wartość false**. Ustaw dla opcji **wstępnego ładowania** **wartość true**. Wybierz przycisk **OK**.
 
 * Za pomocą *web.config*Dodaj `<applicationInitialization>` element z `doAppInitAfterRestart` ustawionym do `true` `<system.webServer>` elementów w pliku *web.config* aplikacji:
 
@@ -632,7 +614,7 @@ Aby zapobiec przekroczeniu przez aplikację, należy ustawić limit czasu bezczy
 
 1. W panelu **połączenia** wybierz pozycję **Pule aplikacji** .
 1. Kliknij prawym przyciskiem myszy pulę aplikacji aplikacji na liście i wybierz pozycję **Ustawienia zaawansowane**.
-1. Domyślny **limit czasu bezczynności (w minutach)** wynosi **20** minut. Ustaw **limit czasu bezczynności (w minutach)** na **0** (zero). Kliknij przycisk **OK**.
+1. Domyślny **limit czasu bezczynności (w minutach)** wynosi **20** minut. Ustaw **limit czasu bezczynności (w minutach)** na **0** (zero). Wybierz przycisk **OK**.
 1. Odtwórz proces roboczy.
 
 Aby zapobiec przekroczeniu limitu [czasu hostowanych przez aplikacje](#out-of-process-hosting-model) aplikacji, użyj jednej z następujących metod:
@@ -1075,7 +1057,7 @@ Aby hostować aplikację ASP.NET Core jako aplikację podrzędną w innej aplika
 
 1. Kliknij prawym przyciskiem myszy folder subapp w Menedżerze usług IIS, a następnie wybierz polecenie **Konwertuj na aplikację**.
 
-1. W oknie dialogowym **Dodawanie aplikacji** Użyj przycisku **Wybierz** dla **puli aplikacji** , aby przypisać pulę aplikacji utworzoną dla aplikacji podrzędnej. Kliknij przycisk **OK**.
+1. W oknie dialogowym **Dodawanie aplikacji** Użyj przycisku **Wybierz** dla **puli aplikacji** , aby przypisać pulę aplikacji utworzoną dla aplikacji podrzędnej. Wybierz przycisk **OK**.
 
 Przypisanie oddzielnej puli aplikacji do aplikacji podrzędnej jest wymagane w przypadku korzystania z modelu hostingu w procesie.
 
@@ -1135,7 +1117,7 @@ Jeśli proces roboczy usług IIS wymaga podwyższonego poziomu dostępu do aplik
 
    ![Okno dialogowe Wybieranie użytkowników lub grup dla folderu aplikacji: Nazwa puli aplikacji "domyślna pula" jest dołączana do "puli aplikacji IIS \" w obszarze nazw obiektów przed wybraniem pozycji" Sprawdź nazwy ".](index/_static/select-users-or-groups-1.png)
 
-1. Kliknij przycisk **OK**.
+1. Wybierz przycisk **OK**.
 
    ![Okno dialogowe Wybieranie użytkowników lub grup dla folderu aplikacji: po wybraniu pozycji "Sprawdź nazwy" w obszarze nazwy obiektów zostanie wyświetlona nazwa obiektu "domyślna pula aplikacji".](index/_static/select-users-or-groups-2.png)
 
@@ -1206,10 +1188,10 @@ Użyj jednego z poniższych metod, aby włączyć moduł inicjowania aplikacji d
 
   1. W panelu **połączenia** wybierz pozycję **Pule aplikacji** .
   1. Kliknij prawym przyciskiem myszy pulę aplikacji aplikacji na liście i wybierz pozycję **Ustawienia zaawansowane**.
-  1. Domyślny **tryb uruchamiania** to **OnDemand**. Ustaw **tryb uruchamiania** na **AlwaysRunning**. Kliknij przycisk **OK**.
+  1. Domyślny **tryb uruchamiania** to **OnDemand**. Ustaw **tryb uruchamiania** na **AlwaysRunning**. Wybierz przycisk **OK**.
   1. Otwórz węzeł **Lokacje** w panelu **połączenia** .
   1. Kliknij prawym przyciskiem myszy aplikację i wybierz pozycję Zarządzaj ustawieniami zaawansowanymi **witryny sieci Web** > **Advanced Settings**.
-  1. Domyślnym ustawieniem **wstępnego ładowania** jest **wartość false**. Ustaw dla opcji **wstępnego ładowania** **wartość true**. Kliknij przycisk **OK**.
+  1. Domyślnym ustawieniem **wstępnego ładowania** jest **wartość false**. Ustaw dla opcji **wstępnego ładowania** **wartość true**. Wybierz przycisk **OK**.
 
 * Za pomocą *web.config*Dodaj `<applicationInitialization>` element z `doAppInitAfterRestart` ustawionym do `true` `<system.webServer>` elementów w pliku *web.config* aplikacji:
 
@@ -1232,7 +1214,7 @@ Aby zapobiec przekroczeniu przez aplikację, należy ustawić limit czasu bezczy
 
 1. W panelu **połączenia** wybierz pozycję **Pule aplikacji** .
 1. Kliknij prawym przyciskiem myszy pulę aplikacji aplikacji na liście i wybierz pozycję **Ustawienia zaawansowane**.
-1. Domyślny **limit czasu bezczynności (w minutach)** wynosi **20** minut. Ustaw **limit czasu bezczynności (w minutach)** na **0** (zero). Kliknij przycisk **OK**.
+1. Domyślny **limit czasu bezczynności (w minutach)** wynosi **20** minut. Ustaw **limit czasu bezczynności (w minutach)** na **0** (zero). Wybierz przycisk **OK**.
 1. Odtwórz proces roboczy.
 
 Aby zapobiec przekroczeniu limitu [czasu hostowanych przez aplikacje](#out-of-process-hosting-model) aplikacji, użyj jednej z następujących metod:
@@ -1676,7 +1658,7 @@ Aby hostować aplikację ASP.NET Core jako aplikację podrzędną w innej aplika
 
 1. Kliknij prawym przyciskiem myszy folder subapp w Menedżerze usług IIS, a następnie wybierz polecenie **Konwertuj na aplikację**.
 
-1. W oknie dialogowym **Dodawanie aplikacji** Użyj przycisku **Wybierz** dla **puli aplikacji** , aby przypisać pulę aplikacji utworzoną dla aplikacji podrzędnej. Kliknij przycisk **OK**.
+1. W oknie dialogowym **Dodawanie aplikacji** Użyj przycisku **Wybierz** dla **puli aplikacji** , aby przypisać pulę aplikacji utworzoną dla aplikacji podrzędnej. Wybierz przycisk **OK**.
 
 Przypisanie oddzielnej puli aplikacji do aplikacji podrzędnej jest wymagane w przypadku korzystania z modelu hostingu w procesie.
 
@@ -1731,7 +1713,7 @@ Jeśli proces roboczy usług IIS wymaga podwyższonego poziomu dostępu do aplik
 
    ![Okno dialogowe Wybieranie użytkowników lub grup dla folderu aplikacji: Nazwa puli aplikacji "domyślna pula" jest dołączana do "puli aplikacji IIS \" w obszarze nazw obiektów przed wybraniem pozycji" Sprawdź nazwy ".](index/_static/select-users-or-groups-1.png)
 
-1. Kliknij przycisk **OK**.
+1. Wybierz przycisk **OK**.
 
    ![Okno dialogowe Wybieranie użytkowników lub grup dla folderu aplikacji: po wybraniu pozycji "Sprawdź nazwy" w obszarze nazwy obiektów zostanie wyświetlona nazwa obiektu "domyślna pula aplikacji".](index/_static/select-users-or-groups-2.png)
 

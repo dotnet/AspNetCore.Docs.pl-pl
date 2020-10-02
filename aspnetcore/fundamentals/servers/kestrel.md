@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/kestrel
-ms.openlocfilehash: 5890e56f65712bcd781a3aad278a5aaa7914d0ea
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 44558a0f2fdc61eb860223658f5bef1d0117ba87
+ms.sourcegitcommit: e519d95d17443abafba8f712ac168347b15c8b57
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635024"
+ms.lasthandoff: 10/02/2020
+ms.locfileid: "91653955"
 ---
 # <a name="kestrel-web-server-implementation-in-aspnet-core"></a>Implementacja serwera sieci Web Kestrel w ASP.NET Core
 
@@ -354,6 +354,14 @@ webBuilder.ConfigureKestrel(serverOptions =>
 ```
 
 Wartość domyślna to 96 KB (98 304).
+
+### <a name="trailers"></a>Przyczep
+
+[!INCLUDE[](~/includes/trailers.md)]
+
+### <a name="reset"></a>Reset
+
+[!INCLUDE[](~/includes/reset.md)]
 
 ### <a name="synchronous-io"></a>Synchroniczne operacje we/wy
 

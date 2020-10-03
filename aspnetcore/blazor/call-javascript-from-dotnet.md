@@ -5,7 +5,7 @@ description: Dowiedz się, jak wywoływać funkcje języka JavaScript z metod .N
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/17/2020
+ms.date: 10/02/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: da4ce8a2610fc07d22153f66831d693ae66e0fe5
-ms.sourcegitcommit: 6c82d78662332cd40d614019b9ed17c46e25be28
+ms.openlocfilehash: 89ffdfe2b714941440d7560b0ff1331a5c5523f6
+ms.sourcegitcommit: c0a15ab8549cb729731a0fdf1d7da0b7feaa11ff
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/29/2020
-ms.locfileid: "91424155"
+ms.lasthandoff: 10/02/2020
+ms.locfileid: "91671746"
 ---
 # <a name="call-javascript-functions-from-net-methods-in-aspnet-core-no-locblazor"></a>Wywoływanie funkcji języka JavaScript z metod .NET w ASP.NET Core Blazor
 
@@ -529,6 +529,117 @@ public async ValueTask<string> Prompt(string message)
     return await module.InvokeAsync<string>("showPrompt", message);
 }
 ```
+
+## <a name="use-of-javascript-libraries-that-render-ui-dom-elements"></a>Korzystanie z bibliotek języka JavaScript, które renderują interfejs użytkownika (elementy DOM)
+
+Czasami warto używać bibliotek języka JavaScript, które tworzą widoczne elementy interfejsu użytkownika w modelu DOM przeglądarki. Na pierwszy rzut oka może wydawać się trudne, ponieważ Blazor system różnicowania polega na kontroli nad drzewem elementów Dom i uruchamianiu do błędów, jeśli jakiś kod zewnętrzny przydzieli drzewo Dom i unieważnia swój mechanizm do zastosowania różnic. Nie jest to Blazor specyficzne ograniczenie. To samo wyzwanie występuje w przypadku wszystkich opartych na różnicach struktur interfejsu użytkownika.
+
+Na szczęście proste osadzanie wygenerowanego zewnętrznie interfejsu użytkownika w Blazor interfejsie użytkownika składnika jest niezawodne. Zalecaną techniką jest `.razor` utworzenie pustego elementu przez kod składnika (plik). W odniesieniu do Blazor systemu różnicowego, element jest zawsze pusty, dlatego moduł renderowania nie odnosi się do elementu i zamiast niego opuszcza jego zawartość. Dzięki temu można bezpiecznie wypełnić element dowolną zewnętrznie zarządzaną zawartością.
+
+Poniższy przykład demonstruje koncepcję. W `if` instrukcji when `firstRender` `true` , zrób coś z `myElement` . Na przykład Wywołaj zewnętrzną bibliotekę JavaScript w celu jej wypełnienia. Blazor pozostawia zawartość elementu tylko do momentu usunięcia tego składnika. Po usunięciu składnika zostanie również usunięta cała poddrzewo DOM składnika.
+
+```razor
+<h1>Hello! This is a Blazor component rendered at @DateTime.Now</h1>
+
+<div @ref="myElement"></div>
+
+@code {
+    HtmlElement myElement;
+    
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            ...
+        }
+    }
+}
+```
+
+Jako bardziej szczegółowy przykład rozważmy poniższy składnik, który renderuje interaktywną mapę przy użyciu [interfejsów API MapBox typu open source](https://www.mapbox.com/):
+
+```razor
+@inject IJSRuntime JS
+@implements IAsyncDisposable
+
+<div @ref="mapElement" style='width: 400px; height: 300px;'></div>
+
+<button @onclick="() => ShowAsync(51.454514, -2.587910)">Show Bristol, UK</button>
+<button @onclick="() => ShowAsync(35.6762, 139.6503)">Show Tokyo, Japan</button>
+
+@code
+{
+    ElementReference mapElement;
+    IJSObjectReference mapModule;
+    IJSObjectReference mapInstance;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            mapModule = await JS.InvokeAsync<IJSObjectReference>(
+                "import", "./mapComponent.js");
+            mapInstance = await mapModule.InvokeAsync<IJSObjectReference>(
+                "addMapToElement", mapElement);
+        }
+    }
+
+    Task ShowAsync(double latitude, double longitude)
+        => mapModule.InvokeVoidAsync("setMapCenter", mapInstance, latitude, 
+            longitude).AsTask();
+
+    private async ValueTask IAsyncDisposable.DisposeAsync()
+    {
+        await mapInstance.DisposeAsync();
+        await mapModule.DisposeAsync();
+    }
+}
+```
+
+Odpowiedni moduł JavaScript, który powinien być umieszczony w `wwwroot/mapComponent.js` , jest następujący:
+
+```javascript
+import 'https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js';
+
+// TO MAKE THE MAP APPEAR YOU MUST ADD YOUR ACCESS TOKEN FROM 
+// https://account.mapbox.com
+mapboxgl.accessToken = '{ACCESS TOKEN}';
+
+export function addMapToElement(element) {
+  return new mapboxgl.Map({
+    container: element,
+    style: 'mapbox://styles/mapbox/streets-v11',
+    center: [-74.5, 40],
+    zoom: 9
+  });
+}
+
+export function setMapCenter(map, latitude, longitude) {
+  map.setCenter([longitude, latitude]);
+}
+```
+
+W poprzednim przykładzie Zastąp ciąg `{ACCESS TOKEN}` prawidłowym tokenem dostępu, z którego można uzyskać dostęp https://account.mapbox.com .
+
+Aby wygenerować poprawne style, Dodaj następujący tag arkusza stylów do strony HTML hosta ( `index.html` lub `_Host.cshtml` ):
+
+```html
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" />
+```
+
+W powyższym przykładzie jest tworzony interaktywny interfejs użytkownika mapy, w którym użytkownik:
+
+* Można przeciągnąć, aby przewinąć lub powiększyć.
+* Kliknij przycisk przyciski, aby przejść do wstępnie zdefiniowanych lokalizacji.
+
+<img src="https://user-images.githubusercontent.com/1101362/94939821-92ef6700-04ca-11eb-858e-fff6df0053ae.png" width="600" />
+
+Najważniejsze kwestie, które należy zrozumieć:
+
+ * Wartość `<div>` with `@ref="mapElement"` ma wartość pustą Blazor . Z tego względu `mapbox-gl.js` można bezpiecznie wypełnić i zmodyfikować jego zawartość w czasie. Tej techniki można użyć z dowolną biblioteką języka JavaScript, która renderuje interfejs użytkownika. Można nawet osadzić składniki z struktury SPA w języku JavaScript innej firmy w Blazor składnikach programu, o ile nie spróbują się dowiedzieć i modyfikować innych części strony. *Nie* jest bezpieczny dla zewnętrznego kodu JavaScript, aby modyfikować elementy, które nie są Blazor traktowane jako puste.
+ * Korzystając z tego podejścia, należy wziąć pod uwagę reguły dotyczące sposobu Blazor zachowywania lub niszczenia elementów dom. W poprzednim przykładzie składnik bezpiecznie obsługuje przycisk kliknij zdarzenia i aktualizuje istniejące wystąpienie mapy, ponieważ elementy DOM są zachowywane w miarę możliwości domyślnie. Jeśli renderuje listę elementów mapy z wewnątrz `@foreach` pętli, chcesz użyć, `@key` Aby zapewnić zachowywanie wystąpień składników. W przeciwnym razie zmiany w danych listy mogą spowodować wystąpienie składników, aby zachować stan poprzednich wystąpień w niepożądany sposób. Aby uzyskać więcej informacji, zobacz [Używanie @key do zachowywania elementów i składników](xref:blazor/components/index#use-key-to-control-the-preservation-of-elements-and-components).
+
+Ponadto w poprzednim przykładzie pokazano, jak można hermetyzować logikę JavaScript i zależności w module ES6 i ładować ją dynamicznie przy użyciu `import` identyfikatora. Aby uzyskać więcej informacji, zobacz temat [izolacja JavaScript i odwołania do obiektów](#blazor-javascript-isolation-and-object-references).
 
 ::: moniker-end
 

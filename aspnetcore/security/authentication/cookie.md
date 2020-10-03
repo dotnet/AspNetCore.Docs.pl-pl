@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/cookie
-ms.openlocfilehash: 24ba49828db08fdd67723c81ac0c8d9981ab3404
-ms.sourcegitcommit: 47c9a59ff8a359baa6bca2637d3af87ddca1245b
+ms.openlocfilehash: 211b6c7ec0bc7a48671e614427961cb332d06aa3
+ms.sourcegitcommit: c0a15ab8549cb729731a0fdf1d7da0b7feaa11ff
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/27/2020
-ms.locfileid: "88945418"
+ms.lasthandoff: 10/02/2020
+ms.locfileid: "91671772"
 ---
 # <a name="use-no-loccookie-authentication-without-no-locaspnet-core-identity"></a>Użyj cookie uwierzytelniania bez ASP.NET Core Identity
 
@@ -36,9 +36,7 @@ ASP.NET Core Identity jest kompletnym, w pełni funkcjonalnym dostawcą uwierzyt
 
 W celach demonstracyjnych w przykładowej aplikacji konto użytkownika dla hipotetycznego użytkownika, Maria Rodriguez jest stałe do aplikacji. Zaloguj się przy użyciu adresu **e-mail** `maria.rodriguez@contoso.com` i hasła. Użytkownik jest uwierzytelniany w `AuthenticateUser` metodzie w pliku *Pages/Account/Login. cshtml. cs* . W świecie rzeczywistym użytkownik zostanie uwierzytelniony w odniesieniu do bazy danych.
 
-## <a name="configuration"></a>Konfigurowanie
-
-Jeśli aplikacja nie korzysta z [pakietu Microsoft. AspNetCore. app](xref:fundamentals/metapackage-app), Utwórz odwołanie do pakietu w pliku projektu dla elementu [Microsoft. AspNetCore. Authentication. Cookie Pakiet s](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Cookies/) .
+## <a name="configuration"></a>Konfiguracja
 
 W `Startup.ConfigureServices` metodzie Utwórz usługi pośredniczące uwierzytelniania przy użyciu <xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication*> <xref:Microsoft.Extensions.DependencyInjection.CookieExtensions.AddCookie*> metod i:
 
@@ -259,7 +257,7 @@ ASP.NET Core Identity jest kompletnym, w pełni funkcjonalnym dostawcą uwierzyt
 
 W celach demonstracyjnych w przykładowej aplikacji konto użytkownika dla hipotetycznego użytkownika, Maria Rodriguez jest stałe do aplikacji. Zaloguj się przy użyciu adresu **e-mail** `maria.rodriguez@contoso.com` i hasła. Użytkownik jest uwierzytelniany w `AuthenticateUser` metodzie w pliku *Pages/Account/Login. cshtml. cs* . W świecie rzeczywistym użytkownik zostanie uwierzytelniony w odniesieniu do bazy danych.
 
-## <a name="configuration"></a>Konfigurowanie
+## <a name="configuration"></a>Konfiguracja
 
 Jeśli aplikacja nie korzysta z [pakietu Microsoft. AspNetCore. app](xref:fundamentals/metapackage-app), Utwórz odwołanie do pakietu w pliku projektu dla elementu [Microsoft. AspNetCore. Authentication. Cookie Pakiet s](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Cookies/) .
 
@@ -468,7 +466,7 @@ await HttpContext.SignInAsync(
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:security/authorization/limitingidentitybyscheme>
 * <xref:security/authorization/claims>

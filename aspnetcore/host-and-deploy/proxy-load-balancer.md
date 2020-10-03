@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/proxy-load-balancer
-ms.openlocfilehash: 209f75edc2901422b94c619a505e0b8316aec699
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: 2babfb33921412f5da20d2b5060766b7ee483392
+ms.sourcegitcommit: c0a15ab8549cb729731a0fdf1d7da0b7feaa11ff
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865393"
+ms.lasthandoff: 10/02/2020
+ms.locfileid: "91671759"
 ---
 # <a name="configure-aspnet-core-to-work-with-proxy-servers-and-load-balancers"></a>Konfigurowanie ASP.NET Core do pracy z serwerami proxy i usługami równoważenia obciążenia
 
@@ -48,7 +48,7 @@ Zgodnie z Konwencją serwery proxy przesyłają dalej informacje w nagłówkach 
 | X-Forwarded-proto | Wartość schematu inicjującego (HTTP/HTTPS). Ta wartość może być również listą schematów, jeśli żądanie przełączyło wiele serwerów proxy. |
 | X-Forward-Host | Oryginalna wartość pola nagłówka hosta. Zazwyczaj proxy nie modyfikują nagłówka hosta. Zobacz [Poradnik zabezpieczeń firmy Microsoft CVE-2018-0787](https://github.com/aspnet/Announcements/issues/295) , aby uzyskać informacje na temat luki w zabezpieczeniach dotyczącej podniesienia uprawnień, która ma wpływ na systemy, w których serwer proxy nie weryfikuje ani nie ogranicza nagłówków hosta do znanych prawidłowych wartości. |
 
-Przekazane nagłówki — oprogramowanie pośredniczące, z pakietu [Microsoft. AspNetCore. HttpOverrides](https://www.nuget.org/packages/Microsoft.AspNetCore.HttpOverrides/) , odczytuje te nagłówki i wypełnia pola skojarzone w <xref:Microsoft.AspNetCore.Http.HttpContext> .
+Przekazane nagłówki pośredniczące ( <xref:Microsoft.AspNetCore.HttpOverrides.ForwardedHeadersMiddleware> ), odczytują te nagłówki i wypełniają pola skojarzone w <xref:Microsoft.AspNetCore.Http.HttpContext> .
 
 Aktualizacje oprogramowania pośredniczącego:
 
@@ -380,7 +380,7 @@ services.Configure<ForwardedHeadersOptions>(options =>
 > [!IMPORTANT]
 > Zezwalanie na nagłówki tylko zaufanym serwerom proxy i sieciom. W przeciwnym razie ataki [metodą fałszowania adresów IP](https://www.iplocation.net/ip-spoofing) są możliwe.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:host-and-deploy/web-farm>
 * [Poradnik zabezpieczeń firmy Microsoft CVE-2018-0787: ASP.NET Core podniesienia poziomu uprawnień](https://github.com/aspnet/Announcements/issues/295)
@@ -708,7 +708,7 @@ services.Configure<ForwardedHeadersOptions>(options =>
 > [!IMPORTANT]
 > Zezwalanie na nagłówki tylko zaufanym serwerom proxy i sieciom. W przeciwnym razie ataki [metodą fałszowania adresów IP](https://www.iplocation.net/ip-spoofing) są możliwe.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:host-and-deploy/web-farm>
 * [Poradnik zabezpieczeń firmy Microsoft CVE-2018-0787: ASP.NET Core podniesienia poziomu uprawnień](https://github.com/aspnet/Announcements/issues/295)

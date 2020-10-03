@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/filters
-ms.openlocfilehash: c97e3afbbf94a4cb721c5d814a377eec3e26a03b
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: eeae167286e793ecd5a547cea0142cf7d8014ece
+ms.sourcegitcommit: c0a15ab8549cb729731a0fdf1d7da0b7feaa11ff
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865404"
+ms.lasthandoff: 10/02/2020
+ms.locfileid: "91671785"
 ---
 # <a name="filters-in-aspnet-core"></a>Filtry w ASP.NET Core
 
@@ -221,7 +221,7 @@ Pomocnik `TestController`:
 
 <!-- test via  webBuilder.UseStartup<Startup>(); -->
 
-Nawigowanie w celu `https://localhost:5001/Test2/FilterTest2` uruchomienia następującego kodu:
+Nawigowanie w celu `https://localhost:5001/Test/FilterTest2` uruchomienia następującego kodu:
 
 * `TestController.OnActionExecuting`
   * `MySampleActionFilter.OnActionExecuting`
@@ -260,8 +260,8 @@ Filtr globalny zostanie dodany w `StartUp.ConfigureServices` :
   * `MySampleActionFilter.OnActionExecuting`
     * `MyAction2FilterAttribute.OnActionExecuting`
       * `Test2Controller.FilterTest2`
-    * `MySampleActionFilter.OnActionExecuted`
-  * `MyAction2FilterAttribute.OnResultExecuting`
+    * `MyAction2FilterAttribute.OnResultExecuting`
+  * `MySampleActionFilter.OnActionExecuted`
 * `Test2Controller.OnActionExecuted`
 
 `Order`Właściwość przesłania zakres podczas określania kolejności, w której są uruchamiane filtry. Filtry są sortowane najpierw według kolejności, a następnie zakres jest używany do przerwania powiązań. Wszystkie wbudowane filtry implementują `IOrderedFilter` i ustawiają `Order` wartość domyślną 0. Jak wspomniano wcześniej, filtry na poziomie kontrolera [Order](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.Core/src/Filters/ControllerActionFilter.cs#L15-L17) ustawiają Właściwość Order `int.MinValue` dla filtrów wbudowanych, zakres określa kolejność, chyba że `Order` jest ustawiona na wartość różną od zera.

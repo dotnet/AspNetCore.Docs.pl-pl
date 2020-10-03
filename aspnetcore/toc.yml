@@ -933,6 +933,9 @@
         - name: Przekształcanie pliku web.config
           displayName: 'deploy, publish'
           uid: host-and-deploy/iis/transform-webconfig
+        - name: HTTP/2
+          displayName: 'deploy, publish'
+          uid: host-and-deploy/iis/protocols
     - name: Kestrel
       uid: fundamentals/servers/kestrel
       displayName: 'deploy, publish, server'
@@ -989,7 +992,7 @@
   items:
     - name: Omówienie
       uid: security/index
-    - name: Uwierzytelnianie
+    - name: Authentication
       items:
         - name: Omówienie
           uid: security/authentication/index

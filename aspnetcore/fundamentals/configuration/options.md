@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/configuration/options
-ms.openlocfilehash: a6af5a7b1b4bc066a563c7cac59274fd39594cf6
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 6eafad63bd4c49cee6a85108b37a8b61e1214bce
+ms.sourcegitcommit: d7991068bc6b04063f4bd836fc5b9591d614d448
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632593"
+ms.lasthandoff: 10/06/2020
+ms.locfileid: "91762337"
 ---
 # <a name="options-pattern-in-aspnet-core"></a>Wzorzec opcji na platformie ASP.NET Core
 
@@ -37,6 +37,8 @@ Wzorzec opcji używa klas, aby zapewnić silnie określony dostęp do grup powi�
 * [Separacja obaw](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#separation-of-concerns): ustawienia dla różnych części aplikacji nie są zależne ani powiązane ze sobą.
 
 Opcje umożliwiają również mechanizm weryfikacji danych konfiguracyjnych. Aby uzyskać więcej informacji, zobacz sekcję [Opcje walidacji](#options-validation) .
+
+Ten temat zawiera informacje dotyczące wzorca opcji w ASP.NET Core. Aby uzyskać informacje na temat używania wzorca opcji w aplikacjach konsolowych, zobacz [Opcje wzorca w programie .NET](/dotnet/core/extensions/options).
 
 [Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/options/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
 

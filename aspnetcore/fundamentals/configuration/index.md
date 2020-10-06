@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/configuration/index
-ms.openlocfilehash: c6b77f20792c32a697fff8d1d78ef3c2536c5f8f
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 7565ede55acd936072fc1930918d46808548f287
+ms.sourcegitcommit: d7991068bc6b04063f4bd836fc5b9591d614d448
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722900"
+ms.lasthandoff: 10/06/2020
+ms.locfileid: "91762350"
 ---
 # <a name="configuration-in-aspnet-core"></a>Konfiguracja w ASP.NET Core
 
@@ -41,6 +41,8 @@ Konfiguracja w ASP.NET Core jest wykonywana przy użyciu co najmniej jednego [do
 * Niestandardowi dostawcy, instalowani lub utworzony
 * Pliki katalogu
 * Obiekty w pamięci .NET
+
+Ten temat zawiera informacje dotyczące konfiguracji w ASP.NET Core. Aby uzyskać informacje na temat korzystania z konfiguracji w aplikacjach konsolowych, zobacz [Konfiguracja platformy .NET](/dotnet/core/extensions/configuration).
 
 [Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
 
@@ -69,7 +71,7 @@ Poniższy kod wyświetla dostawców konfiguracji włączonych w kolejności, w j
 
 [!code-csharp[](index/samples/3.x/ConfigSample/Pages/Index2.cshtml.cs?name=snippet)]
 
-### <a name="appsettingsjson"></a>appsettings.jsna
+### <a name="appsettingsjson"></a>appsettings.json
 
 Rozważmy następujące *appsettings.js* pliku:
 
@@ -81,7 +83,7 @@ Poniższy kod z [pobranego przykładu](https://github.com/dotnet/AspNetCore.Docs
 
 Domyślna <xref:Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider> Konfiguracja ładowania w następującej kolejności:
 
-1. *appsettings.jsna*
+1. *appsettings.json*
 1. *appSettings.* `Environment` *. JSON* : na przykład, *AppSettings*. ***Środowisko produkcyjne***. *JSON* i *AppSettings*. ***Programowanie***. pliki *JSON* . Wersja środowiska pliku jest ładowana na podstawie [IHostingEnvironment. EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostingEnvironment.EnvironmentName*). Aby uzyskać więcej informacji, zobacz <xref:fundamentals/environments>.
 
 *AppSettings*. `Environment` . wartości *JSON* przesłaniają klucze w *appsettings.jsna*. Na przykład domyślnie:
@@ -320,7 +322,7 @@ W poniższej tabeli przedstawiono dostawców konfiguracji dostępnych do ASP.NET
 
 Typową sekwencją dostawców konfiguracji jest:
 
-1. *appsettings.jsna*
+1. *appsettings.json*
 1. *AppSettings*. `Environment` . *kod JSON*
 1. [Menedżer wpisów tajnych](xref:security/app-secrets)
 1. Zmienne środowiskowe używające [dostawcy konfiguracji zmiennych środowiskowych](#evcp).
@@ -762,7 +764,7 @@ Aby uzyskać więcej informacji na temat migrowania konfiguracji aplikacji z wcz
 
 <xref:Microsoft.AspNetCore.Hosting.IHostingStartup>Implementacja umożliwia dodawanie ulepszeń do aplikacji podczas uruchamiania z zewnętrznego zestawu poza `Startup` klasą aplikacji. Aby uzyskać więcej informacji, zobacz <xref:fundamentals/configuration/platform-specific-configuration>.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Kod źródłowy konfiguracji](https://github.com/dotnet/extensions/tree/master/src/Configuration)
 * <xref:fundamentals/configuration/options>

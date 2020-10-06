@@ -1,7 +1,7 @@
 ---
-title: Host ogólny .NET
+title: Host ogólny .NET w ASP.NET Core
 author: rick-anderson
-description: Dowiedz się więcej o hoście ogólnym programu .NET Core, który jest odpowiedzialny za uruchamianie aplikacji i zarządzanie okresem istnienia.
+description: Użyj hosta ogólnego platformy .NET Core w aplikacjach ASP.NET Core.  Host ogólny jest odpowiedzialny za uruchamianie aplikacji i zarządzanie okresem istnienia.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
@@ -18,18 +18,20 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/host/generic-host
-ms.openlocfilehash: 59cfae9ff619f8de894686c4b773d66e5cbe10ad
-ms.sourcegitcommit: d60bfd52bfb559e805abd654b87a2a0c7eb69cf8
+ms.openlocfilehash: d3de81ce7248372279b423da865513ee5db73c79
+ms.sourcegitcommit: d7991068bc6b04063f4bd836fc5b9591d614d448
 ms.translationtype: MT
 ms.contentlocale: pl-PL
 ms.lasthandoff: 10/06/2020
-ms.locfileid: "91754739"
+ms.locfileid: "91762324"
 ---
-# <a name="net-generic-host"></a>Host ogólny .NET
+# <a name="net-generic-host-in-aspnet-core"></a>Host ogólny .NET w ASP.NET Core
 
 ::: moniker range=">= aspnetcore-5.0"
 
 Szablony ASP.NET Core tworzą hosta ogólnego platformy .NET Core ( <xref:Microsoft.Extensions.Hosting.HostBuilder> ).
+
+Ten temat zawiera informacje dotyczące korzystania z hosta ogólnego platformy .NET w ASP.NET Core. Aby uzyskać informacje na temat korzystania z hosta ogólnego platformy .NET w aplikacjach konsolowych, zobacz [host ogólny programu .NET](/dotnet/core/extensions/generic-host).
 
 ## <a name="host-definition"></a>Definicja hosta
 
@@ -529,6 +531,8 @@ public class Program
 ::: moniker range=">= aspnetcore-3.0 < aspnetcore-5.0"
 
 Szablony ASP.NET Core tworzą hosta ogólnego platformy .NET Core ( <xref:Microsoft.Extensions.Hosting.HostBuilder> ).
+
+Ten temat zawiera informacje dotyczące korzystania z hosta ogólnego platformy .NET w ASP.NET Core. Aby uzyskać informacje na temat korzystania z hosta ogólnego platformy .NET w aplikacjach konsolowych, zobacz [host ogólny programu .NET](/dotnet/core/extensions/generic-host).
 
 ## <a name="host-definition"></a>Definicja hosta
 

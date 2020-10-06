@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/lifecycle
-ms.openlocfilehash: a43268acdb53bf811148fe795ef0434662ddb32f
-ms.sourcegitcommit: d7991068bc6b04063f4bd836fc5b9591d614d448
+ms.openlocfilehash: 100007a5757c1a54333c57adf573bcb8cc4fdd85
+ms.sourcegitcommit: 652aefa1e0d570df42e8bca15ca43b2d250009f3
 ms.translationtype: MT
 ms.contentlocale: pl-PL
 ms.lasthandoff: 10/06/2020
-ms.locfileid: "91762221"
+ms.locfileid: "91764059"
 ---
 # <a name="aspnet-core-no-locblazor-lifecycle"></a>ASP.NET Core Blazor cykl życia
 
@@ -41,14 +41,14 @@ Zdarzenia cyklu życia składnika:
    * Wywołanie [`OnInitialized{Async}`](#component-initialization-methods) . W przypadku <xref:System.Threading.Tasks.Task> zwrócenia elementu <xref:System.Threading.Tasks.Task> jest oczekiwany, a następnie jest renderowany składnik. Jeśli element <xref:System.Threading.Tasks.Task> nie jest zwracany, renderowanie składnika.
 1. Wywołanie [`OnParametersSet{Async}`](#after-parameters-are-set) . W przypadku <xref:System.Threading.Tasks.Task> zwrócenia elementu <xref:System.Threading.Tasks.Task> jest oczekiwany, a następnie jest renderowany składnik. Jeśli element <xref:System.Threading.Tasks.Task> nie jest zwracany, renderowanie składnika.
 
-![Zdarzenia cyklu życia składnika::: No-Loc (Razor)::: składnik w::: No-Loc (Blazor)::](lifecycle/_static/lifecycle1.png)
+<img src="lifecycle/_static/lifecycle1.png" alt="Component lifecycle events of a Razor component in Blazor" data-linktype="relative-path" style="max-width:50%;display:block;margin:0 auto">
 
 Przetwarzanie zdarzeń w Document Object Model (DOM):
 
 1. Procedura obsługi zdarzeń jest uruchamiana.
 1. W przypadku <xref:System.Threading.Tasks.Task> zwrócenia elementu <xref:System.Threading.Tasks.Task> jest oczekiwany, a następnie jest renderowany składnik. Jeśli element <xref:System.Threading.Tasks.Task> nie jest zwracany, składnik jest renderowany.
 
-![Przetwarzanie zdarzeń Document Object Model (DOM)](lifecycle/_static/lifecycle2.png)
+<img src="lifecycle/_static/lifecycle2.png" alt="Document Object Model (DOM) event processing" data-linktype="relative-path" style="max-width:50%;display:block;margin:0 auto">
 
 `Render`Cykl życia:
 
@@ -57,7 +57,7 @@ Przetwarzanie zdarzeń w Document Object Model (DOM):
 1. Oczekiwanie na zaktualizowanie modelu DOM.
 1. Wywołanie [`OnAfterRender{Async}`](#after-component-render) .
 
-![Cykl życia renderowania](lifecycle/_static/lifecycle3.png)
+<img src="lifecycle/_static/lifecycle3.png" alt="Render lifecycle" data-linktype="relative-path" style="max-width:50%;display:block;margin:0 auto">
 
 Deweloperzy mogą wykonywać wywołania [`StateHasChanged`](#state-changes) w wyniku.
 

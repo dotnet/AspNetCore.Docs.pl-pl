@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/signalr-blazor-webassembly
-ms.openlocfilehash: a8b1e7cd94836e89c438045df4bb8dd049da7f72
-ms.sourcegitcommit: e519d95d17443abafba8f712ac168347b15c8b57
+ms.openlocfilehash: e4c77bd5bf5a26a11cdd23664ac24ae50986969b
+ms.sourcegitcommit: d60bfd52bfb559e805abd654b87a2a0c7eb69cf8
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/02/2020
-ms.locfileid: "91653987"
+ms.lasthandoff: 10/06/2020
+ms.locfileid: "91754713"
 ---
 # <a name="use-aspnet-core-no-locsignalr-with-no-locblazor-webassembly"></a>Użyj ASP.NET Core SignalR z Blazor WebAssembly
 
@@ -59,7 +59,7 @@ Na końcu tego samouczka będziesz mieć działającą aplikację czatu.
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
 <!-- * [Visual Studio for Mac version 8.8 or later (in preview)](https://visualstudio.microsoft.com/vs/mac/) -->
-* [Visual Studio dla komputerów Mac wersja 8,8 lub nowsza (w wersji zapoznawczej)](https://docs.microsoft.com/visualstudio/releasenotes/vs2019-mac-preview-relnotes)
+* [Visual Studio dla komputerów Mac wersja 8,8 lub nowsza (w wersji zapoznawczej)](/visualstudio/releasenotes/vs2019-mac-preview-relnotes)
 * [!INCLUDE [.NET Core 5.0 SDK](~/includes/5.0-SDK.md)]
 
 # <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli/)

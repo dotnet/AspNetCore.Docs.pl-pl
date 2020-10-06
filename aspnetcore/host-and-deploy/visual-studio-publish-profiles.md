@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/visual-studio-publish-profiles
-ms.openlocfilehash: a7bbc3f3a0a0d5a320bd290d325f0c01390828b4
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: e86a648e2707e808452e3bc92d991058c8fde480
+ms.sourcegitcommit: d60bfd52bfb559e805abd654b87a2a0c7eb69cf8
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634166"
+ms.lasthandoff: 10/06/2020
+ms.locfileid: "91754648"
 ---
 # <a name="visual-studio-publish-profiles-pubxml-for-aspnet-core-app-deployment"></a>Profile publikacji programu Visual Studio (. pubxml) dla wdrożenia aplikacji ASP.NET Core
 
@@ -119,7 +119,7 @@ dotnet publish -c Release -o C:\MyWebs\test
 
 Właściwości programu MSBuild można przekazywać przy użyciu jednego z następujących formatów:
 
-* `p:<NAME>=<VALUE>`
+* `-p:<NAME>=<VALUE>`
 * `/p:<NAME>=<VALUE>`
 
 Na przykład następujące polecenie publikuje `Release` kompilację do udziału sieciowego. Udział sieciowy jest określony za pomocą ukośników (*//R8/*) i działa na wszystkich obsługiwanych platformach .NET Core.

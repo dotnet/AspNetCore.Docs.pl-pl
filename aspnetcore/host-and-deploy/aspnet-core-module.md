@@ -1,7 +1,7 @@
 ---
 title: Moduł ASP.NET Core
 author: rick-anderson
-description: Dowiedz się, jak skonfigurować moduł ASP.NET Core na potrzeby hostowania aplikacji ASP.NET Core.
+description: Dowiedz się więcej na temat modułu ASP.NET Core na potrzeby hostowania aplikacji ASP.NET Core za pomocą usług IIS.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
@@ -18,18 +18,39 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/aspnet-core-module
-ms.openlocfilehash: 9197f8509141b30dffcc2ccc11979f8853b37d39
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 8ee9ab2b598bc8ff62faa45a5666615ee7ab239b
+ms.sourcegitcommit: d60bfd52bfb559e805abd654b87a2a0c7eb69cf8
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633139"
+ms.lasthandoff: 10/06/2020
+ms.locfileid: "91754674"
 ---
 # <a name="aspnet-core-module"></a>Moduł ASP.NET Core
 
 Autorzy [Dykstra](https://github.com/tdykstra), [Rick Strahl](https://github.com/RickStrahl), [Krzysztof Ross](https://github.com/Tratcher), [Rick Anderson](https://twitter.com/RickAndMSFT), [sourabh Shirhatti](https://twitter.com/sshirhatti)i [Justin Kotalik](https://github.com/jkotalik)
 
-::: moniker range=">= aspnetcore-3.0"
+::: moniker range=">= aspnetcore-5.0"
+
+Moduł ASP.NET Core jest natywnym modułem usług IIS, który jest podłączany do potoku usług IIS, dzięki czemu aplikacje ASP.NET Core mogą współdziałać z usługami IIS. Uruchom ASP.NET Core aplikacje za pomocą usług IIS: 
+
+* Hostowanie aplikacji ASP.NET Core w procesie roboczym usług IIS ( `w3wp.exe` ), nazywanym [modelem hostingu w procesie](xref:host-and-deploy/iis/in-process-hosting).
+* Przekazywanie żądań sieci Web do zaplecza ASP.NET Core aplikacji, na których uruchomiono serwer Kestrel, nazywany [modelem hostingu poza procesem](xref:host-and-deploy/iis/out-of-process-hosting).
+
+Istnieją kompromisy między poszczególnymi modelami hostingu. Domyślnie model hostingu w procesie jest używany z powodu lepszej wydajności i diagnostyki.
+
+## <a name="install-aspnet-core-module"></a>Zainstaluj moduł ASP.NET Core
+
+Pobierz instalatora przy użyciu następującego linku:
+
+[Bieżący Instalator pakietu hostingu platformy .NET Core (Pobieranie bezpośrednie)](https://dotnet.microsoft.com/permalink/dotnetcore-current-windows-runtime-bundle-installer)
+
+Aby uzyskać szczegółowe informacje na temat sposobu instalowania modułu ASP.NET Core lub instalowania różnych wersji modułu, zobacz [Instalowanie zestawu hostingu platformy .NET Core](xref:host-and-deploy/iis/hosting-bundle).
+
+Aby zapoznać się z samouczkiem dotyczącym publikowania aplikacji ASP.NET Core na serwerze usług IIS, zobacz <xref:tutorials/publish-to-iis> .
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0 < aspnetcore-5.0"
 
 Moduł ASP.NET Core jest natywnym modułem usług IIS, który jest podłączany do potoku usług IIS:
 
@@ -63,15 +84,15 @@ Następujące cechy są stosowane podczas hostingu w procesie:
 
 * Udostępnianie puli aplikacji między aplikacjami nie jest obsługiwane. Użyj jednej puli aplikacji na aplikację.
 
-* W przypadku korzystania z [Web Deploy](/iis/publish/using-web-deploy/introduction-to-web-deploy) lub ręcznego umieszczania [ plikuapp_offline.htm we wdrożeniu](xref:host-and-deploy/iis/index#locked-deployment-files)aplikacja może nie zostać ZAMKNIĘTA natychmiast po otwarciu połączenia. Na przykład połączenie protokołu WebSocket może opóźnić zamykanie aplikacji.
+* W przypadku korzystania z [Web Deploy](/iis/publish/using-web-deploy/introduction-to-web-deploy) lub ręcznego umieszczania [ `app_offline.htm` pliku we wdrożeniu](xref:host-and-deploy/iis/index#locked-deployment-files)aplikacja może nie zostać wyłączona natychmiast po otwarciu połączenia. Na przykład połączenie protokołu WebSocket może opóźnić zamykanie aplikacji.
 
 * Architektura (bitową) aplikacji i zainstalowane środowisko uruchomieniowe (x64 lub x86) musi być zgodna z architekturą puli aplikacji.
 
-* Wykryto rozłączenia klientów. Token anulowania [HttpContext. RequestAborted](xref:Microsoft.AspNetCore.Http.HttpContext.RequestAborted*) został anulowany po rozłączeniu klienta.
+* Wykryto rozłączenia klientów. [`HttpContext.RequestAborted`](xref:Microsoft.AspNetCore.Http.HttpContext.RequestAborted*)Token anulowania jest anulowany, gdy klient odłączy się.
 
-* W ASP.NET Core 2.2.1 lub wcześniejszym <xref:System.IO.Directory.GetCurrentDirectory*> zwraca katalog procesów roboczych procesu uruchomionego przez usługi IIS, a nie katalog aplikacji (na przykład *C:\Windows\System32\inetsrv* for *w3wp.exe*).
+* W ASP.NET Core 2.2.1 lub wcześniejszym <xref:System.IO.Directory.GetCurrentDirectory*> zwraca katalog procesów roboczych procesu uruchomionego przez usługi IIS, a nie katalog aplikacji (na przykład `C:\Windows\System32\inetsrv` w przypadku `w3wp.exe` ).
 
-  Przykładowy kod, który ustawia bieżący katalog aplikacji, znajduje się w [klasie CurrentDirectoryHelpers](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/aspnet-core-module/samples_snapshot/3.x/CurrentDirectoryHelpers.cs). Wywołaj `SetCurrentDirectory` metodę. Kolejne wywołania w celu <xref:System.IO.Directory.GetCurrentDirectory*> udostępnienia katalogu aplikacji.
+  Przykładowy kod, który ustawia bieżący katalog aplikacji, znajduje się w [ `CurrentDirectoryHelpers` klasie](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/aspnet-core-module/samples_snapshot/3.x/CurrentDirectoryHelpers.cs). Wywołaj `SetCurrentDirectory` metodę. Kolejne wywołania w celu <xref:System.IO.Directory.GetCurrentDirectory*> udostępnienia katalogu aplikacji.
 
 * Podczas hostingu w procesie <xref:Microsoft.AspNetCore.Authentication.AuthenticationService.AuthenticateAsync*> nie jest wywoływana wewnętrznie w celu zainicjowania użytkownika. W związku z tym, <xref:Microsoft.AspNetCore.Authentication.IClaimsTransformation> implementacja użyta do przekształcenia oświadczeń po każdym uwierzytelnieniu nie jest domyślnie aktywowana. Podczas przekształcania oświadczeń z <xref:Microsoft.AspNetCore.Authentication.IClaimsTransformation> implementacją, wywołaj polecenie <xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication*> Dodaj usługi uwierzytelniania:
 
@@ -92,7 +113,7 @@ Następujące cechy są stosowane podczas hostingu w procesie:
 
 ### <a name="out-of-process-hosting-model"></a>Model hostingu poza procesem
 
-Aby skonfigurować aplikację do hostingu poza procesem, ustaw wartość `<AspNetCoreHostingModel>` właściwości na `OutOfProcess` w pliku projektu (*. csproj*):
+Aby skonfigurować aplikację do hostingu poza procesem, ustaw wartość `<AspNetCoreHostingModel>` właściwości na `OutOfProcess` w pliku projektu ( `.csproj` ):
 
 ```xml
 <PropertyGroup>
@@ -106,14 +127,14 @@ Wartość `<AspNetCoreHostingModel>` jest uwzględniana wielkość liter, dlateg
 
 Serwer [Kestrel](xref:fundamentals/servers/kestrel) jest używany zamiast serwera http usług IIS ( `IISHttpServer` ).
 
-W przypadku [CreateDefaultBuilder](xref:fundamentals/host/generic-host#default-builder-settings) połączeń z <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIISIntegration*> :
+W przypadku nieprzetwarzanych [`CreateDefaultBuilder`](xref:fundamentals/host/generic-host#default-builder-settings) wywołań <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIISIntegration*> :
 
 * Skonfiguruj port i ścieżkę bazową, na której serwer powinien nasłuchiwać przy uruchomionym za modułem ASP.NET Core.
 * Skonfiguruj hosta do przechwytywania błędów uruchamiania.
 
 ### <a name="hosting-model-changes"></a>Zmiany modelu hostingu
 
-Jeśli to `hostingModel` ustawienie zostanie zmienione w pliku *web.config* (wyjaśniono w sekcji [Konfiguracja z web.config](#configuration-with-webconfig) ), moduł odtwarza proces roboczy dla usług IIS.
+Jeśli to `hostingModel` ustawienie zostanie zmienione w `web.config` pliku (wyjaśniono w sekcji [Konfiguracja z `web.config` ](#configuration-with-webconfig) ), moduł odtwarza proces roboczy dla usług IIS.
 
 W przypadku IIS Express moduł nie odtwarza procesu roboczego, ale zamiast tego wyzwala bezpieczne zamknięcie bieżącego procesu IIS Express. Następne żądanie do aplikacji powoduje zduplikowanie nowego procesu IIS Express.
 
@@ -137,7 +158,7 @@ Aby uzyskać instrukcje dotyczące sposobu instalowania modułu ASP.NET Core, zo
 
 Moduł ASP.NET Core jest skonfigurowany przy użyciu `aspNetCore` sekcji `system.webServer` węzła w pliku *web.config* witryny.
 
-Następujący *web.config* plik jest publikowany dla [wdrożenia zależnego od platformy](/dotnet/articles/core/deploying/#framework-dependent-deployments-fdd) i konfiguruje moduł ASP.NET Core do obsługi żądań lokacji:
+Następujący `web.config` plik jest publikowany dla [wdrożenia zależnego od platformy](/dotnet/articles/core/deploying/#framework-dependent-deployments-fdd) i konfiguruje moduł ASP.NET Core do obsługi żądań lokacji:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -176,19 +197,19 @@ Następujące *web.config* są publikowane dla [wdrożenia samodzielnego](/dotne
 </configuration>
 ```
 
-<xref:System.Configuration.SectionInformation.InheritInChildApplications*>Właściwość jest ustawiona na `false` , aby wskazać, że ustawienia określone w [\<location>](/iis/manage/managing-your-configuration-settings/understanding-iis-configuration-delegation#the-concept-of-location) elemencie nie są dziedziczone przez aplikacje, które znajdują się w podkatalogu aplikacji.
+<xref:System.Configuration.SectionInformation.InheritInChildApplications*>Właściwość jest ustawiona na `false` , aby wskazać, że ustawienia określone w [`<location>`](/iis/manage/managing-your-configuration-settings/understanding-iis-configuration-delegation#the-concept-of-location) elemencie nie są dziedziczone przez aplikacje, które znajdują się w podkatalogu aplikacji.
 
-Gdy aplikacja zostanie wdrożona do [Azure App Service](https://azure.microsoft.com/services/app-service/), `stdoutLogFile` ścieżka jest ustawiona na `\\?\%home%\LogFiles\stdout` . Ścieżka zapisuje dzienniki stdout do folderu *LogFiles* , który jest lokalizacją automatycznie utworzoną przez usługę.
+Gdy aplikacja zostanie wdrożona do [Azure App Service](https://azure.microsoft.com/services/app-service/), `stdoutLogFile` ścieżka jest ustawiona na `\\?\%home%\LogFiles\stdout` . Ścieżka zapisuje dzienniki stdout do `LogFiles` folderu, który jest lokalizacją automatycznie utworzoną przez usługę.
 
 Aby uzyskać informacje na temat konfiguracji aplikacji podrzędnych usług IIS, zobacz <xref:host-and-deploy/iis/index#sub-applications> .
 
 ### <a name="attributes-of-the-aspnetcore-element"></a>Atrybuty elementu aspNetCore
 
-| Atrybut | Opis | Domyślny |
+| Atrybut | Opis | Domyślne |
 | --------- | ----------- | :-----: |
 | `arguments` | <p>Opcjonalny atrybut ciągu.</p><p>Argumenty do pliku wykonywalnego określonego w **processPath**.</p> | |
 | `disableStartUpErrorPage` | <p>Opcjonalny atrybut Boolean.</p><p>W przypadku wartości true strona **błędu 502,5 procesu** jest pomijana, a strona kodu stanu 502 skonfigurowana w *web.config* ma pierwszeństwo.</p> | `false` |
-| `forwardWindowsAuthToken` | <p>Opcjonalny atrybut Boolean.</p><p>Jeśli wartość jest równa true, token jest przekazywany do procesu podrzędnego, który nasłuchuje na% ASPNETCORE_PORT% jako nagłówek "MS-ASPNETCORE-WINAUTHTOKEN" na żądanie. Jest odpowiedzialny za ten proces, aby wywołać metodę CloseHandle na tym tokenie na żądanie.</p> | `true` |
+| `forwardWindowsAuthToken` | <p>Opcjonalny atrybut Boolean.</p><p>Jeśli wartość jest równa true, token jest przekazywany do procesu podrzędnego, który nasłuchuje w `%ASPNETCORE_PORT%` formie nagłówka `'MS-ASPNETCORE-WINAUTHTOKEN'` na żądanie. Jest odpowiedzialny za ten proces, aby wywołać metodę CloseHandle na tym tokenie na żądanie.</p> | `true` |
 | `hostingModel` | <p>Opcjonalny atrybut ciągu.</p><p>Określa model hostingu jako proces ( `InProcess` / `inprocess` ) lub out-of-Process ( `OutOfProcess` / `outofprocess` ).</p> | `InProcess`<br>`inprocess` |
 | `processesPerApplication` | <p>Opcjonalny atrybut Integer.</p><p>Określa liczbę wystąpień procesu określonego w ustawieniu **processPath** , które może być przypadające na aplikację.</p><p>&dagger;W przypadku hostingu w procesie wartość jest ograniczona do `1` .</p><p>Ustawienie `processesPerApplication` jest niezalecane. Ten atrybut zostanie usunięty w przyszłych wydaniach.</p> | Wartooć `1`<br>Długości `1`<br>Maksymalny `100`&dagger; |
 | `processPath` | <p>Wymagany atrybut ciągu.</p><p>Ścieżka do pliku wykonywalnego, który uruchamia proces nasłuchiwanie żądań HTTP. Obsługiwane są ścieżki względne. Jeśli ścieżka zaczyna się od `.` , ścieżka jest uznawana za względną względem katalogu głównego witryny.</p> | |
@@ -197,13 +218,13 @@ Aby uzyskać informacje na temat konfiguracji aplikacji podrzędnych usług IIS,
 | `shutdownTimeLimit` | <p>Opcjonalny atrybut Integer.</p><p>Czas w sekundach, przez który moduł czeka, aż plik wykonywalny zostanie bezpiecznie zamknięty po wykryciu pliku *app_offline.htm* .</p> | Wartooć `10`<br>Długości `0`<br>Maksymalny `600` |
 | `startupTimeLimit` | <p>Opcjonalny atrybut Integer.</p><p>Czas w sekundach, przez który moduł czeka, aż plik wykonywalny uruchomi proces nasłuchujący na porcie. Jeśli ten limit czasu zostanie przekroczony, moduł zakasuje proces.</p><p>Podczas hostingu *w procesie*: proces **nie** jest ponownie uruchamiany i **nie używa ustawienia** **rapidFailsPerMinute** .</p><p>Podczas hostingu *poza procesem*: moduł próbuje ponownie uruchomić proces, gdy odbierze nowe żądanie i kontynuuje próbę ponownego uruchomienia procesu na kolejnych żądaniach przychodzących, chyba że aplikacja nie uruchomi **rapidFailsPerMinute** liczby razy w ostatniej minucie.</p><p>Wartość 0 (zero) **nie** jest uważana za nieskończony limit czasu.</p> | Wartooć `120`<br>Długości `0`<br>Maksymalny `3600` |
 | `stdoutLogEnabled` | <p>Opcjonalny atrybut Boolean.</p><p>Jeśli wartość jest równa true, **stdout** i **stderr** dla procesu określonego w **processPath** są przekierowywane do pliku określonego w **stdoutLogFile**.</p> | `false` |
-| `stdoutLogFile` | <p>Opcjonalny atrybut ciągu.</p><p>Określa względną lub bezwzględną ścieżkę do pliku, dla którego jest rejestrowany **stdout** i **stderr** z procesu określonego w **processPath** . Ścieżki względne są względne względem katalogu głównego witryny. Każda ścieżka rozpoczynająca `.` się od jest określana względem katalogu głównego witryny, a wszystkie inne ścieżki są traktowane jako ścieżki bezwzględne. Wszystkie foldery podane w ścieżce są tworzone przez moduł po utworzeniu pliku dziennika. Przy użyciu ograniczników podkreślenia, sygnatury czasowej, identyfikatora procesu i rozszerzenia pliku (*log*) są dodawane do ostatniego segmentu ścieżki **stdoutLogFile** . Jeśli `.\logs\stdout` jest podana jako wartość, przykładowy dziennik stdout jest zapisywany jako *stdout_20180205194132_1934. log* w folderze *Logs* , gdy jest zapisywany na 2/5/2018 o godzinie 19:41:32 przy użyciu identyfikatora procesu 1934.</p> | `aspnetcore-stdout` |
+| `stdoutLogFile` | <p>Opcjonalny atrybut ciągu.</p><p>Określa względną lub bezwzględną ścieżkę do pliku, dla którego jest rejestrowany **stdout** i **stderr** z procesu określonego w **processPath** . Ścieżki względne są względne względem katalogu głównego witryny. Każda ścieżka rozpoczynająca `.` się od jest określana względem katalogu głównego witryny, a wszystkie inne ścieżki są traktowane jako ścieżki bezwzględne. Wszystkie foldery podane w ścieżce są tworzone przez moduł po utworzeniu pliku dziennika. Przy użyciu ograniczników podkreślenia, sygnatury czasowej, identyfikatora procesu i rozszerzenia pliku ( `.log` ) są dodawane do ostatniego segmentu ścieżki **stdoutLogFile** . Jeśli `.\logs\stdout` jest podana jako wartość, przykładowy dziennik stdout jest zapisywany jako `stdout_20180205194132_1934.log` w folderze, `logs` gdy zapisywany w dniu 2/5/2018 o godzinie 19:41:32 z identyfikatorem procesu 1934.</p> | `aspnetcore-stdout` |
 
 ### <a name="set-environment-variables"></a>Ustawianie zmiennych środowiskowych
 
 Zmienne środowiskowe można określić dla procesu w `processPath` atrybucie. Określ zmienną środowiskową z `<environmentVariable>` elementem podrzędnym `<environmentVariables>` elementu kolekcji. Zmienne środowiskowe ustawione w tej sekcji mają pierwszeństwo przed zmiennymi środowiskowymi systemowymi.
 
-W poniższym przykładzie są ustawiane dwie zmienne środowiskowe w *web.config*. `ASPNETCORE_ENVIRONMENT` konfiguruje środowisko aplikacji do programu `Development` . Deweloper może tymczasowo ustawić tę wartość w pliku *web.config* w celu wymuszenia załadowania [strony wyjątku dewelopera](xref:fundamentals/error-handling) podczas debugowania wyjątku aplikacji. `CONFIG_DIR` to przykład zmiennej środowiskowej zdefiniowanej przez użytkownika, w której deweloper ma napisać kod, który odczytuje wartość przy uruchamianiu, aby utworzyć ścieżkę do ładowania pliku konfiguracji aplikacji.
+Poniższy przykład ustawia dwie zmienne środowiskowe w `web.config` . `ASPNETCORE_ENVIRONMENT` konfiguruje środowisko aplikacji do programu `Development` . Deweloper może tymczasowo ustawić tę wartość w pliku, `web.config` Aby wymusić ładowanie [strony wyjątku dewelopera](xref:fundamentals/error-handling) podczas debugowania wyjątku aplikacji. `CONFIG_DIR` to przykład zmiennej środowiskowej zdefiniowanej przez użytkownika, w której deweloper ma napisać kod, który odczytuje wartość przy uruchamianiu, aby utworzyć ścieżkę do ładowania pliku konfiguracji aplikacji.
 
 ```xml
 <aspNetCore processPath="dotnet"
@@ -219,7 +240,7 @@ W poniższym przykładzie są ustawiane dwie zmienne środowiskowe w *web.config
 ```
 
 > [!NOTE]
-> Alternatywą dla ustawienia środowiska bezpośrednio w *web.config* jest uwzględnienie `<EnvironmentName>` właściwości w [profilu publikacji (. pubxml)](xref:host-and-deploy/visual-studio-publish-profiles) lub pliku projektu. To podejście ustawia środowisko w *web.config* po opublikowaniu projektu:
+> Alternatywą dla ustawienia środowiska bezpośrednio w programie `web.config` jest uwzględnienie `<EnvironmentName>` właściwości w [profilu publikacji ( `.pubxml` )](xref:host-and-deploy/visual-studio-publish-profiles) lub w pliku projektu. To podejście ustawia środowisko w `web.config` momencie opublikowania projektu:
 >
 > ```xml
 > <PropertyGroup>
@@ -230,11 +251,11 @@ W poniższym przykładzie są ustawiane dwie zmienne środowiskowe w *web.config
 > [!WARNING]
 > Dla `ASPNETCORE_ENVIRONMENT` zmiennej środowiskowej należy ustawić tylko `Development` serwery przejściowe i testowe, które nie są dostępne dla niezaufanych sieci, takich jak Internet.
 
-## <a name="app_offlinehtm"></a>app_offline.htm
+## `app_offline.htm`
 
-Jeśli plik o nazwie *app_offline.htm* zostanie wykryty w katalogu głównym aplikacji, moduł ASP.NET Core próbuje bezpiecznie zamknąć aplikację i zatrzymać przetwarzanie żądań przychodzących. Jeśli aplikacja nadal działa po upływie liczby sekund zdefiniowanej w programie `shutdownTimeLimit` , moduł ASP.NET Core kasuje uruchomiony proces.
+Jeśli plik o nazwie `app_offline.htm` zostanie wykryty w katalogu głównym aplikacji, moduł ASP.NET Core próbuje bezpiecznie zamknąć aplikację i zatrzymać przetwarzanie żądań przychodzących. Jeśli aplikacja nadal działa po upływie liczby sekund zdefiniowanej w programie `shutdownTimeLimit` , moduł ASP.NET Core kasuje uruchomiony proces.
 
-Gdy plik *app_offline.htm* jest obecny, moduł ASP.NET Core reaguje na żądania, wysyłając z powrotem zawartość pliku *app_offline.htm* . Po usunięciu pliku *app_offline.htm* następnym żądaniu zostanie uruchomiona aplikacja.
+Gdy `app_offline.htm` plik jest obecny, moduł ASP.NET Core odpowiada na żądania, wysyłając z powrotem zawartość `app_offline.htm` pliku. Po `app_offline.htm` usunięciu pliku, następne żądanie uruchamia aplikację.
 
 W przypadku korzystania z modelu hostingu poza procesem aplikacja może nie zostać wyłączona natychmiast, jeśli istnieje otwarte połączenie. Na przykład połączenie protokołu WebSocket może opóźnić zamykanie aplikacji.
 
@@ -248,7 +269,7 @@ W przypadku hostingu w procesie, Jeśli uruchomienie aplikacji przez moduł ASP.
 
 W przypadku hostingu poza procesem, jeśli moduł ASP.NET Core nie może uruchomić procesu zaplecza lub proces zaplecza zostanie uruchomiony, ale nie nasłuchuje na skonfigurowanym porcie, zostanie wyświetlona strona kod stanu *niepowodzenia procesu 502,5* .
 
-Aby pominąć tę stronę i przywrócić domyślną stronę kodową stanu 5xx usługi IIS, użyj `disableStartUpErrorPage` atrybutu. Aby uzyskać więcej informacji o konfigurowaniu niestandardowych komunikatów o błędach, zobacz [Błędy \<httpErrors> http ](/iis/configuration/system.webServer/httpErrors/).
+Aby pominąć tę stronę i przywrócić domyślną stronę kodową stanu 5xx usługi IIS, użyj `disableStartUpErrorPage` atrybutu. Aby uzyskać więcej informacji o konfigurowaniu niestandardowych komunikatów o błędach, zobacz [Błędy `<httpErrors>` http ](/iis/configuration/system.webServer/httpErrors/).
 
 ## <a name="log-creation-and-redirection"></a>Tworzenie i przekierowywanie dzienników
 
@@ -260,7 +281,7 @@ Użycie dziennika stdout jest zalecane tylko w przypadku rozwiązywania problem�
 
 Nie używaj dziennika stdout w celu uzyskania ogólnych celów rejestrowania aplikacji. Aby rejestrować procedury w aplikacji ASP.NET Core, użyj biblioteki rejestrowania, która ogranicza rozmiar pliku dziennika i obraca dzienniki. Aby uzyskać więcej informacji, zobacz [dostawców rejestrowania innych](xref:fundamentals/logging/index#third-party-logging-providers)firm.
 
-Sygnatura czasowa i rozszerzenie pliku są dodawane automatycznie podczas tworzenia pliku dziennika. Nazwa pliku dziennika składa się przez dołączenie sygnatury czasowej, identyfikatora procesu i rozszerzenia pliku (*log*) do ostatniego segmentu `stdoutLogFile` ścieżki (zazwyczaj *stdout*), które są rozdzielane znakami podkreślenia. Jeśli `stdoutLogFile` ścieżka kończy się od *stdout*, dziennik aplikacji o identyfikatorze PID 1934 utworzony w 2/5/2018 o 19:42:32 ma nazwę pliku *stdout_20180205194132_1934. log*.
+Sygnatura czasowa i rozszerzenie pliku są dodawane automatycznie podczas tworzenia pliku dziennika. Nazwa pliku dziennika jest złożona przez dołączenie sygnatury czasowej, identyfikatora procesu i rozszerzenia pliku ( `.log` ) do ostatniego segmentu `stdoutLogFile` ścieżki (zwykle `stdout` ) rozdzielanej znakami podkreślenia. Jeśli `stdoutLogFile` ścieżka kończy się na `stdout` , dziennik aplikacji o identyfikatorze PID 1934 utworzony w dniu 2/5/2018 o 19:42:32 ma nazwę pliku `stdout_20180205194132_1934.log` .
 
 Jeśli `stdoutLogEnabled` ma wartość false, błędy występujące podczas uruchamiania aplikacji są przechwytywane i emitowane do dziennika zdarzeń do 30 KB. Po uruchomieniu wszystkie dodatkowe dzienniki są odrzucane.
 
@@ -283,7 +304,7 @@ Aby uzyskać więcej informacji na temat formatów ścieżki, zobacz [formaty ś
 
 ## <a name="enhanced-diagnostic-logs"></a>Udoskonalone dzienniki diagnostyczne
 
-Moduł ASP.NET Core można skonfigurować w celu udostępnienia dzienników diagnostyki rozszerzonej. Dodaj `<handlerSettings>` element do `<aspNetCore>` elementu w *web.config*. Ustawienie w `debugLevel` celu `TRACE` ujawniania większej wierności informacji diagnostycznych:
+Moduł ASP.NET Core można skonfigurować w celu udostępnienia dzienników diagnostyki rozszerzonej. Dodaj `<handlerSettings>` element do `<aspNetCore>` elementu w `web.config` . Ustawienie w `debugLevel` celu `TRACE` ujawniania większej wierności informacji diagnostycznych:
 
 ```xml
 <aspNetCore processPath="dotnet"
@@ -298,13 +319,13 @@ Moduł ASP.NET Core można skonfigurować w celu udostępnienia dzienników diag
 </aspNetCore>
 ```
 
-Wszystkie foldery w ścieżce (*dzienniki* w poprzednim przykładzie) są tworzone przez moduł po utworzeniu pliku dziennika. Pula aplikacji musi mieć dostęp do zapisu w lokalizacji, w której zapisano dzienniki (Użyj `IIS AppPool\<app_pool_name>` do zapewnienia uprawnienia do zapisu).
+Wszystkie foldery w ścieżce ( `logs` w poprzednim przykładzie) są tworzone przez moduł po utworzeniu pliku dziennika. Pula aplikacji musi mieć dostęp do zapisu w lokalizacji, w której zapisano dzienniki (Użyj `IIS AppPool\{APP POOL NAME}` , gdzie symbol zastępczy `{APP POOL NAME}` jest nazwą puli aplikacji, aby zapewnić uprawnienie do zapisu).
 
 Wartości poziomu debugowania ( `debugLevel` ) mogą zawierać zarówno poziom, jak i lokalizację.
 
 Poziomy (w kolejności od najmniejszej do największej szczegółowości):
 
-* BŁĄD
+* ERROR
 * OSTRZEŻENIE
 * INFORMACJE
 * TRACE
@@ -317,19 +338,19 @@ Lokalizacje (wiele lokalizacji jest dozwolonych):
 
 Ustawienia programu obsługi można także zapewnić za pomocą zmiennych środowiskowych:
 
-* `ASPNETCORE_MODULE_DEBUG_FILE`: Ścieżka do pliku dziennika debugowania. (Domyślnie: *aspnetcore-Debug. log*)
+* `ASPNETCORE_MODULE_DEBUG_FILE`: Ścieżka do pliku dziennika debugowania. (Domyślnie: `aspnetcore-debug.log` )
 * `ASPNETCORE_MODULE_DEBUG`: Debugowanie ustawienia poziomu.
 
 > [!WARNING]
 > **Nie** pozostawiaj włączonej rejestracji debugowania w ramach wdrożenia dłużej niż jest to wymagane, aby rozwiązać problem. Rozmiar dziennika nie jest ograniczony. Pozostawienie włączonego dziennika debugowania może spowodować wyczerpanie dostępnego miejsca na dysku i awarię serwera lub usługi App Service.
 
-Zobacz sekcję [Configuration with web.config](#configuration-with-webconfig) , aby zobaczyć przykład `aspNetCore` elementu w pliku *web.config* .
+Zapoznaj się z tematem [Konfiguracja z web.config](#configuration-with-webconfig) , aby zapoznać się z przykładem `aspNetCore` elementu w `web.config` pliku.
 
 ## <a name="modify-the-stack-size"></a>Modyfikowanie rozmiaru stosu
 
 *Stosuje się tylko w przypadku korzystania z modelu hostingu w procesie.*
 
-Skonfiguruj zarządzany rozmiar stosu przy użyciu `stackSize` Ustawienia w bajtach w *web.config*. Domyślny rozmiar to `1048576` bajty (1 MB).
+Skonfiguruj zarządzany rozmiar stosu przy użyciu `stackSize` Ustawienia w bajtach w `web.config` . Domyślny rozmiar to 1 048 576 bajtów (1 MB).
 
 ```xml
 <aspNetCore processPath="dotnet"
@@ -353,7 +374,7 @@ Token parowania jest używany w celu zagwarantowania, że żądania odbierane pr
 
 ## <a name="aspnet-core-module-with-an-iis-shared-configuration"></a>Moduł ASP.NET Core z konfiguracją udostępnioną usług IIS
 
-Instalator modułu ASP.NET Core jest uruchamiany z uprawnieniami konta **TrustedInstaller** . Ponieważ konto systemu lokalnego nie ma uprawnień do modyfikowania dla ścieżki udziału używanej przez udostępnioną konfigurację usług IIS, Instalator zgłasza błąd odmowy dostępu podczas próby skonfigurowania ustawień modułu w pliku *applicationHost.config* w udziale.
+Instalator modułu ASP.NET Core jest uruchamiany z uprawnieniami konta **TrustedInstaller** . Ponieważ konto systemu lokalnego nie ma uprawnień do modyfikowania dla ścieżki udziału używanej przez udostępnioną konfigurację usług IIS, Instalator zgłasza błąd odmowy dostępu podczas próby skonfigurowania ustawień modułu w `applicationHost.config` pliku w udziale.
 
 W przypadku korzystania z konfiguracji udostępnionej przez usługi IIS na tym samym komputerze, na którym znajduje się instalacja usług IIS, uruchom Instalatora pakietu ASP.NET Core hostowania z `OPT_NO_SHARED_CONFIG_CHECK` parametrem ustawionym na `1` :
 
@@ -365,19 +386,19 @@ Jeśli ścieżka do konfiguracji udostępnionej nie znajduje się na tym samym k
 
 1. Wyłącz konfigurację udostępnioną usług IIS.
 1. Uruchom instalatora.
-1. Wyeksportuj zaktualizowany plik *applicationHost.config* do udziału.
+1. Wyeksportuj zaktualizowany `applicationHost.config` plik do udziału.
 1. Włącz ponownie konfigurację udostępnioną usług IIS.
 
 ## <a name="module-version-and-hosting-bundle-installer-logs"></a>Dzienniki instalacji pakietu i pakietów hostingu
 
 Aby określić wersję zainstalowanego modułu ASP.NET Core:
 
-1. W systemie hostingu przejdź do *%windir%\System32\inetsrv*.
-1. Znajdź plik *aspnetcore.dll* .
+1. W systemie hostingu przejdź do `%windir%\System32\inetsrv` .
+1. Znajdź `aspnetcore.dll` plik.
 1. Kliknij prawym przyciskiem myszy plik i wybierz polecenie **Właściwości** z menu kontekstowego.
 1. Wybierz kartę **szczegóły** . **Wersja pliku** i **Wersja produktu** reprezentują zainstalowaną wersję modułu.
 
-Dzienniki Instalatora pakietu hostingu dla modułu znajdują się pod adresem *C: \\ Użytkownicy \\ % username% \\ AppData \\ Local \\ temp*. Plik ma nazwę *dd_DotNetCoreWinSvrHosting__ \<timestamp> _000_AspNetCoreModule_x64. log*.
+Dzienniki Instalatora pakietu hostingu dla modułu znajdują się pod adresem `C:\Users\%UserName%\AppData\Local\Temp` . Plik ma nazwę `dd_DotNetCoreWinSvrHosting__{TIMESTAMP}_000_AspNetCoreModule_x64.log` .
 
 ## <a name="module-schema-and-configuration-file-locations"></a>Lokalizacje pliku modułu, schematu i konfiguracji
 
@@ -385,51 +406,51 @@ Dzienniki Instalatora pakietu hostingu dla modułu znajdują się pod adresem *C
 
 **IIS (x86/amd64):**
 
-* % windir% \System32\inetsrv\aspnetcore.dll
+* `%windir%\System32\inetsrv\aspnetcore.dll`
 
-* % windir% \SysWOW64\inetsrv\aspnetcore.dll
+* `%windir%\SysWOW64\inetsrv\aspnetcore.dll`
 
-* Module\V2\aspnetcorev2.dll rdzeń%ProgramFiles%\IIS\Asp.Net
+* `%ProgramFiles%\IIS\Asp.Net Core Module\V2\aspnetcorev2.dll`
 
-* % ProgramFiles (x86)% \ IIS\Asp.Net Core Module\V2\aspnetcorev2.dll
+* `%ProgramFiles(x86)%\IIS\Asp.Net Core Module\V2\aspnetcorev2.dll`
 
 **IIS Express (x86/amd64):**
 
-* %ProgramFiles%\IIS Express\aspnetcore.dll
+* `%ProgramFiles%\IIS Express\aspnetcore.dll`
 
-* % ProgramFiles (x86)% \ IIS Express\aspnetcore.dll
+* `%ProgramFiles(x86)%\IIS Express\aspnetcore.dll`
 
-* %ProgramFiles%\IIS Express\Asp.Net Core Module\V2\aspnetcorev2.dll
+* `%ProgramFiles%\IIS Express\Asp.Net Core Module\V2\aspnetcorev2.dll`
 
-* % ProgramFiles (x86)% \ Express\Asp.Net Module\V2\aspnetcorev2.dll Core usług IIS
+* `%ProgramFiles(x86)%\IIS Express\Asp.Net Core Module\V2\aspnetcorev2.dll`
 
 ### <a name="schema"></a>Schemat
 
 **IIS**
 
-* % windir% \System32\inetsrv\config\schema\aspnetcore_schema.xml
+* `%windir%\System32\inetsrv\config\schema\aspnetcore_schema.xml`
 
-* % windir% \System32\inetsrv\config\schema\aspnetcore_schema_v2.xml
+* `%windir%\System32\inetsrv\config\schema\aspnetcore_schema_v2.xml`
 
 **IIS Express**
 
-* %ProgramFiles%\IIS Express\config\schema\aspnetcore_schema.xml
+* `%ProgramFiles%\IIS Express\config\schema\aspnetcore_schema.xml`
 
-* %ProgramFiles%\IIS Express\config\schema\aspnetcore_schema_v2.xml
+* `%ProgramFiles%\IIS Express\config\schema\aspnetcore_schema_v2.xml`
 
 ### <a name="configuration"></a>Konfigurowanie
 
 **IIS**
 
-* % windir% \System32\inetsrv\config\applicationHost.config
+* `%windir%\System32\inetsrv\config\applicationHost.config`
 
 **IIS Express**
 
-* Visual Studio: {Aplikacja główna} \\.vs\config\applicationHost.config
+* Program Visual Studio: `{APPLICATION ROOT}\.vs\config\applicationHost.config`
 
-* *iisexpress.exe* INTERFEJS WIERSZA POLECENIA:% USERPROFILE% \Documents\IISExpress\config\applicationhost.config
+* *iisexpress.exe* Interfejs `%USERPROFILE%\Documents\IISExpress\config\applicationhost.config`
 
-Pliki można znaleźć, wyszukując *aspnetcore* w pliku *applicationHost.config* .
+Pliki można znaleźć, wyszukując je `aspnetcore` w `applicationHost.config` pliku.
 
 ::: moniker-end
 
@@ -599,26 +620,26 @@ Aby uzyskać informacje na temat konfiguracji aplikacji podrzędnych usług IIS,
 
 ### <a name="attributes-of-the-aspnetcore-element"></a>Atrybuty elementu aspNetCore
 
-| Atrybut | Opis | Domyślny |
+| Atrybut | Opis | Domyślne |
 | --------- | ----------- | :-----: |
-| `arguments` | <p>Opcjonalny atrybut ciągu.</p><p>Argumenty do pliku wykonywalnego określonego w **processPath**.</p> | |
+| `arguments` | <p>Opcjonalny atrybut ciągu.</p><p>Argumenty do pliku wykonywalnego określonego w `processPath` .</p> | |
 | `disableStartUpErrorPage` | <p>Opcjonalny atrybut Boolean.</p><p>W przypadku wartości true strona **błędu 502,5 procesu** jest pomijana, a strona kodu stanu 502 skonfigurowana w *web.config* ma pierwszeństwo.</p> | `false` |
 | `forwardWindowsAuthToken` | <p>Opcjonalny atrybut Boolean.</p><p>Jeśli wartość jest równa true, token jest przekazywany do procesu podrzędnego, który nasłuchuje na% ASPNETCORE_PORT% jako nagłówek "MS-ASPNETCORE-WINAUTHTOKEN" na żądanie. Jest odpowiedzialny za ten proces, aby wywołać metodę CloseHandle na tym tokenie na żądanie.</p> | `true` |
 | `hostingModel` | <p>Opcjonalny atrybut ciągu.</p><p>Określa model hostingu jako proces ( `InProcess` / `inprocess` ) lub out-of-Process ( `OutOfProcess` / `outofprocess` ).</p> | `OutOfProcess`<br>`outofprocess` |
-| `processesPerApplication` | <p>Opcjonalny atrybut Integer.</p><p>Określa liczbę wystąpień procesu określonego w ustawieniu **processPath** , które może być przypadające na aplikację.</p><p>&dagger;W przypadku hostingu w procesie wartość jest ograniczona do `1` .</p><p>Ustawienie `processesPerApplication` jest niezalecane. Ten atrybut zostanie usunięty w przyszłych wydaniach.</p> | Wartooć `1`<br>Długości `1`<br>Maksymalny `100`&dagger; |
+| `processesPerApplication` | <p>Opcjonalny atrybut Integer.</p><p>Określa liczbę wystąpień procesu określonego w `processPath` ustawieniu, które może być przypadające na aplikację.</p><p>&dagger;W przypadku hostingu w procesie wartość jest ograniczona do `1` .</p><p>Ustawienie `processesPerApplication` jest niezalecane. Ten atrybut zostanie usunięty w przyszłych wydaniach.</p> | Wartooć `1`<br>Długości `1`<br>Maksymalny `100`&dagger; |
 | `processPath` | <p>Wymagany atrybut ciągu.</p><p>Ścieżka do pliku wykonywalnego, który uruchamia proces nasłuchiwanie żądań HTTP. Obsługiwane są ścieżki względne. Jeśli ścieżka zaczyna się od `.` , ścieżka jest uznawana za względną względem katalogu głównego witryny.</p> | |
-| `rapidFailsPerMinute` | <p>Opcjonalny atrybut Integer.</p><p>Określa, ile razy proces określony w **processPath** może ulec awarii na minutę. W przypadku przekroczenia tego limitu moduł przestaje uruchomić proces przez pozostałą część minuty.</p><p>Nieobsługiwane w przypadku hostingu w procesie.</p> | Wartooć `10`<br>Długości `0`<br>Maksymalny `100` |
+| `rapidFailsPerMinute` | <p>Opcjonalny atrybut Integer.</p><p>Określa, ile razy proces określony w programie `processPath` może ulec awarii na minutę. W przypadku przekroczenia tego limitu moduł przestaje uruchomić proces przez pozostałą część minuty.</p><p>Nieobsługiwane w przypadku hostingu w procesie.</p> | Wartooć `10`<br>Długości `0`<br>Maksymalny `100` |
 | `requestTimeout` | <p>Opcjonalny atrybut TimeSpan.</p><p>Określa czas, przez który moduł ASP.NET Core czeka na odpowiedź z procesu nasłuchiwania na% ASPNETCORE_PORT%.</p><p>W wersjach modułu ASP.NET Core, który został dostarczony z wersją ASP.NET Core 2,1 lub nowszą, wartość `requestTimeout` jest określona w godzinach, minutach i sekundach.</p><p>Nie dotyczy hostingu w procesie. W przypadku hostingu w procesie moduł czeka na aplikację w celu przetworzenia żądania.</p><p>Prawidłowe wartości segmentów minut i sekund ciągu mieszczą się w zakresie 0-59. Użycie **60** w wartości minut lub sekund skutkuje *błędem wewnętrznego serwera 500*.</p> | Wartooć `00:02:00`<br>Długości `00:00:00`<br>Maksymalny `360:00:00` |
-| `shutdownTimeLimit` | <p>Opcjonalny atrybut Integer.</p><p>Czas w sekundach, przez który moduł czeka, aż plik wykonywalny zostanie bezpiecznie zamknięty po wykryciu pliku *app_offline.htm* .</p> | Wartooć `10`<br>Długości `0`<br>Maksymalny `600` |
-| `startupTimeLimit` | <p>Opcjonalny atrybut Integer.</p><p>Czas w sekundach, przez który moduł czeka, aż plik wykonywalny uruchomi proces nasłuchujący na porcie. Jeśli ten limit czasu zostanie przekroczony, moduł zakasuje proces.</p><p>Podczas hostingu *w procesie*: proces **nie** jest ponownie uruchamiany i **nie używa ustawienia** **rapidFailsPerMinute** .</p><p>Podczas hostingu *poza procesem*: moduł próbuje ponownie uruchomić proces, gdy odbierze nowe żądanie i kontynuuje próbę ponownego uruchomienia procesu na kolejnych żądaniach przychodzących, chyba że aplikacja nie uruchomi **rapidFailsPerMinute** liczby razy w ostatniej minucie.</p><p>Wartość 0 (zero) **nie** jest uważana za nieskończony limit czasu.</p> | Wartooć `120`<br>Długości `0`<br>Maksymalny `3600` |
-| `stdoutLogEnabled` | <p>Opcjonalny atrybut Boolean.</p><p>Jeśli wartość jest równa true, **stdout** i **stderr** dla procesu określonego w **processPath** są przekierowywane do pliku określonego w **stdoutLogFile**.</p> | `false` |
-| `stdoutLogFile` | <p>Opcjonalny atrybut ciągu.</p><p>Określa względną lub bezwzględną ścieżkę do pliku, dla którego jest rejestrowany **stdout** i **stderr** z procesu określonego w **processPath** . Ścieżki względne są względne względem katalogu głównego witryny. Każda ścieżka rozpoczynająca `.` się od jest określana względem katalogu głównego witryny, a wszystkie inne ścieżki są traktowane jako ścieżki bezwzględne. Wszystkie foldery podane w ścieżce są tworzone przez moduł po utworzeniu pliku dziennika. Przy użyciu ograniczników podkreślenia, sygnatury czasowej, identyfikatora procesu i rozszerzenia pliku (*log*) są dodawane do ostatniego segmentu ścieżki **stdoutLogFile** . Jeśli `.\logs\stdout` jest podana jako wartość, przykładowy dziennik stdout jest zapisywany jako *stdout_20180205194132_1934. log* w folderze *Logs* , gdy jest zapisywany na 2/5/2018 o godzinie 19:41:32 przy użyciu identyfikatora procesu 1934.</p> | `aspnetcore-stdout` |
+| `shutdownTimeLimit` | <p>Opcjonalny atrybut Integer.</p><p>Czas w sekundach, przez który moduł czeka na łagodne zamknięcie pliku wykonywalnego, gdy `app_offline.htm` zostanie wykryty.</p> | Wartooć `10`<br>Długości `0`<br>Maksymalny `600` |
+| `startupTimeLimit` | <p>Opcjonalny atrybut Integer.</p><p>Czas w sekundach, przez który moduł czeka, aż plik wykonywalny uruchomi proces nasłuchujący na porcie. Jeśli ten limit czasu zostanie przekroczony, moduł zakasuje proces.</p><p>Podczas hostingu *w procesie*: proces **nie** jest ponownie uruchamiany i **nie używa tego** `rapidFailsPerMinute` Ustawienia.</p><p>Podczas hostingu *poza procesem*: moduł próbuje ponownie uruchomić proces, gdy odbierze nowe żądanie, i kontynuuje próbę ponownego uruchomienia procesu na kolejnych żądaniach przychodzących, chyba że aplikacja nie powiedzie się `rapidFailsPerMinute` w ciągu ostatniej minuty.</p><p>Wartość 0 (zero) **nie** jest uważana za nieskończony limit czasu.</p> | Wartooć `120`<br>Długości `0`<br>Maksymalny `3600` |
+| `stdoutLogEnabled` | <p>Opcjonalny atrybut Boolean.</p><p>Jeśli wartość jest równa true, **stdout** i **stderr** dla procesu określonego w programie `processPath` są przekierowywane do pliku określonego w **stdoutLogFile**.</p> | `false` |
+| `stdoutLogFile` | <p>Opcjonalny atrybut ciągu.</p><p>Określa względną lub bezwzględną ścieżkę do pliku, dla którego `stdout` `stderr` proces określony w `processPath` jest rejestrowany. Ścieżki względne są względne względem katalogu głównego witryny. Każda ścieżka rozpoczynająca `.` się od jest określana względem katalogu głównego witryny, a wszystkie inne ścieżki są traktowane jako ścieżki bezwzględne. Wszystkie foldery podane w ścieżce są tworzone przez moduł po utworzeniu pliku dziennika. Przy użyciu ograniczników podkreślenia, sygnatury czasowej, identyfikatora procesu i rozszerzenia pliku ( `.log` ) są dodawane do ostatniego segmentu `stdoutLogFile` ścieżki. Jeśli `.\logs\stdout` jest podana jako wartość, przykładowy dziennik stdout jest zapisywany jako `stdout_20180205194132_1934.log` w folderze, `logs` gdy zapisywany w dniu 2/5/2018 o godzinie 19:41:32 z identyfikatorem procesu 1934.</p> | `aspnetcore-stdout` |
 
 ### <a name="setting-environment-variables"></a>Ustawianie zmiennych środowiskowych
 
 Zmienne środowiskowe można określić dla procesu w `processPath` atrybucie. Określ zmienną środowiskową z `<environmentVariable>` elementem podrzędnym `<environmentVariables>` elementu kolekcji. Zmienne środowiskowe ustawione w tej sekcji mają pierwszeństwo przed zmiennymi środowiskowymi systemowymi.
 
-W poniższym przykładzie są ustawiane dwie zmienne środowiskowe. `ASPNETCORE_ENVIRONMENT` konfiguruje środowisko aplikacji do programu `Development` . Deweloper może tymczasowo ustawić tę wartość w pliku *web.config* w celu wymuszenia załadowania [strony wyjątku dewelopera](xref:fundamentals/error-handling) podczas debugowania wyjątku aplikacji. `CONFIG_DIR` to przykład zmiennej środowiskowej zdefiniowanej przez użytkownika, w której deweloper ma napisać kod, który odczytuje wartość przy uruchamianiu, aby utworzyć ścieżkę do ładowania pliku konfiguracji aplikacji.
+W poniższym przykładzie są ustawiane dwie zmienne środowiskowe. `ASPNETCORE_ENVIRONMENT` konfiguruje środowisko aplikacji do programu `Development` . Deweloper może tymczasowo ustawić tę wartość w pliku, `web.config` Aby wymusić ładowanie [strony wyjątku dewelopera](xref:fundamentals/error-handling) podczas debugowania wyjątku aplikacji. `CONFIG_DIR` to przykład zmiennej środowiskowej zdefiniowanej przez użytkownika, w której deweloper ma napisać kod, który odczytuje wartość przy uruchamianiu, aby utworzyć ścieżkę do ładowania pliku konfiguracji aplikacji.
 
 ```xml
 <aspNetCore processPath="dotnet"
@@ -634,7 +655,7 @@ W poniższym przykładzie są ustawiane dwie zmienne środowiskowe. `ASPNETCORE_
 ```
 
 > [!NOTE]
-> Alternatywą dla ustawienia środowiska bezpośrednio w *web.config* jest uwzględnienie `<EnvironmentName>` właściwości w [profilu publikacji (. pubxml)](xref:host-and-deploy/visual-studio-publish-profiles) lub pliku projektu. To podejście ustawia środowisko w *web.config* po opublikowaniu projektu:
+> Alternatywą dla ustawienia środowiska bezpośrednio w programie `web.config` jest uwzględnienie `<EnvironmentName>` właściwości w [profilu publikacji (pubxml)](xref:host-and-deploy/visual-studio-publish-profiles) lub w pliku projektu. To podejście ustawia środowisko w `web.config` momencie opublikowania projektu:
 >
 > ```xml
 > <PropertyGroup>
@@ -647,9 +668,9 @@ W poniższym przykładzie są ustawiane dwie zmienne środowiskowe. `ASPNETCORE_
 
 ## <a name="app_offlinehtm"></a>app_offline.htm
 
-Jeśli plik o nazwie *app_offline.htm* zostanie wykryty w katalogu głównym aplikacji, moduł ASP.NET Core próbuje bezpiecznie zamknąć aplikację i zatrzymać przetwarzanie żądań przychodzących. Jeśli aplikacja nadal działa po upływie liczby sekund zdefiniowanej w programie `shutdownTimeLimit` , moduł ASP.NET Core kasuje uruchomiony proces.
+Jeśli plik o nazwie `app_offline.htm` zostanie wykryty w katalogu głównym aplikacji, moduł ASP.NET Core próbuje bezpiecznie zamknąć aplikację i zatrzymać przetwarzanie żądań przychodzących. Jeśli aplikacja nadal działa po upływie liczby sekund zdefiniowanej w programie `shutdownTimeLimit` , moduł ASP.NET Core kasuje uruchomiony proces.
 
-Gdy plik *app_offline.htm* jest obecny, moduł ASP.NET Core reaguje na żądania, wysyłając z powrotem zawartość pliku *app_offline.htm* . Po usunięciu pliku *app_offline.htm* następnym żądaniu zostanie uruchomiona aplikacja.
+Gdy `app_offline.htm` plik jest obecny, moduł ASP.NET Core odpowiada na żądania, wysyłając z powrotem zawartość `app_offline.htm` pliku. Po `app_offline.htm` usunięciu pliku, następne żądanie uruchamia aplikację.
 
 W przypadku korzystania z modelu hostingu poza procesem aplikacja może nie zostać wyłączona natychmiast, jeśli istnieje otwarte połączenie. Na przykład połączenie protokołu WebSocket może opóźnić zamykanie aplikacji.
 
@@ -667,7 +688,7 @@ Aby pominąć tę stronę i przywrócić domyślną stronę kodową stanu 5xx us
 
 ## <a name="log-creation-and-redirection"></a>Tworzenie i przekierowywanie dzienników
 
-Moduł ASP.NET Core przekierowuje dane wyjściowe z konsoli stdout i stderr do dysku, jeśli `stdoutLogEnabled` `stdoutLogFile` atrybuty i `aspNetCore` elementu są ustawione. Wszystkie foldery w `stdoutLogFile` ścieżce są tworzone przez moduł po utworzeniu pliku dziennika. Pula aplikacji musi mieć dostęp do zapisu w lokalizacji, w której zapisano dzienniki (Użyj `IIS AppPool\<app_pool_name>` do zapewnienia uprawnienia do zapisu).
+Moduł ASP.NET Core przekierowuje dane wyjściowe z konsoli stdout i stderr do dysku, jeśli `stdoutLogEnabled` `stdoutLogFile` atrybuty i `aspNetCore` elementu są ustawione. Wszystkie foldery w `stdoutLogFile` ścieżce są tworzone przez moduł po utworzeniu pliku dziennika. Pula aplikacji musi mieć dostęp do zapisu w lokalizacji, w której zapisano dzienniki (Użyj `IIS AppPool\{APP POOL NAME}` do udostępnienia uprawnienia do zapisu, gdzie symbol zastępczy `{APP POOL NAME}` to nazwa puli aplikacji).
 
 Dzienniki nie są obracane, chyba że zostanie wykonane odtwarzanie procesów/ponowne uruchomienie. Ponosisz odpowiedzialność dostawcy usług hostingowych, aby ograniczyć ilość miejsca na dysku zużywanej przez dzienniki.
 
@@ -675,7 +696,7 @@ Użycie dziennika stdout jest zalecane tylko w przypadku rozwiązywania problem�
 
 Nie używaj dziennika stdout w celu uzyskania ogólnych celów rejestrowania aplikacji. Aby rejestrować procedury w aplikacji ASP.NET Core, użyj biblioteki rejestrowania, która ogranicza rozmiar pliku dziennika i obraca dzienniki. Aby uzyskać więcej informacji, zobacz [dostawców rejestrowania innych](xref:fundamentals/logging/index#third-party-logging-providers)firm.
 
-Sygnatura czasowa i rozszerzenie pliku są dodawane automatycznie podczas tworzenia pliku dziennika. Nazwa pliku dziennika składa się przez dołączenie sygnatury czasowej, identyfikatora procesu i rozszerzenia pliku (*log*) do ostatniego segmentu `stdoutLogFile` ścieżki (zazwyczaj *stdout*), które są rozdzielane znakami podkreślenia. Jeśli `stdoutLogFile` ścieżka kończy się od *stdout*, dziennik aplikacji o identyfikatorze PID 1934 utworzony w 2/5/2018 o 19:42:32 ma nazwę pliku *stdout_20180205194132_1934. log*.
+Sygnatura czasowa i rozszerzenie pliku są dodawane automatycznie podczas tworzenia pliku dziennika. Nazwa pliku dziennika jest złożona przez dołączenie sygnatury czasowej, identyfikatora procesu i rozszerzenia pliku ( `.log` ) do ostatniego segmentu `stdoutLogFile` ścieżki (zwykle `stdout` ) rozdzielanej znakami podkreślenia. Jeśli `stdoutLogFile` ścieżka kończy się na `stdout` , dziennik aplikacji o identyfikatorze PID 1934 utworzony w dniu 2/5/2018 o 19:42:32 ma nazwę pliku `stdout_20180205194132_1934.log` .
 
 Jeśli `stdoutLogEnabled` ma wartość false, błędy występujące podczas uruchamiania aplikacji są przechwytywane i emitowane do dziennika zdarzeń do 30 KB. Po uruchomieniu wszystkie dodatkowe dzienniki są odrzucane.
 
@@ -696,7 +717,7 @@ Aby uzyskać więcej informacji na temat formatów ścieżki, zobacz [formaty ś
 
 ## <a name="enhanced-diagnostic-logs"></a>Udoskonalone dzienniki diagnostyczne
 
-Moduł ASP.NET Core można skonfigurować w celu udostępnienia dzienników diagnostyki rozszerzonej. Dodaj `<handlerSettings>` element do `<aspNetCore>` elementu w *web.config*. Ustawienie w `debugLevel` celu `TRACE` ujawniania większej wierności informacji diagnostycznych:
+Moduł ASP.NET Core można skonfigurować w celu udostępnienia dzienników diagnostyki rozszerzonej. Dodaj `<handlerSettings>` element do `<aspNetCore>` elementu w `web.config` . Ustawienie w `debugLevel` celu `TRACE` ujawniania większej wierności informacji diagnostycznych:
 
 ```xml
 <aspNetCore processPath="dotnet"
@@ -711,13 +732,13 @@ Moduł ASP.NET Core można skonfigurować w celu udostępnienia dzienników diag
 </aspNetCore>
 ```
 
-Foldery w ścieżce przekazanej do `<handlerSetting>` wartości (*dzienniki* w powyższym przykładzie) nie są automatycznie tworzone przez moduł i powinny być wcześniej dostępne we wdrożeniu. Pula aplikacji musi mieć dostęp do zapisu w lokalizacji, w której zapisano dzienniki (Użyj `IIS AppPool\<app_pool_name>` do zapewnienia uprawnienia do zapisu).
+Foldery w ścieżce przekazanej do `<handlerSetting>` wartości ( `logs` w poprzednim przykładzie) nie są automatycznie tworzone przez moduł i powinny być wcześniej dostępne we wdrożeniu. Pula aplikacji musi mieć dostęp do zapisu w lokalizacji, w której zapisano dzienniki (Użyj `IIS AppPool\{APP POOL NAME}` do udostępnienia uprawnienia do zapisu, gdzie symbol zastępczy `{APP POOL NAME}` to nazwa puli aplikacji).
 
 Wartości poziomu debugowania ( `debugLevel` ) mogą zawierać zarówno poziom, jak i lokalizację.
 
 Poziomy (w kolejności od najmniejszej do największej szczegółowości):
 
-* BŁĄD
+* ERROR
 * OSTRZEŻENIE
 * INFORMACJE
 * TRACE
@@ -730,13 +751,13 @@ Lokalizacje (wiele lokalizacji jest dozwolonych):
 
 Ustawienia programu obsługi można także zapewnić za pomocą zmiennych środowiskowych:
 
-* `ASPNETCORE_MODULE_DEBUG_FILE`: Ścieżka do pliku dziennika debugowania. (Domyślnie: *aspnetcore-Debug. log*)
+* `ASPNETCORE_MODULE_DEBUG_FILE`: Ścieżka do pliku dziennika debugowania. (Domyślnie: `aspnetcore-debug.log` )
 * `ASPNETCORE_MODULE_DEBUG`: Debugowanie ustawienia poziomu.
 
 > [!WARNING]
 > **Nie** pozostawiaj włączonej rejestracji debugowania w ramach wdrożenia dłużej niż jest to wymagane, aby rozwiązać problem. Rozmiar dziennika nie jest ograniczony. Pozostawienie włączonego dziennika debugowania może spowodować wyczerpanie dostępnego miejsca na dysku i awarię serwera lub usługi App Service.
 
-Zobacz sekcję [Configuration with web.config](#configuration-with-webconfig) , aby zobaczyć przykład `aspNetCore` elementu w pliku *web.config* .
+Zapoznaj się z tematem [Konfiguracja z web.config](#configuration-with-webconfig) , aby zapoznać się z przykładem `aspNetCore` elementu w `web.config` pliku.
 
 ## <a name="proxy-configuration-uses-http-protocol-and-a-pairing-token"></a>Konfiguracja serwera proxy używa protokołu HTTP i tokenu parowania
 
@@ -748,7 +769,7 @@ Token parowania jest używany w celu zagwarantowania, że żądania odbierane pr
 
 ## <a name="aspnet-core-module-with-an-iis-shared-configuration"></a>Moduł ASP.NET Core z konfiguracją udostępnioną usług IIS
 
-Instalator modułu ASP.NET Core jest uruchamiany z uprawnieniami konta **TrustedInstaller** . Ponieważ konto systemu lokalnego nie ma uprawnień do modyfikowania dla ścieżki udziału używanej przez udostępnioną konfigurację usług IIS, Instalator zgłasza błąd odmowy dostępu podczas próby skonfigurowania ustawień modułu w pliku *applicationHost.config* w udziale.
+Instalator modułu ASP.NET Core jest uruchamiany z uprawnieniami `TrustedInstaller` konta. Ponieważ konto systemu lokalnego nie ma uprawnień do modyfikowania dla ścieżki udziału używanej przez udostępnioną konfigurację usług IIS, Instalator zgłasza błąd odmowy dostępu podczas próby skonfigurowania ustawień modułu w `applicationHost.config` pliku w udziale.
 
 W przypadku korzystania z konfiguracji udostępnionej przez usługi IIS na tym samym komputerze, na którym znajduje się instalacja usług IIS, uruchom Instalatora pakietu ASP.NET Core hostowania z `OPT_NO_SHARED_CONFIG_CHECK` parametrem ustawionym na `1` :
 
@@ -760,71 +781,71 @@ Jeśli ścieżka do konfiguracji udostępnionej nie znajduje się na tym samym k
 
 1. Wyłącz konfigurację udostępnioną usług IIS.
 1. Uruchom instalatora.
-1. Wyeksportuj zaktualizowany plik *applicationHost.config* do udziału.
+1. Wyeksportuj zaktualizowany `applicationHost.config` plik do udziału.
 1. Włącz ponownie konfigurację udostępnioną usług IIS.
 
 ## <a name="module-version-and-hosting-bundle-installer-logs"></a>Dzienniki instalacji pakietu i pakietów hostingu
 
 Aby określić wersję zainstalowanego modułu ASP.NET Core:
 
-1. W systemie hostingu przejdź do *%windir%\System32\inetsrv*.
-1. Znajdź plik *aspnetcore.dll* .
+1. W systemie hostingu przejdź do `%windir%\System32\inetsrv` .
+1. Znajdź `aspnetcore.dll` plik.
 1. Kliknij prawym przyciskiem myszy plik i wybierz polecenie **Właściwości** z menu kontekstowego.
 1. Wybierz kartę **szczegóły** . **Wersja pliku** i **Wersja produktu** reprezentują zainstalowaną wersję modułu.
 
-Dzienniki Instalatora pakietu hostingu dla modułu znajdują się pod adresem *C: \\ Użytkownicy \\ % username% \\ AppData \\ Local \\ temp*. Plik ma nazwę *dd_DotNetCoreWinSvrHosting__ \<timestamp> _000_AspNetCoreModule_x64. log*.
+Dzienniki Instalatora pakietu hostingu dla modułu znajdują się pod adresem `C:\\Users\\%UserName%\\AppData\\Local\\Temp` . Plik ma nazwę `dd_DotNetCoreWinSvrHosting__\{TIMESTAMP}_000_AspNetCoreModule_x64.log` , gdzie symbol zastępczy `{TIMESTAMP}` jest sygnaturą czasową.
 
 ## <a name="module-schema-and-configuration-file-locations"></a>Lokalizacje pliku modułu, schematu i konfiguracji
 
 ### <a name="module"></a>Moduł
 
-**IIS (x86/amd64):**
+**IIS (x86/amd64)**:
 
-* % windir% \System32\inetsrv\aspnetcore.dll
+* `%windir%\System32\inetsrv\aspnetcore.dll`
 
-* % windir% \SysWOW64\inetsrv\aspnetcore.dll
+* `%windir%\SysWOW64\inetsrv\aspnetcore.dll`
 
-* Module\V2\aspnetcorev2.dll rdzeń%ProgramFiles%\IIS\Asp.Net
+* `%ProgramFiles%\IIS\Asp.Net Core Module\V2\aspnetcorev2.dll`
 
-* % ProgramFiles (x86)% \ IIS\Asp.Net Core Module\V2\aspnetcorev2.dll
+* `%ProgramFiles(x86)%\IIS\Asp.Net Core Module\V2\aspnetcorev2.dll`
 
-**IIS Express (x86/amd64):**
+**IIS Express (x86/amd64)**:
 
-* %ProgramFiles%\IIS Express\aspnetcore.dll
+* `%ProgramFiles%\IIS Express\aspnetcore.dll`
 
-* % ProgramFiles (x86)% \ IIS Express\aspnetcore.dll
+* `%ProgramFiles(x86)%\IIS Express\aspnetcore.dll`
 
-* %ProgramFiles%\IIS Express\Asp.Net Core Module\V2\aspnetcorev2.dll
+* `%ProgramFiles%\IIS Express\Asp.Net Core Module\V2\aspnetcorev2.dll`
 
-* % ProgramFiles (x86)% \ Express\Asp.Net Module\V2\aspnetcorev2.dll Core usług IIS
+* `%ProgramFiles(x86)%\IIS Express\Asp.Net Core Module\V2\aspnetcorev2.dll`
 
 ### <a name="schema"></a>Schemat
 
 **IIS**
 
-* % windir% \System32\inetsrv\config\schema\aspnetcore_schema.xml
+* `%windir%\System32\inetsrv\config\schema\aspnetcore_schema.xml`
 
-* % windir% \System32\inetsrv\config\schema\aspnetcore_schema_v2.xml
+* `%windir%\System32\inetsrv\config\schema\aspnetcore_schema_v2.xml`
 
 **IIS Express**
 
-* %ProgramFiles%\IIS Express\config\schema\aspnetcore_schema.xml
+* `%ProgramFiles%\IIS Express\config\schema\aspnetcore_schema.xml`
 
-* %ProgramFiles%\IIS Express\config\schema\aspnetcore_schema_v2.xml
+* `%ProgramFiles%\IIS Express\config\schema\aspnetcore_schema_v2.xml`
 
 ### <a name="configuration"></a>Konfigurowanie
 
 **IIS**
 
-* % windir% \System32\inetsrv\config\applicationHost.config
+* `%windir%\System32\inetsrv\config\applicationHost.config`
 
 **IIS Express**
 
-* Visual Studio: {Aplikacja główna} \\.vs\config\applicationHost.config
+* Program Visual Studio: `{APPLICATION ROOT}\.vs\config\applicationHost.config`
 
-* *iisexpress.exe* INTERFEJS WIERSZA POLECENIA:% USERPROFILE% \Documents\IISExpress\config\applicationhost.config
+* *iisexpress.exe* Interfejs `%USERPROFILE%\Documents\IISExpress\config\applicationhost.config`
 
-Pliki można znaleźć, wyszukując *aspnetcore* w pliku *applicationHost.config* .
+Pliki można znaleźć, wyszukując je `aspnetcore` w `applicationHost.config` pliku.
 
 ::: moniker-end
 
@@ -843,7 +864,7 @@ Ponieważ ASP.NET Core aplikacje działają w procesie innym niż proces roboczy
 
 Na poniższym diagramie przedstawiono relację między usługami IIS, modułem ASP.NET Core i aplikacją:
 
-![Moduł ASP.NET Core](aspnet-core-module/_static/ancm-outofprocess.png)
+![Moduł ASP.NET Core](iis/index/_static/ancm-outofprocess.png)
 
 Żądania docierają z sieci Web do sterownika HTTP.sys trybu jądra. Sterownik kieruje żądania do usług IIS na skonfigurowanym porcie witryny sieci Web, zwykle 80 (HTTP) lub 443 (HTTPS). Moduł przekazuje żądania do Kestrel na losowo wybranym porcie dla aplikacji, która nie jest portem 80 lub 443.
 
@@ -906,7 +927,7 @@ Aby uzyskać informacje na temat konfiguracji aplikacji podrzędnych usług IIS,
 
 ### <a name="attributes-of-the-aspnetcore-element"></a>Atrybuty elementu aspNetCore
 
-| Atrybut | Opis | Domyślny |
+| Atrybut | Opis | Domyślne |
 | --------- | ----------- | :-----: |
 | `arguments` | <p>Opcjonalny atrybut ciągu.</p><p>Argumenty do pliku wykonywalnego określonego w **processPath**.</p>| |
 | `disableStartUpErrorPage` | <p>Opcjonalny atrybut Boolean.</p><p>W przypadku wartości true strona **błędu 502,5 procesu** jest pomijana, a strona kodu stanu 502 skonfigurowana w *web.config* ma pierwszeństwo.</p> | `false` |
@@ -953,8 +974,6 @@ Gdy plik *app_offline.htm* jest obecny, moduł ASP.NET Core reaguje na żądania
 ## <a name="start-up-error-page"></a>Strona błędu uruchamiania
 
 Jeśli moduł ASP.NET Core nie może uruchomić procesu zaplecza lub proces zaplecza zostanie uruchomiony, ale nie nasłuchuje na skonfigurowanym porcie, zostanie wyświetlona strona kod stanu *niepowodzenia procesu 502,5* . Aby pominąć tę stronę i przywrócić domyślną stronę kodową stanu 502 usług IIS, użyj `disableStartUpErrorPage` atrybutu. Aby uzyskać więcej informacji o konfigurowaniu niestandardowych komunikatów o błędach, zobacz [Błędy \<httpErrors> http ](/iis/configuration/system.webServer/httpErrors/).
-
-![Strona kodowa stanu niepowodzenia procesów 502,5](aspnet-core-module/_static/ANCM-502_5.png)
 
 ## <a name="log-creation-and-redirection"></a>Tworzenie i przekierowywanie dzienników
 

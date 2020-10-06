@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/inheritance
-ms.openlocfilehash: 34c4ea28103b9eb12601b383a46091084391f120
-ms.sourcegitcommit: 62cc131969b2379f7a45c286a751e22d961dfbdb
+ms.openlocfilehash: fabb0ed9c0f64a529b516d521d60a7d862e2654a
+ms.sourcegitcommit: d60bfd52bfb559e805abd654b87a2a0c7eb69cf8
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/22/2020
-ms.locfileid: "90847601"
+ms.lasthandoff: 10/06/2020
+ms.locfileid: "91754570"
 ---
 # <a name="tutorial-implement-inheritance---aspnet-mvc-with-ef-core"></a>Samouczek: implementowanie dziedziczenia-ASP.NET MVC z EF Core
 
@@ -64,7 +64,7 @@ Ten wzorzec generowania struktury dziedziczenia jednostek z pojedynczej tabeli b
 Alternatywą jest, aby baza danych wyglądała podobnie jak struktura dziedziczenia. Na przykład można mieć tylko pola nazw w tabeli Person i mieć osobne tabele instruktorów i uczniów z polami daty.
 
 > [!WARNING]
-> Tabela na typ (TPT) nie jest obsługiwana przez EF Core 3. x, ale została zaimplementowana w [EF Core 5,0](https://docs.microsoft.com/ef/core/what-is-new/ef-core-5.0/plan).
+> Tabela na typ (TPT) nie jest obsługiwana przez EF Core 3. x, ale została zaimplementowana w [EF Core 5,0](/ef/core/what-is-new/ef-core-5.0/plan).
 
 ![Dziedziczenie dla typu tabeli](inheritance/_static/tpt.png)
 

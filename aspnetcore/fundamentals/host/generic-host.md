@@ -18,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/host/generic-host
-ms.openlocfilehash: e606812c1c2164a7e4d0926a76d2ff7ada4c9a87
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 59cfae9ff619f8de894686c4b773d66e5cbe10ad
+ms.sourcegitcommit: d60bfd52bfb559e805abd654b87a2a0c7eb69cf8
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635388"
+ms.lasthandoff: 10/06/2020
+ms.locfileid: "91754739"
 ---
 # <a name="net-generic-host"></a>Host ogólny .NET
 
-::: moniker range=">= aspnetcore-3.0 <= aspnetcore-3.1"
+::: moniker range=">= aspnetcore-5.0"
 
-Szablony ASP.NET Core tworzą hosta ogólnego platformy .NET Core, <xref:Microsoft.Extensions.Hosting.HostBuilder> .
+Szablony ASP.NET Core tworzą hosta ogólnego platformy .NET Core ( <xref:Microsoft.Extensions.Hosting.HostBuilder> ).
 
 ## <a name="host-definition"></a>Definicja hosta
 
@@ -51,7 +51,7 @@ Host jest zazwyczaj konfigurowany, zbudowany i uruchamiany przez kod w `Program`
 * Wywołuje `CreateHostBuilder` metodę, aby utworzyć i skonfigurować obiekt konstruktora.
 * Wywołania `Build` i `Run` metody w obiekcie konstruktora.
 
-Szablony sieci Web ASP.NET Core generują następujący kod w celu utworzenia hosta ogólnego:
+Szablony sieci Web ASP.NET Core generują następujący kod w celu utworzenia hosta:
 
 ```csharp
 public class Program
@@ -70,7 +70,7 @@ public class Program
 }
 ```
 
-Poniższy kod tworzy hosta ogólnego przy użyciu obciążenia innego niż HTTP. `IHostedService`Implementacja jest dodawana do kontenera di:
+Poniższy kod tworzy obciążenie inne niż HTTP z `IHostedService` implementacją dodaną do kontenera di.
 
 ```csharp
 public class Program
@@ -99,8 +99,6 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
             webBuilder.UseStartup<Startup>();
         });
 ```
-
-Poprzedni kod jest generowany przez szablony ASP.NET Core.
 
 Jeśli aplikacja używa Entity Framework Core, nie zmieniaj nazwy ani podpisu `CreateHostBuilder` metody. [Narzędzia Entity Framework Core](/ef/core/miscellaneous/cli/) oczekują na znalezienie `CreateHostBuilder` metody, która konfiguruje hosta bez uruchamiania aplikacji. Aby uzyskać więcej informacji, zobacz [Tworzenie DbContext w czasie projektowania](/ef/core/miscellaneous/cli/dbcontext-creation).
 
@@ -179,6 +177,507 @@ Konfiguracja hosta jest używana we właściwościach <xref:Microsoft.Extensions
 Konfiguracja hosta jest dostępna w [HostBuilderContext.Configwersja](xref:Microsoft.Extensions.Hosting.HostBuilderContext.Configuration) <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureAppConfiguration*> . Po `ConfigureAppConfiguration` program `HostBuilderContext.Configuration` zostanie zastąpiony konfiguracją aplikacji.
 
 Aby dodać konfigurację hosta, wywołaj polecenie <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureHostConfiguration*> `IHostBuilder` . `ConfigureHostConfiguration` może być wywoływana wiele razy z wynikami. Host używa dowolnej opcji ustawia wartość ostatnią dla danego klucza.
+
+Dostawca zmiennych środowiskowych z prefiksami `DOTNET_` i argumentami wiersza polecenia są uwzględniane przez `CreateDefaultBuilder` . W przypadku aplikacji sieci Web jest dodawany dostawca zmiennych środowiskowych z prefiksem `ASPNETCORE_` . Prefiks jest usuwany, gdy są odczytywane zmienne środowiskowe. Na przykład wartość zmiennej środowiskowej jest `ASPNETCORE_ENVIRONMENT` wartością konfiguracji hosta dla `environment` klucza.
+
+Poniższy przykład umożliwia utworzenie konfiguracji hosta:
+
+[!code-csharp[](generic-host/samples-snapshot/3.x/Program.cs?name=snippet_HostConfig)]
+
+## <a name="app-configuration"></a>Konfiguracja aplikacji
+
+Konfiguracja aplikacji jest tworzona przez wywołanie metody <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureAppConfiguration*> on `IHostBuilder` . `ConfigureAppConfiguration` może być wywoływana wiele razy z wynikami. Aplikacja używa dowolnej opcji ustawia wartość ostatnią dla danego klucza. 
+
+Konfiguracja utworzona przez program `ConfigureAppConfiguration` jest dostępna w [HostBuilderContext.Configwersja](xref:Microsoft.Extensions.Hosting.HostBuilderContext.Configuration*) na potrzeby kolejnych operacji i jako usługa z di. Konfiguracja hosta jest również dodawana do konfiguracji aplikacji.
+
+Aby uzyskać więcej informacji, zobacz [Konfiguracja w ASP.NET Core](xref:fundamentals/configuration/index#configureappconfiguration).
+
+## <a name="settings-for-all-app-types"></a>Ustawienia dla wszystkich typów aplikacji
+
+Ta sekcja zawiera listę ustawień hosta, które dotyczą zarówno obciążeń HTTP, jak i innych niż HTTP. Domyślnie zmienne środowiskowe używane do konfigurowania tych ustawień mogą mieć `DOTNET_` `ASPNETCORE_` prefiks lub.
+
+<!-- In the following sections, two spaces at end of line are used to force line breaks in the rendered page. -->
+
+### <a name="applicationname"></a>ApplicationName
+
+Właściwość [IHostEnvironment. ApplicationName](xref:Microsoft.Extensions.Hosting.IHostEnvironment.ApplicationName*) jest ustawiana na podstawie konfiguracji hosta podczas konstruowania hosta.
+
+**Klucz**: `applicationName`  
+**Typ**: `string`  
+**Wartość domyślna**: Nazwa zestawu, który zawiera punkt wejścia aplikacji.  
+**Zmienna środowiskowa**: `<PREFIX_>APPLICATIONNAME`
+
+Aby ustawić tę wartość, należy użyć zmiennej środowiskowej. 
+
+### <a name="contentroot"></a>ContentRoot
+
+Właściwość [IHostEnvironment. ContentRootPath](xref:Microsoft.Extensions.Hosting.IHostEnvironment.ContentRootPath*) określa, gdzie host rozpoczyna wyszukiwanie plików zawartości. Jeśli ścieżka nie istnieje, uruchomienie hosta nie powiedzie się.
+
+**Klucz**: `contentRoot`  
+**Typ**: `string`  
+**Domyślnie**: folder, w którym znajduje się zestaw aplikacji.  
+**Zmienna środowiskowa**: `<PREFIX_>CONTENTROOT`
+
+Aby ustawić tę wartość, użyj zmiennej środowiskowej lub wywołaj `UseContentRoot` `IHostBuilder` :
+
+```csharp
+Host.CreateDefaultBuilder(args)
+    .UseContentRoot("c:\\content-root")
+    //...
+```
+
+Aby uzyskać więcej informacji, zobacz:
+
+* [Podstawy: zawartość główna](xref:fundamentals/index#content-root)
+* [WebRoot](#webroot)
+
+### <a name="environmentname"></a>EnvironmentName
+
+Dla właściwości [IHostEnvironment. EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostEnvironment.EnvironmentName*) można ustawić dowolną wartość. Wartości zdefiniowane przez platformę obejmują `Development` , `Staging` , i `Production` . W wartościach nie jest rozróżniana wielkość liter.
+
+**Klucz**: `environment`  
+**Typ**: `string`  
+**Wartość domyślna**: `Production`  
+**Zmienna środowiskowa**: `<PREFIX_>ENVIRONMENT`
+
+Aby ustawić tę wartość, użyj zmiennej środowiskowej lub wywołaj `UseEnvironment` `IHostBuilder` :
+
+```csharp
+Host.CreateDefaultBuilder(args)
+    .UseEnvironment("Development")
+    //...
+```
+
+### <a name="shutdowntimeout"></a>ShutdownTimeout
+
+[HostOptions. shutdownTimeout](xref:Microsoft.Extensions.Hosting.HostOptions.ShutdownTimeout*) ustawia limit czasu dla <xref:Microsoft.Extensions.Hosting.IHost.StopAsync*> . Wartość domyślna to pięć sekund.  Podczas okresu przekroczenia limitu czasu Host:
+
+* Wyzwala [IHostApplicationLifetime. ApplicationStopping](/dotnet/api/microsoft.extensions.hosting.ihostapplicationlifetime.applicationstopping).
+* Próbuje zatrzymać usługi hostowane, rejestrowanie błędów dla usług, których zatrzymanie nie powiodło się.
+
+Jeśli limit czasu upłynie przed zatrzymaniem wszystkich usług hostowanych, wszystkie pozostałe aktywne usługi zostaną zatrzymane po zamknięciu aplikacji. Usługi są zatrzymane nawet wtedy, gdy nie zakończyły przetwarzania. Jeśli usługi wymagają dodatkowego czasu na zatrzymanie, zwiększ limit czasu.
+
+**Klucz**: `shutdownTimeoutSeconds`  
+**Typ**: `int`  
+**Wartość domyślna**: 5 sekund  
+**Zmienna środowiskowa**: `<PREFIX_>SHUTDOWNTIMEOUTSECONDS`
+
+Aby ustawić tę wartość, użyj zmiennej środowiskowej lub skonfiguruj `HostOptions` . Poniższy przykład ustawia limit czasu na 20 sekund:
+
+[!code-csharp[](generic-host/samples-snapshot/3.x/Program.cs?name=snippet_HostOptions)]
+
+### <a name="disable-app-configuration-reload-on-change"></a>Wyłącz ponowne ładowanie konfiguracji aplikacji przy zmianie
+
+[Domyślnie](xref:fundamentals/configuration/index#default) *appsettings.json* i *appSettings. { Środowisko}. kod JSON* jest ponownie ładowany, gdy plik ulegnie zmianie. Aby wyłączyć to zachowanie ponownego ładowania w ASP.NET Core 5,0 lub nowszym, ustaw `hostBuilder:reloadConfigOnChange` klucz na `false` .
+
+**Klucz**: `hostBuilder:reloadConfigOnChange`  
+**Typ**: `bool` ( `true` lub `1` )  
+**Wartość domyślna**: `true`  
+**Argument wiersza polecenia**: `hostBuilder:reloadConfigOnChange`  
+**Zmienna środowiskowa**: `<PREFIX_>hostBuilder:reloadConfigOnChange`
+
+> [!WARNING]
+> Separator dwukropek ( `:` ) nie działa ze zmiennymi kluczy hierarchicznych na wszystkich platformach. Aby uzyskać więcej informacji, zobacz [zmienne środowiskowe](xref:fundamentals/configuration/index#environment-variables).
+
+## <a name="settings-for-web-apps"></a>Ustawienia usługi Web Apps
+
+Niektóre ustawienia hosta mają zastosowanie tylko do obciążeń protokołu HTTP. Domyślnie zmienne środowiskowe używane do konfigurowania tych ustawień mogą mieć `DOTNET_` `ASPNETCORE_` prefiks lub.
+
+Metody rozszerzenia dla `IWebHostBuilder` programu są dostępne dla tych ustawień. Przykłady kodu, które pokazują, jak wywołać metody rozszerzane `webBuilder` jest wystąpieniem `IWebHostBuilder` , tak jak w poniższym przykładzie:
+
+```csharp
+public static IHostBuilder CreateHostBuilder(string[] args) =>
+    Host.CreateDefaultBuilder(args)
+        .ConfigureWebHostDefaults(webBuilder =>
+        {
+            webBuilder.CaptureStartupErrors(true);
+            webBuilder.UseStartup<Startup>();
+        });
+```
+
+### <a name="capturestartuperrors"></a>CaptureStartupErrors
+
+Gdy `false` , błędy podczas uruchamiania, kończy się hostem. Gdy `true` host przechwytuje wyjątki podczas uruchamiania, a następnie próbuje uruchomić serwer.
+
+**Klucz**: `captureStartupErrors`  
+**Typ**: `bool` ( `true` lub `1` )  
+**Domyślnie**: wartość domyślna to, `false` chyba że aplikacja działa z Kestrel za usługami IIS, gdzie wartość domyślna to `true` .  
+**Zmienna środowiskowa**: `<PREFIX_>CAPTURESTARTUPERRORS`
+
+Aby ustawić tę wartość, użyj konfiguracji lub wywołania `CaptureStartupErrors` :
+
+```csharp
+webBuilder.CaptureStartupErrors(true);
+```
+
+### <a name="detailederrors"></a>DetailedErrors
+
+Po włączeniu lub gdy środowisko jest `Development` , aplikacja przechwytuje szczegółowe błędy.
+
+**Klucz**: `detailedErrors`  
+**Typ**: `bool` ( `true` lub `1` )  
+**Wartość domyślna**: `false`  
+**Zmienna środowiskowa**: `<PREFIX_>_DETAILEDERRORS`
+
+Aby ustawić tę wartość, użyj konfiguracji lub wywołania `UseSetting` :
+
+```csharp
+webBuilder.UseSetting(WebHostDefaults.DetailedErrorsKey, "true");
+```
+
+### <a name="hostingstartupassemblies"></a>HostingStartupAssemblies
+
+Rozdzielany średnikami ciąg początkowych zestawów startowych do załadowania podczas uruchamiania. Mimo że wartość konfiguracji jest domyślnie pustym ciągiem, zestaw startowy obsługujący zawsze zawiera zestaw aplikacji. W przypadku udostępniania zestawów startowych są one dodawane do zestawu aplikacji do załadowania, gdy aplikacja kompiluje swoje popularne usługi podczas uruchamiania.
+
+**Klucz**: `hostingStartupAssemblies`  
+**Typ**: `string`  
+**Wartość domyślna**: pusty ciąg  
+**Zmienna środowiskowa**: `<PREFIX_>_HOSTINGSTARTUPASSEMBLIES`
+
+Aby ustawić tę wartość, użyj konfiguracji lub wywołania `UseSetting` :
+
+```csharp
+webBuilder.UseSetting(WebHostDefaults.HostingStartupAssembliesKey, "assembly1;assembly2");
+```
+
+### <a name="hostingstartupexcludeassemblies"></a>HostingStartupExcludeAssemblies
+
+Rozdzielany średnikami ciąg początkowych zestawów uruchamiania, który ma zostać wykluczony podczas uruchamiania.
+
+**Klucz**: `hostingStartupExcludeAssemblies`  
+**Typ**: `string`  
+**Wartość domyślna**: pusty ciąg  
+**Zmienna środowiskowa**: `<PREFIX_>_HOSTINGSTARTUPEXCLUDEASSEMBLIES`
+
+Aby ustawić tę wartość, użyj konfiguracji lub wywołania `UseSetting` :
+
+```csharp
+webBuilder.UseSetting(WebHostDefaults.HostingStartupExcludeAssembliesKey, "assembly1;assembly2");
+```
+
+### <a name="https_port"></a>HTTPS_Port
+
+Port przekierowania protokołu HTTPS. Używany do [wymuszania protokołu HTTPS](xref:security/enforcing-ssl).
+
+**Klucz**: `https_port`  
+**Typ**: `string`  
+Wartość **Domyślna**: nie ustawiono wartości domyślnej.  
+**Zmienna środowiskowa**: `<PREFIX_>HTTPS_PORT`
+
+Aby ustawić tę wartość, użyj konfiguracji lub wywołania `UseSetting` :
+
+```csharp
+webBuilder.UseSetting("https_port", "8080");
+```
+
+### <a name="preferhostingurls"></a>PreferHostingUrls
+
+Wskazuje, czy host powinien nasłuchiwać adresów URL skonfigurowanych przy użyciu `IWebHostBuilder` zamiast adresów URL skonfigurowanych dla `IServer` implementacji.
+
+**Klucz**: `preferHostingUrls`  
+**Typ**: `bool` ( `true` lub `1` )  
+**Wartość domyślna**: `true`  
+**Zmienna środowiskowa**: `<PREFIX_>_PREFERHOSTINGURLS`
+
+Aby ustawić tę wartość, użyj zmiennej środowiskowej lub wywołaj `PreferHostingUrls` :
+
+```csharp
+webBuilder.PreferHostingUrls(false);
+```
+
+### <a name="preventhostingstartup"></a>PreventHostingStartup
+
+Zapobiega automatycznemu ładowaniu zestawów startowych hostingu, w tym hostingu zestawów startowych skonfigurowanych przez zestaw aplikacji. Aby uzyskać więcej informacji, zobacz <xref:fundamentals/configuration/platform-specific-configuration>.
+
+**Klucz**: `preventHostingStartup`  
+**Typ**: `bool` ( `true` lub `1` )  
+**Wartość domyślna**: `false`  
+**Zmienna środowiskowa**: `<PREFIX_>_PREVENTHOSTINGSTARTUP`
+
+Aby ustawić tę wartość, użyj zmiennej środowiskowej lub wywołaj `UseSetting` :
+
+```csharp
+webBuilder.UseSetting(WebHostDefaults.PreventHostingStartupKey, "true");
+```
+
+### <a name="startupassembly"></a>StartupAssembly
+
+Zestaw do wyszukiwania `Startup` klasy.
+
+**Klucz**: `startupAssembly`  
+**Typ**: `string`  
+**Domyślnie**: zestaw aplikacji  
+**Zmienna środowiskowa**: `<PREFIX_>STARTUPASSEMBLY`
+
+Aby ustawić tę wartość, użyj zmiennej środowiskowej lub wywołania `UseStartup` . `UseStartup` może przyjmować nazwę zestawu ( `string` ) lub typ ( `TStartup` ). Jeśli `UseStartup` wywoływana jest wiele metod, pierwszeństwo ma Ostatnia.
+
+```csharp
+webBuilder.UseStartup("StartupAssemblyName");
+```
+
+```csharp
+webBuilder.UseStartup<Startup>();
+```
+
+### <a name="urls"></a>Adresy URL
+
+Rozdzielana średnikami lista adresów IP lub adresów hostów z portami i protokołami, na których serwer powinien nasłuchiwać żądań. Na przykład `http://localhost:123`. Użyj " \* ", aby wskazać, że serwer powinien nasłuchiwać żądań na dowolnym adresie IP lub nazwie hosta przy użyciu określonego portu i protokołu (na przykład `http://*:5000` ). Protokół ( `http://` lub `https://` ) musi być dołączony do każdego adresu URL. Obsługiwane formaty różnią się między serwerami.
+
+**Klucz**: `urls`  
+**Typ**: `string`  
+**Wartość domyślna**: `http://localhost:5000` i `https://localhost:5001`  
+**Zmienna środowiskowa**: `<PREFIX_>URLS`
+
+Aby ustawić tę wartość, użyj zmiennej środowiskowej lub wywołaj `UseUrls` :
+
+```csharp
+webBuilder.UseUrls("http://*:5000;http://localhost:5001;https://hostname:5002");
+```
+
+Kestrel ma własny interfejs API konfiguracji punktu końcowego. Aby uzyskać więcej informacji, zobacz <xref:fundamentals/servers/kestrel#endpoint-configuration>.
+
+### <a name="webroot"></a>WebRoot
+
+Właściwość [IWebHostEnvironment. WebRootPath](xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment.WebRootPath) określa ścieżkę względną do statycznych zasobów aplikacji. Jeśli ścieżka nie istnieje, jest używany dostawca plików No-op.  
+
+**Klucz**: `webroot`  
+**Typ**: `string`  
+**Wartość domyślna**: wartość domyślna to `wwwroot` . Ścieżka do *elementu {content root}/wwwroot* musi istnieć.  
+**Zmienna środowiskowa**: `<PREFIX_>WEBROOT`
+
+Aby ustawić tę wartość, użyj zmiennej środowiskowej lub wywołaj `UseWebRoot` `IWebHostBuilder` :
+
+```csharp
+webBuilder.UseWebRoot("public");
+```
+
+Aby uzyskać więcej informacji, zobacz:
+
+* [Podstawy: katalog główny sieci Web](xref:fundamentals/index#web-root)
+* [ContentRoot](#contentroot)
+
+## <a name="manage-the-host-lifetime"></a>Zarządzanie okresem istnienia hosta
+
+Wywołaj metody z skompilowanej <xref:Microsoft.Extensions.Hosting.IHost> implementacji, aby uruchomić i zatrzymać aplikację. Te metody mają wpływ na wszystkie  <xref:Microsoft.Extensions.Hosting.IHostedService> implementacje zarejestrowane w kontenerze usługi.
+
+### <a name="run"></a>Uruchom
+
+<xref:Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run*> uruchamia aplikację i blokuje wątek wywołujący do momentu wyłączenia hosta.
+
+### <a name="runasync"></a>RunAsync
+
+<xref:Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync*> uruchamia aplikację i zwraca <xref:System.Threading.Tasks.Task> , która kończy się po wyzwoleniu tokenu anulowania lub zamknięcia.
+
+### <a name="runconsoleasync"></a>RunConsoleAsync
+
+<xref:Microsoft.Extensions.Hosting.HostingHostBuilderExtensions.RunConsoleAsync*>włącza obsługę konsoli, kompiluje i uruchamia hosta, a następnie czeka na zamknięcie programu <kbd>Ctrl</kbd> + <kbd>C</kbd>/SIGINT lub SIGTERM.
+
+### <a name="start"></a>Rozpocznij
+
+<xref:Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Start*> uruchamia hosta synchronicznie.
+
+### <a name="startasync"></a>StartAsync
+
+<xref:Microsoft.Extensions.Hosting.IHost.StartAsync*> uruchamia hosta i zwraca <xref:System.Threading.Tasks.Task> , który kończy się po wyzwoleniu tokenu anulowania lub zamknięcia. 
+
+<xref:Microsoft.Extensions.Hosting.IHostLifetime.WaitForStartAsync*> jest wywoływana na początku `StartAsync` , który czeka na zakończenie przed kontynuowaniem. Może to służyć do opóźnienia uruchamiania do momentu zasygnalizowania zdarzenia zewnętrznego.
+
+### <a name="stopasync"></a>StopAsync
+
+<xref:Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.StopAsync*> próbuje zatrzymać hosta w ramach podanego limitu czasu.
+
+### <a name="waitforshutdown"></a>WaitForShutdown
+
+<xref:Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.WaitForShutdown*>blokuje wątek wywołujący do momentu wyzwolenia przez IHostLifetime, na przykład przez <kbd>naciśnięcie klawiszy CTRL</kbd> + <kbd>C</kbd>/SIGINT lub SIGTERM.
+
+### <a name="waitforshutdownasync"></a>WaitForShutdownAsync
+
+<xref:Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.WaitForShutdownAsync*> Zwraca wartość <xref:System.Threading.Tasks.Task> , która kończy się, gdy zamknięcie jest wyzwalane za pośrednictwem danego tokenu i wywołań <xref:Microsoft.Extensions.Hosting.IHost.StopAsync*> .
+
+### <a name="external-control"></a>Zewnętrzna kontrola
+
+Bezpośrednią kontrolę nad okresem istnienia hosta można uzyskać przy użyciu metod, które mogą być wywoływane zewnętrznie:
+
+```csharp
+public class Program
+{
+    private IHost _host;
+
+    public Program()
+    {
+        _host = new HostBuilder()
+            .Build();
+    }
+
+    public async Task StartAsync()
+    {
+        _host.StartAsync();
+    }
+
+    public async Task StopAsync()
+    {
+        using (_host)
+        {
+            await _host.StopAsync(TimeSpan.FromSeconds(5));
+        }
+    }
+}
+```
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0 < aspnetcore-5.0"
+
+Szablony ASP.NET Core tworzą hosta ogólnego platformy .NET Core ( <xref:Microsoft.Extensions.Hosting.HostBuilder> ).
+
+## <a name="host-definition"></a>Definicja hosta
+
+*Host* to obiekt, który hermetyzuje zasoby aplikacji, takie jak:
+
+* Iniekcja zależności (DI)
+* Rejestrowanie
+* Konfigurowanie
+* `IHostedService` metod
+
+Po uruchomieniu hosta jest on wywoływany <xref:Microsoft.Extensions.Hosting.IHostedService.StartAsync%2A?displayProperty=nameWithType> dla każdej implementacji <xref:Microsoft.Extensions.Hosting.IHostedService> zarejestrowanej w kolekcji kontenera usługi hostowanej usług. W aplikacji sieci Web jedną z `IHostedService` implementacji jest usługa sieci Web, która uruchamia [implementację serwera http](xref:fundamentals/index#servers).
+
+Główną przyczyną uwzględnienia wszystkich zasobów zależnych od aplikacji w jednym obiekcie jest zarządzanie okresem istnienia: Kontrola uruchamiania aplikacji i bezpieczne zamykanie.
+
+## <a name="set-up-a-host"></a>Konfigurowanie hosta
+
+Host jest zazwyczaj konfigurowany, zbudowany i uruchamiany przez kod w `Program` klasie. `Main`Metoda:
+
+* Wywołuje `CreateHostBuilder` metodę, aby utworzyć i skonfigurować obiekt konstruktora.
+* Wywołania `Build` i `Run` metody w obiekcie konstruktora.
+
+Szablony sieci Web ASP.NET Core generują następujący kod w celu utworzenia hosta ogólnego:
+
+```csharp
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        CreateHostBuilder(args).Build().Run();
+    }
+
+    public static IHostBuilder CreateHostBuilder(string[] args) =>
+        Host.CreateDefaultBuilder(args)
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder.UseStartup<Startup>();
+            });
+}
+```
+
+Poniższy kod tworzy hosta ogólnego przy użyciu obciążenia innego niż HTTP. `IHostedService`Implementacja jest dodawana do kontenera di:
+
+```csharp
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        CreateHostBuilder(args).Build().Run();
+    }
+
+    public static IHostBuilder CreateHostBuilder(string[] args) =>
+        Host.CreateDefaultBuilder(args)
+            .ConfigureServices((hostContext, services) =>
+            {
+               services.AddHostedService<Worker>();
+            });
+}
+```
+
+W przypadku obciążeń HTTP `Main` Metoda jest taka sama, ale `CreateHostBuilder` wywołuje `ConfigureWebHostDefaults` :
+
+```csharp
+public static IHostBuilder CreateHostBuilder(string[] args) =>
+    Host.CreateDefaultBuilder(args)
+        .ConfigureWebHostDefaults(webBuilder =>
+        {
+            webBuilder.UseStartup<Startup>();
+        });
+```
+
+Poprzedni kod jest generowany przez szablony ASP.NET Core.
+
+Jeśli aplikacja używa Entity Framework Core, nie zmieniaj nazwy ani podpisu `CreateHostBuilder` metody. [Narzędzia Entity Framework Core](/ef/core/miscellaneous/cli/) oczekują na znalezienie `CreateHostBuilder` metody, która konfiguruje hosta bez uruchamiania aplikacji. Aby uzyskać więcej informacji, zobacz [Tworzenie DbContext w czasie projektowania](/ef/core/miscellaneous/cli/dbcontext-creation).
+
+## <a name="default-builder-settings"></a>Ustawienia domyślnego konstruktora
+
+<xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder%2A>Metoda:
+
+* Ustawia [katalog główny zawartości](xref:fundamentals/index#content-root) na ścieżkę zwracaną przez <xref:System.IO.Directory.GetCurrentDirectory%2A> .
+* Ładuje konfigurację hosta z:
+  * Zmienne środowiskowe poprzedzone prefiksem `DOTNET_` .
+  * Argumenty wiersza polecenia.
+* Ładuje konfigurację aplikacji z:
+  * *appsettings.js*.
+  * *appSettings. {Environment}. JSON*.
+  * [Secret Manager](xref:security/app-secrets) , gdy aplikacja jest uruchamiana w `Development` środowisku.
+  * Zmienne środowiskowe.
+  * Argumenty wiersza polecenia.
+* Dodaje następujących dostawców [rejestrowania](xref:fundamentals/logging/index) :
+  * Konsola
+  * Debugowanie
+  * EventSource
+  * EventLog (tylko w przypadku uruchamiania w systemie Windows)
+* Umożliwia [weryfikację zakresu](xref:fundamentals/dependency-injection#scope-validation) i [Sprawdzanie poprawności zależności](xref:Microsoft.Extensions.DependencyInjection.ServiceProviderOptions.ValidateOnBuild) , gdy środowisko jest opracowywane.
+
+`ConfigureWebHostDefaults`Metoda:
+
+* Ładuje konfigurację hosta ze zmiennych środowiskowych, które są poprzedzone prefiksem `ASPNETCORE_` .
+* Ustawia serwer [Kestrel](xref:fundamentals/servers/kestrel) jako serwer sieci Web i konfiguruje go przy użyciu dostawców konfiguracji hostingu aplikacji. Aby poznać domyślne opcje serwera Kestrel, zobacz <xref:fundamentals/servers/kestrel#kestrel-options> .
+* Dodaje [oprogramowanie pośredniczące do filtrowania hosta](xref:fundamentals/servers/kestrel#host-filtering).
+* Dodaje [przekazane nagłówki — oprogramowanie pośredniczące](xref:host-and-deploy/proxy-load-balancer#forwarded-headers) , jeśli `ASPNETCORE_FORWARDEDHEADERS_ENABLED` jest równe `true` .
+* Włącza integrację usług IIS. Aby poznać domyślne opcje usług IIS, zobacz <xref:host-and-deploy/iis/index#iis-options> .
+
+[Ustawienia dla wszystkich typów aplikacji](#settings-for-all-app-types) i [Ustawienia dla usługi Web Apps](#settings-for-web-apps) w dalszej części tego artykułu pokazują, jak zastąpić ustawienia domyślnego konstruktora.
+
+## <a name="framework-provided-services"></a>Usługi udostępniane przez platformę
+
+Następujące usługi są rejestrowane automatycznie:
+
+* [IHostApplicationLifetime](#ihostapplicationlifetime)
+* [IHostLifetime](#ihostlifetime)
+* [IHostEnvironment / IWebHostEnvironment](#ihostenvironment)
+
+Aby uzyskać więcej informacji na temat usług udostępnianych przez platformę, zobacz <xref:fundamentals/dependency-injection#framework-provided-services> .
+
+## <a name="ihostapplicationlifetime"></a>IHostApplicationLifetime
+
+Wstrzyknąć <xref:Microsoft.Extensions.Hosting.IHostApplicationLifetime> usługę (dawniej `IApplicationLifetime` ) do dowolnej klasy w celu obsługi zadań po uruchomieniu i bezpiecznego zamykania. Trzy właściwości interfejsu to tokeny anulowania używane do rejestrowania metod obsługi zdarzeń uruchamiania i zatrzymywania aplikacji. Interfejs zawiera również `StopApplication` metodę.
+
+Poniższy przykład to `IHostedService` implementacja, która rejestruje `IHostApplicationLifetime` zdarzenia:
+
+[!code-csharp[](generic-host/samples-snapshot/3.x/LifetimeEventsHostedService.cs?name=snippet_LifetimeEvents)]
+
+## <a name="ihostlifetime"></a>IHostLifetime
+
+<xref:Microsoft.Extensions.Hosting.IHostLifetime>Implementacja kontroluje moment uruchomienia hosta i jego zatrzymania. Używana jest Ostatnia zarejestrowana implementacja.
+
+`Microsoft.Extensions.Hosting.Internal.ConsoleLifetime` jest `IHostLifetime` implementacją domyślną. `ConsoleLifetime`:
+
+* Nasłuchuje <kbd>kombinacji klawiszy CTRL</kbd> + <kbd>C</kbd>/SIGINT lub SIGTERM oraz wywołań, <xref:Microsoft.Extensions.Hosting.IHostApplicationLifetime.StopApplication%2A> Aby rozpocząć proces zamykania.
+* Odblokowuje rozszerzenia, takie jak [RunAsync](#runasync) i [WaitForShutdownAsync](#waitforshutdownasync).
+
+## <a name="ihostenvironment"></a>IHostEnvironment
+
+Wsuń <xref:Microsoft.Extensions.Hosting.IHostEnvironment> usługę do klasy, aby uzyskać informacje o następujących ustawieniach:
+
+* [ApplicationName](#applicationname)
+* [EnvironmentName](#environmentname)
+* [ContentRootPath](#contentroot)
+
+Aplikacje sieci Web implementują `IWebHostEnvironment` interfejs, który dziedziczy `IHostEnvironment` i dodaje [WebRootPath](#webroot).
+
+## <a name="host-configuration"></a>Konfiguracja hosta
+
+Konfiguracja hosta jest używana we właściwościach <xref:Microsoft.Extensions.Hosting.IHostEnvironment> implementacji.
+
+Konfiguracja hosta jest dostępna w [HostBuilderContext.Configwersja](xref:Microsoft.Extensions.Hosting.HostBuilderContext.Configuration) <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureAppConfiguration%2A> . Po `ConfigureAppConfiguration` program `HostBuilderContext.Configuration` zostanie zastąpiony konfiguracją aplikacji.
+
+Aby dodać konfigurację hosta, wywołaj polecenie <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureHostConfiguration%2A> `IHostBuilder` . `ConfigureHostConfiguration` może być wywoływana wiele razy z wynikami. Host używa dowolnej opcji ustawia wartość ostatnią dla danego klucza.
 
 Dostawca zmiennych środowiskowych z prefiksami `DOTNET_` i argumentami wiersza polecenia są uwzględniane przez `CreateDefaultBuilder` . W przypadku aplikacji sieci Web jest dodawany dostawca zmiennych środowiskowych z prefiksem `ASPNETCORE_` . Prefiks jest usuwany, gdy są odczytywane zmienne środowiskowe. Na przykład wartość zmiennej środowiskowej jest `ASPNETCORE_ENVIRONMENT` wartością konfiguracji hosta dla `environment` klucza.
 
@@ -998,505 +1497,6 @@ public class MyClass
     public void Shutdown()
     {
         _appLifetime.StopApplication();
-    }
-}
-```
-
-::: moniker-end
-
-::: moniker range=">= aspnetcore-5.0"
-
-Szablony ASP.NET Core tworzą hosta ogólnego platformy .NET Core ( <xref:Microsoft.Extensions.Hosting.HostBuilder> ).
-
-## <a name="host-definition"></a>Definicja hosta
-
-*Host* to obiekt, który hermetyzuje zasoby aplikacji, takie jak:
-
-* Iniekcja zależności (DI)
-* Rejestrowanie
-* Konfigurowanie
-* `IHostedService` metod
-
-Po uruchomieniu hosta jest on wywoływany <xref:Microsoft.Extensions.Hosting.IHostedService.StartAsync%2A?displayProperty=nameWithType> dla każdej implementacji <xref:Microsoft.Extensions.Hosting.IHostedService> zarejestrowanej w kolekcji kontenera usługi hostowanej usług. W aplikacji sieci Web jedną z `IHostedService` implementacji jest usługa sieci Web, która uruchamia [implementację serwera http](xref:fundamentals/index#servers).
-
-Główną przyczyną uwzględnienia wszystkich zasobów zależnych od aplikacji w jednym obiekcie jest zarządzanie okresem istnienia: Kontrola uruchamiania aplikacji i bezpieczne zamykanie.
-
-## <a name="set-up-a-host"></a>Konfigurowanie hosta
-
-Host jest zazwyczaj konfigurowany, zbudowany i uruchamiany przez kod w `Program` klasie. `Main`Metoda:
-
-* Wywołuje `CreateHostBuilder` metodę, aby utworzyć i skonfigurować obiekt konstruktora.
-* Wywołania `Build` i `Run` metody w obiekcie konstruktora.
-
-Szablony sieci Web ASP.NET Core generują następujący kod w celu utworzenia hosta:
-
-```csharp
-public class Program
-{
-    public static void Main(string[] args)
-    {
-        CreateHostBuilder(args).Build().Run();
-    }
-
-    public static IHostBuilder CreateHostBuilder(string[] args) =>
-        Host.CreateDefaultBuilder(args)
-            .ConfigureWebHostDefaults(webBuilder =>
-            {
-                webBuilder.UseStartup<Startup>();
-            });
-}
-```
-
-Poniższy kod tworzy obciążenie inne niż HTTP z `IHostedService` implementacją dodaną do kontenera di.
-
-```csharp
-public class Program
-{
-    public static void Main(string[] args)
-    {
-        CreateHostBuilder(args).Build().Run();
-    }
-
-    public static IHostBuilder CreateHostBuilder(string[] args) =>
-        Host.CreateDefaultBuilder(args)
-            .ConfigureServices((hostContext, services) =>
-            {
-               services.AddHostedService<Worker>();
-            });
-}
-```
-
-W przypadku obciążeń HTTP `Main` Metoda jest taka sama, ale `CreateHostBuilder` wywołuje `ConfigureWebHostDefaults` :
-
-```csharp
-public static IHostBuilder CreateHostBuilder(string[] args) =>
-    Host.CreateDefaultBuilder(args)
-        .ConfigureWebHostDefaults(webBuilder =>
-        {
-            webBuilder.UseStartup<Startup>();
-        });
-```
-
-Jeśli aplikacja używa Entity Framework Core, nie zmieniaj nazwy ani podpisu `CreateHostBuilder` metody. [Narzędzia Entity Framework Core](/ef/core/miscellaneous/cli/) oczekują na znalezienie `CreateHostBuilder` metody, która konfiguruje hosta bez uruchamiania aplikacji. Aby uzyskać więcej informacji, zobacz [Tworzenie DbContext w czasie projektowania](/ef/core/miscellaneous/cli/dbcontext-creation).
-
-## <a name="default-builder-settings"></a>Ustawienia domyślnego konstruktora
-
-<xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder*>Metoda:
-
-* Ustawia [katalog główny zawartości](xref:fundamentals/index#content-root) na ścieżkę zwracaną przez <xref:System.IO.Directory.GetCurrentDirectory*> .
-* Ładuje konfigurację hosta z:
-  * Zmienne środowiskowe poprzedzone prefiksem `DOTNET_` .
-  * Argumenty wiersza polecenia.
-* Ładuje konfigurację aplikacji z:
-  * *appsettings.js*.
-  * *appSettings. {Environment}. JSON*.
-  * [Secret Manager](xref:security/app-secrets) , gdy aplikacja jest uruchamiana w `Development` środowisku.
-  * Zmienne środowiskowe.
-  * Argumenty wiersza polecenia.
-* Dodaje następujących dostawców [rejestrowania](xref:fundamentals/logging/index) :
-  * Konsola
-  * Debugowanie
-  * EventSource
-  * EventLog (tylko w przypadku uruchamiania w systemie Windows)
-* Umożliwia [weryfikację zakresu](xref:fundamentals/dependency-injection#scope-validation) i [Sprawdzanie poprawności zależności](xref:Microsoft.Extensions.DependencyInjection.ServiceProviderOptions.ValidateOnBuild) , gdy środowisko jest opracowywane.
-
-`ConfigureWebHostDefaults`Metoda:
-
-* Ładuje konfigurację hosta ze zmiennych środowiskowych, które są poprzedzone prefiksem `ASPNETCORE_` .
-* Ustawia serwer [Kestrel](xref:fundamentals/servers/kestrel) jako serwer sieci Web i konfiguruje go przy użyciu dostawców konfiguracji hostingu aplikacji. Aby poznać domyślne opcje serwera Kestrel, zobacz <xref:fundamentals/servers/kestrel#kestrel-options> .
-* Dodaje [oprogramowanie pośredniczące do filtrowania hosta](xref:fundamentals/servers/kestrel#host-filtering).
-* Dodaje [przekazane nagłówki — oprogramowanie pośredniczące](xref:host-and-deploy/proxy-load-balancer#forwarded-headers) , jeśli `ASPNETCORE_FORWARDEDHEADERS_ENABLED` jest równe `true` .
-* Włącza integrację usług IIS. Aby poznać domyślne opcje usług IIS, zobacz <xref:host-and-deploy/iis/index#iis-options> .
-
-[Ustawienia dla wszystkich typów aplikacji](#settings-for-all-app-types) i [Ustawienia dla usługi Web Apps](#settings-for-web-apps) w dalszej części tego artykułu pokazują, jak zastąpić ustawienia domyślnego konstruktora.
-
-## <a name="framework-provided-services"></a>Usługi udostępniane przez platformę
-
-Następujące usługi są rejestrowane automatycznie:
-
-* [IHostApplicationLifetime](#ihostapplicationlifetime)
-* [IHostLifetime](#ihostlifetime)
-* [IHostEnvironment / IWebHostEnvironment](#ihostenvironment)
-
-Aby uzyskać więcej informacji na temat usług udostępnianych przez platformę, zobacz <xref:fundamentals/dependency-injection#framework-provided-services> .
-
-## <a name="ihostapplicationlifetime"></a>IHostApplicationLifetime
-
-Wstrzyknąć <xref:Microsoft.Extensions.Hosting.IHostApplicationLifetime> usługę (dawniej `IApplicationLifetime` ) do dowolnej klasy w celu obsługi zadań po uruchomieniu i bezpiecznego zamykania. Trzy właściwości interfejsu to tokeny anulowania używane do rejestrowania metod obsługi zdarzeń uruchamiania i zatrzymywania aplikacji. Interfejs zawiera również `StopApplication` metodę.
-
-Poniższy przykład to `IHostedService` implementacja, która rejestruje `IHostApplicationLifetime` zdarzenia:
-
-[!code-csharp[](generic-host/samples-snapshot/3.x/LifetimeEventsHostedService.cs?name=snippet_LifetimeEvents)]
-
-## <a name="ihostlifetime"></a>IHostLifetime
-
-<xref:Microsoft.Extensions.Hosting.IHostLifetime>Implementacja kontroluje moment uruchomienia hosta i jego zatrzymania. Używana jest Ostatnia zarejestrowana implementacja.
-
-`Microsoft.Extensions.Hosting.Internal.ConsoleLifetime` jest `IHostLifetime` implementacją domyślną. `ConsoleLifetime`:
-
-* Nasłuchuje <kbd>kombinacji klawiszy CTRL</kbd> + <kbd>C</kbd>/SIGINT lub SIGTERM oraz wywołań, <xref:Microsoft.Extensions.Hosting.IHostApplicationLifetime.StopApplication*> Aby rozpocząć proces zamykania.
-* Odblokowuje rozszerzenia, takie jak [RunAsync](#runasync) i [WaitForShutdownAsync](#waitforshutdownasync).
-
-## <a name="ihostenvironment"></a>IHostEnvironment
-
-Wsuń <xref:Microsoft.Extensions.Hosting.IHostEnvironment> usługę do klasy, aby uzyskać informacje o następujących ustawieniach:
-
-* [ApplicationName](#applicationname)
-* [EnvironmentName](#environmentname)
-* [ContentRootPath](#contentroot)
-
-Aplikacje sieci Web implementują `IWebHostEnvironment` interfejs, który dziedziczy `IHostEnvironment` i dodaje [WebRootPath](#webroot).
-
-## <a name="host-configuration"></a>Konfiguracja hosta
-
-Konfiguracja hosta jest używana we właściwościach <xref:Microsoft.Extensions.Hosting.IHostEnvironment> implementacji.
-
-Konfiguracja hosta jest dostępna w [HostBuilderContext.Configwersja](xref:Microsoft.Extensions.Hosting.HostBuilderContext.Configuration) <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureAppConfiguration*> . Po `ConfigureAppConfiguration` program `HostBuilderContext.Configuration` zostanie zastąpiony konfiguracją aplikacji.
-
-Aby dodać konfigurację hosta, wywołaj polecenie <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureHostConfiguration*> `IHostBuilder` . `ConfigureHostConfiguration` może być wywoływana wiele razy z wynikami. Host używa dowolnej opcji ustawia wartość ostatnią dla danego klucza.
-
-Dostawca zmiennych środowiskowych z prefiksami `DOTNET_` i argumentami wiersza polecenia są uwzględniane przez `CreateDefaultBuilder` . W przypadku aplikacji sieci Web jest dodawany dostawca zmiennych środowiskowych z prefiksem `ASPNETCORE_` . Prefiks jest usuwany, gdy są odczytywane zmienne środowiskowe. Na przykład wartość zmiennej środowiskowej jest `ASPNETCORE_ENVIRONMENT` wartością konfiguracji hosta dla `environment` klucza.
-
-Poniższy przykład umożliwia utworzenie konfiguracji hosta:
-
-[!code-csharp[](generic-host/samples-snapshot/3.x/Program.cs?name=snippet_HostConfig)]
-
-## <a name="app-configuration"></a>Konfiguracja aplikacji
-
-Konfiguracja aplikacji jest tworzona przez wywołanie metody <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureAppConfiguration*> on `IHostBuilder` . `ConfigureAppConfiguration` może być wywoływana wiele razy z wynikami. Aplikacja używa dowolnej opcji ustawia wartość ostatnią dla danego klucza. 
-
-Konfiguracja utworzona przez program `ConfigureAppConfiguration` jest dostępna w [HostBuilderContext.Configwersja](xref:Microsoft.Extensions.Hosting.HostBuilderContext.Configuration*) na potrzeby kolejnych operacji i jako usługa z di. Konfiguracja hosta jest również dodawana do konfiguracji aplikacji.
-
-Aby uzyskać więcej informacji, zobacz [Konfiguracja w ASP.NET Core](xref:fundamentals/configuration/index#configureappconfiguration).
-
-## <a name="settings-for-all-app-types"></a>Ustawienia dla wszystkich typów aplikacji
-
-Ta sekcja zawiera listę ustawień hosta, które dotyczą zarówno obciążeń HTTP, jak i innych niż HTTP. Domyślnie zmienne środowiskowe używane do konfigurowania tych ustawień mogą mieć `DOTNET_` `ASPNETCORE_` prefiks lub.
-
-<!-- In the following sections, two spaces at end of line are used to force line breaks in the rendered page. -->
-
-### <a name="applicationname"></a>ApplicationName
-
-Właściwość [IHostEnvironment. ApplicationName](xref:Microsoft.Extensions.Hosting.IHostEnvironment.ApplicationName*) jest ustawiana na podstawie konfiguracji hosta podczas konstruowania hosta.
-
-**Klucz**: `applicationName`  
-**Typ**: `string`  
-**Wartość domyślna**: Nazwa zestawu, który zawiera punkt wejścia aplikacji.  
-**Zmienna środowiskowa**: `<PREFIX_>APPLICATIONNAME`
-
-Aby ustawić tę wartość, należy użyć zmiennej środowiskowej. 
-
-### <a name="contentroot"></a>ContentRoot
-
-Właściwość [IHostEnvironment. ContentRootPath](xref:Microsoft.Extensions.Hosting.IHostEnvironment.ContentRootPath*) określa, gdzie host rozpoczyna wyszukiwanie plików zawartości. Jeśli ścieżka nie istnieje, uruchomienie hosta nie powiedzie się.
-
-**Klucz**: `contentRoot`  
-**Typ**: `string`  
-**Domyślnie**: folder, w którym znajduje się zestaw aplikacji.  
-**Zmienna środowiskowa**: `<PREFIX_>CONTENTROOT`
-
-Aby ustawić tę wartość, użyj zmiennej środowiskowej lub wywołaj `UseContentRoot` `IHostBuilder` :
-
-```csharp
-Host.CreateDefaultBuilder(args)
-    .UseContentRoot("c:\\content-root")
-    //...
-```
-
-Aby uzyskać więcej informacji, zobacz:
-
-* [Podstawy: zawartość główna](xref:fundamentals/index#content-root)
-* [WebRoot](#webroot)
-
-### <a name="environmentname"></a>EnvironmentName
-
-Dla właściwości [IHostEnvironment. EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostEnvironment.EnvironmentName*) można ustawić dowolną wartość. Wartości zdefiniowane przez platformę obejmują `Development` , `Staging` , i `Production` . W wartościach nie jest rozróżniana wielkość liter.
-
-**Klucz**: `environment`  
-**Typ**: `string`  
-**Wartość domyślna**: `Production`  
-**Zmienna środowiskowa**: `<PREFIX_>ENVIRONMENT`
-
-Aby ustawić tę wartość, użyj zmiennej środowiskowej lub wywołaj `UseEnvironment` `IHostBuilder` :
-
-```csharp
-Host.CreateDefaultBuilder(args)
-    .UseEnvironment("Development")
-    //...
-```
-
-### <a name="shutdowntimeout"></a>ShutdownTimeout
-
-[HostOptions. shutdownTimeout](xref:Microsoft.Extensions.Hosting.HostOptions.ShutdownTimeout*) ustawia limit czasu dla <xref:Microsoft.Extensions.Hosting.IHost.StopAsync*> . Wartość domyślna to pięć sekund.  Podczas okresu przekroczenia limitu czasu Host:
-
-* Wyzwala [IHostApplicationLifetime. ApplicationStopping](/dotnet/api/microsoft.extensions.hosting.ihostapplicationlifetime.applicationstopping).
-* Próbuje zatrzymać usługi hostowane, rejestrowanie błędów dla usług, których zatrzymanie nie powiodło się.
-
-Jeśli limit czasu upłynie przed zatrzymaniem wszystkich usług hostowanych, wszystkie pozostałe aktywne usługi zostaną zatrzymane po zamknięciu aplikacji. Usługi są zatrzymane nawet wtedy, gdy nie zakończyły przetwarzania. Jeśli usługi wymagają dodatkowego czasu na zatrzymanie, zwiększ limit czasu.
-
-**Klucz**: `shutdownTimeoutSeconds`  
-**Typ**: `int`  
-**Wartość domyślna**: 5 sekund  
-**Zmienna środowiskowa**: `<PREFIX_>SHUTDOWNTIMEOUTSECONDS`
-
-Aby ustawić tę wartość, użyj zmiennej środowiskowej lub skonfiguruj `HostOptions` . Poniższy przykład ustawia limit czasu na 20 sekund:
-
-[!code-csharp[](generic-host/samples-snapshot/3.x/Program.cs?name=snippet_HostOptions)]
-
-### <a name="disable-app-configuration-reload-on-change"></a>Wyłącz ponowne ładowanie konfiguracji aplikacji przy zmianie
-
-[Domyślnie](xref:fundamentals/configuration/index#default) *appsettings.json* i *appSettings. { Środowisko}. kod JSON* jest ponownie ładowany, gdy plik ulegnie zmianie. Aby wyłączyć to zachowanie ponownego ładowania w ASP.NET Core 5,0 w wersji zapoznawczej 3 lub nowszej, ustaw `hostBuilder:reloadConfigOnChange` klucz na `false` .
-
-**Klucz**: `hostBuilder:reloadConfigOnChange`  
-**Typ**: `bool` ( `true` lub `1` )  
-**Wartość domyślna**: `true`  
-**Argument wiersza polecenia**: `hostBuilder:reloadConfigOnChange`  
-**Zmienna środowiskowa**: `<PREFIX_>hostBuilder:reloadConfigOnChange`
-
-> [!WARNING]
-> Separator dwukropek ( `:` ) nie działa ze zmiennymi kluczy hierarchicznych na wszystkich platformach. Aby uzyskać więcej informacji, zobacz [zmienne środowiskowe](xref:fundamentals/configuration/index#environment-variables).
-
-## <a name="settings-for-web-apps"></a>Ustawienia usługi Web Apps
-
-Niektóre ustawienia hosta mają zastosowanie tylko do obciążeń protokołu HTTP. Domyślnie zmienne środowiskowe używane do konfigurowania tych ustawień mogą mieć `DOTNET_` `ASPNETCORE_` prefiks lub.
-
-Metody rozszerzenia dla `IWebHostBuilder` programu są dostępne dla tych ustawień. Przykłady kodu, które pokazują, jak wywołać metody rozszerzane `webBuilder` jest wystąpieniem `IWebHostBuilder` , tak jak w poniższym przykładzie:
-
-```csharp
-public static IHostBuilder CreateHostBuilder(string[] args) =>
-    Host.CreateDefaultBuilder(args)
-        .ConfigureWebHostDefaults(webBuilder =>
-        {
-            webBuilder.CaptureStartupErrors(true);
-            webBuilder.UseStartup<Startup>();
-        });
-```
-
-### <a name="capturestartuperrors"></a>CaptureStartupErrors
-
-Gdy `false` , błędy podczas uruchamiania, kończy się hostem. Gdy `true` host przechwytuje wyjątki podczas uruchamiania, a następnie próbuje uruchomić serwer.
-
-**Klucz**: `captureStartupErrors`  
-**Typ**: `bool` ( `true` lub `1` )  
-**Domyślnie**: wartość domyślna to, `false` chyba że aplikacja działa z Kestrel za usługami IIS, gdzie wartość domyślna to `true` .  
-**Zmienna środowiskowa**: `<PREFIX_>CAPTURESTARTUPERRORS`
-
-Aby ustawić tę wartość, użyj konfiguracji lub wywołania `CaptureStartupErrors` :
-
-```csharp
-webBuilder.CaptureStartupErrors(true);
-```
-
-### <a name="detailederrors"></a>DetailedErrors
-
-Po włączeniu lub gdy środowisko jest `Development` , aplikacja przechwytuje szczegółowe błędy.
-
-**Klucz**: `detailedErrors`  
-**Typ**: `bool` ( `true` lub `1` )  
-**Wartość domyślna**: `false`  
-**Zmienna środowiskowa**: `<PREFIX_>_DETAILEDERRORS`
-
-Aby ustawić tę wartość, użyj konfiguracji lub wywołania `UseSetting` :
-
-```csharp
-webBuilder.UseSetting(WebHostDefaults.DetailedErrorsKey, "true");
-```
-
-### <a name="hostingstartupassemblies"></a>HostingStartupAssemblies
-
-Rozdzielany średnikami ciąg początkowych zestawów startowych do załadowania podczas uruchamiania. Mimo że wartość konfiguracji jest domyślnie pustym ciągiem, zestaw startowy obsługujący zawsze zawiera zestaw aplikacji. W przypadku udostępniania zestawów startowych są one dodawane do zestawu aplikacji do załadowania, gdy aplikacja kompiluje swoje popularne usługi podczas uruchamiania.
-
-**Klucz**: `hostingStartupAssemblies`  
-**Typ**: `string`  
-**Wartość domyślna**: pusty ciąg  
-**Zmienna środowiskowa**: `<PREFIX_>_HOSTINGSTARTUPASSEMBLIES`
-
-Aby ustawić tę wartość, użyj konfiguracji lub wywołania `UseSetting` :
-
-```csharp
-webBuilder.UseSetting(WebHostDefaults.HostingStartupAssembliesKey, "assembly1;assembly2");
-```
-
-### <a name="hostingstartupexcludeassemblies"></a>HostingStartupExcludeAssemblies
-
-Rozdzielany średnikami ciąg początkowych zestawów uruchamiania, który ma zostać wykluczony podczas uruchamiania.
-
-**Klucz**: `hostingStartupExcludeAssemblies`  
-**Typ**: `string`  
-**Wartość domyślna**: pusty ciąg  
-**Zmienna środowiskowa**: `<PREFIX_>_HOSTINGSTARTUPEXCLUDEASSEMBLIES`
-
-Aby ustawić tę wartość, użyj konfiguracji lub wywołania `UseSetting` :
-
-```csharp
-webBuilder.UseSetting(WebHostDefaults.HostingStartupExcludeAssembliesKey, "assembly1;assembly2");
-```
-
-### <a name="https_port"></a>HTTPS_Port
-
-Port przekierowania protokołu HTTPS. Używany do [wymuszania protokołu HTTPS](xref:security/enforcing-ssl).
-
-**Klucz**: `https_port`  
-**Typ**: `string`  
-Wartość **Domyślna**: nie ustawiono wartości domyślnej.  
-**Zmienna środowiskowa**: `<PREFIX_>HTTPS_PORT`
-
-Aby ustawić tę wartość, użyj konfiguracji lub wywołania `UseSetting` :
-
-```csharp
-webBuilder.UseSetting("https_port", "8080");
-```
-
-### <a name="preferhostingurls"></a>PreferHostingUrls
-
-Wskazuje, czy host powinien nasłuchiwać adresów URL skonfigurowanych przy użyciu `IWebHostBuilder` zamiast adresów URL skonfigurowanych dla `IServer` implementacji.
-
-**Klucz**: `preferHostingUrls`  
-**Typ**: `bool` ( `true` lub `1` )  
-**Wartość domyślna**: `true`  
-**Zmienna środowiskowa**: `<PREFIX_>_PREFERHOSTINGURLS`
-
-Aby ustawić tę wartość, użyj zmiennej środowiskowej lub wywołaj `PreferHostingUrls` :
-
-```csharp
-webBuilder.PreferHostingUrls(false);
-```
-
-### <a name="preventhostingstartup"></a>PreventHostingStartup
-
-Zapobiega automatycznemu ładowaniu zestawów startowych hostingu, w tym hostingu zestawów startowych skonfigurowanych przez zestaw aplikacji. Aby uzyskać więcej informacji, zobacz <xref:fundamentals/configuration/platform-specific-configuration>.
-
-**Klucz**: `preventHostingStartup`  
-**Typ**: `bool` ( `true` lub `1` )  
-**Wartość domyślna**: `false`  
-**Zmienna środowiskowa**: `<PREFIX_>_PREVENTHOSTINGSTARTUP`
-
-Aby ustawić tę wartość, użyj zmiennej środowiskowej lub wywołaj `UseSetting` :
-
-```csharp
-webBuilder.UseSetting(WebHostDefaults.PreventHostingStartupKey, "true");
-```
-
-### <a name="startupassembly"></a>StartupAssembly
-
-Zestaw do wyszukiwania `Startup` klasy.
-
-**Klucz**: `startupAssembly`  
-**Typ**: `string`  
-**Domyślnie**: zestaw aplikacji  
-**Zmienna środowiskowa**: `<PREFIX_>STARTUPASSEMBLY`
-
-Aby ustawić tę wartość, użyj zmiennej środowiskowej lub wywołania `UseStartup` . `UseStartup` może przyjmować nazwę zestawu ( `string` ) lub typ ( `TStartup` ). Jeśli `UseStartup` wywoływana jest wiele metod, pierwszeństwo ma Ostatnia.
-
-```csharp
-webBuilder.UseStartup("StartupAssemblyName");
-```
-
-```csharp
-webBuilder.UseStartup<Startup>();
-```
-
-### <a name="urls"></a>Adresy URL
-
-Rozdzielana średnikami lista adresów IP lub adresów hostów z portami i protokołami, na których serwer powinien nasłuchiwać żądań. Na przykład `http://localhost:123`. Użyj " \* ", aby wskazać, że serwer powinien nasłuchiwać żądań na dowolnym adresie IP lub nazwie hosta przy użyciu określonego portu i protokołu (na przykład `http://*:5000` ). Protokół ( `http://` lub `https://` ) musi być dołączony do każdego adresu URL. Obsługiwane formaty różnią się między serwerami.
-
-**Klucz**: `urls`  
-**Typ**: `string`  
-**Wartość domyślna**: `http://localhost:5000` i `https://localhost:5001`  
-**Zmienna środowiskowa**: `<PREFIX_>URLS`
-
-Aby ustawić tę wartość, użyj zmiennej środowiskowej lub wywołaj `UseUrls` :
-
-```csharp
-webBuilder.UseUrls("http://*:5000;http://localhost:5001;https://hostname:5002");
-```
-
-Kestrel ma własny interfejs API konfiguracji punktu końcowego. Aby uzyskać więcej informacji, zobacz <xref:fundamentals/servers/kestrel#endpoint-configuration>.
-
-### <a name="webroot"></a>WebRoot
-
-Właściwość [IWebHostEnvironment. WebRootPath](xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment.WebRootPath) określa ścieżkę względną do statycznych zasobów aplikacji. Jeśli ścieżka nie istnieje, jest używany dostawca plików No-op.  
-
-**Klucz**: `webroot`  
-**Typ**: `string`  
-**Wartość domyślna**: wartość domyślna to `wwwroot` . Ścieżka do *elementu {content root}/wwwroot* musi istnieć.  
-**Zmienna środowiskowa**: `<PREFIX_>WEBROOT`
-
-Aby ustawić tę wartość, użyj zmiennej środowiskowej lub wywołaj `UseWebRoot` `IWebHostBuilder` :
-
-```csharp
-webBuilder.UseWebRoot("public");
-```
-
-Aby uzyskać więcej informacji, zobacz:
-
-* [Podstawy: katalog główny sieci Web](xref:fundamentals/index#web-root)
-* [ContentRoot](#contentroot)
-
-## <a name="manage-the-host-lifetime"></a>Zarządzanie okresem istnienia hosta
-
-Wywołaj metody z skompilowanej <xref:Microsoft.Extensions.Hosting.IHost> implementacji, aby uruchomić i zatrzymać aplikację. Te metody mają wpływ na wszystkie  <xref:Microsoft.Extensions.Hosting.IHostedService> implementacje zarejestrowane w kontenerze usługi.
-
-### <a name="run"></a>Uruchom
-
-<xref:Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run*> uruchamia aplikację i blokuje wątek wywołujący do momentu wyłączenia hosta.
-
-### <a name="runasync"></a>RunAsync
-
-<xref:Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync*> uruchamia aplikację i zwraca <xref:System.Threading.Tasks.Task> , która kończy się po wyzwoleniu tokenu anulowania lub zamknięcia.
-
-### <a name="runconsoleasync"></a>RunConsoleAsync
-
-<xref:Microsoft.Extensions.Hosting.HostingHostBuilderExtensions.RunConsoleAsync*>włącza obsługę konsoli, kompiluje i uruchamia hosta, a następnie czeka na zamknięcie programu <kbd>Ctrl</kbd> + <kbd>C</kbd>/SIGINT lub SIGTERM.
-
-### <a name="start"></a>Rozpocznij
-
-<xref:Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Start*> uruchamia hosta synchronicznie.
-
-### <a name="startasync"></a>StartAsync
-
-<xref:Microsoft.Extensions.Hosting.IHost.StartAsync*> uruchamia hosta i zwraca <xref:System.Threading.Tasks.Task> , który kończy się po wyzwoleniu tokenu anulowania lub zamknięcia. 
-
-<xref:Microsoft.Extensions.Hosting.IHostLifetime.WaitForStartAsync*> jest wywoływana na początku `StartAsync` , który czeka na zakończenie przed kontynuowaniem. Może to służyć do opóźnienia uruchamiania do momentu zasygnalizowania zdarzenia zewnętrznego.
-
-### <a name="stopasync"></a>StopAsync
-
-<xref:Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.StopAsync*> próbuje zatrzymać hosta w ramach podanego limitu czasu.
-
-### <a name="waitforshutdown"></a>WaitForShutdown
-
-<xref:Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.WaitForShutdown*>blokuje wątek wywołujący do momentu wyzwolenia przez IHostLifetime, na przykład przez <kbd>naciśnięcie klawiszy CTRL</kbd> + <kbd>C</kbd>/SIGINT lub SIGTERM.
-
-### <a name="waitforshutdownasync"></a>WaitForShutdownAsync
-
-<xref:Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.WaitForShutdownAsync*> Zwraca wartość <xref:System.Threading.Tasks.Task> , która kończy się, gdy zamknięcie jest wyzwalane za pośrednictwem danego tokenu i wywołań <xref:Microsoft.Extensions.Hosting.IHost.StopAsync*> .
-
-### <a name="external-control"></a>Zewnętrzna kontrola
-
-Bezpośrednią kontrolę nad okresem istnienia hosta można uzyskać przy użyciu metod, które mogą być wywoływane zewnętrznie:
-
-```csharp
-public class Program
-{
-    private IHost _host;
-
-    public Program()
-    {
-        _host = new HostBuilder()
-            .Build();
-    }
-
-    public async Task StartAsync()
-    {
-        _host.StartAsync();
-    }
-
-    public async Task StopAsync()
-    {
-        using (_host)
-        {
-            await _host.StopAsync(TimeSpan.FromSeconds(5));
-        }
     }
 }
 ```

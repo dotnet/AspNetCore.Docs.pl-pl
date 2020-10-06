@@ -18,16 +18,16 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity/spa
-ms.openlocfilehash: 913f8f1e43586ce71353c080e72be3b80f4c0573
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 1e50fb2f2f5e3621b189f756c53e80a2dd64c8a6
+ms.sourcegitcommit: d60bfd52bfb559e805abd654b87a2a0c7eb69cf8
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634270"
+ms.lasthandoff: 10/06/2020
+ms.locfileid: "91754531"
 ---
 # <a name="authentication-and-authorization-for-spas"></a>Uwierzytelnianie i autoryzacja dla aplikacji jednostronicowych
 
-ASP.NET Core 3,0 lub nowszy oferuje uwierzytelnianie w aplikacjach jednostronicowych (aplikacji jednostronicowych) przy użyciu obsługi autoryzacji interfejsu API. ASP.NET Core Identityuwierzytelnianie i przechowywanie użytkowników są łączone z [ Identity serwerem](https://identityserver.io/) w celu zaimplementowania połączenia OpenID Connect.
+Szablony ASP.NET Core 3,1 i nowsze oferują uwierzytelnianie w aplikacjach jednostronicowych (aplikacji jednostronicowych) przy użyciu obsługi autoryzacji interfejsu API. ASP.NET Core Identityuwierzytelnianie i przechowywanie użytkowników są łączone z [ Identity serwerem](https://identityserver.io/) w celu zaimplementowania połączenia OpenID Connect.
 
 Parametr uwierzytelniania został dodany do szablonów projektów **kątowych** i **reagowania** , które są podobne do parametrów uwierzytelniania w szablonach **aplikacji sieci Web (Model-View-Controller)** (MVC) i **aplikacji sieci Web** ( Razor strony). Dozwolone wartości parametrów to **none** i **indywidualny**. Szablon projektu **React.js i Redux** nie obsługuje w tym momencie parametru Authentication.
 
@@ -119,7 +119,7 @@ Aby uzyskać pełną kontrolę nad schematem bazy danych, Dziedzicz z jednej z d
 
 W pliku *Controllers\OidcConfigurationController.cs* Zwróć uwagę na punkt końcowy, który jest wstępnie zainicjowany do obsługi parametrów OIDC wymaganych przez klienta.
 
-### <a name="appsettingsjson"></a>appsettings.jsna
+### <a name="appsettingsjson"></a>appsettings.json
 
 W *appsettings.js* w pliku katalogu głównego projektu znajduje się nowa `IdentityServer` sekcja opisująca listę skonfigurowanych klientów. W poniższym przykładzie istnieje pojedynczy klient. Nazwa klienta odpowiada nazwie aplikacji i jest zamapowana według Konwencji do `ClientId` parametru OAuth. Profil wskazuje konfigurowany typ aplikacji. Jest on używany wewnętrznie w przypadku Konwencji, które upraszczają proces konfiguracji serwera. Istnieje kilka dostępnych profilów, zgodnie z opisem w sekcji [Profile aplikacji](#application-profiles) .
 

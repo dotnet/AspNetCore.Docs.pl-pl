@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: d4fd0d501ff14e37bb55b78bb6493ad43f9e5a87
-ms.sourcegitcommit: 139c998d37e9f3e3d0e3d72e10dbce8b75957d89
+ms.openlocfilehash: b8dd272d673e84b45a39272531385ebfd1d06175
+ms.sourcegitcommit: daa9ccf580df531254da9dce8593441ac963c674
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/07/2020
-ms.locfileid: "91805573"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91900989"
 ---
 # <a name="debug-aspnet-core-no-locblazor-webassembly"></a>Debuguj ASP.NET Core Blazor WebAssembly
 
@@ -93,7 +93,7 @@ Aby debugować Blazor WebAssembly aplikację w programie Visual Studio:
    > [!NOTE]
    > **Uruchamianie bez debugowania** (<kbd>Ctrl</kbd> + <kbd>F5</kbd>) nie jest obsługiwane. Gdy aplikacja jest uruchamiana w konfiguracji debugowania, obciążenie związane z debugowaniem zawsze skutkuje niewielkim obniżeniem wydajności.
 
-1. W aplikacji *klienckiej* Ustaw punkt przerwania w `currentCount++;` wierszu `Pages/Counter.razor` .
+1. W `*Client*` aplikacji ustaw punkt przerwania w `currentCount++;` wierszu `Pages/Counter.razor` .
 1. W przeglądarce przejdź do `Counter` strony i wybierz przycisk **kliknij** , aby trafić punkt przerwania.
 1. W programie Visual Studio Sprawdź wartość `currentCount` pola w oknie **zmiennych lokalnych** .
 1. Naciśnij klawisz <kbd>F5</kbd> , aby kontynuować wykonywanie.
@@ -180,7 +180,7 @@ Aby uzyskać informacje na temat używania niestandardowej ścieżki bazy aplika
 
 1. Uruchomiona jest aplikacja autonomiczna i zostanie otwarta przeglądarka debugowania.
 
-1. W aplikacji *klienckiej* Ustaw punkt przerwania w `currentCount++;` wierszu `Pages/Counter.razor` .
+1. W `*Client*` aplikacji ustaw punkt przerwania w `currentCount++;` wierszu `Pages/Counter.razor` .
 
 1. W przeglądarce przejdź do `Counter` strony i wybierz przycisk **kliknij** , aby trafić punkt przerwania.
 
@@ -285,7 +285,7 @@ Aby debugować Blazor WebAssembly aplikację w Visual Studio dla komputerów Mac
    > [!IMPORTANT]
    > Przeglądarka Google Chrome lub Microsoft Edge musi być wybraną przeglądarką dla sesji debugowania.
 
-1. W aplikacji *klienckiej* Ustaw punkt przerwania w `currentCount++;` wierszu `Pages/Counter.razor` .
+1. W `*Client*` aplikacji ustaw punkt przerwania w `currentCount++;` wierszu `Pages/Counter.razor` .
 1. W przeglądarce przejdź do `Counter` strony i wybierz przycisk **kliknij** , aby trafić w punkt przerwania:
 1. W programie Visual Studio Sprawdź wartość `currentCount` pola w oknie **zmiennych lokalnych** .
 1. Naciśnij <kbd>&#8984;</kbd> + <kbd>&#8617;</kbd> , aby kontynuować wykonywanie.

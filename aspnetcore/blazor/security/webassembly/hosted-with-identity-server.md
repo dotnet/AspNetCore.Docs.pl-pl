@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-identity-server
-ms.openlocfilehash: 91cc7ffc46f5f1f68efd7e481479b19938476cb0
-ms.sourcegitcommit: d7991068bc6b04063f4bd836fc5b9591d614d448
+ms.openlocfilehash: 6ae8c55fcfc85dc725a7dd20a7dbecba063a13e9
+ms.sourcegitcommit: daa9ccf580df531254da9dce8593441ac963c674
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/06/2020
-ms.locfileid: "91762246"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91900791"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-hosted-app-with-no-locidentity-server"></a>Zabezpieczanie Blazor WebAssembly hostowanej aplikacji ASP.NET Core Identity z serwerem
 
@@ -72,7 +72,7 @@ Aby utworzyć nowy Blazor WebAssembly projekt z mechanizmem uwierzytelniania:
 
 ---
 
-## <a name="server-app-configuration"></a>Konfiguracja aplikacji serwera
+## <a name="server-app-configuration"></a>*`Server`* Konfiguracja aplikacji
 
 W poniższych sekcjach opisano Dodatki do projektu w przypadku włączenia obsługi uwierzytelniania.
 
@@ -170,7 +170,7 @@ W sekcji Ustawienia aplikacji ( `appsettings.json` ) w katalogu głównym projek
 
 Symbol zastępczy `{APP ASSEMBLY}` jest nazwą zestawu aplikacji (na przykład `BlazorSample.Client` ).
 
-## <a name="client-app-configuration"></a>Konfiguracja aplikacji klienta
+## <a name="client-app-configuration"></a>*`Client`* Konfiguracja aplikacji
 
 ### <a name="authentication-package"></a>Pakiet uwierzytelniania
 
@@ -287,7 +287,7 @@ Uruchom aplikację z projektu serwera. W przypadku korzystania z programu Visual
 
 ### <a name="custom-user-factory"></a>Niestandardowa fabryka użytkowników
 
-W aplikacji klienckiej Utwórz niestandardową fabrykę użytkowników. Identity Serwer wysyła wiele ról jako tablicę JSON w ramach pojedynczego `role` żądania. Pojedyncza rola jest wysyłana jako wartość ciągu w ramach żądania. Fabryka tworzy pojedyncze zgłoszenie `role` dla każdej z ról użytkownika.
+W *`Client`* aplikacji Utwórz niestandardową fabrykę użytkowników. Identity Serwer wysyła wiele ról jako tablicę JSON w ramach pojedynczego `role` żądania. Pojedyncza rola jest wysyłana jako wartość ciągu w ramach żądania. Fabryka tworzy pojedyncze zgłoszenie `role` dla każdej z ról użytkownika.
 
 `CustomUserFactory.cs`:
 
@@ -349,14 +349,14 @@ public class CustomUserFactory
 }
 ```
 
-W aplikacji klienckiej Zarejestruj fabrykę w `Program.Main` ( `Program.cs` ):
+W *`Client`* aplikacji Zarejestruj fabrykę w `Program.Main` ( `Program.cs` ):
 
 ```csharp
 builder.Services.AddApiAuthorization()
     .AddAccountClaimsPrincipalFactory<CustomUserFactory>();
 ```
 
-W aplikacji serwera Wywołaj <xref:Microsoft.AspNetCore.Identity.IdentityBuilder.AddRoles*> Identity konstruktora, który dodaje usługi związane z rolami:
+W *`Server`* aplikacji Zadzwoń do <xref:Microsoft.AspNetCore.Identity.IdentityBuilder.AddRoles*> Identity konstruktora, który dodaje usługi związane z rolami:
 
 ```csharp
 using Microsoft.AspNetCore.Identity;
@@ -378,7 +378,7 @@ Skorzystaj z **jednej** z następujących metod:
 
 #### <a name="api-authorization-options"></a>Opcje autoryzacji interfejsu API
 
-W aplikacji serwerowej:
+W *`Server`* aplikacji:
 
 * Skonfiguruj Identity serwer, aby umieścić `name` oświadczenia i w tokenie `role` dostępu.
 * Zapobiegaj domyślnym mapowaniu ról w programie obsługi tokenów JWT.
@@ -402,7 +402,7 @@ JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("role");
 
 #### <a name="profile-service"></a>Usługa profilowania
 
-W aplikacji serwerowej Utwórz `ProfileService` implementację.
+W *`Server`* aplikacji Utwórz `ProfileService` implementację.
 
 `ProfileService.cs`:
 
@@ -436,7 +436,7 @@ public class ProfileService : IProfileService
 }
 ```
 
-W aplikacji serwera Zarejestruj usługę profilu w `Startup.ConfigureServices` :
+W *`Server`* aplikacji Zarejestruj usługę profilu w `Startup.ConfigureServices` :
 
 ```csharp
 using IdentityServer4.Services;
@@ -448,7 +448,7 @@ services.AddTransient<IProfileService, ProfileService>();
 
 ### <a name="use-authorization-mechanisms"></a>Korzystanie z mechanizmów autoryzacji
 
-W aplikacji klienckiej podejścia do autoryzacji składników są w tym momencie funkcjonalne. Każdy mechanizm autoryzacji w składnikach może używać roli do autoryzowania użytkownika:
+W *`Client`* aplikacji metody autoryzacji składników są w tym momencie funkcjonalne. Każdy mechanizm autoryzacji w składnikach może używać roli do autoryzowania użytkownika:
 
 * [ `AuthorizeView` składnik](xref:blazor/security/index#authorizeview-component) (przykład: `<AuthorizeView Roles="admin">` )
 * [ `[Authorize]` dyrektywa Attribute](xref:blazor/security/index#authorize-attribute) ( <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> ) (przykład: `@attribute [Authorize(Roles = "admin")]` )
@@ -463,7 +463,7 @@ W aplikacji klienckiej podejścia do autoryzacji składników są w tym momencie
   }
   ```
 
-`User.Identity.Name` Program jest wypełniany w aplikacji klienckiej przy użyciu nazwy użytkownika, która jest zazwyczaj ich adresem e-mail logowania.
+`User.Identity.Name` jest wypełniana w *`Client`* aplikacji nazwą użytkownika, która jest zazwyczaj ich adresem e-mail logowania.
 
 [!INCLUDE[](~/includes/blazor-security/usermanager-signinmanager.md)]
 
@@ -568,7 +568,7 @@ Get-ChildItem -path Cert:\CurrentUser\My -Recurse | Format-List DnsNameList, Sub
 
 [!INCLUDE[](~/includes/blazor-security/troubleshoot.md)]
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Wdrożenie do Azure App Service](xref:security/authentication/identity/spa#deploy-to-production)
 * [Importowanie certyfikatu z Key Vault (dokumentacja platformy Azure)](/azure/app-service/configure-ssl-certificate#import-a-certificate-from-key-vault)

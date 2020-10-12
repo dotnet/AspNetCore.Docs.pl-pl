@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/additional-scenarios
-ms.openlocfilehash: 2881b5d01f3b2e41659e3166a4e77b64a450f017
-ms.sourcegitcommit: a07f83b00db11f32313045b3492e5d1ff83c4437
+ms.openlocfilehash: 50d455b37c51fdd6d3b52b10b3e819eb45526de4
+ms.sourcegitcommit: daa9ccf580df531254da9dce8593441ac963c674
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/15/2020
-ms.locfileid: "90592922"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91900963"
 ---
 # <a name="aspnet-core-no-locblazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor WebAssembly dodatkowe scenariusze zabezpieczeń
 
@@ -177,7 +177,7 @@ W przypadku Blazor aplikacji na podstawie Blazor WebAssembly szablonu hostowaneg
 
 ### <a name="graph-api-example"></a>Przykład interfejs API programu Graph
 
-W poniższym przykładzie nazwa <xref:System.Net.Http.HttpClient> dla interfejs API programu Graph jest używana w celu uzyskania numeru telefonu komórkowego użytkownika w celu przetworzenia wywołania. Po dodaniu Microsoft Graph uprawnienia interfejsu API `User.Read` w obszarze usługi AAD w Azure Portal zakres jest konfigurowany dla nazwanego klienta w aplikacji autonomicznej lub aplikacji klienckiej rozwiązania hostowanego Blazor .
+W poniższym przykładzie nazwa <xref:System.Net.Http.HttpClient> dla interfejs API programu Graph jest używana w celu uzyskania numeru telefonu komórkowego użytkownika w celu przetworzenia wywołania. Po dodaniu Microsoft Graph uprawnienia interfejsu API `User.Read` w obszarze usługi AAD w Azure Portal zakres jest konfigurowany dla nazwanego klienta w aplikacji autonomicznej lub *`Client`* aplikacji hostowanego Blazor rozwiązania.
 
 > [!NOTE]
 > W przykładzie w tej sekcji uzyskano interfejs API programu Graph dane dla użytkownika w *kodzie składnika*. Aby utworzyć oświadczenia użytkowników z interfejs API programu Graph, zobacz następujące zasoby:
@@ -1070,7 +1070,7 @@ Po zastosowaniu wskazówek w jednej z Blazor WebAssembly tematów aplikacji host
 * Wstępnie renderuje ścieżki, dla których autoryzacja nie jest wymagana.
 * Nie określa ścieżek PreRender, dla których wymagana jest autoryzacja.
 
-W klasie aplikacji klienta `Program` ( `Program.cs` ) należy wykonać typowe rejestracje usługi w oddzielnym metodzie (na przykład `ConfigureCommonServices` ):
+W *`Client`* `Program` klasie aplikacji ( `Program.cs` ), typowe rejestracje usługi w ramach programu w oddzielnym metodzie (na przykład `ConfigureCommonServices` ):
 
 ```csharp
 public class Program
@@ -1130,7 +1130,7 @@ app.UseEndpoints(endpoints =>
 });
 ```
 
-W aplikacji serwer Utwórz `Pages` folder, jeśli nie istnieje. Utwórz `_Host.cshtml` stronę w folderze aplikacji serwera `Pages` . Wklej zawartość z pliku aplikacji klienckiej `wwwroot/index.html` do `Pages/_Host.cshtml` pliku. Aktualizuj zawartość pliku:
+W aplikacji serwer Utwórz `Pages` folder, jeśli nie istnieje. Utwórz `_Host.cshtml` stronę w folderze aplikacji serwera `Pages` . Wklej zawartość z *`Client`* `wwwroot/index.html` pliku aplikacji do `Pages/_Host.cshtml` pliku. Aktualizuj zawartość pliku:
 
 * Dodaj `@page "_Host"` na początku pliku.
 * Zastąp `<app>Loading...</app>` tag następującym:
@@ -1297,6 +1297,6 @@ Symbol zastępczy `{APP ASSEMBLY}` jest nazwą zestawu aplikacji (na przykład `
 
 Aby uzyskać więcej informacji, zobacz <xref:grpc/browser>.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [`HttpClient` i `HttpRequestMessage` z opcjami żądania interfejsu API pobierania](xref:blazor/call-web-api#httpclient-and-httprequestmessage-with-fetch-api-request-options)

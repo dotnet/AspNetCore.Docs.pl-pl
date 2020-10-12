@@ -5,7 +5,7 @@ description: Dowiedz się, jak zabezpieczyć Blazor WebAssembly aplikację hosto
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/08/2020
+ms.date: 10/08/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-azure-active-directory-b2c
-ms.openlocfilehash: adc45293a6dfd324c12482d2dfffdeaa25eee4a3
-ms.sourcegitcommit: 9a90b956af8d8584d597f1e5c1dbfb0ea9bb8454
+ms.openlocfilehash: aa6c865f5fd51d1634bde3ac96e1fddc7216a801
+ms.sourcegitcommit: daa9ccf580df531254da9dce8593441ac963c674
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/21/2020
-ms.locfileid: "88712444"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91900950"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-hosted-app-with-azure-active-directory-b2c"></a>Zabezpieczanie Blazor WebAssembly hostowanej aplikacji ASP.NET Core przy użyciu Azure Active Directory B2C
 
@@ -47,8 +47,8 @@ Postępuj zgodnie ze wskazówkami w [samouczku: Zarejestruj aplikację w Azure A
 1. Podaj **nazwę** aplikacji (na przykład ** Blazor Server AAD B2C**).
 1. W przypadku **obsługiwanych typów kont**wybierz opcję wiele dzierżawców: **konta w dowolnym katalogu organizacyjnym lub dowolnego dostawcę tożsamości. Do uwierzytelniania użytkowników za pomocą Azure AD B2C.**
 1. *Aplikacja interfejsu API serwera* nie wymaga **identyfikatora URI przekierowania** w tym scenariuszu, więc pozostaw listę rozwijaną w **sieci Web** i nie wprowadzaj identyfikatora URI przekierowania.
-1. Upewnij się, że **uprawnienia**  >  **udzielają zgody administratora na OpenID Connect, a uprawnienia offline_access** są włączone.
-1. Wybierz pozycję **Rejestruj**.
+1. Upewnij się, że **uprawnienia**  >  **udzielają zgody administratora na OpenID Connect, a uprawnienia offline_access** są zaznaczone.
+1. Wybierz pozycję **Zarejestruj**.
 
 Zapisz następujące informacje:
 
@@ -67,30 +67,52 @@ W obszarze **Uwidacznianie interfejsu API**:
 
 Zapisz następujące informacje:
 
-* Identyfikator URI identyfikatora aplikacji (na przykład `https://contoso.onmicrosoft.com/41451fa7-82d9-4673-8fa5-69eff5a761fd` , `api://41451fa7-82d9-4673-8fa5-69eff5a761fd` lub podana wartość niestandardowa)
+* Identyfikator URI identyfikatora aplikacji (na przykład `api://41451fa7-82d9-4673-8fa5-69eff5a761fd` , `https://contoso.onmicrosoft.com/41451fa7-82d9-4673-8fa5-69eff5a761fd` lub podana wartość niestandardowa)
 * Nazwa zakresu (na przykład `API.Access` )
-
-Identyfikator URI aplikacji może wymagać specjalnej konfiguracji w aplikacji klienckiej, która jest opisana w sekcji [zakresy tokenu dostępu](#access-token-scopes) w dalszej części tego tematu.
 
 ### <a name="register-a-client-app"></a>Rejestrowanie aplikacji klienckiej
 
-Postępuj zgodnie ze wskazówkami w [samouczku: Zarejestruj aplikację w Azure Active Directory B2C](/azure/active-directory-b2c/tutorial-register-applications) ponownie, aby zarejestrować aplikację usługi AAD dla *aplikacji klienckiej* , a następnie wykonaj następujące czynności:
+Postępuj zgodnie ze wskazówkami w [samouczku: Zarejestruj aplikację w Azure Active Directory B2C](/azure/active-directory-b2c/tutorial-register-applications) ponownie, aby zarejestrować aplikację usługi AAD dla *`Client`* aplikacji, a następnie wykonaj następujące czynności:
 
-1. W **Azure Active Directory**  >  **rejestracje aplikacji**wybierz pozycję **Nowa rejestracja**.
+::: moniker range=">= aspnetcore-5.0"
+
+1. W **Azure Active Directory** > **rejestracje aplikacji**wybierz pozycję **Nowa rejestracja**.
 1. Podaj **nazwę** aplikacji (na przykład ** Blazor AAD B2C klienta**).
 1. W przypadku **obsługiwanych typów kont**wybierz opcję wiele dzierżawców: **konta w dowolnym katalogu organizacyjnym lub dowolnego dostawcę tożsamości. Do uwierzytelniania użytkowników za pomocą Azure AD B2C.**
-1. Pozostaw pole listy rozwijanej **Identyfikator URI przekierowania** jako **Sieć Web** i podaj następujący identyfikator URI przekierowania: `https://localhost:{PORT}/authentication/login-callback` . Domyślnym portem dla aplikacji działającej w Kestrel jest 5001. Jeśli aplikacja jest uruchamiana na innym porcie Kestrel, użyj portu aplikacji. W przypadku IIS Express losowo wygenerowany port dla aplikacji można znaleźć we właściwościach aplikacji serwera w panelu **debugowanie** . Ponieważ aplikacja nie istnieje w tym punkcie i port IIS Express nie jest znany, Wróć do tego kroku po utworzeniu aplikacji i zaktualizowaniu identyfikatora URI przekierowania. W sekcji [Tworzenie aplikacji](#create-the-app) zostanie wyświetlona informacja przypominająca IIS Express użytkownikom w celu zaktualizowania identyfikatora URI przekierowania.
-1. Upewnij się, że **uprawnienia**  >  **udzielają zgody administratora na OpenID Connect, a uprawnienia offline_access** są włączone.
-1. Wybierz pozycję **Rejestruj**.
+1. Ustaw listę rozwijaną **URI przekierowania** na **aplikację jednostronicową (Spa)** i podaj następujący identyfikator URI przekierowania: `https://localhost:{PORT}/authentication/login-callback` . Domyślnym portem dla aplikacji działającej w Kestrel jest 5001. Jeśli aplikacja jest uruchamiana na innym porcie Kestrel, użyj portu aplikacji. W przypadku IIS Express losowo wygenerowany port dla aplikacji można znaleźć we *`Server`* właściwościach aplikacji w panelu **debugowanie** . Ponieważ aplikacja nie istnieje w tym punkcie i port IIS Express nie jest znany, Wróć do tego kroku po utworzeniu aplikacji i zaktualizowaniu identyfikatora URI przekierowania. W sekcji [Tworzenie aplikacji](#create-the-app) zostanie wyświetlona informacja przypominająca IIS Express użytkownikom w celu zaktualizowania identyfikatora URI przekierowania.
+1. Upewnij się, że **uprawnienia** > **udzielają zgody administratora na OpenID Connect, a uprawnienia offline_access** są zaznaczone.
+1. Wybierz pozycję **Zarejestruj**.
+
+1. Zapisz identyfikator aplikacji (klienta) (na przykład `4369008b-21fa-427c-abaa-9b53bf58e538` ).
+
+W **Authentication** obszarze > **Konfiguracja platformy** uwierzytelniania > **aplikacja jednostronicowa (Spa)**:
+
+1. Upewnij się, że jest obecny **Identyfikator URI przekierowania** `https://localhost:{PORT}/authentication/login-callback` .
+1. W przypadku **niejawnego udzielenia**upewnij się, że **nie** wybrano pól wyboru dla **tokenów dostępu** i **tokenów identyfikatorów** .
+1. Pozostałe wartości domyślne dla aplikacji są dopuszczalne dla tego środowiska.
+1. Wybierz ikonę **Zapisz**.
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+1. W **Azure Active Directory** > **rejestracje aplikacji**wybierz pozycję **Nowa rejestracja**.
+1. Podaj **nazwę** aplikacji (na przykład ** Blazor AAD B2C klienta**).
+1. W przypadku **obsługiwanych typów kont**wybierz opcję wiele dzierżawców: **konta w dowolnym katalogu organizacyjnym lub dowolnego dostawcę tożsamości. Do uwierzytelniania użytkowników za pomocą Azure AD B2C.**
+1. Pozostaw pole listy rozwijanej **Identyfikator URI przekierowania** jako **Sieć Web** i podaj następujący identyfikator URI przekierowania: `https://localhost:{PORT}/authentication/login-callback` . Domyślnym portem dla aplikacji działającej w Kestrel jest 5001. Jeśli aplikacja jest uruchamiana na innym porcie Kestrel, użyj portu aplikacji. W przypadku IIS Express losowo wygenerowany port dla aplikacji można znaleźć we *`Server`* właściwościach aplikacji w panelu **debugowanie** . Ponieważ aplikacja nie istnieje w tym punkcie i port IIS Express nie jest znany, Wróć do tego kroku po utworzeniu aplikacji i zaktualizowaniu identyfikatora URI przekierowania. W sekcji [Tworzenie aplikacji](#create-the-app) zostanie wyświetlona informacja przypominająca IIS Express użytkownikom w celu zaktualizowania identyfikatora URI przekierowania.
+1. Upewnij się, że **uprawnienia** > **udzielają zgody administratora na OpenID Connect, a uprawnienia offline_access** są zaznaczone.
+1. Wybierz pozycję **Zarejestruj**.
 
 Zapisz identyfikator aplikacji (klienta) (na przykład `4369008b-21fa-427c-abaa-9b53bf58e538` ).
 
-W **Authentication**obszarze  >  **konfiguracje platformy**uwierzytelniania w  >  **sieci Web**:
+W **Authentication** obszarze > **konfiguracje platformy** uwierzytelniania w > **sieci Web**:
 
 1. Upewnij się, że jest obecny **Identyfikator URI przekierowania** `https://localhost:{PORT}/authentication/login-callback` .
 1. W przypadku **niejawnego przydzielenia**zaznacz pola wyboru dla **tokenów dostępu** i **tokenów identyfikatorów**.
 1. Pozostałe wartości domyślne dla aplikacji są dopuszczalne dla tego środowiska.
 1. Wybierz ikonę **Zapisz**.
+
+::: moniker-end
 
 W **uprawnienia interfejsu API**:
 
@@ -99,7 +121,7 @@ W **uprawnienia interfejsu API**:
 1. Otwórz listę **interfejsów API** .
 1. Włącz dostęp do interfejsu API (na przykład `API.Access` ).
 1. Wybierz pozycję **Dodaj uprawnienia**.
-1. Wybierz przycisk **Udziel zgody administratora na {nazwa dzierżawy}** . Wybierz pozycję **Tak**, aby potwierdzić.
+1. Wybierz przycisk **Udziel zgody administratora na {nazwa dzierżawy}** . Kliknij przycisk **Tak**, aby potwierdzić.
 
 W **Home**obszarze  >  **Azure AD B2C**  >  **przepływy użytkowników**w Azure AD B2C domowej:
 
@@ -117,32 +139,30 @@ Zastąp symbole zastępcze w poniższym poleceniu zapisanymi wcześniej informac
 dotnet new blazorwasm -au IndividualB2C --aad-b2c-instance "{AAD B2C INSTANCE}" --api-client-id "{SERVER API APP CLIENT ID}" --app-id-uri "{SERVER API APP ID URI}" --client-id "{CLIENT APP CLIENT ID}" --default-scope "{DEFAULT SCOPE}" --domain "{TENANT DOMAIN}" -ho -o {APP NAME} -ssp "{SIGN UP OR SIGN IN POLICY}"
 ```
 
-| Symbol zastępczy                   | Nazwa Azure Portal                                     | Przykład                                |
-| ----------------------------- | ----------------------------------------------------- | -------------------------------------- |
-| `{AAD B2C INSTANCE}`          | Wystąpienie                                              | `https://contoso.b2clogin.com/`        |
-| `{APP NAME}`                  | &mdash;                                               | `BlazorSample`                         |
-| `{CLIENT APP CLIENT ID}`      | Identyfikator aplikacji (klienta) dla *aplikacji klienckiej*          | `4369008b-21fa-427c-abaa-9b53bf58e538` |
-| `{DEFAULT SCOPE}`             | Nazwa zakresu                                            | `API.Access`                           |
-| `{SERVER API APP CLIENT ID}`  | Identyfikator aplikacji (klienta) dla *aplikacji interfejsu API serwera*      | `41451fa7-82d9-4673-8fa5-69eff5a761fd` |
-| `{SERVER API APP ID URI}`     | Identyfikator URI identyfikatora aplikacji ([patrz Uwaga](#access-token-scopes)) | `41451fa7-82d9-4673-8fa5-69eff5a761fd` |
-| `{SIGN UP OR SIGN IN POLICY}` | Przepływ użytkownika rejestracji/logowania                             | `B2C_1_signupsignin1`                  |
-| `{TENANT DOMAIN}`             | Domena podstawowa/Wydawca/dzierżawa                       | `contoso.onmicrosoft.com`              |
+| Symbol zastępczy                   | Nazwa Azure Portal                                     | Przykład                                      |
+| ----------------------------- | ----------------------------------------------------- | -------------------------------------------- |
+| `{AAD B2C INSTANCE}`          | Wystąpienie                                              | `https://contoso.b2clogin.com/`              |
+| `{APP NAME}`                  | &mdash;                                               | `BlazorSample`                               |
+| `{CLIENT APP CLIENT ID}`      | Identyfikator aplikacji (klienta) dla *`Client`* aplikacji        | `4369008b-21fa-427c-abaa-9b53bf58e538`       |
+| `{DEFAULT SCOPE}`             | Nazwa zakresu                                            | `API.Access`                                 |
+| `{SERVER API APP CLIENT ID}`  | Identyfikator aplikacji (klienta) dla *aplikacji interfejsu API serwera*      | `41451fa7-82d9-4673-8fa5-69eff5a761fd`       |
+| `{SERVER API APP ID URI}`     | Identyfikator URI identyfikatora aplikacji                                    | `api://41451fa7-82d9-4673-8fa5-69eff5a761fd` |
+| `{SIGN UP OR SIGN IN POLICY}` | Przepływ użytkownika rejestracji/logowania                             | `B2C_1_signupsignin1`                        |
+| `{TENANT DOMAIN}`             | Domena podstawowa/Wydawca/dzierżawa                       | `contoso.onmicrosoft.com`                    |
 
 Lokalizacja wyjściowa określona przy użyciu `-o|--output` opcji tworzy folder projektu, jeśli nie istnieje, i wchodzi w skład nazwy aplikacji.
 
 > [!NOTE]
-> Przekaż identyfikator URI aplikacji do `app-id-uri` opcji, ale Uwaga w aplikacji klienckiej może być wymagana zmiana konfiguracji, która jest opisana w sekcji [zakresy tokenu dostępu](#access-token-scopes) .
->
-> Ponadto zakres skonfigurowany przez Blazor szablon hostowany może być powtórzony na HOŚCIE identyfikatora URI aplikacji. Upewnij się, że zakres skonfigurowany dla `DefaultAccessTokenScopes` kolekcji jest poprawny w `Program.Main` ( `Program.cs` ) *aplikacji klienckiej*.
+> Zakres skonfigurowany przez Blazor szablon hostowany może być powtórzony na HOŚCIE identyfikatora URI aplikacji. Upewnij się, że zakres skonfigurowany dla `DefaultAccessTokenScopes` kolekcji jest poprawny w `Program.Main` ( `Program.cs` ) *`Client`* aplikacji.
 
 > [!NOTE]
-> W Azure Portal konfiguracja platformy **uwierzytelniania**w sieci Web dla *aplikacji klienta*  >  **Platform configurations**  >  **Web**  >  **Redirect URI** jest skonfigurowana dla portu 5001 dla aplikacji, które działają na serwerze Kestrel z ustawieniami domyślnymi.
+> W Azure Portal *`Client`* **Identyfikator URI przekierowania** konfiguracji platformy aplikacji jest skonfigurowany dla portu 5001 dla aplikacji, które działają na serwerze Kestrel z ustawieniami domyślnymi.
 >
-> Jeśli *aplikacja kliencka* jest uruchamiana na losowo IIS Express porcie, port aplikacji można znaleźć we właściwościach *aplikacji interfejsu API serwera* w panelu **debugowanie** .
+> Jeśli *`Client`* aplikacja jest uruchamiana na losowo IIS Express porcie, port aplikacji można znaleźć we właściwościach *aplikacji interfejsu API serwera* w panelu **debugowanie** .
 >
-> Jeśli port nie został wcześniej skonfigurowany przy użyciu znanego portu *aplikacji klienta* , Wróć do rejestracji *aplikacji klienckiej* w Azure Portal i zaktualizuj identyfikator URI przekierowania z prawidłowym portem.
+> Jeśli port nie został wcześniej skonfigurowany przy użyciu *`Client`* znanego portu aplikacji, Wróć do *`Client`* rejestracji aplikacji w Azure Portal i zaktualizuj identyfikator URI przekierowania z prawidłowym portem.
 
-## <a name="server-app-configuration"></a>Konfiguracja aplikacji serwera
+## <a name="server-app-configuration"></a>*`Server`* Konfiguracja aplikacji
 
 *Ta sekcja dotyczy **`Server`** aplikacji rozwiązania.*
 
@@ -243,7 +263,7 @@ public class WeatherForecastController : ControllerBase
 }
 ```
 
-## <a name="client-app-configuration"></a>Konfiguracja aplikacji klienta
+## <a name="client-app-configuration"></a>*`Client`* Konfiguracja aplikacji
 
 *Ta sekcja dotyczy **`Client`** aplikacji rozwiązania.*
 
@@ -334,7 +354,11 @@ builder.Services.AddMsalAuthentication(options =>
 });
 ```
 
-[!INCLUDE[](~/includes/blazor-security/azure-scope.md)]
+Określ dodatkowe zakresy z `AdditionalScopesToConsent` :
+
+```csharp
+options.ProviderOptions.AdditionalScopesToConsent.Add("{ADDITIONAL SCOPE URI}");
+```
 
 Aby uzyskać więcej informacji, zobacz następujące sekcje *dodatkowych scenariuszy* :
 

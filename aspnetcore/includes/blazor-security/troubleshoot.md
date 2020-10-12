@@ -12,22 +12,22 @@ Jednym z metod zapobiegania występowaniu plików cookie i danych lokacji z zak�
 
 * Konfigurowanie przeglądarki
   * Użyj przeglądarki do testowania, który można skonfigurować, aby usunąć wszystkie pliki cookie i dane z lokacji za każdym razem, gdy przeglądarka zostanie zamknięta.
-  * Upewnij się, że przeglądarka została ZAMKNIĘTA ręcznie lub przez IDE między każdą zmianą aplikacji, użytkownika testowego lub konfiguracji dostawcy.
+  * Upewnij się, że przeglądarka została ZAMKNIĘTA ręcznie lub przez IDE w celu dowolnych zmian w konfiguracji aplikacji, użytkownika testowego lub dostawcy.
 * Użyj polecenia niestandardowego, aby otworzyć przeglądarkę w trybie incognito lub prywatnym w programie Visual Studio:
   * Otwórz okno dialogowe **Przeglądaj z programem** Visual Studio. **Run**
   * Wybierz przycisk **Add** (Dodaj).
   * Podaj ścieżkę do przeglądarki w polu **program** . Następujące ścieżki plików wykonywalnych są typowymi lokalizacjami instalacji dla systemu Windows 10. Jeśli przeglądarka jest zainstalowana w innej lokalizacji lub nie korzystasz z systemu Windows 10, podaj ścieżkę do pliku wykonywalnego przeglądarki.
-    * Microsoft Edge:`C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe`
-    * Google Chrome:`C:\Program Files (x86)\Google\Chrome\Application\chrome.exe`
-    * Mozilla Firefox:`C:\Program Files\Mozilla Firefox\firefox.exe`
+    * Microsoft Edge: `C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe`
+    * Google Chrome: `C:\Program Files (x86)\Google\Chrome\Application\chrome.exe`
+    * Mozilla Firefox: `C:\Program Files\Mozilla Firefox\firefox.exe`
   * W polu **argumenty** Podaj opcję wiersza polecenia, która jest wykorzystywana przez przeglądarkę do otwierania w trybie incognito lub prywatnym. Niektóre przeglądarki wymagają adresu URL aplikacji.
-    * Microsoft Edge:`-inprivate`
-    * Google Chrome:`--incognito --new-window https://localhost:5001`
-    * Mozilla Firefox:`-private -url https://localhost:5001`
+    * Microsoft Edge: Użyj `-inprivate` .
+    * Google Chrome: Użyj `--incognito --new-window {URL}` , gdzie symbol zastępczy `{URL}` jest adresem URL do otwarcia (na przykład `https://localhost:5001` ).
+    * Mozilla Firefox: Użyj `-private -url {URL}` , gdzie symbol zastępczy `{URL}` jest adresem URL do otwarcia (na przykład `https://localhost:5001` ).
   * Podaj nazwę w polu **przyjazna nazwa** . Na przykład `Firefox Auth Testing`.
   * Wybierz przycisk **OK**.
   * Aby uniknąć konieczności wybierania profilu przeglądarki dla każdej iteracji testowania w aplikacji, Ustaw profil jako domyślny przy użyciu przycisku **Ustaw jako domyślny** .
-  * Upewnij się, że przeglądarka jest zamknięta przez środowisko IDE między wszystkimi zmianami aplikacji, użytkownika testowego lub konfiguracji dostawcy.
+  * Upewnij się, że w środowisku IDE jest ZAMKNIĘTA przeglądarka, aby wprowadzić zmiany w konfiguracji aplikacji, użytkownika testowego lub dostawcy.
 
 ### <a name="run-the-server-app"></a>Uruchom aplikację serwera
 

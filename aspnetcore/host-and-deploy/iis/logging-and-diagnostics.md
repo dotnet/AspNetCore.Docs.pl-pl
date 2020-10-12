@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/logging-and-diagnostics
-ms.openlocfilehash: 9af2311dd1f42cce3547c8215af22d2613453510
-ms.sourcegitcommit: d60bfd52bfb559e805abd654b87a2a0c7eb69cf8
+ms.openlocfilehash: 523eec53d7d21723dcf136c4e5ce299533a78cc6
+ms.sourcegitcommit: daa9ccf580df531254da9dce8593441ac963c674
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/06/2020
-ms.locfileid: "91755312"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91901028"
 ---
 # <a name="log-creation-and-redirection"></a>Tworzenie i przekierowywanie dzienników
 
@@ -98,4 +98,4 @@ Ustawienia programu obsługi można także zapewnić za pomocą zmiennych środo
 > [!WARNING]
 > **Nie** pozostawiaj włączonej rejestracji debugowania w ramach wdrożenia dłużej niż jest to wymagane, aby rozwiązać problem. Rozmiar dziennika nie jest ograniczony. Pozostawienie włączonego dziennika debugowania może spowodować wyczerpanie dostępnego miejsca na dysku i awarię serwera lub usługi App Service.
 
-Zapoznaj się z tematem [Konfiguracja przy użyciu `web.config` ](xref:host-and-deploy/iis/web-config#configuration-with-webconfig) programu, aby zapoznać się z przykładem `aspNetCore` elementu w `web.config` pliku.
+Zapoznaj się [z tematem `web.config` konfiguracja modułu ASP.NET Core z](xref:host-and-deploy/iis/web-config#configuration-of-aspnet-core-module-with-webconfig) przykładem `aspNetCore` elementu w `web.config` pliku.

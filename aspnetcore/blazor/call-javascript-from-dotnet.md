@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: d36140067ba6e75f2d00cb86ea488e40d28bd86f
-ms.sourcegitcommit: d7991068bc6b04063f4bd836fc5b9591d614d448
+ms.openlocfilehash: a7ba41501b856482c8fcf7efa8e1d78857020bf5
+ms.sourcegitcommit: ecae2aa432628b9181d1fa11037c231c7dd56c9e
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/06/2020
-ms.locfileid: "91762168"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92113767"
 ---
 # <a name="call-javascript-functions-from-net-methods-in-aspnet-core-no-locblazor"></a>Wywoływanie funkcji języka JavaScript z metod .NET w ASP.NET Core Blazor
 
@@ -164,7 +164,10 @@ Symbol zastępczy `{APP ASSEMBLY}` to nazwa zestawu aplikacji aplikacji (na przy
 
 ## <a name="call-a-void-javascript-function"></a>Wywoływanie funkcji języka JavaScript typu void
 
-Funkcje języka JavaScript zwracające [wartość void (0)/void 0](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/void) lub [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined) są wywoływane z <xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType> .
+Użyj <xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType> dla następujących:
+
+* Funkcje języka JavaScript zwracające [wartość void (0)/void 0](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/void) lub [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined).
+* Jeśli program .NET nie jest wymagany do odczytu wyniku wywołania JavaScript.
 
 ## <a name="detect-when-a-no-locblazor-server-app-is-prerendering"></a>Wykryj, kiedy Blazor Server aplikacja jest renderowana
  
@@ -665,8 +668,33 @@ Ponadto w poprzednim przykładzie pokazano, jak można hermetyzować logikę Jav
 
 ::: moniker-end
 
+## <a name="size-limits-on-js-interop-calls"></a>Limity rozmiaru dla wywołań międzyoperacyjnych w JS
+
+W programie Blazor WebAssembly platforma nie nakłada ograniczeń dotyczących rozmiaru danych wejściowych i wyjściowych wywołań js międzyoperacyjnych.
+
+W programie Blazor Server wynik wywołania elementu js Interop jest ograniczony przez maksymalny rozmiar ładunku wymuszony przez SignalR ( <xref:Microsoft.AspNetCore.SignalR.HubOptions.MaximumReceiveMessageSize> ), który domyślnie 32 KB. Aplikacje, które próbują odpowiedzieć na wywołanie elementu JS Interop z ładunkiem większym niż <xref:Microsoft.AspNetCore.SignalR.HubOptions.MaximumReceiveMessageSize> Zgłoś błąd. Większy limit można skonfigurować przez modyfikację <xref:Microsoft.AspNetCore.SignalR.HubOptions.MaximumReceiveMessageSize> . W poniższym przykładzie ustawiono maksymalny rozmiar komunikatu odbioru na 64 KB (64 * 1024 * 1024):
+
+```csharp
+services.AddServerSideBlazor()
+   .AddHubOptions(options => options.MaximumReceiveMessageSize = 64 * 1024 * 1024);
+```
+
+Zwiększenie SignalR limitu jest kosztem wymaganym przez użycie większej liczby zasobów serwera i ujawnia serwerowi zwiększone ryzyko ze strony złośliwego użytkownika. Ponadto odczytywanie dużej ilości zawartości w usłudze do pamięci jako ciągów lub tablic bajtowych może również spowodować, że alokacje działające nieprawidłowo z modułem wyrzucania elementów bezużytecznych, co skutkuje dodatkowymi karami za wydajność. Jedną z opcji odczytu dużych ładunków jest rozważenie wysłania zawartości w mniejszych fragmentach i przetworzenie ładunku jako <xref:System.IO.Stream> . Można go użyć podczas odczytywania dużych ładunków JSON lub w przypadku, gdy dane są dostępne w języku JavaScript jako nieprzetworzone bajty. Przykład demonstrujący wysyłanie dużych ładunków binarnych w programie Blazor Server , które używają technik podobnych do `InputFile` składnika, można znaleźć w [przykładowej aplikacji przesyłania danych binarnych](https://github.com/aspnet/samples/tree/master/samples/aspnetcore/blazor/BinarySubmit).
+
+Podczas opracowywania kodu, który przesyła dużą ilość danych między językami JavaScript i należy wziąć pod uwagę następujące wskazówki Blazor :
+
+* Wydziel dane na mniejsze fragmenty i Wyślij segmenty danych sekwencyjnie, dopóki wszystkie dane nie zostaną odebrane przez serwer.
+* Nie przydzielaj dużych obiektów w kodzie JavaScript i C#.
+* Nie blokuj głównego wątku interfejsu użytkownika przez długie okresy podczas wysyłania lub otrzymywania danych.
+* Zwolnij wszystkie używane pamięci, gdy proces zostanie ukończony lub anulowany.
+* Wymuś następujące dodatkowe wymagania dotyczące zabezpieczeń:
+  * Zadeklaruj maksymalny rozmiar pliku lub danych, który może zostać przesłany.
+  * Zadeklaruj minimalną szybkość przekazywania z klienta na serwerze.
+* Po odebraniu danych przez serwer dane mogą być następujące:
+  * Tymczasowo przechowywane w buforze pamięci do momentu zebrania wszystkich segmentów.
+  * Wykorzystano natychmiast. Na przykład dane mogą być przechowywane bezpośrednio w bazie danych lub zapisywane na dysku w miarę odbierania poszczególnych segmentów.
+
 ## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:blazor/call-dotnet-from-javascript>
 * [InteropComponent. Razor — przykład (repozytorium dotnet/AspNetCore w witrynie GitHub, 3,1 gałąź wydania)](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)
-* [Wykonywanie dużych transferów danych w Blazor Server aplikacjach](xref:blazor/advanced-scenarios#perform-large-data-transfers-in-blazor-server-apps)

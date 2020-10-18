@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/globalization-localization
-ms.openlocfilehash: 2b8820acba564bdfb85f8338ed5482573960fbb4
-ms.sourcegitcommit: 600666440398788db5db25dc0496b9ca8fe50915
+ms.openlocfilehash: be73b0c1e33a2cd15c9ff0dc51044f9bd48c43fe
+ms.sourcegitcommit: ecae2aa432628b9181d1fa11037c231c7dd56c9e
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90080280"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92113819"
 ---
 # <a name="aspnet-core-no-locblazor-globalization-and-localization"></a>ASP.NET Core Blazor globalizacja i lokalizacja
 
@@ -76,7 +76,15 @@ Aby jawnie skonfigurować kulturę, ustaw <xref:System.Globalization.CultureInfo
 
 ::: moniker range=">= aspnetcore-5.0"
 
-Domyślnie Blazor WebAssembly zasoby globalizacji są wymagane do wyświetlania wartości, takich jak daty i waluta, w kulturze użytkownika. Jeśli aplikacja nie wymaga lokalizacji, można skonfigurować aplikację do obsługi niezmiennej kultury, która jest oparta na `en-US` kulturze:
+Domyślnie program Blazor WebAssembly przenosi minimalne zasoby globalizacji wymagane do wyświetlania wartości, takich jak daty i waluta, w kulturze użytkownika. Aplikacje, które muszą obsługiwać dynamiczną zmianę kultury, powinny być konfigurowane `BlazorWebAssemblyLoadAllGlobalizationData` w pliku projektu:
+
+```xml
+<PropertyGroup>
+  <BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
+</PropertyGroup>
+```
+
+Jeśli aplikacja nie wymaga lokalizacji, można skonfigurować aplikację do obsługi niezmiennej kultury, która jest oparta na `en-US` kulturze:
 
 ```xml
 <PropertyGroup>
@@ -100,12 +108,12 @@ Blazor Server aplikacje są zlokalizowane przy użyciu [oprogramowania pośredni
 
 Kulturę można ustawić przy użyciu jednej z następujących metod:
 
-* [Cookiewolumin](#cookies)
+* [Cookies](#cookies)
 * [Podaj interfejs użytkownika, aby wybrać kulturę](#provide-ui-to-choose-the-culture)
 
 Aby uzyskać więcej informacji i przykładów, zobacz <xref:fundamentals/localization> .
 
-#### <a name="no-loccookies"></a>Cookiewolumin
+#### <a name="no-loccookies"></a>Cookies
 
 Kultura lokalizacji cookie może utrwalać kulturę użytkownika. Oprogramowanie pośredniczące lokalizacji odczytuje cookie kolejne żądania, aby ustawić kulturę użytkownika. 
 

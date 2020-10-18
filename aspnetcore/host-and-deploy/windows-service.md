@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/windows-service
-ms.openlocfilehash: 11362f677da3e55df4267cf3d6ca8097c24c218f
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: d4df10f9450ca956d7b1a4297caa63cdd0caf23e
+ms.sourcegitcommit: ecae2aa432628b9181d1fa11037c231c7dd56c9e
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633945"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92113754"
 ---
 # <a name="host-aspnet-core-in-a-windows-service"></a>ASP.NET Core hosta w usłudze systemu Windows
 
@@ -158,7 +158,7 @@ Aby nawiązać *Logowanie jako prawa usługi* dla konta użytkownika usługi:
 1. Wybierz pozycję **Dodaj użytkownika lub grupę**.
 1. Podaj nazwę obiektu (konto użytkownika) przy użyciu jednej z następujących metod:
    1. Wpisz konto użytkownika ( `{DOMAIN OR COMPUTER NAME\USER}` ) w polu Nazwa obiektu, a następnie wybierz **przycisk OK** , aby dodać użytkownika do zasad.
-   1. Wybierz pozycję **Zaawansowane**. Wybierz pozycję **Znajdź teraz**. Wybierz z listy konto użytkownika. Kliknij przycisk **OK**. Ponownie wybierz **przycisk OK** , aby dodać użytkownika do zasad.
+   1. Wybierz pozycję **Zaawansowane**. Wybierz pozycję **Znajdź teraz**. Wybierz z listy konto użytkownika. Wybierz przycisk **OK**. Ponownie wybierz **przycisk OK** , aby dodać użytkownika do zasad.
 1. Wybierz **przycisk OK** lub **Zastosuj** , aby zaakceptować zmiany.
 
 ## <a name="create-and-manage-the-windows-service"></a>Tworzenie usługi systemu Windows i zarządzanie nią
@@ -169,12 +169,12 @@ Zarejestrowanie usługi za pomocą poleceń programu PowerShell. Z poziomu powł
 
 ```powershell
 $acl = Get-Acl "{EXE PATH}"
-$aclRuleArgs = {DOMAIN OR COMPUTER NAME\USER}, "Read,Write,ReadAndExecute", "ContainerInherit,ObjectInherit", "None", "Allow"
+$aclRuleArgs = "{DOMAIN OR COMPUTER NAME\USER}", "Read,Write,ReadAndExecute", "ContainerInherit,ObjectInherit", "None", "Allow"
 $accessRule = New-Object System.Security.AccessControl.FileSystemAccessRule($aclRuleArgs)
 $acl.SetAccessRule($accessRule)
 $acl | Set-Acl "{EXE PATH}"
 
-New-Service -Name {SERVICE NAME} -BinaryPathName {EXE FILE PATH} -Credential {DOMAIN OR COMPUTER NAME\USER} -Description "{DESCRIPTION}" -DisplayName "{DISPLAY NAME}" -StartupType Automatic
+New-Service -Name {SERVICE NAME} -BinaryPathName "{EXE FILE PATH}" -Credential "{DOMAIN OR COMPUTER NAME\USER}" -Description "{DESCRIPTION}" -DisplayName "{DISPLAY NAME}" -StartupType Automatic
 ```
 
 * `{EXE PATH}`: Ścieżka do folderu aplikacji na hoście (na przykład `d:\myservice` ). Nie dołączaj pliku wykonywalnego aplikacji do ścieżki. Końcowy ukośnik nie jest wymagany.
@@ -340,7 +340,7 @@ Gdy aplikacja *zawiesza* się (bez awarii), kończy się niepowodzeniem podczas 
 
 #### <a name="analyze-the-dump"></a>Analizowanie zrzutu
 
-Zrzut można analizować przy użyciu kilku metod. Aby uzyskać więcej informacji, zobacz [Analizowanie pliku zrzutu w trybie użytkownika](/windows-hardware/drivers/debugger/analyzing-a-user-mode-dump-file).
+Zrzut można analizować przy użyciu kilku metod. Aby uzyskać więcej informacji, zobacz [Analizowanie pliku zrzutu User-Mode](/windows-hardware/drivers/debugger/analyzing-a-user-mode-dump-file).
 
 ## <a name="additional-resources"></a>Dodatkowe zasoby
 
@@ -470,7 +470,7 @@ Aby nawiązać *Logowanie jako prawa usługi* dla konta użytkownika usługi:
 1. Wybierz pozycję **Dodaj użytkownika lub grupę**.
 1. Podaj nazwę obiektu (konto użytkownika) przy użyciu jednej z następujących metod:
    1. Wpisz konto użytkownika ( `{DOMAIN OR COMPUTER NAME\USER}` ) w polu Nazwa obiektu, a następnie wybierz **przycisk OK** , aby dodać użytkownika do zasad.
-   1. Wybierz pozycję **Zaawansowane**. Wybierz pozycję **Znajdź teraz**. Wybierz z listy konto użytkownika. Kliknij przycisk **OK**. Ponownie wybierz **przycisk OK** , aby dodać użytkownika do zasad.
+   1. Wybierz pozycję **Zaawansowane**. Wybierz pozycję **Znajdź teraz**. Wybierz z listy konto użytkownika. Wybierz przycisk **OK**. Ponownie wybierz **przycisk OK** , aby dodać użytkownika do zasad.
 1. Wybierz **przycisk OK** lub **Zastosuj** , aby zaakceptować zmiany.
 
 ## <a name="create-and-manage-the-windows-service"></a>Tworzenie usługi systemu Windows i zarządzanie nią
@@ -674,7 +674,7 @@ Gdy aplikacja *zawiesza* się (bez awarii), kończy się niepowodzeniem podczas 
 
 #### <a name="analyze-the-dump"></a>Analizowanie zrzutu
 
-Zrzut można analizować przy użyciu kilku metod. Aby uzyskać więcej informacji, zobacz [Analizowanie pliku zrzutu w trybie użytkownika](/windows-hardware/drivers/debugger/analyzing-a-user-mode-dump-file).
+Zrzut można analizować przy użyciu kilku metod. Aby uzyskać więcej informacji, zobacz [Analizowanie pliku zrzutu User-Mode](/windows-hardware/drivers/debugger/analyzing-a-user-mode-dump-file).
 
 ## <a name="additional-resources"></a>Dodatkowe zasoby
 
@@ -807,7 +807,7 @@ Aby nawiązać *Logowanie jako prawa usługi* dla konta użytkownika usługi:
 1. Wybierz pozycję **Dodaj użytkownika lub grupę**.
 1. Podaj nazwę obiektu (konto użytkownika) przy użyciu jednej z następujących metod:
    1. Wpisz konto użytkownika ( `{DOMAIN OR COMPUTER NAME\USER}` ) w polu Nazwa obiektu, a następnie wybierz **przycisk OK** , aby dodać użytkownika do zasad.
-   1. Wybierz pozycję **Zaawansowane**. Wybierz pozycję **Znajdź teraz**. Wybierz z listy konto użytkownika. Kliknij przycisk **OK**. Ponownie wybierz **przycisk OK** , aby dodać użytkownika do zasad.
+   1. Wybierz pozycję **Zaawansowane**. Wybierz pozycję **Znajdź teraz**. Wybierz z listy konto użytkownika. Wybierz przycisk **OK**. Ponownie wybierz **przycisk OK** , aby dodać użytkownika do zasad.
 1. Wybierz **przycisk OK** lub **Zastosuj** , aby zaakceptować zmiany.
 
 ## <a name="create-and-manage-the-windows-service"></a>Tworzenie usługi systemu Windows i zarządzanie nią
@@ -1011,7 +1011,7 @@ Gdy aplikacja *zawiesza* się (bez awarii), kończy się niepowodzeniem podczas 
 
 #### <a name="analyze-the-dump"></a>Analizowanie zrzutu
 
-Zrzut można analizować przy użyciu kilku metod. Aby uzyskać więcej informacji, zobacz [Analizowanie pliku zrzutu w trybie użytkownika](/windows-hardware/drivers/debugger/analyzing-a-user-mode-dump-file).
+Zrzut można analizować przy użyciu kilku metod. Aby uzyskać więcej informacji, zobacz [Analizowanie pliku zrzutu User-Mode](/windows-hardware/drivers/debugger/analyzing-a-user-mode-dump-file).
 
 ## <a name="additional-resources"></a>Dodatkowe zasoby
 

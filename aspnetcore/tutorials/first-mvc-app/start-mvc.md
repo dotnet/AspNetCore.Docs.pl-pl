@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/start-mvc
-ms.openlocfilehash: 9d70b292a93a5d19cc25b2fc592ec88ce8262434
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 177112106d143a6826c1f927aac807da0aa9f2b4
+ms.sourcegitcommit: ecae2aa432628b9181d1fa11037c231c7dd56c9e
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88629993"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92113832"
 ---
 # <a name="get-started-with-aspnet-core-mvc"></a>Wprowadzenie do ASP.NET Core MVC
 
@@ -47,7 +47,7 @@ Na końcu masz aplikację, która może zarządzać i wyświetlać dane filmu.
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs-3.1.md)]
 
@@ -61,13 +61,13 @@ Na końcu masz aplikację, która może zarządzać i wyświetlać dane filmu.
 
 ---
 
-## <a name="create-a-web-app"></a>tworzenie aplikacji internetowej
+## <a name="create-a-web-app"></a>Tworzenie aplikacji internetowej
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 * W programie Visual Studio wybierz pozycję **Utwórz nowy projekt**.
 
-* Wybierz **ASP.NET Core aplikacji sieci Web** , a następnie wybierz przycisk **dalej**.
+* Wybierz pozycję **ASP.NET Core aplikacja sieci Web** > **dalej**.
 
 ![Nowa aplikacja sieci Web ASP.NET Core](start-mvc/_static/np_2.1.png)
 
@@ -75,7 +75,7 @@ Na końcu masz aplikację, która może zarządzać i wyświetlać dane filmu.
 
   ![Nowa aplikacja sieci Web ASP.NET Core](start-mvc/_static/config.png)
 
-* Wybierz pozycję **aplikacja sieci Web (Model-View-Controller)**, a następnie wybierz pozycję **Utwórz**.
+* Wybierz pozycję **aplikacja sieci Web (Model-View-Controller)**. Z listy rozwijanej wybierz pozycję **.NET Core** i **ASP.NET Core 3,1**, a następnie wybierz pozycję **Utwórz**.
 
 ![Okno dialogowe Nowy projekt, .NET Core w lewym okienku, ASP.NET Core Web ](start-mvc/_static/new_project30.png)
 
@@ -94,7 +94,7 @@ Samouczek założono familarity z VS Code. Aby uzyskać więcej informacji, zoba
    code -r MvcMovie
    ```
 
-  * Zostanie wyświetlone okno dialogowe z **wymaganymi zasobami do kompilowania i debugowania brakuje w "MvcMovie". Dodać je?**  Wybierz opcję **tak**
+  * Zostanie wyświetlone okno dialogowe z **wymaganymi zasobami do kompilowania i debugowania brakuje w "MvcMovie". Dodać je?**  Wybierz pozycję **Tak**
 
   * `dotnet new mvc -o MvcMovie`: tworzy nowy projekt ASP.NET Core MVC w folderze *MvcMovie* .
   * `code -r MvcMovie`: Ładuje plik projektu *MvcMovie. csproj* w Visual Studio Code.
@@ -124,7 +124,7 @@ Samouczek założono familarity z VS Code. Aby uzyskać więcej informacji, zoba
 
 ### <a name="run-the-app"></a>Uruchamianie aplikacji
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 Wybierz **kombinację klawiszy CTRL-F5** , aby uruchomić aplikację w trybie bez debugowania.
 
@@ -200,7 +200,7 @@ Na końcu masz aplikację, która może zarządzać i wyświetlać dane filmu.
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs2019-2.2.md)]
 
@@ -213,9 +213,9 @@ Na końcu masz aplikację, która może zarządzać i wyświetlać dane filmu.
 [!INCLUDE[](~/includes/net-core-prereqs-mac-2.2.md)]
 
 ---
-## <a name="create-a-web-app"></a>tworzenie aplikacji internetowej
+## <a name="create-a-web-app"></a>Tworzenie aplikacji internetowej
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 * W programie Visual Studio wybierz pozycję **Utwórz nowy projekt**.
 
@@ -247,7 +247,7 @@ Samouczek założono familarity z VS Code. Aby uzyskać więcej informacji, zoba
    code -r MvcMovie
    ```
 
-  * Zostanie wyświetlone okno dialogowe z **wymaganymi zasobami do kompilowania i debugowania brakuje w "MvcMovie". Dodać je?**  Wybierz opcję **tak**
+  * Zostanie wyświetlone okno dialogowe z **wymaganymi zasobami do kompilowania i debugowania brakuje w "MvcMovie". Dodać je?**  Wybierz pozycję **Tak**
 
   * `dotnet new mvc -o MvcMovie`: tworzy nowy projekt ASP.NET Core MVC w folderze *MvcMovie* .
   * `code -r MvcMovie`: Ładuje plik projektu *MvcMovie. csproj* w Visual Studio Code.
@@ -273,7 +273,7 @@ Samouczek założono familarity z VS Code. Aby uzyskać więcej informacji, zoba
 
 ### <a name="run-the-app"></a>Uruchamianie aplikacji
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 Wybierz **kombinację klawiszy CTRL-F5** , aby uruchomić aplikację w trybie bez debugowania.
 

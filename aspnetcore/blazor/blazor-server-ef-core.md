@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/blazor-server-ef-core
-ms.openlocfilehash: fc902cb5a82fda9fdbed09c40d66a846d9360f6a
-ms.sourcegitcommit: daa9ccf580df531254da9dce8593441ac963c674
+ms.openlocfilehash: ac84b9d2fac4fe3df48d356eea3ea48fd23bfda4
+ms.sourcegitcommit: ecae2aa432628b9181d1fa11037c231c7dd56c9e
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/09/2020
-ms.locfileid: "91900742"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92113637"
 ---
 # <a name="aspnet-core-no-locblazor-server-with-entity-framework-core-efcore"></a>ASP.NET Core Blazor Server z Entity Framework Core (EFCore)
 
@@ -110,6 +110,19 @@ Fabryka jest wstrzykiwana do składników i używana do tworzenia nowych wystąp
 > [!NOTE]
 > `Wrapper` jest [odwołaniem](xref:blazor/components/index#capture-references-to-components) do składnika `GridWrapper` . Zobacz `Index` składnik ( `Pages/Index.razor` ) w [przykładowej aplikacji](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/common/samples/5.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Pages/Index.razor).
 
+Nowe <xref:Microsoft.EntityFrameworkCore.DbContext> wystąpienia można utworzyć przy użyciu fabryki, która umożliwia skonfigurowanie parametrów połączenia na, na przykład `DbContext` w przypadku używania modelu [ASP.NET Core Identity ]) (linki XREF: Security/Authentication/customize_identity_model):
+
+```csharp
+services.AddDbContextFactory<ApplicationDbContext>(options =>
+{
+    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+});
+
+services.AddScoped<ApplicationDbContext>(p => 
+    p.GetRequiredService<IDbContextFactory<ApplicationDbContext>>()
+    .CreateDbContext());
+```
+
 <h3 id="scope-to-the-component-lifetime-5x">Zakres czasu istnienia składnika</h3>
 
 Można utworzyć element <xref:Microsoft.EntityFrameworkCore.DbContext> , który istnieje w okresie istnienia składnika. Dzięki temu można używać go jako [jednostki pracy](https://martinfowler.com/eaaCatalog/unitOfWork.html) i korzystać z wbudowanych funkcji, takich jak śledzenie zmian i rozwiązywanie współbieżności.
@@ -127,6 +140,23 @@ Aplikacja Przykładowa gwarantuje, że kontekst zostanie usunięty po usunięciu
 Na koniec [`OnInitializedAsync`](xref:blazor/components/lifecycle) jest zastępowany w celu utworzenia nowego kontekstu. W przykładowej aplikacji [`OnInitializedAsync`](xref:blazor/components/lifecycle) ładuje kontakt w tej samej metodzie:
 
 [!code-csharp[](./common/samples/5.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Pages/EditContact.razor?name=snippet2)]
+
+<h3 id="enable-sensitive-data-logging">Włącz rejestrowanie danych poufnych</h3>
+
+<xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.EnableSensitiveDataLogging%2A> zawiera dane aplikacji w komunikatach o wyjątkach i rejestrowaniu struktury. Zarejestrowane dane mogą zawierać wartości przypisane do właściwości wystąpień jednostek i wartości parametrów dla poleceń wysyłanych do bazy danych. Rejestrowanie danych w programie <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.EnableSensitiveDataLogging%2A> stanowi **zagrożenie bezpieczeństwa**, ponieważ może uwidaczniać hasła i inne dane osobowe, gdy rejestruje instrukcje SQL wykonywane względem bazy danych.
+
+Zalecamy włączenie tylko <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.EnableSensitiveDataLogging%2A> do celów deweloperskich i testowych:
+
+```csharp
+#if DEBUG
+    services.AddDbContextFactory<ContactContext>(opt =>
+        opt.UseSqlite($"Data Source={nameof(ContactContext.ContactsDb)}.db")
+        .EnableSensitiveDataLogging());
+#else
+    services.AddDbContextFactory<ContactContext>(opt =>
+        opt.UseSqlite($"Data Source={nameof(ContactContext.ContactsDb)}.db"));
+#endif
+```
 
 :::moniker-end
 
@@ -218,6 +248,19 @@ Fabryka jest wstrzykiwana do składników i używana do tworzenia nowych wystąp
 > [!NOTE]
 > `Wrapper` jest [odwołaniem](xref:blazor/components/index#capture-references-to-components) do składnika `GridWrapper` . Zobacz `Index` składnik ( `Pages/Index.razor` ) w [przykładowej aplikacji](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/common/samples/3.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Pages/Index.razor).
 
+Nowe <xref:Microsoft.EntityFrameworkCore.DbContext> wystąpienia można utworzyć przy użyciu fabryki, która umożliwia skonfigurowanie parametrów połączenia na, na przykład `DbContext` w przypadku używania modelu [ASP.NET Core Identity ]) (linki XREF: Security/Authentication/customize_identity_model):
+
+```csharp
+services.AddDbContextFactory<ApplicationDbContext>(options =>
+{
+    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+});
+
+services.AddScoped<ApplicationDbContext>(p => 
+    p.GetRequiredService<IDbContextFactory<ApplicationDbContext>>()
+    .CreateDbContext());
+```
+
 <h3 id="scope-to-the-component-lifetime-3x">Zakres czasu istnienia składnika</h3>
 
 Można utworzyć element <xref:Microsoft.EntityFrameworkCore.DbContext> , który istnieje w okresie istnienia składnika. Dzięki temu można używać go jako [jednostki pracy](https://martinfowler.com/eaaCatalog/unitOfWork.html) i korzystać z wbudowanych funkcji, takich jak śledzenie zmian i rozwiązywanie współbieżności.
@@ -241,8 +284,25 @@ W powyższym przykładzie:
 * Gdy `Busy` jest ustawiona na `true` , mogą zaczynać się operacje asynchroniczne. Gdy `Busy` jest ustawiona z powrotem `false` , operacje asynchroniczne powinny zostać zakończone.
 * Umieść dodatkową logikę obsługi błędów w `catch` bloku.
 
+<h3 id="enable-sensitive-data-logging">Włącz rejestrowanie danych poufnych</h3>
+
+<xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.EnableSensitiveDataLogging%2A> zawiera dane aplikacji w komunikatach o wyjątkach i rejestrowaniu struktury. Zarejestrowane dane mogą zawierać wartości przypisane do właściwości wystąpień jednostek i wartości parametrów dla poleceń wysyłanych do bazy danych. Rejestrowanie danych w programie <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.EnableSensitiveDataLogging%2A> stanowi **zagrożenie bezpieczeństwa**, ponieważ może uwidaczniać hasła i inne dane osobowe, gdy rejestruje instrukcje SQL wykonywane względem bazy danych.
+
+Zalecamy włączenie tylko <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.EnableSensitiveDataLogging%2A> do celów deweloperskich i testowych:
+
+```csharp
+#if DEBUG
+    services.AddDbContextFactory<ContactContext>(opt =>
+        opt.UseSqlite($"Data Source={nameof(ContactContext.ContactsDb)}.db")
+        .EnableSensitiveDataLogging());
+#else
+    services.AddDbContextFactory<ContactContext>(opt =>
+        opt.UseSqlite($"Data Source={nameof(ContactContext.ContactsDb)}.db"));
+#endif
+```
+
 :::moniker-end
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Dokumentacja EF Core](/ef/)

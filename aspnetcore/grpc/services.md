@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/services
-ms.openlocfilehash: 878792120d69bea9ca6f620a87a7e04da2ec1815
-ms.sourcegitcommit: 111b4e451da2e275fb074cde5d8a84b26a81937d
+ms.openlocfilehash: c4d37556a3345d275f45c537a40908c5966fe015
+ms.sourcegitcommit: ecae2aa432628b9181d1fa11037c231c7dd56c9e
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/27/2020
-ms.locfileid: "89040843"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92113624"
 ---
 # <a name="create-grpc-services-and-methods"></a>Tworzenie usług i metod gRPC
 
@@ -87,7 +87,7 @@ Domyślnie wygenerowany element `GreeterBase` nie wykonuje żadnych czynności. 
 ```csharp
 public class GreeterService : GreeterBase
 {
-    public override Task<HelloReply> UnaryCall(HelloRequest request, ServerCallContext context)
+    public override Task<HelloReply> SayHello(HelloRequest request, ServerCallContext context)
     {
         return Task.FromResult(new HelloRequest { Message = $"Hello {request.Name}" });
     }

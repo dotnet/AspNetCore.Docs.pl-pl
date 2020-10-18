@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/performance
-ms.openlocfilehash: 4d50698b8c55f7fb3ef9a2c3102e73e046a22a9c
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: b54d13bfd9207a7b8961c1c4fa9908d3d54a4270
+ms.sourcegitcommit: ecae2aa432628b9181d1fa11037c231c7dd56c9e
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722848"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92113858"
 ---
 # <a name="performance-best-practices-with-grpc"></a>Najlepsze rozwiązania w zakresie wydajności z gRPC
 
@@ -53,7 +53,7 @@ Fabryka klientów gRPC oferuje scentralizowany sposób konfigurowania kanałów.
 
 ## <a name="connection-concurrency"></a>Współbieżność połączenia
 
-Połączenia HTTP/2 zwykle mają limit [maksymalnej liczby równoczesnych strumieni (aktywne żądania HTTP)](https://http2.github.io/http2-spec/#rfc.section.5.1.2) w ramach połączenia. Domyślnie większość serwerów ustawia ten limit na 100 strumieni współbieżnych.
+Połączenia HTTP/2 zwykle mają limit [maksymalnej liczby równoczesnych strumieni (aktywne żądania HTTP)](https://httpwg.github.io/specs/rfc7540.html#rfc.section.5.1.2) w ramach połączenia. Domyślnie większość serwerów ustawia ten limit na 100 strumieni współbieżnych.
 
 Kanał gRPC korzysta z pojedynczego połączenia HTTP/2, a współbieżne wywołania są multipleksne dla tego połączenia. Gdy liczba aktywnych wywołań osiągnie limit strumienia połączeń, dodatkowe wywołania są umieszczane w kolejce na kliencie. Wywołania w kolejce oczekują na zakończenie aktywnych wywołań przed ich wysłaniem. Aplikacje o dużym obciążeniu lub długotrwałych wywołaniach gRPC mogą zobaczyć problemy z wydajnością spowodowane przez wywołania kolejkowania z powodu tego limitu.
 

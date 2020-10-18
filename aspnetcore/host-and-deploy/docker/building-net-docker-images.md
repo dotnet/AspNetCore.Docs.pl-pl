@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/docker/building-net-docker-images
-ms.openlocfilehash: 791cc14feac30ad8a571d155624ab821dfd77981
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 6f94323873937d1428d6cfa1b0ef15e44611fd47
+ms.sourcegitcommit: b3ec60f7682e43211c2b40c60eab3d4e45a48ab1
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722861"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92153649"
 ---
 # <a name="docker-images-for-aspnet-core"></a>Obrazy platformy Docker dla ASP.NET Core
 
@@ -73,7 +73,7 @@ Przykładowy pliku dockerfile używa [funkcji budowania wielu etapów platformy 
   * [macOS](https://docs.docker.com/docker-for-mac/install/)
   * [Windows](https://docs.docker.com/docker-for-windows/install/)
 
-* [Narzędzia](https://git-scm.com/download)
+* [Git](https://git-scm.com/download)
 
 ## <a name="download-the-sample-app"></a>Pobieranie przykładowej aplikacji
 
@@ -99,7 +99,7 @@ Przykładowy pliku dockerfile używa [funkcji budowania wielu etapów platformy 
 
 ## <a name="run-in-a-linux-container"></a>Uruchamianie w kontenerze systemu Linux
 
-* W kliencie platformy Docker przejdź do obszaru kontenery systemu Linux.
+* W kliencie platformy Docker [Przejdź do obszaru kontenery systemu Linux](https://docs.docker.com/docker-for-windows/#switch-between-windows-and-linux-containers).
 
 * Przejdź do folderu pliku dockerfile w programie *dotnet-Docker/Samples/aspnetapp*.
 
@@ -125,7 +125,7 @@ Przykładowy pliku dockerfile używa [funkcji budowania wielu etapów platformy 
 
 ## <a name="run-in-a-windows-container"></a>Uruchamianie w kontenerze systemu Windows
 
-* W kliencie platformy Docker przejdź do kontenerów systemu Windows.
+* W kliencie platformy Docker [Przejdź do kontenerów systemu Windows](https://docs.docker.com/docker-for-windows/#switch-between-windows-and-linux-containers).
 
 Przejdź do folderu pliku platformy Docker pod adresem `dotnet-docker/samples/aspnetapp` .
 
@@ -259,7 +259,7 @@ Jak wspomniano w poprzednim pliku dockerfile, `*.csproj` pliki są kopiowane i p
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Docker Build — polecenie](https://docs.docker.com/engine/reference/commandline/build)
 * [Polecenie Docker Run](https://docs.docker.com/engine/reference/commandline/run)

@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/index
-ms.openlocfilehash: 0111b7944bc95932937f0fd74524e3960c5fb681
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: f8271d71f34487062484581ba6b3b8445a62439c
+ms.sourcegitcommit: ecae2aa432628b9181d1fa11037c231c7dd56c9e
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634621"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92113794"
 ---
 # <a name="host-and-deploy-aspnet-core"></a>Hostowanie i wdrażanie ASP.NET Core
 
@@ -70,7 +70,7 @@ Dodatkowa konfiguracja może być wymagana dla aplikacji hostowanych w ramach se
 
 ## <a name="use-visual-studio-and-msbuild-to-automate-deployments"></a>Korzystanie z programu Visual Studio i narzędzia MSBuild do automatyzowania wdrożeń
 
-Wdrożenie często wymaga dodatkowych zadań oprócz kopiowania danych wyjściowych z [dotnet Publish](/dotnet/core/tools/dotnet-publish) na serwer. Na przykład dodatkowe pliki mogą być wymagane lub wykluczone z folderu *publikacji* . Program Visual Studio używa programu MSBuild do wdrażania w sieci Web, a programu MSBuild można dostosować do wykonywania wielu innych zadań podczas wdrażania. Aby uzyskać więcej informacji, zobacz <xref:host-and-deploy/visual-studio-publish-profiles> i książka [using programu MSBuild i Team Foundation Build](http://msbuildbook.com/) .
+Wdrożenie często wymaga dodatkowych zadań oprócz kopiowania danych wyjściowych z [dotnet Publish](/dotnet/core/tools/dotnet-publish) na serwer. Na przykład dodatkowe pliki mogą być wymagane lub wykluczone z folderu *publikacji* . Program Visual Studio używa programu [MSBuild](/visualstudio/msbuild/msbuild) do wdrażania w sieci Web, a programu MSBuild można dostosować do wykonywania wielu innych zadań podczas wdrażania. Aby uzyskać więcej informacji, zobacz <xref:host-and-deploy/visual-studio-publish-profiles> i książka [using programu MSBuild i Team Foundation Build](http://msbuildbook.com/) .
 
 Za pomocą [funkcji publikowania w sieci Web](xref:tutorials/publish-to-azure-webapp-using-vs) lub [wbudowanej obsługi narzędzia Git](xref:host-and-deploy/azure-apps/azure-continuous-deployment)aplikacje można wdrażać bezpośrednio z programu Visual Studio do Azure App Service. Azure DevOps Services obsługuje [ciągłe wdrażanie do Azure App Service](/azure/devops/pipelines/targets/webapp). Aby uzyskać więcej informacji, zobacz [DevOps with ASP.NET Core i platformę Azure](xref:azure/devops/index).
 

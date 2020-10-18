@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/troubleshoot
-ms.openlocfilehash: 2f2a41af544bc040bd20e15b057ad8fc7fb16cfe
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 0c897c8c640f8713fc7d3b6cad0e6c571131d7a5
+ms.sourcegitcommit: ecae2aa432628b9181d1fa11037c231c7dd56c9e
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633971"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92113845"
 ---
 # <a name="troubleshoot-grpc-on-net-core"></a>Rozwiązywanie problemów z gRPC na platformie .NET Core
 
@@ -86,7 +86,7 @@ var client = new Greet.GreeterClient(channel);
 
 ## <a name="call-insecure-grpc-services-with-net-core-client"></a>Wywoływanie niezabezpieczonych usług gRPC z klientem .NET Core
 
-Dodatkowa konfiguracja jest wymagana do wywołania niezabezpieczonych usług gRPC za pomocą klienta .NET Core. Klient gRPC musi ustawić `System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport` przełącznik do `true` i używać `http` go w adresie serwera:
+Gdy aplikacja korzysta z platformy .NET Core 3. x, wymagana jest dodatkowa konfiguracja do wywoływania niezabezpieczonych usług gRPC z klientem .NET Core. Klient gRPC musi ustawić `System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport` przełącznik do `true` i używać `http` go w adresie serwera:
 
 ```csharp
 // This switch must be set before creating the GrpcChannel/HttpClient.
@@ -97,6 +97,8 @@ AppContext.SetSwitch(
 var channel = GrpcChannel.ForAddress("http://localhost:5000");
 var client = new Greet.GreeterClient(channel);
 ```
+
+Aplikacje .NET 5 nie potrzebują dodatkowej konfiguracji, ale w celu wywołania niezabezpieczonych usług gRPC muszą używać `Grpc.Net.Client` wersji 2.32.0 lub nowszej.
 
 ## <a name="unable-to-start-aspnet-core-grpc-app-on-macos"></a>Nie można uruchomić aplikacji ASP.NET Core gRPC na macOS
 

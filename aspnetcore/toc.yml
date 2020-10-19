@@ -177,6 +177,9 @@
             - name: Wdrażanie przy użyciu funkcji GitHub Actions >>
               display: 'tutorial, kubernetes, aks, acr, docker, devops'
               href: /learn/modules/microservices-devops-aspnet-core/
+            - name: Rejestrowanie i monitorowanie >>
+              display: 'tutorial, kubernetes, aks, acr, docker, serilog'
+              href: /learn/modules/microservices-logging-aspnet-core/
         - name: Dostęp do danych >>
           displayName: 'tutorial, ef, entity framework'
           href: /learn/modules/persist-data-ef-core/
@@ -1118,6 +1121,8 @@
           uid: security/authorization/policies
         - name: Dostawcy zasad autoryzacji
           uid: security/authorization/iauthorizationpolicyprovider
+        - name: Dostosowywanie zachowania klasy AuthorizationMiddleware
+          uid: security/authorization/authorizationmiddlewareresulthandler
         - name: Wstrzykiwanie zależności w programach obsługi wymagań
           uid: security/authorization/dependencyinjection
         - name: Autoryzacja na podstawie zasobów

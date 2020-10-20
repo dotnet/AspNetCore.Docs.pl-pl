@@ -1,5 +1,5 @@
 ---
-title: Dostosuj zachowanie AuthorizationMiddleware
+title: Dostosowywanie zachowania klasy AuthorizationMiddleware
 author: pranavkm
 ms.author: prkrishn
 description: W tym artykule wyjaśniono, jak dostosować obsługę wyników AuthorizationMiddleware.
@@ -12,7 +12,7 @@ ms.contentlocale: pl-PL
 ms.lasthandoff: 10/17/2020
 ms.locfileid: "92156785"
 ---
-# <a name="customize-the-behavior-of-authorizationmiddleware"></a>Dostosuj zachowanie AuthorizationMiddleware
+# <a name="customize-the-behavior-of-authorizationmiddleware"></a>Dostosowywanie zachowania klasy AuthorizationMiddleware
 
 Aplikacje mogą zarejestrować `Microsoft.AspNetCore.Authorization.IAuthorizationMiddlewareResultHandler` się, aby dostosować sposób, w jaki oprogramowanie pośredniczące obsługuje wyniki autoryzacji. Aplikacje mogą korzystać z dostosowanego oprogramowania pośredniczącego w celu:
 

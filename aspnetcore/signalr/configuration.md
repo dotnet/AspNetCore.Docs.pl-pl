@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/configuration
-ms.openlocfilehash: 579491cfe60a26593ca038a1691f9b52f0fb1d06
-ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
+ms.openlocfilehash: 8851246dbaa076af1fdbc4e5e4f1ada0e4e3988a
+ms.sourcegitcommit: b5ebaf42422205d212e3dade93fcefcf7f16db39
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/27/2020
-ms.locfileid: "91393876"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92326593"
 ---
 # <a name="aspnet-core-no-locsignalr-configuration"></a>SignalRKonfiguracja ASP.NET Core
 
@@ -198,7 +198,7 @@ let connection = new signalR.HubConnectionBuilder()
 
 Poniższa tabela zawiera listę dostępnych poziomów dzienników. Wartość określana przez użytkownika w celu ustawienia `configureLogging` **minimalnego** poziomu dziennika, który zostanie zarejestrowany. Komunikaty zarejestrowane na tym poziomie **lub poziomy wymienione po nim w tabeli**zostaną zarejestrowane.
 
-| String                      | LogLevel               |
+| Ciąg                      | LogLevel               |
 | --------------------------- | ---------------------- |
 | `trace`                     | `LogLevel.Trace`       |
 | `debug`                     | `LogLevel.Debug`       |
@@ -233,7 +233,7 @@ Można je bezpiecznie zignorować.
 
 Transporty używane przez program SignalR można skonfigurować w `WithUrl` wywołaniu ( `withUrl` w języku JavaScript). Wartości bitowe i `HttpTransportType` można użyć, aby ograniczyć klient do używania tylko określonych transportów. Wszystkie transporty są domyślnie włączone.
 
-Na przykład, aby wyłączyć transport zdarzeń wysłanych przez serwer, ale zezwolić na połączenia z usługą WebSockets i długie sondowanie:
+Na przykład, aby wyłączyć transport zdarzeń Server-Sent, ale zezwolić na połączenia z usługą WebSockets i długie sondowanie:
 
 ```csharp
 var connection = new HubConnectionBuilder()
@@ -264,7 +264,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 
 ### <a name="configure-bearer-authentication"></a>Konfigurowanie uwierzytelniania okaziciela
 
-Aby zapewnić dane uwierzytelniania wraz z SignalR żądaniami, użyj `AccessTokenProvider` opcji ( `accessTokenFactory` w języku JavaScript), aby określić funkcję, która zwraca żądany token dostępu. W kliencie .NET token dostępu jest przenoszona jako token "uwierzytelnianie okaziciela" protokołu HTTP (przy użyciu `Authorization` nagłówka z typem `Bearer` ). W kliencie JavaScript token dostępu jest używany jako token okaziciela, **z wyjątkiem** kilku przypadków, w których interfejsy API przeglądarki ograniczają możliwość zastosowania nagłówków (w konkretnym przypadku zdarzeń wysyłanych przez serwer i żądań WebSockets). W takich przypadkach token dostępu jest podawany jako wartość ciągu zapytania `access_token` .
+Aby zapewnić dane uwierzytelniania wraz z SignalR żądaniami, użyj `AccessTokenProvider` opcji ( `accessTokenFactory` w języku JavaScript), aby określić funkcję, która zwraca żądany token dostępu. W kliencie .NET token dostępu jest przenoszona jako token "uwierzytelnianie okaziciela" protokołu HTTP (przy użyciu `Authorization` nagłówka z typem `Bearer` ). W kliencie JavaScript token dostępu jest używany jako token okaziciela, **z wyjątkiem** kilku przypadków, w których interfejsy API przeglądarki ograniczają możliwość stosowania nagłówków (w konkretnym przypadku Server-Sent zdarzeń i żądań WebSockets). W takich przypadkach token dostępu jest podawany jako wartość ciągu zapytania `access_token` .
 
 W kliencie .NET `AccessTokenProvider` opcji można określić za pomocą delegata opcji w `WithUrl` :
 
@@ -358,6 +358,7 @@ Dodatkowe opcje można skonfigurować w `WithUrl` `withUrl` metodzie (w języku 
 | Opcja języka JavaScript | Wartość domyślna | Opis |
 | ----------------- | ------------- | ----------- |
 | `accessTokenFactory` | `null` | Funkcja zwracająca ciąg, który jest dostarczany jako token uwierzytelniania okaziciela w żądaniach HTTP. |
+| `transport` | `null` | <xref:Microsoft.AspNetCore.Http.Connections.HttpTransportType>Wartość określająca transport, który ma być używany w połączeniu. |
 | `headers` | `null` | Słownik nagłówków wysłanych z każdym żądaniem HTTP. Wysyłanie nagłówków w przeglądarce nie działa w przypadku obiektów WebSockets ani <xref:Microsoft.AspNetCore.Http.Connections.HttpTransportType.ServerSentEvents> strumienia. |
 | `logMessageContent` | `null` | Ustaw na `true` , aby rejestrować bajty/znaki komunikatów wysyłanych i odbieranych przez klienta. |
 | `skipNegotiation` | `false` | Ustaw tę wartość na `true` , aby pominąć krok negocjowania. **Obsługiwane tylko wtedy, gdy transport Sockets jest jedynym włączonym transportem**. Nie można włączyć tego ustawienia w przypadku korzystania z SignalR usługi platformy Azure. |
@@ -379,6 +380,8 @@ W kliencie platformy .NET te opcje można modyfikować za pomocą delegata opcji
 var connection = new HubConnectionBuilder()
     .WithUrl("https://example.com/chathub", options => {
         options.Headers["Foo"] = "Bar";
+        options.SkipNegotiation = true;
+        options.Transports = HttpTransportType.WebSockets;
         options.Cookies.Add(new Cookie(/* ... */);
         options.ClientCertificates.Add(/* ... */);
     })
@@ -390,8 +393,9 @@ W kliencie JavaScript te opcje można podać w obiekcie JavaScript udostępniony
 ```javascript
 let connection = new signalR.HubConnectionBuilder()
     .withUrl("/chathub", {
-        skipNegotiation: true,
-        transport: signalR.HttpTransportType.WebSockets
+        // "Foo: Bar" will not be sent with WebSockets or Server-Sent Events requests
+        headers: { "Foo": "Bar" },
+        transport: signalR.HttpTransportType.LongPolling 
     })
     .build();
 ```
@@ -406,7 +410,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
         .build();
 ```
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:tutorials/signalr>
 * <xref:signalr/hubs>
@@ -586,7 +590,7 @@ let connection = new signalR.HubConnectionBuilder()
 
 Poniższa tabela zawiera listę dostępnych poziomów dzienników. Wartość określana przez użytkownika w celu ustawienia `configureLogging` **minimalnego** poziomu dziennika, który zostanie zarejestrowany. Komunikaty zarejestrowane na tym poziomie **lub poziomy wymienione po nim w tabeli**zostaną zarejestrowane.
 
-| String                      | LogLevel               |
+| Ciąg                      | LogLevel               |
 | --------------------------- | ---------------------- |
 | `trace`                     | `LogLevel.Trace`       |
 | `debug`                     | `LogLevel.Debug`       |
@@ -621,7 +625,7 @@ Można je bezpiecznie zignorować.
 
 Transporty używane przez program SignalR można skonfigurować w `WithUrl` wywołaniu ( `withUrl` w języku JavaScript). Wartości bitowe i `HttpTransportType` można użyć, aby ograniczyć klient do używania tylko określonych transportów. Wszystkie transporty są domyślnie włączone.
 
-Na przykład, aby wyłączyć transport zdarzeń wysłanych przez serwer, ale zezwolić na połączenia z usługą WebSockets i długie sondowanie:
+Na przykład, aby wyłączyć transport zdarzeń Server-Sent, ale zezwolić na połączenia z usługą WebSockets i długie sondowanie:
 
 ```csharp
 var connection = new HubConnectionBuilder()
@@ -652,7 +656,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 
 ### <a name="configure-bearer-authentication"></a>Konfigurowanie uwierzytelniania okaziciela
 
-Aby zapewnić dane uwierzytelniania wraz z SignalR żądaniami, użyj `AccessTokenProvider` opcji ( `accessTokenFactory` w języku JavaScript), aby określić funkcję, która zwraca żądany token dostępu. W kliencie .NET token dostępu jest przenoszona jako token "uwierzytelnianie okaziciela" protokołu HTTP (przy użyciu `Authorization` nagłówka z typem `Bearer` ). W kliencie JavaScript token dostępu jest używany jako token okaziciela, **z wyjątkiem** kilku przypadków, w których interfejsy API przeglądarki ograniczają możliwość zastosowania nagłówków (w konkretnym przypadku zdarzeń wysyłanych przez serwer i żądań WebSockets). W takich przypadkach token dostępu jest podawany jako wartość ciągu zapytania `access_token` .
+Aby zapewnić dane uwierzytelniania wraz z SignalR żądaniami, użyj `AccessTokenProvider` opcji ( `accessTokenFactory` w języku JavaScript), aby określić funkcję, która zwraca żądany token dostępu. W kliencie .NET token dostępu jest przenoszona jako token "uwierzytelnianie okaziciela" protokołu HTTP (przy użyciu `Authorization` nagłówka z typem `Bearer` ). W kliencie JavaScript token dostępu jest używany jako token okaziciela, **z wyjątkiem** kilku przypadków, w których interfejsy API przeglądarki ograniczają możliwość stosowania nagłówków (w konkretnym przypadku Server-Sent zdarzeń i żądań WebSockets). W takich przypadkach token dostępu jest podawany jako wartość ciągu zapytania `access_token` .
 
 W kliencie .NET `AccessTokenProvider` opcji można określić za pomocą delegata opcji w `WithUrl` :
 
@@ -746,6 +750,7 @@ Dodatkowe opcje można skonfigurować w `WithUrl` `withUrl` metodzie (w języku 
 | Opcja języka JavaScript | Wartość domyślna | Opis |
 | ----------------- | ------------- | ----------- |
 | `accessTokenFactory` | `null` | Funkcja zwracająca ciąg, który jest dostarczany jako token uwierzytelniania okaziciela w żądaniach HTTP. |
+| `transport` | `null` | <xref:Microsoft.AspNetCore.Http.Connections.HttpTransportType>Wartość określająca transport, który ma być używany w połączeniu. |
 | `logMessageContent` | `null` | Ustaw na `true` , aby rejestrować bajty/znaki komunikatów wysyłanych i odbieranych przez klienta. |
 | `skipNegotiation` | `false` | Ustaw tę wartość na `true` , aby pominąć krok negocjowania. **Obsługiwane tylko wtedy, gdy transport Sockets jest jedynym włączonym transportem**. Nie można włączyć tego ustawienia w przypadku korzystania z SignalR usługi platformy Azure. |
 
@@ -792,7 +797,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
         .build();
 ```
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:tutorials/signalr>
 * <xref:signalr/hubs>
@@ -971,7 +976,7 @@ let connection = new signalR.HubConnectionBuilder()
 
 Poniższa tabela zawiera listę dostępnych poziomów dzienników. Wartość określana przez użytkownika w celu ustawienia `configureLogging` **minimalnego** poziomu dziennika, który zostanie zarejestrowany. Komunikaty zarejestrowane na tym poziomie **lub poziomy wymienione po nim w tabeli**zostaną zarejestrowane.
 
-| String                      | LogLevel               |
+| Ciąg                      | LogLevel               |
 | --------------------------- | ---------------------- |
 | `trace`                     | `LogLevel.Trace`       |
 | `debug`                     | `LogLevel.Debug`       |
@@ -1006,7 +1011,7 @@ Można je bezpiecznie zignorować.
 
 Transporty używane przez program SignalR można skonfigurować w `WithUrl` wywołaniu ( `withUrl` w języku JavaScript). Wartości bitowe i `HttpTransportType` można użyć, aby ograniczyć klient do używania tylko określonych transportów. Wszystkie transporty są domyślnie włączone.
 
-Na przykład, aby wyłączyć transport zdarzeń wysłanych przez serwer, ale zezwolić na połączenia z usługą WebSockets i długie sondowanie:
+Na przykład, aby wyłączyć transport zdarzeń Server-Sent, ale zezwolić na połączenia z usługą WebSockets i długie sondowanie:
 
 ```csharp
 var connection = new HubConnectionBuilder()
@@ -1037,7 +1042,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 
 ### <a name="configure-bearer-authentication"></a>Konfigurowanie uwierzytelniania okaziciela
 
-Aby zapewnić dane uwierzytelniania wraz z SignalR żądaniami, użyj `AccessTokenProvider` opcji ( `accessTokenFactory` w języku JavaScript), aby określić funkcję, która zwraca żądany token dostępu. W kliencie .NET token dostępu jest przenoszona jako token "uwierzytelnianie okaziciela" protokołu HTTP (przy użyciu `Authorization` nagłówka z typem `Bearer` ). W kliencie JavaScript token dostępu jest używany jako token okaziciela, **z wyjątkiem** kilku przypadków, w których interfejsy API przeglądarki ograniczają możliwość zastosowania nagłówków (w konkretnym przypadku zdarzeń wysyłanych przez serwer i żądań WebSockets). W takich przypadkach token dostępu jest podawany jako wartość ciągu zapytania `access_token` .
+Aby zapewnić dane uwierzytelniania wraz z SignalR żądaniami, użyj `AccessTokenProvider` opcji ( `accessTokenFactory` w języku JavaScript), aby określić funkcję, która zwraca żądany token dostępu. W kliencie .NET token dostępu jest przenoszona jako token "uwierzytelnianie okaziciela" protokołu HTTP (przy użyciu `Authorization` nagłówka z typem `Bearer` ). W kliencie JavaScript token dostępu jest używany jako token okaziciela, **z wyjątkiem** kilku przypadków, w których interfejsy API przeglądarki ograniczają możliwość stosowania nagłówków (w konkretnym przypadku Server-Sent zdarzeń i żądań WebSockets). W takich przypadkach token dostępu jest podawany jako wartość ciągu zapytania `access_token` .
 
 W kliencie .NET `AccessTokenProvider` opcji można określić za pomocą delegata opcji w `WithUrl` :
 
@@ -1131,6 +1136,7 @@ Dodatkowe opcje można skonfigurować w `WithUrl` `withUrl` metodzie (w języku 
 | Opcja języka JavaScript | Wartość domyślna | Opis |
 | ----------------- | ------------- | ----------- |
 | `accessTokenFactory` | `null` | Funkcja zwracająca ciąg, który jest dostarczany jako token uwierzytelniania okaziciela w żądaniach HTTP. |
+| `transport` | `null` | <xref:Microsoft.AspNetCore.Http.Connections.HttpTransportType>Wartość określająca transport, który ma być używany w połączeniu. |
 | `logMessageContent` | `null` | Ustaw na `true` , aby rejestrować bajty/znaki komunikatów wysyłanych i odbieranych przez klienta. |
 | `skipNegotiation` | `false` | Ustaw tę wartość na `true` , aby pominąć krok negocjowania. **Obsługiwane tylko wtedy, gdy transport Sockets jest jedynym włączonym transportem**. Nie można włączyć tego ustawienia w przypadku korzystania z SignalR usługi platformy Azure. |
 
@@ -1177,7 +1183,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
         .build();
 ```
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:tutorials/signalr>
 * <xref:signalr/hubs>
@@ -1366,7 +1372,7 @@ Można je bezpiecznie zignorować.
 
 Transporty używane przez program SignalR można skonfigurować w `WithUrl` wywołaniu ( `withUrl` w języku JavaScript). Wartości bitowe i `HttpTransportType` można użyć, aby ograniczyć klient do używania tylko określonych transportów. Wszystkie transporty są domyślnie włączone.
 
-Na przykład, aby wyłączyć transport zdarzeń wysłanych przez serwer, ale zezwolić na połączenia z usługą WebSockets i długie sondowanie:
+Na przykład, aby wyłączyć transport zdarzeń Server-Sent, ale zezwolić na połączenia z usługą WebSockets i długie sondowanie:
 
 ```csharp
 var connection = new HubConnectionBuilder()
@@ -1386,7 +1392,7 @@ W tej wersji elementu WebSockets klienta Java jest jedynym dostępnym transporte
 
 ### <a name="configure-bearer-authentication"></a>Konfigurowanie uwierzytelniania okaziciela
 
-Aby zapewnić dane uwierzytelniania wraz z SignalR żądaniami, użyj `AccessTokenProvider` opcji ( `accessTokenFactory` w języku JavaScript), aby określić funkcję, która zwraca żądany token dostępu. W kliencie .NET token dostępu jest przenoszona jako token "uwierzytelnianie okaziciela" protokołu HTTP (przy użyciu `Authorization` nagłówka z typem `Bearer` ). W kliencie JavaScript token dostępu jest używany jako token okaziciela, **z wyjątkiem** kilku przypadków, w których interfejsy API przeglądarki ograniczają możliwość zastosowania nagłówków (w konkretnym przypadku zdarzeń wysyłanych przez serwer i żądań WebSockets). W takich przypadkach token dostępu jest podawany jako wartość ciągu zapytania `access_token` .
+Aby zapewnić dane uwierzytelniania wraz z SignalR żądaniami, użyj `AccessTokenProvider` opcji ( `accessTokenFactory` w języku JavaScript), aby określić funkcję, która zwraca żądany token dostępu. W kliencie .NET token dostępu jest przenoszona jako token "uwierzytelnianie okaziciela" protokołu HTTP (przy użyciu `Authorization` nagłówka z typem `Bearer` ). W kliencie JavaScript token dostępu jest używany jako token okaziciela, **z wyjątkiem** kilku przypadków, w których interfejsy API przeglądarki ograniczają możliwość stosowania nagłówków (w konkretnym przypadku Server-Sent zdarzeń i żądań WebSockets). W takich przypadkach token dostępu jest podawany jako wartość ciągu zapytania `access_token` .
 
 W kliencie .NET `AccessTokenProvider` opcji można określić za pomocą delegata opcji w `WithUrl` :
 
@@ -1480,6 +1486,7 @@ Dodatkowe opcje można skonfigurować w `WithUrl` `withUrl` metodzie (w języku 
 | Opcja języka JavaScript | Wartość domyślna | Opis |
 | ----------------- | ------------- | ----------- |
 | `accessTokenFactory` | `null` | Funkcja zwracająca ciąg, który jest dostarczany jako token uwierzytelniania okaziciela w żądaniach HTTP. |
+| `transport` | `null` | <xref:Microsoft.AspNetCore.Http.Connections.HttpTransportType>Wartość określająca transport, który ma być używany w połączeniu. |
 | `logMessageContent` | `null` | Ustaw na `true` , aby rejestrować bajty/znaki komunikatów wysyłanych i odbieranych przez klienta. |
 | `skipNegotiation` | `false` | Ustaw tę wartość na `true` , aby pominąć krok negocjowania. **Obsługiwane tylko wtedy, gdy transport Sockets jest jedynym włączonym transportem**. Nie można włączyć tego ustawienia w przypadku korzystania z SignalR usługi platformy Azure. |
 
@@ -1526,7 +1533,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
         .build();
 ```
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:tutorials/signalr>
 * <xref:signalr/hubs>
@@ -1714,7 +1721,7 @@ Można je bezpiecznie zignorować.
 
 Transporty używane przez program SignalR można skonfigurować w `WithUrl` wywołaniu ( `withUrl` w języku JavaScript). Wartości bitowe i `HttpTransportType` można użyć, aby ograniczyć klient do używania tylko określonych transportów. Wszystkie transporty są domyślnie włączone.
 
-Na przykład, aby wyłączyć transport zdarzeń wysłanych przez serwer, ale zezwolić na połączenia z usługą WebSockets i długie sondowanie:
+Na przykład, aby wyłączyć transport zdarzeń Server-Sent, ale zezwolić na połączenia z usługą WebSockets i długie sondowanie:
 
 ```csharp
 var connection = new HubConnectionBuilder()
@@ -1732,7 +1739,7 @@ let connection = new signalR.HubConnectionBuilder()
 
 ### <a name="configure-bearer-authentication"></a>Konfigurowanie uwierzytelniania okaziciela
 
-Aby zapewnić dane uwierzytelniania wraz z SignalR żądaniami, użyj `AccessTokenProvider` opcji ( `accessTokenFactory` w języku JavaScript), aby określić funkcję, która zwraca żądany token dostępu. W kliencie .NET token dostępu jest przenoszona jako token "uwierzytelnianie okaziciela" protokołu HTTP (przy użyciu `Authorization` nagłówka z typem `Bearer` ). W kliencie JavaScript token dostępu jest używany jako token okaziciela, **z wyjątkiem** kilku przypadków, w których interfejsy API przeglądarki ograniczają możliwość zastosowania nagłówków (w konkretnym przypadku zdarzeń wysyłanych przez serwer i żądań WebSockets). W takich przypadkach token dostępu jest podawany jako wartość ciągu zapytania `access_token` .
+Aby zapewnić dane uwierzytelniania wraz z SignalR żądaniami, użyj `AccessTokenProvider` opcji ( `accessTokenFactory` w języku JavaScript), aby określić funkcję, która zwraca żądany token dostępu. W kliencie .NET token dostępu jest przenoszona jako token "uwierzytelnianie okaziciela" protokołu HTTP (przy użyciu `Authorization` nagłówka z typem `Bearer` ). W kliencie JavaScript token dostępu jest używany jako token okaziciela, **z wyjątkiem** kilku przypadków, w których interfejsy API przeglądarki ograniczają możliwość stosowania nagłówków (w konkretnym przypadku Server-Sent zdarzeń i żądań WebSockets). W takich przypadkach token dostępu jest podawany jako wartość ciągu zapytania `access_token` .
 
 W kliencie .NET `AccessTokenProvider` opcji można określić za pomocą delegata opcji w `WithUrl` :
 
@@ -1823,6 +1830,7 @@ Dodatkowe opcje można skonfigurować w `WithUrl` `withUrl` metodzie (w języku 
 | Opcja języka JavaScript | Wartość domyślna | Opis |
 | ----------------- | ------------- | ----------- |
 | `accessTokenFactory` | `null` | Funkcja zwracająca ciąg, który jest dostarczany jako token uwierzytelniania okaziciela w żądaniach HTTP. |
+| `transport` | `null` | <xref:Microsoft.AspNetCore.Http.Connections.HttpTransportType>Wartość określająca transport, który ma być używany w połączeniu. |
 | `logMessageContent` | `null` | Ustaw na `true` , aby rejestrować bajty/znaki komunikatów wysyłanych i odbieranych przez klienta. |
 | `skipNegotiation` | `false` | Ustaw tę wartość na `true` , aby pominąć krok negocjowania. **Obsługiwane tylko wtedy, gdy transport Sockets jest jedynym włączonym transportem**. Nie można włączyć tego ustawienia w przypadku korzystania z SignalR usługi platformy Azure. |
 

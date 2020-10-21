@@ -3,7 +3,8 @@ title: Zażądaj funkcji w ASP.NET Core
 author: ardalis
 description: Dowiedz się więcej na temat szczegółów implementacji serwera sieci Web związanych z żądaniami HTTP i odpowiedziami, które są zdefiniowane w interfejsach dla ASP.NET Core.
 ms.author: riande
-ms.date: 10/14/2016
+ms.custom: mvc
+ms.date: 10/20/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -16,70 +17,140 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/request-features
-ms.openlocfilehash: 3b5c929519407de5dc582c10a86745efddc8a38a
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 879b775ba2998ee803708ebf231b5fcd363b811c
+ms.sourcegitcommit: b5ebaf42422205d212e3dade93fcefcf7f16db39
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634517"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92326429"
 ---
 # <a name="request-features-in-aspnet-core"></a>Zażądaj funkcji w ASP.NET Core
 
 Przez [Steve Smith](https://ardalis.com/)
 
-Szczegóły implementacji serwera sieci Web związane z żądaniami HTTP i odpowiedziami są zdefiniowane w interfejsach. Te interfejsy są używane przez implementacje serwera i oprogramowanie pośredniczące do tworzenia i modyfikowania potoku hostingu aplikacji.
-
-## <a name="feature-interfaces"></a>Interfejsy funkcji
-
-ASP.NET Core definiuje wiele interfejsów funkcji HTTP `Microsoft.AspNetCore.Http.Features` , które są używane przez serwery do identyfikowania obsługiwanych funkcji. Poniższe interfejsy funkcji obsługują żądania i zwracają odpowiedzi:
-
-`IHttpRequestFeature` Definiuje strukturę żądania HTTP, łącznie z protokołem, ścieżką, ciągiem zapytania, nagłówkami i treścią.
-
-`IHttpResponseFeature` Definiuje strukturę odpowiedzi HTTP, w tym kod stanu, nagłówki i treść odpowiedzi.
-
-`IHttpAuthenticationFeature` Definiuje obsługę identyfikacji użytkowników na podstawie `ClaimsPrincipal` i określania procedury obsługi uwierzytelniania.
-
-`IHttpUpgradeFeature` Definiuje obsługę [uaktualnień http](https://tools.ietf.org/html/rfc2616.html#section-14.42), które umożliwiają klientowi określenie dodatkowych protokołów, które mają być używane, jeśli serwer chce przełączyć protokoły.
-
-`IHttpBufferingFeature` Definiuje metody służące do wyłączania buforowania żądań i/lub odpowiedzi.
-
-`IHttpConnectionFeature` Definiuje właściwości adresów i portów lokalnych i zdalnych.
-
-`IHttpRequestLifetimeFeature` Definiuje obsługę przerywania połączeń lub wykrywanie, czy żądanie zostało zakończone przedwcześnie, na przykład przez odłączenie klienta.
-
-`IHttpSendFileFeature` Definiuje metodę asynchronicznego wysyłania plików.
-
-`IHttpWebSocketFeature` Definiuje interfejs API do obsługi gniazd sieci Web.
-
-`IHttpRequestIdentifierFeature` Dodaje właściwość, która może zostać zaimplementowana w celu jednoznacznego identyfikowania żądań.
-
-`ISessionFeature` Definiuje `ISessionFactory` i `ISession` abstrakcje dla pomocniczych sesji użytkowników.
-
-`ITlsConnectionFeature` Definiuje interfejs API do pobierania certyfikatów klienta.
-
-`ITlsTokenBindingFeature` Definiuje metody pracy z parametrami powiązania tokenu TLS.
-
-> [!NOTE]
-> `ISessionFeature` nie jest funkcją serwera, ale jest zaimplementowana przez program `SessionMiddleware` (zobacz [Zarządzanie stanem aplikacji](app-state.md)).
+`HttpContext`Interfejs API używany przez aplikacje i oprogramowanie pośredniczące do przetwarzania żądań ma warstwę abstrakcji undernieth ją jako *interfejsy funkcji*. Każdy interfejs funkcji zawiera szczegółowy podzestaw funkcji uwidocznionych przez program `HttpContext` . Te interfejsy mogą być dodawane, modyfikowane, opakowane, zastępowane lub nawet usuwane przez serwer lub oprogramowanie pośredniczące, gdy żądanie jest przetwarzane bez konieczności ponownego implementowania całego programu `HttpContext` . Mogą być również używane do makietowania funkcjonalności podczas testowania.
 
 ## <a name="feature-collections"></a>Kolekcje funkcji
 
-`Features`Właściwość `HttpContext` zawiera interfejs do pobierania i ustawiania dostępnych funkcji http dla bieżącego żądania. Ponieważ kolekcja funkcji jest modyfikowalna nawet w kontekście żądania, oprogramowanie pośredniczące może służyć do modyfikowania kolekcji i dodawania obsługi dodatkowych funkcji.
+<xref:Microsoft.AspNetCore.Http.HttpContext.Features>Właściwość `HttpContext` zapewnia dostęp do kolekcji interfejsów funkcji dla bieżącego żądania. Ponieważ kolekcja funkcji jest modyfikowalna nawet w kontekście żądania, oprogramowanie pośredniczące może służyć do modyfikowania kolekcji i dodawania obsługi dodatkowych funkcji. Niektóre funkcje zaawansowane są dostępne tylko przez uzyskanie dostępu do skojarzonego interfejsu za pomocą kolekcji funkcji.
 
-## <a name="middleware-and-request-features"></a>Oprogramowanie pośredniczące i funkcje żądania
+## <a name="feature-interfaces"></a>Interfejsy funkcji
 
-Chociaż serwery są odpowiedzialne za tworzenie kolekcji funkcji, oprogramowanie pośredniczące może dodawać do tej kolekcji i korzystać z funkcji z kolekcji. Na przykład `StaticFileMiddleware` program uzyskuje dostęp do `IHttpSendFileFeature` funkcji. Jeśli ta funkcja istnieje, jest używana do wysyłania żądanego pliku statycznego ze ścieżki fizycznej. W przeciwnym razie do wysłania pliku zostanie użyta mniejsza Metoda alternatywna. Jeśli jest dostępna, `IHttpSendFileFeature` umożliwia systemowi operacyjnemu otwarcie pliku i przeprowadzenie bezpośredniego kopiowania trybu jądra na kartę sieciową.
+ASP.NET Core definiuje wiele popularnych interfejsów funkcji protokołu HTTP w programie <xref:Microsoft.AspNetCore.Http.Features?displayProperty=fullName> , które są współużytkowane przez różne serwery i oprogramowanie pośredniczące w celu zidentyfikowania obsługiwanych przez nich funkcji. Serwery i oprogramowanie pośredniczące mogą również udostępniać własne interfejsy z dodatkowymi funkcjami.
 
-Ponadto oprogramowanie pośredniczące może dodać do kolekcji funkcji ustanowionej przez serwer. Istniejące funkcje mogą być nawet zastępowane przez oprogramowanie pośredniczące, co pozwala oprogramowaniu pośredniczącemu rozszerzyć funkcjonalność serwera. Funkcje dodane do kolekcji są natychmiast dostępne dla innych programów pośredniczących lub aplikacji bazowej w późniejszym czasie w potoku żądania.
+Większość interfejsów funkcji zapewnia opcjonalną, bardziej uproszczoną funkcjonalność i skojarzone `HttpContext` z nimi interfejsy API zapewniają wartości domyślne, jeśli ta funkcja nie jest obecna. Niektóre interfejsy są wskazane w poniższej zawartości zgodnie z wymaganiami, ponieważ zapewniają podstawowe funkcje żądań i odpowiedzi, które muszą zostać zaimplementowane w celu przetworzenia żądania.
 
-Łącząc niestandardowe implementacje serwera i konkretne udoskonalenia oprogramowania pośredniczącego, można utworzyć precyzyjny zestaw funkcji wymaganych przez aplikację. Pozwala to na dodanie brakujących funkcji bez konieczności zmiany na serwerze i gwarantuje, że dostępna jest tylko minimalna liczba funkcji, co ogranicza obszar narażony na ataki i zwiększa wydajność.
+Następujące interfejsy funkcji pochodzą z <xref:Microsoft.AspNetCore.Http.Features?displayProperty=fullName> :
 
-## <a name="summary"></a>Podsumowanie
+<xref:Microsoft.AspNetCore.Http.Features.IHttpRequestFeature>: Określa strukturę żądania HTTP, łącznie z protokołem, ścieżką, ciągiem zapytania, nagłówkami i treścią. Ta funkcja jest wymagana, aby przetwarzać żądania.
 
-Interfejsy funkcji definiują określone funkcje HTTP, które mogą być obsługiwane przez dane żądanie. Serwery definiują kolekcje funkcji i początkowy zestaw funkcji obsługiwanych przez ten serwer, ale oprogramowanie pośredniczące może służyć do ulepszania tych funkcji.
+<xref:Microsoft.AspNetCore.Http.Features.IHttpResponseFeature>: Określa strukturę odpowiedzi HTTP, w tym kod stanu, nagłówki i treść odpowiedzi. Ta funkcja jest wymagana, aby przetwarzać żądania.
+
+::: moniker range=">= aspnetcore-3.0"
+
+<xref:Microsoft.AspNetCore.Http.Features.IHttpResponseBodyFeature>: Definiuje różne sposoby pisania treści odpowiedzi przy użyciu `Stream` , a `PipeWriter` lub pliku. Ta funkcja jest wymagana, aby przetwarzać żądania. Spowoduje to zastąpienie `IHttpResponseFeature.Body` i `IHttpSendFileFeature` .
+
+::: moniker-end
+
+<xref:Microsoft.AspNetCore.Http.Features.Authentication.IHttpAuthenticationFeature>: Zawiera <xref:System.Security.Claims.ClaimsPrincipal> aktualnie skojarzone z żądaniem.
+
+<xref:Microsoft.AspNetCore.Http.Features.IFormFeature>: Służy do analizowania i buforowania przychodzących przesłanych formularzy HTTP i wieloczęściowego.
+
+::: moniker range=">= aspnetcore-2.0"
+
+<xref:Microsoft.AspNetCore.Http.Features.IHttpBodyControlFeature>: Służy do kontrolowania, czy synchroniczne operacje we/wy są dozwolone dla treści żądania lub odpowiedzi.
+
+::: moniker-end
+   
+::: moniker range="< aspnetcore-3.0"
+
+<xref:Microsoft.AspNetCore.Http.Features.IHttpBufferingFeature>: Definiuje metody służące do wyłączania buforowania żądań i/lub odpowiedzi.
+
+::: moniker-end
+
+<xref:Microsoft.AspNetCore.Http.Features.IHttpConnectionFeature>: Definiuje właściwości identyfikatora połączenia oraz adresów i portów lokalnych i zdalnych.
+
+::: moniker range=">= aspnetcore-2.0"
+
+<xref:Microsoft.AspNetCore.Http.Features.IHttpMaxRequestBodySizeFeature>: Określa maksymalny dozwolony rozmiar treści żądania dla bieżącego żądania.
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-5.0"
+
+`IHttpRequestBodyDetectionFeature`: Wskazuje, czy żądanie może mieć treść.
+
+::: moniker-end
+
+<xref:Microsoft.AspNetCore.Http.Features.IHttpRequestIdentifierFeature>: Dodaje właściwość, która może zostać zaimplementowana w celu jednoznacznego identyfikowania żądań.
+
+<xref:Microsoft.AspNetCore.Http.Features.IHttpRequestLifetimeFeature>: Definiuje obsługę przerywania połączeń lub wykrywania, czy żądanie zostało zakończone przedwcześnie, na przykład przez odłączenie klienta.
+
+::: moniker range=">= aspnetcore-3.0"
+
+<xref:Microsoft.AspNetCore.Http.Features.IHttpRequestTrailersFeature>: Zapewnia dostęp do nagłówków naczepy żądania (jeśli istnieją).
+
+<xref:Microsoft.AspNetCore.Http.Features.IHttpResetFeature>: Służy do wysyłania komunikatów resetowania dla protokołów, które obsługują je, takich jak HTTP/2 lub HTTP/3.
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-2.2"
+
+<xref:Microsoft.AspNetCore.Http.Features.IHttpResponseTrailersFeature>: Umożliwia aplikacji dostarczanie nagłówków przyczepy odpowiedzi, jeśli są obsługiwane.
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
+<xref:Microsoft.AspNetCore.Http.Features.IHttpSendFileFeature>: Definiuje metodę asynchronicznego wysyłania plików.
+
+::: moniker-end
+
+<xref:Microsoft.AspNetCore.Http.Features.IHttpUpgradeFeature>: Definiuje obsługę [uaktualnień http](https://tools.ietf.org/html/rfc2616.html#section-14.42), które umożliwiają klientowi określenie dodatkowych protokołów, które mają być używane, jeśli serwer chce przełączyć protokoły.
+
+<xref:Microsoft.AspNetCore.Http.Features.IHttpWebSocketFeature>: Definiuje interfejs API do obsługi gniazd sieci Web.
+
+::: moniker range=">= aspnetcore-3.0"
+
+<xref:Microsoft.AspNetCore.Http.Features.IHttpsCompressionFeature>: Kontroluje, czy kompresja odpowiedzi powinna być używana przez połączenia HTTPS.
+
+::: moniker-end
+
+<xref:Microsoft.AspNetCore.Http.Features.IItemsFeature>: Przechowuje <xref:Microsoft.AspNetCore.Http.Features.IItemsFeature.Items> kolekcję dla stanu aplikacji na żądanie.
+
+<xref:Microsoft.AspNetCore.Http.Features.IQueryFeature>: Analizuje i buforuje ciąg zapytania.
+   
+::: moniker range=">= aspnetcore-3.0"
+
+<xref:Microsoft.AspNetCore.Http.Features.IRequestBodyPipeFeature>: Reprezentuje treść żądania jako <xref:System.IO.Pipelines.PipeReader> .
+ 
+::: moniker-end
+
+<xref:Microsoft.AspNetCore.Http.Features.IRequestCookiesFeature>: Analizuje i buforuje `Cookie` wartości nagłówka żądania.
+
+<xref:Microsoft.AspNetCore.Http.Features.IResponseCookiesFeature>: Kontroluje sposób cookie zastosowania odpowiedzi s do `Set-Cookie` nagłówka.
+
+::: moniker range=">= aspnetcore-2.2"
+
+<xref:Microsoft.AspNetCore.Http.Features.IServerVariablesFeature>: Ta funkcja zapewnia dostęp do zmiennych serwerowych żądania, takich jak te udostępniane przez usługi IIS.
+
+::: moniker-end
+   
+<xref:Microsoft.AspNetCore.Http.Features.IServiceProvidersFeature>: Zapewnia dostęp do <xref:System.IServiceProvider> usługi z żądaniami z zakresem.
+
+<xref:Microsoft.AspNetCore.Http.Features.ISessionFeature>: Definiuje `ISessionFactory` i <xref:Microsoft.AspNetCore.Http.ISession> abstrakcje dla pomocniczych sesji użytkowników. `ISessionFeature` jest zaimplementowany przez <xref:Microsoft.AspNetCore.Session.SessionMiddleware> (zobacz <xref:fundamentals/app-state> ).
+
+<xref:Microsoft.AspNetCore.Http.Features.ITlsConnectionFeature>: Definiuje interfejs API do pobierania certyfikatów klienta.
+
+<xref:Microsoft.AspNetCore.Http.Features.ITlsTokenBindingFeature>: Definiuje metody pracy z parametrami powiązania tokenu TLS.
+   
+::: moniker range=">= aspnetcore-2.2"
+   
+<xref:Microsoft.AspNetCore.Http.Features.ITrackingConsentFeature>: Służy do wykonywania zapytań, udzielania i wycofywania zgody użytkownika na przechowywanie informacji o użytkowniku związanych z działaniem i funkcjonalnością witryny.
+   
+::: moniker-end
 
 ## <a name="additional-resources"></a>Dodatkowe zasoby
 
-* [Serwery](xref:fundamentals/servers/index)
-* [Oprogramowanie pośredniczące](xref:fundamentals/middleware/index)
-* [Otwarty interfejs internetowy dla platformy .NET (OWIN)](xref:fundamentals/owin)
+* <xref:fundamentals/servers/index>
+* <xref:fundamentals/middleware/index>

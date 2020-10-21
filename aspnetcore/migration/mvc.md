@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/mvc
-ms.openlocfilehash: d615f67fc5cb23499ee7e14b747390a7a1b5a693
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: 51228e59284b5edf0554e9929b16deafe08ea31e
+ms.sourcegitcommit: b5ebaf42422205d212e3dade93fcefcf7f16db39
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865133"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92326624"
 ---
 # <a name="migrate-from-aspnet-mvc-to-aspnet-core-mvc"></a>Migrowanie z ASP.NET MVC do ASP.NET Core MVC
 
@@ -48,7 +48,7 @@ Utwórz przykładowy projekt ASP.NET MVC w programie Visual Studio do migracji:
 
 1. Z menu **plik** wybierz pozycję **Nowy** > **projekt**.
 1. Wybierz pozycję **aplikacja sieci Web ASP.NET (.NET Framework)** , a następnie wybierz pozycję **dalej**.
-1. Nazwij projekt *WebApp1* , aby przestrzeń nazw była zgodna z projektem ASP.NET Core utworzonym w następnym kroku. Wybierz przycisk **Utwórz**.
+1. Nazwij projekt *WebApp1* , aby przestrzeń nazw była zgodna z projektem ASP.NET Core utworzonym w następnym kroku. Wybierz pozycję **Utwórz**.
 1. Wybierz pozycję **MVC**, a następnie wybierz pozycję **Utwórz**.
 
 ## <a name="create-the-aspnet-core-project"></a>Tworzenie projektu ASP.NET Core
@@ -57,9 +57,9 @@ Utwórz nowe rozwiązanie z nowym projektem ASP.NET Core, aby przeprowadzić mig
 
 1. Uruchom drugie wystąpienie programu Visual Studio.
 1. Z menu **plik** wybierz pozycję **Nowy** > **projekt**.
-1. Wybierz pozycję **ASP.NET Web Core Web Application** , a następnie wybierz przycisk **dalej**.
+1. Wybierz **ASP.NET Core aplikacji sieci Web** , a następnie wybierz przycisk **dalej**.
 1. W oknie dialogowym **Konfigurowanie nowego projektu** Nazwij projekt *WebApp1*.
-1. Ustaw lokalizację na inny katalog niż poprzedni projekt, aby użyć tej samej nazwy projektu. Korzystanie z tej samej przestrzeni nazw ułatwia kopiowanie kodu między dwoma projektami. Wybierz przycisk **Utwórz**.
+1. Ustaw lokalizację na inny katalog niż poprzedni projekt, aby użyć tej samej nazwy projektu. Korzystanie z tej samej przestrzeni nazw ułatwia kopiowanie kodu między dwoma projektami. Wybierz pozycję **Utwórz**.
 1. W oknie dialogowym **Tworzenie nowej ASP.NET Core aplikacji sieci Web** upewnij się, że wybrano opcję **.net Core** i **ASP.NET Core 3,1** . Wybierz szablon projektu **aplikacja sieci Web (Model-View-Controller)** i wybierz pozycję **Utwórz**.
 
 ## <a name="configure-the-aspnet-core-site-to-use-mvc"></a>Skonfiguruj witrynę ASP.NET Core, aby używać MVC
@@ -186,7 +186,7 @@ ASP.NET Core konwertuje Nieobsłużone wyjątki na odpowiedzi na błędy HTTP 50
 
 * <xref:migration/identity>
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:blazor/index>
 * <xref:mvc/views/tag-helpers/intro>
@@ -372,7 +372,7 @@ Istnieje wiele problemów, które mogą spowodować, że komunikaty o błędach 
 
 ASP.NET Core konwertuje Nieobsłużone wyjątki na odpowiedzi na błędy HTTP 500. Zwykle szczegóły błędu nie są uwzględniane w tych odpowiedziach, aby zapobiec ujawnieniu potencjalnie poufnych informacji o serwerze. Aby uzyskać więcej informacji, zobacz [stronę wyjątków dla deweloperów](xref:fundamentals/error-handling#developer-exception-page).
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:blazor/index>
 * <xref:mvc/views/tag-helpers/intro>

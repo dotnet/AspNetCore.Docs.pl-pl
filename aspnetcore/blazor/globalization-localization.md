@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/globalization-localization
-ms.openlocfilehash: be73b0c1e33a2cd15c9ff0dc51044f9bd48c43fe
-ms.sourcegitcommit: ecae2aa432628b9181d1fa11037c231c7dd56c9e
+ms.openlocfilehash: 4345dd8525c2e72aaddc8e45a4fd4d9bfdd63040
+ms.sourcegitcommit: b5ebaf42422205d212e3dade93fcefcf7f16db39
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/16/2020
-ms.locfileid: "92113819"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92326527"
 ---
 # <a name="aspnet-core-no-locblazor-globalization-and-localization"></a>ASP.NET Core Blazor globalizacja i lokalizacja
 
@@ -83,6 +83,19 @@ Domyślnie program Blazor WebAssembly przenosi minimalne zasoby globalizacji wym
   <BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
 </PropertyGroup>
 ```
+
+Blazor WebAssembly można również skonfigurować do uruchamiania przy użyciu określonej kultury aplikacji przy użyciu opcji przekazaną do `Blazor.start` . Przykładowo poniżej przedstawiono aplikację skonfigurowaną do uruchamiania przy użyciu `en-GB` kultury:
+
+```html
+<script src="_framework/blazor.webassembly.js" autostart="false"></script>
+<script>
+  Blazor.start({
+    applicationCulture: 'en-GB'
+  });
+</script>
+```
+
+Wartość parametru `applicationCulture` musi być zgodna z [formatem taga języka BCP-47](https://tools.ietf.org/html/bcp47).
 
 Jeśli aplikacja nie wymaga lokalizacji, można skonfigurować aplikację do obsługi niezmiennej kultury, która jest oparta na `en-US` kulturze:
 

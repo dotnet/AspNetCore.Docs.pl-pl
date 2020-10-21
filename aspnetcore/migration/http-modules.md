@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/http-modules
-ms.openlocfilehash: 213807634a2a6990e9025de7871295cf97a81faf
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: 808215d103db9c5d63fe63b6875a222e6b0ba1fa
+ms.sourcegitcommit: b5ebaf42422205d212e3dade93fcefcf7f16db39
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865590"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92326617"
 ---
 # <a name="migrate-http-handlers-and-modules-to-aspnet-core-middleware"></a>Migrowanie programów obsługi i modułów HTTP do ASP.NET Core oprogramowania pośredniczącego
 
@@ -356,7 +356,7 @@ Element **HttpContext. Response. Output** tłumaczy na:
 
 **HttpContext. Response. TransmitFile**
 
-W [tym miejscu](../fundamentals/request-features.md#middleware-and-request-features)omówiono obsługę pliku.
+Obsługa pliku jest omówiona w temacie [oprogramowanie pośredniczące i funkcje żądania](xref:fundamentals/request-features#middleware-and-request-features).
 
 **HttpContext. Response. Headers**
 
@@ -393,7 +393,7 @@ public async Task Invoke(HttpContext httpContext)
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_SetCookies)]
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Obsługa protokołu HTTP i moduły HTTP — Omówienie](/iis/configuration/system.webserver/)
 * [Konfiguracja](xref:fundamentals/configuration/index)

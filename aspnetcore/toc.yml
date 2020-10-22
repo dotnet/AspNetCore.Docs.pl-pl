@@ -705,6 +705,9 @@
     - name: Rejestrowanie i diagnostyka
       displayName: signalr
       uid: signalr/diagnostics
+    - name: Rozwiązywanie problemów
+      displayName: signalr
+      uid: signalr/troubleshoot
     - name: Specyfikacje
       displayName: 'signalr, specs'
       items:

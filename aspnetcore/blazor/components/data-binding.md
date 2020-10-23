@@ -5,7 +5,7 @@ description: Dowiedz się więcej o funkcjach powiązań danych dla składników
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/19/2020
+ms.date: 10/22/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/data-binding
-ms.openlocfilehash: 0884b0bedd9ed31b8c85790c6950c7c5d63bdf44
-ms.sourcegitcommit: e519d95d17443abafba8f712ac168347b15c8b57
+ms.openlocfilehash: 5a4d50d88ebdf606da397666bf3003232cddd955
+ms.sourcegitcommit: d84a225ec3381355c343460deed50f2fa5722f60
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/02/2020
-ms.locfileid: "91653909"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92429102"
 ---
 # <a name="aspnet-core-no-locblazor-data-binding"></a>ASP.NET Core Blazor powiązania danych
 
@@ -141,9 +141,15 @@ Określanie formatu dla `date` typu pola nie jest zalecane, ponieważ Blazor ma 
 <input type="date" @bind="startDate" @bind:format="yyyy-MM-dd">
 ```
 
-## <a name="parent-to-child-binding-with-component-parameters"></a>Powiązanie element nadrzędny-to-Child z parametrami składnika
+## <a name="binding-with-component-parameters"></a>Powiązanie z parametrami składnika
+
+Typowy scenariusz polega na powiązaniu właściwości w składniku podrzędnym z właściwością w jej elemencie nadrzędnym. Ten scenariusz jest nazywany *powiązaniem łańcuchowym* , ponieważ wiele poziomów powiązań występuje jednocześnie.
 
 Parametry składnika umożliwiają powiązanie właściwości i pól składnika nadrzędnego z `@bind-{PROPERTY OR FIELD}` składnią.
+
+Nie można zaimplementować powiązań łańcuchowych przy użyciu [`@bind`](xref:mvc/views/razor#bind) składni w składniku podrzędnym. Procedura obsługi zdarzeń i wartość musi być określona oddzielnie, aby można było obsługiwać aktualizowanie właściwości w elemencie nadrzędnym ze składnika podrzędnego.
+
+Składnik nadrzędny nadal wykorzystuje [`@bind`](xref:mvc/views/razor#bind) składnię w celu skonfigurowania powiązania danych ze składnikiem podrzędnym.
 
 Następujący `Child` składnik ( `Shared/Child.razor` ) ma `Year` parametr składnika i `YearChanged` wywołanie zwrotne:
 
@@ -155,16 +161,25 @@ Następujący `Child` składnik ( `Shared/Child.razor` ) ma `Year` parametr skł
     </div>
 </div>
 
+<button @onclick="UpdateYearFromChild">Update Year from Child</button>
+
 @code {
+    private Random r = new Random();
+
     [Parameter]
     public int Year { get; set; }
 
     [Parameter]
     public EventCallback<int> YearChanged { get; set; }
+
+    private async Task UpdateYearFromChild()
+    {
+        await YearChanged.InvokeAsync(r.Next(1950, 2021));
+    }
 }
 ```
 
-Wywołanie zwrotne ( <xref:Microsoft.AspNetCore.Components.EventCallback%601> ) musi być nazwane jako nazwa parametru składnika, po którym następuje `Changed` sufiks "" `{PARAMETER NAME}Changed` . W poprzednim przykładzie wywołanie zwrotne ma nazwę `YearChanged` . Aby uzyskać więcej informacji na temat <xref:Microsoft.AspNetCore.Components.EventCallback%601> , zobacz <xref:blazor/components/event-handling#eventcallback> .
+Wywołanie zwrotne ( <xref:Microsoft.AspNetCore.Components.EventCallback%601> ) musi być nazwane jako nazwa parametru składnika, po którym następuje `Changed` sufiks "" `{PARAMETER NAME}Changed` . W poprzednim przykładzie wywołanie zwrotne ma nazwę `YearChanged` . <xref:Microsoft.AspNetCore.Components.EventCallback.InvokeAsync%2A?displayProperty=nameWithType> Wywołuje delegata skojarzonego z powiązaniem z podanym argumentem i wysyła powiadomienie o zdarzeniu dla zmienionej właściwości.
 
 W poniższym `Parent` składniku ( `Parent.razor` ) `year` pole jest powiązane z `Year` parametrem składnika podrzędnego:
 
@@ -198,13 +213,7 @@ Zgodnie z Konwencją Właściwość można powiązać z odpowiadającą jej obs�
 <Child @bind-Year="year" @bind-Year:event="YearChanged" />
 ```
 
-## <a name="child-to-parent-binding-with-chained-bind"></a>Powiązanie elementu podrzędnego z elementem nadrzędnym z powiązaniem łańcuchowym
-
-Typowy scenariusz polega na łańcuchu parametru powiązanego z danymi do elementu strony w danych wyjściowych składnika. Ten scenariusz jest nazywany *powiązaniem łańcuchowym* , ponieważ wiele poziomów powiązań występuje jednocześnie.
-
-Nie można zaimplementować powiązania łańcuchowego ze [`@bind`](xref:mvc/views/razor#bind) składnią w składniku podrzędnym. Program obsługi zdarzeń i wartość muszą być określone osobno. Składnik nadrzędny, jednak może używać [`@bind`](xref:mvc/views/razor#bind) składni z parametrem składnika podrzędnego.
-
-Następujący `PasswordField` składnik ( `PasswordField.razor` ):
+W bardziej zaawansowanym i rzeczywistym przykładzie Poniższy `PasswordField` składnik ( `PasswordField.razor` ):
 
 * Ustawia `<input>` wartość elementu na `password` pole.
 * Uwidacznia zmiany właściwości w `Password` składniku nadrzędnym [`EventCallback`](xref:blazor/components/event-handling#eventcallback) , który przekazuje w bieżącej wartości pola elementu podrzędnego `password` jako argument.
@@ -315,6 +324,8 @@ Password:
     }
 }
 ```
+
+Aby uzyskać więcej informacji na temat <xref:Microsoft.AspNetCore.Components.EventCallback%601> , zobacz <xref:blazor/components/event-handling#eventcallback> .
 
 ## <a name="bind-across-more-than-two-components"></a>Powiązywanie w więcej niż dwóch składnikach
 

@@ -1,7 +1,9 @@
+::: moniker range=">= aspnetcore-3.0 < aspnetcore-5.0"
+
 > [!WARNING]
 > Parametr **"catch-all"** może być zgodny z niepoprawnymi trasami z powodu [błędu](https://github.com/dotnet/aspnetcore/issues/18677) w routingu. Aplikacje, na które ma wpływ ta usterka, mają następującą charakterystykę:
 >
-> * Trasa przechwycenia, na przykład`{**slug}"`
+> * Trasa przechwycenia, na przykład `{**slug}"`
 > * Trasa catch-all nie będzie zgodna z żądaniami, które powinny być zgodne.
 > * Usunięcie innych tras spowoduje rozpoczęcie pracy z całą trasą.
 >
@@ -18,3 +20,5 @@
 >}
 >// Remaining code removed for brevity.
 >```
+
+::: moniker-end

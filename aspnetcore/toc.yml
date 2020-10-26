@@ -385,6 +385,8 @@
               uid: blazor/components/virtualization
             - name: Składniki z szablonami
               uid: blazor/components/templated-components
+            - name: Izolacja CSS
+              uid: blazor/components/css-isolation
             - name: Integracja składników
               uid: blazor/components/integrate-components-into-razor-pages-and-mvc-apps
             - name: Biblioteki składników
@@ -447,7 +449,7 @@
           uid: blazor/webassembly-lazy-load-assemblies
         - name: Wydajność zestawu WebAssembly
           uid: blazor/webassembly-performance-best-practices
-        - name: Testowanie
+        - name: Składniki testowe
           uid: blazor/test
         - name: Progresywne aplikacje internetowe
           uid: blazor/progressive-web-app

@@ -3,7 +3,7 @@ title: 'Samouczek: wywoływanie interfejsu API sieci Web ASP.NET Core przy użyc
 author: rick-anderson
 description: Dowiedz się, jak wywołać interfejs API sieci Web ASP.NET Core przy użyciu języka JavaScript.
 ms.author: riande
-ms.custom: mvc
+ms.custom: mvc, devx-track-js
 ms.date: 11/26/2019
 no-loc:
 - ASP.NET Core Identity
@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/web-api-javascript
-ms.openlocfilehash: 3d097d724ac5e2313d24f1f06e47b881f29a4a98
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: b41288bd63267a9aa7035e25ebc8d838eed5d93b
+ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633802"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92690689"
 ---
 # <a name="tutorial-call-an-aspnet-core-web-api-with-javascript"></a>Samouczek: wywoływanie interfejsu API sieci Web ASP.NET Core przy użyciu języka JavaScript
 
@@ -51,7 +51,7 @@ W tej sekcji dodasz stronę HTML zawierającą formularze do tworzenia elementó
 
 Najprostsze `fetch` wywołanie akceptuje pojedynczy parametr reprezentujący trasę. Drugi parametr, znany jako `init` obiekt, jest opcjonalny. `init` służy do konfigurowania żądania HTTP.
 
-1. Skonfiguruj aplikację do [obsługi plików statycznych](/dotnet/api/microsoft.aspnetcore.builder.staticfileextensions.usestaticfiles#Microsoft_AspNetCore_Builder_StaticFileExtensions_UseStaticFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_) i [Włącz domyślne mapowanie plików](/dotnet/api/microsoft.aspnetcore.builder.defaultfilesextensions.usedefaultfiles#Microsoft_AspNetCore_Builder_DefaultFilesExtensions_UseDefaultFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_). Następujący wyróżniony kod jest wymagany w `Configure` metodzie *Startup.cs*:
+1. Skonfiguruj aplikację do [obsługi plików statycznych](/dotnet/api/microsoft.aspnetcore.builder.staticfileextensions.usestaticfiles#Microsoft_AspNetCore_Builder_StaticFileExtensions_UseStaticFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_) i [Włącz domyślne mapowanie plików](/dotnet/api/microsoft.aspnetcore.builder.defaultfilesextensions.usedefaultfiles#Microsoft_AspNetCore_Builder_DefaultFilesExtensions_UseDefaultFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_). Następujący wyróżniony kod jest wymagany w `Configure` metodzie *Startup.cs* :
 
     [!code-csharp[](first-web-api/samples/3.0/TodoApi/StartupJavaScript.cs?highlight=8-9&name=snippet_configure)]
 
@@ -69,7 +69,7 @@ Najprostsze `fetch` wywołanie akceptuje pojedynczy parametr reprezentujący tra
 
 Zmiana ustawień uruchamiania projektu ASP.NET Core może być wymagana do lokalnego przetestowania strony HTML:
 
-1. Otwórz *Properties\launchSettings.jsna*.
+1. Otwórz *Properties\launchSettings.jsna* .
 1. Usuń `launchUrl` Właściwość, aby wymusić otwieranie przez aplikację w *index.html* &mdash; domyślnego pliku projektu.
 
 Ten przykład wywołuje wszystkie metody CRUD internetowego interfejsu API. Poniżej znajdują się wyjaśnienia żądań interfejsu API sieci Web.
@@ -101,7 +101,7 @@ Gdy internetowy interfejs API zwraca kod stanu pomyślnego, `getItems` Funkcja j
 
 Aktualizowanie elementu do wykonania jest podobne do dodawania jednego z nich; Istnieją jednak dwie znaczące różnice:
 
-* Trasa ma sufiks z unikatowym identyfikatorem elementu do zaktualizowania. Na przykład *API/TodoItems/1*.
+* Trasa ma sufiks z unikatowym identyfikatorem elementu do zaktualizowania. Na przykład *API/TodoItems/1* .
 * Zlecenie akcji HTTP jest UMIESZCZAne zgodnie z `method` opcją.
 
 [!code-javascript[](first-web-api/samples/3.0/TodoApi/wwwroot/js/site.js?name=snippet_UpdateItem)]

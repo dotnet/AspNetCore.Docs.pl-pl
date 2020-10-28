@@ -4,7 +4,7 @@ author: guardrex
 description: Eksploruj ASP.NET Core Blazor , jak tworzyć interaktywny interfejs użytkownika sieci Web po stronie klienta przy użyciu platformy .NET w aplikacji ASP.NET Core.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
-ms.custom: mvc, seoapril2019
+ms.custom: mvc, seoapril2019, devx-track-js
 ms.date: 09/25/2020
 no-loc:
 - ASP.NET Core Identity
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/index
-ms.openlocfilehash: 7ad374fdc7452664e3367d6ef214fd4cebdf3b08
-ms.sourcegitcommit: 139c998d37e9f3e3d0e3d72e10dbce8b75957d89
+ms.openlocfilehash: bae3e96021971e373ad743a0b52da7f69d839c40
+ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/07/2020
-ms.locfileid: "91805530"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92690596"
 ---
 # <a name="introduction-to-aspnet-core-no-locblazor"></a>Wprowadzenie do ASP.NET Core Blazor
 
@@ -49,7 +49,7 @@ Korzystanie z programu .NET do tworzenia aplikacji sieci Web po stronie klienta 
 
 ## <a name="components"></a>Składniki
 
-Blazor aplikacje są oparte na *składnikach*. Składnik w programie Blazor to element interfejsu użytkownika, taki jak strona, okno dialogowe lub formularz wprowadzania danych.
+Blazor aplikacje są oparte na *składnikach* . Składnik w programie Blazor to element interfejsu użytkownika, taki jak strona, okno dialogowe lub formularz wprowadzania danych.
 
 Składniki to klasy .NET C# wbudowane w [zestawy .NET](/dotnet/standard/assembly/) , które:
 
@@ -58,7 +58,7 @@ Składniki to klasy .NET C# wbudowane w [zestawy .NET](/dotnet/standard/assembly
 * Mogą być zagnieżdżane i ponownie używane.
 * Mogą być udostępniane i dystrybuowane jako [ Razor biblioteki klas](xref:razor-pages/ui-class) lub [pakiety NuGet](/nuget/what-is-nuget).
 
-Klasa składnika jest zwykle zapisywana w formie [Razor](xref:mvc/views/razor) strony znaczników z `.razor` rozszerzeniem pliku. Składniki w programie Blazor są formalnie określane jako * Razor składniki*. Razor jest składnią służącą do łączenia znaczników HTML z kodem C# zaprojektowanym pod kątem produktywności dla deweloperów. Razor umożliwia przełączanie między znacznikami HTML i C# w tym samym pliku z obsługą programowania [IntelliSense](/visualstudio/ide/using-intellisense) w programie Visual Studio. Razor Używane są również strony i MVC Razor . W przeciwieństwie do Razor stron i MVC, które są zbudowane wokół modelu żądania/odpowiedzi, składniki są używane specjalnie dla logiki interfejsu użytkownika po stronie klienta.
+Klasa składnika jest zwykle zapisywana w formie [Razor](xref:mvc/views/razor) strony znaczników z `.razor` rozszerzeniem pliku. Składniki w programie Blazor są formalnie określane jako *Razor składniki* . Razor jest składnią służącą do łączenia znaczników HTML z kodem C# zaprojektowanym pod kątem produktywności dla deweloperów. Razor umożliwia przełączanie między znacznikami HTML i C# w tym samym pliku z obsługą programowania [IntelliSense](/visualstudio/ide/using-intellisense) w programie Visual Studio. Razor Używane są również strony i MVC Razor . W przeciwieństwie do Razor stron i MVC, które są zbudowane wokół modelu żądania/odpowiedzi, składniki są używane specjalnie dla logiki interfejsu użytkownika po stronie klienta.
 
 Blazor używa naturalnych tagów HTML dla kompozycji interfejsu użytkownika. Poniższy Razor znacznik ilustruje składnik ( `Dialog.razor` ), który wyświetla okno dialogowe i przetwarza zdarzenie, gdy użytkownik wybierze przycisk:
 
@@ -107,7 +107,7 @@ To okno dialogowe jest renderowane, gdy `Index` dostęp do składnika zostanie u
 
 ![Składnik okna dialogowego renderowany w przeglądarce zagnieżdżony wewnątrz składnika indeksu. Konsola narzędzia deweloperskie przeglądarki pokazuje komunikat zapisany przez kod C#, gdy użytkownik wybierze opcję tak! w interfejsie użytkownika.](index/_static/dialog.png)
 
-Składniki są renderowane w pamięci podręcznej [Document Object Model (dom)](https://developer.mozilla.org/docs/Web/API/Document_Object_Model/Introduction) przeglądarki o nazwie *drzewo renderowania*, która jest używana do aktualizowania interfejsu użytkownika w elastyczny i wydajny sposób.
+Składniki są renderowane w pamięci podręcznej [Document Object Model (dom)](https://developer.mozilla.org/docs/Web/API/Document_Object_Model/Introduction) przeglądarki o nazwie *drzewo renderowania* , która jest używana do aktualizowania interfejsu użytkownika w elastyczny i wydajny sposób.
 
 ## Blazor WebAssembly
 
@@ -115,7 +115,7 @@ Blazor WebAssembly to [Struktura aplikacji jednostronicowej (Spa)](/dotnet/archi
 
 Uruchamianie kodu platformy .NET wewnątrz przeglądarek sieci Web jest możliwe przez [zestaw webassembly](https://webassembly.org) (skrócony `wasm` ). Webassembly to kompaktowy format kodu bajtowego zoptymalizowany pod kątem szybkiego pobierania i maksymalnej szybkości wykonywania. Webassembly to otwarty standard sieci Web, który jest obsługiwany w przeglądarkach sieci Web bez wtyczek.
 
-Kod webassembly może uzyskać dostęp do pełnej funkcjonalności przeglądarki za pośrednictwem języka JavaScript, nazywanego *współdziałaniem języka JavaScript*, często skracana do międzyoperacyjności *JavaScript Interop* lub *js*. Kod .NET wykonywany za pośrednictwem webassembly w przeglądarce jest uruchamiany w piaskownicy języka JavaScript przeglądarki z ochroną, którą piaskownica zapewnia przed złośliwymi działaniami na komputerze klienckim.
+Kod webassembly może uzyskać dostęp do pełnej funkcjonalności przeglądarki za pośrednictwem języka JavaScript, nazywanego *współdziałaniem języka JavaScript* , często skracana do międzyoperacyjności *JavaScript Interop* lub *js* . Kod .NET wykonywany za pośrednictwem webassembly w przeglądarce jest uruchamiany w piaskownicy języka JavaScript przeglądarki z ochroną, którą piaskownica zapewnia przed złośliwymi działaniami na komputerze klienckim.
 
 ![::: No-Loc (Blazor webassembly)::: uruchamia kod .NET w przeglądarce z zestawem webassembly.](index/_static/blazor-webassembly.png)
 
@@ -125,7 +125,7 @@ Gdy Blazor WebAssembly aplikacja zostanie skompilowana i uruchomiona w przegląd
 * Zestawy i [środowisko uruchomieniowe platformy .NET](/dotnet/framework/get-started/overview) są pobierane do przeglądarki.
 * Blazor WebAssembly ładuje uruchomienia środowiska uruchomieniowego .NET i konfiguruje środowisko uruchomieniowe w celu załadowania zestawów dla aplikacji. Blazor WebAssemblyŚrodowisko uruchomieniowe używa międzyoperacyjnego języka JavaScript do obsługi operacji manipulowania Dom i interfejsu API przeglądarki.
 
-Rozmiar opublikowanej aplikacji, jej *rozmiaru ładunku*, jest krytycznym czynnikiem wydajności dla useability aplikacji. Pobieranie dużej aplikacji do przeglądarki zajmuje stosunkowo dużo czasu, co zmniejsza środowisko użytkownika. Blazor WebAssembly optymalizuje rozmiar ładunku, aby skrócić czas pobierania:
+Rozmiar opublikowanej aplikacji, jej *rozmiaru ładunku* , jest krytycznym czynnikiem wydajności dla useability aplikacji. Pobieranie dużej aplikacji do przeglądarki zajmuje stosunkowo dużo czasu, co zmniejsza środowisko użytkownika. Blazor WebAssembly optymalizuje rozmiar ładunku, aby skrócić czas pobierania:
 
 ::: moniker range=">= aspnetcore-5.0"
 

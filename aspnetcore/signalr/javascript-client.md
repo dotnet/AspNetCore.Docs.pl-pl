@@ -4,7 +4,7 @@ author: bradygaster
 description: Omówienie klienta ASP.NET Core SignalR JavaScript.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
-ms.custom: mvc
+ms.custom: mvc, devx-track-js
 ms.date: 04/08/2020
 no-loc:
 - ASP.NET Core Identity
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/javascript-client
-ms.openlocfilehash: 6f611e56ec62ad7aea8a93e4761e1f67d0f76574
-ms.sourcegitcommit: fad0cd264c9d07a48a8c6ba1690807e0f8728898
+ms.openlocfilehash: be271272c952487fccc5136307c84fdf49391848
+ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/22/2020
-ms.locfileid: "92379469"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92690643"
 ---
 # <a name="aspnet-core-no-locsignalr-javascript-client"></a>SignalRKlient ASP.NET Core JavaScript
 
@@ -41,14 +41,14 @@ SignalRBiblioteka klienta JavaScript jest dostarczana jako pakiet [npm](https://
 
 ### <a name="install-with-npm"></a>Zainstaluj za pomocą npm
 
-W przypadku programu Visual Studio Uruchom następujące polecenia z **konsoli Menedżera pakietów** w folderze głównym. Aby uzyskać Visual Studio Code, uruchom następujące polecenia w **zintegrowanym terminalu**.
+W przypadku programu Visual Studio Uruchom następujące polecenia z **konsoli Menedżera pakietów** w folderze głównym. Aby uzyskać Visual Studio Code, uruchom następujące polecenia w **zintegrowanym terminalu** .
 
 ```bash
 npm init -y
 npm install @microsoft/signalr
 ```
 
-npm instaluje zawartość pakietu w folderze *node_modules \\ @microsoft\signalr\dist\browser * . Utwórz nowy folder o nazwie *sygnalizujący* w folderze *wwwroot \\ lib* . Skopiuj plik *signalr.js* do folderu *wwwroot\lib\signalr* .
+npm instaluje zawartość pakietu w folderze *node_modules \\ @microsoft\signalr\dist\browser* . Utwórz nowy folder o nazwie *sygnalizujący* w folderze *wwwroot \\ lib* . Skopiuj plik *signalr.js* do folderu *wwwroot\lib\signalr* .
 
 Odwołuje się do SignalR klienta JavaScript w `<script>` elemencie. Na przykład:
 
@@ -278,7 +278,7 @@ Poniższy kod ilustruje typowe podejście do ponownego łączenia ręcznego:
 
 Implementacja rzeczywista będzie używać wykładniczej kopii zapasowej lub ponowić określoną liczbę razy przed pokazaniem.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Dokumentacja interfejsów API języka JavaScript](/javascript/api/?view=signalr-js-latest&preserve-view=true )
 * [Samouczek JavaScript](xref:tutorials/signalr)
@@ -306,14 +306,14 @@ SignalRBiblioteka klienta JavaScript jest dostarczana jako pakiet [npm](https://
 
 ### <a name="install-with-npm"></a>Zainstaluj za pomocą npm
 
-W przypadku korzystania z programu Visual Studio Uruchom następujące polecenia z **konsoli Menedżera pakietów** w folderze głównym. Aby uzyskać Visual Studio Code, uruchom następujące polecenia w **zintegrowanym terminalu**.
+W przypadku korzystania z programu Visual Studio Uruchom następujące polecenia z **konsoli Menedżera pakietów** w folderze głównym. Aby uzyskać Visual Studio Code, uruchom następujące polecenia w **zintegrowanym terminalu** .
 
 ```bash
 npm init -y
 npm install @aspnet/signalr
 ```
 
-npm instaluje zawartość pakietu w folderze *node_modules \\ @aspnet\signalr\dist\browser * . Utwórz nowy folder o nazwie *sygnalizujący* w folderze *wwwroot \\ lib* . Skopiuj plik *signalr.js* do folderu *wwwroot\lib\signalr* .
+npm instaluje zawartość pakietu w folderze *node_modules \\ @aspnet\signalr\dist\browser* . Utwórz nowy folder o nazwie *sygnalizujący* w folderze *wwwroot \\ lib* . Skopiuj plik *signalr.js* do folderu *wwwroot\lib\signalr* .
 
 Odwołuje się do SignalR klienta JavaScript w `<script>` elemencie. Na przykład:
 
@@ -423,7 +423,7 @@ Poniższy kod ilustruje typowe podejście do ponownego łączenia ręcznego:
 
 Implementacja rzeczywista będzie używać wykładniczej kopii zapasowej lub ponowić określoną liczbę razy przed pokazaniem.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Dokumentacja interfejsów API języka JavaScript](/javascript/api/?view=signalr-js-latest)
 * [Samouczek JavaScript](xref:tutorials/signalr)

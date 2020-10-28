@@ -4,7 +4,7 @@ author: pranavkm
 description: Wskazówki dotyczące zwiększania wydajności Blazor WebAssembly aplikacji ASP.NET Core i unikania typowych problemów z wydajnością.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
-ms.custom: mvc
+ms.custom: mvc, devx-track-js
 ms.date: 10/09/2020
 no-loc:
 - ASP.NET Core Identity
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-performance-best-practices
-ms.openlocfilehash: ea3f197e5bab82f4fb40238fe31cd5ce29ab62ad
-ms.sourcegitcommit: daa9ccf580df531254da9dce8593441ac963c674
+ms.openlocfilehash: 0e827680e7024eabed09b989466476a3a80eb225
+ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/09/2020
-ms.locfileid: "91900976"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92690269"
 ---
 # <a name="aspnet-core-no-locblazor-webassembly-performance-best-practices"></a>ASP.NET Core Blazor WebAssembly najlepszych rozwiązań dotyczących wydajności
 
@@ -31,8 +31,8 @@ Autorzy [Pranav Krishnamoorthy](https://github.com/pranavkm) i [Steve Sanderson]
 
 Blazor WebAssembly jest starannie zaprojektowany i zoptymalizowany pod kątem wysokiej wydajności w najbardziej realistycznych scenariuszach interfejsu użytkownika aplikacji. Jednak generowanie najlepszych wyników zależy od deweloperów korzystających z odpowiednich wzorców i funkcji. Należy wziąć pod uwagę następujące aspekty:
 
-* **Przepływność środowiska uruchomieniowego**: kod platformy .NET działa w interpreterze środowiska uruchomieniowego webassembly, więc PRZEPŁYWNOŚĆ procesora CPU jest ograniczona. W wymagających scenariuszach aplikacja korzysta z [optymalizacji szybkości renderowania](#optimize-rendering-speed).
-* **Czas uruchamiania**: aplikacja przenosi środowisko uruchomieniowe platformy .NET do przeglądarki, dlatego ważne jest, aby użyć funkcji [minimalizujących rozmiar pobieranych aplikacji](#minimize-app-download-size).
+* **Przepływność środowiska uruchomieniowego** : kod platformy .NET działa w interpreterze środowiska uruchomieniowego webassembly, więc PRZEPŁYWNOŚĆ procesora CPU jest ograniczona. W wymagających scenariuszach aplikacja korzysta z [optymalizacji szybkości renderowania](#optimize-rendering-speed).
+* **Czas uruchamiania** : aplikacja przenosi środowisko uruchomieniowe platformy .NET do przeglądarki, dlatego ważne jest, aby użyć funkcji [minimalizujących rozmiar pobieranych aplikacji](#minimize-app-download-size).
 
 ## <a name="optimize-rendering-speed"></a>Optymalizuj szybkość renderowania
 

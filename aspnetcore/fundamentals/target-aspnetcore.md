@@ -288,7 +288,7 @@ Na przykład, aby dodać klienta internetowego interfejsu API:
 </Project>
 ```
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:razor-pages/ui-class>
 * <xref:blazor/components/class-libraries>

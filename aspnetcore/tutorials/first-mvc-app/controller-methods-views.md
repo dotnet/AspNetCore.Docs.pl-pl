@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/controller-methods-views
-ms.openlocfilehash: 07b67cd7c267c39b99277114b73642b5caa3e312
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 745703aaa4ceb39c75789bab0bde4564f3d79a30
+ms.sourcegitcommit: c06a5bf419541d17595af30e4cf6f2787c21855e
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632840"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92678550"
 ---
 # <a name="part-6-controller-methods-and-views-in-aspnet-core"></a>Część 6, metody kontrolera i widoki w ASP.NET Core
 
@@ -43,7 +43,7 @@ Przejdź do `Movies` kontrolera i przytrzymaj wskaźnik myszy nad linkiem **edyc
 
 ![Okno przeglądarki z myszą nad linkiem edycji i pokazanym adresem URL linku https://localhost:5001/Movies/Edit/5](~/tutorials/first-mvc-app/controller-methods-views/_static/edit7.png)
 
-Linki **Edytuj**, **szczegóły**i **Usuń** są generowane przez pomocnika podstawowego tagu zakotwiczenia MVC w pliku *views/filmy/index. cshtml* .
+Linki **Edytuj** , **szczegóły** i **Usuń** są generowane przez pomocnika podstawowego tagu zakotwiczenia MVC w pliku *views/filmy/index. cshtml* .
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Movies/IndexOriginal.cshtml?highlight=1-3&range=46-50)]
 
@@ -107,7 +107,7 @@ Zwróć uwagę, że druga `Edit` Metoda działania jest poprzedzona `[HttpPost]`
 
 `HttpPost`Ten atrybut określa, że ta `Edit` Metoda może być wywoływana *tylko* w przypadku `POST` żądań. Można zastosować `[HttpGet]` atrybut do pierwszej metody edycji, ale nie jest to konieczne, ponieważ jest to `[HttpGet]` wartość domyślna.
 
-Ten `ValidateAntiForgeryToken` atrybut służy do [zapobiegania fałszerstwu żądania](xref:security/anti-request-forgery) i jest sparowany z tokenem chroniącym przed fałszerstwem wygenerowanym w pliku widoku edycji (*widoki/filmy/Edit. cshtml*). Plik widoku edycji generuje token chroniący przed fałszerstwem za pomocą [pomocnika tagu formularza](xref:mvc/views/working-with-forms).
+Ten `ValidateAntiForgeryToken` atrybut służy do [zapobiegania fałszerstwu żądania](xref:security/anti-request-forgery) i jest sparowany z tokenem chroniącym przed fałszerstwem wygenerowanym w pliku widoku edycji ( *widoki/filmy/Edit. cshtml* ). Plik widoku edycji generuje token chroniący przed fałszerstwem za pomocą [pomocnika tagu formularza](xref:mvc/views/working-with-forms).
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Movies/Edit.cshtml?range=9)]
 
@@ -149,7 +149,7 @@ Na poniższej liście przedstawiono `[HttpPost]` wersję `Edit` metody akcji.
 
 Ten `[ValidateAntiForgeryToken]` atrybut sprawdza poprawność ukrytego tokenu [XSRF](xref:security/anti-request-forgery) wygenerowanego przez generatora tokenów chroniących przed fałszowaniem w [Pomocniku tagów formularza](xref:mvc/views/working-with-forms)
 
-System [powiązań modelu](xref:mvc/models/model-binding) przyjmuje wartości ogłoszonych formularzy i tworzy `Movie` obiekt, który jest przesyłany jako `movie` parametr. `ModelState.IsValid`Metoda weryfikuje, czy dane przesłane w formularzu mogą służyć do modyfikowania (edycji lub aktualizowania) `Movie` obiektu. Jeśli dane są prawidłowe, zostaną zapisane. Zaktualizowane (edytowane) dane filmu są zapisywane w bazie danych przez wywołanie `SaveChangesAsync` metody kontekstu bazy danych. Po zapisaniu danych kod przekierowuje użytkownika do `Index` metody akcji `MoviesController` klasy, która wyświetla kolekcję filmów, włącznie z wprowadzonymi zmianami.
+System [powiązań modelu](xref:mvc/models/model-binding) przyjmuje wartości ogłoszonych formularzy i tworzy `Movie` obiekt, który jest przesyłany jako `movie` parametr. `ModelState.IsValid`Właściwość weryfikuje, że dane przesłane w formularzu mogą służyć do modyfikowania (edycji lub aktualizowania) `Movie` obiektu. Jeśli dane są prawidłowe, zostaną zapisane. Zaktualizowane (edytowane) dane filmu są zapisywane w bazie danych przez wywołanie `SaveChangesAsync` metody kontekstu bazy danych. Po zapisaniu danych kod przekierowuje użytkownika do `Index` metody akcji `MoviesController` klasy, która wyświetla kolekcję filmów, włącznie z wprowadzonymi zmianami.
 
 Przed opublikowaniem formularza na serwerze sprawdzanie poprawności po stronie klienta sprawdza wszystkie reguły sprawdzania poprawności w polach. Jeśli wystąpią jakieś błędy sprawdzania poprawności, zostanie wyświetlony komunikat o błędzie z informacją, że formularz nie zostanie opublikowany. Jeśli język JavaScript jest wyłączony, nie będzie można sprawdzić poprawności po stronie klienta, ale serwer wykryje ogłoszone wartości, które nie są prawidłowe, a wartości formularza zostaną wyświetlone ponownie przy użyciu komunikatów o błędach. W dalszej części samouczka sprawdzimy [Sprawdzanie poprawności modelu](xref:mvc/models/validation) w bardziej szczegółowy sposób. [Pomocnik tagów walidacji](xref:mvc/views/working-with-forms) w szablonie *widoki/filmy/edytowanie. cshtml* ma zadbać o wyświetlenie odpowiednich komunikatów o błędach.
 

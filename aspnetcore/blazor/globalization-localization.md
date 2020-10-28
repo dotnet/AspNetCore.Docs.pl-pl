@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/globalization-localization
-ms.openlocfilehash: 4345dd8525c2e72aaddc8e45a4fd4d9bfdd63040
-ms.sourcegitcommit: b5ebaf42422205d212e3dade93fcefcf7f16db39
+ms.openlocfilehash: 52810cb5a5961ffe932a7f5ac2a3a03033781cc9
+ms.sourcegitcommit: c06a5bf419541d17595af30e4cf6f2787c21855e
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92326527"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92678493"
 ---
 # <a name="aspnet-core-no-locblazor-globalization-and-localization"></a>ASP.NET Core Blazor globalizacja i lokalizacja
 
@@ -66,7 +66,7 @@ Następujące typy pól mają określone wymagania dotyczące formatowania i nie
 
 [`@bind`](xref:mvc/views/razor#bind) obsługuje `@bind:culture` parametr, aby zapewnić <xref:System.Globalization.CultureInfo?displayProperty=fullName> analizę i formatowanie wartości. Określanie kultury nie jest zalecane w przypadku używania `date` `number` typów pól i. `date` i `number` ma wbudowaną Blazor obsługę, która udostępnia wymaganą kulturę.
 
-## <a name="localization"></a>Lokalizacja
+## <a name="localization"></a>Localization
 
 ### Blazor WebAssembly
 
@@ -121,12 +121,12 @@ Blazor Server aplikacje są zlokalizowane przy użyciu [oprogramowania pośredni
 
 Kulturę można ustawić przy użyciu jednej z następujących metod:
 
-* [Cookies](#cookies)
+* [Cookiewolumin](#cookies)
 * [Podaj interfejs użytkownika, aby wybrać kulturę](#provide-ui-to-choose-the-culture)
 
 Aby uzyskać więcej informacji i przykładów, zobacz <xref:fundamentals/localization> .
 
-#### <a name="no-loccookies"></a>Cookies
+#### <a name="no-loccookies"></a>Cookiewolumin
 
 Kultura lokalizacji cookie może utrwalać kulturę użytkownika. Oprogramowanie pośredniczące lokalizacji odczytuje cookie kolejne żądania, aby ustawić kulturę użytkownika. 
 
@@ -164,6 +164,19 @@ Lokalizacja jest obsługiwana przez aplikację w następującej kolejności zdar
 1. Przeglądarka otwiera połączenie WebSocket, aby utworzyć sesję interaktywną Blazor Server .
 1. Oprogramowanie pośredniczące lokalizacji odczytuje cookie i przypisuje kulturę.
 1. Blazor ServerSesja rozpoczyna się od poprawnej kultury.
+
+Podczas pracy z <xref:Microsoft.AspNetCore.Mvc.Razor.RazorPage> , użyj <xref:Microsoft.AspNetCore.Mvc.Razor.RazorPage.Context> Właściwości:
+
+```razor
+@{
+    this.Context.Response.Cookies.Append(
+        CookieRequestCultureProvider.DefaultCookieName,
+        CookieRequestCultureProvider.MakeCookieValue(
+            new RequestCulture(
+                CultureInfo.CurrentCulture,
+                CultureInfo.CurrentUICulture)));
+}
+```
 
 #### <a name="provide-ui-to-choose-the-culture"></a>Podaj interfejs użytkownika, aby wybrać kulturę
 

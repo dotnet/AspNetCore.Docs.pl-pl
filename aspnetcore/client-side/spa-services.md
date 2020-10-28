@@ -4,7 +4,7 @@ author: scottaddie
 description: Dowiedz się więcej na temat korzyści z używania usług JavaScript do tworzenia aplikacji jednostronicowej (SPA) obsługiwanej przez ASP.NET Core.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
-ms.custom: H1Hack27Feb2017
+ms.custom: H1Hack27Feb2017, devx-track-js
 ms.date: 09/06/2019
 no-loc:
 - ASP.NET Core Identity
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: client-side/spa-services
-ms.openlocfilehash: 379a8f52dab36d331bc42c1fee8d64b3971e9e91
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 33ae16c033142aa1c0f4cea53ca746e8a6aaf052
+ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88625664"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92690665"
 ---
 # <a name="use-javascript-services-to-create-single-page-applications-in-aspnet-core"></a>Korzystanie z usług JavaScript do tworzenia aplikacji jednostronicowych w ASP.NET Core
 
@@ -132,7 +132,7 @@ Otrzymany `UserName` argument jest serializowany przy użyciu wbudowanego serial
 
 [!code-typescript[](../client-side/spa-services/sample/SpaServicesSampleApp/ClientApp/boot-server.ts?range=6,10-21,38-52,79-)]
 
-Nazwy właściwości przesyłane przez pomocników tagów są reprezentowane przy użyciu notacji **PascalCase** . Przeciwieństwo do języka JavaScript, gdzie te same nazwy właściwości są reprezentowane przez **CamelCase**. Domyślna konfiguracja serializacji JSON jest odpowiedzialna za tę różnicę.
+Nazwy właściwości przesyłane przez pomocników tagów są reprezentowane przy użyciu notacji **PascalCase** . Przeciwieństwo do języka JavaScript, gdzie te same nazwy właściwości są reprezentowane przez **CamelCase** . Domyślna konfiguracja serializacji JSON jest odpowiedzialna za tę różnicę.
 
 Aby rozwijać poprzedni przykład kodu, dane mogą być przekazywane z serwera do widoku przez Hydrating `globals` Właściwości dostarczonej do `resolve` funkcji:
 
@@ -252,10 +252,10 @@ dotnet new angular
 
 Istnieją dwa podstawowe tryby konfiguracji środowiska uruchomieniowego:
 
-* **Programowanie**:
+* **Programowanie** :
   * Zawiera mapy źródłowe ułatwiające debugowanie.
   * Nie optymalizuje kodu po stronie klienta pod kątem wydajności.
-* **Produkcja**:
+* **Produkcja** :
   * Wyklucza mapy źródłowe.
   * Optymalizuje kod po stronie klienta za pomocą funkcji grupowania i minifikacja.
 

@@ -5,6 +5,7 @@ description: Dowiedz się, jak ASP.NET Core udostępnia usługi i oprogramowanie
 ms.author: riande
 ms.date: 11/30/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/localization
-ms.openlocfilehash: fcf69bdaaed5cf0283ae27440c28061857d2cbcb
-ms.sourcegitcommit: d1a897ebd89daa05170ac448e4831d327f6b21a8
+ms.openlocfilehash: 07e2f561b0e9db58780d6e8a271e32b00132b1b5
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/01/2020
-ms.locfileid: "91606774"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059523"
 ---
 # <a name="globalization-and-localization-in-aspnet-core"></a>Globalizacja i lokalizacja w ASP.NET Core
 
@@ -139,7 +140,7 @@ ASP.NET Core pozwala określić dwie wartości kulturowe `SupportedCultures` i `
 
 Plik zasobów jest użytecznym mechanizmem oddzielania lokalizowalnych ciągów od kodu. Przetłumaczone ciągi dla języka innego niż domyślny są izolowane w plikach zasobów *resx* . Na przykład możesz chcieć utworzyć plik zasobów hiszpański o nazwie *Welcome. es. resx* zawierający przetłumaczone ciągi. "es" to kod języka w języku hiszpańskim. Aby utworzyć ten plik zasobów w programie Visual Studio:
 
-1. W **Eksplorator rozwiązań**kliknij prawym przyciskiem myszy folder, który będzie zawierać plik zasobów, > **Dodaj** > **nowy element**.
+1. W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy folder, który będzie zawierać plik zasobów, > **Dodaj** > **nowy element** .
 
    ![Zagnieżdżone menu kontekstowe: w Eksplorator rozwiązań menu kontekstowe jest otwarte dla zasobów. Drugie menu kontekstowe jest otwarte dla dodawania pokazującego wyróżnione polecenie Nowy element.](localization/_static/newi.png)
 
@@ -157,9 +158,9 @@ Plik zasobów jest użytecznym mechanizmem oddzielania lokalizowalnych ciągów 
 
 ## <a name="resource-file-naming"></a>Nazewnictwo plików zasobów
 
-Zasoby są nazwane dla pełnej nazwy typu swojej klasy pomniejszonej o nazwę zestawu. Na przykład zasób francuski w projekcie, którego głównym zestawem jest `LocalizationWebsite.Web.dll` dla klasy, będzie `LocalizationWebsite.Web.Startup` nazwany *Startup. fr. resx*. Zasób klasy `LocalizationWebsite.Web.Controllers.HomeController` nosi nazwę *controllers. HomeController. fr. resx*. Jeśli przestrzeń nazw klasy Target nie jest taka sama jak nazwa zestawu, będzie potrzebna pełna nazwa typu. Przykładowo w przykładowym projekcie zasób dla typu `ExtraNamespace.Tools` powinien mieć nazwę *ExtraNamespace. Tools. fr. resx*.
+Zasoby są nazwane dla pełnej nazwy typu swojej klasy pomniejszonej o nazwę zestawu. Na przykład zasób francuski w projekcie, którego głównym zestawem jest `LocalizationWebsite.Web.dll` dla klasy, będzie `LocalizationWebsite.Web.Startup` nazwany *Startup. fr. resx* . Zasób klasy `LocalizationWebsite.Web.Controllers.HomeController` nosi nazwę *controllers. HomeController. fr. resx* . Jeśli przestrzeń nazw klasy Target nie jest taka sama jak nazwa zestawu, będzie potrzebna pełna nazwa typu. Przykładowo w przykładowym projekcie zasób dla typu `ExtraNamespace.Tools` powinien mieć nazwę *ExtraNamespace. Tools. fr. resx* .
 
-W przykładowym projekcie `ConfigureServices` Metoda ustawia `ResourcesPath` do "zasobów", więc ścieżka względna projektu dla francuskiego pliku zasobów kontrolera głównego to *zasoby/kontrolery. HomeController. fr. resx*. Alternatywnie można użyć folderów do organizowania plików zasobów. W przypadku kontrolera macierzystego ścieżka będzie zawierać *zasoby/kontrolery/HomeController. fr. resx*. Jeśli ta opcja nie zostanie użyta `ResourcesPath` , plik *. resx* zostanie użyty w katalogu bazowym projektu. Plik zasobu dla `HomeController` nosi nazwę *controllers. HomeController. fr. resx*. Wybór przy użyciu konwencji nazewnictwa kropka lub ścieżki zależy od tego, w jaki sposób chcesz zorganizować pliki zasobów.
+W przykładowym projekcie `ConfigureServices` Metoda ustawia `ResourcesPath` do "zasobów", więc ścieżka względna projektu dla francuskiego pliku zasobów kontrolera głównego to *zasoby/kontrolery. HomeController. fr. resx* . Alternatywnie można użyć folderów do organizowania plików zasobów. W przypadku kontrolera macierzystego ścieżka będzie zawierać *zasoby/kontrolery/HomeController. fr. resx* . Jeśli ta opcja nie zostanie użyta `ResourcesPath` , plik *. resx* zostanie użyty w katalogu bazowym projektu. Plik zasobu dla `HomeController` nosi nazwę *controllers. HomeController. fr. resx* . Wybór przy użyciu konwencji nazewnictwa kropka lub ścieżki zależy od tego, w jaki sposób chcesz zorganizować pliki zasobów.
 
 | Nazwa zasobu | Nazwa kropka lub ścieżki |
 | ------------   | ------------- |
@@ -212,11 +213,11 @@ Na przykład, jeśli usuniesz oznaczenie kultury ". fr" i masz kulturę ustawion
 
 ### <a name="generate-resource-files-with-visual-studio"></a>Generowanie plików zasobów przy użyciu programu Visual Studio
 
-Jeśli utworzysz plik zasobów w programie Visual Studio bez kultury w nazwie pliku (na przykład *Welcome. resx*), program Visual Studio utworzy klasę języka C# z właściwością dla każdego ciągu. Zwykle nie jest to możliwe dzięki ASP.NET Core. Zazwyczaj nie istnieje domyślny plik zasobów *resx* (plik *. resx* bez nazwy kultury). Zalecamy utworzenie pliku *resx* z nazwą kultury (na przykład *Welcome. fr. resx*). Podczas tworzenia pliku *resx* przy użyciu nazwy kultury program Visual Studio nie generuje pliku klasy.
+Jeśli utworzysz plik zasobów w programie Visual Studio bez kultury w nazwie pliku (na przykład *Welcome. resx* ), program Visual Studio utworzy klasę języka C# z właściwością dla każdego ciągu. Zwykle nie jest to możliwe dzięki ASP.NET Core. Zazwyczaj nie istnieje domyślny plik zasobów *resx* (plik *. resx* bez nazwy kultury). Zalecamy utworzenie pliku *resx* z nazwą kultury (na przykład *Welcome. fr. resx* ). Podczas tworzenia pliku *resx* przy użyciu nazwy kultury program Visual Studio nie generuje pliku klasy.
 
 ### <a name="add-other-cultures"></a>Dodaj inne kultury
 
-Każda kombinacja języka i kultury (oprócz języka domyślnego) wymaga unikatowego pliku zasobów. Tworzysz pliki zasobów dla różnych kultur i ustawień regionalnych, tworząc nowe pliki zasobów, w których kody języka ISO są częścią nazwy pliku (na przykład **en-us**, **fr-CA**i **pl-GB**). Te kody ISO są umieszczane między nazwami plików i rozszerzeniem *resx* , jak w *Welcome.es-MX. resx* (hiszpański/Meksyk).
+Każda kombinacja języka i kultury (oprócz języka domyślnego) wymaga unikatowego pliku zasobów. Tworzysz pliki zasobów dla różnych kultur i ustawień regionalnych, tworząc nowe pliki zasobów, w których kody języka ISO są częścią nazwy pliku (na przykład **en-us** , **fr-CA** i **pl-GB** ). Te kody ISO są umieszczane między nazwami plików i rozszerzeniem *resx* , jak w *Welcome.es-MX. resx* (hiszpański/Meksyk).
 
 ## <a name="implement-a-strategy-to-select-the-languageculture-for-each-request"></a>Zaimplementuj strategię, aby wybrać język/kulturę dla każdego żądania
 
@@ -250,7 +251,7 @@ Lista domyślna przechodzi od najbardziej konkretnych do najmniej określonych. 
 
 ### <a name="querystringrequestcultureprovider"></a>QueryStringRequestCultureProvider
 
-Niektóre aplikacje będą używać ciągu zapytania do ustawienia <https://docs.microsoft.com/dotnet/api/system.globalization.cultureinfo?view=netcore-3.1> . W przypadku aplikacji, które korzystają z cookie metody lub nagłówka Accept-Language, Dodawanie ciągu zapytania do adresu URL jest przydatne w przypadku debugowania i testowania kodu. Domyślnie program `QueryStringRequestCultureProvider` jest rejestrowany jako pierwszy dostawca lokalizacji na `RequestCultureProvider` liście. Parametry ciągu zapytania są przekazywane `culture` i `ui-culture` . Poniższy przykład ustawia określoną kulturę (język i region) na hiszpański/Meksyk:
+Niektóre aplikacje będą używać ciągu zapytania do ustawienia <https://docs.microsoft.com/dotnet/api/system.globalization.cultureinfo?view=netcore-3.1> . W przypadku aplikacji korzystających z cookie metody nagłówka lub Accept-Language dodanie ciągu zapytania do adresu URL jest przydatne w przypadku debugowania i testowania kodu. Domyślnie program `QueryStringRequestCultureProvider` jest rejestrowany jako pierwszy dostawca lokalizacji na `RequestCultureProvider` liście. Parametry ciągu zapytania są przekazywane `culture` i `ui-culture` . Poniższy przykład ustawia określoną kulturę (język i region) na hiszpański/Meksyk:
 
    `http://localhost:5000/?culture=es-MX&ui-culture=es-MX`
 
@@ -274,25 +275,25 @@ c=en-UK|uic=en-US
 
 Jeśli określisz tylko jedną z informacji o kulturze i kulturze interfejsu użytkownika, określona kultura zostanie użyta dla informacji kultury i kultury interfejsu użytkownika.
 
-### <a name="the-accept-language-http-header"></a>Nagłówek Accept-Language HTTP
+### <a name="the-accept-language-http-header"></a>Accept-Language nagłówek HTTP
 
-[Nagłówek Accept-Language](https://www.w3.org/International/questions/qa-accept-lang-locales) jest settable w większości przeglądarek i był pierwotnie przeznaczony do określenia języka użytkownika. To ustawienie wskazuje, co przeglądarka została ustawiona do wysłania lub która dziedziczy z bazowego systemu operacyjnego. Nagłówek Accept-Language HTTP z żądania przeglądarki nie jest infallibleym sposobem wykrywania preferowanego języka użytkownika (zobacz [Ustawianie preferencji językowych w przeglądarce](https://www.w3.org/International/questions/qa-lang-priorities.en.php)). Aplikacja produkcyjna powinna uwzględniać sposób, w jaki użytkownik może dostosować wybór kultury.
+[Nagłówek Accept-Language](https://www.w3.org/International/questions/qa-accept-lang-locales) jest settable w większości przeglądarek i był pierwotnie przeznaczony do określenia języka użytkownika. To ustawienie wskazuje, co przeglądarka została ustawiona do wysłania lub która dziedziczy z bazowego systemu operacyjnego. Accept-Language nagłówku HTTP z żądania przeglądarki nie jest INFALLIBLE sposób wykrywania preferowanego języka użytkownika (zobacz [Ustawianie preferencji językowych w przeglądarce](https://www.w3.org/International/questions/qa-lang-priorities.en.php)). Aplikacja produkcyjna powinna uwzględniać sposób, w jaki użytkownik może dostosować wybór kultury.
 
-### <a name="set-the-accept-language-http-header-in-ie"></a>Ustawianie nagłówka HTTP Accept-Language w programie IE
+### <a name="set-the-accept-language-http-header-in-ie"></a>Ustawianie Accept-Language nagłówku HTTP w programie IE
 
-1. Na ikonie koła zębatego naciśnij pozycję **Opcje internetowe**.
+1. Na ikonie koła zębatego naciśnij pozycję **Opcje internetowe** .
 
-1. Naciśnij pozycję **Języki**.
+1. Naciśnij pozycję **Języki** .
 
    ![Opcje internetowe](localization/_static/lang.png)
 
-1. Naciśnij pozycję **Ustaw preferencje językowe**.
+1. Naciśnij pozycję **Ustaw preferencje językowe** .
 
-1. Naciśnij pozycję **Dodaj język**.
+1. Naciśnij pozycję **Dodaj język** .
 
 1. Dodaj język.
 
-1. Naciśnij pozycję język, a następnie naciśnij pozycję **Przenieś w górę**.
+1. Naciśnij pozycję język, a następnie naciśnij pozycję **Przenieś w górę** .
 
 ### <a name="use-a-custom-provider"></a>Używanie dostawcy niestandardowego
 
@@ -493,7 +494,7 @@ ASP.NET Core pozwala określić dwie wartości kulturowe `SupportedCultures` i `
 
 Plik zasobów jest użytecznym mechanizmem oddzielania lokalizowalnych ciągów od kodu. Przetłumaczone ciągi dla języka innego niż domyślny są izolowane w plikach zasobów *resx* . Na przykład możesz chcieć utworzyć plik zasobów hiszpański o nazwie *Welcome. es. resx* zawierający przetłumaczone ciągi. "es" to kod języka w języku hiszpańskim. Aby utworzyć ten plik zasobów w programie Visual Studio:
 
-1. W **Eksplorator rozwiązań**kliknij prawym przyciskiem myszy folder, który będzie zawierać plik zasobów, > **Dodaj** > **nowy element**.
+1. W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy folder, który będzie zawierać plik zasobów, > **Dodaj** > **nowy element** .
 
    ![Zagnieżdżone menu kontekstowe: w Eksplorator rozwiązań menu kontekstowe jest otwarte dla zasobów. Drugie menu kontekstowe jest otwarte dla dodawania pokazującego wyróżnione polecenie Nowy element.](localization/_static/newi.png)
 
@@ -511,9 +512,9 @@ Plik zasobów jest użytecznym mechanizmem oddzielania lokalizowalnych ciągów 
 
 ## <a name="resource-file-naming"></a>Nazewnictwo plików zasobów
 
-Zasoby są nazwane dla pełnej nazwy typu swojej klasy pomniejszonej o nazwę zestawu. Na przykład zasób francuski w projekcie, którego głównym zestawem jest `LocalizationWebsite.Web.dll` dla klasy, będzie `LocalizationWebsite.Web.Startup` nazwany *Startup. fr. resx*. Zasób klasy `LocalizationWebsite.Web.Controllers.HomeController` nosi nazwę *controllers. HomeController. fr. resx*. Jeśli przestrzeń nazw klasy Target nie jest taka sama jak nazwa zestawu, będzie potrzebna pełna nazwa typu. Przykładowo w przykładowym projekcie zasób dla typu `ExtraNamespace.Tools` powinien mieć nazwę *ExtraNamespace. Tools. fr. resx*.
+Zasoby są nazwane dla pełnej nazwy typu swojej klasy pomniejszonej o nazwę zestawu. Na przykład zasób francuski w projekcie, którego głównym zestawem jest `LocalizationWebsite.Web.dll` dla klasy, będzie `LocalizationWebsite.Web.Startup` nazwany *Startup. fr. resx* . Zasób klasy `LocalizationWebsite.Web.Controllers.HomeController` nosi nazwę *controllers. HomeController. fr. resx* . Jeśli przestrzeń nazw klasy Target nie jest taka sama jak nazwa zestawu, będzie potrzebna pełna nazwa typu. Przykładowo w przykładowym projekcie zasób dla typu `ExtraNamespace.Tools` powinien mieć nazwę *ExtraNamespace. Tools. fr. resx* .
 
-W przykładowym projekcie `ConfigureServices` Metoda ustawia `ResourcesPath` do "zasobów", więc ścieżka względna projektu dla francuskiego pliku zasobów kontrolera głównego to *zasoby/kontrolery. HomeController. fr. resx*. Alternatywnie można użyć folderów do organizowania plików zasobów. W przypadku kontrolera macierzystego ścieżka będzie zawierać *zasoby/kontrolery/HomeController. fr. resx*. Jeśli ta opcja nie zostanie użyta `ResourcesPath` , plik *. resx* zostanie użyty w katalogu bazowym projektu. Plik zasobu dla `HomeController` nosi nazwę *controllers. HomeController. fr. resx*. Wybór przy użyciu konwencji nazewnictwa kropka lub ścieżki zależy od tego, w jaki sposób chcesz zorganizować pliki zasobów.
+W przykładowym projekcie `ConfigureServices` Metoda ustawia `ResourcesPath` do "zasobów", więc ścieżka względna projektu dla francuskiego pliku zasobów kontrolera głównego to *zasoby/kontrolery. HomeController. fr. resx* . Alternatywnie można użyć folderów do organizowania plików zasobów. W przypadku kontrolera macierzystego ścieżka będzie zawierać *zasoby/kontrolery/HomeController. fr. resx* . Jeśli ta opcja nie zostanie użyta `ResourcesPath` , plik *. resx* zostanie użyty w katalogu bazowym projektu. Plik zasobu dla `HomeController` nosi nazwę *controllers. HomeController. fr. resx* . Wybór przy użyciu konwencji nazewnictwa kropka lub ścieżki zależy od tego, w jaki sposób chcesz zorganizować pliki zasobów.
 
 | Nazwa zasobu | Nazwa kropka lub ścieżki |
 | ------------   | ------------- |
@@ -566,11 +567,11 @@ Na przykład, jeśli usuniesz oznaczenie kultury ". fr" i masz kulturę ustawion
 
 ### <a name="generate-resource-files-with-visual-studio"></a>Generowanie plików zasobów przy użyciu programu Visual Studio
 
-Jeśli utworzysz plik zasobów w programie Visual Studio bez kultury w nazwie pliku (na przykład *Welcome. resx*), program Visual Studio utworzy klasę języka C# z właściwością dla każdego ciągu. Zwykle nie jest to możliwe dzięki ASP.NET Core. Zazwyczaj nie istnieje domyślny plik zasobów *resx* (plik *. resx* bez nazwy kultury). Zalecamy utworzenie pliku *resx* z nazwą kultury (na przykład *Welcome. fr. resx*). Podczas tworzenia pliku *resx* przy użyciu nazwy kultury program Visual Studio nie generuje pliku klasy.
+Jeśli utworzysz plik zasobów w programie Visual Studio bez kultury w nazwie pliku (na przykład *Welcome. resx* ), program Visual Studio utworzy klasę języka C# z właściwością dla każdego ciągu. Zwykle nie jest to możliwe dzięki ASP.NET Core. Zazwyczaj nie istnieje domyślny plik zasobów *resx* (plik *. resx* bez nazwy kultury). Zalecamy utworzenie pliku *resx* z nazwą kultury (na przykład *Welcome. fr. resx* ). Podczas tworzenia pliku *resx* przy użyciu nazwy kultury program Visual Studio nie generuje pliku klasy.
 
 ### <a name="add-other-cultures"></a>Dodaj inne kultury
 
-Każda kombinacja języka i kultury (oprócz języka domyślnego) wymaga unikatowego pliku zasobów. Tworzysz pliki zasobów dla różnych kultur i ustawień regionalnych, tworząc nowe pliki zasobów, w których kody języka ISO są częścią nazwy pliku (na przykład **en-us**, **fr-CA**i **pl-GB**). Te kody ISO są umieszczane między nazwami plików i rozszerzeniem *resx* , jak w *Welcome.es-MX. resx* (hiszpański/Meksyk).
+Każda kombinacja języka i kultury (oprócz języka domyślnego) wymaga unikatowego pliku zasobów. Tworzysz pliki zasobów dla różnych kultur i ustawień regionalnych, tworząc nowe pliki zasobów, w których kody języka ISO są częścią nazwy pliku (na przykład **en-us** , **fr-CA** i **pl-GB** ). Te kody ISO są umieszczane między nazwami plików i rozszerzeniem *resx* , jak w *Welcome.es-MX. resx* (hiszpański/Meksyk).
 
 ## <a name="implement-a-strategy-to-select-the-languageculture-for-each-request"></a>Zaimplementuj strategię, aby wybrać język/kulturę dla każdego żądania
 
@@ -604,7 +605,7 @@ Lista domyślna przechodzi od najbardziej konkretnych do najmniej określonych. 
 
 ### <a name="querystringrequestcultureprovider"></a>QueryStringRequestCultureProvider
 
-Niektóre aplikacje będą używać ciągu zapytania do ustawienia <https://docs.microsoft.com/dotnet/api/system.globalization.cultureinfo?view=netcore-3.1> . W przypadku aplikacji, które korzystają z cookie metody lub nagłówka Accept-Language, Dodawanie ciągu zapytania do adresu URL jest przydatne w przypadku debugowania i testowania kodu. Domyślnie program `QueryStringRequestCultureProvider` jest rejestrowany jako pierwszy dostawca lokalizacji na `RequestCultureProvider` liście. Parametry ciągu zapytania są przekazywane `culture` i `ui-culture` . Poniższy przykład ustawia określoną kulturę (język i region) na hiszpański/Meksyk:
+Niektóre aplikacje będą używać ciągu zapytania do ustawienia <https://docs.microsoft.com/dotnet/api/system.globalization.cultureinfo?view=netcore-3.1> . W przypadku aplikacji korzystających z cookie metody nagłówka lub Accept-Language dodanie ciągu zapytania do adresu URL jest przydatne w przypadku debugowania i testowania kodu. Domyślnie program `QueryStringRequestCultureProvider` jest rejestrowany jako pierwszy dostawca lokalizacji na `RequestCultureProvider` liście. Parametry ciągu zapytania są przekazywane `culture` i `ui-culture` . Poniższy przykład ustawia określoną kulturę (język i region) na hiszpański/Meksyk:
 
 ```
 http://localhost:5000/?culture=es-MX&ui-culture=es-MX
@@ -630,25 +631,25 @@ c=en-UK|uic=en-US
 
 Jeśli określisz tylko jedną z informacji o kulturze i kulturze interfejsu użytkownika, określona kultura zostanie użyta dla informacji kultury i kultury interfejsu użytkownika.
 
-### <a name="the-accept-language-http-header"></a>Nagłówek Accept-Language HTTP
+### <a name="the-accept-language-http-header"></a>Accept-Language nagłówek HTTP
 
-[Nagłówek Accept-Language](https://www.w3.org/International/questions/qa-accept-lang-locales) jest settable w większości przeglądarek i był pierwotnie przeznaczony do określenia języka użytkownika. To ustawienie wskazuje, co przeglądarka została ustawiona do wysłania lub która dziedziczy z bazowego systemu operacyjnego. Nagłówek Accept-Language HTTP z żądania przeglądarki nie jest infallibleym sposobem wykrywania preferowanego języka użytkownika (zobacz [Ustawianie preferencji językowych w przeglądarce](https://www.w3.org/International/questions/qa-lang-priorities.en.php)). Aplikacja produkcyjna powinna uwzględniać sposób, w jaki użytkownik może dostosować wybór kultury.
+[Nagłówek Accept-Language](https://www.w3.org/International/questions/qa-accept-lang-locales) jest settable w większości przeglądarek i był pierwotnie przeznaczony do określenia języka użytkownika. To ustawienie wskazuje, co przeglądarka została ustawiona do wysłania lub która dziedziczy z bazowego systemu operacyjnego. Accept-Language nagłówku HTTP z żądania przeglądarki nie jest INFALLIBLE sposób wykrywania preferowanego języka użytkownika (zobacz [Ustawianie preferencji językowych w przeglądarce](https://www.w3.org/International/questions/qa-lang-priorities.en.php)). Aplikacja produkcyjna powinna uwzględniać sposób, w jaki użytkownik może dostosować wybór kultury.
 
-### <a name="set-the-accept-language-http-header-in-ie"></a>Ustawianie nagłówka HTTP Accept-Language w programie IE
+### <a name="set-the-accept-language-http-header-in-ie"></a>Ustawianie Accept-Language nagłówku HTTP w programie IE
 
-1. Na ikonie koła zębatego naciśnij pozycję **Opcje internetowe**.
+1. Na ikonie koła zębatego naciśnij pozycję **Opcje internetowe** .
 
-1. Naciśnij pozycję **Języki**.
+1. Naciśnij pozycję **Języki** .
 
    ![Opcje internetowe](localization/_static/lang.png)
 
-1. Naciśnij pozycję **Ustaw preferencje językowe**.
+1. Naciśnij pozycję **Ustaw preferencje językowe** .
 
-1. Naciśnij pozycję **Dodaj język**.
+1. Naciśnij pozycję **Dodaj język** .
 
 1. Dodaj język.
 
-1. Naciśnij pozycję język, a następnie naciśnij pozycję **Przenieś w górę**.
+1. Naciśnij pozycję język, a następnie naciśnij pozycję **Przenieś w górę** .
 
 ### <a name="use-a-custom-provider"></a>Używanie dostawcy niestandardowego
 
@@ -848,7 +849,7 @@ ASP.NET Core pozwala określić dwie wartości kulturowe `SupportedCultures` i `
 
 Plik zasobów jest użytecznym mechanizmem oddzielania lokalizowalnych ciągów od kodu. Przetłumaczone ciągi dla języka innego niż domyślny są izolowane w plikach zasobów *resx* . Na przykład możesz chcieć utworzyć plik zasobów hiszpański o nazwie *Welcome. es. resx* zawierający przetłumaczone ciągi. "es" to kod języka w języku hiszpańskim. Aby utworzyć ten plik zasobów w programie Visual Studio:
 
-1. W **Eksplorator rozwiązań**kliknij prawym przyciskiem myszy folder, który będzie zawierać plik zasobów, > **Dodaj** > **nowy element**.
+1. W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy folder, który będzie zawierać plik zasobów, > **Dodaj** > **nowy element** .
 
    ![Zagnieżdżone menu kontekstowe: w Eksplorator rozwiązań menu kontekstowe jest otwarte dla zasobów. Drugie menu kontekstowe jest otwarte dla dodawania pokazującego wyróżnione polecenie Nowy element.](localization/_static/newi.png)
 
@@ -866,9 +867,9 @@ Plik zasobów jest użytecznym mechanizmem oddzielania lokalizowalnych ciągów 
 
 ## <a name="resource-file-naming"></a>Nazewnictwo plików zasobów
 
-Zasoby są nazwane dla pełnej nazwy typu swojej klasy pomniejszonej o nazwę zestawu. Na przykład zasób francuski w projekcie, którego głównym zestawem jest `LocalizationWebsite.Web.dll` dla klasy, będzie `LocalizationWebsite.Web.Startup` nazwany *Startup. fr. resx*. Zasób klasy `LocalizationWebsite.Web.Controllers.HomeController` nosi nazwę *controllers. HomeController. fr. resx*. Jeśli przestrzeń nazw klasy Target nie jest taka sama jak nazwa zestawu, będzie potrzebna pełna nazwa typu. Przykładowo w przykładowym projekcie zasób dla typu `ExtraNamespace.Tools` powinien mieć nazwę *ExtraNamespace. Tools. fr. resx*.
+Zasoby są nazwane dla pełnej nazwy typu swojej klasy pomniejszonej o nazwę zestawu. Na przykład zasób francuski w projekcie, którego głównym zestawem jest `LocalizationWebsite.Web.dll` dla klasy, będzie `LocalizationWebsite.Web.Startup` nazwany *Startup. fr. resx* . Zasób klasy `LocalizationWebsite.Web.Controllers.HomeController` nosi nazwę *controllers. HomeController. fr. resx* . Jeśli przestrzeń nazw klasy Target nie jest taka sama jak nazwa zestawu, będzie potrzebna pełna nazwa typu. Przykładowo w przykładowym projekcie zasób dla typu `ExtraNamespace.Tools` powinien mieć nazwę *ExtraNamespace. Tools. fr. resx* .
 
-W przykładowym projekcie `ConfigureServices` Metoda ustawia `ResourcesPath` do "zasobów", więc ścieżka względna projektu dla francuskiego pliku zasobów kontrolera głównego to *zasoby/kontrolery. HomeController. fr. resx*. Alternatywnie można użyć folderów do organizowania plików zasobów. W przypadku kontrolera macierzystego ścieżka będzie zawierać *zasoby/kontrolery/HomeController. fr. resx*. Jeśli ta opcja nie zostanie użyta `ResourcesPath` , plik *. resx* zostanie użyty w katalogu bazowym projektu. Plik zasobu dla `HomeController` nosi nazwę *controllers. HomeController. fr. resx*. Wybór przy użyciu konwencji nazewnictwa kropka lub ścieżki zależy od tego, w jaki sposób chcesz zorganizować pliki zasobów.
+W przykładowym projekcie `ConfigureServices` Metoda ustawia `ResourcesPath` do "zasobów", więc ścieżka względna projektu dla francuskiego pliku zasobów kontrolera głównego to *zasoby/kontrolery. HomeController. fr. resx* . Alternatywnie można użyć folderów do organizowania plików zasobów. W przypadku kontrolera macierzystego ścieżka będzie zawierać *zasoby/kontrolery/HomeController. fr. resx* . Jeśli ta opcja nie zostanie użyta `ResourcesPath` , plik *. resx* zostanie użyty w katalogu bazowym projektu. Plik zasobu dla `HomeController` nosi nazwę *controllers. HomeController. fr. resx* . Wybór przy użyciu konwencji nazewnictwa kropka lub ścieżki zależy od tego, w jaki sposób chcesz zorganizować pliki zasobów.
 
 | Nazwa zasobu | Nazwa kropka lub ścieżki |
 | ------------   | ------------- |
@@ -921,11 +922,11 @@ Na przykład, jeśli usuniesz oznaczenie kultury ". fr" i masz kulturę ustawion
 
 ### <a name="generate-resource-files-with-visual-studio"></a>Generowanie plików zasobów przy użyciu programu Visual Studio
 
-Jeśli utworzysz plik zasobów w programie Visual Studio bez kultury w nazwie pliku (na przykład *Welcome. resx*), program Visual Studio utworzy klasę języka C# z właściwością dla każdego ciągu. Zwykle nie jest to możliwe dzięki ASP.NET Core. Zazwyczaj nie istnieje domyślny plik zasobów *resx* (plik *. resx* bez nazwy kultury). Zalecamy utworzenie pliku *resx* z nazwą kultury (na przykład *Welcome. fr. resx*). Podczas tworzenia pliku *resx* przy użyciu nazwy kultury program Visual Studio nie generuje pliku klasy.
+Jeśli utworzysz plik zasobów w programie Visual Studio bez kultury w nazwie pliku (na przykład *Welcome. resx* ), program Visual Studio utworzy klasę języka C# z właściwością dla każdego ciągu. Zwykle nie jest to możliwe dzięki ASP.NET Core. Zazwyczaj nie istnieje domyślny plik zasobów *resx* (plik *. resx* bez nazwy kultury). Zalecamy utworzenie pliku *resx* z nazwą kultury (na przykład *Welcome. fr. resx* ). Podczas tworzenia pliku *resx* przy użyciu nazwy kultury program Visual Studio nie generuje pliku klasy.
 
 ### <a name="add-other-cultures"></a>Dodaj inne kultury
 
-Każda kombinacja języka i kultury (oprócz języka domyślnego) wymaga unikatowego pliku zasobów. Tworzysz pliki zasobów dla różnych kultur i ustawień regionalnych, tworząc nowe pliki zasobów, w których kody języka ISO są częścią nazwy pliku (na przykład **en-us**, **fr-CA**i **pl-GB**). Te kody ISO są umieszczane między nazwami plików i rozszerzeniem *resx* , jak w *Welcome.es-MX. resx* (hiszpański/Meksyk).
+Każda kombinacja języka i kultury (oprócz języka domyślnego) wymaga unikatowego pliku zasobów. Tworzysz pliki zasobów dla różnych kultur i ustawień regionalnych, tworząc nowe pliki zasobów, w których kody języka ISO są częścią nazwy pliku (na przykład **en-us** , **fr-CA** i **pl-GB** ). Te kody ISO są umieszczane między nazwami plików i rozszerzeniem *resx* , jak w *Welcome.es-MX. resx* (hiszpański/Meksyk).
 
 ## <a name="implement-a-strategy-to-select-the-languageculture-for-each-request"></a>Zaimplementuj strategię, aby wybrać język/kulturę dla każdego żądania
 
@@ -959,7 +960,7 @@ Lista domyślna przechodzi od najbardziej konkretnych do najmniej określonych. 
 
 ### <a name="querystringrequestcultureprovider"></a>QueryStringRequestCultureProvider
 
-Niektóre aplikacje będą używać ciągu zapytania do ustawienia <xref:System.Globalization.CultureInfo> . W przypadku aplikacji, które korzystają z cookie metody lub nagłówka Accept-Language, Dodawanie ciągu zapytania do adresu URL jest przydatne w przypadku debugowania i testowania kodu. Domyślnie program `QueryStringRequestCultureProvider` jest rejestrowany jako pierwszy dostawca lokalizacji na `RequestCultureProvider` liście. Parametry ciągu zapytania są przekazywane `culture` i `ui-culture` . Poniższy przykład ustawia określoną kulturę (język i region) na hiszpański/Meksyk:
+Niektóre aplikacje będą używać ciągu zapytania do ustawienia <xref:System.Globalization.CultureInfo> . W przypadku aplikacji korzystających z cookie metody nagłówka lub Accept-Language dodanie ciągu zapytania do adresu URL jest przydatne w przypadku debugowania i testowania kodu. Domyślnie program `QueryStringRequestCultureProvider` jest rejestrowany jako pierwszy dostawca lokalizacji na `RequestCultureProvider` liście. Parametry ciągu zapytania są przekazywane `culture` i `ui-culture` . Poniższy przykład ustawia określoną kulturę (język i region) na hiszpański/Meksyk:
 
 ```
 http://localhost:5000/?culture=es-MX&ui-culture=es-MX
@@ -985,25 +986,25 @@ c=en-UK|uic=en-US
 
 Jeśli określisz tylko jedną z informacji o kulturze i kulturze interfejsu użytkownika, określona kultura zostanie użyta dla informacji kultury i kultury interfejsu użytkownika.
 
-### <a name="the-accept-language-http-header"></a>Nagłówek Accept-Language HTTP
+### <a name="the-accept-language-http-header"></a>Accept-Language nagłówek HTTP
 
-[Nagłówek Accept-Language](https://www.w3.org/International/questions/qa-accept-lang-locales) jest settable w większości przeglądarek i był pierwotnie przeznaczony do określenia języka użytkownika. To ustawienie wskazuje, co przeglądarka została ustawiona do wysłania lub która dziedziczy z bazowego systemu operacyjnego. Nagłówek Accept-Language HTTP z żądania przeglądarki nie jest infallibleym sposobem wykrywania preferowanego języka użytkownika (zobacz [Ustawianie preferencji językowych w przeglądarce](https://www.w3.org/International/questions/qa-lang-priorities.en.php)). Aplikacja produkcyjna powinna uwzględniać sposób, w jaki użytkownik może dostosować wybór kultury.
+[Nagłówek Accept-Language](https://www.w3.org/International/questions/qa-accept-lang-locales) jest settable w większości przeglądarek i był pierwotnie przeznaczony do określenia języka użytkownika. To ustawienie wskazuje, co przeglądarka została ustawiona do wysłania lub która dziedziczy z bazowego systemu operacyjnego. Accept-Language nagłówku HTTP z żądania przeglądarki nie jest INFALLIBLE sposób wykrywania preferowanego języka użytkownika (zobacz [Ustawianie preferencji językowych w przeglądarce](https://www.w3.org/International/questions/qa-lang-priorities.en.php)). Aplikacja produkcyjna powinna uwzględniać sposób, w jaki użytkownik może dostosować wybór kultury.
 
-### <a name="set-the-accept-language-http-header-in-ie"></a>Ustawianie nagłówka HTTP Accept-Language w programie IE
+### <a name="set-the-accept-language-http-header-in-ie"></a>Ustawianie Accept-Language nagłówku HTTP w programie IE
 
-1. Na ikonie koła zębatego naciśnij pozycję **Opcje internetowe**.
+1. Na ikonie koła zębatego naciśnij pozycję **Opcje internetowe** .
 
-1. Naciśnij pozycję **Języki**.
+1. Naciśnij pozycję **Języki** .
 
    ![Opcje internetowe](localization/_static/lang.png)
 
-1. Naciśnij pozycję **Ustaw preferencje językowe**.
+1. Naciśnij pozycję **Ustaw preferencje językowe** .
 
-1. Naciśnij pozycję **Dodaj język**.
+1. Naciśnij pozycję **Dodaj język** .
 
 1. Dodaj język.
 
-1. Naciśnij pozycję język, a następnie naciśnij pozycję **Przenieś w górę**.
+1. Naciśnij pozycję język, a następnie naciśnij pozycję **Przenieś w górę** .
 
 ### <a name="the-content-language-http-header"></a>Nagłówek HTTP w języku zawartości
 

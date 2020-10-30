@@ -5,6 +5,7 @@ description: Zapoznaj się ze szczegółami implementacji formatu magazynu klucz
 ms.author: riande
 ms.date: 04/08/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/implementation/key-storage-format
-ms.openlocfilehash: daf86d3e3357d42ddad74d5e2f06e00e0e24db07
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 4a8503964c98d1828dc9d02640a7621b370e679c
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631995"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060147"
 ---
 # <a name="key-storage-format-in-aspnet-core"></a>Format magazynu kluczy w ASP.NET Core
 
@@ -34,7 +35,7 @@ Obiekty są przechowywane w reprezentacji XML. Domyślnym katalogiem magazynu kl
 
 ## <a name="the-key-element"></a>\<key>Element
 
-Klucze istnieją jako obiekty najwyższego poziomu w repozytorium kluczy. Klucze konwencji mają **klucz filename-{GUID}. XML**, gdzie {GUID} jest identyfikatorem klucza. Każdy taki plik zawiera jeden klucz. Format pliku jest następujący.
+Klucze istnieją jako obiekty najwyższego poziomu w repozytorium kluczy. Klucze konwencji mają **klucz filename-{GUID}. XML** , gdzie {GUID} jest identyfikatorem klucza. Każdy taki plik zawiera jeden klucz. Format pliku jest następujący.
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -77,7 +78,7 @@ Określony format \<descriptor> elementu zależy od uwierzytelnionej implementac
 
 ## <a name="the-encryptedsecret-element"></a>\<encryptedSecret>Element
 
-Element ** &lt; encryptedSecret &gt; ** , który zawiera zaszyfrowaną formę materiału klucza tajnego, może być obecny, jeśli [włączono szyfrowanie wpisów tajnych w stanie spoczynku](xref:security/data-protection/implementation/key-encryption-at-rest). Ten atrybut `decryptorType` to kwalifikowana dla zestawu nazwa typu, który implementuje [IXmlDecryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.xmlencryption.ixmldecryptor). Ten typ jest odpowiedzialny za odczytywanie wewnętrznego elementu ** &lt; encryptedKey &gt; ** i odszyfrowywanie go w celu odzyskania oryginalnego tekstu.
+Element **&lt; encryptedSecret &gt;** , który zawiera zaszyfrowaną formę materiału klucza tajnego, może być obecny, jeśli [włączono szyfrowanie wpisów tajnych w stanie spoczynku](xref:security/data-protection/implementation/key-encryption-at-rest). Ten atrybut `decryptorType` to kwalifikowana dla zestawu nazwa typu, który implementuje [IXmlDecryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.xmlencryption.ixmldecryptor). Ten typ jest odpowiedzialny za odczytywanie wewnętrznego elementu **&lt; encryptedKey &gt;** i odszyfrowywanie go w celu odzyskania oryginalnego tekstu.
 
 Podobnie jak w przypadku `<descriptor>` , określony format `<encryptedSecret>` elementu zależy od mechanizmu szyfrowania w trybie Rest. W powyższym przykładzie klucz główny jest szyfrowany przy użyciu funkcji DPAPI systemu Windows na komentarz.
 

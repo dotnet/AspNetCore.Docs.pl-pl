@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 11/15/2018
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/resourcebased
-ms.openlocfilehash: bb47f3452d29dfeea0e4d3c4a9c22a06869a3fe7
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 202ca681a66ddf7f729d8835e2f77da846583df1
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631358"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060173"
 ---
 # <a name="resource-based-authorization-in-aspnet-core"></a>Autoryzacja oparta na zasobach w ASP.NET Core
 
 Strategia autoryzacji zależy od zasobów, do których uzyskuje się dostęp. Rozważ dokument, który ma właściwość Author. Tylko autor może zaktualizować dokument. W związku z tym dokument musi zostać pobrany z magazynu danych, zanim będzie można przeprowadzić ocenę autoryzacji.
 
-Obliczanie atrybutu występuje przed powiązaniem danych i przed wykonaniem procedury obsługi stron lub akcji ładującej dokument. Z tych powodów niewystarczająca jest autoryzacja deklaratywna z `[Authorize]` atrybutem. Zamiast tego można wywołać niestandardową metodę autoryzacji &mdash; stylu znanej jako samodzielna *autoryzacja*.
+Obliczanie atrybutu występuje przed powiązaniem danych i przed wykonaniem procedury obsługi stron lub akcji ładującej dokument. Z tych powodów niewystarczająca jest autoryzacja deklaratywna z `[Authorize]` atrybutem. Zamiast tego można wywołać niestandardową metodę autoryzacji &mdash; stylu znanej jako samodzielna *autoryzacja* .
 
 ::: moniker range=">= aspnetcore-3.0"
 [Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/resourcebased/samples/3_0) ([jak pobrać](xref:index#how-to-download-a-sample)).

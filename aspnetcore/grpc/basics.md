@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 07/09/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/basics
-ms.openlocfilehash: aacaf9cca131d3fba1c3ae96cf42d51d3fdc17b6
-ms.sourcegitcommit: 47c9a59ff8a359baa6bca2637d3af87ddca1245b
+ms.openlocfilehash: 4968ac889cd3b4e0780ce73dc729d0107a416932
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/27/2020
-ms.locfileid: "88945431"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061018"
 ---
 # <a name="grpc-services-with-c"></a>usługi gRPC w języku C\#
 
@@ -32,7 +33,7 @@ W tym dokumencie przedstawiono koncepcje niezbędne do pisania aplikacji [gRPC](
 
 ## <a name="proto-file"></a>plik PROTO
 
-gRPC używa podejścia pierwszego kontraktu do programowania interfejsu API. Bufory protokołu (protobuf) są domyślnie używane jako język definicji interfejsu (IDL). Plik * \* . proto* zawiera:
+gRPC używa podejścia pierwszego kontraktu do programowania interfejsu API. Bufory protokołu (protobuf) są domyślnie używane jako język definicji interfejsu (IDL). Plik *\* . proto* zawiera:
 
 * Definicja usługi gRPC.
 * Komunikaty wysyłane między klientami a serwerami.
@@ -50,7 +51,7 @@ Rozważmy na przykład plik *Greeting. proto* używany w temacie [Rozpoczynanie 
 
 ## <a name="add-a-proto-file-to-a-c-app"></a>Dodawanie pliku. proto do \# aplikacji C
 
-Plik * \* proto* jest dołączany do projektu przez dodanie go do `<Protobuf>` grupy Items:
+Plik *\* proto* jest dołączany do projektu przez dodanie go do `<Protobuf>` grupy Items:
 
 [!code-xml[](~/tutorials/grpc/grpc-start/sample/GrpcGreeter/GrpcGreeter.csproj?highlight=2&range=7-9)]
 
@@ -63,7 +64,7 @@ Domyślnie `<Protobuf>` odwołanie generuje konkretny klient i klasę bazową us
 
 ## <a name="c-tooling-support-for-proto-files"></a>Obsługa narzędzi C# dla plików. proto
 
-Pakiet narzędzi [GRPC. Tools](https://www.nuget.org/packages/Grpc.Tools/) jest wymagany do generowania zasobów C# z plików * \* . proto* . Wygenerowane zasoby (pliki):
+Pakiet narzędzi [GRPC. Tools](https://www.nuget.org/packages/Grpc.Tools/) jest wymagany do generowania zasobów C# z plików *\* . proto* . Wygenerowane zasoby (pliki):
 
 * Są generowane w przypadku, gdy jest to wymagane, za każdym razem, gdy projekt jest skompilowany.
 * Nie są dodawane do projektu ani zaewidencjonowane do kontroli źródła.
@@ -79,7 +80,7 @@ Projekty klienta należy bezpośrednio odwoływać `Grpc.Tools` się do innych p
 
 ## <a name="generated-c-assets"></a>Wygenerowane elementy zawartości C#
 
-Pakiet narzędzi generuje typy C# reprezentujące komunikaty zdefiniowane w zawartych plikach * \* . proto* .
+Pakiet narzędzi generuje typy C# reprezentujące komunikaty zdefiniowane w zawartych plikach *\* . proto* .
 
 W przypadku zasobów po stronie serwera jest generowany abstrakcyjny typ podstawowy usługi. Typ podstawowy zawiera definicje wszystkich wywołań gRPC znajdujących się w pliku *. proto* . Utwórz konkretną implementację usługi, która pochodzi z tego typu podstawowego i implementuje logikę dla wywołań gRPC. W przypadku `greet.proto` , przykładu opisanego wcześniej, `GreeterBase` generowany jest typ abstrakcyjny, który zawiera `SayHello` metodę wirtualną. Konkretna implementacja `GreeterService` przesłania metodę i implementuje logikę obsługi wywołania gRPC.
 
@@ -89,7 +90,7 @@ Dla zasobów po stronie klienta jest generowany konkretny typ klienta. Wywołani
 
 [!code-csharp[](~/tutorials/grpc/grpc-start/sample/GrpcGreeterClient/Program.cs?name=snippet)]
 
-Domyślnie zasoby serwera i klienta są generowane dla każdego pliku * \* . proto* , który znajduje się w `<Protobuf>` grupie elementów. Aby upewnić się, że tylko zasoby serwera są generowane w projekcie serwera, `GrpcServices` atrybut jest ustawiany na `Server` .
+Domyślnie zasoby serwera i klienta są generowane dla każdego pliku *\* . proto* , który znajduje się w `<Protobuf>` grupie elementów. Aby upewnić się, że tylko zasoby serwera są generowane w projekcie serwera, `GrpcServices` atrybut jest ustawiany na `Server` .
 
 [!code-xml[](~/tutorials/grpc/grpc-start/sample/GrpcGreeter/GrpcGreeter.csproj?highlight=2&range=7-9)]
 

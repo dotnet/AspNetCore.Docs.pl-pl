@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/working-with-forms
-ms.openlocfilehash: c337e727a4683b0b3c67307af93ef8efa246e2ad
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: a568ad481eb09587e2ddce8e84d0ac3eff01e990
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631020"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060901"
 ---
 # <a name="tag-helpers-in-forms-in-aspnet-core"></a>Pomocnicy tagów w formularzach w ASP.NET Core
 
@@ -67,7 +68,7 @@ Pomocnik tagu formularza powyżej generuje następujący kod HTML:
 
 [!code-cshtml[](../../mvc/views/working-with-forms/sample/final/Views/Demo/RegisterRoute.cshtml)]
 
-Wiele widoków w folderze *widoki/konto* (generowane podczas tworzenia nowej aplikacji sieci Web przy użyciu *poszczególnych kont użytkowników*) zawiera atrybut [ASP-Route-ReturnUrl](xref:mvc/views/working-with-forms) :
+Wiele widoków w folderze *widoki/konto* (generowane podczas tworzenia nowej aplikacji sieci Web przy użyciu *poszczególnych kont użytkowników* ) zawiera atrybut [ASP-Route-ReturnUrl](xref:mvc/views/working-with-forms) :
 
 ```cshtml
 <form asp-controller="Account" asp-action="Login"
@@ -182,7 +183,7 @@ Składnia:
 
 Pomocnik tagu wejściowego:
 
-* Generuje `id` `name` atrybuty HTML dla nazwy wyrażenia określonego w `asp-for` atrybucie. `asp-for="Property1.Property2"` jest odpowiednikiem `m => m.Property1.Property2` . Nazwa wyrażenia jest używana jako `asp-for` wartość atrybutu. Aby uzyskać dodatkowe informacje, zobacz sekcję [nazwy wyrażeń](#expression-names) .
+* Generuje `id` `name` atrybuty HTML dla nazwy wyrażenia określonego w `asp-for` atrybucie. `asp-for="Property1.Property2"` jest równoważne `m => m.Property1.Property2`. Nazwa wyrażenia jest używana jako `asp-for` wartość atrybutu. Aby uzyskać dodatkowe informacje, zobacz sekcję [nazwy wyrażeń](#expression-names) .
 
 * Ustawia `type` wartość atrybutu HTML na podstawie atrybutów typu modelu i  [adnotacji danych](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.iattributeadapter) zastosowanych do właściwości model
 
@@ -210,7 +211,7 @@ Pomocnik tagu wejściowego:
 |Typ .NET|Typ danych wejściowych|
 |---|---|
 |Wartość logiczna|Type = "CheckBox"|
-|Ciąg|Type = "text"|
+|String|Type = "text"|
 |DateTime|Type =["DateTime-local"](https://developer.mozilla.org/docs/Web/HTML/Element/input/datetime-local)|
 |Byte|Type = "number"|
 |int|Type = "number"|
@@ -502,7 +503,7 @@ Wygenerowany kod HTML (gdy model jest prawidłowy):
 
 * Ma alternatywę pomocnika HTML `Html.DropDownListFor` i `Html.ListBoxFor`
 
-`Select Tag Helper` `asp-for` Określa nazwę właściwości modelu dla elementu [SELECT](https://www.w3.org/wiki/HTML/Elements/select) i `asp-items` określa elementy [opcji](https://www.w3.org/wiki/HTML/Elements/option) .  Na przykład:
+`Select Tag Helper` `asp-for` Określa nazwę właściwości modelu dla elementu [SELECT](https://www.w3.org/wiki/HTML/Elements/select) i `asp-items` określa elementy [opcji](https://www.w3.org/wiki/HTML/Elements/option) .  Przykład:
 
 [!code-cshtml[](working-with-forms/sample/final/Views/Home/Index.cshtml?range=4)]
 

@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 03/19/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/google-logins
-ms.openlocfilehash: a7a5260a2446ac3f3be00755ef051e56080a7485
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 111ea7c972778dfd5296d0401c16563aeaa36a63
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634296"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060316"
 ---
 # <a name="google-external-login-setup-in-aspnet-core"></a>Konfiguracja zewnętrznego logowania do usługi Google w ASP.NET Core
 
@@ -33,11 +34,11 @@ W tym samouczku pokazano, jak umożliwić użytkownikom logowanie się za pomoc�
 ## <a name="create-a-google-api-console-project-and-client-id"></a>Tworzenie projektu konsoli interfejsu API firmy Google i identyfikatora klienta
 
 * Zainstaluj [Microsoft. AspNetCore. Authentication. Google](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Google).
-* Przejdź do [strony integracja z logowaniem Google w aplikacji sieci Web](https://developers.google.com/identity/sign-in/web/sign-in) i wybierz pozycję **Konfiguruj projekt**.
-* W oknie dialogowym **Konfigurowanie klienta uwierzytelniania OAuth** wybierz opcję **serwer sieci Web**.
+* Przejdź do [integracji usługi Google Sign-In w aplikacji sieci Web](https://developers.google.com/identity/sign-in/web/sign-in) i wybierz pozycję **Konfiguruj projekt** .
+* W oknie dialogowym **Konfigurowanie klienta uwierzytelniania OAuth** wybierz opcję **serwer sieci Web** .
 * W polu tekstowym **autoryzowane adresy URI przekierowania** ustaw identyfikator URI przekierowania. Na przykład `https://localhost:44312/signin-google`
-* Zapisz **Identyfikator klienta** i **klucz tajny klienta**.
-* Podczas wdrażania lokacji Zarejestruj nowy publiczny adres URL z poziomu **konsoli Google**.
+* Zapisz **Identyfikator klienta** i **klucz tajny klienta** .
+* Podczas wdrażania lokacji Zarejestruj nowy publiczny adres URL z poziomu **konsoli Google** .
 
 ## <a name="store-the-google-client-id-and-secret"></a>Zapisz identyfikator i klucz tajny klienta Google
 
@@ -65,7 +66,7 @@ Dodaj usługę Google do `Startup.ConfigureServices` :
 
 ## <a name="sign-in-with-google"></a>Zaloguj się przy użyciu usługi Google
 
-* Uruchom aplikację i kliknij pozycję **Zaloguj**. Zostanie wyświetlona opcja zalogowania się za pomocą usługi Google.
+* Uruchom aplikację i kliknij pozycję **Zaloguj** . Zostanie wyświetlona opcja zalogowania się za pomocą usługi Google.
 * Kliknij przycisk **Google** , który przekierowuje do usługi Google w celu uwierzytelnienia.
 * Po wprowadzeniu poświadczeń Google nastąpi przekierowanie z powrotem do witryny sieci Web.
 
@@ -82,7 +83,7 @@ Segment identyfikatora URI `/signin-google` jest ustawiany jako domyślne wywoł
 ## <a name="troubleshooting"></a>Rozwiązywanie problemów
 
 * Jeśli logowanie nie działa i nie pojawiają się żadne błędy, przełącz się do trybu deweloperskiego, aby ułatwić debugowanie problemu.
-* Jeśli Identity nie jest skonfigurowany przez wywołanie `services.AddIdentity` w `ConfigureServices` , próba uwierzytelnienia wyników w *argumencieexception: należy podać opcję "SignInScheme"*. Szablon projektu używany w tym samouczku zapewnia, że jest to gotowe.
+* Jeśli Identity nie jest skonfigurowany przez wywołanie `services.AddIdentity` w `ConfigureServices` , próba uwierzytelnienia wyników w *argumencieexception: należy podać opcję "SignInScheme"* . Szablon projektu używany w tym samouczku zapewnia, że jest to gotowe.
 * Jeśli baza danych lokacji nie została utworzona przez zastosowanie początkowej migracji, podczas *przetwarzania błędu żądania nie można wykonać operacji bazy danych* . Wybierz pozycję **Zastosuj migracje** , aby utworzyć bazę danych, a następnie Odśwież stronę, aby kontynuować z powodu błędu.
 
 ## <a name="next-steps"></a>Następne kroki

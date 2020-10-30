@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 09/07/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/deadlines-cancellation
-ms.openlocfilehash: 59b737a032ea37a554ad5ddd0f4d44e4e1602d88
-ms.sourcegitcommit: a07f83b00db11f32313045b3492e5d1ff83c4437
+ms.openlocfilehash: a735ed4d2ca8db1c9b7998acd14f9be761fe7ec6
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/15/2020
-ms.locfileid: "90594441"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059926"
 ---
 # <a name="reliable-grpc-services-with-deadlines-and-cancellation"></a>Niezawodne usługi gRPC z terminami i anulowaniem
 
@@ -57,7 +58,7 @@ Korzystanie `ServerCallContext.CancellationToken` z usługi gRPC:
 
 ### <a name="propagating-deadlines"></a>Propagowanie terminów
 
-Gdy wywołanie gRPC jest nawiązywane z wykonywanej usługi gRPC, termin powinien zostać rozpropagowany. Na przykład:
+Gdy wywołanie gRPC jest nawiązywane z wykonywanej usługi gRPC, termin powinien zostać rozpropagowany. Przykład:
 
 1. Wywołania aplikacji klienta `FrontendService.GetUser` z terminem ostatecznym.
 2. `FrontendService` wywołania `UserService.GetUser` . Termin określony przez klienta powinien być określony przy użyciu nowego wywołania gRPC.

@@ -5,6 +5,7 @@ description: Część 5 serii samouczków na Razor stronach.
 ms.author: riande
 ms.date: 12/20/2018
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/da1
-ms.openlocfilehash: 04479e5c3a0b1e9badbb4e58043cf059beefb4ab
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 7d25dae67c928fa659654ce4ab34cfdad08b5300
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632801"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060069"
 ---
 # <a name="part-5-update-the-generated-pages-in-an-aspnet-core-app"></a>Część 5. aktualizowanie wygenerowanych stron w aplikacji ASP.NET Core
 
@@ -47,7 +48,7 @@ Przejdź do stron/filmów i umieść kursor na linku **edycji** , aby zobaczyć 
 
 ![Okno przeglądarki z myszą nad linkiem edycji i pokazanym adresem URL linku http://localhost:1234/Movies/Edit/5](~/tutorials/razor-pages/da1/edit7.png)
 
-Linki **Edytuj**, **szczegóły**i **Usuń** są generowane przez [pomocnika tagu kotwicy](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) w pliku *Pages/Films/index. cshtml* .
+Linki **Edytuj** , **szczegóły** i **Usuń** są generowane przez [pomocnika tagu kotwicy](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) w pliku *Pages/Films/index. cshtml* .
 
 [!code-cshtml[](~/tutorials/razor-pages/razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Index.cshtml?highlight=16-18&range=32-)]
 
@@ -86,7 +87,7 @@ Zaktualizuj strony edytowania, szczegółów i usuwania, Razor Aby użyć szablo
 Aby przetestować zachowanie `@page "{id:int?}"` :
 
 * Ustaw dyrektywę Page na stronie */filmy/details. cshtml* na `@page "{id:int?}"` .
-* Ustaw punkt przerwania `public async Task<IActionResult> OnGetAsync(int? id)` (w obszarze *strony/filmy/szczegóły. cshtml. cs*).
+* Ustaw punkt przerwania `public async Task<IActionResult> OnGetAsync(int? id)` (w obszarze *strony/filmy/szczegóły. cshtml. cs* ).
 * Przejdź do adresu `https://localhost:5001/Movies/Details/`.
 
 W przypadku `@page "{id:int}"` dyrektywy punkt przerwania nigdy nie trafi. Aparat routingu zwraca protokół HTTP 404. Przy użyciu `@page "{id:int?}"` `OnGetAsync` Metoda zwraca `NotFound` (HTTP 404).
@@ -102,7 +103,7 @@ Poprzedni kod wykrywa wyjątki współbieżności, gdy jeden klient usuwa film, 
 Aby przetestować `catch` blok:
 
 * Ustaw punkt przerwania na `catch (DbUpdateConcurrencyException)`
-* Wybierz pozycję **Edytuj** dla filmu, wprowadź zmiany, ale nie wprowadzaj opcji **Zapisz**.
+* Wybierz pozycję **Edytuj** dla filmu, wprowadź zmiany, ale nie wprowadzaj opcji **Zapisz** .
 * W innym oknie przeglądarki wybierz łącze **Usuń** dla tego samego filmu, a następnie usuń film.
 * W poprzednim oknie przeglądarki Opublikuj zmiany w filmie.
 
@@ -162,7 +163,7 @@ Przejdź do stron/filmów i umieść kursor na linku **edycji** , aby zobaczyć 
 
 ![Okno przeglądarki z myszą nad linkiem edycji i pokazanym adresem URL linku http://localhost:1234/Movies/Edit/5](~/tutorials/razor-pages/da1/edit7.png)
 
-Linki **Edytuj**, **szczegóły**i **Usuń** są generowane przez [pomocnika tagu kotwicy](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) w pliku *Pages/Films/index. cshtml* .
+Linki **Edytuj** , **szczegóły** i **Usuń** są generowane przez [pomocnika tagu kotwicy](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) w pliku *Pages/Films/index. cshtml* .
 
 [!code-cshtml[](~/tutorials/razor-pages/razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Index.cshtml?highlight=16-18&range=32-)]
 
@@ -199,7 +200,7 @@ Zaktualizuj strony edytowania, szczegółów i usuwania, Razor Aby użyć szablo
 Aby przetestować zachowanie `@page "{id:int?}"` :
 
 * Ustaw dyrektywę Page na stronie */filmy/details. cshtml* na `@page "{id:int?}"` .
-* Ustaw punkt przerwania `public async Task<IActionResult> OnGetAsync(int? id)` (w obszarze *strony/filmy/szczegóły. cshtml. cs*).
+* Ustaw punkt przerwania `public async Task<IActionResult> OnGetAsync(int? id)` (w obszarze *strony/filmy/szczegóły. cshtml. cs* ).
 * Przejdź do adresu `https://localhost:5001/Movies/Details/`.
 
 W przypadku `@page "{id:int}"` dyrektywy punkt przerwania nigdy nie trafi. Aparat routingu zwraca protokół HTTP 404. Przy użyciu `@page "{id:int?}"` `OnGetAsync` Metoda zwraca `NotFound` (HTTP 404).
@@ -215,7 +216,7 @@ Poprzedni kod wykrywa wyjątki współbieżności, gdy jeden klient usuwa film, 
 Aby przetestować `catch` blok:
 
 * Ustaw punkt przerwania na `catch (DbUpdateConcurrencyException)`
-* Wybierz pozycję **Edytuj** dla filmu, wprowadź zmiany, ale nie wprowadzaj opcji **Zapisz**.
+* Wybierz pozycję **Edytuj** dla filmu, wprowadź zmiany, ale nie wprowadzaj opcji **Zapisz** .
 * W innym oknie przeglądarki wybierz łącze **Usuń** dla tego samego filmu, a następnie usuń film.
 * W poprzednim oknie przeglądarki Opublikuj zmiany w filmie.
 

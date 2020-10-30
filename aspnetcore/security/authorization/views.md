@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 11/08/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/views
-ms.openlocfilehash: 775ebdffe2b0753de18bf07d9ff1193235a45b17
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: b3d6e595aa08208f2bf9e95d7070cf9c24802b62
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88629889"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061330"
 ---
 # <a name="view-based-authorization-in-aspnet-core-mvc"></a>Autoryzacja na podstawie widoku w ASP.NET Core MVC
 
@@ -57,4 +58,4 @@ W niektórych przypadkach zasób będzie modelem widoku. Wywołaj `AuthorizeAsyn
 W poprzednim kodzie model jest przenoszona jako zasób, a Ocena zasad powinna być uwzględniana.
 
 > [!WARNING]
-> Nie należy polegać na przełączaniu widoczności elementów interfejsu użytkownika aplikacji jako pojedynczej kontroli autoryzacji. Ukrycie elementu interfejsu użytkownika może nie całkowicie uniemożliwić dostęp do jego skojarzonej akcji kontrolera. Rozważmy na przykład przycisk w powyższym fragmencie kodu. Użytkownik może wywołać `Edit` metodę akcji, jeśli wie, że adres URL zasobu względnego to */Document/Edit/1*. Z tego powodu `Edit` Metoda działania powinna wykonywać własne sprawdzanie autoryzacji.
+> Nie należy polegać na przełączaniu widoczności elementów interfejsu użytkownika aplikacji jako pojedynczej kontroli autoryzacji. Ukrycie elementu interfejsu użytkownika może nie całkowicie uniemożliwić dostęp do jego skojarzonej akcji kontrolera. Rozważmy na przykład przycisk w powyższym fragmencie kodu. Użytkownik może wywołać `Edit` metodę akcji, jeśli wie, że adres URL zasobu względnego to */Document/Edit/1* . Z tego powodu `Edit` Metoda działania powinna wykonywać własne sprawdzanie autoryzacji.

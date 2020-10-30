@@ -5,6 +5,7 @@ description: W tej serii samouczków pokazano, jak używać Razor stron w ASP.NE
 ms.author: riande
 ms.date: 11/12/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/razor-pages-start
-ms.openlocfilehash: db05b8243b91a936a6ed72b0445e0770d44df014
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: ab890b956b1242f183054b7ab4575a59072b4f50
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634582"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060238"
 ---
 # <a name="tutorial-get-started-with-no-locrazor-pages-in-aspnet-core"></a>Samouczek: wprowadzenie do Razor stron w ASP.NET Core
 
@@ -67,13 +68,13 @@ Na końcu tego samouczka będziesz mieć Razor aplikację sieci Web strony roboc
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Z menu **plik** programu Visual Studio wybierz pozycję **Nowy** > **projekt**.
-* Utwórz nową aplikację sieci Web ASP.NET Core a następnie wybierz pozycję **dalej**.
+* Z menu **plik** programu Visual Studio wybierz pozycję **Nowy** > **projekt** .
+* Utwórz nową aplikację sieci Web ASP.NET Core a następnie wybierz pozycję **dalej** .
   ![Nowa aplikacja sieci Web ASP.NET Core](razor-pages-start/_static/np_2.1.png)
-* Nazwij projekt ** Razor PagesMovie**. Ważne jest, aby nazwa projektu * Razor PagesMovie* , tak aby przestrzenie nazw były zgodne podczas kopiowania i wklejania kodu.
+* Nazwij projekt **Razor PagesMovie** . Ważne jest, aby nazwa projektu *Razor PagesMovie* , tak aby przestrzenie nazw były zgodne podczas kopiowania i wklejania kodu.
   ![Nowa aplikacja sieci Web ASP.NET Core](razor-pages-start/_static/config.png)
 
-* Wybierz pozycję **ASP.NET Core 3,1** na liście rozwijanej, **aplikacji sieci Web**, a następnie wybierz pozycję **Utwórz**.
+* Wybierz pozycję **ASP.NET Core 3,1** na liście rozwijanej, **aplikacji sieci Web** , a następnie wybierz pozycję **Utwórz** .
 
 ![Nowa aplikacja sieci Web ASP.NET Core](razor-pages-start/_static/3/npx.png)
 
@@ -94,31 +95,31 @@ Na końcu tego samouczka będziesz mieć Razor aplikację sieci Web strony roboc
   code -r RazorPagesMovie
   ```
 
-  * `dotnet new`Polecenie tworzy nowy Razor Projekt strony w folderze * Razor PagesMovie* .
-  * `code`Polecenie otwiera folder * Razor PagesMovie* w bieżącym wystąpieniu Visual Studio Code.
+  * `dotnet new`Polecenie tworzy nowy Razor Projekt strony w folderze *Razor PagesMovie* .
+  * `code`Polecenie otwiera folder *Razor PagesMovie* w bieżącym wystąpieniu Visual Studio Code.
 
-* Gdy ikona płomienia OmniSharp na pasku stanu zmieni kolor na zielony, w oknie dialogowym zostanie wyświetlony monit **o podanie wymaganych zasobów do skompilowania i debugowania z elementu " Razor PagesMovie". Dodać je?** Wybierz pozycję **Tak**.
+* Gdy ikona płomienia OmniSharp na pasku stanu zmieni kolor na zielony, w oknie dialogowym zostanie wyświetlony monit **o podanie wymaganych zasobów do skompilowania i debugowania z elementu " Razor PagesMovie". Dodać je?** Wybierz pozycję **Tak** .
 
   Katalog *. programu vscode* , zawierający *launch.json* i *tasks.jsdla* plików, jest dodawany do katalogu głównego projektu.
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-* Wybierz pozycję **plik** > **nowe rozwiązanie**.
+* Wybierz pozycję **plik** > **nowe rozwiązanie** .
 
   ![macOS nowe rozwiązanie](../first-mvc-app/start-mvc/_static/new_project_vsmac.png)
 
-* W Visual Studio dla komputerów Mac starszej niż wersja 8,6 Wybierz **.NET Core**pozycję  >  **App**  >  **aplikacja internetowa aplikacji sieci Web**platformy .NET Core  >  **Next**. W wersji 8,6 lub nowszej wybierz kolejno pozycje **Sieć Web i aplikacja konsoli**aplikacji  >  **App**  >  **sieci Web**  >  **Next**.
+* W Visual Studio dla komputerów Mac starszej niż wersja 8,6 Wybierz **.NET Core** pozycję  >  **App**  >  **aplikacja internetowa aplikacji sieci Web** platformy .NET Core  >  **Next** . W wersji 8,6 lub nowszej wybierz kolejno pozycje **Sieć Web i aplikacja konsoli** aplikacji  >  **App**  >  **sieci Web**  >  **Next** .
 
   ![Wybieranie szablonu aplikacji sieci Web macOS](razor-pages-start/_static/web_app_template_vsmac.png)
 
 * W oknie dialogowym **Konfigurowanie nowej aplikacji sieci Web** :
 
-  * Upewnij się, że **uwierzytelnianie** jest ustawione na wartość **bez uwierzytelniania**.
-  * Jeśli jest prezentowana opcja wyboru **platformy docelowej**, wybierz najnowszą wersję 3. x.
+  * Upewnij się, że **uwierzytelnianie** jest ustawione na wartość **bez uwierzytelniania** .
+  * Jeśli jest prezentowana opcja wyboru **platformy docelowej** , wybierz najnowszą wersję 3. x.
 
-  Wybierz pozycję **Dalej**.
+  Wybierz opcję **Dalej** .
 
-* Nazwij projekt ** Razor PagesMovie**, a następnie wybierz pozycję **Utwórz**.
+* Nazwij projekt **Razor PagesMovie** , a następnie wybierz pozycję **Utwórz** .
 
   ![macOS Nazwij projekt](razor-pages-start/_static/RazorPagesMovie.png)
 
@@ -211,17 +212,17 @@ Na końcu tego samouczka będziesz mieć Razor aplikację sieci Web strony roboc
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Z menu **plik** programu Visual Studio wybierz pozycję **Nowy** > **projekt**.
+* Z menu **plik** programu Visual Studio wybierz pozycję **Nowy** > **projekt** .
 
-* Utwórz nową aplikację sieci Web ASP.NET Core a następnie wybierz pozycję **dalej**.
+* Utwórz nową aplikację sieci Web ASP.NET Core a następnie wybierz pozycję **dalej** .
 
   ![Nowa aplikacja sieci Web ASP.NET Core](razor-pages-start/_static/np_2.1.png)
 
-* Nazwij projekt ** Razor PagesMovie**. Ważne jest, aby nazwa projektu * Razor PagesMovie* , tak aby przestrzenie nazw były zgodne podczas kopiowania i wklejania kodu.
+* Nazwij projekt **Razor PagesMovie** . Ważne jest, aby nazwa projektu *Razor PagesMovie* , tak aby przestrzenie nazw były zgodne podczas kopiowania i wklejania kodu.
 
   ![Nowa aplikacja sieci Web ASP.NET Core](razor-pages-start/_static/config.png)
 
-* Wybierz pozycję **ASP.NET Core 2,2** na liście rozwijanej, **aplikacji sieci Web**, a następnie wybierz pozycję **Utwórz**.
+* Wybierz pozycję **ASP.NET Core 2,2** na liście rozwijanej, **aplikacji sieci Web** , a następnie wybierz pozycję **Utwórz** .
 
 ![Nowa aplikacja sieci Web ASP.NET Core](razor-pages-start/_static/np_2_2.2.png)
 
@@ -242,29 +243,29 @@ Na końcu tego samouczka będziesz mieć Razor aplikację sieci Web strony roboc
   code -r RazorPagesMovie
   ```
 
-  * `dotnet new`Polecenie tworzy nowy Razor Projekt strony w folderze * Razor PagesMovie* .
-  * `code`Polecenie otwiera folder * Razor PagesMovie* w bieżącym wystąpieniu Visual Studio Code.
+  * `dotnet new`Polecenie tworzy nowy Razor Projekt strony w folderze *Razor PagesMovie* .
+  * `code`Polecenie otwiera folder *Razor PagesMovie* w bieżącym wystąpieniu Visual Studio Code.
 
-* Gdy ikona płomienia OmniSharp na pasku stanu zmieni kolor na zielony, w oknie dialogowym zostanie wyświetlony monit **o podanie wymaganych zasobów do skompilowania i debugowania z elementu " Razor PagesMovie". Dodać je?** Wybierz pozycję **Tak**.
+* Gdy ikona płomienia OmniSharp na pasku stanu zmieni kolor na zielony, w oknie dialogowym zostanie wyświetlony monit **o podanie wymaganych zasobów do skompilowania i debugowania z elementu " Razor PagesMovie". Dodać je?** Wybierz pozycję **Tak** .
 
   Katalog *. programu vscode* , zawierający *launch.json* i *tasks.jsdla* plików, jest dodawany do katalogu głównego projektu.
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-* Wybierz pozycję **plik** > **nowe rozwiązanie**.
+* Wybierz pozycję **plik** > **nowe rozwiązanie** .
 
 ![macOS nowe rozwiązanie](../first-mvc-app/start-mvc/_static/new_project_vsmac.png)
 
-* W Visual Studio dla komputerów Mac starszej niż wersja 8,6 Wybierz **.NET Core**pozycję  >  **App**  >  **aplikacja internetowa aplikacji sieci Web**platformy .NET Core  >  **Next**. W wersji 8,6 lub nowszej wybierz kolejno pozycje **Sieć Web i aplikacja konsoli**aplikacji  >  **App**  >  **sieci Web**  >  **Next**.
+* W Visual Studio dla komputerów Mac starszej niż wersja 8,6 Wybierz **.NET Core** pozycję  >  **App**  >  **aplikacja internetowa aplikacji sieci Web** platformy .NET Core  >  **Next** . W wersji 8,6 lub nowszej wybierz kolejno pozycje **Sieć Web i aplikacja konsoli** aplikacji  >  **App**  >  **sieci Web**  >  **Next** .
 
 * W oknie dialogowym **Konfigurowanie nowej aplikacji sieci Web** :
 
-  * Upewnij się, że **uwierzytelnianie** jest ustawione na wartość **bez uwierzytelniania**.
-  * Jeśli jest prezentowana opcja wyboru **platformy docelowej**, wybierz najnowszą wersję 2. x.
+  * Upewnij się, że **uwierzytelnianie** jest ustawione na wartość **bez uwierzytelniania** .
+  * Jeśli jest prezentowana opcja wyboru **platformy docelowej** , wybierz najnowszą wersję 2. x.
 
-  Wybierz pozycję **Dalej**.
+  Wybierz opcję **Dalej** .
 
-* Nazwij projekt ** Razor PagesMovie**, a następnie wybierz pozycję **Utwórz**.
+* Nazwij projekt **Razor PagesMovie** , a następnie wybierz pozycję **Utwórz** .
 
   ![nameproj](razor-pages-start/_static/RazorPagesMovie.png)
 

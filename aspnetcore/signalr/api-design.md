@@ -7,6 +7,7 @@ ms.author: anurse
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/api-design
-ms.openlocfilehash: 4a838c3a051476bd3d281e133d08b643656ae3b7
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 87665a7950edbc70b664230d2f078598e9dbc0aa
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632905"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059653"
 ---
 # <a name="no-locsignalr-api-design-considerations"></a>SignalR Zagadnienia dotyczące projektowania interfejsu API
 
@@ -33,7 +34,7 @@ Ten artykuł zawiera wskazówki dotyczące kompilowania SignalR interfejsów API
 
 ## <a name="use-custom-object-parameters-to-ensure-backwards-compatibility"></a>Używanie niestandardowych parametrów obiektów w celu zapewnienia zgodności z poprzednimi wersjami
 
-Dodawanie parametrów do SignalR metody centrum (na kliencie lub serwerze) jest istotną *zmianą*. Oznacza to, że starsi klienci/serwery będą otrzymywać błędy podczas próby wywołania metody bez odpowiedniej liczby parametrów. Jednak Dodawanie właściwości do niestandardowego parametru obiektu **nie** jest istotną zmianą. Może to służyć do projektowania zgodnych interfejsów API, które są odporne na zmiany na kliencie lub serwerze.
+Dodawanie parametrów do SignalR metody centrum (na kliencie lub serwerze) jest istotną *zmianą* . Oznacza to, że starsi klienci/serwery będą otrzymywać błędy podczas próby wywołania metody bez odpowiedniej liczby parametrów. Jednak Dodawanie właściwości do niestandardowego parametru obiektu **nie** jest istotną zmianą. Może to służyć do projektowania zgodnych interfejsów API, które są odporne na zmiany na kliencie lub serwerze.
 
 Rozważmy na przykład interfejs API po stronie serwera, podobny do następującego:
 
@@ -43,7 +44,7 @@ Klient JavaScript wywołuje tę metodę, wykonując `invoke` następujące czynn
 
 [!code-typescript[CallWithOneParameter](api-design/sample/Samples.ts?name=CallWithOneParameter)]
 
-Jeśli później dodasz drugi parametr do metody serwera, starsi klienci nie będą podawać tej wartości parametru. Na przykład:
+Jeśli później dodasz drugi parametr do metody serwera, starsi klienci nie będą podawać tej wartości parametru. Przykład:
 
 [!code-csharp[ParameterBasedNewVersion](api-design/sample/Samples.cs?name=ParameterBasedNewVersion)]
 

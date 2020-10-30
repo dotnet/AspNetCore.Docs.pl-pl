@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 4/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/memory
-ms.openlocfilehash: 7f1d20687f6dd588e125acf3815815c2bcf0cd04
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 6d2a89ec7c64728bc585ad235293f2277f9a66f7
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722686"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061486"
 ---
 # <a name="memory-management-and-garbage-collection-gc-in-aspnet-core"></a>Zarządzanie pamięcią i wyrzucanie elementów bezużytecznych (GC) w ASP.NET Core
 
@@ -137,8 +138,8 @@ Powyższy wykres przedstawia:
 
 Moduł wyrzucania elementów bezużytecznych platformy .NET ma dwa różne tryby:
 
-* **Stacja robocza GC**: zoptymalizowana dla pulpitu.
-* **Serwer GC**. Domyślna wartość GC dla aplikacji ASP.NET Core. Zoptymalizowany pod kątem serwera.
+* **Stacja robocza GC** : zoptymalizowana dla pulpitu.
+* **Serwer GC** . Domyślna wartość GC dla aplikacji ASP.NET Core. Zoptymalizowany pod kątem serwera.
 
 Tryb GC można jawnie ustawić w pliku projektu lub w *runtimeconfig.jsna* pliku opublikowanej aplikacji. Następujące znaczniki pokazują ustawienia `ServerGarbageCollection` w pliku projektu:
 
@@ -235,7 +236,7 @@ Ten sam wyciek może wystąpić w kodzie użytkownika, wykonując jedną z nast�
 
 ### <a name="large-objects-heap"></a>Sterta dużych obiektów
 
-Częste alokacje pamięci/wolne cykle mogą fragmentacji pamięci, szczególnie podczas przydzielania dużych fragmentów pamięci. Obiekty są przydzielono w ciągłych blokach pamięci. W celu ograniczenia fragmentacji, gdy pamięć podwolna zostanie zwolniona, próbuje ją zdefragmentować. Ten proces jest nazywany **kompaktowania**. Kompaktowanie obejmuje przeniesienie obiektów. Przeniesienie dużych obiektów nakłada spadek wydajności. Z tego powodu w wykazie globalnym tworzona jest specjalna strefa pamięci dla _dużych_ obiektów, nazywana [stertą dużego obiektu](/dotnet/standard/garbage-collection/large-object-heap) (LOH). Obiekty, które są większe niż 85 000 bajtów (około 83 KB) są następujące:
+Częste alokacje pamięci/wolne cykle mogą fragmentacji pamięci, szczególnie podczas przydzielania dużych fragmentów pamięci. Obiekty są przydzielono w ciągłych blokach pamięci. W celu ograniczenia fragmentacji, gdy pamięć podwolna zostanie zwolniona, próbuje ją zdefragmentować. Ten proces jest nazywany **kompaktowania** . Kompaktowanie obejmuje przeniesienie obiektów. Przeniesienie dużych obiektów nakłada spadek wydajności. Z tego powodu w wykazie globalnym tworzona jest specjalna strefa pamięci dla _dużych_ obiektów, nazywana [stertą dużego obiektu](/dotnet/standard/garbage-collection/large-object-heap) (LOH). Obiekty, które są większe niż 85 000 bajtów (około 83 KB) są następujące:
 
 * Umieszczone na LOH.
 * Nie kompaktuje.
@@ -271,7 +272,7 @@ Na poniższym wykresie przedstawiono profil pamięci wywołania `/api/loh/84975`
 
 ![Poprzedni wykres](memory/_static/loh1.png)
 
-Na poniższym wykresie przedstawiono profil pamięci wywołania `/api/loh/84976` punktu końcowego, przydzielanie *tylko jednego bajtu*:
+Na poniższym wykresie przedstawiono profil pamięci wywołania `/api/loh/84976` punktu końcowego, przydzielanie *tylko jednego bajtu* :
 
 ![Poprzedni wykres](memory/_static/loh2.png)
 
@@ -443,7 +444,7 @@ Zastosowanie tego samego obciążenia co wersja niebędąca w puli powoduje, że
 
 Główną różnicą jest przydzieloną liczbę bajtów, a jako wiele mniejszych kolekcji generacji 0.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Odzyskiwanie pamięci](/dotnet/standard/garbage-collection/)
 * [Zrozumienie różnych trybów GC przy użyciu wizualizatora współbieżności](https://blogs.msdn.microsoft.com/seteplia/2017/01/05/understanding-different-gc-modes-with-concurrency-visualizer/)

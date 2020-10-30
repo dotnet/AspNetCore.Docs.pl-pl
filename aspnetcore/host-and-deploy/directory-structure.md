@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/09/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/directory-structure
-ms.openlocfilehash: b557f1d1650b3deadcda679f300b1bc45a6202e7
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 918bc11e06b8f2bea5506d3b61f462e15998efa0
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88627380"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059861"
 ---
 # <a name="aspnet-core-directory-structure"></a>Struktura katalogów ASP.NET Core
 
@@ -44,7 +45,7 @@ Katalog *publikowania* zawiera elementy możliwe do wdrożenia aplikacji wytwarz
 
 &dagger;Wskazuje katalog
 
-Katalog *publikowania* reprezentuje *ścieżkę katalogu głównego zawartości*, nazywaną również *ścieżką bazową aplikacji*, wdrożenia. Dowolnych nazw do katalogu *publikacji* wdrożonej aplikacji na serwerze, jej lokalizacja służy jako ścieżka fizyczna serwera do hostowanej aplikacji.
+Katalog *publikowania* reprezentuje *ścieżkę katalogu głównego zawartości* , nazywaną również *ścieżką bazową aplikacji* , wdrożenia. Dowolnych nazw do katalogu *publikacji* wdrożonej aplikacji na serwerze, jej lokalizacja służy jako ścieżka fizyczna serwera do hostowanej aplikacji.
 
 Katalog *wwwroot* (jeśli istnieje) zawiera tylko zasoby statyczne.
 
@@ -74,7 +75,7 @@ Katalog *publikowania* zawiera elementy możliwe do wdrożenia aplikacji wytwarz
 
 &dagger;Wskazuje katalog
 
-Katalog *publikowania* reprezentuje *ścieżkę katalogu głównego zawartości*, nazywaną również *ścieżką bazową aplikacji*, wdrożenia. Dowolnych nazw do katalogu *publikacji* wdrożonej aplikacji na serwerze, jej lokalizacja służy jako ścieżka fizyczna serwera do hostowanej aplikacji.
+Katalog *publikowania* reprezentuje *ścieżkę katalogu głównego zawartości* , nazywaną również *ścieżką bazową aplikacji* , wdrożenia. Dowolnych nazw do katalogu *publikacji* wdrożonej aplikacji na serwerze, jej lokalizacja służy jako ścieżka fizyczna serwera do hostowanej aplikacji.
 
 Katalog *wwwroot* (jeśli istnieje) zawiera tylko zasoby statyczne.
 

@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/15/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/policies
-ms.openlocfilehash: 140969c80191c9549bc19507b9c4818b88fed0d1
-ms.sourcegitcommit: c026bf76a0e14a5ee68983519a63574c674e9ff7
+ms.openlocfilehash: 286dc3bcc66b86a2a6b7d3cb7b6052bf7b474aff
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/01/2020
-ms.locfileid: "91636806"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060212"
 ---
 # <a name="policy-based-authorization-in-aspnet-core"></a>Autoryzacja oparta na zasadach w ASP.NET Core
 
@@ -122,17 +123,17 @@ Użyj <xref:Microsoft.AspNetCore.Authorization.IAuthorizationService> lub `[Auth
 
 Jeśli używasz Razor stron, zobacz [stosowanie zasad do Razor stron](#apply-policies-to-razor-pages) w tym dokumencie.
 
-Zasady są stosowane do kontrolerów przy użyciu `[Authorize]` atrybutu z nazwą zasad. Na przykład:
+Zasady są stosowane do kontrolerów przy użyciu `[Authorize]` atrybutu z nazwą zasad. Przykład:
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Controllers/AlcoholPurchaseController.cs?name=snippet_AlcoholPurchaseControllerClass&highlight=4)]
 
 ## <a name="apply-policies-to-no-locrazor-pages"></a>Stosowanie zasad do Razor stron
 
-Zasady są stosowane do Razor stron przy użyciu `[Authorize]` atrybutu z nazwą zasad. Na przykład:
+Zasady są stosowane do Razor stron przy użyciu `[Authorize]` atrybutu z nazwą zasad. Przykład:
 
 [!code-csharp[](policies/samples/PoliciesAuthApp2/Pages/AlcoholPurchase.cshtml.cs?name=snippet_AlcoholPurchaseModelClass&highlight=4)]
 
-***Nie*** można zastosować zasad na Razor poziomie obsługi strony, muszą one być stosowane na stronie.
+Zasady **nie** mogą * być stosowane na Razor poziomie obsługi strony, muszą być stosowane do strony.
 
 Zasady mogą być stosowane do Razor stron przy użyciu [Konwencji autoryzacji](xref:security/authorization/razor-pages-authorization).
 
@@ -142,7 +143,7 @@ Wymaganie autoryzacji to zbiór parametrów danych, których zasady mogą użyć
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Services/Requirements/MinimumAgeRequirement.cs?name=snippet_MinimumAgeRequirementClass)]
 
-Jeśli zasady autoryzacji zawierają wiele wymagań autoryzacji, wszystkie wymagania muszą zostać spełnione, aby Ocena zasad powiodła się. Innymi słowy, wiele wymagań autoryzacji dodanych do pojedynczych zasad autoryzacji jest traktowanych **na zasadzie.**
+Jeśli zasady autoryzacji zawierają wiele wymagań autoryzacji, wszystkie wymagania muszą zostać spełnione, aby Ocena zasad powiodła się. Innymi słowy, wiele wymagań autoryzacji dodanych do pojedynczych zasad autoryzacji jest traktowanych na podstawie _ *i* *.
 
 > [!NOTE]
 > Wymagania nie muszą mieć danych ani właściwości.
@@ -177,7 +178,7 @@ Poprzedni kod przechodzi przez [PendingRequirements](/dotnet/api/microsoft.aspne
 
 ### <a name="handler-registration"></a>Rejestracja procedury obsługi
 
-Procedury obsługi są rejestrowane w kolekcji usług podczas konfiguracji. Na przykład:
+Procedury obsługi są rejestrowane w kolekcji usług podczas konfiguracji. Przykład:
 
 [!code-csharp[](policies/samples/3.0PoliciesAuthApp1/Startup.cs?range=31-32,39-40,42-45, 53-55, 58)]
 
@@ -202,7 +203,7 @@ Jeśli program obsługi wywołuje `context.Succeed` lub `context.Fail` , wszystk
 
 ## <a name="why-would-i-want-multiple-handlers-for-a-requirement"></a>Dlaczego chcesz mieć wiele programów obsługi wymagań?
 
-W przypadkach, w których Ocena ma być przeprowadzana na podstawie **lub** , należy zaimplementować wiele programów obsługi dla jednego wymagania. Na przykład firma Microsoft ma drzwi, które są otwierane tylko za pomocą kart kluczowych. Jeśli opuścisz kartę kluczową w domu, recepcjonista drukuje tymczasowy naklejkę i otwiera drzwiczki. W tym scenariuszu istnieje jedno wymaganie, *BuildingEntry*, ale wiele programów obsługi, każdy z nich bada pojedyncze wymaganie.
+W przypadkach, w których Ocena ma być przeprowadzana na podstawie **lub** , należy zaimplementować wiele programów obsługi dla jednego wymagania. Na przykład firma Microsoft ma drzwi, które są otwierane tylko za pomocą kart kluczowych. Jeśli opuścisz kartę kluczową w domu, recepcjonista drukuje tymczasowy naklejkę i otwiera drzwiczki. W tym scenariuszu istnieje jedno wymaganie, *BuildingEntry* , ale wiele programów obsługi, każdy z nich bada pojedyncze wymaganie.
 
 *BuildingEntryRequirement.cs*
 
@@ -230,7 +231,7 @@ Na przykład poprzedni można `BadgeEntryHandler` napisać ponownie w następuj�
 
 `HandleRequirementAsync`Metoda zaimplementowana w procedurze obsługi autoryzacji ma dwa parametry: `AuthorizationHandlerContext` a i `TRequirement` obsługujące. Platformy, takie jak MVC lub, SignalR mogą dodawać dowolne obiekty do `Resource` właściwości w `AuthorizationHandlerContext` celu przekazania dodatkowych informacji.
 
-W przypadku korzystania z routingu punktów końcowych Autoryzacja jest zwykle obsługiwana przez oprogramowanie pośredniczące autoryzacji. W tym przypadku `Resource` Właściwość jest wystąpieniem <xref:Microsoft.AspNetCore.Http.Endpoint> . Punkt końcowy może służyć do sondowania bazowego zasobu, z którym jest przeprowadzana Routing. Na przykład:
+W przypadku korzystania z routingu punktów końcowych Autoryzacja jest zwykle obsługiwana przez oprogramowanie pośredniczące autoryzacji. W tym przypadku `Resource` Właściwość jest wystąpieniem <xref:Microsoft.AspNetCore.Http.Endpoint> . Punkt końcowy może służyć do sondowania bazowego zasobu, z którym jest przeprowadzana Routing. Przykład:
 
 ```csharp
 if (context.Resource is Endpoint endpoint)
@@ -358,13 +359,13 @@ Użyj <xref:Microsoft.AspNetCore.Authorization.IAuthorizationService> lub `[Auth
 
 Jeśli używasz Razor stron, zobacz [stosowanie zasad do Razor stron](#apply-policies-to-razor-pages) w tym dokumencie.
 
-Zasady są stosowane do kontrolerów przy użyciu `[Authorize]` atrybutu z nazwą zasad. Na przykład:
+Zasady są stosowane do kontrolerów przy użyciu `[Authorize]` atrybutu z nazwą zasad. Przykład:
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Controllers/AlcoholPurchaseController.cs?name=snippet_AlcoholPurchaseControllerClass&highlight=4)]
 
 ## <a name="apply-policies-to-no-locrazor-pages"></a>Stosowanie zasad do Razor stron
 
-Zasady są stosowane do Razor stron przy użyciu `[Authorize]` atrybutu z nazwą zasad. Na przykład:
+Zasady są stosowane do Razor stron przy użyciu `[Authorize]` atrybutu z nazwą zasad. Przykład:
 
 [!code-csharp[](policies/samples/PoliciesAuthApp2/Pages/AlcoholPurchase.cshtml.cs?name=snippet_AlcoholPurchaseModelClass&highlight=4)]
 
@@ -411,7 +412,7 @@ Poprzedni kod przechodzi przez [PendingRequirements](/dotnet/api/microsoft.aspne
 
 ### <a name="handler-registration"></a>Rejestracja procedury obsługi
 
-Procedury obsługi są rejestrowane w kolekcji usług podczas konfiguracji. Na przykład:
+Procedury obsługi są rejestrowane w kolekcji usług podczas konfiguracji. Przykład:
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Startup.cs?range=32-33,48-53,61,62-63,66)]
 
@@ -436,7 +437,7 @@ Jeśli program obsługi wywołuje `context.Succeed` lub `context.Fail` , wszystk
 
 ## <a name="why-would-i-want-multiple-handlers-for-a-requirement"></a>Dlaczego chcesz mieć wiele programów obsługi wymagań?
 
-W przypadkach, w których Ocena ma być przeprowadzana na podstawie **lub** , należy zaimplementować wiele programów obsługi dla jednego wymagania. Na przykład firma Microsoft ma drzwi, które są otwierane tylko za pomocą kart kluczowych. Jeśli opuścisz kartę kluczową w domu, recepcjonista drukuje tymczasowy naklejkę i otwiera drzwiczki. W tym scenariuszu istnieje jedno wymaganie, *BuildingEntry*, ale wiele programów obsługi, każdy z nich bada pojedyncze wymaganie.
+W przypadkach, w których Ocena ma być przeprowadzana na podstawie **lub** , należy zaimplementować wiele programów obsługi dla jednego wymagania. Na przykład firma Microsoft ma drzwi, które są otwierane tylko za pomocą kart kluczowych. Jeśli opuścisz kartę kluczową w domu, recepcjonista drukuje tymczasowy naklejkę i otwiera drzwiczki. W tym scenariuszu istnieje jedno wymaganie, *BuildingEntry* , ale wiele programów obsługi, każdy z nich bada pojedyncze wymaganie.
 
 *BuildingEntryRequirement.cs*
 

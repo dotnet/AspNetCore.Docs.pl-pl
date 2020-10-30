@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/12/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/razor-pages-authorization
-ms.openlocfilehash: b17717e7b3cbaa64d4ff00661f15439728f161d3
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 69e1d639aeb55ae64cc54b1cda402ed6bcbb04ab
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634894"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060186"
 ---
 # <a name="no-locrazor-pages-authorization-conventions-in-aspnet-core"></a>Razor Konwencje autoryzacji stron w ASP.NET Core
 
@@ -74,7 +75,7 @@ Użyj <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExt
 options.Conventions.AuthorizeAreaPage("Identity", "/Manage/Accounts");
 ```
 
-Nazwa strony jest ścieżką pliku bez rozszerzenia względem katalogu głównego stron określonego obszaru. Na przykład nazwa strony dla *obszaru plik/ Identity /Pages/Manage/accounts.cshtml* to */Manage/accounts*.
+Nazwa strony jest ścieżką pliku bez rozszerzenia względem katalogu głównego stron określonego obszaru. Na przykład nazwa strony dla *obszaru plik/ Identity /Pages/Manage/accounts.cshtml* to */Manage/accounts* .
 
 Aby określić [zasady autoryzacji](xref:security/authorization/policies), użyj [przeciążenia AuthorizeAreaPage](xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeAreaPage*):
 
@@ -90,7 +91,7 @@ Użyj <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExt
 options.Conventions.AuthorizeAreaFolder("Identity", "/Manage");
 ```
 
-Ścieżka folderu to ścieżka folderu względem katalogu głównego stron określonego obszaru. Na przykład ścieżka folderu dla plików w obszarze *obszary/ Identity /Pages/Manage/* to */Manage*.
+Ścieżka folderu to ścieżka folderu względem katalogu głównego stron określonego obszaru. Na przykład ścieżka folderu dla plików w obszarze *obszary/ Identity /Pages/Manage/* to */Manage* .
 
 Aby określić [zasady autoryzacji](xref:security/authorization/policies), użyj [przeciążenia AuthorizeAreaFolder](xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeAreaFolder*):
 
@@ -186,7 +187,7 @@ Użyj <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExt
 options.Conventions.AuthorizeAreaPage("Identity", "/Manage/Accounts");
 ```
 
-Nazwa strony jest ścieżką pliku bez rozszerzenia względem katalogu głównego stron określonego obszaru. Na przykład nazwa strony dla *obszaru plik/ Identity /Pages/Manage/accounts.cshtml* to */Manage/accounts*.
+Nazwa strony jest ścieżką pliku bez rozszerzenia względem katalogu głównego stron określonego obszaru. Na przykład nazwa strony dla *obszaru plik/ Identity /Pages/Manage/accounts.cshtml* to */Manage/accounts* .
 
 Aby określić [zasady autoryzacji](xref:security/authorization/policies), użyj [przeciążenia AuthorizeAreaPage](xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeAreaPage*):
 
@@ -202,7 +203,7 @@ Użyj <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExt
 options.Conventions.AuthorizeAreaFolder("Identity", "/Manage");
 ```
 
-Ścieżka folderu to ścieżka folderu względem katalogu głównego stron określonego obszaru. Na przykład ścieżka folderu dla plików w obszarze *obszary/ Identity /Pages/Manage/* to */Manage*.
+Ścieżka folderu to ścieżka folderu względem katalogu głównego stron określonego obszaru. Na przykład ścieżka folderu dla plików w obszarze *obszary/ Identity /Pages/Manage/* to */Manage* .
 
 Aby określić [zasady autoryzacji](xref:security/authorization/policies), użyj [przeciążenia AuthorizeAreaFolder](xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeAreaFolder*):
 

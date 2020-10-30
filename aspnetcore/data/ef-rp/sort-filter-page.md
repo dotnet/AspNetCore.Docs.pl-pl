@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/sort-filter-page
-ms.openlocfilehash: e01704cb10c88f3e9442e74034f5e5d39787f300
-ms.sourcegitcommit: e519d95d17443abafba8f712ac168347b15c8b57
+ms.openlocfilehash: 51a1e2a90259898262ac655b7a0e8a55d766f0c7
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/02/2020
-ms.locfileid: "91653896"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061044"
 ---
 # <a name="part-3-no-locrazor-pages-with-ef-core-in-aspnet-core---sort-filter-paging"></a>Część 3, Razor strony z EF Core w ASP.NET Core — sortowanie, filtrowanie, stronicowanie
 
@@ -61,7 +62,7 @@ Gdy strona indeksu zostanie zażądana od linku **uczniów** , nie ma ciągu zap
 
 [!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml.cs?name=snippet_Ternary)]
 
-Kod używa [warunkowego operatora języka C#?:](/dotnet/csharp/language-reference/operators/conditional-operator). `?:`Operator jest operatorem Trzyelementowy, przyjmuje trzy operandy. Pierwszy wiersz określa, że gdy `sortOrder` ma wartość null lub jest pusty, `NameSort` jest ustawiony na `name_desc` . Jeśli `sortOrder` wartość ***nie*** jest równa null lub pusta, `NameSort` jest ustawiona na pusty ciąg.
+Kod używa [warunkowego operatora języka C#?:](/dotnet/csharp/language-reference/operators/conditional-operator). `?:`Operator jest operatorem Trzyelementowy, przyjmuje trzy operandy. Pierwszy wiersz określa, że gdy `sortOrder` ma wartość null lub jest pusty, `NameSort` jest ustawiony na `name_desc` . Jeśli `sortOrder` parametr ma wartość * *_not_* _ null lub `NameSort` jest pusty, jest ustawiony na pusty ciąg.
 
 Te dwie instrukcje umożliwiają stronie ustawienie hiperłączy nagłówka kolumny w następujący sposób:
 
@@ -84,7 +85,7 @@ Po `IQueryable` utworzeniu lub zmodyfikowaniu nie są wysyłane żadne zapytania
 
 ### <a name="add-column-heading-hyperlinks-to-the-student-index-page"></a>Dodawanie hiperłączy nagłówka kolumny do strony indeksu ucznia
 
-Zastąp kod w *Students/index. cshtml*poniższym kodem. Zmiany są wyróżnione.
+Zastąp kod w _Students/index.cshtml *, poniższym kodem. Zmiany są wyróżnione.
 
 [!code-cshtml[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml?highlight=5,8,17-19,22,25-27,33)]
 
@@ -150,9 +151,9 @@ Przetestuj aplikację:
 
 * Wybierz kartę **studenci** i wprowadź ciąg wyszukiwania. Jeśli używasz oprogramowania SQLite, filtr nie uwzględnia wielkości liter tylko w przypadku zaimplementowania `ToUpper` wcześniej pokazanego kodu.
 
-* Wybierz pozycję **Wyszukaj**.
+* Wybierz pozycję **Wyszukaj** .
 
-Zwróć uwagę, że adres URL zawiera ciąg wyszukiwania. Na przykład:
+Zwróć uwagę, że adres URL zawiera ciąg wyszukiwania. Przykład:
 
 ```browser-address-bar
 https://localhost:5001/Students?SearchString=an
@@ -340,7 +341,7 @@ Metoda używa LINQ to Entities, aby określić kolumnę, według której ma zost
 
 ### <a name="add-column-heading-hyperlinks-to-the-student-index-page"></a>Dodawanie hiperłączy nagłówka kolumny do strony indeksu ucznia
 
-Zastąp kod w *Students/index. cshtml*następującym wyróżnionym kodem:
+Zastąp kod w *Students/index. cshtml* następującym wyróżnionym kodem:
 
 [!code-cshtml[](intro/samples/cu21/Pages/Students/Index2.cshtml?highlight=17-19,25-27)]
 
@@ -352,14 +353,14 @@ Powyższy kod ma następujące działanie:
 Aby sprawdzić, czy sortowanie działa:
 
 * Uruchom aplikację i wybierz kartę **studenci** .
-* Kliknij pozycję **nazwisko**.
-* Kliknij pozycję **Data rejestracji**.
+* Kliknij pozycję **nazwisko** .
+* Kliknij pozycję **Data rejestracji** .
 
 Aby lepiej zrozumieć kod:
 
-* W polu *studenci/index. cshtml. cs*Ustaw punkt przerwania na `switch (sortOrder)` .
+* W polu *studenci/index. cshtml. cs* Ustaw punkt przerwania na `switch (sortOrder)` .
 * Dodaj czujkę dla `NameSort` i `DateSort` .
-* W obszarze *uczniowie/index. cshtml*Ustaw punkt przerwania na `@Html.DisplayNameFor(model => model.Student[0].LastName)` .
+* W obszarze *uczniowie/index. cshtml* Ustaw punkt przerwania na `@Html.DisplayNameFor(model => model.Student[0].LastName)` .
 
 Przechodzenie przez debuger.
 
@@ -396,7 +397,7 @@ Istnieje spadek wydajności dotyczący wywoływania `ToUpper` . `ToUpper`Kod dod
 
 ### <a name="add-a-search-box-to-the-student-index-page"></a>Dodawanie pola wyszukiwania do strony indeksu uczniów
 
-W obszarze *Pages/Students/index. cshtml*Dodaj następujący wyróżniony kod w celu utworzenia przycisku **wyszukiwania** i elementów Chrome.
+W obszarze *Pages/Students/index. cshtml* Dodaj następujący wyróżniony kod w celu utworzenia przycisku **wyszukiwania** i elementów Chrome.
 
 [!code-cshtml[](intro/samples/cu21/Pages/Students/Index3.cshtml?highlight=14-23&range=1-25)]
 
@@ -405,7 +406,7 @@ Poprzedni kod używa `<form>` [pomocnika tagów](xref:mvc/views/tag-helpers/intr
 Przetestuj aplikację:
 
 * Wybierz kartę **studenci** i wprowadź ciąg wyszukiwania.
-* Wybierz pozycję **Wyszukaj**.
+* Wybierz pozycję **Wyszukaj** .
 
 Zwróć uwagę, że adres URL zawiera ciąg wyszukiwania.
 
@@ -433,7 +434,7 @@ W folderze projektu Utwórz `PaginatedList.cs` przy użyciu następującego kodu
 
 ## <a name="add-paging-functionality-to-the-index-method"></a>Dodawanie funkcji stronicowania do metody index
 
-W obszarze *uczniowie/index. cshtml. cs*zaktualizuj typ `Student` z `IList<Student>` do `PaginatedList<Student>` :
+W obszarze *uczniowie/index. cshtml. cs* zaktualizuj typ `Student` z `IList<Student>` do `PaginatedList<Student>` :
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Index.cshtml.cs?name=snippet_SortFilterPageType)]
 
@@ -474,7 +475,7 @@ Dwa znaki zapytania `PaginatedList.CreateAsync` reprezentują [operator łączen
 
 ## <a name="add-paging-links-to-the-student-no-locrazor-page"></a>Dodawanie linków stronicowania do strony ucznia Razor
 
-Zaktualizuj znaczniki w *uczniów/index. cshtml*. Zmiany są wyróżnione:
+Zaktualizuj znaczniki w *uczniów/index. cshtml* . Zmiany są wyróżnione:
 
 [!code-cshtml[](intro/samples/cu21/Pages/Students/Index.cshtml?highlight=28-31,37-40,68-999)]
 
@@ -495,9 +496,9 @@ Uruchom aplikację i przejdź do strony uczniów.
 
 Aby lepiej zrozumieć kod:
 
-* W polu *studenci/index. cshtml. cs*Ustaw punkt przerwania na `switch (sortOrder)` .
+* W polu *studenci/index. cshtml. cs* Ustaw punkt przerwania na `switch (sortOrder)` .
 * Dodaj czujkę dla `NameSort` , `DateSort` , `CurrentSort` , i `Model.Student.PageIndex` .
-* W obszarze *uczniowie/index. cshtml*Ustaw punkt przerwania na `@Html.DisplayNameFor(model => model.Student[0].LastName)` .
+* W obszarze *uczniowie/index. cshtml* Ustaw punkt przerwania na `@Html.DisplayNameFor(model => model.Student[0].LastName)` .
 
 Przechodzenie przez debuger.
 

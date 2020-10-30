@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 7/22/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/testing
-ms.openlocfilehash: d6c70d828d6c2f62f9e7b849a299df3077f2da32
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 962c1cf0be0f80ecd6c3adda7d22db7f16519a2a
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635232"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060355"
 ---
 # <a name="unit-test-controller-logic-in-aspnet-core"></a>Logika kontrolera testów jednostkowych w ASP.NET Core
 
@@ -35,7 +36,7 @@ Przez [Steve Smith](https://ardalis.com/)
 
 ## <a name="unit-testing-controllers"></a>Kontrolery testów jednostkowych
 
-Skonfiguruj testy jednostkowe akcji kontrolera, aby skoncentrować się na zachowaniu kontrolera. Test jednostkowy kontrolera pozwala uniknąć scenariuszy, takich jak [filtry](xref:mvc/controllers/filters), [Routing](xref:fundamentals/routing)i [powiązania modelu](xref:mvc/models/model-binding). Testy, które obejmują interakcje między składnikami, które zbiorczo odpowiadają na żądanie, są obsługiwane przez *testy integracji*. Aby uzyskać więcej informacji na temat testów integracji, zobacz <xref:test/integration-tests> .
+Skonfiguruj testy jednostkowe akcji kontrolera, aby skoncentrować się na zachowaniu kontrolera. Test jednostkowy kontrolera pozwala uniknąć scenariuszy, takich jak [filtry](xref:mvc/controllers/filters), [Routing](xref:fundamentals/routing)i [powiązania modelu](xref:mvc/models/model-binding). Testy, które obejmują interakcje między składnikami, które zbiorczo odpowiadają na żądanie, są obsługiwane przez *testy integracji* . Aby uzyskać więcej informacji na temat testów integracji, zobacz <xref:test/integration-tests> .
 
 Jeśli piszesz filtry niestandardowe i trasy, przetestuj je jednostkowo, a nie jako część testów dla konkretnej akcji kontrolera.
 
@@ -89,7 +90,7 @@ Wywołane wywołania, które nie są wywoływane, są zwykle ignorowane, ale wyw
 > [!NOTE]
 > Biblioteka MOQ używana w tym przykładzie umożliwia mieszanie możliwej do zweryfikowania lub "ścisłych", imitacje z niemożliwymi do zweryfikowania makietami (nazywanymi również "luźnymi" fragmentami lub wycinkami). Dowiedz się więcej o [dostosowywaniu zachowań makiety za pomocą MOQ](https://github.com/Moq/moq4/wiki/Quickstart#customizing-mock-behavior).
 
-[SessionController](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/controllers/testing/samples/3.x/TestingControllersSample/src/TestingControllersSample/Controllers/SessionController.cs) w aplikacji przykładowej wyświetla informacje powiązane z określoną sesją burzy mózgów. Kontroler zawiera logikę do działania z nieprawidłowymi `id` wartościami (Istnieją dwa `return` scenariusze w poniższym przykładzie, aby pokryć te scenariusze). Instrukcja Final `return` zwraca nowy `StormSessionViewModel` Widok (*controllers/SessionController. cs*):
+[SessionController](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/controllers/testing/samples/3.x/TestingControllersSample/src/TestingControllersSample/Controllers/SessionController.cs) w aplikacji przykładowej wyświetla informacje powiązane z określoną sesją burzy mózgów. Kontroler zawiera logikę do działania z nieprawidłowymi `id` wartościami (Istnieją dwa `return` scenariusze w poniższym przykładzie, aby pokryć te scenariusze). Instrukcja Final `return` zwraca nowy `StormSessionViewModel` Widok ( *controllers/SessionController. cs* ):
 
 [!code-csharp[](testing/samples/3.x/TestingControllersSample/src/TestingControllersSample/Controllers/SessionController.cs?name=snippet_SessionController&highlight=12-16,18-22,31)]
 
@@ -202,7 +203,7 @@ W przypadku prawidłowej sesji `id` test końcowy potwierdza, że:
 
 [Testy jednostkowe](/dotnet/articles/core/testing/unit-testing-with-dotnet-test) obejmują testowanie części aplikacji w izolacji z jej infrastruktury i zależności. Podczas logiki kontrolera testów jednostkowych tylko zawartość pojedynczej akcji jest testowana, a nie zachowanie jej zależności lub samego środowiska.
 
-Skonfiguruj testy jednostkowe akcji kontrolera, aby skoncentrować się na zachowaniu kontrolera. Test jednostkowy kontrolera pozwala uniknąć scenariuszy, takich jak [filtry](xref:mvc/controllers/filters), [Routing](xref:fundamentals/routing)i [powiązania modelu](xref:mvc/models/model-binding). Testy, które obejmują interakcje między składnikami, które zbiorczo odpowiadają na żądanie, są obsługiwane przez *testy integracji*. Aby uzyskać więcej informacji na temat testów integracji, zobacz <xref:test/integration-tests> .
+Skonfiguruj testy jednostkowe akcji kontrolera, aby skoncentrować się na zachowaniu kontrolera. Test jednostkowy kontrolera pozwala uniknąć scenariuszy, takich jak [filtry](xref:mvc/controllers/filters), [Routing](xref:fundamentals/routing)i [powiązania modelu](xref:mvc/models/model-binding). Testy, które obejmują interakcje między składnikami, które zbiorczo odpowiadają na żądanie, są obsługiwane przez *testy integracji* . Aby uzyskać więcej informacji na temat testów integracji, zobacz <xref:test/integration-tests> .
 
 Jeśli piszesz filtry niestandardowe i trasy, przetestuj je jednostkowo, a nie jako część testów dla konkretnej akcji kontrolera.
 
@@ -252,7 +253,7 @@ Wywołane wywołania, które nie są wywoływane, są zwykle ignorowane, ale wyw
 > [!NOTE]
 > Biblioteka MOQ używana w tym przykładzie umożliwia mieszanie możliwej do zweryfikowania lub "ścisłych", imitacje z niemożliwymi do zweryfikowania makietami (nazywanymi również "luźnymi" fragmentami lub wycinkami). Dowiedz się więcej o [dostosowywaniu zachowań makiety za pomocą MOQ](https://github.com/Moq/moq4/wiki/Quickstart#customizing-mock-behavior).
 
-[SessionController](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/controllers/testing/samples/2.x/TestingControllersSample/src/TestingControllersSample/Controllers/SessionController.cs) w aplikacji przykładowej wyświetla informacje powiązane z określoną sesją burzy mózgów. Kontroler zawiera logikę do działania z nieprawidłowymi `id` wartościami (Istnieją dwa `return` scenariusze w poniższym przykładzie, aby pokryć te scenariusze). Instrukcja Final `return` zwraca nowy `StormSessionViewModel` Widok (*controllers/SessionController. cs*):
+[SessionController](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/controllers/testing/samples/2.x/TestingControllersSample/src/TestingControllersSample/Controllers/SessionController.cs) w aplikacji przykładowej wyświetla informacje powiązane z określoną sesją burzy mózgów. Kontroler zawiera logikę do działania z nieprawidłowymi `id` wartościami (Istnieją dwa `return` scenariusze w poniższym przykładzie, aby pokryć te scenariusze). Instrukcja Final `return` zwraca nowy `StormSessionViewModel` Widok ( *controllers/SessionController. cs* ):
 
 [!code-csharp[](testing/samples/2.x/TestingControllersSample/src/TestingControllersSample/Controllers/SessionController.cs?name=snippet_SessionController&highlight=12-16,18-22,31)]
 
@@ -359,6 +360,6 @@ W przypadku prawidłowej sesji `id` test końcowy potwierdza, że:
 
 * <xref:test/integration-tests>
 * [Tworzenie i uruchamianie testów jednostkowych za pomocą programu Visual Studio](/visualstudio/test/unit-test-your-code)
-* [AspNetCore. MVC-Fluent — Biblioteka testów dla ASP.NET Core MVC](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc): Biblioteka testów jednostkowych z jednoznacznie określonymi typami, dostarczająca interfejs Fluent do testowania aplikacji MVC i Web API. (*Niekonserwowane lub obsługiwane przez firmę Microsoft).*
-* [JustMockLite](https://github.com/telerik/JustMockLite): Struktura dla deweloperów platformy .NET. (*Niekonserwowane lub obsługiwane przez firmę Microsoft).*
+* [AspNetCore. MVC-Fluent — Biblioteka testów dla ASP.NET Core MVC](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc): Biblioteka testów jednostkowych z jednoznacznie określonymi typami, dostarczająca interfejs Fluent do testowania aplikacji MVC i Web API. ( *Niekonserwowane lub obsługiwane przez firmę Microsoft).*
+* [JustMockLite](https://github.com/telerik/JustMockLite): Struktura dla deweloperów platformy .NET. ( *Niekonserwowane lub obsługiwane przez firmę Microsoft).*
 

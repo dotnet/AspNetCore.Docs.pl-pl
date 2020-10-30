@@ -5,6 +5,7 @@ description: W tym samouczku pokazano, jak zainstalować i używać narzędzia o
 ms.author: riande
 ms.date: 05/31/2018
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/dotnet-watch
-ms.openlocfilehash: 3569e9440b8e431ec0e5357e548af2e3783481ac
-ms.sourcegitcommit: 422e02bad384775bfe19a90910737340ad106c5b
+ms.openlocfilehash: 27420fe00ba6375e15b67fb359be06df055eff1f
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/15/2020
-ms.locfileid: "90083456"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060043"
 ---
 # <a name="develop-aspnet-core-apps-using-a-file-watcher"></a>Opracowywanie aplikacji ASP.NET Core przy użyciu obserwatora plików
 
@@ -80,7 +81,7 @@ Przejdź do interfejsu API produktu ( `http://localhost:<port number>/api/math/p
 
 ## <a name="run-net-core-cli-commands-using-dotnet-watch"></a>Uruchamianie poleceń interfejs wiersza polecenia platformy .NET Core przy użyciu `dotnet watch`
 
-Każde [polecenie interfejs wiersza polecenia platformy .NET Core](/dotnet/core/tools#cli-commands) można uruchomić za pomocą polecenia `dotnet watch` . Na przykład:
+Każde [polecenie interfejs wiersza polecenia platformy .NET Core](/dotnet/core/tools#cli-commands) można uruchomić za pomocą polecenia `dotnet watch` . Przykład:
 
 | Polecenie | Polecenie z zegarkiem |
 | ---- | ----- |
@@ -200,7 +201,7 @@ Jeśli celem jest oglądanie obu projektów, Utwórz niestandardowy plik projekt
 </Project>
 ```
 
-Aby rozpocząć obserwowanie plików w obu projektach, przejdź do folderu *testowego* . Wykonaj następujące polecenie:
+Aby rozpocząć obserwowanie plików w obu projektach, przejdź do folderu *testowego* . Uruchom następujące polecenie:
 
 ```dotnetcli
 dotnet watch msbuild /t:Test
@@ -216,7 +217,7 @@ Niektóre opcje konfiguracji mogą być przesyłane `dotnet watch` przez zmienne
 | ------------- | ------------- |
 | `DOTNET_USE_POLLING_FILE_WATCHER`                | W przypadku ustawienia wartości "1" lub "true" program `dotnet watch` używa obserwatora pliku sondowania zamiast CoreFx `FileSystemWatcher` . Używane podczas oglądania plików w udziałach sieciowych lub zainstalowanych woluminów platformy Docker.                       |
 | `DOTNET_WATCH_SUPPRESS_MSBUILD_INCREMENTALISM`   | Domyślnie program `dotnet watch` optymalizuje kompilację, unikając niektórych operacji, takich jak uruchamianie przywracania lub ponowne ocenianie zestawu obserwowanych plików podczas każdej zmiany pliku. W przypadku ustawienia wartości "1" lub "true" te optymalizacje są wyłączone. |
-| `DOTNET_WATCH_SUPPRESS_LAUNCH_BROWSER`   | `dotnet watch run` próbuje uruchomić przeglądarki dla aplikacji sieci Web `launchBrowser` skonfigurowanych w *launchSettings.jsna*. W przypadku ustawienia wartości "1" lub "prawda" to zachowanie jest pomijane. |
+| `DOTNET_WATCH_SUPPRESS_LAUNCH_BROWSER`   | `dotnet watch run` próbuje uruchomić przeglądarki dla aplikacji sieci Web `launchBrowser` skonfigurowanych w *launchSettings.jsna* . W przypadku ustawienia wartości "1" lub "prawda" to zachowanie jest pomijane. |
 | `DOTNET_WATCH_SUPPRESS_BROWSER_REFRESH`   | `dotnet watch run` próbuje odświeżyć przeglądarki po wykryciu zmian plików. W przypadku ustawienia wartości "1" lub "prawda" to zachowanie jest pomijane. To zachowanie jest również pomijane, jeśli `DOTNET_WATCH_SUPPRESS_LAUNCH_BROWSER` jest ustawiona. |
 
 ## <a name="dotnet-watch-in-github"></a>`dotnet-watch` w witrynie GitHub

@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/17/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/mfa
-ms.openlocfilehash: 76a11aa7b89b3ce60ed11bd7553a7e5898f661f4
-ms.sourcegitcommit: d1a897ebd89daa05170ac448e4831d327f6b21a8
+ms.openlocfilehash: 873f7d113df84c931ad7fbf2c72aa292e4e87c48
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/01/2020
-ms.locfileid: "91606800"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060394"
 ---
 # <a name="multi-factor-authentication-in-aspnet-core"></a>Uwierzytelnianie wieloskładnikowe w ASP.NET Core
 
@@ -151,7 +152,7 @@ namespace IdentityStandaloneMfa
 }
 ```
 
-Ponieważ Identity Konfiguracja usługi została zmieniona w `Startup` klasie, należy zaktualizować układy programu Identity . Szkieletuje Identity strony w aplikacji. Zdefiniuj układ w pliku * Identity /Account/Manage/_Layout. cshtml* .
+Ponieważ Identity Konfiguracja usługi została zmieniona w `Startup` klasie, należy zaktualizować układy programu Identity . Szkieletuje Identity strony w aplikacji. Zdefiniuj układ w pliku *Identity /Account/Manage/_Layout. cshtml* .
 
 ```cshtml
 @{
@@ -332,7 +333,7 @@ You can enable MFA to login here:
 
 W `Login` metodzie `IIdentityServerInteractionService` Implementacja interfejsu `_interaction` jest używana w celu uzyskania dostępu do parametrów żądania OpenID Connect Connect. `acr_values`Do parametru uzyskuje się dostęp przy użyciu `AcrValues` właściwości. Gdy klient wysłał ten program za pomocą `mfa` zestawu, można to sprawdzić.
 
-Jeśli wymagana jest usługa MFA, a użytkownik w programie ASP.NET Core Identity ma włączoną usługę MFA, logowanie jest kontynuowane. Jeśli użytkownik nie ma włączonej usługi MFA, użytkownik zostanie przekierowany do widoku niestandardowego *ErrorEnable2FA. cshtml*. Następnie ASP.NET Core Identity podpisuje użytkownika w programie.
+Jeśli wymagana jest usługa MFA, a użytkownik w programie ASP.NET Core Identity ma włączoną usługę MFA, logowanie jest kontynuowane. Jeśli użytkownik nie ma włączonej usługi MFA, użytkownik zostanie przekierowany do widoku niestandardowego *ErrorEnable2FA. cshtml* . Następnie ASP.NET Core Identity podpisuje użytkownika w programie.
 
 ```csharp
 //

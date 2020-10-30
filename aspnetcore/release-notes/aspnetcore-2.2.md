@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-2.2
-ms.openlocfilehash: 085a26d508af5bdce506ab923a3256046b3894ab
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 67581904c686b0f8b6736b751c8e3f1545f6a286
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722491"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059705"
 ---
 # <a name="whats-new-in-aspnet-core-22"></a>Co nowego w ASP.NET Core 2,2
 
@@ -73,7 +74,7 @@ HTTP/2 to główna wersja protokołu HTTP. Istotne funkcje protokołu HTTP/2 obe
 
 Chociaż protokół HTTP/2 zachowuje semantykę protokołu HTTP (na przykład nagłówki HTTP i metody), jest to istotna zmiana z protokołu HTTP/1. x na temat tego, jak dane są frameowe i wysyłane między klientem a serwerem.
 
-W związku z tą zmianą w ramkach serwery i klienci muszą negocjować używaną wersję protokołu. Negocjowanie protokołu warstwy aplikacji (CLIENTHELLO ALPN) to rozszerzenie TLS, które umożliwia serwerowi i klientowi negocjowanie wersji protokołu używanej w ramach uzgadniania TLS. Chociaż istnieje możliwość uzyskania wcześniejszej wiedzy między serwerem a klientem programu, wszystkie główne przeglądarki obsługują CLIENTHELLO ALPN jako jedyny sposób nawiązywania połączenia HTTP/2.
+W związku z tą zmianą w ramkach serwery i klienci muszą negocjować używaną wersję protokołu. Negocjowanie protokołu Application-Layer (CLIENTHELLO ALPN) to rozszerzenie TLS, które umożliwia serwerowi i klientowi negocjowanie wersji protokołu używanej w ramach uzgadniania TLS. Chociaż istnieje możliwość uzyskania wcześniejszej wiedzy między serwerem a klientem programu, wszystkie główne przeglądarki obsługują CLIENTHELLO ALPN jako jedyny sposób nawiązywania połączenia HTTP/2.
 
 Aby uzyskać więcej informacji, zobacz [Obsługa protokołu HTTP/2](xref:fundamentals/servers/index?view=aspnetcore-2.2#http2-support).
 
@@ -86,7 +87,7 @@ We wcześniejszych wersjach ASP.NET Core opcje Kestrel są konfigurowane przez w
 
 ## <a name="iis-in-process-hosting"></a>Hosting w procesie usług IIS
 
-W starszych wersjach ASP.NET Core usługi IIS pełnią funkcję zwrotnego serwera proxy. W 2,2 moduł ASP.NET Core może wykonać rozruch CoreCLR i hostowanie aplikacji w procesie roboczym usług IIS (*w3wp.exe*). Hosting w procesie zapewnia wydajność i zyski z diagnostyki podczas pracy z usługami IIS.
+W starszych wersjach ASP.NET Core usługi IIS pełnią funkcję zwrotnego serwera proxy. W 2,2 moduł ASP.NET Core może wykonać rozruch CoreCLR i hostowanie aplikacji w procesie roboczym usług IIS ( *w3wp.exe* ). Hosting w procesie zapewnia wydajność i zyski z diagnostyki podczas pracy z usługami IIS.
 
 Aby uzyskać więcej informacji, zobacz [hosting w procesie dla usług IIS](xref:host-and-deploy/aspnet-core-module?view=aspnetcore-2.2#in-process-hosting-model).
 

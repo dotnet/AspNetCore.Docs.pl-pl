@@ -5,6 +5,7 @@ description: Odkryj, jak ASP.NET Core kontrolery MVC żądają swoich zależnoś
 ms.author: riande
 ms.date: 02/24/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/dependency-injection
-ms.openlocfilehash: 74c43e4f01e5b0d6923bf06f8859341c49088ef6
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 1282cd984584be423fba755e64e5d2f1afd2af89
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635245"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060615"
 ---
 # <a name="dependency-injection-into-controllers-in-aspnet-core"></a>Wstrzykiwanie zależności do kontrolerów w ASP.NET Core
 
@@ -65,7 +66,7 @@ Uruchom aplikację i zostanie wyświetlony komunikat z uwzględnieniem czasu.
 
 Dostęp do ustawień aplikacji lub konfiguracji z poziomu kontrolera jest typowym wzorcem. *Wzorzec opcji* opisany w <xref:fundamentals/configuration/options> jest preferowanym podejściem do zarządzania ustawieniami. Ogólnie rzecz biorąc nie należy wprowadzać bezpośrednio <xref:Microsoft.Extensions.Configuration.IConfiguration> do kontrolera.
 
-Utwórz klasę, która reprezentuje opcje. Na przykład:
+Utwórz klasę, która reprezentuje opcje. Przykład:
 
 [!code-csharp[](dependency-injection/3.1sample/ControllerDI/Models/SampleWebSettings.cs?name=snippet)]
 
@@ -129,7 +130,7 @@ Uruchom aplikację i zostanie wyświetlony komunikat z uwzględnieniem czasu.
 
 Dostęp do ustawień aplikacji lub konfiguracji z poziomu kontrolera jest typowym wzorcem. *Wzorzec opcji* opisany w <xref:fundamentals/configuration/options> jest preferowanym podejściem do zarządzania ustawieniami. Ogólnie rzecz biorąc nie należy wprowadzać bezpośrednio <xref:Microsoft.Extensions.Configuration.IConfiguration> do kontrolera.
 
-Utwórz klasę, która reprezentuje opcje. Na przykład:
+Utwórz klasę, która reprezentuje opcje. Przykład:
 
 [!code-csharp[](dependency-injection/sample/ControllerDI/Models/SampleWebSettings.cs?name=snippet)]
 

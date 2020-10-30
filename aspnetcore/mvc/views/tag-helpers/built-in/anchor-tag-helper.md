@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 10/13/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/anchor-tag-helper
-ms.openlocfilehash: fcb58e2e0bfc6598edeb8c7f79986c3faf84e316
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: d39db59b0fc273fe4193a4864f302ecd3f4ad348
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633932"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060914"
 ---
 # <a name="anchor-tag-helper-in-aspnet-core"></a>Pomocnik tagu kotwicy w ASP.NET Core
 
@@ -52,7 +53,7 @@ Wygenerowany kod HTML:
 <a href="/Speaker">All Speakers</a>
 ```
 
-Jeśli `asp-controller` atrybut jest określony i `asp-action` nie jest, wartość domyślna `asp-action` to akcja kontrolera skojarzona z aktualnie wykonywanym widokiem. Jeśli `asp-action` zostanie pominięty z poprzedniego znacznika, a pomocnik tagu kotwicy jest używany w widoku indeksu *HomeController*( *Index* */Home*), wygenerowany kod HTML jest:
+Jeśli `asp-controller` atrybut jest określony i `asp-action` nie jest, wartość domyślna `asp-action` to akcja kontrolera skojarzona z aktualnie wykonywanym widokiem. Jeśli `asp-action` zostanie pominięty z poprzedniego znacznika, a pomocnik tagu kotwicy jest używany w widoku indeksu *HomeController* ( *Index* */Home* ), wygenerowany kod HTML jest:
 
 ```html
 <a href="/Home">All Speakers</a>
@@ -82,7 +83,7 @@ Rozważmy następującą akcję kontrolera:
 
 [!code-csharp[](samples/TagHelpersBuiltIn/Controllers/BuiltInTagController.cs?name=snippet_AnchorTagHelperAction)]
 
-Przy użyciu domyślnego szablonu trasy zdefiniowanego w *Startup.Configuruj*:
+Przy użyciu domyślnego szablonu trasy zdefiniowanego w *Startup.Configuruj* :
 
 [!code-csharp[](samples/TagHelpersBuiltIn/Startup.cs?name=snippet_UseMvc&highlight=8-10)]
 
@@ -138,7 +139,7 @@ W poniższym znaczniku `asp-route` atrybut odwołuje się do nazwanej trasy:
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspRoute)]
 
-Pomocnik tagu kotwicy generuje trasę bezpośrednio do tej akcji kontrolera przy użyciu adresu URL */Speaker/Evaluations*. Wygenerowany kod HTML:
+Pomocnik tagu kotwicy generuje trasę bezpośrednio do tej akcji kontrolera przy użyciu adresu URL */Speaker/Evaluations* . Wygenerowany kod HTML:
 
 ```html
 <a href="/Speaker/Evaluations">Speaker Evaluations</a>
@@ -229,7 +230,7 @@ Weź pod uwagę następującą hierarchię katalogów:
       * **Kontrolery**
         * *HomeController.cs*
       * **Widoki**
-        * **Strona główna**
+        * **Ekran główny**
           * *AboutBlog. cshtml*
           * *Index. cshtml*
         * *\_ViewStart. cshtml*
@@ -246,13 +247,13 @@ Wygenerowany kod HTML:
 ```
 
 > [!TIP]
-> Aby obsługiwać obszary w aplikacji MVC, szablon trasy musi zawierać odwołanie do obszaru, jeśli istnieje. Ten szablon jest reprezentowany przez drugi parametr `routes.MapRoute` wywołania metody w *Startup.Configuruj*:
+> Aby obsługiwać obszary w aplikacji MVC, szablon trasy musi zawierać odwołanie do obszaru, jeśli istnieje. Ten szablon jest reprezentowany przez drugi parametr `routes.MapRoute` wywołania metody w *Startup.Configuruj* :
 >
 > [!code-csharp[](samples/TagHelpersBuiltIn/Startup.cs?name=snippet_UseMvc&highlight=5)]
 
 ### <a name="asp-protocol"></a>ASP — protokół
 
-Atrybut [ASP-Protocol](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Protocol*) służy do określania protokołu (takiego jak `https` ) w adresie URL. Na przykład:
+Atrybut [ASP-Protocol](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Protocol*) służy do określania protokołu (takiego jak `https` ) w adresie URL. Przykład:
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspProtocol)]
 
@@ -266,7 +267,7 @@ Nazwa hosta w przykładzie jest localhost. Pomocnik tagu kotwicy używa domeny p
 
 ### <a name="asp-host"></a>ASP — Host
 
-Atrybut [ASP-Host](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Host*) służy do określania nazwy hosta w adresie URL. Na przykład:
+Atrybut [ASP-Host](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Host*) służy do określania nazwy hosta w adresie URL. Przykład:
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspHost)]
 

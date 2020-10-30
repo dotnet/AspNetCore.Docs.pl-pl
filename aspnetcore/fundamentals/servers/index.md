@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/07/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/index
-ms.openlocfilehash: 8dde2d663f4eac94173038eaf7df6b95d67ba62e
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: a27fdd70963830d22b3501972d6150dde5e1ea54
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635037"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059510"
 ---
 # <a name="web-server-implementations-in-aspnet-core"></a>Implementacje serwera sieci Web w ASP.NET Core
 
@@ -41,7 +42,7 @@ Użyj Kestrel:
 
   ![Kestrel komunikuje się bezpośrednio z Internetem bez serwera proxy zwrotnego](kestrel/_static/kestrel-to-internet2.png)
 
-* *Serwer proxy zwrotnego*, taki jak [Internet Information Services (IIS)](https://www.iis.net/), [Nginx](https://nginx.org)lub [Apache](https://httpd.apache.org/). Odwrotny serwer proxy odbiera żądania HTTP z Internetu i przekazuje je do usługi Kestrel.
+* *Serwer proxy zwrotnego* , taki jak [Internet Information Services (IIS)](https://www.iis.net/), [Nginx](https://nginx.org)lub [Apache](https://httpd.apache.org/). Odwrotny serwer proxy odbiera żądania HTTP z Internetu i przekazuje je do usługi Kestrel.
 
   ![Kestrel komunikuje się pośrednio z Internetem za pomocą odwrotnego serwera proxy, takiego jak IIS, Nginx lub Apache](kestrel/_static/kestrel-to-internet.png)
 
@@ -98,7 +99,7 @@ ASP.NET Core dostarcza następujące elementy:
 * [Serwer Kestrel](xref:fundamentals/servers/kestrel) jest domyślnym serwerem HTTP dla wielu platform.
 * [ SerwerHTTP.sys](xref:fundamentals/servers/httpsys) to serwer HTTP z systemem Windows oparty na [HTTP.sys sterownika jądra i interfejsu API serwera http](/windows/desktop/Http/http-api-start-page).
 
-W przypadku korzystania z [usług IIS](/iis/get-started/introduction-to-iis/introduction-to-iis-architecture) lub [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview)aplikacja działa w procesie innym niż proces roboczy usług IIS (*poza procesem*) z [serwerem Kestrel](#kestrel).
+W przypadku korzystania z [usług IIS](/iis/get-started/introduction-to-iis/introduction-to-iis-architecture) lub [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview)aplikacja działa w procesie innym niż proces roboczy usług IIS ( *poza procesem* ) z [serwerem Kestrel](#kestrel).
 
 Ponieważ ASP.NET Core aplikacje działają w procesie innym niż proces roboczy usług IIS, moduł obsługuje zarządzanie procesami. Moduł uruchamia proces dla aplikacji ASP.NET Core, gdy pierwsze żądanie zostanie odebrane i ponownie uruchomiony, jeśli zostanie zamknięty lub ulegnie awarii. Jest to zasadniczo takie samo zachowanie jak w przypadku aplikacji uruchamianych w procesie, które są zarządzane przez [usługę aktywacji procesów systemu Windows (was)](/iis/manage/provisioning-and-managing-iis/features-of-the-windows-process-activation-service-was).
 
@@ -165,7 +166,7 @@ Serwer jest uruchamiany po uruchomieniu aplikacji zintegrowanego środowiska pro
 
 * [Visual Studio](https://visualstudio.microsoft.com): profile uruchamiania mogą służyć do uruchamiania aplikacji i serwera za pomocą [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) / [ASP.NET Core Module](xref:host-and-deploy/aspnet-core-module) lub konsoli programu.
 * [Visual Studio Code](https://code.visualstudio.com/): aplikacja i serwer są uruchamiane przez [omnisharp](https://github.com/OmniSharp/omnisharp-vscode), która aktywuje debuger CoreCLR.
-* [Visual Studio dla komputerów Mac](https://visualstudio.microsoft.com/vs/mac/): aplikacja i serwer są uruchamiane przez [debuger trybu miękkiego mono](https://www.mono-project.com/docs/advanced/runtime/docs/soft-debugger/).
+* [Visual Studio dla komputerów Mac](https://visualstudio.microsoft.com/vs/mac/): aplikacja i serwer są uruchamiane za pomocą [debugera Soft-Mode mono](https://www.mono-project.com/docs/advanced/runtime/docs/soft-debugger/).
 
 Podczas uruchamiania aplikacji z poziomu wiersza polecenia w folderze projektu, [uruchomienie dotnet](/dotnet/core/tools/dotnet-run) uruchamia aplikację i serwer (tylko Kestrel i HTTP.sys). Konfiguracja jest określana przez `-c|--configuration` opcję, która jest ustawiona na wartość `Debug` (domyślnie) lub `Release` .
 

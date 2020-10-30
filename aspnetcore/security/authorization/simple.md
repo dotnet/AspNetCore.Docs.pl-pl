@@ -5,6 +5,7 @@ description: Dowiedz się, w jaki sposób używać atrybutu Autoryzuj, aby ogran
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/simple
-ms.openlocfilehash: edf027b23ba6b22146e4521c134e67ac6fe1bd03
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: ae8fb47e58924d559f1c2c4ed7c9545c37141209
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634803"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061343"
 ---
 # <a name="simple-authorization-in-aspnet-core"></a>Prosta autoryzacja w ASP.NET Core
 
@@ -63,7 +64,7 @@ public class AccountController : Controller
 
 Teraz tylko uwierzytelnieni użytkownicy mogą uzyskiwać dostęp do `Logout` funkcji.
 
-Można również użyć atrybutu, `AllowAnonymous` Aby zezwolić na dostęp nieuwierzytelnionym użytkownikom do poszczególnych akcji. Na przykład:
+Można również użyć atrybutu, `AllowAnonymous` Aby zezwolić na dostęp nieuwierzytelnionym użytkownikom do poszczególnych akcji. Przykład:
 
 ```csharp
 [Authorize]
@@ -91,19 +92,18 @@ Może to umożliwić tylko uwierzytelnionym użytkownikom `AccountController` , 
 
 ## <a name="authorize-attribute-and-no-locrazor-pages"></a>Autoryzuj atrybut i Razor strony
 
-<xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> ***Nie*** można zastosować do Razor obsługi stron. Na przykład `[Authorize]` nie można zastosować do `OnGet` `OnPost` programu obsługi stron ani żadnej z nich. Rozważ użycie kontrolera ASP.NET Core MVC dla stron z różnymi wymaganiami dotyczącymi autoryzacji dla różnych programów obsługi.
+<xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute>**Nie** można zastosować do Razor programów obsługi stron. Na przykład `[Authorize]` nie można zastosować do `OnGet` `OnPost` programu obsługi stron ani żadnej z nich. Rozważ użycie kontrolera ASP.NET Core MVC dla stron z różnymi wymaganiami dotyczącymi autoryzacji dla różnych programów obsługi.
 
 Poniższe dwa podejścia mogą służyć do stosowania autoryzacji do Razor metod obsługi stron:
 
-* Użyj oddzielnych stron dla programów obsługi stron wymagających innej autoryzacji. Zawartość udostępniona została przeniesiona do co najmniej jednego [widoku częściowego](xref:mvc/views/partial). Jeśli to możliwe, jest to zalecane podejście.
+_ Użyj oddzielnych stron dla programów obsługi stron wymagających innej autoryzacji. Zawartość udostępniona została przeniesiona do co najmniej jednego [widoku częściowego](xref:mvc/views/partial). Jeśli to możliwe, jest to zalecane podejście.
 * W przypadku zawartości, która musi udostępniać wspólną stronę, należy napisać filtr wykonujący autoryzację jako część [IAsyncPageFilter. OnPageHandlerSelectionAsync](xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncPageFilter.OnPageHandlerSelectionAsync%2A). Projekt [PageHandlerAuth](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/simple/samples/3.1/PageHandlerAuth) GitHub ilustruje następujące podejście:
   * [AuthorizeIndexPageHandlerFilter](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/security/authorization/simple/samples/3.1/PageHandlerAuth/AuthorizeIndexPageHandlerFilter.cs) implementuje filtr autoryzacji:[!code-csharp[](~/security/authorization/simple/samples/3.1/PageHandlerAuth/Pages/Index.cshtml.cs?name=snippet)]
 
   * Atrybut [[AuthorizePageHandler]](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/simple/samples/3.1/PageHandlerAuth/Pages/Index.cshtml.cs#L16) jest stosowany do `OnGet` obsługi stron: [!code-csharp[](~/security/authorization/simple/samples/3.1/PageHandlerAuth/AuthorizeIndexPageHandlerFilter.cs?name=snippet)]
 
 > [!WARNING]
-> Podejście przykładowe [PageHandlerAuth](https://github.com/pranavkm/PageHandlerAuth) nie ***jest:***
-> * Twórz przy użyciu atrybutów autoryzacji zastosowanych do strony, modelu strony lub globalnie. Tworzenie atrybutów autoryzacji powoduje, że uwierzytelnianie i autoryzacja są wykonywane wiele razy, gdy tylko jeden z nich jest `AuthorizeAttribute` `AuthorizeFilter` również stosowany do strony.
+> Podejście przykładowe [PageHandlerAuth](https://github.com/pranavkm/PageHandlerAuth) **nie może** składać się z atrybutów autoryzacji zastosowanych do strony, modelu strony lub globalnie. Tworzenie atrybutów autoryzacji powoduje, że uwierzytelnianie i autoryzacja są wykonywane wiele razy, gdy tylko jeden z nich jest `AuthorizeAttribute` `AuthorizeFilter` również stosowany do strony.
 > * Pracuj w połączeniu z pozostałą częścią systemu uwierzytelniania i autoryzacji ASP.NET Core. Należy sprawdzić, czy użycie tego podejścia działa prawidłowo dla aplikacji.
 
 Brak planów do obsługi `AuthorizeAttribute` Razor stron obsługi na stronie. 

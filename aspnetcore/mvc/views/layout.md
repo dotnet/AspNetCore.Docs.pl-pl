@@ -5,6 +5,7 @@ description: Dowiedz się, jak używać typowych układów, udostępniać dyrekt
 ms.author: riande
 ms.date: 07/30/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/layout
-ms.openlocfilehash: 308e567e0480f83972ab7a55c7b957af83a164fd
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 502df268e7f5f33acfffccd5ec0bd65267fa12da
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630695"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060979"
 ---
 # <a name="layout-in-aspnet-core"></a>Układ w ASP.NET Core
 
@@ -46,7 +47,7 @@ Większość aplikacji sieci Web ma wspólny układ, który zapewnia użytkownik
 
 Typowe struktury HTML, takie jak skrypty i arkusze stylów, również są często używane przez wiele stron w aplikacji. Wszystkie te elementy udostępnione mogą być zdefiniowane w pliku *układu* , do którego może odwoływać się dowolny widok używany w aplikacji. Układy zmniejszają ilość zduplikowanego kodu w widokach.
 
-Zgodnie z Konwencją domyślny układ aplikacji ASP.NET Core ma nazwę *_Layout. cshtml*. Pliki układów dla nowych projektów ASP.NET Core utworzonych przy użyciu szablonów są następujące:
+Zgodnie z Konwencją domyślny układ aplikacji ASP.NET Core ma nazwę *_Layout. cshtml* . Pliki układów dla nowych projektów ASP.NET Core utworzonych przy użyciu szablonów są następujące:
 
 * Razor Strony: *Pages/Shared/_Layout. cshtml*
 
@@ -68,7 +69,7 @@ Razor widoki mają `Layout` Właściwość. Poszczególne widoki określają uk�
 
 [!code-cshtml[](../../common/samples/WebApplication1/Views/_ViewStart.cshtml?highlight=2)]
 
-Określony układ może używać pełnej ścieżki (na przykład */Pages/Shared/_Layout. cshtml* lub */views/Shared/_Layout. cshtml*) lub częściowej nazwy (przykład: `_Layout` ). Po podaniu częściowej nazwy Razor aparat widoku wyszukuje plik układu przy użyciu standardowego procesu odnajdywania. Folder, w którym istnieje metoda obsługi (lub kontroler), jest wyszukiwany jako pierwszy, a następnie folder *udostępniony* . Ten proces odnajdywania jest identyczny z procesem używanym do odnajdywania [widoków częściowych](xref:mvc/views/partial#partial-view-discovery).
+Określony układ może używać pełnej ścieżki (na przykład */Pages/Shared/_Layout. cshtml* lub */views/Shared/_Layout. cshtml* ) lub częściowej nazwy (przykład: `_Layout` ). Po podaniu częściowej nazwy Razor aparat widoku wyszukuje plik układu przy użyciu standardowego procesu odnajdywania. Folder, w którym istnieje metoda obsługi (lub kontroler), jest wyszukiwany jako pierwszy, a następnie folder *udostępniony* . Ten proces odnajdywania jest identyczny z procesem używanym do odnajdywania [widoków częściowych](xref:mvc/views/partial#partial-view-discovery).
 
 Domyślnie każdy układ musi wywoływać `RenderBody` . W każdym miejscu, w którym `RenderBody` jest umieszczane wywołanie, zawartość widoku będzie renderowana.
 
@@ -76,7 +77,7 @@ Domyślnie każdy układ musi wywoływać `RenderBody` . W każdym miejscu, w kt
 <!-- https://stackoverflow.com/questions/23327578 -->
 ### <a name="sections"></a>Sekcje
 
-Układ może opcjonalnie odwoływać się do co najmniej jednej *sekcji*, wywołując `RenderSection` . Sekcje umożliwiają organizowanie miejsca, w którym należy umieścić pewne elementy strony. Każde wywołanie programu `RenderSection` może określać, czy ta sekcja jest wymagana czy opcjonalna:
+Układ może opcjonalnie odwoływać się do co najmniej jednej *sekcji* , wywołując `RenderSection` . Sekcje umożliwiają organizowanie miejsca, w którym należy umieścić pewne elementy strony. Każde wywołanie programu `RenderSection` może określać, czy ta sekcja jest wymagana czy opcjonalna:
 
 ```html
 <script type="text/javascript" src="~/scripts/global.js"></script>
@@ -96,7 +97,7 @@ Przykładowa `@section` Definicja w Razor widoku stron:
 
 W powyższym kodzie *skrypty/main.js* są dodawane do `scripts` sekcji na stronie lub widoku. Inne strony lub widoki w tej samej aplikacji mogą nie wymagać tego skryptu i nie będą mogły definiować sekcji skryptów.
 
-W poniższym znaczniku jest używana [pomocnik tagów częściowej](xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper) do renderowania  *_ValidationScriptsPartial. cshtml*:
+W poniższym znaczniku jest używana [pomocnik tagów częściowej](xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper) do renderowania  *_ValidationScriptsPartial. cshtml* :
 
 ```html
 @section Scripts {
@@ -136,7 +137,7 @@ Przykładowy `_ViewImports.cshtml` plik:
 
 [!code-cshtml[](../../common/samples/WebApplication1/Views/_ViewImports.cshtml)]
 
-Plik *_ViewImports. cshtml* dla aplikacji ASP.NET Core MVC zazwyczaj znajduje się w folderze *stron* (lub *widoków*). Plik *_ViewImports. cshtml* można umieścić w dowolnym folderze. w takim przypadku zostanie on zastosowany tylko do stron lub widoków w tym folderze i jego podfolderach. `_ViewImports` pliki są przetwarzane, rozpoczynając od poziomu głównego, a następnie dla każdego folderu, który zaczyna się do lokalizacji strony lub widoku. `_ViewImports` ustawienia określone na poziomie głównym mogą zostać zastąpione na poziomie folderu.
+Plik *_ViewImports. cshtml* dla aplikacji ASP.NET Core MVC zazwyczaj znajduje się w folderze *stron* (lub *widoków* ). Plik *_ViewImports. cshtml* można umieścić w dowolnym folderze. w takim przypadku zostanie on zastosowany tylko do stron lub widoków w tym folderze i jego podfolderach. `_ViewImports` pliki są przetwarzane, rozpoczynając od poziomu głównego, a następnie dla każdego folderu, który zaczyna się do lokalizacji strony lub widoku. `_ViewImports` ustawienia określone na poziomie głównym mogą zostać zastąpione na poziomie folderu.
 
 Załóżmy na przykład, że:
 
@@ -158,7 +159,7 @@ Jeśli w hierarchii plików znaleziono wiele plików *_ViewImports. cshtml* , po
 
 ## <a name="running-code-before-each-view"></a>Uruchamianie kodu przed każdym widokiem
 
-Kod, który musi zostać uruchomiony przed każdym widokiem lub stroną należy umieścić w pliku *_ViewStart. cshtml* . Zgodnie z Konwencją plik *_ViewStart. cshtml* znajduje się w folderze *stron* (lub *widoków*). Instrukcje wymienione w *_ViewStart. cshtml* są uruchamiane przed wszystkimi pełnymi widokami (nie układami i nieczęściowymi widokami). Podobnie jak [ViewImports. cshtml](xref:mvc/views/layout#viewimports), *_ViewStart. cshtml* jest hierarchiczna. Jeśli plik *_ViewStart. cshtml* jest zdefiniowany w folderze widoku lub strony, zostanie on uruchomiony po elemencie zdefiniowanym w folderze głównym folderu *stron* (lub *widoków*) (jeśli istnieje).
+Kod, który musi zostać uruchomiony przed każdym widokiem lub stroną należy umieścić w pliku *_ViewStart. cshtml* . Zgodnie z Konwencją plik *_ViewStart. cshtml* znajduje się w folderze *stron* (lub *widoków* ). Instrukcje wymienione w *_ViewStart. cshtml* są uruchamiane przed wszystkimi pełnymi widokami (nie układami i nieczęściowymi widokami). Podobnie jak [ViewImports. cshtml](xref:mvc/views/layout#viewimports), *_ViewStart. cshtml* jest hierarchiczna. Jeśli plik *_ViewStart. cshtml* jest zdefiniowany w folderze widoku lub strony, zostanie on uruchomiony po elemencie zdefiniowanym w folderze głównym folderu *stron* (lub *widoków* ) (jeśli istnieje).
 
 Przykładowy plik *_ViewStart. cshtml* :
 
@@ -166,4 +167,4 @@ Przykładowy plik *_ViewStart. cshtml* :
 
 Powyższy plik określa, że wszystkie widoki będą korzystać z układu *_Layout. cshtml* .
 
-*_ViewStart. cshtml* i *_ViewImports. cshtml* **nie** są zwykle umieszczane w folderze */Pages/Shared* (lub */views/Shared*). Wersje tych plików na poziomie aplikacji należy umieścić bezpośrednio w folderze */Pages* (lub */views*).
+*_ViewStart. cshtml* i *_ViewImports. cshtml* **nie** są zwykle umieszczane w folderze */Pages/Shared* (lub */views/Shared* ). Wersje tych plików na poziomie aplikacji należy umieścić bezpośrednio w folderze */Pages* (lub */views* ).

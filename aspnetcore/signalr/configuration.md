@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 04/12/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/configuration
-ms.openlocfilehash: 8851246dbaa076af1fdbc4e5e4f1ada0e4e3988a
-ms.sourcegitcommit: b5ebaf42422205d212e3dade93fcefcf7f16db39
+ms.openlocfilehash: 7dac8c84683553a52e07ecc61c8bcf8616e77dc6
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92326593"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061239"
 ---
 # <a name="aspnet-core-no-locsignalr-configuration"></a>SignalRKonfiguracja ASP.NET Core
 
@@ -196,9 +197,9 @@ let connection = new signalR.HubConnectionBuilder()
     .build();
 ```
 
-Poniższa tabela zawiera listę dostępnych poziomów dzienników. Wartość określana przez użytkownika w celu ustawienia `configureLogging` **minimalnego** poziomu dziennika, który zostanie zarejestrowany. Komunikaty zarejestrowane na tym poziomie **lub poziomy wymienione po nim w tabeli**zostaną zarejestrowane.
+Poniższa tabela zawiera listę dostępnych poziomów dzienników. Wartość określana przez użytkownika w celu ustawienia `configureLogging` **minimalnego** poziomu dziennika, który zostanie zarejestrowany. Komunikaty zarejestrowane na tym poziomie **lub poziomy wymienione po nim w tabeli** zostaną zarejestrowane.
 
-| Ciąg                      | LogLevel               |
+| String                      | LogLevel               |
 | --------------------------- | ---------------------- |
 | `trace`                     | `LogLevel.Trace`       |
 | `debug`                     | `LogLevel.Debug`       |
@@ -342,7 +343,7 @@ Dodatkowe opcje można skonfigurować w `WithUrl` `withUrl` metodzie (w języku 
 | Opcja .NET |  Wartość domyślna | Opis |
 | ----------- | -------------- | ----------- |
 | `AccessTokenProvider` | `null` | Funkcja zwracająca ciąg, który jest dostarczany jako token uwierzytelniania okaziciela w żądaniach HTTP. |
-| `SkipNegotiation` | `false` | Ustaw tę wartość na `true` , aby pominąć krok negocjowania. **Obsługiwane tylko wtedy, gdy transport Sockets jest jedynym włączonym transportem**. Nie można włączyć tego ustawienia w przypadku korzystania z SignalR usługi platformy Azure. |
+| `SkipNegotiation` | `false` | Ustaw tę wartość na `true` , aby pominąć krok negocjowania. **Obsługiwane tylko wtedy, gdy transport Sockets jest jedynym włączonym transportem** . Nie można włączyć tego ustawienia w przypadku korzystania z SignalR usługi platformy Azure. |
 | `ClientCertificates` | Pusty | Kolekcja certyfikatów TLS do wysłania w celu uwierzytelniania żądań. |
 | `Cookies` | Pusty | Kolekcja HTTP cookie s do wysłania w każdym ŻĄDANIU http. |
 | `Credentials` | Pusty | Poświadczenia do wysyłania przy każdym żądaniu HTTP. |
@@ -361,7 +362,7 @@ Dodatkowe opcje można skonfigurować w `WithUrl` `withUrl` metodzie (w języku 
 | `transport` | `null` | <xref:Microsoft.AspNetCore.Http.Connections.HttpTransportType>Wartość określająca transport, który ma być używany w połączeniu. |
 | `headers` | `null` | Słownik nagłówków wysłanych z każdym żądaniem HTTP. Wysyłanie nagłówków w przeglądarce nie działa w przypadku obiektów WebSockets ani <xref:Microsoft.AspNetCore.Http.Connections.HttpTransportType.ServerSentEvents> strumienia. |
 | `logMessageContent` | `null` | Ustaw na `true` , aby rejestrować bajty/znaki komunikatów wysyłanych i odbieranych przez klienta. |
-| `skipNegotiation` | `false` | Ustaw tę wartość na `true` , aby pominąć krok negocjowania. **Obsługiwane tylko wtedy, gdy transport Sockets jest jedynym włączonym transportem**. Nie można włączyć tego ustawienia w przypadku korzystania z SignalR usługi platformy Azure. |
+| `skipNegotiation` | `false` | Ustaw tę wartość na `true` , aby pominąć krok negocjowania. **Obsługiwane tylko wtedy, gdy transport Sockets jest jedynym włączonym transportem** . Nie można włączyć tego ustawienia w przypadku korzystania z SignalR usługi platformy Azure. |
 | `withCredentials` | `true` | Określa, czy poświadczenia będą wysyłane z żądaniem CORS. Azure App Service używa cookie s dla sesji programu Sticky i wymaga, aby ta opcja działała poprawnie. Aby uzyskać więcej informacji na temat mechanizmu CORS w programie SignalR , zobacz <xref:signalr/security#cross-origin-resource-sharing> . |
 
 # <a name="java"></a>[Java](#tab/java)
@@ -369,7 +370,7 @@ Dodatkowe opcje można skonfigurować w `WithUrl` `withUrl` metodzie (w języku 
 | Opcja Java | Wartość domyślna | Opis |
 | ----------- | ------------- | ----------- |
 | `withAccessTokenProvider` | `null` | Funkcja zwracająca ciąg, który jest dostarczany jako token uwierzytelniania okaziciela w żądaniach HTTP. |
-| `shouldSkipNegotiate` | `false` | Ustaw tę wartość na `true` , aby pominąć krok negocjowania. **Obsługiwane tylko wtedy, gdy transport Sockets jest jedynym włączonym transportem**. Nie można włączyć tego ustawienia w przypadku korzystania z SignalR usługi platformy Azure. |
+| `shouldSkipNegotiate` | `false` | Ustaw tę wartość na `true` , aby pominąć krok negocjowania. **Obsługiwane tylko wtedy, gdy transport Sockets jest jedynym włączonym transportem** . Nie można włączyć tego ustawienia w przypadku korzystania z SignalR usługi platformy Azure. |
 | `withHeader` `withHeaders` | Pusty | Mapa dodatkowych nagłówków HTTP do wysłania w każdym żądaniu HTTP. |
 
 ---
@@ -588,9 +589,9 @@ let connection = new signalR.HubConnectionBuilder()
     .build();
 ```
 
-Poniższa tabela zawiera listę dostępnych poziomów dzienników. Wartość określana przez użytkownika w celu ustawienia `configureLogging` **minimalnego** poziomu dziennika, który zostanie zarejestrowany. Komunikaty zarejestrowane na tym poziomie **lub poziomy wymienione po nim w tabeli**zostaną zarejestrowane.
+Poniższa tabela zawiera listę dostępnych poziomów dzienników. Wartość określana przez użytkownika w celu ustawienia `configureLogging` **minimalnego** poziomu dziennika, który zostanie zarejestrowany. Komunikaty zarejestrowane na tym poziomie **lub poziomy wymienione po nim w tabeli** zostaną zarejestrowane.
 
-| Ciąg                      | LogLevel               |
+| String                      | LogLevel               |
 | --------------------------- | ---------------------- |
 | `trace`                     | `LogLevel.Trace`       |
 | `debug`                     | `LogLevel.Debug`       |
@@ -734,7 +735,7 @@ Dodatkowe opcje można skonfigurować w `WithUrl` `withUrl` metodzie (w języku 
 | Opcja .NET |  Wartość domyślna | Opis |
 | ----------- | -------------- | ----------- |
 | `AccessTokenProvider` | `null` | Funkcja zwracająca ciąg, który jest dostarczany jako token uwierzytelniania okaziciela w żądaniach HTTP. |
-| `SkipNegotiation` | `false` | Ustaw tę wartość na `true` , aby pominąć krok negocjowania. **Obsługiwane tylko wtedy, gdy transport Sockets jest jedynym włączonym transportem**. Nie można włączyć tego ustawienia w przypadku korzystania z SignalR usługi platformy Azure. |
+| `SkipNegotiation` | `false` | Ustaw tę wartość na `true` , aby pominąć krok negocjowania. **Obsługiwane tylko wtedy, gdy transport Sockets jest jedynym włączonym transportem** . Nie można włączyć tego ustawienia w przypadku korzystania z SignalR usługi platformy Azure. |
 | `ClientCertificates` | Pusty | Kolekcja certyfikatów TLS do wysłania w celu uwierzytelniania żądań. |
 | `Cookies` | Pusty | Kolekcja HTTP cookie s do wysłania w każdym ŻĄDANIU http. |
 | `Credentials` | Pusty | Poświadczenia do wysyłania przy każdym żądaniu HTTP. |
@@ -752,14 +753,14 @@ Dodatkowe opcje można skonfigurować w `WithUrl` `withUrl` metodzie (w języku 
 | `accessTokenFactory` | `null` | Funkcja zwracająca ciąg, który jest dostarczany jako token uwierzytelniania okaziciela w żądaniach HTTP. |
 | `transport` | `null` | <xref:Microsoft.AspNetCore.Http.Connections.HttpTransportType>Wartość określająca transport, który ma być używany w połączeniu. |
 | `logMessageContent` | `null` | Ustaw na `true` , aby rejestrować bajty/znaki komunikatów wysyłanych i odbieranych przez klienta. |
-| `skipNegotiation` | `false` | Ustaw tę wartość na `true` , aby pominąć krok negocjowania. **Obsługiwane tylko wtedy, gdy transport Sockets jest jedynym włączonym transportem**. Nie można włączyć tego ustawienia w przypadku korzystania z SignalR usługi platformy Azure. |
+| `skipNegotiation` | `false` | Ustaw tę wartość na `true` , aby pominąć krok negocjowania. **Obsługiwane tylko wtedy, gdy transport Sockets jest jedynym włączonym transportem** . Nie można włączyć tego ustawienia w przypadku korzystania z SignalR usługi platformy Azure. |
 
 # <a name="java"></a>[Java](#tab/java)
 
 | Opcja Java | Wartość domyślna | Opis |
 | ----------- | ------------- | ----------- |
 | `withAccessTokenProvider` | `null` | Funkcja zwracająca ciąg, który jest dostarczany jako token uwierzytelniania okaziciela w żądaniach HTTP. |
-| `shouldSkipNegotiate` | `false` | Ustaw tę wartość na `true` , aby pominąć krok negocjowania. **Obsługiwane tylko wtedy, gdy transport Sockets jest jedynym włączonym transportem**. Nie można włączyć tego ustawienia w przypadku korzystania z SignalR usługi platformy Azure. |
+| `shouldSkipNegotiate` | `false` | Ustaw tę wartość na `true` , aby pominąć krok negocjowania. **Obsługiwane tylko wtedy, gdy transport Sockets jest jedynym włączonym transportem** . Nie można włączyć tego ustawienia w przypadku korzystania z SignalR usługi platformy Azure. |
 | `withHeader` `withHeaders` | Pusty | Mapa dodatkowych nagłówków HTTP do wysłania w każdym żądaniu HTTP. |
 
 ---
@@ -974,9 +975,9 @@ let connection = new signalR.HubConnectionBuilder()
     .build();
 ```
 
-Poniższa tabela zawiera listę dostępnych poziomów dzienników. Wartość określana przez użytkownika w celu ustawienia `configureLogging` **minimalnego** poziomu dziennika, który zostanie zarejestrowany. Komunikaty zarejestrowane na tym poziomie **lub poziomy wymienione po nim w tabeli**zostaną zarejestrowane.
+Poniższa tabela zawiera listę dostępnych poziomów dzienników. Wartość określana przez użytkownika w celu ustawienia `configureLogging` **minimalnego** poziomu dziennika, który zostanie zarejestrowany. Komunikaty zarejestrowane na tym poziomie **lub poziomy wymienione po nim w tabeli** zostaną zarejestrowane.
 
-| Ciąg                      | LogLevel               |
+| String                      | LogLevel               |
 | --------------------------- | ---------------------- |
 | `trace`                     | `LogLevel.Trace`       |
 | `debug`                     | `LogLevel.Debug`       |
@@ -1120,7 +1121,7 @@ Dodatkowe opcje można skonfigurować w `WithUrl` `withUrl` metodzie (w języku 
 | Opcja .NET |  Wartość domyślna | Opis |
 | ----------- | -------------- | ----------- |
 | `AccessTokenProvider` | `null` | Funkcja zwracająca ciąg, który jest dostarczany jako token uwierzytelniania okaziciela w żądaniach HTTP. |
-| `SkipNegotiation` | `false` | Ustaw tę wartość na `true` , aby pominąć krok negocjowania. **Obsługiwane tylko wtedy, gdy transport Sockets jest jedynym włączonym transportem**. Nie można włączyć tego ustawienia w przypadku korzystania z SignalR usługi platformy Azure. |
+| `SkipNegotiation` | `false` | Ustaw tę wartość na `true` , aby pominąć krok negocjowania. **Obsługiwane tylko wtedy, gdy transport Sockets jest jedynym włączonym transportem** . Nie można włączyć tego ustawienia w przypadku korzystania z SignalR usługi platformy Azure. |
 | `ClientCertificates` | Pusty | Kolekcja certyfikatów TLS do wysłania w celu uwierzytelniania żądań. |
 | `Cookies` | Pusty | Kolekcja HTTP cookie s do wysłania w każdym ŻĄDANIU http. |
 | `Credentials` | Pusty | Poświadczenia do wysyłania przy każdym żądaniu HTTP. |
@@ -1138,14 +1139,14 @@ Dodatkowe opcje można skonfigurować w `WithUrl` `withUrl` metodzie (w języku 
 | `accessTokenFactory` | `null` | Funkcja zwracająca ciąg, który jest dostarczany jako token uwierzytelniania okaziciela w żądaniach HTTP. |
 | `transport` | `null` | <xref:Microsoft.AspNetCore.Http.Connections.HttpTransportType>Wartość określająca transport, który ma być używany w połączeniu. |
 | `logMessageContent` | `null` | Ustaw na `true` , aby rejestrować bajty/znaki komunikatów wysyłanych i odbieranych przez klienta. |
-| `skipNegotiation` | `false` | Ustaw tę wartość na `true` , aby pominąć krok negocjowania. **Obsługiwane tylko wtedy, gdy transport Sockets jest jedynym włączonym transportem**. Nie można włączyć tego ustawienia w przypadku korzystania z SignalR usługi platformy Azure. |
+| `skipNegotiation` | `false` | Ustaw tę wartość na `true` , aby pominąć krok negocjowania. **Obsługiwane tylko wtedy, gdy transport Sockets jest jedynym włączonym transportem** . Nie można włączyć tego ustawienia w przypadku korzystania z SignalR usługi platformy Azure. |
 
 # <a name="java"></a>[Java](#tab/java)
 
 | Opcja Java | Wartość domyślna | Opis |
 | ----------- | ------------- | ----------- |
 | `withAccessTokenProvider` | `null` | Funkcja zwracająca ciąg, który jest dostarczany jako token uwierzytelniania okaziciela w żądaniach HTTP. |
-| `shouldSkipNegotiate` | `false` | Ustaw tę wartość na `true` , aby pominąć krok negocjowania. **Obsługiwane tylko wtedy, gdy transport Sockets jest jedynym włączonym transportem**. Nie można włączyć tego ustawienia w przypadku korzystania z SignalR usługi platformy Azure. |
+| `shouldSkipNegotiate` | `false` | Ustaw tę wartość na `true` , aby pominąć krok negocjowania. **Obsługiwane tylko wtedy, gdy transport Sockets jest jedynym włączonym transportem** . Nie można włączyć tego ustawienia w przypadku korzystania z SignalR usługi platformy Azure. |
 | `withHeader` `withHeaders` | Pusty | Mapa dodatkowych nagłówków HTTP do wysłania w każdym żądaniu HTTP. |
 
 ---
@@ -1470,7 +1471,7 @@ Dodatkowe opcje można skonfigurować w `WithUrl` `withUrl` metodzie (w języku 
 | Opcja .NET |  Wartość domyślna | Opis |
 | ----------- | -------------- | ----------- |
 | `AccessTokenProvider` | `null` | Funkcja zwracająca ciąg, który jest dostarczany jako token uwierzytelniania okaziciela w żądaniach HTTP. |
-| `SkipNegotiation` | `false` | Ustaw tę wartość na `true` , aby pominąć krok negocjowania. **Obsługiwane tylko wtedy, gdy transport Sockets jest jedynym włączonym transportem**. Nie można włączyć tego ustawienia w przypadku korzystania z SignalR usługi platformy Azure. |
+| `SkipNegotiation` | `false` | Ustaw tę wartość na `true` , aby pominąć krok negocjowania. **Obsługiwane tylko wtedy, gdy transport Sockets jest jedynym włączonym transportem** . Nie można włączyć tego ustawienia w przypadku korzystania z SignalR usługi platformy Azure. |
 | `ClientCertificates` | Pusty | Kolekcja certyfikatów TLS do wysłania w celu uwierzytelniania żądań. |
 | `Cookies` | Pusty | Kolekcja HTTP cookie s do wysłania w każdym ŻĄDANIU http. |
 | `Credentials` | Pusty | Poświadczenia do wysyłania przy każdym żądaniu HTTP. |
@@ -1488,14 +1489,14 @@ Dodatkowe opcje można skonfigurować w `WithUrl` `withUrl` metodzie (w języku 
 | `accessTokenFactory` | `null` | Funkcja zwracająca ciąg, który jest dostarczany jako token uwierzytelniania okaziciela w żądaniach HTTP. |
 | `transport` | `null` | <xref:Microsoft.AspNetCore.Http.Connections.HttpTransportType>Wartość określająca transport, który ma być używany w połączeniu. |
 | `logMessageContent` | `null` | Ustaw na `true` , aby rejestrować bajty/znaki komunikatów wysyłanych i odbieranych przez klienta. |
-| `skipNegotiation` | `false` | Ustaw tę wartość na `true` , aby pominąć krok negocjowania. **Obsługiwane tylko wtedy, gdy transport Sockets jest jedynym włączonym transportem**. Nie można włączyć tego ustawienia w przypadku korzystania z SignalR usługi platformy Azure. |
+| `skipNegotiation` | `false` | Ustaw tę wartość na `true` , aby pominąć krok negocjowania. **Obsługiwane tylko wtedy, gdy transport Sockets jest jedynym włączonym transportem** . Nie można włączyć tego ustawienia w przypadku korzystania z SignalR usługi platformy Azure. |
 
 # <a name="java"></a>[Java](#tab/java)
 
 | Opcja Java | Wartość domyślna | Opis |
 | ----------- | ------------- | ----------- |
 | `withAccessTokenProvider` | `null` | Funkcja zwracająca ciąg, który jest dostarczany jako token uwierzytelniania okaziciela w żądaniach HTTP. |
-| `shouldSkipNegotiate` | `false` | Ustaw tę wartość na `true` , aby pominąć krok negocjowania. **Obsługiwane tylko wtedy, gdy transport Sockets jest jedynym włączonym transportem**. Nie można włączyć tego ustawienia w przypadku korzystania z SignalR usługi platformy Azure. |
+| `shouldSkipNegotiate` | `false` | Ustaw tę wartość na `true` , aby pominąć krok negocjowania. **Obsługiwane tylko wtedy, gdy transport Sockets jest jedynym włączonym transportem** . Nie można włączyć tego ustawienia w przypadku korzystania z SignalR usługi platformy Azure. |
 | `withHeader` `withHeaders` | Pusty | Mapa dodatkowych nagłówków HTTP do wysłania w każdym żądaniu HTTP. |
 
 ---
@@ -1814,7 +1815,7 @@ Dodatkowe opcje można skonfigurować w `WithUrl` `withUrl` metodzie (w języku 
 | Opcja .NET |  Wartość domyślna | Opis |
 | ----------- | -------------- | ----------- |
 | `AccessTokenProvider` | `null` | Funkcja zwracająca ciąg, który jest dostarczany jako token uwierzytelniania okaziciela w żądaniach HTTP. |
-| `SkipNegotiation` | `false` | Ustaw tę wartość na `true` , aby pominąć krok negocjowania. **Obsługiwane tylko wtedy, gdy transport Sockets jest jedynym włączonym transportem**. Nie można włączyć tego ustawienia w przypadku korzystania z SignalR usługi platformy Azure. |
+| `SkipNegotiation` | `false` | Ustaw tę wartość na `true` , aby pominąć krok negocjowania. **Obsługiwane tylko wtedy, gdy transport Sockets jest jedynym włączonym transportem** . Nie można włączyć tego ustawienia w przypadku korzystania z SignalR usługi platformy Azure. |
 | `ClientCertificates` | Pusty | Kolekcja certyfikatów TLS do wysłania w celu uwierzytelniania żądań. |
 | `Cookies` | Pusty | Kolekcja HTTP cookie s do wysłania w każdym ŻĄDANIU http. |
 | `Credentials` | Pusty | Poświadczenia do wysyłania przy każdym żądaniu HTTP. |
@@ -1832,14 +1833,14 @@ Dodatkowe opcje można skonfigurować w `WithUrl` `withUrl` metodzie (w języku 
 | `accessTokenFactory` | `null` | Funkcja zwracająca ciąg, który jest dostarczany jako token uwierzytelniania okaziciela w żądaniach HTTP. |
 | `transport` | `null` | <xref:Microsoft.AspNetCore.Http.Connections.HttpTransportType>Wartość określająca transport, który ma być używany w połączeniu. |
 | `logMessageContent` | `null` | Ustaw na `true` , aby rejestrować bajty/znaki komunikatów wysyłanych i odbieranych przez klienta. |
-| `skipNegotiation` | `false` | Ustaw tę wartość na `true` , aby pominąć krok negocjowania. **Obsługiwane tylko wtedy, gdy transport Sockets jest jedynym włączonym transportem**. Nie można włączyć tego ustawienia w przypadku korzystania z SignalR usługi platformy Azure. |
+| `skipNegotiation` | `false` | Ustaw tę wartość na `true` , aby pominąć krok negocjowania. **Obsługiwane tylko wtedy, gdy transport Sockets jest jedynym włączonym transportem** . Nie można włączyć tego ustawienia w przypadku korzystania z SignalR usługi platformy Azure. |
 
 # <a name="java"></a>[Java](#tab/java)
 
 | Opcja Java | Wartość domyślna | Opis |
 | ----------- | ------------- | ----------- |
 | `withAccessTokenProvider` | `null` | Funkcja zwracająca ciąg, który jest dostarczany jako token uwierzytelniania okaziciela w żądaniach HTTP. |
-| `shouldSkipNegotiate` | `false` | Ustaw tę wartość na `true` , aby pominąć krok negocjowania. **Obsługiwane tylko wtedy, gdy transport Sockets jest jedynym włączonym transportem**. Nie można włączyć tego ustawienia w przypadku korzystania z SignalR usługi platformy Azure. |
+| `shouldSkipNegotiate` | `false` | Ustaw tę wartość na `true` , aby pominąć krok negocjowania. **Obsługiwane tylko wtedy, gdy transport Sockets jest jedynym włączonym transportem** . Nie można włączyć tego ustawienia w przypadku korzystania z SignalR usługi platformy Azure. |
 | `withHeader` `withHeaders` | Pusty | Mapa dodatkowych nagłówków HTTP do wysłania w każdym żądaniu HTTP. |
 
 ---

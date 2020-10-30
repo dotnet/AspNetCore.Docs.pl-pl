@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 7/23/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/validation
-ms.openlocfilehash: 86c523c69d3ee85f56bf1a51719a0bd93cbe97fc
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 991a0f29c0edc5a220dfde69bd22dc4ed758394d
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633555"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060732"
 ---
 # <a name="part-8-add-validation-to-an-aspnet-core-no-locrazor-page"></a>Część 8, Dodawanie walidacji do Razor strony ASP.NET Core
 
@@ -32,7 +33,7 @@ W tej sekcji logika walidacji jest dodawana do `Movie` modelu. Reguły sprawdzan
 
 ## <a name="validation"></a>Walidacja
 
-Kluczową cechą rozwoju oprogramowania jest nazywana [sucha](https://wikipedia.org/wiki/Don%27t_repeat_yourself) ("**D**on't **R**EPEAT **Y**ourself"). Razor Strony zachęcają do programowania, w którym funkcje są określone raz i są widoczne w całej aplikacji. SUCHy może pomóc:
+Kluczową cechą rozwoju oprogramowania jest nazywana [sucha](https://wikipedia.org/wiki/Don%27t_repeat_yourself) (" **D** on't **R** EPEAT **Y** ourself"). Razor Strony zachęcają do programowania, w którym funkcje są określone raz i są widoczne w całej aplikacji. SUCHy może pomóc:
 
 * Zmniejsz ilość kodu w aplikacji.
 * Spraw, aby kod był mniej podatny na błędy i łatwiejszy do testowania i konserwowania.
@@ -82,7 +83,7 @@ Znacząca korzyść polega na tym, że zmiany kodu **nie** były wymagane na str
 
 Dane formularza nie są ogłaszane na serwerze, dopóki nie zostaną wykryte błędy weryfikacji po stronie klienta. Sprawdź, czy dane formularza nie zostały ogłoszone przy użyciu co najmniej jednej z następujących metod:
 
-* Umieść punkt przerwania w `OnPostAsync` metodzie. Prześlij formularz (wybierz pozycję **Utwórz** lub **Zapisz**). Punkt przerwania nigdy nie trafi.
+* Umieść punkt przerwania w `OnPostAsync` metodzie. Prześlij formularz (wybierz pozycję **Utwórz** lub **Zapisz** ). Punkt przerwania nigdy nie trafi.
 * Użyj [Narzędzia programu Fiddler](https://www.telerik.com/fiddler).
 * Użyj narzędzi deweloperskich przeglądarki do monitorowania ruchu sieciowego.
 
@@ -186,7 +187,7 @@ CREATE TABLE [dbo].[Movie] (
 
 Powyższe zmiany schematu nie powodują wygenerowania wyjątku przez EF. Należy jednak utworzyć migrację, aby schemat był spójny z modelem.
 
-W menu **Narzędzia** wybierz kolejno pozycje **menedżer pakietów NuGet > konsola Menedżera pakietów**.
+W menu **Narzędzia** wybierz kolejno pozycje **menedżer pakietów NuGet > konsola Menedżera pakietów** .
 W obszarze PMC wprowadź następujące polecenia:
 
 ```powershell

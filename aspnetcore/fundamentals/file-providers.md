@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/06/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/file-providers
-ms.openlocfilehash: 30c28e7bd4cd9c926b157f5a7b9e6688bd5b9b9a
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 16e5ead9898125c804da4d60322510474201d897
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634608"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059445"
 ---
 # <a name="file-providers-in-aspnet-core"></a>Dostawcy plików w ASP.NET Core
 
@@ -31,7 +32,7 @@ Przez [Steve Smith](https://ardalis.com/)
 
 ::: moniker range=">= aspnetcore-3.0"
 
-ASP.NET Core abstrakcję dostępu systemu plików przy użyciu dostawców plików. Dostawcy plików są używani w całym ASP.NET Core Framework. Na przykład:
+ASP.NET Core abstrakcję dostępu systemu plików przy użyciu dostawców plików. Dostawcy plików są używani w całym ASP.NET Core Framework. Przykład:
 
 * <xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment> udostępnia [katalog główny zawartości](xref:fundamentals/index#content-root) aplikacji i [katalogu głównego sieci Web](xref:fundamentals/index#web-root) jako `IFileProvider` typy.
 * [Oprogramowanie pośredniczące plików statycznych](xref:fundamentals/static-files) używa dostawców plików do lokalizowania plików statycznych.
@@ -114,7 +115,7 @@ Użyj [wzorców globalizowania](#glob-patterns) , aby określić jeden lub więc
 
 Aplikacja Przykładowa *FileProviderSample* tworzy `ManifestEmbeddedFileProvider` i przekazuje aktualnie wykonywany zestaw do jego konstruktora.
 
-*Startup.cs*:
+*Startup.cs* :
 
 ```csharp
 var manifestEmbeddedProvider = 
@@ -161,7 +162,7 @@ Niektóre systemy plików, takie jak kontenery platformy Docker i udziały sieci
 
 ### <a name="glob-patterns"></a>Wzorce globalizowania
 
-Ścieżki systemu plików używają wzorców symboli wieloznacznych o nazwie *globalizowania (lub obsługi symboli wieloznacznych)*. Określ grupy plików z tymi wzorcami. Dwa symbole wieloznaczne to `*` `**` :
+Ścieżki systemu plików używają wzorców symboli wieloznacznych o nazwie *globalizowania (lub obsługi symboli wieloznacznych)* . Określ grupy plików z tymi wzorcami. Dwa symbole wieloznaczne to `*` `**` :
 
 **`*`**  
 Dopasowuje wszystko na bieżącym poziomie folderu, dowolnej nazwie pliku lub dowolnym rozszerzeniu pliku. Dopasowania są kończone przez `/` `.` znaki i w ścieżce pliku.
@@ -175,7 +176,7 @@ W poniższej tabeli przedstawiono typowe przykłady wzorców globalizowania.
 |---------|---------|
 |`directory/file.txt`|Dopasowuje określony plik w określonym katalogu.|
 |`directory/*.txt`|Dopasowuje wszystkie pliki z rozszerzeniem *. txt* w określonym katalogu.|
-|`directory/*/appsettings.json`|Dopasowuje wszystkieappsettings.jsplików w katalogach dokładnie * o* jeden poziom poniżej folderu *katalogu* .|
+|`directory/*/appsettings.json`|Dopasowuje wszystkie *appsettings.json* pliki w katalogach dokładnie o jeden poziom poniżej folderu *katalogu* .|
 |`directory/**/*.txt`|Dopasowuje wszystkie pliki z rozszerzeniem *. txt* , które znajdują się w dowolnym miejscu w folderze *katalogu* .|
 
 ::: moniker-end
@@ -261,7 +262,7 @@ Użyj [wzorców globalizowania](#glob-patterns) , aby określić jeden lub więc
 
 Przykładowa aplikacja tworzy `ManifestEmbeddedFileProvider` i przekazuje aktualnie wykonywany zestaw do jego konstruktora.
 
-*Startup.cs*:
+*Startup.cs* :
 
 ```csharp
 var manifestEmbeddedProvider = 
@@ -303,7 +304,7 @@ Niektóre systemy plików, takie jak kontenery platformy Docker i udziały sieci
 
 ## <a name="glob-patterns"></a>Wzorce globalizowania
 
-Ścieżki systemu plików używają wzorców symboli wieloznacznych o nazwie *globalizowania (lub obsługi symboli wieloznacznych)*. Określ grupy plików z tymi wzorcami. Dwa symbole wieloznaczne to `*` `**` :
+Ścieżki systemu plików używają wzorców symboli wieloznacznych o nazwie *globalizowania (lub obsługi symboli wieloznacznych)* . Określ grupy plików z tymi wzorcami. Dwa symbole wieloznaczne to `*` `**` :
 
 **`*`**  
 Dopasowuje wszystko na bieżącym poziomie folderu, dowolnej nazwie pliku lub dowolnym rozszerzeniu pliku. Dopasowania są kończone przez `/` `.` znaki i w ścieżce pliku.

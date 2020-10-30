@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: H1Hack27Feb2017
 ms.date: 03/18/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/intro
-ms.openlocfilehash: 345d20494111b808dac9678637de060169730a53
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: 781365d99c6d36d8abaec9681128ba712db8cb88
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865354"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060667"
 ---
 # <a name="tag-helpers-in-aspnet-core"></a>Pomocnicy tagów w ASP.NET Core
 
@@ -75,13 +76,13 @@ Zakres pomocników tagów jest kontrolowany przez kombinację `@addTagHelper` `@
 
 ### <a name="addtaghelper-makes-tag-helpers-available"></a>`@addTagHelper` udostępnia pomocników tagów
 
-Jeśli utworzysz nową aplikację sieci Web ASP.NET Core o nazwie *AuthoringTagHelpers*, do projektu zostanie dodany następujący plik *widoków/_ViewImports. cshtml* :
+Jeśli utworzysz nową aplikację sieci Web ASP.NET Core o nazwie *AuthoringTagHelpers* , do projektu zostanie dodany następujący plik *widoków/_ViewImports. cshtml* :
 
 [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/_ViewImportsCopy.cshtml?highlight=2&range=2-3)]
 
-`@addTagHelper`Dyrektywa powoduje, że pomocników tagów są dostępni do widoku. W takim przypadku plik widoku to *Pages/_ViewImports. cshtml*, które domyślnie są dziedziczone przez wszystkie pliki w folderze *stron* i podfolderach. Udostępnianie pomocników tagów. W powyższym kodzie użyto składni wieloznacznej (" \* "), aby określić, że wszystkie pomocniki tagów w określonym zestawie (*Microsoft. AspNetCore. MVC. TagHelpers*) będą dostępne dla każdego pliku widoku w katalogu *widoków* lub podkatalogu. Pierwszy parametr po `@addTagHelper` określeniu pomocników tagów do załadowania (używamy " \* " dla wszystkich pomocników tagów), a drugi parametr "Microsoft. AspNetCore. MVC. TagHelpers" określa zestaw zawierający pomocników tagów. *Microsoft. AspNetCore. MVC. TagHelpers* to zestaw wbudowanych pomocników tagów ASP.NET Core.
+`@addTagHelper`Dyrektywa powoduje, że pomocników tagów są dostępni do widoku. W takim przypadku plik widoku to *Pages/_ViewImports. cshtml* , które domyślnie są dziedziczone przez wszystkie pliki w folderze *stron* i podfolderach. Udostępnianie pomocników tagów. W powyższym kodzie użyto składni wieloznacznej (" \* "), aby określić, że wszystkie pomocniki tagów w określonym zestawie ( *Microsoft. AspNetCore. MVC. TagHelpers* ) będą dostępne dla każdego pliku widoku w katalogu *widoków* lub podkatalogu. Pierwszy parametr po `@addTagHelper` określeniu pomocników tagów do załadowania (używamy " \* " dla wszystkich pomocników tagów), a drugi parametr "Microsoft. AspNetCore. MVC. TagHelpers" określa zestaw zawierający pomocników tagów. *Microsoft. AspNetCore. MVC. TagHelpers* to zestaw wbudowanych pomocników tagów ASP.NET Core.
 
-Aby uwidocznić wszystkich pomocników tagów w tym projekcie (tworząc zestaw o nazwie *AuthoringTagHelpers*), należy użyć następujących elementów:
+Aby uwidocznić wszystkich pomocników tagów w tym projekcie (tworząc zestaw o nazwie *AuthoringTagHelpers* ), należy użyć następujących elementów:
 
 [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/_ViewImportsCopy.cshtml?highlight=3)]
 
@@ -93,7 +94,7 @@ Jeśli projekt zawiera `EmailTagHelper` domyślną przestrzeń nazw ( `Authoring
 @addTagHelper AuthoringTagHelpers.TagHelpers.EmailTagHelper, AuthoringTagHelpers
 ```
 
-Aby dodać pomocnika tagów do widoku przy użyciu FQN, należy najpierw dodać FQN ( `AuthoringTagHelpers.TagHelpers.EmailTagHelper` ), a następnie nazwę zestawu (*AuthoringTagHelpers*). Większość deweloperów preferuje użycie \* składni symbol wieloznaczny "". Składnia symbol wieloznaczny umożliwia wstawianie symbolu wieloznacznego " \* " jako sufiksu w FQN. Na przykład każda z poniższych dyrektyw przyniesie `EmailTagHelper` :
+Aby dodać pomocnika tagów do widoku przy użyciu FQN, należy najpierw dodać FQN ( `AuthoringTagHelpers.TagHelpers.EmailTagHelper` ), a następnie nazwę zestawu ( *AuthoringTagHelpers* ). Większość deweloperów preferuje użycie \* składni symbol wieloznaczny "". Składnia symbol wieloznaczny umożliwia wstawianie symbolu wieloznacznego " \* " jako sufiksu w FQN. Na przykład każda z poniższych dyrektyw przyniesie `EmailTagHelper` :
 
 ```cshtml
 @addTagHelper AuthoringTagHelpers.TagHelpers.E*, AuthoringTagHelpers
@@ -106,7 +107,7 @@ Jak wspomniano wcześniej, dodanie `@addTagHelper` dyrektywy do pliku *views/_Vi
 
 ### <a name="removetaghelper-removes-tag-helpers"></a>`@removeTagHelper` usuwa pomocników tagów
 
-`@removeTagHelper`Ma takie same dwa parametry jak `@addTagHelper` i usuwa pomocnika tagu, który został wcześniej dodany. Na przykład `@removeTagHelper` zastosowana do określonego widoku powoduje usunięcie określonego pomocnika tagów z widoku. Użycie `@removeTagHelper` w pliku *viewss/Folder/_ViewImports. cshtml* usuwa określony pomocnik tagów ze wszystkich widoków w *folderze*.
+`@removeTagHelper`Ma takie same dwa parametry jak `@addTagHelper` i usuwa pomocnika tagu, który został wcześniej dodany. Na przykład `@removeTagHelper` zastosowana do określonego widoku powoduje usunięcie określonego pomocnika tagów z widoku. Użycie `@removeTagHelper` w pliku *viewss/Folder/_ViewImports. cshtml* usuwa określony pomocnik tagów ze wszystkich widoków w *folderze* .
 
 ### <a name="controlling-tag-helper-scope-with-the-_viewimportscshtml-file"></a>Kontrolowanie zakresu pomocnika tagów przy użyciu pliku *_ViewImports. cshtml*
 
@@ -272,13 +273,13 @@ Edytor programu Visual Studio pomaga napisać **wszystkie** znaczniki w podejśc
 
 ## <a name="customizing-the-tag-helper-element-font"></a>Dostosowywanie czcionki elementu pomocnika tagów
 
-Możesz dostosować czcionkę i kolorowanie przy użyciu **Tools**  >  **opcji**narzędzia  >  **Environment**  >  **czcionki i kolory**środowiska:
+Możesz dostosować czcionkę i kolorowanie przy użyciu **Tools**  >  **opcji** narzędzia  >  **Environment**  >  **czcionki i kolory** środowiska:
 
 ![image (obraz)](intro/_static/fontoptions2.png)
 
 [!INCLUDE[](~/includes/built-in-TH.md)]
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Autorzy tagów](xref:mvc/views/tag-helpers/authoring)
 * [Praca z formularzami](xref:mvc/views/working-with-forms)

@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 10/17/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/dotnet-grpc
-ms.openlocfilehash: 18d504d7a130aeaa9f8ab6cca6c92dab5febfae6
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: f34e1543d9695e138a85db3b79e013cf5fb6d138
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633243"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059913"
 ---
 # <a name="manage-protobuf-references-with-dotnet-grpc"></a>Zarządzanie odwołaniami narzędzia Protobuf za pomocą narzędzia dotnet-GRPC
 
 Przez [Jan Luo](https://github.com/juntaoluo)
 
-`dotnet-grpc` jest globalnym narzędziem platformy .NET Core do zarządzania odwołaniami [protobuf (*. proto*)](xref:grpc/basics#proto-file) w ramach projektu .NET gRPC. Narzędzie może służyć do dodawania, odświeżania, usuwania i wyświetlania listy odwołań protobuf.
+`dotnet-grpc` jest globalnym narzędziem platformy .NET Core do zarządzania odwołaniami [protobuf ( *. proto* )](xref:grpc/basics#proto-file) w ramach projektu .NET gRPC. Narzędzie może służyć do dodawania, odświeżania, usuwania i wyświetlania listy odwołań protobuf.
 
 ## <a name="installation"></a>Instalacja
 
@@ -108,7 +109,7 @@ dotnet-grpc add-url [options] <url>
 | -p | --projekt | Ścieżka do pliku projektu, na którym mają być wykonywane działania. Jeśli plik nie zostanie określony, polecenie przeszukuje bieżący katalog.
 | -s | --usługi | Typ usług gRPC, które mają zostać wygenerowane. Jeśli `Default` jest określony, `Both` jest używany dla projektów sieci Web i `Client` jest używany dla projektów nieopartych na sieci Web. Akceptowane wartości to,,,, `Both` `Client` `Default` `None` `Server` .
 | -i | --dodatkowe-import-katalogów | Dodatkowe katalogi, które mają być używane podczas rozpoznawania importu dla plików protobuf. Jest to rozdzielana średnikami lista ścieżek.
-| | --dostęp | Modyfikator dostępu, który ma być używany dla wygenerowanych klas języka C#. Wartość domyślna to `Public` . Akceptowane wartości to `Internal` i `Public` .
+| | --dostęp | Modyfikator dostępu, który ma być używany dla wygenerowanych klas języka C#. Wartość domyślna to `Public`. Akceptowane wartości to `Internal` i `Public` .
 
 ## <a name="remove"></a>Usuń
 

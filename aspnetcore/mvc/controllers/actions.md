@@ -5,6 +5,7 @@ description: ''
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/actions
-ms.openlocfilehash: 9542a7c0fd16c00f46ee69c5873878a7c70ef626
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: a9319e74d0213b178c2a71be69a0332270d9446c
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630331"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061460"
 ---
 # <a name="handle-requests-with-controllers-in-aspnet-core-mvc"></a>Obsługa żądań z kontrolerami w ASP.NET Core MVC
 
@@ -31,7 +32,7 @@ Kontrolery, akcje i wyniki akcji są podstawową częścią sposobu, w jaki dewe
 
 ## <a name="what-is-a-controller"></a>Co to jest kontroler?
 
-Kontroler służy do definiowania i grupowania zestawu akcji. Akcja (lub *Metoda akcji*) to metoda na kontrolerze, który obsługuje żądania. Kontrolery logicznie grupują podobne działania jednocześnie. Ta agregacja akcji umożliwia stosowanie wspólnych zestawów reguł, takich jak routing, buforowanie i autoryzacja, które mają być stosowane zbiorczo. Żądania są mapowane na akcje za poorednictwem [routingu](xref:mvc/controllers/routing).
+Kontroler służy do definiowania i grupowania zestawu akcji. Akcja (lub *Metoda akcji* ) to metoda na kontrolerze, który obsługuje żądania. Kontrolery logicznie grupują podobne działania jednocześnie. Ta agregacja akcji umożliwia stosowanie wspólnych zestawów reguł, takich jak routing, buforowanie i autoryzacja, które mają być stosowane zbiorczo. Żądania są mapowane na akcje za poorednictwem [routingu](xref:mvc/controllers/routing).
 
 Według Konwencji, klasy kontrolera:
 
@@ -48,7 +49,7 @@ Klasa kontrolera nie może mieć skojarzonego `[NonController]` atrybutu.
 
 Kontrolery powinny przestrzegać [zasad jawnych zależności](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies). Istnieje kilka podejścia do implementowania tej zasady. Jeśli wiele akcji kontrolera wymaga tej samej usługi, rozważ użycie [iniekcji konstruktora](xref:mvc/controllers/dependency-injection#constructor-injection) , aby zażądać tych zależności. Jeśli usługa jest wymagana tylko przez pojedynczą metodę akcji, należy rozważyć użycie [iniekcji akcji](xref:mvc/controllers/dependency-injection#action-injection-with-fromservices) , aby zażądać zależności.
 
-W przypadku wzorca **M**odelu-**V**każ-**C**kontroler jest odpowiedzialny za wstępne przetwarzanie żądania i tworzenie wystąpienia modelu. Ogólnie rzecz biorąc, decyzje biznesowe powinny być wykonywane w ramach modelu.
+W przypadku wzorca **M** odelu- **V** każ- **C** kontroler jest odpowiedzialny za wstępne przetwarzanie żądania i tworzenie wystąpienia modelu. Ogólnie rzecz biorąc, decyzje biznesowe powinny być wykonywane w ramach modelu.
 
 Kontroler pobiera wynik przetwarzania modelu (jeśli istnieje) i zwraca odpowiedni widok oraz powiązane z nim dane widoku lub wynik wywołania interfejsu API. Dowiedz się więcej na [temat ASP.NET Core MVC](xref:mvc/overview) i [rozpocznij pracę z ASP.NET Core MVC i Visual Studio](xref:tutorials/first-mvc-app/start-mvc).
 
@@ -60,7 +61,7 @@ Metody publiczne na kontrolerze, z wyjątkiem tych z `[NonAction]` atrybutem, s�
 
 Metody akcji powinny zawierać logikę mapowania żądania do zagadnienia biznesowego. Kwestie biznesowe powinny być zwykle reprezentowane jako usługi, do których kontroler uzyskuje dostęp poprzez [iniekcję zależności](xref:mvc/controllers/dependency-injection). Następnie akcje mapują wynik akcji biznesowej do stanu aplikacji.
 
-Akcje mogą zwracać wszystko, ale często zwracają wystąpienie `IActionResult` (lub `Task<IActionResult>` dla metod asynchronicznych), które generuje odpowiedź. Metoda akcji jest odpowiedzialna za wybór *rodzaju odpowiedzi*. Wynik akcji *wykonuje odpowiedź*.
+Akcje mogą zwracać wszystko, ale często zwracają wystąpienie `IActionResult` (lub `Task<IActionResult>` dla metod asynchronicznych), które generuje odpowiedź. Metoda akcji jest odpowiedzialna za wybór *rodzaju odpowiedzi* . Wynik akcji *wykonuje odpowiedź* .
 
 ### <a name="controller-helper-methods"></a>Metody pomocnika kontrolera
 
@@ -100,13 +101,13 @@ W tej kategorii istnieją dwa typy wyników: [Wyświetl](xref:mvc/views/overview
 
 #### <a name="3-methods-resulting-in-a-non-empty-response-body-formatted-in-a-content-type-negotiated-with-the-client"></a>3. metody powodujące niepustą treść odpowiedzi sformatowaną w typie zawartości negocjowanej z klientem
 
-Ta kategoria jest lepiej znana jako **negocjowanie zawartości**. [Negocjowanie zawartości](xref:web-api/advanced/formatting#content-negotiation) ma zastosowanie zawsze, gdy akcja zwraca typ [ObjectResult](/dotnet/api/microsoft.aspnetcore.mvc.objectresult) lub coś innego niż implementacja [IActionResult](/dotnet/api/microsoft.aspnetcore.mvc.iactionresult) . Akcja zwracająca brak `IActionResult` implementacji (na przykład `object` ) zwraca również sformatowaną odpowiedź.
+Ta kategoria jest lepiej znana jako **negocjowanie zawartości** . [Negocjowanie zawartości](xref:web-api/advanced/formatting#content-negotiation) ma zastosowanie zawsze, gdy akcja zwraca typ [ObjectResult](/dotnet/api/microsoft.aspnetcore.mvc.objectresult) lub coś innego niż implementacja [IActionResult](/dotnet/api/microsoft.aspnetcore.mvc.iactionresult) . Akcja zwracająca brak `IActionResult` implementacji (na przykład `object` ) zwraca również sformatowaną odpowiedź.
 
 Niektóre metody pomocnika tego typu obejmują `BadRequest` , `CreatedAtRoute` , i `Ok` . Przykłady tych metod obejmują `return BadRequest(modelState);` odpowiednio, `return CreatedAtRoute("routename", values, newobject);` i `return Ok(value);` . Należy pamiętać, że `BadRequest` i `Ok` przeprowadzić negocjację zawartości tylko wtedy, gdy przekazała wartość; bez przekazywania wartości, zamiast tego jako typy wyników kodu stanu HTTP. Z `CreatedAtRoute` drugiej strony Metoda zawsze wykonuje negocjację zawartości, ponieważ jej przeciążenia wymagają, aby wartość została przekazana.
 
 ### <a name="cross-cutting-concerns"></a>Zagadnienia dotyczące wycinania
 
-Aplikacje zwykle udostępniają części ich przepływu pracy. Przykładem może być aplikacja wymagająca uwierzytelniania w celu uzyskania dostępu do koszyka lub aplikacja, która przechowuje dane na niektórych stronach. Aby wykonać logikę przed lub po metodzie akcji, użyj *filtru*. Użycie [filtrów](xref:mvc/controllers/filters) na temat zagadnień związanych z rozcinaniem może zmniejszyć liczbę operacji duplikowania.
+Aplikacje zwykle udostępniają części ich przepływu pracy. Przykładem może być aplikacja wymagająca uwierzytelniania w celu uzyskania dostępu do koszyka lub aplikacja, która przechowuje dane na niektórych stronach. Aby wykonać logikę przed lub po metodzie akcji, użyj *filtru* . Użycie [filtrów](xref:mvc/controllers/filters) na temat zagadnień związanych z rozcinaniem może zmniejszyć liczbę operacji duplikowania.
 
 Większość atrybutów filtru, takich jak `[Authorize]` , może być stosowana na poziomie kontrolera lub akcji w zależności od wymaganego poziomu szczegółowości.
 

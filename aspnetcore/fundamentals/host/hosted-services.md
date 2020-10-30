@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/10/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/host/hosted-services
-ms.openlocfilehash: 04841eb4f6adfec76020d3fe61601037c3fc0733
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: b8d6ec079ed39fb3a2c314816ebae6cea0847a36
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635349"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061083"
 ---
 # <a name="background-tasks-with-hosted-services-in-aspnet-core"></a>Zadania w tle z usługami hostowanymi w ASP.NET Core
 
@@ -31,7 +32,7 @@ Według [Jeow li Huan](https://github.com/huan086)
 
 ::: moniker range=">= aspnetcore-3.0"
 
-W ASP.NET Core zadania w tle można zaimplementować jako *usługi hostowane*. Usługa hostowana jest klasą z logiką zadań w tle, która implementuje <xref:Microsoft.Extensions.Hosting.IHostedService> interfejs. Ten temat zawiera trzy przykłady usługi hostowanej:
+W ASP.NET Core zadania w tle można zaimplementować jako *usługi hostowane* . Usługa hostowana jest klasą z logiką zadań w tle, która implementuje <xref:Microsoft.Extensions.Hosting.IHostedService> interfejs. Ten temat zawiera trzy przykłady usługi hostowanej:
 
 * Zadanie w tle, które jest uruchamiane na czasomierzu.
 * Usługa hostowana, która aktywuje [usługę](xref:fundamentals/dependency-injection#service-lifetimes)o określonym zakresie. Usługa objęta zakresem może używać [iniekcji zależności (di)](xref:fundamentals/dependency-injection).
@@ -53,7 +54,7 @@ Aby użyć szablonu jako podstawy dla aplikacji usług hostowanych:
 
 ## <a name="package"></a>Pakiet
 
-Aplikacja oparta na szablonie usługi procesu roboczego używa `Microsoft.NET.Sdk.Worker` zestawu SDK i ma jawne odwołanie do pakietu [Microsoft. Extensions. hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting) . Na przykład zapoznaj się z plikiem projektu przykładowej aplikacji (*BackgroundTasksSample. csproj*).
+Aplikacja oparta na szablonie usługi procesu roboczego używa `Microsoft.NET.Sdk.Worker` zestawu SDK i ma jawne odwołanie do pakietu [Microsoft. Extensions. hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting) . Na przykład zapoznaj się z plikiem projektu przykładowej aplikacji ( *BackgroundTasksSample. csproj* ).
 
 W przypadku aplikacji sieci Web, które używają `Microsoft.NET.Sdk.Web` zestawu SDK, pakiet [Microsoft. Extensions. hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting) jest przywoływany niejawnie z udostępnionej struktury. Jawne odwołanie do pakietu w pliku projektu aplikacji nie jest wymagane.
 
@@ -61,7 +62,7 @@ W przypadku aplikacji sieci Web, które używają `Microsoft.NET.Sdk.Web` zestaw
 
 <xref:Microsoft.Extensions.Hosting.IHostedService>Interfejs definiuje dwie metody dla obiektów zarządzanych przez hosta:
 
-* [StartAsync (CancellationToken)](xref:Microsoft.Extensions.Hosting.IHostedService.StartAsync*): `StartAsync` zawiera logikę do uruchomienia zadania w tle. `StartAsync` jest wywoływana *przed*:
+* [StartAsync (CancellationToken)](xref:Microsoft.Extensions.Hosting.IHostedService.StartAsync*): `StartAsync` zawiera logikę do uruchomienia zadania w tle. `StartAsync` jest wywoływana *przed* :
 
   * Skonfigurowano potok przetwarzania żądania aplikacji ( `Startup.Configure` ).
   * Serwer został uruchomiony i zostanie wyzwolony [IApplicationLifetime. ApplicationStarted](xref:Microsoft.AspNetCore.Hosting.IApplicationLifetime.ApplicationStarted*) .
@@ -127,7 +128,7 @@ Zadanie w tle czasu używa klasy [System. Threading. Timer](xref:System.Threadin
 
 <xref:System.Threading.Timer>Nie czeka na zakończenie poprzednich wykonań `DoWork` , więc wskazane podejście może nie być odpowiednie dla każdego scenariusza. Z [blokadą. przyrost](xref:System.Threading.Interlocked.Increment*) służy do zwiększania licznika wykonywania jako operacja niepodzielna, która zapewnia, że wiele wątków nie zostanie jednocześnie zaktualizowanych `executionCount` .
 
-Usługa jest zarejestrowana w `IHostBuilder.ConfigureServices` (*program.cs*) z `AddHostedService` metodą rozszerzenia:
+Usługa jest zarejestrowana w `IHostBuilder.ConfigureServices` ( *program.cs* ) z `AddHostedService` metodą rozszerzenia:
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Program.cs?name=snippet1)]
 
@@ -146,7 +147,7 @@ Usługa hostowana tworzy zakres, aby rozwiązać usługę zadań w tle w zakresi
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Services/ConsumeScopedServiceHostedService.cs?name=snippet1&highlight=19,22-35)]
 
-Usługi są zarejestrowane w usłudze `IHostBuilder.ConfigureServices` (*program.cs*). Usługa hostowana jest zarejestrowana przy użyciu `AddHostedService` metody rozszerzającej:
+Usługi są zarejestrowane w usłudze `IHostBuilder.ConfigureServices` ( *program.cs* ). Usługa hostowana jest zarejestrowana przy użyciu `AddHostedService` metody rozszerzającej:
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Program.cs?name=snippet2)]
 
@@ -169,12 +170,12 @@ W poniższym `QueueHostedService` przykładzie:
 * `IBackgroundTaskQueue`Jest wstrzykiwana do `MonitorLoop` usługi.
 * `IBackgroundTaskQueue.QueueBackgroundWorkItem` jest wywoływana w celu dodawania do kolejki elementu pracy.
 * Element roboczy symuluje długotrwałe zadanie w tle:
-  * Trzy 5-sekundowe opóźnienia są wykonywane ( `Task.Delay` ).
+  * 3 5 — dwa opóźnienia są wykonywane ( `Task.Delay` ).
   * `try-catch`Pułapka instrukcji <xref:System.OperationCanceledException> , jeśli zadanie zostało anulowane.
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Services/MonitorLoop.cs?name=snippet_Monitor&highlight=7,33)]
 
-Usługi są zarejestrowane w usłudze `IHostBuilder.ConfigureServices` (*program.cs*). Usługa hostowana jest zarejestrowana przy użyciu `AddHostedService` metody rozszerzającej:
+Usługi są zarejestrowane w usłudze `IHostBuilder.ConfigureServices` ( *program.cs* ). Usługa hostowana jest zarejestrowana przy użyciu `AddHostedService` metody rozszerzającej:
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Program.cs?name=snippet3)]
 
@@ -186,7 +187,7 @@ Usługi są zarejestrowane w usłudze `IHostBuilder.ConfigureServices` (*program
 
 ::: moniker range="< aspnetcore-3.0"
 
-W ASP.NET Core zadania w tle można zaimplementować jako *usługi hostowane*. Usługa hostowana jest klasą z logiką zadań w tle, która implementuje <xref:Microsoft.Extensions.Hosting.IHostedService> interfejs. Ten temat zawiera trzy przykłady usługi hostowanej:
+W ASP.NET Core zadania w tle można zaimplementować jako *usługi hostowane* . Usługa hostowana jest klasą z logiką zadań w tle, która implementuje <xref:Microsoft.Extensions.Hosting.IHostedService> interfejs. Ten temat zawiera trzy przykłady usługi hostowanej:
 
 * Zadanie w tle, które jest uruchamiane na czasomierzu.
 * Usługa hostowana, która aktywuje [usługę](xref:fundamentals/dependency-injection#service-lifetimes)o określonym zakresie. Usługa objęta zakresem może używać [iniekcji zależności (di)](xref:fundamentals/dependency-injection)

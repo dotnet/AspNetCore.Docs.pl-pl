@@ -5,6 +5,7 @@ description: Dowiedz się, jak ASP.NET Core MVC to rozbudowana platforma służ�
 ms.author: riande
 ms.date: 02/12/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/overview
-ms.openlocfilehash: 29701506d9f6c1ff90081a548d524bc0deb65cda
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: c55421efa1fd559f462549bfaceb794d4a9c35b8
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633620"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059315"
 ---
 # <a name="overview-of-aspnet-core-mvc"></a>Omówienie platformy ASP.NET Core MVC
 
@@ -268,5 +269,5 @@ Aby uzyskać więcej informacji, zobacz <xref:mvc/compatibility-version>.
 
 ## <a name="additional-resources"></a>Dodatkowe zasoby
 
-* [AspNetCore. MVC-Fluent — Biblioteka testów dla ASP.NET Core MVC](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc): Biblioteka testów jednostkowych z jednoznacznie określonymi typami, dostarczająca interfejs Fluent do testowania aplikacji MVC i Web API. (*Niekonserwowane lub obsługiwane przez firmę Microsoft).*
+* [AspNetCore. MVC-Fluent — Biblioteka testów dla ASP.NET Core MVC](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc): Biblioteka testów jednostkowych z jednoznacznie określonymi typami, dostarczająca interfejs Fluent do testowania aplikacji MVC i Web API. ( *Niekonserwowane lub obsługiwane przez firmę Microsoft).*
 * <xref:blazor/components/integrate-components-into-razor-pages-and-mvc-apps>

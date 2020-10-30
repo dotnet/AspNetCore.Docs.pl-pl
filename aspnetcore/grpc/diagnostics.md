@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 09/23/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/diagnostics
-ms.openlocfilehash: 7d2da20d04b93ebcd16fb58a4b74b5b67d37bd72
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 1f25ae76e5a480e5e6f247e4ac78d06dd4e778e9
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722926"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060446"
 ---
 # <a name="logging-and-diagnostics-in-grpc-on-net"></a>Rejestrowanie i Diagnostyka w programie gRPC na platformie .NET
 
@@ -45,7 +46,7 @@ usługi gRPC i dzienniki zapisu klienta gRPC przy użyciu funkcji [rejestrowania
 
 Ponieważ usługi gRPC Services są hostowane na ASP.NET Core, korzysta z systemu rejestrowania ASP.NET Core. W konfiguracji domyślnej gRPC rejestruje bardzo mało informacji, ale można je skonfigurować. Szczegółowe informacje na temat konfigurowania rejestrowania ASP.NET Core można znaleźć w dokumentacji dotyczącej [rejestrowania ASP.NET Core](xref:fundamentals/logging/index#configuration) .
 
-gRPC dodaje dzienniki w `Grpc` kategorii. Aby włączyć szczegółowe dzienniki z gRPC, skonfiguruj `Grpc` prefiksy na `Debug` poziomie *appsettings.jsw* pliku, dodając następujące elementy do `LogLevel` podsekcji w `Logging` :
+gRPC dodaje dzienniki w `Grpc` kategorii. Aby włączyć szczegółowe dzienniki z gRPC, skonfiguruj `Grpc` prefiksy do `Debug` poziomu w *appsettings.json* pliku, dodając następujące elementy do `LogLevel` podsekcji w `Logging` :
 
 [!code-json[](diagnostics/sample/logging-config.json?highlight=7)]
 
@@ -222,7 +223,7 @@ Press p to pause, r to resume, q to quit.
 
 Innym sposobem na obserwowanie metryk gRPC jest przechwycenie danych licznika przy Application Insights użyciu [pakietu Microsoft. ApplicationInsights. EventCounterCollector](/azure/azure-monitor/app/eventcounters). Po zakończeniu instalacji Application Insights zbiera typowe liczniki platformy .NET w czasie wykonywania. Liczniki gRPC nie są zbierane domyślnie, ale usługi App Insights można [dostosować w celu uwzględnienia dodatkowych liczników](/azure/azure-monitor/app/eventcounters#customizing-counters-to-be-collected).
 
-Określ gRPC Liczniki usługi Application Insights do zebrania w *Startup.cs*:
+Określ gRPC Liczniki usługi Application Insights do zebrania w *Startup.cs* :
 
 ```csharp
     using Microsoft.ApplicationInsights.Extensibility.EventCounterCollector;

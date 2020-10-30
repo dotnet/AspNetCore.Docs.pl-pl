@@ -5,6 +5,7 @@ description: Część 7 Razor stron i Entity Framework serii samouczków.
 ms.author: riande
 ms.date: 07/22/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/update-related-data
-ms.openlocfilehash: 17b200f0ba90035c417c96689798263af16551de
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 3ec88a862697c540a1a98e733c31d76922f81f7c
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722822"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060537"
 ---
 # <a name="part-7-no-locrazor-pages-with-ef-core-in-aspnet-core---update-related-data"></a>Część 7 Razor strony z EF Core w programie ASP.NET Core — aktualizacja powiązanych danych
 
@@ -76,7 +77,7 @@ Zaktualizuj *strony/kursy/Utwórz. cshtml* przy użyciu następującego kodu:
 
 Poprzedni kod wprowadza następujące zmiany:
 
-* Zmienia podpis z **DepartmentID** na **dział**.
+* Zmienia podpis z **DepartmentID** na **dział** .
 * Zamienia wartość `"ViewBag.DepartmentID"` na `DepartmentNameSL` (z klasy bazowej).
 * Dodaje opcję "Wybierz dział". Ta zmiana renderuje "Select Department" na liście rozwijanej, gdy nie wybrano jeszcze żadnego działu, a nie pierwszego działu.
 * Dodaje komunikat weryfikacyjny, gdy nie wybrano działu.
@@ -104,10 +105,10 @@ Aktualizowanie *stron/kursów/Edit. cshtml* przy użyciu następującego kodu:
 Poprzedni kod wprowadza następujące zmiany:
 
 * Wyświetla identyfikator kursu. Zazwyczaj klucz podstawowy (PK) jednostki nie jest wyświetlany. PKs są zwykle oznaczane przez użytkowników. W tym przypadku klucz podstawowy jest numerem kursu.
-* Zmienia podpis dla listy rozwijanej działu od **DepartmentID** do **działu**.
+* Zmienia podpis dla listy rozwijanej działu od **DepartmentID** do **działu** .
 * Zamienia wartość `"ViewBag.DepartmentID"` na `DepartmentNameSL` (z klasy bazowej).
 
-Ta strona zawiera ukryte pole ( `<input type="hidden">` ) dla numeru kursu. Dodanie `<label>` pomocnika tagów z `asp-for="Course.CourseID"` nie eliminuje potrzeby pola ukrytego. `<input type="hidden">` jest wymagana do uwzględnienia numeru kursu w opublikowanych danych, gdy użytkownik kliknie przycisk **Zapisz**.
+Ta strona zawiera ukryte pole ( `<input type="hidden">` ) dla numeru kursu. Dodanie `<label>` pomocnika tagów z `asp-for="Course.CourseID"` nie eliminuje potrzeby pola ukrytego. `<input type="hidden">` jest wymagana do uwzględnienia numeru kursu w opublikowanych danych, gdy użytkownik kliknie przycisk **Zapisz** .
 
 ## <a name="update-the-course-details-and-delete-pages"></a>Aktualizowanie szczegółów kursu i stron usuwania
 
@@ -293,7 +294,7 @@ Zaktualizuj *strony/kursy/Utwórz. cshtml* przy użyciu następującego kodu:
 
 Poprzedzające znaczniki wprowadzają następujące zmiany:
 
-* Zmienia podpis z **DepartmentID** na **dział**.
+* Zmienia podpis z **DepartmentID** na **dział** .
 * Zamienia wartość `"ViewBag.DepartmentID"` na `DepartmentNameSL` (z klasy bazowej).
 * Dodaje opcję "Wybierz dział". Ta zmiana renderuje "Select Department" zamiast pierwszego działu.
 * Dodaje komunikat weryfikacyjny, gdy nie wybrano działu.
@@ -319,10 +320,10 @@ Aktualizowanie *stron/kursów/Edit. cshtml* przy użyciu następującego znaczni
 Poprzedzające znaczniki wprowadzają następujące zmiany:
 
 * Wyświetla identyfikator kursu. Zazwyczaj klucz podstawowy (PK) jednostki nie jest wyświetlany. PKs są zwykle oznaczane przez użytkowników. W tym przypadku klucz podstawowy jest numerem kursu.
-* Zmienia podpis z **DepartmentID** na **dział**.
+* Zmienia podpis z **DepartmentID** na **dział** .
 * Zamienia wartość `"ViewBag.DepartmentID"` na `DepartmentNameSL` (z klasy bazowej).
 
-Ta strona zawiera ukryte pole ( `<input type="hidden">` ) dla numeru kursu. Dodanie `<label>` pomocnika tagów z `asp-for="Course.CourseID"` nie eliminuje potrzeby pola ukrytego. `<input type="hidden">` jest wymagana do uwzględnienia numeru kursu w opublikowanych danych, gdy użytkownik kliknie przycisk **Zapisz**.
+Ta strona zawiera ukryte pole ( `<input type="hidden">` ) dla numeru kursu. Dodanie `<label>` pomocnika tagów z `asp-for="Course.CourseID"` nie eliminuje potrzeby pola ukrytego. `<input type="hidden">` jest wymagana do uwzględnienia numeru kursu w opublikowanych danych, gdy użytkownik kliknie przycisk **Zapisz** .
 
 Przetestuj zaktualizowany kod. Tworzenie, edytowanie i usuwanie kursu.
 
@@ -455,7 +456,7 @@ Poprzedni kod wprowadza następujące zmiany:
 
 * Jeśli instruktor zostanie usunięty, zostanie przypisany jako administrator jakichkolwiek działów, program usunie przypisanie instruktora z tych urzędów.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Wersja usługi YouTube w tym samouczku (część 1)](https://www.youtube.com/watch?v=Csh6gkmwc9E)
 * [Wersja usługi YouTube w tym samouczku (część 2)](https://www.youtube.com/watch?v=mOAankB_Zgc)

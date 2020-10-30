@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/21/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/file-uploads
-ms.openlocfilehash: 6ff78b26e8e2363cf6c54ebb2a392f390fb2995c
-ms.sourcegitcommit: cd412a44f26cb416ceb348fc0a1ccc9a6e9ca73e
+ms.openlocfilehash: 14561bace565c104d0a9c926cad3105c4865e72a
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/21/2020
-ms.locfileid: "88720282"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061174"
 ---
 # <a name="upload-files-in-aspnet-core"></a>Przekaż pliki w ASP.NET Core
 
@@ -124,7 +125,7 @@ Przesyłanie strumieniowe dużych plików jest omówione w sekcji [przekazywanie
 
 Aby przekazać małe pliki, użyj formularza wieloczęściowego lub Skonstruuj żądanie POST przy użyciu języka JavaScript.
 
-Poniższy przykład ilustruje użycie Razor formularza stron do przekazywania pojedynczego pliku (*Pages/BufferedSingleFileUploadPhysical. cshtml* w przykładowej aplikacji):
+Poniższy przykład ilustruje użycie Razor formularza stron do przekazywania pojedynczego pliku ( *Pages/BufferedSingleFileUploadPhysical. cshtml* w przykładowej aplikacji):
 
 ```cshtml
 <form enctype="multipart/form-data" method="post">
@@ -194,7 +195,7 @@ Poniższy przykład jest analogiczny do poprzedniego przykładu, z wyjątkiem te
 Aby wykonać formularz POST w języku JavaScript dla klientów, którzy [nie obsługują interfejsu API pobierania](https://caniuse.com/#feat=fetch), należy użyć jednej z następujących metod:
 
 * Użyj wypełniania pobierania (na przykład [window. Fetch Fill (GitHub/Fetch)](https://github.com/github/fetch)).
-* Użyj polecenia `XMLHttpRequest`. Na przykład:
+* Użyj polecenia `XMLHttpRequest`. Przykład:
 
   ```javascript
   <script>
@@ -435,7 +436,7 @@ Pełna `StreamingController.UploadDatabase` Metoda przesyłania strumieniowego d
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Controllers/StreamingController.cs?name=snippet_UploadDatabase)]
 
-`MultipartRequestHelper` (*Narzędzia/MultipartRequestHelper. cs*):
+`MultipartRequestHelper` ( *Narzędzia/MultipartRequestHelper. cs* ):
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Utilities/MultipartRequestHelper.cs)]
 
@@ -467,7 +468,7 @@ Skanowanie plików wymaga użycia zasobów serwera w scenariuszach o dużych ilo
 
 ### <a name="file-extension-validation"></a>Weryfikacja rozszerzenia pliku
 
-Rozszerzenie przekazanego pliku powinno być sprawdzane względem listy dozwolonych rozszerzeń. Na przykład:
+Rozszerzenie przekazanego pliku powinno być sprawdzane względem listy dozwolonych rozszerzeń. Przykład:
 
 ```csharp
 private string[] permittedExtensions = { ".txt", ".pdf" };
@@ -533,7 +534,7 @@ Wiele implementacji musi zawierać sprawdzenie, czy plik istnieje; w przeciwnym 
 
 Ogranicz rozmiar przekazanych plików.
 
-W przykładowej aplikacji rozmiar pliku jest ograniczony do 2 MB (wyrażony w bajtach). Limit jest dostarczany przez [konfigurację](xref:fundamentals/configuration/index) z *appsettings.jsw* pliku:
+W przykładowej aplikacji rozmiar pliku jest ograniczony do 2 MB (wyrażony w bajtach). Limit jest dostarczany przez [konfigurację](xref:fundamentals/configuration/index) z *appsettings.json* pliku:
 
 ```json
 {
@@ -848,7 +849,7 @@ Przesyłanie strumieniowe dużych plików jest omówione w sekcji [przekazywanie
 
 Aby przekazać małe pliki, użyj formularza wieloczęściowego lub Skonstruuj żądanie POST przy użyciu języka JavaScript.
 
-Poniższy przykład ilustruje użycie Razor formularza stron do przekazywania pojedynczego pliku (*Pages/BufferedSingleFileUploadPhysical. cshtml* w przykładowej aplikacji):
+Poniższy przykład ilustruje użycie Razor formularza stron do przekazywania pojedynczego pliku ( *Pages/BufferedSingleFileUploadPhysical. cshtml* w przykładowej aplikacji):
 
 ```cshtml
 <form enctype="multipart/form-data" method="post">
@@ -918,7 +919,7 @@ Poniższy przykład jest analogiczny do poprzedniego przykładu, z wyjątkiem te
 Aby wykonać formularz POST w języku JavaScript dla klientów, którzy [nie obsługują interfejsu API pobierania](https://caniuse.com/#feat=fetch), należy użyć jednej z następujących metod:
 
 * Użyj wypełniania pobierania (na przykład [window. Fetch Fill (GitHub/Fetch)](https://github.com/github/fetch)).
-* Użyj polecenia `XMLHttpRequest`. Na przykład:
+* Użyj polecenia `XMLHttpRequest`. Przykład:
 
   ```javascript
   <script>
@@ -1159,7 +1160,7 @@ Pełna `StreamingController.UploadDatabase` Metoda przesyłania strumieniowego d
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Controllers/StreamingController.cs?name=snippet_UploadDatabase)]
 
-`MultipartRequestHelper` (*Narzędzia/MultipartRequestHelper. cs*):
+`MultipartRequestHelper` ( *Narzędzia/MultipartRequestHelper. cs* ):
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Utilities/MultipartRequestHelper.cs)]
 
@@ -1191,7 +1192,7 @@ Skanowanie plików wymaga użycia zasobów serwera w scenariuszach o dużych ilo
 
 ### <a name="file-extension-validation"></a>Weryfikacja rozszerzenia pliku
 
-Rozszerzenie przekazanego pliku powinno być sprawdzane względem listy dozwolonych rozszerzeń. Na przykład:
+Rozszerzenie przekazanego pliku powinno być sprawdzane względem listy dozwolonych rozszerzeń. Przykład:
 
 ```csharp
 private string[] permittedExtensions = { ".txt", ".pdf" };
@@ -1257,7 +1258,7 @@ Wiele implementacji musi zawierać sprawdzenie, czy plik istnieje; w przeciwnym 
 
 Ogranicz rozmiar przekazanych plików.
 
-W przykładowej aplikacji rozmiar pliku jest ograniczony do 2 MB (wyrażony w bajtach). Limit jest dostarczany przez [konfigurację](xref:fundamentals/configuration/index) z *appsettings.jsw* pliku:
+W przykładowej aplikacji rozmiar pliku jest ograniczony do 2 MB (wyrażony w bajtach). Limit jest dostarczany przez [konfigurację](xref:fundamentals/configuration/index) z *appsettings.json* pliku:
 
 ```json
 {
@@ -1583,7 +1584,7 @@ Przesyłanie strumieniowe dużych plików jest omówione w sekcji [przekazywanie
 
 Aby przekazać małe pliki, użyj formularza wieloczęściowego lub Skonstruuj żądanie POST przy użyciu języka JavaScript.
 
-Poniższy przykład ilustruje użycie Razor formularza stron do przekazywania pojedynczego pliku (*Pages/BufferedSingleFileUploadPhysical. cshtml* w przykładowej aplikacji):
+Poniższy przykład ilustruje użycie Razor formularza stron do przekazywania pojedynczego pliku ( *Pages/BufferedSingleFileUploadPhysical. cshtml* w przykładowej aplikacji):
 
 ```cshtml
 <form enctype="multipart/form-data" method="post">
@@ -1653,7 +1654,7 @@ Poniższy przykład jest analogiczny do poprzedniego przykładu, z wyjątkiem te
 Aby wykonać formularz POST w języku JavaScript dla klientów, którzy [nie obsługują interfejsu API pobierania](https://caniuse.com/#feat=fetch), należy użyć jednej z następujących metod:
 
 * Użyj wypełniania pobierania (na przykład [window. Fetch Fill (GitHub/Fetch)](https://github.com/github/fetch)).
-* Użyj polecenia `XMLHttpRequest`. Na przykład:
+* Użyj polecenia `XMLHttpRequest`. Przykład:
 
   ```javascript
   <script>
@@ -1894,7 +1895,7 @@ Pełna `StreamingController.UploadDatabase` Metoda przesyłania strumieniowego d
 
 [!code-csharp[](file-uploads/samples/2.x/SampleApp/Controllers/StreamingController.cs?name=snippet_UploadDatabase)]
 
-`MultipartRequestHelper` (*Narzędzia/MultipartRequestHelper. cs*):
+`MultipartRequestHelper` ( *Narzędzia/MultipartRequestHelper. cs* ):
 
 [!code-csharp[](file-uploads/samples/2.x/SampleApp/Utilities/MultipartRequestHelper.cs)]
 
@@ -1926,7 +1927,7 @@ Skanowanie plików wymaga użycia zasobów serwera w scenariuszach o dużych ilo
 
 ### <a name="file-extension-validation"></a>Weryfikacja rozszerzenia pliku
 
-Rozszerzenie przekazanego pliku powinno być sprawdzane względem listy dozwolonych rozszerzeń. Na przykład:
+Rozszerzenie przekazanego pliku powinno być sprawdzane względem listy dozwolonych rozszerzeń. Przykład:
 
 ```csharp
 private string[] permittedExtensions = { ".txt", ".pdf" };
@@ -1992,7 +1993,7 @@ Wiele implementacji musi zawierać sprawdzenie, czy plik istnieje; w przeciwnym 
 
 Ogranicz rozmiar przekazanych plików.
 
-W przykładowej aplikacji rozmiar pliku jest ograniczony do 2 MB (wyrażony w bajtach). Limit jest dostarczany przez [konfigurację](xref:fundamentals/configuration/index) z *appsettings.jsw* pliku:
+W przykładowej aplikacji rozmiar pliku jest ograniczony do 2 MB (wyrażony w bajtach). Limit jest dostarczany przez [konfigurację](xref:fundamentals/configuration/index) z *appsettings.json* pliku:
 
 ```json
 {
@@ -2219,7 +2220,7 @@ Przykłady w tym temacie polegają na zapełnieniu <xref:System.IO.MemoryStream>
 ::: moniker-end
 
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Opróżnianie żądań połączenia HTTP](xref:fundamentals/servers/kestrel#http11-request-draining)
 * [Przekazywanie plików bez ograniczeń](https://owasp.org/www-community/vulnerabilities/Unrestricted_File_Upload)

@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 5/7/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/index
-ms.openlocfilehash: 7fe3e18b226061260d0c17220ba110bd61486b5f
-ms.sourcegitcommit: d60bfd52bfb559e805abd654b87a2a0c7eb69cf8
+ms.openlocfilehash: e4a94ca9e3607868f3eb25d88338e8156f7f5206
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/06/2020
-ms.locfileid: "91754700"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061525"
 ---
 # <a name="host-aspnet-core-on-windows-with-iis"></a>ASP.NET Core hosta w systemie Windows z usługami IIS
 
@@ -270,7 +271,7 @@ Jeśli musisz przekształcić `web.config` przy publikowaniu, zobacz <xref:host-
 
 Włącz rolę serwera **serwera sieci Web (IIS)** i Ustanów usługi ról.
 
-1. Użyj kreatora **dodawania ról i funkcji** z menu **Zarządzaj** lub łącza w **Menedżer serwera**. W kroku **role serwera** zaznacz pole wyboru **serwer sieci Web (IIS)**.
+1. Użyj kreatora **dodawania ról i funkcji** z menu **Zarządzaj** lub łącza w **Menedżer serwera** . W kroku **role serwera** zaznacz pole wyboru **serwer sieci Web (IIS)** .
 
    ![W kroku wybierz role serwera zostanie wybrana rola IIS serwera sieci Web.](index/_static/server-roles-ws2016.png)
 
@@ -279,32 +280,32 @@ Włącz rolę serwera **serwera sieci Web (IIS)** i Ustanów usługi ról.
    ![Domyślne usługi ról są wybrane w kroku Wybierz usługi ról.](index/_static/role-services-ws2016.png)
 
    **Uwierzytelnianie systemu Windows (opcjonalnie)**  
-   Aby włączyć uwierzytelnianie systemu Windows, rozwiń następujące węzły: **Zabezpieczenia serwera sieci Web**  >  **Security**. Wybierz funkcję **uwierzytelniania systemu Windows** . Aby uzyskać więcej informacji, zobacz [uwierzytelnianie `<windowsAuthentication>` systemu Windows](/iis/configuration/system.webServer/security/authentication/windowsAuthentication/) i [Konfigurowanie uwierzytelniania systemu Windows](xref:security/authentication/windowsauth).
+   Aby włączyć uwierzytelnianie systemu Windows, rozwiń następujące węzły: **Zabezpieczenia serwera sieci Web**  >  **Security** . Wybierz funkcję **uwierzytelniania systemu Windows** . Aby uzyskać więcej informacji, zobacz [uwierzytelnianie `<windowsAuthentication>` systemu Windows](/iis/configuration/system.webServer/security/authentication/windowsAuthentication/) i [Konfigurowanie uwierzytelniania systemu Windows](xref:security/authentication/windowsauth).
 
    **Obiekty WebSockets (opcjonalnie)**  
-   Obiekty WebSockets są obsługiwane w ASP.NET Core 1,1 lub nowszych. Aby włączyć obiekty WebSockets, rozwiń następujące węzły: projektowanie aplikacji **serwera sieci Web**  >  **Application Development**. Wybierz funkcję **protokołu WebSocket** . Aby uzyskać więcej informacji, zobacz [WebSockets](xref:fundamentals/websockets).
+   Obiekty WebSockets są obsługiwane w ASP.NET Core 1,1 lub nowszych. Aby włączyć obiekty WebSockets, rozwiń następujące węzły: projektowanie aplikacji **serwera sieci Web**  >  **Application Development** . Wybierz funkcję **protokołu WebSocket** . Aby uzyskać więcej informacji, zobacz [WebSockets](xref:fundamentals/websockets).
 
 1. Przejdź do kroku **potwierdzenia** , aby zainstalować rolę i usługi serwera sieci Web. Po zainstalowaniu roli **serwera sieci Web (IIS)** nie jest wymagane ponowne uruchomienie serwera ani usług IIS.
 
 **Systemy operacyjne Windows dla komputerów stacjonarnych**
 
-Włącz **konsolę zarządzania usług IIS** i **usługi World Wide Web**.
+Włącz **konsolę zarządzania usług IIS** i **usługi World Wide Web** .
 
 1. Przejdź do pozycji **Panel sterowania** > **programy** > **programy i funkcje** > **Włącz lub wyłącz funkcje systemu Windows** (po lewej stronie ekranu).
 
 1. Otwórz węzeł **Internet Information Services** . Otwórz węzeł **Narzędzia do zarządzania siecią Web** .
 
-1. Zaznacz pole wyboru w obszarze **Konsola zarządzania usługami IIS**.
+1. Zaznacz pole wyboru w obszarze **Konsola zarządzania usługami IIS** .
 
-1. Zaznacz pole wyboru **usług World Wide Web Services**.
+1. Zaznacz pole wyboru **usług World Wide Web Services** .
 
 1. Zaakceptuj domyślne funkcje **usług World Wide Web Services** lub Dostosuj funkcje usług IIS.
 
    **Uwierzytelnianie systemu Windows (opcjonalnie)**  
-   Aby włączyć uwierzytelnianie systemu Windows, rozwiń następujące węzły: **World Wide Web usług**  >  **zabezpieczenia**. Wybierz funkcję **uwierzytelniania systemu Windows** . Aby uzyskać więcej informacji, zobacz [uwierzytelnianie \<windowsAuthentication> systemu Windows](/iis/configuration/system.webServer/security/authentication/windowsAuthentication/) i [Konfigurowanie uwierzytelniania systemu Windows](xref:security/authentication/windowsauth).
+   Aby włączyć uwierzytelnianie systemu Windows, rozwiń następujące węzły: **World Wide Web usług**  >  **zabezpieczenia** . Wybierz funkcję **uwierzytelniania systemu Windows** . Aby uzyskać więcej informacji, zobacz [uwierzytelnianie \<windowsAuthentication> systemu Windows](/iis/configuration/system.webServer/security/authentication/windowsAuthentication/) i [Konfigurowanie uwierzytelniania systemu Windows](xref:security/authentication/windowsauth).
 
    **Obiekty WebSockets (opcjonalnie)**  
-   Obiekty WebSockets są obsługiwane w ASP.NET Core 1,1 lub nowszych. Aby włączyć obiekty WebSockets, rozwiń następujące węzły: **World Wide Web Services**  >  **Application Development Features**. Wybierz funkcję **protokołu WebSocket** . Aby uzyskać więcej informacji, zobacz [WebSockets](xref:fundamentals/websockets).
+   Obiekty WebSockets są obsługiwane w ASP.NET Core 1,1 lub nowszych. Aby włączyć obiekty WebSockets, rozwiń następujące węzły: **World Wide Web Services**  >  **Application Development Features** . Wybierz funkcję **protokołu WebSocket** . Aby uzyskać więcej informacji, zobacz [WebSockets](xref:fundamentals/websockets).
 
 1. Jeśli instalacja usług IIS wymaga ponownego uruchomienia, należy ponownie uruchomić system.
 
@@ -374,32 +375,32 @@ Podczas wdrażania aplikacji na serwerach z [Web Deploy](/iis/install/installing
 
 1. W Menedżerze usług IIS Otwórz węzeł serwera w panelu **połączenia** . Kliknij prawym przyciskiem myszy folder **sitess** . Wybierz pozycję **Dodaj witrynę internetową** z menu kontekstowego.
 
-1. Podaj **nazwę lokacji** i ustaw **ścieżkę fizyczną** folderu wdrożenia aplikacji. Podaj konfigurację **powiązania** i Utwórz witrynę sieci Web, wybierając **przycisk OK**:
+1. Podaj **nazwę lokacji** i ustaw **ścieżkę fizyczną** folderu wdrożenia aplikacji. Podaj konfigurację **powiązania** i Utwórz witrynę sieci Web, wybierając **przycisk OK** :
 
    ![Podaj nazwę lokacji, ścieżkę fizyczną i nazwę hosta w kroku Dodaj witrynę sieci Web.](index/_static/add-website-ws2016.png)
 
    > [!WARNING]
    > `http://*:80/` `http://+:80` **Nie** należy używać powiązań z symbolami wieloznacznymi (i) najwyższego poziomu. Powiązania z symbolami wieloznacznymi najwyższego poziomu mogą otwierać aplikację pod kątem luk w zabezpieczeniach. Dotyczy to zarówno silnych, jak i słabych symboli wieloznacznych. Używaj jawnych nazw hostów zamiast symboli wieloznacznych. Powiązanie symboli wieloznacznych z poddomeną (na przykład `*.mysub.com` ) nie ma tego ryzyka bezpieczeństwa, jeśli kontrolujesz całą domenę nadrzędną (w przeciwieństwie do `*.com` , która jest narażona). Aby uzyskać więcej informacji, zobacz [sekcję rfc7230-5,4](https://tools.ietf.org/html/rfc7230#section-5.4) .
 
-1. W węźle serwera wybierz pozycję **Pule aplikacji**.
+1. W węźle serwera wybierz pozycję **Pule aplikacji** .
 
 1. Kliknij prawym przyciskiem myszy pulę aplikacji lokacji i wybierz pozycję **Ustawienia podstawowe** z menu kontekstowego.
 
-1. W oknie **Edytowanie puli aplikacji** Ustaw **wersję środowiska .NET CLR** na **Brak kodu zarządzanego**:
+1. W oknie **Edytowanie puli aplikacji** Ustaw **wersję środowiska .NET CLR** na **Brak kodu zarządzanego** :
 
    ![Nie ustawiaj kodu zarządzanego dla wersji środowiska .NET CLR.](index/_static/edit-apppool-ws2016.png)
 
     ASP.NET Core działa w osobnym procesie i zarządza środowiskiem uruchomieniowym. ASP.NET Core nie polega na ładowaniu programu Desktop CLR (.NET CLR). Podstawowe środowisko uruchomieniowe języka wspólnego (CoreCLR) dla platformy .NET Core jest uruchamiane w celu hostowania aplikacji w procesie roboczym. Ustawienie **wersji środowiska .NET CLR** na **Brak kodu zarządzanego** jest opcjonalne, ale zalecane.
 
-1. *ASP.NET Core 2,2 lub nowszy*:
+1. *ASP.NET Core 2,2 lub nowszy* :
 
-   * W przypadku 32-bitowego (x86) [wdrożenia](/dotnet/core/deploying/#self-contained-deployments-scd) opublikowanego z 32-bitowym zestawem SDK, który korzysta z [modelu hostingu w procesie](#in-process-hosting-model), należy włączyć pulę aplikacji dla 32-bitowego. W Menedżerze usług IIS przejdź do **pul aplikacji** na pasku bocznym **połączenia** . Wybierz pulę aplikacji aplikacji. Na pasku bocznym **Akcje** wybierz pozycję **Ustawienia zaawansowane**. Ustaw dla opcji **Włącz aplikacje 32-bitowe** `True` . 
+   * W przypadku 32-bitowego (x86) [wdrożenia](/dotnet/core/deploying/#self-contained-deployments-scd) opublikowanego z 32-bitowym zestawem SDK, który korzysta z [modelu hostingu w procesie](#in-process-hosting-model), należy włączyć pulę aplikacji dla 32-bitowego. W Menedżerze usług IIS przejdź do **pul aplikacji** na pasku bocznym **połączenia** . Wybierz pulę aplikacji aplikacji. Na pasku bocznym **Akcje** wybierz pozycję **Ustawienia zaawansowane** . Ustaw dla opcji **Włącz aplikacje 32-bitowe** `True` . 
 
-   * W przypadku [wdrożenia](/dotnet/core/deploying/#self-contained-deployments-scd) z systemem 64-bitowym (x64), które używa [modelu hostingu w procesie](#in-process-hosting-model), wyłącz pulę aplikacji dla procesów 32-bitowych (x86). W Menedżerze usług IIS przejdź do **pul aplikacji** na pasku bocznym **połączenia** . Wybierz pulę aplikacji aplikacji. Na pasku bocznym **Akcje** wybierz pozycję **Ustawienia zaawansowane**. Ustaw dla opcji **Włącz aplikacje 32-bitowe** `False` . 
+   * W przypadku [wdrożenia](/dotnet/core/deploying/#self-contained-deployments-scd) z systemem 64-bitowym (x64), które używa [modelu hostingu w procesie](#in-process-hosting-model), wyłącz pulę aplikacji dla procesów 32-bitowych (x86). W Menedżerze usług IIS przejdź do **pul aplikacji** na pasku bocznym **połączenia** . Wybierz pulę aplikacji aplikacji. Na pasku bocznym **Akcje** wybierz pozycję **Ustawienia zaawansowane** . Ustaw dla opcji **Włącz aplikacje 32-bitowe** `False` . 
 
 1. Potwierdź, że tożsamość modelu procesu ma odpowiednie uprawnienia.
 
-   Jeśli domyślna tożsamość puli aplikacji (**model procesów**  >  **Identity** ) została zmieniona z **ApplicationPool Identity ** na inną tożsamość, sprawdź, czy Nowa tożsamość ma wymagane uprawnienia dostępu do folderu, bazy danych i innych wymaganych zasobów aplikacji. Na przykład Pula aplikacji wymaga dostępu do odczytu i zapisu do folderów, w których aplikacja odczytuje i zapisuje pliki.
+   Jeśli domyślna tożsamość puli aplikacji ( **model procesów**  >  **Identity** ) została zmieniona z **ApplicationPool Identity** na inną tożsamość, sprawdź, czy Nowa tożsamość ma wymagane uprawnienia dostępu do folderu, bazy danych i innych wymaganych zasobów aplikacji. Na przykład Pula aplikacji wymaga dostępu do odczytu i zapisu do folderów, w których aplikacja odczytuje i zapisuje pliki.
 
 **Konfiguracja uwierzytelniania systemu Windows (opcjonalnie)**  
 Aby uzyskać więcej informacji, zobacz [Konfigurowanie uwierzytelniania systemu Windows](xref:security/authentication/windowsauth).
@@ -514,9 +515,9 @@ Aby hostować aplikację ASP.NET Core jako aplikację podrzędną w innej aplika
 
 1. Dodaj lokację główną w Menedżerze usług IIS przy użyciu aplikacji podrzędnej w folderze w lokacji głównej.
 
-1. Kliknij prawym przyciskiem myszy folder subapp w Menedżerze usług IIS, a następnie wybierz polecenie **Konwertuj na aplikację**.
+1. Kliknij prawym przyciskiem myszy folder subapp w Menedżerze usług IIS, a następnie wybierz polecenie **Konwertuj na aplikację** .
 
-1. W oknie dialogowym **Dodawanie aplikacji** Użyj przycisku **Wybierz** dla **puli aplikacji** , aby przypisać pulę aplikacji utworzoną dla aplikacji podrzędnej. Wybierz przycisk **OK**.
+1. W oknie dialogowym **Dodawanie aplikacji** Użyj przycisku **Wybierz** dla **puli aplikacji** , aby przypisać pulę aplikacji utworzoną dla aplikacji podrzędnej. Wybierz pozycję **OK** .
 
 Przypisanie oddzielnej puli aplikacji do aplikacji podrzędnej jest wymagane w przypadku korzystania z modelu hostingu w procesie.
 
@@ -556,7 +557,7 @@ Okno dialogowe **Dodaj witrynę sieci Web** usług IIS domyślnie umożliwia poj
 
 ## <a name="application-pool-no-locidentity"></a>Pula aplikacji Identity
 
-Konto tożsamości puli aplikacji umożliwia uruchamianie aplikacji na unikatowym koncie bez konieczności tworzenia domen ani kont lokalnych oraz zarządzania nimi. W przypadku usług IIS 8,0 lub nowszych proces roboczy administratora usług IIS tworzy konto wirtualne o nazwie nowej puli aplikacji i domyślnie uruchamia procesy robocze puli aplikacji w ramach tego konta. W konsoli zarządzania usługami IIS w obszarze **Ustawienia zaawansowane** dla puli aplikacji upewnij się, że **Identity** ustawiono opcję Użyj **ApplicationPool Identity **:
+Konto tożsamości puli aplikacji umożliwia uruchamianie aplikacji na unikatowym koncie bez konieczności tworzenia domen ani kont lokalnych oraz zarządzania nimi. W przypadku usług IIS 8,0 lub nowszych proces roboczy administratora usług IIS tworzy konto wirtualne o nazwie nowej puli aplikacji i domyślnie uruchamia procesy robocze puli aplikacji w ramach tego konta. W konsoli zarządzania usługami IIS w obszarze **Ustawienia zaawansowane** dla puli aplikacji upewnij się, że **Identity** ustawiono opcję Użyj **ApplicationPool Identity** :
 
 ![Okno dialogowe Zaawansowane ustawienia puli aplikacji](index/_static/apppool-identity.png)
 
@@ -566,7 +567,7 @@ Jeśli proces roboczy usług IIS wymaga podwyższonego poziomu dostępu do aplik
 
 1. Otwórz Eksploratora Windows i przejdź do katalogu.
 
-1. Kliknij prawym przyciskiem myszy katalog i wybierz polecenie **Właściwości**.
+1. Kliknij prawym przyciskiem myszy katalog i wybierz polecenie **Właściwości** .
 
 1. Na karcie **zabezpieczenia** wybierz przycisk **Edytuj** , a następnie przycisk **Dodaj** .
 
@@ -576,7 +577,7 @@ Jeśli proces roboczy usług IIS wymaga podwyższonego poziomu dostępu do aplik
 
    ![Okno dialogowe Wybieranie użytkowników lub grup dla folderu aplikacji: Nazwa puli aplikacji "domyślna pula" jest dołączana do "puli aplikacji IIS \" w obszarze nazw obiektów przed wybraniem pozycji" Sprawdź nazwy ".](index/_static/select-users-or-groups-1.png)
 
-1. Wybierz przycisk **OK**.
+1. Wybierz pozycję **OK** .
 
    ![Okno dialogowe Wybieranie użytkowników lub grup dla folderu aplikacji: po wybraniu pozycji "Sprawdź nazwy" w obszarze nazwy obiektów zostanie wyświetlona nazwa obiektu "domyślna pula aplikacji".](index/_static/select-users-or-groups-2.png)
 
@@ -632,25 +633,25 @@ Upewnij się, że funkcja inicjowania roli inicjalizacji aplikacji IIS jest wł�
 Na komputerach z systemem Windows 7 lub nowszym w przypadku lokalnego korzystania z usług IIS:
 
 1. Przejdź do pozycji **Panel sterowania** > **programy** > **programy i funkcje** > **Włącz lub wyłącz funkcje systemu Windows** (po lewej stronie ekranu).
-1. Otwórz **Internet Information Services** > **World Wide Web Services** > **funkcje projektowania aplikacji**Internet Information Services World Wide Web Services.
-1. Zaznacz pole wyboru dla **inicjowania aplikacji**.
+1. Otwórz **Internet Information Services** > **World Wide Web Services** > **funkcje projektowania aplikacji** Internet Information Services World Wide Web Services.
+1. Zaznacz pole wyboru dla **inicjowania aplikacji** .
 
 W systemie Windows Server 2008 R2 lub nowszym:
 
-1. Otwórz **Kreatora dodawania ról i funkcji**.
+1. Otwórz **Kreatora dodawania ról i funkcji** .
 1. W panelu **Wybierz usługi ról** Otwórz węzeł **Programowanie aplikacji** .
-1. Zaznacz pole wyboru dla **inicjowania aplikacji**.
+1. Zaznacz pole wyboru dla **inicjowania aplikacji** .
 
 Użyj jednego z poniższych metod, aby włączyć moduł inicjowania aplikacji dla lokacji:
 
 * Za pomocą Menedżera usług IIS:
 
   1. W panelu **połączenia** wybierz pozycję **Pule aplikacji** .
-  1. Kliknij prawym przyciskiem myszy pulę aplikacji aplikacji na liście i wybierz pozycję **Ustawienia zaawansowane**.
-  1. Domyślny **tryb uruchamiania** to **OnDemand**. Ustaw **tryb uruchamiania** na **AlwaysRunning**. Wybierz przycisk **OK**.
+  1. Kliknij prawym przyciskiem myszy pulę aplikacji aplikacji na liście i wybierz pozycję **Ustawienia zaawansowane** .
+  1. Domyślny **tryb uruchamiania** to **OnDemand** . Ustaw **tryb uruchamiania** na **AlwaysRunning** . Wybierz pozycję **OK** .
   1. Otwórz węzeł **Lokacje** w panelu **połączenia** .
-  1. Kliknij prawym przyciskiem myszy aplikację i wybierz pozycję Zarządzaj ustawieniami zaawansowanymi **witryny sieci Web** > **Advanced Settings**.
-  1. Domyślnym ustawieniem **wstępnego ładowania** jest **wartość false**. Ustaw dla opcji **wstępnego ładowania** **wartość true**. Wybierz przycisk **OK**.
+  1. Kliknij prawym przyciskiem myszy aplikację i wybierz pozycję Zarządzaj ustawieniami zaawansowanymi **witryny sieci Web** > **Advanced Settings** .
+  1. Domyślnym ustawieniem **wstępnego ładowania** jest **wartość false** . Ustaw dla opcji **wstępnego ładowania** **wartość true** . Wybierz pozycję **OK** .
 
 * Przy użyciu `web.config` , Dodaj `<applicationInitialization>` element z `doAppInitAfterRestart` ustawionym do `true` `<system.webServer>` elementów w pliku web.config"aplikacji:
 
@@ -672,8 +673,8 @@ Użyj jednego z poniższych metod, aby włączyć moduł inicjowania aplikacji d
 Aby zapobiec przekroczeniu przez aplikację, należy ustawić limit czasu bezczynności puli aplikacji przy użyciu Menedżera usług IIS:
 
 1. W panelu **połączenia** wybierz pozycję **Pule aplikacji** .
-1. Kliknij prawym przyciskiem myszy pulę aplikacji aplikacji na liście i wybierz pozycję **Ustawienia zaawansowane**.
-1. Domyślny **limit czasu bezczynności (w minutach)** wynosi **20** minut. Ustaw **limit czasu bezczynności (w minutach)** na **0** (zero). Wybierz przycisk **OK**.
+1. Kliknij prawym przyciskiem myszy pulę aplikacji aplikacji na liście i wybierz pozycję **Ustawienia zaawansowane** .
+1. Domyślny **limit czasu bezczynności (w minutach)** wynosi **20** minut. Ustaw **limit czasu bezczynności (w minutach)** na **0** (zero). Wybierz pozycję **OK** .
 1. Odtwórz proces roboczy.
 
 Aby zapobiec przekroczeniu limitu [czasu hostowanych przez aplikacje](#out-of-process-hosting-model) aplikacji, użyj jednej z następujących metod:
@@ -767,7 +768,7 @@ Po przetworzeniu żądania przez serwer HTTP IIS żądanie jest wypychane do pot
 
 Hosting w procesie jest nieobecny w przypadku istniejących aplikacji, ale w przypadku wszystkich scenariuszy z usługami w ramach programu z obsługą IIS Express usług w toku są domyślnie obsługiwane [nowe](/dotnet/core/tools/dotnet-new) szablony.
 
-`CreateDefaultBuilder` dodaje <xref:Microsoft.AspNetCore.Hosting.Server.IServer> wystąpienie przez wywołanie <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIIS%2A> metody w celu uruchomienia [CoreCLR](/dotnet/standard/glossary#coreclr) i hostowania aplikacji w procesie roboczym usług IIS (*w3wp.exe* lub *iisexpress.exe*). Testy wydajności wskazują, że hostowanie aplikacji platformy .NET Core w procesie zapewnia znacznie wyższą przepływność żądań w porównaniu z obsługą żądań serwera proxy poza procesem i serwerem [Kestrel](xref:fundamentals/servers/kestrel) .
+`CreateDefaultBuilder` dodaje <xref:Microsoft.AspNetCore.Hosting.Server.IServer> wystąpienie przez wywołanie <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIIS%2A> metody w celu uruchomienia [CoreCLR](/dotnet/standard/glossary#coreclr) i hostowania aplikacji w procesie roboczym usług IIS ( *w3wp.exe* lub *iisexpress.exe* ). Testy wydajności wskazują, że hostowanie aplikacji platformy .NET Core w procesie zapewnia znacznie wyższą przepływność żądań w porównaniu z obsługą żądań serwera proxy poza procesem i serwerem [Kestrel](xref:fundamentals/servers/kestrel) .
 
 ### <a name="out-of-process-hosting-model"></a>Model hostingu poza procesem
 
@@ -791,7 +792,7 @@ Aby uzyskać więcej informacji na temat hostingu, zobacz [host in ASP.NET Core]
 
 ### <a name="enable-the-iisintegration-components"></a>Włącz składniki IISIntegration
 
-Podczas kompilowania hosta w `CreateWebHostBuilder` (*program.cs*), wywołaj, <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder%2A> Aby włączyć integrację usług IIS:
+Podczas kompilowania hosta w `CreateWebHostBuilder` ( *program.cs* ), wywołaj, <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder%2A> Aby włączyć integrację usług IIS:
 
 ```csharp
 public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
@@ -868,7 +869,7 @@ Podczas wyłączania pliku zestawu SDK sieci Web, *processPath* i *argumenty* po
 
 W celu poprawnego skonfigurowania [modułu ASP.NET Core](xref:host-and-deploy/aspnet-core-module) plik *web.config* musi znajdować się w ścieżce [katalogu głównego zawartości](xref:fundamentals/index#content-root) (zazwyczaj ścieżka podstawowa aplikacji) wdrożonej aplikacji. Ta sama lokalizacja jest taka sama jak ścieżka fizyczna witryny sieci Web dostarczana do usług IIS. Plik *web.config* jest wymagany w katalogu głównym aplikacji, aby umożliwić Publikowanie wielu aplikacji przy użyciu Web Deploy.
 
-Poufne pliki znajdują się w ścieżce fizycznej aplikacji, na przykład * \<assembly>.runtimeconfig.jsna*, * \<assembly> . XML* (Komentarze dokumentacji XML) i * \<assembly>.deps.js*. Gdy plik *web.config* jest obecny, a lokacja jest uruchamiana normalnie, usługi IIS nie będą obsługiwały tych poufnych plików, jeśli są żądane. Jeśli brakuje pliku *web.config* , nazwa jest nieprawidłowa lub nie można skonfigurować lokacji do normalnego uruchamiania, usługi IIS mogą publicznie udostępniać poufne pliki.
+Poufne pliki znajdują się w ścieżce fizycznej aplikacji, na przykład *\<assembly>.runtimeconfig.jsna* , *\<assembly> . XML* (Komentarze dokumentacji XML) i *\<assembly>.deps.js* . Gdy plik *web.config* jest obecny, a lokacja jest uruchamiana normalnie, usługi IIS nie będą obsługiwały tych poufnych plików, jeśli są żądane. Jeśli brakuje pliku *web.config* , nazwa jest nieprawidłowa lub nie można skonfigurować lokacji do normalnego uruchamiania, usługi IIS mogą publicznie udostępniać poufne pliki.
 
 **Plik *web.config* musi być obecny we wdrożeniu przez cały czas, prawidłowo nazwany i można skonfigurować lokację pod kątem normalnego uruchamiania. Nigdy nie usuwaj pliku *web.config* z wdrożenia produkcyjnego.**
 
@@ -882,7 +883,7 @@ Jeśli musisz przekształcić *web.config* przy publikowaniu (na przykład ustaw
 
 Włącz rolę serwera **serwera sieci Web (IIS)** i Ustanów usługi ról.
 
-1. Użyj kreatora **dodawania ról i funkcji** z menu **Zarządzaj** lub łącza w **Menedżer serwera**. W kroku **role serwera** zaznacz pole wyboru **serwer sieci Web (IIS)**.
+1. Użyj kreatora **dodawania ról i funkcji** z menu **Zarządzaj** lub łącza w **Menedżer serwera** . W kroku **role serwera** zaznacz pole wyboru **serwer sieci Web (IIS)** .
 
    ![W kroku wybierz role serwera zostanie wybrana rola IIS serwera sieci Web.](index/_static/server-roles-ws2016.png)
 
@@ -891,32 +892,32 @@ Włącz rolę serwera **serwera sieci Web (IIS)** i Ustanów usługi ról.
    ![Domyślne usługi ról są wybrane w kroku Wybierz usługi ról.](index/_static/role-services-ws2016.png)
 
    **Uwierzytelnianie systemu Windows (opcjonalnie)**  
-   Aby włączyć uwierzytelnianie systemu Windows, rozwiń następujące węzły: **Zabezpieczenia serwera sieci Web**  >  **Security**. Wybierz funkcję **uwierzytelniania systemu Windows** . Aby uzyskać więcej informacji, zobacz [uwierzytelnianie \<windowsAuthentication> systemu Windows](/iis/configuration/system.webServer/security/authentication/windowsAuthentication/) i [Konfigurowanie uwierzytelniania systemu Windows](xref:security/authentication/windowsauth).
+   Aby włączyć uwierzytelnianie systemu Windows, rozwiń następujące węzły: **Zabezpieczenia serwera sieci Web**  >  **Security** . Wybierz funkcję **uwierzytelniania systemu Windows** . Aby uzyskać więcej informacji, zobacz [uwierzytelnianie \<windowsAuthentication> systemu Windows](/iis/configuration/system.webServer/security/authentication/windowsAuthentication/) i [Konfigurowanie uwierzytelniania systemu Windows](xref:security/authentication/windowsauth).
 
    **Obiekty WebSockets (opcjonalnie)**  
-   Obiekty WebSockets są obsługiwane w ASP.NET Core 1,1 lub nowszych. Aby włączyć obiekty WebSockets, rozwiń następujące węzły: projektowanie aplikacji **serwera sieci Web**  >  **Application Development**. Wybierz funkcję **protokołu WebSocket** . Aby uzyskać więcej informacji, zobacz [WebSockets](xref:fundamentals/websockets).
+   Obiekty WebSockets są obsługiwane w ASP.NET Core 1,1 lub nowszych. Aby włączyć obiekty WebSockets, rozwiń następujące węzły: projektowanie aplikacji **serwera sieci Web**  >  **Application Development** . Wybierz funkcję **protokołu WebSocket** . Aby uzyskać więcej informacji, zobacz [WebSockets](xref:fundamentals/websockets).
 
 1. Przejdź do kroku **potwierdzenia** , aby zainstalować rolę i usługi serwera sieci Web. Po zainstalowaniu roli **serwera sieci Web (IIS)** nie jest wymagane ponowne uruchomienie serwera ani usług IIS.
 
 **Systemy operacyjne Windows dla komputerów stacjonarnych**
 
-Włącz **konsolę zarządzania usług IIS** i **usługi World Wide Web**.
+Włącz **konsolę zarządzania usług IIS** i **usługi World Wide Web** .
 
 1. Przejdź do pozycji **Panel sterowania** > **programy** > **programy i funkcje** > **Włącz lub wyłącz funkcje systemu Windows** (po lewej stronie ekranu).
 
 1. Otwórz węzeł **Internet Information Services** . Otwórz węzeł **Narzędzia do zarządzania siecią Web** .
 
-1. Zaznacz pole wyboru w obszarze **Konsola zarządzania usługami IIS**.
+1. Zaznacz pole wyboru w obszarze **Konsola zarządzania usługami IIS** .
 
-1. Zaznacz pole wyboru **usług World Wide Web Services**.
+1. Zaznacz pole wyboru **usług World Wide Web Services** .
 
 1. Zaakceptuj domyślne funkcje **usług World Wide Web Services** lub Dostosuj funkcje usług IIS.
 
    **Uwierzytelnianie systemu Windows (opcjonalnie)**  
-   Aby włączyć uwierzytelnianie systemu Windows, rozwiń następujące węzły: **World Wide Web usług**  >  **zabezpieczenia**. Wybierz funkcję **uwierzytelniania systemu Windows** . Aby uzyskać więcej informacji, zobacz [uwierzytelnianie \<windowsAuthentication> systemu Windows](/iis/configuration/system.webServer/security/authentication/windowsAuthentication/) i [Konfigurowanie uwierzytelniania systemu Windows](xref:security/authentication/windowsauth).
+   Aby włączyć uwierzytelnianie systemu Windows, rozwiń następujące węzły: **World Wide Web usług**  >  **zabezpieczenia** . Wybierz funkcję **uwierzytelniania systemu Windows** . Aby uzyskać więcej informacji, zobacz [uwierzytelnianie \<windowsAuthentication> systemu Windows](/iis/configuration/system.webServer/security/authentication/windowsAuthentication/) i [Konfigurowanie uwierzytelniania systemu Windows](xref:security/authentication/windowsauth).
 
    **Obiekty WebSockets (opcjonalnie)**  
-   Obiekty WebSockets są obsługiwane w ASP.NET Core 1,1 lub nowszych. Aby włączyć obiekty WebSockets, rozwiń następujące węzły: **World Wide Web Services**  >  **Application Development Features**. Wybierz funkcję **protokołu WebSocket** . Aby uzyskać więcej informacji, zobacz [WebSockets](xref:fundamentals/websockets).
+   Obiekty WebSockets są obsługiwane w ASP.NET Core 1,1 lub nowszych. Aby włączyć obiekty WebSockets, rozwiń następujące węzły: **World Wide Web Services**  >  **Application Development Features** . Wybierz funkcję **protokołu WebSocket** . Aby uzyskać więcej informacji, zobacz [WebSockets](xref:fundamentals/websockets).
 
 1. Jeśli instalacja usług IIS wymaga ponownego uruchomienia, należy ponownie uruchomić system.
 
@@ -949,7 +950,7 @@ Zainstaluj *pakiet hostingu platformy .NET Core* w systemie hostingu. Pakiet ins
    * `OPT_NO_RUNTIME=1`: Pomiń Instalowanie środowiska uruchomieniowego platformy .NET Core. Używany, gdy serwer obsługuje tylko [wdrożenia samodzielne (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd).
    * `OPT_NO_SHAREDFX=1`: Pomiń instalację ASP.NET Shared Framework (ASP.NET Runtime). Używany, gdy serwer obsługuje tylko [wdrożenia samodzielne (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd).
    * `OPT_NO_X86=1`: Pomiń Instalowanie środowiska uruchomieniowego x86. Użyj tego parametru, Jeśli wiesz, że nie będziesz hostować aplikacji 32-bitowych. Jeśli w przyszłości będziesz hostować zarówno aplikacje 32-bitowe, jak i 64-bitowe, nie używaj tego parametru i zainstaluj oba środowiska uruchomieniowe.
-   * `OPT_NO_SHARED_CONFIG_CHECK=1`: Wyłącz sprawdzanie przy użyciu konfiguracji udostępnionej usług IIS, gdy konfiguracja udostępniona (*applicationHost.config*) znajduje się na tym samym komputerze, na którym zainstalowano program IIS. *Dostępne tylko w przypadku ASP.NET Core 2,2 lub nowszych instalatorów pakietu do obsługi.* Aby uzyskać więcej informacji, zobacz <xref:host-and-deploy/aspnet-core-module#aspnet-core-module-with-an-iis-shared-configuration>.
+   * `OPT_NO_SHARED_CONFIG_CHECK=1`: Wyłącz sprawdzanie przy użyciu konfiguracji udostępnionej usług IIS, gdy konfiguracja udostępniona ( *applicationHost.config* ) znajduje się na tym samym komputerze, na którym zainstalowano program IIS. *Dostępne tylko w przypadku ASP.NET Core 2,2 lub nowszych instalatorów pakietu do obsługi.* Aby uzyskać więcej informacji, zobacz <xref:host-and-deploy/aspnet-core-module#aspnet-core-module-with-an-iis-shared-configuration>.
 1. Uruchom ponownie system lub wykonaj następujące polecenia w powłoce poleceń:
 
    ```console
@@ -975,30 +976,30 @@ Podczas wdrażania aplikacji na serwerach z [Web Deploy](/iis/install/installing
 
 1. W Menedżerze usług IIS Otwórz węzeł serwera w panelu **połączenia** . Kliknij prawym przyciskiem myszy folder **sitess** . Wybierz pozycję **Dodaj witrynę internetową** z menu kontekstowego.
 
-1. Podaj **nazwę lokacji** i ustaw **ścieżkę fizyczną** folderu wdrożenia aplikacji. Podaj konfigurację **powiązania** i Utwórz witrynę sieci Web, wybierając **przycisk OK**:
+1. Podaj **nazwę lokacji** i ustaw **ścieżkę fizyczną** folderu wdrożenia aplikacji. Podaj konfigurację **powiązania** i Utwórz witrynę sieci Web, wybierając **przycisk OK** :
 
    ![Podaj nazwę lokacji, ścieżkę fizyczną i nazwę hosta w kroku Dodaj witrynę sieci Web.](index/_static/add-website-ws2016.png)
 
    > [!WARNING]
    > `http://*:80/` `http://+:80` **Nie** należy używać powiązań z symbolami wieloznacznymi (i) najwyższego poziomu. Powiązania z symbolami wieloznacznymi najwyższego poziomu mogą otwierać aplikację pod kątem luk w zabezpieczeniach. Dotyczy to zarówno silnych, jak i słabych symboli wieloznacznych. Używaj jawnych nazw hostów zamiast symboli wieloznacznych. Powiązanie symboli wieloznacznych z poddomeną (na przykład `*.mysub.com` ) nie ma tego ryzyka bezpieczeństwa, jeśli kontrolujesz całą domenę nadrzędną (w przeciwieństwie do `*.com` , która jest narażona). Aby uzyskać więcej informacji, zobacz [sekcję rfc7230-5,4](https://tools.ietf.org/html/rfc7230#section-5.4) .
 
-1. W węźle serwera wybierz pozycję **Pule aplikacji**.
+1. W węźle serwera wybierz pozycję **Pule aplikacji** .
 
 1. Kliknij prawym przyciskiem myszy pulę aplikacji lokacji i wybierz pozycję **Ustawienia podstawowe** z menu kontekstowego.
 
-1. W oknie **Edytowanie puli aplikacji** Ustaw **wersję środowiska .NET CLR** na **Brak kodu zarządzanego**:
+1. W oknie **Edytowanie puli aplikacji** Ustaw **wersję środowiska .NET CLR** na **Brak kodu zarządzanego** :
 
    ![Nie ustawiaj kodu zarządzanego dla wersji środowiska .NET CLR.](index/_static/edit-apppool-ws2016.png)
 
     ASP.NET Core działa w osobnym procesie i zarządza środowiskiem uruchomieniowym. ASP.NET Core nie polega na ładowaniu środowiska CLR (.NET CLR) &mdash; podstawowego środowiska uruchomieniowego języka wspólnego (CoreCLR) dla platformy .NET Core w celu hostowania aplikacji w procesie roboczym. Ustawienie **wersji środowiska .NET CLR** na **Brak kodu zarządzanego** jest opcjonalne, ale zalecane.
 
-1. *ASP.NET Core 2,2 lub nowsza*: w przypadku [wdrożenia](/dotnet/core/deploying/#self-contained-deployments-scd) z systemem 64-bitowym (x64), które korzysta z [modelu hostingu w procesie](#in-process-hosting-model), wyłączaj pulę aplikacji dla procesów 32-bit (x86).
+1. *ASP.NET Core 2,2 lub nowsza* : w przypadku [wdrożenia](/dotnet/core/deploying/#self-contained-deployments-scd) z systemem 64-bitowym (x64), które korzysta z [modelu hostingu w procesie](#in-process-hosting-model), wyłączaj pulę aplikacji dla procesów 32-bit (x86).
 
-   Na pasku bocznym **Akcje** Menedżera usług IIS > **Pule aplikacji**wybierz pozycję **Ustaw ustawienia domyślne puli aplikacji** lub **Zaawansowane**. Znajdź **opcję Włącz aplikacje 32-bitowe** i ustaw wartość na `False` . To ustawienie nie ma wpływu na aplikacje wdrożone na potrzeby [hostingu poza procesem](xref:host-and-deploy/aspnet-core-module#out-of-process-hosting-model).
+   Na pasku bocznym **Akcje** Menedżera usług IIS > **Pule aplikacji** wybierz pozycję **Ustaw ustawienia domyślne puli aplikacji** lub **Zaawansowane** . Znajdź **opcję Włącz aplikacje 32-bitowe** i ustaw wartość na `False` . To ustawienie nie ma wpływu na aplikacje wdrożone na potrzeby [hostingu poza procesem](xref:host-and-deploy/aspnet-core-module#out-of-process-hosting-model).
 
 1. Potwierdź, że tożsamość modelu procesu ma odpowiednie uprawnienia.
 
-   Jeśli domyślna tożsamość puli aplikacji (**model procesów**  >  **Identity** ) została zmieniona z **ApplicationPool Identity ** na inną tożsamość, sprawdź, czy Nowa tożsamość ma wymagane uprawnienia dostępu do folderu, bazy danych i innych wymaganych zasobów aplikacji. Na przykład Pula aplikacji wymaga dostępu do odczytu i zapisu do folderów, w których aplikacja odczytuje i zapisuje pliki.
+   Jeśli domyślna tożsamość puli aplikacji ( **model procesów**  >  **Identity** ) została zmieniona z **ApplicationPool Identity** na inną tożsamość, sprawdź, czy Nowa tożsamość ma wymagane uprawnienia dostępu do folderu, bazy danych i innych wymaganych zasobów aplikacji. Na przykład Pula aplikacji wymaga dostępu do odczytu i zapisu do folderów, w których aplikacja odczytuje i zapisuje pliki.
 
 **Konfiguracja uwierzytelniania systemu Windows (opcjonalnie)**  
 Aby uzyskać więcej informacji, zobacz [Konfigurowanie uwierzytelniania systemu Windows](xref:security/authentication/windowsauth).
@@ -1114,9 +1115,9 @@ Aby hostować aplikację ASP.NET Core jako aplikację podrzędną w innej aplika
 
 1. Dodaj lokację główną w Menedżerze usług IIS przy użyciu aplikacji podrzędnej w folderze w lokacji głównej.
 
-1. Kliknij prawym przyciskiem myszy folder subapp w Menedżerze usług IIS, a następnie wybierz polecenie **Konwertuj na aplikację**.
+1. Kliknij prawym przyciskiem myszy folder subapp w Menedżerze usług IIS, a następnie wybierz polecenie **Konwertuj na aplikację** .
 
-1. W oknie dialogowym **Dodawanie aplikacji** Użyj przycisku **Wybierz** dla **puli aplikacji** , aby przypisać pulę aplikacji utworzoną dla aplikacji podrzędnej. Wybierz przycisk **OK**.
+1. W oknie dialogowym **Dodawanie aplikacji** Użyj przycisku **Wybierz** dla **puli aplikacji** , aby przypisać pulę aplikacji utworzoną dla aplikacji podrzędnej. Wybierz pozycję **OK** .
 
 Przypisanie oddzielnej puli aplikacji do aplikacji podrzędnej jest wymagane w przypadku korzystania z modelu hostingu w procesie.
 
@@ -1156,7 +1157,7 @@ Okno dialogowe **Dodaj witrynę sieci Web** usług IIS domyślnie umożliwia poj
 
 ## <a name="application-pool-no-locidentity"></a>Pula aplikacji Identity
 
-Konto tożsamości puli aplikacji umożliwia uruchamianie aplikacji na unikatowym koncie bez konieczności tworzenia domen ani kont lokalnych oraz zarządzania nimi. W przypadku usług IIS 8,0 lub nowszych proces roboczy administratora usług IIS tworzy konto wirtualne o nazwie nowej puli aplikacji i domyślnie uruchamia procesy robocze puli aplikacji w ramach tego konta. W konsoli zarządzania usługami IIS w obszarze **Ustawienia zaawansowane** dla puli aplikacji upewnij się, że **Identity** ustawiono opcję Użyj **ApplicationPool Identity **:
+Konto tożsamości puli aplikacji umożliwia uruchamianie aplikacji na unikatowym koncie bez konieczności tworzenia domen ani kont lokalnych oraz zarządzania nimi. W przypadku usług IIS 8,0 lub nowszych proces roboczy administratora usług IIS tworzy konto wirtualne o nazwie nowej puli aplikacji i domyślnie uruchamia procesy robocze puli aplikacji w ramach tego konta. W konsoli zarządzania usługami IIS w obszarze **Ustawienia zaawansowane** dla puli aplikacji upewnij się, że **Identity** ustawiono opcję Użyj **ApplicationPool Identity** :
 
 ![Okno dialogowe Zaawansowane ustawienia puli aplikacji](index/_static/apppool-identity.png)
 
@@ -1166,17 +1167,17 @@ Jeśli proces roboczy usług IIS wymaga podwyższonego poziomu dostępu do aplik
 
 1. Otwórz Eksploratora Windows i przejdź do katalogu.
 
-1. Kliknij prawym przyciskiem myszy katalog i wybierz polecenie **Właściwości**.
+1. Kliknij prawym przyciskiem myszy katalog i wybierz polecenie **Właściwości** .
 
 1. Na karcie **zabezpieczenia** wybierz przycisk **Edytuj** , a następnie przycisk **Dodaj** .
 
 1. Wybierz przycisk **lokalizacje** i upewnij się, że wybrano system.
 
-1. Wprowadź **<usług IIS puli aplikacji \\ app_pool_name>** w polu **Wprowadź nazwy obiektów do wybrania** . Wybierz przycisk **Sprawdź nazwy** . W obszarze *Domyślna pula aplikacji* Sprawdź nazwy za pomocą **usług IIS AppPool\DefaultAppPool**. Po wybraniu przycisku **Sprawdź nazwy** w obszarze nazwy obiektów zostanie wykazana wartość **Domyślna pula aplikacji** . Nie można wprowadzić nazwy puli aplikacji bezpośrednio w obszarze nazw obiektów. Podczas sprawdzania nazwy obiektu Użyj **<IIS puli aplikacji \\ app_pool_name>** .
+1. Wprowadź **<usług IIS puli aplikacji \\ app_pool_name>** w polu **Wprowadź nazwy obiektów do wybrania** . Wybierz przycisk **Sprawdź nazwy** . W obszarze *Domyślna pula aplikacji* Sprawdź nazwy za pomocą **usług IIS AppPool\DefaultAppPool** . Po wybraniu przycisku **Sprawdź nazwy** w obszarze nazwy obiektów zostanie wykazana wartość **Domyślna pula aplikacji** . Nie można wprowadzić nazwy puli aplikacji bezpośrednio w obszarze nazw obiektów. Podczas sprawdzania nazwy obiektu Użyj **<IIS puli aplikacji \\ app_pool_name>** .
 
    ![Okno dialogowe Wybieranie użytkowników lub grup dla folderu aplikacji: Nazwa puli aplikacji "domyślna pula" jest dołączana do "puli aplikacji IIS \" w obszarze nazw obiektów przed wybraniem pozycji" Sprawdź nazwy ".](index/_static/select-users-or-groups-1.png)
 
-1. Wybierz przycisk **OK**.
+1. Wybierz pozycję **OK** .
 
    ![Okno dialogowe Wybieranie użytkowników lub grup dla folderu aplikacji: po wybraniu pozycji "Sprawdź nazwy" w obszarze nazwy obiektów zostanie wyświetlona nazwa obiektu "domyślna pula aplikacji".](index/_static/select-users-or-groups-2.png)
 
@@ -1232,27 +1233,27 @@ Upewnij się, że funkcja inicjowania roli inicjalizacji aplikacji IIS jest wł�
 Na komputerach z systemem Windows 7 lub nowszym w przypadku lokalnego korzystania z usług IIS:
 
 1. Przejdź do pozycji **Panel sterowania** > **programy** > **programy i funkcje** > **Włącz lub wyłącz funkcje systemu Windows** (po lewej stronie ekranu).
-1. Otwórz **Internet Information Services** > **World Wide Web Services** > **funkcje projektowania aplikacji**Internet Information Services World Wide Web Services.
-1. Zaznacz pole wyboru dla **inicjowania aplikacji**.
+1. Otwórz **Internet Information Services** > **World Wide Web Services** > **funkcje projektowania aplikacji** Internet Information Services World Wide Web Services.
+1. Zaznacz pole wyboru dla **inicjowania aplikacji** .
 
 W systemie Windows Server 2008 R2 lub nowszym:
 
-1. Otwórz **Kreatora dodawania ról i funkcji**.
+1. Otwórz **Kreatora dodawania ról i funkcji** .
 1. W panelu **Wybierz usługi ról** Otwórz węzeł **Programowanie aplikacji** .
-1. Zaznacz pole wyboru dla **inicjowania aplikacji**.
+1. Zaznacz pole wyboru dla **inicjowania aplikacji** .
 
 Użyj jednego z poniższych metod, aby włączyć moduł inicjowania aplikacji dla lokacji:
 
 * Za pomocą Menedżera usług IIS:
 
   1. W panelu **połączenia** wybierz pozycję **Pule aplikacji** .
-  1. Kliknij prawym przyciskiem myszy pulę aplikacji aplikacji na liście i wybierz pozycję **Ustawienia zaawansowane**.
-  1. Domyślny **tryb uruchamiania** to **OnDemand**. Ustaw **tryb uruchamiania** na **AlwaysRunning**. Wybierz przycisk **OK**.
+  1. Kliknij prawym przyciskiem myszy pulę aplikacji aplikacji na liście i wybierz pozycję **Ustawienia zaawansowane** .
+  1. Domyślny **tryb uruchamiania** to **OnDemand** . Ustaw **tryb uruchamiania** na **AlwaysRunning** . Wybierz pozycję **OK** .
   1. Otwórz węzeł **Lokacje** w panelu **połączenia** .
-  1. Kliknij prawym przyciskiem myszy aplikację i wybierz pozycję Zarządzaj ustawieniami zaawansowanymi **witryny sieci Web** > **Advanced Settings**.
-  1. Domyślnym ustawieniem **wstępnego ładowania** jest **wartość false**. Ustaw dla opcji **wstępnego ładowania** **wartość true**. Wybierz przycisk **OK**.
+  1. Kliknij prawym przyciskiem myszy aplikację i wybierz pozycję Zarządzaj ustawieniami zaawansowanymi **witryny sieci Web** > **Advanced Settings** .
+  1. Domyślnym ustawieniem **wstępnego ładowania** jest **wartość false** . Ustaw dla opcji **wstępnego ładowania** **wartość true** . Wybierz pozycję **OK** .
 
-* Za pomocą *web.config*Dodaj `<applicationInitialization>` element z `doAppInitAfterRestart` ustawionym do `true` `<system.webServer>` elementów w pliku *web.config* aplikacji:
+* Za pomocą *web.config* Dodaj `<applicationInitialization>` element z `doAppInitAfterRestart` ustawionym do `true` `<system.webServer>` elementów w pliku *web.config* aplikacji:
 
   ```xml
   <?xml version="1.0" encoding="utf-8"?>
@@ -1272,8 +1273,8 @@ Użyj jednego z poniższych metod, aby włączyć moduł inicjowania aplikacji d
 Aby zapobiec przekroczeniu przez aplikację, należy ustawić limit czasu bezczynności puli aplikacji przy użyciu Menedżera usług IIS:
 
 1. W panelu **połączenia** wybierz pozycję **Pule aplikacji** .
-1. Kliknij prawym przyciskiem myszy pulę aplikacji aplikacji na liście i wybierz pozycję **Ustawienia zaawansowane**.
-1. Domyślny **limit czasu bezczynności (w minutach)** wynosi **20** minut. Ustaw **limit czasu bezczynności (w minutach)** na **0** (zero). Wybierz przycisk **OK**.
+1. Kliknij prawym przyciskiem myszy pulę aplikacji aplikacji na liście i wybierz pozycję **Ustawienia zaawansowane** .
+1. Domyślny **limit czasu bezczynności (w minutach)** wynosi **20** minut. Ustaw **limit czasu bezczynności (w minutach)** na **0** (zero). Wybierz pozycję **OK** .
 1. Odtwórz proces roboczy.
 
 Aby zapobiec przekroczeniu limitu [czasu hostowanych przez aplikacje](#out-of-process-hosting-model) aplikacji, użyj jednej z następujących metod:
@@ -1340,7 +1341,7 @@ Aby opublikować aplikację 64-bitową, należy użyć 64-bitowej (x64) zestaw .
 
 ASP.NET Core jest dostarczany z [serwerem Kestrel](xref:fundamentals/servers/kestrel), a domyślnym serwerem HTTP na wielu platformach.
 
-W przypadku korzystania z [usług IIS](/iis/get-started/introduction-to-iis/introduction-to-iis-architecture) lub [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview)aplikacja działa w procesie innym niż proces roboczy usług IIS (*poza procesem*) z [serwerem Kestrel](xref:fundamentals/servers/index#kestrel).
+W przypadku korzystania z [usług IIS](/iis/get-started/introduction-to-iis/introduction-to-iis-architecture) lub [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview)aplikacja działa w procesie innym niż proces roboczy usług IIS ( *poza procesem* ) z [serwerem Kestrel](xref:fundamentals/servers/index#kestrel).
 
 Ponieważ ASP.NET Core aplikacje działają w procesie innym niż proces roboczy usług IIS, moduł obsługuje zarządzanie procesami. Moduł uruchamia proces dla aplikacji ASP.NET Core, gdy pierwsze żądanie zostanie odebrane i ponownie uruchomiony, jeśli zostanie zamknięty lub ulegnie awarii. Jest to zasadniczo takie samo zachowanie jak w przypadku aplikacji uruchamianych w procesie, które są zarządzane przez [usługę aktywacji procesów systemu Windows (was)](/iis/manage/provisioning-and-managing-iis/features-of-the-windows-process-activation-service-was).
 
@@ -1372,7 +1373,7 @@ Aby uzyskać więcej informacji na temat hostingu, zobacz [host in ASP.NET Core]
 
 ### <a name="enable-the-iisintegration-components"></a>Włącz składniki IISIntegration
 
-Podczas kompilowania hosta w `CreateWebHostBuilder` (*program.cs*), wywołaj, <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder%2A> Aby włączyć integrację usług IIS:
+Podczas kompilowania hosta w `CreateWebHostBuilder` ( *program.cs* ), wywołaj, <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder%2A> Aby włączyć integrację usług IIS:
 
 ```csharp
 public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
@@ -1436,7 +1437,7 @@ Podczas wyłączania pliku zestawu SDK sieci Web, *processPath* i *argumenty* po
 
 W celu poprawnego skonfigurowania [modułu ASP.NET Core](xref:host-and-deploy/aspnet-core-module) plik *web.config* musi znajdować się w ścieżce [katalogu głównego zawartości](xref:fundamentals/index#content-root) (zazwyczaj ścieżka podstawowa aplikacji) wdrożonej aplikacji. Ta sama lokalizacja jest taka sama jak ścieżka fizyczna witryny sieci Web dostarczana do usług IIS. Plik *web.config* jest wymagany w katalogu głównym aplikacji, aby umożliwić Publikowanie wielu aplikacji przy użyciu Web Deploy.
 
-Poufne pliki znajdują się w ścieżce fizycznej aplikacji, na przykład * \<assembly>.runtimeconfig.jsna*, * \<assembly> . XML* (Komentarze dokumentacji XML) i * \<assembly>.deps.js*. Gdy plik *web.config* jest obecny, a lokacja jest uruchamiana normalnie, usługi IIS nie będą obsługiwały tych poufnych plików, jeśli są żądane. Jeśli brakuje pliku *web.config* , nazwa jest nieprawidłowa lub nie można skonfigurować lokacji do normalnego uruchamiania, usługi IIS mogą publicznie udostępniać poufne pliki.
+Poufne pliki znajdują się w ścieżce fizycznej aplikacji, na przykład *\<assembly>.runtimeconfig.jsna* , *\<assembly> . XML* (Komentarze dokumentacji XML) i *\<assembly>.deps.js* . Gdy plik *web.config* jest obecny, a lokacja jest uruchamiana normalnie, usługi IIS nie będą obsługiwały tych poufnych plików, jeśli są żądane. Jeśli brakuje pliku *web.config* , nazwa jest nieprawidłowa lub nie można skonfigurować lokacji do normalnego uruchamiania, usługi IIS mogą publicznie udostępniać poufne pliki.
 
 **Plik *web.config* musi być obecny we wdrożeniu przez cały czas, prawidłowo nazwany i można skonfigurować lokację pod kątem normalnego uruchamiania. Nigdy nie usuwaj pliku *web.config* z wdrożenia produkcyjnego.**
 
@@ -1450,7 +1451,7 @@ Jeśli musisz przekształcić *web.config* przy publikowaniu (na przykład ustaw
 
 Włącz rolę serwera **serwera sieci Web (IIS)** i Ustanów usługi ról.
 
-1. Użyj kreatora **dodawania ról i funkcji** z menu **Zarządzaj** lub łącza w **Menedżer serwera**. W kroku **role serwera** zaznacz pole wyboru **serwer sieci Web (IIS)**.
+1. Użyj kreatora **dodawania ról i funkcji** z menu **Zarządzaj** lub łącza w **Menedżer serwera** . W kroku **role serwera** zaznacz pole wyboru **serwer sieci Web (IIS)** .
 
    ![W kroku wybierz role serwera zostanie wybrana rola IIS serwera sieci Web.](index/_static/server-roles-ws2016.png)
 
@@ -1459,32 +1460,32 @@ Włącz rolę serwera **serwera sieci Web (IIS)** i Ustanów usługi ról.
    ![Domyślne usługi ról są wybrane w kroku Wybierz usługi ról.](index/_static/role-services-ws2016.png)
 
    **Uwierzytelnianie systemu Windows (opcjonalnie)**  
-   Aby włączyć uwierzytelnianie systemu Windows, rozwiń następujące węzły: **Zabezpieczenia serwera sieci Web**  >  **Security**. Wybierz funkcję **uwierzytelniania systemu Windows** . Aby uzyskać więcej informacji, zobacz [uwierzytelnianie \<windowsAuthentication> systemu Windows](/iis/configuration/system.webServer/security/authentication/windowsAuthentication/) i [Konfigurowanie uwierzytelniania systemu Windows](xref:security/authentication/windowsauth).
+   Aby włączyć uwierzytelnianie systemu Windows, rozwiń następujące węzły: **Zabezpieczenia serwera sieci Web**  >  **Security** . Wybierz funkcję **uwierzytelniania systemu Windows** . Aby uzyskać więcej informacji, zobacz [uwierzytelnianie \<windowsAuthentication> systemu Windows](/iis/configuration/system.webServer/security/authentication/windowsAuthentication/) i [Konfigurowanie uwierzytelniania systemu Windows](xref:security/authentication/windowsauth).
 
    **Obiekty WebSockets (opcjonalnie)**  
-   Obiekty WebSockets są obsługiwane w ASP.NET Core 1,1 lub nowszych. Aby włączyć obiekty WebSockets, rozwiń następujące węzły: projektowanie aplikacji **serwera sieci Web**  >  **Application Development**. Wybierz funkcję **protokołu WebSocket** . Aby uzyskać więcej informacji, zobacz [WebSockets](xref:fundamentals/websockets).
+   Obiekty WebSockets są obsługiwane w ASP.NET Core 1,1 lub nowszych. Aby włączyć obiekty WebSockets, rozwiń następujące węzły: projektowanie aplikacji **serwera sieci Web**  >  **Application Development** . Wybierz funkcję **protokołu WebSocket** . Aby uzyskać więcej informacji, zobacz [WebSockets](xref:fundamentals/websockets).
 
 1. Przejdź do kroku **potwierdzenia** , aby zainstalować rolę i usługi serwera sieci Web. Po zainstalowaniu roli **serwera sieci Web (IIS)** nie jest wymagane ponowne uruchomienie serwera ani usług IIS.
 
 **Systemy operacyjne Windows dla komputerów stacjonarnych**
 
-Włącz **konsolę zarządzania usług IIS** i **usługi World Wide Web**.
+Włącz **konsolę zarządzania usług IIS** i **usługi World Wide Web** .
 
 1. Przejdź do pozycji **Panel sterowania** > **programy** > **programy i funkcje** > **Włącz lub wyłącz funkcje systemu Windows** (po lewej stronie ekranu).
 
 1. Otwórz węzeł **Internet Information Services** . Otwórz węzeł **Narzędzia do zarządzania siecią Web** .
 
-1. Zaznacz pole wyboru w obszarze **Konsola zarządzania usługami IIS**.
+1. Zaznacz pole wyboru w obszarze **Konsola zarządzania usługami IIS** .
 
-1. Zaznacz pole wyboru **usług World Wide Web Services**.
+1. Zaznacz pole wyboru **usług World Wide Web Services** .
 
 1. Zaakceptuj domyślne funkcje **usług World Wide Web Services** lub Dostosuj funkcje usług IIS.
 
    **Uwierzytelnianie systemu Windows (opcjonalnie)**  
-   Aby włączyć uwierzytelnianie systemu Windows, rozwiń następujące węzły: **World Wide Web usług**  >  **zabezpieczenia**. Wybierz funkcję **uwierzytelniania systemu Windows** . Aby uzyskać więcej informacji, zobacz [uwierzytelnianie \<windowsAuthentication> systemu Windows](/iis/configuration/system.webServer/security/authentication/windowsAuthentication/) i [Konfigurowanie uwierzytelniania systemu Windows](xref:security/authentication/windowsauth).
+   Aby włączyć uwierzytelnianie systemu Windows, rozwiń następujące węzły: **World Wide Web usług**  >  **zabezpieczenia** . Wybierz funkcję **uwierzytelniania systemu Windows** . Aby uzyskać więcej informacji, zobacz [uwierzytelnianie \<windowsAuthentication> systemu Windows](/iis/configuration/system.webServer/security/authentication/windowsAuthentication/) i [Konfigurowanie uwierzytelniania systemu Windows](xref:security/authentication/windowsauth).
 
    **Obiekty WebSockets (opcjonalnie)**  
-   Obiekty WebSockets są obsługiwane w ASP.NET Core 1,1 lub nowszych. Aby włączyć obiekty WebSockets, rozwiń następujące węzły: **World Wide Web Services**  >  **Application Development Features**. Wybierz funkcję **protokołu WebSocket** . Aby uzyskać więcej informacji, zobacz [WebSockets](xref:fundamentals/websockets).
+   Obiekty WebSockets są obsługiwane w ASP.NET Core 1,1 lub nowszych. Aby włączyć obiekty WebSockets, rozwiń następujące węzły: **World Wide Web Services**  >  **Application Development Features** . Wybierz funkcję **protokołu WebSocket** . Aby uzyskać więcej informacji, zobacz [WebSockets](xref:fundamentals/websockets).
 
 1. Jeśli instalacja usług IIS wymaga ponownego uruchomienia, należy ponownie uruchomić system.
 
@@ -1517,7 +1518,7 @@ Zainstaluj *pakiet hostingu platformy .NET Core* w systemie hostingu. Pakiet ins
    * `OPT_NO_RUNTIME=1`: Pomiń Instalowanie środowiska uruchomieniowego platformy .NET Core. Używany, gdy serwer obsługuje tylko [wdrożenia samodzielne (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd).
    * `OPT_NO_SHAREDFX=1`: Pomiń instalację ASP.NET Shared Framework (ASP.NET Runtime). Używany, gdy serwer obsługuje tylko [wdrożenia samodzielne (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd).
    * `OPT_NO_X86=1`: Pomiń Instalowanie środowiska uruchomieniowego x86. Użyj tego parametru, Jeśli wiesz, że nie będziesz hostować aplikacji 32-bitowych. Jeśli w przyszłości będziesz hostować zarówno aplikacje 32-bitowe, jak i 64-bitowe, nie używaj tego parametru i zainstaluj oba środowiska uruchomieniowe.
-   * `OPT_NO_SHARED_CONFIG_CHECK=1`: Wyłącz sprawdzanie przy użyciu konfiguracji udostępnionej usług IIS, gdy konfiguracja udostępniona (*applicationHost.config*) znajduje się na tym samym komputerze, na którym zainstalowano program IIS. *Dostępne tylko w przypadku ASP.NET Core 2,2 lub nowszych instalatorów pakietu do obsługi.* Aby uzyskać więcej informacji, zobacz <xref:host-and-deploy/aspnet-core-module#aspnet-core-module-with-an-iis-shared-configuration>.
+   * `OPT_NO_SHARED_CONFIG_CHECK=1`: Wyłącz sprawdzanie przy użyciu konfiguracji udostępnionej usług IIS, gdy konfiguracja udostępniona ( *applicationHost.config* ) znajduje się na tym samym komputerze, na którym zainstalowano program IIS. *Dostępne tylko w przypadku ASP.NET Core 2,2 lub nowszych instalatorów pakietu do obsługi.* Aby uzyskać więcej informacji, zobacz <xref:host-and-deploy/aspnet-core-module#aspnet-core-module-with-an-iis-shared-configuration>.
 1. Uruchom ponownie system lub wykonaj następujące polecenia w powłoce poleceń:
 
    ```console
@@ -1543,30 +1544,30 @@ Podczas wdrażania aplikacji na serwerach z [Web Deploy](/iis/install/installing
 
 1. W Menedżerze usług IIS Otwórz węzeł serwera w panelu **połączenia** . Kliknij prawym przyciskiem myszy folder **sitess** . Wybierz pozycję **Dodaj witrynę internetową** z menu kontekstowego.
 
-1. Podaj **nazwę lokacji** i ustaw **ścieżkę fizyczną** folderu wdrożenia aplikacji. Podaj konfigurację **powiązania** i Utwórz witrynę sieci Web, wybierając **przycisk OK**:
+1. Podaj **nazwę lokacji** i ustaw **ścieżkę fizyczną** folderu wdrożenia aplikacji. Podaj konfigurację **powiązania** i Utwórz witrynę sieci Web, wybierając **przycisk OK** :
 
    ![Podaj nazwę lokacji, ścieżkę fizyczną i nazwę hosta w kroku Dodaj witrynę sieci Web.](index/_static/add-website-ws2016.png)
 
    > [!WARNING]
    > `http://*:80/` `http://+:80` **Nie** należy używać powiązań z symbolami wieloznacznymi (i) najwyższego poziomu. Powiązania z symbolami wieloznacznymi najwyższego poziomu mogą otwierać aplikację pod kątem luk w zabezpieczeniach. Dotyczy to zarówno silnych, jak i słabych symboli wieloznacznych. Używaj jawnych nazw hostów zamiast symboli wieloznacznych. Powiązanie symboli wieloznacznych z poddomeną (na przykład `*.mysub.com` ) nie ma tego ryzyka bezpieczeństwa, jeśli kontrolujesz całą domenę nadrzędną (w przeciwieństwie do `*.com` , która jest narażona). Aby uzyskać więcej informacji, zobacz [sekcję rfc7230-5,4](https://tools.ietf.org/html/rfc7230#section-5.4) .
 
-1. W węźle serwera wybierz pozycję **Pule aplikacji**.
+1. W węźle serwera wybierz pozycję **Pule aplikacji** .
 
 1. Kliknij prawym przyciskiem myszy pulę aplikacji lokacji i wybierz pozycję **Ustawienia podstawowe** z menu kontekstowego.
 
-1. W oknie **Edytowanie puli aplikacji** Ustaw **wersję środowiska .NET CLR** na **Brak kodu zarządzanego**:
+1. W oknie **Edytowanie puli aplikacji** Ustaw **wersję środowiska .NET CLR** na **Brak kodu zarządzanego** :
 
    ![Nie ustawiaj kodu zarządzanego dla wersji środowiska .NET CLR.](index/_static/edit-apppool-ws2016.png)
 
     ASP.NET Core działa w osobnym procesie i zarządza środowiskiem uruchomieniowym. ASP.NET Core nie polega na ładowaniu środowiska CLR (.NET CLR) &mdash; podstawowego środowiska uruchomieniowego języka wspólnego (CoreCLR) dla platformy .NET Core w celu hostowania aplikacji w procesie roboczym. Ustawienie **wersji środowiska .NET CLR** na **Brak kodu zarządzanego** jest opcjonalne, ale zalecane.
 
-1. *ASP.NET Core 2,2 lub nowsza*: w przypadku [wdrożenia](/dotnet/core/deploying/#self-contained-deployments-scd) z systemem 64-bitowym (x64), które korzysta z [modelu hostingu w procesie](#in-process-hosting-model), wyłączaj pulę aplikacji dla procesów 32-bit (x86).
+1. *ASP.NET Core 2,2 lub nowsza* : w przypadku [wdrożenia](/dotnet/core/deploying/#self-contained-deployments-scd) z systemem 64-bitowym (x64), które korzysta z [modelu hostingu w procesie](#in-process-hosting-model), wyłączaj pulę aplikacji dla procesów 32-bit (x86).
 
-   Na pasku bocznym **Akcje** Menedżera usług IIS > **Pule aplikacji**wybierz pozycję **Ustaw ustawienia domyślne puli aplikacji** lub **Zaawansowane**. Znajdź **opcję Włącz aplikacje 32-bitowe** i ustaw wartość na `False` . To ustawienie nie ma wpływu na aplikacje wdrożone na potrzeby [hostingu poza procesem](xref:host-and-deploy/aspnet-core-module#out-of-process-hosting-model).
+   Na pasku bocznym **Akcje** Menedżera usług IIS > **Pule aplikacji** wybierz pozycję **Ustaw ustawienia domyślne puli aplikacji** lub **Zaawansowane** . Znajdź **opcję Włącz aplikacje 32-bitowe** i ustaw wartość na `False` . To ustawienie nie ma wpływu na aplikacje wdrożone na potrzeby [hostingu poza procesem](xref:host-and-deploy/aspnet-core-module#out-of-process-hosting-model).
 
 1. Potwierdź, że tożsamość modelu procesu ma odpowiednie uprawnienia.
 
-   Jeśli domyślna tożsamość puli aplikacji (**model procesów**  >  **Identity** ) została zmieniona z **ApplicationPool Identity ** na inną tożsamość, sprawdź, czy Nowa tożsamość ma wymagane uprawnienia dostępu do folderu, bazy danych i innych wymaganych zasobów aplikacji. Na przykład Pula aplikacji wymaga dostępu do odczytu i zapisu do folderów, w których aplikacja odczytuje i zapisuje pliki.
+   Jeśli domyślna tożsamość puli aplikacji ( **model procesów**  >  **Identity** ) została zmieniona z **ApplicationPool Identity** na inną tożsamość, sprawdź, czy Nowa tożsamość ma wymagane uprawnienia dostępu do folderu, bazy danych i innych wymaganych zasobów aplikacji. Na przykład Pula aplikacji wymaga dostępu do odczytu i zapisu do folderów, w których aplikacja odczytuje i zapisuje pliki.
 
 **Konfiguracja uwierzytelniania systemu Windows (opcjonalnie)**  
 Aby uzyskać więcej informacji, zobacz [Konfigurowanie uwierzytelniania systemu Windows](xref:security/authentication/windowsauth).
@@ -1715,9 +1716,9 @@ Aby hostować aplikację ASP.NET Core jako aplikację podrzędną w innej aplika
 
 1. Dodaj lokację główną w Menedżerze usług IIS przy użyciu aplikacji podrzędnej w folderze w lokacji głównej.
 
-1. Kliknij prawym przyciskiem myszy folder subapp w Menedżerze usług IIS, a następnie wybierz polecenie **Konwertuj na aplikację**.
+1. Kliknij prawym przyciskiem myszy folder subapp w Menedżerze usług IIS, a następnie wybierz polecenie **Konwertuj na aplikację** .
 
-1. W oknie dialogowym **Dodawanie aplikacji** Użyj przycisku **Wybierz** dla **puli aplikacji** , aby przypisać pulę aplikacji utworzoną dla aplikacji podrzędnej. Wybierz przycisk **OK**.
+1. W oknie dialogowym **Dodawanie aplikacji** Użyj przycisku **Wybierz** dla **puli aplikacji** , aby przypisać pulę aplikacji utworzoną dla aplikacji podrzędnej. Wybierz pozycję **OK** .
 
 Przypisanie oddzielnej puli aplikacji do aplikacji podrzędnej jest wymagane w przypadku korzystania z modelu hostingu w procesie.
 
@@ -1752,7 +1753,7 @@ W przypadku hostowania wielu witryn sieci Web na serwerze zalecamy odizolowanie 
 
 ## <a name="application-pool-no-locidentity"></a>Pula aplikacji Identity
 
-Konto tożsamości puli aplikacji umożliwia uruchamianie aplikacji na unikatowym koncie bez konieczności tworzenia domen ani kont lokalnych oraz zarządzania nimi. W przypadku usług IIS 8,0 lub nowszych proces roboczy administratora usług IIS tworzy konto wirtualne o nazwie nowej puli aplikacji i domyślnie uruchamia procesy robocze puli aplikacji w ramach tego konta. W konsoli zarządzania usługami IIS w obszarze **Ustawienia zaawansowane** dla puli aplikacji upewnij się, że **Identity** ustawiono opcję Użyj **ApplicationPool Identity **:
+Konto tożsamości puli aplikacji umożliwia uruchamianie aplikacji na unikatowym koncie bez konieczności tworzenia domen ani kont lokalnych oraz zarządzania nimi. W przypadku usług IIS 8,0 lub nowszych proces roboczy administratora usług IIS tworzy konto wirtualne o nazwie nowej puli aplikacji i domyślnie uruchamia procesy robocze puli aplikacji w ramach tego konta. W konsoli zarządzania usługami IIS w obszarze **Ustawienia zaawansowane** dla puli aplikacji upewnij się, że **Identity** ustawiono opcję Użyj **ApplicationPool Identity** :
 
 ![Okno dialogowe Zaawansowane ustawienia puli aplikacji](index/_static/apppool-identity.png)
 
@@ -1762,17 +1763,17 @@ Jeśli proces roboczy usług IIS wymaga podwyższonego poziomu dostępu do aplik
 
 1. Otwórz Eksploratora Windows i przejdź do katalogu.
 
-1. Kliknij prawym przyciskiem myszy katalog i wybierz polecenie **Właściwości**.
+1. Kliknij prawym przyciskiem myszy katalog i wybierz polecenie **Właściwości** .
 
 1. Na karcie **zabezpieczenia** wybierz przycisk **Edytuj** , a następnie przycisk **Dodaj** .
 
 1. Wybierz przycisk **lokalizacje** i upewnij się, że wybrano system.
 
-1. Wprowadź **<usług IIS puli aplikacji \\ app_pool_name>** w polu **Wprowadź nazwy obiektów do wybrania** . Wybierz przycisk **Sprawdź nazwy** . W obszarze *Domyślna pula aplikacji* Sprawdź nazwy za pomocą **usług IIS AppPool\DefaultAppPool**. Po wybraniu przycisku **Sprawdź nazwy** w obszarze nazwy obiektów zostanie wykazana wartość **Domyślna pula aplikacji** . Nie można wprowadzić nazwy puli aplikacji bezpośrednio w obszarze nazw obiektów. Podczas sprawdzania nazwy obiektu Użyj **<IIS puli aplikacji \\ app_pool_name>** .
+1. Wprowadź **<usług IIS puli aplikacji \\ app_pool_name>** w polu **Wprowadź nazwy obiektów do wybrania** . Wybierz przycisk **Sprawdź nazwy** . W obszarze *Domyślna pula aplikacji* Sprawdź nazwy za pomocą **usług IIS AppPool\DefaultAppPool** . Po wybraniu przycisku **Sprawdź nazwy** w obszarze nazwy obiektów zostanie wykazana wartość **Domyślna pula aplikacji** . Nie można wprowadzić nazwy puli aplikacji bezpośrednio w obszarze nazw obiektów. Podczas sprawdzania nazwy obiektu Użyj **<IIS puli aplikacji \\ app_pool_name>** .
 
    ![Okno dialogowe Wybieranie użytkowników lub grup dla folderu aplikacji: Nazwa puli aplikacji "domyślna pula" jest dołączana do "puli aplikacji IIS \" w obszarze nazw obiektów przed wybraniem pozycji" Sprawdź nazwy ".](index/_static/select-users-or-groups-1.png)
 
-1. Wybierz przycisk **OK**.
+1. Wybierz pozycję **OK** .
 
    ![Okno dialogowe Wybieranie użytkowników lub grup dla folderu aplikacji: po wybraniu pozycji "Sprawdź nazwy" w obszarze nazwy obiektów zostanie wyświetlona nazwa obiektu "domyślna pula aplikacji".](index/_static/select-users-or-groups-2.png)
 

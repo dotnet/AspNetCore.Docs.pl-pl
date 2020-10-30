@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/28/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/read-related-data
-ms.openlocfilehash: dd00b9d7faf467857ec1e47f4cfb0296d84e5d3f
-ms.sourcegitcommit: 62cc131969b2379f7a45c286a751e22d961dfbdb
+ms.openlocfilehash: e52e4aefc18b84f85bea28a9724894eed50ca54a
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/22/2020
-ms.locfileid: "90847705"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061070"
 ---
 # <a name="part-6-no-locrazor-pages-with-ef-core-in-aspnet-core---read-related-data"></a>Część 6 Razor strony z EF Core w ASP.NET Core — Odczytaj powiązane dane
 
@@ -148,9 +149,9 @@ Poniższy kod ładuje powiązane dane przy użyciu `Select` metody:
 
 [!code-csharp[](intro/samples/cu30snapshots/6-related/Pages/Courses/IndexSelect.cshtml.cs?name=snippet_RevisedIndexMethod&highlight=6)]
 
-Poprzedni kod nie zwraca żadnych typów jednostek, dlatego śledzenie nie jest wykonywane. Aby uzyskać więcej informacji na temat śledzenia EF, zobacz [śledzenie a nie śledzenie zapytań](/ef/core/querying/tracking).
+Poprzedni kod nie zwraca żadnych typów jednostek, dlatego śledzenie nie jest wykonywane. Aby uzyskać więcej informacji na temat śledzenia EF, zobacz [śledzenie a No-Tracking zapytań](/ef/core/querying/tracking).
 
-Pomocnik `CourseViewModel`:
+`CourseViewModel`:
 
 [!code-csharp[](intro/samples/cu30snapshots/6-related/Models/SchoolViewModels/CourseViewModel.cs?name=snippet)]
 
@@ -284,7 +285,7 @@ Poprzedni kod wprowadza następujące zmiany:
   <tr class="@selectedRow">
   ```
 
-* Dodaje nowe hiperłącze z etykietą **SELECT**. Ten link powoduje wysłanie wybranego identyfikatora instruktora do `Index` metody i ustawienie koloru tła.
+* Dodaje nowe hiperłącze z etykietą **SELECT** . Ten link powoduje wysłanie wybranego identyfikatora instruktora do `Index` metody i ustawienie koloru tła.
 
   ```html
   <a asp-action="Index" asp-route-id="@item.ID">Select</a> |
@@ -453,7 +454,7 @@ Poniższy kod ładuje powiązane dane przy użyciu `Select` metody:
 
 [!code-csharp[](intro/samples/cu/Pages/Courses/IndexSelect.cshtml.cs?name=snippet_RevisedIndexMethod&highlight=4)]
 
-Pomocnik `CourseViewModel`:
+`CourseViewModel`:
 
 [!code-csharp[](intro/samples/cu/Models/SchoolViewModels/CourseViewModel.cs?name=snippet)]
 
@@ -530,7 +531,7 @@ Poprzedzające znaczniki wprowadzają następujące zmiany:
 
   `http://localhost:1234/Instructors/2`
 
-* Tytuł strony to **Instruktorzy**.
+* Tytuł strony to **Instruktorzy** .
 * Dodano kolumnę **pakietu Office** , która `item.OfficeAssignment.Location` jest wyświetlana tylko wtedy, gdy `item.OfficeAssignment` nie ma wartości null. Ponieważ jest to relacja "jeden do zera" lub "jeden", nie może być powiązana jednostka OfficeAssignment.
 
   ```html
@@ -553,7 +554,7 @@ Poprzedzające znaczniki wprowadzają następujące zmiany:
   <tr class="@selectedRow">
   ```
 
-* Dodano nowe hiperłącze z etykietą **SELECT**. Ten link powoduje wysłanie wybranego identyfikatora instruktora do `Index` metody i ustawienie koloru tła.
+* Dodano nowe hiperłącze z etykietą **SELECT** . Ten link powoduje wysłanie wybranego identyfikatora instruktora do `Index` metody i ustawienie koloru tła.
 
   ```html
   <a asp-action="Index" asp-route-id="@item.ID">Select</a> |
@@ -612,7 +613,7 @@ Zaktualizuj zapytanie w `OnGetAsync` metodzie na *stronach/instruktorów/index. 
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/Index.cshtml.cs?name=snippet_ThenInclude&highlight=6-9)]
 
-Aktualizowanie *stron/instruktorów/index. cshtml*. Dodaj następujący znacznik na końcu pliku:
+Aktualizowanie *stron/instruktorów/index. cshtml* . Dodaj następujący znacznik na końcu pliku:
 
 [!code-cshtml[](intro/samples/cu/Pages/Instructors/IndexRRD.cshtml?range=103-)]
 

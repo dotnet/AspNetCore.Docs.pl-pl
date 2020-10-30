@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/10/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: test/troubleshoot
-ms.openlocfilehash: 24781e7689a1a238e9d2fa9666fa61a8642135c3
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 8e6c640cd775e5d4cbe6e34c1cecc391baf57344
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632138"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059575"
 ---
 # <a name="troubleshoot-and-debug-aspnet-core-projects"></a>Rozwiązywanie problemów i debugowanie ASP.NET Core projektów
 
@@ -49,7 +50,7 @@ To ostrzeżenie jest wyświetlane, gdy są zainstalowane zarówno wersje 32-bito
 * 32-bitowy zestaw .NET Core SDK został zainstalowany przez inną aplikację.
 * Pobrano i zainstalowano nieprawidłową wersję.
 
-Odinstaluj 32-bitowy zestaw .NET Core SDK, aby uniknąć tego ostrzeżenia. Odinstaluj z **Panelu sterowania**  >  **programy i funkcje**  >  **Odinstaluj lub zmień program**. Jeśli rozumiesz, dlaczego ostrzeżenie i jego konsekwencje, możesz zignorować to ostrzeżenie.
+Odinstaluj 32-bitowy zestaw .NET Core SDK, aby uniknąć tego ostrzeżenia. Odinstaluj z **Panelu sterowania**  >  **programy i funkcje**  >  **Odinstaluj lub zmień program** . Jeśli rozumiesz, dlaczego ostrzeżenie i jego konsekwencje, możesz zignorować to ostrzeżenie.
 
 ### <a name="the-net-core-sdk-is-installed-in-multiple-locations"></a>Zestaw .NET Core SDK jest zainstalowany w wielu lokalizacjach
 
@@ -57,9 +58,9 @@ W oknie dialogowym **Nowy projekt** dla ASP.NET Core może zostać wyświetlone 
 
 > Zestaw .NET Core SDK jest zainstalowany w wielu lokalizacjach. Wyświetlane są tylko szablony z zestawów SDK zainstalowanych w lokalizacji "C: \\ Program Files \\ dotnet \\ SDK \\ ".
 
-Ten komunikat jest wyświetlany w przypadku co najmniej jednej instalacji zestaw .NET Core SDK w katalogu poza językiem *C: \\ Program Files \\ \\ zestawu dotnet SDK \\ *. Zwykle zdarza się to, gdy zestaw .NET Core SDK został wdrożony na komputerze przy użyciu funkcji kopiowania/wklejania zamiast Instalatora MSI.
+Ten komunikat jest wyświetlany w przypadku co najmniej jednej instalacji zestaw .NET Core SDK w katalogu poza językiem *C: \\ Program Files \\ \\ zestawu dotnet SDK \\* . Zwykle zdarza się to, gdy zestaw .NET Core SDK został wdrożony na komputerze przy użyciu funkcji kopiowania/wklejania zamiast Instalatora MSI.
 
-Odinstaluj wszystkie 32-bitowe zestawy SDK platformy .NET Core i środowiska uruchomieniowe, aby uniknąć tego ostrzeżenia. Odinstaluj z **Panelu sterowania**  >  **programy i funkcje**  >  **Odinstaluj lub zmień program**. Jeśli rozumiesz, dlaczego ostrzeżenie i jego konsekwencje, możesz zignorować to ostrzeżenie.
+Odinstaluj wszystkie 32-bitowe zestawy SDK platformy .NET Core i środowiska uruchomieniowe, aby uniknąć tego ostrzeżenia. Odinstaluj z **Panelu sterowania**  >  **programy i funkcje**  >  **Odinstaluj lub zmień program** . Jeśli rozumiesz, dlaczego ostrzeżenie i jego konsekwencje, możesz zignorować to ostrzeżenie.
 
 ### <a name="no-net-core-sdks-were-detected"></a>Nie wykryto żadnych zestawów .NET Core SDK
 

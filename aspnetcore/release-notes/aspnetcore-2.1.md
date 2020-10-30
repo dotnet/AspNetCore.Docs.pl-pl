@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-2.1
-ms.openlocfilehash: d10fd89a3eac34e855ba92673033edc541aa6393
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 62fc9d866adcf05ff024501db68cce8bb8b11a98
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632411"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059718"
 ---
 # <a name="whats-new-in-aspnet-core-21"></a>Co nowego w ASP.NET Core 2,1
 
@@ -92,7 +93,7 @@ ASP.NET Core udostępnia interfejsy API i szablony, które pomagają spełnić n
 
 Wprowadzono nowy pakiet, który usprawnia tworzenie i wykonywanie testów. Pakiet [Microsoft. AspNetCore. MVC. test](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Testing/) obsługuje następujące zadania:
 
-* Kopiuje plik zależności (* \* . deps*) z testowanej aplikacji do folderu *bin* projektu testowego.
+* Kopiuje plik zależności ( *\* . deps* ) z testowanej aplikacji do folderu *bin* projektu testowego.
 * Ustawia katalog główny zawartości dla elementu głównego projektu przetestowanej aplikacji, co umożliwia znalezienie plików statycznych i stron/widoków podczas wykonywania testów.
 * Udostępnia klasę [WebApplicationFactory](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) do usprawnienia uruchamiania przetestowanej aplikacji z [TestServer](/dotnet/api/microsoft.aspnetcore.testhost.testserver).
 
@@ -172,7 +173,7 @@ W 2,1 Razor strony szukają Razor zasobów (takich jak układy i części) w nas
 
 ## <a name="no-locrazor-pages-in-an-area"></a>Razor Strony w obszarze
 
-Razor Strony obsługują teraz [obszary](xref:mvc/controllers/areas). Aby zobaczyć przykład obszarów, Utwórz nową Razor aplikację sieci Web dla poszczególnych kont użytkowników. RazorAplikacja internetowa stron z pojedynczymi kontami użytkowników zawiera */Areas/ Identity /Pages*.
+Razor Strony obsługują teraz [obszary](xref:mvc/controllers/areas). Aby zobaczyć przykład obszarów, Utwórz nową Razor aplikację sieci Web dla poszczególnych kont użytkowników. RazorAplikacja internetowa stron z pojedynczymi kontami użytkowników zawiera */Areas/ Identity /Pages* .
 
 ## <a name="mvc-compatibility-version"></a>Wersja zgodności MVC
 

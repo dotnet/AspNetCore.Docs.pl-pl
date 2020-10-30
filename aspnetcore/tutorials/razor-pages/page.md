@@ -5,6 +5,7 @@ description: Część 3 serii samouczków na Razor stronach.
 ms.author: riande
 ms.date: 08/17/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/page
-ms.openlocfilehash: 03febbd71df19cd3524d26e229a8bd8798a874b5
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: 7d0085e1d444de30ca124ef544668122ab350c93
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865124"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060056"
 ---
 # <a name="part-3-scaffolded-no-locrazor-pages-in-aspnet-core"></a>Część 3, szkieletowe Razor strony w ASP.NET Core
 
@@ -75,7 +76,7 @@ Bada wyrażenie lambda użyte w następującym Pomocniku HTML:
 
 ### <a name="the-layout-page"></a>Strona układu
 
-Wybierz linki menu (** Razor PagesMovie**, **Home**i **privacy**). Każda Strona wyświetla ten sam układ menu. Układ menu jest implementowany w pliku *Pages/Shared/_Layout. cshtml* . Otwórz plik *Pages/Shared/_Layout. cshtml* .
+Wybierz linki menu ( **Razor PagesMovie** , **Home** i **privacy** ). Każda Strona wyświetla ten sam układ menu. Układ menu jest implementowany w pliku *Pages/Shared/_Layout. cshtml* . Otwórz plik *Pages/Shared/_Layout. cshtml* .
 
 Szablony [układów](xref:mvc/views/layout) umożliwiają układ kontenera HTML:
 
@@ -106,7 +107,7 @@ Wiersz `@*Markup removed for brevity.*@` jest Razor komentarzem. W przeciwieńst
 
 ### <a name="update-the-layout"></a>Aktualizowanie układu
 
-Zmień `<title>` element w pliku *Pages/Shared/_Layout. cshtml* , aby wyświetlał **film** zamiast ** Razor PagesMovie**.
+Zmień `<title>` element w pliku *Pages/Shared/_Layout. cshtml* , aby wyświetlał **film** zamiast **Razor PagesMovie** .
 
 [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie30/Pages/Shared/_Layout.cshtml?range=1-6&highlight=6)]
 
@@ -126,10 +127,10 @@ Poprzedni element zakotwiczenia jest [pomocnikiem tagów](xref:mvc/views/tag-hel
 
 Zapisz zmiany i przetestuj aplikację, klikając łącze **RpMovie** . Jeśli występują problemy, zobacz plik [_Layout. cshtml](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Pages/Shared/_Layout.cshtml) w usłudze GitHub.
 
-Przetestuj inne linki (**Narzędzia główne**, **RpMovie**, **Utwórz**, **Edytuj**i **Usuń**). Każda Strona ustawia tytuł, który można zobaczyć na karcie przeglądarki. Po utworzeniu zakładki na stronie tytuł jest używany dla zakładki.
+Przetestuj inne linki ( **Narzędzia główne** , **RpMovie** , **Utwórz** , **Edytuj** i **Usuń** ). Każda Strona ustawia tytuł, który można zobaczyć na karcie przeglądarki. Po utworzeniu zakładki na stronie tytuł jest używany dla zakładki.
 
 > [!NOTE]
-> W polu nie można wprowadzać przecinków dziesiętnych `Price` . Aby zapewnić obsługę [walidacji jQuery](https://jqueryvalidation.org/) dla ustawień regionalnych innych niż angielskie, które używają przecinka (",") dla przecinka dziesiętnego i formatów dat innych niż angielski, należy wykonać kroki w celu globalizacji aplikacji. Aby uzyskać instrukcje dotyczące dodawania przecinków dziesiętnych, zobacz ten problem w usłudze [GitHub 4076](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420) .
+> W polu nie można wprowadzać przecinków dziesiętnych `Price` . Aby zapewnić obsługę [walidacji jQuery](https://jqueryvalidation.org/) dla ustawień regionalnych innych niż angielskie, które używają przecinka (",") dla przecinka dziesiętnego i nieUS-Englishych formatów daty, należy wykonać kroki w celu globalizacji aplikacji. Aby uzyskać instrukcje dotyczące dodawania przecinków dziesiętnych, zobacz ten problem w usłudze [GitHub 4076](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420) .
 
 `Layout`Właściwość jest ustawiana w pliku *Pages/_ViewStart. cshtml* :
 
@@ -209,7 +210,7 @@ Aparat szkieletu tworzy Razor znaczniki dla każdego pola w modelu (z wyjątkiem
 
 Aby uzyskać więcej informacji na temat pomocników tagów `<form method="post">` , takich jak, zobacz [pomocnicy tagów w ASP.NET Core](xref:mvc/views/tag-helpers/intro).
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 > [!div class="step-by-step"]
 > [Poprzedni: Dodawanie modelu](xref:tutorials/razor-pages/model) 
@@ -265,7 +266,7 @@ Bada wyrażenie lambda użyte w następującym Pomocniku HTML:
 
 ### <a name="the-layout-page"></a>Strona układu
 
-Wybierz linki menu (** Razor PagesMovie**, **Home**i **privacy**). Każda Strona wyświetla ten sam układ menu. Układ menu jest implementowany w pliku *Pages/Shared/_Layout. cshtml* . Otwórz plik *Pages/Shared/_Layout. cshtml* .
+Wybierz linki menu ( **Razor PagesMovie** , **Home** i **privacy** ). Każda Strona wyświetla ten sam układ menu. Układ menu jest implementowany w pliku *Pages/Shared/_Layout. cshtml* . Otwórz plik *Pages/Shared/_Layout. cshtml* .
 
 Szablony [układów](xref:mvc/views/layout) umożliwiają określenie układu kontenera HTML witryny w jednym miejscu, a następnie zastosowanie go na wielu stronach w witrynie. Znajdź `@RenderBody()` wiersz. `RenderBody` jest symbolem zastępczym, w którym wszystkie utworzone widoki związane ze stroną są wyświetlane, *opakowane* na stronie układ. Na przykład w przypadku wybrania linku **prywatność** widok **strony/prywatność. cshtml** jest renderowany wewnątrz `RenderBody` metody.
 
@@ -291,7 +292,7 @@ Wiersz `@*Markup removed for brevity.*@` jest Razor komentarzem, które nie poja
 
 ### <a name="update-the-layout"></a>Aktualizowanie układu
 
-Zmień `<title>` element w pliku *Pages/Shared/_Layout. cshtml* , aby wyświetlał **film** zamiast ** Razor PagesMovie**.
+Zmień `<title>` element w pliku *Pages/Shared/_Layout. cshtml* , aby wyświetlał **film** zamiast **Razor PagesMovie** .
 
 [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie22/Pages/Shared/_Layout.cshtml?range=1-6&highlight=6)]
 
@@ -311,10 +312,10 @@ Poprzedni element zakotwiczenia jest [pomocnikiem tagów](xref:mvc/views/tag-hel
 
 Zapisz zmiany i przetestuj aplikację, klikając łącze **RpMovie** . Jeśli występują problemy, zobacz plik [_Layout. cshtml](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Pages/Shared/_Layout.cshtml) w usłudze GitHub.
 
-Przetestuj inne linki (**Narzędzia główne**, **RpMovie**, **Utwórz**, **Edytuj**i **Usuń**). Każda Strona ustawia tytuł, który można zobaczyć na karcie przeglądarki. Po utworzeniu zakładki na stronie tytuł jest używany dla zakładki.
+Przetestuj inne linki ( **Narzędzia główne** , **RpMovie** , **Utwórz** , **Edytuj** i **Usuń** ). Każda Strona ustawia tytuł, który można zobaczyć na karcie przeglądarki. Po utworzeniu zakładki na stronie tytuł jest używany dla zakładki.
 
 > [!NOTE]
-> W polu nie można wprowadzać przecinków dziesiętnych `Price` . Aby zapewnić obsługę [walidacji jQuery](https://jqueryvalidation.org/) dla ustawień regionalnych innych niż angielskie, które używają przecinka (",") dla przecinka dziesiętnego i formatów dat innych niż angielski, należy wykonać kroki w celu globalizacji aplikacji. Ten [problem w usłudze GitHub 4076](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420) zawiera instrukcje dotyczące dodawania przecinków dziesiętnych.
+> W polu nie można wprowadzać przecinków dziesiętnych `Price` . Aby zapewnić obsługę [walidacji jQuery](https://jqueryvalidation.org/) dla ustawień regionalnych innych niż angielskie, które używają przecinka (",") dla przecinka dziesiętnego i nieUS-Englishych formatów daty, należy wykonać kroki w celu globalizacji aplikacji. Ten [problem w usłudze GitHub 4076](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420) zawiera instrukcje dotyczące dodawania przecinków dziesiętnych.
 
 `Layout`Właściwość jest ustawiana w pliku *Pages/_ViewStart. cshtml* :
 
@@ -374,7 +375,7 @@ Aparat szkieletu tworzy Razor znaczniki dla każdego pola w modelu (z wyjątkiem
 
 [Pomocnik tagu wejściowego](xref:mvc/views/working-with-forms) ( `<input asp-for="Movie.Title" class="form-control">` ) używa atrybutów [DataAnnotations](/aspnet/mvc/overview/older-versions/mvc-music-store/mvc-music-store-part-6) i tworzy atrybuty HTML, które są zbędne do walidacji jQuery po stronie klienta.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Wersja tego samouczka usługi YouTube](https://youtu.be/zxgKjPYnOMM)
 

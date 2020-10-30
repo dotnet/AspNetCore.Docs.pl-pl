@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-2.0'
 ms.author: scaddie
 ms.date: 06/12/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/th-components
-ms.openlocfilehash: d3bae9cd5b4a5c7315c795229c7eafbf1e44e22d
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 15bddd8ce18546bef7ee7e6ec2e32e369d0858a3
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88627588"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060563"
 ---
 # <a name="tag-helper-components-in-aspnet-core"></a>Oznacz składniki pomocnika w ASP.NET Core
 
@@ -30,7 +31,7 @@ Przez [Scott Addie](https://twitter.com/Scott_Addie) i [Fiyaz bin Hasan](https:/
 
 Składnik pomocnika tagów to pomocnik tagów, który umożliwia warunkowe modyfikowanie lub Dodawanie elementów HTML z kodu po stronie serwera. Ta funkcja jest dostępna w ASP.NET Core 2,0 lub nowszej.
 
-ASP.NET Core obejmuje dwa wbudowane składniki pomocnika tagów: `head` i `body` . Znajdują się one w <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers> przestrzeni nazw i mogą być używane zarówno w MVC, jak i Razor stronach. Składniki pomocnika tagów nie wymagają rejestracji w aplikacji w *_ViewImports. cshtml*.
+ASP.NET Core obejmuje dwa wbudowane składniki pomocnika tagów: `head` i `body` . Znajdują się one w <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers> przestrzeni nazw i mogą być używane zarówno w MVC, jak i Razor stronach. Składniki pomocnika tagów nie wymagają rejestracji w aplikacji w *_ViewImports. cshtml* .
 
 [Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/tag-helpers/th-components/samples) ([jak pobrać](xref:index#how-to-download-a-sample))
 
@@ -123,7 +124,7 @@ Aby utworzyć składnik pomocnika tagów niestandardowych:
 
 * Utwórz klasę publiczną wyprowadzaną z <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers.TagHelperComponentTagHelper> .
 * Zastosuj [`[HtmlTargetElement]`](xref:Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElementAttribute) atrybut do klasy. Określ nazwę docelowego elementu HTML.
-* *Opcjonalne*: Zastosuj [`[EditorBrowsable(EditorBrowsableState.Never)]`](xref:System.ComponentModel.EditorBrowsableAttribute) atrybut do klasy, aby pominąć wyświetlanie typu w IntelliSense.
+* *Opcjonalne* : Zastosuj [`[EditorBrowsable(EditorBrowsableState.Never)]`](xref:System.ComponentModel.EditorBrowsableAttribute) atrybut do klasy, aby pominąć wyświetlanie typu w IntelliSense.
 
 Poniższy kod tworzy składnik pomocnika tagów niestandardowych, który jest przeznaczony dla `<address>` elementu HTML:
 

@@ -7,6 +7,7 @@ ms.author: scaddie
 ms.custom: mvc, seodec18
 ms.date: 08/17/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mongo-app
-ms.openlocfilehash: 61f72c4d281e7957b520e1660440e536ebd4c78a
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 350df417886fe1ea5fef89dc221c217d596768b3
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631774"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060745"
 ---
 # <a name="create-a-web-api-with-aspnet-core-and-mongodb"></a>Tworzenie internetowego interfejsu API za pomocą ASP.NET Core i MongoDB
 
@@ -160,10 +161,10 @@ Baza danych jest gotowa. Możesz rozpocząć tworzenie ASP.NET Core internetoweg
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-1. Przejdź do pozycji **plik** > **Nowy** > **projekt**.
-1. Wybierz typ projektu **aplikacja sieci Web ASP.NET Core** a następnie wybierz przycisk **dalej**.
-1. Nazwij projekt *BooksApi*, a następnie wybierz pozycję **Utwórz**.
-1. Wybierz platformę docelową **.NET Core** i **ASP.NET Core 3,0**. Wybierz szablon projektu **interfejsu API** i wybierz pozycję **Utwórz**.
+1. Przejdź do pozycji **plik** > **Nowy** > **projekt** .
+1. Wybierz typ projektu **aplikacja sieci Web ASP.NET Core** a następnie wybierz przycisk **dalej** .
+1. Nazwij projekt *BooksApi* , a następnie wybierz pozycję **Utwórz** .
+1. Wybierz platformę docelową **.NET Core** i **ASP.NET Core 3,0** . Wybierz szablon projektu **interfejsu API** i wybierz pozycję **Utwórz** .
 1. Odwiedź [galerię NuGet: MongoDB. Driver](https://www.nuget.org/packages/MongoDB.Driver/) , aby określić najnowszą stabilną wersję sterownika .NET dla usługi MongoDB. W oknie **konsola Menedżera pakietów** przejdź do katalogu głównego projektu. Uruchom następujące polecenie, aby zainstalować sterownik .NET dla MongoDB:
 
    ```powershell
@@ -181,7 +182,7 @@ Baza danych jest gotowa. Możesz rozpocząć tworzenie ASP.NET Core internetoweg
 
    Nowy projekt interfejsu API sieci Web ASP.NET Core przeznaczony dla platformy .NET Core został wygenerowany i otwarty w Visual Studio Code.
 
-1. Gdy ikona płomienia OmniSharp na pasku stanu zmieni kolor na zielony, w oknie dialogowym zostanie wyświetlony monit **o podanie wymaganych zasobów do skompilowania i debugowania z elementu "BooksApi". Dodać je?**. Wybierz pozycję **Tak**.
+1. Gdy ikona płomienia OmniSharp na pasku stanu zmieni kolor na zielony, w oknie dialogowym zostanie wyświetlony monit **o podanie wymaganych zasobów do skompilowania i debugowania z elementu "BooksApi". Dodać je?** . Wybierz pozycję **Tak** .
 1. Odwiedź [galerię NuGet: MongoDB. Driver](https://www.nuget.org/packages/MongoDB.Driver/) , aby określić najnowszą stabilną wersję sterownika .NET dla usługi MongoDB. Otwórz **zintegrowany terminal** i przejdź do katalogu głównego projektu. Uruchom następujące polecenie, aby zainstalować sterownik .NET dla MongoDB:
 
    ```dotnetcli
@@ -191,11 +192,11 @@ Baza danych jest gotowa. Możesz rozpocząć tworzenie ASP.NET Core internetoweg
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
 1. W Visual Studio dla komputerów Mac starszej niż wersja 8,6 Wybierz pozycję **plik**  >  **nowe rozwiązanie**  >  **.NET Core**  >  **aplikacji** z paska bocznego. W wersji 8,6 lub nowszej wybierz pozycję **plik**  >  **nowe rozwiązanie**  >  **Sieć Web i Aplikacja konsolowa**  >  **App** na pasku bocznym.
-1. Wybierz **ASP.NET Core** > szablon projektu C# **interfejsu API** ASP.NET Core, a następnie wybierz przycisk **dalej**.
-1. Z listy rozwijanej **platforma docelowa** wybierz pozycję **.NET Core 3,1** , a następnie wybierz pozycję **Next (dalej**).
-1. Wprowadź *BooksApi* jako **nazwę projektu**, a następnie wybierz pozycję **Utwórz**.
-1. W konsoli **rozwiązania** kliknij prawym przyciskiem myszy węzeł **zależności** projektu i wybierz polecenie **Dodaj pakiety**.
-1. Wprowadź *MongoDB. Driver* w polu wyszukiwania, wybierz pakiet *MongoDB. Driver* , a następnie wybierz pozycję **Dodaj pakiet**.
+1. Wybierz **ASP.NET Core** > szablon projektu C# **interfejsu API** ASP.NET Core, a następnie wybierz przycisk **dalej** .
+1. Z listy rozwijanej **platforma docelowa** wybierz pozycję **.NET Core 3,1** , a następnie wybierz pozycję **Next (dalej** ).
+1. Wprowadź *BooksApi* jako **nazwę projektu** , a następnie wybierz pozycję **Utwórz** .
+1. W konsoli **rozwiązania** kliknij prawym przyciskiem myszy węzeł **zależności** projektu i wybierz polecenie **Dodaj pakiety** .
+1. Wprowadź *MongoDB. Driver* w polu wyszukiwania, wybierz pakiet *MongoDB. Driver* , a następnie wybierz pozycję **Dodaj pakiet** .
 1. Wybierz przycisk **Akceptuj** w oknie dialogowym **akceptacji licencji** .
 
 ---
@@ -239,7 +240,7 @@ Baza danych jest gotowa. Możesz rozpocząć tworzenie ASP.NET Core internetoweg
 
 ## <a name="add-a-configuration-model"></a>Dodaj model konfiguracji
 
-1. Dodaj następujące wartości konfiguracji bazy danych do *appsettings.jsna*:
+1. Dodaj następujące wartości konfiguracji bazy danych do *appsettings.json* :
 
    [!code-json[](first-mongo-app/samples/3.x/SampleApp/appsettings.json?highlight=2-6)]
 
@@ -247,7 +248,7 @@ Baza danych jest gotowa. Możesz rozpocząć tworzenie ASP.NET Core internetoweg
 
    [!code-csharp[](first-mongo-app/samples/3.x/SampleApp/Models/BookstoreDatabaseSettings.cs)]
 
-   Poprzednia `BookstoreDatabaseSettings` Klasa jest używana do przechowywania *appsettings.jsw* `BookstoreDatabaseSettings` wartościach właściwości pliku. Nazwy właściwości JSON i C# są nazywane identycznie, aby uprościć proces mapowania.
+   Poprzednia `BookstoreDatabaseSettings` Klasa jest używana do przechowywania *appsettings.json* `BookstoreDatabaseSettings` wartości właściwości pliku. Nazwy właściwości JSON i C# są nazywane identycznie, aby uprościć proces mapowania.
 
 1. Dodaj następujący wyróżniony kod do `Startup.ConfigureServices` :
 
@@ -255,7 +256,7 @@ Baza danych jest gotowa. Możesz rozpocząć tworzenie ASP.NET Core internetoweg
 
    Powyższy kod ma następujące działanie:
 
-   * Wystąpienie konfiguracji, do którego są powiązane *appsettings.jsw* pliku, `BookstoreDatabaseSettings` jest zarejestrowane w kontenerze iniekcji zależności (di). Na przykład `BookstoreDatabaseSettings` `ConnectionString` właściwość obiektu jest wypełniana `BookstoreDatabaseSettings:ConnectionString` właściwością w *appsettings.jsna*.
+   * Wystąpienie konfiguracji, do którego *appsettings.json* `BookstoreDatabaseSettings` jest powiązane sekcja pliku, jest zarejestrowane w kontenerze iniekcji zależności (di). Na przykład `BookstoreDatabaseSettings` `ConnectionString` właściwość obiektu jest wypełniana `BookstoreDatabaseSettings:ConnectionString` właściwością w *appsettings.json* .
    * `IBookstoreDatabaseSettings`Interfejs jest rejestrowany przy użyciu programu di z pojedynczym [okresem istnienia usługi](xref:fundamentals/dependency-injection#service-lifetimes). Po dowstrzykiwaniu wystąpienie interfejsu jest rozpoznawane jako `BookstoreDatabaseSettings` obiekt.
 
 1. Dodaj następujący kod na początku *Startup.cs* , aby rozwiązać `BookstoreDatabaseSettings` `IBookstoreDatabaseSettings` odwołania i:
@@ -269,7 +270,7 @@ Baza danych jest gotowa. Możesz rozpocząć tworzenie ASP.NET Core internetoweg
 
    [!code-csharp[](first-mongo-app/samples/3.x/SampleApp/Services/BookService.cs?name=snippet_BookServiceClass)]
 
-   W poprzednim kodzie `IBookstoreDatabaseSettings` wystąpienie jest pobierane z funkcji di przez iniekcję konstruktora. Ta technika zapewnia dostęp do *appsettings.jsna* wartościach konfiguracji, które zostały dodane w sekcji [Dodawanie modelu konfiguracji](#add-a-configuration-model) .
+   W poprzednim kodzie `IBookstoreDatabaseSettings` wystąpienie jest pobierane z funkcji di przez iniekcję konstruktora. Ta technika zapewnia dostęp do *appsettings.json* wartości konfiguracyjnych, które zostały dodane w sekcji [Dodawanie modelu konfiguracji](#add-a-configuration-model) .
 
 1. Dodaj następujący wyróżniony kod do `Startup.ConfigureServices` :
 
@@ -365,7 +366,7 @@ Aby spełnić powyższe wymagania, należy wprowadzić następujące zmiany:
 
    W przypadku poprzedniej zmiany nazwy właściwości w serializowanej odpowiedzi JSON interfejsu API sieci Web pasują do odpowiednich nazw właściwości w typie obiektu CLR. Na przykład, `Book` `Author` Serializacja właściwości klasy jako `Author` .
 
-1. W *modelach/książka. cs*Dodaj adnotację do `BookName` właściwości z następującym [`[JsonProperty]`](https://www.newtonsoft.com/json/help/html/T_Newtonsoft_Json_JsonPropertyAttribute.htm) atrybutem:
+1. W *modelach/książka. cs* Dodaj adnotację do `BookName` właściwości z następującym [`[JsonProperty]`](https://www.newtonsoft.com/json/help/html/T_Newtonsoft_Json_JsonPropertyAttribute.htm) atrybutem:
 
    [!code-csharp[](first-mongo-app/samples/3.x/SampleApp/Models/Book.cs?name=snippet_BookNameProperty&highlight=2)]
 
@@ -510,10 +511,10 @@ Baza danych jest gotowa. Możesz rozpocząć tworzenie ASP.NET Core internetoweg
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-1. Przejdź do pozycji **plik** > **Nowy** > **projekt**.
-1. Wybierz typ projektu **aplikacja sieci Web ASP.NET Core** a następnie wybierz przycisk **dalej**.
-1. Nazwij projekt *BooksApi*, a następnie wybierz pozycję **Utwórz**.
-1. Wybierz platformę docelową **.NET Core** i **ASP.NET Core 2,2**. Wybierz szablon projektu **interfejsu API** i wybierz pozycję **Utwórz**.
+1. Przejdź do pozycji **plik** > **Nowy** > **projekt** .
+1. Wybierz typ projektu **aplikacja sieci Web ASP.NET Core** a następnie wybierz przycisk **dalej** .
+1. Nazwij projekt *BooksApi* , a następnie wybierz pozycję **Utwórz** .
+1. Wybierz platformę docelową **.NET Core** i **ASP.NET Core 2,2** . Wybierz szablon projektu **interfejsu API** i wybierz pozycję **Utwórz** .
 1. Odwiedź [galerię NuGet: MongoDB. Driver](https://www.nuget.org/packages/MongoDB.Driver/) , aby określić najnowszą stabilną wersję sterownika .NET dla usługi MongoDB. W oknie **konsola Menedżera pakietów** przejdź do katalogu głównego projektu. Uruchom następujące polecenie, aby zainstalować sterownik .NET dla MongoDB:
 
    ```powershell
@@ -531,7 +532,7 @@ Baza danych jest gotowa. Możesz rozpocząć tworzenie ASP.NET Core internetoweg
 
    Nowy projekt interfejsu API sieci Web ASP.NET Core przeznaczony dla platformy .NET Core został wygenerowany i otwarty w Visual Studio Code.
 
-1. Gdy ikona płomienia OmniSharp na pasku stanu zmieni kolor na zielony, w oknie dialogowym zostanie wyświetlony monit **o podanie wymaganych zasobów do skompilowania i debugowania z elementu "BooksApi". Dodać je?**. Wybierz pozycję **Tak**.
+1. Gdy ikona płomienia OmniSharp na pasku stanu zmieni kolor na zielony, w oknie dialogowym zostanie wyświetlony monit **o podanie wymaganych zasobów do skompilowania i debugowania z elementu "BooksApi". Dodać je?** . Wybierz pozycję **Tak** .
 1. Odwiedź [galerię NuGet: MongoDB. Driver](https://www.nuget.org/packages/MongoDB.Driver/) , aby określić najnowszą stabilną wersję sterownika .NET dla usługi MongoDB. Otwórz **zintegrowany terminal** i przejdź do katalogu głównego projektu. Uruchom następujące polecenie, aby zainstalować sterownik .NET dla MongoDB:
 
    ```dotnetcli
@@ -541,11 +542,11 @@ Baza danych jest gotowa. Możesz rozpocząć tworzenie ASP.NET Core internetoweg
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
 1. W Visual Studio dla komputerów Mac starszej niż wersja 8,6 Wybierz pozycję **plik**  >  **nowe rozwiązanie**  >  **.NET Core**  >  **aplikacji** z paska bocznego. W wersji 8,6 lub nowszej wybierz pozycję **plik**  >  **nowe rozwiązanie**  >  **Sieć Web i Aplikacja konsolowa**  >  **App** na pasku bocznym.
-1. Wybierz szablon projektu C# **interfejsu API sieci Web ASP.NET Core** i kliknij przycisk **dalej**.
-1. Z listy rozwijanej **platforma docelowa** wybierz pozycję **.NET Core 2,2** , a następnie wybierz pozycję **Next (dalej**).
-1. Wprowadź *BooksApi* jako **nazwę projektu**, a następnie wybierz pozycję **Utwórz**.
-1. W konsoli **rozwiązania** kliknij prawym przyciskiem myszy węzeł **zależności** projektu i wybierz polecenie **Dodaj pakiety**.
-1. Wprowadź *MongoDB. Driver* w polu wyszukiwania, wybierz pakiet *MongoDB. Driver* , a następnie wybierz pozycję **Dodaj pakiet**.
+1. Wybierz szablon projektu C# **interfejsu API sieci Web ASP.NET Core** i kliknij przycisk **dalej** .
+1. Z listy rozwijanej **platforma docelowa** wybierz pozycję **.NET Core 2,2** , a następnie wybierz pozycję **Next (dalej** ).
+1. Wprowadź *BooksApi* jako **nazwę projektu** , a następnie wybierz pozycję **Utwórz** .
+1. W konsoli **rozwiązania** kliknij prawym przyciskiem myszy węzeł **zależności** projektu i wybierz polecenie **Dodaj pakiety** .
+1. Wprowadź *MongoDB. Driver* w polu wyszukiwania, wybierz pakiet *MongoDB. Driver* , a następnie wybierz pozycję **Dodaj pakiet** .
 1. Wybierz przycisk **Akceptuj** w oknie dialogowym **akceptacji licencji** .
 
 ---
@@ -589,7 +590,7 @@ Baza danych jest gotowa. Możesz rozpocząć tworzenie ASP.NET Core internetoweg
 
 ## <a name="add-a-configuration-model"></a>Dodaj model konfiguracji
 
-1. Dodaj następujące wartości konfiguracji bazy danych do *appsettings.jsna*:
+1. Dodaj następujące wartości konfiguracji bazy danych do *appsettings.json* :
 
    [!code-json[](first-mongo-app/samples/2.x/SampleApp/appsettings.json?highlight=2-6)]
 
@@ -597,7 +598,7 @@ Baza danych jest gotowa. Możesz rozpocząć tworzenie ASP.NET Core internetoweg
 
    [!code-csharp[](first-mongo-app/samples/2.x/SampleApp/Models/BookstoreDatabaseSettings.cs)]
 
-   Poprzednia `BookstoreDatabaseSettings` Klasa jest używana do przechowywania *appsettings.jsw* `BookstoreDatabaseSettings` wartościach właściwości pliku. Nazwy właściwości JSON i C# są nazywane identycznie, aby uprościć proces mapowania.
+   Poprzednia `BookstoreDatabaseSettings` Klasa jest używana do przechowywania *appsettings.json* `BookstoreDatabaseSettings` wartości właściwości pliku. Nazwy właściwości JSON i C# są nazywane identycznie, aby uprościć proces mapowania.
 
 1. Dodaj następujący wyróżniony kod do `Startup.ConfigureServices` :
 
@@ -605,7 +606,7 @@ Baza danych jest gotowa. Możesz rozpocząć tworzenie ASP.NET Core internetoweg
 
    Powyższy kod ma następujące działanie:
 
-   * Wystąpienie konfiguracji, do którego są powiązane *appsettings.jsw* pliku, `BookstoreDatabaseSettings` jest zarejestrowane w kontenerze iniekcji zależności (di). Na przykład `BookstoreDatabaseSettings` `ConnectionString` właściwość obiektu jest wypełniana `BookstoreDatabaseSettings:ConnectionString` właściwością w *appsettings.jsna*.
+   * Wystąpienie konfiguracji, do którego *appsettings.json* `BookstoreDatabaseSettings` jest powiązane sekcja pliku, jest zarejestrowane w kontenerze iniekcji zależności (di). Na przykład `BookstoreDatabaseSettings` `ConnectionString` właściwość obiektu jest wypełniana `BookstoreDatabaseSettings:ConnectionString` właściwością w *appsettings.json* .
    * `IBookstoreDatabaseSettings`Interfejs jest rejestrowany przy użyciu programu di z pojedynczym [okresem istnienia usługi](xref:fundamentals/dependency-injection#service-lifetimes). Po dowstrzykiwaniu wystąpienie interfejsu jest rozpoznawane jako `BookstoreDatabaseSettings` obiekt.
 
 1. Dodaj następujący kod na początku *Startup.cs* , aby rozwiązać `BookstoreDatabaseSettings` `IBookstoreDatabaseSettings` odwołania i:
@@ -619,7 +620,7 @@ Baza danych jest gotowa. Możesz rozpocząć tworzenie ASP.NET Core internetoweg
 
    [!code-csharp[](first-mongo-app/samples/2.x/SampleApp/Services/BookService.cs?name=snippet_BookServiceClass)]
 
-   W poprzednim kodzie `IBookstoreDatabaseSettings` wystąpienie jest pobierane z funkcji di przez iniekcję konstruktora. Ta technika zapewnia dostęp do *appsettings.jsna* wartościach konfiguracji, które zostały dodane w sekcji [Dodawanie modelu konfiguracji](#add-a-configuration-model) .
+   W poprzednim kodzie `IBookstoreDatabaseSettings` wystąpienie jest pobierane z funkcji di przez iniekcję konstruktora. Ta technika zapewnia dostęp do *appsettings.json* wartości konfiguracyjnych, które zostały dodane w sekcji [Dodawanie modelu konfiguracji](#add-a-configuration-model) .
 
 1. Dodaj następujący wyróżniony kod do `Startup.ConfigureServices` :
 
@@ -713,7 +714,7 @@ Aby spełnić powyższe wymagania, należy wprowadzić następujące zmiany:
 
    W przypadku poprzedniej zmiany nazwy właściwości w serializowanej odpowiedzi JSON interfejsu API sieci Web pasują do odpowiednich nazw właściwości w typie obiektu CLR. Na przykład, `Book` `Author` Serializacja właściwości klasy jako `Author` .
 
-1. W *modelach/książka. cs*Dodaj adnotację do `BookName` właściwości z następującym [`[JsonProperty]`](https://www.newtonsoft.com/json/help/html/T_Newtonsoft_Json_JsonPropertyAttribute.htm) atrybutem:
+1. W *modelach/książka. cs* Dodaj adnotację do `BookName` właściwości z następującym [`[JsonProperty]`](https://www.newtonsoft.com/json/help/html/T_Newtonsoft_Json_JsonPropertyAttribute.htm) atrybutem:
 
    [!code-csharp[](first-mongo-app/samples/2.x/SampleApp/Models/Book.cs?name=snippet_BookNameProperty&highlight=2)]
 

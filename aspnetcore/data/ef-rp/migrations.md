@@ -5,6 +5,7 @@ description: Część 4 Razor stron i Entity Framework serii samouczków.
 ms.author: riande
 ms.date: 07/22/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/migrations
-ms.openlocfilehash: 78eb466fcfeb130e411df490f033114b3fdebeef
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: e6d1b9f041e892aaa37840c28fdb3153bf098b0d
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722634"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061109"
 ---
 # <a name="part-4-no-locrazor-pages-with-ef-core-migrations-in-aspnet-core"></a>Część 4 Razor strony z migracjami EF Core w programie ASP.NET Core
 
@@ -113,7 +114,7 @@ Parametr name migracji ("InitialCreate" w przykładzie) jest używany jako nazwa
 
 ## <a name="the-data-model-snapshot"></a>Migawka modelu danych
 
-Migracja tworzy *migawkę* bieżącego modelu danych w *migracji/SchoolContextModelSnapshot. cs*. Po dodaniu migracji, EF określa zmiany, porównując bieżący model danych z plikiem migawki.
+Migracja tworzy *migawkę* bieżącego modelu danych w *migracji/SchoolContextModelSnapshot. cs* . Po dodaniu migracji, EF określa zmiany, porównując bieżący model danych z plikiem migawki.
 
 Ponieważ plik migawek śledzi stan modelu danych, nie można usunąć migracji, usuwając `<timestamp>_<migrationname>.cs` plik. Aby wykonać kopię zapasową najnowszej migracji, należy użyć `migrations remove` polecenia. To polecenie usuwa migrację i gwarantuje, że migawka zostanie prawidłowo zresetowana. Aby uzyskać więcej informacji, zobacz [migracja programu dotnet EF Usuń](/ef/core/miscellaneous/cli/dotnet#dotnet-ef-migrations-remove).
 
@@ -123,7 +124,7 @@ Ta seria samouczków została uruchomiona przy użyciu `EnsureCreated` . `Ensure
 
 Od tego momentu samouczki będą korzystać z migracji.
 
-W polu *Data/dbinitialize. cs*Dodaj komentarz do następującego wiersza:
+W polu *Data/dbinitialize. cs* Dodaj komentarz do następującego wiersza:
 
 ```csharp
 context.Database.EnsureCreated();
@@ -151,7 +152,7 @@ Login failed for user 'user name'.
 
 Rozwiązanie może być uruchamiane z `dotnet ef database update` wiersza polecenia.
 
-### <a name="additional-resources"></a>Zasoby dodatkowe
+### <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Interfejs wiersza polecenia EF Core](/ef/core/miscellaneous/cli/dotnet).
 * [Konsola menedżera pakietów (Visual Studio)](/ef/core/miscellaneous/cli/powershell)
@@ -250,13 +251,13 @@ Wcześniej baza danych została porzucona i nie istnieje, dlatego migracji tworz
 
 ### <a name="the-data-model-snapshot"></a>Migawka modelu danych
 
-Migracje tworzą *migawkę* bieżącego schematu bazy danych w *migracji/SchoolContextModelSnapshot. cs*. Po dodaniu migracji, EF określa, co zmieniło się, porównując model danych z plikiem migawki.
+Migracje tworzą *migawkę* bieżącego schematu bazy danych w *migracji/SchoolContextModelSnapshot. cs* . Po dodaniu migracji, EF określa, co zmieniło się, porównując model danych z plikiem migawki.
 
 Aby usunąć migrację, użyj następującego polecenia:
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Usuń migrację
+Remove-Migration
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -319,7 +320,7 @@ Login failed for user 'user name'.
 
 Rozwiązanie: Uruchom `dotnet ef database update`
 
-### <a name="additional-resources"></a>Zasoby dodatkowe
+### <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Wersja tego samouczka usługi YouTube](https://www.youtube.com/watch?v=OWSUuMLKTJo)
 * [Interfejs wiersza polecenia platformy .NET Core](/ef/core/miscellaneous/cli/dotnet).

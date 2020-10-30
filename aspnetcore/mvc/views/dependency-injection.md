@@ -5,6 +5,7 @@ description: Dowiedz się, jak ASP.NET Core obsługuje iniekcję zależności w 
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/dependency-injection
-ms.openlocfilehash: 5ab79740d2068a50e4138e5b86f1622af8ef5ec7
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: a596d05e3d1d73d4faa2f84d97a40e4a2c1234e4
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633607"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059289"
 ---
 # <a name="dependency-injection-into-views-in-aspnet-core"></a>Wstrzykiwanie zależności do widoków w ASP.NET Core
 
@@ -33,9 +34,9 @@ ASP.NET Core obsługuje [iniekcję zależności](xref:fundamentals/dependency-in
 
 ## <a name="configuration-injection"></a>Iniekcja konfiguracji
 
-*appsettings.js* wartości można wstrzyknąć bezpośrednio do widoku.
+*appsettings.json* wartości można wstrzyknąć bezpośrednio do widoku.
 
-Przykład *appsettings.jsw* pliku:
+Przykład *appsettings.json* pliku:
 
 ```json
 {
@@ -66,7 +67,7 @@ Usługę można wstrzyknąć do widoku za pomocą `@inject` dyrektywy. Można tr
 
 [!code-cshtml[](../../mvc/views/dependency-injection/sample/src/ViewInjectSample/Views/ToDo/Index.cshtml?highlight=4,5,15,16,17)]
 
-Ten widok przedstawia listę `ToDoItem` wystąpień wraz z podsumowaniem pokazującym ogólną statystykę. Podsumowanie jest wypełniane przez wstrzykiwaną `StatisticsService` . Ta usługa jest zarejestrowana na potrzeby iniekcji zależności w `ConfigureServices` programie *Startup.cs*:
+Ten widok przedstawia listę `ToDoItem` wystąpień wraz z podsumowaniem pokazującym ogólną statystykę. Podsumowanie jest wypełniane przez wstrzykiwaną `StatisticsService` . Ta usługa jest zarejestrowana na potrzeby iniekcji zależności w `ConfigureServices` programie *Startup.cs* :
 
 [!code-csharp[](../../mvc/views/dependency-injection/sample/src/ViewInjectSample/Startup.cs?highlight=6,7&range=15-22)]
 

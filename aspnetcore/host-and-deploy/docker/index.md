@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/08/2018
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/docker/index
-ms.openlocfilehash: bcb09300ccfd0fa1595bff325da1049d4d185b64
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 6b4b011314be2481e6e71d7782fff6ee99cedb9a
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88627354"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059783"
 ---
 # <a name="host-aspnet-core-in-docker-containers"></a>ASP.NET Core hosta w kontenerach platformy Docker
 

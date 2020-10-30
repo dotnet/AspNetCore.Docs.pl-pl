@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 09/20/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/index
-ms.openlocfilehash: 4a2f86d906c7b268b1fb2a63c50a1b8f0dd2b154
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 80f44e3845cc1e3c87d5d657807a318eb65e6c6f
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633191"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059900"
 ---
 # <a name="introduction-to-grpc-on-net-core"></a>Wprowadzenie do gRPC na platformie .NET Core
 
@@ -46,7 +47,7 @@ Te korzyści sprawiają, że gRPC doskonale nadaje się do:
 
 ## <a name="c-tooling-support-for-proto-files"></a>Obsługa narzędzi C# dla plików. proto
 
-gRPC używa podejścia pierwszego kontraktu do programowania interfejsu API. Usługi i komunikaty są zdefiniowane w plikach * \* . proto* :
+gRPC używa podejścia pierwszego kontraktu do programowania interfejsu API. Usługi i komunikaty są zdefiniowane w plikach *\* . proto* :
 
 ```protobuf
 syntax = "proto3";
@@ -64,10 +65,10 @@ message HelloReply {
 }
 ```
 
-Typy .NET dla usług, klientów i komunikatów są generowane automatycznie przez dołączenie plików * \* proto* w projekcie:
+Typy .NET dla usług, klientów i komunikatów są generowane automatycznie przez dołączenie plików *\* proto* w projekcie:
 
 * Dodaj odwołanie do pakietu do pakietu [GRPC. Tools](https://www.nuget.org/packages/Grpc.Tools/) .
-* Dodaj pliki * \* . proto* do `<Protobuf>` grupy elementów.
+* Dodaj pliki *\* . proto* do `<Protobuf>` grupy elementów.
 
 ```xml
 <ItemGroup>
@@ -105,7 +106,7 @@ public class GreeterService : Greeter.GreeterBase
 }
 ```
 
-`GreeterService`dziedziczy z `GreeterBase` typu, który jest generowany na podstawie `Greeter` usługi w pliku * \* . proto* . Usługa jest dostępna dla klientów w *Startup.cs*:
+`GreeterService`dziedziczy z `GreeterBase` typu, który jest generowany na podstawie `Greeter` usługi w pliku *\* . proto* . Usługa jest dostępna dla klientów w *Startup.cs* :
 
 ```csharp
 app.UseEndpoints(endpoints =>
@@ -118,7 +119,7 @@ Aby dowiedzieć się więcej na temat usług gRPC Services na ASP.NET Core, zoba
 
 ## <a name="call-grpc-services-with-a-net-client"></a>Wywoływanie usług gRPC za pomocą klienta platformy .NET
 
-gRPC klienci są konkretnymi typami klientów, które są [generowane z plików * \* . proto* ](xref:grpc/basics#generated-c-assets). Konkretny klient gRPC ma metody, które są tłumaczone na usługę gRPC w pliku * \* . proto* .
+gRPC klienci są konkretnymi typami klientów, które są [generowane z plików *\* . proto*](xref:grpc/basics#generated-c-assets). Konkretny klient gRPC ma metody, które są tłumaczone na usługę gRPC w pliku *\* . proto* .
 
 ```csharp
 var channel = GrpcChannel.ForAddress("https://localhost:5001");

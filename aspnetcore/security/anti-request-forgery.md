@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc, devx-track-js
 ms.date: 12/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/anti-request-forgery
-ms.openlocfilehash: 201ffe692c1ded3661a5e1ac566f90b29d61ce9e
-ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
+ms.openlocfilehash: 197954965ee57b2a44ad0217d79ba142114e7df6
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/27/2020
-ms.locfileid: "92690343"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060849"
 ---
 # <a name="prevent-cross-site-request-forgery-xsrfcsrf-attacks-in-aspnet-core"></a>Uniemożliwiaj ataki między witrynami (XSRF/CSRF) w ASP.NET Core
 

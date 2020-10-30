@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 04/06/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/performance-best-practices
-ms.openlocfilehash: 01575ec87d2d346da7367523ca5e257d53de4983
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: a3fc398569fafefc0b4634e80433a5d4e0e1b4ff
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722621"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061005"
 ---
 # <a name="aspnet-core-performance-best-practices"></a>ASP.NET Core najlepszych rozwiązań dotyczących wydajności
 
@@ -44,13 +45,13 @@ Aplikacje ASP.NET Core powinny być przeznaczone do przetwarzania wielu żądań
 
 Typowy problem z wydajnością w aplikacjach ASP.NET Core blokuje wywołania, które mogą być asynchroniczne. Wiele wywołań blokowania synchronicznego prowadzi do [przetrzymania puli wątków](/archive/blogs/vancem/diagnosing-net-core-threadpool-starvation-with-perfview-why-my-service-is-not-saturating-all-cores-or-seems-to-stall) i nieprawidłowej reakcji.
 
-**Nie należy**:
+**Nie należy** :
 
 * Zablokuj wykonywanie asynchroniczne przez wywołanie metody [Task. wait](/dotnet/api/system.threading.tasks.task.wait) lub [Task. Result](/dotnet/api/system.threading.tasks.task-1.result).
 * Uzyskaj blokady w wspólnych ścieżkach kodu. Aplikacje ASP.NET Core są najbardziej wydajne, gdy jest to zaprojektowane w celu równoległego uruchamiania kodu.
 * Wywołaj [zadanie. Run](/dotnet/api/system.threading.tasks.task.run) i od razu ją oczekuje. ASP.NET Core już uruchomił kod aplikacji w zwykłych wątkach puli wątków, więc wywołując zadanie. Run tylko skutkuje niepotrzebnym planowaniem puli wątków. Nawet jeśli zaplanowany kod blokuje wątek, zadanie. Run nie uniemożliwia tego.
 
-**Do**:
+**Do** :
 
 * Utwórz asynchroniczne [ścieżki kodu na gorąco](#understand-hot-code-paths) .
 * Wywołania dostępu do danych, we/wy i długotrwałych interfejsów API operacji asynchronicznie, jeśli jest dostępny asynchroniczny interfejs API. **Nie** należy używać [zadania. Run](/dotnet/api/system.threading.tasks.task.run) , aby wykonać synchroniczny asynchroniczny interfejs API.
@@ -71,7 +72,7 @@ Począwszy od ASP.NET Core 3,0, `IAsyncEnumerable<T>` może być używany jako a
 Mając
 
 * **Należy rozważyć buforowanie** dużych obiektów, które są często używane. Buforowanie dużych obiektów zapobiega kosztownym alokacjom.
-* **Buforuj** bufory przy użyciu [ArrayPool \<T> ](/dotnet/api/system.buffers.arraypool-1) do przechowywania dużych tablic.
+* **Buforuj** bufory przy użyciu [ArrayPool \<T>](/dotnet/api/system.buffers.arraypool-1) do przechowywania dużych tablic.
 * **Nie** przydzielaj wielu, krótkoterminowych dużych obiektów w [ścieżkach kodu gorąca](#understand-hot-code-paths).
 
 Problemy z pamięcią, takie jak poprzednia, można zdiagnozować, przeglądając statystyki dotyczące wyrzucania elementów bezużytecznych (GC) w [Narzędzia PerfView](https://github.com/Microsoft/perfview) i badając:
@@ -117,7 +118,7 @@ Mając
 
 ## <a name="keep-common-code-paths-fast"></a>Szybkie śledzenie wspólnych ścieżek kodu
 
-Chcesz, aby cały kod był szybki. Często nazywane ścieżki kodu są najbardziej krytyczne dla optymalizacji. Należą do nich następujące elementy:
+Chcesz, aby cały kod był szybki. Często nazywane ścieżki kodu są najbardziej krytyczne dla optymalizacji. Należą do nich:
 
 * Składniki pośredniczące w potoku przetwarzania żądań aplikacji, szczególnie oprogramowanie pośredniczące działające wczesnie w potoku. Te składniki mają duży wpływ na wydajność.
 * Kod wykonywany dla każdego żądania lub wiele razy na żądanie. Na przykład niestandardowe rejestrowanie, programy obsługi autoryzacji lub inicjowanie usług przejściowych.

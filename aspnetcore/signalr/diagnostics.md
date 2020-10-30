@@ -7,6 +7,7 @@ ms.author: anurse
 ms.custom: devx-track-csharp, signalr, devx-track-js
 ms.date: 06/12/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/diagnostics
-ms.openlocfilehash: 890359c9e9f6c3c60f3105124f52c66b09a8a4fb
-ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
+ms.openlocfilehash: 6e5e9d866a1e03e69856cc63dcfe30284048dd6d
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/27/2020
-ms.locfileid: "92690673"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061317"
 ---
 # <a name="logging-and-diagnostics-in-aspnet-core-no-locsignalr"></a>Rejestrowanie i Diagnostyka w ASP.NET Core SignalR
 
@@ -43,7 +44,7 @@ SignalR używa dwóch kategorii rejestratora:
 * `Microsoft.AspNetCore.SignalR`: W przypadku dzienników związanych z protokołami centrów, aktywowanie centrów, wywoływanie metod i innych działań związanych z centrum.
 * `Microsoft.AspNetCore.Http.Connections`: W przypadku dzienników związanych z transportami, takich jak obiekty WebSockets, długie sondowanie, zdarzenia Server-Sent i infrastruktura niskiego poziomu SignalR .
 
-Aby włączyć szczegółowe dzienniki SignalR , należy skonfigurować obie powyższe prefiksy na `Debug` poziomie w *appsettings.jsna* pliku, dodając następujące elementy do `LogLevel` podsekcji w `Logging` :
+Aby włączyć szczegółowe dzienniki SignalR , skonfiguruj obie powyższe prefiksy do `Debug` poziomu w *appsettings.json* pliku, dodając następujące elementy do `LogLevel` podsekcji w `Logging` :
 
 [!code-json[](diagnostics/logging-config.json?highlight=7-8)]
 
@@ -105,7 +106,7 @@ W poniższej tabeli przedstawiono poziomy dziennika dostępne dla klienta JavaSc
 
 Po skonfigurowaniu szczegółowości dzienniki zostaną zapisane w konsoli przeglądarki (lub w standardowym wyjściu w aplikacji NodeJS).
 
-Jeśli chcesz wysłać dzienniki do niestandardowego systemu rejestrowania, możesz dostarczyć obiekt JavaScript implementujący `ILogger` interfejs. Jedyną metodą, która musi zostać wdrożona `log` , jest, która pobiera poziom zdarzenia i komunikat skojarzony ze zdarzeniem. Na przykład:
+Jeśli chcesz wysłać dzienniki do niestandardowego systemu rejestrowania, możesz dostarczyć obiekt JavaScript implementujący `ILogger` interfejs. Jedyną metodą, która musi zostać wdrożona `log` , jest, która pobiera poziom zdarzenia i komunikat skojarzony ze zdarzeniem. Przykład:
 
 [!code-typescript[](diagnostics/custom-logger.ts?highlight=3-7,13)]
 
@@ -235,7 +236,7 @@ SignalR metryki serwera są raportowane w <xref:Microsoft.AspNetCore.Http.Connec
 
 ### <a name="observe-metrics"></a>Obserwuj metryki
 
-[dotnet-Counters](/dotnet/core/diagnostics/dotnet-counters) to narzędzie do monitorowania wydajności dla monitorowania kondycji ad hoc i badania wydajności pierwszego poziomu. Monitoruj aplikację .NET za pomocą `Microsoft.AspNetCore.Http.Connections` nazwy dostawcy. Na przykład:
+[dotnet-Counters](/dotnet/core/diagnostics/dotnet-counters) to narzędzie do monitorowania wydajności dla monitorowania kondycji ad hoc i badania wydajności pierwszego poziomu. Monitoruj aplikację .NET za pomocą `Microsoft.AspNetCore.Http.Connections` nazwy dostawcy. Przykład:
 
 ```console
 > dotnet-counters monitor --process-id 37016 Microsoft.AspNetCore.Http.Connections

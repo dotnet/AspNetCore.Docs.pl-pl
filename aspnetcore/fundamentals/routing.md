@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 4/1/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/routing
-ms.openlocfilehash: e3dd7168e6974f63fa963d3732bc5df41814c70e
-ms.sourcegitcommit: d5ecad1103306fac8d5468128d3e24e529f1472c
+ms.openlocfilehash: 5b07a2839daf190d99b2787db70998373d34cd44
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/23/2020
-ms.locfileid: "92491626"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060004"
 ---
 # <a name="routing-in-aspnet-core"></a>Routing w ASP.NET Core
 
@@ -80,7 +81,7 @@ W powyższym przykładzie użyto pojedynczej *trasy do* punktu końcowego kodu p
 
 <a name="endpoint"></a>
 
-`MapGet`Metoda jest używana do definiowania **punktu końcowego**. Punkt końcowy to coś, co może być:
+`MapGet`Metoda jest używana do definiowania **punktu końcowego** . Punkt końcowy to coś, co może być:
 
 * Wybierany przez dopasowanie adresu URL i metody HTTP.
 * Wykonywane przez uruchomienie delegata.
@@ -96,7 +97,7 @@ W poniższym przykładzie przedstawiono Routing z bardziej zaawansowanym szablon
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/RouteTemplateStartup.cs?name=snippet)]
 
-Ciąg `/hello/{name:alpha}` jest **szablonem trasy**. Służy do konfigurowania sposobu dopasowywania punktu końcowego. W tym przypadku szablon pasuje do:
+Ciąg `/hello/{name:alpha}` jest **szablonem trasy** . Służy do konfigurowania sposobu dopasowywania punktu końcowego. W tym przypadku szablon pasuje do:
 
 * Adres URL, taki jak `/hello/Ryan`
 * Dowolna ścieżka URL, która rozpoczyna się od `/hello/` po którym następuje sekwencja znaków alfabetu.  `:alpha` stosuje ograniczenie trasy, które pasuje tylko do znaków alfabetu. [Ograniczenia trasy](#route-constraint-reference) zostały omówione w dalszej części tego dokumentu.
@@ -130,7 +131,7 @@ Wywoływanie <xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuth
 
 ### <a name="endpoint-metadata"></a>Metadane punktu końcowego
 
-W poprzednim przykładzie istnieją dwa punkty końcowe, ale tylko punkt końcowy sprawdzania kondycji ma dołączone zasady autoryzacji. Jeśli żądanie jest zgodne z punktem końcowym sprawdzania kondycji, `/healthz` zostanie wykonane sprawdzanie autoryzacji. Pokazuje, że punkty końcowe mogą mieć dodatkowe dane dołączone do nich. Te dodatkowe dane są nazywane **metadanymi**punktu końcowego:
+W poprzednim przykładzie istnieją dwa punkty końcowe, ale tylko punkt końcowy sprawdzania kondycji ma dołączone zasady autoryzacji. Jeśli żądanie jest zgodne z punktem końcowym sprawdzania kondycji, `/healthz` zostanie wykonane sprawdzanie autoryzacji. Pokazuje, że punkty końcowe mogą mieć dodatkowe dane dołączone do nich. Te dodatkowe dane są nazywane **metadanymi** punktu końcowego:
 
 * Metadane mogą być przetwarzane przez oprogramowanie pośredniczące obsługujące Routing.
 * Metadane mogą być dowolnego typu .NET.
@@ -209,12 +210,12 @@ W poprzednim przykładzie pokazano dwa ważne pojęcia:
 
 Powyższy kod przedstawia przykład niestandardowego oprogramowania pośredniczącego, które obsługuje zasady dotyczące poszczególnych punktów końcowych. Oprogramowanie pośredniczące zapisuje *Dziennik inspekcji* dostępu do poufnych danych w konsoli programu. Oprogramowanie pośredniczące można skonfigurować do *inspekcji* punktu końcowego przy użyciu `AuditPolicyAttribute` metadanych. Ten przykład pokazuje wzorzec *wyboru, w* którym są poddawane inspekcji tylko punkty końcowe oznaczone jako poufne. Istnieje możliwość zdefiniowania tej logiki na odwrót, przeprowadzenia inspekcji wszystkich elementów, które nie są oznaczone jako bezpieczne, na przykład. System metadanych punktu końcowego jest elastyczny. Ta logika może być zaprojektowana w dowolny sposób, jak w przypadku użycia.
 
-Poprzedni przykładowy kod jest przeznaczony do zademonstrowania podstawowych koncepcji punktów końcowych. **Przykład nie jest przeznaczony do użycia w środowisku produkcyjnym**. Bardziej kompletna wersja oprogramowania pośredniczącego *dziennika inspekcji* :
+Poprzedni przykładowy kod jest przeznaczony do zademonstrowania podstawowych koncepcji punktów końcowych. **Przykład nie jest przeznaczony do użycia w środowisku produkcyjnym** . Bardziej kompletna wersja oprogramowania pośredniczącego *dziennika inspekcji* :
 
 * Zaloguj się do pliku lub bazy danych.
 * Dołącz szczegóły, takie jak użytkownik, adres IP, nazwa poufnego punktu końcowego itd.
 
-Metadane zasad inspekcji `AuditPolicyAttribute` są zdefiniowane jako `Attribute` ułatwiające korzystanie z struktur opartych na klasach, takich jak kontrolery i SignalR . W przypadku używania *trasy do kodu*:
+Metadane zasad inspekcji `AuditPolicyAttribute` są zdefiniowane jako `Attribute` ułatwiające korzystanie z struktur opartych na klasach, takich jak kontrolery i SignalR . W przypadku używania *trasy do kodu* :
 
 * Metadane są dołączone do interfejsu API programu Builder.
 * Struktury oparte na klasie obejmują wszystkie atrybuty w odpowiedniej metodzie i klasie podczas tworzenia punktów końcowych.
@@ -229,7 +230,7 @@ Poniższy przykładowy kod kontrast korzystający z oprogramowania pośredniczą
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/TerminalMiddlewareStartup.cs?name=snippet)]
 
-Styl oprogramowania pośredniczącego widoczny w programie `Approach 1:` to **terminalowe oprogramowanie pośredniczące**. Jest on nazywany oprogramowanie pośredniczące terminalu, ponieważ wykonuje operację zgodną:
+Styl oprogramowania pośredniczącego widoczny w programie `Approach 1:` to **terminalowe oprogramowanie pośredniczące** . Jest on nazywany oprogramowanie pośredniczące terminalu, ponieważ wykonuje operację zgodną:
 
 * Operacja dopasowywania w poprzednim przykładzie dotyczy `Path == "/"` oprogramowania pośredniczącego i `Path == "/Movie"` routingu.
 * Gdy dopasowanie zakończy się pomyślnie, wykonuje pewne funkcje i zwraca zamiast wywoływania `next` oprogramowania pośredniczącego.
@@ -696,7 +697,7 @@ Rolą schematu adresowania jest skojarzenie między adresem i zgodnymi punktami 
 
 ### <a name="ambient-values-and-explicit-values"></a>Wartości otoczenia i jawne wartości
 
-Z bieżącego żądania Routing uzyskuje dostęp do wartości trasy bieżącego żądania `HttpContext.Request.RouteValues` . Wartości skojarzone z bieżącym żądaniem są określane jako **wartości otoczenia**. Na potrzeby przejrzystości dokumentacja odwołuje się do wartości trasy przekazaną do metod jako **wartości jawnych**.
+Z bieżącego żądania Routing uzyskuje dostęp do wartości trasy bieżącego żądania `HttpContext.Request.RouteValues` . Wartości skojarzone z bieżącym żądaniem są określane jako **wartości otoczenia** . Na potrzeby przejrzystości dokumentacja odwołuje się do wartości trasy przekazaną do metod jako **wartości jawnych** .
 
 Poniższy przykład pokazuje wartości otoczenia i jawne wartości. Zapewnia ona wartości otoczenia z bieżącego żądania i wartości jawne: `{ id = 17, }` :
 
@@ -756,7 +757,7 @@ Po znalezieniu zestawu punktów końcowych kandydujących algorytm generowania a
 * Przetwarza punkty końcowe iteracyjnie.
 * Zwraca pierwszy udany wynik.
 
-Pierwszy krok w tym procesie nazywa się **nieprawidłową wartością trasy**.  Unieważnianie wartości trasy to proces, za pomocą którego Routing decyduje o tym, które wartości tras z wartości otoczenia powinny być używane, i które mają być ignorowane. Każda wartość otoczenia jest brana pod uwagę i jest dołączona do wartości jawnych lub ignorowana.
+Pierwszy krok w tym procesie nazywa się **nieprawidłową wartością trasy** .  Unieważnianie wartości trasy to proces, za pomocą którego Routing decyduje o tym, które wartości tras z wartości otoczenia powinny być używane, i które mają być ignorowane. Każda wartość otoczenia jest brana pod uwagę i jest dołączona do wartości jawnych lub ignorowana.
 
 Najlepszym sposobem, aby myśleć o roli otaczających wartości, jest próba zapisu deweloperów aplikacji wpisywanych w niektórych typowych przypadkach. Tradycyjnie scenariusze, w których wartości otoczenia są przydatne, są związane z MVC:
 
@@ -972,7 +973,7 @@ Deklarowanie typu metadanych jako interfejsu dodaje kolejną warstwę elastyczno
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/ICoolMetadata.cs?name=snippet)]
 
-Najlepszym sposobem postępowania z tymi wskazówkami jest uniknięcie definiowania **metadanych znacznika**:
+Najlepszym sposobem postępowania z tymi wskazówkami jest uniknięcie definiowania **metadanych znacznika** :
 
 * Nie wyszukuj tylko obecności typu metadanych.
 * Zdefiniuj Właściwość metadanych i sprawdź właściwość.
@@ -1071,7 +1072,7 @@ Routing jest połączony z potokiem [pośredniczącym](xref:fundamentals/middlew
 
 ### <a name="url-matching"></a>Dopasowanie adresu URL
 
-Dopasowywanie adresów URL to proces, za pomocą którego Routing wysyła żądanie przychodzące do *punktu końcowego*. Ten proces jest oparty na danych w ścieżce URL, ale można go rozszerzyć w celu uwzględnienia wszelkich danych w żądaniu. Możliwość wysyłania żądań do oddzielnych programów obsługi jest kluczem do skalowania rozmiaru i złożoności aplikacji.
+Dopasowywanie adresów URL to proces, za pomocą którego Routing wysyła żądanie przychodzące do *punktu końcowego* . Ten proces jest oparty na danych w ścieżce URL, ale można go rozszerzyć w celu uwzględnienia wszelkich danych w żądaniu. Możliwość wysyłania żądań do oddzielnych programów obsługi jest kluczem do skalowania rozmiaru i złożoności aplikacji.
 
 System routingu w ramach routingu punktów końcowych jest odpowiedzialny za wszystkie decyzje dotyczące wysyłania. Ponieważ oprogramowanie pośredniczące stosuje zasady oparte na wybranym punkcie końcowym, ważne jest, aby wszystkie decyzje, które mogą mieć wpływ na wysyłanie lub stosowanie zasad zabezpieczeń, zostały wprowadzone w systemie routingu.
 
@@ -1177,14 +1178,14 @@ Istnieje kilka różnic między routingiem punktu końcowego w ASP.NET Core 2,2 
 
   Rozważmy następujący przykład w ASP.NET Core 2,1 lub starszej. W przypadku łączenia z inną akcją (lub inną stroną) wartości trasy mogą być ponownie używane na różne sposoby.
 
-  W */Pages/Store/Product.cshtml*:
+  W */Pages/Store/Product.cshtml* :
 
   ```cshtml
   @page "{id}"
   @Url.Page("/Login")
   ```
 
-  W */Pages/login.cshtml*:
+  W */Pages/login.cshtml* :
 
   ```cshtml
   @page "{id?}"
@@ -1433,7 +1434,7 @@ Następujące słowa kluczowe są nazwami zarezerwowanymi i nie mogą być używ
 Ograniczenia trasy są wykonywane, gdy nastąpiło dopasowanie do przychodzącego adresu URL, a Ścieżka adresu URL jest zgodna z wartościami trasy. Ograniczenia trasy zwykle sprawdzają wartość trasy skojarzoną za pośrednictwem szablonu trasy i podejmują decyzję o tym, czy wartość jest akceptowalna. Niektóre ograniczenia trasy używają danych poza wartością trasy, aby uwzględnić, czy żądanie może być kierowane. Na przykład <xref:Microsoft.AspNetCore.Routing.Constraints.HttpMethodRouteConstraint> może akceptować lub odrzucać żądanie na podstawie jego zlecenia http. Ograniczenia są używane w żądaniach routingu i generowania linków.
 
 > [!WARNING]
-> Nie używaj ograniczeń **sprawdzania poprawności danych wejściowych**. Jeśli ograniczenia są używane do **sprawdzania poprawności danych wejściowych**, nieprawidłowe dane wejściowe w odpowiedzi *404 — nie znaleziono* , zamiast *żądania 400-złe* z odpowiednim komunikatem o błędzie. Ograniczenia trasy są **używane do** odróżniania podobnych tras, a nie do sprawdzania danych wejściowych dla określonej trasy.
+> Nie używaj ograniczeń **sprawdzania poprawności danych wejściowych** . Jeśli ograniczenia są używane do **sprawdzania poprawności danych wejściowych** , nieprawidłowe dane wejściowe w odpowiedzi *404 — nie znaleziono* , zamiast *żądania 400-złe* z odpowiednim komunikatem o błędzie. Ograniczenia trasy są **używane do** odróżniania podobnych tras, a nie do sprawdzania danych wejściowych dla określonej trasy.
 
 W poniższej tabeli przedstawiono przykładowe ograniczenia trasy i ich oczekiwane zachowanie.
 
@@ -1566,7 +1567,7 @@ Poniższy przykład pokazuje, jak wygenerować link do trasy, używając słowni
 
 <xref:Microsoft.AspNetCore.Routing.VirtualPathData.VirtualPath>Wygenerowano na końcu powyższego przykładu `/package/create/123` . Słownik zawiera `operation` `id` wartości i trasy szablonu "śledzenie trasy pakietu" `package/{operation}/{id}` . Aby uzyskać szczegółowe informacje, zapoznaj się z przykładowym kodem w sekcji [Używanie oprogramowania pośredniczącego usługi routingu](#use-routing-middleware) lub [przykładowej aplikacji](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/routing/samples).
 
-Drugi parametr <xref:Microsoft.AspNetCore.Routing.VirtualPathContext> konstruktora jest kolekcją *wartości otoczenia*. Wartości otoczenia są wygodne do użycia, ponieważ ograniczają liczbę wartości, które Deweloper musi określić w kontekście żądania. Bieżące wartości trasy bieżącego żądania są uznawane za wartości otoczenia dla generacji łącza. W akcji aplikacji ASP.NET Core MVC `About` `HomeController` , nie trzeba określać wartości trasy kontrolera do łączenia z `Index` akcją, &mdash; w której `Home` jest używana wartość otoczenia.
+Drugi parametr <xref:Microsoft.AspNetCore.Routing.VirtualPathContext> konstruktora jest kolekcją *wartości otoczenia* . Wartości otoczenia są wygodne do użycia, ponieważ ograniczają liczbę wartości, które Deweloper musi określić w kontekście żądania. Bieżące wartości trasy bieżącego żądania są uznawane za wartości otoczenia dla generacji łącza. W akcji aplikacji ASP.NET Core MVC `About` `HomeController` , nie trzeba określać wartości trasy kontrolera do łączenia z `Index` akcją, &mdash; w której `Home` jest używana wartość otoczenia.
 
 Wartości otoczenia, które nie pasują do parametru, są ignorowane. Wartości otoczenia są również ignorowane, gdy jawnie podana wartość przesłania wartość otoczenia. Dopasowanie występuje od lewej do prawej w adresie URL.
 
@@ -1629,7 +1630,7 @@ Obsługa generowania adresów URL umożliwia tworzenie aplikacji bez adresów UR
 
 Routing używa implementacji tras programu <xref:Microsoft.AspNetCore.Routing.IRouter> do:
 
-* Mapuj przychodzące żądania do *obsługi tras*.
+* Mapuj przychodzące żądania do *obsługi tras* .
 * Generuj adresy URL używane w odpowiedziach.
 
 Domyślnie aplikacja ma jedną kolekcję tras. Po nadejściu żądania trasy w kolekcji są przetwarzane w kolejności, w jakiej istnieją w kolekcji. Platforma próbuje dopasować przychodzący adres URL żądania do trasy w kolekcji, wywołując <xref:Microsoft.AspNetCore.Routing.IRouter.RouteAsync*> metodę dla każdej trasy w kolekcji. Odpowiedź może używać routingu do generowania adresów URL (na przykład w przypadku przekierowania lub linków) na podstawie informacji o trasach i w ten sposób unikania zakodowanych adresów URL, co ułatwia łatwość utrzymania.
@@ -1647,7 +1648,7 @@ Routing jest połączony z potokiem [pośredniczącym](xref:fundamentals/middlew
 
 ### <a name="url-matching"></a>Dopasowanie adresu URL
 
-Dopasowywanie adresów URL to proces, za pomocą którego Routing wysyła żądanie przychodzące do *procedury obsługi*. Ten proces jest oparty na danych w ścieżce URL, ale można go rozszerzyć w celu uwzględnienia wszelkich danych w żądaniu. Możliwość wysyłania żądań do oddzielnych programów obsługi jest kluczem do skalowania rozmiaru i złożoności aplikacji.
+Dopasowywanie adresów URL to proces, za pomocą którego Routing wysyła żądanie przychodzące do *procedury obsługi* . Ten proces jest oparty na danych w ścieżce URL, ale można go rozszerzyć w celu uwzględnienia wszelkich danych w żądaniu. Możliwość wysyłania żądań do oddzielnych programów obsługi jest kluczem do skalowania rozmiaru i złożoności aplikacji.
 
 Żądania przychodzące wprowadzają <xref:Microsoft.AspNetCore.Builder.RouterMiddleware> , który wywołuje <xref:Microsoft.AspNetCore.Routing.IRouter.RouteAsync*> metodę dla każdej trasy w sekwencji. <xref:Microsoft.AspNetCore.Routing.IRouter>Wystąpienie wybiera, czy *obsługiwać* żądanie przez ustawienie [RouteContext. Handler](xref:Microsoft.AspNetCore.Routing.RouteContext.Handler*) na wartość różną od null <xref:Microsoft.AspNetCore.Http.RequestDelegate> . Jeśli trasa ustawi procedurę obsługi dla żądania, przetwarzanie trasy zostanie zatrzymane, a procedura obsługi zostanie wywołana w celu przetworzenia żądania. Jeśli nie znaleziono procedury obsługi trasy do przetworzenia żądania, oprogramowanie pośredniczące przekazuje żądanie do następnego oprogramowania pośredniczącego w potoku żądania.
 
@@ -1883,7 +1884,7 @@ Użycie szablonu jest ogólnie najprostszym podejściem do routingu. Ograniczeni
 Ograniczenia trasy są wykonywane, gdy nastąpiło dopasowanie do przychodzącego adresu URL, a Ścieżka adresu URL jest zgodna z wartościami trasy. Ograniczenia trasy zwykle sprawdzają wartość trasy skojarzoną za pośrednictwem szablonu trasy i podejmują decyzję o tym, czy wartość jest akceptowalna. Niektóre ograniczenia trasy używają danych poza wartością trasy, aby uwzględnić, czy żądanie może być kierowane. Na przykład <xref:Microsoft.AspNetCore.Routing.Constraints.HttpMethodRouteConstraint> może akceptować lub odrzucać żądanie na podstawie jego zlecenia http. Ograniczenia są używane w żądaniach routingu i generowania linków.
 
 > [!WARNING]
-> Nie używaj ograniczeń **sprawdzania poprawności danych wejściowych**. Jeśli ograniczenia są używane do **sprawdzania poprawności danych wejściowych**, nieprawidłowe dane wejściowe w odpowiedzi *404 — nie znaleziono* , zamiast *żądania 400-złe* z odpowiednim komunikatem o błędzie. Ograniczenia trasy są **używane do** odróżniania podobnych tras, a nie do sprawdzania danych wejściowych dla określonej trasy.
+> Nie używaj ograniczeń **sprawdzania poprawności danych wejściowych** . Jeśli ograniczenia są używane do **sprawdzania poprawności danych wejściowych** , nieprawidłowe dane wejściowe w odpowiedzi *404 — nie znaleziono* , zamiast *żądania 400-złe* z odpowiednim komunikatem o błędzie. Ograniczenia trasy są **używane do** odróżniania podobnych tras, a nie do sprawdzania danych wejściowych dla określonej trasy.
 
 W poniższej tabeli przedstawiono przykładowe ograniczenia trasy i ich oczekiwane zachowanie.
 
@@ -1972,7 +1973,7 @@ Poniższy przykład pokazuje, jak wygenerować link do trasy, używając słowni
 
 <xref:Microsoft.AspNetCore.Routing.VirtualPathData.VirtualPath>Wygenerowano na końcu powyższego przykładu `/package/create/123` . Słownik zawiera `operation` `id` wartości i trasy szablonu "śledzenie trasy pakietu" `package/{operation}/{id}` . Aby uzyskać szczegółowe informacje, zapoznaj się z przykładowym kodem w sekcji [Używanie oprogramowania pośredniczącego usługi routingu](#use-routing-middleware) lub [przykładowej aplikacji](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/routing/samples).
 
-Drugi parametr <xref:Microsoft.AspNetCore.Routing.VirtualPathContext> konstruktora jest kolekcją *wartości otoczenia*. Wartości otoczenia są wygodne do użycia, ponieważ ograniczają liczbę wartości, które Deweloper musi określić w kontekście żądania. Bieżące wartości trasy bieżącego żądania są uznawane za wartości otoczenia dla generacji łącza. W akcji aplikacji ASP.NET Core MVC `About` `HomeController` , nie trzeba określać wartości trasy kontrolera do łączenia z `Index` akcją, &mdash; w której `Home` jest używana wartość otoczenia.
+Drugi parametr <xref:Microsoft.AspNetCore.Routing.VirtualPathContext> konstruktora jest kolekcją *wartości otoczenia* . Wartości otoczenia są wygodne do użycia, ponieważ ograniczają liczbę wartości, które Deweloper musi określić w kontekście żądania. Bieżące wartości trasy bieżącego żądania są uznawane za wartości otoczenia dla generacji łącza. W akcji aplikacji ASP.NET Core MVC `About` `HomeController` , nie trzeba określać wartości trasy kontrolera do łączenia z `Index` akcją, &mdash; w której `Home` jest używana wartość otoczenia.
 
 Wartości otoczenia, które nie pasują do parametru, są ignorowane. Wartości otoczenia są również ignorowane, gdy jawnie podana wartość przesłania wartość otoczenia. Dopasowanie występuje od lewej do prawej w adresie URL.
 

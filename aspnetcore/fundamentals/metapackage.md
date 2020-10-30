@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/25/2018
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/metapackage
-ms.openlocfilehash: 133eee71fcd85a95ac53684c3c6e475a54592967
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: b739398c2a440f21c8bdfdc1f4d8e25412358a6a
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634569"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060693"
 ---
 # <a name="microsoftaspnetcoreall-metapackage-for-aspnet-core-20"></a>Microsoft. AspNetCore. All, pakiet dla ASP.NET Core 2,0
 
@@ -38,7 +39,7 @@ ms.locfileid: "88634569"
 
 Ta funkcja wymaga ASP.NET Core 2. x przeznaczonych dla platformy .NET Core 2. x.
 
-[Microsoft. AspNetCore. All](https://www.nuget.org/packages/Microsoft.AspNetCore.All) to pakiet, który odwołuje się do udostępnionej struktury. *Struktura udostępniona* to zbiór zestawów (plików*dll* ), które nie znajdują się w folderach aplikacji. Aby można było uruchomić aplikację, na komputerze musi być zainstalowana struktura udostępniona. Aby uzyskać więcej informacji, zobacz [udostępnioną strukturę](https://natemcmaster.com/blog/2018/08/29/netcore-primitives-2/).
+[Microsoft. AspNetCore. All](https://www.nuget.org/packages/Microsoft.AspNetCore.All) to pakiet, który odwołuje się do udostępnionej struktury. *Struktura udostępniona* to zbiór zestawów (plików *dll* ), które nie znajdują się w folderach aplikacji. Aby można było uruchomić aplikację, na komputerze musi być zainstalowana struktura udostępniona. Aby uzyskać więcej informacji, zobacz [udostępnioną strukturę](https://natemcmaster.com/blog/2018/08/29/netcore-primitives-2/).
 
 Współdzielona struktura, `Microsoft.AspNetCore.All` do której odwołuje się obejmuje:
 
@@ -96,7 +97,7 @@ Następujące pakiety są zawarte w `Microsoft.AspNetCore.All` pakiecie, ale nie
 
 Aby przenieść z `Microsoft.AspNetCore.All` do `Microsoft.AspNetCore.App` , jeśli aplikacja używa dowolnych interfejsów API z powyższych pakietów lub pakietów wprowadzonych przez te pakiety, Dodaj odwołania do tych pakietów w projekcie.
 
-Wszystkie zależności poprzedzających pakietów, które w przeciwnym razie nie są zależnościami, `Microsoft.AspNetCore.App` nie są uwzględniane niejawnie. Na przykład:
+Wszystkie zależności poprzedzających pakietów, które w przeciwnym razie nie są zależnościami, `Microsoft.AspNetCore.App` nie są uwzględniane niejawnie. Przykład:
 
 * `StackExchange.Redis` jako zależność `Microsoft.Extensions.Caching.Redis`
 * `Microsoft.ApplicationInsights` jako zależność `Microsoft.AspNetCore.ApplicationInsights.HostingStartup`

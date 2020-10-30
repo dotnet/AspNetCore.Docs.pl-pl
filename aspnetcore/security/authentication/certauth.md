@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: bdorrans
 ms.date: 07/16/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/certauth
-ms.openlocfilehash: 57d46e34993148943b1e9680a372405be9c80605
-ms.sourcegitcommit: 6c82d78662332cd40d614019b9ed17c46e25be28
+ms.openlocfilehash: 83525a4c1e87a60b57130c1bba14360c7d03f552
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/29/2020
-ms.locfileid: "91424207"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061382"
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>Konfigurowanie uwierzytelniania certyfikatów w ASP.NET Core
 
@@ -47,7 +48,7 @@ W aplikacji sieci Web Dodaj odwołanie do pakietu [Microsoft. AspNetCore. Authen
 
 Jeśli uwierzytelnianie nie powiedzie się, ta procedura obsługi zwróci `403 (Forbidden)` odpowiedź zamiast elementu `401 (Unauthorized)` , zgodnie z oczekiwaniami. Powodem jest to, że uwierzytelnianie powinno nastąpić podczas początkowego połączenia TLS. Przez czas, gdy dociera do programu obsługi, jest zbyt opóźniony. Nie ma możliwości uaktualnienia połączenia z anonimowego połączenia z certyfikatem.
 
-Dodaj również `app.UseAuthentication();` `Startup.Configure` metodę. W przeciwnym razie `HttpContext.User` nie zostanie ustawiona jako `ClaimsPrincipal` utworzona na podstawie certyfikatu. Na przykład:
+Dodaj również `app.UseAuthentication();` `Startup.Configure` metodę. W przeciwnym razie `HttpContext.User` nie zostanie ustawiona jako `ClaimsPrincipal` utworzona na podstawie certyfikatu. Przykład:
 
 ::: moniker range=">= aspnetcore-5.0"
 
@@ -234,7 +235,7 @@ Koncepcyjnie sprawdzenie poprawności certyfikatu jest problemem z autoryzacją.
 
 ### <a name="kestrel"></a>Kestrel
 
-W *program.cs*Skonfiguruj Kestrel w następujący sposób:
+W *program.cs* Skonfiguruj Kestrel w następujący sposób:
 
 ```csharp
 public static void Main(string[] args)

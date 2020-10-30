@@ -7,6 +7,7 @@ ms.custom: mvc
 ms.date: 03/19/2020
 monikerRange: '>= aspnetcore-3.0'
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/microsoft-logins
-ms.openlocfilehash: 36341a0e439be57d7da4f787aa6103b92c624e96
-ms.sourcegitcommit: 62cc131969b2379f7a45c286a751e22d961dfbdb
+ms.openlocfilehash: 3161e4f0f735294d69dd51634b424d1ed573e615
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/22/2020
-ms.locfileid: "90847588"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060303"
 ---
 # <a name="microsoft-account-external-login-setup-with-aspnet-core"></a>Konfiguracja logowania zewnętrznego konta Microsoft z ASP.NET Core
 
@@ -36,25 +37,25 @@ W tym przykładzie pokazano, jak umożliwić użytkownikom zalogowanie się przy
 * Dodaj pakiet NuGet [Microsoft. AspNetCore. Authentication. MicrosoftAccount](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.MicrosoftAccount/) do projektu.
 * Przejdź do strony [Azure Portal-rejestracje aplikacji](https://go.microsoft.com/fwlink/?linkid=2083908) i Utwórz lub Zaloguj się do konto Microsoft:
 
-Jeśli nie masz konto Microsoft, wybierz pozycję **Utwórz**. Po zalogowaniu nastąpi przekierowanie do strony **rejestracje aplikacji** :
+Jeśli nie masz konto Microsoft, wybierz pozycję **Utwórz** . Po zalogowaniu nastąpi przekierowanie do strony **rejestracje aplikacji** :
 
 * Wybierz **nową rejestrację**
-* Wprowadź **nazwę**.
-* Wybierz opcję dla **obsługiwanych typów kont**.  <!-- Accounts for any org work with MS domain accounts. Most folks probably want the last option, personal MS accounts. It took 24 hours after setting this up for the keys to work -->
+* Wprowadź **nazwę** .
+* Wybierz opcję dla **obsługiwanych typów kont** .  <!-- Accounts for any org work with MS domain accounts. Most folks probably want the last option, personal MS accounts. It took 24 hours after setting this up for the keys to work -->
   * `MicrosoftAccount`Pakiet obsługuje rejestracje aplikacji utworzone przy użyciu opcji "konta w dowolnym katalogu organizacyjnym" lub "konta w dowolnym katalogu organizacyjnym i na kontach Microsoft".
   * Aby skorzystać z innych opcji, ustaw `AuthorizationEndpoint` i `TokenEndpoint` elementy członkowskie `MicrosoftAccountOptions` użyte do zainicjowania uwierzytelniania konta Microsoft do adresów URL wyświetlanych na stronie **punkty końcowe** rejestracji aplikacji po jej utworzeniu (dostępne przez kliknięcie punktów końcowych na stronie **Przegląd** ).
-* W obszarze **Identyfikator URI przekierowania**wprowadź adres URL programowania z `/signin-microsoft` dołączonym. Na przykład `https://localhost:5001/signin-microsoft`. Schemat uwierzytelniania firmy Microsoft skonfigurowany w dalszej części tego przykładu będzie automatycznie obsługiwał żądania w `/signin-microsoft` marszrucie w celu zaimplementowania przepływu OAuth.
+* W obszarze **Identyfikator URI przekierowania** wprowadź adres URL programowania z `/signin-microsoft` dołączonym. Na przykład `https://localhost:5001/signin-microsoft`. Schemat uwierzytelniania firmy Microsoft skonfigurowany w dalszej części tego przykładu będzie automatycznie obsługiwał żądania w `/signin-microsoft` marszrucie w celu zaimplementowania przepływu OAuth.
 * Wybierz pozycję **zarejestruj**
 
 ### <a name="create-client-secret"></a>Utwórz klucz tajny klienta
 
-* W lewym okienku wybierz pozycję **certyfikaty & wpisy tajne**.
-* W obszarze wpisy **tajne klienta**wybierz pozycję **nowy klucz tajny klienta** .
+* W lewym okienku wybierz pozycję **certyfikaty & wpisy tajne** .
+* W obszarze wpisy **tajne klienta** wybierz pozycję **nowy klucz tajny klienta** .
 
   * Dodaj opis wpisu tajnego klienta.
   * Wybierz przycisk **Add** (Dodaj).
 
-* W obszarze wpisy **tajne klienta**skopiuj wartość klucza tajnego klienta.
+* W obszarze wpisy **tajne klienta** skopiuj wartość klucza tajnego klienta.
 
 Segment identyfikatora URI `/signin-microsoft` jest ustawiany jako domyślne wywołanie zwrotne dostawcy uwierzytelniania firmy Microsoft. Można zmienić domyślny identyfikator URI wywołania zwrotnego podczas konfigurowania oprogramowania pośredniczącego uwierzytelniania firmy Microsoft za pośrednictwem dziedziczonej właściwości [RemoteAuthenticationOptions. CallbackPath](/dotnet/api/microsoft.aspnetcore.authentication.remoteauthenticationoptions.callbackpath) klasy [MicrosoftAccountOptions](/dotnet/api/microsoft.aspnetcore.authentication.microsoftaccount.microsoftaccountoptions) .
 
@@ -84,7 +85,7 @@ Aby uzyskać więcej informacji na temat opcji konfiguracji obsługiwanych przez
 
 ## <a name="sign-in-with-microsoft-account"></a>Konto Zaloguj się przy użyciu konta Microsoft
 
-Uruchom aplikację i kliknij pozycję **Zaloguj**. Zostanie wyświetlona opcja zalogowania się do firmy Microsoft. Po kliknięciu firmy Microsoft nastąpi przekierowanie do firmy Microsoft w celu uwierzytelnienia. Po zalogowaniu się przy użyciu konta Microsoft zostanie wyświetlony monit o zezwolenie aplikacji na dostęp do informacji:
+Uruchom aplikację i kliknij pozycję **Zaloguj** . Zostanie wyświetlona opcja zalogowania się do firmy Microsoft. Po kliknięciu firmy Microsoft nastąpi przekierowanie do firmy Microsoft w celu uwierzytelnienia. Po zalogowaniu się przy użyciu konta Microsoft zostanie wyświetlony monit o zezwolenie aplikacji na dostęp do informacji:
 
 Naciśnij pozycję **tak** . nastąpi przekierowanie z powrotem do witryny sieci Web, w której można ustawić swój adres e-mail.
 
@@ -99,7 +100,7 @@ Jesteś teraz zalogowany przy użyciu poświadczeń firmy Microsoft:
 * Jeśli dostawca kont Microsoft przekieruje Cię do strony błędu logowania, należy zwrócić uwagę na tytuły i opis błędu parametrów zapytania bezpośrednio po elemencie `#` (hasztagów) w identyfikatorze URI.
 
   Mimo że zostanie wyświetlony komunikat o błędzie z informacją o problemie z uwierzytelnianiem firmy Microsoft, najbardziej typową przyczyną jest to, że identyfikator URI aplikacji nie pasuje do żadnego z **identyfikatorów URI przekierowania** określonych dla danej platformy **sieci Web** .
-* Jeśli Identity nie jest skonfigurowany przez wywołanie `services.AddIdentity` w `ConfigureServices` , próba uwierzytelnienia spowoduje powstanie *argumentu ArgumentException: należy podać opcję "SignInScheme"*. Szablon projektu używany w tym przykładzie zapewnia, że jest to gotowe.
+* Jeśli Identity nie jest skonfigurowany przez wywołanie `services.AddIdentity` w `ConfigureServices` , próba uwierzytelnienia spowoduje powstanie *argumentu ArgumentException: należy podać opcję "SignInScheme"* . Szablon projektu używany w tym przykładzie zapewnia, że jest to gotowe.
 * Jeśli baza danych lokacji nie została utworzona przez zastosowanie początkowej migracji, *podczas przetwarzania błędu żądania nie powiodła się operacja bazy danych* . Naciśnij pozycję **Zastosuj migracje** , aby utworzyć bazę danych i odświeżyć, aby kontynuować z powodu błędu.
 
 ## <a name="next-steps"></a>Następne kroki

@@ -5,6 +5,7 @@ description: Zapoznaj się ze szczegółami implementacji szyfrowania klucza och
 ms.author: riande
 ms.date: 07/16/2018
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/implementation/key-encryption-at-rest
-ms.openlocfilehash: 4ca2d998141639406a8283c4c756c05a93251928
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: e2841278e8262e6dbbfcf172e0b6599bb19f1d6c
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633684"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061278"
 ---
 # <a name="key-encryption-at-rest-in-windows-and-azure-using-aspnet-core"></a>Szyfrowanie kluczy w systemie Windows i platformie Azure przy użyciu ASP.NET Core
 
@@ -32,7 +33,7 @@ System ochrony danych [domyślnie stosuje mechanizm odnajdywania](xref:security/
 
 ::: moniker range=">= aspnetcore-2.1"
 
-## <a name="azure-key-vault"></a>W usłudze Azure Key Vault
+## <a name="azure-key-vault"></a>Azure Key Vault
 
 Aby przechowywać klucze w [Azure Key Vault](https://azure.microsoft.com/services/key-vault/), skonfiguruj system przy użyciu [ProtectKeysWithAzureKeyVault](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault) w `Startup` klasie:
 

@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/02/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/jsonpatch
-ms.openlocfilehash: e57c5185323305ccbef7960653c9174931e45d75
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: da507974b88c21de22e2c7a56950943207565138
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635401"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060550"
 ---
 # <a name="jsonpatch-in-aspnet-core-web-api"></a>JsonPatch w interfejsie Web API ASP.NET Core
 
@@ -37,7 +38,7 @@ W tym artykule wyjaśniono, jak obsłużyć żądania poprawek w formacie JSON w
 Aby włączyć obsługę poprawek JSON w aplikacji, wykonaj następujące czynności:
 
 1. Zainstaluj [`Microsoft.AspNetCore.Mvc.NewtonsoftJson`](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson/) pakiet NuGet.
-1. Zaktualizuj `Startup.ConfigureServices` metodę projektu w celu wywołania <xref:Microsoft.Extensions.DependencyInjection.NewtonsoftJsonMvcBuilderExtensions.AddNewtonsoftJson*> . Na przykład:
+1. Zaktualizuj `Startup.ConfigureServices` metodę projektu w celu wywołania <xref:Microsoft.Extensions.DependencyInjection.NewtonsoftJsonMvcBuilderExtensions.AddNewtonsoftJson*> . Przykład:
 
     ```csharp
     services
@@ -67,7 +68,7 @@ Metody PUT i [patch](https://tools.ietf.org/html/rfc5789) są używane do aktual
 
 ## <a name="json-patch"></a>Poprawka JSON
 
-[Poprawka JSON](https://tools.ietf.org/html/rfc6902) to format służący do określania aktualizacji, które mają zostać zastosowane do zasobu. Dokument poprawki JSON zawiera tablicę *operacji*. Każda operacja identyfikuje określony typ zmiany. Przykłady takich zmian obejmują dodanie elementu tablicy lub zastępowanie wartości właściwości.
+[Poprawka JSON](https://tools.ietf.org/html/rfc6902) to format służący do określania aktualizacji, które mają zostać zastosowane do zasobu. Dokument poprawki JSON zawiera tablicę *operacji* . Każda operacja identyfikuje określony typ zmiany. Przykłady takich zmian obejmują dodanie elementu tablicy lub zastępowanie wartości właściwości.
 
 Na przykład następujące dokumenty JSON reprezentują zasób, dokument poprawki JSON dla zasobu oraz wynik zastosowania operacji patch.
 
@@ -79,7 +80,7 @@ Na przykład następujące dokumenty JSON reprezentują zasób, dokument poprawk
 
 [!code-json[](jsonpatch/samples/2.2/JSON/add.json)]
 
-W powyższym formacie JSON:
+W powyższym kodzie JSON:
 
 * `op`Właściwość wskazuje typ operacji.
 * `path`Właściwość wskazuje element do zaktualizowania.
@@ -279,7 +280,7 @@ Metody PUT i [patch](https://tools.ietf.org/html/rfc5789) są używane do aktual
 
 ## <a name="json-patch"></a>Poprawka JSON
 
-[Poprawka JSON](https://tools.ietf.org/html/rfc6902) to format służący do określania aktualizacji, które mają zostać zastosowane do zasobu. Dokument poprawki JSON zawiera tablicę *operacji*. Każda operacja identyfikuje określony typ zmiany, na przykład Dodaj element tablicy lub Zastąp wartość właściwości.
+[Poprawka JSON](https://tools.ietf.org/html/rfc6902) to format służący do określania aktualizacji, które mają zostać zastosowane do zasobu. Dokument poprawki JSON zawiera tablicę *operacji* . Każda operacja identyfikuje określony typ zmiany, na przykład Dodaj element tablicy lub Zastąp wartość właściwości.
 
 Na przykład następujące dokumenty JSON reprezentują zasób, dokument poprawki JSON dla zasobu oraz wynik zastosowania operacji patch.
 
@@ -291,7 +292,7 @@ Na przykład następujące dokumenty JSON reprezentują zasób, dokument poprawk
 
 [!code-json[](jsonpatch/samples/2.2/JSON/add.json)]
 
-W powyższym formacie JSON:
+W powyższym kodzie JSON:
 
 * `op`Właściwość wskazuje typ operacji.
 * `path`Właściwość wskazuje element do zaktualizowania.

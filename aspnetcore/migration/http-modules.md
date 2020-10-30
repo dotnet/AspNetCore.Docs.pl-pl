@@ -5,6 +5,7 @@ description: ''
 ms.author: riande
 ms.date: 12/07/2016
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/http-modules
-ms.openlocfilehash: 808215d103db9c5d63fe63b6875a222e6b0ba1fa
-ms.sourcegitcommit: b5ebaf42422205d212e3dade93fcefcf7f16db39
+ms.openlocfilehash: 9664f49bd709d2c9e46130773211c339e391d1f6
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92326617"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060706"
 ---
 # <a name="migrate-http-handlers-and-modules-to-aspnet-core-middleware"></a>Migrowanie programów obsługi i modułów HTTP do ASP.NET Core oprogramowania pośredniczącego
 
@@ -57,7 +58,7 @@ Przed przystąpieniem do ASP.NET Core oprogramowania pośredniczącego najpierw 
 
 1. <https://docs.microsoft.com/previous-versions/ms227673(v=vs.140)>, Czyli zdarzenia serii wywoływane przez ASP.NET: [BeginRequest](/dotnet/api/system.web.httpapplication.beginrequest), [AuthenticateRequest](/dotnet/api/system.web.httpapplication.authenticaterequest)itd. Każdy moduł może utworzyć procedurę obsługi dla jednego lub wielu zdarzeń.
 
-2. Dla tego samego zdarzenia kolejność, w jakiej są skonfigurowane w *Web.config*.
+2. Dla tego samego zdarzenia kolejność, w jakiej są skonfigurowane w *Web.config* .
 
 Oprócz modułów można dodać programy obsługi dla zdarzeń cyklu życia do pliku *Global.asax.cs* . Te programy obsługi są uruchamiane po programach obsługi w skonfigurowanych modułach.
 
@@ -65,7 +66,7 @@ Oprócz modułów można dodać programy obsługi dla zdarzeń cyklu życia do p
 
 **Oprogramowanie pośredniczące jest prostsze niż moduły HTTP i programy obsługi:**
 
-* Moduły, programy obsługi, *Global.asax.cs*, *Web.config* (z wyjątkiem konfiguracji usług IIS) i cykl życia aplikacji zostały utracone
+* Moduły, programy obsługi, *Global.asax.cs* , *Web.config* (z wyjątkiem konfiguracji usług IIS) i cykl życia aplikacji zostały utracone
 
 * Role obu modułów i programów obsługi zostały przejęte przez oprogramowanie pośredniczące
 
@@ -132,7 +133,7 @@ Po przeprowadzeniu migracji funkcjonalności modułu do nowego oprogramowania po
 
 ## <a name="migrating-module-insertion-into-the-request-pipeline"></a>Migrowanie wstawiania modułu do potoku żądania
 
-Moduły HTTP są zazwyczaj dodawane do potoku żądania przy użyciu *Web.config*:
+Moduły HTTP są zazwyczaj dodawane do potoku żądania przy użyciu *Web.config* :
 
 [!code-xml[](../migration/http-modules/sample/Asp.Net4/Asp.Net4/Web.config?highlight=6&range=1-3,32-33,36,43,50,101)]
 
@@ -140,7 +141,7 @@ Przekształć to, [dodając nowe oprogramowanie pośredniczące](xref:fundamenta
 
 [!code-csharp[](../migration/http-modules/sample/Asp.Net.Core/Startup.cs?name=snippet_Configure&highlight=16)]
 
-Dokładne miejsce w potoku, w którym wstawiasz nowe oprogramowanie pośredniczące, zależy od zdarzenia, które zostało obsłużone jako moduł ( `BeginRequest` , `EndRequest` itp.) i jego kolejność na liście modułów w *Web.config*.
+Dokładne miejsce w potoku, w którym wstawiasz nowe oprogramowanie pośredniczące, zależy od zdarzenia, które zostało obsłużone jako moduł ( `BeginRequest` , `EndRequest` itp.) i jego kolejność na liście modułów w *Web.config* .
 
 Jak wspomniano wcześniej, nie ma cyklu życia aplikacji w ASP.NET Core i kolejności, w której odpowiedzi są przetwarzane przez oprogramowanie pośredniczące, różnią się od kolejności używanej przez moduły. Może to spowodować, że decyzje dotyczące porządkowania są bardziej trudne.
 
@@ -180,7 +181,7 @@ Oprogramowanie pośredniczące dodane do potoku, zanim gałąź zostanie wywoła
 
 ## <a name="loading-middleware-options-using-the-options-pattern"></a>Ładowanie opcji oprogramowania pośredniczącego przy użyciu wzorca opcji
 
-Niektóre moduły i programy obsługi mają opcje konfiguracji, które są przechowywane w *Web.config*. Jednak w ASP.NET Core jest używany nowy model konfiguracji zamiast *Web.config*.
+Niektóre moduły i programy obsługi mają opcje konfiguracji, które są przechowywane w *Web.config* . Jednak w ASP.NET Core jest używany nowy model konfiguracji zamiast *Web.config* .
 
 Nowy [system konfiguracji](xref:fundamentals/configuration/index) zapewnia następujące opcje:
 
@@ -194,7 +195,7 @@ Nowy [system konfiguracji](xref:fundamentals/configuration/index) zapewnia nast�
 
 2. Przechowywanie wartości opcji
 
-   System konfiguracji umożliwia przechowywanie wartości opcji w dowolnym miejscu. Jednak większość lokacji używa *appsettings.jsna*, więc zajmiemy się tym podejściem:
+   System konfiguracji umożliwia przechowywanie wartości opcji w dowolnym miejscu. Jednak większość witryn korzysta z *appsettings.json* tej metody:
 
    [!code-json[](http-modules/sample/Asp.Net.Core/appsettings.json?range=1,14-18)]
 
@@ -206,7 +207,7 @@ Nowy [system konfiguracji](xref:fundamentals/configuration/index) zapewnia nast�
 
     Aktualizowanie `Startup` klasy:
 
-   1. Jeśli używasz *appsettings.json*, Dodaj go do konstruktora konfiguracji w `Startup` konstruktorze:
+   1. Jeśli używasz programu *appsettings.json* , Dodaj go do konstruktora konfiguracji w `Startup` konstruktorze:
 
       [!code-csharp[](../migration/http-modules/sample/Asp.Net.Core/Startup.cs?name=snippet_Ctor&highlight=5-6)]
 
@@ -234,9 +235,9 @@ Ten podział działa inaczej, jeśli chcesz użyć tego samego oprogramowania po
 
 Rozwiązaniem jest uzyskanie obiektów Options z rzeczywistymi wartościami opcji w `Startup` klasie i przekazywanie ich bezpośrednio do każdego wystąpienia oprogramowania pośredniczącego.
 
-1. Dodaj drugi klucz do *appsettings.js*
+1. Dodaj drugi klucz do *appsettings.json*
 
-   Aby dodać drugi zestaw opcji do *appsettings.jsw* pliku, Użyj nowego klucza w celu jego jednoznacznej identyfikacji:
+   Aby dodać drugi zestaw opcji do *appsettings.json* pliku, Użyj nowego klucza w celu jego jednoznacznej identyfikacji:
 
    [!code-json[](http-modules/sample/Asp.Net.Core/appsettings.json?range=1,10-18&highlight=2-5)]
 
@@ -323,7 +324,7 @@ Element **HttpContext. Request. form** tłumaczy na:
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Form)]
 
 > [!WARNING]
-> Odczytaj wartości formularza tylko wtedy, gdy podtyp zawartości to *x-www-form-urlencoded* lub *form-Data*.
+> Odczytaj wartości formularza tylko wtedy, gdy podtyp zawartości to *x-www-form-urlencoded* lub *form-Data* .
 
 Element **HttpContext. Request. InputStream** Wykonuje translację na:
 
@@ -379,7 +380,7 @@ public async Task Invoke(HttpContext httpContext)
 
 **HttpContext. Response. Cookie wolumin**
 
-Cookies przenoszone do przeglądarki w nagłówku *zestawu Cookie * odpowiedzi. W związku z tym wysyłanie cookie s wymaga tego samego wywołania zwrotnego, które jest używane do wysyłania nagłówków odpowiedzi:
+Cookies przenoszone do przeglądarki w nagłówku *zestawu Cookie* odpowiedzi. W związku z tym wysyłanie cookie s wymaga tego samego wywołania zwrotnego, które jest używane do wysyłania nagłówków odpowiedzi:
 
 ```csharp
 public async Task Invoke(HttpContext httpContext)

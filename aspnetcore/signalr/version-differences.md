@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.date: 11/21/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/version-differences
-ms.openlocfilehash: 965fbb3d8007cb64aaf51d82d87ed7a3a5298e9b
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: c4c0ff83cb789e9aa35085496daa461404615726
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90721791"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061213"
 ---
 # <a name="differences-between-aspnet-no-locsignalr-and-aspnet-core-no-locsignalr"></a>Różnice między ASP.NET SignalR i ASP.NET Core SignalR
 
@@ -38,7 +39,7 @@ ASP.NET Core SignalR nie jest zgodny z klientami lub serwerami dla ASP.NET Signa
 | **Pakiety NuGet klienta** | [Microsoft. AspNet. SignalR . Klient](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.Client/)<br>[Microsoft. AspNet. SignalR . JS](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.JS/) | [Microsoft. AspNetCore. SignalR . Klient](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client/) |
 | **Pakiet npm klienta języka JavaScript** | [SignalR](https://www.npmjs.com/package/signalr) | [`@microsoft/signalr`](https://www.npmjs.com/package/@microsoft/signalr) |
 | **Klient Java** | [Repozytorium GitHub](https://github.com/SignalR/java-client) (przestarzałe)  | Maven pakietu [com. Microsoft. Signal](https://search.maven.org/artifact/com.microsoft.signalr/signalr) |
-| **Typ aplikacji serwera** | ASP.NET (System. Web) lub samoobsługowy OWIN | ASP.NET Core |
+| **Typ aplikacji serwera** | ASP.NET (System. Web) lub OWIN Self-Host | ASP.NET Core |
 | **Obsługiwane platformy serwera** | .NET Framework 4,5 lub nowszy | .NET Core 3,0 lub nowszy |
 
 ::: moniker-end
@@ -51,7 +52,7 @@ ASP.NET Core SignalR nie jest zgodny z klientami lub serwerami dla ASP.NET Signa
 | **Pakiety NuGet klienta** | [Microsoft. AspNet. SignalR . Klient](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.Client/)<br>[Microsoft. AspNet. SignalR . JS](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.JS/) | [Microsoft. AspNetCore. SignalR . Klient](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client/) |
 | **Pakiet npm klienta języka JavaScript** | [SignalR](https://www.npmjs.com/package/signalr) | [`@aspnet/signalr`](https://www.npmjs.com/package/@aspnet/signalr) |
 | **Klient Java** | [Repozytorium GitHub](https://github.com/SignalR/java-client) (przestarzałe)  | Maven pakietu [com. Microsoft. Signal](https://search.maven.org/artifact/com.microsoft.signalr/signalr) |
-| **Typ aplikacji serwera** | ASP.NET (System. Web) lub samoobsługowy OWIN | ASP.NET Core |
+| **Typ aplikacji serwera** | ASP.NET (System. Web) lub OWIN Self-Host | ASP.NET Core |
 | **Obsługiwane platformy serwera** | .NET Framework 4,5 lub nowszy | .NET Framework 4.6.1 lub nowsze<br>.NET Core 2,1 lub nowszy |
 
 ::: moniker-end
@@ -202,7 +203,8 @@ Zależność od jQuery została usunięta, jednak projekty nadal mogą korzysta�
 
 ### <a name="internet-explorer-support"></a>Obsługa programu Internet Explorer
 
-ASP.NET Core SignalR wymaga programu Microsoft Internet Explorer 11 lub nowszego (ASP.NET SignalR obsługiwany program Microsoft Internet Explorer 8 lub nowszy).
+ASP.NET Core SignalR obsługuje program Microsoft Internet Explorer 11 lub nowszy, natomiast ASP.NET SignalR obsługuje program Microsoft Internet Explorer 8 lub nowszy.
+Więcej informacji na temat obsługi przeglądarki można znaleźć na [obsługiwanych platformach](xref:signalr/supported-platforms#javascript-client).
 
 ### <a name="javascript-client-method-syntax"></a>Składnia metody klienta JavaScript
 
@@ -289,7 +291,7 @@ ASP.NET SignalR obsługuje SQL Server i Redis. ASP.NET Core SignalR obsługuje u
 * [Usługa platformy Azure SignalR](/azure/azure-signalr/)
 * [Redis](xref:signalr/redis-backplane)
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Centra](xref:signalr/hubs)
 * [Klient JavaScript](xref:signalr/javascript-client)

@@ -6,6 +6,7 @@ ms.author: casoper
 ms.custom: devx-track-csharp, mvc
 ms.date: 01/21/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/azure-ad-b2c
-ms.openlocfilehash: edacded5df4d5f4819b3657bc7eff99e6d96d394
-ms.sourcegitcommit: 9a90b956af8d8584d597f1e5c1dbfb0ea9bb8454
+ms.openlocfilehash: f917bec8f2d929e62bf43494159a63458f135c5f
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/21/2020
-ms.locfileid: "88712548"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061395"
 ---
 # <a name="cloud-authentication-with-azure-active-directory-b2c-in-aspnet-core"></a>Uwierzytelnianie w chmurze za pomocą Azure Active Directory B2C w ASP.NET Core
 
@@ -86,7 +87,7 @@ W programie Visual Studio:
     
     ![Przycisk Zmień uwierzytelnianie](./azure-ad-b2c/_static/changeauth.png)
 
-4. W oknie dialogowym **Zmienianie uwierzytelniania** wybierz pozycję **indywidualne konta użytkowników**, a następnie wybierz pozycję **Połącz z istniejącym magazynem użytkowników w chmurze** na liście rozwijanej. 
+4. W oknie dialogowym **Zmienianie uwierzytelniania** wybierz pozycję **indywidualne konta użytkowników** , a następnie wybierz pozycję **Połącz z istniejącym magazynem użytkowników w chmurze** na liście rozwijanej. 
     
     ![Okno dialogowe Zmienianie uwierzytelniania](./azure-ad-b2c/_static/changeauthdialog.png)
 
@@ -108,14 +109,14 @@ W programie Visual Studio:
 Wróć do okna przeglądarki z wciąż otwartymi właściwościami aplikacji B2C. Zmień tymczasowy **adres URL odpowiedzi** określony wcześniej na wartość skopiowaną z programu Visual Studio. Wybierz pozycję **Zapisz** w górnej części okna.
 
 > [!TIP]
-> Jeśli nie skopiowano adresu URL odpowiedzi, użyj adresu HTTPS z karty debugowanie we właściwościach projektu sieci Web i Dołącz wartość **CallbackPath** z *appsettings.js*.
+> Jeśli nie skopiowano adresu URL odpowiedzi, użyj adresu HTTPS z karty debugowanie we właściwościach projektu sieci Web i Dołącz wartość **CallbackPath** z *appsettings.json* .
 
 ## <a name="configure-policies"></a>Konfigurowanie zasad
 
-Wykonaj kroki opisane w dokumentacji Azure AD B2C, aby [utworzyć zasady tworzenia konta lub logowania](/azure/active-directory-b2c/active-directory-b2c-reference-policies#user-flow-versions), a następnie [Utwórz zasady resetowania hasła](/azure/active-directory-b2c/active-directory-b2c-reference-policies#user-flow-versions). Użyj przykładowych wartości znajdujących się w dokumentacji dotyczącej ** Identity dostawców**, **atrybutów rejestracji**i **oświadczeń aplikacji**. Użycie przycisku **Uruchom teraz** w celu przetestowania zasad zgodnie z opisem w dokumentacji jest opcjonalne.
+Wykonaj kroki opisane w dokumentacji Azure AD B2C, aby [utworzyć zasady tworzenia konta lub logowania](/azure/active-directory-b2c/active-directory-b2c-reference-policies#user-flow-versions), a następnie [Utwórz zasady resetowania hasła](/azure/active-directory-b2c/active-directory-b2c-reference-policies#user-flow-versions). Użyj przykładowych wartości znajdujących się w dokumentacji dotyczącej **Identity dostawców** , **atrybutów rejestracji** i **oświadczeń aplikacji** . Użycie przycisku **Uruchom teraz** w celu przetestowania zasad zgodnie z opisem w dokumentacji jest opcjonalne.
 
 > [!WARNING]
-> Upewnij się, że nazwy zasad są dokładnie zgodnie z opisem w dokumentacji, ponieważ te zasady były używane w oknie dialogowym **Zmienianie uwierzytelniania** w programie Visual Studio. Nazwy zasad można weryfikować w *appsettings.js*.
+> Upewnij się, że nazwy zasad są dokładnie zgodnie z opisem w dokumentacji, ponieważ te zasady były używane w oknie dialogowym **Zmienianie uwierzytelniania** w programie Visual Studio. Nazwy zasad mogą być weryfikowane w programie *appsettings.json* .
 
 ## <a name="configure-the-underlying-openidconnectoptionsjwtbearerno-loccookie-options"></a>Skonfiguruj bazowe OpenIdConnectOptions/JwtBearer/ Cookie Opcje
 
@@ -143,7 +144,7 @@ services.Configure<JwtBearerOptions>(
 
 ## <a name="run-the-app"></a>Uruchamianie aplikacji
 
-W programie Visual Studio naciśnij klawisz **F5** , aby skompilować i uruchomić aplikację. Po uruchomieniu aplikacji sieci Web wybierz pozycję **Akceptuj** , aby zaakceptować użycie cookie s (Jeśli zostanie wyświetlony monit), a następnie wybierz pozycję **Zaloguj się**.
+W programie Visual Studio naciśnij klawisz **F5** , aby skompilować i uruchomić aplikację. Po uruchomieniu aplikacji sieci Web wybierz pozycję **Akceptuj** , aby zaakceptować użycie cookie s (Jeśli zostanie wyświetlony monit), a następnie wybierz pozycję **Zaloguj się** .
 
 ![Zaloguj się do aplikacji](./azure-ad-b2c/_static/signin.png)
 

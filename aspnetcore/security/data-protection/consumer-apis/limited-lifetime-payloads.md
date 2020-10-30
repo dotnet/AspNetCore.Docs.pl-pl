@@ -5,6 +5,7 @@ description: Dowiedz się, jak ograniczyć okres istnienia chronionego ładunku 
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/consumer-apis/limited-lifetime-payloads
-ms.openlocfilehash: f76aca460c293b5f814ba10ee6c8ac68b3d147bb
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 74417d076399066a49271c27ff128d9de6c10f94
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634426"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060797"
 ---
 # <a name="limit-the-lifetime-of-protected-payloads-in-aspnet-core"></a>Ogranicz okres istnienia chronionych ładunków w ASP.NET Core
 

@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-2.0
-ms.openlocfilehash: 9d8c33ef10825baa212466fe683d4c1dc582f7eb
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: f9fad5a63c76a3b21341a12fd40baafcdf2c9dac
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632463"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059731"
 ---
 # <a name="whats-new-in-aspnet-core-20"></a>Co nowego w ASP.NET Core 2,0
 
@@ -141,7 +142,7 @@ Aby uzyskać więcej informacji, zobacz [ Razor przeglądanie kompilacji i wstę
 
 ## <a name="no-locrazor-support-for-c-71"></a>Razor Obsługa języka C# 7,1
 
-RazorAparat widoku został zaktualizowany, aby współpracował z nowym kompilatorem Roslyn. Obejmuje to obsługę funkcji języka C# 7,1, takich jak domyślne wyrażenia, wywnioskowane nazwy krotek i dopasowanie do wzorca przy użyciu typów ogólnych. Aby użyć języka C# 7,1 w projekcie, Dodaj następującą właściwość w pliku projektu, a następnie załaduj ponownie rozwiązanie:
+RazorAparat widoku został zaktualizowany, aby współpracował z nowym kompilatorem Roslyn. Obejmuje obsługę funkcji języka C# 7,1, takich jak domyślne wyrażenia, wywnioskowane nazwy krotek i Pattern-Matching z typami ogólnymi. Aby użyć języka C# 7,1 w projekcie, Dodaj następującą właściwość w pliku projektu, a następnie załaduj ponownie rozwiązanie:
 
 ```xml
 <LangVersion>latest</LangVersion>

@@ -5,6 +5,7 @@ description: Dowiedz się, w jaki sposób widoki obsługują prezentację danych
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/overview
-ms.openlocfilehash: 6afd69414f2dc0158f724c6e6f7b3a3e51c1e92c
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 373b17377740441d3859e3b7d942017a22bc7a68
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630682"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060628"
 ---
 # <a name="views-in-aspnet-core-mvc"></a>Widoki w ASP.NET Core MVC
 
@@ -35,7 +36,7 @@ W ASP.NET Core MVC, widoki są plikami *. cshtml* , które używają [języka pr
 
 ![Folder widoki w Eksplorator rozwiązań programu Visual Studio jest otwarty z folderem macierzystym otwartym, aby pokazać informacje o plikach. cshtml, Contact. cshtml i index. cshtml](overview/_static/views_solution_explorer.png)
 
-Kontroler *główny* jest reprezentowany przez folder *macierzysty* w folderze *widoki* . Folder *macierzysty* zawiera widoki stron sieci Web *Informacje o*programie, *kontakt*i *indeks* (Strona główna). Gdy użytkownik zażąda jednej z tych trzech stron sieci Web, akcje kontrolera w kontrolerze *głównym* określają, które z tych trzech widoków są używane do kompilowania i zwracania strony internetowej do użytkownika.
+Kontroler *główny* jest reprezentowany przez folder *macierzysty* w folderze *widoki* . Folder *macierzysty* zawiera widoki stron sieci Web *Informacje o* programie, *kontakt* i *indeks* (Strona główna). Gdy użytkownik zażąda jednej z tych trzech stron sieci Web, akcje kontrolera w kontrolerze *głównym* określają, które z tych trzech widoków są używane do kompilowania i zwracania strony internetowej do użytkownika.
 
 Użyj [układów](xref:mvc/views/layout) , aby zapewnić spójne sekcje stron i ograniczyć powtarzanie kodu. Układy często zawierają nagłówek, nawigację i elementy menu oraz stopkę. Nagłówek i stopka zazwyczaj zawierają standardowe znaczniki dla wielu elementów metadanych i linki do zasobów skryptu i stylu. Układy umożliwiają uniknięcie tego standardowego znacznika w widokach.
 
@@ -98,7 +99,7 @@ Po powrocie tej akcji widok *Informacje o. cshtml* widoczny w ostatniej sekcji j
 
 Gdy akcja zwraca widok, odbywa się proces o nazwie *odnajdywanie widoku* . Ten proces określa, który plik widoku jest używany na podstawie nazwy widoku. 
 
-Domyślne zachowanie `View` metody ( `return View();` ) ma zwrócić widok o tej samej nazwie co Metoda akcji, z której jest wywoływana. Na przykład nazwa metody *informacji* `ActionResult` kontrolera służy do wyszukiwania pliku widoku o nazwie *about. cshtml*. Najpierw środowisko uruchomieniowe przeszukuje folder *widoki/[ControllerName]* dla widoku. Jeśli w tym miejscu nie zostanie znaleziony pasujący widok, przeszukiwany jest folder *udostępniony* dla tego widoku.
+Domyślne zachowanie `View` metody ( `return View();` ) ma zwrócić widok o tej samej nazwie co Metoda akcji, z której jest wywoływana. Na przykład nazwa metody *informacji* `ActionResult` kontrolera służy do wyszukiwania pliku widoku o nazwie *about. cshtml* . Najpierw środowisko uruchomieniowe przeszukuje folder *widoki/[ControllerName]* dla widoku. Jeśli w tym miejscu nie zostanie znaleziony pasujący widok, przeszukiwany jest folder *udostępniony* dla tego widoku.
 
 Nie ma znaczenia, czy niejawnie zwracają `ViewResult` `return View();` nazwę widoku do `View` metody z `return View("<ViewName>");` . W obu przypadkach należy wyświetlić wyszukiwanie w poszukiwaniu zgodnego pliku widoku w następującej kolejności:
 
@@ -142,9 +143,9 @@ Przekazywanie danych do widoków przy użyciu kilku metod:
 
 ### <a name="strongly-typed-data-viewmodel"></a>Dane silnie wpisane (ViewModel)
 
-Najbardziej niezawodne podejście polega na określeniu typu [modelu](xref:mvc/models/model-binding) w widoku. Ten model jest często określany jako *ViewModel*. Wystąpienie typu ViewModel można przekazać do widoku z akcji.
+Najbardziej niezawodne podejście polega na określeniu typu [modelu](xref:mvc/models/model-binding) w widoku. Ten model jest często określany jako *ViewModel* . Wystąpienie typu ViewModel można przekazać do widoku z akcji.
 
-Użycie ViewModel do przekazywania danych do widoku pozwala widokowi korzystać z funkcji sprawdzania *silnych* typów. *Silne wpisywanie* (lub *silnie wpisane*) oznacza, że każda zmienna i stała ma jawnie zdefiniowany typ (na przykład,, `string` `int` lub `DateTime` ). Ważność typów używanych w widoku jest sprawdzana w czasie kompilacji.
+Użycie ViewModel do przekazywania danych do widoku pozwala widokowi korzystać z funkcji sprawdzania *silnych* typów. *Silne wpisywanie* (lub *silnie wpisane* ) oznacza, że każda zmienna i stała ma jawnie zdefiniowany typ (na przykład,, `string` `int` lub `DateTime` ). Ważność typów używanych w widoku jest sprawdzana w czasie kompilacji.
 
 [Program Visual Studio](https://visualstudio.microsoft.com) i lista [Visual Studio Code](https://code.visualstudio.com/) grupy o jednoznacznie określonym typie przy użyciu funkcji o nazwie [IntelliSense](/visualstudio/ide/using-intellisense). Aby wyświetlić właściwości ViewModel, wpisz nazwę zmiennej dla ViewModel, a następnie kropkę ( `.` ). Dzięki temu można szybciej napisać kod z mniejszą liczbą błędów.
 
@@ -181,7 +182,7 @@ public IActionResult Contact()
 }
 ```
 
-Nie ma żadnych ograniczeń dotyczących typów modelu, które można dostarczyć do widoku. Zalecamy używanie zwykłego starego obiektu CLR (POCO) modele widoków z niewielkimi lub żadnymi zachowaniami (metodami). Zazwyczaj klasy ViewModel są przechowywane w folderze *models* lub w oddzielnym folderze *modele widoków* w katalogu głównym aplikacji. *Adres* ViewModel używany w powyższym przykładzie to poco ViewModel przechowywany w pliku o nazwie *Address.cs*:
+Nie ma żadnych ograniczeń dotyczących typów modelu, które można dostarczyć do widoku. Zalecamy używanie zwykłego starego obiektu CLR (POCO) modele widoków z niewielkimi lub żadnymi zachowaniami (metodami). Zazwyczaj klasy ViewModel są przechowywane w folderze *models* lub w oddzielnym folderze *modele widoków* w katalogu głównym aplikacji. *Adres* ViewModel używany w powyższym przykładzie to poco ViewModel przechowywany w pliku o nazwie *Address.cs* :
 
 ```csharp
 namespace WebApplication1.ViewModels
@@ -205,7 +206,7 @@ Nic nie pozwala na korzystanie z tych samych klas zarówno dla typów ViewModel,
 
 `ViewBag`*nie jest dostępny w Razor Strony.*
 
-W przypadku widoków o jednoznacznie określonym typie widoki mają dostęp do jednoznacznie *wpisanej* kolekcji (nazywanej również *luźno wpisaną*) kolekcją danych. W przeciwieństwie do mocnych typów, *słabych typów* (lub *luźnych typów*) oznacza, że nie deklaruje jawnie typu danych, z których korzystasz. Możesz użyć kolekcji nieokreślonych danych do przekazywania małych ilości danych do i z kontrolerów i widoków.
+W przypadku widoków o jednoznacznie określonym typie widoki mają dostęp do jednoznacznie *wpisanej* kolekcji (nazywanej również *luźno wpisaną* ) kolekcją danych. W przeciwieństwie do mocnych typów, *słabych typów* (lub *luźnych typów* ) oznacza, że nie deklaruje jawnie typu danych, z których korzystasz. Możesz użyć kolekcji nieokreślonych danych do przekazywania małych ilości danych do i z kontrolerów i widoków.
 
 | Przekazywanie danych między...                        | Przykład                                                                        |
 | ------------------------------------------------- | ------------------------------------------------------------------------------ |

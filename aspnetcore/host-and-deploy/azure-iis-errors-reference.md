@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/azure-iis-errors-reference
-ms.openlocfilehash: 46fa3138e3fbcc4ed5e4497ec017a5873a4cdb13
-ms.sourcegitcommit: d60bfd52bfb559e805abd654b87a2a0c7eb69cf8
+ms.openlocfilehash: b009cc61a94e618a48d96ecbd770ef6371308f6a
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/06/2020
-ms.locfileid: "91754661"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059848"
 ---
 # <a name="common-errors-reference-for-azure-app-service-and-iis-with-aspnet-core"></a>Informacje dotyczące typowych błędów dla Azure App Service i usług IIS z ASP.NET Core
 
@@ -39,7 +40,7 @@ Zbierz wymienione poniżej informacje.
 * Wpisy dziennika zdarzeń aplikacji
   * Azure App Service: zobacz <xref:test/troubleshoot-azure-iis> .
   * IIS
-    1. Wybierz pozycję **Rozpocznij** w menu **systemu Windows** , wpisz *Podgląd zdarzeń*i naciśnij klawisz **Enter**.
+    1. Wybierz pozycję **Rozpocznij** w menu **systemu Windows** , wpisz *Podgląd zdarzeń* i naciśnij klawisz **Enter** .
     1. Po otwarciu **Podgląd zdarzeń** rozwiń pozycję **Dzienniki systemu Windows** > **Application** na pasku bocznym.
 * Element stdout modułu ASP.NET Core i wpisy dziennika debugowania
   * Azure App Service: zobacz <xref:test/troubleshoot-azure-iis> .
@@ -63,7 +64,7 @@ Pliki inne niż systemowe w katalogu **C:\Windows\SysWOW64\inetsrv** nie są zac
 
 *Dotyczy aplikacji hostowanych przez usługę Azure App Services.*
 
-* **Przeglądarka:** Błąd HTTP 500,0 — błąd ładowania procedury obsługi ANCM w procesie
+* **Przeglądarka:** Błąd HTTP 500,0 — błąd ładowania procedury obsługi In-Process ANCM
 
 * **Dziennik aplikacji:** Wywoływanie hostfxr w celu znalezienia procedury obsługi żądania przetworzenia nie powiodło się bez wyszukiwania natywnych zależności. Nie można znaleźć procedury obsługi żądania nieprzetwarzania. Przechwycono dane wyjściowe z wywołania hostfxr: nie można odnaleźć żadnej zgodnej wersji platformy. Nie znaleziono określonej struktury "Microsoft. AspNetCore. app" w wersji "{VERSION}-Preview- \* ". Nie można uruchomić aplikacji "/LM/W3SVC/1416782824/ROOT", ErrorCode "0x8000FFFF".
 
@@ -90,7 +91,7 @@ Aby uzyskać więcej informacji, zobacz <xref:host-and-deploy/azure-apps/index#i
 
 ## <a name="an-x86-app-is-deployed-but-the-app-pool-isnt-enabled-for-32-bit-apps"></a>Aplikacja x86 została wdrożona, ale Pula aplikacji nie jest włączona dla aplikacji 32-bitowych
 
-* **Przeglądarka:** Błąd HTTP 500,30 — niepowodzenie uruchomienia ANCM w procesie
+* **Przeglądarka:** Błąd HTTP 500,30 — błąd uruchamiania ANCM In-Process
 
 * **Dziennik aplikacji:** Aplikacja "/LM/W3SVC/5/ROOT" z fizycznym elementem głównym "{PATH}" napotkała nieoczekiwany wyjątek zarządzany, kod wyjątku = "0xe0434352". Aby uzyskać więcej informacji, Sprawdź dzienniki stderr. Aplikacja "/LM/W3SVC/5/ROOT" z fizycznym elementem głównym "{PATH}" nie może załadować środowiska CLR i aplikacji zarządzanej. Wątek roboczy CLR zakończony przedwcześnie
 
@@ -102,7 +103,7 @@ Ten scenariusz jest zalewkowany przez zestaw SDK podczas publikowania aplikacji 
 
 Rozwiązywanie problemów:
 
-W przypadku wdrożenia opartego na architekturze x86 ( `<PlatformTarget>x86</PlatformTarget>` ) Włącz pulę aplikacji usług IIS dla aplikacji 32-bitowych. W Menedżerze usług IIS Otwórz **Zaawansowane ustawienia** puli aplikacji i ustaw **wartość True**dla **aplikacji 32-bitowych** .
+W przypadku wdrożenia opartego na architekturze x86 ( `<PlatformTarget>x86</PlatformTarget>` ) Włącz pulę aplikacji usług IIS dla aplikacji 32-bitowych. W Menedżerze usług IIS Otwórz **Zaawansowane ustawienia** puli aplikacji i ustaw **wartość True** dla **aplikacji 32-bitowych** .
 
 ## <a name="platform-conflicts-with-rid"></a>Konflikty platformy z identyfikatorem RID
 
@@ -154,7 +155,7 @@ Upewnij się, że są włączone odpowiednie role i funkcje. Zobacz [Konfiguracj
 
 Rozwiązywanie problemów:
 
-Sprawdź **Ustawienia podstawowe** witryny sieci Web usług IIS i folder aplikacji fizycznych. Upewnij się, że aplikacja znajduje się w folderze w **ścieżce fizycznej**witryny sieci Web usług IIS.
+Sprawdź **Ustawienia podstawowe** witryny sieci Web usług IIS i folder aplikacji fizycznych. Upewnij się, że aplikacja znajduje się w folderze w **ścieżce fizycznej** witryny sieci Web usług IIS.
 
 ## <a name="incorrect-role-aspnet-core-module-not-installed-or-incorrect-permissions"></a>Nieprawidłowa rola, moduł ASP.NET Core nie jest zainstalowany lub nieprawidłowe uprawnienia
 
@@ -176,7 +177,7 @@ Rozwiązywanie problemów:
 
   Aby uzyskać więcej informacji, zobacz [Instalowanie pakietu hostingu .NET Core](xref:host-and-deploy/iis/index#install-the-net-core-hosting-bundle).
 
-* Upewnij się, że **Application Pool** > **model procesów** puli aplikacji > **Identity** ma wartość **ApplicationPool Identity ** lub że niestandardowa tożsamość ma odpowiednie uprawnienia dostępu do folderu wdrożenia aplikacji.
+* Upewnij się, że **Application Pool** > **model procesów** puli aplikacji > **Identity** ma wartość **ApplicationPool Identity** lub że niestandardowa tożsamość ma odpowiednie uprawnienia dostępu do folderu wdrożenia aplikacji.
 
 * Jeśli odinstalowano pakiet hostingu ASP.NET Core i zainstalowano wcześniejszą wersję pakietu hostingu, plik *applicationHost.config* nie zawiera sekcji dla modułu ASP.NET Core. Otwórz *applicationHost.config* w lokalizacji *% windir%/system32/inetsrv/config* i Znajdź `<configuration><configSections><sectionGroup name="system.webServer">` grupę sekcji. Jeśli w grupie sekcji brakuje sekcji modułu ASP.NET Core, Dodaj element Section:
 
@@ -188,7 +189,7 @@ Rozwiązywanie problemów:
 
 ## <a name="incorrect-processpath-missing-path-variable-hosting-bundle-not-installed-systemiis-not-restarted-vc-redistributable-not-installed-or-dotnetexe-access-violation"></a>Nieprawidłowa processPath, brakująca zmienna PATH, pakiet hostingu nie został zainstalowany, nie uruchomiono systemu/usług IIS, pakiet redystrybucyjny programu VC + + nie został zainstalowany lub dotnet.exe naruszenie dostępu
 
-* **Przeglądarka:** Błąd HTTP 500,0 — błąd ładowania procedury obsługi ANCM w procesie
+* **Przeglądarka:** Błąd HTTP 500,0 — błąd ładowania procedury obsługi In-Process ANCM
 
 * **Dziennik aplikacji:** Nie można uruchomić procesu "MACHINE/WEBROOT/APPHOST/{ASSEMBLY}" z fizycznym elementem głównym "C: \{ Path} \' " przy użyciu wiersza polecenia "" {...} " ", ErrorCode =" 0x80070002:0. Aplikacja "{PATH}" nie mogła zostać uruchomiona. Nie znaleziono pliku wykonywalnego w lokalizacji "{PATH}". Nie można uruchomić aplikacji "/LM/W3SVC/2/ROOT", ErrorCode "0x8007023e".
 
@@ -202,7 +203,7 @@ Rozwiązywanie problemów:
 
 * Sprawdź atrybut *processPath* w `<aspNetCore>` elemencie w *web.config* , aby upewnić się, że jest to `dotnet` wdrożenie zależne od platformy (FDD) lub `.\{ASSEMBLY}.exe` [wdrożenie samodzielne (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd).
 
-* W przypadku elementu FDD *dotnet.exe* może być niedostępna za pośrednictwem ustawień ścieżki. Upewnij się, że w ustawieniach ścieżki systemowej istnieje wartość *C:\Program Files\dotnet \\ * .
+* W przypadku elementu FDD *dotnet.exe* może być niedostępna za pośrednictwem ustawień ścieżki. Upewnij się, że w ustawieniach ścieżki systemowej istnieje wartość *C:\Program Files\dotnet \\* .
 
 * W przypadku elementu FDD *dotnet.exe* może być niedostępna dla tożsamości użytkownika puli aplikacji. Upewnij się, że tożsamość użytkownika puli aplikacji ma dostęp do katalogu *C:\Program Files\dotnet* . Upewnij się, że nie ma skonfigurowanych reguł odmowy dla tożsamości użytkownika puli aplikacji w *folderze C:\Program Files\dotnet* i katalogach aplikacji.
 
@@ -218,7 +219,7 @@ Rozwiązywanie problemów:
 
 ## <a name="incorrect-arguments-of-aspnetcore-element"></a>Nieprawidłowe argumenty \<aspNetCore> elementu
 
-* **Przeglądarka:** Błąd HTTP 500,0 — błąd ładowania procedury obsługi ANCM w procesie
+* **Przeglądarka:** Błąd HTTP 500,0 — błąd ładowania procedury obsługi In-Process ANCM
 
 * **Dziennik aplikacji:** Wywoływanie hostfxr w celu znalezienia procedury obsługi żądania przetworzenia nie powiodło się bez wyszukiwania natywnych zależności. Najbardziej prawdopodobną przyczyną jest to, że aplikacja jest nieprawidłowo skonfigurowana. Sprawdź wersje programów Microsoft. servicecore. app i Microsoft. AspNetCore. app, które są przeznaczone dla aplikacji, i są zainstalowane na komputerze. Nie można znaleźć procedury obsługi żądania nieprzetwarzania. Przechwycone dane wyjściowe z wywołania hostfxr: Czy chodziło o uruchamianie poleceń zestawu dotnet SDK? Zainstaluj zestaw SDK dotnet z: https://go.microsoft.com/fwlink/?LinkID=798306&clcid=0x409 nie można uruchomić aplikacji "/LM/W3SVC/3/root", ErrorCode "0x8000FFFF".
 
@@ -234,7 +235,7 @@ Rozwiązywanie problemów:
 
 ## <a name="missing-net-core-shared-framework"></a>Brak współdzielonej platformy .NET Core
 
-* **Przeglądarka:** Błąd HTTP 500,0 — błąd ładowania procedury obsługi ANCM w procesie
+* **Przeglądarka:** Błąd HTTP 500,0 — błąd ładowania procedury obsługi In-Process ANCM
 
 * **Dziennik aplikacji:** Wywoływanie hostfxr w celu znalezienia procedury obsługi żądania przetworzenia nie powiodło się bez wyszukiwania natywnych zależności. Najbardziej prawdopodobną przyczyną jest to, że aplikacja jest nieprawidłowo skonfigurowana. Sprawdź wersje programów Microsoft. servicecore. app i Microsoft. AspNetCore. app, które są przeznaczone dla aplikacji, i są zainstalowane na komputerze. Nie można znaleźć procedury obsługi żądania nieprzetwarzania. Przechwycono dane wyjściowe z wywołania hostfxr: nie można odnaleźć żadnej zgodnej wersji platformy. Nie znaleziono określonej struktury "Microsoft. AspNetCore. app" w wersji "{VERSION}".
 
@@ -296,7 +297,7 @@ Rozwiązywanie problemów:
 
 ## <a name="application-configuration-general-issue"></a>Ogólny problem z konfiguracją aplikacji
 
-* **Przeglądarka:** Błąd HTTP 500,0 — błąd ładowania procedury obsługi ANCM w procesie — **lub —** błąd HTTP 500,30-ANCM w procesie — niepowodzenie uruchamiania
+* **Przeglądarka:** Błąd HTTP 500,0 — błąd ładowania procedury obsługi ANCM In-Process **--lub--** błąd HTTP 500,30-ANCM In-Process uruchomienia
 
 * **Dziennik aplikacji:** Zmiennej
 
@@ -327,7 +328,7 @@ Zbierz wymienione poniżej informacje.
 * Wpisy dziennika zdarzeń aplikacji
   * Azure App Service: zobacz <xref:test/troubleshoot-azure-iis> .
   * IIS
-    1. Wybierz pozycję **Rozpocznij** w menu **systemu Windows** , wpisz *Podgląd zdarzeń*i naciśnij klawisz **Enter**.
+    1. Wybierz pozycję **Rozpocznij** w menu **systemu Windows** , wpisz *Podgląd zdarzeń* i naciśnij klawisz **Enter** .
     1. Po otwarciu **Podgląd zdarzeń** rozwiń pozycję **Dzienniki systemu Windows** > **Application** na pasku bocznym.
 * Element stdout modułu ASP.NET Core i wpisy dziennika debugowania
   * Azure App Service: zobacz <xref:test/troubleshoot-azure-iis> .
@@ -351,7 +352,7 @@ Pliki inne niż systemowe w katalogu **C:\Windows\SysWOW64\inetsrv** nie są zac
 
 *Dotyczy aplikacji hostowanych przez usługę Azure App Services.*
 
-* **Przeglądarka:** Błąd HTTP 500,0 — błąd ładowania procedury obsługi ANCM w procesie
+* **Przeglądarka:** Błąd HTTP 500,0 — błąd ładowania procedury obsługi In-Process ANCM
 
 * **Dziennik aplikacji:** Wywoływanie hostfxr w celu znalezienia procedury obsługi żądania przetworzenia nie powiodło się bez wyszukiwania natywnych zależności. Nie można znaleźć procedury obsługi żądania nieprzetwarzania. Przechwycono dane wyjściowe z wywołania hostfxr: nie można odnaleźć żadnej zgodnej wersji platformy. Nie znaleziono określonej struktury "Microsoft. AspNetCore. app" w wersji "{VERSION}-Preview- \* ". Nie można uruchomić aplikacji "/LM/W3SVC/1416782824/ROOT", ErrorCode "0x8000FFFF".
 
@@ -376,7 +377,7 @@ Aby uzyskać więcej informacji, zobacz <xref:host-and-deploy/azure-apps/index#i
 
 ## <a name="an-x86-app-is-deployed-but-the-app-pool-isnt-enabled-for-32-bit-apps"></a>Aplikacja x86 została wdrożona, ale Pula aplikacji nie jest włączona dla aplikacji 32-bitowych
 
-* **Przeglądarka:** Błąd HTTP 500,30 — niepowodzenie uruchomienia ANCM w procesie
+* **Przeglądarka:** Błąd HTTP 500,30 — błąd uruchamiania ANCM In-Process
 
 * **Dziennik aplikacji:** Aplikacja "/LM/W3SVC/5/ROOT" z fizycznym elementem głównym "{PATH}" napotkała nieoczekiwany wyjątek zarządzany, kod wyjątku = "0xe0434352". Aby uzyskać więcej informacji, Sprawdź dzienniki stderr. Aplikacja "/LM/W3SVC/5/ROOT" z fizycznym elementem głównym "{PATH}" nie może załadować środowiska CLR i aplikacji zarządzanej. Wątek roboczy CLR zakończony przedwcześnie
 
@@ -386,7 +387,7 @@ Ten scenariusz jest zalewkowany przez zestaw SDK podczas publikowania aplikacji 
 
 Rozwiązywanie problemów:
 
-W przypadku wdrożenia opartego na architekturze x86 ( `<PlatformTarget>x86</PlatformTarget>` ) Włącz pulę aplikacji usług IIS dla aplikacji 32-bitowych. W Menedżerze usług IIS Otwórz **Zaawansowane ustawienia** puli aplikacji i ustaw **wartość True**dla **aplikacji 32-bitowych** .
+W przypadku wdrożenia opartego na architekturze x86 ( `<PlatformTarget>x86</PlatformTarget>` ) Włącz pulę aplikacji usług IIS dla aplikacji 32-bitowych. W Menedżerze usług IIS Otwórz **Zaawansowane ustawienia** puli aplikacji i ustaw **wartość True** dla **aplikacji 32-bitowych** .
 
 ## <a name="platform-conflicts-with-rid"></a>Konflikty platformy z identyfikatorem RID
 
@@ -434,7 +435,7 @@ Upewnij się, że są włączone odpowiednie role i funkcje. Zobacz [Konfiguracj
 
 Rozwiązywanie problemów:
 
-Sprawdź **Ustawienia podstawowe** witryny sieci Web usług IIS i folder aplikacji fizycznych. Upewnij się, że aplikacja znajduje się w folderze w **ścieżce fizycznej**witryny sieci Web usług IIS.
+Sprawdź **Ustawienia podstawowe** witryny sieci Web usług IIS i folder aplikacji fizycznych. Upewnij się, że aplikacja znajduje się w folderze w **ścieżce fizycznej** witryny sieci Web usług IIS.
 
 ## <a name="incorrect-role-aspnet-core-module-not-installed-or-incorrect-permissions"></a>Nieprawidłowa rola, moduł ASP.NET Core nie jest zainstalowany lub nieprawidłowe uprawnienia
 
@@ -454,7 +455,7 @@ Rozwiązywanie problemów:
 
   Aby uzyskać więcej informacji, zobacz [Instalowanie pakietu hostingu .NET Core](xref:host-and-deploy/iis/index#install-the-net-core-hosting-bundle).
 
-* Upewnij się, że **Application Pool** > **model procesów** puli aplikacji > **Identity** ma wartość **ApplicationPool Identity ** lub że niestandardowa tożsamość ma odpowiednie uprawnienia dostępu do folderu wdrożenia aplikacji.
+* Upewnij się, że **Application Pool** > **model procesów** puli aplikacji > **Identity** ma wartość **ApplicationPool Identity** lub że niestandardowa tożsamość ma odpowiednie uprawnienia dostępu do folderu wdrożenia aplikacji.
 
 * Jeśli odinstalowano pakiet hostingu ASP.NET Core i zainstalowano wcześniejszą wersję pakietu hostingu, plik *applicationHost.config* nie zawiera sekcji dla modułu ASP.NET Core. Otwórz *applicationHost.config* w lokalizacji *% windir%/system32/inetsrv/config* i Znajdź `<configuration><configSections><sectionGroup name="system.webServer">` grupę sekcji. Jeśli w grupie sekcji brakuje sekcji modułu ASP.NET Core, Dodaj element Section:
 
@@ -478,7 +479,7 @@ Rozwiązywanie problemów:
 
 * Sprawdź atrybut *processPath* w `<aspNetCore>` elemencie w *web.config* , aby upewnić się, że jest to `dotnet` wdrożenie zależne od platformy (FDD) lub `.\{ASSEMBLY}.exe` [wdrożenie samodzielne (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd).
 
-* W przypadku elementu FDD *dotnet.exe* może być niedostępna za pośrednictwem ustawień ścieżki. Upewnij się, że w ustawieniach ścieżki systemowej istnieje wartość *C:\Program Files\dotnet \\ * .
+* W przypadku elementu FDD *dotnet.exe* może być niedostępna za pośrednictwem ustawień ścieżki. Upewnij się, że w ustawieniach ścieżki systemowej istnieje wartość *C:\Program Files\dotnet \\* .
 
 * W przypadku elementu FDD *dotnet.exe* może być niedostępna dla tożsamości użytkownika puli aplikacji. Upewnij się, że tożsamość użytkownika puli aplikacji ma dostęp do katalogu *C:\Program Files\dotnet* . Upewnij się, że nie ma skonfigurowanych reguł odmowy dla tożsamości użytkownika puli aplikacji w *folderze C:\Program Files\dotnet* i katalogach aplikacji.
 

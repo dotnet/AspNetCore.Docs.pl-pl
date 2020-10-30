@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 7/14/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/entity-framework-6
-ms.openlocfilehash: 64d420d7076f1da453ee423cc4a3732eeb47b221
-ms.sourcegitcommit: 4df148cbbfae9ec8d377283ee71394944a284051
+ms.openlocfilehash: 086418c161677f585b08ed360555c93d8575e701
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88876701"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059458"
 ---
 # <a name="aspnet-core-and-entity-framework-6"></a>ASP.NET Core i Entity Framework 6
 ::: moniker range=">= aspnetcore-3.0"
@@ -31,9 +32,9 @@ Zgodnie z [dobrymi](https://github.com/attrib75)
 
 [Entity Framework Core](/ef/) należy używać w przypadku nowych rozwiązań programistycznych. [Przykład pobierania](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/entity-framework-6/3.xsample) używa [Entity Framework 6 (Ef6)](/ef/ef6), który może służyć do migrowania zamykania aplikacji do ASP.NET Core.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
-* [Konfiguracja oparta na kodzie Entity Framework](/ef/ef6/fundamentals/configuring/code-based)
+* [Konfiguracja Code-Based Entity Framework](/ef/ef6/fundamentals/configuring/code-based)
 
 ::: moniker-end
 
@@ -104,9 +105,9 @@ Ten przykład można utworzyć od podstaw, wykonując następujące kroki w prog
 
 * W projekcie podstawowym Dodaj odwołanie projektu do projektu biblioteki klas.    
 
-* W projekcie podstawowym w *Startup.cs*Zarejestruj kontekst dla di.    
+* W projekcie podstawowym w *Startup.cs* Zarejestruj kontekst dla di.    
 
-* W projekcie podstawowym w *appsettings.jsna*, Dodaj parametry połączenia.    
+* W projekcie podstawowym w programie *appsettings.json* Dodaj parametry połączenia.  
 
 * W projekcie podstawowym Dodaj kontroler i widok, aby sprawdzić, czy można odczytywać i zapisywać dane. (Należy zauważyć, że ASP.NET Core tworzenie szkieletu MVC nie będzie współpracowało z kontekstem EF6, do którego odwołuje się Biblioteka klas).
 

@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/distributed
-ms.openlocfilehash: 0d27206412a098f4ea749ec10189bf24d2322de1
-ms.sourcegitcommit: 9a90b956af8d8584d597f1e5c1dbfb0ea9bb8454
+ms.openlocfilehash: 6d87c8de66bf5600189465b96dee903841106b6f
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/21/2020
-ms.locfileid: "88712483"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061148"
 ---
 # <a name="distributed-caching-in-aspnet-core"></a>Rozproszone buforowanie w ASP.NET Core
 
@@ -112,7 +113,7 @@ Przykładowa aplikacja jest wdrażana <xref:Microsoft.Extensions.Caching.SqlServ
 [!code-csharp[](distributed/samples/3.x/DistCacheSample/Startup.cs?name=snippet_AddDistributedSqlServerCache)]
 
 > [!NOTE]
-> <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.ConnectionString*>(I opcjonalnie <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.SchemaName*> <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.TableName*> ) są zwykle przechowywane poza kontrolą źródła (na przykład przechowywane przez [Menedżera wpisów tajnych](xref:security/app-secrets) lub w *appsettings.jsna* / *appSettings. { ENVIRONMENT}. JSON* — pliki). Parametry połączenia mogą zawierać poświadczenia, które powinny być przechowywane w systemach kontroli źródła.
+> <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.ConnectionString*>(I opcjonalnie <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.SchemaName*> <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.TableName*> ) są zwykle przechowywane poza kontrolą źródła (na przykład przechowywane przez [Menedżera wpisów tajnych](xref:security/app-secrets) lub w *appsettings.json* / *appSettings. { ENVIRONMENT}. JSON* — pliki). Parametry połączenia mogą zawierać poświadczenia, które powinny być przechowywane w systemach kontroli źródła.
 
 ### <a name="distributed-redis-cache"></a>Redis Cache dystrybuowane
 
@@ -155,7 +156,7 @@ Po rozpoczęciu przykładowej aplikacji <xref:Microsoft.Extensions.Caching.Distr
 
 Przykładowa aplikacja wstrzykiwa do <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> `IndexModel` użycia na stronie indeksu.
 
-Za każdym razem, gdy strona indeksu zostanie załadowana, pamięć podręczna jest sprawdzana pod kątem pamięci podręcznej w programie `OnGetAsync` . Jeśli czas w pamięci podręcznej nie upłynął, zostanie wyświetlony czas. Jeśli od czasu ostatniego dostępu do pamięci podręcznej upłynie 20 sekund (podczas ostatniego ładowania strony), na stronie zostanie wyświetlona *godzina wygaśnięcia pamięci podręcznej*.
+Za każdym razem, gdy strona indeksu zostanie załadowana, pamięć podręczna jest sprawdzana pod kątem pamięci podręcznej w programie `OnGetAsync` . Jeśli czas w pamięci podręcznej nie upłynął, zostanie wyświetlony czas. Jeśli od czasu ostatniego dostępu do pamięci podręcznej upłynie 20 sekund (podczas ostatniego ładowania strony), na stronie zostanie wyświetlona *godzina wygaśnięcia pamięci podręcznej* .
 
 Natychmiast Aktualizuj buforowany czas do bieżącego czasu, wybierając przycisk **Resetuj buforowany czas** . Przycisk wyzwala `OnPostResetCachedTime` metodę procedury obsługi.
 
@@ -172,7 +173,7 @@ Podczas decydowania, która implementacja <xref:Microsoft.Extensions.Caching.Dis
 
 * Istniejąca infrastruktura
 * Wymagania dotyczące wydajności
-* Cost (Koszt)
+* Koszt
 * Środowisko pracy zespołu
 
 Rozwiązania pamięci podręcznej zwykle polegają na magazynie w pamięci, aby zapewnić szybkie pobieranie danych z pamięci podręcznej, ale pamięć jest ograniczonym zasobem i kosztowna. Przechowuj tylko często używane dane w pamięci podręcznej.
@@ -181,7 +182,7 @@ Ogólnie pamięć podręczna Redis zapewnia wyższą przepływność i mniejsze 
 
 Gdy SQL Server jest używany jako magazyn zapasowy rozproszonej pamięci podręcznej, korzystanie z tej samej bazy danych dla pamięci podręcznej i zwykłego magazynu danych aplikacji może mieć negatywny wpływ na wydajność obu tych elementów. Zalecamy używanie dedykowanego wystąpienia SQL Server dla magazynu zapasowego rozproszonej pamięci podręcznej.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Redis Cache na platformie Azure](/azure/azure-cache-for-redis/)
 * [SQL Database na platformie Azure](/azure/sql-database/)
@@ -279,7 +280,7 @@ Przykładowa aplikacja jest wdrażana <xref:Microsoft.Extensions.Caching.SqlServ
 [!code-csharp[](distributed/samples/2.x/DistCacheSample/Startup.cs?name=snippet_AddDistributedSqlServerCache)]
 
 > [!NOTE]
-> <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.ConnectionString*>(I opcjonalnie <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.SchemaName*> <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.TableName*> ) są zwykle przechowywane poza kontrolą źródła (na przykład przechowywane przez [Menedżera wpisów tajnych](xref:security/app-secrets) lub w *appsettings.jsna* / *appSettings. { ENVIRONMENT}. JSON* — pliki). Parametry połączenia mogą zawierać poświadczenia, które powinny być przechowywane w systemach kontroli źródła.
+> <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.ConnectionString*>(I opcjonalnie <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.SchemaName*> <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.TableName*> ) są zwykle przechowywane poza kontrolą źródła (na przykład przechowywane przez [Menedżera wpisów tajnych](xref:security/app-secrets) lub w *appsettings.json* / *appSettings. { ENVIRONMENT}. JSON* — pliki). Parametry połączenia mogą zawierać poświadczenia, które powinny być przechowywane w systemach kontroli źródła.
 
 ### <a name="distributed-redis-cache"></a>Redis Cache dystrybuowane
 
@@ -325,7 +326,7 @@ Po rozpoczęciu przykładowej aplikacji <xref:Microsoft.Extensions.Caching.Distr
 
 Przykładowa aplikacja wstrzykiwa do <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> `IndexModel` użycia na stronie indeksu.
 
-Za każdym razem, gdy strona indeksu zostanie załadowana, pamięć podręczna jest sprawdzana pod kątem pamięci podręcznej w programie `OnGetAsync` . Jeśli czas w pamięci podręcznej nie upłynął, zostanie wyświetlony czas. Jeśli od czasu ostatniego dostępu do pamięci podręcznej upłynie 20 sekund (podczas ostatniego ładowania strony), na stronie zostanie wyświetlona *godzina wygaśnięcia pamięci podręcznej*.
+Za każdym razem, gdy strona indeksu zostanie załadowana, pamięć podręczna jest sprawdzana pod kątem pamięci podręcznej w programie `OnGetAsync` . Jeśli czas w pamięci podręcznej nie upłynął, zostanie wyświetlony czas. Jeśli od czasu ostatniego dostępu do pamięci podręcznej upłynie 20 sekund (podczas ostatniego ładowania strony), na stronie zostanie wyświetlona *godzina wygaśnięcia pamięci podręcznej* .
 
 Natychmiast Aktualizuj buforowany czas do bieżącego czasu, wybierając przycisk **Resetuj buforowany czas** . Przycisk wyzwala `OnPostResetCachedTime` metodę procedury obsługi.
 
@@ -342,7 +343,7 @@ Podczas decydowania, która implementacja <xref:Microsoft.Extensions.Caching.Dis
 
 * Istniejąca infrastruktura
 * Wymagania dotyczące wydajności
-* Cost (Koszt)
+* Koszt
 * Środowisko pracy zespołu
 
 Rozwiązania pamięci podręcznej zwykle polegają na magazynie w pamięci, aby zapewnić szybkie pobieranie danych z pamięci podręcznej, ale pamięć jest ograniczonym zasobem i kosztowna. Przechowuj tylko często używane dane w pamięci podręcznej.
@@ -351,7 +352,7 @@ Ogólnie pamięć podręczna Redis zapewnia wyższą przepływność i mniejsze 
 
 Gdy SQL Server jest używany jako magazyn zapasowy rozproszonej pamięci podręcznej, korzystanie z tej samej bazy danych dla pamięci podręcznej i zwykłego magazynu danych aplikacji może mieć negatywny wpływ na wydajność obu tych elementów. Zalecamy używanie dedykowanego wystąpienia SQL Server dla magazynu zapasowego rozproszonej pamięci podręcznej.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Redis Cache na platformie Azure](/azure/azure-cache-for-redis/)
 * [SQL Database na platformie Azure](/azure/sql-database/)
@@ -449,7 +450,7 @@ Przykładowa aplikacja jest wdrażana <xref:Microsoft.Extensions.Caching.SqlServ
 [!code-csharp[](distributed/samples/2.x/DistCacheSample/Startup.cs?name=snippet_AddDistributedSqlServerCache)]
 
 > [!NOTE]
-> <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.ConnectionString*>(I opcjonalnie <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.SchemaName*> <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.TableName*> ) są zwykle przechowywane poza kontrolą źródła (na przykład przechowywane przez [Menedżera wpisów tajnych](xref:security/app-secrets) lub w *appsettings.jsna* / *appSettings. { ENVIRONMENT}. JSON* — pliki). Parametry połączenia mogą zawierać poświadczenia, które powinny być przechowywane w systemach kontroli źródła.
+> <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.ConnectionString*>(I opcjonalnie <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.SchemaName*> <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.TableName*> ) są zwykle przechowywane poza kontrolą źródła (na przykład przechowywane przez [Menedżera wpisów tajnych](xref:security/app-secrets) lub w *appsettings.json* / *appSettings. { ENVIRONMENT}. JSON* — pliki). Parametry połączenia mogą zawierać poświadczenia, które powinny być przechowywane w systemach kontroli źródła.
 
 ### <a name="distributed-redis-cache"></a>Redis Cache dystrybuowane
 
@@ -501,7 +502,7 @@ Po rozpoczęciu przykładowej aplikacji <xref:Microsoft.Extensions.Caching.Distr
 
 Przykładowa aplikacja wstrzykiwa do <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> `IndexModel` użycia na stronie indeksu.
 
-Za każdym razem, gdy strona indeksu zostanie załadowana, pamięć podręczna jest sprawdzana pod kątem pamięci podręcznej w programie `OnGetAsync` . Jeśli czas w pamięci podręcznej nie upłynął, zostanie wyświetlony czas. Jeśli od czasu ostatniego dostępu do pamięci podręcznej upłynie 20 sekund (podczas ostatniego ładowania strony), na stronie zostanie wyświetlona *godzina wygaśnięcia pamięci podręcznej*.
+Za każdym razem, gdy strona indeksu zostanie załadowana, pamięć podręczna jest sprawdzana pod kątem pamięci podręcznej w programie `OnGetAsync` . Jeśli czas w pamięci podręcznej nie upłynął, zostanie wyświetlony czas. Jeśli od czasu ostatniego dostępu do pamięci podręcznej upłynie 20 sekund (podczas ostatniego ładowania strony), na stronie zostanie wyświetlona *godzina wygaśnięcia pamięci podręcznej* .
 
 Natychmiast Aktualizuj buforowany czas do bieżącego czasu, wybierając przycisk **Resetuj buforowany czas** . Przycisk wyzwala `OnPostResetCachedTime` metodę procedury obsługi.
 
@@ -518,7 +519,7 @@ Podczas decydowania, która implementacja <xref:Microsoft.Extensions.Caching.Dis
 
 * Istniejąca infrastruktura
 * Wymagania dotyczące wydajności
-* Cost (Koszt)
+* Koszt
 * Środowisko pracy zespołu
 
 Rozwiązania pamięci podręcznej zwykle polegają na magazynie w pamięci, aby zapewnić szybkie pobieranie danych z pamięci podręcznej, ale pamięć jest ograniczonym zasobem i kosztowna. Przechowuj tylko często używane dane w pamięci podręcznej.
@@ -527,7 +528,7 @@ Ogólnie pamięć podręczna Redis zapewnia wyższą przepływność i mniejsze 
 
 Gdy SQL Server jest używany jako magazyn zapasowy rozproszonej pamięci podręcznej, korzystanie z tej samej bazy danych dla pamięci podręcznej i zwykłego magazynu danych aplikacji może mieć negatywny wpływ na wydajność obu tych elementów. Zalecamy używanie dedykowanego wystąpienia SQL Server dla magazynu zapasowego rozproszonej pamięci podręcznej.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Redis Cache na platformie Azure](/azure/azure-cache-for-redis/)
 * [SQL Database na platformie Azure](/azure/sql-database/)

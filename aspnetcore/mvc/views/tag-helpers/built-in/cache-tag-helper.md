@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/10/2018
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/cache-tag-helper
-ms.openlocfilehash: b1cab7ab8b491529ee4208d92fb30082be795eda
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: a87f91255bd1f280b1567f522423a6f4e88a6dd8
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635063"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060888"
 ---
 # <a name="cache-tag-helper-in-aspnet-core-mvc"></a>Pomocnik tagu pamięci podręcznej w ASP.NET Core MVC
 
@@ -44,7 +45,7 @@ Pierwsze żądanie do strony zawierającej pomocnika tagów wyświetla bieżąc�
 
 ### <a name="enabled"></a>enabled
 
-| Typ atrybutu  | Przykłady        | Domyślny |
+| Typ atrybutu  | Przykłady        | Domyślne |
 | --------------- | --------------- | ------- |
 | Boolean         | `true`, `false` | `true`  |
 
@@ -76,7 +77,7 @@ Poniższy przykład pamięci podręcznej zawartości pomocnika tagów pamięci p
 
 ### <a name="expires-after"></a>wygasa — po
 
-| Typ atrybutu | Przykład                      | Domyślny    |
+| Typ atrybutu | Przykład                      | Domyślne    |
 | -------------- | ---------------------------- | ---------- |
 | `TimeSpan`     | `@TimeSpan.FromSeconds(120)` | 20 minut |
 
@@ -112,7 +113,7 @@ Przykład:
 
 | Typ atrybutu | Przykłady                                    |
 | -------------- | ------------------------------------------- |
-| Ciąg         | `User-Agent`, `User-Agent,content-encoding` |
+| String         | `User-Agent`, `User-Agent,content-encoding` |
 
 `vary-by-header` akceptuje rozdzielaną przecinkami listę wartości nagłówka, które wyzwalają Odświeżanie pamięci podręcznej, gdy zmieniają się.
 
@@ -128,7 +129,7 @@ Poniższy przykład monitoruje wartość nagłówka `User-Agent` . Przykład buf
 
 | Typ atrybutu | Przykłady             |
 | -------------- | -------------------- |
-| Ciąg         | `Make`, `Make,Model` |
+| String         | `Make`, `Make,Model` |
 
 `vary-by-query` akceptuje listę rozdzielonych przecinkami <xref:Microsoft.AspNetCore.Http.IQueryCollection.Keys*> w ciągu zapytania ( <xref:Microsoft.AspNetCore.Http.HttpRequest.Query*> ), które wyzwalają Odświeżanie pamięci podręcznej, gdy zostanie zmieniona wartość dowolnego z wymienionych kluczy.
 
@@ -144,13 +145,13 @@ Poniższy przykład monitoruje wartości `Make` i `Model` . Przykład buforuje z
 
 | Typ atrybutu | Przykłady             |
 | -------------- | -------------------- |
-| Ciąg         | `Make`, `Make,Model` |
+| String         | `Make`, `Make,Model` |
 
 `vary-by-route` akceptuje rozdzielaną przecinkami listę nazw parametrów trasy, które wyzwalają Odświeżanie pamięci podręcznej, gdy wartość parametru dane trasy zostanie zmieniona.
 
 Przykład:
 
-*Startup.cs*:
+*Startup.cs* :
 
 ```csharp
 routes.MapRoute(
@@ -158,7 +159,7 @@ routes.MapRoute(
     template: "{controller=Home}/{action=Index}/{Make?}/{Model?}");
 ```
 
-*Index. cshtml*:
+*Index. cshtml* :
 
 ```cshtml
 <cache vary-by-route="Make,Model">
@@ -170,7 +171,7 @@ routes.MapRoute(
 
 | Typ atrybutu | Przykłady                                                                         |
 | -------------- | -------------------------------------------------------------------------------- |
-| Ciąg         | `.AspNetCore.Identity.Application`, `.AspNetCore.Identity.Application,HairColor` |
+| String         | `.AspNetCore.Identity.Application`, `.AspNetCore.Identity.Application,HairColor` |
 
 `vary-by-cookie` akceptuje rozdzielaną przecinkami listę cookie nazw, które wyzwalają Odświeżanie pamięci podręcznej po cookie zmianie wartości.
 
@@ -184,7 +185,7 @@ Poniższy przykład monitoruje cookie skojarzone z ASP.NET Core Identity . Po uw
 
 ### <a name="vary-by-user"></a>Zróżnicuj według użytkownika
 
-| Typ atrybutu  | Przykłady        | Domyślny |
+| Typ atrybutu  | Przykłady        | Domyślne |
 | --------------- | --------------- | ------- |
 | Boolean         | `true`, `false` | `true`  |
 
@@ -204,7 +205,7 @@ Użycie tego atrybutu zachowuje zawartość w pamięci podręcznej przez proces 
 
 | Typ atrybutu | Przykład  |
 | -------------- | -------- |
-| Ciąg         | `@Model` |
+| String         | `@Model` |
 
 `vary-by` umożliwia dostosowanie danych przechowywanych w pamięci podręcznej. Gdy obiekt, do którego odwołuje się wartość ciągu atrybutu, zmienia się zawartość pomocnika tagu pamięci podręcznej. Często łączenie ciągów wartości modelu jest przypisywane do tego atrybutu. Efektywnie jest to scenariusz, w którym aktualizacja dowolnej z połączonych wartości unieważnia pamięć podręczną.
 
@@ -223,7 +224,7 @@ public IActionResult Index(string myParam1, string myParam2, string myParam3)
 }
 ```
 
-*Index. cshtml*:
+*Index. cshtml* :
 
 ```cshtml
 <cache vary-by="@Model">
@@ -233,7 +234,7 @@ public IActionResult Index(string myParam1, string myParam2, string myParam3)
 
 ### <a name="priority"></a>priority
 
-| Typ atrybutu      | Przykłady                               | Domyślny  |
+| Typ atrybutu      | Przykłady                               | Domyślne  |
 | ------------------- | -------------------------------------- | -------- |
 | `CacheItemPriority` | `High`, `Low`, `NeverRemove`, `Normal` | `Normal` |
 

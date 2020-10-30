@@ -5,7 +5,7 @@ description: Dowiedz się, jak przesyłać strumieniowo dane między klientem a 
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc, devx-track-js
-ms.date: 11/12/2019
+ms.date: 10/29/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/streaming
-ms.openlocfilehash: 2f21248934395b682adf8060dae4e3d145e52215
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: b07c280f271ccdd525128b973da065001a5cf0ed
+ms.sourcegitcommit: 0d40fc4932531ce13fc4ee9432144584e03c2f1c
 ms.translationtype: MT
 ms.contentlocale: pl-PL
 ms.lasthandoff: 10/30/2020
-ms.locfileid: "93058210"
+ms.locfileid: "93062444"
 ---
 # <a name="use-streaming-in-aspnet-core-no-locsignalr"></a>Używanie przesyłania strumieniowego w ASP.NET Core SignalR
 
@@ -320,6 +320,22 @@ hubConnection.stream(String.class, "ExampleStreamingHubMethod", "Arg1")
 ```
 
 `stream`Metoda on `HubConnection` zwraca widoczny dla typu elementu strumienia. Metoda zauważalnego typu `subscribe` ma miejsce, gdzie `onNext` `onError` `onCompleted` są zdefiniowane i procedury obsługi.
+
+### <a name="client-to-server-streaming"></a>Przesyłanie strumieniowe klient-serwer
+
+SignalRKlient Java może wywoływać metody przesyłania strumieniowego między serwerami w centrach, przekazując [zauważalny](https://rxjs-dev.firebaseapp.com/api/index/class/Observable) argument do `send` , `invoke` , lub, w zależności od `stream` wywoływanej metody centrum.
+
+```java
+ReplaySubject<String> stream = ReplaySubject.create();
+hubConnection.send("UploadStream", stream);
+stream.onNext("FirstItem");
+stream.onNext("SecondItem");
+stream.onComplete();
+```
+
+Wywołanie `stream.onNext(item)` elementu zapisuje element do strumienia, a metoda Hub odbiera element na serwerze.
+
+Aby zakończyć strumień, wywołaj polecenie `stream.onComplete()` .
 
 ::: moniker-end
 

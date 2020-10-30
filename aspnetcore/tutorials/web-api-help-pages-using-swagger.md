@@ -1,10 +1,10 @@
 ---
-title: ASP.NET Core stronach pomocy interfejsu API sieci Web w programie Swagger/OpenAPI
+title: ASP.NET Core dokumentację interfejsu API sieci Web za pomocą programu Swagger/OpenAPI
 author: RicoSuter
 description: Ten samouczek zawiera wskazówki dotyczące dodawania struktury Swagger w celu wygenerowania dokumentacji i stron pomocy dla aplikacji interfejsu API sieci Web.
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 07/06/2020
+ms.date: 10/29/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -18,32 +18,39 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/web-api-help-pages-using-swagger
-ms.openlocfilehash: b4b27e6b845d960b4b92612b90938f0770f23170
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: e5442c88048cf41e289fb476b4082cb6029b1b75
+ms.sourcegitcommit: 0d40fc4932531ce13fc4ee9432144584e03c2f1c
 ms.translationtype: MT
 ms.contentlocale: pl-PL
 ms.lasthandoff: 10/30/2020
-ms.locfileid: "93056676"
+ms.locfileid: "93062457"
 ---
-# <a name="aspnet-core-web-api-help-pages-with-swagger--openapi"></a>ASP.NET Core stronach pomocy interfejsu API sieci Web w programie Swagger/OpenAPI
+# <a name="aspnet-core-web-api-documentation-with-swagger--openapi"></a>ASP.NET Core dokumentację interfejsu API sieci Web za pomocą programu Swagger/OpenAPI
 
 [Christoph Nienaber](https://twitter.com/zuckerthoben) i [Portoryko Suter](https://blog.rsuter.com/)
 
-W przypadku korzystania z internetowego interfejsu API zrozumienie jego różnych metod może być trudne dla dewelopera. Struktura [Swagger](https://swagger.io/), znana również jako [openapi](https://www.openapis.org/), rozwiązuje problem związany z generowaniem użytecznej dokumentacji i stron pomocy dla interfejsów API sieci Web. Zapewnia takie korzyści, jak dokumentacja interaktywna, generowanie zestawu SDK klienta i możliwość odnajdywania interfejsów API.
+Swagger (OpenAPI) to specyfikacja języka niezależny od opisująca opisywanie interfejsów API REST. Dzięki temu zarówno komputery, jak i ludzie mogą zrozumieć możliwości interfejsu API REST bez bezpośredniego dostępu do kodu źródłowego. Główne cele są następujące:
 
-W tym artykule opisano implementacje [Swashbuckle. AspNetCore](https://github.com/domaindrivendev/Swashbuckle.AspNetCore) i [NSwag](https://github.com/RicoSuter/NSwag) .NET Swagger:
+* Zminimalizuj ilość pracy wymaganej do połączenia z odłączonymi usługami.
+* Skrócenie czasu wymaganego do dokładnego udokumentowania usługi.
 
-* **Swashbuckle. AspNetCore** to projekt Open Source służący do generowania dokumentów struktury Swagger dla ASP.NET Core interfejsów API sieci Web.
+Dwa główne implementacje OpenAPI dla platformy .NET to [Swashbuckle](https://github.com/domaindrivendev/Swashbuckle.AspNetCore) i [NSwag](https://github.com/RicoSuter/NSwag), zobacz:
 
-* **NSwag** jest innym projektem Open Source na potrzeby generowania dokumentów struktury Swagger i INTEGROWANIA [interfejsu użytkownika struktury Swagger](https://swagger.io/swagger-ui/) lub [ReDoc](https://github.com/Rebilly/ReDoc) do ASP.NET Core interfejsów API sieci Web. Ponadto NSwag oferuje podejścia do generowania kodu klienta C# i języka TypeScript dla interfejsu API.
+* [Wprowadzenie z Swashbuckle](xref:tutorials/get-started-with-swashbuckle)
+* [Wprowadzenie z NSwag](xref:tutorials/get-started-with-nswag)
 
-## <a name="what-is-swagger--openapi"></a>Co to jest Swagger/OpenAPI?
+## <a name="openapi-vs-swagger"></a>OpenApi a Swagger
 
-Swagger to specyfikacja języka niezależny od do opisywania interfejsów API [rest](https://en.wikipedia.org/wiki/Representational_state_transfer) . Projekt Swagger został przekazano do [inicjatywy openapi](https://www.openapis.org/), w której jest teraz określany jako openapi. Obie nazwy są używane zamiennie; OpenAPI jest jednak preferowane. Pozwala to komputerom i ludziom na zrozumienie możliwości usługi bez bezpośredniego dostępu do implementacji (kod źródłowy, dostęp do sieci, dokumentacja). Jednym z celów jest zminimalizowanie ilości pracy wymaganej do nawiązania połączenia z nieskojarzonymi usługami. Innym celem jest skrócenie czasu wymaganego do dokładnego udokumentowania usługi.
+Projekt Swagger został odstawiony do inicjatywy OpenAPI w 2015 i został już określony jako OpenAPI. Obie nazwy są używane zamiennie. Jednak "OpenAPI" odwołuje się do specyfikacji. "Swagger" oznacza rodzinę produktów typu open source i komercyjnych z interfejsu SmartBear Ready, która współpracuje ze specyfikacją OpenAPI. Kolejne produkty typu open source, takie jak [OpenAPIGenerator](https://github.com/OpenAPITools/openapi-generator), również należą do nazwy rodziny Swagger, mimo że nie zostały wydane przez interfejsu SmartBear Ready.
+
+Krótko mówiąc:
+
+* OpenAPI jest specyfikacją.
+* Struktura Swagger jest narzędziem korzystającym ze specyfikacji OpenAPI. Na przykład OpenAPIGenerator i SwaggerUI.
 
 ## <a name="openapi-specification-openapijson"></a>OpenAPI — Specyfikacja (openapi.json)
 
-Rdzeń do przepływu OpenAPI jest domyślnie specyfikacją &mdash; dokumentu o nazwie *openapi.jsna* . Jest on generowany przez łańcuch narzędzi OpenAPI (lub implementacje innych firm) na podstawie Twojej usługi. Opisuje możliwości interfejsu API i sposób uzyskiwania dostępu do niego przy użyciu protokołu HTTP. Służy on do tworzenia interfejsu użytkownika struktury Swagger i jest używany przez łańcuch narzędzi do włączania odnajdywania i generowania kodu klienta. Oto przykład specyfikacji OpenAPI, zredukowany dla zwięzłości:
+Specyfikacja OpenAPI jest dokumentem opisującym możliwości interfejsu API. Dokument jest oparty na adnotacjach XML i atrybutów w obrębie kontrolerów i modeli. Jest ona podstawową częścią przepływu OpenAPI i służy do kierowania narzędzi, takich jak SwaggerUI. Domyślnie jest on o nazwie *openapi.json* . Oto przykład specyfikacji OpenAPI, zredukowany dla zwięzłości:
 
 ```json
 {
@@ -137,7 +144,7 @@ Rdzeń do przepływu OpenAPI jest domyślnie specyfikacją &mdash; dokumentu o n
 
 ![Interfejs użytkownika struktury Swagger](web-api-help-pages-using-swagger/_static/swagger-ui.png)
 
-Każda publiczna Metoda działania w kontrolerach może być testowana z poziomu interfejsu użytkownika. Kliknij nazwę metody, aby rozwinąć sekcję. Dodaj wszelkie niezbędne parametry i kliknij przycisk **Wypróbuj!** .
+Każda publiczna Metoda działania w kontrolerach może być testowana z poziomu interfejsu użytkownika. Wybierz nazwę metody, aby rozwinąć sekcję. Dodaj wszelkie niezbędne parametry i wybierz pozycję **Wypróbuj!** .
 
 ![Przykład pobierania testów struktury Swagger](web-api-help-pages-using-swagger/_static/get-try-it-out.png)
 

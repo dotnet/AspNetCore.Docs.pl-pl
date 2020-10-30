@@ -1,117 +1,118 @@
 ---
-title: Narzędzia dla ASP.NET Core Blazor
+title: 'Narzędzia dla ASP.NET Core :::no-loc(Blazor):::'
 author: guardrex
-description: Dowiedz się więcej o narzędziach dostępnych do kompilowania Blazor aplikacji.
+description: 'Dowiedz się więcej o narzędziach dostępnych do kompilowania :::no-loc(Blazor)::: aplikacji.'
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 09/28/2020
 no-loc:
-- ASP.NET Core Identity
-- cookie
-- Cookie
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- ':::no-loc(appsettings.json):::'
+- ':::no-loc(ASP.NET Core Identity):::'
+- ':::no-loc(cookie):::'
+- ':::no-loc(Cookie):::'
+- ':::no-loc(Blazor):::'
+- ':::no-loc(Blazor Server):::'
+- ':::no-loc(Blazor WebAssembly):::'
+- ':::no-loc(Identity):::'
+- ":::no-loc(Let's Encrypt):::"
+- ':::no-loc(Razor):::'
+- ':::no-loc(SignalR):::'
 uid: blazor/tooling
 zone_pivot_groups: operating-systems
-ms.openlocfilehash: d1626fe753782d524bf75c398c11235c3110633a
-ms.sourcegitcommit: d7991068bc6b04063f4bd836fc5b9591d614d448
+ms.openlocfilehash: 500342ac979efdee824ac0d4b5757ca9804f3b30
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/06/2020
-ms.locfileid: "91762155"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93054817"
 ---
-# <a name="tooling-for-aspnet-core-no-locblazor"></a><span data-ttu-id="b3f6c-103">Narzędzia dla ASP.NET Core Blazor</span><span class="sxs-lookup"><span data-stu-id="b3f6c-103">Tooling for ASP.NET Core Blazor</span></span>
+# <a name="tooling-for-aspnet-core-no-locblazor"></a><span data-ttu-id="e4017-103">Narzędzia dla ASP.NET Core :::no-loc(Blazor):::</span><span class="sxs-lookup"><span data-stu-id="e4017-103">Tooling for ASP.NET Core :::no-loc(Blazor):::</span></span>
 
-<span data-ttu-id="b3f6c-104">Autorzy [Daniel Roth](https://github.com/danroth27) i [Luke Latham](https://github.com/guardrex)</span><span class="sxs-lookup"><span data-stu-id="b3f6c-104">By [Daniel Roth](https://github.com/danroth27) and [Luke Latham](https://github.com/guardrex)</span></span>
+<span data-ttu-id="e4017-104">Autorzy [Daniel Roth](https://github.com/danroth27) i [Luke Latham](https://github.com/guardrex)</span><span class="sxs-lookup"><span data-stu-id="e4017-104">By [Daniel Roth](https://github.com/danroth27) and [Luke Latham](https://github.com/guardrex)</span></span>
 
 ::: zone pivot="windows"
 
-1. <span data-ttu-id="b3f6c-105">Zainstaluj najnowszą wersję programu [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/) z **ASP.NET i programowaniem aplikacji sieci Web** .</span><span class="sxs-lookup"><span data-stu-id="b3f6c-105">Install the latest version of [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/) with the **ASP.NET and web development** workload.</span></span>
+1. <span data-ttu-id="e4017-105">Zainstaluj najnowszą wersję programu [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/) z **ASP.NET i programowaniem aplikacji sieci Web** .</span><span class="sxs-lookup"><span data-stu-id="e4017-105">Install the latest version of [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/) with the **ASP.NET and web development** workload.</span></span>
 
-1. <span data-ttu-id="b3f6c-106">Tworzenie nowego projektu.</span><span class="sxs-lookup"><span data-stu-id="b3f6c-106">Create a new project.</span></span>
+1. <span data-ttu-id="e4017-106">Tworzenie nowego projektu.</span><span class="sxs-lookup"><span data-stu-id="e4017-106">Create a new project.</span></span>
 
-1. <span data-ttu-id="b3f6c-107">Wybierz pozycję \*\* Blazor aplikacja\*\*.</span><span class="sxs-lookup"><span data-stu-id="b3f6c-107">Select **Blazor App**.</span></span> <span data-ttu-id="b3f6c-108">Wybierz opcję **Dalej**.</span><span class="sxs-lookup"><span data-stu-id="b3f6c-108">Select **Next**.</span></span>
+1. <span data-ttu-id="e4017-107">Wybierz pozycję **:::no-loc(Blazor)::: aplikacja** .</span><span class="sxs-lookup"><span data-stu-id="e4017-107">Select **:::no-loc(Blazor)::: App** .</span></span> <span data-ttu-id="e4017-108">Wybierz opcję **Dalej** .</span><span class="sxs-lookup"><span data-stu-id="e4017-108">Select **Next** .</span></span>
 
-1. <span data-ttu-id="b3f6c-109">Podaj nazwę projektu w polu **Nazwa projektu** lub zaakceptuj nazwę domyślną projektu.</span><span class="sxs-lookup"><span data-stu-id="b3f6c-109">Provide a project name in the **Project name** field or accept the default project name.</span></span> <span data-ttu-id="b3f6c-110">Potwierdź, że wpis **lokalizacji** jest poprawny lub podaj lokalizację dla projektu.</span><span class="sxs-lookup"><span data-stu-id="b3f6c-110">Confirm the **Location** entry is correct or provide a location for the project.</span></span> <span data-ttu-id="b3f6c-111">Wybierz pozycję **Utwórz**.</span><span class="sxs-lookup"><span data-stu-id="b3f6c-111">Select **Create**.</span></span>
+1. <span data-ttu-id="e4017-109">Podaj nazwę projektu w polu **Nazwa projektu** lub zaakceptuj nazwę domyślną projektu.</span><span class="sxs-lookup"><span data-stu-id="e4017-109">Provide a project name in the **Project name** field or accept the default project name.</span></span> <span data-ttu-id="e4017-110">Potwierdź, że wpis **lokalizacji** jest poprawny lub podaj lokalizację dla projektu.</span><span class="sxs-lookup"><span data-stu-id="e4017-110">Confirm the **Location** entry is correct or provide a location for the project.</span></span> <span data-ttu-id="e4017-111">Wybierz pozycję **Utwórz** .</span><span class="sxs-lookup"><span data-stu-id="e4017-111">Select **Create** .</span></span>
 
-1. <span data-ttu-id="b3f6c-112">Aby zapoznać się z Blazor WebAssembly doświadczeniem, wybierz szablon \*\* Blazor WebAssembly aplikacji\*\* .</span><span class="sxs-lookup"><span data-stu-id="b3f6c-112">For a Blazor WebAssembly experience, choose the **Blazor WebAssembly App** template.</span></span> <span data-ttu-id="b3f6c-113">Aby zapoznać się z Blazor Server doświadczeniem, wybierz szablon \*\* Blazor Server aplikacji\*\* .</span><span class="sxs-lookup"><span data-stu-id="b3f6c-113">For a Blazor Server experience, choose the **Blazor Server App** template.</span></span> <span data-ttu-id="b3f6c-114">Wybierz pozycję **Utwórz**.</span><span class="sxs-lookup"><span data-stu-id="b3f6c-114">Select **Create**.</span></span>
+1. <span data-ttu-id="e4017-112">Aby zapoznać się z :::no-loc(Blazor WebAssembly)::: doświadczeniem, wybierz szablon **:::no-loc(Blazor WebAssembly)::: aplikacji** .</span><span class="sxs-lookup"><span data-stu-id="e4017-112">For a :::no-loc(Blazor WebAssembly)::: experience, choose the **:::no-loc(Blazor WebAssembly)::: App** template.</span></span> <span data-ttu-id="e4017-113">Aby zapoznać się z :::no-loc(Blazor Server)::: doświadczeniem, wybierz szablon **:::no-loc(Blazor Server)::: aplikacji** .</span><span class="sxs-lookup"><span data-stu-id="e4017-113">For a :::no-loc(Blazor Server)::: experience, choose the **:::no-loc(Blazor Server)::: App** template.</span></span> <span data-ttu-id="e4017-114">Wybierz pozycję **Utwórz** .</span><span class="sxs-lookup"><span data-stu-id="e4017-114">Select **Create** .</span></span>
 
-   <span data-ttu-id="b3f6c-115">Aby uzyskać informacje na temat dwóch Blazor modeli hostingu *Blazor WebAssembly* i *Blazor Server* , zobacz <xref:blazor/hosting-models> .</span><span class="sxs-lookup"><span data-stu-id="b3f6c-115">For information on the two Blazor hosting models, *Blazor WebAssembly* and *Blazor Server*, see <xref:blazor/hosting-models>.</span></span>
+   <span data-ttu-id="e4017-115">Aby uzyskać informacje na temat dwóch :::no-loc(Blazor)::: modeli hostingu *:::no-loc(Blazor WebAssembly):::* i *:::no-loc(Blazor Server):::* , zobacz <xref:blazor/hosting-models> .</span><span class="sxs-lookup"><span data-stu-id="e4017-115">For information on the two :::no-loc(Blazor)::: hosting models, *:::no-loc(Blazor WebAssembly):::* and *:::no-loc(Blazor Server):::* , see <xref:blazor/hosting-models>.</span></span>
 
-1. <span data-ttu-id="b3f6c-116">Naciśnij klawisz <kbd>Ctrl</kbd> + <kbd>F5</kbd> , aby uruchomić aplikację.</span><span class="sxs-lookup"><span data-stu-id="b3f6c-116">Press <kbd>Ctrl</kbd>+<kbd>F5</kbd> to run the app.</span></span>
+1. <span data-ttu-id="e4017-116">Naciśnij klawisz <kbd>Ctrl</kbd> + <kbd>F5</kbd> , aby uruchomić aplikację.</span><span class="sxs-lookup"><span data-stu-id="e4017-116">Press <kbd>Ctrl</kbd>+<kbd>F5</kbd> to run the app.</span></span>
 
-<span data-ttu-id="b3f6c-117">Aby uzyskać więcej informacji na temat ufania certyfikatowi Deweloperskiemu protokołu HTTPS ASP.NET Core, zobacz <xref:security/enforcing-ssl#trust-the-aspnet-core-https-development-certificate-on-windows-and-macos> .</span><span class="sxs-lookup"><span data-stu-id="b3f6c-117">For more information on trusting the ASP.NET Core HTTPS development certificate, see <xref:security/enforcing-ssl#trust-the-aspnet-core-https-development-certificate-on-windows-and-macos>.</span></span>
+<span data-ttu-id="e4017-117">Aby uzyskać więcej informacji na temat ufania certyfikatowi Deweloperskiemu protokołu HTTPS ASP.NET Core, zobacz <xref:security/enforcing-ssl#trust-the-aspnet-core-https-development-certificate-on-windows-and-macos> .</span><span class="sxs-lookup"><span data-stu-id="e4017-117">For more information on trusting the ASP.NET Core HTTPS development certificate, see <xref:security/enforcing-ssl#trust-the-aspnet-core-https-development-certificate-on-windows-and-macos>.</span></span>
 
 ::: zone-end
 
 ::: zone pivot="linux"
 
-1. <span data-ttu-id="b3f6c-118">Zainstaluj najnowszą wersję [zestaw .NET Core SDK](https://dotnet.microsoft.com/download).</span><span class="sxs-lookup"><span data-stu-id="b3f6c-118">Install the latest version of the [.NET Core SDK](https://dotnet.microsoft.com/download).</span></span> <span data-ttu-id="b3f6c-119">Jeśli wcześniej zainstalowano zestaw SDK, możesz określić zainstalowaną wersję, wykonując następujące polecenie w powłoce poleceń:</span><span class="sxs-lookup"><span data-stu-id="b3f6c-119">If you previously installed the SDK, you can determine your installed version by executing the following command in a command shell:</span></span>
+1. <span data-ttu-id="e4017-118">Zainstaluj najnowszą wersję [zestaw .NET Core SDK](https://dotnet.microsoft.com/download).</span><span class="sxs-lookup"><span data-stu-id="e4017-118">Install the latest version of the [.NET Core SDK](https://dotnet.microsoft.com/download).</span></span> <span data-ttu-id="e4017-119">Jeśli wcześniej zainstalowano zestaw SDK, możesz określić zainstalowaną wersję, wykonując następujące polecenie w powłoce poleceń:</span><span class="sxs-lookup"><span data-stu-id="e4017-119">If you previously installed the SDK, you can determine your installed version by executing the following command in a command shell:</span></span>
 
    ```dotnetcli
    dotnet --version
    ```
 
-1. <span data-ttu-id="b3f6c-120">Zainstaluj najnowszą wersję programu [Visual Studio Code](https://code.visualstudio.com).</span><span class="sxs-lookup"><span data-stu-id="b3f6c-120">Install the latest version of [Visual Studio Code](https://code.visualstudio.com).</span></span>
+1. <span data-ttu-id="e4017-120">Zainstaluj najnowszą wersję programu [Visual Studio Code](https://code.visualstudio.com).</span><span class="sxs-lookup"><span data-stu-id="e4017-120">Install the latest version of [Visual Studio Code](https://code.visualstudio.com).</span></span>
 
-1. <span data-ttu-id="b3f6c-121">Zainstaluj najnowszą wersję [języka C# dla rozszerzenia Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp).</span><span class="sxs-lookup"><span data-stu-id="b3f6c-121">Install the latest [C# for Visual Studio Code extension](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp).</span></span>
+1. <span data-ttu-id="e4017-121">Zainstaluj najnowszą wersję [języka C# dla rozszerzenia Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp).</span><span class="sxs-lookup"><span data-stu-id="e4017-121">Install the latest [C# for Visual Studio Code extension](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp).</span></span>
 
-1. <span data-ttu-id="b3f6c-122">Aby uzyskać Blazor WebAssembly środowisko, wykonaj następujące polecenie w powłoce poleceń:</span><span class="sxs-lookup"><span data-stu-id="b3f6c-122">For a Blazor WebAssembly experience, execute the following command in a command shell:</span></span>
+1. <span data-ttu-id="e4017-122">Aby uzyskać :::no-loc(Blazor WebAssembly)::: środowisko, wykonaj następujące polecenie w powłoce poleceń:</span><span class="sxs-lookup"><span data-stu-id="e4017-122">For a :::no-loc(Blazor WebAssembly)::: experience, execute the following command in a command shell:</span></span>
 
    ```dotnetcli
    dotnet new blazorwasm -o WebApplication1
    ```
 
-   <span data-ttu-id="b3f6c-123">Aby uzyskać Blazor Server środowisko, wykonaj następujące polecenie w powłoce poleceń:</span><span class="sxs-lookup"><span data-stu-id="b3f6c-123">For a Blazor Server experience, execute the following command in a command shell:</span></span>
+   <span data-ttu-id="e4017-123">Aby uzyskać :::no-loc(Blazor Server)::: środowisko, wykonaj następujące polecenie w powłoce poleceń:</span><span class="sxs-lookup"><span data-stu-id="e4017-123">For a :::no-loc(Blazor Server)::: experience, execute the following command in a command shell:</span></span>
 
    ```dotnetcli
    dotnet new blazorserver -o WebApplication1
    ```
 
-   <span data-ttu-id="b3f6c-124">Aby uzyskać informacje na temat dwóch Blazor modeli hostingu *Blazor WebAssembly* i *Blazor Server* , zobacz <xref:blazor/hosting-models> .</span><span class="sxs-lookup"><span data-stu-id="b3f6c-124">For information on the two Blazor hosting models, *Blazor WebAssembly* and *Blazor Server*, see <xref:blazor/hosting-models>.</span></span>
+   <span data-ttu-id="e4017-124">Aby uzyskać informacje na temat dwóch :::no-loc(Blazor)::: modeli hostingu *:::no-loc(Blazor WebAssembly):::* i *:::no-loc(Blazor Server):::* , zobacz <xref:blazor/hosting-models> .</span><span class="sxs-lookup"><span data-stu-id="e4017-124">For information on the two :::no-loc(Blazor)::: hosting models, *:::no-loc(Blazor WebAssembly):::* and *:::no-loc(Blazor Server):::* , see <xref:blazor/hosting-models>.</span></span>
 
-1. <span data-ttu-id="b3f6c-125">Otwórz `WebApplication1` folder w Visual Studio Code.</span><span class="sxs-lookup"><span data-stu-id="b3f6c-125">Open the `WebApplication1` folder in Visual Studio Code.</span></span>
+1. <span data-ttu-id="e4017-125">Otwórz `WebApplication1` folder w Visual Studio Code.</span><span class="sxs-lookup"><span data-stu-id="e4017-125">Open the `WebApplication1` folder in Visual Studio Code.</span></span>
 
-1. <span data-ttu-id="b3f6c-126">Żądania IDE służące do dodawania zasobów do kompilowania i debugowania projektu.</span><span class="sxs-lookup"><span data-stu-id="b3f6c-126">The IDE requests that you add assets to build and debug the project.</span></span> <span data-ttu-id="b3f6c-127">Wybierz pozycję **Tak**.</span><span class="sxs-lookup"><span data-stu-id="b3f6c-127">Select **Yes**.</span></span>
+1. <span data-ttu-id="e4017-126">Żądania IDE służące do dodawania zasobów do kompilowania i debugowania projektu.</span><span class="sxs-lookup"><span data-stu-id="e4017-126">The IDE requests that you add assets to build and debug the project.</span></span> <span data-ttu-id="e4017-127">Wybierz pozycję **Tak** .</span><span class="sxs-lookup"><span data-stu-id="e4017-127">Select **Yes** .</span></span>
 
-1. <span data-ttu-id="b3f6c-128">Naciśnij klawisz <kbd>Ctrl</kbd> + <kbd>F5</kbd> , aby uruchomić aplikację.</span><span class="sxs-lookup"><span data-stu-id="b3f6c-128">Press <kbd>Ctrl</kbd>+<kbd>F5</kbd> to run the app.</span></span>
+1. <span data-ttu-id="e4017-128">Naciśnij klawisz <kbd>Ctrl</kbd> + <kbd>F5</kbd> , aby uruchomić aplikację.</span><span class="sxs-lookup"><span data-stu-id="e4017-128">Press <kbd>Ctrl</kbd>+<kbd>F5</kbd> to run the app.</span></span>
 
-## <a name="trust-a-development-certificate"></a><span data-ttu-id="b3f6c-129">Ufanie certyfikatowi Deweloperskiemu</span><span class="sxs-lookup"><span data-stu-id="b3f6c-129">Trust a development certificate</span></span>
+## <a name="trust-a-development-certificate"></a><span data-ttu-id="e4017-129">Ufanie certyfikatowi Deweloperskiemu</span><span class="sxs-lookup"><span data-stu-id="e4017-129">Trust a development certificate</span></span>
 
-<span data-ttu-id="b3f6c-130">Nie istnieje scentralizowany sposób zaufania certyfikatu w systemie Linux.</span><span class="sxs-lookup"><span data-stu-id="b3f6c-130">There's no centralized way to trust a certificate on Linux.</span></span> <span data-ttu-id="b3f6c-131">Zazwyczaj przyjmuje się jedną z następujących metod:</span><span class="sxs-lookup"><span data-stu-id="b3f6c-131">Typically, one of the following approaches is adopted:</span></span>
+<span data-ttu-id="e4017-130">Nie istnieje scentralizowany sposób zaufania certyfikatu w systemie Linux.</span><span class="sxs-lookup"><span data-stu-id="e4017-130">There's no centralized way to trust a certificate on Linux.</span></span> <span data-ttu-id="e4017-131">Zazwyczaj przyjmuje się jedną z następujących metod:</span><span class="sxs-lookup"><span data-stu-id="e4017-131">Typically, one of the following approaches is adopted:</span></span>
 
-* <span data-ttu-id="b3f6c-132">Wyklucz adres URL aplikacji na liście wykluczeń przeglądarki.</span><span class="sxs-lookup"><span data-stu-id="b3f6c-132">Exclude the app's URL in browser's exclude list.</span></span>
-* <span data-ttu-id="b3f6c-133">Ufaj wszystkim certyfikatom z podpisem własnym dla programu `localhost` .</span><span class="sxs-lookup"><span data-stu-id="b3f6c-133">Trust all self-signed certificates for `localhost`.</span></span>
-* <span data-ttu-id="b3f6c-134">Dodaj certyfikat do listy zaufanych certyfikatów w przeglądarce.</span><span class="sxs-lookup"><span data-stu-id="b3f6c-134">Add the certificate to the list of trusted certificates in the browser.</span></span>
+* <span data-ttu-id="e4017-132">Wyklucz adres URL aplikacji na liście wykluczeń przeglądarki.</span><span class="sxs-lookup"><span data-stu-id="e4017-132">Exclude the app's URL in browser's exclude list.</span></span>
+* <span data-ttu-id="e4017-133">Ufaj wszystkim certyfikatom z podpisem własnym dla programu `localhost` .</span><span class="sxs-lookup"><span data-stu-id="e4017-133">Trust all self-signed certificates for `localhost`.</span></span>
+* <span data-ttu-id="e4017-134">Dodaj certyfikat do listy zaufanych certyfikatów w przeglądarce.</span><span class="sxs-lookup"><span data-stu-id="e4017-134">Add the certificate to the list of trusted certificates in the browser.</span></span>
 
-<span data-ttu-id="b3f6c-135">Aby uzyskać więcej informacji, zobacz wskazówki dostarczone przez producenta przeglądarki i dystrybucję systemu Linux.</span><span class="sxs-lookup"><span data-stu-id="b3f6c-135">For more information, see the guidance provided by your browser manufacturer and Linux distribution.</span></span>
+<span data-ttu-id="e4017-135">Aby uzyskać więcej informacji, zobacz wskazówki dostarczone przez producenta przeglądarki i dystrybucję systemu Linux.</span><span class="sxs-lookup"><span data-stu-id="e4017-135">For more information, see the guidance provided by your browser manufacturer and Linux distribution.</span></span>
 
 ::: zone-end
 
 ::: zone pivot="macos"
 
-1. <span data-ttu-id="b3f6c-136">Zainstaluj [Visual Studio dla komputerów Mac](https://visualstudio.microsoft.com/vs/mac/).</span><span class="sxs-lookup"><span data-stu-id="b3f6c-136">Install [Visual Studio for Mac](https://visualstudio.microsoft.com/vs/mac/).</span></span>
+1. <span data-ttu-id="e4017-136">Zainstaluj [Visual Studio dla komputerów Mac](https://visualstudio.microsoft.com/vs/mac/).</span><span class="sxs-lookup"><span data-stu-id="e4017-136">Install [Visual Studio for Mac](https://visualstudio.microsoft.com/vs/mac/).</span></span>
 
-1. <span data-ttu-id="b3f6c-137">Wybierz pozycję **plik**  >  **nowe rozwiązanie** lub Utwórz **Nowy** projekt z **okna uruchamiania**.</span><span class="sxs-lookup"><span data-stu-id="b3f6c-137">Select **File** > **New Solution** or create a **New** project from the **Start Window**.</span></span>
+1. <span data-ttu-id="e4017-137">Wybierz pozycję **plik**  >  **nowe rozwiązanie** lub Utwórz **Nowy** projekt z **okna uruchamiania** .</span><span class="sxs-lookup"><span data-stu-id="e4017-137">Select **File** > **New Solution** or create a **New** project from the **Start Window** .</span></span>
 
-1. <span data-ttu-id="b3f6c-138">Na pasku bocznym wybierz pozycję Aplikacja **sieci Web i konsola**  >  **App**.</span><span class="sxs-lookup"><span data-stu-id="b3f6c-138">In the sidebar, select **Web and Console** > **App**.</span></span>
+1. <span data-ttu-id="e4017-138">Na pasku bocznym wybierz pozycję Aplikacja **sieci Web i konsola**  >  **App** .</span><span class="sxs-lookup"><span data-stu-id="e4017-138">In the sidebar, select **Web and Console** > **App** .</span></span>
 
-   <span data-ttu-id="b3f6c-139">Aby zapoznać się z Blazor WebAssembly doświadczeniem, wybierz szablon \*\* Blazor WebAssembly aplikacji\*\* .</span><span class="sxs-lookup"><span data-stu-id="b3f6c-139">For a Blazor WebAssembly experience, choose the **Blazor WebAssembly App** template.</span></span> <span data-ttu-id="b3f6c-140">Aby zapoznać się z Blazor Server doświadczeniem, wybierz szablon \*\* Blazor Server aplikacji\*\* .</span><span class="sxs-lookup"><span data-stu-id="b3f6c-140">For a Blazor Server experience, choose the **Blazor Server App** template.</span></span> <span data-ttu-id="b3f6c-141">Wybierz opcję **Dalej**.</span><span class="sxs-lookup"><span data-stu-id="b3f6c-141">Select **Next**.</span></span>
+   <span data-ttu-id="e4017-139">Aby zapoznać się z :::no-loc(Blazor WebAssembly)::: doświadczeniem, wybierz szablon **:::no-loc(Blazor WebAssembly)::: aplikacji** .</span><span class="sxs-lookup"><span data-stu-id="e4017-139">For a :::no-loc(Blazor WebAssembly)::: experience, choose the **:::no-loc(Blazor WebAssembly)::: App** template.</span></span> <span data-ttu-id="e4017-140">Aby zapoznać się z :::no-loc(Blazor Server)::: doświadczeniem, wybierz szablon **:::no-loc(Blazor Server)::: aplikacji** .</span><span class="sxs-lookup"><span data-stu-id="e4017-140">For a :::no-loc(Blazor Server)::: experience, choose the **:::no-loc(Blazor Server)::: App** template.</span></span> <span data-ttu-id="e4017-141">Wybierz opcję **Dalej** .</span><span class="sxs-lookup"><span data-stu-id="e4017-141">Select **Next** .</span></span>
 
-   <span data-ttu-id="b3f6c-142">Aby uzyskać informacje na temat dwóch Blazor modeli hostingu *Blazor WebAssembly* i *Blazor Server* , zobacz <xref:blazor/hosting-models> .</span><span class="sxs-lookup"><span data-stu-id="b3f6c-142">For information on the two Blazor hosting models, *Blazor WebAssembly* and *Blazor Server*, see <xref:blazor/hosting-models>.</span></span>
+   <span data-ttu-id="e4017-142">Aby uzyskać informacje na temat dwóch :::no-loc(Blazor)::: modeli hostingu *:::no-loc(Blazor WebAssembly):::* i *:::no-loc(Blazor Server):::* , zobacz <xref:blazor/hosting-models> .</span><span class="sxs-lookup"><span data-stu-id="e4017-142">For information on the two :::no-loc(Blazor)::: hosting models, *:::no-loc(Blazor WebAssembly):::* and *:::no-loc(Blazor Server):::* , see <xref:blazor/hosting-models>.</span></span>
 
-1. <span data-ttu-id="b3f6c-143">Upewnij się, że **uwierzytelnianie** jest ustawione na wartość **bez uwierzytelniania**.</span><span class="sxs-lookup"><span data-stu-id="b3f6c-143">Confirm that **Authentication** is set to **No Authentication**.</span></span> <span data-ttu-id="b3f6c-144">Wybierz opcję **Dalej**.</span><span class="sxs-lookup"><span data-stu-id="b3f6c-144">Select **Next**.</span></span>
+1. <span data-ttu-id="e4017-143">Upewnij się, że **uwierzytelnianie** jest ustawione na wartość **bez uwierzytelniania** .</span><span class="sxs-lookup"><span data-stu-id="e4017-143">Confirm that **Authentication** is set to **No Authentication** .</span></span> <span data-ttu-id="e4017-144">Wybierz opcję **Dalej** .</span><span class="sxs-lookup"><span data-stu-id="e4017-144">Select **Next** .</span></span>
 
-1. <span data-ttu-id="b3f6c-145">W polu **Nazwa projektu** Nadaj nazwę aplikacji `WebApplication1` .</span><span class="sxs-lookup"><span data-stu-id="b3f6c-145">In the **Project Name** field, name the app `WebApplication1`.</span></span> <span data-ttu-id="b3f6c-146">Wybierz pozycję **Utwórz**.</span><span class="sxs-lookup"><span data-stu-id="b3f6c-146">Select **Create**.</span></span>
+1. <span data-ttu-id="e4017-145">W polu **Nazwa projektu** Nadaj nazwę aplikacji `WebApplication1` .</span><span class="sxs-lookup"><span data-stu-id="e4017-145">In the **Project Name** field, name the app `WebApplication1`.</span></span> <span data-ttu-id="e4017-146">Wybierz pozycję **Utwórz** .</span><span class="sxs-lookup"><span data-stu-id="e4017-146">Select **Create** .</span></span>
 
-1. <span data-ttu-id="b3f6c-147">Wybierz pozycję **Uruchom**  >  **Uruchom bez debugowania** , aby uruchomić aplikację *bez debugera*.</span><span class="sxs-lookup"><span data-stu-id="b3f6c-147">Select **Run** > **Start Without Debugging** to run the app *without the debugger*.</span></span> <span data-ttu-id="b3f6c-148">Uruchom **aplikację z**  >  przyciskiem Uruchom**debugowanie** lub Uruchom (&#9654;), aby uruchomić aplikację *z debugerem*.</span><span class="sxs-lookup"><span data-stu-id="b3f6c-148">Run the app with **Run** > **Start Debugging** or the Run (&#9654;) button to run the app *with the debugger*.</span></span>
+1. <span data-ttu-id="e4017-147">Wybierz pozycję **Uruchom**  >  **Uruchom bez debugowania** , aby uruchomić aplikację *bez debugera* .</span><span class="sxs-lookup"><span data-stu-id="e4017-147">Select **Run** > **Start Without Debugging** to run the app *without the debugger* .</span></span> <span data-ttu-id="e4017-148">Uruchom **aplikację z**  >  przyciskiem Uruchom **debugowanie** lub Uruchom (&#9654;), aby uruchomić aplikację *z debugerem* .</span><span class="sxs-lookup"><span data-stu-id="e4017-148">Run the app with **Run** > **Start Debugging** or the Run (&#9654;) button to run the app *with the debugger* .</span></span>
 
-<span data-ttu-id="b3f6c-149">Jeśli zostanie wyświetlony monit o zaufać certyfikatowi Deweloperskiemu, zaufaj certyfikatowi i Kontynuuj.</span><span class="sxs-lookup"><span data-stu-id="b3f6c-149">If a prompt appears to trust the development certificate, trust the certificate and continue.</span></span> <span data-ttu-id="b3f6c-150">Hasła użytkownika i pęku kluczy są wymagane do zaufania certyfikatu.</span><span class="sxs-lookup"><span data-stu-id="b3f6c-150">The user and keychain passwords are required to trust the certificate.</span></span> <span data-ttu-id="b3f6c-151">Aby uzyskać więcej informacji na temat ufania certyfikatowi Deweloperskiemu protokołu HTTPS ASP.NET Core, zobacz <xref:security/enforcing-ssl#trust-the-aspnet-core-https-development-certificate-on-windows-and-macos> .</span><span class="sxs-lookup"><span data-stu-id="b3f6c-151">For more information on trusting the ASP.NET Core HTTPS development certificate, see <xref:security/enforcing-ssl#trust-the-aspnet-core-https-development-certificate-on-windows-and-macos>.</span></span>
+<span data-ttu-id="e4017-149">Jeśli zostanie wyświetlony monit o zaufać certyfikatowi Deweloperskiemu, zaufaj certyfikatowi i Kontynuuj.</span><span class="sxs-lookup"><span data-stu-id="e4017-149">If a prompt appears to trust the development certificate, trust the certificate and continue.</span></span> <span data-ttu-id="e4017-150">Hasła użytkownika i pęku kluczy są wymagane do zaufania certyfikatu.</span><span class="sxs-lookup"><span data-stu-id="e4017-150">The user and keychain passwords are required to trust the certificate.</span></span> <span data-ttu-id="e4017-151">Aby uzyskać więcej informacji na temat ufania certyfikatowi Deweloperskiemu protokołu HTTPS ASP.NET Core, zobacz <xref:security/enforcing-ssl#trust-the-aspnet-core-https-development-certificate-on-windows-and-macos> .</span><span class="sxs-lookup"><span data-stu-id="e4017-151">For more information on trusting the ASP.NET Core HTTPS development certificate, see <xref:security/enforcing-ssl#trust-the-aspnet-core-https-development-certificate-on-windows-and-macos>.</span></span>
 
 ::: zone-end

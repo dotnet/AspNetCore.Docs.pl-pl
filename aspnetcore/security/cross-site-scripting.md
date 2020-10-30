@@ -5,6 +5,7 @@ description: Więcej informacji na temat skryptów między lokacjami (XSS) i tec
 ms.author: riande
 ms.date: 10/02/2018
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/cross-site-scripting
-ms.openlocfilehash: 38e9e102e9ac18ec14bceebf391c11a434492ac9
-ms.sourcegitcommit: 6ecdc481d5b9a10d2c6e091217f017b36bdba957
+ms.openlocfilehash: 1c90a786efe8c3c205a729a2da9d3a99d0222012
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/15/2020
-ms.locfileid: "90456065"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053088"
 ---
 # <a name="prevent-cross-site-scripting-xss-in-aspnet-core"></a>Zapobiegaj skryptom między lokacjami (XSS) w ASP.NET Core
 
@@ -68,7 +69,7 @@ Ten widok wyprowadza zawartość zmiennej *untrustedInput* . Ta zmienna zawiera 
 
 ## <a name="javascript-encoding-using-no-locrazor"></a>Kodowanie JavaScript przy użyciu Razor
 
-Czasami może się okazać, że chcesz wstawić wartość do języka JavaScript, aby przetworzyć ją w widoku. Istnieją dwa sposoby, aby to zrobić. Najbezpieczniejszym sposobem wstawiania wartości jest umieszczenie wartości w atrybucie danych tagu i pobranie go w języku JavaScript. Na przykład:
+Czasami może się okazać, że chcesz wstawić wartość do języka JavaScript, aby przetworzyć ją w widoku. Istnieją dwa sposoby, aby to zrobić. Najbezpieczniejszym sposobem wstawiania wartości jest umieszczenie wartości w atrybucie danych tagu i pobranie go w języku JavaScript. Przykład:
 
 ```cshtml
 @{
@@ -161,10 +162,9 @@ Poprzedni kod generuje następujące dane wyjściowe:
 ```
 
 >[!WARNING]
-> ***Nie*** łącz niezaufanych danych wejściowych w języku JavaScript, aby tworzyć elementy dom lub korzystać `document.write()` z dynamicznie generowanej zawartości.
+> Do * **nie** można łączyć niezaufanych danych wejściowych w języku JavaScript w celu tworzenia elementów dom lub korzystania `document.write()` z dynamicznie generowanej zawartości.
 >
-> Użyj jednego z następujących metod, aby zapobiec ujawnieniu kodu w oparciu o ataki oparte na modelu DOM:
-> * `createElement()` i przypisz wartości właściwości z odpowiednimi metodami lub właściwościami, takimi jak `node.textContent=` lub węzłem. InnerText = ".
+> Użyj jednego z poniższych metod, aby zapobiec ujawnieniu kodu w oparciu o dane z modelu DOM: _ `createElement()` i przypisz wartości właściwości z odpowiednimi metodami lub właściwościami, takimi jak `node.textContent=` lub węzłem. InnerText = ".
 > * `document.CreateTextNode()` i Dołącz je do odpowiedniej lokalizacji DOM.
 > * `element.SetAttribute()`
 > * `element[attribute]=`
@@ -173,7 +173,7 @@ Poprzedni kod generuje następujące dane wyjściowe:
 
 Kodery HTML, JavaScript i URL są dostępne dla kodu na dwa sposoby, można je wstrzyknąć za pośrednictwem [iniekcji zależności](xref:fundamentals/dependency-injection) lub użyć domyślnych koderów zawartych w `System.Text.Encodings.Web` przestrzeni nazw. Jeśli używasz koderów domyślnych, wszystkie zastosowane do zakresów znaków, które mają być traktowane jako bezpieczne, nie zaczną obowiązywać — domyślne kodery będą używać najbezpieczniejszych reguł kodowania.
 
-Aby użyć konfigurowalnych koderów za pośrednictwem narzędzi, konstruktory powinny przyjmować parametr *HtmlEncode*, *JavaScriptEncoder* i *UrlEncoder* , zgodnie z potrzebami. Na przykład:
+Aby użyć konfigurowalnych koderów za pośrednictwem narzędzi, konstruktory powinny przyjmować parametr *HtmlEncode* , *JavaScriptEncoder* i *UrlEncoder* , zgodnie z potrzebami. Na przykład:
 
 ```csharp
 public class HomeController : Controller
@@ -195,7 +195,7 @@ public class HomeController : Controller
 
 ## <a name="encoding-url-parameters"></a>Parametry kodowania adresu URL
 
-Jeśli chcesz skompilować ciąg zapytania URL z niezaufanymi danymi wejściowymi jako wartość, użyj `UrlEncoder` do kodowania wartości. Na przykład
+Jeśli chcesz skompilować ciąg zapytania URL z niezaufanymi danymi wejściowymi jako wartość, użyj `UrlEncoder` do kodowania wartości. Przykład:
 
 ```csharp
 var example = "\"Quoted Value with spaces and &\"";

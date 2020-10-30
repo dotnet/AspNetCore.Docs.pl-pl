@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/13/2018
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/new-field
-ms.openlocfilehash: 2a80a9c4848703802b15348a30f2564f9580a24b
-ms.sourcegitcommit: ecae2aa432628b9181d1fa11037c231c7dd56c9e
+ms.openlocfilehash: d2b3b22a94e3119712e331565cc74ffa60ada726
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/16/2020
-ms.locfileid: "92113884"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93050709"
 ---
 # <a name="part-8-add-a-new-field-to-an-aspnet-core-mvc-app"></a>Część 8 Dodaj nowe pole do aplikacji ASP.NET Core MVC
 
@@ -40,13 +41,13 @@ Gdy Code First EF jest używany do automatycznego tworzenia bazy danych, Code Fi
 
 ## <a name="add-a-rating-property-to-the-movie-model"></a>Dodawanie właściwości oceny do modelu filmu
 
-Dodaj `Rating` Właściwość do *modeli/filmów. cs*:
+Dodaj `Rating` Właściwość do *modeli/filmów. cs* :
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Models/MovieDateRating.cs?highlight=13&name=snippet)]
 
 Tworzenie aplikacji
 
-### <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+### <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
  Ctrl+Shift+B
 
@@ -62,7 +63,7 @@ Polecenie ⌘ + B
 
 ------
 
-Ponieważ dodano nowe pole do `Movie` klasy, należy zaktualizować listę powiązań właściwości, aby ta nowa właściwość została uwzględniona. W programie *MoviesController.cs*zaktualizuj `[Bind]` atrybut dla obu `Create` metod i, `Edit` Aby uwzględnić `Rating` Właściwość:
+Ponieważ dodano nowe pole do `Movie` klasy, należy zaktualizować listę powiązań właściwości, aby ta nowa właściwość została uwzględniona. W programie *MoviesController.cs* zaktualizuj `[Bind]` atrybut dla obu `Create` metod i, `Edit` Aby uwzględnić `Rating` Właściwość:
 
 ```csharp
 [Bind("Id,Title,ReleaseDate,Genre,Price,Rating")]
@@ -110,9 +111,9 @@ Istnieje kilka metod rozpoznawania błędu:
 
 W tym samouczku zostanie użyta Migracje Code First.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-W menu **Narzędzia** wybierz kolejno pozycje **menedżer pakietów NuGet > konsola Menedżera pakietów**.
+W menu **Narzędzia** wybierz kolejno pozycje **menedżer pakietów NuGet > konsola Menedżera pakietów** .
 
   ![Menu PMC](adding-model/_static/pmc.png)
 

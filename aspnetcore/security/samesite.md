@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/03/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - SignalR
 - Electron
 uid: security/samesite
-ms.openlocfilehash: 3ba033b4165b19131d11311e5ae9d64e6afe48ca
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: 6f826416e3045df32abf41e94e667120e71ae717
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865433"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051619"
 ---
 # <a name="work-with-samesite-no-loccookies-in-aspnet-core"></a>Pracuj z SameSite cookie s w ASP.NET Core
 
@@ -100,7 +101,7 @@ Domyślna wartość SameSite dla uwierzytelniania formularzy i stanu sesji cooki
 
 Wszystkie składniki ASP.NET Core, które emitują cookie elementy s, zastępują poprzednie wartości domyślne przy użyciu ustawień odpowiednich dla ich scenariuszy. Zastąpione poprzednie wartości domyślne nie zostały zmienione.
 
-| Składnik | cookie | Domyślny |
+| Składnik | cookie | Domyślne |
 | ------------- | ------------- |
 | <xref:Microsoft.AspNetCore.Http.CookieBuilder> | <xref:Microsoft.AspNetCore.Http.CookieBuilder.SameSite> | `Unspecified` |
 | <xref:Microsoft.AspNetCore.Http.HttpContext.Session>  | [SessionOptions.Cookie](xref:Microsoft.AspNetCore.Builder.SessionOptions.Cookie) |`Lax` |
@@ -157,7 +158,7 @@ Obsługa SameSite została najpierw zaimplementowana w ASP.NET Core w 2,0 przy u
 
 ## <a name="supporting-older-browsers"></a>Obsługa starszych przeglądarek
 
-Standard 2016 SameSite, że nieznane wartości muszą być traktowane jako `SameSite=Strict` wartości. Aplikacje dostępne ze starszych przeglądarek, które obsługują Standard 2016 SameSite, mogą ulec przerwie, gdy pobierają Właściwość SameSite o wartości `None` . Aplikacje sieci Web muszą implementować wykrywanie przeglądarki, jeśli chcą obsługiwać starsze przeglądarki. ASP.NET Core nie implementuje wykrywania przeglądarki, ponieważ wartości agentów użytkownika są bardzo nietrwałe i często zmieniają się. Punkt rozszerzenia w programie <xref:Microsoft.AspNetCore.CookiePolicy> umożliwia podłączanie w ramach logiki specyficznej dla agenta użytkownika.
+Standard 2016 SameSite, że nieznane wartości muszą być traktowane jako `SameSite=Strict` wartości. Aplikacje dostępne ze starszych przeglądarek, które obsługują Standard 2016 SameSite, mogą ulec przerwie, gdy pobierają Właściwość SameSite o wartości `None` . Aplikacje sieci Web muszą implementować wykrywanie przeglądarki, jeśli chcą obsługiwać starsze przeglądarki. ASP.NET Core nie implementuje wykrywania przeglądarki, ponieważ wartości User-Agents są bardzo trwałe i często zmieniają się. Punkt rozszerzenia w programie <xref:Microsoft.AspNetCore.CookiePolicy> umożliwia podłączanie w User-Agent określonej logiki.
 
 W programie `Startup.Configure` Dodaj kod, który wywołuje <xref:Microsoft.AspNetCore.Builder.CookiePolicyAppBuilderExtensions.UseCookiePolicy*> przed wywołaniem <xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*> metody lub *dowolną* metodę, która zapisuje cookie :
 
@@ -201,7 +202,7 @@ Przetestuj aplikacje sieci Web przy użyciu wersji klienta, która może być zg
 
 ### <a name="test-with-chrome"></a>Testowanie za pomocą przeglądarki Chrome
 
-Chrome 78 + daje mylące wyniki, ponieważ ma tymczasowe środki zaradcze. Program Chrome 78 + tymczasowe środki zaradcze dopuszczają cookie niedawne dwa minuty. Program Chrome 76 lub 77 z włączonymi odpowiednimi flagami testu zapewnia dokładniejsze wyniki. Aby przetestować nowe zachowanie SameSite, przełącz `chrome://flags/#same-site-by-default-cookies` się na **włączone**. Starsze wersje programu Chrome (75 i poniżej) zostały zgłoszone w celu niepowodzenia z nowym `None` ustawieniem. Zobacz [Obsługa starszych przeglądarek](#sob) w tym dokumencie.
+Chrome 78 + daje mylące wyniki, ponieważ ma tymczasowe środki zaradcze. Program Chrome 78 + tymczasowe środki zaradcze dopuszczają cookie niedawne dwa minuty. Program Chrome 76 lub 77 z włączonymi odpowiednimi flagami testu zapewnia dokładniejsze wyniki. Aby przetestować nowe zachowanie SameSite, przełącz `chrome://flags/#same-site-by-default-cookies` się na **włączone** . Starsze wersje programu Chrome (75 i poniżej) zostały zgłoszone w celu niepowodzenia z nowym `None` ustawieniem. Zobacz [Obsługa starszych przeglądarek](#sob) w tym dokumencie.
 
 Firma Google nie udostępnia starszych wersji programu Chrome. Postępuj zgodnie z instrukcjami podanymi w części [pobieranie chromu](https://www.chromium.org/getting-involved/download-chromium) , aby przetestować starsze wersje programu Chrome. **Nie** Pobieraj programu Chrome z linków dostarczonych przez wyszukiwanie starszych wersji programu Chrome.
 
@@ -230,7 +231,7 @@ Flagi SameSite są ustawiane na `edge://flags/#same-site-by-default-cookies` str
 
 Wersje programu Electron obejmują starsze wersje chromu. Na przykład wersja Electron użyta przez zespoły to chrom 66, który wykazuje starsze zachowanie. Należy przeprowadzić własne testy zgodności z Electron używaną wersją produktu. Zapoznaj się z tematem [Obsługa starszych przeglądarek](#sob) w następnej sekcji.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Blog chromu: deweloperzy: przygotowanie do nowego SameSite = none; Cookie Ustawienia zabezpieczeń](https://blog.chromium.org/2019/10/developers-get-ready-for-new.html)
 * [SameSite cookie s](https://web.dev/samesite-cookies-explained/)

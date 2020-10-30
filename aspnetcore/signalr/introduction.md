@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/27/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/introduction
-ms.openlocfilehash: ab850fa8afbee9d2664868937362388a03374908
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 1810fef903362addcef4a6c9ec53264604f58d2b
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634699"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051476"
 ---
 # <a name="introduction-to-aspnet-core-no-locsignalr"></a>Wprowadzenie do ASP.NET Core SignalR
 
@@ -54,12 +55,12 @@ Poniżej przedstawiono niektóre funkcje programu SignalR dla programu ASP.NET C
 SignalR obsługuje następujące techniki obsługi komunikacji w czasie rzeczywistym (w kolejności bezpiecznego powrotu):
 
 * [Protokoły WebSocket](https://tools.ietf.org/html/rfc7118)
-* Zdarzenia wysłane przez serwer
+* Zdarzenia Server-Sent
 * Długotrwałe sondowanie
 
 SignalR automatycznie wybiera najlepszą metodę transportu, która znajduje się w możliwościach serwera i klienta.
 
-## <a name="hubs"></a>Koncentratory
+## <a name="hubs"></a>Centra
 
 SignalR używa *centrów* do komunikacji między klientami a serwerami.
 
@@ -71,5 +72,5 @@ Centra wywołują kod po stronie klienta, wysyłając komunikaty zawierające na
 
 * [Wprowadzenie SignalR do ASP.NET Core](xref:tutorials/signalr)
 * [Obsługiwane platformy](xref:signalr/supported-platforms)
-* [Koncentratory](xref:signalr/hubs)
+* [Centra](xref:signalr/hubs)
 * [Klient JavaScript](xref:signalr/javascript-client)

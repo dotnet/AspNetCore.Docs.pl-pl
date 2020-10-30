@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 01/16/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/hubs
-ms.openlocfilehash: 71ca0896bc645b7625f60c3a9e8fe321079d524a
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 4a31c16eb44e2244574d0df49c30e7a44b2bba6e
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631280"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93050943"
 ---
 # <a name="use-hubs-in-no-locsignalr-for-aspnet-core"></a>Korzystanie z koncentratorów w programie SignalR dla ASP.NET Core
 
@@ -155,7 +156,7 @@ Ten interfejs może służyć do refaktoryzacji poprzedniego `ChatHub` przykład
 
 Użycie `Hub<IChatClient>` umożliwia sprawdzenie w czasie kompilacji metod klienta. Zapobiega to problemom spowodowanym użyciem ciągów Magic, ponieważ `Hub<T>` może zapewnić tylko dostęp do metod zdefiniowanych w interfejsie.
 
-Użycie silnie określonego typu `Hub<T>` wyłącza możliwość użycia `SendAsync` . Wszelkie metody zdefiniowane w interfejsie mogą być nadal zdefiniowane jako asynchroniczne. W rzeczywistości każda z tych metod powinna zwrócić `Task` . Ponieważ jest to interfejs, nie używaj `async` słowa kluczowego. Na przykład:
+Użycie silnie określonego typu `Hub<T>` wyłącza możliwość użycia `SendAsync` . Wszelkie metody zdefiniowane w interfejsie mogą być nadal zdefiniowane jako asynchroniczne. W rzeczywistości każda z tych metod powinna zwrócić `Task` . Ponieważ jest to interfejs, nie używaj `async` słowa kluczowego. Przykład:
 
 ```csharp
 public interface IClient
@@ -191,7 +192,7 @@ Wyjątki zgłoszone w metodach centrum są wysyłane do klienta, który wywoła�
 
 [!code-javascript[Error](hubs/sample/wwwroot/js/chat.js?range=23)]
 
-Jeśli centrum zgłosi wyjątek, połączenia nie są zamknięte. Domyślnie program SignalR zwraca ogólny komunikat o błędzie do klienta. Na przykład:
+Jeśli centrum zgłosi wyjątek, połączenia nie są zamknięte. Domyślnie program SignalR zwraca ogólny komunikat o błędzie do klienta. Przykład:
 
 ```
 Microsoft.AspNetCore.SignalR.HubException: An unexpected error occurred invoking 'MethodName' on the server.

@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 01/17/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/scale
-ms.openlocfilehash: 2bfe05748e6740043be7f1ccc6dbe22ad4b0ca44
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: d3e9cd23a55702bcf9b002dcce556428683afeca
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722569"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93052776"
 ---
 # <a name="aspnet-core-no-locsignalr-hosting-and-scaling"></a>ASP.NET Core SignalR hosting i skalowanie
 
@@ -45,13 +46,13 @@ Aby uzyskać wskazówki dotyczące konfigurowania Azure App Service dla programu
 
 ## <a name="tcp-connection-resources"></a>Zasoby połączenia TCP
 
-Liczba współbieżnych połączeń TCP, które może obsługiwać serwer sieci Web, jest ograniczona. Klienci standardowi HTTP korzystają z połączeń *tymczasowych* . Te połączenia można zamknąć, gdy klient przechodzi w stan bezczynności i zostanie otwarty ponownie później. Z drugiej strony SignalR połączenie jest *trwałe*. SignalR połączenia pozostają otwarte nawet wtedy, gdy klient przejdzie w stan bezczynności. W aplikacji o dużym natężeniu ruchu, która obsługuje wielu klientów, te trwałe połączenia mogą spowodować, że serwery osiągnął maksymalną liczbę połączeń.
+Liczba współbieżnych połączeń TCP, które może obsługiwać serwer sieci Web, jest ograniczona. Klienci standardowi HTTP korzystają z połączeń *tymczasowych* . Te połączenia można zamknąć, gdy klient przechodzi w stan bezczynności i zostanie otwarty ponownie później. Z drugiej strony SignalR połączenie jest *trwałe* . SignalR połączenia pozostają otwarte nawet wtedy, gdy klient przejdzie w stan bezczynności. W aplikacji o dużym natężeniu ruchu, która obsługuje wielu klientów, te trwałe połączenia mogą spowodować, że serwery osiągnął maksymalną liczbę połączeń.
 
 Połączenia trwałe zużywają także dodatkową pamięć, aby śledzić każde połączenie.
 
 Duże wykorzystanie zasobów związanych z połączeniami przez SignalR program może mieć wpływ na inne aplikacje sieci Web, które są hostowane na tym samym serwerze. W przypadku SignalR otwarcia i przechowywania ostatnich dostępnych połączeń TCP inne aplikacje sieci Web na tym samym serwerze również nie będą miały dostępnych połączeń.
 
-Jeśli na serwerze wykorzystano połączenia, zobaczysz losowe błędy gniazda i błędy resetowania połączenia. Na przykład:
+Jeśli na serwerze wykorzystano połączenia, zobaczysz losowe błędy gniazda i błędy resetowania połączenia. Przykład:
 
 ```
 An attempt was made to access a socket in a way forbidden by its access permissions...
@@ -120,14 +121,85 @@ Powyższe warunki mogą spowodować osiągnięcie 10 limitów połączeń w syst
 
 ## <a name="linux-with-nginx"></a>System Linux z serwerem Nginx
 
-Ustaw `Connection` `Upgrade` następujące elementy i nagłówki serwera proxy dla obiektów SignalR WebSockets:
+Poniżej znajdują się minimalne wymagane ustawienia umożliwiające włączenie obiektów WebSockets, ServerSentEvents i LongPolling dla SignalR :
 
 ```nginx
-proxy_set_header Upgrade $http_upgrade;
-proxy_set_header Connection $connection_upgrade;
+http {
+  map $http_connection $connection_upgrade {
+    "~*Upgrade" $http_connection;
+    default keep-alive;
+}
+
+  server {
+    listen 80;
+    server_name example.com *.example.com;
+
+    # Configure the SignalR Endpoint
+    location /hubroute {
+      # App server url
+      proxy_pass http://localhost:5000;
+
+      # Configuration for WebSockets
+      proxy_set_header Upgrade $http_upgrade;
+      proxy_set_header Connection $connection_upgrade;
+      proxy_cache off;
+
+      # Configuration for ServerSentEvents
+      proxy_buffering off;
+
+      # Configuration for LongPolling or if your KeepAliveInterval is longer than 60 seconds
+      proxy_read_timeout 100s;
+
+      proxy_set_header Host $host;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header X-Forwarded-Proto $scheme;
+    }
+  }
+}
 ```
 
-Aby uzyskać więcej informacji, zobacz [Nginx jako proxy protokołu WebSocket](https://www.nginx.com/blog/websocket-nginx/).
+Gdy używane są wiele serwerów zaplecza, należy dodać sesje programu Sticky, aby uniemożliwić nawiązywanie SignalR połączeń z serwerów podczas nawiązywania połączenia. Istnieje wiele sposobów dodawania sesji programu Sticky Nginx. Poniżej przedstawiono dwa podejścia w zależności od tego, co jest dostępne.
+
+Dodano następujące elementy oprócz poprzedniej konfiguracji. W poniższych przykładach `backend` jest nazwą grupy serwerów.
+
+W programie [Nginx Open Source](https://nginx.org/en/)Użyj metody `ip_hash` do kierowania połączeń do serwera na podstawie adresu IP klienta:
+
+```nginx
+http {
+  upstream backend {
+    # App server 1
+    server http://localhost:5000;
+    # App server 2
+    server http://localhost:5002;
+
+    ip_hash;
+  }
+}
+```
+
+Za pomocą programu [Nginx Plus](https://www.nginx.com/products/nginx) `sticky` Dodaj cookie do żądania i Przypnij żądania użytkownika do serwera:
+
+```nginx
+http {
+  upstream backend {
+    # App server 1
+    server http://localhost:5000;
+    # App server 2
+    server http://localhost:5002;
+
+    sticky cookie srv_id expires=max domain=.example.com path=/ httponly;
+  }
+}
+```
+
+Na koniec przejdź `proxy_pass http://localhost:5000` `server` do sekcji do `proxy_pass http://backend` .
+
+Aby uzyskać więcej informacji na temat obiektów WebSockets za pośrednictwem usługi Nginx, zobacz [Nginx jako serwer proxy protokołu WebSocket](https://www.nginx.com/blog/websocket-nginx).
+
+Aby uzyskać więcej informacji o równoważeniu obciążenia i sesjach Nginx, zobacz [równoważenie obciążenia sieciowego](https://docs.nginx.com/nginx/admin-guide/load-balancer/http-load-balancer/).
+
+Aby uzyskać więcej informacji na temat ASP.NET Core za pomocą Nginx, zobacz następujący artykuł:
+* <xref:host-and-deploy/linux-nginx>
 
 ## <a name="third-party-no-locsignalr-backplane-providers"></a>Dostawcy rozwiązań innych firm SignalR
 

@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/middleware
-ms.openlocfilehash: 7fe9629e1c60a6156c69e546736049653a4229b7
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 3c28b6c736f07c0d0483152eeec4300a5a92224c
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722647"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93052113"
 ---
 # <a name="response-caching-middleware-in-aspnet-core"></a>Buforowanie oprogramowania pośredniczącego w ASP.NET Core
 
@@ -113,7 +114,7 @@ Poniższa tabela zawiera informacje dotyczące nagłówków HTTP, które mają w
 | Header | Szczegóły |
 | ------ | ------- |
 | `Authorization` | Odpowiedź nie jest buforowana, jeśli nagłówek istnieje. |
-| `Cache-Control` | Oprogramowanie pośredniczące traktuje tylko odpowiedzi w pamięci `public` podręcznej oznaczone za pomocą dyrektywy Cache. Sterowanie buforowaniem przy użyciu następujących parametrów:<ul><li>maks. wiek</li><li>Max-nieodświeżone&#8224;</li><li>min — nowy</li><li>musi ponownie sprawdzić poprawność</li><li>nie-pamięć podręczna</li><li>bez sklepu</li><li>tylko-w pamięci podręcznej</li><li>private</li><li>public</li><li>s-maxage</li><li>serwer proxy — ponowne sprawdzanie poprawności&#8225;</li></ul>&#8224;Jeśli żaden limit nie zostanie określony do `max-stale` , oprogramowanie pośredniczące nie podejmuje żadnych działań.<br>&#8225;`proxy-revalidate` ma ten sam skutek co `must-revalidate` .<br><br>Aby uzyskać więcej informacji, zobacz [RFC 7231: dyrektywy kontroli pamięci podręcznej żądania](https://tools.ietf.org/html/rfc7234#section-5.2.1). |
+| `Cache-Control` | Oprogramowanie pośredniczące traktuje tylko odpowiedzi w pamięci `public` podręcznej oznaczone za pomocą dyrektywy Cache. Sterowanie buforowaniem przy użyciu następujących parametrów:<ul><li>maks. wiek</li><li>Max-nieodświeżone&#8224;</li><li>min — nowy</li><li>musi ponownie sprawdzić poprawność</li><li>nie-pamięć podręczna</li><li>bez sklepu</li><li>tylko-w pamięci podręcznej</li><li>private</li><li>public</li><li>s-maxage</li><li>serwer proxy — ponowne sprawdzanie poprawności&#8225;</li></ul>&#8224;Jeśli żaden limit nie zostanie określony do `max-stale` , oprogramowanie pośredniczące nie podejmuje żadnych działań.<br>&#8225;`proxy-revalidate` ma ten sam skutek co `must-revalidate` .<br><br>Aby uzyskać więcej informacji, zobacz [RFC 7231: Request Cache-Control dyrektywy](https://tools.ietf.org/html/rfc7234#section-5.2.1). |
 | `Pragma` | `Pragma: no-cache`Nagłówek w żądaniu daje ten sam skutek co `Cache-Control: no-cache` . Ten nagłówek jest zastępowany przez odpowiednie dyrektywy w `Cache-Control` nagłówku, jeśli jest obecny. Uwzględnianie zgodności z poprzednimi wersjami przy użyciu protokołu HTTP/1.0. |
 | `Set-Cookie` | Odpowiedź nie jest buforowana, jeśli nagłówek istnieje. Wszystkie oprogramowanie pośredniczące w potoku przetwarzania żądań, które ustawia jeden lub więcej cookie s uniemożliwia buforowanie odpowiedzi przez oprogramowanie pośredniczące do buforowania odpowiedzi (na przykład [ cookie dostawcy TempData opartego na protokole](xref:fundamentals/app-state#tempdata)).  |
 | `Vary` | `Vary`Nagłówek jest używany do różnicowania buforowanej odpowiedzi przez inny nagłówek. Na przykład w pamięci podręcznej odpowiedzi są kodowane przez dołączenie `Vary: Accept-Encoding` nagłówka, w którym są buforowane odpowiedzi na żądania z nagłówkami `Accept-Encoding: gzip` i `Accept-Encoding: text/plain` oddzielnie. Odpowiedź z wartością nagłówka `*` nigdy nie jest przechowywana. |
@@ -124,7 +125,7 @@ Poniższa tabela zawiera informacje dotyczące nagłówków HTTP, które mają w
 | `Content-Length` | W przypadku obsługi z pamięci podręcznej `Content-Length` nagłówek jest ustawiany przez oprogramowanie pośredniczące, jeśli nie został podany w oryginalnej odpowiedzi. |
 | `Age` | `Age`Nagłówek wysłany w oryginalnej odpowiedzi jest ignorowany. Oprogramowanie pośredniczące oblicza nową wartość w przypadku obsługi odpowiedzi w pamięci podręcznej. |
 
-## <a name="caching-respects-request-cache-control-directives"></a>Buforowanie — dyrektywy dotyczące kontroli pamięci podręcznej żądań
+## <a name="caching-respects-request-cache-control-directives"></a>Cache-Control dyrektywy z uwzględnieniem pamięci podręcznej
 
 Oprogramowanie pośredniczące uwzględnia reguły [buforowania HTTP 1,1](https://tools.ietf.org/html/rfc7234#section-5.2). Reguły wymagają pamięci podręcznej, aby honorować prawidłowy `Cache-Control` nagłówek Wysłany przez klienta. W obszarze specyfikacji klient może wykonywać żądania z `no-cache` wartością nagłówka i wymusić, aby serwer generował nową odpowiedź dla każdego żądania. Obecnie nie ma kontroli nad tym zachowaniem buforowania podczas korzystania z oprogramowania pośredniczącego, ponieważ oprogramowanie pośredniczące jest zgodne z oficjalną specyfikacją buforowania.
 
@@ -163,7 +164,7 @@ Podczas testowania i rozwiązywania problemów z pamięcią podręczną przeglą
 > [!NOTE]
 > System antysfałszowany służący do generowania zabezpieczonych tokenów, aby zapobiec atakom przez wiele witryn (CSRF), w `Cache-Control` związku z czym `Pragma` `no-cache` odpowiedzi nie są buforowane. Aby uzyskać informacje na temat sposobu wyłączania tokenów antysfałszowanych dla elementów formularza HTML, zobacz <xref:security/anti-request-forgery#aspnet-core-antiforgery-configuration> .
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:fundamentals/startup>
 * <xref:fundamentals/middleware/index>
@@ -257,7 +258,7 @@ Poniższa tabela zawiera informacje dotyczące nagłówków HTTP, które mają w
 | Header | Szczegóły |
 | ------ | ------- |
 | `Authorization` | Odpowiedź nie jest buforowana, jeśli nagłówek istnieje. |
-| `Cache-Control` | Oprogramowanie pośredniczące traktuje tylko odpowiedzi w pamięci `public` podręcznej oznaczone za pomocą dyrektywy Cache. Sterowanie buforowaniem przy użyciu następujących parametrów:<ul><li>maks. wiek</li><li>Max-nieodświeżone&#8224;</li><li>min — nowy</li><li>musi ponownie sprawdzić poprawność</li><li>nie-pamięć podręczna</li><li>bez sklepu</li><li>tylko-w pamięci podręcznej</li><li>private</li><li>public</li><li>s-maxage</li><li>serwer proxy — ponowne sprawdzanie poprawności&#8225;</li></ul>&#8224;Jeśli żaden limit nie zostanie określony do `max-stale` , oprogramowanie pośredniczące nie podejmuje żadnych działań.<br>&#8225;`proxy-revalidate` ma ten sam skutek co `must-revalidate` .<br><br>Aby uzyskać więcej informacji, zobacz [RFC 7231: dyrektywy kontroli pamięci podręcznej żądania](https://tools.ietf.org/html/rfc7234#section-5.2.1). |
+| `Cache-Control` | Oprogramowanie pośredniczące traktuje tylko odpowiedzi w pamięci `public` podręcznej oznaczone za pomocą dyrektywy Cache. Sterowanie buforowaniem przy użyciu następujących parametrów:<ul><li>maks. wiek</li><li>Max-nieodświeżone&#8224;</li><li>min — nowy</li><li>musi ponownie sprawdzić poprawność</li><li>nie-pamięć podręczna</li><li>bez sklepu</li><li>tylko-w pamięci podręcznej</li><li>private</li><li>public</li><li>s-maxage</li><li>serwer proxy — ponowne sprawdzanie poprawności&#8225;</li></ul>&#8224;Jeśli żaden limit nie zostanie określony do `max-stale` , oprogramowanie pośredniczące nie podejmuje żadnych działań.<br>&#8225;`proxy-revalidate` ma ten sam skutek co `must-revalidate` .<br><br>Aby uzyskać więcej informacji, zobacz [RFC 7231: Request Cache-Control dyrektywy](https://tools.ietf.org/html/rfc7234#section-5.2.1). |
 | `Pragma` | `Pragma: no-cache`Nagłówek w żądaniu daje ten sam skutek co `Cache-Control: no-cache` . Ten nagłówek jest zastępowany przez odpowiednie dyrektywy w `Cache-Control` nagłówku, jeśli jest obecny. Uwzględnianie zgodności z poprzednimi wersjami przy użyciu protokołu HTTP/1.0. |
 | `Set-Cookie` | Odpowiedź nie jest buforowana, jeśli nagłówek istnieje. Wszystkie oprogramowanie pośredniczące w potoku przetwarzania żądań, które ustawia jeden lub więcej cookie s uniemożliwia buforowanie odpowiedzi przez oprogramowanie pośredniczące do buforowania odpowiedzi (na przykład [ cookie dostawcy TempData opartego na protokole](xref:fundamentals/app-state#tempdata)).  |
 | `Vary` | `Vary`Nagłówek jest używany do różnicowania buforowanej odpowiedzi przez inny nagłówek. Na przykład w pamięci podręcznej odpowiedzi są kodowane przez dołączenie `Vary: Accept-Encoding` nagłówka, w którym są buforowane odpowiedzi na żądania z nagłówkami `Accept-Encoding: gzip` i `Accept-Encoding: text/plain` oddzielnie. Odpowiedź z wartością nagłówka `*` nigdy nie jest przechowywana. |
@@ -268,7 +269,7 @@ Poniższa tabela zawiera informacje dotyczące nagłówków HTTP, które mają w
 | `Content-Length` | W przypadku obsługi z pamięci podręcznej `Content-Length` nagłówek jest ustawiany przez oprogramowanie pośredniczące, jeśli nie został podany w oryginalnej odpowiedzi. |
 | `Age` | `Age`Nagłówek wysłany w oryginalnej odpowiedzi jest ignorowany. Oprogramowanie pośredniczące oblicza nową wartość w przypadku obsługi odpowiedzi w pamięci podręcznej. |
 
-## <a name="caching-respects-request-cache-control-directives"></a>Buforowanie — dyrektywy dotyczące kontroli pamięci podręcznej żądań
+## <a name="caching-respects-request-cache-control-directives"></a>Cache-Control dyrektywy z uwzględnieniem pamięci podręcznej
 
 Oprogramowanie pośredniczące uwzględnia reguły [buforowania HTTP 1,1](https://tools.ietf.org/html/rfc7234#section-5.2). Reguły wymagają pamięci podręcznej, aby honorować prawidłowy `Cache-Control` nagłówek Wysłany przez klienta. W obszarze specyfikacji klient może wykonywać żądania z `no-cache` wartością nagłówka i wymusić, aby serwer generował nową odpowiedź dla każdego żądania. Obecnie nie ma kontroli nad tym zachowaniem buforowania podczas korzystania z oprogramowania pośredniczącego, ponieważ oprogramowanie pośredniczące jest zgodne z oficjalną specyfikacją buforowania.
 

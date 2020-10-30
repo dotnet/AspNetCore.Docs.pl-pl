@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/14/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: test/integration-tests
-ms.openlocfilehash: 9b36a77730a43c7515fcd2c56621412453784c9d
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: f1ce6a209ef3ca85abe0a6f1ac61d85bec52d17a
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722543"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93050826"
 ---
 # <a name="integration-tests-in-aspnet-core"></a>Testy integracji w ASP.NET Core
 
@@ -57,7 +58,7 @@ Te szersze testy są używane do testowania infrastruktury aplikacji i całego �
 * Urządzenia sieciowe
 * Potok żądania-odpowiedź
 
-Testy jednostkowe wykorzystują składniki, *znane jako elementy* sztuczne lub *makiety*, zamiast składników infrastruktury.
+Testy jednostkowe wykorzystują składniki, *znane jako elementy* sztuczne lub *makiety* , zamiast składników infrastruktury.
 
 W przeciwieństwie do testów jednostkowych, testy integracji:
 
@@ -71,7 +72,7 @@ W związku z tym Ogranicz korzystanie z testów integracji do najważniejszych s
 > Nie zapisuj testów integracji dla każdej możliwej permutacji danych i dostępu do plików z bazami danych i systemami plików. Bez względu na to, ile miejsc w aplikacji współdziała z bazami danych i systemami plików, skoncentrowany zestaw testów do odczytu, zapisu, aktualizacji i usuwania umożliwia zwykle testowanie składników bazy danych i systemu plików. Użyj testów jednostkowych do rutynowych testów logiki metod, które współpracują z tymi składnikami. W testach jednostkowych użycie sztucznych/imitacji infrastruktury powoduje szybsze wykonywanie testów.
 
 > [!NOTE]
-> W dyskusjach dotyczących testów integracji testowany projekt jest często określany jako testowany *system*lub "SUT".
+> W dyskusjach dotyczących testów integracji testowany projekt jest często określany jako testowany *system* lub "SUT".
 >
 > *"SUT" jest używany w tym temacie w celu odwoływania się do testowanej aplikacji ASP.NET Core.*
 
@@ -83,7 +84,7 @@ Testy integracji w ASP.NET Core wymagają następujących czynności:
 * Projekt testowy tworzy testowy host sieci Web dla SUT i używa klienta serwera testowego do obsługi żądań i odpowiedzi z SUT.
 * Moduł uruchamiający testy służy do wykonywania testów i raportujących wyniki testów.
 
-Testy integracji są zgodne z sekwencją zdarzeń, które obejmują typowe kroki testu *rozmieszczenia*, *działania*i *potwierdzeń* :
+Testy integracji są zgodne z sekwencją zdarzeń, które obejmują typowe kroki testu *rozmieszczenia* , *działania* i *potwierdzeń* :
 
 1. SUT hosta sieci Web.
 1. Klient serwera testowego jest tworzony w celu przesyłania żądań do aplikacji.
@@ -99,7 +100,7 @@ Składniki infrastruktury, takie jak test hosta sieci Web i serwer testu w pami�
 
 `Microsoft.AspNetCore.Mvc.Testing`Pakiet obsługuje następujące zadania:
 
-* Kopiuje plik zależności (*. deps*) z SUT do katalogu *bin* projektu testowego.
+* Kopiuje plik zależności ( *. deps* ) z SUT do katalogu *bin* projektu testowego.
 * Ustawia [katalog główny zawartości](xref:fundamentals/index#content-root) dla katalogu głównego projektu SUT, aby umożliwić znalezienie plików statycznych i stron/widoków podczas wykonywania testów.
 * Udostępnia klasę [WebApplicationFactory](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) , aby usprawnić uruchamianie SUT przy użyciu `TestServer` .
 
@@ -139,7 +140,7 @@ Jeśli [środowisko](xref:fundamentals/environments) SUT nie jest ustawione, śr
 
 [WebApplicationFactory \<TEntryPoint> ](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) służy do tworzenia [TestServer](/dotnet/api/microsoft.aspnetcore.testhost.testserver) dla testów integracji. `TEntryPoint` jest klasą punktu wejścia SUT, zazwyczaj `Startup` klasy.
 
-Klasy testowe implementują interfejs *armatury klasy* ([IClassFixture](https://xunit.github.io/docs/shared-context#class-fixture)) w celu wskazania, że Klasa zawiera testy i udostępnia wystąpienia obiektów udostępnionych w ramach testów w klasie.
+Klasy testowe implementują interfejs *armatury klasy* ( [IClassFixture](https://xunit.github.io/docs/shared-context#class-fixture)) w celu wskazania, że Klasa zawiera testy i udostępnia wystąpienia obiektów udostępnionych w ramach testów w klasie.
 
 Poniższa klasa testowa, `BasicTests` , używa `WebApplicationFactory` do ładowania początkowego SUT i zapewnienia [HttpClient](/dotnet/api/system.net.http.httpclient) do metody testowej `Get_EndpointsReturnSuccessAndCorrectContentType` . Metoda sprawdza, czy kod stanu odpowiedzi powiedzie się (kody stanu z zakresu 200-299), a `Content-Type` nagłówek jest `text/html; charset=utf-8` dla kilku stron aplikacji.
 
@@ -161,7 +162,7 @@ Konfigurację hosta sieci Web można utworzyć niezależnie od klas testów prze
 
    Kontekst bazy danych SUT jest zarejestrowany w `Startup.ConfigureServices` metodzie. `builder.ConfigureServices`Wywołanie zwrotne aplikacji testowej jest wykonywane *po* `Startup.ConfigureServices` wykonaniu kodu aplikacji. Kolejność wykonywania jest istotną zmianą dla [hosta ogólnego](xref:fundamentals/host/generic-host) w wersji ASP.NET Core 3,0. Aby użyć innej bazy danych dla testów niż baza danych aplikacji, należy zastąpić kontekst bazy danych aplikacji `builder.ConfigureServices` .
 
-   W przypadku SUTs, które nadal korzystają z [hosta sieci Web](xref:fundamentals/host/web-host), `builder.ConfigureServices` wywołanie zwrotne aplikacji testowej jest wykonywane *przed* `Startup.ConfigureServices` kodem SUT. `builder.ConfigureTestServices`Wywołanie zwrotne aplikacji testowej jest wykonywane *po*.
+   W przypadku SUTs, które nadal korzystają z [hosta sieci Web](xref:fundamentals/host/web-host), `builder.ConfigureServices` wywołanie zwrotne aplikacji testowej jest wykonywane *przed* `Startup.ConfigureServices` kodem SUT. `builder.ConfigureTestServices`Wywołanie zwrotne aplikacji testowej jest wykonywane *po* .
 
    Przykładowa aplikacja znajduje deskryptor usługi dla kontekstu bazy danych i używa deskryptora do usunięcia rejestracji usługi. Następnie fabryka dodaje nową `ApplicationDbContext` , która korzysta z bazy danych w pamięci dla testów.
 
@@ -194,7 +195,7 @@ Wszelkie żądania POST do SUT muszą być zgodne z sprawdzeniem, czy jest ono a
 1. Przeanalizuj cookie token przed fałszowaniem i Żądaj tokenu weryfikacji z odpowiedzi.
 1. Wprowadź żądanie POST z użyciem reguły "antysfałszowane" cookie i tokenu walidacji żądania.
 
-`SendAsync`Metody rozszerzenia pomocnika (*pomocnicys/HttpClientExtensions. cs*) i `GetDocumentAsync` metoda pomocnika (*pomocnicys/HtmlHelpers. cs*) w [przykładowej aplikacji](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples/) używają analizatora [AngleSharp](https://anglesharp.github.io/) do obsługi kontroli przed fałszerstwem przy użyciu następujących metod:
+`SendAsync`Metody rozszerzenia pomocnika ( *pomocnicys/HttpClientExtensions. cs* ) i `GetDocumentAsync` metoda pomocnika ( *pomocnicys/HtmlHelpers. cs* ) w [przykładowej aplikacji](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples/) używają analizatora [AngleSharp](https://anglesharp.github.io/) do obsługi kontroli przed fałszerstwem przy użyciu następujących metod:
 
 * `GetDocumentAsync`: Odbiera [HttpResponseMessage](/dotnet/api/system.net.http.httpresponsemessage) i zwraca `IHtmlDocument` . `GetDocumentAsync` używa fabryki przygotowującej *odpowiedź wirtualną* na podstawie oryginału `HttpResponseMessage` . Aby uzyskać więcej informacji, zapoznaj się z [dokumentacją AngleSharp](https://github.com/AngleSharp/AngleSharp#documentation).
 * `SendAsync` metody rozszerzające `HttpClient` [HttpRequestMessage](/dotnet/api/system.net.http.httprequestmessage) i Call [SendAsync (HttpRequestMessage)](/dotnet/api/system.net.http.httpclient.sendasync#System_Net_Http_HttpClient_SendAsync_System_Net_Http_HttpRequestMessage_) do przesyłania żądań do SUT. Przeciążenia dla `SendAsync` Zaakceptuj formularz HTML ( `IHtmlFormElement` ) i następujące:
@@ -219,7 +220,7 @@ Ponieważ inny test w `IndexPageTests` klasie wykonuje operację, która usuwa w
 
 W poniższej tabeli przedstawiono domyślne [WebApplicationFactoryClientOptions](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions) dostępne podczas tworzenia `HttpClient` wystąpień.
 
-| Opcja | Opis | Domyślny |
+| Opcja | Opis | Domyślne |
 | ------ | ----------- | ------- |
 | [AllowAutoRedirect](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.allowautoredirect) | Pobiera lub ustawia, czy `HttpClient` wystąpienia powinny automatycznie śledzić odpowiedzi przekierowania. | `true` |
 | [BaseAddress](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.baseaddress) | Pobiera lub ustawia podstawowy adres `HttpClient` wystąpień. | `http://localhost` |
@@ -245,23 +246,23 @@ Usługi można przesłaniać w teście, używając wywołania [ConfigureTestServ
 
 Przykład SUT obejmuje usługę objętą zakresem zwracającą ofertę. Po zażądaniu strony indeksu oferta zostanie osadzona w ukrytym polu na stronie indeksu.
 
-*Usługi/IQuoteService. cs*:
+*Usługi/IQuoteService. cs* :
 
 [!code-csharp[](integration-tests/samples/3.x/IntegrationTestsSample/src/RazorPagesProject/Services/IQuoteService.cs?name=snippet1)]
 
-*Usługi/QuoteService. cs*:
+*Usługi/QuoteService. cs* :
 
 [!code-csharp[](integration-tests/samples/3.x/IntegrationTestsSample/src/RazorPagesProject/Services/QuoteService.cs?name=snippet1)]
 
-*Startup.cs*:
+*Startup.cs* :
 
 [!code-csharp[](integration-tests/samples/3.x/IntegrationTestsSample/src/RazorPagesProject/Startup.cs?name=snippet2)]
 
-*Pages/index. cshtml. cs*:
+*Pages/index. cshtml. cs* :
 
 [!code-csharp[](integration-tests/samples/3.x/IntegrationTestsSample/src/RazorPagesProject/Pages/Index.cshtml.cs?name=snippet1&highlight=4,9,20,26)]
 
-*Strony/indeks. cs*:
+*Strony/indeks. cs* :
 
 [!code-cshtml[](integration-tests/samples/3.x/IntegrationTestsSample/src/RazorPagesProject/Pages/Index.cshtml?name=snippet_Quote)]
 
@@ -274,7 +275,7 @@ Po uruchomieniu aplikacji SUT jest generowany następujący znacznik:
 
 W celu przetestowania usługi i iniekcji cytatu w teście integracji, usługa makiety jest wstrzykiwana do SUT przez test. Usługa makiety zastępuje aplikację `QuoteService` za pomocą usługi dostarczonej przez aplikację testową o nazwie `TestQuoteService` :
 
-*IntegrationTests.IndexPageTests.cs*:
+*IntegrationTests.IndexPageTests.cs* :
 
 [!code-csharp[](integration-tests/samples/3.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/IntegrationTests/IndexPageTests.cs?name=snippet4)]
 
@@ -342,7 +343,7 @@ protected override IWebHostBuilder CreateWebHostBuilder() =>
 
 ## <a name="how-the-test-infrastructure-infers-the-app-content-root-path"></a>Jak infrastruktura testowa wnioskuje ścieżkę katalogu głównego zawartości aplikacji
 
-`WebApplicationFactory`Konstruktor wnioskuje ścieżkę [katalogu głównego zawartości](xref:fundamentals/index#content-root) aplikacji, wyszukując [WebApplicationFactoryContentRootAttribute](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactorycontentrootattribute) na zestawie zawierającym testy integracji z kluczem równym `TEntryPoint` zestawowi `System.Reflection.Assembly.FullName` . W przypadku nieznalezienia atrybutu o poprawnym kluczu `WebApplicationFactory` Wróć do wyszukiwania pliku rozwiązania (*. sln*) i dołączaj `TEntryPoint` nazwę zestawu do katalogu rozwiązania. Katalog główny aplikacji (ścieżka katalogu głównego zawartości) służy do odnajdywania widoków i plików zawartości.
+`WebApplicationFactory`Konstruktor wnioskuje ścieżkę [katalogu głównego zawartości](xref:fundamentals/index#content-root) aplikacji, wyszukując [WebApplicationFactoryContentRootAttribute](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactorycontentrootattribute) na zestawie zawierającym testy integracji z kluczem równym `TEntryPoint` zestawowi `System.Reflection.Assembly.FullName` . W przypadku nieznalezienia atrybutu o poprawnym kluczu `WebApplicationFactory` Wróć do wyszukiwania pliku rozwiązania ( *. sln* ) i dołączaj `TEntryPoint` nazwę zestawu do katalogu rozwiązania. Katalog główny aplikacji (ścieżka katalogu głównego zawartości) służy do odnajdywania widoków i plików zawartości.
 
 ## <a name="disable-shadow-copying"></a>Wyłącz kopiowanie w tle
 
@@ -379,10 +380,10 @@ dotnet test
 
 SUT to Razor system komunikatów stron o następujących cechach:
 
-* Strona indeks aplikacji (*Pages/index. cshtml* i *Pages/index. cshtml. cs*) zawiera metody interfejsu użytkownika i modelu strony umożliwiające sterowanie dodawaniem, usuwaniem i analizą komunikatów (średnia liczba wyrazów na komunikat).
-* Komunikat jest opisywany przez `Message` klasę (*Data/Message. cs*) z dwiema właściwościami: `Id` (Key) i `Text` (Message). `Text`Właściwość jest wymagana i jest ograniczona do 200 znaków.
+* Strona indeks aplikacji ( *Pages/index. cshtml* i *Pages/index. cshtml. cs* ) zawiera metody interfejsu użytkownika i modelu strony umożliwiające sterowanie dodawaniem, usuwaniem i analizą komunikatów (średnia liczba wyrazów na komunikat).
+* Komunikat jest opisywany przez `Message` klasę ( *Data/Message. cs* ) z dwiema właściwościami: `Id` (Key) i `Text` (Message). `Text`Właściwość jest wymagana i jest ograniczona do 200 znaków.
 * Komunikaty są przechowywane przy użyciu&#8224; [bazy danych Entity Framework w pamięci](/ef/core/providers/in-memory/) .
-* Aplikacja zawiera warstwę dostępu do danych (DAL) w swojej klasie kontekstu bazy danych `AppDbContext` (*Data/AppDbContext. cs*).
+* Aplikacja zawiera warstwę dostępu do danych (DAL) w swojej klasie kontekstu bazy danych `AppDbContext` ( *Data/AppDbContext. cs* ).
 * Jeśli baza danych jest pusta podczas uruchamiania aplikacji, magazyn komunikatów zostanie zainicjowany przy użyciu trzech komunikatów.
 * Aplikacja zawiera dostęp do programu `/SecurePage` , do którego jest dostępny tylko uwierzytelniony użytkownik.
 
@@ -413,7 +414,7 @@ Przykładowa aplikacja odziarnauje bazę danych z trzema komunikatami w *Utiliti
 
 Kontekst bazy danych SUT jest zarejestrowany w `Startup.ConfigureServices` metodzie. `builder.ConfigureServices`Wywołanie zwrotne aplikacji testowej jest wykonywane *po* `Startup.ConfigureServices` wykonaniu kodu aplikacji. Aby użyć innej bazy danych dla testów, kontekst bazy danych aplikacji musi zostać zastąpiony `builder.ConfigureServices` . Aby uzyskać więcej informacji, zobacz sekcję [Dostosowywanie WebApplicationFactory](#customize-webapplicationfactory) .
 
-W przypadku SUTs, które nadal korzystają z [hosta sieci Web](xref:fundamentals/host/web-host), `builder.ConfigureServices` wywołanie zwrotne aplikacji testowej jest wykonywane *przed* `Startup.ConfigureServices` kodem SUT. `builder.ConfigureTestServices`Wywołanie zwrotne aplikacji testowej jest wykonywane *po*.
+W przypadku SUTs, które nadal korzystają z [hosta sieci Web](xref:fundamentals/host/web-host), `builder.ConfigureServices` wywołanie zwrotne aplikacji testowej jest wykonywane *przed* `Startup.ConfigureServices` kodem SUT. `builder.ConfigureTestServices`Wywołanie zwrotne aplikacji testowej jest wykonywane *po* .
 
 ::: moniker-end
 
@@ -445,7 +446,7 @@ Te szersze testy są używane do testowania infrastruktury aplikacji i całego �
 * Urządzenia sieciowe
 * Potok żądania-odpowiedź
 
-Testy jednostkowe wykorzystują składniki, *znane jako elementy* sztuczne lub *makiety*, zamiast składników infrastruktury.
+Testy jednostkowe wykorzystują składniki, *znane jako elementy* sztuczne lub *makiety* , zamiast składników infrastruktury.
 
 W przeciwieństwie do testów jednostkowych, testy integracji:
 
@@ -459,7 +460,7 @@ W związku z tym Ogranicz korzystanie z testów integracji do najważniejszych s
 > Nie zapisuj testów integracji dla każdej możliwej permutacji danych i dostępu do plików z bazami danych i systemami plików. Bez względu na to, ile miejsc w aplikacji współdziała z bazami danych i systemami plików, skoncentrowany zestaw testów do odczytu, zapisu, aktualizacji i usuwania umożliwia zwykle testowanie składników bazy danych i systemu plików. Użyj testów jednostkowych do rutynowych testów logiki metod, które współpracują z tymi składnikami. W testach jednostkowych użycie sztucznych/imitacji infrastruktury powoduje szybsze wykonywanie testów.
 
 > [!NOTE]
-> W dyskusjach dotyczących testów integracji testowany projekt jest często określany jako testowany *system*lub "SUT".
+> W dyskusjach dotyczących testów integracji testowany projekt jest często określany jako testowany *system* lub "SUT".
 >
 > *"SUT" jest używany w tym temacie w celu odwoływania się do testowanej aplikacji ASP.NET Core.*
 
@@ -471,7 +472,7 @@ Testy integracji w ASP.NET Core wymagają następujących czynności:
 * Projekt testowy tworzy testowy host sieci Web dla SUT i używa klienta serwera testowego do obsługi żądań i odpowiedzi z SUT.
 * Moduł uruchamiający testy służy do wykonywania testów i raportujących wyniki testów.
 
-Testy integracji są zgodne z sekwencją zdarzeń, które obejmują typowe kroki testu *rozmieszczenia*, *działania*i *potwierdzeń* :
+Testy integracji są zgodne z sekwencją zdarzeń, które obejmują typowe kroki testu *rozmieszczenia* , *działania* i *potwierdzeń* :
 
 1. SUT hosta sieci Web.
 1. Klient serwera testowego jest tworzony w celu przesyłania żądań do aplikacji.
@@ -487,7 +488,7 @@ Składniki infrastruktury, takie jak test hosta sieci Web i serwer testu w pami�
 
 `Microsoft.AspNetCore.Mvc.Testing`Pakiet obsługuje następujące zadania:
 
-* Kopiuje plik zależności (*. deps*) z SUT do katalogu *bin* projektu testowego.
+* Kopiuje plik zależności ( *. deps* ) z SUT do katalogu *bin* projektu testowego.
 * Ustawia [katalog główny zawartości](xref:fundamentals/index#content-root) dla katalogu głównego projektu SUT, aby umożliwić znalezienie plików statycznych i stron/widoków podczas wykonywania testów.
 * Udostępnia klasę [WebApplicationFactory](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) , aby usprawnić uruchamianie SUT przy użyciu `TestServer` .
 
@@ -521,7 +522,7 @@ Jeśli [środowisko](xref:fundamentals/environments) SUT nie jest ustawione, śr
 
 [WebApplicationFactory \<TEntryPoint> ](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) służy do tworzenia [TestServer](/dotnet/api/microsoft.aspnetcore.testhost.testserver) dla testów integracji. `TEntryPoint` jest klasą punktu wejścia SUT, zazwyczaj `Startup` klasy.
 
-Klasy testowe implementują interfejs *armatury klasy* ([IClassFixture](https://xunit.github.io/docs/shared-context#class-fixture)) w celu wskazania, że Klasa zawiera testy i udostępnia wystąpienia obiektów udostępnionych w ramach testów w klasie.
+Klasy testowe implementują interfejs *armatury klasy* ( [IClassFixture](https://xunit.github.io/docs/shared-context#class-fixture)) w celu wskazania, że Klasa zawiera testy i udostępnia wystąpienia obiektów udostępnionych w ramach testów w klasie.
 
 Poniższa klasa testowa, `BasicTests` , używa `WebApplicationFactory` do ładowania początkowego SUT i zapewnienia [HttpClient](/dotnet/api/system.net.http.httpclient) do metody testowej `Get_EndpointsReturnSuccessAndCorrectContentType` . Metoda sprawdza, czy kod stanu odpowiedzi powiedzie się (kody stanu z zakresu 200-299), a `Content-Type` nagłówek jest `text/html; charset=utf-8` dla kilku stron aplikacji.
 
@@ -557,7 +558,7 @@ Wszelkie żądania POST do SUT muszą być zgodne z sprawdzeniem, czy jest ono a
 1. Przeanalizuj cookie token przed fałszowaniem i Żądaj tokenu weryfikacji z odpowiedzi.
 1. Wprowadź żądanie POST z użyciem reguły "antysfałszowane" cookie i tokenu walidacji żądania.
 
-`SendAsync`Metody rozszerzenia pomocnika (*pomocnicys/HttpClientExtensions. cs*) i `GetDocumentAsync` metoda pomocnika (*pomocnicys/HtmlHelpers. cs*) w [przykładowej aplikacji](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples/) używają analizatora [AngleSharp](https://anglesharp.github.io/) do obsługi kontroli przed fałszerstwem przy użyciu następujących metod:
+`SendAsync`Metody rozszerzenia pomocnika ( *pomocnicys/HttpClientExtensions. cs* ) i `GetDocumentAsync` metoda pomocnika ( *pomocnicys/HtmlHelpers. cs* ) w [przykładowej aplikacji](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples/) używają analizatora [AngleSharp](https://anglesharp.github.io/) do obsługi kontroli przed fałszerstwem przy użyciu następujących metod:
 
 * `GetDocumentAsync`: Odbiera [HttpResponseMessage](/dotnet/api/system.net.http.httpresponsemessage) i zwraca `IHtmlDocument` . `GetDocumentAsync` używa fabryki przygotowującej *odpowiedź wirtualną* na podstawie oryginału `HttpResponseMessage` . Aby uzyskać więcej informacji, zapoznaj się z [dokumentacją AngleSharp](https://github.com/AngleSharp/AngleSharp#documentation).
 * `SendAsync` metody rozszerzające `HttpClient` [HttpRequestMessage](/dotnet/api/system.net.http.httprequestmessage) i Call [SendAsync (HttpRequestMessage)](/dotnet/api/system.net.http.httpclient.sendasync#System_Net_Http_HttpClient_SendAsync_System_Net_Http_HttpRequestMessage_) do przesyłania żądań do SUT. Przeciążenia dla `SendAsync` Zaakceptuj formularz HTML ( `IHtmlFormElement` ) i następujące:
@@ -582,7 +583,7 @@ Ponieważ inny test w `IndexPageTests` klasie wykonuje operację, która usuwa w
 
 W poniższej tabeli przedstawiono domyślne [WebApplicationFactoryClientOptions](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions) dostępne podczas tworzenia `HttpClient` wystąpień.
 
-| Opcja | Opis | Domyślny |
+| Opcja | Opis | Domyślne |
 | ------ | ----------- | ------- |
 | [AllowAutoRedirect](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.allowautoredirect) | Pobiera lub ustawia, czy `HttpClient` wystąpienia powinny automatycznie śledzić odpowiedzi przekierowania. | `true` |
 | [BaseAddress](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.baseaddress) | Pobiera lub ustawia podstawowy adres `HttpClient` wystąpień. | `http://localhost` |
@@ -608,23 +609,23 @@ Usługi można przesłaniać w teście, używając wywołania [ConfigureTestServ
 
 Przykład SUT obejmuje usługę objętą zakresem zwracającą ofertę. Po zażądaniu strony indeksu oferta zostanie osadzona w ukrytym polu na stronie indeksu.
 
-*Usługi/IQuoteService. cs*:
+*Usługi/IQuoteService. cs* :
 
 [!code-csharp[](integration-tests/samples/2.x/IntegrationTestsSample/src/RazorPagesProject/Services/IQuoteService.cs?name=snippet1)]
 
-*Usługi/QuoteService. cs*:
+*Usługi/QuoteService. cs* :
 
 [!code-csharp[](integration-tests/samples/2.x/IntegrationTestsSample/src/RazorPagesProject/Services/QuoteService.cs?name=snippet1)]
 
-*Startup.cs*:
+*Startup.cs* :
 
 [!code-csharp[](integration-tests/samples/2.x/IntegrationTestsSample/src/RazorPagesProject/Startup.cs?name=snippet2)]
 
-*Pages/index. cshtml. cs*:
+*Pages/index. cshtml. cs* :
 
 [!code-csharp[](integration-tests/samples/2.x/IntegrationTestsSample/src/RazorPagesProject/Pages/Index.cshtml.cs?name=snippet1&highlight=4,9,20,26)]
 
-*Strony/indeks. cs*:
+*Strony/indeks. cs* :
 
 [!code-cshtml[](integration-tests/samples/2.x/IntegrationTestsSample/src/RazorPagesProject/Pages/Index.cshtml?name=snippet_Quote)]
 
@@ -637,7 +638,7 @@ Po uruchomieniu aplikacji SUT jest generowany następujący znacznik:
 
 W celu przetestowania usługi i iniekcji cytatu w teście integracji, usługa makiety jest wstrzykiwana do SUT przez test. Usługa makiety zastępuje aplikację `QuoteService` za pomocą usługi dostarczonej przez aplikację testową o nazwie `TestQuoteService` :
 
-*IntegrationTests.IndexPageTests.cs*:
+*IntegrationTests.IndexPageTests.cs* :
 
 [!code-csharp[](integration-tests/samples/2.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/IntegrationTests/IndexPageTests.cs?name=snippet4)]
 
@@ -723,7 +724,7 @@ public class CustomWebApplicationFactory<TStartup>
 
 ## <a name="how-the-test-infrastructure-infers-the-app-content-root-path"></a>Jak infrastruktura testowa wnioskuje ścieżkę katalogu głównego zawartości aplikacji
 
-`WebApplicationFactory`Konstruktor wnioskuje ścieżkę [katalogu głównego zawartości](xref:fundamentals/index#content-root) aplikacji, wyszukując [WebApplicationFactoryContentRootAttribute](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactorycontentrootattribute) na zestawie zawierającym testy integracji z kluczem równym `TEntryPoint` zestawowi `System.Reflection.Assembly.FullName` . W przypadku nieznalezienia atrybutu o poprawnym kluczu `WebApplicationFactory` Wróć do wyszukiwania pliku rozwiązania (*. sln*) i dołączaj `TEntryPoint` nazwę zestawu do katalogu rozwiązania. Katalog główny aplikacji (ścieżka katalogu głównego zawartości) służy do odnajdywania widoków i plików zawartości.
+`WebApplicationFactory`Konstruktor wnioskuje ścieżkę [katalogu głównego zawartości](xref:fundamentals/index#content-root) aplikacji, wyszukując [WebApplicationFactoryContentRootAttribute](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactorycontentrootattribute) na zestawie zawierającym testy integracji z kluczem równym `TEntryPoint` zestawowi `System.Reflection.Assembly.FullName` . W przypadku nieznalezienia atrybutu o poprawnym kluczu `WebApplicationFactory` Wróć do wyszukiwania pliku rozwiązania ( *. sln* ) i dołączaj `TEntryPoint` nazwę zestawu do katalogu rozwiązania. Katalog główny aplikacji (ścieżka katalogu głównego zawartości) służy do odnajdywania widoków i plików zawartości.
 
 ## <a name="disable-shadow-copying"></a>Wyłącz kopiowanie w tle
 
@@ -737,7 +738,7 @@ Dodaj *xunit.runner.js* do pliku głównego projektu testowego z następującą 
 }
 ```
 
-Jeśli używasz programu Visual Studio, ustaw wartość właściwości **Kopiuj do katalogu wyjściowego** na **zawsze Kopiuj**. Jeśli nie korzystasz z programu Visual Studio, Dodaj `Content` obiekt docelowy do pliku projektu aplikacji testowej:
+Jeśli używasz programu Visual Studio, ustaw wartość właściwości **Kopiuj do katalogu wyjściowego** na **zawsze Kopiuj** . Jeśli nie korzystasz z programu Visual Studio, Dodaj `Content` obiekt docelowy do pliku projektu aplikacji testowej:
 
 ```xml
 <ItemGroup>
@@ -770,10 +771,10 @@ dotnet test
 
 SUT to Razor system komunikatów stron o następujących cechach:
 
-* Strona indeks aplikacji (*Pages/index. cshtml* i *Pages/index. cshtml. cs*) zawiera metody interfejsu użytkownika i modelu strony umożliwiające sterowanie dodawaniem, usuwaniem i analizą komunikatów (średnia liczba wyrazów na komunikat).
-* Komunikat jest opisywany przez `Message` klasę (*Data/Message. cs*) z dwiema właściwościami: `Id` (Key) i `Text` (Message). `Text`Właściwość jest wymagana i jest ograniczona do 200 znaków.
+* Strona indeks aplikacji ( *Pages/index. cshtml* i *Pages/index. cshtml. cs* ) zawiera metody interfejsu użytkownika i modelu strony umożliwiające sterowanie dodawaniem, usuwaniem i analizą komunikatów (średnia liczba wyrazów na komunikat).
+* Komunikat jest opisywany przez `Message` klasę ( *Data/Message. cs* ) z dwiema właściwościami: `Id` (Key) i `Text` (Message). `Text`Właściwość jest wymagana i jest ograniczona do 200 znaków.
 * Komunikaty są przechowywane przy użyciu&#8224; [bazy danych Entity Framework w pamięci](/ef/core/providers/in-memory/) .
-* Aplikacja zawiera warstwę dostępu do danych (DAL) w swojej klasie kontekstu bazy danych `AppDbContext` (*Data/AppDbContext. cs*).
+* Aplikacja zawiera warstwę dostępu do danych (DAL) w swojej klasie kontekstu bazy danych `AppDbContext` ( *Data/AppDbContext. cs* ).
 * Jeśli baza danych jest pusta podczas uruchamiania aplikacji, magazyn komunikatów zostanie zainicjowany przy użyciu trzech komunikatów.
 * Aplikacja zawiera dostęp do programu `/SecurePage` , do którego jest dostępny tylko uwierzytelniony użytkownik.
 
@@ -804,7 +805,7 @@ Przykładowa aplikacja odziarnauje bazę danych z trzema komunikatami w *Utiliti
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Testy jednostkowe](/dotnet/articles/core/testing/unit-testing-with-dotnet-test)
 * <xref:test/razor-pages-tests>

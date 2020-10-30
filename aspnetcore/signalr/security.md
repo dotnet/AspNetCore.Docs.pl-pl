@@ -7,6 +7,7 @@ ms.author: anurse
 ms.custom: mvc
 ms.date: 01/16/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/security
-ms.openlocfilehash: 12293c5cb3dc49d505225f1b44e824e9273cfffc
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 5ecbf07b1527e9c68443870f7fce77adc29a5416
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630994"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93050839"
 ---
 # <a name="security-considerations-in-aspnet-core-no-locsignalr"></a>Zagadnienia dotyczące zabezpieczeń w ASP.NET Core SignalR
 
@@ -33,7 +34,7 @@ Ten artykuł zawiera informacje dotyczące zabezpieczania SignalR .
 
 ## <a name="cross-origin-resource-sharing"></a>Współużytkowanie zasobów między źródłami
 
-[Współużytkowanie zasobów między źródłami (CORS)](https://www.w3.org/TR/cors/) może służyć do zezwalania na połączenia między źródłami SignalR w przeglądarce. Jeśli kod JavaScript jest hostowany w innej domenie z SignalR aplikacji, należy włączyć [oprogramowanie pośredniczące CORS](xref:security/cors) , aby umożliwić programowi JavaScript łączenie się z SignalR aplikacją. Zezwalaj na żądania między źródłami tylko z domen, które ufają lub kontrolują. Na przykład:
+[Współużytkowanie zasobów między źródłami (CORS)](https://www.w3.org/TR/cors/) może służyć do zezwalania na połączenia między źródłami SignalR w przeglądarce. Jeśli kod JavaScript jest hostowany w innej domenie z SignalR aplikacji, należy włączyć [oprogramowanie pośredniczące CORS](xref:security/cors) , aby umożliwić programowi JavaScript łączenie się z SignalR aplikacją. Zezwalaj na żądania między źródłami tylko z domen, które ufają lub kontrolują. Przykład:
 
 * Twoja witryna jest hostowana `http://www.example.com`
 * Twoja SignalR aplikacja jest hostowana `http://signalr.example.com`
@@ -101,7 +102,7 @@ Ochrona zapewniana przez mechanizm CORS nie ma zastosowania do obiektów WebSock
 
 ::: moniker range="< aspnetcore-2.2"
 
-Ochrona zapewniana przez mechanizm CORS nie ma zastosowania do obiektów WebSockets. Przeglądarki **nie**:
+Ochrona zapewniana przez mechanizm CORS nie ma zastosowania do obiektów WebSockets. Przeglądarki **nie** :
 
 * Wykonaj żądania funkcji CORS przed inspekcją.
 * Przestrzeganie ograniczeń określonych w `Access-Control` nagłówkach podczas wykonywania żądań WebSocket.
@@ -123,7 +124,7 @@ Uwidacznianie `ConnectionId` może prowadzić do złośliwej personifikacji, je�
 
 ## <a name="access-token-logging"></a>Rejestrowanie tokenu dostępu
 
-W przypadku korzystania z usługi WebSockets lub zdarzeń wysyłanych przez serwer klient przeglądarki wysyła token dostępu w ciągu zapytania. Uzyskiwanie tokenu dostępu za pośrednictwem ciągu zapytania jest zazwyczaj bezpieczne przy użyciu standardowego `Authorization` nagłówka. Zawsze używaj protokołu HTTPS, aby zapewnić bezpieczne połączenie między klientem a serwerem. Wiele serwerów sieci Web rejestruje adres URL dla każdego żądania, w tym ciąg zapytania. Rejestrowanie adresów URL może rejestrować token dostępu. ASP.NET Core domyślnie rejestruje adres URL dla każdego żądania, który będzie zawierać ciąg zapytania. Na przykład:
+W przypadku korzystania z usługi WebSockets lub zdarzeń Server-Sent klient przeglądarki wysyła token dostępu w ciągu zapytania. Uzyskiwanie tokenu dostępu za pośrednictwem ciągu zapytania jest zazwyczaj bezpieczne przy użyciu standardowego `Authorization` nagłówka. Zawsze używaj protokołu HTTPS, aby zapewnić bezpieczne połączenie między klientem a serwerem. Wiele serwerów sieci Web rejestruje adres URL dla każdego żądania, w tym ciąg zapytania. Rejestrowanie adresów URL może rejestrować token dostępu. ASP.NET Core domyślnie rejestruje adres URL dla każdego żądania, który będzie zawierać ciąg zapytania. Przykład:
 
 ```
 info: Microsoft.AspNetCore.Hosting.Internal.WebHost[1]

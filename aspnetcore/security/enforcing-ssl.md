@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/06/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/enforcing-ssl
-ms.openlocfilehash: b5260084c2fdd296168e918f06d8b54faf1865d5
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: e473da9a7cbd91a601ad4af0c7c02c7f576f348c
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722660"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051125"
 ---
 # <a name="enforce-https-in-aspnet-core"></a>Wymuszanie protokołu HTTPS w ASP.NET Core
 
@@ -113,7 +114,7 @@ Określ port HTTPS przy użyciu dowolnej z następujących metod:
 
   * W obszarze Konfiguracja hosta.
   * Przez ustawienie `ASPNETCORE_HTTPS_PORT` zmiennej środowiskowej.
-  * Dodając wpis najwyższego poziomu w *appsettings.jsna*:
+  * Dodając wpis najwyższego poziomu w *appsettings.json* :
 
     [!code-json[](enforcing-ssl/sample-snapshot/3.x/appsettings.json?highlight=2)]
 
@@ -127,7 +128,7 @@ Określ port HTTPS przy użyciu dowolnej z następujących metod:
 
   * W obszarze Konfiguracja hosta.
   * Przez ustawienie `ASPNETCORE_HTTPS_PORT` zmiennej środowiskowej.
-  * Dodając wpis najwyższego poziomu w *appsettings.jsna*:
+  * Dodając wpis najwyższego poziomu w *appsettings.json* :
 
     [!code-json[](enforcing-ssl/sample-snapshot/2.x/appsettings.json?highlight=2)]
 
@@ -135,7 +136,7 @@ Określ port HTTPS przy użyciu dowolnej z następujących metod:
 
 ::: moniker-end
 
-* W obszarze programowanie Ustaw adres URL HTTPS w *launchsettings.jsna*. Włącz protokół HTTPS, gdy zostanie użyta IIS Express.
+* W obszarze programowanie Ustaw adres URL HTTPS w *launchsettings.jsna* . Włącz protokół HTTPS, gdy zostanie użyta IIS Express.
 
 * Skonfiguruj punkt końcowy adresu URL HTTPS dla wdrożenia publicznej krawędzi serwera [Kestrel](xref:fundamentals/servers/kestrel) lub serwera [HTTP.sys](xref:fundamentals/servers/httpsys) . Aplikacja używa tylko **jednego portu HTTPS** . Oprogramowanie pośredniczące odnajduje port za pośrednictwem programu <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature> .
 
@@ -192,7 +193,7 @@ Ustawienia domyślne oprogramowania pośredniczącego do wysyłania [Status307Te
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Podczas konfigurowania usług w programie *Startup.cs*:
+Podczas konfigurowania usług w programie *Startup.cs* :
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -213,7 +214,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ::: moniker range="<= aspnetcore-2.2"
 
-Podczas konfigurowania usług w programie *Startup.cs*:
+Podczas konfigurowania usług w programie *Startup.cs* :
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)

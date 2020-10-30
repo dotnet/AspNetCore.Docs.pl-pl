@@ -5,6 +5,7 @@ description: Część 3 serii samouczków na ASP.NET Core MVC.
 ms.author: riande
 ms.date: 8/04/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-view
-ms.openlocfilehash: 970cc1fe6e0a0e0204ddafec09c15db6fed9aa66
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 078329d1e5dfe41a7713b1e53894a9b09886752d
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88629759"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93052672"
 ---
 # <a name="part-3-add-a-view-to-an-aspnet-core-mvc-app"></a>Część 3 Dodawanie widoku do aplikacji ASP.NET Core MVC
 
@@ -37,25 +38,25 @@ Obecnie `Index` Metoda zwraca ciąg z komunikatem, który jest zakodowany w klas
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/HelloWorldController.cs?name=snippet_4)]
 
-Poprzedni kod wywołuje <xref:Microsoft.AspNetCore.Mvc.Controller.View*> metodę kontrolera. Używa szablonu widoku do wygenerowania odpowiedzi HTML. Metody kontrolera (znane także jako *metody akcji*), takie jak `Index` powyższa metoda, zazwyczaj zwracają <xref:Microsoft.AspNetCore.Mvc.IActionResult> (lub klasę pochodną <xref:Microsoft.AspNetCore.Mvc.ActionResult> ), a nie typ taki jak `string` .
+Poprzedni kod wywołuje <xref:Microsoft.AspNetCore.Mvc.Controller.View*> metodę kontrolera. Używa szablonu widoku do wygenerowania odpowiedzi HTML. Metody kontrolera (znane także jako *metody akcji* ), takie jak `Index` powyższa metoda, zazwyczaj zwracają <xref:Microsoft.AspNetCore.Mvc.IActionResult> (lub klasę pochodną <xref:Microsoft.AspNetCore.Mvc.ActionResult> ), a nie typ taki jak `string` .
 
 ## <a name="add-a-view"></a>Dodawanie widoku
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Kliknij prawym przyciskiem myszy folder *widoki* , a następnie **Dodaj > nowy folder** i nadaj mu nazwę folder *HelloWorld*.
+* Kliknij prawym przyciskiem myszy folder *widoki* , a następnie **Dodaj > nowy folder** i nadaj mu nazwę folder *HelloWorld* .
 
-* Kliknij prawym przyciskiem myszy folder *widoki/HelloWorld* , a następnie **Dodaj > nowy element**.
+* Kliknij prawym przyciskiem myszy folder *widoki/HelloWorld* , a następnie **Dodaj > nowy element** .
 
 * W oknie dialogowym **Dodaj nowy element — MvcMovie**
 
   * W polu wyszukiwania w prawym górnym rogu wprowadź *Widok*
 
-  * Wybierz ** Razor Widok**
+  * Wybierz **Razor Widok**
 
-  * Zachowaj wartość pola **Nazwa** , *index. cshtml*.
+  * Zachowaj wartość pola **Nazwa** , *index. cshtml* .
 
-  * Wybierz pozycję **Dodaj**
+  * Wybierz pozycję **Dodaj** .
 
 ![Okno dialogowe Dodawanie nowego elementu](adding-view/_static/add_view.png)
 
@@ -63,19 +64,19 @@ Poprzedni kod wywołuje <xref:Microsoft.AspNetCore.Mvc.Controller.View*> metodę
 
 Dodaj `Index` widok dla `HelloWorldController` .
 
-* Dodaj nowy folder o nazwie *viewss/HelloWorld*.
-* Dodaj nowy plik do pliku *viewss/HelloWorld* Name *index. cshtml*.
+* Dodaj nowy folder o nazwie *viewss/HelloWorld* .
+* Dodaj nowy plik do pliku *viewss/HelloWorld* Name *index. cshtml* .
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-* Kliknij prawym przyciskiem myszy folder *widoki* , a następnie **Dodaj > nowy folder** i nadaj mu nazwę folder *HelloWorld*.
-* Kliknij prawym przyciskiem myszy folder *widoki/HelloWorld* , a następnie **Dodaj > nowy plik**.
+* Kliknij prawym przyciskiem myszy folder *widoki* , a następnie **Dodaj > nowy folder** i nadaj mu nazwę folder *HelloWorld* .
+* Kliknij prawym przyciskiem myszy folder *widoki/HelloWorld* , a następnie **Dodaj > nowy plik** .
 * W oknie dialogowym **nowy plik** :
 
   * W lewym okienku wybierz pozycję **ASP .NET Core** .
   * Wybierz **stronę widok MVC** w środkowym okienku.
   * Wpisz *indeks* w polu **Nazwa** .
-  * Wybierz pozycję **Nowy**.
+  * Wybierz pozycję **Nowy** .
 
 ![Okno dialogowe Dodawanie nowego elementu](adding-view/_static/add_view_mac.png)
 
@@ -91,7 +92,7 @@ Przejdź do adresu `https://localhost:{PORT}/HelloWorld`. Metoda w niewykonanym 
 
 ## <a name="change-views-and-layout-pages"></a>Zmień widoki i strony układu
 
-Wybierz linki menu (**MvcMovie**, **Home**i **privacy**). Każda Strona wyświetla ten sam układ menu. Układ menu jest implementowany w pliku *views/Shared/_Layout. cshtml* . Otwórz plik *views/Shared/_Layout. cshtml* .
+Wybierz linki menu ( **MvcMovie** , **Home** i **privacy** ). Każda Strona wyświetla ten sam układ menu. Układ menu jest implementowany w pliku *views/Shared/_Layout. cshtml* . Otwórz plik *views/Shared/_Layout. cshtml* .
 
 Szablony [układów](xref:mvc/views/layout) umożliwiają określenie układu kontenera HTML witryny w jednym miejscu, a następnie zastosowanie go na wielu stronach w witrynie. Znajdź `@RenderBody()` wiersz. `RenderBody` jest symbolem zastępczym, w którym wszystkie utworzone strony specyficzne dla widoku są *widoczne na stronie* układ. Na przykład po wybraniu linku **prywatności** widok **widoki/główna/prywatność. cshtml** jest renderowany wewnątrz `RenderBody` metody.
 
@@ -108,13 +109,13 @@ Poprzednia Adiustacja wprowadziła następujące zmiany:
 
 W powyższym znaczniku `asp-area=""` [atrybut pomocnika tagu zakotwiczenia](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) i wartość atrybutu zostały pominięte, ponieważ ta aplikacja nie korzysta z [obszarów](xref:mvc/controllers/areas).
 
-**Uwaga**: `Movies` kontroler nie został zaimplementowany. W tym momencie `Movie App` łącze nie działa.
+**Uwaga** : `Movies` kontroler nie został zaimplementowany. W tym momencie `Movie App` łącze nie działa.
 
-Zapisz zmiany i wybierz łącze **prywatność** . Zwróć uwagę, jak tytuł na karcie Przeglądarka wyświetla **zasady zachowania poufności informacji — aplikacja dla filmów** zamiast **zasad ochrony prywatności — film MVC**:
+Zapisz zmiany i wybierz łącze **prywatność** . Zwróć uwagę, jak tytuł na karcie Przeglądarka wyświetla **zasady zachowania poufności informacji — aplikacja dla filmów** zamiast **zasad ochrony prywatności — film MVC** :
 
 ![Karta prywatność](~/tutorials/first-mvc-app/adding-view/_static/about2.png)
 
-Wybierz link **domowy** i zwróć uwagę na to, że tytuł i tekst zakotwiczenia również wyświetlają **aplikację Movie**. Udało nam się wprowadzić zmiany w szablonie układu i wszystkie strony w witrynie będą odzwierciedlały nowy tekst linku i nowy tytuł.
+Wybierz link **domowy** i zwróć uwagę na to, że tytuł i tekst zakotwiczenia również wyświetlają **aplikację Movie** . Udało nam się wprowadzić zmiany w szablonie układu i wszystkie strony w witrynie będą odzwierciedlały nowy tekst linku i nowy tytuł.
 
 Przejrzyj plik *views/_ViewStart. cshtml* :
 
@@ -154,13 +155,13 @@ Kontrolery są odpowiedzialne za dostarczanie danych wymaganych w celu renderowa
 
 Obecnie `Welcome` Metoda w `HelloWorldController` klasie przyjmuje `name` parametr i, `ID` a następnie wyprowadza wartości bezpośrednio do przeglądarki. Zamiast przetworzyć tę odpowiedź jako ciąg, należy zmienić kontroler tak, aby używał szablonu widoku. Szablon widoku generuje odpowiedź dynamiczną, co oznacza, że odpowiednie bity danych muszą zostać przesłane z kontrolera do widoku w celu wygenerowania odpowiedzi. W tym celu należy mieć kontroler umieszczający dane dynamiczne (parametry) wymagane przez szablon widoku w `ViewData` słowniku, do którego będzie miał dostęp ten szablon.
 
-W *HelloWorldController.cs*Zmień metodę, `Welcome` Aby dodać `Message` `NumTimes` wartość i do `ViewData` słownika. `ViewData`Słownik jest obiektem dynamicznym, co oznacza, że można użyć dowolnego typu; `ViewData` obiekt nie ma zdefiniowanych właściwości, dopóki nie umieścisz w nim elementu. [System powiązania modelu MVC](xref:mvc/models/model-binding) automatycznie mapuje nazwane parametry ( `name` i `numTimes` ) z ciągu zapytania na pasku adresu na parametry w metodzie. Pełny plik *HelloWorldController.cs* wygląda następująco:
+W *HelloWorldController.cs* Zmień metodę, `Welcome` Aby dodać `Message` `NumTimes` wartość i do `ViewData` słownika. `ViewData`Słownik jest obiektem dynamicznym, co oznacza, że można użyć dowolnego typu; `ViewData` obiekt nie ma zdefiniowanych właściwości, dopóki nie umieścisz w nim elementu. [System powiązania modelu MVC](xref:mvc/models/model-binding) automatycznie mapuje nazwane parametry ( `name` i `numTimes` ) z ciągu zapytania na pasku adresu na parametry w metodzie. Pełny plik *HelloWorldController.cs* wygląda następująco:
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/HelloWorldController.cs?name=snippet_5)]
 
 `ViewData`Obiekt dictionary zawiera dane, które zostaną przesłane do widoku.
 
-Utwórz szablon widoku powitalnego o nazwie *przeglądający/HelloWorld/Welcome. cshtml*.
+Utwórz szablon widoku powitalnego o nazwie *przeglądający/HelloWorld/Welcome. cshtml* .
 
 Utworzysz pętlę w szablonie widoku *Welcome. cshtml* , który wyświetla "Hello" `NumTimes` . Zastąp zawartość *widoków/HelloWorld/Welcome. cshtml* następującym:
 
@@ -194,25 +195,25 @@ Obecnie `Index` Metoda zwraca ciąg z komunikatem, który jest zakodowany w klas
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/HelloWorldController.cs?name=snippet_4)]
 
-Poprzedni kod wywołuje <xref:Microsoft.AspNetCore.Mvc.Controller.View*> metodę kontrolera. Używa szablonu widoku do wygenerowania odpowiedzi HTML. Metody kontrolera (znane także jako *metody akcji*), takie jak `Index` powyższa metoda, zazwyczaj zwracają <xref:Microsoft.AspNetCore.Mvc.IActionResult> (lub klasę pochodną <xref:Microsoft.AspNetCore.Mvc.ActionResult> ), a nie typ taki jak `string` .
+Poprzedni kod wywołuje <xref:Microsoft.AspNetCore.Mvc.Controller.View*> metodę kontrolera. Używa szablonu widoku do wygenerowania odpowiedzi HTML. Metody kontrolera (znane także jako *metody akcji* ), takie jak `Index` powyższa metoda, zazwyczaj zwracają <xref:Microsoft.AspNetCore.Mvc.IActionResult> (lub klasę pochodną <xref:Microsoft.AspNetCore.Mvc.ActionResult> ), a nie typ taki jak `string` .
 
 ## <a name="add-a-view"></a>Dodawanie widoku
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Kliknij prawym przyciskiem myszy folder *widoki* , a następnie **Dodaj > nowy folder** i nadaj mu nazwę folder *HelloWorld*.
+* Kliknij prawym przyciskiem myszy folder *widoki* , a następnie **Dodaj > nowy folder** i nadaj mu nazwę folder *HelloWorld* .
 
-* Kliknij prawym przyciskiem myszy folder *widoki/HelloWorld* , a następnie **Dodaj > nowy element**.
+* Kliknij prawym przyciskiem myszy folder *widoki/HelloWorld* , a następnie **Dodaj > nowy element** .
 
 * W oknie dialogowym **Dodaj nowy element — MvcMovie**
 
   * W polu wyszukiwania w prawym górnym rogu wprowadź *Widok*
 
-  * Wybierz ** Razor Widok**
+  * Wybierz **Razor Widok**
 
-  * Zachowaj wartość pola **Nazwa** , *index. cshtml*.
+  * Zachowaj wartość pola **Nazwa** , *index. cshtml* .
 
-  * Wybierz pozycję **Dodaj**
+  * Wybierz pozycję **Dodaj** .
 
 ![Okno dialogowe Dodawanie nowego elementu](adding-view/_static/add_view.png)
 
@@ -220,19 +221,19 @@ Poprzedni kod wywołuje <xref:Microsoft.AspNetCore.Mvc.Controller.View*> metodę
 
 Dodaj `Index` widok dla `HelloWorldController` .
 
-* Dodaj nowy folder o nazwie *viewss/HelloWorld*.
-* Dodaj nowy plik do pliku *viewss/HelloWorld* Name *index. cshtml*.
+* Dodaj nowy folder o nazwie *viewss/HelloWorld* .
+* Dodaj nowy plik do pliku *viewss/HelloWorld* Name *index. cshtml* .
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-* Kliknij prawym przyciskiem myszy folder *widoki* , a następnie **Dodaj > nowy folder** i nadaj mu nazwę folder *HelloWorld*.
-* Kliknij prawym przyciskiem myszy folder *widoki/HelloWorld* , a następnie **Dodaj > nowy plik**.
+* Kliknij prawym przyciskiem myszy folder *widoki* , a następnie **Dodaj > nowy folder** i nadaj mu nazwę folder *HelloWorld* .
+* Kliknij prawym przyciskiem myszy folder *widoki/HelloWorld* , a następnie **Dodaj > nowy plik** .
 * W oknie dialogowym **nowy plik** :
 
   * W lewym okienku wybierz pozycję **Sieć Web** .
   * W środkowym okienku wybierz pozycję **pusty plik HTML** .
   * Wpisz *index. cshtml* w polu **Nazwa** .
-  * Wybierz pozycję **Nowy**.
+  * Wybierz pozycję **Nowy** .
 
 ![Okno dialogowe Dodawanie nowego elementu](adding-view/_static/add_view_mac.png)
 
@@ -248,7 +249,7 @@ Przejdź do adresu `https://localhost:{PORT}/HelloWorld`. Metoda w niewykonanym 
 
 ## <a name="change-views-and-layout-pages"></a>Zmień widoki i strony układu
 
-Wybierz linki menu (**MvcMovie**, **Home**i **privacy**). Każda Strona wyświetla ten sam układ menu. Układ menu jest implementowany w pliku *views/Shared/_Layout. cshtml* . Otwórz plik *views/Shared/_Layout. cshtml* .
+Wybierz linki menu ( **MvcMovie** , **Home** i **privacy** ). Każda Strona wyświetla ten sam układ menu. Układ menu jest implementowany w pliku *views/Shared/_Layout. cshtml* . Otwórz plik *views/Shared/_Layout. cshtml* .
 
 Szablony [układów](xref:mvc/views/layout) umożliwiają określenie układu kontenera HTML witryny w jednym miejscu, a następnie zastosowanie go na wielu stronach w witrynie. Znajdź `@RenderBody()` wiersz. `RenderBody` jest symbolem zastępczym, w którym wszystkie utworzone strony specyficzne dla widoku są *widoczne na stronie* układ. Na przykład po wybraniu linku **prywatności** widok **widoki/główna/prywatność. cshtml** jest renderowany wewnątrz `RenderBody` metody.
 
@@ -268,13 +269,13 @@ W powyższym znaczniku `asp-area` [atrybut pomocnika tagu kotwicy](xref:mvc/view
 > We haven't implemented the `Movies` controller yet, so if you click the `Movie App` link, you get a 404 (Not found) error.
 -->
 
-**Uwaga**: `Movies` kontroler nie został zaimplementowany. W tym momencie `Movie App` łącze nie działa.
+**Uwaga** : `Movies` kontroler nie został zaimplementowany. W tym momencie `Movie App` łącze nie działa.
 
-Zapisz zmiany i wybierz łącze **prywatność** . Zwróć uwagę, jak tytuł na karcie Przeglądarka wyświetla **zasady zachowania poufności informacji — aplikacja dla filmów** zamiast **zasad ochrony prywatności — film MVC**:
+Zapisz zmiany i wybierz łącze **prywatność** . Zwróć uwagę, jak tytuł na karcie Przeglądarka wyświetla **zasady zachowania poufności informacji — aplikacja dla filmów** zamiast **zasad ochrony prywatności — film MVC** :
 
 ![Karta prywatność](~/tutorials/first-mvc-app/adding-view/_static/about2.png)
 
-Wybierz link **domowy** i zwróć uwagę na to, że tytuł i tekst zakotwiczenia również wyświetlają **aplikację Movie**. Udało nam się wprowadzić zmiany w szablonie układu i wszystkie strony w witrynie będą odzwierciedlały nowy tekst linku i nowy tytuł.
+Wybierz link **domowy** i zwróć uwagę na to, że tytuł i tekst zakotwiczenia również wyświetlają **aplikację Movie** . Udało nam się wprowadzić zmiany w szablonie układu i wszystkie strony w witrynie będą odzwierciedlały nowy tekst linku i nowy tytuł.
 
 Przejrzyj plik *views/_ViewStart. cshtml* :
 
@@ -314,13 +315,13 @@ Kontrolery są odpowiedzialne za dostarczanie danych wymaganych w celu renderowa
 
 Obecnie `Welcome` Metoda w `HelloWorldController` klasie przyjmuje `name` parametr i, `ID` a następnie wyprowadza wartości bezpośrednio do przeglądarki. Zamiast przetworzyć tę odpowiedź jako ciąg, należy zmienić kontroler tak, aby używał szablonu widoku. Szablon widoku generuje odpowiedź dynamiczną, co oznacza, że odpowiednie bity danych muszą zostać przesłane z kontrolera do widoku w celu wygenerowania odpowiedzi. W tym celu należy mieć kontroler umieszczający dane dynamiczne (parametry) wymagane przez szablon widoku w `ViewData` słowniku, do którego będzie miał dostęp ten szablon.
 
-W *HelloWorldController.cs*Zmień metodę, `Welcome` Aby dodać `Message` `NumTimes` wartość i do `ViewData` słownika. `ViewData`Słownik jest obiektem dynamicznym, co oznacza, że można użyć dowolnego typu; `ViewData` obiekt nie ma zdefiniowanych właściwości, dopóki nie umieścisz w nim elementu. [System powiązania modelu MVC](xref:mvc/models/model-binding) automatycznie mapuje nazwane parametry ( `name` i `numTimes` ) z ciągu zapytania na pasku adresu na parametry w metodzie. Pełny plik *HelloWorldController.cs* wygląda następująco:
+W *HelloWorldController.cs* Zmień metodę, `Welcome` Aby dodać `Message` `NumTimes` wartość i do `ViewData` słownika. `ViewData`Słownik jest obiektem dynamicznym, co oznacza, że można użyć dowolnego typu; `ViewData` obiekt nie ma zdefiniowanych właściwości, dopóki nie umieścisz w nim elementu. [System powiązania modelu MVC](xref:mvc/models/model-binding) automatycznie mapuje nazwane parametry ( `name` i `numTimes` ) z ciągu zapytania na pasku adresu na parametry w metodzie. Pełny plik *HelloWorldController.cs* wygląda następująco:
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/HelloWorldController.cs?name=snippet_5)]
 
 `ViewData`Obiekt dictionary zawiera dane, które zostaną przesłane do widoku.
 
-Utwórz szablon widoku powitalnego o nazwie *przeglądający/HelloWorld/Welcome. cshtml*.
+Utwórz szablon widoku powitalnego o nazwie *przeglądający/HelloWorld/Welcome. cshtml* .
 
 Utworzysz pętlę w szablonie widoku *Welcome. cshtml* , który wyświetla "Hello" `NumTimes` . Zastąp zawartość *widoków/HelloWorld/Welcome. cshtml* następującym:
 

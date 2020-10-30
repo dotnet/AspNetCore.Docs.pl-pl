@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/03/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/samesite/mvc21
-ms.openlocfilehash: 38e5f0d1a2ecf5b46f73bf8574f73934a070880f
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 61878af0f9af72284b43ffd46cca42b0cf043326
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722608"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051554"
 ---
 # <a name="aspnet-core-21-mvc-samesite-no-loccookie-sample"></a>Przykład ASP.NET Core SameSite 2,1 MVC cookie
 
@@ -90,7 +91,7 @@ Po kliknięciu przycisku "Utwórz SameSite" w powyższym obrazie można zobaczy�
 
 W celu przechwycenia elementu cookie s, aby dostosować wartość Brak zgodnie z obsługą agenta przeglądarki użytkownika, należy użyć `CookiePolicy` oprogramowania pośredniczącego. Ta wartość musi być umieszczona w potoku żądania HTTP **przed** wszelkimi składnikami, które zapisują cookie i konfigurują w ramach `ConfigureServices()` .
 
-Aby wstawić go do użycia potoku `app.UseCookiePolicy()` w `Configure(IApplicationBuilder, IHostingEnvironment)` metodzie w [Startup.cs](https://github.com/blowdart/AspNetSameSiteSamples/blob/master/AspNetCore21MVC/Startup.cs). Na przykład:
+Aby wstawić go do użycia potoku `app.UseCookiePolicy()` w `Configure(IApplicationBuilder, IHostingEnvironment)` metodzie w [Startup.cs](https://github.com/blowdart/AspNetSameSiteSamples/blob/master/AspNetCore21MVC/Startup.cs). Przykład:
 
 ```c#
 public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -120,7 +121,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 }
 ```
 
-Następnie w obszarze `ConfigureServices(IServiceCollection services)` Konfigurowanie cookie zasad do wywołania klasy pomocnika, gdy cookie s są dołączane lub usuwane. Na przykład:
+Następnie w obszarze `ConfigureServices(IServiceCollection services)` Konfigurowanie cookie zasad do wywołania klasy pomocnika, gdy cookie s są dołączane lub usuwane. Przykład:
 
 ```c#
 public void ConfigureServices(IServiceCollection services)

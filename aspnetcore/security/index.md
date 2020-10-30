@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/24/2018
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/index
-ms.openlocfilehash: 0378fd06b5cae5b8911e8a2f41937b28d5444538
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 3c86c66bebe8a5ce1c195ebf931193e7e2a73fef
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632866"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051632"
 ---
 # <a name="overview-of-aspnet-core-security"></a>Przegląd zabezpieczeń ASP.NET Core
 
@@ -47,4 +48,4 @@ ASP.NET Core i EF zawierają funkcje, które ułatwiają Zabezpieczanie aplikacj
 * [Ataki między lokacjami (XSRF/CSRF)](xref:security/anti-request-forgery)
 * [Otwarte ataki przekierowania](xref:security/preventing-open-redirects)
 
-Istnieje więcej luk w zabezpieczeniach. Aby uzyskać więcej informacji, zapoznaj się z innymi artykułami w sekcji **zabezpieczenia i Identity ** treść spisu treści.
+Istnieje więcej luk w zabezpieczeniach. Aby uzyskać więcej informacji, zapoznaj się z innymi artykułami w sekcji **zabezpieczenia i Identity** treść spisu treści.

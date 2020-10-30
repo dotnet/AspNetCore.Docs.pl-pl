@@ -5,8 +5,9 @@ description: Używanie Identity z aplikacją jednostronicową hostowaną w aplik
 monikerRange: '>= aspnetcore-3.0'
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 11/08/2019
+ms.date: 10/27/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,30 +19,30 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity/spa
-ms.openlocfilehash: 1e50fb2f2f5e3621b189f756c53e80a2dd64c8a6
-ms.sourcegitcommit: d60bfd52bfb559e805abd654b87a2a0c7eb69cf8
+ms.openlocfilehash: 8acc34c88bf62b3da1b920acc7318c94435c100e
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/06/2020
-ms.locfileid: "91754531"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051983"
 ---
 # <a name="authentication-and-authorization-for-spas"></a>Uwierzytelnianie i autoryzacja dla aplikacji jednostronicowych
 
 Szablony ASP.NET Core 3,1 i nowsze oferują uwierzytelnianie w aplikacjach jednostronicowych (aplikacji jednostronicowych) przy użyciu obsługi autoryzacji interfejsu API. ASP.NET Core Identityuwierzytelnianie i przechowywanie użytkowników są łączone z [ Identity serwerem](https://identityserver.io/) w celu zaimplementowania połączenia OpenID Connect.
 
-Parametr uwierzytelniania został dodany do szablonów projektów **kątowych** i **reagowania** , które są podobne do parametrów uwierzytelniania w szablonach **aplikacji sieci Web (Model-View-Controller)** (MVC) i **aplikacji sieci Web** ( Razor strony). Dozwolone wartości parametrów to **none** i **indywidualny**. Szablon projektu **React.js i Redux** nie obsługuje w tym momencie parametru Authentication.
+Parametr uwierzytelniania został dodany do szablonów projektów **kątowych** i **reagowania** , które są podobne do parametrów uwierzytelniania w szablonach **aplikacji sieci Web (Model-View-Controller)** (MVC) i **aplikacji sieci Web** ( Razor strony). Dozwolone wartości parametrów to **none** i **indywidualny** . Szablon projektu **React.js i Redux** nie obsługuje w tym momencie parametru Authentication.
 
 ## <a name="create-an-app-with-api-authorization-support"></a>Tworzenie aplikacji z obsługą autoryzacji interfejsu API
 
 Uwierzytelnianie i autoryzacja użytkowników mogą być używane z aplikacji jednostronicowychą kątową i reagują. Otwórz powłokę poleceń i uruchom następujące polecenie:
 
-**Kątowy**:
+**Kątowy** :
 
 ```dotnetcli
 dotnet new angular -o <output_directory_name> -au Individual
 ```
 
-**Reagowanie**:
+**Reagowanie** :
 
 ```dotnetcli
 dotnet new react -o <output_directory_name> -au Individual
@@ -119,9 +120,9 @@ Aby uzyskać pełną kontrolę nad schematem bazy danych, Dziedzicz z jednej z d
 
 W pliku *Controllers\OidcConfigurationController.cs* Zwróć uwagę na punkt końcowy, który jest wstępnie zainicjowany do obsługi parametrów OIDC wymaganych przez klienta.
 
-### <a name="appsettingsjson"></a>appsettings.json
+### appsettings.json
 
-W *appsettings.js* w pliku katalogu głównego projektu znajduje się nowa `IdentityServer` sekcja opisująca listę skonfigurowanych klientów. W poniższym przykładzie istnieje pojedynczy klient. Nazwa klienta odpowiada nazwie aplikacji i jest zamapowana według Konwencji do `ClientId` parametru OAuth. Profil wskazuje konfigurowany typ aplikacji. Jest on używany wewnętrznie w przypadku Konwencji, które upraszczają proces konfiguracji serwera. Istnieje kilka dostępnych profilów, zgodnie z opisem w sekcji [Profile aplikacji](#application-profiles) .
+W *appsettings.json* pliku katalogu głównego projektu znajduje się nowa `IdentityServer` sekcja opisująca listę skonfigurowanych klientów. W poniższym przykładzie istnieje pojedynczy klient. Nazwa klienta odpowiada nazwie aplikacji i jest zamapowana według Konwencji do `ClientId` parametru OAuth. Profil wskazuje konfigurowany typ aplikacji. Jest on używany wewnętrznie w przypadku Konwencji, które upraszczają proces konfiguracji serwera. Istnieje kilka dostępnych profilów, zgodnie z opisem w sekcji [Profile aplikacji](#application-profiles) .
 
 ```json
 "IdentityServer": {
@@ -150,9 +151,9 @@ W *appsettings.Development.jsna* pliku katalogu głównego projektu znajduje si�
 Obsługa uwierzytelniania i autoryzacji interfejsu API w szablonie kątowym znajduje się w jego własnym module skośnym w katalogu *ClientApp\src\api-Authorization* . Moduł składa się z następujących elementów:
 
 * 3 składniki:
-  * *login. Component. TS*: obsługuje przepływ logowania aplikacji.
-  * *Wyloguj. składnik. TS*: obsługuje przepływ wylogowania aplikacji.
-  * *login-menu. składnik. TS*: element widget wyświetlający jeden z następujących zestawów linków:
+  * *login. Component. TS* : obsługuje przepływ logowania aplikacji.
+  * *Wyloguj. składnik. TS* : obsługuje przepływ wylogowania aplikacji.
+  * *login-menu. składnik. TS* : element widget wyświetlający jeden z następujących zestawów linków:
     * Zarządzanie profilami użytkowników i wylogowywanie łączy podczas uwierzytelniania użytkownika.
     * Rejestrowanie i logowanie w przypadku braku uwierzytelnienia użytkownika.
 * Ochrona trasy `AuthorizeGuard` , którą można dodać do tras i wymaga uwierzytelnienia użytkownika przed odwiedzeniem trasy.
@@ -165,12 +166,12 @@ Obsługa uwierzytelniania i autoryzacji interfejsu API w szablonie kątowym znaj
 Obsługa uwierzytelniania i autoryzacji interfejsu API w szablonie reagowania znajduje się w katalogu *ClientApp\src\components\api-Authorization* . Składa się z następujących elementów:
 
 * 4 składniki:
-  * *Login.js*: obsługuje przepływ logowania aplikacji.
-  * *Logout.js*: obsługuje przepływ wylogowania aplikacji.
-  * *LoginMenu.js*: element widget wyświetlający jeden z następujących zestawów linków:
+  * *Login.js* : obsługuje przepływ logowania aplikacji.
+  * *Logout.js* : obsługuje przepływ wylogowania aplikacji.
+  * *LoginMenu.js* : element widget wyświetlający jeden z następujących zestawów linków:
     * Zarządzanie profilami użytkowników i wylogowywanie łączy podczas uwierzytelniania użytkownika.
     * Rejestrowanie i logowanie w przypadku braku uwierzytelnienia użytkownika.
-  * *AuthorizeRoute.js*: składnik trasy, który wymaga uwierzytelnienia użytkownika przed renderowaniem składnika wskazanego w `Component` parametrze.
+  * *AuthorizeRoute.js* : składnik trasy, który wymaga uwierzytelnienia użytkownika przed renderowaniem składnika wskazanego w `Component` parametrze.
 * Wyeksportowane `authService` wystąpienie klasy `AuthorizeService` , które obsługuje szczegóły niższego poziomu procesu uwierzytelniania i ujawnia informacje o uwierzytelnionym użytkowniku w pozostałej części aplikacji do użycia.
 
 Teraz, gdy widzisz główne składniki rozwiązania, możesz zapoznać się ze szczegółowymi scenariuszami dotyczącymi aplikacji.
@@ -197,7 +198,7 @@ services.Configure<JwtBearerOptions>(
 
 Procedura obsługi JWT interfejsu API wywołuje zdarzenia, które umożliwiają kontrolę nad procesem uwierzytelniania przy użyciu `JwtBearerEvents` . Aby zapewnić obsługę autoryzacji interfejsu API, `AddIdentityServerJwt` rejestruje własne programy obsługi zdarzeń.
 
-Aby dostosować obsługę zdarzenia, zawiń istniejący program obsługi zdarzeń z dodatkową logiką zgodnie z wymaganiami. Na przykład:
+Aby dostosować obsługę zdarzenia, zawiń istniejący program obsługi zdarzeń z dodatkową logiką zgodnie z wymaganiami. Przykład:
 
 ```csharp
 services.Configure<JwtBearerOptions>(
@@ -282,11 +283,32 @@ Aby wdrożyć aplikację w środowisku produkcyjnym, należy zainicjować nastę
   * Można go wygenerować za poorednictwem standardowych narzędzi, takich jak PowerShell lub OpenSSL.
   * Można go zainstalować w magazynie certyfikatów na maszynach docelowych lub wdrożyć jako plik *PFX* przy użyciu silnego hasła.
 
+### <a name="example-deploy-to-a-non-azure-web-hosting-provider"></a>Przykład: wdrażanie do dostawcy hostingu w sieci Web spoza platformy Azure
+
+W panelu hostingu w sieci Web Utwórz lub Załaduj certyfikat. Następnie w *appsettings.json* pliku aplikacji zmodyfikuj `IdentityServer` sekcję, aby zawierała szczegóły klucza. Przykład:
+
+```json
+"IdentityServer": {
+  "Key": {
+    "Type": "Store",
+    "StoreName": "WebHosting",
+    "StoreLocation": "CurrentUser",
+    "Name": "CN=MyApplication"
+  }
+}
+```
+
+W powyższym przykładzie:
+
+* `StoreName` reprezentuje nazwę magazynu certyfikatów, w którym przechowywany jest certyfikat. W tym przypadku wskazuje magazyn hostingu w sieci Web.
+* `StoreLocation` reprezentuje miejsce załadowania certyfikatu ( `CurrentUser` w tym przypadku).
+* `Name` odpowiada podmiotowi wyróżnionemu dla certyfikatu.
+
 ### <a name="example-deploy-to-azure-app-service"></a>Przykład: Wdróż do Azure App Service
 
 W tej sekcji opisano wdrażanie aplikacji do Azure App Service przy użyciu certyfikatu przechowywanego w magazynie certyfikatów. Aby zmodyfikować aplikację w celu załadowania certyfikatu z magazynu certyfikatów, podczas konfigurowania aplikacji w Azure Portal w późniejszym kroku wymagany jest plan usługi warstwy Standardowa lub lepszy.
 
-W *appsettings.js* aplikacji w pliku zmodyfikuj `IdentityServer` sekcję, aby uwzględnić szczegóły klucza:
+W *appsettings.json* pliku aplikacji zmodyfikuj `IdentityServer` sekcję, aby zawierała szczegóły klucza:
 
 ```json
 "IdentityServer": {

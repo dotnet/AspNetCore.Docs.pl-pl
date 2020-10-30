@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 7/23/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/new-field
-ms.openlocfilehash: f5efb121b95d84876c9029cf06a96f827137e660
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 951a8ada57ae523f362313426c0279556eb8339b
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631452"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93050618"
 ---
 # <a name="part-7-add-a-new-field-to-a-no-locrazor-page-in-aspnet-core"></a>Część 7 Dodaj nowe pole do Razor strony w ASP.NET Core
 
@@ -52,7 +53,7 @@ Otwórz plik *models/Movie. cs* i Dodaj `Rating` Właściwość:
 
 Kompilowanie aplikacji.
 
-Edycja *stron/filmów/index. cshtml*i Dodawanie `Rating` pola:
+Edycja *stron/filmów/index. cshtml* i Dodawanie `Rating` pola:
 
 <a name="addrat"></a>
 
@@ -94,7 +95,7 @@ Skompiluj rozwiązanie.
 
 ### <a name="add-a-migration-for-the-rating-field"></a>Dodawanie migracji dla pola oceny
 
-W menu **Narzędzia** wybierz kolejno pozycje **menedżer pakietów NuGet > konsola Menedżera pakietów**.
+W menu **Narzędzia** wybierz kolejno pozycje **menedżer pakietów NuGet > konsola Menedżera pakietów** .
 W obszarze PMC wprowadź następujące polecenia:
 
 ```powershell
@@ -118,9 +119,9 @@ W przypadku usunięcia wszystkich rekordów w bazie danych inicjator będzie wyp
 Innym rozwiązaniem jest usunięcie bazy danych i użycie migracji w celu ponownego utworzenia bazy danych. Aby usunąć bazę danych w programie SSOX:
 
 * Wybierz bazę danych w SSOX.
-* Kliknij prawym przyciskiem myszy bazę danych, a następnie wybierz pozycję *Usuń*.
-* Zaznacz pole wyboru **Zamknij istniejące połączenia**.
-* Kliknij przycisk **OK**.
+* Kliknij prawym przyciskiem myszy bazę danych, a następnie wybierz pozycję *Usuń* .
+* Zaznacz pole wyboru **Zamknij istniejące połączenia** .
+* Wybierz pozycję **OK** .
 * W obszarze [PMC](xref:tutorials/razor-pages/new-field#pmc)zaktualizuj bazę danych:
 
   ```powershell
@@ -179,7 +180,7 @@ Otwórz plik *models/Movie. cs* i Dodaj `Rating` Właściwość:
 
 Kompilowanie aplikacji.
 
-Edycja *stron/filmów/index. cshtml*i Dodawanie `Rating` pola:
+Edycja *stron/filmów/index. cshtml* i Dodawanie `Rating` pola:
 
 [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/IndexRating.cshtml?highlight=40-42,61-63)]
 
@@ -219,7 +220,7 @@ Skompiluj rozwiązanie.
 
 ### <a name="add-a-migration-for-the-rating-field"></a>Dodawanie migracji dla pola oceny
 
-W menu **Narzędzia** wybierz kolejno pozycje **menedżer pakietów NuGet > konsola Menedżera pakietów**.
+W menu **Narzędzia** wybierz kolejno pozycje **menedżer pakietów NuGet > konsola Menedżera pakietów** .
 W obszarze PMC wprowadź następujące polecenia:
 
 ```powershell
@@ -243,9 +244,9 @@ W przypadku usunięcia wszystkich rekordów w bazie danych inicjator będzie wyp
 Innym rozwiązaniem jest usunięcie bazy danych i użycie migracji w celu ponownego utworzenia bazy danych. Aby usunąć bazę danych w programie SSOX:
 
 * Wybierz bazę danych w SSOX.
-* Kliknij prawym przyciskiem myszy bazę danych, a następnie wybierz pozycję *Usuń*.
-* Zaznacz pole wyboru **Zamknij istniejące połączenia**.
-* Kliknij przycisk **OK**.
+* Kliknij prawym przyciskiem myszy bazę danych, a następnie wybierz pozycję *Usuń* .
+* Zaznacz pole wyboru **Zamknij istniejące połączenia** .
+* Wybierz pozycję **OK** .
 * W obszarze [PMC](xref:tutorials/razor-pages/new-field#pmc)zaktualizuj bazę danych:
 
   ```powershell
@@ -258,7 +259,7 @@ Innym rozwiązaniem jest usunięcie bazy danych i użycie migracji w celu ponown
 
 [!INCLUDE[](~/includes/RP-mvc-shared/sqlite-warn.md)]
 
-Usuń bazę danych i użyj migracji, aby ponownie utworzyć bazę danych. Aby usunąć bazę danych, usuń plik bazy danych (*MvcMovie. DB*). Następnie uruchom `ef database update` polecenie:
+Usuń bazę danych i użyj migracji, aby ponownie utworzyć bazę danych. Aby usunąć bazę danych, usuń plik bazy danych ( *MvcMovie. DB* ). Następnie uruchom `ef database update` polecenie:
 
 ```dotnetcli
 dotnet ef database update

@@ -7,6 +7,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/advanced/conventions
-ms.openlocfilehash: 425f1aaf1fa86f10d857c34e621c302f2db258e5
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 0c5ea8ba69e4c6287afce1771ac9cee65bb188a8
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88626795"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93052542"
 ---
 # <a name="use-web-api-conventions"></a>Korzystanie z Konwencji interfejsu API sieci Web
 
@@ -36,7 +37,7 @@ Konwencja umożliwia:
 * Zdefiniuj najpopularniejsze typy zwracane i kody stanu zwrócone przez określony typ akcji.
 * Zidentyfikuj akcje odbiegające od zdefiniowanego standardu.
 
-ASP.NET Core MVC 2,2 i nowsze zawierają zestaw Konwencji domyślnych w programie <xref:Microsoft.AspNetCore.Mvc.DefaultApiConventions?displayProperty=fullName> . Konwencje są oparte na kontrolerze (*ValuesController.cs*), który znajduje się w szablonie projektu **interfejsu API** ASP.NET Core. Jeśli akcje są zgodne ze wzorcami w szablonie, należy pomyślnie korzystać z domyślnych Konwencji. Jeśli domyślne konwencje nie spełniają Twoich potrzeb, zobacz [Tworzenie Konwencji internetowego interfejsu API](#create-web-api-conventions).
+ASP.NET Core MVC 2,2 i nowsze zawierają zestaw Konwencji domyślnych w programie <xref:Microsoft.AspNetCore.Mvc.DefaultApiConventions?displayProperty=fullName> . Konwencje są oparte na kontrolerze ( *ValuesController.cs* ), który znajduje się w szablonie projektu **interfejsu API** ASP.NET Core. Jeśli akcje są zgodne ze wzorcami w szablonie, należy pomyślnie korzystać z domyślnych Konwencji. Jeśli domyślne konwencje nie spełniają Twoich potrzeb, zobacz [Tworzenie Konwencji internetowego interfejsu API](#create-web-api-conventions).
 
 W środowisku uruchomieniowym <xref:Microsoft.AspNetCore.Mvc.ApiExplorer> rozumie konwencje. `ApiExplorer` jest abstrakcją MVC do komunikowania się z [openapi](https://www.openapis.org/) (znanego również jako Swagger) generatorami dokumentów. Atrybuty z stosowanej Konwencji są skojarzone z akcją i są zawarte w dokumentacji OpenAPI akcji. [Analizatory interfejsów API](xref:web-api/advanced/analyzers) są również zrozumiałe Konwencji. Jeśli akcja jest niekonwencjonalny (na przykład zwraca kod stanu, który nie jest udokumentowany przez zastosowana Konwencja), ostrzeżenie zachęca do dokumentowania kodu stanu.
 
@@ -65,7 +66,7 @@ Konwencje nie tworzą; Każda akcja może być skojarzona z dokładnie jedną Ko
 
 1. `Microsoft.AspNetCore.Mvc.ApiConventionTypeAttribute` zastosowane do kontrolera &mdash; stosuje określony typ Konwencji do wszystkich akcji na kontrolerze. Metoda Konwencji jest oznaczona przy użyciu wskazówek, które określają akcje, których dotyczy Metoda Konwencji. Aby uzyskać więcej informacji na temat wskazówek, zobacz [Tworzenie Konwencji interfejsu API sieci Web](#create-web-api-conventions)).
 
-    W poniższym przykładzie domyślny zestaw Konwencji jest stosowany do wszystkich akcji w *ContactsConventionController*:
+    W poniższym przykładzie domyślny zestaw Konwencji jest stosowany do wszystkich akcji w *ContactsConventionController* :
 
     [!code-csharp[](conventions/sample/Controllers/ContactsConventionController.cs?name=snippet_ApiConventionTypeAttribute&highlight=2)]
 
@@ -84,7 +85,7 @@ Jeśli domyślne konwencje interfejsów API nie spełniają Twoich potrzeb, nale
 
 ### <a name="response-types"></a>Typy odpowiedzi
 
-Te metody są opatrzone adnotacją `[ProducesResponseType]` lub `[ProducesDefaultResponseType]` atrybutami. Na przykład:
+Te metody są opatrzone adnotacją `[ProducesResponseType]` lub `[ProducesDefaultResponseType]` atrybutami. Przykład:
 
 ```csharp
 public static class MyAppConventions
@@ -104,7 +105,7 @@ W przypadku braku szczegółowych atrybutów metadanych zastosowanie tej Konwenc
 
 ### <a name="naming-requirements"></a>Wymagania dotyczące nazewnictwa
 
-`[ApiConventionNameMatch]`Atrybuty i `[ApiConventionTypeMatch]` mogą być stosowane do metody Konwencji, która określa akcje, do których mają zastosowanie. Na przykład:
+`[ApiConventionNameMatch]`Atrybuty i `[ApiConventionTypeMatch]` mogą być stosowane do metody Konwencji, która określa akcje, do których mają zastosowanie. Przykład:
 
 ```csharp
 [ProducesResponseType(StatusCodes.Status200OK)]

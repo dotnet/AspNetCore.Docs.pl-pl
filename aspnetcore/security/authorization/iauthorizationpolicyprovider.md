@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/14/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/iauthorizationpolicyprovider
-ms.openlocfilehash: 2d231440847270b3b2fe47fbe29359f494900292
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 0f6f628cee0623c21a2a93aa11470005f8c78c58
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635206"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053140"
 ---
 # <a name="custom-authorization-policy-providers-using-iauthorizationpolicyprovider-in-aspnet-core"></a>Niestandardowi dostawcy zasad autoryzacji korzystający z usługi IAuthorizationPolicyProvider w ASP.NET Core 
 
@@ -187,9 +188,9 @@ public Task<AuthorizationPolicy> GetFallbackPolicyAsync() =>
 
 ## <a name="use-a-custom-iauthorizationpolicyprovider"></a>Użyj niestandardowego IAuthorizationPolicyProvider
 
-Aby używać zasad niestandardowych z poziomu programu `IAuthorizationPolicyProvider` , ***należy***:
+Aby używać zasad niestandardowych z `IAuthorizationPolicyProvider` , należy * **musi** _:
 
-* Zarejestruj odpowiednie `AuthorizationHandler` typy z iniekcją zależności (zgodnie z opisem w [autoryzacji opartej na zasadach](xref:security/authorization/policies#authorization-handlers)), podobnie jak w przypadku wszystkich scenariuszy autoryzacji opartych na zasadach.
+_ Rejestruje odpowiednie `AuthorizationHandler` typy z iniekcją zależności (opisany w [autoryzacji opartej na zasadach](xref:security/authorization/policies#authorization-handlers)), podobnie jak w przypadku wszystkich scenariuszy autoryzacji opartych na zasadach.
 * Zarejestruj typ niestandardowy `IAuthorizationPolicyProvider` w kolekcji usługi iniekcji zależności aplikacji w programie `Startup.ConfigureServices` , aby zastąpić domyślnego dostawcę zasad.
 
   ```csharp

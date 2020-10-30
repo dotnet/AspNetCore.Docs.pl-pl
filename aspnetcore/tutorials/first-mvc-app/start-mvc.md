@@ -5,6 +5,7 @@ description: Dowiedz się, jak rozpocząć pracę z ASP.NET Core MVC.
 ms.author: riande
 ms.date: 10/16/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/start-mvc
-ms.openlocfilehash: 177112106d143a6826c1f927aac807da0aa9f2b4
-ms.sourcegitcommit: ecae2aa432628b9181d1fa11037c231c7dd56c9e
+ms.openlocfilehash: cf17aaf8eff342c378536d4f635e09b936459bee
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/16/2020
-ms.locfileid: "92113832"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93052912"
 ---
 # <a name="get-started-with-aspnet-core-mvc"></a>Wprowadzenie do ASP.NET Core MVC
 
@@ -47,7 +48,7 @@ Na końcu masz aplikację, która może zarządzać i wyświetlać dane filmu.
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs-3.1.md)]
 
@@ -63,19 +64,19 @@ Na końcu masz aplikację, która może zarządzać i wyświetlać dane filmu.
 
 ## <a name="create-a-web-app"></a>Tworzenie aplikacji internetowej
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* W programie Visual Studio wybierz pozycję **Utwórz nowy projekt**.
+* W programie Visual Studio wybierz pozycję **Utwórz nowy projekt** .
 
-* Wybierz pozycję **ASP.NET Core aplikacja sieci Web** > **dalej**.
+* Wybierz pozycję **ASP.NET Core aplikacja sieci Web** > **dalej** .
 
 ![Nowa aplikacja sieci Web ASP.NET Core](start-mvc/_static/np_2.1.png)
 
-* Nadaj projektowi nazwę **MvcMovie** i wybierz pozycję **Utwórz**. Ważne jest, aby nazwa **MvcMovie** projektu była taka sama, jak w przypadku kopiowania kodu, przestrzeń nazw będzie pasować.
+* Nadaj projektowi nazwę **MvcMovie** i wybierz pozycję **Utwórz** . Ważne jest, aby nazwa **MvcMovie** projektu była taka sama, jak w przypadku kopiowania kodu, przestrzeń nazw będzie pasować.
 
   ![Nowa aplikacja sieci Web ASP.NET Core](start-mvc/_static/config.png)
 
-* Wybierz pozycję **aplikacja sieci Web (Model-View-Controller)**. Z listy rozwijanej wybierz pozycję **.NET Core** i **ASP.NET Core 3,1**, a następnie wybierz pozycję **Utwórz**.
+* Wybierz pozycję **aplikacja sieci Web (Model-View-Controller)** . Z listy rozwijanej wybierz pozycję **.NET Core** i **ASP.NET Core 3,1** , a następnie wybierz pozycję **Utwórz** .
 
 ![Okno dialogowe Nowy projekt, .NET Core w lewym okienku, ASP.NET Core Web ](start-mvc/_static/new_project30.png)
 
@@ -101,22 +102,22 @@ Samouczek założono familarity z VS Code. Aby uzyskać więcej informacji, zoba
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-* Wybierz pozycję **plik** > **nowe rozwiązanie**.
+* Wybierz pozycję **plik** > **nowe rozwiązanie** .
 
   ![macOS nowe rozwiązanie](start-mvc/_static/new_project_vsmac.png)
 
-* W Visual Studio dla komputerów Mac starszej niż wersja 8,6 Wybierz **.NET Core**pozycję  >  aplikacja sieci Web**aplikacji**.NET Core  >  **(Model-View-Controller)**  >  **dalej**. W wersji 8,6 lub nowszej wybierz kolejno pozycje **Sieć Web i aplikacja konsoli**  >  **App**  >  **aplikacji sieci Web (Model-View-Controller)**  >  **dalej**.
+* W Visual Studio dla komputerów Mac starszej niż wersja 8,6 Wybierz **.NET Core** pozycję  >  aplikacja sieci Web **aplikacji** .NET Core  >  **(Model-View-Controller)**  >  **dalej** . W wersji 8,6 lub nowszej wybierz kolejno pozycje **Sieć Web i aplikacja konsoli**  >  **App**  >  **aplikacji sieci Web (Model-View-Controller)**  >  **dalej** .
 
   ![Wybieranie szablonu aplikacji sieci Web macOS](start-mvc/_static/web_app_template_vsmac.png)
 
 * W oknie dialogowym **Konfigurowanie nowej aplikacji sieci Web** :
 
-  * Upewnij się, że **uwierzytelnianie** jest ustawione na wartość **bez uwierzytelniania**.
-  * Jeśli jest prezentowana opcja wyboru **platformy docelowej**, wybierz najnowszą wersję 3. x.
+  * Upewnij się, że **uwierzytelnianie** jest ustawione na wartość **bez uwierzytelniania** .
+  * Jeśli jest prezentowana opcja wyboru **platformy docelowej** , wybierz najnowszą wersję 3. x.
 
-  Wybierz pozycję **Dalej**.
+  Wybierz opcję **Dalej** .
 
-* Nazwij projekt **MvcMovie**, a następnie wybierz pozycję **Utwórz**.
+* Nazwij projekt **MvcMovie** , a następnie wybierz pozycję **Utwórz** .
 
   ![macOS Nazwij projekt](start-mvc/_static/MvcMovie.png)
 
@@ -124,7 +125,7 @@ Samouczek założono familarity z VS Code. Aby uzyskać więcej informacji, zoba
 
 ### <a name="run-the-app"></a>Uruchamianie aplikacji
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Wybierz **kombinację klawiszy CTRL-F5** , aby uruchomić aplikację w trybie bez debugowania.
 
@@ -200,7 +201,7 @@ Na końcu masz aplikację, która może zarządzać i wyświetlać dane filmu.
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs2019-2.2.md)]
 
@@ -215,20 +216,20 @@ Na końcu masz aplikację, która może zarządzać i wyświetlać dane filmu.
 ---
 ## <a name="create-a-web-app"></a>Tworzenie aplikacji internetowej
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* W programie Visual Studio wybierz pozycję **Utwórz nowy projekt**.
+* W programie Visual Studio wybierz pozycję **Utwórz nowy projekt** .
 
-* Wybierz **ASP.NET Core aplikacji sieci Web** , a następnie wybierz przycisk **dalej**.
+* Wybierz **ASP.NET Core aplikacji sieci Web** , a następnie wybierz przycisk **dalej** .
 
 ![Nowa aplikacja sieci Web ASP.NET Core](start-mvc/_static/np_2.1.png)
 
-* Nadaj projektowi nazwę **MvcMovie** i wybierz pozycję **Utwórz**. Ważne jest, aby nazwa **MvcMovie** projektu była taka sama, jak w przypadku kopiowania kodu, przestrzeń nazw będzie pasować.
+* Nadaj projektowi nazwę **MvcMovie** i wybierz pozycję **Utwórz** . Ważne jest, aby nazwa **MvcMovie** projektu była taka sama, jak w przypadku kopiowania kodu, przestrzeń nazw będzie pasować.
 
   ![Nowa aplikacja sieci Web ASP.NET Core](start-mvc/_static/config.png)
 
 
-* Wybierz pozycję **aplikacja sieci Web (Model-View-Controller)**, a następnie wybierz pozycję **Utwórz**.
+* Wybierz pozycję **aplikacja sieci Web (Model-View-Controller)** , a następnie wybierz pozycję **Utwórz** .
 
 ![Okno dialogowe Nowy projekt, .NET Core w lewym okienku, ASP.NET Core Web ](start-mvc/_static/new_project22-21.png)
 
@@ -254,26 +255,26 @@ Samouczek założono familarity z VS Code. Aby uzyskać więcej informacji, zoba
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-* Wybierz pozycję **plik** > **nowe rozwiązanie**.
+* Wybierz pozycję **plik** > **nowe rozwiązanie** .
 
   ![macOS nowe rozwiązanie](./start-mvc/_static/new_project_vsmac.png)
 
-* W Visual Studio dla komputerów Mac starszej niż wersja 8,6 Wybierz **.NET Core**pozycję  >  aplikacja sieci Web**aplikacji**.NET Core  >  **(Model-View-Controller)**  >  **dalej**. W wersji 8,6 lub nowszej wybierz kolejno pozycje **Sieć Web i aplikacja konsoli**  >  **App**  >  **aplikacji sieci Web (Model-View-Controller)**  >  **dalej**.
+* W Visual Studio dla komputerów Mac starszej niż wersja 8,6 Wybierz **.NET Core** pozycję  >  aplikacja sieci Web **aplikacji** .NET Core  >  **(Model-View-Controller)**  >  **dalej** . W wersji 8,6 lub nowszej wybierz kolejno pozycje **Sieć Web i aplikacja konsoli**  >  **App**  >  **aplikacji sieci Web (Model-View-Controller)**  >  **dalej** .
 
 * W oknie dialogowym **Konfigurowanie nowej aplikacji sieci Web** :
 
-  * Upewnij się, że **uwierzytelnianie** jest ustawione na wartość **bez uwierzytelniania**.
-  * Jeśli jest prezentowana opcja wyboru **platformy docelowej**, wybierz najnowszą wersję 2. x.
+  * Upewnij się, że **uwierzytelnianie** jest ustawione na wartość **bez uwierzytelniania** .
+  * Jeśli jest prezentowana opcja wyboru **platformy docelowej** , wybierz najnowszą wersję 2. x.
 
-  Wybierz pozycję **Dalej**.
+  Wybierz opcję **Dalej** .
 
-* Nazwij projekt **MvcMovie**, a następnie wybierz pozycję **Utwórz**.
+* Nazwij projekt **MvcMovie** , a następnie wybierz pozycję **Utwórz** .
 
 ---
 
 ### <a name="run-the-app"></a>Uruchamianie aplikacji
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Wybierz **kombinację klawiszy CTRL-F5** , aby uruchomić aplikację w trybie bez debugowania.
 
@@ -289,7 +290,7 @@ Wybierz **kombinację klawiszy CTRL-F5** , aby uruchomić aplikację w trybie be
 
   ![IIS Express](start-mvc/_static/iis_express.png)
 
-* Wybierz pozycję **Zaakceptuj**, aby wyrazić zgodę na śledzenie. Ta aplikacja nie śledzi informacji osobistych. Kod wygenerowany przez szablon zawiera zasoby, które pomagają spełnić [ogólne rozporządzenie o ochronie danych (Rodo)](xref:security/gdpr).
+* Wybierz pozycję **Zaakceptuj** , aby wyrazić zgodę na śledzenie. Ta aplikacja nie śledzi informacji osobistych. Kod wygenerowany przez szablon zawiera zasoby, które pomagają spełnić [ogólne rozporządzenie o ochronie danych (Rodo)](xref:security/gdpr).
 
   ![Strona główna lub indeks](start-mvc/_static/privacy.png)
 
@@ -307,7 +308,7 @@ Naciśnij klawisze CTRL + F5, aby uruchomić bez debugera.
 
   Uruchamianie aplikacji za pomocą klawiszy CTRL + F5 (tryb bez debugowania) umożliwia wprowadzanie zmian w kodzie, zapisywanie pliku, odświeżanie przeglądarki i wyświetlanie zmian w kodzie. Wielu deweloperów woli używać trybu niedebugowania do odświeżania strony i wyświetlania zmian.
 
-* Wybierz pozycję **Zaakceptuj**, aby wyrazić zgodę na śledzenie. Ta aplikacja nie śledzi informacji osobistych. Kod wygenerowany przez szablon zawiera zasoby, które pomagają spełnić [ogólne rozporządzenie o ochronie danych (Rodo)](xref:security/gdpr).
+* Wybierz pozycję **Zaakceptuj** , aby wyrazić zgodę na śledzenie. Ta aplikacja nie śledzi informacji osobistych. Kod wygenerowany przez szablon zawiera zasoby, które pomagają spełnić [ogólne rozporządzenie o ochronie danych (Rodo)](xref:security/gdpr).
 
   ![Strona główna lub indeks](start-mvc/_static/privacy.png)
 
@@ -324,7 +325,7 @@ Wybierz pozycję **Uruchom**  >  **Uruchom bez debugowania** , aby uruchomić ap
 * Na pasku adresu są wyświetlane inne elementy `localhost:port#` , takie jak `example.com` . To dlatego, że `localhost` jest standardową nazwą hosta dla komputera lokalnego. Podczas tworzenia projektu internetowego w programie Visual Studio dla serwera internetowego jest używany losowy port. Po uruchomieniu aplikacji zobaczysz inny numer portu.
 * Aplikację można uruchomić w trybie debugowania lub bez debugowania z menu **Run (uruchamianie** ).
 
-* Wybierz pozycję **Zaakceptuj**, aby wyrazić zgodę na śledzenie. Ta aplikacja nie śledzi informacji osobistych. Kod wygenerowany przez szablon zawiera zasoby, które pomagają spełnić [ogólne rozporządzenie o ochronie danych (Rodo)](xref:security/gdpr).
+* Wybierz pozycję **Zaakceptuj** , aby wyrazić zgodę na śledzenie. Ta aplikacja nie śledzi informacji osobistych. Kod wygenerowany przez szablon zawiera zasoby, które pomagają spełnić [ogólne rozporządzenie o ochronie danych (Rodo)](xref:security/gdpr).
 
   ![Strona główna lub indeks](./start-mvc/_static/output_privacy_macos.png)
 

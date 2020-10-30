@@ -6,6 +6,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/client-features
-ms.openlocfilehash: bb8352b11e78582c4a32b67da7dcb701d020b0d9
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 1d1778f95c53179ca05eaced3d1913f208220df4
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90721713"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93050982"
 ---
 # <a name="aspnet-core-no-locsignalr-clients"></a>ASP.NET Core SignalR klienci
 
@@ -53,14 +54,14 @@ W poniższej tabeli przedstawiono funkcje i obsługę klientów, którzy oferuj�
 | [Przesyłanie strumieniowe klient-serwer](xref:signalr/streaming)          |3.0.0|3.0.0|3.0.0|3.0.0|
 | Automatyczne ponowne łączenie ([.NET](./dotnet-client.md?tabs=visual-studio&view=aspnetcore-3.0#handle-lost-connection), [JavaScript](./javascript-client.md?view=aspnetcore-3.0#reconnect-clients))          |3.0.0|3.0.0|3.0.0|❌|
 | Transport gniazd WebSockets |2.1.0|1.0.0|1.0.0|1.0.0|
-| Transport zdarzeń wysłanych przez serwer |2.1.0|1.0.0|1.0.0|❌|
+| Transport zdarzeń Server-Sent |2.1.0|1.0.0|1.0.0|❌|
 | Długotrwały transport sondowania |2.1.0|1.0.0|1.0.0|3.0.0|
 | Protokół centrum JSON |2.1.0|1.0.0|1.0.0|1.0.0|
 | Protokół centrum MessagePack |2.1.0|1.0.0|1.0.0|❌|
 
 Obsługa włączania dodatkowych funkcji klienta jest śledzona w [naszym monitorze problemów](https://github.com/dotnet/AspNetCore/issues).
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Wprowadzenie SignalR do ASP.NET Core](xref:tutorials/signalr)
 * [Obsługiwane platformy](xref:signalr/supported-platforms)

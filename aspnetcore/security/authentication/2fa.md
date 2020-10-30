@@ -7,6 +7,7 @@ ms.author: riande
 ms.date: 09/22/2018
 ms.custom: mvc, seodec18
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/2fa
-ms.openlocfilehash: e5e606afaf0219f3a0eb7301203b7142a00322be
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 1ee9e656c2e631c9b5588149e0a75e07108baff1
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634114"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051268"
 ---
 # <a name="two-factor-authentication-with-sms-in-aspnet-core"></a>Uwierzytelnianie dwuskładnikowe za pomocą wiadomości SMS w ASP.NET Core
 
@@ -48,17 +49,17 @@ Utwórz konto programu SMS, na przykład z [Twilio](https://www.twilio.com/) lub
 
 **Twilio**
 
-Na karcie Pulpit nawigacyjny konta usługi Twilio Skopiuj **Identyfikator SID konta** i **token uwierzytelniania**.
+Na karcie Pulpit nawigacyjny konta usługi Twilio Skopiuj **Identyfikator SID konta** i **token uwierzytelniania** .
 
 **ASPSMS:**
 
-W ustawieniach konta przejdź do **userKey** i skopiuj go wraz z **hasłem**.
+W ustawieniach konta przejdź do **userKey** i skopiuj go wraz z **hasłem** .
 
 Te wartości zostaną później zapisane za pomocą narzędzia Menedżer kluczy tajnych w kluczach `SMSAccountIdentification` i `SMSAccountPassword` .
 
 #### <a name="specifying-senderid--originator"></a>Określanie SenderID/inicjatora
 
-**Twilio:** Na karcie liczby Skopiuj **numer telefonu**Twilio.
+**Twilio:** Na karcie liczby Skopiuj **numer telefonu** Twilio.
 
 **ASPSMS:** W menu odblokowane odblokowywanie Odblokuj co najmniej jeden inicjator lub wybierz inicjator alfanumeryczny (nieobsługiwany przez wszystkie sieci).
 
@@ -72,7 +73,7 @@ Użyjemy [wzorca opcji](xref:fundamentals/configuration/options) , aby uzyskać 
 
 [!code-csharp[](2fa/sample/Web2FA/Services/SMSoptions.cs)]
 
-Ustaw `SMSAccountIdentification` opcję `SMSAccountPassword` oraz `SMSAccountFrom` za pomocą narzędzia do [zarządzania kluczami tajnymi](xref:security/app-secrets). Na przykład:
+Ustaw `SMSAccountIdentification` opcję `SMSAccountPassword` oraz `SMSAccountFrom` za pomocą narzędzia do [zarządzania kluczami tajnymi](xref:security/app-secrets). Przykład:
 
 ```none
 C:/Web2FA/src/WebApp1>dotnet user-secrets set SMSAccountIdentification 12345
@@ -99,7 +100,7 @@ info: Successfully saved SMSAccountIdentification = 12345 to the secret store.
 
 ### <a name="configure-startup-to-use-smsoptions"></a>Konfigurowanie uruchamiania do użycia `SMSoptions`
 
-Dodaj `SMSoptions` do kontenera usługi w `ConfigureServices` metodzie w *Startup.cs*:
+Dodaj `SMSoptions` do kontenera usługi w `ConfigureServices` metodzie w *Startup.cs* :
 
 [!code-csharp[](2fa/sample/Web2FA/Startup.cs?name=snippet1&highlight=4)]
 
@@ -117,7 +118,7 @@ Otwórz plik widoku views */Manage/index. cshtml* Razor i Usuń znaki komentarza
 
 ![Zarządzanie widokiem — naciśnięcie linku "Dodaj"](2fa/_static/login2fa2.png)
 
-* Dodaj numer telefonu, który będzie otrzymywał kod weryfikacyjny, a następnie naciśnij pozycję **Wyślij kod weryfikacyjny**.
+* Dodaj numer telefonu, który będzie otrzymywał kod weryfikacyjny, a następnie naciśnij pozycję **Wyślij kod weryfikacyjny** .
 
 ![Strona dodawania numeru telefonu](2fa/_static/login2fa3.png)
 
@@ -141,13 +142,13 @@ Jeśli nie otrzymasz wiadomości tekstowej, zobacz stronę dziennika Twilio.
 
 * Zaloguj się.
 
-* Konto użytkownika mogło korzystać z uwierzytelniania dwuskładnikowego, więc należy podać drugi czynnik uwierzytelniania. W tym samouczku włączono weryfikację telefonu. Wbudowane szablony umożliwiają również skonfigurowanie poczty e-mail jako drugiego czynnika. Można skonfigurować dodatkowe dwa czynniki do uwierzytelniania, takie jak kody QR. Naciśnij pozycję **Prześlij**.
+* Konto użytkownika mogło korzystać z uwierzytelniania dwuskładnikowego, więc należy podać drugi czynnik uwierzytelniania. W tym samouczku włączono weryfikację telefonu. Wbudowane szablony umożliwiają również skonfigurowanie poczty e-mail jako drugiego czynnika. Można skonfigurować dodatkowe dwa czynniki do uwierzytelniania, takie jak kody QR. Naciśnij pozycję **Prześlij** .
 
 ![Wyślij widok kodu weryfikacyjnego](2fa/_static/login2fa7.png)
 
 * Wprowadź kod uzyskany w wiadomości SMS.
 
-* Kliknięcie pola wyboru **Zapamiętaj tę przeglądarkę** spowoduje zwolnienie z używania funkcji 2FA do logowania się w przypadku korzystania z tego samego urządzenia i przeglądarki. Włączenie funkcji 2FA i kliknięcie opcji **Zapamiętaj, że ta przeglądarka** zapewni mocną ochronę funkcji 2FA przed złośliwymi użytkownikami próbującymi uzyskać dostęp do Twojego konta, o ile nie mają dostępu do urządzenia. Można to zrobić na dowolnym używanym przez siebie urządzeniu prywatnym. Dzięki ustawieniu  **Zapamiętaj tę przeglądarkę**możesz uzyskać dodatkowe zabezpieczenia funkcji 2FA z urządzeń, które nie są regularnie używane, i uzyskać wygodę, aby nie mieć możliwości przechodzenia przez funkcji 2FA na własne urządzenia.
+* Kliknięcie pola wyboru **Zapamiętaj tę przeglądarkę** spowoduje zwolnienie z używania funkcji 2FA do logowania się w przypadku korzystania z tego samego urządzenia i przeglądarki. Włączenie funkcji 2FA i kliknięcie opcji **Zapamiętaj, że ta przeglądarka** zapewni mocną ochronę funkcji 2FA przed złośliwymi użytkownikami próbującymi uzyskać dostęp do Twojego konta, o ile nie mają dostępu do urządzenia. Można to zrobić na dowolnym używanym przez siebie urządzeniu prywatnym. Dzięki ustawieniu  **Zapamiętaj tę przeglądarkę** możesz uzyskać dodatkowe zabezpieczenia funkcji 2FA z urządzeń, które nie są regularnie używane, i uzyskać wygodę, aby nie mieć możliwości przechodzenia przez funkcji 2FA na własne urządzenia.
 
 ![Weryfikuj widok](2fa/_static/login2fa8.png)
 

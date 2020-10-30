@@ -5,6 +5,7 @@ description: Informacje o dostawcach magazynu kluczy w ASP.NET Core i sposobach 
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/implementation/key-storage-providers
-ms.openlocfilehash: fb21f7d4d784451096db5c420f2ffd4532c2b490
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 36e8bc494125d0770347ddf32390365d83a91d27
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631332"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051749"
 ---
 # <a name="key-storage-providers-in-aspnet-core"></a>Dostawcy magazynu kluczy w ASP.NET Core
 
@@ -131,7 +132,7 @@ Aby uzyskać więcej informacji, zobacz następujące tematy:
 
 **Dotyczy tylko wdrożeń systemu Windows.**
 
-Czasami aplikacja może nie mieć dostępu do zapisu w systemie plików. Rozważmy scenariusz, w którym aplikacja działa jako konto usługi wirtualnej (na przykład tożsamość puli aplikacji *w3wp.exe*). W takich przypadkach administrator może udostępnić klucz rejestru, który jest dostępny dla tożsamości konta usługi. Wywołaj metodę rozszerzenia [PersistKeysToRegistry](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionbuilderextensions.persistkeystoregistry) , jak pokazano poniżej. Podaj [RegistryKey](/dotnet/api/microsoft.aspnetcore.dataprotection.repositories.registryxmlrepository.registrykey) wskazujący lokalizację, w której mają być przechowywane klucze kryptograficzne:
+Czasami aplikacja może nie mieć dostępu do zapisu w systemie plików. Rozważmy scenariusz, w którym aplikacja działa jako konto usługi wirtualnej (na przykład tożsamość puli aplikacji *w3wp.exe* ). W takich przypadkach administrator może udostępnić klucz rejestru, który jest dostępny dla tożsamości konta usługi. Wywołaj metodę rozszerzenia [PersistKeysToRegistry](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionbuilderextensions.persistkeystoregistry) , jak pokazano poniżej. Podaj [RegistryKey](/dotnet/api/microsoft.aspnetcore.dataprotection.repositories.registryxmlrepository.registrykey) wskazujący lokalizację, w której mają być przechowywane klucze kryptograficzne:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)

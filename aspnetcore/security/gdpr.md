@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/11/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/gdpr
-ms.openlocfilehash: 35a12cb8d2a9617e51d886e798cff5ee60b0a8ad
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: ec65a2c8362c15716bebd6b22f5639785ba74c98
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634712"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051008"
 ---
 # <a name="eu-general-data-protection-regulation-gdpr-support-in-aspnet-core"></a>Obsługa Ogólne rozporządzenie o ochronie danych UE (Rodo) w ASP.NET Core
 
@@ -46,7 +47,7 @@ Aby włączyć domyślną cookie funkcję wyrażania zgody, która została znal
 
   [!code-cshtml[Main](gdpr/sample/RP3.0/Pages/Shared/_Layout.cshtml?name=snippet&highlight=4)]
 
-* Dodaj plik * \_ Cookie ConsentPartial. cshtml* do projektu:
+* Dodaj plik *\_ Cookie ConsentPartial. cshtml* do projektu:
 
   [!code-cshtml[Main](gdpr/sample/RP3.0/Pages/Shared/_CookieConsentPartial.cshtml)]
 
@@ -71,8 +72,8 @@ Aby włączyć domyślną cookie funkcję wyrażania zgody, która została znal
 Razor Strony i projekty MVC utworzone przy użyciu szablonów projektu obejmują następujące wsparcie Rodo:
 
 * [ Cookie Zasady](/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyappbuilderextensions.usecookiepolicy) [ Cookie PolicyOptions](/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyoptions) i use są ustawiane w `Startup` klasie.
-* [Widok częściowy](xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper) * \_ Cookie ConsentPartial. cshtml* . W tym pliku znajduje się przycisk **Akceptuj** . Gdy użytkownik kliknie przycisk **Akceptuj** , wyrażasz zgodę na przechowywanie cookie s.
-* Widok Pages */privacy. cshtml* lub *widoki/Home/privacy. cshtml* zawiera stronę zawierającą szczegółowe informacje o zasadach zachowania poufności informacji. Plik * \_ Cookie ConsentPartial. cshtml* generuje link do strony prywatność.
+* [Widok częściowy](xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper) *\_ Cookie ConsentPartial. cshtml* . W tym pliku znajduje się przycisk **Akceptuj** . Gdy użytkownik kliknie przycisk **Akceptuj** , wyrażasz zgodę na przechowywanie cookie s.
+* Widok Pages */privacy. cshtml* lub *widoki/Home/privacy. cshtml* zawiera stronę zawierającą szczegółowe informacje o zasadach zachowania poufności informacji. Plik *\_ Cookie ConsentPartial. cshtml* generuje link do strony prywatność.
 * W przypadku aplikacji utworzonych przy użyciu poszczególnych kont użytkowników Strona Zarządzanie zawiera linki umożliwiające pobranie i usunięcie [osobistych danych użytkownika](#pd).
 
 ### <a name="no-loccookiepolicyoptions-and-useno-loccookiepolicy"></a>CookieZasady PolicyOptions i użycia Cookie
@@ -87,13 +88,13 @@ Razor Strony i projekty MVC utworzone przy użyciu szablonów projektu obejmują
 
 ### <a name="_no-loccookieconsentpartialcshtml-partial-view"></a>\_CookieWidok częściowy ConsentPartial. cshtml
 
-Widok częściowy * \_ Cookie ConsentPartial. cshtml* :
+Widok częściowy *\_ Cookie ConsentPartial. cshtml* :
 
 [!code-cshtml[](gdpr/sample/RP2.2/Pages/Shared/_CookieConsentPartial.cshtml)]
 
 Ta część częściowa:
 
-* Uzyskuje stan śledzenia dla użytkownika. Jeśli aplikacja jest skonfigurowana do wymagania zgody, użytkownik musi wyrazić zgodę przed rozpoczęciem cookie śledzenia. Jeśli jest wymagana zgoda, cookie panel zgody jest ustalany w górnej części paska nawigacyjnego utworzonego przez plik * \_ Layout. cshtml* .
+* Uzyskuje stan śledzenia dla użytkownika. Jeśli aplikacja jest skonfigurowana do wymagania zgody, użytkownik musi wyrazić zgodę przed rozpoczęciem cookie śledzenia. Jeśli jest wymagana zgoda, cookie panel zgody jest ustalany w górnej części paska nawigacyjnego utworzonego przez plik *\_ Layout. cshtml* .
 * Udostępnia element HTML `<p>` do podsumowywania prywatności i cookie zasad użytkowania.
 * Zawiera link do strony lub widoku prywatności, w którym można szczegółowo zapoznać się z zasadami zachowania poufności informacji w witrynie.
 
@@ -121,7 +122,7 @@ Jeśli cookie nie podano zgody na przechowywanie s, cookie do przeglądarki są 
 
 ASP.NET Core aplikacje utworzone przy użyciu poszczególnych kont użytkowników zawierają kod umożliwiający pobranie i usunięcie danych osobowych.
 
-Wybierz nazwę użytkownika, a następnie wybierz pozycję **dane osobowe**:
+Wybierz nazwę użytkownika, a następnie wybierz pozycję **dane osobowe** :
 
 ![Strona Zarządzanie danymi osobistymi](gdpr/_static/pd.png)
 
@@ -134,7 +135,7 @@ Uwagi:
 
 ::: moniker-end
 
-## <a name="encryption-at-rest"></a>Szyfrowanie danych magazynowanych
+## <a name="encryption-at-rest"></a>Szyfrowanie w spoczynku
 
 Niektóre bazy danych i mechanizmy magazynu umożliwiają szyfrowanie w spoczynku. Szyfrowanie w spoczynku:
 
@@ -143,13 +144,13 @@ Niektóre bazy danych i mechanizmy magazynu umożliwiają szyfrowanie w spoczynk
 * Jest najłatwiejszym i najbezpieczniejszą opcją.
 * Umożliwia bazie danych zarządzanie kluczami i szyfrowaniem.
 
-Na przykład:
+Przykład:
 
 * Program Microsoft SQL i usługa Azure SQL zapewniają [transparent Data Encryption](/sql/relational-databases/security/encryption/transparent-data-encryption) (TDE).
 * [Usługa SQL Azure domyślnie szyfruje bazę danych](https://azure.microsoft.com/updates/newly-created-azure-sql-databases-encrypted-by-default/)
 * [Obiekty blob, pliki, tabele i queue storage platformy Azure domyślnie są szyfrowane](https://azure.microsoft.com/blog/announcing-default-encryption-for-azure-blobs-files-table-and-queue-storage/).
 
-W przypadku baz danych, które nie zapewniają wbudowanego szyfrowania w spoczynku, może być możliwe użycie szyfrowania dysków w celu zapewnienia tej samej ochrony. Na przykład:
+W przypadku baz danych, które nie zapewniają wbudowanego szyfrowania w spoczynku, może być możliwe użycie szyfrowania dysków w celu zapewnienia tej samej ochrony. Przykład:
 
 * [Funkcja BitLocker dla systemu Windows Server](/windows/security/information-protection/bitlocker/bitlocker-how-to-deploy-on-windows-server)
 * W systemie Linux:

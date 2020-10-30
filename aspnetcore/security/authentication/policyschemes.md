@@ -5,6 +5,7 @@ description: Schematy zasad uwierzytelniania ułatwiają korzystanie z jednego s
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/policyschemes
-ms.openlocfilehash: 60ac9914ef811a705c61ab3b2bec61643acc6ec0
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 63d931c926c9660f5d68d5a2ce292bf57efdb49c
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634985"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053231"
 ---
 # <a name="policy-schemes-in-aspnet-core"></a>Schematy zasad w ASP.NET Core
 

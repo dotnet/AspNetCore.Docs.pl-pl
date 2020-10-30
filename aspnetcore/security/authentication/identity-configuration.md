@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/11/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity-configuration
-ms.openlocfilehash: ae4a2eb9d95339651c3810a9f8489d703d73a3fe
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: b11a2d584b7275a9065c9915021ac945823531f8
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632684"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051996"
 ---
 # <a name="configure-no-locaspnet-core-identity"></a>Ponowne ASP.NET Core Identity
 
@@ -36,7 +37,7 @@ Klasa [ Identity Options](/dotnet/api/microsoft.aspnetcore.identity.identityopti
 
 [ Identity Opcje. oświadczenia Identity ](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.claimsidentity) określają [ Identity Opcje oświadczeń](/dotnet/api/microsoft.aspnetcore.identity.claimsidentityoptions) z właściwościami podanymi w poniższej tabeli.
 
-| Właściwość | Opis | Domyślny |
+| Właściwość | Opis | Domyślne |
 | -------- | ----------- | :-----: |
 | [RoleClaimType](/dotnet/api/microsoft.aspnetcore.identity.claimsidentityoptions.roleclaimtype) | Pobiera lub ustawia typ zgłoszenia używany dla żądania roli. | [Oświadczenia. rola](/dotnet/api/system.security.claims.claimtypes.role) |
 | [SecurityStampClaimType](/dotnet/api/microsoft.aspnetcore.identity.claimsidentityoptions.securitystampclaimtype) | Pobiera lub ustawia typ zgłoszenia używany dla żądania sygnatury zabezpieczeń. | `AspNet.Identity.SecurityStamp` |
@@ -61,10 +62,10 @@ Pomyślne uwierzytelnienie resetuje liczbę prób dostępu zakończonych niepowo
 
 [ Identity Options. Blokada](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.lockout) określa [LockoutOptions](/dotnet/api/microsoft.aspnetcore.identity.lockoutoptions) z właściwościami pokazanymi w tabeli.
 
-| Właściwość | Opis | Domyślny |
+| Właściwość | Opis | Domyślne |
 | -------- | ----------- | :-----: |
 | [AllowedForNewUsers](/dotnet/api/microsoft.aspnetcore.identity.lockoutoptions.allowedfornewusers) | Określa, czy nowy użytkownik może być zablokowany. | `true` |
-| [DefaultLockoutTimeSpan](/dotnet/api/microsoft.aspnetcore.identity.lockoutoptions.defaultlockouttimespan) | Ilość czasu, przez który użytkownik jest blokowany, gdy następuje blokada. | 5 min |
+| [DefaultLockoutTimeSpan](/dotnet/api/microsoft.aspnetcore.identity.lockoutoptions.defaultlockouttimespan) | Ilość czasu, przez który użytkownik jest blokowany, gdy następuje blokada. | 5 minut |
 | [MaxFailedAccessAttempts](/dotnet/api/microsoft.aspnetcore.identity.lockoutoptions.maxfailedaccessattempts) | Liczba nieudanych prób dostępu do momentu zablokowania użytkownika, jeśli włączono blokadę. | 5 |
 
 ### <a name="password"></a>Hasło
@@ -82,7 +83,7 @@ Hasła są konfigurowane przy użyciu:
 
 [ Identity Options. Password](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.password) określa [PasswordOptions](/dotnet/api/microsoft.aspnetcore.identity.passwordoptions) z właściwościami podanymi w tabeli.
 
-| Właściwość | Opis | Domyślny |
+| Właściwość | Opis | Domyślne |
 | -------- | ----------- | :-----: |
 | [RequireDigit](/dotnet/api/microsoft.aspnetcore.identity.passwordoptions.requiredigit) | Wymaga liczby z zakresu od 0-9 do hasła. | `true` |
 | [RequiredLength](/dotnet/api/microsoft.aspnetcore.identity.passwordoptions.requiredlength) | Minimalna długość hasła. | 6 |
@@ -99,7 +100,7 @@ Poniższy kod określa `SignIn` Ustawienia (do wartości domyślnych):
 
 [ Identity Opcje. Signer](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.signin) określa [SignInOptions](/dotnet/api/microsoft.aspnetcore.identity.signinoptions) z właściwościami podanymi w tabeli.
 
-| Właściwość | Opis | Domyślny |
+| Właściwość | Opis | Domyślne |
 | -------- | ----------- | :-----: |
 | [RequireConfirmedEmail](/dotnet/api/microsoft.aspnetcore.identity.signinoptions.requireconfirmedemail) | Do zalogowania się wymaga potwierdzonej wiadomości e-mail. | `false` |
 | [RequireConfirmedPhoneNumber](/dotnet/api/microsoft.aspnetcore.identity.signinoptions.requireconfirmedphonenumber) | Wymaga potwierdzenia numeru telefonu w celu zalogowania się. | `false` |
@@ -123,14 +124,14 @@ Poniższy kod określa `SignIn` Ustawienia (do wartości domyślnych):
 
 [ Identity Opcje. User](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.user) określa [UserOptions](/dotnet/api/microsoft.aspnetcore.identity.useroptions) z właściwościami podanymi w tabeli.
 
-| Właściwość | Opis | Domyślny |
+| Właściwość | Opis | Domyślne |
 | -------- | ----------- | :-----: |
 | [AllowedUserNameCharacters](/dotnet/api/microsoft.aspnetcore.identity.useroptions.allowedusernamecharacters) | Dozwolone znaki w nazwie użytkownika. | abcdefghijklmnopqrstuvwxyz<br>ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>0123456789<br>-.\_@+ |
 | [RequireUniqueEmail](/dotnet/api/microsoft.aspnetcore.identity.useroptions.requireuniqueemail) | Wymaga, aby każdy użytkownik miał unikatową wiadomość e-mail. | `false` |
 
 ### <a name="no-loccookie-settings"></a>Ustawienia usługiCookie
 
-Skonfiguruj aplikację cookie w programie `Startup.ConfigureServices` . [ConfigureApplication Cookie ](/dotnet/api/microsoft.extensions.dependencyinjection.identityservicecollectionextensions.configureapplicationcookie#Microsoft_Extensions_DependencyInjection_IdentityServiceCollectionExtensions_ConfigureApplicationCookie_Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_Microsoft_AspNetCore_Authentication_Cookies_CookieAuthenticationOptions__) musi być wywoływana **po** wywołaniu `AddIdentity` lub `AddDefaultIdentity` .
+Skonfiguruj aplikację cookie w programie `Startup.ConfigureServices` . [ConfigureApplication Cookie](/dotnet/api/microsoft.extensions.dependencyinjection.identityservicecollectionextensions.configureapplicationcookie#Microsoft_Extensions_DependencyInjection_IdentityServiceCollectionExtensions_ConfigureApplicationCookie_Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_Microsoft_AspNetCore_Authentication_Cookies_CookieAuthenticationOptions__) musi być wywoływana **po** wywołaniu `AddIdentity` lub `AddDefaultIdentity` .
 
 [!code-csharp[](identity-configuration/sample/Startup.cs?name=snippet_cookie)]
 
@@ -142,7 +143,7 @@ Aby uzyskać więcej informacji, zobacz [ Cookie AuthenticationOptions](/dotnet/
 
 | Opcja | Opis |
 | ------ | ----------- |
-| <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.CompatibilityMode> | Tryb zgodności używany podczas mieszania nowych haseł. Wartość domyślna to <xref:Microsoft.AspNetCore.Identity.PasswordHasherCompatibilityMode.IdentityV3> . Pierwszy bajt skrótu hasła zwanego *znacznikiem formatu*określa wersję algorytmu wyznaczania wartości skrótu używanego do mieszania hasła. Podczas weryfikowania hasła przy użyciu skrótu <xref:Microsoft.AspNetCore.Identity.PasswordHasher`1.VerifyHashedPassword*> Metoda wybiera poprawny algorytm na podstawie pierwszego bajtu. Klient może się uwierzytelnić niezależnie od tego, która wersja algorytmu została użyta do skrótu hasła. Ustawienie trybu zgodności ma wpływ na skróty *nowych haseł*. |
+| <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.CompatibilityMode> | Tryb zgodności używany podczas mieszania nowych haseł. Wartość domyślna to <xref:Microsoft.AspNetCore.Identity.PasswordHasherCompatibilityMode.IdentityV3> . Pierwszy bajt skrótu hasła zwanego *znacznikiem formatu* określa wersję algorytmu wyznaczania wartości skrótu używanego do mieszania hasła. Podczas weryfikowania hasła przy użyciu skrótu <xref:Microsoft.AspNetCore.Identity.PasswordHasher`1.VerifyHashedPassword*> Metoda wybiera poprawny algorytm na podstawie pierwszego bajtu. Klient może się uwierzytelnić niezależnie od tego, która wersja algorytmu została użyta do skrótu hasła. Ustawienie trybu zgodności ma wpływ na skróty *nowych haseł* . |
 | <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.IterationCount> | Liczba iteracji używanych podczas tworzenia skrótów haseł przy użyciu PBKDF2. Ta wartość jest używana tylko wtedy, gdy <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.CompatibilityMode> jest ustawiona na <xref:Microsoft.AspNetCore.Identity.PasswordHasherCompatibilityMode.IdentityV3> . Wartość musi być dodatnią liczbą całkowitą i wartością domyślną `10000` . |
 
 W poniższym przykładzie <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.IterationCount> jest ustawiona na wartość `12000` w `Startup.ConfigureServices` :

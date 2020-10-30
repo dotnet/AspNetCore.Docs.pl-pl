@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/01/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/signalr-blazor-webassembly
-ms.openlocfilehash: 6086c422b2d0598af309bbf8b900b9e03a3fe147
-ms.sourcegitcommit: d5ecad1103306fac8d5468128d3e24e529f1472c
+ms.openlocfilehash: 81cbfb692ffbd0bb6335ccef6dd10ad6c20fb334
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/23/2020
-ms.locfileid: "92491590"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93052711"
 ---
 # <a name="use-aspnet-core-no-locsignalr-with-no-locblazor-webassembly"></a>Użyj ASP.NET Core SignalR z Blazor WebAssembly
 
@@ -46,7 +47,7 @@ Na końcu tego samouczka będziesz mieć działającą aplikację czatu.
 
 ::: moniker range=">= aspnetcore-5.0"
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 <!-- * [Visual Studio 2019 16.8 or later](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) with the **ASP.NET and web development** workload -->
 * [Program Visual Studio 2019 16,8 lub nowszy (w wersji zapoznawczej)](https://visualstudio.microsoft.com/vs/preview/) z **ASP.NET i programowaniem aplikacji sieci Web**
@@ -62,7 +63,7 @@ Na końcu tego samouczka będziesz mieć działającą aplikację czatu.
 * [Visual Studio dla komputerów Mac wersja 8,8 lub nowsza (w wersji zapoznawczej)](/visualstudio/releasenotes/vs2019-mac-preview-relnotes)
 * [!INCLUDE [.NET Core 5.0 SDK](~/includes/5.0-SDK.md)]
 
-# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli/)
+# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli/)
 
 [!INCLUDE[](~/includes/5.0-SDK.md)]
 
@@ -72,7 +73,7 @@ Na końcu tego samouczka będziesz mieć działającą aplikację czatu.
 
 ::: moniker range="< aspnetcore-5.0"
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * [Program Visual Studio 2019 16,6 lub nowszy](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) z **ASP.NET i programowaniem aplikacji sieci Web**
 * [!INCLUDE [.NET Core 3.1 SDK](~/includes/3.1-SDK.md)]
@@ -86,7 +87,7 @@ Na końcu tego samouczka będziesz mieć działającą aplikację czatu.
 * [Visual Studio dla komputerów Mac wersja 8,6 lub nowsza](https://visualstudio.microsoft.com/vs/mac/)
 * [!INCLUDE [.NET Core 3.1 SDK](~/includes/3.1-SDK.md)]
 
-# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli/)
+# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli/)
 
 [!INCLUDE[](~/includes/3.1-SDK.md)]
 
@@ -98,7 +99,7 @@ Na końcu tego samouczka będziesz mieć działającą aplikację czatu.
 
 Postępuj zgodnie ze wskazówkami dotyczącymi wybranego narzędzia:
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 ::: moniker range=">= aspnetcore-5.0"
 
@@ -116,15 +117,15 @@ Postępuj zgodnie ze wskazówkami dotyczącymi wybranego narzędzia:
 
 1. Tworzenie nowego projektu.
 
-1. Wybierz pozycję ** Blazor aplikacja** i wybierz pozycję **dalej**.
+1. Wybierz pozycję **Blazor aplikacja** i wybierz pozycję **dalej** .
 
-1. Wpisz `BlazorSignalRApp` wartość w polu **Nazwa projektu** . Potwierdź, że wpis **lokalizacji** jest poprawny lub podaj lokalizację dla projektu. Wybierz przycisk **Utwórz**.
+1. Wpisz `BlazorSignalRApp` wartość w polu **Nazwa projektu** . Potwierdź, że wpis **lokalizacji** jest poprawny lub podaj lokalizację dla projektu. Wybierz pozycję **Utwórz** .
 
-1. Wybierz szablon ** Blazor WebAssembly aplikacji** .
+1. Wybierz szablon **Blazor WebAssembly aplikacji** .
 
-1. W obszarze **Zaawansowane**zaznacz pole wyboru **hostowane ASP.NET Core** .
+1. W obszarze **Zaawansowane** zaznacz pole wyboru **hostowane ASP.NET Core** .
 
-1. Wybierz przycisk **Utwórz**.
+1. Wybierz pozycję **Utwórz** .
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -136,27 +137,27 @@ Postępuj zgodnie ze wskazówkami dotyczącymi wybranego narzędzia:
 
 1. W Visual Studio Code Otwórz folder projektu aplikacji.
 
-1. Gdy pojawi się okno dialogowe dodawania zasobów do kompilowania i debugowania aplikacji, wybierz pozycję **tak**. Visual Studio Code automatycznie dodaje `.vscode` folder z wygenerowanymi `launch.json` `tasks.json` plikami i.
+1. Gdy pojawi się okno dialogowe dodawania zasobów do kompilowania i debugowania aplikacji, wybierz pozycję **tak** . Visual Studio Code automatycznie dodaje `.vscode` folder z wygenerowanymi `launch.json` `tasks.json` plikami i.
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
 1. Zainstaluj najnowszą wersję programu [Visual Studio dla komputerów Mac](https://visualstudio.microsoft.com/vs/mac/) i wykonaj następujące czynności:
 
-1. Wybierz pozycję **plik**  >  **nowe rozwiązanie** lub Utwórz **Nowy** projekt z **okna uruchamiania**.
+1. Wybierz pozycję **plik**  >  **nowe rozwiązanie** lub Utwórz **Nowy** projekt z **okna uruchamiania** .
 
-1. Na pasku bocznym wybierz pozycję Aplikacja **sieci Web i konsola**  >  **App**.
+1. Na pasku bocznym wybierz pozycję Aplikacja **sieci Web i konsola**  >  **App** .
 
-1. Wybierz szablon ** Blazor WebAssembly aplikacji** . Wybierz pozycję **Dalej**.
+1. Wybierz szablon **Blazor WebAssembly aplikacji** . Wybierz opcję **Dalej** .
 
-1. Upewnij się, że **uwierzytelnianie** jest ustawione na wartość **bez uwierzytelniania**. Zaznacz pole wyboru **hostowane ASP.NET Core** . Wybierz pozycję **Dalej**.
+1. Upewnij się, że **uwierzytelnianie** jest ustawione na wartość **bez uwierzytelniania** . Zaznacz pole wyboru **hostowane ASP.NET Core** . Wybierz opcję **Dalej** .
 
-1. W polu **Nazwa projektu** Nadaj nazwę aplikacji `BlazorSignalRApp` . Wybierz przycisk **Utwórz**.
+1. W polu **Nazwa projektu** Nadaj nazwę aplikacji `BlazorSignalRApp` . Wybierz pozycję **Utwórz** .
 
    Jeśli zostanie wyświetlony monit o zaufać certyfikatowi Deweloperskiemu, zaufaj certyfikatowi i Kontynuuj. Hasła użytkownika i pęku kluczy są wymagane do zaufania certyfikatu.
 
 1. Otwórz projekt, przechodząc do folderu projektu i otwierając plik rozwiązania projektu ( `.sln` ).
 
-# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli/)
+# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli/)
 
 W powłoce poleceń wykonaj następujące polecenie:
 
@@ -168,23 +169,23 @@ dotnet new blazorwasm --hosted --output BlazorSignalRApp
 
 ## <a name="add-the-no-locsignalr-client-library"></a>Dodawanie SignalR biblioteki klienta
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio/)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)
 
-1. W **Eksplorator rozwiązań**kliknij prawym przyciskiem myszy `BlazorSignalRApp.Client` projekt i wybierz polecenie **Zarządzaj pakietami NuGet**.
+1. W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy `BlazorSignalRApp.Client` projekt i wybierz polecenie **Zarządzaj pakietami NuGet** .
 
 1. W oknie dialogowym **Zarządzanie pakietami NuGet** upewnij się, że **Źródło pakietów** jest ustawione na wartość `nuget.org` .
 
 1. Po wybraniu **przycisku Przeglądaj** wpisz `Microsoft.AspNetCore.SignalR.Client` w polu wyszukiwania.
 
-1. W wynikach wyszukiwania wybierz [`Microsoft.AspNetCore.SignalR.Client`](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client) pakiet i wybierz pozycję **Zainstaluj**.
+1. W wynikach wyszukiwania wybierz [`Microsoft.AspNetCore.SignalR.Client`](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client) pakiet i wybierz pozycję **Zainstaluj** .
 
-1. Jeśli zostanie wyświetlone okno dialogowe **Podgląd zmian** , wybierz **przycisk OK**.
+1. Jeśli zostanie wyświetlone okno dialogowe **Podgląd zmian** , wybierz **przycisk OK** .
 
 1. Jeśli zostanie wyświetlone okno dialogowe **Akceptacja licencji** , wybierz pozycję **Akceptuję** , jeśli akceptujesz postanowienia licencyjne.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code/)
 
-W **zintegrowanym terminalu** (**Wyświetl**  >  **Terminal** z paska narzędzi) wykonaj następujące polecenia:
+W **zintegrowanym terminalu** ( **Wyświetl**  >  **Terminal** z paska narzędzi) wykonaj następujące polecenia:
 
 ```dotnetcli
 dotnet add Client package Microsoft.AspNetCore.SignalR.Client
@@ -192,17 +193,17 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-1. Na pasku bocznym **rozwiązania** kliknij prawym przyciskiem myszy `BlazorSignalRApp.Client` projekt i wybierz polecenie **Zarządzaj pakietami NuGet**.
+1. Na pasku bocznym **rozwiązania** kliknij prawym przyciskiem myszy `BlazorSignalRApp.Client` projekt i wybierz polecenie **Zarządzaj pakietami NuGet** .
 
 1. W oknie dialogowym **Zarządzanie pakietami NuGet** upewnij się, że lista rozwijana źródłowa ma ustawioną wartość `nuget.org` .
 
 1. Po wybraniu **przycisku Przeglądaj** wpisz `Microsoft.AspNetCore.SignalR.Client` w polu wyszukiwania.
 
-1. W wynikach wyszukiwania zaznacz pole wyboru obok [`Microsoft.AspNetCore.SignalR.Client`](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client) pakietu i wybierz polecenie **Dodaj pakiet**.
+1. W wynikach wyszukiwania zaznacz pole wyboru obok [`Microsoft.AspNetCore.SignalR.Client`](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client) pakietu i wybierz polecenie **Dodaj pakiet** .
 
 1. Jeśli zostanie wyświetlone okno dialogowe **Akceptacja licencji** , wybierz pozycję **Akceptuj** , jeśli akceptujesz postanowienia licencyjne.
 
-# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli/)
+# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli/)
 
 W powłoce poleceń wykonaj następujące polecenia:
 
@@ -292,9 +293,9 @@ W `BlazorSignalRApp.Server` projekcie Utwórz `Hubs` folder (plural) i Dodaj nas
 
 1. Postępuj zgodnie ze wskazówkami dotyczącymi narzędzi:
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-1. W **Eksplorator rozwiązań**wybierz `BlazorSignalRApp.Server` projekt. Naciśnij klawisz <kbd>F5</kbd> , aby uruchomić aplikację z debugowaniem lub <kbd>klawiszem Ctrl</kbd> + <kbd>F5</kbd> , aby uruchomić aplikację bez debugowania.
+1. W **Eksplorator rozwiązań** wybierz `BlazorSignalRApp.Server` projekt. Naciśnij klawisz <kbd>F5</kbd> , aby uruchomić aplikację z debugowaniem lub <kbd>klawiszem Ctrl</kbd> + <kbd>F5</kbd> , aby uruchomić aplikację bez debugowania.
 
 1. Skopiuj adres URL z paska adresu, Otwórz inne wystąpienie przeglądarki lub kartę, a następnie wklej adres URL na pasku adresu.
 
@@ -346,7 +347,7 @@ W `BlazorSignalRApp.Server` projekcie Utwórz `Hubs` folder (plural) i Dodaj nas
 
    Cudzysłowy: *gwiazdka Trek VI: niewykrywalny kraj* &copy; 1991 [Paramount](https://www.paramountmovies.com/movies/star-trek-vi-the-undiscovered-country)
 
-# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli/)
+# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli/)
 
 1. W powłoce poleceń wykonaj następujące polecenia:
 
@@ -382,7 +383,7 @@ Aby dowiedzieć się więcej na temat tworzenia Blazor aplikacji, zapoznaj się 
 > <xref:blazor/index>
 > [Uwierzytelnianie tokenu okaziciela z użyciem Identity serwera, obiektów WebSockets i zdarzeń Server-Sent](xref:signalr/authn-and-authz#bearer-token-authentication)
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:signalr/introduction>
 * [SignalR negocjowanie między źródłami na potrzeby uwierzytelniania](xref:blazor/fundamentals/additional-scenarios#signalr-cross-origin-negotiation-for-authentication)

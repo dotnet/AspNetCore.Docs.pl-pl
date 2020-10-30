@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 9/25/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/compatibility-version
-ms.openlocfilehash: b7d14aa0371fcc01d568cf1e7b9908c4a8d984df
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 9123bd70dfee1578912f682faf0520735fd55776
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722835"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051294"
 ---
 # <a name="compatibility-version-for-aspnet-core-mvc"></a>Wersja zgodności dla ASP.NET Core MVC
 

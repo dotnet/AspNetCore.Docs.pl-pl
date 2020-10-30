@@ -6,6 +6,7 @@ ms.author: casoper
 ms.custom: devx-track-csharp, mvc, seodec18, devx-track-azurecli
 ms.date: 10/24/2018
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: azure/devops/deploy-to-app-service
-ms.openlocfilehash: e6d8b4bcbbbe909fde971a8c706287654fcc98ba
-ms.sourcegitcommit: 62cc131969b2379f7a45c286a751e22d961dfbdb
+ms.openlocfilehash: 52c4905ecb3a76f1dd10629f834b2b541b698774
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/22/2020
-ms.locfileid: "90847627"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93052360"
 ---
 # <a name="deploy-an-app-to-app-service"></a>Wdróż aplikację w App Service
 
@@ -120,13 +121,13 @@ Aby wdrożyć aplikację, musisz utworzyć App Service [aplikację sieci Web](/a
     az webapp deployment user set --user-name REPLACE_WITH_USER_NAME --password REPLACE_WITH_PASSWORD
     ```
 
-    f. Skonfiguruj aplikację sieci Web tak, aby akceptowała wdrożenia z lokalnego narzędzia Git i wyświetlała *adres URL wdrożenia narzędzia Git*. **Zanotuj ten adres URL później**.
+    f. Skonfiguruj aplikację sieci Web tak, aby akceptowała wdrożenia z lokalnego narzędzia Git i wyświetlała *adres URL wdrożenia narzędzia Git* . **Zanotuj ten adres URL później** .
 
     ```azurecli
     echo Git deployment URL: $(az webapp deployment source config-local-git --name $webappname --resource-group AzureTutorial --query url --output tsv)
     ```
 
-    przykład Wyświetl *adres URL aplikacji sieci Web*. Przejdź do tego adresu URL, aby wyświetlić pustą aplikację sieci Web. **Zanotuj ten adres URL później**.
+    przykład Wyświetl *adres URL aplikacji sieci Web* . Przejdź do tego adresu URL, aby wyświetlić pustą aplikację sieci Web. **Zanotuj ten adres URL później** .
 
     ```console
     echo Web app URL: http://$webappname.azurewebsites.net
@@ -157,14 +158,14 @@ Aby wdrożyć aplikację, musisz utworzyć App Service [aplikację sieci Web](/a
 Aplikacja została już wdrożona z poziomu powłoki poleceń. Użyjmy zintegrowanych narzędzi programu Visual Studio, aby wdrożyć aktualizację do aplikacji. W tle program Visual Studio wykonuje te same czynności co w przypadku narzędzi wiersza polecenia, ale w znanym interfejsie użytkownika programu Visual Studio.
 
 1. Otwórz *SimpleFeedReader. sln* w programie Visual Studio.
-2. W Eksplorator rozwiązań Otwórz *Pages\Index.cshtml*. Zmień `<h2>Simple Feed Reader</h2>` na `<h2>Simple Feed Reader - V2</h2>` .
+2. W Eksplorator rozwiązań Otwórz *Pages\Index.cshtml* . Zmień `<h2>Simple Feed Reader</h2>` na `<h2>Simple Feed Reader - V2</h2>` .
 3. Naciśnij **klawisze CTRL** + **SHIFT** + **B** , aby skompilować aplikację.
-4. W Eksplorator rozwiązań kliknij prawym przyciskiem myszy projekt, a następnie kliknij pozycję **Publikuj**.
+4. W Eksplorator rozwiązań kliknij prawym przyciskiem myszy projekt, a następnie kliknij pozycję **Publikuj** .
 
     ![Zrzut ekranu przedstawiający kliknięcie prawym przyciskiem myszy, Publikuj](./media/deploying-to-app-service/publish.png)
-5. Program Visual Studio może utworzyć nowy zasób App Service, ale ta aktualizacja zostanie opublikowana w ramach istniejącego wdrożenia. W oknie dialogowym **Wybieranie elementu docelowego publikowania** wybierz pozycję **App Service** z listy po lewej stronie, a następnie wybierz pozycję **Wybierz istniejące**. Kliknij przycisk **Opublikuj**.
+5. Program Visual Studio może utworzyć nowy zasób App Service, ale ta aktualizacja zostanie opublikowana w ramach istniejącego wdrożenia. W oknie dialogowym **Wybieranie elementu docelowego publikowania** wybierz pozycję **App Service** z listy po lewej stronie, a następnie wybierz pozycję **Wybierz istniejące** . Kliknij przycisk **Opublikuj** .
 6. W oknie dialogowym **App Service** upewnij się, że konto Microsoft lub organizacyjne używane do tworzenia subskrypcji platformy Azure jest wyświetlane w prawym górnym rogu. Jeśli nie, kliknij listę rozwijaną i Dodaj ją.
-7. Upewnij się, że wybrano poprawną **subskrypcję** platformy Azure. W obszarze **Widok**wybierz pozycję **Grupa zasobów**. Rozwiń grupę zasobów **AzureTutorial** , a następnie wybierz istniejącą aplikację sieci Web. Kliknij przycisk **OK**.
+7. Upewnij się, że wybrano poprawną **subskrypcję** platformy Azure. W obszarze **Widok** wybierz pozycję **Grupa zasobów** . Rozwiń grupę zasobów **AzureTutorial** , a następnie wybierz istniejącą aplikację sieci Web. Kliknij pozycję **OK** .
 
     ![Zrzut ekranu przedstawiający okno dialogowe publikowania App Service](./media/deploying-to-app-service/publish-dialog.png)
 
@@ -179,19 +180,19 @@ Miejsca wdrożenia obsługują przemieszczanie zmian bez wpływu na działanie a
 1. Zaloguj się do [Azure Cloud Shell](https://shell.azure.com/bash), jeśli jeszcze nie jest zalogowany.
 2. Utwórz miejsce przejściowe.
 
-    a. Utwórz miejsce wdrożenia o nazwie *tymczasowej*.
+    a. Utwórz miejsce wdrożenia o nazwie *tymczasowej* .
 
     ```azurecli
     az webapp deployment slot create --name $webappname --resource-group AzureTutorial --slot staging
     ```
 
-    b. Skonfiguruj miejsce przejściowe tak, aby korzystało z wdrożenia z lokalnego narzędzia Git i uzyskać adres URL wdrożenia **przemieszczania** . **Zanotuj ten adres URL później**.
+    b. Skonfiguruj miejsce przejściowe tak, aby korzystało z wdrożenia z lokalnego narzędzia Git i uzyskać adres URL wdrożenia **przemieszczania** . **Zanotuj ten adres URL później** .
 
     ```azurecli
     echo Git deployment URL for staging: $(az webapp deployment source config-local-git --name $webappname --resource-group AzureTutorial --slot staging --query url --output tsv)
     ```
 
-    c. Wyświetl adres URL miejsca przemieszczania. Przejdź do adresu URL, aby wyświetlić puste miejsce przejściowe. **Zanotuj ten adres URL później**.
+    c. Wyświetl adres URL miejsca przemieszczania. Przejdź do adresu URL, aby wyświetlić puste miejsce przejściowe. **Zanotuj ten adres URL później** .
 
     ```console
     echo Staging web app URL: http://$webappname-staging.azurewebsites.net

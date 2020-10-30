@@ -5,6 +5,7 @@ description: Dowiedz się, jak utworzyć aplikację ASP.NET Core przy użyciu po
 ms.author: riande
 ms.date: 03/11/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/accconfirm
-ms.openlocfilehash: d6ea37ceb83ffbaa94187e0c541c79428594e4b4
-ms.sourcegitcommit: 2039e60eb7b482da8298f82dcd5eda27cf747f32
+ms.openlocfilehash: 91148c67d5dc0bf97e2f926f50dcff5dd0708f4b
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88906452"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93052321"
 ---
 # <a name="account-confirmation-and-password-recovery-in-aspnet-core"></a>Potwierdzenie konta i odzyskiwanie hasła w ASP.NET Core
 
@@ -56,7 +57,7 @@ Uruchom aplikację, wybierz łącze **zarejestruj** i zarejestruj użytkownika. 
 * Wybierz link `Click here to confirm your account`.
 * Wybierz łącze **logowania** i zaloguj się przy użyciu tych samych poświadczeń.
 * Wybierz `Hello YourEmail@provider.com!` link, który przekierowuje Cię do `/Identity/Account/Manage/PersonalData` strony.
-* Wybierz kartę **dane osobowe** po lewej stronie, a następnie wybierz pozycję **Usuń**.
+* Wybierz kartę **dane osobowe** po lewej stronie, a następnie wybierz pozycję **Usuń** .
 
 ### <a name="configure-an-email-provider"></a>Konfigurowanie dostawcy poczty e-mail
 
@@ -64,7 +65,7 @@ W tym samouczku [SendGrid](https://sendgrid.com) jest używany do wysyłania wia
 
 Konto SendGrid może wymagać [dodania nadawcy](https://sendgrid.com/docs/ui/sending-email/senders/).
 
-Utwórz klasę, aby pobrać bezpieczny klucz poczty e-mail. Dla tego przykładu Utwórz *usługi/AuthMessageSenderOptions. cs*:
+Utwórz klasę, aby pobrać bezpieczny klucz poczty e-mail. Dla tego przykładu Utwórz *usługi/AuthMessageSenderOptions. cs* :
 
 [!code-csharp[](accconfirm/sample/WebPWrecover30/Services/AuthMessageSenderOptions.cs?name=snippet1)]
 
@@ -106,7 +107,7 @@ W konsoli Menedżera pakietów wprowadź następujące polecenie:
 Install-Package SendGrid
 ```
 
-# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
 
 W konsoli programu wprowadź następujące polecenie:
 
@@ -155,7 +156,7 @@ Uruchom aplikację internetową, a następnie przetestuj potwierdzenie konta i p
 
 ### <a name="test-password-reset"></a>Resetowanie hasła do testu
 
-* Jeśli użytkownik jest zalogowany, wybierz pozycję **Wyloguj**.
+* Jeśli użytkownik jest zalogowany, wybierz pozycję **Wyloguj** .
 * Wybierz link **Zaloguj** i wybierz łącze nie **pamiętasz hasła?**
 * Wprowadź adres e-mail, który został użyty do zarejestrowania konta.
 * Zostanie wysłana wiadomość e-mail z linkiem służącym do resetowania hasła. Sprawdź swój adres e-mail i kliknij link, aby zresetować hasło. Po pomyślnym zresetowaniu hasła możesz zalogować się przy użyciu adresu e-mail i nowego hasła.
@@ -266,7 +267,7 @@ Uruchom aplikację, wybierz łącze **zarejestruj** i zarejestruj użytkownika. 
 
 Zwróć uwagę na to, że `EmailConfirmed` pole tabeli ma wartość `False` .
 
-Możesz chcieć ponownie użyć tej wiadomości e-mail w następnym kroku, gdy aplikacja wyśle wiadomość e-mail z potwierdzeniem. Kliknij prawym przyciskiem myszy wiersz i wybierz polecenie **Usuń**. Usunięcie aliasu e-mail ułatwia wykonanie następujących czynności.
+Możesz chcieć ponownie użyć tej wiadomości e-mail w następnym kroku, gdy aplikacja wyśle wiadomość e-mail z potwierdzeniem. Kliknij prawym przyciskiem myszy wiersz i wybierz polecenie **Usuń** . Usunięcie aliasu e-mail ułatwia wykonanie następujących czynności.
 
 <a name="prevent-login-at-registration"></a>
 
@@ -286,7 +287,7 @@ Aktualizuj `Startup.ConfigureServices`  , aby wymagać potwierdzonej wiadomości
 
 W tym samouczku [SendGrid](https://sendgrid.com) jest używany do wysyłania wiadomości e-mail. Aby wysłać wiadomość e-mail, musisz mieć konto SendGrid i klucz. Możesz użyć innych dostawców poczty e-mail. Program zawiera ASP.NET Core 2. x `System.Net.Mail` , który umożliwia wysyłanie wiadomości e-mail z aplikacji. Zalecamy użycie SendGrid lub innej usługi poczty e-mail do wysyłania wiadomości e-mail. Protokół SMTP jest trudny do poprawnego zabezpieczania i konfigurowania.
 
-Utwórz klasę, aby pobrać bezpieczny klucz poczty e-mail. Dla tego przykładu Utwórz *usługi/AuthMessageSenderOptions. cs*:
+Utwórz klasę, aby pobrać bezpieczny klucz poczty e-mail. Dla tego przykładu Utwórz *usługi/AuthMessageSenderOptions. cs* :
 
 [!code-csharp[](accconfirm/sample/WebPWrecover22/Services/AuthMessageSenderOptions.cs?name=snippet1)]
 
@@ -326,7 +327,7 @@ W konsoli Menedżera pakietów wprowadź następujące polecenie:
 Install-Package SendGrid
 ```
 
-# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
 
 W konsoli programu wprowadź następujące polecenie:
 
@@ -355,7 +356,7 @@ Dodaj następujący kod do `ConfigureServices` metody w pliku *Startup.cs* :
 
 ## <a name="enable-account-confirmation-and-password-recovery"></a>Włącz potwierdzenie konta i odzyskiwanie hasła
 
-Szablon zawiera kod służący do potwierdzenia konta i odzyskiwania hasła. Znajdź `OnPostAsync` metodę w *obszarach/ Identity /Pages/Account/register.cshtml.cs*.
+Szablon zawiera kod służący do potwierdzenia konta i odzyskiwania hasła. Znajdź `OnPostAsync` metodę w *obszarach/ Identity /Pages/Account/register.cshtml.cs* .
 
 Zablokuj automatyczne logowanie nowo zarejestrowanych użytkowników, dodając komentarz do następującego wiersza:
 
@@ -385,7 +386,7 @@ Zostanie wyświetlona strona zarządzanie z wybraną kartą **profil** . **Wiado
 
 ### <a name="test-password-reset"></a>Resetowanie hasła do testu
 
-* Jeśli użytkownik jest zalogowany, wybierz pozycję **Wyloguj**.
+* Jeśli użytkownik jest zalogowany, wybierz pozycję **Wyloguj** .
 * Wybierz link **Zaloguj** i wybierz łącze nie **pamiętasz hasła?**
 * Wprowadź adres e-mail, który został użyty do zarejestrowania konta.
 * Zostanie wysłana wiadomość e-mail z linkiem służącym do resetowania hasła. Sprawdź swój adres e-mail i kliknij link, aby zresetować hasło. Po pomyślnym zresetowaniu hasła możesz zalogować się przy użyciu adresu e-mail i nowego hasła.

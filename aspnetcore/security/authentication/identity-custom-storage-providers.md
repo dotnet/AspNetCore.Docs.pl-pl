@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/23/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity-custom-storage-providers
-ms.openlocfilehash: a8414efeece1afd55d0f30d232ef360d0a21714c
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: c89098bf0b2c4396f9856aca2be9967af5df0cb7
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630136"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051905"
 ---
 # <a name="custom-storage-providers-for-no-locaspnet-core-identity"></a>Niestandardowi dostawcy magazynu dla programu ASP.NET Core Identity
 
@@ -34,7 +35,7 @@ ASP.NET Core Identity to rozszerzalny system, który umożliwia utworzenie niest
 
 ## <a name="introduction"></a>Wprowadzenie
 
-Domyślnie ASP.NET Core Identity System przechowuje informacje o użytkowniku w bazie danych SQL Server przy użyciu Entity Framework Core. W przypadku wielu aplikacji to podejście działa prawidłowo. Jednak warto użyć innego mechanizmu trwałości lub schematu danych. Na przykład:
+Domyślnie ASP.NET Core Identity System przechowuje informacje o użytkowniku w bazie danych SQL Server przy użyciu Entity Framework Core. W przypadku wielu aplikacji to podejście działa prawidłowo. Jednak warto użyć innego mechanizmu trwałości lub schematu danych. Przykład:
 
 * Używasz [usługi Azure Table Storage](/azure/storage/) lub innego magazynu danych.
 * Tabele bazy danych mają inną strukturę. 
@@ -180,7 +181,7 @@ W ramach `UserStore` klasy używane są klasy dostępu do danych, które został
 * **IQueryableUserStore**  
  Interfejs [IQueryableUserStore &lt; TUser &gt; ](/dotnet/api/microsoft.aspnetcore.identity.iqueryableuserstore-1) definiuje elementy członkowskie, które są implementowane w celu udostępnienia magazynu użytkownika queryable.
 
-Implementowane są tylko interfejsy, które są potrzebne w aplikacji. Na przykład:
+Implementowane są tylko interfejsy, które są potrzebne w aplikacji. Przykład:
 
 ```csharp
 public class UserStore : IUserStore<IdentityUser>,

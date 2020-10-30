@@ -5,6 +5,7 @@ description: Część 4 samouczków z serii ASP.NET Core MVC.
 ms.author: riande
 ms.date: 01/13/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,22 +17,22 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-model
-ms.openlocfilehash: ddd517ef8fbf8cb4bb8765cb3caab4724c0205f0
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 428d153cd94c882db16484a3009c86d1f9593538
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631969"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93050904"
 ---
 # <a name="part-4-add-a-model-to-an-aspnet-core-mvc-app"></a>Część 4. Dodawanie modelu do aplikacji ASP.NET Core MVC
 
 Autorzy [Rick Anderson](https://twitter.com/RickAndMSFT) i [Tomasz Dykstra](https://github.com/tdykstra)
 
-W tej sekcji dodasz klasy do zarządzania filmami w bazie danych. Te klasy będą częścią "**m**odelu" aplikacji **m**VC.
+W tej sekcji dodasz klasy do zarządzania filmami w bazie danych. Te klasy będą częścią " **m** odelu" aplikacji **m** VC.
 
 Te klasy są używane z [Entity Framework Core](/ef/core) (Ef Core) do pracy z bazą danych. EF Core to struktura obiektu mapowania relacyjnego (ORM), która upraszcza kod dostępu do danych, który trzeba napisać.
 
-Klasy modelu, które tworzysz, są nazywane klasami POCO ( **z Lain** **P**LR **C** **o**biekty), ponieważ nie mają żadnej zależności od EF Core. Po prostu definiują właściwości danych, które będą przechowywane w bazie danych.
+Klasy modelu, które tworzysz, są nazywane klasami POCO ( **z Lain** **P** LR **C** **o** biekty), ponieważ nie mają żadnej zależności od EF Core. Po prostu definiują właściwości danych, które będą przechowywane w bazie danych.
 
 W tym samouczku najpierw napiszesz klasy modelu, a EF Core tworzy bazę danych.
 
@@ -41,7 +42,7 @@ W tym samouczku najpierw napiszesz klasy modelu, a EF Core tworzy bazę danych.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Kliknij prawym przyciskiem myszy folder *modele* > **Dodaj**  >  **klasę**. Nazwij plik *Movie.cs*.
+Kliknij prawym przyciskiem myszy folder *modele* > **Dodaj**  >  **klasę** . Nazwij plik *Movie.cs* .
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -49,7 +50,7 @@ Dodaj plik o nazwie *Movie.cs* do folderu *models* .
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-Kliknij prawym przyciskiem myszy folder *modele* > **Dodaj**  >  **nową klasę**  >  **pustą**klasy. Nazwij plik *Movie.cs*.
+Kliknij prawym przyciskiem myszy folder *modele* > **Dodaj**  >  **nową klasę**  >  **pustą** klasy. Nazwij plik *Movie.cs* .
 
 ---
 
@@ -88,7 +89,7 @@ Poprzednie polecenie dodaje dostawcę SQL Server EF Core. Pakiet dostawcy instal
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-W menu **projekt** wybierz polecenie **Zarządzaj pakietami NuGet**.
+W menu **projekt** wybierz polecenie **Zarządzaj pakietami NuGet** .
 
 W polu **wyszukiwania** w prawym górnym rogu wprowadź `Microsoft.EntityFrameworkCore.SQLite` i naciśnij klawisz **Return** , aby wyszukać. Wybierz pasujący pakiet NuGet i naciśnij przycisk **Dodaj pakiet** .
 
@@ -126,7 +127,7 @@ Poprzedni kod tworzy właściwość [nieogólnymi \<Movie> ](/dotnet/api/microso
 
 ASP.NET Core jest skompilowany przy użyciu [iniekcji zależności (di)](xref:fundamentals/dependency-injection). Usługi (takie jak kontekst EF Core DB) muszą być zarejestrowane przy użyciu funkcji "DI" podczas uruchamiania aplikacji. Składniki wymagające tych usług (takie jak Razor strony) są udostępniane przez parametry konstruktora. Kod konstruktora, który pobiera wystąpienie kontekstu bazy danych, jest wyświetlany w dalszej części tego samouczka. W tej sekcji rejestrujesz kontekst bazy danych przy użyciu funkcji DI Container.
 
-Dodaj następujące `using` instrukcje w górnej części *Startup.cs*:
+Dodaj następujące `using` instrukcje w górnej części *Startup.cs* :
 
 ```csharp
 using MvcMovie.Data;
@@ -145,13 +146,13 @@ Dodaj następujący wyróżniony kod w `Startup.ConfigureServices` :
 
 ---
 
-Nazwa parametrów połączenia jest przenoszona do kontekstu przez wywołanie metody w obiekcie [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) . W przypadku lokalnego projektowania [system konfiguracji ASP.NET Core](xref:fundamentals/configuration/index) odczytuje parametry połączenia z *appsettings.jsna* pliku.
+Nazwa parametrów połączenia jest przenoszona do kontekstu przez wywołanie metody w obiekcie [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) . W przypadku lokalnego projektowania [system konfiguracji ASP.NET Core](xref:fundamentals/configuration/index) odczytuje parametry połączenia z *appsettings.json* pliku.
 
 <a name="cs"></a>
 
 ## <a name="add-a-database-connection-string"></a>Dodaj parametry połączenia z bazą danych
 
-Dodaj parametry połączenia do *appsettings.jsw* pliku:
+Dodaj parametry połączenia do *appsettings.json* pliku:
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -171,11 +172,11 @@ Użyj narzędzia do tworzenia szkieletu, aby utworzyć strony z przykładem twor
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-W **Eksplorator rozwiązań**kliknij prawym przyciskiem myszy folder *controllers* , **> Dodaj > nowy element szkieletowy**.
+W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy folder *controllers* , **> Dodaj > nowy element szkieletowy** .
 
 ![Widok powyżej kroku](adding-model/_static/add_controller21.png)
 
-W oknie dialogowym **Dodawanie szkieletu** wybierz pozycję **kontroler MVC z widokami przy użyciu Entity Framework > Dodaj**.
+W oknie dialogowym **Dodawanie szkieletu** wybierz pozycję **kontroler MVC z widokami przy użyciu Entity Framework > Dodaj** .
 
 ![Okno dialogowe Dodawanie szkieletu](adding-model/_static/add_scaffold21.png)
 
@@ -188,18 +189,18 @@ Ukończ okno dialogowe **Dodawanie kontrolera** :
 
 * **Widoki:** Zachowaj wartość domyślną dla każdej zaznaczonej opcji
 * **Nazwa kontrolera:** Zachowaj domyślną *MoviesController*
-* Wybierz pozycję **Dodaj**
+* Wybierz pozycję **Dodaj** .
 
 Program Visual Studio tworzy:
 
-* Kontroler filmów (*controllers/MoviesController. cs*)
-* Razor Wyświetlanie plików na potrzeby tworzenia, usuwania, szczegółów, edytowania i indeksowania stron (*widoki/filmy/ \* . cshtml*)
+* Kontroler filmów ( *controllers/MoviesController. cs* )
+* Razor Wyświetlanie plików na potrzeby tworzenia, usuwania, szczegółów, edytowania i indeksowania stron ( *widoki/filmy/ \* . cshtml* )
 
-Automatyczne tworzenie tych plików jest znane jako *rusztowania*.
+Automatyczne tworzenie tych plików jest znane jako *rusztowania* .
 
 ### <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) 
 
-* Otwórz okno polecenia w katalogu projektu (katalog zawierający pliki *program.cs*, *Startup.cs*i *. csproj* ).
+* Otwórz okno polecenia w katalogu projektu (katalog zawierający pliki *program.cs* , *Startup.cs* i *. csproj* ).
 
 * W systemie Linux wyeksportuj ścieżkę narzędzia do tworzenia szkieletu:
 
@@ -217,7 +218,7 @@ Automatyczne tworzenie tych plików jest znane jako *rusztowania*.
 
 ### <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-* Otwórz okno polecenia w katalogu projektu (katalog zawierający pliki *program.cs*, *Startup.cs*i *. csproj* ).
+* Otwórz okno polecenia w katalogu projektu (katalog zawierający pliki *program.cs* , *Startup.cs* i *. csproj* ).
 
 * Uruchom następujące polecenie:
 
@@ -313,9 +314,9 @@ Przejrzyj *migracje/{timestamp} _InitialCreate* pliku migracji CS:
 * Przetestuj stronę **Tworzenie** . Wprowadź i prześlij dane.
 
   > [!NOTE]
-  > W polu nie można wprowadzać przecinków dziesiętnych `Price` . Aby zapewnić obsługę [walidacji jQuery](https://jqueryvalidation.org/) dla ustawień regionalnych innych niż angielskie, które używają przecinka (",") dla przecinka dziesiętnego i dla formatów dat innych niż angielski, aplikacja musi być globalna. Aby uzyskać instrukcje dotyczące globalizacji, zobacz [ten problem](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420)w usłudze GitHub.
+  > W polu nie można wprowadzać przecinków dziesiętnych `Price` . Aby zapewnić obsługę [walidacji jQuery](https://jqueryvalidation.org/) dla ustawień regionalnych innych niż angielski, które używają przecinka (",") dla punktu dziesiętnego i dla formatów nieUS-Englishych, aplikacja musi być globalna. Aby uzyskać instrukcje dotyczące globalizacji, zobacz [ten problem](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420)w usłudze GitHub.
 
-* Przetestuj strony **Edytuj**, **szczegóły**i **Usuń** .
+* Przetestuj strony **Edytuj** , **szczegóły** i **Usuń** .
 
 ## <a name="dependency-injection-in-the-controller"></a>Wstrzykiwanie zależności w kontrolerze
 
@@ -427,13 +428,13 @@ Ponieważ `Model` obiekt jest silnie określony (jako `IEnumerable<Movie>` obiek
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Kliknij prawym przyciskiem myszy folder *modele* > **Dodaj**  >  **klasę**. Nazwij **film**klasy.
+Kliknij prawym przyciskiem myszy folder *modele* > **Dodaj**  >  **klasę** . Nazwij **film** klasy.
 
 [!INCLUDE [model 1b](~/includes/mvc-intro/model1b.md)]
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Visual Studio dla komputerów Mac](#tab/visual-studio-code+visual-studio-mac)
 
-* Dodaj klasę do folderu *models* o nazwie *Movie.cs*.
+* Dodaj klasę do folderu *models* o nazwie *Movie.cs* .
 
 [!INCLUDE [model 1b](~/includes/mvc-intro/model1b.md)]
 [!INCLUDE [model 2](~/includes/mvc-intro/model2.md)]
@@ -446,11 +447,11 @@ W tej sekcji model filmu jest szkieletem. Oznacza to, że narzędzie tworzenia s
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-W **Eksplorator rozwiązań**kliknij prawym przyciskiem myszy folder *controllers* , **> Dodaj > nowy element szkieletowy**.
+W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy folder *controllers* , **> Dodaj > nowy element szkieletowy** .
 
 ![Widok powyżej kroku](adding-model/_static/add_controller21.png)
 
-W oknie dialogowym **Dodawanie szkieletu** wybierz pozycję **kontroler MVC z widokami przy użyciu Entity Framework > Dodaj**.
+W oknie dialogowym **Dodawanie szkieletu** wybierz pozycję **kontroler MVC z widokami przy użyciu Entity Framework > Dodaj** .
 
 ![Okno dialogowe Dodawanie szkieletu](adding-model/_static/add_scaffold21.png)
 
@@ -463,24 +464,24 @@ Ukończ okno dialogowe **Dodawanie kontrolera** :
 
 * **Widoki:** Zachowaj wartość domyślną dla każdej zaznaczonej opcji
 * **Nazwa kontrolera:** Zachowaj domyślną *MoviesController*
-* Wybierz pozycję **Dodaj**
+* Wybierz pozycję **Dodaj** .
 
 ![Okno dialogowe Dodawanie kontrolera](adding-model/_static/add_controller2.png)
 
 Program Visual Studio tworzy:
 
-* [Klasa kontekstu bazy danych](xref:data/ef-mvc/intro#create-the-database-context) Entity Framework Core (*Data/MvcMovieContext. cs*)
-* Kontroler filmów (*controllers/MoviesController. cs*)
-* Razor Wyświetlanie plików na potrzeby tworzenia, usuwania, szczegółów, edytowania i indeksowania stron (*widoki/filmy/ \* . cshtml*)
+* [Klasa kontekstu bazy danych](xref:data/ef-mvc/intro#create-the-database-context) Entity Framework Core ( *Data/MvcMovieContext. cs* )
+* Kontroler filmów ( *controllers/MoviesController. cs* )
+* Razor Wyświetlanie plików na potrzeby tworzenia, usuwania, szczegółów, edytowania i indeksowania stron ( *widoki/filmy/ \* . cshtml* )
 
-Automatyczne tworzenie kontekstu bazy danych i metod akcji [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) (tworzenie, odczytywanie, aktualizowanie i usuwanie) jest znane jako *rusztowanie*.
+Automatyczne tworzenie kontekstu bazy danych i metod akcji [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) (tworzenie, odczytywanie, aktualizowanie i usuwanie) jest znane jako *rusztowanie* .
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 <!--  Until https://github.com/aspnet/Scaffolding/issues/582 is fixed windows needs backslash or the namespace is namespace RazorPagesMovie.Pages_Movies rather than namespace RazorPagesMovie.Pages.Movies
 -->
 
-* Otwórz okno polecenia w katalogu projektu (katalog zawierający pliki *program.cs*, *Startup.cs*i *. csproj* ).
+* Otwórz okno polecenia w katalogu projektu (katalog zawierający pliki *program.cs* , *Startup.cs* i *. csproj* ).
 * Zainstaluj narzędzie do tworzenia szkieletu:
 
   ```dotnetcli
@@ -505,7 +506,7 @@ Automatyczne tworzenie kontekstu bazy danych i metod akcji [CRUD](https://wikipe
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-* Otwórz okno polecenia w katalogu projektu (katalog zawierający pliki *program.cs*, *Startup.cs*i *. csproj* ).
+* Otwórz okno polecenia w katalogu projektu (katalog zawierający pliki *program.cs* , *Startup.cs* i *. csproj* ).
 * Zainstaluj narzędzie do tworzenia szkieletu:
 
   ```dotnetcli
@@ -606,7 +607,7 @@ Przeanalizuj poniższą `Startup.ConfigureServices` metodę. Podświetlony wiers
 
 Poprzedni kod tworzy właściwość [nieogólnymi \<Movie> ](/dotnet/api/microsoft.entityframeworkcore.dbset-1) dla zestawu jednostek. W Entity Framework terminologii zestaw jednostek zwykle odpowiada tabeli bazy danych. Jednostka odnosi się do wiersza w tabeli.
 
-Nazwa parametrów połączenia jest przenoszona do kontekstu przez wywołanie metody w obiekcie [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) . W przypadku lokalnego projektowania [system konfiguracji ASP.NET Core](xref:fundamentals/configuration/index) odczytuje parametry połączenia z *appsettings.jsna* pliku.
+Nazwa parametrów połączenia jest przenoszona do kontekstu przez wywołanie metody w obiekcie [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) . W przypadku lokalnego projektowania [system konfiguracji ASP.NET Core](xref:fundamentals/configuration/index) odczytuje parametry połączenia z *appsettings.json* pliku.
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Visual Studio dla komputerów Mac](#tab/visual-studio-code+visual-studio-mac)
 
@@ -632,9 +633,9 @@ Pominięto [krok migracji](#pmc).
 * Przetestuj link **tworzenia** . Wprowadź i prześlij dane.
 
   > [!NOTE]
-  > W polu nie można wprowadzać przecinków dziesiętnych `Price` . Aby zapewnić obsługę [walidacji jQuery](https://jqueryvalidation.org/) dla ustawień regionalnych innych niż angielskie, które używają przecinka (",") dla przecinka dziesiętnego i dla formatów dat innych niż angielski, aplikacja musi być globalna. Aby uzyskać instrukcje dotyczące globalizacji, zobacz [ten problem](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420)w usłudze GitHub.
+  > W polu nie można wprowadzać przecinków dziesiętnych `Price` . Aby zapewnić obsługę [walidacji jQuery](https://jqueryvalidation.org/) dla ustawień regionalnych innych niż angielski, które używają przecinka (",") dla punktu dziesiętnego i dla formatów nieUS-Englishych, aplikacja musi być globalna. Aby uzyskać instrukcje dotyczące globalizacji, zobacz [ten problem](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420)w usłudze GitHub.
 
-* Przetestuj linki **Edytuj**, **Szczegóły** i **Usuń**.
+* Przetestuj linki **Edytuj** , **Szczegóły** i **Usuń** .
 
 Zapoznaj się z `Startup` klasą:
 

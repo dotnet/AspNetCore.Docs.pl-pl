@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/06/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/app-state
-ms.openlocfilehash: 95035ec372ab6adb5bafb40f2b939c549ac6f839
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: c11b748f9d79235b14c9541019da6e1fb3428af6
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633815"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051411"
 ---
 # <a name="session-and-state-management-in-aspnet-core"></a>Zarządzanie sesjami i stanami na platformie ASP.NET Core
 
@@ -141,7 +142,7 @@ Aby zastąpić cookie wartości domyślne sesji, użyj <xref:Microsoft.AspNetCor
 
 Aplikacja używa właściwości, <xref:Microsoft.AspNetCore.Builder.SessionOptions.IdleTimeout> Aby określić, jak długo sesja może być bezczynna, zanim jej zawartość w pamięci podręcznej serwera zostanie porzucona. Ta właściwość jest niezależna od cookie daty wygaśnięcia. Każde żądanie przechodzące przez [oprogramowanie pośredniczące sesji](xref:Microsoft.AspNetCore.Session.SessionMiddleware) resetuje limit czasu.
 
-Stan sesji to *nie jest blokowanie*. Jeśli dwa żądania jednocześnie próbują zmodyfikować zawartość sesji, ostatnie żądanie zastępuje pierwsze. `Session` Program jest implementowany jako *spójna sesja*, co oznacza, że cała zawartość jest przechowywana razem. Gdy dwa żądania poszukują modyfikacji różnych wartości sesji, ostatnie żądanie może zastąpić zmiany sesji wykonane przez pierwsze.
+Stan sesji to *nie jest blokowanie* . Jeśli dwa żądania jednocześnie próbują zmodyfikować zawartość sesji, ostatnie żądanie zastępuje pierwsze. `Session` Program jest implementowany jako *spójna sesja* , co oznacza, że cała zawartość jest przechowywana razem. Gdy dwa żądania poszukują modyfikacji różnych wartości sesji, ostatnie żądanie może zastąpić zmiany sesji wykonane przez pierwsze.
 
 ### <a name="set-and-get-session-values"></a>Ustawianie i pobieranie wartości sesji
 
@@ -401,7 +402,7 @@ Aby zastąpić cookie wartości domyślne sesji, użyj `SessionOptions` :
 
 Aplikacja używa właściwości, <xref:Microsoft.AspNetCore.Builder.SessionOptions.IdleTimeout> Aby określić, jak długo sesja może być bezczynna, zanim jej zawartość w pamięci podręcznej serwera zostanie porzucona. Ta właściwość jest niezależna od cookie daty wygaśnięcia. Każde żądanie przechodzące przez [oprogramowanie pośredniczące sesji](xref:Microsoft.AspNetCore.Session.SessionMiddleware) resetuje limit czasu.
 
-Stan sesji to *nie jest blokowanie*. Jeśli dwa żądania jednocześnie próbują zmodyfikować zawartość sesji, ostatnie żądanie zastępuje pierwsze. `Session` Program jest implementowany jako *spójna sesja*, co oznacza, że cała zawartość jest przechowywana razem. Gdy dwa żądania poszukują modyfikacji różnych wartości sesji, ostatnie żądanie może zastąpić zmiany sesji wykonane przez pierwsze.
+Stan sesji to *nie jest blokowanie* . Jeśli dwa żądania jednocześnie próbują zmodyfikować zawartość sesji, ostatnie żądanie zastępuje pierwsze. `Session` Program jest implementowany jako *spójna sesja* , co oznacza, że cała zawartość jest przechowywana razem. Gdy dwa żądania poszukują modyfikacji różnych wartości sesji, ostatnie żądanie może zastąpić zmiany sesji wykonane przez pierwsze.
 
 ### <a name="set-and-get-session-values"></a>Ustawianie i pobieranie wartości sesji
 

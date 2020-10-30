@@ -5,6 +5,7 @@ description: W tym artykule opisano sposób dostosowywania bazowego Entity Frame
 ms.author: avickers
 ms.date: 07/01/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/customize_identity_model
-ms.openlocfilehash: 71f532aa00c2afeeb0d6b93c01cb6a1fbd0a686c
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 6e520c76a3377e889166ca8d08b75754ef34b6a1
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634309"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93052048"
 ---
 # <a name="no-locidentity-model-customization-in-aspnet-core"></a>Identity dostosowanie modelu w ASP.NET Core
 
@@ -220,7 +221,7 @@ Identity definiuje domyślne typy [środowiska uruchomieniowego języka wspólne
 
 Zamiast bezpośrednio używać tych typów, typy mogą służyć jako klasy bazowe dla własnych typów aplikacji. `DbContext`Klasy zdefiniowane przez Identity są ogólne, w taki sposób, aby można było używać różnych typów CLR dla co najmniej jednego typu jednostki w modelu. Te typy ogólne umożliwiają `User` zmianę typu danych klucza podstawowego (PK).
 
-W przypadku używania Identity z obsługą ról, <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext> należy użyć klasy. Na przykład:
+W przypadku używania Identity z obsługą ról, <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext> należy użyć klasy. Przykład:
 
 ```csharp
 // Uses all the built-in Identity types
@@ -435,7 +436,7 @@ Wykonaj następujące kroki, aby zmienić typ klucza PK:
 
     ::: moniker-end
 
-4. Jeśli `ApplicationUser` jest używana Klasa niestandardowa, zaktualizuj klasę, aby dziedziczyć `IdentityUser` . Na przykład:
+4. Jeśli `ApplicationUser` jest używana Klasa niestandardowa, zaktualizuj klasę, aby dziedziczyć `IdentityUser` . Przykład:
 
     ::: moniker range="<= aspnetcore-1.1"
 
@@ -503,7 +504,7 @@ Wykonaj następujące kroki, aby zmienić typ klucza PK:
 
     ::: moniker-end
 
-5. Jeśli `ApplicationRole` jest używana Klasa niestandardowa, zaktualizuj klasę, aby dziedziczyć `IdentityRole<TKey>` . Na przykład:
+5. Jeśli `ApplicationRole` jest używana Klasa niestandardowa, zaktualizuj klasę, aby dziedziczyć `IdentityRole<TKey>` . Przykład:
 
     [!code-csharp[](customize-identity-model/samples/2.1/RazorPagesSampleApp/Data/ApplicationRole.cs?name=snippet_ApplicationRole&highlight=4)]
 
@@ -952,7 +953,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
 ### <a name="map-to-a-different-schema"></a>Mapuj na inny schemat
 
-Schematy mogą działać inaczej niż dostawcy baz danych. W przypadku SQL Server wartością domyślną jest utworzenie wszystkich tabel w schemacie *dbo* . Tabele można tworzyć w innym schemacie. Na przykład:
+Schematy mogą działać inaczej niż dostawcy baz danych. W przypadku SQL Server wartością domyślną jest utworzenie wszystkich tabel w schemacie *dbo* . Tabele można tworzyć w innym schemacie. Przykład:
 
 ```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -965,7 +966,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
 ::: moniker range=">= aspnetcore-2.1"
 
-### <a name="lazy-loading"></a>Ładowanie z opóźnieniem
+### <a name="lazy-loading"></a>Ładowanie opóźnione
 
 W tej sekcji zostanie dodana obsługa serwerów proxy ładowania opóźnionego w Identity modelu. Ładowanie z opóźnieniem jest przydatne, ponieważ umożliwia korzystanie z właściwości nawigacji bez uprzedniego załadowania.
 

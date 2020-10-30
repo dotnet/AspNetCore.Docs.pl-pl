@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/startup
-ms.openlocfilehash: b10ddf52ea7d22ea98c295da61c09da8c87fc7a7
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 747b13abb0ce3fed2d1dc018c6dbf82db1ae7130
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633750"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93052243"
 ---
 # <a name="app-startup-in-aspnet-core"></a>Uruchamianie aplikacji w ASP.NET Core
 
@@ -37,7 +38,7 @@ Autorzy [Rick Anderson](https://twitter.com/RickAndMSFT), [Tomasz Dykstra](https
 
 Aplikacje ASP.NET Core używają `Startup` klasy, która jest nazywana `Startup` Konwencją. Klasa `Startup`:
 
-* Opcjonalnie zawiera <xref:Microsoft.AspNetCore.Hosting.StartupBase.ConfigureServices*> metodę konfigurowania *usług*aplikacji. Usługa to składnik wielokrotnego użytku, który zapewnia funkcjonalność aplikacji. Usługi są *rejestrowane* `ConfigureServices` i zużywane przez aplikację za pośrednictwem [iniekcji zależności (di)](xref:fundamentals/dependency-injection) lub <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.ApplicationServices*> .
+* Opcjonalnie zawiera <xref:Microsoft.AspNetCore.Hosting.StartupBase.ConfigureServices*> metodę konfigurowania *usług* aplikacji. Usługa to składnik wielokrotnego użytku, który zapewnia funkcjonalność aplikacji. Usługi są *rejestrowane* `ConfigureServices` i zużywane przez aplikację za pośrednictwem [iniekcji zależności (di)](xref:fundamentals/dependency-injection) lub <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.ApplicationServices*> .
 * Zawiera <xref:Microsoft.AspNetCore.Hosting.StartupBase.Configure*> metodę tworzenia potoku przetwarzania żądań aplikacji.
 
 `ConfigureServices` i `Configure` są wywoływane przez środowisko uruchomieniowe ASP.NET Core podczas uruchamiania aplikacji:
@@ -79,7 +80,7 @@ Aby uzyskać więcej informacji na temat hosta, zobacz [hosta](xref:fundamentals
 
 Przed wywołaniem metod host może skonfigurować niektóre usługi `Startup` . Aby uzyskać więcej informacji, zobacz [hosta](xref:fundamentals/index#host).
 
-W przypadku funkcji wymagających znaczącej konfiguracji istnieją `Add{Service}` metody rozszerzające w systemie <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection> . Na przykład **Dodaj**DbContext, **Dodaj**domyślne Identity , **Dodaj**EntityFrameworkStores i **Dodaj** Razor strony:
+W przypadku funkcji wymagających znaczącej konfiguracji istnieją `Add{Service}` metody rozszerzające w systemie <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection> . Na przykład **Dodaj** DbContext, **Dodaj** domyślne Identity , **Dodaj** EntityFrameworkStores i **Dodaj** Razor strony:
 
 [!code-csharp[](startup/3.0_samples/StartupFilterSample/StartupIdentity.cs?name=snippet)]
 
@@ -172,7 +173,7 @@ Kolejność wykonywania oprogramowania pośredniczącego jest określana na pods
 
 Aplikacje ASP.NET Core używają `Startup` klasy, która jest nazywana `Startup` Konwencją. Klasa `Startup`:
 
-* Opcjonalnie zawiera <xref:Microsoft.AspNetCore.Hosting.StartupBase.ConfigureServices*> metodę konfigurowania *usług*aplikacji. Usługa to składnik wielokrotnego użytku, który zapewnia funkcjonalność aplikacji. Usługi są *rejestrowane* `ConfigureServices` i zużywane przez aplikację za pośrednictwem [iniekcji zależności (di)](xref:fundamentals/dependency-injection) lub <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.ApplicationServices*> .
+* Opcjonalnie zawiera <xref:Microsoft.AspNetCore.Hosting.StartupBase.ConfigureServices*> metodę konfigurowania *usług* aplikacji. Usługa to składnik wielokrotnego użytku, który zapewnia funkcjonalność aplikacji. Usługi są *rejestrowane* `ConfigureServices` i zużywane przez aplikację za pośrednictwem [iniekcji zależności (di)](xref:fundamentals/dependency-injection) lub <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.ApplicationServices*> .
 * Zawiera <xref:Microsoft.AspNetCore.Hosting.StartupBase.Configure*> metodę tworzenia potoku przetwarzania żądań aplikacji.
 
 `ConfigureServices` i `Configure` są wywoływane przez środowisko uruchomieniowe ASP.NET Core podczas uruchamiania aplikacji:
@@ -211,7 +212,7 @@ Aby uzyskać więcej informacji na temat hosta, zobacz [hosta](xref:fundamentals
 
 Przed wywołaniem metod host może skonfigurować niektóre usługi `Startup` . Aby uzyskać więcej informacji, zobacz [hosta](xref:fundamentals/index#host).
 
-W przypadku funkcji wymagających znaczącej konfiguracji istnieją `Add{Service}` metody rozszerzające w systemie <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection> . Na przykład **Dodaj**DbContext, **Dodaj**domyślne Identity , **Dodaj**EntityFrameworkStores i **Dodaj** Razor strony:
+W przypadku funkcji wymagających znaczącej konfiguracji istnieją `Add{Service}` metody rozszerzające w systemie <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection> . Na przykład **Dodaj** DbContext, **Dodaj** domyślne Identity , **Dodaj** EntityFrameworkStores i **Dodaj** Razor strony:
 
 [!code-csharp[](startup/sample_snapshot/Startup3.cs)]
 

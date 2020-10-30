@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 01/10/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/proper-to-2x/membership-to-core-identity
-ms.openlocfilehash: a9ec02381b156a6599042d8e504a476036246302
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: d981c424fd2d6cad95b9164420f093672325c347
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865558"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051359"
 ---
 # <a name="migrate-from-aspnet-membership-authentication-to-aspnet-core-20-no-locidentity"></a>Migrowanie z uwierzytelniania członkostwa ASP.NET do ASP.NET Core 2,0 Identity
 
@@ -47,16 +48,16 @@ ASP.NET Core 2,0 jest zgodna z [Identity](/aspnet/identity/index) zasadą wprowa
 
 Najszybszym sposobem wyświetlenia schematu dla ASP.NET Core 2,0 Identity jest utworzenie nowej aplikacji ASP.NET Core 2,0. Wykonaj następujące kroki w programie Visual Studio 2017:
 
-1. Wybierz pozycję **plik**  >  **Nowy**  >  **projekt**.
-1. Utwórz nowy projekt **aplikacji sieci Web ASP.NET Core** o nazwie *Core Identity Sample*.
-1. Wybierz pozycję **ASP.NET Core 2,0** na liście rozwijanej, a następnie wybierz pozycję **aplikacja sieci Web**. Ten szablon generuje aplikację [ Razor Pages](xref:razor-pages/index) . Przed kliknięciem przycisku **OK**kliknij pozycję **Zmień uwierzytelnianie**.
-1. Wybierz **konta poszczególnych użytkowników** dla Identity szablonów. Na koniec kliknij przycisk **OK**, a następnie **OK**. Program Visual Studio tworzy projekt przy użyciu ASP.NET Core Identity szablonu.
-1. Wybierz kolejno pozycje **Narzędzia**Menedżer  >  **pakietów NuGet**  >  **konsola Menedżera** pakietów, aby otworzyć okno **konsoli Menedżera pakietów** (PMC).
+1. Wybierz pozycję **plik**  >  **Nowy**  >  **projekt** .
+1. Utwórz nowy projekt **aplikacji sieci Web ASP.NET Core** o nazwie *Core Identity Sample* .
+1. Wybierz pozycję **ASP.NET Core 2,0** na liście rozwijanej, a następnie wybierz pozycję **aplikacja sieci Web** . Ten szablon generuje aplikację [ Razor Pages](xref:razor-pages/index) . Przed kliknięciem przycisku **OK** kliknij pozycję **Zmień uwierzytelnianie** .
+1. Wybierz **konta poszczególnych użytkowników** dla Identity szablonów. Na koniec kliknij przycisk **OK** , a następnie **OK** . Program Visual Studio tworzy projekt przy użyciu ASP.NET Core Identity szablonu.
+1. Wybierz kolejno pozycje **Narzędzia** Menedżer  >  **pakietów NuGet**  >  **konsola Menedżera** pakietów, aby otworzyć okno **konsoli Menedżera pakietów** (PMC).
 1. Przejdź do katalogu głównego projektu w PMC i uruchom polecenie [Entity Framework (EF) Core](/ef/core) `Update-Database` .
 
     ASP.NET Core 2,0 Identity używa EF Core do korzystania z bazy danych przechowującej dane uwierzytelniania. Aby nowo utworzona aplikacja działała, musi być bazą danych do przechowywania tych danych. Po utworzeniu nowej aplikacji najszybszym sposobem na sprawdzenie schematu w środowisku bazy danych jest utworzenie bazy danych przy użyciu [EF Core migracji](/ef/core/managing-schemas/migrations/). Ten proces powoduje utworzenie bazy danych lokalnie lub w innym miejscu, która śladuje ten schemat. Zapoznaj się z powyższą dokumentacją, aby uzyskać więcej informacji.
 
-    Polecenia EF Core używają parametrów połączenia dla bazy danych określonej w *appsettings.jsna*. Następujące parametry połączenia są przeznaczone dla bazy danych na *hoście lokalnym* o nazwie *ASP-NET-Core-Identity*. W tym ustawieniu EF Core jest skonfigurowany do używania `DefaultConnection` parametrów połączenia.
+    Polecenia EF Core używają parametrów połączenia dla bazy danych określonej w *appsettings.json* . Następujące parametry połączenia są przeznaczone dla bazy danych na *hoście lokalnym* o nazwie *ASP-NET-Core-Identity* . W tym ustawieniu EF Core jest skonfigurowany do używania `DefaultConnection` parametrów połączenia.
 
     ```json
     {
@@ -66,7 +67,7 @@ Najszybszym sposobem wyświetlenia schematu dla ASP.NET Core 2,0 Identity jest u
     }
     ```
 
-1. Wybierz pozycję **Wyświetl**  >  **Eksplorator obiektów SQL Server**. Rozwiń węzeł odpowiadający nazwie bazy danych określonej we `ConnectionStrings:DefaultConnection` właściwości *appsettings.json*.
+1. Wybierz pozycję **Wyświetl**  >  **Eksplorator obiektów SQL Server** . Rozwiń węzeł odpowiadający nazwie bazy danych określonej we `ConnectionStrings:DefaultConnection` właściwości *appsettings.json* .
 
     `Update-Database`Polecenie utworzyło bazę danych określoną za pomocą schematu i wszystkie dane potrzebne do zainicjowania aplikacji. Na poniższej ilustracji przedstawiono strukturę tabeli, która została utworzona z poprzednimi krokami.
 
@@ -74,7 +75,7 @@ Najszybszym sposobem wyświetlenia schematu dla ASP.NET Core 2,0 Identity jest u
 
 ## <a name="migrate-the-schema"></a>Migrowanie schematu
 
-Istnieją delikatne różnice w strukturach tabel i polach dla członkostwa i ASP.NET Core Identity . Wzorzec został znacząco zmieniony na potrzeby uwierzytelniania/autoryzacji za pomocą aplikacji ASP.NET i ASP.NET Core. Obiekty kluczowe, które są nadal używane w połączeniu z Identity *użytkownikami* i *rolami*. Oto Mapowanie tabel dla *użytkowników*, *ról*i *roli użytkownika*.
+Istnieją delikatne różnice w strukturach tabel i polach dla członkostwa i ASP.NET Core Identity . Wzorzec został znacząco zmieniony na potrzeby uwierzytelniania/autoryzacji za pomocą aplikacji ASP.NET i ASP.NET Core. Obiekty kluczowe, które są nadal używane w połączeniu z Identity *użytkownikami* i *rolami* . Oto Mapowanie tabel dla *użytkowników* , *ról* i *roli użytkownika* .
 
 ### <a name="users"></a>Użytkownicy
 
@@ -106,7 +107,7 @@ Istnieją delikatne różnice w strukturach tabel i polach dla członkostwa i AS
 |`RoleId`                 |`string`  |`RoleId`      |`string`                   |
 |`UserId`                 |`string`  |`UserId`      |`string`                   |
 
-Odwołuje się do powyższej tabeli mapowania podczas tworzenia skryptu migracji dla *użytkowników* i *ról*. W poniższym przykładzie założono, że masz dwie bazy danych na serwerze bazy danych. Jedna baza danych zawiera istniejący schemat i dane członkostwa ASP.NET. Druga *podstawowa Identity Przykładowa* baza danych została utworzona przy użyciu opisanej wcześniej procedury. Komentarze są zawarte w tekście, aby uzyskać więcej szczegółów.
+Odwołuje się do powyższej tabeli mapowania podczas tworzenia skryptu migracji dla *użytkowników* i *ról* . W poniższym przykładzie założono, że masz dwie bazy danych na serwerze bazy danych. Jedna baza danych zawiera istniejący schemat i dane członkostwa ASP.NET. Druga *podstawowa Identity Przykładowa* baza danych została utworzona przy użyciu opisanej wcześniej procedury. Komentarze są zawarte w tekście, aby uzyskać więcej szczegółów.
 
 ```sql
 -- THIS SCRIPT NEEDS TO RUN FROM THE CONTEXT OF THE MEMBERSHIP DB
@@ -200,7 +201,7 @@ Po zakończeniu poprzedniego skryptu ASP.NET Core Identity utworzona wcześniej 
 > [!NOTE]
 > Jeśli system członkostwa ma użytkowników z nazwami użytkowników, którzy nie są zgodni z ich adresem e-mail, zmiany są wymagane w przypadku aplikacji utworzonej wcześniej w celu tego celu. Szablon domyślny oczekuje `UserName` i jest taki `Email` sam. W sytuacjach, w których są różne, proces logowania należy zmodyfikować do użycia `UserName` zamiast `Email` .
 
-Na `PageModel` stronie logowania, która znajduje się w *Pages\Account\Login.cshtml.cs*, Usuń `[EmailAddress]` atrybut z właściwości *email* . Zmień nazwę na nazwę *użytkownika*. Wymaga to zmiany wszędzie tam `EmailAddress` , gdzie jest wymieniony, w *widoku* i *PageModel*. Wynik będzie wyglądać następująco:
+Na `PageModel` stronie logowania, która znajduje się w *Pages\Account\Login.cshtml.cs* , Usuń `[EmailAddress]` atrybut z właściwości *email* . Zmień nazwę na nazwę *użytkownika* . Wymaga to zmiany wszędzie tam `EmailAddress` , gdzie jest wymieniony, w *widoku* i *PageModel* . Wynik będzie wyglądać następująco:
 
  ![Stałe logowanie](identity/_static/fixed-login.png)
 

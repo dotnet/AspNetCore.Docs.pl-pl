@@ -7,70 +7,71 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 9/25/2019
 no-loc:
-- ASP.NET Core Identity
-- cookie
-- Cookie
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- ':::no-loc(appsettings.json):::'
+- ':::no-loc(ASP.NET Core Identity):::'
+- ':::no-loc(cookie):::'
+- ':::no-loc(Cookie):::'
+- ':::no-loc(Blazor):::'
+- ':::no-loc(Blazor Server):::'
+- ':::no-loc(Blazor WebAssembly):::'
+- ':::no-loc(Identity):::'
+- ":::no-loc(Let's Encrypt):::"
+- ':::no-loc(Razor):::'
+- ':::no-loc(SignalR):::'
 uid: mvc/compatibility-version
-ms.openlocfilehash: b7d14aa0371fcc01d568cf1e7b9908c4a8d984df
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 9123bd70dfee1578912f682faf0520735fd55776
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722835"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051294"
 ---
-# <a name="compatibility-version-for-aspnet-core-mvc"></a><span data-ttu-id="632a9-103">Wersja zgodności dla ASP.NET Core MVC</span><span class="sxs-lookup"><span data-stu-id="632a9-103">Compatibility version for ASP.NET Core MVC</span></span>
+# <a name="compatibility-version-for-aspnet-core-mvc"></a><span data-ttu-id="3eec4-103">Wersja zgodności dla ASP.NET Core MVC</span><span class="sxs-lookup"><span data-stu-id="3eec4-103">Compatibility version for ASP.NET Core MVC</span></span>
 
-<span data-ttu-id="632a9-104">Autor: [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="632a9-104">By [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
+<span data-ttu-id="3eec4-104">Autor: [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="3eec4-104">By [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
-<span data-ttu-id="632a9-105"><xref:Microsoft.Extensions.DependencyInjection.MvcCoreMvcBuilderExtensions.SetCompatibilityVersion*>Metoda to no-op dla aplikacji ASP.NET Core 3,0.</span><span class="sxs-lookup"><span data-stu-id="632a9-105">The <xref:Microsoft.Extensions.DependencyInjection.MvcCoreMvcBuilderExtensions.SetCompatibilityVersion*> method is a no-op for ASP.NET Core 3.0 apps.</span></span> <span data-ttu-id="632a9-106">Oznacza to, że wywołanie `SetCompatibilityVersion` z jakąkolwiek wartością nie <xref:Microsoft.AspNetCore.Mvc.CompatibilityVersion> ma wpływu na aplikację.</span><span class="sxs-lookup"><span data-stu-id="632a9-106">That is, calling `SetCompatibilityVersion` with any value of <xref:Microsoft.AspNetCore.Mvc.CompatibilityVersion> has no impact on the application.</span></span>
+<span data-ttu-id="3eec4-105"><xref:Microsoft.Extensions.DependencyInjection.MvcCoreMvcBuilderExtensions.SetCompatibilityVersion*>Metoda to no-op dla aplikacji ASP.NET Core 3,0.</span><span class="sxs-lookup"><span data-stu-id="3eec4-105">The <xref:Microsoft.Extensions.DependencyInjection.MvcCoreMvcBuilderExtensions.SetCompatibilityVersion*> method is a no-op for ASP.NET Core 3.0 apps.</span></span> <span data-ttu-id="3eec4-106">Oznacza to, że wywołanie `SetCompatibilityVersion` z jakąkolwiek wartością nie <xref:Microsoft.AspNetCore.Mvc.CompatibilityVersion> ma wpływu na aplikację.</span><span class="sxs-lookup"><span data-stu-id="3eec4-106">That is, calling `SetCompatibilityVersion` with any value of <xref:Microsoft.AspNetCore.Mvc.CompatibilityVersion> has no impact on the application.</span></span>
 
-* <span data-ttu-id="632a9-107">Następna wersja pomocnicza ASP.NET Core może stanowić nową `CompatibilityVersion` wartość.</span><span class="sxs-lookup"><span data-stu-id="632a9-107">The next minor version of ASP.NET Core may provide a new `CompatibilityVersion` value.</span></span>
-* <span data-ttu-id="632a9-108">`CompatibilityVersion` wartości `Version_2_0` przez `Version_2_2` są oznaczone `[Obsolete(...)]` .</span><span class="sxs-lookup"><span data-stu-id="632a9-108">`CompatibilityVersion` values `Version_2_0` through `Version_2_2` are marked `[Obsolete(...)]`.</span></span>
-* <span data-ttu-id="632a9-109">Zobacz [przerywanie zmian interfejsu API w ramach funkcji "antysfałszowanych", mechanizmu CORS, diagnostyki, MVC i routingu](https://github.com/aspnet/Announcements/issues/387).</span><span class="sxs-lookup"><span data-stu-id="632a9-109">See [Breaking API changes in Antiforgery, CORS, Diagnostics, Mvc, and Routing](https://github.com/aspnet/Announcements/issues/387).</span></span> <span data-ttu-id="632a9-110">Ta lista zawiera istotne zmiany dotyczące przełączników zgodności.</span><span class="sxs-lookup"><span data-stu-id="632a9-110">This list includes breaking changes for compatibility switches.</span></span>
+* <span data-ttu-id="3eec4-107">Następna wersja pomocnicza ASP.NET Core może stanowić nową `CompatibilityVersion` wartość.</span><span class="sxs-lookup"><span data-stu-id="3eec4-107">The next minor version of ASP.NET Core may provide a new `CompatibilityVersion` value.</span></span>
+* <span data-ttu-id="3eec4-108">`CompatibilityVersion` wartości `Version_2_0` przez `Version_2_2` są oznaczone `[Obsolete(...)]` .</span><span class="sxs-lookup"><span data-stu-id="3eec4-108">`CompatibilityVersion` values `Version_2_0` through `Version_2_2` are marked `[Obsolete(...)]`.</span></span>
+* <span data-ttu-id="3eec4-109">Zobacz [przerywanie zmian interfejsu API w ramach funkcji "antysfałszowanych", mechanizmu CORS, diagnostyki, MVC i routingu](https://github.com/aspnet/Announcements/issues/387).</span><span class="sxs-lookup"><span data-stu-id="3eec4-109">See [Breaking API changes in Antiforgery, CORS, Diagnostics, Mvc, and Routing](https://github.com/aspnet/Announcements/issues/387).</span></span> <span data-ttu-id="3eec4-110">Ta lista zawiera istotne zmiany dotyczące przełączników zgodności.</span><span class="sxs-lookup"><span data-stu-id="3eec4-110">This list includes breaking changes for compatibility switches.</span></span>
 
-<span data-ttu-id="632a9-111">Aby dowiedzieć się `SetCompatibilityVersion` , jak działa z aplikacjami ASP.NET Core 2. x, wybierz [wersję ASP.NET Core 2,2 tego artykułu](?view=aspnetcore-2.2).</span><span class="sxs-lookup"><span data-stu-id="632a9-111">To see how `SetCompatibilityVersion` works with ASP.NET Core 2.x apps, select the [ASP.NET Core 2.2 version of this article](?view=aspnetcore-2.2).</span></span>
+<span data-ttu-id="3eec4-111">Aby dowiedzieć się `SetCompatibilityVersion` , jak działa z aplikacjami ASP.NET Core 2. x, wybierz [wersję ASP.NET Core 2,2 tego artykułu](?view=aspnetcore-2.2).</span><span class="sxs-lookup"><span data-stu-id="3eec4-111">To see how `SetCompatibilityVersion` works with ASP.NET Core 2.x apps, select the [ASP.NET Core 2.2 version of this article](?view=aspnetcore-2.2).</span></span>
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-<span data-ttu-id="632a9-112"><xref:Microsoft.Extensions.DependencyInjection.MvcCoreMvcBuilderExtensions.SetCompatibilityVersion*>Metoda zezwala aplikacji ASP.NET Core 2. x na zgodę lub rezygnację z ewentualnych zmian w zachowaniu, które wprowadzono w ASP.NET Core MVC 2,1 lub 2,2.</span><span class="sxs-lookup"><span data-stu-id="632a9-112">The <xref:Microsoft.Extensions.DependencyInjection.MvcCoreMvcBuilderExtensions.SetCompatibilityVersion*> method allows an ASP.NET Core 2.x app to opt-in or opt-out of potentially breaking behavior changes introduced in ASP.NET Core MVC 2.1 or 2.2.</span></span> <span data-ttu-id="632a9-113">Te potencjalnie nieprzerwane zmiany zachowania są zazwyczaj sposobem zachowania podsystemu MVC i sposobu wywoływania **kodu** przez środowisko uruchomieniowe.</span><span class="sxs-lookup"><span data-stu-id="632a9-113">These potentially breaking behavior changes are generally in how the MVC subsystem behaves and how **your code** is called by the runtime.</span></span> <span data-ttu-id="632a9-114">Dzięki wykorzystaniu z programu można uzyskać najnowsze zachowanie i długoterminowe zachowanie ASP.NET Core.</span><span class="sxs-lookup"><span data-stu-id="632a9-114">By opting in, you get the latest behavior, and the long-term behavior of ASP.NET Core.</span></span>
+<span data-ttu-id="3eec4-112"><xref:Microsoft.Extensions.DependencyInjection.MvcCoreMvcBuilderExtensions.SetCompatibilityVersion*>Metoda zezwala aplikacji ASP.NET Core 2. x na zgodę lub rezygnację z ewentualnych zmian w zachowaniu, które wprowadzono w ASP.NET Core MVC 2,1 lub 2,2.</span><span class="sxs-lookup"><span data-stu-id="3eec4-112">The <xref:Microsoft.Extensions.DependencyInjection.MvcCoreMvcBuilderExtensions.SetCompatibilityVersion*> method allows an ASP.NET Core 2.x app to opt-in or opt-out of potentially breaking behavior changes introduced in ASP.NET Core MVC 2.1 or 2.2.</span></span> <span data-ttu-id="3eec4-113">Te potencjalnie nieprzerwane zmiany zachowania są zazwyczaj sposobem zachowania podsystemu MVC i sposobu wywoływania **kodu** przez środowisko uruchomieniowe.</span><span class="sxs-lookup"><span data-stu-id="3eec4-113">These potentially breaking behavior changes are generally in how the MVC subsystem behaves and how **your code** is called by the runtime.</span></span> <span data-ttu-id="3eec4-114">Dzięki wykorzystaniu z programu można uzyskać najnowsze zachowanie i długoterminowe zachowanie ASP.NET Core.</span><span class="sxs-lookup"><span data-stu-id="3eec4-114">By opting in, you get the latest behavior, and the long-term behavior of ASP.NET Core.</span></span>
 
-<span data-ttu-id="632a9-115">Poniższy kod ustawia tryb zgodności na ASP.NET Core 2,2:</span><span class="sxs-lookup"><span data-stu-id="632a9-115">The following code sets the compatibility mode to ASP.NET Core 2.2:</span></span>
+<span data-ttu-id="3eec4-115">Poniższy kod ustawia tryb zgodności na ASP.NET Core 2,2:</span><span class="sxs-lookup"><span data-stu-id="3eec4-115">The following code sets the compatibility mode to ASP.NET Core 2.2:</span></span>
 
 [!code-csharp[Main](compatibility-version/samples/2.x/CompatibilityVersionSample/Startup.cs?name=snippet1)]
 
-<span data-ttu-id="632a9-116">Zalecamy przetestowanie aplikacji przy użyciu najnowszej wersji ( `CompatibilityVersion.Latest` ).</span><span class="sxs-lookup"><span data-stu-id="632a9-116">We recommend you test your app using the latest version (`CompatibilityVersion.Latest`).</span></span> <span data-ttu-id="632a9-117">Przewidujemy, że większość aplikacji nie będzie miała wpływu na zmiany zachowań przy użyciu najnowszej wersji.</span><span class="sxs-lookup"><span data-stu-id="632a9-117">We anticipate that most apps won't have breaking behavior changes using the latest version.</span></span>
+<span data-ttu-id="3eec4-116">Zalecamy przetestowanie aplikacji przy użyciu najnowszej wersji ( `CompatibilityVersion.Latest` ).</span><span class="sxs-lookup"><span data-stu-id="3eec4-116">We recommend you test your app using the latest version (`CompatibilityVersion.Latest`).</span></span> <span data-ttu-id="3eec4-117">Przewidujemy, że większość aplikacji nie będzie miała wpływu na zmiany zachowań przy użyciu najnowszej wersji.</span><span class="sxs-lookup"><span data-stu-id="3eec4-117">We anticipate that most apps won't have breaking behavior changes using the latest version.</span></span>
 
-<span data-ttu-id="632a9-118">Aplikacje, które `SetCompatibilityVersion(CompatibilityVersion.Version_2_0)` są wywoływane, są chronione przed potencjalnie niepodzielnymi zmianami zachowania wprowadzonymi w wersjach ASP.NET Core 2.1/2.2 MVC.</span><span class="sxs-lookup"><span data-stu-id="632a9-118">Apps that call `SetCompatibilityVersion(CompatibilityVersion.Version_2_0)` are protected from potentially breaking behavior changes introduced in the ASP.NET Core 2.1/2.2 MVC versions.</span></span> <span data-ttu-id="632a9-119">Ta ochrona:</span><span class="sxs-lookup"><span data-stu-id="632a9-119">This protection:</span></span>
+<span data-ttu-id="3eec4-118">Aplikacje, które `SetCompatibilityVersion(CompatibilityVersion.Version_2_0)` są wywoływane, są chronione przed potencjalnie niepodzielnymi zmianami zachowania wprowadzonymi w wersjach ASP.NET Core 2.1/2.2 MVC.</span><span class="sxs-lookup"><span data-stu-id="3eec4-118">Apps that call `SetCompatibilityVersion(CompatibilityVersion.Version_2_0)` are protected from potentially breaking behavior changes introduced in the ASP.NET Core 2.1/2.2 MVC versions.</span></span> <span data-ttu-id="3eec4-119">Ta ochrona:</span><span class="sxs-lookup"><span data-stu-id="3eec4-119">This protection:</span></span>
 
-* <span data-ttu-id="632a9-120">Nie ma zastosowania do wszystkich 2,1 i późniejszych zmian, jest to konieczne do potencjalnego zakłócenia zmian zachowania środowiska uruchomieniowego ASP.NET Core w podsystemie MVC.</span><span class="sxs-lookup"><span data-stu-id="632a9-120">Does not apply to all 2.1 and later changes, it's targeted to potentially breaking ASP.NET Core runtime behavior changes in the MVC subsystem.</span></span>
-* <span data-ttu-id="632a9-121">Nie rozszerzy do ASP.NET Core 3,0.</span><span class="sxs-lookup"><span data-stu-id="632a9-121">Does not extend to ASP.NET Core 3.0.</span></span>
+* <span data-ttu-id="3eec4-120">Nie ma zastosowania do wszystkich 2,1 i późniejszych zmian, jest to konieczne do potencjalnego zakłócenia zmian zachowania środowiska uruchomieniowego ASP.NET Core w podsystemie MVC.</span><span class="sxs-lookup"><span data-stu-id="3eec4-120">Does not apply to all 2.1 and later changes, it's targeted to potentially breaking ASP.NET Core runtime behavior changes in the MVC subsystem.</span></span>
+* <span data-ttu-id="3eec4-121">Nie rozszerzy do ASP.NET Core 3,0.</span><span class="sxs-lookup"><span data-stu-id="3eec4-121">Does not extend to ASP.NET Core 3.0.</span></span>
 
-<span data-ttu-id="632a9-122">Domyślna zgodność dla aplikacji ASP.NET Core 2,1 i 2,2, które **nie** są wywoływane, `SetCompatibilityVersion` to 2,0 zgodności.</span><span class="sxs-lookup"><span data-stu-id="632a9-122">The default compatibility for ASP.NET Core 2.1 and 2.2 apps that do **not** call `SetCompatibilityVersion` is 2.0 compatibility.</span></span> <span data-ttu-id="632a9-123">Oznacza to, że wywołanie `SetCompatibilityVersion` jest takie samo jak wywołanie metody `SetCompatibilityVersion(CompatibilityVersion.Version_2_0)` .</span><span class="sxs-lookup"><span data-stu-id="632a9-123">That is, not calling `SetCompatibilityVersion` is the same as calling `SetCompatibilityVersion(CompatibilityVersion.Version_2_0)`.</span></span>
+<span data-ttu-id="3eec4-122">Domyślna zgodność dla aplikacji ASP.NET Core 2,1 i 2,2, które **nie** są wywoływane, `SetCompatibilityVersion` to 2,0 zgodności.</span><span class="sxs-lookup"><span data-stu-id="3eec4-122">The default compatibility for ASP.NET Core 2.1 and 2.2 apps that do **not** call `SetCompatibilityVersion` is 2.0 compatibility.</span></span> <span data-ttu-id="3eec4-123">Oznacza to, że wywołanie `SetCompatibilityVersion` jest takie samo jak wywołanie metody `SetCompatibilityVersion(CompatibilityVersion.Version_2_0)` .</span><span class="sxs-lookup"><span data-stu-id="3eec4-123">That is, not calling `SetCompatibilityVersion` is the same as calling `SetCompatibilityVersion(CompatibilityVersion.Version_2_0)`.</span></span>
 
-<span data-ttu-id="632a9-124">Poniższy kod ustawia tryb zgodności na ASP.NET Core 2,2, z wyjątkiem następujących zachowań:</span><span class="sxs-lookup"><span data-stu-id="632a9-124">The following code sets the compatibility mode to ASP.NET Core 2.2, except for the following behaviors:</span></span>
+<span data-ttu-id="3eec4-124">Poniższy kod ustawia tryb zgodności na ASP.NET Core 2,2, z wyjątkiem następujących zachowań:</span><span class="sxs-lookup"><span data-stu-id="3eec4-124">The following code sets the compatibility mode to ASP.NET Core 2.2, except for the following behaviors:</span></span>
 
 * <xref:Microsoft.AspNetCore.Mvc.MvcOptions.AllowCombiningAuthorizeFilters>
 * <xref:Microsoft.AspNetCore.Mvc.MvcOptions.InputFormatterExceptionPolicy>
 
 [!code-csharp[Main](compatibility-version/samples/2.x/CompatibilityVersionSample/Startup2.cs?name=snippet1)]
 
-<span data-ttu-id="632a9-125">W przypadku aplikacji, które napotykają zmiany zachowania podczas przerwania, przy użyciu odpowiednich przełączników zgodności:</span><span class="sxs-lookup"><span data-stu-id="632a9-125">For apps that encounter breaking behavior changes, using the appropriate compatibility switches:</span></span>
+<span data-ttu-id="3eec4-125">W przypadku aplikacji, które napotykają zmiany zachowania podczas przerwania, przy użyciu odpowiednich przełączników zgodności:</span><span class="sxs-lookup"><span data-stu-id="3eec4-125">For apps that encounter breaking behavior changes, using the appropriate compatibility switches:</span></span>
 
-* <span data-ttu-id="632a9-126">Umożliwia korzystanie z najnowszej wersji i rezygnację z określonych zmian w zachowaniu.</span><span class="sxs-lookup"><span data-stu-id="632a9-126">Allows you to use the latest release and opt out of specific breaking behavior changes.</span></span>
-* <span data-ttu-id="632a9-127">Zapewnia czas na zaktualizowanie aplikacji, aby działała z najnowszymi zmianami.</span><span class="sxs-lookup"><span data-stu-id="632a9-127">Gives you time to update your app so it works with the latest changes.</span></span>
+* <span data-ttu-id="3eec4-126">Umożliwia korzystanie z najnowszej wersji i rezygnację z określonych zmian w zachowaniu.</span><span class="sxs-lookup"><span data-stu-id="3eec4-126">Allows you to use the latest release and opt out of specific breaking behavior changes.</span></span>
+* <span data-ttu-id="3eec4-127">Zapewnia czas na zaktualizowanie aplikacji, aby działała z najnowszymi zmianami.</span><span class="sxs-lookup"><span data-stu-id="3eec4-127">Gives you time to update your app so it works with the latest changes.</span></span>
 
-<span data-ttu-id="632a9-128"><xref:Microsoft.AspNetCore.Mvc.MvcOptions>Dokumentacja jest dobrym wyjaśnieniem, co zmieniło się i dlaczego zmiany są poprawiane dla większości użytkowników.</span><span class="sxs-lookup"><span data-stu-id="632a9-128">The <xref:Microsoft.AspNetCore.Mvc.MvcOptions> documentation has a good explanation of what changed and why the changes are an improvement for most users.</span></span>
+<span data-ttu-id="3eec4-128"><xref:Microsoft.AspNetCore.Mvc.MvcOptions>Dokumentacja jest dobrym wyjaśnieniem, co zmieniło się i dlaczego zmiany są poprawiane dla większości użytkowników.</span><span class="sxs-lookup"><span data-stu-id="3eec4-128">The <xref:Microsoft.AspNetCore.Mvc.MvcOptions> documentation has a good explanation of what changed and why the changes are an improvement for most users.</span></span>
 
-<span data-ttu-id="632a9-129">W ASP.NET Core 3,0 stare zachowania obsługiwane przez przełączniki zgodności zostały usunięte.</span><span class="sxs-lookup"><span data-stu-id="632a9-129">With ASP.NET Core 3.0, old behaviors supported by compatibility switches have been removed.</span></span> <span data-ttu-id="632a9-130">Te zmiany są pozytywne, korzystając niemal wszystkich użytkowników.</span><span class="sxs-lookup"><span data-stu-id="632a9-130">We feel these are positive changes benefitting nearly all users.</span></span> <span data-ttu-id="632a9-131">Wprowadzając te zmiany w 2,1 i 2,2, większość aplikacji może korzystać z zalet, podczas gdy inne mają czas na aktualizację.</span><span class="sxs-lookup"><span data-stu-id="632a9-131">By introducing these changes in 2.1 and 2.2, most apps can benefit, while others have time to update.</span></span>
+<span data-ttu-id="3eec4-129">W ASP.NET Core 3,0 stare zachowania obsługiwane przez przełączniki zgodności zostały usunięte.</span><span class="sxs-lookup"><span data-stu-id="3eec4-129">With ASP.NET Core 3.0, old behaviors supported by compatibility switches have been removed.</span></span> <span data-ttu-id="3eec4-130">Te zmiany są pozytywne, korzystając niemal wszystkich użytkowników.</span><span class="sxs-lookup"><span data-stu-id="3eec4-130">We feel these are positive changes benefitting nearly all users.</span></span> <span data-ttu-id="3eec4-131">Wprowadzając te zmiany w 2,1 i 2,2, większość aplikacji może korzystać z zalet, podczas gdy inne mają czas na aktualizację.</span><span class="sxs-lookup"><span data-stu-id="3eec4-131">By introducing these changes in 2.1 and 2.2, most apps can benefit, while others have time to update.</span></span>
 ::: moniker-end

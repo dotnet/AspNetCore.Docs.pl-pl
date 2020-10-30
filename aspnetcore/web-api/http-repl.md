@@ -7,6 +7,7 @@ ms.author: scaddie
 ms.custom: mvc, devx-track-azurecli
 ms.date: 05/20/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/http-repl
-ms.openlocfilehash: b12f4b10230f2631392011a6e443156bf9a2d843
-ms.sourcegitcommit: d5ecad1103306fac8d5468128d3e24e529f1472c
+ms.openlocfilehash: efd2208044ad6392131216266afc34187d738b78
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/23/2020
-ms.locfileid: "92491447"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93058977"
 ---
 # <a name="test-web-apis-with-the-http-repl"></a>Testowanie interfejsów API sieci Web przy użyciu protokołu HTTP REPL
 
@@ -565,7 +566,7 @@ Parametr trasy, jeśli istnieje, oczekiwany przez skojarzoną metodę akcji kont
 
 Aby wydać żądanie HTTP PUT:
 
-1. *Opcjonalnie*: Uruchom `get` polecenie, aby wyświetlić dane przed zmodyfikowaniem:
+1. *Opcjonalnie* : Uruchom `get` polecenie, aby wyświetlić dane przed zmodyfikowaniem:
 
     ```console
     https://localhost:5001/fruits~ get
@@ -627,7 +628,7 @@ Aby wydać żądanie HTTP PUT:
     Server: Kestrel
     ```
 
-1. *Opcjonalne*: wydaj `get` polecenie, aby zobaczyć modyfikacje. Na przykład, jeśli wpisano "wiśnię" w edytorze tekstu, `get` zwraca następujące polecenie:
+1. *Opcjonalne* : wydaj `get` polecenie, aby zobaczyć modyfikacje. Na przykład, jeśli wpisano "wiśnię" w edytorze tekstu, `get` zwraca następujące polecenie:
 
     ```console
     https://localhost:5001/fruits~ get
@@ -678,7 +679,7 @@ Parametr trasy, jeśli istnieje, oczekiwany przez skojarzoną metodę akcji kont
 
 Aby wydać żądanie HTTP DELETE:
 
-1. *Opcjonalnie*: Uruchom `get` polecenie, aby wyświetlić dane przed zmodyfikowaniem:
+1. *Opcjonalnie* : Uruchom `get` polecenie, aby wyświetlić dane przed zmodyfikowaniem:
 
     ```console
     https://localhost:5001/fruits~ get
@@ -718,7 +719,7 @@ Aby wydać żądanie HTTP DELETE:
     Server: Kestrel
     ```
 
-1. *Opcjonalne*: wydaj `get` polecenie, aby zobaczyć modyfikacje. W tym przykładzie `get` zwraca następujące polecenie:
+1. *Opcjonalne* : wydaj `get` polecenie, aby zobaczyć modyfikacje. W tym przykładzie `get` zwraca następujące polecenie:
 
     ```console
     https://localhost:5001/fruits~ get
@@ -1063,7 +1064,7 @@ Po uruchomieniu poprzedniego polecenia powłoka poleceń zawiera tylko następuj
 https://localhost:5001/~
 ```
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Żądania interfejsu API REST](https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#74-supported-methods)
 * [Repozytorium usługi GitHub HTTP REPL](https://github.com/dotnet/HttpRepl)

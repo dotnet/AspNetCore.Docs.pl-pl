@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/1x-to-2x/index
-ms.openlocfilehash: 6160dfd117235065ba4b990b95bbc1f4abdf1626
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 6d67924d87cdbe72cb08c5305dfe45c5b22b31bc
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634348"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93057118"
 ---
 # <a name="migrate-from-aspnet-core-1x-to-20"></a>Migrowanie z ASP.NET Core 1. x do 2,0
 
@@ -129,13 +130,13 @@ W projektach 1. x Dodawanie dostawców konfiguracji do aplikacji zostało zreali
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Startup.cs?name=snippet_1xStartup)]
 
-W powyższym przykładzie załaduje `Configuration` element członkowski z ustawieniami konfiguracji z *appsettings.jsna* , a także z dowolnym *appSettings. \<EnvironmentName\> plik JSON* pasuje do `IHostingEnvironment.EnvironmentName` właściwości. Lokalizacja tych plików jest taka sama jak ścieżka *Startup.cs*.
+W powyższym przykładzie załadujesz `Configuration` element członkowski z ustawieniami konfiguracji z programu *appsettings.json* , a także z dowolnego pliku *appSettings. \<EnvironmentName\> plik JSON* pasuje do `IHostingEnvironment.EnvironmentName` właściwości. Lokalizacja tych plików jest taka sama jak ścieżka *Startup.cs* .
 
 W projektach 2,0, kod konfiguracji standardowa nieodłącz się od projektów 1. x działa w tle. Na przykład zmienne środowiskowe i ustawienia aplikacji są ładowane podczas uruchamiania. Równoważny kod *Startup.cs* został zredukowany do `IConfiguration` inicjacji z wstrzykiwanym wystąpieniem:
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetFx2.0App/AspNetCoreDotNetFx2.0App/Startup.cs?name=snippet_2xStartup)]
 
-Aby usunąć domyślnych dostawców dodanych przez `WebHostBuilder.CreateDefaultBuilder` , wywołaj `Clear` metodę we `IConfigurationBuilder.Sources` właściwości w `ConfigureAppConfiguration` . Aby dodać dostawców z powrotem, użyj `ConfigureAppConfiguration` metody w *program.cs*:
+Aby usunąć domyślnych dostawców dodanych przez `WebHostBuilder.CreateDefaultBuilder` , wywołaj `Clear` metodę we `IConfigurationBuilder.Sources` właściwości w `ConfigureAppConfiguration` . Aby dodać dostawców z powrotem, użyj `ConfigureAppConfiguration` metody w *program.cs* :
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetFx2.0App/AspNetCoreDotNetFx2.0App/Program.cs?name=snippet_ProgramMainConfigProviders&highlight=9-14)]
 
@@ -155,15 +156,15 @@ W projektach 1. x używających EF Core 1. x, polecenie takie jak `dotnet ef mig
 
 W przypadku projektów 2,0 przy użyciu EF Core 2,0 `Program.BuildWebHost` jest wywoływana w celu uzyskania usług aplikacji. W przeciwieństwie do 1. x, ma to dodatkowy efekt uboczny wywoływania `Startup.Configure` . Jeśli aplikacja 1. x wywołała kod inicjalizacji bazy danych w swojej `Configure` metodzie, mogą wystąpić nieoczekiwane problemy. Na przykład jeśli baza danych jeszcze nie istnieje, kod inicjujący jest uruchamiany przed wykonaniem polecenia EF Core migracji. Ten problem powoduje, że `dotnet ef migrations list` polecenie kończy się niepowodzeniem, jeśli baza danych jeszcze nie istnieje.
 
-Rozważmy następujący kod inicjujący inicjatora 1. x w `Configure` metodzie *Startup.cs*:
+Rozważmy następujący kod inicjujący inicjatora 1. x w `Configure` metodzie *Startup.cs* :
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Startup.cs?name=snippet_ConfigureSeedData&highlight=8)]
 
-W projektach 2,0 Przenieś `SeedData.Initialize` wywołanie do `Main` metody *program.cs*:
+W projektach 2,0 Przenieś `SeedData.Initialize` wywołanie do `Main` metody *program.cs* :
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App/Program2.cs?name=snippet_Main2Code&highlight=10)]
 
-Począwszy od 2,0, jest to niewłaściwe rozwiązanie w przypadku `BuildWebHost` kompilacji i konfigurowania hosta sieci Web. Wszystkie informacje o działaniu aplikacji powinny być obsługiwane poza `BuildWebHost` &mdash; zwykle w `Main` metodzie *program.cs*.
+Począwszy od 2,0, jest to niewłaściwe rozwiązanie w przypadku `BuildWebHost` kompilacji i konfigurowania hosta sieci Web. Wszystkie informacje o działaniu aplikacji powinny być obsługiwane poza `BuildWebHost` &mdash; zwykle w `Main` metodzie *program.cs* .
 
 <a name="view-compilation"></a>
 
@@ -183,17 +184,17 @@ Podczas określania wartości docelowej .NET Framework nadal trzeba jawnie odwo�
 
 Istotna konfiguracja Instrumentacji wydajności aplikacji jest bardzo ważna. Teraz można polegać na nowych funkcjach [Application Insights](/azure/application-insights/app-insights-overview) "świateł-up" dostępnych w narzędziach programu Visual Studio 2017.
 
-Projekty ASP.NET Core 1,1 utworzone w programie Visual Studio 2017 zostały dodane domyślnie Application Insights. Jeśli nie używasz bezpośrednio zestawu SDK Application Insights, poza *program.cs* i *Startup.cs*, wykonaj następujące kroki:
+Projekty ASP.NET Core 1,1 utworzone w programie Visual Studio 2017 zostały dodane domyślnie Application Insights. Jeśli nie używasz bezpośrednio zestawu SDK Application Insights, poza *program.cs* i *Startup.cs* , wykonaj następujące kroki:
 
 1. Jeśli celem jest .NET Core, usuń następujący `<PackageReference />` węzeł z pliku *. csproj* :
 
     [!code-xml[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App.csproj?range=10)]
 
-2. Jeśli celem jest .NET Core, Usuń `UseApplicationInsights` wywołanie metody rozszerzenia z *program.cs*:
+2. Jeśli celem jest .NET Core, Usuń `UseApplicationInsights` wywołanie metody rozszerzenia z *program.cs* :
 
     [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Program.cs?name=snippet_ProgramCsMain&highlight=8)]
 
-3. Usuń Application Insights wywołanie interfejsu API po stronie klienta z *_Layout. cshtml*. Obejmuje dwa następujące wiersze kodu:
+3. Usuń Application Insights wywołanie interfejsu API po stronie klienta z *_Layout. cshtml* . Obejmuje dwa następujące wiersze kodu:
 
     [!code-cshtml[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Views/Shared/_Layout.cshtml?range=1,19&dedent=4)]
 

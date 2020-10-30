@@ -5,6 +5,7 @@ description: Część 6 serii samouczków na Razor stronach.
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/search
-ms.openlocfilehash: 5e899929372697f7a381cd493655309fa3f70f79
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 960f60198f5e65ed05d0374fd0704537376d27d6
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633854"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93058093"
 ---
 # <a name="part-6-add-search-to-aspnet-core-no-locrazor-pages"></a>Część 6, Dodawanie wyszukiwania do Razor stron ASP.NET Core
 
@@ -33,7 +34,7 @@ Autor: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 W poniższych sekcjach są dodawane przeszukiwania filmów według *gatunku* lub *nazwy* .
 
-Dodaj następujące wyróżnione właściwości do *stron/filmów/index. cshtml. cs*:
+Dodaj następujące wyróżnione właściwości do *stron/filmów/index. cshtml. cs* :
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Index.cshtml.cs?name=snippet_newProps&highlight=11-999)]
 
@@ -136,7 +137,7 @@ Przetestuj aplikację, wyszukując według gatunku, tytułu filmu i obu tych ele
 
 W poniższych sekcjach są dodawane przeszukiwania filmów według *gatunku* lub *nazwy* .
 
-Dodaj następujące wyróżnione właściwości do *stron/filmów/index. cshtml. cs*:
+Dodaj następujące wyróżnione właściwości do *stron/filmów/index. cshtml. cs* :
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Index.cshtml.cs?name=snippet_newProps&highlight=11-999)]
 

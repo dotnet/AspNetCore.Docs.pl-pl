@@ -6,6 +6,7 @@ ms.assetid: 0be164aa-1d72-4192-bd6b-192c9c301164
 ms.author: riande
 ms.date: 12/18/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/model-binding
-ms.openlocfilehash: ca2f071ccb84fdb2eb06f533fc4d088ad1b1c785
-ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
+ms.openlocfilehash: a3be22134246c76b0a809ddb97b33ff97ace9a5b
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/27/2020
-ms.locfileid: "91393889"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93057508"
 ---
 # <a name="model-binding-in-aspnet-core"></a>Powiązanie modelu w ASP.NET Core
 
@@ -80,7 +81,7 @@ Można zastosować do właściwości publicznej kontrolera lub `PageModel` klasy
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Pages/Instructors/Edit.cshtml.cs?name=snippet_BindProperty&highlight=3-4)]
 
-### <a name="bindpropertiesattribute"></a>[BindProperties] — atrybut
+### <a name="bindproperties-attribute"></a>[BindProperties] — atrybut
 
 Dostępne w ASP.NET Core 2,1 i nowszych.  Można zastosować do kontrolera lub `PageModel` klasy, aby poinformować powiązanie modelu z elementem docelowym wszystkich właściwości publicznych klasy:
 
@@ -158,7 +159,7 @@ Nie stosuj `[FromBody]` do więcej niż jednego parametru na metodę akcji. Gdy 
 
 ### <a name="additional-sources"></a>Dodatkowe źródła
 
-Dane źródłowe są dostarczane do systemu powiązań modelu przez *dostawców wartości*. Można napisać i zarejestrować dostawców wartości niestandardowych, którzy pobierają dane dla powiązania modelu z innych źródeł. Na przykład możesz potrzebować danych z cookie lub stanu sesji. Aby pobrać dane z nowego źródła:
+Dane źródłowe są dostarczane do systemu powiązań modelu przez *dostawców wartości* . Można napisać i zarejestrować dostawców wartości niestandardowych, którzy pobierają dane dla powiązania modelu z innych źródeł. Na przykład możesz potrzebować danych z cookie lub stanu sesji. Aby pobrać dane z nowego źródła:
 
 * Utwórz klasę implementującą `IValueProvider` .
 * Utwórz klasę implementującą `IValueProviderFactory` .
@@ -203,7 +204,7 @@ Ta sama strategia jest zalecana, jeśli nie chcesz, aby Błędy konwersji typów
 
 Typy proste, które tworzą spinacz modelu mogą konwertować ciągi źródłowe, w następujący sposób:
 
-* [Boolean](xref:System.ComponentModel.BooleanConverter)
+* [Typu](xref:System.ComponentModel.BooleanConverter)
 * [Byte, bajty](xref:System.ComponentModel.ByteConverter) [SByte](xref:System.ComponentModel.SByteConverter)
 * [Delikatn](xref:System.ComponentModel.CharConverter)
 * [Data/godzina](xref:System.ComponentModel.DateTimeConverter)
@@ -223,7 +224,7 @@ Typy proste, które tworzą spinacz modelu mogą konwertować ciągi źródłowe
 
 Typ złożony musi mieć publiczny Konstruktor domyślny i publiczne właściwości do zapisu do powiązania. W przypadku wystąpienia powiązania modelu Klasa jest tworzona przy użyciu publicznego konstruktora domyślnego. 
 
-Dla każdej właściwości typu złożonego powiązanie modelu przeszukuje źródła dla *prefiksu wzorca nazwy. property_name*. Jeśli nic nie zostanie znalezione, szuka tylko *property_name* bez prefiksu.
+Dla każdej właściwości typu złożonego powiązanie modelu wyszukuje źródła nazwy wzorca *prefix.property_name* . Jeśli nic nie zostanie znalezione, szuka tylko *property_name* bez prefiksu.
 
 W przypadku powiązania z parametrem prefiks jest nazwą parametru. W przypadku powiązania z `PageModel` właściwością publiczną prefiks jest publiczną nazwą właściwości. Niektóre atrybuty mają `Prefix` Właściwość, która pozwala zastąpić domyślne użycie parametru lub nazwy właściwości.
 
@@ -279,11 +280,11 @@ Dostępne są kilka wbudowanych atrybutów do kontrolowania powiązania modelu t
 * `[BindNever]`
 
 > [!WARNING]
-> Te atrybuty wpływają na powiązanie modelu, gdy dane formularza ogłoszonego są źródłem wartości. ***Nie*** wpływają one na wejściowe elementy formatujące, które przetwarzają ogłoszone treści kodu JSON i XML. Dane wejściowe są wyjaśnione [w dalszej części tego artykułu](#input-formatters).
+> Te atrybuty wpływają na powiązanie modelu, gdy dane formularza ogłoszonego są źródłem wartości. **Nie mają** one wpływu na wejściowe elementy formatujące, które przetwarzają ogłoszone treści JSON i XML. Dane wejściowe są wyjaśnione [w dalszej części tego artykułu](#input-formatters).
 
 ### <a name="bind-attribute"></a>[Bind] — atrybut
 
-Można zastosować do klasy lub parametru metody. Określa, które właściwości modelu powinny być dołączone do powiązania modelu. `[Bind]` nie ***ma wpływu na*** wejściowe elementy formatujące.
+Można zastosować do klasy lub parametru metody. Określa, które właściwości modelu powinny być dołączone do powiązania modelu. `[Bind]` nie _*_ma wpływu na_*_ wejściowe elementy formatujące.
 
 W poniższym przykładzie tylko określone właściwości `Instructor` modelu są powiązane, gdy wywoływana jest jakakolwiek procedura obsługi lub metoda działania:
 
@@ -299,7 +300,7 @@ W poniższym przykładzie tylko określone właściwości `Instructor` modelu s�
 public IActionResult OnPost([Bind("LastName,FirstMidName,HireDate")] Instructor instructor)
 ```
 
-Ten `[Bind]` atrybut może służyć do ochrony przed nadużyciem w scenariuszach *tworzenia* scenariuszy. Nie działa prawidłowo w scenariuszach edycji, ponieważ wykluczone właściwości mają ustawioną wartość null lub wartość domyślną, a nie jako pozostawione bez zmian. W celu zapewnienia obrony przed przekroczeniem, zaleca się, aby zamiast `[Bind]` atrybutu. Aby uzyskać więcej informacji, zobacz [temat Security uwagi dotyczący przefinalizowania](xref:data/ef-mvc/crud#security-note-about-overposting).
+Ten `[Bind]` atrybut może służyć do ochrony przed nadużyciem w scenariuszach _create *. Nie działa prawidłowo w scenariuszach edycji, ponieważ wykluczone właściwości mają ustawioną wartość null lub wartość domyślną, a nie jako pozostawione bez zmian. W celu zapewnienia obrony przed przekroczeniem, zaleca się, aby zamiast `[Bind]` atrybutu. Aby uzyskać więcej informacji, zobacz [temat Security uwagi dotyczący przefinalizowania](xref:data/ef-mvc/crud#security-note-about-overposting).
 
 ### <a name="bindrequired-attribute"></a>[BindRequired] — atrybut
 
@@ -317,7 +318,7 @@ Można stosować tylko do właściwości modelu, a nie do parametrów metody. Un
 
 ## <a name="collections"></a>Kolekcje
 
-Dla celów, które są kolekcjami typów prostych, powiązanie modelu wyszukuje dopasowania do *parameter_name* lub *property_name*. Jeśli dopasowanie nie zostanie znalezione, szuka jednego z obsługiwanych formatów bez prefiksu. Na przykład:
+Dla celów, które są kolekcjami typów prostych, powiązanie modelu wyszukuje dopasowania do *parameter_name* lub *property_name* . Jeśli dopasowanie nie zostanie znalezione, szuka jednego z obsługiwanych formatów bez prefiksu. Przykład:
 
 * Załóżmy, że parametr, który ma zostać powiązany, jest tablicą o nazwie `selectedCourses` :
 
@@ -362,7 +363,7 @@ Dla celów, które są kolekcjami typów prostych, powiązanie modelu wyszukuje 
 
 ## <a name="dictionaries"></a>Słowniki
 
-Dla `Dictionary` elementów docelowych powiązanie modelu wyszukuje dopasowania do *parameter_name* lub *property_name*. Jeśli dopasowanie nie zostanie znalezione, szuka jednego z obsługiwanych formatów bez prefiksu. Na przykład:
+Dla `Dictionary` elementów docelowych powiązanie modelu wyszukuje dopasowania do *parameter_name* lub *property_name* . Jeśli dopasowanie nie zostanie znalezione, szuka jednego z obsługiwanych formatów bez prefiksu. Przykład:
 
 * Załóżmy, że parametr docelowy jest `Dictionary<int, string>` nazwany `selectedCourses` :
 
@@ -547,7 +548,7 @@ Aby uzyskać więcej informacji, zobacz [TryUpdateModelAsync](xref:data/ef-rp/cr
 
 Nazwa tego atrybutu jest zgodna ze wzorcem atrybutów powiązania modelu, które określają źródło danych. Ale nie informacje o powiązaniu danych od dostawcy wartości. Pobiera wystąpienie typu z kontenera [iniekcji zależności](xref:fundamentals/dependency-injection) . Jego celem jest zapewnienie alternatywy dla iniekcji konstruktorów, gdy potrzebna jest usługa tylko wtedy, gdy jest wywoływana konkretna metoda.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * <xref:mvc/models/validation>
 * <xref:mvc/advanced/custom-model-binding>
@@ -608,7 +609,7 @@ Można zastosować do właściwości publicznej kontrolera lub `PageModel` klasy
 
 [!code-csharp[](model-binding/samples/2.x/ModelBindingSample/Pages/Instructors/Edit.cshtml.cs?name=snippet_BindProperty&highlight=3-4)]
 
-### <a name="bindpropertiesattribute"></a>[BindProperties] — atrybut
+### <a name="bindproperties-attribute"></a>[BindProperties] — atrybut
 
 Dostępne w ASP.NET Core 2,1 i nowszych.  Można zastosować do kontrolera lub `PageModel` klasy, aby poinformować powiązanie modelu z elementem docelowym wszystkich właściwości publicznych klasy:
 
@@ -686,7 +687,7 @@ Nie stosuj `[FromBody]` do więcej niż jednego parametru na metodę akcji. Gdy 
 
 ### <a name="additional-sources"></a>Dodatkowe źródła
 
-Dane źródłowe są dostarczane do systemu powiązań modelu przez *dostawców wartości*. Można napisać i zarejestrować dostawców wartości niestandardowych, którzy pobierają dane dla powiązania modelu z innych źródeł. Na przykład możesz potrzebować danych z cookie lub stanu sesji. Aby pobrać dane z nowego źródła:
+Dane źródłowe są dostarczane do systemu powiązań modelu przez *dostawców wartości* . Można napisać i zarejestrować dostawców wartości niestandardowych, którzy pobierają dane dla powiązania modelu z innych źródeł. Na przykład możesz potrzebować danych z cookie lub stanu sesji. Aby pobrać dane z nowego źródła:
 
 * Utwórz klasę implementującą `IValueProvider` .
 * Utwórz klasę implementującą `IValueProviderFactory` .
@@ -731,7 +732,7 @@ Ta sama strategia jest zalecana, jeśli nie chcesz, aby Błędy konwersji typów
 
 Typy proste, które tworzą spinacz modelu mogą konwertować ciągi źródłowe, w następujący sposób:
 
-* [Boolean](xref:System.ComponentModel.BooleanConverter)
+* [Typu](xref:System.ComponentModel.BooleanConverter)
 * [Byte, bajty](xref:System.ComponentModel.ByteConverter) [SByte](xref:System.ComponentModel.SByteConverter)
 * [Delikatn](xref:System.ComponentModel.CharConverter)
 * [Data/godzina](xref:System.ComponentModel.DateTimeConverter)
@@ -751,7 +752,7 @@ Typy proste, które tworzą spinacz modelu mogą konwertować ciągi źródłowe
 
 Typ złożony musi mieć publiczny Konstruktor domyślny i publiczne właściwości do zapisu do powiązania. W przypadku wystąpienia powiązania modelu Klasa jest tworzona przy użyciu publicznego konstruktora domyślnego. 
 
-Dla każdej właściwości typu złożonego powiązanie modelu przeszukuje źródła dla *prefiksu wzorca nazwy. property_name*. Jeśli nic nie zostanie znalezione, szuka tylko *property_name* bez prefiksu.
+Dla każdej właściwości typu złożonego powiązanie modelu wyszukuje źródła nazwy wzorca *prefix.property_name* . Jeśli nic nie zostanie znalezione, szuka tylko *property_name* bez prefiksu.
 
 W przypadku powiązania z parametrem prefiks jest nazwą parametru. W przypadku powiązania z `PageModel` właściwością publiczną prefiks jest publiczną nazwą właściwości. Niektóre atrybuty mają `Prefix` Właściwość, która pozwala zastąpić domyślne użycie parametru lub nazwy właściwości.
 
@@ -845,7 +846,7 @@ Ten `[Bind]` atrybut może służyć do ochrony przed nadużyciem w scenariuszac
 
 ## <a name="collections"></a>Kolekcje
 
-Dla celów, które są kolekcjami typów prostych, powiązanie modelu wyszukuje dopasowania do *parameter_name* lub *property_name*. Jeśli dopasowanie nie zostanie znalezione, szuka jednego z obsługiwanych formatów bez prefiksu. Na przykład:
+Dla celów, które są kolekcjami typów prostych, powiązanie modelu wyszukuje dopasowania do *parameter_name* lub *property_name* . Jeśli dopasowanie nie zostanie znalezione, szuka jednego z obsługiwanych formatów bez prefiksu. Przykład:
 
 * Załóżmy, że parametr, który ma zostać powiązany, jest tablicą o nazwie `selectedCourses` :
 
@@ -890,7 +891,7 @@ Dla celów, które są kolekcjami typów prostych, powiązanie modelu wyszukuje 
 
 ## <a name="dictionaries"></a>Słowniki
 
-Dla `Dictionary` elementów docelowych powiązanie modelu wyszukuje dopasowania do *parameter_name* lub *property_name*. Jeśli dopasowanie nie zostanie znalezione, szuka jednego z obsługiwanych formatów bez prefiksu. Na przykład:
+Dla `Dictionary` elementów docelowych powiązanie modelu wyszukuje dopasowania do *parameter_name* lub *property_name* . Jeśli dopasowanie nie zostanie znalezione, szuka jednego z obsługiwanych formatów bez prefiksu. Przykład:
 
 * Załóżmy, że parametr docelowy jest `Dictionary<int, string>` nazwany `selectedCourses` :
 

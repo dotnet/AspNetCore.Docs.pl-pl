@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 06/26/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/get-started-with-swashbuckle
-ms.openlocfilehash: 84094dce306e10470ec7b7be3efe6da024470330
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 9fbd4bc5e91d8f05afc99a4f04c706399f83a518
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628849"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93057612"
 ---
 # <a name="get-started-with-swashbuckle-and-aspnet-core"></a>Wprowadzenie do Swashbuckle i ASP.NET Core
 
@@ -47,7 +48,7 @@ Swashbuckle można dodać przy użyciu następujących metod:
 * W oknie **konsola Menedżera pakietów** :
   * Przejdź do **wyświetlania**  >  **innych**  >  **konsoli Menedżera pakietów** systemu Windows
   * Przejdź do katalogu, w którym znajduje się plik *TodoApi. csproj*
-  * Wykonaj następujące polecenie:
+  * Uruchom następujące polecenie:
 
     ```powershell
     Install-Package Swashbuckle.AspNetCore -Version 5.5.0
@@ -70,7 +71,7 @@ Swashbuckle można dodać przy użyciu następujących metod:
 
 ### <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-Uruchom następujące polecenie w **zintegrowanym terminalu**:
+Uruchom następujące polecenie w **zintegrowanym terminalu** :
 
 ```dotnetcli
 dotnet add TodoApi.csproj package Swashbuckle.AspNetCore -v 5.5.0
@@ -179,7 +180,7 @@ Komentarze XML można włączyć przy użyciu następujących metod:
 
 ::: moniker range=">= aspnetcore-2.0"
 
-* Kliknij prawym przyciskiem myszy projekt w **Eksplorator rozwiązań** a następnie wybierz polecenie **edytuj <Project_Name>. csproj**.
+* Kliknij prawym przyciskiem myszy projekt w **Eksplorator rozwiązań** a następnie wybierz polecenie **edytuj <Project_Name>. csproj** .
 * Ręcznie Dodaj wyróżnione wiersze do pliku *csproj* :
 
 [!code-xml[](../tutorials/web-api-help-pages-using-swagger/samples/2.1/TodoApi.Swashbuckle/TodoApi.csproj?name=snippet_SuppressWarnings&highlight=1-2,4)]
@@ -188,7 +189,7 @@ Komentarze XML można włączyć przy użyciu następujących metod:
 
 ::: moniker range="<= aspnetcore-1.1"
 
-* Kliknij prawym przyciskiem myszy projekt w **Eksplorator rozwiązań** i wybierz polecenie **Właściwości**.
+* Kliknij prawym przyciskiem myszy projekt w **Eksplorator rozwiązań** i wybierz polecenie **Właściwości** .
 * Sprawdź pole **plik dokumentacji XML** w sekcji **dane wyjściowe** na karcie **kompilacja** .
 
 ::: moniker-end
@@ -197,7 +198,7 @@ Komentarze XML można włączyć przy użyciu następujących metod:
 
 ::: moniker range=">= aspnetcore-2.0"
 
-* W *okienko rozwiązania*naciśnij klawisz **Control** i kliknij nazwę projektu. Przejdź do **menu Narzędzia**  >  **Edytuj plik**.
+* W *okienko rozwiązania* naciśnij klawisz **Control** i kliknij nazwę projektu. Przejdź do **menu Narzędzia**  >  **Edytuj plik** .
 * Ręcznie Dodaj wyróżnione wiersze do pliku *csproj* :
 
 [!code-xml[](../tutorials/web-api-help-pages-using-swagger/samples/2.1/TodoApi.Swashbuckle/TodoApi.csproj?name=snippet_SuppressWarnings&highlight=1-2,4)]
@@ -408,7 +409,7 @@ Obecność tego atrybutu zmienia zachowanie interfejsu użytkownika i zmienia ź
 },
 ```
 
-Dodaj `[Produces("application/json")]` atrybut do kontrolera interfejsu API. Celem jest zadeklarowanie, że działania kontrolera obsługują typ zawartości odpowiedzi dla *aplikacji/JSON*:
+Dodaj `[Produces("application/json")]` atrybut do kontrolera interfejsu API. Celem jest zadeklarowanie, że działania kontrolera obsługują typ zawartości odpowiedzi dla *aplikacji/JSON* :
 
 ::: moniker range="<= aspnetcore-2.0"
 

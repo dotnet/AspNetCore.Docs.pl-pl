@@ -6,6 +6,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/21/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/signalr
-ms.openlocfilehash: b69d60e7d0e24f6d3c8032b391c98a6cd1589305
-ms.sourcegitcommit: 9c031530d2e652fe422e786bd43392bc500d622f
+ms.openlocfilehash: 59c296f3388e71254badb02fa3ae4279005c359c
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/18/2020
-ms.locfileid: "90770184"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93056884"
 ---
 # <a name="tutorial-get-started-with-aspnet-core-no-locsignalr"></a>Samouczek: wprowadzenie do ASP.NET Core SignalR
 
@@ -61,15 +62,15 @@ Na końcu będziesz mieć działającą aplikację czatu:
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)
 
-* Z menu wybierz pozycję **plik > nowy projekt**.
+* Z menu wybierz pozycję **plik > nowy projekt** .
 
-* W oknie dialogowym **Tworzenie nowego projektu** wybierz pozycję **ASP.NET Core aplikacja sieci Web**, a następnie wybierz przycisk **dalej**.
+* W oknie dialogowym **Tworzenie nowego projektu** wybierz pozycję **ASP.NET Core aplikacja sieci Web** , a następnie wybierz przycisk **dalej** .
 
-* W oknie dialogowym **Konfigurowanie nowego projektu** Nazwij * SignalR rozmowę*projektu, a następnie wybierz pozycję **Utwórz**.
+* W oknie dialogowym **Konfigurowanie nowego projektu** Nazwij *SignalR rozmowę* projektu, a następnie wybierz pozycję **Utwórz** .
 
-* W oknie dialogowym **Tworzenie nowej ASP.NET Core aplikacji sieci Web** wybierz pozycję **.net Core** i **ASP.NET Core 3,1**. 
+* W oknie dialogowym **Tworzenie nowej ASP.NET Core aplikacji sieci Web** wybierz pozycję **.net Core** i **ASP.NET Core 3,1** . 
 
-* Wybierz pozycję **aplikacja sieci Web** , aby utworzyć projekt, który używa Razor stron, a następnie wybierz pozycję **Utwórz**.
+* Wybierz pozycję **aplikacja sieci Web** , aby utworzyć projekt, który używa Razor stron, a następnie wybierz pozycję **Utwórz** .
 
   ![Okno dialogowe nowego projektu w programie Visual Studio](signalr/_static/3.x/signalr-new-project-dialog.png)
 
@@ -86,33 +87,33 @@ Na końcu będziesz mieć działającą aplikację czatu:
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-* Z menu wybierz pozycję **plik > nowe rozwiązanie**.
+* Z menu wybierz pozycję **plik > nowe rozwiązanie** .
 
-* Wybierz pozycję **.NET Core > App > aplikacji sieci Web** (nie zaznaczaj **aplikacji sieci Web (Model-View-Controller)**), a następnie wybierz przycisk **dalej**.
+* Wybierz pozycję **.NET Core > App > aplikacji sieci Web** (nie zaznaczaj **aplikacji sieci Web (Model-View-Controller)** ), a następnie wybierz przycisk **dalej** .
 
-* Upewnij się, że **platforma docelowa** jest ustawiona na **platformę .NET Core 3,1**, a następnie wybierz przycisk **dalej**.
+* Upewnij się, że **platforma docelowa** jest ustawiona na **platformę .NET Core 3,1** , a następnie wybierz przycisk **dalej** .
 
-* Nadaj nazwę * SignalR rozmowie*projektu, a następnie wybierz pozycję **Utwórz**.
+* Nadaj nazwę *SignalR rozmowie* projektu, a następnie wybierz pozycję **Utwórz** .
 
 ---
 
 ## <a name="add-the-no-locsignalr-client-library"></a>Dodawanie SignalR biblioteki klienta
 
-SignalRBiblioteka serwerów jest dołączona do struktury udostępnionej ASP.NET Core 3,1. Biblioteka klienta JavaScript nie jest automatycznie dołączana do projektu. W tym samouczku użyjesz programu Library Manager (LibMan), aby uzyskać bibliotekę kliencką z *unpkg*. unpkg to usługa Content Delivery Network (CDN), która umożliwia dostarczanie elementów znalezionych w npm, Menedżer pakietów Node.js.
+SignalRBiblioteka serwerów jest dołączona do struktury udostępnionej ASP.NET Core 3,1. Biblioteka klienta JavaScript nie jest automatycznie dołączana do projektu. W tym samouczku użyjesz programu Library Manager (LibMan), aby uzyskać bibliotekę kliencką z *unpkg* . unpkg to usługa Content Delivery Network (CDN), która umożliwia dostarczanie elementów znalezionych w npm, Menedżer pakietów Node.js.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)
 
-* W **Eksplorator rozwiązań**kliknij prawym przyciskiem myszy projekt, a następnie wybierz polecenie **Dodaj** > **bibliotekę po stronie klienta**.
+* W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy projekt, a następnie wybierz polecenie **Dodaj** > **bibliotekę po stronie klienta** .
 
-* W oknie dialogowym **Dodawanie biblioteki po stronie klienta** dla **dostawcy** wybierz pozycję **unpkg**.
+* W oknie dialogowym **Dodaj bibliotekę Client-Side** , dla **dostawcy** wybierz pozycję **unpkg** .
 
-* W obszarze **Biblioteka**wprowadź `@microsoft/signalr@latest` .
+* W obszarze **Biblioteka** wprowadź `@microsoft/signalr@latest` .
 
-* Wybierz pozycję **Wybierz określone pliki**, rozwiń folder *dist/przeglądarka* , a następnie wybierz pozycję *signalr.js* i *signalr.min.js*.
+* Wybierz pozycję **Wybierz określone pliki** , rozwiń folder *dist/przeglądarka* , a następnie wybierz pozycję *signalr.js* i *signalr.min.js* .
 
-* Ustaw **lokalizację docelową** na plik *wwwroot/js/signaler/*, a następnie wybierz pozycję **Zainstaluj**.
+* Ustaw **lokalizację docelową** na plik *wwwroot/js/signaler/* , a następnie wybierz pozycję **Zainstaluj** .
 
-  ![Okno dialogowe Dodawanie biblioteki po stronie klienta — wybór biblioteki](signalr/_static/3.x/find-signalr-client-libs-select-files.png)
+  ![Okno dialogowe Dodawanie biblioteki Client-Side — wybór biblioteki](signalr/_static/3.x/find-signalr-client-libs-select-files.png)
 
   LibMan tworzy folder *wwwroot/js/sygnalizujący* i kopiuje do niego wybrane pliki.
 
@@ -145,13 +146,13 @@ SignalRBiblioteka serwerów jest dołączona do struktury udostępnionej ASP.NET
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-* W **terminalu**Uruchom następujące polecenie, aby zainstalować LibMan.
+* W **terminalu** Uruchom następujące polecenie, aby zainstalować LibMan.
 
   ```dotnetcli
   dotnet tool install -g Microsoft.Web.LibraryManager.Cli
   ```
 
-* Przejdź do folderu projektu (taki, który zawiera plik * SignalR Chat. csproj* ).
+* Przejdź do folderu projektu (taki, który zawiera plik *SignalR Chat. csproj* ).
 
 * Uruchom następujące polecenie, aby pobrać SignalR bibliotekę kliencką przy użyciu LibMan.
 
@@ -236,7 +237,7 @@ SignalRSerwer musi być skonfigurowany tak, aby przekazywać SignalR żądania d
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-* Z menu wybierz polecenie **uruchom > Uruchom bez debugowania**.
+* Z menu wybierz polecenie **uruchom > Uruchom bez debugowania** .
 
 ---
 
@@ -292,15 +293,15 @@ Na końcu będziesz mieć działającą aplikację czatu:::: ![ no-Loc (signaler
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)  
 
-* Z menu wybierz pozycję **plik > nowy projekt**. 
+* Z menu wybierz pozycję **plik > nowy projekt** . 
 
-* W oknie dialogowym **Nowy projekt** wybierz pozycję **zainstalowane > Visual C# > sieci Web > ASP.NET Core aplikacji sieci Web**. Nadaj nazwę * SignalR rozmowie*projektu.   
+* W oknie dialogowym **Nowy projekt** wybierz pozycję **zainstalowane > Visual C# > sieci Web > ASP.NET Core aplikacji sieci Web** . Nadaj nazwę *SignalR rozmowie* projektu.   
 
   ![Okno dialogowe nowego projektu w programie Visual Studio](signalr/_static/2.x/signalr-new-project-dialog.png)    
 
 * Wybierz pozycję **aplikacja sieci Web** , aby utworzyć projekt, który używa Razor stron.   
 
-* Wybierz platformę docelową programu **.NET Core**, wybierz pozycję **ASP.NET Core 2,2**, a następnie kliknij przycisk **OK**.    
+* Wybierz platformę docelową programu **.NET Core** , wybierz pozycję **ASP.NET Core 2,2** , a następnie kliknij przycisk **OK** .    
 
   ![Okno dialogowe nowego projektu w programie Visual Studio](signalr/_static/2.x/signalr-new-project-choose-type.png)   
 
@@ -317,35 +318,35 @@ Na końcu będziesz mieć działającą aplikację czatu:::: ![ no-Loc (signaler
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)   
 
-* Z menu wybierz pozycję **plik > nowe rozwiązanie**.    
+* Z menu wybierz pozycję **plik > nowe rozwiązanie** .    
 
-* Wybierz pozycję **.NET Core > app > ASP.NET Core Web App** (nie wybieraj **ASP.NET Core Web App (MVC)**).  
+* Wybierz pozycję **.NET Core > app > ASP.NET Core Web App** (nie wybieraj **ASP.NET Core Web App (MVC)** ).  
 
-* Wybierz pozycję **Dalej**.  
+* Wybierz opcję **Dalej** .  
 
-* Nadaj nazwę * SignalR rozmowie*projektu, a następnie wybierz pozycję **Utwórz**. 
+* Nadaj nazwę *SignalR rozmowie* projektu, a następnie wybierz pozycję **Utwórz** . 
 
 --- 
 
 ## <a name="add-the-no-locsignalr-client-library"></a>Dodawanie SignalR biblioteki klienta 
 
-SignalRBiblioteka serwerów jest dołączona do `Microsoft.AspNetCore.App` pakietu. Biblioteka klienta JavaScript nie jest automatycznie dołączana do projektu. W tym samouczku użyjesz programu Library Manager (LibMan), aby uzyskać bibliotekę kliencką z *unpkg*. unpkg to usługa Content Delivery Network (CDN), która umożliwia dostarczanie elementów znalezionych w npm, Menedżer pakietów Node.js.   
+SignalRBiblioteka serwerów jest dołączona do `Microsoft.AspNetCore.App` pakietu. Biblioteka klienta JavaScript nie jest automatycznie dołączana do projektu. W tym samouczku użyjesz programu Library Manager (LibMan), aby uzyskać bibliotekę kliencką z *unpkg* . unpkg to usługa Content Delivery Network (CDN), która umożliwia dostarczanie elementów znalezionych w npm, Menedżer pakietów Node.js.   
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)  
 
-* W **Eksplorator rozwiązań**kliknij prawym przyciskiem myszy projekt, a następnie wybierz polecenie **Dodaj** > **bibliotekę po stronie klienta**.  
+* W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy projekt, a następnie wybierz polecenie **Dodaj** > **bibliotekę po stronie klienta** .  
 
-* W oknie dialogowym **Dodawanie biblioteki po stronie klienta** dla **dostawcy** wybierz pozycję **unpkg**. 
+* W oknie dialogowym **Dodaj bibliotekę Client-Side** , dla **dostawcy** wybierz pozycję **unpkg** . 
 
-* W polu **Biblioteka**wprowadź `@microsoft/signalr@3` i wybierz najnowszą wersję, która nie jest w wersji zapoznawczej.  
+* W polu **Biblioteka** wprowadź `@microsoft/signalr@3` i wybierz najnowszą wersję, która nie jest w wersji zapoznawczej.  
 
-  ![Okno dialogowe Dodawanie biblioteki po stronie klienta — wybór biblioteki](signalr/_static/2.x/libman1.png)   
+  ![Okno dialogowe Dodawanie biblioteki Client-Side — wybór biblioteki](signalr/_static/2.x/libman1.png)   
 
-* Wybierz pozycję **Wybierz określone pliki**, rozwiń folder *dist/przeglądarka* , a następnie wybierz pozycję *signalr.js* i *signalr.min.js*. 
+* Wybierz pozycję **Wybierz określone pliki** , rozwiń folder *dist/przeglądarka* , a następnie wybierz pozycję *signalr.js* i *signalr.min.js* . 
 
-* Ustaw **lokalizację docelową** na plik *wwwroot/lib/sygnalizujący/*, a następnie wybierz pozycję **Zainstaluj**.    
+* Ustaw **lokalizację docelową** na plik *wwwroot/lib/sygnalizujący/* , a następnie wybierz pozycję **Zainstaluj** .    
 
-  ![Okno dialogowe Dodawanie biblioteki po stronie klienta — Wybieranie plików i lokalizacji docelowej](signalr/_static/2.x/libman2.png) 
+  ![Okno dialogowe Dodawanie Client-Side biblioteki — Wybieranie plików i lokalizacji docelowej](signalr/_static/2.x/libman2.png) 
 
   LibMan tworzy folder *wwwroot/lib/sygnalizujący* i kopiuje do niego wybrane pliki.    
 
@@ -378,13 +379,13 @@ SignalRBiblioteka serwerów jest dołączona do `Microsoft.AspNetCore.App` pakie
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)   
 
-* W **terminalu**Uruchom następujące polecenie, aby zainstalować LibMan. 
+* W **terminalu** Uruchom następujące polecenie, aby zainstalować LibMan. 
 
   ```dotnetcli  
   dotnet tool install -g Microsoft.Web.LibraryManager.Cli   
   ```   
 
-* Przejdź do folderu projektu (taki, który zawiera plik * SignalR Chat. csproj* ).   
+* Przejdź do folderu projektu (taki, który zawiera plik *SignalR Chat. csproj* ).   
 
 * Uruchom następujące polecenie, aby pobrać SignalR bibliotekę kliencką przy użyciu LibMan.    
 
@@ -469,7 +470,7 @@ SignalRSerwer musi być skonfigurowany tak, aby przekazywać SignalR żądania d
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio dla komputerów Mac](#tab/visual-studio-mac)
 
-* Z menu wybierz polecenie **uruchom > Uruchom bez debugowania**.
+* Z menu wybierz polecenie **uruchom > Uruchom bez debugowania** .
 
 ---
 
@@ -484,7 +485,7 @@ SignalRSerwer musi być skonfigurowany tak, aby przekazywać SignalR żądania d
 > [!TIP]    
 > Jeśli aplikacja nie działa, Otwórz narzędzia deweloperskie przeglądarki (F12) i przejdź do konsoli programu. Mogą pojawić się błędy związane z kodem HTML i JavaScript. Załóżmy na przykład, że należy umieścić *signalr.js* w innym folderze niż skierowany. W takim przypadku odwołanie do tego pliku nie będzie działało i zobaczysz błąd 404 w konsoli.   
 > ![ Błąd nie znalezionosignalr.js](signalr/_static/2.x/f12-console.png)    
-## <a name="additional-resources"></a>Zasoby dodatkowe 
+## <a name="additional-resources"></a>Dodatkowe zasoby 
 * [Wersja tego samouczka usługi YouTube](https://www.youtube.com/watch?v=iKlVmu-r0JQ)   
 
 ::: moniker-end

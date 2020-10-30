@@ -6,6 +6,7 @@ description: Dowiedz się, jak używać pomocnika tagów składnika ASP.NET Core
 ms.custom: mvc
 ms.date: 04/15/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/component-tag-helper
-ms.openlocfilehash: 1a0422da6bd48049cac73debe7d335da91e311be
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: cddbca7f95e4d2143d4632aaa83133bc6210e251
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633919"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059159"
 ---
 # <a name="component-tag-helper-in-aspnet-core"></a>Pomocnik tagu składnika w ASP.NET Core
 
@@ -106,7 +107,7 @@ Typ parametru musi być możliwy do serializacji JSON, co oznacza, że typ musi 
 
 W poniższym przykładzie obiekt klasy jest przenoszona do składnika:
 
-*MyClass.cs*:
+*MyClass.cs* :
 
 ```csharp
 public class MyClass
@@ -122,7 +123,7 @@ public class MyClass
 
 **Klasa musi mieć publiczny Konstruktor bez parametrów.**
 
-*Shared/webcomponent. Razor*:
+*Shared/webcomponent. Razor* :
 
 ```razor
 <h2>MyComponent</h2>
@@ -137,7 +138,7 @@ public class MyClass
 }
 ```
 
-*Strony/Moje strony. cshtml*:
+*Strony/Moje strony. cshtml* :
 
 ```cshtml
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers

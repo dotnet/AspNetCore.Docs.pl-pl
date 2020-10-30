@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/response-compression
-ms.openlocfilehash: b8947e3c3c4f634fbd838c22ff60799257143480
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 9327c98c22a4d42d31ea8ba1eb8337153040b5b5
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634998"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93056975"
 ---
 # <a name="response-compression-in-aspnet-core"></a>Kompresja odpowiedzi w ASP.NET Core
 
@@ -91,7 +92,7 @@ Poznaj funkcje oprogramowania pośredniczącego kompresji odpowiedzi z [przykła
 
 Oprogramowanie pośredniczące kompresji odpowiedzi jest dostarczane przez pakiet [Microsoft. AspNetCore. ResponseCompression](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCompression/) , który jest niejawnie uwzględniony w aplikacjach ASP.NET Core.
 
-## <a name="configuration"></a>Konfigurowanie
+## <a name="configuration"></a>Konfiguracja
 
 Poniższy kod pokazuje, jak włączyć oprogramowanie pośredniczące kompresji odpowiedzi dla domyślnych typów MIME i dostawców kompresji ([Brotli](#brotli-compression-provider) i [gzip](#gzip-compression-provider)):
 
@@ -233,7 +234,7 @@ Oprogramowanie pośredniczące określa domyślny zestaw typów MIME dla kompres
 * `text/plain`
 * `text/xml`
 
-Zastąp lub Dołącz typy MIME z opcjami oprogramowania pośredniczącego kompresji odpowiedzi. Należy zauważyć, że symbole wieloznaczne MIME, takie jak `text/*` nie są obsługiwane. Przykładowa aplikacja dodaje typ MIME dla `image/svg+xml` i kompresuje i obsługuje obraz transparentu ASP.NET Core (*transparent. SVG*).
+Zastąp lub Dołącz typy MIME z opcjami oprogramowania pośredniczącego kompresji odpowiedzi. Należy zauważyć, że symbole wieloznaczne MIME, takie jak `text/*` nie są obsługiwane. Przykładowa aplikacja dodaje typ MIME dla `image/svg+xml` i kompresuje i obsługuje obraz transparentu ASP.NET Core ( *transparent. SVG* ).
 
 [!code-csharp[](response-compression/samples/3.x/SampleApp/Startup.cs?name=snippet1&highlight=8-10)]
 
@@ -337,7 +338,7 @@ Poznaj funkcje oprogramowania pośredniczącego kompresji odpowiedzi z [przykła
 
 Aby uwzględnić oprogramowanie pośredniczące w projekcie, Dodaj odwołanie do pakietu [Microsoft. AspNetCore. app](xref:fundamentals/metapackage-app), który obejmuje pakiet [Microsoft. AspNetCore. ResponseCompression](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCompression/) .
 
-## <a name="configuration"></a>Konfigurowanie
+## <a name="configuration"></a>Konfiguracja
 
 Poniższy kod pokazuje, jak włączyć oprogramowanie pośredniczące kompresji odpowiedzi dla domyślnych typów MIME i dostawców kompresji ([Brotli](#brotli-compression-provider) i [gzip](#gzip-compression-provider)):
 
@@ -478,7 +479,7 @@ Oprogramowanie pośredniczące określa domyślny zestaw typów MIME dla kompres
 * `text/plain`
 * `text/xml`
 
-Zastąp lub Dołącz typy MIME z opcjami oprogramowania pośredniczącego kompresji odpowiedzi. Należy zauważyć, że symbole wieloznaczne MIME, takie jak `text/*` nie są obsługiwane. Przykładowa aplikacja dodaje typ MIME dla `image/svg+xml` i kompresuje i obsługuje obraz transparentu ASP.NET Core (*transparent. SVG*).
+Zastąp lub Dołącz typy MIME z opcjami oprogramowania pośredniczącego kompresji odpowiedzi. Należy zauważyć, że symbole wieloznaczne MIME, takie jak `text/*` nie są obsługiwane. Przykładowa aplikacja dodaje typ MIME dla `image/svg+xml` i kompresuje i obsługuje obraz transparentu ASP.NET Core ( *transparent. SVG* ).
 
 [!code-csharp[](response-compression/samples/2.x/SampleApp/Startup.cs?name=snippet1&highlight=8-10)]
 
@@ -582,7 +583,7 @@ Poznaj funkcje oprogramowania pośredniczącego kompresji odpowiedzi z [przykła
 
 Aby uwzględnić oprogramowanie pośredniczące w projekcie, Dodaj odwołanie do pakietu [Microsoft. AspNetCore. app](xref:fundamentals/metapackage-app), który obejmuje pakiet [Microsoft. AspNetCore. ResponseCompression](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCompression/) .
 
-## <a name="configuration"></a>Konfigurowanie
+## <a name="configuration"></a>Konfiguracja
 
 Poniższy kod pokazuje, jak włączyć oprogramowanie pośredniczące kompresji odpowiedzi dla domyślnych typów MIME i [dostawcy kompresji gzip](#gzip-compression-provider):
 
@@ -683,7 +684,7 @@ Oprogramowanie pośredniczące określa domyślny zestaw typów MIME dla kompres
 * `text/plain`
 * `text/xml`
 
-Zastąp lub Dołącz typy MIME z opcjami oprogramowania pośredniczącego kompresji odpowiedzi. Należy zauważyć, że symbole wieloznaczne MIME, takie jak `text/*` nie są obsługiwane. Przykładowa aplikacja dodaje typ MIME dla `image/svg+xml` i kompresuje i obsługuje obraz transparentu ASP.NET Core (*transparent. SVG*).
+Zastąp lub Dołącz typy MIME z opcjami oprogramowania pośredniczącego kompresji odpowiedzi. Należy zauważyć, że symbole wieloznaczne MIME, takie jak `text/*` nie są obsługiwane. Przykładowa aplikacja dodaje typ MIME dla `image/svg+xml` i kompresuje i obsługuje obraz transparentu ASP.NET Core ( *transparent. SVG* ).
 
 [!code-csharp[](response-compression/samples/2.x/SampleApp/Startup.cs?name=snippet1&highlight=8-10)]
 

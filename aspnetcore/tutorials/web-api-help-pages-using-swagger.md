@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 07/06/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/web-api-help-pages-using-swagger
-ms.openlocfilehash: c40aede044c78122a9057613f0eece9acf84df7b
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: b4b27e6b845d960b4b92612b90938f0770f23170
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633997"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93056676"
 ---
 # <a name="aspnet-core-web-api-help-pages-with-swagger--openapi"></a>ASP.NET Core stronach pomocy interfejsu API sieci Web w programie Swagger/OpenAPI
 
@@ -42,7 +43,7 @@ Swagger to specyfikacja języka niezależny od do opisywania interfejsów API [r
 
 ## <a name="openapi-specification-openapijson"></a>OpenAPI — Specyfikacja (openapi.json)
 
-Rdzeń do przepływu OpenAPI jest domyślnie specyfikacją &mdash; dokumentu o nazwie *openapi.jsna*. Jest on generowany przez łańcuch narzędzi OpenAPI (lub implementacje innych firm) na podstawie Twojej usługi. Opisuje możliwości interfejsu API i sposób uzyskiwania dostępu do niego przy użyciu protokołu HTTP. Służy on do tworzenia interfejsu użytkownika struktury Swagger i jest używany przez łańcuch narzędzi do włączania odnajdywania i generowania kodu klienta. Oto przykład specyfikacji OpenAPI, zredukowany dla zwięzłości:
+Rdzeń do przepływu OpenAPI jest domyślnie specyfikacją &mdash; dokumentu o nazwie *openapi.jsna* . Jest on generowany przez łańcuch narzędzi OpenAPI (lub implementacje innych firm) na podstawie Twojej usługi. Opisuje możliwości interfejsu API i sposób uzyskiwania dostępu do niego przy użyciu protokołu HTTP. Służy on do tworzenia interfejsu użytkownika struktury Swagger i jest używany przez łańcuch narzędzi do włączania odnajdywania i generowania kodu klienta. Oto przykład specyfikacji OpenAPI, zredukowany dla zwięzłości:
 
 ```json
 {
@@ -136,7 +137,7 @@ Rdzeń do przepływu OpenAPI jest domyślnie specyfikacją &mdash; dokumentu o n
 
 ![Interfejs użytkownika struktury Swagger](web-api-help-pages-using-swagger/_static/swagger-ui.png)
 
-Każda publiczna Metoda działania w kontrolerach może być testowana z poziomu interfejsu użytkownika. Kliknij nazwę metody, aby rozwinąć sekcję. Dodaj wszelkie niezbędne parametry i kliknij przycisk **Wypróbuj!**.
+Każda publiczna Metoda działania w kontrolerach może być testowana z poziomu interfejsu użytkownika. Kliknij nazwę metody, aby rozwinąć sekcję. Dodaj wszelkie niezbędne parametry i kliknij przycisk **Wypróbuj!** .
 
 ![Przykład pobierania testów struktury Swagger](web-api-help-pages-using-swagger/_static/get-try-it-out.png)
 

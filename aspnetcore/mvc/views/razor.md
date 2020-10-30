@@ -5,6 +5,7 @@ description: Dowiedz się więcej o Razor składni znaczników na potrzeby osadz
 ms.author: riande
 ms.date: 02/12/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/razor
-ms.openlocfilehash: 9c2bbd2d463af8a2ea7db716d01bf1436338ea77
-ms.sourcegitcommit: cd861463faf44956855e3c4b3669483bbc4a7463
+ms.openlocfilehash: c1278b0cd3e58814b1c06dca81efd662c3de0c54
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/29/2020
-ms.locfileid: "89101364"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059198"
 ---
 # <a name="no-locrazor-syntax-reference-for-aspnet-core"></a>Razor odwołanie do składni dla ASP.NET Core
 
 Autorzy [Rick Anderson](https://twitter.com/RickAndMSFT), [Taylor Mullen](https://twitter.com/ntaylormullen)i [Dan Vicarel](https://github.com/Rabadash8820)
 
-Razor jest składnią znaczników na potrzeby osadzania kodu opartego na serwerze w stronach sieci Web. RazorSkładnia składa się z Razor znaczników, C# i HTML. Pliki zawierające Razor generalnie mają rozszerzenie *. cshtml* . Razorznajduje się również w plikach [ Razor składników](xref:blazor/components/index) (*. Razor*).
+Razor jest składnią znaczników na potrzeby osadzania kodu opartego na serwerze w stronach sieci Web. RazorSkładnia składa się z Razor znaczników, C# i HTML. Pliki zawierające Razor generalnie mają rozszerzenie *. cshtml* . Razorznajduje się również w plikach [ Razor składników](xref:blazor/components/index) ( *. Razor* ).
 
 ## <a name="rendering-html"></a>Renderowanie HTML
 
@@ -496,7 +497,7 @@ W obszarze [ Razor składniki](xref:blazor/components/index)Użyj `@code` , `@fu
 
 ::: moniker-end
 
-Na przykład:
+Przykład:
 
 [!code-cshtml[](razor/sample/Views/Home/Contact6.cshtml)]
 
@@ -657,7 +658,7 @@ Razor uwidacznia `Model` Właściwość do uzyskiwania dostępu do modelu przeka
 
 Dla Razor przykładu stron przedstawionych w poniższej tabeli:
 
-* Każda Strona importuje *strony/_ViewImports. cshtml*.
+* Każda Strona importuje *strony/_ViewImports. cshtml* .
 * *Strona/_ViewImports. cshtml* zawiera `@namespace Hello.World` .
 * Każda Strona ma `Hello.World` jako element główny przestrzeni nazw.
 
@@ -930,7 +931,7 @@ RazorSłowa kluczowe języka C# muszą mieć podwójne ucieczki z `@(@C# Razor K
 
 ::: moniker range=">= aspnetcore-2.1"
 
-W zestaw .NET Core SDK 2,1 lub nowszej, [ Razor zestaw SDK](xref:razor-pages/sdk) obsługuje kompilację Razor plików. Podczas kompilowania projektu Razor zestaw SDK generuje *obj/<build_configuration>/<target_framework_moniker>/ Razor * katalogu w katalogu głównym projektu. Struktura katalogów w *Razor* katalogu odzwierciedla strukturę katalogu projektu.
+W zestaw .NET Core SDK 2,1 lub nowszej, [ Razor zestaw SDK](xref:razor-pages/sdk) obsługuje kompilację Razor plików. Podczas kompilowania projektu Razor zestaw SDK generuje *obj/<build_configuration>/<target_framework_moniker>/ Razor* katalogu w katalogu głównym projektu. Struktura katalogów w *Razor* katalogu odzwierciedla strukturę katalogu projektu.
 
 Rozważmy następującą strukturę katalogów w projekcie ASP.NET Core stron 2,1 na Razor platformie .NET Core 2,1:
 
@@ -968,7 +969,7 @@ Kompilowanie projektu w konfiguracji *debugowania* powoduje zwrócenie następuj
            Index.g.cshtml.cs
 ```
 
-Aby wyświetlić wygenerowaną klasę dla *stron/index. cshtml*, Otwórz *obj/Debug/netcoreapp 2.1/ Razor /Pages/index.g.cshtml.cs*.
+Aby wyświetlić wygenerowaną klasę dla *stron/index. cshtml* , Otwórz *obj/Debug/netcoreapp 2.1/ Razor /Pages/index.g.cshtml.cs* .
 
 ::: moniker-end
 
@@ -993,8 +994,8 @@ Ustaw punkt przerwania na `return csharpDocument;` instrukcji `CustomTemplateEng
 RazorAparat widoku wykonuje wyszukiwania z uwzględnieniem wielkości liter w widokach. Jednak rzeczywiste wyszukiwanie jest określane przez podstawowy system plików:
 
 * Źródło na podstawie pliku:
-  * W systemach operacyjnych z systemami plików bez uwzględniania wielkości liter (na przykład Windows) wyszukiwania dostawcy plików fizycznych nie uwzględniają wielkości liter. Na przykład `return View("Test")` wyniki są zgodne z */views/Home/test.cshtml*, */views/Home/test.cshtml*i innymi wariantami wielkości liter.
-  * W przypadku systemów plików z uwzględnieniem wielkości liter (na przykład Linux, OSX i with `EmbeddedFileProvider` ) Wyszukiwanie jest rozróżniana wielkość liter. Na przykład, w odniesieniu do `return View("Test")` */views/Home/test.cshtml*.
+  * W systemach operacyjnych z systemami plików bez uwzględniania wielkości liter (na przykład Windows) wyszukiwania dostawcy plików fizycznych nie uwzględniają wielkości liter. Na przykład `return View("Test")` wyniki są zgodne z */views/Home/test.cshtml* , */views/Home/test.cshtml* i innymi wariantami wielkości liter.
+  * W przypadku systemów plików z uwzględnieniem wielkości liter (na przykład Linux, OSX i with `EmbeddedFileProvider` ) Wyszukiwanie jest rozróżniana wielkość liter. Na przykład, w odniesieniu do `return View("Test")` */views/Home/test.cshtml* .
 * Wstępnie skompilowane widoki: w przypadku ASP.NET Core 2,0 i nowszych wyszukiwanie wstępnie skompilowanych widoków nie uwzględnia wielkości liter we wszystkich systemach operacyjnych. Zachowanie jest takie samo jak zachowanie dostawcy plików fizycznych w systemie Windows. Jeśli dwa skompilowane widoki różnią się tylko wielkością liter, wynik wyszukiwania jest niejednoznaczny.
 
 Deweloperzy są zachęcani do dopasowania wielkości liter w nazwach plików i katalogów do wielkości liter:

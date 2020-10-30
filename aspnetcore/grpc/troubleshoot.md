@@ -7,6 +7,7 @@ ms.author: jamesnk
 ms.custom: mvc
 ms.date: 07/09/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/troubleshoot
-ms.openlocfilehash: 0c897c8c640f8713fc7d3b6cad0e6c571131d7a5
-ms.sourcegitcommit: ecae2aa432628b9181d1fa11037c231c7dd56c9e
+ms.openlocfilehash: cbce85caf7ba792253ba62c6be084c8905acd00f
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/16/2020
-ms.locfileid: "92113845"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93058717"
 ---
 # <a name="troubleshoot-grpc-on-net-core"></a>Rozwiązywanie problemów z gRPC na platformie .NET Core
 
@@ -108,7 +109,7 @@ Kestrel nie obsługuje protokołu HTTP/2 z protokołem TLS w macOS i starszych w
 
 Aby obejść ten problem, należy skonfigurować Kestrel i klienta gRPC do używania protokołu HTTP/2 *bez* szyfrowania TLS. Należy to zrobić tylko podczas projektowania. Użycie protokołu TLS spowoduje, że komunikaty gRPC są wysyłane bez szyfrowania.
 
-Kestrel musi skonfigurować punkt końcowy HTTP/2 bez protokołu TLS w *program.cs*:
+Kestrel musi skonfigurować punkt końcowy HTTP/2 bez protokołu TLS w *program.cs* :
 
 ```csharp
 public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -136,7 +137,7 @@ Klienta gRPC należy również skonfigurować tak, aby nie korzystał z protoko�
 
 gRPC generowanie kodu dla konkretnych klientów i klas podstawowych usług wymaga przywoływania plików protobuf i narzędzi z projektu. Należy uwzględnić:
 
-* pliki *. proto* , które mają być używane w `<Protobuf>` grupie elementów. [Zaimportowane pliki *proto* ](https://developers.google.com/protocol-buffers/docs/proto3#importing-definitions) muszą odwoływać się do projektu.
+* pliki *. proto* , które mają być używane w `<Protobuf>` grupie elementów. [Zaimportowane pliki *proto*](https://developers.google.com/protocol-buffers/docs/proto3#importing-definitions) muszą odwoływać się do projektu.
 * Odwołanie do pakietu dla pakietu narzędzi gRPC [gRPC. Tools](https://www.nuget.org/packages/Grpc.Tools/).
 
 Aby uzyskać więcej informacji na temat generowania zasobów gRPC C#, zobacz <xref:grpc/basics> .
@@ -166,9 +167,9 @@ Projekty WPF mają [znany problem](https://github.com/dotnet/wpf/issues/810) , k
 Ten problem można obejść, wykonując następujące:
 
 1. Utwórz nowy projekt biblioteki klas .NET Core.
-2. W nowym projekcie Dodaj odwołania, aby włączyć [generowanie kodu w języku C# z plików * \* . proto* ](xref:grpc/basics#generated-c-assets):
+2. W nowym projekcie Dodaj odwołania, aby włączyć [generowanie kodu w języku C# z plików *\* . proto*](xref:grpc/basics#generated-c-assets):
     * Dodaj odwołanie do pakietu do pakietu [GRPC. Tools](https://www.nuget.org/packages/Grpc.Tools/) .
-    * Dodaj pliki * \* . proto* do `<Protobuf>` grupy elementów.
+    * Dodaj pliki *\* . proto* do `<Protobuf>` grupy elementów.
 3. W aplikacji WPF Dodaj odwołanie do nowego projektu.
 
 Aplikacja WPF może używać typów wygenerowanych przez gRPC z nowego projektu biblioteki klas.

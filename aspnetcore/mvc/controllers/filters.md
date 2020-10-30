@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/04/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/filters
-ms.openlocfilehash: eeae167286e793ecd5a547cea0142cf7d8014ece
-ms.sourcegitcommit: c0a15ab8549cb729731a0fdf1d7da0b7feaa11ff
+ms.openlocfilehash: ecb4de3439656eb56507b920db704048d8f96759
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/02/2020
-ms.locfileid: "91671785"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93058509"
 ---
 # <a name="filters-in-aspnet-core"></a>Filtry w ASP.NET Core
 
@@ -48,7 +49,7 @@ Ten dokument ma zastosowanie do Razor stron, kontrolerów interfejsu API i kontr
 
 ## <a name="how-filters-work"></a>Jak działają filtry
 
-Filtry są uruchamiane w *potoku wywołania akcji ASP.NET Core*, czasami określane jako *potok filtru*. Potok filtru jest uruchamiany po ASP.NET Core wybiera akcję do wykonania.
+Filtry są uruchamiane w *potoku wywołania akcji ASP.NET Core* , czasami określane jako *potok filtru* . Potok filtru jest uruchamiany po ASP.NET Core wybiera akcję do wykonania.
 
 ![Żądanie jest przetwarzane przez inne oprogramowanie pośredniczące, kierowanie oprogramowania pośredniczącego, wybór akcji i potok akcji wywołania. Przetwarzanie żądań jest kontynuowane przez wybór akcji, kierowanie oprogramowania pośredniczącego i różnych innych programów pośredniczących przed wysłaniem odpowiedzi do klienta.](filters/_static/filter-pipeline-1.png)
 
@@ -126,7 +127,7 @@ Poniższy kod implementuje `ActionFilterAttribute` , że:
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/MyActionFilterAttribute.cs?name=snippet)]
 
-Opcje konfiguracji są dostępne z [systemu konfiguracji](xref:fundamentals/configuration/index) przy użyciu [wzorca opcji](xref:fundamentals/configuration/options). Na przykład, z *appsettings.jsw* pliku:
+Opcje konfiguracji są dostępne z [systemu konfiguracji](xref:fundamentals/configuration/index) przy użyciu [wzorca opcji](xref:fundamentals/configuration/options). Na przykład, z *appsettings.json* pliku:
 
 [!code-json[](filters/3.1sample/FiltersSample/appsettings.json)]
 
@@ -145,7 +146,7 @@ Poniższy kod stosuje `MyActionFilterAttribute` `Index2` metodę do:
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/SampleController.cs?name=snippet2&highlight=9)]
 
-W obszarze **nagłówki odpowiedzi**, `author: Rick Anderson` i `Editor: Joe Smith` jest wyświetlana po `Sample/Index2` wywołaniu punktu końcowego.
+W obszarze **nagłówki odpowiedzi** , `author: Rick Anderson` i `Editor: Joe Smith` jest wyświetlana po `Sample/Index2` wywołaniu punktu końcowego.
 
 Poniższy kod stosuje `MyActionFilterAttribute` `AddHeaderAttribute` stronę i do Razor strony:
 
@@ -166,7 +167,7 @@ Atrybuty filtru:
 
 ## <a name="filter-scopes-and-order-of-execution"></a>Zakresy filtrów i kolejność wykonywania
 
-Filtr można dodać do potoku w jednym z trzech *zakresów*:
+Filtr można dodać do potoku w jednym z trzech *zakresów* :
 
 * Użycie atrybutu w akcji kontrolera. Atrybutów filtru nie można stosować do Razor metod obsługi stron.
 * Użycie atrybutu na kontrolerze lub Razor stronie.
@@ -210,7 +211,7 @@ Każdy kontroler, który dziedziczy z <xref:Microsoft.AspNetCore.Mvc.Controller>
 
 Na przykład, w przykładzie pobierania, `MySampleActionFilter` jest stosowana globalnie podczas uruchamiania.
 
-Pomocnik `TestController`:
+`TestController`:
 
 * Stosuje `SampleActionFilterAttribute` ( `[SampleActionFilter]` ) do `FilterTest2` akcji.
 * Przesłania `OnActionExecuting` i `OnActionExecuted` .
@@ -282,7 +283,7 @@ Potok filtru może być skrócony przez ustawienie <xref:Microsoft.AspNetCore.Mv
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/ShortCircuitingResourceFilterAttribute.cs?name=snippet)]
 
-W poniższym kodzie, zarówno, `ShortCircuitingResourceFilter` jak i jako `AddHeader` element docelowy filtru `SomeResource` metodę akcji. Pomocnik `ShortCircuitingResourceFilter`:
+W poniższym kodzie, zarówno, `ShortCircuitingResourceFilter` jak i jako `AddHeader` element docelowy filtru `SomeResource` metodę akcji. `ShortCircuitingResourceFilter`:
 
 * Uruchamiany jako pierwszy, ponieważ jest filtrem zasobów i `AddHeader` jest filtrem akcji.
 * Krótkie obwody pozostała część potoku.
@@ -637,7 +638,7 @@ Ten dokument ma zastosowanie do Razor stron, kontrolerów interfejsu API i kontr
 
 ## <a name="how-filters-work"></a>Jak działają filtry
 
-Filtry są uruchamiane w *potoku wywołania akcji ASP.NET Core*, czasami określane jako *potok filtru*.  Potok filtru jest uruchamiany po ASP.NET Core wybiera akcję do wykonania.
+Filtry są uruchamiane w *potoku wywołania akcji ASP.NET Core* , czasami określane jako *potok filtru* .  Potok filtru jest uruchamiany po ASP.NET Core wybiera akcję do wykonania.
 
 ![Żądanie jest przetwarzane przez inne oprogramowanie pośredniczące, kierowanie oprogramowania pośredniczącego, wybór akcji i potok wywołania akcji ASP.NET Core. Przetwarzanie żądań jest kontynuowane przez wybór akcji, kierowanie oprogramowania pośredniczącego i różnych innych programów pośredniczących przed wysłaniem odpowiedzi do klienta.](filters/_static/filter-pipeline-1.png)
 
@@ -710,7 +711,7 @@ Atrybuty filtru:
 
 ## <a name="filter-scopes-and-order-of-execution"></a>Zakresy filtrów i kolejność wykonywania
 
-Filtr można dodać do potoku w jednym z trzech *zakresów*:
+Filtr można dodać do potoku w jednym z trzech *zakresów* :
 
 * Użycie atrybutu w akcji.
 * Używanie atrybutu na kontrolerze.
@@ -722,7 +723,7 @@ Poprzedni kod dodaje trzy filtry globalnie przy użyciu kolekcji [MvcOptions. fi
 
 ### <a name="default-order-of-execution"></a>Domyślna kolejność wykonywania
 
-Jeśli istnieje wiele filtrów tego *samego typu*, zakres określa domyślną kolejność wykonywania filtrowania.  Filtry globalne Otocz filtry klas. Filtry klas Otocz filtry metod.
+Jeśli istnieje wiele filtrów tego *samego typu* , zakres określa domyślną kolejność wykonywania filtrowania.  Filtry globalne Otocz filtry klas. Filtry klas Otocz filtry metod.
 
 W wyniku zagnieżdżania filtrów, *po* kodzie filtrów działa w odwrotnej kolejności *przed* kodem. Sekwencja filtru:
 
@@ -761,7 +762,7 @@ Każdy kontroler, który dziedziczy z <xref:Microsoft.AspNetCore.Mvc.Controller>
 
 Na przykład, w przykładzie pobierania, `MySampleActionFilter` jest stosowana globalnie podczas uruchamiania.
 
-Pomocnik `TestController`:
+`TestController`:
 
 * Stosuje `SampleActionFilterAttribute` ( `[SampleActionFilter]` ) do `FilterTest2` akcji.
 * Przesłania `OnActionExecuting` i `OnActionExecuted` .
@@ -814,7 +815,7 @@ Potok filtru może być skrócony przez ustawienie <xref:Microsoft.AspNetCore.Mv
 
 [!code-csharp[](./filters/sample/FiltersSample/Filters/ShortCircuitingResourceFilterAttribute.cs?name=snippet)]
 
-W poniższym kodzie, zarówno, `ShortCircuitingResourceFilter` jak i jako `AddHeader` element docelowy filtru `SomeResource` metodę akcji. Pomocnik `ShortCircuitingResourceFilter`:
+W poniższym kodzie, zarówno, `ShortCircuitingResourceFilter` jak i jako `AddHeader` element docelowy filtru `SomeResource` metodę akcji. `ShortCircuitingResourceFilter`:
 
 * Uruchamiany jako pierwszy, ponieważ jest filtrem zasobów i `AddHeader` jest filtrem akcji.
 * Krótkie obwody pozostała część potoku.

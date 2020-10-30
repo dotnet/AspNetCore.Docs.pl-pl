@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/14/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/view-compilation
-ms.openlocfilehash: 3d76eff93d5c7c53b57136e5183e1ca5287dec81
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 77ca96b329136ee044ab6fc5f6b5ebb5b67fe64c
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631124"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059081"
 ---
 # <a name="no-locrazor-file-compilation-in-aspnet-core"></a>Razor kompilacja pliku w ASP.NET Core
 
@@ -62,7 +63,7 @@ dotnet new webapp --razor-runtime-compilation
 Aby włączyć kompilację środowiska uruchomieniowego dla wszystkich środowisk w istniejącym projekcie:
 
 1. Zainstaluj [pakiet Microsoft. AspNetCore. MVC. Razor . ](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation/) Pakiet NuGet RuntimeCompilation.
-1. Zaktualizuj `Startup.ConfigureServices` metodę projektu w celu dołączenia wywołania do <xref:Microsoft.Extensions.DependencyInjection.RazorRuntimeCompilationMvcBuilderExtensions.AddRazorRuntimeCompilation*> . Na przykład:
+1. Zaktualizuj `Startup.ConfigureServices` metodę projektu w celu dołączenia wywołania do <xref:Microsoft.Extensions.DependencyInjection.RazorRuntimeCompilationMvcBuilderExtensions.AddRazorRuntimeCompilation*> . Przykład:
 
     ```csharp
     public void ConfigureServices(IServiceCollection services)
@@ -84,7 +85,7 @@ Kompilacja środowiska uruchomieniowego może być włączona w taki sposób, ż
 Aby włączyć kompilację środowiska uruchomieniowego tylko w środowisku deweloperskim:
 
 1. Zainstaluj [pakiet Microsoft. AspNetCore. MVC. Razor . ](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation/) Pakiet NuGet RuntimeCompilation.
-1. Zmodyfikuj sekcję uruchamianie profilu `environmentVariables` w *launchSettings.jsna*:
+1. Zmodyfikuj sekcję uruchamianie profilu `environmentVariables` w *launchSettings.jsna* :
     * Sprawdź `ASPNETCORE_ENVIRONMENT` , czy jest ustawiona na `"Development"` .
     * Ustaw `ASPNETCORE_HOSTINGSTARTUPASSEMBLIES` wartość `"Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation"` .
 
@@ -96,7 +97,7 @@ W klasie projektu nie są wymagane żadne zmiany w kodzie `Startup` . W czasie w
 
 ## <a name="enable-runtime-compilation-for-a-no-locrazor-class-library"></a>Włącz kompilację środowiska uruchomieniowego dla Razor biblioteki klas
 
-Rozważmy scenariusz, w którym Razor Projekt strony odwołuje się do [ Razor biblioteki klas (RCL)](xref:razor-pages/ui-class) o nazwie *MyClassLib*. RCL _Layout zawiera plik *. cshtml* , który jest używany przez wszystkie projekty MVC i Razor Pages zespołu. Chcesz włączyć kompilację środowiska uruchomieniowego dla pliku *_Layout. cshtml* w tym RCL. Wprowadź następujące zmiany w Razor projekcie stron:
+Rozważmy scenariusz, w którym Razor Projekt strony odwołuje się do [ Razor biblioteki klas (RCL)](xref:razor-pages/ui-class) o nazwie *MyClassLib* . RCL _Layout zawiera plik *. cshtml* , który jest używany przez wszystkie projekty MVC i Razor Pages zespołu. Chcesz włączyć kompilację środowiska uruchomieniowego dla pliku *_Layout. cshtml* w tym RCL. Wprowadź następujące zmiany w Razor projekcie stron:
 
 1. Włącz kompilację środowiska uruchomieniowego z instrukcjami w [warunkowo Włącz kompilację środowiska uruchomieniowego w istniejącym projekcie](#conditionally-enable-runtime-compilation-in-an-existing-project).
 1. Skonfiguruj opcje kompilacji środowiska uruchomieniowego w programie `Startup.ConfigureServices` :
@@ -128,7 +129,7 @@ Aby włączyć kompilację środowiska uruchomieniowego dla wszystkich środowis
 
 1. Zainstaluj [pakiet Microsoft. AspNetCore. MVC. Razor . ](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation/) Pakiet NuGet RuntimeCompilation.
 
-1. Zaktualizuj `Startup.ConfigureServices` metodę projektu w celu dołączenia wywołania do <xref:Microsoft.Extensions.DependencyInjection.RazorRuntimeCompilationMvcBuilderExtensions.AddRazorRuntimeCompilation*> . Na przykład:
+1. Zaktualizuj `Startup.ConfigureServices` metodę projektu w celu dołączenia wywołania do <xref:Microsoft.Extensions.DependencyInjection.RazorRuntimeCompilationMvcBuilderExtensions.AddRazorRuntimeCompilation*> . Przykład:
 
     ```csharp
     public void ConfigureServices(IServiceCollection services)

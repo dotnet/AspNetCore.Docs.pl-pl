@@ -6,6 +6,7 @@ ms.author: casoper
 ms.custom: devx-track-csharp, mvc, seodec18
 ms.date: 10/24/2018
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: azure/devops/next-steps
-ms.openlocfilehash: 59c6bba7e5d05bbb6ef7db65bbedf70c4524b092
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 35b0486611cc15f25b1c8b54584c264e4c1298c9
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88625352"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93056598"
 ---
 # <a name="next-steps"></a>Następne kroki
 
@@ -44,7 +45,7 @@ Poza hostingiem sieci Web i DevOps platforma Azure oferuje szeroką gamę usług
 
 [Azure Active Directory](/azure/active-directory/) i [Azure Active Directory B2C](/azure/active-directory-b2c/) są usługami tożsamości. Azure Active Directory jest zaprojektowana dla scenariuszy korporacyjnych i umożliwia współpracę z usługą Azure AD B2B (Business-to-Business), natomiast Azure Active Directory B2C jest zamierzonymi scenariuszami biznesowymi, w tym logowaniem do sieci społecznościowej.
 
-## <a name="mobile"></a>Komórkowy
+## <a name="mobile"></a>Aplikacje mobilne
 
 [Notification Hubs](/azure/notification-hubs/) to wieloplatformowy, Skalowalny aparat powiadomień wypychanych umożliwiający szybkie wysyłanie milionów komunikatów do aplikacji działających na różnych typach urządzeń.
 

@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc, devx-track-js
 ms.date: 08/13/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - SignalR
 - Models
 uid: tutorials/first-web-api
-ms.openlocfilehash: 17f04dc9a0bdcf8ff016d83b915c017ff485cb36
-ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
+ms.openlocfilehash: fc41dd13e7d027d9630cd596162f9b5fd2ef9e2b
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/27/2020
-ms.locfileid: "92690703"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93058496"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>Samouczek: Tworzenie internetowego interfejsu API za pomocą ASP.NET Core
 
@@ -62,7 +63,7 @@ Na poniższym diagramie przedstawiono projekt aplikacji.
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs-5.0.md)]
 
@@ -78,7 +79,7 @@ Na poniższym diagramie przedstawiono projekt aplikacji.
 
 ## <a name="create-a-web-project"></a>Tworzenie projektu sieci Web
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Z menu **plik** wybierz pozycję **Nowy** > **projekt** .
 * Wybierz szablon **aplikacja sieci Web ASP.NET Core** a następnie kliknij przycisk **dalej** .
@@ -118,7 +119,7 @@ Na poniższym diagramie przedstawiono projekt aplikacji.
 
   ![Wybór szablonu interfejsu API macOS](first-web-api-mac/_static/api_template.png)
 
-* W oknie dialogowym **Konfigurowanie nowego interfejsu API sieci Web ASP.NET Core** wybierz najnowszą platformę **docelową** .NET Core 3. x. Wybierz pozycję **Dalej** .
+* W oknie dialogowym **Konfigurowanie nowego interfejsu API sieci Web ASP.NET Core** wybierz najnowszą platformę **docelową** .NET Core 3. x. Wybierz opcję **Dalej** .
 
 * Wprowadź *TodoApi* jako **nazwę projektu** , a następnie wybierz pozycję **Utwórz** .
 
@@ -139,7 +140,7 @@ Otwórz Terminal poleceń w folderze projektu i uruchom następujące polecenia:
 
 Szablon projektu tworzy `WeatherForecast` interfejs API z obsługą [struktury Swagger](xref:tutorials/web-api-help-pages-using-swagger).
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Naciśnij klawisze CTRL + F5, aby uruchomić bez debugera.
 
@@ -226,7 +227,7 @@ Ze względu na to, że program Swagger został usunięty, poprzedzający znaczni
 
 *Model* to zestaw klas, które reprezentują dane zarządzane przez aplikację. Model tej aplikacji jest pojedynczą `TodoItem` klasą.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy projekt. Wybierz pozycję **Dodaj**  >  **Nowy folder** . Nazwij folder *Models* .
 
@@ -264,7 +265,7 @@ Klasy modelu mogą przejść do dowolnego miejsca w projekcie, ale *Models* fold
 
 *Kontekst bazy danych* jest główną klasą, która koordynuje Entity Framework funkcji dla modelu danych. Ta klasa jest tworzona przez wyprowadzanie z <xref:Microsoft.EntityFrameworkCore.DbContext?displayProperty=fullName> klasy.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 ### <a name="add-nuget-packages"></a>Dodawanie pakietów NuGet
 
@@ -311,7 +312,7 @@ Powyższy kod ma następujące działanie:
 
 ## <a name="scaffold-a-controller"></a>Tworzenie szkieletu kontrolera
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Kliknij prawym przyciskiem myszy folder *controllers* .
 * Wybierz pozycję **Dodaj** > **nowy element szkieletowy** .
@@ -427,7 +428,7 @@ Zaimplementowane są dwa punkty końcowe GET:
 * `GET /api/TodoItems`
 * `GET /api/TodoItems/{id}`
 
-Przetestuj aplikację, wywołując dwa punkty końcowe z przeglądarki lub wpisu. Na przykład:
+Przetestuj aplikację, wywołując dwa punkty końcowe z przeglądarki lub wpisu. Przykład:
 
 * `https://localhost:5001/api/TodoItems`
 * `https://localhost:5001/api/TodoItems/1`
@@ -588,7 +589,7 @@ Na poniższym diagramie przedstawiono projekt aplikacji.
 
 ## <a name="prerequisites"></a>Wymagania wstępne
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs-3.1.md)]
 
@@ -604,7 +605,7 @@ Na poniższym diagramie przedstawiono projekt aplikacji.
 
 ## <a name="create-a-web-project"></a>Tworzenie projektu sieci Web
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Z menu **plik** wybierz pozycję **Nowy** > **projekt** .
 * Wybierz szablon **aplikacja sieci Web ASP.NET Core** a następnie kliknij przycisk **dalej** .
@@ -644,7 +645,7 @@ Na poniższym diagramie przedstawiono projekt aplikacji.
 
   ![Wybór szablonu interfejsu API macOS](first-web-api-mac/_static/api_template.png)
 
-* W oknie dialogowym **Konfigurowanie nowego interfejsu API sieci Web ASP.NET Core** wybierz najnowszą platformę **docelową** .NET Core 3. x. Wybierz pozycję **Dalej** .
+* W oknie dialogowym **Konfigurowanie nowego interfejsu API sieci Web ASP.NET Core** wybierz najnowszą platformę **docelową** .NET Core 3. x. Wybierz opcję **Dalej** .
 
 * Wprowadź *TodoApi* jako **nazwę projektu** , a następnie wybierz pozycję **Utwórz** .
 
@@ -665,7 +666,7 @@ Otwórz Terminal poleceń w folderze projektu i uruchom następujące polecenia:
 
 Szablon projektu tworzy `WeatherForecast` interfejs API. Wywołaj `Get` metodę z przeglądarki, aby przetestować aplikację.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Naciśnij klawisze CTRL + F5, aby uruchomić aplikację. Program Visual Studio uruchamia przeglądarkę i przechodzi do `https://localhost:<port>/WeatherForecast` lokalizacji, gdzie `<port>` jest losowo wybierany numer portu.
 
@@ -722,7 +723,7 @@ Zwracany jest kod JSON podobny do następującego:
 
 *Model* to zestaw klas, które reprezentują dane zarządzane przez aplikację. Model tej aplikacji jest pojedynczą `TodoItem` klasą.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy projekt. Wybierz pozycję **Dodaj**  >  **Nowy folder** . Nazwij folder *Models* .
 
@@ -760,7 +761,7 @@ Klasy modelu mogą przejść do dowolnego miejsca w projekcie, ale *Models* fold
 
 *Kontekst bazy danych* jest główną klasą, która koordynuje Entity Framework funkcji dla modelu danych. Ta klasa jest tworzona przez wyprowadzanie z `Microsoft.EntityFrameworkCore.DbContext` klasy.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 ### <a name="add-nuget-packages"></a>Dodawanie pakietów NuGet
 
@@ -802,7 +803,7 @@ Powyższy kod ma następujące działanie:
 
 ## <a name="scaffold-a-controller"></a>Tworzenie szkieletu kontrolera
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Kliknij prawym przyciskiem myszy folder *controllers* .
 * Wybierz pozycję **Dodaj** > **nowy element szkieletowy** .
@@ -914,7 +915,7 @@ Te metody implementują dwa punkty końcowe GET:
 * `GET /api/TodoItems`
 * `GET /api/TodoItems/{id}`
 
-Przetestuj aplikację, wywołując dwa punkty końcowe z przeglądarki lub wpisu. Na przykład:
+Przetestuj aplikację, wywołując dwa punkty końcowe z przeglądarki lub wpisu. Przykład:
 
 * `https://localhost:5001/api/TodoItems`
 * `https://localhost:5001/api/TodoItems/1`
@@ -1079,7 +1080,7 @@ Na poniższym diagramie przedstawiono projekt aplikacji.
 
 ## <a name="prerequisites-21"></a>Wymagania wstępne 2,1
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs2019-2.2.md)]
 
@@ -1095,7 +1096,7 @@ Na poniższym diagramie przedstawiono projekt aplikacji.
 
 ## <a name="create-a-web-project-21"></a>Tworzenie projektu sieci Web 2,1
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Z menu **plik** wybierz pozycję **Nowy** > **projekt** .
 * Wybierz szablon **aplikacja sieci Web ASP.NET Core** a następnie kliknij przycisk **dalej** .
@@ -1127,7 +1128,7 @@ Na poniższym diagramie przedstawiono projekt aplikacji.
 
 * W Visual Studio dla komputerów Mac starszej niż wersja 8,6 Wybierz **.NET Core** pozycję  >  **App**  >  **interfejs API** aplikacji .NET Core  >  **Next** . W wersji 8,6 lub nowszej wybierz pozycję **Web and Console**  >  **App**  >  **interfejs API**  >  **Next** aplikacji sieci Web i konsoli.
   
-* W oknie dialogowym **Konfigurowanie nowego interfejsu API sieci Web ASP.NET Core** wybierz najnowszą platformę **docelową** programu .NET Core 2. x. Wybierz pozycję **Dalej** .
+* W oknie dialogowym **Konfigurowanie nowego interfejsu API sieci Web ASP.NET Core** wybierz najnowszą platformę **docelową** programu .NET Core 2. x. Wybierz opcję **Dalej** .
 
 * Wprowadź *TodoApi* jako **nazwę projektu** , a następnie wybierz pozycję **Utwórz** .
 
@@ -1139,7 +1140,7 @@ Na poniższym diagramie przedstawiono projekt aplikacji.
 
 Szablon projektu tworzy `values` interfejs API. Wywołaj `Get` metodę z przeglądarki, aby przetestować aplikację.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Naciśnij klawisze CTRL + F5, aby uruchomić aplikację. Program Visual Studio uruchamia przeglądarkę i przechodzi do `https://localhost:<port>/api/values` lokalizacji, gdzie `<port>` jest losowo wybierany numer portu.
 
@@ -1165,7 +1166,7 @@ Zostanie zwrócony następujący kod JSON:
 
 *Model* to zestaw klas, które reprezentują dane zarządzane przez aplikację. Model tej aplikacji jest pojedynczą `TodoItem` klasą.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy projekt. Wybierz pozycję **Dodaj**  >  **Nowy folder** . Nazwij folder *Models* .
 
@@ -1203,7 +1204,7 @@ Klasy modelu mogą przejść do dowolnego miejsca w projekcie, ale *Models* fold
 
 *Kontekst bazy danych* jest główną klasą, która koordynuje Entity Framework funkcji dla modelu danych. Ta klasa jest tworzona przez wyprowadzanie z `Microsoft.EntityFrameworkCore.DbContext` klasy.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Kliknij prawym przyciskiem myszy *Models* folder i wybierz polecenie **Dodaj**  >  **klasę** . Nadaj klasie nazwę *TodoContext* i kliknij przycisk **Dodaj** .
 
@@ -1233,7 +1234,7 @@ Powyższy kod ma następujące działanie:
 
 ## <a name="add-a-controller-21"></a>Dodawanie kontrolera 2,1
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Kliknij prawym przyciskiem myszy folder *controllers* .
 * Wybierz pozycję **Dodaj** > **nowy element** .
@@ -1272,7 +1273,7 @@ Te metody implementują dwa punkty końcowe GET:
 
 Zatrzymaj aplikację, jeśli jest nadal uruchomiona. Następnie uruchom ją ponownie, aby uwzględnić najnowsze zmiany.
 
-Przetestuj aplikację, wywołując dwa punkty końcowe z przeglądarki. Na przykład:
+Przetestuj aplikację, wywołując dwa punkty końcowe z przeglądarki. Przykład:
 
 * `https://localhost:<port>/api/todo`
 * `https://localhost:<port>/api/todo/1`
@@ -1322,7 +1323,7 @@ Ten samouczek używa programu do testowania interfejsu API sieci Web.
 * Uruchom wpis.
 * Wyłącz **weryfikację certyfikatu SSL** .
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * W **File** obszarze > **Ustawienia** pliku (karta **Ogólne** ) Wyłącz **weryfikację certyfikatu SSL** .
 

@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 11/04/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/response
-ms.openlocfilehash: 9516410399ce69f1d69b09781b2530d052a11e7a
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 2864de5b9931ed255569cb087c67c71004c4df92
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631878"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059016"
 ---
 # <a name="response-caching-in-aspnet-core"></a>Buforowanie odpowiedzi w ASP.NET Core
 
@@ -38,30 +39,30 @@ W przypadku buforowania po stronie serwera, które następuje zgodnie ze specyfi
 
 ## <a name="http-based-response-caching"></a>Buforowanie odpowiedzi oparte na protokole HTTP
 
-[Specyfikacja buforowania HTTP 1,1](https://tools.ietf.org/html/rfc7234) opisuje, jak należy zachować pamięć podręczną Internetu. Podstawowy nagłówek HTTP używany do buforowania to [Cache-Control](https://tools.ietf.org/html/rfc7234#section-5.2), który jest używany do określania *dyrektyw*pamięci podręcznej. Dyrektywy kontrolują zachowanie pamięci podręcznej w miarę jak żądania skierowane do klientów na serwery i jako odpowiedzi sprawiają, że serwery są z powrotem do klientów. Żądania i odpowiedzi przechodzą przez serwery proxy, a serwery proxy muszą również być zgodne ze specyfikacją buforowania HTTP 1,1.
+[Specyfikacja buforowania HTTP 1,1](https://tools.ietf.org/html/rfc7234) opisuje, jak należy zachować pamięć podręczną Internetu. Podstawowy nagłówek HTTP używany do buforowania to [Cache-Control](https://tools.ietf.org/html/rfc7234#section-5.2), który jest używany do określania *dyrektyw* pamięci podręcznej. Dyrektywy kontrolują zachowanie pamięci podręcznej w miarę jak żądania skierowane do klientów na serwery i jako odpowiedzi sprawiają, że serwery są z powrotem do klientów. Żądania i odpowiedzi przechodzą przez serwery proxy, a serwery proxy muszą również być zgodne ze specyfikacją buforowania HTTP 1,1.
 
 Wspólne `Cache-Control` dyrektywy przedstawiono w poniższej tabeli.
 
 | Dyrektywę                                                       | Akcja |
 | --------------------------------------------------------------- | ------ |
 | [public](https://tools.ietf.org/html/rfc7234#section-5.2.2.5)   | Pamięć podręczna może przechowywać odpowiedź. |
-| [private](https://tools.ietf.org/html/rfc7234#section-5.2.2.6)  | Odpowiedź nie może być przechowywana w udostępnionej pamięci podręcznej. Prywatna pamięć podręczna może przechowywać i ponownie używać odpowiedzi. |
+| [użytek](https://tools.ietf.org/html/rfc7234#section-5.2.2.6)  | Odpowiedź nie może być przechowywana w udostępnionej pamięci podręcznej. Prywatna pamięć podręczna może przechowywać i ponownie używać odpowiedzi. |
 | [maks. wiek](https://tools.ietf.org/html/rfc7234#section-5.2.1.1)  | Klient nie akceptuje odpowiedzi, której wiek jest większy niż określona liczba sekund. Przykłady: `max-age=60` (60 sekund), `max-age=2592000` (1 miesiąc) |
-| [nie-pamięć podręczna](https://tools.ietf.org/html/rfc7234#section-5.2.1.4) | **Na**żądanie: pamięć podręczna nie może używać zapisanej odpowiedzi w celu spełnienia żądania. Serwer pierwotny ponownie generuje odpowiedź dla klienta, a oprogramowanie pośredniczące aktualizuje zapisaną odpowiedź w jej pamięci podręcznej.<br><br>**W odpowiedzi**: nie można używać odpowiedzi dla kolejnych żądań bez sprawdzania poprawności na serwerze źródłowym. |
-| [bez sklepu](https://tools.ietf.org/html/rfc7234#section-5.2.1.5) | **Żądania: pamięć**podręczna nie może przechowywać żądania.<br><br>**Odpowiedzi**: pamięć podręczna nie może przechowywać żadnej części odpowiedzi. |
+| [nie-pamięć podręczna](https://tools.ietf.org/html/rfc7234#section-5.2.1.4) | **Na** żądanie: pamięć podręczna nie może używać zapisanej odpowiedzi w celu spełnienia żądania. Serwer pierwotny ponownie generuje odpowiedź dla klienta, a oprogramowanie pośredniczące aktualizuje zapisaną odpowiedź w jej pamięci podręcznej.<br><br>**W odpowiedzi** : nie można używać odpowiedzi dla kolejnych żądań bez sprawdzania poprawności na serwerze źródłowym. |
+| [bez sklepu](https://tools.ietf.org/html/rfc7234#section-5.2.1.5) | **Żądania: pamięć** podręczna nie może przechowywać żądania.<br><br>**Odpowiedzi** : pamięć podręczna nie może przechowywać żadnej części odpowiedzi. |
 
 W poniższej tabeli przedstawiono inne nagłówki pamięci podręcznej, które odgrywają rolę w buforowanie.
 
 | Header                                                     | Funkcja |
 | ---------------------------------------------------------- | -------- |
-| [Wiek](https://tools.ietf.org/html/rfc7234#section-5.1)     | Oszacowanie czasu (w sekundach), po którym odpowiedź została wygenerowana lub pomyślnie zweryfikowana na serwerze pochodzenia. |
+| [Age](https://tools.ietf.org/html/rfc7234#section-5.1)     | Oszacowanie czasu (w sekundach), po którym odpowiedź została wygenerowana lub pomyślnie zweryfikowana na serwerze pochodzenia. |
 | [Wygasł](https://tools.ietf.org/html/rfc7234#section-5.3) | Czas, po którym odpowiedź jest uważana za przestarzałą. |
 | [Pragm](https://tools.ietf.org/html/rfc7234#section-5.4)  | Istnieje w celu zachowania zgodności z poprzednimi wersjami z pamięcią podręczną protokołu HTTP/1.0 na potrzeby ustawienia `no-cache` zachowania. Jeśli `Cache-Control` nagłówek jest obecny, `Pragma` nagłówek jest ignorowany. |
 | [Zmienia](https://tools.ietf.org/html/rfc7231#section-7.1.4)  | Określa, że nie można wysyłać buforowanej odpowiedzi, chyba że wszystkie `Vary` pola nagłówka są zgodne z oryginalnym żądaniem odpowiedzi w pamięci podręcznej i nowym żądaniu. |
 
-## <a name="http-based-caching-respects-request-cache-control-directives"></a>Buforowanie oparte na protokole HTTP uwzględnia dyrektywy kontroli pamięci podręcznej żądań
+## <a name="http-based-caching-respects-request-cache-control-directives"></a>W przypadku buforowania opartego na protokole HTTP Cache-Control dyrektywy
 
-[Specyfikacja buforowania HTTP 1,1 dla nagłówka Cache-Control](https://tools.ietf.org/html/rfc7234#section-5.2) wymaga, aby pamięć podręczna zatraktował prawidłowy `Cache-Control` nagłówek Wysłany przez klienta. Klient może wykonywać żądania z `no-cache` wartością nagłówka i wymusić, aby serwer generował nową odpowiedź dla każdego żądania.
+[Specyfikacja buforowania HTTP 1,1 dla nagłówka Cache-Control](https://tools.ietf.org/html/rfc7234#section-5.2) wymaga pamięci podręcznej, aby honorować prawidłowy `Cache-Control` nagłówek Wysłany przez klienta. Klient może wykonywać żądania z `no-cache` wartością nagłówka i wymusić, aby serwer generował nową odpowiedź dla każdego żądania.
 
 Zawsze `Cache-Control` , gdy nagłówki żądań klientów są brane pod uwagę, Jeśli rozważasz cel buforowania http. Zgodnie z oficjalną specyfikacją buforowanie jest przeznaczone do zmniejszenia opóźnień i obciążenia sieci w celu zaspokojenia żądań w sieci klientów, serwerów proxy i serwerów. Nie musi to być sposób sterowania obciążeniem na serwerze źródłowym.
 
@@ -71,7 +72,7 @@ Nie ma kontroli nad tym zachowaniem buforowania podczas korzystania z [oprogramo
 
 ### <a name="in-memory-caching"></a>Buforowanie w pamięci
 
-Buforowanie w pamięci używa pamięci serwera do przechowywania buforowanych danych. Ten typ buforowania jest odpowiedni dla jednego serwera lub wielu serwerów używających *sesji programu Sticky Notes*. Sesje programu Sticky Notes oznaczają, że żądania od klienta są zawsze kierowane do tego samego serwera w celu przetworzenia.
+Buforowanie w pamięci używa pamięci serwera do przechowywania buforowanych danych. Ten typ buforowania jest odpowiedni dla jednego serwera lub wielu serwerów używających *sesji programu Sticky Notes* . Sesje programu Sticky Notes oznaczają, że żądania od klienta są zawsze kierowane do tego samego serwera w celu przetworzenia.
 
 Aby uzyskać więcej informacji, zobacz <xref:performance/caching/memory>.
 

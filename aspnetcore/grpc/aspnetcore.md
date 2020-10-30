@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 09/03/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/aspnetcore
-ms.openlocfilehash: 11237c93832e095abb03d761773d213dfa336052
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: b120aa4ab6922445f2c53f3b1cb3bd5c159d8a84
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633893"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93057833"
 ---
 # <a name="grpc-services-with-aspnet-core"></a>Usługi gRPC na platformie ASP.NET Core
 
@@ -66,7 +67,7 @@ gRPC wymaga pakietu [gRPC. AspNetCore](https://www.nuget.org/packages/Grpc.AspNe
 
 ### <a name="configure-grpc"></a>Konfigurowanie gRPC
 
-W *Startup.cs*:
+W *Startup.cs* :
 
 * gRPC jest włączona z `AddGrpc` metodą.
 * Każda usługa gRPC jest dodawana do potoku routingu za pomocą `MapGrpcService` metody.
@@ -93,11 +94,11 @@ Kestrel [obsługuje protokół HTTP/2](xref:fundamentals/servers/kestrel#http2-s
 
 Punkty końcowe Kestrel używane dla gRPC powinny być zabezpieczone przy użyciu protokołu TLS. W trakcie opracowywania, punkt końcowy zabezpieczony przy użyciu protokołu TLS jest automatycznie tworzony na `https://localhost:5001` czas, gdy obecny jest ASP.NET Core certyfikat deweloperski. Nie jest wymagana żadna konfiguracja. `https`Prefiks sprawdza, czy punkt końcowy Kestrel korzysta z protokołu TLS.
 
-W środowisku produkcyjnym należy jawnie skonfigurować protokół TLS. W poniższym *appsettings.jsna* przykład jest dostępny punkt końcowy HTTP/2 zabezpieczony przy użyciu protokołu TLS:
+W środowisku produkcyjnym należy jawnie skonfigurować protokół TLS. W poniższym *appsettings.json* przykładzie jest dostępny punkt końcowy HTTP/2 zabezpieczony przy użyciu protokołu TLS:
 
 [!code-json[](~/grpc/aspnetcore/sample/appsettings.json?highlight=4)]
 
-Alternatywnie można skonfigurować punkty końcowe Kestrel w *program.cs*:
+Alternatywnie można skonfigurować punkty końcowe Kestrel w *program.cs* :
 
 [!code-csharp[](~/grpc/aspnetcore/sample/Program.cs?highlight=7&name=snippet)]
 

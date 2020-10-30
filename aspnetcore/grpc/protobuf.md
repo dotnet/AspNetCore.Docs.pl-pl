@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 08/23/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/protobuf
-ms.openlocfilehash: ea46e04bc4aa6269efbf8917d5f32194402a66ef
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: b70a5ee00405eecfce900b86dc631a54682dce1a
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722699"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93058899"
 ---
 # <a name="create-protobuf-messages-for-net-apps"></a>Tworzenie komunikatów protobuf dla aplikacji platformy .NET
 
@@ -95,7 +96,7 @@ Natywne typy skalarne nie zapewniają wartości daty i godziny, równoważne z. 
 
 W poniższej tabeli przedstawiono typy daty i godziny:
 
-| Typ .NET        | Nieznany typ protobuf    |
+| Typ .NET        | Typ Well-Known protobuf    |
 | ---------------- | --------------------------- |
 | `DateTimeOffset` | `google.protobuf.Timestamp` |
 | `DateTime`       | `google.protobuf.Timestamp` |
@@ -136,7 +137,7 @@ var duration = meeting.Duration?.ToTimeSpan();
 
 Generowanie kodu protobuf dla języka C# używa typów natywnych, takich jak `int` for `int32` . Dlatego wartości są zawsze uwzględniane i nie mogą być `null` .
 
-W przypadku wartości, które wymagają jawności, na przykład `null` używania `int?` w kodzie C#, dobrze znane typy protobuf obejmują otoki, które są kompilowane do typów dopuszczających wartość null. Aby ich użyć, zaimportuj `wrappers.proto` do `.proto` pliku, tak jak w poniższym kodzie:
+Dla wartości, które wymagają jawności `null` , takich jak użycie `int?` w kodzie C#, typy Well-Known protobuf obejmują otoki, które są kompilowane do typów dopuszczających wartość null. Aby ich użyć, zaimportuj `wrappers.proto` do `.proto` pliku, tak jak w poniższym kodzie:
 
 ```protobuf  
 syntax = "proto3"
@@ -153,7 +154,7 @@ message Person {
 
 W poniższej tabeli przedstawiono pełną listę typów otoki z równoważnym typem języka C#:
 
-| Typ C#      | Otoka dobrze znanego typu       |
+| Typ C#      | Otoka typu Well-Known       |
 | ------------ | ----------------------------- |
 | `bool?`      | `google.protobuf.BoolValue`   |
 | `double?`    | `google.protobuf.DoubleValue` |
@@ -188,7 +189,7 @@ await File.WriteAllBytesAsync(path, payload.Data.ToByteArray());
 
 ### <a name="decimals"></a>Miejsca dziesiętne
 
-Protobuf nie obsługuje natywnie typu .NET `decimal` , tylko `double` i `float` . W projekcie protobuf istnieje trwająca dyskusja dotycząca możliwości dodawania standardowego typu dziesiętnego do dobrze znanych typów, z obsługą platformy dla języków i struktur, które je obsługują. Nic nie zostało jeszcze zaimplementowane.
+Protobuf nie obsługuje natywnie typu .NET `decimal` , tylko `double` i `float` . W projekcie protobuf istnieje trwająca dyskusja dotycząca możliwości dodawania standardowego typu dziesiętnego do typów Well-Known, z obsługą platformy dla języków i struktur, które je obsługują. Nic nie zostało jeszcze zaimplementowane.
 
 Istnieje możliwość utworzenia definicji komunikatu reprezentującej `decimal` Typ, który działa w celu bezpiecznej serializacji między klientami i serwerami platformy .NET. Jednak deweloperzy na innych platformach będą musieli zrozumieć używany format i zaimplementować ich własny sposób obsługi.
 
@@ -388,7 +389,7 @@ switch (response.ResultCase)
 
 ### <a name="value"></a>Wartość
 
-`Value`Typ reprezentuje wartość wpisaną dynamicznie. Może to być albo `null` Liczba, ciąg, wartość logiczna, słownik wartości ( `Struct` ) lub lista wartości ( `ValueList` ). `Value` jest dobrze znanym typem protobuf, który korzysta z wcześniej omówionej `oneof` funkcji. Aby użyć `Value` typu, zaimportuj `struct.proto` .
+`Value`Typ reprezentuje wartość wpisaną dynamicznie. Może to być albo `null` Liczba, ciąg, wartość logiczna, słownik wartości ( `Struct` ) lub lista wartości ( `ValueList` ). `Value` to protobuf Well-Known typ, który korzysta z wcześniej omówionej `oneof` funkcji. Aby użyć `Value` typu, zaimportuj `struct.proto` .
 
 ```protobuf
 import "google/protobuf/struct.proto";
@@ -444,7 +445,7 @@ var json = JsonFormatter.Default.Format(status.Metadata);
 var document = JsonDocument.Parse(json);
 ```
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Przewodnik po języku protobuf](https://developers.google.com/protocol-buffers/docs/proto3#simple)
 * <xref:grpc/versioning>

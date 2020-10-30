@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/18/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/advanced-scenarios
-ms.openlocfilehash: 295e5dd025afc486be08ecadbf661bf765c2745f
-ms.sourcegitcommit: ecae2aa432628b9181d1fa11037c231c7dd56c9e
+ms.openlocfilehash: 95714b3c0d21d3b348a9a8a984e2a42e7708499e
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/16/2020
-ms.locfileid: "92113611"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93056559"
 ---
 # <a name="aspnet-core-no-locblazor-advanced-scenarios"></a>BlazorZaawansowane scenariusze ASP.NET Core
 
@@ -31,7 +32,7 @@ Autorzy [Luke Latham](https://github.com/guardrex) i [Daniel Roth](https://githu
 
 ## <a name="no-locblazor-server-circuit-handler"></a>Blazor Server Procedura obsługi obwodu
 
-Blazor Server umożliwia kodowi Definiowanie *procedury obsługi obwodu*, która umożliwia uruchamianie kodu na zmiany stanu obwodu użytkownika. Procedura obsługi obwodu jest implementowana przez wyprowadzanie z `CircuitHandler` i rejestrowanie klasy w kontenerze usługi aplikacji. Poniższy przykład obsługi obwodu śledzi otwarte SignalR połączenia:
+Blazor Server umożliwia kodowi Definiowanie *procedury obsługi obwodu* , która umożliwia uruchamianie kodu na zmiany stanu obwodu użytkownika. Procedura obsługi obwodu jest implementowana przez wyprowadzanie z `CircuitHandler` i rejestrowanie klasy w kontenerze usługi aplikacji. Poniższy przykład obsługi obwodu śledzi otwarte SignalR połączenia:
 
 ```csharp
 using System.Collections.Generic;
@@ -140,7 +141,7 @@ W poniższym przykładzie pętla w `CreateComponent` metodzie generuje trzy `Pet
 
 Razor Pliki składników ( `.razor` ) są zawsze kompilowane. Kompilacja jest potencjalną możliwością przekroczenia interpretacji kodu, ponieważ krok kompilacji może służyć do iniekcji informacji, które zwiększają wydajność aplikacji w czasie wykonywania.
 
-Najważniejszym przykładem tych ulepszeń są *numery sekwencji*. Numery sekwencji wskazują na środowisko uruchomieniowe, które pochodzą z różnych i uporządkowanych wierszy kodu. Środowisko uruchomieniowe używa tych informacji do generowania wydajnych różnic drzewa w czasie liniowym, które są znacznie szybsze niż zwykle jest to możliwe dla algorytmu różnicowego drzewa ogólnego.
+Najważniejszym przykładem tych ulepszeń są *numery sekwencji* . Numery sekwencji wskazują na środowisko uruchomieniowe, które pochodzą z różnych i uporządkowanych wierszy kodu. Środowisko uruchomieniowe używa tych informacji do generowania wydajnych różnic drzewa w czasie liniowym, które są znacznie szybsze niż zwykle jest to możliwe dla algorytmu różnicowego drzewa ogólnego.
 
 Weź pod uwagę następujący Razor plik składnika ( `.razor` ):
 
@@ -177,7 +178,7 @@ Wyobraź sobie `someFlag` , że zostanie ona `false` przerenderowana, a znacznik
 | :------: | ---------- | :----: |
 | 1        | Węzeł tekstu  | Second |
 
-Gdy środowisko uruchomieniowe wykonuje porównanie, zobaczy, że element w sekwencji `0` został usunięty, więc generuje następujący *skrypt*uproszczonej edycji:
+Gdy środowisko uruchomieniowe wykonuje porównanie, zobaczy, że element w sekwencji `0` został usunięty, więc generuje następujący *skrypt* uproszczonej edycji:
 
 * Usuń pierwszy węzeł tekstu.
 

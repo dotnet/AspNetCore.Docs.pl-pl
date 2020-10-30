@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/1/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/websockets
-ms.openlocfilehash: 11cd1c266516c696859c4116c940400e90d09ab4
-ms.sourcegitcommit: c06a5bf419541d17595af30e4cf6f2787c21855e
+ms.openlocfilehash: 83a41d503b2d56bca3f1bac14eeb9d54a8257642
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/27/2020
-ms.locfileid: "92678539"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93057781"
 ---
 # <a name="websockets-support-in-aspnet-core"></a>Obsługa obiektów WebSockets w ASP.NET Core
 
@@ -158,10 +159,10 @@ Aby włączyć obsługę protokołu WebSocket w systemie Windows Server 2012 lub
 > Te kroki nie są wymagane w przypadku korzystania z IIS Express
 
 1. Użyj kreatora **dodawania ról i funkcji** z menu **Zarządzaj** lub łącza w **Menedżer serwera** .
-1. Wybierz opcję **Instalacja oparta na rolach lub oparta na funkcjach** . Wybierz pozycję **Dalej** .
-1. Wybierz odpowiedni serwer (serwer lokalny jest domyślnie wybrany). Wybierz pozycję **Dalej** .
+1. Wybierz opcję **Instalacja oparta na rolach lub oparta na funkcjach** . Wybierz opcję **Dalej** .
+1. Wybierz odpowiedni serwer (serwer lokalny jest domyślnie wybrany). Wybierz opcję **Dalej** .
 1. Rozwiń węzeł **serwer sieci Web (IIS)** w drzewie **role** , rozwiń węzeł **serwer sieci Web** , a następnie rozwiń węzeł **Programowanie aplikacji** .
-1. Wybierz pozycję **Protokół WebSocket** . Wybierz pozycję **Dalej** .
+1. Wybierz pozycję **Protokół WebSocket** . Wybierz opcję **Dalej** .
 1. Jeśli nie są potrzebne dodatkowe funkcje, wybierz pozycję **dalej** .
 1. Wybierz pozycję **Zainstaluj** .
 1. Po zakończeniu instalacji wybierz pozycję **Zamknij** , aby zakończyć pracę kreatora.
@@ -173,7 +174,7 @@ Aby włączyć obsługę protokołu WebSocket w systemie Windows 8 lub nowszym:
 
 1. Przejdź do pozycji **Panel sterowania**  >  **programy**  >  **programy i funkcje**  >  **Włącz lub wyłącz funkcje systemu Windows** (po lewej stronie ekranu).
 1. Otwórz następujące węzły: **Internet Information Services**  >  **World Wide Web Services**  >  **Application Development Features** .
-1. Wybierz funkcję **protokołu WebSocket** . Wybierz przycisk **OK** .
+1. Wybierz funkcję **protokołu WebSocket** . Wybierz pozycję **OK** .
 
 ### <a name="disable-websocket-when-using-socketio-on-nodejs"></a>Wyłącz protokół WebSocket przy użyciu socket.io na Node.js
 

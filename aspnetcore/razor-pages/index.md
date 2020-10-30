@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-2.0'
 ms.author: riande
 ms.date: 02/12/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/index
-ms.openlocfilehash: 8058cc3c3461d72c713c8be53c3667112adb2ae5
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: ff045b24c351c696566dee6046fc4b76f8f88e1a
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634127"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059146"
 ---
 # <a name="introduction-to-no-locrazor-pages-in-aspnet-core"></a>Wprowadzenie do Razor stron w ASP.NET Core
 
@@ -72,7 +73,7 @@ Aby uzyskać szczegółowe instrukcje dotyczące tworzenia projektu stron, zobac
 
 ## <a name="no-locrazor-pages"></a>Razor Page
 
-Razor Strony są włączone w *Startup.cs*:
+Razor Strony są włączone w *Startup.cs* :
 
 [!code-csharp[](index/3.0sample/RazorPagesIntro/Startup.cs?name=snippet_Startup&highlight=12,36)]
 
@@ -90,7 +91,7 @@ Model strony *stron/index2. cshtml. cs* :
 
 [!code-csharp[](index/3.0sample/RazorPagesIntro/Pages/Index2.cshtml.cs)]
 
-Zgodnie z Konwencją `PageModel` plik klasy ma taką samą nazwę jak Razor plik stronicowania dołączony do *. cs* . Na przykład Poprzednia Razor strona to *Pages/index2. cshtml*. Plik zawierający `PageModel` klasę ma nazwę *Pages/index2. cshtml. cs*.
+Zgodnie z Konwencją `PageModel` plik klasy ma taką samą nazwę jak Razor plik stronicowania dołączony do *. cs* . Na przykład Poprzednia Razor strona to *Pages/index2. cshtml* . Plik zawierający `PageModel` klasę ma nazwę *Pages/index2. cshtml. cs* .
 
 Skojarzenia ścieżek adresów URL ze stronami są określane przez lokalizację strony w systemie plików. W poniższej tabeli przedstawiono Razor ścieżkę strony i pasujący adres URL:
 
@@ -137,9 +138,9 @@ Zgodnie z Konwencją `PageModel` Klasa jest wywoływana `<PageName>Model` i znaj
 `PageModel`Klasa umożliwia rozdzielenie logiki strony od jej prezentacji. Definiuje procedury obsługi stron dla żądań wysyłanych do strony oraz dane używane do renderowania strony. Ta separacja umożliwia:
 
 * Zarządzanie zależnościami stron przy użyciu [iniekcji zależności](xref:fundamentals/dependency-injection).
-* [Testy jednostkowe](xref:test/razor-pages-tests)
+* [Testowanie jednostek](xref:test/razor-pages-tests)
 
-Strona ma `OnPostAsync` *metodę obsługi*, która jest uruchamiana na `POST` żądaniach (gdy użytkownik księguje formularz). Można dodać metody obsługi dla dowolnego zlecenia HTTP. Najczęstsze procedury obsługi to:
+Strona ma `OnPostAsync` *metodę obsługi* , która jest uruchamiana na `POST` żądaniach (gdy użytkownik księguje formularz). Można dodać metody obsługi dla dowolnego zlecenia HTTP. Najczęstsze procedury obsługi to:
 
 * `OnGet` — na potrzeby inicjowania stanu wymaganego dla strony. W poprzednim kodzie `OnGet` Metoda wyświetla stronę *onmode. cshtml* Razor .
 * `OnPost` — na potrzeby obsługi przesłanych formularzy.
@@ -166,7 +167,7 @@ Plik widoku *Pages/Create. cshtml* :
 
 [!code-cshtml[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create.cshtml)]
 
-Renderowany kod HTML ze *stron/Create. cshtml*:
+Renderowany kod HTML ze *stron/Create. cshtml* :
 
 [!code-html[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create4.html)]
 
@@ -215,7 +216,7 @@ Przeglądanie pliku widoku *stron/Create. cshtml* :
 
 [!code-cshtml[](index/3.0sample/RazorPagesContacts/Pages/Customers/Index.cshtml)]
 
-Skojarzona `PageModel` Klasa (*index.cshtml.cs*):
+Skojarzona `PageModel` Klasa ( *index.cshtml.cs* ):
 
 [!code-csharp[](index/3.0sample/RazorPagesContacts/Pages/Customers/Index.cshtml.cs?name=snippet)]
 
@@ -353,11 +354,11 @@ Razor Strony są chronione przez [weryfikację przed fałszerstwem](xref:securit
 
 ## <a name="using-layouts-partials-templates-and-tag-helpers-with-no-locrazor-pages"></a>Używanie układów, częściowych, szablonów i pomocników tagów ze Razor stronami
 
-Strony współpracują ze wszystkimi możliwościami Razor aparatu widoku. Układy, częściowe, szablony, pomocniki tagów, *_ViewStart. cshtml*i *_ViewImports. cshtml* działają w taki sam sposób, jak w przypadku widoków konwencjonalnych Razor .
+Strony współpracują ze wszystkimi możliwościami Razor aparatu widoku. Układy, częściowe, szablony, pomocniki tagów, *_ViewStart. cshtml* i *_ViewImports. cshtml* działają w taki sam sposób, jak w przypadku widoków konwencjonalnych Razor .
 
 Zanotujmy Tę stronę, korzystając z zalet niektórych z tych funkcji.
 
-Dodaj [stronę układu](xref:mvc/views/layout) do *stron/Shared/_Layout. cshtml*:
+Dodaj [stronę układu](xref:mvc/views/layout) do *stron/Shared/_Layout. cshtml* :
 
 [!code-cshtml[](index/3.0sample/RazorPagesContacts/Pages/Shared/_Layout2.cshtml?hightlight=12)]
 
@@ -369,7 +370,7 @@ Dodaj [stronę układu](xref:mvc/views/layout) do *stron/Shared/_Layout. cshtml*
 
 Aby uzyskać więcej informacji, zobacz [stronę układu](xref:mvc/views/layout).
 
-Właściwość [układu](xref:mvc/views/layout#specifying-a-layout) jest ustawiana na *stronie/_ViewStart. cshtml*:
+Właściwość [układu](xref:mvc/views/layout#specifying-a-layout) jest ustawiana na *stronie/_ViewStart. cshtml* :
 
 [!code-cshtml[](index/sample/RazorPagesContacts2/Pages/_ViewStart.cshtml)]
 
@@ -379,7 +380,7 @@ Plik układu powinien przejść do *stron/folderu udostępnionego* .
 
 Zalecamy **umieszczenie pliku** układu w *widokach/folderze udostępnionym* . *Widoki/udostępnione* są wzorcem widoków MVC. Razor Strony są przeznaczone do korzystania z hierarchii folderów, a nie Konwencji ścieżek.
 
-Widok wyszukiwania na Razor stronie zawiera folder *strony* . Układy, szablony i częściowe używane razem z kontrolerami MVC i konwencjonalnymi Razor widokami *działają tylko*.
+Widok wyszukiwania na Razor stronie zawiera folder *strony* . Układy, szablony i częściowe używane razem z kontrolerami MVC i konwencjonalnymi Razor widokami *działają tylko* .
 
 Dodaj plik *Pages/_ViewImports. cshtml* :
 
@@ -395,7 +396,7 @@ Dodaj plik *Pages/_ViewImports. cshtml* :
 
 `@namespace`Dyrektywa ustawia przestrzeń nazw dla strony. `@model`Dyrektywa nie musi zawierać przestrzeni nazw.
 
-Gdy `@namespace` dyrektywa jest zawarta w *_ViewImports. cshtml*, określona przestrzeń nazw udostępnia prefiks dla wygenerowanej przestrzeni nazw na stronie, która importuje `@namespace` dyrektywę. Pozostała część wygenerowanej przestrzeni nazw (część sufiksu) jest ścieżką względną oddzieloną kropką między folderem zawierającym *_ViewImports. cshtml* i folderem zawierającym stronę.
+Gdy `@namespace` dyrektywa jest zawarta w *_ViewImports. cshtml* , określona przestrzeń nazw udostępnia prefiks dla wygenerowanej przestrzeni nazw na stronie, która importuje `@namespace` dyrektywę. Pozostała część wygenerowanej przestrzeni nazw (część sufiksu) jest ścieżką względną oddzieloną kropką między folderem zawierającym *_ViewImports. cshtml* i folderem zawierającym stronę.
 
 Na przykład `PageModel` Klasa *Pages/Customers/Edit. cshtml. cs* jawnie ustawia przestrzeń nazw:
 
@@ -419,7 +420,7 @@ Zaktualizowane *strony/Create. cshtml* plik widoku z *_ViewImports. cshtml* i po
 
 W poprzednim kodzie, *_ViewImports. cshtml* zaimportował przestrzeń nazw i pomocników tagów. Plik układu zaimportował pliki JavaScript.
 
-Na stronie [ Razor startowej projektu](#rpvs17) znajdują się *strony/_ValidationScriptsPartial. cshtml*, które przechwytuje walidację po stronie klienta.
+Na stronie [ Razor startowej projektu](#rpvs17) znajdują się *strony/_ValidationScriptsPartial. cshtml* , które przechwytuje walidację po stronie klienta.
 
 Aby uzyskać więcej informacji o widokach częściowych, zobacz <xref:mvc/views/partial> .
 
@@ -443,13 +444,13 @@ Aplikacja ma następującą strukturę plików/folderów:
     * *Edytuj. cshtml*
     * *Index. cshtml*
 
-Strony */Customers/Create. cshtml* i *Pages/Customers/Edit. cshtml* przekierowywać do *stron/Customers/index. cshtml* po powodzeniu. Ciąg `./Index` jest względną nazwą strony używaną w celu uzyskania dostępu do poprzedniej strony. Służy do generowania adresów URL na stronie *strony/klienci/index. cshtml* . Na przykład:
+Strony */Customers/Create. cshtml* i *Pages/Customers/Edit. cshtml* przekierowywać do *stron/Customers/index. cshtml* po powodzeniu. Ciąg `./Index` jest względną nazwą strony używaną w celu uzyskania dostępu do poprzedniej strony. Służy do generowania adresów URL na stronie *strony/klienci/index. cshtml* . Przykład:
 
 * `Url.Page("./Index", ...)`
 * `<a asp-page="./Index">Customers Index Page</a>`
 * `RedirectToPage("./Index")`
 
-Bezwzględna nazwa strony `/Index` służy do generowania adresów URL na stronie *stron/index. cshtml* . Na przykład:
+Bezwzględna nazwa strony `/Index` służy do generowania adresów URL na stronie *stron/index. cshtml* . Przykład:
 
 * `Url.Page("/Index", ...)`
 * `<a asp-page="/Index">Home Index Page</a>`
@@ -457,7 +458,7 @@ Bezwzględna nazwa strony `/Index` służy do generowania adresów URL na stroni
 
 Nazwa strony jest ścieżką do strony z folderu głównego */Pages* , włącznie z wiodącym `/` (na przykład `/Index` ). Powyższe przykłady generowania adresów URL oferują udoskonalone Opcje i możliwości funkcjonalne w porównaniu z zakodowanym adresem URL. Generowanie adresów URL używa [routingu](xref:mvc/controllers/routing) i może generować i kodować parametry zgodnie ze sposobem zdefiniowania trasy w ścieżce docelowej.
 
-Generowanie adresów URL dla stron obsługuje nazwy względne. W poniższej tabeli przedstawiono, która strona indeksu została wybrana przy użyciu różnych `RedirectToPage` parametrów na stronie */Customers/Create. cshtml*.
+Generowanie adresów URL dla stron obsługuje nazwy względne. W poniższej tabeli przedstawiono, która strona indeksu została wybrana przy użyciu różnych `RedirectToPage` parametrów na stronie */Customers/Create. cshtml* .
 
 | RedirectToPage (x)| Strona |
 | ----------------- | ------------ |
@@ -468,7 +469,7 @@ Generowanie adresów URL dla stron obsługuje nazwy względne. W poniższej tabe
 
 <!-- Test via ~/razor-pages/index/3.0sample/RazorPagesContacts/Pages/Customers/Details.cshtml.cs -->
 
-`RedirectToPage("Index")`, `RedirectToPage("./Index")` , i `RedirectToPage("../Index")` są *nazwami względnymi*. `RedirectToPage`Parametr jest *połączony* ze ścieżką bieżącej strony, aby obliczyć nazwę strony docelowej.
+`RedirectToPage("Index")`, `RedirectToPage("./Index")` , i `RedirectToPage("../Index")` są *nazwami względnymi* . `RedirectToPage`Parametr jest *połączony* ze ścieżką bieżącej strony, aby obliczyć nazwę strony docelowej.
 
 Łączenie nazw względnych jest przydatne podczas kompilowania lokacji ze złożoną strukturą. Gdy nazwy względne są używane do łączenia między stronami w folderze:
 
@@ -554,7 +555,7 @@ Model strony:
 
 [!code-csharp[](index/sample/RazorPagesContacts2/Pages/Customers/CreateFATH.cshtml.cs?highlight=20,32)]
 
-Poprzedni kod używa *nazwanych metod obsługi*. Nazwane metody obsługi są tworzone przez pobranie tekstu w nazwie po `On<HTTP Verb>` i przed `Async` (jeśli istnieje). W poprzednim przykładzie metody strony są onpost**JoinList**Async i Onpost**JoinListUC**Async. Po usunięciu funkcji *onpost* i *Async* nazwy programów obsługi są `JoinList` i `JoinListUC` .
+Poprzedni kod używa *nazwanych metod obsługi* . Nazwane metody obsługi są tworzone przez pobranie tekstu w nazwie po `On<HTTP Verb>` i przed `Async` (jeśli istnieje). W poprzednim przykładzie metody strony są onpost **JoinList** Async i Onpost **JoinListUC** Async. Po usunięciu funkcji *onpost* i *Async* nazwy programów obsługi są `JoinList` i `JoinListUC` .
 
 [!code-cshtml[](index/sample/RazorPagesContacts2/Pages/Customers/CreateFATH.cshtml?range=12-13)]
 
@@ -667,7 +668,7 @@ Uruchom `dotnet new webapp` polecenie w wierszu polecenia.
 
 ## <a name="no-locrazor-pages"></a>Razor Page
 
-Razor Strony są włączone w *Startup.cs*:
+Razor Strony są włączone w *Startup.cs* :
 
 [!code-csharp[](index/sample/RazorPagesIntro/Startup.cs?name=snippet_Startup)]
 
@@ -685,7 +686,7 @@ Model strony *stron/index2. cshtml. cs* :
 
 [!code-csharp[](index/sample/RazorPagesIntro/Pages/Index2.cshtml.cs)]
 
-Zgodnie z Konwencją `PageModel` plik klasy ma taką samą nazwę jak Razor plik stronicowania dołączony do *. cs* . Na przykład Poprzednia Razor strona to *Pages/index2. cshtml*. Plik zawierający `PageModel` klasę ma nazwę *Pages/index2. cshtml. cs*.
+Zgodnie z Konwencją `PageModel` plik klasy ma taką samą nazwę jak Razor plik stronicowania dołączony do *. cs* . Na przykład Poprzednia Razor strona to *Pages/index2. cshtml* . Plik zawierający `PageModel` klasę ma nazwę *Pages/index2. cshtml. cs* .
 
 Skojarzenia ścieżek adresów URL ze stronami są określane przez lokalizację strony w systemie plików. W poniższej tabeli przedstawiono Razor ścieżkę strony i pasujący adres URL:
 
@@ -732,7 +733,7 @@ Zgodnie z Konwencją `PageModel` Klasa jest wywoływana `<PageName>Model` i znaj
 * Zarządzanie zależnościami stron przy użyciu [iniekcji zależności](xref:fundamentals/dependency-injection).
 * [Testowanie jednostkowe](xref:test/razor-pages-tests) stron.
 
-Strona ma `OnPostAsync` *metodę obsługi*, która jest uruchamiana na `POST` żądaniach (gdy użytkownik księguje formularz). Metody procedury obsługi można dodać dla dowolnego czasownika HTTP. Najczęstsze procedury obsługi to:
+Strona ma `OnPostAsync` *metodę obsługi* , która jest uruchamiana na `POST` żądaniach (gdy użytkownik księguje formularz). Metody procedury obsługi można dodać dla dowolnego czasownika HTTP. Najczęstsze procedury obsługi to:
 
 * `OnGet` — na potrzeby inicjowania stanu wymaganego dla strony. Przykład [OnGet](#OnGet) .
 * `OnPost` — na potrzeby obsługi przesłanych formularzy.
@@ -767,11 +768,11 @@ Razor Domyślnie strony powiążą właściwości tylko z `GET` niezleceniami. U
 
 [!INCLUDE[](~/includes/bind-get.md)]
 
-Strona główna (*index. cshtml*):
+Strona główna ( *index. cshtml* ):
 
 [!code-cshtml[](index/sample/RazorPagesContacts/Pages/Index.cshtml)]
 
-Skojarzona `PageModel` Klasa (*index.cshtml.cs*):
+Skojarzona `PageModel` Klasa ( *index.cshtml.cs* ):
 
 [!code-csharp[](index/sample/RazorPagesContacts/Pages/Index.cshtml.cs)]
 
@@ -873,11 +874,11 @@ Nie trzeba pisać kodu do [weryfikacji przed fałszerstwem](xref:security/anti-r
 
 ## <a name="using-layouts-partials-templates-and-tag-helpers-with-no-locrazor-pages"></a>Używanie układów, częściowych, szablonów i pomocników tagów ze Razor stronami
 
-Strony współpracują ze wszystkimi możliwościami Razor aparatu widoku. Układy, częściowe, szablony, pomocniki tagów, *_ViewStart. cshtml*, *_ViewImports. cshtml* działają w taki sam sposób, jak w przypadku Razor widoków konwencjonalnych.
+Strony współpracują ze wszystkimi możliwościami Razor aparatu widoku. Układy, częściowe, szablony, pomocniki tagów, *_ViewStart. cshtml* , *_ViewImports. cshtml* działają w taki sam sposób, jak w przypadku Razor widoków konwencjonalnych.
 
 Zanotujmy Tę stronę, korzystając z zalet niektórych z tych funkcji.
 
-Dodaj [stronę układu](xref:mvc/views/layout) do *stron/Shared/_Layout. cshtml*:
+Dodaj [stronę układu](xref:mvc/views/layout) do *stron/Shared/_Layout. cshtml* :
 
 [!code-cshtml[](index/sample/RazorPagesContacts2/Pages/_LayoutSimple.cshtml)]
 
@@ -888,7 +889,7 @@ Dodaj [stronę układu](xref:mvc/views/layout) do *stron/Shared/_Layout. cshtml*
 
 Aby uzyskać więcej informacji, zobacz [stronę układu](xref:mvc/views/layout) .
 
-Właściwość [układu](xref:mvc/views/layout#specifying-a-layout) jest ustawiana na *stronie/_ViewStart. cshtml*:
+Właściwość [układu](xref:mvc/views/layout#specifying-a-layout) jest ustawiana na *stronie/_ViewStart. cshtml* :
 
 [!code-cshtml[](index/sample/RazorPagesContacts2/Pages/_ViewStart.cshtml)]
 
@@ -898,7 +899,7 @@ Plik układu powinien przejść do *stron/folderu udostępnionego* .
 
 Zalecamy **umieszczenie pliku** układu w *widokach/folderze udostępnionym* . *Widoki/udostępnione* są wzorcem widoków MVC. Razor Strony są przeznaczone do korzystania z hierarchii folderów, a nie Konwencji ścieżek.
 
-Widok wyszukiwania na Razor stronie zawiera folder *strony* . Układy, szablony i częściowe, które są używane z kontrolerami MVC i konwencjonalnymi Razor widokami *działają tylko*.
+Widok wyszukiwania na Razor stronie zawiera folder *strony* . Układy, szablony i częściowe, które są używane z kontrolerami MVC i konwencjonalnymi Razor widokami *działają tylko* .
 
 Dodaj plik *Pages/_ViewImports. cshtml* :
 
@@ -914,7 +915,7 @@ Gdy `@namespace` dyrektywa jest używana jawnie na stronie:
 
 Dyrektywa ustawia przestrzeń nazw dla strony. `@model`Dyrektywa nie musi zawierać przestrzeni nazw.
 
-Gdy `@namespace` dyrektywa jest zawarta w *_ViewImports. cshtml*, określona przestrzeń nazw udostępnia prefiks dla wygenerowanej przestrzeni nazw na stronie, która importuje `@namespace` dyrektywę. Pozostała część wygenerowanej przestrzeni nazw (część sufiksu) jest ścieżką względną oddzieloną kropką między folderem zawierającym *_ViewImports. cshtml* i folderem zawierającym stronę.
+Gdy `@namespace` dyrektywa jest zawarta w *_ViewImports. cshtml* , określona przestrzeń nazw udostępnia prefiks dla wygenerowanej przestrzeni nazw na stronie, która importuje `@namespace` dyrektywę. Pozostała część wygenerowanej przestrzeni nazw (część sufiksu) jest ścieżką względną oddzieloną kropką między folderem zawierającym *_ViewImports. cshtml* i folderem zawierającym stronę.
 
 Na przykład `PageModel` Klasa *Pages/Customers/Edit. cshtml. cs* jawnie ustawia przestrzeń nazw:
 
@@ -936,7 +937,7 @@ Zaktualizowane *strony/Utwórz plik widoku. cshtml* :
 
 [!code-cshtml[](index/sample/RazorPagesContacts2/Pages/Customers/Create.cshtml?highlight=2)]
 
-Na stronie [ Razor startowej projektu](#rpvs17) znajdują się *strony/_ValidationScriptsPartial. cshtml*, które przechwytuje walidację po stronie klienta.
+Na stronie [ Razor startowej projektu](#rpvs17) znajdują się *strony/_ValidationScriptsPartial. cshtml* , które przechwytuje walidację po stronie klienta.
 
 Aby uzyskać więcej informacji o widokach częściowych, zobacz <xref:mvc/views/partial> .
 
@@ -959,7 +960,7 @@ Aplikacja ma następującą strukturę plików/folderów:
     * *Edytuj. cshtml*
     * *Index. cshtml*
 
-Strony */Customers/Create. cshtml* i *Pages/Customers/Edit. cshtml* przekierują do *stron/index. cshtml* po powodzeniu. Ciąg `/Index` jest częścią identyfikatora URI, aby uzyskać dostęp do poprzedniej strony. Ten ciąg `/Index` może służyć do generowania identyfikatorów URI na stronie *stron/index. cshtml* . Na przykład:
+Strony */Customers/Create. cshtml* i *Pages/Customers/Edit. cshtml* przekierują do *stron/index. cshtml* po powodzeniu. Ciąg `/Index` jest częścią identyfikatora URI, aby uzyskać dostęp do poprzedniej strony. Ten ciąg `/Index` może służyć do generowania identyfikatorów URI na stronie *stron/index. cshtml* . Przykład:
 
 * `Url.Page("/Index", ...)`
 * `<a asp-page="/Index">My Index Page</a>`
@@ -967,7 +968,7 @@ Strony */Customers/Create. cshtml* i *Pages/Customers/Edit. cshtml* przekierują
 
 Nazwa strony jest ścieżką do strony z folderu głównego */Pages* , włącznie z wiodącym `/` (na przykład `/Index` ). Powyższe przykłady generowania adresów URL oferują ulepszone opcje i możliwości funkcjonalne w porównaniu z zakodowana adresem URL. Generowanie adresów URL używa [routingu](xref:mvc/controllers/routing) i może generować i kodować parametry zgodnie ze sposobem zdefiniowania trasy w ścieżce docelowej.
 
-Generowanie adresów URL dla stron obsługuje nazwy względne. W poniższej tabeli przedstawiono, która strona indeksu została wybrana z różnymi `RedirectToPage` parametrami *stron/Customers/Create. cshtml*:
+Generowanie adresów URL dla stron obsługuje nazwy względne. W poniższej tabeli przedstawiono, która strona indeksu została wybrana z różnymi `RedirectToPage` parametrami *stron/Customers/Create. cshtml* :
 
 | RedirectToPage (x)| Strona |
 | ----------------- | ------------ |
@@ -976,7 +977,7 @@ Generowanie adresów URL dla stron obsługuje nazwy względne. W poniższej tabe
 | RedirectToPage(".. /Index") | *Strony/indeks* |
 | RedirectToPage ("index")  | *Strony/klienci/indeks* |
 
-`RedirectToPage("Index")`, `RedirectToPage("./Index")` , i `RedirectToPage("../Index")`  są *nazwami względnymi*. `RedirectToPage`Parametr jest *połączony* ze ścieżką bieżącej strony, aby obliczyć nazwę strony docelowej.  <!-- Review: Original had The provided string is combined with the page name of the current page to compute the name of the destination page.  page name, not page path -->
+`RedirectToPage("Index")`, `RedirectToPage("./Index")` , i `RedirectToPage("../Index")`  są *nazwami względnymi* . `RedirectToPage`Parametr jest *połączony* ze ścieżką bieżącej strony, aby obliczyć nazwę strony docelowej.  <!-- Review: Original had The provided string is combined with the page name of the current page to compute the name of the destination page.  page name, not page path -->
 
 Łączenie nazw względnych jest przydatne podczas kompilowania lokacji ze złożoną strukturą. Jeśli używasz nazw względnych do łączenia między stronami w folderze, możesz zmienić nazwę tego folderu. Wszystkie linki nadal działają (ponieważ nie zawierają nazwy folderu).
 
@@ -1061,7 +1062,7 @@ Model strony:
 
 [!code-csharp[](index/sample/RazorPagesContacts2/Pages/Customers/CreateFATH.cshtml.cs?highlight=20,32)]
 
-Poprzedni kod używa *nazwanych metod obsługi*. Nazwane metody obsługi są tworzone przez pobranie tekstu w nazwie po `On<HTTP Verb>` i przed `Async` (jeśli istnieje). W poprzednim przykładzie metody strony są onpost**JoinList**Async i Onpost**JoinListUC**Async. Po usunięciu funkcji *onpost* i *Async* nazwy programów obsługi są `JoinList` i `JoinListUC` .
+Poprzedni kod używa *nazwanych metod obsługi* . Nazwane metody obsługi są tworzone przez pobranie tekstu w nazwie po `On<HTTP Verb>` i przed `Async` (jeśli istnieje). W poprzednim przykładzie metody strony są onpost **JoinList** Async i Onpost **JoinListUC** Async. Po usunięciu funkcji *onpost* i *Async* nazwy programów obsługi są `JoinList` i `JoinListUC` .
 
 [!code-cshtml[](index/sample/RazorPagesContacts2/Pages/Customers/CreateFATH.cshtml?range=12-13)]
 

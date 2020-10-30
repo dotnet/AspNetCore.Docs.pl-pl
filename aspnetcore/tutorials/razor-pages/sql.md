@@ -5,6 +5,7 @@ description: Część 4 z serii samouczków na Razor stronach.
 ms.author: riande
 ms.date: 7/22/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/sql
-ms.openlocfilehash: d2e18782411b1801c74fa33ba1b31bad9662f3b2
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: d592cf7d8a96a7e4ec2e53418843a186488951be
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88627120"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93058158"
 ---
 # <a name="part-4-with-a-database-and-aspnet-core"></a>Część 4, z bazą danych i ASP.NET Core
 
@@ -31,7 +32,7 @@ Autorzy [Rick Anderson](https://twitter.com/RickAndMSFT) i Jan [Audette](https:/
 
 [!INCLUDE[](~/includes/rp/download.md)]
 
-`RazorPagesMovieContext`Obiekt obsługuje zadanie łączenia się z bazą danych i mapowania `Movie` obiektów do rekordów bazy danych. Kontekst bazy danych jest zarejestrowany z kontenerem [iniekcji zależności](xref:fundamentals/dependency-injection) w `ConfigureServices` metodzie w *Startup.cs*:
+`RazorPagesMovieContext`Obiekt obsługuje zadanie łączenia się z bazą danych i mapowania `Movie` obiektów do rekordów bazy danych. Kontekst bazy danych jest zarejestrowany z kontenerem [iniekcji zależności](xref:fundamentals/dependency-injection) w `ConfigureServices` metodzie w *Startup.cs* :
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -43,7 +44,7 @@ Autorzy [Rick Anderson](https://twitter.com/RickAndMSFT) i Jan [Audette](https:/
 
 ---
 
-System [konfiguracji](xref:fundamentals/configuration/index) ASP.NET Core odczytuje `ConnectionString` . W przypadku lokalnego projektowania pobiera parametry połączenia z *appsettings.js* pliku.
+System [konfiguracji](xref:fundamentals/configuration/index) ASP.NET Core odczytuje `ConnectionString` . W przypadku lokalnego opracowywania pobiera parametry połączenia z *appsettings.json* pliku.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -70,7 +71,7 @@ LocalDB to uproszczona wersja aparatu bazy danych SQL Server Express, która jes
 
   ![Menu Widok](sql/_static/ssox.png)
 
-* Kliknij prawym przyciskiem myszy `Movie` tabelę i wybierz polecenie **Projektant widoków**:
+* Kliknij prawym przyciskiem myszy `Movie` tabelę i wybierz polecenie **Projektant widoków** :
 
   ![Menu kontekstowe są otwierane w tabeli filmów](sql/_static/design.png)
 
@@ -78,7 +79,7 @@ LocalDB to uproszczona wersja aparatu bazy danych SQL Server Express, która jes
 
 Zanotuj ikonę klucza obok pozycji `ID` . Domyślnie EF tworzy właściwość o nazwie `ID` dla klucza podstawowego.
 
-* Kliknij prawym przyciskiem myszy `Movie` tabelę i wybierz polecenie **Wyświetl dane**:
+* Kliknij prawym przyciskiem myszy `Movie` tabelę i wybierz polecenie **Wyświetl dane** :
 
   ![Otwórz tabelę filmów pokazującą dane tabeli](sql/_static/vd22.png)
 
@@ -108,7 +109,7 @@ if (context.Movie.Any())
 
 ### <a name="add-the-seed-initializer"></a>Dodawanie inicjatora inicjatora
 
-W *program.cs*Zmień metodę, `Main` Aby wykonać następujące czynności:
+W *program.cs* Zmień metodę, `Main` Aby wykonać następujące czynności:
 
 * Pobierz wystąpienie kontekstu bazy danych z kontenera iniekcji zależności.
 * Wywołaj metodę inicjatora, przekazując ją do kontekstu.
@@ -130,7 +131,7 @@ Następujący wyjątek występuje, gdy `Update-Database` nie został uruchomiony
 * Usuń wszystkie rekordy z bazy danych. Można to zrobić za pomocą linków usuwania w przeglądarce lub z [SSOX](xref:tutorials/razor-pages/new-field#ssox)
 * Wymuś inicjalizację aplikacji (wywołaj metody z `Startup` klasy), aby była uruchamiana Metoda inicjatora. Aby wymusić inicjalizację, IIS Express należy zatrzymać i uruchomić ponownie. Można to zrobić przy użyciu następujących metod:
 
-  * Kliknij prawym przyciskiem myszy ikonę IIS Express pasku zadań w obszarze powiadomień i naciśnij pozycję **Zakończ** lub **Zatrzymaj witrynę**:
+  * Kliknij prawym przyciskiem myszy ikonę IIS Express pasku zadań w obszarze powiadomień i naciśnij pozycję **Zakończ** lub **Zatrzymaj witrynę** :
 
     ![Ikona paska zadań IIS Express](../first-mvc-app/working-with-sql/_static/iisExIcon.png)
 
@@ -161,7 +162,7 @@ Następny samouczek poprawi prezentację danych.
 
 [!INCLUDE[](~/includes/rp/download.md)]
 
-`RazorPagesMovieContext`Obiekt obsługuje zadanie łączenia się z bazą danych i mapowania `Movie` obiektów do rekordów bazy danych. Kontekst bazy danych jest zarejestrowany z kontenerem [iniekcji zależności](xref:fundamentals/dependency-injection) w `ConfigureServices` metodzie w *Startup.cs*:
+`RazorPagesMovieContext`Obiekt obsługuje zadanie łączenia się z bazą danych i mapowania `Movie` obiektów do rekordów bazy danych. Kontekst bazy danych jest zarejestrowany z kontenerem [iniekcji zależności](xref:fundamentals/dependency-injection) w `ConfigureServices` metodzie w *Startup.cs* :
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -178,7 +179,7 @@ Aby uzyskać więcej informacji na temat metod używanych w programie `Configure
 * [Obsługa ogólne rozporządzenie o ochronie danych UE (Rodo) w ASP.NET Core](xref:security/gdpr) dla `CookiePolicyOptions` .
 * [SetCompatibilityVersion](xref:mvc/compatibility-version)
 
-System [konfiguracji](xref:fundamentals/configuration/index) ASP.NET Core odczytuje `ConnectionString` . W przypadku lokalnego projektowania pobiera parametry połączenia z *appsettings.js* pliku.
+System [konfiguracji](xref:fundamentals/configuration/index) ASP.NET Core odczytuje `ConnectionString` . W przypadku lokalnego opracowywania pobiera parametry połączenia z *appsettings.json* pliku.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -209,7 +210,7 @@ LocalDB to uproszczona wersja aparatu bazy danych SQL Server Express, która jes
 
   ![Menu Widok](sql/_static/ssox.png)
 
-* Kliknij prawym przyciskiem myszy `Movie` tabelę i wybierz polecenie **Projektant widoków**:
+* Kliknij prawym przyciskiem myszy `Movie` tabelę i wybierz polecenie **Projektant widoków** :
 
   ![Menu kontekstowe jest otwarte w tabeli filmów](sql/_static/design.png)
 
@@ -217,7 +218,7 @@ LocalDB to uproszczona wersja aparatu bazy danych SQL Server Express, która jes
 
 Zanotuj ikonę klucza obok pozycji `ID` . Domyślnie EF tworzy właściwość o nazwie `ID` dla klucza podstawowego.
 
-* Kliknij prawym przyciskiem myszy `Movie` tabelę i wybierz polecenie **Wyświetl dane**:
+* Kliknij prawym przyciskiem myszy `Movie` tabelę i wybierz polecenie **Wyświetl dane** :
 
   ![Otwórz tabelę filmów pokazującą dane tabeli](sql/_static/vd22.png)
 
@@ -252,7 +253,7 @@ if (context.Movie.Any())
 
 ### <a name="add-the-seed-initializer"></a>Dodawanie inicjatora inicjatora
 
-W *program.cs*Zmień metodę, `Main` Aby wykonać następujące czynności:
+W *program.cs* Zmień metodę, `Main` Aby wykonać następujące czynności:
 
 * Pobierz wystąpienie kontekstu bazy danych z kontenera iniekcji zależności.
 * Wywołaj metodę inicjatora, przekazując ją do kontekstu.
@@ -274,7 +275,7 @@ Logowanie użytkownika "Nazwa użytkownika" nie powiodło się.
 * Usuń wszystkie rekordy z bazy danych. Można to zrobić za pomocą linków usuwania w przeglądarce lub z [SSOX](xref:tutorials/razor-pages/new-field#ssox)
 * Wymuś inicjalizację aplikacji (wywołaj metody z `Startup` klasy), aby była uruchamiana Metoda inicjatora. Aby wymusić inicjalizację, IIS Express należy zatrzymać i uruchomić ponownie. Można to zrobić przy użyciu następujących metod:
 
-  * Kliknij prawym przyciskiem myszy ikonę IIS Express pasku zadań w obszarze powiadomień i naciśnij pozycję **Zakończ** lub **Zatrzymaj witrynę**:
+  * Kliknij prawym przyciskiem myszy ikonę IIS Express pasku zadań w obszarze powiadomień i naciśnij pozycję **Zakończ** lub **Zatrzymaj witrynę** :
 
     ![Ikona paska zadań IIS Express](../first-mvc-app/working-with-sql/_static/iisExIcon.png)
 

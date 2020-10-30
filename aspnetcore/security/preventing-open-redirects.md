@@ -5,6 +5,7 @@ description: Pokazuje, jak zapobiec atakom typu "Open redirect" w aplikacji ASP.
 ms.author: riande
 ms.date: 07/07/2017
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/preventing-open-redirects
-ms.openlocfilehash: 5226e301960a56145b94b6128d0034c40b86bffd
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: e546cd852367921c7c694db3639f7a233f606e75
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633464"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93058392"
 ---
 # <a name="prevent-open-redirect-attacks-in-aspnet-core"></a>Zapobiegaj atakom typu "Open redirect" w ASP.NET Core
 
@@ -39,7 +40,7 @@ Ponieważ docelowy adres URL jest określony w ciągu kwerendy żądania, złoś
 
 Złośliwy użytkownik może stworzyć atak przeznaczony do zezwalania złośliwemu użytkownikowi na dostęp do poświadczeń lub informacji poufnych. Aby rozpocząć atak, złośliwy użytkownik zakończył pracę użytkownika w celu kliknięcia linku do strony logowania do witryny z wartością QueryString, która została `returnUrl` dodana do adresu URL. Rozważmy na przykład aplikację, `contoso.com` która obejmuje stronę logowania w witrynie `http://contoso.com/Account/LogOn?returnUrl=/Home/About` . Atakujący wykonuje następujące czynności:
 
-1. Użytkownik klika złośliwe łącze do `http://contoso.com/Account/LogOn?returnUrl=http://contoso1.com/Account/LogOn` (drugi adres URL to "contoso**1**. com", a nie "contoso.com").
+1. Użytkownik klika złośliwe łącze do `http://contoso.com/Account/LogOn?returnUrl=http://contoso1.com/Account/LogOn` (drugi adres URL to "contoso **1** . com", a nie "contoso.com").
 2. Logowanie użytkownika zakończyło się pomyślnie.
 3. Użytkownik zostanie przekierowany (przez lokację) do programu `http://contoso1.com/Account/LogOn` (złośliwa lokacja, która wygląda tak samo jak prawdziwa witryna).
 4. Użytkownik loguje się ponownie (podając złośliwe witryny jako poświadczenia) i zostaje przekierowany z powrotem do rzeczywistej lokacji.

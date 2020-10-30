@@ -5,6 +5,7 @@ description: Tworzenie Razor aplikacji sieci Web w systemie Windows przy użyciu
 ms.author: riande
 ms.date: 08/09/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/index
-ms.openlocfilehash: aa9747e5f74f0f2d4764f9ebbb5c6d19191451ff
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 0feb60c7e0189bf12d584c3916e0254b3be729c0
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634725"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93058067"
 ---
 # <a name="tutorial-create-a-no-locrazor-pages-web-app-with-aspnet-core"></a>Samouczek: Tworzenie Razor aplikacji sieci Web za pomocą ASP.NET Core
 

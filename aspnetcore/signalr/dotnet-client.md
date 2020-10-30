@@ -1,73 +1,74 @@
 ---
-title: ASP.NET Core SignalR klienta platformy .NET
+title: 'ASP.NET Core :::no-loc(SignalR)::: klienta platformy .NET'
 author: bradygaster
-description: Informacje o kliencie ASP.NET Core SignalR .NET
+description: 'Informacje o kliencie ASP.NET Core :::no-loc(SignalR)::: .NET'
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
 ms.date: 01/14/2020
 no-loc:
-- ASP.NET Core Identity
-- cookie
-- Cookie
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- ':::no-loc(appsettings.json):::'
+- ':::no-loc(ASP.NET Core Identity):::'
+- ':::no-loc(cookie):::'
+- ':::no-loc(Cookie):::'
+- ':::no-loc(Blazor):::'
+- ':::no-loc(Blazor Server):::'
+- ':::no-loc(Blazor WebAssembly):::'
+- ':::no-loc(Identity):::'
+- ":::no-loc(Let's Encrypt):::"
+- ':::no-loc(Razor):::'
+- ':::no-loc(SignalR):::'
 uid: signalr/dotnet-client
-ms.openlocfilehash: f56beb634689b42aec3fe193c389e52de746c92a
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 7849322e50aeceda0850d94f9c9bcda79a6051c8
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634010"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061226"
 ---
-# <a name="aspnet-core-no-locsignalr-net-client"></a><span data-ttu-id="1ec7f-103">ASP.NET Core SignalR klienta platformy .NET</span><span class="sxs-lookup"><span data-stu-id="1ec7f-103">ASP.NET Core SignalR .NET Client</span></span>
+# <a name="aspnet-core-no-locsignalr-net-client"></a><span data-ttu-id="03aa0-103">ASP.NET Core :::no-loc(SignalR)::: klienta platformy .NET</span><span class="sxs-lookup"><span data-stu-id="03aa0-103">ASP.NET Core :::no-loc(SignalR)::: .NET Client</span></span>
 
-<span data-ttu-id="1ec7f-104">SignalRBiblioteka kliencka ASP.NET Core .NET umożliwia komunikowanie się z SignalR koncentratorami z poziomu aplikacji .NET.</span><span class="sxs-lookup"><span data-stu-id="1ec7f-104">The ASP.NET Core SignalR .NET client library lets you communicate with SignalR hubs from .NET apps.</span></span>
+<span data-ttu-id="03aa0-104">:::no-loc(SignalR):::Biblioteka kliencka ASP.NET Core .NET umożliwia komunikowanie się z :::no-loc(SignalR)::: koncentratorami z poziomu aplikacji .NET.</span><span class="sxs-lookup"><span data-stu-id="03aa0-104">The ASP.NET Core :::no-loc(SignalR)::: .NET client library lets you communicate with :::no-loc(SignalR)::: hubs from .NET apps.</span></span>
 
-<span data-ttu-id="1ec7f-105">[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/dotnet-client/sample) ([jak pobrać](xref:index#how-to-download-a-sample))</span><span class="sxs-lookup"><span data-stu-id="1ec7f-105">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/dotnet-client/sample) ([how to download](xref:index#how-to-download-a-sample))</span></span>
+<span data-ttu-id="03aa0-105">[Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/dotnet-client/sample) ([jak pobrać](xref:index#how-to-download-a-sample))</span><span class="sxs-lookup"><span data-stu-id="03aa0-105">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/dotnet-client/sample) ([how to download](xref:index#how-to-download-a-sample))</span></span>
 
-<span data-ttu-id="1ec7f-106">Przykładowy kod w tym artykule jest aplikacją WPF, która używa SignalR klienta programu ASP.NET Core .NET.</span><span class="sxs-lookup"><span data-stu-id="1ec7f-106">The code sample in this article is a WPF app that uses the ASP.NET Core SignalR .NET client.</span></span>
+<span data-ttu-id="03aa0-106">Przykładowy kod w tym artykule jest aplikacją WPF, która używa :::no-loc(SignalR)::: klienta programu ASP.NET Core .NET.</span><span class="sxs-lookup"><span data-stu-id="03aa0-106">The code sample in this article is a WPF app that uses the ASP.NET Core :::no-loc(SignalR)::: .NET client.</span></span>
 
-## <a name="install-the-no-locsignalr-net-client-package"></a><span data-ttu-id="1ec7f-107">Zainstaluj SignalR pakiet klienta platformy .NET</span><span class="sxs-lookup"><span data-stu-id="1ec7f-107">Install the SignalR .NET client package</span></span>
+## <a name="install-the-no-locsignalr-net-client-package"></a><span data-ttu-id="03aa0-107">Zainstaluj :::no-loc(SignalR)::: pakiet klienta platformy .NET</span><span class="sxs-lookup"><span data-stu-id="03aa0-107">Install the :::no-loc(SignalR)::: .NET client package</span></span>
 
-<span data-ttu-id="1ec7f-108">[Microsoft. AspNetCore. SignalR .. ](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client)Do nawiązania połączenia z koncentratorami wymagany jest pakiet klienta platformy .NET SignalR .</span><span class="sxs-lookup"><span data-stu-id="1ec7f-108">The [Microsoft.AspNetCore.SignalR.Client](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client) package is required for .NET clients to connect to SignalR hubs.</span></span>
+<span data-ttu-id="03aa0-108">[Microsoft. AspNetCore. :::no-loc(SignalR)::: .. ](https://www.nuget.org/packages/Microsoft.AspNetCore.:::no-loc(SignalR):::.Client)Do nawiązania połączenia z koncentratorami wymagany jest pakiet klienta platformy .NET :::no-loc(SignalR)::: .</span><span class="sxs-lookup"><span data-stu-id="03aa0-108">The [Microsoft.AspNetCore.:::no-loc(SignalR):::.Client](https://www.nuget.org/packages/Microsoft.AspNetCore.:::no-loc(SignalR):::.Client) package is required for .NET clients to connect to :::no-loc(SignalR)::: hubs.</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="1ec7f-109">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="1ec7f-109">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="03aa0-109">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="03aa0-109">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="1ec7f-110">Aby zainstalować bibliotekę kliencką, uruchom następujące polecenie w oknie **konsola Menedżera pakietów** :</span><span class="sxs-lookup"><span data-stu-id="1ec7f-110">To install the client library, run the following command in the **Package Manager Console** window:</span></span>
+<span data-ttu-id="03aa0-110">Aby zainstalować bibliotekę kliencką, uruchom następujące polecenie w oknie **konsola Menedżera pakietów** :</span><span class="sxs-lookup"><span data-stu-id="03aa0-110">To install the client library, run the following command in the **Package Manager Console** window:</span></span>
 
 ```powershell
-Install-Package Microsoft.AspNetCore.SignalR.Client
+Install-Package Microsoft.AspNetCore.:::no-loc(SignalR):::.Client
 ```
 
-# <a name="net-core-cli"></a>[<span data-ttu-id="1ec7f-111">interfejs wiersza polecenia programu .NET Core</span><span class="sxs-lookup"><span data-stu-id="1ec7f-111">.NET Core CLI</span></span>](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[<span data-ttu-id="03aa0-111">interfejs wiersza polecenia programu .NET Core</span><span class="sxs-lookup"><span data-stu-id="03aa0-111">.NET Core CLI</span></span>](#tab/netcore-cli)
 
-<span data-ttu-id="1ec7f-112">Aby zainstalować bibliotekę kliencką, uruchom następujące polecenie w powłoce poleceń:</span><span class="sxs-lookup"><span data-stu-id="1ec7f-112">To install the client library, run the following command in a command shell:</span></span>
+<span data-ttu-id="03aa0-112">Aby zainstalować bibliotekę kliencką, uruchom następujące polecenie w powłoce poleceń:</span><span class="sxs-lookup"><span data-stu-id="03aa0-112">To install the client library, run the following command in a command shell:</span></span>
 
 ```dotnetcli
-dotnet add package Microsoft.AspNetCore.SignalR.Client
+dotnet add package Microsoft.AspNetCore.:::no-loc(SignalR):::.Client
 ```
 
 ---
 
-## <a name="connect-to-a-hub"></a><span data-ttu-id="1ec7f-113">Nawiązywanie połączenia z centrum</span><span class="sxs-lookup"><span data-stu-id="1ec7f-113">Connect to a hub</span></span>
+## <a name="connect-to-a-hub"></a><span data-ttu-id="03aa0-113">Nawiązywanie połączenia z centrum</span><span class="sxs-lookup"><span data-stu-id="03aa0-113">Connect to a hub</span></span>
 
-<span data-ttu-id="1ec7f-114">Aby nawiązać połączenie, Utwórz `HubConnectionBuilder` wywołanie i `Build` .</span><span class="sxs-lookup"><span data-stu-id="1ec7f-114">To establish a connection, create a `HubConnectionBuilder` and call `Build`.</span></span> <span data-ttu-id="1ec7f-115">Podczas tworzenia połączenia można skonfigurować adres URL centrum, protokół, typ transportu, poziom dziennika, nagłówki i inne opcje.</span><span class="sxs-lookup"><span data-stu-id="1ec7f-115">The hub URL, protocol, transport type, log level, headers, and other options can be configured while building a connection.</span></span> <span data-ttu-id="1ec7f-116">Skonfiguruj wszystkie wymagane opcje, wstawiając dowolne `HubConnectionBuilder` metody do programu `Build` .</span><span class="sxs-lookup"><span data-stu-id="1ec7f-116">Configure any required options by inserting any of the `HubConnectionBuilder` methods into `Build`.</span></span> <span data-ttu-id="1ec7f-117">Rozpocznij połączenie z usługą `StartAsync` .</span><span class="sxs-lookup"><span data-stu-id="1ec7f-117">Start the connection with `StartAsync`.</span></span>
+<span data-ttu-id="03aa0-114">Aby nawiązać połączenie, Utwórz `HubConnectionBuilder` wywołanie i `Build` .</span><span class="sxs-lookup"><span data-stu-id="03aa0-114">To establish a connection, create a `HubConnectionBuilder` and call `Build`.</span></span> <span data-ttu-id="03aa0-115">Podczas tworzenia połączenia można skonfigurować adres URL centrum, protokół, typ transportu, poziom dziennika, nagłówki i inne opcje.</span><span class="sxs-lookup"><span data-stu-id="03aa0-115">The hub URL, protocol, transport type, log level, headers, and other options can be configured while building a connection.</span></span> <span data-ttu-id="03aa0-116">Skonfiguruj wszystkie wymagane opcje, wstawiając dowolne `HubConnectionBuilder` metody do programu `Build` .</span><span class="sxs-lookup"><span data-stu-id="03aa0-116">Configure any required options by inserting any of the `HubConnectionBuilder` methods into `Build`.</span></span> <span data-ttu-id="03aa0-117">Rozpocznij połączenie z usługą `StartAsync` .</span><span class="sxs-lookup"><span data-stu-id="03aa0-117">Start the connection with `StartAsync`.</span></span>
 
 [!code-csharp[Build hub connection](dotnet-client/sample/signalrchatclient/MainWindow.xaml.cs?name=snippet_MainWindowClass&highlight=15-17,39)]
 
-## <a name="handle-lost-connection"></a><span data-ttu-id="1ec7f-118">Obsługa utraconych połączeń</span><span class="sxs-lookup"><span data-stu-id="1ec7f-118">Handle lost connection</span></span>
+## <a name="handle-lost-connection"></a><span data-ttu-id="03aa0-118">Obsługa utraconych połączeń</span><span class="sxs-lookup"><span data-stu-id="03aa0-118">Handle lost connection</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
-### <a name="automatically-reconnect"></a><span data-ttu-id="1ec7f-119">Automatycznie Połącz ponownie</span><span class="sxs-lookup"><span data-stu-id="1ec7f-119">Automatically reconnect</span></span>
+### <a name="automatically-reconnect"></a><span data-ttu-id="03aa0-119">Automatycznie Połącz ponownie</span><span class="sxs-lookup"><span data-stu-id="03aa0-119">Automatically reconnect</span></span>
 
-<span data-ttu-id="1ec7f-120"><xref:Microsoft.AspNetCore.SignalR.Client.HubConnection>Można skonfigurować do automatycznego ponownego łączenia przy użyciu `WithAutomaticReconnect` metody w <xref:Microsoft.AspNetCore.SignalR.Client.HubConnectionBuilder> .</span><span class="sxs-lookup"><span data-stu-id="1ec7f-120">The <xref:Microsoft.AspNetCore.SignalR.Client.HubConnection> can be configured to automatically reconnect using the `WithAutomaticReconnect` method on the <xref:Microsoft.AspNetCore.SignalR.Client.HubConnectionBuilder>.</span></span> <span data-ttu-id="1ec7f-121">Domyślnie nie będzie automatycznie ponownie łączyć się.</span><span class="sxs-lookup"><span data-stu-id="1ec7f-121">It won't automatically reconnect by default.</span></span>
+<span data-ttu-id="03aa0-120"><xref:Microsoft.AspNetCore.:::no-loc(SignalR):::.Client.HubConnection>Można skonfigurować do automatycznego ponownego łączenia przy użyciu `WithAutomaticReconnect` metody w <xref:Microsoft.AspNetCore.:::no-loc(SignalR):::.Client.HubConnectionBuilder> .</span><span class="sxs-lookup"><span data-stu-id="03aa0-120">The <xref:Microsoft.AspNetCore.:::no-loc(SignalR):::.Client.HubConnection> can be configured to automatically reconnect using the `WithAutomaticReconnect` method on the <xref:Microsoft.AspNetCore.:::no-loc(SignalR):::.Client.HubConnectionBuilder>.</span></span> <span data-ttu-id="03aa0-121">Domyślnie nie będzie automatycznie ponownie łączyć się.</span><span class="sxs-lookup"><span data-stu-id="03aa0-121">It won't automatically reconnect by default.</span></span>
 
 ```csharp
 HubConnection connection= new HubConnectionBuilder()
@@ -76,9 +77,9 @@ HubConnection connection= new HubConnectionBuilder()
     .Build();
 ```
 
-<span data-ttu-id="1ec7f-122">Bez żadnych parametrów program `WithAutomaticReconnect()` skonfiguruje klienta tak, aby czekał 0, 2, 10 i 30 sekund przed podjęciem próby ponownego połączenia, zatrzymywanie po czterech nieudanych próbach.</span><span class="sxs-lookup"><span data-stu-id="1ec7f-122">Without any parameters, `WithAutomaticReconnect()` configures the client to wait 0, 2, 10, and 30 seconds respectively before trying each reconnect attempt, stopping after four failed attempts.</span></span>
+<span data-ttu-id="03aa0-122">Bez żadnych parametrów program `WithAutomaticReconnect()` skonfiguruje klienta tak, aby czekał 0, 2, 10 i 30 sekund przed podjęciem próby ponownego połączenia, zatrzymywanie po czterech nieudanych próbach.</span><span class="sxs-lookup"><span data-stu-id="03aa0-122">Without any parameters, `WithAutomaticReconnect()` configures the client to wait 0, 2, 10, and 30 seconds respectively before trying each reconnect attempt, stopping after four failed attempts.</span></span>
 
-<span data-ttu-id="1ec7f-123">Przed rozpoczęciem wszelkich ponownych prób nawiązania połączenia `HubConnection` nastąpi przejście do `HubConnectionState.Reconnecting` stanu i wyzwolenie `Reconnecting` zdarzenia.</span><span class="sxs-lookup"><span data-stu-id="1ec7f-123">Before starting any reconnect attempts, the `HubConnection` will transition to the `HubConnectionState.Reconnecting` state and fire the `Reconnecting` event.</span></span>  <span data-ttu-id="1ec7f-124">Dzięki temu można ostrzec użytkowników, że połączenie zostało utracone i wyłączyć elementy interfejsu użytkownika.</span><span class="sxs-lookup"><span data-stu-id="1ec7f-124">This provides an opportunity to warn users that the connection has been lost and to disable UI elements.</span></span> <span data-ttu-id="1ec7f-125">Aplikacje nieinteraktywne mogą uruchamiać kolejkowanie lub porzucanie komunikatów.</span><span class="sxs-lookup"><span data-stu-id="1ec7f-125">Non-interactive apps can start queuing or dropping messages.</span></span>
+<span data-ttu-id="03aa0-123">Przed rozpoczęciem wszelkich ponownych prób nawiązania połączenia `HubConnection` nastąpi przejście do `HubConnectionState.Reconnecting` stanu i wyzwolenie `Reconnecting` zdarzenia.</span><span class="sxs-lookup"><span data-stu-id="03aa0-123">Before starting any reconnect attempts, the `HubConnection` will transition to the `HubConnectionState.Reconnecting` state and fire the `Reconnecting` event.</span></span>  <span data-ttu-id="03aa0-124">Dzięki temu można ostrzec użytkowników, że połączenie zostało utracone i wyłączyć elementy interfejsu użytkownika.</span><span class="sxs-lookup"><span data-stu-id="03aa0-124">This provides an opportunity to warn users that the connection has been lost and to disable UI elements.</span></span> <span data-ttu-id="03aa0-125">Aplikacje nieinteraktywne mogą uruchamiać kolejkowanie lub porzucanie komunikatów.</span><span class="sxs-lookup"><span data-stu-id="03aa0-125">Non-interactive apps can start queuing or dropping messages.</span></span>
 
 ```csharp
 connection.Reconnecting += error =>
@@ -92,12 +93,12 @@ connection.Reconnecting += error =>
 };
 ```
 
-<span data-ttu-id="1ec7f-126">Jeśli klient pomyślnie ponownie nawiązuje połączenie w ramach pierwszych czterech prób, `HubConnection` nastąpi powrót do `Connected` stanu i wyzwolenie `Reconnected` zdarzenia.</span><span class="sxs-lookup"><span data-stu-id="1ec7f-126">If the client successfully reconnects within its first four attempts, the `HubConnection` will transition back to the `Connected` state and fire the `Reconnected` event.</span></span> <span data-ttu-id="1ec7f-127">Zapewnia to możliwość informowania użytkowników o tym, że połączenie zostało ponownie nawiązane i usuwa wszystkie wiadomości w kolejce.</span><span class="sxs-lookup"><span data-stu-id="1ec7f-127">This provides an opportunity to inform users the connection has been reestablished and dequeue any queued messages.</span></span>
+<span data-ttu-id="03aa0-126">Jeśli klient pomyślnie ponownie nawiązuje połączenie w ramach pierwszych czterech prób, `HubConnection` nastąpi powrót do `Connected` stanu i wyzwolenie `Reconnected` zdarzenia.</span><span class="sxs-lookup"><span data-stu-id="03aa0-126">If the client successfully reconnects within its first four attempts, the `HubConnection` will transition back to the `Connected` state and fire the `Reconnected` event.</span></span> <span data-ttu-id="03aa0-127">Zapewnia to możliwość informowania użytkowników o tym, że połączenie zostało ponownie nawiązane i usuwa wszystkie wiadomości w kolejce.</span><span class="sxs-lookup"><span data-stu-id="03aa0-127">This provides an opportunity to inform users the connection has been reestablished and dequeue any queued messages.</span></span>
 
-<span data-ttu-id="1ec7f-128">Ponieważ połączenie jest całkowicie nowe dla serwera, do `ConnectionId` obsługi zdarzeń zostanie udostępniona nowa `Reconnected` .</span><span class="sxs-lookup"><span data-stu-id="1ec7f-128">Since the connection looks entirely new to the server, a new `ConnectionId` will be provided to the `Reconnected` event handlers.</span></span>
+<span data-ttu-id="03aa0-128">Ponieważ połączenie jest całkowicie nowe dla serwera, do `ConnectionId` obsługi zdarzeń zostanie udostępniona nowa `Reconnected` .</span><span class="sxs-lookup"><span data-stu-id="03aa0-128">Since the connection looks entirely new to the server, a new `ConnectionId` will be provided to the `Reconnected` event handlers.</span></span>
 
 > [!WARNING]
-> <span data-ttu-id="1ec7f-129">`Reconnected`Parametr programu obsługi zdarzeń `connectionId` będzie miał wartość null, jeśli `HubConnection` został skonfigurowany do [pomijania negocjacji](xref:signalr/configuration#configure-client-options).</span><span class="sxs-lookup"><span data-stu-id="1ec7f-129">The `Reconnected` event handler's `connectionId` parameter will be null if the `HubConnection` was configured to [skip negotiation](xref:signalr/configuration#configure-client-options).</span></span>
+> <span data-ttu-id="03aa0-129">`Reconnected`Parametr programu obsługi zdarzeń `connectionId` będzie miał wartość null, jeśli `HubConnection` został skonfigurowany do [pomijania negocjacji](xref:signalr/configuration#configure-client-options).</span><span class="sxs-lookup"><span data-stu-id="03aa0-129">The `Reconnected` event handler's `connectionId` parameter will be null if the `HubConnection` was configured to [skip negotiation](xref:signalr/configuration#configure-client-options).</span></span>
 
 ```csharp
 connection.Reconnected += connectionId =>
@@ -111,7 +112,7 @@ connection.Reconnected += connectionId =>
 };
 ```
 
-<span data-ttu-id="1ec7f-130">`WithAutomaticReconnect()` nie zostanie skonfigurowana `HubConnection` do ponawiania początkowych nieudanych uruchomień, dlatego należy ręcznie obsługiwać błędy uruchamiania:</span><span class="sxs-lookup"><span data-stu-id="1ec7f-130">`WithAutomaticReconnect()` won't configure the `HubConnection` to retry initial start failures, so start failures need to be handled manually:</span></span>
+<span data-ttu-id="03aa0-130">`WithAutomaticReconnect()` nie zostanie skonfigurowana `HubConnection` do ponawiania początkowych nieudanych uruchomień, dlatego należy ręcznie obsługiwać błędy uruchamiania:</span><span class="sxs-lookup"><span data-stu-id="03aa0-130">`WithAutomaticReconnect()` won't configure the `HubConnection` to retry initial start failures, so start failures need to be handled manually:</span></span>
 
 ```csharp
 public static async Task<bool> ConnectWithRetryAsync(HubConnection connection, CancellationToken token)
@@ -139,7 +140,7 @@ public static async Task<bool> ConnectWithRetryAsync(HubConnection connection, C
 }
 ```
 
-<span data-ttu-id="1ec7f-131">Jeśli klient nie zostanie pomyślnie ponownie połączony w ramach pierwszych czterech prób, `HubConnection` przejdzie do `Disconnected` stanu i uruchomi <xref:Microsoft.AspNetCore.SignalR.Client.HubConnection.Closed> zdarzenie.</span><span class="sxs-lookup"><span data-stu-id="1ec7f-131">If the client doesn't successfully reconnect within its first four attempts, the `HubConnection` will transition to the `Disconnected` state and fire the <xref:Microsoft.AspNetCore.SignalR.Client.HubConnection.Closed> event.</span></span> <span data-ttu-id="1ec7f-132">Zapewnia to możliwość próby ponownego uruchomienia połączenia ręcznie lub poinformowanie użytkowników, że połączenie zostało trwale utracone.</span><span class="sxs-lookup"><span data-stu-id="1ec7f-132">This provides an opportunity to attempt to restart the connection manually or inform users the connection has been permanently lost.</span></span>
+<span data-ttu-id="03aa0-131">Jeśli klient nie zostanie pomyślnie ponownie połączony w ramach pierwszych czterech prób, `HubConnection` przejdzie do `Disconnected` stanu i uruchomi <xref:Microsoft.AspNetCore.:::no-loc(SignalR):::.Client.HubConnection.Closed> zdarzenie.</span><span class="sxs-lookup"><span data-stu-id="03aa0-131">If the client doesn't successfully reconnect within its first four attempts, the `HubConnection` will transition to the `Disconnected` state and fire the <xref:Microsoft.AspNetCore.:::no-loc(SignalR):::.Client.HubConnection.Closed> event.</span></span> <span data-ttu-id="03aa0-132">Zapewnia to możliwość próby ponownego uruchomienia połączenia ręcznie lub poinformowanie użytkowników, że połączenie zostało trwale utracone.</span><span class="sxs-lookup"><span data-stu-id="03aa0-132">This provides an opportunity to attempt to restart the connection manually or inform users the connection has been permanently lost.</span></span>
 
 ```csharp
 connection.Closed += error =>
@@ -152,7 +153,7 @@ connection.Closed += error =>
 };
 ```
 
-<span data-ttu-id="1ec7f-133">Aby skonfigurować niestandardową liczbę prób ponownego połączenia przed odłączeniem lub zmianą czasu ponownego połączenia, program `WithAutomaticReconnect` akceptuje tablicę liczb reprezentujących opóźnienie (w milisekundach) przed rozpoczęciem każdej próby ponownego nawiązania połączenia.</span><span class="sxs-lookup"><span data-stu-id="1ec7f-133">In order to configure a custom number of reconnect attempts before disconnecting or change the reconnect timing, `WithAutomaticReconnect` accepts an array of numbers representing the delay in milliseconds to wait before starting each reconnect attempt.</span></span>
+<span data-ttu-id="03aa0-133">Aby skonfigurować niestandardową liczbę prób ponownego połączenia przed odłączeniem lub zmianą czasu ponownego połączenia, program `WithAutomaticReconnect` akceptuje tablicę liczb reprezentujących opóźnienie (w milisekundach) przed rozpoczęciem każdej próby ponownego nawiązania połączenia.</span><span class="sxs-lookup"><span data-stu-id="03aa0-133">In order to configure a custom number of reconnect attempts before disconnecting or change the reconnect timing, `WithAutomaticReconnect` accepts an array of numbers representing the delay in milliseconds to wait before starting each reconnect attempt.</span></span>
 
 ```csharp
 HubConnection connection= new HubConnectionBuilder()
@@ -163,19 +164,19 @@ HubConnection connection= new HubConnectionBuilder()
     // .WithAutomaticReconnect(new[] { TimeSpan.Zero, TimeSpan.FromSeconds(2), TimeSpan.FromSeconds(10), TimeSpan.FromSeconds(30) }) yields the default behavior.
 ```
 
-<span data-ttu-id="1ec7f-134">W powyższym przykładzie konfiguruje `HubConnection` się, aby rozpocząć próba ponownego połączenia natychmiast po utracie połączenia.</span><span class="sxs-lookup"><span data-stu-id="1ec7f-134">The preceding example configures the `HubConnection` to start attempting reconnects immediately after the connection is lost.</span></span> <span data-ttu-id="1ec7f-135">Dotyczy to również konfiguracji domyślnej.</span><span class="sxs-lookup"><span data-stu-id="1ec7f-135">This is also true for the default configuration.</span></span>
+<span data-ttu-id="03aa0-134">W powyższym przykładzie konfiguruje `HubConnection` się, aby rozpocząć próba ponownego połączenia natychmiast po utracie połączenia.</span><span class="sxs-lookup"><span data-stu-id="03aa0-134">The preceding example configures the `HubConnection` to start attempting reconnects immediately after the connection is lost.</span></span> <span data-ttu-id="03aa0-135">Dotyczy to również konfiguracji domyślnej.</span><span class="sxs-lookup"><span data-stu-id="03aa0-135">This is also true for the default configuration.</span></span>
 
-<span data-ttu-id="1ec7f-136">Jeśli pierwsza próba ponownego połączenia nie powiedzie się, druga próba ponownego połączenia zostanie również uruchomiona natychmiast, a nie w ciągu 2 sekund, tak jak w przypadku konfiguracji domyślnej.</span><span class="sxs-lookup"><span data-stu-id="1ec7f-136">If the first reconnect attempt fails, the second reconnect attempt will also start immediately instead of waiting 2 seconds like it would in the default configuration.</span></span>
+<span data-ttu-id="03aa0-136">Jeśli pierwsza próba ponownego połączenia nie powiedzie się, druga próba ponownego połączenia zostanie również uruchomiona natychmiast, a nie w ciągu 2 sekund, tak jak w przypadku konfiguracji domyślnej.</span><span class="sxs-lookup"><span data-stu-id="03aa0-136">If the first reconnect attempt fails, the second reconnect attempt will also start immediately instead of waiting 2 seconds like it would in the default configuration.</span></span>
 
-<span data-ttu-id="1ec7f-137">Jeśli druga próba ponownego połączenia nie powiedzie się, trzecia próba ponownego nawiązania połączenia rozpocznie się w ciągu 10 sekund, co jest ponownie podobne do konfiguracji domyślnej.</span><span class="sxs-lookup"><span data-stu-id="1ec7f-137">If the second reconnect attempt fails, the third reconnect attempt will start in 10 seconds which is again like the default configuration.</span></span>
+<span data-ttu-id="03aa0-137">Jeśli druga próba ponownego połączenia nie powiedzie się, trzecia próba ponownego nawiązania połączenia rozpocznie się w ciągu 10 sekund, co jest ponownie podobne do konfiguracji domyślnej.</span><span class="sxs-lookup"><span data-stu-id="03aa0-137">If the second reconnect attempt fails, the third reconnect attempt will start in 10 seconds which is again like the default configuration.</span></span>
 
-<span data-ttu-id="1ec7f-138">Zachowanie niestandardowe jest następnie ponownie niezależne od zachowania domyślnego przez zatrzymanie po trzecim nieudanej próbie połączenia.</span><span class="sxs-lookup"><span data-stu-id="1ec7f-138">The custom behavior then diverges again from the default behavior by stopping after the third reconnect attempt failure.</span></span> <span data-ttu-id="1ec7f-139">W konfiguracji domyślnej będzie jeszcze jedna kolejna próba ponownego połączenia w ciągu 30 sekund.</span><span class="sxs-lookup"><span data-stu-id="1ec7f-139">In the default configuration there would be one more reconnect attempt in another 30 seconds.</span></span>
+<span data-ttu-id="03aa0-138">Zachowanie niestandardowe jest następnie ponownie niezależne od zachowania domyślnego przez zatrzymanie po trzecim nieudanej próbie połączenia.</span><span class="sxs-lookup"><span data-stu-id="03aa0-138">The custom behavior then diverges again from the default behavior by stopping after the third reconnect attempt failure.</span></span> <span data-ttu-id="03aa0-139">W konfiguracji domyślnej będzie jeszcze jedna kolejna próba ponownego połączenia w ciągu 30 sekund.</span><span class="sxs-lookup"><span data-stu-id="03aa0-139">In the default configuration there would be one more reconnect attempt in another 30 seconds.</span></span>
 
-<span data-ttu-id="1ec7f-140">Jeśli chcesz jeszcze większą kontrolę nad chronometrażem i liczbą prób automatycznego ponownego połączenia, `WithAutomaticReconnect` zaakceptuje obiekt implementujący `IRetryPolicy` interfejs, który ma pojedynczą metodę o nazwie `NextRetryDelay` .</span><span class="sxs-lookup"><span data-stu-id="1ec7f-140">If you want even more control over the timing and number of automatic reconnect attempts, `WithAutomaticReconnect` accepts an object implementing the `IRetryPolicy` interface, which has a single method named `NextRetryDelay`.</span></span>
+<span data-ttu-id="03aa0-140">Jeśli chcesz jeszcze większą kontrolę nad chronometrażem i liczbą prób automatycznego ponownego połączenia, `WithAutomaticReconnect` zaakceptuje obiekt implementujący `IRetryPolicy` interfejs, który ma pojedynczą metodę o nazwie `NextRetryDelay` .</span><span class="sxs-lookup"><span data-stu-id="03aa0-140">If you want even more control over the timing and number of automatic reconnect attempts, `WithAutomaticReconnect` accepts an object implementing the `IRetryPolicy` interface, which has a single method named `NextRetryDelay`.</span></span>
 
-<span data-ttu-id="1ec7f-141">`NextRetryDelay` przyjmuje jeden argument z typem `RetryContext` .</span><span class="sxs-lookup"><span data-stu-id="1ec7f-141">`NextRetryDelay` takes a single argument with the type `RetryContext`.</span></span> <span data-ttu-id="1ec7f-142">`RetryContext`Ma trzy właściwości: `PreviousRetryCount` , `ElapsedTime` i `RetryReason` , które są, a `long` `TimeSpan` i `Exception` odpowiednio.</span><span class="sxs-lookup"><span data-stu-id="1ec7f-142">The `RetryContext` has three properties: `PreviousRetryCount`, `ElapsedTime` and `RetryReason`, which are a `long`, a `TimeSpan` and an `Exception` respectively.</span></span> <span data-ttu-id="1ec7f-143">Przed pierwszym ponownym połączeniem, oba `PreviousRetryCount` i `ElapsedTime` będą miały wartość zero, a `RetryReason` będzie wyjątek, który spowodował utratę połączenia.</span><span class="sxs-lookup"><span data-stu-id="1ec7f-143">Before the first reconnect attempt, both `PreviousRetryCount` and `ElapsedTime` will be zero, and the `RetryReason` will be the Exception that caused the connection to be lost.</span></span> <span data-ttu-id="1ec7f-144">Po każdym nieudanej próbie ponowieniu próby `PreviousRetryCount` zostanie zaktualizowany w `ElapsedTime` celu odzwierciedlenia czasu, który połączył się do tej pory, i `RetryReason` będzie to wyjątek, który spowodował, że Ostatnia próba ponownego połączenia nie powiedzie się.</span><span class="sxs-lookup"><span data-stu-id="1ec7f-144">After each failed retry attempt, `PreviousRetryCount` will be incremented by one, `ElapsedTime` will be updated to reflect the amount of time spent reconnecting so far, and the `RetryReason` will be the Exception that caused the last reconnect attempt to fail.</span></span>
+<span data-ttu-id="03aa0-141">`NextRetryDelay` przyjmuje jeden argument z typem `RetryContext` .</span><span class="sxs-lookup"><span data-stu-id="03aa0-141">`NextRetryDelay` takes a single argument with the type `RetryContext`.</span></span> <span data-ttu-id="03aa0-142">`RetryContext`Ma trzy właściwości: `PreviousRetryCount` , `ElapsedTime` i `RetryReason` , które są, a `long` `TimeSpan` i `Exception` odpowiednio.</span><span class="sxs-lookup"><span data-stu-id="03aa0-142">The `RetryContext` has three properties: `PreviousRetryCount`, `ElapsedTime` and `RetryReason`, which are a `long`, a `TimeSpan` and an `Exception` respectively.</span></span> <span data-ttu-id="03aa0-143">Przed pierwszym ponownym połączeniem, oba `PreviousRetryCount` i `ElapsedTime` będą miały wartość zero, a `RetryReason` będzie wyjątek, który spowodował utratę połączenia.</span><span class="sxs-lookup"><span data-stu-id="03aa0-143">Before the first reconnect attempt, both `PreviousRetryCount` and `ElapsedTime` will be zero, and the `RetryReason` will be the Exception that caused the connection to be lost.</span></span> <span data-ttu-id="03aa0-144">Po każdym nieudanej próbie ponowieniu próby `PreviousRetryCount` zostanie zaktualizowany w `ElapsedTime` celu odzwierciedlenia czasu, który połączył się do tej pory, i `RetryReason` będzie to wyjątek, który spowodował, że Ostatnia próba ponownego połączenia nie powiedzie się.</span><span class="sxs-lookup"><span data-stu-id="03aa0-144">After each failed retry attempt, `PreviousRetryCount` will be incremented by one, `ElapsedTime` will be updated to reflect the amount of time spent reconnecting so far, and the `RetryReason` will be the Exception that caused the last reconnect attempt to fail.</span></span>
 
-<span data-ttu-id="1ec7f-145">`NextRetryDelay` musi zwrócić wartość TimeSpan reprezentującą czas oczekiwania przed kolejną próbą ponownego połączenia lub `null` Jeśli `HubConnection` należy zatrzymać Ponowne nawiązywanie połączenia.</span><span class="sxs-lookup"><span data-stu-id="1ec7f-145">`NextRetryDelay` must return either a TimeSpan representing the time to wait before the next reconnect attempt or `null` if the `HubConnection` should stop reconnecting.</span></span>
+<span data-ttu-id="03aa0-145">`NextRetryDelay` musi zwrócić wartość TimeSpan reprezentującą czas oczekiwania przed kolejną próbą ponownego połączenia lub `null` Jeśli `HubConnection` należy zatrzymać Ponowne nawiązywanie połączenia.</span><span class="sxs-lookup"><span data-stu-id="03aa0-145">`NextRetryDelay` must return either a TimeSpan representing the time to wait before the next reconnect attempt or `null` if the `HubConnection` should stop reconnecting.</span></span>
 
 ```csharp
 public class RandomRetryPolicy : IRetryPolicy
@@ -206,22 +207,22 @@ HubConnection connection = new HubConnectionBuilder()
     .Build();
 ```
 
-<span data-ttu-id="1ec7f-146">Alternatywnie można napisać kod, który ponownie podłącze klienta ręcznie, jak pokazano w [ręcznym ponownym nawiązaniu połączenia](#manually-reconnect).</span><span class="sxs-lookup"><span data-stu-id="1ec7f-146">Alternatively, you can write code that will reconnect your client manually as demonstrated in [Manually reconnect](#manually-reconnect).</span></span>
+<span data-ttu-id="03aa0-146">Alternatywnie można napisać kod, który ponownie podłącze klienta ręcznie, jak pokazano w [ręcznym ponownym nawiązaniu połączenia](#manually-reconnect).</span><span class="sxs-lookup"><span data-stu-id="03aa0-146">Alternatively, you can write code that will reconnect your client manually as demonstrated in [Manually reconnect](#manually-reconnect).</span></span>
 
 ::: moniker-end
 
-### <a name="manually-reconnect"></a><span data-ttu-id="1ec7f-147">Ręczne ponowne łączenie</span><span class="sxs-lookup"><span data-stu-id="1ec7f-147">Manually reconnect</span></span>
+### <a name="manually-reconnect"></a><span data-ttu-id="03aa0-147">Ręczne ponowne łączenie</span><span class="sxs-lookup"><span data-stu-id="03aa0-147">Manually reconnect</span></span>
 
 ::: moniker range="< aspnetcore-3.0"
 
 > [!WARNING]
-> <span data-ttu-id="1ec7f-148">Przed 3,0 klient platformy .NET dla programu SignalR nie będzie automatycznie ponownie łączyć się.</span><span class="sxs-lookup"><span data-stu-id="1ec7f-148">Prior to 3.0, the .NET client for SignalR doesn't automatically reconnect.</span></span> <span data-ttu-id="1ec7f-149">Musisz napisać kod, który ponownie podłącze klienta ręcznie.</span><span class="sxs-lookup"><span data-stu-id="1ec7f-149">You must write code that will reconnect your client manually.</span></span>
+> <span data-ttu-id="03aa0-148">Przed 3,0 klient platformy .NET dla programu :::no-loc(SignalR)::: nie będzie automatycznie ponownie łączyć się.</span><span class="sxs-lookup"><span data-stu-id="03aa0-148">Prior to 3.0, the .NET client for :::no-loc(SignalR)::: doesn't automatically reconnect.</span></span> <span data-ttu-id="03aa0-149">Musisz napisać kod, który ponownie podłącze klienta ręcznie.</span><span class="sxs-lookup"><span data-stu-id="03aa0-149">You must write code that will reconnect your client manually.</span></span>
 
 ::: moniker-end
 
-<span data-ttu-id="1ec7f-150">Użyj <xref:Microsoft.AspNetCore.SignalR.Client.HubConnection.Closed> zdarzenia, aby odpowiedzieć na utracone połączenie.</span><span class="sxs-lookup"><span data-stu-id="1ec7f-150">Use the <xref:Microsoft.AspNetCore.SignalR.Client.HubConnection.Closed> event to respond to a lost connection.</span></span> <span data-ttu-id="1ec7f-151">Na przykład możesz chcieć zautomatyzować ponowne łączenie.</span><span class="sxs-lookup"><span data-stu-id="1ec7f-151">For example, you might want to automate reconnection.</span></span>
+<span data-ttu-id="03aa0-150">Użyj <xref:Microsoft.AspNetCore.:::no-loc(SignalR):::.Client.HubConnection.Closed> zdarzenia, aby odpowiedzieć na utracone połączenie.</span><span class="sxs-lookup"><span data-stu-id="03aa0-150">Use the <xref:Microsoft.AspNetCore.:::no-loc(SignalR):::.Client.HubConnection.Closed> event to respond to a lost connection.</span></span> <span data-ttu-id="03aa0-151">Na przykład możesz chcieć zautomatyzować ponowne łączenie.</span><span class="sxs-lookup"><span data-stu-id="03aa0-151">For example, you might want to automate reconnection.</span></span>
 
-<span data-ttu-id="1ec7f-152">`Closed`Zdarzenie wymaga delegata zwracającego element `Task` , który umożliwia uruchamianie kodu asynchronicznego bez użycia `async void` .</span><span class="sxs-lookup"><span data-stu-id="1ec7f-152">The `Closed` event requires a delegate that returns a `Task`, which allows async code to run without using `async void`.</span></span> <span data-ttu-id="1ec7f-153">Aby spełnić podpis delegata w programie `Closed` obsługi zdarzeń, który jest uruchamiany synchronicznie, zwróć `Task.CompletedTask` :</span><span class="sxs-lookup"><span data-stu-id="1ec7f-153">To satisfy the delegate signature in a `Closed` event handler that runs synchronously, return `Task.CompletedTask`:</span></span>
+<span data-ttu-id="03aa0-152">`Closed`Zdarzenie wymaga delegata zwracającego element `Task` , który umożliwia uruchamianie kodu asynchronicznego bez użycia `async void` .</span><span class="sxs-lookup"><span data-stu-id="03aa0-152">The `Closed` event requires a delegate that returns a `Task`, which allows async code to run without using `async void`.</span></span> <span data-ttu-id="03aa0-153">Aby spełnić podpis delegata w programie `Closed` obsługi zdarzeń, który jest uruchamiany synchronicznie, zwróć `Task.CompletedTask` :</span><span class="sxs-lookup"><span data-stu-id="03aa0-153">To satisfy the delegate signature in a `Closed` event handler that runs synchronously, return `Task.CompletedTask`:</span></span>
 
 ```csharp
 connection.Closed += (error) => {
@@ -230,44 +231,44 @@ connection.Closed += (error) => {
 };
 ```
 
-<span data-ttu-id="1ec7f-154">Główną przyczyną obsługi asynchronicznej jest to, że można ponownie uruchomić połączenie.</span><span class="sxs-lookup"><span data-stu-id="1ec7f-154">The main reason for the async support is so you can restart the connection.</span></span> <span data-ttu-id="1ec7f-155">Rozpoczęcie połączenia jest akcją asynchroniczną.</span><span class="sxs-lookup"><span data-stu-id="1ec7f-155">Starting a connection is an async action.</span></span>
+<span data-ttu-id="03aa0-154">Główną przyczyną obsługi asynchronicznej jest to, że można ponownie uruchomić połączenie.</span><span class="sxs-lookup"><span data-stu-id="03aa0-154">The main reason for the async support is so you can restart the connection.</span></span> <span data-ttu-id="03aa0-155">Rozpoczęcie połączenia jest akcją asynchroniczną.</span><span class="sxs-lookup"><span data-stu-id="03aa0-155">Starting a connection is an async action.</span></span>
 
-<span data-ttu-id="1ec7f-156">W programie `Closed` obsługi, który ponownie uruchamia połączenie, rozważ oczekiwanie na losowe opóźnienie, aby zapobiec przeciążeniu serwera, jak pokazano w następującym przykładzie:</span><span class="sxs-lookup"><span data-stu-id="1ec7f-156">In a `Closed` handler that restarts the connection, consider waiting for some random delay to prevent overloading the server, as shown in the following example:</span></span>
+<span data-ttu-id="03aa0-156">W programie `Closed` obsługi, który ponownie uruchamia połączenie, rozważ oczekiwanie na losowe opóźnienie, aby zapobiec przeciążeniu serwera, jak pokazano w następującym przykładzie:</span><span class="sxs-lookup"><span data-stu-id="03aa0-156">In a `Closed` handler that restarts the connection, consider waiting for some random delay to prevent overloading the server, as shown in the following example:</span></span>
 
 [!code-csharp[Use Closed event handler to automate reconnection](dotnet-client/sample/signalrchatclient/MainWindow.xaml.cs?name=snippet_ClosedRestart)]
 
-## <a name="call-hub-methods-from-client"></a><span data-ttu-id="1ec7f-157">Wywoływanie metod centrów z klienta</span><span class="sxs-lookup"><span data-stu-id="1ec7f-157">Call hub methods from client</span></span>
+## <a name="call-hub-methods-from-client"></a><span data-ttu-id="03aa0-157">Wywoływanie metod centrów z klienta</span><span class="sxs-lookup"><span data-stu-id="03aa0-157">Call hub methods from client</span></span>
 
-<span data-ttu-id="1ec7f-158">`InvokeAsync` wywołuje metody w centrum.</span><span class="sxs-lookup"><span data-stu-id="1ec7f-158">`InvokeAsync` calls methods on the hub.</span></span> <span data-ttu-id="1ec7f-159">Przekaż nazwę metody Hub i wszystkie argumenty zdefiniowane w metodzie Hub do `InvokeAsync` .</span><span class="sxs-lookup"><span data-stu-id="1ec7f-159">Pass the hub method name and any arguments defined in the hub method to `InvokeAsync`.</span></span> <span data-ttu-id="1ec7f-160">SignalR jest asynchroniczny, więc używaj `async` i `await` podczas wykonywania wywołań.</span><span class="sxs-lookup"><span data-stu-id="1ec7f-160">SignalR is asynchronous, so use `async` and `await` when making the calls.</span></span>
+<span data-ttu-id="03aa0-158">`InvokeAsync` wywołuje metody w centrum.</span><span class="sxs-lookup"><span data-stu-id="03aa0-158">`InvokeAsync` calls methods on the hub.</span></span> <span data-ttu-id="03aa0-159">Przekaż nazwę metody Hub i wszystkie argumenty zdefiniowane w metodzie Hub do `InvokeAsync` .</span><span class="sxs-lookup"><span data-stu-id="03aa0-159">Pass the hub method name and any arguments defined in the hub method to `InvokeAsync`.</span></span> <span data-ttu-id="03aa0-160">:::no-loc(SignalR)::: jest asynchroniczny, więc używaj `async` i `await` podczas wykonywania wywołań.</span><span class="sxs-lookup"><span data-stu-id="03aa0-160">:::no-loc(SignalR)::: is asynchronous, so use `async` and `await` when making the calls.</span></span>
 
 [!code-csharp[InvokeAsync method](dotnet-client/sample/signalrchatclient/MainWindow.xaml.cs?name=snippet_InvokeAsync)]
 
-<span data-ttu-id="1ec7f-161">`InvokeAsync`Metoda zwraca, `Task` która kończy się, gdy metoda serwera zwraca wartość.</span><span class="sxs-lookup"><span data-stu-id="1ec7f-161">The `InvokeAsync` method returns a `Task` which completes when the server method returns.</span></span> <span data-ttu-id="1ec7f-162">Wartość zwracana, jeśli istnieje, jest podawana jako wynik `Task` .</span><span class="sxs-lookup"><span data-stu-id="1ec7f-162">The return value, if any, is provided as the result of the `Task`.</span></span> <span data-ttu-id="1ec7f-163">Wszystkie wyjątki zgłoszone przez metodę na serwerze generują błędy `Task` .</span><span class="sxs-lookup"><span data-stu-id="1ec7f-163">Any exceptions thrown by the method on the server produce a faulted `Task`.</span></span> <span data-ttu-id="1ec7f-164">Użyj `await` składni, aby poczekać na zakończenie i składnię metody serwera, aby `try...catch` obsłużyć błędy.</span><span class="sxs-lookup"><span data-stu-id="1ec7f-164">Use `await` syntax to wait for the server method to complete and `try...catch` syntax to handle errors.</span></span>
+<span data-ttu-id="03aa0-161">`InvokeAsync`Metoda zwraca, `Task` która kończy się, gdy metoda serwera zwraca wartość.</span><span class="sxs-lookup"><span data-stu-id="03aa0-161">The `InvokeAsync` method returns a `Task` which completes when the server method returns.</span></span> <span data-ttu-id="03aa0-162">Wartość zwracana, jeśli istnieje, jest podawana jako wynik `Task` .</span><span class="sxs-lookup"><span data-stu-id="03aa0-162">The return value, if any, is provided as the result of the `Task`.</span></span> <span data-ttu-id="03aa0-163">Wszystkie wyjątki zgłoszone przez metodę na serwerze generują błędy `Task` .</span><span class="sxs-lookup"><span data-stu-id="03aa0-163">Any exceptions thrown by the method on the server produce a faulted `Task`.</span></span> <span data-ttu-id="03aa0-164">Użyj `await` składni, aby poczekać na zakończenie i składnię metody serwera, aby `try...catch` obsłużyć błędy.</span><span class="sxs-lookup"><span data-stu-id="03aa0-164">Use `await` syntax to wait for the server method to complete and `try...catch` syntax to handle errors.</span></span>
 
-<span data-ttu-id="1ec7f-165">`SendAsync`Metoda zwraca, `Task` która kończy się, gdy komunikat został wysłany do serwera.</span><span class="sxs-lookup"><span data-stu-id="1ec7f-165">The `SendAsync` method returns a `Task` which completes when the message has been sent to the server.</span></span> <span data-ttu-id="1ec7f-166">Nie podano wartości zwracanej od momentu `Task` zaczekania na zakończenie metody serwera.</span><span class="sxs-lookup"><span data-stu-id="1ec7f-166">No return value is provided since this `Task` doesn't wait until the server method completes.</span></span> <span data-ttu-id="1ec7f-167">Wszystkie wyjątki zgłoszone na kliencie podczas wysyłania komunikatu generują błędy `Task` .</span><span class="sxs-lookup"><span data-stu-id="1ec7f-167">Any exceptions thrown on the client while sending the message produce a faulted `Task`.</span></span> <span data-ttu-id="1ec7f-168">Użyj `await` składni i, `try...catch` Aby obsłużyć błędy wysyłania.</span><span class="sxs-lookup"><span data-stu-id="1ec7f-168">Use `await` and `try...catch` syntax to handle send errors.</span></span>
+<span data-ttu-id="03aa0-165">`SendAsync`Metoda zwraca, `Task` która kończy się, gdy komunikat został wysłany do serwera.</span><span class="sxs-lookup"><span data-stu-id="03aa0-165">The `SendAsync` method returns a `Task` which completes when the message has been sent to the server.</span></span> <span data-ttu-id="03aa0-166">Nie podano wartości zwracanej od momentu `Task` zaczekania na zakończenie metody serwera.</span><span class="sxs-lookup"><span data-stu-id="03aa0-166">No return value is provided since this `Task` doesn't wait until the server method completes.</span></span> <span data-ttu-id="03aa0-167">Wszystkie wyjątki zgłoszone na kliencie podczas wysyłania komunikatu generują błędy `Task` .</span><span class="sxs-lookup"><span data-stu-id="03aa0-167">Any exceptions thrown on the client while sending the message produce a faulted `Task`.</span></span> <span data-ttu-id="03aa0-168">Użyj `await` składni i, `try...catch` Aby obsłużyć błędy wysyłania.</span><span class="sxs-lookup"><span data-stu-id="03aa0-168">Use `await` and `try...catch` syntax to handle send errors.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="1ec7f-169">Wywoływanie metod centrów z poziomu klienta jest obsługiwane tylko w przypadku korzystania z usługi platformy Azure SignalR w trybie *domyślnym* .</span><span class="sxs-lookup"><span data-stu-id="1ec7f-169">Calling hub methods from a client is only supported when using the Azure SignalR Service in *Default* mode.</span></span> <span data-ttu-id="1ec7f-170">Aby uzyskać więcej informacji, zobacz [często zadawane pytania (repozytorium Azure-sygnalizujące GitHub)](https://github.com/Azure/azure-signalr/blob/dev/docs/faq.md#what-is-the-meaning-of-service-mode-defaultserverlessclassic-how-can-i-choose).</span><span class="sxs-lookup"><span data-stu-id="1ec7f-170">For more information, see [Frequently Asked Questions (azure-signalr GitHub repository)](https://github.com/Azure/azure-signalr/blob/dev/docs/faq.md#what-is-the-meaning-of-service-mode-defaultserverlessclassic-how-can-i-choose).</span></span>
+> <span data-ttu-id="03aa0-169">Wywoływanie metod centrów z poziomu klienta jest obsługiwane tylko w przypadku korzystania z usługi platformy Azure :::no-loc(SignalR)::: w trybie *domyślnym* .</span><span class="sxs-lookup"><span data-stu-id="03aa0-169">Calling hub methods from a client is only supported when using the Azure :::no-loc(SignalR)::: Service in *Default* mode.</span></span> <span data-ttu-id="03aa0-170">Aby uzyskać więcej informacji, zobacz [często zadawane pytania (repozytorium Azure-sygnalizujące GitHub)](https://github.com/Azure/azure-signalr/blob/dev/docs/faq.md#what-is-the-meaning-of-service-mode-defaultserverlessclassic-how-can-i-choose).</span><span class="sxs-lookup"><span data-stu-id="03aa0-170">For more information, see [Frequently Asked Questions (azure-signalr GitHub repository)](https://github.com/Azure/azure-signalr/blob/dev/docs/faq.md#what-is-the-meaning-of-service-mode-defaultserverlessclassic-how-can-i-choose).</span></span>
 
-## <a name="call-client-methods-from-hub"></a><span data-ttu-id="1ec7f-171">Wywoływanie metod klienta z centrum</span><span class="sxs-lookup"><span data-stu-id="1ec7f-171">Call client methods from hub</span></span>
+## <a name="call-client-methods-from-hub"></a><span data-ttu-id="03aa0-171">Wywoływanie metod klienta z centrum</span><span class="sxs-lookup"><span data-stu-id="03aa0-171">Call client methods from hub</span></span>
 
-<span data-ttu-id="1ec7f-172">Zdefiniuj metody, które są używane przez centrum `connection.On` po skompilowaniu, ale przed rozpoczęciem połączenia.</span><span class="sxs-lookup"><span data-stu-id="1ec7f-172">Define methods the hub calls using `connection.On` after building, but before starting the connection.</span></span>
+<span data-ttu-id="03aa0-172">Zdefiniuj metody, które są używane przez centrum `connection.On` po skompilowaniu, ale przed rozpoczęciem połączenia.</span><span class="sxs-lookup"><span data-stu-id="03aa0-172">Define methods the hub calls using `connection.On` after building, but before starting the connection.</span></span>
 
 [!code-csharp[Define client methods](dotnet-client/sample/signalrchatclient/MainWindow.xaml.cs?name=snippet_ConnectionOn)]
 
-<span data-ttu-id="1ec7f-173">Poprzedni kod w `connection.On` działa, gdy kod po stronie serwera wywołuje go przy użyciu `SendAsync` metody.</span><span class="sxs-lookup"><span data-stu-id="1ec7f-173">The preceding code in `connection.On` runs when server-side code calls it using the `SendAsync` method.</span></span>
+<span data-ttu-id="03aa0-173">Poprzedni kod w `connection.On` działa, gdy kod po stronie serwera wywołuje go przy użyciu `SendAsync` metody.</span><span class="sxs-lookup"><span data-stu-id="03aa0-173">The preceding code in `connection.On` runs when server-side code calls it using the `SendAsync` method.</span></span>
 
 [!code-csharp[Call client method](dotnet-client/sample/signalrchat/hubs/chathub.cs?name=snippet_SendMessage)]
 
-## <a name="error-handling-and-logging"></a><span data-ttu-id="1ec7f-174">Obsługa błędów i rejestrowanie</span><span class="sxs-lookup"><span data-stu-id="1ec7f-174">Error handling and logging</span></span>
+## <a name="error-handling-and-logging"></a><span data-ttu-id="03aa0-174">Obsługa błędów i rejestrowanie</span><span class="sxs-lookup"><span data-stu-id="03aa0-174">Error handling and logging</span></span>
 
-<span data-ttu-id="1ec7f-175">Obsługa błędów przy użyciu instrukcji try-catch.</span><span class="sxs-lookup"><span data-stu-id="1ec7f-175">Handle errors with a try-catch statement.</span></span> <span data-ttu-id="1ec7f-176">Zbadaj `Exception` obiekt, aby określić odpowiednią akcję do wykonania po wystąpieniu błędu.</span><span class="sxs-lookup"><span data-stu-id="1ec7f-176">Inspect the `Exception` object to determine the proper action to take after an error occurs.</span></span>
+<span data-ttu-id="03aa0-175">Obsługa błędów przy użyciu instrukcji try-catch.</span><span class="sxs-lookup"><span data-stu-id="03aa0-175">Handle errors with a try-catch statement.</span></span> <span data-ttu-id="03aa0-176">Zbadaj `Exception` obiekt, aby określić odpowiednią akcję do wykonania po wystąpieniu błędu.</span><span class="sxs-lookup"><span data-stu-id="03aa0-176">Inspect the `Exception` object to determine the proper action to take after an error occurs.</span></span>
 
 [!code-csharp[Logging](dotnet-client/sample/signalrchatclient/MainWindow.xaml.cs?name=snippet_ErrorHandling)]
 
-## <a name="additional-resources"></a><span data-ttu-id="1ec7f-177">Dodatkowe zasoby</span><span class="sxs-lookup"><span data-stu-id="1ec7f-177">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="03aa0-177">Dodatkowe zasoby</span><span class="sxs-lookup"><span data-stu-id="03aa0-177">Additional resources</span></span>
 
-* [<span data-ttu-id="1ec7f-178">Koncentratory</span><span class="sxs-lookup"><span data-stu-id="1ec7f-178">Hubs</span></span>](xref:signalr/hubs)
-* [<span data-ttu-id="1ec7f-179">Klient JavaScript</span><span class="sxs-lookup"><span data-stu-id="1ec7f-179">JavaScript client</span></span>](xref:signalr/javascript-client)
-* [<span data-ttu-id="1ec7f-180">Publikowanie na platformie Azure</span><span class="sxs-lookup"><span data-stu-id="1ec7f-180">Publish to Azure</span></span>](xref:signalr/publish-to-azure-web-app)
-* [<span data-ttu-id="1ec7f-181">SignalRDokumentacja bezserwerowa usługi platformy Azure</span><span class="sxs-lookup"><span data-stu-id="1ec7f-181">Azure SignalR Service serverless documentation</span></span>](/azure/azure-signalr/signalr-concept-serverless-development-config)
+* [<span data-ttu-id="03aa0-178">Centra</span><span class="sxs-lookup"><span data-stu-id="03aa0-178">Hubs</span></span>](xref:signalr/hubs)
+* [<span data-ttu-id="03aa0-179">Klient JavaScript</span><span class="sxs-lookup"><span data-stu-id="03aa0-179">JavaScript client</span></span>](xref:signalr/javascript-client)
+* [<span data-ttu-id="03aa0-180">Publikowanie na platformie Azure</span><span class="sxs-lookup"><span data-stu-id="03aa0-180">Publish to Azure</span></span>](xref:signalr/publish-to-azure-web-app)
+* [<span data-ttu-id="03aa0-181">:::no-loc(SignalR):::Dokumentacja bezserwerowa usługi platformy Azure</span><span class="sxs-lookup"><span data-stu-id="03aa0-181">Azure :::no-loc(SignalR)::: Service serverless documentation</span></span>](/azure/azure-signalr/signalr-concept-serverless-development-config)

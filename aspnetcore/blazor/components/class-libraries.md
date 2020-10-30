@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/27/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,18 +19,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/class-libraries
-ms.openlocfilehash: afd1bfffae11520a5d9abccc1d2ee4cf3a46a4bf
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: f8e36cbe905b5ec2e674123c0f2ab6db99683c7c
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722465"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93056416"
 ---
 # <a name="aspnet-core-no-locrazor-components-class-libraries"></a>RazorBiblioteki klas składników ASP.NET Core
 
 Autor [Simon Timms](https://github.com/stimms)
 
-Składniki mogą być współużytkowane w [ Razor bibliotece klas (RCL)](xref:razor-pages/ui-class) w różnych projektach. * Razor Biblioteka klas składników* może być dołączana z:
+Składniki mogą być współużytkowane w [ Razor bibliotece klas (RCL)](xref:razor-pages/ui-class) w różnych projektach. *Razor Biblioteka klas składników* może być dołączana z:
 
 * Inny projekt w rozwiązaniu.
 * Pakiet NuGet.
@@ -42,16 +43,16 @@ Podobnie jak składniki są zwykłymi typami .NET, składniki udostępniane prze
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 1. Tworzenie nowego projektu.
-1. Wybierz ** Razor bibliotekę klas**. Wybierz pozycję **Dalej**.
-1. W oknie dialogowym **Utwórz nową Razor bibliotekę klas** wybierz pozycję **Utwórz**.
-1. Podaj nazwę projektu w polu **Nazwa projektu** lub zaakceptuj nazwę domyślną projektu. W przykładach w tym temacie użyto nazwy projektu `ComponentLibrary` . Wybierz pozycję **Utwórz**.
+1. Wybierz **Razor bibliotekę klas** . Wybierz opcję **Dalej** .
+1. W oknie dialogowym **Utwórz nową Razor bibliotekę klas** wybierz pozycję **Utwórz** .
+1. Podaj nazwę projektu w polu **Nazwa projektu** lub zaakceptuj nazwę domyślną projektu. W przykładach w tym temacie użyto nazwy projektu `ComponentLibrary` . Wybierz pozycję **Utwórz** .
 1. Dodaj RCL do rozwiązania:
-   1. Kliknij prawym przyciskiem myszy rozwiązanie. Wybierz pozycję **Dodaj**  >  **istniejący projekt**.
+   1. Kliknij prawym przyciskiem myszy rozwiązanie. Wybierz pozycję **Dodaj**  >  **istniejący projekt** .
    1. Przejdź do pliku projektu RCL.
    1. Wybierz plik projektu RCL ( `.csproj` ).
 1. Dodaj odwołanie RCL z aplikacji:
-   1. Kliknij prawym przyciskiem myszy projekt aplikacji. Wybierz pozycję **Dodaj**  >  **odwołanie**.
-   1. Wybierz projekt RCL. Wybierz pozycję **OK**.
+   1. Kliknij prawym przyciskiem myszy projekt aplikacji. Wybierz pozycję **Dodaj**  >  **odwołanie** .
+   1. Wybierz projekt RCL. Wybierz pozycję **OK** .
 
 > [!NOTE]
 > Jeśli pole wyboru **strony i widoki pomocy technicznej** jest zaznaczone podczas generowania RCL z szablonu, Dodaj również `_Imports.razor` plik do katalogu głównego wygenerowanego projektu z następującą zawartością, aby włączyć Razor Tworzenie składników:
@@ -64,7 +65,7 @@ Podobnie jak składniki są zwykłymi typami .NET, składniki udostępniane prze
 
 # <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli)
 
-1. Użyj szablonu ** Razor biblioteki klas** ( `razorclasslib` ) za pomocą [`dotnet new`](/dotnet/core/tools/dotnet-new) polecenia w powłoce poleceń. W poniższym przykładzie jest tworzony RCL o nazwie `ComponentLibrary` . Folder, który `ComponentLibrary` ma zostać utworzony, jest tworzony automatycznie podczas wykonywania polecenia:
+1. Użyj szablonu **Razor biblioteki klas** ( `razorclasslib` ) za pomocą [`dotnet new`](/dotnet/core/tools/dotnet-new) polecenia w powłoce poleceń. W poniższym przykładzie jest tworzony RCL o nazwie `ComponentLibrary` . Folder, który `ComponentLibrary` ma zostać utworzony, jest tworzony automatycznie podczas wykonywania polecenia:
 
    ```dotnetcli
    dotnet new razorclasslib -o ComponentLibrary
@@ -120,9 +121,11 @@ Welcome to your new app.
 
 Opcjonalnie należy uwzględnić `@using ComponentLibrary` dyrektywę w pliku najwyższego poziomu, `_Import.razor` Aby udostępnić składniki biblioteki dla całego projektu. Dodaj dyrektywę do pliku na `_Import.razor` dowolnym poziomie, aby zastosować przestrzeń nazw do pojedynczego składnika lub zestawu składników w folderze.
 
+<!-- HOLD for reactivation at 5.x
+
 ::: moniker range=">= aspnetcore-5.0"
 
-Aby dostarczyć `Component1` `my-component` klasy CSS do składnika, Połącz z arkuszem stylów biblioteki przy użyciu [ `Link` składnika](xref:blazor/fundamentals/additional-scenarios#influence-html-head-tag-elements) struktury w `Component1.razor` :
+To provide `Component1`'s `my-component` CSS class to the component, link to the library's stylesheet using the framework's [`Link` component](xref:blazor/fundamentals/additional-scenarios#influence-html-head-tag-elements) in `Component1.razor`:
 
 ```razor
 <div class="my-component">
@@ -134,7 +137,7 @@ Aby dostarczyć `Component1` `my-component` klasy CSS do składnika, Połącz z 
 </div>
 ```
 
-Aby udostępnić arkusz stylów w aplikacji, możesz połączyć się z arkuszem stylów biblioteki w `wwwroot/index.html` pliku ( Blazor WebAssembly ) lub `Pages/_Host.cshtml` pliku () aplikacji ( Blazor Server ):
+To provide the stylesheet across the app, you can alternatively link to the library's stylesheet in the app's `wwwroot/index.html` file (Blazor WebAssembly) or `Pages/_Host.cshtml` file (Blazor Server):
 
 ```html
 <head>
@@ -143,14 +146,16 @@ Aby udostępnić arkusz stylów w aplikacji, możesz połączyć się z arkuszem
 </head>
 ```
 
-Gdy `Link` składnik jest używany w składniku podrzędnym, połączony element zawartości jest również dostępny dla każdego innego składnika podrzędnego składnika nadrzędnego, o ile jest renderowany element podrzędny ze `Link` składnikiem. Rozróżnienie między użyciem `Link` składnika w składniku podrzędnym i umieszczenie `<link>` znacznika HTML w `wwwroot/index.html` lub `Pages/_Host.cshtml` polega na tym, że renderowany tag HTML składnika Framework:
+When the `Link` component is used in a child component, the linked asset is also available to any other child component of the parent component as long as the child with the `Link` component is rendered. The distinction between using the `Link` component in a child component and placing a `<link>` HTML tag in `wwwroot/index.html` or `Pages/_Host.cshtml` is that a framework component's rendered HTML tag:
 
-* Mogą być modyfikowane przez stan aplikacji. `<link>`Nie można zmodyfikować oznakowanego języka HTML w stanie aplikacji.
-* Jest usuwany z kodu HTML, `<head>` gdy składnik nadrzędny nie jest już renderowany.
+* Can be modified by application state. A hard-coded `<link>` HTML tag can't be modified by application state.
+* Is removed from the HTML `<head>` when the parent component is no longer rendered.
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-5.0"
+
+-->
 
 Aby podać `Component1` `my-component` klasę CSS, Połącz się z arkuszem stylów biblioteki w `wwwroot/index.html` pliku ( Blazor WebAssembly ) lub `Pages/_Host.cshtml` pliku () aplikacji ( Blazor Server ):
 
@@ -161,7 +166,11 @@ Aby podać `Component1` `my-component` klasę CSS, Połącz się z arkuszem styl
 </head>
 ```
 
+<!-- HOLD for reactivation at 5.x
+
 ::: moniker-end
+
+-->
 
 ## <a name="create-a-no-locrazor-components-class-library-with-static-assets"></a>Tworzenie Razor biblioteki klas składników ze statycznymi zasobami
 
@@ -218,7 +227,7 @@ dotnet pack
 
 Przekaż pakiet do narzędzia NuGet przy użyciu [`dotnet nuget push`](/dotnet/core/tools/dotnet-nuget-push) polecenia w powłoce poleceń.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 ::: moniker range=">= aspnetcore-5.0"
 

@@ -6,6 +6,7 @@ ms.author: riande
 ms.date: 09/28/2019
 ms.topic: tutorial
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/read-related-data
-ms.openlocfilehash: f2b4fd9fb1e328882583536b704d516955343417
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 610a9e9b0007fb468ea9cdae6fadd2e756de4290
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88629460"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93054063"
 ---
 # <a name="tutorial-read-related-data---aspnet-mvc-with-ef-core"></a>Samouczek: odczytywanie powiązanych danych — ASP.NET MVC z EF Core
 
@@ -48,7 +49,7 @@ W tym samouczku zostały wykonane następujące czynności:
 
 ## <a name="learn-how-to-load-related-data"></a>Dowiedz się, jak ładować powiązane dane
 
-Istnieje kilka sposobów, które oprogramowanie mapowanie relacyjne (ORM), takie jak Entity Framework, może ładować powiązane dane do właściwości nawigacji jednostki:
+Istnieje kilka sposobów, że oprogramowanie Object-Relational Mapping (ORM), takie jak Entity Framework, może ładować powiązane dane do właściwości nawigacji jednostki:
 
 * Ładowanie eager. Po odczytaniu jednostki są pobierane powiązane dane. Zwykle powoduje to pojedyncze zapytanie sprzężenia, które pobiera wszystkie dane, które są zbędne. Należy określić eager ładowania w Entity Framework Core przy użyciu `Include` metod i `ThenInclude` .
 
@@ -58,7 +59,7 @@ Istnieje kilka sposobów, które oprogramowanie mapowanie relacyjne (ORM), takie
 
   ![Przykład oddzielnych zapytań](read-related-data/_static/separate-queries.png)
 
-* Jawne ładowanie. Gdy obiekt jest najpierw odczytywany, powiązane dane nie są pobierane. Napiszesz kod, który pobiera powiązane dane, jeśli jest to potrzebne. Tak jak w przypadku eager ładowania z oddzielnymi zapytaniami, jawne ładowanie powoduje wysłanie wielu zapytań do bazy danych. Różnica polega na tym, że z jawnym ładowaniem kod określa właściwości nawigacji do załadowania. W Entity Framework Core 1,1 można użyć `Load` metody do wykonania jawnego ładowania. Na przykład:
+* Jawne ładowanie. Gdy obiekt jest najpierw odczytywany, powiązane dane nie są pobierane. Napiszesz kod, który pobiera powiązane dane, jeśli jest to potrzebne. Tak jak w przypadku eager ładowania z oddzielnymi zapytaniami, jawne ładowanie powoduje wysłanie wielu zapytań do bazy danych. Różnica polega na tym, że z jawnym ładowaniem kod określa właściwości nawigacji do załadowania. W Entity Framework Core 1,1 można użyć `Load` metody do wykonania jawnego ładowania. Przykład:
 
   ![Przykład jawnego ładowania](read-related-data/_static/explicit-loading.png)
 
@@ -180,7 +181,7 @@ Następnie, jeśli wybrano kurs, wybrany kurs zostanie pobrany z listy kursów w
 
 ### <a name="modify-the-instructor-index-view"></a>Modyfikowanie widoku indeksu instruktora
 
-W obszarze *widoki/instruktorzy/index. cshtml*Zastąp kod szablonu poniższym kodem. Zmiany są wyróżnione.
+W obszarze *widoki/instruktorzy/index. cshtml* Zastąp kod szablonu poniższym kodem. Zmiany są wyróżnione.
 
 [!code-cshtml[](intro/samples/cu/Views/Instructors/Index1.cshtml?range=1-64&highlight=1,3-7,15-19,24,26-31,41-54,56)]
 
@@ -188,7 +189,7 @@ Wprowadzono następujące zmiany w istniejącym kodzie:
 
 * Zmieniono klasę modelu na `InstructorIndexData` .
 
-* Zmieniono tytuł strony z **indeksu** na **Instruktorzy**.
+* Zmieniono tytuł strony z **indeksu** na **Instruktorzy** .
 
 * Dodano kolumnę **pakietu Office** , która `item.OfficeAssignment.Location` jest wyświetlana tylko wtedy, gdy `item.OfficeAssignment` nie ma wartości null. (Ponieważ jest to relacja "jeden do zera" lub jeden-do-jednego, nie może być powiązana jednostka OfficeAssignment).
 
@@ -244,7 +245,7 @@ Odśwież stronę ponownie i wybierz instruktora. Następnie wybierz kurs, aby z
 
 ## <a name="about-explicit-loading"></a>Informacje o jawnym załadowaniu
 
-Po pobraniu listy instruktorów w *InstructorsController.cs*określono eager ładowania dla `CourseAssignments` właściwości nawigacji.
+Po pobraniu listy instruktorów w *InstructorsController.cs* określono eager ładowania dla `CourseAssignments` właściwości nawigacji.
 
 Załóżmy, że oczekujesz, że użytkownicy rzadko chcą widzieć rejestracje w wybranym instruktorze i kursie. W takim przypadku możesz chcieć załadować dane rejestracji tylko wtedy, gdy jest to wymagane. Aby zapoznać się z przykładem, jak przeprowadzić jawne ładowanie, Zastąp `Index` metodę następującym kodem, który usuwa eager ładowania na potrzeby rejestracji i ładuje tę właściwość jawnie. Zmiany kodu są wyróżnione.
 

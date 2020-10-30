@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 08/20/2018
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: client-side/libman/libman-vs
-ms.openlocfilehash: 77cfced18edd9db5be21265469b42f32e3de274d
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 1c97f5d7fbf64c5043e6d2277091b9a477833bf1
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88625677"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93054713"
 ---
 # <a name="use-libman-with-aspnet-core-in-visual-studio"></a>Używanie LibMan z ASP.NET Core w programie Visual Studio
 
@@ -45,16 +46,16 @@ Program Visual Studio ma wbudowaną obsługę [LibMan](xref:client-side/libman/i
 
 Pliki bibliotek można dodać do projektu ASP.NET Core na dwa różne sposoby:
 
-1. [Korzystanie z okna dialogowego Dodawanie biblioteki po stronie klienta](#use-the-add-client-side-library-dialog)
+1. [Korzystanie z okna dialogowego Dodawanie biblioteki Client-Side](#use-the-add-client-side-library-dialog)
 1. [Ręczne konfigurowanie wpisów pliku manifestu LibMan](#manually-configure-libman-manifest-file-entries)
 
-### <a name="use-the-add-client-side-library-dialog"></a>Korzystanie z okna dialogowego Dodawanie biblioteki po stronie klienta
+### <a name="use-the-add-client-side-library-dialog"></a>Korzystanie z okna dialogowego Dodawanie biblioteki Client-Side
 
 Wykonaj następujące kroki, aby zainstalować bibliotekę po stronie klienta:
 
-* W **Eksplorator rozwiązań**kliknij prawym przyciskiem myszy folder projektu, w którym należy dodać pliki. Wybierz pozycję **Dodaj**  >  **bibliotekę po stronie klienta**. Zostanie wyświetlone okno dialogowe **Dodawanie biblioteki po stronie klienta** :
+* W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy folder projektu, w którym należy dodać pliki. Wybierz pozycję **Dodaj**  >  **bibliotekę po stronie klienta** . Zostanie wyświetlone okno dialogowe **dodawanie Client-Side biblioteki** :
 
-  ![Okno dialogowe Dodawanie biblioteki po stronie klienta](_static/add-library-dialog.png)
+  ![Okno dialogowe Dodawanie biblioteki Client-Side](_static/add-library-dialog.png)
 
 * Wybierz dostawcę biblioteki z listy rozwijanej **dostawca** . CDNJS jest dostawcą domyślnym.
 * Wpisz nazwę biblioteki do pobrania w polu tekstowym **Biblioteka** . Technologia IntelliSense udostępnia listę bibliotek zaczynających się od podanego tekstu.
@@ -79,8 +80,8 @@ Wykonaj następujące kroki, aby zainstalować bibliotekę po stronie klienta:
   |Katalog główny projektu (Jeśli folder *wwwroot* nie istnieje) |*lib/jQuery/*         |
   |Folder *stron* w projekcie                 |*Strony/jQuery/*       |
 
-* Kliknij przycisk **Zainstaluj** , aby pobrać pliki, na konfigurację w *libman.jsna*.
-* Zapoznaj się z informacjami dotyczącymi instalacji w oknie **danych wyjściowych** programu **Library Manager** . Na przykład:
+* Kliknij przycisk **Zainstaluj** , aby pobrać pliki, na konfigurację w *libman.jsna* .
+* Zapoznaj się z informacjami dotyczącymi instalacji w oknie **danych wyjściowych** programu **Library Manager** . Przykład:
 
   ```console
   Restore operation started...
@@ -95,13 +96,13 @@ Wykonaj następujące kroki, aby zainstalować bibliotekę po stronie klienta:
 
 ### <a name="manually-configure-libman-manifest-file-entries"></a>Ręczne konfigurowanie wpisów pliku manifestu LibMan
 
-Wszystkie operacje LibMan w programie Visual Studio opierają się na zawartości manifestu LibMan głównego projektu (*libman.json*). Możesz ręcznie edytować *libman.jsw* celu skonfigurowania plików biblioteki dla projektu. Program Visual Studio przywraca wszystkie pliki bibliotek, gdy *libman.json* jest zapisywany.
+Wszystkie operacje LibMan w programie Visual Studio opierają się na zawartości manifestu LibMan głównego projektu ( *libman.json* ). Możesz ręcznie edytować *libman.jsw* celu skonfigurowania plików biblioteki dla projektu. Program Visual Studio przywraca wszystkie pliki bibliotek, gdy *libman.json* jest zapisywany.
 
 Aby otworzyć *libman.jsna* potrzeby edycji, dostępne są następujące opcje:
 
-* Kliknij dwukrotnie *libman.jsw* pliku w **Eksplorator rozwiązań**.
-* Kliknij prawym przyciskiem myszy projekt w **Eksplorator rozwiązań** i wybierz pozycję **Zarządzaj bibliotekami po stronie klienta**. **&#8224;**
-* Wybierz pozycję **Zarządzaj bibliotekami po stronie klienta** z menu **projektu** programu Visual Studio. **&#8224;**
+* Kliknij dwukrotnie *libman.jsw* pliku w **Eksplorator rozwiązań** .
+* Kliknij prawym przyciskiem myszy projekt w **Eksplorator rozwiązań** i wybierz polecenie **zarządzaj bibliotekami Client-Side** . **&#8224;**
+* Wybierz pozycję **Zarządzaj bibliotekami Client-Side** z menu **projektu** programu Visual Studio. **&#8224;**
 
 **&#8224;** Jeśli *libman.jsw* pliku nie istnieje już w katalogu głównym projektu, zostanie utworzony z domyślną zawartością szablonu elementu.
 
@@ -109,9 +110,9 @@ Program Visual Studio oferuje zaawansowane funkcje edycji JSON, takie jak koloro
 
 Przy użyciu następującego pliku manifestu LibMan pobiera pliki zgodnie z konfiguracją zdefiniowaną we `libraries` właściwości. Wyjaśnienie literałów obiektów zdefiniowanych w `libraries` następujący sposób:
 
-* Podzestaw [jQuery](https://jquery.com/) w wersji 3.3.1 jest pobierany z dostawcy CDNJS. Podzestaw jest zdefiniowany we `files` właściwościach &mdash; *jquery.min.js*, *jquery.js*i *jQuery. min. map*. Pliki są umieszczane w folderze *wwwroot/lib/jQuery* projektu.
+* Podzestaw [jQuery](https://jquery.com/) w wersji 3.3.1 jest pobierany z dostawcy CDNJS. Podzestaw jest zdefiniowany we `files` właściwościach &mdash; *jquery.min.js* , *jquery.js* i *jQuery. min. map* . Pliki są umieszczane w folderze *wwwroot/lib/jQuery* projektu.
 * W [całości wersja 4.1.3](https://getbootstrap.com/) jest pobierana i umieszczana w folderze *wwwroot/lib/Bootstrap* . Właściwość literału obiektu `provider` zastępuje `defaultProvider` wartość właściwości. LibMan pobiera pliki Bootstrap z dostawcy unpkg.
-* Podzbiór [Lodash](https://lodash.com/) został zatwierdzony przez organ regulujący w organizacji. Pliki *lodash.js* i *lodash.min.js* są pobierane z lokalnego systemu plików w lokalizacji *C: \\ temp \\ lodash \\ *. Pliki są kopiowane do folderu *wwwroot/lib/lodash* projektu.
+* Podzbiór [Lodash](https://lodash.com/) został zatwierdzony przez organ regulujący w organizacji. Pliki *lodash.js* i *lodash.min.js* są pobierane z lokalnego systemu plików w lokalizacji *C: \\ temp \\ lodash \\* . Pliki są kopiowane do folderu *wwwroot/lib/lodash* projektu.
 
 [!code-json[](samples/LibManSample/libman.json)]
 
@@ -133,7 +134,7 @@ LibMan może przywrócić zdefiniowane pliki biblioteki w ramach procesu kompila
 
 Aby włączyć i przetestować zachowanie funkcji przywracania po kompilacji:
 
-* Kliknij prawym przyciskiem myszy pozycję *libman.jsna* **Eksplorator rozwiązań** i wybierz opcję **Włącz przywracanie bibliotek po stronie klienta w kompilacji** z menu kontekstowego.
+* Kliknij prawym przyciskiem myszy pozycję *libman.jsna* **Eksplorator rozwiązań** , a następnie wybierz pozycję **Włącz przywracanie bibliotek Client-Side w kompilacji** z menu kontekstowego.
 * Po wyświetleniu monitu o zainstalowanie pakietu NuGet kliknij przycisk **tak** . Pakiet NuGet [Microsoft. Web. librarymanager. Build](https://www.nuget.org/packages/Microsoft.Web.LibraryManager.Build/) został dodany do projektu:
 
   [!code-xml[](samples/LibManSample/LibManSample.csproj?name=snippet_RestoreOnBuildPackage)]
@@ -153,7 +154,7 @@ Aby włączyć i przetestować zachowanie funkcji przywracania po kompilacji:
   ========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ==========
   ```
 
-Gdy włączone jest zachowanie funkcji Przywróć przy kompilacji *libman.js* , w menu kontekstowym zostanie wyświetlona opcja **Wyłącz Przywracanie bibliotek po stronie klienta w ramach kompilacji** . Wybranie tej opcji spowoduje usunięcie `Microsoft.Web.LibraryManager.Build` odwołania do pakietu z pliku projektu. W związku z tym biblioteki po stronie klienta nie są już przywracane dla każdej kompilacji.
+Gdy włączone jest zachowanie przywracania po kompilacji, *libman.jsw* menu kontekstowym zostanie wyświetlona opcja **Wyłącz Przywracanie Client-Side podczas kompilacji** . Wybranie tej opcji spowoduje usunięcie `Microsoft.Web.LibraryManager.Build` odwołania do pakietu z pliku projektu. W związku z tym biblioteki po stronie klienta nie są już przywracane dla każdej kompilacji.
 
 Bez względu na ustawienie Przywróć na kompilację można ręcznie przywrócić w dowolnym momencie z *libman.jsw* menu kontekstowym. Aby uzyskać więcej informacji, zobacz [Przywracanie plików ręcznie](#restore-files-manually).
 
@@ -162,16 +163,16 @@ Bez względu na ustawienie Przywróć na kompilację można ręcznie przywróci�
 Aby ręcznie przywrócić pliki biblioteki:
 
 * Dla wszystkich projektów w rozwiązaniu:
-  * Kliknij prawym przyciskiem myszy nazwę rozwiązania w **Eksplorator rozwiązań**.
-  * Wybierz opcję **Przywróć biblioteki po stronie klienta** .
+  * Kliknij prawym przyciskiem myszy nazwę rozwiązania w **Eksplorator rozwiązań** .
+  * Wybierz opcję **Przywróć biblioteki Client-Side** .
 * Dla określonego projektu:
-  * Kliknij prawym przyciskiem myszy *libman.jsw* pliku w **Eksplorator rozwiązań**.
-  * Wybierz opcję **Przywróć biblioteki po stronie klienta** .
+  * Kliknij prawym przyciskiem myszy *libman.jsw* pliku w **Eksplorator rozwiązań** .
+  * Wybierz opcję **Przywróć biblioteki Client-Side** .
 
 Podczas gdy operacja przywracania jest uruchomiona:
 
-* Ikona centrum stanu zadań (TSC) na pasku stanu programu Visual Studio zostanie animowana i zostanie *rozpoczęta operacja przywracania*. Kliknięcie ikony powoduje otwarcie etykietki narzędzia zawierającego listę znanych zadań w tle.
-* Komunikaty będą wysyłane do paska stanu i źródła danych programu **Library Manager** okna **danych wyjściowych** . Na przykład:
+* Ikona centrum stanu zadań (TSC) na pasku stanu programu Visual Studio zostanie animowana i zostanie *rozpoczęta operacja przywracania* . Kliknięcie ikony powoduje otwarcie etykietki narzędzia zawierającego listę znanych zadań w tle.
+* Komunikaty będą wysyłane do paska stanu i źródła danych programu **Library Manager** okna **danych wyjściowych** . Przykład:
 
   ```console
   Restore operation started...
@@ -188,15 +189,15 @@ Podczas gdy operacja przywracania jest uruchomiona:
 
 Aby wykonać operację *czyszczenia* , która spowoduje usunięcie plików biblioteki, które zostały wcześniej przywrócone w programie Visual Studio:
 
-* Kliknij prawym przyciskiem myszy *libman.jsw* pliku w **Eksplorator rozwiązań**.
-* Wybierz opcję **Wyczyść biblioteki po stronie klienta** .
+* Kliknij prawym przyciskiem myszy *libman.jsw* pliku w **Eksplorator rozwiązań** .
+* Wybierz opcję **wyczyść Client-Side biblioteki** .
 
 Aby zapobiec przypadkowemu usunięciu plików nienależących do biblioteki, operacja czyszczenia nie usuwa całych katalogów. Usuwa tylko te pliki, które zostały uwzględnione w poprzednim przywracaniu.
 
 Podczas gdy operacja czyszczenia jest uruchomiona:
 
-* Ikona TSC na pasku stanu programu Visual Studio będzie animowana i zostanie *rozpoczęta operacja odczytywania bibliotek klienckich*. Kliknięcie ikony powoduje otwarcie etykietki narzędzia zawierającego listę znanych zadań w tle.
-* Komunikaty są wysyłane do paska stanu i źródła danych programu **Library Manager** okna **danych wyjściowych** . Na przykład:
+* Ikona TSC na pasku stanu programu Visual Studio będzie animowana i zostanie *rozpoczęta operacja odczytywania bibliotek klienckich* . Kliknięcie ikony powoduje otwarcie etykietki narzędzia zawierającego listę znanych zadań w tle.
+* Komunikaty są wysyłane do paska stanu i źródła danych programu **Library Manager** okna **danych wyjściowych** . Przykład:
 
 ```console
 Clean libraries operation started...
@@ -210,21 +211,21 @@ Operacja czyszczenia usuwa tylko pliki z projektu. Pliki biblioteki znajdują si
 
 Aby odinstalować pliki biblioteki:
 
-* Otwórz *libman.jsna*.
+* Otwórz *libman.jsna* .
 * Umieść karetkę wewnątrz odpowiedniego `libraries` literału obiektu.
-* Kliknij ikonę żarówki, która pojawia się na lewym marginesie, a następnie wybierz pozycję **Odinstaluj \<library_name> @ \<library_version> **:
+* Kliknij ikonę żarówki, która pojawia się na lewym marginesie, a następnie wybierz pozycję **Odinstaluj \<library_name> @ \<library_version>** :
 
   ![Opcja menu kontekstowego odinstalowywania biblioteki](_static/uninstall-menu-option.png)
 
-Alternatywnie można ręcznie edytować i zapisać manifest LibMan (*libman.json*). [Operacja przywracania](#restore-library-files) jest uruchamiana, gdy plik zostanie zapisany. Pliki bibliotek, które nie są już zdefiniowane w *libman.jsna* są usuwane z projektu.
+Alternatywnie można ręcznie edytować i zapisać manifest LibMan ( *libman.json* ). [Operacja przywracania](#restore-library-files) jest uruchamiana, gdy plik zostanie zapisany. Pliki bibliotek, które nie są już zdefiniowane w *libman.jsna* są usuwane z projektu.
 
 ## <a name="update-library-version"></a>Zaktualizuj wersję biblioteki
 
 Aby sprawdzić dostępność zaktualizowanej wersji biblioteki:
 
-* Otwórz *libman.jsna*.
+* Otwórz *libman.jsna* .
 * Umieść karetkę wewnątrz odpowiedniego `libraries` literału obiektu.
-* Kliknij ikonę żarówki, która pojawia się na lewym marginesie. Umieść kursor nad **sprawdzaniem dostępności aktualizacji**.
+* Kliknij ikonę żarówki, która pojawia się na lewym marginesie. Umieść kursor nad **sprawdzaniem dostępności aktualizacji** .
 
 LibMan sprawdza, czy wersja biblioteki jest nowsza niż zainstalowana wersja. Mogą wystąpić następujące wyniki:
 

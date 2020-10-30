@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/05/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/threat-mitigation
-ms.openlocfilehash: a9bdf68e30d2688d4d7836410a7913794a73fe01
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 5c3a002a8e3df030d53c8625597342a68ca0d4b5
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88626431"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93055415"
 ---
 # <a name="threat-mitigation-guidance-for-aspnet-core-no-locblazor-server"></a>Wskazówki dotyczące łagodzenia zagrożeń dla ASP.NET Core Blazor Server
 
@@ -60,7 +61,7 @@ Zasoby zewnętrzne dotyczące Blazor platformy, takie jak bazy danych i dojścia
 
 Wyczerpanie procesora może wystąpić, gdy jeden lub więcej klientów wymusza intensywną realizację procesora CPU przez serwer.
 
-Rozważmy na przykład Blazor Server aplikację, która oblicza *numer Fibonnacci*. Numer Fibonnacci jest tworzony z sekwencji Fibonnacci, gdzie każda liczba w sekwencji jest sumą dwóch poprzednich numerów. Ilość pracy wymaganej do osiągnięcia odpowiedzi zależy od długości sekwencji i rozmiaru wartości początkowej. Jeśli aplikacja nie nakłada limitów na żądanie klienta, obliczenia intensywnie korzystające z procesora CPU mogą wzniżyć czas procesora i zmniejszyć wydajność innych zadań. Nadmierne zużycie zasobów to wpływ na dostępność.
+Rozważmy na przykład Blazor Server aplikację, która oblicza *numer Fibonnacci* . Numer Fibonnacci jest tworzony z sekwencji Fibonnacci, gdzie każda liczba w sekwencji jest sumą dwóch poprzednich numerów. Ilość pracy wymaganej do osiągnięcia odpowiedzi zależy od długości sekwencji i rozmiaru wartości początkowej. Jeśli aplikacja nie nakłada limitów na żądanie klienta, obliczenia intensywnie korzystające z procesora CPU mogą wzniżyć czas procesora i zmniejszyć wydajność innych zadań. Nadmierne zużycie zasobów to wpływ na dostępność.
 
 Wykorzystanie procesora CPU jest problemem w przypadku wszystkich aplikacji publicznych. W zwykłych aplikacjach sieci Web żądania i połączenia przekroczą limit czasu jako zabezpieczenie, ale Blazor Server aplikacje nie zapewniają tych samych zabezpieczeń. Blazor Server aplikacje muszą zawierać odpowiednie sprawdzenia i limity przed przeprowadzeniem potencjalnej pracy intensywnie obciążającej procesor CPU.
 
@@ -76,7 +77,7 @@ Rozważmy następujący scenariusz utrzymywania i wyświetlania listy elementów
 * Jeśli schemat stronicowania nie jest używany do renderowania, serwer używa dodatkowej pamięci dla obiektów, które nie są widoczne w interfejsie użytkownika. Bez limitu liczby elementów, wymagania dotyczące pamięci mogą wyczerpać dostępną pamięć serwera. Aby uniknąć tego scenariusza, należy użyć jednej z następujących metod:
   * Użyj list z podziałem na strony podczas renderowania.
   * Wyświetlić tylko pierwsze 100 do 1 000 elementów i wymagać od użytkownika wprowadzenia kryteriów wyszukiwania, aby znaleźć elementy poza wyświetlanymi elementami.
-  * Aby zapoznać się z bardziej zaawansowanym scenariuszem renderowania, zaimplementuj listy lub siatki obsługujące *wirtualizację*. Przy użyciu wirtualizacji program wyświetla tylko podzbiór elementów, które są obecnie widoczne dla użytkownika. Gdy użytkownik współdziała z paskiem przewijania w interfejsie użytkownika, składnik renderuje tylko te elementy, które są wymagane do wyświetlenia. Elementy, które nie są obecnie wymagane do wyświetlania, mogą być przechowywane w magazynie pomocniczym, co jest idealnym rozwiązaniem. Niewyświetlane elementy można również przechowywać w pamięci, co jest mniej idealne.
+  * Aby zapoznać się z bardziej zaawansowanym scenariuszem renderowania, zaimplementuj listy lub siatki obsługujące *wirtualizację* . Przy użyciu wirtualizacji program wyświetla tylko podzbiór elementów, które są obecnie widoczne dla użytkownika. Gdy użytkownik współdziała z paskiem przewijania w interfejsie użytkownika, składnik renderuje tylko te elementy, które są wymagane do wyświetlenia. Elementy, które nie są obecnie wymagane do wyświetlania, mogą być przechowywane w magazynie pomocniczym, co jest idealnym rozwiązaniem. Niewyświetlane elementy można również przechowywać w pamięci, co jest mniej idealne.
 
 Blazor Server aplikacje oferują podobny model programowania dla innych platform interfejsu użytkownika dla aplikacji stanowych, takich jak WPF, Windows Forms lub Blazor WebAssembly . Główną różnicą jest to, że w kilku strukturach interfejsu użytkownika używana przez aplikację pamięć należy do klienta i ma wpływ tylko na danego klienta. Na przykład Blazor WebAssembly aplikacja działa wyłącznie na kliencie i używa zasobów pamięci klienta. W tym Blazor Server scenariuszu pamięć używana przez aplikację należy do serwera i jest współdzielona przez klientów w wystąpieniu serwera.
 
@@ -106,7 +107,7 @@ Domyślnie nie ma żadnego limitu liczby połączeń na użytkownika dla Blazor 
 
 Ataki typu "odmowa usługi" (DoS) obejmują klienta, który powoduje, że serwer wyczerpuje jeden lub więcej zasobów, dzięki czemu aplikacja jest niedostępna. Blazor Server Aplikacje obejmują pewne limity domyślne i korzystają z innych ASP.NET Core i SignalR limitów ochrony przed atakami systemu DOS ustawionymi w systemie <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions> .
 
-| Blazor Server limit aplikacji | Opis | Domyślny |
+| Blazor Server limit aplikacji | Opis | Domyślne |
 | --- | --- | --- |
 | <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.DisconnectedCircuitMaxRetained> | Maksymalna liczba odłączonych obwodów, które dany serwer przechowuje w pamięci w danym momencie. | 100 |
 | <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.DisconnectedCircuitRetentionPeriod> | Maksymalny czas przechowywania połączonego obwodu w pamięci przed jego usunięciem. | 3 minuty |
@@ -115,7 +116,7 @@ Ataki typu "odmowa usługi" (DoS) obejmują klienta, który powoduje, że serwer
 
 Ustaw maksymalny rozmiar komunikatu dla pojedynczego przychodzącego komunikatu z centrum <xref:Microsoft.AspNetCore.SignalR.HubConnectionContextOptions> .
 
-| SignalR i limit ASP.NET Core | Opis | Domyślny |
+| SignalR i limit ASP.NET Core | Opis | Domyślne |
 | --- | --- | --- |
 | <xref:Microsoft.AspNetCore.SignalR.HubConnectionContextOptions.MaximumReceiveMessageSize?displayProperty=nameWithType> | Rozmiar wiadomości dla pojedynczej wiadomości. | 32 KB |
 
@@ -161,7 +162,7 @@ Nie ufaj wywołań z języka JavaScript do metod .NET. Gdy metoda .NET jest nara
 
 Zdarzenia zapewniają punkt wejścia do Blazor Server aplikacji. Te same reguły zabezpieczania punktów końcowych w aplikacjach sieci Web mają zastosowanie do obsługi zdarzeń w Blazor Server aplikacjach. Złośliwy klient może wysłać dowolne dane, które chcą wysłać jako ładunek dla zdarzenia.
 
-Na przykład:
+Przykład:
 
 * Zdarzenie zmiany dla elementu `<select>` może wysłać wartość, która nie należy do opcji prezentowanych przez aplikację dla klienta.
 * `<input>`Może wysłać dowolne dane tekstowe do serwera, pomijając sprawdzanie poprawności po stronie klienta.

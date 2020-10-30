@@ -1,11 +1,12 @@
 ---
-title: Uwierzytelnianie użytkowników za pomocą usługi WS-Federation w ASP.NET Core
+title: Uwierzytelnianie użytkowników za pomocą WS-Federation w ASP.NET Core
 author: chlowell
-description: W tym samouczku pokazano, jak używać usługi WS-Federation w aplikacji ASP.NET Core.
+description: W tym samouczku pokazano, jak używać WS-Federation w aplikacji ASP.NET Core.
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 01/16/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/ws-federation
-ms.openlocfilehash: 8a593efd799e900483d0337a06e02c3558b63bfb
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: ed78923a2bdd1ed683a72c0a6f34337a38350035
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634088"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053374"
 ---
-# <a name="authenticate-users-with-ws-federation-in-aspnet-core"></a>Uwierzytelnianie użytkowników za pomocą usługi WS-Federation w ASP.NET Core
+# <a name="authenticate-users-with-ws-federation-in-aspnet-core"></a>Uwierzytelnianie użytkowników za pomocą WS-Federation w ASP.NET Core
 
 W tym samouczku pokazano, jak umożliwić użytkownikom logowanie się przy użyciu dostawcy uwierzytelniania WS-Federation, takiego jak Active Directory Federation Services (ADFS) lub [Azure Active Directory](/azure/active-directory/) (AAD). Używa ona przykładowej aplikacji ASP.NET Core opisanej w temacie [uwierzytelnianie w serwisach Facebook, Google i dostawcy zewnętrznym](xref:security/authentication/social/index).
 
-W przypadku aplikacji ASP.NET Core obsługa protokołu WS-Federation jest zapewniana przez [Microsoft. AspNetCore. Authentication. WsFederation](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.WsFederation). Ten składnik jest przewoźny z [Microsoft. Owin. Security. WsFederation](https://www.nuget.org/packages/Microsoft.Owin.Security.WsFederation) i udostępnia wiele elementów tego Mechanics. Składniki te są jednak różne na kilka ważnych sposobów.
+W przypadku aplikacji ASP.NET Core WS-Federation pomoc techniczna jest świadczona przez [Microsoft. AspNetCore. Authentication. WsFederation](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.WsFederation). Ten składnik jest przewoźny z [Microsoft. Owin. Security. WsFederation](https://www.nuget.org/packages/Microsoft.Owin.Security.WsFederation) i udostępnia wiele elementów tego Mechanics. Składniki te są jednak różne na kilka ważnych sposobów.
 
 Domyślnie nowe oprogramowanie pośredniczące:
 
@@ -53,7 +54,7 @@ Domyślnie nowe oprogramowanie pośredniczące:
 
 ![Kreator dodawania zaufania jednostki uzależnionej: Konfigurowanie certyfikatu](ws-federation/_static/AdfsConfigureCert.png)
 
-* Włącz obsługę protokołu pasywnego usługi WS-Federation przy użyciu adresu URL aplikacji. Sprawdź, czy port jest prawidłowy dla aplikacji:
+* Włącz obsługę protokołu pasywnego WS-Federation przy użyciu adresu URL aplikacji. Sprawdź, czy port jest prawidłowy dla aplikacji:
 
 ![Kreator dodawania zaufania jednostki uzależnionej: Konfigurowanie adresu URL](ws-federation/_static/AdfsConfigureUrl.png)
 
@@ -66,34 +67,34 @@ Domyślnie nowe oprogramowanie pośredniczące:
 
 ![Edytuj reguły dotyczące roszczeń](ws-federation/_static/EditClaimRules.png)
 
-* W **Kreatorze dodawania reguły przekształcania oświadczeń**pozostaw zaznaczone pole wyboru domyślne **Wysyłaj atrybuty LDAP as** , a następnie kliknij przycisk **dalej**. Dodaj mapowanie reguły atrybut LDAP **nazwa konta sam** do żądania wychodzącego **Identyfikator nazwy** :
+* W **Kreatorze dodawania reguły przekształcania oświadczeń** pozostaw zaznaczone pole wyboru domyślne **Wysyłaj atrybuty LDAP as** , a następnie kliknij przycisk **dalej** . Dodaj mapowanie reguły atrybut LDAP **nazwa konta sam** do żądania wychodzącego **Identyfikator nazwy** :
 
 ![Kreator dodawania reguły przekształcania roszczeń: Konfigurowanie reguły dotyczącej roszczeń](ws-federation/_static/AddTransformClaimRule.png)
 
 * Kliknij przycisk **Zakończ**  >  **OK** w oknie **Edytowanie reguł roszczeń** .
 
-### <a name="azure-active-directory"></a>Usługa Azure Active Directory
+### <a name="azure-active-directory"></a>Azure Active Directory
 
-* Przejdź do bloku rejestracje aplikacji dzierżawy usługi AAD. Kliknij pozycję **rejestracja nowej aplikacji**:
+* Przejdź do bloku rejestracje aplikacji dzierżawy usługi AAD. Kliknij pozycję **rejestracja nowej aplikacji** :
 
 ![Azure Active Directory: Rejestracje aplikacji](ws-federation/_static/AadNewAppRegistration.png)
 
 * Wprowadź nazwę rejestracji aplikacji. Nie ma to znaczenia dla aplikacji ASP.NET Core.
-* Wprowadź adres URL, na który aplikacja nasłuchuje jako **adres URL logowania**:
+* Wprowadź adres URL, na który aplikacja nasłuchuje jako **adres URL logowania** :
 
 ![Azure Active Directory: Utwórz rejestrację aplikacji](ws-federation/_static/AadCreateAppRegistration.png)
 
-* Kliknij pozycję **punkty końcowe** i Zanotuj adres URL **dokumentu metadanych Federacji** . To jest oprogramowanie pośredniczące WS-Federation `MetadataAddress` :
+* Kliknij pozycję **punkty końcowe** i Zanotuj adres URL **dokumentu metadanych Federacji** . To jest WS-Federation oprogramowanie pośredniczące `MetadataAddress` :
 
 ![Azure Active Directory: punkty końcowe](ws-federation/_static/AadFederationMetadataDocument.png)
 
-* Przejdź do rejestracji nowej aplikacji. Kliknij pozycję **uwidaczniaj interfejs API**. Kliknij przycisk identyfikatora aplikacji identyfikator URI **Ustawienia**  >  **Zapisz**. Zanotuj  **Identyfikator URI aplikacji**. To jest oprogramowanie pośredniczące WS-Federation `Wtrealm` :
+* Przejdź do rejestracji nowej aplikacji. Kliknij pozycję **uwidaczniaj interfejs API** . Kliknij przycisk identyfikatora aplikacji identyfikator URI **Ustawienia**  >  **Zapisz** . Zanotuj  **Identyfikator URI aplikacji** . To jest WS-Federation oprogramowanie pośredniczące `Wtrealm` :
 
 ![Azure Active Directory: właściwości rejestracji aplikacji](ws-federation/_static/AadAppIdUri.png)
 
-## <a name="use-ws-federation-without-no-locaspnet-core-identity"></a>Korzystanie z protokołu WS-Federation bez ASP.NET Core Identity
+## <a name="use-ws-federation-without-no-locaspnet-core-identity"></a>Użyj WS-Federation bez ASP.NET Core Identity
 
-Oprogramowanie pośredniczące WS-Federation może być używane bez programu Identity . Na przykład:
+Oprogramowania pośredniczącego WS-Federation można używać bez programu Identity . Przykład:
 ::: moniker range=">= aspnetcore-3.0"
 [!code-csharp[](ws-federation/samples/StartupNon31.cs?name=snippet)]
 ::: moniker-end
@@ -102,10 +103,10 @@ Oprogramowanie pośredniczące WS-Federation może być używane bez programu Id
 [!code-csharp[](ws-federation/samples/StartupNon21.cs?name=snippet)]
 ::: moniker-end
 
-## <a name="add-ws-federation-as-an-external-login-provider-for-no-locaspnet-core-identity"></a>Dodaj usługę WS-Federation jako zewnętrznego dostawcę logowania dla ASP.NET Core Identity
+## <a name="add-ws-federation-as-an-external-login-provider-for-no-locaspnet-core-identity"></a>Dodaj WS-Federation jako zewnętrznego dostawcę logowania dla ASP.NET Core Identity
 
 * Dodaj zależność od elementu [Microsoft. AspNetCore. Authentication. WsFederation](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.WsFederation) do projektu.
-* Dodaj usługę WS-Federation do `Startup.ConfigureServices` :
+* Dodaj WS-Federation do `Startup.ConfigureServices` :
 
 ::: moniker range=">= aspnetcore-3.0"
 [!code-csharp[](ws-federation/samples/Startup31.cs?name=snippet)]
@@ -117,7 +118,7 @@ Oprogramowanie pośredniczące WS-Federation może być używane bez programu Id
 
 [!INCLUDE [default settings configuration](social/includes/default-settings.md)]
 
-### <a name="log-in-with-ws-federation"></a>Logowanie za pomocą usługi WS-Federation
+### <a name="log-in-with-ws-federation"></a>Zaloguj się przy użyciu WS-Federation
 
 Przejdź do aplikacji, a następnie kliknij link **Zaloguj** w nagłówku nawigacji. Istnieje możliwość zalogowania się za pomocą WsFederation: ![ log na stronie](ws-federation/_static/WsFederationButton.png)
 

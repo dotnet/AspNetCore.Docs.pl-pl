@@ -7,6 +7,7 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/advanced
-ms.openlocfilehash: 9f02165f54d3cd3328496710dc92ebc86c4640d6
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 386be395399bf4131e4b6c8cac8221f994e8b7c5
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88626834"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93054388"
 ---
 # <a name="tutorial-learn-about-advanced-scenarios---aspnet-mvc-with-ef-core"></a>Samouczek: informacje na temat scenariuszy zaawansowanych — ASP.NET MVC z EF Core
 
@@ -62,7 +63,7 @@ Gdy jest zawsze prawdziwe w przypadku wykonywania poleceń SQL w aplikacji sieci
 
 `DbSet<TEntity>`Klasa zawiera metodę, której można użyć do wykonania zapytania zwracającego jednostkę typu `TEntity` . Aby zobaczyć, jak to działa, Zmień kod w `Details` metodzie kontrolera działu.
 
-W *DepartmentsController.cs*, w `Details` metodzie, Zastąp kod pobierający dział z `FromSql` wywołaniem metody, jak pokazano w następującym wyróżnionym kodzie:
+W *DepartmentsController.cs* , w `Details` metodzie, Zastąp kod pobierający dział z `FromSql` wywołaniem metody, jak pokazano w następującym wyróżnionym kodzie:
 
 [!code-csharp[](intro/samples/cu/Controllers/DepartmentsController.cs?name=snippet_RawSQL&highlight=8,9,10)]
 
@@ -74,7 +75,7 @@ Aby sprawdzić, czy nowy kod działa prawidłowo, wybierz kartę **działy** , a
 
 Wcześniej utworzono siatkę statystyk uczniów dla strony informacje, która wykazała liczbę studentów dla każdej daty rejestracji. Uzyskano dane z zestawu jednostek studentów ( `_context.Students` ) i używane LINQ do projekcji wyników do listy `EnrollmentDateGroup` obiektów modelu widoku. Załóżmy, że chcesz napisać sam kod SQL, zamiast używać LINQ. W tym celu należy uruchomić zapytanie SQL zwracające coś innego niż obiekty Entity. W EF Core 1,0 jednym ze sposobów jest zapisanie kodu ADO.NET i nawiązanie połączenia z bazą danych EF.
 
-W *HomeController.cs*Zastąp `About` metodę następującym kodem:
+W *HomeController.cs* Zastąp `About` metodę następującym kodem:
 
 [!code-csharp[](intro/samples/cu/Controllers/HomeController.cs?name=snippet_UseRawSQL&highlight=3-32)]
 
@@ -92,7 +93,7 @@ Załóżmy, że administratorzy uniwersytetów firmy Contoso chcą wykonywać gl
 
 ![Strona aktualizacji kredytów kursu](advanced/_static/update-credits.png)
 
-W *CoursesController.cs*Dodaj metody UpdateCourseCredits dla narzędzia HttpGet i HTTPPOST:
+W *CoursesController.cs* Dodaj metody UpdateCourseCredits dla narzędzia HttpGet i HTTPPOST:
 
 [!code-csharp[](intro/samples/cu/Controllers/CoursesController.cs?name=snippet_UpdateGet)]
 
@@ -102,11 +103,11 @@ Gdy kontroler przetwarza żądanie narzędzia HttpGet, nic nie jest zwracane w `
 
 Po kliknięciu przycisku **Aktualizuj** Metoda HTTPPOST jest wywoływana, a mnożnik ma wartość wprowadzoną w polu tekstowym. Następnie kod wykonuje instrukcję SQL, która aktualizuje kursy i zwraca liczbę odnośnych wierszy do widoku w `ViewData` . Gdy widok pobiera `RowsAffected` wartość, wyświetlana jest liczba zaktualizowanych wierszy.
 
-W **Eksplorator rozwiązań**kliknij prawym przyciskiem myszy folder *widoki/kursy* , a następnie kliknij polecenie **Dodaj > nowy element**.
+W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy folder *widoki/kursy* , a następnie kliknij polecenie **Dodaj > nowy element** .
 
-W oknie dialogowym **Dodaj nowy element** kliknij **ASP.NET Core** w obszarze **zainstalowane** w okienku po lewej stronie, kliknij pozycję ** Razor Wyświetl**i nazwij nowy widok *UpdateCourseCredits. cshtml*.
+W oknie dialogowym **Dodaj nowy element** kliknij **ASP.NET Core** w obszarze **zainstalowane** w okienku po lewej stronie, kliknij pozycję **Razor Wyświetl** i nazwij nowy widok *UpdateCourseCredits. cshtml* .
 
-W obszarze *widoki/kursy/UpdateCourseCredits. cshtml*Zastąp kod szablonu następującym kodem:
+W obszarze *widoki/kursy/UpdateCourseCredits. cshtml* Zastąp kod szablonu następującym kodem:
 
 [!code-cshtml[](intro/samples/cu/Views/Courses/UpdateCourseCredits.cshtml)]
 
@@ -184,7 +185,7 @@ Entity Framework określa, w jaki sposób jednostka została zmieniona (i w zwi�
 
 * ChangeTracker. wpisy
 
-Jeśli śledzisz dużą liczbę jednostek i wywołujesz jedną z tych metod wiele razy w pętli, możesz uzyskać znaczące ulepszenia wydajności, tymczasowo wyłączając automatyczne wykrywanie zmian przy użyciu `ChangeTracker.AutoDetectChangesEnabled` właściwości. Na przykład:
+Jeśli śledzisz dużą liczbę jednostek i wywołujesz jedną z tych metod wiele razy w pętli, możesz uzyskać znaczące ulepszenia wydajności, tymczasowo wyłączając automatyczne wykrywanie zmian przy użyciu `ChangeTracker.AutoDetectChangesEnabled` właściwości. Przykład:
 
 ```csharp
 _context.ChangeTracker.AutoDetectChangesEnabled = false;
@@ -224,7 +225,7 @@ Komunikat o błędzie:
 
 Rozwiązanie:
 
-Zatrzymaj lokację w IIS Express. Przejdź do paska zadań systemu Windows, Znajdź IIS Express i kliknij prawym przyciskiem myszy jego ikonę, wybierz witrynę firmy Contoso University, a następnie kliknij pozycję **Zatrzymaj lokację**.
+Zatrzymaj lokację w IIS Express. Przejdź do paska zadań systemu Windows, Znajdź IIS Express i kliknij prawym przyciskiem myszy jego ikonę, wybierz witrynę firmy Contoso University, a następnie kliknij pozycję **Zatrzymaj lokację** .
 
 ### <a name="migration-scaffolded-with-no-code-in-up-and-down-methods"></a>Migracja szkieletowa bez kodu w metodach up i Down
 
@@ -240,9 +241,9 @@ Uruchom `migrations remove` polecenie, Zapisz zmiany kodu i ponownie uruchom `mi
 
 Podczas wprowadzania zmian schematu w bazie danych, która ma istniejące dane, można uzyskać inne błędy. Jeśli wystąpią błędy migracji, nie można rozwiązać tego problemu, możesz zmienić nazwę bazy danych w parametrach połączenia lub usunąć bazę danych. W przypadku nowej bazy danych nie ma żadnych danych do migracji, a polecenie Update-Database jest znacznie bardziej gotowe do wykonania bez błędów.
 
-Najprostszym podejściem jest zmiana nazwy bazy danych w *appsettings.jsna*. Przy następnym uruchomieniu `database update` zostanie utworzona nowa baza danych.
+Najprostszym podejściem jest zmiana nazwy bazy danych w programie *appsettings.json* . Przy następnym uruchomieniu `database update` zostanie utworzona nowa baza danych.
 
-Aby usunąć bazę danych w programie SSOX, kliknij prawym przyciskiem myszy bazę danych, kliknij polecenie **Usuń**, a następnie w oknie dialogowym **Usuwanie bazy danych** wybierz pozycję **Zamknij istniejące połączenia** i kliknij przycisk **OK**.
+Aby usunąć bazę danych w programie SSOX, kliknij prawym przyciskiem myszy bazę danych, kliknij polecenie **Usuń** , a następnie w oknie dialogowym **Usuwanie bazy danych** wybierz pozycję **Zamknij istniejące połączenia** i kliknij przycisk **OK** .
 
 Aby usunąć bazę danych przy użyciu interfejsu wiersza polecenia, uruchom `database drop` polecenie CLI:
 

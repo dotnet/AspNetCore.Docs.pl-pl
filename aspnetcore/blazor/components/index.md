@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/19/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: be1584e72fc1504ac9f8ca10a6b084c95a579b5b
-ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
+ms.openlocfilehash: d30f40945a3b2799dfc2d9391bba37eee1bfdc18
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/11/2020
-ms.locfileid: "90009625"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93056273"
 ---
 # <a name="create-and-use-aspnet-core-no-locrazor-components"></a>Tworzenie i używanie Razor składników ASP.NET Core
 
@@ -31,11 +32,11 @@ ms.locfileid: "90009625"
 
 [Wyświetl lub pobierz przykładowy kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([jak pobrać](xref:index#how-to-download-a-sample))
 
-Blazor aplikacje są kompilowane przy użyciu *składników*programu. Składnik jest niezależnym fragmentem interfejsu użytkownika (UI), takim jak strona, okno dialogowe lub formularz. Składnik zawiera znaczniki HTML i logikę przetwarzania wymagane do iniekcji danych lub reagowania na zdarzenia interfejsu użytkownika. Składniki są elastyczne i lekkie. Mogą być zagnieżdżane, ponownie używane i udostępniane między projektami.
+Blazor aplikacje są kompilowane przy użyciu *składników* programu. Składnik jest niezależnym fragmentem interfejsu użytkownika (UI), takim jak strona, okno dialogowe lub formularz. Składnik zawiera znaczniki HTML i logikę przetwarzania wymagane do iniekcji danych lub reagowania na zdarzenia interfejsu użytkownika. Składniki są elastyczne i lekkie. Mogą być zagnieżdżane, ponownie używane i udostępniane między projektami.
 
 ## <a name="component-classes"></a>Klasy składników
 
-Składniki są implementowane w [Razor](xref:mvc/views/razor) plikach składników ( `.razor` ) przy użyciu kombinacji języka C# i znaczników HTML. Składnik w programie Blazor jest formalnie nazywany * Razor składnikiem*.
+Składniki są implementowane w [Razor](xref:mvc/views/razor) plikach składników ( `.razor` ) przy użyciu kombinacji języka C# i znaczników HTML. Składnik w programie Blazor jest formalnie nazywany *Razor składnikiem* .
 
 ### <a name="no-locrazor-syntax"></a>Razor obowiązuje
 
@@ -253,7 +254,7 @@ Aby uzyskać informacje dotyczące przechwytywania wszystkich parametrów trasy 
 
 ### <a name="component-parameters"></a>Parametry składnika
 
-Składniki mogą mieć *Parametry składnika*, które są zdefiniowane przy użyciu właściwości publicznych w klasie składnika z [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) atrybutem. Użyj atrybutów, aby określić argumenty dla składnika w znaczniku.
+Składniki mogą mieć *Parametry składnika* , które są zdefiniowane przy użyciu właściwości publicznych w klasie składnika z [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) atrybutem. Użyj atrybutów, aby określić argumenty dla składnika w znaczniku.
 
 `Components/ChildComponent.razor`:
 
@@ -266,7 +267,7 @@ W poniższym przykładzie z przykładowej aplikacji `ParentComponent` ustawia wa
 [!code-razor[](index/samples_snapshot/ParentComponent.razor?highlight=5-6)]
 
 > [!WARNING]
-> Nie należy tworzyć składników, które zapisują do własnych *parametrów składników*, zamiast tego należy użyć pola private. Aby uzyskać więcej informacji, zobacz sekcję [zastępowanie parametrów](#overwritten-parameters) .
+> Nie należy tworzyć składników, które zapisują do własnych *parametrów składników* , zamiast tego należy użyć pola private. Aby uzyskać więcej informacji, zobacz sekcję [zastępowanie parametrów](#overwritten-parameters) .
 
 ## <a name="child-content"></a>Zawartość podrzędna
 

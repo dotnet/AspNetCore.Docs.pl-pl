@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc, devx-track-js
 ms.date: 10/09/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-performance-best-practices
-ms.openlocfilehash: 0e827680e7024eabed09b989466476a3a80eb225
-ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
+ms.openlocfilehash: 423745d734d8da2b8f3f974f9b4dd1a0265d4877
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/27/2020
-ms.locfileid: "92690269"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93054739"
 ---
 # <a name="aspnet-core-no-locblazor-webassembly-performance-best-practices"></a>ASP.NET Core Blazor WebAssembly najlepszych rozwiązań dotyczących wydajności
 
@@ -149,7 +150,7 @@ Aby uzyskać więcej informacji, zobacz <xref:blazor/components/virtualization>.
 
 Większość Blazor składników nie wymaga agresywnej optymalizacji. Wynika to z faktu, że większość składników nie jest często powtarzana w interfejsie użytkownika i nie jest uruchamiana z dużą częstotliwością. Na przykład `@page` składniki i składniki reprezentujące jednopoziomowe elementy interfejsu użytkownika, takie jak okna dialogowe lub formularze, najprawdopodobniej pojawiają się tylko jeden w czasie i ponownie renderują w odpowiedzi na gest użytkownika. Te składniki nie tworzą obciążenia o wysokim poziomie renderowania, dzięki czemu można swobodnie korzystać z dowolnej kombinacji potrzebnych funkcji, bez obaw o wydajność renderowania.
 
-Istnieją jednak również typowe scenariusze, w których można tworzyć składniki, które muszą być powtórzone na dużą skalę. Na przykład:
+Istnieją jednak również typowe scenariusze, w których można tworzyć składniki, które muszą być powtórzone na dużą skalę. Przykład:
 
  * Duże zagnieżdżone formularze mogą mieć setki poszczególnych wejść, etykiet i innych elementów.
  * Siatki mogą zawierać tysiące komórek.

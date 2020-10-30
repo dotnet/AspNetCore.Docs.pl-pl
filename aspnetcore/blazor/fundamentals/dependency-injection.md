@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/dependency-injection
-ms.openlocfilehash: 3dc15f5efcc8f48a809bf9132588fb38732a7b35
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 7b573c0635aafe7efcf56185c250dbab836e6cf4
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628290"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93056025"
 ---
 # <a name="aspnet-core-no-locblazor-dependency-injection"></a>ASP.NET Core Blazor wstrzykiwania zależności
 
@@ -165,7 +166,7 @@ Usługi można skonfigurować przy użyciu okresów istnienia podanych w poniżs
 
 | Okres istnienia | Opis |
 | -------- | ----------- |
-| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped%2A> | Blazor WebAssembly aplikacje nie mają obecnie koncepcji DI Scopes. `Scoped`-zarejestrowane usługi zachowują się jak `Singleton` usługi. Jednak Blazor Server model hostingu obsługuje `Scoped` okres istnienia. W Blazor Server aplikacjach do zakresu rejestracji usługi w zakresie jest *dołączany*zakres. Z tego powodu użycie usług objętych zakresem jest preferowane dla usług, które powinny być objęte zakresem bieżącego użytkownika, nawet jeśli bieżącym celem jest uruchomienie po stronie klienta w przeglądarce. |
+| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped%2A> | Blazor WebAssembly aplikacje nie mają obecnie koncepcji DI Scopes. `Scoped`-zarejestrowane usługi zachowują się jak `Singleton` usługi. Jednak Blazor Server model hostingu obsługuje `Scoped` okres istnienia. W Blazor Server aplikacjach do zakresu rejestracji usługi w zakresie jest *dołączany* zakres. Z tego powodu użycie usług objętych zakresem jest preferowane dla usług, które powinny być objęte zakresem bieżącego użytkownika, nawet jeśli bieżącym celem jest uruchomienie po stronie klienta w przeglądarce. |
 | <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Singleton%2A> | DI tworzy *pojedyncze wystąpienie* usługi. Wszystkie składniki wymagające `Singleton` usługi odbierają wystąpienie tej samej usługi. |
 | <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Transient%2A> | Za każdym razem, gdy składnik uzyskuje wystąpienie `Transient` usługi z kontenera usługi, otrzymuje *nowe wystąpienie* usługi. |
 

@@ -5,8 +5,9 @@ description: Zapoznaj się z dodatkowymi scenariuszami ASP.NET Core Blazor konfi
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/12/2020
+ms.date: 10/27/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/additional-scenarios
-ms.openlocfilehash: 075bcc68fd2dff0ebf2cfceacec24fde8c818603
-ms.sourcegitcommit: b5ebaf42422205d212e3dade93fcefcf7f16db39
+ms.openlocfilehash: f8b6e65424948aaa7b28023497bbbf2a1ceb47dd
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92326543"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93056052"
 ---
 # <a name="aspnet-core-no-locblazor-hosting-model-configuration"></a>ASP.NET Core Blazor konfigurację modelu hostingu
 
@@ -300,11 +301,13 @@ window.addEventListener('pagehide', () => {
 });
 ```
 
-## <a name="influence-html-head-tag-elements"></a>Wpływ na `<head>` elementy tagów HTML
+<!-- HOLD for reactivation at 5x
 
-*Ta sekcja ma zastosowanie do nadchodzącego ASP.NET Core 5,0 wersji Blazor WebAssembly i Blazor Server .*
+## Influence HTML `<head>` tag elements
 
-Gdy renderowane,, `Title` `Link` i `Meta` składniki dodają lub aktualizują dane w `<head>` elementach tagów HTML:
+*This section applies to the upcoming ASP.NET Core 5.0 release of Blazor WebAssembly and Blazor Server.*
+
+When rendered, the `Title`, `Link`, and `Meta` components add or update data in the HTML `<head>` tag elements:
 
 ```razor
 @using Microsoft.AspNetCore.Components.Web.Extensions.Head
@@ -314,22 +317,24 @@ Gdy renderowane,, `Title` `Link` i `Meta` składniki dodają lub aktualizują da
 <Meta content="{DESCRIPTION}" name="description" />
 ```
 
-W powyższym przykładzie symbole zastępcze dla `{TITLE}` , `{URL}` , i `{DESCRIPTION}` są wartościami ciągów, Razor zmiennymi lub Razor wyrażeniami.
+In the preceding example, placeholders for `{TITLE}`, `{URL}`, and `{DESCRIPTION}` are string values, Razor variables, or Razor expressions.
 
-Stosuje się następujące cechy:
+The following characteristics apply:
 
-* Renderowanie wstępne po stronie serwera jest obsługiwane.
-* `Value`Parametr jest jedynym prawidłowym parametrem `Title` składnika.
-* Atrybuty HTML podane w `Meta` `Link` składnikach i są przechwytywane w [dodatkowych atrybutach](xref:blazor/components/index#attribute-splatting-and-arbitrary-parameters) i przekazywane do renderowanego tagu HTML.
-* W przypadku wielu `Title` składników tytuł strony odzwierciedla `Value` ostatni `Title` renderowany składnik.
-* Jeśli wiele `Meta` lub `Link` składniki są dołączone do identycznych atrybutów, istnieje dokładnie jeden tag HTML renderowany dla `Meta` lub `Link` składnika. Dwa `Meta` lub `Link` składniki nie mogą odwoływać się do tego samego renderowanego tagu HTML.
-* Zmiany parametrów istniejących `Meta` lub `Link` składników są uwzględniane w ich RENDEROWANE Tagi HTML.
-* Gdy `Link` składniki lub `Meta` nie są już renderowane i w rezultacie są usuwane przez platformę, RENDEROWANE Tagi HTML są usuwane.
+* Server-side prerendering is supported.
+* The `Value` parameter is the only valid parameter for the `Title` component.
+* HTML attributes provided to the `Meta` and `Link` components are captured in [additional attributes](xref:blazor/components/index#attribute-splatting-and-arbitrary-parameters) and passed through to the rendered HTML tag.
+* For multiple `Title` components, the title of the page reflects the `Value` of the last `Title` component rendered.
+* If multiple `Meta` or `Link` components are included with identical attributes, there's exactly one HTML tag rendered per `Meta` or `Link` component. Two `Meta` or `Link` components can't refer to the same rendered HTML tag.
+* Changes to the parameters of existing `Meta` or `Link` components are reflected in their rendered HTML tags.
+* When the `Link` or `Meta` components are no longer rendered and thus disposed by the framework, their rendered HTML tags are removed.
 
-Gdy jeden ze składników platformy jest używany w składniku podrzędnym, renderowany tag HTML ma wpływ na dowolny składnik podrzędny składnika nadrzędnego, o ile jest renderowany składnik podrzędny zawierający składnik Framework. Rozróżnienie między użyciem jednego z tych składników platformy w składniku podrzędnym i umieszczenie znacznika HTML w `wwwroot/index.html` lub `Pages/_Host.cshtml` polega na tym, że RENDEROWANY tag HTML składnika Framework:
+When one of the framework components is used in a child component, the rendered HTML tag influences any other child component of the parent component as long as the child component containing the framework component is rendered. The distinction between using the one of these framework components in a child component and placing a an HTML tag in `wwwroot/index.html` or `Pages/_Host.cshtml` is that a framework component's rendered HTML tag:
 
-* Mogą być modyfikowane przez stan aplikacji. Nie można zmodyfikować oznakowanego języka HTML w stanie aplikacji.
-* Jest usuwany z kodu HTML, `<head>` gdy składnik nadrzędny nie jest już renderowany.
+* Can be modified by application state. A hard-coded HTML tag can't be modified by application state.
+* Is removed from the HTML `<head>` when the parent component is no longer rendered.
+
+-->
 
 ::: moniker-end
 

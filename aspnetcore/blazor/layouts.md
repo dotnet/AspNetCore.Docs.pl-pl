@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/23/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/layouts
-ms.openlocfilehash: f41b41194f597505d775c95f1e65960c2f827e3b
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: e61c76b5d53ad7646961632d00b047ecd2d9e477
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628017"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93055610"
 ---
 # <a name="aspnet-core-no-locblazor-layouts"></a>ASP.NET Core Blazor układy
 
@@ -33,7 +34,7 @@ Niektóre elementy aplikacji, takie jak menu, wiadomości o prawach autorskich i
 
 Technicznie, układ jest tylko innym składnikiem. Układ jest zdefiniowany w Razor szablonie lub w kodzie C# i może używać [powiązań danych](xref:blazor/components/data-binding), [iniekcji zależności](xref:blazor/fundamentals/dependency-injection)i innych scenariuszy składników.
 
-Aby przekształcić *składnik* do *układu*, składnik:
+Aby przekształcić *składnik* do *układu* , składnik:
 
 * Dziedziczy z <xref:Microsoft.AspNetCore.Components.LayoutComponentBase> , który definiuje <xref:Microsoft.AspNetCore.Components.LayoutComponentBase.Body> Właściwość dla renderowanej zawartości wewnątrz układu.
 * Używa Razor składni `@Body` do określenia lokalizacji w znaczniku układu, w którym jest renderowana zawartość.
@@ -86,7 +87,7 @@ Następujące `_Imports.razor` Importy plików:
 
 `_Imports.razor`Plik jest podobny do [pliku _ViewImports. cshtml dla Razor widoków i stron](xref:mvc/views/layout#importing-shared-directives) , ale jest stosowany w odniesieniu do Razor plików składników.
 
-Określanie układu w programie `_Imports.razor` przesłania układ określony jako *domyślny układ*routera.
+Określanie układu w programie `_Imports.razor` przesłania układ określony jako *domyślny układ* routera.
 
 > [!WARNING]
 > **Nie** dodawaj Razor `@layout` dyrektywy do `_Imports.razor` pliku głównego, co spowoduje nieskończoną pętlę układów w aplikacji. Aby kontrolować domyślny układ aplikacji, określ układ w `Router` składniku. Aby uzyskać więcej informacji, zobacz sekcję dotyczącą [układu domyślnego](#default-layout) .

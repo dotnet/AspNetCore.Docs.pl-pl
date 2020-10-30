@@ -5,6 +5,7 @@ description: W tym artykule wprowadzono przenośne pliki obiektów i instrukcje 
 ms.author: scaddie
 ms.date: 09/26/2017
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/portable-object-localization
-ms.openlocfilehash: f471c5b7511434cf42717e52ef271663c2e36647
-ms.sourcegitcommit: 6ecdc481d5b9a10d2c6e091217f017b36bdba957
+ms.openlocfilehash: 2e28ebaf1962ebd834c43f1cfbc28929b1937c40
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/15/2020
-ms.locfileid: "90456052"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053725"
 ---
 # <a name="configure-portable-object-localization-in-aspnet-core"></a>Konfigurowanie lokalizacji obiektu przenośnego w ASP.NET Core
 
@@ -88,11 +89,11 @@ Plik *. csproj* zawiera teraz wiersz podobny do następującego (numer wersji mo
 
 ### <a name="registering-the-service"></a>Rejestrowanie usługi
 
-Dodaj wymagane usługi do `ConfigureServices` metody *Startup.cs*:
+Dodaj wymagane usługi do `ConfigureServices` metody *Startup.cs* :
 
 [!code-csharp[](localization/sample/3.x/POLocalization/Startup.cs?name=snippet_ConfigureServices&highlight=4-21)]
 
-Dodaj wymagane oprogramowanie pośredniczące do `Configure` metody *Startup.cs*:
+Dodaj wymagane oprogramowanie pośredniczące do `Configure` metody *Startup.cs* :
 
 [!code-csharp[](localization/sample/3.x/POLocalization/Startup.cs?name=snippet_Configure&highlight=15)]
 
@@ -104,7 +105,7 @@ Dodaj następujący kod do Razor wybranego widoku. W tym przykładzie użyto *. 
 
 ### <a name="creating-a-po-file"></a>Tworzenie pliku ZZ
 
-Utwórz plik o nazwie * \<culture code> . ZZ* w folderze głównym aplikacji. W tym przykładzie nazwa pliku to *fr. po* , ponieważ używany jest język francuski:
+Utwórz plik o nazwie *\<culture code> . ZZ* w folderze głównym aplikacji. W tym przykładzie nazwa pliku to *fr. po* , ponieważ używany jest język francuski:
 
 [!code-text[](localization/sample/3.x/POLocalization/fr.po)]
 
@@ -170,7 +171,7 @@ Edytuj plik *views/Home/about. cshtml* , aby renderować zlokalizowane ciągi w 
 
 Po przełączeniu kultur widoczne są następujące elementy:
 
-Instrukcję `/Home/About`:
+Dla `/Home/About`:
 
 ```html
 There is one item.
@@ -178,7 +179,7 @@ There are 2 items.
 There are 5 items.
 ```
 
-Instrukcję `/Home/About?culture=fr`:
+Dla `/Home/About?culture=fr`:
 
 ```html
 Il y a un élément.
@@ -186,7 +187,7 @@ Il y a 2 éléments.
 Il y a 5 éléments.
 ```
 
-Instrukcję `/Home/About?culture=cs`:
+Dla `/Home/About?culture=cs`:
 
 ```html
 Existuje jedna položka.
@@ -214,7 +215,7 @@ msgstr "Bonjour le monde!"
 
 Z `msgctxt` ustawioną opcją, tłumaczenie tekstu odbywa się podczas nawigowania do `/Home/About?culture=fr-FR` . Tłumaczenie nie będzie odbywać się podczas nawigowania do `/Home/Contact?culture=fr-FR` .
 
-Gdy żaden konkretny wpis nie jest dopasowany do danego kontekstu pliku, mechanizm rezerwowy elementu sadu rdzeń szuka odpowiedniego pliku. Przy założeniu, że nie określono określonego kontekstu pliku dla *widoków/Home/Contact. cshtml*, przechodzenie do `/Home/Contact?culture=fr-FR` ładowania pliku ZZ, takiego jak:
+Gdy żaden konkretny wpis nie jest dopasowany do danego kontekstu pliku, mechanizm rezerwowy elementu sadu rdzeń szuka odpowiedniego pliku. Przy założeniu, że nie określono określonego kontekstu pliku dla *widoków/Home/Contact. cshtml* , przechodzenie do `/Home/Contact?culture=fr-FR` ładowania pliku ZZ, takiego jak:
 
 [!code-text[](localization/sample/3.x/POLocalization/fr.po)]
 
@@ -303,11 +304,11 @@ Plik *. csproj* zawiera teraz wiersz podobny do następującego (numer wersji mo
 
 ### <a name="registering-the-service"></a>Rejestrowanie usługi
 
-Dodaj wymagane usługi do `ConfigureServices` metody *Startup.cs*:
+Dodaj wymagane usługi do `ConfigureServices` metody *Startup.cs* :
 
 [!code-csharp[](localization/sample/2.x/POLocalization/Startup.cs?name=snippet_ConfigureServices&highlight=4-21)]
 
-Dodaj wymagane oprogramowanie pośredniczące do `Configure` metody *Startup.cs*:
+Dodaj wymagane oprogramowanie pośredniczące do `Configure` metody *Startup.cs* :
 
 [!code-csharp[](localization/sample/2.x/POLocalization/Startup.cs?name=snippet_Configure&highlight=15)]
 
@@ -319,7 +320,7 @@ Dodaj następujący kod do Razor wybranego widoku. W tym przykładzie użyto *. 
 
 ### <a name="creating-a-po-file"></a>Tworzenie pliku ZZ
 
-Utwórz plik o nazwie * \<culture code> . ZZ* w folderze głównym aplikacji. W tym przykładzie nazwa pliku to *fr. po* , ponieważ używany jest język francuski:
+Utwórz plik o nazwie *\<culture code> . ZZ* w folderze głównym aplikacji. W tym przykładzie nazwa pliku to *fr. po* , ponieważ używany jest język francuski:
 
 [!code-text[](localization/sample/2.x/POLocalization/fr.po)]
 
@@ -385,7 +386,7 @@ Edytuj plik *views/Home/about. cshtml* , aby renderować zlokalizowane ciągi w 
 
 Po przełączeniu kultur widoczne są następujące elementy:
 
-Instrukcję `/Home/About`:
+Dla `/Home/About`:
 
 ```html
 There is one item.
@@ -393,7 +394,7 @@ There are 2 items.
 There are 5 items.
 ```
 
-Instrukcję `/Home/About?culture=fr`:
+Dla `/Home/About?culture=fr`:
 
 ```html
 Il y a un élément.
@@ -401,7 +402,7 @@ Il y a 2 éléments.
 Il y a 5 éléments.
 ```
 
-Instrukcję `/Home/About?culture=cs`:
+Dla `/Home/About?culture=cs`:
 
 ```html
 Existuje jedna položka.
@@ -429,7 +430,7 @@ msgstr "Bonjour le monde!"
 
 Z `msgctxt` ustawioną opcją, tłumaczenie tekstu odbywa się podczas nawigowania do `/Home/About?culture=fr-FR` . Tłumaczenie nie będzie odbywać się podczas nawigowania do `/Home/Contact?culture=fr-FR` .
 
-Gdy żaden konkretny wpis nie jest dopasowany do danego kontekstu pliku, mechanizm rezerwowy elementu sadu rdzeń szuka odpowiedniego pliku. Przy założeniu, że nie określono określonego kontekstu pliku dla *widoków/Home/Contact. cshtml*, przechodzenie do `/Home/Contact?culture=fr-FR` ładowania pliku ZZ, takiego jak:
+Gdy żaden konkretny wpis nie jest dopasowany do danego kontekstu pliku, mechanizm rezerwowy elementu sadu rdzeń szuka odpowiedniego pliku. Przy założeniu, że nie określono określonego kontekstu pliku dla *widoków/Home/Contact. cshtml* , przechodzenie do `/Home/Contact?culture=fr-FR` ładowania pliku ZZ, takiego jak:
 
 [!code-text[](localization/sample/2.x/POLocalization/fr.po)]
 

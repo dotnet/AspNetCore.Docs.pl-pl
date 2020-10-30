@@ -7,6 +7,7 @@ ms.custom: seoapril2019, mvc, seodec18
 ms.date: 03/19/2020
 monikerRange: '>= aspnetcore-3.0'
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/facebook-logins
-ms.openlocfilehash: ce0e7ad30c137562b74dc9fe5c53235e3599e575
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: be0b655645fd2bd0eab9f9c30a65485f386cead3
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634361"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053361"
 ---
 # <a name="facebook-external-login-setup-in-aspnet-core"></a>Konfiguracja logowania zewnętrznego w serwisie Facebook w ASP.NET Core
 
@@ -48,7 +49,7 @@ Ten samouczek z przykładami kodu pokazuje, jak umożliwić użytkownikom zalogo
 
   ![Utwórz nowy formularz identyfikatora aplikacji](index/_static/FBNewAppId.png)
 
-* Na nowej karcie aplikacji wybierz pozycję **Dodaj produkt**.  Na karcie **Logowanie w serwisie Facebook** kliknij pozycję **Konfiguruj** . 
+* Na nowej karcie aplikacji wybierz pozycję **Dodaj produkt** .  Na karcie **Logowanie w serwisie Facebook** kliknij pozycję **Konfiguruj** . 
 
   ![Strona konfiguracji produktu](index/_static/FBProductSetup.png)
 
@@ -65,7 +66,7 @@ Ten samouczek z przykładami kodu pokazuje, jak umożliwić użytkownikom zalogo
 > [!NOTE]
 > Identyfikator URI */SignIn-Facebook* jest ustawiany jako domyślne wywołanie zwrotne dostawcy uwierzytelniania w serwisie Facebook. Domyślny identyfikator URI wywołania zwrotnego można zmienić podczas konfigurowania oprogramowania pośredniczącego uwierzytelniania w serwisie Facebook za pośrednictwem dziedziczonej właściwości [RemoteAuthenticationOptions. CallbackPath](/dotnet/api/microsoft.aspnetcore.authentication.remoteauthenticationoptions.callbackpath) klasy [FacebookOptions](/dotnet/api/microsoft.aspnetcore.authentication.facebook.facebookoptions) .
 
-* Kliknij przycisk **Zapisz zmiany**.
+* Kliknij przycisk **Zapisz zmiany** .
 
 * Kliknij link **Ustawienia**  >  **podstawowe** na lewym pasku nawigacyjnym.
 
@@ -103,7 +104,7 @@ services.AddAuthentication().AddFacebook(facebookOptions =>
 
 ## <a name="sign-in-with-facebook"></a>Logowanie za pomocą usługi Facebook
 
-* Uruchom aplikację i wybierz pozycję **Zaloguj się**. 
+* Uruchom aplikację i wybierz pozycję **Zaloguj się** . 
 * W obszarze **Użyj innej usługi do zalogowania się.** wybierz pozycję Facebook.
 * Nastąpi przekierowanie do usługi **Facebook** w celu uwierzytelnienia.
 * Wprowadź swoje poświadczenia w serwisie Facebook.
@@ -132,7 +133,7 @@ Zalecamy, aby `AccessDeniedPath` strona zawierała następujące informacje:
 * Przejdź do [Facebook.com](https://www.facebook.com/)
 * Jeśli użytkownik jest zalogowany, musisz się wylogować.
 * Uruchom aplikację i wybierz pozycję Logowanie do serwisu Facebook.
-* Wybierz pozycję **nie teraz**. Nastąpi przekierowanie do określonej `AccessDeniedPath` strony.
+* Wybierz pozycję **nie teraz** . Nastąpi przekierowanie do określonej `AccessDeniedPath` strony.
 
 <!-- End of React  -->
 [!INCLUDE[Forward request information when behind a proxy or load balancer section](includes/forwarded-headers-middleware.md)]
@@ -146,7 +147,7 @@ Zobacz Dokumentacja interfejsu API [FacebookOptions](/dotnet/api/microsoft.aspne
 
 ## <a name="troubleshooting"></a>Rozwiązywanie problemów
 
-* **Tylko ASP.NET Core 2. x:** Jeśli Identity nie jest skonfigurowany przez wywołanie `services.AddIdentity` w `ConfigureServices` , próba uwierzytelnienia spowoduje powstanie *argumentu ArgumentException: należy podać opcję "SignInScheme"*. Szablon projektu używany w tym samouczku zapewnia, że jest to gotowe.
+* **Tylko ASP.NET Core 2. x:** Jeśli Identity nie jest skonfigurowany przez wywołanie `services.AddIdentity` w `ConfigureServices` , próba uwierzytelnienia spowoduje powstanie *argumentu ArgumentException: należy podać opcję "SignInScheme"* . Szablon projektu używany w tym samouczku zapewnia, że jest to gotowe.
 * Jeśli baza danych lokacji nie została utworzona przez zastosowanie początkowej migracji, podczas *przetwarzania błędu żądania nie można wykonać operacji bazy danych* . Naciśnij pozycję **Zastosuj migracje** , aby utworzyć bazę danych i odświeżyć, aby kontynuować z powodu błędu.
 
 ## <a name="next-steps"></a>Następne kroki

@@ -7,6 +7,7 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/update-related-data
-ms.openlocfilehash: 356536a22f11ca5db6cfa9cda79598ec8aa03e18
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: f41d0b1d7ba46ef4867e0d160dc61f21042ce403
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88625274"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053946"
 ---
 # <a name="tutorial-update-related-data---aspnet-mvc-with-ef-core"></a>Samouczek: aktualizowanie powiązanych danych — ASP.NET MVC z EF Core
 
@@ -52,7 +53,7 @@ W tym samouczku zostały wykonane następujące czynności:
 
 Po utworzeniu nowej jednostki kursu musi ona mieć relację z istniejącym działem. Aby to ułatwić, kod szkieletowy obejmuje metody kontrolera oraz tworzenie i edytowanie widoków zawierających listę rozwijaną umożliwiającą wybranie działu. Lista rozwijana ustawia `Course.DepartmentID` Właściwość klucza obcego i to wszystko Entity Framework potrzeby w celu załadowania `Department` właściwości nawigacji do odpowiedniej jednostki działu. Użyjesz kodu szkieletowego, ale nieco zmień go, aby dodać obsługę błędów i posortować listę rozwijaną.
 
-W *CoursesController.cs*Usuń cztery metody tworzenia i edycji i zastąp je następującym kodem:
+W *CoursesController.cs* Usuń cztery metody tworzenia i edycji i zastąp je następującym kodem:
 
 [!code-csharp[](intro/samples/cu/Controllers/CoursesController.cs?name=snippet_CreateGet)]
 
@@ -88,37 +89,37 @@ Aby zoptymalizować wydajność szczegółów kursu i stron usuwania, Dodaj `AsN
 
 ### <a name="modify-the-course-views"></a>Modyfikowanie widoków kursów
 
-W obszarze *widoki/kursy/Utwórz. cshtml*Dodaj opcję "Wybierz dział" do listy rozwijanej **dział** , Zmień podpis z **DepartmentID** na **Wydział**i Dodaj komunikat weryfikacji.
+W obszarze *widoki/kursy/Utwórz. cshtml* Dodaj opcję "Wybierz dział" do listy rozwijanej **dział** , Zmień podpis z **DepartmentID** na **Wydział** i Dodaj komunikat weryfikacji.
 
 [!code-cshtml[](intro/samples/cu/Views/Courses/Create.cshtml?highlight=2-6&range=29-34)]
 
-W obszarze *widoki/kursy/Edytuj. cshtml*wprowadź tę samą zmianę dla pola działu, który właśnie został *utworzony. cshtml*.
+W obszarze *widoki/kursy/Edytuj. cshtml* wprowadź tę samą zmianę dla pola działu, który właśnie został *utworzony. cshtml* .
 
-Ponadto w obszarze *widoki/kursy/Edytuj. cshtml*Dodaj pole numer kursu przed polem **tytuł** . Ponieważ numer kursu jest kluczem podstawowym, jest wyświetlany, ale nie można go zmienić.
+Ponadto w obszarze *widoki/kursy/Edytuj. cshtml* Dodaj pole numer kursu przed polem **tytuł** . Ponieważ numer kursu jest kluczem podstawowym, jest wyświetlany, ale nie można go zmienić.
 
 [!code-cshtml[](intro/samples/cu/Views/Courses/Edit.cshtml?range=15-18)]
 
 W widoku edycji już istnieje pole ukryte ( `<input type="hidden">` ). Dodanie `<label>` pomocnika tagów nie eliminuje potrzeby ukrytego pola, ponieważ nie powoduje, że numer kursu ma być uwzględniony w opublikowanych danych, gdy użytkownik kliknie przycisk **Zapisz** na stronie **Edycja** .
 
-W obszarze *widoki/kursy/Usuń. cshtml*Dodaj pole numer kursu z góry i zmień identyfikator działu na nazwę działu.
+W obszarze *widoki/kursy/Usuń. cshtml* Dodaj pole numer kursu z góry i zmień identyfikator działu na nazwę działu.
 
 [!code-cshtml[](intro/samples/cu/Views/Courses/Delete.cshtml?highlight=14-19,36)]
 
-W obszarze *widoki/kursy/szczegóły. cshtml*wprowadź tę samą zmianę, która właśnie została wykonana dla elementu *DELETE. cshtml*.
+W obszarze *widoki/kursy/szczegóły. cshtml* wprowadź tę samą zmianę, która właśnie została wykonana dla elementu *DELETE. cshtml* .
 
 ### <a name="test-the-course-pages"></a>Testowanie stron kursów
 
-Uruchom aplikację, wybierz kartę **kursy** , kliknij pozycję **Utwórz nową**, a następnie wprowadź dane, aby utworzyć nowy kurs:
+Uruchom aplikację, wybierz kartę **kursy** , kliknij pozycję **Utwórz nową** , a następnie wprowadź dane, aby utworzyć nowy kurs:
 
 ![Strona tworzenia kursu](update-related-data/_static/course-create.png)
 
-Kliknij przycisk **Utwórz**. Zostanie wyświetlona strona indeks kursów z nowym kursem, który został dodany do listy. Nazwa działu na liście stron indeksu pochodzi z właściwości nawigacji, co oznacza, że relacja została prawidłowo ustanowiona.
+Kliknij pozycję **Utwórz** . Zostanie wyświetlona strona indeks kursów z nowym kursem, który został dodany do listy. Nazwa działu na liście stron indeksu pochodzi z właściwości nawigacji, co oznacza, że relacja została prawidłowo ustanowiona.
 
 Kliknij pozycję **Edytuj** na kursie na stronie indeks kursów.
 
 ![Strona edytowania kursu](update-related-data/_static/course-edit.png)
 
-Zmień dane na stronie i kliknij przycisk **Zapisz**. Zostanie wyświetlona strona indeks kursów z zaktualizowanymi danymi kursu.
+Zmień dane na stronie i kliknij przycisk **Zapisz** . Zostanie wyświetlona strona indeks kursów z zaktualizowanymi danymi kursu.
 
 ## <a name="add-instructors-edit-page"></a>Dodaj stronę edycji instruktorów
 
@@ -132,7 +133,7 @@ Podczas edytowania rekordu instruktora chcesz mieć możliwość aktualizowania 
 
 ### <a name="update-the-instructors-controller"></a>Aktualizowanie kontrolera instruktorów
 
-W *InstructorsController.cs*Zmień kod w `Edit` metodzie narzędzia HttpGet tak, aby ładował właściwość nawigacji jednostki instruktora `OfficeAssignment` i wywołania `AsNoTracking` :
+W *InstructorsController.cs* Zmień kod w `Edit` metodzie narzędzia HttpGet tak, aby ładował właściwość nawigacji jednostki instruktora `OfficeAssignment` i wywołania `AsNoTracking` :
 
 [!code-csharp[](intro/samples/cu/Controllers/InstructorsController.cs?highlight=8-11&name=snippet_EditGetOA)]
 
@@ -172,11 +173,11 @@ Kod wykonuje następujące czynności:
 
 ### <a name="update-the-instructor-edit-view"></a>Aktualizuj widok do edycji instruktora
 
-W obszarze *widoki/instruktorzy/Edit. cshtml*Dodaj nowe pole do edytowania lokalizacji biura na końcu przed przyciskiem **Zapisz** :
+W obszarze *widoki/instruktorzy/Edit. cshtml* Dodaj nowe pole do edytowania lokalizacji biura na końcu przed przyciskiem **Zapisz** :
 
 [!code-cshtml[](intro/samples/cu/Views/Instructors/Edit.cshtml?range=30-34)]
 
-Uruchom aplikację, wybierz kartę **Instruktorzy** , a następnie kliknij przycisk **Edytuj** na instruktorze. Zmień **lokalizację biura** , a następnie kliknij przycisk **Zapisz**.
+Uruchom aplikację, wybierz kartę **Instruktorzy** , a następnie kliknij przycisk **Edytuj** na instruktorze. Zmień **lokalizację biura** , a następnie kliknij przycisk **Zapisz** .
 
 ![Strona edycji instruktora](update-related-data/_static/instructor-edit-office.png)
 
@@ -198,7 +199,7 @@ Utwórz *AssignedCourseData.cs* w folderze *SchoolViewModels* i Zastąp istniej�
 
 [!code-csharp[](intro/samples/cu/Models/SchoolViewModels/AssignedCourseData.cs)]
 
-W *InstructorsController.cs*Zastąp metodę narzędzia HttpGet `Edit` następującym kodem. Zmiany są wyróżnione.
+W *InstructorsController.cs* Zastąp metodę narzędzia HttpGet `Edit` następującym kodem. Zmiany są wyróżnione.
 
 [!code-csharp[](intro/samples/cu/Controllers/InstructorsController.cs?highlight=10,17,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36&name=snippet_EditGetCourses)]
 
@@ -206,7 +207,7 @@ Kod dodaje eager ładowania dla `Courses` właściwości nawigacji i wywołuje n
 
 Kod w `PopulateAssignedCourseData` metodzie odczytuje przez wszystkie jednostki kursu w celu załadowania listy kursów przy użyciu klasy model widoku. Dla każdego kursu kod sprawdza, czy kurs istnieje we `Courses` właściwości nawigacji instruktora. Aby utworzyć efektywne wyszukiwanie podczas sprawdzania, czy kurs jest przypisany do instruktora, kursy przypisane do instruktora są umieszczane w `HashSet` kolekcji. `Assigned`Właściwość jest ustawiona na wartość true dla kursów, do których jest przypisany instruktor. Widok użyje tej właściwości, aby określić, które pola wyboru muszą być wyświetlane jako wybrane. Na koniec lista jest przenoszona do widoku w temacie `ViewData` .
 
-Następnie Dodaj kod, który jest wykonywany, gdy użytkownik kliknie przycisk **Zapisz**. Zastąp `EditPost` metodę poniższym kodem i Dodaj nową metodę, która aktualizuje `Courses` Właściwość nawigacji jednostki instruktora.
+Następnie Dodaj kod, który jest wykonywany, gdy użytkownik kliknie przycisk **Zapisz** . Zastąp `EditPost` metodę poniższym kodem i Dodaj nową metodę, która aktualizuje `Courses` Właściwość nawigacji jednostki instruktora.
 
 [!code-csharp[](intro/samples/cu/Controllers/InstructorsController.cs?highlight=1,3,12,13,25,39-40&name=snippet_EditPostCourses)]
 
@@ -232,7 +233,7 @@ Jeśli nie wybrano pola wyboru dla kursu, ale kurs jest we `Instructor.CourseAss
 
 ### <a name="update-the-instructor-views"></a>Aktualizowanie widoków instruktora
 
-W obszarze *widoki/instruktorzy/Edit. cshtml*Dodaj pole **kursów** z tablicą pól wyboru, dodając Poniższy kod bezpośrednio po elementach `div` pola **Office** i przed `div` elementem przycisku **Zapisz** .
+W obszarze *widoki/instruktorzy/Edit. cshtml* Dodaj pole **kursów** z tablicą pól wyboru, dodając Poniższy kod bezpośrednio po elementach `div` pola **Office** i przed `div` elementem przycisku **Zapisz** .
 
 <a id="notepad"></a>
 > [!NOTE]
@@ -255,7 +256,7 @@ Zmień niektóre przypisania kursu, a następnie kliknij przycisk Zapisz. Wprowa
 
 ## <a name="update-delete-page"></a>Aktualizuj stronę usuwania
 
-W *InstructorsController.cs*Usuń `DeleteConfirmed` metodę i Wstaw w jej miejscu następujący kod.
+W *InstructorsController.cs* Usuń `DeleteConfirmed` metodę i Wstaw w jej miejscu następujący kod.
 
 [!code-csharp[](intro/samples/cu/Controllers/InstructorsController.cs?highlight=5-7,9-12&name=snippet_DeleteConfirmed)]
 
@@ -267,7 +268,7 @@ Ten kod wprowadza następujące zmiany:
 
 ## <a name="add-office-location-and-courses-to-create-page"></a>Dodawanie lokalizacji i kursów biura do tworzenia strony
 
-W *InstructorsController.cs*Usuń metody narzędzia HttpGet i HTTPPOST `Create` , a następnie Dodaj następujący kod w ich miejscu:
+W *InstructorsController.cs* Usuń metody narzędzia HttpGet i HTTPPOST `Create` , a następnie Dodaj następujący kod w ich miejscu:
 
 [!code-csharp[](intro/samples/cu/Controllers/InstructorsController.cs?name=snippet_Create&highlight=3-5,12,14-22,29)]
 
@@ -300,7 +301,7 @@ public ICollection<CourseAssignment> CourseAssignments
 
 Jeśli zmodyfikujesz `CourseAssignments` Właściwość w ten sposób, możesz usunąć jawny kod inicjalizacji właściwości w kontrolerze.
 
-W obszarze *widoki/instruktor/Create. cshtml*Dodaj pole tekstowe Lokalizacja biura i pola wyboru dla kursów przed przyciskiem Prześlij. Tak jak w przypadku strony edytowania [Popraw formatowanie, jeśli program Visual Studio ponownie sformatuje kod podczas jego wklejania](#notepad).
+W obszarze *widoki/instruktor/Create. cshtml* Dodaj pole tekstowe Lokalizacja biura i pola wyboru dla kursów przed przyciskiem Prześlij. Tak jak w przypadku strony edytowania [Popraw formatowanie, jeśli program Visual Studio ponownie sformatuje kod podczas jego wklejania](#notepad).
 
 [!code-cshtml[](intro/samples/cu/Views/Instructors/Create.cshtml?range=29-61)]
 

@@ -7,6 +7,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 03/07/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: spa/react
-ms.openlocfilehash: 0ace8f358b509634c86dfa29c3f943626797ed69
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 6c3539d96329489189f49a3af0c718791824be6b
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628754"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93054453"
 ---
 # <a name="use-the-react-project-template-with-aspnet-core"></a>Użyj szablonu projektu reagowanie z ASP.NET Core
 
@@ -72,7 +73,7 @@ Istnieją niewielkie różnice między aplikacją reakcji utworzoną przez ten s
 
 ## <a name="install-npm-packages"></a>Zainstaluj pakiety npm
 
-Aby zainstalować pakiety npm innych firm, należy użyć wiersza polecenia w podkatalogu *ClientApp* . Na przykład:
+Aby zainstalować pakiety npm innych firm, należy użyć wiersza polecenia w podkatalogu *ClientApp* . Przykład:
 
 ```console
 cd ClientApp

@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/concurrency
-ms.openlocfilehash: 0f0f1a9c70a2d6725cbb68ac62850cf6aa332d36
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 573a509041bfb34faf50a227c451824db03f92ee
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90721843"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053998"
 ---
 # <a name="part-8-no-locrazor-pages-with-ef-core-in-aspnet-core---concurrency"></a>Część 8 Razor strony z EF Core w ASP.NET Core — współbieżność
 
@@ -55,7 +56,7 @@ Optymistyczna współbieżność umożliwia konflikty współbieżności, a nast
 
 ![Zmiana wartości budżetu na 0](concurrency/_static/change-budget30.png)
 
-Przed Janem kliknie przycisk **Zapisz**, Jan odwiedzi tę samą stronę i zmieni pole Data rozpoczęcia z 9/1/2007 na 9/1/2013.
+Przed Janem kliknie przycisk **Zapisz** , Jan odwiedzi tę samą stronę i zmieni pole Data rozpoczęcia z 9/1/2007 na 9/1/2013.
 
 ![Zmiana daty rozpoczęcia na 2013](concurrency/_static/change-date30.png)
 
@@ -97,7 +98,7 @@ EF Core zgłasza `DbConcurrencyException` wyjątki w przypadku wykrycia konflikt
 
 ## <a name="add-a-tracking-property"></a>Dodaj właściwość śledzenia
 
-W obszarze *modele/dział. cs*Dodaj właściwość śledzenia o nazwie rowversion:
+W obszarze *modele/dział. cs* Dodaj właściwość śledzenia o nazwie rowversion:
 
 [!code-csharp[](intro/samples/cu30/Models/Department.cs?highlight=26,27)]
 
@@ -279,7 +280,7 @@ Poniższy kod dodaje niestandardowy komunikat o błędzie dla każdej kolumny, k
 
 [!code-csharp[](intro/samples/cu30/Pages/Departments/Edit.cshtml.cs?name=snippet_Error)]
 
-Poniższy wyróżniony kod ustawia `RowVersion` wartość nowej wartości pobranej z bazy danych. Następnym razem, gdy użytkownik kliknie przycisk **Zapisz**, zostanie przechwycony tylko błąd współbieżności występujący od momentu ostatniego wyświetlenia strony edycji.
+Poniższy wyróżniony kod ustawia `RowVersion` wartość nowej wartości pobranej z bazy danych. Następnym razem, gdy użytkownik kliknie przycisk **Zapisz** , zostanie przechwycony tylko błąd współbieżności występujący od momentu ostatniego wyświetlenia strony edycji.
 
 [!code-csharp[](intro/samples/cu30/Pages/Departments/Edit.cshtml.cs?name=snippet_TryUpdateModel&highlight=28)]
 
@@ -303,12 +304,12 @@ Powyższy kod ma następujące działanie:
 Otwórz dwa wystąpienia przeglądarki edycji dla działu angielskiego:
 
 * Uruchom aplikację i wybierz pozycję działy.
-* Kliknij prawym przyciskiem myszy hiperłącze **Edytuj** dla działu angielskiego i wybierz polecenie **Otwórz na nowej karcie**.
+* Kliknij prawym przyciskiem myszy hiperłącze **Edytuj** dla działu angielskiego i wybierz polecenie **Otwórz na nowej karcie** .
 * Na pierwszej karcie kliknij hiperłącze **Edytuj** dla działu w języku angielskim.
 
 Dwie karty przeglądarki wyświetlają te same informacje.
 
-Zmień nazwę na pierwszej karcie przeglądarki, a następnie kliknij przycisk **Zapisz**.
+Zmień nazwę na pierwszej karcie przeglądarki, a następnie kliknij przycisk **Zapisz** .
 
 ![Edycja działu Strona 1 po zmianie](concurrency/_static/edit-after-change-130.png)
 
@@ -318,7 +319,7 @@ Zmień inne pole w drugiej karcie przeglądarki.
 
 ![Edycja działu Strona 2 po zmianie](concurrency/_static/edit-after-change-230.png)
 
-Kliknij pozycję **Zapisz**. Komunikaty o błędach są wyświetlane dla wszystkich pól, które nie pasują do wartości bazy danych:
+Kliknij pozycję **Zapisz** . Komunikaty o błędach są wyświetlane dla wszystkich pól, które nie pasują do wartości bazy danych:
 
 ![Komunikat o błędzie strony edytowania działu](concurrency/_static/edit-error30.png)
 
@@ -359,18 +360,18 @@ Tworzenie działu testowego.
 Otwórz dwa wystąpienia przeglądarki usuwania dla działu testowego:
 
 * Uruchom aplikację i wybierz pozycję działy.
-* Kliknij prawym przyciskiem myszy hiperłącze **Usuń** dla działu testowego i wybierz polecenie **Otwórz na nowej karcie**.
+* Kliknij prawym przyciskiem myszy hiperłącze **Usuń** dla działu testowego i wybierz polecenie **Otwórz na nowej karcie** .
 * Kliknij hiperłącze **Edytuj** dla działu testowego.
 
 Dwie karty przeglądarki wyświetlają te same informacje.
 
-Zmień budżet na pierwszej karcie przeglądarki, a następnie kliknij przycisk **Zapisz**.
+Zmień budżet na pierwszej karcie przeglądarki, a następnie kliknij przycisk **Zapisz** .
 
 W przeglądarce zostanie wyświetlona strona indeks z wartością zmieniona i zaktualizowanym wskaźnikiem rowVersion. Zanotuj zaktualizowany wskaźnik rowVersion, który jest wyświetlany na drugim serwerze ogłaszania zwrotnego na drugiej karcie.
 
 Usuń dział testów z drugiej karty. Błąd współbieżności jest wyświetlany z bieżącymi wartościami z bazy danych. Kliknięcie przycisku **Usuń** powoduje usunięcie jednostki, o ile `RowVersion` nie została zaktualizowana.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Tokeny współbieżności w EF Core](/ef/core/modeling/concurrency)
 * [Obsługa współbieżności w EF Core](/ef/core/saving/concurrency)
@@ -407,7 +408,7 @@ Optymistyczna współbieżność umożliwia konflikty współbieżności, a nast
 
 ![Zmiana wartości budżetu na 0](concurrency/_static/change-budget.png)
 
-Przed Janem kliknie przycisk **Zapisz**, Jan odwiedzi tę samą stronę i zmieni pole Data rozpoczęcia z 9/1/2007 na 9/1/2013.
+Przed Janem kliknie przycisk **Zapisz** , Jan odwiedzi tę samą stronę i zmieni pole Data rozpoczęcia z 9/1/2007 na 9/1/2013.
 
 ![Zmiana daty rozpoczęcia na 2013](concurrency/_static/change-date.png)
 
@@ -471,7 +472,7 @@ W EF Core, gdy żadne wiersze nie zostały zaktualizowane przez `Update` polecen
 
 ### <a name="add-a-tracking-property-to-the-department-entity"></a>Dodawanie właściwości śledzenia do jednostki działu
 
-W obszarze *modele/dział. cs*Dodaj właściwość śledzenia o nazwie rowversion:
+W obszarze *modele/dział. cs* Dodaj właściwość śledzenia o nazwie rowversion:
 
 [!code-csharp[](intro/samples/cu/Models/Department.cs?name=snippet_Final&highlight=26,27)]
 
@@ -575,7 +576,7 @@ Poniższy kod dodaje niestandardowy komunikat o błędzie dla każdej kolumny, k
 
 [!code-csharp[](intro/samples/cu/Pages/Departments/Edit.cshtml.cs?name=snippet_err)]
 
-Poniższy wyróżniony kod ustawia `RowVersion` wartość nowej wartości pobranej z bazy danych. Następnym razem, gdy użytkownik kliknie przycisk **Zapisz**, zostanie przechwycony tylko błąd współbieżności występujący od momentu ostatniego wyświetlenia strony edycji.
+Poniższy wyróżniony kod ustawia `RowVersion` wartość nowej wartości pobranej z bazy danych. Następnym razem, gdy użytkownik kliknie przycisk **Zapisz** , zostanie przechwycony tylko błąd współbieżności występujący od momentu ostatniego wyświetlenia strony edycji.
 
 [!code-csharp[](intro/samples/cu/Pages/Departments/Edit.cshtml.cs?name=snippet_try&highlight=23)]
 
@@ -599,12 +600,12 @@ Poprzedzające znaczniki:
 Otwórz dwa wystąpienia przeglądarki edycji dla działu angielskiego:
 
 * Uruchom aplikację i wybierz pozycję działy.
-* Kliknij prawym przyciskiem myszy hiperłącze **Edytuj** dla działu angielskiego i wybierz polecenie **Otwórz na nowej karcie**.
+* Kliknij prawym przyciskiem myszy hiperłącze **Edytuj** dla działu angielskiego i wybierz polecenie **Otwórz na nowej karcie** .
 * Na pierwszej karcie kliknij hiperłącze **Edytuj** dla działu w języku angielskim.
 
 Dwie karty przeglądarki wyświetlają te same informacje.
 
-Zmień nazwę na pierwszej karcie przeglądarki, a następnie kliknij przycisk **Zapisz**.
+Zmień nazwę na pierwszej karcie przeglądarki, a następnie kliknij przycisk **Zapisz** .
 
 ![Edycja działu Strona 1 po zmianie](concurrency/_static/edit-after-change-1.png)
 
@@ -614,7 +615,7 @@ Zmień inne pole w drugiej karcie przeglądarki.
 
 ![Edycja działu Strona 2 po zmianie](concurrency/_static/edit-after-change-2.png)
 
-Kliknij pozycję **Zapisz**. Komunikaty o błędach są wyświetlane dla wszystkich pól, które nie pasują do wartości bazy danych:
+Kliknij pozycję **Zapisz** . Komunikaty o błędach są wyświetlane dla wszystkich pól, które nie pasują do wartości bazy danych:
 
 ![Komunikat o błędzie strony edytowania działu](concurrency/_static/edit-error.png)
 
@@ -657,12 +658,12 @@ Tworzenie działu testowego.
 Otwórz dwa wystąpienia przeglądarki usuwania dla działu testowego:
 
 * Uruchom aplikację i wybierz pozycję działy.
-* Kliknij prawym przyciskiem myszy hiperłącze **Usuń** dla działu testowego i wybierz polecenie **Otwórz na nowej karcie**.
+* Kliknij prawym przyciskiem myszy hiperłącze **Usuń** dla działu testowego i wybierz polecenie **Otwórz na nowej karcie** .
 * Kliknij hiperłącze **Edytuj** dla działu testowego.
 
 Dwie karty przeglądarki wyświetlają te same informacje.
 
-Zmień budżet na pierwszej karcie przeglądarki, a następnie kliknij przycisk **Zapisz**.
+Zmień budżet na pierwszej karcie przeglądarki, a następnie kliknij przycisk **Zapisz** .
 
 W przeglądarce zostanie wyświetlona strona indeks z wartością zmieniona i zaktualizowanym wskaźnikiem rowVersion. Zanotuj zaktualizowany wskaźnik rowVersion, który jest wyświetlany na drugim serwerze ogłaszania zwrotnego na drugiej karcie.
 
@@ -670,7 +671,7 @@ Usuń dział testów z drugiej karty. Błąd współbieżności jest wyświetlan
 
 Zobacz [dziedziczenie](xref:data/ef-mvc/inheritance) sposobu dziedziczenia modelu danych.
 
-### <a name="additional-resources"></a>Zasoby dodatkowe
+### <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Tokeny współbieżności w EF Core](/ef/core/modeling/concurrency)
 * [Obsługa współbieżności w EF Core](/ef/core/saving/concurrency)

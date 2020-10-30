@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/23/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/handle-errors
-ms.openlocfilehash: dfe6f1ac79732d158e31fb5250645d4ff98d1c0b
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: c789928252417ef1cf95c60deb7edef24d58126e
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628342"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93056000"
 ---
 # <a name="handle-errors-in-aspnet-core-no-locblazor-apps"></a>Obsługa błędów w Blazor aplikacjach ASP.NET Core
 
@@ -90,7 +91,7 @@ W Blazor Server aplikacji Dostosuj środowisko w `Pages/_Host.cshtml` pliku:
 
 ## <a name="how-a-no-locblazor-server-app-reacts-to-unhandled-exceptions"></a>Jak Blazor Server Aplikacja reaguje na Nieobsłużone wyjątki
 
-Blazor Server jest strukturą stanową. Gdy użytkownicy współpracują z aplikacją, utrzymują połączenie z serwerem znanym jako *obwód*. Obwód zawiera aktywne wystąpienia składnika, a także wiele innych aspektów stanu, takich jak:
+Blazor Server jest strukturą stanową. Gdy użytkownicy współpracują z aplikacją, utrzymują połączenie z serwerem znanym jako *obwód* . Obwód zawiera aktywne wystąpienia składnika, a także wiele innych aspektów stanu, takich jak:
 
 * Najnowsze renderowane dane wyjściowe składników.
 * Bieżący zestaw delegatów obsługi zdarzeń, które mogą być wyzwalane przez zdarzenia po stronie klienta.

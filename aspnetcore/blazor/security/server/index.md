@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/06/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/index
-ms.openlocfilehash: d6d0f6f859dbaef98c6c8a9c53fe9858705cdc0a
-ms.sourcegitcommit: 139c998d37e9f3e3d0e3d72e10dbce8b75957d89
+ms.openlocfilehash: 108fb3a8a24295cad43fd8c83303abd95a7ecd33
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/07/2020
-ms.locfileid: "91805508"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93055480"
 ---
 # <a name="secure-aspnet-core-no-locblazor-server-apps"></a>Bezpieczne Blazor Server aplikacje ASP.NET Core
 
@@ -35,16 +36,16 @@ Blazor Server aplikacje są skonfigurowane pod kątem zabezpieczeń w taki sam s
 
 Blazor ServerSzablon projektu można skonfigurować do uwierzytelniania podczas tworzenia projektu.
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Postępuj zgodnie ze wskazówkami programu Visual Studio w programie, <xref:blazor/tooling> Aby utworzyć nowy Blazor Server projekt z mechanizmem uwierzytelniania.
 
-Po wybraniu szablonu ** Blazor Server aplikacji** w oknie dialogowym **Tworzenie nowej ASP.NET Core aplikacji sieci Web** wybierz pozycję **Zmień** w obszarze **uwierzytelnianie**.
+Po wybraniu szablonu **Blazor Server aplikacji** w oknie dialogowym **Tworzenie nowej ASP.NET Core aplikacji sieci Web** wybierz pozycję **Zmień** w obszarze **uwierzytelnianie** .
 
 Zostanie otwarte okno dialogowe z zaoferowaniem tego samego zestawu mechanizmów uwierzytelniania dostępnych dla innych projektów ASP.NET Core:
 
 * **Bez uwierzytelniania**
-* **Konta poszczególnych użytkowników**: konta użytkowników mogą być przechowywane:
+* **Konta poszczególnych użytkowników** : konta użytkowników mogą być przechowywane:
   * W aplikacji korzystającej z [Identity](xref:security/authentication/identity) systemu ASP.NET Core.
   * Z [Azure AD B2C](xref:security/authentication/azure-ad-b2c).
 * **Konta służbowe**
@@ -84,7 +85,7 @@ Aby uzyskać więcej informacji, zobacz [`dotnet new`](/dotnet/core/tools/dotnet
 
 1. Aplikacja jest tworzona dla poszczególnych użytkowników przechowywanych w aplikacji za pomocą usługi ASP.NET Core Identity .
 
-# <a name="net-core-cli"></a>[Interfejs wiersza polecenia platformy .NET Core](#tab/netcore-cli/)
+# <a name="net-core-cli"></a>[interfejs wiersza polecenia programu .NET Core](#tab/netcore-cli/)
 
 Utwórz nowy Blazor Server projekt z mechanizmem uwierzytelniania przy użyciu następującego polecenia w powłoce poleceń:
 

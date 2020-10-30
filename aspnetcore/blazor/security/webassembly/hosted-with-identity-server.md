@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/27/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-identity-server
-ms.openlocfilehash: a6fd005e19f532089ac1a1914756fb03eabb24c4
-ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
+ms.openlocfilehash: 147f1d6cdea0b9992b8be333db4cb06e30c7feaf
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/27/2020
-ms.locfileid: "92690474"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93055220"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-hosted-app-with-no-locidentity-server"></a>Zabezpieczanie Blazor WebAssembly hostowanej aplikacji ASP.NET Core Identity z serwerem
 
@@ -34,7 +35,7 @@ W tym artykule wyjaśniono, jak utworzyć [hostowaną Blazor WebAssembly aplikac
 > [!NOTE]
 > Aby skonfigurować autonomiczną lub hostowaną Blazor WebAssembly aplikację do korzystania z istniejącego Identity wystąpienia serwera zewnętrznego, postępuj zgodnie ze wskazówkami w temacie <xref:blazor/security/webassembly/standalone-with-authentication-library> .
 
-# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Aby utworzyć nowy Blazor WebAssembly projekt z mechanizmem uwierzytelniania:
 
@@ -492,7 +493,7 @@ Aby skonfigurować aplikację, Azure App Service i Azure Key Vault do hostowania
 
    Aby utworzyć certyfikat, należy użyć jednej z następujących metod lub innego odpowiedniego narzędzia lub usługi online:
 
-   * [Usługa Azure Key Vault](/azure/key-vault/certificates/quick-create-portal#add-a-certificate-to-key-vault)
+   * [Azure Key Vault](/azure/key-vault/certificates/quick-create-portal#add-a-certificate-to-key-vault)
    * [MakeCert w systemie Windows](/windows/desktop/seccrypto/makecert)
    * [OpenSSL](https://www.openssl.org)
 
@@ -554,7 +555,7 @@ Dokumentacja platformy Azure zawiera dodatkowe szczegóły dotyczące korzystani
 * [Dokumentacja App Service](/azure/app-service/)
 * [Samouczek: mapowanie istniejącej niestandardowej nazwy DNS na Azure App Service](/azure/app-service/app-service-web-tutorial-custom-domain)
 * [Zabezpiecz niestandardową nazwę DNS z powiązaniem TLS/SSL w Azure App Service](/azure/app-service/configure-ssl-bindings)
-* [Usługa Azure Key Vault](/azure/key-vault/)
+* [Azure Key Vault](/azure/key-vault/)
 
 Zalecamy używanie nowego okna przeglądarki w trybie prywatnym lub incognito dla każdego przebiegu testu aplikacji po zmianie aplikacji, konfiguracji aplikacji lub usług platformy Azure w Azure Portal. cookieWyzwolenie z poprzedniego przebiegu testowego może spowodować niepowodzenie uwierzytelniania lub autoryzacji podczas testowania lokacji nawet wtedy, gdy konfiguracja lokacji jest poprawna. Aby uzyskać więcej informacji na temat sposobu konfigurowania programu Visual Studio, aby otworzyć nowe okno przeglądarki w trybie prywatnym lub incognito dla każdego przebiegu testowego, zobacz sekcję [ Cookie s i dane lokacji](#cookies-and-site-data) .
 

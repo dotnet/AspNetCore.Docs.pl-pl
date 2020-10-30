@@ -5,8 +5,9 @@ description: Dowiedz się, jak utrwalać stan w Blazor Server aplikacjach.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/22/2020
+ms.date: 10/29/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -19,12 +20,12 @@ no-loc:
 - SignalR
 uid: blazor/state-management
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: a74f056447839c4cf057948f26a9ece9b5799656
-ms.sourcegitcommit: d1a897ebd89daa05170ac448e4831d327f6b21a8
+ms.openlocfilehash: 1769ddbb95c9ffe373e916c885e411adc3d4c65b
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/01/2020
-ms.locfileid: "91606717"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93054999"
 ---
 # <a name="aspnet-core-no-locblazor-state-management"></a>BlazorZarządzanie stanem ASP.NET Core
 
@@ -54,7 +55,7 @@ Trwałość danych jest zazwyczaj wymagana tylko w przypadku stanu wysokiej wart
 * Wieloetapowe formularze sieci Web: czasochłonne, aby użytkownik mógł ponownie wprowadzić dane dla kilku ukończonych kroków wieloetapowego formularza sieci Web, jeśli ich stan zostanie utracony. Użytkownik utraci stan w tym scenariuszu, jeśli opuszcza formularz i wróci później.
 * Koszyki: każdy handlowy istotny składnik aplikacji, który reprezentuje potencjalne dochody, może być utrzymywany. Użytkownik, który straci swój stan, a tym samym koszyk, może zakupić mniejszą liczbę produktów lub usług w momencie powrotu do lokacji w przyszłości.
 
-Aplikacja może utrzymywać tylko *stan aplikacji*. Interfejsów użytkownika nie mogą być utrwalane, takie jak wystąpienia składników i ich drzewa renderowania. Składniki i drzewa renderowania nie są generalnie serializowane. Aby zachować stan interfejsu użytkownika, na przykład rozwinięte węzły kontrolki widoku drzewa, aplikacja musi używać niestandardowego kodu do modelowania zachowania stanu interfejsu użytkownika jako możliwy do serializacji stan aplikacji.
+Aplikacja może utrzymywać tylko *stan aplikacji* . Interfejsów użytkownika nie mogą być utrwalane, takie jak wystąpienia składników i ich drzewa renderowania. Składniki i drzewa renderowania nie są generalnie serializowane. Aby zachować stan interfejsu użytkownika, na przykład rozwinięte węzły kontrolki widoku drzewa, aplikacja musi używać niestandardowego kodu do modelowania zachowania stanu interfejsu użytkownika jako możliwy do serializacji stan aplikacji.
 
 ## <a name="where-to-persist-state"></a>Gdzie będzie trwały stan
 
@@ -82,7 +83,7 @@ Więcej informacji można znaleźć w następujących zasobach:
 
 * <xref:blazor/call-web-api>
 * <xref:blazor/security/webassembly/index>
-* Blazor*Zabezpieczenia i Identity * artykułu
+* Blazor*Zabezpieczenia i Identity* artykułu
 
 Aby uzyskać więcej informacji na temat opcji usługi Azure Data Storage, zobacz następujące tematy:
 
@@ -134,7 +135,7 @@ Ogólnie rzecz biorąc, `sessionStorage` jest bezpiecznie używać. `sessionStor
 
 ::: zone pivot="server"
 
-Blazor Server jest platformą aplikacji stanowych. W większości przypadków aplikacja utrzymuje połączenie z serwerem. Stan użytkownika jest przechowywany w pamięci serwera w ramach *obwodu*. 
+Blazor Server jest platformą aplikacji stanowych. W większości przypadków aplikacja utrzymuje połączenie z serwerem. Stan użytkownika jest przechowywany w pamięci serwera w ramach *obwodu* . 
 
 Przykłady stanu użytkownika przechowywanego w obwodzie:
 
@@ -163,7 +164,7 @@ Trwałość danych jest zazwyczaj wymagana tylko w przypadku stanu wysokiej wart
 * Wieloetapowe formularze sieci Web: czasochłonne, aby użytkownik mógł ponownie wprowadzić dane dla kilku ukończonych kroków wieloetapowego formularza sieci Web, jeśli ich stan zostanie utracony. Użytkownik utraci stan w tym scenariuszu, jeśli opuszcza formularz i wróci później.
 * Koszyki: każdy handlowy istotny składnik aplikacji, który reprezentuje potencjalne dochody, może być utrzymywany. Użytkownik, który straci swój stan, a tym samym koszyk, może zakupić mniejszą liczbę produktów lub usług w momencie powrotu do lokacji w przyszłości.
 
-Aplikacja może utrzymywać tylko *stan aplikacji*. Interfejsów użytkownika nie mogą być utrwalane, takie jak wystąpienia składników i ich drzewa renderowania. Składniki i drzewa renderowania nie są generalnie serializowane. Aby zachować stan interfejsu użytkownika, na przykład rozwinięte węzły kontrolki widoku drzewa, aplikacja musi używać niestandardowego kodu do modelowania zachowania stanu interfejsu użytkownika jako możliwy do serializacji stan aplikacji.
+Aplikacja może utrzymywać tylko *stan aplikacji* . Interfejsów użytkownika nie mogą być utrwalane, takie jak wystąpienia składników i ich drzewa renderowania. Składniki i drzewa renderowania nie są generalnie serializowane. Aby zachować stan interfejsu użytkownika, na przykład rozwinięte węzły kontrolki widoku drzewa, aplikacja musi używać niestandardowego kodu do modelowania zachowania stanu interfejsu użytkownika jako możliwy do serializacji stan aplikacji.
 
 ## <a name="where-to-persist-state"></a>Gdzie będzie trwały stan
 
@@ -225,7 +226,7 @@ Ostrzeżenia dotyczące korzystania z magazynu przeglądarki:
 * Przechowywanie kilku kilobajtów danych jest rozsądne dla Blazor Server aplikacji. Po kilku kilobajtach należy wziąć pod uwagę wpływ na wydajność, ponieważ dane są ładowane i zapisywane w sieci.
 * Użytkownicy mogą wyświetlać i modyfikować dane. [Ochrona danych ASP.NET Core](xref:security/data-protection/introduction) może ograniczyć ryzyko. Na przykład [ASP.NET Core chronionej przeglądarki](#aspnet-core-protected-browser-storage) używa ASP.NET Core ochrony danych.
 
-Pakiety NuGet innych firm zapewniają interfejsy API do pracy z `localStorage` i `sessionStorage` . Warto rozważać wybór pakietu, który w sposób przezroczysty używa [ASP.NET Core ochrony danych](xref:security/data-protection/introduction). Ochrona danych szyfruje przechowywane dane i zmniejsza potencjalne ryzyko naruszenia przechowywanych danych. Jeśli dane serializowane w formacie JSON są przechowywane w postaci zwykłego tekstu, użytkownicy mogą zobaczyć dane przy użyciu narzędzi deweloperskich przeglądarki, a także zmodyfikować przechowywane dane. Zabezpieczanie danych nie zawsze jest problemem, ponieważ dane mogą być proste. Na przykład odczytywanie lub modyfikowanie zapisanego koloru elementu interfejsu użytkownika nie jest istotnym zagrożeniem bezpieczeństwa użytkownika lub organizacji. Unikaj zezwalania użytkownikom na inspekcję i manipulowanie *danymi poufnymi*.
+Pakiety NuGet innych firm zapewniają interfejsy API do pracy z `localStorage` i `sessionStorage` . Warto rozważać wybór pakietu, który w sposób przezroczysty używa [ASP.NET Core ochrony danych](xref:security/data-protection/introduction). Ochrona danych szyfruje przechowywane dane i zmniejsza potencjalne ryzyko naruszenia przechowywanych danych. Jeśli dane serializowane w formacie JSON są przechowywane w postaci zwykłego tekstu, użytkownicy mogą zobaczyć dane przy użyciu narzędzi deweloperskich przeglądarki, a także zmodyfikować przechowywane dane. Zabezpieczanie danych nie zawsze jest problemem, ponieważ dane mogą być proste. Na przykład odczytywanie lub modyfikowanie zapisanego koloru elementu interfejsu użytkownika nie jest istotnym zagrożeniem bezpieczeństwa użytkownika lub organizacji. Unikaj zezwalania użytkownikom na inspekcję i manipulowanie *danymi poufnymi* .
 
 ::: moniker range=">= aspnetcore-5.0"
 
@@ -235,15 +236,6 @@ ASP.NET Core magazynu chronionej przeglądarki wykorzystuje [ochronę danych ASP
 
 > [!NOTE]
 > Magazyn chronionej przeglądarki opiera się na ASP.NET Core ochrony danych i jest obsługiwany tylko w przypadku Blazor Server aplikacji.
-
-### <a name="configuration"></a>Konfigurowanie
-
-1. Dodaj odwołanie do pakietu do [`Microsoft.AspNetCore.Components.Web.Extensions`](https://www.nuget.org/packages/Microsoft.AspNetCore.Http.Extensions) .
-1. W programie `Startup.ConfigureServices` Wywołaj `AddProtectedBrowserStorage` `localStorage` kolekcję usługi i Dodaj do `sessionStorage` niej usługi:
-
-   ```csharp
-   services.AddProtectedBrowserStorage();
-   ```
 
 ### <a name="save-and-load-data-within-a-component"></a>Zapisz i Załaduj dane w składniku
 
@@ -255,7 +247,7 @@ W dowolnym składniku wymagającym ładowania lub zapisywania danych w magazynie
 Wybór zależy od lokalizacji magazynu przeglądarki, która ma być używana. W poniższym przykładzie `sessionStorage` jest używany:
 
 ```razor
-@using Microsoft.AspNetCore.Components.Web.Extensions
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
 @inject ProtectedSessionStorage ProtectedSessionStore
 ```
 
@@ -336,7 +328,7 @@ Aby wyłączyć renderowanie, Otwórz `Pages/_Host.cshtml` plik i Zmień `render
 Renderowanie może być przydatne w przypadku innych stron, które nie używają `localStorage` ani `sessionStorage` . Aby zachować renderowanie, odłóż operację ładowania do momentu podłączenia przeglądarki do obwodu. Poniżej przedstawiono przykład przechowywania wartości licznika:
 
 ```razor
-@using Microsoft.AspNetCore.Components.Web.Extensions
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
 @inject ProtectedLocalStorage ProtectedLocalStore
 
 @if (isConnected)
@@ -384,7 +376,7 @@ Jeśli wiele składników korzysta z magazynu opartego na przeglądarce, ponowne
 W poniższym przykładzie `CounterStateProvider` składnika dane licznika są utrwalane `sessionStorage` :
 
 ```razor
-@using Microsoft.AspNetCore.Components.Web.Extensions
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
 @inject ProtectedSessionStorage ProtectedSessionStore
 
 @if (isLoaded)
@@ -476,7 +468,7 @@ ASP.NET Core magazynu chronionej przeglądarki wykorzystuje [ochronę danych ASP
 >
 > Pakiet jest dostępny tylko do użytku w aplikacjach ASP.NET Core 3,1 Blazor Server .
 
-### <a name="configuration"></a>Konfigurowanie
+### <a name="configuration"></a>Konfiguracja
 
 1. Dodaj odwołanie do pakietu do [`Microsoft.AspNetCore.ProtectedBrowserStorage`](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage) .
 1. W `Pages/_Host.cshtml` pliku Dodaj następujący skrypt wewnątrz tagu zamykającego `</body>` :

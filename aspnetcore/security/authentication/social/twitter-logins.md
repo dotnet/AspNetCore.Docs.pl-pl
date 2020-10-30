@@ -7,6 +7,7 @@ ms.custom: mvc
 ms.date: 03/19/2020
 monikerRange: '>= aspnetcore-3.0'
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/twitter-logins
-ms.openlocfilehash: da0c5579b0828aee7f1c78ec7f5731db50151e90
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 47926d12ac5f922f2937df164d38ff6eb63cacf1
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634062"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053283"
 ---
 # <a name="twitter-external-sign-in-setup-with-aspnet-core"></a>Konfiguracja logowania zewnętrznego usługi Twitter za pomocą ASP.NET Core
 
@@ -37,18 +38,18 @@ Ten przykład pokazuje, jak umożliwić użytkownikom [zalogowanie](https://dev.
 
 * Przejdź do [https://apps.twitter.com/](https://apps.twitter.com/) i zaloguj się. Jeśli nie masz jeszcze konta usługi Twitter, Użyj linku Utwórz **[teraz](https://twitter.com/signup)** , aby go utworzyć.
 
-* Wybierz pozycję **Utwórz aplikację**. Wypełnij pola **Nazwa aplikacji**, **Opis aplikacji** i publiczny identyfikator URI **witryny sieci Web** (może to być czas tymczasowy do momentu zarejestrowania nazwy domeny):
+* Wybierz pozycję **Utwórz aplikację** . Wypełnij pola **Nazwa aplikacji** , **Opis aplikacji** i publiczny identyfikator URI **witryny sieci Web** (może to być czas tymczasowy do momentu zarejestrowania nazwy domeny):
 
 * Zaznacz pole wyboru obok pozycji **Włącz logowanie za pomocą usługi Twitter**
 
-* Microsoft. AspNetCore.Identity Domyślnie program wymaga od użytkowników posiadania adresu e-mail. Przejdź do karty **uprawnienia** , kliknij przycisk **Edytuj** , a następnie zaznacz pole wyboru obok **żądania adresu e-mail od użytkowników**.
+* Microsoft. AspNetCore.Identity Domyślnie program wymaga od użytkowników posiadania adresu e-mail. Przejdź do karty **uprawnienia** , kliknij przycisk **Edytuj** , a następnie zaznacz pole wyboru obok **żądania adresu e-mail od użytkowników** .
 
 * Wprowadź swój identyfikator URI rozwoju z `/signin-twitter` dołączonym do pola **adresy URL wywołania zwrotnego** (na przykład: `https://webapp128.azurewebsites.net/signin-twitter` ). Schemat uwierzytelniania usługi Twitter skonfigurowany w dalszej części tego przykładu będzie automatycznie obsługiwał żądania w `/signin-twitter` marszrucie w celu zaimplementowania przepływu OAuth.
 
   > [!NOTE]
   > Segment identyfikatora URI `/signin-twitter` jest ustawiany jako domyślne wywołanie zwrotne dostawcy uwierzytelniania w usłudze Twitter. Domyślny identyfikator URI wywołania zwrotnego można zmienić podczas konfigurowania oprogramowania pośredniczącego uwierzytelniania usługi Twitter za pomocą dziedziczonej właściwości [RemoteAuthenticationOptions. CallbackPath](/dotnet/api/microsoft.aspnetcore.authentication.remoteauthenticationoptions.callbackpath) klasy [TwitterOptions](/dotnet/api/microsoft.aspnetcore.authentication.twitter.twitteroptions) .
 
-* Wypełnij resztę formularza i wybierz pozycję **Utwórz**. Wyświetlane są nowe szczegóły aplikacji:
+* Wypełnij resztę formularza i wybierz pozycję **Utwórz** . Wyświetlane są nowe szczegóły aplikacji:
 
 ## <a name="store-the-twitter-consumer-api-key-and-secret"></a>Przechowywanie klucza i wpisu tajnego interfejsu API klienta usługi Twitter
 
@@ -80,7 +81,7 @@ Zobacz Dokumentacja interfejsu API [TwitterOptions](/dotnet/api/microsoft.aspnet
 
 ## <a name="sign-in-with-twitter"></a>Zaloguj się przy użyciu usługi Twitter
 
-Uruchom aplikację i wybierz pozycję **Zaloguj się**. Zostanie wyświetlona opcja zalogowania się przy użyciu usługi Twitter:
+Uruchom aplikację i wybierz pozycję **Zaloguj się** . Zostanie wyświetlona opcja zalogowania się przy użyciu usługi Twitter:
 
 Klikanie przekierowania w usłudze **Twitter** do usługi Twitter w celu uwierzytelnienia:
 
@@ -98,7 +99,7 @@ Rather in the twitter setup, you can provide an External sign-in homepage. The e
 
 ## <a name="troubleshooting"></a>Rozwiązywanie problemów
 
-* **Tylko ASP.NET Core 2. x:** Jeśli Identity nie jest skonfigurowany przez wywołanie `services.AddIdentity` w `ConfigureServices` , próba uwierzytelnienia spowoduje powstanie *argumentu ArgumentException: należy podać opcję "SignInScheme"*. Szablon projektu używany w tym przykładzie zapewnia, że jest to gotowe.
+* **Tylko ASP.NET Core 2. x:** Jeśli Identity nie jest skonfigurowany przez wywołanie `services.AddIdentity` w `ConfigureServices` , próba uwierzytelnienia spowoduje powstanie *argumentu ArgumentException: należy podać opcję "SignInScheme"* . Szablon projektu używany w tym przykładzie zapewnia, że jest to gotowe.
 * Jeśli baza danych lokacji nie została utworzona przez zastosowanie początkowej migracji, *podczas przetwarzania błędu żądania nie powiodła się operacja bazy danych* . Naciśnij pozycję **Zastosuj migracje** , aby utworzyć bazę danych i odświeżyć, aby kontynuować z powodu błędu.
 
 ## <a name="next-steps"></a>Następne kroki

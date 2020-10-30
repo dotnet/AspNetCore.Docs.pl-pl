@@ -7,6 +7,7 @@ ms.author: stevesa
 ms.custom: mvc
 ms.date: 02/06/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: spa/angular
-ms.openlocfilehash: c4afddca1d0c2428371c90013f5dbd5c1afb5108
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 2fff0d60b71bbbab9347dbe74cad023264247388
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628784"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93054570"
 ---
 # <a name="use-the-angular-project-template-with-aspnet-core"></a>Użyj szablonu projektu kątowego z ASP.NET Core
 
@@ -65,7 +66,7 @@ Now listening on: http://localhost:<port>
 Przejdź do tego adresu URL w przeglądarce.
 
 > [!WARNING]
-> Aplikacja uruchamia wystąpienie kątowego serwera interfejsu wiersza polecenia w tle. Rejestrowany jest komunikat podobny do następującego: Usługa *anie na żywo serwer programistyczny nasłuchuje na hoście lokalnym: &lt; otherport &gt; , Otwórz przeglądarkę do http://localhost:&lt ; otherport &gt; / *. Zignoruj ten komunikat, &mdash; ponieważ **nie** jest to adres URL połączonej ASP.NET Core i aplikacji interfejsu wiersza polecenia.
+> Aplikacja uruchamia wystąpienie kątowego serwera interfejsu wiersza polecenia w tle. Rejestrowany jest komunikat podobny do następującego: Usługa *anie na żywo serwer programistyczny nasłuchuje na hoście lokalnym: &lt; otherport &gt; , Otwórz przeglądarkę do http://localhost:&lt ; otherport &gt; /* . Zignoruj ten komunikat, &mdash; ponieważ **nie** jest to adres URL połączonej ASP.NET Core i aplikacji interfejsu wiersza polecenia.
 
 ---
 
@@ -91,7 +92,7 @@ Jeśli nie masz `ng` zainstalowanego narzędzia, uruchom polecenie `npm run ng` 
 
 ## <a name="install-npm-packages"></a>Zainstaluj pakiety npm
 
-Aby zainstalować pakiety npm innych firm, należy użyć wiersza polecenia w podkatalogu *ClientApp* . Na przykład:
+Aby zainstalować pakiety npm innych firm, należy użyć wiersza polecenia w podkatalogu *ClientApp* . Przykład:
 
 ```console
 cd ClientApp

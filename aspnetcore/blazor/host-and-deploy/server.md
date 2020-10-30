@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/26/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/server
-ms.openlocfilehash: afbaad2f27359a4a1cac5c5fe1da16d3e80d038f
-ms.sourcegitcommit: 7258e94cf60c16e5b6883138e5e68516751ead0f
+ms.openlocfilehash: 74473eb5c0efcd8798d260b765c848d7e621e534
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/29/2020
-ms.locfileid: "89102656"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93055766"
 ---
 # <a name="host-and-deploy-no-locblazor-server"></a>Hostowanie i wdrażanie Blazor Server
 
@@ -37,7 +38,7 @@ ms.locfileid: "89102656"
 
 Przy użyciu [ Blazor Server modelu hostingu](xref:blazor/hosting-models#blazor-server)program Blazor jest wykonywany na serwerze z poziomu aplikacji ASP.NET Core. Aktualizacje interfejsu użytkownika, obsługa zdarzeń i wywołania języka JavaScript są obsługiwane przez [SignalR](xref:signalr/introduction) połączenie.
 
-Wymagany jest serwer sieci Web obsługujący aplikację ASP.NET Core. Program Visual Studio zawiera szablon projektu ** Blazor Server aplikacji** ( `blazorserverside` szablon podczas korzystania z [`dotnet new`](/dotnet/core/tools/dotnet-new) polecenia).
+Wymagany jest serwer sieci Web obsługujący aplikację ASP.NET Core. Program Visual Studio zawiera szablon projektu **Blazor Server aplikacji** ( `blazorserverside` szablon podczas korzystania z [`dotnet new`](/dotnet/core/tools/dotnet-new) polecenia).
 
 ## <a name="scalability"></a>Skalowalność
 
@@ -55,7 +56,7 @@ Gdy rozważasz skalowalność pojedynczego serwera (skalowanie w górę), pamię
 
 Aby uzyskać wskazówki dotyczące tworzenia bezpiecznych i skalowalnych Blazor aplikacji serwerowych, zobacz <xref:blazor/security/server/threat-mitigation> .
 
-Każdy obwód wykorzystuje około 250 KB pamięci w przypadku aplikacji o minimalnej *Hello World*. Rozmiar obwodu zależy od kodu aplikacji i wymagań dotyczących konserwacji stanu związanych z poszczególnymi składnikami. Zalecamy mierzenie wymagań dotyczących zasobów podczas opracowywania aplikacji i infrastruktury, ale następujący punkt odniesienia może być punktem początkowym w planowaniu celu wdrożenia: jeśli oczekujesz, że aplikacja będzie obsługiwać 5 000 współbieżnych użytkowników, należy rozważyć budżetowanie co najmniej 1,3 GB pamięci serwera do aplikacji (lub ~ 273 KB na użytkownika).
+Każdy obwód wykorzystuje około 250 KB pamięci w przypadku aplikacji o minimalnej *Hello World* . Rozmiar obwodu zależy od kodu aplikacji i wymagań dotyczących konserwacji stanu związanych z poszczególnymi składnikami. Zalecamy mierzenie wymagań dotyczących zasobów podczas opracowywania aplikacji i infrastruktury, ale następujący punkt odniesienia może być punktem początkowym w planowaniu celu wdrożenia: jeśli oczekujesz, że aplikacja będzie obsługiwać 5 000 współbieżnych użytkowników, należy rozważyć budżetowanie co najmniej 1,3 GB pamięci serwera do aplikacji (lub ~ 273 KB na użytkownika).
 
 ### <a name="no-locsignalr-configuration"></a>SignalR skonfigurować
 
@@ -79,7 +80,7 @@ Zalecamy korzystanie z [ SignalR usługi platformy Azure](xref:signalr/scale#azu
 
 Aby skonfigurować aplikację (i opcjonalnie zainicjować obsługę administracyjną) SignalR usługi platformy Azure:
 
-1. Włącz obsługę *sesji usługi Sticky Notes*, w przypadku których klienci są [przekierowywani z powrotem do tego samego serwera podczas renderowania](xref:blazor/hosting-models#connection-to-the-server). Ustaw `ServerStickyMode` opcję lub wartość konfiguracji na `Required` . Zazwyczaj aplikacja tworzy konfigurację przy użyciu **jednej** z następujących metod:
+1. Włącz obsługę *sesji usługi Sticky Notes* , w przypadku których klienci są [przekierowywani z powrotem do tego samego serwera podczas renderowania](xref:blazor/hosting-models#connection-to-the-server). Ustaw `ServerStickyMode` opcję lub wartość konfiguracji na `Required` . Zazwyczaj aplikacja tworzy konfigurację przy użyciu **jednej** z następujących metod:
 
    * `Startup.ConfigureServices`:
   
@@ -99,10 +100,10 @@ Aby skonfigurować aplikację (i opcjonalnie zainicjować obsługę administracy
        "Azure:SignalR:ServerStickyMode": "Required"
        ```
 
-     * **Configuration**  >  **Ustawienia aplikacji** konfiguracji usługi App Service w Azure Portal (**Nazwa**: `Azure:SignalR:ServerStickyMode` , **wartość**: `Required` ).
+     * **Configuration**  >  **Ustawienia aplikacji** konfiguracji usługi App Service w Azure Portal ( **Nazwa** : `Azure:SignalR:ServerStickyMode` , **wartość** : `Required` ).
 
 1. Utwórz profil publikowania aplikacji platformy Azure w programie Visual Studio dla Blazor Server aplikacji.
-1. Dodaj zależność ** SignalR usługi platformy Azure** do profilu. Jeśli subskrypcja platformy Azure nie ma istniejącego wystąpienia usługi platformy Azure SignalR , które ma zostać przypisane do aplikacji, wybierz opcję **Utwórz nowe SignalR wystąpienie usługi platformy Azure** , aby udostępnić nowe wystąpienie usługi.
+1. Dodaj zależność **SignalR usługi platformy Azure** do profilu. Jeśli subskrypcja platformy Azure nie ma istniejącego wystąpienia usługi platformy Azure SignalR , które ma zostać przypisane do aplikacji, wybierz opcję **Utwórz nowe SignalR wystąpienie usługi platformy Azure** , aby udostępnić nowe wystąpienie usługi.
 1. Publikowanie aplikacji na platformie Azure
 
 #### <a name="iis"></a>IIS

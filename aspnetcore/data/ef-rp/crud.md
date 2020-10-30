@@ -5,6 +5,7 @@ description: Część 2 Razor stron i Entity Framework serii samouczków.
 ms.author: riande
 ms.date: 07/22/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/crud
-ms.openlocfilehash: 083214c01dbec6c6f44d6b82f5b514a029e57cbe
-ms.sourcegitcommit: d1a897ebd89daa05170ac448e4831d327f6b21a8
+ms.openlocfilehash: c5b9be64ea30cce7a3178bfbb244ef893e9639d2
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/01/2020
-ms.locfileid: "91606737"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053868"
 ---
 # <a name="part-2-no-locrazor-pages-with-ef-core-in-aspnet-core---crud"></a>Część 2, Razor strony z EF Core w ASP.NET Core — CRUD
 
@@ -136,7 +137,7 @@ Użycie `StudentVM` wymaga użycia strony tworzenia `StudentVM` zamiast `Student
 
 ## <a name="update-the-edit-page"></a>Aktualizowanie strony edytowania
 
-W obszarze *strony/studenci/Edytuj. cshtml. cs*Zastąp `OnGetAsync` `OnPostAsync` metody i poniższym kodem.
+W obszarze *strony/studenci/Edytuj. cshtml. cs* Zastąp `OnGetAsync` `OnPostAsync` metody i poniższym kodem.
 
 [!code-csharp[Main](intro/samples/cu30/Pages/Students/Edit.cshtml.cs?name=snippet_OnGetPost)]
 
@@ -183,7 +184,7 @@ Poprzedni kod dodaje opcjonalny parametr `saveChangesError` do `OnGetAsync` sygn
 * Przechwycono wyjątek bazy danych.
 * Metoda Delete Pages `OnGetAsync` jest wywoływana z `saveChangesError=true` .
 
-Dodaj komunikat o błędzie do *stron/uczniów/Delete. cshtml*:
+Dodaj komunikat o błędzie do *stron/uczniów/Delete. cshtml* :
 
 [!code-cshtml[Main](intro/samples/cu30/Pages/Students/Delete.cshtml?highlight=10)]
 
@@ -299,7 +300,7 @@ Użycie `StudentVM` wymaga, aby funkcja [Create. cshtml](https://github.com/dotn
 
 ## <a name="update-the-edit-page"></a>Aktualizowanie strony edytowania
 
-W obszarze *strony/studenci/Edytuj. cshtml. cs*Zastąp `OnGetAsync` `OnPostAsync` metody i poniższym kodem.
+W obszarze *strony/studenci/Edytuj. cshtml. cs* Zastąp `OnGetAsync` `OnPostAsync` metody i poniższym kodem.
 
 [!code-csharp[Main](intro/samples/cu30/Pages/Students/Edit.cshtml.cs?name=snippet_OnGetPost)]
 
@@ -346,7 +347,7 @@ Poprzedni kod dodaje opcjonalny parametr `saveChangesError` do `OnGetAsync` sygn
 * Przechwycono wyjątek bazy danych.
 * Metoda Delete Pages `OnGetAsync` jest wywoływana z `saveChangesError=true` .
 
-Dodaj komunikat o błędzie do strony usuwania Razor (*strony/uczniowie/Delete. cshtml*):
+Dodaj komunikat o błędzie do strony usuwania Razor ( *strony/uczniowie/Delete. cshtml* ):
 
 [!code-cshtml[Main](intro/samples/cu30/Pages/Students/Delete.cshtml?highlight=10)]
 
@@ -404,7 +405,7 @@ Ale jeśli chcesz użyć `Include` innych jednostek, `FindAsync` nie jest już t
 
 ## <a name="customize-the-details-page"></a>Dostosuj stronę szczegółów
 
-Przejdź do `Pages/Students` strony. Linki **Edytuj**, **szczegóły**i **Usuń** są generowane przez [pomocnika tagu kotwicy](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) w pliku *Pages/Students/index. cshtml* .
+Przejdź do `Pages/Students` strony. Linki **Edytuj** , **szczegóły** i **Usuń** są generowane przez [pomocnika tagu kotwicy](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) w pliku *Pages/Students/index. cshtml* .
 
 [!code-cshtml[](intro/samples/cu21/Pages/Students/Index1.cshtml?name=snippet)]
 
@@ -438,7 +439,7 @@ Metoda [AsNoTracking](/dotnet/api/microsoft.entityframeworkcore.entityframeworkq
 
 ### <a name="display-related-enrollments-on-the-details-page"></a>Wyświetl powiązane rejestracje na stronie szczegółów
 
-Otwórz *stronę/uczniów/szczegóły. cshtml*. Dodaj następujący wyróżniony kod, aby wyświetlić listę rejestracji:
+Otwórz *stronę/uczniów/szczegóły. cshtml* . Dodaj następujący wyróżniony kod, aby wyświetlić listę rejestracji:
 
 [!code-cshtml[](intro/samples/cu21/Pages/Students/Details.cshtml?highlight=32-53)]
 

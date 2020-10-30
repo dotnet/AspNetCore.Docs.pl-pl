@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/22/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/data-binding
-ms.openlocfilehash: fd337a6fb54c418ff08af18014073a6b3f07bb8c
-ms.sourcegitcommit: d5ecad1103306fac8d5468128d3e24e529f1472c
+ms.openlocfilehash: f1730ed366fc81444ffe54e88bcd33147efb0aa7
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/23/2020
-ms.locfileid: "92491470"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93056299"
 ---
 # <a name="aspnet-core-no-locblazor-data-binding"></a>ASP.NET Core Blazor powiązania danych
 
@@ -331,8 +332,8 @@ Aby uzyskać więcej informacji na temat <xref:Microsoft.AspNetCore.Components.E
 
 Można powiązać dowolną liczbę składników zagnieżdżonych, ale należy przestrzegać jednokierunkowego przepływu danych:
 
-* Powiadomienia o zmianach *przepływają w górę hierarchii*.
-* Nowe wartości parametrów *przepływają w dół hierarchii*.
+* Powiadomienia o zmianach *przepływają w górę hierarchii* .
+* Nowe wartości parametrów *przepływają w dół hierarchii* .
 
 Typowym i Zalecanym podejściem jest przechowywanie wyłącznie danych źródłowych w składniku nadrzędnym, aby uniknąć wszelkich pomyłek dotyczących stanu, który należy zaktualizować.
 
@@ -425,7 +426,7 @@ Poniższe składniki przedstawiają powyższe koncepcje:
 
 W przypadku alternatywnego podejścia przystosowanego do udostępniania danych w pamięci między składnikami, które nie są niekoniecznie zagnieżdżone, zobacz <xref:blazor/state-management#in-memory-state-container-service> .
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Powiązywanie z przyciskami radiowymi w formularzu](xref:blazor/forms-validation#radio-buttons)
 * [Powiązywanie `<select>` opcji elementu z wartościami obiektów C# `null` w formularzu](xref:blazor/forms-validation#binding-select-element-options-to-c-object-null-values)

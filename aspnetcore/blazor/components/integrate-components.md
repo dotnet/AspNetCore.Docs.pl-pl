@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/25/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/integrate-components-into-razor-pages-and-mvc-apps
-ms.openlocfilehash: e2045d7d169e81c85f4c7dbd97357455ecd70ea3
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: e56a08be082cef4ba3a0a58fdfa9d3800d244f75
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628485"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93056260"
 ---
 # <a name="integrate-aspnet-core-no-locrazor-components-into-no-locrazor-pages-and-mvc-apps"></a>Integrowanie Razor składników ASP.NET Core ze Razor stronami i aplikacjami MVC
 
@@ -50,7 +51,7 @@ Istniejące Razor strony lub aplikacja MVC mogą integrować Razor składniki na
      <base href="~/" />
      ```
 
-     `href`Wartość ( *Ścieżka podstawowa aplikacji*) w poprzednim przykładzie zakłada, że aplikacja znajduje się w ścieżce adresu URL katalogu głównego ( `/` ). Jeśli aplikacja jest aplikacją podrzędną, postępuj zgodnie ze wskazówkami w sekcji *Ścieżka podstawowa aplikacji* <xref:blazor/host-and-deploy/index#app-base-path> artykułu.
+     `href`Wartość ( *Ścieżka podstawowa aplikacji* ) w poprzednim przykładzie zakłada, że aplikacja znajduje się w ścieżce adresu URL katalogu głównego ( `/` ). Jeśli aplikacja jest aplikacją podrzędną, postępuj zgodnie ze wskazówkami w sekcji *Ścieżka podstawowa aplikacji* <xref:blazor/host-and-deploy/index#app-base-path> artykułu.
 
      Plik znajduje się `_Layout.cshtml` w folderze *strony/udostępnione* w Razor aplikacji strony lub *widokach/folderze udostępnionym* w aplikacji MVC.
 
@@ -152,7 +153,7 @@ Aby obsługiwać Razor składniki routingu w Razor aplikacjach stron:
    });
    ```
 
-1. Dodaj składniki routingu do aplikacji. Na przykład:
+1. Dodaj składniki routingu do aplikacji. Przykład:
 
    ```razor
    @page "/counter"
@@ -235,7 +236,7 @@ Aby obsługiwać Razor składniki routingu w aplikacjach MVC:
    });
    ```
 
-1. Utwórz `Pages` folder i Dodaj do aplikacji składniki obsługujące Routing. Na przykład:
+1. Utwórz `Pages` folder i Dodaj do aplikacji składniki obsługujące Routing. Przykład:
 
    ```razor
    @page "/counter"

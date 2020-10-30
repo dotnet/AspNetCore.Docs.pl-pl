@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/06/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/additional-scenarios
-ms.openlocfilehash: 89288f3fce2dbb6f2647693ba8aaf29500b5bb2b
-ms.sourcegitcommit: 139c998d37e9f3e3d0e3d72e10dbce8b75957d89
+ms.openlocfilehash: ac30b2ba9da4b5dbc2e02a2f6eb1252927483f73
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/07/2020
-ms.locfileid: "91805495"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93055506"
 ---
 # <a name="aspnet-core-no-locblazor-server-additional-security-scenarios"></a>ASP.NET Core Blazor Server dodatkowe scenariusze zabezpieczeń
 
@@ -35,7 +36,7 @@ Autor [Javier Calvarro Nelson](https://github.com/javiercn)
 
 Tokeny dostępne poza Razor składnikami w Blazor Server aplikacji mogą być przesyłane do składników z podejściem opisanym w tej sekcji.
 
-Uwierzytelniaj Blazor Server aplikację w taki sam sposób, jak w przypadku zwykłych Razor stron lub aplikacji MVC. Zainicjuj obsługę administracyjną i Zapisz tokeny na potrzeby uwierzytelniania cookie . Na przykład:
+Uwierzytelniaj Blazor Server aplikację w taki sam sposób, jak w przypadku zwykłych Razor stron lub aplikacji MVC. Zainicjuj obsługę administracyjną i Zapisz tokeny na potrzeby uwierzytelniania cookie . Przykład:
 
 ```csharp
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
@@ -179,7 +180,7 @@ endpoints.MapBlazorHub().RequireAuthorization(
 
 Tokeny dostępne poza Razor składnikami w Blazor Server aplikacji mogą być przesyłane do składników z podejściem opisanym w tej sekcji.
 
-Uwierzytelniaj Blazor Server aplikację w taki sam sposób, jak w przypadku zwykłych Razor stron lub aplikacji MVC. Zainicjuj obsługę administracyjną i Zapisz tokeny na potrzeby uwierzytelniania cookie . Na przykład:
+Uwierzytelniaj Blazor Server aplikację w taki sam sposób, jak w przypadku zwykłych Razor stron lub aplikacji MVC. Zainicjuj obsługę administracyjną i Zapisz tokeny na potrzeby uwierzytelniania cookie . Przykład:
 
 ```csharp
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
@@ -198,7 +199,7 @@ services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme, options =
 
 Opcjonalnie dodatkowe zakresy są dodawane z `options.Scope.Add("{SCOPE}");` , gdzie symbol zastępczy `{SCOPE}` jest dodatkowym zakresem do dodania.
 
-Opcjonalnie zasób jest określany przy użyciu `options.Resource = "{RESOURCE}";` , gdzie symbol zastępczy `{RESOURCE}` jest zasobem. Na przykład:
+Opcjonalnie zasób jest określany przy użyciu `options.Resource = "{RESOURCE}";` , gdzie symbol zastępczy `{RESOURCE}` jest zasobem. Przykład:
 
 ```csharp
 options.Resource = "https://graph.microsoft.com";

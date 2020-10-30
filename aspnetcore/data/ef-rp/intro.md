@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 9/26/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/intro
-ms.openlocfilehash: 35a5758500ae2bc691c8d08eccb22340f9998c39
-ms.sourcegitcommit: 6c82d78662332cd40d614019b9ed17c46e25be28
+ms.openlocfilehash: c4b4f2b89be2018857abaafb448f052c3848ec59
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/29/2020
-ms.locfileid: "91424292"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93054078"
 ---
 # <a name="no-locrazor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>Razor Strony z Entity Framework Core w ASP.NET Core — samouczek 1 z 8
 
@@ -118,10 +119,10 @@ To run the app after downloading the completed project:
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Z menu **plik** programu Visual Studio wybierz pozycję **Nowy** > **projekt**.
-* Wybierz **ASP.NET Core aplikacji sieci Web**.
-* Nazwij projekt *ContosoUniversity*. Ważne jest, aby użyć tej dokładnej nazwy, łącznie z wielką literą, więc przestrzenie nazw są zgodne, gdy kod jest kopiowany i wklejany.
-* Na liście rozwijanej wybierz pozycję **.NET Core** i **ASP.NET Core 5,0** , a następnie wybierz pozycję **aplikacja sieci Web**.
+* Z menu **plik** programu Visual Studio wybierz pozycję **Nowy** > **projekt** .
+* Wybierz **ASP.NET Core aplikacji sieci Web** .
+* Nazwij projekt *ContosoUniversity* . Ważne jest, aby użyć tej dokładnej nazwy, łącznie z wielką literą, więc przestrzenie nazw są zgodne, gdy kod jest kopiowany i wklejany.
+* Na liście rozwijanej wybierz pozycję **.NET Core** i **ASP.NET Core 5,0** , a następnie wybierz pozycję **aplikacja sieci Web** .
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -143,9 +144,9 @@ Plik układu ustawia nagłówek, stopkę i menu witryny. Poprzedni kod wprowadza
 
 * Każde wystąpienie "ContosoUniversity" na "University-Uniwersytet". Istnieją trzy wystąpienia.
 * Wpisy menu **Home** i **privacy** są usuwane.
-* Wpisy są **dodawane do programu**, **studentów**, **kursów**, **instruktorów**i **działów**.
+* Wpisy są **dodawane do programu** , **studentów** , **kursów** , **instruktorów** i **działów** .
 
-W obszarze *Pages/index. cshtml*Zastąp zawartość pliku następującym kodem:
+W obszarze *Pages/index. cshtml* Zastąp zawartość pliku następującym kodem:
 
 [!code-cshtml[Main](intro/samples/cu50/Pages/Index.cshtml)]
 
@@ -221,15 +222,15 @@ W tej sekcji użyjesz narzędzia do tworzenia szkieletów ASP.NET Core do wygene
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Utwórz folder *stron/uczniów* .
-* W **Eksplorator rozwiązań**kliknij prawym przyciskiem myszy folder *strony/uczniowie* i wybierz polecenie **Dodaj** > **nowy element szkieletowy**.
+* W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy folder *strony/uczniowie* i wybierz polecenie **Dodaj** > **nowy element szkieletowy** .
 * W oknie dialogowym **Dodaj nowy element szkieletowy** :
   * Na lewej karcie Wybierz pozycję **zainstalowane > typowe Razor strony >**
-  * Wybierz ** Razor strony przy użyciu Entity Framework (CRUD)** > **Dodaj**.
+  * Wybierz **Razor strony przy użyciu Entity Framework (CRUD)** > **Dodaj** .
 * Na **stronie Dodawanie Razor stron przy użyciu Entity Framework (CRUD)** okna dialogowego:
-  * Z listy rozwijanej **Klasa modelu** wybierz pozycję **student (ContosoUniversity. models)**.
+  * Z listy rozwijanej **Klasa modelu** wybierz pozycję **student (ContosoUniversity. models)** .
   * W wierszu **klasy kontekstu danych** wybierz **+** znak (plus).
     * Zmień nazwę kontekstu danych na End `SchoolContext` zamiast `ContosoUniversityContext` . Nazwa zaktualizowanego kontekstu: `ContosoUniversity.Data.SchoolContext`
-   * Wybierz pozycję **Dodaj**.
+   * Wybierz pozycję **Dodaj** .
 
 Następujące pakiety są instalowane automatycznie:
 
@@ -287,13 +288,13 @@ Proces tworzenia szkieletu:
   * *Details. cshtml* i *details.cshtml.cs*
   * *Edit. cshtml* i *Edit.cshtml.cs*
   * *Index. cshtml* i *index.cshtml.cs*
-* Tworzy *dane/SchoolContext. cs*.
-* Dodaje kontekst do iniekcji zależności w *Startup.cs*.
-* Dodaje parametry połączenia z bazą danych do *appsettings.js*.
+* Tworzy *dane/SchoolContext. cs* .
+* Dodaje kontekst do iniekcji zależności w *Startup.cs* .
+* Dodaje parametry połączenia z bazą danych do programu *appsettings.json* .
 
 ## <a name="database-connection-string"></a>Parametry połączenia z bazą danych
 
-Narzędzie do tworzenia szkieletu generuje parametry połączenia w *appsettings.js* pliku.
+Narzędzie do tworzenia szkieletu generuje parametry połączenia w *appsettings.json* pliku.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -305,7 +306,7 @@ LocalDB to uproszczona wersja aparatu bazy danych SQL Server Express i jest prze
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-Skróć parametry połączenia oprogramowania SQLite do *bazy danych cu. DB*:
+Skróć parametry połączenia oprogramowania SQLite do *bazy danych cu. DB* :
 
 [!code-json[Main](intro/samples/cu50/appsettingsSQLite.json?highlight=11)]
 
@@ -360,7 +361,7 @@ Aby uzyskać informacje na temat korzystania z produkcyjnej bazy danych, zobacz 
 
 ---
 
-Nazwa parametrów połączenia jest przenoszona do kontekstu przez wywołanie metody w obiekcie [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) . W przypadku lokalnego projektowania [system konfiguracji ASP.NET Core](xref:fundamentals/configuration/index) odczytuje parametry połączenia z *appsettings.jsna* pliku.
+Nazwa parametrów połączenia jest przenoszona do kontekstu przez wywołanie metody w obiekcie [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) . W przypadku lokalnego projektowania [system konfiguracji ASP.NET Core](xref:fundamentals/configuration/index) odczytuje parametry połączenia z *appsettings.json* pliku.
 
 ### <a name="add-the-database-exception-filter"></a>Dodaj filtr wyjątku bazy danych
 
@@ -406,7 +407,7 @@ W dalszej części tego samouczka zostanie usunięta baza danych, która został
 ### <a name="test-the-app"></a>Testowanie aplikacji
 
 * Uruchom aplikację.
-* Wybierz link **Students (studenci** ), a następnie **Utwórz nowy**.
+* Wybierz link **Students (studenci** ), a następnie **Utwórz nowy** .
 * Przetestuj linki Edytuj, Szczegóły i Usuń.
 
 ## <a name="seed-the-database"></a>Wypełnianie bazy danych
@@ -419,7 +420,7 @@ Utwórz *dane/Dbinitializeer. cs* przy użyciu następującego kodu:
 
   Kod sprawdza, czy w bazie danych istnieją uczniowie. Jeśli nie ma uczniów, dodaje dane testowe do bazy danych. Tworzy dane testowe w tablicach, a nie w `List<T>` celu zoptymalizowania wydajności.
 
-W *program.cs*Zastąp wywołanie wywołaniem `EnsureCreated` `DbInitializer.Initialize` :
+W *program.cs* Zastąp wywołanie wywołaniem `EnsureCreated` `DbInitializer.Initialize` :
 
   ```csharp
   // context.Database.EnsureCreated();
@@ -450,7 +451,7 @@ Odpowiedz przy użyciu `Y` , aby usunąć bazę danych.
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Otwórz **Eksplorator obiektów SQL Server** (SSOX) z menu **Widok** w programie Visual Studio.
-* W SSOX wybierz pozycję **(LocalDB) \MSSQLLocalDB > bazy danych > SchoolContext-{GUID}**. Nazwa bazy danych jest generowana na podstawie podanej wcześniej nazwy kontekstu oraz łącznika i identyfikatora GUID.
+* W SSOX wybierz pozycję **(LocalDB) \MSSQLLocalDB > bazy danych > SchoolContext-{GUID}** . Nazwa bazy danych jest generowana na podstawie podanej wcześniej nazwy kontekstu oraz łącznika i identyfikatora GUID.
 * Rozwiń węzeł **tabele** .
 * Kliknij prawym przyciskiem myszy tabelę **uczniów** i kliknij polecenie **Wyświetl dane** , aby wyświetlić utworzone kolumny i wiersze wstawione do tabeli.
 * Kliknij prawym przyciskiem myszy tabelę **uczniów** i kliknij polecenie **Wyświetl kod** , aby zobaczyć, jak `Student` model mapuje się do `Student` schematu tabeli.
@@ -576,10 +577,10 @@ Aby uruchomić aplikację po pobraniu ukończonego projektu:
 
 Aby uruchomić aplikację po pobraniu ukończonego projektu:
 
-* Usuń *ContosoUniversity. csproj*i Zmień nazwę *ContosoUniversitySQLite. csproj* na *ContosoUniversity. csproj*.
-* W *program.cs*, komentarz `#define Startup` `StartupSQLite` jest używany.
-* Usuń *appSettings.js*i zmień nazwę *appSettingsSQLite.jsna* na *appSettings.jsna*.
-* Usuń folder *migracji* , a następnie zmień nazwę *MigrationsSQL* na *migracji*.
+* Usuń *ContosoUniversity. csproj* i Zmień nazwę *ContosoUniversitySQLite. csproj* na *ContosoUniversity. csproj* .
+* W *program.cs* , komentarz `#define Startup` `StartupSQLite` jest używany.
+* Usuń *appSettings.js* i zmień nazwę *appSettingsSQLite.jsna* na *appSettings.jsna* .
+* Usuń folder *migracji* , a następnie zmień nazwę *MigrationsSQL* na *migracji* .
 * Wykonaj wyszukiwanie globalne dla `#if SQLiteVersion` i Usuń `#if SQLiteVersion` oraz skojarzoną `#endif` instrukcję.
 * Skompiluj projekt.
 * W wierszu polecenia w folderze projektu uruchom następujące polecenia:
@@ -604,10 +605,10 @@ Aby uruchomić aplikację po pobraniu ukończonego projektu:
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Z menu **plik** programu Visual Studio wybierz pozycję **Nowy** > **projekt**.
-* Wybierz **ASP.NET Core aplikacji sieci Web**.
-* Nazwij projekt *ContosoUniversity*. Ważne jest, aby użyć tej dokładnej nazwy, łącznie z wielką literą, więc przestrzenie nazw są zgodne, gdy kod jest kopiowany i wklejany.
-* Na liście rozwijanej wybierz pozycję **.NET Core** i **ASP.NET Core 3,0** , a następnie wybierz pozycję **aplikacja sieci Web**.
+* Z menu **plik** programu Visual Studio wybierz pozycję **Nowy** > **projekt** .
+* Wybierz **ASP.NET Core aplikacji sieci Web** .
+* Nazwij projekt *ContosoUniversity* . Ważne jest, aby użyć tej dokładnej nazwy, łącznie z wielką literą, więc przestrzenie nazw są zgodne, gdy kod jest kopiowany i wklejany.
+* Na liście rozwijanej wybierz pozycję **.NET Core** i **ASP.NET Core 3,0** , a następnie wybierz pozycję **aplikacja sieci Web** .
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -624,17 +625,17 @@ Aby uruchomić aplikację po pobraniu ukończonego projektu:
 
 ## <a name="set-up-the-site-style"></a>Konfigurowanie stylu witryny
 
-Skonfiguruj nagłówek, stopkę i menu witryny przez aktualizację *stron/Shared/_Layout. cshtml*:
+Skonfiguruj nagłówek, stopkę i menu witryny przez aktualizację *stron/Shared/_Layout. cshtml* :
 
 * Zmień każde wystąpienie "ContosoUniversity" na "Uniwersytet firmy Contoso". Istnieją trzy wystąpienia.
 
-* Usuń wpisy menu **Home** i **privacy** oraz Dodaj wpisy dotyczące **osób,** **studentów**, **kursów**, **instruktorów**i **działów**.
+* Usuń wpisy menu **Home** i **privacy** oraz Dodaj wpisy dotyczące **osób,** **studentów** , **kursów** , **instruktorów** i **działów** .
 
 Zmiany są wyróżnione.
 
 [!code-cshtml[Main](intro/samples/cu30/Pages/Shared/_Layout.cshtml?highlight=6,14,21-35,49)]
 
-W obszarze *Pages/index. cshtml*Zastąp zawartość pliku następującym kodem, aby zamienić tekst na ASP.NET Core z tekstem dotyczącym tej aplikacji:
+W obszarze *Pages/index. cshtml* Zastąp zawartość pliku następującym kodem, aby zamienić tekst na ASP.NET Core z tekstem dotyczącym tej aplikacji:
 
 [!code-cshtml[Main](intro/samples/cu30/Pages/Index.cshtml)]
 
@@ -707,13 +708,13 @@ W tej sekcji użyjesz narzędzia do tworzenia szkieletów ASP.NET Core do wygene
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Utwórz folder *uczniów* w folderze *strony* .
-* W **Eksplorator rozwiązań**kliknij prawym przyciskiem myszy folder *strony/uczniowie* i wybierz polecenie **Dodaj** > **nowy element szkieletowy**.
-* W oknie dialogowym **Dodawanie szkieletu** wybierz pozycję ** Razor strony z użyciem Entity Framework (CRUD)** > **Dodaj**.
+* W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy folder *strony/uczniowie* i wybierz polecenie **Dodaj** > **nowy element szkieletowy** .
+* W oknie dialogowym **Dodawanie szkieletu** wybierz pozycję **Razor strony z użyciem Entity Framework (CRUD)** > **Dodaj** .
 * Na **stronie Dodawanie Razor stron przy użyciu Entity Framework (CRUD)** okna dialogowego:
-  * Z listy rozwijanej **Klasa modelu** wybierz pozycję **student (ContosoUniversity. models)**.
+  * Z listy rozwijanej **Klasa modelu** wybierz pozycję **student (ContosoUniversity. models)** .
   * W wierszu **klasy kontekstu danych** wybierz **+** znak (plus).
-  * Zmień nazwę kontekstu danych z *ContosoUniversity. models. ContosoUniversityContext* na *ContosoUniversity. Data. SchoolContext*.
-  * Wybierz pozycję **Dodaj**.
+  * Zmień nazwę kontekstu danych z *ContosoUniversity. models. ContosoUniversityContext* na *ContosoUniversity. Data. SchoolContext* .
+  * Wybierz pozycję **Dodaj** .
 
 Następujące pakiety są instalowane automatycznie:
 
@@ -774,15 +775,15 @@ Proces tworzenia szkieletu:
   * *Details. cshtml* i *details.cshtml.cs*
   * *Edit. cshtml* i *Edit.cshtml.cs*
   * *Index. cshtml* i *index.cshtml.cs*
-* Tworzy *dane/SchoolContext. cs*.
-* Dodaje kontekst do iniekcji zależności w *Startup.cs*.
-* Dodaje parametry połączenia z bazą danych do *appsettings.js*.
+* Tworzy *dane/SchoolContext. cs* .
+* Dodaje kontekst do iniekcji zależności w *Startup.cs* .
+* Dodaje parametry połączenia z bazą danych do programu *appsettings.json* .
 
 ## <a name="database-connection-string"></a>Parametry połączenia z bazą danych
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-*appsettings.jsw* pliku określa parametry połączenia [SQL Server LocalDB](/sql/database-engine/configure-windows/sql-server-2016-express-localdb).
+*appsettings.json* Plik określa parametry połączenia [SQL Server LocalDB](/sql/database-engine/configure-windows/sql-server-2016-express-localdb).
 
 [!code-json[Main](intro/samples/cu30/appsettings.json?highlight=11)]
 
@@ -790,7 +791,7 @@ LocalDB to uproszczona wersja aparatu bazy danych SQL Server Express i jest prze
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-Zmień parametry połączenia w taki sposób, aby wskazywały plik bazy danych programu SQLite o nazwie *cu. DB*:
+Zmień parametry połączenia w taki sposób, aby wskazywały plik bazy danych programu SQLite o nazwie *cu. DB* :
 
 [!code-json[Main](intro/samples/cu30/appsettingsSQLite.json?highlight=11)]
 
@@ -835,7 +836,7 @@ Narzędzie do tworzenia szkieletów automatycznie zarejestrowało klasę konteks
 
 ---
 
-Nazwa parametrów połączenia jest przenoszona do kontekstu przez wywołanie metody w obiekcie [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) . W przypadku lokalnego projektowania [system konfiguracji ASP.NET Core](xref:fundamentals/configuration/index) odczytuje parametry połączenia z *appsettings.jsna* pliku.
+Nazwa parametrów połączenia jest przenoszona do kontekstu przez wywołanie metody w obiekcie [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) . W przypadku lokalnego projektowania [system konfiguracji ASP.NET Core](xref:fundamentals/configuration/index) odczytuje parametry połączenia z *appsettings.json* pliku.
 
 ## <a name="create-the-database"></a>Tworzenie bazy danych
 
@@ -857,7 +858,7 @@ W dalszej części tego samouczka zostanie usunięta baza danych, która został
 ### <a name="test-the-app"></a>Testowanie aplikacji
 
 * Uruchom aplikację.
-* Wybierz link **Students (studenci** ), a następnie **Utwórz nowy**.
+* Wybierz link **Students (studenci** ), a następnie **Utwórz nowy** .
 * Przetestuj linki Edytuj, Szczegóły i Usuń.
 
 ## <a name="seed-the-database"></a>Wypełnianie bazy danych
@@ -870,7 +871,7 @@ Utwórz *dane/Dbinitializeer. cs* przy użyciu następującego kodu:
 
   Kod sprawdza, czy w bazie danych istnieją uczniowie. Jeśli nie ma uczniów, dodaje dane testowe do bazy danych. Tworzy dane testowe w tablicach, a nie w `List<T>` celu zoptymalizowania wydajności.
 
-* W *program.cs*Zastąp wywołanie wywołaniem `EnsureCreated` `DbInitializer.Initialize` :
+* W *program.cs* Zastąp wywołanie wywołaniem `EnsureCreated` `DbInitializer.Initialize` :
 
   ```csharp
   // context.Database.EnsureCreated();
@@ -900,7 +901,7 @@ Drop-Database
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Otwórz **Eksplorator obiektów SQL Server** (SSOX) z menu **Widok** w programie Visual Studio.
-* W SSOX wybierz pozycję **(LocalDB) \MSSQLLocalDB > bazy danych > SchoolContext-{GUID}**. Nazwa bazy danych jest generowana na podstawie podanej wcześniej nazwy kontekstu oraz łącznika i identyfikatora GUID.
+* W SSOX wybierz pozycję **(LocalDB) \MSSQLLocalDB > bazy danych > SchoolContext-{GUID}** . Nazwa bazy danych jest generowana na podstawie podanej wcześniej nazwy kontekstu oraz łącznika i identyfikatora GUID.
 * Rozwiń węzeł **tabele** .
 * Kliknij prawym przyciskiem myszy tabelę **uczniów** i kliknij polecenie **Wyświetl dane** , aby wyświetlić utworzone kolumny i wiersze wstawione do tabeli.
 * Kliknij prawym przyciskiem myszy tabelę **uczniów** i kliknij polecenie **Wyświetl kod** , aby zobaczyć, jak `Student` model mapuje się do `Student` schematu tabeli.
@@ -992,9 +993,9 @@ Styl interfejsu użytkownika tej witryny jest zbliżony do zawartości wygenerow
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Z menu **plik** programu Visual Studio wybierz pozycję **Nowy** > **projekt**.
-* Utwórz nową aplikację sieci Web ASP.NET Core. Nazwij projekt **ContosoUniversity**. Ważne jest, aby nazwa projektu *ContosoUniversity* , tak aby przestrzenie nazw były zgodne, gdy kod jest kopiowany/wklejany.
-* Wybierz pozycję **ASP.NET Core 2,1** na liście rozwijanej, a następnie wybierz pozycję **aplikacja sieci Web**.
+* Z menu **plik** programu Visual Studio wybierz pozycję **Nowy** > **projekt** .
+* Utwórz nową aplikację sieci Web ASP.NET Core. Nazwij projekt **ContosoUniversity** . Ważne jest, aby nazwa projektu *ContosoUniversity* , tak aby przestrzenie nazw były zgodne, gdy kod jest kopiowany/wklejany.
+* Wybierz pozycję **ASP.NET Core 2,1** na liście rozwijanej, a następnie wybierz pozycję **aplikacja sieci Web** .
 
 Aby poznać obrazy powyższych kroków, zobacz [Tworzenie Razor aplikacji sieci Web](xref:tutorials/razor-pages/razor-pages-start#create-a-razor-pages-web-app).
 Uruchom aplikację.
@@ -1015,13 +1016,13 @@ Kilka zmian powoduje skonfigurowanie menu witryny, układu i strony głównej. A
 
 * Zmień każde wystąpienie "ContosoUniversity" na "Uniwersytet firmy Contoso". Istnieją trzy wystąpienia.
 
-* Dodaj pozycje menu dla **studentów**, **kursów**, **instruktorów**i **działów**, a następnie usuń wpis menu **kontakt** .
+* Dodaj pozycje menu dla **studentów** , **kursów** , **instruktorów** i **działów** , a następnie usuń wpis menu **kontakt** .
 
 Zmiany są wyróżnione. (Wszystkie znaczniki *nie* są wyświetlane).
 
 [!code-cshtml[](intro/samples/cu21/Pages/Shared/_Layout.cshtml?highlight=6,29,35-38,50&name=snippet)]
 
-W obszarze *Pages/index. cshtml*Zastąp zawartość pliku następującym kodem, aby zamienić tekst na ASP.NET i MVC z tekstem dotyczącym tej aplikacji:
+W obszarze *Pages/index. cshtml* Zastąp zawartość pliku następującym kodem, aby zamienić tekst na ASP.NET i MVC z tekstem dotyczącym tej aplikacji:
 
 [!code-cshtml[](intro/samples/cu21/Pages/Index.cshtml)]
 
@@ -1088,15 +1089,15 @@ W tej sekcji model ucznia jest szkieletem. Oznacza to, że narzędzie tworzenia 
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* W **Eksplorator rozwiązań**kliknij prawym przyciskiem myszy folder *strony/uczniowie* > **Dodaj** > **nowy element szkieletowy**.
-* W oknie dialogowym **Dodawanie szkieletu** wybierz pozycję ** Razor strony z użyciem Entity Framework (CRUD)** > **Dodaj**.
+* W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy folder *strony/uczniowie* > **Dodaj** > **nowy element szkieletowy** .
+* W oknie dialogowym **Dodawanie szkieletu** wybierz pozycję **Razor strony z użyciem Entity Framework (CRUD)** > **Dodaj** .
 
 Wypełnij okno dialogowe **Dodawanie Razor stron przy użyciu Entity Framework (CRUD)** :
 
-* Z listy rozwijanej **Klasa modelu** wybierz pozycję **student (ContosoUniversity. models)**.
-* W wierszu **klasy kontekstu danych** wybierz **+** znak (plus), a następnie zmień wygenerowaną nazwę na **ContosoUniversity. models. SchoolContext**.
+* Z listy rozwijanej **Klasa modelu** wybierz pozycję **student (ContosoUniversity. models)** .
+* W wierszu **klasy kontekstu danych** wybierz **+** znak (plus), a następnie zmień wygenerowaną nazwę na **ContosoUniversity. models. SchoolContext** .
 * Z listy rozwijanej **Klasa kontekstu danych** wybierz pozycję **ContosoUniversity. models. SchoolContext**
-* Wybierz pozycję **Dodaj**.
+* Wybierz pozycję **Dodaj** .
 
 ![Okno dialogowe CRUD](intro/_static/s1.png)
 
@@ -1124,7 +1125,7 @@ Proces szkieletu utworzył i zmienił następujące pliki:
 ### <a name="file-updates"></a>Aktualizacje plików
 
 * *Startup.cs* : szczegółowe zmiany w tym pliku opisano w następnej sekcji.
-* *appsettings.json* : dodano parametry połączenia używane do nawiązywania połączenia z lokalną bazą danych.
+* *appsettings.json* : Dodano parametry połączenia używane do nawiązania połączenia z lokalną bazą danych.
 
 ## <a name="examine-the-context-registered-with-dependency-injection"></a>Sprawdzanie kontekstu zarejestrowanego przy iniekcji zależności
 
@@ -1132,15 +1133,15 @@ ASP.NET Core jest skompilowana z [iniekcją zależności](xref:fundamentals/depe
 
 Narzędzie do tworzenia szkieletów automatycznie utworzyło kontekst bazy danych i zarejestrował go przy użyciu kontenera iniekcji zależności.
 
-Zapoznaj się z `ConfigureServices` metodą w *Startup.cs*. Podświetlony wiersz został dodany przez program do tworzenia szkieletu:
+Zapoznaj się z `ConfigureServices` metodą w *Startup.cs* . Podświetlony wiersz został dodany przez program do tworzenia szkieletu:
 
 [!code-csharp[](intro/samples/cu21/Startup.cs?name=snippet_SchoolContext&highlight=13-14)]
 
-Nazwa parametrów połączenia jest przenoszona do kontekstu przez wywołanie metody w obiekcie [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) . W przypadku lokalnego projektowania [system konfiguracji ASP.NET Core](xref:fundamentals/configuration/index) odczytuje parametry połączenia z *appsettings.jsna* pliku.
+Nazwa parametrów połączenia jest przenoszona do kontekstu przez wywołanie metody w obiekcie [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) . W przypadku lokalnego projektowania [system konfiguracji ASP.NET Core](xref:fundamentals/configuration/index) odczytuje parametry połączenia z *appsettings.json* pliku.
 
 ## <a name="update-main"></a>Aktualizuj główne
 
-W *program.cs*Zmień metodę, `Main` Aby wykonać następujące czynności:
+W *program.cs* Zmień metodę, `Main` Aby wykonać następujące czynności:
 
 * Pobierz wystąpienie kontekstu bazy danych z kontenera iniekcji zależności.
 * Wywołaj  [EnsureCreated](/dotnet/api/microsoft.entityframeworkcore.infrastructure.databasefacade.ensurecreated#Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_EnsureCreated).
@@ -1165,7 +1166,7 @@ Poniższy kod przedstawia zaktualizowany plik *program.cs* .
 
 Uruchom aplikację i zaakceptuj cookie zasady. Ta aplikacja nie przechowuje informacji osobistych. Informacje o zasadach można znaleźć cookie w witrynie [pomocy technicznej ogólne rozporządzenie O ochronie danych (Rodo)](xref:security/gdpr).
 
-* Wybierz link **Students (studenci** ), a następnie **Utwórz nowy**.
+* Wybierz link **Students (studenci** ), a następnie **Utwórz nowy** .
 * Przetestuj linki Edytuj, Szczegóły i Usuń.
 
 ## <a name="examine-the-schoolcontext-db-context"></a>Sprawdzanie kontekstu bazy danych SchoolContext DB
@@ -1201,7 +1202,7 @@ Kod sprawdza, czy w bazie danych istnieją uczniowie. Jeśli w bazie danych nie 
 
 `EnsureCreated`Metoda automatycznie tworzy bazę danych dla kontekstu bazy danych. Jeśli baza danych istnieje, `EnsureCreated` zwraca bez modyfikacji bazy danych.
 
-W *program.cs*Zmień metodę, `Main` Aby wywołać `Initialize` :
+W *program.cs* Zmień metodę, `Main` Aby wywołać `Initialize` :
 
 [!code-csharp[](intro/samples/cu21/Program.cs?name=snippet2&highlight=14-15)]
 
@@ -1223,7 +1224,7 @@ Drop-Database
 
 Nazwa bazy danych jest generowana na podstawie podanej wcześniej nazwy kontekstu oraz łącznika i identyfikatora GUID. W rezultacie nazwa bazy danych będzie "SchoolContext-{GUID}". Identyfikator GUID będzie różny dla każdego użytkownika.
 Otwórz **Eksplorator obiektów SQL Server** (SSOX) z menu **Widok** w programie Visual Studio.
-W SSOX kliknij pozycję **(LocalDB) \MSSQLLocalDB > bazy danych > SchoolContext-{GUID}**.
+W SSOX kliknij pozycję **(LocalDB) \MSSQLLocalDB > bazy danych > SchoolContext-{GUID}** .
 
 Rozwiń węzeł **tabele** .
 

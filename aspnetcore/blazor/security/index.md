@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/index
-ms.openlocfilehash: f198cef0cf990dcc2806d3967130db64af47c1d0
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 6110f51eb5d5ee40d6ce5a5d49ddda3329d1f033
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88627835"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93055545"
 ---
 # <a name="aspnet-core-no-locblazor-authentication-and-authorization"></a>ASP.NET Core Blazor uwierzytelnianie i autoryzacja
 
@@ -246,8 +247,8 @@ Po uwierzytelnieniu użytkownika są stosowane reguły *autoryzacji* umożliwiaj
 Dostęp jest zazwyczaj udzielany lub odrzucany w zależności od tego, czy:
 
 * Użytkownik jest uwierzytelniany (zalogowany).
-* Użytkownik należy do *roli*.
-* Użytkownik ma *wierzytelność*.
+* Użytkownik należy do *roli* .
+* Użytkownik ma *wierzytelność* .
 * *Zasady* są spełnione.
 
 Każda z tych koncepcji jest taka sama jak w aplikacji ASP.NET Core MVC lub Razor Pages. Więcej informacji o zabezpieczeniach ASP.NET Core można znaleźć w artykułach w obszarze [ASP.NET Core Identity Security i ](xref:security/index).
@@ -321,7 +322,7 @@ Jeśli ani <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Rol
 
 ### <a name="content-displayed-during-asynchronous-authentication"></a>Zawartość wyświetlana podczas uwierzytelniania asynchronicznego
 
-Blazor umożliwia określenie stanu uwierzytelniania w sposób *asynchroniczny*. Głównym scenariuszem tego podejścia jest w Blazor WebAssembly aplikacjach, które składają żądanie do zewnętrznego punktu końcowego w celu uwierzytelnienia.
+Blazor umożliwia określenie stanu uwierzytelniania w sposób *asynchroniczny* . Głównym scenariuszem tego podejścia jest w Blazor WebAssembly aplikacjach, które składają żądanie do zewnętrznego punktu końcowego w celu uwierzytelnienia.
 
 Gdy trwa uwierzytelnianie, <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> domyślnie nie jest wyświetlana żadna zawartość. Aby wyświetlić zawartość podczas uwierzytelniania, należy użyć `<Authorizing>` tagu:
 

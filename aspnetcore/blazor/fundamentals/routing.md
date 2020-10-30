@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/02/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/routing
-ms.openlocfilehash: 09e7ca9c03103de116c566352496174e97fbc3ce
-ms.sourcegitcommit: a07f83b00db11f32313045b3492e5d1ff83c4437
+ms.openlocfilehash: 5898059d83576cd0d2af15ad61bc399cbfbe0e99
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/15/2020
-ms.locfileid: "90593011"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93055857"
 ---
 # <a name="aspnet-core-no-locblazor-routing"></a>BlazorRouting ASP.NET Core
 
@@ -148,13 +149,13 @@ Dostępne są ograniczenia trasy podane w poniższej tabeli. W przypadku ogranic
 | Typu | Przykład           | Przykładowe dopasowania                                                                  | Niezmiennej<br>kultura<br>parowanie |
 | ---------- | ----------------- | -------------------------------------------------------------------------------- | :------------------------------: |
 | `bool`     | `{active:bool}`   | `true`, `FALSE`                                                                  | Nie                               |
-| `datetime` | `{dob:datetime}`  | `2016-12-31`, `2016-12-31 7:32pm`                                                | Yes                              |
-| `decimal`  | `{price:decimal}` | `49.99`, `-1,000.01`                                                             | Yes                              |
-| `double`   | `{weight:double}` | `1.234`, `-1,001.01e8`                                                           | Yes                              |
-| `float`    | `{weight:float}`  | `1.234`, `-1,001.01e8`                                                           | Yes                              |
+| `datetime` | `{dob:datetime}`  | `2016-12-31`, `2016-12-31 7:32pm`                                                | Tak                              |
+| `decimal`  | `{price:decimal}` | `49.99`, `-1,000.01`                                                             | Tak                              |
+| `double`   | `{weight:double}` | `1.234`, `-1,001.01e8`                                                           | Tak                              |
+| `float`    | `{weight:float}`  | `1.234`, `-1,001.01e8`                                                           | Tak                              |
 | `guid`     | `{id:guid}`       | `CD2C1638-1638-72D5-1638-DEADBEEF1638`, `{CD2C1638-1638-72D5-1638-DEADBEEF1638}` | Nie                               |
-| `int`      | `{id:int}`        | `123456789`, `-123456789`                                                        | Yes                              |
-| `long`     | `{ticks:long}`    | `123456789`, `-123456789`                                                        | Yes                              |
+| `int`      | `{id:int}`        | `123456789`, `-123456789`                                                        | Tak                              |
+| `long`     | `{ticks:long}`    | `123456789`, `-123456789`                                                        | Tak                              |
 
 > [!WARNING]
 > Ograniczenia trasy, które weryfikują adres URL i są konwertowane na typ CLR (takie jak `int` lub <xref:System.DateTime> ), zawsze używają niezmiennej kultury. W tych ograniczeniach przyjęto założenie, że adres URL nie jest Lokalizowalny.
@@ -237,7 +238,7 @@ Poniższy `NavMenu` składnik tworzy [`Bootstrap`](https://getbootstrap.com/docs
 Dostępne są dwie <xref:Microsoft.AspNetCore.Components.Routing.NavLinkMatch> Opcje, które można przypisać do `Match` atrybutu `<NavLink>` elementu:
 
 * <xref:Microsoft.AspNetCore.Components.Routing.NavLinkMatch.All?displayProperty=nameWithType>: <xref:Microsoft.AspNetCore.Components.Routing.NavLink> Jest aktywny, gdy jest zgodny z całym bieżącym adresem URL.
-* <xref:Microsoft.AspNetCore.Components.Routing.NavLinkMatch.Prefix?displayProperty=nameWithType> (*ustawienie domyślne*): <xref:Microsoft.AspNetCore.Components.Routing.NavLink> jest aktywny, gdy pasuje do dowolnego PREFIKSU bieżącego adresu URL.
+* <xref:Microsoft.AspNetCore.Components.Routing.NavLinkMatch.Prefix?displayProperty=nameWithType> ( *ustawienie domyślne* ): <xref:Microsoft.AspNetCore.Components.Routing.NavLink> jest aktywny, gdy pasuje do dowolnego PREFIKSU bieżącego adresu URL.
 
 W poprzednim przykładzie Strona główna <xref:Microsoft.AspNetCore.Components.Routing.NavLink> `href=""` odpowiada GŁÓWNEmu adresowi URL i odbiera tylko `active` klasy CSS przy domyślnym adresie URL ścieżki podstawowej aplikacji (na przykład `https://localhost:5001/` ). Druga <xref:Microsoft.AspNetCore.Components.Routing.NavLink> otrzymuje klasę, `active` gdy użytkownik odwiedzi dowolny adres URL z `MyComponent` prefiksem (na przykład `https://localhost:5001/MyComponent` i `https://localhost:5001/MyComponent/AnotherSegment` ).
 

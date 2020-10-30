@@ -7,6 +7,7 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/concurrency
-ms.openlocfilehash: 629baeba545142e156e1a51107b470c932dae3cb
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: d476c836e8d497ca1291992dda38da1fc9f59ed2
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88629278"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93054375"
 ---
 # <a name="tutorial-handle-concurrency---aspnet-mvc-with-ef-core"></a>Samouczek: obsługa współbieżności ASP.NET MVC z EF Core
 
@@ -68,7 +69,7 @@ Alternatywą dla pesymistycznej współbieżności jest Optymistyczna współbie
 
 ![Zmiana wartości budżetu na 0](concurrency/_static/change-budget.png)
 
-Przed Janem kliknie przycisk **Zapisz**, Jan odwiedzi tę samą stronę i zmieni pole Data rozpoczęcia z 9/1/2007 na 9/1/2013.
+Przed Janem kliknie przycisk **Zapisz** , Jan odwiedzi tę samą stronę i zmieni pole Data rozpoczęcia z 9/1/2007 na 9/1/2013.
 
 ![Zmiana daty rozpoczęcia na 2013](concurrency/_static/change-date.png)
 
@@ -110,13 +111,13 @@ W pozostałej części tego samouczka dodasz `rowversion` Właściwość śledze
 
 ## <a name="add-a-tracking-property"></a>Dodaj właściwość śledzenia
 
-W obszarze *modele/dział. cs*Dodaj właściwość śledzenia o nazwie rowversion:
+W obszarze *modele/dział. cs* Dodaj właściwość śledzenia o nazwie rowversion:
 
 [!code-csharp[](intro/samples/cu/Models/Department.cs?name=snippet_Final&highlight=26,27)]
 
 Ten `Timestamp` atrybut określa, że ta kolumna zostanie uwzględniona w klauzuli WHERE poleceń Update i DELETE wysyłanych do bazy danych. Ten atrybut jest wywoływany, `Timestamp` ponieważ poprzednie wersje SQL Server używały `timestamp` typu danych SQL przed zastąpieniem go przez program SQL Server `rowversion` . Typ .NET dla `rowversion` jest tablicą bajtów.
 
-Jeśli wolisz używać interfejsu API Fluent, możesz użyć `IsConcurrencyToken` metody (w *danych/SchoolContext. cs*), aby określić właściwość śledzenia, jak pokazano w następującym przykładzie:
+Jeśli wolisz używać interfejsu API Fluent, możesz użyć `IsConcurrencyToken` metody (w *danych/SchoolContext. cs* ), aby określić właściwość śledzenia, jak pokazano w następującym przykładzie:
 
 ```csharp
 modelBuilder.Entity<Department>()
@@ -187,7 +188,7 @@ Kod dodaje niestandardowy komunikat o błędzie dla każdej kolumny, która ma w
 
 [!code-csharp[](intro/samples/cu/Controllers/DepartmentsController.cs?range=174-178)]
 
-Na koniec kod ustawia `RowVersion` wartość `departmentToUpdate` do nowej wartości pobranej z bazy danych. Ta nowa `RowVersion` wartość zostanie zapisana w ukrytym polu po ponownym wyświetleniu strony edycji, a przy następnym kliknięciu przycisku **Zapisz**zostaną przechwycone tylko błędy współbieżności, które zachodzą od momentu wyświetlenia ekranu edycji.
+Na koniec kod ustawia `RowVersion` wartość `departmentToUpdate` do nowej wartości pobranej z bazy danych. Ta nowa `RowVersion` wartość zostanie zapisana w ukrytym polu po ponownym wyświetleniu strony edycji, a przy następnym kliknięciu przycisku **Zapisz** zostaną przechwycone tylko błędy współbieżności, które zachodzą od momentu wyświetlenia ekranu edycji.
 
 [!code-csharp[](intro/samples/cu/Controllers/DepartmentsController.cs?range=199-200)]
 
@@ -195,7 +196,7 @@ Na koniec kod ustawia `RowVersion` wartość `departmentToUpdate` do nowej warto
 
 ## <a name="update-edit-view"></a>Aktualizuj widok edycji
 
-W obszarze *widoki/działy/Edit. cshtml*wprowadź następujące zmiany:
+W obszarze *widoki/działy/Edit. cshtml* wprowadź następujące zmiany:
 
 * Dodaj ukryte pole, aby zapisać `RowVersion` wartość właściwości, bezpośrednio po ukrytym polu `DepartmentID` właściwości.
 
@@ -205,9 +206,9 @@ W obszarze *widoki/działy/Edit. cshtml*wprowadź następujące zmiany:
 
 ## <a name="test-concurrency-conflicts"></a>Testuj konflikty współbieżności
 
-Uruchom aplikację i przejdź do strony indeks działów. Kliknij prawym przyciskiem myszy hiperłącze **Edytuj** dla działu angielskiego i wybierz polecenie **Otwórz na nowej karcie**, a następnie kliknij hiperłącze **Edytuj** dla działu angielskiego. Dwie karty przeglądarki zawierają teraz te same informacje.
+Uruchom aplikację i przejdź do strony indeks działów. Kliknij prawym przyciskiem myszy hiperłącze **Edytuj** dla działu angielskiego i wybierz polecenie **Otwórz na nowej karcie** , a następnie kliknij hiperłącze **Edytuj** dla działu angielskiego. Dwie karty przeglądarki zawierają teraz te same informacje.
 
-Zmień pole na pierwszej karcie przeglądarki, a następnie kliknij przycisk **Zapisz**.
+Zmień pole na pierwszej karcie przeglądarki, a następnie kliknij przycisk **Zapisz** .
 
 ![Edycja działu Strona 1 po zmianie](concurrency/_static/edit-after-change-1.png)
 
@@ -217,7 +218,7 @@ Zmień pole na drugiej karcie przeglądarki.
 
 ![Edycja działu Strona 2 po zmianie](concurrency/_static/edit-after-change-2.png)
 
-Kliknij pozycję **Zapisz**. Zostanie wyświetlony komunikat o błędzie:
+Kliknij pozycję **Zapisz** . Zostanie wyświetlony komunikat o błędzie:
 
 ![Komunikat o błędzie strony edytowania działu](concurrency/_static/edit-error.png)
 
@@ -229,7 +230,7 @@ Na stronie Usuwanie Entity Framework wykrywa konflikty współbieżności spowod
 
 ### <a name="update-the-delete-methods-in-the-departments-controller"></a>Aktualizowanie metod DELETE w kontrolerze działu
 
-W *DepartmentsController.cs*Zastąp metodę narzędzia HttpGet `Delete` następującym kodem:
+W *DepartmentsController.cs* Zastąp metodę narzędzia HttpGet `Delete` następującym kodem:
 
 [!code-csharp[](intro/samples/cu/Controllers/DepartmentsController.cs?name=snippet_DeleteGet&highlight=1,10,14-17,21-29)]
 
@@ -259,7 +260,7 @@ W przypadku przechwyconego błędu współbieżności kod ponownie wyświetla st
 
 ### <a name="update-the-delete-view"></a>Aktualizowanie widoku usuwania
 
-W obszarze *widoki/działy/Delete. cshtml*Zamień kod szkieletowy na następujący kod, który dodaje pole komunikatu o błędzie i ukryte pola dla właściwości DepartmentID i rowversion. Zmiany są wyróżnione.
+W obszarze *widoki/działy/Delete. cshtml* Zamień kod szkieletowy na następujący kod, który dodaje pole komunikatu o błędzie i ukryte pola dla właściwości DepartmentID i rowversion. Zmiany są wyróżnione.
 
 [!code-cshtml[](intro/samples/cu/Views/Departments/Delete.cshtml?highlight=9,38,44,45,48)]
 
@@ -273,13 +274,13 @@ Powoduje to wprowadzenie następujących zmian:
 
 * Dodaje ukryte pole dla `RowVersion` właściwości.
 
-Uruchom aplikację i przejdź do strony indeks działów. Kliknij prawym przyciskiem myszy hiperłącze **Usuń** dla działu angielskiego i wybierz polecenie **Otwórz na nowej karcie**, a następnie na pierwszej karcie kliknij hiperłącze **Edytuj** dla działu angielskiego.
+Uruchom aplikację i przejdź do strony indeks działów. Kliknij prawym przyciskiem myszy hiperłącze **Usuń** dla działu angielskiego i wybierz polecenie **Otwórz na nowej karcie** , a następnie na pierwszej karcie kliknij hiperłącze **Edytuj** dla działu angielskiego.
 
-W pierwszym oknie Zmień jedną z wartości, a następnie kliknij przycisk **Zapisz**:
+W pierwszym oknie Zmień jedną z wartości, a następnie kliknij przycisk **Zapisz** :
 
 ![Strona Edycja działu po zmianie przed usunięciem](concurrency/_static/edit-after-change-for-delete.png)
 
-Na drugiej karcie kliknij pozycję **Usuń**. Zobaczysz komunikat o błędzie współbieżności, a wartości działu są odświeżane z aktualną wartością w bazie danych.
+Na drugiej karcie kliknij pozycję **Usuń** . Zobaczysz komunikat o błędzie współbieżności, a wartości działu są odświeżane z aktualną wartością w bazie danych.
 
 ![Strona potwierdzenia usunięcia działu z błędem współbieżności](concurrency/_static/delete-error.png)
 

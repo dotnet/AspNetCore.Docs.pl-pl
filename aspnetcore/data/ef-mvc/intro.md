@@ -7,6 +7,7 @@ ms.custom: mvc
 ms.date: 02/06/2019
 ms.topic: tutorial
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/intro
-ms.openlocfilehash: e081c13f9ffb33c1ff137cb0989e747d51571ea7
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 36d72e037087399c8893d5ecb4a6fffdca3a3608
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88629200"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93054245"
 ---
 # <a name="tutorial-get-started-with-ef-core-in-an-aspnet-mvc-web-app"></a>Samouczek: wprowadzenie do EF Core w aplikacji sieci Web ASP.NET MVC
 
@@ -81,21 +82,21 @@ Użytkownicy mogą wyświetlać i aktualizować informacje dotyczące uczniów, 
 
 * Otwórz program Visual Studio.
 
-* Z menu **plik** wybierz pozycję **Nowy projekt >**.
+* Z menu **plik** wybierz pozycję **Nowy projekt >** .
 
-* W lewym okienku wybierz pozycję **zainstalowane > Visual C# > sieci Web**.
+* W lewym okienku wybierz pozycję **zainstalowane > Visual C# > sieci Web** .
 
 * Wybierz szablon projektu **aplikacji sieci Web ASP.NET Core** .
 
-* Wprowadź **ContosoUniversity** jako nazwę, a następnie kliknij przycisk **OK**.
+* Wprowadź **ContosoUniversity** jako nazwę, a następnie kliknij przycisk **OK** .
 
   ![Okno dialogowe Nowy projekt](intro/_static/new-project2.png)
 
 * Zaczekaj, aż pojawi się okno dialogowe **Nowa aplikacja sieci Web ASP.NET Core** .
 
-* Wybierz pozycję **.NET Core**, **ASP.NET Core 2,2** i szablon **aplikacji sieci Web (Model-View-Controller)** .
+* Wybierz pozycję **.NET Core** , **ASP.NET Core 2,2** i szablon **aplikacji sieci Web (Model-View-Controller)** .
 
-* Upewnij się, że **uwierzytelnianie** jest ustawione na wartość **bez uwierzytelniania**.
+* Upewnij się, że **uwierzytelnianie** jest ustawione na wartość **bez uwierzytelniania** .
 
 * Wybierz **przycisk OK**
 
@@ -109,13 +110,13 @@ Otwórz *Widok widoki/Shared/_Layout. cshtml* i wprowadź następujące zmiany:
 
 * Zmień każde wystąpienie "ContosoUniversity" na "Uniwersytet firmy Contoso". Istnieją trzy wystąpienia.
 
-* Dodaj pozycje menu dla **informacji o**programie, **studentów**, **kursy**, **Instruktorzy**i **działy**, a następnie usuń wpis menu **prywatność** .
+* Dodaj pozycje menu dla **informacji o** programie, **studentów** , **kursy** , **Instruktorzy** i **działy** , a następnie usuń wpis menu **prywatność** .
 
 Zmiany są wyróżnione.
 
 [!code-cshtml[](intro/samples/cu/Views/Shared/_Layout.cshtml?highlight=6,34-48,63)]
 
-W obszarze *widoki/Home/index. cshtml*Zastąp zawartość pliku następującym kodem, aby zamienić tekst na ASP.NET i MVC z tekstem dotyczącym tej aplikacji:
+W obszarze *widoki/Home/index. cshtml* Zastąp zawartość pliku następującym kodem, aby zamienić tekst na ASP.NET i MVC z tekstem dotyczącym tej aplikacji:
 
 [!code-cshtml[](intro/samples/cu/Views/Home/Index.cshtml)]
 
@@ -189,9 +190,9 @@ Dowiesz się więcej na temat `DatabaseGenerated` atrybutu w [kolejnym samouczku
 
 Klasa główna, która koordynuje funkcje Entity Framework dla danego modelu danych, jest klasą kontekstu bazy danych. Tę klasę można utworzyć, wyprowadzając ją z `Microsoft.EntityFrameworkCore.DbContext` klasy. W kodzie możesz określić, które jednostki zostaną uwzględnione w modelu danych. Można również dostosować pewne zachowanie Entity Framework. W tym projekcie Klasa ma nazwę `SchoolContext` .
 
-W folderze projektu Utwórz folder o nazwie *dane*.
+W folderze projektu Utwórz folder o nazwie *dane* .
 
-W folderze *dane* Utwórz nowy plik klasy o nazwie *SchoolContext.cs*i Zastąp kod szablonu następującym kodem:
+W folderze *dane* Utwórz nowy plik klasy o nazwie *SchoolContext.cs* i Zastąp kod szablonu następującym kodem:
 
 [!code-csharp[](intro/samples/cu/Data/SchoolContext.cs?name=snippet_Intro)]
 
@@ -207,17 +208,17 @@ Po utworzeniu bazy danych EF tworzy tabele, które mają nazwy takie same jak `D
 
 ASP.NET Core domyślnie implementuje [iniekcję zależności](../../fundamentals/dependency-injection.md) . Usługi (takie jak kontekst bazy danych EF) są rejestrowane przy użyciu iniekcji zależności podczas uruchamiania aplikacji. Składniki, które wymagają tych usług (takich jak kontrolery MVC), są dostarczane przez parametry konstruktora. Zobaczysz kod konstruktora kontrolera, który pobiera wystąpienie kontekstu w dalszej części tego samouczka.
 
-Aby zarejestrować się `SchoolContext` jako usługa, otwórz *Startup.cs*i Dodaj wyróżnione wiersze do `ConfigureServices` metody.
+Aby zarejestrować się `SchoolContext` jako usługa, otwórz *Startup.cs* i Dodaj wyróżnione wiersze do `ConfigureServices` metody.
 
 [!code-csharp[](intro/samples/cu/Startup.cs?name=snippet_SchoolContext&highlight=9-10)]
 
-Nazwa parametrów połączenia jest przenoszona do kontekstu przez wywołanie metody w `DbContextOptionsBuilder` obiekcie. W przypadku lokalnego projektowania [system konfiguracji ASP.NET Core](xref:fundamentals/configuration/index) odczytuje parametry połączenia z *appsettings.jsna* pliku.
+Nazwa parametrów połączenia jest przenoszona do kontekstu przez wywołanie metody w `DbContextOptionsBuilder` obiekcie. W przypadku lokalnego projektowania [system konfiguracji ASP.NET Core](xref:fundamentals/configuration/index) odczytuje parametry połączenia z *appsettings.json* pliku.
 
 Dodaj `using` instrukcje dla `ContosoUniversity.Data` i `Microsoft.EntityFrameworkCore` przestrzeni nazw, a następnie Skompiluj projekt.
 
 [!code-csharp[](intro/samples/cu/Startup.cs?name=snippet_Usings)]
 
-Otwórz *appsettings.jsw* pliku i Dodaj parametry połączenia, jak pokazano w poniższym przykładzie.
+Otwórz *appsettings.json* plik i Dodaj parametry połączenia, jak pokazano w poniższym przykładzie.
 
 [!code-json[](./intro/samples/cu/appsettings1.json?highlight=2-4)]
 
@@ -237,7 +238,7 @@ W folderze *dane* Utwórz nowy plik klasy o nazwie *DbInitializer.cs* i Zastąp 
 
 Kod sprawdza, czy w bazie danych znajdują się uczniowie i czy nie, zakłada, że baza danych jest nowa i należy ją umieścić w danych testowych. Ładuje dane testowe do tablic, a nie `List<T>` kolekcji w celu zoptymalizowania wydajności.
 
-W *program.cs*Zmień metodę, `Main` Aby wykonać następujące czynności podczas uruchamiania aplikacji:
+W *program.cs* Zmień metodę, `Main` Aby wykonać następujące czynności podczas uruchamiania aplikacji:
 
 * Pobierz wystąpienie kontekstu bazy danych z kontenera iniekcji zależności.
 * Wywołaj metodę inicjatora, przekazując ją do kontekstu.
@@ -249,7 +250,7 @@ Dodaj `using` instrukcje:
 
 [!code-csharp[](intro/samples/cu/Program.cs?name=snippet_Usings)]
 
-W starszych samouczkach można zobaczyć podobny kod w `Configure` metodzie w *Startup.cs*. Zalecamy użycie `Configure` metody tylko w celu skonfigurowania potoku żądania. Kod uruchamiania aplikacji należy do `Main` metody.
+W starszych samouczkach można zobaczyć podobny kod w `Configure` metodzie w *Startup.cs* . Zalecamy użycie `Configure` metody tylko w celu skonfigurowania potoku żądania. Kod uruchamiania aplikacji należy do `Main` metody.
 
 Teraz podczas pierwszego uruchomienia aplikacji baza danych zostanie utworzona i zostanie zainicjowana przy użyciu danych testowych. Za każdym razem, gdy zmieniasz model danych, możesz usunąć bazę danych, zaktualizować metodę inicjatora i zacząć od nowa baza danych w taki sam sposób. W kolejnych samouczkach zobaczysz, jak zmodyfikować bazę danych, gdy zmieni się model danych, bez usuwania i ponownego tworzenia.
 
@@ -259,27 +260,27 @@ Następnie użyjesz aparatu tworzenia szkieletów w programie Visual Studio, aby
 
 Automatyczne tworzenie metod i widoków akcji CRUD jest znane jako rusztowania. Tworzenie szkieletu różni się od generowania kodu, ponieważ kod szkieletowy jest punktem wyjścia, który można zmodyfikować zgodnie z własnymi wymaganiami, ale zazwyczaj nie jest modyfikowany kod wygenerowany. Jeśli musisz dostosować wygenerowany kod, użyj klas częściowych lub ponownie Wygeneruj kod, gdy zmienią się.
 
-* Kliknij prawym przyciskiem myszy folder **controllers** w **Eksplorator rozwiązań** a następnie wybierz pozycję **Dodaj > nowy element szkieletowy**.
+* Kliknij prawym przyciskiem myszy folder **controllers** w **Eksplorator rozwiązań** a następnie wybierz pozycję **Dodaj > nowy element szkieletowy** .
 
 * W oknie dialogowym **Dodawanie szkieletu** :
 
-  * Wybierz **kontroler MVC z widokami, używając Entity Framework**.
+  * Wybierz **kontroler MVC z widokami, używając Entity Framework** .
 
-  * Kliknij pozycję **Dodaj**. Zostanie wyświetlone okno dialogowe **Dodawanie kontrolera MVC z widokami, przy użyciu Entity Framework** .
+  * Kliknij pozycję **Dodaj** . Zostanie wyświetlone okno dialogowe **Dodawanie kontrolera MVC z widokami, przy użyciu Entity Framework** .
 
     ![Student dla szkieletu](intro/_static/scaffold-student2.png)
 
-  * W obszarze **Klasa modelu** wybierz **ucznia**.
+  * W obszarze **Klasa modelu** wybierz **ucznia** .
 
-  * W obszarze **Klasa kontekstu danych** wybierz pozycję **SchoolContext**.
+  * W obszarze **Klasa kontekstu danych** wybierz pozycję **SchoolContext** .
 
   * Zaakceptuj domyślną **StudentsController** jako nazwę.
 
-  * Kliknij pozycję **Dodaj**.
+  * Kliknij pozycję **Dodaj** .
 
-  Po kliknięciu przycisku **Dodaj**aparat szkieletu programu Visual Studio tworzy plik *StudentsController.cs* i zestaw widoków (pliki *. cshtml* ), które współpracują z kontrolerem.
+  Po kliknięciu przycisku **Dodaj** aparat szkieletu programu Visual Studio tworzy plik *StudentsController.cs* i zestaw widoków (pliki *. cshtml* ), które współpracują z kontrolerem.
 
-(Aparat tworzenia szkieletów może również utworzyć kontekst bazy danych, jeśli nie utworzysz go ręcznie, jak wcześniej w tym samouczku. Aby określić nową klasę kontekstu w polu **Dodaj kontroler** , kliknij znak plus z prawej strony **klasy kontekstu danych**.  Następnie program Visual Studio utworzy `DbContext` klasę, a także kontroler i widoki.
+(Aparat tworzenia szkieletów może również utworzyć kontekst bazy danych, jeśli nie utworzysz go ręcznie, jak wcześniej w tym samouczku. Aby określić nową klasę kontekstu w polu **Dodaj kontroler** , kliknij znak plus z prawej strony **klasy kontekstu danych** .  Następnie program Visual Studio utworzy `DbContext` klasę, a także kontroler i widoki.
 
 Zauważ, że kontroler przyjmuje `SchoolContext` jako parametr konstruktora.
 
@@ -313,7 +314,7 @@ Zamknij okno przeglądarki.
 
 Jeśli okno SSOX nie jest jeszcze otwarte, wybierz je z menu **Widok** w programie Visual Studio.
 
-W SSOX kliknij pozycję **(LocalDB) \MSSQLLocalDB > bazy danych**, a następnie kliknij pozycję Nazwa bazy danych, która znajduje się w parametrach połączenia w *appsettings.js* pliku.
+W SSOX kliknij pozycję **(LocalDB) \MSSQLLocalDB > bazy danych** , a następnie kliknij pozycję Nazwa bazy danych, która znajduje się w parametrach połączenia w *appsettings.json* pliku.
 
 Rozwiń węzeł **tabele** , aby wyświetlić tabele w bazie danych.
 
@@ -323,7 +324,7 @@ Kliknij prawym przyciskiem myszy tabelę **uczniów** i kliknij polecenie **Wyś
 
 ![Tabela uczniów w SSOX](intro/_static/ssox-student-table.png)
 
-Pliki *. mdf* i *. ldf* znajdują się w folderze *C:\Users \\ \<yourusername> * .
+Pliki *. mdf* i *. ldf* znajdują się w folderze *C:\Users \\ \<yourusername>* .
 
 Ponieważ wywołujesz `EnsureCreated` metodę inicjatora, która jest uruchamiana podczas uruchamiania aplikacji, możesz teraz wprowadzić zmianę `Student` klasy, usunąć bazę danych, ponownie uruchomić aplikację, a baza danych zostanie automatycznie utworzona ponownie w celu dopasowania do zmiany. Na przykład, jeśli dodasz `EmailAddress` Właściwość do `Student` klasy, zobaczysz nową `EmailAddress` kolumnę w nowo utworzonej tabeli.
 

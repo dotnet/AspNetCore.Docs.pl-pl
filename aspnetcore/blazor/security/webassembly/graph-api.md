@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/27/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/graph-api
-ms.openlocfilehash: 3c77a8b39562c0145d1441cfdfe1dcf57aa3a613
-ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
+ms.openlocfilehash: c346a80008b411e9fbbc584f7906227ab836d5fe
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/27/2020
-ms.locfileid: "92692087"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93055207"
 ---
 # <a name="use-graph-api-with-aspnet-core-no-locblazor-webassembly"></a>Użyj interfejs API programu Graph z ASP.NET Core Blazor WebAssembly
 

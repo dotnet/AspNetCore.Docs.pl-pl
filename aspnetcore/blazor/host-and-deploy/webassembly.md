@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/09/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: c3f537ff3b55f295db478cb097bc99023cc71a87
-ms.sourcegitcommit: b5ebaf42422205d212e3dade93fcefcf7f16db39
+ms.openlocfilehash: 0912b3fbcd0b891deb4985eaa18841c22f4f3264
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92326512"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93055753"
 ---
 # <a name="host-and-deploy-aspnet-core-no-locblazor-webassembly"></a>Hostowanie i wdrażanie ASP.NET Core Blazor WebAssembly
 
@@ -124,7 +125,7 @@ Podczas wdrażania na serwerze usług IIS można użyć modułu ponownego zapisy
 
 *Wdrożenie hostowane* Blazor WebAssembly umożliwia aplikacji przeglądarki z poziomu [aplikacji ASP.NET Core](xref:index) działającej na serwerze sieci Web.
 
-Aplikacja kliencka Blazor WebAssembly jest publikowana w `/bin/Release/{TARGET FRAMEWORK}/publish/wwwroot` folderze aplikacji serwerowej wraz z wszelkimi innymi statycznymi zasobami sieci Web aplikacji serwera. Te dwie aplikacje są wdrażane razem. Wymagany jest serwer sieci Web, który umożliwia hostowanie aplikacji ASP.NET Core. W przypadku wdrożenia hostowanego program Visual Studio zawiera szablon projektu ** Blazor WebAssembly aplikacji** ( `blazorwasm` szablon przy użyciu [`dotnet new`](/dotnet/core/tools/dotnet-new) polecenia) z **`Hosted`** wybraną opcją ( `-ho|--hosted` przy użyciu `dotnet new` polecenia).
+Aplikacja kliencka Blazor WebAssembly jest publikowana w `/bin/Release/{TARGET FRAMEWORK}/publish/wwwroot` folderze aplikacji serwerowej wraz z wszelkimi innymi statycznymi zasobami sieci Web aplikacji serwera. Te dwie aplikacje są wdrażane razem. Wymagany jest serwer sieci Web, który umożliwia hostowanie aplikacji ASP.NET Core. W przypadku wdrożenia hostowanego program Visual Studio zawiera szablon projektu **Blazor WebAssembly aplikacji** ( `blazorwasm` szablon przy użyciu [`dotnet new`](/dotnet/core/tools/dotnet-new) polecenia) z **`Hosted`** wybraną opcją ( `-ho|--hosted` przy użyciu `dotnet new` polecenia).
 
 Aby uzyskać więcej informacji na temat ASP.NET Core hostingu i wdrażania aplikacji, zobacz <xref:host-and-deploy/index> .
 
@@ -289,22 +290,30 @@ W przypadku zasobów statycznych należy stosować następujące podejścia:
   <img alt="..." src="_content/{LIBRARY NAME}/{ASSET FILE NAME}" />
   ```
 
+<!-- HOLD for reactivation at 5.x
+
 ::: moniker range=">= aspnetcore-5.0"
 
-Składniki udostępniane aplikacji klienckiej przez bibliotekę klas są zwykle przywoływane. Jeśli wszystkie składniki wymagają plików stylów lub JavaScript, użyj jednego z poniższych metod, aby uzyskać zasoby statyczne:
+Components provided to a client app by a class library are referenced normally. If any components require stylesheets or JavaScript files, use either of the following approaches to obtain the static assets:
 
-* Plik aplikacji klienckiej `wwwroot/index.html` może łączyć ( `<link>` ) ze statycznymi zasobami.
-* Składnik może używać [ `Link` składnika](xref:blazor/fundamentals/additional-scenarios#influence-html-head-tag-elements) struktury do uzyskiwania zasobów statycznych.
+* The client app's `wwwroot/index.html` file can link (`<link>`) to the static assets.
+* The component can use the framework's [`Link` component](xref:blazor/fundamentals/additional-scenarios#influence-html-head-tag-elements) to obtain the static assets.
 
-Powyższe podejścia przedstawiono w poniższych przykładach.
+The preceding approaches are demonstrated in the following examples.
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-5.0"
 
+-->
+
 Składniki udostępniane aplikacji klienckiej przez bibliotekę klas są zwykle przywoływane. Jeśli wszystkie składniki wymagają plików stylów lub JavaScript, plik aplikacji klienta `wwwroot/index.html` musi zawierać poprawne linki do zasobów statycznych. Te podejścia przedstawiono w poniższych przykładach.
 
+<!-- HOLD for reactivation at 5.x
+
 ::: moniker-end
+
+-->
 
 Dodaj następujący `Jeep` składnik do jednej z aplikacji klienckich. `Jeep`Składnik używa:
 
@@ -338,9 +347,11 @@ Dodaj następujący `Jeep` składnik do jednej z aplikacji klienckich. `Jeep`Sk�
 > [!WARNING]
 > Nie Publikuj obrazów pojazdów publicznie, chyba że są **one** właścicielami. W przeciwnym razie ryzyko naruszenia praw autorskich.
 
+<!-- HOLD for reactivation at 5.x
+
 ::: moniker range=">= aspnetcore-5.0"
 
-`jeep-yj.png`Obraz biblioteki można również dodać do `Component1` składnika biblioteki ( `Component1.razor` ). Aby zapewnić `my-component` klasę CSS stronie aplikacji klienta, Połącz się z arkuszem stylów biblioteki przy użyciu [ `Link` składnika](xref:blazor/fundamentals/additional-scenarios#influence-html-head-tag-elements)struktury:
+The library's `jeep-yj.png` image can also be added to the library's `Component1` component (`Component1.razor`). To provide the `my-component` CSS class to the client app's page, link to the library's stylesheet using the framework's [`Link` component](xref:blazor/fundamentals/additional-scenarios#influence-html-head-tag-elements):
 
 ```razor
 <div class="my-component">
@@ -358,7 +369,7 @@ Dodaj następujący `Jeep` składnik do jednej z aplikacji klienckich. `Jeep`Sk�
 </div>
 ```
 
-Alternatywą dla korzystania ze [ `Link` składnika](xref:blazor/fundamentals/additional-scenarios#influence-html-head-tag-elements) jest załadowanie arkusza stylów z pliku aplikacji klienckiej `wwwroot/index.html` . Takie podejście sprawia, że arkusz stylów jest dostępny dla wszystkich składników w aplikacji klienckiej:
+An alternative to using the [`Link` component](xref:blazor/fundamentals/additional-scenarios#influence-html-head-tag-elements) is to load the stylesheet from the client app's `wwwroot/index.html` file. This approach makes the stylesheet available to all of the components in the client app:
 
 ```html
 <head>
@@ -370,6 +381,8 @@ Alternatywą dla korzystania ze [ `Link` składnika](xref:blazor/fundamentals/ad
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-5.0"
+
+-->
 
 `jeep-yj.png`Obraz biblioteki można również dodać do `Component1` składnika biblioteki ( `Component1.razor` ):
 
@@ -396,7 +409,11 @@ Plik aplikacji klienta `wwwroot/index.html` żąda arkusza stylów biblioteki z 
 </head>
 ```
 
+<!-- HOLD for reactivation at 5.x
+
 ::: moniker-end
+
+-->
 
 Dodaj nawigację do `Jeep` składnika w składniku aplikacji klienckiej `NavMenu` ( `Shared/NavMenu.razor` ):
 
@@ -521,7 +538,7 @@ Hosting pliku statycznego [usługi Azure Storage](/azure/storage/) umożliwia Bl
 Gdy usługa BLOB jest włączona dla hostingu statycznej witryny sieci Web na koncie magazynu:
 
 * Ustaw **nazwę dokumentu indeksu** na `index.html` .
-* Ustaw **ścieżkę do dokumentu błędu** `index.html` . Razor składniki i inne punkty końcowe inne niż pliki nie znajdują się w ścieżkach fizycznych w zawartości statycznej przechowywanej przez usługę BLOB. Po otrzymaniu żądania dla jednego z tych zasobów, który Blazor powinien zostać obsłużony przez router, błąd *404-nie znaleziono* przez usługę BLOB Service kieruje żądanie do **ścieżki dokumentu błędu**. `index.html`Obiekt BLOB jest zwracany, a Blazor router ładuje i przetwarza ścieżkę.
+* Ustaw **ścieżkę do dokumentu błędu** `index.html` . Razor składniki i inne punkty końcowe inne niż pliki nie znajdują się w ścieżkach fizycznych w zawartości statycznej przechowywanej przez usługę BLOB. Po otrzymaniu żądania dla jednego z tych zasobów, który Blazor powinien zostać obsłużony przez router, błąd *404-nie znaleziono* przez usługę BLOB Service kieruje żądanie do **ścieżki dokumentu błędu** . `index.html`Obiekt BLOB jest zwracany, a Blazor router ładuje i przetwarza ścieżkę.
 
 Jeśli pliki nie są ładowane w czasie wykonywania ze względu na nieodpowiednie typy MIME w `Content-Type` nagłówkach plików, wykonaj jedną z następujących czynności:
 
@@ -530,7 +547,7 @@ Jeśli pliki nie są ładowane w czasie wykonywania ze względu na nieodpowiedni
 
   W Eksplorator usługi Storage (Azure Portal) dla każdego pliku:
   
-  1. Kliknij prawym przyciskiem myszy plik i wybierz polecenie **Właściwości**.
+  1. Kliknij prawym przyciskiem myszy plik i wybierz polecenie **Właściwości** .
   1. Ustaw wartość **ContentType** i wybierz przycisk **Zapisz** .
 
 Aby uzyskać więcej informacji, zobacz [Obsługa statycznej witryny sieci Web w usłudze Azure Storage](/azure/storage/blobs/storage-blob-static-website).
@@ -665,7 +682,7 @@ W przypadku korzystania z witryny projektu zamiast witryny organizacji zaktualiz
   "commandLineArgs": "--contentroot=/content-root-path"
   ```
 
-* W programie Visual Studio Określ argument w **właściwościach**  >  **Debuguj**  >  **argumenty aplikacji**. Ustawienie argumentu na stronie właściwości programu Visual Studio powoduje dodanie argumentu do `launchSettings.json` pliku.
+* W programie Visual Studio Określ argument w **właściwościach**  >  **Debuguj**  >  **argumenty aplikacji** . Ustawienie argumentu na stronie właściwości programu Visual Studio powoduje dodanie argumentu do `launchSettings.json` pliku.
 
   ```console
   --contentroot=/content-root-path
@@ -690,7 +707,7 @@ W przypadku korzystania z witryny projektu zamiast witryny organizacji zaktualiz
   "commandLineArgs": "--pathbase=/relative-URL-path"
   ```
 
-* W programie Visual Studio Określ argument w **właściwościach**  >  **Debuguj**  >  **argumenty aplikacji**. Ustawienie argumentu na stronie właściwości programu Visual Studio powoduje dodanie argumentu do `launchSettings.json` pliku.
+* W programie Visual Studio Określ argument w **właściwościach**  >  **Debuguj**  >  **argumenty aplikacji** . Ustawienie argumentu na stronie właściwości programu Visual Studio powoduje dodanie argumentu do `launchSettings.json` pliku.
 
   ```console
   --pathbase=/relative-URL-path
@@ -712,7 +729,7 @@ W przypadku korzystania z witryny projektu zamiast witryny organizacji zaktualiz
   "commandLineArgs": "--urls=http://127.0.0.1:0"
   ```
 
-* W programie Visual Studio Określ argument w **właściwościach**  >  **Debuguj**  >  **argumenty aplikacji**. Ustawienie argumentu na stronie właściwości programu Visual Studio powoduje dodanie argumentu do `launchSettings.json` pliku.
+* W programie Visual Studio Określ argument w **właściwościach**  >  **Debuguj**  >  **argumenty aplikacji** . Ustawienie argumentu na stronie właściwości programu Visual Studio powoduje dodanie argumentu do `launchSettings.json` pliku.
 
   ```console
   --urls=http://127.0.0.1:0
@@ -896,7 +913,7 @@ Po skompilowaniu aplikacji wygenerowany `blazor.boot.json` manifest opisuje skr�
 
 Najczęstsze przyczyny tego niepowodzenia to:
 
- * Odpowiedź serwera sieci Web jest błędem (na przykład *404 — nie można znaleźć* lub *500 — wewnętrzny błąd serwera*) zamiast pliku, którego żądała przeglądarka. Jest on raportowany przez przeglądarkę jako błąd sprawdzania integralności, a nie jako błąd odpowiedzi.
+ * Odpowiedź serwera sieci Web jest błędem (na przykład *404 — nie można znaleźć* lub *500 — wewnętrzny błąd serwera* ) zamiast pliku, którego żądała przeglądarka. Jest on raportowany przez przeglądarkę jako błąd sprawdzania integralności, a nie jako błąd odpowiedzi.
  * Coś zmieniło zawartość plików między kompilacją a dostarczeniem plików do przeglądarki. Może się tak zdarzyć:
    * Jeśli narzędzia kompilacji lub kompilacje ręcznie modyfikują dane wyjściowe kompilacji.
    * Jeśli jakiś aspekt procesu wdrażania zmodyfikował pliki. Na przykład jeśli korzystasz z mechanizmu wdrożenia opartego na usłudze git, weź pod uwagę, że git w sposób przezroczysty konwertuje końce wierszy w stylu systemu Windows do końca wiersza w stylu Unix, jeśli zatwierdzisz pliki w systemie Windows i wyewidencjonujesz je w systemie Linux. Zmiana końców wierszy plików zmienia wartości skrótów SHA-256. Aby uniknąć tego problemu, rozważ [użycie `.gitattributes` programu do traktowania artefaktów kompilacji jako `binary` plików](https://git-scm.com/book/en/v2/Customizing-Git-Git-Attributes).

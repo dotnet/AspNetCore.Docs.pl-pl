@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/14/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/configure-trimmer
-ms.openlocfilehash: 57d8f069c79b558020253968d736f350bc8a6f03
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 337b188d3c0aeac9c5c635ebca265b9a35c6904d
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90721739"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93055805"
 ---
 # <a name="configure-the-trimmer-for-aspnet-core-no-locblazor"></a>Skonfiguruj element dostosowujący dla ASP.NET Core Blazor
 
@@ -44,7 +45,7 @@ Przycinanie aplikacji .NET można wyłączyć, ustawiając właściwość progra
 ```
 Dodatkowe opcje konfigurowania elementu dostosowującego można znaleźć w [opcjach przycinania](/dotnet/core/deploying/trimming-options).
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Przycinanie samodzielnych wdrożeń i plików wykonywalnych](/dotnet/core/deploying/trim-self-contained)
 * <xref:blazor/webassembly-performance-best-practices#intermediate-language-il-trimming>

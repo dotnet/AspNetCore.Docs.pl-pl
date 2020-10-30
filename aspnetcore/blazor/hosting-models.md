@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/11/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,28 +19,28 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: 0830214029d59d0820ed3c5806267c766314c74f
-ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
+ms.openlocfilehash: 1ec1f699d3beb5dbbc3851d9e3b6b1d3faf64cfd
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/11/2020
-ms.locfileid: "90009677"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93055675"
 ---
 # <a name="aspnet-core-no-locblazor-hosting-models"></a>ASP.NET Core Blazor modele hostingu
 
 Autor [Daniel Roth](https://github.com/danroth27)
 
-Blazorto platforma internetowa służąca do uruchamiania programu w przeglądarce w programie .NET Runtime [WebAssembly](https://webassembly.org/)( *Blazor WebAssembly* ) lub po stronie serwera w ASP.NET Core ( *Blazor Server* ). Niezależnie od modelu hostingu modele aplikacji i składników *są takie same*.
+Blazorto platforma internetowa służąca do uruchamiania programu w przeglądarce w programie .NET Runtime [WebAssembly](https://webassembly.org/)( *Blazor WebAssembly* ) lub po stronie serwera w ASP.NET Core ( *Blazor Server* ). Niezależnie od modelu hostingu modele aplikacji i składników *są takie same* .
 
 ## Blazor WebAssembly
 
-Główny model hostingu dla programu działa Blazor po stronie klienta w przeglądarce w zestawie webassembly. BlazorAplikacja, jej zależności i środowisko uruchomieniowe platformy .NET są pobierane do przeglądarki. Aplikacja jest wykonywana bezpośrednio w wątku interfejsu użytkownika przeglądarki. Aktualizacje interfejsu użytkownika i obsługa zdarzeń są wykonywane w ramach tego samego procesu. Zasoby aplikacji są wdrażane jako pliki statyczne na serwerze sieci Web lub usłudze obsługującej zawartość statyczną dla klientów. Ponieważ aplikacja jest tworzona na potrzeby wdrożenia bez aplikacji ASP.NET Core wewnętrznej bazy danych, nazywana jest * Blazor WebAssembly aplikacją autonomiczną*.
+Główny model hostingu dla programu działa Blazor po stronie klienta w przeglądarce w zestawie webassembly. BlazorAplikacja, jej zależności i środowisko uruchomieniowe platformy .NET są pobierane do przeglądarki. Aplikacja jest wykonywana bezpośrednio w wątku interfejsu użytkownika przeglądarki. Aktualizacje interfejsu użytkownika i obsługa zdarzeń są wykonywane w ramach tego samego procesu. Zasoby aplikacji są wdrażane jako pliki statyczne na serwerze sieci Web lub usłudze obsługującej zawartość statyczną dla klientów. Ponieważ aplikacja jest tworzona na potrzeby wdrożenia bez aplikacji ASP.NET Core wewnętrznej bazy danych, nazywana jest *Blazor WebAssembly aplikacją autonomiczną* .
 
 ![::: No-Loc (Blazor webassembly):::: w wątku interfejsu użytkownika w przeglądarce zostanie uruchomiona aplikacja No-Loc (Blazor)::: App.](hosting-models/_static/blazor-webassembly.png)
 
-Aby utworzyć Blazor aplikację przy użyciu modelu hostingu po stronie klienta, użyj szablonu ** Blazor WebAssembly aplikacji** ( [`dotnet new blazorwasm`](/dotnet/core/tools/dotnet-new) ).
+Aby utworzyć Blazor aplikację przy użyciu modelu hostingu po stronie klienta, użyj szablonu **Blazor WebAssembly aplikacji** ( [`dotnet new blazorwasm`](/dotnet/core/tools/dotnet-new) ).
 
-Po wybraniu szablonu ** Blazor WebAssembly aplikacji** można skonfigurować aplikację do używania zaplecza ASP.NET Core, zaznaczając pole wyboru **hostowane ASP.NET Core** ( [`dotnet new blazorwasm --hosted`](/dotnet/core/tools/dotnet-new) ). Aplikacja ASP.NET Core obsługuje Blazor klientów. Aplikacja z zapleczem ASP.NET Core jest nazywana * Blazor WebAssembly aplikacją hostowaną*. Blazor WebAssemblyAplikacja może współdziałać z serwerem za pośrednictwem sieci przy użyciu wywołań interfejsu API sieci Web lub [SignalR](xref:signalr/introduction) ( <xref:tutorials/signalr-blazor-webassembly> ).
+Po wybraniu szablonu **Blazor WebAssembly aplikacji** można skonfigurować aplikację do używania zaplecza ASP.NET Core, zaznaczając pole wyboru **hostowane ASP.NET Core** ( [`dotnet new blazorwasm --hosted`](/dotnet/core/tools/dotnet-new) ). Aplikacja ASP.NET Core obsługuje Blazor klientów. Aplikacja z zapleczem ASP.NET Core jest nazywana *Blazor WebAssembly aplikacją hostowaną* . Blazor WebAssemblyAplikacja może współdziałać z serwerem za pośrednictwem sieci przy użyciu wywołań interfejsu API sieci Web lub [SignalR](xref:signalr/introduction) ( <xref:tutorials/signalr-blazor-webassembly> ).
 
 `blazor.webassembly.js`Skrypt jest dostarczany przez strukturę i dojścia:
 
@@ -60,7 +61,7 @@ Istnieją Downsides do Blazor WebAssembly hostingu:
 * Rozmiar pobieranych plików jest większy i ładowanie aplikacji trwa dłużej.
 * Środowisko uruchomieniowe platformy .NET i obsługa narzędzi są mniej dojrzałe. Na przykład istnieją ograniczenia dotyczące obsługi [.NET Standard](/dotnet/standard/net-standard) i debugowania.
 
-Model hostowanej Blazor aplikacji obsługuje [kontenery platformy Docker](/dotnet/standard/microservices-architecture/container-docker-introduction/index). Kliknij prawym przyciskiem myszy projekt serwera w programie Visual Studio i wybierz polecenie **Dodaj**  >  **obsługę platformy Docker**.
+Model hostowanej Blazor aplikacji obsługuje [kontenery platformy Docker](/dotnet/standard/microservices-architecture/container-docker-introduction/index). Kliknij prawym przyciskiem myszy projekt serwera w programie Visual Studio i wybierz polecenie **Dodaj**  >  **obsługę platformy Docker** .
 
 ## Blazor Server
 
@@ -68,7 +69,7 @@ W Blazor Server modelu hostingu aplikacja jest wykonywana na serwerze z poziomu 
 
 ![Przeglądarka współdziała z aplikacją (hostowaną wewnątrz aplikacji ASP.NET Core) na serwerze za pośrednictwem::: No-Loc (Sygnalizującer):: Connection.](hosting-models/_static/blazor-server.png)
 
-Aby utworzyć Blazor aplikację przy użyciu Blazor Server modelu hostingu, użyj szablonu ** Blazor Server aplikacji** ASP.NET Core ( [`dotnet new blazorserver`](/dotnet/core/tools/dotnet-new) ). Aplikacja ASP.NET Core hostuje Blazor Server aplikację i tworzy SignalR punkt końcowy, do którego klienci nawiązują połączenie.
+Aby utworzyć Blazor aplikację przy użyciu Blazor Server modelu hostingu, użyj szablonu **Blazor Server aplikacji** ASP.NET Core ( [`dotnet new blazorserver`](/dotnet/core/tools/dotnet-new) ). Aplikacja ASP.NET Core hostuje Blazor Server aplikację i tworzy SignalR punkt końcowy, do którego klienci nawiązują połączenie.
 
 Aplikacja ASP.NET Core odwołuje się `Startup` do klasy aplikacji do dodania:
 
@@ -86,7 +87,7 @@ Blazor ServerModel hostingu oferuje kilka korzyści:
 * Baza kodu platformy .NET/C#, w tym kod składnika aplikacji, nie jest obsługiwana dla klientów.
 
 > [!IMPORTANT]
-> Blazor ServerAplikacja jest przedstawiona w odpowiedzi na pierwsze żądanie klienta, która konfiguruje stan interfejsu użytkownika na serwerze. Gdy klient próbuje utworzyć SignalR połączenie, **Klient musi ponownie nawiązać połączenie z tym samym serwerem**. Blazor Server aplikacje korzystające z więcej niż jednego serwera wewnętrznej bazy danych powinny implementować *sesje usługi Sticky Notes* dla SignalR połączeń. Aby uzyskać więcej informacji, zobacz sekcję [połączenie z serwerem](#connection-to-the-server) .
+> Blazor ServerAplikacja jest przedstawiona w odpowiedzi na pierwsze żądanie klienta, która konfiguruje stan interfejsu użytkownika na serwerze. Gdy klient próbuje utworzyć SignalR połączenie, **Klient musi ponownie nawiązać połączenie z tym samym serwerem** . Blazor Server aplikacje korzystające z więcej niż jednego serwera wewnętrznej bazy danych powinny implementować *sesje usługi Sticky Notes* dla SignalR połączeń. Aby uzyskać więcej informacji, zobacz sekcję [połączenie z serwerem](#connection-to-the-server) .
 
 Istnieją Downsides do Blazor Server hostingu:
 
@@ -95,7 +96,7 @@ Istnieją Downsides do Blazor Server hostingu:
 * Skalowalność jest wyzwaniem dla aplikacji z wieloma użytkownikami. Serwer musi zarządzać wieloma połączeniami klientów i obsługiwać stan klienta.
 * Do obsłużynia aplikacji wymagany jest serwer ASP.NET Core. Scenariusze wdrażania bez użycia serwera nie są możliwe (na przykład w celu obsługi aplikacji z sieci CDN).
 
-Blazor ServerModel aplikacji obsługuje [kontenery platformy Docker](/dotnet/standard/microservices-architecture/container-docker-introduction/index). Kliknij prawym przyciskiem myszy projekt w programie Visual Studio i wybierz polecenie **Dodaj**  >  **obsługę platformy Docker**.
+Blazor ServerModel aplikacji obsługuje [kontenery platformy Docker](/dotnet/standard/microservices-architecture/container-docker-introduction/index). Kliknij prawym przyciskiem myszy projekt w programie Visual Studio i wybierz polecenie **Dodaj**  >  **obsługę platformy Docker** .
 
 ### <a name="comparison-to-server-rendered-ui"></a>Porównanie z renderowanym przez serwer interfejsem użytkownika
 
@@ -106,12 +107,12 @@ Gdy Razor Strona lub widok jest renderowany, każdy wiersz Razor kodu EMITUJE ko
 * Cała strona zostanie ponownie przerenderowana na tekst HTML.
 * Strona jest wysyłana do klienta.
 
-BlazorAplikacja składa się z elementów wielokrotnego użytku interfejsu użytkownika o nazwie *Components*. Składnik zawiera kod C#, znacznik i inne składniki. Gdy składnik jest renderowany, program Blazor tworzy wykres dołączonych składników podobny do Document Object Model HTML lub XML (dom). Ten wykres zawiera stan składnika przechowywany w właściwościach i polach. Blazor oblicza wykres składnika, aby utworzyć binarną reprezentację znacznika. Format binarny może:
+BlazorAplikacja składa się z elementów wielokrotnego użytku interfejsu użytkownika o nazwie *Components* . Składnik zawiera kod C#, znacznik i inne składniki. Gdy składnik jest renderowany, program Blazor tworzy wykres dołączonych składników podobny do Document Object Model HTML lub XML (dom). Ten wykres zawiera stan składnika przechowywany w właściwościach i polach. Blazor oblicza wykres składnika, aby utworzyć binarną reprezentację znacznika. Format binarny może:
 
 * Włączono tekst HTML (podczas renderowania prerenderingu &dagger; ).
 * Służy do wydajnej aktualizacji znaczników podczas normalnego renderowania.
 
-&dagger;*Renderowanie*wstępnie: żądany Razor składnik jest kompilowany na serwerze do statycznego kodu HTML i wysyłany do klienta, gdzie jest renderowany dla użytkownika. Po nawiązaniu połączenia między klientem a serwerem, statycznie renderowane elementy składnika są zastępowane elementami interaktywnymi. Renderowanie w czasie konwersji sprawia, że aplikacja będzie bardziej odpowiadać użytkownikowi.
+&dagger;*Renderowanie* wstępnie: żądany Razor składnik jest kompilowany na serwerze do statycznego kodu HTML i wysyłany do klienta, gdzie jest renderowany dla użytkownika. Po nawiązaniu połączenia między klientem a serwerem, statycznie renderowane elementy składnika są zastępowane elementami interaktywnymi. Renderowanie w czasie konwersji sprawia, że aplikacja będzie bardziej odpowiadać użytkownikowi.
 
 Aktualizacja interfejsu użytkownika w programie Blazor jest wyzwalana przez:
 
@@ -124,13 +125,13 @@ Składnik jest usuwany po przejściu przez użytkownika na klienta. Gdy użytkow
 
 ### <a name="circuits"></a>Elektrycznych
 
-Blazor ServerAplikacja została utworzona na podstawie [ASP.NET Core SignalR ](xref:signalr/introduction). Każdy klient komunikuje się z serwerem za pośrednictwem co najmniej jednego SignalR połączenia nazywanego *obwodem*. Obwód jest Blazor abstrakcją dla SignalR połączeń, które mogą tolerować tymczasowe przerwy w sieci. Gdy Blazor klient zobaczy, że SignalR połączenie jest rozłączone, próbuje ponownie nawiązać połączenie z serwerem przy użyciu nowego SignalR połączenia.
+Blazor ServerAplikacja została utworzona na podstawie [ASP.NET Core SignalR ](xref:signalr/introduction). Każdy klient komunikuje się z serwerem za pośrednictwem co najmniej jednego SignalR połączenia nazywanego *obwodem* . Obwód jest Blazor abstrakcją dla SignalR połączeń, które mogą tolerować tymczasowe przerwy w sieci. Gdy Blazor klient zobaczy, że SignalR połączenie jest rozłączone, próbuje ponownie nawiązać połączenie z serwerem przy użyciu nowego SignalR połączenia.
 
 Każdy ekran przeglądarki (karta przeglądarki lub iframe), który jest połączony z Blazor Server aplikacją, używa SignalR połączenia. Jest to jeszcze inna ważna różnica w porównaniu z typowymi aplikacjami renderowanymi przez serwer. W aplikacji renderowanej na serwerze otwieranie tej samej aplikacji na wielu ekranach przeglądarki zazwyczaj nie jest przeważnie uwzględniane w dodatkowych wymaganiach dotyczących zasobów na serwerze. W Blazor Server aplikacji każdy ekran przeglądarki wymaga oddzielnego obwodu i oddzielnych wystąpień stanu składnika, które mają być zarządzane przez serwer programu.
 
 Blazor uważa *, że zamyka* kartę przeglądarki lub przechodzenie do zewnętrznego adresu URL. W przypadku bezpiecznego zakończenia obwód i skojarzone zasoby są natychmiast uwalniane. Klient może również odłączyć się niebezpiecznie, na przykład z powodu przerwy w działaniu sieci. Blazor Server przechowuje połączone obwody przez konfigurowalne interwały, aby umożliwić klientowi ponowne nawiązanie połączenia.
 
-Blazor Server umożliwia kodowi Definiowanie *procedury obsługi obwodu*, która umożliwia uruchamianie kodu na zmiany stanu obwodu użytkownika. Aby uzyskać więcej informacji, zobacz <xref:blazor/advanced-scenarios#blazor-server-circuit-handler>.
+Blazor Server umożliwia kodowi Definiowanie *procedury obsługi obwodu* , która umożliwia uruchamianie kodu na zmiany stanu obwodu użytkownika. Aby uzyskać więcej informacji, zobacz <xref:blazor/advanced-scenarios#blazor-server-circuit-handler>.
 
 ### <a name="ui-latency"></a>Opóźnienie interfejsu użytkownika
 

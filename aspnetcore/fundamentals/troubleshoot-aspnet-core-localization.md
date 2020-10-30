@@ -5,6 +5,7 @@ description: Dowiedz się, jak zdiagnozować problemy z lokalizacją w aplikacja
 ms.author: riande
 ms.date: 01/24/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/troubleshoot-aspnet-core-localization
-ms.openlocfilehash: 1cb7fb61063bf888819e940476f27c3adafa24de
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 995db4c8c9d0c0f1f77b1fd3665e707975406a7f
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88629928"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053621"
 ---
 # <a name="troubleshoot-aspnet-core-localization"></a>Rozwiązywanie problemów z lokalizacją ASP.NET Core
 
@@ -117,4 +118,4 @@ Gdy główna przestrzeń nazw zestawu różni się od nazwy zestawu, lokalizacja
 
 ## <a name="resources--build-action"></a>Akcja kompilacji & zasobów
 
-W przypadku używania plików zasobów do lokalizacji należy pamiętać, że mają one odpowiednią akcję kompilacji. Powinny to być **zasoby osadzone**, w przeciwnym razie `ResourceStringLocalizer` nie można znaleźć tych zasobów.
+W przypadku używania plików zasobów do lokalizacji należy pamiętać, że mają one odpowiednią akcję kompilacji. Powinny to być **zasoby osadzone** , w przeciwnym razie `ResourceStringLocalizer` nie można znaleźć tych zasobów.

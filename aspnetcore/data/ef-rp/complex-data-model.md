@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/complex-data-model
-ms.openlocfilehash: 55269c6985534b49cc2567b2d197e46d9b7b1fd7
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 1ac9d6303daac82f3973c5d027fe1f453dc32e02
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722530"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93054102"
 ---
 # <a name="part-5-no-locrazor-pages-with-ef-core-in-aspnet-core---data-model"></a>Część 5, Razor strony z EF Core w modelu ASP.NET Core — dane
 
@@ -70,7 +71,7 @@ Poprzedni kod dodaje `FullName` Właściwość i dodaje następujące atrybuty d
 
 W przypadku dat rejestracji uczniów wszystkie strony wyświetlają teraz godzinę i datę, chociaż tylko data jest ważna. Używając atrybutów adnotacji danych, można wprowadzić jedną zmianę kodu, która naprawi format wyświetlania na każdej stronie, która wyświetla dane. 
 
-Atrybut [DataType](/dotnet/api/system.componentmodel.dataannotations.datatypeattribute) określa typ danych, który jest bardziej szczegółowy niż typ wewnętrzny bazy danych. W tym przypadku należy wyświetlić tylko datę, a nie datę i godzinę. [Wyliczenie DataType](/dotnet/api/system.componentmodel.dataannotations.datatype) zawiera wiele typów danych, takich jak data, godzina, numer telefonu, waluta, EmailAddress itp. Ten `DataType` atrybut może również umożliwić aplikacji automatyczne udostępnianie funkcji specyficznych dla typu. Na przykład:
+Atrybut [DataType](/dotnet/api/system.componentmodel.dataannotations.datatypeattribute) określa typ danych, który jest bardziej szczegółowy niż typ wewnętrzny bazy danych. W tym przypadku należy wyświetlić tylko datę, a nie datę i godzinę. [Wyliczenie DataType](/dotnet/api/system.componentmodel.dataannotations.datatype) zawiera wiele typów danych, takich jak data, godzina, numer telefonu, waluta, EmailAddress itp. Ten `DataType` atrybut może również umożliwić aplikacji automatyczne udostępnianie funkcji specyficznych dla typu. Przykład:
 
 * `mailto:`Łącze jest tworzone automatycznie dla `DataType.EmailAddress` .
 * Selektor daty jest dostępny `DataType.Date` w większości przeglądarek.
@@ -236,7 +237,7 @@ W tym samouczku sposób, w jaki można to zrobić, jest usunięcie i ponowne utw
 
 * Uruchom aplikację i przejdź do strony uczniów.
 * Należy zauważyć, że czasy nie są wprowadzane ani wyświetlane wraz z datami.
-* Wybierz pozycję **Utwórz nową**, a następnie spróbuj wprowadzić nazwę dłuższą niż 50 znaków.
+* Wybierz pozycję **Utwórz nową** , a następnie spróbuj wprowadzić nazwę dłuższą niż 50 znaków.
 
 > [!Note]
 > W poniższych sekcjach Kompilowanie aplikacji na niektórych etapach powoduje wygenerowanie błędów kompilatora. Instrukcje określają, kiedy należy skompilować aplikację.
@@ -444,7 +445,7 @@ Istnieje relacja wiele-do-wielu między `Student` `Course` obiektami i. `Enrollm
 
 Na poniższej ilustracji pokazano, jak wyglądają te relacje w diagramie jednostek. (Ten diagram został wygenerowany przy użyciu [narzędzi EF PowerShell](https://marketplace.visualstudio.com/items?itemName=ErikEJ.EntityFramework6PowerToolsCommunityEdition) dla programu EF 6. x. Tworzenie diagramu nie jest częścią samouczka.
 
-![Student-kurs wiele do wielu relacji](complex-data-model/_static/student-course.png)
+![Student-Course wiele do wielu relacji](complex-data-model/_static/student-course.png)
 
 Każda linia relacji ma 1 na jednym końcu i gwiazdkę (*) na drugim, wskazując relację jeden do wielu.
 
@@ -472,7 +473,7 @@ Modele danych rozpoczynają się od siebie i rosną. Tabele sprzężenia bez ła
 
 ### <a name="composite-key"></a>Klucz złożony
 
-Dwa FKs w `CourseAssignment` ( `InstructorID` i `CourseID` ) jednoznacznie identyfikują każdy wiersz `CourseAssignment` tabeli. `CourseAssignment` nie wymaga dedykowanego klucza podstawowego. `InstructorID`Właściwości i `CourseID` działają jako złożony klucz podstawowy. Jedynym sposobem określenia złożonego PKs do EF Core jest *interfejs API Fluent*. W następnej sekcji przedstawiono sposób konfigurowania złożonego klucza podstawowego.
+Dwa FKs w `CourseAssignment` ( `InstructorID` i `CourseID` ) jednoznacznie identyfikują każdy wiersz `CourseAssignment` tabeli. `CourseAssignment` nie wymaga dedykowanego klucza podstawowego. `InstructorID`Właściwości i `CourseID` działają jako złożony klucz podstawowy. Jedynym sposobem określenia złożonego PKs do EF Core jest *interfejs API Fluent* . W następnej sekcji przedstawiono sposób konfigurowania złożonego klucza podstawowego.
 
 Klucz złożony gwarantuje, że:
 
@@ -537,7 +538,7 @@ Na powyższym diagramie przedstawiono:
 
 ## <a name="seed-the-database"></a>Wypełnianie bazy danych
 
-Zaktualizuj kod w *danych/Dbinitializeer. cs*:
+Zaktualizuj kod w *danych/Dbinitializeer. cs* :
 
 [!code-csharp[](intro/samples/cu30/Data/DbInitializer.cs)]
 
@@ -590,7 +591,7 @@ W następnej sekcji zobaczysz, jak uniknąć tego błędu.
 Teraz, gdy masz już istniejącą bazę danych, musisz się zastanowić, jak zastosować do niej zmiany. Ten samouczek przedstawia dwie alternatywy:
 
 * [Porzuć i ponownie utwórz bazę danych](#drop). Wybierz tę sekcję, jeśli używasz oprogramowania SQLite.
-* [Zastosuj migrację do istniejącej bazy danych](#applyexisting). Instrukcje w tej sekcji działają tylko w przypadku SQL Server, a **nie dla oprogramowania SQLite**. 
+* [Zastosuj migrację do istniejącej bazy danych](#applyexisting). Instrukcje w tej sekcji działają tylko w przypadku SQL Server, a **nie dla oprogramowania SQLite** . 
 
 Dowolny wybór działa dla SQL Server. Chociaż metoda Apply-Migration jest bardziej złożona i czasochłonna, jest to preferowane podejście do rzeczywistych środowisk produkcyjnych. 
 
@@ -649,7 +650,7 @@ Otwórz bazę danych w programie SSOX:
 
 * Zapoznaj się z tabelą **CourseAssignment** :
 
-  * Kliknij prawym przyciskiem myszy tabelę **CourseAssignment** , a następnie wybierz polecenie **Wyświetl dane**.
+  * Kliknij prawym przyciskiem myszy tabelę **CourseAssignment** , a następnie wybierz polecenie **Wyświetl dane** .
   * Sprawdź, czy tabela **CourseAssignment** zawiera dane.
 
   ![CourseAssignment dane w SSOX](complex-data-model/_static/ssox-ci-data.png)
@@ -760,7 +761,7 @@ Aktualizuj *modele/uczniów. cs* przy użyciu następującego wyróżnionego kod
 
 [!code-csharp[](intro/samples/cu21/Models/Student.cs?name=snippet_DataType&highlight=3,12-13)]
 
-Atrybut [DataType](/dotnet/api/system.componentmodel.dataannotations.datatypeattribute) określa typ danych, który jest bardziej szczegółowy niż typ wewnętrzny bazy danych. W tym przypadku należy wyświetlić tylko datę, a nie datę i godzinę. [Wyliczenie DataType](/dotnet/api/system.componentmodel.dataannotations.datatype) zawiera wiele typów danych, takich jak data, godzina, numer telefonu, waluta, EmailAddress itp. Ten `DataType` atrybut może również umożliwić aplikacji automatyczne udostępnianie funkcji specyficznych dla typu. Na przykład:
+Atrybut [DataType](/dotnet/api/system.componentmodel.dataannotations.datatypeattribute) określa typ danych, który jest bardziej szczegółowy niż typ wewnętrzny bazy danych. W tym przypadku należy wyświetlić tylko datę, a nie datę i godzinę. [Wyliczenie DataType](/dotnet/api/system.componentmodel.dataannotations.datatype) zawiera wiele typów danych, takich jak data, godzina, numer telefonu, waluta, EmailAddress itp. Ten `DataType` atrybut może również umożliwić aplikacji automatyczne udostępnianie funkcji specyficznych dla typu. Przykład:
 
 * `mailto:`Łącze jest tworzone automatycznie dla `DataType.EmailAddress` .
 * Selektor daty jest dostępny `DataType.Date` w większości przeglądarek.
@@ -802,11 +803,11 @@ Poprzedni kod ogranicza nazwy do nie więcej niż 50 znaków. Ten `StringLength`
 [RegularExpression(@"^[A-Z]+[a-zA-Z]*$")]
 ```
 
-Uruchom aplikację: 
+Uruchom aplikację:
 
 * Przejdź do strony uczniów.
-* Wybierz pozycję **Utwórz nową**, a następnie wprowadź nazwę o długości większej niż 50 znaków.
-* Wybierz pozycję **Utwórz**, a po stronie klienta zostanie wyświetlony komunikat o błędzie.
+* Wybierz pozycję **Utwórz nową** , a następnie wprowadź nazwę o długości większej niż 50 znaków.
+* Wybierz pozycję **Utwórz** , a po stronie klienta zostanie wyświetlony komunikat o błędzie.
 
 ![Strona indeksu studentów przedstawiająca błędy długości ciągu](complex-data-model/_static/string-length-errors.png)
 
@@ -1147,7 +1148,7 @@ Istnieje relacja wiele-do-wielu między `Student` `Course` obiektami i. `Enrollm
 
 Na poniższej ilustracji pokazano, jak wyglądają te relacje w diagramie jednostek. (Ten diagram został wygenerowany przy użyciu [narzędzi EF PowerShell](https://marketplace.visualstudio.com/items?itemName=ErikEJ.EntityFramework6PowerToolsCommunityEdition) dla programu EF 6. x. Tworzenie diagramu nie jest częścią samouczka.
 
-![Student-kurs wiele do wielu relacji](complex-data-model/_static/student-course.png)
+![Student-Course wiele do wielu relacji](complex-data-model/_static/student-course.png)
 
 Każda linia relacji ma 1 na jednym końcu i gwiazdkę (*) na drugim, wskazując relację jeden do wielu.
 
@@ -1180,7 +1181,7 @@ Modele danych rozpoczynają się od siebie i rosną. Sprzężenia bez ładunku (
 
 ### <a name="composite-key"></a>Klucz złożony
 
-FKs nie dopuszcza wartości null. Dwa FKs w `CourseAssignment` ( `InstructorID` i `CourseID` ) jednoznacznie identyfikują każdy wiersz `CourseAssignment` tabeli. `CourseAssignment` nie wymaga dedykowanego klucza podstawowego. `InstructorID`Właściwości i `CourseID` działają jako złożony klucz podstawowy. Jedynym sposobem określenia złożonego PKs do EF Core jest *interfejs API Fluent*. W następnej sekcji przedstawiono sposób konfigurowania złożonego klucza podstawowego.
+FKs nie dopuszcza wartości null. Dwa FKs w `CourseAssignment` ( `InstructorID` i `CourseID` ) jednoznacznie identyfikują każdy wiersz `CourseAssignment` tabeli. `CourseAssignment` nie wymaga dedykowanego klucza podstawowego. `InstructorID`Właściwości i `CourseID` działają jako złożony klucz podstawowy. Jedynym sposobem określenia złożonego PKs do EF Core jest *interfejs API Fluent* . W następnej sekcji przedstawiono sposób konfigurowania złożonego klucza podstawowego.
 
 Klucz złożony gwarantuje:
 
@@ -1195,7 +1196,7 @@ Klucz złożony gwarantuje:
 
 ## <a name="update-the-db-context"></a>Aktualizowanie kontekstu bazy danych
 
-Dodaj następujący wyróżniony kod do *danych/SchoolContext. cs*:
+Dodaj następujący wyróżniony kod do *danych/SchoolContext. cs* :
 
 [!code-csharp[](intro/samples/cu21/Data/SchoolContext.cs?name=snippet_BeforeInheritance&highlight=15-18,25-31)]
 
@@ -1245,7 +1246,7 @@ Na powyższym diagramie przedstawiono:
 
 ## <a name="seed-the-db-with-test-data"></a>Wypełnianie bazy danych danymi testowymi
 
-Zaktualizuj kod w *danych/Dbinitializeer. cs*:
+Zaktualizuj kod w *danych/Dbinitializeer. cs* :
 
 [!code-csharp[](intro/samples/cu21/Data/DbInitializer.cs?name=snippet_Final)]
 
@@ -1289,7 +1290,7 @@ database "ContosoUniversity", table "dbo.Department", column 'DepartmentID'.
 Teraz, gdy masz już istniejącą bazę danych, musisz się zastanowić, jak zastosować w niej przyszłe zmiany. Ten samouczek przedstawia dwa podejścia:
 
 * [Porzuć i ponownie utwórz bazę danych](#drop)
-* [Zastosuj migrację do istniejącej bazy danych](#applyexisting). Chociaż ta metoda jest bardziej złożona i czasochłonna, jest preferowanym podejściem dla rzeczywistych środowisk produkcyjnych. **Uwaga**: jest to opcjonalna sekcja samouczka. Możesz wykonać kroki porzucenia i utworzyć ponownie i pominąć tę sekcję. Jeśli chcesz wykonać kroki opisane w tej sekcji, nie wykonuj kroków usuwania i ponownego tworzenia. 
+* [Zastosuj migrację do istniejącej bazy danych](#applyexisting). Chociaż ta metoda jest bardziej złożona i czasochłonna, jest preferowanym podejściem dla rzeczywistych środowisk produkcyjnych. **Uwaga** : jest to opcjonalna sekcja samouczka. Możesz wykonać kroki porzucenia i utworzyć ponownie i pominąć tę sekcję. Jeśli chcesz wykonać kroki opisane w tej sekcji, nie wykonuj kroków usuwania i ponownego tworzenia. 
 
 <a name="drop"></a>
 
@@ -1332,7 +1333,7 @@ Otwórz bazę danych w programie SSOX:
 
 Zapoznaj się z tabelą **CourseAssignment** :
 
-* Kliknij prawym przyciskiem myszy tabelę **CourseAssignment** , a następnie wybierz polecenie **Wyświetl dane**.
+* Kliknij prawym przyciskiem myszy tabelę **CourseAssignment** , a następnie wybierz polecenie **Wyświetl dane** .
 * Sprawdź, czy tabela **CourseAssignment** zawiera dane.
 
 ![CourseAssignment dane w SSOX](complex-data-model/_static/ssox-ci-data.png)
@@ -1378,7 +1379,7 @@ Aplikacja produkcyjna:
 
 Następny samouczek obejmuje powiązane dane.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Dodatkowe zasoby
 
 * [Wersja usługi YouTube w tym samouczku (część 1)](https://www.youtube.com/watch?v=0n2f0ObgCoA)
 * [Wersja usługi YouTube w tym samouczku (część 2)](https://www.youtube.com/watch?v=Je0Z5K1TNmY)

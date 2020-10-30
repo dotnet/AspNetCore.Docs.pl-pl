@@ -6,6 +6,7 @@ ms.author: riande
 ms.date: 03/27/2019
 ms.topic: tutorial
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/sort-filter-page
-ms.openlocfilehash: 16a0b264f8395670b02d091afd44e71d0dad4d0b
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 8e425d413471912c763c4892a90e9d12039efec4
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88629356"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053985"
 ---
 # <a name="tutorial-add-sorting-filtering-and-paging---aspnet-mvc-with-ef-core"></a>Samouczek: Dodawanie sortowania, filtrowania i stronicowania — ASP.NET MVC z EF Core
 
@@ -52,7 +53,7 @@ Aby dodać sortowanie na stronie indeksu ucznia, należy zmienić `Index` metod�
 
 ### <a name="add-sorting-functionality-to-the-index-method"></a>Dodawanie funkcji sortowania do metody index
 
-W *StudentsController.cs*Zastąp `Index` metodę następującym kodem:
+W *StudentsController.cs* Zastąp `Index` metodę następującym kodem:
 
 [!code-csharp[](intro/samples/cu/Controllers/StudentsController.cs?name=snippet_SortOnly)]
 
@@ -79,7 +80,7 @@ Ten kod może uzyskać pełne informacje z dużą liczbą kolumn. [W ostatnim sa
 
 ### <a name="add-column-heading-hyperlinks-to-the-student-index-view"></a>Dodawanie hiperłączy nagłówka kolumny do widoku indeksu ucznia
 
-Zastąp kod w *widokach/uczniów/index. cshtml*, używając poniższego kodu do dodawania hiperłączy nagłówka kolumny. Zmienione wiersze są wyróżnione.
+Zastąp kod w *widokach/uczniów/index. cshtml* , używając poniższego kodu do dodawania hiperłączy nagłówka kolumny. Zmienione wiersze są wyróżnione.
 
 [!code-cshtml[](intro/samples/cu/Views/Students/Index2.cshtml?highlight=16,22)]
 
@@ -95,7 +96,7 @@ Aby dodać filtrowanie do strony indeksu uczniów, należy dodać pole tekstowe 
 
 ### <a name="add-filtering-functionality-to-the-index-method"></a>Dodawanie funkcji filtrowania do metody index
 
-W *StudentsController.cs*Zastąp `Index` metodę następującym kodem (zmiany są wyróżnione).
+W *StudentsController.cs* Zastąp `Index` metodę następującym kodem (zmiany są wyróżnione).
 
 [!code-csharp[](intro/samples/cu/Controllers/StudentsController.cs?name=snippet_SortFilter&highlight=1,5,9-13)]
 
@@ -104,11 +105,11 @@ Dodano `searchString` parametr do `Index` metody. Wartość ciągu wyszukiwania 
 > [!NOTE]
 > W tym miejscu wywoływana jest `Where` Metoda `IQueryable` obiektu, a filtr zostanie przetworzony na serwerze. W niektórych scenariuszach może być wywoływana `Where` Metoda jako metoda rozszerzająca w kolekcji w pamięci. (Na przykład załóżmy, że zmienisz odwołanie na `_context.Students` tak, aby zamiast EF `DbSet` odwołuje się do metody repozytorium, która zwraca `IEnumerable` kolekcję). Wyniki byłyby zwykle takie same, ale w niektórych przypadkach mogą być różne.
 >
->Na przykład .NET Framework implementacja `Contains` metody domyślnie wykonuje porównanie z uwzględnieniem wielkości liter, ale w SQL Server jest określana przez ustawienie sortowania wystąpienia SQL Server. Ustawienie domyślne nie uwzględnia wielkości liter. Można wywołać metodę, `ToUpper` Aby test jawnie nie uwzględniał wielkości liter:  *gdzie (s => s. LastName. ToUpper (). Zawiera (Ciągwyszukiwania. ToUpper ())*. Dzięki temu wyniki są takie same, jeśli później zmienisz kod w celu użycia repozytorium, które zwraca `IEnumerable` kolekcję zamiast `IQueryable` obiektu. (Po wywołaniu `Contains` metody w `IEnumerable` kolekcji jest pobierana .NET Framework implementacja. po wywołaniu dla `IQueryable` obiektu zostanie wykorzystana implementacja dostawcy bazy danych). Istnieje jednak spadek wydajności dla tego rozwiązania. `ToUpper`Kod mógłby umieścić funkcję w klauzuli WHERE instrukcji SELECT TSQL. Uniemożliwi to Optymalizatorowi użycie indeksu. Mając na względzie, że program SQL jest przede wszystkim instalowany jako bez uwzględniania wielkości liter, najlepszym rozwiązaniem jest uniknięcie `ToUpper` kodu do momentu przeprowadzenia migracji do magazynu danych z uwzględnieniem wielkości liter.
+>Na przykład .NET Framework implementacja `Contains` metody domyślnie wykonuje porównanie z uwzględnieniem wielkości liter, ale w SQL Server jest określana przez ustawienie sortowania wystąpienia SQL Server. Ustawienie domyślne nie uwzględnia wielkości liter. Można wywołać metodę, `ToUpper` Aby test jawnie nie uwzględniał wielkości liter:  *gdzie (s => s. LastName. ToUpper (). Zawiera (Ciągwyszukiwania. ToUpper ())* . Dzięki temu wyniki są takie same, jeśli później zmienisz kod w celu użycia repozytorium, które zwraca `IEnumerable` kolekcję zamiast `IQueryable` obiektu. (Po wywołaniu `Contains` metody w `IEnumerable` kolekcji jest pobierana .NET Framework implementacja. po wywołaniu dla `IQueryable` obiektu zostanie wykorzystana implementacja dostawcy bazy danych). Istnieje jednak spadek wydajności dla tego rozwiązania. `ToUpper`Kod mógłby umieścić funkcję w klauzuli WHERE instrukcji SELECT TSQL. Uniemożliwi to Optymalizatorowi użycie indeksu. Mając na względzie, że program SQL jest przede wszystkim instalowany jako bez uwzględniania wielkości liter, najlepszym rozwiązaniem jest uniknięcie `ToUpper` kodu do momentu przeprowadzenia migracji do magazynu danych z uwzględnieniem wielkości liter.
 
 ### <a name="add-a-search-box-to-the-student-index-view"></a>Dodawanie pola wyszukiwania do widoku indeksu ucznia
 
-W obszarze *widoki/uczniów/index. cshtml*Dodaj wyróżniony kod bezpośrednio przed otwierającym tagiem tabeli, aby utworzyć podpis, pole tekstowe i przycisk **wyszukiwania** .
+W obszarze *widoki/uczniów/index. cshtml* Dodaj wyróżniony kod bezpośrednio przed otwierającym tagiem tabeli, aby utworzyć podpis, pole tekstowe i przycisk **wyszukiwania** .
 
 [!code-cshtml[](intro/samples/cu/Views/Students/Index3.cshtml?range=9-23&highlight=5-13)]
 
@@ -144,7 +145,7 @@ W folderze projektu Utwórz `PaginatedList.cs` , a następnie zastąp kod szablo
 
 ## <a name="add-paging-to-index-method"></a>Dodaj stronicowanie do metody index
 
-W *StudentsController.cs*Zastąp `Index` metodę poniższym kodem.
+W *StudentsController.cs* Zastąp `Index` metodę poniższym kodem.
 
 [!code-csharp[](intro/samples/cu/Controllers/StudentsController.cs?name=snippet_SortFilterPage&highlight=1-5,7,11-18,45-46)]
 
@@ -187,7 +188,7 @@ return View(await PaginatedList<Student>.CreateAsync(students.AsNoTracking(), pa
 
 ## <a name="add-paging-links"></a>Dodaj linki stronicowania
 
-W obszarze *widoki/studenci/index. cshtml*Zastąp istniejący kod następującym kodem. Zmiany są wyróżnione.
+W obszarze *widoki/studenci/index. cshtml* Zastąp istniejący kod następującym kodem. Zmiany są wyróżnione.
 
 [!code-cshtml[](intro/samples/cu/Views/Students/Index.cshtml?highlight=1,27,30,33,61-79)]
 
@@ -235,7 +236,7 @@ W nowym folderze Dodaj plik klasy *EnrollmentDateGroup.cs* i Zastąp kod szablon
 
 ### <a name="modify-the-home-controller"></a>Modyfikowanie kontrolera macierzystego
 
-W *HomeController.cs*Dodaj następujące instrukcje using na początku pliku:
+W *HomeController.cs* Dodaj następujące instrukcje using na początku pliku:
 
 [!code-csharp[](intro/samples/cu/Controllers/HomeController.cs?name=snippet_Usings1)]
 

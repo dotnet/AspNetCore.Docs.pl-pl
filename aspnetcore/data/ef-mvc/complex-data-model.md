@@ -7,6 +7,7 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/complex-data-model
-ms.openlocfilehash: 07f5e910236f78105c039e462ab51d6e62b09439
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: cee9e9eb4c5435f3f63f7d1d04f131d88effe9f6
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88626938"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93054479"
 ---
 # <a name="tutorial-create-a-complex-data-model---aspnet-mvc-with-ef-core"></a>Samouczek: Tworzenie złożonego modelu danych — ASP.NET MVC z EF Core
 
@@ -61,7 +62,7 @@ W tej sekcji dowiesz się, jak dostosować model danych przy użyciu atrybutów,
 
 W przypadku dat rejestracji uczniów na wszystkich stronach sieci Web jest obecnie wyświetlany czas wraz z datą, chociaż wszystko, co jest ważne dla tego pola, to Data. Używając atrybutów adnotacji danych, można wprowadzić jedną zmianę kodu, która naprawi format wyświetlania w każdym widoku, który wyświetla dane. Aby zapoznać się z przykładem, jak to zrobić, Dodaj atrybut do `EnrollmentDate` właściwości w `Student` klasie.
 
-W *modelach/student. cs*Dodaj `using` instrukcję do `System.ComponentModel.DataAnnotations` przestrzeni nazw i Dodaj `DataType` `DisplayFormat` atrybuty i do `EnrollmentDate` właściwości, jak pokazano w następującym przykładzie:
+W *modelach/student. cs* Dodaj `using` instrukcję do `System.ComponentModel.DataAnnotations` przestrzeni nazw i Dodaj `DataType` `DisplayFormat` atrybuty i do `EnrollmentDate` właściwości, jak pokazano w następującym przykładzie:
 
 [!code-csharp[](intro/samples/cu/Models/Student.cs?name=snippet_DataType&highlight=3,12-13)]
 
@@ -117,11 +118,11 @@ dotnet ef migrations add MaxLengthOnNames
 dotnet ef database update
 ```
 
-`migrations add`Polecenie ostrzega o utracie danych, ponieważ zmiana powoduje krótszą długość dla dwóch kolumn.  Migracja tworzy plik o nazwie * \<timeStamp> _MaxLengthOnNames. cs*. Ten plik zawiera kod w `Up` metodzie, która zaktualizuje bazę danych w taki sposób, aby była zgodna z bieżącym modelem danych. `database update`Polecenie uruchomiło ten kod.
+`migrations add`Polecenie ostrzega o utracie danych, ponieważ zmiana powoduje krótszą długość dla dwóch kolumn.  Migracja tworzy plik o nazwie *\<timeStamp> _MaxLengthOnNames. cs* . Ten plik zawiera kod w `Up` metodzie, która zaktualizuje bazę danych w taki sposób, aby była zgodna z bieżącym modelem danych. `database update`Polecenie uruchomiło ten kod.
 
 Sygnatura czasowa poprzedzona nazwą pliku migracji jest używana przez Entity Framework do porządkowania migracji. Można utworzyć wiele migracji przed uruchomieniem polecenia Update-Database, a następnie wszystkie migracje zostaną zastosowane w kolejności, w której zostały utworzone.
 
-Uruchom aplikację, wybierz kartę **uczniowie** , kliknij pozycję **Utwórz nową**, a następnie spróbuj wprowadzić nazwy dłuższe niż 50 znaków. Aplikacja powinna uniemożliwiać wykonanie tej czynności. 
+Uruchom aplikację, wybierz kartę **uczniowie** , kliknij pozycję **Utwórz nową** , a następnie spróbuj wprowadzić nazwy dłuższe niż 50 znaków. Aplikacja powinna uniemożliwiać wykonanie tej czynności. 
 
 ### <a name="the-column-attribute"></a>Atrybut Column
 
@@ -145,7 +146,7 @@ dotnet ef migrations add ColumnFirstName
 dotnet ef database update
 ```
 
-W **Eksplorator obiektów SQL Server**Otwórz projektanta tabeli uczniów, klikając dwukrotnie tabelę **uczniów** .
+W **Eksplorator obiektów SQL Server** Otwórz projektanta tabeli uczniów, klikając dwukrotnie tabelę **uczniów** .
 
 ![Tabela studentów w SSOX po migracji](complex-data-model/_static/ssox-after-migration.png)
 
@@ -158,7 +159,7 @@ Przed zastosowaniem pierwszych dwóch migracji, kolumny nazw były typu nvarchar
 
 ![Jednostka ucznia](complex-data-model/_static/student-entity.png)
 
-W *modelach/student. cs*Zastąp kod, który został dodany wcześniej do poniższego kodu. Zmiany są wyróżnione.
+W *modelach/student. cs* Zastąp kod, który został dodany wcześniej do poniższego kodu. Zmiany są wyróżnione.
 
 [!code-csharp[](intro/samples/cu/Models/Student.cs?name=snippet_BeforeInheritance&highlight=11,13,15,18,22,24-31)]
 
@@ -187,7 +188,7 @@ Ten `Display` atrybut określa, że podpis pól tekstowych powinien mieć warto�
 
 ![Jednostka instruktora](complex-data-model/_static/instructor-entity.png)
 
-Utwórz *modele/instruktor. cs*, zastępując kod szablonu następującym kodem:
+Utwórz *modele/instruktor. cs* , zastępując kod szablonu następującym kodem:
 
 [!code-csharp[](intro/samples/cu/Models/Instructor.cs?name=snippet_BeforeInheritance)]
 
@@ -250,7 +251,7 @@ Można umieścić `[Required]` atrybut we właściwości nawigacji instruktora, 
 
 ![Jednostka kursu](complex-data-model/_static/course-entity.png)
 
-W *modelach/kurs. cs*Zastąp kod, który został dodany wcześniej do poniższego kodu. Zmiany są wyróżnione.
+W *modelach/kurs. cs* Zastąp kod, który został dodany wcześniej do poniższego kodu. Zmiany są wyróżnione.
 
 [!code-csharp[](intro/samples/cu/Models/Course.cs?name=snippet_Final&highlight=2,10,13,16,19,21,23)]
 
@@ -345,7 +346,7 @@ public ICollection<Course> Courses { get; set; }
 
 ![Jednostka rejestracji](complex-data-model/_static/enrollment-entity.png)
 
-W *modelach/rejestracji. cs*Zastąp kod, który został dodany wcześniej do poniższego kodu:
+W *modelach/rejestracji. cs* Zastąp kod, który został dodany wcześniej do poniższego kodu:
 
 [!code-csharp[](intro/samples/cu/Models/Enrollment.cs?name=snippet_Final&highlight=1-2,16)]
 
@@ -373,7 +374,7 @@ Istnieje relacja wiele-do-wielu między jednostkami uczniów i kursów, a jednos
 
 Na poniższej ilustracji pokazano, jak wyglądają te relacje w diagramie jednostek. (Ten diagram został wygenerowany przy użyciu Entity Framework narzędzia do zarządzania prawami do programu EF 6. x; Tworzenie diagramu nie jest częścią samouczka, a właśnie jest używane w tym miejscu jako ilustracja).
 
-![Student-kurs wiele do wielu relacji](complex-data-model/_static/student-course.png)
+![Student-Course wiele do wielu relacji](complex-data-model/_static/student-course.png)
 
 Każda linia relacji ma 1 na jednym końcu i gwiazdkę (*) na drugim, wskazując relację jeden do wielu.
 
@@ -481,7 +482,7 @@ Zapisz zmiany i skompiluj projekt.
 
 ## <a name="change-the-connection-string"></a>Zmień parametry połączenia
 
-Teraz masz nowy kod w `DbInitializer` klasie, który dodaje dane inicjatora dla nowych jednostek do pustej bazy danych. Aby program EF utworzył nową pustą bazę danych, należy zmienić nazwę bazy danych w parametrach połączenia w *appsettings.jsna* ContosoUniversity3 lub inną nazwę, która nie została użyta na komputerze, którego używasz.
+Teraz masz nowy kod w `DbInitializer` klasie, który dodaje dane inicjatora dla nowych jednostek do pustej bazy danych. Aby program EF utworzył nową pustą bazę danych, należy zmienić nazwę bazy danych w parametrach połączenia w *appsettings.json* ContosoUniversity3 lub innej nazwie, która nie została użyta na komputerze, którego używasz.
 
 ```json
 {
@@ -490,7 +491,7 @@ Teraz masz nowy kod w `DbInitializer` klasie, który dodaje dane inicjatora dla 
   },
 ```
 
-Zapisz zmianę w *appsettings.js*.
+Zapisz zmiany w *appsettings.json* .
 
 > [!NOTE]
 > Alternatywą dla zmiany nazwy bazy danych jest usunięcie bazy danych. Użyj **Eksplorator obiektów SQL Server** (SSOX) lub `database drop` interfejsu wiersza polecenia:

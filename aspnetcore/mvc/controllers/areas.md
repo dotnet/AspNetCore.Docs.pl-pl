@@ -5,6 +5,7 @@ description: Dowiedz się, jak obszary są funkcją ASP.NET MVC służącą do o
 ms.author: riande
 ms.date: 03/21/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/areas
-ms.openlocfilehash: 033b57f5406d0344347b2f787fa2b2fbb2da8604
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 42eec406813adce4d7edbc1ab66a1f689c4aca0e
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630253"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053530"
 ---
 # <a name="areas-in-aspnet-core"></a>Obszary w ASP.NET Core
 
@@ -62,7 +63,7 @@ Typowy ASP.NET Core aplikacja internetowa korzystająca z obszarów, kontroleró
 
 ### <a name="area-folder-structure"></a>Struktura folderów obszaru
 
-Weź pod uwagę aplikację, która ma dwie grupy logiczne, *produkty* i *usługi*. Przy użyciu obszarów struktura folderów będzie wyglądać podobnie do następujących:
+Weź pod uwagę aplikację, która ma dwie grupy logiczne, *produkty* i *usługi* . Przy użyciu obszarów struktura folderów będzie wyglądać podobnie do następujących:
 
 * Project name (Nazwa projektu)
   * Obszary
@@ -148,7 +149,7 @@ Folder główny aplikacji jest folderem zawierającym *Startup.cs* w aplikacji i
 
 ### <a name="_viewimportscshtml"></a>_ViewImports. cshtml
 
- */Views/_ViewImports. cshtml*, dla MVC i */Pages/_ViewImports. cshtml* dla Razor stron nie są importowane do widoków w obszarach. Użyj jednej z następujących metod, aby udostępnić widok Imports do wszystkich widoków:
+ */Views/_ViewImports. cshtml* , dla MVC i */Pages/_ViewImports. cshtml* dla Razor stron nie są importowane do widoków w obszarach. Użyj jednej z następujących metod, aby udostępnić widok Imports do wszystkich widoków:
 
 * Dodaj *_ViewImports. cshtml* do [folderu głównego aplikacji](#arf). *_ViewImports. cshtml* w folderze głównym aplikacji zostanie zastosowane do wszystkich widoków w aplikacji.
 * Skopiuj plik *_ViewImports. cshtml* do odpowiedniego folderu widoku w obszarze obszary.
@@ -264,7 +265,7 @@ Typowy ASP.NET Core aplikacja internetowa korzystająca z obszarów, kontroleró
 
 ### <a name="area-folder-structure"></a>Struktura folderów obszaru
 
-Weź pod uwagę aplikację, która ma dwie grupy logiczne, *produkty* i *usługi*. Przy użyciu obszarów struktura folderów będzie wyglądać podobnie do następujących:
+Weź pod uwagę aplikację, która ma dwie grupy logiczne, *produkty* i *usługi* . Przy użyciu obszarów struktura folderów będzie wyglądać podobnie do następujących:
 
 * Project name (Nazwa projektu)
   * Obszary

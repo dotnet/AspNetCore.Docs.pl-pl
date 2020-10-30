@@ -7,6 +7,7 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/migrations
-ms.openlocfilehash: 058d59834dc53b6280b8e4ff285a1860e90e257c
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 070c18db55956d79560904f53395b5001c7bce6d
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88629447"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93054037"
 ---
 # <a name="tutorial-using-the-migrations-feature---aspnet-mvc-with-ef-core"></a>Samouczek: Używanie funkcji migracji ASP.NET MVC z EF Core
 
@@ -53,7 +54,7 @@ Aby móc korzystać z migracji, można użyć **konsoli Menedżera pakietów** (
 
 ## <a name="change-the-connection-string"></a>Zmień parametry połączenia
 
-W *appsettings.jsna* pliku Zmień nazwę bazy danych w parametrach połączenia na ContosoUniversity2 lub inną nazwę, która nie została użyta na komputerze, którego używasz.
+W *appsettings.json* pliku Zmień nazwę bazy danych w parametrach połączenia na ContosoUniversity2 lub inną nazwę, która nie została użyta na komputerze, którego używasz.
 
 [!code-json[](intro/samples/cu/appsettings2.json?range=1-4)]
 
@@ -72,7 +73,7 @@ Ta zmiana konfiguruje projekt w taki sposób, aby podczas pierwszej migracji utw
 
 Zapisz zmiany i skompiluj projekt. Następnie otwórz okno polecenia i przejdź do folderu projektu. Oto szybka metoda:
 
-* W **Eksplorator rozwiązań**kliknij prawym przyciskiem myszy projekt, a następnie wybierz polecenie **Otwórz folder w Eksploratorze plików** z menu kontekstowego.
+* W **Eksplorator rozwiązań** kliknij prawym przyciskiem myszy projekt, a następnie wybierz polecenie **Otwórz folder w Eksploratorze plików** z menu kontekstowego.
 
   ![Otwórz w elemencie menu Eksploratora plików](migrations/_static/open-in-file-explorer.png)
 
@@ -97,11 +98,11 @@ info: Microsoft.EntityFrameworkCore.Infrastructure[10403]
 Done. To undo this action, use 'ef migrations remove'
 ```
 
-Jeśli zostanie wyświetlony komunikat o błędzie "*nie można uzyskać dostępu do pliku... ContosoUniversity.dll, ponieważ jest on używany przez inny proces*", znajdź ikonę IIS Express na pasku zadań systemu Windows, a następnie kliknij ją prawym przyciskiem myszy, a następnie kliknij pozycję **ContosoUniversity > Zatrzymaj witrynę**.
+Jeśli zostanie wyświetlony komunikat o błędzie " *nie można uzyskać dostępu do pliku... ContosoUniversity.dll, ponieważ jest on używany przez inny proces* ", znajdź ikonę IIS Express na pasku zadań systemu Windows, a następnie kliknij ją prawym przyciskiem myszy, a następnie kliknij pozycję **ContosoUniversity > Zatrzymaj witrynę** .
 
 ## <a name="examine-up-and-down-methods"></a>Sprawdzanie metod w górę i w dół
 
-Po wykonaniu `migrations add` polecenia EF wygenerowało kod, który spowoduje utworzenie bazy danych od podstaw. Ten kod znajduje się w folderze *migrations* w pliku o nazwie * \<timestamp> _InitialCreate. cs*. `Up`Metoda `InitialCreate` klasy tworzy tabele bazy danych, które odpowiadają zestawom jednostek modelu danych, a `Down` Metoda usuwa je, jak pokazano w poniższym przykładzie.
+Po wykonaniu `migrations add` polecenia EF wygenerowało kod, który spowoduje utworzenie bazy danych od podstaw. Ten kod znajduje się w folderze *migrations* w pliku o nazwie *\<timestamp> _InitialCreate. cs* . `Up`Metoda `InitialCreate` klasy tworzy tabele bazy danych, które odpowiadają zestawom jednostek modelu danych, a `Down` Metoda usuwa je, jak pokazano w poniższym przykładzie.
 
 [!code-csharp[](intro/samples/cu/Migrations/20170215220724_InitialCreate.cs?range=92-118)]
 
@@ -113,7 +114,7 @@ W przypadku utworzenia początkowej migracji, gdy baza danych już istnieje, kod
 
 ## <a name="the-data-model-snapshot"></a>Migawka modelu danych
 
-Migracja tworzy *migawkę* bieżącego schematu bazy danych w *migracji/SchoolContextModelSnapshot. cs*. Po dodaniu migracji, EF określa, co zmieniło się, porównując model danych z plikiem migawki.
+Migracja tworzy *migawkę* bieżącego schematu bazy danych w *migracji/SchoolContextModelSnapshot. cs* . Po dodaniu migracji, EF określa, co zmieniło się, porównując model danych z plikiem migawki.
 
 Aby usunąć migrację, użyj polecenia [migracji programu dotnet EF Remove](/ef/core/miscellaneous/cli/dotnet#dotnet-ef-migrations-remove) . `dotnet ef migrations remove` usuwa migrację i gwarantuje, że migawka zostanie prawidłowo zresetowana. Jeśli `dotnet ef migrations remove` to się nie powiedzie, użyj, `dotnet ef migrations remove -v` Aby uzyskać więcej informacji na temat błędu.
 

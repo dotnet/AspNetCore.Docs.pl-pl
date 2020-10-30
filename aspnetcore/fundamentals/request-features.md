@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/20/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/request-features
-ms.openlocfilehash: 879b775ba2998ee803708ebf231b5fcd363b811c
-ms.sourcegitcommit: b5ebaf42422205d212e3dade93fcefcf7f16db39
+ms.openlocfilehash: d906474b0fd291cc4a68390f390b2bf538e21eff
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92326429"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053712"
 ---
 # <a name="request-features-in-aspnet-core"></a>Zażądaj funkcji w ASP.NET Core
 
 Przez [Steve Smith](https://ardalis.com/)
 
-`HttpContext`Interfejs API używany przez aplikacje i oprogramowanie pośredniczące do przetwarzania żądań ma warstwę abstrakcji undernieth ją jako *interfejsy funkcji*. Każdy interfejs funkcji zawiera szczegółowy podzestaw funkcji uwidocznionych przez program `HttpContext` . Te interfejsy mogą być dodawane, modyfikowane, opakowane, zastępowane lub nawet usuwane przez serwer lub oprogramowanie pośredniczące, gdy żądanie jest przetwarzane bez konieczności ponownego implementowania całego programu `HttpContext` . Mogą być również używane do makietowania funkcjonalności podczas testowania.
+`HttpContext`Interfejs API używany przez aplikacje i oprogramowanie pośredniczące do przetwarzania żądań ma warstwę abstrakcji undernieth ją jako *interfejsy funkcji* . Każdy interfejs funkcji zawiera szczegółowy podzestaw funkcji uwidocznionych przez program `HttpContext` . Te interfejsy mogą być dodawane, modyfikowane, opakowane, zastępowane lub nawet usuwane przez serwer lub oprogramowanie pośredniczące, gdy żądanie jest przetwarzane bez konieczności ponownego implementowania całego programu `HttpContext` . Mogą być również używane do makietowania funkcjonalności podczas testowania.
 
 ## <a name="feature-collections"></a>Kolekcje funkcji
 

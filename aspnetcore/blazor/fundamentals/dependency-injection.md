@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/dependency-injection
-ms.openlocfilehash: 7b573c0635aafe7efcf56185c250dbab836e6cf4
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: a636498ee3fedbbf0fe021407a718f95a02f70c3
+ms.sourcegitcommit: d64bf0cbe763beda22a7728c7f10d07fc5e19262
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93056025"
+ms.lasthandoff: 11/03/2020
+ms.locfileid: "93234169"
 ---
 # <a name="aspnet-core-no-locblazor-dependency-injection"></a>ASP.NET Core Blazor wstrzykiwania zależności
 
@@ -69,7 +69,7 @@ public class Program
         var builder = WebAssemblyHostBuilder.CreateDefault(args);
         builder.Services.AddSingleton<IMyDependency, MyDependency>();
         builder.RootComponents.Add<App>("app");
-        
+
         builder.Services.AddScoped(sp => 
             new HttpClient
             {
@@ -91,7 +91,7 @@ public class Program
         var builder = WebAssemblyHostBuilder.CreateDefault(args);
         builder.Services.AddSingleton<WeatherService>();
         builder.RootComponents.Add<App>("app");
-        
+
         builder.Services.AddScoped(sp => 
             new HttpClient
             {
@@ -118,7 +118,7 @@ public class Program
         var builder = WebAssemblyHostBuilder.CreateDefault(args);
         builder.Services.AddSingleton<WeatherService>();
         builder.RootComponents.Add<App>("app");
-        
+
         builder.Services.AddScoped(sp => 
             new HttpClient
             {
@@ -217,7 +217,7 @@ Złożone usługi mogą wymagać dodatkowych usług. W poprzednim przykładzie `
 ```csharp
 public class DataAccess : IDataAccess
 {
-    public DataAccess(HttpClient client)
+    public DataAccess(HttpClient http)
     {
         ...
     }
@@ -323,7 +323,7 @@ Poniższe przykłady przedstawiają sposób wykrywania jednorazowych usług prze
 
 [!code-csharp[](dependency-injection/samples_snapshot/3.x/transient-disposables/server-startup.cs?highlight=6-8,11-32)]
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:fundamentals/dependency-injection>
 * [`IDisposable` Wskazówki dotyczące wystąpień przejściowych i współużytkowanych](xref:fundamentals/dependency-injection#idisposable-guidance-for-transient-and-shared-instances)

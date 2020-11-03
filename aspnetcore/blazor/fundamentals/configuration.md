@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/configuration
-ms.openlocfilehash: 430ea2c764e068fe47353115cbeccd2c092617cb
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: f8b1c49ab29bb8a88ca6d9785cd7ee151315e065
+ms.sourcegitcommit: d64bf0cbe763beda22a7728c7f10d07fc5e19262
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93056013"
+ms.lasthandoff: 11/03/2020
+ms.locfileid: "93234377"
 ---
 # <a name="aspnet-core-no-locblazor-configuration"></a>BlazorKonfiguracja ASP.NET Core
 
@@ -167,14 +167,14 @@ using Microsoft.Extensions.Configuration;
 
 ...
 
-var client = new HttpClient()
+var http = new HttpClient()
 {
     BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
 };
 
-builder.Services.AddScoped(sp => client);
+builder.Services.AddScoped(sp => http);
 
-using var response = await client.GetAsync("cars.json");
+using var response = await http.GetAsync("cars.json");
 using var stream = await response.Content.ReadAsStreamAsync();
 
 builder.Configuration.AddJsonStream(stream);

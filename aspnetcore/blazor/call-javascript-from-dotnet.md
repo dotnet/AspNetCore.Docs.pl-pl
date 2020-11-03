@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: 217918fb946df966d45bba130606c8101d163aaf
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 17d6087b884775a8bfcb41fe23296f508467e924
+ms.sourcegitcommit: d64bf0cbe763beda22a7728c7f10d07fc5e19262
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93056611"
+ms.lasthandoff: 11/03/2020
+ms.locfileid: "93234455"
 ---
 # <a name="call-javascript-functions-from-net-methods-in-aspnet-core-no-locblazor"></a>Wywoływanie funkcji języka JavaScript z metod .NET w ASP.NET Core Blazor
 
@@ -56,7 +56,7 @@ Kod JavaScript, taki jak kod przedstawiony w powyższym przykładzie, można ró
 
 Następujący składnik:
 
-* Wywołuje `convertArray` funkcję JavaScript przy użyciu `JSRuntime` przycisku składnika ( **`Convert Array`** ).
+* Wywołuje `convertArray` funkcję JavaScript przy użyciu `JS` przycisku składnika ( **`Convert Array`** ).
 * Po wywołaniu funkcji języka JavaScript przenoszona tablica jest konwertowana na ciąg. Ciąg jest zwracany do składnika do wyświetlenia.
 
 [!code-razor[](call-javascript-from-dotnet/samples_snapshot/call-js-example.razor?highlight=2,34-35)]
@@ -77,7 +77,7 @@ Aby użyć <xref:Microsoft.JSInterop.IJSRuntime> abstrakcji, należy zastosować
 
   [!code-csharp[](call-javascript-from-dotnet/samples_snapshot/inject-abstraction-class.cs?highlight=5)]
 
-  W `<head>` elemencie `wwwroot/index.html` ( Blazor WebAssembly ) lub `Pages/_Host.cshtml` ( Blazor Server ), podaj `handleTickerChanged` funkcję języka JavaScript. Funkcja jest wywoływana z `JSRuntime.InvokeAsync` i zwraca wartość:
+  W `<head>` elemencie `wwwroot/index.html` ( Blazor WebAssembly ) lub `Pages/_Host.cshtml` ( Blazor Server ), podaj `handleTickerChanged` funkcję języka JavaScript. Funkcja jest wywoływana z `JS.InvokeAsync` i zwraca wartość:
 
   [!code-html[](call-javascript-from-dotnet/samples_snapshot/index-script-handleTickerChanged2.html)]
 
@@ -85,7 +85,7 @@ Aby użyć <xref:Microsoft.JSInterop.IJSRuntime> abstrakcji, należy zastosować
 
   ```razor
   [Inject]
-  IJSRuntime JSRuntime { get; set; }
+  IJSRuntime JS { get; set; }
   ```
 
 W aplikacji przykładowej po stronie klienta, która jest dołączona do tego tematu, dostępne są dwie funkcje języka JavaScript, które współdziałają z modelem DOM, aby odbierać dane wejściowe użytkownika i wyświetlać komunikat powitalny:
@@ -131,7 +131,7 @@ Przykładowa aplikacja zawiera składnik demonstrujący międzyoperacyjność JS
 ```razor
 @page "/JSInterop"
 @using {APP ASSEMBLY}.JsInteropClasses
-@inject IJSRuntime JSRuntime
+@inject IJSRuntime JS
 
 <h1>JavaScript Interop</h1>
 
@@ -146,11 +146,11 @@ Przykładowa aplikacja zawiera składnik demonstrujący międzyoperacyjność JS
 @code {
     public async Task TriggerJsPrompt()
     {
-        var name = await JSRuntime.InvokeAsync<string>(
+        var name = await JS.InvokeAsync<string>(
                 "exampleJsFunctions.showPrompt",
                 "What's your name?");
 
-        await JSRuntime.InvokeVoidAsync(
+        await JS.InvokeVoidAsync(
                 "exampleJsFunctions.displayWelcome",
                 $"Hello {name}! Welcome to Blazor!");
     }
@@ -236,10 +236,9 @@ Aby użyć metody rozszerzenia, Utwórz statyczną metodę rozszerzenia, która 
 
 ```csharp
 public static async Task TriggerClickEvent(this ElementReference elementRef, 
-    IJSRuntime jsRuntime)
+    IJSRuntime js)
 {
-    await jsRuntime.InvokeVoidAsync(
-        "interopFunctions.clickElement", elementRef);
+    await js.InvokeVoidAsync("interopFunctions.clickElement", elementRef);
 }
 ```
 
@@ -254,10 +253,9 @@ Podczas pracy z typami ogólnymi i zwracają wartość, użyj <xref:System.Threa
 
 ```csharp
 public static ValueTask<T> GenericMethod<T>(this ElementReference elementRef, 
-    IJSRuntime jsRuntime)
+    IJSRuntime js)
 {
-    return jsRuntime.InvokeAsync<T>(
-        "exampleJsFunctions.doSomethingGeneric", elementRef);
+    return js.InvokeAsync<T>("exampleJsFunctions.doSomethingGeneric", elementRef);
 }
 ```
 
@@ -488,7 +486,7 @@ Usługa JS Interop może zakończyć się niepowodzeniem z powodu błędów siec
 * Dla wywołania w kodzie składnika pojedyncze wywołanie może określać limit czasu:
 
   ```csharp
-  var result = await JSRuntime.InvokeAsync<string>("MyJSOperation", 
+  var result = await JS.InvokeAsync<string>("MyJSOperation", 
       TimeSpan.FromSeconds({SECONDS}), new[] { "Arg1" });
   ```
 
@@ -525,10 +523,10 @@ export function showPrompt(message) {
 }
 ```
 
-Dodaj poprzedni moduł JavaScript do biblioteki .NET jako statyczny element zawartości sieci Web ( `wwwroot/exampleJsInterop.js` ), a następnie zaimportuj moduł do kodu platformy .NET przy użyciu <xref:Microsoft.JSInterop.IJSRuntime> usługi. Usługa jest wstrzykiwana jako `jsRuntime` (niepokazywana) dla następującego przykładu:
+Dodaj poprzedni moduł JavaScript do biblioteki .NET jako statyczny element zawartości sieci Web ( `wwwroot/exampleJsInterop.js` ), a następnie zaimportuj moduł do kodu platformy .NET przy użyciu <xref:Microsoft.JSInterop.IJSRuntime> usługi. Usługa jest wstrzykiwana jako `js` (niepokazywana) dla następującego przykładu:
 
 ```csharp
-var module = await jsRuntime.InvokeAsync<IJSObjectReference>(
+var module = await js.InvokeAsync<IJSObjectReference>(
     "import", "./_content/MyComponents/exampleJsInterop.js");
 ```
 
@@ -557,13 +555,15 @@ window.unmarshalledInstance = {
 ```
 
 ```csharp
-var unmarshalledRuntime = (IJSUnmarshalledRuntime)jsRuntime;
+var unmarshalledRuntime = (IJSUnmarshalledRuntime)js;
 var jsUnmarshalledReference = unmarshalledRuntime
     .InvokeUnmarshalled<IJSUnmarshalledObjectReference>("unmarshalledInstance");
 
 string helloWorldString = jsUnmarshalledReference.InvokeUnmarshalled<string, string>(
     "helloWorld");
 ```
+
+W poprzednim przykładzie <xref:Microsoft.JSInterop.IJSRuntime> Usługa jest wstrzykiwana do klasy i przypisana do `js` (nie jest wyświetlana).
 
 ## <a name="use-of-javascript-libraries-that-render-ui-dom-elements"></a>Korzystanie z bibliotek języka JavaScript, które renderują interfejs użytkownika (elementy DOM)
 
@@ -704,7 +704,7 @@ Podczas opracowywania kodu, który przesyła dużą ilość danych między języ
   * Tymczasowo przechowywane w buforze pamięci do momentu zebrania wszystkich segmentów.
   * Wykorzystano natychmiast. Na przykład dane mogą być przechowywane bezpośrednio w bazie danych lub zapisywane na dysku w miarę odbierania poszczególnych segmentów.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:blazor/call-dotnet-from-javascript>
 * [InteropComponent. Razor — przykład (repozytorium dotnet/AspNetCore w witrynie GitHub, 3,1 gałąź wydania)](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)

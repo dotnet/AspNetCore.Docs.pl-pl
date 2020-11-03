@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-dotnet-from-javascript
-ms.openlocfilehash: 91452ac9c7ab627cac2d5a05ed60e4117c87ebfa
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 456339d46cf2991baaa27ae2a3a97a5c221fd3b0
+ms.sourcegitcommit: d64bf0cbe763beda22a7728c7f10d07fc5e19262
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93056585"
+ms.lasthandoff: 11/03/2020
+ms.locfileid: "93234403"
 ---
 # <a name="call-net-methods-from-javascript-functions-in-aspnet-core-no-locblazor"></a>Wywoływanie metod .NET z funkcji języka JavaScript w ASP.NET Core Blazor
 
@@ -125,7 +125,7 @@ Gdy **`Trigger .NET instance method HelloHelper.SayHello`** przycisk jest zaznac
 @code {
     public async Task TriggerNetInstanceMethod()
     {
-        var exampleJsInterop = new ExampleJsInterop(JSRuntime);
+        var exampleJsInterop = new ExampleJsInterop(JS);
         await exampleJsInterop.CallHelloHelperSayHello("Blazor");
     }
 }
@@ -160,19 +160,19 @@ Aby uniknąć przecieków pamięci i zezwolić na wyrzucanie elementów bezużyt
   ```csharp
   public class ExampleJsInterop : IDisposable
   {
-      private readonly IJSRuntime jsRuntime;
+      private readonly IJSRuntime js;
       private DotNetObjectReference<HelloHelper> objRef;
 
-      public ExampleJsInterop(IJSRuntime jsRuntime)
+      public ExampleJsInterop(IJSRuntime js)
       {
-          this.jsRuntime = jsRuntime;
+          this.js = js;
       }
 
       public ValueTask<string> CallHelloHelperSayHello(string name)
       {
           objRef = DotNetObjectReference.Create(new HelloHelper(name));
 
-          return jsRuntime.InvokeAsync<string>(
+          return js.InvokeAsync<string>(
               "exampleJsFunctions.sayHello",
               objRef);
       }
@@ -190,7 +190,7 @@ Aby uniknąć przecieków pamięci i zezwolić na wyrzucanie elementów bezużyt
   @page "/JSInteropComponent"
   @using {APP ASSEMBLY}.JsInteropClasses
   @implements IDisposable
-  @inject IJSRuntime JSRuntime
+  @inject IJSRuntime JS
 
   <h1>JavaScript Interop</h1>
 
@@ -205,7 +205,7 @@ Aby uniknąć przecieków pamięci i zezwolić na wyrzucanie elementów bezużyt
       {
           objRef = DotNetObjectReference.Create(new HelloHelper("Blazor"));
 
-          await JSRuntime.InvokeAsync<string>(
+          await JS.InvokeAsync<string>(
               "exampleJsFunctions.sayHello",
               objRef);
       }
@@ -396,7 +396,7 @@ Symbol zastępczy `{APP ASSEMBLY}` to nazwa zestawu aplikacji aplikacji (na przy
 `Shared/ListItem.razor`:
 
 ```razor
-@inject IJSRuntime JsRuntime
+@inject IJSRuntime JS
 
 <li>
     @message
@@ -415,7 +415,7 @@ Symbol zastępczy `{APP ASSEMBLY}` to nazwa zestawu aplikacji aplikacji (na przy
 
     protected async Task InteropCall()
     {
-        await JsRuntime.InvokeVoidAsync("updateMessageCallerJS",
+        await JS.InvokeVoidAsync("updateMessageCallerJS",
             DotNetObjectReference.Create(messageUpdateInvokeHelper));
     }
 
@@ -457,7 +457,7 @@ Aby uzyskać więcej informacji, zobacz następujące problemy:
 * [Odwołania cykliczne nie są obsługiwane, zrób dwa (dotnet/aspnetcore #20525)](https://github.com/dotnet/aspnetcore/issues/20525)
 * [Propozycja: Dodawanie mechanizmu do obsługi odwołań cyklicznych podczas serializacji (#30820 dotnet/Runtime)](https://github.com/dotnet/runtime/issues/30820)
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:blazor/call-javascript-from-dotnet>
 * [`InteropComponent.razor` przykład (repozytorium dotnet/AspNetCore w witrynie GitHub, 3,1 gałęzi wydania)](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)

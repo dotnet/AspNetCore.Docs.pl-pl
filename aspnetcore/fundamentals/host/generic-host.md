@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/host/generic-host
-ms.openlocfilehash: 3020734917fbf4d093420ad99114633d04e2a31b
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 3e44932c302713132a37534b97fffdd91acce2c7
+ms.sourcegitcommit: d64bf0cbe763beda22a7728c7f10d07fc5e19262
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93060498"
+ms.lasthandoff: 11/03/2020
+ms.locfileid: "93234559"
 ---
 # <a name="net-generic-host-in-aspnet-core"></a>Host ogólny .NET w ASP.NET Core
 
@@ -126,7 +126,7 @@ Jeśli aplikacja używa Entity Framework Core, nie zmieniaj nazwy ani podpisu `C
   * EventLog (tylko w przypadku uruchamiania w systemie Windows)
 * Umożliwia [weryfikację zakresu](xref:fundamentals/dependency-injection#scope-validation) i [Sprawdzanie poprawności zależności](xref:Microsoft.Extensions.DependencyInjection.ServiceProviderOptions.ValidateOnBuild) , gdy środowisko jest opracowywane.
 
-`ConfigureWebHostDefaults`Metoda:
+<xref:Microsoft.Extensions.Hosting.GenericHostBuilderExtensions.ConfigureWebHostDefaults*>Metoda:
 
 * Ładuje konfigurację hosta ze zmiennych środowiskowych, które są poprzedzone prefiksem `ASPNETCORE_` .
 * Ustawia serwer [Kestrel](xref:fundamentals/servers/kestrel) jako serwer sieci Web i konfiguruje go przy użyciu dostawców konfiguracji hostingu aplikacji. Aby poznać domyślne opcje serwera Kestrel, zobacz <xref:fundamentals/servers/kestrel#kestrel-options> .
@@ -197,7 +197,7 @@ Aby uzyskać więcej informacji, zobacz [Konfiguracja w ASP.NET Core](xref:funda
 
 ## <a name="settings-for-all-app-types"></a>Ustawienia dla wszystkich typów aplikacji
 
-Ta sekcja zawiera listę ustawień hosta, które dotyczą zarówno obciążeń HTTP, jak i innych niż HTTP. Domyślnie zmienne środowiskowe używane do konfigurowania tych ustawień mogą mieć `DOTNET_` `ASPNETCORE_` prefiks lub.
+Ta sekcja zawiera listę ustawień hosta, które dotyczą zarówno obciążeń HTTP, jak i innych niż HTTP. Domyślnie zmienne środowiskowe używane do konfigurowania tych ustawień mogą mieć `DOTNET_` `ASPNETCORE_` prefiks lub. Aby uzyskać więcej informacji, zobacz sekcję [domyślne ustawienia konstruktora](#default-builder-settings) .
 
 <!-- In the following sections, two spaces at end of line are used to force line breaks in the rendered page. -->
 

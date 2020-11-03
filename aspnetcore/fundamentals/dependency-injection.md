@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/dependency-injection
-ms.openlocfilehash: 53ccb90e92b99385fcc1d9358686b505ac1a0dcc
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 31db9aea9e0b7ed21cae2f87fbb9e2e649782697
+ms.sourcegitcommit: d64bf0cbe763beda22a7728c7f10d07fc5e19262
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93060524"
+ms.lasthandoff: 11/03/2020
+ms.locfileid: "93234468"
 ---
 # <a name="dependency-injection-in-aspnet-core"></a>Wstrzykiwanie zależności w ASP.NET Core
 
@@ -187,7 +187,7 @@ services.AddSingleton<IMyDependency, DifferentDependency>();
 public class MyService
 {
     public MyService(IMyDependency myDependency, 
-       IEnumberable<IMyDependency> myDependencies)
+       IEnumerable<IMyDependency> myDependencies)
     {
         Trace.Assert(myDependency is DifferentDependency);
 
@@ -402,7 +402,7 @@ W poniższej tabeli przedstawiono niewielki przykład następujących usług zar
 | <xref:System.Diagnostics.DiagnosticSource?displayProperty=fullName>                             | Pojedynczego |
 | <xref:System.Diagnostics.DiagnosticListener?displayProperty=fullName>                           | Pojedynczego |
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:mvc/views/dependency-injection>
 * <xref:mvc/controllers/dependency-injection>
@@ -639,7 +639,7 @@ services.AddSingleton<IMyDependency, DifferentDependency>();
 public class MyService
 {
     public MyService(IMyDependency myDependency, 
-       IEnumberable<IMyDependency> myDependencies)
+       IEnumerable<IMyDependency> myDependencies)
     {
         Trace.Assert(myDependency is DifferentDependency);
 
@@ -662,7 +662,7 @@ services.TryAddSingleton<IMyDependency, DifferentDependency>();
 public class MyService
 {
     public MyService(IMyDependency myDependency, 
-        IEnumberable<IMyDependency> myDependencies)
+        IEnumerable<IMyDependency> myDependencies)
     {
         Trace.Assert(myDependency is MyDependency);
         Trace.Assert(myDependencies.Single() is MyDependency);
@@ -1010,7 +1010,7 @@ Podobnie jak w przypadku wszystkich zestawów zaleceń, mogą wystąpić sytuacj
 
 DI jest *alternatywą* dla wzorców dostępu do obiektów static/Global. Możesz nie być w stanie korzystać z zalet programu DI w przypadku jego mieszania z dostępem do obiektów statycznych.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:mvc/views/dependency-injection>
 * <xref:mvc/controllers/dependency-injection>

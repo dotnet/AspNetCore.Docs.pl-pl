@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/graph-api
-ms.openlocfilehash: c346a80008b411e9fbbc584f7906227ab836d5fe
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 569a88630f7b75e866d8ecda99605ebe3bc58db8
+ms.sourcegitcommit: d64bf0cbe763beda22a7728c7f10d07fc5e19262
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93055207"
+ms.lasthandoff: 11/03/2020
+ms.locfileid: "93234435"
 ---
 # <a name="use-graph-api-with-aspnet-core-no-locblazor-webassembly"></a>Użyj interfejs API programu Graph z ASP.NET Core Blazor WebAssembly
 
@@ -100,11 +100,11 @@ internal static class GraphClientExtensions
             Provider = provider;
         }
 
-        public IAccessTokenProvider Provider { get; }
+        public IAccessTokenProvider TokenProvider { get; }
 
         public async Task AuthenticateRequestAsync(HttpRequestMessage request)
         {
-            var result = await Provider.RequestAccessToken(
+            var result = await TokenProvider.RequestAccessToken(
                 new AccessTokenRequestOptions()
                 {
                     Scopes = {STRING ARRAY OF SCOPES}
@@ -120,11 +120,11 @@ internal static class GraphClientExtensions
 
     private class HttpClientHttpProvider : IHttpProvider
     {
-        private readonly HttpClient client;
+        private readonly HttpClient http;
 
-        public HttpClientHttpProvider(HttpClient client)
+        public HttpClientHttpProvider(HttpClient http)
         {
-            this.client = client;
+            this.http = http;
         }
 
         public ISerializer Serializer { get; } = new Serializer();
@@ -137,14 +137,14 @@ internal static class GraphClientExtensions
 
         public Task<HttpResponseMessage> SendAsync(HttpRequestMessage request)
         {
-            return client.SendAsync(request);
+            return http.SendAsync(request);
         }
 
         public Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, 
             HttpCompletionOption completionOption, 
             CancellationToken cancellationToken)
         {
-            return client.SendAsync(request, completionOption, cancellationToken);
+            return http.SendAsync(request, completionOption, cancellationToken);
         }
     }
 }

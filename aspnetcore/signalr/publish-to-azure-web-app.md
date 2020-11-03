@@ -5,7 +5,7 @@ description: Dowiedz się, jak opublikować SignalR aplikację ASP.NET Core w Az
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
-ms.date: 11/12/2019
+ms.date: 11/02/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/publish-to-azure-web-app
-ms.openlocfilehash: e00eea81788c9b335691b7e5ffe6a46534c3c492
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 8e6d36fe0b38486f94078b8f9cf12b852da7e0d9
+ms.sourcegitcommit: d64bf0cbe763beda22a7728c7f10d07fc5e19262
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93058223"
+ms.lasthandoff: 11/03/2020
+ms.locfileid: "93234516"
 ---
 # <a name="publish-an-aspnet-core-no-locsignalr-app-to-azure-app-service"></a>Publikowanie aplikacji ASP.NET Core SignalR w Azure App Service
 
@@ -54,7 +54,7 @@ W tym artykule opisano Publikowanie przy użyciu narzędzi w programie Visual St
    | **Grupa zasobów** | Grupa powiązanych zasobów, do której należy aplikacja. |
    | **Plan hostingu**   | Plan cenowy dla aplikacji sieci Web. |
 
-1. Wybierz pozycję **SignalR usługa platformy Azure** na **Dependencies**  >  liście rozwijanej **Dodaj** zależności:
+1. Wybierz **pozycję SignalR usługa platformy Azure** w sekcji **zależności usługi** . Wybierz **+** przycisk:
 
    ![Obszar zależności pokazujący wybór platformy Azure::: No-Loc (sygnalizujący)::: Service na liście rozwijanej dodawania](publish-to-azure-web-app/_static/signalr-service-dependency.png)
 
@@ -94,7 +94,7 @@ W przypadku aplikacji hostowanych bez SignalR usługi Azure enable:
 
 Gniazda sieci Web i inne transporty są ograniczone w zależności od wybranego planu App Service. Aby uzyskać więcej informacji, zapoznaj się z sekcją *limity Cloud Services platformy Azure* i *App Service limity* dotyczące [subskrypcji, limitów, przydziałów i ograniczeń usługi](/azure/azure-subscription-service-limits#app-service-limits) Azure.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * [Co to jest SignalR usługa Azure?](/azure/azure-signalr/signalr-overview)
 * <xref:signalr/introduction>

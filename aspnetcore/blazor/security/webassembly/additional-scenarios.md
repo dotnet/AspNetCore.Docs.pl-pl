@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/additional-scenarios
-ms.openlocfilehash: 22c8ab52a93e7ea7df6be608501bebf33764b711
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 88970b0e53b456467bdc2218a3a6b943bbbf0df5
+ms.sourcegitcommit: d64bf0cbe763beda22a7728c7f10d07fc5e19262
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93055337"
+ms.lasthandoff: 11/03/2020
+ms.locfileid: "93234390"
 ---
 # <a name="aspnet-core-no-locblazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor WebAssembly dodatkowe scenariusze zabezpieczeń
 
@@ -65,7 +65,7 @@ Skonfigurowana konfiguracja służy <xref:System.Net.Http.HttpClient> do podejmo
 
 ```razor
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
-@inject HttpClient Client
+@inject HttpClient Http
 
 ...
 
@@ -76,7 +76,7 @@ protected override async Task OnInitializedAsync()
     try
     {
         examples = 
-            await Client.GetFromJsonAsync<ExampleType[]>("ExampleAPIMethod");
+            await Http.GetFromJsonAsync<ExampleType[]>("ExampleAPIMethod");
 
         ...
     }
@@ -191,11 +191,11 @@ using static {APP ASSEMBLY}.Data;
 
 public class WeatherForecastClient
 {
-    private readonly HttpClient client;
+    private readonly HttpClient http;
  
-    public WeatherForecastClient(HttpClient client)
+    public WeatherForecastClient(HttpClient http)
     {
-        this.client = client;
+        this.http = http;
     }
  
     public async Task<WeatherForecast[]> GetForecastAsync()
@@ -204,7 +204,7 @@ public class WeatherForecastClient
 
         try
         {
-            forecasts = await client.GetFromJsonAsync<WeatherForecast[]>(
+            forecasts = await http.GetFromJsonAsync<WeatherForecast[]>(
                 "WeatherForecast");
         }
         catch (AccessTokenNotAvailableException exception)
@@ -411,6 +411,11 @@ Poniższy przykład pokazuje, jak:
 * Odzyskaj poprzedni stan, a następnie Uwierzytelnij przy użyciu parametru ciągu zapytania.
 
 ```razor
+...
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@inject IAccessTokenProvider TokenProvider
+...
+
 <EditForm Model="User" @onsubmit="OnSaveAsync">
     <label>User
         <InputText @bind-Value="User.Name" />
@@ -442,12 +447,12 @@ Poniższy przykład pokazuje, jak:
 
     public async Task OnSaveAsync()
     {
-        var httpClient = new HttpClient();
-        httpClient.BaseAddress = new Uri(Navigation.BaseUri);
+        var http = new HttpClient();
+        http.BaseAddress = new Uri(Navigation.BaseUri);
 
         var resumeUri = Navigation.Uri + $"?state=resumeSavingProfile";
 
-        var tokenResult = await AuthenticationService.RequestAccessToken(
+        var tokenResult = await TokenProvider.RequestAccessToken(
             new AccessTokenRequestOptions
             {
                 ReturnUrl = resumeUri
@@ -455,9 +460,9 @@ Poniższy przykład pokazuje, jak:
 
         if (tokenResult.TryGetToken(out var token))
         {
-            httpClient.DefaultRequestHeaders.Add("Authorization", 
+            http.DefaultRequestHeaders.Add("Authorization", 
                 $"Bearer {token.Value}");
-            await httpClient.PostAsJsonAsync("Save", User);
+            await http.PostAsJsonAsync("Save", User);
         }
         else
         {
@@ -1048,7 +1053,7 @@ Symbol zastępczy `{APP ASSEMBLY}` jest nazwą zestawu aplikacji (na przykład `
 
 Aby uzyskać więcej informacji, zobacz <xref:grpc/browser>.
 
-## <a name="additional-resources"></a>Dodatkowe zasoby
+## <a name="additional-resources"></a>Zasoby dodatkowe
 
 * <xref:blazor/security/webassembly/graph-api>
 * [`HttpClient` i `HttpRequestMessage` z opcjami żądania interfejsu API pobierania](xref:blazor/call-web-api#httpclient-and-httprequestmessage-with-fetch-api-request-options)

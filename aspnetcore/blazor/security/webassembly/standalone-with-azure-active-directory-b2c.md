@@ -19,38 +19,36 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/standalone-with-azure-active-directory-b2c
-ms.openlocfilehash: 423c7ad9f00a991c634f24a170c52d6dcb035ee1
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 14eda03419e22538e17b7b4d6fa697d61cb384c8
+ms.sourcegitcommit: 45aa1c24c3fdeb939121e856282b00bdcf00ea55
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93055155"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93343713"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-standalone-app-with-azure-active-directory-b2c"></a>Zabezpieczanie ASP.NET Core Blazor WebAssembly aplikacji autonomicznej za pomocą Azure Active Directory B2C
 
 Autorzy [Javier Calvarro Nelson](https://github.com/javiercn) i [Luke Latham](https://github.com/guardrex)
 
-Aby utworzyć [autonomiczną Blazor WebAssembly aplikację](xref:blazor/hosting-models#blazor-webassembly) korzystającą z [Azure Active Directory (AAD) B2C](/azure/active-directory-b2c/overview) do uwierzytelniania:
+W tym artykule opisano sposób tworzenia [autonomicznej Blazor WebAssembly aplikacji](xref:blazor/hosting-models#blazor-webassembly) korzystającej z usługi [Azure Active Directory (AAD) B2C](/azure/active-directory-b2c/overview) na potrzeby uwierzytelniania.
 
-Postępuj zgodnie ze wskazówkami w poniższych tematach, aby utworzyć dzierżawę i zarejestrować aplikację sieci Web w witrynie Azure Portal:
-
-[Tworzenie dzierżawy AAD B2C](/azure/active-directory-b2c/tutorial-create-tenant)
+Utwórz dzierżawę lub Zidentyfikuj istniejącą dzierżawę usługi B2C, która ma być używana przez aplikację w Azure Portal, postępując zgodnie ze wskazówkami zawartymi w artykule [Tworzenie dzierżawy AAD B2C (dokumentacja platformy Azure)](/azure/active-directory-b2c/tutorial-create-tenant) .
 
 Zapisz następujące informacje:
 
 * Wystąpienie AAD B2C (na przykład `https://contoso.b2clogin.com/` , które obejmuje końcowy ukośnik): wystąpienie jest schematem i hostem rejestracji aplikacji Azure B2C, którą można znaleźć, otwierając okno **punkty końcowe** ze strony **rejestracje aplikacji** w Azure Portal.
 * AAD B2C domeny podstawowej/wydawcy/dzierżawy (na przykład `contoso.onmicrosoft.com` ): domena jest dostępna jako **domena wydawcy** w bloku **znakowania** Azure Portal dla zarejestrowanej aplikacji.
 
-Postępuj zgodnie ze wskazówkami w [samouczku: Zarejestruj aplikację w Azure Active Directory B2C](/azure/active-directory-b2c/tutorial-register-applications) ponownie, aby zarejestrować aplikację usługi AAD dla *`Client`* aplikacji, a następnie wykonaj następujące czynności:
+Zarejestruj aplikację AAD B2C (powiązane wskazówki w dokumentacji platformy Azure: [Samouczek: rejestrowanie aplikacji w programie Azure Active Directory B2C](/azure/active-directory-b2c/tutorial-register-applications)):
 
 ::: moniker range=">= aspnetcore-5.0"
 
-1. W **Azure Active Directory** > **rejestracje aplikacji** wybierz pozycję **Nowa rejestracja** .
+1. W **Azure Active Directory** > **rejestracje aplikacji** wybierz pozycję **Nowa rejestracja**.
 1. Podaj **nazwę** aplikacji (na przykład **Blazor autonomiczna AAD B2C** ).
 1. W przypadku **obsługiwanych typów kont** wybierz opcję wiele dzierżawców: **konta w dowolnym katalogu organizacyjnym lub dowolnego dostawcę tożsamości. Do uwierzytelniania użytkowników za pomocą Azure AD B2C.**
 1. Ustaw listę rozwijaną **URI przekierowania** na **aplikację jednostronicową (Spa)** i podaj następujący identyfikator URI przekierowania: `https://localhost:{PORT}/authentication/login-callback` . Domyślnym portem dla aplikacji działającej w Kestrel jest 5001. Jeśli aplikacja jest uruchamiana na innym porcie Kestrel, użyj portu aplikacji. W przypadku IIS Express losowo wygenerowany port dla aplikacji można znaleźć we właściwościach aplikacji w panelu **debugowanie** . Ponieważ aplikacja nie istnieje w tym punkcie i port IIS Express nie jest znany, Wróć do tego kroku po utworzeniu aplikacji i zaktualizowaniu identyfikatora URI przekierowania. Uwaga zostanie wyświetlona w dalszej części tego tematu, aby przypominać IIS Express użytkownikom w celu zaktualizowania identyfikatora URI przekierowania.
 1. Upewnij się, że **uprawnienia** > **udzielają zgody administratora na OpenID Connect, a uprawnienia offline_access** są zaznaczone.
-1. Wybierz pozycję **Zarejestruj** .
+1. Wybierz pozycję **Zarejestruj**.
 
 Zapisz identyfikator aplikacji (klienta) (na przykład `41451fa7-82d9-4673-8fa5-69eff5a761fd` ).
 
@@ -59,27 +57,27 @@ W **Authentication** obszarze > **Konfiguracja platformy** uwierzytelniania > **
 1. Upewnij się, że jest obecny **Identyfikator URI przekierowania** `https://localhost:{PORT}/authentication/login-callback` .
 1. W przypadku **niejawnego udzielenia** upewnij się, że **nie** wybrano pól wyboru dla **tokenów dostępu** i **tokenów identyfikatorów** .
 1. Pozostałe wartości domyślne dla aplikacji są dopuszczalne dla tego środowiska.
-1. Wybierz ikonę **Zapisz** .
+1. Wybierz ikonę **Zapisz**.
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-5.0"
 
-1. W **Azure Active Directory** > **rejestracje aplikacji** wybierz pozycję **Nowa rejestracja** .
+1. W **Azure Active Directory** > **rejestracje aplikacji** wybierz pozycję **Nowa rejestracja**.
 1. Podaj **nazwę** aplikacji (na przykład **Blazor autonomiczna AAD B2C** ).
 1. W przypadku **obsługiwanych typów kont** wybierz opcję wiele dzierżawców: **konta w dowolnym katalogu organizacyjnym lub dowolnego dostawcę tożsamości. Do uwierzytelniania użytkowników za pomocą Azure AD B2C.**
 1. Pozostaw pole listy rozwijanej **Identyfikator URI przekierowania** jako **Sieć Web** i podaj następujący identyfikator URI przekierowania: `https://localhost:{PORT}/authentication/login-callback` . Domyślnym portem dla aplikacji działającej w Kestrel jest 5001. Jeśli aplikacja jest uruchamiana na innym porcie Kestrel, użyj portu aplikacji. W przypadku IIS Express losowo wygenerowany port dla aplikacji można znaleźć we właściwościach aplikacji w panelu **debugowanie** . Ponieważ aplikacja nie istnieje w tym punkcie i port IIS Express nie jest znany, Wróć do tego kroku po utworzeniu aplikacji i zaktualizowaniu identyfikatora URI przekierowania. Uwaga zostanie wyświetlona w dalszej części tego tematu, aby przypominać IIS Express użytkownikom w celu zaktualizowania identyfikatora URI przekierowania.
 1. Upewnij się, że **uprawnienia** > **udzielają zgody administratora na OpenID Connect, a uprawnienia offline_access** są zaznaczone.
-1. Wybierz pozycję **Zarejestruj** .
+1. Wybierz pozycję **Zarejestruj**.
 
 Zapisz identyfikator aplikacji (klienta) (na przykład `41451fa7-82d9-4673-8fa5-69eff5a761fd` ).
 
 W **Authentication** obszarze > **konfiguracje platformy** uwierzytelniania w > **sieci Web** :
 
 1. Upewnij się, że jest obecny **Identyfikator URI przekierowania** `https://localhost:{PORT}/authentication/login-callback` .
-1. W przypadku **niejawnego przydzielenia** zaznacz pola wyboru dla **tokenów dostępu** i **tokenów identyfikatorów** .
+1. W przypadku **niejawnego przydzielenia** zaznacz pola wyboru dla **tokenów dostępu** i **tokenów identyfikatorów**.
 1. Pozostałe wartości domyślne dla aplikacji są dopuszczalne dla tego środowiska.
-1. Wybierz ikonę **Zapisz** .
+1. Wybierz ikonę **Zapisz**.
 
 ::: moniker-end
 

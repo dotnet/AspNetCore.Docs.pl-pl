@@ -1,10 +1,13 @@
 ---
-title: Część 6, Dodawanie wyszukiwania do Razor stron ASP.NET Core
+title: Część 6, Dodawanie wyszukiwania
 author: rick-anderson
 description: Część 6 serii samouczków na Razor stronach.
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- Index
+- Create
+- Delete
 - appsettings.json
 - ASP.NET Core Identity
 - cookie
@@ -17,35 +20,47 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/search
-ms.openlocfilehash: 960f60198f5e65ed05d0374fd0704537376d27d6
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 00c1be2704d92c7d4f868e6eaa346bd8e9901dbf
+ms.sourcegitcommit: 342588e10ae0054a6d6dc0fd11dae481006be099
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93058093"
+ms.lasthandoff: 11/07/2020
+ms.locfileid: "94360845"
 ---
 # <a name="part-6-add-search-to-aspnet-core-no-locrazor-pages"></a>Część 6, Dodawanie wyszukiwania do Razor stron ASP.NET Core
 
 Autor: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-::: moniker range=">= aspnetcore-3.0"
+::: moniker range=">= aspnetcore-5.0"
 
-[!INCLUDE[](~/includes/rp/download.md)]
+[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50) ([jak pobrać](xref:index#how-to-download-a-sample)).
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0 >= aspnetcore-3.0"
+
+[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30) ([jak pobrać](xref:index#how-to-download-a-sample)).
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0"
 
 W poniższych sekcjach są dodawane przeszukiwania filmów według *gatunku* lub *nazwy* .
 
-Dodaj następujące wyróżnione właściwości do *stron/filmów/index. cshtml. cs* :
+Dodaj następujące wyróżnione instrukcje using i właściwości do *stron/filmów/ Index . cshtml.cs* :
 
-[!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Index.cshtml.cs?name=snippet_newProps&highlight=11-999)]
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Index.cshtml.cs?name=snippet_newProps&highlight=3,23,24,25,26,27)]
 
-* `SearchString`: zawiera tekst wprowadzany przez użytkowników w polu tekstowym Wyszukaj. `SearchString` ma [`[BindProperty]`](/dotnet/api/microsoft.aspnetcore.mvc.bindpropertyattribute) atrybut. `[BindProperty]` tworzy powiązanie wartości formularzy i ciągów zapytań o takiej samej nazwie jak właściwość. `(SupportsGet = true)` jest wymagany do tworzenia powiązań w żądaniach GET.
-* `Genres`: zawiera listę gatunku. `Genres` umożliwia użytkownikowi wybranie gatunku z listy. `SelectList` KONIECZN `using Microsoft.AspNetCore.Mvc.Rendering;`
-* `MovieGenre`: zawiera konkretny gatunek wybierany przez użytkownika (na przykład "zachodni").
+W poprzednim kodzie:
+
+* `SearchString`: Zawiera tekst wprowadzany przez użytkowników w polu tekstowym Wyszukaj. `SearchString` ma [`[BindProperty]`](xref:Microsoft.AspNetCore.Mvc.BindPropertyAttribute) atrybut. `[BindProperty]` tworzy powiązanie wartości formularzy i ciągów zapytań o takiej samej nazwie jak właściwość. `[BindProperty(SupportsGet = true)]` jest wymagany do powiązania żądań HTTP GET.
+* `Genres`: Zawiera listę gatunku. `Genres` umożliwia użytkownikowi wybranie gatunku z listy. `SelectList` KONIECZN `using Microsoft.AspNetCore.Mvc.Rendering;`
+* `MovieGenre`: Zawiera konkretny gatunek wybierany przez użytkownika. Na przykład "zachodnie".
 * `Genres` i `MovieGenre` są używane w dalszej części tego samouczka.
 
 [!INCLUDE[](~/includes/bind-get.md)]
 
-Zaktualizuj metodę strony indeksu `OnGetAsync` przy użyciu następującego kodu:
+Zaktualizuj Index `OnGetAsync` metodę strony przy użyciu następującego kodu:
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Index.cshtml.cs?name=snippet_1stSearch)]
 
@@ -63,16 +78,16 @@ Jeśli `SearchString` Właściwość nie ma wartości null lub jest pusta, zapyt
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Index.cshtml.cs?name=snippet_SearchNull)]
 
-`s => s.Title.Contains()`Kod jest [wyrażeniem lambda](/dotnet/csharp/programming-guide/statements-expressions-operators/lambda-expressions). Wyrażenia lambda są używane w kwerendach [LINQ](/dotnet/csharp/programming-guide/concepts/linq/) opartych na metodach jako argumenty dla standardowych metod operatora zapytań, takich jak Metoda [WHERE](/dotnet/csharp/programming-guide/concepts/linq/query-syntax-and-method-syntax-in-linq) lub `Contains` (używana w poprzednim kodzie). Zapytania LINQ nie są wykonywane, gdy są zdefiniowane lub są modyfikowane przez wywołanie metody (takiej jak `Where` `Contains`  lub `OrderBy` ). Zamiast tego wykonywanie zapytania jest odroczone. Oznacza to, że Obliczanie wyrażenia jest opóźnione do momentu przekroczenia jego zrealizowanej wartości lub `ToListAsync` wywołania metody. Aby uzyskać więcej informacji, zobacz [wykonywanie zapytań](/dotnet/framework/data/adonet/ef/language-reference/query-execution) .
+`s => s.Title.Contains()`Kod jest [wyrażeniem lambda](/dotnet/csharp/programming-guide/statements-expressions-operators/lambda-expressions). Wyrażenia lambda są używane w kwerendach [LINQ](/dotnet/csharp/programming-guide/concepts/linq/) opartych na metodach jako argumenty dla standardowych metod operatorów zapytań, takich jak Metoda [WHERE](/dotnet/csharp/programming-guide/concepts/linq/query-syntax-and-method-syntax-in-linq) lub `Contains` . Zapytania LINQ nie są wykonywane, gdy są zdefiniowane lub są modyfikowane przez wywołanie metody, takiej jak `Where` , `Contains` lub `OrderBy` . Zamiast tego wykonywanie zapytania jest odroczone. Obliczanie wyrażenia jest opóźnione do momentu przekroczenia jego prawdziwej wartości lub `ToListAsync` wywołania metody. Aby uzyskać więcej informacji, zobacz [wykonywanie zapytań](/dotnet/framework/data/adonet/ef/language-reference/query-execution) .
 
 > [!NOTE]
 > Metoda [Contains](/dotnet/api/system.data.objects.dataclasses.entitycollection-1.contains) jest uruchamiana w bazie danych, a nie w kodzie C#. Uwzględnianie wielkości liter w zapytaniu zależy od bazy danych i sortowania. Na SQL Server `Contains` mapuje do [programu SQL Server, np](/sql/t-sql/language-elements/like-transact-sql). bez uwzględniania wielkości liter. W ramach programu SQLite domyślne sortowanie uwzględnia wielkość liter.
 
-Przejdź do strony filmy i dołącz ciąg zapytania, taki jak `?searchString=Ghost` adres URL (na przykład `https://localhost:5001/Movies?searchString=Ghost` ). Wyświetlane są filtrowane filmy.
+Przejdź do strony filmy i dołącz ciąg zapytania, taki jak `?searchString=Ghost` adres URL. Na przykład `https://localhost:5001/Movies?searchString=Ghost`. Wyświetlane są filtrowane filmy.
 
-![Widok indeksu](search/_static/ghost.png)
+![::: No-Loc (indeks)::: View](search/_static/ghost.png)
 
-Jeśli do strony indeksu zostanie dodany następujący szablon trasy, ciąg wyszukiwania może zostać przekierowany jako segment adresu URL (na przykład `https://localhost:5001/Movies/Ghost` ).
+Jeśli do strony zostanie dodany następujący szablon trasy Index , ciąg wyszukiwania może zostać przekierowany jako segment adresu URL. Na przykład `https://localhost:5001/Movies/Ghost`.
 
 ```cshtml
 @page "{searchString?}"
@@ -80,30 +95,30 @@ Jeśli do strony indeksu zostanie dodany następujący szablon trasy, ciąg wysz
 
 Powyższe ograniczenie trasy umożliwia przeszukiwanie tytułu jako dane trasy (segment adresu URL), a nie jako wartość ciągu zapytania.  `?`W `"{searchString?}"` tym przypadku jest to opcjonalny parametr trasy.
 
-![Widok indeksu z wyrazem Ghost dodany do adresu URL i zwrotną listą filmów dwóch filmów, Ghostbusters i Ghostbusters 2](search/_static/g2.png)
+![::: No-Loc (index)::: View z wyrazem "Ghost" dodanym do adresu URL i zwrotną listą filmów dwóch filmów, Ghostbusters i Ghostbusters 2](search/_static/g2.png)
 
-Środowisko uruchomieniowe ASP.NET Core używa [powiązania modelu](xref:mvc/models/model-binding) , aby ustawić wartość `SearchString` właściwości z ciągu zapytania ( `?searchString=Ghost` ) lub danych trasy ( `https://localhost:5001/Movies/Ghost` ). W powiązaniu modelu nie jest rozróżniana wielkość liter.
+Środowisko uruchomieniowe ASP.NET Core używa [powiązania modelu](xref:mvc/models/model-binding) , aby ustawić wartość `SearchString` właściwości z ciągu zapytania ( `?searchString=Ghost` ) lub danych trasy ( `https://localhost:5001/Movies/Ghost` ). Powiązanie modelu *_jest *_* nierozróżniana wielkość liter.
 
-Nie można jednak oczekiwać, że użytkownicy modyfikują adres URL w celu wyszukania filmu. W tym kroku zostanie dodany interfejs użytkownika do filtrowania filmów. Jeśli dodano ograniczenie trasy `"{searchString?}"` , usuń je.
+Jednak użytkownicy nie mogą zmieniać adresu URL w celu wyszukania filmu. W tym kroku zostanie dodany interfejs użytkownika do filtrowania filmów. Jeśli dodano ograniczenie trasy `"{searchString?}"` , usuń je.
 
-Otwórz plik *Pages/Films/index. cshtml* i Dodaj `<form>` znaczniki wyróżnione w poniższym kodzie:
+Otwórz plik _Pages/Movies/ Index . cshtml * i Dodaj znacznik wyróżniony w poniższym kodzie:
 
 [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie30/SnapShots/Index2.cshtml?highlight=14-19&range=1-22)]
 
 Tag HTML `<form>` używa następujących [pomocników tagów](xref:mvc/views/tag-helpers/intro):
 
-* [Pomocnik tagu formularza](xref:mvc/views/working-with-forms#the-form-tag-helper). Gdy formularz zostanie przesłany, ciąg filtru jest wysyłany do *stron/filmów/indeksu* za pośrednictwem ciągu zapytania.
+* [Pomocnik tagu formularza](xref:mvc/views/working-with-forms#the-form-tag-helper). Gdy formularz zostanie przesłany, ciąg filtru jest wysyłany do *stron/filmów/ Index* stron za pośrednictwem ciągu zapytania.
 * [Pomocnik tagu wejściowego](xref:mvc/views/working-with-forms#the-input-tag-helper)
 
 Zapisz zmiany i przetestuj filtr.
 
-![Widok indeksu z słowem Ghost wpisanych do pola tekstowego filtru tytułu](search/_static/filter.png)
+![::: No-Loc (index)::: View z wyrazem Ghost wpisanych do pola tekstowego filtru tytułu](search/_static/filter.png)
 
 ## <a name="search-by-genre"></a>Wyszukaj według gatunku
 
-Zaktualizuj `OnGetAsync` metodę przy użyciu następującego kodu:
+Zaktualizuj Index `OnGetAsync` metodę strony przy użyciu następującego kodu:
 
-[!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Index.cshtml.cs?name=snippet_SearchGenre)]
+   [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Index.cshtml.cs?name=snippet_SearchGenre)]
 
 Poniższy kod jest zapytanie LINQ, które pobiera wszystkie gatunki z bazy danych.
 
@@ -115,40 +130,38 @@ Poniższy kod jest zapytanie LINQ, które pobiera wszystkie gatunki z bazy danyc
 
 ### <a name="add-search-by-genre-to-the-no-locrazor-page"></a>Dodaj wyszukiwanie według gatunku na Razor stronie
 
-Zaktualizuj *indeks. cshtml* w następujący sposób:
+1. Aktualizowanie *Index . cshtml* [ `<form>` element] ( https://developer.mozilla.org/docs/Web/HTML/Element/form) jak wyróżniono w następującej adjustacji):
 
-[!code-cshtml[](razor-pages-start/sample/RazorPagesMovie30/SnapShots/IndexFormGenreNoRating.cshtml?highlight=16-18&range=1-26)]
+   [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie30/SnapShots/IndexFormGenreNoRating.cshtml?highlight=16-18&range=1-26)]
 
-Przetestuj aplikację, wyszukując według gatunku, tytułu filmu i obu tych elementów.
+1. Przetestuj aplikację, wyszukując według gatunku, tytułu filmu i obu tych elementów.
 
 ## <a name="additional-resources"></a>Dodatkowe zasoby
 
-* [Wersja tego samouczka usługi YouTube](https://youtu.be/4B6pHtdyo08)
-
 > [!div class="step-by-step"]
 > [Poprzedni: aktualizowanie stron](xref:tutorials/razor-pages/da1) 
->  [Dalej: Dodawanie nowego pola](xref:tutorials/razor-pages/new-field)
+>  [Dalej: Dodaj nowe pole](xref:tutorials/razor-pages/new-field)
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-[!INCLUDE[](~/includes/rp/download.md)]
+[Wyświetlanie lub Pobieranie przykładowego kodu](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start) ([jak pobrać](xref:index#how-to-download-a-sample)).
 
 W poniższych sekcjach są dodawane przeszukiwania filmów według *gatunku* lub *nazwy* .
 
-Dodaj następujące wyróżnione właściwości do *stron/filmów/index. cshtml. cs* :
+Dodaj następujące wyróżnione właściwości do *stron/filmów/ Index . cshtml.cs* :
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Index.cshtml.cs?name=snippet_newProps&highlight=11-999)]
 
-* `SearchString`: zawiera tekst wprowadzany przez użytkowników w polu tekstowym Wyszukaj. `SearchString` ma [`[BindProperty]`](/dotnet/api/microsoft.aspnetcore.mvc.bindpropertyattribute) atrybut. `[BindProperty]` tworzy powiązanie wartości formularzy i ciągów zapytań o takiej samej nazwie jak właściwość. `(SupportsGet = true)` jest wymagany do tworzenia powiązań w żądaniach GET.
-* `Genres`: zawiera listę gatunku. `Genres` umożliwia użytkownikowi wybranie gatunku z listy. `SelectList` KONIECZN `using Microsoft.AspNetCore.Mvc.Rendering;`
-* `MovieGenre`: zawiera konkretny gatunek wybierany przez użytkownika (na przykład "zachodni").
+* `SearchString`: Zawiera tekst wprowadzany przez użytkowników w polu tekstowym Wyszukaj. `SearchString` ma [`[BindProperty]`](xref:Microsoft.AspNetCore.Mvc.BindPropertyAttribute) atrybut. `[BindProperty]` tworzy powiązanie wartości formularzy i ciągów zapytań o takiej samej nazwie jak właściwość. `[BindProperty(SupportsGet = true)]` jest wymagany do powiązania żądań HTTP GET.
+* `Genres`: Zawiera listę gatunku. `Genres` umożliwia użytkownikowi wybranie gatunku z listy. `SelectList` KONIECZN `using Microsoft.AspNetCore.Mvc.Rendering;`
+* `MovieGenre`: Zawiera konkretny gatunek wybierany przez użytkownika. Na przykład "zachodnie".
 * `Genres` i `MovieGenre` są używane w dalszej części tego samouczka.
 
 [!INCLUDE[](~/includes/bind-get.md)]
 
-Zaktualizuj metodę strony indeksu `OnGetAsync` przy użyciu następującego kodu:
+Zaktualizuj Index `OnGetAsync` metodę strony przy użyciu następującego kodu:
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Index.cshtml.cs?name=snippet_1stSearch)]
 
@@ -166,15 +179,15 @@ Jeśli `SearchString` Właściwość nie ma wartości null lub jest pusta, zapyt
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Index.cshtml.cs?name=snippet_SearchNull)]
 
-`s => s.Title.Contains()`Kod jest [wyrażeniem lambda](/dotnet/csharp/programming-guide/statements-expressions-operators/lambda-expressions). Wyrażenia lambda są używane w kwerendach [LINQ](/dotnet/csharp/programming-guide/concepts/linq/) opartych na metodach jako argumenty dla standardowych metod operatora zapytań, takich jak Metoda [WHERE](/dotnet/csharp/programming-guide/concepts/linq/query-syntax-and-method-syntax-in-linq) lub `Contains` (używana w poprzednim kodzie). Zapytania LINQ nie są wykonywane, gdy są zdefiniowane lub są modyfikowane przez wywołanie metody (takiej jak `Where` `Contains`  lub `OrderBy` ). Zamiast tego wykonywanie zapytania jest odroczone. Oznacza to, że Obliczanie wyrażenia jest opóźnione do momentu przekroczenia jego zrealizowanej wartości lub `ToListAsync` wywołania metody. Aby uzyskać więcej informacji, zobacz [wykonywanie zapytań](/dotnet/framework/data/adonet/ef/language-reference/query-execution) .
+`s => s.Title.Contains()`Kod jest [wyrażeniem lambda](/dotnet/csharp/programming-guide/statements-expressions-operators/lambda-expressions). Wyrażenia lambda są używane w kwerendach [LINQ](/dotnet/csharp/programming-guide/concepts/linq/) opartych na metodach jako argumenty dla standardowych metod operatorów zapytań, takich jak Metoda [WHERE](/dotnet/csharp/programming-guide/concepts/linq/query-syntax-and-method-syntax-in-linq) lub `Contains` . Zapytania LINQ nie są wykonywane, gdy są zdefiniowane lub są modyfikowane przez wywołanie metody, takiej jak `Where` , `Contains`  lub `OrderBy` . Zamiast tego wykonywanie zapytania jest odroczone. Obliczanie wyrażenia jest opóźnione do momentu przekroczenia jego prawdziwej wartości lub `ToListAsync` wywołania metody. Aby uzyskać więcej informacji, zobacz [wykonywanie zapytań](/dotnet/framework/data/adonet/ef/language-reference/query-execution) .
 
 **Uwaga:** Metoda [Contains](/dotnet/api/system.data.objects.dataclasses.entitycollection-1.contains) jest uruchamiana w bazie danych, a nie w kodzie C#. Uwzględnianie wielkości liter w zapytaniu zależy od bazy danych i sortowania. Na SQL Server `Contains` mapuje do [programu SQL Server, np](/sql/t-sql/language-elements/like-transact-sql). bez uwzględniania wielkości liter. W ramach programu SQLite domyślne sortowanie uwzględnia wielkość liter.
 
-Przejdź do strony filmy i dołącz ciąg zapytania, taki jak `?searchString=Ghost` adres URL (na przykład `https://localhost:5001/Movies?searchString=Ghost` ). Wyświetlane są filtrowane filmy.
+Przejdź do strony filmy i dołącz ciąg zapytania, taki jak `?searchString=Ghost` adres URL. Na przykład `https://localhost:5001/Movies?searchString=Ghost`. Wyświetlane są filtrowane filmy.
 
-![Widok indeksu](search/_static/ghost.png)
+![::: No-Loc (indeks)::: View](search/_static/ghost.png)
 
-Jeśli do strony indeksu zostanie dodany następujący szablon trasy, ciąg wyszukiwania może zostać przekierowany jako segment adresu URL (na przykład `https://localhost:5001/Movies/Ghost` ).
+Jeśli do strony zostanie dodany następujący szablon trasy Index , ciąg wyszukiwania może zostać przekierowany jako segment adresu URL. Na przykład `https://localhost:5001/Movies/Ghost`.
 
 ```cshtml
 @page "{searchString?}"
@@ -182,24 +195,24 @@ Jeśli do strony indeksu zostanie dodany następujący szablon trasy, ciąg wysz
 
 Powyższe ograniczenie trasy umożliwia przeszukiwanie tytułu jako dane trasy (segment adresu URL), a nie jako wartość ciągu zapytania.  `?`W `"{searchString?}"` tym przypadku jest to opcjonalny parametr trasy.
 
-![Widok indeksu z wyrazem Ghost dodany do adresu URL i zwrotną listą filmów dwóch filmów, Ghostbusters i Ghostbusters 2](search/_static/g2.png)
+![::: No-Loc (index)::: View z wyrazem "Ghost" dodanym do adresu URL i zwrotną listą filmów dwóch filmów, Ghostbusters i Ghostbusters 2](search/_static/g2.png)
 
-Środowisko uruchomieniowe ASP.NET Core używa [powiązania modelu](xref:mvc/models/model-binding) , aby ustawić wartość `SearchString` właściwości z ciągu zapytania ( `?searchString=Ghost` ) lub danych trasy ( `https://localhost:5001/Movies/Ghost` ). W powiązaniu modelu nie jest rozróżniana wielkość liter.
+Środowisko uruchomieniowe ASP.NET Core używa [powiązania modelu](xref:mvc/models/model-binding) , aby ustawić wartość `SearchString` właściwości z ciągu zapytania ( `?searchString=Ghost` ) lub danych trasy ( `https://localhost:5001/Movies/Ghost` ). Powiązanie modelu *_jest *_* nierozróżniana wielkość liter.
 
-Nie można jednak oczekiwać, że użytkownicy modyfikują adres URL w celu wyszukania filmu. W tym kroku zostanie dodany interfejs użytkownika do filtrowania filmów. Jeśli dodano ograniczenie trasy `"{searchString?}"` , usuń je.
+Jednak użytkownicy nie mogą zmieniać adresu URL w celu wyszukania filmu. W tym kroku zostanie dodany interfejs użytkownika do filtrowania filmów. Jeśli dodano ograniczenie trasy `"{searchString?}"` , usuń je.
 
-Otwórz plik *Pages/Films/index. cshtml* i Dodaj `<form>` znaczniki wyróżnione w poniższym kodzie:
+Otwórz plik _Pages/Movies/ Index . cshtml * i Dodaj `<form>` znacznik wyróżniony w poniższym kodzie:
 
 [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Index2.cshtml?highlight=14-19&range=1-22)]
 
 Tag HTML `<form>` używa następujących [pomocników tagów](xref:mvc/views/tag-helpers/intro):
 
-* [Pomocnik tagu formularza](xref:mvc/views/working-with-forms#the-form-tag-helper). Gdy formularz zostanie przesłany, ciąg filtru jest wysyłany do *stron/filmów/indeksu* za pośrednictwem ciągu zapytania.
+* [Pomocnik tagu formularza](xref:mvc/views/working-with-forms#the-form-tag-helper). Gdy formularz zostanie przesłany, ciąg filtru jest wysyłany do *stron/filmów/ Index* stron za pośrednictwem ciągu zapytania.
 * [Pomocnik tagu wejściowego](xref:mvc/views/working-with-forms#the-input-tag-helper)
 
 Zapisz zmiany i przetestuj filtr.
 
-![Widok indeksu z słowem Ghost wpisanych do pola tekstowego filtru tytułu](search/_static/filter.png)
+![::: No-Loc (index)::: View z wyrazem Ghost wpisanych do pola tekstowego filtru tytułu](search/_static/filter.png)
 
 ## <a name="search-by-genre"></a>Wyszukaj według gatunku
 
@@ -217,7 +230,7 @@ Poniższy kod jest zapytanie LINQ, które pobiera wszystkie gatunki z bazy danyc
 
 ### <a name="add-search-by-genre-to-the-no-locrazor-page"></a>Dodaj wyszukiwanie według gatunku na Razor stronie
 
-Zaktualizuj *indeks. cshtml* w następujący sposób:
+Aktualizowanie *Index . cshtml* [ `<form>` element] ( https://developer.mozilla.org/docs/Web/HTML/Element/form) jak wyróżniono w następującej adjustacji):
 
 [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/IndexFormGenreNoRating.cshtml?highlight=16-18&range=1-26)]
 
@@ -230,6 +243,6 @@ Powyższy kod używa pomocnika [SELECT tag](xref:mvc/views/working-with-forms#th
 
 > [!div class="step-by-step"]
 > [Poprzedni: aktualizowanie stron](xref:tutorials/razor-pages/da1) 
->  [Dalej: Dodawanie nowego pola](xref:tutorials/razor-pages/new-field)
+>  [Dalej: Dodaj nowe pole](xref:tutorials/razor-pages/new-field)
 
 ::: moniker-end

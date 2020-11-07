@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: 669ebaf6dcd05561340aefda4a75b6fe1068d207
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: b7e246c20bf12f8ddf07cff54864836cb535aa60
+ms.sourcegitcommit: bb475e69cb647f22cf6d2c6f93d0836c160080d7
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93056195"
+ms.lasthandoff: 11/06/2020
+ms.locfileid: "94340000"
 ---
 # <a name="debug-aspnet-core-no-locblazor-webassembly"></a>Debuguj ASP.NET Core Blazor WebAssembly
 
@@ -57,6 +57,8 @@ Debugowanie wymaga jednej z następujących przeglądarek:
 * Google Chrome (wersja 70 lub nowsza) (domyślnie)
 * Microsoft Edge (wersja 80 lub nowsza)
 
+Upewnij się, że zapory lub serwery proxy nie blokują komunikacji z serwerem proxy debugowania ( `NodeJS` proces). Aby uzyskać więcej informacji, zobacz sekcję [Konfiguracja zapory](#firewall-configuration) .
+
 Visual Studio dla komputerów Mac wymaga wersji 8,8 (kompilacja 1532) lub nowszej:
 
 1. Zainstaluj najnowszą wersję Visual Studio dla komputerów Mac, wybierając przycisk **pobierz Visual Studio dla komputerów Mac** w [firmie Microsoft: Visual Studio dla komputerów Mac](https://visualstudio.microsoft.com/vs/mac/).
@@ -84,7 +86,7 @@ Po zaktualizowaniu `launchSettings.json` plik powinien wyglądać podobnie do po
 
 Wartości zastępcze protokołu WebSockets Protocol ( `wsProtocol` ), hosta ( `url.hostname` ), portu ( `url.port` ) i kontrolera URI w uruchomionej przeglądarce ( `browserInspectUri` ) są udostępniane przez platformę.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Program Visual Studio](#tab/visual-studio)
 
 Aby debugować Blazor WebAssembly aplikację w programie Visual Studio:
 
@@ -192,7 +194,7 @@ Aby uzyskać informacje na temat używania niestandardowej ścieżki bazy aplika
 
 1. Otwórz Blazor WebAssembly folder rozwiązania aplikacji hostowanej w vs Code.
 
-1. Jeśli nie ma ustawionej konfiguracji uruchamiania dla projektu, wyświetlane jest następujące powiadomienie. Wybierz pozycję **Tak** .
+1. Jeśli nie ma ustawionej konfiguracji uruchamiania dla projektu, wyświetlane jest następujące powiadomienie. Wybierz pozycję **Tak**.
 
    > Brak wymaganych zasobów do skompilowania i debugowania w "{APPLICATION NAME}". Dodać je?
 
@@ -339,16 +341,34 @@ Blazor udostępnia serwer proxy debugowania, który implementuje [Protokół Chr
 
 Mapy źródeł przeglądarki umożliwiają przeglądarce mapowanie skompilowanych plików z powrotem do ich oryginalnych plików źródłowych i są często używane do debugowania po stronie klienta. Jednak Blazor obecnie nie mapuje języka C# bezpośrednio do języka JavaScript/WASM. Zamiast tego program Blazor wykonuje interpretację Il w przeglądarce, dlatego mapy źródłowe nie są istotne.
 
+## <a name="firewall-configuration"></a>Konfiguracja zapory
+
+Jeśli zapora blokuje komunikację z serwerem proxy debugowania, należy utworzyć regułę wyjątku zapory, która zezwala na komunikację między przeglądarką a `NodeJS` procesem.
+
+> [!WARNING]
+> Aby uniknąć tworzenia vulnerablities zabezpieczeń, należy wprowadzić modyfikację konfiguracji zapory. Starannie stosuj wskazówki dotyczące zabezpieczeń, stosuj najlepsze rozwiązania w zakresie zabezpieczeń oraz ostrzeżenia wydawane przez producenta zapory.
+>
+> Zezwalanie na otwieranie komunikacji z `NodeJS` procesem:
+>
+> * Otwiera serwer węzła do dowolnego połączenia, w zależności od możliwości i konfiguracji zapory.
+> * Może być ryzykowne w zależności od sieci.
+> * **Jest zalecane tylko na maszynach deweloperskich.**
+>
+> Jeśli to możliwe, zezwalanie na tylko otwartej komunikacji z `NodeJS` procesem **w sieciach zaufanych lub prywatnych**.
+
+Aby uzyskać wskazówki dotyczące konfiguracji [zapory systemu Windows](/windows/security/threat-protection/windows-firewall/windows-firewall-with-advanced-security) , zobacz [Tworzenie reguły programu w programie lub usłudze przychodzącej](/windows/security/threat-protection/windows-firewall/create-an-inbound-program-or-service-rule). Aby uzyskać więcej informacji, zobacz [Zapora Windows Defender z zabezpieczeniami zaawansowanymi](/windows/security/threat-protection/windows-firewall/windows-firewall-with-advanced-security) i pokrewne artykuły w zestawie dokumentacji zapory systemu Windows.
+
 ## <a name="troubleshoot"></a>Rozwiązywanie problemów
 
 Jeśli występują błędy, następujące porady mogą pomóc:
 
 * Na karcie **debuger** Otwórz narzędzia deweloperskie w przeglądarce. W konsoli programu wykonaj polecenie, `localStorage.clear()` Aby usunąć wszystkie punkty przerwania.
 * Upewnij się, że został zainstalowany i zaufany certyfikat programistyczny protokołu HTTPS ASP.NET Core. Aby uzyskać więcej informacji, zobacz <xref:security/enforcing-ssl#troubleshoot-certificate-problems>.
-* Program Visual Studio wymaga opcji **Enable JavaScript Debug for ASP.NET (Chrome, Edge i IE)** w **Tools**  >  **opcji** narzędzia  >  **debugowanie**  >  **Ogólne** . Jest to ustawienie domyślne dla programu Visual Studio. Jeśli debugowanie nie działa, upewnij się, że opcja jest zaznaczona.
+* Program Visual Studio wymaga opcji **Enable JavaScript Debug for ASP.NET (Chrome, Edge i IE)** w **Tools**  >  **opcji** narzędzia  >  **debugowanie**  >  **Ogólne**. Jest to ustawienie domyślne dla programu Visual Studio. Jeśli debugowanie nie działa, upewnij się, że opcja jest zaznaczona.
 * Jeśli w środowisku używany jest serwer proxy HTTP, upewnij się, że `localhost` jest on uwzględniony w ustawieniach obejścia serwera proxy. Można to zrobić, ustawiając `NO_PROXY` zmienną środowiskową w jednej z:
   * `launchSettings.json`Plik dla projektu.
   * Na poziomie zmiennych środowiskowych użytkownika lub systemu na potrzeby zastosowania do wszystkich aplikacji. W przypadku korzystania ze zmiennej środowiskowej Uruchom ponownie program Visual Studio, aby zmiany zaczęły obowiązywać.
+* Upewnij się, że zapory lub serwery proxy nie blokują komunikacji z serwerem proxy debugowania ( `NodeJS` proces). Aby uzyskać więcej informacji, zobacz sekcję [Konfiguracja zapory](#firewall-configuration) .
 
 ### <a name="breakpoints-in-oninitializedasync-not-hit"></a>Punkty przerwania w elemencie `OnInitialized{Async}` nie trafią
 

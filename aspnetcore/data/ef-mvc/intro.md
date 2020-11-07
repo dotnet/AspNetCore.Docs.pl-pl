@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/intro
-ms.openlocfilehash: 77cf1e9ad51b7044a35e1a9b2c125b0fdd91435e
-ms.sourcegitcommit: 33f631a4427b9a422755601ac9119953db0b4a3e
+ms.openlocfilehash: ef1d94ce7a0aa853336260b8d73b9d4036c907ac
+ms.sourcegitcommit: bb475e69cb647f22cf6d2c6f93d0836c160080d7
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 11/05/2020
-ms.locfileid: "93365389"
+ms.lasthandoff: 11/06/2020
+ms.locfileid: "94340013"
 ---
 # <a name="tutorial-get-started-with-ef-core-in-an-aspnet-mvc-web-app"></a>Samouczek: wprowadzenie do EF Core w aplikacji sieci Web ASP.NET MVC
 
@@ -73,11 +73,15 @@ Użytkownicy mogą wyświetlać i aktualizować informacje dotyczące uczniów, 
 
 ## <a name="create-web-app"></a>Tworzenie aplikacji internetowej
 
-* Uruchom program Visual Studio i wybierz pozycję **ASP.NET Core aplikacji sieci Web** > **dalej**.
-* Nadaj nazwę projektowi `ContosoUniversity` . Ważne jest, aby użyć tej dokładnej nazwy, w tym wielką literą, więc przestrzenie nazw są zgodne, gdy kod jest kopiowany.
-* Wybierz przycisk **Utwórz**.
-* Wybierz pozycję **.NET Core** i **ASP.NET Core 5,0** na liście rozwijanej, a następnie wybierz szablon **aplikacja sieci Web (model-kontroler-kontrolera)** .
-  ![Nowe okno dialogowe projektu ASP.NET Core](intro/_static/new-aspnet5.png)
+1. Uruchom program Visual Studio i wybierz pozycję **Utwórz nowy projekt**.
+1. W oknie dialogowym **Tworzenie nowego projektu** wybierz pozycję **ASP.NET Core aplikacja sieci Web** > **dalej**.
+1. W oknie dialogowym **Konfigurowanie nowego projektu** wprowadź wartość `ContosoUniversity` w polu **Nazwa projektu**. Ważne jest, aby użyć tej dokładnej nazwy, z uwzględnieniem wielkich liter, więc każdy pasuje do tego, `namespace` kiedy kod jest kopiowany.
+1. Wybierz przycisk **Utwórz**.
+1. W oknie dialogowym **Tworzenie nowej ASP.NET Core aplikacji sieci Web** wybierz:
+    1. **Platformy .NET Core** i **ASP.NET Core 5,0** na liście rozwijanej.
+    1. **ASP.NET Core aplikacji sieci Web (Model-View-Controller)**.
+    1. **Create** 
+       Utwórz ![ Nowe okno dialogowe projektu ASP.NET Core](~/data/ef-mvc/intro/_static/new-aspnet5.png)
 
 ## <a name="set-up-the-site-style"></a>Konfigurowanie stylu witryny
 
@@ -388,11 +392,13 @@ Przejdź do następnego samouczka, aby dowiedzieć się, jak wykonywać podstawo
 
 ::: moniker-end
 
-::: moniker range="< aspnetcore-3.0"
+::: moniker range="<= aspnetcore-3.1"
 
 [!INCLUDE [RP better than MVC](~/includes/RP-EF/rp-over-mvc.md)]
 
 Przykładowa aplikacja internetowa Contoso University demonstruje sposób tworzenia aplikacji sieci Web ASP.NET Core 2,2 MVC przy użyciu Entity Framework (EF) Core 2,2 i Visual Studio 2017 lub 2019.
+
+Ten samouczek nie został zaktualizowany do ASP.NET Core 3,1. Została zaktualizowana [ASP.NET Core 5,0](xref:data/ef-mvc/intro?view=aspnetcore-5.0).
 
 Przykładowa aplikacja jest witryną internetową fikcyjnej firmy Contoso University. Obejmuje to funkcje, takie jak przyjmowanie studentów, tworzenie kursu i przydziały instruktora. Jest to pierwsza z szeregu samouczków, które wyjaśniają, jak skompilować przykładową aplikację firmy Contoso University od podstaw.
 

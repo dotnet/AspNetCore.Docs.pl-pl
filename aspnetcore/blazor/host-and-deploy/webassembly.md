@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: 0912b3fbcd0b891deb4985eaa18841c22f4f3264
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 7ae462ff9abd06fe4ab4b3e00a71515b76b0ee7d
+ms.sourcegitcommit: bb475e69cb647f22cf6d2c6f93d0836c160080d7
 ms.translationtype: MT
 ms.contentlocale: pl-PL
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93055753"
+ms.lasthandoff: 11/06/2020
+ms.locfileid: "94339987"
 ---
 # <a name="host-and-deploy-aspnet-core-no-locblazor-webassembly"></a>Hostowanie i wdrażanie ASP.NET Core Blazor WebAssembly
 
@@ -523,7 +523,16 @@ Usuwanie procedury obsługi lub wyłączanie dziedziczenia jest wykonywane poza 
 
 #### <a name="brotli-and-gzip-compression"></a>Brotli i Kompresja gzip
 
-Usługi IIS można skonfigurować `web.config` w taki sposób, aby obsługiwały zasoby Brotli lub Gzip skompresowane Blazor . Aby zapoznać się z przykładową konfiguracją, zobacz [`web.config`](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/host-and-deploy/webassembly/_samples/web.config?raw=true) .
+*Ta sekcja dotyczy tylko aplikacji autonomicznych Blazor WebAssembly . aplikacje hostowane Blazor używają domyślnego pliku aplikacji ASP.NET Core `web.config` , a nie pliku połączonego z tą sekcją.*
+
+Program IIS można skonfigurować `web.config` w taki sposób, aby obsługiwał skompresowane zasoby Brotli lub gzip Blazor dla aplikacji autonomicznych Blazor WebAssembly . Przykładowy plik konfiguracji można znaleźć w temacie [`web.config`](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/host-and-deploy/webassembly/_samples/web.config?raw=true) .
+
+Dodatkowa konfiguracja przykładowego `web.config` pliku może być wymagana w następujących scenariuszach:
+
+* Specyfikacja aplikacji wywołuje jedną z następujących czynności:
+  * Obsługa skompresowanych plików, które nie są konfigurowane przez przykładowy `web.config` plik.
+  * Obsługa skompresowanych plików skonfigurowanych przez przykładowy `web.config` plik w nieskompresowanym formacie.
+* Konfiguracja usług IIS na serwerze (na przykład `applicationHost.config` ) zapewnia ustawienia domyślne usług IIS na poziomie serwera. W zależności od konfiguracji na poziomie serwera aplikacja może wymagać innej konfiguracji usług IIS niż zawartość pliku przykładowego `web.config` .
 
 #### <a name="troubleshooting"></a>Rozwiązywanie problemów
 
@@ -538,7 +547,7 @@ Hosting pliku statycznego [usługi Azure Storage](/azure/storage/) umożliwia Bl
 Gdy usługa BLOB jest włączona dla hostingu statycznej witryny sieci Web na koncie magazynu:
 
 * Ustaw **nazwę dokumentu indeksu** na `index.html` .
-* Ustaw **ścieżkę do dokumentu błędu** `index.html` . Razor składniki i inne punkty końcowe inne niż pliki nie znajdują się w ścieżkach fizycznych w zawartości statycznej przechowywanej przez usługę BLOB. Po otrzymaniu żądania dla jednego z tych zasobów, który Blazor powinien zostać obsłużony przez router, błąd *404-nie znaleziono* przez usługę BLOB Service kieruje żądanie do **ścieżki dokumentu błędu** . `index.html`Obiekt BLOB jest zwracany, a Blazor router ładuje i przetwarza ścieżkę.
+* Ustaw **ścieżkę do dokumentu błędu** `index.html` . Razor składniki i inne punkty końcowe inne niż pliki nie znajdują się w ścieżkach fizycznych w zawartości statycznej przechowywanej przez usługę BLOB. Po otrzymaniu żądania dla jednego z tych zasobów, który Blazor powinien zostać obsłużony przez router, błąd *404-nie znaleziono* przez usługę BLOB Service kieruje żądanie do **ścieżki dokumentu błędu**. `index.html`Obiekt BLOB jest zwracany, a Blazor router ładuje i przetwarza ścieżkę.
 
 Jeśli pliki nie są ładowane w czasie wykonywania ze względu na nieodpowiednie typy MIME w `Content-Type` nagłówkach plików, wykonaj jedną z następujących czynności:
 
@@ -547,7 +556,7 @@ Jeśli pliki nie są ładowane w czasie wykonywania ze względu na nieodpowiedni
 
   W Eksplorator usługi Storage (Azure Portal) dla każdego pliku:
   
-  1. Kliknij prawym przyciskiem myszy plik i wybierz polecenie **Właściwości** .
+  1. Kliknij prawym przyciskiem myszy plik i wybierz polecenie **Właściwości**.
   1. Ustaw wartość **ContentType** i wybierz przycisk **Zapisz** .
 
 Aby uzyskać więcej informacji, zobacz [Obsługa statycznej witryny sieci Web w usłudze Azure Storage](/azure/storage/blobs/storage-blob-static-website).
@@ -682,7 +691,7 @@ W przypadku korzystania z witryny projektu zamiast witryny organizacji zaktualiz
   "commandLineArgs": "--contentroot=/content-root-path"
   ```
 
-* W programie Visual Studio Określ argument w **właściwościach**  >  **Debuguj**  >  **argumenty aplikacji** . Ustawienie argumentu na stronie właściwości programu Visual Studio powoduje dodanie argumentu do `launchSettings.json` pliku.
+* W programie Visual Studio Określ argument w **właściwościach**  >  **Debuguj**  >  **argumenty aplikacji**. Ustawienie argumentu na stronie właściwości programu Visual Studio powoduje dodanie argumentu do `launchSettings.json` pliku.
 
   ```console
   --contentroot=/content-root-path
@@ -707,7 +716,7 @@ W przypadku korzystania z witryny projektu zamiast witryny organizacji zaktualiz
   "commandLineArgs": "--pathbase=/relative-URL-path"
   ```
 
-* W programie Visual Studio Określ argument w **właściwościach**  >  **Debuguj**  >  **argumenty aplikacji** . Ustawienie argumentu na stronie właściwości programu Visual Studio powoduje dodanie argumentu do `launchSettings.json` pliku.
+* W programie Visual Studio Określ argument w **właściwościach**  >  **Debuguj**  >  **argumenty aplikacji**. Ustawienie argumentu na stronie właściwości programu Visual Studio powoduje dodanie argumentu do `launchSettings.json` pliku.
 
   ```console
   --pathbase=/relative-URL-path
@@ -729,7 +738,7 @@ W przypadku korzystania z witryny projektu zamiast witryny organizacji zaktualiz
   "commandLineArgs": "--urls=http://127.0.0.1:0"
   ```
 
-* W programie Visual Studio Określ argument w **właściwościach**  >  **Debuguj**  >  **argumenty aplikacji** . Ustawienie argumentu na stronie właściwości programu Visual Studio powoduje dodanie argumentu do `launchSettings.json` pliku.
+* W programie Visual Studio Określ argument w **właściwościach**  >  **Debuguj**  >  **argumenty aplikacji**. Ustawienie argumentu na stronie właściwości programu Visual Studio powoduje dodanie argumentu do `launchSettings.json` pliku.
 
   ```console
   --urls=http://127.0.0.1:0
